@@ -251,32 +251,25 @@ public class SearchUICore {
 			}
 			if (r1.localeName.equals(r2.localeName)) {
 				double similarityRadius = 30;
-				if(a1 != null && a2 != null) {
-					if(a1.getType().getKeyName().equals("natural") && 
-							a2.getType().getKeyName().equals("natural")) {
-						similarityRadius = 10000;
+				if (a1 != null && a2 != null) {
+					// here 2 points are amenity
+					String type1 = a1.getType().getKeyName();
+					String type2 = a2.getType().getKeyName();
+					String subType1 = a1.getSubType();
+					String subType2 = a2.getSubType();
+					if (!type1.equals(type2)) {
+						return false;
 					}
-				}
-				if(ObjectType.isAddress(r1.objectType) && ObjectType.isAddress(r2.objectType)) {
+					if (type1.equals("natural")) {
+						similarityRadius = 10000;
+					} else if (subType1.equals(subType2)) {
+						if (subType1.contains("cn_ref") || subType1.contains("wn_ref")
+								|| (subType1.startsWith("route_hiking_") && subType1.endsWith("n_poi"))) {
+							similarityRadius = 10000;
+						}
+					}
+				} else if(ObjectType.isAddress(r1.objectType) && ObjectType.isAddress(r2.objectType)) {
 					similarityRadius = 100;
-				}
-				if (a1.getSubType().contains("cn_ref") && a2.getSubType().contains("cn_ref") && a1.getType().getKeyName().equals(a2.getType().getKeyName())) {
-					similarityRadius = 10000;
-				}
-				if (a1.getSubType().contains("wn_ref") && a2.getSubType().contains("wn_ref") && a1.getType().getKeyName().equals(a2.getType().getKeyName())) {
-					similarityRadius = 10000;
-				}
-				if (a1.getSubType().equals("route_hiking_iwn_poi") && a2.getSubType().equals("route_hiking_iwn_poi") && a1.getType().getKeyName().equals(a2.getType().getKeyName())) {
-					similarityRadius = 10000;
-				}
-				if (a1.getSubType().equals("route_hiking_nwn_poi") && a2.getSubType().equals("route_hiking_nwn_poi") && a1.getType().getKeyName().equals(a2.getType().getKeyName())) {
-					similarityRadius = 10000;
-				}
-				if (a1.getSubType().equals("route_hiking_rwn_poi") && a2.getSubType().equals("route_hiking_rwn_poi") && a1.getType().getKeyName().equals(a2.getType().getKeyName())) {
-					similarityRadius = 10000;
-				}
-				if (a1.getSubType().equals("route_hiking_lwn_poi") && a2.getSubType().equals("route_hiking_lwn_poi") && a1.getType().getKeyName().equals(a2.getType().getKeyName())) {
-					similarityRadius = 10000;
 				}
 				return MapUtils.getDistance(r1.location, r2.location) < similarityRadius;
 			}
