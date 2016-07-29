@@ -2465,4 +2465,7 @@
 	<string name="poi_gaelic_games">Gaelaj pilkludoj</string>
 	<string name="poi_running">Kurado</string>
 	<string name="poi_netball">Netbalo</string>
+	<string name="poi_karting">Aŭteto-konkurso (karting)</string>
+	<string name="poi_badminton">Badmintono</string>
+	<string name="poi_judo">Ĵudo</string>
 	</resources>
