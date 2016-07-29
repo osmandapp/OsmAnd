@@ -3019,4 +3019,6 @@
 	<string name="poi_toilets_disposal_chemical">Toilets disposal: chemical</string>
 	<string name="poi_toilets_disposal_bucket">Toilets disposal: bucket</string>
 
+	<string name="poi_length">Length</string>
+
 </resources>
