@@ -1098,7 +1098,7 @@
 	<string name="poi_route_hiking_nwn_poi">Piedirada vojo nacia</string>
 	<string name="poi_route_hiking_rwn_poi">Piedirada vojo regiona</string>
 	<string name="poi_route_hiking_lwn_poi">Piedirada vojo loka</string>
-	<string name="poi_route_hiking_ref_poi">Referenco pri piedirada vojo</string>
+	<string name="poi_route_hiking_ref_poi">Referenco de piedirada vojo</string>
 
 	<string name="poi_collection_times">Prenoj de postaĵoj je</string>
 	<string name="poi_phone">Telefono</string>
@@ -1907,7 +1907,7 @@
 	<string name="poi_route_funicular_ref">Funikularo</string>
 	<string name="poi_route_ferry_ref">Pramo</string>
 
-	<string name="poi_route_railway_ref">Kurso fervoja</string>
+	<string name="poi_route_railway_ref">Referenco de fervojo</string>
 
 	<string name="poi_surveillance_yes">Gardo: jes</string>
 	<string name="poi_shop_additional_yes">Kun vendejo</string>
@@ -2141,7 +2141,7 @@
 	<string name="poi_historic_gallows">Pendumilo historia</string>
 	<string name="poi_historic_threshing_floor">Draŝejo historia</string>
 	<string name="poi_square">Placo</string>
-	<string name="poi_prison_camp">Eksa milit-kaptitara kampo</string>
+	<string name="poi_prison_camp">Eksa pun-koncentrejo</string>
 	<string name="poi_summit_cross">Kruco sur la montopinto: jes</string>
 
 	<string name="poi_temperature">Temperaturo</string>
@@ -2330,5 +2330,94 @@
 	<string name="poi_site_type_hut_circle">Speco: restaĵo de ronda domo</string>
 	<string name="poi_site_type_necropolis">Speco: nekropolo</string>
 	<string name="poi_site_type_petroglyph">Speco: ŝtongrataĵo (petroglifo)</string>
-	<string name="poi_site_type_earthwork">Speco: artefarita terkonstruaĵo</string>
+	<string name="poi_site_type_earthwork">Speco: terkonstruaĵo</string>
+	<string name="poi_megalith_type_menhir">Megalit-speco: menhiro</string>
+	<string name="poi_megalith_type_dolmen">Megalit-speco: dolmeno</string>
+	<string name="poi_megalith_type_nuraghe">Megalit-speco: nurage</string>
+	<string name="poi_megalith_type_stone_circle">Megalit-speco: ŝtona rondo</string>
+	<string name="poi_megalith_type_passage_grave">Magalit-speco: koridora tombejo</string>
+	<string name="poi_fortification_type_hill_fort">Fortikaĵ-speco: remparburgo</string>
+	<string name="poi_fortification_type_limes">Fortikaĵ-speco: limeso</string>
+	<string name="poi_fortification_type_sconce">Fortikaĵ-speco: skanso</string>
+	<string name="poi_fortification_type_ring_ditch">Fortikaĵ-speco: ronda fosaĵo</string>
+
+	<string name="poi_pa">Pā (maoria fortikaĵa vilaĝo)</string>
+
+	<string name="poi_club_freemasonry">Domo de framasona loĝio</string>
+	<string name="poi_club_sailing">Boatada klubejo</string>
+	<string name="poi_club_scout">Skolta klubejo</string>
+
+	<string name="poi_artist_name">Artisto</string>
+	<string name="poi_sculptor">Skulptisto</string>
+
+	<string name="poi_building_type_church">Konstruaĵ-speco: kirko</string>
+	<string name="poi_building_type_chapel">Konstruaĵ-speco: kapelo</string>
+	<string name="poi_building_type_mosque">Konstruaĵ-speco: moskeo</string>
+	<string name="poi_building_type_temple">Konstruaĵ-speco: templo</string>
+	<string name="poi_building_type_cathedral">Konstruaĵ-speco: katedralo</string>
+	<string name="poi_building_type_monastery">Konstruaĵ-speco: monaĥejo</string>
+	<string name="poi_building_type_basilica">Konstruaĵ-speco: baziliko</string>
+	<string name="poi_building_type_synagogue">Konstruaĵ-speco: sinagogo</string>
+	<string name="poi_building_type_shrine">Konstruaĵ-speco: sanktejo</string>
+
+	<string name="poi_concentration_camp">Speco: koncentrejo</string>
+	<string name="poi_pow_camp">Speco: milit-kaptitejo</string>
+	<string name="poi_labor_camp">Speco: punlaborejo</string>
+	<string name="poi_concentration_camp_nazism">Speco: nazia</string>
+	<string name="poi_concentration_camp_gulag">Speco: gulago</string>
+
+	<string name="poi_bathing_yes">Banado: jes</string>
+	<string name="poi_bathing_no">Banado: ne</string>
+
+	<string name="poi_boat_storage">Boat-garaĝo seka</string>
+
+	<string name="poi_conveying_yes">Rulŝtuparo aŭ rultrotuaro</string>
+
+	<string name="poi_bridge_ref">Referenco de ponto</string>
+	<string name="poi_tunnel_ref">Referenco de tunelo</string>
+
+	<string name="poi_ref">Referenco</string>
+
+	<string name="poi_cargo_passengers">Portaĵo: pasaĝeroj</string>
+	<string name="poi_cargo_vehicle">Portaĵo: veturiloj</string>
+	<string name="poi_cargo_bicycle">Portaĵo: bicikloj</string>
+	<string name="poi_cargo_container">Portaĵo: transportujoj</string>
+	<string name="poi_cargo_hgv">Portaĵoj: kamionoj</string>
+
+	<string name="poi_wiki_lang_als">Vikipedio Alemana</string>
+	<string name="poi_wiki_lang_az">Vikipedio Azerbajĝana</string>
+	<string name="poi_wiki_lang_bn">Vikipedio Bengala</string>
+	<string name="poi_wiki_lang_bpy">Vikipedio Biŝnuprija</string>
+	<string name="poi_wiki_lang_br">Vikipedio Bretona</string>
+	<string name="poi_wiki_lang_bs">Vikipedio Bosna</string>
+	<string name="poi_wiki_lang_cy">Vikipedio Kimra</string>
+	<string name="poi_wiki_lang_fa">Vikipedio Persa</string>
+	<string name="poi_wiki_lang_fy">Vikipedio Frisa</string>
+	<string name="poi_wiki_lang_ga">Vikipedia Irlanda</string>
+	<string name="poi_wiki_lang_hy">Vikipedio Armena</string>
+	<string name="poi_wiki_lang_is">Vikipedio Islanda</string>
+	<string name="poi_wiki_lang_ka">Vikipedio Kartvela</string>
+	<string name="poi_wiki_lang_ku">Vikipedio Kurda</string>
+	<string name="poi_wiki_lang_la">Vikipedio Latina</string>
+	<string name="poi_wiki_lang_lb">Vikipedio Luksemburga</string>
+	<string name="poi_wiki_lang_mk">Vikipedio Makedona</string>
+	<string name="poi_wiki_lang_ml">Vikipedio Malajala</string>
+	<string name="poi_wiki_lang_mr">Vikipedio Marata</string>
+	<string name="poi_wiki_lang_nds">Vikipedio Platgermana</string>
+	<string name="poi_wiki_lang_nv">Vikipedio Navaha</string>
+	<string name="poi_wiki_lang_os">Vikipedio Oseta</string>
+	<string name="poi_wiki_lang_pms">Vikipedio Piemonta</string>
+	<string name="poi_wiki_lang_sc">Vikipedio Sarda</string>
+	<string name="poi_wiki_lang_sh">Vikipedio Serbokroata</string>
+	<string name="poi_wiki_lang_sq">Vikipedio Albana</string>
+	<string name="poi_wiki_lang_ta">Vikipedio Tamila</string>
+	<string name="poi_wiki_lang_tl">Vikipedio Tagaloga</string>
+
+	<string name="poi_wiki_lang_war">Vikipedio Varaja</string>
+	<string name="poi_wiki_lang_min">Vikipedio Minankabaŭa</string>
+	<string name="poi_wiki_lang_kk">Vikipedio Kazaĥa</string>
+	<string name="poi_wiki_lang_uz">Vikipedio Uzbeka</string>
+	<string name="poi_wiki_lang_ce">Vikipedio Ĉeĉena</string>
+	<string name="poi_wiki_lang_ur">Vikipedio Urdua</string>
+	<string name="poi_wiki_lang_oc">Vikipedio Okcitana</string>
 	</resources>
