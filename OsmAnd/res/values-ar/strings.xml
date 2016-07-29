@@ -897,7 +897,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
 	<string name="native_library_not_supported">المكتبات الأصيلة غير مدعومة على هذا الجهاز.</string>
 	<string name="init_native_library">تهيئة المكتبة الأصيلة…</string>
 	<string name="choose_auto_follow_route">عرض خريطة في المنتصف تلقائيًا</string>
-	<string name="choose_auto_follow_route_descr"/>
+	<string name="choose_auto_follow_route_descr">الوقت حتى يتزامن عرض الخريطة مع الموقع الحالي</string>
 	<string name="auto_follow_route_never">أبدا (اضغط \'ذهاب\' لتبدأ التوجيه يدويا)</string>
 	<string name="auto_follow_route_navigation">مركز صناعة السيارات الوحيد</string>
 	<string name="auto_follow_route_navigation_descr">التوسيط التلقائي لعرض الخريطة فقط أثناء الملاحة.</string>
@@ -2340,4 +2340,9 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="rendering_attr_hikingRoutesOSMC_name">غطاء رمز التنزه</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">تقديم مسارات وفقا لآثار OSMC</string>
 
+    <string name="local_index_description">انقر فوق أي عنصر لمعرفة المزيد من التفاصيل، اضغط وواصل الضغط للتعطيل أو الحذف. البيانات الحالية على الجهاز (%1$s متاحة):</string>
+    <string name="keep_informing_descr">إعادة إعلان تعليمات الملاحة في فترات منتظمة</string>
+    <string name="shared_string_others">آخرى</string>
+    <string name="local_index_action_do">أنت على وشك %1$s%2$ s عنصر. تواصل؟</string>
+    <string name="amenity_type_geocache">جيوكاش</string>
     </resources>
