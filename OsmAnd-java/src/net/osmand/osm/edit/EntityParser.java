@@ -11,6 +11,7 @@ import net.osmand.data.City;
 import net.osmand.data.City.CityType;
 import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
+import net.osmand.data.TransportRoute;
 import net.osmand.data.TransportStop;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.MapRenderingTypes;
@@ -220,8 +221,8 @@ public class EntityParser {
 	}
 	
 	
-	public static OsmTransportRoute parserRoute(Relation r, String ref){
-		OsmTransportRoute rt = new OsmTransportRoute();
+	public static TransportRoute parserRoute(Relation r, String ref){
+		TransportRoute rt = new TransportRoute();
 		parseMapObject(rt, r, r.getTags());
 		rt.setRef(ref);
 		return rt;

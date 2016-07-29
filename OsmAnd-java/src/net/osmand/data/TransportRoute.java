@@ -1,8 +1,10 @@
 package net.osmand.data;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
+import net.osmand.osm.edit.Way;
 import net.osmand.util.MapUtils;
 
 public class TransportRoute extends MapObject {
@@ -12,6 +14,11 @@ public class TransportRoute extends MapObject {
 	private String operator;
 	private String type;
 	private Integer dist = null;
+	private List<Way> forwardWays;
+	private List<Way> forwardAggWays;
+	private List<Way> backwardWays;
+	private List<Way> backwardAggWays;
+	private List<Way> sharedWays;
 	
 	public TransportRoute(){
 	}
@@ -22,6 +29,67 @@ public class TransportRoute extends MapObject {
 	
 	public List<TransportStop> getBackwardStops() {
 		return backwardStops;
+	}
+	
+	public List<Way> getAggregateForwardWays() {
+		if(forwardAggWays != null){
+			return forwardAggWays;
+		}
+		forwardAggWays = new ArrayList<>();
+		if(forwardWays != null) {
+			forwardAggWays.addAll(forwardWays);
+		}
+		if(sharedWays != null) {
+			forwardAggWays.addAll(sharedWays);
+		}
+		return forwardAggWays;
+	}
+	
+	public List<Way> getAggregateBackwardWays() {
+		if (backwardAggWays != null) {
+			return backwardAggWays;
+		}
+		backwardAggWays = new ArrayList<>();
+		if (backwardWays != null) {
+			backwardAggWays.addAll(backwardWays);
+		}
+		if (sharedWays != null) {
+			backwardAggWays.addAll(sharedWays);
+		}
+		return backwardAggWays;
+	}
+	
+	public List<Way> getSharedWays() {
+		return sharedWays;
+	}
+	
+	public List<Way> getForwardWays() {
+		return forwardWays;
+	}
+	
+	public List<Way> getBackwardWays() {
+		return backwardWays;
+	}
+	
+	public void addWay(Way w, int direction){
+		if(direction > 0) {
+			if(forwardWays == null) {
+				forwardWays = new ArrayList<>();
+			}
+			forwardWays.add(w);
+		}
+		if(direction < 0) {
+			if(backwardWays == null) {
+				backwardWays = new ArrayList<>();
+			}
+			backwardWays.add(w);
+		}
+		if(direction == 0) {
+			if(sharedWays == null) {
+				sharedWays = new ArrayList<>();
+			}
+			sharedWays.add(w);
+		}
 	}
 	
 	public String getRef() {
