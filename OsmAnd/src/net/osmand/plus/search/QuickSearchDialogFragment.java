@@ -165,11 +165,8 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 					}
 					app.getPoiFilters().clearSelectedPoiFilters();
 					app.getPoiFilters().addSelectedPoiFilter(filter);
-					if (location != null) {
-						settings.setMapLocationToShow(location.getLatitude(), location.getLongitude(), 15);
-					}
 					getMapActivity().setQuickSearchTopbarActive(searchPhrase.isNoSelectedType());
-					MapActivity.launchMapActivityMoveToTop(getActivity());
+					getMapActivity().refreshMap();
 					if (searchPhrase.isNoSelectedType()) {
 						hide();
 					} else {
@@ -346,9 +343,11 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			updateLocationUI(mapCenter, null);
 		}
 		getDialog().show();
+		paused = false;
 	}
 
 	public void hide() {
+		paused = true;
 		getDialog().hide();
 	}
 
