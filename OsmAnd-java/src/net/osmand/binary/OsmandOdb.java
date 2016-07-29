@@ -29403,6 +29403,7 @@ public final class OsmandOdb {
      * array of delta x,y sint32 (CodedIinputStream) &gt;&gt; 5 (precision 31 &gt;&gt; 5)
      * first x,y - 31 coordinates (&gt;&gt;5), next points is delta to previous
      * point, line or outer polygon coordinates
+     * 0, 0 split geometry (for not connected segments)
      * </pre>
      */
     boolean hasDirectGeometry();
@@ -29413,6 +29414,7 @@ public final class OsmandOdb {
      * array of delta x,y sint32 (CodedIinputStream) &gt;&gt; 5 (precision 31 &gt;&gt; 5)
      * first x,y - 31 coordinates (&gt;&gt;5), next points is delta to previous
      * point, line or outer polygon coordinates
+     * 0, 0 split geometry (for not connected segments)
      * </pre>
      */
     com.google.protobuf.ByteString getDirectGeometry();
@@ -29426,6 +29428,16 @@ public final class OsmandOdb {
      * <code>optional bytes reverseGeometry = 18;</code>
      */
     com.google.protobuf.ByteString getReverseGeometry();
+
+    // optional bytes sharedGeometry = 19;
+    /**
+     * <code>optional bytes sharedGeometry = 19;</code>
+     */
+    boolean hasSharedGeometry();
+    /**
+     * <code>optional bytes sharedGeometry = 19;</code>
+     */
+    com.google.protobuf.ByteString getSharedGeometry();
   }
   /**
    * Protobuf type {@code OsmAnd.OBF.TransportRoute}
@@ -29537,6 +29549,11 @@ public final class OsmandOdb {
             case 146: {
               bitField0_ |= 0x00000100;
               reverseGeometry_ = input.readBytes();
+              break;
+            }
+            case 154: {
+              bitField0_ |= 0x00000200;
+              sharedGeometry_ = input.readBytes();
               break;
             }
           }
@@ -29846,6 +29863,7 @@ public final class OsmandOdb {
      * array of delta x,y sint32 (CodedIinputStream) &gt;&gt; 5 (precision 31 &gt;&gt; 5)
      * first x,y - 31 coordinates (&gt;&gt;5), next points is delta to previous
      * point, line or outer polygon coordinates
+     * 0, 0 split geometry (for not connected segments)
      * </pre>
      */
     public boolean hasDirectGeometry() {
@@ -29858,6 +29876,7 @@ public final class OsmandOdb {
      * array of delta x,y sint32 (CodedIinputStream) &gt;&gt; 5 (precision 31 &gt;&gt; 5)
      * first x,y - 31 coordinates (&gt;&gt;5), next points is delta to previous
      * point, line or outer polygon coordinates
+     * 0, 0 split geometry (for not connected segments)
      * </pre>
      */
     public com.google.protobuf.ByteString getDirectGeometry() {
@@ -29880,6 +29899,22 @@ public final class OsmandOdb {
       return reverseGeometry_;
     }
 
+    // optional bytes sharedGeometry = 19;
+    public static final int SHAREDGEOMETRY_FIELD_NUMBER = 19;
+    private com.google.protobuf.ByteString sharedGeometry_;
+    /**
+     * <code>optional bytes sharedGeometry = 19;</code>
+     */
+    public boolean hasSharedGeometry() {
+      return ((bitField0_ & 0x00000200) == 0x00000200);
+    }
+    /**
+     * <code>optional bytes sharedGeometry = 19;</code>
+     */
+    public com.google.protobuf.ByteString getSharedGeometry() {
+      return sharedGeometry_;
+    }
+
     private void initFields() {
       id_ = 0L;
       type_ = 0;
@@ -29892,6 +29927,7 @@ public final class OsmandOdb {
       reverseStops_ = java.util.Collections.emptyList();
       directGeometry_ = com.google.protobuf.ByteString.EMPTY;
       reverseGeometry_ = com.google.protobuf.ByteString.EMPTY;
+      sharedGeometry_ = com.google.protobuf.ByteString.EMPTY;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -29954,6 +29990,9 @@ public final class OsmandOdb {
       if (((bitField0_ & 0x00000100) == 0x00000100)) {
         output.writeBytes(18, reverseGeometry_);
       }
+      if (((bitField0_ & 0x00000200) == 0x00000200)) {
+        output.writeBytes(19, sharedGeometry_);
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -30006,6 +30045,10 @@ public final class OsmandOdb {
       if (((bitField0_ & 0x00000100) == 0x00000100)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(18, reverseGeometry_);
+      }
+      if (((bitField0_ & 0x00000200) == 0x00000200)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(19, sharedGeometry_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -30155,6 +30198,8 @@ public final class OsmandOdb {
         bitField0_ = (bitField0_ & ~0x00000200);
         reverseGeometry_ = com.google.protobuf.ByteString.EMPTY;
         bitField0_ = (bitField0_ & ~0x00000400);
+        sharedGeometry_ = com.google.protobuf.ByteString.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000800);
         return this;
       }
 
@@ -30237,6 +30282,10 @@ public final class OsmandOdb {
           to_bitField0_ |= 0x00000100;
         }
         result.reverseGeometry_ = reverseGeometry_;
+        if (((from_bitField0_ & 0x00000800) == 0x00000800)) {
+          to_bitField0_ |= 0x00000200;
+        }
+        result.sharedGeometry_ = sharedGeometry_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -30333,6 +30382,9 @@ public final class OsmandOdb {
         }
         if (other.hasReverseGeometry()) {
           setReverseGeometry(other.getReverseGeometry());
+        }
+        if (other.hasSharedGeometry()) {
+          setSharedGeometry(other.getSharedGeometry());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -31218,6 +31270,7 @@ public final class OsmandOdb {
        * array of delta x,y sint32 (CodedIinputStream) &gt;&gt; 5 (precision 31 &gt;&gt; 5)
        * first x,y - 31 coordinates (&gt;&gt;5), next points is delta to previous
        * point, line or outer polygon coordinates
+       * 0, 0 split geometry (for not connected segments)
        * </pre>
        */
       public boolean hasDirectGeometry() {
@@ -31230,6 +31283,7 @@ public final class OsmandOdb {
        * array of delta x,y sint32 (CodedIinputStream) &gt;&gt; 5 (precision 31 &gt;&gt; 5)
        * first x,y - 31 coordinates (&gt;&gt;5), next points is delta to previous
        * point, line or outer polygon coordinates
+       * 0, 0 split geometry (for not connected segments)
        * </pre>
        */
       public com.google.protobuf.ByteString getDirectGeometry() {
@@ -31242,6 +31296,7 @@ public final class OsmandOdb {
        * array of delta x,y sint32 (CodedIinputStream) &gt;&gt; 5 (precision 31 &gt;&gt; 5)
        * first x,y - 31 coordinates (&gt;&gt;5), next points is delta to previous
        * point, line or outer polygon coordinates
+       * 0, 0 split geometry (for not connected segments)
        * </pre>
        */
       public Builder setDirectGeometry(com.google.protobuf.ByteString value) {
@@ -31260,6 +31315,7 @@ public final class OsmandOdb {
        * array of delta x,y sint32 (CodedIinputStream) &gt;&gt; 5 (precision 31 &gt;&gt; 5)
        * first x,y - 31 coordinates (&gt;&gt;5), next points is delta to previous
        * point, line or outer polygon coordinates
+       * 0, 0 split geometry (for not connected segments)
        * </pre>
        */
       public Builder clearDirectGeometry() {
@@ -31301,6 +31357,42 @@ public final class OsmandOdb {
       public Builder clearReverseGeometry() {
         bitField0_ = (bitField0_ & ~0x00000400);
         reverseGeometry_ = getDefaultInstance().getReverseGeometry();
+        onChanged();
+        return this;
+      }
+
+      // optional bytes sharedGeometry = 19;
+      private com.google.protobuf.ByteString sharedGeometry_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <code>optional bytes sharedGeometry = 19;</code>
+       */
+      public boolean hasSharedGeometry() {
+        return ((bitField0_ & 0x00000800) == 0x00000800);
+      }
+      /**
+       * <code>optional bytes sharedGeometry = 19;</code>
+       */
+      public com.google.protobuf.ByteString getSharedGeometry() {
+        return sharedGeometry_;
+      }
+      /**
+       * <code>optional bytes sharedGeometry = 19;</code>
+       */
+      public Builder setSharedGeometry(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000800;
+        sharedGeometry_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional bytes sharedGeometry = 19;</code>
+       */
+      public Builder clearSharedGeometry() {
+        bitField0_ = (bitField0_ & ~0x00000800);
+        sharedGeometry_ = getDefaultInstance().getSharedGeometry();
         onChanged();
         return this;
       }
@@ -57904,89 +57996,90 @@ public final class OsmandOdb {
       " \003(\t\022\030\n\020attributeTagIds2\030\021 \003(\r\022\030\n\020attrib" +
       "uteValues2\030\022 \003(\t\"=\n\017TransportRoutes\022*\n\006r" +
       "outes\030\006 \003(\0132\032.OsmAnd.OBF.TransportRoute\"" +
-      "\226\002\n\016TransportRoute\022\n\n\002id\030\001 \002(\004\022\014\n\004type\030\003" +
+      "\256\002\n\016TransportRoute\022\n\n\002id\030\001 \002(\004\022\014\n\004type\030\003" +
       " \001(\r\022\020\n\010operator\030\004 \001(\r\022\013\n\003ref\030\005 \001(\t\022\014\n\004n" +
       "ame\030\006 \001(\r\022\017\n\007name_en\030\007 \001(\r\022\020\n\010distance\030\010" +
       " \001(\r\0223\n\013directStops\030\017 \003(\0132\036.OsmAnd.OBF.T" +
       "ransportRouteStop\0224\n\014reverseStops\030\020 \003(\0132",
       "\036.OsmAnd.OBF.TransportRouteStop\022\026\n\016direc" +
       "tGeometry\030\021 \001(\014\022\027\n\017reverseGeometry\030\022 \001(\014" +
-      "\"W\n\022TransportRouteStop\022\n\n\002id\030\001 \002(\022\022\n\n\002dx" +
-      "\030\002 \002(\021\022\n\n\002dy\030\003 \002(\021\022\014\n\004name\030\006 \002(\r\022\017\n\007name" +
-      "_en\030\007 \001(\r\"b\n\rTransportStop\022\n\n\002dx\030\001 \002(\021\022\n" +
-      "\n\002dy\030\002 \002(\021\022\n\n\002id\030\005 \002(\022\022\014\n\004name\030\006 \002(\r\022\017\n\007" +
-      "name_en\030\007 \001(\r\022\016\n\006routes\030\020 \003(\r\"\272\001\n\022Transp" +
-      "ortStopsTree\022\014\n\004left\030\001 \002(\021\022\r\n\005right\030\002 \002(" +
-      "\021\022\013\n\003top\030\003 \002(\021\022\016\n\006bottom\030\004 \002(\021\0220\n\010subtre" +
-      "es\030\007 \003(\0132\036.OsmAnd.OBF.TransportStopsTree",
-      "\022(\n\005leafs\030\010 \003(\0132\031.OsmAnd.OBF.TransportSt" +
-      "op\022\016\n\006baseId\030\020 \001(\004\"\256\001\n\024OsmAndTransportIn" +
-      "dex\022\014\n\004name\030\001 \001(\t\022+\n\006routes\030\003 \001(\0132\033.OsmA" +
-      "nd.OBF.TransportRoutes\022-\n\005stops\030\006 \001(\0132\036." +
-      "OsmAnd.OBF.TransportStopsTree\022,\n\013stringT" +
-      "able\030\t \002(\0132\027.OsmAnd.OBF.StringTable\"\312\002\n\016" +
-      "OsmAndPoiIndex\022\014\n\004name\030\001 \002(\t\022-\n\nboundari" +
-      "es\030\002 \002(\0132\031.OsmAnd.OBF.OsmAndTileBox\0228\n\017c" +
-      "ategoriesTable\030\003 \003(\0132\037.OsmAnd.OBF.OsmAnd" +
-      "CategoryTable\0221\n\tnameIndex\030\004 \001(\0132\036.OsmAn",
-      "d.OBF.OsmAndPoiNameIndex\0226\n\rsubtypesTabl" +
-      "e\030\005 \001(\0132\037.OsmAnd.OBF.OsmAndSubtypesTable" +
-      "\022\'\n\005boxes\030\006 \003(\0132\030.OsmAnd.OBF.OsmAndPoiBo" +
-      "x\022-\n\007poiData\030\t \003(\0132\034.OsmAnd.OBF.OsmAndPo" +
-      "iBoxData\"\331\001\n\022OsmAndPoiNameIndex\022-\n\005table" +
-      "\030\003 \002(\0132\036.OsmAnd.OBF.IndexedStringTable\022C" +
-      "\n\004data\030\005 \003(\01325.OsmAnd.OBF.OsmAndPoiNameI" +
-      "ndex.OsmAndPoiNameIndexData\032O\n\026OsmAndPoi" +
-      "NameIndexData\0225\n\005atoms\030\003 \003(\0132&.OsmAnd.OB" +
-      "F.OsmAndPoiNameIndexDataAtom\"Q\n\032OsmAndPo",
-      "iNameIndexDataAtom\022\014\n\004zoom\030\002 \001(\r\022\t\n\001x\030\003 " +
-      "\001(\r\022\t\n\001y\030\004 \001(\r\022\017\n\007shiftTo\030\016 \001(\007\">\n\023OsmAn" +
-      "dCategoryTable\022\020\n\010category\030\001 \002(\t\022\025\n\rsubc" +
-      "ategories\030\003 \003(\t\"E\n\023OsmAndSubtypesTable\022." +
-      "\n\010subtypes\030\004 \003(\0132\034.OsmAnd.OBF.OsmAndPoiS" +
-      "ubtype\"\205\001\n\020OsmAndPoiSubtype\022\014\n\004name\030\001 \002(" +
-      "\t\022\017\n\007tagname\030\002 \001(\t\022\016\n\006isText\030\003 \002(\010\022\021\n\tfr" +
-      "equency\030\005 \001(\r\022\031\n\021subtypeValuesSize\030\006 \001(\r" +
-      "\022\024\n\014subtypeValue\030\010 \003(\t\"\255\001\n\014OsmAndPoiBox\022" +
-      "\014\n\004zoom\030\001 \002(\r\022\014\n\004left\030\002 \002(\021\022\013\n\003top\030\003 \002(\021",
-      "\0223\n\ncategories\030\004 \001(\0132\037.OsmAnd.OBF.OsmAnd" +
-      "PoiCategories\022*\n\010subBoxes\030\n \003(\0132\030.OsmAnd" +
-      ".OBF.OsmAndPoiBox\022\023\n\013shiftToData\030\016 \001(\007\"@" +
-      "\n\023OsmAndPoiCategories\022\022\n\ncategories\030\003 \003(" +
-      "\r\022\025\n\rsubcategories\030\005 \003(\r\"i\n\020OsmAndPoiBox" +
-      "Data\022\014\n\004zoom\030\001 \001(\r\022\t\n\001x\030\002 \001(\r\022\t\n\001y\030\003 \001(\r" +
-      "\0221\n\007poiData\030\005 \003(\0132 .OsmAnd.OBF.OsmAndPoi" +
-      "BoxDataAtom\"\360\001\n\024OsmAndPoiBoxDataAtom\022\n\n\002" +
-      "dx\030\002 \002(\021\022\n\n\002dy\030\003 \002(\021\022\022\n\ncategories\030\004 \003(\r" +
-      "\022\025\n\rsubcategories\030\005 \003(\r\022\014\n\004name\030\006 \001(\t\022\016\n",
-      "\006nameEn\030\007 \001(\t\022\n\n\002id\030\010 \001(\004\022\024\n\014openingHour" +
-      "s\030\n \001(\t\022\014\n\004site\030\013 \001(\t\022\r\n\005phone\030\014 \001(\t\022\014\n\004" +
-      "note\030\r \001(\t\022\026\n\016textCategories\030\016 \003(\r\022\022\n\nte" +
-      "xtValues\030\017 \003(\t\"\032\n\007IdTable\022\017\n\007routeId\030\001 \003" +
-      "(\022\"F\n\017RestrictionData\022\014\n\004type\030\001 \002(\005\022\014\n\004f" +
-      "rom\030\002 \002(\005\022\n\n\002to\030\003 \002(\005\022\013\n\003via\030\004 \001(\005\"x\n\tRo" +
-      "uteData\022\016\n\006points\030\001 \002(\014\022\022\n\npointTypes\030\004 " +
-      "\001(\014\022\022\n\npointNames\030\005 \001(\014\022\r\n\005types\030\007 \002(\014\022\017" +
-      "\n\007routeId\030\014 \002(\005\022\023\n\013stringNames\030\016 \001(\014\"\304\005\n" +
-      "\022OsmAndRoutingIndex\022\014\n\004name\030\001 \002(\t\022?\n\005rul",
-      "es\030\002 \003(\01320.OsmAnd.OBF.OsmAndRoutingIndex" +
-      ".RouteEncodingRule\022>\n\trootBoxes\030\003 \003(\0132+." +
-      "OsmAnd.OBF.OsmAndRoutingIndex.RouteDataB" +
-      "ox\022A\n\014basemapBoxes\030\004 \003(\0132+.OsmAnd.OBF.Os" +
-      "mAndRoutingIndex.RouteDataBox\022=\n\006blocks\030" +
-      "\005 \003(\0132-.OsmAnd.OBF.OsmAndRoutingIndex.Ro" +
-      "uteDataBlock\032;\n\021RouteEncodingRule\022\013\n\003tag" +
-      "\030\003 \002(\t\022\r\n\005value\030\005 \002(\t\022\n\n\002id\030\007 \001(\r\032\231\001\n\014Ro" +
-      "uteDataBox\022\014\n\004left\030\001 \002(\021\022\r\n\005right\030\002 \002(\021\022" +
-      "\013\n\003top\030\003 \002(\021\022\016\n\006bottom\030\004 \002(\021\022\023\n\013shiftToD",
-      "ata\030\005 \001(\007\022:\n\005boxes\030\007 \003(\0132+.OsmAnd.OBF.Os" +
-      "mAndRoutingIndex.RouteDataBox\032\303\001\n\016RouteD" +
-      "ataBlock\022$\n\007idTable\030\005 \001(\0132\023.OsmAnd.OBF.I" +
-      "dTable\022*\n\013dataObjects\030\006 \003(\0132\025.OsmAnd.OBF" +
-      ".RouteData\0221\n\014restrictions\030\007 \003(\0132\033.OsmAn" +
-      "d.OBF.RestrictionData\022,\n\013stringTable\030\010 \001" +
-      "(\0132\027.OsmAnd.OBF.StringTableB\036\n\021net.osman" +
-      "d.binaryB\tOsmandOdb"
+      "\022\026\n\016sharedGeometry\030\023 \001(\014\"W\n\022TransportRou" +
+      "teStop\022\n\n\002id\030\001 \002(\022\022\n\n\002dx\030\002 \002(\021\022\n\n\002dy\030\003 \002" +
+      "(\021\022\014\n\004name\030\006 \002(\r\022\017\n\007name_en\030\007 \001(\r\"b\n\rTra" +
+      "nsportStop\022\n\n\002dx\030\001 \002(\021\022\n\n\002dy\030\002 \002(\021\022\n\n\002id" +
+      "\030\005 \002(\022\022\014\n\004name\030\006 \002(\r\022\017\n\007name_en\030\007 \001(\r\022\016\n" +
+      "\006routes\030\020 \003(\r\"\272\001\n\022TransportStopsTree\022\014\n\004" +
+      "left\030\001 \002(\021\022\r\n\005right\030\002 \002(\021\022\013\n\003top\030\003 \002(\021\022\016" +
+      "\n\006bottom\030\004 \002(\021\0220\n\010subtrees\030\007 \003(\0132\036.OsmAn",
+      "d.OBF.TransportStopsTree\022(\n\005leafs\030\010 \003(\0132" +
+      "\031.OsmAnd.OBF.TransportStop\022\016\n\006baseId\030\020 \001" +
+      "(\004\"\256\001\n\024OsmAndTransportIndex\022\014\n\004name\030\001 \001(" +
+      "\t\022+\n\006routes\030\003 \001(\0132\033.OsmAnd.OBF.Transport" +
+      "Routes\022-\n\005stops\030\006 \001(\0132\036.OsmAnd.OBF.Trans" +
+      "portStopsTree\022,\n\013stringTable\030\t \002(\0132\027.Osm" +
+      "And.OBF.StringTable\"\312\002\n\016OsmAndPoiIndex\022\014" +
+      "\n\004name\030\001 \002(\t\022-\n\nboundaries\030\002 \002(\0132\031.OsmAn" +
+      "d.OBF.OsmAndTileBox\0228\n\017categoriesTable\030\003" +
+      " \003(\0132\037.OsmAnd.OBF.OsmAndCategoryTable\0221\n",
+      "\tnameIndex\030\004 \001(\0132\036.OsmAnd.OBF.OsmAndPoiN" +
+      "ameIndex\0226\n\rsubtypesTable\030\005 \001(\0132\037.OsmAnd" +
+      ".OBF.OsmAndSubtypesTable\022\'\n\005boxes\030\006 \003(\0132" +
+      "\030.OsmAnd.OBF.OsmAndPoiBox\022-\n\007poiData\030\t \003" +
+      "(\0132\034.OsmAnd.OBF.OsmAndPoiBoxData\"\331\001\n\022Osm" +
+      "AndPoiNameIndex\022-\n\005table\030\003 \002(\0132\036.OsmAnd." +
+      "OBF.IndexedStringTable\022C\n\004data\030\005 \003(\01325.O" +
+      "smAnd.OBF.OsmAndPoiNameIndex.OsmAndPoiNa" +
+      "meIndexData\032O\n\026OsmAndPoiNameIndexData\0225\n" +
+      "\005atoms\030\003 \003(\0132&.OsmAnd.OBF.OsmAndPoiNameI",
+      "ndexDataAtom\"Q\n\032OsmAndPoiNameIndexDataAt" +
+      "om\022\014\n\004zoom\030\002 \001(\r\022\t\n\001x\030\003 \001(\r\022\t\n\001y\030\004 \001(\r\022\017" +
+      "\n\007shiftTo\030\016 \001(\007\">\n\023OsmAndCategoryTable\022\020" +
+      "\n\010category\030\001 \002(\t\022\025\n\rsubcategories\030\003 \003(\t\"" +
+      "E\n\023OsmAndSubtypesTable\022.\n\010subtypes\030\004 \003(\013" +
+      "2\034.OsmAnd.OBF.OsmAndPoiSubtype\"\205\001\n\020OsmAn" +
+      "dPoiSubtype\022\014\n\004name\030\001 \002(\t\022\017\n\007tagname\030\002 \001" +
+      "(\t\022\016\n\006isText\030\003 \002(\010\022\021\n\tfrequency\030\005 \001(\r\022\031\n" +
+      "\021subtypeValuesSize\030\006 \001(\r\022\024\n\014subtypeValue" +
+      "\030\010 \003(\t\"\255\001\n\014OsmAndPoiBox\022\014\n\004zoom\030\001 \002(\r\022\014\n",
+      "\004left\030\002 \002(\021\022\013\n\003top\030\003 \002(\021\0223\n\ncategories\030\004" +
+      " \001(\0132\037.OsmAnd.OBF.OsmAndPoiCategories\022*\n" +
+      "\010subBoxes\030\n \003(\0132\030.OsmAnd.OBF.OsmAndPoiBo" +
+      "x\022\023\n\013shiftToData\030\016 \001(\007\"@\n\023OsmAndPoiCateg" +
+      "ories\022\022\n\ncategories\030\003 \003(\r\022\025\n\rsubcategori" +
+      "es\030\005 \003(\r\"i\n\020OsmAndPoiBoxData\022\014\n\004zoom\030\001 \001" +
+      "(\r\022\t\n\001x\030\002 \001(\r\022\t\n\001y\030\003 \001(\r\0221\n\007poiData\030\005 \003(" +
+      "\0132 .OsmAnd.OBF.OsmAndPoiBoxDataAtom\"\360\001\n\024" +
+      "OsmAndPoiBoxDataAtom\022\n\n\002dx\030\002 \002(\021\022\n\n\002dy\030\003" +
+      " \002(\021\022\022\n\ncategories\030\004 \003(\r\022\025\n\rsubcategorie",
+      "s\030\005 \003(\r\022\014\n\004name\030\006 \001(\t\022\016\n\006nameEn\030\007 \001(\t\022\n\n" +
+      "\002id\030\010 \001(\004\022\024\n\014openingHours\030\n \001(\t\022\014\n\004site\030" +
+      "\013 \001(\t\022\r\n\005phone\030\014 \001(\t\022\014\n\004note\030\r \001(\t\022\026\n\016te" +
+      "xtCategories\030\016 \003(\r\022\022\n\ntextValues\030\017 \003(\t\"\032" +
+      "\n\007IdTable\022\017\n\007routeId\030\001 \003(\022\"F\n\017Restrictio" +
+      "nData\022\014\n\004type\030\001 \002(\005\022\014\n\004from\030\002 \002(\005\022\n\n\002to\030" +
+      "\003 \002(\005\022\013\n\003via\030\004 \001(\005\"x\n\tRouteData\022\016\n\006point" +
+      "s\030\001 \002(\014\022\022\n\npointTypes\030\004 \001(\014\022\022\n\npointName" +
+      "s\030\005 \001(\014\022\r\n\005types\030\007 \002(\014\022\017\n\007routeId\030\014 \002(\005\022" +
+      "\023\n\013stringNames\030\016 \001(\014\"\304\005\n\022OsmAndRoutingIn",
+      "dex\022\014\n\004name\030\001 \002(\t\022?\n\005rules\030\002 \003(\01320.OsmAn" +
+      "d.OBF.OsmAndRoutingIndex.RouteEncodingRu" +
+      "le\022>\n\trootBoxes\030\003 \003(\0132+.OsmAnd.OBF.OsmAn" +
+      "dRoutingIndex.RouteDataBox\022A\n\014basemapBox" +
+      "es\030\004 \003(\0132+.OsmAnd.OBF.OsmAndRoutingIndex" +
+      ".RouteDataBox\022=\n\006blocks\030\005 \003(\0132-.OsmAnd.O" +
+      "BF.OsmAndRoutingIndex.RouteDataBlock\032;\n\021" +
+      "RouteEncodingRule\022\013\n\003tag\030\003 \002(\t\022\r\n\005value\030" +
+      "\005 \002(\t\022\n\n\002id\030\007 \001(\r\032\231\001\n\014RouteDataBox\022\014\n\004le" +
+      "ft\030\001 \002(\021\022\r\n\005right\030\002 \002(\021\022\013\n\003top\030\003 \002(\021\022\016\n\006",
+      "bottom\030\004 \002(\021\022\023\n\013shiftToData\030\005 \001(\007\022:\n\005box" +
+      "es\030\007 \003(\0132+.OsmAnd.OBF.OsmAndRoutingIndex" +
+      ".RouteDataBox\032\303\001\n\016RouteDataBlock\022$\n\007idTa" +
+      "ble\030\005 \001(\0132\023.OsmAnd.OBF.IdTable\022*\n\013dataOb" +
+      "jects\030\006 \003(\0132\025.OsmAnd.OBF.RouteData\0221\n\014re" +
+      "strictions\030\007 \003(\0132\033.OsmAnd.OBF.Restrictio" +
+      "nData\022,\n\013stringTable\030\010 \001(\0132\027.OsmAnd.OBF." +
+      "StringTableB\036\n\021net.osmand.binaryB\tOsmand" +
+      "Odb"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -58124,7 +58217,7 @@ public final class OsmandOdb {
           internal_static_OsmAnd_OBF_TransportRoute_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAnd_OBF_TransportRoute_descriptor,
-              new java.lang.String[] { "Id", "Type", "Operator", "Ref", "Name", "NameEn", "Distance", "DirectStops", "ReverseStops", "DirectGeometry", "ReverseGeometry", });
+              new java.lang.String[] { "Id", "Type", "Operator", "Ref", "Name", "NameEn", "Distance", "DirectStops", "ReverseStops", "DirectGeometry", "ReverseGeometry", "SharedGeometry", });
           internal_static_OsmAnd_OBF_TransportRouteStop_descriptor =
             getDescriptor().getMessageTypes().get(17);
           internal_static_OsmAnd_OBF_TransportRouteStop_fieldAccessorTable = new

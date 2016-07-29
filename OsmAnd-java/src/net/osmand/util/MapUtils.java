@@ -367,7 +367,7 @@ public class MapUtils {
 	/**
 	 * interleaves the bits of two 32-bit numbers. the result is known as a Morton code.
 	 */
-	private static long interleaveBits(long x, long y) {
+	public static long interleaveBits(long x, long y) {
 		long c = 0;
 		for (byte b = 31; b >= 0; b--) {
 			c = (c << 1) | ((x >> b) & 1);
@@ -515,6 +515,29 @@ public class MapUtils {
 		return sa < 0;
 	}
 
+
+	
+
+
+	public static long deinterleaveY(long coord) {
+		long x = 0;
+		for (byte b = 31; b >= 0; b--) {
+			x = (x << 1) | (1 & coord >> (b * 2));
+		}
+		return x;
+	}
+	
+	public static long deinterleaveX(long coord) {
+		long x = 0;
+		for (byte b = 31; b >= 0; b--) {
+			x = (x << 1) | (1 & coord >> (b * 2 + 1));
+		}
+		return x;
+	}
+	
+	
+
+	
 }
 
 

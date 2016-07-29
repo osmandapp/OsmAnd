@@ -2039,7 +2039,7 @@ public class BinaryMapIndexReader {
 
 	public static void main(String[] args) throws IOException {
 		File fl = new File(System.getProperty("maps") + "/Synthetic_test_rendering.obf");
-		fl = new File(System.getProperty("maps") + "/Netherlands_noord-holland_europe.obf");
+		fl = new File(System.getProperty("maps") + "/Map.obf");
 		
 		RandomAccessFile raf = new RandomAccessFile(fl, "r");
 
@@ -2228,6 +2228,11 @@ public class BinaryMapIndexReader {
 			for (net.osmand.data.TransportRoute route : routes.valueCollection()) {
 				println(" " + route.getRef() + " " + route.getName() + " " + route.getDistance() + " "
 						+ route.getAvgBothDistance());
+				StringBuilder b = new StringBuilder();
+				for(Way w : route.getForwardWays()) {
+					b.append(w.getNodes()).append(" ");
+				}
+				println("  forward ways: " + b.toString());
 			}
 		}
 	}

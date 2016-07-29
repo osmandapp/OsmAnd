@@ -4,11 +4,14 @@ import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.map.hash.TIntObjectHashMap;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.data.TransportStop;
+import net.osmand.osm.edit.Node;
+import net.osmand.osm.edit.Way;
 import net.osmand.util.MapUtils;
 import net.sf.junidecode.Junidecode;
 
@@ -275,6 +278,37 @@ public class BinaryMapTransportReaderAdapter {
 				break;
 			case OsmandOdb.TransportRoute.OPERATOR_FIELD_NUMBER:
 				dataObject.setOperator(regStr(stringTable)); //$NON-NLS-1$
+				break;
+			case OsmandOdb.TransportRoute.DIRECTGEOMETRY_FIELD_NUMBER:
+			case OsmandOdb.TransportRoute.REVERSEGEOMETRY_FIELD_NUMBER:
+			case OsmandOdb.TransportRoute.SHAREDGEOMETRY_FIELD_NUMBER:
+				int dir = tag == OsmandOdb.TransportRoute.SHAREDGEOMETRY_FIELD_NUMBER ? 0 : (
+						tag == OsmandOdb.TransportRoute.DIRECTGEOMETRY_FIELD_NUMBER ? 1 : -1);
+				int sizeL = codedIS.readRawVarint32();
+				int pold = codedIS.pushLimit(sizeL);
+				int px = 0; 
+				int py = 0;
+				Way w = new Way(-1);
+				while (codedIS.getBytesUntilLimit() > 0) {
+					int ddx = (codedIS.readSInt32() << BinaryMapIndexReader.SHIFT_COORDINATES);
+					int ddy = (codedIS.readSInt32() << BinaryMapIndexReader.SHIFT_COORDINATES);
+					if(ddx == 0 && ddy == 0) {
+						if(w.getNodes().size() > 0) {
+							dataObject.addWay(w, dir);
+						}
+						w = new Way(-1);
+					} else {
+						int x = ddx + px;
+						int y = ddy + py;
+						w.addNode(new Node(MapUtils.get31LatitudeY(y), MapUtils.get31LongitudeX(x), -1));
+						px = x;
+						py = y;
+					}
+				}
+				if(w.getNodes().size() > 0) {
+					dataObject.addWay(w, dir );
+				}
+				codedIS.popLimit(pold);
 				break;
 			case OsmandOdb.TransportRoute.REVERSESTOPS_FIELD_NUMBER:
 				if(onlyDescription){

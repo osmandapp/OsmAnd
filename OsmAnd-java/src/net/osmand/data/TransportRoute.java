@@ -15,7 +15,10 @@ public class TransportRoute extends MapObject {
 	private String type;
 	private Integer dist = null;
 	private List<Way> forwardWays;
+	private List<Way> forwardAggWays;
 	private List<Way> backwardWays;
+	private List<Way> backwardAggWays;
+	private List<Way> sharedWays;
 	
 	public TransportRoute(){
 	}
@@ -28,32 +31,64 @@ public class TransportRoute extends MapObject {
 		return backwardStops;
 	}
 	
-	public List<Way> getForwardWays() {
-		if(forwardWays == null){
-			return Collections.emptyList();
+	public List<Way> getAggregateForwardWays() {
+		if(forwardAggWays != null){
+			return forwardAggWays;
 		}
+		forwardAggWays = new ArrayList<>();
+		if(forwardWays != null) {
+			forwardAggWays.addAll(forwardWays);
+		}
+		if(sharedWays != null) {
+			forwardAggWays.addAll(sharedWays);
+		}
+		return forwardAggWays;
+	}
+	
+	public List<Way> getAggregateBackwardWays() {
+		if (backwardAggWays != null) {
+			return backwardAggWays;
+		}
+		backwardAggWays = new ArrayList<>();
+		if (backwardWays != null) {
+			backwardAggWays.addAll(backwardWays);
+		}
+		if (sharedWays != null) {
+			backwardAggWays.addAll(sharedWays);
+		}
+		return backwardAggWays;
+	}
+	
+	public List<Way> getSharedWays() {
+		return sharedWays;
+	}
+	
+	public List<Way> getForwardWays() {
 		return forwardWays;
 	}
 	
 	public List<Way> getBackwardWays() {
-		if(backwardWays == null){
-			return Collections.emptyList();
-		}
 		return backwardWays;
 	}
 	
 	public void addWay(Way w, int direction){
-		if(direction >= 0) {
+		if(direction > 0) {
 			if(forwardWays == null) {
 				forwardWays = new ArrayList<>();
 			}
 			forwardWays.add(w);
 		}
-		if(direction <= 0) {
+		if(direction < 0) {
 			if(backwardWays == null) {
 				backwardWays = new ArrayList<>();
 			}
 			backwardWays.add(w);
+		}
+		if(direction == 0) {
+			if(sharedWays == null) {
+				sharedWays = new ArrayList<>();
+			}
+			sharedWays.add(w);
 		}
 	}
 	
