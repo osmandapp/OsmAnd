@@ -260,6 +260,24 @@ public class SearchUICore {
 				if(ObjectType.isAddress(r1.objectType) && ObjectType.isAddress(r2.objectType)) {
 					similarityRadius = 100;
 				}
+				if (a1.getSubType().contains("cn_ref") && a2.getSubType().contains("cn_ref") && a1.getType().getKeyName().equals(a2.getType().getKeyName())) {
+					similarityRadius = 10000;
+				}
+				if (a1.getSubType().contains("wn_ref") && a2.getSubType().contains("wn_ref") && a1.getType().getKeyName().equals(a2.getType().getKeyName())) {
+					similarityRadius = 10000;
+				}
+				if (a1.getSubType().equals("route_hiking_iwn_poi") && a2.getSubType().equals("route_hiking_iwn_poi") && a1.getType().getKeyName().equals(a2.getType().getKeyName())) {
+					similarityRadius = 10000;
+				}
+				if (a1.getSubType().equals("route_hiking_nwn_poi") && a2.getSubType().equals("route_hiking_nwn_poi") && a1.getType().getKeyName().equals(a2.getType().getKeyName())) {
+					similarityRadius = 10000;
+				}
+				if (a1.getSubType().equals("route_hiking_rwn_poi") && a2.getSubType().equals("route_hiking_rwn_poi") && a1.getType().getKeyName().equals(a2.getType().getKeyName())) {
+					similarityRadius = 10000;
+				}
+				if (a1.getSubType().equals("route_hiking_lwn_poi") && a2.getSubType().equals("route_hiking_lwn_poi") && a1.getType().getKeyName().equals(a2.getType().getKeyName())) {
+					similarityRadius = 10000;
+				}
 				return MapUtils.getDistance(r1.location, r2.location) < similarityRadius;
 			}
 		}
