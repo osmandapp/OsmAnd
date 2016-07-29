@@ -2245,7 +2245,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="hillshade_layer_disabled">طبقة التضاريس غير مفعلة</string>
     <string name="srtm_plugin_disabled">الخطوط الكفافية معطلة</string>
     <string name="nm">بحاجة إلى معلومات أكثر</string>
-    <string name="nm_h">nmi/h</string>
+    <string name="nm_h">ميل بحري/ساعة</string>
     <string name="simulate_your_location_descr">"محاكاة باستخدام طريق مقاس أو تسجيل GPX "</string>
     <string name="routing_attr_avoid_shuttle_train_name">تجنب قطار المدينة</string>
     <string name="routing_attr_avoid_shuttle_train_description">تجنب قطار المدينة</string>
@@ -2271,7 +2271,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="proxy_host_descr">ضبط اسم مضيف البروكسي (مثال 127.0.0.1)</string>
     <string name="map_preferred_locale_descr">اللغة المفضلة للمسميات على الخريطة (إذا لم تكن متوفرة ستتحول إلى اللغة الإنجليزية أو الأسماء المحلية)</string>
     <string name="rendering_attr_hideWoodScrubs_name">خشب وشجيرات</string>
-    <string name="osmo_gpx_points_downloaded">"تم تحميل %1$s من نقاط OsMo "</string>
+    <string name="osmo_gpx_points_downloaded">تم تحميل %1$ من نقاط آوسمو.</string>
     <string name="osmo_gpx_track_downloaded">تم تحميل %1$s من مسار OsMo.</string>
     <string name="osmo_show_group_notifications_descr">إظهار إشعارات عند انضمام مستخدم أو تركه المجموعة</string>
     <string name="osmo_credentials_not_valid">معلومات OsMo الخاصة بك غير صالحة.</string>
@@ -2289,5 +2289,5 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="osmo_session_token">حصة مأخوذة: %1$s</string>
     <string name="osmo_locations_sent">المواقع المرسلة %1$d (في الانتظار %2$d )</string>
     <string name="osmo_conn_successfull">اتصال محقق: %1$s</string>
-    <string name="osmo_io_error">مشكلة اتصال OsMo:</string>
+    <string name="osmo_io_error">"مشكلة اتصال آوسمو: "</string>
     </resources>
