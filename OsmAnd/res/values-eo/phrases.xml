@@ -2443,4 +2443,24 @@
 	<string name="poi_wiki_lang_mn">Vikipedio Mongola</string>
 	<string name="poi_wiki_lang_nap">Vikipedio Napola</string>
 
+	<string name="poi_craft_electronics">Riparejo de elektronikaĵoj</string>
+	<string name="poi_aerialway_length">Longo</string>
+
+	<string name="poi_building_type_pyramid">Konstruaĵ-speco: piramido</string>
+
+	<string name="poi_fitness">Ripoz-gimnastiko</string>
+
+	<string name="poi_fitness_centre">Ripoz-gimnastika centro</string>
+	<string name="poi_microwave_oven_yes">Mikroondilo: jes</string>
+	<string name="poi_microwave_oven_no">Mikroondilo: ne</string>
+	<string name="poi_water_heater_yes">Varmigilo por akvo: jes</string>
+	<string name="poi_water_heater_no">Varmigilo por akvo: ne</string>
+
+	<string name="poi_parking_surface">Speco: senkovra</string>
+	<string name="poi_parking_garage_boxes">Speco: garaĝ-budoj</string>
+	<string name="poi_parking_carports">Speco: tegmenta</string>
+
+	<string name="poi_dojo">Doĵo</string>
+
+	<string name="poi_gaelic_games">Gaelaj pilkludoj</string>
 	</resources>
