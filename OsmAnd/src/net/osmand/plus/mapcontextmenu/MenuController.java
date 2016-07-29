@@ -2,6 +2,7 @@ package net.osmand.plus.mapcontextmenu;
 
 import android.graphics.drawable.Drawable;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.LinearLayout;
 
 import net.osmand.binary.RouteDataObject;
@@ -12,7 +13,6 @@ import net.osmand.data.PointDescription;
 import net.osmand.data.TransportStop;
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
-import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -139,8 +139,8 @@ public abstract class MenuController extends BaseMenuController {
 
 	protected abstract void setObject(Object object);
 
-	public void addPlainMenuItem(int iconId, String text, boolean needLinks, boolean isUrl) {
-		builder.addPlainMenuItem(iconId, text, needLinks, isUrl);
+	public void addPlainMenuItem(int iconId, String text, boolean needLinks, boolean isUrl, OnClickListener onClickListener) {
+		builder.addPlainMenuItem(iconId, text, needLinks, isUrl, onClickListener);
 	}
 
 	public void clearPlainMenuItems() {
@@ -153,7 +153,7 @@ public abstract class MenuController extends BaseMenuController {
 
 	protected void addMyLocationToPlainItems(LatLon latLon) {
 		addPlainMenuItem(R.drawable.ic_action_get_my_location, PointDescription.getLocationName(getMapActivity(),
-				latLon.getLatitude(), latLon.getLongitude(), true).replaceAll("\n", ""), false, false);
+				latLon.getLatitude(), latLon.getLongitude(), true).replaceAll("\n", ""), false, false, null);
 	}
 
 	public PointDescription getPointDescription() {
