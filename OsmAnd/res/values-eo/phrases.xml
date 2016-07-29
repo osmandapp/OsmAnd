@@ -2393,7 +2393,7 @@
 	<string name="poi_wiki_lang_cy">Vikipedio Kimra</string>
 	<string name="poi_wiki_lang_fa">Vikipedio Persa</string>
 	<string name="poi_wiki_lang_fy">Vikipedio Frisa</string>
-	<string name="poi_wiki_lang_ga">Vikipedia Irlanda</string>
+	<string name="poi_wiki_lang_ga">Vikipedio Irlanda</string>
 	<string name="poi_wiki_lang_hy">Vikipedio Armena</string>
 	<string name="poi_wiki_lang_is">Vikipedio Islanda</string>
 	<string name="poi_wiki_lang_ka">Vikipedio Kartvela</string>
@@ -2420,4 +2420,27 @@
 	<string name="poi_wiki_lang_ce">Vikipedio Ĉeĉena</string>
 	<string name="poi_wiki_lang_ur">Vikipedio Urdua</string>
 	<string name="poi_wiki_lang_oc">Vikipedio Okcitana</string>
+	<string name="poi_wiki_lang_mg">Vikipedio Malagasa</string>
+	<string name="poi_wiki_lang_zhminnan">Vikipedio Minnana</string>
+	<string name="poi_wiki_lang_tt">Vikipedio Tatara</string>
+	<string name="poi_wiki_lang_jv">Vikipedio Java</string>
+	<string name="poi_wiki_lang_ky">Vikipedio Kirgiza</string>
+	<string name="poi_wiki_lang_zhyue">Vikipedio Kantona</string>
+	<string name="poi_wiki_lang_ast">Vikipedio Asturia</string>
+	<string name="poi_wiki_lang_tg">Vikipedio Taĝika</string>
+	<string name="poi_wiki_lang_ba">Vikipedio Baŝkira</string>
+	<string name="poi_wiki_lang_sco">Vikipedio Skota</string>
+	<string name="poi_wiki_lang_pnb">Vikipedio Panĝaba</string>
+	<string name="poi_wiki_lang_cv">Vikipedio Ĉuvaŝa</string>
+	<string name="poi_wiki_lang_lmo">Vikipedio Lombarda</string>
+	<string name="poi_wiki_lang_my">Vikipedio Birma</string>
+	<string name="poi_wiki_lang_yo">Vikipedio Joruba</string>
+	<string name="poi_wiki_lang_an">Vikipedio Aragona</string>
+	<string name="poi_wiki_lang_ne">Vikipedio Nepala</string>
+	<string name="poi_wiki_lang_gu">Vikipedio Guĝarata</string>
+	<string name="poi_wiki_lang_scn">Vikipedio Sicilia</string>
+	<string name="poi_wiki_lang_bar">Vikipedio Bavara</string>
+	<string name="poi_wiki_lang_mn">Vikipedio Mongola</string>
+	<string name="poi_wiki_lang_nap">Vikipedio Napola</string>
+
 	</resources>
