@@ -1979,7 +1979,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="osmo_start_service">خدمة أوسمو OsMo</string>
     <string name="routing_attr_avoid_borders_name">منع تخطي الحدود</string>
     <string name="impassable_road_desc">حدد الطرق التي تريد تجنبها أثناء التنقل</string>
-    <string name="search_categories">الفئات\n</string>
+    <string name="search_categories">الفئات</string>
     <string name="shared_string_near">بالقرب من</string>
     <string name="route_tslr">در قليلا إلى اليمين ثم واصل</string>
     <string name="route_tsll">در قليلا إلى اليسار ثم واصل</string>
@@ -2193,7 +2193,19 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="osmo_set_moving_target">تعيين كهدف متنقل</string>
     <string name="osmo_group">مجموعة أوسمو OsMo</string>
     <string name="show_something_on_map">اظهر %1$s على الخريطة</string>
-    <string name="release_2_4">" • باحث نصوص جديد مجاني وكفئ\n\n • تحسين ملحوظ للصوت عن طريق البلوتوث\n\n • إدخال تحسينات في مرشد الطراقات، و الإعلانات الصوتية مع تعيين ممرات الالتفاف\n\n • إضافة باقة من اللغات و التراجم مع دعم لغات مناطق عدة\n\n • العديد من التحسينات الأخرى وإصلاحات خلل\n\nوأكثر … "</string>
+    <string name="release_2_4">"
+ • باحث نصوص جديد مجاني وكفئ
+
+ • تحسين ملحوظ للصوت عبر البلوتوث
+
+ • إدخال تحسينات في مرشد الطراقات، و الإعلانات الصوتية مع تعيين ممرات الالتفاف
+
+ • إضافة باقة من اللغات و الترجمات مع دعم لغات مناطق عدة
+
+ • العديد من التحسينات الأخرى وإصلاحات الخلل
+
+وأكثر …
+ "</string>
     <string name="dist_away_from_my_location">ابحث %1$s بعيدا</string>
     <string name="show_on_map">اظهر على الخريطة</string>
     <string name="share_history_subject">" تمت مشاركته من طرف OsmAnd"</string>
@@ -2226,4 +2238,56 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="rendering_attr_hideProposed_name">الأشياء المقترحة</string>
     <string name="osm_edit_created_poi">إنشاء OSM POI</string>
 
+    <string name="coords_search">البحث عن إحداثيات</string>
+    <string name="advanced_coords_search">بحث متقدم عن الإحداثيات</string>
+    <string name="simulate_initial_startup_descr">وضع علامة تشير إلى بدء تشغيل التطبيق الأولي، ابقي جميع الإعدادات الأخرى دون تغيير</string>
+    <string name="region_maps">خرائط واسعة النطاق</string>
+    <string name="hillshade_layer_disabled">طبقة التضاريس غير مفعلة</string>
+    <string name="srtm_plugin_disabled">الخطوط الكفافية معطلة</string>
+    <string name="nm">بحاجة إلى معلومات أكثر</string>
+    <string name="nm_h">nmi/h</string>
+    <string name="simulate_your_location_descr">"محاكاة باستخدام طريق مقاس أو تسجيل GPX "</string>
+    <string name="routing_attr_avoid_shuttle_train_name">تجنب قطار المدينة</string>
+    <string name="routing_attr_avoid_shuttle_train_description">تجنب قطار المدينة</string>
+    <string name="traffic_warning_hazard">خطر</string>
+    <string name="rendering_value_boldOutline_name">مخطط واضح</string>
+    <string name="lang_pms">بييمونتي</string>
+    <string name="lang_br">بريتون</string>
+    <string name="lang_bpy">اللغة البيشنوبيرية (هندية)</string>
+    <string name="lang_new">نوار / باهاسا النيبال</string>
+    <string name="lang_ceb">لغة السيبيونو</string>
+    <string name="archive_wikipedia_data">لديك بيانات ويكيبيديا منزلة قديمة غير متوافقة. هل تريد أرشفتها؟</string>
+    <string name="disable_recording_once_app_killed">منع التسجيل المستقل</string>
+    <string name="disable_recording_once_app_killed_descrp">سوف يتم توقيف تسجيل GPX عندما ايقاف التطبيق (عبر نافذة التطبيقات المستعملة مؤخرا). (إشعار التطبيق يختفي من شريط إشعارات الجهاز.)</string>
+    <string name="shared_string_import2osmand">إدخال الى OsmAnd</string>
+    <string name="osm_edit_context_menu_delete">حذف تعديل OSM</string>
+    <string name="rendering_value_disabled_name">معطل</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">تلوين وفق نطاق الطريق</string>
+    <string name="rendering_value_walkingRoutesOSMC_name">تلوين وفق OSMC</string>
+    <string name="shared_string_logoff">خروج</string>
+    <string name="local_recordings_delete_all_confirm">ستقوم بحذف %1$d ملاحظات. هل أنت واثق؟</string>
+    <string name="nautical_maps_missing">لعرض الخرائط البحرية، يجب تحميل خريطة خاصة</string>
+    <string name="save_track_to_gpx_globally_descr">تسجيل الموقع العام إلى ملف GPX يمكن تشغيله أو إيقافه باستخدام نافذة تسجيل GPX على الشاشة خريطة</string>
+    <string name="proxy_host_descr">ضبط اسم مضيف البروكسي (مثال 127.0.0.1)</string>
+    <string name="map_preferred_locale_descr">اللغة المفضلة للمسميات على الخريطة (إذا لم تكن متوفرة ستتحول إلى اللغة الإنجليزية أو الأسماء المحلية)</string>
+    <string name="rendering_attr_hideWoodScrubs_name">خشب وشجيرات</string>
+    <string name="osmo_gpx_points_downloaded">"تم تحميل %1$s من نقاط OsMo "</string>
+    <string name="osmo_gpx_track_downloaded">تم تحميل %1$s من مسار OsMo.</string>
+    <string name="osmo_show_group_notifications_descr">إظهار إشعارات عند انضمام مستخدم أو تركه المجموعة</string>
+    <string name="osmo_credentials_not_valid">معلومات OsMo الخاصة بك غير صالحة.</string>
+    <string name="osmo_regenerate_login_ids_confirm">هل أنت متأكدة من تجديد هويتك الشخصية؟ جميع الأجهزة المتصلة بحسابك لن تكون قادرة على تتبعك بعد الآن.</string>
+    <string name="osmo_cancel_moving_target">"إلغاء تحريك الهدف "</string>
+    <string name="osmo_group_share">للإتصال بالمجموعة %2$s، حدد هوبة المجموعة (%1$s) أو انقر %3$s.</string>
+    <string name="osmo_session_not_available">الحصة غير متوفرة، الرجاء التأكد من أن \'ارسال المواقع \"مفعل.</string>
+    <string name="osmo_share_session">مشاركة الحصة</string>
+    <string name="osmo_session_id_share">رابط الحصة لتتبع جهاز (%1$s)</string>
+    <string name="osmo_tracker_id_share">"من أجل توصيل الجهاز %2$s، انقر على الرابط %3$s  أو حدد هوية المتعقب (%1$s)"</string>
+    <string name="osmo_server_operation_failed">"فشلت عملية سيرفر OsMo "</string>
+    <string name="osmo_activity">مراقبة OpenStreetMap</string>
+    <string name="osmo_control">"الوصول السريع لـ OsMo "</string>
+    <string name="osmo_connected_devices">الأجهزة المتصلة</string>
+    <string name="osmo_session_token">حصة مأخوذة: %1$s</string>
+    <string name="osmo_locations_sent">المواقع المرسلة %1$d (في الانتظار %2$d )</string>
+    <string name="osmo_conn_successfull">اتصال محقق: %1$s</string>
+    <string name="osmo_io_error">مشكلة اتصال OsMo:</string>
     </resources>
