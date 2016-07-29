@@ -9,12 +9,16 @@ import android.widget.AbsListView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import net.osmand.binary.BinaryMapIndexReader.SearchPoiTypeFilter;
 import net.osmand.data.Amenity;
 import net.osmand.data.City;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.Street;
+import net.osmand.osm.AbstractPoiType;
+import net.osmand.osm.MapPoiTypes;
+import net.osmand.osm.PoiCategory;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
@@ -22,9 +26,10 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.OsmAndListFragment;
 import net.osmand.plus.dashboard.DashLocationFragment;
-import net.osmand.plus.helpers.SearchHistoryHelper;
+import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
 import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchResult;
+import net.osmand.util.Algorithms;
 
 import java.util.List;
 
@@ -84,7 +89,7 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 					|| sr.objectType == ObjectType.WPT
 					|| sr.objectType == ObjectType.STREET_INTERSECTION) {
 
-				showOnMap(sr);
+				showOnMap(sr, sr.objectType != ObjectType.RECENT_OBJ);
 			} else {
 				dialogFragment.completeQueryWithObject(item.getSearchResult());
 			}
@@ -142,20 +147,27 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 		dialogFragment.onSearchListFragmentResume(this);
 	}
 
-	private void showOnMap(SearchResult searchResult) {
+	private void showOnMap(SearchResult searchResult, boolean showTopbar) {
 		if (searchResult.location != null) {
 			OsmandApplication app = getMyApplication();
+			String lang = searchResult.requiredSearchPhrase.getSettings().getLang();
 			PointDescription pointDescription = null;
 			Object object = searchResult.object;
 			switch (searchResult.objectType) {
 				case POI:
-					String poiSimpleFormat = OsmAndFormatter.getPoiStringWithoutType(
-							(Amenity) object, searchResult.requiredSearchPhrase.getSettings().getLang());
+					String poiSimpleFormat = OsmAndFormatter.getPoiStringWithoutType((Amenity) object, lang);
 					pointDescription = new PointDescription(PointDescription.POINT_TYPE_POI, poiSimpleFormat);
 					break;
 				case RECENT_OBJ:
-					SearchHistoryHelper.HistoryEntry entry = (SearchHistoryHelper.HistoryEntry) object;
-					pointDescription = entry.getName();
+					HistoryEntry entry = (HistoryEntry) object;
+					Amenity amenity = findAmenity(entry.getName().getName(), entry.getLat(), entry.getLon(), lang);
+					if (amenity != null) {
+						object = amenity;
+						pointDescription = new PointDescription(PointDescription.POINT_TYPE_POI,
+								OsmAndFormatter.getPoiStringWithoutType(amenity, lang));
+					} else {
+						pointDescription = entry.getName();
+					}
 					break;
 				case FAVORITE:
 					FavouritePoint fav = (FavouritePoint) object;
@@ -163,13 +175,13 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 					break;
 				case HOUSE:
 					String nm = searchResult.localeName;
-					if(searchResult.relatedObject instanceof City) {
-						nm = ((City)searchResult.relatedObject).getName(searchResult.requiredSearchPhrase.getSettings().getLang(), true) + " " + nm;
-					} else if(searchResult.relatedObject instanceof Street) {
-						String s = ((Street)searchResult.relatedObject).getName(searchResult.requiredSearchPhrase.getSettings().getLang(), true);
-						String c = ((Street)searchResult.relatedObject).getCity().getName(searchResult.requiredSearchPhrase.getSettings().getLang(), true);
-						nm = s + " " + nm +", " + c;
-					} else if(searchResult.localeRelatedObjectName != null) {
+					if (searchResult.relatedObject instanceof City) {
+						nm = ((City) searchResult.relatedObject).getName(searchResult.requiredSearchPhrase.getSettings().getLang(), true) + " " + nm;
+					} else if (searchResult.relatedObject instanceof Street) {
+						String s = ((Street) searchResult.relatedObject).getName(searchResult.requiredSearchPhrase.getSettings().getLang(), true);
+						String c = ((Street) searchResult.relatedObject).getCity().getName(searchResult.requiredSearchPhrase.getSettings().getLang(), true);
+						nm = s + " " + nm + ", " + c;
+					} else if (searchResult.localeRelatedObjectName != null) {
 						nm = searchResult.localeRelatedObjectName + " " + nm;
 					}
 					pointDescription = new PointDescription(PointDescription.POINT_TYPE_ADDRESS, nm);
@@ -187,18 +199,56 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 					pointDescription = wpt.getPointDescription(getMyApplication());
 					break;
 			}
-			getMapActivity().setQuickSearchTopbarActive(true);
+			getMapActivity().setQuickSearchTopbarActive(showTopbar);
+			if (!showTopbar) {
+				dialogFragment.dismiss();
+			}
 			getMyApplication().getSettings().setMapLocationToShow(
 					searchResult.location.getLatitude(), searchResult.location.getLongitude(),
 					searchResult.preferredZoom, pointDescription, true, object);
 
 			MapActivity.launchMapActivityMoveToTop(getActivity());
-			dialogFragment.hide();
+			if (showTopbar) {
+				dialogFragment.hide();
+			}
 		}
 	}
 
+	private Amenity findAmenity(String name, double lat, double lon, String lang) {
+		OsmandApplication app = getMyApplication();
+		List<Amenity> amenities = app.getResourceManager().searchAmenities(
+				new SearchPoiTypeFilter() {
+					@Override
+					public boolean accept(PoiCategory type, String subcategory) {
+						return true;
+					}
+
+					@Override
+					public boolean isEmpty() {
+						return false;
+					}
+				}, lat, lon, lat, lon, -1, null);
+
+		MapPoiTypes types = app.getPoiTypes();
+		for (Amenity amenity : amenities) {
+			String amenityName = amenity.getName(lang, true);
+			if (Algorithms.isEmpty(amenityName)) {
+				AbstractPoiType st = types.getAnyPoiTypeByKey(amenity.getSubType());
+				if (st != null) {
+					amenityName = st.getTranslation();
+				} else {
+					amenityName = amenity.getSubType();
+				}
+			}
+			if (name.contains(amenityName)) {
+				return amenity;
+			}
+		}
+		return null;
+	}
+
 	public MapActivity getMapActivity() {
-		return (MapActivity)getActivity();
+		return (MapActivity) getActivity();
 	}
 
 	public void updateLocation(LatLon latLon, Float heading) {
