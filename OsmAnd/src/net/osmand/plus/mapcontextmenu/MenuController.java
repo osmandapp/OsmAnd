@@ -340,4 +340,8 @@ public abstract class MenuController extends BaseMenuController {
 
 		public abstract void buttonPressed();
 	}
+
+	public void onHide() {
+		
+	}
 }

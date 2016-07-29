@@ -1,6 +1,7 @@
 package net.osmand.plus.views;
 
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.ColorFilter;
 import android.graphics.Paint;
 import android.graphics.Path;
@@ -393,9 +394,7 @@ public abstract class OsmandMapLayer {
 						rc.setDensityValue((float) tileBox.getMapDensity());
 						// cachedColor = req.getIntPropertyValue(rrs.PROPS.R_COLOR);
 						renderer.updatePaint(req, paint, 0, false, rc);
-						if(paint.getColor() == 0 && defaultColor != 0) {
-							paint.setColor(defaultColor);
-						}
+						updateDefaultColor(paint, defaultColor);
 						if (paint.getStrokeWidth() == 0 && defaultWidth != 0) {
 							paint.setStrokeWidth(defaultWidth);
 						}
@@ -427,6 +426,13 @@ public abstract class OsmandMapLayer {
 				return true;
 			}
 			return false;
+		}
+
+
+		private void updateDefaultColor(Paint paint, int defaultColor) {
+			if((paint.getColor() == 0 || paint.getColor() == Color.BLACK) && defaultColor != 0) {
+				paint.setColor(defaultColor);
+			}
 		}
 		
 		private int calculateHash(Object... o) {
