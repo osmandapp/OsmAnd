@@ -357,6 +357,9 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 			mapActivity.getMapView().setMapPosition(mapPosition);
 			mapPosition = 0;
 		}
+		if(getMenuController() != null) {
+			getMenuController().onHide();
+		}
 		WeakReference<MapContextMenuFragment> fragmentRef = findMenuFragment();
 		if (fragmentRef != null) {
 			fragmentRef.get().dismissMenu();

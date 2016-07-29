@@ -1,6 +1,7 @@
 package net.osmand.plus.views;
 
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.ColorFilter;
 import android.graphics.Paint;
 import android.graphics.Path;
@@ -393,12 +394,6 @@ public abstract class OsmandMapLayer {
 						rc.setDensityValue((float) tileBox.getMapDensity());
 						// cachedColor = req.getIntPropertyValue(rrs.PROPS.R_COLOR);
 						renderer.updatePaint(req, paint, 0, false, rc);
-						if(paint.getColor() == 0 && defaultColor != 0) {
-							paint.setColor(defaultColor);
-						}
-						if (paint.getStrokeWidth() == 0 && defaultWidth != 0) {
-							paint.setStrokeWidth(defaultWidth);
-						}
 						isPaint2 = renderer.updatePaint(req, paint2, 1, false, rc);
 						if (paint2.getStrokeWidth() == 0 && defaultWidth2 != 0) {
 							paint2.setStrokeWidth(defaultWidth2);
@@ -421,12 +416,22 @@ public abstract class OsmandMapLayer {
 						}
 					} else {
 						System.err.println("Rendering attribute route is not found !");
+					}
+					updateDefaultColor(paint, defaultColor);
+					if (paint.getStrokeWidth() == 0 && defaultWidth != 0) {
 						paint.setStrokeWidth(defaultWidth);
 					}
 				}
 				return true;
 			}
 			return false;
+		}
+
+
+		private void updateDefaultColor(Paint paint, int defaultColor) {
+			if((paint.getColor() == 0 || paint.getColor() == Color.BLACK) && defaultColor != 0) {
+				paint.setColor(defaultColor);
+			}
 		}
 		
 		private int calculateHash(Object... o) {

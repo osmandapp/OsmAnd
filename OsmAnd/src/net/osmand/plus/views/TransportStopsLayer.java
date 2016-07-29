@@ -232,7 +232,7 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 	@Override
 	public PointDescription getObjectName(Object o) {
 		if(o instanceof TransportStop){
-			return new PointDescription(PointDescription.POINT_TYPE_POI, view.getContext().getString(R.string.transport_Stop),
+			return new PointDescription(PointDescription.POINT_TYPE_TRANSPORT_STOP, view.getContext().getString(R.string.transport_Stop),
 					((TransportStop)o).getName()); 
 		}
 		return null;

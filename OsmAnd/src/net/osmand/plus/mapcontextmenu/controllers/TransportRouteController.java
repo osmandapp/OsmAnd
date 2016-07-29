@@ -2,15 +2,19 @@ package net.osmand.plus.mapcontextmenu.controllers;
 
 import java.util.List;
 
+import android.view.View;
+import android.view.View.OnClickListener;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.TransportStop;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.mapcontextmenu.controllers.TransportStopController.TransportStopRoute;
+import net.osmand.plus.views.TransportStopsLayer;
 
 public class TransportRouteController extends MenuController {
 
@@ -70,17 +74,37 @@ public class TransportRouteController extends MenuController {
 	public String getTypeStr() {
 		return getPointDescription().getTypeName();
 	}
+	
+	@Override
+	public void onHide() {
+		super.onHide();
+		TransportStopsLayer stopsLayer = getMapActivity().getMapLayers().getTransportStopsLayer();
+		stopsLayer.setRoute(null);
+	}
 
 	@Override
-	public void addPlainMenuItems(String typeStr, PointDescription pointDescription, LatLon latLon) {
+	public void addPlainMenuItems(String typeStr, PointDescription pointDescription, final LatLon latLon) {
 		super.addPlainMenuItems(typeStr, pointDescription, latLon);
 		List<TransportStop> stops = transportStop.route.getForwardStops();
 		boolean useEnglishNames = getMapActivity().getMyApplication().getSettings().usingEnglishNames();
-		for (TransportStop stop : stops) {
+		for (final TransportStop stop : stops) {
+			final String name = useEnglishNames ? stop.getEnName(true) : stop.getName();
 			addPlainMenuItem(
 					stop == transportStop.stop ? R.drawable.ic_action_marker_dark : 
 						(transportStop.type == null ? R.drawable.mx_route_bus_ref  : transportStop.type.getResourceId()),
-					useEnglishNames ? stop.getEnName(true) : stop.getName(), false, false, null);
+					name , false, false, new OnClickListener() {
+						
+						@Override
+						public void onClick(View arg0) {
+							MapContextMenu mm = getMapActivity().getContextMenu();
+							PointDescription pd = new PointDescription(PointDescription.POINT_TYPE_TRANSPORT_STOP, 
+									getMapActivity().getString(R.string.transport_Stop),
+									name);
+							TransportStopsLayer stopsLayer = getMapActivity().getMapLayers().getTransportStopsLayer();
+							stopsLayer.setRoute(null);
+							mm.show(latLon, pd, stop);
+						}
+					});
 		}
 	}
 
