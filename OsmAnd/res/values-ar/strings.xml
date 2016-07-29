@@ -486,7 +486,8 @@
 	<string name="osmand_parking_pm">م</string>
 	<string name="osmand_parking_am">ص</string>
 	<string name="osmand_parking_position_name">نقطة ركن</string>
-	<string name="osmand_parking_plugin_description">اضافة موقف السيارات تسمح بحفظ الأماكن التي ركنت بها سيارتك والوقت المتبقي للركن(في حالة وقت محدد). كل من المكان والزمن متواجدان على لوحة القياس وكذلك في المؤشرات على شاشة الخريطة. يمكن اضافة منبه الى رزنامة جهازك كتذكير.</string>
+	<string name="osmand_parking_plugin_description">خاصية الركن تسمح بحفظ الأماكن التي ركنت بها سيارتك والوقت المتبقي للركن(في حالة وقت محدود).
+كل من المكان والزمن متواجدان على لوحة القياس وكذلك في المؤشرات على شاشة الخريطة. يمكن اضافة منبه الى رزنامة جهازك كتذكير.</string>
 	<string name="osmand_parking_plugin_name">ملحق مواقف السيارة</string>
 	<string name="context_menu_item_add_parking_point">أشر إليه كموقف السيارات</string>
 	<string name="context_menu_item_delete_parking_point">احذف علامة وقوف السيارات</string>
@@ -886,7 +887,9 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
 	
 	
 	<string name="download_files_not_enough_space">ليس هناك مساحة حرة كافية لتحميل %1$s م.ب. (المساحة الحرة: %2$s).</string>
-	<string name="download_files_question_space">تحميل {0} ملف ؟ هذا يحتاج {1} ميغابايت بشكل دائم. حاليا، هناك {2} ميغابايت متاحة.</string>
+	<string name="download_files_question_space">حقا تريد تحميل {0} ملف ؟
+هذا يحتاج {1} مب بشكل دائم.
+ حاليا، هناك {2} مب متوفرة.</string>
 	
 	
 	
@@ -1787,7 +1790,9 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="osm_live_region_desc">سيتم إرسال جزء من التبرع إلى مستخدمي OSM الذين يقومون بإرسال التغييرات إلى الخريطة في تلك المنطقة</string>
     <string name="osm_live_ask_for_purchase">يرجى شراء اشتراك OSM Live أولاً</string>
 
-    <string name="osm_live_header">يتيح هذا الاشتراك التحديثات كل ساعة لجميع الخرائط العالم. جزء كبير من الدخل سيعود إلى مجتمع OSM وتدفع لكل مساهمة OSM. في حال كنت تحب أوسماند و OSM وترغب في دعم ذلك، هذه هي الطريقة المثلى للقيام بذلك.</string>
+    <string name="osm_live_header">يتيح هذا الاشتراك التحديثات كل ساعة لجميع خرائط العالم. 
+جزء كبير من الدخل سيعود إلى مجتمع OSM وتدفع لكل مساهمة OSM.
+ في حال كنت تحب OsmAnd و OSM وترغب في الدعم، هذه هي الطريقة المثلى للقيام بذلك.</string>
     
     <string name="map_markers_other">علامات أخرى</string>
     <string name="upload_anonymously">حمل بصفة مجهولة</string>
@@ -1843,7 +1848,13 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="access_autoannounce_period_descr">اقل مهلة بين الاخطارات</string>
     <string name="access_map_linked_to_location">الخريطة مرتبطة بالموقع</string>
     <string name="rendering_value_bold_name">عريض</string>
-    <string name="osmo_group_information_desc">" - جاري إنشاء مجموعة, رجاءا اعط تسمية لها واملأ الوصف\n- من مجموعة التطبيق تم إنشاؤها فقط باستخدام نوع بسيط, اقرأ المزيد على الموقع https://osmo.mobi/g/new\n- باستخدام موقع ويب يمكنك ادارة مجموعة, لوضع العلامات والنقاط متاحة جميعا\n- نحن لا نؤيد استخدام مجموعة مستخدم واحد فقط, اذا لم تكن هذه مجموعة POI\n- المجموعات الخاصة محدودة لـ 8 أشخاص\n- الأحكام والشروط متوفرة دائما بشكل مفصل على الموقع OsMo.mobi\n- اذ كنت بحاجة لشروط خاصة - رجاءا تواصل مع الدعم : osmo.mobi@gmail.com "</string>
+    <string name="osmo_group_information_desc">"- عند إنشاء مجموعة, رجاءا اعطاها تسمية واملأ الوصف
+- من خلال التطبيق، إنشاء مجموعة يتم فقط باستخدام نوع مبسط, اقرأ المزيد على الموقع https://osmo.mobi/g/new
+- باستخدام موقع ويب يمكنك ادارة مجموعة، وضع مسارات ونقاط كلها متاحة 
+- نحن لا نؤيد استخدام مجموعة لمستخدم واحد فقط, اذا لم تكن هذه مجموعة لـ POI
+- المجموعات الخاصة محدودة بـ 8 أشخاص
+- الأحكام والشروط متوفرة دائما بشكل مفصل على الموقع OsMo.mobi
+- اذ كنت بحاجة لشروط خاصة - رجاءا اتصل بالدعم : osmo.mobi@gmail.com "</string>
     <string name="osmo_no_connection_msg">تعذر الاتصال بالخادم OsMo:\n- تحقق من اتصالك بالإنترنت\n- تحقق من الإعدادات\n- تفقد تويتر الخاص بنا : https://twitter.com/OsMomobi</string>
     <string name="anonymous_user_hint">مستخدم مجهول لا يمكنه :\n- إنشاء مجموعة;\n- مزامنة المجموعات والأجهزة مع الخادم;\n- إدارة المجموعات والأجهزة من خلال لوحة تحكم خاصة على الموقع.</string>
     <string name="osmo_auto_send_locations_descr">ابدأ الرحلة و قم بإرسال المواقع تلقائيا بعد تشغيل التطبيق</string>
@@ -1954,15 +1965,36 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="map_widget_magnetic_bearing">تأثير مغناطيسي</string>
     <string name="coords_format">تنسيق الاحداثيات</string>
     <string name="night">ليل</string>
-    <string name="osmo_plugin_description">"هذه الاضافة تتيح جزئيا وظيفة المراقبة لاوبن ستريت ماب، انظر https://osmo.mobi\nيمكنك تعقب جميع اجهزة مجموعة المشاركة في الوقت الفعلي.يمكنك ايضا مشاهدة النقاط والتعقبات التي تم رفعها في المجموعة المنضم اليها.\nالمجموعات لم بتم حذفها بعد اشهر، اجعلها تتماشى مع القوانين التي انشئت بها المجموعة على الموقع OsMo.mobi. "</string>
-    <string name="release_2_3">" OSM Live. يدعم خرائط المساهمين والمطورين ويقوم بتحديث الخرائط كل ساعة.\n\nالعلامات الموضعية. طريقة جديدة لتحديد الاماكن على الخريطة بسرعة.\n\nخرائط OSM اكثر مفصلة اكثر بتحديد حدود الدول والعديد من مزايا الخرائط الجديدة.\n\nمظهر محسن.\n\nالعديد من التحسينات على قائمة محتوى الخريطة مثل محتويات بحث البحث عن العناوين.\n\nهذا واكثر.... "</string>
+    <string name="osmo_plugin_description">"هذه الاضافة تتيح جزئيا وظيفة المراقبة لاوبن ستريت ماب، انظر https://osmo.mobi
+
+
+يمكنك تعقب جميع اجهزة مجموعة مشاركة في الوقت الفعلي.يمكنك أيضا مشاهدة النقاط والتعقبات التي تم رفعها في المجموعة المنضم اليها.
+
+
+المجموعات لم بتم حذفها بعد أشهر، اجعلها تتماشى مع القوانين التي انشئت بها المجموعات على الموقع OsMo.mobi.
+ "</string>
+    <string name="release_2_3">"
+ • OSM Live. يدعم مساهمي الخرائط والمطورين بتحديث الخرائط كل ساعة.
+
+ • العلامات الموضعية. طريقة جديدة لتحديد الاماكن على الخريطة بسرعة.
+
+ • خرائط OSM مفصلة اكثر مع حدود الدول والعديد من مزايا الخرائط الجديدة.
+
+ • مظهر محسن عند إعداد الطريق.
+
+ • تحسينات عدة على قائمة محتوى الخريطة كمحتويات البحث عن العناوين.
+
+ • هذا واكثر....
+ "</string>
     <string name="shared_string_move_up">حرك للاعلى</string>
     <string name="shared_string_move_down">حرك للاسفل</string>
     <string name="open_street_map_login_and_pass">اسم المستخدم وكلمة المرور ل اوبن ستريت ماب</string>
     <string name="osm_live_email_desc">نحن بحاجة اليه لكي لنوفر لك معلومات حول المساهمات</string>
     <string name="select_map_marker">اختر علامة موضعية</string>
     <string name="show_transparency_seekbar">اظهر شفافية شريط البحث</string>
-    <string name="download_files_error_not_enough_space">لا يوجد مساحة كافية! قد يحتاج هذا الى {3} ميغابايت مؤقتا و {1} ميغابايت دائمة. حاليا هناك {2} ميغابايت متوفرة.</string>
+    <string name="download_files_error_not_enough_space">مساحة غير كافية!
+ قد يحتاج هذا الى {3} مب مؤقتا و {1} ميغابايت دائمة.
+حاليا، هناك {2} مب متوفرة.</string>
     <string name="starting_point">نقطة الانطلاق</string>
     <string name="shared_string_sound">الصوت</string>
     <string name="shared_string_remove">حذف</string>
@@ -2014,7 +2046,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="rendering_attr_hideIcons_name">أيقونات ال POI</string>
     <string name="shared_string_type">النوع</string>
     <string name="shared_string_not_selected">غير محدد</string>
-    <string name="rec_split">تقطيع المسجل</string>
+    <string name="rec_split">قسم المسجل</string>
     <string name="rec_split_title">إستعمل مقسم التسجيلات</string>
     <string name="rec_split_clip_length">طول المقطع</string>
     <string name="rec_split_storage_size">حجم التخزين</string>
@@ -2117,7 +2149,9 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="show_on_start">إظهار عند البدء</string>
     <string name="osmo_enable_tracker">إرسل نقاط وضعيتي</string>
     <string name="map_widget_bearing">تاثير نسبي</string>
-    <string name="download_files_question_space_with_temp">هل تريد حقا تحميل {0} ملف؟\nهذا يحتاج {3} مب مؤقتة و {1} مب دائمة . حاليا هناك، {2} مب متاحة.</string>
+    <string name="download_files_question_space_with_temp">هل تريد حقا تحميل {0} ملف؟
+هذا يحتاج {3} مب مؤقتة و {1} مب دائمة.
+ حاليا هناك، {2} مب متوفرة.</string>
     <string name="transport_route_distance">مسافة المسلك</string>
     <string name="update_poi_error_local">خطأ تحيين القائمة المحلية للPOI</string>
     <string name="context_menu_item_update_poi">تحيين الPOI</string>
@@ -2290,4 +2324,6 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="osmo_locations_sent">المواقع المرسلة %1$d (في الانتظار %2$d )</string>
     <string name="osmo_conn_successfull">اتصال محقق: %1$s</string>
     <string name="osmo_io_error">"مشكلة اتصال آوسمو: "</string>
+    <string name="osmo_settings_uuid">هوية جهاز خاصة</string>
+    <string name="osmo_mode_restart">أعد تشغيل حصة آوسمو</string>
     </resources>
