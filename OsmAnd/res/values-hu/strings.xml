@@ -2236,4 +2236,5 @@ A csoport nem lesz törölve néhány hónap múlva, az OsMo.mobi weboldalon lé
 	<string name="lang_hsb">Szorb (felső)</string>
     <string name="shared_string_from">innen</string>
     <string name="coords_search">Koordináta keresés</string>
+    <string name="city_type_neighbourhood">Városrész</string>
     </resources>
