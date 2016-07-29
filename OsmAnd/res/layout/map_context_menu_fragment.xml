@@ -214,6 +214,59 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/download_buttons_container"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/context_menu_buttons_top_margin"
+                android:clickable="true"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/context_menu_buttons_padding_bottom"
+                android:paddingLeft="62dp"
+                android:paddingRight="2dp"
+                android:visibility="gone"
+                tools:visibility="visible">
+
+                <View
+                    android:id="@+id/download_buttons_top_border"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="10dp"
+                    android:background="?attr/dashboard_divider"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/download_button_left"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackground"
+                        android:gravity="left|center_vertical"
+                        android:paddingLeft="@dimen/context_menu_button_padding_x"
+                        android:paddingRight="@dimen/context_menu_button_padding_x"
+                        android:text="@string/shared_string_download"
+                        android:textColor="?attr/contextMenuButtonColor"
+                        android:textSize="@dimen/default_desc_text_size"/>
+
+                    <Button
+                        android:id="@+id/download_button_right"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackground"
+                        android:gravity="center"
+                        android:paddingLeft="@dimen/context_menu_button_padding_x"
+                        android:paddingRight="@dimen/context_menu_button_padding_x"
+                        android:text="@string/shared_string_delete"
+                        android:textColor="?attr/contextMenuButtonColor"
+                        android:textSize="@dimen/default_desc_text_size"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:id="@+id/title_progress_container"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"

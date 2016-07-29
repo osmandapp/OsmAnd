@@ -66,6 +66,8 @@ public abstract class MenuController extends BaseMenuController {
 	protected TitleButtonController rightTitleButtonController;
 	protected TitleButtonController topRightTitleButtonController;
 
+	protected TitleButtonController leftDownloadButtonController;
+	protected TitleButtonController rightDownloadButtonController;
 	protected TitleProgressController titleProgressController;
 
 	public MenuController(MenuBuilder builder, PointDescription pointDescription, MapActivity mapActivity) {
@@ -233,6 +235,14 @@ public abstract class MenuController extends BaseMenuController {
 
 	public TitleButtonController getTopRightTitleButtonController() {
 		return topRightTitleButtonController;
+	}
+
+	public TitleButtonController getLeftDownloadButtonController() {
+		return leftDownloadButtonController;
+	}
+
+	public TitleButtonController getRightDownloadButtonController() {
+		return rightDownloadButtonController;
 	}
 
 	public TitleProgressController getTitleProgressController() {

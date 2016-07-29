@@ -83,7 +83,7 @@ public class MapDataMenuController extends MenuController {
 		OsmandPlugin srtmPlugin = OsmandPlugin.getPlugin(SRTMPlugin.class);
 		srtmNeedsInstallation = srtmPlugin == null || srtmPlugin.needsInstallation();
 
-		leftTitleButtonController = new TitleButtonController() {
+		leftDownloadButtonController = new TitleButtonController() {
 			@Override
 			public void buttonPressed() {
 				if (backuped) {
@@ -112,10 +112,10 @@ public class MapDataMenuController extends MenuController {
 				}
 			}
 		};
-		leftTitleButtonController.caption = getMapActivity().getString(R.string.shared_string_download);
-		leftTitleButtonController.leftIconId = R.drawable.ic_action_import;
+		leftDownloadButtonController.caption = getMapActivity().getString(R.string.shared_string_download);
+		leftDownloadButtonController.leftIconId = R.drawable.ic_action_import;
 
-		rightTitleButtonController = new TitleButtonController() {
+		rightDownloadButtonController = new TitleButtonController() {
 			@Override
 			public void buttonPressed() {
 				if (indexItem != null) {
@@ -129,8 +129,8 @@ public class MapDataMenuController extends MenuController {
 				}
 			}
 		};
-		rightTitleButtonController.caption = getMapActivity().getString(R.string.shared_string_delete);
-		rightTitleButtonController.leftIconId = R.drawable.ic_action_delete_dark;
+		rightDownloadButtonController.caption = getMapActivity().getString(R.string.shared_string_delete);
+		rightDownloadButtonController.leftIconId = R.drawable.ic_action_delete_dark;
 
 		topRightTitleButtonController = new TitleButtonController() {
 			@Override
@@ -317,28 +317,28 @@ public class MapDataMenuController extends MenuController {
 			}
 		}
 
-		leftTitleButtonController.visible = true;
-		leftTitleButtonController.leftIconId = R.drawable.ic_action_import;
+		leftDownloadButtonController.visible = true;
+		leftDownloadButtonController.leftIconId = R.drawable.ic_action_import;
 		if (backuped) {
-			leftTitleButtonController.caption = getMapActivity().getString(R.string.local_index_mi_restore);
+			leftDownloadButtonController.caption = getMapActivity().getString(R.string.local_index_mi_restore);
 		} else if (indexItem != null) {
 			if ((indexItem.getType() == DownloadActivityType.SRTM_COUNTRY_FILE
 					|| indexItem.getType() == DownloadActivityType.HILLSHADE_FILE)
 					&& srtmDisabled) {
-				leftTitleButtonController.caption = getMapActivity().getString(R.string.get_plugin);
-				leftTitleButtonController.leftIconId = 0;
+				leftDownloadButtonController.caption = getMapActivity().getString(R.string.get_plugin);
+				leftDownloadButtonController.leftIconId = 0;
 			} else if (indexItem.isOutdated()) {
-				leftTitleButtonController.caption = getMapActivity().getString(R.string.shared_string_update);
+				leftDownloadButtonController.caption = getMapActivity().getString(R.string.shared_string_update);
 			} else if (!downloaded) {
-				leftTitleButtonController.caption = getMapActivity().getString(R.string.shared_string_download);
+				leftDownloadButtonController.caption = getMapActivity().getString(R.string.shared_string_download);
 			} else {
-				leftTitleButtonController.visible = false;
+				leftDownloadButtonController.visible = false;
 			}
 		} else {
-			leftTitleButtonController.visible = false;
+			leftDownloadButtonController.visible = false;
 		}
 
-		rightTitleButtonController.visible = downloaded;
+		rightDownloadButtonController.visible = downloaded;
 		topRightTitleButtonController.visible = (otherIndexItems != null && otherIndexItems.size() > 0)
 				|| (otherLocalIndexInfos != null && otherLocalIndexInfos.size() > 0);
 
