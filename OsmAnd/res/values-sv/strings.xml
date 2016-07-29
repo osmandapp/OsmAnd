@@ -104,15 +104,16 @@
     <string name="select_animate_speedup">Välj animerad ruttacceleration</string>
     <string name="global_app_allocated_memory_descr">Allokerat minne %1$s MB (Android-gräns %2$s MB, Dalvik %3$s MB).</string>
     <string name="global_app_allocated_memory">Allokerat minne</string>
-    <string name="native_app_allocated_memory_descr">Totalt inbyggt minne tilldelat av appen %1$s MB (Dalvik %2$s MB, annat %3$s MB). Proportionellt minne %4$s MB (Android-gräns %5$s MB, Dalvik %6$s MB).</string>
+    <string name="native_app_allocated_memory_descr">Totalt inbyggt minne tilldelat av appen %1$s MB (Dalvik %2$s MB, annat %3$s MB).
+Proportionellt minne %4$s MB (Android-gräns %5$s MB, Dalvik %6$s MB).</string>
     <string name="native_app_allocated_memory">Totalt inbyggt minne</string>
 
     <string name="starting_point_too_far">Startpunkten ligger för långt från närmaste väg.</string>
     <string name="shared_location">Delad plats</string>
     <string name="osmand_parking_event">Hämta bilen från parkering</string>
     <string name="osmand_parking_warning">Varning</string>
-    <string name="osmand_parking_warning_text">Notifiering om att hämta din bil har tidigare lagts till i din kalender. Den kommer att finnas där tills du tar bort den manuellt.</string>
-    <string name="osmand_parking_time_limit_title">Ange tidsgränsen för parkering</string>
+    <string name="osmand_parking_warning_text">En avisering om att hämta din bil har lagts till i din kalender. Den kommer att finnas där tills du tar bort den manuellt.</string>
+    <string name="osmand_parking_time_limit_title">Ange tidsgränsen för parkeringen</string>
     <string name="osmand_parking_delete_confirm">Vill du ta bort markören för parkeringsplatsen?</string>
     <string name="osmand_parking_delete">Ta bort P-markering</string>
     <string name="osmand_parking_choose_type">Välj typ av parkering</string>
@@ -192,7 +193,7 @@
     <string name="osmand_parking_position_description_add">Att hämta bilen på:</string>
     <string name="osmand_parking_pm">em</string>
     <string name="osmand_parking_am">fm</string>
-    <string name="osmand_parking_position_name">Parkeringspunkt</string>
+    <string name="osmand_parking_position_name">Parkeringsplats</string>
     <string name="osmand_parking_plugin_description">Modulen Parkeringsplats hjälper dig att hålla reda på var din bil är parkerad och vid behov hur mycket parkeringstid det är kvar. Du hittar din parkeringsplats och -tid på instrumentbrädan och i widgeten på kartskärmen. Du kan lägga till ett larm i kalendern som en påminnelse.</string>
     <string name="osmand_parking_plugin_name">Parkeringsplats</string>
     <string name="context_menu_item_add_parking_point">Markera som parkeringsplats</string>
@@ -235,7 +236,7 @@
     <string name="bg_service_sleep_mode_on">Stoppa\n körning i bakgrunden</string>
     <string name="osmand_parking_time_limit">Tidsbegränsad parkering</string>
     <string name="osmand_parking_time_no_limit">Ej tidsbegränsad parkering</string>
-    <string name="osmand_parking_position_description">Din parkerade bils position. %1$s</string>
+    <string name="osmand_parking_position_description">Din parkerade bils plats. %1$s</string>
 
     <string name="prefs_plugins_descr">Insticksmoduler aktiverar avancerade inställningar samt ger ytterligare funktionalitet</string>
     <string name="prefs_plugins">Insticksmoduler</string>
@@ -331,7 +332,9 @@
 
 
     <string name="download_files_not_enough_space">Det finns inte tillräckligt med ledigt utrymme för att ladda ner %1$s MB (ledigt: %2$s).</string>
-    <string name="download_files_question_space">Verkligen ladda ner {0} fil(er)? Detta kräver {1} MB permanent. För tillfället finns det {2} MB ledigt.</string>
+    <string name="download_files_question_space">Verkligen ladda ner {0} fil(er)?
+Detta kräver {1} MB permanent.
+För tillfället finns det {2} MB ledigt.</string>
 
 
     <string name="use_transparent_map_theme">Genomskinligt tema</string>
@@ -532,7 +535,7 @@
     <string name="add_as_last_destination_point">Lägg till som sista mellanliggande destination</string>
     <string name="add_as_first_destination_point">Lägg till som första mellanliggande destination</string>
     <string name="replace_destination_point">Byt destination</string>
-    <string name="new_destination_point_dialog">Du har redan en angiven destination.</string>
+    <string name="new_destination_point_dialog">Du har redan angivit en destination:</string>
     <string name="target_point">Destination %1$s</string>
     <string name="target_points">Destinationer</string>
     <string name="intermediate_point_too_far">Den mellanliggande destinationen %1$s ligger för långt från närmaste väg.</string>
@@ -862,7 +865,7 @@
 
     <string name="local_indexes_cat_av">Audio-/videodata</string>
     <string name="stop_routing_confirm">Är det säkert att du vill avbryta navigeringen?</string>
-    <string name="clear_dest_confirm">Är det säkert att du vill ta bort din destinationspunkt (samt mellanliggande destinationer)?</string>
+    <string name="clear_dest_confirm">Är det säkert att du vill ta bort din destination (samt mellanliggande destinationer)?</string>
     <string name="recording_context_menu_show">Visa</string>
     <string name="recording_photo_description">Foto %1$s %2$s</string>
     <string name="recording_context_menu_precord">Ta ett foto</string>
@@ -886,7 +889,10 @@
     <string name="av_settings">Inställningar för ljud och video </string>
     <string name="recording_error">Ett fel uppstod under inspelningen </string>
     <string name="recording_camera_not_available">Ingen kamera tillgänglig</string>
-    <string name="srtm_plugin_description">"Denna modul erbjuder överlägg med höjdkurvor som kan visas i kombination med OsmAnds standardkartor. Denna funktion kommer att uppskattas av idrottsmän, vandrare och alla som är intresserade av höjdskillnander i landskapet.\n\nDessa globala data (mellan 70 grader norr och 70 grader syd) baseras på mätningar av SRTM (Shuttle Radar Topography Mission) och ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), ett bildinstrument ombord Terra, flaggskeppet i NASA:s Earth Observing System. ASTER är ett samprojekt mellan NASA, Japans Ministry of Economy, Trade and Industry (METI), and Japan Space Systems (J-spacesystems). "</string>
+    <string name="srtm_plugin_description">"Denna modul erbjuder överlägg med höjdkurvor som kan visas i kombination med OsmAnds standardkartor. Denna funktion kommer att uppskattas av idrottsmän, vandrare och alla som är intresserade av höjdskillnander i landskapet.
+
+Dessa globala data (mellan 70 grader norr och 70 grader syd) baseras på mätningar av SRTM (Shuttle Radar Topography Mission) och ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), ett bildinstrument ombord Terra, flaggskeppet i NASA:s Earth Observing System. ASTER är ett samprojekt mellan NASA, Japans Ministry of Economy, Trade and Industry (METI), and Japan Space Systems (J-spacesystems).
+ "</string>
     <string name="delete_target_point">Ta bort destination</string>
     <string name="intermediate_point">Mellanliggande destination %1$s</string>
     <string name="poi_filter_nominatim">Online Nominatim</string>
@@ -987,7 +993,10 @@
     <string name="av_def_action_choose">Välj vid användning</string>
 
     <string name="enable_plugin_monitoring_services">Aktivera Trippinspelningspluginen för att använda positionsloggningstjänster (GPX-loggning, online-spårning)</string>
-    <string name="osmand_srtm_long_description_1000_chars">"Denna modul erbjuder både ett överlägg med konturlinjer och ett höjdkurvslager som kan visas ovanpå OsmAnds offline-kartor. Denna funktion kommer att uppskattas av idrottsmän, vandrare och alla som är intresserade av höjdskillnader i landskapet.\n\nDessa globala data (mellan 70 grader norr och 70 grader syd) är baserade på SRTM (Shuttle Radar Topography Mission) och ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), ett bildinstrument på Terra, NASA:s Earth Observing Systems satellit. ASTER är ett samarbete mellan NASA, Japans finansdepartement, Trade and Industry (METI) och Japan Space Systems (J-spacesystems). "</string>
+    <string name="osmand_srtm_long_description_1000_chars">"Denna modul erbjuder både ett överlägg med konturlinjer och ett höjdkurvslager som kan visas ovanpå OsmAnds offline-kartor. Denna funktion kommer att uppskattas av idrottsmän, vandrare och alla som är intresserade av höjdskillnader i landskapet.
+
+Dessa globala data (mellan 70 grader norr och 70 grader syd) är baserade på SRTM (Shuttle Radar Topography Mission) och ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), ett bildinstrument på Terra, NASA:s Earth Observing Systems satellit. ASTER är ett samarbete mellan NASA, Japans finansdepartement, Trade and Industry (METI) och Japan Space Systems (J-spacesystems).
+ "</string>
     <string name="access_arrival_time">Ankomsttid</string>
     <string name="index_name_openmaps">OpenMaps EU</string>
 
@@ -1041,7 +1050,13 @@
     <string name="gpx_saved_sucessfully">GPX-filen sparades utan problem till {0}</string>
     <string name="osmand_distance_planning_plugin_description">Denna modul erbjuder en widget på kartskärmen för att skapa spår genom att peta på kartan (eller använda/modifiera befintliga GPX-filer) för att planera en resa samt att mäta avståndet mellan punkter. Resultatet kan sparas i GPX-format som kan användas för att planera GPX-rutter.</string>
     <string name="osmand_distance_planning_plugin_name">Avståndskalkylator &amp; planeringsverktyg</string>
-    <string name="use_distance_measurement_help">* Peta på kartan för att markera en punkt.\n* Tryck och håll på kartan för att ta bort en tidigare punkt.\n* Tryck och håll på en punkt för att visa den och lägga till en beskrivning.\n* Peta på mät-widgeten för att se fler åtgärder.</string>
+    <string name="use_distance_measurement_help">* Peta på kartan för att markera en punkt.
+
+* Tryck och håll på kartan för att ta bort en tidigare punkt.
+
+* Tryck och håll på en punkt för att visa den och lägga till en beskrivning.
+
+* Peta på mät-widgeten för att se fler åtgärder.</string>
     <string name="distance_measurement_start_editing">Börja redigera</string>
     <string name="distance_measurement_finish_editing">Avsluta redigeringen</string>
     <string name="distance_measurement_finish_subtrack">Starta ett nytt underspår</string>
@@ -1386,7 +1401,15 @@
 
     <string name="osmo_not_signed_in">Inloggningen till OsMo misslyckades</string>
     <string name="osmo_group_by_invite">Anslut via inbjudan</string>
-    <string name="osmo_group_information_desc">" - När du skapar en grupp, ge den ett namn och fyll i beskrivningen\n- Läs mer på webbplatsen https://osmo.mobi/g/new\n- Via en webbsajt kan du hantera en grupp och placera ut spår och punkter tillgängliga för alla\n- Vi tillåter inte grupper med endast 1 användare om det inte är en POI-grupp\n- Privata grupper är begränsade till 8 personer\n- Mer detaljer finns på webbsajten OsMo.mobi\n- Om du behöver skapa en grupp med andra villkor kontakta http://osmo.mobi "</string>
+    <string name="osmo_group_information_desc">"
+ - När du skapar en grupp, ge den ett namn och fyll i beskrivningen
+- Läs mer på webbplatsen https://osmo.mobi/g/new
+- Via en webbsajt kan du hantera en grupp och placera ut spår och punkter tillgängliga för alla
+- Vi tillåter inte grupper med endast 1 användare om det inte är en POI-grupp
+- Privata grupper är begränsade till 8 personer
+- Mer detaljer finns på webbsajten OsMo.mobi
+- Om du behöver skapa en grupp med andra villkor kontakta http://osmo.mobi
+ "</string>
     <string name="osmo_group_information">Läs detta innan du skapar en grupp!</string>
     <string name="keep_navigation_service">Behåll</string>
     <string name="stop_navigation_service">Stoppa</string>
@@ -1421,7 +1444,11 @@
     <string name="rendering_attr_showCycleRoutes_name">Visa cykelleder</string>
     <string name="lang_fa">Persiska</string>
     <string name="osmo_auth_error_short">Godkännandet misslyckades</string>
-    <string name="osmo_auth_error">Fel vid godkännande av OsMo: %1$s.↵\nTjänsten kan vara tillfälligt nere eller så har din registrering förfallit.\nVill du fortsätta med en ny registrering?</string>
+    <string name="osmo_auth_error">Fel vid godkännande av OsMo: %1$s.↵
+
+Tjänsten kan vara tillfälligt nere eller så har din registrering förfallit.
+
+Vill du fortsätta med en ny registrering?</string>
     <string name="lang_al">Albanska</string>
     <string name="lang_ar">Arabiska</string>
     <string name="lang_sc">Sardinska</string>
@@ -2095,8 +2122,12 @@
     <string name="shared_string_toolbar">Verktygsfält</string>
     <string name="shared_string_widgets">Widgetar</string>
     <string name="show_map_markers_topbar">Visa kartmarkörsfält</string>
-    <string name="download_files_error_not_enough_space">Inte tillräckligt med utrymme! Detta skulle kräva {3} MB temporärt och {1} MB permanent. För tillfället finns det bara {2} MB tillgängligt.</string>
-    <string name="download_files_question_space_with_temp">Verkligen hämta {0} fil(er)? Detta kräver {3} MB temporärt och {1} MB permanent. För tillfället finns det bara {2} MB tillgängligt.</string>
+    <string name="download_files_error_not_enough_space">Inte tillräckligt med utrymme!
+Detta skulle kräva {3} MB temporärt och {1} MB permanent.
+För tillfället finns det bara {2} MB tillgängligt.</string>
+    <string name="download_files_question_space_with_temp">Verkligen hämta {0} fil(er)?
+Detta kräver {3} MB temporärt och {1} MB permanent.
+För tillfället finns det bara {2} MB tillgängligt.</string>
     <string name="upload_osm_note">Ladda upp OSM-anteckning</string>
     <string name="upload_anonymously">Ladda upp anonymt</string>
 <string name="select_map_marker">Välj kartmarkör</string>
@@ -2169,7 +2200,9 @@
     <string name="report">Rapporter</string>
     <string name="storage_permission_restart_is_required">Nu har appen tillåtelse att skriva till extern lagringsplats. En manuell omstart av appen krävs.</string>
     <string name="osm_live_support_region">Stödregion</string>
-    <string name="osm_live_header">Denna prenumeration aktiverar uppdateringar varje timme av kartor runt omkring i världen. Den större delen av inkomsterna går tillbaka till OSM-gemenskapen och betalas ut för varje OSM-bidrag. Om du tycker om OsmAnd och OSM och vill stödja detta så är detta ett utmärkt sätt att göra det på.</string>
+    <string name="osm_live_header">Denna prenumeration aktiverar uppdateringar varje timme av kartor runt omkring i världen.
+Den större delen av inkomsterna går tillbaka till OSM-gemenskapen och betalas ut för varje OSM-bidrag.
+Om du tycker om OsmAnd och OSM och vill stödja detta så är detta ett utmärkt sätt att göra det på.</string>
     
     <string name="access_no_destination">Ingen destination angiven</string>
     <string name="map_widget_magnetic_bearing">Magnetisk bäring</string>
@@ -2203,8 +2236,8 @@
     <string name="storage_directory_card">Minneskort</string>
     <string name="coords_format">Koordinatformat</string>
     <string name="coords_format_descr">Format för de geografiska koordinaterna</string>
-  	<string name="share_history_subject">Historik delad via OsmAnd</string>
+  	<string name="share_history_subject">" delad via OsmAnd"</string>
     <string name="search_categories">Kategorier</string>
     <string name="postcode">Postnummer</string>
-    <string name="rec_split"></string>
+    <string name="rec_split"/>
     </resources>
