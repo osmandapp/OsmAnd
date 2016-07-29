@@ -4,6 +4,7 @@ import java.util.List;
 
 import android.view.View;
 import android.view.View.OnClickListener;
+import net.osmand.binary.OsmandOdb.TransportRouteStop;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.TransportStop;
@@ -76,11 +77,18 @@ public class TransportRouteController extends MenuController {
 	}
 	
 	@Override
-	public void onHide() {
+	public void onClose() {
 		super.onHide();
 		TransportStopsLayer stopsLayer = getMapActivity().getMapLayers().getTransportStopsLayer();
 		stopsLayer.setRoute(null);
 	}
+	
+	public void onAcquireNewController(PointDescription pointDescription, Object object) {
+		if(object instanceof TransportRouteStop) {
+			TransportStopsLayer stopsLayer = getMapActivity().getMapLayers().getTransportStopsLayer();
+			stopsLayer.setRoute(null);
+		}
+	};
 
 	@Override
 	public void addPlainMenuItems(String typeStr, PointDescription pointDescription, final LatLon latLon) {
@@ -89,8 +97,8 @@ public class TransportRouteController extends MenuController {
 		boolean useEnglishNames = getMapActivity().getMyApplication().getSettings().usingEnglishNames();
 		for (final TransportStop stop : stops) {
 			final String name = useEnglishNames ? stop.getEnName(true) : stop.getName();
-			addPlainMenuItem(
-					stop == transportStop.stop ? R.drawable.ic_action_marker_dark : 
+			boolean currentStop = stop.getName().equals(transportStop.stop.getName()); 
+			addPlainMenuItem(currentStop? R.drawable.ic_action_marker_dark : 
 						(transportStop.type == null ? R.drawable.mx_route_bus_ref  : transportStop.type.getResourceId()),
 					name , false, false, new OnClickListener() {
 						

@@ -450,6 +450,9 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 	}
 
 	private void acquireMenuController() {
+		if(menuController != null) {
+			menuController.onAcquireNewController(pointDescription, object);
+		}
 		menuController = MenuController.getMenuController(mapActivity, pointDescription, object, MenuType.STANDARD);
 	}
 
