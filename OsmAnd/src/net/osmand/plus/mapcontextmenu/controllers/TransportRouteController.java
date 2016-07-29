@@ -36,7 +36,9 @@ public class TransportRouteController extends MenuController {
 
 	@Override
 	public int getLeftIconId() {
-		return this.transportStop.type.getTopResourceId();
+		return this.transportStop.type == null ?
+				R.drawable.mx_public_transport : 
+				this.transportStop.type.getTopResourceId();
 	}
 
 	@Override
@@ -76,7 +78,8 @@ public class TransportRouteController extends MenuController {
 		boolean useEnglishNames = getMapActivity().getMyApplication().getSettings().usingEnglishNames();
 		for (TransportStop stop : stops) {
 			addPlainMenuItem(
-					stop == transportStop.stop ? R.drawable.ic_action_marker_dark : transportStop.type.getResourceId(),
+					stop == transportStop.stop ? R.drawable.ic_action_marker_dark : 
+						(transportStop.type == null ? R.drawable.mx_route_bus_ref  : transportStop.type.getResourceId()),
 					useEnglishNames ? stop.getEnName(true) : stop.getName(), false, false, null);
 		}
 	}
