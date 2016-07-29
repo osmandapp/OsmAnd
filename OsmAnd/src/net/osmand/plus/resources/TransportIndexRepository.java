@@ -18,7 +18,7 @@ public interface TransportIndexRepository {
 	public void searchTransportStops(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude,
 			int limit, List<TransportStop> stops, ResultMatcher<TransportStop> matcher);
 	
-	public List<String> getRouteDescriptionsForStop(TransportStop stop, String format);
+	public List<TransportRoute> getRouteForStop(TransportStop stop);
 
 	public List<RouteInfoLocation> searchTransportRouteStops(double latitude, double longitude, LatLon locationToGo, int zoom);
 		

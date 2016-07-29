@@ -55,38 +55,18 @@ public class TransportIndexRepositoryBinary implements TransportIndexRepository 
 		}
 	}
 
-
-	/**
-	 * 
-	 * @param stop
-	 * @param format {0} - ref, {1} - type, {2} - name, {3} - name_en
-	 * @return null if something goes wrong
-	 */
 	@Override
-	public List<String> getRouteDescriptionsForStop(TransportStop stop, String format) {
-		assert acceptTransportStop(stop);
-		long now = System.currentTimeMillis();
-		
-		MessageFormat f = new MessageFormat(format);
-		List<String> res = new ArrayList<String>();
+	public List<TransportRoute> getRouteForStop(TransportStop stop){
 		try {
-			List<TransportRoute> routes = file.getTransportRouteDescriptions(stop);
-			if(routes != null){
-				for(TransportRoute route : routes){
-					res.add(f.format(new String[] { route.getRef() + "", route.getType() + "", route.getName() + "", route.getEnName(true) + "" })); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
-				}
+			List<TransportRoute> res = file.getTransportRouteDescriptions(stop);
+			if(res != null){
+				return res;
 			}
 		} catch (IOException e) {
 			log.error("Disk error ", e); //$NON-NLS-1$
 		}
-
-		if (log.isDebugEnabled()) {
-			log.debug(String.format("Search for stop %s done in %s ms found %s.", //$NON-NLS-1$
-					stop.getId() + "", System.currentTimeMillis() - now, res.size())); //$NON-NLS-1$
-		}
-		return res;
+		return Collections.emptyList();
 	}
-
 	
 
 	@Override

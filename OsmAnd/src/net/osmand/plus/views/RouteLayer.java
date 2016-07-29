@@ -10,6 +10,7 @@ import java.util.List;
 import net.osmand.Location;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.render.OsmandRenderer;
 import net.osmand.plus.render.OsmandRenderer.RenderingContext;
@@ -39,15 +40,6 @@ public class RouteLayer extends OsmandMapLayer {
 	private final RoutingHelper helper;
 	private List<Location> points = new ArrayList<Location>();
 	private List<Location> actionPoints = new ArrayList<Location>();
-	private Paint paint;
-	private Paint actionPaint;
-	private Paint paint2;
-	private boolean isPaint2;
-	private Paint shadowPaint;
-	private boolean isShadowPaint;
-	private Paint paint_1;
-	private boolean isPaint_1;
-	private int cachedHash;
 
 	private Path path;
 
@@ -58,7 +50,7 @@ public class RouteLayer extends OsmandMapLayer {
 	private Paint paintIcon;
 	private Paint paintIconAction;
 
-	private OsmandRenderer osmandRenderer;
+	private RenderingLineAttributes attrs;
 
 
 	public RouteLayer(RoutingHelper helper){
@@ -67,20 +59,7 @@ public class RouteLayer extends OsmandMapLayer {
 	
 
 	private void initUI() {
-		paint = new Paint();
-		paint.setStyle(Style.STROKE);
-		paint.setAntiAlias(true);
-		paint.setStrokeCap(Cap.ROUND);
-		paint.setStrokeJoin(Join.ROUND);
 		actionArrow = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_action_arrow, null);
-		
-		actionPaint = new Paint();
-		actionPaint.setStyle(Style.STROKE);
-		actionPaint.setAntiAlias(true);
-		actionPaint.setStrokeCap(Cap.BUTT);
-		actionPaint.setStrokeJoin(Join.ROUND);
-		actionPaint.setStrokeWidth(7 * view.getScaleCoefficient());
-		actionPaint.setColor(Color.WHITE);
 		path = new Path();
 		
 		paintIcon = new Paint();
@@ -89,72 +68,39 @@ public class RouteLayer extends OsmandMapLayer {
 		paintIcon.setColor(Color.BLACK);
 		paintIcon.setStrokeWidth(3);
 		
-
 		paintIconAction = new Paint();
 		paintIconAction.setFilterBitmap(true);
 		paintIconAction.setAntiAlias(true);
 		
+		attrs = new RenderingLineAttributes("route");
+		attrs.defaultWidth = (int) (12 * view.getDensity());
+		attrs.defaultWidth3 = (int) (7 * view.getDensity());
+		attrs.defaultColor = view.getResources().getColor(R.color.nav_track);
+		attrs.paint3.setStrokeCap(Cap.BUTT);
+		attrs.paint3.setColor(Color.WHITE);
 	}
 	
 	@Override
 	public void initLayer(OsmandMapTileView view) {
 		this.view = view;
-		osmandRenderer = view.getApplication().getResourceManager().getRenderer().getRenderer();
 		initUI();
 	}
 
 	public void updateLayerStyle() {
-		cachedHash = -1;
+		attrs.cachedHash = -1;
 	}
 	
-	private void updatePaints(DrawSettings nightMode, RotatedTileBox tileBox){
-		RenderingRulesStorage rrs = view.getApplication().getRendererRegistry().getCurrentSelectedRenderer();
-		final boolean isNight = nightMode != null && nightMode.isNightMode();
-		int hsh = calculateHash(rrs, isNight, tileBox.getMapDensity());
-		if (hsh != cachedHash) {
-			cachedHash = hsh;
-			// cachedColor = view.getResources().getColor(R.color.nav_track);
-			if (rrs != null) {
-				RenderingRuleSearchRequest req = new RenderingRuleSearchRequest(rrs);
-				req.setBooleanFilter(rrs.PROPS.R_NIGHT_MODE, isNight);
-				if (req.searchRenderingAttribute("route")) {
-					RenderingContext rc = new OsmandRenderer.RenderingContext(view.getContext());
-					rc.setDensityValue((float) tileBox.getMapDensity());
-//					cachedColor = req.getIntPropertyValue(rrs.PROPS.R_COLOR);
-					osmandRenderer.updatePaint(req, paint, 0, false, rc);
-					if(paint.getStrokeWidth() == 0) {
-						paint.setStrokeWidth(12 * view.getDensity());
-					}
-					osmandRenderer.updatePaint(req, actionPaint, 2, false, rc);
-					paintIconAction.setColorFilter(new PorterDuffColorFilter(actionPaint.getColor(), Mode.MULTIPLY));
-					
-					isPaint2 = osmandRenderer.updatePaint(req, paint2, 1, false, rc);
-					isPaint_1 = osmandRenderer.updatePaint(req, paint_1, -1, false, rc);
-					isShadowPaint = req.isSpecified(rrs.PROPS.R_SHADOW_RADIUS);
-					if(isShadowPaint) {
-						ColorFilter cf = new PorterDuffColorFilter(req.getIntPropertyValue(rrs.PROPS.R_SHADOW_COLOR), Mode.SRC_IN);
-						shadowPaint.setColorFilter(cf);
-						shadowPaint.setStrokeWidth(paint.getStrokeWidth() + 2 * rc.getComplexValue(req, rrs.PROPS.R_SHADOW_RADIUS));
-					}
-				} else {
-					System.err.println("Rendering attribute route is not found !");
-					paint.setStrokeWidth(12 * view.getDensity());
-				}
-				actionPaint.setStrokeWidth(7 * view.getScaleCoefficient());
-			}
-		}
-	}
-	
-	
-	private int calculateHash(Object... o) {
-		return Arrays.hashCode(o);
-	}
 	
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 		path.reset();
 		if (helper.getFinalLocation() != null && helper.getRoute().isCalculated()) {
-			updatePaints(settings, tileBox);
+			boolean updatePaints = attrs.updatePaints(view, settings, tileBox);
+			attrs.isPaint3 = false;
+			if(updatePaints) {
+				paintIconAction.setColorFilter(new PorterDuffColorFilter(attrs.paint3.getColor(), Mode.MULTIPLY));
+			}
+			
 			if(coloredArrowUp == null) {
 				Bitmap originalArrowUp = BitmapFactory.decodeResource(view.getResources(), R.drawable.h_arrow, null);
 				coloredArrowUp = originalArrowUp;
@@ -200,7 +146,7 @@ public class RouteLayer extends OsmandMapLayer {
 					Location o = actionPoints.get(i);
 					if (o == null) {
 						first = true;
-						canvas.drawPath(pth, actionPaint);
+						canvas.drawPath(pth, attrs.paint3);
 						double angleRad = Math.atan2(y - py, x - px);
 						double angle = (angleRad * 180 / Math.PI) + 90f;
 						double distSegment = Math.sqrt((y - py) * (y - py) + (x - px) * (x - px));
@@ -250,17 +196,7 @@ public class RouteLayer extends OsmandMapLayer {
 					ty.add(y);
 				}
 				calculatePath(tb, tx, ty, path);
-
-				if (isPaint_1) {
-					canvas.drawPath(path, paint_1);
-				}
-				if (isShadowPaint) {
-					canvas.drawPath(path, shadowPaint);
-				}
-				canvas.drawPath(path, paint);
-				if (isPaint2) {
-					canvas.drawPath(path, paint2);
-				}
+				attrs.drawPath(canvas, path);
 				if (tb.getZoomAnimation() == 0) {
 					TIntArrayList lst = new TIntArrayList(50);
 					calculateSplitPaths(tb, tx, ty, lst);
@@ -274,29 +210,29 @@ public class RouteLayer extends OsmandMapLayer {
 
 
 	private void drawArrowsOverPath(Canvas canvas, TIntArrayList lst, Bitmap arrow) {
-		float pxStep = arrow.getHeight() * 4f;
+		double pxStep = arrow.getHeight() * 4f;
 		Matrix matrix = new Matrix();
-		float dist = 0;
+		double dist = 0;
 		for (int i = 0; i < lst.size(); i += 4) {
 			int px = lst.get(i);
 			int py = lst.get(i + 1);
 			int x = lst.get(i + 2);
 			int y = lst.get(i + 3);
-			float angleRad = (float) Math.atan2(y - py, x - px);
-			float angle = (float) (angleRad * 180 / Math.PI) + 90f;
-			float distSegment = (float) Math.sqrt((y - py) * (y - py) + (x - px) * (x - px));
+			double angleRad = Math.atan2(y - py, x - px);
+			double angle = (angleRad * 180 / Math.PI) + 90f;
+			double distSegment = Math.sqrt((y - py) * (y - py) + (x - px) * (x - px));
 			if(distSegment == 0) {
 				continue;
 			}
 			int len = (int) (distSegment / pxStep);
 			if (len > 0) {
-				float pdx = ((x - px) / len);
-				float pdy = ((y - py) / len);
+				double pdx = ((x - px) / len);
+				double pdy = ((y - py) / len);
 				for (int k = 1; k <= len; k++) {
 					matrix.reset();
 					matrix.postTranslate(0, -arrow.getHeight() / 2);
-					matrix.postRotate(angle, arrow.getWidth() / 2, 0);
-					matrix.postTranslate(px + k * pdx- arrow.getWidth() / 2 , py + pdy * k);
+					matrix.postRotate((float) angle, arrow.getWidth() / 2, 0);
+					matrix.postTranslate((float)(px + k * pdx- arrow.getWidth() / 2) , (float)(py + pdy * k));
 					canvas.drawBitmap(arrow, matrix, paintIcon);
 					dist = 0;
 				}
@@ -304,7 +240,7 @@ public class RouteLayer extends OsmandMapLayer {
 				if(dist > pxStep) {
 					matrix.reset();
 					matrix.postTranslate(0, -arrow.getHeight() / 2);
-					matrix.postRotate(angle, arrow.getWidth() / 2, 0);
+					matrix.postRotate((float) angle, arrow.getWidth() / 2, 0);
 					matrix.postTranslate(px + (x - px) / 2 - arrow.getWidth() / 2, py + (y - py) / 2);
 					canvas.drawBitmap(arrow, matrix, paintIcon);
 					dist = 0;

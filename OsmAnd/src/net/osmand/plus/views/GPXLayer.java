@@ -369,17 +369,14 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 		for (SelectedGpxFile g : selectedGPXFiles) {
 			List<TrkSegment> segments = g.getPointsToDisplay();
 			for (TrkSegment ts : segments) {
-
 				if (ts.renders.isEmpty()                // only do once (CODE HERE NEEDS TO BE UI INSTEAD)
 						&& !ts.points.isEmpty()) {        // hmmm. 0-point tracks happen, but.... how?
-
 					if (g.isShowCurrentTrack()) {
 						ts.renders.add(new Renderable.CurrentTrack(ts.points));
 					} else {
 						ts.renders.add(new Renderable.StandardTrack(ts.points, 17.2));
 					}
 				}
-
 				updatePaints(ts.getColor(cachedColor), g.isRoutePoints(), g.isShowCurrentTrack(), settings, tileBox);
 				ts.drawRenderers(view.getZoom(), paint, canvas, tileBox);
 			}

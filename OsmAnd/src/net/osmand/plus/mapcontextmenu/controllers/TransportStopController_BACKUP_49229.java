@@ -112,11 +112,21 @@ public class TransportStopController extends MenuController {
 
 	@Override
 	public void addPlainMenuItems(String typeStr, PointDescription pointDescription, LatLon latLon) {
+<<<<<<< HEAD
+		for (List<TransportStopRoute> l : routes) {
+			for (TransportStopRoute r : l) {
+				if (r.type == null) {
+					addPlainMenuItem(R.drawable.ic_action_polygom_dark, r.desc, false, false, null);
+				} else {
+					addPlainMenuItem(r.type.getResourceId(), r.desc, false, false, null);
+				}
+=======
 		for (TransportStopRoute r : routes) {
 			if (r.type == null) {
-				addPlainMenuItem(R.drawable.ic_action_polygom_dark, r.desc, false, false, null);
+				addPlainMenuItem(R.drawable.ic_action_polygom_dark, r.desc, false, false);
 			} else {
-				addPlainMenuItem(r.type.getResourceId(), r.desc, false, false, null);
+				addPlainMenuItem(r.type.getResourceId(), r.desc, false, false);
+>>>>>>> 0855c6c36d1d10760efecc2dcc04c3840362ca87
 			}
 		}
 		super.addPlainMenuItems(typeStr, pointDescription, latLon);

@@ -114,9 +114,9 @@ public class TransportStopController extends MenuController {
 	public void addPlainMenuItems(String typeStr, PointDescription pointDescription, LatLon latLon) {
 		for (TransportStopRoute r : routes) {
 			if (r.type == null) {
-				addPlainMenuItem(R.drawable.ic_action_polygom_dark, r.desc, false, false, null);
+				addPlainMenuItem(R.drawable.ic_action_polygom_dark, r.desc, false, false);
 			} else {
-				addPlainMenuItem(r.type.getResourceId(), r.desc, false, false, null);
+				addPlainMenuItem(r.type.getResourceId(), r.desc, false, false);
 			}
 		}
 		super.addPlainMenuItems(typeStr, pointDescription, latLon);
