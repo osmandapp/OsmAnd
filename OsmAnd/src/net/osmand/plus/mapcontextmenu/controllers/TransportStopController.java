@@ -149,7 +149,7 @@ public class TransportStopController extends MenuController {
 		}
 	}
 
-	private class TransportStopRoute {
+	public static class TransportStopRoute {
 		public TransportStopType type;
 		public String desc;
 		public TransportRoute route;
