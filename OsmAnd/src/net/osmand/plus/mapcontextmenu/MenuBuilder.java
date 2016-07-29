@@ -43,12 +43,14 @@ public class MenuBuilder {
 		private String text;
 		private boolean needLinks;
 		private boolean url;
+		private OnClickListener onClickListener;
 
-		public PlainMenuItem(int iconId, String text, boolean needLinks, boolean url) {
+		public PlainMenuItem(int iconId, String text, boolean needLinks, boolean url, OnClickListener onClickListener) {
 			this.iconId = iconId;
 			this.text = text;
 			this.needLinks = needLinks;
 			this.url = url;
+			this.onClickListener = onClickListener;
 		}
 
 		public int getIconId() {
@@ -65,6 +67,10 @@ public class MenuBuilder {
 
 		public boolean isUrl() {
 			return url;
+		}
+
+		public OnClickListener getOnClickListener() {
+			return onClickListener;
 		}
 	}
 
@@ -88,7 +94,7 @@ public class MenuBuilder {
 
 	protected void buildPlainMenuItems(View view) {
 		for (PlainMenuItem item : plainMenuItems) {
-			buildRow(view, item.getIconId(), item.getText(), 0, item.isNeedLinks(), 0, item.isUrl());
+			buildRow(view, item.getIconId(), item.getText(), 0, item.isNeedLinks(), 0, item.isUrl(), item.getOnClickListener());
 		}
 	}
 
@@ -111,11 +117,11 @@ public class MenuBuilder {
 		firstRow = false;
 	}
 
-	protected View buildRow(View view, int iconId, String text, int textColor, boolean needLinks, int textLinesLimit, boolean isUrl) {
-		return buildRow(view, getRowIcon(iconId), text, textColor, needLinks, textLinesLimit, isUrl);
+	protected View buildRow(View view, int iconId, String text, int textColor, boolean needLinks, int textLinesLimit, boolean isUrl, OnClickListener onClickListener) {
+		return buildRow(view, getRowIcon(iconId), text, textColor, needLinks, textLinesLimit, isUrl, onClickListener);
 	}
 
-	protected View buildRow(final View view, Drawable icon, final String text, int textColor, boolean needLinks, int textLinesLimit, boolean isUrl) {
+	protected View buildRow(final View view, Drawable icon, final String text, int textColor, boolean needLinks, int textLinesLimit, boolean isUrl, OnClickListener onClickListener) {
 
 		if (!isFirstRow()) {
 			buildRowDivider(view, false);
@@ -183,7 +189,9 @@ public class MenuBuilder {
 		llText.setLayoutParams(llTextViewParams);
 		llText.addView(textView);
 
-		if (isUrl) {
+		if (onClickListener != null) {
+			ll.setOnClickListener(onClickListener);
+		} else if (isUrl) {
 			ll.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
@@ -269,8 +277,8 @@ public class MenuBuilder {
 	public void buildCustomAddressLine(LinearLayout ll) {
 	}
 
-	public void addPlainMenuItem(int iconId, String text, boolean needLinks, boolean isUrl) {
-		plainMenuItems.add(new PlainMenuItem(iconId, text, needLinks, isUrl));
+	public void addPlainMenuItem(int iconId, String text, boolean needLinks, boolean isUrl, OnClickListener onClickListener) {
+		plainMenuItems.add(new PlainMenuItem(iconId, text, needLinks, isUrl, onClickListener));
 	}
 
 	public void clearPlainMenuItems() {

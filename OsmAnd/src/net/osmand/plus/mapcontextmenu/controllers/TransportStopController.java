@@ -114,9 +114,9 @@ public class TransportStopController extends MenuController {
 		for (List<TransportStopRoute> l : routes) {
 			for (TransportStopRoute r : l) {
 				if (r.type == null) {
-					addPlainMenuItem(R.drawable.ic_action_polygom_dark, r.desc, false, false);
+					addPlainMenuItem(R.drawable.ic_action_polygom_dark, r.desc, false, false, null);
 				} else {
-					addPlainMenuItem(r.type.getResourceId(), r.desc, false, false);
+					addPlainMenuItem(r.type.getResourceId(), r.desc, false, false, null);
 				}
 			}
 		}

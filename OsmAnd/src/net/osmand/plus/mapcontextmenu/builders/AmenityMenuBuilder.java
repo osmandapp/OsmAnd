@@ -350,7 +350,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 
 		buildRow(view, R.drawable.ic_action_get_my_location, PointDescription.getLocationName(app,
 				amenity.getLocation().getLatitude(), amenity.getLocation().getLongitude(), true)
-				.replaceAll("\n", ""), 0, false, 0, false);
+				.replaceAll("\n", ""), 0, false, 0, false, null);
 	}
 
 	public void buildAmenityRow(View view, AmenityInfoRow info) {
