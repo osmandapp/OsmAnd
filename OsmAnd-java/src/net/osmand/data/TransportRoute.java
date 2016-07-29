@@ -1,8 +1,10 @@
 package net.osmand.data;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
+import net.osmand.osm.edit.Way;
 import net.osmand.util.MapUtils;
 
 public class TransportRoute extends MapObject {
@@ -12,6 +14,8 @@ public class TransportRoute extends MapObject {
 	private String operator;
 	private String type;
 	private Integer dist = null;
+	private List<Way> forwardWays;
+	private List<Way> backwardWays;
 	
 	public TransportRoute(){
 	}
@@ -22,6 +26,35 @@ public class TransportRoute extends MapObject {
 	
 	public List<TransportStop> getBackwardStops() {
 		return backwardStops;
+	}
+	
+	public List<Way> getForwardWays() {
+		if(forwardWays == null){
+			return Collections.emptyList();
+		}
+		return forwardWays;
+	}
+	
+	public List<Way> getBackwardWays() {
+		if(backwardWays == null){
+			return Collections.emptyList();
+		}
+		return backwardWays;
+	}
+	
+	public void addWay(Way w, int direction){
+		if(direction >= 0) {
+			if(forwardWays == null) {
+				forwardWays = new ArrayList<>();
+			}
+			forwardWays.add(w);
+		}
+		if(direction <= 0) {
+			if(backwardWays == null) {
+				backwardWays = new ArrayList<>();
+			}
+			backwardWays.add(w);
+		}
 	}
 	
 	public String getRef() {
