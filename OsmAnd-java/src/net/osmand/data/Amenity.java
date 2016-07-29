@@ -246,6 +246,15 @@ public class Amenity extends MapObject {
 	public void setOpeningHours(String openingHours) {
 		setAdditionalInfo(OPENING_HOURS, openingHours);
 	}
+	
+	@Override
+	public int compareTo(MapObject o) {
+		int cmp = super.compareTo(o);
+		if(cmp == 0 && o instanceof Amenity) {
+			return ((Amenity) o).getType().getKeyName().compareTo(getType().getKeyName());
+		}
+		return cmp;
+	}
 
 
 }
