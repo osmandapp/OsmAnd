@@ -1,21 +1,33 @@
 package net.osmand.plus.views;
 
 import android.graphics.Canvas;
+import android.graphics.ColorFilter;
+import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PointF;
+import android.graphics.PorterDuffColorFilter;
+import android.graphics.Paint.Cap;
+import android.graphics.Paint.Join;
+import android.graphics.Paint.Style;
+import android.graphics.PorterDuff.Mode;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.view.MotionEvent;
-
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.data.QuadTree;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.ContextMenuAdapter;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.render.OsmandRenderer;
+import net.osmand.plus.render.OsmandRenderer.RenderingContext;
+import net.osmand.render.RenderingRuleSearchRequest;
+import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.MapAlgorithms;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -115,25 +127,28 @@ public abstract class OsmandMapLayer {
 		int py = ys.get(0);
 		int h = tb.getPixHeight();
 		int w = tb.getPixWidth();
+		int left =  -w / 4;
+		int right = w + w / 4;
+		int top = - h/4;
+		int bottom = h + h/4;
 		int cnt = 0;
-		boolean pin = isIn(px, py, 0, 0, w, h);
-		Path path = null;
+		
+		boolean pin = isIn(px, py, left, top, right, bottom);
 		for (int i = 1; i < xs.size(); i++) {
 			int x = xs.get(i);
 			int y = ys.get(i);
-			boolean in = isIn(x, y, 0, 0, w, h);
+			boolean in = isIn(x, y, left, top, right, bottom);
 			boolean draw = false;
 			if (pin && in) {
 				draw = true;
 			} else {
 				long intersection = MapAlgorithms.calculateIntersection(x, y,
-						px, py, 0, w, h, 0);
+						px, py, left, right, bottom, top);
 				if (intersection != -1) {
 					draw = true;
 				}
 			}
 			if (draw) {
-				path = new Path();
 				results.add(px);
 				results.add(py);
 				results.add(x);
@@ -323,4 +338,115 @@ public abstract class OsmandMapLayer {
 
 	}
 
+	protected static class RenderingLineAttributes {
+		protected int cachedHash;
+		public Paint paint;
+		public int defaultWidth = 0;
+		public int defaultColor = 0;
+		public boolean isPaint2;
+		public Paint paint2;
+		public int defaultWidth2 = 0;
+		public boolean isPaint3;
+		public Paint paint3;
+		public int defaultWidth3 = 0;
+		public Paint shadowPaint;
+		public boolean isShadowPaint;
+		public int defaultShadowWidthExtent = 2;
+		public Paint paint_1;
+		public boolean isPaint_1;
+		public int defaultWidth_1 = 0;
+		private String renderingAttribute;
+		
+		public RenderingLineAttributes(String renderingAttribute) {
+			this.renderingAttribute = renderingAttribute;
+			paint = initPaint();
+			paint2 = initPaint();
+			paint3 = initPaint();
+			paint_1 = initPaint();
+			shadowPaint = initPaint();
+		}
+		
+		
+		private Paint initPaint() {
+			Paint paint = new Paint();
+			paint.setStyle(Style.STROKE);
+			paint.setAntiAlias(true);
+			paint.setStrokeCap(Cap.ROUND);
+			paint.setStrokeJoin(Join.ROUND);
+			return paint;
+		}
+
+
+		public boolean updatePaints(OsmandMapTileView view, DrawSettings settigns, RotatedTileBox tileBox) {
+			OsmandApplication app = view.getApplication();
+			OsmandRenderer renderer = app.getResourceManager().getRenderer().getRenderer();
+			RenderingRulesStorage rrs = app.getRendererRegistry().getCurrentSelectedRenderer();
+			final boolean isNight = settigns != null && settigns.isNightMode();
+			int hsh = calculateHash(rrs, isNight, tileBox.getMapDensity());
+			if (hsh != cachedHash) {
+				cachedHash = hsh;
+				if (rrs != null) {
+					RenderingRuleSearchRequest req = new RenderingRuleSearchRequest(rrs);
+					req.setBooleanFilter(rrs.PROPS.R_NIGHT_MODE, isNight);
+					if (req.searchRenderingAttribute(renderingAttribute)) {
+						RenderingContext rc = new OsmandRenderer.RenderingContext(app);
+						rc.setDensityValue((float) tileBox.getMapDensity());
+						// cachedColor = req.getIntPropertyValue(rrs.PROPS.R_COLOR);
+						renderer.updatePaint(req, paint, 0, false, rc);
+						if(paint.getColor() == 0 && defaultColor != 0) {
+							paint.setColor(defaultColor);
+						}
+						if (paint.getStrokeWidth() == 0 && defaultWidth != 0) {
+							paint.setStrokeWidth(defaultWidth);
+						}
+						isPaint2 = renderer.updatePaint(req, paint2, 1, false, rc);
+						if (paint2.getStrokeWidth() == 0 && defaultWidth2 != 0) {
+							paint2.setStrokeWidth(defaultWidth2);
+						}
+						isPaint3 = renderer.updatePaint(req, paint3, 2, false, rc);
+						if (paint3.getStrokeWidth() == 0 && defaultWidth3 != 0) {
+							paint3.setStrokeWidth(defaultWidth3);
+						}
+						isPaint_1 = renderer.updatePaint(req, paint_1, -1, false, rc);
+						if (paint_1.getStrokeWidth() == 0 && defaultWidth_1 != 0) {
+							paint_1.setStrokeWidth(defaultWidth_1);
+						}
+						isShadowPaint = req.isSpecified(rrs.PROPS.R_SHADOW_RADIUS);
+						if (isShadowPaint) {
+							ColorFilter cf = new PorterDuffColorFilter(
+									req.getIntPropertyValue(rrs.PROPS.R_SHADOW_COLOR), Mode.SRC_IN);
+							shadowPaint.setColorFilter(cf);
+							shadowPaint.setStrokeWidth(paint.getStrokeWidth() + defaultShadowWidthExtent
+									* rc.getComplexValue(req, rrs.PROPS.R_SHADOW_RADIUS));
+						}
+					} else {
+						System.err.println("Rendering attribute route is not found !");
+						paint.setStrokeWidth(defaultWidth);
+					}
+				}
+				return true;
+			}
+			return false;
+		}
+		
+		private int calculateHash(Object... o) {
+			return Arrays.hashCode(o);
+		}
+		
+		public void drawPath(Canvas canvas, Path path) {
+			if (isPaint_1) {
+				canvas.drawPath(path, paint_1);
+			}
+			if (isShadowPaint) {
+				canvas.drawPath(path, shadowPaint);
+			}
+			canvas.drawPath(path, paint);
+			if (isPaint2) {
+				canvas.drawPath(path, paint2);
+			}
+			if (isPaint3) {
+				canvas.drawPath(path, paint3);
+			}
+		}
+	}
 }
