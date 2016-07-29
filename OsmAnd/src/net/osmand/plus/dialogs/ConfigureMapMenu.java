@@ -1,16 +1,17 @@
 package net.osmand.plus.dialogs;
 
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnMultiChoiceClickListener;
-import android.content.Intent;
-import android.support.annotation.DrawableRes;
-import android.support.annotation.StringRes;
-import android.support.v7.app.AlertDialog;
-import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.CompoundButton;
-import android.widget.Toast;
+import gnu.trove.list.array.TIntArrayList;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
 import net.osmand.PlatformUtil;
 import net.osmand.core.android.MapRendererContext;
@@ -28,7 +29,6 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityLayers;
 import net.osmand.plus.activities.PluginActivity;
 import net.osmand.plus.activities.SettingsActivity;
-import net.osmand.plus.activities.TransportRouteHelper;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.render.RendererRegistry;
@@ -43,18 +43,17 @@ import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-
-import gnu.trove.list.array.TIntArrayList;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnMultiChoiceClickListener;
+import android.content.Intent;
+import android.support.annotation.DrawableRes;
+import android.support.annotation.StringRes;
+import android.support.v7.app.AlertDialog;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.CompoundButton;
+import android.widget.Toast;
 
 public class ConfigureMapMenu {
 	private static final Log LOG = PlatformUtil.getLog(ConfigureMapMenu.class);
@@ -158,8 +157,6 @@ public class ConfigureMapMenu {
 				} else {
 					ma.getMapLayers().selectMapLayer(ma.getMapView());
 				}
-			} else if (itemId == R.string.layer_transport_route) {
-				ma.getMapLayers().getTransportInfoLayer().setVisible(isChecked);
 			}
 			ma.getMapLayers().updateLayers(ma.getMapView());
 			ma.getMapView().refreshMap();
@@ -252,14 +249,6 @@ public class ConfigureMapMenu {
 				.setTitleId(R.string.layer_map, activity)
 				.setIcon(R.drawable.ic_world_globe_dark)
 				.setListener(l).createItem());
-		if (TransportRouteHelper.getInstance().routeIsCalculated()) {
-			adapter.addItem(new ContextMenuItem.ItemBuilder()
-					.setTitleId(R.string.layer_transport_route, activity)
-					.setSelected(true)
-					.setColor(R.color.osmand_orange)
-					.setIcon(R.drawable.ic_action_bus_dark)
-					.setListener(l).createItem());
-		}
 
 		OsmandPlugin.registerLayerContextMenu(activity.getMapView(), adapter, activity);
 		app.getAppCustomization().prepareLayerContextMenu(activity, adapter);

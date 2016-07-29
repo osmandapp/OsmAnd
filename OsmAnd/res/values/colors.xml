@@ -174,7 +174,7 @@
 
 	<color name="nav_track">#CCaa0088</color>
 	<color name="nav_track_fluorescent">#CC00ddff</color>
-	<color name="transport_route_line">#CCaa0088</color>
+	<color name="transport_route_line">#CC2f7af5</color>
 	
 
 	<color name="nav_arrow_distant">#C0C0C0</color>

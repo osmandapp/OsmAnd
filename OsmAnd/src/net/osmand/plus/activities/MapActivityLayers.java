@@ -1,16 +1,10 @@
 package net.osmand.plus.activities;
 
 
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.graphics.drawable.Drawable;
-import android.support.v7.app.AlertDialog;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ListView;
-import android.widget.Toast;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map.Entry;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.ResultMatcher;
@@ -50,14 +44,18 @@ import net.osmand.plus.views.POIMapLayer;
 import net.osmand.plus.views.PointLocationLayer;
 import net.osmand.plus.views.PointNavigationLayer;
 import net.osmand.plus.views.RouteLayer;
-import net.osmand.plus.views.TransportInfoLayer;
 import net.osmand.plus.views.TransportStopsLayer;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
-
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map.Entry;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.support.v7.app.AlertDialog;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ListView;
+import android.widget.Toast;
 
 /**
  * Object is responsible to maintain layers using by map activity
@@ -74,7 +72,6 @@ public class MapActivityLayers {
 	private POIMapLayer poiMapLayer;
 	private FavouritesLayer mFavouritesLayer;
 	private TransportStopsLayer transportStopsLayer;
-	private TransportInfoLayer transportInfoLayer;
 	private PointLocationLayer locationLayer;
 	private PointNavigationLayer navigationLayer;
 	private MapMarkersLayer mapMarkersLayer;
@@ -142,9 +139,6 @@ public class MapActivityLayers {
 		mapView.addLayer(mFavouritesLayer, 4);
 		// 5. transport layer
 		transportStopsLayer = new TransportStopsLayer();
-		// 5.5 transport info layer 
-		transportInfoLayer = new TransportInfoLayer(TransportRouteHelper.getInstance());
-		mapView.addLayer(transportInfoLayer, 5.5f);
 		// 5.95 all text labels
 		// 6. point location layer 
 		locationLayer = new PointLocationLayer(activity.getMapViewTrackingUtilities());
@@ -600,10 +594,11 @@ public class MapActivityLayers {
 	public POIMapLayer getPoiMapLayer() {
 		return poiMapLayer;
 	}
-
-	public TransportInfoLayer getTransportInfoLayer() {
-		return transportInfoLayer;
+	
+	public TransportStopsLayer getTransportStopsLayer() {
+		return transportStopsLayer;
 	}
+
 
 	public DownloadedRegionsLayer getDownloadedRegionsLayer() {
 		return downloadedRegionsLayer;

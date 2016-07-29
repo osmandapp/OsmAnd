@@ -1,5 +1,8 @@
 package net.osmand.plus.mapcontextmenu.controllers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.TransportRoute;
@@ -11,12 +14,8 @@ import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.resources.TransportIndexRepository;
-import net.osmand.plus.views.TransportInfoLayer;
+import net.osmand.plus.views.TransportStopsLayer;
 import net.osmand.util.Algorithms;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import android.view.View;
 import android.view.View.OnClickListener;
 
@@ -123,8 +122,8 @@ public class TransportStopController extends MenuController {
 				public void onClick(View arg0) {
 					MapContextMenu mm = getMapActivity().getContextMenu();
 					PointDescription pd = new PointDescription(PointDescription.POINT_TYPE_TRANSPORT_ROUTE, r.desc);
-					TransportInfoLayer tif = getMapActivity().getMapLayers().getTransportInfoLayer();
-					tif.
+					TransportStopsLayer stopsLayer = getMapActivity().getMapLayers().getTransportStopsLayer();
+					stopsLayer.setRoute(r.route);
 					mm.show(latLon, pd, r);
 				}
 			};
