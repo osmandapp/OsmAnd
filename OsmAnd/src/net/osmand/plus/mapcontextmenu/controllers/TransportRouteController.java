@@ -78,7 +78,6 @@ public class TransportRouteController extends MenuController {
 	@Override
 	public void onHide() {
 		super.onHide();
-		MapContextMenu mm = getMapActivity().getContextMenu();
 		TransportStopsLayer stopsLayer = getMapActivity().getMapLayers().getTransportStopsLayer();
 		stopsLayer.setRoute(null);
 	}
