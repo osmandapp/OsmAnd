@@ -551,15 +551,13 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 
 			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 			builder.setTitle(R.string.coords_format)
-					.setSingleChoiceItems(entries, parent.currentFormat, null)
-					.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
+					.setSingleChoiceItems(entries, parent.currentFormat, new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
-							int selectedPosition = ((AlertDialog) dialog).getListView().getCheckedItemPosition();
-							parent.applyFormat(selectedPosition);
+							parent.applyFormat(which);
+							dialog.dismiss();
 						}
-					})
-					.setNegativeButton(R.string.shared_string_cancel, null);
+					});
 			return builder.create();
 		}
 	}
