@@ -2,6 +2,7 @@ package net.osmand.plus.mapcontextmenu.controllers;
 
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.data.TransportRoute;
 import net.osmand.data.TransportStop;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -62,7 +63,7 @@ public class TransportStopController extends MenuController {
 	}
 
 	private TransportStop transportStop;
-	private List<List<TransportStopRoute>> routes = new ArrayList<>();
+	private List<TransportStopRoute> routes = new ArrayList<>();
 	private TransportStopType topType;
 
 	public TransportStopController(OsmandApplication app, MapActivity mapActivity,
@@ -111,13 +112,11 @@ public class TransportStopController extends MenuController {
 
 	@Override
 	public void addPlainMenuItems(String typeStr, PointDescription pointDescription, LatLon latLon) {
-		for (List<TransportStopRoute> l : routes) {
-			for (TransportStopRoute r : l) {
-				if (r.type == null) {
-					addPlainMenuItem(R.drawable.ic_action_polygom_dark, r.desc, false, false);
-				} else {
-					addPlainMenuItem(r.type.getResourceId(), r.desc, false, false);
-				}
+		for (TransportStopRoute r : routes) {
+			if (r.type == null) {
+				addPlainMenuItem(R.drawable.ic_action_polygom_dark, r.desc, false, false);
+			} else {
+				addPlainMenuItem(r.type.getResourceId(), r.desc, false, false);
 			}
 		}
 		super.addPlainMenuItems(typeStr, pointDescription, latLon);
@@ -133,33 +132,18 @@ public class TransportStopController extends MenuController {
 
 		for (TransportIndexRepository t : reps) {
 			if (t.acceptTransportStop(transportStop)) {
-				List<String> l;
-				if (useEnglishNames) {
-					l = t.getRouteDescriptionsForStop(transportStop, "{1} {0} - {3}");
-				} else {
-					l = t.getRouteDescriptionsForStop(transportStop, "{1} {0} - {2}");
-				}
-				if (l != null) {
-					List<TransportStopRoute> routeList = new ArrayList<>();
-					for (String s : l) {
-						int firstSpaceIndex = s.indexOf(' ');
-						if (firstSpaceIndex != -1) {
-							String typeName = s.substring(0, firstSpaceIndex);
-							TransportStopType type = TransportStopType.findType(typeName);
-							TransportStopRoute r = new TransportStopRoute();
-							r.type = type;
-							if (type == null) {
-								r.desc = s;
-							} else {
-								r.desc = s.substring(firstSpaceIndex + 1);
-							}
-							routeList.add(r);
-							if (topType == null && type != null && type.isTopType()) {
-								topType = type;
-							}
+				List<TransportRoute> rts = t.getRouteForStop(transportStop);
+				if (rts != null) {
+					for (TransportRoute rs : rts) {
+						TransportStopType type = TransportStopType.findType(rs.getType());
+						TransportStopRoute r = new TransportStopRoute();
+						if (topType == null && type != null && type.isTopType()) {
+							topType = type;
 						}
+						r.desc = rs.getRef() + " " + (useEnglishNames ? rs.getName() : rs.getEnName(true));
+						r.route = rs;
+						this.routes.add(r);
 					}
-					routes.add(routeList);
 				}
 			}
 		}
@@ -168,5 +152,6 @@ public class TransportStopController extends MenuController {
 	private class TransportStopRoute {
 		public TransportStopType type;
 		public String desc;
+		public TransportRoute route;
 	}
 }
