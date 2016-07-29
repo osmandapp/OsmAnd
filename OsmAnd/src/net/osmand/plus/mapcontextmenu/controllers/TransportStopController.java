@@ -1,6 +1,7 @@
 package net.osmand.plus.mapcontextmenu.controllers;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import net.osmand.data.LatLon;
@@ -146,7 +147,7 @@ public class TransportStopController extends MenuController {
 
 		for (TransportIndexRepository t : reps) {
 			if (t.acceptTransportStop(transportStop)) {
-				List<TransportRoute> rts = t.getRouteForStop(transportStop);
+				Collection<TransportRoute> rts = t.getRouteForStop(transportStop);
 				if (rts != null) {
 					for (TransportRoute rs : rts) {
 						TransportStopType type = TransportStopType.findType(rs.getType());

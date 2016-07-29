@@ -5,6 +5,7 @@ import gnu.trove.map.hash.TIntObjectHashMap;
 import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -56,9 +57,9 @@ public class TransportIndexRepositoryBinary implements TransportIndexRepository 
 	}
 
 	@Override
-	public List<TransportRoute> getRouteForStop(TransportStop stop){
+	public Collection<TransportRoute> getRouteForStop(TransportStop stop){
 		try {
-			List<TransportRoute> res = file.getTransportRouteDescriptions(stop);
+			Collection<TransportRoute> res = file.getTransportRoutes(stop.getReferencesToRoutes()).valueCollection();
 			if(res != null){
 				return res;
 			}

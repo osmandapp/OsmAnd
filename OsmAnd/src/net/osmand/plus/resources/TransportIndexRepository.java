@@ -1,5 +1,6 @@
 package net.osmand.plus.resources;
 
+import java.util.Collection;
 import java.util.List;
 
 import net.osmand.ResultMatcher;
@@ -18,7 +19,7 @@ public interface TransportIndexRepository {
 	public void searchTransportStops(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude,
 			int limit, List<TransportStop> stops, ResultMatcher<TransportStop> matcher);
 	
-	public List<TransportRoute> getRouteForStop(TransportStop stop);
+	public Collection<TransportRoute> getRouteForStop(TransportStop stop);
 
 	public List<RouteInfoLocation> searchTransportRouteStops(double latitude, double longitude, LatLon locationToGo, int zoom);
 		
