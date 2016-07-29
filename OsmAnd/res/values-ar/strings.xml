@@ -2325,5 +2325,19 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="osmo_conn_successfull">اتصال محقق: %1$s</string>
     <string name="osmo_io_error">"مشكلة اتصال آوسمو: "</string>
     <string name="osmo_settings_uuid">هوية جهاز خاصة</string>
-    <string name="osmo_mode_restart">أعد تشغيل حصة آوسمو</string>
+    <string name="osmo_mode_restart">إعادة تشغيل حصة آوسمو</string>
+    <string name="osmo_mode_on">إيقاف حصة آوسمو</string>
+    <string name="osmo_mode_off">بدء حصة آوسمو</string>
+    <string name="osmo_settings_descr">ضبط إعدادات المراقبة وإعداد قناة مراقبة شخصية</string>
+    <string name="lang_hu_formal">الهنغارية (الرسمية)</string>
+    <string name="routing_attr_avoid_stairs_name">تجنب الأدراج</string>
+    <string name="routing_attr_avoid_stairs_description">تجنب الأدراج</string>
+    <string name="routing_attr_avoid_borders_description">تجنب عبور الحدود إلى بلد آخر</string>
+    <string name="routing_attr_height_description">تحديد ارتفاع السيارة المسموح على الطرق</string>
+    <string name="disable_complex_routing_descr">تعطيل 2-مرحلة التوجيه للملاحة بالسيارة</string>
+    <string name="rendering_attr_alpineHiking_name">مقياس جبال الألب للتنزه (نادي جبال الألب السويسرية)</string>
+    <string name="rendering_attr_alpineHiking_description">تقديم مسارات وفقا لمقياس SAC</string>
+    <string name="rendering_attr_hikingRoutesOSMC_name">غطاء رمز التنزه</string>
+    <string name="rendering_attr_hikingRoutesOSMC_description">تقديم مسارات وفقا لآثار OSMC</string>
+
     </resources>
