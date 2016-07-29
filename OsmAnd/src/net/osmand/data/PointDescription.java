@@ -39,6 +39,7 @@ public class PointDescription {
 	public static final String POINT_TYPE_GPX_ITEM = "gpx_item";
 	public static final String POINT_TYPE_WORLD_REGION_SHOW_ON_MAP = "world_region_show_on_map";
 	public static final String POINT_TYPE_BLOCKED_ROAD = "blocked_road";
+	public static final String POINT_TYPE_TRANSPORT_ROUTE = "transport_route";
 
 
 	public static final PointDescription LOCATION_POINT = new PointDescription(POINT_TYPE_LOCATION, "");

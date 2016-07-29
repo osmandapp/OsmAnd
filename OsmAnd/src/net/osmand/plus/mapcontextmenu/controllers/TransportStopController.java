@@ -7,6 +7,7 @@ import net.osmand.data.TransportStop;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.resources.TransportIndexRepository;
@@ -14,6 +15,9 @@ import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import android.view.View;
+import android.view.View.OnClickListener;
 
 public class TransportStopController extends MenuController {
 
@@ -111,12 +115,20 @@ public class TransportStopController extends MenuController {
 	}
 
 	@Override
-	public void addPlainMenuItems(String typeStr, PointDescription pointDescription, LatLon latLon) {
-		for (TransportStopRoute r : routes) {
+	public void addPlainMenuItems(String typeStr, PointDescription pointDescription, final LatLon latLon) {
+		for (final TransportStopRoute r : routes) {
+			OnClickListener listener = new OnClickListener() {
+				@Override
+				public void onClick(View arg0) {
+					MapContextMenu mm = getMapActivity().getContextMenu();
+					PointDescription pd = new PointDescription(PointDescription.POINT_TYPE_TRANSPORT_ROUTE, r.desc);
+					mm.show(latLon, pd, r);
+				}
+			};
 			if (r.type == null) {
-				addPlainMenuItem(R.drawable.ic_action_polygom_dark, r.desc, false, false, null);
+				addPlainMenuItem(R.drawable.ic_action_polygom_dark, r.desc, false, false, listener );
 			} else {
-				addPlainMenuItem(r.type.getResourceId(), r.desc, false, false, null);
+				addPlainMenuItem(r.type.getResourceId(), r.desc, false, false, listener);
 			}
 		}
 		super.addPlainMenuItems(typeStr, pointDescription, latLon);
@@ -142,6 +154,7 @@ public class TransportStopController extends MenuController {
 						}
 						r.desc = rs.getRef() + " " + (useEnglishNames ? rs.getName() : rs.getEnName(true));
 						r.route = rs;
+						r.stop = transportStop;
 						this.routes.add(r);
 					}
 				}
@@ -153,5 +166,6 @@ public class TransportStopController extends MenuController {
 		public TransportStopType type;
 		public String desc;
 		public TransportRoute route;
+		public TransportStop stop;
 	}
 }

@@ -1,8 +1,12 @@
 package net.osmand.plus.mapcontextmenu.controllers;
 
+import java.util.List;
+
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.data.TransportStop;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
@@ -51,6 +55,11 @@ public class TransportRouteController extends MenuController {
 	}
 	
 	@Override
+	public boolean buttonsVisible() {
+		return false;
+	}
+	
+	@Override
 	public boolean displayStreetNameInTitle() {
 		return super.displayStreetNameInTitle();
 	}
@@ -62,14 +71,14 @@ public class TransportRouteController extends MenuController {
 
 	@Override
 	public void addPlainMenuItems(String typeStr, PointDescription pointDescription, LatLon latLon) {
-//		for (TransportStopRoute r : routes) {
-//			if (r.type == null) {
-//				addPlainMenuItem(R.drawable.ic_action_polygom_dark, r.desc, false, false);
-//			} else {
-//				addPlainMenuItem(r.type.getResourceId(), r.desc, false, false);
-//			}
-//		}
 		super.addPlainMenuItems(typeStr, pointDescription, latLon);
+		List<TransportStop> stops = transportStop.route.getForwardStops();
+		boolean useEnglishNames = getMapActivity().getMyApplication().getSettings().usingEnglishNames();
+		for (TransportStop stop : stops) {
+			addPlainMenuItem(
+					stop == transportStop.stop ? R.drawable.ic_action_marker_dark : transportStop.type.getResourceId(),
+					useEnglishNames ? stop.getEnName(true) : stop.getName(), false, false, null);
+		}
 	}
 
 }
