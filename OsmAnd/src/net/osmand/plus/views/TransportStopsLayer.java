@@ -5,9 +5,11 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.Path;
 import android.graphics.PointF;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
+import net.osmand.Location;
 import net.osmand.ResultMatcher;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
@@ -15,9 +17,13 @@ import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.data.QuadTree;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.data.TransportRoute;
 import net.osmand.data.TransportStop;
+import net.osmand.osm.edit.Node;
+import net.osmand.osm.edit.Way;
 import net.osmand.plus.R;
 import net.osmand.plus.poi.PoiUIFilter;
+import gnu.trove.list.array.TIntArrayList;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -32,9 +38,14 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 	private Paint paintIcon;
 	private Bitmap stopBus;
 	private Bitmap stopSmall;
+	private RenderingLineAttributes attrs;
 
 	private MapLayerData<List<TransportStop>> data;
+	private TransportRoute route = null;
 
+	private Path path;
+
+	@SuppressWarnings("deprecation")
 	@Override
 	public void initLayer(final OsmandMapTileView view) {
 		this.view = view;
@@ -43,9 +54,12 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 		wmgr.getDefaultDisplay().getMetrics(dm);
 
 		paintIcon = new Paint();
+		path = new Path();
 		stopBus = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_transport_stop_bus);
 		stopSmall = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_transport_stop_small);
-		
+		attrs = new RenderingLineAttributes("transport_route");
+		attrs.defaultWidth = (int) (12 * view.getDensity());
+		attrs.defaultColor = view.getResources().getColor(R.color.transport_route_line);
 		data = new OsmandMapLayer.MapLayerData<List<TransportStop>>() {
 			{
 				ZOOM_THRESHOLD = 0;
@@ -118,6 +132,14 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 		}
 	}
 	
+	public TransportRoute getRoute() {
+		return route;
+	}
+	
+	public void setRoute(TransportRoute route) {
+		this.route = route;
+	}
+	
 
 	
 	public int getRadiusPoi(RotatedTileBox tb){
@@ -139,16 +161,16 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 
 	
 	@Override
-	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox,
+	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tb,
 			DrawSettings settings) {
-		if (tileBox.getZoom() >= startZoom) {
-			data.queryNewData(tileBox);;
+		if (tb.getZoom() >= startZoom) {
+			data.queryNewData(tb);;
 			float iconSize = stopBus.getWidth() * 3 / 2.5f;
-			QuadTree<QuadRect> boundIntersections = initBoundIntersections(tileBox);
+			QuadTree<QuadRect> boundIntersections = initBoundIntersections(tb);
 			List<TransportStop> fullObjects = new ArrayList<>();
 			for (TransportStop o : data.getResults()) {
-				float x = tileBox.getPixXFromLatLon(o.getLocation().getLatitude(), o.getLocation().getLongitude());
-				float y = tileBox.getPixYFromLatLon(o.getLocation().getLatitude(), o.getLocation().getLongitude());
+				float x = tb.getPixXFromLatLon(o.getLocation().getLatitude(), o.getLocation().getLongitude());
+				float y = tb.getPixYFromLatLon(o.getLocation().getLatitude(), o.getLocation().getLongitude());
 
 				if (intersects(boundIntersections, x, y, iconSize, iconSize)) {
 					canvas.drawBitmap(stopSmall, x - stopSmall.getWidth() / 2, y - stopSmall.getHeight() / 2, paintIcon);
@@ -157,10 +179,34 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 				}
 			}
 			for (TransportStop o : fullObjects) {
-				float x = tileBox.getPixXFromLatLon(o.getLocation().getLatitude(), o.getLocation().getLongitude());
-				float y = tileBox.getPixYFromLatLon(o.getLocation().getLatitude(), o.getLocation().getLongitude());
+				float x = tb.getPixXFromLatLon(o.getLocation().getLatitude(), o.getLocation().getLongitude());
+				float y = tb.getPixYFromLatLon(o.getLocation().getLatitude(), o.getLocation().getLongitude());
 				Bitmap b = stopBus;
 				canvas.drawBitmap(b, x - b.getWidth() / 2, y - b.getHeight() / 2, paintIcon);
+			}
+			if(route != null) {
+				attrs.updatePaints(view, settings, tb);
+				canvas.rotate(-tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
+				try {
+					path.reset();
+					List<Way> ws = route.getAggregateForwardWays();
+					for (Way w : ws) {
+						TIntArrayList tx = new TIntArrayList();
+						TIntArrayList ty = new TIntArrayList();
+						for (int i = 0; i < w.getNodes().size(); i++) {
+							Node o = w.getNodes().get(i);
+							int x = (int) tb.getPixXFromLatLon(o.getLatitude(), o.getLongitude());
+							int y = (int) tb.getPixYFromLatLon(o.getLatitude(), o.getLongitude());
+							tx.add(x);
+							ty.add(y);
+						}
+						calculatePath(tb, tx, ty, path);
+					}
+					attrs.drawPath(canvas, path);
+				} finally {
+					canvas.rotate(tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
+				}
+				
 			}
 		}
 	}

@@ -377,11 +377,11 @@ public abstract class OsmandMapLayer {
 		}
 
 
-		public boolean updatePaints(OsmandMapTileView view, DrawSettings settigns, RotatedTileBox tileBox) {
+		public boolean updatePaints(OsmandMapTileView view, DrawSettings settings, RotatedTileBox tileBox) {
 			OsmandApplication app = view.getApplication();
 			OsmandRenderer renderer = app.getResourceManager().getRenderer().getRenderer();
 			RenderingRulesStorage rrs = app.getRendererRegistry().getCurrentSelectedRenderer();
-			final boolean isNight = settigns != null && settigns.isNightMode();
+			final boolean isNight = settings != null && settings.isNightMode();
 			int hsh = calculateHash(rrs, isNight, tileBox.getMapDensity());
 			if (hsh != cachedHash) {
 				cachedHash = hsh;
