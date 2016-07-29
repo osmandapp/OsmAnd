@@ -41,6 +41,11 @@ public class HistoryMenuController extends MenuController {
 	}
 
 	@Override
+	public boolean displayStreetNameInTitle() {
+		return entry.getName().isLocation();
+	}
+
+	@Override
 	public boolean displayDistanceDirection() {
 		return true;
 	}

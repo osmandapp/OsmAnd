@@ -160,13 +160,25 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 					break;
 				case RECENT_OBJ:
 					HistoryEntry entry = (HistoryEntry) object;
-					Amenity amenity = findAmenity(entry.getName().getName(), entry.getLat(), entry.getLon(), lang);
-					if (amenity != null) {
-						object = amenity;
-						pointDescription = new PointDescription(PointDescription.POINT_TYPE_POI,
-								OsmAndFormatter.getPoiStringWithoutType(amenity, lang));
-					} else {
-						pointDescription = entry.getName();
+					pointDescription = entry.getName();
+					if (pointDescription.isPoi()) {
+						Amenity amenity = findAmenity(entry.getName().getName(), entry.getLat(), entry.getLon(), lang);
+						if (amenity != null) {
+							object = amenity;
+							pointDescription = new PointDescription(PointDescription.POINT_TYPE_POI,
+									OsmAndFormatter.getPoiStringWithoutType(amenity, lang));
+						}
+					} else if (pointDescription.isFavorite()) {
+						LatLon entryLatLon = new LatLon(entry.getLat(), entry.getLon());
+						List<FavouritePoint> favs = app.getFavorites().getFavouritePoints();
+						for (FavouritePoint f : favs) {
+							if (entryLatLon.equals(new LatLon(f.getLatitude(), f.getLongitude()))
+									&& pointDescription.getName().equals(f.getName())) {
+								object = f;
+								pointDescription = f.getPointDescription();
+								break;
+							}
+						}
 					}
 					break;
 				case FAVORITE:
