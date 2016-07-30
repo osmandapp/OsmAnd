@@ -2354,4 +2354,19 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="missing_write_external_storage_permission">التطبيق ليس لديه إذن لاستخدام بطاقة الأس دي</string>
     <string name="save_poi_without_poi_type_message">هل تريد حقا حفظ POI بدون تحديد نوعه؟</string>
     <string name="dashboard_or_drawer_description">هناك خيار جديد لتحكم بشكل مرن بالتطبيق عبر لوحة القياس أو القائمة الثابتة. اختيارك يمكن تغييره دائما في إعدادات لوحة القياس.</string>
+    <string name="osmo_auth_error">خطأ آوسمو في التصريح: %1$s.
+
+قد يكون عطل مؤقت في الخدمة أو تسجيلك انتهى.
+
+هل تريد المتابعة بتسجيل جديد؟</string>
+    <string name="use_osmand_routing_service_descr">استخدام OsmAnd للملاحة دون نت ينطبق فقط على الطرق &gt; 20 كم (تجريبي)</string>
+    <string name="osmand_routing_experimental">ملاحة OsmAnd دون نت ميزة تجريبية وهي لا تعمل لمسافات تزيد عن 20 كيلومترا.
+
+خدمة الملاحة حولت مؤقتا إلى CloudMade على الانترنت.</string>
+    <string name="build_installed">"إصدار {0} تثبيت بنجاح  ({1})."</string>
+    <string name="downloading_build">تحميل إصدار…</string>
+    <string name="install_selected_build">هل تريد تثبيت التطبيق - {0} من {1} {2} مب ؟</string>
+    <string name="loading_builds_failed">فشل في الحصول على قائمة إصدارات التطبيق</string>
+    <string name="loading_builds">جاري تحميل إصدارات التطبيق…</string>
+    <string name="select_build_to_install">حدد إصدار التطبيق للتثبيت</string>
     </resources>
