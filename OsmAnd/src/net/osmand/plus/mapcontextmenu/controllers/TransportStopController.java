@@ -6,6 +6,7 @@ import java.util.List;
 
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.data.RotatedTileBox;
 import net.osmand.data.TransportRoute;
 import net.osmand.data.TransportStop;
 import net.osmand.plus.OsmandApplication;
@@ -123,9 +124,11 @@ public class TransportStopController extends MenuController {
 				public void onClick(View arg0) {
 					MapContextMenu mm = getMapActivity().getContextMenu();
 					PointDescription pd = new PointDescription(PointDescription.POINT_TYPE_TRANSPORT_ROUTE, r.desc);
+					mm.show(latLon, pd, r);
 					TransportStopsLayer stopsLayer = getMapActivity().getMapLayers().getTransportStopsLayer();
 					stopsLayer.setRoute(r.route);
-					mm.show(latLon, pd, r);
+					int cz = r.calculateZoom(0, getMapActivity().getMapView().getCurrentRotatedTileBox());
+					getMapActivity().changeZoom(cz - getMapActivity().getMapView().getZoom());
 				}
 			};
 			if (r.type == null) {
@@ -171,5 +174,24 @@ public class TransportStopController extends MenuController {
 		public String desc;
 		public TransportRoute route;
 		public TransportStop stop;
+		public boolean showWholeRoute;
+
+		public int calculateZoom(int startPosition, RotatedTileBox currentRotatedTileBox) {
+			RotatedTileBox cp = currentRotatedTileBox.copy();
+			boolean notContains = true;
+			while (cp.getZoom() > 12 && notContains) {
+				notContains = false;
+				List<TransportStop> sts = route.getForwardStops();
+				for(int i = startPosition; i < sts.size(); i++) {
+					TransportStop st = sts.get(startPosition);
+					if (!cp.containsLatLon(st.getLocation())) {
+						notContains = true;
+						break;
+					}
+				}
+				cp.setZoom(cp.getZoom() - 1);
+			}
+			return cp.getZoom();
+		}
 	}
 }

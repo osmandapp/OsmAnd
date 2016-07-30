@@ -2343,7 +2343,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="local_index_description">انقر فوق أي عنصر لمعرفة المزيد من التفاصيل، اضغط وواصل الضغط للتعطيل أو الحذف. البيانات الحالية على الجهاز (%1$s متاحة):</string>
     <string name="keep_informing_descr">إعادة إعلان تعليمات الملاحة في فترات منتظمة</string>
     <string name="shared_string_others">آخرى</string>
-    <string name="local_index_action_do">أنت على وشك %1$s%2$ s عنصر. تواصل؟</string>
+    <string name="local_index_action_do">أنت على وشك %1$s %2$s عنصر. تواصل؟</string>
     <string name="amenity_type_geocache">جيوكاش</string>
     <string name="use_osmand_routing_service">ملاحة OsmAnd &gt; كم20</string>
     </resources>
