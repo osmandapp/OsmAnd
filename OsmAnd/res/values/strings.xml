@@ -2000,12 +2000,10 @@ If you need help with OsmAnd application, please contact our support team: suppo
     <string name="none_region_found">No offline data for regions found on SD card. Download regions from the Internet.</string>
     <string name="poi_namefinder_query_empty">Input search query to find POI</string>
     <string name="any_poi">Any</string>
-    <string name="layer_transport_route">Transport route</string>
     <string name="thanks_yandex_traffic">Thanks to Yandex for traffic information.</string>
     <string name="layer_yandex_traffic">Yandex traffic</string>
     <string name="layer_route">Route</string>
     <string name="layer_osm_bugs">OSM Notes (online)</string>
-    <string name="layer_transport">Transport stops</string>
     <string name="layer_poi">POI…</string>
     <string name="layer_map">Map source…</string>
     <string name="menu_layers">Map layers</string>
