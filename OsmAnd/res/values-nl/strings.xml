@@ -903,48 +903,48 @@ Proportioneel werkgeheugen %4$s MB (Android limiet %5$s MB, Dalvik %6$s MB).</st
 
 <string name="osmand_short_description_80_chars">OsmAnd is een open-source navigatiesysteem met raster- en vectorkaarten</string>
 <string name="osmand_plus_short_description_80_chars">OsmAnd is een open-source navigatiesysteem met online en offline kaarten</string>
-<string name="osmand_long_description_1000_chars">
-		OsmAnd (OSM Automated Navigation Directions)
+<string name="osmand_long_description_1000_chars">"
+ OsmAnd (OSM Automated Navigation Directions)
 
-		OsmAnd is een open-source navigatie-applicatie die toegang geeft tot een uitgebreide variëteit aan wereldwijde OpenStreetMap (OSM) gegevens. Alle kaartgegevens (vector- of rasterkaarten) kunnen in het telefoongeheugen worden opgeslagen voor offline gebruik. OsmAnd biedt zowel offline als online route-aanwijzingen met stembegeleiding. 
+OsmAnd is een open-source navigatie-applicatie die toegang geeft tot een uitgebreide variëteit aan wereldwijde OpenStreetMap (OSM) gegevens. Alle kaartgegevens (vector- of rasterkaarten) kunnen in het telefoongeheugen worden opgeslagen voor offline gebruik. OsmAnd biedt zowel offline als online route-aanwijzingen met stembegeleiding. 
 
-		Enkele van de mogelijkheden:
-		- Volledig offline gebruik (met gedownloade vector- of rasterkaarten)
-		- Compacte offline vectorkaarten van de hele wereld zijn beschikbaar
-		- Kaarten van landen of regio\'s direct downloadbaar via de app
-		- Meerdere kaartlagen mogelijk, zoals GPX- of navigatietracks, interessepunten (points of interest), favorieten, hoogtelijnen, haltes openbaar vervoer, aanvullende kaarten met instelbare transparantie
-		- Offline zoeken naar adressen en plaatsen
-		- Offline route-aanwijzingen voor auto, fiets, en voetganger, keuze uit:
-		- optioneel automatische dag/nacht-weergave
-		- optioneel snelheidsafhankelijk inzoomen
-		- optionele kaartoriëntatie volgens kompas of bewegingsrichting
-		- optionele rijbaanbegeleiding, snelheidslimieten, opgenomen en TTS-stemmen.
+ Enkele van de mogelijkheden:
+ - Volledig offline gebruik (met gedownloade vector- of rasterkaarten)
+ - Compacte offline vectorkaarten van de hele wereld zijn beschikbaar
+ - Kaarten van landen of regio\'s direct downloadbaar via de app
+ - Meerdere kaartlagen mogelijk, zoals GPX- of navigatietracks, interessepunten (points of interest), favorieten, hoogtelijnen, haltes openbaar vervoer, aanvullende kaarten met instelbare transparantie
+ - Offline zoeken naar adressen en plaatsen
+ - Offline route-aanwijzingen voor auto, fiets, en voetganger, keuze uit:
+     - optioneel automatische dag/nacht-weergave
+     - optioneel snelheidsafhankelijk inzoomen
+     - optionele kaartoriëntatie volgens kompas of bewegingsrichting
+     - optionele rijstrookinformatie, snelheidslimiet, opgenomen- en TTS-stemmen.
 
-		Beperkingen van de gratis versie van OsmAnd:
-		- Beperkt aantal kaartdownloads
-		- Geen toegang tot Wikipedia offline POI\'s.
+ Beperkingen van de gratis versie van OsmAnd:
+ - Beperkt aantal kaartdownloads
+ - Geen toegang tot Wikipedia offline POI\'s.
 
-		OsmAnd wordt actief ontwikkeld en de verdere vooruitgang van het project is afhankelijk van financiële bijdragen om de ontwikkeling en toetsing van nieuwe functionaliteit te kunnen bekostigen. Wij verzoeken je om OsmAnd+ te kopen, of om een donatie over te maken via osmand.net.
-	</string>
-<string name="osmand_plus_long_description_1000_chars">
-		OsmAnd+ (OSM Automated Navigation Directions)
+ OsmAnd wordt actief ontwikkeld en de verdere vooruitgang van het project is afhankelijk van financiële bijdragen om de ontwikkeling en toetsing van nieuwe functionaliteit te kunnen bekostigen. Wij verzoeken je om OsmAnd+ te kopen, of om een donatie over te maken via osmand.net.
+ "</string>
+<string name="osmand_plus_long_description_1000_chars">"
+ OsmAnd+ (OSM Automated Navigation Directions)
 
-		OsmAnd is een open-source navigatie- en kaartsysteem dat gebruikmaakt van de grote verzameling OpenStreetMap-gegevens. Alle kaartgegevens kunnen worden opgeslagen in het telefoongeheugen voor offline gebruik. OsmAnd biedt zowel offline als online navigatie met stembegeleiding.
+OsmAnd is een open-source navigatie- en kaartsysteem dat gebruikmaakt van de grote verzameling OpenStreetMap-gegevens. Alle kaartgegevens kunnen worden opgeslagen in het telefoongeheugen voor offline gebruik. OsmAnd biedt zowel offline als online navigatie met stembegeleiding.
 
-		OsmAnd+ is de betaalde versie. Door deze te kopen ondersteun je het project, betaal je mee aan nieuwe ontwikkelingen, en ontvang je de laatste updates.
+ OsmAnd+ is de betaalde versie. Door deze te kopen ondersteun je het project, betaal je mee aan nieuwe ontwikkelingen, en ontvang je de laatste updates.
 
-		Belangrijke eigenschappen:
-		- Complete functionaliteit zonder internetverbinding
-		- Onbeperkt downloaden van offline-kaarten
-		- Compacte vectorkaarten voor de gehele wereld
-		- Download Wikipedia-interessepunten voor toerisme
-		- Offline zoeken naar adressen en plaatsen (POI)
-		- Offline routeberekening voor korte afstanden (experimenteel)
-		- Navigatie voor auto / fiets / voetganger
-		- Stembegeleiding, rijstrookindicatie en snelheidswaarschuwingen
-		- Meerdere kaartlagen voor POI, afgelegde weg, favorieten, hoogtelijnen, OV-haltes en extra kaarten
-		- Automatisch draaien en zoomen van de kaart
-	</string>
+ Belangrijke eigenschappen:
+ - Complete functionaliteit zonder internetverbinding
+ - Onbeperkt downloaden van offline-kaarten
+ - Compacte vectorkaarten voor de gehele wereld
+ - Download Wikipedia-interessepunten voor toerisme
+ - Offline zoeken naar adressen en plaatsen (POI)
+ - Offline routeberekening voor tot ca. 250 km 
+ - Navigatie voor auto / fiets / voetganger
+ - Stembegeleiding, rijstrookindicatie en snelheidswaarschuwingen
+ - Meerdere kaartlagen voor POI, afgelegde weg, favorieten, hoogtelijnen, OV-haltes en extra kaarten
+ - Automatisch draaien en zoomen van de kaart
+ "</string>
 <string name="avoid_motorway">Vermijd snelwegen</string>
 
 <string name="snap_to_road_descr">Positie op de weg uitlijnen tijdens navigatie</string>
