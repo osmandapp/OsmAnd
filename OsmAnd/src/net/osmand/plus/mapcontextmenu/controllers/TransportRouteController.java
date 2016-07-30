@@ -1,5 +1,6 @@
 package net.osmand.plus.mapcontextmenu.controllers;
 
+import java.lang.ref.WeakReference;
 import java.util.List;
 
 import android.view.View;
@@ -7,14 +8,17 @@ import android.view.View.OnClickListener;
 import net.osmand.binary.OsmandOdb.TransportRouteStop;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.data.RotatedTileBox;
 import net.osmand.data.TransportStop;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
+import net.osmand.plus.mapcontextmenu.MapContextMenuFragment;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.mapcontextmenu.controllers.TransportStopController.TransportStopRoute;
+import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.TransportStopsLayer;
 
 public class TransportRouteController extends MenuController {
@@ -96,22 +100,53 @@ public class TransportRouteController extends MenuController {
 		super.addPlainMenuItems(typeStr, pointDescription, latLon);
 		List<TransportStop> stops = transportStop.route.getForwardStops();
 		boolean useEnglishNames = getMapActivity().getMyApplication().getSettings().usingEnglishNames();
-		for (final TransportStop stop : stops) {
+		int currentStop = -1;
+		for (int i = 0; i < stops.size(); i++) {
+			final TransportStop stop = stops.get(i);
+			if (stop.getName().equals(transportStop.stop.getName())) {
+				currentStop = i;
+				break;
+			}
+		}
+		int defaultIcon = transportStop.type == null ? R.drawable.mx_route_bus_ref : transportStop.type.getResourceId();
+		int startPosition = 0;
+		if(!transportStop.showWholeRoute) {
+			startPosition = (currentStop == -1 ? 0 : currentStop);
+			if (currentStop > 0) {
+				addPlainMenuItem(defaultIcon, getMapActivity().getString(R.string.route_stops_before, currentStop),
+						false, false, new OnClickListener() {
+
+							@Override
+							public void onClick(View arg0) {
+								MapContextMenu mm = getMapActivity().getContextMenu();
+								transportStop.showWholeRoute = true;
+								mm.showOrUpdate(latLon, getPointDescription(), transportStop);
+								TransportStopsLayer stopsLayer = getMapActivity().getMapLayers().getTransportStopsLayer();
+								int cz = transportStop.calculateZoom(0, getMapActivity().getMapView().getCurrentRotatedTileBox());
+								getMapActivity().changeZoom(cz - getMapActivity().getMapView().getZoom());
+								stopsLayer.setRoute(transportStop.route);
+							}
+						});
+			}
+		}
+		for (int i = startPosition; i < stops.size(); i++) {
+			final TransportStop stop = stops.get(i);
 			final String name = useEnglishNames ? stop.getEnName(true) : stop.getName();
-			boolean currentStop = stop.getName().equals(transportStop.stop.getName()); 
-			addPlainMenuItem(currentStop? R.drawable.ic_action_marker_dark : 
-						(transportStop.type == null ? R.drawable.mx_route_bus_ref  : transportStop.type.getResourceId()),
-					name , false, false, new OnClickListener() {
-						
+			addPlainMenuItem(currentStop == i ? R.drawable.ic_action_marker_dark: defaultIcon,
+					name, false, false, new OnClickListener() {
+
 						@Override
 						public void onClick(View arg0) {
 							MapContextMenu mm = getMapActivity().getContextMenu();
-							PointDescription pd = new PointDescription(PointDescription.POINT_TYPE_TRANSPORT_STOP, 
-									getMapActivity().getString(R.string.transport_Stop),
-									name);
+							PointDescription pd = new PointDescription(PointDescription.POINT_TYPE_TRANSPORT_STOP,
+									getMapActivity().getString(R.string.transport_Stop), name);
 							TransportStopsLayer stopsLayer = getMapActivity().getMapLayers().getTransportStopsLayer();
 							stopsLayer.setRoute(null);
-							mm.show(latLon, pd, stop);
+							mm.show(stop.getLocation(), pd, stop);
+							WeakReference<MapContextMenuFragment> rr = mm.findMenuFragment();
+							if(rr != null && rr.get() != null) {
+								rr.get().centerMarkerLocation();
+							}
 						}
 					});
 		}

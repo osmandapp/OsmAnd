@@ -312,7 +312,7 @@ public class BinaryMapTransportReaderAdapter {
 				}
 				int length = codedIS.readRawVarint32();
 				int olds = codedIS.pushLimit(length);
-				TransportStop stop = readTransportRouteStop(rx, ry, rid, stringTable);
+				TransportStop stop = readTransportRouteStop(rx, ry, rid, stringTable, filePointer);
 				dataObject.getForwardStops().add(stop);
 				rid = stop.getId();
 				rx = (int) MapUtils.getTileNumberX(BinaryMapIndexReader.TRANSPORT_STOP_ZOOM, stop.getLocation().getLongitude());
@@ -397,8 +397,11 @@ public class BinaryMapTransportReaderAdapter {
 
 	
 	
-	private TransportStop readTransportRouteStop(int dx, int dy, long did, TIntObjectHashMap<String> stringTable) throws IOException {
+	private TransportStop readTransportRouteStop(int dx, int dy, long did, TIntObjectHashMap<String> stringTable, 
+			int filePointer) throws IOException {
 		TransportStop dataObject = new TransportStop();
+		dataObject.setFileOffset(codedIS.getTotalBytesRead());
+		dataObject.setReferencesToRoutes(new int[] {filePointer});
 		boolean end = false;
 		while(!end){
 			int t = codedIS.readTag();

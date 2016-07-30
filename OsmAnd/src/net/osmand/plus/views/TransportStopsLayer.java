@@ -106,7 +106,7 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 	
 	public void getFromPoint(RotatedTileBox tb,PointF point, List<? super TransportStop> res) {
 		if (data.getResults() != null) {
-			List<TransportStop> objects = data.getResults();
+			List<TransportStop> objects = route != null ? route.getForwardStops() : data.getResults();
 			int ex = (int) point.x;
 			int ey = (int) point.y;
 			final int rp = getRadiusPoi(tb);
@@ -169,18 +169,34 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 				try {
 					path.reset();
 					List<Way> ws = route.getForwardWays();
-					if (ws != null)  
+					if (ws != null) {
+						for (Way w : ws) {
+							TIntArrayList tx = new TIntArrayList();
+							TIntArrayList ty = new TIntArrayList();
+							for (int i = 0; i < w.getNodes().size(); i++) {
+								Node o = w.getNodes().get(i);
+								int x = (int) tb.getPixXFromLatLon(o.getLatitude(), o.getLongitude());
+								int y = (int) tb.getPixYFromLatLon(o.getLatitude(), o.getLongitude());
+								tx.add(x);
+								ty.add(y);
+							}
+							calculatePath(tb, tx, ty, path);
+						}
+					}
 					attrs.drawPath(canvas, path);
 				} finally {
 					canvas.rotate(tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
 				}
-				
 			}
 			
 			float iconSize = stopBus.getWidth() * 3 / 2.5f;
 			QuadTree<QuadRect> boundIntersections = initBoundIntersections(tb);
 			List<TransportStop> fullObjects = new ArrayList<>();
-			for (TransportStop o : data.getResults()) {
+			List<TransportStop> objects = data.getResults() ;
+			if(route != null) {
+				objects = route.getForwardStops();
+			}
+			for (TransportStop o : objects) {
 				float x = tb.getPixXFromLatLon(o.getLocation().getLatitude(), o.getLocation().getLongitude());
 				float y = tb.getPixYFromLatLon(o.getLocation().getLatitude(), o.getLocation().getLongitude());
 
