@@ -473,28 +473,7 @@ public class BinaryMapIndexReader {
 		return result;
 	}
 
-	/**
-	 * Transport public methods
-	 */
-	public List<net.osmand.data.TransportRoute> getTransportRouteDescriptions(TransportStop stop) throws IOException {
-		TransportIndex ind = getTransportIndex(stop.getFileOffset());
-		if (ind == null) {
-			return null;
-		}
-		List<net.osmand.data.TransportRoute> list = new ArrayList<TransportRoute>();
-		TIntObjectHashMap<String> stringTable = new TIntObjectHashMap<String>();
-		for (int filePointer : stop.getReferencesToRoutes()) {
-			TransportRoute tr = transportAdapter.getTransportRoute(filePointer, stringTable, true);
-			if (tr != null) {
-				list.add(tr);
-			}
-		}
-		transportAdapter.initializeStringTable(ind, stringTable);
-		for (TransportRoute route : list) {
-			transportAdapter.initializeNames(true, route, stringTable);
-		}
-		return list;
-	}
+	
 
 	public boolean transportStopBelongsTo(TransportStop s) {
 		return getTransportIndex(s.getFileOffset()) != null;

@@ -4,9 +4,7 @@ import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.map.hash.TIntObjectHashMap;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.data.TransportStop;
@@ -248,9 +246,6 @@ public class BinaryMapTransportReaderAdapter {
 		long rid = 0;
 		int rx = 0;
 		int ry = 0;
-		long did = 0;
-		int dx = 0;
-		int dy = 0;
 		while(!end){
 			int t = codedIS.readTag();
 			int tag = WireFormat.getTagFieldNumber(t);
@@ -279,11 +274,7 @@ public class BinaryMapTransportReaderAdapter {
 			case OsmandOdb.TransportRoute.OPERATOR_FIELD_NUMBER:
 				dataObject.setOperator(regStr(stringTable)); //$NON-NLS-1$
 				break;
-			case OsmandOdb.TransportRoute.DIRECTGEOMETRY_FIELD_NUMBER:
-			case OsmandOdb.TransportRoute.REVERSEGEOMETRY_FIELD_NUMBER:
-			case OsmandOdb.TransportRoute.SHAREDGEOMETRY_FIELD_NUMBER:
-				int dir = tag == OsmandOdb.TransportRoute.SHAREDGEOMETRY_FIELD_NUMBER ? 0 : (
-						tag == OsmandOdb.TransportRoute.DIRECTGEOMETRY_FIELD_NUMBER ? 1 : -1);
+			case OsmandOdb.TransportRoute.GEOMETRY_FIELD_NUMBER:
 				int sizeL = codedIS.readRawVarint32();
 				int pold = codedIS.pushLimit(sizeL);
 				int px = 0; 
@@ -294,7 +285,7 @@ public class BinaryMapTransportReaderAdapter {
 					int ddy = (codedIS.readSInt32() << BinaryMapIndexReader.SHIFT_COORDINATES);
 					if(ddx == 0 && ddy == 0) {
 						if(w.getNodes().size() > 0) {
-							dataObject.addWay(w, dir);
+							dataObject.addWay(w);
 						}
 						w = new Way(-1);
 					} else {
@@ -306,11 +297,14 @@ public class BinaryMapTransportReaderAdapter {
 					}
 				}
 				if(w.getNodes().size() > 0) {
-					dataObject.addWay(w, dir );
+					dataObject.addWay(w);
 				}
 				codedIS.popLimit(pold);
 				break;
-			case OsmandOdb.TransportRoute.REVERSESTOPS_FIELD_NUMBER:
+			// deprecated
+//			case OsmandOdb.TransportRoute.REVERSESTOPS_FIELD_NUMBER:
+//				break;
+			case OsmandOdb.TransportRoute.DIRECTSTOPS_FIELD_NUMBER:
 				if(onlyDescription){
 					end = true;
 					codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
@@ -318,22 +312,7 @@ public class BinaryMapTransportReaderAdapter {
 				}
 				int length = codedIS.readRawVarint32();
 				int olds = codedIS.pushLimit(length);
-				TransportStop stop = readTransportRouteStop(dx, dy, did, stringTable);
-				dataObject.getBackwardStops().add(stop);
-				did = stop.getId();
-				dx = (int) MapUtils.getTileNumberX(BinaryMapIndexReader.TRANSPORT_STOP_ZOOM, stop.getLocation().getLongitude());
-				dy = (int) MapUtils.getTileNumberY(BinaryMapIndexReader.TRANSPORT_STOP_ZOOM, stop.getLocation().getLatitude());
-				codedIS.popLimit(olds);
-				break;
-			case OsmandOdb.TransportRoute.DIRECTSTOPS_FIELD_NUMBER:
-				if(onlyDescription){
-					end = true;
-					codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
-					break;
-				}
-				length = codedIS.readRawVarint32();
-				olds = codedIS.pushLimit(length);
-				stop = readTransportRouteStop(rx, ry, rid, stringTable);
+				TransportStop stop = readTransportRouteStop(rx, ry, rid, stringTable);
 				dataObject.getForwardStops().add(stop);
 				rid = stop.getId();
 				rx = (int) MapUtils.getTileNumberX(BinaryMapIndexReader.TRANSPORT_STOP_ZOOM, stop.getLocation().getLongitude());
@@ -400,9 +379,8 @@ public class BinaryMapTransportReaderAdapter {
 		if(dataObject.getType().length() > 0){
 			dataObject.setType(stringTable.get(dataObject.getType().charAt(0)));
 		}
-		for (int i = 0; i < 2 && !onlyDescription; i++) {
-			List<TransportStop> stops = i == 0 ? dataObject.getForwardStops() : dataObject.getBackwardStops();
-			for (TransportStop s : stops) {
+		if (!onlyDescription) {
+			for (TransportStop s : dataObject.getForwardStops()) {
 				initializeNames(stringTable, s);
 			}
 		}

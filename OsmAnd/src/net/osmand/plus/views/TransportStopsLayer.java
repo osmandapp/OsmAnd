@@ -1,17 +1,13 @@
 package net.osmand.plus.views;
 
-import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.graphics.Path;
-import android.graphics.PointF;
-import android.util.DisplayMetrics;
-import android.view.WindowManager;
-import net.osmand.Location;
+import gnu.trove.list.array.TIntArrayList;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
 import net.osmand.ResultMatcher;
-import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
@@ -22,13 +18,15 @@ import net.osmand.data.TransportStop;
 import net.osmand.osm.edit.Node;
 import net.osmand.osm.edit.Way;
 import net.osmand.plus.R;
-import net.osmand.plus.poi.PoiUIFilter;
-import gnu.trove.list.array.TIntArrayList;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.Path;
+import android.graphics.PointF;
+import android.util.DisplayMetrics;
+import android.view.WindowManager;
 
 public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider {
 	private static final int startZoom = 12;
@@ -170,19 +168,8 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 				canvas.rotate(-tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
 				try {
 					path.reset();
-					List<Way> ws = route.getAggregateForwardWays();
-					for (Way w : ws) {
-						TIntArrayList tx = new TIntArrayList();
-						TIntArrayList ty = new TIntArrayList();
-						for (int i = 0; i < w.getNodes().size(); i++) {
-							Node o = w.getNodes().get(i);
-							int x = (int) tb.getPixXFromLatLon(o.getLatitude(), o.getLongitude());
-							int y = (int) tb.getPixYFromLatLon(o.getLatitude(), o.getLongitude());
-							tx.add(x);
-							ty.add(y);
-						}
-						calculatePath(tb, tx, ty, path);
-					}
+					List<Way> ws = route.getForwardWays();
+					if (ws != null)  
 					attrs.drawPath(canvas, path);
 				} finally {
 					canvas.rotate(tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
