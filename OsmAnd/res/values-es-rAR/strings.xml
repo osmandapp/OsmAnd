@@ -2503,6 +2503,8 @@ Si necesitas ayuda con la aplicación OsmAnd, contacte con nuestro equipo de sop
 
  • Mejoras en la guía de ruta, indicaciones por voz y de carriles de giro.
 
+ • Mejoras en la capa de transporte
+
  • Se agregaron más idiomas y ahora soporta idiomas regionales.
 
  • Muchas otras mejoras y correcciones de errores.
@@ -2515,4 +2517,5 @@ Si necesitas ayuda con la aplicación OsmAnd, contacte con nuestro equipo de sop
     <string name="back_to_search">Volver a la búsqueda</string>
     <string name="coords_search">Búsqueda de coordenadas</string>
     <string name="advanced_coords_search">Búsqueda avanzada de coordenadas</string>
+    <string name="route_stops_before">%1$s paradas anteriores</string>
     </resources>
