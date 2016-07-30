@@ -2404,4 +2404,5 @@ Cas que aprecieu OsmAnd  i OSM i vulgueu ajudar-los, és una via perfecta per fe
     <string name="dist_away_from_my_location">Cwrca %1$s més enllà</string>
     <string name="coords_search">Cerca per coordenades</string>
     <string name="advanced_coords_search">Cerca avançada per coordenades</string>
+    <string name="route_stops_before">Queden %1$s parades</string>
     </resources>
