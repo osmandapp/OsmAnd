@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='UTF-8'?>
 <resources><string name="poi_historic_mine">Historische mijn</string>
 	<string name="poi_palaeontological_site">Paleontologische site</string>
 
@@ -63,7 +63,7 @@
 	<string name="poi_kiosk">Kiosk</string>
 	<string name="poi_kitchen">Keukenwinkel</string>
 	<string name="poi_mobile_phone">Mobiele telefoon-winkel</string>
-	<string name="poi_motorcycle">Motordealer</string>
+	<string name="poi_motorcycle">Motorfietsen-dealer</string>
 	<string name="poi_musical_instrument">Muziekinstrumentenwinkel</string>
 	<string name="poi_newsagent">Krantenkiosk</string>
 	<string name="poi_optician">Opticien</string>
@@ -75,7 +75,7 @@
 	<string name="poi_second_hand">Tweedehandswinkel</string>
 	<string name="poi_ship_chandler">Scheepsuitrusting</string>
 	<string name="poi_sports">Sportwinkel</string>
-	<string name="poi_stationery">Kantoorboekwinkel</string>
+	<string name="poi_stationery">Kantoorboekhandel</string>
 	<string name="poi_tableware">Serviesgoed</string>
 	<string name="poi_ticket">Ticketwinkel</string>
 	<string name="poi_tobacco">Tabakswinkel</string>
@@ -88,7 +88,7 @@
 	<string name="poi_department_store">Warenhuis</string>
 	<string name="poi_electronics">Elektronica-winkel</string>
 	<string name="poi_car">Autodealer</string>
-	<string name="poi_car_parts">Auto-onderdelenwinkel</string>
+	<string name="poi_car_parts">Auto-onderdelenhandel</string>
 	<string name="poi_atv">Quad-winkel</string>
 	<string name="poi_cosmetics">Cosmeticazaak</string>
 	<string name="poi_marketplace">Marktplaats</string>
@@ -303,7 +303,7 @@
 	<string name="poi_club_charity">Liefdadigheidsvereniging</string>
 
 	<string name="poi_library">Bibliotheek</string>
-	<string name="poi_arts_centre">Kunstencentrum</string>
+	<string name="poi_arts_centre">Kunstcentrum</string>
 	<string name="poi_cinema">Cinema</string>
 	<string name="poi_casino">Casino</string>
 	<string name="poi_community_centre">Gemeenschapscentrum</string>
@@ -475,8 +475,8 @@
 	<string name="poi_ice_skating">Ijsschaatsen</string>
 	<string name="poi_telephone_exchange">Telefooncentrale</string>
 
-	<string name="poi_waste_disposal">Afvalverwerking</string>
-	<string name="poi_waste_basket">Prullenbak</string>
+	<string name="poi_waste_disposal">Afvalcontainer</string>
+	<string name="poi_waste_basket">Afvalbak</string>
 
 	<string name="poi_adit">Horizontale mijnschacht</string>
 	<string name="poi_survey_point">Landmeet punt</string>
@@ -559,8 +559,8 @@
 	<string name="poi_wine">Wijnhandel</string>
 
 	<string name="poi_public_transport_stop_position">Halte openbaar vervoer</string>
-	<string name="poi_halt">Station</string>
-	<string name="poi_railway_buffer_stop">Spoor stootblok</string>
+	<string name="poi_halt">Treinhalte</string>
+	<string name="poi_railway_buffer_stop">Stootblok</string>
 	<string name="poi_orienteering">Oriëntatieloop</string>
 	<string name="poi_paragliding">Parapenten</string>
 	<string name="poi_pelota">Pelota vasca</string>
@@ -586,7 +586,7 @@
 	
 	<string name="poi_wayside_cross">Wegkruis</string>
 	<string name="poi_wayside_shrine">Odsey schrijn</string>
-	<string name="poi_information">VVV</string>
+	<string name="poi_information">Informatie</string>
 	<string name="poi_viewpoint">Uitzicht</string>
 	<string name="poi_camp_site">Kampeerplaats</string>
 	<string name="poi_caravan_site">Caravanterrein</string>
@@ -1415,4 +1415,74 @@
 	<string name="poi_rooms">Kamers</string>
 
 	<string name="poi_payment_none">Gratis</string>
+	<string name="poi_seamark_dyke">Dijk (zeebaken)</string>
+	<string name="poi_deadlock">Doodlopende weg</string>
+
+	<string name="poi_stars_1s">Sterren: 1 S (Superior Tourist)</string>
+	<string name="poi_stars_2">Sterren: 2 (Standard)</string>
+	<string name="poi_stars_2s">Sterren: 2S (Superior Standard)</string>
+	<string name="poi_stars_3">Sterren: 3 (Comfort)</string>
+	<string name="poi_stars_3s">Sterren: 3S (Superior Comfort)</string>
+	<string name="poi_stars_4">Sterren: 4 (First Class)</string>
+	<string name="poi_stars_4s">Sterren: 4S (Superior First Class)</string>
+	<string name="poi_stars_5">Sterren: 5 (Luxury)</string>
+	<string name="poi_stars_5s">Sterren: 5S (Superior Luxury)</string>
+	<string name="poi_stars_6">Sterren: 6</string>
+	<string name="poi_stars_7">Sterren: 7</string>
+	<string name="poi_love_hotel">Ontmoetingshotel</string>
+
+	<string name="poi_payment_coins_yes">Betaling met munten mogelijk</string>
+	<string name="poi_payment_coins_no">Betaling met munten niet mogelijk</string>
+	<string name="poi_payment_coins_0.5">Betaling met € 0.50 munten mogelijk</string>
+	<string name="poi_payment_coins_50c12">Betaling met € 0.50, € 1, en € 2 munten mogelijk</string>
+	<string name="poi_payment_telephone_cards_yes">Telefoonkaarten mogelijk</string>
+	<string name="poi_payment_telephone_cards_no">Telefoonkaarten niet mogelijk</string>
+	<string name="poi_payment_credit_cards_yes">Betaling met Creditcard mogelijk</string>
+	<string name="poi_payment_credit_cards_no">Betaling met Creditcard niet mogelijk</string>
+	<string name="poi_payment_notes_yes">Betaling met bankbiljetten mogelijk</string>
+	<string name="poi_payment_notes_no">Betaling met bankbiljetten niet mogelijk</string>
+	<string name="poi_payment_electronic_purses_yes">Betaling met elektronische portemonnee mogelijk</string>
+	<string name="poi_payment_electronic_purses_no">Betaling met elektronische portemonnee niet mogelijk</string>
+	<string name="poi_payment_cash_yes">Contante betaling mogelijk</string>
+	<string name="poi_payment_cash_no">Contante betaling niet mogelijk</string>
+	<string name="poi_payment_debit_cards_yes">Betaling met debetkaarten mogelijk</string>
+	<string name="poi_payment_debit_cards_no">Betaling met debetkaarten niet mogelijk</string>
+	<string name="poi_payment_bitcoin_yes">Betaling met Bitcoin mogelijk</string>
+	<string name="poi_payment_bitcoin_no">Betaling met Bitcion niet mogelijk</string>
+	<string name="poi_payment_visa_yes">Betaling met Visa-kaart mogelijk</string>
+	<string name="poi_payment_visa_no">Betaling met Visa-kaart NIET mogelijk</string>
+	<string name="poi_payment_mastercard_yes">Betaling met MasterCard mogelijk</string>
+	<string name="poi_payment_mastercard_no">Betaling met MasterCard NIET mogelijk</string>
+	<string name="poi_payment_account_cards_yes">Betaling met klantenkaart mogelijk</string>
+	<string name="poi_payment_account_cards_no">Betaling met klantenkaart NIET mogelijk</string>
+	<string name="poi_payment_maestro_yes">Betaling met Maestro-kaart mogelijk</string>
+	<string name="poi_payment_maestro_no">Betaling met Maestro-kaart NIET mogelijk</string>
+	<string name="poi_payment_american_express_yes">Betaling met American Express (AMEX)-kaart mogelijk</string>
+	<string name="poi_payment_american_express_no">Betaling met American Express (AMEX)-kaart NIET mogelijk</string>
+	<string name="poi_payment_diners_club_yes">Betaling met Diners Club-kaart mogelijk</string>
+	<string name="poi_payment_diners_club_no">Betaling met Diners Club-kaart NIET mogelijk</string>
+	<string name="poi_payment_dkv_yes">Betaling met DKV mogelijk</string>
+	<string name="poi_payment_dkv_no">Betaling met DKV NIET mogelijk</string>
+	<string name="poi_payment_uta_yes">Betaling met UTA-kaarten mogelijk</string>
+	<string name="poi_payment_uta_no">Betaling met UTA-kaarten NIET mogelijk</string>
+	<string name="poi_payment_efectivo_yes">Contante betaling mogelijk</string>
+	<string name="poi_payment_efectivo_no">Contante betaling NIET mogelijk</string>
+	<string name="poi_payment_girocard_yes">Betaling met Girocard mogelijk</string>
+	<string name="poi_payment_girocard_no">Betaling met Girocard NIET mogelijk</string>
+	<string name="poi_payment_discover_card_yes">Betaling met Discover-card mogelijk</string>
+	<string name="poi_payment_discover_card_no">Betaling met Discover-card NIET mogelijk</string>
+	<string name="poi_payment_visa_electron_yes">Betaling met Visa Electron-card mogelijk</string>
+	<string name="poi_payment_visa_electron_no">Betaling met Visa Electron-card NIET mogelijk</string>
+	<string name="poi_payment_litecoin_yes">Betaling met Litecoin mogelijk</string>
+	<string name="poi_payment_litecoin_no">Betaling met Litecoin NIET mogelijk</string>
+	<string name="poi_payment_cheque_yes">Betaling met cheques mogelijk</string>
+	<string name="poi_payment_cheque_no">Betaling met cheques NIET mogelijk</string>
+	<string name="poi_payment_pikepass_yes">Betaling met PIKEPASS mogelijk</string>
+	<string name="poi_payment_pikepass_no">Betaling met PIKEPASS niet mogelijk</string>
+	<string name="poi_payment_pikepass_designated">Alleen betaling met Oklahoma PIKEPASS mogelijk</string>
+	<string name="poi_payment_visa_debit_yes">Betaling met Visa Debitcards mogelijk</string>
+	<string name="poi_payment_visa_debit_no">Betaling met Visa Debitcards NIET mogelijk</string>
+	<string name="poi_payment_cryptocurrencies_no">Betaling met Cryptocurrencies NIET mogelijk</string>
+	<string name="poi_payment_others_yes">Andere betalingsmogelijkheden mogelijk</string>
+	<string name="poi_payment_others_no">Andere betalingsvormen NIET mogelijk</string>
 	</resources>
