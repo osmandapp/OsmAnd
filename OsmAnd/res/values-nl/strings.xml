@@ -1642,11 +1642,17 @@ Anonieme groepen kunnen makkelijk gemaakt worden, bestaan maar een beperkt aanta
     <string name="osmo_gpx_track_downloaded">OsMo track: %1$s opgehaald.</string>
     <string name="osmo_group_information_desc">"
  - Geef een naam en omschrijving om een groep te maken
+
 - Hier gemaakte groepen zijn van het type \'Simple\'; zie voor uitleg https://osmo.mobi/g/new
+
 - Via de website kunnen groepen beheerd worden en paden en punten beschikbaar worden gemaakt
+
 - Een groep is voor meerdere gebruikers, als het niet de POI-groep is
+
 - Er kunnen maximaal 8 deelnemers in een prive-groep
+
 - Gebruiksvoorwaarden zijn beschikbaar op de site osmo.mobi
+
 - Als u een groep nodig heeft met andere voorwaarden, neem dan contact op met support: osmo.mobi@gmail.com
  "</string>
     <string name="osmo_group_information">Lees dit voordat u een groep maakt!</string>
