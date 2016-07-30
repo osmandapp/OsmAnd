@@ -2472,5 +2472,5 @@ Falls Sie OsmAnd mögen und das Projekt OpenStreetMap unterstützen wollen, so i
     <string name="dist_away_from_my_location">Suche %1$s entfernt</string>
     <string name="advanced_coords_search">Koordinatensuche (erweitert)</string>
     <string name="coords_search">Koordinatensuche</string>
-    <string name="route_stops_before">%1$ s Haltestellen vor</string>
+    <string name="route_stops_before">%1$s Haltestellen vor</string>
     </resources>

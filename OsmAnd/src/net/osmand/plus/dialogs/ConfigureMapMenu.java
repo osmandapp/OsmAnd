@@ -590,27 +590,25 @@ public class ConfigureMapMenu {
 			final ItemClickListener clickListener = new ContextMenuAdapter.ItemClickListener() {
 				@Override
 				public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> a, int itemId, int pos,
-								boolean isChecked) {
-							if (!isChecked) {
-								for (int i = 0; i < prefs.size(); i++) {
-									prefs.get(i).set(false);
-								}
-								a.notifyDataSetInvalidated();
-								refreshMapComplete(activity);
-								activity.getMapLayers().updateLayers(activity.getMapView());
-							} else {
-								showPreferencesDialog(adapter, a, pos, activity, activity.getString(strId), ps, prefs,
-										useDescription);
-							}
-							return false;
+						boolean isChecked) {
+					if (!isChecked && !useDescription) {
+						for (int i = 0; i < prefs.size(); i++) {
+							prefs.get(i).set(false);
 						}
-				
+						a.notifyDataSetInvalidated();
+						refreshMapComplete(activity);
+						activity.getMapLayers().updateLayers(activity.getMapView());
+					} else {
+						showPreferencesDialog(adapter, a, pos, activity, activity.getString(strId), ps, prefs,
+								useDescription);
+					}
+					return false;
+				}
+
 			};
-			ContextMenuItem.ItemBuilder builder = new ContextMenuItem.ItemBuilder()
-			.setTitleId(strId, activity)
-			.setIcon(icon)
-			.setListener(clickListener);
-			if(useDescription) {
+			ContextMenuItem.ItemBuilder builder = new ContextMenuItem.ItemBuilder().setTitleId(strId, activity)
+					.setIcon(icon).setListener(clickListener);
+			if (useDescription) {
 				final String descr = getDescription(prefs);
 				builder.setDescription(descr);
 				builder.setLayout(R.layout.list_item_single_line_descrition_narrow);
