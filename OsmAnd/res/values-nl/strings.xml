@@ -1488,7 +1488,7 @@ Wil je een nieuwe map maken op de toegestane locatie en de OsmAnd-bestanden daar
     <string name="voice_pref_title">Stem</string>
     <string name="misc_pref_title">Diversen</string>
     <string name="localization_pref_title">Regiogebonden</string>
-    <string name="interrupt_music_descr">Onderbreek muziek bij aankondigingen (niet alleen volume verlagen)</string>
+    <string name="interrupt_music_descr">Onderbreek muziekweergave bij aankondigingen (niet alleen het volume verlagen)</string>
 	<string name="interrupt_music">Muziek onderbreken</string>
 	<string name="share_route_as_gpx">Deel route als GPX-bestand</string>
 	<string name="share_route_subject">Route gedeeld via OsmAnd</string>
