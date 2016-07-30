@@ -2187,6 +2187,9 @@ Kaj la loko kaj tempo estas montrataj ĉe la OsmAnd stirpanelo, kaj ĉe la fenes
  • Plibonigita navigado - voĉaj sciigoj, kaj subdiroj pri koridoroj
 
 
+ • Plibonigita tavolo de publik-transporto
+
+
  • Aldonitaj novaj lingvoj kaj subteno por dialektoj
 
 
@@ -2200,4 +2203,5 @@ Kaj la loko kaj tempo estas montrataj ĉe la OsmAnd stirpanelo, kaj ĉe la fenes
     <string name="back_to_search">Reveni al serĉo</string>
     <string name="coords_search">Koordinat-serĉo</string>
     <string name="advanced_coords_search">Detala koordinat-serĉo</string>
+    <string name="route_stops_before">%1$s haltejoj malantaŭ</string>
     </resources>
