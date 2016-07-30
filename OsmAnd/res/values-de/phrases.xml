@@ -2908,4 +2908,22 @@
 
 	<string name="poi_observatory_type_espionage">Nutzung: Spionage</string>
 	<string name="poi_observatory_type_meteorological">Nutzung: meteorologische</string>
+	<string name="poi_length">Länge</string>
+
+<string name="poi_crossing_bell_yes">Kreuzungssignalton</string>
+	<string name="poi_crossing_bell_no">Kreuzungssignalton: nein</string>
+	<string name="poi_crossing_light_yes">Kreuzungsbeleutung</string>
+	<string name="poi_crossing_light_no">Kreuzungsbeleutung: nein</string>
+	<string name="poi_crossing_on_demand_yes">Übergang auf Anfrage</string>
+	<string name="poi_crossing_on_demand_no">Übergang auf Anfrage: nein</string>
+	<string name="poi_crossing_saltire_yes">Andreaskreuz</string>
+	<string name="poi_crossing_saltire_no">Andreaskreuz: nein</string>
+	<string name="poi_crossing_supervision_yes">Kreuzungsaufsicht</string>
+	<string name="poi_crossing_supervision_no">Kreuzungsaufsicht: nein</string>
+	<string name="poi_crossing_supervision_attendant">Kreuzungsaufsicht: Begleiter</string>
+	<string name="poi_crossing_supervision_camera">Kreuzungsaufsicht: Kamera</string>
+
+	<string name="poi_dispensing_yes">Dosierung: Ja</string>
+	<string name="poi_dispensing_no">Dosierung: keine</string>
+
 	</resources>
