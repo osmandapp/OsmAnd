@@ -159,7 +159,9 @@
   
   
   <string name="download_files_not_enough_space">Er is niet voldoende vrije ruimte %1$s MB te downloaden (vrij: %2$s).</string>
-  <string name="download_files_question_space">{0} bestand(en) downloaden? Deze beslaan {1} MB opslagruimte. Er is nu {2} MB beschikbaar.</string>
+  <string name="download_files_question_space">{0} bestand(en) downloaden? 
+Deze beslaan {1} MB opslagruimte. 
+Er is nu {2} MB beschikbaar.</string>
   
   
   <string name="use_transparent_map_theme">Transparant thema</string>
@@ -763,7 +765,12 @@
   <string name="online_map_settings_descr">Configureer online of bewaarde kaartbronnen</string>
   
   
-  <string name="osmand_rastermaps_plugin_description">"Geeft toegang tot vele soorten online (zogenaamde tegel of raster) kaarten, van vooraf gedefinieerde OpenStreetMap tegels (zoals Mapnik) tot satellietbeelden en lagen voor speciale doeleinden zoals weerkaarten, klimaatkaarten, geologische kaarten, reliëflagen, enz.\n\nAl deze kaarten kunnen worden gebruikt als de hoofd(basis)kaart, of als een extra laag of een achtergrondlaag bij een andere basiskaart (zoals de normale offline kaarten van OsmAnd). Om een achtergrondlaag beter te klunnen zien, kunt u elementen van de OsmAnd kaarten eenvoudig verbergen via het menu \'Kaart instellen\'.\n\nTegelkaarten zijn direct via online bronnen verkrijgbaar of kunnen voor offline gebruik gereedgemaakt worden (en handmatig gekopieerd naar de OsmAnd gegevensmap) als SQLite database door diverse hulpprogramma\'s van derden. "</string>
+  <string name="osmand_rastermaps_plugin_description">"Geeft toegang tot vele soorten online (zogenaamde tegel of raster) kaarten, van vooraf gedefinieerde OpenStreetMap tegels (zoals Mapnik) tot satellietbeelden en lagen voor speciale doeleinden zoals weerkaarten, klimaatkaarten, geologische kaarten, reliëflagen, enz.
+
+Al deze kaarten kunnen worden gebruikt als de hoofd(basis)kaart, of als een extra laag of een achtergrondlaag bij een andere basiskaart (zoals de normale offline kaarten van OsmAnd). Om een achtergrondlaag beter te klunnen zien, kunt u elementen van de OsmAnd kaarten eenvoudig verbergen via het menu \'Kaart instellen\'.
+
+Tegelkaarten zijn direct via online bronnen verkrijgbaar of kunnen voor offline gebruik gereedgemaakt worden (en handmatig gekopieerd naar de OsmAnd gegevensmap) als SQLite database door diverse hulpprogramma\'s van derden.
+ "</string>
   <string name="osmand_background_plugin_description">Instellingen om tracking en navigatie te kunnen gebruiken met het scherm uit (schakelt de GPS periodiek in).</string>
   <string name="osmand_accessibility_description">Maakt de toegankelijkheid-opties van uw toestel beschikbaar in OsmAnd. Het vergemakkelijkt o.a. het aanpassen van de spreeksnelheid, het configureren van D-pad scherm navigatie door gebruik van een trackbal voor zoomregeling of het gebruiken van tekst-naar-spraak opties voor het automatisch aankondigen van uw positie.</string>
   
@@ -826,7 +833,9 @@
   <string name="osmand_parking_pm">\'s-middags</string>
   <string name="osmand_parking_am">\'s-ochtends</string>
   <string name="osmand_parking_position_name">Parkeerplek</string>
-  <string name="osmand_parking_plugin_description">De parkeerplaats-plugin bewaart de locatie waar de auto geparkeerd staat en de gekozen parkeertijd. U kunt uw parkeerplaats en resterende parkeertijd vinden op het Osmand dashboard en op de kaart zelf.\nKan ter herinnering ook een afspraak in uw agenda zetten.</string>
+  <string name="osmand_parking_plugin_description">De parkeerplaats-plugin bewaart de locatie waar de auto geparkeerd staat en de gekozen parkeertijd.
+U kunt uw parkeerplaats en resterende parkeertijd vinden op het Osmand dashboard en op de kaart zelf.
+Kan ter herinnering ook een afspraak in uw agenda zetten.</string>
   <string name="osmand_parking_plugin_name">Parkeerplaats</string>
   <string name="context_menu_item_add_parking_point">Markeer als parkeerlocatie</string>
   <string name="context_menu_item_delete_parking_point">Verwijder de parkeerpositie</string>
@@ -835,7 +844,8 @@
   
   <string name="global_app_allocated_memory_descr">Beschikbaar werkgeheugen %1$s MB (Android limiet %2$s MB, Dalvik %3$s MB).</string>
   <string name="global_app_allocated_memory">Beschikbaar werkgeheugen</string>
-  <string name="native_app_allocated_memory_descr">Werkgeheugen, gereserveerd door app %1$s MB (Dalvik %2$s MB, overig %3$s MB). Proportioneel werkgeheugen %4$s MB (Android limiet %5$s MB, Dalvik %6$s MB).</string>
+  <string name="native_app_allocated_memory_descr">Werkgeheugen, gereserveerd door app %1$s MB (Dalvik %2$s MB, overig %3$s MB).
+Proportioneel werkgeheugen %4$s MB (Android limiet %5$s MB, Dalvik %6$s MB).</string>
   <string name="native_app_allocated_memory">Totaal werkgeheugen</string>
   <string name="select_animate_speedup">Snelheid van de routesimulatie kiezen</string>
   <string name="osmand_parking_hours">Uur</string>
@@ -959,7 +969,7 @@
     <string name="add_as_last_destination_point">Als laatste tussenpunt toevoegen</string>
     <string name="add_as_first_destination_point">Als eerste Tussenpunt toevoegen</string>
     <string name="replace_destination_point">Bestemming vervangen</string>
-    <string name="new_destination_point_dialog">Er is al een Bestemming gekozen.</string>
+    <string name="new_destination_point_dialog">Er is al een Bestemming gekozen:</string>
     <string name="target_point">Bestemming %1$s</string>
     <string name="target_points">Bestemmingen</string>
     <string name="map_widget_monitoring_services">Registratiediensten</string>
@@ -1002,7 +1012,10 @@
     
 	<string name="index_srtm_parts">gedeelten</string>
     <string name="index_srtm_ele">Hoogtelijnen</string>
-    <string name="srtm_plugin_description">"Toon contourlijnen en een reliëflaag over de normale kaart. Uitermate praktisch voor sporters, wandelaars, trekkers, en iedereen die geïnteresseerd is in de hoogteverschillen van een landschap.\n\nDe wereldwijde gegevens (van 70 graden noorderbreedte tot 70 graden zuiderbreedte) zijn gebaseerd op metingen door SRTM (Shuttle Radar Topography Mission) en ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), een beeldvormend instrument aan boord van de satelliet Terra, het vlaggeschip van NASA\'s Earth Observing System. ASTER is een samenwerkingsverband tussen NASA, het Japanse Ministerie van Economie, Handel en Industrie (METI), en het Japan Space Systems (J-spacesystems). "</string>
+    <string name="srtm_plugin_description">"Toon contourlijnen en een reliëflaag over de normale kaart. Uitermate praktisch voor sporters, wandelaars, trekkers, en iedereen die geïnteresseerd is in de hoogteverschillen van een landschap.
+
+De wereldwijde gegevens (van 70 graden noorderbreedte tot 70 graden zuiderbreedte) zijn gebaseerd op metingen door SRTM (Shuttle Radar Topography Mission) en ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), een beeldvormend instrument aan boord van de satelliet Terra, het vlaggeschip van NASA\'s Earth Observing System. ASTER is een samenwerkingsverband tussen NASA, het Japanse Ministerie van Economie, Handel en Industrie (METI), en het Japan Space Systems (J-spacesystems).
+ "</string>
     <string name="srtm_plugin_name">Hoogtelijnen</string>
     <string name="download_select_map_types">Andere kaarten</string>
     <string name="download_srtm_maps">Hoogtelijnen</string>
@@ -1011,7 +1024,10 @@
 <string name="audionotes_plugin_description">De Audio/Video-Notities Plugin biedt de mogelijkheid voor het maken van Foto-, Audio- en VideoNotities tijdens een reis, direct via de knop in de kaartweergave, of via het menu bij een locatie op de kaart.</string>
     <string name="audionotes_plugin_name">Audio/Video-Notities</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd-plugin voor offline hoogtelijnen</string>
-    <string name="osmand_srtm_long_description_1000_chars">"Toon contourlijnen en een reliëflaag over de normale kaart. Uitermate praktisch voor sporters, wandelaars, trekkers, en iedereen die geïnteresseerd is in de hoogteverschillen van een landschap.\n\nDe wereldwijde gegevens (van 70 graden noorderbreedte tot 70 graden zuiderbreedte) zijn gebaseerd op metingen door SRTM (Shuttle Radar Topography Mission) en ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), een beeldvormend instrument aan boord van de satelliet Terra, het vlaggeschip van NASA\'s Earth Observing System. ASTER is een samenwerkingsverband tussen NASA, het Japanse Ministerie van Economie, Handel en Industrie (METI), en het Japan Space Systems (J-spacesystems). "</string>
+    <string name="osmand_srtm_long_description_1000_chars">"Toon contourlijnen en een reliëflaag over de normale kaart. Uitermate praktisch voor sporters, wandelaars, trekkers, en iedereen die geïnteresseerd is in de hoogteverschillen van een landschap.
+
+De wereldwijde gegevens (van 70 graden noorderbreedte tot 70 graden zuiderbreedte) zijn gebaseerd op metingen door SRTM (Shuttle Radar Topography Mission) en ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), een beeldvormend instrument aan boord van de satelliet Terra, het vlaggeschip van NASA\'s Earth Observing System. ASTER is een samenwerkingsverband tussen NASA, het Japanse Ministerie van Economie, Handel en Industrie (METI), en het Japan Space Systems (J-spacesystems).
+ "</string>
     
     
     <string name="map_widget_distancemeasurement">Afstandsmeting</string>
@@ -1081,9 +1097,149 @@
     <string name="map_widget_gps_info">GPS info</string>
     <string name="layer_hillshade">Reliëfweergave</string>
     <string name="osmand_play_title_30_chars">OsmAnd Kaarten &amp; Navigatie</string>
-	<string name="osmand_extended_description_4000_chars">" OsmAnd (OSM Automated Navigation Directions) is een applicatie om te navigeren en de kaart te bekijken dat gebruik maakt van de uitstekende gratis en wereldwijde kaarten van OpenStreetMap (OSM). Alle kaarten kunnen op het toestel bewaard worden voor offline gebruik. OsmAnd biedt navigatie met stemaanduidingen en beeldweergave voor auto, fiets en voetganger. De belangrijkste functies werken online en offline (geen internet nodig). Enkele van de eigenschappen: Navigatie - Werkt online (snel) of offline (geen datakosten in het buitenland) - Realtime navigatie met opgenomen stem of spraaksynthese - Rijstrookaanduiding, straatnamen en tijd van aankomst - Ondersteunt tussenpunten op de route en herberekent automatisch als wordt afgeweken van de route - Vind plaatsen op adres, soort (restaurant, hotel, benzinepomp, museum) of coördinaten Kaart bekijken - Toon positie en richting op de kaart - Kan de kaart richten naar noorden, bewegingsrichting of kompasrichting - Kan satellietbeelden weergeven (van Bing) - Kan overlays weergeven zoals GPX-tracks en extra kaarten met instelbare transparantie - Plaatsnamen weergegeven in Engels, lokale of fonetische weergave Gebruik gegevens van OpenStreetMap en Wikipedia - Uitstekende informatie van de beste samenwerkingsprojecten ter wereld - Wereldwijde kaarten van OpenStreetMap, per land of regio te downloaden - Wikipedia-interessepunten, fantastisch voor toerisme (niet in de gratis versie) - Onbeperkt gratis downloaden en gebruiken van kaarten (beperkt tot 16 kaartbestanden in de gratis versie) - Kaarten altijd up-to-date (tenminste eens per maand een nieuwe versie) - Compacte downloads van vectorkaarten - Keuze complete kaarten of alleen het wegennet (voorbeeld: heel Japan is 700 MB, of 200 MB voor alleen het wegennet) - Ook online-kaarten of bewaarde kaartsegmenten zijn mogelijk Veiligheid - Instelbaar: automatisch schakelen tussen dag- en nachtweergave - Instelbaar: weergave van maximumsnelheid en waarschuwing bij overschrijding - Instelbaar: automatisch zoomen naar gelang de snelheid - Deel je locatie zodat vrienden je kunnen vinden Functies voor fietsers en voetgangers - De kaarten bevatten voet-, wandel- en fietspaden, fantastisch voor buitenactiviteiten - Speciale navigatie en weergave voor fietsers en voetgangers - Kan OV-haltes (trein/bus/tram) weergeven inclusief lijnnummers - Kan afgelegde pad bewaren als GPX-bestand of online - Kan snelheid en hoogte weergeven - Kan hoogtelijnen en reliëf weergeven (met extra plugin) Direct bijdragen aan OpenStreetMap - Meld fouten in de kaart - Upload GPX-tracks naar OpenStreetMap in de app - Maak interessepunten en stuur ze naar OpenStreetMap (ook later indien offline) - Kan reis vastleggen op de achtergrond (toestel in slaapstand) OsmAnd is open-source en wordt actief ontwikkeld. Iedereen kan meewerken door fouten te melden, vertalingen te verbeteren of nieuwe functies te programmeren. Het project ontwikkelt zich snel en divers door deze interactie met gebruikers en ontwikkelaars. Het project rust op financiële bijdragen voor de ontwikkeling, het programmeren en het testen van nieuwe functies. Door OsmAnd+ te kopen maakt u dit programma nog fantastischer! Je kan ook specifieke functies financieel ondersteunen of een algemene donatie doen op OsmAnd.net. Indicatie van kaartkwaliteit en -compleetheid: - West-Europa **** - Oost-Europa: *** - Rusland: *** - Noord-Amerika: *** - Zuid-Amerika: ** - Azie: ** - Japan &amp; Korea: *** - Midden-Oosten: ** - Afrika: ** - Antarctica: * Lijst van ondersteunde landen (praktisch de hele wereld!): Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, Argentinie, Armenie, Aruba, Australie, Azerbaijan, Bahamas, Bahrein, Bangladesh, Barbados, Belarus, Belgie, Belize, Benin, Bermuda, Bhutan, Bolivia, Bonaire, Bosnie en Herzegovina, Botswana, Brazilie, Britse Maagdeneilanden, Brunei, Bulgarije, Burkina Faso, Burundi, Cambodia, Canada, Central African Republic, Chile, China, Colombia, Comoros, Congo, Costa Rica, Ivoorkust, Cuba, Curaçao, Cyprus, Denmark, Djibouti, Dominica, Dominican Republic, Duitsland, Ecuador, Egypte, El Salvador, Equatoriaal Guinea, Eritrea, Estland, Ethiopie, Fiji, Finland, Frankrijk, Frans Guiana, Frans Polynesia, Gabon, Gambia, Georgia, Ghana, Gibraltar, Grenada, Griekenland, Groenland, Guadeloupe, Guam, Guatemala, Guernsey, Guinea, Guinee-Bissau, Guyana, Haiti, Vaticaanstad, Honduras, Hong Kong, Hongarije, Ierland, IJsland, India, Indonesie, Iran, Irak, Isle of Man, Israel, Italie, Jamaica, Japan, Jemen, Jersey, Jordanie, Kaapverdie, Kameroen, Kazakhstan, Kenya, Kiribati, Koeweit, Kroatie, Noord-Korea en Zuid-Korea, Kyrgyzstan, Laos, Lebanon, Lesotho, Letland, Liberia, Libie, Liechtenstein, Litouwen, Luxemburg, Macao, Macedonie, Madagascar, Malawi, Maleisie, Malediven, Mali, Malta, Marokko, Martinique, Mauritanie, Mauritius, Mayotte, Mexico, Micronesie, Moldavie, Monaco, Mongolie, Montenegro, Montserrat, Mozambique, Myanmar, Namibia, Nauru, Nederland, Nederlandse Antillen, Nepal, Nicaragua, Nieuw-Caledoniae, Nieuw-Zeeland, Niger, Nigeria, Noorwegen, Oeganda, Oman, Oostenrijk, Pakistan, Palau, Palestinian Territory, Panama, Papua New Guinea, Paraguay, Peru, Philippijnen, Polen, Portugal, Puerto Rico, Qatar, Romenie, Rusland, Rwanda, Saint Barthelemy, Saint Helena, Saint Kitts and Nevis, Saint Lucia, Saint Martin, Saint Pierre and Miquelon, Saint Vincent and the Grenadines, Samoa, San Marino, Saudi-Arabie, Senegal, Servie, Seychellen, Sierra Leone, Singapore, Slovakije, Slovenie, Somalie, Spanje, Sri Lanka, Soedan, Suriname, Swaziland, Syrie, Taiwan, Tajikistan, Tanzania, Thailand, Timor-Leste, Tjechie, Togo, Tokelau, Tonga, Trinidad and Tobago, Tsjaad, Tunesie, Turkije, Turkmenistan, Tuvalu, Ukraine, United Arab Emirates, United Kingdom (UK), United States of America (USA), Uruguay, Uzbekistan, Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Zambia, Zimbabwe, Zuid-Afrika, Zuid-Georgia, Zuid-Soedan, Zweden, Zwitserland. "</string>
+	<string name="osmand_extended_description_4000_chars">"
+OsmAnd (OSM Automated Navigation Directions) is een applicatie om te navigeren en de kaart te bekijken dat gebruik maakt van de uitstekende gratis en wereldwijde kaarten van OpenStreetMap (OSM). Alle kaarten kunnen op het toestel bewaard worden voor offline gebruik.
+OsmAnd biedt navigatie met stemaanduidingen en beeldweergave voor auto, fiets en voetganger.
+De belangrijkste functies werken offline (geen internetverbinding nodig).
+
+Enkele van de eigenschappen:
+
+Navigatie 
+ - Werkt online (snel) of offline (geen datakosten in het buitenland)
+ - Realtime navigatie met opgenomen stem of spraaksynthese
+ - Rijstrookaanduiding, straatnamen en tijd van aankomst
+ - Ondersteunt tussenpunten op de route en herberekent automatisch als wordt afgeweken van de route
+ - Vindt plaatsen op adres, soort (restaurant, hotel, benzinepomp, museum) of coördinaten
+
+Kaart bekijken 
+ - Toont positie en richting op de kaart
+  - Kan de kaart richten naar het noorden, bewegingsrichting of kompasrichting
+  - Kan satellietbeelden weergeven (van Bing, alleen online)
+  - Kan overlays weergeven zoals GPX-tracks en extra kaarten, met instelbare transparantie
+  - Plaatsnamen weergegeven in Engels, lokale of fonetische weergave 
+
+Gebruik gegevens van OpenStreetMap en Wikipedia
+  - Uitstekende informatie van de beste samenwerkingsprojecten ter wereld
+  - Wereldwijde kaarten van OpenStreetMap, per land of regio te downloaden
+  - Wikipedia-interessepunten, fantastisch voor toerisme (niet in de gratis versie)
+  - Onbeperkt gratis downloaden en gebruiken van kaarten (beperkt tot 16 kaartbestanden in de gratis versie)
+  - Kaarten altijd up-to-date (tenminste eens per maand een nieuwe versie)
+  - Compacte downloads van vectorkaarten
+  - Keuze complete kaarten of alleen het wegennet (voorbeeld: heel Japan is 700 MB, of 200 MB voor alleen het wegennet)
+  - Ook online-kaarten of bewaarde kaartsegmenten zijn mogelijk
+
+Veiligheid
+  - Instelbaar: automatisch schakelen tussen dag- en nachtweergave
+  - Instelbaar: weergave van maximumsnelheid en waarschuwing bij overschrijding
+  - Instelbaar: automatisch zoomen naar gelang de snelheid
+  - Deel je locatie zodat vrienden je kunnen vinden
+
+Functies voor fietsers en voetgangers
+  - De kaarten bevatten voet-, wandel- en fietspaden, fantastisch voor buitenactiviteiten
+  - Speciale navigatie en weergave voor fietsers en voetgangers
+  - Kan OV-haltes (trein/bus/tram) weergeven inclusief lijnnummers
+  - Kan de afgelegde weg bewaren als GPX-bestand of online 
+  - Kan snelheid en hoogte weergeven
+  - Kan hoogtelijnen en reliëf weergeven (met extra plugin)
+
+Direct bijdragen aan OpenStreetMap
+  - Meld fouten in de kaart
+  - Upload GPX-tracks naar OpenStreetMap vanuit de app
+  - Maak interessepunten en stuur ze naar OpenStreetMap (ook later indien offline)
+  - Kan reis vastleggen op de achtergrond (toestel in slaapstand) 
+
+OsmAnd is open-source en wordt actief ontwikkeld. Iedereen kan meewerken door fouten te melden, vertalingen te verbeteren of nieuwe functies te programmeren.
+Het project ontwikkelt zich snel en divers door deze interactie met gebruikers en ontwikkelaars. Het project is afhankelijk van financiële bijdragen voor de ontwikkeling, het programmeren en het testen van nieuwe functies. 
+Door OsmAnd+ te kopen maakt u dit programma nog fantastischer!
+Je kan ook specifieke functies financieel ondersteunen of een algemene donatie doen op OsmAnd.net.
+
+Indicatie van kaartkwaliteit en -compleetheid:
+  - West-Europa **** 
+  - Oost-Europa: ***
+  - Rusland: ***
+  - Noord-Amerika: ***
+  - Zuid-Amerika: **
+  - Azie: **
+  - Japan &amp; Korea: ***
+  - Midden-Oosten: **
+  - Afrika: **
+  - Antarctica: *
+
+Lijst van ondersteunde landen (feitelijk de hele wereld!):
+Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, Argentinie, Armenie, Aruba, Australie, Azerbaijan, Bahamas, Bahrein, Bangladesh, Barbados, Belarus, Belgie, Belize, Benin, Bermuda, Bhutan, Bolivia, Bonaire, Bosnie en Herzegovina, Botswana, Brazilie, Britse Maagdeneilanden, Brunei, Bulgarije, Burkina Faso, Burundi, Cambodia, Canada, Central African Republic, Chile, China, Colombia, Comoros, Congo, Costa Rica, Ivoorkust, Cuba, Curaçao, Cyprus, Denmark, Djibouti, Dominica, Dominican Republic, Duitsland, Ecuador, Egypte, El Salvador, Equatoriaal Guinea, Eritrea, Estland, Ethiopie, Fiji, Finland, Frankrijk, Frans Guiana, Frans Polynesia, Gabon, Gambia, Georgia, Ghana, Gibraltar, Grenada, Griekenland, Groenland, Guadeloupe, Guam, Guatemala, Guernsey, Guinea, Guinee-Bissau, Guyana, Haiti, Vaticaanstad, Honduras, Hong Kong, Hongarije, Ierland, IJsland, India, Indonesie, Iran, Irak, Isle of Man, Israel, Italie, Jamaica, Japan, Jemen, Jersey, Jordanie, Kaapverdie, Kameroen, Kazakhstan, Kenya, Kiribati, Koeweit, Kroatie, Noord-Korea en Zuid-Korea, Kyrgyzstan, Laos, Lebanon, Lesotho, Letland, Liberia, Libie, Liechtenstein, Litouwen, Luxemburg, Macao, Macedonie, Madagascar, Malawi, Maleisie, Malediven, Mali, Malta, Marokko, Martinique, Mauritanie, Mauritius, Mayotte, Mexico, Micronesie, Moldavie, Monaco, Mongolie, Montenegro, Montserrat, Mozambique, Myanmar, Namibia, Nauru, Nederland, Nederlandse Antillen, Nepal, Nicaragua, Nieuw-Caledoniae, Nieuw-Zeeland, Niger, Nigeria, Noorwegen, Oeganda, Oman, Oostenrijk, Pakistan, Palau, Palestinian Territory, Panama, Papua New Guinea, Paraguay, Peru, Philippijnen, Polen, Portugal, Puerto Rico, Qatar, Romenie, Rusland, Rwanda, Saint Barthelemy, Saint Helena, Saint Kitts and Nevis, Saint Lucia, Saint Martin, Saint Pierre and Miquelon, Saint Vincent and the Grenadines, Samoa, San Marino, Saudi-Arabie, Senegal, Servie, Seychellen, Sierra Leone, Singapore, Slovakije, Slovenie, Somalie, Spanje, Sri Lanka, Soedan, Suriname, Swaziland, Syrie, Taiwan, Tajikistan, Tanzania, Thailand, Timor-Leste, Tjechie, Togo, Tokelau, Tonga, Trinidad and Tobago, Tsjaad, Tunesie, Turkije, Turkmenistan, Tuvalu, Ukraine, United Arab Emirates, United Kingdom (UK), United States of America (USA), Uruguay, Uzbekistan, Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Zambia, Zimbabwe, Zuid-Afrika, Zuid-Georgia, Zuid-Soedan, Zweden, Zwitserland.
+ "</string>
 	<string name="osmand_plus_play_title_30_chars">OsmAnd+ Kaarten &amp; Navigatie</string>
-	<string name="osmand_plus_extended_description_4000_chars">" OsmAnd (OSM Automated Navigation Directions) is een applicatie om te navigeren en de kaart te bekijken dat gebruik maakt van de uitstekende gratis en wereldwijde kaarten van OpenStreetMap (OSM). Alle kaarten kunnen op het toestel bewaard worden voor offline gebruik. OsmAnd biedt navigatie met stemaanduidingen en beeldweergave voor auto, fiets en voetganger. De belangrijkste functies werken online en offline (geen internet nodig). OsmAnd+ is de betaalde versie. Door deze te kopen ondersteun je het project, betaal je mee aan nieuwe ontwikkelingen, en ontvang je de laatste updates. Enkele van de eigenschappen: Navigatie - Werkt online (snel) of offline (geen datakosten in het buitenland) - Realtime navigatie met opgenomen stem of spraaksynthese - Rijstrookaanduiding, straatnamen en tijd van aankomst - Ondersteunt tussenpunten op de route en herberekent automatisch als wordt afgeweken van de route - Vind plaatsen op adres, soort (restaurant, hotel, benzinepomp, museum) of coördinaten Kaart bekijken - Toon positie en richting op de kaart - Kan de kaart richten naar noorden, bewegingsrichting of kompasrichting - Kan satellietbeelden weergeven (van Bing) - Kan overlays weergeven zoals GPX-tracks en extra kaarten met instelbare transparantie - Plaatsnamen weergegeven in Engels, lokale of fonetische weergave Gebruik gegevens van OpenStreetMap en Wikipedia - Uitstekende informatie van de beste samenwerkingsprojecten ter wereld - Wereldwijde kaarten van OpenStreetMap, per land of regio te downloaden - Wikipedia-interessepunten, fantastisch voor toerisme - Onbeperkt gratis downloaden en gebruiken van kaarten - Kaarten altijd up-to-date (tenminste eens per maand een nieuwe versie) - Compacte downloads van vectorkaarten - Keuze complete kaarten of alleen het wegennet (voorbeeld: heel Japan is 700 MB, of 200 MB voor alleen het wegennet) - Ook online-kaarten of bewaarde kaartsegmenten zijn mogelijk Veiligheid - Instelbaar: automatisch schakelen tussen dag- en nachtweergave - Instelbaar: weergave van maximumsnelheid en waarschuwing bij overschrijding - Instelbaar: automatisch zoomen naar gelang de snelheid - Deel je locatie zodat vrienden je kunnen vinden Functies voor fietsers en voetgangers - De kaarten bevatten voet-, wandel- en fietspaden, fantastisch voor buitenactiviteiten - Speciale navigatie en weergave voor fietsers en voetgangers - Kan OV-haltes (trein/bus/tram) weergeven inclusief lijnnummers - Kan afgelegde pad bewaren als GPX-bestand of online - Kan snelheid en hoogte weergeven - Kan hoogtelijnen en reliëf weergeven (met extra plugin) Direct bijdragen aan OpenStreetMap - Meld fouten in de kaart - Upload GPX-tracks naar OpenStreetMap in de app - Maak interessepunten en stuur ze naar OpenStreetMap (ook later indien offline) - Kan reis vastleggen op de achtergrond (toestel in slaapstand) OsmAnd is open-source en wordt actief ontwikkeld. Iedereen kan meewerken door fouten te melden, vertalingen te verbeteren of nieuwe functies te programmeren. Het project ontwikkelt zich snel en divers door deze interactie met gebruikers en ontwikkelaars. Het project rust op financiële bijdragen voor de ontwikkeling, het programmeren en het testen van nieuwe functies. Door OsmAnd+ te kopen maak je dit programma nog fantastischer! Je kan ook specifieke functies financieel ondersteunen of een algemene donatie doen op OsmAnd.net. Indicatie van kaartkwaliteit en -compleetheid: - West-Europa **** - Oost-Europa: *** - Rusland: *** - Noord-Amerika: *** - Zuid-Amerika: ** - Azie: ** - Japan &amp; Korea: *** - Midden-Oosten: ** - Afrika: ** - Antarctica: * Lijst van ondersteunde landen (praktisch de hele wereld!): Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, Argentinie, Armenie, Aruba, Australie, Azerbaijan, Bahamas, Bahrein, Bangladesh, Barbados, Belarus, Belgie, Belize, Benin, Bermuda, Bhutan, Bolivia, Bonaire, Bosnie en Herzegovina, Botswana, Brazilie, Britse Maagdeneilanden, Brunei, Bulgarije, Burkina Faso, Burundi, Cambodia, Canada, Central African Republic, Chile, China, Colombia, Comoros, Congo, Costa Rica, Ivoorkust, Cuba, Curaçao, Cyprus, Denmark, Djibouti, Dominica, Dominican Republic, Duitsland, Ecuador, Egypte, El Salvador, Equatoriaal Guinea, Eritrea, Estland, Ethiopie, Fiji, Finland, Frankrijk, Frans Guiana, Frans Polynesia, Gabon, Gambia, Georgia, Ghana, Gibraltar, Grenada, Griekenland, Groenland, Guadeloupe, Guam, Guatemala, Guernsey, Guinea, Guinee-Bissau, Guyana, Haiti, Vaticaanstad, Honduras, Hong Kong, Hongarije, Ierland, IJsland, India, Indonesie, Iran, Irak, Isle of Man, Israel, Italie, Jamaica, Japan, Jemen, Jersey, Jordanie, Kaapverdie, Kameroen, Kazakhstan, Kenya, Kiribati, Koeweit, Kroatie, Noord-Korea en Zuid-Korea, Kyrgyzstan, Laos, Lebanon, Lesotho, Letland, Liberia, Libie, Liechtenstein, Litouwen, Luxemburg, Macao, Macedonie, Madagascar, Malawi, Maleisie, Malediven, Mali, Malta, Marokko, Martinique, Mauritanie, Mauritius, Mayotte, Mexico, Micronesie, Moldavie, Monaco, Mongolie, Montenegro, Montserrat, Mozambique, Myanmar, Namibia, Nauru, Nederland, Nederlandse Antillen, Nepal, Nicaragua, Nieuw-Caledoniae, Nieuw-Zeeland, Niger, Nigeria, Noorwegen, Oeganda, Oman, Oostenrijk, Pakistan, Palau, Palestinian Territory, Panama, Papua New Guinea, Paraguay, Peru, Philippijnen, Polen, Portugal, Puerto Rico, Qatar, Romenie, Rusland, Rwanda, Saint Barthelemy, Saint Helena, Saint Kitts and Nevis, Saint Lucia, Saint Martin, Saint Pierre and Miquelon, Saint Vincent and the Grenadines, Samoa, San Marino, Saudi-Arabie, Senegal, Servie, Seychellen, Sierra Leone, Singapore, Slovakije, Slovenie, Somalie, Spanje, Sri Lanka, Soedan, Suriname, Swaziland, Syrie, Taiwan, Tajikistan, Tanzania, Thailand, Timor-Leste, Tjechie, Togo, Tokelau, Tonga, Trinidad and Tobago, Tsjaad, Tunesie, Turkije, Turkmenistan, Tuvalu, Ukraine, United Arab Emirates, United Kingdom (UK), United States of America (USA), Uruguay, Uzbekistan, Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Zambia, Zimbabwe, Zuid-Afrika, Zuid-Georgia, Zuid-Soedan, Zweden, Zwitserland. "</string>
+	<string name="osmand_plus_extended_description_4000_chars">"
+OsmAnd (OSM Automated Navigation Directions) is een applicatie om te navigeren en de kaart te bekijken dat gebruik maakt van de uitstekende gratis en wereldwijde kaarten van OpenStreetMap (OSM). Alle kaarten kunnen op het toestel bewaard worden voor offline gebruik. OsmAnd biedt navigatie met stemaanduidingen en beeldweergave voor auto, fiets en voetganger.
+De belangrijkste functies werken online en offline (geen internet nodig). 
+
+OsmAnd+ is de betaalde versie. Door deze te kopen ondersteun je het project, betaal je mee aan nieuwe ontwikkelingen, en ontvang je de laatste updates.
+
+Enkele van de eigenschappen:
+
+Navigatie
+ - Werkt online (snel) of offline (geen datakosten in het buitenland)
+ - Realtime navigatie met opgenomen stem of spraaksynthese
+ - Rijstrookaanduiding, straatnamen en tijd van aankomst
+ - Ondersteunt tussenpunten op de route en herberekent automatisch als wordt afgeweken van de route
+ - Vindt plaatsen op adres, soort (restaurant, hotel, benzinepomp, museum) of coördinaten
+
+Kaart bekijken
+ - Toont positie en richting op de kaart
+ - Kan de kaart richten naar noorden, bewegingsrichting of kompasrichting
+ - Kan satellietbeelden weergeven (van Bing)
+ - Kan overlays weergeven zoals GPX-tracks en extra kaarten met instelbare transparantie
+ - Plaatsnamen weergegeven in Engels, lokale of fonetische weergave
+
+Gebruik gegevens van OpenStreetMap en Wikipedia
+ - Uitstekende informatie van de beste samenwerkingsprojecten ter wereld
+ - Wereldwijde kaarten van OpenStreetMap, per land of regio te downloaden
+ - Wikipedia-interessepunten, fantastisch voor toerisme
+ - Onbeperkt gratis downloaden en gebruiken van kaarten
+ - Kaarten altijd up-to-date (tenminste eens per maand een nieuwe versie)
+ - Compacte downloads van vectorkaarten
+ - Keuze complete kaarten of alleen het wegennet (voorbeeld: heel Japan is 700 MB, of 200 MB voor alleen het wegennet)
+ - Ook online-kaarten of bewaarde kaartsegmenten zijn mogelijk
+
+Veiligheid
+ - Instelbaar: automatisch schakelen tussen dag- en nachtweergave
+ - Instelbaar: weergave van maximumsnelheid en waarschuwing bij overschrijding
+ - Instelbaar: automatisch zoomen naar gelang de snelheid
+ - Deel je locatie zodat vrienden je kunnen vinden
+
+Functies voor fietsers en voetgangers
+ - De kaarten bevatten voet-, wandel- en fietspaden, fantastisch voor buitenactiviteiten
+ - Speciale navigatie en weergave voor fietsers en voetgangers
+ - Kan OV-haltes (trein/bus/tram) weergeven inclusief lijnnummers
+ - Kan de afgelegde weg bewaren als GPX-bestand of online
+ - Kan snelheid en hoogte weergeven
+ - Kan hoogtelijnen en reliëf weergeven (met extra plugin)
+
+ Direct bijdragen aan OpenStreetMap
+ - Meld fouten in de kaart
+ - Upload GPX-tracks naar OpenStreetMap vanuit de app
+ - Maak interessepunten en stuur ze naar OpenStreetMap (ook later indien offline)
+ - Kan reis vastleggen op de achtergrond (toestel in slaapstand)
+
+OsmAnd is open-source en wordt actief ontwikkeld. Iedereen kan meewerken door fouten te melden, vertalingen te verbeteren of nieuwe functies te programmeren.
+Het project ontwikkelt zich snel en divers door deze interactie met gebruikers en ontwikkelaars. Het project is afhankelijk van op financiële bijdragen voor de ontwikkeling, het programmeren en het testen van nieuwe functies. 
+Door OsmAnd+ te kopen maak je dit programma nog fantastischer! Je kan ook specifieke functies financieel ondersteunen of een algemene donatie doen op OsmAnd.net.
+
+Indicatie van kaartkwaliteit en -compleetheid:
+ - West-Europa ****
+ - Oost-Europa: ***
+ - Rusland: ***
+ - Noord-Amerika: ***
+ - Zuid-Amerika: **
+ - Azie: **
+ - Japan &amp; Korea: ***
+ - Midden-Oosten: **
+ - Afrika: **
+ - Antarctica: *
+
+Lijst van ondersteunde landen (feitelijk de hele wereld!): 
+Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, Argentinie, Armenie, Aruba, Australie, Azerbaijan, Bahamas, Bahrein, Bangladesh, Barbados, Belarus, Belgie, Belize, Benin, Bermuda, Bhutan, Bolivia, Bonaire, Bosnie en Herzegovina, Botswana, Brazilie, Britse Maagdeneilanden, Brunei, Bulgarije, Burkina Faso, Burundi, Cambodia, Canada, Central African Republic, Chile, China, Colombia, Comoros, Congo, Costa Rica, Ivoorkust, Cuba, Curaçao, Cyprus, Denmark, Djibouti, Dominica, Dominican Republic, Duitsland, Ecuador, Egypte, El Salvador, Equatoriaal Guinea, Eritrea, Estland, Ethiopie, Fiji, Finland, Frankrijk, Frans Guiana, Frans Polynesia, Gabon, Gambia, Georgia, Ghana, Gibraltar, Grenada, Griekenland, Groenland, Guadeloupe, Guam, Guatemala, Guernsey, Guinea, Guinee-Bissau, Guyana, Haiti, Vaticaanstad, Honduras, Hong Kong, Hongarije, Ierland, IJsland, India, Indonesie, Iran, Irak, Isle of Man, Israel, Italie, Jamaica, Japan, Jemen, Jersey, Jordanie, Kaapverdie, Kameroen, Kazakhstan, Kenya, Kiribati, Koeweit, Kroatie, Noord-Korea en Zuid-Korea, Kyrgyzstan, Laos, Lebanon, Lesotho, Letland, Liberia, Libie, Liechtenstein, Litouwen, Luxemburg, Macao, Macedonie, Madagascar, Malawi, Maleisie, Malediven, Mali, Malta, Marokko, Martinique, Mauritanie, Mauritius, Mayotte, Mexico, Micronesie, Moldavie, Monaco, Mongolie, Montenegro, Montserrat, Mozambique, Myanmar, Namibia, Nauru, Nederland, Nederlandse Antillen, Nepal, Nicaragua, Nieuw-Caledoniae, Nieuw-Zeeland, Niger, Nigeria, Noorwegen, Oeganda, Oman, Oostenrijk, Pakistan, Palau, Palestinian Territory, Panama, Papua New Guinea, Paraguay, Peru, Philippijnen, Polen, Portugal, Puerto Rico, Qatar, Romenie, Rusland, Rwanda, Saint Barthelemy, Saint Helena, Saint Kitts and Nevis, Saint Lucia, Saint Martin, Saint Pierre and Miquelon, Saint Vincent and the Grenadines, Samoa, San Marino, Saudi-Arabie, Senegal, Servie, Seychellen, Sierra Leone, Singapore, Slovakije, Slovenie, Somalie, Spanje, Sri Lanka, Soedan, Suriname, Swaziland, Syrie, Taiwan, Tajikistan, Tanzania, Thailand, Timor-Leste, Tjechie, Togo, Tokelau, Tonga, Trinidad and Tobago, Tsjaad, Tunesie, Turkije, Turkmenistan, Tuvalu, Ukraine, United Arab Emirates, United Kingdom (UK), United States of America (USA), Uruguay, Uzbekistan, Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Zambia, Zimbabwe, Zuid-Afrika, Zuid-Georgia, Zuid-Soedan, Zweden, Zwitserland.
+ "</string>
 	
     
 	<string name="hno">Huisnummer</string>
@@ -1123,7 +1279,13 @@
     <string name="gpx_saved_sucessfully">GPX-bestand succesvol opgeslagen als {0}</string>
     <string name="osmand_distance_planning_plugin_description">Maak een route door op de kaart te tikken of gebruik of wijzig GPX-bestanden. Plan een reis en bereken de afstand tussen punten. Het resultaat kan worden bewaard als GPX-bestand, om later te gebruiken als navigatieroute.</string>
     <string name="osmand_distance_planning_plugin_name">Afstand meten &amp; Route plannen</string>
-    <string name="use_distance_measurement_help">* Klik om een punt te markeren.\n * Klik lang op de kaart om het vorige punt te verwijderen.\n * Klik lang op een punt om de beschrijving te zien en toe te voegen.\n * Klik op de meet-widget om meer acties te zien.</string>
+    <string name="use_distance_measurement_help">* Klik om een punt te markeren.
+
+* Klik lang op de kaart om het vorige punt te verwijderen.
+
+* Klik lang op een punt om de beschrijving te zien en toe te voegen.
+
+* Klik op de meet-widget om meer acties te zien.</string>
     <string name="distance_measurement_start_editing">Begin met bewerken</string>
     <string name="distance_measurement_finish_editing">Bewerken beëindigen</string>
     <string name="distance_measurement_finish_subtrack">Begin een nieuwe subtrack</string>
@@ -1239,7 +1401,10 @@
     <string name="guidance_preferences_descr">Navigatievoorkeuren</string>
     <string name="routing_preferences_descr">Routeberekening-voorkeuren</string>
     <string name="app_mode_truck">Vrachtauto</string>
-    <string name="android_19_location_disabled">Vanaf Android 4.4 (KitKat) kunnen kaarten niet meer worden opgeslagen in de bestaande map(%s). Wil je een nieuwe map maken op de toegestane locatie en de OsmAnd-bestanden daar naartoe kopiëren?\n Let op: oude bestanden blijven bestaan. U kunt ze zelf verwijderen.\n Let op: het is niet meer mogelijk bestanden te delen tussen OsmAnd en Osmand+.</string>
+    <string name="android_19_location_disabled">Vanaf Android 4.4 (KitKat) kunnen kaarten niet meer worden opgeslagen in de bestaande map(%s). 
+Wil je een nieuwe map maken op de toegestane locatie en de OsmAnd-bestanden daar naartoe kopiëren?
+ Let op: oude bestanden blijven bestaan. U kunt ze zelf verwijderen.
+ Let op: het is niet meer mogelijk bestanden te delen tussen OsmAnd en Osmand+.</string>
     
     <string name="copying_osmand_one_file_descr">Kopieer bestand (%s) naar de nieuwe locatie…</string>
     <string name="copying_osmand_files_descr">OsmAnd-bestanden worden naar de nieuwe locatie gekopieerd (%s)…</string>
@@ -1330,7 +1495,12 @@
 	<string name="navigation_intent_invalid">Ongeldig formaat: %s</string>
 <string name="osmo_settings_uuid">Uniek device-ID</string>
     <string name="osmo_settings_descr">Configureer monitor instellingen en maak een persoonlijk monitor-kanaal</string>
-    <string name="osmo_plugin_description">"Deze plug-in is voor OpenStreetMap Monitoring\", zie https://osmo.mobi.\n\nJe kunt alle toestellen van een groep deelnemers volgen. Er zijn mogelijkheden voor het permanent of tijdelijk volgen.\n\nAnonieme groepen kunnen makkelijk gemaakt worden, bestaan maar een beperkt aantal dagen en zijn beperkt in de mogelijkheden, zoals het ontbreken van beheer op afstand en een groepsbeheerder. Volledig functionele groepen moeten worden aangemaakt op de website en alleen geregistreerde leden kunnen ze gebruiken. "</string>
+    <string name="osmo_plugin_description">"Deze plug-in is voor OpenStreetMap Monitoring\", zie https://osmo.mobi.
+
+Je kunt alle toestellen van een groep deelnemers volgen. Er zijn mogelijkheden voor het permanent of tijdelijk volgen.
+
+Anonieme groepen kunnen makkelijk gemaakt worden, bestaan maar een beperkt aantal dagen en zijn beperkt in de mogelijkheden, zoals het ontbreken van beheer op afstand en een groepsbeheerder. Volledig functionele groepen moeten worden aangemaakt op de website en alleen geregistreerde leden kunnen ze gebruiken.
+ "</string>
     <string name="osmo_plugin_name">OsMo (OSM monitoring)</string>
     <string name="osmo_settings">OsMo</string>
    	<string name="keep_informing_never">Alleen handmatig (druk op de pijl)</string>
@@ -1470,12 +1640,24 @@
     <string name="osmo_auto_connect">Automatisch verbinding maken</string>
     <string name="osmo_start_service">OsMo service</string>
     <string name="osmo_gpx_track_downloaded">OsMo track: %1$s opgehaald.</string>
-    <string name="osmo_group_information_desc">" - Geef een naam en omschrijving om een groep te maken\n- Hier gemaakte groepen zijn van het type \'Simple\'; zie voor uitleg https://osmo.mobi/g/new\n- Via de website kunnen groepen beheerd worden en paden en punten beschikbaar worden gemaakt\n- Een groep is voor meerdere gebruikers, als het niet de POI-groep is\n- Er kunnen maximaal 8 deelnemers in een prive-groep\n- Gebruiksvoorwaarden zijn beschikbaar op de site osmo.mobi\n- Als u een groep nodig heeft met andere voorwaarden, neem dan contact op met support: osmo.mobi@gmail.com "</string>
+    <string name="osmo_group_information_desc">"
+ - Geef een naam en omschrijving om een groep te maken
+- Hier gemaakte groepen zijn van het type \'Simple\'; zie voor uitleg https://osmo.mobi/g/new
+- Via de website kunnen groepen beheerd worden en paden en punten beschikbaar worden gemaakt
+- Een groep is voor meerdere gebruikers, als het niet de POI-groep is
+- Er kunnen maximaal 8 deelnemers in een prive-groep
+- Gebruiksvoorwaarden zijn beschikbaar op de site osmo.mobi
+- Als u een groep nodig heeft met andere voorwaarden, neem dan contact op met support: osmo.mobi@gmail.com
+ "</string>
     <string name="osmo_group_information">Lees dit voordat u een groep maakt!</string>
     <string name="osmo_not_signed_in">Kon niet inloggen op OsMo</string>
     <string name="osmo_group_by_invite">Alleen toegang met uitnodiging</string>
     <string name="osmo_auth_error_short">Aanmelding mislukt</string>
-    <string name="osmo_auth_error">OsMo aanmeldings fout: %1$s.\nMogelijk is de service tijdelijk niet beschikbaar of is uw registratie verlopen.\nWilt u verder gaan met een nieuwe registratie?</string>
+    <string name="osmo_auth_error">OsMo aanmeldings fout: %1$s.
+
+Mogelijk is de service tijdelijk niet beschikbaar of is uw registratie verlopen.
+
+Wilt u verder gaan met een nieuwe registratie?</string>
     <string name="rendering_attr_hideBuildings_name">Gebouwen</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Voet- en fietspaden</string>
     <string name="rendering_attr_hideText_name">Tekst</string>
@@ -1551,7 +1733,10 @@
     <string name="int_hour">u.</string>
     <string name="duration">Duur</string>
     <string name="distance">Afstand</string>
-    <string name="record_plugin_description">"Registreer uw afgelegde weg als track in een GPX-bestand. Gebruik de opnameknop op het kaartscherm, of laat alle reizen automatisch opslaan.\n\nOpgenomen tracks kunnen worden gedeeld met vrienden of worden gebruikt als OSM-bijdragen. Atleten kunnen opgenomen tracks gebruiken om hun trainingen te volgen. OsmAnd kan tracks analyseren (rondetijden, gemiddelde snelheid enz.) en tracks kunnen natuurlijk ook met andere programma\'s worden geanalyseerd. "</string>
+    <string name="record_plugin_description">"Registreer uw afgelegde weg als track in een GPX-bestand. Gebruik de opnameknop op het kaartscherm, of laat alle reizen automatisch opslaan.
+
+Opgenomen tracks kunnen worden gedeeld met vrienden of worden gebruikt als OSM-bijdragen. Atleten kunnen opgenomen tracks gebruiken om hun trainingen te volgen. OsmAnd kan tracks analyseren (rondetijden, gemiddelde snelheid enz.) en tracks kunnen natuurlijk ook met andere programma\'s worden geanalyseerd.
+ "</string>
     <string name="save_track_to_gpx_globally">Track maken in GPX-bestand</string>
 	<string name="save_track_to_gpx_globally_descr">Het registreren van de afgelegde weg in een GPX-bestand kan worden aan- en uitgeschakeld met een knop op het kaartscherm</string>
 	<string name="save_track_interval_globally">Interval tussen geregistreerde punten</string>
@@ -1680,10 +1865,29 @@
     <string name="track_segments">GPX-track-segmenten</string>
 	<string name="track_points">GPX-track-punten</string>
 	<string name="plugin_touringview_name">Touring-kaartweergave</string>
-	<string name="plugin_touringview_descr">"Verandert de kaartstijl in \'Touring-weergave (meer contrast en detail)\'. Dit is een speciale, meer gedetailleerde weergave voor reizigers en professionele chauffeurs.\n\nDeze weergave biedt, op ieder zoom niveau van de kaart, de maximale hoeveelheid aan reisgegevens die beschikbaar is in de kaart (met name wegen, onverharde wegen, paden, en oriëntatiepunten).\n\nAlle soorten wegen zijn goed te herkennen door een eenduidige kleurcodering, wat bijvoorbeeld handig is bij het besturen van een groot voertuig.\n\nOok zijn er speciale touring-opties zoals fietsroutes en bergwandelpaden.\n\nEen speciale kaart downloaden is niet nodig; de weergave wordt gecreëerd van de gewone kaartgegevens.\n\nDeze weergave kan worden aan- en uitgezet door het kiezen van \'Touring-weergave (meer contrast en detail)\' onder \'Kaart instellen\' en dan \'Kaartstijl\'. "</string>
-	<string name="plugin_nautical_descr">"Toon nautische gegevens op de kaart voor varen, zeilen, en andere vormen van watersport. Download ook het kaartbestand \'Zeebakens (wereld)\' om deze plugin te gebruiken.\n\nDeze plugin biedt alle nautische navigatietekens en kaartsymbolen voor de binnenvaart en voor navigatie bij de kust. In de beschrijving van elke navigatieteken staat de informatie die nodig is om hem te identificeren en over de betekenis (categorie, vorm, kleur, volgorde, referentie, enz.) ervan.\n\nOm weer de gewone kaart te zien kunt u de plugin uitschakelen of de \'Kaart stijl\' onder \'Kaart instellen\' veranderen. "</string>
+	<string name="plugin_touringview_descr">"Verandert de kaartstijl in \'Touring-weergave (meer contrast en detail)\'. Dit is een speciale, meer gedetailleerde weergave voor reizigers en professionele chauffeurs.
+
+Deze weergave biedt, op ieder zoom niveau van de kaart, de maximale hoeveelheid aan reisgegevens die beschikbaar is in de kaart (met name wegen, onverharde wegen, paden, en oriëntatiepunten).
+
+Alle soorten wegen zijn goed te herkennen door een eenduidige kleurcodering, wat bijvoorbeeld handig is bij het besturen van een groot voertuig.
+
+Ook zijn er speciale touring-opties zoals fietsroutes en bergwandelpaden.
+
+Een speciale kaart downloaden is niet nodig; de weergave wordt gecreëerd van de gewone kaartgegevens.
+
+Deze weergave kan worden aan- en uitgezet door het kiezen van \'Touring-weergave (meer contrast en detail)\' onder \'Kaart instellen\' en dan \'Kaartstijl\'.
+ "</string>
+	<string name="plugin_nautical_descr">"Toon nautische gegevens op de kaart voor varen, zeilen, en andere vormen van watersport. Download ook het kaartbestand \'Zeebakens (wereld)\' om deze plugin te gebruiken.
+
+Deze plugin biedt alle nautische navigatietekens en kaartsymbolen voor de binnenvaart en voor navigatie bij de kust. In de beschrijving van elke navigatieteken staat de informatie die nodig is om hem te identificeren en over de betekenis (categorie, vorm, kleur, volgorde, referentie, enz.) ervan.
+
+Om weer de gewone kaart te zien kunt u de plugin uitschakelen of de \'Kaart stijl\' onder \'Kaart instellen\' veranderen.
+ "</string>
 	<string name="plugin_ski_name">Ski kaartweergave</string>
-	<string name="plugin_ski_descr">"Toon gedetailleerde informatie over slalompistes, langlaufroutes, alpine ski routes, kabelbanen en skiliften wereldwijd. Routes en pistes worden getoond in een kleurcode naar moeilijkheidsgraad, en afgebeeld in een speciale \'Winter en ski\' kaartstijl die lijkt op een besneeuwd winterlandschap.\n\nHet activeren van deze weergave verandert de kaartstijl in \'Winter en ski\', met alle kenmerken van het landschap onder winterse omstandigheden. Deze weergave kan worden teruggedraaid door het de-activeren van de plugin, of door het veranderen van de \'Kaart stijl\' onder \'Kaart Instellen\'. "</string>
+	<string name="plugin_ski_descr">"Toon gedetailleerde informatie over slalompistes, langlaufroutes, alpine ski routes, kabelbanen en skiliften wereldwijd. Routes en pistes worden getoond in een kleurcode naar moeilijkheidsgraad, en afgebeeld in een speciale \'Winter en ski\' kaartstijl die lijkt op een besneeuwd winterlandschap.
+
+Het activeren van deze weergave verandert de kaartstijl in \'Winter en ski\', met alle kenmerken van het landschap onder winterse omstandigheden. Deze weergave kan worden teruggezet door het de-activeren van de plugin, of door het veranderen van de \'Kaart stijl\' onder \'Kaart Instellen\'.
+ "</string>
 	
 	
 	<string name="rename_failed">Hernoemen mislukt.</string>
@@ -2078,7 +2282,25 @@
     
     <string name="dashboard_or_drawer_description">Kies tussen het flexibele Dashboard of een vast Menu. Dit is altijd te wijzigen via de dashboard-instellingen.</string>
     <string name="copied_to_clipboard">Gekopieerd naar klembord</string>
-    <string name="release_2_2">" • Nieuw contextmenu bij het aantikken van plekken op de kaart en op andere schermen\n\n • De kaart wordt direct getoond, tenzij \'Toon dashboard bij starten van de app\' is gekozen\n\n • Kies welke kaarten worden getoond op het dashboard\n\n • Mogelijkheid menu te gebruiken in plaats van het dashboard\n\n • Kaarten downloaden door op de wereldkaart te tikken\n\n • Fijnmaziger zoeken van POI\n\n • Betere bewerkingsmogelijkheden van POI en OSM\n\n • Kaarten downloaden is makkelijker en overzichtelijker\n\n en meer… "</string>
+    <string name="release_2_2">"
+ • Nieuw contextmenu bij het aantikken van plekken op de kaart en op andere schermen
+
+ • De kaart wordt direct getoond, tenzij \'Toon dashboard bij starten van de app\' is gekozen
+
+ • Kies welke kaarten worden getoond op het dashboard
+
+ • Mogelijkheid menu te gebruiken in plaats van het dashboard
+
+ • Kaarten downloaden door op de wereldkaart te tikken
+
+ • Fijnmaziger zoeken van POI
+
+ • Betere bewerkingsmogelijkheden van POI en OSM
+
+ • Kaarten downloaden is makkelijker en overzichtelijker
+
+ en meer…
+ "</string>
     <string name="shared_string_commit">Bijdrage versturen</string>
 	
     <string name="context_menu_item_delete_waypoint">GPX-routepunt wissen?</string>
@@ -2198,14 +2420,20 @@
     <string name="osm_live_subscription_settings">Abonnementsgegevens</string>
     <string name="osm_live_ask_for_purchase">Neem alsjeblieft eerst een OSM Live Abonnement</string>
 
-    <string name="osm_live_header">Met dit abonnement ontvang je dagelijks updates voor kaarten over de hele wereld. Een belangrijk deel van uw bijdrage gaat naar de OSM gemeenschap en wordt uitbetaald naar het aantal OSM bewerkingen. Als je OsmAnd en OSM wil ondersteunen, is dit de perfecte manier om dat te doen.</string>
+    <string name="osm_live_header">Met dit abonnement ontvang je dagelijks updates voor kaarten over de hele wereld. 
+Een belangrijk deel van uw bijdrage gaat naar de OSM-gemeenschap en wordt uitbetaald naar het aantal OSM-bewerkingen.
+Als je OsmAnd en OSM wil ondersteunen, is dit de perfecte manier om dat te doen.</string>
     
     <string name="select_map_marker">Kies markeervlaggetjes</string>
     <string name="map_markers_other">Andere markeervlaggetjes</string>
     <string name="upload_anonymously">Anoniem uploaden</string>
     <string name="show_transparency_seekbar">Toon Transparantie-schuif op kaart</string>
-    <string name="download_files_error_not_enough_space">Niet genoeg opslagruimte! Tijdelijk is {3} MB nodig en permanent {1} MB. Nu is maar {2} MB beschikbaar.</string>
-    <string name="download_files_question_space_with_temp">{0} bestanden downloaden? Tijdelijk is {3} MB nodig en permanent {1} MB. Er is nu {2} MB beschikbaar.</string>
+    <string name="download_files_error_not_enough_space">Niet genoeg opslagruimte! 
+Tijdelijk is {3} MB nodig en permanent {1} MB. 
+Nu is maar {2} MB beschikbaar.</string>
+    <string name="download_files_question_space_with_temp">{0} bestanden downloaden? 
+Tijdelijk is {3} MB nodig en permanent {1} MB. 
+Er is nu {2} MB beschikbaar.</string>
     <string name="upload_osm_note_description">Je kunt OSM Opmerkingen anoniem uploaden of je OpenStreetMap.org profiel gebruiken.</string>
     <string name="upload_osm_note">OSM Opmerking uploaden</string>
     <string name="map_marker_1st">Eerste Markeervlaggetje</string>
@@ -2222,7 +2450,50 @@
     <string name="map_markers">Markeervlaggetjes</string>
     <string name="map_marker">Markeervlaggetje</string>
     <string name="consider_turning_polygons_off">Het wordt aanbevolen om vlakken te verbergen.</string>
-    <string name="osmand_plus_extended_description_4000_chars_v2">" OsmAnd+ Kaarten &amp; Navigatie - Plaatsen vinden en routes berekenen zonder internetverbinding. Eenvoudig kaarten downloaden van alle landen wereldwijd voor je op reis gaat. Basisfuncties: • Gedetailleerde kaarten van 200 landen • Offline navigatie met gesproken aanwijzingen • Offline adressen zoeken • Offline informatie over bezienswaardigheden, café\'s, parkeerplaatsen, winkels enz. • Locaties als Favoriet opslaan • Navigatie voor Auto, Fiets en Wandelen Aanvullende mogelijkheden: • GPX-tracks tonen en opnemen • Wikipedia informatie van plaatsen en interessepunten • Foto-Video en Audio-Notities maken  •   Dag en Nachtmode voor veilig autorijden • Openbaar Vervoer: haltes en lijnen tonen • Fiets en Wandelroutes • Online kaarten weergeven uit diverse bronnen • Informatie over straatkwaliteit en verlichtging • Interessepunten aanmaken, wijzigen en verwijderen door OpenStreetMap.org gebruikers • OsMo - Live andere apparaten volgen Een betrouwbare Navigatietoepassing voor uw land: Frankrijk, Duitsland, Mexico, Verenigd Koninkrijk, Spanje, Nederland, Verenigde Staten van Amerika, Rusland, Brazilië of welk ander land ook. Plugins: Hoogtelijnen en reliëf https://goo.gl/7mojP8 Hoogtelijnen en reliëfschaduw wordt aan de standaard OsmAnd-kaart toegevoegd • Ski-kaarten https://goo.gl/pX6DxJ Informatie over skipistes, langlaufen, kabelbanen en skiliften • Nautische kaarten https://goo.gl/0hEdxm Speciale kaart met nautische informatie voor binnenvaart en kustvaart • Parkeerplaats https://goo.gl/6JxQXF Markeer de locatie van je geparkeerde auto en hou de parkeertijd bij. Meer functies zijn in ontwikkeling! Twitter: https://twitter.com/osmandapp Facebook: https://www.facebook.com/osmandapp Website: http://osmand.net Als je hulp nodig hebt met OsmAnd: neem contact op met ons support team: support@osmand.net. "</string>
+    <string name="osmand_plus_extended_description_4000_chars_v2">"
+OsmAnd+ Kaarten &amp; Navigatie
+Plaatsen vinden en routes berekenen zonder internetverbinding.
+Eenvoudig kaarten downloaden van alle landen wereldwijd voor je op reis gaat.
+
+Basisfuncties:
+ • Gedetailleerde kaarten van 200 landen
+ • Offline navigatie met gesproken aanwijzingen
+ • Offline adressen zoeken
+ • Offline informatie over bezienswaardigheden, café\'s, parkeerplaatsen, winkels enz
+ • Locaties als Favoriet opslaan
+ • Navigatie voor Auto, Fiets en Wandelen
+
+Aanvullende mogelijkheden:
+ • GPX-tracks tonen en opnemen
+ • Wikipedia informatie van plaatsen en interessepunten
+ • Foto-Video en Audio-Notities maken
+ • Dag en Nachtmode voor veilig autorijden
+ • Openbaar Vervoer: haltes en lijnen tonen
+ • Fiets en Wandelroutes
+ • Online kaarten weergeven uit diverse bronnen
+ • Informatie over straatkwaliteit en verlichting
+ • Interessepunten aanmaken, wijzigen en verwijderen door OpenStreetMap.org gebruikers
+ • OsMo - Live andere apparaten volgen
+
+Een betrouwbare Navigatietoepassing voor uw land: Frankrijk, Duitsland, Mexico, Verenigd Koninkrijk, Spanje, Nederland, Verenigde Staten van Amerika, Rusland, Brazilië of welk ander land ook.
+Plugins:
+ • Hoogtelijnen en reliëf https://goo.gl/7mojP8 
+   Hoogtelijnen en reliëfschaduw wordt aan de standaard OsmAnd-kaart toegevoegd
+ • Ski-kaarten https://goo.gl/pX6DxJ
+    Informatie over skipistes, langlaufen, kabelbanen en skiliften
+ • Nautische kaarten https://goo.gl/0hEdxm
+   Speciale kaart met nautische informatie voor binnenvaart en kustvaart
+ • Parkeerplaats https://goo.gl/6JxQXF
+    Markeer de locatie van je geparkeerde auto en hou de parkeertijd bij.
+
+Meer functies zijn in ontwikkeling!
+
+Twitter: https://twitter.com/osmandapp
+Facebook: https://www.facebook.com/osmandapp
+Website: http://osmand.net
+
+Als je hulp nodig hebt met OsmAnd: neem contact op met ons support team: support@osmand.net. 
+ "</string>
     <string name="recalculate_route">Route opnieuw berekenen</string>
     <string name="shared_string_topbar">Topbalk</string>
     <string name="storage_directory_readonly_desc">De geselecteerde opslagmap is niet schrijfbaar. Er wordt tijdelijk intern geheugen gebruikt. Kies een geldige opslagmap.</string>
@@ -2231,7 +2502,19 @@
     <string name="shared_string_move_up">Omhoog</string>
     <string name="shared_string_move_down">Omlaag</string>
     <string name="finish_navigation">Navigatie stoppen</string>
-    <string name="release_2_3">" • OSM Live: Ondersteun bijdragers aan de kaart en ontwikkelaars en ontvang dagelijks kaart-updates.\n\n • Markeervlaggetjes: Een nieuwe manier op snel plekken op de kaart te kiezen.\n\n • Nog meer details op de kaart met landspecifieke routeschildjes en nog veel meer nieuwe mogelijkheden.\n\n • De route-voorbereiding is vernieuwd.\n\n • Vele verbeteringen in het kaart-context-menu, zoals adres-zoek-functie.\n\n en nog meer… "</string>
+    <string name="release_2_3">"
+ • OSM Live: Ondersteun bijdragers aan de kaart en ontwikkelaars en ontvang dagelijks kaart-updates.
+
+ • Markeervlaggetjes: Een nieuwe manier op snel plekken op de kaart te kiezen.
+
+ • Nog meer details op de kaart met landspecifieke routeschildjes en nog veel meer nieuwe mogelijkheden.
+
+ • De route-voorbereiding is vernieuwd.
+
+ • Vele verbeteringen in het kaart-context-menu, zoals adres-zoek-functie.
+
+ en nog meer…
+ "</string>
     <string name="storage_permission_restart_is_required">OsmAnd heeft nu toestemming om de externe opslag te gebruiken. Een handmatige herstart is noodzakelijk.</string>
     <string name="full_report">Volledig Verslag</string>
     <string name="open_street_map_login_and_pass">OpenStreetMap loginnaam and wachtwoord</string>
@@ -2302,9 +2585,26 @@
     <string name="back_to_search">Terug naar zoekscherm</string>
     <string name="confirmation_to_delete_history_items">Geselecteerde items verwijderen uit geschiedenis?</string>
     <string name="show_something_on_map">Toon %1$s op de kaart</string>
-    <string name="release_2_4">" • Nieuwe krachtige zoekfunctie\n\n • Audio via Bluetooth is verbeterd\n\n • Verbeterde route-instructies, gesproken aanwijzingen en rijstrook-informatie\n\n • Vertalingen in nieuwe talen; ook regionale talen worden nu ondersteund\n\n • Vele ander verbeteringen en bug-fixes\n\n en nog meer... "</string>
+    <string name="release_2_4">"
+ • Nieuwe krachtige zoekfunctie
+
+ • Audio via Bluetooth is verbeterd
+
+ • Verbeterde route-instructies, gesproken aanwijzingen en rijstrook-informatie
+
+ • Verbeterde weergave van Openbaar Vervoer
+
+ • Vertalingen in nieuwe talen; ook regionale talen worden nu ondersteund
+
+ • Vele ander verbeteringen en bug-fixes
+
+ en nog meer...
+ "</string>
     <string name="dist_away_from_my_location">Zoek tot %1$s ver weg</string>
     <string name="show_on_map">Toon op de kaart</string>
     <string name="share_history_subject">" gedeeld via OsmAnd"</string>
     <string name="lang_hsb">Oppersorbisch</string>
+    <string name="route_stops_before">nog %1$s haltes</string>
+    <string name="coords_search">Zoeken met Coördinaten</string>
+    <string name="advanced_coords_search">Zoeken met Coördinaten</string>
     </resources>
