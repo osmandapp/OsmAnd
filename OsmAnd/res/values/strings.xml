@@ -1268,7 +1268,7 @@
 		- Download of country or region maps directly from the app
 		- Overlay of several map layers possible, like GPX or navigation tracks, Points of Interest, favorites, contour lines, public transport stops, additional maps with customizable transparency
 		- Offline search for addresses and places (POIs)
-		- Offline routing for short distances (experimental)
+		- Offline routing for medium-range distances 
 		- Car, bicycle, and pedestrian modes with:
 		-  optional automated day/night view switching
 		-  optional speed-dependent map zooming
@@ -1368,7 +1368,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 		- Offline Wikipedia feature (download Wikipedia POIs), great for sightseeing
 		- Overlay of several map layers possible, like GPX or navigation tracks, Points of Interest, favorites, contour lines, public transport stops, additional maps with customizable transparency
 		- Offline search for addresses and places (POIs)
-		- Offline routing for short distances (experimental)
+		- Offline routing for medium-range distances
 		- Car, bicycle, and pedestrian modes with:
 		-  optional automated day/night view switching
 		-  optional speed-dependent map zooming
@@ -1924,8 +1924,6 @@ If you need help with OsmAnd application, please contact our support team: suppo
     <string name="reading_cached_tiles">Reading cached tiles…</string>
     <string name="version_index_is_big_for_memory">The index \'\'{0}\'\' did not fit into memory</string>
     <string name="version_index_is_not_supported">The version of index \'\'{0}\'\' is not supported</string>
-    <string name="use_osmand_routing_service">OsmAnd navigation &gt;20km</string>
-    <string name="use_osmand_routing_service_descr">Use OsmAnd offline navigation applies only to routes &gt; 20 km (experimental)</string>
     <string name="osmand_routing_experimental">OsmAnd offline navigation is an experimental feature and it does not work for distances of more than about 20 km.\n\nNavigation service is temporarily switched to online CloudMade.</string>
     <string name="specified_dir_doesnt_exist">Can not find the specified folder.</string>
 

@@ -587,30 +587,51 @@ public class ConfigureMapMenu {
 			}
 		}
 		if (prefs.size() > 0) {
-			
+			final ItemClickListener clickListener = new ContextMenuAdapter.ItemClickListener() {
+				@Override
+				public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> a, int itemId, int pos,
+								boolean isChecked) {
+							if (!isChecked) {
+								for (int i = 0; i < prefs.size(); i++) {
+									prefs.get(i).set(false);
+								}
+								a.notifyDataSetInvalidated();
+								refreshMapComplete(activity);
+								activity.getMapLayers().updateLayers(activity.getMapView());
+							} else {
+								showPreferencesDialog(adapter, a, pos, activity, activity.getString(strId), ps, prefs,
+										useDescription);
+							}
+							return false;
+						}
+				
+			};
 			ContextMenuItem.ItemBuilder builder = new ContextMenuItem.ItemBuilder()
 			.setTitleId(strId, activity)
 			.setIcon(icon)
-			.setListener(new ContextMenuAdapter.ItemClickListener() {
-				@Override
-				public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> a,
-												  int itemId, int pos, boolean isChecked) {
-					if(!isChecked) {
-						for (int i = 0; i < prefs.size(); i++) {
-							prefs.get(i).set(false);
-						}
-					} else {
-						showPreferencesDialog(adapter, a, pos, activity, activity.getString(strId), ps, prefs, useDescription);
-					}
-					return false;
-				}
-			});
+			.setListener(clickListener);
 			if(useDescription) {
 				final String descr = getDescription(prefs);
 				builder.setDescription(descr);
 				builder.setLayout(R.layout.list_item_single_line_descrition_narrow);
 			} else {
 				boolean selected = false;
+				builder.setListener(new OnRowItemClick() {
+					
+					@Override
+					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> a, int itemId, int pos, boolean isChecked) {
+						return clickListener.onContextMenuClick(a, itemId, pos, isChecked);
+					}
+					
+					@Override
+					public boolean onRowItemClick(ArrayAdapter<ContextMenuItem> a, View view, int itemId,
+							int pos) {
+						showPreferencesDialog(adapter, a, pos, activity, activity.getString(strId), ps, prefs,
+								useDescription);
+						return false;
+					}
+				});
+				builder.setSecondaryIcon(R.drawable.ic_action_additional_option);
 				for(OsmandSettings.CommonPreference<Boolean> p : prefs) {
 					if(p.get()) {
 						selected = true;
