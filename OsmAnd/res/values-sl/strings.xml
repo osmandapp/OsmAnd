@@ -2527,6 +2527,9 @@ V kolikor naletite na težave s programom OsmAnd, prosimo, stopite v stik s skup
  • Izboljšano vodenje po poteh, glasovno sporočanje in nakazovanje menjave pasov
 
 
+ • Izboljšan vmesnik prevoza
+
+
  • Dodane jezikovne prilagoditve in podpora krajevnim značilnostim prikaza
 
 
@@ -2542,4 +2545,5 @@ V kolikor naletite na težave s programom OsmAnd, prosimo, stopite v stik s skup
     <string name="lang_hsb">Sorbsčina (zgornja)</string>
     <string name="coords_search">Iskanje po koordinatah</string>
     <string name="advanced_coords_search">Napredno iskanje po koordinatah</string>
+    <string name="route_stops_before">%1$s se zaustavi pred</string>
     </resources>
