@@ -2530,4 +2530,5 @@ Hvis du er fan af OsmAnd og OSM og ønsker at støtte dem, er dette en perfekt m
     <string name="back_to_search">Tilbage til søg</string>
     <string name="coords_search">Søg på koordinater</string>
     <string name="advanced_coords_search">Avanceret søg på koordinater</string>
+    <string name="route_stops_before">%1$s stopper inden</string>
     </resources>
