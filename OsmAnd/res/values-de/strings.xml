@@ -188,7 +188,12 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
 	<string name="shared_string_online_maps">Online-Karten</string>
 	<string name="online_map_settings_descr">Online- oder zwischengespeicherte Kachelkartenquellen konfigurieren</string>
 
-	<string name="osmand_rastermaps_plugin_description">"Dieses Plugin ermöglicht die Verwendung zahlreicher Online-Kachel-Kartenquellen, von vordefinierten Openstreetmap-Kacheln (wie Mapnik) über Satellitenbilder bis zu speziellen Overlays wie Wetterkarten, Klimakarten, geologischen Karten, Reliefkarten, usw.\n\nAlle Karten können sowohl als Hauptkarte wie auch als Überlagerung oder Unterlage für OsmAnds Standard-Offline-Karten verwendet werden. Um unterlegte Karten sichtbarer zu machen, können gewisse Elemente der OsmAnd-Vektorkarten im Menü \'Karte konfigurieren\' ausgeblendet werden.\n\nKarten-Kacheln können direkt online bezogen werden, und werden im OsmAnd-Unterordner \'tiles\' zwischengespeichert. Sie können für die Offline-Verwendung auch von anderen Tools als SQLite-Datei vorbereitet und manuell in den OsmAnd-Unterordner \'tiles\' kopiert werden. "</string>
+	<string name="osmand_rastermaps_plugin_description">"Dieses Plugin ermöglicht die Verwendung zahlreicher Online-Kachel-Kartenquellen, von vordefinierten Openstreetmap-Kacheln (wie Mapnik) über Satellitenbilder bis zu speziellen Overlays wie Wetterkarten, Klimakarten, geologischen Karten, Reliefkarten, usw.
+
+Alle Karten können sowohl als Hauptkarte wie auch als Überlagerung oder Unterlage für OsmAnds Standard-Offline-Karten verwendet werden. Um unterlegte Karten sichtbarer zu machen, können gewisse Elemente der OsmAnd-Vektorkarten im Menü \'Karte konfigurieren\' ausgeblendet werden.
+
+Karten-Kacheln können direkt online bezogen werden, und werden im OsmAnd-Unterordner \'tiles\' zwischengespeichert. Sie können für die Offline-Verwendung auch von anderen Tools als SQLite-Datei vorbereitet und manuell in den OsmAnd-Unterordner \'tiles\' kopiert werden.
+ "</string>
 	<string name="osmand_background_plugin_description">Zeigt die Einstellungen für die Standortaufzeichnung oder die Navigation während das Gerät im Standby-Modus ist (periodisches Aufwecken des GPS-Empfängers).</string>
 	<string name="osmand_accessibility_description">Diese Plugin macht die Funktionalitäten der System-Eingabehilfen direkt in OsmAnd verfügbar. Dadurch kann z.B. die Abspielgeschwindigkeit der Synthesizer-Stimme, die Bildschirmnavigation durch Steuerkreuz, Benutzung eines Trackballs zur Zoomsteuerung, Text-to-Speech-Feedback (automatischen Ansage der Position) konfiguriert werden.</string>
 
@@ -345,7 +350,9 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
 	<string name="osmand_service_descr">OsmAnd läuft bei ausgeschalteter Anzeige im Hintergrund</string>
 
 	<string name="download_files_not_enough_space">Nicht genügend freier Speicher vorhanden zum Laden von %1$s MB (frei: %2$s).</string>
-	<string name="download_files_question_space">Wirklich {0} Datei(en) herunterladen? Dies benötigt dauerhaft {1} MB. Aktuell sind {2} MB verfügbar.</string>
+	<string name="download_files_question_space">Wirklich {0} Datei(en) herunterladen?
+Dies benötigt dauerhaft {1} MB. 
+Aktuell sind {2} MB verfügbar.</string>
 	<string name="use_transparent_map_theme">Transparentes Layout</string>
 	<string name="native_library_not_supported">Native Bibliothek wird auf diesem Gerät nicht unterstützt.</string>
 	<string name="init_native_library">Native Bibliothek wird initialisiert…</string>
@@ -1401,7 +1408,14 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
 
 	<string name="osmo_settings_uuid">Geräte-ID</string>
 	<string name="osmo_settings_descr">Konfigurieren der Überwachungseinstellungen und des persönlichen Überwachungskanals</string>
-	<string name="osmo_plugin_description">"Dieses Plugin stellt teilweise den Funktionsumfang der sogenannten OsMo-Live-Überwachung bereit, siehe http://osmo.mobi.\n\nSie können in Echtzeit alle Geräte einer teilnehmenden Gruppe verfolgen. Sie können auch den Punkt und die Tracks sehen, welche in der Gruppe hochgeladen worden sind, der Sie angehören.\n\nAnonym erstellte Gruppen können spontan eingerichtet werden, hier sind die Optionen etwas eingeschränkt: Lebensdauer der Gruppe nur für einige Tage, auch ist keine zentrale Steuerung der Gruppe möglich. Voll funktionsfähige Gruppen müssen auf der genannten Internetseite erstellt werden, auf die Gruppe haben nur registrierte Nutzer Zugriff. "</string>
+	<string name="osmo_plugin_description">"Dieses Plugin stellt teilweise den Funktionsumfang der sogenannten OsMo-Live-Überwachung bereit, siehe http://osmo.mobi.
+
+
+Sie können in Echtzeit alle Geräte einer teilnehmenden Gruppe verfolgen. Sie können auch den Punkt und die Tracks sehen, welche in der Gruppe hochgeladen worden sind, der Sie angehören.
+
+
+Anonym erstellte Gruppen können spontan eingerichtet werden, hier sind die Optionen etwas eingeschränkt: Lebensdauer der Gruppe nur für einige Tage, auch ist keine zentrale Steuerung der Gruppe möglich. Voll funktionsfähige Gruppen müssen auf der genannten Internetseite erstellt werden, auf die Gruppe haben nur registrierte Nutzer Zugriff.
+ "</string>
 	<string name="osmo_plugin_name">OpenStreetMap Überwachung</string>
 	<string name="osmo_settings">OsMo</string>
 	<string name="osmo_io_error">"OsMo-Verbindungsproblem: "</string>
@@ -1531,7 +1545,10 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
     <string name="waypoints">Wegpunkte</string>
     <string name="targets">Ziele</string>
     <string name="way_alarms">Verkehrswarnungen</string>
-    <string name="record_plugin_description">"Dieses Plugin aktiviert die Funktionalität, Tracks als lokale GPX-Datei (oder auch online via Web-Service) aufzunehmen und abzuspeichern, entweder durch Antippen der GPX-Aufnahme Schaltfläche auf dem Kartenbildschirm bei Bedarf, oder durch automatisches Speichern aller navigierten Routen.\n\nAufgenommene Tracks kann man z.B. mit Bekannten teilen, oder auch zum Upload für OSM-Bearbeitungen verwenden. Sportler können gespeicherte Tracks zur Dokumentation und Analyse Ihres Trainings verwenden. Einige Analysefunktionen sind direkt in OsmAnd enthalten, wie Rundenzeiten, Durchschnittsgeschwindigkeit, etc. Aufgezeichnete Tracks können natürlich auch später zur Analyse in anderen Tools weiterverwendet werden. "</string>
+    <string name="record_plugin_description">"Dieses Plugin aktiviert die Funktionalität, Tracks als lokale GPX-Datei (oder auch online via Web-Service) aufzunehmen und abzuspeichern, entweder durch Antippen der GPX-Aufnahme Schaltfläche auf dem Kartenbildschirm bei Bedarf, oder durch automatisches Speichern aller navigierten Routen.
+
+Aufgenommene Tracks kann man z.B. mit Bekannten teilen, oder auch zum Upload für OSM-Bearbeitungen verwenden. Sportler können gespeicherte Tracks zur Dokumentation und Analyse Ihres Trainings verwenden. Einige Analysefunktionen sind direkt in OsmAnd enthalten, wie Rundenzeiten, Durchschnittsgeschwindigkeit, etc. Aufgezeichnete Tracks können natürlich auch später zur Analyse in anderen Tools weiterverwendet werden.
+ "</string>
     <string name="route_descr_destination">Ziel</string>
     <string name="local_index_description">Ein Element antippen, um mehr Details zu erfahren oder antippen und halten zum Deaktivieren oder Löschen. Aktuell auf dem Gerät vorhandene Daten (%1$s frei):</string>
 	<string name="text_size_descr">Karten-Schriftgröße festlegen</string>
@@ -1933,7 +1950,33 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
     <string name="access_from_map_description">Menü-Knopf zeigt Dashboard, nicht das Menü</string>
     <string name="show_on_start_description">\"Aus\" startet direkt die Kartenansicht</string>
     <string name="copied_to_clipboard">In die Zwischenablage kopiert</string>
-    <string name="release_2_2">" • Neue kontextbezogene Benutzeroberfläche bei Auswahl von Orten auf der Karte und anderen Ansichten\n\n • Kartenansicht wird nun direkt gestartet, außer bei Auswahl von \'Zeige Dashboard bei App-Start\'\n\n • Auswahl der anzuzeigenden Elemente im Dashboard möglich\n\n • Dashboard kann umgangen werden, falls menübasierte App-Steuerung gewünscht ist\n\n • Zum Herunterladen von Kartendateien können nun Regionen direkt durch Tippen auf der Weltkarte ausgewählt werden\n\n • Die POI-Suche ermöglicht nun speziellere Abfragen\n\n • Verbesserungen beim Editieren von POI- und OSM-Objekten\n\n • Oberfläche und Struktur zum Herunterladen der Karten wurden überarbeitet\n\n und mehr … "</string>
+    <string name="release_2_2">"
+ • Neue kontextbezogene Benutzeroberfläche bei Auswahl von Orten auf der Karte und anderen Ansichten
+
+
+ • Kartenansicht wird nun direkt gestartet, außer bei Auswahl von \'Zeige Dashboard bei App-Start\'
+
+
+ • Auswahl der anzuzeigenden Elemente im Dashboard möglich
+
+
+ • Dashboard kann umgangen werden, falls menübasierte App-Steuerung gewünscht ist
+
+
+ • Zum Herunterladen von Kartendateien können nun Regionen direkt durch Tippen auf der Weltkarte ausgewählt werden
+
+
+ • Die POI-Suche ermöglicht nun speziellere Abfragen
+
+
+ • Verbesserungen beim Editieren von POI- und OSM-Objekten
+
+
+ • Oberfläche und Struktur zum Herunterladen der Karten wurden überarbeitet
+
+
+ und mehr …
+ "</string>
     <string name="osm_save_offline">Offline speichern</string>
     <string name="osm_edit_modified_poi">Geänderter OSM-POI</string>
     <string name="osm_edit_deleted_poi">Gelöschter OSM-POI</string>
@@ -2076,8 +2119,12 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
     <string name="consider_turning_polygons_off">Es wird empfohlen, das Rendern von Polygonen zu deaktivieren.</string>
     <string name="show_map_markers_topbar">Leiste mit den Kartenmarkierungen anzeigen</string>
     <string name="shared_string_widgets">Widgets</string>
-    <string name="download_files_error_not_enough_space">Nicht genug Speicher! Es werden temporär {3} MB benötigt und {1} MB permanent. Aktuell sind nur {2} MB verfügbar.</string>
-    <string name="download_files_question_space_with_temp">Wirklich {0} Datei(en) herunterladen? Dies benötigt temporär {3} MB und permanent {1} MB. Aktuell sind {2} MB verfügbar.</string>
+    <string name="download_files_error_not_enough_space">"Nicht genug Speicher!
+Es werden vorübergehend {3} MB  und {1} MB dauerhaft benötigt.
+Aktuell sind nur {2} MB verfügbar."</string>
+    <string name="download_files_question_space_with_temp">Wirklich {0} Datei(en) herunterladen?
+Dies benötigt vorübergehend {3} MB und dauerhaft {1} MB.
+Aktuell sind {2} MB verfügbar.</string>
     <string name="select_map_marker">Kartenmarkierung auswählen</string>
     <string name="map_markers_other">Andere Markierungen</string>
     <string name="upload_osm_note_description">Sie können Ihre OSM-Hinweise anonym hochladen, wenn Sie Ihr OpenStreetMap.org-Profil nutzen.</string>
@@ -2104,7 +2151,9 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
     <string name="osm_live_ask_for_purchase">Bitte kaufen Sie zuerst ein OSM-Live-Abonnement</string>
 
     <string name="osm_live_region_desc">Teile Ihrer Spende werden an OSM-Mitwirkende weitergegeben, welche diese Region bearbeiten</string>
-    <string name="osm_live_header">Dieses Abonnement schaltet stündliche Updates für die gesamten weltweiten Karten frei. Ein Großteil dieser Einnahmen geht zurück an die OSM-Gemeinschaft, eine Auszahlung erfolgt je nach Anzahl der Beiträge zu den OSM-Daten. Falls Sie OsmAnd mögen und das Projekt OpenStreetMap unterstützen wollen, so ist dies dafür eine perfekte Möglichkeit.</string>
+    <string name="osm_live_header">Dieses Abonnement schaltet stündliche Updates für die gesamten weltweiten Karten frei. 
+Ein Großteil dieser Einnahmen geht zurück an die OSM-Gemeinschaft, eine Auszahlung erfolgt je nach Anzahl der Beiträge zu den OSM-Daten. 
+Falls Sie OsmAnd mögen und das Projekt OpenStreetMap unterstützen wollen, so ist dies dafür eine perfekte Möglichkeit.</string>
     
     <string name="shared_string_topbar">Obere Leiste</string>
     <string name="finish_navigation">Navigation beenden</string>
@@ -2188,8 +2237,27 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
     <string name="back_to_search">Zurück zur Suche</string>
     <string name="confirmation_to_delete_history_items">Ausgewählte Verlaufselemente löschen?</string>
     <string name="show_something_on_map">%1$s auf der Karte zeigen</string>
-    <string name="release_2_4">" • Neue sehr leistungsfähige Freitextsuche\n\n • Deutlich verbesserte Audiowiedergabe über Bluetooth\n\n • Verbesserte Navigationsansagen, Sprachinformationen und Abbiegespurhinweise\n\n • Mehr Sprachen hinzugefügt und Unterstützung für regionale Sprachen\n\n • Viele andere Verbesserungen und Problembehebungen\n\n und mehr… "</string>
+    <string name="release_2_4">"
+ • Neue sehr leistungsfähige Freitextsuche
+
+
+ • Deutlich verbesserte Audiowiedergabe über Bluetooth
+
+
+ • Verbesserte Navigationsansagen, Sprachinformationen und Abbiegespurhinweise
+
+
+ • Mehr Sprachen hinzugefügt und Unterstützung für regionale Sprachen
+
+
+ • Viele andere Verbesserungen und Problembehebungen
+
+
+ und mehr…
+ "</string>
     <string name="show_on_map">Zeige auf der Karte</string>
     <string name="share_history_subject">" geteilt über OsmAnd"</string>
     <string name="dist_away_from_my_location">Suche %1$s entfernt</string>
+    <string name="advanced_coords_search">Koordinatensuche (erweitert)</string>
+    <string name="coords_search">Koordinatensuche</string>
     </resources>
