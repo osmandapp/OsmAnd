@@ -344,6 +344,9 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 			if (object instanceof MapMarker) {
 				mapActivity.getMyApplication().getMapMarkersHelper().removeListener(this);
 			}
+			if(menuController != null) {
+				menuController.onClose();
+			}
 			if (this.object != null) {
 				clearSelectedObject(this.object);
 			}
