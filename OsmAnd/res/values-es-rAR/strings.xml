@@ -2497,17 +2497,17 @@ Si necesitas ayuda con la aplicación OsmAnd, contacte con nuestro equipo de sop
     <string name="share_history_subject">" compartido vía OsmAnd"</string>
     <string name="show_on_map">Mostrar en el mapa</string>
     <string name="release_2_4">"
- • Nueva búsqueda de texto libre muy potente.
+ • Nueva búsqueda de texto libre muy potente
 
- • Muchas mejoras de audio mediante Bluetooth.
+ • Muchas mejoras de audio mediante Bluetooth
 
- • Mejoras en la guía de ruta, indicaciones por voz y de carriles de giro.
+ • Mejoras en la guía de ruta, indicaciones por voz y de carriles de giro
 
  • Mejoras en la capa de transporte
 
- • Se agregaron más idiomas y ahora soporta idiomas regionales.
+ • Se agregaron más idiomas y ahora soporta idiomas regionales
 
- • Muchas otras mejoras y correcciones de errores.
+ • Muchas otras mejoras y correcciones de errores
 
  y más…
  "</string>
@@ -2517,5 +2517,5 @@ Si necesitas ayuda con la aplicación OsmAnd, contacte con nuestro equipo de sop
     <string name="back_to_search">Volver a la búsqueda</string>
     <string name="coords_search">Búsqueda de coordenadas</string>
     <string name="advanced_coords_search">Búsqueda avanzada de coordenadas</string>
-    <string name="route_stops_before">%1$s paradas anteriores</string>
+    <string name="route_stops_before">%1$s parada(s) anterior(es)</string>
     </resources>
