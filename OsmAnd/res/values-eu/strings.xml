@@ -1325,7 +1325,7 @@
     <string name="osmo_edit_color">Erakutsi kolorea</string>
     <string name="osmo_group_info">Info</string>
     <string name="osmo_group">OsMo taldea</string>
-    <string name="osmo_track_interval">Jarraipen tartea</string>
+    <string name="osmo_track_interval">Erregistratze tartea</string>
 	<string name="osmo_track_interval_descr">Hautatu kokapena bidaltzeko tartea</string>
     <string name="int_days">egunak</string>
     <string name="osmo_connect_menu">Konektatu</string>
@@ -2013,7 +2013,7 @@
     <string name="lang_pms">Piemontera</string>
     <string name="lang_tl">Tagalo</string>
     <string name="lang_az">Azerbaijanera</string>
-    <string name="lang_new"/>
+    <string name="lang_new">Newar / Nepal Bhasa</string>
     <string name="delay_to_start_navigation">Hasi biraz-birako nabigazioa hau eta gero…</string>
     <string name="delay_navigation_start">Hasi biraz-birako gidaketa automatikoki</string>
     <string name="watch">Ikusi</string>
@@ -2054,4 +2054,49 @@
 
     <string name="use_dashboard_btn">Erabili kontrol panela</string>
     <string name="dashboard_or_drawer_description">Orain aplikazioa kontrol panel aldakor batetik ala finkatutako menu estatiko batetik kudeatzeko aukera dago. Erabakia aldatzeko aukera duzu kontrol panelaren ezarpenetan.</string>
+    <string name="release_2_2">"
+ • Testuinguruaren jakitun den interfazea mapan eta beste pantailetan kokalekuetan sakatzeko 
+
+ • Maparen pantaila orain zuzenean abiatzen da \"Bistaratu kontrol panela abioan\" markatu ezean
+
+ • Konfiguratu kontrol panelean agertuko diren fitxak, eta nola
+
+ • Saltatu panel kontrola menu bidezko kontrola nahiago baduzu
+
+ • Mapak deskargatzeko, eskualdeak zuzenean aukeratu daitezke mapan sakatuz
+
+ • POI bilaketak galdera zehatzagoak onartzen ditu orain
+
+ • Hobetutako POI eta OSM edizio funtzionaltasuna
+
+ • Mapen datuen deskargarako estruktura eta interfazea eraldatu da
+
+ eta gehiago…
+ "</string>
+    <string name="speak_poi">Inguruko POI</string>
+    <string name="osmo_gpx_points_downloaded">%1$s OsMo puntuak deskargatuta.</string>
+    <string name="show_zoom_buttons_navigation_descr">Erakutsi zoom botoiak nabigazioan</string>
+    <string name="osmo_show_group_notifications">Erakutsi talde jakinarazpenak</string>
+    <string name="osmo_show_group_notifications_descr">Erakutsi laster mezuak erabiltzailea taldera batzean edo taldea uztean</string>
+    <string name="osmo_sign_in">Hasi saioa</string>
+    <string name="osmo_create_groups_confirm">Taldeak sortzeko OsMO erabiltzaile erregistratua izan behar zara.</string>
+    <string name="osmo_credentials_not_valid">Zure OsMo kredentzialak baliogabeak dira.</string>
+    <string name="osmo_regenerate_login_ids_confirm">Ziur id pertsonalak birsortu nahi dituzula? Zuri konektatutako gailu guztiak zu jarraitzeko aukera galduko dute.</string>
+    <string name="osmo_regenerate_login_ids">Birsortu erabiltzaile id-a</string>
+    <string name="osmo_cancel_moving_target">Ezeztu xede mugikorra</string>
+    <string name="osmo_center_location">Zentratu pantailan</string>
+    <string name="osmo_set_moving_target">Ezarri xede mugikor gisa</string>
+    <string name="osmo_use_server_name">Erregistratutako izena</string>
+    <string name="osmo_group_share">%2$s taldera konektatzeko, zehaztu talde id-a (%1$s) edo sakatu %3$s.</string>
+    <string name="osmo_share_connect_device">Baimendu gailu hau etengabe jarraitzea</string>
+    <string name="osmo_share_current_session">Partekatu uneko saioa nabigatzailean</string>
+    <string name="osmo_session_not_available">Saioa ez dago eskuragarri, egiaztatu \'Bidali kokalekuak\' aktibatuta dagoela.</string>
+    <string name="osmo_share_session">Partekatu saioa</string>
+    <string name="osmo_session_id_share">Gailua jarraitzeko saioaren URLa (%1$s)</string>
+    <string name="osmo_tracker_id_share">"%2$s gailu xedera konektatzeko, sakatu  %3$s lotura edo zehaztu jarraipen id bat (%1$s)"</string>
+    <string name="update">Eguneratu</string>
+    <string name="use_drawer_btn">Erabili menua</string>
+    <string name="map_legend">Maparen legenda</string>
+    <string name="save_poi_without_poi_type_message">Ziur POI puntua POI mota gabe gorde nahi duzula?</string>
+    <string name="poi_context_menu_modify_osm_change">Eraldatu OSM aldaketa</string>
     </resources>
