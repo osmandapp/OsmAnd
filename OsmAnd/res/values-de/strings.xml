@@ -170,7 +170,7 @@ Einige der Kernfunktionen:
 - Direktes Herunterladen von Länder- oder Regionenkarten aus der App heraus 
 - Darstellung mehrerer überlagerter Kartenschichten wie GPX oder Navigations-Tracks, POIs (Points of Interest), Favoriten, Höhenlinien, ÖPNV-Haltestellen, zusätzliche Karten mit wählbarer Transparenz 
 - Offline Adress- und POI-Suche 
-- Offlinenavigation für kurze Distanzen (experimentell) 
+- Offlinenavigation für mittelstrecken Distanzen
 
 - Auto-, Fahrrad- und Fußgänger-Modus mit 
 - optionaler automatischer Tag-Nacht-Umschaltung der Anzeige 
@@ -202,7 +202,7 @@ Einige der Kernfunktionen:
 - Offline-Wikipedia-Funktion (Anzeige von Wikipedia-POIs), sehr nützlich für Besichtigungstouren
 - Darstellung mehrerer überlagerter Kartenschichten wie GPX- oder Navigations-Tracks, POIs (Points of Interest), Favoriten, Höhenlinien, ÖPNV-Haltestellen, zusätzliche Karten mit wählbarer Transparenz
 - Offline-Adress- und POI-Suche
-- Offlinenavigation für kurze Distanzen (experimentell)
+- Offlinenavigation für mittelstrecken Distanzen
 - Auto-, Fahrrad- und Fußgänger-Modus mit
 - optionaler automatischer Tag-Nacht-Umschaltung der Anzeige
 - optionalem geschwindigkeitsabhängigem Kartenmaßstab
