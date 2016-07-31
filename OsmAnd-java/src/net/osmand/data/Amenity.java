@@ -251,7 +251,11 @@ public class Amenity extends MapObject {
 	public int compareTo(MapObject o) {
 		int cmp = super.compareTo(o);
 		if(cmp == 0 && o instanceof Amenity) {
-			return ((Amenity) o).getType().getKeyName().compareTo(getType().getKeyName());
+			int kn = ((Amenity) o).getType().getKeyName().compareTo(getType().getKeyName());
+			if(kn == 0) {
+				kn = ((Amenity) o).getSubType().compareTo(getSubType());
+			}
+			return kn;
 		}
 		return cmp;
 	}
@@ -260,7 +264,8 @@ public class Amenity extends MapObject {
 	public boolean equals(Object o) {
 		boolean res = super.equals(o);
 		if (res && o instanceof Amenity) {
-			return ((Amenity) o).getType().getKeyName().equals(getType().getKeyName());
+			return Algorithms.stringsEqual(((Amenity) o).getType().getKeyName(), getType().getKeyName())
+					&& Algorithms.stringsEqual(((Amenity) o).getSubType(), getSubType());
 		}
 		return res;
 	}

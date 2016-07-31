@@ -243,6 +243,12 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 
 		MapPoiTypes types = app.getPoiTypes();
 		for (Amenity amenity : amenities) {
+			String poiSimpleFormat = OsmAndFormatter.getPoiStringWithoutType(amenity, lang);
+			if (poiSimpleFormat.equals(name)) {
+				return amenity;
+			}
+		}
+		for (Amenity amenity : amenities) {
 			String amenityName = amenity.getName(lang, true);
 			if (Algorithms.isEmpty(amenityName)) {
 				AbstractPoiType st = types.getAnyPoiTypeByKey(amenity.getSubType());

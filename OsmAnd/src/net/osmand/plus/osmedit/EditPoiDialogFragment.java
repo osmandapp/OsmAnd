@@ -503,7 +503,9 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 			for (PoiType s : ct.getPoiTypes()) {
 				if (!s.isReference() && !s.isNotEditableOsm() && s.getBaseLangType() == null) {
 					addMapEntryAdapter(subCategories, s.getTranslation(), s);
-					addMapEntryAdapter(subCategories, s.getKeyName().replace('_', ' '), s);
+					if(!s.getKeyName().contains("osmand")) {
+						addMapEntryAdapter(subCategories, s.getKeyName().replace('_', ' '), s);
+					}
 				}
 			}
 		}
