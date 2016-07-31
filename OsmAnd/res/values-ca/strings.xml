@@ -319,7 +319,7 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="amenity_type_sport">Esports</string>
     <string name="amenity_type_sustenance">Alimentació i beguda</string>
     <string name="amenity_type_tourism">Turisme</string>
-    <string name="amenity_type_transportation">Transport</string>
+    <string name="amenity_type_transportation">Transport col·lectiu</string>
     <string name="indexing_address">S\'estan indexant les adreces-…</string>
     <string name="indexing_map">Indexant el mapa…</string>
     <string name="indexing_poi">S\'estan indexant els PDI …</string>
@@ -451,7 +451,7 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="searching">Cercant…</string>
     <string name="search_history_city">Ciutat: {0}</string>
     <string name="search_history_street">Carrer: {0}, {1}</string>
-    <string name="transport">Transport</string>
+    <string name="transport">Transport col·lectiu</string>
     <string name="transport_stops">parades</string>
     <string name="transport_Routes">Rutes</string>
     <string name="menu_mute_off">So activat</string>
@@ -1640,7 +1640,7 @@ Les rutes enregistrades es poden compartir amb els vostres amics o aportar-les p
     <string name="anonymous_user">Usuari anònim</string>
     <string name="logged_as">S\'ha iniciat sessió com a %1$s</string>
     <string name="rendering_category_details">Detalls</string>
-    <string name="rendering_category_transport">Transport</string>
+    <string name="rendering_category_transport">Transport col·lectiu</string>
     <string name="rendering_category_others">Altres atributs del mapa</string>
     <string name="map_widget_appearance_rem">Elements pendents</string>
     <string name="map_widget_top">Barra d\'estat</string>
