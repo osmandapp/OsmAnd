@@ -61,6 +61,7 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 	private static final String CONFIG_FILE = "_ttsconfig.p";
 	private static final int[] TTS_VOICE_VERSION = new int[] { 102, 103 }; // !! MUST BE SORTED  
 	// TTS any more 101 because of to much changes
+	// TODO: We could actually remove v102 support, I am done updating all existing 35 TTS voices to v103. Hardy, July 2016
 	private static final Log log = PlatformUtil.getLog(TTSCommandPlayerImpl.class);
 	private TextToSpeech mTts;
 	private Context mTtsContext;
