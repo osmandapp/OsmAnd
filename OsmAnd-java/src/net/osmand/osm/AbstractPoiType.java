@@ -42,7 +42,11 @@ public abstract class AbstractPoiType {
 	}
 	
 	public String getIconKeyName() {
-		return getKeyName().replace(':', '_');
+		String kn = getKeyName();
+		if(kn.startsWith("osmand_")) {
+			kn = kn.substring("osmand_".length());
+		}
+		return kn.replace(':', '_');
 	}
 	
 	public void setTopVisible(boolean topVisible) {
