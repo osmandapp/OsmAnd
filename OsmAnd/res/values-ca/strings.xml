@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
 
     <string name="show_warnings_title">Mostra alertes…</string>
     <string name="map_widget_fluorescent">Rutes amb fluorescència</string>
@@ -2386,13 +2387,16 @@ Cas que aprecieu OsmAnd  i OSM i vulgueu ajudar-los, és una via perfecta per fe
  • Nova cerca de text lliure molt potent
 
 
- • Àudio amb Bluetooth molt millorat
+ • Integració via Bluetooth de l\'àudio del cotxe amb l\'altaveu del mòbil
 
 
  • Guia de navegació millorada, indicacions de veu i indicacions de carrils de gir
 
 
  • Millores a la capa de transport col·lectiu
+
+
+• Afegits més llocs i nova gestió de llocs regionals
 
 
  • Moltes més millores i correccions d\'errors
