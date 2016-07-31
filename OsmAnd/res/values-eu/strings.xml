@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
   <string name="local_index_tile_data_zooms">Deskargatutako zoomak: %1$s</string>
   <string name="local_index_tile_data_expire">Iraungitze epea (minutuak): %1$s</string>
   <string name="local_index_tile_data_downloadable">Deskargagarria: %1$s</string>
@@ -357,7 +358,9 @@
   <string name="osmand_parking_pm">PM</string>
   <string name="osmand_parking_am">AM</string>
   <string name="osmand_parking_position_name">Aparkaleku puntua</string>
-  <string name="osmand_parking_plugin_description">Plugin honek zure aparkatutako kotxearen kokalekua gordetzea ahalbideratzen zaitu.</string>
+  <string name="osmand_parking_plugin_description">Plugin honek zure aparkatutako kotxearen kokalekua eta geratzen zaizun denbora gogoratzea ahalbideratzen zaitu (denbora muga badago).
+
+Kokalekua eta denbora OsmAnd kontrol panelean ikusgai daude eta maparen pantailako trepetan . Alarma bat gehitu daiteke Android egutegira oroigarri gisa.</string>
   <string name="osmand_parking_plugin_name">Aparkalekuaren kokapena</string>
   <string name="context_menu_item_add_parking_point">Aparkaleku kokapen bezala markatu</string>
   <string name="context_menu_item_delete_parking_point">Aparkaleku markatzaile bat ezabatu</string>
@@ -556,7 +559,9 @@
   
   
   <string name="download_files_not_enough_space">Ez dago leku nahikorik %1$s MB deskargatzeko (%2$s libre).</string>
-  <string name="download_files_question_space">Benetan {0} fitxategi deskargatu? Honek {1} MB behar ditu behin betiko. {2} MB daude libre orain.</string>
+  <string name="download_files_question_space">Benetan {0} fitxategi deskargatu? 
+Honek {1} MB behar ditu behin betiko. 
+{2} MB daude libre orain.</string>
   
   
   
@@ -1764,11 +1769,17 @@
     <string name="osm_live_region_desc">Zure dohaintzaren parte bat eskualde horretara aldaketak bidaltzen dituzten OSM erabiltzaileei bidaliko zaie</string>
     <string name="osm_live_ask_for_purchase">Erosi OSM Live harpidetza aurretik</string>
 
-    <string name="osm_live_header">Harpidetza honek mundu osoko mapen eguneraketak orduero jasotzea baimentzen dizu. Diru sarreraren parte handiena OSM komunitateari ematen zaio eta kontribuzioen arabera ordaintzen da. OsmAnd eta OSM maite badituzu eta babestu nahi badituzu, hau modu egokia da.</string>
+    <string name="osm_live_header">Harpidetza honek mundu osoko mapen eguneraketak orduero jasotzea baimentzen dizu. 
+Diru sarreraren parte handiena OSM komunitateari ematen zaio eta kontribuzioen arabera ordaintzen da. 
+OsmAnd eta OSM maite badituzu eta babestu nahi badituzu, hau modu egokia da.</string>
     
     <string name="show_transparency_seekbar">Bistaratu bilaketa barra gardena</string>
-    <string name="download_files_error_not_enough_space">Ez dago espazio nahikoa! Honek {3} MB behar ditu une batez eta {1} MB behin betiko. Orain {2} MB daude eskuragarri.</string>
-    <string name="download_files_question_space_with_temp">{0} fitxategi deskargatu? Honek {3} MB behar ditu une batez eta {1} MB behin betiko. Orain, {2} MB daude eskuragarri.</string>
+    <string name="download_files_error_not_enough_space">Ez dago espazio nahikoa!
+Honek {3} MB behar ditu une batez eta {1} MB behin betiko.
+ Orain {2} MB daude eskuragarri.</string>
+    <string name="download_files_question_space_with_temp">{0} fitxategi deskargatu? 
+Honek {3} MB behar ditu une batez eta {1} MB behin betiko. 
+Orain, {2} MB daude eskuragarri.</string>
     <string name="upload_osm_note_description">Zure OSM oharra anonimoki igo dezakezu zure OpenStreetMap.org profila erabiltzen baduzu.</string>
     <string name="rendering_attr_showMtbRoutes_name">Bistaratu MTB ibilbideak</string>
     <string name="rendering_attr_hideIcons_name">POI ikonoak</string>
@@ -1830,10 +1841,28 @@
     <string name="map_downloaded_descr">%1$s mapa deskargatu da. Joan atzera mapara erabiltzen hasteko.</string>
     <string name="file_name_containes_illegal_char">Fitxategiaren izenak karaktere baliogaberen bat du</string>
 <string name="show_something_on_map">Erakutsi %1$s mapan</string>
-    <string name="release_2_4">" • Testu librearen bilaketa boteretsu berria.
-\n\n • Asko hobetutako Bluetooth bidezko audioa.\n\n • Hobetutako ibilbide gidatzea erraia aldaketarekin.
-\n\n • Hobekuntzak eta konpondutako arazoak.\n\neta gehiago… "</string>
-    <string name="dist_away_from_my_location">%1$sra</string>
+    <string name="release_2_4">"
+ • Testu librearen bilaketa boteretsu berria.
+
+
+ • Asko hobetutako Bluetooth bidezko audioa.
+
+
+ • Hobetutako ibilbide gidatzea, ahots hitzemateak, erraia aldaketaren abisua.
+
+
+ • Hobetutako garraio geruza
+
+
+ • Hizkuntza geihago eta eskualdeetako hizkuntzak gehitu dira
+
+
+ • Hobekuntzak eta konpondutako arazoak.
+
+
+eta gehiago…
+ "</string>
+    <string name="dist_away_from_my_location">Bilatu %1$sra</string>
     <string name="show_on_map">Erakutsi mapan</string>
     <string name="share_history_subject">" OsmAnd bidez partekatua"</string>
     <string name="search_categories">Kategoriak</string>
@@ -1850,7 +1879,7 @@
     <string name="si_mph">Miliak orduko</string>
     <string name="si_min_m">Minutuak miliako</string>
     <string name="si_nm_h">Itsas miliak orduko (korapiloak)</string>
-    <string name="nm_h">nmi/h</string>
+    <string name="nm_h">korapiloak</string>
     <string name="av_locations_descr">GPX fitxategia ohar-kokapenekin</string>
     <string name="traffic_warning_hazard">Arriskua</string>
     <string name="rendering_value_boldOutline_name">Ingerada lodia</string>
