@@ -64,6 +64,7 @@ import net.osmand.util.MapUtils;
 import java.io.File;
 import java.io.RandomAccessFile;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
@@ -340,7 +341,9 @@ public class MainActivity extends Activity {
 			}
 		}
 
-		searchUICore = new SearchUICore(app.getPoiTypes(), LANGUAGE, files.toArray(new BinaryMapIndexReader[files.size()]));
+		searchUICore = new SearchUICore(app.getPoiTypes(), LANGUAGE);
+		searchUICore.getSearchSettings().setOfflineIndexes(Arrays.asList(files.toArray(new BinaryMapIndexReader[files.size()])));
+		searchUICore.init();
 
 		searchUICore.setOnResultsComplete(new Runnable() {
 			@Override
