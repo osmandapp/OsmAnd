@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
     <string name="always_center_position_on_map">Ammustra sa positzione semper a su tzentru</string>
     <string name="voice_pref_title">Boghe</string>
     <string name="misc_pref_title">Mistura</string>
@@ -79,8 +80,10 @@
     <string name="routing_attr_weight_name">Lìmite de pesu</string>
     <string name="routing_attr_weight_description">Dislinda su lìmite de pesu de su veìculu</string>
     <string name="android_19_location_disabled">Dae sa versione Android 4.4 (KitKat) non podes prus iscarrigare e agiornare sas mapas in sa cartella betza (%s). La bòles remplasare cun sa chi est acusentida e copiare in cue totus sos datos?
-\n Nota 1: sos datos antepostos tuos non at a èssere mudados (ma podent essere burrados manualmente).
-\n Nota 2: in sa cartella noa non at a èssere possìbile cumpartzire sos datos intra OsmAnd e OsmAnd+.</string>
+
+ Nota 1: sos datos antepostos tuos non at a èssere mudados (ma podent essere iscantzellados manualmente).
+
+ Nota 2: in sa cartella noa non at a èssere possìbile cumpartzire sos datos intra OsmAnd e OsmAnd+.</string>
 
     <string name="copying_osmand_one_file_descr">Copiende su documentu (%s) in sa destinatzione noa…</string>
     <string name="copying_osmand_files_descr">Copiende sos datos de OsmAnd in (%s), sa destinatzione noa…</string>
@@ -106,8 +109,8 @@
     <string name="app_mode_aircraft">Aèreo</string>
 
 
-    <string name="local_osm_changes_delete_all_confirm">Istas pro burrare %1$d modìficas OSM. Seguru ses?</string>
-    <string name="shared_string_delete_all">Burra totu</string>
+    <string name="local_osm_changes_delete_all_confirm">As a iscantzellare %1$d modìficas OSM. Seguru ses?</string>
+    <string name="shared_string_delete_all">Iscantzella totu</string>
     <string name="animate_routing_route_not_calculated">Pro praghere càlcula s’andala in antis</string>
     <string name="animate_routing_route">"Dispinta impreende un\'àndala calculada "</string>
     <string name="animate_routing_gpx">Dispinta impreende una caminera GPX</string>
@@ -165,7 +168,7 @@
     <string name="speak_traffic_warnings">Avisos de tràfficu</string>
 
     <string name="osb_author_or_password_not_specified">Pro praghere dislinda su nùmene impitadore OSM e sa crae (password) in sas Impostatziones</string>
-    <string name="clear_intermediate_points">Burra sas tapas intermèdias</string>
+    <string name="clear_intermediate_points">Iscantzella sas tapas intermèdias</string>
     <string name="keep_intermediate_points">Mantènne sas tapas intermèdias</string>
     <string name="new_directions_point_dialog">Tenes giai tapas intermèdias impostadas.</string>
     <string name="context_menu_item_directions_to">Indicatziones cara a</string>
@@ -191,7 +194,7 @@
     <string name="local_osm_changes_backup_successful">Creatzione documentu de muda OSM %1$s acabada</string>
     <string name="local_osm_changes_backup_failed">Creatzione de sa còpia locale de seguràntzia (backup) de sas modìficas faddida</string>
     <string name="local_osm_changes_backup">Crea una còpia de seguràntzia comente muda OSM</string>
-    <string name="delete_point">Burra puntu</string>
+    <string name="delete_point">Iscantzella puntu</string>
     <string name="plugin_distance_point_time">orariu</string>
     <string name="plugin_distance_point_hdop">pretzisione</string>
     <string name="plugin_distance_point_speed">lestresa</string>
@@ -201,15 +204,18 @@
     <string name="gpx_saved_sucessfully">Documentu GPX sarbadu cun sutzessu in {0}</string>
     <string name="osmand_distance_planning_plugin_description">Custa estensione ativat unu widget in s\'ischermu de sa mapa chi permitit de creare àndalas carchende in sa mapa, o de impreare o mudare documentos GPX esistentes, pro pianificare unu biàgiu e medire sa distantzia intre puntos diferentes. Sos resurtados podent èssere sarbados comente GPX, e ant a poder\'èssere impreados prus a tardu comente ghia.</string>
     <string name="osmand_distance_planning_plugin_name">Aina calcoladore de distàntzia e pianificatzione</string>
-    <string name="use_distance_measurement_help">* Toca pro sinnare unu puntu.\n 
-        * Carca e tene carcau in sa mapa pro burrare sos puntos antepostos.\n
-        * Carca e tene carcau supra de unu puntu pro bìdere e alliongiare una descrizione.\n
-        * Carca supra su widget de medidura pro bìdere àteras atziones possibiles.</string>
+    <string name="use_distance_measurement_help">* Toca pro sinnare unu puntu.
+ 
+ * Incarca e mantènne incarcadu in sa mapa pro iscantzellare sos puntos antepostos.
+
+ * Incarca e mantènne incarcadu in subra de unu puntu pro bìdere e alliongiare una descrizione.
+
+ * Incarca in subra de su widget de medidura pro bìdere àteras atziones possìbiles.</string>
     <string name="shared_string_do_not_show_again">Non ammustrare dae nou</string>
     <string name="distance_measurement_start_editing">Incumintza a mudare</string>
     <string name="distance_measurement_finish_editing">Fini de mudare</string>
     <string name="distance_measurement_finish_subtrack">Incumintza una sutacaminera noa</string>
-    <string name="distance_measurement_clear_route">Burra totu sos puntos</string>
+    <string name="distance_measurement_clear_route">Iscantzella totu sos puntos</string>
 
     <string name="distance_measurement_load_gpx">Aberi GPX esistente</string>
     <string name="wait_current_task_finished">Pro praghere iseta sa fine de su traballu presente</string>
@@ -221,9 +227,9 @@
     <string name="files_limit">tenes galu %1$d documentos</string>
     <string name="available_downloads_left">Disponìbiles %1$d documentos de iscarrigare</string>
     <string name="install_paid">Versione cumprida</string>
-    <string name="cancel_route">Burra s’àndala</string>
+    <string name="cancel_route">Iscantzella s’àndala</string>
     <string name="cancel_navigation">Firma su nàvigu</string>
-    <string name="clear_destination">Burra sa destinatzione</string>
+    <string name="clear_destination">Iscantzella sa destinatzione</string>
     <string name="download_using_mobile_internet">Sa connessione WiFi non est alluta. Boles sighire a iscarrigare impreende sa connessione ìnternet atuale?</string>
     <string name="street_name">Nùmene istrada</string>
     <string name="hno">Nùmeru tzivicu</string>
@@ -235,8 +241,13 @@
     <string name="osmo_settings_uuid">ID ùnicu de su dispositivu</string>
     <string name="osmo_settings_descr">Cunfigura sas impostatziones de compidada de su dispositivu e imposta su canale de compidada pessonale</string>
     <string name="osmo_plugin_description">"Custa estensione frunit in parte sas funtzionalidades pro impreare sa compidada OpenStreetMap, bie http://osmo.mobi.
-\n\nPodes sighire sos dispositivos de unu grupu in tempus reale. Podes fintzas bìdere sos puntos e sas rastas carrigadas in su grupu in ue ses.
-\n\nSu grupu chi no est istadu burradu a pustis de carchi mese benit impostadu pro sighire sas règulas pro sa creatzione de grupos in gu giassu/situ OsMo.mobi "</string>
+
+
+Podes sighire sos dispositivos de unu grupu in tempus reale. Podes fintzas bìdere sos puntos e sas rastas carrigadas in su grupu in ue ses.
+
+
+Su grupu chi no est istadu iscantzelladu a pustis de carchi mese benit impostadu pro sighire sas règulas pro sa creatzione de grupos in gu giassu/situ OsMo.mobi
+ "</string>
     <string name="osmo_plugin_name">Compidada OpenStreetMap</string>
     <string name="osmo_settings">OsMo</string>
 
@@ -271,7 +282,7 @@
     <string name="local_indexes_cat_srtm">Lìnias de livellu</string>
     <string name="local_indexes_cat_av">Datos àudio/vìdeo</string>
     <string name="stop_routing_confirm">Ses seguru de bòlere firmare su nàvigu?</string>
-    <string name="clear_dest_confirm">Seguru ses de bòlere burrare sa destinatzione (e sas tapas intermèdias)?</string>
+    <string name="clear_dest_confirm">Seguru ses de bòlere iscantzellare sa destinatzione (e sas tapas intermèdias)?</string>
     <string name="precise_routing_mode_descr">Abìlita pro calculare àndalas pretzisas chene atopos. Est lentu e limitadu in sa distàntzia.</string>
     <string name="precise_routing_mode">Calculu pretzisu de s’àndala (alfa)</string>
     <string name="recording_context_menu_show">Ammustra</string>
@@ -301,14 +312,14 @@
     <string name="recording_is_recorded">S’àudio/vìdeo istat pro èssere registrau. Pro lu firmare carca su widget AV.</string>
     <string name="recording_playing">S’àudio de sa registratzione isseberada istat pro èssere reprodotu.\n%1$s</string>
     <string name="recording_open_external_player">Abèri reprodutòre esternu</string>
-    <string name="recording_delete_confirm">Boles burrare custa registratzione?</string>
+    <string name="recording_delete_confirm">Boles iscantzellare custa registratzione?</string>
 
     <string name="recording_unavailable">non disponìbile</string>
     <string name="recording_context_menu_arecord">Registra una nota àudio</string>
     <string name="recording_context_menu_vrecord">Registra una nota vìdeo</string>
     <string name="layer_recordings">Istratu regitratziònes</string>
     <string name="recording_can_not_be_played">Sa registratzione non podet èssere reprodota</string>
-    <string name="recording_context_menu_delete">Burra sa registratzione</string>
+    <string name="recording_context_menu_delete">Iscantzella sa registratzione</string>
     <string name="recording_context_menu_play">Reprodui</string>
     <string name="recording_description">Registratzione %1$s %3$s %2$s</string>
     <string name="recording_default_name">Registrende</string>
@@ -366,7 +377,7 @@
 
     <string name="map_widget_monitoring_services">Servitzios de registratzione</string>
     <string name="no_route">Peruna àndala</string>
-    <string name="delete_target_point">Burra sa tapa intermèdia</string>
+    <string name="delete_target_point">Iscantzella sa tapa intermèdia</string>
     <string name="target_point">Tapa intermèdia %1$s</string>
     <string name="intermediate_point">Destinatzione intermèdia %1$s</string>
     <string name="context_menu_item_last_intermediate_point">Annanghela comente ùrtima tapa intermèdia</string>
@@ -542,7 +553,7 @@ Boles protzèdere cun una registratzione noa?</string>
     <string name="osmo_credentials_not_valid">Sas credenziales de OsMo tuas non sunt vàlidas.</string>
     <string name="osmo_regenerate_login_ids_confirm">Ses seguru de bòlere reingendrare sos id pessonales? Totu sos dispositivos collegaos a tie non ant a èssere prus capassios de t\'arrastare.</string>
     <string name="osmo_regenerate_login_ids">Torra a ingendrare s’id</string>
-    <string name="osmo_cancel_moving_target">Burra s’obietivu mòbile</string>
+    <string name="osmo_cancel_moving_target">Iscantzella s’obietivu mòbile</string>
     <string name="osmo_center_location">Tzentra in s’ischermu</string>
     <string name="osmo_set_moving_target">Imposta comente obietivu mòbile</string>
     <string name="osmo_use_server_name">Nùmene registrau</string>
@@ -1045,10 +1056,10 @@ Memòria in proportzione %4$s MB (lìmite de Android %5$s MB, Dalvik %6$s MB).</
     <string name="rendering_attr_hikingRoutesOSMC_name">Istratu sìmbulos escursionisticos</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Disinna sas camineras sighinde sas rastas OSMC</string>
 
-    <string name="osmand_parking_delete_confirm">Boles burrare su marcadore de sa positzione de sa màchina parchegiada?</string>
-    <string name="osmand_parking_delete">Burra su marcadore de parchègiu</string>
+    <string name="osmand_parking_delete_confirm">Cheres iscantzellare su marcadore de sa positzione de sa màchina parchegiada?</string>
+    <string name="osmand_parking_delete">Iscantzella su marcadore de parchègiu</string>
     <string name="osmand_parking_position_description_add">Recùpera sa màchina pro sas:</string>
-    <string name="context_menu_item_delete_parking_point">Burra unu marcadore de parchègiu</string>
+    <string name="context_menu_item_delete_parking_point">Iscantzella unu marcadore de parchègiu</string>
     <string name="route_roundabout">Rutunda: piga sa %1$d essida e sighi</string>
     <string name="rendering_attr_appMode_description">Otimizza sas mapas pro</string>
     <string name="rendering_attr_contourLines_description">Ammustra dae su livellu de zoom (serbint sos datos de sas lìnias de livellu):</string>
@@ -1116,7 +1127,7 @@ Memòria in proportzione %4$s MB (lìmite de Android %5$s MB, Dalvik %6$s MB).</
     <string name="update_poi_does_not_change_indexes">Sa modìficas de sos PDI intre s’aplicu non tenent efetos in sas mapas iscarrigadas, sunt imbetzes sarbadas in unu documentu locale.</string>
     <string name="local_openstreetmap_were_uploaded">{0} sos PDI/Notas sunt istados carrigados</string>
     <string name="local_openstreetmap_upload">Càrriga sa modìfica in OSM</string>
-    <string name="local_openstreetmap_delete">Burra sa modìfica</string>
+    <string name="local_openstreetmap_delete">Iscantzella sa modìfica</string>
     <string name="local_openstreetmap_descr_title">Muda asìncrona de OSM:</string>
     <string name="local_openstreetmap_settings_descr">Ammustra e amministra sos PDI/Notas OSM in intro de su database locale</string>
     <string name="live_monitoring_interval_descr">Dislinda s’intervallu de s’arrastamentu in lìnia</string>
@@ -1162,13 +1173,13 @@ Memòria in proportzione %4$s MB (lìmite de Android %5$s MB, Dalvik %6$s MB).</
     <string name="auto_follow_location_enabled">Bisura de sa mapa tzentrada automaticamente.</string>
     <string name="pref_vector_rendering">Optziones dislindadas pro su disinnu vetoriale</string>
     <string name="pref_overlay">Subrapositzione / isfundu</string>
-    <string name="delete_confirmation_msg">Burrare %1$s?</string>
+    <string name="delete_confirmation_msg">Iscantzellare %1$s?</string>
     <string name="city_type_suburb">Bighinadu - apendìtziu</string>
 
     <string name="file_can_not_be_renamed">Su documentu non podet èssere torrau a numenare.</string>
     <string name="poi_query_by_name_matches_categories">Agatadas categorias PDI chi ispricant sa chirca:</string>
     <string name="data_to_search_poi_not_available">Datos locales cuntenentes PDI non presentes.</string>
-    <string name="old_poi_file_should_be_deleted">Su documentu de datos PDI \'%1$s\' est bundajolu e podet èssere burrau.</string>
+    <string name="old_poi_file_should_be_deleted">Su documentu de datos PDI \'%1$s\' est bundajolu e podet èssere iscantzelladu.</string>
     <string name="update_poi_file_not_found">Su documentu pro registrare sas modìficas de sos PDI no est istadu ne agatadu nen creadu.</string>
     <string name="map_version_changed_info">In su server bi sunt documentos de mapas non compatìbiles cun sa versione atuale de su programma. Pro los iscarrigare e impreare agiorna s’aplicu a s\'ùritma versione.</string>
     <string name="shared_string_rename">Càmbia su nùmene</string>
@@ -1177,7 +1188,7 @@ Memòria in proportzione %4$s MB (lìmite de Android %5$s MB, Dalvik %6$s MB).</
     
     <string name="search_position_map_view">Tzentru atuale de sa mapa</string>
     <string name="local_index_mi_upload_gpx">Imbia ad OSM</string>
-    <string name="favourites_delete_multiple_succesful">Puntu/os preferidu/os burradu/os.</string>
+    <string name="favourites_delete_multiple_succesful">Puntu/os preferidu/os iscantzelladu/os.</string>
     <string name="favorite_delete_multiple">Ses burrende %1$d preferidu/os e %2$d grupu/os preferidos. Seguru ses?</string>
     <string name="favorite_home_category">Domo</string>
     <string name="favorite_friends_category">Amigos</string>
@@ -1190,7 +1201,7 @@ Memòria in proportzione %4$s MB (lìmite de Android %5$s MB, Dalvik %6$s MB).</
     <string name="vector_data_missing">Fartant sos datos (\'non in lìnia\') in s’ischeda SD. Ti cussigiamus de los iscarrigare pro poder impreare sas mapas chene lìnia.</string>
     <string name="local_index_installed">Versione locale</string>
     <string name="local_index_items_backuped">%1$d de %2$d ogetu/os istudados curretamente.</string>
-    <string name="local_index_items_deleted">%1$d de %2$d ogetu/os burradu curretamente.</string>
+    <string name="local_index_items_deleted">%1$d de %2$d ogetu/os iscantzelladu curretamente.</string>
     <string name="local_index_items_restored">%1$d de %2$d ogetu/os ativadu/os curretamente.</string>
     <string name="local_index_no_items_to_do">Perunu ogetu dae %1$s</string>
     <string name="local_index_action_do">Istas pro %1$s %2$s ogetu/os. Sighire?</string>
@@ -1362,7 +1373,7 @@ Memòria in proportzione %4$s MB (lìmite de Android %5$s MB, Dalvik %6$s MB).</
     <string name="transport_context_menu">Chirca unu trasportu pùblicu a sa firmada</string>
 
     
-    <string name="poi_context_menu_delete">Burra PDI</string>
+    <string name="poi_context_menu_delete">Iscantzella PDI</string>
     <string name="rotate_map_compass_opt">Cun bùssola</string>
     <string name="rotate_map_none_opt">Peruna rotatzione (nord in artu)</string>
     <string name="rotate_map_to_bearing_descr">Isseberare s’alliniamentu de sa mapa a s’ischermu</string>
@@ -1488,7 +1499,7 @@ Memòria in proportzione %4$s MB (lìmite de Android %5$s MB, Dalvik %6$s MB).</
     <string name="search_history_int_streets">Rugrada: {0} x {1} in {2}</string>
     <string name="search_history_building">Edifìtzios: {0}, {1}, {2}</string>
     <string name="favorite">Preferidu</string>
-    <string name="shared_string_clear_all">Burra totu</string>
+    <string name="shared_string_clear_all">Iscantzella totu</string>
     <string name="shared_string_history">Istòria</string>
     <string name="uploading_data">Imbiu datos…</string>
     <string name="uploading">Imbiu…</string>
@@ -1628,16 +1639,16 @@ Memòria in proportzione %4$s MB (lìmite de Android %5$s MB, Dalvik %6$s MB).</
     <string name="context_menu_item_update_map">Agiorna sa mapa</string>
     
     <string name="context_menu_item_create_poi">Crea PDI</string>
-    <string name="shared_string_cancel">Burra</string>
+    <string name="shared_string_cancel">Iscantzella</string>
     <string name="shared_string_apply">Aplica</string>
     <string name="shared_string_add">Annanghe</string>
     <string name="add_favorite_dialog_top_text">Inserta su nùmene de su preferidu</string>
     <string name="add_favorite_dialog_default_favourite_name">Preferidu</string>
     <string name="add_favorite_dialog_favourite_added_template">Su puntu preferidu \'\'{0}\'\' est istadu annantu.</string>
     <string name="favourites_context_menu_edit">Modìfica preferidu</string>
-    <string name="favourites_context_menu_delete">Burra preferidu</string>
-    <string name="favourites_remove_dialog_msg">Burrare su puntu preferidu \'%s\'?</string>
-    <string name="favourites_remove_dialog_success">Su puntu preferidu {0} est istadu burradu.</string>
+    <string name="favourites_context_menu_delete">Iscantzella preferidu</string>
+    <string name="favourites_remove_dialog_msg">Iscantzellare su puntu preferidu \'%s\'?</string>
+    <string name="favourites_remove_dialog_success">Su puntu preferidu {0} est istadu iscantzelladu.</string>
     
     
     
@@ -1657,16 +1668,16 @@ Memòria in proportzione %4$s MB (lìmite de Android %5$s MB, Dalvik %6$s MB).</
     <string name="poi_edit_title">Muda PDI</string>
     <string name="poi_create_title">Crea PDI</string>
     <string name="poi_error_poi_not_found">Su nodu no est istadu agatadu o s’amenidade no est unu nodu sìngulu</string>
-    <string name="poi_remove_confirm_template">Burrare {0} (insertare unu cummentu)?</string>
-    <string name="poi_remove_title">Burradura PDI</string>
-    <string name="shared_string_delete">Burra</string>
-    <string name="poi_remove_success">PDI burradu curretamente</string>
+    <string name="poi_remove_confirm_template">Iscantzellare {0} (insertare unu cummentu)?</string>
+    <string name="poi_remove_title">Iscantzelladura PDI</string>
+    <string name="shared_string_delete">Iscantzella</string>
+    <string name="poi_remove_success">PDI iscantzelladu curretamente</string>
     <string name="poi_error_unexpected_template">Errore ispessadu durante s’esecutzione de s’atzione {0}.</string>
     <string name="default_buttons_commit">Imbia</string>
-    <string name="shared_string_clear">Burra</string>
-    <string name="edit_filter_delete_dialog_title">Burrare su filtru ischertadu?</string>
-    <string name="edit_filter_delete_message">Su filtru {0} est istadu burradu</string>
-    <string name="edit_filter_create_message">Su filtru {0} est istadu burradu</string>
+    <string name="shared_string_clear">Iscantzella</string>
+    <string name="edit_filter_delete_dialog_title">Iscantzellare su filtru ischertadu?</string>
+    <string name="edit_filter_delete_message">Su filtru {0} est istadu iscantzelladu</string>
+    <string name="edit_filter_create_message">Su filtru {0} est istadu iscantzelladu</string>
     <string name="email">post.el.</string>
     <string name="av_camera_focus">Tipu de messa a fogu</string>
     <string name="av_camera_focus_descr">Issèbera su tipu de messa a fogu de sa fotocàmera integrada</string>
@@ -1719,7 +1730,7 @@ Memòria in proportzione %4$s MB (lìmite de Android %5$s MB, Dalvik %6$s MB).</
     <string name="traffic_warning_calming">Minimadore de lestresa</string>
     <string name="traffic_warning_speed_camera">Autovelox</string>
     <string name="traffic_warning">Avisu de tràficu</string>
-    <string name="local_index_description">Ischerta unu elementu esistente pro bìere prus minujas, carca e mantène carcau pro lu disativare o burrare. Datos como in su dispositivu (%1$s lìberos):</string>
+    <string name="local_index_description">Ischerta un\'elementu esistente pro bìdere prus minujas, incarca e mantènne incarcadu pro lu disativare o iscantzellare. Datos como in su dispositivu (%1$s lìberos):</string>
     <string name="text_size_descr">Issèbera sa mannària de su testu in sa mapa.</string>
     <string name="text_size">Mannària de su testu</string>
     <string name="fav_point_dublicate_message">Nùmene preferidu giai impreadu, cambiadu in %1$s pro non tènnere duplicados.</string>
@@ -1876,7 +1887,7 @@ Memòria in proportzione %4$s MB (lìmite de Android %5$s MB, Dalvik %6$s MB).</
     <string name="track_points">Puntos de sa rasta</string>
     <string name="action_create">Atzione crea</string>
     <string name="action_modify">Atzione modìfica</string>
-    <string name="action_delete">Atzione burra</string>
+    <string name="action_delete">Atzione iscantzella</string>
     <string name="osm_edits">Modìficas OSM</string>
     <string name="osmand_parking_hour">h</string>
     <string name="osmand_parking_minute">min</string>
@@ -1906,7 +1917,7 @@ Memòria in proportzione %4$s MB (lìmite de Android %5$s MB, Dalvik %6$s MB).</
 
     <string name="shared_string_go">Bae</string>
     <string name="delay_to_start_navigation">Brinca sa pianificatzione de s\'àndala…</string>
-    <string name="confirmation_to_clear_history">Boles burrare s’istòria?</string>
+    <string name="confirmation_to_clear_history">Cheres iscantzellare s’istòria?</string>
     <string name="local_osm_changes_upload_all_confirm">As a carrigare %1$d modìficas in OSM. Seguru ses?</string>
     <string name="osmo_grop_name_length_alert">Sa longària de su nùmene de su grupu depet èssere de a su mancu 3 caràteres!</string>
     <string name="osm_changes_added_to_local_edits">Mòdificas OSM annantas a sas modìficas locales</string>
@@ -1915,7 +1926,7 @@ Memòria in proportzione %4$s MB (lìmite de Android %5$s MB, Dalvik %6$s MB).</
     <string name="welcome_text">OsmAnd frunit e ti cunsentit de impreare mapas globales e nàvigu chene lìnia!</string>
     <string name="welcome_header">Benènnidu</string>
     <string name="current_route">Àndala atuale</string>
-    <string name="mark_to_delete">Marca pro burrare</string>
+    <string name="mark_to_delete">Marca pro iscantzellare</string>
     <string name="confirm_usage_speed_cameras">In medas istados (Germània, Frantza, Itàlia, e àteros) s’impreu de avisos pro sos autovelox no est permitidu dae sa lege. OsmAnd non s’at a pigare responsabilidades s’in casu tue che l’as a violare. Pro praghere carca eja petzi si podes impreare custa funtzionalidade.</string>
     <string name="agps_info">Informatziones A-GPS</string>
     <string name="agps_data_last_downloaded">Ùrtimu agiornamentu datos A-GPS: %1$s</string>
@@ -1956,13 +1967,13 @@ Memòria in proportzione %4$s MB (lìmite de Android %5$s MB, Dalvik %6$s MB).</
     <string name="shared_string_logoff">Essi</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Coloratzione a segunda de sa casta de àndala</string>
     <string name="rendering_value_walkingRoutesOSMC_name">Coloratzione a segunda de OSMC</string>
-    <string name="osm_edit_context_menu_delete">Burra modìfica OSM</string>
+    <string name="osm_edit_context_menu_delete">Iscantzella modìfica OSM</string>
     <string name="shared_string_import2osmand">Importa in OsmAnd</string>
     <string name="read_full_article">Leghe s\'artìculu intreu (in lìnia)</string>
 
     <string name="local_indexes_cat_wiki">Wikipedia</string>
     <string name="shared_string_show_details">Ammustra minujas</string>
-    <string name="local_recordings_delete_all_confirm">Istas pro burrare %1$d notas. Seguru ses?</string>
+    <string name="local_recordings_delete_all_confirm">As a iscantzellare %1$d notas. Seguru ses?</string>
     <string name="download_wikipedia_maps">Wikipedia</string>
     <string name="gps_network_not_enabled">Su servìtziu de localizatzione no est abilitadu. Lu boles allùere?</string>
     <string name="disable_recording_once_app_killed">Èvita/istransi sa registratzione autònoma</string>
@@ -2031,7 +2042,7 @@ Memòria in proportzione %4$s MB (lìmite de Android %5$s MB, Dalvik %6$s MB).</
     <string name="download_live_updates">Agiornamentos automàticos</string>
     <string name="we_really_care_about_your_opinion">Nos importat meda de s\'opinione tua, est importante pro nois a ti intendere.</string>
     <string name="failed_to_upload">Carrigamentu faddidu</string>
-    <string name="delete_change">Burra modìficas</string>
+    <string name="delete_change">Iscantzella modìficas</string>
     <string name="successfully_uploaded_pattern">Carrigamentu resessidu {0}/{1}</string>
     <string name="try_again">Torra a proare</string>
     <string name="error_message_pattern">Errore: {0}</string>
@@ -2063,11 +2074,11 @@ Memòria in proportzione %4$s MB (lìmite de Android %5$s MB, Dalvik %6$s MB).</
     
     <string name="please_specify_poi_type">Dislinda casta de PDI.</string>
     <string name="number_of_rows_in_dash">Nùmeru de rigas in su pannellu %1$s</string>
-    <string name="poi_action_delete">burra</string>
+    <string name="poi_action_delete">iscantzella</string>
     <string name="working_days">Dies de traballu</string>
     <string name="recent_places">Logos reghentes</string>
     <string name="favourites">Preferidos</string>
-    <string name="poi_deleted_localy">Su PDI at a èssere burradu a pustis de su carrigamentu de sas modìficas tuas</string>
+    <string name="poi_deleted_localy">Su PDI at a èssere iscantzelladu a pustis de su carrigamentu de sas modìficas tuas</string>
     <string name="show_gpx">Ammustra GPX</string>
     <string name="saved_at_time">Sarbada resèssida in: %1$s</string>
     <string name="show_on_start">Ammustra in su cumintzu</string>
@@ -2181,13 +2192,13 @@ Memòria in proportzione %4$s MB (lìmite de Android %5$s MB, Dalvik %6$s MB).</
     <string name="share_osm_edits_subject">Modìficas OSM cumpartzidas pro mèdiu de OsmAnd</string>
     <string name="save_poi_without_poi_type_message">Boles sarbare su PDI chene dislindare sa casta sua?</string>
     <string name="shared_string_location">Positzione</string>
-    <string name="context_menu_item_delete_waypoint">Burrare su puntu de coladòrgiu GPX?</string>
+    <string name="context_menu_item_delete_waypoint">Iscantzellare su puntu de coladòrgiu GPX?</string>
     <string name="context_menu_item_edit_waypoint">Modìfica su puntu de coladòrgiu GPX</string>
     <string name="poi_context_menu_modify_osm_change">Modìfica càmbiu OSM</string>
     <string name="context_menu_item_open_note">Nota OSM aberta</string>
     <string name="osm_edit_reopened_note">Nota OSM torrada a abèrrere</string>
     <string name="osm_edit_commented_note">Nota OSM cummentada</string>
-    <string name="osm_edit_removed_note">Nota OSM burrada</string>
+    <string name="osm_edit_removed_note">Nota OSM iscantzellada</string>
 	<string name="osm_edit_created_note">Nota OSM creada</string>
 	<string name="osn_bug_name">Nota OSM</string>
 	<string name="osn_add_dialog_title">Crea nota</string>
@@ -2202,7 +2213,7 @@ Memòria in proportzione %4$s MB (lìmite de Android %5$s MB, Dalvik %6$s MB).</
 	<string name="shared_string_commit">Imbia</string>
 	
     <string name="osm_edit_modified_poi">PDI OSM modificadu</string>
-    <string name="osm_edit_deleted_poi">PDI OSM burradu</string>
+    <string name="osm_edit_deleted_poi">PDI OSM iscantzelladu</string>
     <string name="copied_to_clipboard">Copiadu in sos apuntos</string>
     <string name="osm_save_offline">Sarba in sa memòria (impreu chene lìnia)</string>
     <string name="rendering_attr_currentTrackColor_description">Colore GPX</string>
@@ -2295,7 +2306,7 @@ Memòria in proportzione %4$s MB (lìmite de Android %5$s MB, Dalvik %6$s MB).</
 <string name="shared_string_type">Casta</string>
     <string name="starting_point">Puntu de incumintzu</string>
     <string name="item_removed">Elementu bogadu</string>
-    <string name="n_items_removed">elementos burrados</string>
+    <string name="n_items_removed">elementos iscantzellados</string>
     <string name="shared_string_undo_all">ANNUDDA TOTU</string>
     <string name="rec_split">Intervallu de registratzione</string>
     <string name="rec_split_title">Imprea un’intervallu de registratzione</string>
@@ -2306,7 +2317,7 @@ Memòria in proportzione %4$s MB (lìmite de Android %5$s MB, Dalvik %6$s MB).</
     <string name="reports_for">Sinnala pro</string>
 <string name="shared_string_remove">Boga</string>
     <string name="data_is_not_available">Su datu no est disponìbile</string>
-    <string name="clear_updates_proposition_message">Podes burrare sos agiornamentos iscarrigados e torrare a s’editzione originale de sa mapa</string>
+    <string name="clear_updates_proposition_message">Podes iscantzellare sos agiornamentos iscarrigados e torrare a s’editzione originale de sa mapa</string>
     <string name="add_time_span">Annanghe intervallu de tempus</string>
     <string name="road_blocked">Àndala blocada</string>
     <string name="shared_string_select">Ischerta</string>
@@ -2339,7 +2350,7 @@ Optziones agiuntivas:
 • Àndalas turìsticas pro totu su mundu
 • Mapas in lìnia dae medas mitzas
 • Informatziones chi pertocant sa casta de pamentu e de illuminatzione istradale
-• Possibilidade de annanghere, modificare e burrare PDI (pro impreadores OpenStreetMap.org)
+• Possibilidade de annanghere, modificare e iscantzellare PDI (pro impreadores OpenStreetMap.org)
 • OsMo - compidada in lìnia de àteros dispositivos
 
 Imprea unu navigadore afidàbile in sa natzione tua - chi siat sa Frantza, sa Germània, su Mèssicu, su Regnu Unidu, s’Ispàgna, s’Olanda, sos Istados Unidos, sa Rùssia, su Brasile o calesisiat àteru istadu.
@@ -2369,8 +2380,8 @@ Si tenes bisòngiu de agiudu cun s\'aplicatzione OsmAnd, pro praghere cuntata su
     <string name="shared_string_reverse_order">Fùrria s\'òrdine</string>
     
     <string name="show_map_markers_description">Allue sa funtzionalidade Marcadores Mapa</string>
-    <string name="clear_active_markers_q">Boles burrare totu sos marcadores ativos?</string>
-    <string name="clear_markers_history_q">Boles burrare sa cronologia de sos marcadores?</string>
+    <string name="clear_active_markers_q">Boles iscantzellare totu sos marcadores ativos?</string>
+    <string name="clear_markers_history_q">Boles iscantzellare sa cronologia de sos marcadores?</string>
     <string name="active_markers">Marcadores ativos</string>
     <string name="map_markers">Marcadores mapa</string>
     <string name="map_marker">Marcadore mapa</string>
@@ -2502,7 +2513,7 @@ Como bi sunt {2} MB ebbia disponìbiles.</string>
     <string name="show_something_on_map">Ammustra %1$s in sa mapa</string>
     <string name="dist_away_from_my_location">Chirca a %1$s dae inoghe</string>
     <string name="back_to_search">Torra a sa chirca</string>
-    <string name="confirmation_to_delete_history_items">Boles burrare sos elementos ischertados de s\'istòria?</string>
+    <string name="confirmation_to_delete_history_items">Boles iscantzellare sos elementos ischertados de s\'istòria?</string>
     <string name="coords_search">Chirca de coordinatas</string>
     <string name="advanced_coords_search">Chirca avantzada de coordinatas</string>
     <string name="release_2_4">"
