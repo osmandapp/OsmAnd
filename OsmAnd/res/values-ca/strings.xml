@@ -369,7 +369,7 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
  - Baixada il·limitada de mapes nacionals o regionals directament des de l\'aplicació
  - Diverses capes de mapes alhora, com traces GPX o de navegació, PDIs, favorits, parades de transport públic, etc. amb nivell d\'opacitat personalitzada
  - Cerca, fora de línia, d\'adreces i llocs
- - Càlcul de rutes, fora de línia, per distàncies curtes (experimental)
+ - Càlcul de rutes, fora de línia, fins la mitjana distància
  - Modalitats cotxe, bicicleta i vianant
  - Canvi automàtic de vista diürna a nocturna, opcional
  - Ampliació automàtica del mapa segons la velocitat, opcional
@@ -396,7 +396,7 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
  - Disponibilitat fora de línia dels PDI baixats prèviament de Viquipèdia, és genial per fer turisme
  - Diverses capes de mapes alhora, com traces GPX o de navegació, PDIs, favorits, parades de transport públic, etc. amb nivell d\'opacitat personalitzada
  - Cerca fora de línia d\'adreces i llocs
- - Càlcul de rutes fora de línia per distàncies curtes (experimental)
+ - Càlcul de rutes fora de línia fins la mitjana distància
  - Modalitats cotxe, bicicleta i vianant
  - Canvi automàtic de vista diürna a nocturna, opcional
  - Ampliació automàtica del mapa segons la velocitat, opcional
@@ -2390,7 +2390,10 @@ Cas que aprecieu OsmAnd  i OSM i vulgueu ajudar-los, és una via perfecta per fe
  • Àudio amb Bluetooth molt millorat
 
 
- • Guia de navegació millorada amb carrils auxiliars
+ • Guia de navegació millorada, indicacions de veu i indicacions de carrils de gir
+
+
+ • Millores a la capa de transport col·lectiu
 
 
  • Moltes més millores i correccions d\'errors
