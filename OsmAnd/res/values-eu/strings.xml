@@ -145,7 +145,7 @@
   
   <string name="intermediate_points_change_order">Ordena aldatu</string>
   <string name="srtm_paid_version_msg">Mesedez, gehiago garatu ahal izateko kontsideratu Sestra-kurben plugina Marketean erostea.</string>
-  <string name="srtm_paid_version_title">Sestra-kurben plugina</string>
+  <string name="srtm_paid_version_title">Sestra-kurben gehigarria</string>
   <string name="av_def_action_choose">Eskariaren arabera hautatu</string>
   <string name="av_def_action_video">Bideoa grabatu</string>
   <string name="av_def_action_audio">Audioa grabatu</string>
@@ -178,7 +178,7 @@
   <string name="shared_string_control_stop">Gelditu</string>
   <string name="shared_string_control_start">Hasi</string>
   <string name="map_widget_av_notes">Audio/bideo oharrak</string>
-  <string name="osmand_srtm_short_description_80_chars">OsmAnden lineaz kanpoko sestra-kurben plugina</string>
+  <string name="osmand_srtm_short_description_80_chars">Lineaz kanpoko sestra-kurben OsmAnd gehigarria</string>
   <string name="osmand_srtm_long_description_1000_chars">Plugin honek OsmAnd-eko lineaz kanpoko mapetan agertu daitezkeen sestra-kurbak eskaintzen ditu. Datu globalak (iparraldean 70 gradutan eta hegoaldean 70 gradutan) STRM (Shuttle Radar Topography Mission) eta ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer) neurrietan oinarrituak daude, espazioko Terra irudi tresna, NASAren Lurra Behatzeko Sistemaren satelite emblematikoa. ASTER NASAren, Japoniako Ekonomi, Merkataritza eta Industria Ministerioaren (EMIM), eta Japoneko Espazio Sistemaren (J-espaziosistema) elkarlanaren ondorioz sortua izan da.</string>
   <string name="map_widget_distancemeasurement">Distantzia neurketa</string>
   <string name="audionotes_location_not_defined">Ez dago oharrarekin erlazionaturiko kokapenik definituta. \"Kokapena erabili…\" aukeratutako kokapenari ohar bat lotzeko</string>
@@ -413,7 +413,13 @@ Kokalekua eta denbora OsmAnd kontrol panelean ikusgai daude eta maparen pantaila
   <string name="online_map_settings_descr">Konfiguratu sareko edo katxeaturiko mapen iturburuak</string>
   
   
-  <string name="osmand_rastermaps_plugin_description">Ezarpenetara joan sareko edo katxeatutako tesela mapak mapa base bezala edo gain-azal / azpi-azal mapa bezala konfiguratzeko. Mapa hauek lineaz kanporako prestatu daitezke ere eta OsmAndeko karpetan kopiatu.</string>
+  <string name="osmand_rastermaps_plugin_description">"Gehigarri honekin sareko (edo tesela) mapa mota ugari atzitu ditzakezu, aurrez zehaztutako OpenStreetMap teselak (adibidez Mapnik), satelite irudiak, edo erabilera zehatz baterako geruzak, hala nola, eguraldi mapak, mapa geologikoak, erliebe-itzalak eta abar.
+
+
+Mapa guzti hauek mapa nagusi edo oinarrizko gisa ezarri daitezke OsmAnd maparen pantailan bistaratzeko, edo beste oinarrizko mapa baten  gain-azal / azpi-azal gisa (adibidez lineaz kanpoko OsmAnd mapa estandarren gainean edo azpian). Azpiko mapak ikusgaiagoak egiteko OsmAnd bektore-mapetako elementu batzuk ezkutatu daitezke \'Konfiguratu mapa\' menuaren bidez.
+
+Tesela mapak zuzenean sareko iturburuetatik eskuratu daitezke, edo lineaz kanporako prestatu daitezke ere SQLite datu base gisa (eta eskuz OsmAndeko karpetan kopiatu), horretarako dauden hirugarrengoen prestaketa tresnaren bat erabiliz.
+ "</string>
   <string name="osmand_accessibility_description">Erabilerraztasun berezietarako ezaugarrientzako ezarpenak erakutsi.</string>
   
   
@@ -2141,4 +2147,8 @@ eta gehiago…
     <string name="navigation_item_description">Ezarri nabigazioa</string>
     <string name="first_usage_item_description">Nola deskargatu mapak, oinarrizko ezarpenak</string>
     <string name="begin_with_osmand_menu_group">Lehen pausuak OsmAnd erabiltzean</string>
+    <string name="record_plugin_description">"Gehigarri honek zure lorratzak grabatu eta gordetzeko funtzionaltasuna gehitzen du, eskuz maparen pantailan GPX erregistratze trepeta sakatuz, edo automatikoki zure nabigazio guztia GPSX fitxategi batean zuzenean gordez.
+
+Grabatutako lorratzak lagunekin partekatu ditzakezu edo OSM kontribuzio gisa erabili. Kirolariek entrenamenduak grabatzeko erabili dezakete. Lorratzen oinarrizko analisi bat egin daiteke zuzenean OsmAnd erabiliz, bueltako denbora, batezbesteko abiadura, eta abar. eta jakina lorratzak kanpo tresna bereziekin aztertu daitezke ere.
+ "</string>
     </resources>
