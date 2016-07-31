@@ -898,7 +898,7 @@ OsmAnd jest otwarto-źródłowym programem do nawigacji z dostępem do szerokiej
  - Pobieranie map kraju lub regionu bezpośrednio z aplikacji
  - Możliwość nakładania kilku warstw map, takich jak GPX lub tras nawigacji, ciekawe miejsc, ulubionych, poziomic, przystanków komunikacji miejskiej, dodatkowych map z konfigurowalną przejrzystością
  - Wyszukiwanie offline adresów i Użytecznych Miejsc (UM)
- - Wyznaczanie w trybie offline tras na krótkich dystansach (eksperymentalne)
+ - Wyznaczanie w trybie offline tras na średnich dystansach
  - Tryby samochodowy, rowerowy i pieszy z:
  - opcjonalnym automatycznym przełączaniem widoku dzień/noc
  - opcjonalnym skalowaniem map w zależności od prędkości
