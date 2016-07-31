@@ -2403,4 +2403,11 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="transport_stops_to_pass">محطات توقف لتجاوز</string>
     <string name="update_poi_success">تم تحديث بيانات POI بنجاح ({0} تم تحميلها)</string>
     <string name="update_poi_no_offline_poi_index">لا توجد بيانات POI حاليا المتاحة في هاته المنطقة</string>
+    <string name="update_poi_is_not_available_for_zoom">تحديث الـ POI غير متاح لمستويات الزوم الصغيرة</string>
+    <string name="search_history_building">المبنى: {0}، {1}، {2}</string>
+    <string name="max_level_download_tile">التكبير الأقصى بالانترنت</string>
+    <string name="download_question_exist">البيانات المحلية لـ {0} موجودة مسبقا ({1}). هل تريد تحديثها ({2}) ؟</string>
+    <string name="commiting_node">إنشاء نقطة…</string>
+    <string name="converting_names">تحويل الأسماء باللغة المحلية/ الإنجليزية…</string>
+    <string name="previous_run_crashed">الاقلاع الأخير للتطبيق فشل. ملف السجل في {0}. الرجاء الإبلاغ عن هذا المشكل وإرفاق ملف السجل.</string>
     </resources>
