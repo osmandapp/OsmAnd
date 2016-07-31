@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
 
     <string name="switch_to_raster_map_to_see">Vektorové mapy toto místo neobsahují. Mapová data můžete stáhnout v Nastaveních (Spravovat mapové soubory), nebo se přepněte na online mapy.</string>
     <string name="send_files_to_osm">Nahrát GPX soubory do OSM?</string>
@@ -839,11 +840,58 @@ Proporcionální paměť %4$s MB (Limit Androidu %5$s MB, Dalvik %6$s MB).</stri
     <string name="new_destination_point_dialog">Cíl je již nastaven:</string>
     <string name="target_point">Cíl %1$s</string>
     <string name="target_points">Cíle</string>
-    <string name="osmand_long_description_1000_chars">" OsmAnd\n\nOsmAnd je open-source navigační program s přístupem k široké paletě celosvětových mapových dat OpenStreetMap (OSM).\nVeškerá mapová data (vektorová nebo rastrová) mohou být uložena na paměťové kartě telefonu pro offline použití. OsmAnd také nabízí offline a online navigaci včetně hlasové navigace krok za krokem.
-\n\nVýčet některých hlavních funkcí:\n- dokáže pracovat kompletně offline (vektorové nebo rastrové mapy lze uložit do volitelného úložiště zařízení)\n- kompaktní offline vektorové mapy celého světa dostupné zdarma\n- stahování národních nebo regionálních map přímo z aplikace\n- možnost zobrazení několika vrstev mapy: GPX trasa, body zájmu, oblíbená místa, vrstevnice, zastávky hromadné dopravy, dodatečné mapy s nastavitelnou průhledností\n- offline vyhledávání adres a bodů zájmu\n- offline navigace na krátké vzdálenosti (experimentální)\n- režim auto, kolo a pěší s volitelným:\n    - přepínáním denního a nočního zobrazení\n    - automatickým zvětšováním podle rychlosti pohybu\n    - natáčením mapy podle kompasu nebo směru pohybu\n    - naváděním do jízdních pruhů, zobrazením rychlostních limitů\n    - TTS nebo audio hlasovými pokyny
-\n\nOmezení této verze zdarma:\n- omezený počet stažitelných map\n- chybějící přístup na offline Wikipedia POI\n\nOsmAnd je aktivně vyvíjen a náš projekt i jeho budoucí vývoj závisí na finančních příspěvcích. Prosím zvažte zakoupení verze OsmAnd+, sponzorování konkrétní nové funkce nebo obecný dar na osmand.net. "</string>
-    <string name="osmand_plus_long_description_1000_chars">" OsmAnd+\n\nOsmAnd+ je open-source navigační program s přístupem k široké paletě celosvětových mapových dat OpenStreetMap (OSM).\nVeškerá mapová data (vektorová nebo rastrová) mohou být uložena na paměťové kartě telefonu pro offline použití. OsmAnd+ také nabízí offline a online navigaci včetně hlasové navigace krok za krokem.
-\n\nOsmAnd+ je placená verze aplikace, jejím zakoupením sponzorujete projekt, vývoj nových funkcí a obdržíte nejnovější aktualizace.\n\nVýčet některých hlavních funkcí:\n- dokáže pracovat kompletně offline (vektorové nebo rastrové mapy lze uložit do volitelného úložiště zařízení)\n- kompaktní offline vektorové mapy celého světa dostupné zdarma\n- neomezené stahování národních nebo regionálních map přímo z aplikace\n- funkce offline Wikipedie (stažení informací o bodech zájmu z Wikipedie), vynikající pro turisty\n- možnost zobrazení několika vrstev mapy: GPX trasa, body zájmu, oblíbená místa, vrstevnice, zastávky hromadné dopravy, dodatečné mapy s nastavitelnou průhledností\n- offline vyhledávání adres a bodů zájmu\n- offline navigace na krátké vzdálenosti (experimentální)\n- režim auto, kolo a pěší s volitelným:\n    - přepínáním denního a nočního zobrazení\n    - automatickým zvětšováním podle rychlosti pohybu\n    - natáčením mapy podle kompasu nebo směru pohybu\n    - naváděním do jízdních pruhů, zobrazením rychlostních limitů\n    - TTS nebo audio hlasovými pokyny "</string>
+    <string name="osmand_long_description_1000_chars">"
+ OsmAnd
+
+OsmAnd je open-source navigační program s přístupem k široké paletě celosvětových mapových dat OpenStreetMap (OSM).
+Veškerá mapová data (vektorová nebo rastrová) mohou být uložena na paměťové kartě telefonu pro offline použití. OsmAnd také nabízí offline a online navigaci včetně hlasové navigace krok za krokem.
+
+
+Výčet některých hlavních funkcí:
+- dokáže pracovat kompletně offline (vektorové nebo rastrové mapy lze uložit do volitelného úložiště zařízení)
+- kompaktní offline vektorové mapy celého světa dostupné zdarma
+- stahování národních nebo regionálních map přímo z aplikace
+- možnost zobrazení několika vrstev mapy: GPX trasa, body zájmu, oblíbená místa, vrstevnice, zastávky hromadné dopravy, dodatečné mapy s nastavitelnou průhledností
+- offline vyhledávání adres a bodů zájmu
+- offline navigace na střední vzdálenosti
+- režim auto, kolo a pěší s volitelným:
+    - přepínáním denního a nočního zobrazení
+    - automatickým zvětšováním podle rychlosti pohybu
+    - natáčením mapy podle kompasu nebo směru pohybu
+    - naváděním do jízdních pruhů, zobrazením rychlostních limitů
+    - TTS nebo audio hlasovými pokyny
+
+
+Omezení této verze zdarma:
+- omezený počet stažitelných map
+- chybějící přístup na offline Wikipedia POI
+
+OsmAnd je aktivně vyvíjen a náš projekt i jeho budoucí vývoj závisí na finančních příspěvcích. Prosím zvažte zakoupení verze OsmAnd+, sponzorování konkrétní nové funkce nebo obecný dar na osmand.net.
+ "</string>
+    <string name="osmand_plus_long_description_1000_chars">"
+ OsmAnd+
+
+OsmAnd+ je open-source navigační program s přístupem k široké paletě celosvětových mapových dat OpenStreetMap (OSM).
+Veškerá mapová data (vektorová nebo rastrová) mohou být uložena na paměťové kartě telefonu pro offline použití. OsmAnd+ také nabízí offline a online navigaci včetně hlasové navigace krok za krokem.
+
+
+OsmAnd+ je placená verze aplikace, jejím zakoupením sponzorujete projekt, vývoj nových funkcí a obdržíte nejnovější aktualizace.
+
+Výčet některých hlavních funkcí:
+- dokáže pracovat kompletně offline (vektorové nebo rastrové mapy lze uložit do volitelného úložiště zařízení)
+- kompaktní offline vektorové mapy celého světa dostupné zdarma
+- neomezené stahování národních nebo regionálních map přímo z aplikace
+- funkce offline Wikipedie (stažení informací o bodech zájmu z Wikipedie), vynikající pro turisty
+- možnost zobrazení několika vrstev mapy: GPX trasa, body zájmu, oblíbená místa, vrstevnice, zastávky hromadné dopravy, dodatečné mapy s nastavitelnou průhledností
+- offline vyhledávání adres a bodů zájmu
+- offline navigace na střední vzdálenosti
+- režim auto, kolo a pěší s volitelným:
+    - přepínáním denního a nočního zobrazení
+    - automatickým zvětšováním podle rychlosti pohybu
+    - natáčením mapy podle kompasu nebo směru pohybu
+    - naváděním do jízdních pruhů, zobrazením rychlostních limitů
+    - TTS nebo audio hlasovými pokyny
+ "</string>
     <string name="map_widget_monitoring_services">Sledování polohy</string>
     <string name="no_route">Žádná cesta</string>
     <string name="delete_target_point">Smazat cíl</string>
@@ -2159,4 +2207,6 @@ V současnosti je k dispozici {2} MB.</string>
     <string name="dist_away_from_my_location">Hledat do vzdálenosti %1$s</string>
     <string name="show_on_map">Zobrazit na mapě</string>
     <string name="share_history_subject">" sdílené přes OsmAnd"</string>
+    <string name="coords_search">Hledání souřadnic</string>
+    <string name="advanced_coords_search">Rozšířené hledání souřadnic</string>
     </resources>
