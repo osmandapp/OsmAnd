@@ -795,7 +795,7 @@ public class BinaryMapPoiReaderAdapter {
 //				break;
 			case OsmandOdb.OsmAndPoiCategories.CATEGORIES_FIELD_NUMBER:
 				PoiCategory type = poiTypes.getOtherPoiCategory();
-				String subcat = "";
+				String subtype = "";
 				int cat = codedIS.readUInt32();
 				int subcatId = cat >> SHIFT_BITS_CATEGORY;
 				int catId = cat & CATEGORY_MASK;
@@ -803,10 +803,11 @@ public class BinaryMapPoiReaderAdapter {
 					type = region.categoriesType.get(catId);
 					List<String> subcats = region.subcategories.get(catId);
 					if (subcatId < subcats.size()) {
-						subcat = subcats.get(subcatId);
+						subtype = subcats.get(subcatId);
 					}
 				}
-				if (req.poiTypeFilter.accept(type, subcat)) {
+				subtype = poiTypes.replaceDeprecatedSubtype(type, subtype);
+				if (req.poiTypeFilter.accept(type, subtype)) {
 					codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
 					return true;
 				}
