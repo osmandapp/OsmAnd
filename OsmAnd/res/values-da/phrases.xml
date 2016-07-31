@@ -2960,7 +2960,7 @@
 	<string name="poi_crossing_bell_no">Overkørsel med klokke: nej</string>
 	<string name="poi_crossing_light_yes">Overkørsel med blinklys</string>
 	<string name="poi_crossing_light_no">Overkørsel med blinklys: nej</string>
-	<string name="poi_crossing_supervision_attendant">Overkørsel med opsyn: ledsager</string>
+	<string name="poi_crossing_supervision_attendant">Overkørsel med opsyn: ledsaget</string>
 	<string name="poi_crossing_supervision_camera">Overkørsel med opsyn: kamera</string>
 
 <string name="poi_crossing_activation_automatic">Overkørselaktivering: automatisk</string>
@@ -3028,8 +3028,8 @@
 
 <string name="poi_pumping_station">Pumpestation</string>
 
-<string name="poi_display_yes">Skærm: ja</string>
-	<string name="poi_display_no">Skærm: nej</string>
+<string name="poi_display_yes">Visning: ja</string>
+	<string name="poi_display_no">Visning: nej</string>
 	<string name="poi_display_analog_yes">Analog skærm</string>
 	<string name="poi_display_digital_yes">Digital skærm</string>
 	<string name="poi_display_sundial_yes">Solur</string>
@@ -3040,8 +3040,8 @@
 	<string name="poi_thermometer_no">Termometer: nej</string>
 	<string name="poi_hygrometer_yes">Hygrometer: ja</string>
 	<string name="poi_hygrometer_no">Hygrometer: nej</string>
-	<string name="poi_date_yes">Datoskærm: ja</string>
-	<string name="poi_date_no">Datoskærm: nej</string>
+	<string name="poi_date_yes">Datovisning: ja</string>
+	<string name="poi_date_no">Datovisning: nej</string>
 
 	<string name="poi_support_pole">Support: pæl</string>
 	<string name="poi_support_wall_mounted">Support: væg</string>
@@ -3062,7 +3062,7 @@
 	<string name="poi_aquaculture_fish">Akvakultur: fisk</string>
 	<string name="poi_aquaculture_mussels">Akvakultur: muslinger</string>
 
-	<string name="poi_mdf">Vigtigste hovedfordeler</string>
+	<string name="poi_mdf">Hovedkrydsfelt (MDF)</string>
 	<string name="poi_min_age">Minimumsalder</string>
 
 	<string name="poi_organic_yes">Økologiske fødevarer: ja</string>
@@ -3081,7 +3081,7 @@
 
 <string name="poi_fire_operator">Brandoperatør</string>
 
-<string name="poi_diaper_table_count">Blepuslebord</string>
+<string name="poi_diaper_table_count">Puslebord</string>
 
 <string name="poi_water_tank">Vandtank</string>
 
