@@ -2493,9 +2493,9 @@ Si necesitas ayuda con la aplicación OsmAnd, contacte con nuestro equipo de sop
     <string name="share_history_subject">" compartido vía OsmAnd"</string>
     <string name="show_on_map">Mostrar en el mapa</string>
     <string name="release_2_4">"
- • Nueva búsqueda de texto libre muy potente
+ • Nueva búsqueda poderosa de texto libre
 
- • Muchas mejoras de audio mediante Bluetooth
+ • Integración con el sistema de audio del automóvil y altavoces del teléfono vía Bluetooth
 
  • Mejoras en la guía de ruta, indicaciones por voz y de carriles de giro
 
