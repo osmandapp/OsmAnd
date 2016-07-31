@@ -61,7 +61,7 @@
 	<string name="day_night_info_description">זריחה : %1$s
 \nשקיעה : %2$s</string>
 	<string name="day_night_info">פרטי יום/לילה</string>
-	<string name="map_widget_day_night">מפת יום/לילה</string>
+	
 	<string name="map_widget_vector_attributes">מאפייני עיבוד תמונה:</string>
 	<string name="map_widget_renderer">סגנון עיבוד התמונה</string>
 	
@@ -336,7 +336,7 @@
 	<string name="global_app_settings">הגדרות יישומים כלליות</string>
 	<string name="user_name">שם המשתמש שלך ב־OSM</string>
 	<string name="open_street_map_login_descr">נדרש לטובת שליחת נתונים אל openstreetmap.org</string>
-	<string name="user_password_descr">נדרש לטובת שליחת נתונים אל openstreetmap.org</string>
+	
 	<string name="user_password">הססמה שלך ב־OSM</string>
 	<string name="osmand_service">תכונת מצב השינה</string>
 	<string name="osmand_service_descr">יש להשתמש כדי להריץ את OsmAnd כאשר המסך כבוי</string>
@@ -356,7 +356,7 @@
 	<string name="init_native_library">הספרייה הטבעית מופעלת…</string>
 	<string name="choose_auto_follow_route">מרכוז אוטומטי של תצוגת המפה</string>
 	<string name="choose_auto_follow_route_descr">הזמן עד שתצוגת המפה מסתנכרנת עם המיקום הנוכחי</string>
-	<string name="auto_follow_route_never">לעולם לא</string>
+	
 	<string name="auto_follow_route_navigation">מרכוז אוטומטי בעת ניווט בלבד</string>
 	<string name="auto_follow_route_navigation_descr">מרכוז אוטומטי של תצוגת המפה בעת ניווט בלבד.</string>
 	<string name="auto_follow_location_enabled">מרכוז אוטומטי של תצוגת המפה בעת שימוש.</string>
@@ -657,13 +657,13 @@
 	<string name="none_region_found">לא נמצאו נתונים בלתי מקוונים לאזורים בכרטיס ה־SD. יש להוריד אזורים מהאינטרנט.</string>
 	<string name="poi_namefinder_query_empty">יש להזין שאילתת חיפוש כדי למצוא נ״ע</string>
 	<string name="any_poi">כלשהי</string>
-	<string name="layer_transport_route">מסלול תחבורה</string>
+	
 	<string name="thanks_yandex_traffic">תודות ל־Yandex על דיווחי התנועה.</string>
 	<string name="layer_yandex_traffic">תנועה מ־Yandex</string>
 	<string name="layer_route">מסלול</string>
 	<string name="shared_string_favorites">מועדפים</string>
 	<string name="layer_osm_bugs">תקלות ב־OSM</string>
-	<string name="layer_transport">תחנות תחבורה</string>
+	
 	
 	<string name="transport_Stop">תחנה</string>
 	<string name="transport_stops">תחנות</string>
@@ -957,7 +957,7 @@
 <string name="search_history_street">רחוב:\n {0}, {1}</string>
 	
 	<string name="osmand_plus_long_description_1000_chars">" OsmAnd+‎ ‏(OSM הכוונת ניווט אוטומטית) OsmAnd+‎ הנו יישום ניווט בקוד פתוח עם גישה למגוון רחב של נתונים מ־OpenStreetMap‏ (OSM). ניתן לשמור את כל נתוני המפה על כרטיס הזיכרון של הטלפון לצורך שימוש ללא אינטרנט. OsmAnd מציעה גם תכונת טוויית מסלול הפועלת עם וללא אינטרנט וכוללת הנחייה קולית לכל פנייה ופנייה. OsmAnd+‎ הנה הגרסה בתשלום של היישום, רכישת גרסה זו מהווה הבעת תמיכה במיזם, מימון פיתוח של תכונות חדשות ומבטיחה קבלת עדכונים במהירות. חלק מתכונות הליבה: - אפשרות להפעלה ללא אינטרנט (איחסון וקטורים או אריחי מפות שהתקבלו לתיקייה נבחרת) - מפות וקטוריות דחוסות זמינות לכל חלקי העולם - הורדה בלתי מוגבלת של מפות לפי מדינה או אזור ישירות מהיישום - תכונת ויקיפדיה בלתי מקוונת (הורדת נ״ע מוויקיפדיה), מושלם לטיולים - ניתן להערים מספר שכבות של מפות, כמו GPX או דרכי ניווט, נקודות עניין, מועדפים, קווי מתאר, תחנות של תחבורה ציבורית, מפות נוספות עם שקיפות מותאמת - חיפוש בלתי מקוון של כתובות ומקומות (נ״ע) - תכנון מסלול לטווחים קצרים ללא חיבור לאינטרנט (ניסיוני) - מצבים לרכבים, אופניים והליכה ברגל עם: - החלפה אוטומטית בין מצבי יום/לילה - ניתן להגדיר תקריב מתכוונן בהתאם למהירות - יישור המפה בהתאם למצפן או לכיוון התנועה - ניתן להשתמש בהנחיות נתיבים, הצגת הגבלת מהירות, קולות הנחיה כטקסט לדיבור או בהקלטה "</string>
-	<string name="use_osmand_routing_service">ניווט עם OsmAnd של פחות מ־20 ק״מ</string>
+	
 	<string name="use_osmand_routing_service_descr">הניווט הבלתי מקוון של OsmAnd תקף אך ורק למסלולים של פחות מ־20 ק״מ (ניסיוני)</string>
 	<string name="osmand_long_description_1000_chars">" OsmAnd ‏(OSM הכוונת ניווט אוטומטית) OsmAnd הנו יישום ניווט בקוד פתוח עם גישה למגוון רחב של נתונים מ־OpenStreetMap‏ (OSM). ניתן לשמור את כל נתוני המפה על כרטיס הזיכרון של הטלפון לצורך שימוש ללא אינטרנט. OsmAnd מציעה גם תכונת טוויית מסלול הפועלת עם וללא אינטרנט וכוללת הנחייה קולית לכל פנייה ופנייה. חלק מתכונות הליבה: - אפשרות להפעלה ללא אינטרנט (איחסון וקטורים או אריחי מפות שהתקבלו לתיקייה נבחרת) - מפות וקטוריות דחוסות זמינות לכל חלקי העולם - הורדה בלתי מוגבלת של מפות לפי מדינה או אזור ישירות מהיישום - תכונת ויקיפדיה בלתי מקוונת (הורדת נ״ע מוויקיפדיה), מושלם לטיולים - ניתן להערים מספר שכבות של מפות, כמו GPX או דרכי ניווט, נקודות עניין, מועדפים, קווי מתאר, תחנות של תחבורה ציבורית, מפות נוספות עם שקיפות מותאמת - חיפוש בלתי מקוון של כתובות ומקומות (נ״ע) - תכנון מסלול לטווחים קצרים ללא חיבור לאינטרנט (ניסיוני) - מצבים לרכבים, אופניים והליכה ברגל עם: - החלפה אוטומטית בין מצבי יום/לילה - ניתן להגדיר תקריב מתכוונן בהתאם למהירות - יישור המפה בהתאם למצפן או לכיוון התנועה - ניתן להשתמש בהנחיות נתיבים, הצגת הגבלת מהירות, קולות הנחיה כטקסט לדיבור או בהקלטה מגבלות של גרסה חופשית זו של OsmAnd: - מספר הורדות המפה מוגבלות - אין גישה לנ״ע בוויקיפדיה באופן בלתי מקוון. התכנית OsmAnd נמצאת בפיתוח פעיל והמיזם שלנו והמשך התהליך נתמך על תרומות כלכליות למימון הפיתוח והבדיקות של התכונות החדשות. נא לשקול לקנות את OsmAnd+‎ או לממן תכונות חדשות באופן נקודתי או לתרום תרומה כללית דרך osmand.net "</string>
 	<string name="rendering_attr_showRoadMaps_description">נא לבחור מתי להציג מפות לדרכים בלבד:</string>

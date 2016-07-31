@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
     <string name="srtm_paid_version_msg">Overvej at købe Højdekurve udvidelsen (\'Contour lines\') på Google Play for at støtte den videre udvikling.</string>
     <string name="av_def_action_video">Optag video</string>
     <string name="av_def_action_audio">Optag audio</string>
@@ -152,7 +151,7 @@
 	<string name="day_night_info_description">Solopgang: %1$s
 \nSolnedgang: %2$s</string>
     <string name="day_night_info">Dag/nat information</string>
-    <string name="map_widget_day_night">Dag-/natkort</string>
+    
     <string name="map_widget_vector_attributes">Optegningsattributter</string>
     <string name="map_widget_renderer">Kortformat</string>
 
@@ -430,7 +429,7 @@ Både placering og tid er synlige på betjeningspanel samt i modul på kortskær
     <string name="user_name">OSM-brugernavn</string>
     <string name="open_street_map_login_descr">Nødvendige for ændringer i openstreetmap.org</string>
     <string name="user_password">OSM-kodeord</string>
-    <string name="user_password_descr">Nødvendig for ændringer i openstreetmap.org</string>
+    
     <string name="osmand_service">Baggrundstilstand</string>
     <string name="osmand_service_descr">OsmAnd kører i baggrunden, mens skærmen er slukket</string>
 
@@ -449,7 +448,7 @@ I øjeblikket er {2} MB til rådighed.</string>
     <string name="init_native_library">Initialisere indbygget bibliotek…</string>
     <string name="choose_auto_follow_route">Autocentrer kortvisning</string>
     <string name="choose_auto_follow_route_descr">Tid indtil kortvisning synkroniseres med aktuel position</string>
-    <string name="auto_follow_route_never">Aldrig (tryk \'Start\' for at starte vejledning manuelt)</string>
+    
     <string name="auto_follow_route_navigation">Autocentrer kun navigation</string>
     <string name="auto_follow_route_navigation_descr">Autocentrer kun kortvisning under navigation.</string>
     <string name="auto_follow_location_enabled">Autocentrer kort.</string>
@@ -796,7 +795,7 @@ Nogle af de centrale funktioner:
     <string name="reading_cached_tiles">Læser cachelagrede kortfliser…</string>
     <string name="version_index_is_big_for_memory">Ikke nok hukommelse for indeks \'{0}\'</string>
     <string name="version_index_is_not_supported">Versionen af indeks \'{0}\' er ikke understøttet</string>
-    <string name="use_osmand_routing_service">OsmAnd navigation &gt;20km</string>
+    
     <string name="use_osmand_routing_service_descr">Brug af OsmAnd offline navigation gælder kun ruter &gt; 20 km (eksperimentel)</string>
     <string name="specified_dir_doesnt_exist">Kan ikke finde den angivne mappe.</string>
     <string name="application_dir">Datalagringsmappe</string>
@@ -879,12 +878,12 @@ Nogle af de centrale funktioner:
     <string name="none_region_found">Ingen offline-data for regionen er fundet på SD-kortet. Hent regioner fra internettet.</string>
     <string name="poi_namefinder_query_empty">Angiv søgetekst for at finde interessepunkt</string>
     <string name="any_poi">Alle</string>
-    <string name="layer_transport_route">Transportrute</string>
+    
     <string name="thanks_yandex_traffic">Tak til Yandex for trafikinformation.</string>
     <string name="layer_yandex_traffic">Yandex trafik</string>
     <string name="layer_route">Rute</string>
     <string name="layer_osm_bugs">OSM noter (online)</string>
-    <string name="layer_transport">Stoppesteder</string>
+    
     <string name="layer_map">Vælg kortkilde…</string>
     <string name="menu_layers">Kortlag</string>
     <string name="context_menu_item_search_poi">Søg interessepunkt</string>
@@ -1730,7 +1729,7 @@ Optagede spor kan deles med venner eller anvendes til OSM bidrag. Sportsfolk kan
     <string name="wake_on_voice_descr">Tænd for skærmen (hvis slukket) ved navigationsinstruktioner</string>
     <string name="lock_screen_request_explanation">%1$s behøver denne tilladelse til at slukke for skærmen for strømbesparende funktion.</string>
 
-    <string name="osmo_use_https_descr">Brug sikker forbindelse til server</string>
+    
     <string name="osmo_use_https">Brug HTTPS</string>
     <string name="home_button">Hjem</string>
     <string name="search_for">Søg efter</string>
@@ -2371,9 +2370,9 @@ Optagede spor kan deles med venner eller anvendes til OSM bidrag. Sportsfolk kan
     <string name="shared_string_save_changes">Gem ændringer</string>
     <string name="find_parking">Find parkering</string>
     <string name="show_polygons">Vis polygoner</string>
-    <string name="underlay_transparency">Underlejringsgennemsigtighed</string>
+    
     <string name="rendering_attr_showMtbRoutes_name">Vis MTB ruter</string>
-    <string name="show_map_markers">Kortmarkører</string>
+    
     <string name="show_map_markers_description">Aktivér kortmarkører</string>
     <string name="clear_active_markers_q">Fjern alle aktive markører?</string>
     <string name="clear_markers_history_q">Slet kortmarkørhistoriken?</string>
@@ -2385,7 +2384,7 @@ Optagede spor kan deles med venner eller anvendes til OSM bidrag. Sportsfolk kan
     <string name="consider_turning_polygons_off">Det anbefales at deaktivere optegning af polygoner.</string>
     <string name="add_points_to_map_markers_q">Skal alle punkter tilføjes til kortmarkører?</string>
     <string name="shared_string_add_to_map_markers">Tilføj til kortmarkører</string>
-    <string name="show_map_markers_topbar">Vis kortmarkører topbar</string>
+    
     <string name="map_marker_1st">Første kortmarkør</string>
     <string name="map_marker_2nd">Anden kortmarkør</string>
     <string name="shared_string_toolbar">Værktøjslinie</string>
@@ -2515,7 +2514,7 @@ Hvis du er fan af OsmAnd og OSM og ønsker at støtte dem, er dette en perfekt m
     <string name="coords_format">Koordinatformat</string>
     <string name="coords_format_descr">Format for geografiske koordinater</string>
   	<string name="storage_directory_card">Hukommelseskort</string>
-	<string name="shared_string_open_24_7">Åben 24/7</string>
+	
     <string name="shared_string_is_open">Åben nu</string>
     <string name="shared_string_is_open_24_7">Åben 24/7</string>
     <string name="map_widget_search">Søg</string>

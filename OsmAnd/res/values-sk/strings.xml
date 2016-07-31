@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
 
     <string name="recording_context_menu_show">Zobraziť</string>
     <string name="recording_photo_description">Fotografia %1$s %2$s</string>
@@ -207,7 +206,7 @@ Dlaždicové mapy môžete získať priamo zo zdrojov na Internete, alebo ich m�
     <string name="init_native_library">Inicializácia natívnej knižnice…</string>
     <string name="choose_auto_follow_route">Automatické centrovanie</string>
     <string name="choose_auto_follow_route_descr">Čas pokiaľ sa mapové zobrazenie zosynchronizuje s pozíciou</string>
-    <string name="auto_follow_route_never">Nikdy (použite \'Ísť\' pre spustenie pokynov)</string>
+    
     <string name="auto_follow_route_navigation">Automatické centrovanie iba pri navigácii</string>
     <string name="auto_follow_route_navigation_descr">Povoliť automatické centrovanie pozície iba v režime navigácie.</string>
     <string name="auto_follow_location_enabled">Automatické nasledovanie je povolené.</string>
@@ -379,7 +378,7 @@ Dlaždicové mapy môžete získať priamo zo zdrojov na Internete, alebo ich m�
     <string name="reading_cached_tiles">Načítavajú sa dlaždice zo zásobníka…</string>
     <string name="version_index_is_big_for_memory">Index "{0}" sa nezmestil do pamäte</string>
     <string name="version_index_is_not_supported">Verzia indexu "{0}" nie je podporovaná</string>
-    <string name="use_osmand_routing_service">OsmAnd offline navigácia &gt;20km</string>
+    
     <string name="use_osmand_routing_service_descr">Použitie offline navigácie na dlhé vzdialenosti (experimentálne) namiesto CloudMade</string>
     <string name="osmand_routing_experimental">OsmAnd offline navigácia je experimentálna funkcia a nefunguje na vzdialenosť väčšiu ako 20 km.\n\nNavigačná služba je dočasne prepnutá na online CloudMade.</string>
     <string name="specified_dir_doesnt_exist">Nedá sa nájsť zadaný priečinok.</string>
@@ -462,12 +461,12 @@ Dlaždicové mapy môžete získať priamo zo zdrojov na Internete, alebo ich m�
     <string name="none_region_found">Žiadne regióny neboli nájdené na SD karte. Skúste stiahnuť regióny z internetu.</string>
     <string name="poi_namefinder_query_empty">Zadajte požiadavku na nájdenie POI</string>
     <string name="any_poi">Akékoľvek</string>
-    <string name="layer_transport_route">Trasa hromadnej dopravy</string>
+    
     <string name="thanks_yandex_traffic">Vďaka Yandex-u za dopravné informácie.</string>
     <string name="layer_yandex_traffic">Doprava Yandex</string>
     <string name="layer_route">Cesta</string>
     <string name="layer_osm_bugs">OSM Poznámky (online)</string>
-    <string name="layer_transport">Dopravné zastávky</string>
+    
     <string name="layer_poi">Body záujmu (POI)…</string>
     <string name="layer_map">Zdroj mapy…</string>
     <string name="menu_layers">Zobrazenie</string>
@@ -610,7 +609,7 @@ Dlaždicové mapy môžete získať priamo zo zdrojov na Internete, alebo ich m�
     <string name="finished_task">Dokončené</string>
     <string name="use_online_routing_descr">Použiť Internet na výpočet trasy</string>
     <string name="use_online_routing">Použiť online navigáciu</string>
-    <string name="user_password_descr">Heslo potrebné pre prispievanie do openstreetmap.org</string>
+    
     <string name="user_password">OSM heslo</string>
     <string name="osm_settings_descr">Určenie nastavení Openstreetmap.org (OSM) pre OSM nahrávanie</string>
     <string name="data_settings_descr">Výber jazyka, stiahnutie/znovu načítanie údajov</string>
@@ -810,7 +809,7 @@ Proporčná pamäť %4$s MB (Limit Androidu %5$s MB, Dalvik %6$s MB).</string>
     <string name="day_night_info_description">Východ slnka: %1$s
 \nZápad slnka: %2$s</string>
     <string name="day_night_info">Info o dni/noci</string>
-    <string name="map_widget_day_night">Denná/nočná mapa</string>
+    
     <string name="map_widget_vector_attributes">Atribúty vykresľovania</string>
     <string name="map_widget_renderer">Štýl vykresľovania</string>
     <string name="osmand_short_description_80_chars">OsmAnd je open source navigácia s offline aj online mapami</string>
@@ -1592,7 +1591,7 @@ Zaznamenané stopy môžete zdieľať s priateľmi alebo odoslať ako príspevok
     <string name="rendering_attr_tramTrainRoutes_name">Linky električiek a vlakov</string>
     <string name="rendering_category_hide">Skryť</string>
     <string name="lock_screen_request_explanation">%1$s potrebuje toto oprávnenie na vypnutie obrazovky pre šetrenie energiou.</string>
-    <string name="osmo_use_https_descr">Použiť zabezpečené spojenie na server</string>
+    
     <string name="osmo_use_https">Použiť HTTPS</string>
     <string name="home_button">Domov</string>
     <string name="search_for">Hľadať</string>
@@ -2183,7 +2182,7 @@ Aktivovanie tohto pohľadu zmení štýl mapy na \"Zima a lyžovanie\", ktorý z
     <string name="shared_string_read_more">Prečítať viac</string>
     <string name="find_parking">Nájsť parkovanie</string>
     <string name="show_polygons">Zobraziť polygóny</string>
-    <string name="underlay_transparency">Priehľadnosť v podkladovej vrstve</string>
+    
     <string name="rendering_attr_showMtbRoutes_name">Zobraziť trasy pre horské bicykle</string>
     <string name="select_map_marker">Zvoľte mapovú značku</string>
     <string name="map_markers_other">Iné značky</string>
@@ -2195,7 +2194,7 @@ To by dočasne potrebovalo {3} MB a natrvalo {1} MB.
 V súčasnosti je voľných len {2} MB.</string>
     <string name="upload_osm_note_description">OSM poznámku môžete odoslať anonymne ak použijete svoj účet na OpenStreetMap.org.</string>
     <string name="upload_osm_note">Odoslať OSM poznámku</string>
-    <string name="show_map_markers_topbar">Zobraziť horný panel mapových značiek</string>
+    
     <string name="map_marker_1st">Prvá mapová značka</string>
     <string name="map_marker_2nd">Druhá mapová značka</string>
     <string name="shared_string_toolbar">Panel nástrojov</string>

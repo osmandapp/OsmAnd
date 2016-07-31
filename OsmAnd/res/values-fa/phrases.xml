@@ -562,7 +562,7 @@
 <string name="poi_internet_cafe">کافی نت</string>
 
 <string name="poi_bank">بانک</string>
-<string name="poi_atm">ATM</string>
+<string name="poi_amenity_atm">ATM</string>
 <string name="poi_money_lender">وام دهنده پول</string>
 <string name="poi_pawnbroker">بنگاه رهنی</string>
 <string name="poi_bureau_de_change">صرافی</string>

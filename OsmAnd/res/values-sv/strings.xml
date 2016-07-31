@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
     <string name="screen_is_locked">För att låsa upp skärmen tryck på låsikonen</string>
     <string name="ChooseCountry">Välj land</string>
     <string name="choose_city">Välj stad eller postnummer</string>
@@ -33,7 +32,7 @@
 <string name="day_night_info_description">Soluppgång: %1$s
 \nSolnedgång: %2$s</string>
     <string name="day_night_info">Dag-/nattinformation</string>
-    <string name="map_widget_day_night">Dag-/nattkarta</string>
+    
     <string name="map_widget_vector_attributes">Renderingsattribut</string>
 
 
@@ -326,7 +325,7 @@ Proportionellt minne %4$s MB (Android-gräns %5$s MB, Dalvik %6$s MB).</string>
     <string name="user_name">Ditt OSM-användarnamn</string>
     <string name="open_street_map_login_descr">Behövs för ändringar i openstreetmap.org</string>
     <string name="user_password">Ditt OSM-lösenord</string>
-    <string name="user_password_descr">Behövs för ändringar i openstreetmap.org</string>
+    
     <string name="osmand_service">Bakgrundsläge</string>
     <string name="osmand_service_descr">OsmAnd körs i bakgrunden medan skärmen är avstängd</string>
 
@@ -342,7 +341,7 @@ För tillfället finns det {2} MB ledigt.</string>
     <string name="init_native_library">Initierar inbyggt bibliotek …</string>
     <string name="choose_auto_follow_route">Auto-centrerad kartvy</string>
     <string name="choose_auto_follow_route_descr">Tid tills kartvyn synkroniseras med aktuell position</string>
-    <string name="auto_follow_route_never">Aldrig (tryck på Kör för att starta vägledning manuellt)</string>
+    
     <string name="auto_follow_route_navigation">Auto-centrera endast nav</string>
     <string name="auto_follow_route_navigation_descr">Auto-centrera kartan endast vid navigering.</string>
     <string name="auto_follow_location_enabled">Auto-centrera aktuell kartvy.</string>
@@ -526,7 +525,7 @@ För tillfället finns det {2} MB ledigt.</string>
     <string name="reading_cached_tiles">Läser cachade kartbitar …</string>
     <string name="version_index_is_big_for_memory">Index \"{0}\" fick inte plats i minnet</string>
     <string name="version_index_is_not_supported">Denna version av indexet \"{0}\" stöds inte</string>
-    <string name="use_osmand_routing_service">OsmAnd-navigering &gt;20km</string>
+    
     <string name="use_osmand_routing_service_descr">Använd OsmAnd offline navigering gäller endast rutter &gt;20 km (experimentell)</string>
     <string name="specified_dir_doesnt_exist">Kan inte hitta den angivna mappen.</string>
 
@@ -636,12 +635,12 @@ För tillfället finns det {2} MB ledigt.</string>
     <string name="none_region_found">Hittar inga offline-data för regioner på SD-kortet. Ladda ner regioner från Internet.</string>
     <string name="poi_namefinder_query_empty">Ange sökfråga för att hitta POI</string>
     <string name="any_poi">Alla</string>
-    <string name="layer_transport_route">Transportled</string>
+    
     <string name="thanks_yandex_traffic">Tack till Yandex för trafikinformationen.</string>
     <string name="layer_yandex_traffic">Yandex trafik</string>
     <string name="layer_route">Rutt</string>
     <string name="layer_osm_bugs">OSM-anteckningar (online)</string>
-    <string name="layer_transport">Hållplatser</string>
+    
     <string name="layer_poi">Intressepunkter (POI) …</string>
     <string name="layer_map">Kartkälla …</string>
     <string name="menu_layers">Kartlager</string>
@@ -1547,7 +1546,7 @@ Vill du fortsätta med en ny registrering?</string>
     <string name="wake_on_voice">Slå på skärmen</string>
     <string name="wake_on_voice_descr">Slå på skärmen (om den är av) när jag närmar mig en sväng</string>
     <string name="lock_screen_request_explanation">%1$s behöver denna tillåtelse för att stänga av skärmen för strömsparningsfunktionen.</string>
-    <string name="osmo_use_https">Använd HTTPS</string>
+    
     <string name="osmo_use_https_descr">Använd säker anslutning till servern</string>
     <string name="home_button">Hem</string>
     <string name="search_for">Sök efter</string>
@@ -2103,11 +2102,11 @@ Vill du fortsätta med en ny registrering?</string>
     <string name="shared_string_save_changes">Spara ändringar</string>
     <string name="find_parking">Hitta en parkeringsplats</string>
     <string name="show_polygons">Visa polygoner</string>
-    <string name="underlay_transparency">Underläggstransparens</string>
+    
     <string name="rendering_attr_showMtbRoutes_name">Visa MTB-rutter</string>
     <string name="select_map_markers">Välj kartmarkörer</string>
     <string name="shared_string_reverse_order">Omvänd ordning</string>
-    <string name="show_map_markers">Kartmarkörer</string>
+    
     <string name="show_map_markers_description">Aktivera kartmarkörer</string>
     <string name="clear_active_markers_q">Vill du ta bort alla aktiva markörer?</string>
     <string name="clear_markers_history_q">Vill du radera kartmarkörshistoriken?</string>
@@ -2121,7 +2120,7 @@ Vill du fortsätta med en ny registrering?</string>
     <string name="map_marker_2nd">Andra kartmarkör</string>
     <string name="shared_string_toolbar">Verktygsfält</string>
     <string name="shared_string_widgets">Widgetar</string>
-    <string name="show_map_markers_topbar">Visa kartmarkörsfält</string>
+    
     <string name="download_files_error_not_enough_space">Inte tillräckligt med utrymme!
 Detta skulle kräva {3} MB temporärt och {1} MB permanent.
 För tillfället finns det bara {2} MB tillgängligt.</string>

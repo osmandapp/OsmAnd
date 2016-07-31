@@ -1,10 +1,8 @@
-<?xml version='1.0' encoding='utf-8'?>
-<!-- Language: Vietnamese; Language code: vi
-Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><!-- Language: Vietnamese; Language code: vi
+Translator: Le Viet Thanh; email: lethanhx2k@gmail.com --><resources>
 	
 	<string name="choose_auto_follow_route_descr">Chọn thời gian chờ hiển thị bản đồ để quay lại vị trí vừa xong</string>
-	<string name="auto_follow_route_never">Không bao giờ</string>
+	
 	<string name="auto_follow_route_navigation">Tự động bám theo trên bản đồ</string>
 	<string name="auto_follow_route_navigation_descr">Bản đồ tự động di chuyển theo vị trí khi định vị.</string>
 	<string name="auto_follow_location_enabled">Đã kích hoạt thiết lập tự động bám theo.</string>
@@ -235,7 +233,7 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 	<string name="version_index_is_big_for_memory">Chỉ mục \'\'{0}\'\' lớn hơn bộ nhớ</string>
 	<string name="version_index_is_not_supported">Phiên bản chỉ mục \'\'{0}\'\' không được hỗ trợ</string>
 
-	<string name="use_osmand_routing_service">Tìm đường OsmAnd &gt;20km</string>
+	
 	<string name="use_osmand_routing_service_descr">Sử dụng tính năng tìm đường Offline với khoảng cách dài(đang thử nghiệm)</string>
 	<string name="osmand_routing_experimental">Tìm đường Offline trên OsmAnd là tính năng thử nghiệm và
 	nó không thể chạy được với khoảng cách trên 20km.\n\nDịch vụ tìm được sẽ tự động chuyển sang dùng CloudMade.</string>
@@ -339,7 +337,7 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 	<string name="poi_namefinder_query_empty">Nhập thông tin cần tìm</string>
 	<string name="any_poi">Bất kỳ</string>
 	<string name="shared_string_favorites">Ưa thích</string>
-	<string name="layer_transport">Điểm dừng giao thông</string>
+	
 	<string name="layer_poi">Địa điểm…</string>
 	<string name="layer_map">Nguồn bản đồ…</string>
 	<string name="menu_layers">Thiết lập Xem</string>
@@ -497,7 +495,7 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
     
     <string name="use_online_routing_descr">Tìm đường qua Internet</string>
     <string name="use_online_routing">Tìm đường qua Internet</string>
-    <string name="user_password_descr">Mật khẩu tài khoản tại OpenStreetMap.org (OSM)</string>
+    
     <string name="user_password">Mật khẩu OSM</string>
     <string name="osm_settings_descr">Thiết lập Openstreetmap.org (OSM)</string>
     

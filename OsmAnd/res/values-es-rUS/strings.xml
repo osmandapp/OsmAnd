@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
 
     <string name="rendering_attr_hideHouseNumbers_name">Números de casa</string>
     <string name="copying_osmand_file_failed">Falló al copiar archivos</string>
@@ -182,7 +181,7 @@
     <string name="everything_up_to_date">Todos los archivos actualizados</string>
     <string name="use_opengl_render">Usar renderizado OpenGL</string>
     <string name="home_button">Inicio</string>
-    <string name="osmo_use_https_descr">Usa una conexión segura con el servidor</string>
+    
     <string name="osmo_use_https">Usar HTTPS</string>
     <string name="search_for">Buscar</string>
     <string name="coordinates">Coordenadas</string>
@@ -1184,7 +1183,7 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="day_night_info_description">Alba: %1$s
 \nOcaso: %2$s</string>
     <string name="day_night_info">Información día/noche</string>
-    <string name="map_widget_day_night">Mapa día/noche</string>
+    
     <string name="map_widget_renderer">Estilo del mapa</string>
     <string name="layer_map_appearance">Configurar pantalla</string>
     <string name="show_lanes">Carriles</string>
@@ -1422,7 +1421,7 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="user_name">Tu usuario de OSM</string>
     <string name="open_street_map_login_descr">Necesario para envíos a OpenStreetMap.org</string>
     <string name="user_password">Tu contraseña de OSM</string>
-    <string name="user_password_descr">Necesario para envíos a OpenStreetMap.org</string>
+    
     <string name="osmand_service">Modo reposo</string>
     <string name="osmand_service_descr">Ejecutar OsmAnd en segundo plano, mientras la pantalla este apagada</string>
     <string name="download_files_not_enough_space">Sin espacio suficiente para descargar %1$s MB (disponible: %2$s).</string>
@@ -1434,7 +1433,7 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="init_native_library">Inicializando biblioteca nativa…</string>
     <string name="choose_auto_follow_route">Auto-centrar vista del mapa</string>
     <string name="choose_auto_follow_route_descr">Tiempo hasta que la vista del mapa vuelve a sincronizarse con la ubicación actual</string>
-    <string name="auto_follow_route_never">Nunca (pulsa \'Ir\' para iniciar manualmente el guiado)</string>
+    
     <string name="keep_informing_never">Sólo manualmente (pulsa la flecha)</string>
     <string name="keep_informing_descr">Repite instrucciones de navegación a intervalos regulares</string>
     <string name="keep_informing">Repetir instrucciones de navegación</string>
@@ -1610,7 +1609,7 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="reading_cached_tiles">Leyendo teselas guardadas…</string>
     <string name="version_index_is_big_for_memory">La versión \'\'{0}\'\' de índices no cabe en memoria</string>
     <string name="version_index_is_not_supported">No se soporta la versión \'\'{0}\'\' de índices</string>
-    <string name="use_osmand_routing_service">Navegación OsmAnd &gt;20km</string>
+    
     <string name="use_osmand_routing_service_descr">El uso de la navegación sin conexión OsmAnd se aplica solo a rutas &gt; 20 km (experimental)</string>
     <string name="osmand_routing_experimental">La navegación sin conexión OsmAnd es una característica experimental y no funciona para distancias mayores a 20 km.\n\nEl servicio de navegación se cambia temporalmente al servicio en línea CloudMade.</string>
     <string name="specified_dir_doesnt_exist">No se puede encontrar la carpeta indicada.</string>
@@ -1685,12 +1684,12 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="none_region_found">Sin datos descargados para las regiones en la tarjeta SD. Descarga las regiones de Internet.</string>
     <string name="poi_namefinder_query_empty">Ingresa la consulta para buscar el PDI</string>
     <string name="any_poi">Cualquiera</string>
-    <string name="layer_transport_route">Ruta de transporte</string>
+    
     <string name="thanks_yandex_traffic">Gracias a Yandex por la información de tráfico.</string>
     <string name="layer_yandex_traffic">Tráfico Yandex</string>
     <string name="layer_route">Ruta</string>
     <string name="layer_osm_bugs">Informes de problemas (en línea)</string>
-    <string name="layer_transport">Paradas de transporte</string>
+    
     <string name="layer_poi">Puntos de interés…</string>
     <string name="layer_map">Fuente de mapas…</string>
     <string name="menu_layers">Capas de mapas</string>
@@ -2348,10 +2347,10 @@ Si necesitas ayuda con la aplicación OsmAnd, contacte con nuestro equipo de sop
     <string name="shared_string_email_address">Correo electrónico</string>
     <string name="find_parking">Encontrar estacionamiento</string>
     <string name="show_polygons">Mostrar polígonos</string>
-    <string name="underlay_transparency">Transparencia subyacente</string>
+    
     <string name="rendering_attr_showMtbRoutes_name">Rutas de BTT</string>
     <string name="shared_string_reverse_order">Invertir orden</string>
-    <string name="show_map_markers">Marcadores del mapa</string>
+    
     <string name="show_map_markers_description">Activar función de marcadores del mapa</string>
     <string name="clear_active_markers_q">¿Quieres quitar todos los marcadores activos?</string>
     <string name="clear_markers_history_q">¿Quieres vaciar el historial de marcadores del mapa?</string>
@@ -2359,7 +2358,7 @@ Si necesitas ayuda con la aplicación OsmAnd, contacte con nuestro equipo de sop
     <string name="map_markers">Marcadores del mapa</string>
     <string name="map_marker">Marcador del mapa</string>
     <string name="select_map_markers">Elegir marcadores del mapa</string>
-    <string name="show_map_markers_topbar">Mostrar barra superior de Marcadores de mapa</string>
+    
     <string name="map_marker_1st">Primer marcador del mapa</string>
     <string name="map_marker_2nd">Segundo marcador del mapa</string>
     <string name="shared_string_toolbar">Barra de herramientas</string>

@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="shared_string_topbar">Supra breto</string>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources><string name="shared_string_topbar">Supra breto</string>
     <string name="recalculate_route">Rekalkuli kurson</string>
     <string name="donations">Donacioj</string>
     <string name="number_of_recipients">Nombro da ricevontoj</string>
@@ -1661,7 +1660,7 @@ Proporcia memoro %4$s MB (Limito de Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="fast_route_mode_descr">"Aktivigu por kalkuli la plej rapidan kurson, aŭ malaktivigu por la plej mallongan kurson "</string>
     <string name="layer_route">Kurso</string>
     <string name="layer_osm_bugs">OSM notoj (enrete)</string>
-    <string name="layer_transport">Haltejoj</string>
+    
     <string name="layer_poi">Interesejoj…</string>
     <string name="context_menu_item_search_poi">Serĉi Interesejon</string>
     <string name="where_am_i">Kie mi estas?</string>
@@ -1769,7 +1768,7 @@ Kaj la loko kaj tempo estas montrataj ĉe la OsmAnd stirpanelo, kaj ĉe la fenes
     <string name="reading_cached_tiles">Leganta konservitajn kahelojn…</string>
     <string name="version_index_is_big_for_memory">La indekso \"{0}\" ne povas esti enspacata en memorejo</string>
     <string name="version_index_is_not_supported">La indeks-versio \"{0}\" ne estas subtenata</string>
-    <string name="use_osmand_routing_service">OsmAnd navigado &gt;20km</string>
+    
     <string name="use_osmand_routing_service_descr">Uzas OsmAnd eksterretan navigadon por kursoj &gt; 20 km (iafoje malfunkcias)</string>
     <string name="osmand_routing_experimental">OsmAnd eksterreta navigado estas testa eco kaj ĝi ne funkcias por distancoj pli grandaj ol 20 km.\n\nProvizore estas uzata enreta servo CloudMade.</string>
     <string name="specified_dir_doesnt_exist">Ne povis trovi la elektitan dosierujon.</string>
@@ -1861,7 +1860,7 @@ Kaj la loko kaj tempo estas montrataj ĉe la OsmAnd stirpanelo, kaj ĉe la fenes
     <string name="none_region_found">Neniaj eksterretaj datumoj de regionoj trovitaj je memorkarto. Elŝutu regionojn el la Interreto.</string>
     <string name="poi_namefinder_query_empty">Entajpu serĉmendon pri Interesejo</string>
     <string name="any_poi">Ia</string>
-    <string name="layer_transport_route">Transportaj kursoj</string>
+    
     <string name="thanks_yandex_traffic">Dankon al Yandex pro informoj pri trafiko.</string>
     <string name="layer_yandex_traffic">Yandex - informoj pri trafiko</string>
     <string name="menu_layers">Map-tavoloj</string>

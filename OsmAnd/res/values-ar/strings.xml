@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="recording_context_menu_show">اظهر</string>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources><string name="recording_context_menu_show">اظهر</string>
     <string name="av_def_action_picture">التقط صورة</string>
     
     <string name="av_def_action_video">تسجيل الفيديو</string>
@@ -423,7 +422,7 @@
 	<string name="select_navigation_mode">اختر نمط المواصلات</string>
 	<string name="day_night_info_description">الشروق: %1$s \nالغروب: %2$s</string>
 	<string name="day_night_info">معلومات اليوم والليلة</string>
-	<string name="map_widget_day_night">خريطة النهار والليل</string>
+	
 	<string name="map_widget_vector_attributes">سمات التقديم</string>
 	<string name="map_widget_renderer">نمط الخريطة</string>
 	
@@ -553,7 +552,7 @@
 	<string name="general_settings">عام</string>
 	<string name="general_settings_descr">ضبط العرض والإعدادات العامة للتطبيق</string>
 	<string name="open_street_map_login_descr">مطلوب للمساهمة في openstreetmap.org</string>
-	<string name="user_password_descr">مطلوبة للمساهمة في openstreetmap.org</string>
+	
 	<string name="local_openstreetmap_uploading">يرفع …</string>
 	<string name="local_openstreetmap_uploadall">رفع الكل</string>
 	
@@ -898,7 +897,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
 	<string name="init_native_library">تهيئة المكتبة الأصيلة…</string>
 	<string name="choose_auto_follow_route">عرض خريطة في المنتصف تلقائيًا</string>
 	<string name="choose_auto_follow_route_descr">الوقت حتى يتزامن عرض الخريطة مع الموقع الحالي</string>
-	<string name="auto_follow_route_never">أبدا (اضغط \'ذهاب\' لتبدأ التوجيه يدويا)</string>
+	
 	<string name="auto_follow_route_navigation">مركز صناعة السيارات الوحيد</string>
 	<string name="auto_follow_route_navigation_descr">التوسيط التلقائي لعرض الخريطة فقط أثناء الملاحة.</string>
 	<string name="auto_follow_location_enabled">توسيط عرض الخريطة تلقائيا مفعل.</string>
@@ -1381,7 +1380,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="everything_up_to_date">جميع الملفات محدّثة</string>
     <string name="use_opengl_render">استخدام OpenGL للتقديم</string>
     <string name="use_opengl_render_descr">"استخدام أداء OpenGL  مسرع (قد لا تعمل على بعض الأجهزة)"</string>
-    <string name="osmo_use_https_descr">استخدام اتصال أمن إلى الخادم</string>
+    
     <string name="osmo_use_https">استخدام HTTPS</string>
 	<string name="map_update">التحديثات متوفرة لـ %1$s من الخرائط</string>
 	<string name="search_for">البحث عن</string>
@@ -1649,7 +1648,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
 	<string name="where_am_i">أين أنا؟</string>
 	
 	<string name="menu_layers">طبقات الخريطة</string>
-	<string name="layer_transport">مواقف وسائل النقل</string>
+	
 	<string name="layer_route">طريق</string>
 	<string name="filter_existing_indexes">محملة</string>
 	<string name="daynight">وضع نهاري/ليلي</string>
@@ -1681,7 +1680,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
 	<string name="send_report">أرسل تقرير</string>
 	<string name="none_region_found">لا توجد أي بيانات بدون اتصال للمناطق والأقاليم على الذاكرة. قم بتحميل المناطق من الإنترنت.</string>
 	<string name="any_poi">أي</string>
-	<string name="layer_transport_route">طريق وسائل النقل</string>
+	
 	<string name="background_service_int_descr">حدد الفاصل الزمني للإيقاظ لخدمة الخلفية</string>
 	<string name="background_router_service_descr">تُشغل OsmAnd في الخلفية بحيث يتتبع موقعك أثناء إغلاق الشاشة</string>
 	<string name="off_router_service_no_gps_available">خدمة الملاحة في الخلفية تتطلب تفعيل مزود مواقع.</string>
@@ -2345,7 +2344,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="shared_string_others">آخرى</string>
     <string name="local_index_action_do">أنت على وشك %1$s %2$s عنصر. تواصل؟</string>
     <string name="amenity_type_geocache">جيوكاش</string>
-    <string name="use_osmand_routing_service">ملاحة OsmAnd &gt; كم20</string>
+    
     <string name="record_plugin_description">"هذا البرنامج المساعد يفعل وظائف لتسجيل وحفظ المسارات الخاصة بك عبر النقر على نافذة GPX على شاشة الخريطة، أو كذلك تسجيل كافة طرق الملاحة الخاص بك تلقائيا إلى ملف GPX.
  
 
@@ -2359,7 +2358,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
 قد يكون عطل مؤقت في الخدمة أو تسجيلك انتهى.
 
 هل تريد المتابعة بتسجيل جديد؟</string>
-    <string name="use_osmand_routing_service_descr">استخدام OsmAnd للملاحة دون نت ينطبق فقط على الطرق &gt; 20 كم (تجريبي)</string>
+    
     <string name="osmand_routing_experimental">ملاحة OsmAnd دون نت ميزة تجريبية وهي لا تعمل لمسافات تزيد عن 20 كيلومترا.
 
 خدمة الملاحة حولت مؤقتا إلى CloudMade على الانترنت.</string>

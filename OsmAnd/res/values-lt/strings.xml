@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
     <string name="starting_point_too_far">Pradžios taškas yra per toli nuo artimiausio kelio.</string>
     <string name="shared_location">Bendrinta vieta</string>
     <string name="osmand_parking_warning">Dėmesio</string>
@@ -215,7 +214,7 @@
     <string name="user_name">Jūsų OSM vartotojo vardas</string>
     <string name="open_street_map_login_descr">Reikalingas norint teikti duomenis į openstreetmap.org</string>
     <string name="user_password">Jūsų OSM slaptažodis</string>
-    <string name="user_password_descr">Reikalingas norint teikti duomenis į openstreetmap.org</string>
+    
     <string name="osmand_service">Foninis režimas</string>
     <string name="osmand_service_descr">Reikalinga, jei norite naudoti OsmAnd kai ekranas yra išjungtas</string>
 
@@ -229,7 +228,7 @@
     <string name="init_native_library">Inicializuojama aparatinė biblioteka…</string>
     <string name="choose_auto_follow_route">Automatinis žemėlapio centravimas</string>
     <string name="choose_auto_follow_route_descr">Laikas po kurio žemėlapio vaizdas bus sinchronizuotas su dabartine pozicija</string>
-    <string name="auto_follow_route_never">Niekada (spauskite \"Pradėti\", jei norite naviguoti rankiniu būdu)</string>
+    
     <string name="auto_follow_route_navigation">Automatiškai centruoti tik navigacijos metu</string>
     <string name="auto_follow_route_navigation_descr">Automatiškai centruoti žemėlapį tik, kai veikia navigacija.</string>
     <string name="auto_follow_location_enabled">Naudojamas automatinis žemėlapio centravimas.</string>
@@ -433,7 +432,7 @@
     <string name="reading_cached_tiles">Skaitomi išsaugoti žemėlapiai…</string>
     <string name="version_index_is_big_for_memory">Indeksas \'\'{0}\'\' netilpo į atmintį</string>
     <string name="version_index_is_not_supported">Indekso versija \'\'{0}\'\' nepalaikoma</string>
-    <string name="use_osmand_routing_service">OsmAnd navigacija &gt;20km</string>
+    
     <string name="use_osmand_routing_service_descr">OsmAnd navigaciją be interneto taikyti tik maršrutams &gt; 20 km (ekperimentinė funkcija)</string>
     <string name="osmand_routing_experimental">OsmAnd navigacija be interneto yra eksperimentinė funkcija ir ji neveikia didesniems nei 20km atstumams.\n\nLaikinai naudojama CloudMade navigacijos paslauga.</string>
     <string name="specified_dir_doesnt_exist">Neina rasti nurodyto segtuvo.</string>
@@ -519,13 +518,13 @@
     <string name="none_region_found">SD kortelėje nėra parsiųstos regionų informacijos. Parsisiųskite norimus regionus iš interneto.</string>
     <string name="poi_namefinder_query_empty">Įveskite paieškos žodžius norėdami rasti LV</string>
     <string name="any_poi">Bet kurią</string>
-    <string name="layer_transport_route">Transporto maršrutas</string>
+    
     <string name="thanks_yandex_traffic">Ačiū Yandex už kelių informaciją.</string>
     <string name="layer_yandex_traffic">Yandex kelių informacija</string>
     <string name="layer_route">Maršrutas</string>
     <string name="shared_string_favorites">Įsimintos vietos</string>
     <string name="layer_osm_bugs">OSM Pastabos (online)</string>
-    <string name="layer_transport">Transporto stotelės</string>
+    
     <string name="layer_poi">LV…</string>
     <string name="layer_map">Žemėlapių šaltiniai…</string>
     <string name="menu_layers">Žemėlapio sluoksniai</string>
@@ -887,7 +886,7 @@
     <string name="select_navigation_mode">Pasirinkite judėjimo režimą</string>
     <string name="day_night_info_description">Saulėtekis : %1$s \nSaulėlydis : %2$s</string>
     <string name="day_night_info">Dienos/nakties info</string>
-    <string name="map_widget_day_night">Dieninis/naktinis žemėlapis</string>
+    
     <string name="map_widget_vector_attributes">Atvaizduojami atributai</string>
     <string name="map_widget_renderer">Atvaizdavimo stilius</string>
 
@@ -1593,7 +1592,7 @@
     <string name="wake_on_voice_descr">Įjungti ekraną (jei išjungtas) artėjant prie posūkio</string>
     <string name="lock_screen_request_explanation">%1$s prašo leidimo išjungti ekraną tausojant energiją.</string>
     <string name="shared_string_never">Niekada</string>
-    <string name="osmo_use_https">Naudoti HTTPS</string>
+    
     <string name="osmo_use_https_descr">Prie serverio jungtis saugiu ryšiu</string>
 
     <string name="home_button">Namo</string>

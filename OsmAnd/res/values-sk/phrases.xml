@@ -467,7 +467,7 @@
 	<string name="poi_internet_cafe">Internetová kaviareň</string>
 
 	<string name="poi_bank">Banka</string>
-	<string name="poi_atm">Bankomat</string>
+	<string name="poi_amenity_atm">Bankomat</string>
 	<string name="poi_money_lender">Požičovňa peňazí</string>
 	<string name="poi_pawnbroker">Záložňa</string>
 	<string name="poi_bureau_de_change">Zmenáreň</string>

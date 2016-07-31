@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
     <string name="search_button">Poišči</string>
     <string name="search_activity">Iskanje podatkov</string>
 
@@ -281,7 +280,7 @@
     <string name="user_name">Uporabniško ime OSM</string>
     <string name="user_password">Geslo OSM</string>
     <string name="open_street_map_login_descr">Zahtevano za pošiljanje podatkov na strežnik openstreetmap.org</string>
-    <string name="user_password_descr">Zahtevano za pošiljanje podatkov na openstreetmap.org</string>
+    
     <string name="routing_settings_descr">Prilagajanje možnosti za določevanje poti in navigacijo</string>
     <string name="general_settings">Splošne nastavitve</string>
     <string name="general_settings_descr">Prilagajanje splošnih nastavitev programa</string>
@@ -355,7 +354,7 @@
     <string name="rendering_attr_hmRendered_name">Pokaži podrobnejši izris</string>
     <string name="navigate_point_format">Oblika</string>
     <string name="day_night_info">Podrobnosti dneva in noči</string>
-    <string name="map_widget_day_night">Svetlobni učinek</string>
+    
     <string name="map_widget_vector_attributes">Značilnosti izrisovanja</string>
     <string name="map_widget_renderer">Slog zemljevida</string>
     <string name="native_app_allocated_memory_descr">Skupna dodeljena velikost pomnilnika je %1$s MB (Dalvik %2$s MB, drugo %3$s MB).
@@ -447,7 +446,7 @@ Omogoča tudi dodajanje opomb v koledar za prikaz opomnikov ob daljših časih p
     <string name="voice_provider">Jezik glasovnega vodenja</string>
     <string name="settings_preset_descr">Izbor uporabniškega profila s prilagojenimi nastavitvami navigacije in izrisa zemljevida.</string>
 
-    <string name="use_osmand_routing_service">Navigacija OsmAnd &gt; 20 km</string>
+    
 
     <string name="process_navigation_service">Navigacijska storitev OsmAnd</string>
     <string name="hello">Program za navigacijo OsmAnd</string>
@@ -472,7 +471,7 @@ Omogoča tudi dodajanje opomb v koledar za prikaz opomnikov ob daljših časih p
 
     <string name="choose_auto_follow_route">Samodejno središčenje zemljevida</string>
     <string name="choose_auto_follow_route_descr">Časovni zamik, preden se položaj samodejno postavi v središče zemljevida</string>
-    <string name="auto_follow_route_never">Nikoli (pritisnite na \'Začni\' za ročni začetek navigacije)</string>
+    
     <string name="fast_route_mode">Najhitrejša pot</string>
     <string name="fast_route_mode_descr">"Izbrana možnost določa izbor najhitrejše poti, neizbrana pa po razdalji najkrajše. "</string>
     <string name="search_position_undefined">Nedoločeno</string>
@@ -768,7 +767,7 @@ Na voljo je le {2} MB.</string>
     <string name="reading_cached_tiles">Nalaganje shranjenih predmetov zemljevida …</string>
     <string name="version_index_is_big_for_memory">Podatki \"{0}\" so preobsežni za razpoložljiv pomnilnik</string>
     <string name="version_index_is_not_supported">Različica kazala \"{0}\" ni podprta</string>
-    <string name="use_osmand_routing_service_descr">Uporaba navigacije OsmAnd brez povezave je smiselna le za poti &lt; 20 km (preizkusno)</string>
+    
     <string name="osmand_routing_experimental">Navigacija OsmAnd brez povezave je preizkusna zmožnost in ne deluje z razdaljami, ki so večje od 20 km.\n\nStoritev navigacije je začasno preklopljena na spletni CloudMade.</string>
     <string name="osmand_net_previously_installed">Nameščena je starejša različica programa OsmAnd. Vsi nepovezani podatki so podprti v novi različici, vendar je treba najprej izvoziti vse priljubljene točke in jih nato ponovno uvoziti v novejšo različico.</string>
     <string name="build_installed">Različica izgradnje {0} je bila uspešno nameščena ({1}).</string>
@@ -860,14 +859,14 @@ Pomembnejše lastnosti:
     <string name="none_region_found">Na kartici SD ni podatkov območij za uporabo brez povezave. Datoteke lahko prejmete z interneta.</string>
     <string name="poi_namefinder_query_empty">Za iskanje točke POI je treba vpisati iskalni niz</string>
     <string name="any_poi">Katerokoli</string>
-    <string name="layer_transport_route">Pot javnega prevoza</string>
+    
     <string name="thanks_yandex_traffic">Za podatke o prometu gre zahvala spletišču Yandex.</string>
     <string name="layer_yandex_traffic">Promet Yandex</string>
     <string name="no_fav_to_save">Ni priljubljenih točk za shranjevanje</string>
     <string name="layer_route">Pot</string>
     <string name="shared_string_favorites">Pokaži priljubljene točke</string>
     <string name="layer_osm_bugs">Hrošči OSM (zahteva povezavo)</string>
-    <string name="layer_transport">Postaje prevoza</string>
+    
     <string name="layer_poi">Izbor točk POI …</string>
     <string name="layer_map">Vir zemljevida …</string>
     <string name="context_menu_item_search_poi">Iskanje točk POI</string>
@@ -1810,7 +1809,7 @@ Shranjene sledi je mogoče objavljati kot datoteke OSM. Z uporabo vstavka je mog
     <string name="no_internet_connection">Prejem ni mogoč; najverjetneje so težave s povezavo na internet.</string>
     <string name="shared_string_dismiss">Opusti</string>
     <string name="everything_up_to_date">Vse datoteke so posodobljene</string>
-    <string name="osmo_use_https">Uporabi protokol HTTPS</string>
+    
 
     <string name="map_update">Na voljo je %1$s posodobitev zemljevidov</string>
     <string name="search_for">Poišči</string>
@@ -1821,7 +1820,7 @@ Shranjene sledi je mogoče objavljati kot datoteke OSM. Z uporabo vstavka je mog
     <string name="use_opengl_render">Uporabi izrisovanje OpenGL</string>
     <string name="use_opengl_render_descr">Uporabi strojno pospešeno izrisovanje OpenGL (na nekaterih napravah morda ne deluje)</string>
     <string name="home_button">Začetni zaslon</string>
-    <string name="osmo_use_https_descr">Uporabi varno povezavo s strežnikom</string>
+    
     <string name="error_avoid_specific_road">Ni najdenih možnosti obvoza</string>
     <string name="voices">Glasovna navodila</string>
     <string name="speak_pedestrian">Prehodi za pešce</string>
@@ -2346,7 +2345,7 @@ Vrnitev na običajni pogled je mogoče na dva načina. Ali odklopite prekrivni s
     <string name="find_parking">Najdi parkirno mesto</string>
     <string name="select_map_markers">Izbor oznak zemljevida</string>
     <string name="shared_string_reverse_order">Obrni razvrstitev</string>
-    <string name="show_map_markers">Oznake zemljevida</string>
+    
     <string name="show_map_markers_description">Omogoči možnosti oznak zemljevida</string>
     <string name="clear_active_markers_q">Ali želite odstraniti vse dejavne oznake?</string>
     <string name="clear_markers_history_q">Ali res želite počistiti zgodovino oznake?</string>
@@ -2355,7 +2354,7 @@ Vrnitev na običajni pogled je mogoče na dva načina. Ali odklopite prekrivni s
     <string name="map_marker">Oznaka zemljevida</string>
     <string name="rendering_attr_showMtbRoutes_name">Pokaži poti MTB</string>
     <string name="show_polygons">Pokaži poligone</string>
-    <string name="show_map_markers_topbar">Pokaži orodno vrstico oznak zemljevida</string>
+    
     <string name="map_marker_1st">Prva oznaka zemljevida</string>
     <string name="map_marker_2nd">Druga oznaka zemljevida</string>
     <string name="shared_string_toolbar">Orodna vrstica</string>

@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="fav_point_dublicate_message">O nome do punto favorito xa está usado; foi cambiado a %1$s para evitar os duplicados.</string>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources><string name="fav_point_dublicate_message">O nome do punto favorito xa está usado; foi cambiado a %1$s para evitar os duplicados.</string>
     <string name="text_size_descr">Configurar o tamaño da letra no mapa.</string>
     <string name="text_size">Tamaño da letra</string>
     <string name="traffic_warning_speed_limit">Límite de velocidade</string>
@@ -653,7 +652,7 @@
 	<string name="day_night_info_description">Amencer: %1$s
 \nSolpor: %2$s</string>
 	<string name="day_night_info">Información sobre o día e a noite</string>
-	<string name="map_widget_day_night">Mapa diúrno/nocturo</string>
+	
 	<string name="map_widget_vector_attributes">Atributos de renderizado</string>
 	<string name="map_widget_renderer">Estilo de mapa</string>
 	<string name="layer_map_appearance">Configurar a pantalla</string>
@@ -922,7 +921,7 @@
 	<string name="user_name">O seu nome de usuario en OSM</string>
 	<string name="open_street_map_login_descr">Precísase para os envíos a openstreetmap.org</string>
 	<string name="user_password">O seu contrasinal en OSM</string>
-	<string name="user_password_descr">Precísase para os envíos a openstreetmap.org</string>
+	
 	<string name="osmand_service">Modo de segundo plano</string>
 	<string name="osmand_service_descr">OsmAnd execútase en segundo plano cando a pantalla está apagada</string>
 	
@@ -940,7 +939,7 @@
 	<string name="init_native_library">A inicializar a biblioteca nativa …</string>
 	<string name="choose_auto_follow_route">Centrar automaticamente a vista do mapa</string>
 	<string name="choose_auto_follow_route_descr">Tempo até que a vista do mapa se sincronice coa posición actual</string>
-	<string name="auto_follow_route_never">Nunca (toque en «Ir» para iniciar o guiado manualmente)</string>
+	
 	<string name="keep_informing_never">Nunca</string>
     <string name="keep_informing_descr">Anunciar de novo as instrucións de navegación a intervalos regulares</string>
     <string name="keep_informing">Repetir as instrucións de navegación</string>
@@ -1145,7 +1144,7 @@
 	<string name="reading_cached_tiles">A ler as teselas gardadas temporalmente…</string>
 	<string name="version_index_is_big_for_memory">O índice «{0}» non cabe na memoria</string>
 	<string name="version_index_is_not_supported">Non se admite a versión do índice «{0}»</string>
-	<string name="use_osmand_routing_service">OsmAnd navigation &gt;20km</string>
+	
 	<string name="use_osmand_routing_service_descr">Empregar a navegación sen conexión de OsmAnd só para itinerarios &gt; 20 km (experimental)</string>
 	<string name="osmand_routing_experimental">A navegación sen conexión de OsmAnd é unha funcionalidade experimental e non funciona para distancias maiores duns 20 km.\n\nO servizo de navegación vai pasar temporalmente ao CloudMade, con conexión.</string>
 	<string name="specified_dir_doesnt_exist">Non é posíbel atopar o cartafol indicado.</string>
@@ -1232,13 +1231,13 @@
 	<string name="none_region_found">Non foi posíbel atopar datos para as rexións no cartón SD. Descargue as rexións da Internet.</string>
 	<string name="poi_namefinder_query_empty">Introduza a consulta para atopar puntos de interese</string>
 	<string name="any_poi">Calquera</string>
-	<string name="layer_transport_route">Itinerario de transporte</string>
+	
 	<string name="thanks_yandex_traffic">Grazas a Yandex pola información sobre o tráfico.</string>
 	<string name="layer_yandex_traffic">Tráfico de Yandex</string>
 	<string name="layer_route">Itinerario</string>
 	<string name="shared_string_favorites">Favoritos</string>
 	<string name="layer_osm_bugs">Notas de OSM (con conexión)</string>
-	<string name="layer_transport">Paraxes de transporte</string>
+	
 	<string name="layer_poi">PdI…</string>
 	<string name="layer_map">Fonte de mapas…</string>
 	<string name="menu_layers">Capas do mapa</string>
@@ -1552,7 +1551,7 @@
     <string name="use_opengl_render_descr">Empregar renderizado con OpenGL acelerado co hardware (podería non funcionar nalgúns dispositivos)</string>
     <string name="error_avoid_specific_road">Non foi posíbel atopar a estrada máis próxima</string>
     <string name="home_button">Inicio</string>
-    <string name="osmo_use_https_descr">Empregar unha conexión segura co servidor</string>
+    
     <string name="osmo_use_https">Empregar HTTPS</string>
 	
 	<string name="map_update">Hai actualizacións dispoñíbeis para %1$s mapas</string>

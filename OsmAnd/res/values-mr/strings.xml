@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="left_side_navigation">डाव्या बाजूने ड्रायव्हिंग</string>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources><string name="left_side_navigation">डाव्या बाजूने ड्रायव्हिंग</string>
   <string name="unknown_location">अजून स्थान माहित नाही</string>
   <string name="modify_transparency">पारदर्शकता बदला (० - पारदर्शक, २५५ - अपारदर्शक)</string>
   <string name="confirm_interrupt_download">फाइल डाउनलोड थांबवायचे का?</string>
@@ -95,7 +94,7 @@
   <string name="download_files_not_enough_space">%1$s एमबी डाउनलोड करण्यसाठी पुरेशी जागा शिल्लक नाही (शिल्लक जागा: %2$s).</string>
   <string name="download_files_question_space">{0} फाइल डाउनलोड करायच्या का? {1} एमबी जागा लागेल. सध्या शिल्लक जागा {2} एमबी.</string>
   
-  <string name="auto_follow_route_never">कधीच नाही</string>
+  
   <string name="pref_vector_map">वेक्टर नकाशाचे पर्याय</string>
   <string name="delete_confirmation_msg">%1$s काढून टाकायचे का?</string>
   <string name="city_type_suburb">उपनगर</string>
@@ -334,7 +333,7 @@
 <string name="select_navigation_mode">परिवहन माध्यम निवडा</string>
 <string name="day_night_info_description">सुर्योदय : %1$s \nसूर्यास्त : %2$s</string>
 <string name="day_night_info">दिवस/रात्र माहिती</string>
-<string name="map_widget_day_night">दिवस/रात्र नकाशा</string>
+
 
 
 <string name="layer_map_appearance">स्क्रिन कॉन्फिगर करा</string>
@@ -437,9 +436,9 @@
 	<string name="opening_hours">उघडण्याची वेळ</string>
 	<string name="favorite">आवडते ठिकाण</string>
 	<string name="layer_poi">पिओआय…</string>
-	<string name="layer_transport">परिवहन थांबे</string>
+	
 	<string name="layer_route">मार्ग</string>
-	<string name="layer_transport_route">परिवहन मार्ग</string>
+	
 	<string name="vector_data">ऑफलाएन वेक्टर नकाशे</string>
 	<string name="no_vector_map_loaded">वेक्टर नकाशे लोड झाले नाही</string>
 	

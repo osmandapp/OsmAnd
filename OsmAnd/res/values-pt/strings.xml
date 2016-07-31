@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="amenity_type_administrative">Administrativo</string>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources><string name="amenity_type_administrative">Administrativo</string>
   <string name="amenity_type_barrier">Barreira</string>
   <string name="amenity_type_education">Educação</string>
   <string name="amenity_type_emergency">Emergência</string>
@@ -122,13 +121,13 @@
   <string name="none_region_found">Nenhuma região encontrada no cartão SD. Tente fazer o download a partir da Internet.</string>
   <string name="poi_namefinder_query_empty">Parâmetros de pesquisa para encontrar o POI</string>
   <string name="any_poi">Todos</string>
-  <string name="layer_transport_route">Vias de transporte</string>
+  
   <string name="thanks_yandex_traffic">Obrigado à Yandex por fornecer informações de trânsito.</string>
   <string name="layer_yandex_traffic">Tráfego Yandex</string>
   <string name="layer_route">Rota</string>
   <string name="shared_string_favorites">Favoritos</string>
   <string name="layer_osm_bugs">Bugs OSM</string>
-  <string name="layer_transport">Paradas de transportes</string>
+  
   <string name="layer_poi">POI (Ponto de interesse)…</string>
   <string name="layer_map">Fonte dos mapas…</string>
   <string name="menu_layers">Camada de mapa</string>
@@ -291,7 +290,7 @@
   
   <string name="use_online_routing_descr">Utilizar Internet para calcular a rota</string>
   <string name="use_online_routing">Utilizar navegação online</string>
-  <string name="user_password_descr">Sua senha do OpenStreetMap</string>
+  
   <string name="user_password">Senha</string>
   <string name="osm_settings_descr">Definir os parâmetros de conexão OpenStreetMap</string>
   
@@ -615,7 +614,7 @@
   <string name="init_native_library">Inicializando biblioteca nativa…</string>
   <string name="choose_auto_follow_route">Auto-centrar visualização do mapa</string>
   <string name="choose_auto_follow_route_descr">Tempo para o mapa ser centrado na posição actual</string>
-  <string name="auto_follow_route_never">Nunca</string>
+  
   <string name="auto_follow_route_navigation">Auto-centrar apenas navegação</string>
   <string name="auto_follow_route_navigation_descr">Auto-centrar a posição no mapa apenas durante a navegação.</string>
   <string name="auto_follow_location_enabled">Mapa automaticamente centrado.</string>
@@ -788,7 +787,7 @@
   <string name="add_waypoint_dialog_added">Ponto de trilha \'\'{0}\'\' foi adicionado com sucesso</string>
   <string name="add_waypoint_dialog_title">Acrescentar ponto à trilha GPX gravada</string>
   <string name="context_menu_item_add_waypoint">Acrescentar ponto GPX</string>
-  <string name="use_osmand_routing_service">OsmAnd navigação &gt;20km</string>
+  
   <string name="use_osmand_routing_service_descr">Navegação OsmAnd offline aplica-se apenas a rotas &gt; 20 km (experimental)</string>
   <string name="osmand_routing_experimental">Navegação offline OamAnd é ainda uma função experimental e não funciona em distâncias superiores a cerca de 20 km.\n\nO Serviço Navegação está temporariamente mudado para CloudMade online.</string>
   <string name="specified_dir_doesnt_exist">Não foi possível encontrar diretório especificado.</string>
@@ -907,7 +906,7 @@
 <string name="day_night_info_description">Nascer do sol: %1$s
 \nPôr-do-sol: %2$s</string>
 <string name="day_night_info">Dia/noite Informações</string>
-<string name="map_widget_day_night">Modo Dia/noite</string>
+
 <string name="map_widget_vector_attributes">Atributos de renderização</string>
 <string name="map_widget_renderer">Estilo de renderização</string>
 
@@ -1622,7 +1621,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="everything_up_to_date">Todos os arquivos foram atualizados</string>
     <string name="use_opengl_render">Use o renderizador OpenGL</string>
     <string name="home_button">Início</string>
-    <string name="osmo_use_https">Usar HTTPS</string>
+    
 	
 	<string name="map_update">Atualizações disponives para %1$s mapas</string>
 	<string name="search_for">Procurar por</string>
@@ -1950,7 +1949,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="plugin_touringview_descr">"Esta opção muda o estilo de mapa do Osmand para a \"visão Touring \', uma visão especial de alto detalhe, para viajantes e motoristas profissionais.\n\nEsta exibição fornece, em qualquer zoom de mapa, a quantidade máxima de informação de viagem disponível no mapa (particularmente estradas, trilhas, caminhos, e marcas de orientação).\n\nTambém separa claramente todos os tipos de estradas de forma inequívoca com um código de cores, que se revela útil para a condução de veículos grandes (por exemplo).\n\nOferece opções especiais de turismo, como mostrar ciclovias ou rotas alpinas de montanha.\n\nNão é necessário fazer download dum mapa especial, a exibição é feita a partir dos mapas padrão.\n\nEssa visão pode ser revertida, basta desactiva-la, ou alterar o estilo de mapa em \'Configurar mapa\'. "</string>
     <string name="rendering_attr_roadStyle_description">Estilo de estrada</string>
     <string name="error_avoid_specific_road">Nenhum desvio encontrado</string>
-    <string name="osmo_use_https_descr">Usar ligação segura ao servidor</string>
+    
     <string name="wake_on_voice_descr">Acender o visor do dispositivo (se desligado) ao aproximar duma curva</string>
     <string name="map_widget_top">Barra de estado</string>
     <string name="map_widget_right">Painel direito</string>

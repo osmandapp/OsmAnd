@@ -41,7 +41,7 @@
 	<string name="day_night_info_description">Auringon nousu : %1$s
 \nAuringon lasku : %2$s</string>
 	<string name="day_night_info">Päivä/yö info</string>
-	<string name="map_widget_day_night">Päivä/yö kartta</string>
+	
 	
 	<string name="show_lanes">Näytä ajokaistat</string>
 	<string name="avoid_unpaved">Vältä päällystämättömiä teitä</string>
@@ -183,12 +183,12 @@
 	<string name="user_name">OSM käyttäjänimesi</string>
 	<string name="open_street_map_login_descr">Tarvitaan openstreetmap.org ehdotuksia varten</string>
 	<string name="user_password">OSM salasanasi</string>
-	<string name="user_password_descr">Tarvitaan openstreetmap.org ehdotuksia varten</string>
+	
 	
 	<string name="download_files_not_enough_space">Ei ole tarpeeksi tilaa jotta voitaisiin ladata %1$s MB (vapaana: %2$s).</string>
 	<string name="download_files_question_space">Vapaata tilaa on {2} MB! Lataa {0} tiedosto(a) ({1} MB)?</string>
 	
-	<string name="auto_follow_route_never">Ei koskaan</string>
+	
 	<string name="delete_confirmation_msg">Poista %1$s?</string>
 	<string name="city_type_suburb">Lähiö</string>
 	<string name="city_type_hamlet">Kylä</string>
@@ -587,7 +587,7 @@
 	<string name="context_menu_item_add_parking_point">Merkitse pysäköintipaikaksi</string>
 	<string name="context_menu_item_delete_parking_point">Poista pysäköintimerkki</string>
 	<string name="shared_string_clear">Nollaa</string>
-	<string name="use_osmand_routing_service">OsmAnd navigointi &gt;20km</string>
+	
 	<string name="specified_dir_doesnt_exist">Ei löydetty määriteltyä hakemistoa.</string>
 	<string name="voice_is_not_available_title">Ei ääniohjausta valittuna</string>
 	<string name="unknown_from_location">Aloituspistettä ei ole vielä määritelty</string>
@@ -639,7 +639,7 @@
     <string name="av_def_action_picture">Ota kuva</string>
     <string name="recording_context_menu_precord">Ota kuva</string>
     <string name="recording_context_menu_show">Näytä</string>
-    <string name="use_osmand_routing_service_descr">Käytä OsmAnd offline navigointia. Koskee vain alle 20km pitkiä reittejä (kokeellinen)</string>
+    
 	<string name="application_dir">Tallennuskansio</string>
 	<string name="access_arrival_time">Saapumisaika</string>
     <string name="item_checked">valittu</string>

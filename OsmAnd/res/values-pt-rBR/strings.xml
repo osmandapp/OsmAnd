@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="shared_string_my_places">Meus locais</string>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources><string name="shared_string_my_places">Meus locais</string>
 	<string name="days_behind">dias atrás</string>
 	<string name="watch">Ver</string>
 	<string name="rendering_attr_pisteGrooming_name">Pista de preparação</string>
@@ -229,7 +228,7 @@
     <string name="use_opengl_render">Usar renderização OpenGL</string>
     <string name="use_opengl_render_descr">Usar aceleração de hardware OpenGL para renderização (talvez não funcione em alguns aparelhos)</string>
     <string name="error_avoid_specific_road">Nenhum desvio encontrado</string>
-    <string name="osmo_use_https_descr">Usar conexão segura com o servidor</string>
+    
     <string name="osmo_use_https">Usar HTTPS</string>
 	<string name="search_for">Pesquisar por</string>
 	<string name="coordinates">Coordenadas</string>
@@ -820,7 +819,7 @@
 	<string name="recalculate_route_to_your_location">Meio de transporte:</string>
 	<string name="select_navigation_mode">Selecionar meio de transporte</string>
 	<string name="day_night_info">Informações dia/noite</string>
-	<string name="map_widget_day_night">Modo dia/noite</string>
+	
 	<string name="map_widget_renderer">Estilo do mapa</string>
 	<string name="layer_map_appearance">Configurar tela</string>
 	<string name="show_lanes">Mostrar faixas de rolamento</string>
@@ -1117,7 +1116,7 @@
 	<string name="user_name">Seu nome de usuário OSM</string>
 	<string name="open_street_map_login_descr">Necessário para envios ao openstreetmap.org</string>
 	<string name="user_password">Sua senha do OSM</string>
-	<string name="user_password_descr">Necessária para envios ao openstreetmap.org</string>
+	
 	<string name="osmand_service">Modo em segundo plano</string>
 	<string name="osmand_service_descr">Use para executar o OsmAnd, enquanto a tela estiver desligada</string>
 	
@@ -1141,7 +1140,7 @@
 	<string name="native_library_not_supported">Biblioteca nativa não é suportada neste aparelho.</string>
 	<string name="choose_auto_follow_route">Centrar visualização do mapa</string>
 	<string name="choose_auto_follow_route_descr">Tempo para o mapa ser centrado na posição atual</string>
-	<string name="auto_follow_route_never">Nunca (toque \'Ir\' para iniciar a orientação manualmente)</string>
+	
 	<string name="keep_informing_never">Apenas manualmente (toque a seta)</string>
     <string name="keep_informing_descr">Repetir as instruções de navegação em intervalos regulares</string>
     <string name="keep_informing">Repetir as instruções de navegação</string>
@@ -1360,7 +1359,7 @@
 	<string name="reading_cached_tiles">Lendo quadrículas salvas…</string>
 	<string name="version_index_is_big_for_memory">O índice \'\'{0}\'\' não coube na memória</string>
 	<string name="version_index_is_not_supported">A versão do índice \'\'{0}\'\' não é suportada</string>
-	<string name="use_osmand_routing_service">Navegação OsmAnd &gt;20km</string>
+	
 	<string name="use_osmand_routing_service_descr">Navegação OsmAnd off-line aplica-se apenas a rotas &gt;20 km (experimental)</string>
 	<string name="osmand_routing_experimental">Navegação OsmAnd off-line é ainda uma função experimental e não funciona em distâncias superiores a cerca de 20 km.\n\nO serviço de navegação está temporariamente mudado para CloudMade on-line.</string>
 	<string name="specified_dir_doesnt_exist">Não se pode encontrar o diretório especificado.</string>
@@ -1431,11 +1430,11 @@
 	<string name="none_region_found">Nenhum dado de região encontrado no cartão SD. Tente baixar da Internet.</string>
 	<string name="poi_namefinder_query_empty">Parâmetros de pesquisa para encontrar o POI</string>
 	<string name="any_poi">Todos</string>
-	<string name="layer_transport_route">Rota de transporte</string>
+	
 	<string name="thanks_yandex_traffic">Obrigado à Yandex por fornecer informações de trânsito.</string>
 	<string name="layer_yandex_traffic">Trânsito Yandex</string>
 	<string name="layer_route">Rota</string>
-	<string name="layer_transport">Paradas de transporte</string>
+	
 	<string name="layer_poi">POI…</string>
 	<string name="layer_map">Fonte de mapa…</string>
 	<string name="menu_layers">Camadas de mapa</string>
@@ -2002,12 +2001,12 @@
     <string name="shared_string_save_changes">Salvar alterações</string>
     <string name="find_parking">Encontrar estacionamento</string>
     <string name="show_polygons">Mostrar polígonos de áreas</string>
-    <string name="underlay_transparency">Transparência da subcamada</string>
+    
     <string name="add_points_to_map_markers_q">Você quer adicionar todos os pontos aos Marcadores de Mapa?</string>
     <string name="shared_string_add_to_map_markers">Adicionar aos Marcadores de Mapa</string>
     <string name="select_map_markers">Selecionar Marcadores de Mapa</string>
     <string name="shared_string_reverse_order">Ordem inversa</string>
-    <string name="show_map_markers">Marcadores de Mapa</string>
+    
     <string name="show_map_markers_description">Ativar o recurso Marcadores de Mapa</string>
     <string name="clear_active_markers_q">Você quer apagar todos os marcadores ativos?</string>
     <string name="clear_markers_history_q">Você quer limpar o histórico de marcadores?</string>

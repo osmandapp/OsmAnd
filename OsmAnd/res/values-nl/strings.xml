@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
   
   <string name="layer_map_appearance">Configureer scherm</string>
   <string name="show_lanes">Rijstroken</string>
@@ -148,7 +147,7 @@
   <string name="user_name">OSM gebruikersnaam</string>
   <string name="open_street_map_login_descr">Nodig voor OpenStreetMap.org aanmelding</string>
   <string name="user_password">OSM wachtwoord</string>
-  <string name="user_password_descr">Nodig voor OpenStreetMap.org aanmelding</string>
+  
   <string name="osmand_service">Achtergrondmodus</string>
   <string name="osmand_service_descr">OsmAnd werkt op de achtergrond als het scherm uit is</string>
   
@@ -169,7 +168,7 @@ Er is nu {2} MB beschikbaar.</string>
   <string name="init_native_library">Voorbereiden interne bibliotheek…</string>
   <string name="choose_auto_follow_route">Kaartpositie volgen</string>
   <string name="choose_auto_follow_route_descr">Tijd totdat kaartweergave wordt gesynchroniseerd met de positie</string>
-  <string name="auto_follow_route_never">Nooit (druk op \'Start\' om de begeleiding te starten)</string>
+  
   <string name="auto_follow_route_navigation">Alleen automatisch volgen tijdens navigatie</string>
   <string name="auto_follow_route_navigation_descr">Alleen automatisch volgen tijdens navigatie.</string>
   <string name="auto_follow_location_enabled">Automatisch kaart volgen in gebruik.</string>
@@ -376,7 +375,7 @@ Er is nu {2} MB beschikbaar.</string>
   <string name="reading_cached_tiles">Kaartsegmenten worden gelezen…</string>
   <string name="version_index_is_big_for_memory">De index \'\'{0}\'\' past niet in het geheugen</string>
   <string name="version_index_is_not_supported">De versie van index \'\'{0}\'\' wordt niet ondersteund</string>
-  <string name="use_osmand_routing_service">OsmAnd routing &gt;20km</string>
+  
   <string name="use_osmand_routing_service_descr">Gebruik OsmAnd offline routing voor lange afstanden (&gt; 20 km, experimenteel)</string>
   <string name="osmand_routing_experimental">OsmAnd offline routing is een experimentele functie en werkt niet voor afstanden van meer dan ongeveer 20 km.\n\nRouting service is tijdelijk omgeschakeld naar online CloudMade.</string>
   <string name="specified_dir_doesnt_exist">Kan de opgegeven map niet vinden.</string>
@@ -459,12 +458,12 @@ Er is nu {2} MB beschikbaar.</string>
   <string name="none_region_found">Geen offline-gegevens voor regio gevonden op de SD kaart. Download regio\'s van het internet.</string>
   <string name="poi_namefinder_query_empty">Type een zoekwoord om een interessepunt te vinden</string>
   <string name="any_poi">Alle</string>
-  <string name="layer_transport_route">Openbaar Vervoer-verbindingen</string>
+  
   <string name="thanks_yandex_traffic">Met dank aan Yandex voor de verkeersinformatie.</string>
   <string name="layer_yandex_traffic">Yandex Traffic</string>
   <string name="layer_route">Route</string>
   <string name="layer_osm_bugs">OSM-Opmerkingen (online)</string>
-  <string name="layer_transport">OV-haltes</string>
+  
   <string name="layer_poi">Interessepunt…</string>
   <string name="layer_map">Basiskaart…</string>
   <string name="menu_layers">Kaartlagen</string>
@@ -894,7 +893,7 @@ Proportioneel werkgeheugen %4$s MB (Android limiet %5$s MB, Dalvik %6$s MB).</st
 <string name="select_navigation_mode">Kies soort vervoer</string>
 <string name="day_night_info_description">Zonsopgang: %1$s \nZonsondergang: %2$s</string>
 <string name="day_night_info">Dag/nacht info</string>
-<string name="map_widget_day_night">Dag/nacht kaart</string>
+
 <string name="map_widget_vector_attributes">Kaartweergave attributen</string>
 <string name="map_widget_renderer">Kaartstijl</string>
 
@@ -1797,7 +1796,7 @@ Opgenomen tracks kunnen worden gedeeld met vrienden of worden gebruikt als OSM-b
     <string name="rendering_category_hide">Verberg</string>
     <string name="lock_screen_request_explanation">%1$s heeft toestemming nodig om het scherm uit te kunnen schakelen (als onderdeel van de stroombesparende functie).</string>
     
-	<string name="osmo_use_https_descr">Gebruik beveiligde verbinding met server</string>
+	
     <string name="osmo_use_https">Gebruik HTTPS</string>
 	<string name="home_button">Beginscherm</string>
     <string name="search_for">Zoek naar</string>
@@ -2401,7 +2400,7 @@ Het activeren van deze weergave verandert de kaartstijl in \'Winter en ski\', me
     <string name="shared_string_save_changes">Wijzigingen opslaan</string>
     <string name="shared_string_email_address">E-mailadres</string>
     <string name="show_polygons">Toon vlakken</string>
-    <string name="underlay_transparency">Underlay transparantie</string>
+    
     <string name="find_parking">Zoek parkeerplaats</string>
     <string name="rendering_attr_showMtbRoutes_name">Toon MTB-routes</string>
     <string name="shared_string_reverse_order">Volgorde omdraaien</string>

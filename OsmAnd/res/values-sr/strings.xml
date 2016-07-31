@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
     <string name="about_version">Верзија:</string>
     <string name="shared_string_about">Oko</string>
     <string name="about_settings_descr">Верзија инфо, лиценце, чланови пројекта</string>
@@ -116,7 +115,7 @@
 	<string name="native_library_not_supported">Нативна библиотека није подржана на овом уређају .</string>
 	<string name="init_native_library">Покретање нативне библиотеке…</string>
 	<string name="choose_auto_follow_route">Аутоцентрирање мапе</string>
-	<string name="auto_follow_route_never">Никада</string>
+	
 	<string name="pref_vector_map">Подешавање векторске мапа</string>
 	<string name="city_type_suburb">Предграђе</string>
 	<string name="city_type_village">Село</string>
@@ -190,7 +189,7 @@
 	<string name="auto_follow_location_enabled">Ауто-центрирање карте током употребе.</string>
 	<string name="day_night_info_description">Излазак сунца: %1$s \nЗалазак сунца: %2$s</string>
 	<string name="day_night_info">Дан/ноћ информације</string>
-	<string name="map_widget_day_night">Дневна/ноћна мапа</string>
+	
 	<string name="map_widget_renderer">Стил мапе</string>
 	
 	<string name="avoid_in_routing_title">Избегавати…</string>
@@ -202,7 +201,7 @@
 	<string name="rotate_map_to_bearing_descr">Одаберите поравнавање екрана мапе</string>
 	<string name="show_route">Детаљи руте</string>
 	<string name="poi_namefinder_query_empty">Унети упит за претрагу POI</string>
-	<string name="layer_transport_route">Рута транспорта</string>
+	
 	<string name="layer_osm_bugs">Дневник ОСМ-а (на мрежи)</string>
 	<string name="layer_poi">POI…</string>
 	<string name="context_menu_item_search_poi">Претрага POI</string>
@@ -242,7 +241,7 @@
     <string name="everything_up_to_date">Све датотеке су свеже</string>
     <string name="use_opengl_render">Користи ОпенГЛ за приказ</string>
     <string name="use_opengl_render_descr">Користи хардверско убрзање ОпенГЛ-а за приказ (можда не ради на неким уређајима)</string>
-    <string name="osmo_use_https_descr">Користи безбедну везу са сервером</string>
+    
     <string name="osmo_use_https">Користи ХТТПС</string>
 	
 	<string name="map_update">Доступне су надоградње %1$s карата</string>

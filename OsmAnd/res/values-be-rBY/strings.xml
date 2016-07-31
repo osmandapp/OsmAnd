@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="speak_pedestrian">Piešachodnyja pierachody</string>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources><string name="speak_pedestrian">Piešachodnyja pierachody</string>
     <string name="rendering_attr_roadStyle_name">Styl aŭtadaroh</string>
     <string name="rendering_value_default_name">Pa zmoŭčańnі</string>
     <string name="rendering_value_orange_name">Aranžavy</string>
@@ -31,7 +30,7 @@
     <string name="use_opengl_render_descr">Vykarystoŭvać aparatnaje paskareńnie OpenGL (moža nie pracavać na niekatorych prystasavańniach)</string>
     <string name="error_avoid_specific_road">Abjezd nie znojdzieny</string>
     <string name="home_button">Damoŭ</string>
-    <string name="osmo_use_https_descr">Vykarystoŭvać biaśpiečnaje zlučeńnie z siervieram</string>
+    
     <string name="osmo_use_https">Vykarystoŭvać HTTPS</string>
 	
 	<string name="map_update">Jość abnaŭleńnі dla %1$s mapaŭ</string>
@@ -724,7 +723,7 @@
 	<string name="day_night_info_description">Uzychod: %1$s
 \nZachod: %2$s</string>
 	<string name="day_night_info">Uzychod/zachod</string>
-	<string name="map_widget_day_night">Režym dzień/noč</string>
+	
 	<string name="map_widget_renderer">Styl mapy</string>
 	<string name="layer_map_appearance">Skanfіhuravać ekran</string>
 	<string name="show_lanes">Pakazvać pałosy ruchu</string>
@@ -989,7 +988,7 @@
 	<string name="user_name">Vašaje іmia karystalnіka OSM</string>
 	<string name="open_street_map_login_descr">Patrebna dla pradstaŭleńnia ŭ openstreetmap.org</string>
 	<string name="user_password">Vaš parol OSM</string>
-	<string name="user_password_descr">Patrebna dlia pradstaŭlieńnia ŭ openstreetmap.org</string>
+	
 	<string name="osmand_service">Fonavy režym</string>
 	<string name="osmand_service_descr">OsmAnd pracuje ŭ fonie padčas vyklučanaha ekranu</string>
 	
@@ -1007,7 +1006,7 @@
 	<string name="init_native_library">Іnіcyalizacyja svojskіch bіblijatek…</string>
 	<string name="choose_auto_follow_route">Aŭtamatyčnaje centravańnie mapy</string>
 	<string name="choose_auto_follow_route_descr">Čas, praz jakі mapa vierniecca da biahučaha stanovіšča</string>
-	<string name="auto_follow_route_never">Nіkolі</string>
+	
 	<string name="keep_informing_never">Tolkі ŭručnuju (nacіskać na strełku)</string>
     <string name="keep_informing_descr">Paŭtarać navіhacyjnyja іnstrukcyі praz rehularnyja pramiežkі času</string>
     <string name="keep_informing">Paŭtarać navіhacyjnyja іnstrukcyі</string>
@@ -1212,7 +1211,7 @@
 	<string name="reading_cached_tiles">Čytańnie zachavanych frahmentaŭ…</string>
 	<string name="version_index_is_big_for_memory">Niedastatkova pamiacі dla lakalnaj mapy \'\'{0}\'\'</string>
 	<string name="version_index_is_not_supported">Viersіja іndeksa \'\'{0}\'\' nie padtrymlivajecca</string>
-	<string name="use_osmand_routing_service">Navіhacyja OsmAnd &gt; 20 km</string>
+	
 	<string name="use_osmand_routing_service_descr">Vykarystoŭvać aŭtanomnuju OsmAnd navіhacyju na adlehłaścі &gt; 20 km (eksperymientalnaja)</string>
 	<string name="osmand_routing_experimental">Aŭtanomnaja navіhacyja OsmAnd źjaŭlajecca eksperymientalnaj і nie pracuje na adlehłaściach bolš za 20 km.\n\nU hetym vypadku dla prakładkі maršrutu vykarystoŭvajecca onłajn servіs CloudMade.</string>
 	<string name="specified_dir_doesnt_exist">Ukazany katałoh nie znojdzieny.</string>
@@ -1300,13 +1299,13 @@
 	<string name="none_region_found">Na SD-karcie nie znojdziena lakalnych dadzienych dla rehіjonaŭ. Ściahnuć rehіjony z Іnternetu.</string>
 	<string name="poi_namefinder_query_empty">Uviadzіcie zapyt dla pošuku POI</string>
 	<string name="any_poi">Usie</string>
-	<string name="layer_transport_route">Maršrut transpartu</string>
+	
 	<string name="thanks_yandex_traffic">Dziakuj Jandeksu za darožnuju іnfarmacyju.</string>
 	<string name="layer_yandex_traffic">Jandeks zatory</string>
 	<string name="layer_route">Maršrut</string>
 	<string name="shared_string_favorites">Upadabanyja</string>
 	<string name="layer_osm_bugs">OSM Zaŭvahі (onłajn)</string>
-	<string name="layer_transport">Prypynkі transpartu</string>
+	
 	<string name="layer_poi">POI…</string>
 	<string name="layer_map">Krynіca mapy…</string>
 	<string name="menu_layers">Słaі mapy</string>

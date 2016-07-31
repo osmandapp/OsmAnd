@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
     <string name="osmand_plus_extended_description_4000_chars_v2">
 OsmAnd Maps &amp; Navigation - Orte finden und Routen berechnen ohne Interbetverbindung. Dazu einfach Landkarten für beliebuge Länder herunterladen, bevor man sich auf Reisen begibt.
 
@@ -390,7 +389,7 @@ Karten-Kacheln können direkt online bezogen werden, und werden im OsmAnd-Untero
 	<string name="user_name">OSM-Benutzername</string>
 	<string name="open_street_map_login_descr">Benötigt für openstreetmap.org-Beiträge</string>
 	<string name="user_password">OSM-Kennwort</string>
-	<string name="user_password_descr">Benötigt für openstreetmap.org-Beiträge</string>
+	
 	<string name="osmand_service">Hintergrunddienst</string>
 	<string name="osmand_service_descr">OsmAnd läuft bei ausgeschalteter Anzeige im Hintergrund</string>
 
@@ -403,7 +402,7 @@ Aktuell sind {2} MB verfügbar.</string>
 	<string name="init_native_library">Native Bibliothek wird initialisiert…</string>
 	<string name="choose_auto_follow_route">Kartenanzeige nachführen</string>
 	<string name="choose_auto_follow_route_descr">Wartezeit für Rückkehr zur Kartennachführung</string>
-	<string name="auto_follow_route_never">Nie (Auf \'Los\' tippen, um die Navigation manuell zu starten)</string>
+	
 	<string name="auto_follow_route_navigation">Nachführung nur bei aktiver Navigation</string>
 	<string name="auto_follow_route_navigation_descr">Kartennachführung erfolgt nur während Navigation.</string>
 	<string name="auto_follow_location_enabled">Kartennachführung aktiv.</string>
@@ -600,7 +599,7 @@ Aktuell sind {2} MB verfügbar.</string>
 	<string name="reading_cached_tiles">Lese zwischengespeicherte Kacheln…</string>
 	<string name="version_index_is_big_for_memory">Nicht genügend Speicher für Index \'\'{0}\'\'</string>
 	<string name="version_index_is_not_supported">Die Index-Version \'\'{0}\'\' wird nicht unterstützt</string>
-	<string name="use_osmand_routing_service">OsmAnd-Navigation &gt; 20km</string>
+	
 	<string name="use_osmand_routing_service_descr">OsmAnd Offline-Navigation für große Entfernungen verwenden (experimentell) anstatt automatisch CloudMade zu nehmen</string>
 	<string name="osmand_routing_experimental">OsmAnd Offline-Navigation ist noch experimentell und funktioniert nicht gut für Entfernungen über 20 km.\n\nAls Navigationsdienst wird temporär online CloudMade verwendet.</string>
 	<string name="specified_dir_doesnt_exist">Angegebener Ordner kann nicht gefunden werden.</string>
@@ -686,13 +685,13 @@ Aktuell sind {2} MB verfügbar.</string>
 	<string name="none_region_found">Keine Offline-Daten auf der SD-Karte gefunden. Bitte versuchen Sie, die Region über das Internet zu laden.</string>
 	<string name="poi_namefinder_query_empty">Suchbegriff eingeben</string>
 	<string name="any_poi">Alles</string>
-	<string name="layer_transport_route">ÖPNV-Linien</string>
+	
 	<string name="thanks_yandex_traffic">Danke an Yandex für die Überlassung von Verkehrsinformationen.</string>
 	<string name="layer_yandex_traffic">Yandex-Verkehr</string>
 	<string name="layer_route">Route</string>
 	<string name="shared_string_favorites">Favoriten</string>
 	<string name="layer_osm_bugs">OSM-Hinweise (online)</string>
-	<string name="layer_transport">ÖPNV-Haltestellen</string>
+	
 	<string name="layer_poi">POI…</string>
 	<string name="layer_amenity_label">POI Namen</string>
 	<string name="layer_map">Kartenquelle…</string>
@@ -1046,7 +1045,7 @@ Proportionaler Speicher %4$s MB (Android Limit %5$s MB, Dalvik %6$s MB).</string
 	<string name="bg_service_screen_unlock">Bildschirm entsperren</string>
 	<string name="bg_service_screen_lock_toast">Bildschirm gesperrt</string>
 	<string name="bg_service_interval">Aufwachintervall setzen:</string>
-	<string name="map_widget_day_night">Tag/Nacht-Modus</string>
+	
 	<string name="map_widget_vector_attributes">Karten-Zusatzoptionen</string>
 	<string name="map_widget_renderer">Kartendarstellung</string>
 
@@ -1791,7 +1790,7 @@ Aufgenommene Tracks kann man z.B. mit Bekannten teilen, oder auch zum Upload fü
     <string name="lock_screen_request_explanation">%1$s benötigt diese Berechtigung, um den Bildschirm auszuschalten (Energiesparfunktion).</string>
     
     <string name="home_button">Startseite</string>
-    <string name="osmo_use_https_descr">Sichere Server-Verbindung verwenden</string>
+    
     <string name="osmo_use_https">HTTPS nutzen</string>
     <string name="map_update">Aktualisierungen für %1$s Karten verfügbar</string>
     <string name="search_for">Suchen nach</string>
@@ -2318,7 +2317,7 @@ Diese Ansicht kann zurückgestellt werden indem Sie hier wieder deaktiviert oder
     <string name="shared_string_email_address">E-Mail-Adresse speichern</string>
     <string name="find_parking">Parkplatz finden</string>
     <string name="show_polygons">Polygone anzeigen</string>
-    <string name="underlay_transparency">Underlay-Karte Transparenz</string>
+    
     <string name="rendering_attr_showMtbRoutes_name">MTB-Routen anzeigen</string>
     <string name="shared_string_reverse_order">Reihenfolge umkehren</string>
     <string name="map_marker_1st">Erste Kartenmarkierung</string>
@@ -2334,7 +2333,7 @@ Diese Ansicht kann zurückgestellt werden indem Sie hier wieder deaktiviert oder
     <string name="map_markers">Kartenmarkierungen</string>
     <string name="map_marker">Kartenmarkierung</string>
     <string name="consider_turning_polygons_off">Es wird empfohlen, das Rendern von Polygonen zu deaktivieren.</string>
-    <string name="show_map_markers_topbar">Leiste mit den Kartenmarkierungen anzeigen</string>
+    
     <string name="shared_string_widgets">Widgets</string>
     <string name="download_files_error_not_enough_space">"Nicht genug Speicher!
 Es werden vorübergehend {3} MB  und {1} MB dauerhaft benötigt.
@@ -2443,7 +2442,7 @@ Falls Sie OsmAnd mögen und das Projekt OpenStreetMap unterstützen wollen, so i
     <string name="coords_format_descr">Format der geographischen Koordinaten</string>
 		<string name="shared_string_is_open_24_7">Offen 7x24h</string>
   	<string name="storage_directory_card">Speicherkarte</string>
-    <string name="shared_string_open">Öffnen</string>
+    
 <string name="map_widget_search">Suche</string>
 	<string name="shared_string_from">von</string>
     <string name="city_type_district">Stadtteil</string>

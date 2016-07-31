@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="address_search_desc">Mencari alamat</string>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources><string name="address_search_desc">Mencari alamat</string>
   <string name="navpoint_search_desc">Koordinat</string>
   <string name="transport_search_desc">Mencari transportasi</string>
   <string name="favourites_search_desc">Mencari favorit</string>

@@ -227,7 +227,7 @@
   <string name="user_name">Jou OSM gebruiker naam</string>
   <string name="open_street_map_login_descr">Vereis vir openstreetmap.org voorleggings</string>
   <string name="user_password">Jou OSM wagwoord</string>
-  <string name="user_password_descr">Vereis vir openstreetmap.org voorleggings</string>
+  
   <string name="osmand_service">Sluimertoestand Funksionaliteit</string>
   <string name="osmand_service_descr">Gebruik om OsmAnd aan te hou terwyl skerm af is</string>
   
@@ -248,7 +248,7 @@
   <string name="init_native_library">Besig om inheemse biblioteek gereed te maak…</string>
   <string name="choose_auto_follow_route">Outo-senter kaart uitsig</string>
   <string name="choose_auto_follow_route_descr">Tyd tot kaart sal ooreenkom met die huidige posisie</string>
-  <string name="auto_follow_route_never">Nooit</string>
+  
   <string name="auto_follow_route_navigation">Outo-senter slegs navigasie</string>
   <string name="auto_follow_route_navigation_descr">Outo-senter kaart uitsig tydens navigasie.</string>
   <string name="auto_follow_location_enabled">Outo-senter kaart uitsig in gebruik.</string>
@@ -455,7 +455,7 @@
   <string name="reading_cached_tiles">Lees gekaste teëls…</string>
   <string name="version_index_is_big_for_memory">Die indeks \"{0}\" pas nie in die geheue nie</string>
   <string name="version_index_is_not_supported">Die weergawe van indeks \"{0}\'\' word nie ondersteun nie</string>
-  <string name="use_osmand_routing_service">OsmAnd navigasie &gt;20km</string>
+  
   <string name="use_osmand_routing_service_descr">Gebruik OsmAnd aflyn navigasie diens van toepassing slegs op roetes &gt; 20 km (eksperimenteel)</string>
   <string name="osmand_routing_experimental">OsmAnd aflyn navigasie diens is \'n eksperimentele funksie en dit werk nie vir afstande van meer as ongeveer 20 km nie.\n\nNavigasie diens is tydelik oorgeskakel na aanlyn CloudMade.</string>
   <string name="specified_dir_doesnt_exist">Kan nie daardie adres vind nie.</string>
@@ -541,13 +541,13 @@
   <string name="none_region_found">Geen aflyn inligting vir gebiede op SD-kaart gevind nie. Laai gebiede van die Internet af.</string>
   <string name="poi_namefinder_query_empty">Inset soektog navraag om interessante plek te vind</string>
   <string name="any_poi">Enige</string>
-  <string name="layer_transport_route">Vervoer roete</string>
+  
   <string name="thanks_yandex_traffic">Dankie aan Yandex vir verkeersinligting.</string>
   <string name="layer_yandex_traffic">Yandex verkeer</string>
   <string name="layer_route">Roete</string>
   <string name="shared_string_favorites">Gunstelinge</string>
   <string name="layer_osm_bugs">OSM foute</string>
-  <string name="layer_transport">Vervoer stilhouplekke</string>
+  
   <string name="layer_poi">Interessante plek…</string>
   <string name="layer_map">Kaartbron…</string>
   <string name="menu_layers">Kaarte</string>
@@ -889,7 +889,7 @@
 	<string name="filterpoi_activity">Skep PVB filter</string>
 	<string name="select_navigation_mode">Kies vervoertipe</string>
 	<string name="day_night_info">Dag/nag inligting</string>
-	<string name="map_widget_day_night">Dag/nag kaart</string>
+	
 	<string name="map_widget_vector_attributes">Kaart voorstelling eienskappe:</string>
 	<string name="map_widget_renderer">Kaartvoorstelling-styl</string>
 	<string name="layer_map_appearance">Verstel skerm</string>

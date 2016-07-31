@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
 
     <string name="switch_to_raster_map_to_see">Vektorové mapy toto místo neobsahují. Mapová data můžete stáhnout v Nastaveních (Spravovat mapové soubory), nebo se přepněte na online mapy.</string>
     <string name="send_files_to_osm">Nahrát GPX soubory do OSM?</string>
@@ -115,7 +114,7 @@
     <string name="user_name">Jméno uživatele</string>
     <string name="open_street_map_login_descr">Vaše uživatelské jméno na openstreetmap.org</string>
     <string name="user_password">Heslo</string>
-    <string name="user_password_descr">Vaše heslo na openstreetmap.org</string>
+    
     <string name="osmand_service">Služba na pozadí</string>
     <string name="osmand_service_descr">Umožní běh aplikace při vypnutém displeji</string>
     <string name="download_files_not_enough_space">Nedostatek místa pro stažení %1$s MB dat (volné: %2$s).</string>
@@ -127,7 +126,7 @@ Nyní je k dispozici {2} MB.</string>
     <string name="init_native_library">Inicializuji Android native library…</string>
     <string name="choose_auto_follow_route">Automatické centrování</string>
     <string name="choose_auto_follow_route_descr">Zadejte interval pro automatické vrácení mapy na vaši pozici</string>
-    <string name="auto_follow_route_never">Nikdy (klepnout na \'Start\' pro spuštění pokynů)</string>
+    
     <string name="auto_follow_route_navigation">Automatické sledování pozice</string>
     <string name="auto_follow_route_navigation_descr">Zapnout automatické sledování pozice pouze v režimu navigace.</string>
     <string name="auto_follow_location_enabled">Automatické sledování pozice je zapnuto.</string>
@@ -315,7 +314,7 @@ Nyní je k dispozici {2} MB.</string>
     <string name="add_waypoint_dialog_added">Cíl \'\'{0}\'\' byl přidán</string>
     <string name="add_waypoint_dialog_title">Přidat bod na zaznamenávanou GPX trasu</string>
     <string name="context_menu_item_add_waypoint">Přidat bod na GPX trasu</string>
-    <string name="use_osmand_routing_service">Navigace OsmAnd &gt;20km</string>
+    
     <string name="use_osmand_routing_service_descr">Používat offline navigaci pro dlouhé vzdálenosti (experimentální)</string>
     <string name="osmand_routing_experimental">Offline navigace je experimentální a funguje jen pro vzdálenosti do 20 km.\n\nNavigační služba je dočasně přepnuta na online CloudMade.</string>
     <string name="specified_dir_doesnt_exist">Nemohu najít zadaný adresář.</string>
@@ -390,13 +389,13 @@ Nyní je k dispozici {2} MB.</string>
     <string name="none_region_found">Na SD kartě nejsou žádná offline data pro oblasti. Zkuste nějaké stáhnout z internetu.</string>
     <string name="poi_namefinder_query_empty">Zadejte dotaz na POI</string>
     <string name="any_poi">Jakýkoli</string>
-    <string name="layer_transport_route">Trasa hromadné dopravy</string>
+    
     <string name="thanks_yandex_traffic">Děkujeme Yandexu za dopravní informace.</string>
     <string name="layer_yandex_traffic">Yandex doprava</string>
     <string name="layer_route">Cesta</string>
     <string name="shared_string_favorites">Oblíbené</string>
     <string name="layer_osm_bugs">OSM Poznámky (online)</string>
-    <string name="layer_transport">Zastávky</string>
+    
     <string name="layer_poi">POI…</string>
     <string name="layer_map">Zdroj map…</string>
     <string name="menu_layers">Mapová data</string>
@@ -812,7 +811,7 @@ Proporcionální paměť %4$s MB (Limit Androidu %5$s MB, Dalvik %6$s MB).</stri
     <string name="filterpoi_activity">Vytvořit filtr pro POI</string>
     <string name="select_navigation_mode">Vyberte způsob dopravy</string>
     <string name="day_night_info">Denní/noční info</string>
-    <string name="map_widget_day_night">Denní/noční režim</string>
+    
     <string name="map_widget_renderer">Vektorový vykreslovač</string>
     <string name="avoid_motorway">Vyhnout se dálnicím</string>
     <string name="snap_to_road_descr">Zachytí kurzor na nejbližší silnici/cestu během navigace</string>
@@ -1480,7 +1479,7 @@ Zaznamenávané trasy můžete sdílet s vašimi přáteli nebo mohou být použ
     <string name="lock_screen_request_explanation">%1$s potřebuje tato oprávnění pro vypnutí obrazovky při režimu šetření energie.</string>
     <string name="shared_string_never">Nikdy</string>
     <string name="home_button">Domovská obrazovka</string>
-    <string name="osmo_use_https_descr">Použít zabezpečené spojení se serverem</string>
+    
     <string name="osmo_use_https">Použít HTTPS</string>
     <string name="map_update">K dispozici aktualizace pro %1$s map</string>
     <string name="search_for">Hledat</string>

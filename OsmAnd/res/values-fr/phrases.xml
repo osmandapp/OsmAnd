@@ -22,7 +22,7 @@
 	<string name="poi_arts_centre">Centre artistique</string>
 	<string name="poi_artwork">Œuvre d’art</string>
 	<string name="poi_athletics">Athlétisme</string>
-	<string name="poi_atm">Distributeur de billets</string>
+	<string name="poi_amenity_atm">Distributeur de billets</string>
 	<string name="poi_attraction">Attraction touristique</string>
 	<string name="poi_baby_hatch">Tour d\'abandon</string>
 	<string name="poi_bailiff">Huissier</string>

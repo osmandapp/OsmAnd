@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="auto_zoom_none">Без аўтаматычнага маштабаваньня</string>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources><string name="auto_zoom_none">Без аўтаматычнага маштабаваньня</string>
     <string name="auto_zoom_close">Буйней</string>
     <string name="auto_zoom_far">Для сярэдняга маштаба</string>
     <string name="auto_zoom_farthest">Драбней</string>
@@ -274,7 +273,7 @@
 	<string name="select_navigation_mode">Выберыце від транспарту</string>
 	<string name="day_night_info_description">Узыход: %1$s \nЗаход: %2$s</string>
 	<string name="day_night_info">Узыход/заход</string>
-	<string name="map_widget_day_night">Рэжым дзень/ноч</string>
+	
 	<string name="map_widget_vector_attributes">Налады адмалёўкі</string>
 	<string name="map_widget_renderer">Стыль мапы</string>
 	
@@ -542,7 +541,7 @@
 	<string name="user_name">Вашае імя карыстальніка OSM</string>
 	<string name="open_street_map_login_descr">Патрэбна для прадстаўленьня ў openstreetmap.org</string>
 	<string name="user_password">Ваш пароль OSM</string>
-	<string name="user_password_descr">Патрэбна для прадстаўленьня ў openstreetmap.org</string>
+	
 	<string name="osmand_service">Фонавы рэжым</string>
 	<string name="osmand_service_descr">OsmAnd працуе ў фоне падчас выключанага экрану</string>
 	
@@ -562,7 +561,7 @@
 	<string name="init_native_library">Ініцыалізацыя свойскіх бібліятэк…</string>
 	<string name="choose_auto_follow_route">Аўтаматычнае цэнтраваньне мапы</string>
 	<string name="choose_auto_follow_route_descr">Час, праз які мапа вернецца да бягучага становішча</string>
-	<string name="auto_follow_route_never">Ніколі (націсьніце на \"Паехалі\" для навігацыі)</string>
+	
 	<string name="auto_follow_route_navigation">Аўтаматычнае цэнтраваньне толькі падчас навігацыі</string>
 	<string name="auto_follow_route_navigation_descr">Аўтаматычнае цэнтраваньне толькі падчас навігацыі.</string>
 	<string name="auto_follow_location_enabled">Аўтаматычнае цэнтраваньне падчас карыстаньня.</string>
@@ -758,7 +757,7 @@
 	<string name="reading_cached_tiles">Чытаньне захаваных фрагмэнтаў…</string>
 	<string name="version_index_is_big_for_memory">Недастаткова памяці для лякальнай мапы \'\'{0}\'\'</string>
 	<string name="version_index_is_not_supported">Версія індэкса \'\'{0}\'\' не падтрымліваецца</string>
-	<string name="use_osmand_routing_service">Навігацыя OsmAnd &gt; 20 км</string>
+	
 	<string name="use_osmand_routing_service_descr">Выкарыстоўваць аўтаномную OsmAnd навігацыю на адлегласьці &gt; 20 км (экспэрыментальная)</string>
 	<string name="osmand_routing_experimental">Аўтаномная навігацыя OsmAnd зьяўляецца экспэрыментальнай і не працуе на адлегласьцях больш за 20 км.\n\nУ гэтым выпадку для пракладкі маршруту выкарыстоўваецца онлайн сэрвіс CloudMade.</string>
 	<string name="specified_dir_doesnt_exist">Указаны каталог не знойдзены.</string>
@@ -837,12 +836,12 @@
 	<string name="none_region_found">На SD-карце не знойдзена лякальных дадзеных для рэгіёнаў. Сьцягнуць рэгіёны з Інтэрнэту.</string>
 	<string name="poi_namefinder_query_empty">Увядзіце запыт для пошуку POI</string>
 	<string name="any_poi">Усе</string>
-	<string name="layer_transport_route">Маршрут транспарту</string>
+	
 	<string name="thanks_yandex_traffic">Дзякуй Яндэксу за дарожную інфармацыю.</string>
 	<string name="layer_yandex_traffic">Яндэкс заторы</string>
 	<string name="layer_route">Маршрут</string>
 	<string name="layer_osm_bugs">OSM Заўвагі (онлайн)</string>
-	<string name="layer_transport">Прыпынкі транспарту</string>
+	
 	<string name="layer_poi">POI…</string>
 	<string name="layer_map">Крыніца мапы…</string>
 	<string name="menu_layers">Слаі мапы</string>
@@ -1536,7 +1535,7 @@
     <string name="wake_on_voice_descr">Уключаць экран прыстасаваньня пры набліжэньні да павароту</string>
     <string name="lock_screen_request_explanation">%1$s патрабуе дазвол на выключэньне экрану для энергазберажэньня.</string>
     
-	<string name="osmo_use_https_descr">Выкарыстоўваць бясьпечнае злучэньне з серверам</string>
+	
     <string name="osmo_use_https">Выкарыстоўваць HTTPS</string>
 	<string name="home_button">Дамоў</string>
     <string name="map_update">Ёсьць абнаўленьні для %1$s мапаў</string>

@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
     <string name="always_center_position_on_map">Ammustra sa positzione semper a su tzentru</string>
     <string name="voice_pref_title">Boghe</string>
     <string name="misc_pref_title">Mistura</string>
@@ -425,7 +424,7 @@
     <string name="select_navigation_mode">Sèbera de su mèdiu pro su trasportu</string>
     <string name="day_night_info_description">Arbèschida: %1$s \nIntrinada: %2$s</string>
     <string name="day_night_info">Informatziones die/note</string>
-    <string name="map_widget_day_night">Mapa die/note</string>
+    
     <string name="keep_navigation_service">Mantènne</string>
     <string name="stop_navigation_service">Firma</string>
     <string name="enable_sleep_mode">Abìlita sa modalidade GPS \"de isfundu\"</string>
@@ -1005,7 +1004,7 @@ Memòria in proportzione %4$s MB (lìmite de Android %5$s MB, Dalvik %6$s MB).</
     <string name="user_password">Crae (password) in OSM</string>
 
 
-    <string name="auto_follow_route_never">Mai (carca \'Bae\' pro aviare manualmente sa ghia)</string>
+    
     <string name="keep_informing_never">Manualmente ebbia (carca sa fritza)</string>
     <string name="keep_informing">Torra a repìtere sas istrutziones de nàvigu</string>
     <string name="pref_raster_map">Impostatziones de sa mitza de sa mapa</string>
@@ -1133,7 +1132,7 @@ Memòria in proportzione %4$s MB (lìmite de Android %5$s MB, Dalvik %6$s MB).</
     <string name="fav_export_confirmation">Esistint documentos cun preferidos esportados giai. Los boles remplasare?</string>
     <string name="index_settings">Amministra sos documentos de sas mapas</string>
     <string name="open_street_map_login_descr">Netzessàriu pro imbiare contributos a openstreetmap.org</string>
-    <string name="user_password_descr">Netzessària pro imbiare contributos a openstreetmap.org</string>
+    
     <string name="osmand_service">Modalidade de isfundu</string>
     <string name="osmand_service_descr">OsmAnd funtzionat in s’isfundu, cun s’ischermu mortu</string>
 
@@ -1314,7 +1313,7 @@ Memòria in proportzione %4$s MB (lìmite de Android %5$s MB, Dalvik %6$s MB).</
     <string name="reading_cached_tiles">Leghidura anteprimas dae sa cache…</string>
     <string name="version_index_is_big_for_memory">S’ìnditze \'\'{0}\'\' est tropu mannu pro sa memòria atuale</string>
     <string name="version_index_is_not_supported">Sa versione de s’ìnditze \'\'{0}\'\' no est suportada</string>
-    <string name="use_osmand_routing_service">Nàvigu OsmAnd &gt;20km</string>
+    
     <string name="use_osmand_routing_service_descr">S’impreu de su nàvigu chene lìnia OsmAnd s’aplicat petzi a sas àndalas&gt;20 km (isperimentale)</string>
     <string name="specified_dir_doesnt_exist">Impossìbile agatare sa cartella dislindada.</string>
     <string name="application_dir">Cartella datos</string>
@@ -1381,13 +1380,13 @@ Memòria in proportzione %4$s MB (lìmite de Android %5$s MB, Dalvik %6$s MB).</
     <string name="error_occurred_loading_gpx">Errore durante su carrigamentu de su documentu GPX</string>
     <string name="send_report">Imbia resumu</string>
     <string name="any_poi">Totus</string>
-    <string name="layer_transport_route">Àndala de trasportu pùblicu</string>
+    
     <string name="thanks_yandex_traffic">Gràtzias a Yandex pro sas informatziones pro su tràficu.</string>
     <string name="layer_yandex_traffic">Yandex (tràficu)</string>
     <string name="layer_route">Àndala</string>
     <string name="shared_string_favorites">Preferidos</string>
     <string name="layer_osm_bugs">Notas OSM (in lìnia)</string>
-    <string name="layer_transport">Firmadas trasportu pùblicu</string>
+    
     <string name="layer_map">Mitza mapa…</string>
     <string name="menu_layers">Istratos mapa</string>
     <string name="use_trackball_descr">Imprea sa trackballa pro mòere sa mapa</string>
@@ -1762,7 +1761,7 @@ Memòria in proportzione %4$s MB (lìmite de Android %5$s MB, Dalvik %6$s MB).</
     <string name="shared_string_never">Mai</string>
     <string name="lock_screen_request_explanation">%1$s tenet bisòngiu de custa autorizatzione pro istudare s’ischermu pro sa funtzionalidade de rispàrmiu energèticu.</string>
 
-    <string name="osmo_use_https_descr">Imprea una cunnessione segura cun su server</string>
+    
     <string name="osmo_use_https">Imprea HTTPS</string>
     <string name="home_button">Domo</string>
     <string name="search_for">Chirca pro</string>
@@ -2368,7 +2367,7 @@ Si tenes bisòngiu de agiudu cun s\'aplicatzione OsmAnd, pro praghere cuntata su
  "</string>
     <string name="select_map_markers">Ischerta sos marcadores de sa mapa</string>
     <string name="shared_string_reverse_order">Fùrria s\'òrdine</string>
-    <string name="show_map_markers">Marcadores mapa</string>
+    
     <string name="show_map_markers_description">Allue sa funtzionalidade Marcadores Mapa</string>
     <string name="clear_active_markers_q">Boles burrare totu sos marcadores ativos?</string>
     <string name="clear_markers_history_q">Boles burrare sa cronologia de sos marcadores?</string>

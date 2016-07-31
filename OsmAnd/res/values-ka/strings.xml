@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="offline_navigation_not_available">OsmAnd-ით ნავიგაცია გათიშულ რეჟიმში დროებით მიუწვდომელია.</string>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources><string name="offline_navigation_not_available">OsmAnd-ით ნავიგაცია გათიშულ რეჟიმში დროებით მიუწვდომელია.</string>
   <string name="left_side_navigation">მარცხენა ხელით ტარება</string>
   <string name="left_side_navigation_descr">აირჩიეთ მარცხენა მხარეს საჭის გამომყენებელი ქვეყნებისათვის</string>
   
@@ -167,7 +166,7 @@
   <string name="user_name">თქვენი OSM-ს მომხმარებლის სახელი</string>
   <string name="open_street_map_login_descr">საჭიროა openstreetmap.org-ზე ოპერაციებისათვის</string>
   <string name="user_password">თქვენი OSM-ს პაროლი</string>
-  <string name="user_password_descr">საჭიროა openstreetmap.org-ზე ოპერაციებისათვის</string>
+  
   <string name="osmand_service">ფონური პარამეტრები</string>
   <string name="osmand_service_descr">გამოიყენეთ OsmAnd-ის ეკრანის გათიშულობის დროს გამოსაყენებლად</string>
   
@@ -188,7 +187,7 @@
   <string name="init_native_library">ადგილობრივი ბიბლიოთეკის ინიციალიზაცია…</string>
   <string name="choose_auto_follow_route">რუკის ხედვის ცენტრისაკენ ავტომატური გასწორება</string>
   <string name="choose_auto_follow_route_descr">დრო, რომელიც გავა სანამ რუკა იქნება მიმდინარე პოზიციის შესაბამისი იქნება</string>
-  <string name="auto_follow_route_never">არასოდეს</string>
+  
   <string name="auto_follow_route_navigation">მხოლოდ ავტოცენტრირებული ნავიგაცია</string>
   <string name="auto_follow_route_navigation_descr">ავტოცენტრირებული რუკის ხედვა მხოლოდ ნავიგაციის დროს.</string>
   <string name="auto_follow_location_enabled">გამოიყენება ავტოცენტრირებული რუკის ხედი.</string>
@@ -406,7 +405,7 @@
   <string name="reading_cached_tiles">მიმდინარეობს ნაწილების კითხვა…</string>
   <string name="version_index_is_big_for_memory">ინდექსი \'\'{0}\'\' არ ეტევა მეხსიერებაში</string>
   <string name="version_index_is_not_supported">ინდექსის ვერსიის \'\'{0}\'\' მხარდაჭერა არ არსებობს</string>
-  <string name="use_osmand_routing_service">OsmAnd-ის ნავიგაცია &gt;20კმ</string>
+  
   <string name="use_osmand_routing_service_descr">OsmAnd-ის გათიშული ნავიგაცია მუშაობს მხოლოდ გზებზე რომლებიც &gt; 20 კმ (საცდელი)</string>
   <string name="osmand_routing_experimental">OsmAnd-ის გათიშული ნავიგაცია არის საცდელი თვისება რომებიც არ მუშაობს 20 კმ-ზე მეტი მანძილებისათვის.\n\nნავიგაციის სერვისი დროებით გადართულია მიმდინარე სერვისზე CloudMade.</string>
   <string name="specified_dir_doesnt_exist">შეუძლებელია მითითებული დასტის პოვნა.</string>
@@ -492,13 +491,13 @@
   <string name="none_region_found">გათიშული მონაცემები რაიონისათვის SD card-ზე ნაპოვნი არაა. გთხოვთ გადმოწეროთ ინტერნეტიდან.</string>
   <string name="poi_namefinder_query_empty">შეიტანეთ მონაცემები POI-ის მოსაძებნად</string>
   <string name="any_poi">ნებისმიერი</string>
-  <string name="layer_transport_route">ტრანსპორტის გზა</string>
+  
   <string name="thanks_yandex_traffic">მადლობა Yandex-ს ტრაფიკის ინფორმაციისათვის.</string>
   <string name="layer_yandex_traffic">Yandex ტრაფიკი</string>
   <string name="layer_route">გზა</string>
   <string name="shared_string_favorites">რჩეულები</string>
   <string name="layer_osm_bugs">OSM-ის ხოჭოები</string>
-  <string name="layer_transport">ტრანსპორტის გაჩერება</string>
+  
   <string name="layer_poi">POI…</string>
   <string name="layer_map">რუკის წყარო…</string>
   <string name="menu_layers">ხედის აღწერა</string>
@@ -895,7 +894,7 @@
   <string name="bg_service_sleep_mode_on">ძილის რეჟიმის ჩართვა</string>
 <string name="filterpoi_activity">POI ფილტრის შექმნა</string>
 <string name="day_night_info">ინფორმაცია დღეღამის შესახებ</string>
-<string name="map_widget_day_night">დღეღამის რუკა</string>
+
 <string name="map_widget_vector_attributes">რენდერის ატრიბუტები:</string>
 
 

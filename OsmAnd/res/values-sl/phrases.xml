@@ -169,7 +169,7 @@
 	<string name="poi_crematorium">Krematorij</string>
 	<string name="poi_accountant">Računovodja</string>
 	<string name="poi_bank">Banka</string>
-	<string name="poi_atm">Bankomat</string>
+	<string name="poi_amenity_atm">Bankomat</string>
 	<string name="poi_volcano">Vulkan</string>
 	<string name="poi_crater">Krater</string>
 	<string name="poi_river">Reka</string>

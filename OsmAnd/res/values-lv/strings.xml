@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="plugins_screen">Spraudņu pārvaldnieks</string>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources><string name="plugins_screen">Spraudņu pārvaldnieks</string>
   
   <string name="prefs_plugins_descr">Spraudņi papildina aplikācijas iespējas un dod papildus funkcionalitāti</string>
   <string name="prefs_plugins">Spraudņi</string>
@@ -139,7 +138,7 @@
   <string name="user_name">OSM lietotāja vārds</string>
   <string name="open_street_map_login_descr">Nepieciešams, lai veiktu augšupielādes openstreetmap.org</string>
   <string name="user_password">Jūsu OSM parole</string>
-  <string name="user_password_descr">Nepieciešams, lai veiktu openstreetmap.org augšuplādi</string>
+  
   <string name="osmand_service">Fona režīms</string>
   <string name="osmand_service_descr">OsmAnd darbosies fonā, kad ekrāns būs izslēgts</string>
   
@@ -160,7 +159,7 @@
   <string name="init_native_library">Iekļautās bibliotēkas inicializēšana…</string>
   <string name="choose_auto_follow_route">Automātiski centrēt karti</string>
   <string name="choose_auto_follow_route_descr">Laiks līdz karte sinhronizējas ar patreizējo pozīciju</string>
-  <string name="auto_follow_route_never">Nekad (nospiediet zilo bultu, lai sāktu vadību)</string>
+  
   <string name="auto_follow_route_navigation">Autocentrēt maršruta laikā</string>
   <string name="auto_follow_route_navigation_descr">Navigācijas laikā atrodoties kustībā, automātiski centrēt karti.</string>
   <string name="auto_follow_location_enabled">Autocentrēt karti.</string>
@@ -381,7 +380,7 @@
   <string name="reading_cached_tiles">Lasa kešotās bildes…</string>
   <string name="version_index_is_big_for_memory">Indekss \'\'{0}\'\' neietilpst atmiņā</string>
   <string name="version_index_is_not_supported">Indeksa versija \'\'{0}\'\' netiek atbalstīta</string>
-  <string name="use_osmand_routing_service">OsmAnd navigācija &gt;20km</string>
+  
   <string name="use_osmand_routing_service_descr">OsmAnd bezsaistes navigācija darbojas tikai &gt; 20 km gariem maršrutiem (eksperimentāli)</string>
   <string name="osmand_routing_experimental">OsmAnd bezsaistes navigācija ir eksperimentāla funkcija un tā nestrādā attālumiem, kas ir lielāki par 20 km.\n\nNavigācijas serviss pagaidām ir pārslēgts uz tiešsaistes CloudMade.</string>
   <string name="specified_dir_doesnt_exist">Nevar atrast norādīto mapi.</string>
@@ -468,13 +467,13 @@
   <string name="none_region_found">SD kartē nav atrasti reģionu dati. Lūdzu lejupielādējiet reģionus no interneta.</string>
   <string name="poi_namefinder_query_empty">Ievadiet atslēgvārdus POI meklēšanai</string>
   <string name="any_poi">Jebkurš</string>
-  <string name="layer_transport_route">Transporta maršruts</string>
+  
   <string name="thanks_yandex_traffic">Paldies Yandex par satiksmes informāciju.</string>
   <string name="layer_yandex_traffic">Yandex satiksme</string>
   <string name="layer_route">Maršruts</string>
   <string name="shared_string_favorites">Izlase</string>
   <string name="layer_osm_bugs">OSM piezīmes (onlainā)</string>
-  <string name="layer_transport">Sabiedriskā transporta pieturas</string>
+  
   <string name="layer_poi">POI…</string>
   <string name="layer_map">Kartes izcelsme…</string>
   <string name="menu_layers">Kartes klājumi</string>
@@ -947,7 +946,7 @@
 	<string name="select_navigation_mode">Izvēlieties pārvietošanās veidu</string>
 	<string name="day_night_info_description">Saullēkts: %1$s\nSaulriets: %2$s</string>
 	<string name="day_night_info">Dienas/nakts info</string>
-	<string name="map_widget_day_night">Dienas/nakts karte</string>
+	
 	<string name="map_widget_vector_attributes">Renderēšanas attribūti</string>
 	<string name="map_widget_renderer">Renderēšananas veids</string>
 	<string name="int_continuosly">Nepārtraukti</string>
@@ -1561,7 +1560,7 @@
     <string name="use_opengl_render_descr">Lietot iebūvēto paātrināto OpenGL renderēšanu (jābūt saderīgai ierīcei)</string>
     <string name="error_avoid_specific_road">Apvedceļš nav atrasts</string>
     <string name="home_button">Mājas</string>
-    <string name="osmo_use_https_descr">Lietot drošo savienojumu ar serveri</string>
+    
     <string name="osmo_use_https">Lietot HTTPS</string>
 	
 	<string name="map_update">Ir pieejami atjauninājumi %1$s kartēm</string>

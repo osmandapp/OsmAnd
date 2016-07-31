@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
 
     <string name="layer_map_appearance">Configurar pantalla</string>
     <string name="show_lanes">Carriles</string>
@@ -67,7 +66,7 @@
     <string name="user_name">Su usuario OSM</string>
     <string name="open_street_map_login_descr">Necesario para envíos a openstreetmap.org</string>
     <string name="user_password">Su clave OSM</string>
-    <string name="user_password_descr">Necesario para envíos a openstreetmap.org</string>
+    
     <string name="osmand_service">Modo en segundo plano</string>
     <string name="osmand_service_descr">OsmAnd se ejecuta en segundo plano mientras la pantalla está apagada</string>
     <string name="switch_to_raster_map_to_see">No hay ningún mapa vectorial presente descargado para esta ubicación. Puede descargar uno en Ajustes (Gestionar mapas), o cambiar al mapa en línea (para esto active el complemento mapas en línea).</string>
@@ -80,7 +79,7 @@
     <string name="init_native_library">Inicializando biblioteca nativa…</string>
     <string name="choose_auto_follow_route">Auto-centrar vista del mapa</string>
     <string name="choose_auto_follow_route_descr">Tiempo hasta que la vista del mapa vuelve a sincronizarse con la posición actual</string>
-    <string name="auto_follow_route_never">Nunca (pulse \'Ir\' para iniciar manualmente el guiado)</string>
+    
     <string name="auto_follow_route_navigation">Auto-centrar sólo navegación</string>
     <string name="auto_follow_route_navigation_descr">Auto-centrar vista del mapa, sólo durante la navegación.</string>
     <string name="auto_follow_location_enabled">Auto-centrar vista del mapa activado.</string>
@@ -267,7 +266,7 @@
     <string name="reading_cached_tiles">Leyendo teselas almacenadas localmente…</string>
     <string name="version_index_is_big_for_memory">La versión \'\'{0}\'\' de índices no cabe en memoria</string>
     <string name="version_index_is_not_supported">No se soporta la versión \'\'{0}\'\' de índices</string>
-    <string name="use_osmand_routing_service">Navegación OsmAnd &gt;20km</string>
+    
     <string name="use_osmand_routing_service_descr">El uso de la navegación sin conexión de OsmAnd, se aplica solo a rutas mayores a 20 km (experimental)</string>
     <string name="osmand_routing_experimental">La navegación sin conexión de OsmAnd, es una característica experimental y no funciona para distancias mayores a 20 km.\n\nEl servicio de navegación, se cambió temporalmente al servicio en línea CloudMade.</string>
     <string name="specified_dir_doesnt_exist">No se puede encontrar la carpeta especificada.</string>
@@ -347,13 +346,13 @@
     <string name="none_region_found">No hay datos de regiones descargados en la tarjeta SD. Descargue las regiones desde Internet.</string>
     <string name="poi_namefinder_query_empty">Introduzca la consulta para buscar el PDI</string>
     <string name="any_poi">Cualquiera</string>
-    <string name="layer_transport_route">Ruta de transporte</string>
+    
     <string name="thanks_yandex_traffic">Gracias a Yandex por la información de tráfico.</string>
     <string name="layer_yandex_traffic">Tráfico Yandex</string>
     <string name="layer_route">Ruta</string>
     <string name="shared_string_favorites">Favoritos</string>
     <string name="layer_osm_bugs">Notas OSM (en línea)</string>
-    <string name="layer_transport">Paradas de transporte</string>
+    
     <string name="layer_poi">Puntos de interés…</string>
     <string name="layer_map">Fuente del mapa…</string>
     <string name="menu_layers">Capas de mapas</string>
@@ -796,7 +795,7 @@ Puede encontrar la localización y el tiempo de estacionamiento en la tarjeta de
     <string name="select_navigation_mode">Seleccionar modo transporte</string>
     <string name="day_night_info_description">Alba: %1$s \nOcaso: %2$s</string>
     <string name="day_night_info">Información día/noche</string>
-    <string name="map_widget_day_night">Mapa día/noche</string>
+    
     <string name="map_widget_vector_attributes">Atributos de dibujado</string>
     <string name="map_widget_renderer">Estilo del mapa</string>
     <string name="osmand_short_description_80_chars">Visor y navegador de mapas móvil global para mapas OSM fuera y en línea</string>
@@ -1588,7 +1587,7 @@ Puede encontrar la localización y el tiempo de estacionamiento en la tarjeta de
     <string name="wake_on_voice_descr">Enciende la pantalla del dispositivo al aproximarse a un giro</string>
     <string name="lock_screen_request_explanation">%1$s necesita este permiso para apagar la pantalla para la característica de ahorro energético.</string>
     <string name="shared_string_never">Nunca</string>
-    <string name="osmo_use_https_descr">Utilizar conexión segura con el servidor</string>
+    
     <string name="osmo_use_https">Utilizar HTTPS</string>
     <string name="home_button">Inicio</string>
     <string name="map_update">Actualizaciones disponibles para %1$s mapa(s)</string>
@@ -2134,11 +2133,11 @@ OsmAnd Mapas y Navegación - encuentra ubicaciones en el mapa y calcula rutas si
     <string name="shared_string_save_changes">Guardar los cambios</string>
     <string name="find_parking">Encontrar aparcamiento</string>
     <string name="show_polygons">Mostrar polígonos</string>
-    <string name="underlay_transparency">Transparencia de subyacente</string>
+    
     <string name="rendering_attr_showMtbRoutes_name">Mostrar rutas MTB</string>
     <string name="select_map_markers">Seleccionar marcadores de mapa</string>
     <string name="shared_string_reverse_order">Orden inverso</string>
-    <string name="show_map_markers">Marcadores de mapa</string>
+    
     <string name="show_map_markers_description">Activa la característica de marcadores de mapa</string>
     <string name="clear_active_markers_q">"¿Quieres eliminar todos los marcadores  activos?"</string>
     <string name="clear_markers_history_q">¿Quieres borrar el historial de marcadores de mapa?</string>
@@ -2148,7 +2147,7 @@ OsmAnd Mapas y Navegación - encuentra ubicaciones en el mapa y calcula rutas si
     <string name="add_points_to_map_markers_q">¿Quieres añadir todos los puntos a los marcadores de mapa?</string>
     <string name="shared_string_add_to_map_markers">Añadir a marcadores de mapa</string>
     <string name="consider_turning_polygons_off">Se recomienda desactivar la reproducción de polígonos.</string>
-    <string name="show_map_markers_topbar">Mostrar la barra superior de Marcadores de mapa</string>
+    
     <string name="map_marker_1st">Primer marcador de mapa</string>
     <string name="map_marker_2nd">Segundo marcador de mapa</string>
     <string name="shared_string_toolbar">Barra de herramientas</string>

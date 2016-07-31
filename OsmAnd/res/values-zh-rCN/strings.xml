@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="email">電子郵件</string>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources><string name="email">電子郵件</string>
 <string name="poi_dialog_name">名稱</string>
 	<string name="poi_dialog_opening_hours">打開</string>
 	<string name="poi_dialog_comment">評論</string>
@@ -201,13 +200,13 @@
 	<string name="user_name">你的OSM用户名</string>
 	<string name="open_street_map_login_descr">为提交openstreetmap.org需要</string>
 	<string name="user_password">您的OSM密码</string>
-	<string name="user_password_descr">为提交openstreetmap.org需要</string>
+	
 	<string name="osmand_service">睡眠模式功能</string>
 	<string name="osmand_service_descr">使用屏幕关闭时运行OsmAnd</string>
 	
 	
 	
-	<string name="auto_follow_route_never">从来没有</string>
+	
 	<string name="city_type_suburb">市郊</string>
 	<string name="city_type_hamlet">村庄</string>
 	<string name="city_type_village">村</string>
@@ -545,7 +544,7 @@
 	<string name="filterpoi_activity">创建 POI 过滤器</string>
 	<string name="day_night_info_description">日出：%1$s \n日落：%2$s</string>
 	<string name="day_night_info">白天/黑夜信息</string>
-	<string name="map_widget_day_night">白天/黑夜地图</string>
+	
 	<string name="map_widget_vector_attributes">渲染属性：</string>
 	<string name="layer_map_appearance">配置屏幕</string>
 	<string name="map_widget_transparent">透明皮肤</string>
@@ -728,7 +727,7 @@
 	<string name="reading_cached_tiles">正在读取缓存瓦片…</string>
 	<string name="version_index_is_big_for_memory">索引 \'\'{0}\'\' 太大而无法载入内存</string>
 	<string name="version_index_is_not_supported">索引版本号 \'\'{0}\'\' 不支持</string>
-	<string name="use_osmand_routing_service">OsmAnd 导航 &gt;20km</string>
+	
 	<string name="specified_dir_doesnt_exist">无法找到指定的目录。</string>
 	<string name="application_dir">存储目录</string>
 	

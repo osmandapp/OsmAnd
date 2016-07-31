@@ -114,7 +114,7 @@
 	<string name="day_night_info_description">Izlazak sunca: %1$s
 \nZalazak sunca: %2$s</string>
 	<string name="day_night_info">Informacije dan/noć</string>
-	<string name="map_widget_day_night">Dnevna / noćna karta</string>
+	
 	<string name="map_widget_renderer">Stil karte</string>
 	
 	
@@ -454,10 +454,10 @@
 	<string name="layer_map">Izvor karte-…</string>
 	<string name="menu_layers">Odredite prikaz</string>
 	<string name="context_menu_item_search_poi">Traži POI</string>
-	<string name="layer_transport">Postaje javnog prijevoza</string>
+	
 	<string name="layer_poi">POI…</string>
 	
-	<string name="layer_transport_route">Putovi javnoga prijevoza</string>
+	
 	<string name="layer_route">Ruta</string>
 	<string name="shared_string_favorites">Favoriti</string>
 	<string name="layer_osm_bugs">OSM bugovi</string>
@@ -513,7 +513,7 @@
 	<string name="maps_could_not_be_downloaded">Ova karta se ne može preuzeti</string>
 	<string name="daynight">Dnevni/noćni način rada</string>
 	<string name="daynight_descr">Odaberite pravilo za izmjenu između dnevnog i noćnog načina rada</string>
-	<string name="use_osmand_routing_service_descr">Koristite OsmAnd offline navigaciju samo na rutama manjim od 20 km (eksperimentalno)</string>
+	
 	<string name="poi_filter_custom_filter">Prilagođeni filtar</string>
 	<string name="indexing_map">Indeksiranje karte…</string>
 	<string name="indexing_poi">Indeksiranje POI…</string>
@@ -700,7 +700,7 @@
 	<string name="specified_dir_doesnt_exist">Ne mogu pronaći određenu mapu.</string>
 	<string name="osmand_routing_experimental">OsmAnd offline navigacija je eksperimentalna značajka i ne radi na udaljenosti većoj od oko 20 km.\n\nNavigacija je privremeno prebačena na online CloudMade.</string>
 	<string name="poi_filter_namefinder">Online NameFinder</string>
-	<string name="use_osmand_routing_service">OsmAnd navigacija &gt;20km</string>
+	
 	<string name="poi_filter_closest_poi">Najbliže POI</string>
 	<string name="amenity_type_sustenance">Prehrana</string>
 	<string name="amenity_type_man_made">Građevine</string>
@@ -804,7 +804,7 @@
 	<string name="auto_follow_route_navigation_descr">Automatski centriraj prikaz karte samo tijekom navigacije.</string>
 	<string name="auto_follow_location_enabled">Automatsko centriranje karte je uključeno.</string>
 	<string name="auto_follow_route_navigation">Automatsko centriranje samo tijekom navigacije</string>
-	<string name="auto_follow_route_never">Nikad</string>
+	
 	<string name="choose_auto_follow_route">Automatsko centriranje karte</string>
 	<string name="choose_auto_follow_route_descr">Vrijeme dok se prikaz karte sinkronizira s trenutnom pozicijom</string>
 	<string name="use_transparent_map_theme">Prozirna tema</string>
@@ -818,7 +818,7 @@
 	<string name="osmand_service">Mogućnosti stanja mirovanja</string>
 	<string name="osmand_service_descr">Koristite za pokretanje OsmAnd-a dok je zaslon isključen</string>
 	<string name="open_street_map_login_descr">To je potrebno za prijenos podataka na openstreetmap.org</string>
-	<string name="user_password_descr">To je potrebno za prijenos podataka na openstreetmap.org</string>
+	
 	<string name="user_name">Vaše OSM korisničko ime</string>
 	<string name="global_app_settings">Opće postavke aplikacije</string>
 	<string name="global_settings">Opće postavke</string>
@@ -1280,7 +1280,7 @@
     
     <string name="osmo_show_group_notifications_descr">Prikaži obavjest kada se korisnik pridruži ili napusti grupu</string>
     <string name="osmo_regenerate_login_ids">Regenerirajte korisničko ime</string>
-    <string name="osmo_use_https_descr">Koristiti sigurnu vezu s poslužiteljem</string>
+    
     <string name="osmo_use_https">Koristiti HTTPS</string>
 	
 	<string name="lock_screen_request_explanation">%1$s treba dozvolu za isključivanje zaslona za značajku uštede energije.</string>

@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="local_osm_changes_backup_failed">پشتیبان‌گیری از تغییرات OsmAnd ناموفق بود</string>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources><string name="local_osm_changes_backup_failed">پشتیبان‌گیری از تغییرات OsmAnd ناموفق بود</string>
     <string name="plugin_distance_point_time">زمان</string>
     <string name="plugin_distance_point_hdop">دقت</string>
     <string name="plugin_distance_point_speed">سرعت</string>
@@ -93,7 +92,7 @@
 	<string name="select_navigation_mode">انتخاب شیوه رفت و آمد</string>
 	<string name="day_night_info">اطلاعات روز/شب</string>
 	<string name="day_night_info_description">طلوع خورشید: %1$s\nغروب خورشید: %2$s</string>
-	<string name="map_widget_day_night">نقشه روز/شب</string>
+	
 	<string name="map_widget_renderer">سبک نقشه</string>
 	
 	<string name="map_widget_show_ruler">خط کش</string>
@@ -413,7 +412,7 @@
 	<string name="user_name">نام کاربری سایت OSM شما</string>
 	<string name="open_street_map_login_descr">جهت پذیرش در سایت openstreetmap.org مورد نیاز است</string>
 	<string name="user_password">رمز عبور سایت OSM شما</string>
-	<string name="user_password_descr">جهت پذیرش در سایت openstreetmap.org مورد نیاز است</string>
+	
 	
 	<string name="west_south_west">غرب-جنوب-غرب</string>
 	<string name="west">غرب</string>
@@ -737,7 +736,7 @@
 	<string name="animate_route_off">توقف شبیه سازی</string>
 	<string name="animate_route">شروع شبیه سازی</string>
 	<string name="where_am_i">من کجا هستم؟</string>
-	<string name="layer_transport">ایستگاههای حمل و نقل عمومی</string>
+	
 	<string name="transport_stops">ایستگاهها</string>
 	<string name="transport_stops_to_pass">ایستگاههای مسیر</string>
 	<string name="show_transport_over_map_description">نشان دادن ایستگاههای حمل و نقل عمومی روی نقشه</string>
@@ -770,7 +769,7 @@
 	<string name="init_native_library">مقداردهی اولیه کتابخانه بومی…</string>
 	<string name="choose_auto_follow_route">نمای نقشه خودکار-مرکز</string>
 	<string name="choose_auto_follow_route_descr">زمان لازم برای همزمان سازی نقشه با موقعیت فعلی</string>
-	<string name="auto_follow_route_never">هرگز (\'برو\' را بزنید تا هدایت شروع شود)</string>
+	
 	<string name="auto_follow_route_navigation">ناوبری تنها با حالت خودکار-مرکز نقشه</string>
 	<string name="auto_follow_route_navigation_descr">حالت خودکار-مرکز نقشه تنها در زمان مسیریابی.</string>
 	<string name="auto_follow_location_enabled">نمای نقشه خودکار-مرکز میباشد.</string>
@@ -867,7 +866,7 @@
     
     <string name="download_hillshade_maps">تپه سایه</string>
     
-    <string name="osmand_srtm_long_description_1000_chars">"این افزونه، منحنی‌های هم‌تراز را که در نقشه‌های آفلاین OsmAnd نمایش داده میشوند فراهم میکند. داده‌های جهانی (بین 70 درجه شمالی و 70 درجه جنوبی) در این زمینه براساس اندازه گیری‌های SRTM (مأموریت توپوگرافی رادار شاتل) و ASTER (رادیومتر انعکاسی و پرتویی حرارتی هوایی پیشرفته)، یک ابزار تصویربرداری پردازنده ترا و ماهواره فوق پیشرفته سیستم نظارتی زمین ناسا مییباشند. ASTER محصول تلاش مشترک میان ناسا، وزارت اقتصاد ژاپن، صنعت و تجارت (متی)، و سیستم های فضایی ژاپن (جی-اسپیس سیستم) است. "</string>
+    <string name="osmand_srtm_long_description_1000_chars">"این افزونه، منحنی‌های هم‌تراز را که در نقشه‌&#157;های آفلاین OsmAnd نمایش داده میشوند فراهم میکند. داده‌های جهانی (بین 70 درجه شمالی و 70 درجه جنوبی) در این زمینه براساس اندازه گیری‌های SRTM (مأموریت توپوگرافی رادار شاتل) و ASTER (رادیومتر انعکاسی و پرتویی حرارتی هوایی پیشرفته)، یک ابزار تصویربرداری پردازنده ترا و ماهواره فوق پیشرفته سیستم نظارتی زمین ناسا مییباشند. ASTER محصول تلاش مشترک میان ناسا، وزارت اقتصاد ژاپن، صنعت و تجارت (متی)، و سیستم های فضایی ژاپن (جی-اسپیس سیستم) است. "</string>
     <string name="srtm_plugin_description">"این افزونه هم یک لایه خطوط هم‌تراز و هم یک لایه تپه سایه بر روی نقشه‌های استاندارد OsmAnd اضافه میکند. این قابلیت بسیار به درد قهرمانان، کوهنوردان، جهانگردان و هرکسی که به ساختار زمین علاقمند است می‌خورد.\nداده‌های جهانی (بین ۷۰ درجه شمالی و ۷۰ درجه جنوبی) توسط اندازه‌گیریهای SRTM (مأموریت رادار توپوگرافی شاتل) و ASTER (تابش حرارتی فضاپایه پیشرفته و رادیومتری انعکاسی)، ایزار تصویربرداری Terra، ماهواره پرچمدار سیستم نظاره‌گر زمین ناسا انجام شده است. ASTER یک پروژه همکاری مشترک بین ناسا، وزارت اقتصاد ژاپن، وزارت صنعت و بازرگانی و سیستمهای فضایی ژاپن (J-spacesystems) می‌باشد. "</string>
     <string name="monitoring_control_start">جی پی ایکس</string>
     <string name="rendering_attr_noPolygons_description">محو کردن همه عوارض زمین روی نقشه</string>
@@ -964,7 +963,7 @@
 	<string name="none_region_found">داده آفلاینی برای مناطق روی کارت SD پیدا نشد. مناطق را از اینترنت دانلود کنید.</string>
 	<string name="poi_namefinder_query_empty">درخواست جستجو را برای پیدا کردن POI وارد کنید</string>
 	<string name="any_poi">هرچه</string>
-	<string name="layer_transport_route">مسیر حمل و نقل عمومی</string>
+	
 	<string name="thanks_yandex_traffic">با تشکر از Yandex برای فراهم آوردن اطلاعات ترافیک.</string>
 	<string name="layer_yandex_traffic">ترافیک Yandex</string>
 	<string name="layer_route">مسیر</string>
@@ -1011,7 +1010,7 @@
 	<string name="reading_cached_tiles">درحال خواندن کاشی های ذخیره شده…</string>
 	<string name="version_index_is_big_for_memory">ایندکس \'{0}\' در حافظه جای نگرفت</string>
 	<string name="version_index_is_not_supported">نسخه ایندکس \'{0}\' پشتیبانی نمیشود</string>
-	<string name="use_osmand_routing_service">مسیریابی OsmAnd &gt; بیست کیلومتر</string>
+	
 	<string name="use_osmand_routing_service_descr">استفاده از مسیریابی آفلاین OsmAnd تنها در مسیرهای بیش از ۲۰ کیلومتر کاربرد دارد (آزمایشی)</string>
 	<string name="osmand_routing_experimental">مسیریابی آفلاین OsmAnd یک ویژگی آزمایشی است که برای مسیرهای بیش از بیست کیلومتر کارآیی ندارد.\n\nسرویس مسیریابی موقتاْ به سرویس آنلاین CloudMade منتقل شد.</string>
 	<string name="specified_dir_doesnt_exist">پوشه مورد نظر پیدا نشد.</string>
@@ -1390,7 +1389,7 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
     
     <string name="route_descr_destination">مقصد</string>
     <string name="create_poi_link_to_osm_doc">  <u>Online OSM</u> map classification with images</string>
-	<string name="app_mode_hiking">پیاده‌روی</string>
+	<string name="app_mode_hiking">پیاده‌&#157;روی</string>
     <string name="app_mode_motorcycle">موتورسیکلت</string>
     <string name="app_mode_boat">قایق</string>
     <string name="app_mode_aircraft">هواپیما</string>
@@ -1780,7 +1779,7 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
 	<string name="no_internet_connection">دانلود امکانپذیر نیست، لطفا اتصال اینترنت‌تان را بررسی کنید.</string>
     <string name="everything_up_to_date">همه فایلها به روز میباشند</string>
     <string name="home_button">خانه</string>
-    <string name="osmo_use_https_descr">استفاده از اتصال امن به سرور</string>
+    
     <string name="osmo_use_https">استفاده از پروتکل HTTPS</string>
 	
 	<string name="error_avoid_specific_road">مسیر میانبر یافت نشد</string>

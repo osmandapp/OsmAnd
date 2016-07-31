@@ -1,5 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
 	<!--
 		Our app defaults to American English with default strings in res/values
 		This file is manually maintained in res/values-en-rGB and should ONLY contain strings where a different spelling should be used for English as used in the United Kingdom

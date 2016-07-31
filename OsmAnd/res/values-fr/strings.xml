@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
     <string name="offline_edition">Modifications hors-ligne</string>
     <string name="offline_edition_descr">Toujours utiliser l\'édition hors-ligne</string>
 
@@ -60,7 +59,7 @@
     <string name="user_name">Votre identifiant OSM</string>
     <string name="open_street_map_login_descr">Nécessaire pour les contributions openstreetmap.org</string>
     <string name="user_password">Votre mot de passe OSM</string>
-    <string name="user_password_descr">Nécessaire pour les contributions openstreetmap.org</string>
+    
     <string name="osmand_service">Mode tâche de fond</string>
     <string name="osmand_service_descr">OsmAnd s\'exécute en tâche de fond lorsque l\'écran est éteint</string>
 
@@ -78,7 +77,7 @@ Actuellement {2} Mo sont disponibles.</string>
     <string name="init_native_library">Chargement …</string>
     <string name="choose_auto_follow_route">Centrer automatiquement la carte</string>
     <string name="choose_auto_follow_route_descr">Temps avant que la carte se recentre sur la position actuelle</string>
-    <string name="auto_follow_route_never">Jamais (Utiliser \"Aller\" pour démarrer la navigation)</string>
+    
     <string name="auto_follow_route_navigation">Recentrage automatique navigation</string>
     <string name="auto_follow_route_navigation_descr">Recentrage automatique uniquement pendant la navigation.</string>
     <string name="auto_follow_location_enabled">Recentrage automatique activé.</string>
@@ -282,7 +281,7 @@ Actuellement {2} Mo sont disponibles.</string>
     <string name="reading_cached_tiles">Lecture des tuiles en cache…</string>
     <string name="version_index_is_big_for_memory">L\'index \'\'{0}\'\' est trop gros pour la mémoire</string>
     <string name="version_index_is_not_supported">La version de l\'\'index \'\'{0}\'\' n\'\'est pas supporté</string>
-    <string name="use_osmand_routing_service">Navigation hors-ligne OsmAnd &gt;20km</string>
+    
     <string name="use_osmand_routing_service_descr">Utiliser la navigation hors-ligne pour les longues distances (expérimental)</string>
     <string name="osmand_routing_experimental">La navigation hors-ligne OsmAnd est une fonction expérimentale ne fonctionnant pas pour une distance de plus de 20 km.\n\nAu delà la navigation bascule automatiquement sur le service en ligne CloudMade.</string>
     <string name="specified_dir_doesnt_exist">Le dossier spécifié est introuvable.</string>
@@ -370,13 +369,13 @@ Actuellement {2} Mo sont disponibles.</string>
     <string name="none_region_found">Aucune région trouvée sur la carte SD. Essayez d\'en télécharger une d\'internet.</string>
     <string name="poi_namefinder_query_empty">Paramètres de recherche pour trouver le PI</string>
     <string name="any_poi">Tout</string>
-    <string name="layer_transport_route">Itinéraires de transports publics</string>
+    
     <string name="thanks_yandex_traffic">Merci à Yandex de fournir des informations sur le trafic.</string>
     <string name="layer_yandex_traffic">Trafic Yandex</string>
     <string name="layer_route">Route</string>
     <string name="shared_string_favorites">Favoris</string>
     <string name="layer_osm_bugs">Notes OSM (en ligne)</string>
-    <string name="layer_transport">Arrêts de transports publics</string>
+    
     <string name="layer_poi">Points d\'intérêt…</string>
     <string name="layer_map">Carte en ligne…</string>
     <string name="menu_layers">Couches</string>
@@ -887,7 +886,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
 
     <string name="gps_wakeup_interval">Intervalle d\'activation du GPS: %s</string>
     <string name="email">courriel</string>
-    <string name="map_widget_day_night">Mode jour / nuit</string>
+    
     <string name="map_widget_vector_attributes">Attributs de rendu</string>
     <string name="select_navigation_mode">Sélectionnez le mode de transport</string>
 <string name="day_night_info_description">Lever : %1$s
@@ -1594,7 +1593,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="lock_screen_request_explanation">%1$s a besoin de cette permission pour éteindre l\'écran en mode économie d\'énergie.</string>
     <string name="shared_string_never">Jamais</string>
 
-    <string name="osmo_use_https_descr">Utiliser une connexion sécurisée avec le serveur</string>
+    
     <string name="osmo_use_https">Utiliser HTTPS</string>
     <string name="home_button">Accueil</string>
     <string name="search_for">Rechercher</string>
@@ -2242,7 +2241,7 @@ Actuellement {2} Mo sont disponibles.</string>
     <string name="coords_format">Format des coordonnées</string>
     <string name="coords_format_descr">Format des coordonnées géographiques</string>
   	<string name="storage_directory_card">Carte mémoire</string>
-	<string name="shared_string_open_24_7">Ouvert 24/7</string>
+	
     <string name="shared_string_is_open_24_7">Ouvert 24/7</string>
     <string name="map_widget_search">Rechercher</string>
 	<string name="shared_string_from">de</string>

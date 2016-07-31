@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
 <string name="app_mode_bus">Bus</string>
  	<string name="app_mode_train">Ćah</string>
     <string name="map_widget_battery">Staw baterije</string>
@@ -689,7 +688,7 @@
     <string name="error_occurred_loading_gpx">Zmylk occurred while loading GPX</string>
     <string name="send_report">Rozprawu pósłać</string>
     <string name="any_poi">Wšě</string>
-    <string name="layer_transport_route">Linije zjawneho transporta</string>
+    
     <string name="layer_transport">Zastanišća</string>
     <string name="layer_map">Kartowe žórło…</string>
     <string name="menu_layers">Kartowe runiny</string>

@@ -671,7 +671,7 @@
 	<string name="poi_mortuary">Dipòsit de cadàvers</string>
 	<string name="poi_crematorium">Crematori</string>
 	<string name="poi_bank">Banc</string>
-	<string name="poi_atm">Caixer automàtic</string>
+	<string name="poi_amenity_atm">Caixer automàtic</string>
 	<string name="poi_accountant">Comptable</string>
 	<string name="poi_bitcoin_yes">Pagament amb bitcoins</string>
 

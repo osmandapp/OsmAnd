@@ -371,7 +371,7 @@
 	<string name="poi_internet_cafe">Internetcafé</string>
 
 	<string name="poi_bank">Bank</string>
-	<string name="poi_atm">Geldautomaat</string>
+	<string name="poi_amenity_atm">Geldautomaat</string>
 	<string name="poi_accountant">Accountant</string>
 	<string name="poi_cave_entrance">Grot-ingang</string>
 	<string name="poi_peak">Bergtop</string>

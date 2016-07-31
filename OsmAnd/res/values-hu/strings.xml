@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
     <string name="send_files_to_osm">GPX fájl küldése OSM-re?</string>
     <string name="gpx_visibility_txt">Láthatóság</string>
     <string name="gpx_tags_txt">Címkék</string>
@@ -125,7 +124,7 @@
     <string name="user_name">OSM felhasználóneved</string>
     <string name="open_street_map_login_descr">openstreetmap.org felé történő adatküldéshez szükséges</string>
     <string name="user_password">OSM jelszavad</string>
-    <string name="user_password_descr">openstreetmap.org felé történő adatküldéshez szükséges</string>
+    
     <string name="osmand_service">Háttér mód</string>
     <string name="osmand_service_descr">Az OsmAnd háttérben fut, ha ki van kapcsolava a képernyő</string>
 
@@ -142,7 +141,7 @@
     <string name="init_native_library">Natív renderelő inicializálása…</string>
     <string name="choose_auto_follow_route">Automatikus követés ideje</string>
     <string name="choose_auto_follow_route_descr">Válaszd ki, mennyi idő múlva ugorjon vissza a térkép a pozíciódhoz</string>
-    <string name="auto_follow_route_never">Soha (a vezetés kézi indításához koppintson az „Indításra”)</string>
+    
     <string name="auto_follow_route_navigation">Követés csak navigáció közben</string>
     <string name="auto_follow_route_navigation_descr">Csak navigáció közben követi automatikusan a pozíciódat a térkép.</string>
     <string name="auto_follow_location_enabled">Automatikus követés.</string>
@@ -349,7 +348,7 @@
     <string name="version_index_is_big_for_memory">A(z) \'\'{0}\'\' indexadat nem fér a memóriába</string>
     <string name="version_index_is_not_supported">\'\'{0}\'\' index verziója nem támogatott</string>
     <string name="osmand_net_previously_installed">Már telepítettél egy korábbi OsmAnd verziót. Minden internettől független adat használható az új alkalmazással. A Kedvenc pontokat a régi alkalmazásból érdemes kimenteni és az újba betölteni.</string>
-    <string name="use_osmand_routing_service">OsmAnd útvonaltervező &amp;gt;20km</string>
+    
     <string name="use_osmand_routing_service_descr">OsmAnd offline útvonaltervező használata nagy távolságokra is (kísérleti funkció)</string>
     <string name="osmand_routing_experimental">Az OsmAnd offline útvonaltervezője kísérleti funkció és nem működik 20 kilométernél nagyobb távolságban.\n\nÁtmenetileg átállítva online Cluodmade-re.</string>
     <string name="specified_dir_doesnt_exist">Nem található a megadott könyvtár.</string>
@@ -435,13 +434,13 @@
     <string name="none_region_found">Nem található régió az SD kártyán. Próbálj az internetről letölteni régiót.</string>
     <string name="poi_namefinder_query_empty">POI kiválasztáshoz írj be keresést</string>
     <string name="any_poi">Bármely</string>
-    <string name="layer_transport_route">Közlekedési útvonal</string>
+    
     <string name="thanks_yandex_traffic">Köszönet a Yandexnek a forgalmi információkért.</string>
     <string name="layer_yandex_traffic">Yandex forgalmi információ</string>
     <string name="layer_route">Útvonal</string>
     <string name="shared_string_favorites">Kedvencek</string>
     <string name="layer_osm_bugs">OSM Jegyzetek (online)</string>
-    <string name="layer_transport">Közlekedési megállók</string>
+    
     <string name="layer_poi">POI…</string>
     <string name="layer_map">Térképforrás…</string>
     <string name="menu_layers">Térképrétegek</string>
@@ -889,7 +888,7 @@
     <string name="select_navigation_mode">Közlekedési mód kiválasztása</string>
     <string name="day_night_info_description">Napkelte : %1$s \nNapnyugta : %2$s</string>
     <string name="day_night_info">Nappal/éjjel információ</string>
-    <string name="map_widget_day_night">Nappali/éjjeli térképmód</string>
+    
     <string name="map_widget_vector_attributes">Megjelenítési jellemzők</string>
     <string name="map_widget_renderer">Térkép megjelenítési stílus</string>
 
@@ -1591,7 +1590,7 @@ A csoport nem lesz törölve néhány hónap múlva, az OsMo.mobi weboldalon lé
     <string name="shared_string_never">Soha</string>
     <string name="error_avoid_specific_road">Nem található kerülőút</string>
     <string name="home_button">Kezdőlap</string>
-    <string name="osmo_use_https_descr">Biztonságos kapcsolat használata a kiszolgálóval</string>
+    
     <string name="osmo_use_https">HTTPS használata</string>
 
     <string name="map_update">Frissítés érhető el %1$s térképhez</string>

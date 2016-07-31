@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
 
     <string name="show_warnings_title">Mostra alertes…</string>
     <string name="map_widget_fluorescent">Rutes amb fluorescència</string>
@@ -191,7 +190,7 @@ Ara mateix hi ha {2} MB d\'espai lliure."</string>
     <string name="local_openstreetmap_settings">PDIs/Notes d\'OSM desades localment</string>
     <string name="local_openstreetmap_settings_descr">Mostra i gestiona els PDI/notes d\'OSM de la base de dades local</string>
     <string name="day_night_info">Informació de dia/nit</string>
-    <string name="map_widget_day_night">Mapa dia/nit</string>
+    
     <string name="show_lanes">Carrils</string>
     <string name="avoid_ferries">Evita els ferris</string>
     <string name="avoid_in_routing_descr">Evita les carreteres de peatge, les no pavimentades i els ferris</string>
@@ -210,7 +209,7 @@ Ara mateix hi ha {2} MB d\'espai lliure."</string>
     <string name="index_name_tts_voice">Indicadors de veu (sintetitzats amb TTS, recomanat)</string>
     <string name="native_library_not_supported">La llibreria nativa no està suportada en aquest dispositiu.</string>
     <string name="init_native_library">S\'està inicialitzant la llibreria nativa…</string>
-    <string name="auto_follow_route_never">Mai (premeu &lt;&lt;Anar&gt;&gt;  per iniciar la navegació manualment)</string>
+    
     <string name="pref_vector_rendering">Opcions específiques de renderització dels vectors</string>
     <string name="delete_confirmation_msg">Voleu suprimir %1$s?</string>
     <string name="city_type_town">Poble</string>
@@ -253,7 +252,7 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="switch_to_raster_map_to_see">No s\'ha trobat cap mapa de vectors fora de línia per aquesta localització. Podeu baixar-ne un a Configuració (Gestió de fitxers de mapes) o canviar per utilitzar mapes en línia (cal activar el connector de mapes en línia per fer-ho).</string>
     <string name="global_app_settings">Paràmetres globals de l\'aplicació</string>
     <string name="open_street_map_login_descr">És necessari per a les trameses a openstreetmap.org</string>
-    <string name="user_password_descr">És necessària per a les trameses a openstreetmap.org</string>
+    
     <string name="old_poi_file_should_be_deleted">El fitxer de dades de PDI «%1$s» és redundant i serà suprimit.</string>
     <string name="search_position_favorites">Preferits…</string>
     <string name="search_position_map_view">Centre del mapa actual</string>
@@ -587,7 +586,7 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="foot">peu</string>
     <string name="km">km</string>
     <string name="poi_filter_food_shop">Alimentació</string>
-    <string name="use_osmand_routing_service">Navegacio d\'OsmAnd&gt;20Km</string>
+    
     <string name="osmand_net_previously_installed">Ja hi ha una versió prèvia d\'OsmAnd instal·lada. Totes les dades locals es mantindran en la nova aplicació excepte els punts preferits, que s\'han d\'exportar des la versió vella i després importar-los a la nova.</string>
     <string name="install_selected_build">Voleu instal·lar OsmAnd - {0} de {1} {2} MB ?</string>
     <string name="gps_status_app_not_found">L\'aplicació GPS status no està instal·lada. Voleu cercar-la al Market?</string>
@@ -704,7 +703,7 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="gpxup_trackable">Seguible</string>
     <string name="search_offline_geo_error">No s\'ha pogut analitzar la geo intenció «%s»</string>
     <string name="amenity_type_geocache">Geocerca</string>
-    <string name="use_osmand_routing_service_descr">L\'us de la navagacio fora de línia d\'OsmAnd s\'aplica nomes a rutes &gt; 20km (experimental)</string>
+    
     <string name="btn_advanced_mode">Mode avançat…</string>
     <string name="poi_filter_parking">Aparcament</string>
     <string name="poi_filter_public_transport">Transport públic</string>
@@ -719,7 +718,7 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="transport_searching_transport">Resultats de transport (cap destí):</string>
     <string name="transport_searching_route">Resultats de transport ({0} al destí):</string>
     <string name="map_route_by_gpx">Navega utilitzant un GPX</string>
-    <string name="layer_transport_route">Ruta de transport</string>
+    
     <string name="layer_transport">Parades de transport</string>
     <string name="voice_data_unavailable">Les dades de veu seleccionades no estan disponibles</string>
     <string name="search_poi_location">Cercant senyal…</string>
@@ -1662,7 +1661,7 @@ Les rutes enregistrades es poden compartir amb els vostres amics o aportar-les p
     <string name="wake_on_voice_descr">Activa la pantalla del dispositiu (si no ho està) en aproximar-se a un gir</string>
     <string name="lock_screen_request_explanation">"%1$s necessita  aquest permís per la funcionalitat de posar la pantalla en mode d\'estalvi d\'energia."</string>
     <string name="shared_string_never">Mai</string>
-    <string name="osmo_use_https_descr">Utilitzeu una connexió segura al servidor</string>
+    
     <string name="osmo_use_https">Utilitzeu HTTPS</string>
     <string name="home_button">Inici</string>
     <string name="search_for">Cerca per</string>
@@ -2242,7 +2241,7 @@ Twitter: https://twitter.com/osmandapp Facebook: https://www.facebook.com/osmand
 Si us cal ajut per l\'aplicació OsmAnd, contacteu amb el nostre equip de suport: support@osmand.net. 
  "</string>
     <string name="show_polygons">Mostra els polígons</string>
-    <string name="underlay_transparency">Transparència de la capa inferior</string>
+    
     <string name="find_parking">Troba aparcament</string>
     <string name="rendering_attr_showMtbRoutes_name">Mostra les rutes BTT</string>
     <string name="shared_string_reverse_order">Inverteix l\'ordre</string>
@@ -2370,7 +2369,7 @@ Cas que aprecieu OsmAnd  i OSM i vulgueu ajudar-los, és una via perfecta per fe
  	<string name="app_mode_train">Tren</string>
     <string name="coords_format">Format de coordenades</string>
     <string name="coords_format_descr">Format de les coordenades geogràfiques</string>
-	<string name="shared_string_open_24_7">Obert 24h/7d</string>
+	
     <string name="storage_directory_card">Tarja de memòria</string>
     <string name="shared_string_is_open">Obert ara mateix</string>
     <string name="shared_string_is_open_24_7">Obert 24h/7d</string>

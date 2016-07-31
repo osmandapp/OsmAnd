@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
     <string name="osb_author_or_password_not_specified">Моля, въведете потребителско име и парола за сайта на OSM</string>
     <string name="clear_intermediate_points">Изчистване на междинните точки</string>
     <string name="keep_intermediate_points">Запази междинните точки</string>
@@ -250,7 +249,7 @@
     <string name="select_navigation_mode">Изберете режим на придвижване</string>
     <string name="day_night_info_description">Изгрев: %1$s \nЗалез: %2$s</string>
     <string name="day_night_info">Информация за изгрев и залез</string>
-    <string name="map_widget_day_night">Дневна/нощна карта</string>
+    
     <string name="map_widget_vector_attributes">Опции за изчертаване</string>
     <string name="map_widget_renderer">Стил на картата</string>
 
@@ -523,7 +522,7 @@
     <string name="user_name">Вашето потребителско име в OSM</string>
     <string name="open_street_map_login_descr">Необходимо за изпращане към openstreetmap.org</string>
     <string name="user_password">Вашата парола в OSM</string>
-    <string name="user_password_descr">Необходима за изпращане на данни към openstreetmap.org</string>
+    
     <string name="osmand_service">Фонов режим</string>
     <string name="osmand_service_descr">OsmAnd работи във фонов режим, докато на екранът е изключен</string>
 
@@ -537,7 +536,7 @@
     <string name="init_native_library">Стартиране на приложението…</string>
     <string name="choose_auto_follow_route">Автоматично центриране</string>
     <string name="choose_auto_follow_route_descr">Изчакване преди картата да се върне на текущата позиция</string>
-    <string name="auto_follow_route_never">Никога (докоснете \'Старт\' за начало на указанията)</string>
+    
     <string name="auto_follow_route_navigation">Автоматично центриране само при навигация</string>
     <string name="auto_follow_route_navigation_descr">Автоматично центриране само по време на навигация.</string>
     <string name="auto_follow_location_enabled">Автоматичното центриране е включено.</string>
@@ -734,7 +733,7 @@
     <string name="reading_cached_tiles">Зареждане на запазените фрагменти…</string>
     <string name="version_index_is_big_for_memory">Индексът \'\'{0}\'\' не се побира в паметта</string>
     <string name="version_index_is_not_supported">Версията на индекса \'\'{0}\'\' не се поддържа</string>
-    <string name="use_osmand_routing_service">OsmAnd навигация &gt;20км</string>
+    
     <string name="use_osmand_routing_service_descr">Ползвайте офлайн навигацията OsmAnd за дистанции &gt; 20 km (пробна версия)</string>
     <string name="osmand_routing_experimental">Офлайн навигацията на OsmAnd е пробна версия и не работи пълноценно на дистанции по-големи от 20км.\n\nУслугата за навигация временно е превключена на онлайн от CloudMade.</string>
     <string name="specified_dir_doesnt_exist">Посочената папка не може да бъде намерена.</string>
@@ -817,13 +816,13 @@
     <string name="none_region_found">На SD картата няма данни за този район. Свалете от интернет.</string>
     <string name="poi_namefinder_query_empty">Въведете израз за търсене на забележителност</string>
     <string name="any_poi">Всички</string>
-    <string name="layer_transport_route">Маршрут на общ.транспорт</string>
+    
     <string name="thanks_yandex_traffic">Информацията за трафика е любезно предоставена от Яндекс.</string>
     <string name="layer_yandex_traffic">Яндекс трафик</string>
     <string name="layer_route">Маршрут</string>
     <string name="shared_string_favorites">Любими места</string>
     <string name="layer_osm_bugs">OSM бележки (онлайн)</string>
-    <string name="layer_transport">Спирки на общ. транспорт</string>
+    
     <string name="layer_poi">POI…</string>
     <string name="layer_map">Източници на карти…</string>
     <string name="menu_layers">Слоеве</string>
@@ -1519,7 +1518,7 @@
     <string name="use_opengl_render_descr">Използване на хардуерно ускорено OpenGL изчертаване (възможно е да не работи на някои устройства)</string>
     <string name="error_avoid_specific_road">Няма намерен заобиколен път</string>
     <string name="home_button">Начало</string>
-    <string name="osmo_use_https_descr">Използвайте защитена връзка към сървър</string>
+    
     <string name="osmo_use_https">Използване на HTTPS</string>
     <string name="coordinates">Координати</string>
     <string name="anonymous_user_hint">"Анонимен потребител не може  да:\n-създава групи;\n-синхронизира групи и устройства със сървъра;\n-управлява групи и устройства в частен режим."</string>

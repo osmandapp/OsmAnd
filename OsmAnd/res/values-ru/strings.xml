@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
     <string name="number_of_gpx_files_selected_pattern">%s GPX трека(ов) выбрано</string>
     <string name="change_markers_position">Переместить курсор</string>
     <string name="current_track">Текущий путь</string>
@@ -65,7 +64,7 @@
     <string name="lang_fy">Западнофризский</string>
     <string name="lang_als">Албанский (тоскский)</string>
     <string name="rendering_attr_hideProposed_name">Планируемые объекты</string>
-    <string name="osmo_use_https_descr">Использовать безопасное подключение к серверу</string>
+    
     <string name="osmo_use_https">Использовать HTTPS</string>
     <string name="srtm_plugin_description">"Этот плагин обеспечивает как наложение контурных линий, так и отображения затеняющего слоя рельефа поверх стандартных карт OsmAnd. Эта функция высоко оценится спортсменами, туристами, путешественниками и всеми, кто заинтересован в рельефной структуре ландшафта.\n\nГлобальные данные (между 70 градусами на севере и 70 градусами на юге) основываются на измерениях SRTM (Shuttle Radar Topography Mission) и ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer) — инструментом визуализации Terra, флагманского спутника Системы Наблюдения Земли NASA. ASTER является результатом совместных усилий NASA, министерства экономики Японии, торговли и промышленности (METI), а также Космических Систем Японии (J-spacesystems). "</string>
     <string name="srtm_paid_version_msg">Рассмотрите, пожалуйста, покупку плагина \"Линии высот\" в Google Play, чтобы поддержать последующую разработку.</string>
@@ -212,7 +211,7 @@
     <string name="init_native_library">Инициализация нативной библиотеки…</string>
     <string name="choose_auto_follow_route">Настройки автовозврата карты</string>
     <string name="choose_auto_follow_route_descr">Выберите время, через которое карта вернётся к текущей позиции</string>
-    <string name="auto_follow_route_never">Никогда (для начала навигации нажмите \"Поехали\")</string>
+    
     <string name="auto_follow_route_navigation">Автовозврат карты только при следовании по маршруту</string>
     <string name="auto_follow_route_navigation_descr">Возвращать карту в текущее положение только при следовании по маршруту.</string>
     <string name="auto_follow_location_enabled">Привязка карты к местоположению включена.</string>
@@ -371,7 +370,7 @@
     <string name="reading_cached_tiles">Чтение кэшированных растровых карт…</string>
     <string name="version_index_is_big_for_memory">Недостаточно памяти для локальной карты \"\"{0}\"\"</string>
     <string name="version_index_is_not_supported">Версия локальной карты \"\"{0}\"\" не поддерживается</string>
-    <string name="use_osmand_routing_service">Автономная навигация OsmAnd &gt;20км</string>
+    
     <string name="use_osmand_routing_service_descr">Использовать автономную навигацию на большие расстояние (экспериментально)</string>
     <string name="osmand_routing_experimental">Автономная навигация OsmAnd является экспериментальной и не работает на расстояния более 20 километров.\n\nВ этом случае для прокладывания маршрута используется online-сервис CloudMade.</string>
     <string name="specified_dir_doesnt_exist">Невозможно найти указанную директорию.</string>
@@ -453,12 +452,12 @@
     <string name="none_region_found">Не найдены локальные векторные карты высокой детализации. Загрузите их из Интернета.</string>
     <string name="poi_namefinder_query_empty">Введите запрос для поиска POI</string>
     <string name="any_poi">Все</string>
-    <string name="layer_transport_route">Маршрут на транспорте</string>
+    
     <string name="thanks_yandex_traffic">Спасибо Яндексу за предоставление информации о пробках. Установите Яндекс как домашнюю страницу.</string>
     <string name="layer_yandex_traffic">Яндекс.Пробки</string>
     <string name="layer_route">Маршрут</string>
     <string name="layer_osm_bugs">OSM заметки (онлайн)</string>
-    <string name="layer_transport">Остановки транспорта</string>
+    
     <string name="layer_poi">POI…</string>
     <string name="layer_map">Источник карты…</string>
     <string name="menu_layers">Слои</string>
@@ -603,7 +602,7 @@
     <string name="finished_task">Окончен</string>
     <string name="use_online_routing_descr">Использовать Интернет-сервис для прокладки маршрута</string>
     <string name="use_online_routing">Онлайн маршрутизация</string>
-    <string name="user_password_descr">Укажите пароль (требуется для работы с OSM)</string>
+    
     <string name="user_password">Пароль</string>
     <string name="osm_settings_descr">Установка логина/пароля OpenStreetMap</string>
     <string name="data_settings_descr">Настройка данных: язык, обновление данных</string>
@@ -893,7 +892,7 @@
     <string name="map_widget_transparent">Прозрачные виджеты</string>
     <string name="int_continuosly">Постоянно</string>
     <string name="gps_wakeup_interval">Интервал пробуждения GPS: %s</string>
-    <string name="map_widget_day_night">Дневной/ночной режим</string>
+    
     <string name="filterpoi_activity">Создать фильтр POI</string>
     <string name="select_navigation_mode">Выберите вид транспорта</string>
     <string name="day_night_info_description">Восход : %1$s

@@ -697,7 +697,7 @@
 	<string name="poi_internet_cafe">Cybercafé</string>
 
 	<string name="poi_bank">Agência bancária</string>
-	<string name="poi_atm">Caixa eletrônico</string>
+	<string name="poi_amenity_atm">Caixa eletrônico</string>
 	<string name="poi_payment_terminal">Terminal de pagamento</string>
 	<string name="poi_money_lender">Financeira</string>
 	<string name="poi_pawnbroker">Casa de penhores</string>

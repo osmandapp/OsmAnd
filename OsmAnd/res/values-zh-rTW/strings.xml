@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
     <string name="rendering_attr_roadColors_description">選擇道路的色彩調配：</string>
     <string name="rendering_attr_roadColors_name">道路的色彩調配</string>
     <string name="map_widget_show_destination_arrow">顯示目的地方向</string>
@@ -94,7 +93,7 @@
 
     <string name="day_night_info_description">日出：%1$s \n日落：%2$s</string>
     <string name="day_night_info">日/夜資訊</string>
-    <string name="map_widget_day_night">日/夜地圖</string>
+    
     <string name="map_widget_vector_attributes">著色演算屬性</string>
     <string name="map_widget_renderer">地圖樣式</string>
 
@@ -361,7 +360,7 @@
     <string name="user_name">您 OSM 的使用者名稱</string>
     <string name="open_street_map_login_descr">需要在 openstreetmap.org 註冊</string>
     <string name="user_password">您 OSM 的密碼</string>
-    <string name="user_password_descr">需要在 openstreetmap.org 註冊</string>
+    
     <string name="osmand_service">背景模式</string>
     <string name="osmand_service_descr">當螢幕關閉時，讓 OsmAnd 在背景執行</string>
 
@@ -377,7 +376,7 @@
     <string name="init_native_library">初始化原生函式庫…</string>
     <string name="choose_auto_follow_route">地圖檢視自動置中</string>
     <string name="choose_auto_follow_route_descr">一段時間後地圖會移到目前位置</string>
-    <string name="auto_follow_route_never">永不（輕點 \'執行\' 手動開始引導）</string>
+    
     <string name="auto_follow_route_navigation">只有導航時自動置中</string>
     <string name="auto_follow_route_navigation_descr">只有在導航時，地圖檢視自動置中。</string>
     <string name="auto_follow_location_enabled">使用地圖檢視自動置中。</string>
@@ -561,7 +560,7 @@
     <string name="reading_cached_tiles">正在取讀暫存地圖圖磚…</string>
     <string name="version_index_is_big_for_memory">索引 \'\'{0}\'\' 不存在</string>
     <string name="version_index_is_not_supported">這版本的 \'\'{0}\'\' 索引不支援</string>
-    <string name="use_osmand_routing_service">OsmAnd 導航 &gt; 20公里</string>
+    
     <string name="use_osmand_routing_service_descr">使用 OsmAnd 離線導航僅適用于路線 &gt; 20 公里(實驗性的)</string>
     <string name="osmand_routing_experimental">OsmAnd 離線導航是個實驗性的功能，它不能運作超過 20 公里的距離。\n\n導航服務暫時切為線上的 CloudMade。</string>
     <string name="specified_dir_doesnt_exist">找不到指定的資料夾。</string>
@@ -644,12 +643,12 @@
     <string name="none_region_found">在 SD 卡上沒有該地區離線資料。由網路下載資料。</string>
     <string name="poi_namefinder_query_empty">輸入查尋條件以查尋興趣點</string>
     <string name="any_poi">任何</string>
-    <string name="layer_transport_route">公車路線</string>
+    
     <string name="thanks_yandex_traffic">感謝 Yandex 提供的交通資訊。</string>
     <string name="layer_yandex_traffic">Yandex 的交通資訊</string>
     <string name="layer_route">導航路線</string>
     <string name="layer_osm_bugs">OSM 註解(連線)</string>
-    <string name="layer_transport">公車站牌</string>
+    
     <string name="layer_poi">興趣點…</string>
     <string name="layer_map">地圖來源…</string>
     <string name="menu_layers">地圖圖層</string>
@@ -1729,7 +1728,7 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="wake_on_voice">將螢幕開啟</string>
     <string name="wake_on_voice_descr">當接近轉彎時，開啟裝置螢幕 (螢幕關閉時)</string>
     <string name="lock_screen_request_explanation">為了節電作用 %1$s 需要此許可權才能關閉螢幕。</string>
-    <string name="osmo_use_https_descr">使用安全協定連線到伺服器</string>
+    
     <string name="osmo_use_https">使用 HTTPS</string>
     <string name="map_update">有 %1$s 個地圖可更新</string>
     <string name="search_for">查詢</string>
@@ -2376,11 +2375,11 @@ Facebook：https://www.facebook.com/osmandapp
     <string name="shared_string_save_changes">儲存更改</string>
     <string name="find_parking">找停車場</string>
     <string name="show_polygons">顯示多邊形</string>
-    <string name="underlay_transparency">襯底透明度</string>
+    
     <string name="rendering_attr_showMtbRoutes_name">顯示 MTB 路線</string>
     <string name="select_map_markers">選擇地圖標記</string>
     <string name="shared_string_reverse_order">順序相反</string>
-    <string name="show_map_markers">地圖標記</string>
+    
     <string name="show_map_markers_description">啟動地圖標記功能</string>
     <string name="clear_active_markers_q">您想要移除所有的活動標記嗎？</string>
     <string name="clear_markers_history_q">您想清除地圖標記歷史記錄嗎？</string>
@@ -2390,7 +2389,7 @@ Facebook：https://www.facebook.com/osmandapp
     <string name="add_points_to_map_markers_q">您想要將所有的標點都加到地圖標記嗎？</string>
     <string name="shared_string_add_to_map_markers">增加地圖標記</string>
     <string name="consider_turning_polygons_off">建議關閉多邊形的著色演算。</string>
-    <string name="show_map_markers_topbar">顯示地圖標記頂列</string>
+    
     <string name="map_marker_1st">第一個地圖標記</string>
     <string name="map_marker_2nd">第二個地圖標記</string>
     <string name="shared_string_toolbar">工具列</string>

@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="installing_new_resources">新しいデータを展開中…</string>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources><string name="installing_new_resources">新しいデータを展開中…</string>
      <string name="internet_connection_required_for_online_route">オンライン経路案内を使用しようとしていますが
 インターネット接続されていません。</string>
      <string name="tts_language_not_supported_title">未サポート言語</string>
@@ -148,7 +147,7 @@
      <string name="version_index_is_big_for_memory">\'\'{0}\'\' の項目はメモリ内に格納できませんでした</string>
      <string name="version_index_is_not_supported">\'\'{0}\'\' は、このバージョンではサポートされていません</string>
 
-     <string name="use_osmand_routing_service">OsmAnd 経路案内 &gt;20km</string>
+     
      <string name="use_osmand_routing_service_descr">長距離のオフライン経路案内に OsmAndを使用します(実験版)</string>
      <string name="osmand_routing_experimental">OsmAndオフライン経路案内は実験的な機能であり
 20km以上の距離では動作しません。
@@ -267,13 +266,13 @@ MB)をダウンロードしますか?</string>
      <string name="poi_namefinder_query_empty">検索クエリを入力してPOIを探す</string>
      <string name="any_poi">すべて</string>
 
-     <string name="layer_transport_route">交通機関ルート</string>
+     
      <string name="thanks_yandex_traffic">Yandexの交通情報に感謝します。</string>
      <string name="layer_yandex_traffic">Yandex交通情報</string>
      <string name="layer_route">ルート</string>
      <string name="shared_string_favorites">お気に入り</string>
      <string name="layer_osm_bugs">OSM bugs</string>
-     <string name="layer_transport">交通機関乗降場</string>
+     
      <string name="layer_poi">POI…</string>
      <string name="layer_map">マップソース…</string>
      <string name="menu_layers">ビュー定義</string>
@@ -446,7 +445,7 @@ POIの更新は利用できません</string>
  
  <string name="use_online_routing_descr">ルート計算にインターネットを使用します</string>
  <string name="use_online_routing">オンラインルーティングを使用</string>
- <string name="user_password_descr">あなたのOSM パスワードを入力します</string>
+ 
  <string name="user_password">OSM パスワード</string>
  <string name="osm_settings_descr">Openstreetmap.org (OSM)にデータを提出する際に必要な項目の設定します</string>
  
@@ -869,7 +868,7 @@ POIの更新は利用できません</string>
 	<string name="select_navigation_mode">トランスポートモードの選択</string>
 	<string name="day_night_info_description">日の出: %1$s \n日の入: %2$s</string>
 	<string name="day_night_info">昼/夜の情報</string>
-	<string name="map_widget_day_night">日中/夜間モード</string>
+	
 	<string name="map_widget_vector_attributes">描画方法の属性</string>
 	<string name="map_widget_renderer">マップスタイル</string>
 	
@@ -1152,7 +1151,7 @@ POIの更新は利用できません</string>
 	<string name="init_native_library">ネイティブライブラリを初期化しています…</string>
 	<string name="choose_auto_follow_route">マップの自動中心表示設定</string>
 	<string name="choose_auto_follow_route_descr">マップの自動位置調整タイミングを設定します</string>
-	<string name="auto_follow_route_never">使用しない(手動で案内を開始するには青矢印をタップ)</string>
+	
 	<string name="auto_follow_route_navigation">ナビゲーションのみ</string>
 	<string name="auto_follow_route_navigation_descr">マップの自動中心表示はナビゲーション中のみ有効です</string>
 	<string name="auto_follow_location_enabled">設定に従い、現在地をマップ中心に表示します。</string>
@@ -1658,7 +1657,7 @@ POIの更新は利用できません</string>
     
     <string name="text_size_descr">マップ上の文字サイズを設定します。</string>
     <string name="text_size">文字サイズ</string>
-    <string name="osmo_use_https_descr">サーバー接続にセキュリティで保護された接続を使用します</string>
+    
     <string name="osmo_use_https">HTTPSを使用</string>
 	
 	<string name="rendering_attr_tramTrainRoutes_name">路面電車や鉄道での経路</string>

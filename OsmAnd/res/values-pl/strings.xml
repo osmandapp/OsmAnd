@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
 
     <string name="use_transparent_map_theme">Przezroczysty styl</string>
     <string name="native_library_not_supported">To urządzenie nie obsługuje biblioteki renderowania natywnego.</string>
@@ -10,7 +9,7 @@
     <string name="pref_vector_map">Ustawienia mapy wektorowej</string>
     <string name="choose_auto_follow_route">Automatyczne środkowanie mapy</string>
     <string name="choose_auto_follow_route_descr">Ustala opóźnienie podążania mapy za aktualną lokalizacją</string>
-    <string name="auto_follow_route_never">Nigdy (dotknij \'Idź\', aby rozpocząć ręcznie)</string>
+    
     <string name="auto_follow_route_navigation">Auto-podążanie za pozycją</string>
     <string name="auto_follow_route_navigation_descr">Włącz podążanie za pozycją tylko w trybie nawigacji.</string>
     <string name="auto_follow_location_enabled">Podążanie za pozycją jest włączone.</string>
@@ -212,7 +211,7 @@
     <string name="reading_cached_tiles">Wczytywanie zachowanych kafelków…</string>
     <string name="version_index_is_big_for_memory">Index\'\'{0}\'\' nie zmieścił się w pamięci</string>
     <string name="version_index_is_not_supported">Wersja indeksu \'\'{0}\'\' nie jest wspierana</string>
-    <string name="use_osmand_routing_service">Nawigacja OsmAnd &gt;20km</string>
+    
     <string name="use_osmand_routing_service_descr">Użycie routingu offline dla długich tras działa tylko dla tras &gt; 20 km (funkcjonalność eksperymentalna)</string>
     <string name="osmand_routing_experimental">Nawigacja offline w OsmAnd jest funkcją eksperymentalną i nie działa dla odległości większych niż 20 km.\n\nUsługa nawigacji została tymczasowo przełączona na CloudMade (online).</string>
     <string name="specified_dir_doesnt_exist">Nie mogę odnaleźć wskazanego katalogu.</string>
@@ -306,13 +305,13 @@
     <string name="none_region_found">Brak danych offline na karcie SD. Proszę pobrać je z sieci.</string>
     <string name="poi_namefinder_query_empty">Wprowadź zapytanie by znaleźć POI</string>
     <string name="any_poi">Jakiekolwiek</string>
-    <string name="layer_transport_route">Trasa transportu publicznego</string>
+    
     <string name="thanks_yandex_traffic">Podziękowania dla Yandex za informację o korkach.</string>
     <string name="layer_yandex_traffic">Yandex - informacje o korkach</string>
     <string name="layer_route">Trasa</string>
     <string name="shared_string_favorites">Ulubione</string>
     <string name="layer_osm_bugs">Notatki OSM (online)</string>
-    <string name="layer_transport">Przystanki</string>
+    
     <string name="layer_poi">Użyteczne miejsca…</string>
     <string name="layer_map">Zasób mapy…</string>
     <string name="menu_layers">Warstwy mapy</string>
@@ -470,7 +469,7 @@
 
     <string name="use_online_routing_descr">Użyj Internetu do wyznaczenia trasy</string>
     <string name="use_online_routing">Użyj routingu online</string>
-    <string name="user_password_descr">Wymagane do wysyłania danych na openstreetmap.org</string>
+    
     <string name="user_password">Hasło konta OSM</string>
     <string name="osm_settings_descr">Skonfiguruj ustawienia dotyczące potrzebne do wysyłania danych do Openstreetmap.org (OSM)</string>
 
@@ -917,7 +916,7 @@ OsmAnd jest otwarto-źródłowym programem do nawigacji z dostępem do szerokiej
     <string name="snap_to_road">Przyciąganie do drogi</string>
 
     <string name="day_night_info">Informacja o dniu/nocy</string>
-    <string name="map_widget_day_night">Tryb dzienny/nocny</string>
+    
     <string name="map_widget_vector_attributes">Atrybuty renderowania</string>
     <string name="show_lanes">Pasy ruchu</string>
 
@@ -1723,7 +1722,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="rendering_category_hide">Ukrywanie</string>
     <string name="lock_screen_request_explanation">%1$s potrzebuje uprawnień do wyłączenia ekranu dla funkcji oszczędzania energii.</string>
     <string name="shared_string_never">Nigdy</string>
-    <string name="osmo_use_https_descr">Użyj bezpiecznego połączenia z serwerem</string>
+    
     <string name="osmo_use_https">Użyj HTTPS</string>
 
     <string name="home_button">Ekran startowy</string>
@@ -2279,7 +2278,7 @@ Włączenie tego widoku zmienia styl mapy na „Zima i narty”, ukazujący tere
     <string name="upload_osm_note_description">Można przesłać swoje notatki OSM anonimowo jeżeli użyjesz swojego profilu OpenStreetMap.org.</string>
     <string name="upload_osm_note">Prześlij notatki OSM</string>
     <string name="upload_anonymously">Wyślij anonimowo</string>
-<string name="show_map_markers_topbar">Pokaż górny pasek znaczników</string>
+
     <string name="map_marker_1st">Pierwszy znacznik mapy</string>
     <string name="map_marker_2nd">Drugi znacznik mapy</string>
     <string name="shared_string_toolbar">Pasek narzędzi</string>

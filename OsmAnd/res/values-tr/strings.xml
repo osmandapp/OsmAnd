@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="close_changeset">Değişiklik listesini kapat</string>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources><string name="close_changeset">Değişiklik listesini kapat</string>
 	<string name="zxing_barcode_scanner_not_found">ZXing Barcode Scanner uygulaması kurulu değil. Uygulama marketinde aramak ister misiniz?</string>
 	<string name="rendering_attr_roadColors_description">Yol renk şemasını seç:</string>
 	<string name="rendering_attr_roadColors_name">Yol renk şeması</string>
@@ -49,7 +48,7 @@
 	<string name="select_navigation_mode">Ulaşım modunu seç</string>
 	
 	<string name="day_night_info">Gündüz/gece bilgisi</string>
-	<string name="map_widget_day_night">Gündüz/gece haritası</string>
+	
 	<string name="osmand_short_description_80_chars">OsmAnd açık kaynak kodlu, çevrımdışı ve çevrimiçi çalışabilen bir navigasyon uygulamasıdır</string>
 	
 	
@@ -267,7 +266,7 @@
 	
 	<string name="download_files_not_enough_space">İndirme için yeterli yer yok: %1$s MB (free: %2$s).</string>
 	
-	<string name="auto_follow_route_never">Asla (musluk \'Git\' elle gidişi başlatmak için)</string>
+	
 	<string name="animate_route_off">Animasyonu durdur</string>
 	<string name="animate_route">Animasyonu başlat</string>
 	<string name="file_can_not_be_renamed">Dosya yeniden adlandırılamaz.</string>
@@ -626,7 +625,7 @@
 	<string name="global_app_settings">Genel uygulama ayarları</string>
 	<string name="user_name">OSM kullanıcı adınız</string>
 	<string name="open_street_map_login_descr">Openstreetmap.org gönderimler için gereklidir</string>
-	<string name="user_password_descr">Openstreetmap.org gönderimler için gereklidir</string>
+	
 	<string name="osmand_service">Arka plan modu</string>
 	<string name="osmand_service_descr">Ekran kapalı iken Osmand arka planda çalışır</string>
 	
@@ -911,9 +910,9 @@
 	<string name="error_occurred_loading_gpx">GPX yüklenirken hata oluştu</string>
 	<string name="none_region_found">Bölge için SD kart üzerinde çevrimdışı veri bulunamadı. Genel ağdan (internetten) bölgeleri indirin.</string>
 	<string name="poi_namefinder_query_empty">İÇN bulmak için kelime girin</string>
-	<string name="layer_transport_route">Ulaşım yolu</string>
+	
 	<string name="thanks_yandex_traffic">Trafik bilgileri için Yandex\'e teşekkürler.</string>
-	<string name="layer_transport">Ulaşım Durakları</string>
+	
 	<string name="layer_poi">İÇN…</string>
 	<string name="background_service_wait_int_descr">Arka planda konum düzeltmesi için azami bekleme süresini belirleyin</string>
 	<string name="background_service_wait_int">Düzeltme için azami bekleme</string>
@@ -1226,7 +1225,7 @@
     <string name="download_tab_local">Yerel</string>
 	<string name="everything_up_to_date">Tüm dosyalar güncel</string>
     <string name="home_button">Ev</string>
-    <string name="osmo_use_https">HTTPS kullan</string>
+    
 	<string name="map_update">%1$s harita için güncelleme var</string>
 	<string name="coordinates">Koordinatlar</string>
 	<string name="rendering_category_details">Ayrıntılar</string>
@@ -1581,7 +1580,7 @@
 	<string name="transport_context_menu">Durakta Arama taşımacılığı</string>
 	<string name="rotate_map_to_bearing">Harita yönlendirme</string>
 	<string name="version_index_is_not_supported">Endeksin versiyonu \'\' {0} \'desteklenmiyor</string>
-	<string name="use_osmand_routing_service">Osmand navigasyon&gt; 20km</string>
+	
 	<string name="use_osmand_routing_service_descr">Kullanım Osmand çevrimdışı gezinme yolları için geçerlidir&gt; 20 km (deneysel)</string>
 	<string name="osmand_routing_experimental">Osmand çevrimdışı gezinme deneysel bir özelliktir ve daha yaklaşık 20 km\'lik mesafelerde çalışmıyor.\n\nNavigasyon hizmeti geçici olarak çevrimiçi CloudMade geçer.</string>
 	<string name="install_selected_build">Eğer Osmand yüklemek istiyor musunuz - {0} {1} {2} MB?</string>
@@ -1894,7 +1893,7 @@
     <string name="use_opengl_render">Kullanım OpenGL render</string>
     <string name="use_opengl_render_descr">Donanım hızlandırmalı OpenGL render (bazı cihazlarda çalışmayabilir) kullanın</string>
     <string name="error_avoid_specific_road">Bulunamadı baypas</string>
-    <string name="osmo_use_https_descr">Sunucuya Güvenli bağlantı kullan</string>
+    
     <string name="search_for">Arama</string>
     <string name="rendering_attr_publicTransportMode_name">Otobüs, troleybüs, mekik yolları</string>
     <string name="rendering_attr_tramTrainRoutes_name">Tramvay ve tren yolları</string>
@@ -2042,10 +2041,10 @@
     <string name="shared_string_read_more">Daha fazla bilgi edinin</string>
     <string name="osmand_plus_extended_description_4000_chars_v2">" OsmAnd haritalar ve navigasyon - harita konumları bulmak ve Internet bağlantısı olmadan güzergah hesaplamak. Yerler ve yolları içinde yabancı bir alan bulmak için bir geziye gitmeden önce bir ülkenin bir harita yükleme. Temel seçenekleri: • detaylı haritalar 200 ülke • çevrimdışı Navigator ses ile ister çevrimdışı modu • bilgi haritada konumları hakkında • adres arama: faiz, kafeterya, otoparklar, Sık Kullanılanlar •, Bisiklet ve yaya sürüş için mağazaları • ekleme konumları yerlerin gezinti ek seçenekleri: • Beceri görüntülemek ve GPX kaydetmek için parça • Wikipedia açıklaması POI • ekleme fotoğraf, ses, ve harita • gündüz ve gece için video notları göster modları için daha uygun sürüş • toplu taşıma hakkında bilgi yönlendirir ve • bisiklet yolları ve patikalar • yürüyüş parkurları turizm Dünya • Online haritalar çok sayıda kaynakları • yol kaldırım kalite ve sokak aydınlatma • hakkında bilgi: her yerinde durur ekleme, düzenleme ve silme OsMo - canlı izleme diğer cihazlar olsun güvenilir bir navigator POI (OpenStreetMap.org kullanıcılar için) • senin ülke - Fransa olmak , Almanya, Meksika, İngiltere, İspanya, Hollanda, ABD, Rusya, Brezilya veya başka bir devlet. Eklentiler: • kontur haritaları ve arazi gölgelendirme https://goo.gl/7mojP8 kontur satır veri ve arazi görselleştirme temel OsmAnd harita ekledi. • Kayak https://goo.gl/pX6DxJ Kayak pistes, Kayak parça, kablo demiryolları ve teleferik hakkında bilgi: eşler. • Deniz harita https://goo.gl/0hEdxm kullan görüntülemek için özel harita stil arter ve nearshore deniz navigasyon için imzalar. • Park pozisyonu https://goo.gl/6JxQXF park edilmiş aracınızın konumunu işaretlemek ve sol ne kadar zaman zaman sınırlı park yeri görmek yardımcı olur. Bizi izlemeye devam edin! Twitter: https://twitter.com/osmandapp Facebook: https://www.facebook.com/osmandapp Site: http://osmand.net OsmAnd uygulama, yardıma ihtiyacınız varsa lütfen destek ekibimizle: support@osmand.net. "</string>
     <string name="show_polygons">Çokgenleri göster</string>
-    <string name="underlay_transparency">Şeffaflık altına koymak</string>
+    
     <string name="find_parking">Bir park yeri bulmak</string>
     <string name="rendering_attr_showMtbRoutes_name">MTB yolları göster</string>
-    <string name="show_map_markers_topbar"/>
+    
     <string name="map_marker_1st">İlk harita işareti</string>
     <string name="map_marker_2nd">İkinci harita işareti</string>
     <string name="shared_string_toolbar">Araç çubuğu</string>

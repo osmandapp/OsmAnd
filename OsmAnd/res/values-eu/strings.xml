@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
   <string name="local_index_tile_data_zooms">Deskargatutako zoomak: %1$s</string>
   <string name="local_index_tile_data_expire">Iraungitze epea (minutuak): %1$s</string>
   <string name="local_index_tile_data_downloadable">Deskargagarria: %1$s</string>
@@ -276,7 +275,7 @@
   <string name="select_navigation_mode">Aukeratu garraio modua</string>
   <string name="day_night_info_description">Egunsentia: %1$s ⏎\nIlunabarra: %2$s</string>
   <string name="day_night_info">Egun/gau info</string>
-  <string name="map_widget_day_night">Egun/gau mapa</string>
+  
   <string name="map_widget_vector_attributes">Errendatze atributuak</string>
   <string name="map_widget_renderer">Mapa estiloa</string>
   
@@ -546,7 +545,7 @@
   <string name="user_name">Zure OSMeko erabiltzailea</string>
   <string name="open_street_map_login_descr">Beharrezkoa openstreetmap.org-eko bidalketentzat</string>
   <string name="user_password">Zure OSMeko pasahitza</string>
-  <string name="user_password_descr">Beharrezkoa openstreetmap.org-eko bidalketentzat</string>
+  
   <string name="osmand_service">Bigarren planoko modua</string>
   <string name="osmand_service_descr">OsmAnd bigarren planoan dabil pantaila itzalia dagoen bitartean</string>
   
@@ -566,7 +565,7 @@
   <string name="init_native_library">Liburutegi natiboa hasieratzen…</string>
   <string name="choose_auto_follow_route">Auto-zentratu mapa ikuspegia</string>
   <string name="choose_auto_follow_route_descr">Denbora mapa ikuspegia uneko kokapenarekin sinkronizatu harte </string>
-  <string name="auto_follow_route_never">Inoiz</string>
+  
   <string name="auto_follow_route_navigation">Auto-zentratu nabigazioa bakarrik</string>
   <string name="auto_follow_route_navigation_descr">Bakarrik nabigatzean auto-zentratu maparen ikuspegia.</string>
   <string name="auto_follow_location_enabled">Auto-zentratu ikuspegia martxan.</string>
@@ -776,7 +775,7 @@
   <string name="reading_cached_tiles">Katxeatutako teselak irakurtzen…</string>
   <string name="version_index_is_big_for_memory">\"{0}\" indizea ez da memorian sartzen</string>
   <string name="version_index_is_not_supported">\"{0}\" indizearen bertsioa ez da onartzen</string>
-  <string name="use_osmand_routing_service">OsmAnd nabigatzailea &gt;20km</string>
+  
   <string name="use_osmand_routing_service_descr">Erabili OsmAnd lineaz kanpoko nabigatzailea, &gt; 20 km ibilbideetan erabili daiteke (esperimentala)</string>
   <string name="osmand_routing_experimental">OsmAnden lineaz kanpoko nabigazioa ezaugarri esperimentala da eta ez du 20 km baina gehiagoko distantziekin lan egiten.⏎\n⏎\nNabigazio zerbitzuak oraingoz sarean dagoen CloudMade zerbitzua erabiltzen du.</string>
   <string name="specified_dir_doesnt_exist">Ezin izan da zehaztutako karpeta aurkitu.</string>
@@ -859,13 +858,13 @@
   <string name="none_region_found">SD txartelan ez dira eskualdeentzako lineaz kanpoko daturik aurkitu. Eskualdeak Internetetik deskargatu.</string>
   <string name="poi_namefinder_query_empty">Bilaketa terminoak sartu POIak aurkitzeko</string>
   <string name="any_poi">Edozein</string>
-  <string name="layer_transport_route">Garraioaren ibilbidea</string>
+  
   <string name="thanks_yandex_traffic">Eskerrak Yandexi trafikoari buruzko informazioagatik.</string>
   <string name="layer_yandex_traffic">Yandex trafikoa</string>
   <string name="layer_route">Ibilbidea</string>
   <string name="shared_string_favorites">Gogokoenak</string>
   <string name="layer_osm_bugs">OSM Oharrak (sarean)</string>
-  <string name="layer_transport">Garraioaren geldialdiak</string>
+  
   <string name="layer_poi">POI…</string>
   <string name="layer_map">Mapa iturburua…</string>
   <string name="menu_layers">Mapa geruzak</string>

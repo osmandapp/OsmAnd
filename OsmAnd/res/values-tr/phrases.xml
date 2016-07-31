@@ -863,7 +863,7 @@
 	<string name="poi_internet_cafe">İnternet kafe</string>
 
 	<string name="poi_bank">Banka</string>
-	<string name="poi_atm">Bankamatik</string>
+	<string name="poi_amenity_atm">Bankamatik</string>
 	<string name="poi_payment_terminal">Ödeme terminali</string>
 	<string name="poi_money_lender">Borç para veren</string>
 	<string name="poi_pawnbroker">Tefeci</string>

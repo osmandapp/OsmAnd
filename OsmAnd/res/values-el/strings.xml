@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
     <string name="add_tag">Προσθήκη Ετικέτας</string>
     <string name="btn_advanced_mode">Λειτουργία για προχωρημένους…</string>
     <string name="poi_filter_parking">Στάθμευση</string>
@@ -36,7 +35,7 @@
 	
 	<string name="day_night_info_description">Ανατολή : %1$s \nΔύση : %2$s</string>
 	<string name="day_night_info">Πληρ. Ημέρας/Νύχτας</string>
-	<string name="map_widget_day_night">Χάρτης ημέρας/νύχτας</string>
+	
 	<string name="map_widget_vector_attributes">Χαρακτηριστικά απεικόνισης</string>
 	<string name="map_widget_renderer">Στυλ χάρτη</string>
 	
@@ -310,7 +309,7 @@
 	<string name="user_name">Όνομα χρήστη OSM</string>
 	<string name="open_street_map_login_descr">Απαιτείται για υποβολές στο openstreetmap.org</string>
 	<string name="user_password">Κωδικός OSM</string>
-	<string name="user_password_descr">Απαιτείται για υποβολές στο openstreetmap.org</string>
+	
 	<string name="osmand_service">Κατάσταση νάρκης</string>
 	<string name="osmand_service_descr">Χρησιμοποιήστε το για να εκτελείται ο OsmAnd ενώ η οθόνη είναι απενεργοποιημένη</string>
 	
@@ -330,7 +329,7 @@
 	<string name="init_native_library">Αρχικοποίηση εγγενούς βιβλιοθήκης…</string>
 	<string name="choose_auto_follow_route">Αυτο-κεντράρισμα όψης χάρτη</string>
 	<string name="choose_auto_follow_route_descr">Χρόνος μέχρι η οπτική του χάρτη συγχρονιστεί με την τρέχουσα θέση</string>
-	<string name="auto_follow_route_never">Ποτέ (Πατήστε το μπλε βέλος για να αρχίσει η καθοδήγηση χειροκίνητα)</string>
+	
 	<string name="auto_follow_route_navigation">Αυτο-κεντράρισμα μόνο κατά την πλοήγηση</string>
 	<string name="auto_follow_route_navigation_descr">Αυτο-κεντραρισμένη οπτική χάρτη μόνο κατά την πλοήγηση.</string>
 	<string name="auto_follow_location_enabled">Αυτο-κεντράρισμα χάρτη σε χρήση.</string>
@@ -534,7 +533,7 @@
 	<string name="reading_cached_tiles">Ανάγνωση αποθηκευμένων πλακιδίων…</string>
 	<string name="version_index_is_big_for_memory">Το ευρετήριο \'\'{0}\'\' δεν χωράει στη μνήμη</string>
 	<string name="version_index_is_not_supported">Η εκδοχή \'\'{0}\'\' του ευρετηρίου δεν υποστηρίζεται</string>
-	<string name="use_osmand_routing_service">Πλοήγηση OsmAnd &gt;20χλμ</string>
+	
 	<string name="use_osmand_routing_service_descr">Χρήση της εκτός σύνδεσης πλοήγησης του OsmAnd ισχύει μόνο για διαδρομές &gt; 20 χλμ (πειραματικό)</string>
 	<string name="osmand_routing_experimental">Η πλοήγηση εκτός δικτύου OsmAnd είναι μια πειραματική λειτουργία και δε λειτουργεί για αποστάσεις άνω των 20 χλμ.\n\nΗ υπηρεσία πλοήγησης έχει προσωρινά αλλάξει στην δικτυακή CloudMade.</string>
 	<string name="specified_dir_doesnt_exist">Δεν μπορώ να βρω τον καθορισμένο φάκελο.</string>
@@ -617,12 +616,12 @@
 	<string name="none_region_found">Δεν υπάρχουν offline δεδομένα περιοχών στην κάρτα SD. Λήψη περιοχών από το Διαδίκτυο.</string>
 	<string name="poi_namefinder_query_empty">Εισάγετε ερώτημα αναζήτησης για να βρείτε ΣΕ</string>
 	<string name="any_poi">Οποιοδήποτε</string>
-	<string name="layer_transport_route">Δρομολόγιο ΜΜΜ</string>
+	
 	<string name="thanks_yandex_traffic">Ευχαριστούμε τη Yandex για τις πληροφορίες κυκλοφορίας.</string>
 	<string name="layer_yandex_traffic">Κυκλοφορία Yandex</string>
 	<string name="layer_route">Διαδρομή</string>
 	<string name="layer_osm_bugs">Σημειώσεις OSM (σε σύνδεση)</string>
-	<string name="layer_transport">Στάσεις ΜΜΜ</string>
+	
 	<string name="layer_poi">Σημ Ενδ…</string>
 	<string name="layer_map">Πηγή χάρτη…</string>
 	<string name="menu_layers">Επίπεδα χάρτη</string>
@@ -1455,7 +1454,7 @@
     <string name="download_tab_local">Τοπικά</string>
 	<string name="no_internet_connection">Αδύνατη η λήψη, Παρακαλώ ελέγξτε τη σύνδεση στο Διαδίκτυο.</string>
     <string name="everything_up_to_date">Όλα τα αρχεία είναι ενημερωμένα</string>
-    <string name="osmo_use_https">Χρήση HTTPS</string>
+    
 	<string name="map_update">Υπάρχουν ενημερώσεις για %1$s χάρτες</string>
 	<string name="search_for">Αναζήτηση για</string>
 	<string name="coordinates">Συντεταγμένες</string>
@@ -1480,7 +1479,7 @@
     
     <string name="navigate_point_zone">Ζώνη</string>
     <string name="error_avoid_specific_road">Δεν βρέθηκε παράκαμψη</string>
-    <string name="osmo_use_https_descr">Χρήση ασφαλούς σύνδεσης με τον διακομιστή</string>
+    
     
 	<string name="wake_on_voice">Άναμμα οθόνης</string>
     <string name="map_widget_appearance_rem">Εναπομείναντα στοιχεία</string>

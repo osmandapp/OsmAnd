@@ -507,7 +507,7 @@
         <string name="poi_internet_cafe">Internet cafe</string>
 
         <string name="poi_bank">Bank</string>
-        <string name="poi_atm">Hæveautomat</string>
+        <string name="poi_amenity_atm">Hæveautomat</string>
         <string name="poi_money_lender">Pengeudlåner</string>
         <string name="poi_pawnbroker">Pantelåner</string>
         <string name="poi_bureau_de_change">Vekselkontor</string>
