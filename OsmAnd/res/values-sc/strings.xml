@@ -632,9 +632,11 @@ Boles protzèdere cun una registratzione noa?</string>
 
  Calicuna de sas caraterìsticas printzipales:
  - Funtzionalidade cumprida chene lìnia (Sarba sas mapas vetoriales o a tasseddos in sa memòria de su dispositivu)
- - Mapas chene lìnia cumpatas iscarrigàbiles pro totu su mundu - Iscarrigamentu de sas mapas de regiones o istados diretamente dae sa mapa
+ - Mapas chene lìnia cumpatas iscarrigàbiles pro totu su mundu
+ - Iscarrigamentu de sas mapas de regiones o istados diretamente dae sa mapa
  - Possibilidade de subrapositzione de istratos diferentes, comente rastas GPX o de nàvigu, puntos de interesse, preferidos, curvas de livellu, firmadas de sos trasportos pùblicos, mapas annangàbiles cun trasparentzia pessonalizàbile
- - Chirca chene lìnia pro indiritzos e locos (PDI) - Càlculu de s’àndala pro distàntzias curtzas (isperimentale)
+ - Chirca chene lìnia pro indiritzos e locos (PDI)
+ - Càlculu de s’àndala pro distàntzias mèdias
  - Modalidades màchina, bitzicleta, e pedone cun:
  - Muda automàtica optzionale de sa vista die/note
  - Ismanniamentu automàticu optzionale regoladu dae sa lestresa
@@ -737,7 +739,7 @@ Calicuna de sas funtziones printzipales:
  - Funtzionalidade chene lìnia de Wikipedia (isgàrriga PDI Wikipedia), òtima pro giros turìsticos
  - Possibilidade de subrapònnere istratos diferentes de mapas, comente rastas GPX o de nàvigu, Puntos De Interesse, preferidos, lìnias de livellu, firmadas de sos trasportos pùblicos, mapas additzionales cun trasparèntzia pessonalizzàbile
  - Chirca chene lìnia pro indiritzos e logos (PDI)
- - Càlculu de s’àndala chene lìnia pro distàntzias curtzas (isperimentale)
+ - Càlculu de s’àndala chene lìnia pro distàntzias mèdias
  - Modalidades in màchina, bitzicleta, e a pedes cun:
  - muda automàtica optzionale de sa vista die/note
  - Ismanniamentu automàticu optzionale regoladu dae sa lestresa
@@ -2514,6 +2516,9 @@ Como bi sunt {2} MB ebbia disponìbiles.</string>
  • Boghe de ghia, interfàtzia vocale e indicatziones de bortada megioradas
 
 
+ • Istradu de sos trasportos pùblicos megioradu
+
+
  • Medas limbas noas e como fintzas su suportu pro limbas regionales agiuntos
 
 
@@ -2522,4 +2527,5 @@ Como bi sunt {2} MB ebbia disponìbiles.</string>
 
  e àteru…
  "</string>
+    <string name="route_stops_before">%1$s firmadas in antis</string>
     </resources>
