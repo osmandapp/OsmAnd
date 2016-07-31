@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
 
     <string name="recording_context_menu_show">Zobraziť</string>
     <string name="recording_photo_description">Fotografia %1$s %2$s</string>
@@ -825,7 +826,7 @@ Niektoré z hlavných funkcií:
  - Kompaktné offline vektorové mapy pre celý svet - Stiahnutie máp pre krajinu alebo región priamo z aplikácie
  - Možné prekrytia niekoľkých mapových vrstiev ako GPX alebo navigačná trasa, body záujmu, obľúbené, vrstevnice, zastávky hromadnej dopravy, ďalšie mapy s prispôsobiteľnou priehľadnosťou
  - Offline vyhľadávanie adries a miest (POI)
- - Offline smerovania pre krátke vzdialenosti (experimentálne)
+ - Offline smerovanie (navigácia) pre stredné vzdialenosti
  - Režimy pre auto, bicykel a chodcov s:
  - voliteľným/automatickým denným / nočným režimom
  - voliteľné približovanie mapy v závislosti na rýchlosti
@@ -851,7 +852,7 @@ Niektoré z hlavných funkcií:
  - Neobmedzené sťahovanie máp krajín a regiónov priamo z aplikácie
  - Možné prekrytia niekoľkých mapových vrstiev ako GPX alebo navigačná trasa, body záujmu, obľúbené, vrstevnice, zastávky hromadnej dopravy, ďalšie mapy s prispôsobiteľnou priehľadnosťou
  - Offline vyhľadávanie adries a miest (POI)
- - Offline smerovanie pre krátke vzdialenosti (experimentálne)
+ - Offline smerovanie (navigácia) na stredné vzdialenosti
  - Režimy pre auto, bicykel a chodcov s:
  - voliteľným/automatickým denným / nočným režimom
  - voliteľné približovanie mapy v závislosti na rýchlosti
@@ -2372,6 +2373,9 @@ Ak potrebuje pomoc s aplikáciou OsmAnd, kontaktuje podporu: support@osmand.net.
 
 
  • Vylepšená hlasová navigácia a indikácia jazdných pruhov
+
+
+ • Vylepšená vrstva hromadnej dopravy
 
 
  • Pridané ďalšie jazykové a regionálne verzie
