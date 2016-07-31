@@ -1769,7 +1769,7 @@ Kaj la loko kaj tempo estas montrataj ĉe la OsmAnd stirpanelo, kaj ĉe la fenes
     <string name="version_index_is_big_for_memory">La indekso \"{0}\" ne povas esti enspacata en memorejo</string>
     <string name="version_index_is_not_supported">La indeks-versio \"{0}\" ne estas subtenata</string>
     
-    <string name="use_osmand_routing_service_descr">Uzas OsmAnd eksterretan navigadon por kursoj &gt; 20 km (iafoje malfunkcias)</string>
+    
     <string name="osmand_routing_experimental">OsmAnd eksterreta navigado estas testa eco kaj ĝi ne funkcias por distancoj pli grandaj ol 20 km.\n\nProvizore estas uzata enreta servo CloudMade.</string>
     <string name="specified_dir_doesnt_exist">Ne povis trovi la elektitan dosierujon.</string>
 

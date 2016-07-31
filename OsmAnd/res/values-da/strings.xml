@@ -796,7 +796,7 @@ Nogle af de centrale funktioner:
     <string name="version_index_is_big_for_memory">Ikke nok hukommelse for indeks \'{0}\'</string>
     <string name="version_index_is_not_supported">Versionen af indeks \'{0}\' er ikke understøttet</string>
     
-    <string name="use_osmand_routing_service_descr">Brug af OsmAnd offline navigation gælder kun ruter &gt; 20 km (eksperimentel)</string>
+    
     <string name="specified_dir_doesnt_exist">Kan ikke finde den angivne mappe.</string>
     <string name="application_dir">Datalagringsmappe</string>
     <string name="build_installed">Version {0} korrekt installeret ({1}).</string>
@@ -1730,7 +1730,7 @@ Optagede spor kan deles med venner eller anvendes til OSM bidrag. Sportsfolk kan
     <string name="lock_screen_request_explanation">%1$s behøver denne tilladelse til at slukke for skærmen for strømbesparende funktion.</string>
 
     
-    <string name="osmo_use_https">Brug HTTPS</string>
+    
     <string name="home_button">Hjem</string>
     <string name="search_for">Søg efter</string>
 

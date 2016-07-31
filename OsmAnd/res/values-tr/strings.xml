@@ -1581,7 +1581,7 @@
 	<string name="rotate_map_to_bearing">Harita yönlendirme</string>
 	<string name="version_index_is_not_supported">Endeksin versiyonu \'\' {0} \'desteklenmiyor</string>
 	
-	<string name="use_osmand_routing_service_descr">Kullanım Osmand çevrimdışı gezinme yolları için geçerlidir&gt; 20 km (deneysel)</string>
+	
 	<string name="osmand_routing_experimental">Osmand çevrimdışı gezinme deneysel bir özelliktir ve daha yaklaşık 20 km\'lik mesafelerde çalışmıyor.\n\nNavigasyon hizmeti geçici olarak çevrimiçi CloudMade geçer.</string>
 	<string name="install_selected_build">Eğer Osmand yüklemek istiyor musunuz - {0} {1} {2} MB?</string>
 	<string name="tiles_to_download_estimated_size">Yakınlaştırma {0} indirmek {1} fayans ({2} MB)</string>

@@ -758,7 +758,7 @@
 	<string name="version_index_is_big_for_memory">Недастаткова памяці для лякальнай мапы \'\'{0}\'\'</string>
 	<string name="version_index_is_not_supported">Версія індэкса \'\'{0}\'\' не падтрымліваецца</string>
 	
-	<string name="use_osmand_routing_service_descr">Выкарыстоўваць аўтаномную OsmAnd навігацыю на адлегласьці &gt; 20 км (экспэрыментальная)</string>
+	
 	<string name="osmand_routing_experimental">Аўтаномная навігацыя OsmAnd зьяўляецца экспэрыментальнай і не працуе на адлегласьцях больш за 20 км.\n\nУ гэтым выпадку для пракладкі маршруту выкарыстоўваецца онлайн сэрвіс CloudMade.</string>
 	<string name="specified_dir_doesnt_exist">Указаны каталог не знойдзены.</string>
 	<string name="application_dir">Каталёг захоўваньня зьвестак</string>
@@ -1536,7 +1536,7 @@
     <string name="lock_screen_request_explanation">%1$s патрабуе дазвол на выключэньне экрану для энергазберажэньня.</string>
     
 	
-    <string name="osmo_use_https">Выкарыстоўваць HTTPS</string>
+    
 	<string name="home_button">Дамоў</string>
     <string name="map_update">Ёсьць абнаўленьні для %1$s мапаў</string>
 	<string name="search_for">Шукаць</string>

@@ -734,7 +734,7 @@
     <string name="version_index_is_big_for_memory">Индексът \'\'{0}\'\' не се побира в паметта</string>
     <string name="version_index_is_not_supported">Версията на индекса \'\'{0}\'\' не се поддържа</string>
     
-    <string name="use_osmand_routing_service_descr">Ползвайте офлайн навигацията OsmAnd за дистанции &gt; 20 km (пробна версия)</string>
+    
     <string name="osmand_routing_experimental">Офлайн навигацията на OsmAnd е пробна версия и не работи пълноценно на дистанции по-големи от 20км.\n\nУслугата за навигация временно е превключена на онлайн от CloudMade.</string>
     <string name="specified_dir_doesnt_exist">Посочената папка не може да бъде намерена.</string>
     <string name="application_dir">Папка за данни</string>
@@ -1519,7 +1519,7 @@
     <string name="error_avoid_specific_road">Няма намерен заобиколен път</string>
     <string name="home_button">Начало</string>
     
-    <string name="osmo_use_https">Използване на HTTPS</string>
+    
     <string name="coordinates">Координати</string>
     <string name="anonymous_user_hint">"Анонимен потребител не може  да:\n-създава групи;\n-синхронизира групи и устройства със сървъра;\n-управлява групи и устройства в частен режим."</string>
     <string name="anonymous_user">Анонимен потребител</string>

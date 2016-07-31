@@ -1381,7 +1381,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="use_opengl_render">استخدام OpenGL للتقديم</string>
     <string name="use_opengl_render_descr">"استخدام أداء OpenGL  مسرع (قد لا تعمل على بعض الأجهزة)"</string>
     
-    <string name="osmo_use_https">استخدام HTTPS</string>
+    
 	<string name="map_update">التحديثات متوفرة لـ %1$s من الخرائط</string>
 	<string name="search_for">البحث عن</string>
 	<string name="coordinates">إحداثيات</string>

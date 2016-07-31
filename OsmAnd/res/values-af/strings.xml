@@ -456,7 +456,7 @@
   <string name="version_index_is_big_for_memory">Die indeks \"{0}\" pas nie in die geheue nie</string>
   <string name="version_index_is_not_supported">Die weergawe van indeks \"{0}\'\' word nie ondersteun nie</string>
   
-  <string name="use_osmand_routing_service_descr">Gebruik OsmAnd aflyn navigasie diens van toepassing slegs op roetes &gt; 20 km (eksperimenteel)</string>
+  
   <string name="osmand_routing_experimental">OsmAnd aflyn navigasie diens is \'n eksperimentele funksie en dit werk nie vir afstande van meer as ongeveer 20 km nie.\n\nNavigasie diens is tydelik oorgeskakel na aanlyn CloudMade.</string>
   <string name="specified_dir_doesnt_exist">Kan nie daardie adres vind nie.</string>
   <string name="application_dir">Bergingsadres</string>

@@ -526,7 +526,7 @@ För tillfället finns det {2} MB ledigt.</string>
     <string name="version_index_is_big_for_memory">Index \"{0}\" fick inte plats i minnet</string>
     <string name="version_index_is_not_supported">Denna version av indexet \"{0}\" stöds inte</string>
     
-    <string name="use_osmand_routing_service_descr">Använd OsmAnd offline navigering gäller endast rutter &gt;20 km (experimentell)</string>
+    
     <string name="specified_dir_doesnt_exist">Kan inte hitta den angivna mappen.</string>
 
     <string name="context_menu_item_last_intermediate_point">Lägg till som sista mellanliggande destination</string>
@@ -1547,7 +1547,7 @@ Vill du fortsätta med en ny registrering?</string>
     <string name="wake_on_voice_descr">Slå på skärmen (om den är av) när jag närmar mig en sväng</string>
     <string name="lock_screen_request_explanation">%1$s behöver denna tillåtelse för att stänga av skärmen för strömsparningsfunktionen.</string>
     
-    <string name="osmo_use_https_descr">Använd säker anslutning till servern</string>
+    
     <string name="home_button">Hem</string>
     <string name="search_for">Sök efter</string>
 

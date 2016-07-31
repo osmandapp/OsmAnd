@@ -561,7 +561,7 @@
     <string name="version_index_is_big_for_memory">索引 \'\'{0}\'\' 不存在</string>
     <string name="version_index_is_not_supported">這版本的 \'\'{0}\'\' 索引不支援</string>
     
-    <string name="use_osmand_routing_service_descr">使用 OsmAnd 離線導航僅適用于路線 &gt; 20 公里(實驗性的)</string>
+    
     <string name="osmand_routing_experimental">OsmAnd 離線導航是個實驗性的功能，它不能運作超過 20 公里的距離。\n\n導航服務暫時切為線上的 CloudMade。</string>
     <string name="specified_dir_doesnt_exist">找不到指定的資料夾。</string>
     <string name="application_dir">資料存儲器資料夾</string>
@@ -1729,7 +1729,7 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="wake_on_voice_descr">當接近轉彎時，開啟裝置螢幕 (螢幕關閉時)</string>
     <string name="lock_screen_request_explanation">為了節電作用 %1$s 需要此許可權才能關閉螢幕。</string>
     
-    <string name="osmo_use_https">使用 HTTPS</string>
+    
     <string name="map_update">有 %1$s 個地圖可更新</string>
     <string name="search_for">查詢</string>
 

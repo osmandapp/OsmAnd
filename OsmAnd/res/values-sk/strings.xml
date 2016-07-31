@@ -379,7 +379,7 @@ Dlaždicové mapy môžete získať priamo zo zdrojov na Internete, alebo ich m�
     <string name="version_index_is_big_for_memory">Index "{0}" sa nezmestil do pamäte</string>
     <string name="version_index_is_not_supported">Verzia indexu "{0}" nie je podporovaná</string>
     
-    <string name="use_osmand_routing_service_descr">Použitie offline navigácie na dlhé vzdialenosti (experimentálne) namiesto CloudMade</string>
+    
     <string name="osmand_routing_experimental">OsmAnd offline navigácia je experimentálna funkcia a nefunguje na vzdialenosť väčšiu ako 20 km.\n\nNavigačná služba je dočasne prepnutá na online CloudMade.</string>
     <string name="specified_dir_doesnt_exist">Nedá sa nájsť zadaný priečinok.</string>
     <string name="application_dir">Priečinok na ukladanie dát</string>
@@ -1592,7 +1592,7 @@ Zaznamenané stopy môžete zdieľať s priateľmi alebo odoslať ako príspevok
     <string name="rendering_category_hide">Skryť</string>
     <string name="lock_screen_request_explanation">%1$s potrebuje toto oprávnenie na vypnutie obrazovky pre šetrenie energiou.</string>
     
-    <string name="osmo_use_https">Použiť HTTPS</string>
+    
     <string name="home_button">Domov</string>
     <string name="search_for">Hľadať</string>
     <string name="coordinates">Súradnice</string>

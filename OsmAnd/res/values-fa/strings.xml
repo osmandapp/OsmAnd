@@ -1011,7 +1011,7 @@
 	<string name="version_index_is_big_for_memory">ایندکس \'{0}\' در حافظه جای نگرفت</string>
 	<string name="version_index_is_not_supported">نسخه ایندکس \'{0}\' پشتیبانی نمیشود</string>
 	
-	<string name="use_osmand_routing_service_descr">استفاده از مسیریابی آفلاین OsmAnd تنها در مسیرهای بیش از ۲۰ کیلومتر کاربرد دارد (آزمایشی)</string>
+	
 	<string name="osmand_routing_experimental">مسیریابی آفلاین OsmAnd یک ویژگی آزمایشی است که برای مسیرهای بیش از بیست کیلومتر کارآیی ندارد.\n\nسرویس مسیریابی موقتاْ به سرویس آنلاین CloudMade منتقل شد.</string>
 	<string name="specified_dir_doesnt_exist">پوشه مورد نظر پیدا نشد.</string>
 	
@@ -1780,7 +1780,7 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
     <string name="everything_up_to_date">همه فایلها به روز میباشند</string>
     <string name="home_button">خانه</string>
     
-    <string name="osmo_use_https">استفاده از پروتکل HTTPS</string>
+    
 	
 	<string name="error_avoid_specific_road">مسیر میانبر یافت نشد</string>
     <string name="map_update">به روز زسانی برای %1$s نقشه وجود دارد</string>

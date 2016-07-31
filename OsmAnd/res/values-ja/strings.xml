@@ -148,7 +148,7 @@
      <string name="version_index_is_not_supported">\'\'{0}\'\' は、このバージョンではサポートされていません</string>
 
      
-     <string name="use_osmand_routing_service_descr">長距離のオフライン経路案内に OsmAndを使用します(実験版)</string>
+     
      <string name="osmand_routing_experimental">OsmAndオフライン経路案内は実験的な機能であり
 20km以上の距離では動作しません。
 \n\n経路案内サービスはオンラインのCloudMadeに自動的に切り替わります。</string>
@@ -1658,7 +1658,7 @@ POIの更新は利用できません</string>
     <string name="text_size_descr">マップ上の文字サイズを設定します。</string>
     <string name="text_size">文字サイズ</string>
     
-    <string name="osmo_use_https">HTTPSを使用</string>
+    
 	
 	<string name="rendering_attr_tramTrainRoutes_name">路面電車や鉄道での経路</string>
 	<string name="lock_screen_request_explanation">省電力機能で画面をオフにするには%1$s の権限が必要です。</string>

@@ -788,7 +788,7 @@
   <string name="add_waypoint_dialog_title">Acrescentar ponto à trilha GPX gravada</string>
   <string name="context_menu_item_add_waypoint">Acrescentar ponto GPX</string>
   
-  <string name="use_osmand_routing_service_descr">Navegação OsmAnd offline aplica-se apenas a rotas &gt; 20 km (experimental)</string>
+  
   <string name="osmand_routing_experimental">Navegação offline OamAnd é ainda uma função experimental e não funciona em distâncias superiores a cerca de 20 km.\n\nO Serviço Navegação está temporariamente mudado para CloudMade online.</string>
   <string name="specified_dir_doesnt_exist">Não foi possível encontrar diretório especificado.</string>
   <string name="application_dir">Local de armazenamento</string>

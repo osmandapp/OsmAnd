@@ -212,7 +212,7 @@
     <string name="version_index_is_big_for_memory">Index\'\'{0}\'\' nie zmieścił się w pamięci</string>
     <string name="version_index_is_not_supported">Wersja indeksu \'\'{0}\'\' nie jest wspierana</string>
     
-    <string name="use_osmand_routing_service_descr">Użycie routingu offline dla długich tras działa tylko dla tras &gt; 20 km (funkcjonalność eksperymentalna)</string>
+    
     <string name="osmand_routing_experimental">Nawigacja offline w OsmAnd jest funkcją eksperymentalną i nie działa dla odległości większych niż 20 km.\n\nUsługa nawigacji została tymczasowo przełączona na CloudMade (online).</string>
     <string name="specified_dir_doesnt_exist">Nie mogę odnaleźć wskazanego katalogu.</string>
     <string name="application_dir">Katalog przechowywania danych</string>
@@ -1723,7 +1723,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="lock_screen_request_explanation">%1$s potrzebuje uprawnień do wyłączenia ekranu dla funkcji oszczędzania energii.</string>
     <string name="shared_string_never">Nigdy</string>
     
-    <string name="osmo_use_https">Użyj HTTPS</string>
+    
 
     <string name="home_button">Ekran startowy</string>
     <string name="map_update">Dostępne aktualizacje dla %1$s map</string>

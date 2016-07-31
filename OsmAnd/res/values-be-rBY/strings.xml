@@ -31,7 +31,7 @@
     <string name="error_avoid_specific_road">Abjezd nie znojdzieny</string>
     <string name="home_button">Damoŭ</string>
     
-    <string name="osmo_use_https">Vykarystoŭvać HTTPS</string>
+    
 	
 	<string name="map_update">Jość abnaŭleńnі dla %1$s mapaŭ</string>
 	<string name="search_for">Šukać</string>
@@ -1212,7 +1212,7 @@
 	<string name="version_index_is_big_for_memory">Niedastatkova pamiacі dla lakalnaj mapy \'\'{0}\'\'</string>
 	<string name="version_index_is_not_supported">Viersіja іndeksa \'\'{0}\'\' nie padtrymlivajecca</string>
 	
-	<string name="use_osmand_routing_service_descr">Vykarystoŭvać aŭtanomnuju OsmAnd navіhacyju na adlehłaścі &gt; 20 km (eksperymientalnaja)</string>
+	
 	<string name="osmand_routing_experimental">Aŭtanomnaja navіhacyja OsmAnd źjaŭlajecca eksperymientalnaj і nie pracuje na adlehłaściach bolš za 20 km.\n\nU hetym vypadku dla prakładkі maršrutu vykarystoŭvajecca onłajn servіs CloudMade.</string>
 	<string name="specified_dir_doesnt_exist">Ukazany katałoh nie znojdzieny.</string>
 	<string name="application_dir">Kataloh zachoŭvańnia źviestak</string>

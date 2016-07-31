@@ -376,7 +376,7 @@ Er is nu {2} MB beschikbaar.</string>
   <string name="version_index_is_big_for_memory">De index \'\'{0}\'\' past niet in het geheugen</string>
   <string name="version_index_is_not_supported">De versie van index \'\'{0}\'\' wordt niet ondersteund</string>
   
-  <string name="use_osmand_routing_service_descr">Gebruik OsmAnd offline routing voor lange afstanden (&gt; 20 km, experimenteel)</string>
+  
   <string name="osmand_routing_experimental">OsmAnd offline routing is een experimentele functie en werkt niet voor afstanden van meer dan ongeveer 20 km.\n\nRouting service is tijdelijk omgeschakeld naar online CloudMade.</string>
   <string name="specified_dir_doesnt_exist">Kan de opgegeven map niet vinden.</string>
   <string name="application_dir">Opslagmap</string>
@@ -1797,7 +1797,7 @@ Opgenomen tracks kunnen worden gedeeld met vrienden of worden gebruikt als OSM-b
     <string name="lock_screen_request_explanation">%1$s heeft toestemming nodig om het scherm uit te kunnen schakelen (als onderdeel van de stroombesparende functie).</string>
     
 	
-    <string name="osmo_use_https">Gebruik HTTPS</string>
+    
 	<string name="home_button">Beginscherm</string>
     <string name="search_for">Zoek naar</string>
 	

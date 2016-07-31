@@ -259,7 +259,7 @@
     <string name="version_index_is_big_for_memory">L\'indice \'\'{0}\'\' è troppo grande per l\'attuale memoria</string>
     <string name="version_index_is_not_supported">La versione dell\'indice \'\'{0}\'\' non è supportata</string>
     
-    <string name="use_osmand_routing_service_descr">L\'uso della navigazione offline OsmAnd si applica solo alle rotte&gt; 20 km (sperimentale)</string>
+    
     <string name="osmand_routing_experimental">Il routing offline di OsmAnd è sperimentale e non funziona per distanze superiori ai 20 km.\n\nIl servizio routing viene fornito temporaneamente tramite CloudMade online.</string>
     <string name="specified_dir_doesnt_exist">Impossibile trovare la cartella specificata.</string>
     <string name="application_dir">Cartella salvataggio dati</string>
@@ -1567,7 +1567,7 @@
     <string name="lock_screen_request_explanation">%1$s necessita di questa autorizzazione per spegnere lo schermo per la funzionalità di risparmio energetico.</string>
 
     
-    <string name="osmo_use_https_descr">Usa la connessione sicura al server</string>
+    
     <string name="coordinates">Coordinate</string>
     <string name="home_button">Schermata iniziale</string>
     <string name="map_update">Ci sono aggiornamenti per %1$s mappe</string>

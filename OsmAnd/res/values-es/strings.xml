@@ -267,7 +267,7 @@
     <string name="version_index_is_big_for_memory">La versión \'\'{0}\'\' de índices no cabe en memoria</string>
     <string name="version_index_is_not_supported">No se soporta la versión \'\'{0}\'\' de índices</string>
     
-    <string name="use_osmand_routing_service_descr">El uso de la navegación sin conexión de OsmAnd, se aplica solo a rutas mayores a 20 km (experimental)</string>
+    
     <string name="osmand_routing_experimental">La navegación sin conexión de OsmAnd, es una característica experimental y no funciona para distancias mayores a 20 km.\n\nEl servicio de navegación, se cambió temporalmente al servicio en línea CloudMade.</string>
     <string name="specified_dir_doesnt_exist">No se puede encontrar la carpeta especificada.</string>
     <string name="application_dir">Carpeta de almacenamiento de datos</string>
@@ -1588,7 +1588,7 @@ Puede encontrar la localización y el tiempo de estacionamiento en la tarjeta de
     <string name="lock_screen_request_explanation">%1$s necesita este permiso para apagar la pantalla para la característica de ahorro energético.</string>
     <string name="shared_string_never">Nunca</string>
     
-    <string name="osmo_use_https">Utilizar HTTPS</string>
+    
     <string name="home_button">Inicio</string>
     <string name="map_update">Actualizaciones disponibles para %1$s mapa(s)</string>
     <string name="search_for">Buscar por</string>

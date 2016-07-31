@@ -229,7 +229,7 @@
     <string name="use_opengl_render_descr">Usar aceleração de hardware OpenGL para renderização (talvez não funcione em alguns aparelhos)</string>
     <string name="error_avoid_specific_road">Nenhum desvio encontrado</string>
     
-    <string name="osmo_use_https">Usar HTTPS</string>
+    
 	<string name="search_for">Pesquisar por</string>
 	<string name="coordinates">Coordenadas</string>
 	<string name="rendering_attr_publicTransportMode_name">Rotas de ônibus e trólebus</string>
@@ -1360,7 +1360,7 @@
 	<string name="version_index_is_big_for_memory">O índice \'\'{0}\'\' não coube na memória</string>
 	<string name="version_index_is_not_supported">A versão do índice \'\'{0}\'\' não é suportada</string>
 	
-	<string name="use_osmand_routing_service_descr">Navegação OsmAnd off-line aplica-se apenas a rotas &gt;20 km (experimental)</string>
+	
 	<string name="osmand_routing_experimental">Navegação OsmAnd off-line é ainda uma função experimental e não funciona em distâncias superiores a cerca de 20 km.\n\nO serviço de navegação está temporariamente mudado para CloudMade on-line.</string>
 	<string name="specified_dir_doesnt_exist">Não se pode encontrar o diretório especificado.</string>
 	

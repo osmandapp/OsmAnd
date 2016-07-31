@@ -575,7 +575,7 @@
 	<string name="version_index_is_big_for_memory">Indexul hărții \'\'{0}\'\' nu are loc în memorie</string>
 	<string name="version_index_is_not_supported">Această versiune a indexului hărții \'\'{0}\'\' nu este suportată</string>
 	
-	<string name="use_osmand_routing_service_descr">Folosește navigarea OsmAnd offline doar pentru rute &gt; 20 km (experimental)</string>
+	
 	<string name="osmand_routing_experimental">Navigarea OsmAnd offline este experimentală și nu funcționează pe distanțe mai mari de circa 20 km.\n\nServiciul de navigare este momentan comutat pe CloudMade online.</string>
 	<string name="specified_dir_doesnt_exist">Nu pot găsi directorul specificat.</string>
 	<string name="application_dir">Directorul pentru stocare date</string>
@@ -1375,7 +1375,7 @@
     <string name="everything_up_to_date">Toate fişierele actualizate</string>
     <string name="use_opengl_render">Utilizaţi redare OpenGL</string>
     
-    <string name="osmo_use_https">Utilizează HTTPS</string>
+    
 	
 	<string name="map_update">Actualizări disponibile pentru %1$s hărţi</string>
 	<string name="search_for">Căutare pentru</string>

@@ -406,7 +406,7 @@
   <string name="version_index_is_big_for_memory">ინდექსი \'\'{0}\'\' არ ეტევა მეხსიერებაში</string>
   <string name="version_index_is_not_supported">ინდექსის ვერსიის \'\'{0}\'\' მხარდაჭერა არ არსებობს</string>
   
-  <string name="use_osmand_routing_service_descr">OsmAnd-ის გათიშული ნავიგაცია მუშაობს მხოლოდ გზებზე რომლებიც &gt; 20 კმ (საცდელი)</string>
+  
   <string name="osmand_routing_experimental">OsmAnd-ის გათიშული ნავიგაცია არის საცდელი თვისება რომებიც არ მუშაობს 20 კმ-ზე მეტი მანძილებისათვის.\n\nნავიგაციის სერვისი დროებით გადართულია მიმდინარე სერვისზე CloudMade.</string>
   <string name="specified_dir_doesnt_exist">შეუძლებელია მითითებული დასტის პოვნა.</string>
   <string name="application_dir">შესანახი დასტა</string>

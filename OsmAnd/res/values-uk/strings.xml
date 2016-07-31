@@ -420,7 +420,7 @@
   <string name="version_index_is_big_for_memory">Недостатньо пам’яті для локальної мапи \'\'{0}\'\'</string>
   <string name="version_index_is_not_supported">Версія локальної мапи \'\'{0}\'\' не підтримується</string>
   
-  <string name="use_osmand_routing_service_descr">Використовувати OsmAnd оффлайн навігацію на відстані &gt; 20 км (експериментально)</string>
+  
   <string name="osmand_routing_experimental">OsmAnd оффлайн навігація є експериментальною і не працює на відстанях &gt; 20 км\n\nВ цьому випадку для прокладання маршруту використовуйте онлайн сервіс CloudMade.</string>
   <string name="specified_dir_doesnt_exist">Неможливо знайти вказану теку.</string>
   <string name="application_dir">Тека даних</string>
@@ -1716,7 +1716,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
 	<string name="home_button">До початку</string>
     
 	
-    <string name="osmo_use_https">Використовувати HTTPS</string>
+    
 	
 	<string name="map_update">Наявні оновлення для %1$s мап</string>
 	<string name="search_for">Шукати</string>

@@ -719,7 +719,7 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="transport_searching_route">Resultats de transport ({0} al destí):</string>
     <string name="map_route_by_gpx">Navega utilitzant un GPX</string>
     
-    <string name="layer_transport">Parades de transport</string>
+    
     <string name="voice_data_unavailable">Les dades de veu seleccionades no estan disponibles</string>
     <string name="search_poi_location">Cercant senyal…</string>
     <string name="opening_hours_not_supported">Format d\'horaris d\'obertura no suportat per a l\'edició</string>
@@ -1662,7 +1662,7 @@ Les rutes enregistrades es poden compartir amb els vostres amics o aportar-les p
     <string name="lock_screen_request_explanation">"%1$s necessita  aquest permís per la funcionalitat de posar la pantalla en mode d\'estalvi d\'energia."</string>
     <string name="shared_string_never">Mai</string>
     
-    <string name="osmo_use_https">Utilitzeu HTTPS</string>
+    
     <string name="home_button">Inici</string>
     <string name="search_for">Cerca per</string>
     <string name="shared_string_show_all">MOSTRA\'LS TOTS</string>

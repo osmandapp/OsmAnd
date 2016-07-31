@@ -433,7 +433,7 @@
     <string name="version_index_is_big_for_memory">Indeksas \'\'{0}\'\' netilpo į atmintį</string>
     <string name="version_index_is_not_supported">Indekso versija \'\'{0}\'\' nepalaikoma</string>
     
-    <string name="use_osmand_routing_service_descr">OsmAnd navigaciją be interneto taikyti tik maršrutams &gt; 20 km (ekperimentinė funkcija)</string>
+    
     <string name="osmand_routing_experimental">OsmAnd navigacija be interneto yra eksperimentinė funkcija ir ji neveikia didesniems nei 20km atstumams.\n\nLaikinai naudojama CloudMade navigacijos paslauga.</string>
     <string name="specified_dir_doesnt_exist">Neina rasti nurodyto segtuvo.</string>
     <string name="application_dir">Segtuvas duomenų talpinimui</string>
@@ -1593,7 +1593,7 @@
     <string name="lock_screen_request_explanation">%1$s prašo leidimo išjungti ekraną tausojant energiją.</string>
     <string name="shared_string_never">Niekada</string>
     
-    <string name="osmo_use_https_descr">Prie serverio jungtis saugiu ryšiu</string>
+    
 
     <string name="home_button">Namo</string>
     <string name="map_update">Liko atnaujinti %1$s žemėlapių</string>

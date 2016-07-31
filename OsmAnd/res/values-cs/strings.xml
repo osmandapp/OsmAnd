@@ -315,7 +315,7 @@ Nyní je k dispozici {2} MB.</string>
     <string name="add_waypoint_dialog_title">Přidat bod na zaznamenávanou GPX trasu</string>
     <string name="context_menu_item_add_waypoint">Přidat bod na GPX trasu</string>
     
-    <string name="use_osmand_routing_service_descr">Používat offline navigaci pro dlouhé vzdálenosti (experimentální)</string>
+    
     <string name="osmand_routing_experimental">Offline navigace je experimentální a funguje jen pro vzdálenosti do 20 km.\n\nNavigační služba je dočasně přepnuta na online CloudMade.</string>
     <string name="specified_dir_doesnt_exist">Nemohu najít zadaný adresář.</string>
     <string name="application_dir">Adresář pro data</string>
@@ -1480,7 +1480,7 @@ Zaznamenávané trasy můžete sdílet s vašimi přáteli nebo mohou být použ
     <string name="shared_string_never">Nikdy</string>
     <string name="home_button">Domovská obrazovka</string>
     
-    <string name="osmo_use_https">Použít HTTPS</string>
+    
     <string name="map_update">K dispozici aktualizace pro %1$s map</string>
     <string name="search_for">Hledat</string>
     <string name="shared_string_show_all">Zobrazit vše</string>

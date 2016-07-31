@@ -776,7 +776,7 @@
   <string name="version_index_is_big_for_memory">\"{0}\" indizea ez da memorian sartzen</string>
   <string name="version_index_is_not_supported">\"{0}\" indizearen bertsioa ez da onartzen</string>
   
-  <string name="use_osmand_routing_service_descr">Erabili OsmAnd lineaz kanpoko nabigatzailea, &gt; 20 km ibilbideetan erabili daiteke (esperimentala)</string>
+  
   <string name="osmand_routing_experimental">OsmAnden lineaz kanpoko nabigazioa ezaugarri esperimentala da eta ez du 20 km baina gehiagoko distantziekin lan egiten.⏎\n⏎\nNabigazio zerbitzuak oraingoz sarean dagoen CloudMade zerbitzua erabiltzen du.</string>
   <string name="specified_dir_doesnt_exist">Ezin izan da zehaztutako karpeta aurkitu.</string>
   <string name="application_dir">Datuak gordetzeko direktorioa</string>

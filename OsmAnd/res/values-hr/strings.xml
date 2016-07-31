@@ -1281,7 +1281,7 @@
     <string name="osmo_show_group_notifications_descr">Prikaži obavjest kada se korisnik pridruži ili napusti grupu</string>
     <string name="osmo_regenerate_login_ids">Regenerirajte korisničko ime</string>
     
-    <string name="osmo_use_https">Koristiti HTTPS</string>
+    
 	
 	<string name="lock_screen_request_explanation">%1$s treba dozvolu za isključivanje zaslona za značajku uštede energije.</string>
     <string name="rendering_attr_currentTrackColor_name">Boja GPX traga</string>

@@ -1314,7 +1314,7 @@ Memòria in proportzione %4$s MB (lìmite de Android %5$s MB, Dalvik %6$s MB).</
     <string name="version_index_is_big_for_memory">S’ìnditze \'\'{0}\'\' est tropu mannu pro sa memòria atuale</string>
     <string name="version_index_is_not_supported">Sa versione de s’ìnditze \'\'{0}\'\' no est suportada</string>
     
-    <string name="use_osmand_routing_service_descr">S’impreu de su nàvigu chene lìnia OsmAnd s’aplicat petzi a sas àndalas&gt;20 km (isperimentale)</string>
+    
     <string name="specified_dir_doesnt_exist">Impossìbile agatare sa cartella dislindada.</string>
     <string name="application_dir">Cartella datos</string>
 
@@ -1762,7 +1762,7 @@ Memòria in proportzione %4$s MB (lìmite de Android %5$s MB, Dalvik %6$s MB).</
     <string name="lock_screen_request_explanation">%1$s tenet bisòngiu de custa autorizatzione pro istudare s’ischermu pro sa funtzionalidade de rispàrmiu energèticu.</string>
 
     
-    <string name="osmo_use_https">Imprea HTTPS</string>
+    
     <string name="home_button">Domo</string>
     <string name="search_for">Chirca pro</string>
 
