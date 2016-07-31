@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
 
     <string name="rendering_attr_hideHouseNumbers_name">Números de casa</string>
     <string name="copying_osmand_file_failed">Falló al copiar archivos</string>
@@ -868,7 +869,7 @@ Todos los datos del mapa (vectores y teselas) pueden ser almacenados en la memor
  - Descarga de mapa del país o región directamente desde la aplicación
  - Posibilidad de superponer varias capas de mapa, como GPX o rutas de navegación, Puntos de Interés (PDI), favoritos, curvas de nivel, paradas de transporte público, mapas adicionales con transparencia personalizable
  - Búsqueda sin conexión de direcciones y lugares (PDI)
- - Rutas sin conexión para distancias cortas (experimental)
+ - Rutas sin conexión para distancias de rango medio 
  - Modos de automóvil, bicicleta, y peatón con:
  - opción de cambio automático de vista día/noche
  - opción de ampliación según la velocidad
@@ -1033,7 +1034,7 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
  - Descarga del mapa de país o región directamente desde la aplicación
  - Posibilidad de superponer varias capas de mapa, como GPX o rutas de navegación, Puntos de Interés, favoritos, curvas de nivel, paradas de transporte público, mapas adicionales con transparencia personalizable
  - Búsqueda sin conexión de direcciones y lugares (PDI)
- - Rutas sin conexión para distancias cortas (experimental)
+ - Rutas sin conexión para distancias de rango medio
  - Modos de automóvil, bicicleta, y peatón con:
  - Cambio automático opcional de vista día/noche
  - Ampliación opcional según la velocidad
