@@ -37,6 +37,9 @@ public class MapPoiTypes {
 	static final String OSM_WIKI_CATEGORY = "osmwiki";
 	private PoiTranslator poiTranslator = null;
 	private boolean init;
+	Map<String, PoiType> poiTypesByTag = new LinkedHashMap<String, PoiType>();
+	Map<String, String> deprecatedTags = new LinkedHashMap<String, String>();
+	
 
 	public MapPoiTypes(String fileName) {
 		this.resourceName = fileName;
@@ -310,11 +313,17 @@ public class MapPoiTypes {
 					} else if (name.equals("poi_type")) {
 						if (lastCategory == null) {
 							lastCategory = getOtherMapCategory();
-						}
-						lastType = parsePoiType(allTypes, parser, lastCategory, lastFilter, null, null);
-						if ("true".equals(parser.getAttributeValue("", "lang"))) {
-							for (String lng : MapRenderingTypes.langs) {
-								parsePoiType(allTypes, parser, lastCategory, lastFilter, lng, lastType);
+						} 
+						if(!Algorithms.isEmpty(parser.getAttributeValue("", "deprecated_of"))){
+							String vl = parser.getAttributeValue("", "name");
+							String target = parser.getAttributeValue("", "deprecated_of");
+							deprecatedTags.put(vl, target);
+						} else {
+							lastType = parsePoiType(allTypes, parser, lastCategory, lastFilter, null, null);
+							if ("true".equals(parser.getAttributeValue("", "lang"))) {
+								for (String lng : MapRenderingTypes.langs) {
+									parsePoiType(allTypes, parser, lastCategory, lastFilter, lng, lastType);
+								}
 							}
 						}
 
@@ -544,9 +553,6 @@ public class MapPoiTypes {
 		return getPoiCategoryByName(t.getKeyName()) != otherCategory;
 	}
 
-
-	Map<String, PoiType> poiTypesByTag = new LinkedHashMap<String, PoiType>();
-
 	public void initPoiTypesByTag() {
 		if (!poiTypesByTag.isEmpty()) {
 			return;
@@ -580,7 +586,13 @@ public class MapPoiTypes {
 			poiTypesByTag.put(key, p);
 		}
 	}
-
+	
+	public String replaceDeprecatedSubtype(PoiCategory type, String subtype) {
+		if(deprecatedTags.containsKey(subtype)) {
+			return deprecatedTags.get(subtype);
+		}
+		return subtype;
+	}
 
 	public Amenity parseAmenity(String tag, String val, boolean relation, Map<String, String> otherTags) {
 		initPoiTypesByTag();
@@ -652,5 +664,11 @@ public class MapPoiTypes {
 			return pat.isText();
 		}
 	}
+
+
+	
+
+
+	
 
 }
