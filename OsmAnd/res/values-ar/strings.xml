@@ -2395,4 +2395,12 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="use_trackball">استخدم كرة التعقب</string>
     <string name="route_stops_before">%1$s محطة قبل</string>
     <string name="map_legend">مفتاح الخريطة</string>
+    <string name="confirm_download_roadmaps">هل حقا تريد تحميل خريطة الطرق فقط، على الرغم من أنه لديك الخريطة (كاملة)؟</string>
+    <string name="activate_srtm_plugin">رجاءا قم بتفعيل أداة SRTM</string>
+    <string name="transport_search_before">مسار رحلة مسبق</string>
+    <string name="transport_to_go_after">مسافة مسبقة</string>
+    <string name="transport_to_go_before">المسافة اللاحقة</string>
+    <string name="transport_stops_to_pass">محطات توقف لتجاوز</string>
+    <string name="update_poi_success">تم تحديث بيانات POI بنجاح ({0} تم تحميلها)</string>
+    <string name="update_poi_no_offline_poi_index">لا توجد بيانات POI حاليا المتاحة في هاته المنطقة</string>
     </resources>
