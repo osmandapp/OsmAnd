@@ -2391,4 +2391,5 @@ Ak potrebuje pomoc s aplikáciou OsmAnd, kontaktuje podporu: support@osmand.net.
     <string name="back_to_search">Späť na vyhľadávanie</string>
     <string name="coords_search">Hľadanie súradníc</string>
     <string name="advanced_coords_search">Pokročilé hľadanie súradníc</string>
+    <string name="route_stops_before">%1$s zastávok pred</string>
     </resources>
