@@ -503,15 +503,15 @@ I øjeblikket er {2} MB til rådighed.</string>
 	<string name="osmand_long_description_1000_chars">"
  OsmAnd (OSM Automated Navigation Directions)
 
- OsmAnd er en open source navigation applikation med adgang til en lang række af globale OpenStreetMap (OSM) data. Alle kort data (vektor eller kortfliser) kan blive gemt på enhedens hukommelseskort til offline brug. OsmAnd tilbyder også offline og online rute funktionalitet inklusiv sving-efter-sving talevejledning. 
+ OsmAnd er et open source navigationsprogram med adgang til en lang række af globale OpenStreetMap (OSM) data. Alle kortdata (vektor eller kortfliser) kan gemmes på enhedens hukommelseskort til offline brug. OsmAnd tilbyder også offline og online rute funktionalitet inklusiv sving-efter-sving talevejledning. 
 
-Nogle af kernefunktionerne:
+Nogle af hovedfunktionerne:
  - Komplet offline funktionalitet (gemme hentede vektor eller kortfliser i enhedens lager)
- - Kompakt offline vektor kort for hele verden er tilgængelig
+ - Kompakt offline vektorkort for hele verden er tilgængelig
  - Kort for enkelte lande eller regioner kan hentes direkte i applikation
- - Overlejring af flere kort lag er muligt, som f.eks. GPX eller navigations spor, Interessepunkter (IP), favoritter, konturlinjer, Kollektivtrafik stoppesteder og flere kort med modificerebar gennemsigtighed
+ - Overlejring af flere kort lag er muligt, som f.eks. GPX eller navigationsspor, Interessepunkter (IP), favoritter, konturlinjer, Kollektivtrafik stoppesteder og flere kort med modificerebar gennemsigtighed
  - Offline søgning af adresser og steder interessepunkter (IP)
- - Offline ruteplanlægning for meddium afstande
+ - Offline ruteplanlægning for medium afstande
  - Bil, cykel og fodgænger tilstand med:
  - Valgfri automatisk dag/nat tilstandsskift
  - Valgfri automatisk zoom efter hastighed
@@ -524,16 +524,18 @@ Nogle af kernefunktionerne:
  - Antallet af kort der kan hentes er begrænset
  - Ingen adgang Wikipedia offline interessepunkter 
 
-OsmAnd bliver aktivt udviklet. Projektet og videre udvikling afhænger af økonomiske bidrag til at drive udviklingen og test af nye funktioner. Overvej at købe OsmAnd+, betale for en specifik ny funktion eller lave en generel donation på osmand.net.
+OsmAnd bliver aktivt udviklet. Projektet og den videre udvikling afhænger af økonomiske bidrag til at drive udviklingen og test af nye funktioner. Overvej at købe OsmAnd+, betale for en specifik ny funktion eller lave en generel donation på osmand.net.
  "</string>
     <string name="osmand_extended_description_4000_chars">"
-OsmAnd (OSM Automated Navigation Directions) er en kort og navigation applikation med adgang til gratis højkvalitets OpenStreetMap (OSM) kortdata over hele verden. Alle kortdata kan gemmes på enhedens hukommelseskort til brug offline. Via enhedens GPS, tilbyder OsmAnd navigation, med visuel- og talevejledning til bil, cykel, og fodgænger. Alle de vigtigste funktioner arbejde både online og offline (ingen internet behov).
+OsmAnd (OSM Automated Navigation Directions)
 
-Nogle af de vigtigste funktioner:
+OsmAnd er et kort og navigationsprogran med adgang til gratis højkvalitets OpenStreetMap (OSM) kortdata over hele verden. Alle kortdata kan gemmes på enhedens hukommelseskort til brug offline. Via enhedens GPS, tilbyder OsmAnd navigation, med visuel- og talevejledning til bil, cykel, og fodgænger. Alle de vigtigste funktioner arbejde både online og offline (ingen internet behov).
+
+Nogle af hovedfunktionerne:
 
 Navigation
 - Virker online (hurtig) eller offline (ingen roamingtakster i udlandet)
-- Sving-for-sving talwvejledning (indspillede og syntetiske stemmer)
+- Sving-for-sving talevejledning (indspillede og syntetiske stemmer)
 - Valgfri vognbaneskift, gadenavn visning, og forventet ankomst
 - Understøtter mellemliggende destinationer på ruten
 - Automatisk omdirigering, når der afviges fra ruten
@@ -549,7 +551,7 @@ Kort visning
 - Kan vise forskellige overlejringer som rute/navigation GPX-spor og ekstra kort med konfigurerbar gennemsigtighed
 - Eventuelt få vist stednavne på engelsk, lokal eller fonetiske stavemåde
 
-Brug OpenStreetMap og Wikipedia Data:
+Brug af OpenStreetMap og Wikipedia Data:
  - Høj kvalitet information fra de bedste samarbejdsprojekter i verden
 - Globale kort fra OpenStreetMap, til rådighed pr land eller region
 - Wikipedia IP\'er, fantastisk til sightseeing (ikke tilgængelig i gratis version)
@@ -579,7 +581,7 @@ Bidrager direkte til OpenStreetMap
 - Tilføj Interessepunkter (IP) og send dem direkte til OSM (eller senere hvis offline)
 - Valgfri tur optagelse også i baggrundstilstand (mens enheden er i dvaletilstand)
 
-OsmAnd er open source og bliver aktivt udviklet. Alle kan bidrage til anvendelsen ved at rapportere noter, forbedre oversættelser eller programmere nye funktioner. Projektet er i en livlig tilstand af kontinuerlig forbedring af alle disse former for udvikling og brugerinteraktion. Projektets fremskridt er også baseret på finansielle bidrag til finansiering af udvikling, kodning, og afprøvning af nye funktionaliteter. Ved at købe OsmAnd+ er man med til at hjælpe programmet til at være endnu mere fantastisk! Det er også muligt at finansiere specifikke nye funktioner, eller at foretage en generel donation på osmand.net.
+OsmAnd er open source og bliver aktivt udviklet. Alle kan bidrage til anvendelsen ved at rapportere noter, forbedre oversættelser eller programmere nye funktioner. Projektet er i en aktiv tilstand af kontinuerlig forbedring af alle disse former for udvikling og brugerinteraktion. Projektets fremskridt er også baseret på finansielle bidrag til finansiering af udvikling, kodning, og afprøvning af nye funktioner. Ved at købe OsmAnd+ er man med til at hjælpe programmet til at være endnu mere fantastisk! Det er også muligt at finansiere specifikke nye funktioner, eller at foretage en generel donation på osmand.net.
 
 
 Anslået kortdækning og kvalitet:
@@ -599,16 +601,16 @@ Liste over understøttede lande (stort set hele verden!): Afghanistan, Albanien,
     <string name="osmand_plus_long_description_1000_chars">"
  OsmAnd+ (OSM Automated Navigation Directions) 
 
-OsmAnd+ er en open source navigations applikation med adgang til en bred vifte af globale OpenStreetMap (OSM) data. Alle kortdata (vektor eller kortfliser) kan gemmes på enhedens hukommelseskort til offline brug. OsmAnd tilbyder også offline og online ruteplanlægning funktionalitet, herunder sving-for-sving talevejledning. 
+OsmAnd+ er et open source navigationsprogram med adgang til en bred vifte af globale OpenStreetMap (OSM) data. Alle kortdata (vektor eller kortfliser) kan gemmes på enhedens hukommelseskort til offline brug. OsmAnd tilbyder også offline og online ruteplanlægning funktionalitet, herunder sving-for-sving talevejledning. 
 
 OsmAnd+ er den betalte programversion, ved at købe den støtter man projektet, finansiere udviklingen af nye funktioner, og modtager de seneste opdateringer. 
 
-Nogle af de centrale funktioner:
+Nogle af hovedfunktionerne:
  - Komplet offline funktionalitet (gem hentede vektor eller kortfliser i enhedens hukommelsseskort)
  - Kompakte offline vektorkort for hele verden tilgængelig
  - Ubegrænset hentning af lande- eller regionskort direkte fra applikationen
  - Offline Wikipedia funktioner (hent Wikipedia Interessepunkter (IP)), fantastisk til sightseeing
- - Overlejring af flere kortlag mulige, såsom GPX eller navigation spor, seværdigheder, favoritter, højdekurver, stoppesteder for kollektivtrafik , ekstra kort med brugerdefinerbar gennemsigtighed
+ - Overlejring af flere kortlag mulige, såsom GPX eller navigationsspor, seværdigheder, favoritter, højdekurver, stoppesteder for kollektivtrafik , ekstra kort med brugerdefinerbar gennemsigtighed
  - Offline søgning efter adresser og steder (IP)
  - Offline ruteplanlægning til medium afstande
   - Bil, cykel, og fodgængere tilstand med:
@@ -618,16 +620,19 @@ Nogle af de centrale funktioner:
  - Valgfri vognbane vejledning, visning af hastighedsgrænser,  optagede- eller TTS stemmer
  "</string>
     <string name="osmand_plus_extended_description_4000_chars">"
-OsmAnd (OSM Automated Navigation Directions) er et kort og navigations program med adgang til gratis høj kvalitets OpenStreetMap (OSM) kortdata over hele verden. Alle kortdata kan gemmes på enhedens hukommelseskort til brug offline. Via enhedens GPS, tilbyder OsmAnd rutevejledning, med visuel og talevejledning til bil, cykel, og fodgænger. Alle de vigtigste funktioner arbejde både online og offline (intet internet behov). OsmAnd+ er den betalte programversion. Ved at købe det støttes projektet, finansierer udviklingen af nye funktioner, og modtager de seneste opdateringer. Test programmet, før det købes ved at installere den gratis version kaldet OsmAnd.
+OsmAnd (OSM Automated Navigation Directions)
 
+OsmAnd er et kort og navigationsprogram med adgang til gratis høj kvalitets OpenStreetMap (OSM) kortdata over hele verden. Alle kortdata kan gemmes på enhedens hukommelseskort til brug offline. Via enhedens GPS, tilbyder OsmAnd rutevejledning, med visuel og talevejledning til bil, cykel, og fodgænger. Alle de vigtigste funktioner arbejde både online og offline (intet internet behov). 
 
-Nogle af de vigtigste funktioner:
+OsmAnd+ er den betalte programversion. Ved at købe det støttes projektet, finansierer udviklingen af nye funktioner, og modtager de seneste opdateringer. Test programmet, før det købes ved at installere den gratis version kaldet OsmAnd.
+
+Nogle af hovedfunktionerne:
 
 Navigation
-- virker online (hurtig) eller offline (ingen roamingtakster i udlandet)
+- Virker online (hurtig) eller offline (ingen roamingtakster i udlandet)
 - Sving-for-sving talevejledning (indspillede og syntetiske stemmer)
 - Valgfri vognbaneskift, gadenavn og forventet ankomst visning
-- Understøtter mellemliggende destination på ruten
+- Understøtter mellemliggende destinationer på ruten
 - Automatisk omdirigering, når der afviges fra ruten
 - Søg efter steder efter adresse, efter type (f.eks.: restaurant, hotel, tankstation, museum), eller ved geografiske koordinater
 
@@ -641,14 +646,14 @@ Kort Visning
 - Kan vise forskellige overlejringer som rute/navigation GPX-spor og ekstra kort med tilpasselig gennemsigtighed
 - Eventuelt få vist stednavne i engelsk, lokale eller fonetiske stavemåde
 
-Brug OpenStreetMap og Wikipedia Data:
+Brug af OpenStreetMap og Wikipedia data:
 - Høj kvalitet information fra de bedste samarbejdsprojekter i verden
-- Globale kort fra OpenStreetMap, er til rådighed pr land eller region
+- Globale kort fra OpenStreetMap, er til rådighed pr. land eller region
 - Wikipedia Interessepunkter (IP), fantastisk til sightseeing
 - Ubegrænset gratis hentning af kort direkte fra applikationen
 - Altid opdaterede kort (opdateres mindst en gang om måneden)
 - Kompakte offline vektorkort
-- Vælg mellem komplette kortdata og bare vejnet (Eksempel: Hele Japan er 700 MB men vejnettet er kun 200 MB)
+- Vælg mellem komplette kortdata eller bare vejnet (Eksempel: Hele Japan er 700 MB men vejnettet er kun 200 MB)
 - Understøtter også online eller cachede kortfliser.
 
 Sikkerhedsfunktioner
@@ -2556,7 +2561,7 @@ Hvis du er fan af OsmAnd og OSM og ønsker at støtte dem, er dette en perfekt m
     <string name="share_history_subject">" delt via OsmAnd"</string>
     <string name="show_on_map">Vis på kortet</string>
     <string name="release_2_4">"
- • Ny meget kraftfuld fritekstsøgning
+ • Ny meget stærk fritekstsøgning
 
 
   • Meget forbedret lyd via Bluetooth
