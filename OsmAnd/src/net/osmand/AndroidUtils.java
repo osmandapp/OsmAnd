@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Build;
+import android.os.IBinder;
 import android.text.TextUtils;
 import android.text.format.DateFormat;
 import android.util.DisplayMetrics;
@@ -48,6 +49,19 @@ public class AndroidUtils {
 				}
 			}
 		});
+	}
+
+	public static void hideSoftKeyboard(final Activity activity, final View input) {
+		InputMethodManager inputMethodManager = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
+		if (inputMethodManager != null) {
+			if (input != null) {
+				IBinder windowToken = input.getWindowToken();
+				if (windowToken != null) {
+					inputMethodManager.hideSoftInputFromWindow(windowToken, 0);
+				}
+			}
+		}
+
 	}
 
 	public static String formatDate(Context ctx, long time) {

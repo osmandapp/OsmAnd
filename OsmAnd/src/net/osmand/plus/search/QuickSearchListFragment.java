@@ -64,6 +64,9 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 
 				public void onScrollStateChanged(AbsListView view, int scrollState) {
 					scrolling = (scrollState != AbsListView.OnScrollListener.SCROLL_STATE_IDLE);
+					if (scrolling) {
+						dialogFragment.hideKeyboard();
+					}
 				}
 			});
 			View header = getLayoutInflater(savedInstanceState).inflate(R.layout.list_shadow_header, null);

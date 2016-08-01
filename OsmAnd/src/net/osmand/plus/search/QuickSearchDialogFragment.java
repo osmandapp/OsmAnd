@@ -15,6 +15,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.FileProvider;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
@@ -263,6 +264,20 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 		tabLayout = (TabLayout) view.findViewById(R.id.tab_layout);
 		tabLayout.setupWithViewPager(viewPager);
+		viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+			@Override
+			public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+			}
+
+			@Override
+			public void onPageSelected(int position) {
+				hideKeyboard();
+			}
+
+			@Override
+			public void onPageScrollStateChanged(int state) {
+			}
+		});
 
 		searchEditText = (EditText) view.findViewById(R.id.searchEditText);
 		searchEditText.addTextChangedListener(new TextWatcher() {
@@ -331,6 +346,12 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 	public String getText() {
 		return searchEditText.getText().toString();
+	}
+
+	public void hideKeyboard() {
+		if (searchEditText.hasFocus()) {
+			AndroidUtils.hideSoftKeyboard(getActivity(), searchEditText);
+		}
 	}
 
 	public void show() {
