@@ -36,6 +36,7 @@ import net.osmand.plus.mapcontextmenu.MenuController.MenuState;
 import net.osmand.plus.mapcontextmenu.MenuController.MenuType;
 import net.osmand.plus.mapcontextmenu.MenuController.TitleButtonController;
 import net.osmand.plus.mapcontextmenu.MenuController.TitleProgressController;
+import net.osmand.plus.mapcontextmenu.controllers.MapDataMenuController;
 import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditor;
 import net.osmand.plus.mapcontextmenu.editors.PointEditor;
 import net.osmand.plus.mapcontextmenu.editors.WptPtEditor;
@@ -457,6 +458,9 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 			menuController.onAcquireNewController(pointDescription, object);
 		}
 		menuController = MenuController.getMenuController(mapActivity, pointDescription, object, MenuType.STANDARD);
+		if (!(menuController instanceof MapDataMenuController)) {
+			menuController.buildMapDownloadButton(latLon);
+		}
 	}
 
 	public void onSingleTapOnMap() {
@@ -832,6 +836,10 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 
 	public boolean displayDistanceDirection() {
 		return menuController != null && menuController.displayDistanceDirection();
+	}
+
+	public boolean isMapDownloaded() {
+		return menuController != null && menuController.isMapDownloaded();
 	}
 
 	public void updateData() {

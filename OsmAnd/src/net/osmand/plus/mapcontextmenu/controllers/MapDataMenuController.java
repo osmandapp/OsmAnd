@@ -43,13 +43,11 @@ import java.util.Map;
 
 public class MapDataMenuController extends MenuController {
 	private DownloadMapObject mapObject;
-	private IndexItem indexItem;
 	private List<IndexItem> otherIndexItems;
 	private LocalIndexInfo localIndexInfo;
 	private List<LocalIndexInfo> otherLocalIndexInfos;
 	private boolean srtmDisabled;
 	private boolean srtmNeedsInstallation;
-	private boolean downloaded;
 	private boolean backuped;
 
 	private DownloadIndexesThread downloadThread;
@@ -315,6 +313,10 @@ public class MapDataMenuController extends MenuController {
 					break;
 				}
 			}
+		}
+
+		if (indexItem != null) {
+			downloaded = indexItem.isDownloaded();
 		}
 
 		leftDownloadButtonController.visible = true;

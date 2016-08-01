@@ -117,7 +117,7 @@
     <dimen name="context_menu_button_padding_x">10dp</dimen>
     <dimen name="context_menu_buttons_top_margin">-16dp</dimen>
     <dimen name="context_menu_buttons_padding_bottom">4dp</dimen>
-    <dimen name="context_menu_progress_min_height">52dp</dimen>
+    <dimen name="context_menu_progress_min_height">54dp</dimen>
     <dimen name="context_menu_progress_cancel_button_size">44dp</dimen>
     <dimen name="context_menu_action_buttons_h">54dp</dimen>
 

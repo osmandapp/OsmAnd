@@ -646,10 +646,22 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 		}
 
 		// Download buttons
-		boolean showDownloadButtonsContainer = (leftDownloadButtonController != null || rightDownloadButtonController != null)
+		boolean showDownloadButtonsContainer =
+				((leftDownloadButtonController != null && leftDownloadButtonController.visible)
+						|| (rightDownloadButtonController != null && rightDownloadButtonController.visible))
 				&& (titleProgressController == null || !titleProgressController.visible);
 		final View downloadButtonsContainer = view.findViewById(R.id.download_buttons_container);
 		downloadButtonsContainer.setVisibility(showDownloadButtonsContainer ? View.VISIBLE : View.GONE);
+
+		if (showDownloadButtonsContainer) {
+			view.findViewById(R.id.download_buttons_top_border).setVisibility(showTitleButtonsContainer ? View.VISIBLE : View.INVISIBLE);
+			if (showTitleButtonsContainer) {
+				LinearLayout.LayoutParams ll = (LinearLayout.LayoutParams) downloadButtonsContainer.getLayoutParams();
+				if (ll.topMargin != 0) {
+					ll.setMargins(0, 0, 0, 0);
+				}
+			}
+		}
 
 		// Left download button
 		final Button leftDownloadButton = (Button) view.findViewById(R.id.download_button_left);
@@ -683,6 +695,12 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 		final View titleProgressContainer = view.findViewById(R.id.title_progress_container);
 		if (titleProgressController != null) {
 			titleProgressContainer.setVisibility(titleProgressController.visible ? View.VISIBLE : View.GONE);
+			if (titleProgressController.visible && showTitleButtonsContainer) {
+				LinearLayout.LayoutParams ll = (LinearLayout.LayoutParams) titleProgressContainer.getLayoutParams();
+				if (ll.topMargin != 0) {
+					ll.setMargins(0, 0, 0, 0);
+				}
+			}
 
 			final ProgressBar progressBar = (ProgressBar) view.findViewById(R.id.progressBar);
 			final TextView progressTitle = (TextView) view.findViewById(R.id.progressTitle);
@@ -1204,6 +1222,9 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 	@Override
 	public void downloadHasFinished() {
 		updateOnDownload();
+		if (menu != null && menu.isVisible() && menu.isMapDownloaded()) {
+			rebuildMenu();
+		}
 	}
 
 	private void updateOnDownload() {

@@ -69,6 +69,8 @@ public class OsMoMenuController extends MenuController {
 
 	@Override
 	public void updateData() {
+		super.updateData();
+
 		if (OsMoPositionLayer.getFollowDestinationId() != null) {
 			leftTitleButtonController.caption = getMapActivity().getString(R.string.shared_string_cancel);
 			leftTitleButtonController.leftIconId = R.drawable.ic_action_remove_dark;

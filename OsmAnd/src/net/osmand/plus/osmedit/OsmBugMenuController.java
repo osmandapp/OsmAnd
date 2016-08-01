@@ -102,6 +102,7 @@ public class OsmBugMenuController extends MenuController {
 
 	@Override
 	public void updateData() {
+		super.updateData();
 		rightTitleButtonController.visible = bug.isOpened();
 	}
 }
