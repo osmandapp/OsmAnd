@@ -234,8 +234,8 @@ public class MapInfoLayer extends OsmandMapLayer {
 	}
 
 	private void updateQuickSearch(boolean nightMode, TextState ts) {
-		quickSearchView.setBackgroundResource(AndroidUiHelper.isOrientationPortrait(map) ? ts.boxTop
-				: ts.boxFree);
+		int bgColorId = nightMode ? R.color.bg_color_dark : R.color.bg_color_light;
+		quickSearchView.setBackgroundResource(AndroidUiHelper.isOrientationPortrait(map) ? bgColorId : ts.boxFree);
 		quickSearchView.updateTextColor(nightMode, ts.textColor);
 	}
 
