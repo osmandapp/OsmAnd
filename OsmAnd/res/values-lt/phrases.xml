@@ -1,2 +1,28 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="poi_shop">Parduotuvė</string>
+		<string name="poi_shop_food">Maisto parduotuvė</string>
+	<string name="poi_emergency">Pagalbos tarnybos</string>
+	<string name="poi_transportation">Transportas</string>
+		<string name="poi_road_obstacle">Kelio kliūtis</string>
+		<string name="poi_filling_station">Kuro kolonėlė</string>
+		<string name="poi_personal_transport">Asmeninis transportas</string>
+		<string name="poi_public_transport">Viešasis transportas</string>
+		<string name="poi_air_transport">Oro transportas</string>
+		<string name="poi_water_transport">Vandens transportas</string>
+		<string name="poi_bicycle_transport">Dviračių transportas</string>
+		<string name="poi_aerialway_transport">Lynų keltuvai</string>
+		<string name="poi_node_networks">Pėsčiųjų žygių/dviračių maršrutų mazgai</string>
+		<string name="poi_hiking_routes">Pėsčiųjų žygių maršrutai</string>
+		<string name="poi_traffic_enforcement">Eismo valdymas</string>
+	<string name="poi_man_made">Dribtinės kilmės</string>
+		<string name="poi_transport_construction">Transporto konstrukcija</string>
+		<string name="poi_water_supply">Vandens tiekimas</string>
+		<string name="poi_power">Elektros energija</string>
+		<string name="poi_communication">Komunikacija</string>
+		<string name="poi_trash_disposal">Šiukšlių šalinimas</string>
+		<string name="poi_landuse">Žemėtvarka</string>
+	<string name="poi_education">Švietimas</string>
+	<string name="poi_administrative">Administraciniai objektai</string>
+	<string name="poi_healthcare">Sveikatos paslaugos</string>
+	<string name="poi_office">Biuras</string>
+	</resources>
