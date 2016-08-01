@@ -1769,9 +1769,9 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="access_tree_list">قائمة شجرية</string>
     <string name="access_shared_string_not_installed">غير مثبت</string>
     <string name="access_widget_expand">وسع</string>
-    <string name="access_sort">فرز</string>
+    <string name="access_sort">الفرز</string>
     <string name="map_mode">وضع الخريطة</string>
-    <string name="number_of_gpx_files_selected_pattern">%s ملفات GPX محددة</string>
+    <string name="number_of_gpx_files_selected_pattern">%s ملفات GPX المحددة</string>
     <string name="rendering_value_thin_name">رقيقة</string>
     <string name="rendering_value_medium_name">متوسط</string>
     <string name="no_map_markers_found">الرجاء إضافة علامات الخريطة عن طريق الخريطة</string>
@@ -1993,7 +1993,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="shared_string_move_up">حرك للاعلى</string>
     <string name="shared_string_move_down">حرك للاسفل</string>
     <string name="open_street_map_login_and_pass">اسم المستخدم وكلمة المرور ل اوبن ستريت ماب</string>
-    <string name="osm_live_email_desc">نحن بحاجة اليه لكي لنوفر لك معلومات حول المساهمات</string>
+    <string name="osm_live_email_desc">نحن بحاجة اليه لكي نوفر لك معلومات حول المساهمات</string>
     <string name="select_map_marker">اختر علامة موضعية</string>
     <string name="show_transparency_seekbar">اظهر شفافية شريط البحث</string>
     <string name="download_files_error_not_enough_space">مساحة غير كافية!
@@ -2008,7 +2008,14 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="route_duration">المدة الزمنية :</string>
     <string name="route_tr">در يمينا ثم واصل</string>
     <string name="route_tl">در يسارا و اسلك</string>
-    <string name="plugin_nautical_descr"/>
+    <string name="plugin_nautical_descr">"هاته الأداة تثري خريطة التطبيق والملاحة لتوفير خرائط بحرية للزوارق والمراكب الشراعية وأنواع أخرى من الرياضات المائية.
+
+
+خريطة خاصة إضافية للتطبيق ستقدم كل علامات الملاحة البحرية سواء داخلية أو شاطئية وكذلك جدولا للرموز. وصف كل علامة ملاحة يوفر التفاصيل اللازمة للتعرف عليها ومعانيها (الفئة، الشكل، اللون، التسلسل، المرجع...إلخ.).
+
+
+للعودة إلى واحدة من أنماط الخريطة التقليدية، ببساطة إما عطل هاته الأداة مرة أخرى أو غير \'نمط الخريطة\' في \'ضبط الخريطة\' حسب الرغبة.
+ "</string>
     <string name="search_near_map">البحث قرب مركز الخريطة الحالية</string>
     <string name="active_markers">العلامات المفعلة</string>
     <string name="map_markers">علامات الخريطة</string>
@@ -2234,13 +2241,21 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="release_2_4">"
  • باحث نصوص جديد مجاني وكفئ
 
+
  • تحسين ملحوظ للصوت عبر البلوتوث
 
- • إدخال تحسينات في مرشد الطراقات، و الإعلانات الصوتية مع تعيين ممرات الالتفاف
 
- • إضافة باقة من اللغات و الترجمات مع دعم لغات مناطق عدة
+ • تحسينات في مرشد الطراقات، الإعلانات الصوتية وتعيين إشارة الالتفاف
 
- • العديد من التحسينات الأخرى وإصلاحات الخلل
+
+ • طبقة المحسنة للنقل
+
+
+ • إضافة المزيد من اللغات المحلية والآن ندعم لغات إقليمية
+
+
+ • العديد من التحسينات الأخرى وإصلاحات للأعطاب
+
 
 وأكثر …
  "</string>
