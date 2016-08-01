@@ -126,6 +126,8 @@ public class AudioVideoNoteMenuController extends MenuController {
 
 	@Override
 	public void updateData() {
+		super.updateData();
+
 		if (!mIsFileAvailable) {
 			return;
 		}

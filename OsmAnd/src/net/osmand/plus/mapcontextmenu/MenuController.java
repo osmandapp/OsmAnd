@@ -4,12 +4,17 @@ import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.LinearLayout;
+
+import net.osmand.IndexConstants;
+import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.Amenity;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.TransportStop;
+import net.osmand.map.OsmandRegions;
+import net.osmand.map.WorldRegion;
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
@@ -19,6 +24,10 @@ import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.audionotes.AudioVideoNoteMenuController;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin.Recording;
+import net.osmand.plus.download.DownloadActivityType;
+import net.osmand.plus.download.DownloadIndexesThread;
+import net.osmand.plus.download.DownloadValidationManager;
+import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.mapcontextmenu.controllers.AmenityMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.FavouritePointMenuController;
@@ -42,7 +51,15 @@ import net.osmand.plus.osmedit.OsmPoint;
 import net.osmand.plus.osmo.OsMoGroupsStorage.OsMoDevice;
 import net.osmand.plus.osmo.OsMoMenuController;
 import net.osmand.plus.parkingpoint.ParkingPositionMenuController;
+import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.views.DownloadedRegionsLayer.DownloadMapObject;
+import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
+
+import java.io.IOException;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 
 public abstract class MenuController extends BaseMenuController {
 
@@ -69,6 +86,12 @@ public abstract class MenuController extends BaseMenuController {
 	protected TitleButtonController leftDownloadButtonController;
 	protected TitleButtonController rightDownloadButtonController;
 	protected TitleProgressController titleProgressController;
+
+	protected IndexItem indexItem;
+	protected boolean downloaded;
+	private BinaryMapDataObject downloadMapDataObject;
+	private WorldRegion downloadRegion;
+	private DownloadIndexesThread downloadThread;
 
 	public MenuController(MenuBuilder builder, PointDescription pointDescription, MapActivity mapActivity) {
 		super(mapActivity);
@@ -281,27 +304,95 @@ public abstract class MenuController extends BaseMenuController {
 		return false;
 	}
 
-	public int getLeftIconId() { return 0; }
+	public int getLeftIconId() {
+		return 0;
+	}
 
-	public Drawable getLeftIcon() { return null; }
+	public Drawable getLeftIcon() {
+		return null;
+	}
 
-	public Drawable getSecondLineTypeIcon() { return null; }
+	public Drawable getSecondLineTypeIcon() {
+		return null;
+	}
 
-	public int getFavActionIconId() { return R.drawable.map_action_fav_dark; }
+	public int getFavActionIconId() {
+		return R.drawable.map_action_fav_dark;
+	}
 
-	public int getFavActionStringId() { return R.string.shared_string_add_to_favorites; }
+	public int getFavActionStringId() {
+		return R.string.shared_string_add_to_favorites;
+	}
 
-	public String getTypeStr() { return ""; }
+	public String getTypeStr() {
+		return "";
+	}
 
-	public String getCommonTypeStr() { return ""; }
+	public String getCommonTypeStr() {
+		return "";
+	}
 
-	public String getNameStr() { return pointDescription.getName(); }
+	public String getNameStr() {
+		return pointDescription.getName();
+	}
 
 	public void share(LatLon latLon, String title) {
 		ShareMenu.show(latLon, title, getMapActivity());
 	}
 
 	public void updateData() {
+		if (downloadMapDataObject != null) {
+			if (indexItem == null) {
+				List<IndexItem> indexItems = new LinkedList<>(downloadThread.getIndexes().getIndexItems(downloadRegion));
+				for (IndexItem item : indexItems) {
+					if (item.getType() == DownloadActivityType.NORMAL_FILE) {
+						indexItem = item;
+						break;
+					}
+				}
+			}
+
+			if (indexItem != null) {
+				downloaded = indexItem.isDownloaded();
+			}
+
+			leftDownloadButtonController.visible = !downloaded;
+			leftDownloadButtonController.leftIconId = R.drawable.ic_action_import;
+
+			boolean downloadIndexes = getMapActivity().getMyApplication().getSettings().isInternetConnectionAvailable()
+					&& !downloadThread.getIndexes().isDownloadedFromInternet
+					&& !downloadThread.getIndexes().downloadFromInternetFailed;
+
+			boolean isDownloading = indexItem != null && downloadThread.isDownloading(indexItem);
+			if (isDownloading) {
+				titleProgressController.setMapDownloadMode();
+				if (downloadThread.getCurrentDownloadingItem() == indexItem) {
+					titleProgressController.indeterminate = false;
+					titleProgressController.progress = downloadThread.getCurrentDownloadingItemProgress();
+				} else {
+					titleProgressController.indeterminate = true;
+					titleProgressController.progress = 0;
+				}
+				double mb = indexItem.getArchiveSizeMB();
+				String v;
+				if (titleProgressController.progress != -1) {
+					v = getMapActivity().getString(R.string.value_downloaded_of_max, mb * titleProgressController.progress / 100, mb);
+				} else {
+					v = getMapActivity().getString(R.string.file_size_in_mb, mb);
+				}
+				if (indexItem.getType() == DownloadActivityType.ROADS_FILE) {
+					titleProgressController.caption = indexItem.getType().getString(getMapActivity()) + " • " + v;
+				} else {
+					titleProgressController.caption = v;
+				}
+				titleProgressController.visible = true;
+			} else if (downloadIndexes) {
+				titleProgressController.setIndexesDownloadMode();
+				titleProgressController.visible = true;
+			} else {
+				titleProgressController.visible = false;
+			}
+		}
 	}
 
 	public boolean hasCustomAddressLine() {
@@ -353,10 +444,109 @@ public abstract class MenuController extends BaseMenuController {
 
 	public void onHide() {
 	}
-	
+
 	public void onClose() {
 	}
-	
-	public void onAcquireNewController(PointDescription pointDescription2, Object object) {
+
+	public void onAcquireNewController(PointDescription pointDescription, Object object) {
 	}
+
+	public boolean isMapDownloaded() {
+		return downloaded;
+	}
+
+	public void buildMapDownloadButton(LatLon latLon) {
+		int point31x = MapUtils.get31TileNumberX(latLon.getLongitude());
+		int point31y = MapUtils.get31TileNumberY(latLon.getLatitude());
+
+		ResourceManager rm = getMapActivity().getMyApplication().getResourceManager();
+		OsmandRegions osmandRegions = rm.getOsmandRegions();
+
+		List<BinaryMapDataObject> mapDataObjects = null;
+		try {
+			mapDataObjects = osmandRegions.queryBbox(point31x, point31x, point31y, point31y);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		if (mapDataObjects != null) {
+			Iterator<BinaryMapDataObject> it = mapDataObjects.iterator();
+			while (it.hasNext()) {
+				BinaryMapDataObject o = it.next();
+				if (!osmandRegions.contain(o, point31x, point31y)) {
+					it.remove();
+				}
+			}
+			String selectedFullName = "";
+			for (BinaryMapDataObject o : mapDataObjects) {
+				boolean downloaded = checkIfObjectDownloaded(rm, osmandRegions.getDownloadName(o));
+				if (downloaded) {
+					downloadMapDataObject = null;
+					break;
+				} else {
+					String fullName = osmandRegions.getFullName(o);
+					if (fullName.length() > selectedFullName.length()) {
+						selectedFullName = fullName;
+						downloadMapDataObject = o;
+					}
+				}
+			}
+
+			downloaded = downloadMapDataObject == null;
+			if (!downloaded) {
+				downloadThread = getMapActivity().getMyApplication().getDownloadThread();
+				downloadRegion = osmandRegions.getRegionData(selectedFullName);
+				if (downloadRegion != null && downloadRegion.isRegionMapDownload()) {
+					List<IndexItem> indexItems = downloadThread.getIndexes().getIndexItems(downloadRegion);
+					for (IndexItem item : indexItems) {
+						if (item.getType() == DownloadActivityType.NORMAL_FILE
+								&& (item.isDownloaded() || downloadThread.isDownloading(item))) {
+							indexItem = item;
+						}
+					}
+				}
+
+				leftDownloadButtonController = new TitleButtonController() {
+					@Override
+					public void buttonPressed() {
+						if (indexItem != null) {
+							if (indexItem.getType() == DownloadActivityType.NORMAL_FILE) {
+								new DownloadValidationManager(getMapActivity().getMyApplication())
+										.startDownload(getMapActivity(), indexItem);
+							}
+						}
+					}
+				};
+				leftDownloadButtonController.caption =
+						downloadRegion != null ? downloadRegion.getLocaleName() : getMapActivity().getString(R.string.shared_string_download);
+				leftDownloadButtonController.leftIconId = R.drawable.ic_action_import;
+
+				titleProgressController = new TitleProgressController() {
+					@Override
+					public void buttonPressed() {
+						if (indexItem != null) {
+							downloadThread.cancelDownload(indexItem);
+						}
+					}
+				};
+
+				if (!downloadThread.getIndexes().isDownloadedFromInternet) {
+					if (getMapActivity().getMyApplication().getSettings().isInternetConnectionAvailable()) {
+						downloadThread.runReloadIndexFiles();
+					}
+				}
+
+				updateData();
+			}
+		}
+	}
+
+	private boolean checkIfObjectDownloaded(ResourceManager rm, String downloadName) {
+		final String regionName = Algorithms.capitalizeFirstLetterAndLowercase(downloadName)
+				+ IndexConstants.BINARY_MAP_INDEX_EXT;
+		final String roadsRegionName = Algorithms.capitalizeFirstLetterAndLowercase(downloadName) + ".road"
+				+ IndexConstants.BINARY_MAP_INDEX_EXT;
+		return rm.getIndexFileNames().containsKey(regionName) || rm.getIndexFileNames().containsKey(roadsRegionName);
+	}
+
 }

@@ -55,7 +55,7 @@
 	<dimen name="context_menu_button_padding_x">15dp</dimen>
 	<dimen name="context_menu_buttons_top_margin">-24dp</dimen>
 	<dimen name="context_menu_buttons_padding_bottom">6dp</dimen>
-	<dimen name="context_menu_progress_min_height">78dp</dimen>
+	<dimen name="context_menu_progress_min_height">80dp</dimen>
 	<dimen name="context_menu_progress_cancel_button_size">66dp</dimen>
 	<dimen name="context_menu_action_buttons_h">80dp</dimen>
 
