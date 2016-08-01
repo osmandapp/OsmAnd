@@ -25,4 +25,22 @@
 	<string name="poi_administrative">Administraciniai objektai</string>
 	<string name="poi_healthcare">Sveikatos paslaugos</string>
 	<string name="poi_office">Biuras</string>
+	<string name="poi_sport">Sportas</string>
+	<string name="poi_tourism">Turizmas</string>
+		<string name="poi_sightseeing">Lankytini objektai</string>
+		<string name="poi_accomodation">Nakvynė</string>
+		<string name="poi_internet_access">Interneto prieiga</string>
+	<string name="poi_entertainment">Laisvalaikis</string>
+		<string name="poi_club">Klubas</string>
+	<string name="poi_sustenance">Maistas</string>
+	<string name="poi_cafe_and_restaurant">Kavinė ir restoranas</string>
+	<string name="poi_service">Paslaugos</string>
+		<string name="poi_craft">Rankdarbiai</string>
+	<string name="poi_finance">Finansai</string>
+	<string name="poi_natural">Gamta</string>
+	<string name="poi_seamark">Laivyba</string>
+	<string name="poi_military">Kariniai objektai</string>
+	<string name="poi_osmwiki">Vikipedija</string>
+	<string name="poi_user_defined_other">Nustatyta naudotojo</string>
+
 	</resources>
