@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
     <string name="search_button">Poišči</string>
     <string name="search_activity">Iskanje podatkov</string>
 
@@ -825,7 +826,7 @@ Pomembnejše lastnosti:
 \t* Prenos podatkov zemljevida posameznih držav ali področij znotraj programa
 \t* Prekrivanje zemljevidov s podatkovnimi sloji; na primer sledi GPX, načrti poti, zanimive in priljubljene točke, izohipsami, postajališča javnega prometa, dodatni zemljevidi z nastavljivo prosojnostjo
 \t* Iskanje naslovov, krajev in zanimivih točk (POI) brez povezave
-\t* Izdelava načrta najkrajše poti (preizkusno)
+\t* Vodenje poti v načinu brez povezave za srednje dolge poti
 \t* Način za avtomobiliste, kolesarje in pešce:
 \t** z nastavljivim samodejnim preklopom med dnevnim in nočnim prikazom
 \t** z nastavljivo povečavo zemljevida glede na hitrost gibanja
@@ -847,7 +848,7 @@ Pomembnejše lastnosti:
 \t* Prenos podatkov zemljevida posameznih držav ali področij znotraj programa
 \t* Prekrivanje zemljevidov s podatkovnimi plasmi; na primer sledmi GPX, načrti poti, zanimive in priljubljene točke, izohipsami, postajališči javnega prometa, dodatni zemljevidi z nastavljivo prosojnostjo
 \t* Iskanje naslovov, krajev in zanimivih točk (POI) brez povezave
-\t* Izdelava načrta najkrajše poti (preizkusno)
+\t* Vodenje poti v načinu brez povezave za srednje dolge poti
 \t* Način za avtomobiliste, kolesarje in pešce:
 \t** z nastavljivim samodejnim preklopom med dnevnim in nočnim prikazom
 \t** z nastavljivo povečavo zemljevida glede na hitrost gibanja
