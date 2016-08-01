@@ -225,6 +225,7 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 			MapActivity.launchMapActivityMoveToTop(getActivity());
 			if (showTopbar) {
 				dialogFragment.hide();
+				dialogFragment.reloadHistory();
 			}
 		}
 	}

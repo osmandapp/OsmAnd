@@ -571,7 +571,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		}
 	}
 
-	private void reloadCategories() {
+	public void reloadCategories() {
 		SearchAmenityTypesAPI amenityTypesAPI =
 				new SearchAmenityTypesAPI(getMyApplication().getPoiTypes());
 		final List<SearchResult> amenityTypes = new ArrayList<>();
@@ -604,7 +604,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		}
 	}
 
-	private void reloadHistory() {
+	public void reloadHistory() {
 		SearchHistoryAPI historyAPI = new SearchHistoryAPI(getMyApplication());
 		final List<SearchResult> history = new ArrayList<>();
 		SearchPhrase sp = new SearchPhrase(null).generateNewPhrase("", searchUICore.getSearchSettings());
