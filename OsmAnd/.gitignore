@@ -1,3 +1,4 @@
+valgrind/
 bin/
 dist/
 res/values/no_translate.xml
