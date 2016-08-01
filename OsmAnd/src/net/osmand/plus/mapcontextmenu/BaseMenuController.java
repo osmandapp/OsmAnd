@@ -45,7 +45,7 @@ public abstract class BaseMenuController {
 	}
 
 	public boolean isLandscapeLayout() {
-		return !portraitMode && !largeDevice;
+		return !portraitMode;
 	}
 
 	public float getLandscapeWidthDp() {
