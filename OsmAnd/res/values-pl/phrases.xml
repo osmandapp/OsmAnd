@@ -1422,4 +1422,6 @@
 	<string name="poi_access_delivery">Dostęp tylko dla dostarczenia</string>
 	<string name="poi_access_agricultural">Dostęp rolniczy</string>
 
-	</resources>
+	<string name="poi_length">Długość</string>
+
+</resources>
