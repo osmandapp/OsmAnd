@@ -224,6 +224,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		USE_MAGNETIC_FIELD_SENSOR_COMPASS = settings.USE_MAGNETIC_FIELD_SENSOR_COMPASS;
 		USE_FILTER_FOR_COMPASS = settings.USE_KALMAN_FILTER_FOR_COMPASS;
 		currentPositionHelper = new CurrentPositionHelper(app);
+		app.getResourceManager().addResourceListener(currentPositionHelper);
 		locationSimulation = new OsmAndLocationSimulation(app, this);
 		addLocationListener(navigationInfo);
 		addCompassListener(navigationInfo);

@@ -2,13 +2,6 @@ package net.osmand.plus;
 
 import android.os.AsyncTask;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-
 import net.osmand.Location;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
@@ -17,13 +10,21 @@ import net.osmand.binary.GeocodingUtilities;
 import net.osmand.binary.GeocodingUtilities.GeocodingResult;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.plus.resources.RegionAddressRepository;
+import net.osmand.plus.resources.ResourceManager.ResourceListener;
 import net.osmand.router.GeneralRouter.GeneralRouterProfile;
 import net.osmand.router.RoutePlannerFrontEnd;
 import net.osmand.router.RoutingConfiguration;
 import net.osmand.router.RoutingContext;
 import net.osmand.util.MapUtils;
 
-public class CurrentPositionHelper {
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+
+public class CurrentPositionHelper implements ResourceListener {
 	
 	private RouteDataObject lastFound;
 	private Location lastAskedLocation = null;
@@ -31,6 +32,7 @@ public class CurrentPositionHelper {
 	private RoutingContext defCtx;
 	private OsmandApplication app;
 	private ApplicationMode am;
+	private boolean mapsIndexed;
 
 	public CurrentPositionHelper(OsmandApplication app) {
 		this.app = app;
@@ -216,12 +218,18 @@ public class CurrentPositionHelper {
 
 	
 	private synchronized List<GeocodingResult> runUpdateInThread(double lat, double lon, boolean geocoding) throws IOException {
-		if (ctx == null || am != app.getSettings().getApplicationMode()) {
+		if (ctx == null || mapsIndexed || am != app.getSettings().getApplicationMode()) {
 			initCtx(app);
+			mapsIndexed = false;
 			if (ctx == null) {
 				return null;
 			}
 		}
 		return new GeocodingUtilities().reverseGeocodingSearch(geocoding ? defCtx : ctx, lat, lon);
+	}
+
+	@Override
+	public void onMapsIndexed() {
+		mapsIndexed = true;
 	}
 }
