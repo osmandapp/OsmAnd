@@ -119,13 +119,13 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 					if (n.getLocation() == null){
 						continue;
 					}
-					if(!ms.add(n.getName())) {
-						// only unique names
-						continue;
-					}
 					int x = (int) tb.getPixXFromLatLon(n.getLocation().getLatitude(), n.getLocation().getLongitude());
 					int y = (int) tb.getPixYFromLatLon(n.getLocation().getLatitude(), n.getLocation().getLongitude());
 					if (Math.abs(x - ex) <= radius && Math.abs(y - ey) <= radius) {
+						if(!ms.add(n.getName())) {
+							// only unique names
+							continue;
+						}
 						radius = rp;
 						res.add(n);
 					}
