@@ -527,7 +527,7 @@
 	<string name="plugins_screen">ملحقات</string>
 	
 	<string name="prefs_plugins_descr">تفعّل الملحقات إعداداتٍ متقدمة ووظائف إضافية</string>
-	<string name="osm_editing_plugin_description"/>
+	<string name="osm_editing_plugin_description">عبر هاته الأداة يمكن اسخدام التطبيق للمساهمات في الموقع كإنشاء أو تعديل أماكن الأشياء، تصليح الأعطاب أو التبليغ عنها، والمساهمة بملفات GPX مسجلة. الموقع قائم بفعل المجتمع، مشروع رسم الخرائط على النطاق العام العالمي. للمزيد من التفاصيل انظر http://openstreetmap.org. المشاركة الفعالة جد مقدرة، والمساهنات يمكن إنشاءها من التطبيق مباشرة إن قمت بإدخال معلوماتك الشخصية في التطبيق.</string>
 	<string name="vector_maps_may_display_faster_on_some_devices">عادة تعرض الخرائط الاتجاهية أسرع. ربما لا تعمل جيدا على بعض الأجهزة.</string>
 	<string name="play_commands_of_currently_selected_voice">شغل أوامر الصوت المحدد الحالي</string>
 	<string name="switch_to_raster_map_to_see">لا توجد خرائط متجهية محلية لهذا المكان. يمكنك تنزيل إحداها من الإعدادات (إدارة ملفات الخرائط)، أو التغيير لخرائط الانترنت (فعّل ملحق الخرائط عبر الإنترنت لهذا).</string>
