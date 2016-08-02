@@ -27,7 +27,13 @@ import net.osmand.plus.poi.PoiUIFilter;
 
 public class DestinationReachedMenuFragment extends Fragment {
 	public static final String TAG = "DestinationReachedMenuFragment";
+	private static boolean exists = false;
 	private DestinationReachedMenu menu;
+
+
+	public DestinationReachedMenuFragment() {
+		exists = true;
+	}
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -153,6 +159,15 @@ public class DestinationReachedMenuFragment extends Fragment {
 		getMapActivity().getContextMenu().setBaseFragmentVisibility(true);
 	}
 
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		exists = false;
+	}
+
+	public static boolean isExists() {
+		return exists;
+	}
 
 	public static void showInstance(DestinationReachedMenu menu) {
 		int slideInAnim = menu.getSlideInAnimation();

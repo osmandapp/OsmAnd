@@ -12,8 +12,7 @@ public class DestinationReachedMenu extends BaseMenuController {
 	}
 
 	public static void show(MapActivity mapActivity) {
-		Fragment fragment = mapActivity.getSupportFragmentManager().findFragmentByTag(DestinationReachedMenuFragment.TAG);
-		if (fragment == null || fragment.isDetached()) {
+		if (!DestinationReachedMenuFragment.isExists()) {
 			DestinationReachedMenu menu = new DestinationReachedMenu(mapActivity);
 			DestinationReachedMenuFragment.showInstance(menu);
 		}
