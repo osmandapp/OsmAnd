@@ -133,7 +133,7 @@
   <string name="local_indexes_cat_srtm">Sestra-kurbak</string>
   <string name="local_indexes_cat_av">Audio/Bideo datuak</string>
   <string name="stop_routing_confirm">Ziur al zaude nabigazioa gelditu nahi duzula?</string>
-  <string name="clear_dest_confirm">Ziur zaude helmuga (eta erdibideko helburuak) garbitu nahi dituzula?</string>
+  <string name="clear_dest_confirm">Ziur zaude zure helmuga (eta erdibideko helburuak) garbitu nahi dituzula?</string>
   <string name="precise_routing_mode_descr">Gaitu errorerik gabeko ibilbide zehatza kalkulatzeko. Distantzia motzetara dago mugatua eta motela da.</string>
   <string name="precise_routing_mode">Bideratze zehatza (alpha)</string>
   <string name="recording_context_menu_show">Erakutsi</string>
@@ -239,8 +239,8 @@ Datu globalak (iparraldean 70 gradutan eta hegoaldean 70 gradutan) STRM (Shuttle
   <string name="context_menu_item_first_intermediate_point">Gehitu lehen erdibideko helburu gisa</string>
   <string name="add_as_last_destination_point">Gehitu azken erdibideko helburu gisa</string>
   <string name="add_as_first_destination_point">Gehitu lehen erdibideko helburu gisa</string>
-  <string name="replace_destination_point">Ordeztu helmuga puntua</string>
-  <string name="new_destination_point_dialog">Baduzu dagoeneko helmuga puntua ezarria.</string>
+  <string name="replace_destination_point">Ordeztu helmuga</string>
+  <string name="new_destination_point_dialog">Baduzu dagoeneko helmuga ezarria:</string>
   <string name="target_points">Helburuak</string>
   <string name="intermediate_point_too_far">%1$s tarteko helburua urrutiegi dago gertuen dagoen bidetik.</string>
   <string name="arrived_at_intermediate_point">Zure erdibideko helburura heldu zara</string>
@@ -340,38 +340,39 @@ Datu globalak (iparraldean 70 gradutan eta hegoaldean 70 gradutan) STRM (Shuttle
   <string name="route_updated_loc_found">Ibilbidea kokapena aurkitzean kalkulatuko da</string>
   <string name="osmand_parking_hours">Orduak</string>
   <string name="osmand_parking_minutes">Minutuak</string>
-  <string name="osmand_parking_position_description_add_time">Kotxea hemen aparkatua zegoen</string>
+  <string name="osmand_parking_position_description_add_time">Kotxea hemen aparkatua dago</string>
   
   <string name="select_animate_speedup">Aukeratu ibilbide simulazioaren abiadura</string>
   <string name="global_app_allocated_memory_descr">%1$s MB memoria erreserbatuta (Android muga %2$s MB da, Dalvikena %3$s MB).</string>
   <string name="global_app_allocated_memory">Memoria erreserbatua</string>
-  <string name="native_app_allocated_memory_descr">Aplikazioak erreserbatutako memoria %1$s MB da (Dalvik %2$s MB, bestelakoa %3$s MB).⏎\n⇥⇥Memory proportzionala %4$s MB da (Androiden muga %5$s MB da, Dalvik %6$s MB).</string>
+  <string name="native_app_allocated_memory_descr">Aplikazioak erreserbatutako memoria %1$s MB (Dalvik %2$s MB, bestelakoa %3$s MB).⏎
+ Memory proportzionala %4$s MB (Androiden muga %5$s MB, Dalvik %6$s MB).</string>
   <string name="native_app_allocated_memory">Memoria natiboa guztira</string>
   
   <string name="starting_point_too_far">Hasiera puntua urrunegi dago bide gertuenetik.</string>
   <string name="shared_location">Kokapen partekatua</string>
   <string name="osmand_parking_event">Hartu kotxea aparkalekutik</string>
   <string name="osmand_parking_warning">Kontuz</string>
-  <string name="osmand_parking_warning_text">Kotxea hartzeko jakinarazpena zure Egutegira gehitua izan da. Hor egongo da eskuz ezabatu arte.</string>
-  <string name="osmand_parking_time_limit_title">Ezarri aparkatzeko denbora maximoa</string>
+  <string name="osmand_parking_warning_text">Kotxea hartzeko jakinarazpena zure egutegira gehitu da. Hor mantenduko da zuk eskuz ezabatu arte.</string>
+  <string name="osmand_parking_time_limit_title">Ezarri aparkatzeko denbora muga</string>
   <string name="osmand_parking_delete_confirm">Aparkalekuaren kokapena ezabatu nahi al duzu?</string>
   <string name="osmand_parking_delete">Aparkaleku markatzaile bat ezabatu</string>
   <string name="osmand_parking_choose_type">Aparkaleku mota aukeratu</string>
   <string name="osmand_parking_lim_text">Denboraz mugatua</string>
   <string name="osmand_parking_no_lim_text">Denboraz ez mugatua</string>
-  <string name="osmand_parking_add_event">Egutegi aplikaziora jakinarazpen bat gehitu</string>
+  <string name="osmand_parking_add_event">Gehitu jakinarazpen bat egutegi aplikaziora</string>
   <string name="osmand_parking_time_limit">Denboraz mugatutako aparkalekua</string>
   <string name="osmand_parking_time_no_limit">Denboraz ez mugatutako aparkalekua</string>
   <string name="osmand_parking_position_description">Zure aparkatutako kotxearen kokalekua. %1$s</string>
   <string name="osmand_parking_position_description_add">Kotxea hartzeko garaia:</string>
   <string name="osmand_parking_pm">PM</string>
   <string name="osmand_parking_am">AM</string>
-  <string name="osmand_parking_position_name">Aparkaleku puntua</string>
+  <string name="osmand_parking_position_name">Aparkalekua</string>
   <string name="osmand_parking_plugin_description">Gehigarri honek zure aparkatutako kotxearen kokalekua eta geratzen zaizun denbora gogoratzea ahalbideratzen zaitu (denbora muga badago).
 
 Kokalekua eta denbora OsmAnd kontrol panelean ikusgai daude eta maparen pantailako trepetan . Alarma bat gehitu daiteke Android egutegira oroigarri gisa.</string>
   <string name="osmand_parking_plugin_name">Aparkalekuaren kokapena</string>
-  <string name="context_menu_item_add_parking_point">Aparkaleku kokapen bezala markatu</string>
+  <string name="context_menu_item_add_parking_point">Markatu aparkaleku kokapen bezala</string>
   <string name="context_menu_item_delete_parking_point">Aparkaleku markatzaile bat ezabatu</string>
   <string name="gpxup_public">Publikoa</string>
   <string name="gpxup_identifiable">Identifikagarria</string>
@@ -1179,14 +1180,14 @@ Honek {1} MB behar ditu behin betiko.
   <string name="av_camera_focus_descr">Aukeratu barne kamarako fokatze modua</string>
   <string name="av_camera_focus_auto">Auto fokalizazioa</string>
   <string name="av_camera_focus_hiperfocal">Foko hiperfokala</string>
-  <string name="av_camera_focus_edof">Extended depth of field (EDOF)</string>
+  <string name="av_camera_focus_edof">Hedatutako eremu-sakonera (EDOF)</string>
   <string name="av_camera_focus_infinity">Fokatzea infinitoan dago ezarria</string>
   <string name="av_camera_focus_macro">Macro (gertuko) enfokatze modua</string>
   <string name="av_camera_focus_continuous">Kamara etengabe ari da enfokatzen saiatzen</string>
   <string name="av_photo_play_sound">Argazkia ateratzean erreproduzitu soinua </string>
   <string name="av_photo_play_sound_descr">Aukeratu ea argazkiak ateratzean soinua erreproduzitu edo ez</string>
 <string name="use_displayed_track_for_navigation">Bistaratutako lorratza erabili nahi duzu nabigatzeko?</string>
-    <string name="keep_and_add_destination_point">Gehitu azken helmuga puntu gisa</string>
+    <string name="keep_and_add_destination_point">Gehitu ondorengo helmuga gisa</string>
     <string name="select_gpx">Aukeratu GPX…</string>
     <string name="route_descr_select_destination">Aukeratu Helmuga</string>
     <string name="shared_string_select_on_map">Aukeratu mapan</string>
@@ -1210,7 +1211,7 @@ Honek {1} MB behar ditu behin betiko.
 \n 2. Oharra : OsmAnd eta OsmAnd+ artean ezingo dira fitxategiak partekatu.</string>
     
     <string name="copying_osmand_one_file_descr">Fitxategia kopiatzen (%s) kokapen berrira…</string>
-    <string name="copying_osmand_files_descr">OsmAnd fitxategiak kopiatzen kokapen berrira (%s)</string>
+    <string name="copying_osmand_files_descr">OsmAnd fitxategiak kokapen berrira kopiatzen (%s)…</string>
     <string name="copying_osmand_files">OsmAnd fitxategiak kopiatzen…</string>
     <string name="app_mode_truck">Kamioia</string>
     <string name="guidance_preferences_descr">Nabigazio hobespenak</string>
@@ -1266,8 +1267,8 @@ Honek {1} MB behar ditu behin betiko.
     <string name="arrival_distance_descr">Noizko nahi duzu iristearen iragarkia?</string>
     <string name="share_route_subject">Ibilbidea OsmAnd bidez partekatu da</string>
 	<string name="share_route_as_gpx">Partekatu ibilbidea GPX fitxategi bezala</string>
-	<string name="interrupt_music_descr">Eten musika iragarkiak egiterakoan</string>
-	<string name="interrupt_music">Musika eten</string>
+	<string name="interrupt_music_descr">Eten musika guztiz ahots bidezko iragarkiak egiterakoan (eta ez bolumena jaitsi besterik gabe)</string>
+	<string name="interrupt_music">Eten musika</string>
 	<string name="index_item_world_altitude_correction">Munduko Altitude Zuzenketa</string>
 	<string name="rendering_attr_alpineHiking_name">SAC Alpetar ibilbide ikuspegia (Suitzako klub alpinoa)</string>
     <string name="rendering_attr_alpineHiking_description">Renderizatu bideak SAC eskalaren arabera</string>
@@ -1918,7 +1919,7 @@ eta gehiago…
     <string name="lang_es_us">Espainiera (Amerikarra)</string>
     <string name="lang_es_ar">Espainiera (Argentina)</string>
     <string name="lang_nb">Norbegiera (Bokmål)</string>
-    <string name="lang_vo">Volapuk</string>
+    <string name="lang_vo">Volapük</string>
     <string name="lang_th">Thailandiera</string>
     <string name="lang_nn">Norvegiera (Nynorsk)</string>
     <string name="lang_ms">Malaysiera</string>
@@ -2297,5 +2298,9 @@ OsmAnd aplikaziorako gehigarri berezi honek itsas nabigaziorako marka eta ikur k
 OsmAnden ohiko mapa batetara itzultzeko, gehigarri hau desgaitu edo \'Mapa estiloa\' aldatu \'Konfiguratu mapa\' menuan.
  "</string>
     <string name="fav_point_emoticons_message">Gogoko puntuaren izena aldatu da eta orain %1$s da irriabartxoak dituen katea fitxategira gorde ahal izateko.</string>
-    <string name="activate_seamarks_plugin">Gaitu itsaso markak gehigarria mesedez.</string>
+    <string name="activate_seamarks_plugin">Gaitu itsaso markak gehigarria mesedez</string>
+    <string name="plugin_ski_descr">"Gehigari honek zure eskura jartzen ditu mundo osoko eskiatzeko aldapak, fondoko eski zirkuitoak, trabesiako eski ibilbideak, teleferikoak, eta abar. Ibilbideak eta pistak zailtasunaren arabera koloreztatu dira, eta elurtutako paisaiaren itxura duen \'Negu\' estiloko mapa batean adierazten dira.
+
+Hau aktibatzean ikuspegia \'Negua eta eskia\' estilora aldatzen da, paisaia neguko egoeran bistaratuz. Hau atzera aldatu daiteke gehigarri hau desgaituz eta \'Konfiguratu mapa\' menuko \'Mapa estiloa\' aldatuz.
+ "</string>
     </resources>
