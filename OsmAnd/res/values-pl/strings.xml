@@ -616,7 +616,7 @@
     <string name="left_side_navigation">Ruch lewostronny</string>
     <string name="left_side_navigation_descr">Wybierz dla krajów z ruchem lewostronnym</string>
 
-    <string name="unknown_from_location">Początek trasy nie jest jeszcze wyznaczony</string>
+    <string name="unknown_from_location">Nie ustalono jeszcze położenia początkowego</string>
     <string name="confirm_interrupt_download">Anulować pobieranie pliku?</string>
     <string name="basemap_was_selected_to_download">Do pobrania została wybrana mapa bazowa wymagana do prawidłowego funkcjonowania programu.</string>
 
@@ -736,7 +736,7 @@ Mapy kafelkowe można uzyskać bezpośrednio z zasobów sieciowych, jak i przygo
     <string name="live_monitoring_interval">Częstość wysyłania danych</string>
     <string name="live_monitoring_url_descr">Określa adres usługi internetowej przy użyciu następujących parametrów: szerokość={0}, długość={1}, znacznik czasu={2}, hdop={3}, wysokość={4}, prędkość={5}, kierunek={6}</string>
     <string name="live_monitoring_url">Adres usługi śledzenia</string>
-    <string name="gpx_monitoring_disabled_warn">Zapisuj trasę używając widżetu GPX lub ustawienia „Nagrywanie trasy”.</string>
+    <string name="gpx_monitoring_disabled_warn">Zapisuj ślad używając widżetu GPX lub ustawienia „Nagrywanie trasy”.</string>
     <string name="show_current_gpx_title">Aktualny ślad</string>
 
     <string name="free_version_message">Ta darmowa wersja OsmAnd jest ograniczona do %1$s pobrań i nie obsługuje artykułów Wikipedii w trybie offline.</string>
@@ -824,7 +824,7 @@ Miejsce parkowania oraz czas można znaleźć na karcie w panelu oraz na widżec
     <string name="osmand_parking_plugin_name">Miejsce parkowania</string>
     <string name="context_menu_item_add_parking_point">Oznacz położenie parkowania</string>
     <string name="context_menu_item_delete_parking_point">Usuń znacznik parkowania</string>
-    <string name="starting_point_too_far">Początek trasy znajduje się zbyt daleko od najbliższej drogi.</string>
+    <string name="starting_point_too_far">Położenie początkowe znajduje się zbyt daleko od najbliższej drogi.</string>
     <string name="shared_location">Lokalizacja współdzielona</string>
 
     <string name="global_app_allocated_memory_descr">Użyta pamięć: %1$s MB (limit Androida %2$s MB, dalvika %3$s MB).</string>
@@ -832,7 +832,7 @@ Miejsce parkowania oraz czas można znaleźć na karcie w panelu oraz na widżec
     <string name="native_app_allocated_memory_descr">Zużycie pamięci natywnej przez aplikację %1$s MB (dalvik %2$s MB, inna %3$s MB).
  Proportional memory %4$s MB (limit Androida %5$s MB, dalvika %6$s MB).</string>
     <string name="native_app_allocated_memory">Użycie pamięci głównej</string>
-    <string name="select_animate_speedup">Wybierz przyspieszenie symulacji trasy</string>
+    <string name="select_animate_speedup">Wybierz prędkość symulacji trasy</string>
     <string name="osmand_parking_hours">Godziny</string>
     <string name="osmand_parking_minutes">Minuty</string>
     <string name="osmand_parking_position_description_add_time">Samochód został zaparkowany</string>
@@ -1294,7 +1294,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="map_magnifier">Przybliżenie</string>
 
 
-    <string name="route_is_too_long">Obliczanie trasy offline może zająć dłuższą chwilę (lub czasami nie działać) dla punktów, które dzieli więcej niż 200km. Można spróbować dodać cele pośrednie aby zwiększyć wydajność.</string>
+    <string name="route_is_too_long">Obliczanie trasy bez połączenia sieciowego może zająć dłuższą chwilę (lub czasami nie działać) dla położeń, które dzieli więcej niż 200km. Można dodać cele pośrednie, aby zwiększyć wydajność.</string>
     <string name="auto_zoom_none">Brak automatycznego przybliżania</string>
     <string name="auto_zoom_close">Zbliżenie</string>
     <string name="auto_zoom_far">Widok pośredni</string>
@@ -1304,7 +1304,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="shared_string_remember_my_choice">Zapamiętanie wyboru</string>
 
     <string name="animate_routing_route_not_calculated">Proszę najpierw przeliczyć trasę</string>
-    <string name="animate_routing_route">Pokaż używając obliczonej trasy </string>
+    <string name="animate_routing_route">"Zasymuluj używając wyznaczonej trasy "</string>
     <string name="animate_routing_gpx">Pokaż używając śladu GPX</string>
 
     <string name="local_osm_changes_delete_all_confirm">Usunąć %1$d zmian OSM?</string>
@@ -1325,8 +1325,8 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="speech_rate">Szybkość mowy</string>
 
     <string name="disable_complex_routing_descr">Wyłącza 2-etapowe wyznaczanie trasy dla nawigacji samochodowej</string>
-    <string name="complex_route_calculation_failed">Błąd szybkiego obliczania trasy (%s). Przełączanie na tryb powolny.</string>
-    <string name="disable_complex_routing">Wyłączenie złożonego wyznaczanie trasy</string>
+    <string name="complex_route_calculation_failed">"Nie udało się szybko wyznaczyć trasę  (%s). Przełączanie na tryb powolny."</string>
+    <string name="disable_complex_routing">Wyłączenie złożonego wyznaczania trasy</string>
     <string name="guidance_preferences_descr">Ustawienia nawigacji</string>
     <string name="routing_preferences_descr">Wyznaczanie trasy</string>
     <string name="app_mode_truck">Ciężarówka</string>
