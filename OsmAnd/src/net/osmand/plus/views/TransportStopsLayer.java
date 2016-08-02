@@ -202,21 +202,24 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 			if(route != null) {
 				objects = route.getForwardStops();
 			}
-			for (TransportStop o : objects) {
-				float x = tb.getPixXFromLatLon(o.getLocation().getLatitude(), o.getLocation().getLongitude());
-				float y = tb.getPixYFromLatLon(o.getLocation().getLatitude(), o.getLocation().getLongitude());
+			if (objects != null) {
+				for (TransportStop o : objects) {
+					float x = tb.getPixXFromLatLon(o.getLocation().getLatitude(), o.getLocation().getLongitude());
+					float y = tb.getPixYFromLatLon(o.getLocation().getLatitude(), o.getLocation().getLongitude());
 
-				if (intersects(boundIntersections, x, y, iconSize, iconSize)) {
-					canvas.drawBitmap(stopSmall, x - stopSmall.getWidth() / 2, y - stopSmall.getHeight() / 2, paintIcon);
-				} else {
-					fullObjects.add(o);
+					if (intersects(boundIntersections, x, y, iconSize, iconSize)) {
+						canvas.drawBitmap(stopSmall, x - stopSmall.getWidth() / 2, y - stopSmall.getHeight() / 2,
+								paintIcon);
+					} else {
+						fullObjects.add(o);
+					}
 				}
-			}
-			for (TransportStop o : fullObjects) {
-				float x = tb.getPixXFromLatLon(o.getLocation().getLatitude(), o.getLocation().getLongitude());
-				float y = tb.getPixYFromLatLon(o.getLocation().getLatitude(), o.getLocation().getLongitude());
-				Bitmap b = stopBus;
-				canvas.drawBitmap(b, x - b.getWidth() / 2, y - b.getHeight() / 2, paintIcon);
+				for (TransportStop o : fullObjects) {
+					float x = tb.getPixXFromLatLon(o.getLocation().getLatitude(), o.getLocation().getLongitude());
+					float y = tb.getPixYFromLatLon(o.getLocation().getLatitude(), o.getLocation().getLongitude());
+					Bitmap b = stopBus;
+					canvas.drawBitmap(b, x - b.getWidth() / 2, y - b.getHeight() / 2, paintIcon);
+				}
 			}
 			
 		}
