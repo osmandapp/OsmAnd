@@ -9,6 +9,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.resources.RegionAddressRepository;
 import net.osmand.search.SearchUICore;
+import net.osmand.search.SearchUICore.SearchResultCollection;
 import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchCoreFactory;
 import net.osmand.search.core.SearchPhrase;
@@ -28,7 +29,8 @@ public class QuickSearchHelper {
 	public static final int SEARCH_HISTORY_OBJECT_PRIORITY = 10;
 	private OsmandApplication app;
 	private SearchUICore core;
-	
+	private SearchResultCollection resultCollection;
+
 	public QuickSearchHelper(OsmandApplication app) {
 		this.app = app;
 		core = new SearchUICore(app.getPoiTypes(), app.getSettings().MAP_PREFERRED_LOCALE.get());
@@ -36,6 +38,14 @@ public class QuickSearchHelper {
 	
 	public SearchUICore getCore() {
 		return core;
+	}
+
+	public SearchResultCollection getResultCollection() {
+		return resultCollection;
+	}
+
+	public void setResultCollection(SearchResultCollection resultCollection) {
+		this.resultCollection = resultCollection;
 	}
 
 	public void initSearchUICore() {
