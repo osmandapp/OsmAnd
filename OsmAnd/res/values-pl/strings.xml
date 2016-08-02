@@ -104,7 +104,7 @@
 
 
     <string name="installing_new_resources">Rozpakowywanie nowych danych…</string>
-    <string name="internet_connection_required_for_online_route">Próbujesz użyć usługi online do wyznaczenia trasy, ale nie masz połączenia z Internetem.</string>
+    <string name="internet_connection_required_for_online_route">Wybrano sieciową usługę nawigacyjną, ale nie nawiązano połączenia sieciowego.</string>
     <string name="tts_language_not_supported_title">Nieobsługiwany język</string>
     <string name="tts_language_not_supported">Wybrany język nie jest obsługiwany przez zainstalowany moduł syntezy mowy. Odwiedzić Android Market, w poszukiwaniu innego mechanizmu syntezy mowy? W przeciwnym przypadku zostanie użyty aktualny język.</string>
     <string name="tts_missing_language_data_title">Brakujące dane</string>
@@ -451,10 +451,10 @@
     <string name="loading_streets">Wczytywanie ulic…</string>
     <string name="loading_cities">Wczytywanie miast…</string>
 
-    <string name="poi">Użyteczne Miejsce</string>
+    <string name="poi">Użyteczne miejsce</string>
     <string name="error_occurred_saving_gpx">Błąd podczas zapisywania śladu GPX</string>
-    <string name="error_calculating_route">Błąd obliczania trasy</string>
-    <string name="error_calculating_route_occured">Wystąpił błąd podczas obliczania trasy</string>
+    <string name="error_calculating_route">Błąd wyznaczania trasy</string>
+    <string name="error_calculating_route_occured">Wystąpił błąd podczas wyznaczania trasy</string>
     <string name="empty_route_calculated">Wyznaczono pustą trasę</string>
     <string name="new_route_calculated_dist">Obliczono nową trasę, dystans</string>
     <string name="arrived_at_destination">Osiągnięto cel</string>
@@ -512,7 +512,7 @@
     <string name="show_view_angle">Pokaż kierunek wyświetlania</string>
     <string name="map_view_3d_descr">Włącz widok 3D mapy</string>
     <string name="map_view_3d">Widok 3D mapy</string>
-    <string name="show_poi_over_map_description">Pokaż użyteczne miejsca na mapie (użyj ostatnio wybranego filtru)</string>
+    <string name="show_poi_over_map_description">Wyświetl użyteczne miejsca na mapie (użyj ostatnio wybranego filtru)</string>
     <string name="show_poi_over_map">Wyświetlanie użytecznych miejsc</string>
     <string name="map_tile_source_descr">Proszę wybrać zasób map kafelkowych online lub offline</string>
     <string name="map_tile_source">Zasób mapy kafelkowej</string>
@@ -2111,7 +2111,7 @@ Włączenie tego widoku zmienia styl mapy na „Zima i narty”, ukazujący tere
     <string name="rendering_attr_hideProposed_name">Proponowane obiekty</string>
     <string name="shared_string_update">Aktualizuj</string>
     <string name="shared_string_upload">Prześlij</string>
-    <string name="osm_edit_created_poi">Utworzono Użyteczne Miejsce OSM</string>
+    <string name="osm_edit_created_poi">Utworzono użyteczne miejsce OSM</string>
 
     <string name="simulate_initial_startup_descr">Ustala flagę wskazującą pierwsze uruchomienie programu zachowując wszystkie pozostałe ustawienia</string>
     <string name="share_geo">geo:</string>
@@ -2177,7 +2177,7 @@ Włączenie tego widoku zmienia styl mapy na „Zima i narty”, ukazujący tere
     <string name="osn_close_dialog_title">Zamknij notatkę</string>
     <string name="osn_add_dialog_success">Utworzono uwagę</string>
     <string name="context_menu_item_delete_waypoint">Usunąć punkt GPX?</string>
-    <string name="shared_string_location">Lokacja</string>
+    <string name="shared_string_location">Położenie</string>
     <string name="share_osm_edits_subject">Edycje OSM udostępnione przez OsmAnd</string>
     <string name="lang_fy">Fryzyjski</string>
     <string name="rendering_attr_currentTrackColor_description">Kolor śladu GPX</string>
@@ -2187,7 +2187,7 @@ Włączenie tego widoku zmienia styl mapy na „Zima i narty”, ukazujący tere
     <string name="use_drawer_btn">Używaj menu</string>
     <string name="dashboard_or_drawer_description">To jest nowy wybór podstawowej kontroli aplikacja za pomocą konfigurowalnego panelu lub statycznego menu. Wybór zawsze można zmienić w ustawieniach panelu.</string>
     <string name="osm_save_offline">Zapisz lokalnie</string>
-    <string name="please_specify_poi_type_only_from_list">Proszę określić rodzaj Użytecznego Miejsca lub pominąć go</string>
+    <string name="please_specify_poi_type_only_from_list">Proszę określić rodzaj użytecznego miejsca lub pominąć go</string>
     <string name="osm_edit_modified_poi">Zmodyfikowano użyteczne miejsce OSM</string>
     <string name="osm_edit_deleted_poi">Usunięto użyteczne miejce OSM</string>
     <string name="osm_edit_reopened_note">Otwarto ponownie notatkę OSM</string>
@@ -2200,7 +2200,7 @@ Włączenie tego widoku zmienia styl mapy na „Zima i narty”, ukazujący tere
     <string name="osn_close_dialog_error">Wystąpił błąd: nie zamknięto uwagi</string>
     <string name="shared_string_commit">Zatwierdź</string>
 
-    <string name="context_menu_item_edit_waypoint">Edytuj punktu trasy GPX</string>
+    <string name="context_menu_item_edit_waypoint">Edytuj punkt GPX</string>
     <string name="lang_nds">Dolno Saksoński</string>
     <string name="lang_mk">Macedoński</string>
     <string name="lang_als">Albański (Tosk)</string>
@@ -2248,7 +2248,7 @@ Włączenie tego widoku zmienia styl mapy na „Zima i narty”, ukazujący tere
     <string name="n_items_removed">pozycji usuniętych</string>
     <string name="shared_string_undo_all">COFNIJ WSZYSTKO</string>
     <string name="shared_string_type">Typ</string>
-    <string name="starting_point">Początek trasy</string>
+    <string name="starting_point">Położenie początkowe</string>
     <string name="rec_split_storage_size">Wielkość pamięci</string>
     <string name="live_updates">Bieżące aktualizacje</string>
     <string name="hourly">Co godzinę</string>
@@ -2387,7 +2387,7 @@ Włączenie tego widoku zmienia styl mapy na „Zima i narty”, ukazujący tere
     <string name="rendering_value_thin_name">Cienki</string>
     <string name="rendering_value_medium_name">Średni</string>
     <string name="rendering_value_bold_name">Gruby</string>
-    <string name="access_no_destination">Nie ustalono celu trasy</string>
+    <string name="access_no_destination">Nie ustalono położenia docelowego</string>
     <string name="access_disable_offroute_recalc">Utrzymywanie trasy po zboczeniu z niej</string>
     <string name="access_disable_offroute_recalc_descr">Zapobiega zmianie wyznaczonej trasy po znacznym oddaleniu się od niej</string>
     <string name="map_widget_magnetic_bearing">Orientacja magnetyczna</string>
