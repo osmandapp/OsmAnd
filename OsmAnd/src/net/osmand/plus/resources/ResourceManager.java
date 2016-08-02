@@ -95,15 +95,14 @@ public class ResourceManager {
 	protected File dirWithTiles ;
 	
 	private final OsmandApplication context;
-	
-	public interface ResourceWatcher {
-		
-		
-		public boolean indexResource(File f);
-		
-		public List<String> getWatchWorkspaceFolder();
+
+	private List<ResourceListener> resourceListeners = new ArrayList<>();
+
+	public interface ResourceListener {
+
+		void onMapsIndexed();
 	}
-	
+
 	
 	// Indexes
 	private final Map<String, RegionAddressRepository> addressMap = new ConcurrentHashMap<String, RegionAddressRepository>();
@@ -155,7 +154,16 @@ public class ResourceManager {
 		return renderingBufferImageThread;
 	}
 
-	
+	public void addResourceListener(ResourceListener listener) {
+		if (!resourceListeners.contains(listener)) {
+			resourceListeners.add(listener);
+		}
+	}
+
+	public void removeResourceListener(ResourceListener listener) {
+		resourceListeners.remove(listener);
+	}
+
 	public void resetStoreDirectory() {
 		dirWithTiles = context.getAppPath(IndexConstants.TILES_INDEX_DIR);
 		dirWithTiles.mkdirs();
@@ -729,6 +737,9 @@ public class ResourceManager {
 			} catch (Exception e) {
 				log.error("Index file could not be written", e);
 			}
+		}
+		for (ResourceListener l : resourceListeners) {
+			l.onMapsIndexed();
 		}
 		return warnings;
 	}
