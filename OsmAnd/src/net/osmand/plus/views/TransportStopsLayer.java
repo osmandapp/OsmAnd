@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.TreeSet;
 
 import net.osmand.ResultMatcher;
 import net.osmand.data.LatLon;
@@ -112,9 +113,14 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 			final int rp = getRadiusPoi(tb);
 			int radius = rp * 3 / 2;
 			try {
+				TreeSet<String> ms = new TreeSet<>();
 				for (int i = 0; i < objects.size(); i++) {
 					TransportStop n = objects.get(i);
 					if (n.getLocation() == null){
+						continue;
+					}
+					if(!ms.add(n.getName())) {
+						// only unique names
 						continue;
 					}
 					int x = (int) tb.getPixXFromLatLon(n.getLocation().getLatitude(), n.getLocation().getLongitude());

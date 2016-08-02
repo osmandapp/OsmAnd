@@ -3,6 +3,8 @@ package net.osmand.plus.mapcontextmenu.controllers;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import net.osmand.data.LatLon;
@@ -157,21 +159,39 @@ public class TransportStopController extends MenuController {
 
 		for (TransportIndexRepository t : reps) {
 			if (t.acceptTransportStop(transportStop)) {
-				addRoutes(useEnglishNames, t, transportStop, 0);
+				boolean empty = transportStop.getReferencesToRoutes() != null && transportStop.getReferencesToRoutes().length > 0;
+				if(!empty) {
+					addRoutes(useEnglishNames, t, transportStop, transportStop, 0);
+				}
 				ArrayList<TransportStop> ls = new ArrayList<>();
 				QuadRect ll = MapUtils.calculateLatLonBbox(transportStop.getLocation().getLatitude(), transportStop.getLocation().getLongitude(), 150);
 				t.searchTransportStops(ll.top, ll.left, ll.bottom, ll.right, -1, ls, null);
 				for(TransportStop tstop : ls) {
-					if(tstop.getId() != transportStop.getId() || !Arrays.equals(tstop.getReferencesToRoutes(),
-							transportStop.getReferencesToRoutes())) {
-						addRoutes(useEnglishNames, t, tstop, (int) MapUtils.getDistance(tstop.getLocation(), transportStop.getLocation()));
+					if(tstop.getId() != transportStop.getId() || empty) {
+						addRoutes(useEnglishNames, t, tstop, transportStop,  
+								(int) MapUtils.getDistance(tstop.getLocation(), transportStop.getLocation()));
 					}
 				}
 			}
 		}
+		Collections.sort(routes, new Comparator<TransportStopRoute>() {
+
+			@Override
+			public int compare(TransportStopRoute o1, TransportStopRoute o2) {
+				if(o1.distance != o2.distance) {
+					return Algorithms.compare(o1.distance, o2.distance);
+				}
+				int i1 = Algorithms.extractFirstIntegerNumber(o1.desc);
+				int i2 = Algorithms.extractFirstIntegerNumber(o2.desc);
+				if(i1 != i2) {
+					return Algorithms.compare(i1, i2);
+				}
+				return o1.desc.compareTo(o2.desc);
+			}
+		});
 	}
 
-	private void addRoutes(boolean useEnglishNames, TransportIndexRepository t, TransportStop s, int dist) {
+	private void addRoutes(boolean useEnglishNames, TransportIndexRepository t, TransportStop s, TransportStop refStop, int dist) {
 		Collection<TransportRoute> rts = t.getRouteForStop(s);
 		if (rts != null) {
 			for (TransportRoute rs : rts) {
@@ -183,6 +203,7 @@ public class TransportStopController extends MenuController {
 				r.type = type;
 				r.desc = rs.getRef() + " " + (useEnglishNames ?  rs.getEnName(true) : rs.getName());
 				r.route = rs;
+				r.refStop = refStop;
 				r.stop = s;
 				r.distance = dist;
 				this.routes.add(r);
@@ -191,6 +212,7 @@ public class TransportStopController extends MenuController {
 	}
 
 	public static class TransportStopRoute {
+		public TransportStop refStop;
 		public TransportStopType type;
 		public String desc;
 		public TransportRoute route;
@@ -199,8 +221,12 @@ public class TransportStopController extends MenuController {
 		public boolean showWholeRoute;
 
 		public String getDescription(OsmandApplication ctx, boolean useDistance) {
-			if(useDistance && distance > 0) {
-				return desc +" (" + OsmAndFormatter.getFormattedDistance(distance, ctx) +")";
+			if (useDistance && distance > 0) {
+				String nm = OsmAndFormatter.getFormattedDistance(distance, ctx);
+				if (!refStop.getName().equals(stop.getName())) {
+					nm = refStop.getName() + ", " + nm;
+				}
+				return desc + " (" + nm + ")";
 			}
 			return desc;
 		}
