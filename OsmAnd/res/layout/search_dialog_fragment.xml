@@ -24,6 +24,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:gravity="center_vertical"
+                android:focusableInTouchMode="true"
                 android:orientation="horizontal">
 
                 <EditText

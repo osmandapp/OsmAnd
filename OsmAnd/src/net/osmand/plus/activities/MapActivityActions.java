@@ -296,11 +296,7 @@ public class MapActivityActions implements DialogProvider {
 				} else if (standardId == R.string.context_menu_item_last_intermediate_point) {
 					mapActivity.getContextMenu().addAsLastIntermediate();
 				} else if (standardId == R.string.context_menu_item_search) {
-					Intent intent = new Intent(mapActivity, mapActivity.getMyApplication().getAppCustomization().getSearchActivity());
-					intent.putExtra(SearchActivity.SEARCH_LAT, latitude);
-					intent.putExtra(SearchActivity.SEARCH_LON, longitude);
-					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-					mapActivity.startActivity(intent);
+					mapActivity.showQuickSearch(latitude, longitude);
 				} else if (standardId == R.string.context_menu_item_directions_from) {
 					mapActivity.getContextMenu().hide();
 					if (settings.USE_MAP_MARKERS.get()
