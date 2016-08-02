@@ -2329,9 +2329,9 @@ OsmAnd Mapas y Navegación - encuentra ubicaciones en el mapa y calcula rutas si
     <string name="show_something_on_map">Mostrar %1$s en el mapa</string>
     <string name="dist_away_from_my_location">Buscar en %1$s alrededor</string>
     <string name="release_2_4">"
- • Nueva búsqueda de texto libre muy potente
+ • Nueva búsqueda poderosa de texto libre
 
- • Muchas mejoras de audio mediante Bluetooth
+ • Integración con el sistema de audio del automóvil y altavoces del teléfono vía Bluetooth
 
  • Mejoras en la guía de ruta, indicaciones por voz y de carriles de giro
 
