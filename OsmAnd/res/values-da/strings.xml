@@ -2386,71 +2386,45 @@ For at vende tilbage til en af OsmAnd konventionelle kortformater, enten deaktiv
     <string name="osmand_plus_extended_description_4000_chars_v2">"
 OsmAnd Maps &amp; Navigation - find steder på kortet og beregn ruter uden en internetforbindelse. Hent kort for et land, før rejsen og find steder og ruter i et ukendt område.
 
-
 Grundlæggende indstillinger:
-
 • Detaljerede kort for 200 lande
-
 • Offline navigation med talevejledning
 • Adressesøgning i offline tilstand
-
 • Info om steder på kortet: steder af interesse, caféer, parkeringspladser, butikker
-
 • Tilføj steder til foretrukne
-
-• Kørsel-, cykel- og fodgængernavigation
-
+• Bil-, cykel- og fodgængernavigation
 
 Yderligere indstillinger:
-
 • Mulighed for at vise og optage GPX spor
 • Wikipedia beskrivelse af interessepunkter
 • Tilføj foto-, audio-, og videonoter til kort
-
 • Dag- og natkort tilstand for mere bekvem kørsel
-
 • Oplysninger om offentlig transport og stoppesteder
 • Cykel- og gangstier
-
 • Vandreruter for turisme over hele verden
-
 • Online kort fra adskillige kilder
-
 • Info om vej- og fortovskvalitet og gadebelysning
-
 • Tilføj, rediger og sletning af IP (for OpenStreetMap.org brugere)
-
 • OsMo - realtidsovervågning af andre enheder
-
 
 Få pålidelig navigation - om det er i Frankrig, Tyskland, Mexico, Storbritannien, Spanien, Holland, USA, Rusland, Brasilien eller i et andet land.
 
-
 Udvidelser:
-
 • Konturkort og terrænskygge: https://goo.gl/7mojP8
-
-  højdekurver og terræn visualisering tilføjet til grundlæggende OsmAnd kortet.
-
+  højdekurver og terræn visualisering tilføjet til grundkort
 • Skikort: https://goo.gl/pX6DxJ
   info om skipister, langrendsløjper, tovbaner og skilifte
 • Søkort: https://goo.gl/0hEdxm
-
   Kortstil til visning af sømærker for indre- og kystnærnavigation.
-
 • Parkeringsposition https://goo.gl/6JxQXF
-
   Hjælper med at markere placeringen af den parkerede bil og viser hvor meget tid der er tilbage, hvis parkering er tidsbegrænset.
-
 
 Følg med på:
 • Twitter: https://twitter.com/osmandapp
-
 • Facebook: https://www.facebook.com/osmandapp
 • Hjemmeside: http://osmand.net
 
-
-Er der brug for hjælp med OsmAnd, kontakt da supportteamet: support@osmand.net. 
+Brug for hjælp med OsmAnd, kontakt supportteamet: support@osmand.net. 
  "</string>
     <string name="shared_string_email_address">Email adresse</string>
     <string name="shared_string_status">Status</string>
