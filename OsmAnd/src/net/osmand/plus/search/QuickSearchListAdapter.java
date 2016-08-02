@@ -263,21 +263,23 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 			String name = listItem.getName();
 			title.setText(name);
 
+			String desc = listItem.getTypeName();
+			boolean hasDesc = false;
+			if (!Algorithms.isEmpty(desc) && !desc.equals(name)) {
+				subtitle.setText(desc);
+				subtitle.setVisibility(View.VISIBLE);
+				hasDesc = true;
+			} else {
+				subtitle.setVisibility(View.GONE);
+			}
+
 			Drawable typeIcon = listItem.getTypeIcon();
 			ImageView group = (ImageView) view.findViewById(R.id.type_name_icon);
-			if (typeIcon != null) {
+			if (typeIcon != null && hasDesc) {
 				group.setImageDrawable(typeIcon);
 				group.setVisibility(View.VISIBLE);
 			} else {
 				group.setVisibility(View.GONE);
-			}
-
-			String desc = listItem.getTypeName();
-			if (!Algorithms.isEmpty(desc) && !desc.equals(name)) {
-				subtitle.setText(desc);
-				subtitle.setVisibility(View.VISIBLE);
-			} else {
-				subtitle.setVisibility(View.GONE);
 			}
 
 			TextView timeText = (TextView) view.findViewById(R.id.time);
