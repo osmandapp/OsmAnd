@@ -2068,8 +2068,8 @@ Włączenie tego widoku zmienia styl mapy na „Zima i narty”, ukazujący tere
     <string name="min_km">min/km</string>
     <string name="m_s">m/s</string>
 
-    <string name="shared_string_trip_recording">Nagrywanie trasy</string>
-    <string name="simulate_your_location_descr">Symuluje lokalizację za pomocą wyznaczonej trasy lub zarejestrowanego śladu GPX</string>
+    <string name="shared_string_trip_recording">Rejestrowanie śladów</string>
+    <string name="simulate_your_location_descr">Symuluje położenie przy użyciu wyznaczonej trasy lub zarejestrowanego śladu GPX</string>
     <string name="downloads_left_template">pozostało %1$s pobrań</string>
 
     <string name="regions">Regiony</string>
