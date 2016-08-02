@@ -1,14 +1,17 @@
 package net.osmand.plus.mapcontextmenu.controllers;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.data.TransportRoute;
 import net.osmand.data.TransportStop;
+import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -18,6 +21,7 @@ import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.resources.TransportIndexRepository;
 import net.osmand.plus.views.TransportStopsLayer;
 import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 
@@ -123,7 +127,8 @@ public class TransportStopController extends MenuController {
 				@Override
 				public void onClick(View arg0) {
 					MapContextMenu mm = getMapActivity().getContextMenu();
-					PointDescription pd = new PointDescription(PointDescription.POINT_TYPE_TRANSPORT_ROUTE, r.desc);
+					PointDescription pd = new PointDescription(PointDescription.POINT_TYPE_TRANSPORT_ROUTE, 
+							r.getDescription(getMapActivity().getMyApplication(), false));
 					mm.show(latLon, pd, r);
 					TransportStopsLayer stopsLayer = getMapActivity().getMapLayers().getTransportStopsLayer();
 					stopsLayer.setRoute(r.route);
@@ -132,9 +137,11 @@ public class TransportStopController extends MenuController {
 				}
 			};
 			if (r.type == null) {
-				addPlainMenuItem(R.drawable.ic_action_polygom_dark, r.desc, false, false, listener );
+				addPlainMenuItem(R.drawable.ic_action_polygom_dark, r.getDescription(getMapActivity().getMyApplication(), true),
+						false, false, listener );
 			} else {
-				addPlainMenuItem(r.type.getResourceId(), r.desc, false, false, listener);
+				addPlainMenuItem(r.type.getResourceId(), r.getDescription(getMapActivity().getMyApplication(), true), 
+						false, false, listener);
 			}
 		}
 		super.addPlainMenuItems(typeStr, pointDescription, latLon);
@@ -150,21 +157,35 @@ public class TransportStopController extends MenuController {
 
 		for (TransportIndexRepository t : reps) {
 			if (t.acceptTransportStop(transportStop)) {
-				Collection<TransportRoute> rts = t.getRouteForStop(transportStop);
-				if (rts != null) {
-					for (TransportRoute rs : rts) {
-						TransportStopType type = TransportStopType.findType(rs.getType());
-						TransportStopRoute r = new TransportStopRoute();
-						if (topType == null && type != null && type.isTopType()) {
-							topType = type;
-						}
-						r.type = type;
-						r.desc = rs.getRef() + " " + (useEnglishNames ?  rs.getEnName(true) : rs.getName());
-						r.route = rs;
-						r.stop = transportStop;
-						this.routes.add(r);
+				addRoutes(useEnglishNames, t, transportStop, 0);
+				ArrayList<TransportStop> ls = new ArrayList<>();
+				QuadRect ll = MapUtils.calculateLatLonBbox(transportStop.getLocation().getLatitude(), transportStop.getLocation().getLongitude(), 150);
+				t.searchTransportStops(ll.top, ll.left, ll.bottom, ll.right, -1, ls, null);
+				for(TransportStop tstop : ls) {
+					if(tstop.getId() != transportStop.getId() || !Arrays.equals(tstop.getReferencesToRoutes(),
+							transportStop.getReferencesToRoutes())) {
+						addRoutes(useEnglishNames, t, tstop, (int) MapUtils.getDistance(tstop.getLocation(), transportStop.getLocation()));
 					}
 				}
+			}
+		}
+	}
+
+	private void addRoutes(boolean useEnglishNames, TransportIndexRepository t, TransportStop s, int dist) {
+		Collection<TransportRoute> rts = t.getRouteForStop(s);
+		if (rts != null) {
+			for (TransportRoute rs : rts) {
+				TransportStopType type = TransportStopType.findType(rs.getType());
+				TransportStopRoute r = new TransportStopRoute();
+				if (topType == null && type != null && type.isTopType()) {
+					topType = type;
+				}
+				r.type = type;
+				r.desc = rs.getRef() + " " + (useEnglishNames ?  rs.getEnName(true) : rs.getName());
+				r.route = rs;
+				r.stop = s;
+				r.distance = dist;
+				this.routes.add(r);
 			}
 		}
 	}
@@ -174,8 +195,16 @@ public class TransportStopController extends MenuController {
 		public String desc;
 		public TransportRoute route;
 		public TransportStop stop;
+		public int distance;
 		public boolean showWholeRoute;
 
+		public String getDescription(OsmandApplication ctx, boolean useDistance) {
+			if(useDistance && distance > 0) {
+				return desc +" (" + OsmAndFormatter.getFormattedDistance(distance, ctx) +")";
+			}
+			return desc;
+		}
+		
 		public int calculateZoom(int startPosition, RotatedTileBox currentRotatedTileBox) {
 			RotatedTileBox cp = currentRotatedTileBox.copy();
 			boolean notContains = true;

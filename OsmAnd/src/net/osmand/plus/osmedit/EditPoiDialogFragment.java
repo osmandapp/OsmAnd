@@ -1,5 +1,33 @@
 package net.osmand.plus.osmedit;
 
+import java.io.Serializable;
+import java.util.Comparator;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
+import net.osmand.CallbackWithObject;
+import net.osmand.PlatformUtil;
+import net.osmand.data.Amenity;
+import net.osmand.data.LatLon;
+import net.osmand.osm.PoiCategory;
+import net.osmand.osm.PoiType;
+import net.osmand.osm.edit.EntityInfo;
+import net.osmand.osm.edit.Node;
+import net.osmand.osm.edit.OSMSettings;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.base.BaseOsmAndDialogFragment;
+import net.osmand.plus.osmedit.dialogs.PoiSubTypeDialogFragment;
+import net.osmand.plus.osmedit.dialogs.PoiTypeDialogFragment;
+import net.osmand.util.Algorithms;
+
+import org.apache.commons.logging.Log;
+
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
@@ -45,34 +73,6 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import net.osmand.CallbackWithObject;
-import net.osmand.PlatformUtil;
-import net.osmand.data.Amenity;
-import net.osmand.data.LatLon;
-import net.osmand.osm.PoiCategory;
-import net.osmand.osm.PoiType;
-import net.osmand.osm.edit.EntityInfo;
-import net.osmand.osm.edit.Node;
-import net.osmand.osm.edit.OSMSettings;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndDialogFragment;
-import net.osmand.plus.osmedit.dialogs.PoiSubTypeDialogFragment;
-import net.osmand.plus.osmedit.dialogs.PoiTypeDialogFragment;
-import net.osmand.util.Algorithms;
-
-import org.apache.commons.logging.Log;
-
-import java.io.Serializable;
-import java.util.Comparator;
-import java.util.HashSet;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
 
 public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 	public static final String TAG = "EditPoiDialogFragment";
@@ -192,8 +192,6 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 
 					ViewTreeObserver obs = view.getViewTreeObserver();
 					if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-						obs.removeOnGlobalLayoutListener(this);
-					} else {
 						obs.removeGlobalOnLayoutListener(this);
 					}
 

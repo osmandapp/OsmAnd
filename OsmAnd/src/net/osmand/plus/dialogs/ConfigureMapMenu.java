@@ -595,6 +595,7 @@ public class ConfigureMapMenu {
 						for (int i = 0; i < prefs.size(); i++) {
 							prefs.get(i).set(false);
 						}
+						adapter.getItem(pos).setColorRes(ContextMenuItem.INVALID_ID);
 						a.notifyDataSetInvalidated();
 						refreshMapComplete(activity);
 						activity.getMapLayers().updateLayers(activity.getMapView());
@@ -636,6 +637,7 @@ public class ConfigureMapMenu {
 						break;
 					}
 				}
+				builder.setColor(selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
 				builder.setSelected(selected);
 			}
 			return builder.createItem();
@@ -686,7 +688,18 @@ public class ConfigureMapMenu {
 
 		bld.setTitle(category);
 
-		bld.setNegativeButton(R.string.shared_string_cancel, null);
+		bld.setNegativeButton(R.string.shared_string_cancel, new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int whichButton) {
+				boolean selected = false;
+				for (int i = 0; i < prefs.size(); i++) {
+					prefs.get(i).set(tempPrefs[i]);
+					selected |= tempPrefs[i];
+				}
+				adapter.getItem(pos).setSelected(selected);
+				adapter.getItem(pos).setColorRes(selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
+				a.notifyDataSetInvalidated();
+			}
+		});
 
 		bld.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int whichButton) {
@@ -700,6 +713,7 @@ public class ConfigureMapMenu {
 						adapter.getItem(pos).setDescription(getDescription(prefs));
 					} else{
 						adapter.getItem(pos).setSelected(selected);
+						adapter.getItem(pos).setColorRes(selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
 					}
 				}
 				a.notifyDataSetInvalidated();
