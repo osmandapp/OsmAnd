@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
 
     <string name="layer_map_appearance">Configurar pantalla</string>
     <string name="show_lanes">Carriles</string>
@@ -799,23 +800,48 @@ Puede encontrar la localización y el tiempo de estacionamiento en la tarjeta de
     <string name="map_widget_vector_attributes">Atributos de dibujado</string>
     <string name="map_widget_renderer">Estilo del mapa</string>
     <string name="osmand_short_description_80_chars">Visor y navegador de mapas móvil global para mapas OSM fuera y en línea</string>
-    <string name="osmand_long_description_1000_chars">" OsmAnd (OSM Automated Navigation Directions, Guía de Navegación Automatizada)
-\n\nOsmAnd es una aplicación de navegación de código abierto con acceso a una amplia variedad de datos OpenStreetMap (OSM) globales. Todos los datos del mapa (vectoriales y teselas), pueden ser almacenados en la memoria del teléfono para su uso sin conexión. OsmAnd también ofrece funcionalidad de navegación con y sin conexión, incluyendo indicaciones giro-a-giro mediante voz.
-\n\nAlgunas de las características fundamentales:
-\n\n\t- Completa funcionalidad sin conexión (almacena los mapas vectoriales o teselas descargados en el almacenamiento del dispositivo)
-\n\t- Mapas vectoriales compactos disponibles de todo el planeta
-\n\t- Descarga de mapas por país o región directamente desde la aplicación
-\n\t- Posibilidad de superponer varias capas de mapa, como GPX o rutas de navegación, puntos de interés (PDI), favoritos, curvas de nivel, paradas de transporte público, mapas adicionales con transparencia personalizable
-\n\t- Búsqueda sin conexión de direcciones y lugares (PDIs)
-\n\t- Navegación sin conexión para distancias cortas (experimental)
-\n\t- Modo automóvil, bicicleta, y peatón con:
-\n\t\t- opción de cambio automático de vista diurna/nocturna
-\n\t\t- opción de acercamiento dependiente de la velocidad
-\n\t\t- opción de alineamiento del mapa opcional según brújula o dirección de movimiento
-\n\t\t- opción de indicación de carriles, visualización de límites de velocidad, voces grabadas y TTS\n\nLimitaciones de la versión gratuita de OsmAnd:
-\n\n\t- Limitado el número de mapas descargados
-\n\t- Sin acceso a los PDIs descargados de Wikipedia
-\n\nOsmAnd está siendo desarrollado activamente, nuestro proyecto y su progreso adicional se basa en contribuciones económicas para financiar el desarrollo y las pruebas de nuevas funcionalidades. Considere comprar OsmAnd+, financiar nuevas características específicas o hacer una donación en general a osmand.net. "</string>
+    <string name="osmand_long_description_1000_chars">"
+ OsmAnd (OSM Automated Navigation Directions, Guía de Navegación Automatizada)
+
+
+OsmAnd es una aplicación de navegación de código abierto con acceso a una amplia variedad de datos OpenStreetMap (OSM) globales. Todos los datos del mapa (vectoriales y teselas), pueden ser almacenados en la memoria del teléfono para su uso sin conexión. OsmAnd también ofrece funcionalidad de navegación con y sin conexión, incluyendo indicaciones giro-a-giro mediante voz.
+
+
+Algunas de las características fundamentales:
+
+
+\t- Completa funcionalidad sin conexión (almacena los mapas vectoriales o teselas descargados en el almacenamiento del dispositivo)
+
+\t- Mapas vectoriales compactos disponibles de todo el planeta
+
+\t- Descarga de mapas por país o región directamente desde la aplicación
+
+\t- Posibilidad de superponer varias capas de mapa, como GPX o rutas de navegación, puntos de interés (PDI), favoritos, curvas de nivel, paradas de transporte público, mapas adicionales con transparencia personalizable
+
+\t- Búsqueda sin conexión de direcciones y lugares (PDIs)
+
+\t- Navegación sin conexión para distancias medianas.
+
+\t- Modo automóvil, bicicleta, y peatón con:
+
+\t\t- opción de cambio automático de vista diurna/nocturna
+
+\t\t- opción de acercamiento dependiente de la velocidad
+
+\t\t- opción de alineamiento del mapa opcional según brújula o dirección de movimiento
+
+\t\t- opción de indicación de carriles, visualización de límites de velocidad, voces grabadas y TTS
+
+Limitaciones de la versión gratuita de OsmAnd:
+
+
+\t- Limitado el número de mapas descargados
+
+\t- Sin acceso a los PDIs descargados de Wikipedia
+
+
+OsmAnd está siendo desarrollado activamente, nuestro proyecto y su progreso adicional se basa en contribuciones económicas para financiar el desarrollo y las pruebas de nuevas funcionalidades. Considere comprar OsmAnd+, financiar nuevas características específicas o hacer una donación en general a osmand.net.
+ "</string>
     <string name="osmand_plus_short_description_80_chars">Visor y navegador móvil de mapas mundiales para OpenStreetMap fuera y en línea</string>
     <string name="osmand_plus_long_description_1000_chars">"
  OsmAnd+ (OSM Automated Navigation Directions)
@@ -830,7 +856,7 @@ Puede encontrar la localización y el tiempo de estacionamiento en la tarjeta de
  - Descarga de mapa de país o región directamente desde la aplicación
  - Posibilidad de superponer varias capas de mapa, como GPX o rutas de navegación, Puntos de Interés, favoritos, curvas de nivel, paradas de transporte público, mapas adicionales con transparencia personalizable
  - Búsqueda sin conexión de direcciones y lugares (PDI)
- - Rutas sin conexión para distancias cortas (experimental)
+ - Rutas sin conexión para medias distancias.
  - Modos de coche, bicicleta, y peatón con
 : - Cambio automático opcional de vista diurna/nocturna
  - Zoom opcional dependiente de la velocidad
@@ -2002,7 +2028,33 @@ Puede encontrar la localización y el tiempo de estacionamiento en la tarjeta de
     <string name="rendering_attr_currentTrackWidth_description">Ancho del GPX</string>
     <string name="rendering_attr_roadStyle_description">Estilo de carretera</string>
     <string name="osm_save_offline">Guardar sin conexión</string>
-    <string name="release_2_2">" • Nueva interfaz de usuario sensible al contexto para aprovechar lugares en el mapa y en otra pantallas.\n\n• La pantalla del mapa ahora se inicia directamente, a menos que \'Mostrar panel de control al iniciar la aplicación\', este seleccionado.\n\n• Configura cuál y cómo se mostrarán las tarjetas en el panel de instrumentos.\n\n• Omitir el panel de control, si quieres controlar la aplicación desde el menú.\n\n• Para descargar mapas, las regiones pueden seleccionarse directamente pulsando sobre el mapa mundial.\n\n• Mejor recálculo de la ruta (después de reiterados intentos, el motor ahora sugiere una ruta diferente).\n\n• La búsqueda de PDI, ahora soporta consultas más específicas.\n\n• Mejoras en PDI y funcionalidad de edición OSM.\n\n• Se rediseñó la estructura e interfaz de los datos de mapas.\n\n y más… "</string>
+    <string name="release_2_2">"
+ • Nueva interfaz de usuario sensible al contexto para aprovechar lugares en el mapa y en otra pantallas.
+
+
+• La pantalla del mapa ahora se inicia directamente, a menos que \'Mostrar panel de control al iniciar la aplicación\', este seleccionado.
+
+
+• Configura cuál y cómo se mostrarán las tarjetas en el panel de instrumentos.
+
+
+• Omitir el panel de control, si quieres controlar la aplicación desde el menú.
+
+
+• Para descargar mapas, las regiones pueden seleccionarse directamente pulsando sobre el mapa mundial.
+
+
+• La búsqueda de PDI, ahora soporta consultas más específicas.
+
+
+• Mejoras en PDI y funcionalidad de edición OSM.
+
+
+• Se rediseñó la estructura e interfaz de los datos de mapas.
+
+
+ y más…
+ "</string>
     <string name="copied_to_clipboard">Copiado al portapapeles</string>
     
     
