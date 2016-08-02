@@ -5,9 +5,11 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
 import net.osmand.data.QuadPoint;
+import net.osmand.data.QuadRect;
 import net.osmand.util.GeoPointParserUtil.GeoParsedPoint;
 
 
@@ -533,6 +535,25 @@ public class MapUtils {
 			x = (x << 1) | (1 & coord >> (b * 2 + 1));
 		}
 		return x;
+	}
+
+	public static QuadRect calculateLatLonBbox(double latitude, double longitude, int radiusMeters) {
+		int zoom = 16;
+		float coeff = (float) (radiusMeters / MapUtils.getTileDistanceWidth(zoom));
+		double tx = MapUtils.getTileNumberX(zoom, longitude);
+		double ty = MapUtils.getTileNumberY(zoom, latitude);
+		double topLeftX = Math.max(0, tx - coeff);
+		double topLeftY = Math.max(0, ty - coeff);
+		int max = (1 << zoom)  - 1;
+		double bottomRightX = Math.min(max, tx + coeff);
+		double bottomRightY = Math.min(max, ty + coeff);
+		double pw = MapUtils.getPowZoom(31 - zoom);
+		QuadRect rect = new QuadRect(topLeftX * pw, topLeftY * pw, bottomRightX * pw, bottomRightY * pw);
+		rect.left = MapUtils.get31LongitudeX((int) rect.left);
+		rect.top = MapUtils.get31LatitudeY((int) rect.top);
+		rect.right = MapUtils.get31LongitudeX((int) rect.right);
+		rect.bottom = MapUtils.get31LatitudeY((int) rect.bottom);
+		return rect;
 	}
 	
 	
