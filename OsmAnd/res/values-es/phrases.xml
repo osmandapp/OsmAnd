@@ -3055,4 +3055,6 @@
 	<string name="poi_toilets_disposal_chemical">Eliminación de desechos: químico</string>
 	<string name="poi_toilets_disposal_bucket">Eliminación de desechos: cubo</string>
 
+<string name="poi_length">Longitud</string>
+
 </resources>
