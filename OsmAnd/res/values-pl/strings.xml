@@ -435,7 +435,7 @@
     <string name="only_show">Pokaż trasę</string>
     <string name="follow">Rozpocznij nawigację</string>
     <string name="recalculate_route_to_your_location">Środek transportu:</string>
-    <string name="mark_final_location_first">Najpierw wybierz cel podróży</string>
+    <string name="mark_final_location_first">Proszę najpierw wskazać położenie docelowe</string>
     <string name="get_directions">Nawigacja</string>
 
     <string name="opening_hours">Godziny otwarcia</string>
@@ -927,16 +927,16 @@ OsmAnd jest otwarto-źródłowym programem do nawigacji z dostępem do szerokiej
     <string name="delete_target_point">Usuń cel</string>
     <string name="target_point">Cel podróży %1$s</string>
     <string name="intermediate_point">Pośredni cel %1$s</string>
-    <string name="context_menu_item_last_intermediate_point">Dodaj jako ostatni cel pośredni</string>
-    <string name="context_menu_item_first_intermediate_point">Dodaj jako pierwszy cel pośredni</string>
-    <string name="add_as_last_destination_point">Dodaj jako ostatni cel pośredni</string>
-    <string name="add_as_first_destination_point">Dodaj jako pierwszy cel pośredni</string>
+    <string name="context_menu_item_last_intermediate_point">Dodaj ostatnie położenie pośrednie</string>
+    <string name="context_menu_item_first_intermediate_point">Dodaj pierwsze położenie pośrednie</string>
+    <string name="add_as_last_destination_point">Dodaj ostatnie położenie pośrednie</string>
+    <string name="add_as_first_destination_point">Dodaj pierwsze położenie pośrednie</string>
     <string name="replace_destination_point">Zastąp położenie docelowe</string>
     <string name="new_destination_point_dialog">Już wybrano położenie docelowe:</string>
     <string name="target_points">Cele podróży</string>
     <string name="intermediate_point_too_far">Cel pośredni %1$s jest zbyt daleko od najbliższej ulicy.</string>
     <string name="arrived_at_intermediate_point">Osiągnięto położenie pośrednie</string>
-    <string name="context_menu_item_intermediate_point">Dodaj jako położenie pośrednie</string>
+    <string name="context_menu_item_intermediate_point">Dodaj położenie pośrednie</string>
     <string name="map_widget_intermediate_distance">Położenie pośrednie</string>
     <string name="ending_point_too_far">Położenie docelowe leży zbyt daleko od najbliższej ulicy.</string>
     <string name="add_tag">Dodaj znacznik</string>
@@ -1098,7 +1098,7 @@ OsmAnd jest otwarto-źródłowym programem do nawigacji z dostępem do szerokiej
 
     <string name="monitoring_settings_descr">Konfiguruje opcje rejestrowania tras</string>
 
-    <string name="monitoring_settings">Rejestrowanie trasy</string>
+    <string name="monitoring_settings">Rejestrowanie śladu</string>
 
     <string name="select_address_activity">Wybierz adres</string>
     <string name="local_openstreetmap_act_title">Modyfikacje OSM</string>
@@ -1170,9 +1170,9 @@ OsmAnd jest otwarto-źródłowym programem do nawigacji z dostępem do szerokiej
     <string name="context_menu_item_directions_to">Nawiguj do położenia</string>
     <string name="context_menu_item_directions_from">Nawiguj z położenia</string>
     <string name="route_descr_map_location">Mapa: </string>
-    <string name="route_to">Do:</string>
-    <string name="route_via">Przez:</string>
-    <string name="route_from">Z:</string>
+    <string name="route_to">Położenie docelowe:</string>
+    <string name="route_via">Położenie pośrednie:</string>
+    <string name="route_from">Położenie początkowe:</string>
 
 
     <string name="speak_speed_limit">Ograniczenia prędkości</string>
@@ -1358,7 +1358,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="route_preferences">Ustawienia trasy</string>
     <string name="route_info">Informacje o trasie</string>
     <string name="calculate_osmand_route_gpx">Wyznacz trasę offline w OsmAnd</string>
-    <string name="keep_and_add_destination_point">Dodaj jako następny cel</string>
+    <string name="keep_and_add_destination_point">Dodaj kolejny cel</string>
     <string name="use_displayed_track_for_navigation">Wykorzystać wyświetlaną trasę do nawigacji?</string>
 
     <string name="calculate_osmand_route_without_internet">Wyznacz segment trasy OsmAnd offline</string>
@@ -1518,7 +1518,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="osmo_show_group_notifications_descr">Wyświetla powiadomienia, gdy użytkownik dołącza do grupy lub opuszcza grupę</string>
     <string name="gpx_file_is_empty">Plik GPX jest pusty</string>
 
-    <string name="shared_string_my_tracks">Moje trasy</string>
+    <string name="shared_string_my_tracks">Moje ślady</string>
     <string name="shared_string_my_favorites">Ulubione</string>
     <string name="shared_string_my_places">Miejsca</string>
 
@@ -1820,7 +1820,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="shared_string_unexpected_error">Wystąpił nieoczekiwany błąd</string>
     <string name="shared_string_action_template">Działanie {0}</string>
     <string name="shared_string_collapse">Zwiń</string>
-    <string name="shared_string_currently_recording_track">Aktualna trasa</string>
+    <string name="shared_string_currently_recording_track">Aktualny ślad</string>
     <string name="shared_string_audio">Dźwięk</string>
     <string name="shared_string_video">Wideo</string>
     <string name="shared_string_photo">Obraz</string>
@@ -1862,7 +1862,7 @@ Można go wyłączyć używając obecnej tutaj opcji lub zmieniając styl mapy w
     <string name="get_plugin">Pobierz</string>
     <string name="local_osm_changes_upload_all_confirm">Wysłać %1$d zmian do OSM?</string>
     <string name="confirmation_to_clear_history">Wyczyścić historię?</string>
-    <string name="delay_to_start_navigation_descr">Określa czas wyświetlania ekranu planowania trasy</string>
+    <string name="delay_to_start_navigation_descr">Wyświetla pozostały czas oczekiwania na ekranie planowania trasy</string>
     <string name="delay_to_start_navigation">Rozpocznij nawigację zakręt-po-zakręcie za…</string>
     <string name="drawer">Płaska lista</string>
     <string name="days_behind">dni za najnowszą wersją</string>
@@ -1938,7 +1938,7 @@ Włączenie tego widoku zmienia styl mapy na „Zima i narty”, ukazujący tere
     <string name="archive_wikipedia_data">Posiadasz stare niezgodne dane Wikipedii. Czy chcesz je zarchiwizować?</string>
     <string name="download_wikipedia_files">Pobrać dodatkowe dane Wikipedii (%1$s MB)?</string>
     <string name="gps_network_not_enabled">Usługa lokalizacji nie jest włączona. Włączyć ją?</string>
-    <string name="disable_recording_once_app_killed_descrp">Po zakończeniu pracy aplikacji wstrzymuje rejestrowanie trasy. (Ikona pracy w tle znika z paska powiadomień)</string>
+    <string name="disable_recording_once_app_killed_descrp">Po zakończeniu działania aplikacji wstrzymuje rejestrowanie śladu (ikona działania w tle znika z paska powiadomień)</string>
     <string name="shared_string_import2osmand">Import do OsmAnd</string>
     <string name="read_full_article">Czytaj cały artykuł (online)</string>
     <string name="shared_string_wikipedia">Wikipedia</string>
@@ -2405,7 +2405,7 @@ Włączenie tego widoku zmienia styl mapy na „Zima i narty”, ukazujący tere
     <string name="access_autoannounce_period">Okres powiadomień</string>
     <string name="move_marker_bottom_sheet_title">Proszę przesunąć mapę, aby zmienić położenie znacznika</string>
     <string name="change_markers_position">Zmień położenie znacznika</string>
-    <string name="current_track">Aktualna trasa</string>
+    <string name="current_track">Aktualny ślad</string>
     <string name="app_mode_bus">Autobus</string>
  	<string name="app_mode_train">Pociąg</string>
     <string name="follow_us">Śledź nas</string>
