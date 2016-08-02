@@ -2,13 +2,6 @@ package net.osmand.plus;
 
 import android.os.AsyncTask;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-
 import net.osmand.Location;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
@@ -22,6 +15,13 @@ import net.osmand.router.RoutePlannerFrontEnd;
 import net.osmand.router.RoutingConfiguration;
 import net.osmand.router.RoutingContext;
 import net.osmand.util.MapUtils;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
 
 public class CurrentPositionHelper {
 	
@@ -81,7 +81,7 @@ public class CurrentPositionHelper {
 					return null;
 				}
 
-			}.execute((Void) null);
+			}.execute();
 
 			res = true;
 		}
