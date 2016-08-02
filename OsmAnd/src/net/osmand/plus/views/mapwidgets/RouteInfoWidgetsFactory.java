@@ -394,8 +394,8 @@ public class RouteInfoWidgetsFactory {
 						Location loc = locationProvider.getLastKnownLocation();
 						if(loc != null && loc.hasBearing()) {
 							double diff = MapUtils.alignAngleDifference(ro.directionRoute(0, true) -  
-									loc.getBearing() / (2 * Math.PI));
-							direction = Math.abs(diff) < Math.PI;
+									loc.getBearing() / 180f * Math.PI));
+							direction = Math.abs(diff) < Math.PI / 2f;
 						}
 						mx = ro.getMaximumSpeed(direction);
 					}
