@@ -2209,4 +2209,5 @@ V současnosti je k dispozici {2} MB.</string>
     <string name="share_history_subject">" sdílené přes OsmAnd"</string>
     <string name="coords_search">Hledání souřadnic</string>
     <string name="advanced_coords_search">Rozšířené hledání souřadnic</string>
+    <string name="route_stops_before">před %1$s zastávkami</string>
     </resources>
