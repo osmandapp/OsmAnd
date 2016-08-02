@@ -15,6 +15,7 @@ import net.osmand.data.City;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.data.QuadRect;
 import net.osmand.data.Street;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
@@ -30,6 +31,7 @@ import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
 import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchResult;
 import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
 
 import java.util.List;
 
@@ -232,6 +234,7 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 
 	private Amenity findAmenity(String name, double lat, double lon, String lang) {
 		OsmandApplication app = getMyApplication();
+		QuadRect rect = MapUtils.calculateLatLonBbox(lat, lon, 15);
 		List<Amenity> amenities = app.getResourceManager().searchAmenities(
 				new SearchPoiTypeFilter() {
 					@Override
@@ -243,7 +246,7 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 					public boolean isEmpty() {
 						return false;
 					}
-				}, lat, lon, lat, lon, -1, null);
+				}, rect.top, rect.left, rect.bottom, rect.right, -1, null);
 
 		MapPoiTypes types = app.getPoiTypes();
 		for (Amenity amenity : amenities) {

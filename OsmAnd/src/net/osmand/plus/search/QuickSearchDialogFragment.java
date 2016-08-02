@@ -8,6 +8,7 @@ import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
@@ -79,6 +80,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 	public static final String TAG = "QuickSearchDialogFragment";
 	private static final String QUICK_SEARCH_QUERY_KEY = "quick_search_query_key";
+	private static final String QUICK_SEARCH_SEARCHING_KEY = "quick_search_searching_key";
 	private Toolbar toolbar;
 	private LockableViewPager viewPager;
 	private SearchFragmentPagerAdapter pagerAdapter;
@@ -100,15 +102,20 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	private ProgressBar progressBar;
 	private ImageButton clearButton;
 
+	private OsmandApplication app;
+	private QuickSearchHelper searchHelper;
 	private SearchUICore searchUICore;
 	private String searchQuery = "";
-	private SearchResultCollection resultCollection;
 
 	private net.osmand.Location location = null;
 	private Float heading = null;
 	private boolean useMapCenter;
 	private boolean paused;
+	private boolean searching;
 	private boolean foundPartialLocation;
+
+	private boolean newSearch;
+	private boolean interruptedSearch;
 
 	private static final double DISTANCE_THRESHOLD = 70000; // 70km
 
@@ -116,7 +123,8 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		boolean isLightTheme = getMyApplication().getSettings().OSMAND_THEME.get() == OsmandSettings.OSMAND_LIGHT_THEME;
+		app = getMyApplication();
+		boolean isLightTheme = app.getSettings().OSMAND_THEME.get() == OsmandSettings.OSMAND_LIGHT_THEME;
 		int themeId = isLightTheme ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme;
 		setStyle(STYLE_NO_FRAME, themeId);
 	}
@@ -126,14 +134,15 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
 		final MapActivity mapActivity = getMapActivity();
-		final OsmandApplication app = getMyApplication();
 		final View view = inflater.inflate(R.layout.search_dialog_fragment, container, false);
 
 		if (savedInstanceState != null) {
 			searchQuery = savedInstanceState.getString(QUICK_SEARCH_QUERY_KEY);
+			interruptedSearch = savedInstanceState.getBoolean(QUICK_SEARCH_SEARCHING_KEY, false);
 		}
 		if (searchQuery == null) {
 			searchQuery = getArguments().getString(QUICK_SEARCH_QUERY_KEY);
+			newSearch = true;
 		}
 		if (searchQuery == null)
 			searchQuery = "";
@@ -149,7 +158,6 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		view.findViewById(R.id.buttonToolbar).setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				OsmandSettings settings = app.getSettings();
 				SearchPhrase searchPhrase = searchUICore.getPhrase();
 				if (foundPartialLocation) {
 					QuickSearchCoordinatesFragment.showDialog(QuickSearchDialogFragment.this, searchPhrase.getUnknownSearchWord());
@@ -166,13 +174,9 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 					}
 					app.getPoiFilters().clearSelectedPoiFilters();
 					app.getPoiFilters().addSelectedPoiFilter(filter);
-					getMapActivity().setQuickSearchTopbarActive(searchPhrase.isNoSelectedType());
+					getMapActivity().setQuickSearchTopbarActive(true);
 					getMapActivity().refreshMap();
-					if (searchPhrase.isNoSelectedType()) {
-						hide();
-					} else {
-						dismiss();
-					}
+					hide();
 				} else {
 					SearchWord word = searchPhrase.getLastSelectedWord();
 					if (word != null && word.getLocation() != null) {
@@ -180,7 +184,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 						String name = QuickSearchListItem.getName(app, searchResult);
 						String typeName = QuickSearchListItem.getTypeName(app, searchResult);
 						PointDescription pointDescription = new PointDescription(PointDescription.POINT_TYPE_ADDRESS, typeName, name);
-						getMyApplication().getSettings().setMapLocationToShow(
+						app.getSettings().setMapLocationToShow(
 								searchResult.location.getLatitude(), searchResult.location.getLongitude(),
 								searchResult.preferredZoom, pointDescription, true, searchResult.object);
 
@@ -333,6 +337,13 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 		setupSearch(mapActivity);
 
+		return view;
+	}
+
+	@Override
+	public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+		super.onViewCreated(view, savedInstanceState);
+
 		updateToolbarButton();
 		updateClearButtonAndHint();
 		updateClearButtonVisibility(true);
@@ -340,8 +351,6 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 		searchEditText.requestFocus();
 		AndroidUtils.softKeyboardDelayed(searchEditText);
-
-		return view;
 	}
 
 	public String getText() {
@@ -373,21 +382,19 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	}
 
 	public void closeSearch() {
-		MapActivity mapActivity = getMapActivity();
-		mapActivity.getMyApplication().getPoiFilters().clearSelectedPoiFilters();
+		app.getPoiFilters().clearSelectedPoiFilters();
 		dismiss();
 	}
 
 	public void addMainSearchFragment() {
+		mainSearchFragment = (QuickSearchMainListFragment) Fragment.instantiate(this.getContext(), QuickSearchMainListFragment.class.getName());
 		FragmentManager childFragMan = getChildFragmentManager();
 		FragmentTransaction childFragTrans = childFragMan.beginTransaction();
-		mainSearchFragment = new QuickSearchMainListFragment();
-		childFragTrans.add(R.id.search_view, mainSearchFragment);
+		childFragTrans.replace(R.id.search_view, mainSearchFragment);
 		childFragTrans.commit();
 	}
 
 	private void updateToolbarButton() {
-		OsmandApplication app = getMyApplication();
 		if (foundPartialLocation) {
 			buttonToolbarText.setText(app.getString(R.string.advanced_coords_search).toUpperCase());
 		} else if (searchEditText.getText().length() > 0) {
@@ -403,11 +410,14 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	}
 
 	private void setupSearch(final MapActivity mapActivity) {
-		final OsmandApplication app = mapActivity.getMyApplication();
 		// Setup search core
 		String locale = app.getSettings().MAP_PREFERRED_LOCALE.get();
-		searchUICore = app.getSearchUICore().getCore();
-		searchUICore.resetPhrase();
+		searchHelper = app.getSearchUICore();
+		searchUICore = searchHelper.getCore();
+		if (newSearch) {
+			setResultCollection(null);
+			searchUICore.resetPhrase();
+		}
 
 		location = app.getLocationProvider().getLastKnownLocation();
 		LatLon clt = mapActivity.getMapView().getCurrentRotatedTileBox().getCenterLatLon();
@@ -431,8 +441,11 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 				app.runInUIThread(new Runnable() {
 					@Override
 					public void run() {
-						hideProgressBar();
-						addMoreButton();
+						searching = false;
+						if (!paused) {
+							hideProgressBar();
+							addMoreButton();
+						}
 					}
 				});
 			}
@@ -448,6 +461,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
 		outState.putString(QUICK_SEARCH_QUERY_KEY, searchQuery);
+		outState.putBoolean(QUICK_SEARCH_SEARCHING_KEY, searching);
 	}
 
 	@Override
@@ -464,6 +478,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		super.onPause();
 		paused = true;
 		stopLocationUpdate();
+		hideProgressBar();
 	}
 
 	@Override
@@ -485,7 +500,6 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	}
 
 	private void startLocationUpdate() {
-		OsmandApplication app = getMyApplication();
 		app.getLocationProvider().addCompassListener(this);
 		app.getLocationProvider().addLocationListener(this);
 		location = app.getLocationProvider().getLastKnownLocation();
@@ -493,7 +507,6 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	}
 
 	private void stopLocationUpdate() {
-		OsmandApplication app = getMyApplication();
 		app.getLocationProvider().removeLocationListener(this);
 		app.getLocationProvider().removeCompassListener(this);
 	}
@@ -509,7 +522,6 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	}
 
 	private void updateClearButtonAndHint() {
-		OsmandApplication app = getMyApplication();
 		if (useMapCenter && searchEditText.length() == 0) {
 			LatLon latLon = searchUICore.getSearchSettings().getOriginalLocation();
 			double d = MapUtils.getDistance(latLon, location.getLatitude(), location.getLongitude());
@@ -544,6 +556,14 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		}
 	}
 
+	public void setResultCollection(SearchResultCollection resultCollection) {
+		searchHelper.setResultCollection(resultCollection);
+	}
+
+	public SearchResultCollection getResultCollection() {
+		return searchHelper.getResultCollection();
+	}
+
 	public void onSearchListFragmentResume(QuickSearchListFragment searchListFragment) {
 		switch (searchListFragment.getType()) {
 			case HISTORY:
@@ -557,11 +577,13 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 				break;
 
 			case MAIN:
-				if (!Algorithms.isEmpty(searchQuery) && !searchQuery.equals(searchEditText.getText().toString())) {
-					String txt = searchQuery;
-					searchQuery = "";
-					searchEditText.setText(txt);
-					searchEditText.setSelection(txt.length());
+				if (!Algorithms.isEmpty(searchQuery)) {
+					searchEditText.setText(searchQuery);
+					searchEditText.setSelection(searchQuery.length());
+				}
+				if (getResultCollection() != null) {
+					updateSearchResult(getResultCollection(), false);
+					addMoreButton();
 				}
 				break;
 		}
@@ -573,7 +595,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 	public void reloadCategories() {
 		SearchAmenityTypesAPI amenityTypesAPI =
-				new SearchAmenityTypesAPI(getMyApplication().getPoiTypes());
+				new SearchAmenityTypesAPI(app.getPoiTypes());
 		final List<SearchResult> amenityTypes = new ArrayList<>();
 		SearchPhrase sp = new SearchPhrase(null).generateNewPhrase("", searchUICore.getSearchSettings());
 		try {
@@ -596,7 +618,6 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		if (amenityTypes.size() > 0) {
 			searchUICore.sortSearchResults(sp, amenityTypes);
 			List<QuickSearchListItem> rows = new ArrayList<>();
-			OsmandApplication app = getMyApplication();
 			for (SearchResult sr : amenityTypes) {
 				rows.add(new QuickSearchListItem(app, sr));
 			}
@@ -605,7 +626,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	}
 
 	public void reloadHistory() {
-		SearchHistoryAPI historyAPI = new SearchHistoryAPI(getMyApplication());
+		SearchHistoryAPI historyAPI = new SearchHistoryAPI(app);
 		final List<SearchResult> history = new ArrayList<>();
 		SearchPhrase sp = new SearchPhrase(null).generateNewPhrase("", searchUICore.getSearchSettings());
 		historyAPI.search(sp, new SearchResultMatcher(
@@ -623,7 +644,6 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 				}, 0, new AtomicInteger(0), -1));
 		List<QuickSearchListItem> rows = new ArrayList<>();
 		if (history.size() > 0) {
-			OsmandApplication app = getMyApplication();
 			for (SearchResult sr : history) {
 				rows.add(new QuickSearchListItem(app, sr));
 			}
@@ -649,7 +669,6 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		foundPartialLocation = false;
 		updateToolbarButton();
 
-		final OsmandApplication app = getMyApplication();
 		if (app.isApplicationInitializing() && text.length() > 0) {
 			app.getAppInitializer().addListener(new AppInitializeListener() {
 				@Override
@@ -673,7 +692,8 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	}
 
 	private SearchResultCollection runCoreSearchInternal(String text) {
-
+		interruptedSearch = false;
+		searching = true;
 		return searchUICore.search(text, new ResultMatcher<SearchResult>() {
 
 			SearchResultCollection regionResultCollection = null;
@@ -684,6 +704,9 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			public boolean publish(SearchResult object) {
 
 				if (paused) {
+					if (results.size() > 0) {
+						getResultCollection().getCurrentSearchResults().addAll(results);
+					}
 					return false;
 				}
 
@@ -708,18 +731,20 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 						regionResultCollection = null;
 						results = new ArrayList<>();
 
-						getMyApplication().runInUIThread(new Runnable() {
+						app.runInUIThread(new Runnable() {
 							@Override
 							public void run() {
-								boolean appended = false;
-								if (resultCollection == null || resultCollection.getPhrase() != phrase) {
-									resultCollection = new SearchResultCollection(apiResults, phrase);
-								} else {
-									resultCollection.getCurrentSearchResults().addAll(apiResults);
-									appended = true;
-								}
-								if (!hasRegionCollection) {
-									updateSearchResult(resultCollection, appended);
+								if (!paused) {
+									boolean appended = false;
+									if (getResultCollection() == null || getResultCollection().getPhrase() != phrase) {
+										setResultCollection(new SearchResultCollection(apiResults, phrase));
+									} else {
+										getResultCollection().getCurrentSearchResults().addAll(apiResults);
+										appended = true;
+									}
+									if (!hasRegionCollection) {
+										updateSearchResult(getResultCollection(), appended);
+									}
 								}
 							}
 						});
@@ -731,24 +756,26 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 						final SearchPhrase regionPhrase = object.requiredSearchPhrase;
 						searchUICore.sortSearchResults(regionPhrase, regionResults);
 
-						getMyApplication().runInUIThread(new Runnable() {
+						app.runInUIThread(new Runnable() {
 							@Override
 							public void run() {
-								boolean appended = resultCollection != null && resultCollection.getPhrase() == regionPhrase;
-								regionResultCollection = new SearchResultCollection(regionResults, regionPhrase);
-								if (appended) {
-									List<SearchResult> res = new ArrayList<>(resultCollection.getCurrentSearchResults());
-									res.addAll(regionResults);
-									SearchResultCollection resCollection = new SearchResultCollection(res, regionPhrase);
-									updateSearchResult(resCollection, true);
-								} else {
-									updateSearchResult(regionResultCollection, false);
+								if (!paused) {
+									boolean appended = getResultCollection() != null && getResultCollection().getPhrase() == regionPhrase;
+									regionResultCollection = new SearchResultCollection(regionResults, regionPhrase);
+									if (appended) {
+										List<SearchResult> res = new ArrayList<>(getResultCollection().getCurrentSearchResults());
+										res.addAll(regionResults);
+										SearchResultCollection resCollection = new SearchResultCollection(res, regionPhrase);
+										updateSearchResult(resCollection, true);
+									} else {
+										updateSearchResult(regionResultCollection, false);
+									}
 								}
 							}
 						});
 						break;
 					case PARTIAL_LOCATION:
-						getMyApplication().runInUIThread(new Runnable() {
+						app.runInUIThread(new Runnable() {
 							@Override
 							public void run() {
 								foundPartialLocation = true;
@@ -785,7 +812,6 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	}
 
 	private void addMoreButton() {
-		OsmandApplication app = getMyApplication();
 		if ((searchUICore.getPhrase().isUnknownSearchWordPresent() || searchUICore.getPhrase().isLastWord(ObjectType.POI_TYPE))
 				&& searchUICore.getPhrase().getSettings().getRadiusLevel() < 7) {
 
@@ -793,8 +819,10 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 					new QuickSearchMoreListItem(app, app.getString(R.string.search_POI_level_btn).toUpperCase(), new OnClickListener() {
 						@Override
 						public void onClick(View v) {
-							SearchSettings settings = searchUICore.getPhrase().getSettings();
-							searchUICore.updateSettings(settings.setRadiusLevel(settings.getRadiusLevel() + 1));
+							if (!interruptedSearch) {
+								SearchSettings settings = searchUICore.getPhrase().getSettings();
+								searchUICore.updateSettings(settings.setRadiusLevel(settings.getRadiusLevel() + 1));
+							}
 							runCoreSearch(searchQuery, false);
 						}
 					});
@@ -808,7 +836,6 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	private void updateSearchResult(SearchResultCollection res, boolean appended) {
 
 		if (!paused && mainSearchFragment != null) {
-			OsmandApplication app = getMyApplication();
 			List<QuickSearchListItem> rows = new ArrayList<>();
 			if (res.getCurrentSearchResults().size() > 0) {
 				for (final SearchResult sr : res.getCurrentSearchResults()) {
@@ -854,7 +881,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		heading = value;
 		if (Math.abs(MapUtils.degreesDiff(lastHeading, heading)) > 5) {
 			final Location location = this.location;
-			getMyApplication().runInUIThread(new Runnable() {
+			app.runInUIThread(new Runnable() {
 				@Override
 				public void run() {
 					updateLocationUI(location, value);
@@ -869,7 +896,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	public void updateLocation(final Location location) {
 		this.location = location;
 		final Float heading = this.heading;
-		getMyApplication().runInUIThread(new Runnable() {
+		app.runInUIThread(new Runnable() {
 			@Override
 			public void run() {
 				updateLocationUI(location, heading);
@@ -922,7 +949,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 	public void updateSelectionMode(List<QuickSearchListItem> selectedItems) {
 		if (selectedItems.size() > 0) {
-			String text = selectedItems.size() + " " + getMyApplication().getString(R.string.shared_string_selected_lowercase);
+			String text = selectedItems.size() + " " + app.getString(R.string.shared_string_selected_lowercase);
 			titleEdit.setText(text);
 		} else {
 			titleEdit.setText("");
@@ -962,11 +989,11 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 						dir.mkdir();
 					}
 					File dst = new File(dir, "History.gpx");
-					GPXUtilities.writeGpxFile(dst, gpxFile, getMyApplication());
+					GPXUtilities.writeGpxFile(dst, gpxFile, app);
 
 					final Intent sendIntent = new Intent();
 					sendIntent.setAction(Intent.ACTION_SEND);
-					sendIntent.putExtra(Intent.EXTRA_TEXT, "History.gpx:\n\n\n" + GPXUtilities.asString(gpxFile, getMyApplication()));
+					sendIntent.putExtra(Intent.EXTRA_TEXT, "History.gpx:\n\n\n" + GPXUtilities.asString(gpxFile, app));
 					sendIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share_history_subject));
 					sendIntent.putExtra(Intent.EXTRA_STREAM,
 							FileProvider.getUriForFile(getActivity(),
