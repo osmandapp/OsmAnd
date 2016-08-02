@@ -567,13 +567,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 		app.getDownloadThread().setUiActivity(this);
 
-		//if (mapViewTrackingUtilities.getShowRouteFinishDialog()) {
+		if (mapViewTrackingUtilities.getShowRouteFinishDialog()) {
 			DestinationReachedMenu.show(this);
-			//mapViewTrackingUtilities.setShowRouteFinishDialog(false);
-		//}
-		DestinationReachedMenu.show(this);
-		DestinationReachedMenu.show(this);
-		DestinationReachedMenu.show(this);
+			mapViewTrackingUtilities.setShowRouteFinishDialog(false);
+		}
 
 		routingHelper.addListener(this);
 		app.getMapMarkersHelper().addListener(this);
