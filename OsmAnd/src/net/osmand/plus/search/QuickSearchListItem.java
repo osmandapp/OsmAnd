@@ -208,7 +208,7 @@ public class QuickSearchListItem {
 				if (hasTypeInDescription) {
 					return entry.getName().getTypeName();
 				} else {
-					return app.getString(R.string.shared_string_history);
+					return "";
 				}
 			case WPT:
 				StringBuilder sb = new StringBuilder();

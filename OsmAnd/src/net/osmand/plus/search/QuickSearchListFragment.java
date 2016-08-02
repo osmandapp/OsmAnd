@@ -158,6 +158,7 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 			String lang = searchResult.requiredSearchPhrase.getSettings().getLang();
 			PointDescription pointDescription = null;
 			Object object = searchResult.object;
+			String typeName = null;
 			switch (searchResult.objectType) {
 				case POI:
 					String poiSimpleFormat = OsmAndFormatter.getPoiStringWithoutType((Amenity) object, lang);
@@ -191,25 +192,30 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 					pointDescription = fav.getPointDescription();
 					break;
 				case HOUSE:
-					String nm = searchResult.localeName;
+					String name = searchResult.localeName;
 					if (searchResult.relatedObject instanceof City) {
-						nm = ((City) searchResult.relatedObject).getName(searchResult.requiredSearchPhrase.getSettings().getLang(), true) + " " + nm;
+						typeName = ((City) searchResult.relatedObject).getName(searchResult.requiredSearchPhrase.getSettings().getLang(), true);
 					} else if (searchResult.relatedObject instanceof Street) {
 						String s = ((Street) searchResult.relatedObject).getName(searchResult.requiredSearchPhrase.getSettings().getLang(), true);
 						String c = ((Street) searchResult.relatedObject).getCity().getName(searchResult.requiredSearchPhrase.getSettings().getLang(), true);
-						nm = s + " " + nm + ", " + c;
+						name = s + " " + name;
+						typeName = c;
 					} else if (searchResult.localeRelatedObjectName != null) {
-						nm = searchResult.localeRelatedObjectName + " " + nm;
+						typeName = searchResult.localeRelatedObjectName;
 					}
-					pointDescription = new PointDescription(PointDescription.POINT_TYPE_ADDRESS, nm);
+					pointDescription = new PointDescription(PointDescription.POINT_TYPE_ADDRESS, typeName, name);
 					break;
 				case LOCATION:
 					LatLon latLon = (LatLon) object;
 					pointDescription = new PointDescription(latLon.getLatitude(), latLon.getLongitude());
 					break;
 				case STREET_INTERSECTION:
+					typeName = QuickSearchListItem.getTypeName(app, searchResult);
+					if (Algorithms.isEmpty(typeName)) {
+						typeName = null;
+					}
 					pointDescription = new PointDescription(PointDescription.POINT_TYPE_ADDRESS,
-							QuickSearchListItem.getName(app, searchResult));
+							typeName, QuickSearchListItem.getName(app, searchResult));
 					break;
 				case WPT:
 					GPXUtilities.WptPt wpt = (GPXUtilities.WptPt) object;
