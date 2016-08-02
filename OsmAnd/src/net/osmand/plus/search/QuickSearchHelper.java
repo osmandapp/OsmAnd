@@ -22,6 +22,7 @@ import java.util.List;
 public class QuickSearchHelper {
 
 	public static final int SEARCH_FAVORITE_API_PRIORITY = 2;
+	public static final int SEARCH_FAVORITE_API_CATEGORY_PRIORITY = 7;
 	public static final int SEARCH_FAVORITE_OBJECT_PRIORITY = 10;
 	public static final int SEARCH_WPT_API_PRIORITY = 2;
 	public static final int SEARCH_WPT_OBJECT_PRIORITY = 10;
@@ -69,8 +70,6 @@ public class QuickSearchHelper {
 						resultMatcher.publish(sr);
 					} else if (phrase.getNameStringMatcher().matches(sr.localeName)) {
 						resultMatcher.publish(sr);
-					} else if (point.getCategory() != null && phrase.getNameStringMatcher().matches(point.getCategory())) {
-						resultMatcher.publish(sr);
 					}
 				}
 				return true;
@@ -82,6 +81,36 @@ public class QuickSearchHelper {
 					return -1;
 				}
 				return SEARCH_FAVORITE_API_PRIORITY;
+			}
+		});
+
+		// Register favorites by category search api
+		core.registerAPI(new SearchCoreFactory.SearchBaseAPI() {
+
+			@Override
+			public boolean search(SearchPhrase phrase, SearchUICore.SearchResultMatcher resultMatcher) {
+				List<FavouritePoint> favList = app.getFavorites().getFavouritePoints();
+				for (FavouritePoint point : favList) {
+					SearchResult sr = new SearchResult(phrase);
+					sr.localeName = point.getName();
+					sr.object = point;
+					sr.priority = SEARCH_FAVORITE_OBJECT_PRIORITY;
+					sr.objectType = ObjectType.FAVORITE;
+					sr.location = new LatLon(point.getLatitude(), point.getLongitude());
+					sr.preferredZoom = 17;
+					if (point.getCategory() != null && phrase.getNameStringMatcher().matches(point.getCategory())) {
+						resultMatcher.publish(sr);
+					}
+				}
+				return true;
+			}
+
+			@Override
+			public int getSearchPriority(SearchPhrase p) {
+				if(!p.isNoSelectedType() || !p.isUnknownSearchWordPresent()) {
+					return -1;
+				}
+				return SEARCH_FAVORITE_API_CATEGORY_PRIORITY;
 			}
 		});
 
