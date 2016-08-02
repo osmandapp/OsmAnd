@@ -159,7 +159,7 @@ public class TransportStopController extends MenuController {
 
 		for (TransportIndexRepository t : reps) {
 			if (t.acceptTransportStop(transportStop)) {
-				boolean empty = transportStop.getReferencesToRoutes() != null && transportStop.getReferencesToRoutes().length > 0;
+				boolean empty = transportStop.getReferencesToRoutes() == null || transportStop.getReferencesToRoutes().length == 0;
 				if(!empty) {
 					addRoutes(useEnglishNames, t, transportStop, transportStop, 0);
 				}
