@@ -167,7 +167,7 @@ public class TransportStopController extends MenuController {
 				QuadRect ll = MapUtils.calculateLatLonBbox(transportStop.getLocation().getLatitude(), transportStop.getLocation().getLongitude(), 150);
 				t.searchTransportStops(ll.top, ll.left, ll.bottom, ll.right, -1, ls, null);
 				for(TransportStop tstop : ls) {
-					if(tstop.getId() != transportStop.getId() || empty) {
+					if(tstop.getId().longValue() != transportStop.getId().longValue() || empty) {
 						addRoutes(useEnglishNames, t, tstop, transportStop,  
 								(int) MapUtils.getDistance(tstop.getLocation(), transportStop.getLocation()));
 					}
