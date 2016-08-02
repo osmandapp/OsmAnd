@@ -567,10 +567,13 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 		app.getDownloadThread().setUiActivity(this);
 
-		if (mapViewTrackingUtilities.getShowRouteFinishDialog()) {
+		//if (mapViewTrackingUtilities.getShowRouteFinishDialog()) {
 			DestinationReachedMenu.show(this);
-			mapViewTrackingUtilities.setShowRouteFinishDialog(false);
-		}
+			//mapViewTrackingUtilities.setShowRouteFinishDialog(false);
+		//}
+		DestinationReachedMenu.show(this);
+		DestinationReachedMenu.show(this);
+		DestinationReachedMenu.show(this);
 
 		routingHelper.addListener(this);
 		app.getMapMarkersHelper().addListener(this);
@@ -1351,6 +1354,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 	}
 
+	public void showQuickSearch(double latitude, double longitude) {
+		mapContextMenu.hide();
+		QuickSearchDialogFragment.showInstance(this, "", new LatLon(latitude, longitude));
+	}
+
 	public void showQuickSearch() {
 		QuickSearchDialogFragment fragment = getQuickSearchDialogFragment();
 		mapContextMenu.hide();
@@ -1358,7 +1366,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			fragment.show();
 			refreshMap();
 		} else {
-			QuickSearchDialogFragment.showInstance(this, "");
+			QuickSearchDialogFragment.showInstance(this, "", null);
 		}
 	}
 

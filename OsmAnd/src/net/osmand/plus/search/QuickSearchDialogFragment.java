@@ -80,6 +80,8 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 	public static final String TAG = "QuickSearchDialogFragment";
 	private static final String QUICK_SEARCH_QUERY_KEY = "quick_search_query_key";
+	private static final String QUICK_SEARCH_LAT_KEY = "quick_search_lat_key";
+	private static final String QUICK_SEARCH_LON_KEY = "quick_search_lon_key";
 	private static final String QUICK_SEARCH_SEARCHING_KEY = "quick_search_searching_key";
 	private Toolbar toolbar;
 	private LockableViewPager viewPager;
@@ -105,8 +107,9 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	private OsmandApplication app;
 	private QuickSearchHelper searchHelper;
 	private SearchUICore searchUICore;
-	private String searchQuery = "";
+	private String searchQuery;
 
+	private LatLon centerLatLon;
 	private net.osmand.Location location = null;
 	private Float heading = null;
 	private boolean useMapCenter;
@@ -138,10 +141,20 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 		if (savedInstanceState != null) {
 			searchQuery = savedInstanceState.getString(QUICK_SEARCH_QUERY_KEY);
+			double lat = savedInstanceState.getDouble(QUICK_SEARCH_LAT_KEY, Double.NaN);
+			double lon = savedInstanceState.getDouble(QUICK_SEARCH_LON_KEY, Double.NaN);
+			if (!Double.isNaN(lat) && !Double.isNaN(lon)) {
+				centerLatLon = new LatLon(lat, lon);
+			}
 			interruptedSearch = savedInstanceState.getBoolean(QUICK_SEARCH_SEARCHING_KEY, false);
 		}
 		if (searchQuery == null) {
 			searchQuery = getArguments().getString(QUICK_SEARCH_QUERY_KEY);
+			double lat = getArguments().getDouble(QUICK_SEARCH_LAT_KEY, Double.NaN);
+			double lon = getArguments().getDouble(QUICK_SEARCH_LON_KEY, Double.NaN);
+			if (!Double.isNaN(lat) && !Double.isNaN(lon)) {
+				centerLatLon = new LatLon(lat, lon);
+			}
 			newSearch = true;
 		}
 		if (searchQuery == null)
@@ -265,6 +278,9 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		viewPager = (LockableViewPager) view.findViewById(R.id.pager);
 		pagerAdapter = new SearchFragmentPagerAdapter(getChildFragmentManager(), getResources());
 		viewPager.setAdapter(pagerAdapter);
+		if (centerLatLon != null) {
+			viewPager.setCurrentItem(1);
+		}
 
 		tabLayout = (TabLayout) view.findViewById(R.id.tab_layout);
 		tabLayout.setupWithViewPager(viewPager);
@@ -322,6 +338,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 					searchEditText.setSelection(newText.length());
 				} else if (useMapCenter && location != null) {
 					useMapCenter = false;
+					centerLatLon = null;
 					updateUseMapCenterUI();
 					startLocationUpdate();
 					LatLon centerLatLon = new LatLon(location.getLatitude(), location.getLongitude());
@@ -349,8 +366,10 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		updateClearButtonVisibility(true);
 		addMainSearchFragment();
 
-		searchEditText.requestFocus();
-		AndroidUtils.softKeyboardDelayed(searchEditText);
+		if (centerLatLon == null) {
+			searchEditText.requestFocus();
+			AndroidUtils.softKeyboardDelayed(searchEditText);
+		}
 	}
 
 	public String getText() {
@@ -420,19 +439,26 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		}
 
 		location = app.getLocationProvider().getLastKnownLocation();
-		LatLon clt = mapActivity.getMapView().getCurrentRotatedTileBox().getCenterLatLon();
-		LatLon centerLatLon = clt;
-		searchEditText.setHint(R.string.search_poi_category_hint);
-		if (location != null) {
-			double d = MapUtils.getDistance(clt, location.getLatitude(), location.getLongitude());
-			if (d < DISTANCE_THRESHOLD) {
-				centerLatLon = new LatLon(location.getLatitude(), location.getLongitude());
-			} else {
-				useMapCenter = true;
+
+		LatLon searchLatLon;
+		if (centerLatLon == null) {
+			LatLon clt = mapActivity.getMapView().getCurrentRotatedTileBox().getCenterLatLon();
+			searchLatLon = clt;
+			searchEditText.setHint(R.string.search_poi_category_hint);
+			if (location != null) {
+				double d = MapUtils.getDistance(clt, location.getLatitude(), location.getLongitude());
+				if (d < DISTANCE_THRESHOLD) {
+					searchLatLon = new LatLon(location.getLatitude(), location.getLongitude());
+				} else {
+					useMapCenter = true;
+				}
 			}
+		} else {
+			searchLatLon = centerLatLon;
+			useMapCenter = true;
 		}
 		SearchSettings settings = searchUICore.getSearchSettings().setOriginalLocation(
-				new LatLon(centerLatLon.getLatitude(), centerLatLon.getLongitude()));
+				new LatLon(searchLatLon.getLatitude(), searchLatLon.getLongitude()));
 		settings = settings.setLang(locale);
 		searchUICore.updateSettings(settings);
 		searchUICore.setOnResultsComplete(new Runnable() {
@@ -462,6 +488,10 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	public void onSaveInstanceState(Bundle outState) {
 		outState.putString(QUICK_SEARCH_QUERY_KEY, searchQuery);
 		outState.putBoolean(QUICK_SEARCH_SEARCHING_KEY, searching);
+		if (centerLatLon != null) {
+			outState.putDouble(QUICK_SEARCH_LAT_KEY, centerLatLon.getLatitude());
+			outState.putDouble(QUICK_SEARCH_LON_KEY, centerLatLon.getLongitude());
+		}
 	}
 
 	@Override
@@ -522,7 +552,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	}
 
 	private void updateClearButtonAndHint() {
-		if (useMapCenter && searchEditText.length() == 0) {
+		if (useMapCenter && location != null && searchEditText.length() == 0) {
 			LatLon latLon = searchUICore.getSearchSettings().getOriginalLocation();
 			double d = MapUtils.getDistance(latLon, location.getLatitude(), location.getLongitude());
 			String dist = OsmAndFormatter.getFormattedDistance((float) d, app);
@@ -536,7 +566,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 	private void updateClearButtonVisibility(boolean show) {
 		if (show) {
-			clearButton.setVisibility(searchEditText.length() > 0 || useMapCenter ? View.VISIBLE : View.GONE);
+			clearButton.setVisibility(searchEditText.length() > 0 || (useMapCenter && location != null) ? View.VISIBLE : View.GONE);
 		} else {
 			clearButton.setVisibility(View.GONE);
 		}
@@ -846,7 +876,8 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		}
 	}
 
-	public static boolean showInstance(final MapActivity mapActivity, final String searchQuery) {
+	public static boolean showInstance(final MapActivity mapActivity, final String searchQuery,
+									   final LatLon latLon) {
 		try {
 
 			if (mapActivity.isActivityDestroyed()) {
@@ -855,6 +886,10 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 			Bundle bundle = new Bundle();
 			bundle.putString(QUICK_SEARCH_QUERY_KEY, searchQuery);
+			if (latLon != null) {
+				bundle.putDouble(QUICK_SEARCH_LAT_KEY, latLon.getLatitude());
+				bundle.putDouble(QUICK_SEARCH_LON_KEY, latLon.getLongitude());
+			}
 			QuickSearchDialogFragment fragment = new QuickSearchDialogFragment();
 			fragment.setArguments(bundle);
 			fragment.show(mapActivity.getSupportFragmentManager(), TAG);
