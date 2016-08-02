@@ -105,8 +105,8 @@
   
   <string name="osmand_background_plugin_description">Erakutsi esekidura moduan (pantailarekin itzalia) egotean jarraipena eta nabigazioa gaitzeko GPS gailua aldizka esnarazteko ezarpenak.</string>
   <string name="contribution_activity">Bertsioa instalatu</string>
-  <string name="choose_osmand_theme_descr">Aplikazioaren itsura aukeratu</string>
-  <string name="choose_osmand_theme">Aplikazioaren itsura</string>
+  <string name="choose_osmand_theme_descr">Aukeratu aplikazioaren gaia</string>
+  <string name="choose_osmand_theme">Aplikazioaren gaia</string>
   <string name="accessibility_options">Irisgarritasun aukerak</string>
   <string name="select_address_activity">Hautatu helbidea</string>
   <string name="favourites_list_activity">Aukeratu gogokoena</string>
@@ -356,7 +356,7 @@ Datu globalak (iparraldean 70 gradutan eta hegoaldean 70 gradutan) STRM (Shuttle
   <string name="osmand_parking_warning_text">Kotxea hartzeko jakinarazpena zure egutegira gehitu da. Hor mantenduko da zuk eskuz ezabatu arte.</string>
   <string name="osmand_parking_time_limit_title">Ezarri aparkatzeko denbora muga</string>
   <string name="osmand_parking_delete_confirm">Aparkalekuaren kokapena ezabatu nahi al duzu?</string>
-  <string name="osmand_parking_delete">Aparkaleku markatzaile bat ezabatu</string>
+  <string name="osmand_parking_delete">Ezabatu aparkaleku markatzaile bat</string>
   <string name="osmand_parking_choose_type">Aparkaleku mota aukeratu</string>
   <string name="osmand_parking_lim_text">Denboraz mugatua</string>
   <string name="osmand_parking_no_lim_text">Denboraz ez mugatua</string>
@@ -373,7 +373,7 @@ Datu globalak (iparraldean 70 gradutan eta hegoaldean 70 gradutan) STRM (Shuttle
 Kokalekua eta denbora OsmAnd kontrol panelean ikusgai daude eta maparen pantailako trepetan . Alarma bat gehitu daiteke Android egutegira oroigarri gisa.</string>
   <string name="osmand_parking_plugin_name">Aparkalekuaren kokapena</string>
   <string name="context_menu_item_add_parking_point">Markatu aparkaleku kokapen bezala</string>
-  <string name="context_menu_item_delete_parking_point">Aparkaleku markatzaile bat ezabatu</string>
+  <string name="context_menu_item_delete_parking_point">Ezabatu aparkaleku markatzaile bat</string>
   <string name="gpxup_public">Publikoa</string>
   <string name="gpxup_identifiable">Identifikagarria</string>
   <string name="gpxup_trackable">Jarraigarria</string>
@@ -581,7 +581,7 @@ Honek {1} MB behar ditu behin betiko.
   
   
   
-  <string name="use_transparent_map_theme">Itsura-gai gardena</string>
+  <string name="use_transparent_map_theme">Gai gardena</string>
   <string name="native_library_not_supported">Gailu honek ez du liburutegi natiboa jasaten.</string>
   <string name="init_native_library">Liburutegi natiboa hasieratzen…</string>
   <string name="choose_auto_follow_route">Auto-zentratu mapa ikuspegia</string>
@@ -837,7 +837,7 @@ Honek {1} MB behar ditu behin betiko.
   <string name="renderer_load_sucess">Errenderizatzailea arrakastaz kargatua</string>
   <string name="renderer_load_exception">Salbuespena: errenderizatzailea ez da kargatua izan</string>
   <string name="renderers">Bektore errenderizatzailea</string>
-  <string name="renderers_descr">Aukeratu errenderizazioaren itsura</string>
+  <string name="renderers_descr">Aukeratu errenderizazioaren itxura</string>
   <string name="poi_context_menu_website">Erakutsi POIaren webgunea</string>
   <string name="poi_context_menu_call">Erakutsi POIaren telefonoa</string>
   <string name="download_type_to_filter">filtratu beharreko mota</string>
