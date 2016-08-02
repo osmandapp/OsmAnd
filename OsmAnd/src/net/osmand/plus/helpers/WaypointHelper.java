@@ -41,6 +41,8 @@ import net.osmand.util.MapUtils;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 
+//	import android.widget.Toast;
+
 /**
  */
 public class WaypointHelper {
@@ -259,8 +261,7 @@ public class WaypointHelper {
 		return true;
 	}
 
-	public AlarmInfo calculateMostImportantAlarm(RouteDataObject ro, Location loc,
-												 MetricsConstants mc, boolean showCameras) {
+	public AlarmInfo calculateMostImportantAlarm(RouteDataObject ro, Location loc, MetricsConstants mc, boolean showCameras) {
 		boolean direction = true;
 		if (loc.hasBearing()) {
 			double diff = MapUtils.alignAngleDifference(ro.directionRoute(0, true) -
@@ -281,6 +282,17 @@ public class WaypointHelper {
 				for (int r = 0; r < pointTypes.length; r++) {
 					RouteTypeRule typeRule = reg.quickGetEncodingRule(pointTypes[r]);
 					AlarmInfo info = AlarmInfo.createAlarmInfo(typeRule, 0, loc);
+
+					//if (loc.hasBearing()) {
+					// Issue #2873: Check if Alarm is in forward direction
+					//but not sure this is needed
+					//	if (Math.abs(MapUtils.alignAngleDifference(ro.directionRoute(0, true) -
+					//			loc.getBearing() / 360f * 2 * Math.PI)) >= Math.PI / 2f) {
+					//		info = null;
+					//	}
+						//Toast.makeText(app.getApplicationContext(), Double.toString(ro.directionRoute(0, true)) + ",\n" + Double.toString(loc.getBearing()) + ",\n" + Double.toString(MapUtils.alignAngleDifference(ro.directionRoute(0, true) - loc.getBearing() / 360f / (2 * Math.PI))), Toast.LENGTH_LONG).show();
+					//}
+
 					if (info != null) {
 						if (info.getType() != AlarmInfoType.SPEED_CAMERA || showCameras) {
 							long ms = System.currentTimeMillis();
@@ -296,7 +308,6 @@ public class WaypointHelper {
 		}
 		return null;
 	}
-
 
 	private static AlarmInfo createSpeedAlarm(MetricsConstants mc, float mxspeed, Location loc, float delta) {
 		AlarmInfo speedAlarm = null;
