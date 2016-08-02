@@ -1,3 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources><string name="rendering_value_car_name">Takeṛṛust</string>
+    <string name="osmo_leave_confirmation_msg">Tebɣiḍ ad teffɣeḍ seg ugraw %1$s?</string>
+    <string name="osmo_invite">Nced…</string>
     </resources>
