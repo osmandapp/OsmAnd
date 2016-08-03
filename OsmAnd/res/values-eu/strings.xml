@@ -272,12 +272,202 @@ Datu globalak (iparraldean 70 gradutan eta hegoaldean 70 gradutan) STRM (Shuttle
   
   <string name="osmand_play_title_30_chars">OsmAnd Maps &amp; Nabigazioa</string>
   <string name="osmand_short_description_80_chars">Lineaz Kanpoko eta Sare Bidezko Mapa Ikusle eta Nabigatzaile Mugikor Globala OSM Mapetarako</string>
-  <string name="osmand_long_description_1000_chars">⏎\n⇥⇥OsmAnd (OSM Automated Navigation Directions)⏎\n⏎\n⇥⇥OsmAnd kode irekiko nabigaziorako aplikazioa da, OpenStreetMapeko (OSM) mota askotako munduko mapetara sarbidearekin. Mapa guztiak (bektore edo tesela mapak) telefonoaren memoria txartelean gorde daitezke, lineaz kanpoko erabilpena bermatzeko. OsmAndek ere lineaz kanpoko eta sareko ibilbideak eskaintzen ditu, txandakako ahots gidaritzarekin.⏎\n⏎\n⇥⇥Ezaugarri nagusi batzuk:⏎\n⇥⇥- Lineaz kanpoko erabateko erabilpena (bektore edo tesela mapak gorde ondoren aukeratu daitezken karpetetan)⏎\n⇥⇥- Lineaz kanpoko mundu guztiko mapa konpaktuak eskuragarri⏎\n⇥⇥- Muga gabeko herrialde edo eskualdeetako mapen deskarga, aplikaziotik zuzenean⏎\n⇥⇥- Lineaz kanpoko WIkipediako erabilpena (deskargatu Wikipediako POIak), turismorako erabilgarriak⏎\n⇥⇥- Gain-geruza desberdin asko ikusi daitezke, GPX edo ibilbide bidea, interes puntuak (POI), gogokoenak, sestra-kurbak, garraio publikoaren geltokiak, geruza gardeneko mapa gehigarriak.⏎\n⇥⇥- Lineaz kanpoko helbide eta lekuen bilatzailea (POIak)⏎\n⇥⇥- Lineaz kanpoko ibilbide motzetarako jarraipena (esperimentala)⏎\n⇥⇥- Kotxea, txirrinda eta oinezkoentzat modua:⏎\n⇥⇥- aukerazko egun/gau ikuspegi automatizatua⏎\n⇥⇥- aukerazko abiaduraren araberako maparen zooma⏎\n⇥⇥- aukerazko maparen alineazioa, iparrorratzaren edo norabidearen araberakoa⏎\n⇥⇥- aukerazko errei gidaritza, abiadura muga bistaratzea, grabaketa edo TTS (ahots bihurgailua) motorra⏎\n⏎\n⇥⇥OsmAndeko dohaineko bertsioaren mugak:⏎\n⇥⇥- Mapa kopuruak deskargatzeko muga⏎\n⇥⇥- Wikipediako POIetara lineaz kanpoko sarbiderik ez⏎\n⏎\n⇥⇥OsmAnd aktiboki garatua izaten ari da eta proiektuaren prozesuak dituen garatze, programatze eta funtzionalitate berrien probak egiteko behar den finantziazio laguntzetan ere oinarritzen da. OsmAnd+ erosiz gero, aplikazioa are zirraragarria izatea laguntzen duzu! Ezaugarri berriak finantzatzea edo dohaintza orokor bat egitea posible da osman.net-en</string>
-  <string name="osmand_extended_description_4000_chars">⏎\nOsmAnd (OSM Automated Navigation Directions) mapa eta nabigaziorako aplikazioa da, OpenStreetMapeko (OSM) aske, mundu osoko eta kalitate handiko datuetara sarbidearekin. Mapen datu guztiak zure gailuaren memoria txartelean gorde daiteke lineaz kanpoko erabilpena eduki dezazun. Zure gailuaren GPSaren bitartez, OsmAnd-ek nabigazioa eskaintzen dizu, ikusmenezko edo entzutezko gidaritzarekin, kotxe, txirrinda edo oinezkoentzat. Funtzionalitate guztiak bai sarean bai lineaz kanpo funtzionatzen dute (ez dago interneten beharrik).⏎\n⏎\nEzaugarri nagusi batzuk:⏎\n⏎\nNabigazioa⏎\n- Sarean (azkar) edo lineaz kanpo (atzerrian zaudenean roaming kargarik gabe) funtzionatzen du⏎\n- Txandakako ahozko gidaritza (grabatutako eta sintetizatutako ahotsak)⏎\n- Aukerako bide gidaritza, kaleen izenak, eta estimatutako iritsiera ordua⏎\n- Ibilbidearen erdian geldiuneak jarri daitezke⏎\n- Ibilbidetik desbideratzen bazara, automatikoki birkalkulatuko du ibilbidea⏎\n- Leku bilatzailea helbidearen, motaren (adibidez: jatetxea, hotel, gasolindegia, museoa) edo koordenaden arabera⏎\n⏎\nMapen ikuspena⏎\n- Zure kokapena eta orientazioa agertzen da⏎\n- Aukeraz, mapa iparrorratzarekin edo zure norabidearekin mugituko da⏎\n- Gorde zure leku garrantzitsuenak Gogokoetan⏎\n- Zure inguruko POIak (Interes puntuak) ikustea⏎\n- Tesela bereziak ikusi daitezke sarean⏎\n- Satelite irudiak (Bingetik) ikusi daitezke⏎\n- Gain-geruza desberdinak ikusi daitezke, ibilbidea/nabigazioaren GPX bidea eta mapa garden gehigarriak⏎\n- Leku izenak ingelesez, tokiko hizkuntzan edo fonetikoki idatzia ikusteko aukera dago⏎\n⏎\nOpenStreetMap eta Wikipediako datuen erabilpena:⏎\n- Munduko proiektu kolaboratibo hoberenen kalitate handiko informazioa⏎\n- OpenStreetMapeko munduko mapak, herrialde edo eskualde bakoitza eskuragarri dago⏎\n- Wikipediako POIak, turismorako onak (dohaineko bertsioan ez daude erabilgarri)⏎\n- Muga gabeko dohaineko deskarga, aplikaziotik zuzenean (dohaineko bertsioan 16 mapa fitxategiko muga)⏎\n- Mapa eguneratuak beti (gutxienez eguneraketa bat hilabetean)⏎\n- Lineaz kanpoko bektore mapa konpaktuak⏎\n- Mapa osoa edo errepide sarea bakarrik aukeratu daiteke (Adibidez: Japonia guztia 700 MB dira, edo errepide sarea 200 MB bakarrik)⏎\n- Sareko edo katxeatutako tesela mapak jasaten ditu ere⏎\n⏎\nSegurtasun ezaugarriak⏎\n- Aukerazko eguna/gaua ikuspegi kommutazio automatikoa⏎\n- Aukerazko abiadura mugak agertzea, gainditzerakoan abisatzen dizuna⏎\n- Aukerazko abiaduraren araberako mapa zooma⏎\n- Partekatu zure kokapena, zure lagunek uneoro jakin dezaten non zauden⏎\n⏎\nTxirrinda eta oinezkoen ezaugarriak⏎\n- Mapek oinezko, mendiko eta txirrinda bideak dakartzate, kanpo jardueretako aproposa.⏎\n- Ibilbide eta ikuspegi bereziak txirrinda eta oinezkoentzako⏎\n- Aukerazko garraio publikoaren geltokiak (autobus, tranbia, trena) autobus-linien izenak barne⏎\n- Aukerazko bidaiaren grabaketa GPX fitxategi batera edo sareko zerbitzu batera⏎\n- Abiadura eta altuera azaltzeko aukera⏎\n- Sestra-kurbak eta mendi itzalak (plugin gehigarri batez) erakusteko aukera⏎\n⏎\nOpenStreetMapera zuzeneko laguntza⏎\n- Mapetako akatsak salatu⏎\n- GPX bideak igo aplikaziotik OSMra zuzenean⏎\n- POIak gehitu eta zuzenean OSMra igo (edo geroago lineaz kanpo egon ezkero)⏎\n- Aukerazko bidai grabaketa atzeko planoan bada ere (gailua esekituta dagoen bitartean)⏎\n⏎\nOsmAnd kode irekiko proiektua da, eta aktiboki garatua izaten ari da. Edozeinek lagundu dezake aplikazioarekin, erroreak salatzen, itzulitakoa hobetzen, edo ezaugarri berriak programatzen. Proiektua hobetzeko etengabeko egoeran dago garatzaileen eta erabiltzaileen interakzio modu hauei esker. Era berean, proiektuaren prozesuak dituen garatze, programatze eta funtzionalitate berrien probak egiteko behar den finantziazio laguntzetan ere oinarritzen da. OsmAnd+ erosiz gero, aplikazioa are zirraragarria izatea laguntzen duzu! Ezaugarri berriak finantzatzea edo dohaintza orokor bat egitea posible da osman.net-en.⏎\n⏎\n⏎\nGutxi gorabeherako mapa estaldura eta kalitatea:⏎\n- Mendebaldeko Europa: ****⏎\n- Ekialdeko Europa: ***⏎\n- Errusia: ***⏎\n- Ipar Amerika: ***⏎\n- Hego Amerika: **⏎\n- Asia: **⏎\n- Japonia &amp; Korea: ***⏎\n- Ekialde hurbila: **⏎\n- Afrika: **⏎\n- Antartika: *⏎\n⏎\nJasandako herrialdeen lista (funtsean mundu osoa!):⏎\nAfganistan, Albania, Aljeria, Andorra, Angola, Aingira, Antigua eta Barbuda, Argentina, Armenia, Aruba, Australia, Austria, Azerbaijan, Bahamak, Bahrein, Bangladesh, Barbados, Bielorrusia, Belgika, Belize, Benin, Bermuda, Bhutan, Bolivia, Bonaire, Bosnia eta Herzegovina, Botswana, Brasil, Birjina britainiar uharteak, Brunei, Bulgaria, Burkina Faso, Burundi, Kanbodia, Kamerun, Kanada, Kabo Berde, Afrika Erdiko Errepublika, Txad, Txile, Txina, Kolonbia, Komoreak, Kongo, Kosta Rika, Boli Kosta, Kroazia, Kuba, Curaçao, Txipre, Txekia, Danimarka, Djibuti, Dominika, Errepublika Dominikarra, Ekuador, Egipto, El Salvador, Ekuatorial Ginea, Eritrea, Estonia, Etiopia, Euskal Herria, Fiji, Finlandia, Frantzia, Guyana Frantsesa, Polinesia Frantsesa, Gabon, Gambia, Georgia, Alemania, Ghana, Gibraltar, Grezia, Groenlandia, Grenada, Guadalupe, Guam, Guatemala, Guernesey, Ginea, Ginea-Bissau, Guyana, Haiti, Vatikano, Honduras, Hong Kong, Hungaria, Islandia, India, Indonesia, Iran, Irak, Irlanda, Man, Israel, Italia, Jamaika, Japonia, Jersey, Jordania, Kazakhstan, Kenya, Kiribati, Ipar Korea eta Hego Korea, Kuwait, Kirgizistan, Laos, Letpmoa, Libano, Lesotho, Liberia, Libia, Liechtenstein, Lituania, Luxenburgo, Makao, Mazedonia, Madagaskar, Malawi, Malaysia, Maldivak, Mali, Malta, Martinika, Mauritania, Maurizio, Mayotte, Mexiko, Mikronesia, Moldavia, Monako, Mongolia, Montenegro, Montserrat, Maroko, Mozambike, Myanmar, Namibia, Nauru, Nepal, Herbehereak, Antilla herbeheretarrak, Kaledonia Berria, Zeelanda Berria, Nikaragua, Niger, Nigeria, Norvegia, Oman, Pakistan, Palau, Palestina, Panama, Papua Ginea Berria, Paraguai, Peru, Filipinak, Polonia, Portugal, Puerto Rico, Qatar, Errumania, Errusia, Ruanda, San Bartolome, Santa Elena, Saint Kitts eta Nevis, Santa Lucia, San Martin, Saint Pierre eta Mikelune, Saint Vincent eta Grenadinak, Samoa, San Marino, Saudi Arabia, Senegal, Serbia, Seychelleak, Sierra Leona, Singapur, Eslovakia, Eslovenia, Somalia, Hego Africa, Hego Georgia, Hego Sudan, Espainia, Sri Lanka, Sudan, Surinam, Swazilandia, Suedia, Suitza, Siria, Taiwan, Tadjikistan, Tanzania, Tailandia, Timor-Leste, Togo, Tokelau, Tonga, Trinidad eta Tobago, Tunisia, Turkia, Turkmenistan, Tuvalu, Uganda, Ukraina, Arabiar Emirerri Batuak, Erresuma Batua, Ameriketako Estatu Batuak, Uruguai, Uzbekistan, Vanuatu, Venezuela, Vietnam, Wallis eta Futuna, Sahara, Yemen, Zambia, Zimbabwe.⏎\n⇥</string>
+  <string name="osmand_long_description_1000_chars">"
+ ⏎
+⇥⇥OsmAnd (OSM Automated Navigation Directions)⏎
+⏎
+⇥⇥OsmAnd kode irekiko nabigaziorako aplikazioa da, OpenStreetMapeko (OSM) mota askotako munduko mapetara sarbidearekin. Mapa guztiak (bektore edo tesela mapak) telefonoaren memoria txartelean gorde daitezke, lineaz kanpoko erabilpena bermatzeko. OsmAndek ere lineaz kanpoko eta sareko ibilbideak eskaintzen ditu, txandakako ahots gidaritzarekin.⏎
+⏎
+⇥⇥Ezaugarri nagusi batzuk:⏎
+⇥⇥- Lineaz kanpoko erabateko erabilpena (bektore edo tesela mapak gorde ondoren aukeratu daitezken karpetetan)⏎
+⇥⇥- Lineaz kanpoko mundu guztiko mapa konpaktuak eskuragarri⏎
+⇥⇥- Herrialde edo eskualdeetako mapen deskarga, aplikaziotik zuzenean⏎
+⇥⇥- Gain-geruza desberdin asko ikusi daitezke, GPX edo ibilbide bidea, interes puntuak (POI), gogokoenak, sestra-kurbak, garraio publikoaren geltokiak, geruza gardeneko mapa gehigarriak.⏎
+⇥⇥- Lineaz kanpoko helbide eta lekuen bilatzailea (POIak)⏎
+⇥⇥- Lineaz kanpoko ibilbide motzetarako nabigazioa⏎
+⇥⇥- Kotxea, bizikleta eta oinezkoentzat modua:⏎
+⇥⇥- aukerazko egun/gau ikuspegi automatizatua⏎
+⇥⇥- aukerazko abiaduraren araberako maparen zooma⏎
+⇥⇥- aukerazko maparen alineazioa, iparrorratzaren edo norabidearen araberakoa⏎
+⇥⇥- aukerazko errei gidaritza, abiadura muga bistaratzea, grabatutako edo TTS ahotsekin⏎
+⏎
+⇥⇥OsmAndeko dohaineko bertsioaren mugak:⏎
+⇥⇥- Mapa kopuruak deskargatzeko muga⏎
+⇥⇥- Wikipediako POIetara lineaz kanpoko sarbiderik ez⏎
+⏎
+⇥⇥OsmAnd aktiboki garatua izaten ari da eta proiektuaren prozesuak dituen garatze, programatze eta funtzionalitate berrien probak egiteko behar den finantziazio laguntzetan ere oinarritzen da. OsmAnd+ erosiz gero, aplikazioa are zirraragarria izatea laguntzen duzu! Ezaugarri berriak finantzatzea edo dohaintza orokor bat egitea posible da osman.net-en
+ "</string>
+  <string name="osmand_extended_description_4000_chars">"
+⏎
+OsmAnd (OSM Automated Navigation Directions) mapa eta nabigaziorako aplikazioa da, OpenStreetMapeko (OSM) aske, mundu osoko eta kalitate handiko datuetara sarbidearekin. Mapen datu guztiak zure gailuaren memoria txartelean gorde daiteke lineaz kanpoko erabilpena eduki dezazun. Zure gailuaren GPSaren bitartez, OsmAnd-ek nabigazioa eskaintzen dizu, ikusmenezko edo entzutezko gidaritzarekin, kotxe, txirrinda edo oinezkoentzat. Funtzionalitate guztiak bai sarean bai lineaz kanpo funtzionatzen dute (ez dago interneten beharrik).⏎
+⏎
+Ezaugarri nagusi batzuk:⏎
+⏎
+Nabigazioa⏎
+- Sarean (azkar) edo lineaz kanpo (atzerrian zaudenean roaming kargarik gabe) funtzionatzen du⏎
+- Txandakako ahozko gidaritza (grabatutako eta sintetizatutako ahotsak)⏎
+- Aukerako bide gidaritza, kaleen izenak, eta estimatutako iritsiera ordua⏎
+- Ibilbidearen erdian geldiuneak jarri daitezke⏎
+- Ibilbidetik desbideratzen bazara, automatikoki birkalkulatuko du ibilbidea⏎
+- Leku bilatzailea helbidearen, motaren (adibidez: jatetxea, hotel, gasolindegia, museoa) edo koordenaden arabera⏎
+⏎
+Mapen ikuspena⏎
+- Zure kokapena eta orientazioa agertzen da⏎
+- Aukeraz, mapa iparrorratzarekin edo zure norabidearekin mugituko da⏎
+- Gorde zure leku garrantzitsuenak Gogokoetan⏎
+- Zure inguruko POIak (Interes puntuak) ikustea⏎
+- Tesela bereziak ikusi daitezke sarean⏎
+- Satelite irudiak (Bingetik) ikusi daitezke⏎
+- Gain-geruza desberdinak ikusi daitezke, ibilbidea/nabigazioaren GPX bidea eta mapa garden gehigarriak⏎
+- Leku izenak ingelesez, tokiko hizkuntzan edo fonetikoki idatzia ikusteko aukera dago⏎
+⏎
+OpenStreetMap eta Wikipediako datuen erabilpena:⏎
+- Munduko proiektu kolaboratibo hoberenen kalitate handiko informazioa⏎
+- OpenStreetMapeko munduko mapak, herrialde edo eskualde bakoitza eskuragarri dago⏎
+- Wikipediako POIak, turismorako onak (dohaineko bertsioan ez daude erabilgarri)⏎
+- Muga gabeko dohaineko deskarga, aplikaziotik zuzenean (dohaineko bertsioan 16 mapa fitxategiko muga)⏎
+- Mapa eguneratuak beti (gutxienez eguneraketa bat hilabetean)⏎
+- Lineaz kanpoko bektore mapa konpaktuak⏎
+- Mapa osoa edo errepide sarea bakarrik aukeratu daiteke (Adibidez: Japonia guztia 700 MB dira, edo errepide sarea 200 MB bakarrik)⏎
+- Sareko edo katxeatutako tesela mapak jasaten ditu ere⏎
+⏎
+Segurtasun ezaugarriak⏎
+- Aukerazko eguna/gaua ikuspegi kommutazio automatikoa⏎
+- Aukerazko abiadura mugak agertzea, gainditzerakoan abisatzen dizuna⏎
+- Aukerazko abiaduraren araberako mapa zooma⏎
+- Partekatu zure kokapena, zure lagunek uneoro jakin dezaten non zauden⏎
+⏎
+Txirrinda eta oinezkoen ezaugarriak⏎
+- Mapek oinezko, mendiko eta txirrinda bideak dakartzate, kanpo jardueretako aproposa.⏎
+- Ibilbide eta ikuspegi bereziak txirrinda eta oinezkoentzako⏎
+- Aukerazko garraio publikoaren geltokiak (autobus, tranbia, trena) autobus-linien izenak barne⏎
+- Aukerazko bidaiaren grabaketa GPX fitxategi batera edo sareko zerbitzu batera⏎
+- Abiadura eta altuera azaltzeko aukera⏎
+- Sestra-kurbak eta mendi itzalak (plugin gehigarri batez) erakusteko aukera⏎
+⏎
+OpenStreetMapera zuzeneko laguntza⏎
+- Mapetako akatsak salatu⏎
+- GPX bideak igo aplikaziotik OSMra zuzenean⏎
+- POIak gehitu eta zuzenean OSMra igo (edo geroago lineaz kanpo egon ezkero)⏎
+- Aukerazko bidai grabaketa atzeko planoan bada ere (gailua esekituta dagoen bitartean)⏎
+⏎
+OsmAnd kode irekiko proiektua da, eta aktiboki garatua izaten ari da. Edozeinek lagundu dezake aplikazioarekin, erroreak salatzen, itzulitakoa hobetzen, edo ezaugarri berriak programatzen. Proiektua hobetzeko etengabeko egoeran dago garatzaileen eta erabiltzaileen interakzio modu hauei esker. Era berean, proiektuaren prozesuak dituen garatze, programatze eta funtzionalitate berrien probak egiteko behar den finantziazio laguntzetan ere oinarritzen da. OsmAnd+ erosiz gero, aplikazioa are zirraragarria izatea laguntzen duzu! Ezaugarri berriak finantzatzea edo dohaintza orokor bat egitea posible da osman.net-en.⏎
+⏎
+⏎
+Gutxi gorabeherako mapa estaldura eta kalitatea:⏎
+- Mendebaldeko Europa: ****⏎
+- Ekialdeko Europa: ***⏎
+- Errusia: ***⏎
+- Ipar Amerika: ***⏎
+- Hego Amerika: **⏎
+- Asia: **⏎
+- Japonia &amp; Korea: ***⏎
+- Ekialde hurbila: **⏎
+- Afrika: **⏎
+- Antartika: *⏎
+⏎
+Jasandako herrialdeen lista (funtsean mundu osoa!):⏎
+Afganistan, Albania, Aljeria, Andorra, Angola, Aingira, Antigua eta Barbuda, Argentina, Armenia, Aruba, Australia, Austria, Azerbaijan, Bahamak, Bahrein, Bangladesh, Barbados, Bielorrusia, Belgika, Belize, Benin, Bermuda, Bhutan, Bolivia, Bonaire, Bosnia eta Herzegovina, Botswana, Brasil, Birjina britainiar uharteak, Brunei, Bulgaria, Burkina Faso, Burundi, Kanbodia, Kamerun, Kanada, Kabo Berde, Afrika Erdiko Errepublika, Txad, Txile, Txina, Kolonbia, Komoreak, Kongo, Kosta Rika, Boli Kosta, Kroazia, Kuba, Curaçao, Txipre, Txekia, Danimarka, Djibuti, Dominika, Errepublika Dominikarra, Ekuador, Egipto, El Salvador, Ekuatorial Ginea, Eritrea, Estonia, Etiopia, Euskal Herria, Fiji, Finlandia, Frantzia, Guyana Frantsesa, Polinesia Frantsesa, Gabon, Gambia, Georgia, Alemania, Ghana, Gibraltar, Grezia, Groenlandia, Grenada, Guadalupe, Guam, Guatemala, Guernesey, Ginea, Ginea-Bissau, Guyana, Haiti, Vatikano, Honduras, Hong Kong, Hungaria, Islandia, India, Indonesia, Iran, Irak, Irlanda, Man, Israel, Italia, Jamaika, Japonia, Jersey, Jordania, Kazakhstan, Kenya, Kiribati, Ipar Korea eta Hego Korea, Kuwait, Kirgizistan, Laos, Letpmoa, Libano, Lesotho, Liberia, Libia, Liechtenstein, Lituania, Luxenburgo, Makao, Mazedonia, Madagaskar, Malawi, Malaysia, Maldivak, Mali, Malta, Martinika, Mauritania, Maurizio, Mayotte, Mexiko, Mikronesia, Moldavia, Monako, Mongolia, Montenegro, Montserrat, Maroko, Mozambike, Myanmar, Namibia, Nauru, Nepal, Herbehereak, Antilla herbeheretarrak, Kaledonia Berria, Zeelanda Berria, Nikaragua, Niger, Nigeria, Norvegia, Oman, Pakistan, Palau, Palestina, Panama, Papua Ginea Berria, Paraguai, Peru, Filipinak, Polonia, Portugal, Puerto Rico, Qatar, Errumania, Errusia, Ruanda, San Bartolome, Santa Elena, Saint Kitts eta Nevis, Santa Lucia, San Martin, Saint Pierre eta Mikelune, Saint Vincent eta Grenadinak, Samoa, San Marino, Saudi Arabia, Senegal, Serbia, Seychelleak, Sierra Leona, Singapur, Eslovakia, Eslovenia, Somalia, Hego Africa, Hego Georgia, Hego Sudan, Espainia, Sri Lanka, Sudan, Surinam, Swazilandia, Suedia, Suitza, Siria, Taiwan, Tadjikistan, Tanzania, Tailandia, Timor-Leste, Togo, Tokelau, Tonga, Trinidad eta Tobago, Tunisia, Turkia, Turkmenistan, Tuvalu, Uganda, Ukraina, Arabiar Emirerri Batuak, Erresuma Batua, Ameriketako Estatu Batuak, Uruguai, Uzbekistan, Vanuatu, Venezuela, Vietnam, Wallis eta Futuna, Sahara, Yemen, Zambia, Zimbabwe.⏎
+⇥
+ "</string>
   <string name="osmand_plus_play_title_30_chars">OsmAnd+ Mapak &amp; Nabigazioa</string>
   <string name="osmand_plus_short_description_80_chars">Lineaz Kanpoko eta Sare Bidezko OSM Mapetarako Mapa Ikusle eta Nabigatzaile Mugikor Globala</string>
-  <string name="osmand_plus_long_description_1000_chars">⏎\n⇥⇥OsmAnd+ (OSM Automated Navigation Directions)⏎\n⏎\n⇥⇥OsmAnd+ kode irekiko nabigaziorako aplikazioa da, OpenStreetMapeko (OSM) mota askotako munduko mapetara sarbidearekin. Mapa guztiak (bektore edo tesela mapak) telefonoaren memoria txartelean gorde daitezke, lineaz kanpoko erabilpena bermatzeko. OsmAndek ere lineaz kanpoko eta sareko ibilbideak eskaintzen ditu, txandakako ahots gidaritzarekin.⏎\n⏎\n⇥⇥OsmAnd+ aplikazioaren ordaindutako bertsioa da, hau erosiz gero proiektua aurrera eramaten laguntzen ari zara, ezaugarri berrien garapena finantzatzen, eta gainera, azken eguneraketak jasoko dituzu.⏎\n⏎\n⇥⇥Ezaugarri nagusi batzuk:⏎\n⇥⇥- Lineaz kanpoko erabateko erabilpena (bektore edo tesela mapak gorde ondoren aukeratu daitezken karpetetan)⏎\n⇥⇥- Lineaz kanpoko mundu guztiko mapa konpaktuak eskuragarri⏎\n⇥⇥- Muga gabeko herrialde edo eskualdeetako mapen deskarga, aplikaziotik zuzenean⏎\n⇥⇥- Lineaz kanpoko WIkipediako erabilpena (deskargatu Wikipediako POIak), turismorako erabilgarriak⏎\n⇥⇥- Gain-geruza desberdin asko ikusi daitezke, GPX edo ibilbide bidea, interes puntuak (POI), gogokoenak, sestra-kurbak, garraio publikoaren geltokiak, geruza gardeneko mapa gehigarriak.⏎\n⇥⇥- Lineaz kanpoko helbide eta lekuen bilatzailea (POIak)⏎\n⇥⇥- Lineaz kanpoko ibilbide motzetarako jarraipena (esperimentala)⏎\n⇥⇥- Kotxea, txirrinda eta oinezkoentzat modua:⏎\n⇥⇥- aukerazko egun/gau ikuspegi automatizatua⏎\n⇥⇥- aukerazko abiaduraren araberako maparen zooma⏎\n⇥⇥- aukerazko maparen alineazioa, iparrorratzaren edo norabidearen araberakoa⏎\n⇥⇥- aukerazko errei gidaritza, abiadura muga bistaratzea, grabaketa edo TTS (ahots bihurgailua) motorra⏎\n⇥</string>
-  <string name="osmand_plus_extended_description_4000_chars">⏎\nOsmAnd (OSM Automated Navigation Directions) mapa eta nabigaziorako aplikazioa da, OpenStreetMapeko (OSM) aske, mundu osoko eta kalitate handiko datuetara sarbidearekin. Mapen datu guztiak zure gailuaren memoria txartelean gorde daiteke lineaz kanpoko erabilpena eduki dezazun. Zure gailuaren GPSaren bitartez, OsmAnd-ek nabigazioa eskaintzen dizu, ikusmenezko edo entzutezko gidaritzarekin, kotxe, txirrinda edo oinezkoentzat. Funtzionalitate guztiak bai sarean bai lineaz kanpo funtzionatzen dute (ez dago interneten beharrik).⏎\n⏎\nEzaugarri nagusi batzuk:⏎\n⏎\nNabigazioa⏎\n- Sarean (azkar) edo lineaz kanpo (atzerrian zaudenean roaming kargarik gabe) funtzionatzen du⏎\n- Txandakako ahozko gidaritza (grabatutako eta sintetizatutako ahotsak)⏎\n- Aukerako bide gidaritza, kaleen izenak, eta estimatutako iritsiera ordua⏎\n- Ibilbidearen erdian geldiuneak jarri daitezke⏎\n- Ibilbidetik desbideratzen bazara, automatikoki birkalkulatuko du ibilbidea⏎\n- Leku bilatzailea helbidearen, motaren (adibidez: jatetxea, hotel, gasolindegia, museoa) edo koordenaden arabera⏎\n⏎\nMapen ikuspena⏎\n- Zure kokapena eta orientazioa agertzen da⏎\n- Aukeraz, mapa iparrorratzarekin edo zure norabidearekin mugituko da⏎\n- Gorde zure leku garrantzitsuenak Gogokoetan⏎\n- Zure inguruko POIak (Interes puntuak) ikustea⏎\n- Tesela bereziak ikusi daitezke sarean⏎\n- Satelite irudiak (Bingetik) ikusi daitezke⏎\n- Gain-geruza desberdinak ikusi daitezke, ibilbidea/nabigazioaren GPX bidea eta mapa garden gehigarriak⏎\n- Leku izenak ingelesez, tokiko hizkuntzan edo fonetikoki idatzia ikusteko aukera dago⏎\n⏎\nOpenStreetMap eta Wikipediako datuen erabilpena:⏎\n- Munduko proiektu kolaboratibo hoberenen kalitate handiko informazioa⏎\n- OpenStreetMapeko munduko mapak, herrialde edo eskualde bakoitza eskuragarri dago⏎\n- Wikipediako POIak, turismorako onak (dohaineko bertsioan ez daude erabilgarri)⏎\n- Muga gabeko dohaineko deskarga, aplikaziotik zuzenean (dohaineko bertsioan 16 mapa fitxategiko muga)⏎\n- Mapa eguneratuak beti (gutxienez eguneraketa bat hilabetean)⏎\n- Lineaz kanpoko bektore mapa konpaktuak⏎\n- Mapa osoa edo errepide sarea bakarrik aukeratu daiteke (Adibidez: Japonia guztia 700 MB dira, edo errepide sarea 200 MB bakarrik)⏎\n- Sareko edo katxeatutako tesela mapak jasaten ditu ere⏎\n⏎\nSegurtasun ezaugarriak⏎\n- Aukerazko eguna/gaua ikuspegi kommutazio automatikoa⏎\n- Aukerazko abiadura mugak agertzea, gainditzerakoan abisatzen dizuna⏎\n- Aukerazko abiaduraren araberako mapa zooma⏎\n- Partekatu zure kokapena, zure lagunek uneoro jakin dezaten non zauden⏎\n⏎\nTxirrinda eta oinezkoen ezaugarriak⏎\n- Mapek oinezko, mendiko eta txirrinda bideak dakartzate, kanpo jardueretako aproposa.⏎\n- Ibilbide eta ikuspegi bereziak txirrinda eta oinezkoentzako⏎\n- Aukerazko garraio publikoaren geltokiak (autobus, tranbia, trena) autobus-linien izenak barne⏎\n- Aukerazko bidaiaren grabaketa GPX fitxategi batera edo sareko zerbitzu batera⏎\n- Abiadura eta altuera azaltzeko aukera⏎\n- Sestra-kurbak eta mendi itzalak (plugin gehigarri batez) erakusteko aukera⏎\n⏎\nOpenStreetMapera zuzeneko laguntza⏎\n- Mapetako akatsak salatu⏎\n- GPX bideak igo aplikaziotik OSMra zuzenean⏎\n- POIak gehitu eta zuzenean OSMra igo (edo geroago lineaz kanpo egon ezkero)⏎\n- Aukerazko bidai grabaketa atzeko planoan bada ere (gailua lo moduan dagoen bitartean)⏎\n⏎\nOsmAnd kode irekiko proiektua da, eta aktiboki garatua izaten ari da. Edozeinek lagundu dezake aplikazioarekin, erroreak salatzen, itzulitakoa hobetzen, edo ezaugarri berriak programatzen. Proiektua hobetzeko etengabeko egoeran dago garatzaileen eta erabiltzaileen interakzio modu hauei esker. Era berean, proiektuaren prozesuak dituen garatze, programatze eta funtzionalitate berrien probak egiteko behar den finantziazio laguntzetan ere oinarritzen da. OsmAnd+ erosiz gero, aplikazioa are zirraragarria izatea laguntzen duzu! Ezaugarri berriak finantzatzea edo dohaintza orokor bat egitea posible da osman.net-en.⏎\n⏎\n⏎\nGutxi gorabeherako mapa estaldura eta kalitatea:⏎\n- Mendebaldeko Europa: ****⏎\n- Ekialdeko Europa: ***⏎\n- Errusia: ***⏎\n- Ipar Amerika: ***⏎\n- Hego Amerika: **⏎\n- Asia: **⏎\n- Japonia &amp; Korea: ***⏎\n- Ekialde hurbila: **⏎\n- Afrika: **⏎\n- Antartika: *⏎\n⏎\nJasandako herrialdeen lista (funtsean mundu osoa!):⏎\nAfghanistan, Albania, Aljeria, Andorra, Angola, Aingira, Antigua eta Barbuda, Argentina, Armenia, Aruba, Australia, Austria, Azerbaijan, Bahamak, Bahrein, Bangladesh, Barbados, Bielorrusia, Belgika, Belize, Benin, Bermuda, Bhutan, Bolivia, Bonaire, Bosnia eta Herzegovina, Botswana, Brasil, Birjina britainiar uharteak, Brunei, Bulgaria, Burkina Faso, Burundi, Kanbodia, Kamerun, Kanada, Kabo Berde, Afrika Erdiko Errepublika, Txad, Txile, Txina, Kolonbia, Komoreak, Kongo, Kosta Rika, Boli Kosta, Kroazia, Kuba, Curaçao, Txipre, Txekia, Danimarka, Djibuti, Dominika, Errepublika Dominikarra, Ekuador, Egipto, El Salvador, Ecuatorial Ginea, Eritrea, Estonia, Etiopia, Euskal Herria, Fiji, Finlandia, Frantzia, Guyana Frantsesa, Polinesia Frantsesa, Gabon, Ganbia, Georgia, Alemania, Ghana, Gibraltar, Grezia, Groenlandia, Grenada, Guadalupe, Guam, Guatemala, Guernsey, Ginea, Ginea-Bissau, Guyana, Haiti, Vatikano, Honduras, Hong Kong, Hungaria, Island, India, Indonesia, Iran, Irak, Irlanda, Man, Israel, Italia, Jamaica, Japonia, Jersey, Jordania, Kazakhstan, Kenia, Kiribati, Ipar Korea eta Hego Korea, Kuwait, Kirgizstan, Laos, Letpmoa, Libano, Lesotho, Liberia, Libia, Liechtenstein, Lituania, Luxenburgo, Makao, Mazedonia, Madagaskar, Malawi, Malaysia, Maldivak, Mali, Malta, Martinika, Mauritania, Maurizio, Mayotte, Mexico, Micronesia, Moldavia, Monako, Mongolia, Montenegro, Montserrat, Maroko, Mozambike, Myanmar, Namibia, Nauru, Nepal, Herbeherak, Antilla herbeheretarrak, Caledonia Berria, Zelanda Berria, Nikaragua, Niger, Nigeria, Norbegia, Oman, Pakistan, Palau, Palestina, Panama, Papua Ginea Berria, Paraguai, Peru, Filipinak, Polonia, Portugal, Puerto Rico, Qatar, Errumania, Errusia, Ruanda, San Bartolome, Santa Elena, Saint Kitts eta Nevis, Santa Lucia, San Martin, Saint Pierre eta Mikelune, Saint Vincent eta Grenadinak, Samoa, San Marino, Saudi Arabia, Senegal, Serbia, Seychelleak, Sierra Leona, Singapur, Eslovakia, Eslovenia, Somalia, Hego Africa, Hego Georgia, Hego Sudan, Espainia, Sri Lanka, Sudan, Surinam, Swazilandia, Suegia, Suiza, Siria, Taiwan, Tajikistan, Tanzania, Tailandia, Timor-Leste, Togo, Tokelau, Tonga, Trinidad eta Tobago, Tunisia, Turkia, Turkmenistan, Tuvalu, Uganda, Ukraina, Arabiar Emirerri Batuak, Erresuma Batua, Ameriketako Estatu Batuak, Uruguai, Uzbekistan, Vanuatu, Venezuela, Vietnam, Wallis eta Futuna, Sahara, Yemen, Zambia, Zimbabwe.⏎\n⇥</string>
+  <string name="osmand_plus_long_description_1000_chars">"
+ ⏎
+⇥⇥OsmAnd+ (OSM Automated Navigation Directions)⏎
+⏎
+⇥⇥OsmAnd+ kode irekiko nabigaziorako aplikazioa da, OpenStreetMapeko (OSM) mota askotako munduko mapetara sarbidearekin. Mapa guztiak (bektore edo tesela mapak) telefonoaren memoria txartelean gorde daitezke, lineaz kanpoko erabilpena bermatzeko. OsmAndek ere lineaz kanpoko eta sareko ibilbideak eskaintzen ditu, txandakako ahots gidaritzarekin.⏎
+⏎
+⇥⇥OsmAnd+ aplikazioaren ordaindutako bertsioa da, hau erosiz gero proiektua aurrera eramaten laguntzen ari zara, ezaugarri berrien garapena finantzatzen, eta gainera, azken eguneraketak jasoko dituzu.⏎
+⏎
+⇥⇥Ezaugarri nagusi batzuk:⏎
+⇥⇥- Lineaz kanpoko erabateko erabilpena (bektore edo tesela mapak gorde ondoren aukeratu daitezken karpetetan)⏎
+⇥⇥- Lineaz kanpoko mundu guztiko mapa konpaktuak eskuragarri⏎
+⇥⇥- Muga gabeko herrialde edo eskualdeetako mapen deskarga, aplikaziotik zuzenean⏎
+⇥⇥- Lineaz kanpoko WIkipediako erabilpena (deskargatu Wikipediako POIak), turismorako erabilgarriak⏎
+⇥⇥- Gain-geruza desberdin asko ikusi daitezke, GPX edo ibilbide bidea, interes puntuak (POI), gogokoenak, sestra-kurbak, garraio publikoaren geltokiak, geruza gardeneko mapa gehigarriak.⏎
+⇥⇥- Lineaz kanpoko helbide eta lekuen bilatzailea (POIak)⏎
+⇥⇥- Lineaz kanpoko ibilbide ertainetarako nabigazioa⏎
+⇥⇥- Kotxea, txirrinda eta oinezkoentzat modua:⏎
+⇥⇥- aukerazko egun/gau ikuspegi automatizatua⏎
+⇥⇥- aukerazko abiaduraren araberako maparen zooma⏎
+⇥⇥- aukerazko maparen alineazioa, iparrorratzaren edo norabidearen araberakoa⏎
+⇥⇥- aukerazko errei gidaritza, abiadura muga bistaratzea, grabaketa edo TTS (ahots bihurgailua) motorra⏎
+⇥
+ "</string>
+  <string name="osmand_plus_extended_description_4000_chars">"
+⏎
+OsmAnd (OSM Automated Navigation Directions) mapa eta nabigaziorako aplikazioa da, OpenStreetMapeko (OSM) aske, mundu osoko eta kalitate handiko datuetara sarbidearekin. Mapen datu guztiak zure gailuaren memoria txartelean gorde daiteke lineaz kanpoko erabilpena eduki dezazun. Zure gailuaren GPSaren bitartez, OsmAnd-ek nabigazioa eskaintzen dizu, ikusmenezko edo entzutezko gidaritzarekin, kotxe, txirrinda edo oinezkoentzat. Funtzionalitate guztiak bai sarean bai lineaz kanpo funtzionatzen dute (ez dago interneten beharrik).⏎
+⏎
+Ezaugarri nagusi batzuk:⏎
+⏎
+Nabigazioa⏎
+- Sarean (azkar) edo lineaz kanpo (atzerrian zaudenean roaming kargarik gabe) funtzionatzen du⏎
+- Txandakako ahozko gidaritza (grabatutako eta sintetizatutako ahotsak)⏎
+- Aukerako bide gidaritza, kaleen izenak, eta estimatutako iritsiera ordua⏎
+- Ibilbidearen erdian geldiuneak jarri daitezke⏎
+- Ibilbidetik desbideratzen bazara, automatikoki birkalkulatuko du ibilbidea⏎
+- Leku bilatzailea helbidearen, motaren (adibidez: jatetxea, hotel, gasolindegia, museoa) edo koordenaden arabera⏎
+⏎
+Mapen ikuspena⏎
+- Zure kokapena eta orientazioa agertzen da⏎
+- Aukeraz, mapa iparrorratzarekin edo zure norabidearekin mugituko da⏎
+- Gorde zure leku garrantzitsuenak Gogokoetan⏎
+- Zure inguruko POIak (Interes puntuak) ikustea⏎
+- Tesela bereziak ikusi daitezke sarean⏎
+- Satelite irudiak (Bingetik) ikusi daitezke⏎
+- Gain-geruza desberdinak ikusi daitezke, ibilbidea/nabigazioaren GPX bidea eta mapa garden gehigarriak⏎
+- Leku izenak ingelesez, tokiko hizkuntzan edo fonetikoki idatzia ikusteko aukera dago⏎
+⏎
+OpenStreetMap eta Wikipediako datuen erabilpena:⏎
+- Munduko proiektu kolaboratibo hoberenen kalitate handiko informazioa⏎
+- OpenStreetMapeko munduko mapak, herrialde edo eskualde bakoitza eskuragarri dago⏎
+- Wikipediako POIak, turismorako onak (dohaineko bertsioan ez daude erabilgarri)⏎
+- Muga gabeko dohaineko deskarga, aplikaziotik zuzenean (dohaineko bertsioan 16 mapa fitxategiko muga)⏎
+- Mapa eguneratuak beti (gutxienez eguneraketa bat hilabetean)⏎
+- Lineaz kanpoko bektore mapa konpaktuak⏎
+- Mapa osoa edo errepide sarea bakarrik aukeratu daiteke (Adibidez: Japonia guztia 700 MB dira, edo errepide sarea 200 MB bakarrik)⏎
+- Sareko edo katxeatutako tesela mapak jasaten ditu ere⏎
+⏎
+Segurtasun ezaugarriak⏎
+- Aukerazko eguna/gaua ikuspegi kommutazio automatikoa⏎
+- Aukerazko abiadura mugak agertzea, gainditzerakoan abisatzen dizuna⏎
+- Aukerazko abiaduraren araberako mapa zooma⏎
+- Partekatu zure kokapena, zure lagunek uneoro jakin dezaten non zauden⏎
+⏎
+Txirrinda eta oinezkoen ezaugarriak⏎
+- Mapek oinezko, mendiko eta txirrinda bideak dakartzate, kanpo jardueretako aproposa.⏎
+- Ibilbide eta ikuspegi bereziak txirrinda eta oinezkoentzako⏎
+- Aukerazko garraio publikoaren geltokiak (autobus, tranbia, trena) autobus-linien izenak barne⏎
+- Aukerazko bidaiaren grabaketa GPX fitxategi batera edo sareko zerbitzu batera⏎
+- Abiadura eta altuera azaltzeko aukera⏎
+- Sestra-kurbak eta mendi itzalak (plugin gehigarri batez) erakusteko aukera⏎
+⏎
+OpenStreetMapera zuzeneko laguntza⏎
+- Mapetako akatsak salatu⏎
+- GPX bideak igo aplikaziotik OSMra zuzenean⏎
+- POIak gehitu eta zuzenean OSMra igo (edo geroago lineaz kanpo egon ezkero)⏎
+- Aukerazko bidai grabaketa atzeko planoan bada ere (gailua lo moduan dagoen bitartean)⏎
+⏎
+OsmAnd kode irekiko proiektua da, eta aktiboki garatua izaten ari da. Edozeinek lagundu dezake aplikazioarekin, erroreak salatzen, itzulitakoa hobetzen, edo ezaugarri berriak programatzen. Proiektua hobetzeko etengabeko egoeran dago garatzaileen eta erabiltzaileen interakzio modu hauei esker. Era berean, proiektuaren prozesuak dituen garatze, programatze eta funtzionalitate berrien probak egiteko behar den finantziazio laguntzetan ere oinarritzen da. OsmAnd+ erosiz gero, aplikazioa are zirraragarria izatea laguntzen duzu! Ezaugarri berriak finantzatzea edo dohaintza orokor bat egitea posible da osman.net-en.⏎
+⏎
+⏎
+Gutxi gorabeherako mapa estaldura eta kalitatea:⏎
+- Mendebaldeko Europa: ****⏎
+- Ekialdeko Europa: ***⏎
+- Errusia: ***⏎
+- Ipar Amerika: ***⏎
+- Hego Amerika: **⏎
+- Asia: **⏎
+- Japonia &amp; Korea: ***⏎
+- Ekialde hurbila: **⏎
+- Afrika: **⏎
+- Antartika: *⏎
+⏎
+Jasandako herrialdeen lista (funtsean mundu osoa!):⏎
+Afghanistan, Albania, Aljeria, Andorra, Angola, Aingira, Antigua eta Barbuda, Argentina, Armenia, Aruba, Australia, Austria, Azerbaijan, Bahamak, Bahrein, Bangladesh, Barbados, Bielorrusia, Belgika, Belize, Benin, Bermuda, Bhutan, Bolivia, Bonaire, Bosnia eta Herzegovina, Botswana, Brasil, Birjina britainiar uharteak, Brunei, Bulgaria, Burkina Faso, Burundi, Kanbodia, Kamerun, Kanada, Kabo Berde, Afrika Erdiko Errepublika, Txad, Txile, Txina, Kolonbia, Komoreak, Kongo, Kosta Rika, Boli Kosta, Kroazia, Kuba, Curaçao, Txipre, Txekia, Danimarka, Djibuti, Dominika, Errepublika Dominikarra, Ekuador, Egipto, El Salvador, Ecuatorial Ginea, Eritrea, Estonia, Etiopia, Euskal Herria, Fiji, Finlandia, Frantzia, Guyana Frantsesa, Polinesia Frantsesa, Gabon, Ganbia, Georgia, Alemania, Ghana, Gibraltar, Grezia, Groenlandia, Grenada, Guadalupe, Guam, Guatemala, Guernsey, Ginea, Ginea-Bissau, Guyana, Haiti, Vatikano, Honduras, Hong Kong, Hungaria, Island, India, Indonesia, Iran, Irak, Irlanda, Man, Israel, Italia, Jamaica, Japonia, Jersey, Jordania, Kazakhstan, Kenia, Kiribati, Ipar Korea eta Hego Korea, Kuwait, Kirgizstan, Laos, Letpmoa, Libano, Lesotho, Liberia, Libia, Liechtenstein, Lituania, Luxenburgo, Makao, Mazedonia, Madagaskar, Malawi, Malaysia, Maldivak, Mali, Malta, Martinika, Mauritania, Maurizio, Mayotte, Mexico, Micronesia, Moldavia, Monako, Mongolia, Montenegro, Montserrat, Maroko, Mozambike, Myanmar, Namibia, Nauru, Nepal, Herbeherak, Antilla herbeheretarrak, Caledonia Berria, Zelanda Berria, Nikaragua, Niger, Nigeria, Norbegia, Oman, Pakistan, Palau, Palestina, Panama, Papua Ginea Berria, Paraguai, Peru, Filipinak, Polonia, Portugal, Puerto Rico, Qatar, Errumania, Errusia, Ruanda, San Bartolome, Santa Elena, Saint Kitts eta Nevis, Santa Lucia, San Martin, Saint Pierre eta Mikelune, Saint Vincent eta Grenadinak, Samoa, San Marino, Saudi Arabia, Senegal, Serbia, Seychelleak, Sierra Leona, Singapur, Eslovakia, Eslovenia, Somalia, Hego Africa, Hego Georgia, Hego Sudan, Espainia, Sri Lanka, Sudan, Surinam, Swazilandia, Suegia, Suiza, Siria, Taiwan, Tajikistan, Tanzania, Tailandia, Timor-Leste, Togo, Tokelau, Tonga, Trinidad eta Tobago, Tunisia, Turkia, Turkmenistan, Tuvalu, Uganda, Ukraina, Arabiar Emirerri Batuak, Erresuma Batua, Ameriketako Estatu Batuak, Uruguai, Uzbekistan, Vanuatu, Venezuela, Vietnam, Wallis eta Futuna, Sahara, Yemen, Zambia, Zimbabwe.⏎
+⇥
+ "</string>
   
   
   <string name="filterpoi_activity">POI filtroa sortu</string>
@@ -2302,5 +2492,52 @@ OsmAnden ohiko mapa batetara itzultzeko, gehigarri hau desgaitu edo \'Mapa estil
     <string name="plugin_ski_descr">"Gehigari honek zure eskura jartzen ditu mundo osoko eskiatzeko aldapak, fondoko eski zirkuitoak, trabesiako eski ibilbideak, teleferikoak, eta abar. Ibilbideak eta pistak zailtasunaren arabera koloreztatu dira, eta elurtutako paisaiaren itxura duen \'Negu\' estiloko mapa batean adierazten dira.
 
 Hau aktibatzean ikuspegia \'Negua eta eskia\' estilora aldatzen da, paisaia neguko egoeran bistaratuz. Hau atzera aldatu daiteke gehigarri hau desgaituz eta \'Konfiguratu mapa\' menuko \'Mapa estiloa\' aldatuz.
+ "</string>
+    <string name="osmand_plus_extended_description_4000_chars_v2">"
+OsmAnd Mapak eta Nabigazioa - aurkitu kokalekuak mapan eta kalbulatu ibilbideak internet konexiorik gabe. Deskargatu herrialde bateko mapa bidaia hasi aurretik ezezaguna duzun zonaldeetan tokiak eta ibilbideak aurkitzeko.
+
+Oinarrizko aukerak:
+• 200 herrialdeetako mapa zehatzak
+• Lineaz kanpoko nabigatzailea ahots bidezko abisuekin
+• Helbideen bilaketa lineaz kanpo
+• Mapako tokien informazioa: leku interesgarriak, kafetegiak, aparkalekuak, dendak
+• Kokalekuak gogokoetara gehitzea
+• Kotxe, bizikleta eta oinezkoen nabigazioa
+
+Aukera gehigarriak: 
+• GPX lorratzak ikusi eta grabatzeko aukera
+• POI puntuen Wikipediako deskripzioa
+• Argazki, ahots eta bideo oharrak gehitu mapara
+• Egun eta gau moduak gidatze erosorako
+• Garraio publikoaren ibilbide eta geltokien informazioa
+• Bidegorriak eta oinezkoen bideak
+• Mundo osoko ibilbide turistikoak
+• Internet bidezko mapak hainbat iturrietatik
+• Errepidearen kalitatearen eta kaleko argitzearen informazioa
+• Gehitu, editatu eta ezabatu POI puntuak (penStreetMap.org erabiltzaileentzat)
+• OsMo - Monitorizatu zezenean beste gailu batzuk
+
+Lortu nabigazio fidagarria zure herrialdean - Frantzia, Alemania, Mexiko, Erresuma batua. Espainia Herbehereak, Estatu Batuak, Errusia, Brasil edo dena delarik.
+
+Plugins:
+• Contour maps and terrain shading https://goo.gl/7mojP8
+ Contour lines data and terrain visualization added to the basic OsmAnd map.
+
+• Ski maps https://goo.gl/pX6DxJ
+ The info about ski pistes, cross-country skiing tracks, cable railways and ski lifts.
+
+• Nautical map https://goo.gl/0hEdxm
+ Special map style for viewing nautical navigation signs for arterial and nearshore marine navigation.
+
+• Parking position https://goo.gl/6JxQXF
+ Helps you mark the location of your parked vehicle and see how much time is left if the parking is time-limited.
+
+Stay tuned!
+
+Twitter: https://twitter.com/osmandapp
+Facebook: https://www.facebook.com/osmandapp
+Site: http://osmand.net
+
+If you need help with OsmAnd application, please contact our support team: support@osmand.net. 
  "</string>
     </resources>
