@@ -178,10 +178,12 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 			ser.startTag(null, "osm"); //$NON-NLS-1$
 			ser.startTag(null, "changeset"); //$NON-NLS-1$
 
-			ser.startTag(null, "tag"); //$NON-NLS-1$
-			ser.attribute(null, "k", "comment"); //$NON-NLS-1$ //$NON-NLS-2$
-			ser.attribute(null, "v", comment); //$NON-NLS-1$
-			ser.endTag(null, "tag"); //$NON-NLS-1$
+			if(comment != null) {
+				ser.startTag(null, "tag"); //$NON-NLS-1$
+				ser.attribute(null, "k", "comment"); //$NON-NLS-1$ //$NON-NLS-2$
+				ser.attribute(null, "v", comment); //$NON-NLS-1$
+				ser.endTag(null, "tag"); //$NON-NLS-1$
+			}
 
 			ser.startTag(null, "tag"); //$NON-NLS-1$
 			ser.attribute(null, "k", "created_by"); //$NON-NLS-1$ //$NON-NLS-2$
