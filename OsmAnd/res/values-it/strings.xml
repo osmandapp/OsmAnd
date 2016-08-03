@@ -56,7 +56,9 @@
 
 
     <string name="download_files_not_enough_space">Non c\'è abbastanza spazio per scaricare %1$s MB (liberi: %2$s).</string>
-    <string name="download_files_question_space">Scaricare {0} file(s)? Servirebbero {3} MB temporaneamente e {1} MB permanentemente. Ora, sono disponibili solo {2} MB.</string>
+    <string name="download_files_question_space">Scaricare {0} file(s)?
+Servirebbero {1} MB permanentemente.
+Ora, sono disponibili solo {2} MB.</string>
 
 
     <string name="use_transparent_map_theme">Tema trasparente</string>
@@ -868,8 +870,8 @@
 
 
     <string name="osmand_short_description_80_chars">OsmAnd è un\'applicazione di navigazione opensource per mappe offline e online</string>
-<string name="osmand_long_description_1000_chars">
-		↵
+<string name="osmand_long_description_1000_chars">"
+ ↵
 →→OsmAnd (OSM Automatizzata Navigazione Direzioni)↵
 ↵
 →→OsmAnd è una applicazione di navigazione, a sorgente aperto, con accesso a una grande varietà di dati mondiali di OpenStreetMap (OSM). Tutte le mappe (vettoriali o a tasselli) posso essere memorizzate nella scheda di memoria del telefono per essere utilizzate offline. OsmAnd offre anche la funzionalità del calcolo dell\'itinerario online che offline compreso la voce guida curva per curva.↵
@@ -880,7 +882,7 @@
 →→- Scarica le mappe delle nazioni o delle regioni direttamente dal programma↵
 →→- Possibilità di sovrapposizione di diversi strati, come tracce GPX o di navigazione, punti di interesse, preferiti, curve di livello, fermate dei mezzi pubblici, mappe aggiuntive con trasparenza personalizzabile↵
 →→- Ricerca offline per indirizzi e luoghi (PDI)↵
-→→- Calcolo del percorso per brevi distanze (sperimentale)↵
+→→- Calcolo del percorso per distanze a medio raggio↵
 →→- Modalità automobile, bicicletta e pedonale con:↵
 →→- Commutazione opzionale automatica della vista giorno/notte↵
 →→- Zoom automatico opzionale in base alla velocità↵
@@ -892,7 +894,7 @@
 ↵
 →→OsmAnd è continuamente in fase di sviluppo e il nostri progetto e il suo ulteriore progresso si basa su contribuiti finanziari per lo sviluppo e la prova di nuove funzionalità. Ti preghiamo di considerare l\'acquisto di OsmAnd+ o il finanziamento di specifiche nuove funzioni o una donazione generica su osmand.net↵
 →
-	</string>
+ "</string>
     <string name="osmand_plus_short_description_80_chars">Visualizzazione &amp; navigazione mobile con le mappe mondiali OSM online e offline</string>
     <string name="osmand_plus_long_description_1000_chars">" OsmAnd+ (OSM Automatizzate Navigazione e Direzioni) OsmAnd+ è un\'applicazione di navigazione open source con accesso a una grande varietà di dati mondiali di OpenStreetMap (OSM). Tutte le mappe (vettoriali o a tasselli) possono essere memorizzate nella scheda di memoria del telefono per essere utilizzate offline. OsmAnd offre anche la funzionalità di calcolo dell\'itinerario sia online che offline, compresa la voce guida svolta per svolta. OsmAnd+ è la versione a pagamento, tramite l\'acquisto dell\'applicazione sostieni il progetto, finanzi lo sviluppo di nuove funzionalità, e ricevi gli ultimi aggiornamenti. Alcune delle caratteristiche principali: - Funzionalità completa anche disconnessi dalla rete (conserva le mappe vettoriali o a tasselli in una cartella selezionabile) - Mappe vettoriali offline compatte per tutto il mondo a disposizione - Scarica le mappe delle nazioni o delle regioni direttamente dall\'applicazione, senza limiti - Wikipedia Offline (scarica i PDI Wikipedia), ottimo per i giri turistici - Possibilità di sovrapposizione di diversi strati, come tracce GPX o di navigazione, punti di interesse, preferiti, curve di livello, fermate dei mezzi pubblici, mappe aggiuntive con trasparenza personalizzabile - Ricerca offline per indirizzi e luoghi (PDI) - Calcolo del percorso per brevi distanze (sperimentale) - Modalità automobile, bicicletta e pedonale con: - commutazione opzionale automatica della vista giorno/notte - zoom automatico opzionale in base alla velocità - allineamento della mappa in base alla direzione o alla bussola - opzionali indicazione di corsia, indicazione del limite di velocità, voci registrate e TTS "</string>
 
@@ -919,7 +921,7 @@
     <string name="add_as_last_destination_point">Aggiungi come ultima destinazione intermedia</string>
     <string name="add_as_first_destination_point">Aggiungi come prima destinazione intermedia</string>
     <string name="replace_destination_point">Sostituisci la destinazione</string>
-    <string name="new_destination_point_dialog">La destinazione è già impostata.</string>
+    <string name="new_destination_point_dialog">La destinazione è già impostata:</string>
     <string name="target_point">Destinazione %1$s</string>
     <string name="target_points">Destinazioni</string>
     <string name="map_widget_monitoring_services">Servizi di registrazione</string>
@@ -973,7 +975,10 @@
     <string name="audionotes_location_not_defined">La posizione da associare con la nota non è ancora definita. \"Usa posizione …\" per assegnare una nota alla posizione specificata</string>
 
     <string name="osmand_srtm_short_description_80_chars">Plugin Osmand per le curve di livello offline</string>
-    <string name="osmand_srtm_long_description_1000_chars">"Questo plugin fornisce sia le curve di livello che lo strato ombreggiamento dei rilievi che possono essere visualizzate nelle mappe standard di OsmAnd. Questa funzionalità sarà molto apprezzata dagli atleti, dagli escursionisti, e tutti coloro che sono interessati all\'orografia e al paesaggio.\n\nI dati globali (fra i 70 gradi nord e 70 gradi sud) sono basati su misurazioni del SRTM (Shuttle Radar Topography Mission) e ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), lo strumento misuratore a bordo Terra, il satellite della NASA del sistema di osservazione della terra. ASTER è uno sforzo di cooperazione tra NASA, il Ministero dell\'Economia del Giappone, Commercio e Industria (METI) e sistema spaziale giapponese (J-spacesystems). "</string>
+    <string name="osmand_srtm_long_description_1000_chars">"Questo plugin fornisce sia le curve di livello che lo strato ombreggiamento dei rilievi che possono essere visualizzate nelle mappe standard di OsmAnd. Questa funzionalità sarà molto apprezzata dagli atleti, dagli escursionisti, e tutti coloro che sono interessati all\'orografia e al paesaggio.
+
+I dati globali (fra i 70 gradi nord e 70 gradi sud) sono basati su misurazioni del SRTM (Shuttle Radar Topography Mission) e ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), lo strumento misuratore a bordo Terra, il satellite della NASA del sistema di osservazione della terra. ASTER è uno sforzo di cooperazione tra NASA, il Ministero dell\'Economia del Giappone, Commercio e Industria (METI) e sistema spaziale giapponese (J-spacesystems).
+ "</string>
 
 
     <string name="map_widget_distancemeasurement">Misurazione della distanza</string>
@@ -1082,7 +1087,13 @@
     <string name="gpx_saved_sucessfully">File GPX salvato con successo in {0}</string>
     <string name="osmand_distance_planning_plugin_description">Questo plugin fornisce un widget nella finestra della mappa che permette di creare percorsi toccando la mappa o usare o modificare file GPX esistenti, per pianificare un viaggio e misurare la distanza tra i punti. I risultati possono essere salvati come file GPX, che possono essere utilizzati in seguito come guida.</string>
     <string name="osmand_distance_planning_plugin_name">Strumento calcolatore di distanza &amp; pianificazione</string>
-    <string name="use_distance_measurement_help">* Toccare per segnare un punto.\n * Premere e tenere premuto sulla mappa per eliminare il punto precedente.\n * Premere e tenere premuto sul punto per vedere e allegare una descrizione.\n * Fare clic sul widget di misura per vedere ulteriori azioni.</string>
+    <string name="use_distance_measurement_help">* Toccare per segnare un punto.
+
+ * Premere e tenere premuto sulla mappa per eliminare il punto precedente.
+
+ * Premere e tenere premuto sul punto per vedere e allegare una descrizione.
+
+ * Fare clic sul widget di misura per vedere ulteriori azioni.</string>
     <string name="distance_measurement_start_editing">Iniza a modificare</string>
     <string name="distance_measurement_finish_editing">Finisci di modificare</string>
     <string name="distance_measurement_finish_subtrack">Inizia una nuova sottotraccia</string>
@@ -1224,7 +1235,7 @@
     <string name="route_descr_select_destination">Scegli la destinazione</string>
     <string name="route_preferences">Preferenze di percorso</string>
     <string name="route_info">Informazioni sul percorso</string>
-    <string name="keep_and_add_destination_point">Aggiungi come punto di ultima destinazione</string>
+    <string name="keep_and_add_destination_point">Aggiungi come destinazione successiva</string>
     <string name="use_displayed_track_for_navigation">Vuoi usare la traccia visualizzata per la navigazione?</string>
 
     <string name="calculate_osmand_route_without_internet">Calcola un tratto di percorso OsmAnd senza l\'utilizzo di Internet</string>
@@ -1292,7 +1303,12 @@
     <string name="navigation_intent_invalid">Formato non valido: %s</string>
     <string name="osmo_settings_uuid">ID univoco del dispositivo</string>
     <string name="osmo_settings_descr">Configura le impostazioni di monitoraggio e imposta il canale di monitoraggio personale</string>
-    <string name="osmo_plugin_description">"Questo componente aggiuntivo fornisce le funzionalità del cosiddetto monitoraggio avanzato in diretta OsMo, vedi http://osmo.mobi.\n\nPuoi tracciare in tempo reale tutti i dispositivi di un gruppo di partecipanti. Puoi anche visualizzare i punti e le tracce caricate dal gruppo a cui appartieni.\n\nIl gruppo che non è stato rimosso da mesi viene allineato con le tue regole per la creazione di gruppi nel sito OsMo.mobi "</string>
+    <string name="osmo_plugin_description">"Questo componente aggiuntivo fornisce parzialmente le funzionalità del monitoraggio avanzato in diretta OsMo, vedi http://osmo.mobi.
+
+Puoi tracciare in tempo reale tutti i dispositivi di un gruppo di partecipanti. Puoi anche visualizzare i punti e le tracce caricate dal gruppo a cui appartieni.
+
+Il gruppo che non è stato rimosso da mesi viene allineato con le tue regole per la creazione di gruppi nel sito OsMo.mobi
+ "</string>
     <string name="osmo_plugin_name">Monitoraggio OpenStreetMap</string>
     <string name="osmo_settings">OsMO</string>
     <string name="keep_informing_never">Solo manualmente (tap sulla freccia)</string>
@@ -1433,9 +1449,27 @@
     <string name="osmo_gpx_track_downloaded">Scaricate %1$s tracce OsMo.</string>
     <string name="osmo_not_signed_in">Login a OsMo fallito</string>
     <string name="osmo_group_by_invite">Accedere su invito</string>
-    <string name="osmo_group_information_desc">" - Quando crei un gruppo, per favore, dagli un nome e una descrizione\n - Dall\'app possono essere creati solo gruppi di tipo Semplice, più informazioni su sito https://osmo.mobi/g/new\n - Attraverso il sito è possibile gestire il gruppo e aggiungere tracce e punti disponibili per tutti\n - Non auspichiamo l\'utilizzo dei gruppi con un solo membro, se questo non è il gruppo dei PDI\n - I gruppi privati sono limitati a 8 persone\n - Termini e condizioni dell\'utilizzo sono sempre disponibili su OsMo.mobi\n - Se avete altre necessità particolari - per favore contattate il supporto osmo.mobi@gmail.com "</string>
+    <string name="osmo_group_information_desc">"
+ - Quando crei un gruppo, per favore, dagli un nome e una descrizione
+
+ - Dall\'app possono essere creati solo gruppi di tipo Semplice, più informazioni su sito https://osmo.mobi/g/new
+ 
+ - Attraverso il sito è possibile gestire il gruppo e aggiungere tracce e punti disponibili per tutti
+ 
+ - Non auspichiamo l\'utilizzo dei gruppi con un solo membro, se questo non è il gruppo dei PDI
+ 
+ - I gruppi privati sono limitati a 8 persone
+ 
+ - Termini e condizioni dell\'utilizzo sono sempre disponibili su OsMo.mobi
+ 
+ - Se avete altre necessità particolari - per favore contattate il supporto osmo.mobi@gmail.com
+ "</string>
     <string name="osmo_group_information">Per favore leggere prima di creare un gruppo!</string>
-    <string name="osmo_auth_error">Errore di autorizzazione OsMo: %1$s.\nPotrebbe essere un disservizio temporaneo oppure che la registrazione è scaduta.\nVuoi procedere con una nuova registrazione?</string>
+    <string name="osmo_auth_error">Errore di autorizzazione OsMo: %1$s.
+
+Potrebbe essere un disservizio temporaneo oppure che la registrazione è scaduta.
+
+Vuoi procedere con una nuova registrazione?</string>
     <string name="rendering_attr_hideBuildings_name">Edifici</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Strade non carrabili</string>
     <string name="rendering_attr_hideText_name">Testo</string>
@@ -1508,7 +1542,10 @@
     <string name="speak_poi">PDI nelle vicinanze</string>
     <string name="index_tours">Itinerari</string>
     <string name="shared_string_all">Tutto</string>
-    <string name="record_plugin_description">"Questo componente aggiuntivo attiva la funzionalità di registrare e salvare le tue tracce, o manualmente attraverso il pulsante dedicato nello schermo della mappa, oppure automaticamente tenendo traccia di tutti i tuoi spostamenti in un file GPX.\n\nLe tracce registrate possono essere condivise con i tuoi amici o essere usate per chi contribuire a OSM. Gli atleti possono utilizzate le tracce registrate per monitorare i loro allenamenti. Alcune analisi di base possono essere fatte direttamente in OsmAnd, come il tempo sul giro, la velocità media ecc., le tracce naturalmente possono essere in seguito analizzate con strumenti di analisi esterni. "</string>
+    <string name="record_plugin_description">"Questo componente aggiuntivo attiva la funzionalità di registrare e salvare le tue tracce, o manualmente attraverso il pulsante dedicato nello schermo della mappa, oppure automaticamente tenendo traccia di tutti i tuoi spostamenti in un file GPX.
+
+Le tracce registrate possono essere condivise con i tuoi amici o essere usate per chi contribuire a OSM. Gli atleti possono utilizzate le tracce registrate per monitorare i loro allenamenti. Alcune analisi di base possono essere fatte direttamente in OsmAnd, come il tempo sul giro, la velocità media ecc., le tracce naturalmente possono essere in seguito analizzate con strumenti di analisi esterni.
+ "</string>
     <string name="record_plugin_name">Registrazione viaggio</string>
     <string name="int_hour">h</string>
     <string name="duration">Durata</string>
@@ -1625,7 +1662,7 @@
 
 
     <string name="gps_status">Stato GPS</string>
-    <string name="parking_place">Parcheggio</string>
+    <string name="parking_place">Parcheggio (singolo)</string>
     <string name="remove_the_tag">RIMUOVI IL TAG</string>
     <string name="plugin_description_title">Descrizione</string>
 
@@ -1650,7 +1687,10 @@
 		\n\nÈ disponibile la mappa contenente tutta la simbologia nautica come singolo download sotto il nome \"World seamarks\".
 		\n\nCiò può essere invertito sia disattivandolo nuovamente da qui che cambiando lo \'Stile della mappa\' in \' Configura mappa\' come desiderato.
 	</string>
-    <string name="plugin_ski_descr">"Questo plugin per OsmAnd ti mette a portata di mano i dettagli delle piste da sci di fondo e alpino mondiali, funivie e ski lift di tutto il mondo. I percorsi e le piste vengono codificate per colore in base alla difficoltà e raffigurate in uno stile mappa speciale \'Inverno\', che sembra un paesaggio imbiancato dalla neve.\n\nAttivando questa vista lo stile della mappa diventerà \'Inverno e sci\', mostrando tutte le caratteristiche dello scenario nelle condizioni invernali. Questa visualizzazione può essere ripristinata o disattivata nuovamente da qui o cambiando lo \'Stile della mappa\' in \'Configura mappa\' come desiderato. "</string>
+    <string name="plugin_ski_descr">"Questo plugin per OsmAnd ti mette a portata di mano i dettagli delle piste da sci di fondo e alpino mondiali, funivie e ski lift di tutto il mondo. I percorsi e le piste vengono codificate per colore in base alla difficoltà e raffigurate in uno stile mappa speciale \'Inverno\', che sembra un paesaggio imbiancato dalla neve.
+
+Attivando questa vista lo stile della mappa diventerà \'Inverno e sci\', mostrando tutte le caratteristiche dello scenario nelle condizioni invernali. Questa visualizzazione può essere ripristinata o disattivata nuovamente da qui o cambiando lo \'Stile della mappa\' in \'Configura mappa\' come desiderato.
+ "</string>
 	<string name="plugin_touringview_descr">"Attivando questa visualizzazione lo stile della mappa cambierà in \'Vista turistica\', questa è una visualizzazione speciale particolarmente dettagliata per i turisti e autisti professionali.
 \n\nQuesta visualizzazione fornisce, per ogni livello di zoom, il massimo dei dettagli di viaggio disponibili nei dati della mappa (particolari delle strade, sentieri e segni di orientamento).
 \n\nRappresenta anche chiaramente tutte le strade ambigue tramite la colorazione distintiva, ciò risulta utile per esempio guidando autoveicoli di grandi dimensioni.
@@ -2148,7 +2188,7 @@
     <string name="shared_string_status">Stato</string>
     <string name="shared_string_save_changes">Salva le modifiche</string>
     <string name="show_polygons">Mostra i poligoni</string>
-    <string name="find_parking">Cerca un parcheggio</string>
+    <string name="find_parking">Cerca parcheggio</string>
     <string name="osmand_plus_extended_description_4000_chars_v2">" OsmAnd Maps &amp; Navigation - trova luoghi sulla mappa e crea percorsi senza connessione a Internet. Scarica la mappa di una nazione prima di partire per un viaggio per trovare luoghi e percorsi in un luogo sconosciuto. Opzioni base: • Mappe dettagliate di 200 nazioni • Navigatore offline con istruzioni vocali • Ricerca degli indirizzi in modalità offline • Informazioni sui luoghi della mappa: punti d\'interesse, bar, parcheggi, negozi • Aggiunta di luoghi ai preferiti • Navigazione per guida, ciclisti e pedoni Opzioni aggiuntive: • Possibilità di vedere e registrare tracciati GPX • Descrizioni Wikipedia dei PDI • Aggiunta di note audio, video e foto alla mappa • Modalità notturna e diurna della mappa per una guida più confortevole • Informazioni sui percorsi e le fermate dei trasporti pubblici • Piste ciclabili e percorsi pedonali • Sentieri turistici in tutto il mondo • Mappe online da numerose fonti • Informazioni sulla qualità del fondo stradale e sull\'illuminazione • Aggiunta, modifica e cancellazione dei PDI (per gli utenti di OpenStreetMap.org) • OsMo - monitoraggio in tempo reale degli altri dispositivi Usa un navigatore affidabile nella tua nazione - che sia Francia, Germania, Messico, Regno Unito, Spagna, Olanda, USA, Russia, Brasile qualunque altro stato. Plugin: • Curve di livello e ombreggiatura del terreno https://goo.gl/7mojP8 Visualizzazione delle curve di livello e dell\'ombreggiatura del terreno in aggiunta alla mappa base OsmAnd. • Mappe sci https://goo.gl/pX6DxJ Informazioni sulle piste da sci, sui percorsi da sci di fondo, cross-country, funivie e skilift. • Mappe nautiche https://goo.gl/0hEdxm Stile speciale della mappa per mostrare i simboli per la navigazione nautica marine a lungo o breve raggio. • Posizione di parcheggio https://goo.gl/6JxQXF Ti aiuta a segnare la posizione del tuo veicolo parcheggiato e vedere quanto tempo manca se il parcheggio ha limiti di tempo. Resta sintonizzato! Twitter: https://twitter.com/osmandapp Facebook: https://www.facebook.com/osmandapp Sito: http://osmand.net Se hai bisogno di assistenza con l\'app OsmAnd, contatta il nostro team di supporto: support@osmand.net. "</string>
     <string name="rendering_attr_showMtbRoutes_name">Mostra i percorsi MTB</string>
     <string name="select_map_markers">Scegli i marcatori della mappa</string>
@@ -2170,8 +2210,12 @@
     <string name="shared_string_widgets">Widgets</string>
     <string name="select_map_marker">Scegli marcatore mappa</string>
     <string name="map_markers_other">Altri marcatori</string>
-    <string name="download_files_error_not_enough_space">Manca spazio! Servirebbero {3} MB temporaneamente e {1} MB permanentemente. Ora, sono disponibili solo {2} MB.</string>
-    <string name="download_files_question_space_with_temp">Scaricare veramente {0} file(s)? Servirebbero {3} MB temporaneamente e {1} MB permanentemente. Ora, sono disponibili solo {2} MB.</string>
+    <string name="download_files_error_not_enough_space">Manca spazio!
+Servirebbero {3} MB temporaneamente e {1} MB permanentemente.
+Ora, sono disponibili solo {2} MB.</string>
+    <string name="download_files_question_space_with_temp">Scaricare veramente {0} file(s)?
+Servirebbero {3} MB temporaneamente e {1} MB permanentemente.
+Ora, sono disponibili solo {2} MB.</string>
     <string name="upload_osm_note_description">Puoi inviare le tue Note OSM anonimamente se utilizzi il tuo profilo OpenStreetMap.org.</string>
     <string name="upload_osm_note">Invia Nota OSM</string>
     <string name="donations">Donazioni</string>
@@ -2307,4 +2351,6 @@
     <string name="postcode">Codice postale</string>
     <string name="shared_string_from">da</string>
     <string name="city_type_district">Distretto</string>
-    </resources>
+    <string name="city_type_neighbourhood">Dintorni</string>
+    <string name="map_widget_search">Cerca</string>
+	</resources>
