@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
     <string name="rendering_attr_roadColors_description">Velg fargeskjema for veier:</string>
     <string name="rendering_attr_roadColors_name">Veifargeskjema</string>
     <string name="map_widget_show_destination_arrow">Vis retning til målet</string>
@@ -1695,4 +1696,7 @@
     <string name="share_history_subject">" delt via OsmAnd"</string>
     <string name="rendering_attr_horseRoutes_name">Hesteruter</string>
     <string name="world_ski_missing">For å vise skikart må det spesielle offline-kartet lastes ned</string>
+    <string name="route_stops_before">%1$s stopp før</string>
+    <string name="coords_search">Koordinatsøk</string>
+    <string name="advanced_coords_search">Avansert koordinatsøk</string>
     </resources>
