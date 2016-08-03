@@ -247,7 +247,8 @@ public class RouteCalculationResult {
                         int roundAboutEnd = prevLocationSize ;
                     	// take next name for roundabout (not roundabout name)
 						while (lind < list.size() - 1 && list.get(lind).getObject().roundabout()) {
-							roundAboutEnd++;
+							roundAboutEnd += Math.abs(list.get(lind).getEndPointIndex()
+									- list.get(lind).getStartPointIndex());
 							lind++;
 						}
                     	// Consider roundabout end.
