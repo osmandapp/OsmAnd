@@ -30,15 +30,13 @@
 			 <xsl:for-each select="//gx:Track">
 				 <trk>
 					 <trkseg>
-						 <xsl:for-each select="kml:when">
-							 <!-- Timestamp -->
-							 <xsl:variable name="ts" select="."/>
-							 <!-- Coordinates -->
-							 <xsl:variable name="lonlat" select="./following-sibling::gx:coord"/>
+						 <xsl:for-each select="gx:coord">
+						     <xsl:variable name="i" select="position()"/>
+						 	 <xsl:variable name="lonlat" select="."/>
 							 <xsl:variable name="lon" select="substring-before($lonlat,' ')"/>
 							 <xsl:variable name="latele" select="substring-after($lonlat,' ')"/>
 							 <xsl:variable name="lat">
-								 <xsl:choose>
+							 	 <xsl:choose>
 									 <xsl:when test="contains($latele,' ')">
 										 <xsl:value-of select="substring-before($latele,' ')"/>
 									 </xsl:when>
@@ -46,10 +44,18 @@
 										 <xsl:value-of select="$latele"/>
 									 </xsl:otherwise>
 								 </xsl:choose>
-							 </xsl:variable>
-							 <trkpt lon="{$lon}" lat="{$lat}">
-								 <time><xsl:value-of select="$ts"/></time>
-							 </trkpt>
+							</xsl:variable>
+						 	<trkpt lon="{$lon}" lat="{$lat}">
+						 		<xsl:choose>
+									 <xsl:when test="contains($latele,' ')">
+									 	<ele> <xsl:value-of select="substring-after($latele,' ')"/></ele>
+									 </xsl:when>
+								 </xsl:choose>
+								 <xsl:variable name="ts" select="../kml:when[$i]"/>
+ 								 <xsl:if test="$ts">
+								 	<time><xsl:value-of select="$ts"/></time>
+								 </xsl:if>
+						 	</trkpt>
 						 </xsl:for-each>
 					 </trkseg>
 				 </trk>
