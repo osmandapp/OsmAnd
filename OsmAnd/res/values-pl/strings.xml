@@ -1143,7 +1143,7 @@ OsmAnd jest otwarto-źródłowym programem do nawigacji z dostępem do szerokiej
     <string name="local_osm_changes_backup_successful">Plik zmian OSM został pomyślnie wygenerowany %1$s</string>
     <string name="local_osm_changes_backup_failed">Wystąpił błąd podczas tworzenia kopii zapasowej zmian OSM</string>
     <string name="local_osm_changes_backup">Stwórz kopię w formacie zmian OSM</string>
-    <string name="intermediate_items_sort_by_distance">Sortuj door-to-door</string>
+    <string name="intermediate_items_sort_by_distance">Posortuj door-to-door</string>
     <string name="intermediate_items_sort_return">Optymalizacja kolejności celów pośrednich w drodze z bieżącej pozycji do miejsca docelowego.</string>
     <string name="search_street_in_neighborhood_cities">Szukaj ulicy w sąsiadujących miastach</string>
 
@@ -1352,7 +1352,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="routing_attr_weight_name">Limit wagi</string>
     <string name="routing_attr_weight_description">Określa maksymalną, dozwoloną masę pojazdu</string>
     <string name="select_gpx">Wybierz GPX…</string>
-    <string name="route_descr_select_destination">Wybierz cel podróży</string>
+    <string name="route_descr_select_destination">Proszę wybrać cel trasy</string>
     <string name="shared_string_select_on_map">Wybierz na mapie</string>
     <string name="shared_string_favorite">Ulubione</string>
     <string name="route_preferences">Ustawienia trasy</string>
@@ -2345,8 +2345,8 @@ Włączenie tego widoku zmienia styl mapy na „Zima i narty”, ukazujący tere
 
  i więcej…
  "</string>
-    <string name="shared_string_move_up">Podnieś</string>
-    <string name="shared_string_move_down">Opuść</string>
+    <string name="shared_string_move_up">Przenieś w górę</string>
+    <string name="shared_string_move_down">Przenieś w dół</string>
     <string name="finish_navigation">Zakończ nawigację</string>
     <string name="shared_string_topbar">Belka górna</string>
     <string name="osm_user_stat">Edycji %1$s, range %2$s, zmian łącznie %3$s</string>
