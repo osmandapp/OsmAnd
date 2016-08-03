@@ -432,6 +432,18 @@ public class RouteProvider {
 						ch.routeEndPointOffset = info.routeEndPointOffset - startI[0];
 					}
 					ch.setDescriptionRoute(info.getDescriptionRoutePart());
+
+					// Issue #2894
+					if (info.getRef() != null && !"null".equals(info.getRef())) {
+						ch.setRef(info.getRef());
+					}
+					if (info.getStreetName() != null && !"null".equals(info.getStreetName())) {
+						ch.setStreetName(info.getStreetName());
+					}
+					if (info.getDestinationName() != null && !"null".equals(info.getDestinationName())) {
+						ch.setDestinationName(info.getDestinationName());
+					}
+
 					directions.add(ch);
 				}
 			}
