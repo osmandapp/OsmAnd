@@ -2,7 +2,6 @@ package net.osmand.plus.search;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.Amenity;
 import net.osmand.data.City;
@@ -24,6 +23,7 @@ import net.osmand.plus.activities.search.SearchHistoryFragment;
 import net.osmand.plus.base.FavoriteImageDrawable;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
 import net.osmand.plus.render.RenderingIcons;
+import net.osmand.search.core.CustomSearchPoiFilter;
 import net.osmand.search.core.SearchResult;
 import net.osmand.util.Algorithms;
 
@@ -155,8 +155,9 @@ public class QuickSearchListItem {
 				}
 				return "";
 			case POI_TYPE:
+					String res= "";
+			if (searchResult.object instanceof AbstractPoiType) {
 				AbstractPoiType abstractPoiType = (AbstractPoiType) searchResult.object;
-				String res;
 				if (abstractPoiType instanceof PoiCategory) {
 					res = "";
 				} else if (abstractPoiType instanceof PoiFilter) {
@@ -175,6 +176,9 @@ public class QuickSearchListItem {
 				} else {
 					res = "";
 				}
+			} else if (searchResult.object instanceof CustomSearchPoiFilter) {
+				res = ((CustomSearchPoiFilter) searchResult.object).getName();
+			}
 				return res;
 			case POI:
 				Amenity amenity = (Amenity) searchResult.object;
@@ -272,16 +276,25 @@ public class QuickSearchListItem {
 				return app.getIconsCache().getIcon(R.drawable.ic_action_intersection,
 						app.getSettings().isLightContent() ? R.color.osmand_orange : R.color.osmand_orange_dark);
 			case POI_TYPE:
-				AbstractPoiType abstractPoiType = (AbstractPoiType) searchResult.object;
 				int iconId = -1;
+			if (searchResult.object instanceof AbstractPoiType) {
+				AbstractPoiType abstractPoiType = (AbstractPoiType) searchResult.object;
 				if (RenderingIcons.containsBigIcon(abstractPoiType.getIconKeyName())) {
 					iconId = RenderingIcons.getBigIconResourceId(abstractPoiType.getIconKeyName());
 				} else if (abstractPoiType instanceof PoiType
 						&& RenderingIcons.containsBigIcon(((PoiType) abstractPoiType).getOsmTag() + "_"
-						+ ((PoiType) abstractPoiType).getOsmValue())) {
+								+ ((PoiType) abstractPoiType).getOsmValue())) {
 					iconId = RenderingIcons.getBigIconResourceId(((PoiType) abstractPoiType).getOsmTag() + "_"
 							+ ((PoiType) abstractPoiType).getOsmValue());
 				}
+			} else if (searchResult.object instanceof CustomSearchPoiFilter) {
+				Object res = ((CustomSearchPoiFilter) searchResult.object).getIconResource();
+				if (res instanceof String &&  RenderingIcons.containsBigIcon(res.toString())) {
+					iconId = RenderingIcons.getBigIconResourceId(res.toString());
+				} else {
+					iconId = R.drawable.mx_user_defined;
+				}
+			}
 				if (iconId != -1) {
 					return app.getIconsCache().getIcon(iconId,
 							app.getSettings().isLightContent() ? R.color.osmand_orange : R.color.osmand_orange_dark);

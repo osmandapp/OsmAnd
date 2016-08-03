@@ -1,5 +1,6 @@
 package net.osmand.search;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -22,8 +23,11 @@ import net.osmand.osm.MapPoiTypes;
 import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchCoreAPI;
 import net.osmand.search.core.SearchCoreFactory;
+import net.osmand.search.core.SearchCoreFactory.SearchAmenityByTypeAPI;
+import net.osmand.search.core.SearchCoreFactory.SearchAmenityTypesAPI;
 import net.osmand.search.core.SearchCoreFactory.SearchBuildingAndIntersectionsByStreetAPI;
 import net.osmand.search.core.SearchCoreFactory.SearchStreetByCityAPI;
+import net.osmand.search.core.CustomSearchPoiFilter;
 import net.osmand.search.core.SearchPhrase;
 import net.osmand.search.core.SearchResult;
 import net.osmand.search.core.SearchSettings;
@@ -97,6 +101,38 @@ public class SearchUICore {
 		this.totalLimit = totalLimit;
 	}
 	
+	@SuppressWarnings("unchecked")
+	public <T> T getApiByClass(Class<T> cl) {
+		for(SearchCoreAPI a : apis) {
+			if(cl.isInstance(a)) {
+				return (T) a;
+			}
+		}
+		return null;
+	}
+	
+	public <T extends SearchCoreAPI> SearchResultCollection shallowSearch(Class<T> cl,
+			String text, final ResultMatcher<SearchResult> matcher) throws IOException {
+		SearchResultCollection quickRes = new SearchResultCollection();
+		T api = getApiByClass(cl);
+		if(api != null) {
+			SearchPhrase sphrase = this.phrase.generateNewPhrase(text, searchSettings);
+			preparePhrase(sphrase);
+			AtomicInteger ai = new AtomicInteger();
+			SearchResultMatcher rm = new SearchResultMatcher(matcher, ai.get(), ai, totalLimit);
+			api.search(sphrase, rm);
+			
+			sortSearchResults(sphrase, rm.getRequestResults());
+			filterSearchDuplicateResults(sphrase, rm.getRequestResults());
+			
+			LOG.info(">> Shallow Search phrase " + phrase + " " + rm.getRequestResults().size());
+			SearchResultCollection collection = new SearchResultCollection(rm.getRequestResults(),
+					sphrase);
+			return collection;
+		}
+		return quickRes;
+	}
+	
 	public void init() {
 		apis.add(new SearchCoreFactory.SearchLocationAndUrlAPI());
 		apis.add(new SearchCoreFactory.SearchAmenityTypesAPI(poiTypes));
@@ -108,6 +144,14 @@ public class SearchUICore {
 		SearchStreetByCityAPI cityApi = new SearchCoreFactory.SearchStreetByCityAPI(streetsApi);
 		apis.add(cityApi);
 		apis.add(new SearchCoreFactory.SearchAddressByNameAPI(streetsApi, cityApi));
+	}
+	
+	public void addCustomSearchPoiFilter(CustomSearchPoiFilter poiFilter, int priority) {
+		for(SearchCoreAPI capi : apis) {
+			if(capi instanceof SearchAmenityTypesAPI) {
+				((SearchAmenityTypesAPI) capi).addCustomFilter(poiFilter, priority);
+			}
+		}
 	}
 	
 	public void registerAPI(SearchCoreAPI api) {
@@ -207,12 +251,7 @@ public class SearchUICore {
 	
 
 	private void searchInBackground(final SearchPhrase phrase, SearchResultMatcher matcher) {
-		for (SearchWord sw : phrase.getWords()) {
-			if(sw.getResult() != null && sw.getResult().file != null) {
-				phrase.selectFile(sw.getResult().file);
-			}
-		}
-		phrase.sortFiles();
+		preparePhrase(phrase);
 		ArrayList<SearchCoreAPI> lst = new ArrayList<>(apis);
 		Collections.sort(lst, new Comparator<SearchCoreAPI>() {
 
@@ -237,6 +276,15 @@ public class SearchUICore {
 				LOG.error(e.getMessage(), e);
 			}
 		}
+	}
+
+	private void preparePhrase(final SearchPhrase phrase) {
+		for (SearchWord sw : phrase.getWords()) {
+			if(sw.getResult() != null && sw.getResult().file != null) {
+				phrase.selectFile(sw.getResult().file);
+			}
+		}
+		phrase.sortFiles();
 	}
 	
 	public boolean sameSearchResult(SearchResult r1, SearchResult r2) {

@@ -183,14 +183,19 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 					QuickSearchCoordinatesFragment.showDialog(QuickSearchDialogFragment.this, searchPhrase.getUnknownSearchWord());
 				} else if (searchPhrase.isNoSelectedType() || searchPhrase.isLastWord(ObjectType.POI_TYPE)) {
 					PoiUIFilter filter;
-					if (searchPhrase.isNoSelectedType()) {
-						filter = new PoiUIFilter(null, app, "");
+					if (searchPhrase.getLastSelectedWord().getResult().object instanceof AbstractPoiType) {
+						if (searchPhrase.isNoSelectedType()) {
+							filter = new PoiUIFilter(null, app, "");
+						} else {
+							AbstractPoiType abstractPoiType = (AbstractPoiType) searchPhrase.getLastSelectedWord()
+									.getResult().object;
+							filter = new PoiUIFilter(abstractPoiType, app, "");
+						}
+						if (!Algorithms.isEmpty(searchPhrase.getUnknownSearchWord())) {
+							filter.setFilterByName(searchPhrase.getUnknownSearchWord());
+						}
 					} else {
-						AbstractPoiType abstractPoiType = (AbstractPoiType) searchPhrase.getLastSelectedWord().getResult().object;
-						filter = new PoiUIFilter(abstractPoiType, app, "");
-					}
-					if (!Algorithms.isEmpty(searchPhrase.getUnknownSearchWord())) {
-						filter.setFilterByName(searchPhrase.getUnknownSearchWord());
+						filter = (PoiUIFilter) searchPhrase.getLastSelectedWord().getResult().object;
 					}
 					app.getPoiFilters().clearSelectedPoiFilters();
 					app.getPoiFilters().addSelectedPoiFilter(filter);
@@ -631,61 +636,38 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	}
 
 	public void reloadCategories() {
-		SearchAmenityTypesAPI amenityTypesAPI =
-				new SearchAmenityTypesAPI(app.getPoiTypes());
-		final List<SearchResult> amenityTypes = new ArrayList<>();
-		SearchPhrase sp = new SearchPhrase(null).generateNewPhrase("", searchUICore.getSearchSettings());
 		try {
-			amenityTypesAPI.search(sp, new SearchResultMatcher(
-					new ResultMatcher<SearchResult>() {
-						@Override
-						public boolean publish(SearchResult object) {
-							amenityTypes.add(object);
-							return true;
-						}
-
-						@Override
-						public boolean isCancelled() {
-							return false;
-						}
-					}, 0, new AtomicInteger(0), -1));
+			SearchResultCollection res = searchUICore.shallowSearch(SearchAmenityTypesAPI.class, 
+					"", null);
+			if (res != null) {
+				List<QuickSearchListItem> rows = new ArrayList<>();
+				for (SearchResult sr : res.getCurrentSearchResults()) {
+					rows.add(new QuickSearchListItem(app, sr));
+				}
+				categoriesSearchFragment.updateListAdapter(rows, false);
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
+			app.showToastMessage(e.getMessage());
 		}
-		if (amenityTypes.size() > 0) {
-			searchUICore.sortSearchResults(sp, amenityTypes);
-			List<QuickSearchListItem> rows = new ArrayList<>();
-			for (SearchResult sr : amenityTypes) {
-				rows.add(new QuickSearchListItem(app, sr));
-			}
-			categoriesSearchFragment.updateListAdapter(rows, false);
-		}
+		
 	}
 
 	public void reloadHistory() {
-		SearchHistoryAPI historyAPI = new SearchHistoryAPI(app);
-		final List<SearchResult> history = new ArrayList<>();
-		SearchPhrase sp = new SearchPhrase(null).generateNewPhrase("", searchUICore.getSearchSettings());
-		historyAPI.search(sp, new SearchResultMatcher(
-				new ResultMatcher<SearchResult>() {
-					@Override
-					public boolean publish(SearchResult object) {
-						history.add(object);
-						return true;
-					}
-
-					@Override
-					public boolean isCancelled() {
-						return false;
-					}
-				}, 0, new AtomicInteger(0), -1));
-		List<QuickSearchListItem> rows = new ArrayList<>();
-		if (history.size() > 0) {
-			for (SearchResult sr : history) {
-				rows.add(new QuickSearchListItem(app, sr));
+		try {
+			SearchResultCollection res = searchUICore.shallowSearch(SearchHistoryAPI.class, 
+					"", null);
+			if (res != null) {
+				List<QuickSearchListItem> rows = new ArrayList<>();
+				for (SearchResult sr : res.getCurrentSearchResults()) {
+					rows.add(new QuickSearchListItem(app, sr));
+				}
+				historySearchFragment.updateListAdapter(rows, false);
 			}
+		} catch (IOException e) {
+			e.printStackTrace();
+			app.showToastMessage(e.getMessage());
 		}
-		historySearchFragment.updateListAdapter(rows, false);
 	}
 
 	private void runSearch() {

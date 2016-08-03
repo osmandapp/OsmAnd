@@ -1,5 +1,7 @@
 package net.osmand.search.core;
 
+import gnu.trove.list.array.TIntArrayList;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -11,6 +13,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.TreeMap;
 import java.util.TreeSet;
 
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
@@ -465,10 +468,17 @@ public class SearchCoreFactory {
 
 		private Map<String, PoiType> translatedNames = new LinkedHashMap<>();
 		private List<PoiFilter> topVisibleFilters;
+		private List<CustomSearchPoiFilter> customPoiFilters = new ArrayList<>();
+		private TIntArrayList customPoiFiltersPriorites = new TIntArrayList();
 		private MapPoiTypes types;
 
 		public SearchAmenityTypesAPI(MapPoiTypes types) {
 			this.types = types;
+		}
+		
+		public void addCustomFilter(CustomSearchPoiFilter poiFilter, int priority) {
+			this.customPoiFilters.add(poiFilter);
+			this.customPoiFiltersPriorites.add(priority);
 		}
 		
 		@Override
@@ -478,17 +488,11 @@ public class SearchCoreFactory {
 				topVisibleFilters = types.getTopVisibleFilters();
 			}
 //			results.clear();
-			TreeSet<AbstractPoiType> results = new TreeSet<>(new Comparator<AbstractPoiType>() {
-
-				@Override
-				public int compare(AbstractPoiType o1, AbstractPoiType o2) {
-					return o1.getKeyName().compareTo(o2.getKeyName());
-				}
-			});
+			TreeMap<String, AbstractPoiType> results = new TreeMap<String, AbstractPoiType>() ;
 			NameStringMatcher nm = phrase.getNameStringMatcher();
 			for (PoiFilter pf : topVisibleFilters) {
 				if (!phrase.isUnknownSearchWordPresent() || nm.matches(pf.getTranslation())) {
-					results.add(pf);
+					results.put(pf.getTranslation(), pf);
 				}
 			}
 			if (phrase.isUnknownSearchWordPresent()) {
@@ -496,19 +500,34 @@ public class SearchCoreFactory {
 				while (it.hasNext()) {
 					Entry<String, PoiType> e = it.next();
 					if (nm.matches(e.getKey()) || nm.matches(e.getValue().getTranslation())) {
-						results.add(e.getValue());
+						results.put(e.getValue().getTranslation(), e.getValue());
 					}
 				}
 			}
-			for (AbstractPoiType p : results) {
+			Iterator<Entry<String, AbstractPoiType>> it = results.entrySet().iterator();
+			while(it.hasNext()) {
+				Entry<String, AbstractPoiType> p = it.next();
 				SearchResult res = new SearchResult(phrase);
-				res.localeName = p.getTranslation();
-				res.object = p;
+				res.localeName = p.getKey();
+				res.object = p.getValue();
 				res.priority = SEARCH_AMENITY_TYPE_PRIORITY;
 				res.priorityDistance = 0;
 				res.objectType = ObjectType.POI_TYPE;
 				resultMatcher.publish(res);
 			}
+			for(int i =0 ; i< customPoiFilters.size(); i++) {
+				CustomSearchPoiFilter csf = customPoiFilters.get(i);
+				int p = customPoiFiltersPriorites.get(i);
+				if (!phrase.isUnknownSearchWordPresent() || nm.matches(csf.getName())) {
+					SearchResult res = new SearchResult(phrase);
+					res.localeName = csf.getName();
+					res.object = csf;
+					res.priority = SEARCH_AMENITY_TYPE_PRIORITY + p;
+					res.objectType = ObjectType.POI_TYPE;
+					resultMatcher.publish(res);
+				}
+			}
+			
 			return true;
 		}
 		
@@ -530,9 +549,6 @@ public class SearchCoreFactory {
 
 		public SearchAmenityByTypeAPI(MapPoiTypes types) {
 			this.types = types;
-		}
-		public boolean isLastWordPoi(SearchPhrase p ) {
-			return p.isLastWord(ObjectType.POI_TYPE);
 		}
 		
 
@@ -563,86 +579,105 @@ public class SearchCoreFactory {
 		@Override
 		public boolean search(final SearchPhrase phrase, final SearchResultMatcher resultMatcher) throws IOException {
 			if(phrase.isLastWord(ObjectType.POI_TYPE)) {
-				final AbstractPoiType pt = (AbstractPoiType) phrase.getLastSelectedWord().getResult().object;
-				acceptedTypes.clear();
-				poiAdditionals.clear();
-				updateTypesToAccept(pt);
+				Object obj = phrase.getLastSelectedWord().getResult().object;
+				SearchPoiTypeFilter ptf;
+				if(obj instanceof AbstractPoiType) {
+					ptf = getPoiTypeFilter((AbstractPoiType) obj);
+				} else if (obj instanceof SearchPoiTypeFilter) {
+					ptf = (SearchPoiTypeFilter) obj;
+				} else {
+					throw new UnsupportedOperationException();
+				}
 				
 				QuadRect bbox = phrase.getRadiusBBoxToSearch(10000);
 				List<BinaryMapIndexReader> oo = phrase.getOfflineIndexes();
-				final BinaryMapIndexReader[] selected = new BinaryMapIndexReader[1];
-				final NameStringMatcher ns = phrase.getNameStringMatcher();
-
-				SearchRequest<Amenity> req = BinaryMapIndexReader.buildSearchPoiRequest(
-						(int)bbox.left, (int)bbox.right, 
-						(int)bbox.top, (int)bbox.bottom, -1,
-						new SearchPoiTypeFilter() {
-							
-							@Override
-							public boolean isEmpty() {
-								return false;
-							}
-							
-							@Override
-							public boolean accept(PoiCategory type, String subtype) {
-								if (type == null) {
-									return true;
-								}
-								if (!types.isRegisteredType(type)) {
-									type = types.getOtherPoiCategory();
-								}
-								if (!acceptedTypes.containsKey(type)) {
-									return false;
-								}
-								LinkedHashSet<String> set = acceptedTypes.get(type);
-								if (set == null) {
-									return true;
-								}
-								return set.contains(subtype);
-							}
-						}, new ResultMatcher<Amenity>() {
-
-							@Override
-							public boolean publish(Amenity object) {
-								SearchResult res = new SearchResult(phrase);
-								res.localeName = object.getName(phrase.getSettings().getLang(), true);
-								res.otherNames = object.getAllNames(true);
-								if (Algorithms.isEmpty(res.localeName)) {
-									AbstractPoiType st = types.getAnyPoiTypeByKey(object.getSubType());
-									if (st != null) {
-										res.localeName = st.getTranslation();
-									} else {
-										res.localeName = object.getSubType();
-									}
-								}
-								if (phrase.isUnknownSearchWordPresent()
-										&& !(ns.matches(res.localeName) || ns.matches(res.otherNames))) {
-									return false;
-								}
-								
-								res.object = object;
-								res.preferredZoom = 17;
-								res.file = selected[0];
-								res.location = object.getLocation();
-								res.priority = SEARCH_AMENITY_BY_TYPE_PRIORITY;
-								res.priorityDistance = 1;
-								res.objectType = ObjectType.POI;
-								resultMatcher.publish(res);
-								return false;
-							}
-
-							@Override
-							public boolean isCancelled() {
-								return resultMatcher.isCancelled();
-							}
-						});
 				for (BinaryMapIndexReader o : oo) {
-					selected[0] = o;
+					ResultMatcher<Amenity> rm = getResultMatcher(phrase, resultMatcher, o);
+					if(obj instanceof CustomSearchPoiFilter) {
+						rm = ((CustomSearchPoiFilter) obj).wrapResultMatcher(rm);
+					}
+					SearchRequest<Amenity> req = BinaryMapIndexReader.buildSearchPoiRequest(
+							(int)bbox.left, (int)bbox.right, 
+							(int)bbox.top, (int)bbox.bottom, -1, ptf, 
+							rm);
 					o.searchPoi(req);
 					resultMatcher.apiSearchRegionFinished(this, o, phrase);
 				}
 			}
 			return true;
+		}
+
+		private ResultMatcher<Amenity> getResultMatcher(final SearchPhrase phrase, final SearchResultMatcher resultMatcher,
+				final BinaryMapIndexReader selected) {
+			final NameStringMatcher ns = phrase.getNameStringMatcher();
+			return new ResultMatcher<Amenity>() {
+
+				@Override
+				public boolean publish(Amenity object) {
+					SearchResult res = new SearchResult(phrase);
+					res.localeName = object.getName(phrase.getSettings().getLang(), true);
+					res.otherNames = object.getAllNames(true);
+					if (Algorithms.isEmpty(res.localeName)) {
+						AbstractPoiType st = types.getAnyPoiTypeByKey(object.getSubType());
+						if (st != null) {
+							res.localeName = st.getTranslation();
+						} else {
+							res.localeName = object.getSubType();
+						}
+					}
+					if (phrase.isUnknownSearchWordPresent()
+							&& !(ns.matches(res.localeName) || ns.matches(res.otherNames))) {
+						return false;
+					}
+					
+					res.object = object;
+					res.preferredZoom = 17;
+					res.file = selected;
+					res.location = object.getLocation();
+					res.priority = SEARCH_AMENITY_BY_TYPE_PRIORITY;
+					res.priorityDistance = 1;
+					res.objectType = ObjectType.POI;
+					resultMatcher.publish(res);
+					return false;
+				}
+
+				@Override
+				public boolean isCancelled() {
+					return resultMatcher.isCancelled();
+				}
+			};
+		}
+
+		private SearchPoiTypeFilter getPoiTypeFilter(AbstractPoiType pt) {
+			
+			acceptedTypes.clear();
+			poiAdditionals.clear();
+			updateTypesToAccept(pt);
+			return new SearchPoiTypeFilter() {
+				
+				@Override
+				public boolean isEmpty() {
+					return false;
+				}
+				
+				@Override
+				public boolean accept(PoiCategory type, String subtype) {
+					if (type == null) {
+						return true;
+					}
+					if (!types.isRegisteredType(type)) {
+						type = types.getOtherPoiCategory();
+					}
+					if (!acceptedTypes.containsKey(type)) {
+						return false;
+					}
+					LinkedHashSet<String> set = acceptedTypes.get(type);
+					if (set == null) {
+						return true;
+					}
+					return set.contains(subtype);
+				}
+			};
 		}
 	
 		@Override
@@ -653,6 +688,7 @@ public class SearchCoreFactory {
 			}
 			return -1;
 		}
+		
 	}
 	
 	

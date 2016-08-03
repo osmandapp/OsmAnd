@@ -11,7 +11,6 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Objects;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -30,6 +29,7 @@ import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.search.core.CustomSearchPoiFilter;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 import net.osmand.util.OpeningHoursParser;
@@ -37,7 +37,7 @@ import net.osmand.util.OpeningHoursParser.OpeningHours;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
-public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter> {
+public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>, CustomSearchPoiFilter {
 
 	public final static String STD_PREFIX = "std_"; //$NON-NLS-1$
 	public final static String USER_PREFIX = "user_"; //$NON-NLS-1$
@@ -363,7 +363,13 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 		return app.getString(R.string.shared_string_is_open).replace(' ', '_').toLowerCase();
 	}
 
-	private ResultMatcher<Amenity> wrapResultMatcher(final ResultMatcher<Amenity> matcher) {
+	@Override
+	public Object getIconResource() {
+		return getIconId();
+	}
+	
+	@Override
+	public ResultMatcher<Amenity> wrapResultMatcher(final ResultMatcher<Amenity> matcher) {
 		final AmenityNameFilter nm = getNameFilter(filterByName);
 		return new ResultMatcher<Amenity>() {
 
@@ -384,6 +390,7 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 		};
 	}
 
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -593,7 +600,7 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 		}
 		return set.contains(subtype);
 	}
-
+	
 	@Override
 	public boolean isEmpty() {
 		return acceptedTypes.isEmpty() &&

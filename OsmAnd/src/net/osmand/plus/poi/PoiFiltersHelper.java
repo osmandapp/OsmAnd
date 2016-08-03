@@ -174,7 +174,7 @@ public class PoiFiltersHelper {
 		getTopDefinedPoiFilters();
 	}
 
-	private List<PoiUIFilter> getUserDefinedPoiFilters() {
+	public List<PoiUIFilter> getUserDefinedPoiFilters() {
 		ArrayList<PoiUIFilter> userDefinedFilters = new ArrayList<PoiUIFilter>();
 		PoiFilterDbHelper helper = openDbHelper();
 		if (helper != null) {

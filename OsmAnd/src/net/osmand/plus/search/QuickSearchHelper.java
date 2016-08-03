@@ -7,10 +7,12 @@ import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.helpers.SearchHistoryHelper;
+import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.resources.RegionAddressRepository;
 import net.osmand.plus.resources.ResourceManager.ResourceListener;
 import net.osmand.search.SearchUICore;
 import net.osmand.search.SearchUICore.SearchResultCollection;
+import net.osmand.search.core.CustomSearchPoiFilter;
 import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchCoreFactory;
 import net.osmand.search.core.SearchPhrase;
@@ -124,6 +126,14 @@ public class QuickSearchHelper implements ResourceListener {
 
 		// Register WptPt search api
 		core.registerAPI(new SearchWptAPI(app));
+		core.registerAPI(new SearchHistoryAPI(app));
+		
+		PoiFiltersHelper poiFilters = app.getPoiFilters();
+		for(CustomSearchPoiFilter udf : poiFilters.getUserDefinedPoiFilters()) {
+			core.addCustomSearchPoiFilter(udf, 0);
+		}
+		core.addCustomSearchPoiFilter(poiFilters.getLocalWikiPOIFilter(), 1);
+		core.addCustomSearchPoiFilter(poiFilters.getShowAllPOIFilter(), 1);
 	}
 
 	public void setRepositoriesForSearchUICore(final OsmandApplication app) {
@@ -215,9 +225,9 @@ public class QuickSearchHelper implements ResourceListener {
 
 		@Override
 		public int getSearchPriority(SearchPhrase p) {
-			if (!p.isNoSelectedType()) {
+			if (!p.isEmpty()) {
 				return -1;
-			}
+			} 
 			return SEARCH_HISTORY_API_PRIORITY;
 		}
 	}
