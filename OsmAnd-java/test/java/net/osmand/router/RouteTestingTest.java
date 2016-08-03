@@ -29,16 +29,12 @@ import org.junit.runners.Parameterized;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-/**
- * Created by yurkiss on 04.03.16.
- */
-
 @RunWith(Parameterized.class)
-public class RouteTestingTestIgnore {
+public class RouteTestingTest {
 	private TestEntry te;
 
 
-    public RouteTestingTestIgnore(String name, TestEntry te) {
+    public RouteTestingTest(String name, TestEntry te) {
         this.te = te;
     }
 
@@ -50,11 +46,14 @@ public class RouteTestingTestIgnore {
     @Parameterized.Parameters(name = "{index}: {0}")
     public static Iterable<Object[]> data() throws IOException {
         String fileName = "/test_routing.json";
-        Reader reader = new InputStreamReader(RouteTestingTestIgnore.class.getResourceAsStream(fileName));
+        Reader reader = new InputStreamReader(RouteTestingTest.class.getResourceAsStream(fileName));
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         TestEntry[] testEntries = gson.fromJson(reader, TestEntry[].class);
         ArrayList<Object[]> arrayList = new ArrayList<>();
         for(TestEntry te : testEntries) {
+        	if(te.isIgnore()) {
+        		continue;
+        	}
         	arrayList.add(new Object[] {te.getTestName(), te});
         }
         reader.close();
@@ -76,7 +75,7 @@ public class RouteTestingTestIgnore {
 		RoutingContext ctx = fe.buildRoutingContext(config, null, binaryMapIndexReaders,
 				RoutePlannerFrontEnd.RouteCalculationMode.NORMAL);
 		ctx.leftSideNavigation = false;
-		List<RouteSegmentResult> routeSegments = fe.searchRoute(ctx, te.getStartPoint(), te.getEndPoint(), null);
+		List<RouteSegmentResult> routeSegments = fe.searchRoute(ctx, te.getStartPoint(), te.getEndPoint(), te.getTransitPoint());
 		Set<Long> reachedSegments = new TreeSet<Long>();
 		Assert.assertNotNull(routeSegments);
 		int prevSegment = -1;

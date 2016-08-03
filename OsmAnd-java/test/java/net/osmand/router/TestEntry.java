@@ -2,6 +2,8 @@ package net.osmand.router;
 
 import net.osmand.data.LatLon;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -12,6 +14,9 @@ public class TestEntry {
     private String testName;
     private LatLon startPoint;
     private LatLon endPoint;
+    private LatLon transitPoint1;
+    private LatLon transitPoint2;
+    private LatLon transitPoint3;
     private boolean ignore;
     private Map<Long, String> expectedResults;
     private Map<String, String> params;
@@ -26,6 +31,21 @@ public class TestEntry {
     public boolean isShortWay() {
     	return shortWay;
     }
+    
+    public List<LatLon> getTransitPoint() {
+    	ArrayList<LatLon> arrayList = new ArrayList<>();
+    	if(transitPoint1 != null) {
+    		arrayList.add(transitPoint1);
+    	}
+    	if(transitPoint2 != null) {
+    		arrayList.add(transitPoint2);
+    	}
+    	if(transitPoint3 != null) {
+    		arrayList.add(transitPoint3);
+    	}
+    	return arrayList;
+    }
+    
     
     
     public int getPlanRoadDirection() {
