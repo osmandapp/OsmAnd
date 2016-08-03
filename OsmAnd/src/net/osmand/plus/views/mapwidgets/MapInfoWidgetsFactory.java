@@ -262,7 +262,7 @@ public class MapInfoWidgetsFactory {
 			settings = app.getSettings();
 			waypointHelper = app.getWaypointHelper();
 			updateVisibility(false);
-			turnDrawable = new NextTurnInfoWidget.TurnDrawable(map);
+			turnDrawable = new NextTurnInfoWidget.TurnDrawable(map, true);
 		}
 		
 		public boolean updateVisibility(boolean visible) {

@@ -1,14 +1,23 @@
 package net.osmand.plus.views;
 
-import android.graphics.*;
+import java.util.Map;
+
 import net.osmand.plus.R;
 import net.osmand.router.TurnType;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.ColorFilter;
+import android.graphics.Matrix;
+import android.graphics.Paint;
 import android.graphics.Paint.Style;
-import android.graphics.Path.Direction;
+import android.graphics.Path;
+import android.graphics.PointF;
+import android.graphics.Rect;
+import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
-
-import java.util.Map;
 
 public class TurnPathHelper {
 
@@ -20,7 +29,8 @@ public class TurnPathHelper {
 	private static final boolean SHOW_STEPS = true;
 
 	// 72x72
-	public static void calcTurnPath(Path pathForTurn, Path outlay, TurnType turnType, Matrix transform) {
+	public static void calcTurnPath(Path pathForTurn, Path outlay, TurnType turnType, 
+			Matrix transform, PointF center, boolean mini) {
 		if(turnType == null){
 			return;
 		}
@@ -177,41 +187,57 @@ public class TurnPathHelper {
 			pathForTurn.rLineTo(-harrowL / 2, harrowL / 2); // -15 15
 			pathForTurn.rLineTo(hpartArrowL + th, 0); //9 0
 		} else if(turnType != null && turnType.isRoundAbout() && USE_NEW_RNDB) {
-
 			int out = turnType.getExitOut();
 			boolean leftSide = turnType.isLeftSide();
-			float radArrow = 37;
-			float radIn = 11;
-			float radOut = radIn + 6;
+			float radEndOfArrow = 44;
+			float radInnerCircle = 10;
+			float radOuterCircle = radInnerCircle + 8;
 		
-			float radBottom = radOut + 8;
-			float radStepInter = radOut + 6;
-			float radAr = radOut + 4;
-			float radAr2 = radOut + 5;
+			float radBottom = radOuterCircle + 10;
+			float radStepInter = radOuterCircle + 6;
+			float radArrowTriangle1 = radOuterCircle + 7;
+			float radArrowTriangle2 = radOuterCircle + 8;
 		
 			float widthStepIn = 8;
 			float widthStepInter = 6;
 			float widthArrow = 22;
-			float cx = wa / 2 ;
-			float cy = ha / 2 ;
-		
+			
 			
 			double dfL = (leftSide ? 1 : -1) * Math.asin(widthStepIn / (2.0 * radBottom)); 
-			double dfAr2 = (leftSide ? 1 : -1) * Math.asin(widthArrow / (2.0 * radAr2));
+			double dfAr2 = (leftSide ? 1 : -1) * Math.asin(widthArrow / (2.0 * radArrowTriangle2));
 			double dfStepInter = (leftSide ? 1 : -1) * Math.asin(widthStepInter / radStepInter);
-			double dfAr = Math.asin(radBottom * Math.sin(dfL) / radAr);
-			double dfOut = Math.asin(radBottom * Math.sin(dfL) / radOut);
-			double dfStepOut = Math.asin(radStepInter * Math.sin(dfStepInter) / radOut);
-			double dfIn = Math.asin(radBottom * Math.sin(dfL) / radIn);
+			double dfAr = Math.asin(radBottom * Math.sin(dfL) / radArrowTriangle1);
+			double dfOut = Math.asin(radBottom * Math.sin(dfL) / radOuterCircle);
+			double dfStepOut = Math.asin(radStepInter * Math.sin(dfStepInter) / radOuterCircle);
+			double dfIn = Math.asin(radBottom * Math.sin(dfL) / radInnerCircle);
 			double minDelta = Math.abs(dfIn * 2 / Math.PI * 180 ) + 2;
-			boolean showSteps = SHOW_STEPS;
+			boolean showSteps = SHOW_STEPS && !mini;
 //			System.out.println("Angle " + dfL + " " + dfOut + " " + dfIn + " " + minDelta + " ");
-			double rot = alignRotation(turnType.getTurnAngle(), leftSide, minDelta) / 180 * Math.PI;
+			double rot = alignRotation(turnType.getTurnAngle(), leftSide, minDelta, out) / 180 * Math.PI;
+			
+			float cx = wa / 2 ;
+			float cy = ha / 2 ;
+			// align center
+			float potentialArrowEndX = (float) (Math.sin(rot) * radEndOfArrow);
+			float potentialArrowEndY = (float) (Math.cos(rot) * radEndOfArrow);
+			if (potentialArrowEndX > cx) {
+				cx = potentialArrowEndX;
+			} else if (potentialArrowEndX < -cx) {
+				cx = 2 * cx + potentialArrowEndX;
+			}
+			if(potentialArrowEndY > cy) {
+				cy = 2 * cy - potentialArrowEndY;
+			} else if(potentialArrowEndY < -cy) {
+				cy = -potentialArrowEndY;
+			}
+			if(center != null) {
+				center.set(cx, cy);
+			}
 			
 			
-			RectF qrOut = new RectF(cx - radOut, cy - radOut, cx + radOut, cy + radOut);
-			RectF qrIn = new RectF(cx - radIn, cy - radIn, cx + radIn, cy + radIn);
-			if(outlay != null) {
+			RectF qrOut = new RectF(cx - radOuterCircle, cy - radOuterCircle, cx + radOuterCircle, cy + radOuterCircle);
+			RectF qrIn = new RectF(cx - radInnerCircle, cy - radInnerCircle, cx + radInnerCircle, cy + radInnerCircle);
+			if(outlay != null && !mini) {
 				outlay.addArc(qrOut, 0, 360);
 				outlay.addArc(qrIn, 0, -360);
 //				outlay.addOval(qrOut, Direction.CCW);
@@ -219,7 +245,7 @@ public class TurnPathHelper {
 			}
 			
 			// move to bottom ring
-			pathForTurn.moveTo(getProjX(dfOut, cx, cy, radOut), getProjY(dfOut, cx, cy, radOut));
+			pathForTurn.moveTo(getProjX(dfOut, cx, cy, radOuterCircle), getProjY(dfOut, cx, cy, radOuterCircle));
 			if (out <= 1) {
 				showSteps = false;
 			}
@@ -235,18 +261,18 @@ public class TurnPathHelper {
 				// double st = (rot - 2 * dfOut ) / (2 * out - 1);
 				// dfStepOut = st;
 				if (showSteps) {
-					outlay.moveTo(getProjX(dfOut, cx, cy, radOut), getProjY(dfOut, cx, cy, radOut));
+					outlay.moveTo(getProjX(dfOut, cx, cy, radOuterCircle), getProjY(dfOut, cx, cy, radOuterCircle));
 					for (int i = 0; i < out - 1; i++) {
 						outlay.arcTo(qrOut, startArcAngle(dfOut + i * (st + dfStepOut)), sweepArcAngle(st));
 						arcLineTo(outlay,
 								dfOut + (i + 1) * (st + dfStepOut) - dfStepOut / 2 - dfStepInter / 2, cx, cy, radStepInter);
 						arcLineTo(outlay, dfOut + (i + 1) * (st + dfStepOut) - dfStepOut / 2 + dfStepInter / 2, cx, cy, radStepInter);
-						arcLineTo(outlay, dfOut + (i + 1) * (st + dfStepOut), cx, cy, radOut);
+						arcLineTo(outlay, dfOut + (i + 1) * (st + dfStepOut), cx, cy, radOuterCircle);
 						// pathForTurn.arcTo(qr1, startArcAngle(dfOut), sweepArcAngle(rot - dfOut - dfOut));
 					}
 					outlay.arcTo(qrOut, startArcAngle(rot - dfOut - st), sweepArcAngle(st));
 					// swipe back
-					arcLineTo(outlay, rot - dfIn, cx, cy, radIn);
+					arcLineTo(outlay, rot - dfIn, cx, cy, radInnerCircle);
 					outlay.arcTo(qrIn, startArcAngle(rot - dfIn), -sweepArcAngle(rot - dfIn - dfIn));
 				}
 			} 
@@ -257,21 +283,21 @@ public class TurnPathHelper {
 			pathForTurn.arcTo(qrOut, startArcAngle(dfOut), sweepArcAngle(rot - dfOut - dfOut));
 			
 			// up from arc
-			arcLineTo(pathForTurn, rot - dfAr, cx, cy, radAr);
+			arcLineTo(pathForTurn, rot - dfAr, cx, cy, radArrowTriangle1);
 			// left triangle 
 //			arcLineTo(pathForTurn, rot - dfAr2, cx, cy, radAr2); // 1.
 //			arcQuadTo(pathForTurn, rot - dfAr2, radAr2, rot, radArrow, 0.9f, cx, cy); // 2.
-			arcQuadTo(pathForTurn, rot - dfAr, radAr, rot - dfAr2, radAr2, rot, radArrow, 4.5f, cx, cy); // 3.
+			arcQuadTo(pathForTurn, rot - dfAr, radArrowTriangle1, rot - dfAr2, radArrowTriangle2, rot, radEndOfArrow, 4.5f, cx, cy); // 3.
 			
 //			arcLineTo(pathForTurn, rot, cx, cy, radArrow); // 1.
-			arcQuadTo(pathForTurn, rot - dfAr2, radAr2, rot, radArrow, rot + dfAr2, radAr2, 4.5f, cx, cy);
+			arcQuadTo(pathForTurn, rot - dfAr2, radArrowTriangle2, rot, radEndOfArrow, rot + dfAr2, radArrowTriangle2, 4.5f, cx, cy);
 			// right triangle 
 //			arcLineTo(pathForTurn, rot + dfAr2, cx, cy, radAr2); // 1.
-			arcQuadTo(pathForTurn, rot, radArrow, rot + dfAr2, radAr2, rot + dfAr, radAr, 4.5f, cx, cy);
+			arcQuadTo(pathForTurn, rot, radEndOfArrow, rot + dfAr2, radArrowTriangle2, rot + dfAr, radArrowTriangle1, 4.5f, cx, cy);
 			
-			arcLineTo(pathForTurn, rot + dfAr, cx, cy, radAr);
+			arcLineTo(pathForTurn, rot + dfAr, cx, cy, radArrowTriangle1);
 			// down to arc
-			arcLineTo(pathForTurn, rot + dfIn, cx, cy, radIn);
+			arcLineTo(pathForTurn, rot + dfIn, cx, cy, radInnerCircle);
 			// arc
 			pathForTurn.arcTo(qrIn, startArcAngle(rot + dfIn), sweepArcAngle(-rot - dfIn - dfIn));
 			// down
@@ -362,24 +388,34 @@ public class TurnPathHelper {
 		}
 	}
 	
-	private static float alignRotation(float t, boolean leftSide, double minDelta) {
-		// t between -180, 180
+	private static float alignRotation(float t, boolean leftSide, double minDelta, int out) {
+		// t between ]-180, 180]
 		while(t > 180) {
 			t -= 360;
 		}
-		while(t < -180) {
+		while(t <= -180) {
 			t += 360;
 		}
+		// rot left - ] 0, 360], right ] -360,0]
 		float rot = leftSide ? (t + 180) : (t - 180) ;
+		if(rot == 0) {
+			rot = leftSide ? 360 : -360; 
+		}
 		float delta = (float) minDelta;
-		if(rot > 360 - delta && rot < 360) {
+		if(rot > 360 - delta && rot <= 360) {
 			rot = 360 - delta;
-		} else if (rot > 0 && rot < delta) {
-			rot = delta;
-		} else if (rot < -360 + delta && rot > -360) {
+		} else if (rot < -360 + delta && rot >= -360) {
 			rot = -360 + delta;
-		} else if (rot < 0 && rot > -delta) {
+		} else if (rot >= 0 && rot < delta) {
+			rot = delta;
+			if(out > 2) {
+				rot = 360 - delta;
+			} 
+		} else if (rot <= 0 && rot > -delta) {
 			rot = -delta;
+			if(out > 2) {
+				rot = -360 + delta;
+			} 
 		}
 		return rot;
 	}
@@ -447,8 +483,10 @@ public class TurnPathHelper {
 		Path dp = new Path();
 		Path pOutlay = new Path();
 		Path dpOutlay = new Path();
+		private boolean mini;
 		
-		public RouteDrawable(Resources resources){
+		public RouteDrawable(Resources resources, boolean mini){
+			this.mini = mini;
 			paintRouteDirection = new Paint();
 			paintRouteDirection.setStyle(Style.FILL_AND_STROKE);
 			paintRouteDirection.setColor(resources.getColor(R.color.nav_arrow_distant));
@@ -457,7 +495,7 @@ public class TurnPathHelper {
 			paintRouteDirectionOutlay.setStyle(Style.STROKE);
 			paintRouteDirectionOutlay.setColor(Color.BLACK);
 			paintRouteDirectionOutlay.setAntiAlias(true);
-			TurnPathHelper.calcTurnPath(dp, dpOutlay, TurnType.straight(), null);
+			TurnPathHelper.calcTurnPath(dp, dpOutlay, TurnType.straight(), null, null, mini);
 		}
 
 		@Override
@@ -469,7 +507,7 @@ public class TurnPathHelper {
 		}
 		
 		public void setRouteType(TurnType t){
-			TurnPathHelper.calcTurnPath(p, pOutlay, t, null);
+			TurnPathHelper.calcTurnPath(p, pOutlay, t, null, null, mini);
 			onBoundsChange(getBounds());
 		}
 

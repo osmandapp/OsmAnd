@@ -734,7 +734,7 @@ public class RouteInfoWidgetsFactory {
 		return bearingControl;
 	}
 	
-	private static Path getPathFromTurnType(List<Path> paths, int laneType, Path defaultType, float coef) {
+	private static Path getPathFromTurnType(List<Path> paths, int laneType, Path defaultType, float coef, boolean mini) {
 		if(laneType == 0) {
 			return defaultType;
 		}
@@ -749,7 +749,7 @@ public class RouteInfoWidgetsFactory {
 		Matrix pathTransform = new Matrix();
 		pathTransform.postScale(coef, coef );
 		TurnType tp = TurnType.valueOf(laneType, false);
-		TurnPathHelper.calcTurnPath(p, null, tp, pathTransform);
+		TurnPathHelper.calcTurnPath(p, null, tp, pathTransform, null, mini);
 		paths.set(laneType, p);
 		return p;
 	}
@@ -889,7 +889,7 @@ public class RouteInfoWidgetsFactory {
 			leftSide = settings.DRIVING_REGION.get().leftHandDriving;
 
 			this.scaleCoefficient = scaleCoefficent;
-			laneStraight = getPathFromTurnType(paths, TurnType.C, null, scaleCoefficient / miniCoeff);
+			laneStraight = getPathFromTurnType(paths, TurnType.C, null, scaleCoefficient / miniCoeff, true);
 			laneStraightBitmap = TurnPathHelper.getBitmapFromTurnType(ctx.getResources(), bitmapCache, TurnType.C, 0, 0, TurnPathHelper.FIRST_TURN, scaleCoefficient / miniCoeff, leftSide);
 			paintBlack = new Paint();
 			paintBlack.setStyle(Style.STROKE);
@@ -1016,7 +1016,7 @@ public class RouteInfoWidgetsFactory {
 						paintRouteDirection.setColor(ctx.getResources().getColor(R.color.nav_arrow_distant));
 						turnType = TurnType.getPrimaryTurn(lanes[i]); 
 					}
-					Path p = getPathFromTurnType(paths, turnType, laneStraight, scaleCoefficient / miniCoeff);
+					Path p = getPathFromTurnType(paths, turnType, laneStraight, scaleCoefficient / miniCoeff, true);
 					canvas.drawPath(p, paintBlack);
 					canvas.drawPath(p, paintRouteDirection);
 					canvas.translate(w, 0);
