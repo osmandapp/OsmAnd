@@ -5,6 +5,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
+import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopTextView;
 import net.osmand.plus.views.TurnPathHelper;
 import net.osmand.router.TurnType;
 import android.app.Activity;
@@ -14,10 +15,13 @@ import android.graphics.Color;
 import android.graphics.ColorFilter;
 import android.graphics.Matrix;
 import android.graphics.Paint;
+import android.graphics.Paint.Align;
 import android.graphics.Paint.Style;
 import android.graphics.Path;
+import android.graphics.PointF;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
+import android.text.TextPaint;
 
 
 
@@ -36,7 +40,7 @@ public class NextTurnInfoWidget extends TextInfoWidget {
 		super(activity);
 		this.app = app;
 		this.horisontalMini = horisontalMini;
-		turnDrawable = new TurnDrawable(activity);
+		turnDrawable = new TurnDrawable(activity, horisontalMini);
 		if(horisontalMini) {
 			setImageDrawable(turnDrawable, false);
 			setTopImageDrawable(null, null);
@@ -53,11 +57,13 @@ public class NextTurnInfoWidget extends TextInfoWidget {
 	public void setTurnType(TurnType turnType) {
 		boolean vis = updateVisibility(turnType != null);
 		if (turnDrawable.setTurnType(turnType) || vis) {
+			turnDrawable.setTextPaint(topTextView.getPaint());
 			if(horisontalMini) {
 				setImageDrawable(turnDrawable, false);
 			} else {
-				setTopImageDrawable(turnDrawable, turnType == null || turnType.getExitOut() == 0 ? "" : 
-					turnType.getExitOut() + "");
+				setTopImageDrawable(turnDrawable, "");
+//				setTopImageDrawable(turnDrawable, turnType == null || turnType.getExitOut() == 0 ? "" : 
+//					turnType.getExitOut() + "");
 			}
 		}
 	}
@@ -118,14 +124,20 @@ public class NextTurnInfoWidget extends TextInfoWidget {
 		protected int turnImminent;
 		protected boolean deviatedFromRoute;
 		private Context ctx;
+		private boolean mini;
+		private PointF centerText;
+		private TextPaint textPaint;
 		
-		public TurnDrawable(Context ctx) {
+		public TurnDrawable(Context ctx, boolean mini) {
 			this.ctx = ctx;
+			this.mini = mini;
+			centerText = new PointF();
 			paintBlack = new Paint();
 			paintBlack.setStyle(Style.STROKE);
 			paintBlack.setColor(Color.BLACK);
 			paintBlack.setAntiAlias(true);
 			paintBlack.setStrokeWidth(2.5f);
+			
 
 			paintRouteDirection = new Paint();
 			paintRouteDirection.setStyle(Style.FILL);
@@ -137,8 +149,12 @@ public class NextTurnInfoWidget extends TextInfoWidget {
 		@Override
 		protected void onBoundsChange(Rect bounds) {
 			Matrix m = new Matrix();
-			m.setScale(bounds.width() / 72f, bounds.height() / 72f);
+			float scaleX = bounds.width() / 72f;
+			float scaleY = bounds.height() / 72f;
+			m.setScale(scaleX, scaleY);
 			pathForTurn.transform(m, pathForTurn);
+			centerText.x = scaleX * centerText.x;
+			centerText.y = scaleY * centerText.y;
 			pathForTurnOutlay.transform(m, pathForTurnOutlay);
 		}
 		
@@ -166,6 +182,17 @@ public class NextTurnInfoWidget extends TextInfoWidget {
 			canvas.drawPath(pathForTurnOutlay, paintBlack);
 			canvas.drawPath(pathForTurn, paintRouteDirection);
 			canvas.drawPath(pathForTurn, paintBlack);
+			if(textPaint != null ) {
+				if (turnType != null && !mini && turnType.getExitOut() > 0) {
+					canvas.drawText(turnType.getExitOut() + "", centerText.x, 
+							centerText.y + textPaint.getTextSize() / 2, textPaint);
+				}
+			}
+		}
+		
+		public void setTextPaint(TextPaint textPaint) {
+			this.textPaint = textPaint;
+			this.textPaint.setTextAlign(Align.CENTER);
 		}
 
 		@Override
@@ -186,7 +213,7 @@ public class NextTurnInfoWidget extends TextInfoWidget {
 		public boolean setTurnType(TurnType turnType) {
 			if(turnType != this.turnType) {
 				this.turnType = turnType;
-				TurnPathHelper.calcTurnPath(pathForTurn, pathForTurnOutlay, turnType, null);
+				TurnPathHelper.calcTurnPath(pathForTurn, pathForTurnOutlay, turnType, null, centerText, mini);
 				onBoundsChange(getBounds());
 				return true;
 			}

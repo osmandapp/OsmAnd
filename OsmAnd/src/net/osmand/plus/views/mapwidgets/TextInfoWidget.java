@@ -23,7 +23,7 @@ public class TextInfoWidget  {
 	private TextView smallTextView;
 	private TextView smallTextViewShadow;
 	private ImageView topImageView;
-	private TextView topTextView;
+	protected TextView topTextView;
 	private boolean explicitlyVisible;
 	private OsmandApplication app;
 

@@ -189,7 +189,7 @@ public class ShowRouteInfoActivity extends OsmandListActivity {
 			TextView cumulativeTimeLabel = (TextView) row.findViewById(R.id.cumulative_time);
 			ImageView icon = (ImageView) row.findViewById(R.id.direction);
 
-			TurnPathHelper.RouteDrawable drawable = new TurnPathHelper.RouteDrawable(getResources());
+			TurnPathHelper.RouteDrawable drawable = new TurnPathHelper.RouteDrawable(getResources(), true);
 			drawable.setRouteType(model.getTurnType());
 			icon.setImageDrawable(drawable);
 
