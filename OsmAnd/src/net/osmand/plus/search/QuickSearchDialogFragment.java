@@ -83,6 +83,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	private static final String QUICK_SEARCH_LAT_KEY = "quick_search_lat_key";
 	private static final String QUICK_SEARCH_LON_KEY = "quick_search_lon_key";
 	private static final String QUICK_SEARCH_SEARCHING_KEY = "quick_search_searching_key";
+	private static final String QUICK_SEARCH_SHOW_CATEGORIES_KEY = "quick_search_show_categories_key";
 	private Toolbar toolbar;
 	private LockableViewPager viewPager;
 	private SearchFragmentPagerAdapter pagerAdapter;
@@ -139,6 +140,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		final MapActivity mapActivity = getMapActivity();
 		final View view = inflater.inflate(R.layout.search_dialog_fragment, container, false);
 
+		Bundle arguments = getArguments();
 		if (savedInstanceState != null) {
 			searchQuery = savedInstanceState.getString(QUICK_SEARCH_QUERY_KEY);
 			double lat = savedInstanceState.getDouble(QUICK_SEARCH_LAT_KEY, Double.NaN);
@@ -148,10 +150,10 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			}
 			interruptedSearch = savedInstanceState.getBoolean(QUICK_SEARCH_SEARCHING_KEY, false);
 		}
-		if (searchQuery == null) {
-			searchQuery = getArguments().getString(QUICK_SEARCH_QUERY_KEY);
-			double lat = getArguments().getDouble(QUICK_SEARCH_LAT_KEY, Double.NaN);
-			double lon = getArguments().getDouble(QUICK_SEARCH_LON_KEY, Double.NaN);
+		if (searchQuery == null && arguments != null) {
+			searchQuery = arguments.getString(QUICK_SEARCH_QUERY_KEY);
+			double lat = arguments.getDouble(QUICK_SEARCH_LAT_KEY, Double.NaN);
+			double lon = arguments.getDouble(QUICK_SEARCH_LON_KEY, Double.NaN);
 			if (!Double.isNaN(lat) && !Double.isNaN(lon)) {
 				centerLatLon = new LatLon(lat, lon);
 			}
@@ -159,6 +161,11 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		}
 		if (searchQuery == null)
 			searchQuery = "";
+
+		boolean showCategories = false;
+		if (arguments != null) {
+			showCategories = arguments.getBoolean(QUICK_SEARCH_SHOW_CATEGORIES_KEY, false);
+		}
 
 		tabToolbarView = view.findViewById(R.id.tab_toolbar_layout);
 		tabsView = view.findViewById(R.id.tabs_view);
@@ -278,7 +285,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		viewPager = (LockableViewPager) view.findViewById(R.id.pager);
 		pagerAdapter = new SearchFragmentPagerAdapter(getChildFragmentManager(), getResources());
 		viewPager.setAdapter(pagerAdapter);
-		if (centerLatLon != null) {
+		if (centerLatLon != null || showCategories) {
 			viewPager.setCurrentItem(1);
 		}
 
@@ -877,7 +884,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	}
 
 	public static boolean showInstance(final MapActivity mapActivity, final String searchQuery,
-									   final LatLon latLon) {
+									   boolean showCategories, final LatLon latLon) {
 		try {
 
 			if (mapActivity.isActivityDestroyed()) {
@@ -886,6 +893,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 			Bundle bundle = new Bundle();
 			bundle.putString(QUICK_SEARCH_QUERY_KEY, searchQuery);
+			bundle.putBoolean(QUICK_SEARCH_SHOW_CATEGORIES_KEY, showCategories);
 			if (latLon != null) {
 				bundle.putDouble(QUICK_SEARCH_LAT_KEY, latLon.getLatitude());
 				bundle.putDouble(QUICK_SEARCH_LON_KEY, latLon.getLongitude());

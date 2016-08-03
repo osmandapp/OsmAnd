@@ -352,10 +352,10 @@ public class MapActivityLayers {
 				PoiUIFilter pf = list.get(which);
 				String filterId = pf.getFilterId();
 				if (filterId.equals(PoiUIFilter.CUSTOM_FILTER_ID)) {
-					Intent search = new Intent(activity, SearchActivity.class);
-					search.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-					activity.getMyApplication().getSettings().SEARCH_TAB.set(SearchActivity.POI_TAB_INDEX);
-					activity.startActivity(search);
+					if (activity.getDashboard().isVisible()) {
+						activity.getDashboard().hideDashboard();
+					}
+					activity.showQuickSearch(true, true);
 				} else {
 					getApplication().getPoiFilters().clearSelectedPoiFilters();
 					getApplication().getPoiFilters().addSelectedPoiFilter(pf);

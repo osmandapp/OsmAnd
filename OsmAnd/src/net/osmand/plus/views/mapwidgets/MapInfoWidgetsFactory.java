@@ -177,14 +177,14 @@ public class MapInfoWidgetsFactory {
 			searchBackButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					map.showQuickSearch();
+					map.showQuickSearch(false, false);
 				}
 			});
 			searchTitle = (TextView) map.findViewById(R.id.search_title);
 			searchTitle.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					map.showQuickSearch();
+					map.showQuickSearch(false, false);
 				}
 			});
 			searchCloseButton = (ImageButton) map.findViewById(R.id.search_close_button);
