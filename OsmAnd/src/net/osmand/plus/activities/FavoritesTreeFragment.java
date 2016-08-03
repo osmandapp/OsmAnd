@@ -284,11 +284,17 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 
 
 	public void showProgressBar() {
-		getActionBarActivity().setSupportProgressBarIndeterminateVisibility(true);
+		OsmandActionBarActivity activity = getActionBarActivity();
+		if(activity != null) {
+			activity.setSupportProgressBarIndeterminateVisibility(true);
+		}
 	}
 
 	public void hideProgressBar() {
-		getActionBarActivity().setSupportProgressBarIndeterminateVisibility(false);
+		OsmandActionBarActivity activity = getActionBarActivity();
+		if(activity != null) {
+			activity.setSupportProgressBarIndeterminateVisibility(false);
+		}
 	}
 
 	private void enterMapMarkersMode() {
