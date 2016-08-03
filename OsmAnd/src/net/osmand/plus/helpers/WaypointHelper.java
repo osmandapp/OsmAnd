@@ -266,7 +266,7 @@ public class WaypointHelper {
 		if (loc.hasBearing()) {
 			double diff = MapUtils.alignAngleDifference(ro.directionRoute(0, true) -
 					loc.getBearing() / 180f * Math.PI);
-			direction = Math.abs(diff) < Math.PI /2f;
+			direction = Math.abs(diff) < Math.PI / 2f;
 		}
 		float mxspeed = ro.getMaximumSpeed(direction);
 		float delta = app.getSettings().SPEED_LIMIT_EXCEED.get() / 3.6f;
@@ -283,14 +283,15 @@ public class WaypointHelper {
 					RouteTypeRule typeRule = reg.quickGetEncodingRule(pointTypes[r]);
 					AlarmInfo info = AlarmInfo.createAlarmInfo(typeRule, 0, loc);
 
+					// Issue #2873 may indicate we need some sort of check here if Alarm is in forward direction
+					// But cannot reproduce the issue for now
 					//if (loc.hasBearing()) {
-					// Issue #2873: Check if Alarm is in forward direction
-					//TODO: but not sure this is needed, and also need to check direction towards alarm location, not just alignment with routeDataObject
+					//TODO: Check would be needed using bearingTo("actual alarm location"), not alignment with routeDataObject
 					//	if (Math.abs(MapUtils.alignAngleDifference(ro.directionRoute(0, true) -
 					//			loc.getBearing() / 180f * Math.PI)) >= Math.PI / 2f) {
 					//		info = null;
 					//	}
-						//Toast.makeText(app.getApplicationContext(), Double.toString(ro.directionRoute(0, true)) + ",\n" + Double.toString(loc.getBearing()) + ",\n" + Double.toString(MapUtils.alignAngleDifference(ro.directionRoute(0, true) - loc.getBearing() / 180f * Math.PI))), Toast.LENGTH_LONG).show();
+					//Toast.makeText(app.getApplicationContext(), Double.toString(ro.directionRoute(0, true)) + ",\n" + Double.toString(loc.getBearing()) + ",\n" + Double.toString(MapUtils.alignAngleDifference(ro.directionRoute(0, true) - loc.getBearing() / 180f * Math.PI))), Toast.LENGTH_LONG).show();
 					//}
 
 					if (info != null) {
