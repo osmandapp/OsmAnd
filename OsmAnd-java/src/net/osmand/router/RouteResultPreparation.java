@@ -1207,9 +1207,12 @@ public class RouteResultPreparation {
 				int turn;
 				if (laneOptions[j].equals("none") || laneOptions[j].equals("through")) {
 					turn = TurnType.C;
-				} else if (laneOptions[j].equals("slight_right")) {
+					
+				} else if (laneOptions[j].equals("slight_right") || 
+						laneOptions[j].equals("merge_to_right")) {
 					turn = TurnType.TSLR;
-				} else if (laneOptions[j].equals("slight_left")) {
+				} else if (laneOptions[j].equals("slight_left") || 
+						laneOptions[j].equals("merge_to_left")) {
 					turn = TurnType.TSLL;
 				} else if (laneOptions[j].equals("right")) {
 					turn = TurnType.TR;
