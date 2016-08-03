@@ -228,10 +228,10 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 			final TypedValue typedValueAttr = new TypedValue();
 			getMapActivity().getTheme().resolveAttribute(R.attr.left_menu_view_bg, typedValueAttr, true);
 			mainView.setBackgroundResource(typedValueAttr.resourceId);
-			mainView.setLayoutParams(new FrameLayout.LayoutParams(dpToPx(menu.getLandscapeWidthDp()),
+			mainView.setLayoutParams(new FrameLayout.LayoutParams(menu.getLandscapeWidthPx(),
 					ViewGroup.LayoutParams.MATCH_PARENT));
 			View fabContainer = view.findViewById(R.id.context_menu_fab_container);
-			fabContainer.setLayoutParams(new FrameLayout.LayoutParams(dpToPx(menu.getLandscapeWidthDp()),
+			fabContainer.setLayoutParams(new FrameLayout.LayoutParams(menu.getLandscapeWidthPx(),
 					ViewGroup.LayoutParams.MATCH_PARENT));
 		}
 
@@ -1098,7 +1098,7 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 			latlon = box.getLatLonFromPixel(markerMapCenterX, markerMapCenterY);
 		}
 		if (menu.isLandscapeLayout()) {
-			int x = dpToPx(menu.getLandscapeWidthDp());
+			int x = menu.getLandscapeWidthPx();
 			if (markerX - markerPaddingXPx < x || markerX > origMarkerX) {
 				int dx = (x + markerPaddingXPx) - markerX;
 				int dy = 0;

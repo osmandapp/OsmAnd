@@ -30,7 +30,6 @@ public class AudioVideoNoteRecordingMenu {
 	protected long startTime;
 	protected Handler handler;
 	protected boolean portraitMode;
-	protected boolean largeDevice;
 	protected Timer recTimer;
 
 	protected double lat;
@@ -50,7 +49,6 @@ public class AudioVideoNoteRecordingMenu {
 
 		MapActivity mapActivity = plugin.getMapActivity();
 		portraitMode = AndroidUiHelper.isOrientationPortrait(mapActivity);
-		largeDevice = AndroidUiHelper.isXLargeDevice(mapActivity);
 
 		initView(mapActivity);
 		viewfinder = (LinearLayout) view.findViewById(R.id.viewfinder);
@@ -106,7 +104,7 @@ public class AudioVideoNoteRecordingMenu {
 	}
 
 	public boolean isLandscapeLayout() {
-		return !portraitMode && !largeDevice;
+		return !portraitMode;
 	}
 
 	public void show() {

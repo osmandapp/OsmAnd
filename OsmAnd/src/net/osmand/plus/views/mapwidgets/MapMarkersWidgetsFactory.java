@@ -36,7 +36,6 @@ public class MapMarkersWidgetsFactory {
 	private MapMarkersHelper helper;
 	private int screenOrientation;
 	private boolean portraitMode;
-	private boolean largeDevice;
 
 	private View topBar;
 	private View addressTopBar;
@@ -62,7 +61,6 @@ public class MapMarkersWidgetsFactory {
 		helper = map.getMyApplication().getMapMarkersHelper();
 		screenOrientation = DashLocationFragment.getScreenOrientation(map);
 		portraitMode = AndroidUiHelper.isOrientationPortrait(map);
-		largeDevice = AndroidUiHelper.isXLargeDevice(map);
 
 		addressTopBar = map.findViewById(R.id.map_top_bar);
 		topBar = map.findViewById(R.id.map_markers_top_bar);
@@ -304,7 +302,7 @@ public class MapMarkersWidgetsFactory {
 	}
 
 	public boolean isLandscapeLayout() {
-		return !portraitMode && !largeDevice;
+		return !portraitMode;
 	}
 
 	public abstract static class DistanceToMapMarkerControl extends TextInfoWidget {

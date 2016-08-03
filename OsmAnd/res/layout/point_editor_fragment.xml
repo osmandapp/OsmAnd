@@ -72,7 +72,7 @@
                                     android:layout_marginLeft="12dp"
                                     android:layout_marginStart="12dp"
                                     android:layout_marginTop="2dp"
-                                    android:scaleType="center"
+                                    android:scaleType="centerInside"
                                     android:src="@drawable/ic_action_building_number"/>
 
                             </LinearLayout>
@@ -130,7 +130,7 @@
                                     android:layout_marginLeft="12dp"
                                     android:layout_marginStart="12dp"
                                     android:layout_marginTop="2dp"
-                                    android:scaleType="center"
+                                    android:scaleType="centerInside"
                                     android:src="@drawable/ic_action_building_number"/>
 
                             </LinearLayout>

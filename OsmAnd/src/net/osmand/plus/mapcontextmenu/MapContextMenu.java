@@ -714,11 +714,11 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		return menuController != null && menuController.isLandscapeLayout();
 	}
 
-	public float getLandscapeWidthDp() {
+	public int getLandscapeWidthPx() {
 		if (menuController != null) {
-			return menuController.getLandscapeWidthDp();
+			return menuController.getLandscapeWidthPx();
 		} else {
-			return 0f;
+			return 0;
 		}
 	}
 
