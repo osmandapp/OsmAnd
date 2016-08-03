@@ -908,6 +908,21 @@ public class RouteProvider {
 					RouteDirectionInfo dirInfo = new RouteDirectionInfo(avgSpeed, turnType);
 					dirInfo.setDescriptionRoute(item.desc); //$NON-NLS-1$
 					dirInfo.routePointOffset = offset;
+
+					// Issue #2894
+					String sref = item.getExtensionsToRead().get("ref"); //$NON-NLS-1$
+					if (sref != null && !"null".equals(sref)) {
+						dirInfo.setRef(sref); //$NON-NLS-1$
+					}
+					String sstreetname = item.getExtensionsToRead().get("street-name"); //$NON-NLS-1$
+					if (sstreetname != null && !"null".equals(sstreetname)) {
+						dirInfo.setStreetName(sstreetname); //$NON-NLS-1$
+					}
+					String sdest = item.getExtensionsToRead().get("dest"); //$NON-NLS-1$
+					if (sdest != null && !"null".equals(sdest)) {
+						dirInfo.setDestinationName(sdest); //$NON-NLS-1$
+					}
+
 					if (previous != null && TurnType.C != previous.getTurnType().getValue() &&
 							!osmandRouter) {
 						// calculate angle
@@ -1086,6 +1101,18 @@ public class RouteProvider {
 					extensions.put("turn-angle", dirInfo.getTurnType().getTurnAngle() + "");
 				}
 				extensions.put("offset", (dirInfo.routePointOffset - cRoute) + "");
+
+				// Issue #2894
+				if (dirInfo.getRef() != null && !"null".equals(dirInfo.getRef())) {
+					extensions.put("ref", dirInfo.getRef() + "");
+				}
+				if (dirInfo.getStreetName() != null && !"null".equals(dirInfo.getStreetName())) {
+					extensions.put("street-name", dirInfo.getStreetName() + "");
+				}
+				if (dirInfo.getDestinationName() != null && !"null".equals(dirInfo.getDestinationName())) {
+					extensions.put("dest", dirInfo.getDestinationName() + "");
+				}
+
 				route.points.add(pt);
 			}
 		}
