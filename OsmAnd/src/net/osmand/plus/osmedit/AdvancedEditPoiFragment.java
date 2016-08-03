@@ -7,6 +7,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnFocusChangeListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -14,7 +15,6 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import net.osmand.PlatformUtil;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
@@ -193,28 +193,23 @@ public class AdvancedEditPoiFragment extends BaseOsmAndFragment
 			final AutoCompleteTextView valueEditText =
 					(AutoCompleteTextView) convertView.findViewById(R.id.valueEditText);
 			tagEditText.setText(tg);
-			tagEditText.addTextChangedListener(new TextWatcher() {
-				@Override
-				public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-					if (!editPoiData.isInEdit()) {
-						editPoiData.removeTag(s.toString());
+			tagEditText.setAdapter(tagAdapter);
+			tagEditText.setThreshold(1);
+			tagEditText.setOnFocusChangeListener(new OnFocusChangeListener() {
+			    @Override
+				public void onFocusChange(View v, boolean hasFocus) {
+					if (!hasFocus) {
+						if (!editPoiData.isInEdit()) {
+							String s = tagEditText.getText().toString();
+							editPoiData.removeTag(previousTag[0]);
+							editPoiData.putTag(s.toString(), valueEditText.getText().toString());
+							previousTag[0] = s.toString();
+						}
+					} else {
+						tagAdapter.getFilter().filter(tagEditText.getText());
 					}
 				}
-
-				@Override
-				public void onTextChanged(CharSequence s, int start, int before, int count) {
-				}
-
-				@Override
-				public void afterTextChanged(Editable s) {
-					if (!editPoiData.isInEdit()) {
-						editPoiData.removeTag(previousTag[0]);
-						editPoiData.putTag(s.toString(), valueEditText.getText().toString());
-						previousTag[0] = s.toString();
-					}
-				}
-			});
-			initAutocompleteTextView(tagEditText, tagAdapter);
+			 });
 
 			valueEditText.setText(vl);
 			valueEditText.addTextChangedListener(new TextWatcher() {
@@ -261,8 +256,7 @@ public class AdvancedEditPoiFragment extends BaseOsmAndFragment
 
 	private static void initAutocompleteTextView(final AutoCompleteTextView textView,
 												 final ArrayAdapter<String> adapter) {
-		textView.setAdapter(adapter);
-		textView.setThreshold(1);
+		
 		textView.setOnFocusChangeListener(new View.OnFocusChangeListener() {
 			@Override
 			public void onFocusChange(View v, boolean hasFocus) {
