@@ -45,7 +45,7 @@
 
 
     <string name="search_position_map_view">Aktualny środek mapy</string>
-    <string name="select_search_position">Źródło:</string>
+    <string name="select_search_position">Zasób:</string>
     <string name="context_menu_item_search">Szukaj w pobliżu</string>
 
     <string name="shared_string_save_as_gpx">Zapisz jako ślad GPX</string>
@@ -551,7 +551,7 @@
     <string name="navigate_point_format_DMS">DDD MM SS.SS</string>
     <string name="shared_string_show_on_map">Wyświetl na mapie</string>
 
-    <string name="search_address_top_text">Wybierz adres</string>
+    <string name="search_address_top_text">Wybór adresu</string>
     <string name="search_address_region">Region</string>
     <string name="search_address_city">Miejscowość</string>
     <string name="search_address_street">Ulica</string>
@@ -775,9 +775,9 @@ Mapy kafelkowe można uzyskać bezpośrednio z zasobów sieciowych, jak i przygo
     <string name="gpx_option_from_start_point">Przejdź wzdłuż całej ścieżki</string>
   <string name="create_poi_link_to_osm_doc">
 <u>Online OSM</u> map classification with images"</string>
-    <string name="local_index_routing_data">Dane trasowania</string>
+    <string name="local_index_routing_data">Dane wyznaczania tras</string>
     <string name="navigate_point_format">Format</string>
-    <string name="poi_search_desc">Wyszukiwanie Użytecznych Miejsc</string>
+    <string name="poi_search_desc">Wyszukiwanie użytecznych miejsc</string>
     <string name="address_search_desc">Wyszukiwanie adresu</string>
     <string name="navpoint_search_desc">Współrzędne</string>
     <string name="transport_search_desc">Wyszukiwanie transportu publicznego</string>
@@ -785,12 +785,12 @@ Mapy kafelkowe można uzyskać bezpośrednio z zasobów sieciowych, jak i przygo
 
     <string name="rendering_attr_noPolygons_description">"Ukryj wszystkie elementy mapy będące terenami ziemnymi"</string>
     <string name="rendering_attr_noPolygons_name">Wielokąty</string>
-    <string name="rendering_attr_appMode_name">Tryb rysowania</string>
+    <string name="rendering_attr_appMode_name">Tryb renderowania</string>
     <string name="rendering_attr_appMode_description">Optymalizuj mapę dla</string>
     <string name="rendering_attr_contourLines_description">Wyświetlanie od poziomu powiększenia (wymagane dane poziomicowe):</string>
     <string name="rendering_attr_contourLines_name">Poziomice</string>
     <string name="rendering_attr_hmRendered_description">Zwiększ ilość detali pokazywanych na mapie</string>
-    <string name="rendering_attr_hmRendered_name">Pokaż więcej detali na mapie</string>
+    <string name="rendering_attr_hmRendered_name">Wyświetl więcej szczegółów na mapie</string>
     <string name="route_roundabout">Rondo: wybierz %1$d zjazd</string>
     <string name="route_kl">Trzymaj się lewej strony</string>
     <string name="route_kr">Trzymaj się prawej strony</string>
@@ -803,9 +803,9 @@ Mapy kafelkowe można uzyskać bezpośrednio z zasobów sieciowych, jak i przygo
     <string name="gpxup_private">Prywatny</string>
     <string name="osmand_parking_event">Odbierz samochód z parkingu</string>
     <string name="osmand_parking_warning">Uwaga</string>
-    <string name="osmand_parking_warning_text">Powiadomienie o odebraniu samochodu zostało dodane do kalendarza. Pozostanie ono tam, dopóki nie usuniesz go ręcznie.</string>
-    <string name="osmand_parking_time_limit_title">Ustaw limit czasu parkowania</string>
-    <string name="osmand_parking_delete_confirm">Usunąć oznaczenie położenia zaparkowanego samochodu?</string>
+    <string name="osmand_parking_warning_text">Dodano do kalendarza powiadomienie o odebraniu samochodu. Pozostanie ono tam, dopóki zostanie ręcznie usunięte.</string>
+    <string name="osmand_parking_time_limit_title">Ustal limit czasu parkowania</string>
+    <string name="osmand_parking_delete_confirm">Usunąć znacznik położenia zaparkowanego samochodu?</string>
     <string name="osmand_parking_delete">Usuń znacznik parkowania</string>
     <string name="osmand_parking_choose_type">Wybierz typ parkingu</string>
     <string name="osmand_parking_lim_text">Ograniczony czasowo</string>
@@ -1147,9 +1147,9 @@ OsmAnd jest otwarto-źródłowym programem do nawigacji z dostępem do szerokiej
     <string name="intermediate_items_sort_return">Optymalizacja kolejności celów pośrednich w drodze z bieżącej pozycji do miejsca docelowego.</string>
     <string name="search_street_in_neighborhood_cities">Szukaj ulicy w sąsiadujących miastach</string>
 
-    <string name="context_menu_item_destination_point">Ustaw jako punkt docelowy</string>
+    <string name="context_menu_item_destination_point">Ustal jako cel trasy</string>
     <string name="please_select_address">Wybierz miasto lub ulicę</string>
-    <string name="destination_point">Punkt docelowy %1$s</string>
+    <string name="destination_point">Cel trasy %1$s</string>
 
 
     <string name="av_camera_focus">Typ fokusu kamery</string>
@@ -1656,7 +1656,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 
 
     <string name="rendering_attr_publicTransportMode_name">Linie autobusowe, trolejbusowe, transportowe</string>
-    <string name="record_plugin_name">Nagrywanie tras</string>
+    <string name="record_plugin_name">Rejestrowanie śladów</string>
     <string name="int_hour">h</string>
     <string name="duration">Czas trwania</string>
     <string name="distance">Odległość</string>
@@ -1670,8 +1670,11 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="save_track_to_gpx_globally">Rejestrowanie śladu do pliku GPX</string>
     <string name="save_track_to_gpx_globally_descr">Rejestrowanie położenia do pliku GPX można włączyć lub wyłączyć używając widżetu rejestrowania GPX na ekranie mapy</string>
     <string name="save_track_interval_globally">Częstość rejestrowania</string>
-	<string name="record_plugin_description">"Aktywuje funkcje nagrywania i zapisywania tras za pomocą widżetu rejestrowania śladów GPX na ekranie mapy lub automatyczne rejestruje przebiegi wszystkich tras do plików GPX.
-\n\nNagrane ślady można udostępnić znajomym lub wykorzystać na rzecz rowoju map Openstreetmap. Sportowcy mogą korzystać z nagranych śladów do monitorowania treningów. W tym celu OsmAnd udostępnia podstawowe informacje takie, jak czasy okrążeń, średnia prędkość itp. Ślady mogą być później analizowane w specjalnych narzędziach do analizy przygotowanych przez innych dostawców. "</string>
+	<string name="record_plugin_description">"Aktywuje funkcje rejestrowania i zapisywania śladów za pomocą widżetu rejestrowania śladów GPX na ekranie mapy lub automatyczne rejestruje przebiegi wszystkich tras do plików GPX.
+
+
+Nagrane ślady można udostępnić znajomym lub wykorzystać na rzecz rowoju map Openstreetmap. Sportowcy mogą korzystać z nagranych śladów do monitorowania treningów. W tym celu OsmAnd udostępnia podstawowe informacje takie, jak czasy okrążeń, średnia prędkość itp. Ślady mogą być później analizowane w specjalnych narzędziach do analizy przygotowanych przez innych dostawców.
+ "</string>
     <string name="confirm_every_run">Ponawianie pytania</string>
     <string name="save_global_track_interval_descr">Wybierz tempo rejestrowania dla nagrywania ścieżki (włączonego poprzez widżet rejestrowania GPX na mapie)</string>
     <string name="save_global_track_interval">Ogólna częstość rejestrowania</string>
@@ -1726,7 +1729,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     
     
 
-    <string name="home_button">Ekran startowy</string>
+    <string name="home_button">Ekran początkowy</string>
     <string name="map_update">Dostępne aktualizacje dla %1$s map</string>
     <string name="search_for">Wyszukiwanie</string>
 
@@ -1750,8 +1753,8 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="rendering_value_orange_name">Pomarańczowy</string>
     <string name="rendering_value_germanRoadAtlas_name">Niemiecki atlas drogowy</string>
     <string name="rendering_value_americanRoadAtlas_name">Amerykański atlas drogowy</string>
-    <string name="routing_attr_no_new_routing_name">Bez reguł trasowania z wersji 1.9</string>
-    <string name="routing_attr_no_new_routing_description">Nie używaj reguł trasowania wprowadzonych w wersji 1.9</string>
+    <string name="routing_attr_no_new_routing_name">Bez reguł wyznaczania tras z wersji 1.9</string>
+    <string name="routing_attr_no_new_routing_description">Nie używa reguł wyznaczania tras wprowadzonych w wersji 1.9</string>
     <string name="navigate_point_northing">Linia współrzędnych y\"</string>
     <string name="rendering_attr_transportStops_name">Przystanki transportu miejskiego</string>
     <string name="navigate_point_easting">Linia współrzędnych x\"</string>
@@ -1787,7 +1790,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="device_memory">Pamięć urządzenia</string>
     <string name="edit_group">Edytuj grupę</string>
     <string name="parking_place">Miejsce parkowania</string>
-    <string name="avoid_roads_msg">Można wywołać alternatywną trasę poprzez wybranie dróg, które mają być pomijane</string>
+    <string name="avoid_roads_msg">Można wyznaczyć alternatywną trasę wybierając drogi, które mają być omijane</string>
     <string name="enable_proxy_title">Włączenie proxy HTTP</string>
     <string name="proxy_host_title">Host proxy</string>
     <string name="proxy_port_title">Port proxy</string>
@@ -1853,7 +1856,7 @@ Można go wyłączyć używając obecnej tutaj opcji lub zmieniając styl mapy w
     <string name="remove_the_tag">Usuń znacznik</string>
     <string name="version_settings">Kompilacje</string>
     <string name="points">Punkty</string>
-    <string name="navigation_over_track">Rozpocząć nawigowanie wzdłuż trasy?</string>
+    <string name="navigation_over_track">Rozpocząć nawigowanie wzdłuż śladu?</string>
     <string name="save_track_to_gpx_globally_headline">Zapis śladu na żądanie</string>
     <string name="enable_proxy_descr">Konfiguruje proxy HTTP dla wszystkich zapytań sieciowych</string>
     <string name="proxy_host_descr">Ustala nazwę hosta proxy (np. 127.0.0.1)</string>
