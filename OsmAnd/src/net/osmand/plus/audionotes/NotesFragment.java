@@ -234,14 +234,14 @@ public class NotesFragment extends OsmAndListFragment {
 			if(path == shareLocationFile) {
 				File fl = generateGPXForRecordings(selected);
 				if(fl != null) {
-					files.add(FileProvider.getUriForFile(getActivity(), "net.osmand.fileprovider", fl));
+					files.add(FileProvider.getUriForFile(getActivity(), getActivity().getPackageName() + ".fileprovider", fl));
 				}
 			} else {
 				File src = path.getFile();
 				File dst = new File(getActivity().getCacheDir(), "share/"+src.getName());
 				try {
 					Algorithms.fileCopy(src, dst);
-					files.add(FileProvider.getUriForFile(getActivity(), "net.osmand.fileprovider", dst));
+					files.add(FileProvider.getUriForFile(getActivity(), getActivity().getPackageName() + ".fileprovider", dst));
 				} catch (IOException e) {
 					e.printStackTrace();
 				}

@@ -503,7 +503,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 						Algorithms.fileCopy(src, dst);
 						final Intent sendIntent = new Intent();
 						sendIntent.setAction(Intent.ACTION_SEND);
-						sendIntent.putExtra(Intent.EXTRA_TEXT, "Favourites.gpx:\n\n\n" + GPXUtilities.asString(gpxFile, getMyApplication()));
+						sendIntent.putExtra(Intent.EXTRA_TEXT, "Content of the attached file Favourites.gpx:\n\n\n" + GPXUtilities.asString(gpxFile, getMyApplication()));
 						sendIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share_fav_subject));
 						sendIntent.putExtra(Intent.EXTRA_STREAM,
 								FileProvider.getUriForFile(getActivity(),
