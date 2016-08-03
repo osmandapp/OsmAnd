@@ -65,7 +65,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:src="@drawable/ic_destination_arrow_white"/>
+                    android:src="@drawable/ic_direction_arrow"/>
 
                 <TextView
                     android:id="@+id/distance"

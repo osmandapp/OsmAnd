@@ -52,8 +52,9 @@
 
                 <ImageView
                     android:id="@+id/direction"
-                    android:layout_width="@dimen/dashFavDirectionSize"
-                    android:layout_height="@dimen/dashFavDirectionSize"
+                    android:layout_width="@dimen/directionIconSize"
+                    android:layout_height="@dimen/directionIconSize"
+                    android:layout_marginTop="1sp"
                     android:layout_gravity="center_vertical" />
 
                 <TextView

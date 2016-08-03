@@ -783,7 +783,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 				draw = (DirectionDrawable) dd;
 			} else {
 				draw = new DirectionDrawable(SearchPOIActivity.this, 24, 24,
-						R.drawable.ic_destination_arrow_white, R.color.color_distance);
+						R.drawable.ic_direction_arrow, R.color.color_distance);
 				direction.setImageDrawable(draw);
 			}
 			net.osmand.Location loc = location;

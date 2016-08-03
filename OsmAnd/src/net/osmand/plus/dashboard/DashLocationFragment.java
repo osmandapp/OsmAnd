@@ -127,7 +127,7 @@ public abstract class DashLocationFragment extends DashBaseFragment {
 		if (arrow != null) {
 			boolean newImage = false;
 			if (arrowResId == 0) {
-				arrowResId = R.drawable.ic_destination_arrow_white;
+				arrowResId = R.drawable.ic_direction_arrow;
 			}
 			DirectionDrawable dd;
 			if(!(arrow.getDrawable() instanceof DirectionDrawable)) {

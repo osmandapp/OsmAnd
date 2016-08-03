@@ -488,7 +488,7 @@ public class MapMarkerDialogHelper {
 			Location.distanceBetween(marker.getLatitude(), marker.getLongitude(), loc.getLatitude(), loc.getLongitude(), mes);
 		}
 		boolean newImage = false;
-		int arrowResId = R.drawable.ic_destination_arrow_white;
+		int arrowResId = R.drawable.ic_direction_arrow;
 		DirectionDrawable dd;
 		if (!(arrow.getDrawable() instanceof DirectionDrawable)) {
 			newImage = true;
@@ -596,7 +596,7 @@ public class MapMarkerDialogHelper {
 			Location.distanceBetween(marker.getLatitude(), marker.getLongitude(), loc.getLatitude(), loc.getLongitude(), mes);
 		}
 		boolean newImage = false;
-		int arrowResId = R.drawable.ic_destination_arrow_white;
+		int arrowResId = R.drawable.ic_direction_arrow;
 		DirectionDrawable dd;
 		if (!(arrow.getDrawable() instanceof DirectionDrawable)) {
 			newImage = true;

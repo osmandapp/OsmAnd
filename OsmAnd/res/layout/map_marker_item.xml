@@ -54,7 +54,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginRight="4dp"
-                android:src="@drawable/ic_destination_arrow_white"
+                android:src="@drawable/ic_direction_arrow"
                 android:visibility="gone"/>
 
             <TextView

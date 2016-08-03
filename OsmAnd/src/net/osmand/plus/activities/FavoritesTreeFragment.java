@@ -98,7 +98,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 		setAdapter(favouritesAdapter);
 
 		boolean light = getMyApplication().getSettings().isLightContent();
-		arrowImage = ContextCompat.getDrawable(context, R.drawable.ic_destination_arrow_white);
+		arrowImage = ContextCompat.getDrawable(context, R.drawable.ic_direction_arrow);
 		arrowImage.mutate();
 		if (light) {
 			arrowImage.setColorFilter(ContextCompat.getColor(context, R.color.color_distance), PorterDuff.Mode.MULTIPLY);

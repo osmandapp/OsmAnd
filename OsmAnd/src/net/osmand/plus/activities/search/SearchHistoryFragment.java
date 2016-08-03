@@ -258,7 +258,7 @@ public class SearchHistoryFragment extends OsmAndListFragment implements SearchA
 		TextView distanceText = (TextView) row.findViewById(R.id.distance);
 		ImageView direction = (ImageView) row.findViewById(R.id.direction);
 		IconsCache ic = app.getIconsCache();
-		direction.setImageDrawable(ic.getIcon(R.drawable.ic_destination_arrow_white, R.color.color_distance));
+		direction.setImageDrawable(ic.getIcon(R.drawable.ic_direction_arrow, R.color.color_distance));
 		String distance = "";
 		if (location != null) {
 			int dist = (int) (MapUtils.getDistance(location, historyEntry.getLat(), historyEntry.getLon()));

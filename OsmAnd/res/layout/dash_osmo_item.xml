@@ -60,9 +60,10 @@
 				<ImageView
 					android:id="@+id/direction_icon"
 					android:layout_gravity="center_vertical"
-					android:layout_width="@dimen/dashFavDirectionSize"
-					android:layout_height="@dimen/dashFavDirectionSize"
-					tools:src="@drawable/ic_action_start_navigation"/>
+					android:layout_width="@dimen/directionIconSize"
+					android:layout_height="@dimen/directionIconSize"
+					android:layout_marginTop="1sp"
+					tools:src="@drawable/ic_direction_arrow"/>
 
 				<TextView
 					android:id="@+id/distance"
