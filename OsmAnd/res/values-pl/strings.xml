@@ -435,7 +435,7 @@
     <string name="only_show">Pokaż trasę</string>
     <string name="follow">Rozpocznij nawigację</string>
     <string name="recalculate_route_to_your_location">Środek transportu:</string>
-    <string name="mark_final_location_first">Proszę najpierw wskazać położenie docelowe</string>
+    <string name="mark_final_location_first">Proszę najpierw wskazać cel trasy</string>
     <string name="get_directions">Nawigacja</string>
 
     <string name="opening_hours">Godziny otwarcia</string>
@@ -518,7 +518,7 @@
     <string name="map_tile_source">Zasób mapy kafelkowej</string>
     <string name="map_source">Zasób mapy</string>
     <string name="use_internet">Używanie połączenia internetowego</string>
-    <string name="show_location">Pokaż aktualne położenie</string>
+    <string name="show_location">Wyświetl aktualne położenie</string>
 
 
     <string name="show_gps_coordinates_text">Pokaż współrzędne GPS na mapie</string>
@@ -824,8 +824,8 @@ Miejsce parkowania oraz czas można znaleźć na karcie w panelu oraz na widżec
     <string name="osmand_parking_plugin_name">Miejsce parkowania</string>
     <string name="context_menu_item_add_parking_point">Oznacz położenie parkowania</string>
     <string name="context_menu_item_delete_parking_point">Usuń znacznik parkowania</string>
-    <string name="starting_point_too_far">Położenie początkowe znajduje się zbyt daleko od najbliższej drogi.</string>
-    <string name="shared_location">Lokalizacja współdzielona</string>
+    <string name="starting_point_too_far">Początek trasy znajduje się zbyt daleko od najbliższej drogi.</string>
+    <string name="shared_location">Położenie współdzielone</string>
 
     <string name="global_app_allocated_memory_descr">Użyta pamięć: %1$s MB (limit Androida %2$s MB, dalvika %3$s MB).</string>
     <string name="global_app_allocated_memory">Użyta pamięć</string>
@@ -835,10 +835,10 @@ Miejsce parkowania oraz czas można znaleźć na karcie w panelu oraz na widżec
     <string name="select_animate_speedup">Wybierz prędkość symulacji trasy</string>
     <string name="osmand_parking_hours">Godziny</string>
     <string name="osmand_parking_minutes">Minuty</string>
-    <string name="osmand_parking_position_description_add_time">Samochód został zaparkowany</string>
+    <string name="osmand_parking_position_description_add_time">Samochód zaparkowano na</string>
     <string name="use_compass_navigation_descr">Użyj kompasu, gdy nie zostanie wykryty kierunek</string>
     <string name="use_compass_navigation">Użyj kompasu</string>
-    <string name="route_updated_loc_found">Trasa zostanie obliczona po odnalezieniu pozycji</string>
+    <string name="route_updated_loc_found">Trasa zostanie wyznaczona po określeniu aktualnego położenia</string>
     <string name="continue_follow_previous_route_auto">Poprzednia trasa nie została ukończona. Kontynuować ją? (%1$s sekund)</string>
 
 
@@ -859,7 +859,7 @@ Miejsce parkowania oraz czas można znaleźć na karcie w panelu oraz na widżec
     <string name="map_widget_parking">Parking</string>
     <string name="map_widget_monitoring">Rejestrowanie GPX</string>
     <string name="map_widget_speed">Prędkość</string>
-    <string name="map_widget_distance">Cel</string>
+    <string name="map_widget_distance">Cel trasy</string>
     <string name="map_widget_altitude">Wysokość</string>
     <string name="map_widget_time">Czas do celu</string>
     <string name="map_widget_next_turn">Następny zakręt</string>
@@ -868,7 +868,7 @@ Miejsce parkowania oraz czas można znaleźć na karcie w panelu oraz na widżec
     <string name="map_widget_mini_route">Mała mapa trasy</string>
     <string name="bg_service_screen_lock">Zablokuj ekran</string>
     <string name="bg_service_screen_lock_toast">Ekran zablokowany</string>
-    <string name="bg_service_interval">Ustaw częstość wybudzania:</string>
+    <string name="bg_service_interval">Ustal częstość wybudzania:</string>
     <string name="screen_is_locked">Aby odblokować, naciśnij ikonę kłódki</string>
     <string name="bg_service_screen_unlock">Odblokuj ekran</string>
     <string name="bg_service_sleep_mode_off">Uruchom\n aplikację w tle</string>
@@ -927,18 +927,18 @@ OsmAnd jest otwarto-źródłowym programem do nawigacji z dostępem do szerokiej
     <string name="delete_target_point">Usuń cel</string>
     <string name="target_point">Cel podróży %1$s</string>
     <string name="intermediate_point">Pośredni cel %1$s</string>
-    <string name="context_menu_item_last_intermediate_point">Dodaj ostatnie położenie pośrednie</string>
-    <string name="context_menu_item_first_intermediate_point">Dodaj pierwsze położenie pośrednie</string>
-    <string name="add_as_last_destination_point">Dodaj ostatnie położenie pośrednie</string>
-    <string name="add_as_first_destination_point">Dodaj pierwsze położenie pośrednie</string>
-    <string name="replace_destination_point">Zastąp położenie docelowe</string>
-    <string name="new_destination_point_dialog">Już wybrano położenie docelowe:</string>
+    <string name="context_menu_item_last_intermediate_point">Dodaj jako ostatni cel pośredni trasy</string>
+    <string name="context_menu_item_first_intermediate_point">Dodaj jako pierwszy cel pośredni trasy</string>
+    <string name="add_as_last_destination_point">Dodaj jako ostatni cel pośredni trasy</string>
+    <string name="add_as_first_destination_point">Dodaj jako pierwszy cel pośredni trasy</string>
+    <string name="replace_destination_point">Zastąp cel trasy</string>
+    <string name="new_destination_point_dialog">Już ustalono cel trasy:</string>
     <string name="target_points">Cele podróży</string>
     <string name="intermediate_point_too_far">Cel pośredni %1$s jest zbyt daleko od najbliższej ulicy.</string>
-    <string name="arrived_at_intermediate_point">Osiągnięto położenie pośrednie</string>
-    <string name="context_menu_item_intermediate_point">Dodaj położenie pośrednie</string>
-    <string name="map_widget_intermediate_distance">Położenie pośrednie</string>
-    <string name="ending_point_too_far">Położenie docelowe leży zbyt daleko od najbliższej ulicy.</string>
+    <string name="arrived_at_intermediate_point">Osiągnięto cel pośredni trasy</string>
+    <string name="context_menu_item_intermediate_point">Dodaj jako cel pośredni trasy</string>
+    <string name="map_widget_intermediate_distance">Cel pośredni trasy</string>
+    <string name="ending_point_too_far">Cel pośredni trasy leży zbyt daleko od najbliższej ulicy.</string>
     <string name="add_tag">Dodaj znacznik</string>
     <string name="btn_advanced_mode">Tryb zaawansowany…</string>
     <string name="poi_filter_parking">Parking</string>
@@ -1062,7 +1062,7 @@ OsmAnd jest otwarto-źródłowym programem do nawigacji z dostępem do szerokiej
     <string name="av_def_action_picture">Zrobienie zdjęcia</string>
     <string name="recording_context_menu_precord">Zrób zdjęcie</string>
     <string name="stop_routing_confirm">Zatrzymać nawigację?</string>
-    <string name="clear_dest_confirm">Wyczyścić położenie docelowy (i położenia pośrednie)?</string>
+    <string name="clear_dest_confirm">Usunąć cel trasy i jej cele pośrednie?</string>
     <string name="precise_routing_mode">Precyzyjne trasy (alpha)</string>
     <string name="precise_routing_mode_descr">Włącz obliczanie precyzyjnych tras w nawigacji. Funkcja dość powolna, nadal jest ograniczona odległością.</string>
     <string name="local_indexes_cat_av">Dane audio/video</string>
@@ -1105,7 +1105,7 @@ OsmAnd jest otwarto-źródłowym programem do nawigacji z dostępem do szerokiej
     <string name="shared_string_more_actions">Więcej akcji</string>
     <string name="favourites_list_activity">Wybierz ulubione</string>
     <string name="download_using_mobile_internet">Nie nawiązano połączenia za pośrednictwem Wi-Fi. Kontynuować pobieranie używając obecnego połączenia?</string>
-    <string name="clear_destination">Usuń położenie docelowe</string>
+    <string name="clear_destination">Usuń cel trasy</string>
     <string name="cancel_navigation">Zatrzymaj nawigację</string>
     <string name="cancel_route">Odrzuć trasę</string>
     <string name="install_paid">Pełna wersja</string>
@@ -1170,9 +1170,9 @@ OsmAnd jest otwarto-źródłowym programem do nawigacji z dostępem do szerokiej
     <string name="context_menu_item_directions_to">Nawiguj do położenia</string>
     <string name="context_menu_item_directions_from">Nawiguj z położenia</string>
     <string name="route_descr_map_location">Mapa: </string>
-    <string name="route_to">Położenie docelowe:</string>
-    <string name="route_via">Położenie pośrednie:</string>
-    <string name="route_from">Położenie początkowe:</string>
+    <string name="route_to">Cel trasy:</string>
+    <string name="route_via">Cel pośredni trasy:</string>
+    <string name="route_from">Początek trasy:</string>
 
 
     <string name="speak_speed_limit">Ograniczenia prędkości</string>
@@ -1353,7 +1353,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="routing_attr_weight_description">Określa maksymalną, dozwoloną masę pojazdu</string>
     <string name="select_gpx">Wybierz GPX…</string>
     <string name="route_descr_select_destination">Proszę wybrać cel trasy</string>
-    <string name="shared_string_select_on_map">Wybierz na mapie</string>
+    <string name="shared_string_select_on_map">Wskazanie na mapie</string>
     <string name="shared_string_favorite">Ulubione</string>
     <string name="route_preferences">Ustawienia trasy</string>
     <string name="route_info">Informacje o trasie</string>
@@ -1518,7 +1518,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="osmo_show_group_notifications_descr">Wyświetla powiadomienia, gdy użytkownik dołącza do grupy lub opuszcza grupę</string>
     <string name="gpx_file_is_empty">Plik GPX jest pusty</string>
 
-    <string name="shared_string_my_tracks">Moje ślady</string>
+    <string name="shared_string_my_tracks">Ślady</string>
     <string name="shared_string_my_favorites">Ulubione</string>
     <string name="shared_string_my_places">Miejsca</string>
 
@@ -1629,7 +1629,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="lang_sr">Serbski</string>
     <string name="lang_zh_CN">Chiński (uproszczony)</string>
     <string name="lang_zh_TW">Chiński (tradycyjny)</string>
-    <string name="rendering_attr_subwayMode_name">Trasy metra</string>
+    <string name="rendering_attr_subwayMode_name">Linie metra</string>
     <string name="download_additional_maps">Pobrać brakujące mapy %1$s (%2$d MB)?</string>
     <string name="shared_string_more">Więcej…</string>
     <string name="rendering_value_browse_map_name">Przeglądaj mapę</string>
@@ -1655,7 +1655,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="av_camera_pic_size_descr">Wybierz rozmiar obrazu wewnętrznego aparatu</string>
 
 
-    <string name="rendering_attr_publicTransportMode_name">Trasy autobusowe, trolejbusowe, transportowe</string>
+    <string name="rendering_attr_publicTransportMode_name">Linie autobusowe, trolejbusowe, transportowe</string>
     <string name="record_plugin_name">Nagrywanie tras</string>
     <string name="int_hour">h</string>
     <string name="duration">Czas trwania</string>
@@ -1713,7 +1713,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="wake_on_voice_descr">Włącza ekran urządzenia podczas zbliżania się do zakrętu</string>
 
     <string name="impassable_road">Omijanie dróg…</string>
-    <string name="rendering_attr_tramTrainRoutes_name">Trasy tramwajowe i kolejowe</string>
+    <string name="rendering_attr_tramTrainRoutes_name">Linie tramwajowe i kolejowe</string>
 
     <string name="rendering_attr_trainLightrailRoutes_name">Trasy pociągów</string>
     <string name="rendering_attr_tramRoutes_name">Trasy tramwajowe</string>
