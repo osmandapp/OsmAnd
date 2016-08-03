@@ -1556,8 +1556,8 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 
     <string name="show_zoom_buttons_navigation_descr">Wyświetla przyciski zbliżania i oddalania podczas nawigacji</string>
     <string name="show_zoom_buttons_navigation">Przyciski zbliżania</string>
-    <string name="sort_by_distance">Sortuj według odległości</string>
-    <string name="sort_by_name">Sortuj według nazwy</string>
+    <string name="sort_by_distance">Sortuj wg odległości</string>
+    <string name="sort_by_name">Sortuj wg nazwy</string>
     <string name="none_selected_gpx">Nie wybrano żadnego pliku GPX. Aby wybrać proszę nacisnąć i przytrzymać dostępną ścieżkę.</string>
 
     <string name="local_index_select_gpx_file">Wybierz aby wyświetlić</string>
@@ -2301,7 +2301,7 @@ Włączenie tego widoku zmienia styl mapy na „Zima i narty”, ukazujący tere
     <string name="shared_string_status">Status</string>
     <string name="add_time_span">Dodaj przedział czasowy</string>
     <string name="road_blocked">Droga zablokowana</string>
-    <string name="switch_start_finish">Odwróć kolejność punktów startu i celu</string>
+    <string name="switch_start_finish">Odwróć kolejność</string>
     <string name="rendering_attr_hideIcons_name">Ikony Użytecznych Miejsc</string>
     <string name="rec_split">Podział rejestratora</string>
     <string name="rec_split_title">Użyj podziału rejestratora</string>
