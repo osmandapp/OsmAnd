@@ -223,7 +223,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		search.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				mapActivity.showQuickSearch();
+				mapActivity.showQuickSearch(true, false);
 			}
 		});
 

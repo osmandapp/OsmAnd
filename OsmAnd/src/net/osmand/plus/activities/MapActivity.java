@@ -1353,17 +1353,27 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	public void showQuickSearch(double latitude, double longitude) {
 		mapContextMenu.hide();
-		QuickSearchDialogFragment.showInstance(this, "", new LatLon(latitude, longitude));
+		QuickSearchDialogFragment fragment = getQuickSearchDialogFragment();
+		if (fragment != null) {
+			fragment.dismiss();
+			refreshMap();
+		}
+		QuickSearchDialogFragment.showInstance(this, "", true, new LatLon(latitude, longitude));
 	}
 
-	public void showQuickSearch() {
-		QuickSearchDialogFragment fragment = getQuickSearchDialogFragment();
+	public void showQuickSearch(boolean newSearch, boolean showCategories) {
 		mapContextMenu.hide();
+		QuickSearchDialogFragment fragment = getQuickSearchDialogFragment();
 		if (fragment != null) {
-			fragment.show();
+			if (newSearch) {
+				fragment.dismiss();
+				QuickSearchDialogFragment.showInstance(this, "", showCategories, null);
+			} else {
+				fragment.show();
+			}
 			refreshMap();
 		} else {
-			QuickSearchDialogFragment.showInstance(this, "", null);
+			QuickSearchDialogFragment.showInstance(this, "", showCategories, null);
 		}
 	}
 
