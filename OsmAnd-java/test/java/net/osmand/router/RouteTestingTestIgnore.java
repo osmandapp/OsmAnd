@@ -7,9 +7,11 @@ import java.io.RandomAccessFile;
 import java.io.Reader;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -33,20 +35,11 @@ import com.google.gson.GsonBuilder;
 
 @RunWith(Parameterized.class)
 public class RouteTestingTestIgnore {
+	private TestEntry te;
 
 
-    private LatLon startPoint;
-    private LatLon endPoint;
-    private Map<Long, String> expectedResults;
-	private Map<String, String> params;
-
-
-    public RouteTestingTestIgnore(String testName, LatLon startPoint, LatLon endPoint, Map<Long, String> expectedResults, 
-    		Map<String, String> params) {
-        this.startPoint = startPoint;
-        this.endPoint = endPoint;
-        this.expectedResults = expectedResults;
-        this.params = params;
+    public RouteTestingTestIgnore(String name, TestEntry te) {
+        this.te = te;
     }
 
     @BeforeClass
@@ -55,62 +48,65 @@ public class RouteTestingTestIgnore {
     }
 
     @Parameterized.Parameters(name = "{index}: {0}")
-    public static Collection<Object[]> data() throws IOException {
+    public static Iterable<Object[]> data() throws IOException {
         String fileName = "/test_routing.json";
         Reader reader = new InputStreamReader(RouteTestingTestIgnore.class.getResourceAsStream(fileName));
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         TestEntry[] testEntries = gson.fromJson(reader, TestEntry[].class);
-        ArrayList<Object[]> twoDArray = new ArrayList<Object[]>();
-        for (int i = 0; i < testEntries.length; ++i) {
-			if (!testEntries[i].isIgnore()) {
-				Object[] arr = new Object[] { testEntries[i].getTestName(), testEntries[i].getStartPoint(),
-						testEntries[i].getEndPoint(), testEntries[i].getExpectedResults(),
-						testEntries[i].getParams()};
-				twoDArray.add(arr);
-			}
+        ArrayList<Object[]> arrayList = new ArrayList<>();
+        for(TestEntry te : testEntries) {
+        	arrayList.add(new Object[] {te.getTestName(), te});
         }
         reader.close();
-        return twoDArray;
+        return arrayList;
 
     }
 
     @Test
-    public void testRouting() throws Exception {
-    	String fl = "../../resources/test-resources/Routing_test.obf";
-    	RandomAccessFile raf = new RandomAccessFile(fl, "r");
-    	RoutePlannerFrontEnd fe = new RoutePlannerFrontEnd(false);
-        
+	public void testRouting() throws Exception {
+		String fl = "../../resources/test-resources/Routing_test.obf";
+		RandomAccessFile raf = new RandomAccessFile(fl, "r");
+		RoutePlannerFrontEnd fe = new RoutePlannerFrontEnd(false);
+
 		BinaryMapIndexReader[] binaryMapIndexReaders = { new BinaryMapIndexReader(raf, new File(fl)) };
 		RoutingConfiguration.Builder builder = RoutingConfiguration.getDefault();
-        RoutingConfiguration config = builder.build(params.containsKey("vehicle") ? 
-        		params.get("vehicle") : "car", RoutingConfiguration.DEFAULT_MEMORY_LIMIT * 3, params);
-        RoutingContext ctx = fe.buildRoutingContext(config, null, binaryMapIndexReaders,
-                RoutePlannerFrontEnd.RouteCalculationMode.NORMAL);
-        ctx.leftSideNavigation = false;
-        List<RouteSegmentResult> routeSegments = fe.searchRoute(ctx, startPoint, endPoint, null);
-        Set<Long> reachedSegments = new TreeSet<Long>();
-        Assert.assertNotNull(routeSegments);
-        int prevSegment = -1;
-        for (int i = 0; i <= routeSegments.size(); i++) {
-            if (i == routeSegments.size() || routeSegments.get(i).getTurnType() != null) {
-                if (prevSegment >= 0) {
-                    String name = routeSegments.get(prevSegment).getDescription();
-                    long segmentId = routeSegments.get(prevSegment).getObject().getId() >> (BinaryInspector.SHIFT_ID );
-                    System.out.println("segmentId: " + segmentId + " description: " + name);
-                }
-                prevSegment = i;
-            }
-            if (i < routeSegments.size()) {
-                reachedSegments.add(routeSegments.get(i).getObject().getId() >> (BinaryInspector.SHIFT_ID ));
-            }
-        }
+		Map<String, String> params = te.getParams();
+		RoutingConfiguration config = builder.build(params.containsKey("vehicle") ? params.get("vehicle") : "car",
+				RoutingConfiguration.DEFAULT_MEMORY_LIMIT * 3, params);
+		RoutingContext ctx = fe.buildRoutingContext(config, null, binaryMapIndexReaders,
+				RoutePlannerFrontEnd.RouteCalculationMode.NORMAL);
+		ctx.leftSideNavigation = false;
+		List<RouteSegmentResult> routeSegments = fe.searchRoute(ctx, te.getStartPoint(), te.getEndPoint(), null);
+		Set<Long> reachedSegments = new TreeSet<Long>();
+		Assert.assertNotNull(routeSegments);
+		int prevSegment = -1;
+		for (int i = 0; i <= routeSegments.size(); i++) {
+			if (i == routeSegments.size() || routeSegments.get(i).getTurnType() != null) {
+				if (prevSegment >= 0) {
+					String name = routeSegments.get(prevSegment).getDescription();
+					long segmentId = routeSegments.get(prevSegment).getObject().getId() >> (BinaryInspector.SHIFT_ID);
+					System.out.println("segmentId: " + segmentId + " description: " + name);
+				}
+				prevSegment = i;
+			}
+			if (i < routeSegments.size()) {
+				reachedSegments.add(routeSegments.get(i).getObject().getId() >> (BinaryInspector.SHIFT_ID));
+			}
+		}
+		Map<Long, String> expectedResults = te.getExpectedResults();
+		Iterator<Entry<Long, String>> it = expectedResults.entrySet().iterator();
+		while (it.hasNext()) {
+			Entry<Long, String> es = it.next();
+			if (es.getValue().equals("false")) {
+				Assert.assertTrue("Expected segment " + (es.getKey()) + " was wrongly reached in route segments "
+						+ reachedSegments.toString(), !reachedSegments.contains(es.getKey()));
+			} else {
+				Assert.assertTrue("Expected segment " + (es.getKey()) + " weren't reached in route segments "
+						+ reachedSegments.toString(), reachedSegments.contains(es.getKey()));
+			}
+		}
 
-        Set<Long> expectedSegments = expectedResults.keySet();
-        for (Long expSegId : expectedSegments){
-            Assert.assertTrue("Expected segment " + (expSegId ) + 
-            		" weren't reached in route segments " + reachedSegments.toString(), reachedSegments.contains(expSegId));
-        }
-    }
+	}
 
 
 
