@@ -8,6 +8,7 @@ import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.resources.RegionAddressRepository;
+import net.osmand.plus.resources.ResourceManager.ResourceListener;
 import net.osmand.search.SearchUICore;
 import net.osmand.search.SearchUICore.SearchResultCollection;
 import net.osmand.search.core.ObjectType;
@@ -19,7 +20,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-public class QuickSearchHelper {
+public class QuickSearchHelper implements ResourceListener {
 
 	public static final int SEARCH_FAVORITE_API_PRIORITY = 2;
 	public static final int SEARCH_FAVORITE_API_CATEGORY_PRIORITY = 7;
@@ -31,13 +32,19 @@ public class QuickSearchHelper {
 	private OsmandApplication app;
 	private SearchUICore core;
 	private SearchResultCollection resultCollection;
+	private boolean mapsIndexed;
 
 	public QuickSearchHelper(OsmandApplication app) {
 		this.app = app;
 		core = new SearchUICore(app.getPoiTypes(), app.getSettings().MAP_PREFERRED_LOCALE.get());
+		app.getResourceManager().addResourceListener(this);
 	}
 	
 	public SearchUICore getCore() {
+		if (mapsIndexed) {
+			mapsIndexed = false;
+			setRepositoriesForSearchUICore(app);
+		}
 		return core;
 	}
 
@@ -50,6 +57,7 @@ public class QuickSearchHelper {
 	}
 
 	public void initSearchUICore() {
+		mapsIndexed = false;
 		setRepositoriesForSearchUICore(app);
 		core.init();
 		// Register favorites search api
@@ -212,5 +220,10 @@ public class QuickSearchHelper {
 			}
 			return SEARCH_HISTORY_API_PRIORITY;
 		}
+	}
+
+	@Override
+	public void onMapsIndexed() {
+		mapsIndexed = true;
 	}
 }

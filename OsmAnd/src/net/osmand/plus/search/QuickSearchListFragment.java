@@ -158,7 +158,6 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 			String lang = searchResult.requiredSearchPhrase.getSettings().getLang();
 			PointDescription pointDescription = null;
 			Object object = searchResult.object;
-			String typeName = null;
 			switch (searchResult.objectType) {
 				case POI:
 					String poiSimpleFormat = OsmAndFormatter.getPoiStringWithoutType((Amenity) object, lang);
@@ -192,25 +191,24 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 					pointDescription = fav.getPointDescription();
 					break;
 				case HOUSE:
-					String name = searchResult.localeName;
+					String nm = searchResult.localeName;
 					if (searchResult.relatedObject instanceof City) {
-						typeName = ((City) searchResult.relatedObject).getName(searchResult.requiredSearchPhrase.getSettings().getLang(), true);
+						nm = ((City) searchResult.relatedObject).getName(searchResult.requiredSearchPhrase.getSettings().getLang(), true) + " " + nm;
 					} else if (searchResult.relatedObject instanceof Street) {
 						String s = ((Street) searchResult.relatedObject).getName(searchResult.requiredSearchPhrase.getSettings().getLang(), true);
 						String c = ((Street) searchResult.relatedObject).getCity().getName(searchResult.requiredSearchPhrase.getSettings().getLang(), true);
-						name = s + " " + name;
-						typeName = c;
+						nm = s + " " + nm + ", " + c;
 					} else if (searchResult.localeRelatedObjectName != null) {
-						typeName = searchResult.localeRelatedObjectName;
+						nm = searchResult.localeRelatedObjectName + " " + nm;
 					}
-					pointDescription = new PointDescription(PointDescription.POINT_TYPE_ADDRESS, typeName, name);
+					pointDescription = new PointDescription(PointDescription.POINT_TYPE_ADDRESS, nm);
 					break;
 				case LOCATION:
 					LatLon latLon = (LatLon) object;
 					pointDescription = new PointDescription(latLon.getLatitude(), latLon.getLongitude());
 					break;
 				case STREET_INTERSECTION:
-					typeName = QuickSearchListItem.getTypeName(app, searchResult);
+					String typeName = QuickSearchListItem.getTypeName(app, searchResult);
 					if (Algorithms.isEmpty(typeName)) {
 						typeName = null;
 					}
