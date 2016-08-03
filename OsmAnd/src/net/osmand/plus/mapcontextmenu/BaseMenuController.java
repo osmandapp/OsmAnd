@@ -9,12 +9,10 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 
 public abstract class BaseMenuController {
 
-	public final static float LANDSCAPE_WIDTH_DP = 366f;
-
 	private MapActivity mapActivity;
 	private boolean portraitMode;
-	private boolean largeDevice;
 	private boolean nightMode;
+	private int landscapeWidthPx;
 
 	public BaseMenuController(MapActivity mapActivity) {
 		this.mapActivity = mapActivity;
@@ -23,7 +21,7 @@ public abstract class BaseMenuController {
 
 	private void init() {
 		portraitMode = AndroidUiHelper.isOrientationPortrait(mapActivity);
-		largeDevice = AndroidUiHelper.isXLargeDevice(mapActivity);
+		landscapeWidthPx = mapActivity.getResources().getDimensionPixelSize(R.dimen.dashboard_land_width);
 		updateNightMode();
 	}
 
@@ -48,8 +46,8 @@ public abstract class BaseMenuController {
 		return !portraitMode;
 	}
 
-	public float getLandscapeWidthDp() {
-		return LANDSCAPE_WIDTH_DP;
+	public int getLandscapeWidthPx() {
+		return landscapeWidthPx;
 	}
 
 	public float getHalfScreenMaxHeightKoef() {

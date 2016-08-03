@@ -9,7 +9,7 @@
 
     <LinearLayout
         android:id="@+id/main_view"
-        android:layout_width="@dimen/map_route_planning_land_width"
+        android:layout_width="@dimen/dashboard_land_width"
         android:layout_height="match_parent"
         android:layout_gravity="bottom"
         android:background="@drawable/bg_left_menu_dark"

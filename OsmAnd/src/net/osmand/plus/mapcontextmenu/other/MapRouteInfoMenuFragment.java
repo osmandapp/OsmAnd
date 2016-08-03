@@ -115,8 +115,7 @@ public class MapRouteInfoMenuFragment extends Fragment {
 	public void applyDayNightMode() {
 		MapActivity ctx = getMapActivity();
 		boolean portraitMode = AndroidUiHelper.isOrientationPortrait(ctx);
-		boolean largeDevice = AndroidUiHelper.isXLargeDevice(ctx);
-		boolean landscapeLayout = !portraitMode && !largeDevice;
+		boolean landscapeLayout = !portraitMode;
 		boolean nightMode = ctx.getMyApplication().getDaynightHelper().isNightModeForMapControls();
 		if (!landscapeLayout) {
 			AndroidUtils.setBackground(ctx, mainView, nightMode, R.drawable.bg_bottom_menu_light, R.drawable.bg_bottom_menu_dark);

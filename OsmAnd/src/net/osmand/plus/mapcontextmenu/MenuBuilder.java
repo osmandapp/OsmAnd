@@ -31,7 +31,7 @@ import static android.util.TypedValue.COMPLEX_UNIT_DIP;
 
 public class MenuBuilder {
 
-	public static final float SHADOW_HEIGHT_TOP_DP = 16f;
+	public static final float SHADOW_HEIGHT_TOP_DP = 17f;
 
 	protected OsmandApplication app;
 	protected LinkedList<PlainMenuItem> plainMenuItems;
