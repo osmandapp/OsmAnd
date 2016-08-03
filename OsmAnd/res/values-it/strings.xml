@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
     <string name="use_fluorescent_overlays">Sovrapposizioni fluorescenti</string>
     <string name="use_fluorescent_overlays_descr">Usa colori fluorescenti per visualizzare tracce e percorsi</string>
     <string name="offline_edition">Modifiche offline</string>
@@ -1184,7 +1185,7 @@
     <string name="app_mode_boat">Barca</string>
     <string name="app_mode_aircraft">Aereo</string>
     <string name="map_widget_map_rendering">Disegno della mappa</string>
-    <string name="app_modes_choose_descr">Scegli fra le modalità d\'uso disponibili nell\'applicazione</string>
+    <string name="app_modes_choose_descr">Scegli fra le modalità d\'uso disponibili dell\'applicazione</string>
     <string name="app_modes_choose">Profili applicazione</string>
     <string name="amenity_type_seamark">Mare</string>
 
@@ -2272,4 +2273,38 @@
     <string name="storage_directory_card">Scheda di memoria</string>
     <string name="coords_format">Formato coordinate</string>
     <string name="coords_format_descr">Formato per le coordinate geografiche</string>
-  	</resources>
+  	<string name="route_stops_before">%1$s fermate prima</string>
+    <string name="coords_search">Ricerca coordinate</string>
+    <string name="advanced_coords_search">Ricerca coordinate avanzata</string>
+    <string name="back_to_search">Ritorna alla ricerca</string>
+    <string name="confirmation_to_delete_history_items">Vuoi cancellare gli elementi della cronologia selezionati?</string>
+    <string name="show_something_on_map">Mostra %1$s sulla mappa</string>
+    <string name="release_2_4">"
+ • Nuova ricerca testuale molto potente
+
+
+ • Much improved audio over Bluetooth
+
+
+ • Improved route guidance, voice prompting, and turn lane indication
+
+
+ • Improved transport layer
+
+
+ • Added more locales and now support regional locales
+
+
+ • Many other improvements and bug fixes
+
+
+ and more…
+ "</string>
+    <string name="dist_away_from_my_location">Cerca %1$s lontano</string>
+    <string name="show_on_map">Mostra sulla mappa</string>
+    <string name="share_history_subject">" condiviso attraverso OsmAnd"</string>
+    <string name="search_categories">Categorie</string>
+    <string name="postcode">Codice postale</string>
+    <string name="shared_string_from">da</string>
+    <string name="city_type_district">Distretto</string>
+    </resources>
