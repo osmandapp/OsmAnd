@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources><string name="shared_string_topbar">Supra breto</string>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="shared_string_topbar">Supra breto</string>
     <string name="recalculate_route">Rekalkuli kurson</string>
     <string name="donations">Donacioj</string>
     <string name="number_of_recipients">Nombro da ricevontoj</string>
@@ -2132,8 +2133,8 @@ Kaj la loko kaj tempo estas montrataj ĉe la OsmAnd stirpanelo, kaj ĉe la fenes
     <string name="instalation_troubleshooting_item">Instalado kaj problemoj</string>
     <string name="techical_articles_item">Teĥnikaj artikoloj</string>
     <string name="versions_item">Versioj</string>
-    <string name="feedback">Prijuĝaj rimarkoj</string>
-    <string name="contact_us">Kontakti nin</string>
+    <string name="feedback">Sendu opinion</string>
+    <string name="contact_us">Kontaktu nin</string>
     <string name="map_legend">Mapklarigo</string>
     <string name="save_poi_without_poi_type_message">Ĉu vere konservi Interesejon sen determinita speco?</string>
     <string name="poi_context_menu_modify_osm_change">Modifi OSM ŝanĝoj</string>
@@ -2180,7 +2181,7 @@ Kaj la loko kaj tempo estas montrataj ĉe la OsmAnd stirpanelo, kaj ĉe la fenes
  • Nova ebloplena tekstoserĉilo
 
 
- • Plibonigitaj aŭd-sciigoj per Bludento
+ • Konekto kun aŭd-sistemo/parolilo de aŭto per Bludento
 
 
  • Plibonigita navigado - voĉaj sciigoj, kaj subdiroj pri koridoroj
