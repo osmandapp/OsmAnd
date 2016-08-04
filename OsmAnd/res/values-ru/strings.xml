@@ -2027,4 +2027,32 @@
     <string name="lang_hu_formal">Венгерский (официальный)</string>
     <string name="lang_kn">Каннада</string>
     <string name="file_name_containes_illegal_char">Имя файла содержит недопустимый символ</string>
+    <string name="route_stops_before">%1$s остановок до выбранной</string>
+    <string name="coords_search">Поиск по координатам</string>
+    <string name="advanced_coords_search">Расширенный поиск по координатам</string>
+    <string name="back_to_search">Вернуться в поиск</string>
+    <string name="confirmation_to_delete_history_items">Удалить выбранное из истории поиска?</string>
+    <string name="show_something_on_map">Показать %1$s на карте</string>
+    <string name="dist_away_from_my_location">Искать за %1$s от местоположения</string>
+    <string name="share_history_subject"> поделились через OsmAnd</string>
+    <string name="search_categories">Категории</string>
+    <string name="postcode">Почтовый индекс</string>
+    <string name="city_type_district">Район</string>
+    <string name="city_type_neighbourhood">Пригород</string>
+    <string name="map_widget_search">Поиск</string>
+    <string name="shared_string_is_open_24_7">Открыто 24/7</string>
+    <string name="storage_directory_card">Карта памяти</string>
+    <string name="coords_format">Формат координат</string>
+    <string name="coords_format_descr">Формат для географических координат</string>
+  	<string name="app_mode_bus">Автобус</string>
+ 	<string name="app_mode_train">Поезд</string>
+    <string name="release_2_4">
+	\u2022 Новый полнотекстовый поиск\n\n
+	\u2022 Интеграция через Bluetooth автомобильных аудиосистем / колонок\n\n
+	\u2022 Улучшенная навигация по маршруту, голосовые подсказки, отображение полос движения\n\n
+	\u2022 Улучшенный слой транспорта с отображением маршрутов\n\n
+	\u2022 Больше поддерживаемых языков интерфейса\n\n
+	\u2022 Множество улучшений и исправлений ошибок\n\n
+	и многое другое…
+    </string>
 </resources>
