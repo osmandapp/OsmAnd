@@ -12,7 +12,7 @@
     <string name="application_dir">Carpeta de almacenamiento de datos</string>
     <string name="shared_string_copy">Copiar</string>
     <string name="filter_poi_hint">Filtrar por nombre</string>
-    <string name="search_poi_category_hint">Escribe para buscar todas</string>
+    <string name="search_poi_category_hint">Escribe para buscar</string>
     <string name="rendering_attr_OSMMapperAssistant_name">Asistente al mapeador OSM</string>
     <string name="agps_info">Información A-GPS</string>
     <string name="shared_string_manage">Gestionar</string>
@@ -2493,7 +2493,7 @@ Si necesitas ayuda con la aplicación OsmAnd, contacte con nuestro equipo de sop
     <string name="share_history_subject">" compartido vía OsmAnd"</string>
     <string name="show_on_map">Mostrar en el mapa</string>
     <string name="release_2_4">"
- • Nueva búsqueda poderosa de texto libre
+ • Nueva y muy poderosa búsqueda por texto libre
 
  • Integración con el sistema de audio del automóvil y altavoces del teléfono vía Bluetooth
 
