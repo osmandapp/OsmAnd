@@ -66,19 +66,34 @@ public class CollatorStringMatcher implements StringMatcher {
 	 * @return true if part is contained in base
 	 */
 	public static boolean ccontains(Collator collator, String base, String part) {
-		int pos = 0;
-		if (part.length() > 3) {
-			// improve searching by searching first 3 characters
-			pos = cindexOf(collator, pos, part.substring(0, 3), base);
-			if (pos == -1) {
-				return false;
+//		int pos = 0;
+//		if (part.length() > 3) {
+//			// improve searching by searching first 3 characters
+//			pos = cindexOf(collator, pos, part.substring(0, 3), base);
+//			if (pos == -1) {
+//				return false;
+//			}
+//		}
+//		pos = cindexOf(collator, pos, part, base);
+//		if (pos == -1) {
+//			return false;
+//		}
+//		return true;
+		
+		if (base.length() <= part.length())
+			return collator.equals(base, part);
+		
+		for (int pos = 0; pos <= base.length() - part.length() + 1; pos++) {
+			String temp = base.substring(pos, base.length());
+			
+			for (int length = temp.length(); length >= 0; length--) {
+				String temp2 = temp.substring(0,  length);
+				if (collator.equals(temp2, part)) 
+					return true;
 			}
 		}
-		pos = cindexOf(collator, pos, part, base);
-		if (pos == -1) {
-			return false;
-		}
-		return true;
+		
+		return false;
 	}
 
 	private static int cindexOf(Collator collator, int start, String part, String base) {
