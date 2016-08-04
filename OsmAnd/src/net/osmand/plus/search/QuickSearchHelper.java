@@ -206,11 +206,12 @@ public class QuickSearchHelper implements ResourceListener {
 		public boolean search(SearchPhrase phrase, SearchUICore.SearchResultMatcher resultMatcher) {
 			SearchHistoryHelper helper = SearchHistoryHelper.getInstance(app);
 			List<SearchHistoryHelper.HistoryEntry> points = helper.getHistoryEntries();
+			int p = 0;
 			for (SearchHistoryHelper.HistoryEntry point : points) {
 				SearchResult sr = new SearchResult(phrase);
 				sr.localeName = point.getName().getName();
 				sr.object = point;
-				sr.priority = SEARCH_HISTORY_OBJECT_PRIORITY;
+				sr.priority = SEARCH_HISTORY_OBJECT_PRIORITY + (p++);  
 				sr.objectType = ObjectType.RECENT_OBJ;
 				sr.location = new LatLon(point.getLat(), point.getLon());
 				sr.preferredZoom = 17;
