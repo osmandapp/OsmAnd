@@ -38,7 +38,7 @@ public class Street extends MapObject {
 
 	public void addBuildingCheckById(Building building) {
 		for (Building b : buildings) {
-			if (b.getId().longValue() == building.getId().longValue()) {
+			if (b.equals(building)) {
 				return;
 			}
 		}

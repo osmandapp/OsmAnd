@@ -1,6 +1,10 @@
 package net.osmand.data;
 
 
+import java.util.Collections;
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 import net.osmand.util.Algorithms;
 
 public class Building extends MapObject {
@@ -10,6 +14,7 @@ public class Building extends MapObject {
 	private BuildingInterpolation interpolationType;
 	private int interpolationInterval;
 	private String name2;
+	private Map<String, LatLon> entrances = null;
 	
 	public enum BuildingInterpolation {
 		ALL(-1), EVEN(-2), ODD(-3), ALPHABETIC(-4);
@@ -36,6 +41,20 @@ public class Building extends MapObject {
 	
 	public String getPostcode() {
 		return postcode;
+	}
+	
+	public Map<String, LatLon> getEntrances() {
+		if(entrances == null) {
+			return Collections.emptyMap();
+		}
+		return entrances;
+	}
+	
+	public void addEntrance(String ref, LatLon location) {
+		if(entrances == null) {
+			entrances = new LinkedHashMap<>();
+		}
+		entrances.put(ref, location);
 	}
 	
 	public int getInterpolationInterval() {
@@ -145,6 +164,16 @@ public class Building extends MapObject {
 			return new LatLon(interpolation * (lat2 - lat1) + lat1, interpolation * (lon2 - lon1) + lon1);
 		}
 		return loc;
+	}
+	
+	
+	@Override
+	public boolean equals(Object o) {
+		boolean res = super.equals(o);
+		if (res && o instanceof Building) {
+			return Algorithms.stringsEqual(((MapObject) o).getName(), getName());
+		}
+		return res;
 	}
 
 }

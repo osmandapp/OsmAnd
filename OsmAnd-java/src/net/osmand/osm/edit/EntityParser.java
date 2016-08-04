@@ -201,6 +201,16 @@ public class EntityParser {
 			p = e.getTag(OSMTagKey.POSTAL_CODE.getValue());
 		}
 		b.setPostcode(p);
+		if(e instanceof Way) {
+			List<Node> nodes = ((Way) e).getNodes();
+			for(int i = 0; i < nodes.size(); i++) {
+				Node node = nodes.get(i);
+				if(node != null && "yes".equals(node.getTag(OSMTagKey.ENTRANCE)) && 
+						!Algorithms.isEmpty(node.getTag(OSMTagKey.REF))) {
+					b.addEntrance(node.getTag(OSMTagKey.REF), node.getLatLon());
+				}
+			}
+		}
 		return b;
 	}
 	
