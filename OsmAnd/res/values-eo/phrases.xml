@@ -44,7 +44,7 @@
 	<string name="poi_user_defined_other">Propre difinita</string>
 
 	<string name="poi_bakery">Panejo</string>
-	<string name="poi_palaeontological_site">Paleontologa fosejo</string>
+	<string name="poi_palaeontological_site">Paleontologia ejo</string>
 
 	<string name="poi_alcohol">Alkohol-vendejo</string>
 	<string name="poi_cheese">Framaĝ-vendejo</string>
@@ -401,7 +401,7 @@
 	<string name="poi_driving_school">Stirlernejo</string>
 	<string name="poi_college">Kolegio</string>
 	<string name="poi_waterway_turning_point">Marnavigada turniĝejo</string>
-	<string name="poi_dam">Digo</string>
+	<string name="poi_dam">Akvobaraĵo</string>
 	<string name="poi_weir">Riversojlo</string>
 	<string name="poi_breakwater">Ondorompilo</string>
 	<string name="poi_groyne">Ondorompileto</string>
@@ -674,7 +674,7 @@
 	<string name="poi_volleyball">Flugpilkado</string>
 
 	<string name="poi_artwork">Artverko</string>
-	<string name="poi_archaeological_site">Arĥeologia fosejo</string>
+	<string name="poi_archaeological_site">Arĥeologia ejo</string>
 	<string name="poi_battlefield">Batalejo</string>
 	<string name="poi_boundary_stone">Limŝtono</string>
 	<string name="poi_historic_cannon">Pafilego historia</string>
@@ -2468,4 +2468,82 @@
 	<string name="poi_karting">Aŭteto-konkurso (karting)</string>
 	<string name="poi_badminton">Badmintono</string>
 	<string name="poi_judo">Ĵudo</string>
+	<string name="poi_disc_golf">Disk-golfo (ĵetrond-golfo)</string>
+	<string name="poi_futsal">Futsalo</string>
+	<string name="poi_rc_car">Konkurso de aŭtomobiloj telestirataj</string>
+	<string name="poi_squash">Kvarmurpilkado (skvaŝo)</string>
+	<string name="poi_shuffleboard">Shuffleboard</string>
+	<string name="poi_lacrosse">Kanada bastonludo (lacrosse)</string>
+	<string name="poi_boxing">Boksado</string>
+
+	<string name="poi_official_name">Oficiala nomo</string>
+
+	<string name="poi_dyke">Digo</string>
+	<string name="poi_dolphin">Dukdalbo</string>
+
+	<string name="poi_forestry_compartment">Vojmontrilo: arbara sekcio</string>
+	<string name="poi_forestry_allotment">Vojmontrilo: arbara parcelo</string>
+	<string name="poi_construction_yes">Dum konstruado</string>
+	<string name="poi_atm_yes">Bankaŭtomato: jes</string>
+	<string name="poi_atm_no">Bankaŭtomato: ne</string>
+
+	<string name="poi_firepit">Lignofajrejo</string>
+	<string name="poi_street_cabinet">Skatolo diskonektiga</string>
+
+	<string name="poi_fair_trade_yes">Justa komerco: jes</string>
+	<string name="poi_fair_trade_no">Justa komerco: ne</string>
+	<string name="poi_fair_trade_only">Nur produktoj de justa komerco</string>
+
+	<string name="poi_ice_hockey">Glacihokeo</string>
+	<string name="poi_bandy">Glitpilkado</string>
+
+	<string name="poi_protected_area">Naturprotektejo</string>
+	<string name="poi_protection_title">Tipo de protekto</string>
+	<string name="poi_protection_object_historic">Protekto de: historio</string>
+	<string name="poi_protection_object_nature">Protekto de: naturo</string>
+	<string name="poi_protection_object_habitat">Protekto de: vivejo</string>
+	<string name="poi_protection_object_water">Protekto de: akvo</string>
+
+	<string name="poi_nuclear_explosion_country">Eksplodo: lando</string>
+	<string name="poi_nuclear_explosion_site">Eksplodo:ejo</string>
+	<string name="poi_nuclear_explosion_type_underground_shaft">Eksploda speco: subtera, ŝakto</string>
+	<string name="poi_nuclear_explosion_type_underground_tunnel">Eksploda speco: subtera: tunelo</string>
+	<string name="poi_nuclear_explosion_type_atmospheric">Eksploda speco: atmosfera</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_airdrop">Eksploda speco: atmosfera, ĵetaĵo</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_surface_tower">Eksploda speco: atmosfera, surtera, turo</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_balloon">Eksploda speco: atmosfera, balono</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_atmospheric_surface">Eksploda speco: atmosfera, surtera</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_water_surface_barge">Eksploda speco: atmosfera, surakva, ŝipo</string>
+	<string name="poi_nuclear_explosion_type_underground">Eksploda speco: subtera</string>
+	<string name="poi_nuclear_explosion_type_cratering_burst">Eksploda speco: malprofund-subtera</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_rocket_or_missile">Eksploda speco: atmosfera, raketo aŭ misilo</string>
+	<string name="poi_nuclear_explosion_type_space">Eksploda speco: spaco (altitudo pli ol 80 km)</string>
+	<string name="poi_nuclear_explosion_type_underwater">Eksploda speco: subakva</string>
+	<string name="poi_nuclear_explosion_date_utc">Eksploda dato (UTC)</string>
+	<string name="poi_nuclear_explosion_shot_name_en">Eksploda nomo (angle)</string>
+	<string name="poi_nuclear_explosion_series">Eksploda serio</string>
+	<string name="poi_nuclear_explosion_time_utc">Eksploda tempo (UTC)</string>
+	<string name="poi_addr_housename">Nomo de domo</string>
+	<string name="poi_plant_nursery">Plantejo</string>
+
+	<string name="poi_religion">Religiaĵ-vendejo</string>
+
+	<string name="poi_compressed_air_yes">Kunpremilo: jes</string>
+	<string name="poi_compressed_air_no">Kunpremilo: ne</string>
+
+	<string name="poi_car_wash_yes">Aŭtopurigejo: jes</string>
+
+	<string name="poi_vacuum_cleaner_yes">Polvosuĉilo: jes</string>
+	<string name="poi_vacuum_cleaner_no">Polvosuĉilo: ne</string>
+	<string name="poi_amenity_vacuum_cleaner">Polvosuĉilo</string>
+
+	<string name="poi_water_tap">Akvokrano</string>
+	<string name="poi_button_operated_yes">Butonprema: jes</string>
+	<string name="poi_button_operated_no">Butonprema: ne</string>
+
+	<string name="poi_bicycle_repair_station">Bicikla mem-riparejo</string>
+	<string name="poi_sport_free_flying">Glisparaŝutado</string>
+	<string name="poi_free_flying_site_takeoff">Glisparaŝutado: elteriĝejo</string>
+	<string name="poi_free_flying_site_landing">Glisparaŝutado: surteriĝejo</string>
+	<string name="poi_free_flying_site_toplanding">Glisparaŝutado: surteriĝeja montpinto</string>
 	</resources>
