@@ -682,7 +682,7 @@ Tesela mapak zuzenean sareko iturburuetatik eskuratu daitezke, edo lineaz kanpor
   <string name="left">ezkerraldera</string>
   <string name="front_left">ezker-aurrealdera</string>
   <string name="oclock">puntuan</string>
-  <string name="towards">bidean</string>
+  <string name="towards">honuntz</string>
   <string name="accuracy">Zehastasuna</string>
   <string name="altitude">Altuera</string>
   <string name="no_info">Informaziorik ez</string>
@@ -2057,7 +2057,7 @@ Orain, {2} MB daude eskuragarri.</string>
  • Hobetutako ibilbide gidatzea, ahots hitzemateak, erraia aldaketaren abisua.
 
 
- • Hobetutako garraio geruza
+ • Hobetutako garraio geruza, ibilbidearen errendatzearekin.
 
 
  • Hizkuntza geihago eta eskualdeetako hizkuntzak gehitu dira
