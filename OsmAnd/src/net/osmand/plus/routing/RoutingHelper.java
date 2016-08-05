@@ -709,7 +709,7 @@ public class RoutingHelper {
 	}
 	
 		
-	public static String formatStreetName(String name, String ref, String destination) {
+	public String formatStreetName(String name, String ref, String destination) {
 	//Original version returned:
 	// 1. ref + " " + dest
 	// 2. dest
