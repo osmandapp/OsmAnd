@@ -4,6 +4,7 @@
 		This file is manually maintained in res/values-en-rGB and should ONLY contain strings where a different spelling should be used for English as used in the United Kingdom
 	-->
 
+	<string name="towards">towards</string>
 	<string name="access_default_color">Default colour</string>
 	<string name="rendering_value_walkingRoutesScopeOSMC_name">Colouring according to route scope</string>
 	<string name="rendering_value_walkingRoutesOSMC_name">Colouring according to OSMC</string>
