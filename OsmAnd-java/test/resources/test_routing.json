@@ -172,5 +172,25 @@
     "expectedResults": {
       "6346622": "true"
     }
+  },
+  {
+    "testName": "16.Offline Routing: maxheight not supported yet? https://github.com/osmandapp/Osmand/issues/1830",
+    "params": {
+      "vehicle": "car",
+      "short_way": "true",
+      "maxheight": "3",
+      "planRoadDirection": "-1"
+    },
+    "startPoint": {
+      "latitude": 45.8524068832173,
+      "longitude": 35.40013790130615
+    },
+    "endPoint": {
+      "latitude": 45.8515661945522,
+      "longitude": 35.39499878883362
+    },
+    "expectedResults": {
+      "7423385": "false"
+    }
   }
 ]
