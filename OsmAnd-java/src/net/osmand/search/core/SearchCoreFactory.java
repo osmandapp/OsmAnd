@@ -157,7 +157,7 @@ public class SearchCoreFactory {
 	
 	public static class SearchAddressByNameAPI extends SearchBaseAPI {
 		
-		private static final int DEFAULT_ADDRESS_BBOX_RADIUS = 1000*1000;
+		private static final int DEFAULT_ADDRESS_BBOX_RADIUS = 200*1000;
 		private static final int LIMIT = 10000;
 		
 		
@@ -199,7 +199,8 @@ public class SearchCoreFactory {
 			// phrase.isLastWord(ObjectType.CITY, ObjectType.VILLAGE, ObjectType.POSTCODE) || phrase.isLastWord(ObjectType.REGION)
 			if (phrase.isNoSelectedType() || phrase.getRadiusLevel() >= 2) {
 				initAndSearchCities(phrase, resultMatcher);
-				resultMatcher.apiSearchFinished(this, phrase);
+				// not publish results (let it sort)
+				// resultMatcher.apiSearchFinished(this, phrase);
 				searchByName(phrase, resultMatcher);
 			}
 			return true;
@@ -239,7 +240,7 @@ public class SearchCoreFactory {
 					res.localeRelatedObjectName = res.file.getRegionName();
 					res.relatedObject = res.file;
 					res.location = c.getLocation();
-					res.priority = 1;
+					res.priority = SEARCH_ADDRESS_BY_NAME_PRIORITY;
 					res.priorityDistance = 0.1;
 					res.objectType = ObjectType.CITY;
 					if(nm.matches(res.localeName) || nm.matches(res.otherNames)) {
