@@ -578,7 +578,7 @@
 	<string name="poi_optometrist">Okulisto</string>
 	<string name="poi_physiotherapist">Fizioterapiisto</string>
 	<string name="poi_podiatrist">Piedisto</string>
-	<string name="poi_psychotherapist">Psiĥoterapiisto</string>
+	<string name="poi_psychotherapist">Psikoterapiisto</string>
 	<string name="poi_healthcare_rehabilitation">Rekapabligo</string>
 	<string name="poi_speech_therapist">Parolkuracisto</string>
 	<string name="poi_healthcare_yes">Medicinejo</string>
@@ -2613,4 +2613,27 @@
 	<string name="poi_health_service_nursing_no">San-servo: flegado: ne</string>
 	<string name="poi_health_service_counselling_yes">San-servo: konsilado: jes</string>
 	<string name="poi_health_service_counselling_no">San-servo: konsilado: ne</string>
+	<string name="poi_health_service_examination_yes">San-servo: ekzameno: jes</string>
+	<string name="poi_health_service_examination_no">San-servo: ekzameno: ne</string>
+	<string name="poi_health_service_child_care_yes">San-servo: zorgado pri infanoj: jes</string>
+	<string name="poi_health_service_child_care_no">San-servo: zorgado pri infanoj: ne</string>
+	<string name="poi_health_service_prevention_yes">San-servo: antaŭmalhelpo de malsanoj: jes</string>
+	<string name="poi_health_service_prevention_no">San-servo: antaŭmalhelpo de malsanoj: ne</string>
+	<string name="poi_health_service_prevention_vaccination_yes">San-servo: vakcinado: jes</string>
+	<string name="poi_health_service_prevention_vaccination_no">San-servo: vakcinado: ne</string>
+	<string name="poi_health_service_support_yes">San-servo: apogo psika: jes</string>
+	<string name="poi_health_service_support_no">San-servo: apogo psika: ne</string>
+	<string name="poi_health_service_test_yes">San-servo: testoj: jes</string>
+	<string name="poi_health_service_test_no">San-servo: testoj: ne</string>
+
+	<string name="poi_health_facility_type_office">San-servejo: kabineto de kuracisto</string>
+	<string name="poi_health_facility_type_field_hospital">San-servejo: kampa malsanulejo</string>
+	<string name="poi_fire_hydrant_diameter">Diametro de hidranto</string>
+	<string name="poi_fire_hydrant_pressure">Premo de hidranto</string>
+	<string name="poi_fire_hydrant_count">Kiom da hidrantoj</string>
+	<string name="poi_depth">Profundo</string>
+
+	<string name="poi_telescope">Teleskopo</string>
+	<string name="poi_health_facility_type_counselling_centre">San-servejo: kuracistejo</string>
+	<string name="poi_health_facility_type_laboratory">San-servejo: laboratorio</string>
 	</resources>
