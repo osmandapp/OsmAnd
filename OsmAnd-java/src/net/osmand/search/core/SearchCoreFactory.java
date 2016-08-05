@@ -50,6 +50,7 @@ import com.jwetherell.openmap.common.UTMPoint;
 
 public class SearchCoreFactory {
 	
+	public static final int MAX_DEFAULT_SEARCH_RADIUS = 7;
 	
 	//////////////// CONSTANTS //////////
 	public static final int SEARCH_REGION_API_PRIORITY = 3;
@@ -90,6 +91,11 @@ public class SearchCoreFactory {
 			return 1;
 		}
 		
+		@Override
+		public boolean isSearchMoreAvailable(SearchPhrase phrase) {
+			return phrase.getRadiusLevel() < MAX_DEFAULT_SEARCH_RADIUS;
+		}
+		
 		protected void subSearchApiOrPublish(SearchPhrase phrase, 
 				SearchResultMatcher resultMatcher, SearchResult res, SearchBaseAPI api)
 				throws IOException {
@@ -113,8 +119,6 @@ public class SearchCoreFactory {
 	
 	public static class SearchRegionByNameAPI extends SearchBaseAPI {
 
-		
-
 		@Override
 		public boolean search(SearchPhrase phrase, SearchResultMatcher resultMatcher) {
 			for (BinaryMapIndexReader bmir : phrase.getOfflineIndexes()) {
@@ -135,6 +139,11 @@ public class SearchCoreFactory {
 				}
 			}
 			return true;
+		}
+		
+		@Override
+		public boolean isSearchMoreAvailable(SearchPhrase phrase) {
+			return false;
 		}
 		
 		@Override
@@ -174,6 +183,12 @@ public class SearchCoreFactory {
 				return SEARCH_ADDRESS_BY_NAME_API_PRIORITY;
 			}
 			return SEARCH_ADDRESS_BY_NAME_API_PRIORITY_RADIUS2;
+		}
+		
+		@Override
+		public boolean isSearchMoreAvailable(SearchPhrase phrase) {
+			// case when street is not found for given city is covered by SearchStreetByCityAPI
+			return getSearchPriority(phrase) == -1 && super.isSearchMoreAvailable(phrase);
 		}
 
 		@Override
@@ -450,16 +465,17 @@ public class SearchCoreFactory {
 				return -1;
 			}
 			if(p.hasObjectType(ObjectType.POI_TYPE)) {
-				if(p.getRadiusLevel() > 1) {
-					return SEARCH_AMENITY_BY_NAME_API_PRIORITY_IF_POI_TYPE;
-				} else {
-					return -1;
-				}
+				return -1;
 			}
 			if(p.getUnknownSearchWordLength() > 3 || p.getRadiusLevel() > 1) {
 				return SEARCH_AMENITY_BY_NAME_API_PRIORITY_IF_3_CHAR;
 			}
 			return -1;
+		}
+		
+		@Override
+		public boolean isSearchMoreAvailable(SearchPhrase phrase) {
+			return super.isSearchMoreAvailable(phrase) && getSearchPriority(phrase) != -1;
 		}
 	}
 	
@@ -532,6 +548,11 @@ public class SearchCoreFactory {
 		}
 		
 		@Override
+		public boolean isSearchMoreAvailable(SearchPhrase phrase) {
+			return false;
+		}
+		
+		@Override
 		public int getSearchPriority(SearchPhrase p) {
 			if (p.hasObjectType(ObjectType.POI) || p.hasObjectType(ObjectType.POI_TYPE)) {
 				return -1;
@@ -551,6 +572,10 @@ public class SearchCoreFactory {
 			this.types = types;
 		}
 		
+		@Override
+		public boolean isSearchMoreAvailable(SearchPhrase phrase) {
+			return getSearchPriority(phrase) != -1 && super.isSearchMoreAvailable(phrase);
+		}
 
 		private Map<PoiCategory, LinkedHashSet<String>> acceptedTypes = new LinkedHashMap<PoiCategory,
 				LinkedHashSet<String>>();
@@ -646,6 +671,7 @@ public class SearchCoreFactory {
 					return resultMatcher.isCancelled();
 				}
 			};
+			
 		}
 
 		private SearchPoiTypeFilter getPoiTypeFilter(AbstractPoiType pt) {
@@ -698,6 +724,12 @@ public class SearchCoreFactory {
 		private SearchBaseAPI streetsAPI;
 		public SearchStreetByCityAPI(SearchBuildingAndIntersectionsByStreetAPI streetsAPI) {
 			this.streetsAPI = streetsAPI;
+		}
+		
+		@Override
+		public boolean isSearchMoreAvailable(SearchPhrase phrase) {
+			// case when street is not found for given city is covered here
+			return phrase.getRadiusLevel() == 1 && getSearchPriority(phrase) != -1;
 		}
 		
 		private static int LIMIT = 10000;
@@ -761,6 +793,11 @@ public class SearchCoreFactory {
 	
 	public static class SearchBuildingAndIntersectionsByStreetAPI extends SearchBaseAPI {
 		Street cacheBuilding;
+		
+		@Override
+		public boolean isSearchMoreAvailable(SearchPhrase phrase) {
+			return false;
+		}
 		
 		@Override
 		public boolean search(SearchPhrase phrase, final SearchResultMatcher resultMatcher) throws IOException {
@@ -889,6 +926,10 @@ public class SearchCoreFactory {
 	
 	public static class SearchLocationAndUrlAPI extends SearchBaseAPI {
 		
+		@Override
+		public boolean isSearchMoreAvailable(SearchPhrase phrase) {
+			return false;
+		}
 
 //		newFormat = PointDescription.FORMAT_DEGREES;
 //		newFormat = PointDescription.FORMAT_MINUTES;

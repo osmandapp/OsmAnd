@@ -354,7 +354,14 @@ public class SearchUICore {
 	}
 	
 	
-	
+	public boolean isSearchMoreAvailable(SearchPhrase phrase) {
+		for(SearchCoreAPI api : apis) {
+			if(api.getSearchPriority(phrase) >= 0 && api.isSearchMoreAvailable(phrase)) {
+				return true;
+			}
+		}
+		return false;
+	}
 
 	private void searchInBackground(final SearchPhrase phrase, SearchResultMatcher matcher) {
 		preparePhrase(phrase);

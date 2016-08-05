@@ -14,4 +14,10 @@ public interface SearchCoreAPI {
 
 	public boolean search(SearchPhrase phrase, SearchResultMatcher resultMatcher) throws IOException;
 
+	/**
+	 * @param phrase
+	 * @return true if search more available (should be consistent with -1 search priority)
+	 */
+	public boolean isSearchMoreAvailable(SearchPhrase phrase);
+
 }
