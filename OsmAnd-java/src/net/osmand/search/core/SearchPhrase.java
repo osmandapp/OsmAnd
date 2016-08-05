@@ -423,8 +423,18 @@ public class SearchPhrase {
 
 				@Override
 				public int compare(BinaryMapIndexReader o1, BinaryMapIndexReader o2) {
-					LatLon rc1 = o1.getRegionCenter();
-					LatLon rc2 = o2.getRegionCenter();
+ 					LatLon rc1 = null;
+					if(o1.containsMapData()) {
+						rc1 = o1.getMapIndexes().get(0).getCenterLatLon();
+					} else {
+						rc1 = o2.getRegionCenter();
+					}
+					LatLon rc2 = null; 
+					if(o2.containsMapData()) {
+						rc2 = o2.getMapIndexes().get(0).getCenterLatLon();
+					} else {
+						rc2 = o2.getRegionCenter();
+					}
 					double d1 = rc1 == null ? 10000000d : MapUtils.getDistance(rc1, ll);
 					double d2 = rc2 == null ? 10000000d : MapUtils.getDistance(rc2, ll);
 					return Double.compare(d1, d2);

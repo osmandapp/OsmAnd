@@ -160,6 +160,7 @@ public class BinaryMapIndexReader {
 		routingIndexes = new ArrayList<RouteRegion>(referenceToSameFile.routingIndexes);
 		indexes = new ArrayList<BinaryIndexPart>(referenceToSameFile.indexes);
 		basemap = referenceToSameFile.basemap;
+		calculateCenterPointForRegions();
 	}
 
 
@@ -268,13 +269,19 @@ public class BinaryMapIndexReader {
 			for (MapIndex map : mapIndexes) {
 				if (Algorithms.objectEquals(reg.name, map.name)) {
 					if (map.getRoots().size() > 0) {
-						MapRoot mapRoot = map.getRoots().get(map.getRoots().size() - 1);
-						double cy = (MapUtils.get31LatitudeY(mapRoot.getBottom()) + MapUtils.get31LatitudeY(mapRoot.getTop())) / 2;
-						double cx = (MapUtils.get31LongitudeX(mapRoot.getLeft()) + MapUtils.get31LongitudeX(mapRoot.getRight())) / 2;
-						reg.calculatedCenter = new LatLon(cy, cx);
+						reg.calculatedCenter = map.getCenterLatLon();
 						break;
 					}
 				}
+			}
+			if(reg.calculatedCenter == null) {
+				for (RouteRegion map : routingIndexes) {
+					if (Algorithms.objectEquals(reg.name, map.name)) {
+						reg.calculatedCenter = new LatLon(map.getTopLatitude() / 2 + map.getBottomLatitude() / 2,
+								map.getLeftLongitude() / 2 + map.getRightLongitude() / 2);
+						break;
+					}
+				}	
 			}
 		}
 	}
@@ -286,7 +293,7 @@ public class BinaryMapIndexReader {
 	public List<MapIndex> getMapIndexes() {
 		return mapIndexes;
 	}
-
+	
 	public List<RouteRegion> getRoutingIndexes() {
 		return routingIndexes;
 	}
@@ -1794,6 +1801,16 @@ public class BinaryMapIndexReader {
 				return m.get(v);
 			}
 			return null;
+		}
+
+		public LatLon getCenterLatLon() {
+			if(roots.size() == 0) {
+				return null;
+			}
+			MapRoot mapRoot = roots.get(roots.size() - 1);
+			double cy = (MapUtils.get31LatitudeY(mapRoot.getBottom()) + MapUtils.get31LatitudeY(mapRoot.getTop())) / 2;
+			double cx = (MapUtils.get31LongitudeX(mapRoot.getLeft()) + MapUtils.get31LongitudeX(mapRoot.getRight())) / 2;
+			return  new LatLon(cy, cx);
 		}
 
 		public List<MapRoot> getRoots() {
