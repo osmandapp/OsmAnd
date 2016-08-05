@@ -234,7 +234,7 @@ public class SearchCoreFactory {
 					SearchResult res = new SearchResult(phrase);
 					res.object = c;
 					res.file = (BinaryMapIndexReader) c.getReferenceFile();
-					res.localeName = c.getName(phrase.getSettings().getLang(), true);
+					res.localeName = c.getName(phrase.getSettings().getLang(), phrase.getSettings().isTransliterate());
 					res.otherNames = c.getAllNames(true);
 					res.localeRelatedObjectName = res.file.getRegionName();
 					res.relatedObject = res.file;
@@ -276,7 +276,7 @@ public class SearchCoreFactory {
 						SearchResult sr = new SearchResult(phrase);
 						sr.object = object;
 						sr.file = currentFile[0];
-						sr.localeName = object.getName(phrase.getSettings().getLang(), true);
+						sr.localeName = object.getName(phrase.getSettings().getLang(), phrase.getSettings().isTransliterate());
 						sr.otherNames = object.getAllNames(true);
 						sr.localeRelatedObjectName = sr.file.getRegionName();
 						sr.relatedObject = sr.file;
@@ -294,7 +294,7 @@ public class SearchCoreFactory {
 								return false;
 							}
 							sr.objectType = ObjectType.STREET;
-							sr.localeRelatedObjectName = ((Street)object).getCity().getName(phrase.getSettings().getLang(), true);
+							sr.localeRelatedObjectName = ((Street)object).getCity().getName(phrase.getSettings().getLang(), phrase.getSettings().isTransliterate());
 							sr.relatedObject = ((Street)object).getCity();
 						} else if (object instanceof City) {
 							CityType type = ((City)object).getType();
@@ -334,7 +334,7 @@ public class SearchCoreFactory {
 									}
 								}
 								if(c != null) {
-									sr.localeRelatedObjectName = c.getName(phrase.getSettings().getLang(), true);
+									sr.localeRelatedObjectName = c.getName(phrase.getSettings().getLang(), phrase.getSettings().isTransliterate());
 									sr.relatedObject = c;
 									sr.distRelatedObjectName = minDist; 
 								}
@@ -372,7 +372,7 @@ public class SearchCoreFactory {
 					for (SearchResult res : immediateResults) {
 						if(res.objectType == ObjectType.STREET) {
 							City ct = ((Street) res.object).getCity();
-							phrase.countUnknownWordsMatch(res, ct.getName(phrase.getSettings().getLang(), true),
+							phrase.countUnknownWordsMatch(res, ct.getName(phrase.getSettings().getLang(), phrase.getSettings().isTransliterate()),
 									ct.getAllNames(true));
 							subSearchApiOrPublish(phrase, resultMatcher, res, streetsApi);
 						} else {
@@ -417,7 +417,7 @@ public class SearchCoreFactory {
 							}
 							SearchResult sr = new SearchResult(phrase);
 							sr.otherNames = object.getAllNames(true);
-							sr.localeName = object.getName(phrase.getSettings().getLang(), true);
+							sr.localeName = object.getName(phrase.getSettings().getLang(), phrase.getSettings().isTransliterate());
 							if(phrase.isUnknownSearchWordComplete()) {
 								if(!nm.matches(sr.localeName) || !nm.matches(sr.otherNames)) {
 									return false;
@@ -640,7 +640,7 @@ public class SearchCoreFactory {
 				@Override
 				public boolean publish(Amenity object) {
 					SearchResult res = new SearchResult(phrase);
-					res.localeName = object.getName(phrase.getSettings().getLang(), true);
+					res.localeName = object.getName(phrase.getSettings().getLang(), phrase.getSettings().isTransliterate());
 					res.otherNames = object.getAllNames(true);
 					if (Algorithms.isEmpty(res.localeName)) {
 						AbstractPoiType st = types.getAnyPoiTypeByKey(object.getSubType());
@@ -746,7 +746,7 @@ public class SearchCoreFactory {
 				for (Street object : c.getStreets()) {
 
 					SearchResult res = new SearchResult(phrase);
-					res.localeName = object.getName(phrase.getSettings().getLang(), true);
+					res.localeName = object.getName(phrase.getSettings().getLang(), phrase.getSettings().isTransliterate());
 					res.otherNames = object.getAllNames(true);
 					if(object.getName().startsWith("<")) {
 						// streets related to city
@@ -756,7 +756,7 @@ public class SearchCoreFactory {
 							&& !(nm.matches(res.localeName) || nm.matches(res.otherNames))) {
 						continue;
 					}
-					res.localeRelatedObjectName = c.getName(phrase.getSettings().getLang(), true);
+					res.localeRelatedObjectName = c.getName(phrase.getSettings().getLang(), phrase.getSettings().isTransliterate());
 					res.object = object;
 					res.preferredZoom = 17;
 					res.file = sw.getResult().file;
@@ -865,14 +865,14 @@ public class SearchCoreFactory {
 						continue;
 					}
 					
-					res.localeName = b.getName(phrase.getSettings().getLang(), true);
+					res.localeName = b.getName(phrase.getSettings().getLang(), phrase.getSettings().isTransliterate());
 					res.otherNames = b.getAllNames(true);
 					res.object = b;
 					res.file = file;
 					res.priority = priority;
 					res.priorityDistance = 0;
 					res.relatedObject = s;
-					res.localeRelatedObjectName = s.getName(phrase.getSettings().getLang(), true);
+					res.localeRelatedObjectName = s.getName(phrase.getSettings().getLang(), phrase.getSettings().isTransliterate());
 					res.objectType = ObjectType.HOUSE;
 					if(interpolation) {
 						res.location = b.getLocation(b.interpolation(lw));
@@ -889,11 +889,11 @@ public class SearchCoreFactory {
 							continue;
 						}
 						res.otherNames = street.getAllNames(true);
-						res.localeName = street.getName(phrase.getSettings().getLang(), true);
+						res.localeName = street.getName(phrase.getSettings().getLang(), phrase.getSettings().isTransliterate());
 						res.object = street;
 						res.file = file;
 						res.relatedObject = s;
-						res.localeRelatedObjectName = s.getName(phrase.getSettings().getLang(), true);
+						res.localeRelatedObjectName = s.getName(phrase.getSettings().getLang(), phrase.getSettings().isTransliterate());
 						res.priorityDistance = 0;
 						res.objectType = ObjectType.STREET_INTERSECTION;
 						res.location = street.getLocation();

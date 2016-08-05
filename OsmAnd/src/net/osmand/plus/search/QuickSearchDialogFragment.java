@@ -471,7 +471,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		}
 		SearchSettings settings = searchUICore.getSearchSettings().setOriginalLocation(
 				new LatLon(searchLatLon.getLatitude(), searchLatLon.getLongitude()));
-		settings = settings.setLang(locale);
+		settings = settings.setLang(locale, false);
 		searchUICore.updateSettings(settings);
 		searchUICore.setOnResultsComplete(new Runnable() {
 			@Override

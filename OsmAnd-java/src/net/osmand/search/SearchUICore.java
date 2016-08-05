@@ -53,11 +53,11 @@ public class SearchUICore {
 	private MapPoiTypes poiTypes;
 	
 	
-	public SearchUICore(MapPoiTypes poiTypes, String locale) {
+	public SearchUICore(MapPoiTypes poiTypes, String locale, boolean transliterate) {
 		this.poiTypes = poiTypes;
 		taskQueue = new LinkedBlockingQueue<Runnable>();
 		searchSettings = new SearchSettings(new ArrayList<BinaryMapIndexReader>());
-		searchSettings = searchSettings.setLang(locale);
+		searchSettings = searchSettings.setLang(locale, transliterate);
 		phrase = new SearchPhrase(searchSettings, OsmAndCollator.primaryCollator());
 		currentSearchResult = new SearchResultCollection(phrase);
 		singleThreadedExecutor = new ThreadPoolExecutor(1, 1, 0L, TimeUnit.MILLISECONDS, taskQueue);
