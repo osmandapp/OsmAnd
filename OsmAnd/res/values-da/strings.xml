@@ -366,7 +366,7 @@ Kortfliser kan hentes direkte via online-kilder, eller kan fremstilles til offli
     <string name="left">til venstre</string>
     <string name="front_left">fremad til venstre</string>
     <string name="oclock">klokken</string>
-    <string name="towards">mod</string>
+    <string name="towards">Imod</string>
     <string name="accuracy">Nøjagtighed</string>
     <string name="altitude">Højde</string>
     <string name="no_info">Ingen information</string>
