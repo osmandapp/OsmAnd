@@ -621,13 +621,13 @@ Tesela mapak zuzenean sareko iturburuetatik eskuratu daitezke, edo lineaz kanpor
   
   
   
-  <string name="osmand_development_plugin_description">Erakutsi garapen eta debugging ezaugarriak, ibilbide simulazioa edo errenderizazio errendimenduaren bistaratzea esaterako.</string>
+  <string name="osmand_development_plugin_description">Gehigarri honek garapen eta arazte ezaugarriak azalaratzen ditu, ibilbide simulazioa edo errenderizazio errendimenduaren bistaratzea, edo ahots abisuak esaterako. Ezarpen hauek garatzaileentzako dira eta erabiltzaile arruntek ez dituzte behar.</string>
   <string name="plugins_screen">Gehigarriak</string>
   
   <string name="prefs_plugins_descr">Gehigarriek ezarpen aurreratuak eta funtzionalitate berriak aktibatzen dituzte</string>
   <string name="prefs_plugins">Gehigarriak</string>
   
-  <string name="osm_editing_plugin_description">Erakutsi OSMri laguntzeko beharrezkoak diren ezarpenak, POI objektuak sortzea / eraldatzea, OSM akats jakinarazpenak irekitzea / komentatzea eta sortutako GPX fitxategiak bidaltzea esaterako (OSM kredentzialak beharrezkoak ditu).</string>
+  <string name="osm_editing_plugin_description">Gehigarri honekin OsmAnd erabili daiteke OSM ekarpenak egiteko, POI objektuak sortzea edo eraldatzea, OSM akats jakinarazpenak irekitzea edo komentatzea eta sortutako GPX fitxategiak bidaltzea esaterako. OSM elkarlanean egindako, domeinu publikoko mapa proiektu global bat da, xehetasun gehiagorako bisitatu http://openstreetmap.org Parte hartze aktiboa eskertzen da, eta ekarpenak OsmAnd bertatik egin daitezke, aplikazioan OSM kredentzialak zehaztuz gero.</string>
   <string name="vector_maps_may_display_faster_on_some_devices">Ziurrenik bektore mapak azkarrago kargatu. Baliteke gailu batzuetan ongi ez funtzionatzea.</string>
   <string name="play_commands_of_currently_selected_voice">Erreproduzitu aukeratutako ahotsaren komandoak</string>
   <string name="debugging_and_development">OsmAnd garapena</string>
@@ -1719,7 +1719,7 @@ Honek {1} MB behar ditu behin betiko.
     <string name="route_distance">Distantzia:</string>
     <string name="route_duration">Denbora:</string>
     <string name="no_address_found">Ez da helbiderik zehaztu</string>
-    <string name="shared_string_near">Hurbil</string>
+    <string name="shared_string_near">+-</string>
     <string name="shared_string_hide">Ezkutatu</string>
     <string name="av_video_quality_low">Gutxieneko kalitatea</string>
     <string name="av_video_quality_high">Gehieneko kalitatea</string>
@@ -2517,27 +2517,27 @@ Aukera gehigarriak:
 • Gehitu, editatu eta ezabatu POI puntuak (penStreetMap.org erabiltzaileentzat)
 • OsMo - Monitorizatu zezenean beste gailu batzuk
 
-Lortu nabigazio fidagarria zure herrialdean - Frantzia, Alemania, Mexiko, Erresuma batua. Espainia Herbehereak, Estatu Batuak, Errusia, Brasil edo dena delarik.
+Lortu nabigazio fidagarria zure herrialdean - Frantzia, Alemania, Mexiko, Erresuma Batua. Espainia, Herbehereak, Estatu Batuak, Errusia, Brasil edo dena delarik.
 
-Plugins:
-• Contour maps and terrain shading https://goo.gl/7mojP8
- Contour lines data and terrain visualization added to the basic OsmAnd map.
+Gehigarriak:
+• Sestra-kurbak eta erliebe-itzalak https://goo.gl/7mojP8
+ Oinarrizko OsmAnd mapari serta-kurben datuak eta erliebearen bistaratzea gehitzen dio.
 
-• Ski maps https://goo.gl/pX6DxJ
- The info about ski pistes, cross-country skiing tracks, cable railways and ski lifts.
+• Ski mapak https://goo.gl/pX6DxJ
+ Aki pistak, trabesiazko eski ibilbideak, teleferikoak eta abarren informazioa.
 
-• Nautical map https://goo.gl/0hEdxm
- Special map style for viewing nautical navigation signs for arterial and nearshore marine navigation.
+• Itsas-mapak https://goo.gl/0hEdxm
+ Itsas eta ibai nabigaziorako markak ikusteko mapa berezia, ibaian zein itsasoan erabiltzeko.
 
-• Parking position https://goo.gl/6JxQXF
- Helps you mark the location of your parked vehicle and see how much time is left if the parking is time-limited.
+• Aparkalekua https://goo.gl/6JxQXF
+ Aparkatutako ibilgailuaren kokalekua markatzen eta geratzen zaizun denbora kontrolatzen laguntzen dizu denbora muga dagoenean.
 
-Stay tuned!
+Kontaktua mantendu!
 
 Twitter: https://twitter.com/osmandapp
 Facebook: https://www.facebook.com/osmandapp
 Site: http://osmand.net
 
-If you need help with OsmAnd application, please contact our support team: support@osmand.net. 
+OsmAnd aplikazioarekin laguntza behar baduzu, jarri kontaktuan gure laguntza taldearekin: support@osmand.net. 
  "</string>
     </resources>
