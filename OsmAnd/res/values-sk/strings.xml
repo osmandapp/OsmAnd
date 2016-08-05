@@ -139,7 +139,7 @@ Dlaždicové mapy môžete získať priamo zo zdrojov na Internete, alebo ich m�
     <string name="left">doľava</string>
     <string name="front_left">dopredu vľavo</string>
     <string name="oclock">hodín</string>
-    <string name="towards">k</string>
+    <string name="towards">smerom k</string>
     <string name="accuracy">Presnosť</string>
     <string name="altitude">Nadmorská výška</string>
     <string name="no_info">Žiadne info</string>
@@ -2375,7 +2375,7 @@ Ak potrebuje pomoc s aplikáciou OsmAnd, kontaktuje podporu: support@osmand.net.
  • Vylepšená hlasová navigácia a indikácia jazdných pruhov
 
 
- • Vylepšená vrstva hromadnej dopravy
+ • Vylepšená vrstva hromadnej dopravy s vykresľovaním trás
 
 
  • Pridané ďalšie jazykové a regionálne verzie
