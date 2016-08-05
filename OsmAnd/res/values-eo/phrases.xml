@@ -2609,4 +2609,8 @@
 	<string name="poi_nuclear_explosion_warhead">Eksplodo: misilo</string>
 	<string name="poi_nuclear_explosion_device">Eksplodo: aparato</string>
 
+	<string name="poi_health_service_nursing_yes">San-servo: flegado: jes</string>
+	<string name="poi_health_service_nursing_no">San-servo: flegado: ne</string>
+	<string name="poi_health_service_counselling_yes">San-servo: konsilado: jes</string>
+	<string name="poi_health_service_counselling_no">San-servo: konsilado: ne</string>
 	</resources>
