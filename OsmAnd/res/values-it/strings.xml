@@ -1950,7 +1950,7 @@ Attivando questa vista lo stile della mappa diventerà \'Inverno e sci\', mostra
     <string name="waypoint_visit_before">Visita prima</string>
     <string name="shared_string_collapse">Compatta</string>
     <string name="action_create">Azione crea</string>
-    <string name="action_modify">Modificato</string>
+    <string name="action_modify">Azione modifica</string>
     <string name="action_delete">Azione elimina</string>
     <string name="osm_edits">Modifiche OSM</string>
     <string name="osmand_parking_hour">h</string>
