@@ -763,84 +763,39 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 			@Override
 			public boolean publish(SearchResult object) {
-
 				if (paused) {
 					if (results.size() > 0) {
 						getResultCollection().addSearchResults(results, true, true);
 					}
 					return false;
 				}
-
 				switch (object.objectType) {
 					case SEARCH_API_FINISHED:
 						final SearchCoreAPI searchApi = (SearchCoreAPI) object.object;
-
 						final List<SearchResult> apiResults;
 						final SearchPhrase phrase = object.requiredSearchPhrase;
 						final SearchCoreAPI regionApi = regionResultApi;
 						final SearchResultCollection regionCollection = regionResultCollection;
-
 						final boolean hasRegionCollection = (searchApi == regionApi && regionCollection != null);
 						if (hasRegionCollection) {
 							apiResults = regionCollection.getCurrentSearchResults();
 						} else {
 							apiResults = results;
 						}
-
 						regionResultApi = null;
 						regionResultCollection = null;
 						results = new ArrayList<>();
-
-						app.runInUIThread(new Runnable() {
-							@Override
-							public void run() {
-								if (!paused) {
-									boolean appended = false;
-									if (getResultCollection() == null || getResultCollection().getPhrase() != phrase) {
-										SearchResultCollection resCollection = 
-												new SearchResultCollection(phrase);
-										resCollection.addSearchResults(results, true, true);
-										setResultCollection(resCollection);
-									} else {
-										getResultCollection().addSearchResults(apiResults, false, true );
-										appended = true;
-									}
-									if (!hasRegionCollection) {
-										updateSearchResult(getResultCollection(), appended);
-									}
-								}
-							}
-						});
+						showApiResults(apiResults, phrase, hasRegionCollection);
 						break;
 					case SEARCH_API_REGION_FINISHED:
 						regionResultApi = (SearchCoreAPI) object.object;
 						final SearchPhrase regionPhrase = object.requiredSearchPhrase;
 						regionResultCollection = new SearchResultCollection(regionPhrase);
 						regionResultCollection.addSearchResults(results, true, true);
-						app.runInUIThread(new Runnable() {
-							@Override
-							public void run() {
-								if (!paused) {
-									boolean appended = getResultCollection() != null && getResultCollection().getPhrase() == regionPhrase;
-									if (appended) {
-										SearchResultCollection resCollection = 
-												getResultCollection().combineWithCollection(regionResultCollection, false, true);
-										updateSearchResult(resCollection, true);
-									} else {
-										updateSearchResult(regionResultCollection, false);
-									}
-								}
-							}
-						});
+						showRegionResults(regionPhrase, regionResultCollection);
 						break;
 					case PARTIAL_LOCATION:
-						app.runInUIThread(new Runnable() {
-							@Override
-							public void run() {
-								foundPartialLocation = true;
-								updateToolbarButton();
-							}
-						});
+						showLocationToolbar();
 						break;
 					default:
 						results.add(object);
@@ -849,9 +804,62 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 				return false;
 			}
 
+			
+
 			@Override
 			public boolean isCancelled() {
 				return paused;
+			}
+		});
+	}
+	
+	private void showLocationToolbar() {
+		app.runInUIThread(new Runnable() {
+			@Override
+			public void run() {
+				foundPartialLocation = true;
+				updateToolbarButton();
+			}
+		});
+	}
+	
+	private void showApiResults(final List<SearchResult> apiResults, final SearchPhrase phrase,
+			final boolean hasRegionCollection) {
+		app.runInUIThread(new Runnable() {
+			@Override
+			public void run() {
+				if (!paused) {
+					boolean appended = false;
+					if (getResultCollection() == null || getResultCollection().getPhrase() != phrase) {
+						SearchResultCollection resCollection = new SearchResultCollection(phrase);
+						resCollection.addSearchResults(apiResults, true, true);
+						setResultCollection(resCollection);
+					} else {
+						getResultCollection().addSearchResults(apiResults, false, true );
+						appended = true;
+					}
+					if (!hasRegionCollection) {
+						updateSearchResult(getResultCollection(), appended);
+					}
+				}
+			}
+		});
+	}
+	
+	private void showRegionResults(final SearchPhrase regionPhrase, final SearchResultCollection regionResultCollection) {
+		app.runInUIThread(new Runnable() {
+			@Override
+			public void run() {
+				if (!paused) {
+					boolean appended = getResultCollection() != null && getResultCollection().getPhrase() == regionPhrase;
+					if (appended) {
+						SearchResultCollection resCollection = 
+								getResultCollection().combineWithCollection(regionResultCollection, false, true);
+						updateSearchResult(resCollection, true);
+					} else {
+						updateSearchResult(regionResultCollection, false);
+					}
+				}
 			}
 		});
 	}
