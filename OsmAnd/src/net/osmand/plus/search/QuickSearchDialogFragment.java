@@ -59,7 +59,6 @@ import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.search.QuickSearchHelper.SearchHistoryAPI;
 import net.osmand.search.SearchUICore;
 import net.osmand.search.SearchUICore.SearchResultCollection;
-import net.osmand.search.SearchUICore.SearchResultMatcher;
 import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchCoreAPI;
 import net.osmand.search.core.SearchCoreFactory.SearchAmenityTypesAPI;
@@ -74,7 +73,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class QuickSearchDialogFragment extends DialogFragment implements OsmAndCompassListener, OsmAndLocationListener {
 
@@ -636,6 +634,27 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	}
 
 	public void reloadCategories() {
+		if (app.isApplicationInitializing()) {
+			showProgressBar();
+			app.getAppInitializer().addListener(new AppInitializeListener() {
+				@Override
+				public void onProgress(AppInitializer init, AppInitializer.InitEvents event) {
+				}
+
+				@Override
+				public void onFinish(AppInitializer init) {
+					reloadCategoriesInternal();
+					if (!searching) {
+						hideProgressBar();
+					}
+				}
+			});
+		} else {
+			reloadCategoriesInternal();
+		}
+	}
+
+	private void reloadCategoriesInternal() {
 		try {
 			SearchResultCollection res = searchUICore.shallowSearch(SearchAmenityTypesAPI.class, 
 					"", null);
@@ -654,8 +673,29 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	}
 
 	public void reloadHistory() {
+		if (app.isApplicationInitializing()) {
+			showProgressBar();
+			app.getAppInitializer().addListener(new AppInitializeListener() {
+				@Override
+				public void onProgress(AppInitializer init, AppInitializer.InitEvents event) {
+				}
+
+				@Override
+				public void onFinish(AppInitializer init) {
+					reloadHistoryInternal();
+					if (!searching) {
+						hideProgressBar();
+					}
+				}
+			});
+		} else {
+			reloadHistoryInternal();
+		}
+	}
+
+	private void reloadHistoryInternal() {
 		try {
-			SearchResultCollection res = searchUICore.shallowSearch(SearchHistoryAPI.class, 
+			SearchResultCollection res = searchUICore.shallowSearch(SearchHistoryAPI.class,
 					"", null);
 			if (res != null) {
 				List<QuickSearchListItem> rows = new ArrayList<>();
@@ -687,6 +727,8 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		showProgressBar();
 		foundPartialLocation = false;
 		updateToolbarButton();
+		interruptedSearch = false;
+		searching = true;
 
 		if (app.isApplicationInitializing() && text.length() > 0) {
 			app.getAppInitializer().addListener(new AppInitializeListener() {
@@ -711,8 +753,6 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	}
 
 	private SearchResultCollection runCoreSearchInternal(String text) {
-		interruptedSearch = false;
-		searching = true;
 		return searchUICore.search(text, new ResultMatcher<SearchResult>() {
 
 			SearchResultCollection regionResultCollection = null;
@@ -785,6 +825,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 										List<SearchResult> res = new ArrayList<>(getResultCollection().getCurrentSearchResults());
 										res.addAll(regionResults);
 										SearchResultCollection resCollection = new SearchResultCollection(res, regionPhrase);
+										searchUICore.filterSearchDuplicateResults(regionPhrase, resCollection.getCurrentSearchResults());
 										updateSearchResult(resCollection, true);
 									} else {
 										updateSearchResult(regionResultCollection, false);
