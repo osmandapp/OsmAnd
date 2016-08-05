@@ -710,22 +710,49 @@ public class RoutingHelper {
 	
 		
 	public static String formatStreetName(String name, String ref, String destination) {
-		if(destination != null && destination.length() > 0){
-			if(ref != null && ref.length() > 0) {
-				destination = ref + " " + destination;
-			}
-			return destination;
-		} else if(name != null && name.length() > 0){
-			if(ref != null && ref.length() > 0) {
-				name = ref + " " + name;
-			}
-			return name;
-		} else {
-			if(ref == null) {
-				return "";
-			}
-			return ref;
+	//Original version returned:
+	// 1. ref + " " + dest
+	// 2. dest
+	// 3. ref + " " + name
+	// 4. name
+	// 5. ref
+	// 6. ""
+	//Now returns: (ref)+((" ")+name)+((" ")+"toward "+dest)
+
+		String formattedStreetName = "";
+		if (ref != null && ref.length() > 0) {
+			formattedStreetName = ref;
 		}
+		if (name != null && name.length() > 0) {
+			if (formattedStreetName.length() > 0) {
+				formattedStreetName = formattedStreetName + " ";
+			}
+			formattedStreetName = formattedStreetName + name;
+		}
+		if (destination != null && destination.length() > 0) {
+			if (formattedStreetName.length() > 0) {
+				formattedStreetName = formattedStreetName + " ";
+			}
+			formattedStreetName = formattedStreetName + app.getString(R.string.towards) + " " + destination;
+		}
+		return formattedStreetName;
+
+//		if(destination != null && destination.length() > 0){
+//			if(ref != null && ref.length() > 0) {
+//				destination = ref + " " + destination;
+//			}
+//			return destination;
+//		} else if(name != null && name.length() > 0){
+//			if(ref != null && ref.length() > 0) {
+//				name = ref + " " + name;
+//			}
+//			return name;
+//		} else {
+//			if(ref == null) {
+//				return "";
+//			}
+//			return ref;
+//		}
 	}
 	
 //	protected boolean isDistanceLess(float currentSpeed, double dist, double etalon, float defSpeed){
