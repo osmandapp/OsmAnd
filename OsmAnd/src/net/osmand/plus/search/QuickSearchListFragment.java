@@ -293,7 +293,7 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 	public void updateListAdapter(List<QuickSearchListItem> listItems, boolean appended) {
 		if (listAdapter != null) {
 			listAdapter.setListItems(listItems);
-			if (listAdapter.getCount() > 0 && !appended) {
+			if (!appended) {
 				getListView().setSelection(0);
 			}
 		}
