@@ -2239,7 +2239,9 @@ Ora, sono disponibili solo {2} MB.</string>
     <string name="osm_live_subscription_settings">Impostazioni della sottoscrizione</string>
     <string name="osm_live_ask_for_purchase">Per favore acquista prima la sottoscrizione a OSM Live</string>
 
-    <string name="osm_live_header">La sottoscrizione abilita agli aggiornamenti orari per tutte le mappe del mondo. La maggior parte degli incassi ritornano alla comunità OSM ed è corrisposto per ogni contributo OSM. Nel caso ami OsmAnd e OSM e vuoi sostenerli è un perfetto modo per farlo.</string>
+    <string name="osm_live_header">La sottoscrizione abilita agli aggiornamenti orari per tutte le mappe del mondo.
+La maggior parte degli incassi ritornano alla comunità OSM ed è corrisposto per ogni contributo OSM.
+Nel caso ami OsmAnd e OSM e vuoi sostenerli è un perfetto modo per farlo.</string>
     
     <string name="upload_anonymously">Invia anonimamente</string>
     <string name="show_transparency_seekbar">Mostra la barra di ricerca trasparente</string>
