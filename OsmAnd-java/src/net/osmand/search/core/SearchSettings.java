@@ -15,6 +15,7 @@ public class SearchSettings {
 	private int radiusLevel = 1;
 	private int totalLimit = -1;
 	private String lang;
+	private boolean transliterateIfMissing;
 	
 	public SearchSettings(SearchSettings s) {
 		if(s != null) {
@@ -47,9 +48,10 @@ public class SearchSettings {
 		return lang;
 	}
 	
-	public SearchSettings setLang(String lang) {
+	public SearchSettings setLang(String lang, boolean transliterateIfMissing) {
 		SearchSettings s = new SearchSettings(this);
 		s.lang = lang;
+		s.transliterateIfMissing = transliterateIfMissing;
 		return s;
 	}
 	
@@ -77,6 +79,10 @@ public class SearchSettings {
 		SearchSettings s = new SearchSettings(this);
 		s.originalLocation = l;
 		return s;
+	}
+
+	public boolean isTransliterate() {
+		return transliterateIfMissing;
 	}
 
 

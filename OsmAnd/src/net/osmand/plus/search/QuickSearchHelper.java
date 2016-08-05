@@ -38,7 +38,7 @@ public class QuickSearchHelper implements ResourceListener {
 
 	public QuickSearchHelper(OsmandApplication app) {
 		this.app = app;
-		core = new SearchUICore(app.getPoiTypes(), app.getSettings().MAP_PREFERRED_LOCALE.get());
+		core = new SearchUICore(app.getPoiTypes(), app.getSettings().MAP_PREFERRED_LOCALE.get(), false);
 		app.getResourceManager().addResourceListener(this);
 	}
 	
@@ -65,6 +65,11 @@ public class QuickSearchHelper implements ResourceListener {
 		// Register favorites search api
 		core.registerAPI(new SearchCoreFactory.SearchBaseAPI() {
 
+			@Override
+			public boolean isSearchMoreAvailable(SearchPhrase phrase) {
+				return false;
+			}
+			
 			@Override
 			public boolean search(SearchPhrase phrase, SearchUICore.SearchResultMatcher resultMatcher) {
 				List<FavouritePoint> favList = app.getFavorites().getFavouritePoints();
@@ -96,6 +101,11 @@ public class QuickSearchHelper implements ResourceListener {
 
 		// Register favorites by category search api
 		core.registerAPI(new SearchCoreFactory.SearchBaseAPI() {
+			
+			@Override
+			public boolean isSearchMoreAvailable(SearchPhrase phrase) {
+				return false;
+			}
 
 			@Override
 			public boolean search(SearchPhrase phrase, SearchUICore.SearchResultMatcher resultMatcher) {
@@ -153,6 +163,11 @@ public class QuickSearchHelper implements ResourceListener {
 		public SearchWptAPI(OsmandApplication app) {
 			this.app = app;
 		}
+		
+		@Override
+		public boolean isSearchMoreAvailable(SearchPhrase phrase) {
+			return false;
+		}
 
 		@Override
 		public boolean search(SearchPhrase phrase, SearchUICore.SearchResultMatcher resultMatcher) {
@@ -200,6 +215,11 @@ public class QuickSearchHelper implements ResourceListener {
 
 		public SearchHistoryAPI(OsmandApplication app) {
 			this.app = app;
+		}
+		
+		@Override
+		public boolean isSearchMoreAvailable(SearchPhrase phrase) {
+			return false;
 		}
 
 		@Override
