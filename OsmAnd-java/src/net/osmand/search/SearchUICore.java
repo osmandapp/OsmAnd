@@ -81,7 +81,7 @@ public class SearchUICore {
 		 
 		
 		
-		public void addSearchResults(List<SearchResult> sr, boolean resortAll, boolean removeDuplicates) {
+		public SearchResultCollection addSearchResults(List<SearchResult> sr, boolean resortAll, boolean removeDuplicates) {
 			if(resortAll) {
 				this.searchResults.addAll(sr);
 				sortSearchResults();
@@ -129,7 +129,7 @@ public class SearchUICore {
 					
 				}
 			}
-			
+			return this;
 		}
 		
 		public List<SearchResult> getCurrentSearchResults() {
