@@ -771,14 +771,14 @@ Ora, sono disponibili solo {2} MB.</string>
     <string name="gpxup_private">Privato</string>
     <string name="osmand_parking_event">Prendi l\'auto dal parcheggio</string>
     <string name="osmand_parking_warning">Attenzione</string>
-    <string name="osmand_parking_warning_text">Precedentemente è stata aggiunta al tuo calendario la notifica di recuperare l\'auto. Ci rimarrà finché non la eliminerai manualmente.</string>
+    <string name="osmand_parking_warning_text">Un notifica per recuperare l\'auto è stata aggiunta al tuo Calendar. Ci rimarrà finché non la eliminerai manualmente.</string>
     <string name="osmand_parking_time_limit_title">Imposta il limite d\'orario del parcheggio</string>
     <string name="osmand_parking_delete_confirm">Vuoi cancellare il marcatore della posizione di parcheggio?</string>
     <string name="osmand_parking_delete">Elimina un marcatore di parcheggio</string>
     <string name="osmand_parking_choose_type">Scegli il tipo di parcheggio</string>
     <string name="osmand_parking_lim_text">A tempo</string>
     <string name="osmand_parking_no_lim_text">Senza limiti di tempo</string>
-    <string name="osmand_parking_add_event">Aggiungi una notifica all\'applicazione Calendario</string>
+    <string name="osmand_parking_add_event">Aggiungi una notifica all\'applicazione Calendar</string>
     <string name="osmand_parking_time_limit">Parcheggio a tempo</string>
     <string name="osmand_parking_time_no_limit">Parcheggio senza limiti di tempo</string>
     <string name="osmand_parking_position_description">La posizione della tua auto parcheggiata. %1$s</string>
@@ -796,7 +796,8 @@ Ora, sono disponibili solo {2} MB.</string>
 
     <string name="global_app_allocated_memory_descr">Memoria allocata %1$s MB (limite di Android %2$s MB, Dalvik %3$s MB).</string>
     <string name="global_app_allocated_memory">Memoria allocata</string>
-    <string name="native_app_allocated_memory_descr">Memoria nativa totale allocata dall\'app %1$s MB (dalvik %2$s MB, altro %3$s MB). Memoria in proporzione %4$s MB (limite di Android %5$s MB, Dalvik %6$s MB).</string>
+    <string name="native_app_allocated_memory_descr">Memoria nativa totale allocata dall\'app %1$s MB (Dalvik %2$s MB, altro %3$s MB).
+Memoria in proporzione %4$s MB (limite di Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="native_app_allocated_memory">Memoria nativa totale</string>
     <string name="select_animate_speedup">Seleziona la velocità dell\'animazione del percorso</string>
     <string name="osmand_parking_hours">Ore</string>
@@ -2372,7 +2373,46 @@ Attivando questa vista lo stile della mappa diventerà \'Inverno e sci\', mostra
     <string name="shared_string_save_changes">Salva le modifiche</string>
     <string name="show_polygons">Mostra i poligoni</string>
     <string name="find_parking">Cerca parcheggio</string>
-    <string name="osmand_plus_extended_description_4000_chars_v2">" OsmAnd Maps &amp; Navigation - trova luoghi sulla mappa e crea percorsi senza connessione a Internet. Scarica la mappa di una nazione prima di partire per un viaggio per trovare luoghi e percorsi in un luogo sconosciuto. Opzioni base: • Mappe dettagliate di 200 nazioni • Navigatore offline con istruzioni vocali • Ricerca degli indirizzi in modalità offline • Informazioni sui luoghi della mappa: punti d\'interesse, bar, parcheggi, negozi • Aggiunta di luoghi ai preferiti • Navigazione per guida, ciclisti e pedoni Opzioni aggiuntive: • Possibilità di vedere e registrare tracciati GPX • Descrizioni Wikipedia dei PDI • Aggiunta di note audio, video e foto alla mappa • Modalità notturna e diurna della mappa per una guida più confortevole • Informazioni sui percorsi e le fermate dei trasporti pubblici • Piste ciclabili e percorsi pedonali • Sentieri turistici in tutto il mondo • Mappe online da numerose fonti • Informazioni sulla qualità del fondo stradale e sull\'illuminazione • Aggiunta, modifica e cancellazione dei PDI (per gli utenti di OpenStreetMap.org) • OsMo - monitoraggio in tempo reale degli altri dispositivi Usa un navigatore affidabile nella tua nazione - che sia Francia, Germania, Messico, Regno Unito, Spagna, Olanda, USA, Russia, Brasile qualunque altro stato. Plugin: • Curve di livello e ombreggiatura del terreno https://goo.gl/7mojP8 Visualizzazione delle curve di livello e dell\'ombreggiatura del terreno in aggiunta alla mappa base OsmAnd. • Mappe sci https://goo.gl/pX6DxJ Informazioni sulle piste da sci, sui percorsi da sci di fondo, cross-country, funivie e skilift. • Mappe nautiche https://goo.gl/0hEdxm Stile speciale della mappa per mostrare i simboli per la navigazione nautica marine a lungo o breve raggio. • Posizione di parcheggio https://goo.gl/6JxQXF Ti aiuta a segnare la posizione del tuo veicolo parcheggiato e vedere quanto tempo manca se il parcheggio ha limiti di tempo. Resta sintonizzato! Twitter: https://twitter.com/osmandapp Facebook: https://www.facebook.com/osmandapp Sito: http://osmand.net Se hai bisogno di assistenza con l\'app OsmAnd, contatta il nostro team di supporto: support@osmand.net. "</string>
+    <string name="osmand_plus_extended_description_4000_chars_v2">"
+OsmAnd Maps &amp; Navigation - trova luoghi sulla mappa e crea percorsi senza connessione a Internet. Scarica la mappa di una nazione prima di partire per un viaggio per trovare luoghi e percorsi in un luogo sconosciuto. 
+
+Opzioni base:
+• Mappe dettagliate di 200 nazioni 
+• Navigatore offline con istruzioni vocali 
+• Ricerca degli indirizzi in modalità offline 
+• Informazioni sui luoghi della mappa: punti d\'interesse, bar, parcheggi, negozi 
+• Aggiunta di luoghi ai preferiti 
+• Navigazione per guida, ciclisti e pedoni 
+
+Opzioni aggiuntive: 
+• Possibilità di vedere e registrare tracciati GPX 
+• Descrizioni Wikipedia dei PDI 
+• Aggiunta di note audio, video e foto alla mappa 
+• Modalità notturna e diurna della mappa per una guida più confortevole 
+• Informazioni sui percorsi e le fermate dei trasporti pubblici 
+• Piste ciclabili e percorsi pedonali 
+• Sentieri turistici in tutto il mondo 
+• Mappe online da numerose fonti 
+• Informazioni sulla qualità del fondo stradale e sull\'illuminazione 
+• Aggiunta, modifica e cancellazione dei PDI (per gli utenti di OpenStreetMap.org) 
+• OsMo - monitoraggio in tempo reale degli altri dispositivi 
+
+Usa un navigatore affidabile nella tua nazione - che sia Francia, Germania, Messico, Regno Unito, Spagna, Olanda, USA, Russia, Brasile qualunque altro stato. 
+
+Plugin: 
+• Curve di livello e ombreggiatura del terreno https://goo.gl/7mojP8 Visualizzazione delle curve di livello e dell\'ombreggiatura del terreno in aggiunta alla mappa base OsmAnd. 
+• Mappe sci https://goo.gl/pX6DxJ Informazioni sulle piste da sci, sui percorsi da sci di fondo, cross-country, funivie e skilift. 
+• Mappe nautiche https://goo.gl/0hEdxm Stile speciale della mappa per mostrare i simboli per la navigazione nautica marine a lungo o breve raggio. 
+• Posizione di parcheggio https://goo.gl/6JxQXF Ti aiuta a segnare la posizione del tuo veicolo parcheggiato e vedere quanto tempo manca se il parcheggio ha limiti di tempo. 
+
+Resta sintonizzato! 
+
+Twitter: https://twitter.com/osmandapp 
+Facebook: https://www.facebook.com/osmandapp 
+Sito: http://osmand.net 
+
+Se hai bisogno di assistenza con l\'app OsmAnd, contatta il nostro team di supporto: support@osmand.net. 
+ "</string>
     <string name="rendering_attr_showMtbRoutes_name">Mostra i percorsi MTB</string>
     <string name="select_map_markers">Scegli i marcatori della mappa</string>
     <string name="shared_string_reverse_order">Inverti l\'ordine</string>
