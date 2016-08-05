@@ -1,45 +1,5 @@
 package net.osmand.plus.search;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
-import net.osmand.AndroidUtils;
-import net.osmand.Location;
-import net.osmand.OsmAndCollator;
-import net.osmand.ResultMatcher;
-import net.osmand.data.LatLon;
-import net.osmand.data.PointDescription;
-import net.osmand.osm.AbstractPoiType;
-import net.osmand.plus.AppInitializer;
-import net.osmand.plus.AppInitializer.AppInitializeListener;
-import net.osmand.plus.GPXUtilities;
-import net.osmand.plus.GPXUtilities.GPXFile;
-import net.osmand.plus.GPXUtilities.WptPt;
-import net.osmand.plus.LockableViewPager;
-import net.osmand.plus.OsmAndFormatter;
-import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
-import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.helpers.SearchHistoryHelper;
-import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
-import net.osmand.plus.poi.PoiUIFilter;
-import net.osmand.plus.search.QuickSearchHelper.SearchHistoryAPI;
-import net.osmand.search.SearchUICore;
-import net.osmand.search.SearchUICore.SearchResultCollection;
-import net.osmand.search.core.ObjectType;
-import net.osmand.search.core.SearchCoreAPI;
-import net.osmand.search.core.SearchCoreFactory.SearchAmenityTypesAPI;
-import net.osmand.search.core.SearchPhrase;
-import net.osmand.search.core.SearchResult;
-import net.osmand.search.core.SearchSettings;
-import net.osmand.search.core.SearchWord;
-import net.osmand.util.Algorithms;
-import net.osmand.util.MapUtils;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -74,6 +34,48 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import net.osmand.AndroidUtils;
+import net.osmand.Location;
+import net.osmand.ResultMatcher;
+import net.osmand.data.LatLon;
+import net.osmand.data.PointDescription;
+import net.osmand.osm.AbstractPoiType;
+import net.osmand.plus.AppInitializer;
+import net.osmand.plus.AppInitializer.AppInitializeListener;
+import net.osmand.plus.GPXUtilities;
+import net.osmand.plus.GPXUtilities.GPXFile;
+import net.osmand.plus.GPXUtilities.WptPt;
+import net.osmand.plus.LockableViewPager;
+import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
+import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.helpers.SearchHistoryHelper;
+import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
+import net.osmand.plus.poi.PoiUIFilter;
+import net.osmand.plus.search.QuickSearchHelper.SearchHistoryAPI;
+import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarView;
+import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarViewController;
+import net.osmand.search.SearchUICore;
+import net.osmand.search.SearchUICore.SearchResultCollection;
+import net.osmand.search.core.ObjectType;
+import net.osmand.search.core.SearchCoreAPI;
+import net.osmand.search.core.SearchCoreFactory.SearchAmenityTypesAPI;
+import net.osmand.search.core.SearchPhrase;
+import net.osmand.search.core.SearchResult;
+import net.osmand.search.core.SearchSettings;
+import net.osmand.search.core.SearchWord;
+import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 public class QuickSearchDialogFragment extends DialogFragment implements OsmAndCompassListener, OsmAndLocationListener {
 
 	public static final String TAG = "QuickSearchDialogFragment";
@@ -95,6 +97,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	private QuickSearchMainListFragment mainSearchFragment;
 	private QuickSearchHistoryListFragment historySearchFragment;
 	private QuickSearchCategoriesListFragment categoriesSearchFragment;
+	private QuickSearchToolbarController toolbarController = new QuickSearchToolbarController();
 
 	private Toolbar toolbarEdit;
 	private TextView titleEdit;
@@ -197,7 +200,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 					}
 					app.getPoiFilters().clearSelectedPoiFilters();
 					app.getPoiFilters().addSelectedPoiFilter(filter);
-					getMapActivity().setQuickSearchTopbarActive(true);
+					showToolbar();
 					getMapActivity().refreshMap();
 					hide();
 				} else {
@@ -211,7 +214,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 								searchResult.location.getLatitude(), searchResult.location.getLongitude(),
 								searchResult.preferredZoom, pointDescription, true, searchResult.object);
 
-						getMapActivity().setQuickSearchTopbarActive(true);
+						showToolbar();
 						MapActivity.launchMapActivityMoveToTop(getActivity());
 						hide();
 					}
@@ -382,6 +385,15 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		}
 	}
 
+	public void showToolbar() {
+		toolbarController.setTitle(getText());
+		getMapActivity().showTopToolbar(toolbarController);
+	}
+
+	public void hideToolbar() {
+		getMapActivity().hideTopToolbar(toolbarController);
+	}
+
 	public String getText() {
 		return searchEditText.getText().toString();
 	}
@@ -393,7 +405,6 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	}
 
 	public void show() {
-		getMapActivity().setQuickSearchTopbarActive(false);
 		if (useMapCenter) {
 			LatLon mapCenter = getMapActivity().getMapView().getCurrentRotatedTileBox().getCenterLatLon();
 			SearchSettings ss = searchUICore.getSearchSettings().setOriginalLocation(
@@ -527,7 +538,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	public void onDismiss(DialogInterface dialog) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			getMapActivity().setQuickSearchTopbarActive(false);
+			hideToolbar();
 			getChildFragmentManager().popBackStack();
 		}
 		super.onDismiss(dialog);
@@ -1189,6 +1200,28 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		@Override
 		public SearchListFragmentType getType() {
 			return SearchListFragmentType.MAIN;
+		}
+	}
+
+	public static class QuickSearchToolbarController extends TopToolbarViewController {
+
+		public QuickSearchToolbarController() {
+			super(TopToolbarViewController.TopToolbarViewControllerType.QUICK_SEARCH);
+		}
+
+		@Override
+		public void onBackPressed(TopToolbarView view) {
+			view.getMap().showQuickSearch(false, false);
+		}
+
+		@Override
+		public void onTitlePressed(TopToolbarView view) {
+			view.getMap().showQuickSearch(false, false);
+		}
+
+		@Override
+		public void onClosePressed(TopToolbarView view) {
+			view.getMap().closeQuickSearch();
 		}
 	}
 }

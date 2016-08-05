@@ -29,14 +29,15 @@ import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.helpers.WaypointDialogHelper;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.helpers.WaypointHelper.LocationPointWrapper;
+import net.osmand.plus.mapcontextmenu.other.MapRouteInfoMenu;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
-import net.osmand.plus.search.QuickSearchDialogFragment;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
-import net.osmand.plus.mapcontextmenu.other.MapRouteInfoMenu;
 import net.osmand.plus.views.mapwidgets.NextTurnInfoWidget.TurnDrawable;
 import net.osmand.router.TurnType;
+
+import java.util.LinkedList;
 
 public class MapInfoWidgetsFactory {
 	
@@ -162,57 +163,144 @@ public class MapInfoWidgetsFactory {
 	}
 
 	public static abstract class TopToolbarViewController {
-		public abstract void updateInfo();
+		private TopToolbarViewControllerType type;
+		private int backButtonIconId = R.drawable.abc_ic_ab_back_mtrl_am_alpha;
+		private int closeButtonIconId = R.drawable.ic_action_remove_dark;
+		private String title = "";
+
+		public enum TopToolbarViewControllerType {
+			QUICK_SEARCH,
+			CONTEXT_MENU
+		}
+
+		public TopToolbarViewController(TopToolbarViewControllerType type) {
+			this.type = type;
+		}
+
+		public TopToolbarViewControllerType getType() {
+			return type;
+		}
+
+		public String getTitle() {
+			return title;
+		}
+
+		public void setTitle(String title) {
+			this.title = title;
+		}
+
+		public int getBackButtonIconId() {
+			return backButtonIconId;
+		}
+
+		public int getCloseButtonIconId() {
+			return closeButtonIconId;
+		}
+
+		public void updateToolbar(TopToolbarView view) {
+			view.getTitleView().setText(title);
+		}
+
+		public abstract void onBackPressed(TopToolbarView view);
+
+		public abstract void onTitlePressed(TopToolbarView view);
+
+		public abstract void onClosePressed(TopToolbarView view);
 	}
 
 	public static class TopToolbarView {
 		private final MapActivity map;
-		private TopToolbarViewController toolbarController;
-		private View searchTopBar;
-		private View searchTopBarLayout;
-		private ImageButton searchBackButton;
-		private TextView searchTitle;
-		private ImageButton searchCloseButton;
+		private LinkedList<TopToolbarViewController> viewControllers = new LinkedList<>();
+		private View topbar;
+		private View topBarLayout;
+		private ImageButton backButton;
+		private TextView titleView;
+		private ImageButton closeButton;
 
 		public TopToolbarView(final MapActivity map) {
 			this.map = map;
 
-			searchTopBar = map.findViewById(R.id.search_topbar);
-			searchTopBarLayout = map.findViewById(R.id.search_topbar_layout);
-			searchBackButton = (ImageButton) map.findViewById(R.id.search_back_button);
-			searchBackButton.setOnClickListener(new View.OnClickListener() {
+			topbar = map.findViewById(R.id.custom_topbar);
+			topBarLayout = map.findViewById(R.id.custom_topbar_layout);
+			backButton = (ImageButton) map.findViewById(R.id.custom_back_button);
+			backButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					map.showQuickSearch(false, false);
+					TopToolbarViewController viewController = getTopViewController();
+					if (viewController != null) {
+						viewController.onBackPressed(TopToolbarView.this);
+					}
 				}
 			});
-			searchTitle = (TextView) map.findViewById(R.id.search_title);
-			searchTitle.setOnClickListener(new View.OnClickListener() {
+			titleView = (TextView) map.findViewById(R.id.custom_title);
+			titleView.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					map.showQuickSearch(false, false);
+					TopToolbarViewController viewController = getTopViewController();
+					if (viewController != null) {
+						viewController.onTitlePressed(TopToolbarView.this);
+					}
 				}
 			});
-			searchCloseButton = (ImageButton) map.findViewById(R.id.search_close_button);
-			searchCloseButton.setOnClickListener(new View.OnClickListener() {
+			closeButton = (ImageButton) map.findViewById(R.id.custom_close_button);
+			closeButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					map.closeQuickSearch();
+					TopToolbarViewController viewController = getTopViewController();
+					if (viewController != null) {
+						viewController.onClosePressed(TopToolbarView.this);
+					}
 				}
 			});
 			updateVisibility(false);
 		}
 
-		public TopToolbarViewController getToolbarController() {
-			return toolbarController;
+		public MapActivity getMap() {
+			return map;
 		}
 
-		public void setToolbarController(TopToolbarViewController toolbarController) {
-			this.toolbarController = toolbarController;
+		public View getTopbar() {
+			return topbar;
+		}
+
+		public View getTopBarLayout() {
+			return topBarLayout;
+		}
+
+		public ImageButton getBackButton() {
+			return backButton;
+		}
+
+		public TextView getTitleView() {
+			return titleView;
+		}
+
+		public ImageButton getCloseButton() {
+			return closeButton;
+		}
+
+		public TopToolbarViewController getTopViewController() {
+			if (viewControllers.size() > 0) {
+				return viewControllers.get(viewControllers.size() - 1);
+			} else {
+				return null;
+			}
+		}
+
+		public void addViewController(TopToolbarViewController viewController) {
+			if (!viewControllers.contains(viewController)) {
+				viewControllers.add(viewController);
+			}
+			updateInfo();
+		}
+
+		public void removeViewController(TopToolbarViewController viewController) {
+			viewControllers.remove(viewController);
+			updateInfo();
 		}
 
 		public boolean updateVisibility(boolean visible) {
-			return updateVisibility(searchTopBar, visible);
+			return updateVisibility(topbar, visible);
 		}
 
 		public boolean updateVisibility(View v, boolean visible) {
@@ -229,25 +317,28 @@ public class MapInfoWidgetsFactory {
 		}
 
 		public void updateInfo() {
-			boolean isQuickSearchActive = map.isQuickSearchTopbarActive();
-			if (isQuickSearchActive) {
-				QuickSearchDialogFragment fragment = map.getQuickSearchDialogFragment();
-				if (fragment != null) {
-					searchTitle.setText(fragment.getText());
-				}
+			TopToolbarViewController viewController = getTopViewController();
+			if (viewController != null) {
+				viewController.updateToolbar(this);
 			}
-			updateVisibility(isQuickSearchActive);
+			updateVisibility(viewController != null);
 		}
 
 		public void updateTextColor(boolean nightMode, int textColor) {
 			OsmandApplication app = map.getMyApplication();
-			searchTitle.setTextColor(textColor);
-			searchBackButton.setImageDrawable(app.getIconsCache().getIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha, !nightMode));
-			searchCloseButton.setImageDrawable(app.getIconsCache().getIcon(R.drawable.ic_action_remove_dark, !nightMode));
+			titleView.setTextColor(textColor);
+			TopToolbarViewController viewController = getTopViewController();
+			if (viewController != null) {
+				backButton.setImageDrawable(app.getIconsCache().getIcon(viewController.getBackButtonIconId(), !nightMode));
+				closeButton.setImageDrawable(app.getIconsCache().getIcon(viewController.getCloseButtonIconId(), !nightMode));
+			} else {
+				backButton.setImageDrawable(app.getIconsCache().getIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha, !nightMode));
+				closeButton.setImageDrawable(app.getIconsCache().getIcon(R.drawable.ic_action_remove_dark, !nightMode));
+			}
 		}
 
 		public void setBackgroundResource(int boxTop) {
-			searchTopBarLayout.setBackgroundResource(boxTop);
+			topBarLayout.setBackgroundResource(boxTop);
 		}
 	}
 
@@ -352,7 +443,7 @@ public class MapInfoWidgetsFactory {
 					text = "";
 				}
 			}
-			if (map.isQuickSearchTopbarActive()) {
+			if (map.isTopToolbarActive()) {
 				updateVisibility(false);
 			} else if (!showNextTurn && updateWaypoint()) {
 				updateVisibility(true);

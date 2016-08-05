@@ -19,6 +19,7 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarView;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopTextView;
+import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarViewController;
 import net.osmand.plus.views.mapwidgets.MapMarkersWidgetsFactory;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry.MapWidgetRegInfo;
@@ -99,7 +100,19 @@ public class MapInfoLayer extends OsmandMapLayer {
 	public void removeSideWidget(TextInfoWidget widget) {
 		mapInfoControls.removeSideWidgetInternal(widget);
 	}
-	
+
+	public void addTopToolbarViewController(TopToolbarViewController viewController) {
+		topToolbarView.addViewController(viewController);
+	}
+
+	public void removeTopToolbarViewController(TopToolbarViewController viewController) {
+		topToolbarView.removeViewController(viewController);
+	}
+
+	public boolean hasTopToolbar() {
+		return topToolbarView.getTopViewController() != null;
+	}
+
 	public void registerAllControls(){
 		RouteInfoWidgetsFactory ric = new RouteInfoWidgetsFactory();
 		MapInfoWidgetsFactory mic = new MapInfoWidgetsFactory();

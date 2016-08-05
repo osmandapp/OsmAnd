@@ -54,7 +54,6 @@ import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.AppInitializer.InitEvents;
 import net.osmand.plus.ApplicationMode;
-import net.osmand.plus.BusyIndicator;
 import net.osmand.plus.FirstUsageFragment;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.MapMarkersHelper.MapMarkerChangedListener;
@@ -92,11 +91,13 @@ import net.osmand.plus.routing.RoutingHelper.RouteCalculationProgressCallback;
 import net.osmand.plus.search.QuickSearchDialogFragment;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.MapControlsLayer;
+import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.OsmAndMapLayersView;
 import net.osmand.plus.views.OsmAndMapSurfaceView;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.corenative.NativeCoreContext;
+import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarViewController;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
 
@@ -168,7 +169,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	private boolean permissionGranted;
 
 	private boolean mIsDestroyed = false;
-	private boolean quickSearchTopbarActive = false;
+	private boolean topToolbarActive = false;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -1390,11 +1391,20 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		return fragment!= null && !fragment.isDetached() && !fragment.isRemoving() ? (QuickSearchDialogFragment) fragment : null;
 	}
 
-	public boolean isQuickSearchTopbarActive() {
-		return quickSearchTopbarActive && getQuickSearchDialogFragment() != null;
+	public boolean isTopToolbarActive() {
+		MapInfoLayer mapInfoLayer = getMapLayers().getMapInfoLayer();
+		return mapInfoLayer.hasTopToolbar();
 	}
 
-	public void setQuickSearchTopbarActive(boolean quickSearchTopbarActive) {
-		this.quickSearchTopbarActive = quickSearchTopbarActive;
+	public void showTopToolbar(TopToolbarViewController viewController) {
+		MapInfoLayer mapInfoLayer = getMapLayers().getMapInfoLayer();
+		mapInfoLayer.addTopToolbarViewController(viewController);
+		this.topToolbarActive = mapInfoLayer.hasTopToolbar();
+	}
+
+	public void hideTopToolbar(TopToolbarViewController viewController) {
+		MapInfoLayer mapInfoLayer = getMapLayers().getMapInfoLayer();
+		mapInfoLayer.removeTopToolbarViewController(viewController);
+		this.topToolbarActive = mapInfoLayer.hasTopToolbar();
 	}
 }

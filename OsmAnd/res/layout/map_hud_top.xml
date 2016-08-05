@@ -147,7 +147,7 @@
     </FrameLayout>
 
     <FrameLayout
-        android:id="@+id/search_topbar"
+        android:id="@+id/custom_topbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:visibility="gone"
@@ -159,14 +159,14 @@
             android:orientation="vertical">
 
             <LinearLayout
-                android:id="@+id/search_topbar_layout"
+                android:id="@+id/custom_topbar_layout"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dashboard_map_toolbar"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <ImageButton
-                    android:id="@+id/search_back_button"
+                    android:id="@+id/custom_back_button"
                     style="@style/Widget.AppCompat.ActionButton"
                     android:layout_width="54dp"
                     android:layout_height="48dp"
@@ -174,7 +174,7 @@
                     android:src="@drawable/abc_ic_ab_back_mtrl_am_alpha"/>
 
                 <TextView
-                    android:id="@+id/search_title"
+                    android:id="@+id/custom_title"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -185,11 +185,10 @@
                     android:lines="1"
                     android:ellipsize="end"
                     android:singleLine="true"
-                    android:text="Toolbar text"
                     android:textSize="@dimen/abc_text_size_medium_material"/>
 
                 <ImageButton
-                    android:id="@+id/search_close_button"
+                    android:id="@+id/custom_close_button"
                     style="@style/Widget.AppCompat.ActionButton"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
@@ -199,7 +198,7 @@
             </LinearLayout>
 
             <FrameLayout
-                android:id="@+id/search_topbar_shadow"
+                android:id="@+id/custom_topbar_shadow"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:foreground="@drawable/bg_contextmenu_shadow"

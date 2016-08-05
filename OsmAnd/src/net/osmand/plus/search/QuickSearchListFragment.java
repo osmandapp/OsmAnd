@@ -220,10 +220,11 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 					pointDescription = wpt.getPointDescription(getMyApplication());
 					break;
 			}
-			getMapActivity().setQuickSearchTopbarActive(showTopbar);
 			if (showTopbar) {
+				dialogFragment.showToolbar();
 				dialogFragment.hide();
 			} else {
+				dialogFragment.hideToolbar();
 				dialogFragment.dismiss();
 			}
 			getMyApplication().getSettings().setMapLocationToShow(
