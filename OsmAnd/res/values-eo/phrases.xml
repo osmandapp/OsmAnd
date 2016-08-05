@@ -2589,4 +2589,18 @@
 	<string name="poi_nuclear_explosion_purpose_fundamental_science">Eksploda kialo: fundamenta esplorado</string>
 	<string name="poi_nuclear_explosion_purpose_industrial_application_cavity_excavation">Eksploda kialo: industria apliko, fosado de truo</string>
 	<string name="poi_nuclear_explosion_purpose_industrial_application_seismic_sounding">Eksploda kialo: industria apliko, tertrema bildigo</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application_oil_stimulation">Eksploda kialo: industria apliko, stimulo de naftoelterigado</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application">Eksploda kialo: industria apliko</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application_earth_moving">Eksploda kialo: industria apliko, ter-movado</string>
+	<string name="poi_nuclear_explosion_yield">Eksploda energio</string>
+	<string name="poi_nuclear_explosion_hole">Eksploda truo</string>
+	<string name="poi_nuclear_explosion_height_of_burst">Alto de ekbrilo</string>
+	<string name="poi_nuclear_explosion_ground_zero_altitude">Altitudo de grundo nulo</string>
+	<string name="poi_nuclear_explosion_body_wave_magnitude">Grando de unua eksplod-ondo</string>
+	<string name="poi_salt_yes">Sala</string>
+	<string name="poi_salt_no">Nesala</string>
+	<string name="poi_organic_yes">Ekologia manĝaĵo: jes</string>
+	<string name="poi_organic_no">Ekologia manĝaĵo: ne</string>
+	<string name="poi_organic_only">Nur ekologia manĝaĵo</string>
+
 	</resources>
