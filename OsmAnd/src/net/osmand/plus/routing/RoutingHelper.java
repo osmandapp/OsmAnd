@@ -709,7 +709,7 @@ public class RoutingHelper {
 	}
 	
 		
-	public static String formatStreetName(String name, String ref, String destination, boolean includeTowards) {
+	public static String formatStreetName(String name, String ref, String destination, String towards) {
 	//Original version returned:
 	// 1. ref + " " + dest
 	// 2. dest
@@ -733,11 +733,7 @@ public class RoutingHelper {
 			if (formattedStreetName.length() > 0) {
 				formattedStreetName = formattedStreetName + " ";
 			}
-			if (includeTowards) {
-				formattedStreetName = formattedStreetName + R.string.towards + " " + destination;
-			} else {
-				formattedStreetName = formattedStreetName + " " + destination;
-			}
+			formattedStreetName = formattedStreetName + towards + " " + destination;
 		}
 		return formattedStreetName;
 
@@ -781,14 +777,14 @@ public class RoutingHelper {
 			if(next != null) {
 				next[0] = n.directionInfo.getTurnType();
 			}
-			return formatStreetName(nm, rf, dn, true);
+			return formatStreetName(nm, rf, dn, app.getString(R.string.towards));
 		}
 		RouteSegmentResult rs = getCurrentSegmentResult();
 		if(rs != null) {
 			String nm = rs.getObject().getName(settings.MAP_PREFERRED_LOCALE.get());
 			String rf = rs.getObject().getRef();
 			String dn = rs.getObject().getDestinationName(settings.MAP_PREFERRED_LOCALE.get());
-			return formatStreetName(nm, rf, dn, true);
+			return formatStreetName(nm, rf, dn, app.getString(R.string.towards));
 		}
 		return null;
 	}
