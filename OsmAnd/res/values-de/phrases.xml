@@ -1878,8 +1878,8 @@
 	<string name="poi_payment_yandexmoney_no">Yandex.Money nicht akzeptiert</string>
 	<string name="poi_description_payment">Zahlungsbeschreibung</string>
 
-	<string name="poi_internet_access_fee_yes">Internetzugang - kostenfrei</string>
-	<string name="poi_internet_access_fee_no">Internetzugang - kostenpflichtig</string>
+	<string name="poi_internet_access_fee_yes">Internetzugang - kostenpflichtig</string>
+	<string name="poi_internet_access_fee_no">Internetzugang - kostenfrei</string>
 
 	<string name="poi_events_venue">Veranstaltungsort</string>
 
