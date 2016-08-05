@@ -17,7 +17,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory;
-import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.QuickSearchView;
+import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarView;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopTextView;
 import net.osmand.plus.views.mapwidgets.MapMarkersWidgetsFactory;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
@@ -52,7 +52,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 	private OsmandSettings settings;
 	private DrawSettings drawSettings;
 	private TopTextView streetNameView;
-	private QuickSearchView quickSearchView;
+	private TopToolbarView topToolbarView;
 
 	public MapInfoLayer(MapActivity map, RouteLayer layer){
 		this.map = map;
@@ -110,8 +110,8 @@ public class MapInfoLayer extends OsmandMapLayer {
 		streetNameView = new TopTextView(map.getMyApplication(), map);
 		updateStreetName(false, calculateTextState());
 
-		quickSearchView = new QuickSearchView(map);
-		updateQuickSearch(false, calculateTextStateSearch());
+		topToolbarView = new TopToolbarView(map);
+		updateTopToolbar(false, calculateTextStateSearch());
 
 		alarmControl = ric.createAlarmInfoControl(app, map);
 		alarmControl.setVisibility(false);
@@ -218,7 +218,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 				updateReg(ts, reg);
 			}
 			updateStreetName(nightMode, ts);
-			updateQuickSearch(nightMode, calculateTextStateSearch());
+			updateTopToolbar(nightMode, calculateTextStateSearch());
 			lanesControl.updateTextSize(nightMode, ts.textColor, ts.textShadowColor, ts.textBold, ts.textShadowRadius / 2);
 			rulerControl.updateTextSize(nightMode, ts.textColor, ts.textShadowColor,  (int) (2 * view.getDensity()));
 			this.expand.setBackgroundResource(ts.expand);
@@ -233,10 +233,10 @@ public class MapInfoLayer extends OsmandMapLayer {
 		streetNameView.updateTextColor(nightMode, ts.textColor, ts.textShadowColor, ts.textBold, ts.textShadowRadius);
 	}
 
-	private void updateQuickSearch(boolean nightMode, TextState ts) {
+	private void updateTopToolbar(boolean nightMode, TextState ts) {
 		int bgColorId = nightMode ? R.color.bg_color_dark : R.color.bg_color_light;
-		quickSearchView.setBackgroundResource(AndroidUiHelper.isOrientationPortrait(map) ? bgColorId : ts.boxFree);
-		quickSearchView.updateTextColor(nightMode, ts.textColor);
+		topToolbarView.setBackgroundResource(AndroidUiHelper.isOrientationPortrait(map) ? bgColorId : ts.boxFree);
+		topToolbarView.updateTextColor(nightMode, ts.textColor);
 	}
 
 	private void updateReg(TextState ts, MapWidgetRegInfo reg) {
@@ -313,7 +313,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		updateColorShadowsOfText();
 		mapInfoControls.updateInfo(settings.getApplicationMode(), drawSettings, expanded);
 		streetNameView.updateInfo(drawSettings);
-		quickSearchView.updateInfo();
+		topToolbarView.updateInfo();
 		alarmControl.updateInfo(drawSettings);
 		rulerControl.updateInfo(tileBox, drawSettings);
 		lanesControl.updateInfo(drawSettings);

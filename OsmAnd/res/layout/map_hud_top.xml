@@ -185,7 +185,7 @@
                     android:lines="1"
                     android:ellipsize="end"
                     android:singleLine="true"
-                    android:text="Search"
+                    android:text="Toolbar text"
                     android:textSize="@dimen/abc_text_size_medium_material"/>
 
                 <ImageButton

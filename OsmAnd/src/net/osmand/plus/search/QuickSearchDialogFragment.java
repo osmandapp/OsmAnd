@@ -407,6 +407,8 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 	public void hide() {
 		paused = true;
+		hideProgressBar();
+		updateClearButtonVisibility(true);
 		getDialog().hide();
 	}
 
@@ -431,10 +433,10 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			if (word != null && word.getResult() != null) {
 				buttonToolbarText.setText(app.getString(R.string.show_something_on_map, word.getResult().localeName).toUpperCase());
 			} else {
-				buttonToolbarText.setText(app.getString(R.string.show_on_map).toUpperCase());
+				buttonToolbarText.setText(app.getString(R.string.shared_string_show_on_map).toUpperCase());
 			}
 		} else {
-			buttonToolbarText.setText(app.getString(R.string.show_on_map).toUpperCase());
+			buttonToolbarText.setText(app.getString(R.string.shared_string_show_on_map).toUpperCase());
 		}
 	}
 

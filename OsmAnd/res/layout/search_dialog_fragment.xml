@@ -175,7 +175,7 @@
                     android:gravity="center_vertical"
                     android:lines="1"
                     android:singleLine="true"
-                    android:text="@string/show_on_map"
+                    android:text="@string/shared_string_show_on_map"
                     android:textColor="?attr/color_dialog_buttons"
                     android:textSize="@dimen/default_desc_text_size"/>
 

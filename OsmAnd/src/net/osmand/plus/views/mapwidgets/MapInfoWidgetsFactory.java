@@ -161,16 +161,22 @@ public class MapInfoWidgetsFactory {
 		return gpsInfoControl;
 	}
 
-	public static class QuickSearchView {
+	public static abstract class TopToolbarViewController {
+		public abstract void updateInfo();
+	}
+
+	public static class TopToolbarView {
 		private final MapActivity map;
+		private TopToolbarViewController toolbarController;
 		private View searchTopBar;
 		private View searchTopBarLayout;
 		private ImageButton searchBackButton;
 		private TextView searchTitle;
 		private ImageButton searchCloseButton;
 
-		public QuickSearchView(final MapActivity map) {
+		public TopToolbarView(final MapActivity map) {
 			this.map = map;
+
 			searchTopBar = map.findViewById(R.id.search_topbar);
 			searchTopBarLayout = map.findViewById(R.id.search_topbar_layout);
 			searchBackButton = (ImageButton) map.findViewById(R.id.search_back_button);
@@ -195,6 +201,14 @@ public class MapInfoWidgetsFactory {
 				}
 			});
 			updateVisibility(false);
+		}
+
+		public TopToolbarViewController getToolbarController() {
+			return toolbarController;
+		}
+
+		public void setToolbarController(TopToolbarViewController toolbarController) {
+			this.toolbarController = toolbarController;
 		}
 
 		public boolean updateVisibility(boolean visible) {

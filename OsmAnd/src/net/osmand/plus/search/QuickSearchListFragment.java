@@ -221,7 +221,9 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 					break;
 			}
 			getMapActivity().setQuickSearchTopbarActive(showTopbar);
-			if (!showTopbar) {
+			if (showTopbar) {
+				dialogFragment.hide();
+			} else {
 				dialogFragment.dismiss();
 			}
 			getMyApplication().getSettings().setMapLocationToShow(
@@ -230,7 +232,6 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 
 			MapActivity.launchMapActivityMoveToTop(getActivity());
 			if (showTopbar) {
-				dialogFragment.hide();
 				dialogFragment.reloadHistory();
 			}
 		}
