@@ -2603,4 +2603,7 @@
 	<string name="poi_organic_no">Ekologia manĝaĵo: ne</string>
 	<string name="poi_organic_only">Nur ekologia manĝaĵo</string>
 
+	<string name="poi_nuclear_explosion_salvo_first_detonation">Salvo-eksplodo: unua eksplodo de salvo-testo</string>
+	<string name="poi_nuclear_explosion_salvo_second_or_later_detonation">Salvo-eksplodo: dua aŭ posta eksplodo de salvo-testo</string>
+	<string name="poi_nuclear_explosion_crater_diameter">Eksplodo:</string>
 	</resources>
