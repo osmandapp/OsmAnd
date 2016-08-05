@@ -9,8 +9,10 @@ import java.util.List;
 import java.util.TreeSet;
 import java.util.regex.Pattern;
 
+import net.osmand.Collator;
 import net.osmand.CollatorStringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
+import net.osmand.OsmAndCollator;
 import net.osmand.StringMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
@@ -37,6 +39,7 @@ public class SearchPhrase {
 	private static final String DELIMITER = " ";
 	private static final String ALLDELIMITERS = "\\s|,";
 	private static final Pattern reg = Pattern.compile(ALLDELIMITERS);
+	private Collator clt; 
 	
 	
 	public enum SearchPhraseDataType {
@@ -44,12 +47,17 @@ public class SearchPhrase {
 	}
 	
 	
-	public SearchPhrase(SearchSettings settings) {
+	public SearchPhrase(SearchSettings settings, Collator clt) {
 		this.settings = settings;
+		this.clt = clt;
+	}
+	
+	public Collator getCollator() {
+		return clt;
 	}
 	
 	public SearchPhrase generateNewPhrase(String text, SearchSettings settings) {
-		SearchPhrase sp = new SearchPhrase(settings);
+		SearchPhrase sp = new SearchPhrase(settings, this.clt);
 		String restText = text;
 		List<SearchWord> leftWords = this.words;
 		String thisTxt = getText(true);
@@ -259,7 +267,7 @@ public class SearchPhrase {
 	}
 	
 	public SearchPhrase selectWord(SearchResult res, List<String> unknownWords, boolean lastComplete) {
-		SearchPhrase sp = new SearchPhrase(this.settings);
+		SearchPhrase sp = new SearchPhrase(this.settings, this.clt);
 		addResult(res, sp);
 		SearchResult prnt = res.parentSearchResult;
 		while(prnt != null) {

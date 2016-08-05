@@ -1665,7 +1665,7 @@ If you need help with OsmAnd application, please contact our support team: suppo
     <string name="left">to the left</string>
     <string name="front_left">left-forward</string>
     <string name="oclock">o\'clock</string>
-    <string name="towards">towards</string>
+    <string name="towards">toward</string>
     <string name="accuracy">Accuracy</string>
     <string name="altitude">Altitude</string>
     <string name="no_info">No info</string>

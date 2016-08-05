@@ -2,6 +2,7 @@ package net.osmand.search;
 
 import java.io.IOException;
 
+import net.osmand.OsmAndCollator;
 import net.osmand.data.LatLon;
 import net.osmand.search.SearchUICore.SearchResultMatcher;
 import net.osmand.search.core.SearchCoreFactory;
@@ -16,7 +17,7 @@ public class LocationSearchTest {
 	private void search(String string, LatLon latLon) throws IOException {
 		SearchResultMatcher srm = new SearchUICore.SearchResultMatcher(null, 0, null, 100);
 		new SearchCoreFactory.SearchLocationAndUrlAPI().
-			search(new SearchPhrase(null).generateNewPhrase(string, null), srm);
+			search(new SearchPhrase(null, OsmAndCollator.primaryCollator()).generateNewPhrase(string, null), srm);
 		Assert.assertEquals(1, srm.getRequestResults().size());
 		Assert.assertEquals(latLon, srm.getRequestResults().get(0).location);
 	}

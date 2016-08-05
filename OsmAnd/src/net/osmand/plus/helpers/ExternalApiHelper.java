@@ -428,7 +428,7 @@ public class ExternalApiHelper {
 		if (ni.directionInfo != null && ni.directionInfo.getTurnType() != null) {
 			TurnType tt = ni.directionInfo.getTurnType();
 			RouteDirectionInfo a = ni.directionInfo;
-			result.putExtra(prefix + PARAM_NT_DIRECTION_NAME, RoutingHelper.formatStreetName(a.getStreetName(), a.getRef(), a.getDestinationName()));
+			result.putExtra(prefix + PARAM_NT_DIRECTION_NAME, RoutingHelper.formatStreetName(a.getStreetName(), a.getRef(), a.getDestinationName(), ""));
 			result.putExtra(prefix + PARAM_NT_DIRECTION_TURN, tt.toXmlString());
 			if (tt.getLanes() != null) {
 				result.putExtra(prefix + PARAM_NT_DIRECTION_LANES, Arrays.toString(tt.getLanes()));

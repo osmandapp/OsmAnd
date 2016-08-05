@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
     <string name="starting_point_too_far">Pradžios taškas yra per toli nuo artimiausio kelio.</string>
     <string name="shared_location">Bendrinta vieta</string>
     <string name="osmand_parking_warning">Dėmesio</string>
@@ -1456,7 +1457,21 @@
     <string name="osmo_start_service">OsMo paslauga</string>
     <string name="osmo_gpx_track_downloaded">OsMo įrašas %1$s parsiųstas.</string>
     <string name="osmo_group_by_invite">Prisijungti su pakvietimais</string>
-    <string name="osmo_group_information_desc">" - Kurdami grupę suteikiate jai pavadinimą ir aprašymą.\n- Grupėje gali būti iki 8 asmenų.\n- Jei grupėje nebus jokios veiklos arba veikloje dalyvaus tik vienas asmuo dvi savaites, ji bus panaikinta.\n- Narystę grupėje galima apriboti pakvietimais, tačiau valdyti grupę bus galima tik iš administravimo konsolės.\n- Jei jums reikia sukuti grupę su kitokiais reikalavimais, susisiekite su http://osmo.mobi "</string>
+    <string name="osmo_group_information_desc">"
+ - Kurdami grupę suteikite jai pavadinimą ir aprašymą
+
+ - Iš programėlės sukuriamos tik paprasto tipo grupės. Daugiau informacijos https://osmo.mobi/g/new 
+
+ - Interneto svetainėje galite valdyti grupę, pridėti pėdsakus ar taškus
+
+ - Mes nepritariame tik vieno naudotojo grupėms jei tai ne LV grupė
+
+ - Uždaros grupės ribojamos iki 8 narių 
+
+ - Detalios nuostatos ir taisyklės visada prieinamos svetainėje OsMo.mobi
+
+ - Jei jums reikia išskirtinių sąlygų - susisiekite: osmo.mobi@gmail.com
+ "</string>
     <string name="osmo_group_information">Perskaitykite prieš kurdami grupę!</string>
     <string name="osmo_not_signed_in">Prisijungti prie OsMo nepavyko</string>
     <string name="osmo_auth_error_short">Autorizavimas nepavyko</string>
@@ -2217,4 +2232,34 @@
     <string name="osm_live_support_region">Palaikomas regionas</string>
     <string name="osm_live_thanks">Ačiū kad užsiprenumeravote tiesioginius atnaujinimus!</string>
     <string name="osm_live_region_desc">Dalis jūsų paramos bus persiųsta OSM naudotojams, kurie teikia žemėlapio pakeitimus tame regione</string>
+    <string name="route_stops_before">%1$s sustojimai iki</string>
+    <string name="coords_search">Paieška pagal koordinates</string>
+    <string name="advanced_coords_search">Platesnė paieška pagal koordinates</string>
+    <string name="back_to_search">Atgal į paiešką</string>
+    <string name="confirmation_to_delete_history_items">Ar norite ištrinti pasirinktus istorijos įrašus?</string>
+    <string name="show_something_on_map">Rodyti %1$s žemėlapyje</string>
+    <string name="release_2_4">"
+ • Nauja labai galinga tekstinė paieška
+
+
+ • Automobilio audio sistemos / garsiakalbio integracija per Bluetooth
+
+
+ • Patobulintas maršruto nurodymas, balso nurodymai ir posūkio juostų pateikimas
+
+
+ • Patobulintas transporto sluoksnio su maršrutais atvaizdavimas
+
+
+ • Pridėta daugiau lokalių ir dabar jau palaikomos regioninės lokalės
+
+
+ • Daugelis kitų patobulinimų ir ištaisytų klaidų
+
+
+ ir dar daugiau…
+ "</string>
+    <string name="dist_away_from_my_location">Ieškoti %1$s spinduliu</string>
+    <string name="show_on_map">Rodyti žemėlapyje</string>
+    <string name="share_history_subject">" bendrinta iš OsmAnd"</string>
     </resources>
