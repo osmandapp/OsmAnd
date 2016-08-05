@@ -764,8 +764,13 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			@Override
 			public boolean publish(SearchResult object) {
 				if (paused) {
+					if(regionResultCollection != null && regionResultCollection.getCurrentSearchResults().size() > 0) {
+						getResultCollection().addSearchResults(regionResultCollection.getCurrentSearchResults(), true, true);
+						regionResultCollection = null;
+					}
 					if (results.size() > 0) {
 						getResultCollection().addSearchResults(results, true, true);
+						results.clear();
 					}
 					return false;
 				}
@@ -784,14 +789,17 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 						}
 						regionResultApi = null;
 						regionResultCollection = null;
-						results = new ArrayList<>();
+						results.clear();
 						showApiResults(apiResults, phrase, hasRegionCollection);
 						break;
 					case SEARCH_API_REGION_FINISHED:
 						regionResultApi = (SearchCoreAPI) object.object;
 						final SearchPhrase regionPhrase = object.requiredSearchPhrase;
-						regionResultCollection = new SearchResultCollection(regionPhrase);
+						if(regionResultCollection == null) {
+							regionResultCollection = new SearchResultCollection(regionPhrase);
+						}
 						regionResultCollection.addSearchResults(results, true, true);
+						results.clear();
 						showRegionResults(regionPhrase, regionResultCollection);
 						break;
 					case PARTIAL_LOCATION:
