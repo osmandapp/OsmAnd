@@ -317,7 +317,7 @@ public class MapInfoWidgetsFactory {
 						showNextTurn = true;
 						RouteDirectionInfo next = routingHelper.getRouteDirections().get(di);
 						type[0] = next.getTurnType();
-						text = RoutingHelper.formatStreetName(next.getStreetName(), next.getRef(), next.getDestinationName(), true);
+						text = RoutingHelper.formatStreetName(next.getStreetName(), next.getRef(), next.getDestinationName(), map.getMyApplication().getString(R.string.towards));
 //						if (next.distance > 0) {
 //							text += " " + OsmAndFormatter.getFormattedDistance(next.distance, map.getMyApplication());
 //						}
@@ -332,7 +332,7 @@ public class MapInfoWidgetsFactory {
 				RouteDataObject rt = locationProvider.getLastKnownRouteSegment(); 
 				if (rt != null) {
 					text = RoutingHelper.formatStreetName(rt.getName(settings.MAP_PREFERRED_LOCALE.get()), 
-							rt.getRef(), rt.getDestinationName(settings.MAP_PREFERRED_LOCALE.get()), true);
+							rt.getRef(), rt.getDestinationName(settings.MAP_PREFERRED_LOCALE.get()), map.getMyApplication().getString(R.string.towards));
 				} 
 				if (text == null) {
 					text = "";

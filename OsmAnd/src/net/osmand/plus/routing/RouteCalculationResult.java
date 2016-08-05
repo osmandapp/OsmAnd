@@ -261,7 +261,7 @@ public class RouteCalculationResult {
                 }
 
                 String description = toString(turn, ctx) + " " + RoutingHelper.formatStreetName(info.getStreetName(),
-						info.getRef(), info.getDestinationName(), true);
+						info.getRef(), info.getDestinationName(), ctx.getString(R.string.towards));
                 String[] pointNames = s.getObject().getPointNames(s.getStartPointIndex());
                 if(pointNames != null) {
 					for (int t = 0; t < pointNames.length; t++) {

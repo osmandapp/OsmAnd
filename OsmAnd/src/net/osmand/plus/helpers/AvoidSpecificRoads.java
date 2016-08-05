@@ -99,7 +99,7 @@ public class AvoidSpecificRoads {
 
 	protected String getText(RouteDataObject obj) {
 		return RoutingHelper.formatStreetName(obj.getName(app.getSettings().MAP_PREFERRED_LOCALE.get()), 
-				obj.getRef(), obj.getDestinationName(app.getSettings().MAP_PREFERRED_LOCALE.get()), true);
+				obj.getRef(), obj.getDestinationName(app.getSettings().MAP_PREFERRED_LOCALE.get()), app.getString(R.string.towards));
 	}
 
 	public void showDialog(final MapActivity mapActivity) {
