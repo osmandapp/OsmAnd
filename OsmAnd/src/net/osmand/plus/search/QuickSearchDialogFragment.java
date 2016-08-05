@@ -1,5 +1,45 @@
 package net.osmand.plus.search;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import net.osmand.AndroidUtils;
+import net.osmand.Location;
+import net.osmand.OsmAndCollator;
+import net.osmand.ResultMatcher;
+import net.osmand.data.LatLon;
+import net.osmand.data.PointDescription;
+import net.osmand.osm.AbstractPoiType;
+import net.osmand.plus.AppInitializer;
+import net.osmand.plus.AppInitializer.AppInitializeListener;
+import net.osmand.plus.GPXUtilities;
+import net.osmand.plus.GPXUtilities.GPXFile;
+import net.osmand.plus.GPXUtilities.WptPt;
+import net.osmand.plus.LockableViewPager;
+import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
+import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.helpers.SearchHistoryHelper;
+import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
+import net.osmand.plus.poi.PoiUIFilter;
+import net.osmand.plus.search.QuickSearchHelper.SearchHistoryAPI;
+import net.osmand.search.SearchUICore;
+import net.osmand.search.SearchUICore.SearchResultCollection;
+import net.osmand.search.core.ObjectType;
+import net.osmand.search.core.SearchCoreAPI;
+import net.osmand.search.core.SearchCoreFactory.SearchAmenityTypesAPI;
+import net.osmand.search.core.SearchPhrase;
+import net.osmand.search.core.SearchResult;
+import net.osmand.search.core.SearchSettings;
+import net.osmand.search.core.SearchWord;
+import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -33,46 +73,6 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
-import net.osmand.AndroidUtils;
-import net.osmand.Location;
-import net.osmand.ResultMatcher;
-import net.osmand.data.LatLon;
-import net.osmand.data.PointDescription;
-import net.osmand.osm.AbstractPoiType;
-import net.osmand.plus.AppInitializer;
-import net.osmand.plus.AppInitializer.AppInitializeListener;
-import net.osmand.plus.GPXUtilities;
-import net.osmand.plus.GPXUtilities.GPXFile;
-import net.osmand.plus.GPXUtilities.WptPt;
-import net.osmand.plus.LockableViewPager;
-import net.osmand.plus.OsmAndFormatter;
-import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
-import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.helpers.SearchHistoryHelper;
-import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
-import net.osmand.plus.poi.PoiUIFilter;
-import net.osmand.plus.search.QuickSearchHelper.SearchHistoryAPI;
-import net.osmand.search.SearchUICore;
-import net.osmand.search.SearchUICore.SearchResultCollection;
-import net.osmand.search.core.ObjectType;
-import net.osmand.search.core.SearchCoreAPI;
-import net.osmand.search.core.SearchCoreFactory.SearchAmenityTypesAPI;
-import net.osmand.search.core.SearchPhrase;
-import net.osmand.search.core.SearchResult;
-import net.osmand.search.core.SearchSettings;
-import net.osmand.search.core.SearchWord;
-import net.osmand.util.Algorithms;
-import net.osmand.util.MapUtils;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class QuickSearchDialogFragment extends DialogFragment implements OsmAndCompassListener, OsmAndLocationListener {
 
@@ -697,13 +697,13 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		try {
 			SearchResultCollection res = searchUICore.shallowSearch(SearchHistoryAPI.class,
 					"", null);
+			List<QuickSearchListItem> rows = new ArrayList<>();
 			if (res != null) {
-				List<QuickSearchListItem> rows = new ArrayList<>();
 				for (SearchResult sr : res.getCurrentSearchResults()) {
 					rows.add(new QuickSearchListItem(app, sr));
 				}
-				historySearchFragment.updateListAdapter(rows, false);
 			}
+			historySearchFragment.updateListAdapter(rows, false);
 		} catch (IOException e) {
 			e.printStackTrace();
 			app.showToastMessage(e.getMessage());
@@ -764,7 +764,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 				if (paused) {
 					if (results.size() > 0) {
-						getResultCollection().getCurrentSearchResults().addAll(results);
+						getResultCollection().addSearchResults(results, true, true);
 					}
 					return false;
 				}
@@ -783,7 +783,6 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 							apiResults = regionCollection.getCurrentSearchResults();
 						} else {
 							apiResults = results;
-							searchUICore.sortSearchResults(phrase, apiResults);
 						}
 
 						regionResultApi = null;
@@ -796,9 +795,12 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 								if (!paused) {
 									boolean appended = false;
 									if (getResultCollection() == null || getResultCollection().getPhrase() != phrase) {
-										setResultCollection(new SearchResultCollection(apiResults, phrase));
+										SearchResultCollection resCollection = 
+												new SearchResultCollection(phrase);
+										resCollection.addSearchResults(results, true, true);
+										setResultCollection(resCollection);
 									} else {
-										getResultCollection().getCurrentSearchResults().addAll(apiResults);
+										getResultCollection().addSearchResults(apiResults, false, true );
 										appended = true;
 									}
 									if (!hasRegionCollection) {
@@ -810,22 +812,17 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 						break;
 					case SEARCH_API_REGION_FINISHED:
 						regionResultApi = (SearchCoreAPI) object.object;
-
-						final List<SearchResult> regionResults = new ArrayList<>(results);
 						final SearchPhrase regionPhrase = object.requiredSearchPhrase;
-						searchUICore.sortSearchResults(regionPhrase, regionResults);
-
+						regionResultCollection = new SearchResultCollection(regionPhrase);
+						regionResultCollection.addSearchResults(results, true, true);
 						app.runInUIThread(new Runnable() {
 							@Override
 							public void run() {
 								if (!paused) {
 									boolean appended = getResultCollection() != null && getResultCollection().getPhrase() == regionPhrase;
-									regionResultCollection = new SearchResultCollection(regionResults, regionPhrase);
 									if (appended) {
-										List<SearchResult> res = new ArrayList<>(getResultCollection().getCurrentSearchResults());
-										res.addAll(regionResults);
-										SearchResultCollection resCollection = new SearchResultCollection(res, regionPhrase);
-										searchUICore.filterSearchDuplicateResults(regionPhrase, resCollection.getCurrentSearchResults());
+										SearchResultCollection resCollection = 
+												getResultCollection().combineWithCollection(regionResultCollection, false, true);
 										updateSearchResult(resCollection, true);
 									} else {
 										updateSearchResult(regionResultCollection, false);
