@@ -89,7 +89,9 @@ public class SearchUICore {
 					filterSearchDuplicateResults();
 				}
 			} else {
-				if(removeDuplicates) {
+				if(!removeDuplicates) {
+					this.searchResults.addAll(sr);
+				} else {
 					ArrayList<SearchResult> addedResults = new ArrayList<>(sr);
 					SearchResultComparator cmp = new SearchResultComparator(phrase);
 					Collections.sort(addedResults, cmp);
