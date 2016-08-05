@@ -2333,16 +2333,16 @@ Ora, sono disponibili solo {2} MB.</string>
  • Improved route guidance, voice prompting, and turn lane indication
 
 
- • Improved transport layer
+ • Strato trasporti pubblici migliorato
 
 
- • Added more locales and now support regional locales
+ • Aggiunto più lingue e ora sono supportati anche i dialetti
 
 
- • Many other improvements and bug fixes
+ • Molte altre migliorie e correzioni di errori
 
 
- and more…
+ e altro …
  "</string>
     <string name="dist_away_from_my_location">Cerca %1$s lontano</string>
     <string name="show_on_map">Mostra sulla mappa</string>
