@@ -76,45 +76,48 @@ import btools.routingapp.IBRouterService;
 public class RouteProvider {
 	private static final org.apache.commons.logging.Log log = PlatformUtil.getLog(RouteProvider.class);
 	private static final String OSMAND_ROUTER = "OsmAndRouter";
-	
+
 	public enum RouteService {
 			OSMAND("OsmAnd (offline)"), YOURS("YOURS"), 
 //			ORS("OpenRouteService"), // disable ors due to no public rest service (testing2015 doesn't seem stable) 
 			OSRM("OSRM (only car)"),
 			BROUTER("BRouter (offline)"), STRAIGHT("Straight line");
+
 		private final String name;
-		private RouteService(String name){
+
+		private RouteService(String name) {
 			this.name = name;
 		}
+
 		public String getName() {
 			return name;
 		}
-		
-		public boolean isOnline(){
+
+		public boolean isOnline() {
 			return this != OSMAND && this != BROUTER;
 		}
-		
+
 		boolean isAvailable(OsmandApplication ctx) {
 			if (this == BROUTER) {
 				return ctx.getBRouterService() != null;
 			}
 			return true;
 		}
-		
-		public static RouteService[] getAvailableRouters(OsmandApplication ctx){
+
+		public static RouteService[] getAvailableRouters(OsmandApplication ctx) {
 			List<RouteService> list = new ArrayList<RouteProvider.RouteService>();
 			for(RouteService r : values()) {
-				if(r.isAvailable(ctx)) {
+				if (r.isAvailable(ctx)) {
 					list.add(r);
 				}
 			}
 			return list.toArray(new RouteService[list.size()]);
 		}
 	}
-	
-	public RouteProvider(){
+
+	public RouteProvider() {
 	}
-	
+
 	public static class GPXRouteParamsBuilder {
 		boolean calculateOsmAndRoute = false;
 		// parameters
@@ -124,8 +127,8 @@ public class RouteProvider {
 		private boolean passWholeRoute;
 		private boolean calculateOsmAndRouteParts;
 		private boolean useIntermediatePointsRTE;
-		
-		public GPXRouteParamsBuilder(GPXFile file, OsmandSettings settings){
+
+		public GPXRouteParamsBuilder(GPXFile file, OsmandSettings settings) {
 			leftSide = settings.DRIVING_REGION.get().leftHandDriving;
 			this.file = file;
 		}
@@ -133,65 +136,63 @@ public class RouteProvider {
 		public boolean isReverse() {
 			return reverse;
 		}
-		
+
 		public boolean isCalculateOsmAndRouteParts() {
 			return calculateOsmAndRouteParts;
 		}
-		
+
 		public void setCalculateOsmAndRouteParts(boolean calculateOsmAndRouteParts) {
 			this.calculateOsmAndRouteParts = calculateOsmAndRouteParts;
 		}
-		
+
 		public void setUseIntermediatePointsRTE(boolean useIntermediatePointsRTE) {
 			this.useIntermediatePointsRTE = useIntermediatePointsRTE;
 		}
-		
+
 		public boolean isUseIntermediatePointsRTE() {
 			return useIntermediatePointsRTE;
 		}
-		
+
 		public boolean isCalculateOsmAndRoute() {
 			return calculateOsmAndRoute;
 		}
-		
+
 		public void setCalculateOsmAndRoute(boolean calculateOsmAndRoute) {
 			this.calculateOsmAndRoute = calculateOsmAndRoute;
 		}
-		
-		public void setPassWholeRoute(boolean passWholeRoute){
+
+		public void setPassWholeRoute(boolean passWholeRoute) {
 			this.passWholeRoute = passWholeRoute;
 		}
-		
+
 		public boolean isPassWholeRoute() {
 			return passWholeRoute;
 		}
-		
+
 		public GPXRouteParams build(Location start, OsmandSettings settings) {
 			GPXRouteParams res = new GPXRouteParams();
 			res.prepareGPXFile(this);
-//			if(passWholeRoute && start != null){
+//			if (passWholeRoute && start != null) {
 //				res.points.add(0, start);
 //			}
 			return res;
 		}
-		
 
 		public void setReverse(boolean reverse) {
 			this.reverse = reverse;
 		}
-		
+
 		public GPXFile getFile() {
 			return file;
 		}
-		
+
 		public List<Location> getPoints() {
 			GPXRouteParams copy = new GPXRouteParams();
 			copy.prepareGPXFile(this);
 			return copy.getPoints();
 		}
-		
 	}
-	
+
 	public static class GPXRouteParams {
 		List<Location> points = new ArrayList<Location>();
 		List<RouteDirectionInfo> directions;
@@ -204,14 +205,14 @@ public class RouteProvider {
 		public List<Location> getPoints() {
 			return points;
 		}
-		
+
 		public Location getStartPointForRoute(){
 			if(!points.isEmpty()){
 				return points.get(0);
 			}
 			return null;
 		}
-		
+
 		public Location getEndPointForRoute(){
 			if(!points.isEmpty()){
 				return points.get(points.size());
@@ -227,20 +228,20 @@ public class RouteProvider {
 			}
 			return null;
 		}
-		
-		public GPXRouteParams prepareGPXFile(GPXRouteParamsBuilder builder){
+
+		public GPXRouteParams prepareGPXFile(GPXRouteParamsBuilder builder) {
 			GPXFile file = builder.file;
 			boolean reverse = builder.reverse; 
 			passWholeRoute = builder.passWholeRoute;
 			calculateOsmAndRouteParts = builder.calculateOsmAndRouteParts;
 			useIntermediatePointsRTE = builder.useIntermediatePointsRTE;
 			builder.calculateOsmAndRoute = false; // Disabled temporary builder.calculateOsmAndRoute;
-			if(!file.points.isEmpty()) {
-				wpt = new ArrayList<LocationPoint>(file.points );
+			if (!file.points.isEmpty()) {
+				wpt = new ArrayList<LocationPoint>(file.points);
 			}
-			if(file.isCloudmadeRouteFile() || OSMAND_ROUTER.equals(file.author)){
+			if (file.isCloudmadeRouteFile() || OSMAND_ROUTER.equals(file.author)) {
 				directions =  parseOsmAndGPXRoute(points, file, OSMAND_ROUTER.equals(file.author), builder.leftSide, 10);
-				if(reverse){
+					if (reverse) {
 					// clear directions all turns should be recalculated
 					directions = null;
 					Collections.reverse(points);
@@ -269,9 +270,8 @@ public class RouteProvider {
 			}
 			return this;
 		}
-
 	}
-	
+
 	private static Location createLocation(WptPt pt){
 		Location loc = new Location("OsmandRouteProvider");
 		loc.setLatitude(pt.lat);
@@ -286,9 +286,6 @@ public class RouteProvider {
 		}
 		return loc;
 	}
-	
-	
-	
 
 	public RouteCalculationResult calculateRouteImpl(RouteCalculationParams params){
 		long time = System.currentTimeMillis();
@@ -382,9 +379,6 @@ public class RouteProvider {
 		return res;
 	}
 
-
-
-
 	private RouteCalculationResult calculateOsmAndRouteWithIntermediatePoints(RouteCalculationParams routeParams,
 			final List<Location> intermediates) throws IOException {
 		RouteCalculationParams rp = new RouteCalculationParams();
@@ -417,9 +411,6 @@ public class RouteProvider {
 		return findVectorMapsRoute(rp, false);
 	}
 
-
-
-
 	private List<RouteDirectionInfo> calcDirections(int[] startI, int[] endI,
 			final List<RouteDirectionInfo> inputDirections) {
 		List<RouteDirectionInfo> directions = new ArrayList<RouteDirectionInfo>();
@@ -450,9 +441,6 @@ public class RouteProvider {
 		}
 		return directions;
 	}
-
-
-
 
 	private void insertFinalSegment(RouteCalculationParams routeParams, List<Location> points,
 			List<RouteDirectionInfo> directions, boolean calculateOsmAndRouteParts) {
@@ -570,16 +558,13 @@ public class RouteProvider {
 		}
 		return sublist;
 	}
-	
+
 	protected String getString(Context ctx, int resId){
 		if(ctx == null){
 			return ""; //$NON-NLS-1$
 		}
 		return ctx.getString(resId);
 	}
-	
-	
-
 
 	protected RouteCalculationResult findYOURSRoute(RouteCalculationParams params) throws MalformedURLException, IOException,
 			ParserConfigurationException, FactoryConfigurationError, SAXException {
@@ -641,7 +626,7 @@ public class RouteProvider {
 		params.intermediates = null;
 		return new RouteCalculationResult(res, null, params, null);
 	}
-	
+
 	protected RouteCalculationResult findVectorMapsRoute(final RouteCalculationParams params, boolean calcGPXRoute) throws IOException {
 		BinaryMapIndexReader[] files = params.ctx.getResourceManager().getRoutingMapFiles();
 		RoutePlannerFrontEnd router = new RoutePlannerFrontEnd(false);
@@ -718,7 +703,7 @@ public class RouteProvider {
 			complexCtx.leftSideNavigation = params.leftSide;
 			complexCtx.previouslyCalculatedRoute = ctx.previouslyCalculatedRoute;
 		}
-		
+
 		LatLon st = new LatLon(params.start.getLatitude(), params.start.getLongitude());
 		LatLon en = new LatLon(params.end.getLatitude(), params.end.getLongitude());
 		List<LatLon> inters  = new ArrayList<LatLon>();
@@ -727,9 +712,6 @@ public class RouteProvider {
 		}
 		return calcOfflineRouteImpl(params, router, ctx, complexCtx, st, en, inters, precalculated);
 	}
-
-
-
 
 	private RoutingConfiguration initOsmAndRoutingConfig(Builder config, final RouteCalculationParams params, OsmandSettings settings,
 			GeneralRouter generalRouter) throws IOException, FileNotFoundException {
@@ -774,9 +756,6 @@ public class RouteProvider {
 				memoryLimit, paramsR);
 		return cf;
 	}
-
-
-
 
 	private RouteCalculationResult calcOfflineRouteImpl(final RouteCalculationParams params,
 			RoutePlannerFrontEnd router, RoutingContext ctx, RoutingContext complexCtx, LatLon st, LatLon en,
@@ -840,9 +819,6 @@ public class RouteProvider {
 		}
 	}
 
-
-
-
 	private RouteCalculationResult applicationModeNotSupported(RouteCalculationParams params) {
 		return new RouteCalculationResult("Application mode '"+ params.mode.toHumanStringCtx(params.ctx)+ "'is not supported.");
 	}
@@ -854,8 +830,6 @@ public class RouteProvider {
 	private RouteCalculationResult emptyResult() {
 		return new RouteCalculationResult("Empty result");
 	}
-	
-	
 
 	private static List<RouteDirectionInfo> parseOsmAndGPXRoute(List<Location> res, GPXFile gpxFile, boolean osmandRouter,
 			boolean leftSide, float defSpeed) {
@@ -987,7 +961,7 @@ public class RouteProvider {
 		}
 		return directions;
 	}
-	
+
 	protected RouteCalculationResult findORSRoute(RouteCalculationParams params) throws MalformedURLException, IOException, ParserConfigurationException, FactoryConfigurationError,
 			SAXException {
 		List<Location> res = new ArrayList<Location>();
@@ -1053,14 +1027,14 @@ public class RouteProvider {
 		params.intermediates = null;
 		return new RouteCalculationResult(res, null, params, null);
 	}
-	
-	public GPXFile createOsmandRouterGPX(RouteCalculationResult srcRoute, OsmandApplication ctx){
-        TargetPointsHelper helper = ctx.getTargetPointsHelper();
+
+	public GPXFile createOsmandRouterGPX(RouteCalculationResult srcRoute, OsmandApplication ctx) {	
+		TargetPointsHelper helper = ctx.getTargetPointsHelper();
 		int currentRoute = srcRoute.currentRoute;
 		List<Location> routeNodes = srcRoute.getImmutableAllLocations();
 		List<RouteDirectionInfo> directionInfo = srcRoute.getImmutableAllDirections();
 		int currentDirectionInfo = srcRoute.currentDirectionInfo;
-		
+
 		GPXFile gpx = new GPXFile();
 		gpx.author = OSMAND_ROUTER;
 		Track track = new Track();
@@ -1079,18 +1053,18 @@ public class RouteProvider {
 			trkSegment.points.add(startpoint);
 		}
 
-		for(int i = cRoute; i< routeNodes.size(); i++){
+		for (int i = cRoute; i< routeNodes.size(); i++) {
 			Location loc = routeNodes.get(i);
 			WptPt pt = new WptPt();
 			pt.lat = loc.getLatitude();
 			pt.lon = loc.getLongitude();
-			if(loc.hasSpeed()){
+			if (loc.hasSpeed()) {
 				pt.speed = loc.getSpeed();
 			}
-			if(loc.hasAltitude()){
+			if (loc.hasAltitude()) {
 				pt.ele = loc.getAltitude();
 			}
-			if(loc.hasAccuracy()){
+			if (loc.hasAccuracy()) {
 				pt.hdop = loc.getAccuracy();
 			}
 			trkSegment.points.add(pt);
@@ -1108,7 +1082,7 @@ public class RouteProvider {
 				Map<String, String> extensions = pt.getExtensionsToWrite();
 				extensions.put("time", dirInfo.getExpectedTime() + "");
 				int turnType = dirInfo.getTurnType().getValue();
-				if(TurnType.C != turnType){
+				if (TurnType.C != turnType) {
 					extensions.put("turn", dirInfo.getTurnType().toXmlString());
 					extensions.put("turn-angle", dirInfo.getTurnType().getTurnAngle() + "");
 				}
@@ -1128,39 +1102,39 @@ public class RouteProvider {
 				route.points.add(pt);
 			}
 		}
-        List<TargetPoint> ps = helper.getIntermediatePointsWithTarget();
-        for(int k = 0; k < ps.size(); k++) {
-            WptPt pt = new WptPt();
-            pt.lat = ps.get(k).getLatitude();
-            pt.lon = ps.get(k).getLongitude();
-            if(k < ps.size()) {
-                pt.name = ps.get(k).getOnlyName() +"";
-                if(k == ps.size() - 1) {
-                    String target = ctx.getString(R.string.destination_point, "" );
-                    if(pt.name.startsWith(target)) {
-                        pt.name = ctx.getString(R.string.destination_point, pt.name );
-                    }
-                } else {
-                    String prefix = (k + 1) +". ";
-                    if(Algorithms.isEmpty(pt.name)) {
-                        pt.name = ctx.getString(R.string.target_point, pt.name );
-                    }
-                    if(pt.name.startsWith(prefix)) {
-                        pt.name = prefix + pt.name;
-                    }
-                }
-                pt.desc = pt.name;
-            }
-            gpx.points.add(pt);
-        }
-        return gpx;
+		List<TargetPoint> ps = helper.getIntermediatePointsWithTarget();
+		for (int k = 0; k < ps.size(); k++) {
+			WptPt pt = new WptPt();
+			pt.lat = ps.get(k).getLatitude();
+			pt.lon = ps.get(k).getLongitude();
+			if (k < ps.size()) {
+				pt.name = ps.get(k).getOnlyName() +"";
+				if (k == ps.size() - 1) {
+					String target = ctx.getString(R.string.destination_point, "");
+					if (pt.name.startsWith(target)) {
+						pt.name = ctx.getString(R.string.destination_point, pt.name);
+					}
+				} else {
+					String prefix = (k + 1) +". ";
+					if(Algorithms.isEmpty(pt.name)) {
+						pt.name = ctx.getString(R.string.target_point, pt.name);
+					}
+					if (pt.name.startsWith(prefix)) {
+						pt.name = prefix + pt.name;
+					}
+				}
+				pt.desc = pt.name;
+			}
+			gpx.points.add(pt);
+		}
+	return gpx;
 	}
-
 
 	private void appendOSRMLoc(StringBuilder uri, LatLon il) {
 		uri.append("&loc=").append(String.valueOf(il.getLatitude()));
 		uri.append(",").append(String.valueOf(il.getLongitude()));
 	}
+
 	protected RouteCalculationResult findOSRMRoute(RouteCalculationParams params)
 			throws MalformedURLException, IOException, JSONException {
 		// https://router.project-osrm.org/viaroute?loc=52.28,4.83&loc=52.35,4.95&alt=false&output=gpx
@@ -1186,7 +1160,7 @@ public class RouteProvider {
 		appendOSRMLoc(uri, params.end);
 
 		log.info("URL route " + uri);
-		
+
 		URLConnection connection = NetworkUtils.getHttpURLConnection(uri.toString());
 		connection.setRequestProperty("User-Agent", Version.getFullVersion(params.ctx));
 		StringBuilder content = new StringBuilder();
@@ -1213,7 +1187,6 @@ public class RouteProvider {
 		params.intermediates = null;
 		return new RouteCalculationResult(res, null, params, null);
 	}
-
 
 	protected RouteCalculationResult findBROUTERRoute(RouteCalculationParams params) throws MalformedURLException,
 			IOException, ParserConfigurationException, FactoryConfigurationError, SAXException {
@@ -1250,7 +1223,6 @@ public class RouteProvider {
 
 		OsmandApplication ctx = (OsmandApplication) params.ctx;
 		List<Location> res = new ArrayList<Location>();
-		
 
 		IBRouterService brouterService = ctx.getBRouterService();
 		if (brouterService == null) {
@@ -1329,5 +1301,4 @@ public class RouteProvider {
 		dots.add(location);
 		return new RouteCalculationResult(dots, null, params, null);
 	}
-
 }
