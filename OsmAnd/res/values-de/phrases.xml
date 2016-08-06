@@ -92,7 +92,7 @@
 	<string name="poi_camp_site">Campingplatz</string>
 	<string name="poi_canoe">Kanu</string>
 	<string name="poi_cape">Kap</string>
-	<string name="poi_car_parts">Autoteilehändler</string>
+	<string name="poi_car_parts">Autoteile</string>
 	<string name="poi_car_rental">Autovermietung</string>
 	<string name="poi_car_repair">Kfz-Werkstatt</string>
 	<string name="poi_car_sharing">Carsharing Station</string>
@@ -340,7 +340,7 @@
 	<string name="poi_orienteering">Orientierungslauf</string>
 	<string name="poi_outdoor">Outdoor-Geschäft</string>
 	<string name="poi_paddle_tennis">Tischtennis</string>
-	<string name="poi_paint">Lackiererei</string>
+	<string name="poi_paint">Farbengeschäft</string>
 	<string name="poi_craft_painter">Maler</string>
 	<string name="poi_palaeontological_site">Paläontologischer Ort</string>
 	<string name="poi_paragliding">Gleitschirmfliegen</string>
@@ -555,7 +555,7 @@
 	<string name="poi_turning_circle">Wendehammer</string>
 	<string name="poi_university">Universität</string>
 	<string name="poi_craft_upholsterer">Tapezierer</string>
-	<string name="poi_vacuum_cleaner">Staubsauger</string>
+	<string name="poi_vacuum_cleaner">Staubsaugergeschäft</string>
 	<string name="poi_variety_store">Kleinkaufhaus</string>
 	<string name="poi_vehicle_inspection">Fahrzeugkontrolle</string>
 	<string name="poi_vehicle_ramp">Fahrzeugrampe</string>
