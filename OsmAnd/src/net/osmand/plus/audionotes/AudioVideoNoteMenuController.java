@@ -76,6 +76,11 @@ public class AudioVideoNoteMenuController extends MenuController {
 		}
 	}
 
+	@Override
+	protected Object getObject() {
+		return mRecording;
+	}
+
 	public Recording getRecording() {
 		return mRecording;
 	}

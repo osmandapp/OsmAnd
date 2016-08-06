@@ -64,6 +64,11 @@ public class OsmBugMenuController extends MenuController {
 		}
 	}
 
+	@Override
+	protected Object getObject() {
+		return bug;
+	}
+
 	public OpenStreetNote getBug() {
 		return bug;
 	}

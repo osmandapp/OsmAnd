@@ -52,6 +52,11 @@ public class ParkingPositionMenuController extends MenuController {
 	}
 
 	@Override
+	protected Object getObject() {
+		return getLatLon();
+	}
+
+	@Override
 	protected int getSupportedMenuStatesPortrait() {
 		return MenuState.HEADER_ONLY | MenuState.HALF_SCREEN;
 	}

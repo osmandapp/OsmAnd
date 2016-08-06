@@ -183,6 +183,11 @@ public class MapDataMenuController extends MenuController {
 	}
 
 	@Override
+	protected Object getObject() {
+		return mapObject;
+	}
+
+	@Override
 	public boolean needTypeStr() {
 		return true;
 	}

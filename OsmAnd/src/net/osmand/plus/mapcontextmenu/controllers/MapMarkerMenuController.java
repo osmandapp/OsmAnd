@@ -40,6 +40,11 @@ public class MapMarkerMenuController extends MenuController {
 		}
 	}
 
+	@Override
+	protected Object getObject() {
+		return mapMarker;
+	}
+
 	public MapMarker getMapMarker() {
 		return mapMarker;
 	}

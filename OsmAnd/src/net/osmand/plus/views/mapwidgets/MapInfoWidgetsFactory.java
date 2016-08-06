@@ -37,6 +37,7 @@ import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.NextTurnInfoWidget.TurnDrawable;
 import net.osmand.router.TurnType;
 
+import java.util.Iterator;
 import java.util.LinkedList;
 
 public class MapInfoWidgetsFactory {
@@ -162,7 +163,7 @@ public class MapInfoWidgetsFactory {
 		return gpsInfoControl;
 	}
 
-	public static abstract class TopToolbarViewController {
+	public static abstract class TopToolbarController {
 		private TopToolbarViewControllerType type;
 		private int backButtonIconId = R.drawable.abc_ic_ab_back_mtrl_am_alpha;
 		private int closeButtonIconId = R.drawable.ic_action_remove_dark;
@@ -173,7 +174,7 @@ public class MapInfoWidgetsFactory {
 			CONTEXT_MENU
 		}
 
-		public TopToolbarViewController(TopToolbarViewControllerType type) {
+		public TopToolbarController(TopToolbarViewControllerType type) {
 			this.type = type;
 		}
 
@@ -210,7 +211,7 @@ public class MapInfoWidgetsFactory {
 
 	public static class TopToolbarView {
 		private final MapActivity map;
-		private LinkedList<TopToolbarViewController> viewControllers = new LinkedList<>();
+		private LinkedList<TopToolbarController> viewControllers = new LinkedList<>();
 		private View topbar;
 		private View topBarLayout;
 		private ImageButton backButton;
@@ -226,7 +227,7 @@ public class MapInfoWidgetsFactory {
 			backButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					TopToolbarViewController viewController = getTopViewController();
+					TopToolbarController viewController = getTopViewController();
 					if (viewController != null) {
 						viewController.onBackPressed(TopToolbarView.this);
 					}
@@ -236,7 +237,7 @@ public class MapInfoWidgetsFactory {
 			titleView.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					TopToolbarViewController viewController = getTopViewController();
+					TopToolbarController viewController = getTopViewController();
 					if (viewController != null) {
 						viewController.onTitlePressed(TopToolbarView.this);
 					}
@@ -246,7 +247,7 @@ public class MapInfoWidgetsFactory {
 			closeButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					TopToolbarViewController viewController = getTopViewController();
+					TopToolbarController viewController = getTopViewController();
 					if (viewController != null) {
 						viewController.onClosePressed(TopToolbarView.this);
 					}
@@ -279,7 +280,7 @@ public class MapInfoWidgetsFactory {
 			return closeButton;
 		}
 
-		public TopToolbarViewController getTopViewController() {
+		public TopToolbarController getTopViewController() {
 			if (viewControllers.size() > 0) {
 				return viewControllers.get(viewControllers.size() - 1);
 			} else {
@@ -287,14 +288,18 @@ public class MapInfoWidgetsFactory {
 			}
 		}
 
-		public void addViewController(TopToolbarViewController viewController) {
-			if (!viewControllers.contains(viewController)) {
-				viewControllers.add(viewController);
+		public void addViewController(TopToolbarController viewController) {
+			for (Iterator ctrlIter = viewControllers.iterator(); ctrlIter.hasNext(); ) {
+				TopToolbarController controller = (TopToolbarController) ctrlIter.next();
+				if (controller.getType() == viewController.getType()) {
+					ctrlIter.remove();
+				}
 			}
+			viewControllers.add(viewController);
 			updateInfo();
 		}
 
-		public void removeViewController(TopToolbarViewController viewController) {
+		public void removeViewController(TopToolbarController viewController) {
 			viewControllers.remove(viewController);
 			updateInfo();
 		}
@@ -317,7 +322,7 @@ public class MapInfoWidgetsFactory {
 		}
 
 		public void updateInfo() {
-			TopToolbarViewController viewController = getTopViewController();
+			TopToolbarController viewController = getTopViewController();
 			if (viewController != null) {
 				viewController.updateToolbar(this);
 			}
@@ -327,7 +332,7 @@ public class MapInfoWidgetsFactory {
 		public void updateTextColor(boolean nightMode, int textColor) {
 			OsmandApplication app = map.getMyApplication();
 			titleView.setTextColor(textColor);
-			TopToolbarViewController viewController = getTopViewController();
+			TopToolbarController viewController = getTopViewController();
 			if (viewController != null) {
 				backButton.setImageDrawable(app.getIconsCache().getIcon(viewController.getBackButtonIconId(), !nightMode));
 				closeButton.setImageDrawable(app.getIconsCache().getIcon(viewController.getCloseButtonIconId(), !nightMode));

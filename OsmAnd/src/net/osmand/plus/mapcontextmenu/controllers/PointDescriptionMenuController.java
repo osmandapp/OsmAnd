@@ -30,6 +30,11 @@ public class PointDescriptionMenuController extends MenuController {
 	}
 
 	@Override
+	protected Object getObject() {
+		return null;
+	}
+
+	@Override
 	protected int getSupportedMenuStatesPortrait() {
 		return MenuState.HEADER_ONLY | MenuState.HALF_SCREEN | MenuState.FULL_SCREEN;
 	}

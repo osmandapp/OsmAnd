@@ -45,7 +45,8 @@ public class MapMultiSelectionMenu extends BaseMenuController {
 		}
 
 		protected void init() {
-			controller = MenuController.getMenuController(mapActivity, pointDescription, object, MenuType.MULTI_LINE);
+			controller = MenuController.getMenuController(mapActivity, latLon, pointDescription, object, MenuType.MULTI_LINE);
+			controller.setActive(true);
 			initTitle();
 		}
 

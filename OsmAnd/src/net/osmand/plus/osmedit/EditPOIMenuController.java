@@ -110,6 +110,11 @@ public class EditPOIMenuController extends MenuController {
 		}
 	}
 
+	@Override
+	protected Object getObject() {
+		return osmPoint;
+	}
+
 	public OsmPoint getOsmPoint() {
 		return osmPoint;
 	}

@@ -2,6 +2,7 @@ package net.osmand.plus.mapcontextmenu.controllers;
 
 import android.graphics.drawable.Drawable;
 
+import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
@@ -18,6 +19,11 @@ public class MyLocationMenuController  extends MenuController {
 
 	@Override
 	protected void setObject(Object object) {
+	}
+
+	@Override
+	protected Object getObject() {
+		return getLatLon();
 	}
 
 	@Override

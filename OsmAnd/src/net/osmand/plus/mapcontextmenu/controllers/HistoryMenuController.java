@@ -36,6 +36,11 @@ public class HistoryMenuController extends MenuController {
 	}
 
 	@Override
+	protected Object getObject() {
+		return entry;
+	}
+
+	@Override
 	protected int getSupportedMenuStatesPortrait() {
 		return MenuState.HEADER_ONLY | MenuState.HALF_SCREEN;
 	}

@@ -58,7 +58,7 @@ import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.search.QuickSearchHelper.SearchHistoryAPI;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarView;
-import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarViewController;
+import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
 import net.osmand.search.SearchUICore;
 import net.osmand.search.SearchUICore.SearchResultCollection;
 import net.osmand.search.core.ObjectType;
@@ -1227,10 +1227,10 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		}
 	}
 
-	public static class QuickSearchToolbarController extends TopToolbarViewController {
+	public static class QuickSearchToolbarController extends TopToolbarController {
 
 		public QuickSearchToolbarController() {
-			super(TopToolbarViewController.TopToolbarViewControllerType.QUICK_SEARCH);
+			super(TopToolbarController.TopToolbarViewControllerType.QUICK_SEARCH);
 		}
 
 		@Override

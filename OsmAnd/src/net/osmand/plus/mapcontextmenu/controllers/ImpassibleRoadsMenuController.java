@@ -42,6 +42,11 @@ public class ImpassibleRoadsMenuController extends MenuController {
 	}
 
 	@Override
+	protected Object getObject() {
+		return route;
+	}
+
+	@Override
 	public String getTypeStr() {
 		return getMapActivity().getString(R.string.road_blocked);
 	}
