@@ -241,33 +241,35 @@ public class RouteCalculationResult {
 
 			if(turn != null) {
 				RouteDirectionInfo info = new RouteDirectionInfo(s.getSegmentSpeed(), turn);
-                if (routeInd  < list.size()) {
-                    int lind = routeInd;
-                    if(turn.isRoundAbout()) {
-                        int roundAboutEnd = prevLocationSize ;
-                    	// take next name for roundabout (not roundabout name)
+				if (routeInd  < list.size()) {
+					int lind = routeInd;
+					if(turn.isRoundAbout()) {
+						int roundAboutEnd = prevLocationSize ;
+						// take next name for roundabout (not roundabout name)
 						while (lind < list.size() - 1 && list.get(lind).getObject().roundabout()) {
 							roundAboutEnd += Math.abs(list.get(lind).getEndPointIndex()
 									- list.get(lind).getStartPointIndex());
 							lind++;
 						}
-                    	// Consider roundabout end.
-                    	info.routeEndPointOffset = roundAboutEnd;
-                    }
-                    RouteSegmentResult next = list.get(lind);
-                    info.setRef(next.getObject().getRef());
-                    info.setStreetName(next.getObject().getName(ctx.getSettings().MAP_PREFERRED_LOCALE.get()));
-                    info.setDestinationName(next.getObject().getDestinationName(ctx.getSettings().MAP_PREFERRED_LOCALE.get()));
-                }
+						// Consider roundabout end.
+						info.routeEndPointOffset = roundAboutEnd;
+					}
+					RouteSegmentResult next = list.get(lind);
+					info.setRef(next.getObject().getRef());
+					info.setStreetName(next.getObject().getName(ctx.getSettings().MAP_PREFERRED_LOCALE.get()));
+					info.setDestinationName(next.getObject().getDestinationName(ctx.getSettings().MAP_PREFERRED_LOCALE.get()));
+				}
 
-                String description = toString(turn, ctx) + " " + RoutingHelper.formatStreetName(info.getStreetName(),
+		                String description = toString(turn, ctx) + " " + RoutingHelper.formatStreetName(info.getStreetName(),
 						info.getRef(), info.getDestinationName(), ctx.getString(R.string.towards));
-                String[] pointNames = s.getObject().getPointNames(s.getStartPointIndex());
-                if(pointNames != null) {
+				destination = destination.trim();
+				String[] pointNames = s.getObject().getPointNames(s.getStartPointIndex());
+				if(pointNames != null) {
 					for (int t = 0; t < pointNames.length; t++) {
+						description = description.trim();
 						description += " " + pointNames[t];
 					}
-                }
+				}
 				info.setDescriptionRoute(description);
 				info.routePointOffset = prevLocationSize;
 				if(directions.size() > 0 && prevDirectionTime > 0 && prevDirectionDistance > 0) {
