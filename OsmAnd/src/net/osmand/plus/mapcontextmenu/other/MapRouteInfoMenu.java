@@ -607,7 +607,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 			if (!ri.getDescriptionRoutePart().endsWith(" " + OsmAndFormatter.getFormattedDistance(distance, ctx))) {
 				textView.setText((directionInfo + 1) + ". " + ri.getDescriptionRoutePart() + " " + OsmAndFormatter.getFormattedDistance(ri.distance, ctx));
 			} else {
-				textView.setText((directionInfo + 1) + ". " + ri.getDescriptionRoutePart();
+				textView.setText((directionInfo + 1) + ". " + ri.getDescriptionRoutePart());
 			}
 		} else {
 			TextView distanceText = (TextView) mainView.findViewById(R.id.DistanceText);
