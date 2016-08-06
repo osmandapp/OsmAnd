@@ -313,6 +313,10 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		if (init(latLon, pointDescription, object)) {
 			if (!MapContextMenuFragment.showInstance(this, mapActivity, centerMarker)) {
 				active = false;
+			} else {
+				if (menuController != null) {
+					menuController.onShow();
+				}
 			}
 			centerMarker = false;
 			autoHide = false;
@@ -345,7 +349,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 			if (object instanceof MapMarker) {
 				mapActivity.getMyApplication().getMapMarkersHelper().removeListener(this);
 			}
-			if(menuController != null) {
+			if (menuController != null) {
 				menuController.onClose();
 			}
 			if (this.object != null) {
@@ -361,8 +365,8 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 			mapActivity.getMapView().setMapPosition(mapPosition);
 			mapPosition = 0;
 		}
-		if(getMenuController() != null) {
-			getMenuController().onHide();
+		if (menuController != null) {
+			menuController.onHide();
 		}
 		WeakReference<MapContextMenuFragment> fragmentRef = findMenuFragment();
 		if (fragmentRef != null) {
@@ -454,7 +458,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 	}
 
 	private void acquireMenuController() {
-		if(menuController != null) {
+		if (menuController != null) {
 			menuController.onAcquireNewController(pointDescription, object);
 		}
 		menuController = MenuController.getMenuController(mapActivity, pointDescription, object, MenuType.STANDARD);

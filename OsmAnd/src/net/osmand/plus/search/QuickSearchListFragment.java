@@ -94,7 +94,7 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 					|| sr.objectType == ObjectType.WPT
 					|| sr.objectType == ObjectType.STREET_INTERSECTION) {
 
-				showOnMap(sr, sr.objectType != ObjectType.RECENT_OBJ);
+				showOnMap(sr);
 			} else {
 				dialogFragment.completeQueryWithObject(item.getSearchResult());
 			}
@@ -152,7 +152,7 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 		dialogFragment.onSearchListFragmentResume(this);
 	}
 
-	private void showOnMap(SearchResult searchResult, boolean showTopbar) {
+	private void showOnMap(SearchResult searchResult) {
 		if (searchResult.location != null) {
 			OsmandApplication app = getMyApplication();
 			String lang = searchResult.requiredSearchPhrase.getSettings().getLang();
@@ -220,21 +220,20 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 					pointDescription = wpt.getPointDescription(getMyApplication());
 					break;
 			}
-			if (showTopbar) {
-				dialogFragment.showToolbar();
-				dialogFragment.hide();
+
+			if (pointDescription != null) {
+				dialogFragment.showToolbar(pointDescription.getName());
 			} else {
-				dialogFragment.hideToolbar();
-				dialogFragment.dismiss();
+				dialogFragment.showToolbar();
 			}
+			dialogFragment.hide();
+
 			getMyApplication().getSettings().setMapLocationToShow(
 					searchResult.location.getLatitude(), searchResult.location.getLongitude(),
 					searchResult.preferredZoom, pointDescription, true, object);
 
 			MapActivity.launchMapActivityMoveToTop(getActivity());
-			if (showTopbar) {
-				dialogFragment.reloadHistory();
-			}
+			dialogFragment.reloadHistory();
 		}
 	}
 

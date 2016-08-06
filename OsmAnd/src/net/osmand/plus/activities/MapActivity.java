@@ -439,7 +439,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			closeDrawer();
 			return;
 		}
-
+		if (getQuickSearchDialogFragment() != null) {
+			showQuickSearch(false, false);
+			return;
+		}
 		if (prevActivityIntent != null && getSupportFragmentManager().getBackStackEntryCount() == 0) {
 			prevActivityIntent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 			LatLon loc = getMapLocation();
@@ -575,6 +578,14 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 		routingHelper.addListener(this);
 		app.getMapMarkersHelper().addListener(this);
+
+		QuickSearchDialogFragment searchDialogFragment = getQuickSearchDialogFragment();
+		if (searchDialogFragment != null) {
+			if (searchDialogFragment.isSearchHidden()) {
+				searchDialogFragment.hide();
+				searchDialogFragment.restoreToolbar();
+			}
+		}
 
 		getMyApplication().getAppCustomization().resumeActivity(MapActivity.class, this);
 		if (System.currentTimeMillis() - tm > 50) {

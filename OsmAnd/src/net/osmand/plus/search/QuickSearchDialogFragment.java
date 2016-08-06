@@ -84,6 +84,9 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	private static final String QUICK_SEARCH_LON_KEY = "quick_search_lon_key";
 	private static final String QUICK_SEARCH_SEARCHING_KEY = "quick_search_searching_key";
 	private static final String QUICK_SEARCH_SHOW_CATEGORIES_KEY = "quick_search_show_categories_key";
+	private static final String QUICK_SEARCH_HIDDEN_KEY = "quick_search_hidden_key";
+	private static final String QUICK_SEARCH_TOOLBAR_TITLE_KEY = "quick_search_toolbar_title_key";
+
 	private Toolbar toolbar;
 	private LockableViewPager viewPager;
 	private SearchFragmentPagerAdapter pagerAdapter;
@@ -117,7 +120,9 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	private boolean useMapCenter;
 	private boolean paused;
 	private boolean searching;
+	private boolean hidden;
 	private boolean foundPartialLocation;
+	private String toolbarTitle;
 
 	private boolean newSearch;
 	private boolean interruptedSearch;
@@ -150,6 +155,8 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 				centerLatLon = new LatLon(lat, lon);
 			}
 			interruptedSearch = savedInstanceState.getBoolean(QUICK_SEARCH_SEARCHING_KEY, false);
+			hidden = savedInstanceState.getBoolean(QUICK_SEARCH_HIDDEN_KEY, false);
+			toolbarTitle = savedInstanceState.getString(QUICK_SEARCH_TOOLBAR_TITLE_KEY);
 		}
 		if (searchQuery == null && arguments != null) {
 			searchQuery = arguments.getString(QUICK_SEARCH_QUERY_KEY);
@@ -385,8 +392,23 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		}
 	}
 
+	public void restoreToolbar() {
+		if (toolbarTitle != null) {
+			showToolbar(toolbarTitle);
+		} else {
+			showToolbar();
+		}
+	}
+
 	public void showToolbar() {
-		toolbarController.setTitle(getText());
+		toolbarTitle = getText();
+		toolbarController.setTitle(toolbarTitle);
+		getMapActivity().showTopToolbar(toolbarController);
+	}
+
+	public void showToolbar(String title) {
+		toolbarTitle = title;
+		toolbarController.setTitle(toolbarTitle);
 		getMapActivity().showTopToolbar(toolbarController);
 	}
 
@@ -404,6 +426,10 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		}
 	}
 
+	public boolean isSearchHidden() {
+		return hidden;
+	}
+
 	public void show() {
 		if (useMapCenter) {
 			LatLon mapCenter = getMapActivity().getMapView().getCurrentRotatedTileBox().getCenterLatLon();
@@ -414,10 +440,12 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		}
 		getDialog().show();
 		paused = false;
+		hidden = false;
 	}
 
 	public void hide() {
 		paused = true;
+		hidden = true;
 		hideProgressBar();
 		updateClearButtonVisibility(true);
 		getDialog().hide();
@@ -511,6 +539,10 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	public void onSaveInstanceState(Bundle outState) {
 		outState.putString(QUICK_SEARCH_QUERY_KEY, searchQuery);
 		outState.putBoolean(QUICK_SEARCH_SEARCHING_KEY, searching);
+		outState.putBoolean(QUICK_SEARCH_HIDDEN_KEY, hidden);
+		if (toolbarTitle != null) {
+			outState.putString(QUICK_SEARCH_TOOLBAR_TITLE_KEY, toolbarTitle);
+		}
 		if (centerLatLon != null) {
 			outState.putDouble(QUICK_SEARCH_LAT_KEY, centerLatLon.getLatitude());
 			outState.putDouble(QUICK_SEARCH_LON_KEY, centerLatLon.getLongitude());

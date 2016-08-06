@@ -53,6 +53,7 @@ import net.osmand.plus.osmo.OsMoMenuController;
 import net.osmand.plus.parkingpoint.ParkingPositionMenuController;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.views.DownloadedRegionsLayer.DownloadMapObject;
+import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarViewController;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -86,6 +87,8 @@ public abstract class MenuController extends BaseMenuController {
 	protected TitleButtonController leftDownloadButtonController;
 	protected TitleButtonController rightDownloadButtonController;
 	protected TitleProgressController titleProgressController;
+
+	protected TopToolbarViewController toolbarController;
 
 	protected IndexItem indexItem;
 	protected boolean downloaded;
@@ -272,6 +275,10 @@ public abstract class MenuController extends BaseMenuController {
 		return titleProgressController;
 	}
 
+	public TopToolbarViewController getToolbarController() {
+		return toolbarController;
+	}
+
 	public boolean supportZoomIn() {
 		return true;
 	}
@@ -442,10 +449,19 @@ public abstract class MenuController extends BaseMenuController {
 		public abstract void buttonPressed();
 	}
 
+	public void onShow() {
+		if (toolbarController != null) {
+			getMapActivity().showTopToolbar(toolbarController);
+		}
+	}
+
 	public void onHide() {
 	}
 
 	public void onClose() {
+		if (toolbarController != null) {
+			getMapActivity().hideTopToolbar(toolbarController);
+		}
 	}
 
 	public void onAcquireNewController(PointDescription pointDescription, Object object) {
