@@ -38,10 +38,9 @@ public class RouteDirectionInfo {
 	
 	public String getDescriptionRoute(OsmandApplication ctx) {
 		if (!descriptionRoute.endsWith(" " + OsmAndFormatter.getFormattedDistance(distance, ctx))) {
-			return descriptionRoute + " " + OsmAndFormatter.getFormattedDistance(distance, ctx);
-		} else {
-			return descriptionRoute;
+			descriptionRoute += " " + OsmAndFormatter.getFormattedDistance(distance, ctx);
 		}
+		return descriptionRoute.trim();
 	}
 	
 	public String getDescriptionRoutePart() {
