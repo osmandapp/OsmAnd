@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
     <string name="osmand_plus_extended_description_4000_chars_v2">
 OsmAnd Maps &amp; Navigation - Orte finden und Routen berechnen ohne Interbetverbindung. Dazu einfach Landkarten für beliebuge Länder herunterladen, bevor man sich auf Reisen begibt.
 
@@ -2452,7 +2453,7 @@ Falls Sie OsmAnd mögen und das Projekt OpenStreetMap unterstützen wollen, so i
     <string name="lang_hsb">Obersorbisch</string>
     <string name="back_to_search">Zurück zur Suche</string>
     <string name="confirmation_to_delete_history_items">Ausgewählte Verlaufselemente löschen?</string>
-    <string name="show_something_on_map">%1$s auf der Karte zeigen</string>
+    <string name="show_something_on_map">%1$s auf der Karte anzeigen</string>
     <string name="release_2_4">"
  • Neue sehr leistungsfähige Freitextsuche
 
@@ -2469,7 +2470,7 @@ Falls Sie OsmAnd mögen und das Projekt OpenStreetMap unterstützen wollen, so i
     <string name="show_on_map">Zeige auf der Karte</string>
     <string name="share_history_subject">" geteilt über OsmAnd"</string>
     <string name="dist_away_from_my_location">Suche %1$s entfernt</string>
-    <string name="advanced_coords_search">Koordinatensuche (erweitert)</string>
+    <string name="advanced_coords_search">Erweiterte Koordinatensuche</string>
     <string name="coords_search">Koordinatensuche</string>
     <string name="route_stops_before">%1$s Haltestellen vor</string>
     </resources>
