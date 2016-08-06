@@ -223,6 +223,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 						showToolbar();
 						MapActivity.launchMapActivityMoveToTop(getActivity());
+						reloadHistory();
 						hide();
 					}
 				}
