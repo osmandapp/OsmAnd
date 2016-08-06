@@ -1045,13 +1045,14 @@ public class RouteProvider {
 		int cDirInfo = currentDirectionInfo;
 
 		//saving start point to gpx file
-		WptPt startpoint = new WptPt();
-		TargetPoint sc = helper.getPointToStart();
-		if (sc != null){
-			startpoint.lon = sc.getLongitude();
-			startpoint.lat = sc.getLatitude();
-			trkSegment.points.add(startpoint);
-		}
+// This causes all offsets to be wrong by 1. Also: start point seems already present in file.
+//		WptPt startpoint = new WptPt();
+//		TargetPoint sc = helper.getPointToStart();
+//		if (sc != null){
+//			startpoint.lon = sc.getLongitude();
+//			startpoint.lat = sc.getLatitude();
+//			trkSegment.points.add(startpoint);
+//		}
 
 		for (int i = cRoute; i< routeNodes.size(); i++) {
 			Location loc = routeNodes.get(i);
