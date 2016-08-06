@@ -193,15 +193,15 @@ public class ShowRouteInfoActivity extends OsmandListActivity {
 			drawable.setRouteType(model.getTurnType());
 			icon.setImageDrawable(drawable);
 
-			label.setText(model.getDescriptionRoutePart());
+			label.setText(position + ". " + model.getDescriptionRoutePart());
 			if (model.distance > 0) {
 				distanceLabel.setText(OsmAndFormatter.getFormattedDistance(
 						model.distance, getMyApplication()));
 				timeLabel.setText(getTimeDescription(model));
 				row.setContentDescription(label.getText() + " " + timeLabel.getText()); //$NON-NLS-1$
 			} else {
-				if (label.getText().length() == 0) {
-					label.setText(getString((position != lastItemIndex) ? R.string.arrived_at_intermediate_point : R.string.arrived_at_destination));
+				if (label.getText().equals(position + ". ")) {
+					label.setText(getString((position != lastItemIndex) ? position + ". " + R.string.arrived_at_intermediate_point : position + ". " + R.string.arrived_at_destination));
 				}
 				distanceLabel.setText(""); //$NON-NLS-1$
 				timeLabel.setText(""); //$NON-NLS-1$
