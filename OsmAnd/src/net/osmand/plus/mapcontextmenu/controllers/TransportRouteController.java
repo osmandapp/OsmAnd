@@ -34,12 +34,7 @@ public class TransportRouteController extends MenuController {
 		toolbarController = new TopToolbarController(TopToolbarViewControllerType.CONTEXT_MENU) {
 			@Override
 			public void onBackPressed(TopToolbarView view) {
-				MapContextMenu menu = getMapActivity().getContextMenu();
-				getMapActivity().hideTopToolbar(toolbarController);
-				resetRoute();
-				if (!menu.showPreviousMenu() && menu.getMenuController() == TransportRouteController.this) {
-					menu.close();
-				}
+				getMapActivity().getContextMenu().backToolbarAction(TransportRouteController.this);
 			}
 
 			@Override
@@ -49,15 +44,7 @@ public class TransportRouteController extends MenuController {
 
 			@Override
 			public void onClosePressed(TopToolbarView view) {
-				MapContextMenu menu = getMapActivity().getContextMenu();
-				if (menu.getMenuController() == TransportRouteController.this) {
-					menu.close();
-				} else {
-					getMapActivity().hideTopToolbar(toolbarController);
-					menu.clearHistoryStack();
-					resetRoute();
-					getMapActivity().refreshMap();
-				}
+				getMapActivity().getContextMenu().closeToolbar(TransportRouteController.this);
 			}
 		};
 		toolbarController.setTitle(getNameStr());
