@@ -264,7 +264,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 						boolean update, boolean restorePrevious) {
 
 		if (myLocation == null) {
-			myLocation = getMapActivity().getMyApplication().getSettings().getLastKnownMapLocation();
+			myLocation = mapActivity.getMyApplication().getSettings().getLastKnownMapLocation();
 		}
 
 		if (!update && isVisible()) {
@@ -540,7 +540,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		}
 	}
 
-	public boolean hasHistoryStackBackAction() {
+	private boolean hasHistoryStackBackAction() {
 		for (MapContextMenuData menuData : historyStack) {
 			if (menuData.hasBackAction()) {
 				return true;
@@ -549,8 +549,25 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		return false;
 	}
 
-	public void clearHistoryStack() {
+	private void clearHistoryStack() {
 		historyStack.clear();
+	}
+
+	public void backToolbarAction(MenuController menuController) {
+		menuController.onClose();
+		if (!showPreviousMenu() && this.menuController.getClass() == menuController.getClass()) {
+			close();
+		}
+	}
+
+	public void closeToolbar(MenuController menuController) {
+		if (this.menuController.getClass() == menuController.getClass()) {
+			close();
+		} else {
+			clearHistoryStack();
+			menuController.onClose();
+			mapActivity.refreshMap();
+		}
 	}
 
 	public void onSingleTapOnMap() {
