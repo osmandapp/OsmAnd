@@ -1,11 +1,7 @@
 package net.osmand.plus.mapcontextmenu.controllers;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import android.view.View;
+import android.view.View.OnClickListener;
 
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -24,8 +20,12 @@ import net.osmand.plus.resources.TransportIndexRepository;
 import net.osmand.plus.views.TransportStopsLayer;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
-import android.view.View;
-import android.view.View.OnClickListener;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 public class TransportStopController extends MenuController {
 
@@ -91,6 +91,11 @@ public class TransportStopController extends MenuController {
 			this.transportStop = (TransportStop) object;
 			processTransportStop();
 		}
+	}
+
+	@Override
+	protected Object getObject() {
+		return transportStop;
 	}
 
 	@Override

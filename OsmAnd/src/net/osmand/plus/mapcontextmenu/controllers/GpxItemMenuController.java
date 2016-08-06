@@ -26,6 +26,11 @@ public class GpxItemMenuController extends MenuController {
 	}
 
 	@Override
+	protected Object getObject() {
+		return item;
+	}
+
+	@Override
 	protected int getSupportedMenuStatesPortrait() {
 		return MenuState.HEADER_ONLY | MenuState.HALF_SCREEN | MenuState.FULL_SCREEN;
 	}

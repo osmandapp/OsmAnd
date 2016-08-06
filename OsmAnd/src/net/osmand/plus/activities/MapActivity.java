@@ -97,7 +97,7 @@ import net.osmand.plus.views.OsmAndMapSurfaceView;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.corenative.NativeCoreContext;
-import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarViewController;
+import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
 
@@ -1407,13 +1407,13 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		return mapInfoLayer.hasTopToolbar();
 	}
 
-	public void showTopToolbar(TopToolbarViewController viewController) {
+	public void showTopToolbar(TopToolbarController viewController) {
 		MapInfoLayer mapInfoLayer = getMapLayers().getMapInfoLayer();
 		mapInfoLayer.addTopToolbarViewController(viewController);
 		this.topToolbarActive = mapInfoLayer.hasTopToolbar();
 	}
 
-	public void hideTopToolbar(TopToolbarViewController viewController) {
+	public void hideTopToolbar(TopToolbarController viewController) {
 		MapInfoLayer mapInfoLayer = getMapLayers().getMapInfoLayer();
 		mapInfoLayer.removeTopToolbarViewController(viewController);
 		this.topToolbarActive = mapInfoLayer.hasTopToolbar();

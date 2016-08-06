@@ -16,29 +16,63 @@ import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.mapcontextmenu.controllers.TransportStopController.TransportStopRoute;
 import net.osmand.plus.views.TransportStopsLayer;
+import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
+import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController.TopToolbarViewControllerType;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarView;
-import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarViewController;
 
 import java.lang.ref.WeakReference;
 import java.util.List;
 
 public class TransportRouteController extends MenuController {
 
-	private TransportStopRoute transportStop;
+	private TransportStopRoute transportRoute;
 
-	public TransportRouteController(OsmandApplication app, MapActivity mapActivity, PointDescription pointDescription,
-									TransportStopRoute transportStop) {
+	public TransportRouteController(OsmandApplication app, final MapActivity mapActivity, PointDescription pointDescription,
+									final TransportStopRoute transportRoute) {
 		super(new MenuBuilder(app), pointDescription, mapActivity);
-		this.transportStop = transportStop;
-		toolbarController = new TransportRouteToolbarController();
+		this.transportRoute = transportRoute;
+		toolbarController = new TopToolbarController(TopToolbarViewControllerType.CONTEXT_MENU) {
+			@Override
+			public void onBackPressed(TopToolbarView view) {
+				MapContextMenu menu = getMapActivity().getContextMenu();
+				getMapActivity().hideTopToolbar(toolbarController);
+				resetRoute();
+				if (!menu.showPreviousMenu() && menu.getMenuController() == TransportRouteController.this) {
+					menu.close();
+				}
+			}
+
+			@Override
+			public void onTitlePressed(TopToolbarView view) {
+				showMenuAndRoute(getLatLon(), true);
+			}
+
+			@Override
+			public void onClosePressed(TopToolbarView view) {
+				MapContextMenu menu = getMapActivity().getContextMenu();
+				if (menu.getMenuController() == TransportRouteController.this) {
+					menu.close();
+				} else {
+					getMapActivity().hideTopToolbar(toolbarController);
+					menu.clearHistoryStack();
+					resetRoute();
+					getMapActivity().refreshMap();
+				}
+			}
+		};
 		toolbarController.setTitle(getNameStr());
 	}
 
 	@Override
 	protected void setObject(Object object) {
 		if (object instanceof TransportStopRoute) {
-			this.transportStop = (TransportStopRoute) object;
+			this.transportRoute = (TransportStopRoute) object;
 		}
+	}
+
+	@Override
+	protected Object getObject() {
+		return transportRoute;
 	}
 
 	@Override
@@ -48,9 +82,9 @@ public class TransportRouteController extends MenuController {
 
 	@Override
 	public int getLeftIconId() {
-		return this.transportStop.type == null ?
+		return this.transportRoute.type == null ?
 				R.drawable.mx_public_transport :
-				this.transportStop.type.getTopResourceId();
+				this.transportRoute.type.getTopResourceId();
 	}
 
 	@Override
@@ -85,35 +119,39 @@ public class TransportRouteController extends MenuController {
 	}
 
 	@Override
+	public void onShow() {
+		super.onShow();
+		showRoute();
+	}
+
+	@Override
 	public void onClose() {
 		super.onClose();
-		TransportStopsLayer stopsLayer = getMapActivity().getMapLayers().getTransportStopsLayer();
-		stopsLayer.setRoute(null);
+		resetRoute();
 	}
 
 	public void onAcquireNewController(PointDescription pointDescription, Object object) {
 		if (object instanceof TransportRouteStop) {
-			TransportStopsLayer stopsLayer = getMapActivity().getMapLayers().getTransportStopsLayer();
-			stopsLayer.setRoute(null);
+			resetRoute();
 		}
 	}
 
 	@Override
 	public void addPlainMenuItems(String typeStr, PointDescription pointDescription, final LatLon latLon) {
 		super.addPlainMenuItems(typeStr, pointDescription, latLon);
-		List<TransportStop> stops = transportStop.route.getForwardStops();
+		List<TransportStop> stops = transportRoute.route.getForwardStops();
 		boolean useEnglishNames = getMapActivity().getMyApplication().getSettings().usingEnglishNames();
 		int currentStop = -1;
 		for (int i = 0; i < stops.size(); i++) {
 			final TransportStop stop = stops.get(i);
-			if (stop.getName().equals(transportStop.stop.getName())) {
+			if (stop.getName().equals(transportRoute.stop.getName())) {
 				currentStop = i;
 				break;
 			}
 		}
-		int defaultIcon = transportStop.type == null ? R.drawable.mx_route_bus_ref : transportStop.type.getResourceId();
+		int defaultIcon = transportRoute.type == null ? R.drawable.mx_route_bus_ref : transportRoute.type.getResourceId();
 		int startPosition = 0;
-		if (!transportStop.showWholeRoute) {
+		if (!transportRoute.showWholeRoute) {
 			startPosition = (currentStop == -1 ? 0 : currentStop);
 			if (currentStop > 0) {
 				addPlainMenuItem(defaultIcon, getMapActivity().getString(R.string.route_stops_before, currentStop),
@@ -121,13 +159,7 @@ public class TransportRouteController extends MenuController {
 
 							@Override
 							public void onClick(View arg0) {
-								MapContextMenu mm = getMapActivity().getContextMenu();
-								transportStop.showWholeRoute = true;
-								mm.showOrUpdate(latLon, getPointDescription(), transportStop);
-								TransportStopsLayer stopsLayer = getMapActivity().getMapLayers().getTransportStopsLayer();
-								int cz = transportStop.calculateZoom(0, getMapActivity().getMapView().getCurrentRotatedTileBox());
-								getMapActivity().changeZoom(cz - getMapActivity().getMapView().getZoom());
-								stopsLayer.setRoute(transportStop.route);
+								showMenuAndRoute(latLon, false);
 							}
 						});
 			}
@@ -140,13 +172,12 @@ public class TransportRouteController extends MenuController {
 
 						@Override
 						public void onClick(View arg0) {
-							MapContextMenu mm = getMapActivity().getContextMenu();
+							MapContextMenu menu = getMapActivity().getContextMenu();
 							PointDescription pd = new PointDescription(PointDescription.POINT_TYPE_TRANSPORT_STOP,
 									getMapActivity().getString(R.string.transport_Stop), name);
-							TransportStopsLayer stopsLayer = getMapActivity().getMapLayers().getTransportStopsLayer();
-							stopsLayer.setRoute(null);
-							mm.show(stop.getLocation(), pd, stop);
-							WeakReference<MapContextMenuFragment> rr = mm.findMenuFragment();
+							resetRoute();
+							menu.show(stop.getLocation(), pd, stop);
+							WeakReference<MapContextMenuFragment> rr = menu.findMenuFragment();
 							if (rr != null && rr.get() != null) {
 								rr.get().centerMarkerLocation();
 							}
@@ -155,25 +186,24 @@ public class TransportRouteController extends MenuController {
 		}
 	}
 
-	public static class TransportRouteToolbarController extends TopToolbarViewController {
-
-		public TransportRouteToolbarController() {
-			super(TopToolbarViewControllerType.CONTEXT_MENU);
+	private void showMenuAndRoute(LatLon latLon, boolean centerMarker) {
+		MapContextMenu menu = getMapActivity().getContextMenu();
+		if (centerMarker) {
+			menu.setCenterMarker(true);
 		}
+		menu.show(latLon, getPointDescription(), transportRoute);
+	}
 
-		@Override
-		public void onBackPressed(TopToolbarView view) {
-			view.getMap().getContextMenu().close();
-		}
+	private void showRoute() {
+		transportRoute.showWholeRoute = true;
+		TransportStopsLayer stopsLayer = getMapActivity().getMapLayers().getTransportStopsLayer();
+		int cz = transportRoute.calculateZoom(0, getMapActivity().getMapView().getCurrentRotatedTileBox());
+		getMapActivity().changeZoom(cz - getMapActivity().getMapView().getZoom());
+		stopsLayer.setRoute(transportRoute.route);
+	}
 
-		@Override
-		public void onTitlePressed(TopToolbarView view) {
-
-		}
-
-		@Override
-		public void onClosePressed(TopToolbarView view) {
-			view.getMap().getContextMenu().close();
-		}
+	private void resetRoute() {
+		TransportStopsLayer stopsLayer = getMapActivity().getMapLayers().getTransportStopsLayer();
+		stopsLayer.setRoute(null);
 	}
 }

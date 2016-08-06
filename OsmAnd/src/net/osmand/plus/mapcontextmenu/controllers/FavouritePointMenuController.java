@@ -31,6 +31,11 @@ public class FavouritePointMenuController extends MenuController {
 	}
 
 	@Override
+	protected Object getObject() {
+		return fav;
+	}
+
+	@Override
 	protected int getSupportedMenuStatesPortrait() {
 		return MenuState.HEADER_ONLY | MenuState.HALF_SCREEN | MenuState.FULL_SCREEN;
 	}

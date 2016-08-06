@@ -58,6 +58,11 @@ public class TargetPointMenuController extends MenuController {
 		}
 	}
 
+	@Override
+	protected Object getObject() {
+		return targetPoint;
+	}
+
 	public TargetPoint getTargetPoint() {
 		return targetPoint;
 	}

@@ -1,6 +1,7 @@
 package net.osmand.plus.mapcontextmenu;
 
 import android.graphics.drawable.Drawable;
+import android.support.annotation.NonNull;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.LinearLayout;
@@ -53,7 +54,7 @@ import net.osmand.plus.osmo.OsMoMenuController;
 import net.osmand.plus.parkingpoint.ParkingPositionMenuController;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.views.DownloadedRegionsLayer.DownloadMapObject;
-import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarViewController;
+import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -79,6 +80,8 @@ public abstract class MenuController extends BaseMenuController {
 	private int currentMenuState;
 	private MenuType menuType = MenuType.STANDARD;
 	private PointDescription pointDescription;
+	private LatLon latLon;
+	private boolean active;
 
 	protected TitleButtonController leftTitleButtonController;
 	protected TitleButtonController rightTitleButtonController;
@@ -88,7 +91,7 @@ public abstract class MenuController extends BaseMenuController {
 	protected TitleButtonController rightDownloadButtonController;
 	protected TitleProgressController titleProgressController;
 
-	protected TopToolbarViewController toolbarController;
+	protected TopToolbarController toolbarController;
 
 	protected IndexItem indexItem;
 	protected boolean downloaded;
@@ -109,7 +112,8 @@ public abstract class MenuController extends BaseMenuController {
 	}
 
 	public static MenuController getMenuController(MapActivity mapActivity,
-												   PointDescription pointDescription, Object object, MenuType menuType) {
+												   LatLon latLon, PointDescription pointDescription, Object object,
+												   MenuType menuType) {
 		OsmandApplication app = mapActivity.getMyApplication();
 		MenuController menuController = null;
 		if (object != null) {
@@ -156,6 +160,7 @@ public abstract class MenuController extends BaseMenuController {
 			menuController = new PointDescriptionMenuController(app, mapActivity, pointDescription);
 		}
 		menuController.menuType = menuType;
+		menuController.setLatLon(latLon);
 		return menuController;
 	}
 
@@ -169,6 +174,16 @@ public abstract class MenuController extends BaseMenuController {
 	}
 
 	protected abstract void setObject(Object object);
+
+	protected abstract Object getObject();
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
+	}
 
 	public void addPlainMenuItem(int iconId, String text, boolean needLinks, boolean isUrl, OnClickListener onClickListener) {
 		builder.addPlainMenuItem(iconId, text, needLinks, isUrl, onClickListener);
@@ -275,8 +290,16 @@ public abstract class MenuController extends BaseMenuController {
 		return titleProgressController;
 	}
 
-	public TopToolbarViewController getToolbarController() {
+	public TopToolbarController getToolbarController() {
 		return toolbarController;
+	}
+
+	public boolean hasBackAction() {
+		return toolbarController != null;
+	}
+
+	public LatLon getLatLon() {
+		return latLon;
 	}
 
 	public boolean supportZoomIn() {
@@ -469,6 +492,10 @@ public abstract class MenuController extends BaseMenuController {
 
 	public boolean isMapDownloaded() {
 		return downloaded;
+	}
+
+	public void setLatLon(@NonNull LatLon latLon) {
+		this.latLon = latLon;
 	}
 
 	public void buildMapDownloadButton(LatLon latLon) {

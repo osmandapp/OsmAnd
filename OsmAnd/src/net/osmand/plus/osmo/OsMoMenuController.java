@@ -63,6 +63,11 @@ public class OsMoMenuController extends MenuController {
 		}
 	}
 
+	@Override
+	protected Object getObject() {
+		return device;
+	}
+
 	public OsMoDevice getDevice() {
 		return device;
 	}
