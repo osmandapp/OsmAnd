@@ -168,7 +168,7 @@
 	<string name="poi_tram_stop">Haltejo trama</string>
 	<string name="poi_public_transport_stop_position">Haltejo</string>
 	<string name="poi_public_transport_station">Stacidomo</string>
-	<string name="poi_bus_station">Stacidomo busa</string>
+	<string name="poi_bus_station">Stacidomo aŭtobusa</string>
 	<string name="poi_railway_station">Stacidomo fervoja</string>
 	<string name="poi_halt">Haltejo fervoja</string>
 	<string name="poi_railway_platform">Kajo fervoja</string>
@@ -2636,4 +2636,37 @@
 	<string name="poi_telescope">Teleskopo</string>
 	<string name="poi_health_facility_type_counselling_centre">San-servejo: kuracistejo</string>
 	<string name="poi_health_facility_type_laboratory">San-servejo: laboratorio</string>
+	<string name="poi_health_facility_type_therapy">San-servejo: terapiejo</string>
+	<string name="poi_health_facility_type_department">San-servejo: departemento</string>
+	<string name="poi_health_facility_type_dispensary">San-servejo: disdonejo de medikamentoj</string>
+	<string name="poi_health_facility_type_nursing_home">San-servejo: domo de permanenta zorgado</string>
+	<string name="poi_health_facility_type_first_aid">San-servejo: tujhelpejo</string>
+	<string name="poi_health_facility_type_support_group_home">San-servejo: domo de grupo de psika apogo</string>
+
+	<string name="poi_suction_point">Akvo-pumpejo (fajrobrigado)</string>
+
+	<string name="poi_fire_hydrant_type_underground">Speco: subtera</string>
+	<string name="poi_fire_hydrant_type_pillar">Speco: supertersurfaca</string>
+	<string name="poi_fire_hydrant_type_pond">Speco: lageto</string>
+	<string name="poi_fire_hydrant_type_wall">Speco: enmura</string>
+
+	<string name="poi_fire_hydrant_type_dry_barrel">Speco: supertersurfaca (frost-imuna)</string>
+	<string name="poi_health_amenity_type_first_aid_kit">Manapoteko</string>
+	<string name="poi_health_amenity_type_scales">Pesilo publika</string>
+
+	<string name="poi_capacity_beds">Nombro da litoj</string>
+
+	<string name="poi_office_physician">Kabineto de doktoro de medicino</string>
+	<string name="poi_office_therapist">Kabineto de terapiisto</string>
+	<string name="poi_office_podologist">Kabineto de piedisto</string>
+	<string name="poi_office_healer">Kabineto de kuracisto</string>
+	<string name="poi_office_psychologist">Kabineto de psikologiisto</string>
+	<string name="poi_office_nursing_service">Oficejo de flegisto</string>
+	<string name="poi_office_midwife">Oficejo de akuŝisto</string>
+
+	<string name="poi_fire_hydrant_flow_capacity">Flurapido hidranta</string>
+	<string name="poi_fire_hydrant_position_sidewalk">Pozicio de hidranto: irejo</string>
+	<string name="poi_fire_hydrant_position_green">Pozicio de hidranto: gazono</string>
+	<string name="poi_fire_hydrant_position_lane">Pozicio de hidranto: veturejo</string>
+	<string name="poi_fire_hydrant_position_parking_lot">Pozicio de hidranto: parkumejo</string>
 	</resources>
