@@ -2669,4 +2669,106 @@
 	<string name="poi_fire_hydrant_position_green">Pozicio de hidranto: gazono</string>
 	<string name="poi_fire_hydrant_position_lane">Pozicio de hidranto: veturejo</string>
 	<string name="poi_fire_hydrant_position_parking_lot">Pozicio de hidranto: parkumejo</string>
+	<string name="poi_fire_hydrant_position_street">Pozicio de hidranto: strato</string>
+	<string name="poi_fire_hydrant_position_underground">Pozicio de hidranto: subtero</string>
+	<string name="poi_fire_hydrant_style_wsh">Tipo de hidranto: wsh</string>
+	<string name="poi_fire_hydrant_style_water_source_main">Akvofonto de hidranto: akvokonduktilo</string>
+	<string name="poi_fire_hydrant_style_water_source_pond">Akvofonto de hidranto: lageto</string>
+	<string name="poi_fire_hydrant_style_water_source_stream">Akvofonto de hidranto: rivereto</string>
+	<string name="poi_fire_hydrant_style_water_source_cistern">Akvofonto de hidranto: cisterno</string>
+	<string name="poi_in_service_yes">Funkcias: jes</string>
+
+	<string name="poi_street_cabinet_power">Ŝranko-tipo: elektra</string>
+	<string name="poi_street_cabinet_telecom">Ŝranko-tipo: telefona</string>
+	<string name="poi_street_cabinet_cable_tv">Ŝranko-tipo: kablo-televida</string>
+	<string name="poi_street_cabinet_gas">Ŝranko-tipo: gasa</string>
+	<string name="poi_street_cabinet_postal_service">Ŝranko-tipo: poŝta</string>
+	<string name="poi_street_cabinet_waste">Ŝranko-tipo: rubuja</string>
+	<string name="poi_street_cabinet_water_management">Ŝranko-tipo: akvokonduktila</string>
+	<string name="poi_street_cabinet_street_lighting">Ŝranko-tipo: strat-prilumada</string>
+
+	<string name="poi_aerodrome_type_international">Internacia</string>
+	<string name="poi_aerodrome_type_regional">Regiona</string>
+	<string name="poi_aerodrome_type_public">Publika</string>
+	<string name="poi_aerodrome_type_military">Armea</string>
+	<string name="poi_aerodrome_type_military_public">Publika/armea</string>
+	<string name="poi_aerodrome_type_private">Privata</string>
+
+	<string name="poi_military_checkpoint">Kontrolejo armea</string>
+
+	<string name="poi_bicycle_parking_lockers">Ŝranketoj</string>
+	<string name="poi_bicycle_parking_tree">Bicikl-pendigilo</string>
+	<string name="poi_bicycle_parking_streetpod">Duon-ŝranketo</string>
+
+	<string name="poi_wheelchair_designated">Adaptita por rulseĝoj</string>
+	<string name="poi_spoil_heap">Skori-monto</string>
+	
+	<string name="poi_summer_camp">Kampadejo somera (por infanoj)</string>
+	<string name="poi_recreation_center">Ripoza centro</string>
+
+	<string name="poi_crossing_activation_automatic">Malfermata per: aŭtomate</string>
+	<string name="poi_crossing_activation_local">Malfermata per: loke</string>
+	<string name="poi_crossing_activation_remote">Malfermata per: fore</string>
+	<string name="poi_crossing_barrier_yes">Bariero</string>
+	<string name="poi_crossing_barrier_no">Sen bariero</string>
+	<string name="poi_crossing_barrier_full">Bariero: plen-longa</string>
+	<string name="poi_crossing_barrier_half">Bariero: duon-longa</string>
+	<string name="poi_crossing_barrier_double_half">Bariero: du duonoj</string>
+	<string name="poi_crossing_bell_yes">Sonorilo</string>
+	<string name="poi_crossing_bell_no">Sen sonorilo</string>
+	<string name="poi_crossing_light_yes">Trafiklumoj</string>
+	<string name="poi_crossing_light_no">Sen trafiklumoj</string>
+	<string name="poi_crossing_on_demand_yes">Pasado nur laŭpete</string>
+	<string name="poi_crossing_on_demand_no">Pasado nur laŭpete:ne</string>
+	<string name="poi_crossing_saltire_yes">Kruco de Sankta Andreo</string>
+	<string name="poi_crossing_saltire_no">Sen kruco de Sankta Andreo</string>
+	<string name="poi_crossing_supervision_yes">Gardado</string>
+	<string name="poi_crossing_supervision_no">Sen gardado</string>
+	<string name="poi_crossing_supervision_attendant">Gardado: gardisto</string>
+	<string name="poi_crossing_supervision_camera">Gardado: kamero</string>
+
+	<string name="poi_dispensing_yes">Medikamentoj je recepto: jes</string>
+	<string name="poi_dispensing_no">Medikamentoj je recepto: ne</string>
+
+	<string name="poi_valley_balka">Abismo</string>
+
+	<string name="poi_ventilation_shaft">Aerŝakto</string>
+
+	<string name="poi_pump_type_beam_pump">Pumpila speco: vapormaŝina</string>
+	<string name="poi_pump_style_modern">Pumpila aspekto: moderna</string>
+	<string name="poi_pump_type_gravity">Pumpila speco: gravita (sifona)</string>
+	<string name="poi_pump_style_historic">Pumpila aspekto: historia</string>
+	<string name="poi_pump_type_india_mk_2_3">Pumpila speco: India Mk II aŭ III</string>
+	<string name="poi_pump_status_ok">Pumpila stato: laboranta</string>
+	<string name="poi_pump_status_broken">Pumpila stato: difektita</string>
+	<string name="poi_pump_status_locked">Pumpila ŝtato: blokita</string>
+
+	<string name="poi_payment_troika_yes">Troika (Тройка) kartoj akceptataj</string>
+	<string name="poi_payment_troika_no">Troika (Тройка) kartoj malakceptataj</string>
+
+	<string name="poi_telescope_type_optical">Teleskopo: optika</string>
+	<string name="poi_telescope_type_radio">Teleskopo: radia</string>
+	<string name="poi_telescope_type_gamma">Teleskopo: gam-radia</string>
+	<string name="poi_telescope_diameter">Diametro</string>
+	<string name="poi_telescope_spectrum">Spektro</string>
+	<string name="poi_telescope_usage_education">Uzado: edukado</string>
+	<string name="poi_telescope_usage_espionage">Uzado: spionado</string>
+	<string name="poi_telescope_usage_research">Uzado: esplorado</string>
+
+	<string name="poi_observatory_type_espionage">Speco: spionada</string>
+	<string name="poi_observatory_type_meteorological">Speco: veteroscienca</string>
+	<string name="poi_observatory_type_gravitational">Speco: gravit-onda</string>
+
+	<string name="poi_greenhouse_horticulture">Tereno de kultivdomoj</string>
+
+	<string name="poi_voltage">Tensio</string>
+	<string name="poi_generator_output_electricity">Povumo</string>
+	<string name="poi_length">Longo</string>
+
+<string name="poi_traffic_mirror">Trafika spegulo</string>
+
+	<string name="poi_min_age">Minimuma aĝo</string>
+
+	<string name="poi_water_tank">Fajrobrigada akvorezervujo (artefarita)</string>
+
 	</resources>
