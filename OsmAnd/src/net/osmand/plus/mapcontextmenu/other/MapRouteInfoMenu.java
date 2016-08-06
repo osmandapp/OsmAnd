@@ -604,7 +604,11 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 		if (directionInfo >= 0 && routingHelper.getRouteDirections() != null
 				&& directionInfo < routingHelper.getRouteDirections().size()) {
 			RouteDirectionInfo ri = routingHelper.getRouteDirections().get(directionInfo);
-			textView.setText((directionInfo + 1) + ". " + ri.getDescriptionRoutePart() + " " + OsmAndFormatter.getFormattedDistance(ri.distance, ctx));
+			if (!ri.getDescriptionRoutePart().endsWith(" " + OsmAndFormatter.getFormattedDistance(distance, ctx))) {
+				textView.setText((directionInfo + 1) + ". " + ri.getDescriptionRoutePart() + " " + OsmAndFormatter.getFormattedDistance(ri.distance, ctx));
+			} else {
+				textView.setText((directionInfo + 1) + ". " + ri.getDescriptionRoutePart();
+			}
 		} else {
 			TextView distanceText = (TextView) mainView.findViewById(R.id.DistanceText);
 			TextView durationText = (TextView) mainView.findViewById(R.id.DurationText);
