@@ -189,4 +189,13 @@
 	<string name="poi_glaziery">محل زجاج</string>
 	<string name="poi_hardware">متجر لواحق الحاسوب</string>
 	<string name="poi_railway_station">محطة القطارات</string>
+	<string name="poi_kitchen">أثاث مطبخ</string>
+	<string name="poi_leather">متجر جلود</string>
+	<string name="poi_medical_supply">إمدادات طبية</string>
+	<string name="poi_newsagent">بائع جرائد</string>
+	<string name="poi_optician">طبيب العيون</string>
+	<string name="poi_photo">متجر صور</string>
+	<string name="poi_second_hand">متجر أدوات مستعملة</string>
+	<string name="poi_scuba_diving_shop">متجر بضائع الغوص</string>
+	<string name="poi_sports">سلع رياضية</string>
 	</resources>
