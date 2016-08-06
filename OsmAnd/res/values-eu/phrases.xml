@@ -250,4 +250,11 @@
 	<string name="poi_confectionery">Gozogileak</string>
 	<string name="poi_pastry">Pastelgileak</string>
 	<string name="poi_vending_machine">Salmenta automatikoko makina</string>
+	<string name="poi_anime">Anime denda</string>
+	<string name="poi_charity">Ongintzarako denda</string>
+	<string name="poi_chemist">Farmazia</string>
+	<string name="poi_dive">Urpekaritza ekipamendua</string>
+	<string name="poi_doityourself">Etxe hobekuntzetarako denda</string>
+	<string name="poi_fishing">Arrantzarako tresneria</string>
+	<string name="poi_frame">Irudi-markoen denda</string>
 	</resources>
