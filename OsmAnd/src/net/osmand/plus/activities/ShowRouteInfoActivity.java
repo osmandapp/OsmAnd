@@ -296,7 +296,7 @@ public class ShowRouteInfoActivity extends OsmandListActivity {
 				String description = routeDirectionInfo
 						.getDescriptionRoutePart();
 				html.append("<td>");
-				html.append(String.valueOf(i+1) + " " + description);
+				html.append(String.valueOf(i+1) + ". " + description);
 				html.append("</td>");
 				RouteInfoAdapter.CumulativeInfo cumulativeInfo = routeInfo
 						.getRouteDirectionCumulativeInfo(i);
