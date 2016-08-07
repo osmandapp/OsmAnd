@@ -30,7 +30,7 @@
     <string name="data_to_search_poi_not_available">Brak danych lokalnych do wyszukania UM.</string>
     <string name="poi_filter_by_name">Szukaj wg nazwy</string>
     <string name="old_poi_file_should_be_deleted">Plik \'%1$s\' z danymi UM jest nadmiarowy i można go usunąć.</string>
-    <string name="update_poi_file_not_found">Nie znaleziono lokalnego pliku z UM i nie może on zostać utworzony.</string>
+    <string name="update_poi_file_not_found">Nie odnaleziono lokalnego pliku z użytecznymi miejscami i nie można go utworzyć.</string>
     <string name="update_poi_does_not_change_indexes">Zmiana UM w aplikacji nie powoduje zmian w mapie, a jedynie jest zapisywana w pliku lokalnym.</string>
     <string name="button_upgrade_osmandplus">Uaktualnij OsmAnd+</string>
     <string name="map_version_changed_info">Na serwerze są mapy, które są niekompatybilne z tą wersją programu. Aby je pobrać i używać, musisz zaktualizować program do nowszej wersji.</string>
@@ -477,7 +477,7 @@
     <string name="data_settings_descr">Ustaw język, pobierz/wczytaj ponownie dane</string>
     <string name="data_settings">Dane</string>
 
-    <string name="osm_settings">Edycja OSM</string>
+    <string name="osm_settings">Edytowanie OSM</string>
     <string name="auto_zoom_map_descr">Przybliża mapę w zależności od prędkości (dopóki mapa zsynchronizowana jest z aktualnym położeniem)</string>
     <string name="auto_zoom_map">Automatyczne przybliżanie</string>
     <string name="additional_settings">Dodatkowe ustawienia</string>
@@ -493,7 +493,7 @@
     <string name="save_track_to_gpx">Zapisywanie śladu do pliku GPX podczas nawigacji</string>
     <string name="update_tile">Uaktualnij mapę</string>
     <string name="reload_tile">Wczytaj ponownie kafelki</string>
-    <string name="open_street_map_login_descr">Wymagane do wysyłania danych na openstreetmap.org</string>
+    <string name="open_street_map_login_descr">Wprowadza dane uwierzytelniające wymagane do wysyłania zmian na openstreetmap.org</string>
     <string name="user_name">Nazwa użytkownika OSM</string>
     <string name="mark_point">Cel</string>
 
@@ -722,14 +722,14 @@ Mapy kafelkowe można uzyskać bezpośrednio z zasobów sieciowych, jak i przygo
     <string name="offline_edition_descr">Zawsze wprowadza modyfikacje w trybie offline</string>
 
     <string name="local_openstreetmap_uploading">Wysyłanie…</string>
-    <string name="local_openstreetmap_were_uploaded">Wysłano {0} UM/notatek</string>
+    <string name="local_openstreetmap_were_uploaded">Wysłano {0} użytecznych miejsc/uwag</string>
     <string name="local_openstreetmap_uploadall">Wyślij wszystkie</string>
 
     <string name="local_openstreetmap_upload">Wyślij modyfikacje do OSM</string>
     <string name="local_openstreetmap_delete">Usuń modyfikacje</string>
     <string name="local_openstreetmap_descr_title">Asynchroniczna edycja OSM:</string>
-    <string name="local_openstreetmap_settings">Lokalnie zapisane UM/Notatki OSM</string>
-    <string name="local_openstreetmap_settings_descr">Pokaż i zarządzaj UM/Notatkami OSM zapisanymi w lokalnej bazie danych</string>
+    <string name="local_openstreetmap_settings">Lokalnie zapisane użyteczne miejsca/uwagi OSM</string>
+    <string name="local_openstreetmap_settings_descr">Wyświetla i zarządza użytecznymi miejscami i uwagami OSM zapisanymi w lokalnej bazie danych</string>
 
 
     <string name="live_monitoring_interval_descr">Określa tempo wysyłania danych o położeniu</string>
@@ -982,7 +982,7 @@ OsmAnd jest otwarto-źródłowym programem do nawigacji z dostępem do szerokiej
     <string name="native_library_not_running">Program działa w trybie bezpiecznym (wyłącz go w ustawieniach).</string>
     <string name="background_service_is_enabled_question">Usługa w tle jest nadal aktywna. Czy ją również zatrzymać?</string>
 
-    <string name="close_changeset">Zamknij zestaw zmian</string>
+    <string name="close_changeset">Zamknięcie zestawu zmian</string>
     <string name="zxing_barcode_scanner_not_found">Skaner kodów kreskowych ZXing nie jest zainstalowany. Poszukać w Google Play?</string>
     <string name="incomplete_locale">niekompletne</string>
     <string name="download_regular_maps">Mapa zwykła</string>
@@ -1463,9 +1463,9 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="osmo_tracker_id_descr">Wyświetla identyfikator serwera śledzącego</string>
     <string name="osmo_locations_sent">Położenie wysłane %1$d (w buforze %2$d) </string>
 
-    <string name="rendering_value_pink_name">różowy</string>
+    <string name="rendering_value_pink_name">Różowy</string>
 
-    <string name="rendering_value_brown_name">brązowy</string>
+    <string name="rendering_value_brown_name">Brązowy</string>
 
 
     <string name="osmo_edit_device">Zmień właściwości użytkownika</string>
@@ -1797,7 +1797,7 @@ Nagrane ślady można udostępnić znajomym lub wykorzystać na rzecz rowoju map
     <string name="plugin_description_title">Opis</string>
     <string name="plugin_install_needs_network">Zainstalowanie tej wtyczki wymaga połączenia internetowego.</string>
     <string name="osmand_parking_overdue">Przestarzały</string>
-    <string name="action_create">Utwórz</string>
+    <string name="action_create">Utworzenie</string>
     <string name="action_modify">Zmodyfikuj</string>
     <string name="action_delete">Usuń</string>
     <string name="osm_edits">Edycje OSM</string>
@@ -1805,10 +1805,10 @@ Nagrane ślady można udostępnić znajomym lub wykorzystać na rzecz rowoju map
     <string name="osmand_parking_minute">min</string>
     <string name="osmand_parking_time_left">pozostało</string>
     <string name="parking_place_limited">Czas parkowania ograniczony do</string>
-    <string name="your_edits">Twoje zmiany</string>
+    <string name="your_edits">Zmiany</string>
     <string name="waypoint_visit_after">Odwiedź później</string>
     <string name="waypoint_visit_before">Odwiedź wcześniej</string>
-    <string name="simulate_your_location">Symulowanie lokalizacji</string>
+    <string name="simulate_your_location">Symulowanie położenia</string>
     <string name="short_location_on_map">Szerokość %1$s\n Długość %2$s</string>
     <string name="tips_and_tricks_descr">Wyświetla najczęściej zadawane pytania, ostatnie zmiany i inne</string>
     <string name="routing_settings_2">Ustawienia nawigacji</string>
@@ -2114,7 +2114,7 @@ Włączenie tego widoku zmienia styl mapy na „Zima i narty”, ukazujący tere
     <string name="rendering_attr_hideProposed_name">Proponowane obiekty</string>
     <string name="shared_string_update">Aktualizuj</string>
     <string name="shared_string_upload">Prześlij</string>
-    <string name="osm_edit_created_poi">Utworzono użyteczne miejsce OSM</string>
+    <string name="osm_edit_created_poi">Utworzone użyteczne miejsce OSM</string>
 
     <string name="simulate_initial_startup_descr">Ustala flagę wskazującą pierwsze uruchomienie programu zachowując wszystkie pozostałe ustawienia</string>
     <string name="share_geo">geo:</string>
@@ -2279,9 +2279,9 @@ Włączenie tego widoku zmienia styl mapy na „Zima i narty”, ukazujący tere
     <string name="download_files_question_space_with_temp">Czy pobrać {0} plik(-i/-ów)?
  To potrzebuje {3} MB tymczasowo i {1} MB na stałe.
  Obecnie posiadasz dostępne {2} MB.</string>
-    <string name="upload_osm_note_description">Można przesłać swoje notatki OSM anonimowo jeżeli użyjesz swojego profilu OpenStreetMap.org.</string>
-    <string name="upload_osm_note">Prześlij notatki OSM</string>
-    <string name="upload_anonymously">Wyślij anonimowo</string>
+    <string name="upload_osm_note_description">Można przesłać uwagi OSM anonimowo za pośrednictwem profilu na OpenStreetMap.org.</string>
+    <string name="upload_osm_note">Wyślij uwagę OSM</string>
+    <string name="upload_anonymously">Wysłanie anonimowo</string>
 
     <string name="map_marker_1st">Pierwszy znacznik mapy</string>
     <string name="map_marker_2nd">Drugi znacznik mapy</string>
