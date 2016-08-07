@@ -22,7 +22,7 @@
     <string name="osm_live_ask_for_purchase">Bonvolu aĉeti abonon al OSM Live antaŭe</string>
 
     <string name="osm_live_header">Tiu ĉi abono aktivigas ĉiuhorajn ĝisdatigojn por ĉiuj mapoj en la mondo.
- Plejparto de enspezo revenos al OSM komunumo kaj estos pagita por iu ajn kontribuaĵo al OSM.
+ Plejparto de enspezo revenos al la OSM komunumo kaj estos pagita por iu ajn kontribuaĵo al OSM.
  Se vi ŝategas OsmAnd kaj OSM kaj vi volas subteni ilin, tio ĉi estas la plej bona kielo.</string>
     
     <string name="select_map_marker">Elekti mapmarkon</string>
@@ -188,7 +188,7 @@
     <string name="rendering_attr_hideProposed_name">Proponitaj objektoj</string>
     <string name="share_menu_location">Kunhavigi lokon</string>
     <string name="shared_string_send">Sendi</string>
-    <string name="world_map_download_descr">Monda bazmapo (kiu kovras tutan mondon ĉe etaj skaloj) mankas aŭ estas neĝisdata. Bonvolu konsideri elŝuti mondan bazmapon por havi plenan ĉirkaŭaĵon.</string>
+    <string name="world_map_download_descr">Monda bazmapo (kiu kovras tutan mondon ĉe etaj skaloj) mankas aŭ estas neĝisdata. Bonvolu konsideri elŝuti ĝin por havi vidon al tuta mondo.</string>
     <string name="map_downloaded">Mapo elŝutita</string>
     <string name="map_downloaded_descr">Mapo de %1$s estas elŝutita. Reveni al la mapo por komenci uzi ĝin.</string>
     <string name="go_to_map">Aliri al la mapo</string>
@@ -1576,7 +1576,7 @@ Proporcia memoro %4$s MB (Limito de Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="favourites_edit_dialog_name">Nomo</string>
     <string name="favourites_edit_dialog_category">Kategorio</string>
     <string name="shared_string_no_thanks">Ne, dankon</string>
-    <string name="basemap_missing">Monda bazmapo (kiu kovras tutan mondon ĉe etaj skaloj) mankas. Bonvolu elŝuti World_basemap_x.obf dosieron por havi plenan ĉirkaŭaĵon.</string>
+    <string name="basemap_missing">Monda bazmapo (kiu kovras tutan mondon ĉe etaj skaloj) mankas. Bonvolu elŝuti World_basemap_x.obf dosieron por havi vidon al la tuta mondo.</string>
     <string name="vector_data_missing">Mankas eksterretaj datumoj en via memorkarto. Bonvolu elŝuti ilin por uzi mapojn eksterrete.</string>
     <string name="shared_string_release">Eldonita je</string>
     <string name="local_index_installed">Loka versio</string>
