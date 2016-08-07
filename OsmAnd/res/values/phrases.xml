@@ -84,7 +84,7 @@
 	<string name="poi_charity">Charity store</string>
 	<string name="poi_chemist">Drug store</string>
 	<string name="poi_clothes">Apparel store</string>
-	<string name="poi_clothes_children">Childrens apparel</string>
+	<string name="poi_clothes_children">Children\'s apparel</string>
 	<string name="poi_shoes">Shoe store</string>
 	<string name="poi_candles">Candles store</string>
 	<string name="poi_computer">Computer store</string>
@@ -634,7 +634,7 @@
 	<string name="poi_hunting_lodge">Hunting lodge</string>
 
 	<string name="poi_place_of_worship">Place of worship</string>
-	<string name="poi_religion_christian">Сhristianity</string>
+	<string name="poi_religion_christian">Christianity</string>
 	<string name="poi_religion_jewish">Judaism</string>
 	<string name="poi_religion_muslim">Islam</string>
 	<string name="poi_religion_sikh">Sikhism</string>
@@ -672,7 +672,7 @@
 	<string name="poi_denomination_reformed">Reformed</string>
 	<string name="poi_denomination_seventh_day_adventist">Seventh day adventist</string>
 	<string name="poi_denomination_new_apostolic">New apostolic</string>
-	<string name="poi_denomination_church_of_england">Church of england</string>
+	<string name="poi_denomination_church_of_england">Church of England</string>
 	<string name="poi_denomination_episcopal">Episcopal</string>
 	<string name="poi_denomination_shia">Shia</string>
 	<string name="poi_denomination_united">United</string>
@@ -1271,7 +1271,7 @@
 	<string name="poi_information_route_marker">Route marker</string>
 	<string name="poi_information_hikingmap">Hiking map</string>
 	<string name="poi_information_nature">Information marker: nature</string>
-	<string name="poi_information_wildlife">Information marker: wild life</string>
+	<string name="poi_information_wildlife">Information marker: wildlife</string>
 	<string name="poi_information_history">Information marker: history</string>
 	<string name="poi_information_sign">Sign</string>
 	<string name="poi_information_audioguide">Audioguide</string>
@@ -2134,7 +2134,7 @@
 	<string name="poi_dog_yes">Dogs allowed</string>
 	<string name="poi_dog_no">Dogs not allowed</string>
 
-	<string name="poi_refugee_yes">Amenitites for refugees</string>
+	<string name="poi_refugee_yes">Amenities for refugees</string>
 	<string name="poi_refugee_no">Refugees: no</string>
 
 	<string name="poi_social_facility_group_home">Social facility: group home</string>
@@ -2147,7 +2147,7 @@
 	<string name="poi_social_facility_day_care">Social facility: day care</string>
 
 	<string name="poi_social_facility_for_senior">Target social group: seniors</string>
-	<string name="poi_social_facility_for_child">Target social group: childs</string>
+	<string name="poi_social_facility_for_child">Target social group: children</string>
 	<string name="poi_social_facility_for_orphan">Target social group: orphans</string>
 	<string name="poi_social_facility_for_disabled">Target social group: disabled</string>
 	<string name="poi_social_facility_for_mental_health">Target social group: patients with mental disorders</string>
@@ -2523,7 +2523,7 @@
 	<string name="poi_health_specialty_adult_psychiatry_yes">Health specialty: adult psychiatry</string>
 	<string name="poi_health_specialty_acupuncture_yes">Health specialty: acupuncture</string>
 	<string name="poi_health_specialty_homeopathy_yes">Health specialty: homeopathy</string>
-	<string name="poi_health_specialty_traditional_chinese_medicine_yes">Health specialty: traditional chinese medicine</string>
+	<string name="poi_health_specialty_traditional_chinese_medicine_yes">Health specialty: traditional Chinese medicine</string>
 	<string name="poi_health_specialty_reiki_yes">Health specialty: reiki</string>
 	<string name="poi_health_specialty_herbalism_yes">Health specialty: herbalism</string>
 	<string name="poi_health_specialty_chiropractic_yes">Health specialty: chiropractic</string>
@@ -2690,12 +2690,12 @@
 	<string name="poi_sanitary_dump_station">Sanitary dump station</string>
 
 	<string name="poi_medical_system_western_yes">Medical system: western</string>
-	<string name="poi_medical_system_chinese_yes">Medical system: traditional chinese</string>
+	<string name="poi_medical_system_chinese_yes">Medical system: traditional Chinese</string>
 	<string name="poi_medical_system_unknown_yes">Medical system: unknown traditional</string>
 	<string name="poi_medical_system_ayurveeda_yes">Medical system: ayurveeda</string>
 	<string name="poi_medical_system_kampo_yes">Medical system: kampo</string>
-	<string name="poi_medical_system_mongolian_yes">Medical system: traditional mongolian</string>
-	<string name="poi_medical_system_tibetan_yes">Medical system: traditional tibetan</string>
+	<string name="poi_medical_system_mongolian_yes">Medical system: traditional Mongolian</string>
+	<string name="poi_medical_system_tibetan_yes">Medical system: traditional Tibetan</string>
 	<string name="poi_medical_system_sidda_yes">Medical system: sidda</string>
 	<string name="poi_medical_system_unani_yes">Medical system: unani</string>
 
@@ -2749,7 +2749,7 @@
 	<string name="poi_health_person_type_podologist">Role of health worker: podologist</string>
 	<string name="poi_health_person_type_psychologist">Role of health worker: psychologist</string>
 	<string name="poi_health_person_type_therapist">Role of health worker: therapist</string>
-	<string name="poi_health_person_type_physician_assitant">Role of health worker: physician assitant</string>
+	<string name="poi_health_person_type_physician_assitant">Role of health worker: physician assistant</string>
 	<string name="poi_health_person_type_technician">Role of health worker: technician</string>
 	<string name="poi_health_person_type_witchdoctor">Role of health worker: witchdoctor</string>
 

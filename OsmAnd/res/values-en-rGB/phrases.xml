@@ -18,7 +18,7 @@
 	<string name="poi_charity">Charity shop</string>
 	<string name="poi_chemist">Chemist</string>
 	<string name="poi_clothes">Clothes shop</string>
-	<string name="poi_clothes_children">Childrens clothing</string>
+	<string name="poi_clothes_children">Children\'s clothing</string>
 	<string name="poi_shoes">Shoe shop</string>
 	<string name="poi_candles">Candles shop</string>
 	<string name="poi_computer">Computer shop</string>
@@ -35,7 +35,7 @@
 	<string name="poi_herbalist">Herb shop</string>
 	<string name="poi_hifi">HiFi shop</string>
 	<string name="poi_interior_decoration">Interior decoration shop</string>
-	<string name="poi_jewelry">Jewelry shop</string>
+	<string name="poi_jewelry">Jewellery shop</string>
 	<string name="poi_leather">Leather shop</string>
 	<string name="poi_mobile_phone">Cell phone shop</string>
 	<string name="poi_motorcycle">Motorcycle shop</string>
@@ -64,7 +64,7 @@
 	<string name="poi_weapons">Weapons shop</string>
 	<string name="poi_perfumery">Perfume shop</string>
 
-	<string name="poi_traffic_signals">traffic sigal</string>
+	<string name="poi_traffic_signals">Traffic signal</string>
 
 	<string name="poi_service_tyres">Tyres</string>
 	<string name="poi_fuel">Petrol station</string>
@@ -85,7 +85,7 @@
 
 	<string name="poi_healthcare_centre">Healthcare centre</string>
 
-	<string name="poi_sports_centre">Sports center</string>
+	<string name="poi_sports_centre">Sports centre</string>
 
 	<string name="poi_club_theatre">Theatre club</string>
 
