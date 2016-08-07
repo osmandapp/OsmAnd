@@ -185,7 +185,7 @@ public class NextTurnInfoWidget extends TextInfoWidget {
 			if(textPaint != null ) {
 				if (turnType != null && !mini && turnType.getExitOut() > 0) {
 					canvas.drawText(turnType.getExitOut() + "", centerText.x, 
-							centerText.y + textPaint.getTextSize() / 2, textPaint);
+							centerText.y - textPaint.ascent / 2, textPaint);
 				}
 			}
 		}
