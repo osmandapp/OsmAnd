@@ -2803,4 +2803,6 @@
 	<string name="poi_support_pole">Muntita sur: fosto</string>
 	<string name="poi_support_wall_mounted">Muntita sur: muro</string>
 	<string name="poi_support_tree">Muntita sur: arbo</string>
+	<string name="poi_support_pedestal">Muntita sur: piedestalo</string>
+	<string name="poi_support_ground">Muntita sur: planko</string>
 	</resources>
