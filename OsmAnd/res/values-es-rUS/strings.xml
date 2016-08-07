@@ -1358,7 +1358,7 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="favourites_edit_dialog_name">Nombre</string>
     <string name="favourites_edit_dialog_category">Categoría</string>
     <string name="shared_string_no_thanks">No, gracias</string>
-    <string name="basemap_missing">El mapa base mundial (cubriendo todo el mundo a niveles de ampliación pequeños) no está disponible. Por favor, considera descargar World_basemap_x.obf para tener un entorno completo.</string>
+    <string name="basemap_missing">El mapa base mundial (abarca todo el mundo en ampliaciones pequeñas), no está disponible. Por favor, considera descargar World_basemap_x.obf para una vista global.</string>
     <string name="vector_data_missing">Sin datos (\'descargados\') en la tarjeta SD. Considera descargarlos para usar los mapas sin conexión.</string>
     <string name="shared_string_release">Liberado</string>
     <string name="local_index_installed">Versión local</string>
@@ -2003,7 +2003,7 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="go_to_map">Ir al mapa</string>
     <string name="shared_string_qr_code">Código QR</string>
     <string name="enter_country_name">Escribe el nombre del país</string>
-    <string name="world_map_download_descr">El mapa base mundial (abarca todo el mundo en ampliaciones pequeñas), falta o está desactualizado. Considera descargarlo para un entorno completo.</string>
+    <string name="world_map_download_descr">El mapa base mundial (abarca todo el mundo en ampliaciones pequeñas), falta o está desactualizado. Considera descargarlo para una vista global.</string>
     <string name="new_version">Nueva versión</string>
     <string name="begin_with_osmand_menu_group">Primeros pasos con OsmAnd</string>
     <string name="features_menu_group">Características</string>
@@ -2260,7 +2260,7 @@ Si necesitas ayuda con la aplicación OsmAnd, contacte con nuestro equipo de sop
 
     <string name="osm_live_header">Esta suscripción, permite actualizaciones cada hora para todos los mapa del mundo.
  La mayor parte de los ingresos vuelven a la comunidad de OSM y se paga por cada contribución OSM.
- En caso de que ames OsmAnd, OSM y quieras apoyarlo, esta sería una manera correcta de hacerlo.</string>
+Si amas a OsmAnd, OSM y quieres apoyarlos, esta es una perfecta manera de hacerlo.</string>
     
     <string name="select_map_marker">Elegir marcador del mapa</string>
     <string name="map_markers_other">Otros marcadores</string>
