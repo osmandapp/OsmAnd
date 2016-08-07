@@ -2771,4 +2771,36 @@
 
 	<string name="poi_water_tank">Fajrobrigada akvorezervujo (artefarita)</string>
 
+	<string name="poi_generator_output_electricity_yes">Elaĵo: elektro</string>
+	<string name="poi_generator_output_hot_water">Povumo de varma akvo</string>
+	<string name="poi_generator_output_hot_water_yes">Elaĵo: varma akvo</string>
+	<string name="poi_generator_output_steam_yes">Elaĵo: vaporo</string>
+	<string name="poi_generator_output_hot_air_yes">Elaĵo: varma aero</string>
+	<string name="poi_generator_output_cold_water_yes">Elaĵo: malvarma akvo</string>
+	<string name="poi_generator_output_compressed_air">Povumo de kunpremita aero</string>
+	<string name="poi_generator_output_compressed_air_yes">Elaĵo: kunpremita aero</string>
+	<string name="poi_generator_output_vacuum_yes">Elaĵo: vakuo</string>
+	<string name="poi_generator_output_biogas">Povumo de biogaso</string>
+	<string name="poi_generator_output_biogas_yes">Elaĵo: biogaso</string>
+
+	<string name="poi_pumping_station">Pumpstacio</string>
+
+	<string name="poi_display_yes">Vidigilo: jes</string>
+	<string name="poi_display_no">Vidigilo: ne</string>
+	<string name="poi_display_analog_yes">Vidigilo analoga</string>
+	<string name="poi_display_digital_yes">Vidigilo cifereca</string>
+	<string name="poi_display_sundial_yes">Sunhorloĝo</string>
+
+	<string name="poi_barometer_yes">Aerprem-mezurilo: jes</string>
+	<string name="poi_barometer_no">Aerprem-mezurilo: ne</string>
+	<string name="poi_thermometer_yes">Temperatur-mezurilo: jes</string>
+	<string name="poi_thermometer_no">Temperatur-mezurilo: ne</string>
+	<string name="poi_hygrometer_yes">Malsekec-mezurilo: jes</string>
+	<string name="poi_hygrometer_no">Malsekec-mezurilo: ne</string>
+	<string name="poi_date_yes">Vidigo de dato: jes</string>
+	<string name="poi_date_no">Vidigo de dato: ne</string>
+
+	<string name="poi_support_pole">Muntita sur: fosto</string>
+	<string name="poi_support_wall_mounted">Muntita sur: muro</string>
+	<string name="poi_support_tree">Muntita sur: arbo</string>
 	</resources>
