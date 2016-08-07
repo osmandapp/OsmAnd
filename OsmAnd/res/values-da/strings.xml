@@ -1742,7 +1742,10 @@ Optagede spor kan deles med venner eller anvendes til OSM bidrag. Sportsfolk kan
     <string name="speed_limit_exceed_message">Vælg hvor meget hastighedsgrænsen skal overskrides, for at få en taleadvarsel.</string>
     <string name="osmo_device_not_found">Enheden blev ikke fundet</string>
     <string name="osmo_no_connection_msg">Kan ikke forbinde til OsMo serveren:\n- kontrollere internetforbindelsen;\n- kontrollere indstillingerne;\n- se på Twitter: https://twitter.com/OsMomobi</string>
-    <string name="anonymous_user_hint">En anonym bruger kan ikke:\n- oprette grupper;\n- synkronisere grupper og enheder med serveren;\n- administrere grupper og enheder på et personligt betjeningspanel på hjemmesiden.</string>
+    <string name="anonymous_user_hint">En anonym bruger kan ikke:
+- oprette grupper;
+- synkronisere grupper og enheder med serveren;
+- administrere grupper og enheder på et personligt betjeningspanel på hjemmesiden.</string>
     <string name="anonymous_user">Anonym bruger</string>
     <string name="logged_as">Logget ind som %1$s</string>
     <string name="configure_map">Konfigurer kort</string>
