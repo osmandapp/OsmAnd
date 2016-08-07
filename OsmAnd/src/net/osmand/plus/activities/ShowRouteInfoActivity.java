@@ -201,7 +201,7 @@ public class ShowRouteInfoActivity extends OsmandListActivity {
 				row.setContentDescription(label.getText() + " " + timeLabel.getText()); //$NON-NLS-1$
 			} else {
 				if (label.getText().equals(position + ". ")) {
-					label.setText(getString((position != lastItemIndex) ? position + ". " + R.string.arrived_at_intermediate_point : position + ". " + R.string.arrived_at_destination));
+					label.setText(position + ". " + getString((position != lastItemIndex) ? R.string.arrived_at_intermediate_point : R.string.arrived_at_destination));
 				}
 				distanceLabel.setText(""); //$NON-NLS-1$
 				timeLabel.setText(""); //$NON-NLS-1$
