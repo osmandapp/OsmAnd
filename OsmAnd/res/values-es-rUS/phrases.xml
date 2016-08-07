@@ -153,7 +153,7 @@
 	<string name="poi_toll_booth">Peaje</string>
 	<string name="poi_border_control">Control fronterizo</string>
 	<string name="poi_traffic_calming_bump">Reductor de velocidad (lomada, corto)</string>
-	<string name="poi_traffic_calming_hump">Resalte</string>
+	<string name="poi_traffic_calming_hump">Resalte (largo)</string>
 	<string name="poi_traffic_calming_cushion">Cojín</string>
 	<string name="poi_traffic_calming_chicane">Chicana</string>
 	<string name="poi_traffic_calming_rumble_strip">Banda sonora</string>
