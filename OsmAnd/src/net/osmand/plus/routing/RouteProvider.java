@@ -1045,8 +1045,9 @@ public class RouteProvider {
 		int cDirInfo = currentDirectionInfo;
 
 		// Saving start point to gpx file's trkpt section
-// The only time the startpoint is missing in trkpts is if "Calculate first and last segment" is selected, and start is not the start of the selected file. In all other cases it would be duplicated.
-// TODO: Adding it here causes all offsets to be wrong by 1, so this needs fixing
+// The only time the startpoint is missing in trkpts is if "Calculate first and last segment" is selected and start is not the start of the selected GPX file. In all other cases it would be added s duplicate!
+// But even in that case, the second route point is included, usually only very few meters away. So this case probably needs no fixing.
+// Adding the startpoint here causes all offsets to be wrong by 1 (part of Issue #2906), hence the following code is commented out (causing no practical issue). If we want to fix, all offsets need to be adjusted!
 //		WptPt startpoint = new WptPt();
 //		TargetPoint sc = helper.getPointToStart();
 //		if (sc != null){
