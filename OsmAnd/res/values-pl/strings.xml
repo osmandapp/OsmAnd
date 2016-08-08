@@ -11,7 +11,7 @@
     <string name="choose_auto_follow_route">Automatyczne środkowanie mapy</string>
     <string name="choose_auto_follow_route_descr">Ustala opóźnienie podążania mapy za aktualną lokalizacją</string>
     
-    <string name="auto_follow_route_navigation">Auto-podążanie za pozycją</string>
+    <string name="auto_follow_route_navigation">Automatyczne podążanie za położeniem</string>
     <string name="auto_follow_route_navigation_descr">Włącz podążanie za pozycją tylko w trybie nawigacji.</string>
     <string name="auto_follow_location_enabled">Podążanie za pozycją jest włączone.</string>
     <string name="delete_confirmation_msg">Usunąć %1$s?</string>
@@ -113,7 +113,7 @@
     <string name="gpx_option_destination_point">Użyj bieżącego celu</string>
 
 
-    <string name="switch_to_raster_map_to_see">Obecna pozycja nie ma pokrycia w zainstalowanych mapach offline. Możesz pobrać nową w Ustawieniach (Zarządzanie plikami map) lub przełączyć się na mapy online (włącz plugin map online).</string>
+    <string name="switch_to_raster_map_to_see">Żadna z map offline nie zawiera tego położenia. Można pobrać nową mapę na ekranie ustawień programu (Zarządzaj mapami) lub przełączyć na mapy online (wymaga włączenia wtyczki map online).</string>
   <string name="switch_to_vector_map_to_see">Dla bieżącej lokalizacji dostępna jest wektorowa mapa offline.
 \n\t\n\tAby jej użyć, proszę wybrać „Menu” → „Skonfiguruj mapę” → „Zasób mapy…” → „Wektorowe mapy offline”.</string>
 
@@ -269,7 +269,7 @@
     <string name="download_type_to_filter">Proszę wprowadzić tekst, aby filtrować dane</string>
     <string name="use_high_res_maps">Wysoka rozdzielczość ekranu</string>
     <string name="use_high_res_maps_descr">Nie rozciągaj i rozmazuj kafelków mapy na ekranach o dużej rozdzielczości</string>
-    <string name="unknown_location">Pozycja nie jest jeszcze znana</string>
+    <string name="unknown_location">Położenie nie jest jeszcze znane</string>
 
     <string name="context_menu_item_search_transport">Wyszukaj transport publiczny</string>
     <string name="transport_searching_transport">Rezultat wyszukiwania transportu (brak celu):</string>
@@ -311,7 +311,7 @@
     <string name="layer_yandex_traffic">Yandex - informacje o korkach</string>
     <string name="layer_route">Trasa</string>
     <string name="shared_string_favorites">Ulubione</string>
-    <string name="layer_osm_bugs">Notatki OSM (online)</string>
+    <string name="layer_osm_bugs">Uwagi OSM (online)</string>
     
     <string name="layer_poi">Użyteczne miejsca…</string>
     <string name="layer_map">Zasób mapy…</string>
@@ -1107,7 +1107,7 @@ OsmAnd jest otwarto-źródłowym programem do nawigacji z dostępem do szerokiej
     <string name="download_using_mobile_internet">Nie nawiązano połączenia za pośrednictwem Wi-Fi. Kontynuować pobieranie używając obecnego połączenia?</string>
     <string name="clear_destination">Usuń cel trasy</string>
     <string name="cancel_navigation">Zatrzymaj nawigację</string>
-    <string name="cancel_route">Odrzuć trasę</string>
+    <string name="cancel_route">Odrzucanie trasy</string>
     <string name="install_paid">Pełna wersja</string>
     <string name="other_location">Inna</string>
     <string name="files_limit">Pozostało %1$d plików</string>
@@ -1416,7 +1416,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="index_item_world_ski">Światowa mapa tras narciarskich</string>
     <string name="interrupt_music_descr">Wstrzymuje odtwarzanie każdej muzyki podczas komunikatów (nie tylko ją przycisza)</string>
     <string name="interrupt_music">Przerywanie muzyki</string>
-    <string name="always_center_position_on_map">Zawsze wyśrodkowana pozycja</string>
+    <string name="always_center_position_on_map">Zawsze wyśrodkowane położenie</string>
     <string name="voice_pref_title">Głos</string>
     <string name="misc_pref_title">Różne</string>
     <string name="localization_pref_title">Lokalizacja</string>
@@ -2247,7 +2247,7 @@ Włączenie tego widoku zmienia styl mapy na „Zima i narty”, ukazujący tere
     <string name="last_map_change">Ostatnia zmiana mapy: %s</string>
     <string name="rec_split_clip_length">Długość nagrania</string>
     <string name="shared_string_not_selected">Nie wybrany</string>
-<string name="item_removed">Pozycja usunięta</string>
+<string name="item_removed">Usunięto element</string>
     <string name="n_items_removed">pozycji usuniętych</string>
     <string name="shared_string_undo_all">COFNIJ WSZYSTKO</string>
     <string name="shared_string_type">Typ</string>
