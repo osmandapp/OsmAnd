@@ -1024,7 +1024,7 @@ public class RouteProvider {
 			}
 		}
 		params.intermediates = null;
-		return new RouteCalculationResult(res, null, params, null);
+		return new RouteCalculationResult(res, null, params, null, true);
 	}
 
 	public GPXFile createOsmandRouterGPX(RouteCalculationResult srcRoute, OsmandApplication ctx) {	
