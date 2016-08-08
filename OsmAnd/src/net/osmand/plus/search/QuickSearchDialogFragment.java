@@ -83,10 +83,11 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	private static final String QUICK_SEARCH_QUERY_KEY = "quick_search_query_key";
 	private static final String QUICK_SEARCH_LAT_KEY = "quick_search_lat_key";
 	private static final String QUICK_SEARCH_LON_KEY = "quick_search_lon_key";
-	private static final String QUICK_SEARCH_SEARCHING_KEY = "quick_search_searching_key";
+	private static final String QUICK_SEARCH_INTERRUPTED_SEARCH_KEY = "quick_search_interrupted_search_key";
 	private static final String QUICK_SEARCH_SHOW_CATEGORIES_KEY = "quick_search_show_categories_key";
 	private static final String QUICK_SEARCH_HIDDEN_KEY = "quick_search_hidden_key";
 	private static final String QUICK_SEARCH_TOOLBAR_TITLE_KEY = "quick_search_toolbar_title_key";
+	private static final String QUICK_SEARCH_TOOLBAR_VISIBLE_KEY = "quick_search_toolbar_visible_key";
 
 	private Toolbar toolbar;
 	private LockableViewPager viewPager;
@@ -124,6 +125,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	private boolean hidden;
 	private boolean foundPartialLocation;
 	private String toolbarTitle;
+	private boolean toolbarVisible;
 
 	private boolean newSearch;
 	private boolean interruptedSearch;
@@ -157,9 +159,10 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			if (!Double.isNaN(lat) && !Double.isNaN(lon)) {
 				centerLatLon = new LatLon(lat, lon);
 			}
-			interruptedSearch = savedInstanceState.getBoolean(QUICK_SEARCH_SEARCHING_KEY, false);
+			interruptedSearch = savedInstanceState.getBoolean(QUICK_SEARCH_INTERRUPTED_SEARCH_KEY, false);
 			hidden = savedInstanceState.getBoolean(QUICK_SEARCH_HIDDEN_KEY, false);
 			toolbarTitle = savedInstanceState.getString(QUICK_SEARCH_TOOLBAR_TITLE_KEY);
+			toolbarVisible = savedInstanceState.getBoolean(QUICK_SEARCH_TOOLBAR_VISIBLE_KEY, false);
 		}
 		if (searchQuery == null && arguments != null) {
 			searchQuery = arguments.getString(QUICK_SEARCH_QUERY_KEY);
@@ -397,26 +400,28 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	}
 
 	public void restoreToolbar() {
-		if (toolbarTitle != null) {
-			showToolbar(toolbarTitle);
-		} else {
-			showToolbar();
+		if (toolbarVisible) {
+			if (toolbarTitle != null) {
+				showToolbar(toolbarTitle);
+			} else {
+				showToolbar();
+			}
 		}
 	}
 
 	public void showToolbar() {
-		toolbarTitle = getText();
-		toolbarController.setTitle(toolbarTitle);
-		getMapActivity().showTopToolbar(toolbarController);
+		showToolbar(getText());
 	}
 
 	public void showToolbar(String title) {
+		toolbarVisible = true;
 		toolbarTitle = title;
 		toolbarController.setTitle(toolbarTitle);
 		getMapActivity().showTopToolbar(toolbarController);
 	}
 
 	public void hideToolbar() {
+		toolbarVisible = false;
 		getMapActivity().hideTopToolbar(toolbarController);
 	}
 
@@ -449,12 +454,18 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		getDialog().show();
 		paused = false;
 		hidden = false;
+		if (interruptedSearch) {
+			interruptedSearch = false;
+			addMoreButton();
+		}
 	}
 
 	public void hide() {
 		paused = true;
 		hidden = true;
 		hideTimeMs = System.currentTimeMillis();
+		interruptedSearch = searching;
+		searching = false;
 		hideProgressBar();
 		updateClearButtonVisibility(true);
 		getDialog().hide();
@@ -530,7 +541,9 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 						searching = false;
 						if (!paused) {
 							hideProgressBar();
-							addMoreButton();
+							if (searchUICore.isSearchMoreAvailable(searchUICore.getPhrase())) {
+								addMoreButton();
+							}
 						}
 					}
 				});
@@ -547,11 +560,12 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
 		outState.putString(QUICK_SEARCH_QUERY_KEY, searchQuery);
-		outState.putBoolean(QUICK_SEARCH_SEARCHING_KEY, searching);
+		outState.putBoolean(QUICK_SEARCH_INTERRUPTED_SEARCH_KEY, interruptedSearch = searching);
 		outState.putBoolean(QUICK_SEARCH_HIDDEN_KEY, hidden);
 		if (toolbarTitle != null) {
 			outState.putString(QUICK_SEARCH_TOOLBAR_TITLE_KEY, toolbarTitle);
 		}
+		outState.putBoolean(QUICK_SEARCH_TOOLBAR_VISIBLE_KEY, toolbarVisible);
 		if (centerLatLon != null) {
 			outState.putDouble(QUICK_SEARCH_LAT_KEY, centerLatLon.getLatitude());
 			outState.putDouble(QUICK_SEARCH_LON_KEY, centerLatLon.getLongitude());
@@ -678,7 +692,9 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 				}
 				if (getResultCollection() != null) {
 					updateSearchResult(getResultCollection(), false);
-					addMoreButton();
+					if (interruptedSearch || searchUICore.isSearchMoreAvailable(searchUICore.getPhrase())) {
+						addMoreButton();
+					}
 				}
 				break;
 		}
@@ -775,10 +791,10 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		if (settings.getRadiusLevel() != 1) {
 			searchUICore.updateSettings(settings.setRadiusLevel(1));
 		}
-		runCoreSearch(text, true);
+		runCoreSearch(text, true, false);
 	}
 
-	private void runCoreSearch(final String text, final boolean updateResult) {
+	private void runCoreSearch(final String text, final boolean updateResult, final boolean searchMore) {
 		showProgressBar();
 		foundPartialLocation = false;
 		updateToolbarButton();
@@ -793,23 +809,16 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 				@Override
 				public void onFinish(AppInitializer init) {
-					SearchResultCollection c = runCoreSearchInternal(text);
-					if (updateResult) {
-						updateSearchResult(c, false);
-					}
+					runCoreSearchInternal(text, updateResult, searchMore);
 				}
 			});
 		} else {
-			SearchResultCollection c = runCoreSearchInternal(text);
-			if (updateResult) {
-				updateSearchResult(c, false);
-			}
+			runCoreSearchInternal(text, updateResult, searchMore);
 		}
 	}
 
-	private SearchResultCollection runCoreSearchInternal(String text) {
-		return searchUICore.search(text, new ResultMatcher<SearchResult>() {
-
+	private void runCoreSearchInternal(String text, boolean updateResult, boolean searchMore) {
+		SearchResultCollection c = searchUICore.search(text, new ResultMatcher<SearchResult>() {
 			SearchResultCollection regionResultCollection = null;
 			SearchCoreAPI regionResultApi = null;
 			List<SearchResult> results = new ArrayList<>();
@@ -863,6 +872,14 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 				return paused;
 			}
 		});
+
+		if (!searchMore || !needAppend(c.getPhrase())) {
+			setResultCollection(null);
+			updateSearchResult(null, false);
+		}
+		if (updateResult) {
+			updateSearchResult(c, false);
+		}
 	}
 
 	private void showLocationToolbar() {
@@ -881,17 +898,16 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			@Override
 			public void run() {
 				if (!paused) {
-					boolean appended = false;
-					if (getResultCollection() == null || getResultCollection().getPhrase() != phrase) {
+					boolean append = needAppend(phrase);
+					if (append) {
+						getResultCollection().addSearchResults(apiResults, false, true);
+					} else {
 						SearchResultCollection resCollection = new SearchResultCollection(phrase);
 						resCollection.addSearchResults(apiResults, true, true);
 						setResultCollection(resCollection);
-					} else {
-						getResultCollection().addSearchResults(apiResults, false, true);
-						appended = true;
 					}
 					if (!hasRegionCollection) {
-						updateSearchResult(getResultCollection(), appended);
+						updateSearchResult(getResultCollection(), append);
 					}
 				}
 			}
@@ -903,8 +919,8 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			@Override
 			public void run() {
 				if (!paused) {
-					boolean appended = getResultCollection() != null && getResultCollection().getPhrase() == regionPhrase;
-					if (appended) {
+					boolean append = needAppend(regionPhrase);
+					if (append) {
 						SearchResultCollection resCollection =
 								getResultCollection().combineWithCollection(regionResultCollection, false, true);
 						updateSearchResult(resCollection, true);
@@ -914,6 +930,12 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 				}
 			}
 		});
+	}
+
+	private boolean needAppend(SearchPhrase phrase) {
+		return getResultCollection() != null && (getResultCollection().getPhrase() == phrase
+				|| (getResultCollection().getPhrase().isLastWord(ObjectType.POI_TYPE) && phrase.isLastWord(ObjectType.POI_TYPE)
+					&& getResultCollection().getPhrase().getLastSelectedWord().getWord().equals(phrase.getLastSelectedWord().getWord())));
 	}
 
 	public void completeQueryWithObject(SearchResult sr) {
@@ -927,39 +949,37 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		if (settings.getRadiusLevel() != 1) {
 			searchUICore.updateSettings(settings.setRadiusLevel(1));
 		}
-		runCoreSearch(txt, false);
+		runCoreSearch(txt, false, false);
 	}
 
 	private void addMoreButton() {
-		if (searchUICore.isSearchMoreAvailable(searchUICore.getPhrase())) {
-			QuickSearchMoreListItem moreListItem =
-					new QuickSearchMoreListItem(app, app.getString(R.string.search_POI_level_btn).toUpperCase(), new OnClickListener() {
-						@Override
-						public void onClick(View v) {
-							if (!interruptedSearch) {
-								SearchSettings settings = searchUICore.getPhrase().getSettings();
-								searchUICore.updateSettings(settings.setRadiusLevel(settings.getRadiusLevel() + 1));
-							}
-							runCoreSearch(searchQuery, false);
+		QuickSearchMoreListItem moreListItem =
+				new QuickSearchMoreListItem(app, app.getString(R.string.search_POI_level_btn).toUpperCase(), new OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						if (!interruptedSearch) {
+							SearchSettings settings = searchUICore.getPhrase().getSettings();
+							searchUICore.updateSettings(settings.setRadiusLevel(settings.getRadiusLevel() + 1));
 						}
-					});
+						runCoreSearch(searchQuery, false, true);
+					}
+				});
 
-			if (!paused && mainSearchFragment != null) {
-				mainSearchFragment.addListItem(moreListItem);
-			}
+		if (!paused && mainSearchFragment != null) {
+			mainSearchFragment.addListItem(moreListItem);
 		}
 	}
 
-	private void updateSearchResult(SearchResultCollection res, boolean appended) {
+	private void updateSearchResult(SearchResultCollection res, boolean append) {
 
 		if (!paused && mainSearchFragment != null) {
 			List<QuickSearchListItem> rows = new ArrayList<>();
-			if (res.getCurrentSearchResults().size() > 0) {
+			if (res != null && res.getCurrentSearchResults().size() > 0) {
 				for (final SearchResult sr : res.getCurrentSearchResults()) {
 					rows.add(new QuickSearchListItem(app, sr));
 				}
 			}
-			mainSearchFragment.updateListAdapter(rows, appended);
+			mainSearchFragment.updateListAdapter(rows, append);
 		}
 	}
 
