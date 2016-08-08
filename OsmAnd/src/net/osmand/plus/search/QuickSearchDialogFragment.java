@@ -931,9 +931,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	}
 
 	private void addMoreButton() {
-		if ((searchUICore.getPhrase().isUnknownSearchWordPresent() || searchUICore.getPhrase().isLastWord(ObjectType.POI_TYPE))
-				&& searchUICore.getPhrase().getSettings().getRadiusLevel() < 7) {
-
+		if (searchUICore.isSearchMoreAvailable(searchUICore.getPhrase())) {
 			QuickSearchMoreListItem moreListItem =
 					new QuickSearchMoreListItem(app, app.getString(R.string.search_POI_level_btn).toUpperCase(), new OnClickListener() {
 						@Override
