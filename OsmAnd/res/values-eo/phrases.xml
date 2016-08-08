@@ -2956,4 +2956,5 @@
 	<string name="poi_health_specialty_biology_yes">Specialisto: klinika biologiisto (medicina biologiisto)</string>
 	<string name="poi_health_specialty_osteopathy_yes">Specialisto: osteopatiisto (alternativa medicino)</string>
 	<string name="poi_health_specialty_anaesthetics_yes">Specialisto: sensentigisto (anestezologiisto)</string>
+	<string name="poi_health_specialty_pulmonology_yes">Specialisto: pulmisto (pneŭmonologiisto)</string>
 	</resources>
