@@ -854,7 +854,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 						final SearchPhrase regionPhrase = object.requiredSearchPhrase;
 						regionResultCollection =
 								new SearchResultCollection(regionPhrase).addSearchResults(results, true, true);
-						showRegionResults(regionPhrase, regionResultCollection);
+						showRegionResults(regionResultCollection);
 						break;
 					case PARTIAL_LOCATION:
 						showLocationToolbar();
@@ -873,7 +873,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			}
 		});
 
-		if (!searchMore || !needAppend(c.getPhrase())) {
+		if (!searchMore) {
 			setResultCollection(null);
 			updateSearchResult(null, false);
 		}
@@ -898,7 +898,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			@Override
 			public void run() {
 				if (!paused) {
-					boolean append = needAppend(phrase);
+					boolean append = getResultCollection() != null;
 					if (append) {
 						getResultCollection().addSearchResults(apiResults, false, true);
 					} else {
@@ -914,13 +914,12 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		});
 	}
 
-	private void showRegionResults(final SearchPhrase regionPhrase, final SearchResultCollection regionResultCollection) {
+	private void showRegionResults(final SearchResultCollection regionResultCollection) {
 		app.runInUIThread(new Runnable() {
 			@Override
 			public void run() {
 				if (!paused) {
-					boolean append = needAppend(regionPhrase);
-					if (append) {
+					if (getResultCollection() != null) {
 						SearchResultCollection resCollection =
 								getResultCollection().combineWithCollection(regionResultCollection, false, true);
 						updateSearchResult(resCollection, true);
@@ -930,13 +929,6 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 				}
 			}
 		});
-	}
-
-	private boolean needAppend(SearchPhrase phrase) {
-		return getResultCollection() != null && (getResultCollection().getPhrase() == phrase
-				|| (getResultCollection().getPhrase().isLastWord(ObjectType.POI_TYPE) && phrase.isLastWord(ObjectType.POI_TYPE)
-					&& getResultCollection().getPhrase().getLastSelectedWord().getWord().equals(phrase.getLastSelectedWord().getWord())
-					&& !getResultCollection().getPhrase().isUnknownSearchWordPresent() && !phrase.isUnknownSearchWordPresent()));
 	}
 
 	public void completeQueryWithObject(SearchResult sr) {
