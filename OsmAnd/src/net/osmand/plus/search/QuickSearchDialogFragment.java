@@ -53,12 +53,13 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.MapActivity.ShowQuickSearchMode;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.search.QuickSearchHelper.SearchHistoryAPI;
-import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarView;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
+import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarView;
 import net.osmand.search.SearchUICore;
 import net.osmand.search.SearchUICore.SearchResultCollection;
 import net.osmand.search.core.ObjectType;
@@ -126,8 +127,10 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 	private boolean newSearch;
 	private boolean interruptedSearch;
+	private long hideTimeMs;
 
 	private static final double DISTANCE_THRESHOLD = 70000; // 70km
+	private static final int EXPIRATION_TIME_MIN = 10; // 10 minutes
 
 
 	@Override
@@ -431,6 +434,10 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		return hidden;
 	}
 
+	public boolean isExpired() {
+		return hideTimeMs > 0 && System.currentTimeMillis() - hideTimeMs > EXPIRATION_TIME_MIN * 60 * 1000;
+	}
+
 	public void show() {
 		if (useMapCenter) {
 			LatLon mapCenter = getMapActivity().getMapView().getCurrentRotatedTileBox().getCenterLatLon();
@@ -447,6 +454,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	public void hide() {
 		paused = true;
 		hidden = true;
+		hideTimeMs = System.currentTimeMillis();
 		hideProgressBar();
 		updateClearButtonVisibility(true);
 		getDialog().hide();
@@ -563,6 +571,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	public void onPause() {
 		super.onPause();
 		paused = true;
+		hideTimeMs = System.currentTimeMillis();
 		stopLocationUpdate();
 		hideProgressBar();
 	}
@@ -1235,12 +1244,12 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 		@Override
 		public void onBackPressed(TopToolbarView view) {
-			view.getMap().showQuickSearch(false, false);
+			view.getMap().showQuickSearch(ShowQuickSearchMode.CURRENT, false);
 		}
 
 		@Override
 		public void onTitlePressed(TopToolbarView view) {
-			view.getMap().showQuickSearch(false, false);
+			view.getMap().showQuickSearch(ShowQuickSearchMode.CURRENT, false);
 		}
 
 		@Override

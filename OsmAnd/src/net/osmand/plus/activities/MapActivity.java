@@ -440,7 +440,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			return;
 		}
 		if (getQuickSearchDialogFragment() != null) {
-			showQuickSearch(false, false);
+			showQuickSearch(ShowQuickSearchMode.CURRENT, false);
 			return;
 		}
 		if (prevActivityIntent != null && getSupportFragmentManager().getBackStackEntryCount() == 0) {
@@ -1373,11 +1373,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		QuickSearchDialogFragment.showInstance(this, "", true, new LatLon(latitude, longitude));
 	}
 
-	public void showQuickSearch(boolean newSearch, boolean showCategories) {
+	public void showQuickSearch(ShowQuickSearchMode mode, boolean showCategories) {
 		mapContextMenu.hide();
 		QuickSearchDialogFragment fragment = getQuickSearchDialogFragment();
 		if (fragment != null) {
-			if (newSearch) {
+			if (mode == ShowQuickSearchMode.NEW || (mode == ShowQuickSearchMode.NEW_IF_EXPIRED && fragment.isExpired())) {
 				fragment.dismiss();
 				QuickSearchDialogFragment.showInstance(this, "", showCategories, null);
 			} else {
@@ -1417,5 +1417,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		MapInfoLayer mapInfoLayer = getMapLayers().getMapInfoLayer();
 		mapInfoLayer.removeTopToolbarViewController(viewController);
 		this.topToolbarActive = mapInfoLayer.hasTopToolbar();
+	}
+
+	public static enum ShowQuickSearchMode {
+		NEW,
+		NEW_IF_EXPIRED,
+		CURRENT,
 	}
 }

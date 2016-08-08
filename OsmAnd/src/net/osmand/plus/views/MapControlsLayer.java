@@ -37,11 +37,11 @@ import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.MapActivity.ShowQuickSearchMode;
 import net.osmand.plus.activities.search.SearchAddressFragment;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.mapcontextmenu.other.MapRouteInfoMenu;
 import net.osmand.plus.routing.RoutingHelper;
-import net.osmand.plus.search.QuickSearchDialogFragment;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 
 import java.util.ArrayList;
@@ -223,7 +223,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		search.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				mapActivity.showQuickSearch(true, false);
+				mapActivity.showQuickSearch(ShowQuickSearchMode.NEW_IF_EXPIRED, false);
 			}
 		});
 

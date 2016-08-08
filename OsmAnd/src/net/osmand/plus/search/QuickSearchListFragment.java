@@ -221,11 +221,14 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 					break;
 			}
 
+			/*
 			if (pointDescription != null) {
 				dialogFragment.showToolbar(pointDescription.getName());
 			} else {
 				dialogFragment.showToolbar();
 			}
+			*/
+			dialogFragment.hideToolbar();
 			dialogFragment.hide();
 
 			getMyApplication().getSettings().setMapLocationToShow(

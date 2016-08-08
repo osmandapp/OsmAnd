@@ -1,10 +1,15 @@
 package net.osmand.plus.activities;
 
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map.Entry;
+import android.content.DialogInterface;
+import android.graphics.drawable.Drawable;
+import android.support.v7.app.AlertDialog;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ListView;
+import android.widget.Toast;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.ResultMatcher;
@@ -21,7 +26,7 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.SQLiteTileSource;
-import net.osmand.plus.activities.search.SearchActivity;
+import net.osmand.plus.activities.MapActivity.ShowQuickSearchMode;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.poi.PoiUIFilter;
@@ -46,16 +51,11 @@ import net.osmand.plus.views.PointNavigationLayer;
 import net.osmand.plus.views.RouteLayer;
 import net.osmand.plus.views.TransportStopsLayer;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.graphics.drawable.Drawable;
-import android.support.v7.app.AlertDialog;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ListView;
-import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map.Entry;
 
 /**
  * Object is responsible to maintain layers using by map activity
@@ -355,7 +355,7 @@ public class MapActivityLayers {
 					if (activity.getDashboard().isVisible()) {
 						activity.getDashboard().hideDashboard();
 					}
-					activity.showQuickSearch(true, true);
+					activity.showQuickSearch(ShowQuickSearchMode.NEW, true);
 				} else {
 					getApplication().getPoiFilters().clearSelectedPoiFilters();
 					getApplication().getPoiFilters().addSelectedPoiFilter(pf);
