@@ -449,6 +449,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			SearchSettings ss = searchUICore.getSearchSettings().setOriginalLocation(
 					new LatLon(mapCenter.getLatitude(), mapCenter.getLongitude()));
 			searchUICore.updateSettings(ss);
+			updateUseMapCenterUI();
 			updateLocationUI(mapCenter, null);
 		}
 		getDialog().show();
@@ -523,6 +524,8 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 				} else {
 					useMapCenter = true;
 				}
+			} else {
+				useMapCenter = true;
 			}
 		} else {
 			searchLatLon = centerLatLon;
@@ -700,6 +703,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		}
 		LatLon mapCenter = getMapActivity().getMapView().getCurrentRotatedTileBox().getCenterLatLon();
 		if (useMapCenter) {
+			updateUseMapCenterUI();
 			searchListFragment.updateLocation(mapCenter, null);
 		}
 	}

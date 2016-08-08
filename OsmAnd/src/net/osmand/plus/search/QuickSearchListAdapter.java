@@ -371,7 +371,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 		Location ll = app.getLocationProvider().getLastKnownLocation();
 		boolean showCompass = location != null && listItem.getSearchResult().location != null;
 		boolean gpsFixed = ll != null && System.currentTimeMillis() - ll.getTime() < 1000 * 60 * 60 * 20;
-		if (gpsFixed && showCompass) {
+		if ((gpsFixed || useMapCenter) && showCompass) {
 			updateDistanceDirection(view, listItem);
 			compassView.setVisibility(View.VISIBLE);
 		} else {
