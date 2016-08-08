@@ -341,7 +341,7 @@ public class RouteProvider {
 			locs = findStartAndEndLocationsFromRoute(locs, params.start, params.end, startI, endI);
 			List<RouteDirectionInfo> directions = calcDirections(startI, endI, rcr.getRouteDirections());
 			insertInitialSegment(params, locs, directions, true);
-			res = new RouteCalculationResult(locs, directions, params, null);
+			res = new RouteCalculationResult(locs, directions, params, null, false);
 		} catch (RuntimeException e) {
 			e.printStackTrace();
 		}
@@ -375,7 +375,7 @@ public class RouteProvider {
 			info.afterLeftTime = 0;			
 		}
 		RouteCalculationResult res = new RouteCalculationResult(gpxRoute, gpxDirections, routeParams, 
-				gpxParams  == null? null: gpxParams.wpt);
+				gpxParams  == null? null: gpxParams.wpt, false);
 		return res;
 	}
 
@@ -620,11 +620,10 @@ public class RouteProvider {
 			if(doc.getChildNodes().getLength() == 1){
 				Node item = doc.getChildNodes().item(0);
 				return new RouteCalculationResult(item.getNodeValue());
-				
 			}
 		}
 		params.intermediates = null;
-		return new RouteCalculationResult(res, null, params, null);
+		return new RouteCalculationResult(res, null, params, null, true);
 	}
 
 	protected RouteCalculationResult findVectorMapsRoute(final RouteCalculationParams params, boolean calcGPXRoute) throws IOException {
@@ -1188,7 +1187,7 @@ public class RouteProvider {
 			res.add(createLocation(wpt));
 		}
 		params.intermediates = null;
-		return new RouteCalculationResult(res, null, params, null);
+		return new RouteCalculationResult(res, null, params, null, true);
 	}
 
 	protected RouteCalculationResult findBROUTERRoute(RouteCalculationParams params) throws MalformedURLException,
@@ -1276,7 +1275,7 @@ public class RouteProvider {
 		} catch (Exception e) {
 			return new RouteCalculationResult("Exception calling BRouter: " + e); //$NON-NLS-1$
 		}
-		return new RouteCalculationResult(res, null, params, null);
+		return new RouteCalculationResult(res, null, params, null, true);
 	}
 
 	private RouteCalculationResult findStraightRoute(RouteCalculationParams params) {
@@ -1302,6 +1301,6 @@ public class RouteProvider {
 		location.setLatitude(lats[1]);
 		location.setLongitude(lons[1]);
 		dots.add(location);
-		return new RouteCalculationResult(dots, null, params, null);
+		return new RouteCalculationResult(dots, null, params, null, true);
 	}
 }
