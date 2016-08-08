@@ -2578,4 +2578,5 @@ Nel caso ami OsmAnd e OSM e vuoi sostenerli è un perfetto modo per farlo.</stri
     <string name="city_type_district">Distretto</string>
     <string name="city_type_neighbourhood">Dintorni</string>
     <string name="map_widget_search">Cerca</string>
-	</resources>
+	<string name="lang_hsb">Sorabo (Superiore)</string>
+    </resources>
