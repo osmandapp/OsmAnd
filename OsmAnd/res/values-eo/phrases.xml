@@ -1635,9 +1635,9 @@
 	<string name="poi_toilets_access_community">Necesejo: nur por anoj</string>
 	<string name="poi_toilets_access_public">Necesejo: publika aliro</string>
 
-	<string name="poi_diaper_yes">Tablo por trans-vindotuk-ado</string>
-	<string name="poi_diaper_no">Sen tablo por trans-vindotuk-ado</string>
-	<string name="poi_diaper_room">Ĉambro por trans-vindotuk-ado</string>
+	<string name="poi_diaper_yes">Tablo por tra-vindotuk-ado</string>
+	<string name="poi_diaper_no">Sen tablo por tra-vindotuk-ado</string>
+	<string name="poi_diaper_room">Ĉambro por tra-vindotuk-ado</string>
 
 	<string name="poi_maxstay">Tempolimo de parkumado</string>
 
@@ -2472,7 +2472,7 @@
 	<string name="poi_futsal">Futsalo</string>
 	<string name="poi_rc_car">Konkurso de aŭtomobiloj telestirataj</string>
 	<string name="poi_squash">Kvarmurpilkado (skvaŝo)</string>
-	<string name="poi_shuffleboard">Shuffleboard</string>
+	<string name="poi_shuffleboard">Globludo planka (shuffleboard)</string>
 	<string name="poi_lacrosse">Kanada bastonludo (lacrosse)</string>
 	<string name="poi_boxing">Boksado</string>
 
@@ -2828,7 +2828,7 @@
 	<string name="poi_diplomatic_ambassadors_residence">Ambasadestrejo</string>
 	<string name="poi_diplomatic_high_commission">Oficejo de alta komisaro</string>
 
-	<string name="poi_diaper_table_count">Tabloj por trans-vindotuk-ado</string>
+	<string name="poi_diaper_table_count">Tabloj por tra-vindotuk-ado</string>
 
 	<string name="poi_fire_operator">Administranto kontraŭfajrega</string>
 
@@ -2837,4 +2837,111 @@
 	<string name="poi_toilets_disposal_chemical">Necesej-speco: ter-truo kun ĥemiaĵo</string>
 	<string name="poi_toilets_disposal_bucket">Necesej-speco: sitelo</string>
 
+	<string name="poi_provided_for_infant_yes">Por beboj (pli junaj ol 1 jaro): jes</string>
+	<string name="poi_provided_for_infant_no">Por beboj (pli junaj ol 1 jaro): ne</string>
+	<string name="poi_provided_for_toddler_yes">Por infanetoj (1-3 jaraĝaj): jes</string>
+	<string name="poi_provided_for_toddler_no">Por infanetoj (1-3 jaraĝaj): ne</string>
+	<string name="poi_provided_for_child_yes">Por infanoj (4-11 jaraĝaj): jes</string>
+	<string name="poi_provided_for_child_no">Por infanoj (4-11 jaraĝaj): ne</string>
+	<string name="poi_provided_for_adult_yes">Por plenkreskuloj: jes</string>
+	<string name="poi_provided_for_adult_no">Por plenkreskuloj: ne</string>
+	<string name="poi_provided_for_woman_yes">Por virinoj: jes</string>
+	<string name="poi_provided_for_woman_no">Por virinoj: ne</string>
+	<string name="poi_provided_for_senior_yes">Por maljunuloj: jes</string>
+	<string name="poi_provided_for_senior_no">Por maljunuloj: ne</string>
+	<string name="poi_provided_for_girl_yes">Por knabinoj: jes</string>
+	<string name="poi_provided_for_girl_no">Por knabinoj: ne</string>
+	<string name="poi_provided_for_man_yes">Por viroj: jes</string>
+	<string name="poi_provided_for_man_no">Por virinoj: ne</string>
+	<string name="poi_provided_for_boy_yes">Por knaboj: jes</string>
+	<string name="poi_provided_for_boy_no">Por knabinoj: ne</string>
+
+	<string name="poi_treat_inpatient_yes">Por tranoktataj pacientoj: jes</string>
+	<string name="poi_treat_inpatient_no">Por tranoktataj pacientoj: ne</string>
+	<string name="poi_treat_inpatient_only">Nur por tranoktataj pacientoj</string>
+	<string name="poi_counselling_yes">Konsilado: jes</string>
+	<string name="poi_counselling_no">Konsilado: ne</string>
+	<string name="poi_home_visit_yes">Vizitoj en hejmo: jes</string>
+	<string name="poi_home_visit_no">Vizitoj en hejmo: ne</string>
+
+	<string name="poi_emergency_yes">Urĝaj okazoj: jes</string>
+	<string name="poi_emergency_no">Urĝaj okazoj: ne</string>
+	<string name="poi_disease_malaria_yes">Malario: jes</string>
+	<string name="poi_disease_malaria_no">Malario: ne</string>
+	<string name="poi_disease_ebola_yes">Ebolo: jes</string>
+	<string name="poi_disease_ebola_no">Ebolo: ne</string>
+	<string name="poi_disease_autism_yes">Aŭtismo: jes</string>
+	<string name="poi_disease_autism_no">Aŭtismo: ne</string>
+	<string name="poi_disease_aids_yes">Aidoso: jes</string>
+	<string name="poi_disease_aids_no">Aidoso: ne</string>
+
+	<string name="poi_counselling_type_addiction_yes">Konsilado por dependuloj: jes</string>
+	<string name="poi_counselling_type_addiction_no">Konsilado por dependuloj: ne</string>
+	<string name="poi_counselling_type_antenatal_yes">Konsilado por patrinontoj: jes</string>
+	<string name="poi_counselling_type_antenatal_no">Konsilado por patrinontoj: ne</string>
+	<string name="poi_counselling_type_child_guidance_yes">Konsilado por gepatroj: jes</string>
+	<string name="poi_counselling_type_child_guidance_no">Konsilado por gepatroj: ne</string>
+	<string name="poi_counselling_type_couple_yes">Konsilado por homparoj: jes</string>
+	<string name="poi_counselling_type_couple_no">Konsilado por homparoj: ne</string>
+	<string name="poi_counselling_type_crisis_yes">Konsilado por deprimuloj: jes</string>
+	<string name="poi_counselling_type_crisis_no">Konsilado por deprimuloj: ne</string>
+	<string name="poi_counselling_type_drugs_yes">Konsilado por drog-dependuloj: jes</string>
+	<string name="poi_counselling_type_drugs_no">Konsilado por drog-dependuloj: ne</string>
+	<string name="poi_counselling_type_education_yes">Konsilado pri edukado: jes</string>
+	<string name="poi_counselling_type_education_no">Konsilado pri edukado: ne</string>
+	<string name="poi_counselling_type_family_yes">Konsilado pri familio: jes</string>
+	<string name="poi_counselling_type_family_no">Konsilado pri familio: ne</string>
+	<string name="poi_counselling_type_homeless_yes">Konsilado por senhejmuloj: jes</string>
+	<string name="poi_counselling_type_homeless_no">Konsilado por senhejmuloj: ne</string>
+	<string name="poi_counselling_type_immigrant_yes">Konsilado por enmigrantoj: jes</string>
+	<string name="poi_counselling_type_immigrant_no">Konsilado por enmigrantoj: ne</string>
+	<string name="poi_counselling_type_marriage_yes">Konsilado por geedzoj: jes</string>
+	<string name="poi_counselling_type_marriage_no">Konsilado por geedzoj: ne</string>
+	<string name="poi_counselling_type_nutrition_yes">Konsilado pri nutrado: jes</string>
+	<string name="poi_counselling_type_nutrition_nfire_hydo">Konsilado pri nutrado: ne</string>
+	<string name="poi_counselling_type_rehabilitation_yes">Konsilado pri rekapabligo: jes</string>
+	<string name="poi_counselling_type_rehabilitation_no">Konsilado pri rekapabligo: ne</string>
+	<string name="poi_counselling_type_sexual_yes">Konsilado pri seksumo: jes</string>
+	<string name="poi_counselling_type_sexual_no">Konsilado pri seksumo: ne</string>
+	<string name="poi_counselling_type_sexual_abuse_yes">Konsilado por seksperfortitoj: jes</string>
+	<string name="poi_counselling_type_sexual_abuse_no">Konsilado por seksperfortitoj: ne</string>
+	<string name="poi_counselling_type_victim_yes">Konsilado por viktimoj: jes</string>
+	<string name="poi_counselling_type_victim_no">Konsilado por viktimoj: ne</string>
+	<string name="poi_counselling_type_violence_yes">Konsilado por hejm-perfortitoj: jes</string>
+	<string name="poi_counselling_type_violence_no">Konsilado por hejm-perfortitoj: ne</string>
+
+	<string name="poi_health_person_type_assistant">Laboranto de sanservo: helpanto de doktoro</string>
+	<string name="poi_health_person_type_healer">Laboranto de sanservo: kuracisto</string>
+	<string name="poi_health_person_type_midwife">Laboranto de sanservo: akuŝisto</string>
+	<string name="poi_health_person_type_nurse">Laboranto de sanservo: flegisto</string>
+	<string name="poi_health_person_type_paramedic">Laboranto de sanservo: medicina savisto (sukuristo)</string>
+	<string name="poi_health_person_type_physician">Laboranto de sanservo: doktoro de medicino</string>
+	<string name="poi_health_person_type_podologist">Laboranto de sanservo: piedisto</string>
+	<string name="poi_health_person_type_psychologist">Laboranto de sanservo: psikologiisto</string>
+	<string name="poi_health_person_type_therapist">Laboranto de sanservo: terapiisto</string>
+	<string name="poi_health_person_type_physician_assitant">Laboranto de sanservo: helpanto de doktoro</string>
+	<string name="poi_health_person_type_technician">Laboranto de sanservo: teĥnikisto</string>
+	<string name="poi_health_person_type_witchdoctor">Laboranto de sanservo: fuŝkuracisto (ĉarlatano)</string>
+
+	<string name="poi_payment_account_cards_yes">Bankokartoj akceptataj</string>
+	<string name="poi_payment_account_cards_no">Bankokartoj malakceptataj</string>
+	<string name="poi_health_specialty_general_yes">Specialisto: kuracisto familia</string>
+	<string name="poi_health_specialty_ophthalmology_yes">Specialisto: okul-kuracisto (oftalmologiisto)</string>
+	<string name="poi_health_specialty_gynaecology_yes">Specialisto: virin-kuracisto (ginekologiisto)</string>
+	<string name="poi_health_specialty_internal_medicine_yes">Specialisto: isto de interna medicino</string>
+	<string name="poi_health_specialty_orthopaedics_yes">Specialisto: ortopediisto</string>
+	<string name="poi_health_specialty_otolaryngology_yes">Specialisto: orel-naz-gorĝ-isto (otorinolaringologiisto)</string>
+	<string name="poi_health_specialty_paediatrics_yes">Specialisto: infan-kuracisto (pediatro)</string>
+	<string name="poi_health_specialty_paediatrics_no">Sen specialisto de infan-medicino (pediatro)</string>
+	<string name="poi_health_specialty_dermatology_yes">Specialisto: haŭt-kuracisto (dermatologiisto)</string>
+	<string name="poi_health_specialty_urology_yes">Specialisto: urin-sistem-kuracisto (urologiisto)</string>
+	<string name="poi_health_specialty_surgery_yes">Specialisto: ĥirurgiisto</string>
+	<string name="poi_health_specialty_radiology_yes">Specialisto: radi-kuracisto (radiologiisto)</string>
+	<string name="poi_health_specialty_palliative_medicine_yes">Specialisto: isto de zorgado pri nekuracebluloj</string>
+
+	<string name="poi_health_specialty_psychiatry_yes">Specialisto: psikiatriisto</string>
+	<string name="poi_health_specialty_neurology_yes">Specialisto: nervisto (neŭrologiisto)</string>
+	<string name="poi_health_specialty_dermatovenereology_yes">Specialisto: haŭt-seksummalsan-kuracisto (dermato-venerelogiisto)</string>
+	<string name="poi_health_specialty_cardiology_yes">Specialisto: kor-kuracisto (kardiologiisto)</string>
+	<string name="poi_health_specialty_trauma_yes">Specialisto: isto de urĝeca medicino</string>
 	</resources>
