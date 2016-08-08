@@ -1424,4 +1424,46 @@
 
 	<string name="poi_length">Długość</string>
 
-</resources>
+<string name="poi_internet_access_fee_yes">Dostęp do Internetu - wymagana opłata</string>
+	<string name="poi_internet_access_fee_no">Dostęp do Internetu - bezpłatny</string>
+
+	<string name="poi_diet_vegetarian_only">Tylko dieta wegetariańska</string>
+	<string name="poi_diet_vegetarian_yes">Dieta wegetariańska</string>
+	<string name="poi_diet_vegetarian_no">Dieta wegetariańska: nie</string>
+	<string name="poi_diet_vegan_only">Tylko dieta wegańska</string>
+	<string name="poi_diet_vegan_yes">Dieta wegańska</string>
+	<string name="poi_diet_vegan_no">Dieta wegańska: nie</string>
+	<string name="poi_trade_agricultural_supplies">Materiały rolnicze</string>
+	<string name="poi_information_audioguide">Przewodnik audio</string>
+	<string name="poi_railway_crossing">Przejazd kolejowy</string>
+	<string name="poi_male_yes">Dla mężczyzn</string>
+	<string name="poi_male_no">Niedozwolone dla mężczyzn</string>
+	<string name="poi_female_yes">Dla kobiet</string>
+	<string name="poi_female_no">Niedozwolone dla kobiet</string>
+	<string name="poi_clothes_babies">Ubrania dziecięce</string>
+	<string name="poi_clothes_workwear">Odzież robocza</string>
+	<string name="poi_clothes_costumes">Kostiumy</string>
+	<string name="poi_clothes_traditional">Stroje tradycyjne</string>
+	<string name="poi_clothes_maternity">Ubrania ciążowe</string>
+	<string name="poi_clothes_swimwear">Stroje kąpielowe</string>
+	<string name="poi_massage_thai">Masaż: tajski</string>
+	<string name="poi_massage_sexual">Masaż: erotyczny</string>
+	<string name="poi_massage_chinese">Masaż: chiński</string>
+	<string name="poi_massage_therapeutic">Masaż: terapeutyczny</string>
+
+	<string name="poi_handrail_yes">Poręcz: tak</string>
+	<string name="poi_handrail_no">Poręcz: nie</string>
+	<string name="poi_ramp_wheelchair_yes">Podjazd dla wózków: tak</string>
+	<string name="poi_ramp_wheelchair_no">Podjazd dla wózków: nie</string>
+	<string name="poi_display_sundial_yes">Zegar słoneczny</string>
+
+	<string name="poi_barometer_yes">Barometr: tak</string>
+	<string name="poi_barometer_no">Barometr: nie</string>
+	<string name="poi_thermometer_yes">Termometr: tak</string>
+	<string name="poi_thermometer_no">Termometr: nie</string>
+	<string name="poi_hygrometer_yes">Higrometr: tak</string>
+	<string name="poi_hygrometer_no">Higrometr: nie</string>
+	<string name="poi_atm_yes">Bankomat: Tak</string>
+	<string name="poi_atm_no">Bankomat: nie</string>
+
+	</resources>
