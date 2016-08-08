@@ -77,7 +77,7 @@ public class CurrentPositionHelper implements ResourceListener {
 				protected Void doInBackground(Void... params) {
 					try {
 						processGeocoding(loc, geoCoding, storeFound, result);
-					} catch (IOException e) {
+					} catch (Exception e) {
 						e.printStackTrace();
 					}
 					return null;
@@ -111,41 +111,44 @@ public class CurrentPositionHelper implements ResourceListener {
 	protected void justifyResult(List<GeocodingResult> res, final ResultMatcher<GeocodingResult> result) {
 		List<GeocodingResult> complete = new ArrayList<>();
 		double minBuildingDistance = 0;
-		for (GeocodingResult r : res) {
-			Collection<RegionAddressRepository> rar = app.getResourceManager().getAddressRepositories();
-			RegionAddressRepository foundRepo = null;
-			for (RegionAddressRepository repo : rar) {
-				BinaryMapIndexReader reader = repo.getFile();
-				for (RouteRegion rb : reader.getRoutingIndexes()) {
-					if (r.regionFP == rb.getFilePointer() && r.regionLen == rb.getLength()) {
-						foundRepo = repo;
-						break;
+		if (res != null) {
+			for (GeocodingResult r : res) {
+				Collection<RegionAddressRepository> rar = app.getResourceManager().getAddressRepositories();
+				RegionAddressRepository foundRepo = null;
+				for (RegionAddressRepository repo : rar) {
+					BinaryMapIndexReader reader = repo.getFile();
+					for (RouteRegion rb : reader.getRoutingIndexes()) {
+						if (r.regionFP == rb.getFilePointer() && r.regionLen == rb.getLength()) {
+							foundRepo = repo;
+							break;
+						}
+						if (result.isCancelled()) {
+							break;
+						}
 					}
-					if (result.isCancelled()) {
+					if (foundRepo != null || result.isCancelled()) {
 						break;
 					}
 				}
-				if (foundRepo != null || result.isCancelled()) {
+				if (result.isCancelled()) {
 					break;
-				}
-			}
-			if (result.isCancelled()) {
-				break;
-			} else if (foundRepo != null) {
-				List<GeocodingResult> justified = foundRepo.justifyReverseGeocodingSearch(r, minBuildingDistance, result);
-				if (!justified.isEmpty()) {
-					double md = justified.get(0).getDistance();
-					if (minBuildingDistance == 0) {
-						minBuildingDistance = md;
-					} else {
-						minBuildingDistance = Math.min(md, minBuildingDistance);
+				} else if (foundRepo != null) {
+					List<GeocodingResult> justified = foundRepo.justifyReverseGeocodingSearch(r, minBuildingDistance, result);
+					if (!justified.isEmpty()) {
+						double md = justified.get(0).getDistance();
+						if (minBuildingDistance == 0) {
+							minBuildingDistance = md;
+						} else {
+							minBuildingDistance = Math.min(md, minBuildingDistance);
+						}
+						complete.addAll(justified);
 					}
-					complete.addAll(justified);
+				} else {
+					complete.add(r);
 				}
-			} else {
-				complete.add(r);
 			}
 		}
+
 		if (result.isCancelled()) {
 			app.runInUIThread(new Runnable() {
 				public void run() {
@@ -225,7 +228,12 @@ public class CurrentPositionHelper implements ResourceListener {
 				return null;
 			}
 		}
-		return new GeocodingUtilities().reverseGeocodingSearch(geocoding ? defCtx : ctx, lat, lon);
+		try {
+			return new GeocodingUtilities().reverseGeocodingSearch(geocoding ? defCtx : ctx, lat, lon);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	@Override
