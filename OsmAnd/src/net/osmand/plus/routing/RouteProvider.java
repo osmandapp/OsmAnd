@@ -1076,7 +1076,7 @@ public class RouteProvider {
 		gpx.routes.add(route);
 		for (int i = cDirInfo; i < directionInfo.size(); i++) {
 			RouteDirectionInfo dirInfo = directionInfo.get(i);
-			if (dirInfo.routePointOffset >= cRoute) {
+			if (dirInfo.routePointOffset >= cRoute && dirInfo.getTurnType() != null && !dirInfo.getTurnType().isSkipToSpeak()) {
 				Location loc = routeNodes.get(dirInfo.routePointOffset);
 				WptPt pt = new WptPt();
 				pt.lat = loc.getLatitude();
