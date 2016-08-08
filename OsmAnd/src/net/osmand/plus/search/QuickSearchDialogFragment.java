@@ -197,7 +197,12 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 					QuickSearchCoordinatesFragment.showDialog(QuickSearchDialogFragment.this, searchPhrase.getUnknownSearchWord());
 				} else if (searchPhrase.isNoSelectedType() || searchPhrase.isLastWord(ObjectType.POI_TYPE)) {
 					PoiUIFilter filter;
-					if (searchPhrase.getLastSelectedWord().getResult().object instanceof AbstractPoiType) {
+					if (searchPhrase.isNoSelectedType()) {
+						filter = new PoiUIFilter(null, app, "");
+						if (!Algorithms.isEmpty(searchPhrase.getUnknownSearchWord())) {
+							filter.setFilterByName(searchPhrase.getUnknownSearchWord());
+						}
+					} else if (searchPhrase.getLastSelectedWord().getResult().object instanceof AbstractPoiType) {
 						if (searchPhrase.isNoSelectedType()) {
 							filter = new PoiUIFilter(null, app, "");
 						} else {

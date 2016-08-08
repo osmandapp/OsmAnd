@@ -1374,7 +1374,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	public void showQuickSearch(ShowQuickSearchMode mode, boolean showCategories) {
-		mapContextMenu.hide();
+		if (mapContextMenu.isVisible()) {
+			mapContextMenu.hide();
+		} else if (mapContextMenu.getMultiSelectionMenu().isVisible()) {
+			mapContextMenu.getMultiSelectionMenu().hide();
+		}
 		QuickSearchDialogFragment fragment = getQuickSearchDialogFragment();
 		if (fragment != null) {
 			if (mode == ShowQuickSearchMode.NEW || (mode == ShowQuickSearchMode.NEW_IF_EXPIRED && fragment.isExpired())) {
@@ -1419,7 +1423,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		this.topToolbarActive = mapInfoLayer.hasTopToolbar();
 	}
 
-	public static enum ShowQuickSearchMode {
+	public enum ShowQuickSearchMode {
 		NEW,
 		NEW_IF_EXPIRED,
 		CURRENT,
