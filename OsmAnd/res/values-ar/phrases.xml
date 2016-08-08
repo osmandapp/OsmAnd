@@ -198,4 +198,11 @@
 	<string name="poi_second_hand">متجر أدوات مستعملة</string>
 	<string name="poi_scuba_diving_shop">متجر بضائع الغوص</string>
 	<string name="poi_sports">سلع رياضية</string>
+	<string name="poi_hifi">متجر هاي فاي</string>
+	<string name="poi_outdoor">متجر في الهواء الطلق</string>
+	<string name="poi_length">طول</string>
+
+<string name="poi_water_tank">خزان ماء</string>
+
+	<string name="poi_diplomatic_honorary_consulate">قنصلية شرفية</string>
 	</resources>
