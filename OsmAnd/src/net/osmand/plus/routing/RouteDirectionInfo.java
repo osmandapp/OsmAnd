@@ -77,7 +77,7 @@ public class RouteDirectionInfo {
 
 	// expected time after route point
 	public int getExpectedTime() {
-		return (int) (distance / averageSpeed);
+		return (int) Math.round(distance / averageSpeed);
 	}
 
 	
