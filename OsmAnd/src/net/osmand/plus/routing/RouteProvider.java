@@ -341,7 +341,7 @@ public class RouteProvider {
 			locs = findStartAndEndLocationsFromRoute(locs, params.start, params.end, startI, endI);
 			List<RouteDirectionInfo> directions = calcDirections(startI, endI, rcr.getRouteDirections());
 			insertInitialSegment(params, locs, directions, true);
-			res = new RouteCalculationResult(locs, directions, params, null, false);
+			res = new RouteCalculationResult(locs, directions, params, null, true);
 		} catch (RuntimeException e) {
 			e.printStackTrace();
 		}
