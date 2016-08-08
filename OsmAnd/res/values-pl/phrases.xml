@@ -1077,10 +1077,10 @@
 	<string name="poi_leaf_type_leafless">Bezlistne</string>
 	<string name="poi_species">Gatunki</string>
 	<string name="poi_trees_oil">Olejowiec (palma gwinejska)</string>
-	<string name="poi_animal_shelter_dog">Typ schroniska: dla psów</string>
-	<string name="poi_animal_shelter_cat">Typ schroniska: dla kotów</string>
-	<string name="poi_animal_shelter_dog_cat">Typ schroniska: dla psów i kotów</string>
-	<string name="poi_animal_shelter_bird">Typ schroniska: dla ptaków</string>
+	<string name="poi_animal_shelter_dog">Typ schronienia: dla psów</string>
+	<string name="poi_animal_shelter_cat">Typ schronienia: dla kotów</string>
+	<string name="poi_animal_shelter_dog_cat">Typ schronienia: dla psów i kotów</string>
+	<string name="poi_animal_shelter_bird">Typ schronienia: dla ptaków</string>
 
 	<string name="poi_seats">Siedzenia</string>
 	<string name="poi_backrest_yes">Oparcia: tak</string>
@@ -1115,14 +1115,14 @@
 	<string name="poi_information_route_marker">Znacznik trasy</string>
 	<string name="poi_information_sign">Znak</string>
 	<string name="poi_information_bicyclemap">Mapa rowerowa</string>
-	<string name="poi_board_type_plants">Informacje: o roślinach</string>
-	<string name="poi_board_type_public_transport">Informacje: na temat transportu publicznego</string>
-	<string name="poi_board_type_technology">Informacje: technologiczne</string>
-	<string name="poi_board_type_astronomy">Informacje: astronomiczne</string>
+	<string name="poi_board_type_plants">Informacje: rośliny</string>
+	<string name="poi_board_type_public_transport">Informacje: transport publiczny</string>
+	<string name="poi_board_type_technology">Informacje: technika</string>
+	<string name="poi_board_type_astronomy">Informacje: astronomia</string>
 
 	<string name="poi_smoking_no">Zakaz palenia</string>
 	<string name="poi_smoking_outside">Palenie dozwolone na zewnątrz</string>
-	<string name="poi_smoking_yes">Palenie jest dozwolone</string>
+	<string name="poi_smoking_yes">Palenie dozwolone</string>
 	<string name="poi_traffic_signals_sound_yes">Z dźwiękiem</string>
 	<string name="poi_traffic_signals_sound_no">Bez dźwięku</string>
 	<string name="poi_mini_roundabout">Mini rondo</string>
@@ -1466,4 +1466,16 @@
 	<string name="poi_atm_yes">Bankomat: Tak</string>
 	<string name="poi_atm_no">Bankomat: nie</string>
 
+	<string name="poi_pump_powered">Zasilana pompa</string>
+	<string name="poi_information_hikingmap">Mapa piesza</string>
+	<string name="poi_board_type_geology">Informacje: geologia</string>
+	<string name="poi_fireplace_yes">Palenisko</string>
+	<string name="poi_fireplace_no">Brak paleniska</string>
+
+	<string name="poi_smoking_separated">Palenie dozwolone w oddzielnym pomieszczeniu</string>
+	<string name="poi_smoking_isolated">Palenie dozwolone w wydzielonym pomieszczeniu</string>
+	<string name="poi_horse_riding">Jazda konna</string>
+	<string name="poi_sand">Piach</string>
+
+	<string name="poi_level">Poziom</string>
 	</resources>
