@@ -564,7 +564,7 @@ Dlaždicové mapy môžete získať priamo zo zdrojov na Internete, alebo ich m�
     <string name="search_online_address">Online hľadanie</string>
     <string name="max_level_download_tile">Max. online úroveň priblíženia</string>
     <string name="max_level_download_tile_descr">Výber maximálnej úrovne priblíženia na stiahnutie online dlaždíc</string>
-    <string name="route_general_information">Celková vzdialenosť %1$s, čas cestovania %2$d h %3$d m.</string>
+    <string name="route_general_information">Celková vzdialenosť %1$s, čas cestovania %2$d hod. %3$d min.</string>
     <string name="router_service_descr">Výber online alebo offline navigačnej služby</string>
     <string name="router_service">Navigačná služba</string>
     <string name="sd_dir_not_accessible">Priečinok pre uloženie na SD karte nie je prístupný!</string>
