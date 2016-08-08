@@ -53,8 +53,7 @@ public class RouteCalculationResult {
 		this.alarmInfo = new ArrayList<AlarmInfo>();
 	}
 	
-	public RouteCalculationResult(List<Location> list, List<RouteDirectionInfo> directions, RouteCalculationParams params, List<LocationPoint> waypoints
-			) {
+	public RouteCalculationResult(List<Location> list, List<RouteDirectionInfo> directions, RouteCalculationParams params, List<LocationPoint> waypoints, boolean addMissingturns) {
 		this.routingTime = 0;
 		this.errorMessage = null;
 		this.intermediatePoints = new int[params.intermediates == null ? 0 : params.intermediates.size()];
@@ -66,7 +65,6 @@ public class RouteCalculationResult {
 		if(waypoints != null) {
 			this.locationPoints.addAll(waypoints);
 		}
-		boolean addMissingTurns = true;
 		if(addMissingTurns) {
 			removeUnnecessaryGoAhead(localDirections);
 			addMissingTurnsToRoute(locations, localDirections, params.start,params.end, 
