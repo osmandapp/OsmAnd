@@ -935,7 +935,8 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	private boolean needAppend(SearchPhrase phrase) {
 		return getResultCollection() != null && (getResultCollection().getPhrase() == phrase
 				|| (getResultCollection().getPhrase().isLastWord(ObjectType.POI_TYPE) && phrase.isLastWord(ObjectType.POI_TYPE)
-					&& getResultCollection().getPhrase().getLastSelectedWord().getWord().equals(phrase.getLastSelectedWord().getWord())));
+					&& getResultCollection().getPhrase().getLastSelectedWord().getWord().equals(phrase.getLastSelectedWord().getWord())
+					&& !getResultCollection().getPhrase().isUnknownSearchWordPresent() && !phrase.isUnknownSearchWordPresent()));
 	}
 
 	public void completeQueryWithObject(SearchResult sr) {
