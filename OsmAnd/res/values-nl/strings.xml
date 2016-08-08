@@ -2135,7 +2135,7 @@ Het activeren van deze weergave verandert de kaartstijl in \'Winter en ski\', me
 	<string name="try_again">Probeer het opnieuw</string>
 	<string name="error_message_pattern">Fout: {0}</string>
 <string name="rate_this_app_long">Wilt u OsmAnd beoordelen op Google Play? Alvast heel erg bedankt.</string>
-	<string name="favorite_category_dublicate_message">Deze categorienaam bestaat al. Bedenk een andere.</string>
+	<string name="favorite_category_dublicate_message">Deze categorienaam bestaat al. Gebruik een andere.</string>
     <string name="favorite_category_name">Categorienaam</string>
     <string name="favorite_category_add_new_title">Voeg categorie toe</string>
     <string name="regions">Regio\'s</string>
@@ -2179,7 +2179,7 @@ Het activeren van deze weergave verandert de kaartstijl in \'Winter en ski\', me
     <string name="map_downloaded">Kaart gedownload</string>
     <string name="map_downloaded_descr">De kaart van %1$s is gedownload en kan nu worden gebruikt.</string>
     <string name="go_to_map">Ga naar de kaart</string>
-    <string name="world_map_download_descr">De basis-wereldkaart ontbreekt of is verouderd. Download hem om OsmAnd goed te laten functioneren.</string>
+    <string name="world_map_download_descr">De basis-wereldkaart ontbreekt of is verouderd. Download hem voor wereldwijd overzicht om lage zoomlevels.</string>
     <string name="shared_string_update">Updaten</string>
     
     
@@ -2427,7 +2427,7 @@ Het activeren van deze weergave verandert de kaartstijl in \'Winter en ski\', me
     <string name="osm_live_ask_for_purchase">Neem alsjeblieft eerst een OSM Live Abonnement</string>
 
     <string name="osm_live_header">Met dit abonnement ontvang je dagelijks updates voor kaarten over de hele wereld. 
-Een belangrijk deel van uw bijdrage gaat naar de OSM-gemeenschap en wordt uitbetaald naar het aantal OSM-bewerkingen.
+Het grootste gedeelte van uw bijdrage gaat naar de OSM-gemeenschap en wordt uitbetaald naar het aantal OSM-bewerkingen.
 Als je OsmAnd en OSM wil ondersteunen, is dit de perfecte manier om dat te doen.</string>
     
     <string name="select_map_marker">Kies markeervlaggetjes</string>
