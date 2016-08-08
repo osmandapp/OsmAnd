@@ -675,7 +675,7 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="city_type_hamlet">Aldea</string>
     <string name="city_type_village">Vila</string>
     <string name="favorite_delete_multiple">Esteu a punt de suprimir %1$d preferit(s) i %2$d grup(s) de preferits. N\'esteu segurs?</string>
-    <string name="basemap_missing">No s\'ha trobat el mapa base del món (el qual cobreix tot el món als nivells de zoom menors). És recomanable que us baixeu el fitxer World_basemap_x.obf per gaudir d\'un entorn complet.</string>
+    <string name="basemap_missing">No es troba el mapa base mundial (cobreix tot el món però amb poc detall). És recomanable que us baixeu el fitxer World_basemap_x.obf per gaudir d\'una perspectiva global.</string>
     <string name="vector_data_missing">No s\'ha trobat les dades descarregades («fora de línia») a la targeta SD. És recomanable que les baixeu per utilitzar mapes sense connexió.</string>
     <string name="tts_missing_language_data">No hi ha dades instal·lades per la llengua seleccionada. Voleu anar al Market per instal·lar-ne?</string>
     <string name="gpx_option_from_start_point">Passa al llarg de la traça sencera</string>
@@ -2009,7 +2009,7 @@ En activar aquests canvis de visualització l\'estil del mapa canvia a «Hivern 
     <string name="downloads">Baixades</string>
     <string name="activate_seamarks_plugin">Activeu el connector de cartes marines</string>
     <string name="activate_srtm_plugin">Activeu el connector de corbes de nivell</string>
-    <string name="favorite_category_dublicate_message">El nom de categoria especificat ja existeix. Definiu un altre nom.</string>
+    <string name="favorite_category_dublicate_message">El nom de categoria especificat ja existeix. Utilitzeu un nom diferent.</string>
     <string name="favorite_category_name">Nom de categoria</string>
     <string name="favorite_category_add_new_title">Afegeix una nova categoria</string>
     <string name="confirm_download_roadmaps">N\'esteu segur de baixar el mapa amb només carreteres, quan ja teniu el mapa normal (complet)?</string>
@@ -2028,7 +2028,7 @@ En activar aquests canvis de visualització l\'estil del mapa canvia a «Hivern 
     <string name="map_downloaded">Mapa baixat</string>
     <string name="map_downloaded_descr">S\'ha baixat el mapa de %1$s. Torneu al mapa per començar a utilitzar-lo.</string>
     <string name="go_to_map">Vés al mapa</string>
-    <string name="world_map_download_descr">El mapa base mundial (que abasta el món sencer però amb poca ampliació) no es troba o està malmès. Considereu baixar-lo per una operació completa.</string>
+    <string name="world_map_download_descr">El mapa base mundial (d\'abast mundial però amb poc detall) no es troba o està caducat. Considereu baixar-lo per una tenir una perspectiva global.</string>
     <string name="show_on_start_description">Si es desactiva s\'engega amb la pantalla del mapa</string>
     <string name="enter_country_name">Indiqueu el nom del país</string>
     <string name="shared_string_upload">Pujada</string>
@@ -2314,8 +2314,8 @@ Ara mateix, es disposa de {2} MB.</string>
     <string name="file_name_containes_illegal_char">El nom de fitxer inclou un caràcter ilegal</string>
 <string name="no_map_markers_found">Afegiu els marcadors de mapa amb el mapa</string>
     <string name="osm_live_header">"Aquesta subscripció permet actualitzacions horàries de tots els mapes del món. 
-La major part dels ingressos es retornen a la comunitat OSM en retribuir cada contribució OSM. 
-Cas que aprecieu OsmAnd  i OSM i vulgueu ajudar-los, és una via perfecta per fer-ho."</string>
+La majoria dels ingressos es retornen a la comunitat OSM en retribuir cada contribució OSM. 
+Si aprecieu OsmAnd  i OSM i vulgueu ajudar-los, és la via perfecta per fer-ho."</string>
     
     <string name="upload_osm_note_description">Podeu pujar la vostra nota OSM anònimament si utilitzeu el vostre perfil OpenStreetMap.org.</string>
     <string name="add_time_span">Afegeix un lapse de temps</string>
