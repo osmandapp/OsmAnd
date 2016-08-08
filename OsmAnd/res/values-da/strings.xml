@@ -2615,5 +2615,5 @@ Hvis du er fan af OsmAnd og OSM og ønsker at støtte dem, er det den perfekte m
     <string name="back_to_search">Tilbage til søg</string>
     <string name="coords_search">Koordinatsøgning</string>
     <string name="advanced_coords_search">Avanceret koordinatsøgning</string>
-    <string name="route_stops_before">%1$s stopper inden</string>
+    <string name="route_stops_before">%1$s stop før</string>
     </resources>
