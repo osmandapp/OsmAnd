@@ -258,7 +258,7 @@ Dlaždicové mapy môžete získať priamo zo zdrojov na Internete, alebo ich m�
     <string name="favorite_places_category">Miesta</string>
     <string name="shared_string_others">Iné</string>
     <string name="shared_string_no_thanks">Netreba</string>
-    <string name="basemap_missing">Chýba základná mapa sveta(World Basemap). Prosím, zvážte jej stiahnutie pre správnu funkčnosť.</string>
+    <string name="basemap_missing">Základná mapa sveta (pokrývajúca celý svet pri malom priblížení) chýba. Prosím zvážte stiahnutie World_basemap_x.obf pre celkový prehľad.</string>
     <string name="vector_data_missing">Na SD karte chýbajú offline údaje. Prosím, zvážte ich stiahnutie pre použitie máp bez internetu.</string>
     <string name="local_index_gpx_info_show">\n\nKliknite a podržte pre možnosti</string>
     <string name="local_index_installed">Lokálna verzia</string>
@@ -2003,7 +2003,7 @@ Aktivovanie tohto pohľadu zmení štýl mapy na \"Zima a lyžovanie\", ktorý z
     <string name="application_dir_description">Zvoľte kam chcete uložiť súbory máp.</string>
     <string name="osm_edit_created_poi">Vytvorený OSM POI</string>
     
-    <string name="world_map_download_descr">Svetová základná mapa (pokrývajúca celý svet pri malom priblížení) chýba alebo je zastaralá. Prosím zvážte stiahnutie Svetovej základnej mapy, aby ste mali kompletné prostredie.</string>
+    <string name="world_map_download_descr">Svetová základná mapa (pokrývajúca celý svet pri malom priblížení) chýba alebo je zastaralá. Prosím zvážte jej stiahnutie pre celkový prehľad.</string>
     <string name="shared_string_qr_code">QR kód</string>
     <string name="map_downloaded">Mapa stiahnutá</string>
     <string name="map_downloaded_descr">Mapa %1$s bola stiahnutá. Choďte späť na mapu a môžete ju začať používať.</string>
@@ -2234,7 +2234,7 @@ V súčasnosti je voľných len {2} MB.</string>
     <string name="osm_live_ask_for_purchase">Prosím zakúpte si najprv OSM Naživo</string>
 
     <string name="osm_live_header">Registrácia umožní hodinové aktualizácie všetkých máp sveta.
-Veľká časť príjmu ide späť do OSM komunity a za každý príspevok do OSM je vyplatená odmena.
+Väčšina príjmu ide späť do OSM komunity a za každý príspevok do OSM je vyplatená odmena.
 Ak máte radi OsmAnd a OSM a chcete ich podporiť, toto je výborný spôsob ako to urobiť.</string>
     
     <string name="show_transparency_seekbar">Zobraziť panel priesvitnosti</string>
