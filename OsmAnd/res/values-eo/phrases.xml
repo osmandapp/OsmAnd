@@ -1613,7 +1613,7 @@
 	<string name="poi_service_repair">Riparo</string>
 	<string name="poi_service_repair_no">Sen riparo</string>
 	<string name="poi_service_electrical">Riparo de elektraj aŭtoj</string>
-	<string name="poi_motorcycle_repair">Riparo de motorcikloj</string>
+	<string name="poi_motorcycle_repair">Riparejo de motorcikloj</string>
 	<string name="poi_self_service_yes">Memservo</string>
 	<string name="poi_self_service_no">Sen memservo</string>
 	<string name="poi_automated_yes">Aŭtomatigita</string>
@@ -2819,4 +2819,8 @@
 	<string name="poi_aquaculture_fish">Akvokultivo: fiŝoj</string>
 	<string name="poi_aquaculture_mussels">Akvokulturo: moluskoj</string>
 
+	<string name="poi_mdf">Telefon-diskonektig-stacio</string>
+	<string name="poi_diplomatic_consulate">Konsulejo</string>
+	<string name="poi_diplomatic_consulate_general">Konsulejo ĝenerala</string>
+	<string name="poi_diplomatic_honorary_consulate">Konsulejo honora</string>
 	</resources>
