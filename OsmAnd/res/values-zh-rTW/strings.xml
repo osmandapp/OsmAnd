@@ -432,7 +432,7 @@
     <string name="favourites_edit_dialog_name">名稱</string>
     <string name="favourites_edit_dialog_category">類別</string>
     <string name="shared_string_no_thanks">不需要，謝謝</string>
-    <string name="basemap_missing">缺少全球底圖(在縮小時顯示，含蓋全球範圍)。請下載 World_basemap_x.obf 將軟體環境完整化。</string>
+    <string name="basemap_missing">缺少全球底圖(在縮小時顯示，含蓋全球範圍)。請為全球概貌下載 World_basemap_x.obf。</string>
     <string name="vector_data_missing">裝置端(\'離線\')的 SD 卡上找不到資料。欲使用離線地圖請去下載。</string>
     <string name="local_index_gpx_info_show">\n\n長按會出現選項</string>
 
@@ -2129,7 +2129,7 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="world_maps">世界地圖</string>
 
     <string name="downloads">下載</string>
-    <string name="favorite_category_dublicate_message">已有指定的類別名稱。請定義其它名稱。</string>
+    <string name="favorite_category_dublicate_message">已有指定的類別名稱。請使用不同的名稱。</string>
     <string name="favorite_category_name">類別名稱</string>
     <string name="favorite_category_add_new_title">增加新的類別</string>
     <string name="confirm_download_roadmaps">您確定要下載只有道路的地圖，即使您已經擁有標準(完整的)地圖？</string>
@@ -2151,7 +2151,7 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="go_to_map">返回地圖</string>
     <string name="shared_string_qr_code">QR 碼</string>
     <string name="enter_country_name">輸入國家/地區名稱</string>
-    <string name="world_map_download_descr">全球底圖 (小比例尺涵蓋全世界) 丟失或過時。請考量一下為了完整的環境，下載全球底圖。</string>
+    <string name="world_map_download_descr">全球底圖 (小比例尺涵蓋全世界) 丟失或過時。請考量後下載全球概貌。</string>
     <string name="new_version">新版本</string>
     <string name="begin_with_osmand_menu_group">跟 OsmAnd 的第一步</string>
     <string name="features_menu_group">功能</string>
@@ -2429,7 +2429,7 @@ Facebook：https://www.facebook.com/osmandapp
     <string name="osm_live_ask_for_purchase">請先購買 OSM 即時捐助</string>
 
     <string name="osm_live_header">此捐助能夠為世界各地所有的地圖每小時更新一次。
-收入的主要部分回到 OSM 社群和支付每個 OSM 的貢獻。
+大多數收入又回到了 OSM 社群和支付每個 OSM 的貢獻。
 假如您喜愛 OsmAnd 和 OSM 並且想要支援它，這是一個完美方式的作法。</string>
     
     <string name="recalculate_route">重新計算路線</string>
