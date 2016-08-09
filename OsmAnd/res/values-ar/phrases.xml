@@ -205,4 +205,17 @@
 <string name="poi_water_tank">خزان ماء</string>
 
 	<string name="poi_diplomatic_honorary_consulate">قنصلية شرفية</string>
+	<string name="poi_radiotechnics">متجر تقنيات الراديو</string>
+	<string name="poi_tableware">متجر موائد</string>
+	<string name="poi_ticket">بيع التذاكر</string>
+	<string name="poi_tobacco">متجر تبغ</string>
+	<string name="poi_trade">محطة تجارية</string>
+	<string name="poi_tyres">مخزن إطارات</string>
+	<string name="poi_vacuum_cleaner">متجر مكانس كهربائية</string>
+	<string name="poi_variety_store">متجر متنوع</string>
+	<string name="poi_video">متجر فيديوتاك</string>
+	<string name="poi_department_store">متجر متعدد الأقسام</string>
+	<string name="poi_electronics">متجر إلكترونيات</string>
+	<string name="poi_energy">متجر طاقة</string>
+	<string name="poi_car_parts">قطع غيار السيارات</string>
 	</resources>
