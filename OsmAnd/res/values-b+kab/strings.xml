@@ -115,4 +115,7 @@
     <string name="index_srtm_parts">Amuren</string>
     <string name="monitoring_control_start">GPX</string>
     <string name="no_route">Ulac abrid</string>
+    <string name="map_widget_top_text">Isem n webrid</string>
+    <string name="map_widget_back_to_loc">Anida i yelliɣ</string>
+    <string name="osmand_parking_hours">Isragen</string>
     </resources>
