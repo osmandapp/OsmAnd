@@ -1080,35 +1080,41 @@ public class RouteProvider {
 		}
 		Route route = new Route();
 		gpx.routes.add(route);
+		int collectTime = 0;
 		for (int i = cDirInfo; i < directionInfo.size(); i++) {
 			RouteDirectionInfo dirInfo = directionInfo.get(i);
-			if (dirInfo.routePointOffset >= cRoute && dirInfo.getTurnType() != null && !dirInfo.getTurnType().isSkipToSpeak()) {
-				Location loc = routeNodes.get(dirInfo.routePointOffset);
-				WptPt pt = new WptPt();
-				pt.lat = loc.getLatitude();
-				pt.lon = loc.getLongitude();
-				pt.desc = dirInfo.getDescriptionRoute(ctx);
-				Map<String, String> extensions = pt.getExtensionsToWrite();
-				extensions.put("time", dirInfo.getExpectedTime() + "");
-				int turnType = dirInfo.getTurnType().getValue();
-				if (TurnType.C != turnType) {
-					extensions.put("turn", dirInfo.getTurnType().toXmlString());
-					extensions.put("turn-angle", dirInfo.getTurnType().getTurnAngle() + "");
-				}
-				extensions.put("offset", (dirInfo.routePointOffset - cRoute) + "");
+			if (dirInfo.routePointOffset >= cRoute) {
+				if (dirInfo.getTurnType() != null && !dirInfo.getTurnType().isSkipToSpeak()) {
+					Location loc = routeNodes.get(dirInfo.routePointOffset);
+					WptPt pt = new WptPt();
+					pt.lat = loc.getLatitude();
+					pt.lon = loc.getLongitude();
+					pt.desc = dirInfo.getDescriptionRoute(ctx);
+					Map<String, String> extensions = pt.getExtensionsToWrite();
+					extensions.put("time", (collectTime + dirInfo.getExpectedTime()) + "");
+					collectTime = 0;
+					int turnType = dirInfo.getTurnType().getValue();
+					if (TurnType.C != turnType) {
+						extensions.put("turn", dirInfo.getTurnType().toXmlString());
+						extensions.put("turn-angle", dirInfo.getTurnType().getTurnAngle() + "");
+					}
+					extensions.put("offset", (dirInfo.routePointOffset - cRoute) + "");
 
-				// Issue #2894
-				if (dirInfo.getRef() != null && !"null".equals(dirInfo.getRef())) {
-					extensions.put("ref", dirInfo.getRef() + "");
-				}
-				if (dirInfo.getStreetName() != null && !"null".equals(dirInfo.getStreetName())) {
-					extensions.put("street-name", dirInfo.getStreetName() + "");
-				}
-				if (dirInfo.getDestinationName() != null && !"null".equals(dirInfo.getDestinationName())) {
-					extensions.put("dest", dirInfo.getDestinationName() + "");
-				}
+					// Issue #2894
+					if (dirInfo.getRef() != null && !"null".equals(dirInfo.getRef())) {
+						extensions.put("ref", dirInfo.getRef() + "");
+					}
+					if (dirInfo.getStreetName() != null && !"null".equals(dirInfo.getStreetName())) {
+						extensions.put("street-name", dirInfo.getStreetName() + "");
+					}
+					if (dirInfo.getDestinationName() != null && !"null".equals(dirInfo.getDestinationName())) {
+						extensions.put("dest", dirInfo.getDestinationName() + "");
+					}
 
-				route.points.add(pt);
+					route.points.add(pt);
+				} else {
+					collectTime += dirInfo.getExpectedTime();
+				}
 			}
 		}
 		List<TargetPoint> ps = helper.getIntermediatePointsWithTarget();
