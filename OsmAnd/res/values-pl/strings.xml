@@ -73,7 +73,7 @@
 
     <string name="local_index_installed">Wersja lokalna</string>
     <string name="local_index_items_backuped">Zarchiwizowano %1$d z %2$d.</string>
-    <string name="local_index_items_deleted">Skasowano %1$d z %2$d.</string>
+    <string name="local_index_items_deleted">Usunięto %1$d z %2$d.</string>
     <string name="local_index_items_restored">Przywrócono %1$d z %2$d.</string>
     <string name="local_index_no_items_to_do">Brak elementów %1$s</string>
     <string name="local_index_action_do">Zostanie %1$s %2$s elementów. Kontynuować?</string>
