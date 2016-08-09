@@ -709,7 +709,7 @@ Registritaj kursoj povas esti kunhavigitaj kun viaj amikoj aŭ esti uzita por ko
     <string name="rendering_value_browse_map_name">Esplori mapon</string>
     <string name="rendering_value_car_name">Aŭto</string>
     <string name="rendering_value_bicycle_name">Biciklo</string>
-    <string name="rendering_value_pedestrian_name">Perpiedanto</string>
+    <string name="rendering_value_pedestrian_name">Piediranto</string>
     <string name="osmo_invite">Inviti…</string>
     <string name="rendering_attr_coloredBuildings_name">Kolor-kodigi domojn laŭspece</string>
     <string name="osmo_leave_confirmation_msg">Ĉu vi volas forlasi grupon %1$s?</string>
@@ -1264,7 +1264,7 @@ Tiu ĉi vido oni povas nuligi per malaktivigi ĝin tie ĉi, aŭ per ŝanĝi la \
  - Diversspecaj tavoloj de mapo: GPX aŭ navigadaj kursoj, Interesejoj, ŝatataj ejoj, nivelkurboj, haltejoj de publik-transporto, ekstraj mapoj kun ŝanĝebla diafaneco
  - Serĉi eksterrete adresojn kaj interesajn ejojn (Interesejojn)
  - Difini kursojn por mezaj distancoj eksterrete
- - Aŭta, bicikla, kaj perpiedanta reĝimoj kun:
+ - Aŭta, bicikla, kaj piediranta reĝimoj kun:
   - agordeblaj aŭtomata/taga/nokta aspektoj
   - agordebla rapid-dependa map-skalado
   - agordebla map-turniĝo laŭ direkto de movado aŭ kompaso
@@ -1685,7 +1685,7 @@ Proporcia memoro %4$s MB (Limito de Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="search_address">Serĉi adreson</string>
     <string name="app_mode_car">Aŭto</string>
     <string name="app_mode_bicycle">Biciklo</string>
-    <string name="app_mode_pedestrian">Perpiedanto</string>
+    <string name="app_mode_pedestrian">Piediranto</string>
     <string name="get_plugin">Elŝuti</string>
     <string name="do_you_like_osmand">Ĉu OsmAnd plaĉas al Ci?</string>
     <string name="app_name_osmand">OsmAnd</string>
@@ -2204,4 +2204,169 @@ Kaj la loko kaj tempo estas montrataj ĉe la OsmAnd stirpanelo, kaj ĉe la fenes
     <string name="coords_search">Koordinat-serĉo</string>
     <string name="advanced_coords_search">Detala koordinat-serĉo</string>
     <string name="route_stops_before">%1$s haltejoj malantaŭ</string>
+    <string name="osmand_extended_description_4000_chars">"
+OsmAnd (OSM Aŭtomata Navigado Direktanta al la celo) estas mapo kaj navigada aplikaĵo kun aliro al senpagaj, tutmondaj, kaj alt-kvalitaj datumoj de OpenStreetMap (OSM). Ĉiuj mapoj povas esti konservitaj en memorejo de via aparato por eksterreta uzo. Per GPS de via aparato, OsmAnd ebligas difini vojojn, kun vida kaj voĉa gvidado, por aŭto, biciklo, kaj por irado perpiede. Ĉiuj ĉefaj ebloj funkcias kaj enrete kaj eksterrete (Interreto ne bezonata).
+
+Kelkaj ĉefaj ebloj:
+
+Navigado
+ - Funkcias enrete (rapide) kaj eksterrete (neniaj kostoj por retmigrado kiam vi vojaĝos eksterlanden)
+ - Paŝon-post-paŝo gvidanta voĉo (antaŭ-registrita aŭ parol-sintezita)
+ - Laŭvole montras avertojn pri koridoroj, nomojn de stratoj, kaj proksimuman tempon de alveno
+ - Ebligas difini inter-celojn en via kurso
+ - Aŭtomate rekalkulas la vojon kiam vi devojigos
+ - Serĉu lokojn per adreso, per speco (ekz. restoracio, hotelo, benzinejo, muzeo), aŭ per geografiaj koordinatoj
+
+Map-vido
+ - Montras viajn pozicion kaj orientiĝon sur la mapo
+ - Laŭvole turniĝas la mapon laŭ kompaso aŭ laŭ direkto de via movo
+ - Konservu viajn plej gravajn ejojn al Ŝatataj
+ - Montras Interesejojn (probable interesajn ejojn) ĉirkaŭ vi
+ - Povas montri specialajn enretajn kahelajn mapojn
+ - Povas montri vidon de sputniko (de Bing)
+ - Povas montri diversajn surtavolojn kiel GPX-kursojn kaj aliajn mapojn kun agordebla travideblo
+ - Laŭvole montras nomojn de ejoj en Esperanto, loka lingvo, aŭ transskribo fonetika
+
+Uzas datumoj de OpenStreetMap kaj Vikipedio:
+ - Alt-kvalitaj informoj de plej bonaj kunlaboraj projektoj de la mondo
+ - Tutmondaj mapoj de OpenStreetMap, alŝuteblaj je regiono aŭ je lando
+ - Interesoj de Vikipedio, bonegaj por vizitado (nedisponeblaj en senpaga versio)
+ - Senlimigitaj senpagaj elŝutoj senpere en la programo (limigita al 16 map-dosieroj en senpaga versio)
+ - Ĉiam ĝisdataj mapoj (ĝisdatigitaj almenaŭ ĉiumonate)
+ - Kompaktaj eksterretaj vektoraj mapoj
+ - Elektu aŭ plenan mapon aŭ nur-vojan mapon (ekzemplo: plena mapo de Japanujo okupas 700 MB, tamen nur-voja mapo okupas nur 200 MB)
+ - Ankoraŭ subtenas enretajn aŭ kaŝmemorigitaj kahelajn mapojn
+
+Sekurecaj ebloj
+ - Laŭvola mem-baskulebla taga/nokta vido
+ - Laŭvola montrado de rapido, kaj averto kiam vi superas ĝin
+ - Laŭvola rapid-dependa pligrandigado de mapo
+ - Kunhavigu vian lokon, do viaj amikoj povos trovi vin
+
+Ebloj por piedirantoj kaj biciklantoj
+ - Mapoj enhavas piediradaj kaj biciklaj kursoj, ĝustaj por eksterdomaj agadoj
+ - Speciala difinado kaj montrado de vojo por biciklantoj kaj piedirantoj
+ - Laŭvole montras haltejoj publik-transportaj (aŭtobuso, tramo, vagonaro) inkluzive nomoj de linioj
+ - Registru viajn kursojn al loka GPX-dosiero aŭ al Interreta servo
+ - Laŭvole montras rapidon kaj altitudon
+ - Montras nivelkurboj kaj tavolon de nivel-ombrumo (reliefon) (per kromprogramo)
+
+Senpere kontribui al OpenStreetMap
+ - Raportu map-notoj
+ - Alŝutu GPX-kursoj al OSM senpere de la aplikaĵo
+ - Aldonu Interesejojn kaj alŝutu ilin al OSM (aŭ post se eksterrete)
+ - Laŭvole registru kurson dum fona reĝimo (kiam la aparato estas en dormeta reĝimo)
+
+OsmAnd estas malfermkoda kaj senĉese disvolviganta. Iu ajn povas kontribui al la aplikaĵo per raporti problemojn, traduki, aŭ kodumi novajn eblojn. La projekto vivas kaj estas senpaŭze plibonigata per agoj de programistoj kaj uzantoj. La projekto ankaŭ bezonas financan kontribuon por subteno de programado, kaj testado de novaj ebloj. Per aĉeto de OsmAnd+, vi povas helpi la aplikaĵon esti eĉ pli mojosa! Estas ankaŭ eble donaci al difinaj novaj ecoj de programo, aŭ fari ĝeneralan donacon ĉe osmand.net.
+
+
+Proksimuma kovrito de mapo kaj kvalito:
+ - Eŭropo okcidenta: ****
+ - Eŭropo orienta: ***
+ - Rusujo: ***
+ - Norda Ameriko: ***
+ - Suda Ameriko: **
+ - Azio: **
+ - Japanujo kaj Koreo: ***
+ - Meza Oriento: **
+ - Afriko: **
+ - Antarkto: *
+
+Listo de subtenataj landoj (preskaŭ la tuta mondo!):
+Afganujo, Albanujo, Alĝerio, Andoro, Angolo, Angvilo, Antigvo kaj Barbudo, Argentino, Armenujo, Arubo, Aŭstralio, Aŭstrujo, Azerbajĝano, Bahamoj, Bangladeŝo, Barato, Barbado, Barejno, Belgujo, Belizo, Belorusujo, Benino, Birmo, Bocvano, Bolivio, Bonero, Bosnujo kaj Hercegovino, Brazilo, Britaj Virgulininsuloj, Britujo, Brunejo, Bulgarujo, Burkino, Burundo, Butano, Centr-Afriko, Ĉado, Ĉeĥujo, Ĉilio, Ĉinujo, Danujo, Domingo, Dominiko, Ebur-Bordo, Egiptujo, Ekvadoro, Eritreo, Estonujo, Etiopujo, Fiĝioj, Filipinoj, Franca Gviano, Franca Polinezio, Francujo, Gabono, Gambio, Ganao, Germanujo, Gernezejo, Grekujo, Grenado, Gronlando, Gujano, Gvadelupo, Gvamo, Gvatemalo, Gvineo, Gvineo Ekvatora, Gvineo-Bisaŭo, Ĝibraltaro, Ĝibutio, Haitio, Hispanujo, Honduro, Honkongo, Hungarujo, Indonezio, Irako, Irano, Irlando, Islando, Israelo, Italujo, Jamajko, Japanujo, Jemeno, Jordanio, Ĵerzejo, Kaboverdo, Kamboĝo, Kameruno, Kanado, Kartvelujo, Kataro, Kazaĥujo, Kenjo, Kipro, Kirgizujo, Kiribato, Kolombio, Komoroj, Kongo, Kostariko, Kroatujo, Kubo, Kuracao , Kuvajto, Laoso, Latvujo, Lesoto, Libano, Liberio, Libio, Liĥtenŝtejno, Litovujo, Luksemburgo, Madagaskaro, Majoto, Makao, Makedonujo, Malajzio, Malavio, Maldivoj, Malio, Malto, Manksinsulo, Maroko, Martiniko, Maŭricio, Maŭritanujo, Meksiko, Mikronezio, Moldavujo, Monako, Moncerato, Mongolujo, Montenegro, Mozambiko, Namibio, Nauro, Nederlandaj Antiloj, Nederlando, Nepalo, Niĝerio, Niĝero, Nikaragvo, Nord-Koreo, Norvegujo, Nov-Kaledonio, Nov-Zelando, Okcidenta Saharo, Omano, Orienta Timoro, Pakistano, Palaŭo, Palestino, Panamo, Papuo-Nov-Gvineo, Paragvajo, Peruo, Polujo, Portugalujo, Puertoriko, Ruando, Rumanujo, Rusujo, Saint-Barthélemy, Saint-Martin, Salvadoro, Samoo, Sankta Heleno, Sankta Kristoforo kaj Neviso, Sankta Lucio, Sankta Vincento kaj Grenadinoj, Sankta-Piero kaj Mikelono, Sanmarino, Saŭda Arabujo, Sejŝeloj, Senegalo, Serbujo, Sieraleono, Singapuro, Sirio, Slovakujo, Slovenujo, Somalujo, Somalujo, Srilanko, Sud-Afriko, Sud-Georgio kaj Sud-Sandviĉinsuloj, Sud-Koreo, Sud-Sudano, Sudano, Suomujo, Surinamo, Svazilando, Svedujo, Svisujo, Taĝikujo, Tajlando, Tajvano, Tanzanio, Togo, Tokelao, Tongo, Trinidado kaj Tobago, Tunizio, Turkmenujo, Turkujo, Tuvalo, Ugando, Ukrainujo, Unuiĝintaj Arabaj Emirlandoj, Urugvajo, Usono, Uzbekujo, Uzbekujo, Valiso kaj Futuno, Vanuatuo, Vatikano, Venezuelo, Vjetnamujo, Zambio, Zimbabvo
+ "</string>
+    <string name="osmand_plus_long_description_1000_chars">"
+ OsmAnd (OSM Aŭtomata Navigado Direktanta al la celo)
+
+ OsmAnd estas malfermkoda navigada aplikaĵo subtenanta diversajn mondajn mapojn de OpenStreetMap (OSM). Ĉiuj mapoj (vektoraj kaj kahelaj) povas esti konservitaj en la poŝtelefona memorejo por eksterreta uzado. OsmAnd ankaŭ ebligas uzi eksterretan kaj enretan navigadon kun turnon-post-turno voĉaj anoncoj.
+
+ OsmAnd+ estas pagenda versio de programo, per aĉeto de aplikaĵo, vi subtenas la projekton, donacas al novajn eblojn, kaj ricevos la plej novajn ĝisdatigojn.
+
+Ĉefaj ebloj:
+ - Funkcias tute eksterrete (konservas elŝutitajn vektorajn aŭ kahelaj mapojn en la aparata memorejo)
+ - Kompaktaj vektoraj eksterretaj mapoj de la tuta mondo
+ - Senlime elŝuti landaj aŭ regionaj mapoj senpere en la aplikaĵo
+ - Eksterreta Vikipedio (elŝuteblaj Vikipediaj Interesejoj), perfekte por vizitado
+ - Diversspecaj tavoloj de mapo: GPX aŭ navigadaj kursoj, Interesejoj, ŝatataj ejoj, nivelkurboj, haltejoj de publik-transporto, ekstraj mapoj kun ŝanĝebla diafaneco
+ - Serĉi eksterrete adresojn kaj interesajn ejojn (Interesejojn)
+ - Difini kursojn por mezaj distancoj eksterrete
+ - Aŭta, bicikla, kaj piediranta reĝimoj kun:
+  - agordeblaj aŭtomata/taga/nokta aspektoj
+  - agordebla rapid-dependa map-skalado
+  - agordebla map-turniĝo laŭ direkto de movado aŭ kompaso
+  - sciigoj pri koridoroj, rapidlimoj, antaŭregistritaj aŭ sintezitaj parolaj helpoj
+ "</string>
+	<string name="osmand_plus_extended_description_4000_chars">"
+OsmAnd (OSM Aŭtomata Navigado Direktanta al la celo) estas mapo kaj navigada aplikaĵo kun aliro al senpagaj, tutmondaj, kaj alt-kvalitaj datumoj de OpenStreetMap (OSM). Ĉiuj mapoj povas esti konservitaj en memorejo de via aparato por eksterreta uzo. Per GPS de via aparato, OsmAnd ebligas difini vojojn, kun vida kaj voĉa gvidado, por aŭto, biciklo, kaj por irado perpiede. Ĉiuj ĉefaj ebloj funkcias kaj enrete kaj eksterrete (Interreto ne bezonata).
+
+OsmAnd+ estas pagenda versio de aplikaĵo. Per aĉeto de tiu ĉi programo, vi subtenas la projekton, donacas la novaj ebloj, kaj ricevos la plej novajn ĝisdatigojn. Vi povas provi la aplikaĵon antaŭ aĉeto, per instalado de la senpaga versio nomita OsmAnd.
+
+Kelkaj ĉefaj ebloj:
+
+Navigado
+ - Funkcias enrete (rapide) kaj eksterrete (neniaj kostoj por retmigrado kiam vi vojaĝos eksterlanden)
+ - Paŝon-post-paŝo gvidanta voĉo (antaŭ-registrita aŭ parol-sintezita)
+ - Laŭvole montras avertojn pri koridoroj, nomojn de stratoj, kaj proksimuman tempon de alveno
+ - Ebligas difini inter-celojn en via kurso
+ - Aŭtomate rekalkulas la vojon kiam vi devojigos
+ - Serĉu lokojn per adreso, per speco (ekz. restoracio, hotelo, benzinejo, muzeo), aŭ per geografiaj koordinatoj
+
+Map-vido
+ - Montras viajn pozicion kaj orientiĝon sur la mapo
+ - Laŭvole turniĝas la mapon laŭ kompaso aŭ laŭ direkto de via movo
+ - Konservu viajn plej gravajn ejojn al Ŝatataj
+ - Montras Interesejojn (probable interesajn ejojn) ĉirkaŭ vi
+ - Povas montri specialajn enretajn kahelajn mapojn
+ - Povas montri vidon de sputniko (de Bing)
+ - Povas montri diversajn surtavolojn kiel GPX-kursojn kaj aliajn mapojn kun agordebla travideblo
+ - Laŭvole montras nomojn de ejoj en Esperanto, loka lingvo, aŭ transskribo fonetika
+
+Uzas datumoj de OpenStreetMap kaj Vikipedio:
+ - Alt-kvalitaj informoj de plej bonaj kunlaboraj projektoj de la mondo
+ - Tutmondaj mapoj de OpenStreetMap, alŝuteblaj je regiono aŭ je lando
+ - Interesoj de Vikipedio, bonegaj por vizitado
+ - Senlimigitaj senpagaj elŝutoj senpere en la programo
+ - Ĉiam ĝisdataj mapoj (ĝisdatigitaj almenaŭ ĉiumonate)
+ - Kompaktaj eksterretaj vektoraj mapoj
+ - Elektu aŭ plenan mapon aŭ nur-vojan mapon (ekzemplo: plena mapo de Japanujo okupas 700 MB, tamen nur-voja mapo okupas nur 200 MB)
+ - Ankoraŭ subtenas enretajn aŭ kaŝmemorigitaj kahelajn mapojn
+
+Sekurecaj ebloj
+ - Laŭvola mem-baskulebla taga/nokta vido
+ - Laŭvola montrado de rapido, kaj averto kiam vi superas ĝin
+ - Laŭvola rapid-dependa pligrandigado de mapo
+ - Kunhavigu vian lokon, do viaj amikoj povos trovi vin
+
+Ebloj por piedirantoj kaj biciklantoj
+ - Mapoj enhavas piediradaj kaj biciklaj kursoj, ĝustaj por eksterdomaj agadoj
+ - Speciala difinado kaj montrado de vojo por biciklantoj kaj piedirantoj
+ - Laŭvole montras haltejoj publik-transportaj (aŭtobuso, tramo, vagonaro) inkluzive nomoj de linioj
+ - Registru viajn kursojn al loka GPX-dosiero aŭ al Interreta servo
+ - Laŭvole montras rapidon kaj altitudon
+ - Montras nivelkurboj kaj tavolon de nivel-ombrumo (reliefon) (per kromprogramo)
+
+Senpere kontribui al OpenStreetMap
+ - Raportu map-notoj
+ - Alŝutu GPX-kursoj al OSM senpere de la aplikaĵo
+ - Aldonu Interesejojn kaj alŝutu ilin al OSM (aŭ post se eksterrete)
+ - Laŭvole registru kurson dum fona reĝimo (kiam la aparato estas en dormeta reĝimo)
+
+OsmAnd estas malfermkoda kaj senĉese disvolviganta. Iu ajn povas kontribui al la aplikaĵo per raporti problemojn, traduki, aŭ kodumi novajn eblojn. La projekto vivas kaj estas senpaŭze plibonigata per agoj de programistoj kaj uzantoj. La projekto ankaŭ bezonas financan kontribuon por subteno de programado, kaj testado de novaj ebloj. Per aĉeto de OsmAnd+, vi povas helpi la aplikaĵon esti eĉ pli mojosa! Estas ankaŭ eble donaci al difinaj novaj ecoj de programo, aŭ fari ĝeneralan donacon ĉe osmand.net.
+
+
+Proksimuma kovrito de mapo kaj kvalito:
+ - Eŭropo okcidenta: ****
+ - Eŭropo orienta: ***
+ - Rusujo: ***
+ - Norda Ameriko: ***
+ - Suda Ameriko: **
+ - Azio: **
+ - Japanujo kaj Koreo: ***
+ - Meza Oriento: **
+ - Afriko: **
+ - Antarkto: *
+
+Listo de subtenataj landoj (preskaŭ la tuta mondo!):
+Afganujo, Albanujo, Alĝerio, Andoro, Angolo, Angvilo, Antigvo kaj Barbudo, Argentino, Armenujo, Arubo, Aŭstralio, Aŭstrujo, Azerbajĝano, Bahamoj, Bangladeŝo, Barato, Barbado, Barejno, Belgujo, Belizo, Belorusujo, Benino, Birmo, Bocvano, Bolivio, Bonero, Bosnujo kaj Hercegovino, Brazilo, Britaj Virgulininsuloj, Britujo, Brunejo, Bulgarujo, Burkino, Burundo, Butano, Centr-Afriko, Ĉado, Ĉeĥujo, Ĉilio, Ĉinujo, Danujo, Domingo, Dominiko, Ebur-Bordo, Egiptujo, Ekvadoro, Eritreo, Estonujo, Etiopujo, Fiĝioj, Filipinoj, Franca Gviano, Franca Polinezio, Francujo, Gabono, Gambio, Ganao, Germanujo, Gernezejo, Grekujo, Grenado, Gronlando, Gujano, Gvadelupo, Gvamo, Gvatemalo, Gvineo, Gvineo Ekvatora, Gvineo-Bisaŭo, Ĝibraltaro, Ĝibutio, Haitio, Hispanujo, Honduro, Honkongo, Hungarujo, Indonezio, Irako, Irano, Irlando, Islando, Israelo, Italujo, Jamajko, Japanujo, Jemeno, Jordanio, Ĵerzejo, Kaboverdo, Kamboĝo, Kameruno, Kanado, Kartvelujo, Kataro, Kazaĥujo, Kenjo, Kipro, Kirgizujo, Kiribato, Kolombio, Komoroj, Kongo, Kostariko, Kroatujo, Kubo, Kuracao , Kuvajto, Laoso, Latvujo, Lesoto, Libano, Liberio, Libio, Liĥtenŝtejno, Litovujo, Luksemburgo, Madagaskaro, Majoto, Makao, Makedonujo, Malajzio, Malavio, Maldivoj, Malio, Malto, Manksinsulo, Maroko, Martiniko, Maŭricio, Maŭritanujo, Meksiko, Mikronezio, Moldavujo, Monako, Moncerato, Mongolujo, Montenegro, Mozambiko, Namibio, Nauro, Nederlandaj Antiloj, Nederlando, Nepalo, Niĝerio, Niĝero, Nikaragvo, Nord-Koreo, Norvegujo, Nov-Kaledonio, Nov-Zelando, Okcidenta Saharo, Omano, Orienta Timoro, Pakistano, Palaŭo, Palestino, Panamo, Papuo-Nov-Gvineo, Paragvajo, Peruo, Polujo, Portugalujo, Puertoriko, Ruando, Rumanujo, Rusujo, Saint-Barthélemy, Saint-Martin, Salvadoro, Samoo, Sankta Heleno, Sankta Kristoforo kaj Neviso, Sankta Lucio, Sankta Vincento kaj Grenadinoj, Sankta-Piero kaj Mikelono, Sanmarino, Saŭda Arabujo, Sejŝeloj, Senegalo, Serbujo, Sieraleono, Singapuro, Sirio, Slovakujo, Slovenujo, Somalujo, Somalujo, Srilanko, Sud-Afriko, Sud-Georgio kaj Sud-Sandviĉinsuloj, Sud-Koreo, Sud-Sudano, Sudano, Suomujo, Surinamo, Svazilando, Svedujo, Svisujo, Taĝikujo, Tajlando, Tajvano, Tanzanio, Togo, Tokelao, Tongo, Trinidado kaj Tobago, Tunizio, Turkmenujo, Turkujo, Tuvalo, Ugando, Ukrainujo, Unuiĝintaj Arabaj Emirlandoj, Urugvajo, Usono, Uzbekujo, Uzbekujo, Valiso kaj Futuno, Vanuatuo, Vatikano, Venezuelo, Vjetnamujo, Zambio, Zimbabvo
+ "</string>
     </resources>
