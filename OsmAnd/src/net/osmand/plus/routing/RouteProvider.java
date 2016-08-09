@@ -1080,7 +1080,7 @@ public class RouteProvider {
 		}
 		Route route = new Route();
 		gpx.routes.add(route);
-		int collectTime = 0;
+		int collectedTime = 0;
 		for (int i = cDirInfo; i < directionInfo.size(); i++) {
 			RouteDirectionInfo dirInfo = directionInfo.get(i);
 			if (dirInfo.routePointOffset >= cRoute) {
@@ -1089,10 +1089,21 @@ public class RouteProvider {
 					WptPt pt = new WptPt();
 					pt.lat = loc.getLatitude();
 					pt.lon = loc.getLongitude();
-					pt.desc = dirInfo.getDescriptionRoute(ctx);
+
+					// Collect distances for subsequent suppressed turns
+					int collectedDistance = 0;
+					for (int j = i + 1; j < directionInfo.size(); j++) {
+						if (directionInfo.get(j).getTurnType() != null && dirInfo.getTurnType().isSkipToSpeak()) {
+							collectedDistance += directionInfo.get(j).getDistance();
+						} else {
+							break;
+						}
+					}
+					pt.desc = dirInfo.getDescriptionRoute(ctx, collectedDistance + dirInfo.getDistance());
+
 					Map<String, String> extensions = pt.getExtensionsToWrite();
-					extensions.put("time", (collectTime + dirInfo.getExpectedTime()) + "");
-					collectTime = 0;
+					extensions.put("time", (collectedTime + dirInfo.getExpectedTime()) + "");
+					collectedTime = 0;
 					int turnType = dirInfo.getTurnType().getValue();
 					if (TurnType.C != turnType) {
 						extensions.put("turn", dirInfo.getTurnType().toXmlString());
@@ -1113,7 +1124,7 @@ public class RouteProvider {
 
 					route.points.add(pt);
 				} else {
-					collectTime += dirInfo.getExpectedTime();
+					collectedTime += dirInfo.getExpectedTime();
 				}
 			}
 		}
