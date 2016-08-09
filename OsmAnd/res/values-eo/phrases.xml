@@ -2957,4 +2957,14 @@
 	<string name="poi_health_specialty_osteopathy_yes">Specialisto: osteopatiisto (alternativa medicino)</string>
 	<string name="poi_health_specialty_anaesthetics_yes">Specialisto: sensentigisto (anestezologiisto)</string>
 	<string name="poi_health_specialty_pulmonology_yes">Specialisto: pulmisto (pneŭmonologiisto)</string>
+	<string name="poi_health_specialty_dental_oral_maxillo_facial_surgery_yes">Specialisto: makzelvizaĝa ĥirurgiisto</string>
+	<string name="poi_health_specialty_maternity_yes">Specialisto: gravedecisto</string>
+	<string name="poi_health_specialty_emergency_medicine_yes">Specialisto: isto de post-akcidenta kaj vivsava medicino</string>
+	<string name="poi_health_specialty_emergency_medicine_no">Sen specialisto pri post-akcidenta kaj vivsava medicino</string>
+	<string name="poi_health_specialty_plastic_surgery_yes">Specialisto: plastia ĥirurgiisto</string>
+	<string name="poi_health_specialty_orthodontics_yes">Specialisto: dent-ĝustigisto (ortodenciisto)</string>
+	<string name="poi_health_specialty_physiotherapy_yes">Specialisto: fizioterapiisto</string>
+	<string name="poi_health_specialty_biochemistry_yes">Specialisto: bioĥemiisto</string>
+	<string name="poi_health_specialty_occupational_yes">Specialisto: okup-terapiisto</string>
+	<string name="poi_health_specialty_child_psychiatry_yes">Specialisto: psikiatriisto de infanoj</string>
 	</resources>
