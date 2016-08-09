@@ -302,7 +302,7 @@ public class RouteCalculationResult {
 		int[] listDistance = new int[locations.size()];
 		listDistance[locations.size() - 1] = 0;
 		for (int i = locations.size() - 1; i > 0; i--) {
-			listDistance[i - 1] = (int) locations.get(i - 1).distanceTo(locations.get(i));
+			listDistance[i - 1] = (int) Math.round(locations.get(i - 1).distanceTo(locations.get(i)));
 			listDistance[i - 1] += listDistance[i];
 		}
 		
@@ -583,7 +583,7 @@ public class RouteCalculationResult {
 		if (listDistance.length > 0) {
 			listDistance[locations.size() - 1] = 0;
 			for (int i = locations.size() - 1; i > 0; i--) {
-				listDistance[i - 1] = (int) locations.get(i - 1).distanceTo(locations.get(i));
+				listDistance[i - 1] = (int) Math.round(locations.get(i - 1).distanceTo(locations.get(i)));
 				listDistance[i - 1] += listDistance[i];
 			}
 		}
