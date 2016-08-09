@@ -43,6 +43,13 @@ public class RouteDirectionInfo {
 		return descriptionRoute.trim();
 	}
 	
+	public String getDescriptionRoute(OsmandApplication ctx, int collectedDistance) {
+		if (!descriptionRoute.endsWith(OsmAndFormatter.getFormattedDistance(collectedDistance, ctx))) {
+			descriptionRoute += " " + OsmAndFormatter.getFormattedDistance(collectedDistance, ctx);
+		}
+		return descriptionRoute.trim();
+	}
+
 	public String getDescriptionRoutePart() {
 		return descriptionRoute;
 	}
@@ -91,4 +98,8 @@ public class RouteDirectionInfo {
 	public int afterLeftTime;
 	// distance after action (for i.e. after turn to next turn)
 	public int distance;
+
+	public int getDistance() {
+		return distance;
+	}
 }
