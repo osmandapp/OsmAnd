@@ -1752,7 +1752,7 @@ Nagrane ślady można udostępnić znajomym lub wykorzystać na rzecz rowoju map
     <string name="download_tab_downloads">Do pobrania</string>
     <string name="download_tab_updates">Aktualizacje</string>
     <string name="rendering_attr_roadStyle_name">Styl dróg</string>
-    <string name="rendering_value_default_name">Domyślna</string>
+    <string name="rendering_value_default_name">Domyślnie</string>
     <string name="rendering_value_orange_name">Pomarańczowy</string>
     <string name="rendering_value_germanRoadAtlas_name">Niemiecki atlas drogowy</string>
     <string name="rendering_value_americanRoadAtlas_name">Amerykański atlas drogowy</string>
@@ -1914,7 +1914,7 @@ Włączenie tego widoku zmienia styl mapy na „Zima i narty”, ukazujący tere
     <string name="storage_directory_external">Pamięć zewnętrzna</string>
     <string name="storage_directory_default">Pamięć wewnętrzna</string>
     <string name="shared_string_copy">Skopiuj</string>
-    <string name="rendering_value__name">Domyślna</string>
+    <string name="rendering_value__name">Domyślnie</string>
     <string name="rendering_value_highContrastRoads_name">Wysoki kontrast dróg</string>
     <string name="index_name_netherlands">Europa - Holandia</string>
     <string name="storage_directory_manual">Określony ręcznie</string>
