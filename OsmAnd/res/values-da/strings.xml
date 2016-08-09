@@ -709,7 +709,7 @@ Liste over understøttede lande (dybest set hele verden!): Afghanistan, Albanien
     <string name="show_more_map_detail_descr">Vis nogle vektor-kortdetaljer (f.eks. veje) allerede ved lavere zoom</string>
     <string name="favourites_delete_multiple_succesful">Favoritter er slettet.</string>
     <string name="favorite_delete_multiple">%1$d favoritter og %2$d favoritgrupper slettes. Forsæt?</string>
-    <string name="basemap_missing">Verdensgrundkort (dækker hele verden ved lave zoomniveauer) mangler. Overvej at hente World_basemap_x.obf for et komplet kortmiljø.</string>
+    <string name="basemap_missing">Verdensgrundkort (dækker hele verden ved lave zoomniveauer) mangler. Overvej at hente World_basemap_x.obf for en komplet oversigt.</string>
     <string name="vector_data_missing">Offline-data mangler på SD-kort. Overvej at hente for at kunne bruge kort offline.</string>
 
 
@@ -1742,7 +1742,10 @@ Optagede spor kan deles med venner eller anvendes til OSM bidrag. Sportsfolk kan
     <string name="speed_limit_exceed_message">Vælg hvor meget hastighedsgrænsen skal overskrides, for at få en taleadvarsel.</string>
     <string name="osmo_device_not_found">Enheden blev ikke fundet</string>
     <string name="osmo_no_connection_msg">Kan ikke forbinde til OsMo serveren:\n- kontrollere internetforbindelsen;\n- kontrollere indstillingerne;\n- se på Twitter: https://twitter.com/OsMomobi</string>
-    <string name="anonymous_user_hint">En anonym bruger kan ikke:\n- oprette grupper;\n- synkronisere grupper og enheder med serveren;\n- administrere grupper og enheder på et personligt betjeningspanel på hjemmesiden.</string>
+    <string name="anonymous_user_hint">En anonym bruger kan ikke:
+- oprette grupper;
+- synkronisere grupper og enheder med serveren;
+- administrere grupper og enheder på et personligt betjeningspanel på hjemmesiden.</string>
     <string name="anonymous_user">Anonym bruger</string>
     <string name="logged_as">Logget ind som %1$s</string>
     <string name="configure_map">Konfigurer kort</string>
@@ -2205,7 +2208,7 @@ For at vende tilbage til en af OsmAnd konventionelle kortformater, enten deaktiv
     <string name="go_to_map">Gå til kortet</string>
     <string name="shared_string_qr_code">QR kode</string>
     <string name="enter_country_name">Angiv landenavn</string>
-    <string name="world_map_download_descr">Verdensgrundkort (dækker hele verden ved lave zoomniveauer) mangler eller er forældet. Hent verdensgrundkortet for et komplet miljø.</string>
+    <string name="world_map_download_descr">Verdensgrundkortet (dækker hele verden ved lave zoomniveauer) mangler eller er forældet. Hent det for en komplet oversigt.</string>
     <string name="new_version">Ny version</string>
     <string name="begin_with_osmand_menu_group">Kom godt i gang med OsmAnd</string>
     <string name="features_menu_group">Funktioner</string>
@@ -2484,10 +2487,8 @@ I øjeblikket er {2} MB til rådighed.</string>
     <string name="osm_live_ask_for_purchase">Køb først OSM Live-abonnement</string>
 
     <string name="osm_live_header">Abonnementet giver timebaserede opdateringer til alle kort i hele verden. 
-
 Størstedelen af indkomsten går tilbage til OSM fællesskabet og udbetales for hvert OSM bidrag. 
-
-Hvis du er fan af OsmAnd og OSM og ønsker at støtte dem, er dette en perfekt måde at gøre det.</string>
+Hvis du er fan af OsmAnd og OSM og ønsker at støtte dem, er det den perfekte måde at gøre det.</string>
     
     <string name="recalculate_route">Genberegn ruten</string>
     <string name="shared_string_topbar">Topbjælke</string>
@@ -2612,7 +2613,7 @@ Hvis du er fan af OsmAnd og OSM og ønsker at støtte dem, er dette en perfekt m
     <string name="dist_away_from_my_location">Søg %1$s væk</string>
     <string name="confirmation_to_delete_history_items">Slet valgte elementer fra historik?</string>
     <string name="back_to_search">Tilbage til søg</string>
-    <string name="coords_search">Søg på koordinater</string>
-    <string name="advanced_coords_search">Avanceret søg på koordinater</string>
-    <string name="route_stops_before">%1$s stopper inden</string>
+    <string name="coords_search">Koordinatsøgning</string>
+    <string name="advanced_coords_search">Avanceret koordinatsøgning</string>
+    <string name="route_stops_before">%1$s stop før</string>
     </resources>

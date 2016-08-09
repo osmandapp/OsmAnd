@@ -33,7 +33,7 @@
 	<string name="poi_carpet">Tapijtwinkel</string>
 	<string name="poi_chemist">Drogisterij</string>
 	<string name="poi_clothes">Kledingzaak</string>
-	<string name="poi_clothes_children">Kinderkledingwinkel</string>
+	<string name="poi_clothes_children">Kinderkleding</string>
 	<string name="poi_shoes">Schoenenwinkel</string>
 	<string name="poi_computer">Computerwinkel</string>
 	<string name="poi_copyshop">Kopieerwinkel</string>
@@ -1485,4 +1485,6 @@
 	<string name="poi_payment_cryptocurrencies_no">Betaling met Cryptocurrencies NIET mogelijk</string>
 	<string name="poi_payment_others_yes">Andere betalingsmogelijkheden mogelijk</string>
 	<string name="poi_payment_others_no">Andere betalingsvormen NIET mogelijk</string>
-	</resources>
+	<string name="poi_length">Lengte</string>
+
+</resources>

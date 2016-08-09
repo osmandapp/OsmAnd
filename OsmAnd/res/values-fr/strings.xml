@@ -138,7 +138,7 @@ Actuellement {2} Mo sont disponibles.</string>
     <string name="favorite_places_category">Lieux</string>
     <string name="shared_string_others">Autres</string>
     <string name="shared_string_no_thanks">Pas nécessaire</string>
-    <string name="basemap_missing">La carte mondiale de base est absente (couvrant le monde entier à faible zoom). Pensez à télécharger World_basemap_x.obf pour avoir un environnement complet.</string>
+    <string name="basemap_missing">La carte mondiale de base est absente (couvrant le monde entier avec un niveau large). Téléchargez World_basemap_x.obf pour avoir une couverture complète.</string>
     <string name="vector_data_missing">Il n\'y a aucune carte hors-ligne sur la carte SD. Pensez à en télécharger pour utiliser les cartes sans connexion.</string>
 
 

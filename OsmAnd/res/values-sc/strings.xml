@@ -58,7 +58,7 @@
     <string name="calculate_osmand_route_without_internet">Càlcula un\'àndala cun OsmAnd chene impreare internet</string>
     <string name="gpx_option_calculate_first_last_segment">Càlcula un’àndala cun OsmAnd pro su primu e s’ùrtimu segmentu de sa caminera</string>
     <string name="use_displayed_track_for_navigation">Boles impreare s’àndala ammustrada pro su nàvigu?</string>
-    <string name="keep_and_add_destination_point">Annanghe comente ùrtimu puntu de destinatzione</string>
+    <string name="keep_and_add_destination_point">Annanghe comente destinatzione imbeniente</string>
     <string name="select_gpx">Issèbera GPX…</string>
     <string name="route_descr_select_destination">Issèbera sa destinatzione</string>
     <string name="shared_string_select_on_map">Ischerta in sa mapa</string>
@@ -1197,7 +1197,7 @@ Memòria in proportzione %4$s MB (lìmite de Android %5$s MB, Dalvik %6$s MB).</
     <string name="favourites_edit_dialog_name">Nùmene</string>
     <string name="favourites_edit_dialog_category">Categoria</string>
     <string name="shared_string_no_thanks">No, gràtzias</string>
-    <string name="basemap_missing">Fartat sa mapa de base de su mundu (totu su mundu pro zoom bassos). Podes iscarrigare World_basemap_x.obf pro unu sistema cumpridu.</string>
+    <string name="basemap_missing">Fartat sa mapa de base de su mundu (totu su mundu pro ismanniamentos bassos). Podes iscarrigare World_basemap_x.obf pro un\'immàgine diferente.</string>
     <string name="vector_data_missing">Fartant sos datos (\'non in lìnia\') in s’ischeda SD. Ti cussigiamus de los iscarrigare pro poder impreare sas mapas chene lìnia.</string>
     <string name="local_index_installed">Versione locale</string>
     <string name="local_index_items_backuped">%1$d de %2$d ogetu/os istudados curretamente.</string>
@@ -2150,7 +2150,7 @@ Memòria in proportzione %4$s MB (lìmite de Android %5$s MB, Dalvik %6$s MB).</
     <string name="go_to_map">Bae a sa mapa</string>
     <string name="shared_string_qr_code">Còdighe QR</string>
     <string name="enter_country_name">Inserta su nùmene de s\'istadu</string>
-    <string name="world_map_download_descr">Sa mapa mundiale de base (chi coberrit su mundu intreu a zooms bassos) fartat o est betza. Pro praghere cunsìdera sa possibilidade de l’iscarrigare pro tènnere un’aplicatzione cumprida.</string>
+    <string name="world_map_download_descr">Sa mapa mundiale de base (chi coberrit su mundu intreu a ismanniamentos bassos) fartat o est betza. Pro praghere cunsìdera sa possibilidade de l’iscarrigare pro tènnere una immàgine generale.</string>
     <string name="show_on_start_description">\"Istudadu\" mandat deretu a s’ischermu mapa</string>
     <string name="new_version">Versione noa</string>
     <string name="begin_with_osmand_menu_group">Primos passos cun OsmAnd</string>
@@ -2411,7 +2411,7 @@ Si tenes bisòngiu de agiudu cun s\'aplicatzione OsmAnd, pro praghere cuntata su
     <string name="osm_live_email_desc">Nde tenimus bisòngiu pro ti imbiare informatziones a pitzu de sas contributziones</string>
     <string name="osm_live_support_region">Regione de suportu</string>
     <string name="osm_live_header">Custu abbonamentu abilitat agiornamentos ora pro ora pro totu sas mapas de su mundu.
-Sa parte manna de su balàngiu suportat sa comunidade OSM e est pagadu pro cada contributu OSM.
+Sa majoria de su balàngiu suportat sa comunidade OSM e est pagadu pro cada contributu OSM.
 Si istimas OsmAnd e OSM e los boles suportare, custa est una manera perfeta pro lu fàghere.</string>
     
     <string name="select_map_marker">Ischerta marcadore mapa</string>
@@ -2514,8 +2514,8 @@ Como bi sunt {2} MB ebbia disponìbiles.</string>
     <string name="dist_away_from_my_location">Chirca a %1$s dae inoghe</string>
     <string name="back_to_search">Torra a sa chirca</string>
     <string name="confirmation_to_delete_history_items">Boles iscantzellare sos elementos ischertados de s\'istòria?</string>
-    <string name="coords_search">Chirca de coordinatas</string>
-    <string name="advanced_coords_search">Chirca avantzada de coordinatas</string>
+    <string name="coords_search">Chirca cun coordinatas</string>
+    <string name="advanced_coords_search">Chirca avantzada cun coordinatas</string>
     <string name="release_2_4">"
  • Chirca de testu noa e potente meda
 

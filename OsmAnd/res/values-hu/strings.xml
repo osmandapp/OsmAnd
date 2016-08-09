@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
     <string name="send_files_to_osm">GPX fájl küldése OSM-re?</string>
     <string name="gpx_visibility_txt">Láthatóság</string>
     <string name="gpx_tags_txt">Címkék</string>
@@ -2196,7 +2197,7 @@ A csoport nem lesz törölve néhány hónap múlva, az OsMo.mobi weboldalon lé
     <string name="access_disable_offroute_recalc">Ne tervezzen újra, ha letérsz az útról</string>
     <string name="access_disable_wrong_direction_recalc">Ne tervezzen újra, ha rossz irányba mész</string>
     <string name="access_no_destination">Nincs beállítva cél</string>
-    <string name="map_widget_battery">Akumlátor töltöttség</string>
+    <string name="map_widget_battery">Akkumulátor töltöttség</string>
     <string name="move_marker_bottom_sheet_title">A jelölő helyének módosításához mozgasd a térképet</string>
     <string name="lat_lon_pattern">Szél.: %1$.6f Hossz.: %2$.6f</string>
     <string name="access_direction_audio_feedback">Irány hangjelzés</string>

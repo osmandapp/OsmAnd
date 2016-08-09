@@ -37,7 +37,7 @@ public class RouteDirectionInfo {
 	}
 	
 	public String getDescriptionRoute(OsmandApplication ctx) {
-		if (!descriptionRoute.endsWith(" " + OsmAndFormatter.getFormattedDistance(distance, ctx))) {
+		if (!descriptionRoute.endsWith(OsmAndFormatter.getFormattedDistance(distance, ctx))) {
 			descriptionRoute += " " + OsmAndFormatter.getFormattedDistance(distance, ctx);
 		}
 		return descriptionRoute.trim();
@@ -77,7 +77,7 @@ public class RouteDirectionInfo {
 
 	// expected time after route point
 	public int getExpectedTime() {
-		return (int) (distance / averageSpeed);
+		return (int) Math.round(distance / averageSpeed);
 	}
 
 	
