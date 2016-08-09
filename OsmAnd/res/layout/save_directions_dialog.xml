@@ -42,13 +42,17 @@
         <Button
             android:layout_width="125dp"
             android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackground"
             android:text="@string/shared_string_cancel"
+            android:textColor="?attr/contextMenuButtonColor"
             android:id="@+id/Cancel"/>
 
         <Button
             android:layout_width="125dp"
             android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackground"
             android:text="@string/shared_string_save"
+            android:textColor="?attr/contextMenuButtonColor"
             android:id="@+id/Save"/>
     </LinearLayout>
 </LinearLayout>
