@@ -1093,7 +1093,7 @@ public class RouteProvider {
 					// Collect distances for subsequent suppressed turns
 					int collectedDistance = 0;
 					for (int j = i + 1; j < directionInfo.size(); j++) {
-						if (directionInfo.get(j).getTurnType() != null && dirInfo.getTurnType().isSkipToSpeak()) {
+						if (directionInfo.get(j).getTurnType() != null && directionInfo.get(j).getTurnType().isSkipToSpeak()) {
 							collectedDistance += directionInfo.get(j).getDistance();
 						} else {
 							break;
