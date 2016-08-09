@@ -157,7 +157,7 @@
 	<string name="poi_religion_taoist">Taoista</string>
 	<string name="poi_monastery">Kolostor</string>
 	<string name="poi_wayside_cross">Útmenti kereszt</string>
-	<string name="poi_information">Turistainformáció</string>
+	<string name="poi_information">Információ</string>
 	<string name="poi_clock">Óra</string>
 	<string name="poi_viewpoint">Kilátóhely</string>
 	<string name="poi_camp_site">Kemping</string>
@@ -532,7 +532,7 @@
 	<string name="poi_ski_rental">Síkölcsönző</string>
 
 	<string name="poi_arts_centre">Kultúrközpont</string>
-	<string name="poi_social_centre">Közösségi központ</string>
+	<string name="poi_social_centre">Szociális központ</string>
 	<string name="poi_ski_resort">Síközpont</string>
 	<string name="poi_dog_park">Kutyafuttató</string>
 	<string name="poi_leisure_fishing">Horgászhely</string>
@@ -629,7 +629,7 @@
 	<string name="poi_clothes_children">Gyerekruhabolt</string>
 	<string name="poi_candles">Gyertyabolt</string>
 	<string name="poi_doors">Ajtók</string>
-	<string name="poi_erotic">Sex-Shop</string>
+	<string name="poi_erotic">Sexshop</string>
 	<string name="poi_fashion">Divatüzlet</string>
 	<string name="poi_furnace">Fűtéstechnikai szaküzlet</string>
 	<string name="poi_garden_furniture">Kerti bútor bolt</string>
@@ -871,7 +871,7 @@
 	<string name="poi_denomination_reformed">Református</string>
 	<string name="poi_denomination_seventh_day_adventist">Hetednapi adventista</string>
 	<string name="poi_denomination_new_apostolic">Új Apostoli Egyház</string>
-	<string name="poi_denomination_church_of_england">Church of england</string>
+	<string name="poi_denomination_church_of_england">Church of England</string>
 	<string name="poi_denomination_episcopal">Episzkopális</string>
 	<string name="poi_denomination_shia">Síita</string>
 	<string name="poi_denomination_greek_catholic">Görög katolikus</string>
@@ -1007,9 +1007,9 @@
 	<string name="poi_crossing_uncontrolled">Szabályozatlan</string>
 	<string name="poi_crossing_unmarked">Jelzetlen</string>
 	<string name="poi_start_date">Kezdő dátum</string>
-	<string name="poi_wheelchair">Kerekesszék</string>
-	<string name="poi_wheelchair_no">Kerekesszék: nem lehetséges</string>
-	<string name="poi_wheelchair_limited">Kerekesszék: korlátozott</string>
+	<string name="poi_wheelchair">Kerekesszékes</string>
+	<string name="poi_wheelchair_no">Kerekesszékkel nem elérhető</string>
+	<string name="poi_wheelchair_limited">Kerekesszékkel korlátozottan elérhető</string>
 	<string name="poi_wholesale">Nagykereskedés</string>
 
 	<string name="poi_access_private">Privát bemenet</string>
@@ -1050,8 +1050,8 @@
 	<string name="poi_trade_tile">Burkolóanyagok</string>
 
 	<string name="poi_population">Lakosság</string>
-	<string name="poi_parking_underground">Földalatti</string>
-	<string name="poi_parking_multi_storey">Többszintes</string>
+	<string name="poi_parking_underground">Típus: földalatti</string>
+	<string name="poi_parking_multi_storey">Típus: többszintes</string>
 
 	<string name="poi_bicycle_parking_anchors">Horgony</string>
 	<string name="poi_bicycle_parking_stands">Korlát</string>
@@ -1444,4 +1444,76 @@
 	<string name="poi_beach_shingle">Part típus: kavicsos</string>
 	<string name="poi_beach_rocky">Part típus: köves</string>
 
+	<string name="poi_training">Edzőhely</string>
+	<string name="poi_register_office">Anyakönyvi hivatal</string>
+	<string name="poi_bailiff">Végrehajtó</string>
+	<string name="poi_cabin">Hütte</string>
+	<string name="poi_denomination_church_of_scotland">Church of Scotland</string>
+	<string name="poi_denomination_iglesia_ni_cristo">Iglesia ni cristo</string>
+	<string name="poi_denomination_quaker">Kvéker</string>
+	<string name="poi_denomination_nazarene">Nazarénus</string>
+	<string name="poi_denomination_spiritist">Spiritualista</string>
+	<string name="poi_denomination_armenian_apostolic">Örmény apostoli ortodox</string>
+	<string name="poi_denomination_dutch_reformed">Holland református</string>
+	<string name="poi_denomination_apostolic">Apostoli</string>
+	<string name="poi_denomination_unitarian">Unitárius</string>
+	<string name="poi_denomination_shaktism">Saktizmus</string>
+	<string name="poi_denomination_shingon_shu">Singon buddhizmus</string>
+	<string name="poi_denomination_maronite">Maronita</string>
+	<string name="poi_denomination_mahayana">Mahájána buddhizmus</string>
+
+	<string name="poi_resort">Üdülő</string>
+	<string name="poi_hanami">Cseresznyevirágzás-nézés</string>
+	<string name="poi_gallery">Művészeti galéria</string>
+	<string name="poi_craft_handicraft">Kézműves</string>
+	<string name="poi_craft_hvac">Hűtés, szellőztetés, légkondícionálás</string>
+	<string name="poi_craft_insulation">Szigetelés</string>
+	<string name="poi_craft_metal_construction">Fémépítő</string>
+	<string name="poi_craft_parquet_layer">Parkettás</string>
+	<string name="poi_craft_plasterer">Kőműves</string>
+	<string name="poi_craft_pottery">Fazekas</string>
+	<string name="poi_craft_saddler">Szíjgyártó</string>
+	<string name="poi_craft_sailmaker">Vitorlakészítő</string>
+	<string name="poi_craft_sawmill">Fűrésztelep</string>
+	<string name="poi_craft_scaffolder">Állványépítő</string>
+	<string name="poi_craft_sculptor">Szobrász</string>
+	<string name="poi_craft_stand_builder">Stand építő</string>
+	<string name="poi_craft_stonemason">Kőfaragó</string>
+	<string name="poi_craft_sun_protection">Árnyékolástechnikus</string>
+	<string name="poi_craft_sweep">Kéményseprő</string>
+	<string name="poi_craft_tailor">Szabó</string>
+	<string name="poi_craft_tiler">Burkoló</string>
+	<string name="poi_craft_tinsmith">Bádogos</string>
+	<string name="poi_craft_upholsterer">Kárpitos</string>
+	<string name="poi_craft_window_construction">Ablakos</string>
+
+	<string name="poi_craft_computer">Számítástechnikus</string>
+	<string name="poi_floating_dock">Úszódokk</string>
+	<string name="poi_seamark_harbour">Kikötő</string>
+	<string name="poi_landmark">Tájékozódási pont</string>
+	<string name="poi_mooring">Kikötőhely</string>
+	<string name="poi_garden">Kert</string>
+
+	<string name="poi_heath">Törpecserjés</string>
+	<string name="poi_grass">Fű</string>
+	<string name="poi_grassland">Füves puszta</string>
+	<string name="poi_scrub">Bozót</string>
+	<string name="poi_farmland">Szántóföld</string>
+	<string name="poi_logging">Fakitermelés</string>
+	<string name="poi_sand">Homok</string>
+
+	<string name="poi_windfall">Kidőlt fák</string>
+	<string name="poi_dead_wood">Kiszáradt</string>
+
+	<string name="poi_passing_place">Félreállóhely</string>
+	<string name="poi_level">Szint</string>
+	<string name="poi_rtsa_scale">RTSA skála</string>
+
+	<string name="poi_piste_difficulty_easy">Pálya nehézség: könnyű</string>
+	<string name="poi_piste_difficulty_intermediate">Pálya nehézség: közepes</string>
+	<string name="poi_piste_difficulty_advanced">Pálya nehézség: haladó</string>
+	<string name="poi_piste_difficulty_novice">Pálya nehézség: kezdő</string>
+	<string name="poi_piste_difficulty_expert">Pálya nehézség: profi</string>
+	<string name="poi_piste_difficulty_freeride">Pálya nehézség: freeride</string>
+	<string name="poi_piste_grooming_classic">Pálya kezelés: klasszikus</string>
 	</resources>
