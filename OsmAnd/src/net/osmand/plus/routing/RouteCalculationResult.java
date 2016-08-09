@@ -725,7 +725,7 @@ public class RouteCalculationResult {
 	}
 	
 	public Location getLocationFromRouteDirection(RouteDirectionInfo i){
-		if(i.routePointOffset < locations.size()){
+		if(i != null && locations != null && i.routePointOffset < locations.size()){
 			return locations.get(i.routePointOffset);
 		}
 		return null;
