@@ -2369,4 +2369,51 @@ Proksimuma kovrito de mapo kaj kvalito:
 Listo de subtenataj landoj (preskaŭ la tuta mondo!):
 Afganujo, Albanujo, Alĝerio, Andoro, Angolo, Angvilo, Antigvo kaj Barbudo, Argentino, Armenujo, Arubo, Aŭstralio, Aŭstrujo, Azerbajĝano, Bahamoj, Bangladeŝo, Barato, Barbado, Barejno, Belgujo, Belizo, Belorusujo, Benino, Birmo, Bocvano, Bolivio, Bonero, Bosnujo kaj Hercegovino, Brazilo, Britaj Virgulininsuloj, Britujo, Brunejo, Bulgarujo, Burkino, Burundo, Butano, Centr-Afriko, Ĉado, Ĉeĥujo, Ĉilio, Ĉinujo, Danujo, Domingo, Dominiko, Ebur-Bordo, Egiptujo, Ekvadoro, Eritreo, Estonujo, Etiopujo, Fiĝioj, Filipinoj, Franca Gviano, Franca Polinezio, Francujo, Gabono, Gambio, Ganao, Germanujo, Gernezejo, Grekujo, Grenado, Gronlando, Gujano, Gvadelupo, Gvamo, Gvatemalo, Gvineo, Gvineo Ekvatora, Gvineo-Bisaŭo, Ĝibraltaro, Ĝibutio, Haitio, Hispanujo, Honduro, Honkongo, Hungarujo, Indonezio, Irako, Irano, Irlando, Islando, Israelo, Italujo, Jamajko, Japanujo, Jemeno, Jordanio, Ĵerzejo, Kaboverdo, Kamboĝo, Kameruno, Kanado, Kartvelujo, Kataro, Kazaĥujo, Kenjo, Kipro, Kirgizujo, Kiribato, Kolombio, Komoroj, Kongo, Kostariko, Kroatujo, Kubo, Kuracao , Kuvajto, Laoso, Latvujo, Lesoto, Libano, Liberio, Libio, Liĥtenŝtejno, Litovujo, Luksemburgo, Madagaskaro, Majoto, Makao, Makedonujo, Malajzio, Malavio, Maldivoj, Malio, Malto, Manksinsulo, Maroko, Martiniko, Maŭricio, Maŭritanujo, Meksiko, Mikronezio, Moldavujo, Monako, Moncerato, Mongolujo, Montenegro, Mozambiko, Namibio, Nauro, Nederlandaj Antiloj, Nederlando, Nepalo, Niĝerio, Niĝero, Nikaragvo, Nord-Koreo, Norvegujo, Nov-Kaledonio, Nov-Zelando, Okcidenta Saharo, Omano, Orienta Timoro, Pakistano, Palaŭo, Palestino, Panamo, Papuo-Nov-Gvineo, Paragvajo, Peruo, Polujo, Portugalujo, Puertoriko, Ruando, Rumanujo, Rusujo, Saint-Barthélemy, Saint-Martin, Salvadoro, Samoo, Sankta Heleno, Sankta Kristoforo kaj Neviso, Sankta Lucio, Sankta Vincento kaj Grenadinoj, Sankta-Piero kaj Mikelono, Sanmarino, Saŭda Arabujo, Sejŝeloj, Senegalo, Serbujo, Sieraleono, Singapuro, Sirio, Slovakujo, Slovenujo, Somalujo, Somalujo, Srilanko, Sud-Afriko, Sud-Georgio kaj Sud-Sandviĉinsuloj, Sud-Koreo, Sud-Sudano, Sudano, Suomujo, Surinamo, Svazilando, Svedujo, Svisujo, Taĝikujo, Tajlando, Tajvano, Tanzanio, Togo, Tokelao, Tongo, Trinidado kaj Tobago, Tunizio, Turkmenujo, Turkujo, Tuvalo, Ugando, Ukrainujo, Unuiĝintaj Arabaj Emirlandoj, Urugvajo, Usono, Uzbekujo, Uzbekujo, Valiso kaj Futuno, Vanuatuo, Vatikano, Venezuelo, Vjetnamujo, Zambio, Zimbabvo
  "</string>
+    <string name="osmand_plus_extended_description_4000_chars_v2">"
+OsmAnd Mapoj kaj Navigado - trovu ejoj sur mapo kaj difini kursojn sen interreta konekto. Elŝutu mapon de lando antaŭ vi vojaĝos tie por trovi lokojn kaj vojojn de nekonata regiono.
+
+Bazaj ebloj:
+• Detalaj mapoj de 200 landoj
+• Eksterreta navigado kun gvidata voĉo
+• Serĉi adresojn eksterrete
+• Informoj pri lokoj sur la mapo: interesaj ejoj, kafejoj, parkumejoj, vendejoj
+• Aldoni lokojn kiel ŝatatajn
+• Navigado por aŭtistoj, biciklistoj kaj piedirantoj
+
+Pliaj ebloj:
+• Montri kaj registri GPX-kursojn
+• Interesejoj de Vikipedio
+• Aldoni fotojn, aŭdajn kaj videajn notojn sur la mapo
+• Taga kaj nokta aspekto de mapo por oportuna veturado
+• Informoj pri kursoj kaj haltejoj de publika transporto
+• Piediradaj kaj biciklaj kursoj
+• Turismaj vojoj por regionoj de la tuta mondo
+• Enretaj mapoj el diversaj fontoj
+• Informoj pri pavim-kvalito de vojoj kaj strat-prilumado
+• Aldoni, redakti kaj forigi Interesejojn (por redaktantoj de OpenStreetMap)
+• OsMo - perinterreta observado de aliaj aparatoj
+
+Havigu senmalfunkcian navigadilon kie ajn vi estas - en Francujo, Germanujo, Meksiko, Britujo, Hispanujo, Nederlando, Usono, Rusujo, Brazilo kaj en iu ajn alia lando.
+
+Kromprogramoj:
+• Nivelkurboj kaj nivel-ombrumo https://goo.gl/7mojP8
+ Nivelkurboj kaj tavolo de nivel-ombrumo (reliefo) aldonita al baza OsmAnd mapo.
+
+• Skiada mapo https://goo.gl/pX6DxJ
+ Informoj pri descendejoj, skivojoj, kablovojoj kaj skiliftoj.
+
+• Mar-navigada mapo https://goo.gl/0hEdxm
+ Speciala map-aspekto por vidi mar-navigadajn markojn por enlanda kaj apudborda boatado.
+
+• Parkumeja pozicio https://goo.gl/6JxQXF
+ Plifaciligas al vi marki la pozicion de via parkumata veturilo kaj montras kiom da tempo restas se parkumejo estas temp-limigita.
+
+Estu informita!
+
+Twitter: https://twitter.com/osmandapp
+Fejsbuko: https://www.facebook.com/osmandapp
+Retpaĝo: http://osmand.net
+
+Se vi bezonas helpon pri OsmAnd aplikaĵo, bonvolu kontakti nian helpantaron: support@osmand.net 
+ "</string>
     </resources>
