@@ -95,6 +95,7 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 				float locationY = getPointY(tb, pointToStart);
 				canvas.rotate(-tb.getRotate(), locationX, locationY);
 				canvas.drawBitmap(mStartPoint, locationX - marginX, locationY - marginY, mBitmapPaint);
+				canvas.rotate(tb.getRotate(), locationX, locationY);
 			}
 		}
 
@@ -122,6 +123,7 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 			float locationY = getPointY(tb, pointToNavigate);
 			canvas.rotate(-tb.getRotate(), locationX, locationY);
 			canvas.drawBitmap(mTargetPoint, locationX - marginX, locationY - marginY, mBitmapPaint);
+			canvas.rotate(tb.getRotate(), locationX, locationY);
 		}
 
 		Iterator<TargetPoint> it = targetPoints.getIntermediatePoints().iterator();
