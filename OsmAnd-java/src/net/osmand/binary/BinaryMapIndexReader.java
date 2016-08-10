@@ -818,14 +818,20 @@ public class BinaryMapIndexReader {
 		}
 	}
 
-
 	public List<BinaryMapDataObject> searchMapIndex(SearchRequest<BinaryMapDataObject> req) throws IOException {
+		return searchMapIndex(req, null);
+	}
+	
+	public List<BinaryMapDataObject> searchMapIndex(SearchRequest<BinaryMapDataObject> req, MapIndex filterMapIndex) throws IOException {
 		req.numberOfVisitedObjects = 0;
 		req.numberOfAcceptedObjects = 0;
 		req.numberOfAcceptedSubtrees = 0;
 		req.numberOfReadSubtrees = 0;
 		List<MapTree> foundSubtrees = new ArrayList<MapTree>();
 		for (MapIndex mapIndex : mapIndexes) {
+			if(filterMapIndex == null || mapIndex == filterMapIndex) {
+				continue;
+			}
 			// lazy initializing rules
 			if (mapIndex.encodingRules.isEmpty()) {
 				codedIS.seek(mapIndex.filePointer);
@@ -885,73 +891,7 @@ public class BinaryMapIndexReader {
 		return req.getSearchResults();
 	}
 
-	public List<BinaryMapDataObject> searchMapIndex(SearchRequest<BinaryMapDataObject> req, MapIndex mapIndex) throws IOException {
-		req.numberOfVisitedObjects = 0;
-		req.numberOfAcceptedObjects = 0;
-		req.numberOfAcceptedSubtrees = 0;
-		req.numberOfReadSubtrees = 0;
-		List<MapTree> foundSubtrees = new ArrayList<MapTree>();
-
-		// lazy initializing rules
-		if (mapIndex.encodingRules.isEmpty()) {
-			codedIS.seek(mapIndex.filePointer);
-			int oldLimit = codedIS.pushLimit(mapIndex.length);
-			readMapIndex(mapIndex, true);
-			codedIS.popLimit(oldLimit);
-		}
-
-		for (MapRoot level : mapIndex.getRoots()) {
-			if ((level.minZoom <= req.zoom && level.maxZoom >= req.zoom) || req.zoom == -1) {
-				if (level.right < req.left || level.left > req.right || level.top > req.bottom || level.bottom < req.top) {
-					continue;
-				}
-
-				// lazy initializing trees
-				if (level.trees == null) {
-					level.trees = new ArrayList<MapTree>();
-					codedIS.seek(level.filePointer);
-					int oldLimit = codedIS.pushLimit(level.length);
-					readMapLevel(level);
-					codedIS.popLimit(oldLimit);
-				}
-
-				for (MapTree tree : level.trees) {
-					if (tree.right < req.left || tree.left > req.right || tree.top > req.bottom || tree.bottom < req.top) {
-						continue;
-					}
-					codedIS.seek(tree.filePointer);
-					int oldLimit = codedIS.pushLimit(tree.length);
-					searchMapTreeBounds(tree, level, req, foundSubtrees);
-					codedIS.popLimit(oldLimit);
-				}
-
-				Collections.sort(foundSubtrees, new Comparator<MapTree>() {
-					@Override
-					public int compare(MapTree o1, MapTree o2) {
-						return o1.mapDataBlock < o2.mapDataBlock ? -1 : (o1.mapDataBlock == o2.mapDataBlock ? 0 : 1);
-					}
-				});
-				for (MapTree tree : foundSubtrees) {
-					if (!req.isCancelled()) {
-						codedIS.seek(tree.mapDataBlock);
-						int length = codedIS.readRawVarint32();
-						int oldLimit = codedIS.pushLimit(length);
-						readMapDataBlocks(req, tree, mapIndex);
-						codedIS.popLimit(oldLimit);
-					}
-				}
-				foundSubtrees.clear();
-			}
-
-		}
-
-
-		if (req.numberOfVisitedObjects > 0) {
-			log.info("Search is done. Visit " + req.numberOfVisitedObjects + " objects. Read " + req.numberOfAcceptedObjects + " objects."); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-			log.info("Read " + req.numberOfReadSubtrees + " subtrees. Go through " + req.numberOfAcceptedSubtrees + " subtrees.");   //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$
-		}
-		return req.getSearchResults();
-	}
+	
 
 	protected void readMapDataBlocks(SearchRequest<BinaryMapDataObject> req, MapTree tree, MapIndex root) throws IOException {
 		List<BinaryMapDataObject> tempResults = null;
