@@ -99,7 +99,7 @@
     <string name="route_updated_loc_found">Resvägen kommer att beräknas så snart positionen hittas</string>
     <string name="osmand_parking_hours">timmar</string>
     <string name="osmand_parking_minutes">minuter</string>
-    <string name="osmand_parking_position_description_add_time">Bilen parkerades kl</string>
+    <string name="osmand_parking_position_description_add_time">Bilen är parkerad vid</string>
 
     <string name="select_animate_speedup">Välj animerad ruttacceleration</string>
     <string name="global_app_allocated_memory_descr">Allokerat minne %1$s MB (Android-gräns %2$s MB, Dalvik %3$s MB).</string>
@@ -194,7 +194,9 @@ Proportionellt minne %4$s MB (Android-gräns %5$s MB, Dalvik %6$s MB).</string>
     <string name="osmand_parking_pm">em</string>
     <string name="osmand_parking_am">fm</string>
     <string name="osmand_parking_position_name">Parkeringsplats</string>
-    <string name="osmand_parking_plugin_description">Modulen Parkeringsplats hjälper dig att hålla reda på var din bil är parkerad och vid behov hur mycket parkeringstid det är kvar. Du hittar din parkeringsplats och -tid på instrumentbrädan och i widgeten på kartskärmen. Du kan lägga till ett larm i kalendern som en påminnelse.</string>
+    <string name="osmand_parking_plugin_description">Modulen Parkeringsplats hjälper dig att hålla reda på var din bil är parkerad och vid behov hur mycket parkeringstid det är kvar.
+
+Du hittar din parkeringsplats och -tid på instrumentbrädan och i widgeten på kartskärmen. Du kan lägga till ett larm i kalendern som en påminnelse.</string>
     <string name="osmand_parking_plugin_name">Parkeringsplats</string>
     <string name="context_menu_item_add_parking_point">Markera som parkeringsplats</string>
     <string name="context_menu_item_delete_parking_point">Ta bort P-markering</string>
@@ -396,7 +398,7 @@ För tillfället finns det {2} MB ledigt.</string>
     <string name="favourites_edit_dialog_name">Namn</string>
     <string name="favourites_edit_dialog_category">Kategori</string>
     <string name="shared_string_no_thanks">Nej, tack</string>
-    <string name="basemap_missing">Basvärldskarta (som omfattar hela världen i låg inzoomning) saknas. Hämta gärna World_basemap_x.obf för en komplett miljö.</string>
+    <string name="basemap_missing">Basvärldskarta (som omfattar hela världen i låg inzoomning) saknas. Hämta gärna World_basemap_x.obf för en global översikt.</string>
     <string name="vector_data_missing">Offline-data saknas på SD-kortet. Det kan vara klokt att ladda ner detta för att kunna använda kartor offline.</string>
     <string name="local_index_gpx_info_show">\n\nTryck och håll för alternativ</string>
 
@@ -735,7 +737,7 @@ För tillfället finns det {2} MB ledigt.</string>
     <string name="hint_search_online">Online-sökning: Husnummer, gata, stad</string>
     <string name="search_offline_address">Offline</string>
     <string name="max_level_download_tile_descr">Välj högsta zoomnivå att ladda ner för online-kartbitar</string>
-    <string name="route_general_information">Total sträcka %1$s, restid %2$d h %3$d m.</string>
+    <string name="route_general_information">Total sträcka %1$s, restid %2$d h %3$d min.</string>
     <string name="router_service_descr">Välj en online- eller offline-navigeringstjänst</string>
     <string name="router_service">Navigeringstjänst</string>
     <string name="sd_dir_not_accessible">Datalagringsmappen på SD-kortet är inte tillgänglig!</string>
@@ -1193,7 +1195,7 @@ Dessa globala data (mellan 70 grader norr och 70 grader syd) är baserade på SR
 
     <string name="route_preferences">Ruttinställningar</string>
     <string name="route_info">Ruttinformation</string>
-    <string name="keep_and_add_destination_point">Lägg till som sista destinationspunkt</string>
+    <string name="keep_and_add_destination_point">Lägg till som en följande destination</string>
     <string name="calculate_osmand_route_without_internet">Beräkna OsmAnd-ruttsegment utan Internet</string>
     <string name="gpx_option_calculate_first_last_segment">Beräkna OsmAnd-rutt för första och sista ruttsegmentet</string>
     <string name="use_displayed_track_for_navigation">Vill du använda det visade spåret för navigering?</string>
@@ -1408,7 +1410,7 @@ Dessa globala data (mellan 70 grader norr och 70 grader syd) är baserade på SR
 - Vi tillåter inte grupper med endast 1 användare om det inte är en POI-grupp
 - Privata grupper är begränsade till 8 personer
 - Mer detaljer finns på webbsajten OsMo.mobi
-- Om du behöver skapa en grupp med andra villkor kontakta http://osmo.mobi
+- Om du behöver skapa en grupp med andra villkor kontakta supporten:  osmo.mobi@gmail.com
  "</string>
     <string name="osmo_group_information">Läs detta innan du skapar en grupp!</string>
     <string name="keep_navigation_service">Behåll</string>
@@ -1979,7 +1981,7 @@ Vill du fortsätta med en ny registrering?</string>
     <string name="contact_us">Kontakta oss</string>
     <string name="osm_edit_created_poi">Skapat en OSM POI</string>
     
-    <string name="world_map_download_descr">Baskarta över världen (täcker hela världen med låg zoomningsgrad) saknas eller är gammal. Hämta gärna denna karta till din enhet.</string>
+    <string name="world_map_download_descr">Baskarta över världen (täcker hela världen med låg zoomningsgrad) saknas eller är gammal. Hämta gärna denna karta för en global översikt.</string>
     <string name="shared_string_upload">Skicka</string>
     <string name="map_legend">Teckenförklaring</string>
     <string name="shared_string_update">Uppdatera</string>
@@ -2019,7 +2021,33 @@ Vill du fortsätta med en ny registrering?</string>
     <string name="access_from_map">Tillgång från kartan</string>
     <string name="rendering_attr_currentTrackColor_description">GPX-färg</string>
     <string name="rendering_attr_currentTrackWidth_description">GPX-bredd</string>
-    <string name="release_2_2">" • Nytt kontextkänsligt gränssnitt för att peta på platser på kartan och på andra skärmar\n\n • Kartskärmen startar nu automatiskt om inte \'Visa panelen vid appstart\' är vald\n\n • Konfigurera vilka kort och hur de ska visas i panelen\n\n • Gå förbi panelen om du föredrar en menybaserad kontroll över appen\n\n • För att hämta kartor kan regioner väljas direkt genom att peta på världskartan\n\n • Sökning efter intressepunkter (POI) understöder nu mer specifika frågor\n\n • Förbättrad funktion för POI- och OSM-redigering\n\n • Strukturen för hämtning av kartdata och gränssnittet har omarbetats\n\n och mer … "</string>
+    <string name="release_2_2">"
+ • Nytt kontextkänsligt gränssnitt för att peta på platser på kartan och på andra skärmar
+
+
+ • Kartskärmen startar nu automatiskt om inte \'Visa panelen vid appstart\' är vald
+
+
+ • Konfigurera vilka kort och hur de ska visas i panelen
+
+
+ • Gå förbi panelen om du föredrar en menybaserad kontroll över appen
+
+
+ • För att hämta kartor kan regioner väljas direkt genom att peta på världskartan
+
+
+ • Sökning efter intressepunkter (POI) understöder nu mer specifika frågor
+
+
+ • Förbättrad funktion för POI- och OSM-redigering
+
+
+ • Strukturen för hämtning av kartdata och gränssnittet har omarbetats
+
+
+ och mer …
+ "</string>
     <string name="dashboard_or_drawer_description">Det finns ett nytt val att primärt kontrollera appen via den flexibla panelen eller via en statisk meny. Detta val kan du alltid ändra på under inställningarna i panelen.</string>
 <string name="use_dashboard_btn">Använd panelen</string>
     <string name="use_drawer_btn">Använd menyn</string>
@@ -2202,7 +2230,7 @@ För tillfället finns det bara {2} MB tillgängligt.</string>
     <string name="osm_live_support_region">Stödregion</string>
     <string name="osm_live_header">Denna prenumeration aktiverar uppdateringar varje timme av kartor runt omkring i världen.
 Den större delen av inkomsterna går tillbaka till OSM-gemenskapen och betalas ut för varje OSM-bidrag.
-Om du tycker om OsmAnd och OSM och vill stödja detta så är detta ett utmärkt sätt att göra det på.</string>
+Om du tycker om OsmAnd och OSM och vill stödja dem så är detta ett utmärkt sätt att göra det på.</string>
     
     <string name="access_no_destination">Ingen destination angiven</string>
     <string name="map_widget_magnetic_bearing">Magnetisk bäring</string>
