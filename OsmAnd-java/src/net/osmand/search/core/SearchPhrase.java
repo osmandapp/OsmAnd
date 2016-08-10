@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 import java.util.TreeSet;
 import java.util.regex.Pattern;
 
@@ -39,7 +40,29 @@ public class SearchPhrase {
 	private static final String DELIMITER = " ";
 	private static final String ALLDELIMITERS = "\\s|,";
 	private static final Pattern reg = Pattern.compile(ALLDELIMITERS);
-	private Collator clt; 
+	private Collator clt;
+	
+	private static Set<String> conjunctionsThe = new TreeSet<>();
+	private static Set<String> conjunctionsAnd = new TreeSet<>();
+	static {
+		// the
+		conjunctionsThe.add("the");
+		conjunctionsThe.add("der");
+		conjunctionsThe.add("den");
+		conjunctionsThe.add("die");
+		conjunctionsThe.add("das");
+		conjunctionsThe.add("la");
+		conjunctionsThe.add("le");
+		conjunctionsThe.add("el");
+		conjunctionsThe.add("il");
+		// and
+		conjunctionsAnd .add("and");
+		conjunctionsAnd .add("und");
+		conjunctionsAnd .add("en");
+		conjunctionsAnd .add("et");
+		conjunctionsAnd .add("y");
+		conjunctionsAnd .add("и");
+	}
 	
 	
 	public enum SearchPhraseDataType {
@@ -84,11 +107,13 @@ public class SearchPhrase {
 		} else {
 			sp.unknownSearchWordTrim = "";
 			String[] ws = restText.split(ALLDELIMITERS);
+			boolean first = true;
 			for (int i = 0; i < ws.length ; i++) {
 				String wd = ws[i].trim();
-				if (wd.length() > 0) {
-					if (i == 0) {
+				if (wd.length() > 0 && !conjunctionsThe.contains(wd.toLowerCase())) {
+					if (first) {
 						sp.unknownSearchWordTrim = wd;
+						first = false;
 					} else {
 						sp.unknownWords.add(wd);
 					}
