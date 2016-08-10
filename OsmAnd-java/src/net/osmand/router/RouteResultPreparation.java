@@ -977,6 +977,7 @@ public class RouteResultPreparation {
 		Set<String> addedTurns = new TreeSet<String>();
 		// if we have information increase number of roads per each turn direction
 		int diffTurnRoads = roads;
+		int increaseTurnRoads = 0;
 		for(int[] li : lanesInfo) {
 			TIntHashSet set = new TIntHashSet();
 			if(li != null) {
@@ -984,7 +985,7 @@ public class RouteResultPreparation {
 					TurnType.collectTurnTypes(li[k], set);
 				}
 			}
-			diffTurnRoads += Math.max(set.size() - 1, 0);
+			increaseTurnRoads = Math.max(set.size() - 1, 0);
 		}
 		
 		for (int i = 0; i < rawLanes.length; i++) {
@@ -1012,9 +1013,11 @@ public class RouteResultPreparation {
 				// we already found slight turn others are turn in different direction
 				lookupSlightTurn = false;
 			}
-			if (lanes < 0 || diffTurnRoads < 0) {
+			if (lanes < 0 || diffTurnRoads + increaseTurnRoads < 0) {
 				activeStartIndex = ind;
 				break;
+			} else if(diffTurnRoads < 0 && activeStartIndex < 0) {
+				activeStartIndex = ind;
 			}
 		}
 		return activeStartIndex;
