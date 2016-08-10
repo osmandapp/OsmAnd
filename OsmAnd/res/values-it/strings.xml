@@ -123,7 +123,7 @@ Ora, sono disponibili solo {2} MB.</string>
     <string name="favorite_places_category">Luoghi</string>
     <string name="shared_string_others">Ancora</string>
     <string name="shared_string_no_thanks">No, grazie</string>
-    <string name="basemap_missing">La mappa di base del mondo (ricopre l\'intero mondo per zoom bassi) è mancante. Puoi scaricare World_basemap_x.obf per un sistema completo.</string>
+    <string name="basemap_missing">La mappa di base del mondo (ricopre l\'intero mondo per zoom bassi) è mancante. Puoi scaricare World_basemap_x.obf per una visione globale.</string>
     <string name="vector_data_missing">Mancano i dati (\'offline\') nella scheda SD. Ti consigliamo di scaricarli per poter usare le mappe offline.</string>
     <string name="local_index_gpx_info_show">\n\nClic lungo per visualizzare le opzioni</string>
 
@@ -450,7 +450,7 @@ Ora, sono disponibili solo {2} MB.</string>
     <string name="search_online_address">Internet</string>
     <string name="max_level_download_tile">Max zoom online</string>
     <string name="max_level_download_tile_descr">Scegli il livello di zoom massimo da scaricare per le mappe online a mattonelle</string>
-    <string name="route_general_information">Distanza totale %1$s, durata del viaggio %2$d h %3$d m.</string>
+    <string name="route_general_information">Distanza totale %1$s, durata del viaggio %2$d h %3$d min.</string>
     <string name="router_service_descr">Scegli un servizio online oppure offline di navigazione</string>
     <string name="router_service">Servizio di navigazione</string>
     <string name="sd_dir_not_accessible">La cartella di salvataggio sulla SD card non è accessibile!</string>
@@ -2174,7 +2174,7 @@ Attivando questa vista lo stile della mappa diventerà \'Inverno e sci\', mostra
     <string name="world_maps">Mappe mondiali</string>
 
     <string name="downloads">Download</string>
-    <string name="favorite_category_dublicate_message">Il nome della categoria specificata esiste già. Specificane uno diverso.</string>
+    <string name="favorite_category_dublicate_message">Il nome della categoria specificata esiste già. Specifica un nome diverso.</string>
     <string name="favorite_category_name">Nome della categoria</string>
     <string name="favorite_category_add_new_title">Aggiungi una nuova categoria</string>
     <string name="confirm_download_roadmaps">Sei sicuro di volere scaricare mappe solo stradali anche se disponi già di mappe standard complete?</string>
@@ -2219,7 +2219,7 @@ Attivando questa vista lo stile della mappa diventerà \'Inverno e sci\', mostra
     <string name="techical_articles_item">Articoli tecnici</string>
     <string name="versions_item">Versioni</string>
     <string name="contact_us">Contattaci</string>
-    <string name="world_map_download_descr">La mappa di base (copertura mondiale a piccoli livelli di zoom) è mancante o non aggiornata. Valutate di scaricare la mappa mondiale di base per un ambiente completo.</string>
+    <string name="world_map_download_descr">"La mappa di base (copertura mondiale a piccoli livelli di zoom) è mancante o non aggiornata. Valutate di scaricare  per un ambiente completo."</string>
 
     <string name="map_legend">Legenda della mappa</string>
 <string name="shared_string_upload">Carica</string>
@@ -2464,7 +2464,7 @@ Ora, sono disponibili solo {2} MB.</string>
 
     <string name="osm_live_header">La sottoscrizione abilita agli aggiornamenti orari per tutte le mappe del mondo.
 La maggior parte degli incassi ritornano alla comunità OSM ed è corrisposto per ogni contributo OSM.
-Nel caso ami OsmAnd e OSM e vuoi sostenerli è un perfetto modo per farlo.</string>
+Se ami OsmAnd e OSM e vuoi sostenerli è un modo perfetto farlo.</string>
     
     <string name="upload_anonymously">Invia anonimamente</string>
     <string name="show_transparency_seekbar">Mostra la barra di ricerca trasparente</string>
