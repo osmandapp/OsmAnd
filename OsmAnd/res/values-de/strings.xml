@@ -462,7 +462,7 @@ Aktuell sind {2} MB verfügbar.</string>
 	<string name="favourites_edit_dialog_name">Name</string>
 	<string name="favourites_edit_dialog_category">Kategorie</string>
 	<string name="shared_string_no_thanks">Nicht verwendet</string>
-	<string name="basemap_missing">Die Offline-Weltkarte für kleine Vergrößerungen ist noch nicht vorhanden. Bitte \'Übersichtskarte der Welt\' herunterladen.</string>
+	<string name="basemap_missing">Die Offline-Weltkarte für kleine Vergrößerungen fehlt. Bitte das herunterladen der \'Übersichtskarte der Welt\' in Erwägung ziehen.</string>
 	<string name="vector_data_missing">An Bord (\"Offline\") sind keine Daten auf der SD-Karte vorhanden. Bitte ggf. herunterladen, damit Karten offline verwendet werden können.</string>
 	<string name="local_index_gpx_info_show">"\n\nLang klicken für Optionen"</string>
 
@@ -1763,7 +1763,10 @@ Aufgenommene Tracks kann man z.B. mit Bekannten teilen, oder auch zum Upload fü
     <string name="osmo_no_connection_msg">Keine Verbindung zum OsMo-Server:\n- überprüfen Sie Ihre Internetverbindung;\n- überprüfen Sie die Einstellungen;\n- probieren Sie Meldungen auf Twitter: https://twitter.com/OsMomobi</string>
     <string name="anonymous_user">Anonymer Benutzer</string>
     <string name="logged_as">Angemeldet als %1$s</string>
-	<string name="anonymous_user_hint">Anonyme Benutzer können keine:\n- Gruppen erstellen;\n- Gruppen und Geräte mit dem Server synchronisieren;\n- Gruppen und Geräte im Privatbereich auf der Webseite verwalten.</string>
+	<string name="anonymous_user_hint">Anonyme Benutzer können folgendes nicht:
+- Gruppen erstellen;
+- Gruppen und Geräte mit dem Server synchronisieren;
+- Gruppen und Geräte im Privatbereich auf der Webseite verwalten.</string>
     <string name="rendering_category_routes">Routen</string>
     <string name="rendering_category_details">Details</string>
     <string name="rendering_category_transport">ÖPNV-Linien</string>
@@ -2114,13 +2117,13 @@ Diese Ansicht kann zurückgestellt werden indem Sie hier wieder deaktiviert oder
     <string name="whats_new">Neuerungen in</string>
     <string name="osm_edit_created_poi">OSM-POI erstellt</string>
     
-    <string name="world_map_download_descr">Die Basis-Weltkarte (Abdeckung der ganzen Welt bei kleinen Zoomstufen) ist nicht vorhanden oder veraltet. Lade bitte die Basis-Weltkarte herunter.</string>
+    <string name="world_map_download_descr">Die Basis-Weltkarte (Abdeckung der ganzen Welt bei kleinen Zoomstufen) ist nicht vorhanden oder veraltet. Für eine globale Übersicht erwägen Sie einen Download.</string>
     <string name="simulate_initial_startup_descr">Setzt das Flag zum erstmaligen App-Start. Alle anderen Einstellungen bleiben unverändert</string>
     <string name="simulate_initial_startup">Ersten App-Start simulieren</string>
     <string name="share_geo">geo:</string>
     <string name="share_menu_location">Position teilen</string>
     <string name="shared_string_send">Senden</string>
-    <string name="favorite_category_dublicate_message">Der eingegebene Kategoriename existiert bereits. Bitte einen anderen Namen eingeben.</string>
+    <string name="favorite_category_dublicate_message">Der eingegebene Kategoriename existiert bereits. Bitte einen anderen Namen benutzen.</string>
     <string name="favorite_category_name">Kategoriename</string>
     <string name="favorite_category_add_new_title">Neue Kategorie hinzufügen</string>
     <string name="srtm_plugin_disabled">Höhenlinien deaktiviert</string>
@@ -2370,7 +2373,7 @@ Aktuell sind {2} MB verfügbar.</string>
     <string name="osm_live_region_desc">Teile Ihrer Spende werden an OSM-Mitwirkende weitergegeben, welche diese Region bearbeiten</string>
     <string name="osm_live_header">Dieses Abonnement schaltet stündliche Updates für die gesamten weltweiten Karten frei. 
 Ein Großteil dieser Einnahmen geht zurück an die OSM-Gemeinschaft, eine Auszahlung erfolgt je nach Anzahl der Beiträge zu den OSM-Daten. 
-Falls Sie OsmAnd mögen und das Projekt OpenStreetMap unterstützen wollen, so ist dies dafür eine perfekte Möglichkeit.</string>
+Wenn Sie OsmAnd und OSM lieben und unterstützen wollen, so ist dies die perfekte Möglichkeit.</string>
     
     <string name="shared_string_topbar">Obere Leiste</string>
     <string name="finish_navigation">Navigation beenden</string>
@@ -2460,6 +2463,8 @@ Falls Sie OsmAnd mögen und das Projekt OpenStreetMap unterstützen wollen, so i
  • Audio-Integration mit Fahrzeug-Soundanlage / Freisprecheinrichtung über Bluetooth
 
  • Verbesserte Navigationsansagen, Sprachinformationen und Abbiegespurhinweise
+
+ • Verbesserte Anzeige der ÖPNV Linien mit Routenanzeige
 
  • Mehr Sprachen hinzugefügt und Unterstützung für regionale Sprachen
 
