@@ -2616,4 +2616,6 @@ Hvis du er fan af OsmAnd og OSM og ønsker at støtte dem, er det den perfekte m
     <string name="coords_search">Koordinatsøgning</string>
     <string name="advanced_coords_search">Avanceret koordinatsøgning</string>
     <string name="route_stops_before">%1$s stop før</string>
+    <string name="rendering_attr_hideOverground_name">Overjordiske objekter</string>
+
     </resources>
