@@ -75,15 +75,14 @@ public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
 		final IncrementalChangesManager changesManager = getMyApplication().getResourceManager().getChangesManager();
 		final long timestamp = changesManager.getTimestamp(fileNameWithoutExtension);
 		String lastUpdateDate = formatDateTime(getActivity(), timestamp);
-		final long lastCheck = preferenceLastCheck(fileName, getSettings()).get();
-		String lastCheckString = formatDateTime(getActivity(), lastCheck != DEFAULT_LAST_CHECK
-				? lastCheck : timestamp);
 		lastMapChangeTextView.setText(getString(R.string.last_map_change, lastUpdateDate));
+		final long lastCheck = preferenceLastCheck(fileName, getSettings()).get();
 
 
 		OsmandSettings.CommonPreference<Boolean> preference = preferenceLiveUpdatesOn(fileName,
 				getSettings());
-		if (preference.get()) {
+		if (preference.get() && lastCheck != DEFAULT_LAST_CHECK) {
+			String lastCheckString = formatDateTime(getActivity(), lastCheck);
 			lastUpdateTextView.setText(getString(R.string.last_update, lastCheckString));
 		} else {
 			lastUpdateTextView.setVisibility(View.GONE);

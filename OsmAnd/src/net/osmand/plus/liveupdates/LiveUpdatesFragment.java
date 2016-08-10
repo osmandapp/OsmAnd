@@ -33,7 +33,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
@@ -534,9 +533,14 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppList
 					Algorithms.getFileNameWithoutExtension(new File(item));
 			final long timestamp = changesManager.getTimestamp(fileNameWithoutExtension);
 			final long lastCheck = preferenceLastCheck(item, fragment.getSettings()).get();
-			String lastCheckString = formatDateTime(fragment.getActivity(),
-					lastCheck != DEFAULT_LAST_CHECK ? lastCheck : timestamp);
-			descriptionTextView.setText(context.getString(R.string.last_update, lastCheckString));
+			OsmandSettings.CommonPreference<Boolean> liveUpdateOn = preferenceLiveUpdatesOn(item, fragment.getSettings());
+			if(liveUpdateOn.get() && lastCheck != DEFAULT_LAST_CHECK) {
+				String lastCheckString = formatDateTime(fragment.getActivity(), lastCheck );
+				descriptionTextView.setText(context.getString(R.string.last_update, lastCheckString));
+			} else {
+				String lastCheckString = formatDateTime(fragment.getActivity(), timestamp );
+				descriptionTextView.setText(context.getString(R.string.last_map_change, lastCheckString));
+			}
 
 			if (!fragment.isProcessing() && InAppHelper.isSubscribedToLiveUpdates()) {
 				final View.OnClickListener clickListener = new View.OnClickListener() {
