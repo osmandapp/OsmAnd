@@ -235,7 +235,9 @@ Einige der Kernfunktionen:
 
 	<string name="osmand_rastermaps_plugin_description">"Dieses Plugin ermöglicht die Verwendung zahlreicher Online-Kachel-Kartenquellen, von vordefinierten Openstreetmap-Kacheln (wie Mapnik) über Satellitenbilder bis zu speziellen Overlays wie Wetterkarten, Klimakarten, geologischen Karten, Reliefkarten, usw.
 
+
 Alle Karten können sowohl als Hauptkarte wie auch als Überlagerung oder Unterlage für OsmAnds Standard-Offline-Karten verwendet werden. Um unterlegte Karten sichtbarer zu machen, können gewisse Elemente der OsmAnd-Vektorkarten im Menü \'Karte konfigurieren\' ausgeblendet werden.
+
 
 Karten-Kacheln können direkt online bezogen werden, und werden im OsmAnd-Unterordner \'tiles\' zwischengespeichert. Sie können für die Offline-Verwendung auch von anderen Tools als SQLite-Datei vorbereitet und manuell in den OsmAnd-Unterordner \'tiles\' kopiert werden.
  "</string>
