@@ -51,7 +51,7 @@
 	<string name="poi_hifi">Equips d\'alta fidelitat</string>
 	<string name="poi_hunting">Equipament de caça</string>
 	<string name="poi_mobile_phone">Botiga de telèfons mòbils</string>
-	<string name="poi_motorcycle">Botiga de motocicletes</string>
+	<string name="poi_motorcycle">Botiga de motos</string>
 	<string name="poi_musical_instrument">Instruments musicals</string>
 	<string name="poi_newsagent">Premsa</string>
 	<string name="poi_second_hand">Botiga de segona mà</string>
@@ -79,7 +79,7 @@
 	<string name="poi_pet">Botiga d\'animals</string>
 	<string name="poi_radiotechnics">Radiotècnia</string>
 	<string name="poi_sports">Material esportiu</string>
-	<string name="poi_ticket">Taquilla</string>
+	<string name="poi_ticket">Despatx de bitllets</string>
 	<string name="poi_seamark_harbour">Port</string>
 	<string name="poi_fog_signal">Botzina de boira</string>
 	<string name="poi_cosmetics">Cosmètica</string>
@@ -138,7 +138,7 @@
 
 	<string name="poi_houseware">Complements per la llar</string>
 	<string name="poi_stationery">Papereria</string>
-	<string name="poi_tableware">Botiga de vaixelles</string>
+	<string name="poi_tableware">Parament de la taula</string>
 	<string name="poi_toys">Botiga de joguines</string>
 	<string name="poi_trade">Materials de construcció</string>
 	<string name="poi_variety_store">Botiga de descompte</string>
@@ -305,7 +305,7 @@
 	<string name="poi_bedding">Matalasseria</string>
 	<string name="poi_gas">Gas liquat</string>
 	<string name="poi_department_store">Gran magatzem</string>
-	<string name="poi_car_parts">Recanvis d\'automòbil</string>
+	<string name="poi_car_parts">Recanvis de cotxe</string>
 	<string name="poi_fire_water_pond">Punt d\'aigua per incendis</string>
 	<string name="poi_grit_bin">Reserva de sal</string>
 	<string name="poi_emergency_access_point">Punt d\'accés d\'emergència</string>
@@ -477,7 +477,7 @@
 	<string name="poi_bag">Maletes i bosses</string>
 	<string name="poi_outdoor">Botiga d\'esports a l\'aire lliure</string>
 	<string name="poi_ship_chandler">Accessoris per a vaixells</string>
-	<string name="poi_car">Botiga d\'automòbils</string>
+	<string name="poi_car">Venda de cotxes</string>
 	<string name="poi_atv">Botiga de quads</string>
 	<string name="poi_allotments">Horts familiars</string>
 	<string name="poi_forest">Bosc amb manteniment humà</string>
