@@ -2013,8 +2013,8 @@ Włączenie tego widoku zmienia styl mapy na „Zima i narty”, ukazujący tere
     <string name="error_message_pattern">Błąd: {0}</string>
     <string name="av_locations">Położenia</string>
     <string name="plugin_settings">Wtyczki</string>
-    <string name="routing_attr_avoid_shuttle_train_name">Omijanie pociągów wahadłowych</string>
-    <string name="routing_attr_avoid_shuttle_train_description">Omijanie pociągów wahadłowych transportujących auta</string>
+    <string name="routing_attr_avoid_shuttle_train_name">Omijanie miejsc spowolnienia ruchu</string>
+    <string name="routing_attr_avoid_shuttle_train_description">Omijanie miejsc spowolnienia ruchu</string>
     <string name="traffic_warning_hazard">Zagrożenie</string>
     <string name="we_really_care_about_your_opinion">Zależy nam na opinii na temat programu i jest dla nas ważne, aby ją poznać.</string>
     <string name="dahboard_options_dialog_title">Opcje kokpitu</string>
