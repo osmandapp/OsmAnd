@@ -2579,4 +2579,6 @@ Se ami OsmAnd e OSM e vuoi sostenerli è un modo perfetto farlo.</string>
     <string name="city_type_neighbourhood">Dintorni</string>
     <string name="map_widget_search">Cerca</string>
 	<string name="lang_hsb">Sorabo (Superiore)</string>
+    <string name="rendering_attr_hideOverground_name">Oggetti sopra il terreno</string>
+
     </resources>
