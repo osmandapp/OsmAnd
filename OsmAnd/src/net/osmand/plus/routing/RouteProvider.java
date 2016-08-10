@@ -1103,7 +1103,6 @@ public class RouteProvider {
 					pt.desc = dirInfo.getDescriptionRoute(ctx, collectedDistance + dirInfo.getDistance());
 					Map<String, String> extensions = pt.getExtensionsToWrite();
 					extensions.put("time", (collectedTime + dirInfo.getExpectedTime()) + "");
-					collectedTime = 0;
 					int turnType = dirInfo.getTurnType().getValue();
 					if (TurnType.C != turnType) {
 						extensions.put("turn", dirInfo.getTurnType().toXmlString());
