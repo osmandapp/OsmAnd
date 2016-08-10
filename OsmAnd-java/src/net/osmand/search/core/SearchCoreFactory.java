@@ -179,6 +179,9 @@ public class SearchCoreFactory {
 			if (!p.isNoSelectedType() && p.getRadiusLevel() == 1) {
 				return -1;
 			}
+			if(p.isLastWord(ObjectType.POI) || p.isLastWord(ObjectType.POI_TYPE)) {
+				return -1;
+			}
 			if (p.isNoSelectedType()) {
 				return SEARCH_ADDRESS_BY_NAME_API_PRIORITY;
 			}
@@ -188,7 +191,7 @@ public class SearchCoreFactory {
 		@Override
 		public boolean isSearchMoreAvailable(SearchPhrase phrase) {
 			// case when street is not found for given city is covered by SearchStreetByCityAPI
-			return getSearchPriority(phrase) == -1 && super.isSearchMoreAvailable(phrase);
+			return getSearchPriority(phrase) != -1 && super.isSearchMoreAvailable(phrase);
 		}
 
 		@Override
