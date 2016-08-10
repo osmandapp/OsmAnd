@@ -102,4 +102,8 @@ public class RouteDirectionInfo {
 	public int getDistance() {
 		return distance;
 	}
+
+	public int setDistance(int distance) {
+		 this.distance = distance;
+	}
 }

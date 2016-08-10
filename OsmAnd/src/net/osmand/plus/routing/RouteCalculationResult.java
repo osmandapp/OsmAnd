@@ -499,6 +499,7 @@ public class RouteCalculationResult {
 					RouteDirectionInfo prev = directions.get(i - 1);
 					prev.setAverageSpeed((prev.distance + r.distance)
 							/ (prev.distance / prev.getAverageSpeed() + r.distance / r.getAverageSpeed()));
+					prev.setDistance(prev.distance + r.distance);
 					directions.remove(i);
 				} else {
 					i++;
