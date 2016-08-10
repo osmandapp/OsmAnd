@@ -654,9 +654,9 @@ public class ResourceManager {
 				} catch (IOException e) {
 					log.error(String.format("File %s could not be read", f.getName()), e);
 				}
-				if (mapReader == null || (Version.isFreeVersion(context) && 
-						(f.getName().contains("_wiki") || f.getName().contains(".wiki"))
-						)) {
+				boolean wikiMap = (f.getName().contains("_wiki") || f.getName().contains(IndexConstants.BINARY_WIKI_MAP_INDEX_EXT));
+				boolean srtmMap = f.getName().contains(IndexConstants.BINARY_SRTM_MAP_INDEX_EXT);
+				if (mapReader == null || (Version.isFreeVersion(context) && wikiMap)) {
 					warnings.add(MessageFormat.format(context.getString(R.string.version_index_is_not_supported), f.getName())); //$NON-NLS-1$
 				} else {
 					if (mapReader.isBasemap()) {
@@ -676,7 +676,7 @@ public class ResourceManager {
 							}
 							continue;
 						}
-					} else {
+					} else if(!wikiMap && !srtmMap) {
 						changesManager.indexMainMap(f, dateCreated);
 						indexFileNames.put(f.getName(), dateFormat.format(dateCreated)); //$NON-NLS-1$
 					}
