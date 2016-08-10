@@ -136,7 +136,7 @@
     <string name="favourites_edit_dialog_name">Nombre</string>
     <string name="favourites_edit_dialog_category">Categoría</string>
     <string name="shared_string_no_thanks">No, gracias</string>
-    <string name="basemap_missing">El mapa mundial base (cubriendo todo el mundo a niveles de acercamiento pequeños) no está disponible. Por favor, considere descargar World_basemap_x.obf para tener un entorno completo.</string>
+    <string name="basemap_missing">El mapa base mundial (que cubre todo el mundo con niveles de zoom pequeños) falta o está desactualizado, Considera descargar World_basemap_x.obf para una visión global.</string>
     <string name="vector_data_missing">"No hay datos (\'descargados\') en la tarjeta SD.  Por favor, considera descargarlos para utilizar los mapas sin conexión."</string>
     <string name="local_index_gpx_info_show">\n\nMantenga pulsado para opciones</string>
     <string name="local_index_installed">Versión local</string>
@@ -451,7 +451,7 @@
     <string name="search_online_address">Búsqueda en línea</string>
     <string name="max_level_download_tile">Máx. acercamiento con conexión</string>
     <string name="max_level_download_tile_descr">Elige el nivel de acercamiento máximo para descargar teselas de mapas con conexión</string>
-    <string name="route_general_information">Distancia total %1$s, tiempo de viaje %2$d h %3$d m.</string>
+    <string name="route_general_information">Distancia total %1$s, tiempo de viaje %2$d h %3$d min.</string>
     <string name="router_service_descr">Elige un servicio de navegación fuera o en línea</string>
     <string name="router_service">Servicio de navegación</string>
     <string name="sd_dir_not_accessible">¡No se puede acceder a la carpeta de almacenamiento en la tarjeta SD!</string>
@@ -1946,7 +1946,7 @@ OsmAnd está siendo desarrollado activamente, nuestro proyecto y su progreso adi
     <string name="later">Luego</string>
     <string name="get_full_version">Versión completa</string>
     <string name="downloads">Descargas</string>
-    <string name="favorite_category_dublicate_message">El nombre de categoría, ya existe. Defina otro nombre.</string>
+    <string name="favorite_category_dublicate_message">"El nombre de categoría proporcionado ya existe.  Por favor, usa otro nombre."</string>
     <string name="favorite_category_name">Nombre de categoría</string>
     <string name="favorite_category_add_new_title">Añadir nueva categoría</string>
     <string name="confirm_download_roadmaps">¿Desea descargar el mapa de sólo carreteras, aunque ya tenga el mapa estándar (completo)?</string>
@@ -1967,7 +1967,7 @@ OsmAnd está siendo desarrollado activamente, nuestro proyecto y su progreso adi
     <string name="go_to_map">Ir al mapa</string>
     <string name="shared_string_qr_code">Código QR</string>
     <string name="enter_country_name">Ingrese nombre del país</string>
-    <string name="world_map_download_descr">Falta o está desactualizado, el mapa base mundial (abarca todo el mundo en acercamientos pequeños). Considere descargarlo para un entorno completo.</string>
+    <string name="world_map_download_descr">El mapa base mundial ( que cubre todo el mundo con niveles de zoom pequeños) falta o está desactualizado, Considere descargarlo para una visión global.</string>
     <string name="new_version">Nueva versión</string>
     <string name="begin_with_osmand_menu_group">Primeros pasos con OsmAnd</string>
     <string name="features_menu_group">Características</string>
@@ -2239,8 +2239,8 @@ OsmAnd Mapas y Navegación - encuentra ubicaciones en el mapa y calcula rutas si
     <string name="osm_live_ask_for_purchase">Por favor adquiere primero una suscripción a OSM en directo</string>
 
     <string name="osm_live_header">"Esta suscripción permite actualizaciones cada hora para  los mapas de todo el mundo.
- La mayor parte de los ingresos va a la comunidad OSM y se paga por cada contribución a OSM.
- En caso de que te gusten OsmAnd y OSM y quieras apoyarlos, ésta es una manera perfecta de hacerlo."</string>
+ La mayoría de los ingresos va a la comunidad OSM y se paga por cada contribución a OSM.
+ Si te gustan OsmAnd y OSM y quieres apoyarlos, ésta es la manera perfecta de hacerlo."</string>
     
     <string name="show_transparency_seekbar">Mostrar transparencia de la barra de búsqueda</string>
     <string name="storage_directory_readonly_desc">La carpeta de almacenamiento de datos seleccionada actualmente es de sólo lectura. La carpeta de almacenamiento fue cambiada temporalmente a la memoria interna. Por favor, elige directorio de almacenamiento válido.</string>
@@ -2335,7 +2335,7 @@ OsmAnd Mapas y Navegación - encuentra ubicaciones en el mapa y calcula rutas si
 
  • Mejoras en la guía de ruta, indicaciones por voz y de carriles de giro
 
- • Mejoras en la capa de transporte
+ • Mejoras en la capa de transporte con dibujado de rutas
 
  • Se agregaron más idiomas y ahora soporta idiomas regionales
 
