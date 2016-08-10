@@ -1747,9 +1747,9 @@ Fortsetzen mit einer neuen Registrierung?</string>
     <string name="waypoints">Wegpunkte</string>
     <string name="targets">Ziele</string>
     <string name="way_alarms">Verkehrswarnungen</string>
-    <string name="record_plugin_description">"Dieses Plugin aktiviert die Funktionalität, Tracks als lokale GPX-Datei (oder auch online via Web-Service) aufzunehmen und abzuspeichern, entweder durch Antippen der GPX-Aufnahme Schaltfläche auf dem Kartenbildschirm bei Bedarf, oder durch automatisches Speichern aller navigierten Routen.
+    <string name="record_plugin_description">"Dieses Plugin aktiviert die Funktionalität, Tracks als lokale GPX-Datei (oder auch online über Web-Dienste) aufzunehmen und abzuspeichern, entweder durch Antippen der GPX-Aufnahme-Schaltfläche auf dem Kartenbildschirm, oder durch automatisches Speichern aller navigierten Routen.
 
-Aufgenommene Tracks kann man z.B. mit Bekannten teilen, oder auch zum Upload für OSM-Bearbeitungen verwenden. Sportler können gespeicherte Tracks zur Dokumentation und Analyse Ihres Trainings verwenden. Einige Analysefunktionen sind direkt in OsmAnd enthalten, wie Rundenzeiten, Durchschnittsgeschwindigkeit, etc. Aufgezeichnete Tracks können natürlich auch später zur Analyse in anderen Tools weiterverwendet werden.
+Aufgenommene Tracks kann man z.B. mit Bekannten teilen, oder auch zum Upload für OSM-Bearbeitungen verwenden. Sportler können gespeicherte Tracks zur Dokumentation und Analyse Ihres Trainings verwenden. Einige grundlegende Analysefunktionen sind direkt in OsmAnd enthalten, wie Rundenzeiten, Durchschnittsgeschwindigkeit, usw. Aufgezeichnete Tracks können natürlich auch später zur Analyse in anderen Tools weiterverwendet werden.
  "</string>
     <string name="route_descr_destination">Ziel</string>
     <string name="local_index_description">Ein Element antippen, um mehr Details zu erfahren oder antippen und halten zum Deaktivieren oder Löschen. Aktuell auf dem Gerät vorhandene Daten (%1$s frei):</string>
