@@ -829,7 +829,7 @@ public class BinaryMapIndexReader {
 		req.numberOfReadSubtrees = 0;
 		List<MapTree> foundSubtrees = new ArrayList<MapTree>();
 		for (MapIndex mapIndex : mapIndexes) {
-			if(filterMapIndex == null || mapIndex == filterMapIndex) {
+			if(filterMapIndex != null && mapIndex != filterMapIndex) {
 				continue;
 			}
 			// lazy initializing rules
