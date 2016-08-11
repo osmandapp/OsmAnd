@@ -498,7 +498,7 @@
     }
   },
   {
-    "testName": "28.1.Link +TSLL, С",
+    "testName": "28.1.Link +TSLL,C",
     "startPoint": {
       "latitude": 45.64069524601371,
       "longitude": 35.541367523279234
@@ -508,11 +508,11 @@
       "longitude": 35.54365276535992
     },
     "expectedResults": {
-      "118669516": "TSLL:+TSLL,С"
+      "118669516": "TSLL:+TSLL,C"
     }
   },
   {
-    "testName": "28.2.Link +TSLR, С",
+    "testName": "28.2.Link +TSLR,С",
     "startPoint": {
       "latitude": 45.64211106582103,
       "longitude": 35.54128705700879
@@ -522,7 +522,7 @@
       "longitude": 35.53820788105969
     },
     "expectedResults": {
-      "118669511": "TSLR:+TSLR,С"
+      "118669511": "TSLR:+TSLR,C"
     }
   }
 
