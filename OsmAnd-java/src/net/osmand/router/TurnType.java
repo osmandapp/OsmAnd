@@ -334,6 +334,34 @@ public class TurnType {
 			set.add(pt);
 		}		
 	}
+	
+	public static int orderFromLeftToRight(int type) {
+		switch(type) {
+		case TU:
+			return -5;
+		case TSHL:
+			return -4;
+		case TL:
+			return -3;
+		case TSLL:
+			return -2;
+		case KL:
+			return -1;
+		
+		case TRU:
+			return 5;
+		case TSHR:
+			return 4;
+		case TR:
+			return 3;
+		case TSLR:
+			return 2;
+		case KR:
+			return 1;
+		default:
+			return 0;
+		}
+	}
 
 	
 }

@@ -1,5 +1,6 @@
 package net.osmand.router;
 
+import gnu.trove.iterator.TIntIterator;
 import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.set.hash.TIntHashSet;
 
@@ -947,28 +948,29 @@ public class RouteResultPreparation {
 					rawLanes[k] |= 1;
 				}
 			}
-			int tp = inferTurnFromLanes(rawLanes);
+			int tp = inferSlightTurnFromLanes(rawLanes, rs);
 			if (tp != t.getValue() && tp != 0) {
 				t = TurnType.valueOf(tp, leftSide);
 			}
 		} else {
+			boolean possiblyLeftTurn = rs.roadsOnLeft == 0;
+			boolean possiblyRightTurn = rs.roadsOnRight == 0;
 			for (int k = 0; k < rawLanes.length; k++) {
 				int turn = TurnType.getPrimaryTurn(rawLanes[k]);
 				int sturn = TurnType.getSecondaryTurn(rawLanes[k]);
 				boolean active = false;
-				if (turn == TurnType.C) {
-					if ((TurnType.isRightTurn(sturn) && rs.roadsOnRight == 0)
-							|| (TurnType.isLeftTurn(sturn) && rs.roadsOnLeft == 0)) {
-						TurnType.setPrimaryTurn(rawLanes, k, sturn);
-						TurnType.setSecondaryTurn(rawLanes, k, turn);
-					}
+				// some turns go through many segments (to turn right or left)
+				// so on one first segment the lane could be available and may be only 1 possible
+				// all undesired lanes will be disabled through the 2nd pass
+				if((TurnType.isRightTurn(sturn) && possiblyRightTurn) ||
+						(TurnType.isLeftTurn(sturn) && possiblyLeftTurn)) {
+					TurnType.setPrimaryTurn(rawLanes, k, sturn);
+					TurnType.setSecondaryTurn(rawLanes, k, turn);
 					active = true;
-				} else if (TurnType.isRightTurn(turn) && rs.roadsOnRight == 0) {
-					// some turns go through many segments (to turn right or left)
-					// so on one first segment the lane could be available and may be only 1 possible
-					// all undesired lanes will be disabled through the 2nd pass
+				} else if((TurnType.isRightTurn(turn) && possiblyRightTurn) ||
+						(TurnType.isLeftTurn(turn) && possiblyLeftTurn)) {
 					active = true;
-				} else if (TurnType.isLeftTurn(turn) && rs.roadsOnLeft == 0) {
+				} else if (turn == TurnType.C) {
 					active = true;
 				}
 				if (active) {
@@ -1266,7 +1268,7 @@ public class RouteResultPreparation {
 		return lanes;
 	}
 
-	private int inferTurnFromLanes(int[] oLanes) {
+	private int inferSlightTurnFromLanes(int[] oLanes, RoadSplitStructure rs) {
 		TIntHashSet possibleTurns = new TIntHashSet();
 		for (int i = 0; i < oLanes.length; i++) {
 			if ((oLanes[i] & 1) == 0) {
@@ -1310,10 +1312,40 @@ public class RouteResultPreparation {
 				}
 			}
 		}
+		// remove all non-slight turns
+		if(possibleTurns.size() > 1) {
+			TIntIterator it = possibleTurns.iterator();
+			while(it.hasNext()) {
+				int nxt = it.next();
+				if(!TurnType.isSlightTurn(nxt)) {
+					it.remove();
+				}
+			}
+		}
+		int infer = 0;
+		if (possibleTurns.size() == 1) {
+			infer = possibleTurns.iterator().next();
+		} else if (possibleTurns.size() > 1) {
+			if (rs.keepLeft && rs.keepRight && possibleTurns.contains(TurnType.C)) {
+				infer = TurnType.C;
+			} else if (rs.keepLeft || rs.keepRight) {
+				TIntIterator it = possibleTurns.iterator();
+				infer = it.next();
+				while(it.hasNext()) {
+					int next = it.next();
+					int orderInfer = TurnType.orderFromLeftToRight(infer);
+					int orderNext = TurnType.orderFromLeftToRight(next) ;
+					if(rs.keepLeft && orderNext < orderInfer) {
+						infer = next;
+					} else if(rs.keepRight && orderNext > orderInfer) {
+						infer = next;
+					}
+				}
+			}
+		}
 
 		// Checking to see that there is only one unique turn
-		if (possibleTurns.size() == 1) {
-			int infer = possibleTurns.iterator().next();
+		if (infer != 0) {
 			for(int i = 0; i < oLanes.length; i++) {
 				if(TurnType.getSecondaryTurn(oLanes[i]) == infer) {
 					int pt = TurnType.getPrimaryTurn(oLanes[i]);
@@ -1324,10 +1356,8 @@ public class RouteResultPreparation {
 				}
 				
 			}
-			return infer;
 		}
-
-		return 0;
+		return infer;
 	}
 
 	private boolean isMotorway(RouteSegmentResult s){

@@ -508,7 +508,7 @@
       "longitude": 35.54365276535992
     },
     "expectedResults": {
-      "118669516": "+TSLL, С"
+      "118669516": "TSLL:+TSLL,С"
     }
   },
   {
@@ -522,7 +522,7 @@
       "longitude": 35.53820788105969
     },
     "expectedResults": {
-      "118669511": "+TSLR, С"
+      "118669511": "TSLR:+TSLR,С"
     }
   }
 
