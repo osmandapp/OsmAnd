@@ -570,7 +570,7 @@ public class RouteCalculationResult {
 				type = diff > 0 ? TurnType.KL : TurnType.KR; 
 			}
 			// AvgSpeed = 999999 for the last turn prevents the turn to have noticeable impact on travel time totalling if calculated route ends on a GPX route segment
-			RouteDirectionInfo info = new RouteDirectionInfo(999999, TurnType.valueOf(type, false));
+			RouteDirectionInfo info = new RouteDirectionInfo(lastDirInf != null ? lastDirInf.getAverageSpeed() : 1, TurnType.valueOf(type, false));
 			info.distance = 0;
 			info.afterLeftTime = 0;
 			info.routePointOffset = locations.size() - 1;			
