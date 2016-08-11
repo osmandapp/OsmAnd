@@ -218,4 +218,18 @@
 	<string name="poi_electronics">متجر إلكترونيات</string>
 	<string name="poi_energy">متجر طاقة</string>
 	<string name="poi_car_parts">قطع غيار السيارات</string>
+	<string name="poi_games">ألعاب</string>
+	<string name="poi_model">نماذج مقياس</string>
+	<string name="poi_trophy">جوائز، مكافآت</string>
+	<string name="poi_video_games">ألعاب الفيديو</string>
+	<string name="poi_pyrotechnics">الألعاب النارية</string>
+	<string name="poi_weapons">متجر أسلحة</string>
+	<string name="poi_perfumery">متجر عطور</string>
+
+	<string name="poi_fire_hydrant">صنبور مياه الإطفاء</string>
+	<string name="poi_grit_bin">سلة حصى</string>
+	<string name="poi_ambulance_station">محطة إسعاف</string>
+	<string name="poi_emergency_access_point">منفذ طوارئ</string>
+
+	<string name="poi_ford">فورد</string>
 	</resources>
