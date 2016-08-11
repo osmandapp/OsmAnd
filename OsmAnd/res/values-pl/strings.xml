@@ -701,7 +701,7 @@ Mapy kafelkowe można uzyskać bezpośrednio z zasobów sieciowych, jak i przygo
     <string name="left">W lewo</string>
     <string name="front_left">W lewo w przód</string>
     <string name="oclock">punkt</string>
-    <string name="towards">wobec</string>
+    <string name="towards">w kierunku</string>
     <string name="accuracy">Dokładność</string>
     <string name="altitude">Wysokość</string>
     <string name="no_info">Brak informacji</string>
@@ -2097,7 +2097,7 @@ Włączenie tego widoku zmienia styl mapy na „Zima i narty”, ukazujący tere
     <string name="downloads">Pobierz</string>
     <string name="favorite_category_add_new_title">Dodaj nową kategorię</string>
     <string name="favorite_category_name">Nazwa kategorii</string>
-    <string name="favorite_category_dublicate_message">Określona nazwa kategorii już istnieje. Proszę wybrać inną.</string>
+    <string name="favorite_category_dublicate_message">Określona nazwa kategorii już istnieje. Proszę użyć innej nazwy.</string>
     <string name="share_menu_location">Udostępnij położenie</string>
     <string name="shared_string_send">Wyślij</string>
     <string name="file_size_in_mb">%.1f MB</string>
