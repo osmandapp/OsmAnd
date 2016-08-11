@@ -324,4 +324,37 @@
 	<string name="poi_diet_gluten_free_only">Bare glutenfri kost</string>
 	<string name="poi_diet_gluten_free_yes">Glutenfri kost</string>
 	<string name="poi_diet_gluten_free_no">Glutenfri kost: nei</string>
+	<string name="poi_traffic_signals">Trafikklys</string>
+
+	<string name="poi_car_wash">Bilvask</string>
+	<string name="poi_halt">Jernbanestoppested</string>
+	<string name="poi_water_works">Vannverk</string>
+	<string name="poi_pier">Molo</string>
+	<string name="poi_works">Fabrikk</string>
+	<string name="poi_stadium">Stadion</string>
+	<string name="poi_pitch">Sportsbane</string>
+	<string name="poi_place_of_worship">Religiøst sted</string>
+	<string name="poi_grave_yard">Kirkegård</string>
+	<string name="poi_route_hiking_iwn_poi">Internasjonal vandrerute</string>
+	<string name="poi_route_hiking_nwn_poi">Nasjonal vandrerute</string>
+	<string name="poi_route_hiking_rwn_poi">Regional vandrerute</string>
+	<string name="poi_route_hiking_lwn_poi">Lokal vandrerute</string>
+	<string name="poi_crossing_traffic_signals">Med trafikklys</string>
+	<string name="poi_building">Bygning</string>
+	<string name="poi_car_wash_no">Bilvask: nei</string>
+
+	<string name="poi_highway_steps">Trapper</string>
+	<string name="poi_square">Torg</string>
+	<string name="poi_building_type_pyramid">Bygningstype: pyramide</string>
+
+	<string name="poi_car_wash_yes">Bilvask: ja</string>
+
+	<string name="poi_organic_yes">Økologisk mat: ja</string>
+	<string name="poi_organic_no">Økologisk mat: nei</string>
+	<string name="poi_organic_only">Bare økologisk mat</string>
+
+	<string name="poi_traffic_mirror">Trafikkspeil</string>
+
+	<string name="poi_diplomatic_consulate">Konsulat</string>
+	<string name="poi_diplomatic_consulate_general">Generalkonsulat</string>
 	</resources>
