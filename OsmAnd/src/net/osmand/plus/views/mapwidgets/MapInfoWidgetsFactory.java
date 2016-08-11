@@ -563,15 +563,9 @@ public class MapInfoWidgetsFactory {
 					settings.SHOW_STREET_NAME.get()) {
 				RouteDataObject rt = locationProvider.getLastKnownRouteSegment();
 				if (rt != null) {
-<<<<<<< HEAD
 					text = RoutingHelper.formatStreetName(rt.getName(settings.MAP_PREFERRED_LOCALE.get()), 
 							rt.getRef(), rt.getDestinationName(settings.MAP_PREFERRED_LOCALE.get()), ">");
 				} 
-=======
-					text = RoutingHelper.formatStreetName(rt.getName(settings.MAP_PREFERRED_LOCALE.get()),
-							rt.getRef(), rt.getDestinationName(settings.MAP_PREFERRED_LOCALE.get()), map.getMyApplication().getString(R.string.towards));
-				}
->>>>>>> d82263a... Added discount banner
 				if (text == null) {
 					text = "";
 				} else {
@@ -608,11 +602,7 @@ public class MapInfoWidgetsFactory {
 						addressText.setCompoundDrawables(null, null, null, null);
 					}
 				}
-<<<<<<< HEAD
 				if (!text.equals(addressText.getText().toString())  && !text.equals("+  " + addressText.getText().toString())) {
-=======
-				if (!text.equals(addressText.getText().toString())) {
->>>>>>> d82263a... Added discount banner
 					if (!text.equals("")) {
 						topBar.setContentDescription(text);
 					} else {
