@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.regex.Pattern;
@@ -445,24 +447,29 @@ public class SearchPhrase {
 		final LatLon ll = getLastTokenLocation();
 		if(ll != null) {
 			Collections.sort(indexes, new Comparator<BinaryMapIndexReader>() {
+				Map<BinaryMapIndexReader, LatLon> locations = new HashMap<>();
 
 				@Override
 				public int compare(BinaryMapIndexReader o1, BinaryMapIndexReader o2) {
- 					LatLon rc1 = null;
-					if(o1.containsMapData()) {
-						rc1 = o1.getMapIndexes().get(0).getCenterLatLon();
-					} else {
-						rc1 = o2.getRegionCenter();
-					}
-					LatLon rc2 = null; 
-					if(o2.containsMapData()) {
-						rc2 = o2.getMapIndexes().get(0).getCenterLatLon();
-					} else {
-						rc2 = o2.getRegionCenter();
-					}
+ 					LatLon rc1 = getLocation(o1);
+					LatLon rc2 = getLocation(o2);
 					double d1 = rc1 == null ? 10000000d : MapUtils.getDistance(rc1, ll);
 					double d2 = rc2 == null ? 10000000d : MapUtils.getDistance(rc2, ll);
 					return Double.compare(d1, d2);
+				}
+
+				private LatLon getLocation(BinaryMapIndexReader o1) {
+					if(locations.containsKey(o1)) {
+						return locations.get(o1);
+					}
+					LatLon rc1 = null;
+					if(o1.containsMapData()) {
+						rc1 = o1.getMapIndexes().get(0).getCenterLatLon();
+					} else {
+						rc1 = o1.getRegionCenter();
+					}
+					locations.put(o1, rc1);
+					return rc1;
 				}
 			});
 		}
