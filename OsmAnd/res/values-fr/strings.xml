@@ -2255,8 +2255,29 @@ Actuellement {2} Mo sont disponibles.</string>
     <string name="back_to_search">Retour à la recherche</string>
     <string name="confirmation_to_delete_history_items">Souhaitez-vous supprimer les éléments d\'historique sélectionnés ?</string>
     <string name="show_something_on_map">Afficher %1$s sur la carte</string>
-    <string name="route_stops_before">%1$s arrêts précédents</string>
+    <string name="route_stops_before">%1$s arrêts avant</string>
     <string name="coords_search">Recherche de coordonnées</string>
     <string name="advanced_coords_search">Recherche avancée de coordonnées</string>
     <string name="dist_away_from_my_location">Recherche %1$s autour</string>
+    <string name="release_2_4">"
+ • Nouveau moteur de recherche performant à texte libre
+
+
+ • Intégration avec les systèmes audio voiture et haut-parleur par Bluetooth
+
+
+ • Instructions de guidage, annonces vocales, et indications de voies directionnelles améliorées, 
+
+
+ • Amélioration du calque de transport en commun et affichage de l\'itinéraire
+
+
+ • Added more locales and now support regional locales
+
+
+ • Autres améliorations et corrections de bogues
+
+
+ Et plus encore…
+ "</string>
     </resources>
