@@ -482,6 +482,20 @@
     "expectedResults": {
       "7406182": "+TL,C|TR"
     }
+  },
+  {
+    "testName": "27.TSLR Großer Stern (Berlin)",
+    "startPoint": {
+      "latitude": 45.64019080086255,
+      "longitude": 35.5037784576416
+    },
+    "endPoint": {
+      "latitude": 45.63936941405474,
+      "longitude": 35.5013644695282
+    },
+    "expectedResults": {
+      "4400154": "C|C|+TSLR,C|+TSLR|+TSLR"
+    }
   }
 
 ]
