@@ -11,7 +11,6 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import net.osmand.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.data.Amenity;
@@ -19,6 +18,7 @@ import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.dashboard.DashLocationFragment;
+import net.osmand.search.core.SearchPhrase;
 import net.osmand.util.Algorithms;
 import net.osmand.util.OpeningHoursParser;
 
@@ -386,8 +386,15 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 	private void updateDistanceDirection(View view, QuickSearchListItem listItem) {
 		TextView distanceText = (TextView) view.findViewById(R.id.distance);
 		ImageView direction = (ImageView) view.findViewById(R.id.direction);
-
-		DashLocationFragment.updateLocationView(useMapCenter, location,
+		SearchPhrase phrase = listItem.getSearchResult().requiredSearchPhrase;
+		LatLon loc = location;
+		if(phrase != null && useMapCenter) {
+			LatLon ol = phrase.getSettings().getOriginalLocation();
+			if(ol != null) {
+				loc = ol;
+			}
+		}
+		DashLocationFragment.updateLocationView(useMapCenter, loc,
 				heading, direction, distanceText,
 				listItem.getSearchResult().location.getLatitude(),
 				listItem.getSearchResult().location.getLongitude(),
