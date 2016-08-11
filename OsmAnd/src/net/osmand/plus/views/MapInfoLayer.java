@@ -101,16 +101,16 @@ public class MapInfoLayer extends OsmandMapLayer {
 		mapInfoControls.removeSideWidgetInternal(widget);
 	}
 
-	public void addTopToolbarViewController(TopToolbarController viewController) {
-		topToolbarView.addViewController(viewController);
+	public void addTopToolbarController(TopToolbarController controller) {
+		topToolbarView.addController(controller);
 	}
 
-	public void removeTopToolbarViewController(TopToolbarController viewController) {
-		topToolbarView.removeViewController(viewController);
+	public void removeTopToolbarController(TopToolbarController controller) {
+		topToolbarView.removeController(controller);
 	}
 
 	public boolean hasTopToolbar() {
-		return topToolbarView.getTopViewController() != null;
+		return topToolbarView.getTopController() != null;
 	}
 
 	public void registerAllControls(){
@@ -124,7 +124,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		updateStreetName(false, calculateTextState());
 
 		topToolbarView = new TopToolbarView(map);
-		updateTopToolbar(false, calculateTextStateSearch());
+		updateTopToolbar(false);
 
 		alarmControl = ric.createAlarmInfoControl(app, map);
 		alarmControl.setVisibility(false);
@@ -231,7 +231,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 				updateReg(ts, reg);
 			}
 			updateStreetName(nightMode, ts);
-			updateTopToolbar(nightMode, calculateTextStateSearch());
+			updateTopToolbar(nightMode);
 			lanesControl.updateTextSize(nightMode, ts.textColor, ts.textShadowColor, ts.textBold, ts.textShadowRadius / 2);
 			rulerControl.updateTextSize(nightMode, ts.textColor, ts.textShadowColor,  (int) (2 * view.getDensity()));
 			this.expand.setBackgroundResource(ts.expand);
@@ -246,10 +246,8 @@ public class MapInfoLayer extends OsmandMapLayer {
 		streetNameView.updateTextColor(nightMode, ts.textColor, ts.textShadowColor, ts.textBold, ts.textShadowRadius);
 	}
 
-	private void updateTopToolbar(boolean nightMode, TextState ts) {
-		int bgColorId = nightMode ? R.color.bg_color_dark : R.color.bg_color_light;
-		topToolbarView.setBackgroundResource(AndroidUiHelper.isOrientationPortrait(map) ? bgColorId : ts.boxFree);
-		topToolbarView.updateTextColor(nightMode, ts.textColor);
+	private void updateTopToolbar(boolean nightMode) {
+		topToolbarView.updateColors(nightMode);
 	}
 
 	private void updateReg(TextState ts, MapWidgetRegInfo reg) {
@@ -283,27 +281,6 @@ public class MapInfoLayer extends OsmandMapLayer {
 			ts.expand = R.drawable.btn_inset_circle_transparent;
 			ts.boxFree = R.drawable.btn_round_transparent;
 		} else if (nightMode) {
-			ts.boxTop = R.drawable.btn_flat_night;
-			ts.rightRes = R.drawable.btn_left_round_night;
-			ts.leftRes = R.drawable.btn_right_round_night;
-			ts.expand = R.drawable.btn_inset_circle_night;
-			ts.boxFree = R.drawable.btn_round_night;
-		} else {
-			ts.boxTop = R.drawable.btn_flat;
-			ts.rightRes = R.drawable.btn_left_round;
-			ts.leftRes = R.drawable.btn_right_round;
-			ts.expand = R.drawable.btn_inset_circle;
-			ts.boxFree = R.drawable.btn_round;
-		}
-		return ts;
-	}
-
-	private TextState calculateTextStateSearch() {
-		boolean nightMode = drawSettings != null && drawSettings.isNightMode();
-		TextState ts = new TextState();
-		ts.night = nightMode;
-		ts.textColor = nightMode ? ContextCompat.getColor(view.getContext(), R.color.widgettext_night) : Color.BLACK;
-		if (nightMode) {
 			ts.boxTop = R.drawable.btn_flat_night;
 			ts.rightRes = R.drawable.btn_left_round_night;
 			ts.leftRes = R.drawable.btn_right_round_night;

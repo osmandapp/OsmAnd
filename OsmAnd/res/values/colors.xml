@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+	<color name="discount_bar_bg">#357ef2</color>
+
     <color name="searchbar_text_dark">#fff</color>
     <color name="searchbar_text_light">#212121</color>
     <color name="searchbar_text_hint_dark">#7a8c99</color>

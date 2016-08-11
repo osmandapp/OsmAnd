@@ -75,6 +75,7 @@ import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.ui.DataStoragePlaceDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.helpers.DiscountHelper;
 import net.osmand.plus.helpers.ExternalApiHelper;
 import net.osmand.plus.helpers.GpxImportHelper;
 import net.osmand.plus.helpers.WakeLockHelper;
@@ -578,6 +579,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 		routingHelper.addListener(this);
 		app.getMapMarkersHelper().addListener(this);
+
+		DiscountHelper.checkAndDisplay(this);
 
 		QuickSearchDialogFragment searchDialogFragment = getQuickSearchDialogFragment();
 		if (searchDialogFragment != null) {
@@ -1411,15 +1414,15 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		return mapInfoLayer.hasTopToolbar();
 	}
 
-	public void showTopToolbar(TopToolbarController viewController) {
+	public void showTopToolbar(TopToolbarController controller) {
 		MapInfoLayer mapInfoLayer = getMapLayers().getMapInfoLayer();
-		mapInfoLayer.addTopToolbarViewController(viewController);
+		mapInfoLayer.addTopToolbarController(controller);
 		this.topToolbarActive = mapInfoLayer.hasTopToolbar();
 	}
 
-	public void hideTopToolbar(TopToolbarController viewController) {
+	public void hideTopToolbar(TopToolbarController controller) {
 		MapInfoLayer mapInfoLayer = getMapLayers().getMapInfoLayer();
-		mapInfoLayer.removeTopToolbarViewController(viewController);
+		mapInfoLayer.removeTopToolbarController(controller);
 		this.topToolbarActive = mapInfoLayer.hasTopToolbar();
 	}
 
