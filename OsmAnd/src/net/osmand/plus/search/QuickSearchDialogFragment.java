@@ -59,7 +59,6 @@ import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.search.QuickSearchHelper.SearchHistoryAPI;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
-import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarView;
 import net.osmand.search.SearchUICore;
 import net.osmand.search.SearchUICore.SearchResultCollection;
 import net.osmand.search.core.ObjectType;
@@ -102,7 +101,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	private QuickSearchMainListFragment mainSearchFragment;
 	private QuickSearchHistoryListFragment historySearchFragment;
 	private QuickSearchCategoriesListFragment categoriesSearchFragment;
-	private QuickSearchToolbarController toolbarController = new QuickSearchToolbarController();
+	private QuickSearchToolbarController toolbarController;
 
 	private Toolbar toolbarEdit;
 	private TextView titleEdit;
@@ -150,6 +149,26 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 							 Bundle savedInstanceState) {
 		final MapActivity mapActivity = getMapActivity();
 		final View view = inflater.inflate(R.layout.search_dialog_fragment, container, false);
+
+		toolbarController = new QuickSearchToolbarController();
+		toolbarController.setOnBackButtonClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				mapActivity.showQuickSearch(ShowQuickSearchMode.CURRENT, false);
+			}
+		});
+		toolbarController.setOnTitleClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				mapActivity.showQuickSearch(ShowQuickSearchMode.CURRENT, false);
+			}
+		});
+		toolbarController.setOnCloseButtonClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				mapActivity.closeQuickSearch();
+			}
+		});
 
 		Bundle arguments = getArguments();
 		if (savedInstanceState != null) {
@@ -1259,22 +1278,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	public static class QuickSearchToolbarController extends TopToolbarController {
 
 		public QuickSearchToolbarController() {
-			super(TopToolbarController.TopToolbarViewControllerType.QUICK_SEARCH);
-		}
-
-		@Override
-		public void onBackPressed(TopToolbarView view) {
-			view.getMap().showQuickSearch(ShowQuickSearchMode.CURRENT, false);
-		}
-
-		@Override
-		public void onTitlePressed(TopToolbarView view) {
-			view.getMap().showQuickSearch(ShowQuickSearchMode.CURRENT, false);
-		}
-
-		@Override
-		public void onClosePressed(TopToolbarView view) {
-			view.getMap().closeQuickSearch();
+			super(TopToolbarControllerType.QUICK_SEARCH);
 		}
 	}
 }

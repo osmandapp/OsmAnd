@@ -349,55 +349,75 @@
         </FrameLayout>
 
         <FrameLayout
-            android:id="@+id/custom_topbar"
+            android:id="@+id/widget_top_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:clickable="true"
             android:visibility="gone"
             tools:visibility="visible">
 
             <LinearLayout
+                android:id="@+id/widget_top_bar_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:gravity="center_vertical"
+                android:minHeight="@dimen/dashboard_map_toolbar"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/widget_top_bar_back_button"
+                    style="@style/Widget.AppCompat.ActionButton"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:layout_gravity="top"
+                    android:contentDescription="@string/back_to_search"
+                    android:src="@drawable/abc_ic_ab_back_mtrl_am_alpha"/>
 
                 <LinearLayout
-                    android:id="@+id/custom_topbar_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/dashboard_map_toolbar"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <ImageButton
-                        android:id="@+id/custom_back_button"
-                        style="@style/Widget.AppCompat.ActionButton"
-                        android:layout_width="54dp"
-                        android:layout_height="48dp"
-                        android:contentDescription="@string/back_to_search"
-                        android:src="@drawable/abc_ic_ab_back_mtrl_am_alpha"/>
+                    android:id="@+id/widget_top_bar_title_layout"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:paddingBottom="10dp"
+                    android:paddingTop="10dp">
 
                     <TextView
-                        android:id="@+id/custom_title"
-                        android:layout_width="0dp"
+                        android:id="@+id/widget_top_bar_title"
+                        android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
                         android:background="@null"
-                        android:clickable="true"
+                        android:ellipsize="end"
+                        android:gravity="center_vertical"
+                        android:lines="1"
+                        android:singleLine="true"
+                        android:textColor="?android:textColorPrimary"
+                        android:textSize="@dimen/abc_text_size_medium_material"
+                        tools:text="OsmAnd+ 50% discount"/>
+
+                    <TextView
+                        android:id="@+id/widget_top_bar_description"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@null"
+                        android:ellipsize="end"
                         android:gravity="center_vertical"
                         android:textColor="?android:textColorPrimary"
-                        android:lines="1"
-                        android:ellipsize="end"
-                        android:singleLine="true"
-                        android:textSize="@dimen/abc_text_size_medium_material"/>
-
-                    <ImageButton
-                        android:id="@+id/custom_close_button"
-                        style="@style/Widget.AppCompat.ActionButton"
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:contentDescription="@string/shared_string_close"
-                        android:src="@drawable/ic_action_remove_dark"/>
+                        android:textSize="@dimen/default_sub_text_size"
+                        android:visibility="gone"
+                        tools:text="New version of OsmAnd+ with 50% discount"/>
 
                 </LinearLayout>
+
+                <ImageButton
+                    android:id="@+id/widget_top_bar_close_button"
+                    style="@style/Widget.AppCompat.ActionButton"
+                    android:layout_width="48dp"
+                    android:layout_height="56dp"
+                    android:layout_gravity="top"
+                    android:contentDescription="@string/shared_string_close"
+                    android:src="@drawable/ic_action_remove_dark"/>
 
             </LinearLayout>
 

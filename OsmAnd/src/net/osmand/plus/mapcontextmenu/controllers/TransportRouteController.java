@@ -17,8 +17,6 @@ import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.mapcontextmenu.controllers.TransportStopController.TransportStopRoute;
 import net.osmand.plus.views.TransportStopsLayer;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
-import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController.TopToolbarViewControllerType;
-import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarView;
 
 import java.lang.ref.WeakReference;
 import java.util.List;
@@ -31,23 +29,26 @@ public class TransportRouteController extends MenuController {
 									final TransportStopRoute transportRoute) {
 		super(new MenuBuilder(app), pointDescription, mapActivity);
 		this.transportRoute = transportRoute;
-		toolbarController = new TopToolbarController(TopToolbarViewControllerType.CONTEXT_MENU) {
+		toolbarController = new TransportRouteToolbarController();
+		toolbarController.setTitle(getNameStr());
+		toolbarController.setOnBackButtonClickListener(new OnClickListener() {
 			@Override
-			public void onBackPressed(TopToolbarView view) {
-				getMapActivity().getContextMenu().backToolbarAction(TransportRouteController.this);
+			public void onClick(View v) {
+				mapActivity.getContextMenu().backToolbarAction(TransportRouteController.this);
 			}
-
+		});
+		toolbarController.setOnTitleClickListener(new OnClickListener() {
 			@Override
-			public void onTitlePressed(TopToolbarView view) {
+			public void onClick(View v) {
 				showMenuAndRoute(getLatLon(), true);
 			}
-
+		});
+		toolbarController.setOnCloseButtonClickListener(new OnClickListener() {
 			@Override
-			public void onClosePressed(TopToolbarView view) {
-				getMapActivity().getContextMenu().closeToolbar(TransportRouteController.this);
+			public void onClick(View v) {
+				mapActivity.getContextMenu().closeToolbar(TransportRouteController.this);
 			}
-		};
-		toolbarController.setTitle(getNameStr());
+		});
 	}
 
 	@Override
@@ -192,5 +193,12 @@ public class TransportRouteController extends MenuController {
 	private void resetRoute() {
 		TransportStopsLayer stopsLayer = getMapActivity().getMapLayers().getTransportStopsLayer();
 		stopsLayer.setRoute(null);
+	}
+
+	public static class TransportRouteToolbarController extends TopToolbarController {
+
+		public TransportRouteToolbarController() {
+			super(TopToolbarControllerType.CONTEXT_MENU);
+		}
 	}
 }
