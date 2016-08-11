@@ -2524,4 +2524,6 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
 
 إذا كنت بحاجة إلى مساعدة فيما يخص التطبيق OsmAnd، يرجى الاتصال بفريق الدعم: support@osmand.net 
  "</string>
+    <string name="rendering_attr_hideOverground_name">الأشياء ما فوق الأرض</string>
+
     </resources>
