@@ -361,4 +361,15 @@
 
 <string name="poi_water_tank">Vanntank</string>
 
+	<string name="poi_barometer_yes">Barometer: ja</string>
+	<string name="poi_barometer_no">Barometer: nei</string>
+	<string name="poi_thermometer_yes">Termometer: ja</string>
+	<string name="poi_thermometer_no">Termometer: nei</string>
+	<string name="poi_hygrometer_yes">Hygrometer: ja</string>
+	<string name="poi_hygrometer_no">Hygrometer: nei</string>
+	<string name="poi_date_yes">Datovisning: ja</string>
+	<string name="poi_date_no">Datovisning: nei</string>
+
+	<string name="poi_display_sundial_yes">Solur</string>
+
 	</resources>
