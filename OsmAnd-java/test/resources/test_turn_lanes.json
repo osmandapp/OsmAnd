@@ -496,6 +496,34 @@
     "expectedResults": {
       "4400154": "C|C|+TSLR,C|+TSLR|+TSLR"
     }
+  },
+  {
+    "testName": "28.1.Link +TSLL, С",
+    "startPoint": {
+      "latitude": 45.64069524601371,
+      "longitude": 35.541367523279234
+    },
+    "endPoint": {
+      "latitude": 45.63966758220834,
+      "longitude": 35.54365276535992
+    },
+    "expectedResults": {
+      "118669516": "+TSLL, С"
+    }
+  },
+  {
+    "testName": "28.2.TSLR Großer Stern (Berlin)",
+    "startPoint": {
+      "latitude": 45.64211106582103,
+      "longitude": 35.54128705700879
+    },
+    "endPoint": {
+      "latitude": 45.640884649147,
+      "longitude": 35.53820788105969
+    },
+    "expectedResults": {
+      "118669511": "+TSLR, С"
+    }
   }
 
 ]
