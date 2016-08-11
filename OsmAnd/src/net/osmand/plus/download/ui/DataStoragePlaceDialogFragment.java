@@ -1,6 +1,7 @@
 package net.osmand.plus.download.ui;
 
 import android.app.Activity;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.StatFs;
 import android.support.v4.app.FragmentManager;
@@ -153,8 +154,12 @@ public class DataStoragePlaceDialogFragment extends BottomSheetDialogFragment {
 	}
 
 	public static File getExternal1StorageDirectory(Activity activity) {
-		return ((OsmandApplication) activity.getApplication()).getSettings()
-				.getExternal1AppPath();
+		if (Build.VERSION.SDK_INT < 19) {
+			return null;
+		} else {
+			return ((OsmandApplication) activity.getApplication()).getSettings()
+					.getExternal1AppPath();
+		}
 	}
 
 	public static File getSharedStorageDirectory(Activity activity) {
