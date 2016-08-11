@@ -8,6 +8,7 @@ package net.osmand.plus.activities;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 
@@ -19,16 +20,18 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.mapcontextmenu.other.MapRouteInfoMenu;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.TurnPathHelper;
-import net.osmand.plus.mapcontextmenu.other.MapRouteInfoMenu;
 import net.osmand.util.Algorithms;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.content.FileProvider;
 import android.support.v4.view.MenuItemCompat;
+import android.text.Html;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
@@ -89,22 +92,41 @@ public class ShowRouteInfoActivity extends OsmandListActivity {
 			MapActivityActions.createSaveDirections(ShowRouteInfoActivity.this, helper).show();
 			return true;
 		}
-        if (item.getItemId() == SHARE) {
-              final GPXFile gpx = helper.generateGPXFileWithRoute();
-
-              final Intent sendIntent = new Intent();
-              sendIntent.setAction(Intent.ACTION_SEND);
-              sendIntent.putExtra(Intent.EXTRA_TEXT, GPXUtilities.asString(gpx, getMyApplication()));
-              sendIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share_route_subject));
-              sendIntent.setType("application/gpx+xml");
-              startActivity(sendIntent);
-            return true;
-        }
-        if (item.getItemId() == PRINT) {
-        	print();
-          return true;
-      }
-
+		if (item.getItemId() == SHARE) {
+			final GPXFile gpx = helper.generateGPXFileWithRoute();
+			final Uri fileUri = Uri.fromFile(new File(gpx.path));
+			File dir = new File(ShowRouteInfoActivity.this.getCacheDir(), "share");
+			if (!dir.exists()) {
+				dir.mkdir();
+			}
+			File dst = new File(dir, "route.gpx");
+			try {
+				FileWriter fw = new FileWriter(dst);
+				GPXUtilities.writeGpx(fw, gpx, getMyApplication());
+				fw.close();
+				final Intent sendIntent = new Intent();
+				sendIntent.setAction(Intent.ACTION_SEND);
+				sendIntent.putExtra(Intent.EXTRA_TEXT, Html.fromHtml(generateHtml(((RouteInfoAdapter)getListAdapter()), 
+						helper.getGeneralRouteInformation()).toString()));
+				sendIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share_route_subject));
+				sendIntent.putExtra(Intent.EXTRA_STREAM, fileUri);
+				sendIntent.putExtra(
+						Intent.EXTRA_STREAM,
+						FileProvider.getUriForFile(ShowRouteInfoActivity.this,
+								ShowRouteInfoActivity.this.getPackageName() + ".fileprovider", dst));
+				sendIntent.setType("text/plain");
+				startActivity(sendIntent);
+			} catch (IOException e) {
+				// Toast.makeText(getActivity(), "Error sharing favorites: " + e.getMessage(),
+				// Toast.LENGTH_LONG).show();
+				e.printStackTrace();
+			}
+			return true;
+		}
+		if (item.getItemId() == PRINT) {
+			print();
+			return true;
+		}
 		return super.onOptionsItemSelected(item);
 	}
 
@@ -254,74 +276,9 @@ public class ShowRouteInfoActivity extends OsmandListActivity {
 		}
 
 		final String FILE_NAME = "route_info.html";
-		StringBuilder html = new StringBuilder();
-		html.append("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">");
-		html.append("<html xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"en\">");
-		html.append("<head>");
-		html.append("<title>Route info</title>");
-		html.append("<meta http-equiv=\"Content-type\" content=\"text/html; charset=utf-8\" />");
-		html.append("<style>");
-		html.append("table, th, td {");
-		html.append("border: 1px solid black;");
-		html.append("border-collapse: collapse;}");
-		html.append("th, td {");
-		html.append("padding: 5px;}");
-		html.append("</style>");
-		html.append("</head>");
-		html.append("<body>");
-
+		StringBuilder html = generateHtmlPrint(routeInfo, title);
 		FileOutputStream fos = null;
 		try {
-			if (!TextUtils.isEmpty(title)) {
-				html.append("<h1>");
-				html.append(title);
-				html.append("</h1>");
-			}
-			html.append("<table style=\"width:100%\">");
-			final String NBSP = "&nbsp;";
-			final String BR = "<br>";
-			for (int i = 0; i < routeInfo.getCount(); i++) {
-				RouteDirectionInfo routeDirectionInfo = (RouteDirectionInfo) routeInfo
-						.getItem(i);
-				html.append("<tr>");
-				StringBuilder sb = new StringBuilder();
-				sb.append(OsmAndFormatter.getFormattedDistance(
-						routeDirectionInfo.distance, getMyApplication()));
-				sb.append(", ");
-				sb.append(getTimeDescription(routeDirectionInfo));
-				String distance = sb.toString().replaceAll("\\s", NBSP);
-				html.append("<td>");
-				html.append(distance);
-				html.append("</td>");
-				String description = routeDirectionInfo
-						.getDescriptionRoutePart();
-				html.append("<td>");
-				html.append(String.valueOf(i+1) + ". " + description);
-				html.append("</td>");
-				RouteInfoAdapter.CumulativeInfo cumulativeInfo = routeInfo
-						.getRouteDirectionCumulativeInfo(i);
-				html.append("<td>");
-				sb = new StringBuilder();
-				sb.append(OsmAndFormatter.getFormattedDistance(
-						cumulativeInfo.distance, getMyApplication()));
-				sb.append(" - ");
-				sb.append(OsmAndFormatter.getFormattedDistance(
-						cumulativeInfo.distance + routeDirectionInfo.distance,
-						getMyApplication()));
-				sb.append(BR);
-				sb.append(Algorithms.formatDuration(cumulativeInfo.time, getMyApplication().accessibilityEnabled()));
-				sb.append(" - ");
-				sb.append(Algorithms.formatDuration(cumulativeInfo.time
-						+ routeDirectionInfo.getExpectedTime(), getMyApplication().accessibilityEnabled()));
-				String cumulativeTimeAndDistance = sb.toString().replaceAll("\\s", NBSP);
-				html.append(cumulativeTimeAndDistance);
-				html.append("</td>");
-				html.append("</tr>");
-			}
-			html.append("</table>");
-			html.append("</body>");
-			html.append("</html>");
-
 			file = ((OsmandApplication) getApplication()).getAppPath(FILE_NAME);
 			fos = new FileOutputStream(file);
 			fos.write(html.toString().getBytes("UTF-8"));
@@ -341,6 +298,93 @@ public class ShowRouteInfoActivity extends OsmandListActivity {
 		}
 
 		return file;
+	}
+	
+	private StringBuilder generateHtml(RouteInfoAdapter routeInfo, String title) {
+		StringBuilder html = new StringBuilder();
+		if (!TextUtils.isEmpty(title)) {
+			html.append("<h1>");
+			html.append(title);
+			html.append("</h1>");
+		}
+		final String NBSP = "&nbsp;";
+		final String BR = "<br>";
+		for (int i = 0; i < routeInfo.getCount(); i++) {
+			RouteDirectionInfo routeDirectionInfo = (RouteDirectionInfo) routeInfo.getItem(i);
+			StringBuilder sb = new StringBuilder();
+			sb.append(OsmAndFormatter.getFormattedDistance(routeDirectionInfo.distance, getMyApplication()));
+			sb.append(", ").append(NBSP);
+			sb.append(getTimeDescription(routeDirectionInfo));
+			String distance = sb.toString().replaceAll("\\s", NBSP);
+			String description = routeDirectionInfo.getDescriptionRoutePart();
+			html.append(BR);
+			html.append("<p>" + String.valueOf(i + 1) + ". " + NBSP + description + NBSP + "(" + distance + ")</p>");
+		}
+		return html;
+	}
+
+	private StringBuilder generateHtmlPrint(RouteInfoAdapter routeInfo, String title) {
+		StringBuilder html = new StringBuilder();
+		html.append("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">");
+		html.append("<html xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"en\">");
+		html.append("<head>");
+		html.append("<title>Route info</title>");
+		html.append("<meta http-equiv=\"Content-type\" content=\"text/html; charset=utf-8\" />");
+		html.append("<style>");
+		html.append("table, th, td {");
+		html.append("border: 1px solid black;");
+		html.append("border-collapse: collapse;}");
+		html.append("th, td {");
+		html.append("padding: 5px;}");
+		html.append("</style>");
+		html.append("</head>");
+		html.append("<body>");
+
+
+		if (!TextUtils.isEmpty(title)) {
+			html.append("<h1>");
+			html.append(title);
+			html.append("</h1>");
+		}
+		html.append("<table style=\"width:100%\">");
+		final String NBSP = "&nbsp;";
+		final String BR = "<br>";
+		for (int i = 0; i < routeInfo.getCount(); i++) {
+			RouteDirectionInfo routeDirectionInfo = (RouteDirectionInfo) routeInfo.getItem(i);
+			html.append("<tr>");
+			StringBuilder sb = new StringBuilder();
+			sb.append(OsmAndFormatter.getFormattedDistance(routeDirectionInfo.distance, getMyApplication()));
+			sb.append(", ");
+			sb.append(getTimeDescription(routeDirectionInfo));
+			String distance = sb.toString().replaceAll("\\s", NBSP);
+			html.append("<td>");
+			html.append(distance);
+			html.append("</td>");
+			String description = routeDirectionInfo.getDescriptionRoutePart();
+			html.append("<td>");
+			html.append(String.valueOf(i + 1) + ". " + description);
+			html.append("</td>");
+			RouteInfoAdapter.CumulativeInfo cumulativeInfo = routeInfo.getRouteDirectionCumulativeInfo(i);
+			html.append("<td>");
+			sb = new StringBuilder();
+			sb.append(OsmAndFormatter.getFormattedDistance(cumulativeInfo.distance, getMyApplication()));
+			sb.append(" - ");
+			sb.append(OsmAndFormatter.getFormattedDistance(cumulativeInfo.distance + routeDirectionInfo.distance,
+					getMyApplication()));
+			sb.append(BR);
+			sb.append(Algorithms.formatDuration(cumulativeInfo.time, getMyApplication().accessibilityEnabled()));
+			sb.append(" - ");
+			sb.append(Algorithms.formatDuration(cumulativeInfo.time + routeDirectionInfo.getExpectedTime(),
+					getMyApplication().accessibilityEnabled()));
+			String cumulativeTimeAndDistance = sb.toString().replaceAll("\\s", NBSP);
+			html.append(cumulativeTimeAndDistance);
+			html.append("</td>");
+			html.append("</tr>");
+		}
+		html.append("</table>");
+		html.append("</body>");
+		html.append("</html>");
+		return html;
 	}
 
 }

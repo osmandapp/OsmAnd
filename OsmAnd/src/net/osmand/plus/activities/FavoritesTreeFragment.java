@@ -15,6 +15,8 @@ import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.view.ActionMode;
 import android.support.v7.widget.SearchView;
+import android.text.Html;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -30,7 +32,6 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -43,11 +44,13 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
+import net.osmand.plus.activities.ShowRouteInfoActivity.RouteInfoAdapter;
 import net.osmand.plus.base.FavoriteImageDrawable;
 import net.osmand.plus.base.OsmandExpandableListFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.plus.myplaces.FavoritesActivity;
+import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -473,6 +476,26 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 			b.show();
 		}
 	}
+	
+	private StringBuilder generateHtmlPrint() {
+		StringBuilder html = new StringBuilder();
+		html.append("<h1>My Favorites</h1>");
+		List<FavoriteGroup> groups = getMyApplication().getFavorites().getFavoriteGroups();
+		for(FavoriteGroup group : groups) {
+			html.append("<h3>"+group.name+"</h3>");
+			for(FavouritePoint fp : group.points) {
+				String url = "geo:"+((float)fp.getLatitude())+","+((float)fp.getLongitude())+"?m="+fp.getName();
+				html.append("<p>" + fp.getName() + " - " + "<a href=\"" + url + "\">geo:"
+						+ ((float) fp.getLatitude()) + "," + ((float) fp.getLongitude()) + "</a><br>");
+				
+				if(!Algorithms.isEmpty(fp.getDescription())) {
+					html.append(": " + fp.getDescription());
+				}
+				html.append("</p>");
+			}
+		}
+		return html;
+	}
 
 
 	private void shareFavourites() {
@@ -503,7 +526,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 						Algorithms.fileCopy(src, dst);
 						final Intent sendIntent = new Intent();
 						sendIntent.setAction(Intent.ACTION_SEND);
-						sendIntent.putExtra(Intent.EXTRA_TEXT, "Content of the attached file Favourites.gpx:\n\n\n" + GPXUtilities.asString(gpxFile, getMyApplication()));
+						sendIntent.putExtra(Intent.EXTRA_TEXT, Html.fromHtml(generateHtmlPrint().toString()));
 						sendIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share_fav_subject));
 						sendIntent.putExtra(Intent.EXTRA_STREAM,
 								FileProvider.getUriForFile(getActivity(),

@@ -820,7 +820,8 @@ public class RouteCalculationResult {
 //					if(p == null || !i.getTurnType().isSkipToSpeak() ||
 //							(!Algorithms.objectEquals(p.getRef(), i.getRef()) &&
 //									!Algorithms.objectEquals(p.getStreetName(), i.getStreetName()))) {
-					if(i.getTurnType() != null && !i.getTurnType().isSkipToSpeak()) {
+					if(p == null || 
+							(i.getTurnType() != null && !i.getTurnType().isSkipToSpeak())) {
 						p = new RouteDirectionInfo(i.getAverageSpeed(), i.getTurnType());
 						p.routePointOffset = i.routePointOffset;
 						p.routeEndPointOffset = i.routeEndPointOffset;
