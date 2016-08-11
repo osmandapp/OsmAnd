@@ -332,7 +332,7 @@
 	<string name="poi_pier">Molo</string>
 	<string name="poi_works">Fabrikk</string>
 	<string name="poi_stadium">Stadion</string>
-	<string name="poi_pitch">Sportsbane</string>
+	<string name="poi_pitch">Idrettsbane</string>
 	<string name="poi_place_of_worship">Religiøst sted</string>
 	<string name="poi_grave_yard">Kirkegård</string>
 	<string name="poi_route_hiking_iwn_poi">Internasjonal vandrerute</string>
@@ -357,4 +357,8 @@
 
 	<string name="poi_diplomatic_consulate">Konsulat</string>
 	<string name="poi_diplomatic_consulate_general">Generalkonsulat</string>
+	<string name="poi_length">Lengde</string>
+
+<string name="poi_water_tank">Vanntank</string>
+
 	</resources>
