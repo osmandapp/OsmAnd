@@ -2382,4 +2382,6 @@ Si amas a OsmAnd, OSM y quieres apoyarlos, esta es una perfecta manera de hacerl
     <string name="coords_search">Búsqueda de coordenadas</string>
     <string name="advanced_coords_search">Búsqueda avanzada de coordenadas</string>
     <string name="route_stops_before">%1$s parada(s) anterior(es)</string>
+    <string name="rendering_attr_hideOverground_name">Objetos en superficie</string>
+
     </resources>
