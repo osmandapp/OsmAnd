@@ -1050,17 +1050,21 @@ public class RouteProvider {
 		int cRoute = currentRoute;
 		int cDirInfo = currentDirectionInfo;
 
-		// Saving start point to gpx file's trkpt section
-// The only time the startpoint is missing in trkpts is if "Calculate first and last segment" is selected and start is not the start of the selected GPX file. In all other cases it would be added s duplicate!
-// But even in that case, the second route point is included, usually only very few meters away. So this case probably needs no fixing.
-// Adding the startpoint here causes all offsets to be wrong by 1 (part of Issue #2906), hence the following code is commented out (causing no practical issue). If we want to fix, all offsets need to be adjusted!
-//		WptPt startpoint = new WptPt();
-//		TargetPoint sc = helper.getPointToStart();
-//		if (sc != null){
-//			startpoint.lon = sc.getLongitude();
-//			startpoint.lat = sc.getLatitude();
-//			trkSegment.points.add(startpoint);
-//		}
+		// Save the start point to gpx file's trkpt section unless already contained
+		WptPt startpoint = new WptPt();
+		TargetPoint sc = helper.getPointToStart();
+		int routePointOffsetAdjusted = 0;
+		if (sc != null && ((float) sc.getLatitude() != (float) routeNodes.get(cRoute).getLatitude() || (float) sc.getLongitude() != (float) routeNodes.get(cRoute).getLongitude())){
+			startpoint.lat = sc.getLatitude();
+			startpoint.lon = sc.getLongitude();
+			trkSegment.points.add(startpoint);
+			if (directionInfo != null && !directionInfo.isEmpty()) {
+				for (RouteDirectionInfo i : directionInfo) {
+					i.routePointOffset++;
+				}
+			}
+			routePointOffsetAdjusted = 1;
+		}
 
 		for (int i = cRoute; i< routeNodes.size(); i++) {
 			Location loc = routeNodes.get(i);
@@ -1078,13 +1082,14 @@ public class RouteProvider {
 			}
 			trkSegment.points.add(pt);
 		}
+
 		Route route = new Route();
 		gpx.routes.add(route);
 		for (int i = cDirInfo; i < directionInfo.size(); i++) {
 			RouteDirectionInfo dirInfo = directionInfo.get(i);
-			if (dirInfo.routePointOffset >= cRoute) {
+			if (dirInfo.routePointOffset - routePointOffsetAdjusted >= cRoute) {
 				if (dirInfo.getTurnType() != null && !dirInfo.getTurnType().isSkipToSpeak()) {
-					Location loc = routeNodes.get(dirInfo.routePointOffset);
+					Location loc = routeNodes.get(dirInfo.routePointOffset - routePointOffsetAdjusted);
 					WptPt pt = new WptPt();
 					pt.lat = loc.getLatitude();
 					pt.lon = loc.getLongitude();

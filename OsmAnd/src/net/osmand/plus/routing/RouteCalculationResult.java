@@ -513,7 +513,7 @@ public class RouteCalculationResult {
 	 * PREPARATION
 	 * Check points for duplicates (it is very bad for routing) - cloudmade could return it
 	 */
-	private void checkForDuplicatePoints(List<Location> locations, List<RouteDirectionInfo> directions) {
+	public static void checkForDuplicatePoints(List<Location> locations, List<RouteDirectionInfo> directions) {
 		// 
 		for (int i = 0; i < locations.size() - 1;) {
 			if (locations.get(i).distanceTo(locations.get(i + 1)) == 0) {
@@ -554,6 +554,7 @@ public class RouteCalculationResult {
 				// info.setDescriptionRoute(ctx.getString( R.string.route_head));//; //$NON-NLS-1$
 				directions.add(0, info);
 			}
+			checkForDuplicatePoints(locations, directions);
 		}
 		RouteDirectionInfo lastDirInf = directions.size() > 0 ? directions.get(directions.size() - 1) : null;
 		if((lastDirInf == null || lastDirInf.routePointOffset < locations.size() - 1) && locations.size() - 1 > 0) {
