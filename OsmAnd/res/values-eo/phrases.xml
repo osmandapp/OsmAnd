@@ -1594,13 +1594,13 @@
 	<string name="poi_delivery_no">Sen hejmliverado</string>
 	<string name="poi_delivery_only">Nur hejmliverado</string>
 
-	<string name="poi_outdoor_seating_yes">Eksteraj seĝoj</string>
-	<string name="poi_outdoor_seating_no">Sen eksteraj seĝoj</string>
-	<string name="poi_outdoor_seating_terrace">Eksteraj seĝoj: altano</string>
-	<string name="poi_outdoor_seating_sidewalk">Eksteraj seĝoj: ĉe irejo</string>
-	<string name="poi_outdoor_seating_pedestrian_zone">Eksteraj seĝoj: ĉe irejego</string>
-	<string name="poi_outdoor_seating_garden">Eksteraj seĝoj: ĝardeno</string>
-	<string name="poi_outdoor_seating_patio">Eksteraj seĝoj: korto</string>
+	<string name="poi_outdoor_seating_yes">Seĝoj ekstere</string>
+	<string name="poi_outdoor_seating_no">Neniuj seĝoj ekstere</string>
+	<string name="poi_outdoor_seating_terrace">Seĝoj ekstere: en altano</string>
+	<string name="poi_outdoor_seating_sidewalk">Seĝoj ekstere: sur trotuaro</string>
+	<string name="poi_outdoor_seating_pedestrian_zone">Seĝoj ekstere: sur irejo</string>
+	<string name="poi_outdoor_seating_garden">Seĝoj ekstere: en ĝardeno</string>
+	<string name="poi_outdoor_seating_patio">Seĝoj ekstere: en korto</string>
 
 	<string name="poi_cocktails_yes">Kokteloj</string>
 
