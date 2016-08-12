@@ -2556,4 +2556,6 @@ Facebook：https://www.facebook.com/osmandapp
     <string name="coords_search">座標查詢</string>
     <string name="advanced_coords_search">進階座標查詢</string>
     <string name="route_stops_before">%1$s 之前停止</string>
+    <string name="rendering_attr_hideOverground_name">地上的物件</string>
+
     </resources>
