@@ -187,7 +187,7 @@
 	<string name="poi_boatyard">Stocznia</string>
 	<string name="poi_wastewater_plant">Oczyszczalnia ścieków</string>
 	<string name="poi_water_tower">Wieża ciśnień</string>
-	<string name="poi_dam">Tama</string>
+	<string name="poi_dam">Zapora</string>
 	<string name="poi_watermill">Młyn wodny</string>
 
 	<string name="poi_power_substation">Stacja elektroenergetyczna</string>
@@ -477,7 +477,7 @@
 	<string name="poi_midwife">Położna</string>
 	<string name="poi_occupational_therapist">Terapeuta</string>
 	<string name="poi_healthcare_rehabilitation">Rehabilitacja</string>
-	<string name="poi_office_telecommunication">Urząd telekomunikacji</string>
+	<string name="poi_office_telecommunication">Telekomunikacja - Biuro operatora</string>
 	<string name="poi_research">Biuro badań</string>
 	<string name="poi_newspaper">Redakcja gazety</string>
 	<string name="poi_bmx">BMX</string>
@@ -558,7 +558,7 @@
 	<string name="poi_silo">Silos</string>
 	<string name="poi_storage_tank">Zbiornik</string>
 
-	<string name="poi_training">Urządzenie treningowe</string>
+	<string name="poi_training">Sala treningowa</string>
 	<string name="poi_migration">Migracja</string>
 	<string name="poi_isolated_dwelling">Chatka</string>
 	<string name="poi_suburb">Dzielnica</string>
@@ -688,7 +688,7 @@
 	<string name="poi_food_court">Punkt gastronomiczny</string>
 	<string name="poi_cape">Przylądek</string>
 	<string name="poi_cave_entrance">Wejście do jaskini</string>
-	<string name="poi_rapids">Katarakta</string>
+	<string name="poi_rapids">Katarakta na rzece</string>
 	<string name="poi_stone">Głaz</string>
 	<string name="poi_ridge">Grzbiet górski</string>
 	<string name="poi_saddle">Punkt siodłowy (przełęcz)</string>
@@ -937,7 +937,7 @@
 <string name="poi_doors">Drzwi</string>
 	<string name="poi_perfumery">Perfumeria</string>
 
-	<string name="poi_recycling_centre">Centrum recyklingu</string>
+	<string name="poi_recycling_centre">Typ: centrum recyklingu</string>
 	<string name="poi_recycling_container">Typ: kontener</string>
 	<string name="poi_recycling_glass">Szkło</string>
 	<string name="poi_recycling_paper">Papier</string>
@@ -1177,7 +1177,7 @@
 	<string name="poi_denomination_united_methodist">Zjednoczeni metodyści</string>
 	<string name="poi_power_pole">Słup energetyczny</string>
 
-	<string name="poi_brownfield">Tereny przemysłowe</string>
+	<string name="poi_brownfield">Tereny pod zabudowę</string>
 	<string name="poi_association">Biuro stowarzyszenia</string>
 	<string name="poi_financial">Biuro finansowe</string>
 	<string name="poi_denomination_episcopal">Kościół episkopalny</string>
@@ -1484,4 +1484,57 @@
 	<string name="poi_office_forestry">Siedziba nadleśnictwa</string>
 	<string name="poi_guide">Siedziba przewodnika</string>
 	<string name="poi_logistics">Biuro spedycyjne</string>
+	<string name="poi_parish">Parafie</string>
+	<string name="poi_publisher">Wydawnictwo</string>
+
+	<string name="poi_quango">Organizacja częściowo pozarządowa</string>
+	<string name="poi_animal_training">Tresura psów</string>
+	<string name="poi_dojo">Sala ćwiczeń sztuk walk</string>
+
+	<string name="poi_water_tap">Ujęcie wody</string>
+	<string name="poi_grassland">Łąka</string>
+	<string name="poi_heath">Wrzosowisko</string>
+	<string name="poi_protected_area">Rezerwat</string>
+	<string name="poi_resource_sand">Kopalnia piasku</string>
+	<string name="poi_resource_sandstone">Piaskowiec</string>
+	<string name="poi_beach_sand">Typ plaży: piaszczysta</string>
+	<string name="poi_scrub">Zarośla</string>
+	<string name="poi_health_amenity_type_first_aid_kit">Zestaw pierwszej pomocy</string>
+	<string name="poi_health_facility_type_office">Gabinet medyczny</string>
+	<string name="poi_health_amenity_type_scales">Waga publiczna</string>
+
+	<string name="poi_boat_storage">Przechowywanie łodzi</string>
+
+	<string name="poi_cairn">Kopiec</string>
+
+	<string name="poi_commercial">Obszar wykorzystywany komercyjnie</string>
+	<string name="poi_retail">Obszar wykorzystywany dla handlu</string>
+
+	<string name="poi_dolphin">Delfinarium</string>
+
+	<string name="poi_farmland">Pole uprawne</string>
+	<string name="poi_kiln">Suszarnia</string>
+	<string name="poi_logging">Wycinka lasu</string>
+	<string name="poi_plant_nursery">Szkółka roślin</string>
+
+	<string name="poi_service_bicycle_second_hand_yes">Sprzedaż używanych rowerów: tak</string>
+	<string name="poi_service_bicycle_second_hand_no">Sprzedaż używanych rowerów: nie</string>
+
+	<string name="poi_forestry_compartment">Znacznik: części lasu</string>
+	<string name="poi_forestry_allotment">Znacznik: działki leśnej</string>
+	<string name="poi_square">Plac</string>
+	<string name="poi_street_cabinet">Szafa uliczna</string>
+
+	<string name="poi_street_cabinet_power">Typ szafy: prądowa</string>
+	<string name="poi_street_cabinet_telecom">Typ szafy: telekomunikacyjna</string>
+	<string name="poi_street_cabinet_cable_tv">Typ szafy: kable TV</string>
+	<string name="poi_street_cabinet_gas">Typ szafy: gaz</string>
+	<string name="poi_street_cabinet_postal_service">Typ szafy: pocztowa</string>
+	<string name="poi_street_cabinet_waste">Typ szafy: odpady</string>
+	<string name="poi_street_cabinet_water_management">Typ szafy: rozdzielcza wody</string>
+	<string name="poi_street_cabinet_street_lighting">Typ szafy: oświetlenie uliczne</string>
+
+	<string name="poi_water_point">Punkt poboru wody</string>
+
+	<string name="poi_watering_place">Wodopój</string>
 	</resources>
