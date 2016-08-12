@@ -118,4 +118,7 @@
     <string name="map_widget_top_text">Isem n webrid</string>
     <string name="map_widget_back_to_loc">Anida i yelliɣ</string>
     <string name="osmand_parking_hours">Isragen</string>
+    <string name="zoomOut">Zoom deffir</string>
+    <string name="zoomIn">Zoom dat</string>
+    <string name="north">Agafa</string>
     </resources>
