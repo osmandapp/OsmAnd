@@ -2055,4 +2055,6 @@
 	\u2022 Множество улучшений и исправлений ошибок\n\n
 	и многое другое…
     </string>
+    <string name="rendering_attr_hideOverground_name">Надземные объекты</string>
+
 </resources>
