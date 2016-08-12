@@ -118,7 +118,7 @@
 	<string name="poi_pharmacy">صيدلية</string>
 	<string name="poi_driving_school">مدرسة تعليم السياقة</string>
 	<string name="poi_school">مدرسة</string>
-	<string name="poi_building_type_mosque">نوع البناء : مسجد</string>
+	<string name="poi_building_type_mosque">نوع المبنى : مسجد</string>
 	<string name="poi_hospital">مستشفى</string>
 	<string name="poi_police">شرطة</string>
 	<string name="poi_artwork_type_fountain">نوع العمل الفني : نافورة</string>
@@ -278,4 +278,18 @@
 	<string name="poi_lighthouse">المنارة</string>
 
 	<string name="poi_bicycle_rental">تأجير دراجات</string>
+	<string name="poi_city_wall">جدار مدينة</string>
+	<string name="poi_city">مدينة</string>
+	<string name="poi_city_gate">باب مدينة</string>
+	<string name="poi_courthouse">محكمة</string>
+	<string name="poi_restaurant">مطعم</string>
+	<string name="poi_place_of_worship">مكان العبادة</string>
+	<string name="poi_government">حكومة</string>
+	<string name="poi_building">مبنى</string>
+	<string name="poi_hairdresser">حلاق</string>
+	<string name="poi_toilets">مرحاض</string>
+	<string name="poi_traffic_calming_bump">ممهل</string>
+	<string name="poi_highway_crossing">ممر الراجلين</string>
+
+	<string name="poi_post_office">مكتب بريد</string>
 	</resources>
