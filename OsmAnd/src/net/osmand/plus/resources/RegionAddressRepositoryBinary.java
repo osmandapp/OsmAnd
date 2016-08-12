@@ -45,11 +45,9 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 	private final Map<String, City> postCodes;
 	private final Collator collator;
 	private String fileName;
-	private ResourceManager mgr;
 	private OsmandPreference<String> langSetting;
 
 	public RegionAddressRepositoryBinary(ResourceManager mgr, BinaryMapIndexReader file, String fileName) {
-		this.mgr = mgr;
 		langSetting = mgr.getContext().getSettings().MAP_PREFERRED_LOCALE;
 		this.file = file;
 		this.fileName = fileName;

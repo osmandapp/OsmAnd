@@ -107,10 +107,12 @@ public class ResourceManager {
 	// Indexes
 	private final Map<String, RegionAddressRepository> addressMap = new ConcurrentHashMap<String, RegionAddressRepository>();
 	protected final Map<String, AmenityIndexRepository> amenityRepositories =  new ConcurrentHashMap<String, AmenityIndexRepository>();
-	protected final Map<String, String> indexFileNames = new ConcurrentHashMap<String, String>();
-	protected final Map<String, String> basemapFileNames = new ConcurrentHashMap<String, String>();
 	protected final Map<String, BinaryMapIndexReader> routingMapFiles = new ConcurrentHashMap<String, BinaryMapIndexReader>();
 	protected final Map<String, TransportIndexRepository> transportRepositories = new ConcurrentHashMap<String, TransportIndexRepository>();
+	
+	protected final Map<String, String> indexFileNames = new ConcurrentHashMap<String, String>();
+	protected final Map<String, String> basemapFileNames = new ConcurrentHashMap<String, String>();
+	
 	
 	protected final IncrementalChangesManager changesManager = new IncrementalChangesManager(this);
 	
@@ -678,8 +680,8 @@ public class ResourceManager {
 						}
 					} else if(!wikiMap && !srtmMap) {
 						changesManager.indexMainMap(f, dateCreated);
-						indexFileNames.put(f.getName(), dateFormat.format(dateCreated)); //$NON-NLS-1$
 					}
+					indexFileNames.put(f.getName(), dateFormat.format(dateCreated)); //$NON-NLS-1$
 					if (!mapReader.getRegionNames().isEmpty() || mapReader.containsPoiData()) {
 						try {
 							RandomAccessFile raf = new RandomAccessFile(f, "r"); //$NON-NLS-1$
