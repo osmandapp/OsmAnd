@@ -47,6 +47,13 @@ public class PoiType extends AbstractPoiType {
 		}
 		return osmTag;
 	}
+	
+	public String getRawOsmTag() {
+		if(isReference()) {
+			return referenceType.getOsmTag();
+		}
+		return osmTag;
+	}
 
 	public void setOsmTag(String osmTag) {
 		this.osmTag = osmTag;

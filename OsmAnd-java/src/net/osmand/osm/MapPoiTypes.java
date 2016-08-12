@@ -575,10 +575,10 @@ public class MapPoiTypes {
 		if (!p.isReference()) {
 			String key = null;
 			if (p.isAdditional()) {
-				key = p.isText() ? p.getOsmTag() :
-						(p.getOsmTag() + "/" + p.getOsmValue());
+				key = p.isText() ? p.getRawOsmTag() :
+						(p.getRawOsmTag() + "/" + p.getOsmValue());
 			} else {
-				key = p.getOsmTag() + "/" + p.getOsmValue();
+				key = p.getRawOsmTag() + "/" + p.getOsmValue();
 			}
 			if (poiTypesByTag.containsKey(key)) {
 				throw new UnsupportedOperationException("!! Duplicate poi type " + key);
