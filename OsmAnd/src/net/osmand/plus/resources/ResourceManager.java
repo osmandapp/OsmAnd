@@ -105,9 +105,92 @@ public class ResourceManager {
 
 	
 	// Indexes
+	public enum BinaryMapReaderResourceType {
+		POI,
+		REVERSE_GEOCODING,
+		STREET_LOOKUP,
+		TRANSPORT,
+		ADDRESS,
+		QUICK_SEARCH, 
+		ROUTING
+	}
+	
+	public static class BinaryMapReaderResource {
+		private BinaryMapIndexReader initialReader;
+		private File filename;
+		private List<BinaryMapIndexReader> readers = new ArrayList<>(BinaryMapReaderResourceType.values().length);
+		private boolean useForRouting;
+		public BinaryMapReaderResource(File f, BinaryMapIndexReader initialReader) {
+			this.filename = f;
+			this.initialReader = initialReader;
+			while(readers.size() < BinaryMapReaderResourceType.values().length) {
+				readers.add(null);
+			}
+		}
+		
+		public BinaryMapIndexReader getReader(BinaryMapReaderResourceType type) {
+			BinaryMapIndexReader r = readers.get(type.ordinal());
+			if(r == null) {
+				try {
+					RandomAccessFile raf = new RandomAccessFile(filename, "r");
+					r = new BinaryMapIndexReader(raf, initialReader);
+					readers.set(type.ordinal(), r);
+				} catch (IOException e) {
+					log.error("Fail to initialize " + filename.getName(), e);
+					e.printStackTrace();
+				}
+			}
+			return r;
+		}
+
+		public String getFileName() {
+			return filename.getName();
+		}
+
+		
+		// should not use methods to read from file!
+		public BinaryMapIndexReader getShallowReader() {
+			return initialReader;
+		}
+
+		public void close() {
+			close(initialReader);
+			for(BinaryMapIndexReader rr : readers) {
+				if(rr != null) {
+					close(rr);
+				}
+			}
+			initialReader = null;
+		}
+		
+		public boolean isClosed() {
+			return initialReader == null;
+		}
+
+		private void close(BinaryMapIndexReader r) {
+			try {
+				r.close();
+			} catch (IOException e) {
+				log.error("Fail to close " + filename.getName(), e);
+				e.printStackTrace();
+			}
+		}
+
+		public void setUseForRouting(boolean useForRouting) {
+			this.useForRouting = useForRouting;
+		}
+		
+		public boolean isUseForRouting() {
+			return useForRouting;
+		}
+	}
+	
+	protected final Map<String, BinaryMapReaderResource> fileReaders = new ConcurrentHashMap<String, BinaryMapReaderResource>();
+	
+	
 	private final Map<String, RegionAddressRepository> addressMap = new ConcurrentHashMap<String, RegionAddressRepository>();
 	protected final Map<String, AmenityIndexRepository> amenityRepositories =  new ConcurrentHashMap<String, AmenityIndexRepository>();
-	protected final Map<String, BinaryMapIndexReader> routingMapFiles = new ConcurrentHashMap<String, BinaryMapIndexReader>();
+//	protected final Map<String, BinaryMapIndexReader> routingMapFiles = new ConcurrentHashMap<String, BinaryMapIndexReader>();
 	protected final Map<String, TransportIndexRepository> transportRepositories = new ConcurrentHashMap<String, TransportIndexRepository>();
 	
 	protected final Map<String, String> indexFileNames = new ConcurrentHashMap<String, String>();
@@ -650,9 +733,6 @@ public class ResourceManager {
 					if (mapReader.getVersion() != IndexConstants.BINARY_MAP_VERSION) {
 						mapReader = null;
 					}
-					if (mapReader != null) {
-						renderer.initializeNewResource(progress, f, mapReader);
-					}
 				} catch (IOException e) {
 					log.error(String.format("File %s could not be read", f.getName()), e);
 				}
@@ -682,37 +762,21 @@ public class ResourceManager {
 						changesManager.indexMainMap(f, dateCreated);
 					}
 					indexFileNames.put(f.getName(), dateFormat.format(dateCreated)); //$NON-NLS-1$
-					if (!mapReader.getRegionNames().isEmpty() || mapReader.containsPoiData()) {
-						try {
-							RandomAccessFile raf = new RandomAccessFile(f, "r"); //$NON-NLS-1$
-							RegionAddressRepositoryBinary rarb = new RegionAddressRepositoryBinary(this,
-									new BinaryMapIndexReader(raf, mapReader), f.getName());
-							addressMap.put(f.getName(), rarb);
-						} catch (IOException e) {
-							log.error("Exception reading " + f.getAbsolutePath(), e); //$NON-NLS-1$
-							warnings.add(MessageFormat.format(
-									context.getString(R.string.version_index_is_not_supported), f.getName())); //$NON-NLS-1$
-						}
+					renderer.initializeNewResource(progress, f, mapReader);
+					BinaryMapReaderResource resource = new BinaryMapReaderResource(f, mapReader);
+					
+					fileReaders.put(f.getName(), resource);
+					if (!mapReader.getRegionNames().isEmpty()) {
+						RegionAddressRepositoryBinary rarb = new RegionAddressRepositoryBinary(this, resource);
+						addressMap.put(f.getName(), rarb);
 					}
 					if (mapReader.hasTransportData()) {
-						try {
-							RandomAccessFile raf = new RandomAccessFile(f, "r"); //$NON-NLS-1$
-							transportRepositories.put(f.getName(), new TransportIndexRepositoryBinary(new BinaryMapIndexReader(raf, mapReader)));
-						} catch (IOException e) {
-							log.error("Exception reading " + f.getAbsolutePath(), e); //$NON-NLS-1$
-							warnings.add(MessageFormat.format(context.getString(R.string.version_index_is_not_supported), f.getName())); //$NON-NLS-1$
-						}
+						transportRepositories.put(f.getName(), new TransportIndexRepositoryBinary(resource));
 					}
 					// disable osmc for routing temporarily due to some bugs
 					if (mapReader.containsRouteData() && (!f.getParentFile().equals(liveDir) || 
 							context.getSettings().USE_OSM_LIVE_FOR_ROUTING.get())) {
-						try {
-							RandomAccessFile raf = new RandomAccessFile(f, "r"); //$NON-NLS-1$
-							routingMapFiles.put(f.getName(), new BinaryMapIndexReader(raf, mapReader));
-						} catch (IOException e) {
-							log.error("Exception reading " + f.getAbsolutePath(), e); //$NON-NLS-1$
-							warnings.add(MessageFormat.format(context.getString(R.string.version_index_is_not_supported), f.getName())); //$NON-NLS-1$
-						}
+						resource.setUseForRouting(true);
 					}
 					if (mapReader.containsPoiData()) {
 						try {
@@ -912,6 +976,10 @@ public class ResourceManager {
 		return addressMap.values();
 	}
 	
+	public Collection<BinaryMapReaderResource> getFileReaders() {
+		return fileReaders.values();
+	}
+	
 	
 	////////////////////////////////////////////// Working with transport ////////////////////////////////////////////////
 	public List<TransportIndexRepository> searchTransportRepositories(double latitude, double longitude) {
@@ -967,85 +1035,51 @@ public class ResourceManager {
 	////////////////////////////////////////////// Closing methods ////////////////////////////////////////////////
 	
 	public void closeFile(String fileName) {
-		AmenityIndexRepository rep = amenityRepositories.remove(fileName);
-		if(rep != null) {
-			rep.close();
-		}
-		RegionAddressRepository rar = addressMap.remove(fileName);
-		if(rar != null) {
-			rar.close();
-		}
-		TransportIndexRepository tir = transportRepositories.remove(fileName);
-		if(tir != null) {
-			tir.close();
-		}
-		BinaryMapIndexReader rmp = routingMapFiles.remove(fileName);
-		if(rmp != null) {
-			try {
-				rmp.close();
-			} catch (IOException e) {
-				log.error(e, e);
-			}
-		}
+		amenityRepositories.remove(fileName);
+		addressMap.remove(fileName);
+		transportRepositories.remove(fileName);
 		indexFileNames.remove(fileName);
 		renderer.closeConnection(fileName);
-	}
-	
-	public void closeAmenities(){
-		for(AmenityIndexRepository r : amenityRepositories.values()){
-			r.close();
-		}
-		amenityRepositories.clear();
-	}
-	
-	public void closeAddresses(){
-		for(RegionAddressRepository r : addressMap.values()){
-			r.close();
-		}
-		addressMap.clear();
-	}
-	
-	public void closeTransport(){
-		for(TransportIndexRepository r : transportRepositories.values()){
-			r.close();
-		}
-		transportRepositories.clear();
-	}
-	
-	
-	
-	
+		BinaryMapReaderResource resource = fileReaders.remove(fileName);
+		resource.close();
+	}	
 
 	public synchronized void close(){
 		imagesOnFS.clear();
 		indexFileNames.clear();
 		basemapFileNames.clear();
 		renderer.clearAllResources();
-		closeAmenities();
-		closeRouteFiles();
-		closeAddresses();
-		closeTransport();
+		transportRepositories.clear();
+		addressMap.clear();
+		amenityRepositories.clear();
+		for(BinaryMapReaderResource res : fileReaders.values()) {
+			res.close();
+		}
+		fileReaders.clear();
 	}
 	
 	
 	public BinaryMapIndexReader[] getRoutingMapFiles() {
-		return routingMapFiles.values().toArray(new BinaryMapIndexReader[routingMapFiles.size()]);
-	}
-	
-	public void closeRouteFiles() {
-		List<String> map = new ArrayList<String>(routingMapFiles.keySet());
-		for(String m : map){
-			try {
-				BinaryMapIndexReader ind = routingMapFiles.remove(m);
-				if(ind != null){
-					ind.getRaf().close();
-				}
-			} catch(IOException e){
-				log.error("Error closing resource " + m, e);
+		List<BinaryMapIndexReader> readers = new ArrayList<>(fileReaders.size());
+		for(BinaryMapReaderResource r : fileReaders.values()) {
+			if(r.isUseForRouting()) {
+				readers.add(r.getReader(BinaryMapReaderResourceType.ROUTING));
 			}
 		}
-		
+		return readers.toArray(new BinaryMapIndexReader[readers.size()]);
 	}
+	
+	public BinaryMapIndexReader[] getQuickSearchFiles() {
+		List<BinaryMapIndexReader> readers = new ArrayList<>(fileReaders.size());
+		for(BinaryMapReaderResource r : fileReaders.values()) {
+			if(r.getShallowReader().containsPoiData() || 
+					r.getShallowReader().containsAddressData()) {
+				readers.add(r.getReader(BinaryMapReaderResourceType.QUICK_SEARCH));
+			}
+		}
+		return readers.toArray(new BinaryMapIndexReader[readers.size()]);
+	}
+	
 
 	public Map<String, String> getIndexFileNames() {
 		return new LinkedHashMap<String, String>(indexFileNames);

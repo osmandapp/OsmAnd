@@ -1,5 +1,24 @@
 package net.osmand.plus;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+
+import net.osmand.GeoidAltitudeCorrection;
+import net.osmand.PlatformUtil;
+import net.osmand.ResultMatcher;
+import net.osmand.access.NavigationInfo;
+import net.osmand.binary.GeocodingUtilities.GeocodingResult;
+import net.osmand.binary.RouteDataObject;
+import net.osmand.data.LatLon;
+import net.osmand.data.QuadPoint;
+import net.osmand.plus.OsmandSettings.OsmandPreference;
+import net.osmand.plus.TargetPointsHelper.TargetPoint;
+import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.router.RouteSegmentResult;
+import net.osmand.util.MapUtils;
 import android.Manifest;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -22,27 +41,6 @@ import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
-import android.widget.Toast;
-
-import net.osmand.GeoidAltitudeCorrection;
-import net.osmand.PlatformUtil;
-import net.osmand.ResultMatcher;
-import net.osmand.access.NavigationInfo;
-import net.osmand.binary.GeocodingUtilities.GeocodingResult;
-import net.osmand.binary.RouteDataObject;
-import net.osmand.data.LatLon;
-import net.osmand.data.QuadPoint;
-import net.osmand.plus.OsmandSettings.OsmandPreference;
-import net.osmand.plus.TargetPointsHelper.TargetPoint;
-import net.osmand.plus.routing.RoutingHelper;
-import net.osmand.router.RouteSegmentResult;
-import net.osmand.util.MapUtils;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
 
 public class OsmAndLocationProvider implements SensorEventListener {
 
@@ -224,7 +222,6 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		USE_MAGNETIC_FIELD_SENSOR_COMPASS = settings.USE_MAGNETIC_FIELD_SENSOR_COMPASS;
 		USE_FILTER_FOR_COMPASS = settings.USE_KALMAN_FILTER_FOR_COMPASS;
 		currentPositionHelper = new CurrentPositionHelper(app);
-		app.getResourceManager().addResourceListener(currentPositionHelper);
 		locationSimulation = new OsmAndLocationSimulation(app, this);
 		addLocationListener(navigationInfo);
 		addCompassListener(navigationInfo);

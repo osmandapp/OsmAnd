@@ -59,9 +59,6 @@ public interface RegionAddressRepository {
 	
 	public List<MapObject> searchMapObjectsByName(String name, ResultMatcher<MapObject> resultMatcher);
 	
-	
-	public BinaryMapIndexReader getFile();
-	
 	public static class MapObjectNameDistanceComparator implements Comparator<MapObject> {
 		
 		private Collator collator = Collator.getInstance();
@@ -92,6 +89,5 @@ public interface RegionAddressRepository {
 		}
 	}
 
-	public List<GeocodingResult> justifyReverseGeocodingSearch(GeocodingResult r, double minBuildingDistance, final ResultMatcher<GeocodingResult> result);
 
 }

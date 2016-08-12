@@ -20,6 +20,5 @@ public interface TransportIndexRepository {
 	
 	public Collection<TransportRoute> getRouteForStop(TransportStop stop);
 		
-	public void close();
 	
 }

@@ -1,5 +1,8 @@
 package net.osmand.plus.search;
 
+import java.util.Arrays;
+import java.util.List;
+
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
@@ -8,7 +11,6 @@ import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.poi.PoiFiltersHelper;
-import net.osmand.plus.resources.RegionAddressRepository;
 import net.osmand.plus.resources.ResourceManager.ResourceListener;
 import net.osmand.search.SearchUICore;
 import net.osmand.search.SearchUICore.SearchResultCollection;
@@ -17,10 +19,6 @@ import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchCoreFactory;
 import net.osmand.search.core.SearchPhrase;
 import net.osmand.search.core.SearchResult;
-
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
 
 public class QuickSearchHelper implements ResourceListener {
 
@@ -147,12 +145,7 @@ public class QuickSearchHelper implements ResourceListener {
 	}
 
 	public void setRepositoriesForSearchUICore(final OsmandApplication app) {
-		Collection<RegionAddressRepository> regionAddressRepositories = app.getResourceManager().getAddressRepositories();
-		BinaryMapIndexReader[] binaryMapIndexReaderArray = new BinaryMapIndexReader[regionAddressRepositories.size()];
-		int i = 0;
-		for (RegionAddressRepository rep : regionAddressRepositories) {
-			binaryMapIndexReaderArray[i++] = rep.getFile();
-		}
+		BinaryMapIndexReader[] binaryMapIndexReaderArray = app.getResourceManager().getQuickSearchFiles();
 		core.getSearchSettings().setOfflineIndexes(Arrays.asList(binaryMapIndexReaderArray));
 	}
 
