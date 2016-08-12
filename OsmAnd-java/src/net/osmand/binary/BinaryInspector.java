@@ -71,15 +71,15 @@ public class BinaryInspector {
 		// test cases show info
 		if ("test".equals(args[0])) {
 			in.inspector(new String[]{
-//					"-vpoi",
+					"-vpoi",
 //					"-vmap", "-vmapobjects", // "-vmapcoordinates",
-//					"-vrouting",
+					"-vrouting",
 //					"-vaddress", "-vcities","-vstreetgroups",
 //					"-vstreets", "-vbuildings", "-vintersections",
 //					"-lang=ru",
 //					"-bbox=4.8486,52.3084,4.8747,52.2970",
 //					"-osm="+System.getProperty("maps.dir")+"/map.obf.osm", 
-					System.getProperty("maps.dir")+"/Gb_england_europe_simple.obf"
+					System.getProperty("maps.dir")+"/Map.obf"
 			});
 		} else {
 			in.inspector(args);
