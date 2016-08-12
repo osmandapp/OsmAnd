@@ -232,4 +232,50 @@
 	<string name="poi_emergency_access_point">منفذ طوارئ</string>
 
 	<string name="poi_ford">فورد</string>
+	<string name="poi_vehicle_inspection">فحص المركبات</string>
+	<string name="poi_car_wash">غسيل السيارات</string>
+	<string name="poi_fuel">محطة بنزين</string>
+	<string name="poi_fuel_diesel">ديزل</string>
+	<string name="poi_fuel_gtl_diesel">ديزل جي تي أل</string>
+	<string name="poi_fuel_biodiesel">ديزل حيوي</string>
+	<string name="poi_fuel_octane_80">أوكتان 80</string>
+	<string name="poi_fuel_octane_91">أوكتان 91</string>
+	<string name="poi_fuel_octane_92">أوكتان 92</string>
+	<string name="poi_fuel_octane_95">أوكتان 95</string>
+	<string name="poi_fuel_octane_98">أوكتان 98</string>
+	<string name="poi_fuel_octane_100">أوكتان 100</string>
+	<string name="poi_fuel_1_25">وقود 1:25</string>
+	<string name="poi_fuel_1_50">وقود 1:50</string>
+	<string name="poi_fuel_ethanol">إيثانول</string>
+	<string name="poi_fuel_methanol">ميثانول</string>
+	<string name="poi_fuel_e10">E10</string>
+	<string name="poi_fuel_e20">E20</string>
+	<string name="poi_fuel_e85">E85</string>
+	<string name="poi_fuel_biogas">غاز حيوي</string>
+	<string name="poi_fuel_lh2">هيدروجين سائل</string>
+	<string name="poi_fuel_electricity">كهرباء</string>
+	<string name="poi_charging_station">محطة شحن</string>
+	<string name="poi_compressed_air">هواء مضغوط</string>
+	<string name="poi_garages">كراجات</string>
+
+	<string name="poi_public_transport_platform">موقف النقل العمومي</string>
+	<string name="poi_public_transport_platform_bus">موقف حافلات</string>
+	<string name="poi_bus_stop">موقف حافلات</string>
+	<string name="poi_public_transport_stop_position">مكان توقف وسائل النقل العمومي</string>
+	<string name="poi_public_transport_station">محطة النقل العمومي</string>
+	<string name="poi_bus_station">محطة حافلات</string>
+	<string name="poi_railway_platform">منصة سكك حديدية</string>
+	<string name="poi_halt">محطة سكك حديدية</string>
+	<string name="poi_subway_entrance">مدخل مترو الإنفاق</string>
+	<string name="poi_subway_station">محطة مترو الإنفاق</string>
+	<string name="poi_taxi">موقف سيارات الأجرة</string>
+
+	<string name="poi_aerodrome">مطار</string>
+	<string name="poi_helipad">مهبط للطائرات</string>
+	<string name="poi_runway">المدرج</string>
+	<string name="poi_slipway">دعامة</string>
+	<string name="poi_ferry_terminal">محطة العبارة</string>
+	<string name="poi_lighthouse">المنارة</string>
+
+	<string name="poi_bicycle_rental">تأجير دراجات</string>
 	</resources>
