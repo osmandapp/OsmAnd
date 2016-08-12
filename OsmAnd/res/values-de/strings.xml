@@ -2480,4 +2480,6 @@ Wenn Sie OsmAnd und OSM lieben und unterstützen wollen, so ist dies die perfekt
     <string name="advanced_coords_search">Erweiterte Koordinatensuche</string>
     <string name="coords_search">Koordinatensuche</string>
     <string name="route_stops_before">%1$s Haltestellen vor</string>
+    <string name="rendering_attr_hideOverground_name">Oberirdische Objekte</string>
+
     </resources>
