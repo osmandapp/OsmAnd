@@ -66,7 +66,7 @@
     <string name="favorite_places_category">Miejsca</string>
     <string name="shared_string_others">Inne</string>
     <string name="shared_string_no_thanks">Niepotrzebne</string>
-    <string name="basemap_missing">Podstawowa mapa świata jest niezainstalowana. Pobierz plik World_basemap_x.obf.</string>
+    <string name="basemap_missing">Podstawowa mapa świata jest niezainstalowana. Pobierz plik World_basemap_x.obf aby mieć widok całego świata.</string>
     <string name="vector_data_missing">Brak danych (\'offline\') w urządzeniu na karcie SD. Proszę zwrócić uwagę pobierając ją, aby używać map w trybie offline.</string>
     <string name="local_index_gpx_info_show">\n\nProszę nacisnąć i przytrzymać, aby wyświetlić opcje</string>
 
@@ -415,7 +415,7 @@
     <string name="search_online_address">Wyszukiwanie online</string>
     <string name="max_level_download_tile">Maks. zoom online</string>
     <string name="max_level_download_tile_descr">Wybierz maksymalny poziom przybliżenia mapy dla pobierania kafelków map online</string>
-    <string name="route_general_information">Całkowity dystans %1$s, czas podróży %2$d godz %3$d min.</string>
+    <string name="route_general_information">Całkowity dystans %1$s, czas podróży %2$d h %3$d min.</string>
     <string name="router_service_descr">Wybiera usługę nawigacyjną online lub offline</string>
     <string name="router_service">Usługa nawigacyjna</string>
     <string name="sd_dir_not_accessible">Katalog przechowywania danych na karcie SD jest niedostępny!</string>
@@ -2108,7 +2108,7 @@ Włączenie tego widoku zmienia styl mapy na „Zima i narty”, ukazujący tere
     <string name="shared_string_qr_code">Kod QR</string>
     <string name="enter_country_name">Proszę wybrać kraj</string>
     <string name="map_downloaded_descr">Pobrano mapę %1$s. Proszę powrócić do mapy, aby rozpocząć jej używanie.</string>
-    <string name="world_map_download_descr">Brak podstawowej mapy świata (pokrywającej cały glob w małych przybliżeniach) lub jest ona przestarzała. Proszę rozważyć pobranie mapy podstawowej, aby uzyskać kompletne środowisko.</string>
+    <string name="world_map_download_descr">Brak podstawowej mapy świata (pokrywającej cały glob w małych przybliżeniach) lub jest ona przestarzała. Proszę rozważyć pobranie mapy podstawowej, aby mieć widok na cały świat.</string>
     <string name="map_downloaded">Pobrano mapę</string>
     <string name="go_to_map">Powróć do mapy</string>
     <string name="simulate_initial_startup">Zasymuluj pierwsze uruchomienie programu</string>
@@ -2370,7 +2370,7 @@ Włączenie tego widoku zmienia styl mapy na „Zima i narty”, ukazujący tere
     <string name="osm_live_ask_for_purchase">Należy najpierw zakupić subskrypcję OSM Live</string>
 
     <string name="osm_live_header">Ten abonament umożliwia cogodzinną aktualizację dla map z całego świata.
- Większa część dochodów powraca do społeczności OSM i jest wypłacana za każdy wkład OSM.
+ Większa część dochodów powraca do społeczności OSM i jest wypłacana za każdą edycję OSM.
  Jeśli lubisz OsmAnd i OSM i chcesz je wspierać, jest to doskonały sposób, aby to zrobić.</string>
     
     <string name="file_name_containes_illegal_char">Nazwa pliku zawiera niedozwolony znak</string>
@@ -2449,7 +2449,7 @@ Włączenie tego widoku zmienia styl mapy na „Zima i narty”, ukazujący tere
  • Ulepszona nawigacja - podpowiedzi głosowe i wskazówki dot. pasów ruchu
 
 
- • Ulepszenia w warstwie transportu publicznego
+ • Ulepszenia w warstwie transportu publicznego i wyświetlanie kursów
 
 
  • Dodano nowe tłumaczenia i wsparcie dla dialektów
@@ -2466,4 +2466,6 @@ Włączenie tego widoku zmienia styl mapy na „Zima i narty”, ukazujący tere
     <string name="coords_search">Wyszukiwanie współrzędnych</string>
     <string name="advanced_coords_search">Zaawansowane wyszukiwanie współrzędnych</string>
     <string name="route_stops_before">Za %1$s przystanków</string>
+    <string name="rendering_attr_hideOverground_name">Podziemne obiekty</string>
+
     </resources>
