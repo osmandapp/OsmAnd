@@ -702,7 +702,7 @@ Na voljo je le {2} MB.</string>
     <string name="show_more_map_detail">Pokaži več podrobnosti zemljevida</string>
     <string name="show_more_map_detail_descr">Pokaži nekaj podrobnosti vektorskih zemljevidov (ceste, itd.) že pri oddaljenem pogledu</string>
     <string name="shared_string_no_thanks">Ne, hvala</string>
-    <string name="basemap_missing">Osnovni zemljevid sveta (pokriva cel svet pri majhnih povečavah) ni nameščen. Priporočljivo je prejeti datoteko world_basemap_x.obf in jo namestiti.</string>
+    <string name="basemap_missing">Osnovni zemljevid sveta (pokriva cel svet pri majhnih povečavah) ni nameščen. Priporočljivo je prejeti datoteko world_basemap_x.obf za splošni pogled sveta.</string>
     <string name="vector_data_missing">Podatkov za delo brez povezave na kartici SD ni. Priporočljivo je datoteke prejeti in omogočiti navigacijo tudi v načinu brez vzpostavljene povezave.</string>
     <string name="local_index_installed">Datum shranjene različice</string>
     <string name="map_text_size_descr">Izbor velikosti besedila za imena na zemljevidu</string>
@@ -941,7 +941,7 @@ Pomembnejše lastnosti:
     <string name="search_online_address">Iskanje v povezavi</string>
     <string name="max_level_download_tile">Največje približanje pri spletnih zemljevidih</string>
     <string name="max_level_download_tile_descr">Izbira največjega približanja za prejem spletnih zemljevidov</string>
-    <string name="route_general_information">Skupna razdalja %1$s, čas potovanja %2$d h %3$d m.</string>
+    <string name="route_general_information">Skupna razdalja %1$s, čas potovanja %2$d h %3$d min.</string>
     <string name="router_service_descr">Izbira spletne ali krajevne navigacijske storitve</string>
     <string name="sd_dir_not_accessible">Shranjevalnega imenika na kartici SD ni na voljo!</string>
     <string name="download_question">Prejmi {0} – {1}?</string>
@@ -1775,7 +1775,10 @@ Shranjene sledi je mogoče objavljati kot datoteke OSM. Z uporabo vstavka je mog
     <string name="search_radius_proximity">Znotraj</string>
     <string name="osmo_device_not_found">Naprave ni mogoče najti</string>
     <string name="osmo_no_connection_msg">Ni se mogoče povezati s strežnikom OsMo:\n- Preverite internetno povezavo\n- Preverite nastavitve\n- Spremljajte novice na Twitterju: https://twitter.com/OsMomobi</string>
-    <string name="anonymous_user_hint">Brezimni uporabnik ne more:\n- Ustvariti skupin\n- Usklajevati skupin in naprav s strežnikom\n- Zasebno upravljati skupin in naprav prek spletnega vmesnika.</string>
+    <string name="anonymous_user_hint">Brezimni uporabnik ne more:
+- ustvariti skupin,
+- usklajevati skupin in naprav s strežnikom,
+- zasebno upravljati skupin in naprav prek spletnega vmesnika.</string>
     <string name="anonymous_user">Brezimni uporabnik</string>
     <string name="logged_as">Prijava kot %1$s</string>
     <string name="speed_limit_exceed">Upoštevanje omejitve hitrosti</string>
@@ -2546,4 +2549,6 @@ V kolikor naletite na težave s programom OsmAnd, prosimo, stopite v stik s skup
     <string name="coords_search">Iskanje po koordinatah</string>
     <string name="advanced_coords_search">Napredno iskanje po koordinatah</string>
     <string name="route_stops_before">%1$s se zaustavi pred</string>
+    <string name="rendering_attr_hideOverground_name">Nadzemne zgradbe</string>
+
     </resources>
