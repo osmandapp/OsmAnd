@@ -31,7 +31,7 @@
 	<string name="poi_carpet">Sklep z dywanami</string>
 	<string name="poi_chemist">Drogeria</string>
 	<string name="poi_clothes">Sklep odzieżowy</string>
-	<string name="poi_clothes_children">Sklep odzieżowy dla dzieci</string>
+	<string name="poi_clothes_children">Sklep z odzieżą dziecięcą</string>
 	<string name="poi_shoes">Sklep obuwniczy</string>
 	<string name="poi_computer">Sklep komputerowy</string>
 	<string name="poi_curtain">Sklep z zasłonami</string>
@@ -1170,7 +1170,7 @@
 	<string name="poi_tax_advisor">Biuro doradcy podatkowego</string>
 
 	<string name="poi_tourism_yes">Obiekt turystyczny</string>
-	<string name="poi_denomination_church_of_england">Kościół anglikański</string>
+	<string name="poi_denomination_church_of_england">Kościół Anglii</string>
 	<string name="poi_denomination_church_of_scotland">Kościół Szkocji</string>
 	<string name="poi_denomination_salvation_army">Armia Zbawienia</string>
 	<string name="poi_denomination_bulgarian_orthodox">Bułgarski ortodoksyjny</string>
@@ -1537,4 +1537,9 @@
 	<string name="poi_water_point">Punkt poboru wody</string>
 
 	<string name="poi_watering_place">Wodopój</string>
+	<string name="poi_smoking_dedicated">Przeznaczone dla palących</string>
+
+	<string name="poi_toll_yes">Opłata drogowa</string>
+	<string name="poi_traffic_signals_sound_walk">Z dźwiękiem, gdy przejście jest dozwolone</string>
+
 	</resources>
