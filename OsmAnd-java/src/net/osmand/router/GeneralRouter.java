@@ -334,7 +334,7 @@ public class GeneralRouter implements VehicleRouter {
 		float ts = getPenaltyTransition(segment.getRoad());
 		float prevTs = getPenaltyTransition(prev.getRoad());
 		if(prevTs != ts) {
-			if(ts > prevTs) return (ts - prevTs);
+			return Math.abs(ts - prevTs) / 2;
 		}
 //		int[] pt = prev.getRoad().getPointTypes(prevSegmentEnd);
 //		if(pt != null) {
