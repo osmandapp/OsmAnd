@@ -2468,6 +2468,6 @@ Włączenie tego widoku zmienia styl mapy na „Zima i narty”, ukazujący tere
     <string name="coords_search">Wyszukiwanie współrzędnych</string>
     <string name="advanced_coords_search">Zaawansowane wyszukiwanie współrzędnych</string>
     <string name="route_stops_before">Za %1$s przystanków</string>
-    <string name="rendering_attr_hideOverground_name">Podziemne obiekty</string>
+    <string name="rendering_attr_hideOverground_name">Nadziemne obiekty</string>
 
     </resources>
