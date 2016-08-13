@@ -280,7 +280,7 @@ public class InAppHelper {
 
 					return AndroidNetworkUtils.sendRequest(ctx,
 							"http://download.osmand.net/subscription/register.php",
-							parameters, "Requesting userId...");
+							parameters, "Requesting userId...", true);
 
 				} catch (Exception e) {
 					logError("sendRequest Error", e);
@@ -423,7 +423,7 @@ public class InAppHelper {
 
 			AndroidNetworkUtils.sendRequestAsync(ctx,
 					"http://download.osmand.net/subscription/purchased.php",
-					parameters, "Sending purchase info...", new OnRequestResultListener() {
+					parameters, "Sending purchase info...", true, new OnRequestResultListener() {
 						@Override
 						public void onResult(String result) {
 							if (result != null) {

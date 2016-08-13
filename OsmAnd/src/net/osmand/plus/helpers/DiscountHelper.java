@@ -52,7 +52,7 @@ public class DiscountHelper {
 			protected String doInBackground(Void... params) {
 				try {
 					String res = AndroidNetworkUtils.sendRequest(mapActivity.getMyApplication(),
-							"http://osmand.net/api/motd", null, "Requesting discount info...");
+							"http://osmand.net/api/motd", null, "Requesting discount info...", false);
 					return res;
 
 				} catch (Exception e) {
