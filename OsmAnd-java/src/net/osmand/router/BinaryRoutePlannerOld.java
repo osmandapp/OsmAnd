@@ -30,10 +30,7 @@ public class BinaryRoutePlannerOld {
 	
 	
 	private static double squareRootDist(int x1, int y1, int x2, int y2) {
-		// translate into meters 
-		double dy = MapUtils.convert31YToMeters(y1, y2);
-		double dx = MapUtils.convert31XToMeters(x1, x2);
-		return Math.sqrt(dx * dx + dy * dy);
+		return MapUtils.squareRootDist31(x1, y1, x2, y2);
 //		return measuredDist(x1, y1, x2, y2);
 	}
 	

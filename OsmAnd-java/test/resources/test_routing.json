@@ -90,11 +90,11 @@
   {
     "testName": "10.Longer route preferred? https://github.com/osmandapp/Osmand/issues/1941",
     "description": "short_way строит не самый короткий путь. Транзит через MEX 261 короче.",
-    "ignore" : "true",
+    "ignore" : "false",
     "params": {
       "vehicle": "car",
       "short_way": "true",
-      "planRoadDirection": "-1"
+      "planRoadDirection": "0"
     },
     "startPoint": {
       "latitude": 45.9011493841283,
@@ -110,7 +110,7 @@
   },
   {
     "testName": "12.Bizarre navigation at Sundance dr & Sentinel dr in Fremont, CA, USA https://github.com/osmandapp/Osmand/issues/1743",
-    "ignore" : "true",
+    "ignore" : "false",
     "params": {
       "vehicle": "car",
       "short_way": "true",
@@ -130,32 +130,8 @@
     }
   },
   {
-    "testName": "12.1.Bizarre navigation at Sundance dr & Sentinel dr in Fremont, CA, USA (transit2 point) https://github.com/osmandapp/Osmand/issues/1743",
-    "ignore" : "true",
-    "params": {
-      "vehicle": "car",
-      "short_way": "true",
-      "planRoadDirection": "-1"
-    },
-    "startPoint": {
-      "latitude": 45.84882743070033,
-      "longitude": 35.2621882259846
-    },
-    "transitPoint1": {
-      "latitude": 45.84813,
-      "longitude": 35.275932
-    },
-    "endPoint": {
-      "latitude": 45.847528944857174,
-      "longitude": 35.27665740251544
-    },
-    "expectedResults": {
-      "6335573": "false"
-    }
-  },
-  {
-    "testName": "12.2.Bizarre navigation at Sundance dr & Sentinel dr in Fremont, CA, USA (reverse) https://github.com/osmandapp/Osmand/issues/1743",
-    "ignore" : "true",
+    "testName": "12.1.Bizarre navigation at Sundance dr & Sentinel dr in Fremont, CA, USA (reverse) https://github.com/osmandapp/Osmand/issues/1743",
+    "ignore" : "false",
     "params": {
       "vehicle": "car",
       "short_way": "true",
