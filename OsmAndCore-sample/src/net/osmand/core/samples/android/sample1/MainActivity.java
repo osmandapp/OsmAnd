@@ -264,7 +264,7 @@ public class MainActivity extends Activity {
 					net.osmand.core.jni.LatLon latLon = Utilities.convert31ToLatLon(target31);
 					SearchSettings settings = searchUICore.getPhrase().getSettings().setOriginalLocation(
 							new LatLon(latLon.getLatitude(), latLon.getLongitude()));
-					settings = settings.setLang(LANGUAGE);
+					settings = settings.setLang(LANGUAGE, false);
 					searchUICore.updateSettings(settings);
 
 					adapter.setLocation(new LatLon(latLon.getLatitude(), latLon.getLongitude()));
