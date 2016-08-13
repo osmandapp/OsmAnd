@@ -238,7 +238,7 @@
     <string name="distance_measurement_start_editing">بدء تحرير</string>
     <string name="distance_measurement_finish_editing">الانتهاء من تحرير</string>
     <string name="distance_measurement_finish_subtrack">بدء subtrack جديدة</string>
-    <string name="distance_measurement_clear_route">مسح جميع نقاط</string>
+    <string name="distance_measurement_clear_route">مسح جميع النقاط</string>
     
     <string name="distance_measurement_load_gpx">فتح القائمة GPX</string>
     <string name="other_location">أخرى</string>
