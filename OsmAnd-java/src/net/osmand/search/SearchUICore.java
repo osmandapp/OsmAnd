@@ -1,14 +1,4 @@
 package net.osmand.search;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Iterator;
-import java.util.List;
-import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicInteger;
 
 import net.osmand.Collator;
 import net.osmand.OsmAndCollator;
@@ -35,6 +25,17 @@ import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Iterator;
+import java.util.List;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
+
 public class SearchUICore {
 
 	private static final int TIMEOUT_BETWEEN_CHARS = 200;
@@ -44,6 +45,7 @@ public class SearchUICore {
 	
 	private ThreadPoolExecutor singleThreadedExecutor;
 	private LinkedBlockingQueue<Runnable> taskQueue;
+	private Runnable onSearchStart = null;
 	private Runnable onResultsComplete = null;
 	private AtomicInteger requestNumber = new AtomicInteger();
 	private int totalLimit = -1; // -1 unlimited - not used
@@ -276,7 +278,11 @@ public class SearchUICore {
 	public SearchPhrase getPhrase() {
 		return phrase;
 	}
-	
+
+	public void setOnSearchStart(Runnable onSearchStart) {
+		this.onSearchStart = onSearchStart;
+	}
+
 	public void setOnResultsComplete(Runnable onResultsComplete) {
 		this.onResultsComplete = onResultsComplete;
 	}
@@ -325,6 +331,9 @@ public class SearchUICore {
 			@Override
 			public void run() {
 				try {
+					if (onSearchStart != null) {
+						onSearchStart.run();
+					}
 					SearchResultMatcher rm = new SearchResultMatcher(matcher, request, requestNumber, totalLimit);
 					if(TIMEOUT_BETWEEN_CHARS > 0) { 
 						Thread.sleep(TIMEOUT_BETWEEN_CHARS);

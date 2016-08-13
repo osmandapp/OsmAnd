@@ -99,6 +99,7 @@ import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
+import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController.TopToolbarControllerType;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
 
@@ -1412,6 +1413,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	public boolean isTopToolbarActive() {
 		MapInfoLayer mapInfoLayer = getMapLayers().getMapInfoLayer();
 		return mapInfoLayer.hasTopToolbar();
+	}
+
+	public TopToolbarController getTopToolbarController(TopToolbarControllerType type) {
+		MapInfoLayer mapInfoLayer = getMapLayers().getMapInfoLayer();
+		return mapInfoLayer.getTopToolbarController(type);
 	}
 
 	public void showTopToolbar(TopToolbarController controller) {

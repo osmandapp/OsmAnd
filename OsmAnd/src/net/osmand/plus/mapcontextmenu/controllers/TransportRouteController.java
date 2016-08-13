@@ -29,7 +29,7 @@ public class TransportRouteController extends MenuController {
 									final TransportStopRoute transportRoute) {
 		super(new MenuBuilder(app), pointDescription, mapActivity);
 		this.transportRoute = transportRoute;
-		toolbarController = new TransportRouteToolbarController();
+		toolbarController = new ContextMenuToolbarController(this);
 		toolbarController.setTitle(getNameStr());
 		toolbarController.setOnBackButtonClickListener(new OnClickListener() {
 			@Override
@@ -193,12 +193,5 @@ public class TransportRouteController extends MenuController {
 	private void resetRoute() {
 		TransportStopsLayer stopsLayer = getMapActivity().getMapLayers().getTransportStopsLayer();
 		stopsLayer.setRoute(null);
-	}
-
-	public static class TransportRouteToolbarController extends TopToolbarController {
-
-		public TransportRouteToolbarController() {
-			super(TopToolbarControllerType.CONTEXT_MENU);
-		}
 	}
 }
