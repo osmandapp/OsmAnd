@@ -17,6 +17,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory;
+import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController.TopToolbarControllerType;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarView;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopTextView;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
@@ -111,6 +112,10 @@ public class MapInfoLayer extends OsmandMapLayer {
 
 	public boolean hasTopToolbar() {
 		return topToolbarView.getTopController() != null;
+	}
+
+	public TopToolbarController getTopToolbarController(TopToolbarControllerType type) {
+		return topToolbarView.getController(type);
 	}
 
 	public void registerAllControls(){

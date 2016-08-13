@@ -32,6 +32,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.helpers.GpxUiHelper;
+import net.osmand.plus.mapcontextmenu.MenuController.ContextMenuToolbarController;
 import net.osmand.plus.mapcontextmenu.MenuController.MenuState;
 import net.osmand.plus.mapcontextmenu.MenuController.MenuType;
 import net.osmand.plus.mapcontextmenu.MenuController.TitleButtonController;
@@ -45,6 +46,9 @@ import net.osmand.plus.mapcontextmenu.other.ShareMenu;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.ContextMenuLayer;
 import net.osmand.plus.views.OsmandMapLayer;
+import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory;
+import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
+import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController.TopToolbarControllerType;
 import net.osmand.util.MapUtils;
 
 import java.lang.ref.WeakReference;
@@ -557,6 +561,14 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		menuController.onClose();
 		if (!showPreviousMenu() && this.menuController.getClass() == menuController.getClass()) {
 			close();
+		}
+	}
+
+	public void closeActiveToolbar() {
+		TopToolbarController toolbarController = mapActivity.getTopToolbarController(TopToolbarControllerType.CONTEXT_MENU);
+		if (toolbarController != null && toolbarController instanceof ContextMenuToolbarController) {
+			MenuController menuController = ((ContextMenuToolbarController) toolbarController).getMenuController();
+			closeToolbar(menuController);
 		}
 	}
 

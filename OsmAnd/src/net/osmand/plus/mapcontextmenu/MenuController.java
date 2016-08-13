@@ -592,4 +592,17 @@ public abstract class MenuController extends BaseMenuController {
 		return rm.getIndexFileNames().containsKey(regionName) || rm.getIndexFileNames().containsKey(roadsRegionName);
 	}
 
+	public static class ContextMenuToolbarController extends TopToolbarController {
+
+		private MenuController menuController;
+
+		public ContextMenuToolbarController(MenuController menuController) {
+			super(TopToolbarControllerType.CONTEXT_MENU);
+			this.menuController = menuController;
+		}
+
+		public MenuController getMenuController() {
+			return menuController;
+		}
+	}
 }

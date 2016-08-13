@@ -355,6 +355,15 @@ public class MapInfoWidgetsFactory {
 			}
 		}
 
+		public TopToolbarController getController(TopToolbarControllerType type) {
+			for (TopToolbarController controller : controllers) {
+				if (controller.getType() == type) {
+					return controller;
+				}
+			}
+			return null;
+		}
+
 		public void addController(TopToolbarController controller) {
 			for (Iterator ctrlIter = controllers.iterator(); ctrlIter.hasNext(); ) {
 				TopToolbarController ctrl = (TopToolbarController) ctrlIter.next();

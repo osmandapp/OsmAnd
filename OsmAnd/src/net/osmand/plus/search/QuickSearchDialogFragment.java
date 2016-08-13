@@ -37,6 +37,7 @@ import android.widget.TextView;
 import net.osmand.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.ResultMatcher;
+import net.osmand.data.City;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.osm.AbstractPoiType;
@@ -120,6 +121,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	private Float heading = null;
 	private boolean useMapCenter;
 	private boolean paused;
+	private boolean cancelPrev;
 	private boolean searching;
 	private boolean hidden;
 	private boolean foundPartialLocation;
@@ -237,6 +239,8 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 					}
 					app.getPoiFilters().clearSelectedPoiFilters();
 					app.getPoiFilters().addSelectedPoiFilter(filter);
+
+					mapActivity.getContextMenu().closeActiveToolbar();
 					showToolbar();
 					getMapActivity().refreshMap();
 					hide();
@@ -251,7 +255,11 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 								searchResult.location.getLatitude(), searchResult.location.getLongitude(),
 								searchResult.preferredZoom, pointDescription, true, searchResult.object);
 
-						showToolbar();
+						if (searchResult.object != null && searchResult.object instanceof City) {
+							hideToolbar();
+						} else {
+							showToolbar();
+						}
 						MapActivity.launchMapActivityMoveToTop(getActivity());
 						reloadHistory();
 						hide();
@@ -559,6 +567,12 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 				new LatLon(searchLatLon.getLatitude(), searchLatLon.getLongitude()));
 		settings = settings.setLang(locale, false);
 		searchUICore.updateSettings(settings);
+		searchUICore.setOnSearchStart(new Runnable() {
+			@Override
+			public void run() {
+				cancelPrev = false;
+			}
+		});
 		searchUICore.setOnResultsComplete(new Runnable() {
 			@Override
 			public void run() {
@@ -566,7 +580,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 					@Override
 					public void run() {
 						searching = false;
-						if (!paused) {
+						if (!paused && !cancelPrev) {
 							hideProgressBar();
 							if (searchUICore.isSearchMoreAvailable(searchUICore.getPhrase())) {
 								addMoreButton();
@@ -828,6 +842,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		updateToolbarButton();
 		interruptedSearch = false;
 		searching = true;
+		cancelPrev = true;
 
 		if (app.isApplicationInitializing() && text.length() > 0) {
 			app.getAppInitializer().addListener(new AppInitializeListener() {
@@ -853,7 +868,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 			@Override
 			public boolean publish(SearchResult object) {
-				if (paused) {
+				if (paused || cancelPrev) {
 					if (results.size() > 0) {
 						getResultCollection().addSearchResults(results, true, true);
 					}
@@ -897,13 +912,15 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 			@Override
 			public boolean isCancelled() {
-				return paused;
+				return paused || cancelPrev;
 			}
 		});
 
 		if (!searchMore) {
 			setResultCollection(null);
-			updateSearchResult(null, false);
+			if (!updateResult) {
+				updateSearchResult(null, false);
+			}
 		}
 		if (updateResult) {
 			updateSearchResult(c, false);
@@ -925,7 +942,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		app.runInUIThread(new Runnable() {
 			@Override
 			public void run() {
-				if (!paused) {
+				if (!paused && !cancelPrev) {
 					boolean append = getResultCollection() != null;
 					if (append) {
 						getResultCollection().addSearchResults(apiResults, false, true);
@@ -946,7 +963,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		app.runInUIThread(new Runnable() {
 			@Override
 			public void run() {
-				if (!paused) {
+				if (!paused && !cancelPrev) {
 					if (getResultCollection() != null) {
 						SearchResultCollection resCollection =
 								getResultCollection().combineWithCollection(regionResultCollection, false, true);
@@ -986,7 +1003,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 					}
 				});
 
-		if (!paused && mainSearchFragment != null) {
+		if (!paused && !cancelPrev && mainSearchFragment != null) {
 			mainSearchFragment.addListItem(moreListItem);
 		}
 	}
@@ -1077,7 +1094,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	}
 
 	private void updateLocationUI(LatLon latLon, Float heading) {
-		if (latLon != null && !paused) {
+		if (latLon != null && !paused && !cancelPrev) {
 			if (mainSearchFragment != null && searchView.getVisibility() == View.VISIBLE) {
 				mainSearchFragment.updateLocation(latLon, heading);
 			} else if (historySearchFragment != null && viewPager.getCurrentItem() == 0) {
@@ -1089,7 +1106,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	}
 
 	private void updateUseMapCenterUI() {
-		if (!paused) {
+		if (!paused && !cancelPrev) {
 			if (mainSearchFragment != null) {
 				mainSearchFragment.getListAdapter().setUseMapCenter(useMapCenter);
 			}
