@@ -90,7 +90,7 @@
 	<string name="poi_fashion">متجر أزياء</string>
 	<string name="poi_fishing">معدات الصيد</string>
 	<string name="poi_florist">محل بيع الزهور</string>
-	<string name="poi_frame">متجر إطار الصورة</string>
+	<string name="poi_frame">متجر اطارات الصور</string>
 	<string name="poi_furnace">متجر وحدات التدفئة</string>
 	<string name="poi_furniture">متجر أثاث</string>
 	<string name="poi_gift">دكان الهدايا</string>
@@ -337,4 +337,8 @@
 	<string name="poi_tower">برج</string>
 	<string name="poi_tunnel">نفق</string>
 	<string name="poi_tunnel_waterway">نفق مياه</string>
+	<string name="poi_tunnel_pedestrian">نفق ممر الراجلين</string>
+	<string name="poi_tunnel_railway">نفق سكك حديدية</string>
+	<string name="poi_river">وادي</string>
+	<string name="poi_craft_tailor">خياط</string>
 	</resources>
