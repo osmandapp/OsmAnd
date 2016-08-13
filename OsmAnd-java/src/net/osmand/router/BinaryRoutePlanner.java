@@ -4,7 +4,6 @@ import gnu.trove.map.hash.TLongObjectHashMap;
 
 import java.io.IOException;
 import java.text.MessageFormat;
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
@@ -19,7 +18,7 @@ import org.apache.commons.logging.Log;
 
 public class BinaryRoutePlanner {
 
-	private static final int TEST_ID = 31370645;
+	private static final int TEST_ID = 77031244;
 	private static final boolean TEST_SPECIFIC = false;
 
 	private static final int REVERSE_WAY_RESTRICTION_ONLY = 1024;
@@ -394,7 +393,7 @@ public class BinaryRoutePlanner {
             RouteSegment segment, TLongObjectHashMap<RouteSegment> oppositeSegments, boolean doNotAddIntersections) throws IOException {
 		final RouteDataObject road = segment.road;
 		boolean initDirectionAllowed = checkIfInitialMovementAllowedOnSegment(ctx, reverseWaySearch, visitedSegments, segment, road);
-		if (TEST_SPECIFIC && road.getId() == TEST_ID) {
+		if (TEST_SPECIFIC && road.getId() >> 6 == TEST_ID) {
 			printRoad(" ! " + +segment.distanceFromStart + " ", segment, reverseWaySearch);
 		}
 		boolean directionAllowed = initDirectionAllowed;
@@ -777,7 +776,7 @@ public class BinaryRoutePlanner {
 					next.getRoad().getPointsLength() - 1 : 0,  
 					segment, segmentPoint);
 			distFromStart += obstaclesTime;
-			if (TEST_SPECIFIC && next.road.getId() == TEST_ID) {
+			if (TEST_SPECIFIC && next.road.getId() >> 6 == TEST_ID) {
 				printRoad(" !? distFromStart=" + +distFromStart + " from " + segment.getRoad().getId() +
 						" dir=" + segment.getDirectionAssigned() +
 						" distToEnd=" + distanceToEnd +
