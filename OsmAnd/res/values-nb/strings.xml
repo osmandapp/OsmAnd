@@ -1699,4 +1699,6 @@
     <string name="route_stops_before">%1$s stopp før</string>
     <string name="coords_search">Koordinatsøk</string>
     <string name="advanced_coords_search">Avansert koordinatsøk</string>
+    <string name="rendering_attr_hideOverground_name">Objekter over bakken</string>
+
     </resources>
