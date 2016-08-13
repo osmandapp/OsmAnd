@@ -171,7 +171,6 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 			data.queryNewData(tb);
 			if(route != null) {
 				attrs.updatePaints(view, settings, tb);
-				canvas.rotate(-tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
 				try {
 					path.reset();
 					List<Way> ws = route.getForwardWays();
@@ -190,8 +189,8 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 						}
 					}
 					attrs.drawPath(canvas, path);
-				} finally {
-					canvas.rotate(tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
+				} catch (Exception e) {
+					// ignore
 				}
 			}
 			
