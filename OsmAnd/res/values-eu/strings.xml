@@ -135,7 +135,7 @@
   <string name="stop_routing_confirm">Ziur al zaude nabigazioa gelditu nahi duzula?</string>
   <string name="clear_dest_confirm">Ziur zaude zure helmuga (eta erdibideko helburuak) garbitu nahi dituzula?</string>
   <string name="precise_routing_mode_descr">Gaitu errorerik gabeko ibilbide zehatza kalkulatzeko. Distantzia motzetara dago mugatua eta motela da.</string>
-  <string name="precise_routing_mode">Bideratze zehatza (alpha)</string>
+  <string name="precise_routing_mode">Ibilbide kalkulu zehatza (alpha)</string>
   <string name="recording_context_menu_show">Erakutsi</string>
   <string name="recording_photo_description">"%1$s  %2$s argazkia"</string>
   <string name="av_def_action_picture">Argazkia atera</string>
@@ -1405,7 +1405,7 @@ Honek {1} MB behar ditu behin betiko.
     <string name="copying_osmand_files">OsmAnd fitxategiak kopiatzen…</string>
     <string name="app_mode_truck">Kamioia</string>
     <string name="guidance_preferences_descr">Nabigazio hobespenak</string>
-    <string name="routing_preferences_descr">Ibilbide hobespenak</string>
+    <string name="routing_preferences_descr">Nabigazioaren hobespenak</string>
     <string name="speech_rate_descr">TTS ahotsaren abiadura zehaztu</string>
     <string name="speech_rate">Ahots abiadura</string>
     
@@ -2384,7 +2384,7 @@ Erregistro berria burutu nahi duzu?</string>
     <string name="lang_hu_formal">Hungariera (formala)</string>
     <string name="lang_kn">Kannadara</string>
     <string name="routing_attr_height_name">Altuera muga</string>
-    <string name="disable_complex_routing_descr">"Desgaitu 2 faseetako ibilbide kalkulua  kotxe bidezko nabigaziorako"</string>
+    <string name="disable_complex_routing_descr">Desgaitu 2 faseetako ibilbide kalkulua kotxe bidezko nabigaziorako</string>
     <string name="app_modes_choose_descr">Hautatu aplikazioan ikusgai egongo diren erabilera profilak</string>
     <string name="map_widget_map_rendering">Mapen errendatzea</string>
     <string name="local_osm_changes_delete_all_confirm">%1$d OSM aldaketa ezabatuko dituzu. Ziur zaude?</string>
