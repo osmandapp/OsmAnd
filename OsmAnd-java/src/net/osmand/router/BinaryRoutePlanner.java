@@ -174,10 +174,6 @@ public class BinaryRoutePlanner {
 		return finalSegment;
 	}
 
-
-	
-
-
 	protected void checkIfGraphIsEmpty(final RoutingContext ctx, boolean allowDirection,
 			PriorityQueue<RouteSegment> graphSegments, RouteSegmentPoint pnt, TLongObjectHashMap<RouteSegment> visited,
 			String msg) {
@@ -221,7 +217,9 @@ public class BinaryRoutePlanner {
 	public RouteSegment initRouteSegment(final RoutingContext ctx, RouteSegment segment, boolean positiveDirection) {
 		if (segment.getSegmentStart() == 0 && !positiveDirection && segment.getRoad().getPointsLength() > 0) {
 			segment = loadSameSegment(ctx, segment, 1);
-		} else if (segment.getSegmentStart() == segment.getRoad().getPointsLength() - 1 && positiveDirection && segment.getSegmentStart() > 0) {
+		//} else if (segment.getSegmentStart() == segment.getRoad().getPointsLength() - 1 && positiveDirection && segment.getSegmentStart() > 0) {
+		// assymetric cause we calculate initial point differently (segmentStart means that point is between ]segmentStart-1, segmentStart]
+		} else if (segment.getSegmentStart() > 0 && positiveDirection && segment.getSegmentStart() > 0) {
 			segment = loadSameSegment(ctx, segment, segment.getSegmentStart() - 1);
 		}
 		if (segment == null) {
@@ -291,6 +289,12 @@ public class BinaryRoutePlanner {
 				endNeg.distanceToEnd = estimatedDistance;
 				graphReverseSegments.add(endNeg);
 			}
+		}
+		if (TRACE_ROUTING) {
+			printRoad("Initial segment start positive: ", startPos, false);
+			printRoad("Initial segment start negative: ", startNeg, false);
+			printRoad("Initial segment end positive: ", endPos, false);
+			printRoad("Initial segment end negative: ", endNeg, false);
 		}
 	}
 
@@ -446,7 +450,7 @@ public class BinaryRoutePlanner {
 			}
 			obstaclesTime += obstacle;
 
-			boolean alreadyVisited = checkIfOppositieSegmentWasVisited(ctx, reverseWaySearch, graphSegments, segment, oppositeSegments,
+			boolean alreadyVisited = checkIfOppositeSegmentWasVisited(ctx, reverseWaySearch, graphSegments, segment, oppositeSegments,
 					segmentPoint, segmentDist, obstaclesTime);
 			if (alreadyVisited) {
 				directionAllowed = false;
@@ -540,7 +544,7 @@ public class BinaryRoutePlanner {
 		return s.getParentRoute();
 	}
 
-	private boolean checkIfOppositieSegmentWasVisited(final RoutingContext ctx, boolean reverseWaySearch,
+	private boolean checkIfOppositeSegmentWasVisited(final RoutingContext ctx, boolean reverseWaySearch,
 			PriorityQueue<RouteSegment> graphSegments, RouteSegment segment, TLongObjectHashMap<RouteSegment> oppositeSegments,
 			int segmentPoint, float segmentDist, float obstaclesTime) {
 		RouteDataObject road = segment.getRoad();
