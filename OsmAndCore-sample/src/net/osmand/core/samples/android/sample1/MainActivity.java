@@ -341,7 +341,7 @@ public class MainActivity extends Activity {
 			}
 		}
 
-		searchUICore = new SearchUICore(app.getPoiTypes(), LANGUAGE);
+		searchUICore = new SearchUICore(app.getPoiTypes(), LANGUAGE, false);
 		searchUICore.getSearchSettings().setOfflineIndexes(Arrays.asList(files.toArray(new BinaryMapIndexReader[files.size()])));
 		searchUICore.init();
 
