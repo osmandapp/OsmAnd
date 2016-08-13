@@ -292,4 +292,29 @@
 	<string name="poi_highway_crossing">ممر الراجلين</string>
 
 	<string name="poi_post_office">مكتب بريد</string>
+	<string name="poi_water_tower">خزان مياه عمودي</string>
+	<string name="poi_bridge">جسر</string>
+
+	<string name="poi_swimming_pool">حوض سباحة</string>
+	<string name="poi_power_generator">مولد طاقة</string>
+	<string name="poi_peak">قمة جبلية</string>
+	<string name="poi_soccer">كرة القدم</string>
+	<string name="poi_bank">بنك</string>
+	<string name="poi_insurance">شركة تأمين</string>
+	<string name="poi_doctors">أطباء</string>
+	<string name="poi_military_landuse">منطقة عسكرية</string>
+	<string name="poi_military_airfield">حقل جوي عسكري</string>
+	<string name="poi_military_office">مكتب عسكري</string>
+	<string name="poi_military_naval_base">قاعدة بحرية عسكرية</string>
+	<string name="poi_clothes_military">ملابس عسكرية</string>
+
+	<string name="poi_military_checkpoint">نقطة مراقبة عسكرية</string>
+
+	<string name="poi_aerodrome_type_military">عسكرية</string>
+	<string name="poi_sand">رمل</string>
+
+	<string name="poi_resource_sand">رمل</string>
+	<string name="poi_residential">منطقة سكنية</string>
+
+	<string name="poi_industrial">منطقة صناعية</string>
 	</resources>
