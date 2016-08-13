@@ -86,7 +86,6 @@ public class RouteResultPreparationTest {
 
     @Test
     public void testLanes() throws Exception {
-
         List<RouteSegmentResult> routeSegments = fe.searchRoute(ctx, startPoint, endPoint, null);
         Set<Long> reachedSegments = new TreeSet<Long>();
         Assert.assertNotNull(routeSegments);
