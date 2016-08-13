@@ -2953,4 +2953,42 @@
 
 	<string name="poi_valley_balka">Balka</string>
 
+	<string name="poi_voltage">Spannung</string>
+	<string name="poi_generator_output_electricity">Ausgangsleistung</string>
+	<string name="poi_generator_output_electricity_yes">Ausgabe: Strom</string>
+	<string name="poi_generator_output_hot_water_yes">Ausgabe: Warmwasser</string>
+	<string name="poi_generator_output_hot_air_yes">Ausgabe: heiße Luft</string>
+	<string name="poi_generator_output_cold_water_yes">Ausgabe: kaltes Wasser</string>
+	<string name="poi_generator_output_compressed_air_yes">Ausgabe: Druckluft</string>
+	<string name="poi_generator_output_vacuum_yes">Ausgabe: Vakuum</string>
+	<string name="poi_generator_output_biogas_yes">Ausgabe: Biogas</string>
+
+	<string name="poi_display_sundial_yes">Sonnenuhr</string>
+
+	<string name="poi_support_pole">Unterstützung: Pole</string>
+	<string name="poi_support_wall_mounted">Unterstützung: Wand</string>
+	<string name="poi_support_tree">Unterstützung: Baum</string>
+	<string name="poi_support_pedestal">Unterstützung: Sockel</string>
+	<string name="poi_support_ground">Unterstützung: Boden</string>
+	<string name="poi_support_ceiling">Unterstützung: Decke</string>
+	<string name="poi_support_roof">Unterstützung: Dach</string>
+	<string name="poi_support_tower">Unterstützung: Turm</string>
+
+	<string name="poi_aquaculture">Aquakultur</string>
+	<string name="poi_aquaculture_shrimp">Aquakultur: Garnelen</string>
+	<string name="poi_aquaculture_fish">Aquakultur: Fisch</string>
+	<string name="poi_aquaculture_mussels">Aquakultur: Muscheln</string>
+
+	<string name="poi_mdf">Hauptverteiler</string>
+	<string name="poi_organic_yes">Bio-Lebensmittel: Ja</string>
+	<string name="poi_organic_no">Bio-Lebensmittel: Nein</string>
+	<string name="poi_organic_only">Nur Bio-Lebensmittel</string>
+
+	<string name="poi_diplomatic_consulate">Konsulat</string>
+	<string name="poi_diplomatic_permanent_mission">Ständige Vertretung</string>
+	<string name="poi_diplomatic_ambassadors_residence">Residenz des Botschafters</string>
+	<string name="poi_toilets_disposal_flush">Toilettenspülung: Wasserspülung</string>
+	<string name="poi_toilets_disposal_chemical">Toilettenspülung: chemisch</string>
+	<string name="poi_toilets_disposal_bucket">Toilettenspülung: Eimer</string>
+
 	</resources>
