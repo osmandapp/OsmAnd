@@ -29,6 +29,7 @@ public class AndroidNetworkUtils {
 										final String url,
 										final Map<String, String> parameters,
 										final String userOperation,
+										final boolean toastAllowed,
 										final OnRequestResultListener listener) {
 
 		new AsyncTask<Void, Void, String>() {
@@ -36,7 +37,7 @@ public class AndroidNetworkUtils {
 			@Override
 			protected String doInBackground(Void... params) {
 				try {
-					return sendRequest(ctx, url, parameters, userOperation);
+					return sendRequest(ctx, url, parameters, userOperation, toastAllowed);
 				} catch (Exception e) {
 					return null;
 				}
@@ -53,7 +54,8 @@ public class AndroidNetworkUtils {
 	}
 
 
-	public static String sendRequest(OsmandApplication ctx, String url, Map<String, String> parameters, String userOperation) {
+	public static String sendRequest(OsmandApplication ctx, String url, Map<String, String> parameters,
+									 String userOperation, boolean toastAllowed) {
 		HttpURLConnection connection = null;
 		try {
 			connection = NetworkUtils.getHttpURLConnection(url);
@@ -92,9 +94,11 @@ public class AndroidNetworkUtils {
 			}
 
 			if (connection.getResponseCode() != HttpURLConnection.HTTP_OK) {
-				String msg = userOperation
-						+ " " + ctx.getString(R.string.failed_op) + " : " + connection.getResponseMessage();
-				showToast(ctx, msg);
+				if (toastAllowed) {
+					String msg = userOperation
+							+ " " + ctx.getString(R.string.failed_op) + " : " + connection.getResponseMessage();
+					showToast(ctx, msg);
+				}
 			} else {
 				StringBuilder responseBody = new StringBuilder();
 				responseBody.setLength(0);
@@ -123,14 +127,20 @@ public class AndroidNetworkUtils {
 
 		} catch (NullPointerException e) {
 			// that's tricky case why NPE is thrown to fix that problem httpClient could be used
-			String msg = ctx.getString(R.string.auth_failed);
-			showToast(ctx, msg);
+			if (toastAllowed) {
+				String msg = ctx.getString(R.string.auth_failed);
+				showToast(ctx, msg);
+			}
 		} catch (MalformedURLException e) {
-			showToast(ctx, MessageFormat.format(ctx.getResources().getString(R.string.shared_string_action_template)
-					+ ": " + ctx.getResources().getString(R.string.shared_string_unexpected_error), userOperation));
+			if (toastAllowed) {
+				showToast(ctx, MessageFormat.format(ctx.getResources().getString(R.string.shared_string_action_template)
+						+ ": " + ctx.getResources().getString(R.string.shared_string_unexpected_error), userOperation));
+			}
 		} catch (IOException e) {
-			showToast(ctx, MessageFormat.format(ctx.getResources().getString(R.string.shared_string_action_template)
-					+ ": " + ctx.getResources().getString(R.string.shared_string_io_error), userOperation));
+			if (toastAllowed) {
+				showToast(ctx, MessageFormat.format(ctx.getResources().getString(R.string.shared_string_action_template)
+						+ ": " + ctx.getResources().getString(R.string.shared_string_io_error), userOperation));
+			}
 		} finally {
 			if (connection != null) {
 				connection.disconnect();
