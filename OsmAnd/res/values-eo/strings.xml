@@ -2416,6 +2416,6 @@ Retpaĝo: http://osmand.net
 
 Se vi bezonas helpon pri OsmAnd aplikaĵo, bonvolu kontakti nian helpantaron: support@osmand.net 
  "</string>
-    <string name="rendering_attr_hideOverground_name">Subteraj objektoj</string>
+    <string name="rendering_attr_hideOverground_name">Superteraj objektoj</string>
 
     </resources>
