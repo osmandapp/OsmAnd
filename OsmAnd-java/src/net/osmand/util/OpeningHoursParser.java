@@ -154,18 +154,18 @@ public class OpeningHoursParser {
 			for (OpeningHoursRule r : rules) {
 				if (r.containsPreviousDay(cal) && r.containsMonth(cal)) {
 					if (r.isOpenedForTime(cal, true)) {
-						ruleOpen = r.toRuleString(true);
+						ruleOpen = r.toLocalRuleString();
 					} else {
-						ruleClosed = r.toRuleString(true);
+						ruleClosed = r.toLocalRuleString();
 					}
 				}
 			}
 			for (OpeningHoursRule r : rules) {
 				if (r.containsDay(cal) && r.containsMonth(cal)) {
 					if (r.isOpenedForTime(cal, false)) {
-						ruleOpen = r.toRuleString(true);
+						ruleOpen = r.toLocalRuleString();
 					} else {
-						ruleClosed = r.toRuleString(true);
+						ruleClosed = r.toLocalRuleString();
 					}
 				}
 			}
