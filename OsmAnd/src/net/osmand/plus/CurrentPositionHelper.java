@@ -2,7 +2,6 @@ package net.osmand.plus;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -15,10 +14,8 @@ import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.GeocodingUtilities;
 import net.osmand.binary.GeocodingUtilities.GeocodingResult;
 import net.osmand.binary.RouteDataObject;
-import net.osmand.plus.resources.RegionAddressRepository;
 import net.osmand.plus.resources.ResourceManager.BinaryMapReaderResource;
 import net.osmand.plus.resources.ResourceManager.BinaryMapReaderResourceType;
-import net.osmand.plus.resources.ResourceManager.ResourceListener;
 import net.osmand.router.GeneralRouter.GeneralRouterProfile;
 import net.osmand.router.RoutePlannerFrontEnd;
 import net.osmand.router.RoutingConfiguration;
@@ -89,7 +86,6 @@ public class CurrentPositionHelper {
 					return null;
 				}
 			}.execute((Void) null);
-
 			res = true;
 		}
 		return res;

@@ -23,8 +23,10 @@ import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidSpecificRoadsCallback;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.ContextMenuLayer.ApplyMovedObjectCallback;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class ImpassableRoadsLayer extends OsmandMapLayer implements
 		ContextMenuLayer.IContextMenuProvider, ContextMenuLayer.IMoveObjectProvider {
@@ -40,6 +42,8 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 
 	private ContextMenuLayer contextMenuLayer;
 
+	private Set<PreservedRoadDataObject> mPreservedRoadDataObjects;
+
 	public ImpassableRoadsLayer(MapActivity activity) {
 		this.activity = activity;
 	}
@@ -52,15 +56,19 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 		routingHelper = activity.getRoutingHelper();
 
 		contextMenuLayer = view.getLayerByClass(ContextMenuLayer.class);
+
+		List<LatLon> impassibleRoads = activity.getMyApplication().getSettings().getImpassableRoadPoints();
+		mPreservedRoadDataObjects = new HashSet<>(impassibleRoads.size());
+		for (LatLon impassibleRoad : impassibleRoads) {
+			mPreservedRoadDataObjects.add(new PreservedRoadDataObject(impassibleRoad));
+		}
 	}
 
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 		if (contextMenuLayer.getMoveableObject() instanceof RouteDataObject) {
 			PointF pf = contextMenuLayer.getMovableCenterPoint(tileBox);
-			float left = pf.x - roadWorkIcon.getWidth() / 2;
-			float top = pf.y - roadWorkIcon.getHeight();
-			canvas.drawBitmap(roadWorkIcon, left, top, paint);
+			drawPoint(canvas, pf.x, pf.y);
 		}
 	}
 
@@ -75,13 +83,27 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 					}
 				}
 				Location location = getMissingRoadLocations().get(id);
-				float x = tileBox.getPixXFromLatLon(location.getLatitude(), location.getLongitude());
-				float y = tileBox.getPixYFromLatLon(location.getLatitude(), location.getLongitude());
-				float left = x - roadWorkIcon.getWidth() / 2;
-				float top = y - roadWorkIcon.getHeight();
-				canvas.drawBitmap(roadWorkIcon, left, top, paint);
+				final double latitude = location.getLatitude();
+				final double longitude = location.getLongitude();
+				drawPoint(canvas, tileBox, latitude, longitude);
+			}
+			for (PreservedRoadDataObject preservedRoadDataObject : mPreservedRoadDataObjects) {
+				final LatLon latLon = preservedRoadDataObject.getLatLon();
+				drawPoint(canvas, tileBox, latLon.getLatitude(), latLon.getLongitude());
 			}
 		}
+	}
+
+	private void drawPoint(Canvas canvas, RotatedTileBox tileBox, double latitude, double longitude) {
+		float x = tileBox.getPixXFromLatLon(latitude, longitude);
+		float y = tileBox.getPixYFromLatLon(latitude, longitude);
+		drawPoint(canvas, x, y);
+	}
+
+	private void drawPoint(Canvas canvas, float x, float y) {
+		float left = x - roadWorkIcon.getWidth() / 2;
+		float top = y - roadWorkIcon.getHeight();
+		canvas.drawBitmap(roadWorkIcon, left, top, paint);
 	}
 
 	public Map<Long, Location> getMissingRoadLocations() {
@@ -155,6 +177,10 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 				}
 			}
 		}
+		if (!mPreservedRoadDataObjects.isEmpty()) {
+			activity.getMyApplication().getAvoidSpecificRoads().initPreservedData();
+			mPreservedRoadDataObjects.clear();
+		}
 	}
 
 	@Override
@@ -186,7 +212,7 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 				public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked) {
 					if (itemId == R.string.avoid_road) {
 						activity.getMyApplication().getAvoidSpecificRoads().addImpassableRoad(
-								activity, latLon, false, null);
+								activity, latLon, false, null, false);
 					}
 					return true;
 				}
@@ -224,6 +250,18 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 					return callback != null && callback.isCancelled();
 				}
 			});
+		}
+	}
+
+	private static class PreservedRoadDataObject {
+		private final LatLon mLatLon;
+
+		private PreservedRoadDataObject(LatLon latLon) {
+			this.mLatLon = latLon;
+		}
+
+		public LatLon getLatLon() {
+			return mLatLon;
 		}
 	}
 }

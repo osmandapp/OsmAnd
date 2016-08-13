@@ -1609,6 +1609,10 @@ public class OsmandSettings {
 	private MapMarkersStorage mapMarkersStorage = new MapMarkersStorage();
 	private MapMarkersHistoryStorage mapMarkersHistoryStorage = new MapMarkersHistoryStorage();
 
+	private static final String IMPASSABLE_ROAD_POINTS = "impassable_road_points";
+	private static final String IMPASSABLE_ROADS_DESCRIPTIONS = "impassable_roads_descriptions";
+	private ImpassableRoadsStorage mImpassableRoadsStorage = new ImpassableRoadsStorage();
+
 	public void backupPointToStart() {
 		settingsAPI.edit(globalPreferences)
 				.putFloat(START_POINT_LAT_BACKUP, settingsAPI.getFloat(globalPreferences, START_POINT_LAT, 0))
@@ -2041,6 +2045,13 @@ public class OsmandSettings {
 		}
 	}
 
+	private class ImpassableRoadsStorage extends MapPointsStorage {
+		public ImpassableRoadsStorage() {
+			pointsKey = IMPASSABLE_ROAD_POINTS;
+			descriptionsKey = IMPASSABLE_ROADS_DESCRIPTIONS;
+		}
+	}
+
 	private abstract class MapPointsStorage {
 
 		protected String pointsKey;
@@ -2119,6 +2130,19 @@ public class OsmandSettings {
 			}
 		}
 
+		public boolean deletePoint(LatLon latLon) {
+			List<LatLon> ps = getPoints();
+			List<String> ds = getPointDescriptions(ps.size());
+			int index = ps.indexOf(latLon);
+			if (index != -1) {
+				ps.remove(index);
+				ds.remove(index);
+				return savePoints(ps, ds);
+			} else {
+				return false;
+			}
+		}
+
 		public boolean savePoints(List<LatLon> ps, List<String> ds) {
 			StringBuilder sb = new StringBuilder();
 			for (int i = 0; i < ps.size(); i++) {
@@ -2142,6 +2166,18 @@ public class OsmandSettings {
 					.putString(pointsKey, sb.toString())
 					.putString(descriptionsKey, tb.toString())
 					.commit();
+		}
+
+		public boolean movePoint(LatLon latLonEx, LatLon latLonNew) {
+			List<LatLon> ps = getPoints();
+			List<String> ds = getPointDescriptions(ps.size());
+			int i = ps.indexOf(latLonEx);
+			if (i != -1) {
+				ps.set(i, latLonNew);
+				return savePoints(ps, ds);
+			} else {
+				return false;
+			}
 		}
 	}
 
@@ -2292,6 +2328,24 @@ public class OsmandSettings {
 		return settingsAPI.edit(globalPreferences).putInt(POINT_NAVIGATE_ROUTE, NAVIGATE).commit();
 	}
 
+	public List<LatLon> getImpassableRoadPoints() {
+		return mImpassableRoadsStorage.getPoints();
+	}
+	public boolean addImpassableRoad(double latitude, double longitude) {
+		return mImpassableRoadsStorage.insertPoint(latitude, longitude, null, 0);
+	}
+
+	public boolean removeImpassableRoad(int index) {
+		return mImpassableRoadsStorage.deletePoint(index);
+	}
+
+	public boolean removeImpassableRoad(LatLon latLon) {
+		return mImpassableRoadsStorage.deletePoint(latLon);
+	}
+
+	public boolean moveImpassableRoad(LatLon latLonEx, LatLon latLonNew) {
+		return mImpassableRoadsStorage.movePoint(latLonEx, latLonNew);
+	}
 
 	/**
 	 * the location of a parked car
