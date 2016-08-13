@@ -32,12 +32,11 @@ public class BinaryRoutePlanner {
 
 
 	public static double squareRootDist(int x1, int y1, int x2, int y2) {
-		// translate into meters 
-
-		double dy = MapUtils.convert31YToMeters(y1, y2);
-		double dx = MapUtils.convert31XToMeters(x1, x2);
-		return Math.sqrt(dx * dx + dy * dy);
-//		return measuredDist(x1, y1, x2, y2);
+		if(MapUtils.squareRootDist31(x1, y1, x2, y2) - MapUtils.measuredDist31(x1, y1, x2, y2) > 5) {
+			System.out.println("x1 = " + x1 + " x2" + x2 + " y1 " + y1 + " y2 " + y2);
+		}
+		return MapUtils.squareRootDist31(x1, y1, x2, y2);
+//		return MapUtils.measuredDist31(x1, y1, x2, y2);
 	}
 
 
