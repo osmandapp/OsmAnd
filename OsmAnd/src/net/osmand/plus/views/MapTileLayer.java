@@ -205,23 +205,41 @@ public class MapTileLayer extends BaseMapLayer {
 						int xZoom = (tileX % div) * tileSize / div;
 						int yZoom = (tileY % div) * tileSize / div;
 						// nice scale
-						boolean useSampling = kzoom > 4;
-						int margin = useSampling ? 1 : 0;
-						bitmapToZoom.set(Math.max(xZoom - margin, 0), 
-								Math.max(yZoom - margin , 0), 
-								Math.min(margin + xZoom + tileSize / div, tileSize), 
-								Math.min(margin + yZoom + tileSize / div, tileSize));
+						boolean useSampling = kzoom > 3;
+						bitmapToZoom.set(Math.max(xZoom, 0), Math.max(yZoom, 0), 
+								Math.min(xZoom + tileSize / div, tileSize), 
+								Math.min(yZoom + tileSize / div, tileSize));
 						if (!useSampling) {
 							canvas.drawBitmap(bmp, bitmapToZoom, bitmapToDraw, paintBitmap);
 						} else {
+							int margin = 1;
 							int scaledSize = tileSize / div;
-							RectF src = new RectF(0.5f, 0.5f,
-									scaledSize + 2 * margin - 0.5f, scaledSize + 2 * margin - 0.5f);
-							RectF dest = new RectF(0, 0, tileSize, tileSize);
+							float innerMargin = 0.5f;
+							RectF src = new RectF(0, 0, scaledSize, scaledSize);
+							if (bitmapToZoom.left >= margin) {
+								bitmapToZoom.left -= margin;
+								src.left = innerMargin;
+								src.right += margin;
+							}
+							if (bitmapToZoom.top >= margin) {
+								bitmapToZoom.top -= margin;
+								src.top = innerMargin;
+								src.bottom += margin;
+							}
+							if (bitmapToZoom.right + margin <= tileSize) {
+								bitmapToZoom.right += margin;
+								src.right += margin - innerMargin;
+							}
+							if (bitmapToZoom.bottom + margin <= tileSize) {
+								bitmapToZoom.bottom += margin;
+								src.bottom += margin - innerMargin;
+							}
 							Matrix m = new Matrix();
+							RectF dest = new RectF(0, 0, tileSize, tileSize);
 							m.setRectToRect(src, dest, Matrix.ScaleToFit.FILL);
-							Bitmap sampled = Bitmap.createBitmap(bmp, bitmapToZoom.left, bitmapToZoom.top, 
-									scaledSize + 2 * margin - 1, scaledSize + 2 * margin - 1, m, true);
+							Bitmap sampled = Bitmap.createBitmap(bmp, 
+									bitmapToZoom.left, bitmapToZoom.top, 
+									bitmapToZoom.width(), bitmapToZoom.height(), m, true);
 							bitmapToZoom.set(0, 0, tileSize, tileSize);
 							// very expensive that's why put in the cache
 							mgr.putTileInTheCache(ordImgTile, sampled);
