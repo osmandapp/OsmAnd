@@ -9,6 +9,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.PriorityQueue;
 
+import net.osmand.OsmAndCollator;
 import net.osmand.PlatformUtil;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.osm.MapRenderingTypes;
@@ -28,7 +29,7 @@ public class BinaryRoutePlanner {
 	protected static final Log log = PlatformUtil.getLog(BinaryRoutePlanner.class);
 
 	private static final int ROUTE_POINTS = 11;
-	private static final boolean TRACE_ROUTING = false;
+	private static final boolean TRACE_ROUTING = true;
 
 
 	public static double squareRootDist(int x1, int y1, int x2, int y2) {
@@ -86,7 +87,8 @@ public class BinaryRoutePlanner {
 		TLongObjectHashMap<RouteSegment> visitedDirectSegments = new TLongObjectHashMap<RouteSegment>();
 		TLongObjectHashMap<RouteSegment> visitedOppositeSegments = new TLongObjectHashMap<RouteSegment>();
 
-		initQueuesWithStartEnd(ctx, start, end, recalculationEnd, graphDirectSegments, graphReverseSegments);
+		initQueuesWithStartEnd(ctx, start, end, recalculationEnd, graphDirectSegments, graphReverseSegments, 
+				visitedDirectSegments, visitedOppositeSegments);
 
 		// Extract & analyze segment with min(f(x)) from queue while final segment is not found
 		boolean forwardSearch = true;
@@ -244,7 +246,8 @@ public class BinaryRoutePlanner {
 
 
 	private void initQueuesWithStartEnd(final RoutingContext ctx, RouteSegment start, RouteSegment end,
-			RouteSegment recalculationEnd, PriorityQueue<RouteSegment> graphDirectSegments, PriorityQueue<RouteSegment> graphReverseSegments) {
+			RouteSegment recalculationEnd, PriorityQueue<RouteSegment> graphDirectSegments, PriorityQueue<RouteSegment> graphReverseSegments, 
+			TLongObjectHashMap<RouteSegment> visitedDirectSegments, TLongObjectHashMap<RouteSegment> visitedOppositeSegments) {
 		RouteSegment startPos = initRouteSegment(ctx, start, true);
 		RouteSegment startNeg = initRouteSegment(ctx, start, false);
 		RouteSegment endPos = initRouteSegment(ctx, end, true);
@@ -447,10 +450,9 @@ public class BinaryRoutePlanner {
 				directionAllowed = false;
 				continue;
 			}
-			obstaclesTime += obstacle;
-
 			boolean alreadyVisited = checkIfOppositeSegmentWasVisited(ctx, reverseWaySearch, graphSegments, segment, oppositeSegments,
 					segmentPoint, segmentDist, obstaclesTime);
+			obstaclesTime += obstacle;
 			if (alreadyVisited) {
 				directionAllowed = false;
 				continue;
@@ -554,9 +556,8 @@ public class BinaryRoutePlanner {
 			RouteSegment from = !reverseWaySearch ? getParentDiffId(segment) : getParentDiffId(opposite);
 			if (checkViaRestrictions(from, to)) {
 				FinalRouteSegment frs = new FinalRouteSegment(road, segmentPoint);
-				// obstacles already count on backward calculation (so don't include obstaclesTime)
 				float distStartObstacles = segment.distanceFromStart
-						+ calculateTimeWithObstacles(ctx, road, segmentDist, 0);
+						+ calculateTimeWithObstacles(ctx, road, segmentDist, obstaclesTime);
 				frs.setParentRoute(segment);
 				frs.setParentSegmentEnd(segmentPoint);
 				frs.reverseWaySearch = reverseWaySearch;
