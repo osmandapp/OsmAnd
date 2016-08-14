@@ -24,7 +24,7 @@
   {
     "testName": "5.Route depends on the distance to a junction, if routing engine takes the longer way https://github.com/osmandapp/Osmand/issues/1200",
     "description": "Подтверждается только неверный маршрут. От дистанции не зависит, но зависит от planRoadDirection. При -1 маршрут верный, при 0 - нет",
-    "ignore" : "true",
+    "ignore" : "false",
     "params": {
       "vehicle": "car",
       "short_way": "true",
