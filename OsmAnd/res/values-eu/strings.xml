@@ -838,7 +838,7 @@ Honek {1} MB behar ditu behin betiko.
   <string name="favourites_edit_dialog_name">Izena</string>
   <string name="favourites_edit_dialog_category">Kategoria</string>
   <string name="shared_string_no_thanks">Ez, milesker</string>
-  <string name="basemap_missing">Oinarrizko munduko mapa (mundu guztia estaliz zoom maila txikietan) falta da. Mesedez kontsideratu World_basemap_x.obf deskargatzea ikuspegi guztia eduki ahal izateko.</string>
+  <string name="basemap_missing">Oinarrizko munduko mapa (mundu guztia estaliz zoom maila txikietan) falta da. Mesedez kontsideratu World_basemap_x.obf deskargatzea ikuspegi globala eduki ahal izateko.</string>
   <string name="vector_data_missing">Datu lokalak (lineaz kanpokoak) ez daude SD txartelean. Lineaz kanpoko mapak erabili nahi badituzu, jaitsi beharko zenituzke.</string>
   <string name="local_index_gpx_info_show">\n\nZanpatuta mantendu aukerentzat</string>
   
@@ -1173,7 +1173,7 @@ Honek {1} MB behar ditu behin betiko.
   <string name="search_online_address">Sareko bilaketa</string>
   <string name="max_level_download_tile">Sareko zoom maximoa</string>
   <string name="max_level_download_tile_descr">Aukeratu sareko tesela mapentzat deskargatzeko zoom maila maximoa</string>
-  <string name="route_general_information">Distantzia guztira %1$s, bidai-denbora %2$d h %3$d m.</string>
+  <string name="route_general_information">Distantzia guztira %1$s, bidai-denbora %2$d h %3$d min.</string>
   <string name="router_service_descr">Aukeratu sareko edo lineaz kanpoko nabigazio zerbitzu bat</string>
   <string name="router_service">Nabigazio zerbitzua</string>
   <string name="sd_dir_not_accessible">SD txarteleko datuen karpeta ez dago erabilgarri!</string>
@@ -2540,4 +2540,6 @@ Site: http://osmand.net
 
 OsmAnd aplikazioarekin laguntza behar baduzu, jarri kontaktuan gure laguntza taldearekin: support@osmand.net. 
  "</string>
+    <string name="rendering_attr_hideOverground_name">Lur gaineko objektuak</string>
+
     </resources>
