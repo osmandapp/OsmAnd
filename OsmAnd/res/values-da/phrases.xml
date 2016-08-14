@@ -3008,7 +3008,7 @@
 
 	<string name="poi_observatory_type_espionage">Anvendelse: spionage</string>
 	<string name="poi_observatory_type_meteorological">Anvendelse: meteorologisk</string>
-	<string name="poi_observatory_type_gravitational">Anvendelse: gravitationel</string>
+	<string name="poi_observatory_type_gravitational">Anvendelse: tyngekraft</string>
 
 <string name="poi_greenhouse_horticulture">Drivhus havebrug</string>
 
