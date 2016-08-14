@@ -9,7 +9,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.PriorityQueue;
 
-import net.osmand.OsmAndCollator;
 import net.osmand.PlatformUtil;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.osm.MapRenderingTypes;
@@ -29,7 +28,7 @@ public class BinaryRoutePlanner {
 	protected static final Log log = PlatformUtil.getLog(BinaryRoutePlanner.class);
 
 	private static final int ROUTE_POINTS = 11;
-	private static final boolean TRACE_ROUTING = true;
+	private static final boolean TRACE_ROUTING = false;
 
 
 	public static double squareRootDist(int x1, int y1, int x2, int y2) {
