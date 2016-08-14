@@ -1717,4 +1717,87 @@
 	<string name="poi_square">Námestie</string>
 	<string name="poi_depth">Hĺbka</string>
 
-</resources>
+<string name="poi_traffic_mirror">Dopravné zrkadlo</string>
+
+	<string name="poi_diplomatic_consulate">Konzulát</string>
+	<string name="poi_diplomatic_consulate_general">Generálny konzulát</string>
+	<string name="poi_diplomatic_honorary_consulate">Honorárny konzulát</string>
+	<string name="poi_diplomatic_permanent_mission">Stála misia</string>
+	<string name="poi_diplomatic_delegation">Delegácia</string>
+	<string name="poi_diplomatic_ambassadors_residence">Sídlo veľvyslanca</string>
+	<string name="poi_diplomatic_high_commission">Vysoký komisariát</string>
+
+	<string name="poi_diaper_table_count">Počet prebaľovacích stolov</string>
+
+	<string name="poi_water_tank">Vodná nádrž</string>
+
+	<string name="poi_toilets_disposal_flush">Likvidácia obsahu toaliet: splachovanie</string>
+	<string name="poi_toilets_disposal_pitlatrine">Likvidácia obsahu toaliet: latrína</string>
+	<string name="poi_toilets_disposal_chemical">Likvidácia obsahu toaliet: chemické</string>
+	<string name="poi_toilets_disposal_bucket">Likvidácia obsahu toaliet: nádoba</string>
+
+	<string name="poi_length">Dĺžka</string>
+
+<string name="poi_display_yes">Zobrazovanie: áno</string>
+	<string name="poi_display_no">Zobrazovanie: nie</string>
+	<string name="poi_display_analog_yes">Analógové zobrazenie</string>
+	<string name="poi_display_digital_yes">Digitálne zobrazenie</string>
+	<string name="poi_display_sundial_yes">Slnečné hodiny</string>
+
+	<string name="poi_barometer_yes">Barometer: áno</string>
+	<string name="poi_barometer_no">Barometer: nie</string>
+	<string name="poi_thermometer_yes">Teplomer: áno</string>
+	<string name="poi_thermometer_no">Teplomer: nie</string>
+	<string name="poi_hygrometer_yes">Vlhkomer: áno</string>
+	<string name="poi_hygrometer_no">Vlhkomer: nie</string>
+	<string name="poi_date_yes">Zobrazenie dátumu: áno</string>
+	<string name="poi_date_no">Zobrazenie dátumu: nie</string>
+
+	<string name="poi_support_pole">Podpora: stĺp</string>
+	<string name="poi_support_wall_mounted">Podpora: stena</string>
+	<string name="poi_support_tree">Podpora: strom</string>
+	<string name="poi_support_pedestal">Podpora: piedestál</string>
+	<string name="poi_support_ground">Podpora: zem</string>
+	<string name="poi_support_billboard">Podpora: billboard</string>
+	<string name="poi_support_ceiling">Podpora: strop</string>
+	<string name="poi_support_suspended">Podpora: zavesené</string>
+	<string name="poi_support_roof">Podpora: strecha</string>
+	<string name="poi_support_tower">Podpora: veža</string>
+
+	<string name="poi_passenger_information_display_yes">Zobrazovanie informácií pre cestujúcich: áno</string>
+	<string name="poi_passenger_information_display_no">Zobrazovanie informácií pre cestujúcich: nie</string>
+
+	<string name="poi_voltage">Elektrické napätie</string>
+	<string name="poi_dispensing_yes">Lieky na predpis: áno</string>
+	<string name="poi_dispensing_no">Lieky na predpis: nie</string>
+
+	<string name="poi_aerodrome_type_international">Medzinárodné</string>
+	<string name="poi_aerodrome_type_regional">Regionálne</string>
+	<string name="poi_aerodrome_type_public">Civilné</string>
+	<string name="poi_aerodrome_type_military">Vojenské</string>
+	<string name="poi_aerodrome_type_military_public">Vojenské/civilné</string>
+	<string name="poi_aerodrome_type_private">Súkromné</string>
+
+	<string name="poi_salt_yes">Soľ</string>
+	<string name="poi_salt_no">Soľ: nie</string>
+	<string name="poi_wheelchair_designated">Určené pre vozíčkarov</string>
+	<string name="poi_summer_camp">Letný tábor</string>
+	<string name="poi_recreation_center">Rekreačné stredisko</string>
+
+	<string name="poi_crossing_barrier_no">Závory: nie</string>
+	<string name="poi_crossing_barrier_yes">Závory</string>
+	<string name="poi_crossing_barrier_full">Závory: plná šírka</string>
+	<string name="poi_crossing_barrier_half">Závory: polovičná šírka</string>
+	<string name="poi_crossing_barrier_double_half">Závory: dvojité v polovičnej šírke</string>
+	<string name="poi_crossing_bell_yes">Zvukový signál</string>
+	<string name="poi_crossing_bell_no">Zvukový signál: nie</string>
+	<string name="poi_crossing_light_yes">Svetelné znamenie</string>
+	<string name="poi_crossing_light_no">Svetelné znamenie: nie</string>
+	<string name="poi_crossing_on_demand_yes">Prechod na znamenie</string>
+	<string name="poi_crossing_on_demand_no">Prechod na znamenie: nie</string>
+	<string name="poi_crossing_supervision_yes">Dozor na priecestí</string>
+	<string name="poi_crossing_supervision_no">Dozor na priecestí: nie</string>
+	<string name="poi_crossing_supervision_attendant">Dozor na priecestí: dozorca</string>
+	<string name="poi_crossing_supervision_camera">Dozor na priecestí: kamera</string>
+
+	</resources>
