@@ -201,7 +201,10 @@
 	<string name="map_widget_left">Panel esquierdu</string>
 	<string name="configure_map">Configurar mapa</string>
 	<string name="anonymous_user">Usuariu anónimu</string>
-	<string name="osmo_no_connection_msg">Nun ta disponible\'l serviciu d\'OsMo:\n- comprueba la conexón;\n- comprueba los axustes;\n- visita\'l nuesu Twitter: https://twitter.com/OsMomobi</string>
+	<string name="osmo_no_connection_msg">Nun pue coneutase col serviciu OsMo:
+- comprueba la conexón;
+- comprueba los axustes;
+- visita\'l nuesu Twitter: https://twitter.com/OsMomobi</string>
 	<string name="anonymous_user_hint">Un usuariu anónimu nun pue:\n- crear grupos;\n- sincronizar grupos y preseos col sirvidor;\n- xestionar grupos y preseos nuna oficina privada.</string>
 	<string name="logged_as">Aniciesti sesión como %1$s</string>
 	<string name="text_size">Tamañu de testos</string>
@@ -271,7 +274,7 @@
 	<string name="lang_fy">Frisón</string>
 	<string name="lang_als">Albanés (Tosk)</string>
 	<string name="go_to_map">Dir al mapa</string>
-	<string name="favorite_category_dublicate_message">Yá esiste el nome de la estaya especificada. Defini otru nome, por favor.</string>
+	<string name="favorite_category_dublicate_message">Yá esiste\'l nome de la estaya especificada. Usa otru nome, por favor.</string>
 	<string name="default_speed_system">Unidá de velocidá</string>
 	<string name="nm">nmi</string>
 	<string name="nm_h">nmi/h</string>
@@ -422,4 +425,26 @@
     <string name="city_type_district">Distritu</string>
     <string name="postcode">Códigu postal</string>
     <string name="storage_directory_card">Tarxeta memoria</string>
+    <string name="coords_search">Gueta de coordenaes</string>
+    <string name="advanced_coords_search">Gueta avanzada de coordenaes</string>
+    <string name="search_categories">Estayes</string>
+    <string name="osmo_connect_to_my_nickname">Nomatu</string>
+    <string name="storage_permission_restart_is_required">Agora l\'aplicación tien permisu pa escribir nel almacenamientu esternu. Ríquese un reaniciu a mano de l\'aplicación.</string>
+    <string name="show_polygons">Amosar polígonos</string>
+    <string name="find_parking">Alcontrar aparcaderu</string>
+    <string name="shared_string_status">Estáu</string>
+    <string name="shared_string_save_changes">Guardar camudancies</string>
+    <string name="shared_string_email_address">Direición de corréu</string>
+    <string name="shared_string_type">Triba</string>
+    <string name="route_duration">Tiempu:</string>
+    <string name="shared_string_near">Cierca</string>
+    <string name="osn_close_dialog_title">Zarru de nota</string>
+    <string name="osn_reopen_dialog_title">Reapertura de nota</string>
+    <string name="osn_add_dialog_title">Creación de nota</string>
+    <string name="shared_string_commit">Unviar</string>
+
+    <string name="whats_new">Qué hai nuevo en</string>
+    <string name="shared_string_update">Anovar</string>
+    <string name="shared_string_upload">Xubir</string>
+    <string name="lang_sq">Albanés</string>
     </resources>
