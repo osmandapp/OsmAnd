@@ -2023,7 +2023,7 @@ Orain, {2} MB daude eskuragarri.</string>
     <string name="coords_format_descr">Koordenatu geografikoen formatua</string>
   	<string name="app_mode_bus">Bus</string>
  	<string name="app_mode_train">Trena</string>
-    <string name="current_track">Uneko lorratza</string>
+    <string name="current_track">Uneko arrastroa</string>
     <string name="map_widget_battery">Bateriaren maila</string>
     <string name="change_markers_position">Aldatu markatzailearen posizioa</string>
     <string name="move_marker_bottom_sheet_title">Mugitu mapa markatzailearen posizioa aldatzeko</string>
