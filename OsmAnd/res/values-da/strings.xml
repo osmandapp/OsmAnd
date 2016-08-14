@@ -2384,7 +2384,7 @@ For at vende tilbage til en af OsmAnd konventionelle kortformater, enten deaktiv
     <string name="road_blocked">Spærret vej</string>
     <string name="shared_string_remove">Fjern</string>
     <string name="data_is_not_available">Data er ikke tilgængelig</string>
-    <string name="rendering_attr_hideUnderground_name">Underjordiske objekter</string>
+    <string name="rendering_attr_hideUnderground_name">Objekter under jorden</string>
     <string name="shared_string_read_more">Læs mere</string>
     <string name="osmand_plus_extended_description_4000_chars_v2">"
 OsmAnd Maps &amp; Navigation - find steder på kortet og beregn ruter uden en internetforbindelse. Hent kort for et land, før rejsen og find steder og ruter i et ukendt område.
@@ -2616,6 +2616,6 @@ Hvis du er fan af OsmAnd og OSM og ønsker at støtte dem, er det den perfekte m
     <string name="coords_search">Koordinatsøgning</string>
     <string name="advanced_coords_search">Avanceret koordinatsøgning</string>
     <string name="route_stops_before">%1$s stop før</string>
-    <string name="rendering_attr_hideOverground_name">Overjordiske objekter</string>
+    <string name="rendering_attr_hideOverground_name">Objekter over jorden</string>
 
     </resources>
