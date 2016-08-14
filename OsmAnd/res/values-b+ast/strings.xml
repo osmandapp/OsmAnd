@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
 	<string name="av_locations">Allugamientos</string>
 	<string name="plugin_settings">Complementos</string>
 	<string name="no_updates_available">Nun hai anovamientos disponibles</string>
@@ -418,4 +419,7 @@
     <string name="route_via">Per:</string>
     <string name="route_from">Dende:</string>
 
+    <string name="city_type_district">Distritu</string>
+    <string name="postcode">Códigu postal</string>
+    <string name="storage_directory_card">Tarxeta memoria</string>
     </resources>
