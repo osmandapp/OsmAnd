@@ -1041,7 +1041,9 @@ public class ResourceManager {
 		indexFileNames.remove(fileName);
 		renderer.closeConnection(fileName);
 		BinaryMapReaderResource resource = fileReaders.remove(fileName);
-		resource.close();
+		if(resource != null) {
+			resource.close();
+		}
 	}	
 
 	public synchronized void close(){

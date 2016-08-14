@@ -572,7 +572,7 @@ public class MapUtils {
 		rect.bottom = MapUtils.get31LatitudeY((int) rect.bottom);
 		return rect;
 	}
-	
+
 	
 }
 
