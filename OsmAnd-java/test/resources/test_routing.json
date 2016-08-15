@@ -219,8 +219,8 @@
       "longitude": 35.45498698195462
     },
     "endPoint": {
-      "latitude": 45.8312297939474,
-      "longitude": 35.44244497260098
+      "latitude": 45.830605,
+      "longitude": 35.441395
     },
     "expectedResults": {
       "181495": "false"

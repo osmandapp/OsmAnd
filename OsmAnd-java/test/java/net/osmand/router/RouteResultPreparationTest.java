@@ -55,7 +55,6 @@ public class RouteResultPreparationTest {
         RoutingConfiguration.Builder builder = RoutingConfiguration.getDefault();
         Map<String, String> params = new LinkedHashMap<String, String>();
         params.put("car", "true");
-        params.put("short_way", "true");
         RoutingConfiguration config = builder.build("car", RoutingConfiguration.DEFAULT_MEMORY_LIMIT * 3, params);
         BinaryMapIndexReader[] binaryMapIndexReaders = {new BinaryMapIndexReader(raf, fl)};
         ctx = fe.buildRoutingContext(config, null, binaryMapIndexReaders,
