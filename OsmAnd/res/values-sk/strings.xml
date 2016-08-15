@@ -2394,4 +2394,6 @@ Ak potrebuje pomoc s aplikáciou OsmAnd, kontaktuje podporu: support@osmand.net.
     <string name="route_stops_before">%1$s zastávok pred</string>
     <string name="rendering_attr_hideOverground_name">Podzemné objekty</string>
 
+    <string name="shared_string_change">Zmeniť</string>
+    <string name="get_started">Začať</string>
     </resources>
