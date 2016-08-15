@@ -64,8 +64,6 @@
   },
   {
     "testName": "6.Intermediate destination is not routed on residential ways https://github.com/osmandapp/Osmand/issues/2362",
-    "description": "Не воспроизводится",
-    
     "params": {
       "vehicle": "car",
       "short_way": "true",
@@ -85,6 +83,29 @@
     },
     "expectedResults": {
       "44358491": "true"
+    }
+  },
+  {
+    "testName": "9.Routing problem: bypassing destination then backtracking to get there https://github.com/osmandapp/Osmand/issues/2182",
+    "params": {
+      "vehicle": "car",
+      "short_way": "true",
+      "planRoadDirection": "-1"
+    },
+    "startPoint": {
+      "latitude": 45.89801665781154,
+      "longitude": 35.43031065901761
+    },
+    "transitPoint": {
+      "latitude": 45.892986,
+      "longitude": 35.449814
+    },
+    "endPoint": {
+      "latitude": 45.88814493393098,
+      "longitude": 35.451634220686
+    },
+    "expectedResults": {
+      "368643371": "false"
     }
   },
   {
@@ -166,6 +187,24 @@
     },
     "expectedResults": {
       "7423385": "false"
+    }
+  },
+  {
+    "testName": "17.Offline Routing: mysterious wrong routing in Leipzig, Germany https://github.com/osmandapp/Osmand/issues/2748",
+    "params": {
+      "vehicle": "car",
+      "planRoadDirection": "-1"
+    },
+    "startPoint": {
+      "latitude": 45.85080675366101,
+      "longitude": 35.42325108489041
+    },
+    "endPoint": {
+      "latitude": 45.85135974896413,
+      "longitude": 35.419131211843535
+    },
+    "expectedResults": {
+      "28869574": "false"
     }
   }
 ]
