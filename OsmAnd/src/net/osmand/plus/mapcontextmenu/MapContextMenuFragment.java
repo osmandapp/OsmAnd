@@ -58,7 +58,7 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 	public static final float MARKER_PADDING_DP = 20f;
 	public static final float MARKER_PADDING_X_DP = 50f;
 	public static final float SKIP_HALF_SCREEN_STATE_KOEF = .21f;
-	public static final int ZOOM_IN_STANDARD = 15;
+	public static final int ZOOM_IN_STANDARD = 16;
 
 	private View view;
 	private View mainView;
