@@ -784,7 +784,7 @@ public class MapRenderRepositories {
 			if (checkWhetherInterrupted()) {
 				// revert if it was interrupted 
 				// (be smart a bit do not revert if road already drawn) 
-				if(currentRenderingContext.lastRenderedKey < 35) {
+				if(currentRenderingContext.lastRenderedKey < OsmandRenderer.DEFAULT_LINE_MAX) {
 					reuse = this.bmp;
 					this.bmp = this.prevBmp;
 					this.bmpLocation = this.prevBmpLocation;

@@ -35,17 +35,14 @@ public class DiscountHelper {
 
 
 	public static void checkAndDisplay(final MapActivity mapActivity) {
-
 		if (mBannerVisible) {
 			showDiscountBanner(mapActivity, mTitle, mDescription, mIcon, mUrl);
 		}
-
 		if (System.currentTimeMillis() - mLastCheckTime < 1000 * 60 * 60 * 24
 				|| !mapActivity.getMyApplication().getSettings().isInternetConnectionAvailable()) {
 			return;
 		}
 		mLastCheckTime = System.currentTimeMillis();
-
 		new AsyncTask<Void, Void, String>() {
 
 			@Override
@@ -54,7 +51,6 @@ public class DiscountHelper {
 					String res = AndroidNetworkUtils.sendRequest(mapActivity.getMyApplication(),
 							"http://osmand.net/api/motd", null, "Requesting discount info...", false);
 					return res;
-
 				} catch (Exception e) {
 					logError("Requesting discount info error: ", e);
 					return null;
