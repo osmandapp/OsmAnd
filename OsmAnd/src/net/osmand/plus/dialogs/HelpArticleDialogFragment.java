@@ -71,8 +71,8 @@ public class HelpArticleDialogFragment extends DialogFragment {
 		String url = getArguments().getString(URL);
 		webView = (WebView) view.findViewById(R.id.webView);
 		webView.getSettings().setJavaScriptEnabled(true);
-//		webView.getSettings().setBuiltInZoomControls(true);
-//		webView.getSettings().setDisplayZoomControls(true);
+		webView.getSettings().setBuiltInZoomControls(true);
+		webView.getSettings().setDisplayZoomControls(false);
 		webView.getSettings().setSupportZoom(true);
 
 		if (assetName != null) {
