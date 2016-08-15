@@ -1804,7 +1804,7 @@
 
 	<string name="poi_vacuum_cleaner_yes">Vysávač: áno</string>
 	<string name="poi_vacuum_cleaner_no">Vysávač: nie</string>
-	<string name="poi_car_wash_yes">Autoumyváreň: nie</string>
+	<string name="poi_car_wash_yes">Autoumyváreň: áno</string>
 
 	<string name="poi_religion">Náboženské predmety</string>
 
@@ -1827,5 +1827,64 @@
 	<string name="poi_official_name">Oficiálny názov</string>
 
 	<string name="poi_dolphin">Delfín</string>
+
+	<string name="poi_artist_name">Umelec</string>
+	<string name="poi_sculptor">Sochár</string>
+
+	<string name="poi_cross">Kríž</string>
+	<string name="poi_summit_cross">Kríž na vrchole: áno</string>
+
+	<string name="poi_temperature">Teplota</string>
+	<string name="poi_bathing_yes">Kúpanie: áno</string>
+	<string name="poi_bathing_no">Kúpanie: nie</string>
+
+	<string name="poi_boat_storage">Uskladnenie lodí</string>
+
+	<string name="poi_conveying_yes">Pohyblivé: áno</string>
+
+	<string name="poi_bridge_ref">Číslo mosta</string>
+	<string name="poi_tunnel_ref">Číslo tunela</string>
+
+	<string name="poi_ref">Referenčné číslo</string>
+
+	<string name="poi_cargo_passengers">Náklad: cestujúci</string>
+	<string name="poi_cargo_vehicle">Náklad: vozidlá</string>
+	<string name="poi_cargo_bicycle">Náklad: bicykle</string>
+	<string name="poi_cargo_container">Náklad: kontajnery</string>
+	<string name="poi_cargo_hgv">Náklad: nákladné autá</string>
+
+	<string name="poi_craft_electronics">Oprava elektroniky</string>
+	<string name="poi_fireworks">Predaj zábavnej pyrotechniky</string>
+
+	<string name="poi_aerialway_length">Dĺžka</string>
+
+	<string name="poi_lit_yes">Osvetlené: áno</string>
+	<string name="poi_service_bicycle_retail_yes">Predaj bicyklov: áno</string>
+	<string name="poi_service_bicycle_repair_yes">Oprava bicyklov: áno</string>
+	<string name="poi_service_bicycle_rental_yes">Požičovňa bicyklov: áno</string>
+	<string name="poi_service_bicycle_pump_yes">Pumpa na bicykle: áno</string>
+	<string name="poi_service_bicycle_diy_yes">Nástroje na opravu bicyklov: áno</string>
+	<string name="poi_service_bicycle_cleaning_yes">Čistenie bicyklov: áno</string>
+	<string name="poi_service_bicycle_second_hand_yes">Predaj použitých bicyklov: áno</string>
+	<string name="poi_washing_machine_yes">Práčka: áno</string>
+	<string name="poi_shower_yes">Sprcha: áno</string>
+	<string name="poi_caravans_yes">Karavany: áno</string>
+	<string name="poi_power_supply_yes">Zdroj elektriny: áno</string>
+	<string name="poi_handrail_yes">Držadlo: áno</string>
+	<string name="poi_ramp_yes">Rampa: áno</string>
+	<string name="poi_ramp_wheelchair_yes">Rampa pre invalidné vozíky: áno</string>
+	<string name="poi_ramp_stroller_yes">Rampa pre detské kočíky: áno</string>
+	<string name="poi_ramp_bicycle_yes">Rampa pre bicykle: áno</string>
+	<string name="poi_ramp_luggage_yes">Rampa pre batožinu: áno</string>
+	<string name="poi_defibrillator_yes">Defibrilátor: áno</string>
+
+	<string name="poi_microwave_oven_yes">Mikrovlnka: áno</string>
+	<string name="poi_water_heater_yes">Ohrievač vody: áno</string>
+	<string name="poi_compressed_air_yes">Stlačený vzduch: áno</string>
+	<string name="poi_button_operated_yes">Dopytové tlačidlo: áno</string>
+	<string name="poi_free_flying_paragliding_yes">Paragliding: áno</string>
+	<string name="poi_organic_yes">Biopotraviny: áno</string>
+	<string name="poi_organic_no">Biopotraviny: nie</string>
+	<string name="poi_organic_only">Len biopotraviny</string>
 
 	</resources>
