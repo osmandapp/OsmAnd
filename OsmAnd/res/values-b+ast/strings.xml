@@ -492,4 +492,34 @@ Llo %2$s</string>
     <string name="av_audio_format_descr">Esbilla la calidá de salida d\'audiu</string>
     <string name="av_audio_bitrate_descr">Esbilla la tasa de bits d\'audiu</string>
     <string name="access_from_map_description">El botón de menu llancia\'l cuadru de mandos, non el menú</string>
+    <string name="show_on_start_description">«Off» llancia direutamente la pantalla\'l mapa</string>
+    <string name="default_speed_system_descr">Define la unidá de velocidá</string>
+    <string name="osmand_parking_plugin_description">El complementu de posición d\'aparcaderu déxate memorizar u ta aparcáu\'l to coche y cuantu tiempu-y queda (si hai llende de tiempu).
+
+L\'allugamientu y tiempu son visibles nel cuadru de mandos d\'OsmAnd tamién nel widget sobro la pantalla\'l mapa. Pue amestase una alarma nel calendariu d\'Android como recordatoriu.</string>
+    <string name="version_settings_descr">Baxa versiones nightly</string>
+    <string name="enable_proxy_descr">Configura\'l proxy HTTP pa toles solicitúes de rede</string>
+    <string name="proxy_port_descr">Configura\'l to númberu del proxy (exem: 8118)</string>
+    <string name="show_zoom_buttons_navigation_descr">Amuesa los botones de zoom na navegación</string>
+    <string name="osmand_parking_position_description">L\'allugamientu\'l to coche aparcáu. %1$s</string>
+    <string name="navpoint_search_desc">Coordenaes</string>
+    <string name="gpx_description_txt">Descripción</string>
+    <string name="support_new_features_descr">Dona pa ver les carauterístiques nueves implementaes na aplicación</string>
+    <string name="prefs_plugins_descr">Los complementos avanzaos activen los axustes y funcionalides avanzaes</string>
+    <string name="accessibility_mode_descr">Activa les carauterístiques d\'accesibilidá</string>
+    <string name="accessibility_preferences_descr">Preferencies rellacionaes cola accesibilidá</string>
+    <string name="local_openstreetmap_descr_title">Edición d\'OSM asíncrona:</string>
+    <string name="osmand_service_descr">OsmAnd execútase de fondu entrín tea la pantalla apagada</string>
+    <string name="background_router_service_descr">Executa OsmAnd de fondu pa rastrexar la to posición entrín la pantalla tea apagada</string>
+    <string name="app_description">Aplicación de navegación</string>
+    <string name="plugin_description_title">Descripción</string>
+    <string name="faq_item_description">Entrugues más frecuentes</string>
+    <string name="route_stops_before">%1$s paraes enantes</string>
+    <string name="number_of_edits">Númberu d\'ediciones</string>
+    <string name="morning">Mañana</string>
+    <string name="night">Nueche</string>
+    <string name="weekly">Selmanalmente</string>
+    <string name="daily">Diariamente</string>
+    <string name="missing_write_external_storage_permission">L\'aplicación nun tien permisos pa usar la tarxeta SD</string>
+    <string name="only_download_over_wifi">Namái baxar sobro WiFi</string>
     </resources>
