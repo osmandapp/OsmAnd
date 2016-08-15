@@ -1,5 +1,6 @@
 package net.osmand.plus.dialogs;
 
+
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
@@ -51,7 +52,31 @@ public class FavoriteDialogs {
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				FavouritePoint fp = favouritesAdapter.getItem(position);
+				confirmReplace(activity, args, helper, favouritesAdapter, dlgHolder, position);
+			}
+			
+		};
+		if (activity instanceof MapActivity) {
+			favouritesAdapter.updateLocation(((MapActivity) activity).getMapLocation());
+		}
+		if(points.size() == 0){
+			Toast.makeText(activity, activity.getString(R.string.fav_points_not_exist), Toast.LENGTH_SHORT).show();
+			return null;
+		}
+		return showFavoritesDialog(activity, favouritesAdapter, click, null, dlgHolder, true);
+	}
+	
+	private static void confirmReplace(final Activity activity, final Bundle args, final FavouritesDbHelper helper,
+			final FavouritesAdapter favouritesAdapter, final Dialog[] dlgHolder, int position) {
+		AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+		builder.setTitle(R.string.update_existing);
+		final FavouritePoint fp = favouritesAdapter.getItem(position);
+		builder.setMessage(activity.getString(R.string.replace_favorite_confirmation, fp.getName()));
+		builder.setNegativeButton(R.string.shared_string_yes, null);
+		builder.setPositiveButton(R.string.shared_string_yes, new OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
 				if(dlgHolder != null && dlgHolder.length > 0 && dlgHolder[0] != null) {
 					dlgHolder[0].dismiss();
 				}
@@ -64,18 +89,10 @@ public class FavoriteDialogs {
 				}
 				if (activity instanceof MapActivity) {
 					((MapActivity) activity).getMapView().refreshMap();
-				}
+				}				
 			}
-		};
-		if (activity instanceof MapActivity) {
-			favouritesAdapter.updateLocation(((MapActivity) activity).getMapLocation());
-		}
-		final String[] names = new String[points.size()];
-		if(points.size() == 0){
-			Toast.makeText(activity, activity.getString(R.string.fav_points_not_exist), Toast.LENGTH_SHORT).show();
-			return null;
-		}
-		return showFavoritesDialog(activity, favouritesAdapter, click, null, dlgHolder, true);
+		});
+		builder.show();
 	}
 	
 	public static void prepareAddFavouriteDialog(Activity activity, Dialog dialog, Bundle args, double lat, double lon, PointDescription desc) {
