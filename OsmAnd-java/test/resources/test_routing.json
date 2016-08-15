@@ -206,5 +206,24 @@
     "expectedResults": {
       "28869574": "false"
     }
+  },
+  {
+    "testName": "18.navi-problem by 'shortes' way https://github.com/osmandapp/Osmand/issues/1778",
+    "params": {
+      "vehicle": "car",
+      "short_way": "true",
+      "planRoadDirection": "-1"
+    },
+    "startPoint": {
+      "latitude": 45.84411619580555,
+      "longitude": 35.45498698195462
+    },
+    "endPoint": {
+      "latitude": 45.8312297939474,
+      "longitude": 35.44244497260098
+    },
+    "expectedResults": {
+      "181495": "false"
+    }
   }
 ]
