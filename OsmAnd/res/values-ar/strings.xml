@@ -2526,4 +2526,6 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
  "</string>
     <string name="rendering_attr_hideOverground_name">الأشياء ما فوق الأرض</string>
 
+    <string name="shared_string_change">تغيير</string>
+    <string name="get_started">باشر</string>
     </resources>
