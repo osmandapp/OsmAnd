@@ -522,4 +522,41 @@ L\'allugamientu y tiempu son visibles nel cuadru de mandos d\'OsmAnd tamién nel
     <string name="daily">Diariamente</string>
     <string name="missing_write_external_storage_permission">L\'aplicación nun tien permisos pa usar la tarxeta SD</string>
     <string name="only_download_over_wifi">Namái baxar sobro WiFi</string>
+    <string name="application_dir_description">Escueyi u quies guardar los mapes.</string>
+
+    <string name="index_name_voice">Avisos per voz (grabaos, carauterístiques llimitaes)</string>
+    <string name="index_name_tts_voice">Avisos per TTS (prefiríos)</string>
+    <string name="audionotes_location_not_defined">Entá nun se definió l\'allugamientu p\'asociar cola nota. «Usar allugamientu...» p\'asignar una nota al allugamientu especificáu</string>
+    <string name="show_point_options">Usar allugamientu…</string>
+    <string name="local_recordings_delete_all_confirm">Vas desaniciar %1$d notes. ¿Tas seguru?</string>
+    <string name="local_osm_changes_upload_all_confirm">Vas xubir %1$d camudancies a OSM. ¿Tas seguru?</string>
+    <string name="shared_string_go">Dir</string>
+    <string name="short_location_on_map">Lla %1$s
+ Llo %2$s</string>
+    <string name="tips_and_tricks_descr">Entrugues más frecuentes, camudacies recientes y otro</string>
+    <string name="shared_string_map">Mapa</string>
+    <string name="shared_string_favorite">Favoritu</string>
+    <string name="shared_string_favorites">Favoritos</string>
+    <string name="shared_string_address">Direición</string>
+    <string name="shared_string_add">Amestar</string>
+    <string name="shared_string_add_to_favorites">Amestar a favoritos</string>
+    <string name="record_plugin_name">Grabación de viaxe</string>
+	<string name="audionotes_plugin_description">El complementu de notes d\'audiu/videu apurre la funcionalidá de facer notes d\'audiu/semeyes/videu nun viaxe, usando un botón na pantalla\'l mapa o direutamente dende\'l menú contestual pa cualesquier posición nel mapa.</string>
+    <string name="free">"Llibre %1$s "</string>
+    <string name="remove_the_tag">DESANICIAR ETIQUETA</string>
+    <string name="show_pedestrian_warnings">Pasos peatones</string>
+    <string name="background_service_is_enabled_question">Entá ta executándose\'l serviciu de fondu d\'OsmAnd. ¿Quies paralu tamién?</string>
+    <string name="monitoring_settings">Grabación de viaxe</string>
+    <string name="monitoring_settings_descr">Configura cómo grabar los tos viaxes</string>
+    <string name="int_hour">h</string>
+    <string name="index_tours">Percorríos</string>
+    <string name="rendering_attr_hideText_name">Testu</string>
+    <string name="rendering_attr_moreDetailed_name">Más detalles</string>
+    <string name="rendering_attr_lessDetailed_name">Dellos detalles</string>
+    <string name="osmo_auth_error_short">Falló l\'autorización</string>
+    <string name="gpx_info_distance">"Distancia: %1$s (%2$s puntos) "</string>
+    <string name="gpx_selection_segment_title">Segmentu</string>
+    <string name="gpx_selection_number_of_points">" %1$s puntos"</string>
+    <string name="gpx_selection_point">Puntu %1$s</string>
+    <string name="osmo_share_session">Compartir sesión</string>
     </resources>
