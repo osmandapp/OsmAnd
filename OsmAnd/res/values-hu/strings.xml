@@ -2607,4 +2607,7 @@ Weboldal: http://osmand.net
 
 Ha segítségre van szükséged az OsmAnd alkalmazással kapcsolatban, keresd a támogatói csoportunkat: support@osmand.net. 
  "</string>
+    <string name="rendering_attr_hideOverground_name">Felszíni objektumok</string>
+    <string name="shared_string_change">Módosítás</string>
+    <string name="get_started">Kezdj hozzá</string>
     </resources>
