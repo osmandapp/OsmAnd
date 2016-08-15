@@ -200,9 +200,16 @@ public class DownloadIndexesThread {
 		}
 		return i;
 	}
-	
+
+	public void runReloadIndexFilesSilent() {
+		if (checkRunning(true)) {
+			return;
+		}
+		execute(new ReloadIndexesTask());
+	}
+
 	public void runReloadIndexFiles() {
-		if (checkRunning()) {
+		if (checkRunning(false)) {
 			return;
 		}
 		execute(new ReloadIndexesTask());
@@ -210,7 +217,7 @@ public class DownloadIndexesThread {
 
 	public void runDownloadFiles(IndexItem... items) {
 		if (getCurrentRunningTask() instanceof ReloadIndexesTask) {
-			if(checkRunning()) {
+			if(checkRunning(false)) {
 				return;
 			}	
 		}
@@ -271,9 +278,11 @@ public class DownloadIndexesThread {
 	
 	/// PRIVATE IMPL
 
-	private boolean checkRunning() {
+	private boolean checkRunning(boolean silent) {
 		if (getCurrentRunningTask() != null) {
-			Toast.makeText(app, R.string.wait_current_task_finished, Toast.LENGTH_SHORT).show();
+			if (!silent) {
+				Toast.makeText(app, R.string.wait_current_task_finished, Toast.LENGTH_SHORT).show();
+			}
 			return true;
 		}
 		return false;

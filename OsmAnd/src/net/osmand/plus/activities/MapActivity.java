@@ -37,6 +37,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import net.osmand.IndexConstants;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
@@ -54,7 +55,7 @@ import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.AppInitializer.InitEvents;
 import net.osmand.plus.ApplicationMode;
-import net.osmand.plus.FirstUsageFragment;
+import net.osmand.plus.firstusage.FirstUsageWelcomeFragment;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.MapMarkersHelper.MapMarkerChangedListener;
 import net.osmand.plus.OsmAndConstants;
@@ -74,6 +75,7 @@ import net.osmand.plus.dialogs.WhatsNewDialogFragment;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.ui.DataStoragePlaceDialogFragment;
+import net.osmand.plus.firstusage.FirstUsageWizardFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.DiscountHelper;
 import net.osmand.plus.helpers.ExternalApiHelper;
@@ -106,6 +108,7 @@ import net.osmand.util.Algorithms;
 import org.apache.commons.logging.Log;
 
 import java.io.File;
+import java.io.FileFilter;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -272,11 +275,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 		mapView.refreshMap(true);
 
-		if (getMyApplication().getAppInitializer().isFirstTime() && FirstUsageFragment.SHOW) {
-			FirstUsageFragment.SHOW = false;
+		if ((getMyApplication().getAppInitializer().isFirstTime() || !app.getResourceManager().isAnyMapIstalled()) && FirstUsageWelcomeFragment.SHOW) {
+			FirstUsageWelcomeFragment.SHOW = false;
 			getSupportFragmentManager().beginTransaction()
-					.add(R.id.fragmentContainer, new FirstUsageFragment(),
-							FirstUsageFragment.TAG).commit();
+					.add(R.id.fragmentContainer, new FirstUsageWelcomeFragment(),
+							FirstUsageWelcomeFragment.TAG).commit();
 		}
 		mapActions.updateDrawerMenu();
 		drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -1249,6 +1252,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	// DownloadEvents
 	@Override
 	public void newDownloadIndexes() {
+		FirstUsageWizardFragment wizardFragment = (FirstUsageWizardFragment) getSupportFragmentManager().findFragmentByTag(FirstUsageWizardFragment.TAG);
+		if (wizardFragment != null && !wizardFragment.isDetached()) {
+			wizardFragment.newDownloadIndexes();
+		}
 		WeakReference<MapContextMenuFragment> fragmentRef = getContextMenu().findMenuFragment();
 		if (fragmentRef != null) {
 			fragmentRef.get().newDownloadIndexes();
@@ -1258,6 +1265,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	@Override
 	public void downloadInProgress() {
+		FirstUsageWizardFragment wizardFragment = (FirstUsageWizardFragment) getSupportFragmentManager().findFragmentByTag(FirstUsageWizardFragment.TAG);
+		if (wizardFragment != null && !wizardFragment.isDetached()) {
+			wizardFragment.downloadInProgress();
+		}
 		WeakReference<MapContextMenuFragment> fragmentRef = getContextMenu().findMenuFragment();
 		if (fragmentRef != null) {
 			fragmentRef.get().downloadInProgress();
@@ -1266,6 +1277,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	@Override
 	public void downloadHasFinished() {
+		FirstUsageWizardFragment wizardFragment = (FirstUsageWizardFragment) getSupportFragmentManager().findFragmentByTag(FirstUsageWizardFragment.TAG);
+		if (wizardFragment != null && !wizardFragment.isDetached()) {
+			wizardFragment.downloadHasFinished();
+		}
 		WeakReference<MapContextMenuFragment> fragmentRef = getContextMenu().findMenuFragment();
 		if (fragmentRef != null) {
 			fragmentRef.get().downloadHasFinished();
@@ -1287,6 +1302,12 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				&& Manifest.permission.WRITE_EXTERNAL_STORAGE.equals(permissions[0])) {
 			permissionAsked = true;
 			permissionGranted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
+
+		} else if (requestCode == FirstUsageWizardFragment.FIRST_USAGE_LOCATION_PERMISSION) {
+			FirstUsageWizardFragment wizardFragment = (FirstUsageWizardFragment) getSupportFragmentManager().findFragmentByTag(FirstUsageWizardFragment.TAG);
+			if (wizardFragment != null && !wizardFragment.isDetached()) {
+				wizardFragment.processLocationPermission(grantResults[0] == PackageManager.PERMISSION_GRANTED);
+			}
 		}
 
 		super.onRequestPermissionsResult(requestCode, permissions, grantResults);

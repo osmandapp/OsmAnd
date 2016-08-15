@@ -11,6 +11,18 @@
     -->
 
     <!-- Not translatable -->
+    <string name="search_map">Searching map…</string>
+    <string name="first_usage_wizard_desc">We would like to determine your location and suggest to download map of this region.</string>
+    <string name="location_not_found">Location not found</string>
+    <string name="no_inet_connection">No internet connection</string>
+    <string name="no_inet_connection_desc_map">Required to download the map</string>
+    <string name="search_location">Searching location…</string>
+    <string name="storage_free_space">Free space</string>
+    <string name="storage_place_description">OsmAnd holds the data (maps, tracks, etc.) in the %1$s.</string>
+    <string name="give_permission">Give permission</string>
+    <string name="allow_access_location">Allow access to location</string>
+    <string name="maps_and_navigation">Maps &amp; Navigation</string>
+    <string name="first_usage_greeting">Get directions, discover new places, without internet connection</string>
     <string name="osm_live">OSM Live (Beta)</string>
     <string name="ga_api_key">UA-28342846-2</string>
     <string name="ga_dispatchPeriod">10</string>

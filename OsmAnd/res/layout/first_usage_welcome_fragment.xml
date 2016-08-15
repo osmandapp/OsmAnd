@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:osmand="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clickable="true"
+    android:theme="@style/OsmandLightTheme">
+
+    <ImageView
+        android:id="@+id/background_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/osmand_orange"
+        android:scaleType="centerCrop"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/color_transparent"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:orientation="vertical"
+        android:paddingLeft="40dp"
+        android:paddingRight="40dp"
+        android:paddingTop="@dimen/first_usage_title_margin">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@drawable/icon"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginLeft="2dp">
+
+                <net.osmand.plus.widgets.TextViewEx
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="smAnd"
+                    android:textColor="@color/color_white"
+                    android:textSize="@dimen/first_usage_title_text_size"
+                    android:textStyle="bold"
+                    osmand:typeface="@string/font_roboto_regular"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-thin"
+                    android:layout_marginLeft="2dp"
+                    android:text="@string/maps_and_navigation"
+                    android:textColor="@color/color_white"
+                    android:textSize="@dimen/first_usage_subtitle_text_size"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+        <net.osmand.plus.widgets.TextViewEx
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/first_usage_greeting"
+            android:textColor="@color/color_white"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:textSize="@dimen/first_usage_subtitle_text_size"
+            android:textStyle="bold"
+            osmand:typeface="@string/font_roboto_regular"/>
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/start_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/first_usage_title_margin_bottom"
+            android:background="@drawable/btn_round_blue"
+            android:padding="14dp"
+            android:text="@string/get_started"
+            android:textColor="@color/color_white"/>
+
+    </LinearLayout>
+
+</FrameLayout>

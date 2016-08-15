@@ -16,7 +16,6 @@ import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.mapcontextmenu.controllers.TransportStopController.TransportStopRoute;
 import net.osmand.plus.views.TransportStopsLayer;
-import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
 
 import java.lang.ref.WeakReference;
 import java.util.List;
@@ -147,7 +146,8 @@ public class TransportRouteController extends MenuController {
 
 							@Override
 							public void onClick(View arg0) {
-								showMenuAndRoute(latLon, false);
+								MapContextMenu menu = getMapActivity().getContextMenu();
+								menu.showOrUpdate(latLon, getPointDescription(), transportRoute);
 							}
 						});
 			}
