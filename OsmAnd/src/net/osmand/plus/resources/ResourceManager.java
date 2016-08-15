@@ -2,6 +2,7 @@ package net.osmand.plus.resources;
 
 
 import java.io.File;
+import java.io.FileFilter;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -1091,7 +1092,18 @@ public class ResourceManager {
 	public boolean containsBasemap(){
 		return !basemapFileNames.isEmpty();
 	}
-	
+
+	public boolean isAnyMapIstalled() {
+		File appPath = context.getAppPath(null);
+		File[] maps = appPath.listFiles(new FileFilter() {
+			@Override
+			public boolean accept(File pathname) {
+				return pathname.getName().endsWith(IndexConstants.BINARY_MAP_INDEX_EXT);
+			}
+		});
+		return maps != null && maps.length > 0;
+	}
+
 	public Map<String, String> getBackupIndexes(Map<String, String> map) {
 		File file = context.getAppPath(IndexConstants.BACKUP_INDEX_DIR);
 		if (file != null && file.isDirectory()) {

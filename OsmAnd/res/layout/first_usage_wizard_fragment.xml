@@ -1,0 +1,809 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:osmand="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/ctx_menu_info_view_bg"
+    android:clickable="true"
+    android:orientation="vertical"
+    android:paddingTop="8dp"
+    android:theme="@style/OsmandLightTheme">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:layout_width="54dp"
+                    android:layout_height="44dp"
+                    android:scaleType="center"
+                    android:src="@drawable/icon_small"/>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/wizard_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/shared_string_download_map"
+                        android:textColor="?android:attr/textColorPrimary"
+                        android:textSize="@dimen/first_usage_subtitle_text_size"
+                        android:textStyle="bold"/>
+
+                </LinearLayout>
+
+                <android.support.v7.widget.AppCompatButton
+                    android:id="@+id/skip_button"
+                    style="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:text="@string/shared_string_skip"
+                    android:textColor="@color/color_dialog_buttons_light"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/wizard_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="54dp"
+                android:layout_marginRight="54dp"
+                android:layout_marginTop="10dp"
+                android:minHeight="106dp"
+                android:text="@string/first_usage_wizard_desc"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textSize="@dimen/default_list_text_size"/>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/no_location_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginTop="24dp"
+                android:visibility="gone"
+                osmand:cardBackgroundColor="@color/color_white">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="48dp"
+                        android:orientation="horizontal">
+
+                        <android.support.v7.widget.AppCompatImageView
+                            android:id="@+id/no_location_icon"
+                            android:layout_width="54dp"
+                            android:layout_height="60dp"
+                            android:scaleType="center"
+                            android:src="@drawable/ic_action_location_off"
+                            android:tint="@color/icon_color"/>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="14dp"
+                            android:layout_marginTop="14dp"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="14dp"
+                                android:gravity="center_vertical"
+                                android:minHeight="35dp"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/no_location_title"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/location_not_found"
+                                    android:textColor="?android:attr/textColorPrimary"
+                                    android:textSize="@dimen/default_list_text_size"/>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/dashboard_divider_light"/>
+
+                    <android.support.v7.widget.AppCompatButton
+                        android:id="@+id/no_location_action_button"
+                        style="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:minHeight="47dp"
+                        android:text="@string/try_again"
+                        android:textColor="@color/color_dialog_buttons_light"/>
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/no_inet_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginTop="24dp"
+                android:visibility="gone"
+                osmand:cardBackgroundColor="@color/color_white">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="48dp"
+                        android:orientation="horizontal">
+
+                        <android.support.v7.widget.AppCompatImageView
+                            android:id="@+id/no_inet_icon"
+                            android:layout_width="54dp"
+                            android:layout_height="60dp"
+                            android:scaleType="center"
+                            android:src="@drawable/ic_action_wifi_off"
+                            android:tint="@color/icon_color"/>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="14dp"
+                            android:layout_marginTop="14dp"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="14dp"
+                                android:gravity="center_vertical"
+                                android:minHeight="35dp"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/no_inet_title"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/no_inet_connection"
+                                    android:textColor="?android:attr/textColorPrimary"
+                                    android:textSize="@dimen/default_list_text_size"/>
+
+                                <TextView
+                                    android:id="@+id/no_inet_desc"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="2dp"
+                                    android:text="@string/no_inet_connection_desc_map"
+                                    android:textColor="?android:attr/textColorSecondary"
+                                    android:textSize="@dimen/default_sub_text_size"/>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/dashboard_divider_light"/>
+
+                    <android.support.v7.widget.AppCompatButton
+                        android:id="@+id/no_inet_action_button"
+                        style="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:minHeight="47dp"
+                        android:text="@string/try_again"
+                        android:textColor="@color/color_dialog_buttons_light"/>
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/search_location_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginTop="24dp"
+                android:visibility="gone"
+                osmand:cardBackgroundColor="@color/color_white">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="48dp"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="54dp"
+                            android:layout_height="60dp"
+                            android:gravity="center">
+
+                            <ProgressBar
+                                android:id="@+id/search_location_progress_bar"
+                                android:layout_width="32dp"
+                                android:layout_height="32dp"
+                                android:layout_marginRight="8dp"
+                                android:indeterminate="true"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="14dp"
+                            android:layout_marginTop="14dp"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="14dp"
+                                android:gravity="center_vertical"
+                                android:minHeight="35dp"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/search_location_title"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/search_location"
+                                    android:textColor="?android:attr/textColorPrimary"
+                                    android:textSize="@dimen/default_list_text_size"/>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <android.support.v7.widget.AppCompatButton
+                        android:id="@+id/search_location_action_button"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/btn_round_blue_bottom"
+                        android:enabled="false"
+                        android:gravity="center"
+                        android:minHeight="48dp"
+                        android:text="@string/shared_string_download"
+                        android:textColor="@color/color_white"/>
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/search_map_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginTop="24dp"
+                android:visibility="gone"
+                osmand:cardBackgroundColor="@color/color_white">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="48dp"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="54dp"
+                            android:layout_height="60dp"
+                            android:gravity="center">
+
+                            <ProgressBar
+                                android:id="@+id/search_map_progress_bar"
+                                android:layout_width="32dp"
+                                android:layout_height="32dp"
+                                android:layout_marginRight="8dp"
+                                android:indeterminate="true"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="14dp"
+                            android:layout_marginTop="14dp"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="14dp"
+                                android:gravity="center_vertical"
+                                android:minHeight="35dp"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/search_map_title"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/search_map"
+                                    android:textColor="?android:attr/textColorPrimary"
+                                    android:textSize="@dimen/default_list_text_size"/>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <android.support.v7.widget.AppCompatButton
+                        android:id="@+id/search_map_action_button"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/btn_round_blue_bottom"
+                        android:enabled="false"
+                        android:gravity="center"
+                        android:minHeight="48dp"
+                        android:text="@string/shared_string_download"
+                        android:textColor="@color/color_white"/>
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/map_download_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginTop="24dp"
+                android:visibility="gone"
+                osmand:cardBackgroundColor="@color/color_white">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="48dp"
+                        android:orientation="horizontal">
+
+                        <android.support.v7.widget.AppCompatImageView
+                            android:id="@+id/map_download_icon"
+                            android:layout_width="54dp"
+                            android:layout_height="60dp"
+                            android:scaleType="center"
+                            android:src="@drawable/ic_map"
+                            android:tint="@color/icon_color"/>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="14dp"
+                            android:layout_marginTop="14dp"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="14dp"
+                                android:gravity="center_vertical"
+                                android:minHeight="35dp"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/map_download_title"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="?android:attr/textColorPrimary"
+                                    android:textSize="@dimen/default_list_text_size"
+                                    tools:text="The Netherlands"/>
+
+                                <TextView
+                                    android:id="@+id/map_download_desc"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="2dp"
+                                    android:textColor="?android:attr/textColorSecondary"
+                                    android:textSize="@dimen/default_sub_text_size"
+                                    tools:text="255 MB"/>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <android.support.v7.widget.AppCompatButton
+                        android:id="@+id/map_download_action_button"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/btn_round_blue_bottom"
+                        android:gravity="center"
+                        android:minHeight="48dp"
+                        android:text="@string/shared_string_download"
+                        android:textColor="@color/color_white"/>
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/map_downloading_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginTop="24dp"
+                android:visibility="gone"
+                osmand:cardBackgroundColor="@color/color_white">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:id="@+id/map_downloading_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="48dp"
+                        android:orientation="horizontal">
+
+                        <android.support.v7.widget.AppCompatImageView
+                            android:id="@+id/map_downloading_icon"
+                            android:layout_width="54dp"
+                            android:layout_height="60dp"
+                            android:scaleType="center"
+                            android:src="@drawable/ic_map"
+                            android:tint="@color/icon_color"/>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="14dp"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="14dp"
+                                android:gravity="center_vertical"
+                                android:minHeight="35dp"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/map_downloading_title"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="?android:attr/textColorPrimary"
+                                    android:textSize="@dimen/default_list_text_size"
+                                    tools:text="The Netherlands"/>
+
+                                <TextView
+                                    android:id="@+id/map_downloading_desc"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="2dp"
+                                    android:textColor="?android:attr/textColorSecondary"
+                                    android:textSize="@dimen/default_sub_text_size"
+                                    tools:text="255 MB"/>
+
+                            </LinearLayout>
+
+                            <View
+                                android:id="@+id/map_download_padding"
+                                android:layout_width="match_parent"
+                                android:layout_height="14dp"
+                                android:visibility="gone"/>
+
+                            <LinearLayout
+                                android:id="@+id/map_download_progress_layout"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="-8dp"
+                                android:visibility="visible"
+                                android:orientation="horizontal">
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical">
+
+                                    <ProgressBar
+                                        android:id="@+id/map_download_progress_bar"
+                                        style="?android:attr/progressBarStyleHorizontal"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:visibility="visible"/>
+
+                                </LinearLayout>
+
+                                <ImageButton
+                                    android:id="@+id/map_download_progress_button"
+                                    style="@style/Widget.AppCompat.ActionButton"
+                                    android:layout_width="44dp"
+                                    android:layout_height="44dp"
+                                    android:contentDescription="@string/shared_string_cancel"
+                                    android:src="@drawable/map_action_cancel"
+                                    android:tint="@color/icon_color"/>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <View
+                        android:id="@+id/map_downloading_divider"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/dashboard_divider_light"/>
+
+                    <LinearLayout
+                        android:id="@+id/map2_downloading_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="48dp"
+                        android:orientation="horizontal">
+
+                        <android.support.v7.widget.AppCompatImageView
+                            android:id="@+id/map2_downloading_icon"
+                            android:layout_width="54dp"
+                            android:layout_height="60dp"
+                            android:scaleType="center"
+                            android:src="@drawable/ic_map"
+                            android:tint="@color/icon_color"/>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="14dp"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="14dp"
+                                android:gravity="center_vertical"
+                                android:minHeight="35dp"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/map2_downloading_title"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="?android:attr/textColorPrimary"
+                                    android:textSize="@dimen/default_list_text_size"
+                                    tools:text="The Netherlands"/>
+
+                                <TextView
+                                    android:id="@+id/map2_downloading_desc"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="2dp"
+                                    android:textColor="?android:attr/textColorSecondary"
+                                    android:textSize="@dimen/default_sub_text_size"
+                                    tools:text="255 MB"/>
+
+                            </LinearLayout>
+
+                            <View
+                                android:id="@+id/map2_download_padding"
+                                android:layout_width="match_parent"
+                                android:layout_height="14dp"
+                                android:visibility="gone"/>
+
+                            <LinearLayout
+                                android:id="@+id/map2_download_progress_layout"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="-8dp"
+                                android:orientation="horizontal">
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical">
+
+                                    <ProgressBar
+                                        android:id="@+id/map2_download_progress_bar"
+                                        style="?android:attr/progressBarStyleHorizontal"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:visibility="visible"/>
+
+                                </LinearLayout>
+
+                                <ImageButton
+                                    android:id="@+id/map2_download_progress_button"
+                                    style="@style/Widget.AppCompat.ActionButton"
+                                    android:layout_width="44dp"
+                                    android:layout_height="44dp"
+                                    android:contentDescription="@string/shared_string_cancel"
+                                    android:src="@drawable/map_action_cancel"
+                                    android:tint="@color/icon_color"/>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <View
+                        android:id="@+id/map2_downloading_divider"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/dashboard_divider_light"/>
+
+                    <android.support.v7.widget.AppCompatButton
+                        android:id="@+id/map_downloading_action_button"
+                        style="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:minHeight="47dp"
+                        android:text="@string/go_to_map"
+                        android:textColor="@color/color_dialog_buttons_light"/>
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/action_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="@dimen/first_usage_title_margin_bottom"
+                android:background="@drawable/btn_round_blue"
+                android:padding="14dp"
+                android:text="@string/give_permission"
+                android:textColor="@color/color_white"
+                android:visibility="gone"/>
+
+            <LinearLayout
+                android:id="@+id/storage_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/divider_color"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/storage_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="14dp"
+                            android:text="@string/storage_place_description"
+                            android:textColor="?android:attr/textColorSecondary"
+                            android:textSize="@dimen/default_desc_text_size"/>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/storage_free_space"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="14dp"
+                                android:layout_marginTop="8dp"
+                                android:text="@string/storage_free_space"
+                                android:textColor="?android:attr/textColorSecondary"
+                                android:textSize="@dimen/default_desc_text_size"/>
+
+                            <TextView
+                                android:id="@+id/storage_free_space_value"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="14dp"
+                                android:layout_marginTop="8dp"
+                                android:textColor="?android:attr/textColorSecondary"
+                                android:textSize="@dimen/default_desc_text_size"
+                                android:textStyle="bold"
+                                tools:text=" 12 GB"/>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <android.support.v7.widget.AppCompatButton
+                        android:id="@+id/storage_change_button"
+                        style="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="16dp"
+                        android:paddingRight="16dp"
+                        android:text="@string/shared_string_change"
+                        android:textColor="@color/color_dialog_buttons_light"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>
