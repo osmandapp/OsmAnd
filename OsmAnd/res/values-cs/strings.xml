@@ -1148,8 +1148,8 @@ Celosvětová výšková data (mezi 70 stupni severní šířky a 70 stupni již
     <string name="route_info">Informace o trase</string>
     <string name="routing_attr_prefer_motorway_name">Upřednostňovat dálnice</string>
     <string name="routing_attr_prefer_motorway_description">Upřednostňovat dálnice</string>
-    <string name="routing_attr_short_way_name">Nejkratší cesta</string>
-    <string name="routing_attr_short_way_description">Použít nejkratší cestu</string>
+    
+    
     <string name="routing_attr_avoid_toll_name">Vyhnout se placeným silnicím</string>
     <string name="routing_attr_avoid_toll_description">Vyhnout se placeným silnicím</string>
     <string name="routing_attr_avoid_unpaved_name">Vyhnout se nezpevněným cestám</string>

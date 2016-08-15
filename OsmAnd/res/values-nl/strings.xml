@@ -1412,8 +1412,8 @@ Wil je een nieuwe map maken op de toegestane locatie en de OsmAnd-bestanden daar
     <string name="calculate_osmand_route_gpx">Bereken de route offline met OsmAnd</string>
     <string name="routing_attr_prefer_motorway_name">Bij voorkeur autowegen</string>
 	<string name="routing_attr_prefer_motorway_description">Gebruik bij voorkeur autowegen</string>
-	<string name="routing_attr_short_way_name">Korte route</string>
-	<string name="routing_attr_short_way_description">Korte route gebruiken</string>
+	
+	
 	<string name="routing_attr_avoid_toll_name">Vermijd tolwegen</string>
 	<string name="routing_attr_avoid_toll_description">Vermijd tolwegen</string>
 	<string name="routing_attr_avoid_unpaved_name">Vermijd onverharde wegen</string>

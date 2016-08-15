@@ -141,8 +141,8 @@
     <string name="shared_string_select_on_map">Vel på kartet …</string>
     <string name="shared_string_favorite">Favoritt …</string>
     <string name="route_info">Ruteinformasjon</string>
-    <string name="routing_attr_short_way_name">Kortaste veg</string>
-	<string name="routing_attr_short_way_description">Bruk kortaste veg</string>
+    
+	
 	<string name="routing_attr_avoid_ferries_name">Unngår ferjer</string>
 	<string name="routing_attr_avoid_ferries_description">Unngå ferjer</string>
 	<string name="routing_attr_weight_name">Maksvekt</string>

@@ -1059,8 +1059,8 @@
     
 	<string name="local_index_tile_data_maxzoom">Maksimalni zoom: %1$s</string>
     <string name="local_index_tile_data_minzoom">Minimalni zoom: %1$s</string>
-    <string name="routing_attr_short_way_name">Kratak put</string>
-	<string name="routing_attr_short_way_description">Koristite kratak put</string>
+    
+	
 	<string name="amenity_type_seamark">Morske oznake</string>
 <string name="osmo_settings_uuid">Jedinstveni identitet uređaja</string>
     <string name="osmo_settings_descr">Konfigurirajte postavke praćenja i postavljanje osobnih monitoring kanala</string>

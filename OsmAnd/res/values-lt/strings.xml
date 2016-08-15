@@ -1218,8 +1218,8 @@
     <string name="calculate_osmand_route_gpx">Apskaičiuoti maršrutą nenaudojant interneto</string>
     <string name="routing_attr_prefer_motorway_name">Teikti pirmenybę greitkeliams</string>
     <string name="routing_attr_prefer_motorway_description">Teikti pirmenybę greitkeliams</string>
-    <string name="routing_attr_short_way_name">Trumpiausias maršrutas</string>
-    <string name="routing_attr_short_way_description">Naudoti trumpiausią maršrutą</string>
+    
+    
     <string name="routing_attr_avoid_toll_name">Vengti mokamų kelių</string>
     <string name="routing_attr_avoid_toll_description">Vengti mokamų kelių</string>
     <string name="routing_attr_avoid_unpaved_name">Vengti neasfaltuotų kelių</string>

@@ -1409,8 +1409,8 @@ Honek {1} MB behar ditu behin betiko.
     <string name="speech_rate_descr">TTS ahotsaren abiadura zehaztu</string>
     <string name="speech_rate">Ahots abiadura</string>
     
-    <string name="routing_attr_short_way_name">Ibilbide laburra</string>
-	<string name="routing_attr_short_way_description">Ibilbide laburra erabili</string>
+    
+	
 	<string name="rendering_attr_coloredBuildings_name">Koloreztatu eraikinak motaren arabera</string>
     <string name="osmo_invite">Gonbidatu…</string>
     <string name="osmo_leave_confirmation_msg">%1$s taldea utzi nahi duzu?</string>

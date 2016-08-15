@@ -766,7 +766,7 @@
 	<string name="route_descr_select_destination">Valitse kohde</string>
     <string name="routing_attr_prefer_motorway_name">Suosi moottoriteitä</string>
 	<string name="routing_attr_prefer_motorway_description">Suosi moottoriteitä</string>
-	<string name="routing_attr_short_way_name">Lyhin reitti</string>
+	
 	<string name="routing_attr_avoid_toll_name">Vältä tietulleja</string>
 	<string name="routing_attr_avoid_toll_description">Vältä tietulleja</string>
 	<string name="routing_attr_avoid_unpaved_name">Vältä päällystämättömiä teitä</string>

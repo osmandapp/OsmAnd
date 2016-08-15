@@ -1392,8 +1392,8 @@ Liste over understøttede lande (dybest set hele verden!): Afghanistan, Albanien
     <string name="routing_attr_avoid_motorway_description">Undgå motorveje</string>
     <string name="routing_attr_weight_name">Vægtgrænse</string>
     <string name="routing_attr_weight_description">Køretøjets vægt der tillades på ruter</string>
-    <string name="routing_attr_short_way_name">Korteste rute</string>
-    <string name="routing_attr_short_way_description">Anvend korteste rute</string>
+    
+    
     <string name="route_info">Ruteinformation</string>
     <string name="select_gpx">Vælg GPX…</string>
     <string name="route_preferences">Ruteindstillinger</string>

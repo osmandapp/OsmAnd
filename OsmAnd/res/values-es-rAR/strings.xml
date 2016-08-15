@@ -416,8 +416,8 @@
     <string name="route_info">Información de la ruta</string>
     <string name="routing_attr_prefer_motorway_name">Preferir autopistas</string>
     <string name="routing_attr_prefer_motorway_description">Preferir autopistas en la navegación</string>
-    <string name="routing_attr_short_way_name">Camino más corto</string>
-    <string name="routing_attr_short_way_description">Usa el camino corto en lugar del rápido</string>
+    
+    
     <string name="routing_attr_avoid_toll_name">Evitar peajes</string>
     <string name="routing_attr_avoid_toll_description">Evita los caminos con peajes</string>
     <string name="routing_attr_avoid_unpaved_name">Evitar caminos sin pavimentar</string>

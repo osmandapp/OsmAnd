@@ -1224,8 +1224,8 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="app_mode_truck">Camion</string>
     <string name="routing_attr_prefer_motorway_name">Privilégier les autoroutes</string>
     <string name="routing_attr_prefer_motorway_description">Privilégier les autoroutes</string>
-    <string name="routing_attr_short_way_name">Itinéraire le plus court</string>
-    <string name="routing_attr_short_way_description">Emprunter l\'itinéraire le plus court</string>
+    
+    
     <string name="routing_attr_avoid_toll_name">Éviter les routes à péage</string>
     <string name="routing_attr_avoid_toll_description">Éviter les péages</string>
     <string name="routing_attr_avoid_unpaved_name">Éviter les voies non revêtues</string>

@@ -1181,7 +1181,7 @@
     <string name="shared_string_favorite">Favorite</string>
     <string name="routing_attr_prefer_motorway_name">Preferă autostrăzi</string>
 	<string name="routing_attr_prefer_motorway_description">Preferă autostrăzi</string>
-	<string name="routing_attr_short_way_name">Drum scurt</string>
+	
 	
     <string name="disable_complex_routing_descr">Dezactivează rutarea în 2 faze pentru navigarea auto</string>
     <string name="disable_complex_routing">Dezactivează rutarea complexă</string>
@@ -1523,7 +1523,7 @@
     <string name="index_name_italy">Europa - Italia</string>
     <string name="index_name_gb">Europa - Marea Britanie</string>
     <string name="calculate_osmand_route_without_internet">Se calculează segment de traseu OsmAnd fără Internet</string>
-    <string name="routing_attr_short_way_description">Utilizaţi drumul cel mai scurt</string>
+    
 	<string name="rendering_value_default13_name">Implicit(13)</string>
 	<string name="rendering_value_defaultTranslucentCyan_name">Implicit(cyan translucid)</string>
     <string name="rendering_attr_currentTrackColor_name">Culoare GPX</string>

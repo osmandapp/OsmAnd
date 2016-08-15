@@ -817,8 +817,8 @@
     <string name="route_info">경로 정보</string>
     <string name="routing_attr_prefer_motorway_name">전용도로 선호</string>
 	<string name="routing_attr_prefer_motorway_description">전용도로 선호</string>
-	<string name="routing_attr_short_way_name">최단길</string>
-	<string name="routing_attr_short_way_description">최단길 사용하기</string>
+	
+	
 	<string name="routing_attr_avoid_toll_name">유료도로 회피</string>
 	<string name="routing_attr_avoid_toll_description">유료도로 회피하기</string>
 	<string name="routing_attr_avoid_unpaved_name">비포장도로 회피</string>

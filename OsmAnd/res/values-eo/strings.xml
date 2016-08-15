@@ -967,8 +967,8 @@ Tiu ĉi vido oni povas nuligi per malaktivigi ĝin tie ĉi, aŭ per ŝanĝi la \
     <string name="route_info">Informoj pri kurso</string>
     <string name="routing_attr_prefer_motorway_name">Preferi aŭtovojojn</string>
     <string name="routing_attr_prefer_motorway_description">Preferas aŭtovojojn</string>
-    <string name="routing_attr_short_way_name">La plej kurta vojo</string>
-    <string name="routing_attr_short_way_description">Uzas la plej mallogan vojon</string>
+    
+    
     <string name="routing_attr_avoid_toll_name">Eviti pagendajn vojojn</string>
     <string name="routing_attr_avoid_toll_description">Evitas pagendajn vojojn</string>
     <string name="use_osm_live_routing">OSM Live navigado</string>

@@ -1196,8 +1196,8 @@
     <string name="use_displayed_track_for_navigation">Ці хочаце вы выкарыстоўваць адлюстраваны сьлед для навігацыі?</string>
     <string name="route_info">Інфармацыя пра маршрут</string>
     <string name="routing_attr_prefer_motorway_name">Аддаваць перавагу аўтамагістралям</string>
-	<string name="routing_attr_short_way_name">Самы кароткі шлях</string>
-	<string name="routing_attr_short_way_description">Выкарыстоўваць кароткі шлях</string>
+	
+	
 	<string name="routing_attr_avoid_toll_name">Пазьбягаць платныя дарогі</string>
 	<string name="routing_attr_avoid_toll_description">Пазьбягаць платных дарог</string>
 	<string name="routing_attr_avoid_unpaved_name">Пазьбягаць грунтавыя дарогі</string>

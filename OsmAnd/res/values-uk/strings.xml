@@ -1595,8 +1595,8 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="route_info">Інформація про маршрут</string>
     <string name="routing_attr_prefer_motorway_name">Надавати перевагу автомагістралям</string>
 	<string name="routing_attr_prefer_motorway_description">Надавати перевагу автомагістралям</string>
-	<string name="routing_attr_short_way_name">Найкоротший шлях</string>
-	<string name="routing_attr_short_way_description">Використовувати короткий шлях</string>
+	
+	
 	<string name="routing_attr_avoid_toll_name">Уникати платних доріг</string>
 	<string name="routing_attr_avoid_toll_description">Уникати платних доріг</string>
 	<string name="routing_attr_avoid_unpaved_name">Уникати ґрунтових доріг</string>

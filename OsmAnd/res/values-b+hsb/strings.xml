@@ -343,8 +343,8 @@
     <string name="index_name_italy">Europa - Italska</string>
     <string name="index_name_gb">Europa - Wulka Britaniska</string>
     <string name="route_descr_select_destination">Cil wubrać</string>
-    <string name="routing_attr_short_way_name">Najkrótši puć</string>
-    <string name="routing_attr_short_way_description">Najkrótši puć wužiwać</string>
+    
+    
     <string name="routing_attr_avoid_toll_name">Mawtowe dróhi wobeńć</string>
     <string name="routing_attr_avoid_toll_description">Mawtowe dróhi wobeńć</string>
     <string name="routing_attr_avoid_unpaved_name">Njewobkrućene puće wobeńć</string>

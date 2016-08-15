@@ -1377,8 +1377,8 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="calculate_osmand_route_gpx">Calcola percorso OsmAnd offline</string>
     <string name="routing_attr_prefer_motorway_name">Preferisci le autostrade</string>
     <string name="routing_attr_prefer_motorway_description">Preferisci le autostrade</string>
-    <string name="routing_attr_short_way_name">Via più breve</string>
-    <string name="routing_attr_short_way_description">Usa la via più breve</string>
+    
+    
     <string name="routing_attr_avoid_toll_name">Evita strade a pedaggio</string>
     <string name="routing_attr_avoid_toll_description">Evita strade a pedaggio</string>
     <string name="routing_attr_avoid_unpaved_name">Evita strade non pavimentate</string>

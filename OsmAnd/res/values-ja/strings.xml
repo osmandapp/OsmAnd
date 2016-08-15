@@ -1313,8 +1313,8 @@ POIの更新は利用できません</string>
     <string name="route_info">ルート情報</string>
     <string name="routing_attr_prefer_motorway_name">高速道路を優先する</string>
 	<string name="routing_attr_prefer_motorway_description">高速道路を優先する</string>
-	<string name="routing_attr_short_way_name">最も短い道</string>
-	<string name="routing_attr_short_way_description">最も短い道を使用する</string>
+	
+	
 	<string name="routing_attr_avoid_toll_name">有料道路を使用しない</string>
 	<string name="routing_attr_avoid_toll_description">有料道路を使用しない</string>
 	<string name="routing_attr_avoid_unpaved_name">未舗装道路を使用しない</string>

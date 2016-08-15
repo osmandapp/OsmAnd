@@ -1242,8 +1242,8 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 \n Poznámka 1: pôvodné súbory zostanú nedotknuté (môžete ich neskôr vymazať ručne).\n Poznámka 2: v novom úložisku nebude možné zdieľať súbory medzi OsmAnd a OsmAnd+.</string>
     <string name="routing_attr_prefer_motorway_name">Uprednostniť diaľnice</string>
     <string name="routing_attr_prefer_motorway_description">Uprednostniť diaľnice</string>
-    <string name="routing_attr_short_way_name">Najkratšia cesta</string>
-    <string name="routing_attr_short_way_description">Použiť najkratšiu cestu</string>
+    
+    
     <string name="routing_attr_avoid_toll_name">Vyhnúť sa spoplatneným cestám</string>
     <string name="routing_attr_avoid_toll_description">Vyhnúť sa spoplatneným cestám</string>
     <string name="routing_attr_avoid_unpaved_name">Vyhnúť sa nespevneným cestám</string>

@@ -1128,8 +1128,8 @@ Les dades globals (entre 70 graus nord i 70 graus sud) estan basades en mesures 
     <string name="app_mode_truck">Camió</string>
     <string name="routing_attr_prefer_motorway_name">Preferència per autopistes</string>
     <string name="routing_attr_prefer_motorway_description">Es prioritza l\'ús d\'autopistes</string>
-    <string name="routing_attr_short_way_name">Camí més curt</string>
-    <string name="routing_attr_short_way_description">Usa el camí més curt</string>
+    
+    
     <string name="routing_attr_avoid_toll_name">Evita vies de peatge</string>
     <string name="routing_attr_avoid_toll_description">Prioritza carreteres sense peatge</string>
     <string name="routing_attr_avoid_unpaved_name">Evita les vies sense pavimentar</string>

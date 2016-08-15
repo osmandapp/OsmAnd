@@ -1280,8 +1280,8 @@ A globális adatok (az északi 70° és déli 70° szélesség között) az SRTM
     <string name="route_info">Útvonal információ</string>
     <string name="routing_attr_prefer_motorway_name">Autópályák preferálása</string>
     <string name="routing_attr_prefer_motorway_description">Autópályák preferálása</string>
-    <string name="routing_attr_short_way_name">Legrövidebb útvonal</string>
-    <string name="routing_attr_short_way_description">Legrövidebb útvonal tervezése</string>
+    
+    
     <string name="routing_attr_avoid_toll_name">Fizetős utak elkerülése</string>
     <string name="routing_attr_avoid_toll_description">Fizetős utak elkerülése</string>
     <string name="routing_attr_avoid_unpaved_name">Burkolatlan utak elkerülése</string>

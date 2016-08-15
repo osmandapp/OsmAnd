@@ -1441,8 +1441,8 @@ Afganistan, Albanija, Alžirija, Andora, Angola, Angvila, Antigva in Barbuda, Ar
     <string name="index_name_gb">Evropa – Velika Britanija</string>
     <string name="routing_attr_prefer_motorway_name">Prednostno vodi po avtocestah</string>
     <string name="routing_attr_prefer_motorway_description">Prednostno bodo izbrane hitre ceste in avtoceste</string>
-    <string name="routing_attr_short_way_name">Izbor najkrajše poti</string>
-    <string name="routing_attr_short_way_description">Izbrana možnost določa, da bo vedno izbrana najkrajša pot do cilja</string>
+    
+    
     <string name="routing_attr_avoid_toll_name">Izogni se cestninam</string>
     <string name="routing_attr_avoid_toll_description">Izbrane so poti, ki vodijo mimo cest s plačilom cestnine</string>
     <string name="routing_attr_avoid_unpaved_name">Izogni se neasfaltiranim cestam</string>

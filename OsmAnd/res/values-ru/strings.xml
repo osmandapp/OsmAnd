@@ -1101,8 +1101,8 @@
     <string name="routing_attr_avoid_motorway_name">Избегать автомагистралей</string>
     <string name="routing_attr_prefer_motorway_name">Предпочитать автомагистрали</string>
     <string name="routing_attr_prefer_motorway_description">Предпочитать автомагистрали</string>
-    <string name="routing_attr_short_way_name">Кратчайший путь</string>
-    <string name="routing_attr_short_way_description">Использовать кратчайший путь</string>
+    
+    
     <string name="routing_attr_avoid_toll_name">Избегать платных дорог</string>
     <string name="routing_attr_avoid_toll_description">Избегать платных дорог</string>
     <string name="routing_attr_avoid_unpaved_name">Избегать грунтовых дорог</string>

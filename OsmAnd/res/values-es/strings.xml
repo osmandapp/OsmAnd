@@ -1257,8 +1257,8 @@ OsmAnd está siendo desarrollado activamente, nuestro proyecto y su progreso adi
     <string name="calculate_osmand_route_gpx">Calcular la ruta OsmAnd sin conexión</string>
     <string name="routing_attr_prefer_motorway_name">Preferir autopistas</string>
     <string name="routing_attr_prefer_motorway_description">Preferir autopistas</string>
-    <string name="routing_attr_short_way_name">Camino más corto</string>
-    <string name="routing_attr_short_way_description">Utiliza el camino más corto</string>
+    
+    
     <string name="routing_attr_avoid_toll_name">Evitar peajes de carreteras</string>
     <string name="routing_attr_avoid_toll_description">Evita las carreteras con peaje</string>
     <string name="routing_attr_avoid_unpaved_name">Evitar carreteras no pavimentadas</string>

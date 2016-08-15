@@ -9,6 +9,8 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="routing_attr_short_way_name">Fuel-efficient way</string>
+    <string name="routing_attr_short_way_description">Use fuel-efficient way (usually shorter)</string>
     <string name="replace_favorite_confirmation">Are you sure you want to replace favorite %1$s?</string>
     <string name="rendering_attr_hideOverground_name">Overground objects</string>
     <string name="shared_string_change">Change</string>
@@ -974,8 +976,8 @@
     <string name="route_info">Route information</string>
     <string name="routing_attr_prefer_motorway_name">Prefer motorways</string>
     <string name="routing_attr_prefer_motorway_description">Prefer motorways</string>
-    <string name="routing_attr_short_way_name">Shortest way</string>
-    <string name="routing_attr_short_way_description">Use shortest way</string>
+    
+    
     <string name="routing_attr_avoid_toll_name">Avoid toll roads</string>
     <string name="routing_attr_avoid_toll_description">Avoid toll roads</string>
     <string name="routing_attr_avoid_unpaved_name">Avoid unpaved roads</string>
@@ -1951,7 +1953,7 @@ If you need help with OsmAnd application, please contact our support team: suppo
     <string name="items_were_selected">{0} item(s) selected</string>
     <string name="filter_existing_indexes">Downloaded</string>
     <string name="fast_route_mode">Fastest route</string>
-    <string name="fast_route_mode_descr">Enable to calculate fastest route or disable for shortest route </string>
+    <string name="fast_route_mode_descr">Enable to calculate fastest route or disable for fuel-saving route </string>
     <string name="tiles_to_download_estimated_size">At zoom {0} download {1} tiles ({2} MB)</string>
     <string name="shared_string_download_map">Download map</string>
     <string name="select_max_zoom_preload_area">Select maximum zoom to preload</string>

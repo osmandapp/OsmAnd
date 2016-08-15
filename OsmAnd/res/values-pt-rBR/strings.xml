@@ -329,8 +329,8 @@
     <string name="use_displayed_track_for_navigation">Você quer usar o trajeto apresentado para a navegação?</string>
     <string name="routing_attr_prefer_motorway_name">Preferir Autoestradas</string>
 	<string name="routing_attr_prefer_motorway_description">Preferir autoestradas na rota</string>
-	<string name="routing_attr_short_way_name">Rota mais curta</string>
-	<string name="routing_attr_short_way_description">Usar o caminho mais curto</string>
+	
+	
 	<string name="routing_attr_avoid_toll_name">Evitar pedágios</string>
 	<string name="routing_attr_avoid_toll_description">Evitar estradas com pedágio</string>
 	<string name="routing_attr_avoid_unpaved_name">Evitar vias não-pavimentadas</string>

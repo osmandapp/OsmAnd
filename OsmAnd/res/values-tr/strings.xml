@@ -1037,7 +1037,7 @@
 	
 	<string name="routing_attr_prefer_motorway_name">Motosiklet rota</string>
 	<string name="routing_attr_prefer_motorway_description">Motosiklet rota</string>
-	<string name="routing_attr_short_way_name">En kısa yol</string>
+	
 	<string name="routing_attr_avoid_toll_name">Ücretli yollardan kaçın</string>
 	<string name="routing_attr_avoid_toll_description">Ücretli yolları kaçının</string>
 	<string name="routing_attr_avoid_unpaved_name">Asfalt olmayan yollardan kaçınmak</string>
@@ -1051,7 +1051,7 @@
     <string name="copying_osmand_files">Kopyalama Osmand veri dosyaları …</string>
     <string name="calculate_osmand_route_gpx">Çevrimdışı yol hesaplama Osmand</string>
     <string name="app_mode_truck">kamyon</string>
-    <string name="routing_attr_short_way_description">En kısa yolu kullanın</string>
+    
 	
     <string name="copying_osmand_one_file_descr">Şimdidosya ($1%s ) Yeni Geliş kopyalamak …</string>
     <string name="copying_osmand_files_descr">Yeni hedef (%s) için Osmand veri dosyaları kopyalanıyor …</string>

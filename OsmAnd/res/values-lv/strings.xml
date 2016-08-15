@@ -1236,8 +1236,8 @@
     <string name="routing_preferences_descr">Maršruta uzstādījumi</string>
     <string name="routing_attr_prefer_motorway_name">Priekšroka automaģistrālēm</string>
 	<string name="routing_attr_prefer_motorway_description">Maršruta plānošanā vispirms tiks dota priekšroka automaģistrālēm (ātrgaitas šosejām)</string>
-	<string name="routing_attr_short_way_name">Īsākais maršruts</string>
-	<string name="routing_attr_short_way_description">Braukt pa Īsāko maršrutu</string>
+	
+	
 	<string name="routing_attr_avoid_toll_name">Izvairīties no maksas ceļiem</string>
 	<string name="routing_attr_avoid_toll_description">Jāmaksā nodeva par ceļa lietošanu</string>
 	<string name="routing_attr_avoid_unpaved_name">Izvairīties no grants ceļiem</string>

@@ -1438,8 +1438,8 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="route_info">Informações de rota</string>
     <string name="routing_attr_prefer_motorway_name">Prefere auto-estradas</string>
 	<string name="routing_attr_prefer_motorway_description">Prefere auto-estradas</string>
-	<string name="routing_attr_short_way_name">Caminho mais curto</string>
-	<string name="routing_attr_short_way_description">Utilize caminho mais curto</string>
+	
+	
 	<string name="routing_attr_avoid_toll_name">Evite estradas com portagem</string>
 	<string name="routing_attr_avoid_toll_description">Evite estradas com portagem</string>
 	<string name="routing_attr_avoid_unpaved_name">Evite estradas não pavimentadas</string>

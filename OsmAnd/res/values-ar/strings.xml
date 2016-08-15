@@ -1127,7 +1127,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
 	<string name="lang_uk">اﻷوكرانية</string>
 	<string name="index_name_canada">أميركا الشمالية - كندا</string>
     <string name="index_name_italy">أوروبا - إيطاليا</string>
-    <string name="routing_attr_short_way_name">أقصر طريق</string>
+    
 	<string name="copying_osmand_files">جاري نسخ ملفات بيانات OsmAnd…</string>
     <string name="guidance_preferences_descr">تفضيلات الملاحة</string>
     <string name="interrupt_music_descr">إقطع تشغيل الموسيقى عند ورود إعلان ما</string>
@@ -1175,7 +1175,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
 	<string name="index_name_gb">أوروبا - بريطانيا العظمى</string>
     <string name="route_preferences">تفضيلات الطريق</string>
     <string name="route_info">معلومات الطريق</string>
-    <string name="routing_attr_short_way_description">إستخدام أقصر طريق</string>
+    
 	<string name="routing_attr_avoid_toll_name">تجنب الطرق ذات الرسوم</string>
 	<string name="routing_attr_avoid_toll_description">إجتناب الطرق التي يجب دفع رسوم للمرور فيها</string>
 	<string name="routing_attr_avoid_unpaved_name">تجنب الطرق غير المعبّدة</string>

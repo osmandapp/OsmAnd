@@ -1341,8 +1341,8 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 \n Uwaga 2: W nowej lokalizacji nie będzie możliwe współdzielenie tych samych plików pomiędzy OsmAnd i OsmAnd+.</string>
     <string name="routing_attr_prefer_motorway_name">Preferowanie autostrad</string>
     <string name="routing_attr_prefer_motorway_description">Preferowanie autostrad</string>
-    <string name="routing_attr_short_way_name">Najkrótsza droga</string>
-    <string name="routing_attr_short_way_description">Używa najkrótszej drogi</string>
+    
+    
     <string name="routing_attr_avoid_toll_name">Omijanie płatnych dróg</string>
     <string name="routing_attr_avoid_toll_description">Omijanie płatnych dróg</string>
     <string name="routing_attr_avoid_unpaved_name">Omijanie nieutwardzonych dróg</string>

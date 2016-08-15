@@ -1416,8 +1416,8 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
     <string name="calculate_osmand_route_gpx">محاسبه مسیر به صورت آفلاین</string>
     <string name="routing_attr_prefer_motorway_name">ترجیح دادن آزادراه‌ها</string>
 	<string name="routing_attr_prefer_motorway_description">استفاده از آزادراه‌ها در مسیریابی</string>
-	<string name="routing_attr_short_way_name">کوتاهترین مسیر</string>
-	<string name="routing_attr_short_way_description">مسیریابی از کوتاهترین مسیر</string>
+	
+	
 	<string name="routing_attr_avoid_toll_name">اجتناب از مسیرهای دارای عوارضی</string>
 	<string name="routing_attr_avoid_toll_description">اجتناب از مسیرهای دارای عوارضی</string>
 	<string name="routing_attr_avoid_unpaved_name">اجتناب از مسیرهای غیرآسفالته</string>

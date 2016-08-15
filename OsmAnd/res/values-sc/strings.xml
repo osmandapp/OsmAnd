@@ -67,8 +67,8 @@
     <string name="route_info">Informatziones pro s’àndala</string>
     <string name="routing_attr_prefer_motorway_name">Preferre sas autostradas</string>
     <string name="routing_attr_prefer_motorway_description">Preferre sas autostradas</string>
-    <string name="routing_attr_short_way_name">Istrada prus curtza</string>
-    <string name="routing_attr_short_way_description">Imprea sa caminera prus curtza</string>
+    
+    
     <string name="routing_attr_avoid_toll_name">Istransi sas istradas a pagamentu</string>
     <string name="routing_attr_avoid_toll_description">Istransi sas istradas a pagamentu</string>
     <string name="routing_attr_avoid_unpaved_name">Istransi sas istradas non apamentadas</string>

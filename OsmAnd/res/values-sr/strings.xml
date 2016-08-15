@@ -885,8 +885,8 @@
     <string name="route_info">Подаци о путу</string>
     <string name="routing_attr_prefer_motorway_name">Предност путевима за моторна возила</string>
     <string name="routing_attr_prefer_motorway_description">Предност путевима за моторна возила</string>
-    <string name="routing_attr_short_way_name">Најкраћи пут</string>
-    <string name="routing_attr_short_way_description">Користи најкраћи пут</string>
+    
+    
     <string name="routing_attr_avoid_motorway_name">Избегавај путеве за моторна возила</string>
     <string name="routing_attr_avoid_motorway_description">Избегавај путеве за моторна возила</string>
     <string name="routing_attr_avoid_borders_name">Избегавај граничне прелазе</string>

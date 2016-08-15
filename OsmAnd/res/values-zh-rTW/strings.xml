@@ -1342,8 +1342,8 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
 \n注意 2：在新的存儲位置，它不可能在 OsmAnd 和 OsmAnd+ 兩者之間共用檔案。</string>
     <string name="routing_attr_prefer_motorway_name">高速公路優先</string>
     <string name="routing_attr_prefer_motorway_description">高速公路優先</string>
-    <string name="routing_attr_short_way_name">最短路線</string>
-    <string name="routing_attr_short_way_description">使用最短路線</string>
+    
+    
     <string name="routing_attr_avoid_toll_name">避開收費道路</string>
     <string name="routing_attr_avoid_toll_description">避開收費道路</string>
     <string name="routing_attr_avoid_unpaved_name">避開未鋪設路面</string>

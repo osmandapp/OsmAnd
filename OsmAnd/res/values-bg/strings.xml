@@ -1201,8 +1201,8 @@
     <string name="route_info">Информация за маршрут</string>
     <string name="routing_attr_prefer_motorway_name">Предпочитане на магистрали</string>
     <string name="routing_attr_prefer_motorway_description">Магистрали</string>
-    <string name="routing_attr_short_way_name">Кратък маршрут</string>
-    <string name="routing_attr_short_way_description">Използване на кратък маршрут</string>
+    
+    
     <string name="routing_attr_avoid_toll_name">Избягване на пътни такси</string>
     <string name="routing_attr_avoid_toll_description">Избягване на платени пътища</string>
     <string name="routing_attr_avoid_unpaved_name">Избягване на черни пътища</string>

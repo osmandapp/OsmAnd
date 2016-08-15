@@ -382,8 +382,8 @@
     <string name="route_info">Іnfarmacyja pra maršrut</string>
     <string name="routing_attr_prefer_motorway_name">Addavać pieravahu aŭtamahіstralam</string>
 	<string name="routing_attr_prefer_motorway_description">Addavać pieravahu aŭtamahіstralam</string>
-	<string name="routing_attr_short_way_name">Samy karotkі šlach</string>
-	<string name="routing_attr_short_way_description">Vykarystoŭvać karotkі šlach</string>
+	
+	
 	<string name="routing_attr_avoid_toll_name">Paźbiahać płatnyja darohі</string>
 	<string name="routing_attr_avoid_toll_description">Paźbiahać płatnych daroh</string>
 	<string name="routing_attr_avoid_unpaved_name">Paźbiahać hruntavyja darohі</string>

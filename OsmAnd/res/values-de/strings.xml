@@ -1309,8 +1309,8 @@ Die globalen Daten (zwischen N 70° und S 70°) basieren auf Messungen von SRTM 
 	<string name="app_modes_choose">Anwendungsprofile</string>
 	<string name="routing_attr_prefer_motorway_name">Autobahnen bevorzugen</string>
 	<string name="routing_attr_prefer_motorway_description">Autobahnen bevorzugen</string>
-	<string name="routing_attr_short_way_name">Kürzeste Strecke</string>
-	<string name="routing_attr_short_way_description">Kürzeste Strecke benutzen</string>
+	
+	
 	<string name="routing_attr_avoid_toll_name">Mautstraßen vermeiden</string>
 	<string name="routing_attr_avoid_toll_description">Mautstraßen vermeiden</string>
 	<string name="routing_attr_avoid_unpaved_name">Unbefestigte Wege vermeiden</string>

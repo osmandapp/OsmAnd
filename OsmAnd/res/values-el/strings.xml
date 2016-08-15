@@ -1320,8 +1320,8 @@
     <string name="route_info">Πληροφορίες δρομολογίου</string>
     <string name="routing_attr_prefer_motorway_name">Προτίμηση αυτοκινητοδρόμων</string>
 	<string name="routing_attr_prefer_motorway_description">Προτίμηση αυτοκινητοδρόμων</string>
-	<string name="routing_attr_short_way_name">Συντομότερη διαδρομή</string>
-	<string name="routing_attr_short_way_description">Χρησιμοποιήστε τη συντομότερη διαδρομή</string>
+	
+	
 	<string name="routing_attr_avoid_toll_name">Αποφυγή δρόμων με διόδια</string>
 	<string name="routing_attr_avoid_toll_description">Αποφυγή διοδίων</string>
 	<string name="routing_attr_avoid_unpaved_name">Αποφυγή χωματόδρομων</string>

@@ -799,8 +799,8 @@
     <string name="route_descr_select_destination">Velg reisemål</string>
     <string name="routing_attr_prefer_motorway_name">Foretrekk motorveier</string>
     <string name="routing_attr_prefer_motorway_description">Foretrekk motorveier</string>
-    <string name="routing_attr_short_way_name">Korteste vei</string>
-    <string name="routing_attr_short_way_description">Bruk korteste vei</string>
+    
+    
     <string name="routing_attr_avoid_toll_name">Unngå bomveier</string>
     <string name="routing_attr_avoid_toll_description">Unngå bomveier</string>
     <string name="routing_attr_avoid_unpaved_name">Unngå uasfalterte veier</string>
