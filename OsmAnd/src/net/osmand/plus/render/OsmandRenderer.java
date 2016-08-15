@@ -59,6 +59,10 @@ public class OsmandRenderer {
 	private Paint paint;
 
 	private Paint paintIcon;
+	public static final int DEFAULT_POLYGON_MAX = 11;
+	public static final int DEFAULT_LINE_MAX = 100;
+	public static final int DEFAULT_POINTS_MAX = 200;
+
 
 	public static final int TILE_SIZE = 256; 
 	private static final int MAX_V = 75;
@@ -260,16 +264,16 @@ public class OsmandRenderer {
 			rc.lastRenderedKey = 0;
 
 			drawObject(rc, cv, render, polygonsArray, 0);
-			rc.lastRenderedKey = 5;
+			rc.lastRenderedKey = DEFAULT_POLYGON_MAX;
 			if (rc.shadowRenderingMode > 1) {
 				drawObject(rc, cv, render, linesArray, 1);
 			}
-			rc.lastRenderedKey = 40;
+			rc.lastRenderedKey = (DEFAULT_LINE_MAX + DEFAULT_POLYGON_MAX) / 2;
 			drawObject(rc, cv, render, linesArray, 2);
-			rc.lastRenderedKey = 60;
+			rc.lastRenderedKey = DEFAULT_LINE_MAX;
 
 			drawObject(rc, cv, render, pointsArray, 3);
-			rc.lastRenderedKey = 125;
+			rc.lastRenderedKey = DEFAULT_POINTS_MAX;
 
 
 			long beforeIconTextTime = System.currentTimeMillis() - now;
