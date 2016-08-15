@@ -2470,4 +2470,6 @@ Włączenie tego widoku zmienia styl mapy na „Zima i narty”, ukazujący tere
     <string name="route_stops_before">Za %1$s przystanków</string>
     <string name="rendering_attr_hideOverground_name">Nadziemne obiekty</string>
 
+    <string name="shared_string_change">Zmień</string>
+    <string name="get_started">Rozpocznij</string>
     </resources>
