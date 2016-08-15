@@ -9,13 +9,9 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
-<<<<<<< HEAD
     <string name="rendering_attr_hideOverground_name">Overground objects</string>
-
-=======
     <string name="shared_string_change">Change</string>
     <string name="get_started">Get started</string>
->>>>>>> 3ba6e68... First usage wizard in progress
     <string name="route_stops_before">%1$s stops before</string>
     <string name="coords_search">Coordinates search</string>
     <string name="advanced_coords_search">Advanced coordinates search</string>
