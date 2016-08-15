@@ -1800,4 +1800,32 @@
 	<string name="poi_crossing_supervision_attendant">Dozor na priecestí: dozorca</string>
 	<string name="poi_crossing_supervision_camera">Dozor na priecestí: kamera</string>
 
+	<string name="poi_amenity_vacuum_cleaner">Vysávač</string>
+
+	<string name="poi_vacuum_cleaner_yes">Vysávač: áno</string>
+	<string name="poi_vacuum_cleaner_no">Vysávač: nie</string>
+	<string name="poi_car_wash_yes">Autoumyváreň: nie</string>
+
+	<string name="poi_religion">Náboženské predmety</string>
+
+	<string name="poi_plant_nursery">Rastlinná škôlka</string>
+
+	<string name="poi_ice_hockey">Ľadový hokej</string>
+	<string name="poi_firepit">Ohnisko</string>
+	<string name="poi_dojo">Dojo</string>
+
+	<string name="poi_gaelic_games">Galské hry</string>
+	<string name="poi_karting">Motokáry</string>
+	<string name="poi_badminton">Bedminton</string>
+	<string name="poi_judo">Džudo</string>
+	<string name="poi_futsal">Futsal</string>
+	<string name="poi_rc_car">Preteky diaľkovo ovládaných áut</string>
+	<string name="poi_squash">Squash</string>
+	<string name="poi_lacrosse">Lakros</string>
+	<string name="poi_boxing">Box</string>
+
+	<string name="poi_official_name">Oficiálny názov</string>
+
+	<string name="poi_dolphin">Delfín</string>
+
 	</resources>
