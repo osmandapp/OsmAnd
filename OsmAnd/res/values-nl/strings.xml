@@ -562,7 +562,7 @@ Er is nu {2} MB beschikbaar.</string>
   <string name="search_online_address">Internet</string>
   <string name="max_level_download_tile">Max. online zoom</string>
   <string name="max_level_download_tile_descr">Kies maximum zoomniveau voor het downloaden van online kaartsegmenten</string>
-  <string name="route_general_information">Totale afstand %1$s, reistijd %2$d u %3$d m.</string>
+  <string name="route_general_information">Totale afstand %1$s, reistijd %2$d u %3$d min.</string>
   <string name="router_service_descr">Kies een online of offline routeberekening</string>
   <string name="router_service">Routeberekening</string>
   <string name="sd_dir_not_accessible">Opslagmap op SD kaart is niet toegankelijk</string>
@@ -2613,4 +2613,7 @@ Als je hulp nodig hebt met OsmAnd: neem contact op met ons support team: support
     <string name="route_stops_before">nog %1$s haltes</string>
     <string name="coords_search">Zoeken met Coördinaten</string>
     <string name="advanced_coords_search">Zoeken met Coördinaten</string>
+    <string name="rendering_attr_hideOverground_name">Bovengrondse objecten</string>
+    <string name="shared_string_change">Wijzig</string>
+    <string name="get_started">Aan de slag</string>
     </resources>
