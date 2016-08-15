@@ -2411,4 +2411,7 @@ Si aprecieu OsmAnd  i OSM i vulgueu ajudar-los, és la via perfecta per fer-ho."
     <string name="coords_search">Cerca per coordenades</string>
     <string name="advanced_coords_search">Cerca avançada per coordenades</string>
     <string name="route_stops_before">Queden %1$s parades</string>
+    <string name="rendering_attr_hideOverground_name">Elements a cel obert</string>
+    <string name="shared_string_change">Modifica</string>
+    <string name="get_started">Comença</string>
     </resources>
