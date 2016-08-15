@@ -500,7 +500,7 @@
                         android:layout_gravity="center"
                         android:maxLines="1"
                         android:textColor="@color/color_black"
-                        android:textSize="@dimen/map_widget_text_size_small"
+                        android:textSize="@dimen/map_button_text_size"
                         tools:text="1048 km"/>
 
                     <TextView
@@ -510,7 +510,7 @@
                         android:layout_gravity="center"
                         android:maxLines="1"
                         android:textColor="@color/color_black"
-                        android:textSize="@dimen/map_widget_text_size_small"
+                        android:textSize="@dimen/map_button_text_size"
                         tools:text="1048 km"/>
 
 
