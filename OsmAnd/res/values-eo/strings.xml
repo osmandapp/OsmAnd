@@ -2418,4 +2418,6 @@ Se vi bezonas helpon pri OsmAnd aplikaĵo, bonvolu kontakti nian helpantaron: su
  "</string>
     <string name="rendering_attr_hideOverground_name">Superteraj objektoj</string>
 
+    <string name="shared_string_change">Ŝanĝi</string>
+    <string name="get_started">Eki</string>
     </resources>
