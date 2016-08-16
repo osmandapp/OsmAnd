@@ -2424,4 +2424,5 @@ Se vi bezonas helpon pri OsmAnd aplikaĵo, bonvolu kontakti nian helpantaron: su
     <string name="routing_attr_short_way_description">Kalkulas brulaĵ-ŝpareman kurson (kutime plej mallongan)</string>
     <string name="replace_favorite_confirmation">Ĉu vi volas anstataŭigi la ŝatatan ejon %1$s?</string>
     <string name="clear_tile_data">Vakigi ĉiujn kahelojn</string>
+    <string name="update_all_maps_now">Ĉu vi volas ĝisdatigi ĉiujn mapojn nun?</string>
     </resources>
