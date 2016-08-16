@@ -590,7 +590,7 @@
 
 
     <string name="fast_route_mode">最快路線</string>
-    <string name="fast_route_mode_descr">啟用為預估最快的路線而停用則為最短的路線 </string>
+    <string name="fast_route_mode_descr">"啟用估算最快的路線或停用省油的路線 "</string>
     <string name="tiles_to_download_estimated_size">在縮放第{0}級別，下載{1}張地圖圖磚({2} MB)</string>
     <string name="shared_string_download_map">下載地圖</string>
     <string name="select_max_zoom_preload_area">選擇要預載的最大縮放級別</string>
@@ -2558,4 +2558,9 @@ Facebook：https://www.facebook.com/osmandapp
     <string name="route_stops_before">%1$s 之前停止</string>
     <string name="rendering_attr_hideOverground_name">地上的物件</string>
 
+    <string name="routing_attr_short_way_name">省油的方式</string>
+    <string name="routing_attr_short_way_description">使用省油的方式 (通常路途較短)</string>
+    <string name="replace_favorite_confirmation">您確定您想要替換喜愛的 %1$s 嗎？</string>
+    <string name="shared_string_change">更換</string>
+    <string name="get_started">開始</string>
     </resources>
