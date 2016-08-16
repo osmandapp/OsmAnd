@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
@@ -15,6 +16,8 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AlertDialog.Builder;
 import android.support.v7.widget.SwitchCompat;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -66,6 +69,7 @@ import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceLastCheck;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceLiveUpdatesOn;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceTimeOfDayToUpdate;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceUpdateFrequency;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.runLiveUpdate;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.setAlarmForPendingIntent;
 
 public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppListener {
@@ -370,8 +374,7 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppList
 					public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 						if (isChecked) {
 							if (InAppHelper.isSubscribedToLiveUpdates()) {
-								settings.IS_LIVE_UPDATES_ON.set(true);
-								enableLiveUpdates(true);
+								switchOnLiveUpdates(settings);
 							} else {
 								liveUpdatesSwitch.setChecked(false);
 								getMyApplication().showToastMessage(getString(R.string.osm_live_ask_for_purchase));
@@ -381,6 +384,8 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppList
 							enableLiveUpdates(false);
 						}
 					}
+
+					
 				});
 			} else {
 				topShadowView.setVisibility(View.VISIBLE);
@@ -396,6 +401,27 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppList
 			return view;
 		}
 
+		private void switchOnLiveUpdates(final OsmandSettings settings) {
+			settings.IS_LIVE_UPDATES_ON.set(true);
+			enableLiveUpdates(true);
+			if(dataShouldUpdate.size() > 0) {
+				Builder bld = new AlertDialog.Builder(getActivity());
+				bld.setMessage(R.string.update_all_maps_now);
+				bld.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
+					
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						for (LocalIndexInfo li : dataShouldUpdate) {
+							runLiveUpdate(getMyApplication(), li.getFileName(), false);
+						}
+						notifyDataSetChanged();
+					}
+				});
+				bld.setNegativeButton(R.string.shared_string_no, null);
+				bld.show();
+			}
+		}
+		
 		private void enableLiveUpdates(boolean enable) {
 			AlarmManager alarmMgr = (AlarmManager) getActivity()
 					.getSystemService(Context.ALARM_SERVICE);
