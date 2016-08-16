@@ -411,7 +411,7 @@ Dlaždicové mapy môžete získať priamo zo zdrojov na Internete, alebo ich m�
     <string name="osmand_service">Režim na pozadí</string>
     <string name="osmand_service_descr">OsmAnd bude bežať v systéme aj počas vypnutej obrazovky</string>
     <string name="fast_route_mode">Najrýchlejšia trasa</string>
-    <string name="fast_route_mode_descr">Zapnite na výpočet najrýchlejšej trasy alebo vypnite pre najkratšiu trasu </string>
+    <string name="fast_route_mode_descr">"Zapnite na výpočet najrýchlejšej trasy alebo vypnite ekonomickú trasu "</string>
     <string name="tiles_to_download_estimated_size">Pri priblížení {0} sa stiahne {1} dlaždíc ({2} Mb )</string>
     <string name="shared_string_download_map">Stiahnuť mapu</string>
     <string name="select_max_zoom_preload_area">Vybrať max. priblíženie viditeľnej oblasti na načítanie</string>
@@ -2396,4 +2396,7 @@ Ak potrebuje pomoc s aplikáciou OsmAnd, kontaktuje podporu: support@osmand.net.
 
     <string name="shared_string_change">Zmeniť</string>
     <string name="get_started">Začať</string>
+    <string name="routing_attr_short_way_name">Ekonomická trasa</string>
+    <string name="routing_attr_short_way_description">Použiť ekonomickú trasu (obyčajne kratšia)</string>
+    <string name="replace_favorite_confirmation">Naozaj chcete nahradiť obľúbený bod %1$s?</string>
     </resources>
