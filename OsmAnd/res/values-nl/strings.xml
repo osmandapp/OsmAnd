@@ -403,7 +403,7 @@ Er is nu {2} MB beschikbaar.</string>
   <string name="items_were_selected">{0} item(s) geselecteerd</string>
   <string name="filter_existing_indexes">Toon gedownloade</string>
   <string name="fast_route_mode">Snelle route</string>
-  <string name="fast_route_mode_descr">"Activeer voor de snelle route of deactiveer voor de korte route "</string>
+  <string name="fast_route_mode_descr">"Snelle route gebruiken (anders economische route) "</string>
   <string name="tiles_to_download_estimated_size">Op zoom {0} omvat de download {1} kaartsegmenten ({2} MB)</string>
   <string name="shared_string_download_map">Download kaart</string>
   <string name="select_max_zoom_preload_area">Kies maximum zoom om vooraf te laden</string>
@@ -2616,4 +2616,7 @@ Als je hulp nodig hebt met OsmAnd: neem contact op met ons support team: support
     <string name="rendering_attr_hideOverground_name">Bovengrondse objecten</string>
     <string name="shared_string_change">Wijzig</string>
     <string name="get_started">Aan de slag</string>
+    <string name="routing_attr_short_way_name">Economische route</string>
+    <string name="routing_attr_short_way_description">Economische route gebruiken (meestal korter)</string>
+    <string name="replace_favorite_confirmation">Wil je favoriet %1$s inderdaad vervangen?</string>
     </resources>
