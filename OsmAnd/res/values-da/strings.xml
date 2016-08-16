@@ -863,7 +863,7 @@ Liste over understøttede lande (dybest set hele verden!): Afghanistan, Albanien
     <string name="items_were_selected">{0} emner valgt</string>
     <string name="filter_existing_indexes">Hentet</string>
     <string name="fast_route_mode">Hurtigste rute</string>
-    <string name="fast_route_mode_descr">Aktiver for at beregne den hurtigste rute. Deaktiver for at beregne korteste rute </string>
+    <string name="fast_route_mode_descr">"Aktiver for at beregne den hurtigste rute eller deaktiver for  brændstofbesparende rute "</string>
     <string name="tiles_to_download_estimated_size">Ved zoom {0} hent {1} kortfliser ({2} MB)</string>
     <string name="shared_string_download_map">Hent kort</string>
     <string name="select_max_zoom_preload_area">Vælg maksimal zoom der skal indlæses på forhånd</string>
@@ -2618,4 +2618,9 @@ Hvis du er fan af OsmAnd og OSM og ønsker at støtte dem, er det den perfekte m
     <string name="route_stops_before">%1$s stop før</string>
     <string name="rendering_attr_hideOverground_name">Objekter over jorden</string>
 
+    <string name="routing_attr_short_way_name">Brændstoføkonomisk måde</string>
+    <string name="routing_attr_short_way_description">Brug brændstoføkonomisk måde (normalt kortere)</string>
+    <string name="replace_favorite_confirmation">Erstat favorit %1$s?</string>
+    <string name="shared_string_change">Skift</string>
+    <string name="get_started">Kom i gang</string>
     </resources>
