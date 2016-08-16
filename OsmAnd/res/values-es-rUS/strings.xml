@@ -1502,7 +1502,7 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="items_were_selected">{0} elemento(s) seleccionado(s)</string>
     <string name="filter_existing_indexes">Descargados</string>
     <string name="fast_route_mode">Ruta más rápida</string>
-    <string name="fast_route_mode_descr">"Activa, para calcular la ruta más rápida o desactiva, para la más corta "</string>
+    <string name="fast_route_mode_descr">"Activar para calcular la ruta más rápida o desactivar para la más eficiente en combustible "</string>
     <string name="tiles_to_download_estimated_size">En la ampliación {0}, descarga {1} teselas ({2} MB)</string>
     <string name="shared_string_download_map">Descargar mapa</string>
     <string name="select_max_zoom_preload_area">Elige la ampliación máxima para precargar</string>
@@ -2384,4 +2384,9 @@ Si amas a OsmAnd, OSM y quieres apoyarlos, esta es una perfecta manera de hacerl
     <string name="route_stops_before">%1$s parada(s) anterior(es)</string>
     <string name="rendering_attr_hideOverground_name">Objetos en superficie</string>
 
+    <string name="routing_attr_short_way_name">Carretera más eficiente</string>
+    <string name="routing_attr_short_way_description">Usa la ruta más eficiente en combustible (usualmente la más corta)</string>
+    <string name="replace_favorite_confirmation">¿Seguro que quieres reemplazar el favorito %1$s?</string>
+    <string name="shared_string_change">Cambiar</string>
+    <string name="get_started">Empezar</string>
     </resources>
