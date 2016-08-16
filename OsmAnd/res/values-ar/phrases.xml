@@ -368,4 +368,22 @@
 	<string name="poi_recycling_bottles">زجاجات</string>
 	<string name="poi_recycling_sheet_metal">صفائح معدنية</string>
 	<string name="poi_recycling_foil">رقاقة معدنية</string>
+	<string name="poi_employment_agency">مكتب التوظيف</string>
+	<string name="poi_research">مكتب البحوث</string>
+	<string name="poi_it">مكتب تكنولوجيا المعلومات</string>
+	<string name="poi_newspaper">مكتب جرائد</string>
+	<string name="poi_architect">مكتب مهندس معماري</string>
+	<string name="poi_advertising_agency">وكالة إعلانات</string>
+	<string name="poi_educational_institution">مؤسسة تعليمية</string>
+	<string name="poi_studio">ستوديو</string>
+	<string name="poi_office_religion">مكتب شؤون دينية</string>
+	<string name="poi_association">مكتب منظمة</string>
+	<string name="poi_financial">مكتب مالية</string>
+	<string name="poi_political_party">مكتب حزب سياسي</string>
+	<string name="poi_notary">كاتب</string>
+	<string name="poi_foundation">مكتب مؤسسة</string>
+	<string name="poi_tax_advisor">مكتب مستشار الضرائب</string>
+
+	<string name="poi_stadium">ملعب</string>
+	<string name="poi_sports_centre">مركز رياضي</string>
 	</resources>
