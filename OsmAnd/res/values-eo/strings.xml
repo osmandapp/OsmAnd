@@ -1658,7 +1658,7 @@ Proporcia memoro %4$s MB (Limito de Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="filter_existing_indexes">Elŝutitaj</string>
     <string name="shared_string_download_map">Elŝuti mapon</string>
     <string name="fast_route_mode">Plej rapida kurso</string>
-    <string name="fast_route_mode_descr">"Aktivigu por kalkuli la plej rapidan kurson, aŭ malaktivigu por la plej mallongan kurson "</string>
+    <string name="fast_route_mode_descr">"Aktivigu por kalkuli la plej rapidan kurson, aŭ malaktivigu por brulaĵ-ŝpareman kurson "</string>
     <string name="layer_route">Kurso</string>
     <string name="layer_osm_bugs">OSM notoj (enrete)</string>
     
@@ -2420,4 +2420,7 @@ Se vi bezonas helpon pri OsmAnd aplikaĵo, bonvolu kontakti nian helpantaron: su
 
     <string name="shared_string_change">Ŝanĝi</string>
     <string name="get_started">Eki</string>
+    <string name="routing_attr_short_way_name">Brulaĵ-ŝparema kurso</string>
+    <string name="routing_attr_short_way_description">Kalkulas brulaĵ-ŝpareman kurson (kutime plej mallongan)</string>
+    <string name="replace_favorite_confirmation">Ĉu vi volas anstataŭigi la ŝatatan ejon %1$s?</string>
     </resources>
