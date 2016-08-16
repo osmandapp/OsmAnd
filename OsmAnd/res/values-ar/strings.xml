@@ -2389,7 +2389,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="daynight_descr">اختيار قاعدة تحويل وضع نهار/ ليل</string>
     <string name="download_files_question">تحميل {0} ملف ({1} مب)؟</string>
     <string name="items_were_selected">{0} عنصر محدد</string>
-    <string name="fast_route_mode_descr">"تفعيل لحساب الطريق الأسرع أو تعطيل لحساب مسار أقصر "</string>
+    <string name="fast_route_mode_descr">"تفعيل لحساب الطريق الأسرع أو تعطيل لحساب مسار أقل استهلاكا للوقود "</string>
     <string name="continuous_rendering">أداء مستمر</string>
     <string name="continuous_rendering_descr">عرض أداء مستمر بدلا من صورة في المرة الواحدة</string>
     <string name="rendering_exception">حدث خطأ أثناء تقديم المساحة المحددة</string>
@@ -2528,4 +2528,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
 
     <string name="shared_string_change">تغيير</string>
     <string name="get_started">باشر</string>
+    <string name="routing_attr_short_way_name">طريق أقل استهلاكا للوقود</string>
+    <string name="routing_attr_short_way_description">استخدم طريق أقل استهلاكا للوقود (عادة أقصر)</string>
+    <string name="replace_favorite_confirmation">هل أنت متأكد من أنك تريد استبدال المفضلة لديك %1$s؟</string>
     </resources>
