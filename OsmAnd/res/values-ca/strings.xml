@@ -486,7 +486,7 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="items_were_selected">{0} ítem(s) seleccionat(s)</string>
     <string name="shared_string_select_all">Selecciona-ho tot</string>
     <string name="fast_route_mode">La ruta més ràpida</string>
-    <string name="fast_route_mode_descr">Activeu per calcular la ruta més ràpida o desactiveu per calcular la més curta </string>
+    <string name="fast_route_mode_descr">"Activeu per calcular la ruta més ràpida o desactiveu per calcular la de menys consum "</string>
     <string name="shared_string_download_map">Baixa el mapa</string>
     <string name="tiles_to_download_estimated_size">Per al nivell de zoom {0} es baixaran {1} tessel·les ({2} MB)</string>
     <string name="shared_string_ok">D\'acord</string>
@@ -2414,4 +2414,7 @@ Si aprecieu OsmAnd  i OSM i vulgueu ajudar-los, és la via perfecta per fer-ho."
     <string name="rendering_attr_hideOverground_name">Elements a cel obert</string>
     <string name="shared_string_change">Modifica</string>
     <string name="get_started">Comença</string>
+    <string name="routing_attr_short_way_name">Ruta amb menys consum</string>
+    <string name="routing_attr_short_way_description">Utilitza la ruta de menys consum (normalment la més curta)</string>
+    <string name="replace_favorite_confirmation">Confirmeu que voleu substituir la preferència %1$s?</string>
     </resources>
