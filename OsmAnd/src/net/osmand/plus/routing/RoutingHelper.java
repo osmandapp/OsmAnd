@@ -737,22 +737,6 @@ public class RoutingHelper {
 		}
 		return formattedStreetName;
 
-//		if(destination != null && destination.length() > 0){
-//			if(ref != null && ref.length() > 0) {
-//				destination = ref + " " + destination;
-//			}
-//			return destination;
-//		} else if(name != null && name.length() > 0){
-//			if(ref != null && ref.length() > 0) {
-//				name = ref + " " + name;
-//			}
-//			return name;
-//		} else {
-//			if(ref == null) {
-//				return "";
-//			}
-//			return ref;
-//		}
 	}
 	
 //	protected boolean isDistanceLess(float currentSpeed, double dist, double etalon, float defSpeed){

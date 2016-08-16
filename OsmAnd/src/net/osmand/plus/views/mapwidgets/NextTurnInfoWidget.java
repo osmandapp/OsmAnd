@@ -21,6 +21,7 @@ import android.graphics.Path;
 import android.graphics.PointF;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.ColorRes;
 import android.text.TextPaint;
 
 
@@ -127,6 +128,7 @@ public class NextTurnInfoWidget extends TextInfoWidget {
 		private boolean mini;
 		private PointF centerText;
 		private TextPaint textPaint;
+		private int clr;
 		
 		public TurnDrawable(Context ctx, boolean mini) {
 			this.ctx = ctx;
@@ -141,9 +143,16 @@ public class NextTurnInfoWidget extends TextInfoWidget {
 
 			paintRouteDirection = new Paint();
 			paintRouteDirection.setStyle(Style.FILL);
-			paintRouteDirection.setColor(ctx.getResources().getColor(R.color.nav_arrow));
 			paintRouteDirection.setAntiAlias(true);
-			
+			setColor(R.color.nav_arrow);
+		}
+		
+		@ColorRes
+		public void setColor(int clr) {
+			if(clr != this.clr) {
+				this.clr = clr;
+				paintRouteDirection.setColor(ctx.getResources().getColor(clr));
+			}
 		}
 		
 		@Override
