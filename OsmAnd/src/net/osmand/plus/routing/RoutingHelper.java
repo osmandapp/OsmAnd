@@ -735,7 +735,7 @@ public class RoutingHelper {
 			}
 			formattedStreetName = formattedStreetName + towards + " " + destination;
 		}
-		return formattedStreetName;
+		return formattedStreetName.replace(";", ", ");
 
 	}
 	
