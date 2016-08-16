@@ -75,10 +75,10 @@
     <string name="plugin_distance_point_hdop">дакладнасьць</string>
     <string name="plugin_distance_point_speed">хуткасьць</string>
     <string name="plugin_distance_point_ele">вышыня</string>
-    <string name="plugin_distance_point">Кропка</string>
+    <string name="plugin_distance_point">Пункт</string>
     <string name="gpx_file_name">Назва GPX файлу</string>
     <string name="gpx_saved_sucessfully">GPX файл пасьпяхова захаваны ў {0}</string>
-    <string name="osmand_distance_planning_plugin_description">Модуль дадае віджэт на экран мапы, які дазваляе ствараць маршруты, націснуўшы на мапе, а таксама выкарыстоўваць ці зьмяняць існуючыя файлы GPX, планаваць паездку і вымяраць адлегласьць паміж кропкамі. Вынікі могуць быць захаваны ў выглядзе файла GPX, які пасля можа быць выкарыстаны для навігацыі.</string>
+    <string name="osmand_distance_planning_plugin_description">Модуль дадае віджэт на экран мапы, які дазваляе ствараць маршруты, націснуўшы на мапе, а таксама выкарыстоўваць ці зьмяняць існуючыя файлы GPX, планаваць паездку і вымяраць адлегласьць паміж пунктамі. Вынікі могуць быць захаваны ў выглядзе файла GPX, які пасля можа быць выкарыстаны для навігацыі.</string>
     <string name="osmand_distance_planning_plugin_name">Прылада для разьліку адлегласьцей й плянаваньня</string>
     <string name="use_distance_measurement_help">* Націсніце, каб адзначыць пункт.
 
@@ -90,7 +90,7 @@
     <string name="distance_measurement_start_editing">Пачаць рэдагаваньне</string>
     <string name="distance_measurement_finish_editing">Скончыць рэдагаваньне</string>
     <string name="distance_measurement_finish_subtrack">Пачаць новы падтрэк</string>
-    <string name="distance_measurement_clear_route">Выдаліць ўсе кропкі</string>
+    <string name="distance_measurement_clear_route">Выдаліць ўсе пункты</string>
     
     <string name="distance_measurement_load_gpx">Адчыніць існы GPX</string>
     <string name="wait_current_task_finished">Калі ласка, пачакайце пакуль бягучая задача не будзе завершаная</string>
@@ -243,7 +243,7 @@
     <string name="arrived_at_intermediate_point">Вы дасягнулі прамежкавага пункта прызначэньня</string>
     <string name="context_menu_item_intermediate_point">Дадаць прамежкавым пунктам прызначэньня</string>
     <string name="map_widget_intermediate_distance">Прамежкавы пункт прызначэньня</string>
-    <string name="ending_point_too_far">Канчатковая кропка занадта далёка ад бліжэйшай дарогі.</string>
+    <string name="ending_point_too_far">Канцавы пункт занадта далёка ад найбліжэйшай дарогі.</string>
     <string name="add_tag">Дадаць адзнаку</string>
     <string name="btn_advanced_mode">Пашыраны рэжым…</string>
     <string name="poi_filter_parking">Паркоўка</string>
@@ -523,7 +523,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 Прапарцыйнай памяці %4$s МБ (Абмежаваньне Android %5$s МБ, Dalvik %6$s МБ).</string>
 	<string name="native_app_allocated_memory">Усяго фізічнай памяці</string>
 	
-	<string name="starting_point_too_far">Пачатковая кропка занадта далёка ад бліжэйшай дарогі.</string>
+	<string name="starting_point_too_far">Пачатковы пункт занадта далёка ад найбліжэйшай дарогі.</string>
 	<string name="shared_location">Агульныя месцы</string>
 	<string name="osmand_parking_event">Забраць машыну са стаянкі</string>
 	<string name="osmand_parking_warning">Папярэджаньне</string>
@@ -808,7 +808,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="local_index_mi_upload_gpx">Адаслаць у OSM</string>
 	<string name="show_more_map_detail">Паказаць больш дэталей мапы</string>
 	<string name="show_more_map_detail_descr">Паказаць некаторыя дэталі вэктарнай мапы (дарогі й іншыя) на меншым маштабе</string>
-	<string name="favourites_delete_multiple_succesful">Упадабаныя кропкі пасьпяхова выдаленыя.</string>
+	<string name="favourites_delete_multiple_succesful">Упадабаныя пункты пасьпяхова выдаленыя.</string>
 	<string name="favorite_delete_multiple">Вы зьбіраецеся выдаліць %1$d упадабаныя і %2$d групы. Вы ўпэўненыя ?</string>
 	<string name="favorite_home_category">Дом</string>
 	<string name="favorite_friends_category">Сябры</string>
@@ -917,7 +917,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="send_location_email_pattern">Для таго, каб убачыць месцазнаходжаньне націсьніце на спасылку %1$s ці android спасылку %2$s</string>
 	<string name="send_location">Даслаць каардынаты</string>
 	<string name="context_menu_item_share_location">Даслаць каардынаты</string>
-	<string name="add_waypoint_dialog_added">Кропка GPX \'\'{0}\'\' была пасьпяхова дададзеная</string>
+	<string name="add_waypoint_dialog_added">Пункт GPX \'\'{0}\'\' быў пасьпяхова дададзены</string>
 	<string name="add_waypoint_dialog_title">Дадаць кропку да запісанага GPX-сьледу</string>
 	<string name="context_menu_item_add_waypoint">Дадаць GPX кропку</string>
 	<string name="amenity_type_administrative">Адміністрацыйны</string>
@@ -961,7 +961,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="specified_dir_doesnt_exist">Указаны каталог не знойдзены.</string>
 	<string name="application_dir">Каталёг захоўваньня зьвестак</string>
 	
-	<string name="osmand_net_previously_installed">У вас ўсталяваная папярэдняя версія OsmAnd. Усе лякальныя дадзеныя падтрымліваюцца новай версіяй. Але захаваныя кропкі трэба экспартаваць з папярэдняй вэрсіі і імпартаваць у новую.</string>
+	<string name="osmand_net_previously_installed">У вас ўсталяваная папярэдняя версія OsmAnd. Усе лякальныя дадзеныя падтрымліваюцца новай версіяй. Але захаваныя пункты трэба экспартаваць з папярэдняй вэрсіі і імпартаваць у новую.</string>
 	<string name="build_installed">Зборка {0} пасьпяхова ўсталявана ({1}).</string>
 	<string name="downloading_build">Сьцягваецца зборка…</string>
 	<string name="install_selected_build">Хочаце ўсталяваць OsmAnd - {0} з {1} {2} МБ?</string>
@@ -1146,7 +1146,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="downloading_list_indexes">Сьцягваецца сьпіс даступных рэгіёнаў…</string>
 	<string name="list_index_files_was_not_loaded">Сьпіс даступных рэгіёнаў ня быў зладаваны з osmand.net.</string>
 	
-	<string name="fav_points_edited">Захаваная кропка была зьменена</string>
+	<string name="fav_points_edited">Улюбёны пункт быў зьменены</string>
 	<string name="fav_points_not_exist">Няма ўпадабаных месцаў</string>
 	<string name="update_existing">Замяніць</string>
 	<string name="only_show">Паказаць маршрут</string>
@@ -1270,7 +1270,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="favourites_context_menu_edit">Рэдагаваньне ўпадабанага</string>
 	<string name="favourites_context_menu_delete">Выдаліць упадабанае</string>
 	<string name="favourites_remove_dialog_msg">Выдаліць кропку \'%s\' з закладак?</string>
-	<string name="favourites_remove_dialog_success">Кропка {0} была паспяхова выдаленая з закладак.</string>
+	<string name="favourites_remove_dialog_success">Пункт {0} быў паспяхова выдалены з закладак.</string>
 	
 	
 	
@@ -1289,7 +1289,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	
 	<string name="poi_edit_title">Правіць POI</string>
 	<string name="poi_create_title">Стварыць POI</string>
-	<string name="poi_error_poi_not_found">POI не знойдзена або не зьяўляецца кропкай</string>
+	<string name="poi_error_poi_not_found">POI не знойдзены або не зьяўляецца пунктам</string>
 	<string name="poi_remove_confirm_template">Выдаліць {0} (дадаць каментар)?</string>
 	<string name="poi_remove_title">Выдаліць POI</string>
 	<string name="poi_remove_success">POI выдаленая</string>
@@ -1486,7 +1486,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="osmo_mode_off">Запусьціць сэсыю OSMo</string>
     
 	<string name="share_fav_subject">Упадабанае адаслана праз OsmAnd</string>
-	<string name="use_points_as_intermediates">Разлічыць маршрут паміж кропкамі</string>
+	<string name="use_points_as_intermediates">Разлічыць маршрут паміж пунктамі</string>
     
     <string name="osmo_auto_send_locations_descr">Аўтаматычна пачынаць падарожжа і перадачу месцазнаходжаньня пасьля старту дастасаваньня</string>
     <string name="osmo_auto_send_locations">Аўтаматычна пачынаць падарожжа</string>
@@ -1529,7 +1529,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="osmo_activity">Маніторынг OpenStreetMap</string>
     <string name="osmo_enable_tracker">Адсылаць маё месцазнаходжаньне</string>
     
-	<string name="import_file_favourites">Захаваць зьвесткі як GPX файл або імпартаваць кропкі ў абранае?</string>
+	<string name="import_file_favourites">Захаваць зьвесткі як GPX файл або імпартаваць пункты ў абранае?</string>
 	
 	<string name="osmo_track_interval">Інтэрвал адсылкі дадзеных</string>
 	<string name="osmo_expire_group">Тэрмін дзеяньня скончыцца праз</string>
@@ -1700,7 +1700,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="rendering_value_pedestrian_name">Пешаход</string>
     <string name="download_additional_maps">Сьцягнуць мапы, што адсутнічаюць, %1$s (%2$d МБ)?</string>
     
-    <string name="waypoints">Кропкі шляху</string>
+    <string name="waypoints">Пункты шляху</string>
     <string name="way_alarms">Дарожныя папярэджаньні</string>
     <string name="speak_favorites">Упадабаныя паблізу</string>
     <string name="speak_poi">Навакольныя POI</string>
@@ -1734,7 +1734,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="text_size">Памер тэксту</string>
     <string name="speed_limit_exceed">Дапушчальнае значэньне перавышэньня хуткасьці</string>
 	<string name="speed_limit_exceed_message">Задаць дапушчальнае значэньне перавышэньня хуткасьці, пры якім вы атрымаеце галасавое паведамленьне.</string>
-	<string name="fav_point_emoticons_message">Назва ўлюбёнай кропкі была зьменена на %1$s для магчымасьці захаваньня радка з эматыконам ў файл.</string>
+	<string name="fav_point_emoticons_message">Назва ўлюбёнага пункту была зьменена на %1$s для магчымасьці захаваньня радка з эматыконам ў файл.</string>
     <string name="print_route">Паказаць маршрут</string>
     <string name="fav_point_dublicate">Дубляваньне назвы ўлюбёнага пункту</string>
     <string name="fav_point_dublicate_message">Улюбёны пункт з такой назвай ўжо існуе, таму будзе выкарыстана %1$s для прадухіленьня дубляваньня імёнаў.</string>
@@ -1827,7 +1827,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="rendering_attr_streetLighting_name">Вулічнае асьвятленьне</string>
     <string name="version_settings_descr">Сьцягваць начныя зборкі</string>
     <string name="version_settings">Зборкі</string>
-    <string name="points">Кропкі</string>
+    <string name="points">Пункты</string>
     
     
     <string name="gps_status">Стан GPS</string>
