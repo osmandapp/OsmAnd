@@ -632,7 +632,7 @@ Aktuell sind {2} MB verfügbar.</string>
 	<string name="shared_string_select_all">Alle markieren</string>
 	<string name="shared_string_refresh">Aktualisieren</string>
 	<string name="fast_route_mode">Schnellste Route</string>
-	<string name="fast_route_mode_descr">"Auswählen für schnellste Route oder deaktivieren für kürzeste Route "</string>
+	<string name="fast_route_mode_descr">"Auswählen für schnellste Route oder deaktivieren für Kraftstoff sparende Route "</string>
 	<string name="tiles_to_download_estimated_size">Bei Zoomlevel {0} lade {1} Kacheln\n ({2} MB)</string>
 	<string name="shared_string_download_map">Karte herunterladen</string>
 	<string name="select_max_zoom_preload_area">Wähle maximale zu ladende Vergrößerung</string>
@@ -2482,4 +2482,9 @@ Wenn Sie OsmAnd und OSM lieben und unterstützen wollen, so ist dies die perfekt
     <string name="route_stops_before">%1$s Haltestellen vor</string>
     <string name="rendering_attr_hideOverground_name">Oberirdische Objekte</string>
 
+    <string name="routing_attr_short_way_name">Kraftstoff sparende Route</string>
+    <string name="routing_attr_short_way_description">Nutze Kraftstoff sparende Route (in der Regel kürzer)</string>
+    <string name="replace_favorite_confirmation">Wollen sie Favorit %1$s wirklich ersetzen?</string>
+    <string name="shared_string_change">Änderung</string>
+    <string name="get_started">Erste Schritte</string>
     </resources>
