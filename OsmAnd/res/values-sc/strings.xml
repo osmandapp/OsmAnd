@@ -1428,7 +1428,7 @@ Memòria in proportzione %4$s MB (lìmite de Android %5$s MB, Dalvik %6$s MB).</
     <string name="daynight_descr">Issèbera sas règulas pro sa muda de sa modalidade die/note</string>
     <string name="download_files_question">Iscarrigare {0} documentu/os ({1} MB)?</string>
     <string name="shared_string_refresh">Torra a carrigare</string>
-    <string name="fast_route_mode_descr">"Abìlita pro calculare s’àndala prus lestra o disabìlita pro s’àndala prus curtza "</string>
+    <string name="fast_route_mode_descr">"Abìlita pro calculare s’àndala prus lestra o disabìlita pro s’àndala cun consumos prus bassos "</string>
     <string name="select_max_zoom_preload_area">Ischerta su zoom màssimu da precarrigare</string>
     <string name="continuous_rendering">Disinnu sighidu</string>
     <string name="continuous_rendering_descr">Ammustra unu disinnu (rendering) sighidu imbetzes de una immàgine istantànea</string>
@@ -2538,4 +2538,10 @@ Como bi sunt {2} MB ebbia disponìbiles.</string>
  e àteru…
  "</string>
     <string name="route_stops_before">%1$s firmadas in antis</string>
+    <string name="routing_attr_short_way_name">Àndala prus de atòliu pro sos consumos</string>
+    <string name="routing_attr_short_way_description">Issèbera s\'àndala prus de atòliu pro sos consumos (sa prus curtza, de sòlitu)</string>
+    <string name="replace_favorite_confirmation">Seguru ses de bòlere sostituire su preferidu %1$s?</string>
+    <string name="rendering_attr_hideOverground_name">Ogetos subra de terra</string>
+    <string name="shared_string_change">Càmbia</string>
+    <string name="get_started">Incumintza</string>
     </resources>
