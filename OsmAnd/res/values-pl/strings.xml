@@ -248,7 +248,7 @@
     <string name="osmand_service">Tryb działania w tle</string>
     <string name="osmand_service_descr">Działanie aplikacji, gdy ekran jest wygaszony</string>
     <string name="fast_route_mode">Najszybsza trasa</string>
-    <string name="fast_route_mode_descr">"Wyznacza najszybszą trasę zamiast najkrótszej "</string>
+    <string name="fast_route_mode_descr">"Wyznacza najszybszą trasę zamiast paliwo-oszczędnej "</string>
     <string name="tiles_to_download_estimated_size">Do pobrania {1} kafelków na poziomie {0} ({2} MB)</string>
     <string name="shared_string_download_map">Pobierz mapę</string>
     <string name="select_max_zoom_preload_area">Proszę wybrać maksymalne przybliżenie do pobrania</string>
@@ -2472,4 +2472,7 @@ Włączenie tego widoku zmienia styl mapy na „Zima i narty”, ukazujący tere
 
     <string name="shared_string_change">Zmień</string>
     <string name="get_started">Rozpocznij</string>
+    <string name="routing_attr_short_way_name">Paliwo-oszczędna trasa</string>
+    <string name="routing_attr_short_way_description">Oblicza paliwo-oszczędną trasę (zwykle najkrótszą)</string>
+    <string name="replace_favorite_confirmation">Czy chcesz zastąpić ulubiony punkt %1$s?</string>
     </resources>
