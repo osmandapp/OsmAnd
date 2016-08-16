@@ -9,6 +9,7 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="clear_tile_data">Clear all tiles</string>
     <string name="routing_attr_short_way_name">Fuel-efficient way</string>
     <string name="routing_attr_short_way_description">Use fuel-efficient way (usually shorter)</string>
     <string name="replace_favorite_confirmation">Are you sure you want to replace favorite %1$s?</string>

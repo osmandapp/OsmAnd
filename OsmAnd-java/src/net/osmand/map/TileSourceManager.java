@@ -26,6 +26,7 @@ import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
+
 import bsh.Interpreter;
 
 
@@ -249,6 +250,20 @@ public class TileSourceManager {
 			fis.close();
 			bous.close();
 			return bous.toByteArray();
+		}
+		
+		
+		@Override
+		public void clearTiles(String path) {
+			File pf = new File(path);
+			File[] list = pf.listFiles();
+			if(list != null) {
+				for(File l : list) {
+					if(l.isDirectory()) {
+						Algorithms.removeAllFiles(l);
+					}
+				}
+			}
 		}
 	}
 	

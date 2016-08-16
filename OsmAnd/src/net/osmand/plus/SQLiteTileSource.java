@@ -413,6 +413,17 @@ public class SQLiteTileSource implements ITileSource {
 		insertImage(x, y, zoom, buf.array());
 		is.close();
 	}
+	
+
+	@Override
+	public void clearTiles(String path) {
+		SQLiteConnection db = getDatabase();
+		if (db == null || db.isReadOnly() || onlyReadonlyAvailable) {
+			return;
+		}
+		db.execSQL("TRUNCATE TABLE tiles");
+	}
+	
 	/**
 	 * Makes method synchronized to give a little more time for get methods and 
 	 * let all writing attempts to wait outside of this method   
@@ -496,6 +507,7 @@ public class SQLiteTileSource implements ITileSource {
 	public String getReferer() {
 		return referer;
 	}
+
 
 }
 

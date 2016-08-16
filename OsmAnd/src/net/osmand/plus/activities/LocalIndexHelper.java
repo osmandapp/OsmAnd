@@ -77,6 +77,7 @@ public class LocalIndexHelper {
 			if (template.getExpirationTimeMinutes() >= 0) {
 				descr += "\n" + app.getString(R.string.local_index_tile_data_expire, template.getExpirationTimeMinutes());
 			}
+			info.setAttachedObject(template);
 			info.setDescription(descr);
 		} else if (info.getType() == LocalIndexType.SRTM_DATA) {
 			info.setDescription(app.getString(R.string.download_srtm_maps));

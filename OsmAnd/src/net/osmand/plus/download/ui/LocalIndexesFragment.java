@@ -35,8 +35,8 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import net.osmand.IndexConstants;
+import net.osmand.map.ITileSource;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.ItemClickListener;
 import net.osmand.plus.ContextMenuItem;
@@ -220,6 +220,20 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 					getDownloadActivity().reloadLocalIndexes();
 				}
 			});
+		} else if (resId == R.string.clear_tile_data) {		
+			AlertDialog.Builder confirm = new AlertDialog.Builder(getActivity());
+			confirm.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					new LocalIndexOperationTask(getDownloadActivity(), listAdapter, LocalIndexOperationTask.CLEAR_TILES_OPERATION).execute(info);
+				}
+			});
+			confirm.setNegativeButton(R.string.shared_string_no, null);
+			String fn = FileNameTranslationHelper.getFileName(getActivity(),
+					getMyApplication().getResourceManager().getOsmandRegions(),
+					info.getFileName());
+			confirm.setMessage(getString(R.string.delete_confirmation_msg, fn));
+			confirm.show();
 		} else if (resId == R.string.local_index_mi_restore) {
 			new LocalIndexOperationTask(getDownloadActivity(), listAdapter, LocalIndexOperationTask.RESTORE_OPERATION).execute(info);
 		} else if (resId == R.string.shared_string_delete) {
@@ -380,6 +394,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 		protected static int DELETE_OPERATION = 1;
 		protected static int BACKUP_OPERATION = 2;
 		protected static int RESTORE_OPERATION = 3;
+		protected static int CLEAR_TILES_OPERATION = 4;
 
 		private final int operation;
 		private DownloadActivity a;
@@ -459,6 +474,11 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 							info.setBackupedData(true);
 							getMyApplication().getResourceManager().closeFile(info.getFileName());
 						}
+					} else if (operation == CLEAR_TILES_OPERATION) {
+						ITileSource src =  (ITileSource) info.getAttachedObject();
+						if(src != null) {
+							src.clearTiles(info.getPathToData());
+						}
 					}
 					total++;
 					if (successfull) {
@@ -504,8 +524,11 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 		@Override
 		protected void onPostExecute(String result) {
 			a.setProgressBarIndeterminateVisibility(false);
-			Toast.makeText(a, result, Toast.LENGTH_LONG).show();
-			if (operation == RESTORE_OPERATION || operation == BACKUP_OPERATION) {
+			if(result != null && result.length() > 0) {
+				Toast.makeText(a, result, Toast.LENGTH_LONG).show();
+			}
+			
+			if (operation == RESTORE_OPERATION || operation == BACKUP_OPERATION || operation == CLEAR_TILES_OPERATION) {
 				a.reloadLocalIndexes();
 			} else {
 				a.newDownloadIndexes();
@@ -1138,10 +1161,6 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 				}
 			}
 
-			private Drawable getContentIcon(DownloadActivity context, int resourceId) {
-				return context.getMyApplication().getIconsCache().getThemedIcon(resourceId);
-			}
-
 			private Drawable getContentIcon(DownloadActivity context, int resourceId, int colorId) {
 				return context.getMyApplication().getIconsCache().getIcon(resourceId, colorId);
 			}
@@ -1176,6 +1195,18 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 				return true;
 			}
 		});
+		if (info.getType() == LocalIndexType.TILES_DATA && (info.getAttachedObject() instanceof ITileSource) &&
+				((ITileSource)info.getAttachedObject()).couldBeDownloadedFromInternet()) {
+			item = optionsMenu.getMenu().add(R.string.clear_tile_data)
+					.setIcon(iconsCache.getThemedIcon(R.drawable.ic_action_remove_dark));
+			item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+				@Override
+				public boolean onMenuItemClick(MenuItem item) {
+					performBasicOperation(R.string.clear_tile_data, info);
+					return true;
+				}
+			});	
+		}
 		final IndexItem update = filesToUpdate.get(info.getFileName());
 		if (update != null) {
 			item = optionsMenu.getMenu().add(R.string.shared_string_download)
@@ -1203,45 +1234,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 		optionsMenu.show();
 	}
 
-	private void runLiveUpdate(final LocalIndexInfo info) {
-		final String fnExt = Algorithms.getFileNameWithoutExtension(new File(info.getFileName()));
-		new AsyncTask<Object, Object, IncrementalUpdateList>() {
-
-			protected void onPreExecute() {
-				getDownloadActivity().setSupportProgressBarIndeterminateVisibility(true);
-
-			}
-
-			@Override
-			protected IncrementalUpdateList doInBackground(Object... params) {
-				IncrementalChangesManager cm = getMyApplication().getResourceManager().getChangesManager();
-				return cm.getUpdatesByMonth(fnExt);
-			}
-
-			protected void onPostExecute(IncrementalUpdateList result) {
-				getDownloadActivity().setSupportProgressBarIndeterminateVisibility(false);
-				if (result.errorMessage != null) {
-					Toast.makeText(getDownloadActivity(), result.errorMessage, Toast.LENGTH_SHORT).show();
-				} else {
-					List<IncrementalUpdate> ll = result.getItemsForUpdate();
-					if (ll.isEmpty()) {
-						Toast.makeText(getDownloadActivity(), R.string.no_updates_available, Toast.LENGTH_SHORT).show();
-					} else {
-						int i = 0;
-						IndexItem[] is = new IndexItem[ll.size()];
-						for (IncrementalUpdate iu : ll) {
-							IndexItem ii = new IndexItem(iu.fileName, "Incremental update", iu.timestamp, iu.sizeText,
-									iu.contentSize, iu.containerSize, DownloadActivityType.LIVE_UPDATES_FILE);
-							is[i++] = ii;
-						}
-						getDownloadActivity().startDownload(is);
-					}
-				}
-
-			}
-
-		}.execute(fnExt);
-	}
+	
 
 
 	private DownloadActivity getDownloadActivity() {

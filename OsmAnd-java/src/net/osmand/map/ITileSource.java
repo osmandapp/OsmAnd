@@ -30,4 +30,6 @@ public interface ITileSource {
 	
 	public String getReferer();
 
+	public void clearTiles(String path);
+
 }

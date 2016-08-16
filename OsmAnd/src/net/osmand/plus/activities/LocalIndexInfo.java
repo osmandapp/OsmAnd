@@ -23,6 +23,7 @@ public class LocalIndexInfo {
 	private String fileName;
 	private boolean singleFile;
 	private int kbSize = -1;
+	private Object attachedObject;
 
 	// UI state expanded
 	private boolean expanded;
@@ -42,6 +43,14 @@ public class LocalIndexInfo {
 		this.backupedData = backuped;
 	}
 
+	public void setAttachedObject(Object attachedObject) {
+		this.attachedObject = attachedObject;
+	}
+	
+	public Object getAttachedObject() {
+		return attachedObject;
+	}
+	
 	private String formatName(String name) {
 		int ext = name.indexOf('.');
 		if (ext != -1) {
@@ -164,23 +173,8 @@ public class LocalIndexInfo {
 		return type.getBasename(this);
 	}
 
-
-	protected LocalIndexInfo(Parcel in) {
-		int tmpType = in.readInt();
-		this.type = tmpType == -1 ? null : LocalIndexType.values()[tmpType];
-		this.description = in.readString();
-		this.name = in.readString();
-		this.backupedData = in.readByte() != 0;
-		this.corrupted = in.readByte() != 0;
-		this.notSupported = in.readByte() != 0;
-		this.loaded = in.readByte() != 0;
-		this.subfolder = in.readString();
-		this.pathToData = in.readString();
-		this.fileName = in.readString();
-		this.singleFile = in.readByte() != 0;
-		this.kbSize = in.readInt();
-		this.expanded = in.readByte() != 0;
-	}
+  
+	
 
 	
 }
