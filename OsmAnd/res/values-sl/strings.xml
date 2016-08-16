@@ -474,7 +474,7 @@ Omogoča tudi dodajanje opomb v koledar za prikaz opomnikov ob daljših časih p
     <string name="choose_auto_follow_route_descr">Časovni zamik, preden se položaj samodejno postavi v središče zemljevida</string>
     
     <string name="fast_route_mode">Najhitrejša pot</string>
-    <string name="fast_route_mode_descr">"Izbrana možnost določa izbor najhitrejše poti, neizbrana pa po razdalji najkrajše. "</string>
+    <string name="fast_route_mode_descr">"Izbrana možnost določa izbor najhitrejše poti oziroma poti z najmanjšo porabo goriva. "</string>
     <string name="search_position_undefined">Nedoločeno</string>
 
     
@@ -2551,4 +2551,9 @@ V kolikor naletite na težave s programom OsmAnd, prosimo, stopite v stik s skup
     <string name="route_stops_before">%1$s se zaustavi pred</string>
     <string name="rendering_attr_hideOverground_name">Nadzemne zgradbe</string>
 
+    <string name="routing_attr_short_way_name">Pot z najmanjšo porabo goriva</string>
+    <string name="routing_attr_short_way_description">Prednostno izberi pot z najmanjšo porabo goriva (običajno najkrajša)</string>
+    <string name="replace_favorite_confirmation">Ali ste prepričani, da želite zamenjati priljubljeno točko %1$s?</string>
+    <string name="shared_string_change">Spremeni</string>
+    <string name="get_started">Kako začeti ...</string>
     </resources>
