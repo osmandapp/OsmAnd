@@ -2618,9 +2618,9 @@ Hvis du er fan af OsmAnd og OSM og ønsker at støtte dem, er det den perfekte m
     <string name="route_stops_before">%1$s stop før</string>
     <string name="rendering_attr_hideOverground_name">Objekter over jorden</string>
 
-    <string name="routing_attr_short_way_name">Brændstoføkonomisk måde</string>
-    <string name="routing_attr_short_way_description">Brug brændstoføkonomisk måde (normalt kortere)</string>
+    <string name="routing_attr_short_way_name">Brændstofbesparende rute</string>
+    <string name="routing_attr_short_way_description">Brug brændstofbesparende rute (normalt kortere)</string>
     <string name="replace_favorite_confirmation">Erstat favorit %1$s?</string>
     <string name="shared_string_change">Skift</string>
-    <string name="get_started">Kom i gang</string>
+    <string name="get_started">Kom godt i gang</string>
     </resources>
