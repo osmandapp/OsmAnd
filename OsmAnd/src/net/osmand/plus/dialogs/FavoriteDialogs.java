@@ -72,7 +72,7 @@ public class FavoriteDialogs {
 		builder.setTitle(R.string.update_existing);
 		final FavouritePoint fp = favouritesAdapter.getItem(position);
 		builder.setMessage(activity.getString(R.string.replace_favorite_confirmation, fp.getName()));
-		builder.setNegativeButton(R.string.shared_string_yes, null);
+		builder.setNegativeButton(R.string.shared_string_no, null);
 		builder.setPositiveButton(R.string.shared_string_yes, new OnClickListener() {
 			
 			@Override
