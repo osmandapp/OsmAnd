@@ -288,7 +288,7 @@ Ora, sono disponibili solo {2} MB.</string>
     <string name="items_were_selected">{0} oggetto(i) selezionati</string>
     <string name="filter_existing_indexes">Filtro download</string>
     <string name="fast_route_mode">Percorso più veloce</string>
-    <string name="fast_route_mode_descr">Abilita per calcolare il percorso più veloce o disabilita per il percorso più corto </string>
+    <string name="fast_route_mode_descr">"Abilita per calcolare il percorso più veloce o disabilita per il percorso dal minor consumo "</string>
     <string name="tiles_to_download_estimated_size">Per lo zoom {0} scarica {1} tasselli ({2} MB)</string>
     <string name="shared_string_download_map">Download mappa</string>
     <string name="select_max_zoom_preload_area">Seleziona lo zoom massimo da precaricare</string>
@@ -2581,4 +2581,9 @@ Se ami OsmAnd e OSM e vuoi sostenerli è un modo perfetto farlo.</string>
 	<string name="lang_hsb">Sorabo (Superiore)</string>
     <string name="rendering_attr_hideOverground_name">Oggetti sopra il terreno</string>
 
+    <string name="routing_attr_short_way_name">Percorso più efficiente rispetto ai consumi</string>
+    <string name="routing_attr_short_way_description">Utilizza la via migliore rispetto ai consumi (di solito la più breve)</string>
+    <string name="replace_favorite_confirmation">Sei sicuro di voler sostituire il preferito %1$s?</string>
+    <string name="shared_string_change">Cambia</string>
+    <string name="get_started">Inizia</string>
     </resources>
