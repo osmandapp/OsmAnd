@@ -213,4 +213,18 @@
     <string name="weekly">Yal imalass</string>
     <string name="morning">Tifawt</string>
     <string name="night">Iḍ</string>
+    <string name="dist_away_from_my_location">Gmi %1$s ɣef</string>
+    <string name="search_categories">Taggayin</string>
+    <string name="city_type_neighbourhood">Azniq</string>
+    <string name="map_widget_search">Gmi</string>
+	<string name="shared_string_is_open_24_7">Taneldit 24/7</string>
+    <string name="follow_us">Ḍfer aɣ</string>
+    <string name="access_category_choice">Fren taggayt</string>
+    <string name="osmo_groups">Agrawen n OsMo</string>
+    <string name="shared_string_move_up">Ali</string>
+    <string name="shared_string_move_down">Ader</string>
+    <string name="road_blocked">Yergel webrid</string>
+    <string name="shared_string_type">Anaw</string>
+    <string name="live_updates">Isdɣiten usriden</string>
+    <string name="route_duration">Tanazagt</string>
     </resources>
