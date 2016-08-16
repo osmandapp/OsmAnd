@@ -328,6 +328,10 @@ public class GpxImportHelper {
 	}
 
 	private void importFavourites(final GPXUtilities.GPXFile gpxFile, final String fileName, final boolean save) {
+		if(gpxFile.points == null || gpxFile.points.size() == 0) {
+			handleResult(gpxFile, fileName, save);
+			return;
+		}
 		final DialogInterface.OnClickListener importFavouritesListener = new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
