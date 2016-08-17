@@ -1015,7 +1015,7 @@ Honek {1} MB behar ditu behin betiko.
   <string name="shared_string_select_all">Guztia hautatu</string>
   <string name="shared_string_refresh">Birkargatu</string>
   <string name="fast_route_mode">Ibilbiderik azkarrena</string>
-  <string name="fast_route_mode_descr">"Gaitu ibilbiderik azkarrena kalkulatzeko edo ezgaitu ibilbiderik laburrena kalkulatzeko "</string>
+  <string name="fast_route_mode_descr">"Gaitu ibilbiderik azkarrena kalkulatzeko edo ezgaitu ibilbide erregai-efizientea kalkulatzeko "</string>
   <string name="tiles_to_download_estimated_size">{0} zoomean deskargatu {1} tesela ({2} MB)</string>
   <string name="shared_string_download_map">Mapa deskargatu</string>
   <string name="select_max_zoom_preload_area">Aukeratu aurrekargatzeko gehienezko zooma</string>
@@ -2542,4 +2542,13 @@ OsmAnd aplikazioarekin laguntza behar baduzu, jarri kontaktuan gure laguntza tal
  "</string>
     <string name="rendering_attr_hideOverground_name">Lur gaineko objektuak</string>
 
+    <string name="no_update_info_desc">Ez egiaztatu bertsio berrien inguruko edo OsmAndekin erlazioa duten deskontuen eguneraketarik</string>
+    <string name="no_update_info">Ez erakutsi eguneraketarik</string>
+    <string name="update_all_maps_now">Mapa guztiak eguneratu nahi dituzu orain?</string>
+    <string name="clear_tile_data">Garbitu tesela guztiak</string>
+    <string name="routing_attr_short_way_name">Bide erregai-efizientea</string>
+    <string name="routing_attr_short_way_description">Erabili bide erregai-efizientea (normalean laburragoa)</string>
+    <string name="replace_favorite_confirmation">Ziur %1$s gogokoa ordezkatu nahi duzula?</string>
+    <string name="shared_string_change">Aldatu</string>
+    <string name="get_started">Hasi</string>
     </resources>
