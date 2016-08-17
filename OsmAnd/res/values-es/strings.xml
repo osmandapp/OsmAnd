@@ -2388,4 +2388,11 @@ OsmAnd Mapas y Navegación - encuentra ubicaciones en el mapa y calcula rutas si
     <string name="search_another_country">Buscar otro país</string>
     <string name="search_map">Buscando mapa…</string>
     <string name="first_usage_wizard_desc">Deja que OsmAnd determine tu ubicación y sugiera mapas que descargar para esa región.</string>
+    <string name="location_not_found">Ubicación no encontrada</string>
+    <string name="no_inet_connection">No hay conexión a Internet</string>
+    <string name="no_inet_connection_desc_map">Necesaria para descargar mapas.</string>
+    <string name="search_location">Buscando ubicación…</string>
+    <string name="storage_free_space">Espacio libre</string>
+    <string name="storage_place_description">Almacenamiento de datos de OsmAnd (para mapas, trazas, etc.): %1$s.</string>
+    <string name="give_permission">Dar permiso</string>
     </resources>
