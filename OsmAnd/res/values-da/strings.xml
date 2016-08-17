@@ -2625,4 +2625,6 @@ Hvis du er fan af OsmAnd og OSM og ønsker at støtte dem, er det den perfekte m
     <string name="get_started">Kom godt i gang</string>
     <string name="update_all_maps_now">Opdater alle kort nu?</string>
     <string name="clear_tile_data">Ryd alle kortbrikker</string>
+    <string name="no_update_info_desc">Kontroller ikke om der er opdateringer til nye versioner, rabatter i forbindelse med OsmAnd</string>
+    <string name="no_update_info">Vis ikke opdateringer</string>
     </resources>
