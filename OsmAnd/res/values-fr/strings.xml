@@ -2287,4 +2287,6 @@ Actuellement {2} Mo sont disponibles.</string>
     <string name="get_started">Démarrer</string>
     <string name="routing_attr_short_way_name">Trajet économe en carburant</string>
     <string name="routing_attr_short_way_description">Suivre un trajet économe en carburant (trajet habituellement plus court)</string>
+    <string name="no_update_info_desc">Ne pas vérifier les mises à jour ni les offres promotionnelles OsmAnd</string>
+    <string name="no_update_info">Ne pas afficher les mises à jour</string>
     </resources>
