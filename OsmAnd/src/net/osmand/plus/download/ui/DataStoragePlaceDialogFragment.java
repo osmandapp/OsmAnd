@@ -93,7 +93,7 @@ public class DataStoragePlaceDialogFragment extends BottomSheetDialogFragment {
 		final View view = inflater.inflate(R.layout.fragment_data_storage_place_dialog, container,
 				false);
 		((ImageView) view.findViewById(R.id.folderIconImageView))
-				.setImageDrawable(getIcon(R.drawable.ic_action_folder, R.color.map_widget_blue));
+				.setImageDrawable(getIcon(R.drawable.ic_action_folder, R.color.osmand_orange));
 
 		if (storageReadOnly) {
 			((TextView) view.findViewById(R.id.description))
