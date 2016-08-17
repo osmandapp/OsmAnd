@@ -1,13 +1,43 @@
 package net.osmand.plus.activities;
 
-import java.io.File;
-import java.lang.ref.WeakReference;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import android.Manifest;
+import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.Dialog;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.pm.PackageManager;
+import android.media.AudioManager;
+import android.net.Uri;
+import android.os.AsyncTask;
+import android.os.Build;
+import android.os.Bundle;
+import android.os.Environment;
+import android.os.Handler;
+import android.os.Message;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityCompat.OnRequestPermissionsResultCallback;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.Fragment;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.AlertDialog;
+import android.util.DisplayMetrics;
+import android.view.Gravity;
+import android.view.KeyEvent;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.ViewStub;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
@@ -28,6 +58,7 @@ import net.osmand.plus.AppInitializer.InitEvents;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.MapMarkersHelper.MapMarkerChangedListener;
+import net.osmand.plus.OnDismissDialogFragmentListener;
 import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -78,46 +109,18 @@ import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
-import android.Manifest;
-import android.app.Activity;
-import android.app.AlarmManager;
-import android.app.Dialog;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.IntentFilter;
-import android.content.pm.PackageManager;
-import android.media.AudioManager;
-import android.net.Uri;
-import android.os.AsyncTask;
-import android.os.Build;
-import android.os.Bundle;
-import android.os.Environment;
-import android.os.Handler;
-import android.os.Message;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.AlertDialog;
-import android.util.DisplayMetrics;
-import android.view.Gravity;
-import android.view.KeyEvent;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.ViewStub;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.ProgressBar;
-import android.widget.TextView;
-import android.widget.Toast;
+import java.io.File;
+import java.lang.ref.WeakReference;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class MapActivity extends OsmandActionBarActivity implements DownloadEvents,
-		ActivityCompat.OnRequestPermissionsResultCallback, IRouteInformationListener,
-		MapMarkerChangedListener {
+		OnRequestPermissionsResultCallback, IRouteInformationListener,
+		MapMarkerChangedListener, OnDismissDialogFragmentListener {
 	public static final String INTENT_KEY_PARENT_MAP_ACTIVITY = "intent_parent_map_activity_key";
 
 	private static final int SHOW_POSITION_MSG_ID = OsmAndConstants.UI_HANDLER_MAP_VIEW + 1;
@@ -621,6 +624,16 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			}
 		}
 		enableDrawer();
+	}
+
+	@Override
+	public void onDismissDialogFragment(DialogFragment dialogFragment) {
+		if (dialogFragment instanceof DataStoragePlaceDialogFragment) {
+			FirstUsageWizardFragment wizardFragment = getFirstUsageWizardFragment();
+			if (wizardFragment != null) {
+				wizardFragment.updateStorageView();
+			}
+		}
 	}
 
 	public boolean isActivityDestroyed() {
@@ -1247,11 +1260,20 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 	}
 
+	public FirstUsageWizardFragment getFirstUsageWizardFragment() {
+		FirstUsageWizardFragment wizardFragment = (FirstUsageWizardFragment) getSupportFragmentManager().findFragmentByTag(FirstUsageWizardFragment.TAG);
+		if (wizardFragment != null && !wizardFragment.isDetached()) {
+			return wizardFragment;
+		} else {
+			return null;
+		}
+	}
+
 	// DownloadEvents
 	@Override
 	public void newDownloadIndexes() {
-		FirstUsageWizardFragment wizardFragment = (FirstUsageWizardFragment) getSupportFragmentManager().findFragmentByTag(FirstUsageWizardFragment.TAG);
-		if (wizardFragment != null && !wizardFragment.isDetached()) {
+		FirstUsageWizardFragment wizardFragment = getFirstUsageWizardFragment();
+		if (wizardFragment != null) {
 			wizardFragment.newDownloadIndexes();
 		}
 		WeakReference<MapContextMenuFragment> fragmentRef = getContextMenu().findMenuFragment();
@@ -1263,8 +1285,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	@Override
 	public void downloadInProgress() {
-		FirstUsageWizardFragment wizardFragment = (FirstUsageWizardFragment) getSupportFragmentManager().findFragmentByTag(FirstUsageWizardFragment.TAG);
-		if (wizardFragment != null && !wizardFragment.isDetached()) {
+		FirstUsageWizardFragment wizardFragment = getFirstUsageWizardFragment();
+		if (wizardFragment != null) {
 			wizardFragment.downloadInProgress();
 		}
 		WeakReference<MapContextMenuFragment> fragmentRef = getContextMenu().findMenuFragment();
@@ -1275,8 +1297,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	@Override
 	public void downloadHasFinished() {
-		FirstUsageWizardFragment wizardFragment = (FirstUsageWizardFragment) getSupportFragmentManager().findFragmentByTag(FirstUsageWizardFragment.TAG);
-		if (wizardFragment != null && !wizardFragment.isDetached()) {
+		FirstUsageWizardFragment wizardFragment = getFirstUsageWizardFragment();
+		if (wizardFragment != null) {
 			wizardFragment.downloadHasFinished();
 		}
 		WeakReference<MapContextMenuFragment> fragmentRef = getContextMenu().findMenuFragment();
@@ -1302,8 +1324,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			permissionGranted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
 
 		} else if (requestCode == FirstUsageWizardFragment.FIRST_USAGE_LOCATION_PERMISSION) {
-			FirstUsageWizardFragment wizardFragment = (FirstUsageWizardFragment) getSupportFragmentManager().findFragmentByTag(FirstUsageWizardFragment.TAG);
-			if (wizardFragment != null && !wizardFragment.isDetached()) {
+			FirstUsageWizardFragment wizardFragment = getFirstUsageWizardFragment();
+			if (wizardFragment != null) {
 				wizardFragment.processLocationPermission(grantResults[0] == PackageManager.PERMISSION_GRANTED);
 			}
 		}

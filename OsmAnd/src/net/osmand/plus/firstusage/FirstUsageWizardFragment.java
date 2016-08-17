@@ -36,6 +36,7 @@ import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.DownloadValidationManager;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.download.ui.DataStoragePlaceDialogFragment;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -102,6 +103,12 @@ public class FirstUsageWizardFragment extends Fragment implements OsmAndLocation
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		view = inflater.inflate(R.layout.first_usage_wizard_fragment, container, false);
+
+		if (!AndroidUiHelper.isOrientationPortrait(getActivity()) && !AndroidUiHelper.isXLargeDevice(getActivity())) {
+			TextView wizardDescription = (TextView) view.findViewById(R.id.wizard_description);
+			wizardDescription.setMinimumHeight(0);
+			wizardDescription.setMinHeight(0);
+		}
 
 		AppCompatButton skipButton = (AppCompatButton) view.findViewById(R.id.skip_button);
 		skipButton.setOnClickListener(new View.OnClickListener() {
@@ -235,7 +242,7 @@ public class FirstUsageWizardFragment extends Fragment implements OsmAndLocation
 				break;
 		}
 
-		updateStorageView(view.findViewById(R.id.storage_layout));
+		updateStorageView();
 
 		return view;
 	}
@@ -549,36 +556,42 @@ public class FirstUsageWizardFragment extends Fragment implements OsmAndLocation
 		}
 	}
 
+	public void updateStorageView() {
+		updateStorageView(view.findViewById(R.id.storage_layout));
+	}
+
 	private void updateStorageView(View storageView) {
-		TextView title = (TextView) storageView.findViewById(R.id.storage_title);
-		OsmandSettings settings = getMyApplication().getSettings();
-		int type;
-		if (settings.getExternalStorageDirectoryTypeV19() >= 0) {
-			type = settings.getExternalStorageDirectoryTypeV19();
-		} else {
-			ValueHolder<Integer> vh = new ValueHolder<>();
-			settings.getExternalStorageDirectory(vh);
-			if (vh.value != null && vh.value >= 0) {
-				type = vh.value;
+		if (storageView != null) {
+			TextView title = (TextView) storageView.findViewById(R.id.storage_title);
+			OsmandSettings settings = getMyApplication().getSettings();
+			int type;
+			if (settings.getExternalStorageDirectoryTypeV19() >= 0) {
+				type = settings.getExternalStorageDirectoryTypeV19();
 			} else {
-				type = 0;
+				ValueHolder<Integer> vh = new ValueHolder<>();
+				settings.getExternalStorageDirectory(vh);
+				if (vh.value != null && vh.value >= 0) {
+					type = vh.value;
+				} else {
+					type = 0;
+				}
 			}
+			title.setText(getString(R.string.storage_place_description, getStorageName(type)));
+
+			TextView freeSpace = (TextView) storageView.findViewById(R.id.storage_free_space);
+			TextView freeSpaceValue = (TextView) storageView.findViewById(R.id.storage_free_space_value);
+			String freeSpaceStr = getString(R.string.storage_free_space) + ": ";
+			freeSpace.setText(freeSpaceStr);
+			freeSpaceValue.setText(getFreeSpace(settings.getExternalStorageDirectory()));
+
+			AppCompatButton changeStorageButton = (AppCompatButton) storageView.findViewById(R.id.storage_change_button);
+			changeStorageButton.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					DataStoragePlaceDialogFragment.showInstance(getActivity().getSupportFragmentManager(), false);
+				}
+			});
 		}
-		title.setText(getString(R.string.storage_place_description, getStorageName(type)));
-
-		TextView freeSpace = (TextView) storageView.findViewById(R.id.storage_free_space);
-		TextView freeSpaceValue = (TextView) storageView.findViewById(R.id.storage_free_space_value);
-		String freeSpaceStr = getString(R.string.storage_free_space) + ": ";
-		freeSpace.setText(freeSpaceStr);
-		freeSpaceValue.setText(getFreeSpace(settings.getExternalStorageDirectory()));
-
-		AppCompatButton changeStorageButton = (AppCompatButton) storageView.findViewById(R.id.storage_change_button);
-		changeStorageButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				DataStoragePlaceDialogFragment.showInstance(getActivity().getSupportFragmentManager(), false);
-			}
-		});
 	}
 
 	private String getStorageName(int type) {

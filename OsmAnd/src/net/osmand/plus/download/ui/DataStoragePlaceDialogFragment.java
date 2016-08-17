@@ -1,6 +1,7 @@
 package net.osmand.plus.download.ui;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.StatFs;
@@ -16,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import net.osmand.plus.OnDismissDialogFragmentListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
@@ -104,7 +106,7 @@ public class DataStoragePlaceDialogFragment extends BottomSheetDialogFragment {
 		deviceStorageImageView.setImageDrawable(getContentIcon(R.drawable.ic_sdcard));
 		TextView deviceStorageDescription = (TextView) view.findViewById(R.id.deviceMemoryDescription);
 		deviceStorageDescription.setText(deviceStorageName);
-		deviceStorageDescription.setText(getFreeSpace(internalStorage));
+		deviceStorageDescription.setText(getFreeSpace(deviceStorage));
 
 		View sharedMemoryRow = view.findViewById(R.id.sharedMemoryRow);
 		if (hasExternalStoragePermission && sharedStorage != null) {
@@ -146,6 +148,16 @@ public class DataStoragePlaceDialogFragment extends BottomSheetDialogFragment {
 	public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
 		outState.putBoolean(STORAGE_READOLNY_KEY, storageReadOnly);
+	}
+
+	@Override
+	public void onDismiss(DialogInterface dialog) {
+		super.onDismiss(dialog);
+		Activity activity = getActivity();
+		if (activity instanceof OnDismissDialogFragmentListener) {
+			((OnDismissDialogFragmentListener) activity).onDismissDialogFragment(this);
+		}
+
 	}
 
 	public static File getInternalStorageDirectory(Activity activity) {
