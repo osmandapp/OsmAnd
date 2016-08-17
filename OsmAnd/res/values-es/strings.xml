@@ -803,44 +803,26 @@ Puede encontrar la localización y el tiempo de estacionamiento en la tarjeta de
     <string name="osmand_long_description_1000_chars">"
  OsmAnd (OSM Automated Navigation Directions, Guía de Navegación Automatizada)
 
-
 OsmAnd es una aplicación de navegación de código abierto con acceso a una amplia variedad de datos OpenStreetMap (OSM) globales. Todos los datos del mapa (vectoriales y teselas), pueden ser almacenados en la memoria del teléfono para su uso sin conexión. OsmAnd también ofrece funcionalidad de navegación con y sin conexión, incluyendo indicaciones giro-a-giro mediante voz.
 
-
 Algunas de las características fundamentales:
-
-
-\t- Completa funcionalidad sin conexión (almacena los mapas vectoriales o teselas descargados en el almacenamiento del dispositivo)
-
-\t- Mapas vectoriales compactos disponibles de todo el planeta
-
-\t- Descarga de mapas por país o región directamente desde la aplicación
-
-\t- Posibilidad de superponer varias capas de mapa, como GPX o rutas de navegación, puntos de interés (PDI), favoritos, curvas de nivel, paradas de transporte público, mapas adicionales con transparencia personalizable
-
-\t- Búsqueda sin conexión de direcciones y lugares (PDIs)
-
-\t- Navegación sin conexión para distancias medianas.
-
-\t- Modo automóvil, bicicleta, y peatón con:
-
-\t\t- opción de cambio automático de vista diurna/nocturna
-
-\t\t- opción de acercamiento dependiente de la velocidad
-
-\t\t- opción de alineamiento del mapa opcional según brújula o dirección de movimiento
-
-\t\t- opción de indicación de carriles, visualización de límites de velocidad, voces grabadas y TTS
+ - Completa funcionalidad sin conexión (almacena los mapas vectoriales o teselas descargados en el almacenamiento del dispositivo)
+ - Mapas vectoriales compactos disponibles de todo el planeta
+ - Descarga de mapas por país o región directamente desde la aplicación
+ - Posibilidad de superponer varias capas de mapa, como GPX o rutas de navegación, puntos de interés (PDI), favoritos, curvas de nivel, paradas de transporte público, mapas adicionales con transparencia personalizable
+ - Búsqueda sin conexión de direcciones y lugares (PDIs)
+ - Navegación sin conexión para distancias medianas.
+ - Modos automóvil, bicicleta y peatón con:
+\t- opción de cambio automático de vista diurna/nocturna
+\t- opción de acercamiento en función de la velocidad
+\t- opción de alineamiento del mapa según la brújula o la dirección de movimiento
+\t- opción de indicación de carriles, visualización de límites de velocidad, voces grabadas y TTS
 
 Limitaciones de la versión gratuita de OsmAnd:
+ - Limitado el número de mapas descargados
+ - Sin acceso a los PDIs descargados de Wikipedia
 
-
-\t- Limitado el número de mapas descargados
-
-\t- Sin acceso a los PDIs descargados de Wikipedia
-
-
-OsmAnd está siendo desarrollado activamente, nuestro proyecto y su progreso adicional se basa en contribuciones económicas para financiar el desarrollo y las pruebas de nuevas funcionalidades. Considere comprar OsmAnd+, financiar nuevas características específicas o hacer una donación en general a osmand.net.
+OsmAnd está siendo desarrollado activamente y nuestro proyecto y su desarrollo adicional se basa en contribuciones económicas para financiar el desarrollo y las pruebas de nuevas funcionalidades. Por favor, considere comprar OsmAnd+, financiar nuevas características concretas o hacer una donación general en osmand.net.
  "</string>
     <string name="osmand_plus_short_description_80_chars">Visor y navegador móvil de mapas mundiales para OpenStreetMap fuera y en línea</string>
     <string name="osmand_plus_long_description_1000_chars">"
@@ -848,20 +830,20 @@ OsmAnd está siendo desarrollado activamente, nuestro proyecto y su progreso adi
 
  OsmAnd+ es una aplicación de navegación de código abierto con acceso a una amplia variedad de datos OpenStreetMap (OSM) globales. Todos los datos de mapa (vectores y teselas) pueden ser almacenados en la memoria del teléfono para su uso sin conexión. OsmAnd también ofrece funcionalidad de rutas con y sin conexión con guía giro-a-giro mediante voz.
 
- OsmAnd+ es la versión de pago de la aplicación, comprándola da soporte al proyecto, financia el desarrollo de nuevas características, y recibe las últimas actualizaciones.
+ OsmAnd+ es la versión de pago de la aplicación, comprándola da soporte al proyecto, financia el desarrollo de nuevas características y recibe las últimas actualizaciones.
 
  Algunas de las características fundamentales:
- - Completa funcionalidad sin conexión (almacenar los mapas de vectores o teselas descargados en el almacenamiento del dispositivo)
+ - Funcionalidad completa sin conexión (almacena los mapas de vectores y teselas descargados en el almacenamiento del dispositivo)
  - Mapas de vectores compactos disponibles de todo el planeta
- - Descarga de mapa de país o región directamente desde la aplicación
+ - Descarga ilimitada de mapas de país o región directamente desde la aplicación
  - Posibilidad de superponer varias capas de mapa, como GPX o rutas de navegación, Puntos de Interés, favoritos, curvas de nivel, paradas de transporte público, mapas adicionales con transparencia personalizable
- - Búsqueda sin conexión de direcciones y lugares (PDI)
+ - Búsqueda sin conexión de direcciones y lugares (PDIs)
  - Rutas sin conexión para medias distancias.
- - Modos de coche, bicicleta, y peatón con
-: - Cambio automático opcional de vista diurna/nocturna
- - Zoom opcional dependiente de la velocidad
- - Alineamiento del mapa opcional según brújula o dirección de movimiento
- - Indicación de carriles, mostrar límites de velocidad, voces grabadas y generadas opcionales
+ - Modos de coche, bicicleta, y peatón con:
+\t- Cambio automático opcional de vista diurna/nocturna
+\t- Zoom opcional en función de la velocidad
+\t- Orientación del mapa opcional a la brújula o a la dirección de movimiento
+\t- Indicación de carriles, mostrar límites de velocidad, voces grabadas y generadas opcionales
  "</string>
     <string name="avoid_motorway">Evitar autopistas</string>
     <string name="snap_to_road_descr">﻿Ajusta la posición a las carreteras durante la navegación</string>
@@ -1489,10 +1471,21 @@ OsmAnd está siendo desarrollado activamente, nuestro proyecto y su progreso adi
 
  ¿Quiere realizar un nuevo registro?</string>
     <string name="osmo_group_by_invite">Entrar por invitación</string>
-    <string name="osmo_group_information_desc">" - Al crear un grupo por favor dale un nombre e introduce su descripción.\n- Desde la aplicación los grupos se crean sólo con el tipo Simple, lee más en  el sitio web https://osmo.mobi/g/new
-\n - A través de un sitio web puedes gestionar un grupo, para  ubicar pistas y puntos disponibles para todos
-\n - No apoyamos el uso de  grupos de un único usuario, si no es el grupo POI
-\n - Los grupos privados están limitados a 8 personas\n -  Los términos y condiciones detallados siempre están en el sitio web OsMo.mobi\n - Si necesitas condiciones especiales por favor contacta con soporte: osmo.mobi@gmail.com "</string>
+    <string name="osmo_group_information_desc">"
+ - Al crear un grupo por favor dale un nombre e introduce su descripción.
+
+ - Desde la aplicación los grupos se crean sólo con el tipo Simple, lee más en  el sitio web https://osmo.mobi/g/new
+
+ - A través de un sitio web puedes gestionar un grupo, para  ubicar pistas y puntos disponibles para todos
+
+ - No apoyamos el uso de  grupos de un único usuario, si no es el grupo POI
+
+ - Los grupos privados están limitados a 8 personas
+
+ -  Los términos y condiciones detallados siempre están en el sitio web OsMo.mobi
+
+ - Si necesitas condiciones especiales por favor contacta con soporte: osmo.mobi@gmail.com
+ "</string>
     <string name="osmo_group_information">¡Lee antes de crear un grupo!</string>
     <string name="osmo_not_signed_in">Fallo al iniciar sesión en OsMo</string>
     <string name="osmo_gpx_points_downloaded">Puntos OsMo %1$s descargados.</string>
@@ -2308,7 +2301,7 @@ OsmAnd Mapas y Navegación - encuentra ubicaciones en el mapa y calcula rutas si
     <string name="city_type_district">Distrito</string>
     <string name="city_type_neighbourhood">Barrio</string>
     <string name="map_widget_search">Buscar</string>
-	<string name="shared_string_is_open_24_7">Abierto 24/7</string>
+	<string name="shared_string_is_open_24_7">Abierto 24x7</string>
     <string name="storage_directory_card">Tarjeta de memoria</string>
     <string name="coords_format">Formato de coordenadas</string>
     <string name="coords_format_descr">Formato para las coordenadas geográficas</string>
