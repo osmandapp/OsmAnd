@@ -145,7 +145,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:minHeight="47dp"
-                        android:text="@string/try_again"
+                        android:text="@string/search_my_location"
                         android:textColor="@color/color_dialog_buttons_light"/>
 
                 </LinearLayout>
