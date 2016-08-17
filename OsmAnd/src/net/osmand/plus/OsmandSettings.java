@@ -14,7 +14,6 @@ import android.os.Environment;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
-
 import net.osmand.IndexConstants;
 import net.osmand.StateChangedListener;
 import net.osmand.ValueHolder;
@@ -515,6 +514,59 @@ public class OsmandSettings {
 		protected boolean setValue(Object prefs, String val) {
 			return settingsAPI.edit(prefs).putString(getId(), (val != null) ? val.trim() : val).commit();
 		}
+
+	}
+	
+	public class ListStringPreference extends StringPreference {
+
+		private String delimiter;
+
+		private ListStringPreference(String id, String defaultValue, String delimiter) {
+			super(id, defaultValue);
+			this.delimiter = delimiter;
+		}
+		
+		public boolean addValue(String res) {
+			String vl = get();
+			if (vl == null || vl.isEmpty()) {
+				vl = res + delimiter;
+			} else {
+				vl = vl + res + delimiter;
+			}
+			set(vl);
+			return true;
+		}
+		
+		public void clearAll() {
+			set("");
+		}
+		
+		public boolean containsValue(String res) {
+			String vl = get();
+			String r = res + delimiter;
+			return vl.startsWith(r) || vl.indexOf(delimiter + r) >= 0;
+		}
+		
+		public boolean removeValue(String res) {
+			String vl = get();
+			String r = res + delimiter;
+			if(vl != null) {
+				if(vl.startsWith(r)) {
+					vl = vl.substring(r.length());
+					set(vl);
+					return true;
+				} else {
+					int it = vl.indexOf(delimiter + r);
+					if(it >= 0) {
+						vl = vl.substring(0, it + delimiter.length()) + vl.substring(it + delimiter.length() + r.length());
+					}
+					set(vl);
+					return true;
+				}
+			}
+			return false;
+		}
+
 
 	}
 
@@ -2608,6 +2660,9 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> FOLLOW_THE_ROUTE = new BooleanPreference("follow_to_route", false).makeGlobal();
 	public final OsmandPreference<String> FOLLOW_THE_GPX_ROUTE = new StringPreference("follow_gpx", null).makeGlobal();
 
+	public final ListStringPreference TRANSPORT_DEFAULT_SETTINGS =
+			(ListStringPreference) new ListStringPreference("transport_default_settings", "transportStops", ",").makeProfile();
+	
 	public final OsmandPreference<Boolean> SHOW_ARRIVAL_TIME_OTHERWISE_EXPECTED_TIME =
 			new BooleanPreference("show_arrival_time", true).makeGlobal();
 

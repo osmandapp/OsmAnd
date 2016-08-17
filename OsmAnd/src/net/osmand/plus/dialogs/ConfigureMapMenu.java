@@ -24,6 +24,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.CommonPreference;
+import net.osmand.plus.OsmandSettings.ListStringPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityLayers;
@@ -136,7 +137,6 @@ public class ConfigureMapMenu {
 			final ContextMenuItem item = cm.getItem(pos);
 			if (item.getSelected() != null) {
 				item.setColorRes(isChecked ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
-				adapter.notifyDataSetChanged();
 			}
 			if (itemId == R.string.layer_poi) {
 				poiFiltersHelper.clearSelectedPoiFilters();
@@ -163,9 +163,11 @@ public class ConfigureMapMenu {
 					intent.putExtra(PluginActivity.EXTRA_PLUGIN_ID, OsmandRasterMapsPlugin.ID);
 					ma.startActivity(intent);
 				} else {
-					ma.getMapLayers().selectMapLayer(ma.getMapView());
+					ContextMenuItem it = adapter.getItem(pos);
+					ma.getMapLayers().selectMapLayer(ma.getMapView(), it);
 				}
 			}
+			adapter.notifyDataSetChanged();
 			ma.getMapLayers().updateLayers(ma.getMapView());
 			ma.getMapView().refreshMap();
 			return false;
@@ -238,7 +240,7 @@ public class ConfigureMapMenu {
 				.setSecondaryIcon(R.drawable.ic_action_additional_option)
 				.setListener(l).createItem());
 		ContextMenuItem item = createProperties(customRules, R.string.rendering_category_transport, R.drawable.ic_action_bus_dark,
-				"transport", adapter, activity, false);
+				"transport", settings.TRANSPORT_DEFAULT_SETTINGS, adapter, activity, false);
 		if(item != null) {
 			adapter.addItem(item);	
 		}
@@ -261,6 +263,7 @@ public class ConfigureMapMenu {
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setTitleId(R.string.layer_map, activity)
 				.setIcon(R.drawable.ic_world_globe_dark)
+				.setDescription(settings.MAP_ONLINE_DATA.get() ? settings.MAP_TILE_SOURCES.get() : null)
 				.setListener(l).createItem());
 
 		OsmandPlugin.registerLayerContextMenu(activity.getMapView(), adapter, activity);
@@ -498,22 +501,22 @@ public class ConfigureMapMenu {
 
 		ContextMenuItem props;
 		props = createProperties(customRules, R.string.rendering_category_transport, R.drawable.ic_action_bus_dark,
-				"transport", adapter, activity, true);
+				"transport", null, adapter, activity, true);
 		if(props != null) {
 			adapter.addItem(props);
 		}
 		props = createProperties(customRules, R.string.rendering_category_details, R.drawable.ic_action_layers_dark,
-				"details", adapter, activity, true);
+				"details", null, adapter, activity, true);
 		if(props != null) {
 			adapter.addItem(props);
 		}
-		props = createProperties(customRules, R.string.rendering_category_hide, R.drawable.ic_action_hide, "hide",
-				adapter, activity, true);
+		props = createProperties(customRules, R.string.rendering_category_hide, R.drawable.ic_action_hide, 
+				"hide", null, adapter, activity, true);
 		if(props != null) {
 			adapter.addItem(props);
 		}
 		props = createProperties(customRules, R.string.rendering_category_routes, R.drawable.ic_action_map_routes,
-				"routes", adapter, activity, true);
+				"routes", null, adapter, activity, true);
 		if(props != null) {
 			adapter.addItem(props);
 		}
@@ -570,7 +573,7 @@ public class ConfigureMapMenu {
 	private ContextMenuItem createProperties(List<RenderingRuleProperty> customRules,
 								  @StringRes final int strId,
 								  @DrawableRes final int icon,
-								  String category, 
+								  String category,  final ListStringPreference defaultSettings,
 								  final ContextMenuAdapter adapter, final MapActivity activity, final boolean useDescription) {
 		final List<RenderingRuleProperty> ps = new ArrayList<>();
 		final List<OsmandSettings.CommonPreference<Boolean>> prefs = new ArrayList<>();
@@ -592,6 +595,14 @@ public class ConfigureMapMenu {
 				public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> a, int itemId, int pos,
 						boolean isChecked) {
 					if (!isChecked && !useDescription) {
+						if (defaultSettings != null) {
+							defaultSettings.set("");
+							for (int i = 0; i < prefs.size(); i++) {
+								if (prefs.get(i).get()) {
+									defaultSettings.addValue(prefs.get(i).getId());
+								}
+							}
+						}
 						for (int i = 0; i < prefs.size(); i++) {
 							prefs.get(i).set(false);
 						}
@@ -601,7 +612,7 @@ public class ConfigureMapMenu {
 						activity.getMapLayers().updateLayers(activity.getMapView());
 					} else {
 						showPreferencesDialog(adapter, a, pos, activity, activity.getString(strId), ps, prefs,
-								useDescription);
+								useDescription, defaultSettings, true);
 					}
 					return false;
 				}
@@ -626,7 +637,7 @@ public class ConfigureMapMenu {
 					public boolean onRowItemClick(ArrayAdapter<ContextMenuItem> a, View view, int itemId,
 							int pos) {
 						showPreferencesDialog(adapter, a, pos, activity, activity.getString(strId), ps, prefs,
-								useDescription);
+								useDescription, defaultSettings, false);
 						return false;
 					}
 				});
@@ -659,16 +670,14 @@ public class ConfigureMapMenu {
 	}
 
 	protected void showPreferencesDialog(final ContextMenuAdapter adapter, final ArrayAdapter<?> a, final int pos, final MapActivity activity,
-										 String category, List<RenderingRuleProperty> ps, final List<CommonPreference<Boolean>> prefs, final boolean useDescription) {
+										 String category, List<RenderingRuleProperty> ps, final List<CommonPreference<Boolean>> prefs, 
+										 final boolean useDescription, ListStringPreference defaultSettings, boolean useDefault) {
 		AlertDialog.Builder bld = new AlertDialog.Builder(activity);
 		boolean[] checkedItems = new boolean[prefs.size()];
-		for (int i = 0; i < prefs.size(); i++) {
-			checkedItems[i] = prefs.get(i).get();
-		}
-
 		final boolean[] tempPrefs = new boolean[prefs.size()];
 		for (int i = 0; i < prefs.size(); i++) {
-			tempPrefs[i] = prefs.get(i).get();
+			tempPrefs[i] = checkedItems[i] = defaultSettings != null && useDefault ? 
+					defaultSettings.containsValue(prefs.get(i).getId()) : prefs.get(i).get();
 		}
 		final String[] vals = new String[ps.size()];
 		for (int i = 0; i < ps.size(); i++) {
@@ -692,8 +701,7 @@ public class ConfigureMapMenu {
 			public void onClick(DialogInterface dialog, int whichButton) {
 				boolean selected = false;
 				for (int i = 0; i < prefs.size(); i++) {
-					prefs.get(i).set(tempPrefs[i]);
-					selected |= tempPrefs[i];
+					selected |= prefs.get(i).get();
 				}
 				adapter.getItem(pos).setSelected(selected);
 				adapter.getItem(pos).setColorRes(selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
@@ -713,8 +721,8 @@ public class ConfigureMapMenu {
 						adapter.getItem(pos).setDescription(getDescription(prefs));
 					} else{
 						adapter.getItem(pos).setSelected(selected);
-						adapter.getItem(pos).setColorRes(selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
 					}
+					adapter.getItem(pos).setColorRes(selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
 				}
 				a.notifyDataSetInvalidated();
 				refreshMapComplete(activity);

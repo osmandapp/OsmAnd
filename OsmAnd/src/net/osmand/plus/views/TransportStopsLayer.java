@@ -31,6 +31,7 @@ import android.view.WindowManager;
 
 public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider {
 	private static final int startZoom = 12;
+	private static final int startZoomRoute = 10;
 	
 	private OsmandMapTileView view;
 
@@ -105,34 +106,32 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 		};
 	}
 	
-	public void getFromPoint(RotatedTileBox tb,PointF point, List<? super TransportStop> res) {
-		if (data.getResults() != null) {
-			List<TransportStop> objects = route != null ? route.getForwardStops() : data.getResults();
-			int ex = (int) point.x;
-			int ey = (int) point.y;
-			final int rp = getRadiusPoi(tb);
-			int radius = rp * 3 / 2;
-			try {
-				TreeSet<String> ms = new TreeSet<>();
-				for (int i = 0; i < objects.size(); i++) {
-					TransportStop n = objects.get(i);
-					if (n.getLocation() == null){
+	public void getFromPoint(RotatedTileBox tb, PointF point, List<? super TransportStop> res,
+			List<TransportStop> objects) {
+		int ex = (int) point.x;
+		int ey = (int) point.y;
+		final int rp = getRadiusPoi(tb);
+		int radius = rp * 3 / 2;
+		try {
+			TreeSet<String> ms = new TreeSet<>();
+			for (int i = 0; i < objects.size(); i++) {
+				TransportStop n = objects.get(i);
+				if (n.getLocation() == null) {
+					continue;
+				}
+				int x = (int) tb.getPixXFromLatLon(n.getLocation().getLatitude(), n.getLocation().getLongitude());
+				int y = (int) tb.getPixYFromLatLon(n.getLocation().getLatitude(), n.getLocation().getLongitude());
+				if (Math.abs(x - ex) <= radius && Math.abs(y - ey) <= radius) {
+					if (!ms.add(n.getName())) {
+						// only unique names
 						continue;
 					}
-					int x = (int) tb.getPixXFromLatLon(n.getLocation().getLatitude(), n.getLocation().getLongitude());
-					int y = (int) tb.getPixYFromLatLon(n.getLocation().getLatitude(), n.getLocation().getLongitude());
-					if (Math.abs(x - ex) <= radius && Math.abs(y - ey) <= radius) {
-						if(!ms.add(n.getName())) {
-							// only unique names
-							continue;
-						}
-						radius = rp;
-						res.add(n);
-					}
+					radius = rp;
+					res.add(n);
 				}
-			} catch (IndexOutOfBoundsException e) {
-				// that's really rare case, but is much efficient than introduce synchronized block
 			}
+		} catch (IndexOutOfBoundsException e) {
+			// that's really rare case, but is much efficient than introduce synchronized block
 		}
 	}
 	
@@ -149,7 +148,7 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 	public int getRadiusPoi(RotatedTileBox tb){
 		final double zoom = tb.getZoom();
 		int r;
-		if(zoom < startZoom){
+		if(zoom < startZoomRoute){
 			r = 0;
 		} else if(zoom <= 15){
 			r = 8;
@@ -162,14 +161,14 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 		}
 		return (int) (r * tb.getDensity());
 	}
-
 	
+
 	@Override
-	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tb,
-			DrawSettings settings) {
-		if (tb.getZoom() >= startZoom) {
-			data.queryNewData(tb);
-			if(route != null) {
+	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tb,DrawSettings settings) {
+		List<TransportStop> objects = null;
+		if (tb.getZoom() >= startZoomRoute) {
+			if (route != null) {
+				objects = route.getForwardStops();
 				attrs.updatePaints(view, settings, tb);
 				try {
 					path.reset();
@@ -193,35 +192,33 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 					// ignore
 				}
 			}
-			
+		}
+		if (tb.getZoom() >= startZoom && objects == null) {
+			data.queryNewData(tb);
+			objects = data.getResults();
+		}
+		if (objects != null) {
 			float iconSize = stopBus.getWidth() * 3 / 2.5f;
 			QuadTree<QuadRect> boundIntersections = initBoundIntersections(tb);
 			List<TransportStop> fullObjects = new ArrayList<>();
-			List<TransportStop> objects = data.getResults() ;
-			if(route != null) {
-				objects = route.getForwardStops();
-			}
-			if (objects != null) {
-				for (TransportStop o : objects) {
-					float x = tb.getPixXFromLatLon(o.getLocation().getLatitude(), o.getLocation().getLongitude());
-					float y = tb.getPixYFromLatLon(o.getLocation().getLatitude(), o.getLocation().getLongitude());
+			for (TransportStop o : objects) {
+				float x = tb.getPixXFromLatLon(o.getLocation().getLatitude(), o.getLocation().getLongitude());
+				float y = tb.getPixYFromLatLon(o.getLocation().getLatitude(), o.getLocation().getLongitude());
 
-					if (intersects(boundIntersections, x, y, iconSize, iconSize)) {
-						canvas.drawBitmap(stopSmall, x - stopSmall.getWidth() / 2, y - stopSmall.getHeight() / 2,
-								paintIcon);
-					} else {
-						fullObjects.add(o);
-					}
-				}
-				for (TransportStop o : fullObjects) {
-					float x = tb.getPixXFromLatLon(o.getLocation().getLatitude(), o.getLocation().getLongitude());
-					float y = tb.getPixYFromLatLon(o.getLocation().getLatitude(), o.getLocation().getLongitude());
-					Bitmap b = stopBus;
-					canvas.drawBitmap(b, x - b.getWidth() / 2, y - b.getHeight() / 2, paintIcon);
+				if (intersects(boundIntersections, x, y, iconSize, iconSize)) {
+					canvas.drawBitmap(stopSmall, x - stopSmall.getWidth() / 2, y - stopSmall.getHeight() / 2, paintIcon);
+				} else {
+					fullObjects.add(o);
 				}
 			}
-			
+			for (TransportStop o : fullObjects) {
+				float x = tb.getPixXFromLatLon(o.getLocation().getLatitude(), o.getLocation().getLongitude());
+				float y = tb.getPixYFromLatLon(o.getLocation().getLatitude(), o.getLocation().getLongitude());
+				Bitmap b = stopBus;
+				canvas.drawBitmap(b, x - b.getWidth() / 2, y - b.getHeight() / 2, paintIcon);
+			}
 		}
+
 	}
 	
 	@Override
@@ -268,9 +265,11 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 
 	@Override
 	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> res) {
-		if (tileBox.getZoom() >= startZoom) {
-			getFromPoint(tileBox, point, res);
-		}
+		if(tileBox.getZoom() >= startZoomRoute  && route != null) {
+			getFromPoint(tileBox, point, res, route.getForwardStops());
+		} else if (tileBox.getZoom() >= startZoom && data.getResults() != null) {
+			getFromPoint(tileBox, point, res, data.getResults());
+		} 
 	}
 
 	@Override
