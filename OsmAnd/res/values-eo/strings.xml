@@ -2116,7 +2116,7 @@ Kaj la loko kaj tempo estas montrataj ĉe la OsmAnd stirpanelo, kaj ĉe la fenes
     <string name="free_downloads_used">Senpagaj elŝutoj uzitaj</string>
     <string name="free_downloads_used_description">Montras uzitajn senpagajn elŝutojn</string>
 
-    <string name="application_dir_description">Bonvolu elekti kien vi volas konservi map-dosierojn.</string>
+    <string name="application_dir_description">Bonvolu elekti kie vi volas konservi mapoj kaj aliaj datum-dosieroj.</string>
 
     <string name="enter_country_name">Entajpu nomon de lando</string>
     <string name="new_version">Nova versio</string>
