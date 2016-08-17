@@ -1516,4 +1516,8 @@
 	<string name="poi_piste_difficulty_expert">Pálya nehézség: profi</string>
 	<string name="poi_piste_difficulty_freeride">Pálya nehézség: freeride</string>
 	<string name="poi_piste_grooming_classic">Pálya kezelés: klasszikus</string>
+	<string name="poi_debris">Törmelék</string>
+	<string name="poi_jersey_barrier">Betonelem</string>
+	<string name="poi_horse_stile">Lovaskapu</string>
+	<string name="poi_kissing_gate">Lengőkapu</string>
 	</resources>
