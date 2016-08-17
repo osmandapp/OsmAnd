@@ -2383,4 +2383,9 @@ OsmAnd Mapas y Navegación - encuentra ubicaciones en el mapa y calcula rutas si
     <string name="rendering_attr_hideOverground_name">Objetos en superficie</string>
     <string name="shared_string_change">Cambiar</string>
     <string name="get_started">Empezar</string>
+    <string name="skip_map_downloading">Saltar descarga de mapas</string>
+    <string name="skip_map_downloading_desc">No tienes un mapa descargado instalado. Puedes elegir uno de la lista o descargarlo más tarde vía menú - %1$s.</string>
+    <string name="search_another_country">Buscar otro país</string>
+    <string name="search_map">Buscando mapa…</string>
+    <string name="first_usage_wizard_desc">Deja que OsmAnd determine tu ubicación y sugiera mapas que descargar para esa región.</string>
     </resources>
