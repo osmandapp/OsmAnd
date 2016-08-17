@@ -419,7 +419,7 @@ public class MapActivityLayers {
 		adapter.addItem(builder.createItem());
 	}
 
-	public void selectMapLayer(final OsmandMapTileView mapView) {
+	public void selectMapLayer(final OsmandMapTileView mapView, final ContextMenuItem it) {
 		if (OsmandPlugin.getEnabledPlugin(OsmandRasterMapsPlugin.class) == null) {
 			Toast.makeText(activity, R.string.map_online_plugin_is_not_installed, Toast.LENGTH_LONG).show();
 			return;
@@ -477,6 +477,9 @@ public class MapActivityLayers {
 					case layerOsmVector:
 						settings.MAP_ONLINE_DATA.set(false);
 						updateMapSource(mapView, null);
+						if(it != null) {
+							it.setDescription(null);
+						}
 						break;
 					case layerEditInstall:
 						OsmandRasterMapsPlugin.defineNewEditLayer(activity, new ResultMatcher<TileSourceTemplate>() {
@@ -485,6 +488,9 @@ public class MapActivityLayers {
 							public boolean publish(TileSourceTemplate object) {
 								settings.MAP_TILE_SOURCES.set(object.getName());
 								settings.MAP_ONLINE_DATA.set(true);
+								if(it != null) {
+									it.setDescription(object.getName());
+								}
 								updateMapSource(mapView, settings.MAP_TILE_SOURCES);
 								return true;
 							}
@@ -507,9 +513,12 @@ public class MapActivityLayers {
 									if (count == 1) {
 										settings.MAP_TILE_SOURCES.set(template.getName());
 										settings.MAP_ONLINE_DATA.set(true);
+										if(it != null) {
+											it.setDescription(template.getName());
+										}
 										updateMapSource(mapView, settings.MAP_TILE_SOURCES);
 									} else {
-										selectMapLayer(mapView);
+										selectMapLayer(mapView, it);
 									}
 								} else {
 									count++;
@@ -527,6 +536,9 @@ public class MapActivityLayers {
 					default:
 						settings.MAP_TILE_SOURCES.set(layerKey);
 						settings.MAP_ONLINE_DATA.set(true);
+						if(it != null) {
+							it.setDescription(layerKey);
+						}
 						updateMapSource(mapView, settings.MAP_TILE_SOURCES);
 						break;
 				}

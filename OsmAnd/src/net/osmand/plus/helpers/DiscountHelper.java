@@ -122,9 +122,9 @@ public class DiscountHelper {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((message == null) ? 0 : message.hashCode());
-		result = prime * result + ((description == null) ? 0 : description.hashCode());
 		result = prime * result + ((start == null) ? 0 : start.hashCode());
-		result = prime * result + ((end == null) ? 0 : end.hashCode());
+		// result = prime * result + ((description == null) ? 0 : description.hashCode());
+		// result = prime * result + ((end == null) ? 0 : end.hashCode());
 		return result;
 	}
 
