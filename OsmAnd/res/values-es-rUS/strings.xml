@@ -856,7 +856,7 @@
     <string name="interrupt_music_descr">Pausa totalmente cualquier sonido al realizar anuncios (no sólo reduce el volumen)</string>
     <string name="interrupt_music">Pausar música</string>
     <string name="osmand_play_title_30_chars">Navegación y Mapas OsmAnd</string>
-    <string name="osmand_short_description_80_chars">Visor y navegador de mapas móvil global para mapas OSM con y sin conexión</string>
+    <string name="osmand_short_description_80_chars">Visor y navegador móvil global de mapas OSM con y sin conexión</string>
     <string name="osmand_long_description_1000_chars">"
  OsmAnd (OSM Automated Navigation Directions, Guía de Navegación Automatizada)
 
@@ -954,7 +954,7 @@ La lista de países incluidos (¡prácticamente todo el mundo!):
 Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Antillas Holandesas, Arabia Saudita, Argelia, Argentina, Armenia, Aruba, Australia, Austria, Azerbaiyán, Bahamas, Bahrein, Bangladesh, Barbados, Bélgica, Belice, Benín, Bermuda, Bielorrusia, Bolivia, Bonaire, Bosnia y Herzegovina, Botsuana, Brasil, Brunei, Bulgaria, Burkina Faso, Burundi, Bután, Cabo Verde, Camboya, Camerún, Canadá, Chad, Chile, China, Chipre, Colombia, Comoras, Congo, Corea del Norte, Corea del Sur, Costa de Marfil, Costa Rica, Croacia, Cuba, Curazao, Dinamarca, Djibouti, Dominica, Ecuador, Egipto, El Salvador, El Vaticano, Emiratos Árabes Unidos, Eritrea, Eslovaquia, Eslovenia, España, Estados Unidos de América, Estonia, Etiopía, Fiji, Filipinas, Finlandia, Francia, Gabón, Gambia, Georgia, Georgia del Sur, Ghana, Gibraltar, Granada, Grecia, Groenlandia, Guadalupe, Guam, Guatemala, Guayana Francesa, Guernsey, Guinea, Guinea-Bissau, Guinea Ecuatorial, Guyana, Haití, Honduras, Hong Kong, Hungría, India, Indonesia, Irán, Iraq, Irlanda, Isla de Man, Islandia, Islas Vírgenes Británicas, Israel, Italia, Jamaica, Japón, Jersey, Jordania, Kazajistán, Kenya, Kirguistán, Kiribati, Kuwait, Laos, Lesotho, Letonia, Líbano, Liberia, Libia, Liechtenstein, Lituania, Luxemburgo, Macao, Macedonia, Madagascar, Malasia, Malawi, Maldivas, Malí, Malta, Marruecos, Martinica, Mauricio, Mauritania, Mayotte, México, Micronesia, Moldavia, Mónaco, Mongolia, Montenegro, Montserrat, Mozambique, Myanmar, Namibia, Nauru, Nepal, Nicaragua, Níger, Nigeria, Noruega, Nueva Caledonia, Nueva Zelanda, Omán, Países Bajos, Pakistán, Palau, Panamá, Papúa Nueva Guinea, Paraguay, Perú, Polinesia Francesa, Polonia, Portugal, Puerto Rico, Qatar, Reino Unido, República Centroafricana, República Checa, República Dominicana, Ruanda, Rumanía, Rusia, Sahara Occidental, San Bartolomé, Santa Helena, San Cristóbal y Nieves, Samoa, San Marino, San Martín, San Pedro y Miquelón, Santa Lucía, San Vicente y las Granadinas, Senegal, Serbia, Seychelles, Sierra Leona, Singapur, Siria, Somalia, Sri Lanka, Sudáfrica, Sudán, Sudán del Sur, Suecia, Suiza, Suriname, Swazilandia, Tailandia, Taiwán, Tanzania, Tayikistán, Territorio Palestino, Timor Oriental, Togo, Tokelau, Tonga, Trinidad y Tobago, Túnez, Turkmenistán, Turquía, Tuvalu, Ucrania, Uganda, Uruguay, Uzbekistán, Vanuatu, Venezuela, Vietnam, Wallis y Futuna, Yemen, Zambia, Zimbabwe.
  "</string>
     <string name="osmand_plus_play_title_30_chars">Navegación y Mapas OsmAnd+</string>
-    <string name="osmand_plus_short_description_80_chars">Visor y navegador móvil global para mapas de OSM con y sin conexión</string>
+    <string name="osmand_plus_short_description_80_chars">Visor y navegador móvil global de mapas OSM con y sin conexión</string>
     <string name="osmand_plus_long_description_1000_chars">"
  OsmAnd+ (OSM Automated Navigation Directions)
 
@@ -962,18 +962,18 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
 
  OsmAnd+ es la versión de pago de la aplicación, comprándola das soporte al proyecto, financias el desarrollo de nuevas funciones, y recibes las últimas actualizaciones.
 
- Algunas de las funciones fundamentales:
- - Completa funcionalidad sin conexión (guardar los mapas vectoriales o teselas descargados en el almacenamiento del dispositivo)
+  Algunas de las funciones fundamentales:
+ - Completa funcionalidad sin conexión (guarda los mapas vectoriales o teselas descargados en el almacenamiento del dispositivo)
  - Mapas mundiales vectoriales compactos disponibles
- - Descarga del mapa de país o región directamente desde la aplicación
+ - Descarga ilimitada de mapas de países o regiones directamente desde la aplicación
  - Posibilidad de superponer varias capas de mapa, como GPX o rutas de navegación, Puntos de Interés, favoritos, curvas de nivel, paradas de transporte público, mapas adicionales con transparencia personalizable
- - Búsqueda sin conexión de direcciones y lugares (PDI)
+ - Búsqueda sin conexión de direcciones y lugares (PDIs)
  - Rutas sin conexión para distancias de rango medio
- - Modos de automóvil, bicicleta, y peatón con:
- - Cambio automático opcional de vista día/noche
- - Ampliación opcional según la velocidad
- - Alineación opcional del mapa, según brújula o dirección de movimiento
- - Indicación de carriles, mostrar límites de velocidad, voces grabadas y sintetizadas opcionales
+ - Modos de automóvil, bicicleta y peatón con:
+  - (Opcional) Cambio automático de vista día/noche
+  - (Opcional) Ampliación del mapa según la velocidad
+  - (Opcional) Alineación del mapa, según brújula o dirección del movimiento
+  - (Opcional) Indicación de carriles, mostrar límites de velocidad, voces grabadas y sintetizadas
  "</string>
     <string name="osmand_plus_extended_description_4000_chars">"
 OsmAnd (OSM Automated Navigation Directions, o traducido al español, Guía de navegación automatizada OSM) es un mapa y una aplicación de navegación con acceso a datos de todo el mundo, de alta calidad y gratuitos de OpenStreetMap (OSM). Todos los datos de los mapas se pueden almacenar en la tarjeta de memoria del dispositivo para su uso sin conexión. A través del GPS de tu dispositivo, OsmAnd ofrece indicaciones de navegación, visuales y por voz, para automóvil, bicicleta y peatones. Todas las funciones principales funcionan tanto conectado como sin conexión (no necesita Internet).
@@ -1969,8 +1969,8 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="favorite_category_add_new">Añadir nuevo</string>
     <string name="favorite_category_select">Elegir categoría</string>
     <string name="srtm_plugin_disabled">Curvas de nivel desactivadas</string>
-    <string name="show_free_version_banner">Mostrar banner de versión gratuita</string>
-    <string name="show_free_version_banner_description">Aunque tengas la versión paga, podrás ver el banner de la versión gratuita</string>
+    <string name="show_free_version_banner">Mostrar anuncio de la versión gratuita</string>
+    <string name="show_free_version_banner_description">Aunque tengas la versión de pago, verás el anuncio de la versión gratuita</string>
     <string name="downloading_number_of_files">Descargando - %1$d archivo/s</string>
     <string name="hillshade_layer_disabled">Capa de sombreado desactivada</string>
     <string name="buy">COMPRAR</string>
@@ -2330,9 +2330,9 @@ Si amas a OsmAnd, OSM y quieres apoyarlos, esta es una perfecta manera de hacerl
 	<string name="use_osm_live_routing">Navegación OSM Live</string>
     <string name="follow_us">Síguenos</string>
     <string name="access_direction_audio_feedback">Dirección de retroalimentación auditiva</string>
-    <string name="access_direction_audio_feedback_descr">Indica el punto de dirección del destino mediante sonido</string>
-    <string name="access_direction_haptic_feedback">Dirección de retroalimentación háptica</string>
-    <string name="access_direction_haptic_feedback_descr">Indica el punto de dirección del destino mediante vibración</string>
+    <string name="access_direction_audio_feedback_descr">Indica la dirección del destino mediante sonido</string>
+    <string name="access_direction_haptic_feedback">Retroalimentación háptica de la dirección</string>
+    <string name="access_direction_haptic_feedback_descr">Indica la dirección del destino mediante vibración</string>
     <string name="move_marker_bottom_sheet_title">Mueve el mapa para cambiar la ubicación del marcador</string>
     <string name="lat_lon_pattern">Lat: %1$.6f Lon: %2$.6f</string>
     <string name="map_widget_battery">Nivel de batería</string>
@@ -2391,4 +2391,7 @@ Si amas a OsmAnd, OSM y quieres apoyarlos, esta es una perfecta manera de hacerl
     <string name="get_started">Empezar</string>
     <string name="update_all_maps_now">¿Quieres actualizar ahora todos los mapas?</string>
     <string name="clear_tile_data">Limpiar todas las teselas</string>
+    <string name="search_my_location">Buscar mi ubicación</string>
+    <string name="no_update_info_desc">No comprobar actualizaciones de nuevas versiones, relacionadas con descuentos de OsmAnd</string>
+    <string name="no_update_info">No mostrar actualizaciones</string>
     </resources>
