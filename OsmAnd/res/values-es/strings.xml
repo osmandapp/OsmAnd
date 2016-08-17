@@ -295,7 +295,7 @@
     <string name="shared_string_select_all">Marcar todo</string>
     <string name="shared_string_refresh">Actualizar</string>
     <string name="fast_route_mode">Ruta más rápida</string>
-    <string name="fast_route_mode_descr">"Activar, para calcular la ruta más rápida o desactivar, para la ruta más corta "</string>
+    <string name="fast_route_mode_descr">"Activar para calcular la ruta más rápida o desactivar para la ruta que ahora combustible "</string>
     <string name="tiles_to_download_estimated_size">En acercamiento {0} descarga {1} teselas ({2} MB)</string>
     <string name="shared_string_download_map">Descargar mapa</string>
     <string name="select_max_zoom_preload_area">Seleccione el acercamiento máximo para precargar</string>
@@ -2344,4 +2344,12 @@ OsmAnd Mapas y Navegación - encuentra ubicaciones en el mapa y calcula rutas si
  y más…
  "</string>
     <string name="route_stops_before">%1$s parada(s) anterior(es)</string>
+    <string name="update_all_maps_now">¿Quieres actualizar todos los mapas ahora?</string>
+    <string name="clear_tile_data">Borrar todas las teselas</string>
+    <string name="routing_attr_short_way_name">Camino eficiente en combustible</string>
+    <string name="routing_attr_short_way_description">Usar el camino eficiente en combustible (normalmente más corto)</string>
+    <string name="replace_favorite_confirmation">¿Estás seguro que quieres reemplazar el favorito %1$s?</string>
+    <string name="rendering_attr_hideOverground_name">Objetos en superficie</string>
+    <string name="shared_string_change">Cambiar</string>
+    <string name="get_started">Empezar</string>
     </resources>
