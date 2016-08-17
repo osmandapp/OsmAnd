@@ -2394,7 +2394,7 @@ Si amas a OsmAnd, OSM y quieres apoyarlos, esta es una perfecta manera de hacerl
     <string name="search_my_location">Buscar mi ubicación</string>
     <string name="no_update_info_desc">No comprobar actualizaciones de nuevas versiones, relacionadas con descuentos de OsmAnd</string>
     <string name="no_update_info">No mostrar actualizaciones</string>
-    <string name="skip_map_downloading">Omitir descarga del mapa</string>
+    <string name="skip_map_downloading">Omitir descargas de mapas</string>
     <string name="skip_map_downloading_desc">Sin mapas descargados. Puedes elegirlos desde la lista o descargarlos luego mediante el Menú - %1$s.</string>
     <string name="search_another_country">Buscar para otro país</string>
     <string name="search_map">Buscando mapa…</string>
