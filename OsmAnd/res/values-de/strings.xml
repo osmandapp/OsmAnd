@@ -2148,7 +2148,7 @@ Diese Ansicht kann zurückgestellt werden indem Sie hier wieder deaktiviert oder
 	<string name="buy">Erwerben</string>
     <string name="later">Später</string>
     <string name="downloads">Downloads</string>
-    <string name="application_dir_description">Bitte den Speicherort für heruntergeladene Karten wählen.</string>
+    <string name="application_dir_description">Bitte den Speicherort für heruntergeladene Karten und andere Daten wählen.</string>
     <string name="new_version">Neue Version</string>
     <string name="begin_with_osmand_menu_group">Erste Schritte in OsmAnd</string>
     <string name="features_menu_group">Merkmale</string>
@@ -2495,7 +2495,7 @@ Wenn Sie OsmAnd und OSM lieben und unterstützen wollen, so ist dies die perfekt
     <string name="first_usage_wizard_desc">OsmAnd erlauben ihren Standort zu ermitteln um ihnen eine Karte dieser Region zum herunterladen vorzuschlagen.</string>
     <string name="location_not_found">Position nicht gefunden</string>
     <string name="no_inet_connection">Keine Internetverbindung</string>
-    <string name="no_inet_connection_desc_map">Erforderlich, um die Karte herunterzuladen.</string>
+    <string name="no_inet_connection_desc_map">Erforderlich, um Karten herunterzuladen.</string>
     <string name="search_location">Suche nach Standort…</string>
     <string name="storage_free_space">Freier Speicherplatz</string>
     <string name="storage_place_description">OsmAnd speichert die Daten (Karten, Tracks, etc.) in %1$s.</string>
