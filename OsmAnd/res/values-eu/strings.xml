@@ -261,7 +261,7 @@ Datu globalak (iparraldean 70 gradutan eta hegoaldean 70 gradutan) STRM (Shuttle
   <string name="poi_filter_for_tourists">Turistentzako</string>
   <string name="poi_filter_fuel">Gasolina</string>
   <string name="show_warnings_title">Erakutsi alarmak…</string>
-  <string name="show_warnings_descr">Trafiko abisuak konfiguratu (abiadura mugak, geldialdi behartuak, abiadura aldaketak), radar abisuak eta erraien informazioa</string>
+  <string name="show_warnings_descr">Konfiguratu trafiko abisuak (abiadura mugak, geldialdi behartuak, abiadura aldaketak), radar abisuak eta erraien informazioa</string>
   <string name="use_compass_navigation_descr">Erabili iparrorratza bestelako norabiderik antzematen ez denean</string>
   <string name="use_compass_navigation">Iparrorratza erabili</string>
   <string name="avoid_motorway">Saihestu autobideak</string>
@@ -1830,7 +1830,7 @@ Honek {1} MB behar ditu behin betiko.
     <string name="storage_directory">Mapen biltegiratzea</string>
     <string name="shared_string_copy">Kopiatu</string>
     <string name="filter_poi_hint">Iragazi izenez</string>
-    <string name="search_poi_category_hint">Idatzi denak bilatzeko</string>
+    <string name="search_poi_category_hint">Idatzi denetarik bilatzeko</string>
     <string name="shared_string_is_open">Ireki</string>
     <string name="agps_info">A-GPS informazioa</string>
     <string name="shared_string_manage">Kudeatu</string>
@@ -1949,7 +1949,7 @@ Honek {1} MB behar ditu behin betiko.
     <string name="fav_point_dublicate_message">Zehaztutako gogoko izena erabiltzen ari zara jada, bikoizketa saihesteko %1$s izena eman zaio.</string>
     <string name="routing_attr_avoid_stairs_name">Saihestu eskailerak</string>
     <string name="routing_attr_avoid_stairs_description">Saihestu eskailerak</string>
-    <string name="routing_attr_avoid_borders_name">Saihestu mugak gurutzatzea</string>
+    <string name="routing_attr_avoid_borders_name">Saihestu herrialde-mugak gurutzatzea</string>
     <string name="routing_attr_avoid_borders_description">Saihestu beste herrialdera muga gurutzatzea</string>
     <string name="access_shared_string_navigate_up">Nabigatu gorantz</string>
     <string name="osmo_group_information_desc">" - Taldea sortzean eman izen bat eta bete deskripzioa\n - Aplikaziotik mota sinplekoak sortzen dira, irakurri gehiago webgunean https://osmo.mobi/g/new
