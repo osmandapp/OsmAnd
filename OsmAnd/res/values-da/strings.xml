@@ -2628,4 +2628,18 @@ Hvis du er fan af OsmAnd og OSM og ønsker at støtte dem, er det den perfekte m
     <string name="no_update_info_desc">Kontroller ikke om der er opdateringer til nye versioner, rabatter i forbindelse med OsmAnd</string>
     <string name="no_update_info">Vis ikke opdateringer</string>
     <string name="search_my_location">Søg min placering</string>
+    <string name="skip_map_downloading">Spring over hentning af kort</string>
+    <string name="skip_map_downloading_desc">Der ikke nogen offline kort installeret. Vælg et kort fra listen eller hent senere via Menu - %1$s.</string>
+    <string name="search_another_country">Søg efter et andet land</string>
+    <string name="search_map">Søger kort…</string>
+    <string name="first_usage_wizard_desc">Vi vil gerne bestemme din placering og foreslå for at hente kort i denne region.</string>
+    <string name="location_not_found">Sted ikke fundet</string>
+    <string name="no_inet_connection">Ingen internetforbindelse</string>
+    <string name="no_inet_connection_desc_map">Nødvendigt for at hente kortet</string>
+    <string name="search_location">Søger efter placering…</string>
+    <string name="storage_free_space">Ledig lagerplads</string>
+    <string name="storage_place_description">OsmAnd gemmer data (kort, spor, etc.) i %1$s.</string>
+    <string name="give_permission">Giv tilladelse</string>
+    <string name="allow_access_location">Tillad adgang til placering</string>
+    <string name="first_usage_greeting">Få rutevejledning, opdag nye steder, uden internetforbindelse</string>
     </resources>
