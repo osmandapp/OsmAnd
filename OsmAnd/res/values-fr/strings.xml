@@ -2280,4 +2280,11 @@ Actuellement {2} Mo sont disponibles.</string>
 
  Et plus encore…
  "</string>
+    <string name="update_all_maps_now">Souhaitez-vous mettre à jour toutes les cartes maintenant ?</string>
+    <string name="clear_tile_data">Supprimer toutes les tuiles</string>
+    <string name="replace_favorite_confirmation">Êtes-vous sûr de vouloir remplacer le favori %1$s ?</string>
+    <string name="shared_string_change">Modifier</string>
+    <string name="get_started">Démarrer</string>
+    <string name="routing_attr_short_way_name">Trajet économe en carburant</string>
+    <string name="routing_attr_short_way_description">Suivre un trajet économe en carburant (trajet habituellement plus court)</string>
     </resources>
