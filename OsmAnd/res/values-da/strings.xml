@@ -2623,4 +2623,6 @@ Hvis du er fan af OsmAnd og OSM og ønsker at støtte dem, er det den perfekte m
     <string name="replace_favorite_confirmation">Erstat favorit %1$s?</string>
     <string name="shared_string_change">Skift</string>
     <string name="get_started">Kom godt i gang</string>
+    <string name="update_all_maps_now">Opdater alle kort nu?</string>
+    <string name="clear_tile_data">Ryd alle kortfliser</string>
     </resources>
