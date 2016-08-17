@@ -1991,7 +1991,7 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="share_geo">geo:</string>
     <string name="share_menu_location">Compartir ubicación</string>
     <string name="shared_string_send">Enviar</string>
-    <string name="application_dir_description">Elige donde guardar los archivos de los mapas.</string>
+    <string name="application_dir_description">Elige dónde guardar los mapas y otros archivos de datos.</string>
     <string name="show_on_start_description">"Desactivado,  lanza directamente la pantalla del mapa"</string>
     <string name="map_downloaded">Mapa descargado</string>
     <string name="map_downloaded_descr">Se descargó el mapa de %1$s. Vuelve al mapa para empezar a usarlo.</string>
@@ -2396,4 +2396,8 @@ OsmAnd Mapas y Navegación - encuentra ubicaciones en el mapa y calcula rutas si
     <string name="storage_place_description">Almacenamiento de datos de OsmAnd (para mapas, trazas, etc.): %1$s.</string>
     <string name="give_permission">Dar permiso</string>
     <string name="allow_access_location">Permitir acceso a la ubicación</string>
+    <string name="first_usage_greeting">Conseguir indicaciones, descubrir sitios nuevos, sin conexión a Internet</string>
+    <string name="search_my_location">Buscar mi ubicación</string>
+    <string name="no_update_info_desc">No comprueba las actualizaciones sobre nuevas versiones, descuenta relacionado con OsmAnd</string>
+    <string name="no_update_info">No mostrar actualizaciones</string>
     </resources>
