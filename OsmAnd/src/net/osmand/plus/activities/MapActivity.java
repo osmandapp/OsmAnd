@@ -66,6 +66,7 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
+import net.osmand.plus.Version;
 import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.base.FailSafeFuntions;
 import net.osmand.plus.base.MapViewTrackingUtilities;
@@ -275,7 +276,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 		mapView.refreshMap(true);
 
-		if ((getMyApplication().getAppInitializer().isFirstTime() || !app.getResourceManager().isAnyMapIstalled()) && FirstUsageWelcomeFragment.SHOW) {
+		if (((app.getAppInitializer().isFirstTime() && Version.isDeveloperVersion(app)
+				|| !app.getResourceManager().isAnyMapIstalled()) && FirstUsageWelcomeFragment.SHOW) {
 			FirstUsageWelcomeFragment.SHOW = false;
 			getSupportFragmentManager().beginTransaction()
 					.add(R.id.fragmentContainer, new FirstUsageWelcomeFragment(),
