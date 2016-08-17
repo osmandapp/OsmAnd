@@ -2535,4 +2535,19 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="update_all_maps_now">هل تريد تحديث كافة الخرائط الآن؟</string>
     <string name="no_update_info_desc">لا تعين أية تحديثات حول الإصدارات الجديدة، أو التخفيضات متعلقة بـ Osmand</string>
     <string name="no_update_info">عدم إظهار التحديثات</string>
+    <string name="skip_map_downloading">تخطي تحميل الخريطة</string>
+    <string name="skip_map_downloading_desc">ليس لديك أي خريطة محلية مثبتة. يمكنك اختيار الخريطة من اللائحة أو تحميلها لاحقاً عبر القائمة - %1$s.</string>
+    <string name="search_another_country">البحث عن بلد آخر</string>
+    <string name="search_map">بحث في الخريطة…</string>
+    <string name="first_usage_wizard_desc">نود تحديد الموقع الخاص بك واقتراح خريطة هذه المنطقة للتحميل.</string>
+    <string name="location_not_found">لم يتم العثور على الموقع</string>
+    <string name="no_inet_connection">لا يوجد اتصال بالشبكة</string>
+    <string name="no_inet_connection_desc_map">مطلوبة لتحميل الخريطة</string>
+    <string name="search_location">البحث عن الموقع…</string>
+    <string name="storage_free_space">مساحة حرة</string>
+    <string name="storage_place_description">التطبيق يبقي البيانات (خرائط، مسارات، إلخ.) في %1$s.</string>
+    <string name="give_permission">إعطاء الإذن</string>
+    <string name="allow_access_location">الإذن بالوصول إلى الموقع</string>
+    <string name="first_usage_greeting">الحصول على الاتجاهات، اكتشاف أماكن جديدة، دون الاتصال بالإنترنت</string>
+    <string name="search_my_location">البحث في موقعي</string>
     </resources>
