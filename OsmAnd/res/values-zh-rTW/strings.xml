@@ -2563,4 +2563,6 @@ Facebook：https://www.facebook.com/osmandapp
     <string name="replace_favorite_confirmation">您確定您想要替換喜愛的 %1$s 嗎？</string>
     <string name="shared_string_change">更換</string>
     <string name="get_started">開始</string>
+    <string name="update_all_maps_now">您現在想要更新所有地圖？</string>
+    <string name="clear_tile_data">清除所有圖磚</string>
     </resources>
