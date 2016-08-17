@@ -2425,13 +2425,21 @@ Se vi bezonas helpon pri OsmAnd aplikaĵo, bonvolu kontakti nian helpantaron: su
     <string name="replace_favorite_confirmation">Ĉu vi volas anstataŭigi la ŝatatan ejon %1$s?</string>
     <string name="clear_tile_data">Vakigi ĉiujn kahelojn</string>
     <string name="update_all_maps_now">Ĉu vi volas ĝisdatigi ĉiujn mapojn nun?</string>
-    <string name="skip_map_downloading">Transsalti elŝuto de mapo</string>
+    <string name="skip_map_downloading">Transsalti elŝuto de mapoj</string>
     <string name="skip_map_downloading_desc">Vi ne havas iun ajn eksterretan mapon instalitan. Vi povus elekti iun el la listo aŭ elŝuti ĝin poste per la Menuo - %1$s.</string>
     <string name="search_another_country">Serĉi en alia lando</string>
     <string name="search_map">Serĉanta mapon…</string>
-    <string name="first_usage_wizard_desc">Ni volus trovi vian pozicion kaj sugesti elŝuti mapon de tiu regiono.</string>
+    <string name="first_usage_wizard_desc">Bonvolu permesi al OsmAnd trovi vian pozicion kaj sugesti elŝuti mapojn de tiu regiono.</string>
     <string name="location_not_found">Pozicio ne trovita</string>
     <string name="no_inet_connection">Interret-konekto mankas</string>
-    <string name="no_inet_connection_desc_map">Bezonata por elŝuti la mapon</string>
+    <string name="no_inet_connection_desc_map">Bezonata por elŝuti mapojn.</string>
     <string name="search_location">Serĉanta lokon…</string>
+    <string name="storage_free_space">Libera loko</string>
+    <string name="storage_place_description">Datum-memorejo de OsmAnd (por mapoj, kursoj, ktp.): %1%s.</string>
+    <string name="give_permission">Permesi</string>
+    <string name="allow_access_location">Permesi aliron al loko</string>
+    <string name="first_usage_greeting">Navigu kaj esploru novajn lokojn eksterrete</string>
+    <string name="search_my_location">Serĉi mian pozicion</string>
+    <string name="no_update_info">Ne montri ĝisdatigojn</string>
+    <string name="no_update_info_desc">Ne serĉas informojn pri novaj versioj kaj rabatoj por OsmAnd</string>
     </resources>
