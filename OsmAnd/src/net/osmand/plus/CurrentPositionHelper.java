@@ -38,6 +38,11 @@ public class CurrentPositionHelper {
 		this.app = app;
 	}
 	
+	
+	public Location getLastAskedLocation() {
+		return lastAskedLocation;
+	}
+	
 	public boolean getRouteSegment(Location loc, ResultMatcher<RouteDataObject> result) {
 		return scheduleRouteSegmentFind(loc, false, null, result);
 	}
@@ -245,7 +250,7 @@ public class CurrentPositionHelper {
 		});
 	}
 
-	private static double getOrthogonalDistance(RouteDataObject r, Location loc){
+	public static double getOrthogonalDistance(RouteDataObject r, Location loc){
 		double d = 1000;
 		if (r.getPointsLength() > 0) {
 			double pLt = MapUtils.get31LatitudeY(r.getPoint31YTile(0));

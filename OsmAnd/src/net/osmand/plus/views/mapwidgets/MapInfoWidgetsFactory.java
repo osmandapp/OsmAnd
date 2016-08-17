@@ -15,6 +15,7 @@ import android.widget.TextView;
 import net.osmand.Location;
 import net.osmand.ValueHolder;
 import net.osmand.binary.RouteDataObject;
+import net.osmand.plus.CurrentPositionHelper;
 import net.osmand.plus.NavigationService;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmAndLocationProvider;
@@ -37,6 +38,7 @@ import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.NextTurnInfoWidget.TurnDrawable;
 import net.osmand.router.TurnType;
+import net.osmand.util.Algorithms;
 
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -584,8 +586,16 @@ public class MapInfoWidgetsFactory {
 				if (text == null) {
 					text = "";
 				} else {
-					type[0] = TurnType.valueOf(TurnType.C, false);
-					turnDrawable.setColor(R.color.color_myloc_distance);
+					if(!Algorithms.isEmpty(text) && locationProvider.getLastKnownLocation() != null) {
+						double dist = 
+								CurrentPositionHelper.getOrthogonalDistance(rt, locationProvider.getLastKnownLocation());
+						if(dist < 50) {
+							type[0] = TurnType.valueOf(TurnType.C, false);
+							turnDrawable.setColor(R.color.color_myloc_distance);
+						} else {
+							text = map.getResources().getString(R.string.shared_string_near) + " " + text;
+						}
+					}
 				}
 			}
 			if (map.isTopToolbarActive()) {
