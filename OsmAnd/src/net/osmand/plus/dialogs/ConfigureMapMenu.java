@@ -164,7 +164,7 @@ public class ConfigureMapMenu {
 					ma.startActivity(intent);
 				} else {
 					ContextMenuItem it = adapter.getItem(pos);
-					ma.getMapLayers().selectMapLayer(ma.getMapView(), it);
+					ma.getMapLayers().selectMapLayer(ma.getMapView(), it, adapter);
 				}
 			}
 			adapter.notifyDataSetChanged();
@@ -620,14 +620,20 @@ public class ConfigureMapMenu {
 			};
 			ContextMenuItem.ItemBuilder builder = new ContextMenuItem.ItemBuilder().setTitleId(strId, activity)
 					.setIcon(icon).setListener(clickListener);
+			boolean selected = false;
+			for(OsmandSettings.CommonPreference<Boolean> p : prefs) {
+				if(p.get()) {
+					selected = true;
+					break;
+				}
+			}
+			builder.setColor(selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
 			if (useDescription) {
 				final String descr = getDescription(prefs);
 				builder.setDescription(descr);
 				builder.setLayout(R.layout.list_item_single_line_descrition_narrow);
 			} else {
-				boolean selected = false;
 				builder.setListener(new OnRowItemClick() {
-					
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> a, int itemId, int pos, boolean isChecked) {
 						return clickListener.onContextMenuClick(a, itemId, pos, isChecked);
@@ -642,13 +648,6 @@ public class ConfigureMapMenu {
 					}
 				});
 				builder.setSecondaryIcon(R.drawable.ic_action_additional_option);
-				for(OsmandSettings.CommonPreference<Boolean> p : prefs) {
-					if(p.get()) {
-						selected = true;
-						break;
-					}
-				}
-				builder.setColor(selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
 				builder.setSelected(selected);
 			}
 			return builder.createItem();

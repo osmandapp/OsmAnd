@@ -9,6 +9,8 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="no_update_info_desc">Don\'t check any updates about new versions, discounts related to OsmAnd</string>
+    <string name="no_update_info">Don\'t show updates</string>
     <string name="update_all_maps_now">Do you want to update all maps now?</string>
     <string name="clear_tile_data">Clear all tiles</string>
     <string name="routing_attr_short_way_name">Fuel-efficient way</string>

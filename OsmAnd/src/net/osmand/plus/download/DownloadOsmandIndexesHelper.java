@@ -182,11 +182,9 @@ public class DownloadOsmandIndexesHelper {
 			log.debug("Start loading list of index files"); //$NON-NLS-1$
 			try {
 				String strUrl = ctx.getAppCustomization().getIndexesUrl();
-				OsmandSettings settings = ctx.getSettings();
-				
-				long nd = ctx.getAppInitializer().getFirstInstalled();
+				long nd = ctx.getAppInitializer().getFirstInstalledDays();
 				if(nd > 0) {
-					strUrl += "&nd=" + ((System.currentTimeMillis() - nd) / (1000l * 24l * 60l * 60l)); 
+					strUrl += "&nd=" + nd; 
 				}
 				strUrl += "&ns=" + ctx.getAppInitializer().getNumberOfStarts();
 				try {
