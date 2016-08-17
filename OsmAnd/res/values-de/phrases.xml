@@ -1454,7 +1454,7 @@
 	<string name="poi_capacity_parent_no">keine reservierten Plätze für Eltern</string>
 	<string name="poi_capacity_parent">reservierte Plätze für Eltern</string>
 
-	<string name="poi_aerialway_occupancy">"Campingplatz-, Stuhl-,  Autokapazität"</string>
+	<string name="poi_aerialway_occupancy">Kabin-, Gondel-, Sesselkapazität</string>
 	<string name="poi_aerialway_capacity">Kapazität pro Stunde</string>
 	<string name="poi_aerialway_duration">durchschnittliche Fahrzeit, Minuten</string>
 	<string name="poi_aerialway_bubble_yes">Blase</string>
