@@ -276,7 +276,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 		mapView.refreshMap(true);
 
-		if (((app.getAppInitializer().isFirstTime() && Version.isDeveloperVersion(app)
+		if (((app.getAppInitializer().isFirstTime() && Version.isDeveloperVersion(app))
 				|| !app.getResourceManager().isAnyMapIstalled()) && FirstUsageWelcomeFragment.SHOW) {
 			FirstUsageWelcomeFragment.SHOW = false;
 			getSupportFragmentManager().beginTransaction()
