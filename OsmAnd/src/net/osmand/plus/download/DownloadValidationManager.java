@@ -55,6 +55,44 @@ public class DownloadValidationManager {
 		return 0;
 	}
 
+	public boolean isSpaceEnoughForDownload(final FragmentActivity context, final boolean showAlert, final IndexItem... items) {
+		long szChangeLong = 0;
+		long szMaxTempLong = 0;
+		int i = 0;
+		for (IndexItem es : downloadThread.getCurrentDownloadingItems()) {
+			final long szExistingLong = getExistingFileSize(es.getTargetFile(getMyApplication()));
+			long change = es.contentSize - szExistingLong;
+			szChangeLong += change;
+			if (szExistingLong > szMaxTempLong) szMaxTempLong = szExistingLong;
+			i++;
+		}
+		for (IndexItem es : items) {
+			if (es != null) {
+				final long szExistingLong = getExistingFileSize(es.getTargetFile(getMyApplication()));
+				long change = es.contentSize - szExistingLong;
+				szChangeLong += change;
+				if (szExistingLong > szMaxTempLong) szMaxTempLong = szExistingLong;
+				i++;
+			}
+		}
+		double szChange = ((double) szChangeLong) / (1 << 20);
+		double szMaxTemp = szChange + ((double) szMaxTempLong) / (1 << 20);
+
+		// get availabile space
+		double asz = downloadThread.getAvailableSpace();
+		if (asz != -1 && asz > 0 && (szMaxTemp > asz)) {
+			if (showAlert) {
+				AlertDialog.Builder builder = new AlertDialog.Builder(context);
+				builder.setMessage(MessageFormat.format(context.getString(R.string.download_files_error_not_enough_space), i, szChange, asz, szMaxTemp));
+				builder.setNegativeButton(R.string.shared_string_ok, null);
+				builder.show();
+			}
+			return false;
+		} else {
+			return true;
+		}
+	}
+
 	public void downloadFilesCheck_3_ValidateSpace(final FragmentActivity context, final IndexItem... items) {
 		long szChangeLong = 0;
 		long szMaxTempLong = 0;

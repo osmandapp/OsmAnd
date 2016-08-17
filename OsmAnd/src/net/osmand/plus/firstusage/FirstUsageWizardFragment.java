@@ -65,6 +65,7 @@ public class FirstUsageWizardFragment extends Fragment implements OsmAndLocation
 
 	private View view;
 	private DownloadIndexesThread downloadThread;
+	private DownloadValidationManager validationManager;
 	private MessageFormat formatGb = new MessageFormat("{0, number,#.##} GB", Locale.US);
 
 	private static WizardType wizardType;
@@ -94,6 +95,7 @@ public class FirstUsageWizardFragment extends Fragment implements OsmAndLocation
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		downloadThread = getMyApplication().getDownloadThread();
+		validationManager = new DownloadValidationManager(getMyApplication());
 		Bundle args = getArguments();
 		if (args != null) {
 			wizardType = WizardType.valueOf(args.getString(WIZARD_TYPE_KEY, DEFAULT_WIZARD_TYPE.name()));
@@ -153,7 +155,7 @@ public class FirstUsageWizardFragment extends Fragment implements OsmAndLocation
 			case MAP_FOUND:
 				TextView mapTitle = (TextView) view.findViewById(R.id.map_download_title);
 				TextView mapDescription = (TextView) view.findViewById(R.id.map_download_desc);
-				IndexItem indexItem = localMapIndexItem != null ? localMapIndexItem : baseMapIndexItem;
+				final IndexItem indexItem = localMapIndexItem != null ? localMapIndexItem : baseMapIndexItem;
 				if (indexItem != null) {
 					mapTitle.setText(indexItem.getVisibleName(getContext(), getMyApplication().getRegions(), false));
 					mapDescription.setText(indexItem.getSizeDescription(getContext()));
@@ -161,7 +163,14 @@ public class FirstUsageWizardFragment extends Fragment implements OsmAndLocation
 				view.findViewById(R.id.map_download_action_button).setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						showMapDownloadFragment(getActivity());
+						boolean spaceEnoughForBoth = validationManager.isSpaceEnoughForDownload(getActivity(), false, localMapIndexItem, baseMapIndexItem);
+						boolean spaceEnoughForLocal = validationManager.isSpaceEnoughForDownload(getActivity(), true, localMapIndexItem);
+						if (!spaceEnoughForBoth) {
+							baseMapIndexItem = null;
+						}
+						if (spaceEnoughForLocal) {
+							showMapDownloadFragment(getActivity());
+						}
 					}
 				});
 				view.findViewById(R.id.map_download_card).setVisibility(View.VISIBLE);
@@ -336,13 +345,9 @@ public class FirstUsageWizardFragment extends Fragment implements OsmAndLocation
 			case MAP_DOWNLOAD:
 				int i = 0;
 				for (IndexItem indexItem : indexItems) {
-					if (i == 0 && !firstMapDownloadCancelled && !downloadThread.isDownloading(indexItem)) {
-						new DownloadValidationManager(getMyApplication())
-								.startDownload(getActivity(), indexItem);
-					}
-					if (i == 1 && !secondMapDownloadCancelled && !downloadThread.isDownloading(indexItem)) {
-						new DownloadValidationManager(getMyApplication())
-								.startDownload(getActivity(), indexItem);
+					if (!downloadThread.isDownloading(indexItem) && !indexItem.isDownloaded()
+							&& (i == 0 && !firstMapDownloadCancelled) || (i == 1 && !secondMapDownloadCancelled)) {
+						validationManager.startDownload(getActivity(), indexItem);
 					}
 					i++;
 				}
