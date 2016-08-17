@@ -232,10 +232,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 			if (!Algorithms.isEmpty(downloadTargetFileName)) {
 				File f = new File(downloadTargetFileName);
 				if (f.exists() && f.lastModified() > System.currentTimeMillis() - 10000) {
-					boolean firstMap = !getMyApplication().getSettings().FIRST_MAP_IS_DOWNLOADED.get();
-					if (firstMap) {
-						initSettingsFirstMap(downloadItem);
-					}
+					getMyApplication().getDownloadThread().initSettingsFirstMap(downloadItem);
 					showGoToMap(downloadItem);
 				}
 			}
@@ -543,41 +540,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 		task.execute();
 	}
 
-	private void initSettingsFirstMap(WorldRegion reg) {
-		getMyApplication().getSettings().FIRST_MAP_IS_DOWNLOADED.set(true);
-		DrivingRegion drg = null;
-		RegionParams params = reg.getParams();
-		boolean americanSigns = "american".equals(params.getRegionRoadSigns());
-		boolean leftHand = "yes".equals(params.getRegionLeftHandDriving());
-		MetricsConstants mc = "miles".equals(params.getRegionMetric()) ?
-				MetricsConstants.MILES_AND_FOOTS : MetricsConstants.KILOMETERS_AND_METERS;
-		for (DrivingRegion r : DrivingRegion.values()) {
-			if (r.americanSigns == americanSigns && r.leftHandDriving == leftHand &&
-					r.defMetrics == mc) {
-				drg = r;
-				break;
-			}
-		}
-		if (drg != null) {
-			getMyApplication().getSettings().DRIVING_REGION.set(drg);
-		}
-		String lang = params.getRegionLang();
-		if (lang != null) {
-			String lng = lang.split(",")[0];
-			String setTts = null;
-			for (String s : OsmandSettings.TTS_AVAILABLE_VOICES) {
-				if (lng.startsWith(s)) {
-					setTts = s + "-tts";
-					break;
-				} else if (lng.contains("," + s)) {
-					setTts = s + "-tts";
-				}
-			}
-			if (setTts != null) {
-				getMyApplication().getSettings().VOICE_PROVIDER.set(setTts);
-			}
-		}
-	}
+	
 
 	public void setDownloadItem(WorldRegion region, String targetFileName) {
 		if (downloadItem == null) {
