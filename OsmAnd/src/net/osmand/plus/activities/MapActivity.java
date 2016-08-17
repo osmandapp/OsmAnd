@@ -175,7 +175,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	private boolean permissionGranted;
 
 	private boolean mIsDestroyed = false;
-	private boolean topToolbarActive = false;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -1322,7 +1321,14 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				&& Manifest.permission.WRITE_EXTERNAL_STORAGE.equals(permissions[0])) {
 			permissionAsked = true;
 			permissionGranted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
+		} else if (requestCode == FirstUsageWizardFragment.FIRST_USAGE_REQUEST_WRITE_EXTERNAL_STORAGE_PERMISSION
+				&& grantResults.length > 0 && permissions.length > 0
+				&& Manifest.permission.WRITE_EXTERNAL_STORAGE.equals(permissions[0])) {
 
+			FirstUsageWizardFragment wizardFragment = getFirstUsageWizardFragment();
+			if (wizardFragment != null) {
+				wizardFragment.processStoragePermission(grantResults[0] == PackageManager.PERMISSION_GRANTED);
+			}
 		} else if (requestCode == FirstUsageWizardFragment.FIRST_USAGE_LOCATION_PERMISSION) {
 			FirstUsageWizardFragment wizardFragment = getFirstUsageWizardFragment();
 			if (wizardFragment != null) {
@@ -1464,13 +1470,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	public void showTopToolbar(TopToolbarController controller) {
 		MapInfoLayer mapInfoLayer = getMapLayers().getMapInfoLayer();
 		mapInfoLayer.addTopToolbarController(controller);
-		this.topToolbarActive = mapInfoLayer.hasTopToolbar();
 	}
 
 	public void hideTopToolbar(TopToolbarController controller) {
 		MapInfoLayer mapInfoLayer = getMapLayers().getMapInfoLayer();
 		mapInfoLayer.removeTopToolbarController(controller);
-		this.topToolbarActive = mapInfoLayer.hasTopToolbar();
 	}
 
 	public enum ShowQuickSearchMode {

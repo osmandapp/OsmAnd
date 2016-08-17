@@ -55,13 +55,4 @@ public class FirstUsageWelcomeFragment extends Fragment {
 					WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 		}
 	}
-
-	@Override
-	public void onPause() {
-		super.onPause();
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-			Window w = getActivity().getWindow(); // in Activity's onCreate() for instance
-			w.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-		}
-	}
 }

@@ -30,6 +30,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
@@ -58,6 +59,7 @@ public class FirstUsageWizardFragment extends Fragment implements OsmAndLocation
 		AppInitializeListener, DownloadEvents {
 	public static final String TAG = "FirstUsageWizardFrag";
 	public static final int FIRST_USAGE_LOCATION_PERMISSION = 300;
+	public static final int FIRST_USAGE_REQUEST_WRITE_EXTERNAL_STORAGE_PERMISSION = 400;
 	public static final String WIZARD_TYPE_KEY = "wizard_type_key";
 	public static final String SEARCH_LOCATION_BY_IP_KEY = "search_location_by_ip_key";
 
@@ -234,7 +236,7 @@ public class FirstUsageWizardFragment extends Fragment implements OsmAndLocation
 					public void onClick(View v) {
 						MapActivity mapActivity = (MapActivity) getActivity();
 						mapActivity.setMapLocation(location.getLatitude(), location.getLongitude());
-						mapActivity.getMapView().setIntZoom(5);
+						mapActivity.getMapView().setIntZoom(13);
 						closeWizard();
 					}
 				});
@@ -334,11 +336,11 @@ public class FirstUsageWizardFragment extends Fragment implements OsmAndLocation
 			case MAP_DOWNLOAD:
 				int i = 0;
 				for (IndexItem indexItem : indexItems) {
-					if (i == 0 && !firstMapDownloadCancelled) {
+					if (i == 0 && !firstMapDownloadCancelled && !downloadThread.isDownloading(indexItem)) {
 						new DownloadValidationManager(getMyApplication())
 								.startDownload(getActivity(), indexItem);
 					}
-					if (i == 1 && !secondMapDownloadCancelled) {
+					if (i == 1 && !secondMapDownloadCancelled && !downloadThread.isDownloading(indexItem)) {
 						new DownloadValidationManager(getMyApplication())
 								.startDownload(getActivity(), indexItem);
 					}
@@ -539,6 +541,12 @@ public class FirstUsageWizardFragment extends Fragment implements OsmAndLocation
 		}
 	}
 
+	public void processStoragePermission(boolean granted) {
+		if (granted) {
+			DataStoragePlaceDialogFragment.showInstance(getActivity().getSupportFragmentManager(), false);
+		}
+	}
+
 	private static void findLocation(FragmentActivity activity, boolean searchLocationByIp) {
 		OsmandApplication app = (OsmandApplication) activity.getApplication();
 		if (searchLocationByIp) {
@@ -588,7 +596,14 @@ public class FirstUsageWizardFragment extends Fragment implements OsmAndLocation
 			changeStorageButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					DataStoragePlaceDialogFragment.showInstance(getActivity().getSupportFragmentManager(), false);
+					if (!DownloadActivity.hasPermissionToWriteExternalStorage(getContext())) {
+						ActivityCompat.requestPermissions(getActivity(),
+								new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+								FIRST_USAGE_REQUEST_WRITE_EXTERNAL_STORAGE_PERMISSION);
+
+					} else {
+						DataStoragePlaceDialogFragment.showInstance(getActivity().getSupportFragmentManager(), false);
+					}
 				}
 			});
 		}
