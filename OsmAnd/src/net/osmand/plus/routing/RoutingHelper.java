@@ -710,14 +710,8 @@ public class RoutingHelper {
 	
 		
 	public static String formatStreetName(String name, String ref, String destination, String towards) {
-	//Original version returned:
-	// 1. ref + " " + dest
-	// 2. dest
-	// 3. ref + " " + name
-	// 4. name
-	// 5. ref
-	// 6. ""
-	//Now returns: (ref)+((" ")+name)+((" ")+"toward "+dest)
+	//Hardy, 2016-08-05:
+	//Now returns: (ref) + ((" ")+name) + ((" ")+"toward "+dest) or ""
 
 		String formattedStreetName = "";
 		if (ref != null && ref.length() > 0) {
