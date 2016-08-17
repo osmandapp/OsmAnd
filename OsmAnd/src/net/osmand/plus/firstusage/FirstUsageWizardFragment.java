@@ -80,6 +80,7 @@ public class FirstUsageWizardFragment extends Fragment implements OsmAndLocation
 	List<IndexItem> indexItems = new ArrayList<>();
 
 	private static Location location;
+	private static WorldRegion localDownloadRegion;
 	private static IndexItem localMapIndexItem;
 	private static IndexItem baseMapIndexItem;
 	private static boolean firstMapDownloadCancelled;
@@ -378,6 +379,9 @@ public class FirstUsageWizardFragment extends Fragment implements OsmAndLocation
 					}
 					i++;
 				}
+				if (localDownloadRegion != null) {
+					downloadThread.initSettingsFirstMap(localDownloadRegion);
+				}
 				break;
 		}
 	}
@@ -524,6 +528,7 @@ public class FirstUsageWizardFragment extends Fragment implements OsmAndLocation
 			if (!Algorithms.isEmpty(selectedFullName)) {
 				WorldRegion downloadRegion = osmandRegions.getRegionData(selectedFullName);
 				if (downloadRegion != null && downloadRegion.isRegionMapDownload()) {
+					localDownloadRegion = downloadRegion;
 					List<IndexItem> indexItems = new LinkedList<>(downloadThread.getIndexes().getIndexItems(downloadRegion));
 					for (IndexItem item : indexItems) {
 						if (item.getType() == DownloadActivityType.NORMAL_FILE) {
@@ -568,6 +573,7 @@ public class FirstUsageWizardFragment extends Fragment implements OsmAndLocation
 		getActivity().getSupportFragmentManager().beginTransaction()
 				.remove(FirstUsageWizardFragment.this).commit();
 		location = null;
+		localDownloadRegion = null;
 		localMapIndexItem = null;
 		baseMapIndexItem = null;
 		wizardClosed = true;
