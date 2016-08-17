@@ -2619,4 +2619,5 @@ Als je hulp nodig hebt met OsmAnd: neem contact op met ons support team: support
     <string name="routing_attr_short_way_name">Economische route</string>
     <string name="routing_attr_short_way_description">Economische route gebruiken (meestal korter)</string>
     <string name="replace_favorite_confirmation">Wil je favoriet %1$s inderdaad vervangen?</string>
+    <string name="update_all_maps_now">Wil u alle kaarten nu updaten?</string>
     </resources>
