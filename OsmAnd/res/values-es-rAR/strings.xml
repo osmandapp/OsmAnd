@@ -2395,4 +2395,7 @@ Si necesitas ayuda con la aplicación OsmAnd, contacte con nuestro equipo de sop
     <string name="get_started">Empezar</string>
     <string name="update_all_maps_now">¿Quieres actualizar ahora todos los mapas?</string>
     <string name="clear_tile_data">Limpiar todas las teselas</string>
+    <string name="search_my_location">Buscar mi ubicación</string>
+    <string name="no_update_info_desc">No comprobar actualizaciones de nuevas versiones, relacionadas con descuentos de OsmAnd</string>
+    <string name="no_update_info">No mostrar actualizaciones</string>
     </resources>
