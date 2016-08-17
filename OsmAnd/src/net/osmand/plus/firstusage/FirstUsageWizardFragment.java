@@ -1,6 +1,7 @@
 package net.osmand.plus.firstusage;
 
 import android.Manifest;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StatFs;
@@ -174,6 +175,14 @@ public class FirstUsageWizardFragment extends Fragment implements OsmAndLocation
 					}
 				});
 				view.findViewById(R.id.map_download_card).setVisibility(View.VISIBLE);
+				final AppCompatButton searchCountryButton = (AppCompatButton) view.findViewById(R.id.search_country_button);
+				searchCountryButton.setVisibility(View.VISIBLE);
+				searchCountryButton.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						searchCountryMap();
+					}
+				});
 				break;
 			case MAP_DOWNLOAD:
 				if (localMapIndexItem != null) {
@@ -453,6 +462,13 @@ public class FirstUsageWizardFragment extends Fragment implements OsmAndLocation
 			}
 			i++;
 		}
+	}
+
+	private void searchCountryMap() {
+		closeWizard();
+		final Intent intent = new Intent(getActivity(), DownloadActivity.class);
+		intent.putExtra(DownloadActivity.TAB_TO_OPEN, DownloadActivity.DOWNLOAD_TAB);
+		getActivity().startActivity(intent);
 	}
 
 	private void searchMap() {

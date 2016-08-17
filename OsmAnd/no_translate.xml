@@ -11,6 +11,7 @@
     -->
 
     <!-- Not translatable -->
+    <string name="search_another_country">Search for another country</string>
     <string name="search_map">Searching map…</string>
     <string name="first_usage_wizard_desc">We would like to determine your location and suggest to download map of this region.</string>
     <string name="location_not_found">Location not found</string>
