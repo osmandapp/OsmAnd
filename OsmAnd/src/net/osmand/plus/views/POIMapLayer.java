@@ -376,6 +376,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 		settings.setDefaultTextEncodingName("utf-8");
 		settings.setBuiltInZoomControls(true);
 		settings.setDisplayZoomControls(false);
+		settings.setSupportZoom(true);
 
 		wv.loadDataWithBaseURL(null, content, "text/html", "UTF-8", null);
 //		wv.loadUrl(OsMoService.SIGN_IN_URL + app.getSettings().OSMO_DEVICE_KEY.get());
