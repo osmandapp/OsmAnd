@@ -2410,4 +2410,10 @@ Ak potrebuje pomoc s aplikáciou OsmAnd, kontaktuje podporu: support@osmand.net.
     <string name="search_location">Hľadá sa poloha…</string>
     <string name="storage_free_space">Voľné miesto</string>
     <string name="storage_place_description">OsmAnd ukladá údaje (mapy, stopy, atď.) do %1$s.</string>
+    <string name="give_permission">Udeliť povolenie</string>
+    <string name="allow_access_location">Povoliť prístup k polohe</string>
+    <string name="first_usage_greeting">Získajte pokyny, objavte nové miesta, bez pripojenia na internet</string>
+    <string name="search_my_location">Hľadať moju polohu</string>
+    <string name="no_update_info_desc">Nekontrolovať aktualizácie nových verzií a zľavy súvisiace s OsmAnd</string>
+    <string name="no_update_info">Nezobrazovať aktualizácie</string>
     </resources>
