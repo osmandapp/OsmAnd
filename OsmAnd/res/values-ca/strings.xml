@@ -2417,4 +2417,5 @@ Si aprecieu OsmAnd  i OSM i vulgueu ajudar-los, és la via perfecta per fer-ho."
     <string name="routing_attr_short_way_name">Ruta amb menys consum</string>
     <string name="routing_attr_short_way_description">Utilitza la ruta de menys consum (normalment la més curta)</string>
     <string name="replace_favorite_confirmation">Confirmeu que voleu substituir la preferència %1$s?</string>
+    <string name="update_all_maps_now">Voleu actualitzar tots els mapes ara mateix?</string>
     </resources>
