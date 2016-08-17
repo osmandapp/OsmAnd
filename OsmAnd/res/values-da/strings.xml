@@ -2201,7 +2201,7 @@ For at vende tilbage til en af OsmAnd konventionelle kortformater, enten deaktiv
     <string name="share_menu_location">Del placering</string>
     <string name="shared_string_send">Send</string>
 
-    <string name="application_dir_description">Vælg hvor kortfilerne skal gemmes.</string>
+    <string name="application_dir_description">Vælg hvor kort- og andre datafiler skal gemmes.</string>
     <string name="show_on_start_description">\'Fra\' starter direkte på kortet</string>
     <string name="map_downloaded">Kort hentet</string>
     <string name="map_downloaded_descr">Kort over %1$s er hentet. Gå tilbage til kortet for at begynde at bruge det.</string>
@@ -2632,13 +2632,13 @@ Hvis du er fan af OsmAnd og OSM og ønsker at støtte dem, er det den perfekte m
     <string name="skip_map_downloading_desc">Der ikke nogen offline kort installeret. Vælg et kort fra listen eller hent senere via Menu - %1$s.</string>
     <string name="search_another_country">Søg efter et andet land</string>
     <string name="search_map">Søger kort…</string>
-    <string name="first_usage_wizard_desc">Vi vil gerne bestemme din placering og foreslå for at hente kort i denne region.</string>
+    <string name="first_usage_wizard_desc">Lad OsmAnd bestemme din placering og foreslå for at hente kort i denne region.</string>
     <string name="location_not_found">Placering ikke fundet</string>
     <string name="no_inet_connection">Ingen internetforbindelse</string>
-    <string name="no_inet_connection_desc_map">Nødvendigt for at hente kortet</string>
+    <string name="no_inet_connection_desc_map">Nødvendigt for at hente kort.</string>
     <string name="search_location">Søger efter placering…</string>
     <string name="storage_free_space">Ledig lagerplads</string>
-    <string name="storage_place_description">OsmAnd gemmer data (kort, spor, etc.) i %1$s.</string>
+    <string name="storage_place_description">OsmAnd datalagring (for kort, spor, etc.): %1$s.</string>
     <string name="give_permission">Giv tilladelse</string>
     <string name="allow_access_location">Tillad adgang til placering</string>
     <string name="first_usage_greeting">Få rutevejledning, opdag nye steder, uden internetforbindelse</string>
