@@ -2633,7 +2633,7 @@ Hvis du er fan af OsmAnd og OSM og ønsker at støtte dem, er det den perfekte m
     <string name="search_another_country">Søg efter et andet land</string>
     <string name="search_map">Søger kort…</string>
     <string name="first_usage_wizard_desc">Vi vil gerne bestemme din placering og foreslå for at hente kort i denne region.</string>
-    <string name="location_not_found">Sted ikke fundet</string>
+    <string name="location_not_found">Placering ikke fundet</string>
     <string name="no_inet_connection">Ingen internetforbindelse</string>
     <string name="no_inet_connection_desc_map">Nødvendigt for at hente kortet</string>
     <string name="search_location">Søger efter placering…</string>
