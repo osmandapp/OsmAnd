@@ -622,7 +622,7 @@
     <string name="map_online_plugin_is_not_installed">Activa el complemento «Mapas en línea», para seleccionar diferentes fuentes de mapas</string>
     <string name="map_online_data">Mapas en línea y teselas</string>
     <string name="map_online_data_descr">Usa mapas en línea (teselas descargadas y almacenadas localmente en la tarjeta SD)</string>
-    <string name="shared_string_online_maps">Mapas en línea</string>
+    <string name="shared_string_online_maps">Mapas con conexión</string>
     <string name="online_map_settings_descr">Configura las fuentes de teselas de mapas en línea o almacenadas localmente</string>
     <string name="osmand_rastermaps_plugin_description">"Con este complemento puede acceder a muchos tipos de mapas en línea (llamados de teselas o ráster), desde teselas de OpenStreetMap predefinidas (como Mapnik) a imágenes de satélite y capas de propósito especial como mapas del tiempo, mapas del clima, mapas geológicos, capas de sombreado, etc.
 \n\nCualquiera de estos mapas se puede utilizar como el mapa (base) principal, que se mostrará en la pantalla del mapa de OsmAnd, o como una superposición o subyacente de otro mapa base (como los mapas estándares en línea de OsmAnd). Para hacer cualquier mapa subyacente más visible, ciertos elementos de los mapas vectoriales de OsmAnd, se pueden ocultar fácilmente a través del menú \'Configurar mapa\' cuando desee.
