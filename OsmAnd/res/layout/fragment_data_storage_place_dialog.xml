@@ -43,7 +43,7 @@
                 android:layout_weight="1"
                 android:paddingTop="22dp"
                 android:text="@string/application_dir"
-                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="?android:attr/textColorPrimary"
                 android:textSize="@dimen/dialog_header_text_size"/>
 
             <ImageButton
@@ -105,13 +105,15 @@
                             android:layout_gravity="fill_horizontal"
                             android:gravity="center_vertical"
                             android:text="@string/storage_directory_external"
-                            android:textAppearance="?android:attr/textAppearanceMedium"/>
+                            android:textColor="?android:attr/textColorPrimary"
+                            />
 
                         <TextView
                             android:id="@+id/deviceMemoryDescription"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="fill_horizontal"
+                            android:textColor="?android:attr/textColorSecondary"
                             tools:text="Free: 568 Mb"/>
 
                     </LinearLayout>
@@ -153,13 +155,14 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="fill_horizontal"
                             android:text="@string/storage_directory_shared"
-                            android:textAppearance="?android:attr/textAppearanceMedium"/>
+                            android:textColor="?android:attr/textColorPrimary"/>
 
                         <TextView
                             android:id="@+id/sharedMemoryDescription"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="fill_horizontal"
+                            android:textColor="?android:attr/textColorSecondary"
                             tools:text="Free: 9 Gb"/>
 
                     </LinearLayout>
@@ -200,13 +203,14 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="fill_horizontal"
                             android:text="@string/storage_directory_card"
-                            android:textAppearance="?android:attr/textAppearanceMedium"/>
+                            android:textColor="?android:attr/textColorPrimary"/>
 
                         <TextView
                             android:id="@+id/memoryStickDescription"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="fill_horizontal"
+                            android:textColor="?android:attr/textColorSecondary"
                             tools:text="Free: 9 Gb"/>
 
                     </LinearLayout>
