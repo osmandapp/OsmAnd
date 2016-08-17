@@ -2118,4 +2118,5 @@
     <string name="download_files_question_space_with_temp">Действительно загрузить {0} файл (ов)?
 Для этого необходимо {3} MB временно и {1} МБ на постоянной основе.
 В настоящее время существует {2} МБ свободного места.</string>
+    <string name="select_voice_provider">Выбор голосовых подсказок</string>
     </resources>
