@@ -225,5 +225,24 @@
     "expectedResults": {
       "181495": "false"
     }
+  },
+  {
+    "testName": "19.Routing prblem: OsmAnd fails to use the nearest link between two halves of a highway https://github.com/osmandapp/Osmand/issues/1970#issuecomment-209651749",
+    "params": {
+      "vehicle": "car",
+      "short_way": "true",
+      "planRoadDirection": "-1"
+    },
+    "startPoint": {
+      "latitude": 45.84915380671208,
+      "longitude": 35.496067695226714
+    },
+    "endPoint": {
+      "latitude": 45.849069733500244,
+      "longitude": 35.49558221539502
+    },
+    "expectedResults": {
+      "30783342": "false"
+    }
   }
 ]
