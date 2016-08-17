@@ -1520,4 +1520,72 @@
 	<string name="poi_jersey_barrier">Betonelem</string>
 	<string name="poi_horse_stile">Lovaskapu</string>
 	<string name="poi_kissing_gate">Lengőkapu</string>
+	<string name="poi_leisure_common">Közös pihenőterület</string>
+	<string name="poi_piste_grooming_classic_skating">Pálya kezelés: klasszikus- és szabadsítlus</string>
+	<string name="poi_piste_grooming_backcountry">Pálya kezelés: kezeletlen</string>
+	<string name="poi_piste_grooming_scooter">Pálya kezelés: motorosszán</string>
+	<string name="poi_piste_grooming_skating">Pálya kezelés: szabadsítlus</string>
+	<string name="poi_piste_grooming_no">Pálya kezelés: nincs</string>
+	<string name="poi_piste_grooming_mogul">Pálya kezelés: buckasí</string>
+
+	<string name="poi_garden_type_residential">Kerttípus: udvari</string>
+	<string name="poi_garden_type_community">Kerttípus: közösségi</string>
+	<string name="poi_garden_type_private">Kerttípus: magán</string>
+	<string name="poi_garden_type_botanical">Kerttípus: botanikuskert</string>
+
+	<string name="poi_garden_style_kitchen">Kertstílus: konyhakert</string>
+	<string name="poi_garden_style_rosarium">Kertstílus: rózsakert</string>
+	<string name="poi_garden_style_french">Kertstílus: francia</string>
+	<string name="poi_garden_style_english">Kertstílus: angol</string>
+	<string name="poi_garden_style_japanese">Kertstílus: japán</string>
+
+	<string name="poi_capacity_disabled_yes">Mozgáskorlátozottaknak fenntartott hely</string>
+	<string name="poi_capacity_disabled_no">Nincs mozgáskorlátozottaknak fenntartott hely</string>
+	<string name="poi_capacity_disabled">Mozgáskorlátozottaknak fenntartott hely</string>
+	<string name="poi_capacity_women_yes">Nők számára fenntartott hely</string>
+	<string name="poi_capacity_women_no">Nincs nők számára fenntartott hely</string>
+	<string name="poi_capacity_women">Nők számára fenntartott hely</string>
+	<string name="poi_capacity_pupils">Tanulók számára fenntartott hely</string>
+	<string name="poi_capacity_teachers">Tanárok számára fenntartott hely</string>
+	<string name="poi_capacity_parent_yes">Szülők számára fenntartott hely</string>
+	<string name="poi_capacity_parent_no">Nincs szülők számára fenntartott hely</string>
+	<string name="poi_capacity_parent">Szülők számára fenntartott hely</string>
+
+	<string name="poi_aerialway_occupancy">Kabin/ülés kapacitás</string>
+	<string name="poi_aerialway_capacity">Óránkénti kapacitás</string>
+	<string name="poi_aerialway_duration">Átlagos menetidő, perc</string>
+	<string name="poi_aerialway_bubble_yes">Buborék (zárt)</string>
+	<string name="poi_aerialway_bubble_no">Nincs buborék (nem zárt)</string>
+	<string name="poi_aerialway_heating_yes">Fűtött</string>
+	<string name="poi_aerialway_heating_no">Fűtetlen</string>
+	<string name="poi_aerialway_bicycle_yes">Kerékpár: engedélyezett</string>
+	<string name="poi_aerialway_bicycle_no">Kerékpár: tilos</string>
+	<string name="poi_aerialway_bicycle_summer">Kerékpár: csak nyáron</string>
+	<string name="poi_aerialway_access_entry">Csak bejárat</string>
+	<string name="poi_aerialway_access_exit">Csak kijárat</string>
+	<string name="poi_aerialway_access_both">Be- és kijárat</string>
+	<string name="poi_aerialway_summer_access_entry">Nyáron: csak bejárat</string>
+	<string name="poi_aerialway_summer_access_exit">Nyáron: csak kijárat</string>
+	<string name="poi_aerialway_summer_access_both">Nyáron: be- és kijárat</string>
+
+	<string name="poi_stars_1">1 csillagos (turista)</string>
+	<string name="poi_stars_1s">1+ csillagos (turista superior)</string>
+	<string name="poi_stars_2">2 csillagos (standard)</string>
+	<string name="poi_stars_2s">2+ csillagos (standard superior)</string>
+	<string name="poi_stars_3">3 csillagos (komfort)</string>
+	<string name="poi_stars_3s">3+ csillagos (komfort superior)</string>
+	<string name="poi_stars_4">4 csillagos (első osztály)</string>
+	<string name="poi_stars_4s">4+ csillagos (első osztály superior)</string>
+	<string name="poi_stars_5">5 csillagos (luxus)</string>
+	<string name="poi_stars_5s">5+ csillagos (luxus superior)</string>
+	<string name="poi_stars_6">6 csillagos</string>
+	<string name="poi_stars_7">7 csillagos</string>
+	<string name="poi_rooms">Szobák</string>
+
+	<string name="poi_payment_coins_yes">Érmét elfogad</string>
+	<string name="poi_payment_coins_no">Érmét nem fogad el</string>
+	<string name="poi_payment_coins_0.5">$0.5 érmét elfogad</string>
+	<string name="poi_payment_coins_50c12">50c, 1€, és 2€ érmét elfogad</string>
+	<string name="poi_payment_telephone_cards_yes">Telefonkártyát elfogad</string>
+	<string name="poi_payment_telephone_cards_no">Telefonkártyát nem fogad el</string>
 	</resources>
