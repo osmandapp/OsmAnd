@@ -10,7 +10,7 @@
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
     <string name="skip_map_downloading">Skip downloading maps</string>
-    <string name="skip_map_downloading_desc">You do not have any offline map installed. You may choose map from the list or download it later via Menu - %1$s.</string>
+    <string name="skip_map_downloading_desc">You have no offline map installed. You may choose a map from the list or download maps later via Menu - %1$s.</string>
     <string name="search_another_country">Search for another country</string>
     <string name="search_map">Searching map…</string>
     <string name="first_usage_wizard_desc">Let OsmAnd determine your location and suggest maps to download for that region.</string>
