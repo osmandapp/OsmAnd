@@ -87,7 +87,7 @@
     <string name="local_indexes_cat_map">Mapes estàndards (vectorials)</string>
     <string name="map_online_plugin_is_not_installed">Activeu el connector Mapes en línia per poder seleccionar diferents fonts de mapes</string>
     <string name="map_online_data">Mapes en línia (tessel·les)</string>
-    <string name="map_online_data_descr">Utilitzeu mapes en línia (les tessel·les es baixen i es desen a la memòria cau de la targeta SD)</string>
+    <string name="map_online_data_descr">Utilitza mapes en línia (les tessel·les es baixen i es desen a la targeta SD)</string>
     <string name="shared_string_online_maps">Mapes en línia</string>
     <string name="online_map_settings_descr">Configureu les fonts de mapes de tessel·les en línia o desades a la memòria cau</string>
     <string name="osmand_accessibility_description">"Aquest connector fa disponible directament des OsmAnd  les característiques d\'accessibilitat del dispositiu. Us permet, per exemple,  ajustar la velocitat de la veu en la síntesi TTS , configurar la pantalla de navegació, l\'ús del ratolí de bola pel zoom o de la veu sintetitzada, com per anunciar automàticament la vostra posició."</string>
@@ -744,7 +744,7 @@ Els mapes de tessel·les es poden obtenir directament de proveïdors en línia, 
     <string name="add_as_last_destination_point">Afegeix com la darrera fita</string>
     <string name="add_as_first_destination_point">Afegeix com la primera fita</string>
     <string name="replace_destination_point">Substitueix la destinació</string>
-    <string name="new_destination_point_dialog">Ja teniu definida la destinació:</string>
+    <string name="new_destination_point_dialog">Ja teniu definida una destinació:</string>
     <string name="target_point">Destinació %1$s</string>
     <string name="target_points">Destinacions</string>
     <string name="intermediate_point_too_far">La fita %1$s és massa lluny de la carretera més propera.</string>
@@ -786,7 +786,7 @@ Els mapes de tessel·les es poden obtenir directament de proveïdors en línia, 
     <string name="uploading">Enviant…</string>
     <string name="search_osm_nominatim">Cerca una adreça utilitzant OSM Nominatim</string>
     <string name="hint_search_online">Cerca en línia: Núm. de la casa, carrer, ciutat</string>
-    <string name="max_level_download_tile_descr">Seleccioneu el nivell màxim de zoom per baixar les tessel·les dels mapes en línia</string>
+    <string name="max_level_download_tile_descr">Seleccioneu el nivell màxim de zoom per baixar tessel·amb mapes en línia</string>
     <string name="route_general_information">"Distància total %1$s,  temps de viatge %2$d h %3$d min."</string>
     <string name="router_service_descr">Escolliu un servei de navegació en línia o fora de línia</string>
     <string name="download_question">Voleu baixar {0} - {1} ?</string>
@@ -1113,7 +1113,7 @@ Les dades globals (entre 70 graus nord i 70 graus sud) estan basades en mesures 
     <string name="disable_complex_routing_descr">Desactiva el càlcul de ruta en 2 fases per cotxe</string>
     <string name="disable_complex_routing">Desactiva el càlcul complex de la ruta</string>
     <string name="route_is_too_long">"El càlcul fora de línia  d\'una ruta entre punts separats per més de 200 Km pot ser molt lent o aturar-se del tot. Per millorar els resultats us pot convenir afegir fites intermèdies."</string>
-    <string name="edit_tilesource_successfully">El proveïdor de mosaics %1$s és ben desat</string>
+    <string name="edit_tilesource_successfully">El proveïdor de tessel·les %1$s és ben desat</string>
     <string name="edit_tilesource_choose_existing">Tria existent…</string>
     <string name="map_widget_fps_info">Info depuració FPS</string>
     <string name="intermediate_items_sort_return">S\'han reordenat les fites per optimitzar la ruta que les inclou des de la ubicació actual fins a la destinació.</string>
@@ -1150,7 +1150,7 @@ Les dades globals (entre 70 graus nord i 70 graus sud) estan basades en mesures 
     <string name="av_camera_focus">Tipus d\'enfocament</string>
     <string name="poi_error_unexpected_template">S\'ha produït un error inesperat en fer l\'acció {0}.</string>
     
-    <string name="map_tile_source_descr">Trieu l\'origen de les tessel·les, en línia o de la memòria cau</string>
+    <string name="map_tile_source_descr">Trieu l\'origen de les tessel·les, sigui en línia o de la memòria cau</string>
     <string name="previous_run_crashed">La darrera execució de l\'OsmAnd ha fallat. El fitxer log és a {0}. Si us plau informeu del problema i adjunteu el fitxer log.</string>
     <string name="transport_stop_to_go_out">Trieu aturada per sortir</string>
     <string name="route_head">Endavant</string>
