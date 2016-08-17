@@ -1629,4 +1629,49 @@
 	<string name="poi_payment_visa_debit_yes">Visa Bankkártyát elfogad</string>
 	<string name="poi_payment_visa_debit_no">Visa Bankkártyát nem fogad el</string>
 	<string name="poi_payment_cryptocurrencies_no">Kriptovalutát nem fogad el</string>
+	<string name="poi_payment_others_yes">Egyéb fizetési módokat elfogad</string>
+	<string name="poi_payment_others_no">Egyéb fizetési módokat nem fogad el</string>
+	<string name="poi_payment_paypal_yes">PayPal fizetést elfogad</string>
+	<string name="poi_payment_paypal_no">PayPal fizetést nem fogad el</string>
+	<string name="poi_description_payment">Fizetési mód</string>
+
+	<string name="poi_drive_in_yes">Drive-in: van</string>
+	<string name="poi_drive_in_no">Drive-in: nincs</string>
+	<string name="poi_drive_through_yes">Drive-through: van</string>
+	<string name="poi_drive_through_no">Drive-through: nincs</string>
+
+	<string name="poi_cairn">Kőrakás</string>
+
+	<string name="poi_vending_parcel_pickup_mail_in">Csomagfelvétel és -feladás</string>
+	<string name="poi_vending_parcel_pickup">Csomagfelvétel</string>
+	<string name="poi_vending_parcel_mail_in">Csomagfeladás</string>
+	<string name="poi_vending_vouchers">Utalvány</string>
+	<string name="poi_memorial_koshinto">Koshinto</string>
+	<string name="poi_memorial_blue_plaque">kék emléktábla</string>
+	<string name="poi_memorial_jizo">Dzsizó</string>
+	<string name="poi_memorial_cross">Kereszt alakú</string>
+	<string name="poi_memorial_stolperstein">Botlatókő</string>
+	<string name="poi_inscription">Felirat</string>
+	<string name="poi_resource_aggregate">Aggregátor</string>
+	<string name="poi_shelter_type_public_transport">Menedék típusa: tömegközlekedési</string>
+	<string name="poi_shelter_type_picnic_shelter">Menedék típusa: szaletli</string>
+	<string name="poi_shelter_type_weather_shelter">Menedék típusa: esőház</string>
+	<string name="poi_shelter_type_lean_to">Menedék típusa: nyitott esőbeálló</string>
+	<string name="poi_shelter_type_basic_hut">Menedék típusa: egyszerű kunyhó</string>
+	<string name="poi_shelter_type_building">Menedék típusa: épület</string>
+	<string name="poi_shelter_type_wildlife_hide">Menedék típusa: vadfigyelő rejtek</string>
+	<string name="poi_shelter_type_rock_shelter">Menedék típusa: sziklaüreg</string>
+	<string name="poi_shelter_type_sun_shelter">Menedék típusa: naptető</string>
+	<string name="poi_shelter_type_field_shelter">Menedék típusa: állatmenedék</string>
+	<string name="poi_shelter_type_tent">Menedék típusa: sátor</string>
+	<string name="poi_shelter_type_abandoned">Menedék típusa: elhagyott</string>
+
+	<string name="poi_internet_access_type_wlan">Internetelérés típusa: Wi-Fi</string>
+	<string name="poi_internet_access_type_terminal">Internetelérés típusa: munkaállomás</string>
+	<string name="poi_internet_access_type_wired">Internetelérés típusa: vezetékes</string>
+	<string name="poi_internet_access_type_public">Internetelérés típusa: publikus</string>
+	<string name="poi_internet_access_type_service">Internetelérés típusa: szolgáltatás</string>
+	<string name="poi_internet_access_type_no">Nincs internetelérés</string>
+	<string name="poi_internet_access_type_yes">Interneteléréssel</string>
+
 	</resources>
