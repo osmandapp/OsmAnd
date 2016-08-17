@@ -38,7 +38,6 @@ import android.view.WindowManager;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
@@ -116,6 +115,8 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -1310,7 +1311,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	@Override
-	public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+	public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull final int[] grantResults) {
 		OsmandPlugin.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
 		MapControlsLayer mcl = mapView.getLayerByClass(MapControlsLayer.class);
@@ -1327,15 +1328,25 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				&& grantResults.length > 0 && permissions.length > 0
 				&& Manifest.permission.WRITE_EXTERNAL_STORAGE.equals(permissions[0])) {
 
-			FirstUsageWizardFragment wizardFragment = getFirstUsageWizardFragment();
-			if (wizardFragment != null) {
-				wizardFragment.processStoragePermission(grantResults[0] == PackageManager.PERMISSION_GRANTED);
-			}
+			new Timer().schedule(new TimerTask() {
+				@Override
+				public void run() {
+					FirstUsageWizardFragment wizardFragment = getFirstUsageWizardFragment();
+					if (wizardFragment != null) {
+						wizardFragment.processStoragePermission(grantResults[0] == PackageManager.PERMISSION_GRANTED);
+					}
+				}
+			}, 1);
 		} else if (requestCode == FirstUsageWizardFragment.FIRST_USAGE_LOCATION_PERMISSION) {
-			FirstUsageWizardFragment wizardFragment = getFirstUsageWizardFragment();
-			if (wizardFragment != null) {
-				wizardFragment.processLocationPermission(grantResults[0] == PackageManager.PERMISSION_GRANTED);
-			}
+			new Timer().schedule(new TimerTask() {
+				@Override
+				public void run() {
+					FirstUsageWizardFragment wizardFragment = getFirstUsageWizardFragment();
+					if (wizardFragment != null) {
+						wizardFragment.processLocationPermission(grantResults[0] == PackageManager.PERMISSION_GRANTED);
+					}
+				}
+			}, 1);
 		}
 
 		super.onRequestPermissionsResult(requestCode, permissions, grantResults);
