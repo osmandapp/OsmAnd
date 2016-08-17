@@ -2551,4 +2551,19 @@ OsmAnd aplikazioarekin laguntza behar baduzu, jarri kontaktuan gure laguntza tal
     <string name="replace_favorite_confirmation">Ziur %1$s gogokoa ordezkatu nahi duzula?</string>
     <string name="shared_string_change">Aldatu</string>
     <string name="get_started">Hasi</string>
+    <string name="skip_map_downloading">Ski-mapen deskarga</string>
+    <string name="skip_map_downloading_desc">"Ez duzu lineaz kanpoko maparik instalatuta. Zerrendako mapa bat deskargatzea erabaki dezakezu edo geroago egin menuko  %1$s aukeran."</string>
+    <string name="search_another_country">Bilatu beste herrialde bat</string>
+    <string name="search_map">Mapa bilatzen…</string>
+    <string name="first_usage_wizard_desc">Zure kokalekua zehaztu nahiko genuke eta eskualderako mapa egokia deskargatzea iradoki.</string>
+    <string name="location_not_found">Ez da kokapena aurkitu</string>
+    <string name="no_inet_connection">Ez dago internet konexiorik</string>
+    <string name="no_inet_connection_desc_map">Mapa deskargatzeko beharrezkoa da</string>
+    <string name="search_location">Kokalekua bilatzen…</string>
+    <string name="storage_free_space">Espazio librea</string>
+    <string name="storage_place_description">OsmAnd aplikazioak datuak hemen gordetzen ditu: %1$s.</string>
+    <string name="give_permission">Eman baimena</string>
+    <string name="allow_access_location">Eman kokapena atzitzeko baimena</string>
+    <string name="first_usage_greeting">Jaso jarraibideak, aurkitu toki berriak, internet konexiorik gabe</string>
+    <string name="search_my_location">Bilatu nire kokalekua</string>
     </resources>
