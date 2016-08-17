@@ -19,7 +19,7 @@
     <string name="no_inet_connection_desc_map">Required to download maps.</string>
     <string name="search_location">Searching location…</string>
     <string name="storage_free_space">Free space</string>
-    <string name="storage_place_description">OsmAnd's data storage (for maps, tracks, etc.): %1$s.</string>
+    <string name="storage_place_description">OsmAnd\'s data storage (for maps, tracks, etc.): %1$s.</string>
     <string name="give_permission">Give permission</string>
     <string name="allow_access_location">Allow access to location</string>
     <string name="first_usage_greeting">Get directions, discover new places, without internet connection</string>
