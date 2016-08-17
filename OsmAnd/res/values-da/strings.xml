@@ -291,7 +291,7 @@ Både placering og tid er synlige på betjeningspanel samt i modul på kortskær
     <string name="index_settings_descr">Hent og administrer offline kortfiler gemt på enheden</string>
     <string name="map_online_plugin_is_not_installed">Aktiver onlinekort udvidelsen for at vælge andre kortkilder</string>
     <string name="map_online_data">Onlinekort og kortfliser</string>
-    <string name="map_online_data_descr">Brug onlinekort (hent og gem midlertidig kortfliser på SD-kort)</string>
+    <string name="map_online_data_descr">Brug onlinekort (hent og gem midlertidig kortbrikker på SD-kort)</string>
     <string name="shared_string_online_maps">Onlinekort</string>
     <string name="online_map_settings_descr">Konfigurer online- eller cachelagrede kilder til kortfliser</string>
 
@@ -300,7 +300,7 @@ Både placering og tid er synlige på betjeningspanel samt i modul på kortskær
     <string name="osmand_accessibility_description">"Udvidelsen gør  tilgængelighedsfunktioner tilgængelige direkte i OsmAnd. Det letter fx. justering af tale for TTS stemmerne, konfiguration af styrekryds (D-pad) skærmnavigation ved hjælp af en styrekugle til zoomknappen, eller ved hjælp af tekst-til-tale tilbagemeldinger, og som at meddele positionen automatisk."</string>
 	
 	
-	<string name="osmand_rastermaps_plugin_description">"Udvidelsen giver adgang til mange typer af online (såkaldte fliser eller raster) kort, fra foruddefinerede OpenStreetMap kortfliser (som Mapnik) til satellitbilleder og lag til særlig anvendelse som vejr-, klima- eller geologiskekort og relieflag osv.
+	<string name="osmand_rastermaps_plugin_description">"Udvidelsen giver adgang til mange typer af online (såkaldte fliser eller raster) kort, fra foruddefinerede OpenStreetMap kortbrikker (som Mapnik) til satellitbilleder og lag til særlig anvendelse som vejr-, klima- eller geologiskekort og relieflag osv.
 
 Alle disse kort kan enten bruges som det vigtigste (primær) kort, der skal vises på kortskærmen, eller som en over- eller underlejring til et andet basiskort (såsom OsmAnd standard offline kort). For at gøre underlejringskortet mere synlig, kan visse elementer af OsmAnd vektorkort nemt skjules via \'Konfigurer kort\' menuen som ønsket.
 
@@ -832,7 +832,7 @@ Liste over understøttede lande (dybest set hele verden!): Afghanistan, Albanien
     <string name="poi_filter_closest_poi">Nærmeste interessepunkter</string>
     <string name="poi_filter_custom_filter">Brugerdefineret filter</string>
     <string name="poi_filter_namefinder">Online navne-søger</string>
-    <string name="reading_cached_tiles">Læser cachelagrede kortfliser…</string>
+    <string name="reading_cached_tiles">Læser cachelagrede kortbrikker…</string>
     <string name="version_index_is_big_for_memory">Ikke nok hukommelse for indeks \'{0}\'</string>
     <string name="version_index_is_not_supported">Versionen af indeks \'{0}\' er ikke understøttet</string>
     
@@ -864,7 +864,7 @@ Liste over understøttede lande (dybest set hele verden!): Afghanistan, Albanien
     <string name="filter_existing_indexes">Hentet</string>
     <string name="fast_route_mode">Hurtigste rute</string>
     <string name="fast_route_mode_descr">"Aktiver for at beregne den hurtigste rute eller deaktiver for  brændstofbesparende rute "</string>
-    <string name="tiles_to_download_estimated_size">Ved zoom {0} hent {1} kortfliser ({2} MB)</string>
+    <string name="tiles_to_download_estimated_size">Ved zoom {0} hent {1} kortbrikker ({2} MB)</string>
     <string name="shared_string_download_map">Hent kort</string>
     <string name="select_max_zoom_preload_area">Vælg maksimal zoom der skal indlæses på forhånd</string>
     <string name="maps_could_not_be_downloaded">Kortet kunne ikke hentes</string>
@@ -882,7 +882,7 @@ Liste over understøttede lande (dybest set hele verden!): Afghanistan, Albanien
     <string name="phone">Telefon</string>
     <string name="download_type_to_filter">skriv for at filtrere</string>
     <string name="use_high_res_maps">Højopløseligt visning</string>
-    <string name="use_high_res_maps_descr">Stræk (og slør) ikke kortfliser på skærme med stor opløsning</string>
+    <string name="use_high_res_maps_descr">Stræk (og slør) ikke kortbrikker på skærme med stor opløsning</string>
 
     <string name="context_menu_item_search_transport">Søg kollektivtrafik</string>
     <string name="transport_searching_transport">Transportresultater (ingen destination):</string>
@@ -1068,7 +1068,7 @@ Liste over understøttede lande (dybest set hele verden!): Afghanistan, Albanien
     <string name="hint_search_online">Online-søgning: husnummer, gade, by</string>
     <string name="search_online_address">Online søgning</string>
     <string name="max_level_download_tile">Maks online zoom</string>
-    <string name="max_level_download_tile_descr">Vælg maksimum zoomniveau der hentes for online kortfliser</string>
+    <string name="max_level_download_tile_descr">Vælg maks zoomniveau der skal hentes for online kortbrikker</string>
 	
 	
 	
@@ -1156,7 +1156,7 @@ Liste over understøttede lande (dybest set hele verden!): Afghanistan, Albanien
     <string name="map_view_3d">3D-kortvisning</string>
     <string name="show_poi_over_map_description">Vis interessepunkt ovenpå kortet (brug det sidst valgte filter)</string>
     <string name="show_poi_over_map">Vis interessepunkt</string>
-    <string name="map_tile_source_descr">Vælg kilden til onlinekort eller cachelagrede kortfliser</string>
+    <string name="map_tile_source_descr">Vælg kilden til onlinekort eller cachelagrede kortbrikker</string>
     <string name="map_tile_source">Kilde til kortfliser</string>
     <string name="map_source">Kortkilde</string>
     <string name="use_internet">Brug internettet</string>
@@ -1164,7 +1164,7 @@ Liste over understøttede lande (dybest set hele verden!): Afghanistan, Albanien
 
 
     <string name="show_gps_coordinates_text">Vis GPS-koordinater på kortet</string>
-    <string name="use_internet_to_download_tile">Brug internettet til at hente manglende kortfliser</string>
+    <string name="use_internet_to_download_tile">Brug internettet til at hente manglende kortbrikker</string>
     <string name="app_description">Navigationsprogram</string>
 
 
@@ -1326,7 +1326,7 @@ Liste over understøttede lande (dybest set hele verden!): Afghanistan, Albanien
     <string name="local_index_tile_data_zooms">Zoomniveauer hentet: %1$s</string>
     <string name="local_index_tile_data_downloadable">Kan hentes: %1$s</string>
     <string name="local_index_tile_data_name">Kortflisedata: %1$s</string>
-    <string name="edit_tilesource_successfully">Kortflisekilden %1$s er gemt</string>
+    <string name="edit_tilesource_successfully">Kortbrikkilden %1$s er gemt</string>
 
     <string name="about_version">Version:</string>
     <string name="shared_string_about">Om</string>
@@ -2624,5 +2624,5 @@ Hvis du er fan af OsmAnd og OSM og ønsker at støtte dem, er det den perfekte m
     <string name="shared_string_change">Skift</string>
     <string name="get_started">Kom godt i gang</string>
     <string name="update_all_maps_now">Opdater alle kort nu?</string>
-    <string name="clear_tile_data">Ryd alle kortfliser</string>
+    <string name="clear_tile_data">Ryd alle kortbrikker</string>
     </resources>
