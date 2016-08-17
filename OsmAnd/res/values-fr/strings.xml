@@ -2289,4 +2289,19 @@ Actuellement {2} Mo sont disponibles.</string>
     <string name="routing_attr_short_way_description">Suivre un trajet économe en carburant (trajet habituellement plus court)</string>
     <string name="no_update_info_desc">Ne pas vérifier les mises à jour ni les offres promotionnelles OsmAnd</string>
     <string name="no_update_info">Ne pas afficher les mises à jour</string>
+    <string name="skip_map_downloading">Ignorer le téléchargement des cartes</string>
+    <string name="skip_map_downloading_desc">"Aucune carte hors-ligne n\'est installée. Vous pouvez  sélectionner un carte dans la liste ou télécharger une carte ultérieurement depuis le menu - %1$s."</string>
+    <string name="search_another_country">Rechercher un autre pays</string>
+    <string name="search_map">Recherche de la carte…</string>
+    <string name="first_usage_wizard_desc">Laissez OsmAnd déterminer votre position et vous suggérer les cartes de la région.</string>
+    <string name="location_not_found">Position non trouvée</string>
+    <string name="no_inet_connection">Aucune connexion Internet</string>
+    <string name="no_inet_connection_desc_map">Nécessaire pour télécharger des cartes.</string>
+    <string name="search_location">Recherche de la position…</string>
+    <string name="storage_free_space">Espace disponible</string>
+    <string name="give_permission">Autoriser</string>
+    <string name="allow_access_location">Autoriser l\'accès à la position</string>
+    <string name="search_my_location">Rechercher ma position</string>
+    <string name="storage_place_description">Espace utilisé par OsmAnd (pour les cartes, les traces, etc.) : %1$s.</string>
+    <string name="first_usage_greeting">Être guidé, découvrir de nouveaux lieux sans connexion Internet</string>
     </resources>
