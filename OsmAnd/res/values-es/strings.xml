@@ -2271,7 +2271,7 @@ OsmAnd Mapas y Navegación - encuentra ubicaciones en el mapa y calcula rutas si
     <string name="access_smart_autoannounce">Autoanuncio inteligente</string>
     <string name="access_smart_autoannounce_descr">Sólo notifica cuando se cambia la dirección al punto de destino</string>
     <string name="access_autoannounce_period">"Período de  autoanuncio"</string>
-    <string name="access_autoannounce_period_descr">Mínimo intervalo de tiempo entre anuncios</string>
+    <string name="access_autoannounce_period_descr">Intervalo mínimo de tiempo entre anuncios</string>
     <string name="access_default_color">Color por defecto</string>
     <string name="access_category_choice">Elegir categoría</string>
     <string name="access_hint_enter_name">Introducir nombre</string>
@@ -2290,9 +2290,9 @@ OsmAnd Mapas y Navegación - encuentra ubicaciones en el mapa y calcula rutas si
     <string name="lat_lon_pattern">Lat: %1$.6f Lon: %2$.6f</string>
     <string name="follow_us">Síguenos</string>
     <string name="access_direction_audio_feedback">Realimentación por audio de la dirección</string>
-    <string name="access_direction_audio_feedback_descr">Indicar la dirección del punto objetivo mediante sonido</string>
-    <string name="access_direction_haptic_feedback">Retroalimentación háptica de la dirección</string>
-    <string name="access_direction_haptic_feedback_descr">"Indicar la dirección del punto  destino mediante vibración"</string>
+    <string name="access_direction_audio_feedback_descr">Indica la dirección del punto objetivo mediante sonido</string>
+    <string name="access_direction_haptic_feedback">Realimentación háptica de la dirección</string>
+    <string name="access_direction_haptic_feedback_descr">Indica la dirección del punto destino mediante vibración</string>
     <string name="use_osm_live_routing_description">Habilitar la navegación para los cambios de OSM en vivo (Beta)</string>
 	<string name="use_osm_live_routing">Navegación de OSM en vivo</string>
     <string name="access_no_destination">El destino no está fijado</string>
@@ -2324,16 +2324,16 @@ OsmAnd Mapas y Navegación - encuentra ubicaciones en el mapa y calcula rutas si
     <string name="show_on_map">Mostrar en el mapa</string>
     <string name="coords_search">Búsqueda de coordenadas</string>
     <string name="advanced_coords_search">Búsqueda avanzada de coordenadas</string>
-    <string name="back_to_search">Volver a la búsqueda</string>
+    <string name="back_to_search">Volver a buscar</string>
     <string name="confirmation_to_delete_history_items">¿Quieres quitar los elementos seleccionados del historial?</string>
     <string name="show_something_on_map">Mostrar %1$s en el mapa</string>
     <string name="dist_away_from_my_location">Buscar en %1$s alrededor</string>
     <string name="release_2_4">"
  • Nueva y muy poderosa búsqueda por texto libre
 
- • Integración con el sistema de audio del automóvil y altavoces del teléfono vía Bluetooth
+ • Integración con el sistema de audio y  el micrófono del automóvil vía Bluetooth
 
- • Mejoras en la guía de ruta, indicaciones por voz y de carriles de giro
+ • Mejoras en la guía de ruta,  avisos por voz e indicaciones de carriles de giro
 
  • Mejoras en la capa de transporte con dibujado de rutas
 
