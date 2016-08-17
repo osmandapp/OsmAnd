@@ -117,7 +117,7 @@
   <string name="layer_hillshade">Erliebe-itzalak geruza</string>
   <string name="map_widget_gps_info">GPS informazioa</string>
   
-  <string name="access_arrival_time">Iritsiera denbora</string>
+  <string name="access_arrival_time">Iritsiera ordua</string>
   <string name="item_checked">aukeratua</string>
   <string name="item_unchecked">ez aukeratua</string>
   <string name="shared_string_map">Mapa</string>
@@ -775,7 +775,7 @@ Honek {1} MB behar ditu behin betiko.
   <string name="native_library_not_supported">Gailu honek ez du liburutegi natiboa jasaten.</string>
   <string name="init_native_library">Liburutegi natiboa hasieratzen…</string>
   <string name="choose_auto_follow_route">Auto-zentratu mapa ikuspegia</string>
-  <string name="choose_auto_follow_route_descr">Denbora mapa ikuspegia uneko kokapenarekin sinkronizatu harte </string>
+  <string name="choose_auto_follow_route_descr">Mapa ikuspegia uneko kokapenarekin sinkronizatu arteko denbora</string>
   
   <string name="auto_follow_route_navigation">Auto-zentratu nabigazioa bakarrik</string>
   <string name="auto_follow_route_navigation_descr">Bakarrik nabigatzean auto-zentratu maparen ikuspegia.</string>
@@ -1082,8 +1082,8 @@ Honek {1} MB behar ditu behin betiko.
   <string name="context_menu_item_search_poi">POIa bilatu</string>
   <string name="use_trackball_descr">Trackball-a erabili mapa mugitzeko</string>
   <string name="use_trackball">Trackball-a erabili</string>
-  <string name="background_service_wait_int_descr">Ezarri itxarote denbora maximoa kokapenaren bigarren planoko finkaketarentzat</string>
-  <string name="background_service_wait_int">Finkapenarentzat denbora maximoa</string>
+  <string name="background_service_wait_int_descr">Ezarri gehieneko itxarote denbora kokapenaren bigarren planoko irakurketa bakoitzarentzat</string>
+  <string name="background_service_wait_int">Kokapen irakurketarako gehieneko itxarote denbora</string>
   
   <string name="where_am_i">Non nago?</string>
   <string name="process_navigation_service">OsmAndren nabigazio zerbitzua</string>
@@ -2021,7 +2021,7 @@ Orain, {2} MB daude eskuragarri.</string>
     <string name="traffic_warning_speed_camera">Radarra</string>
     <string name="coords_format">Koordenatuen formatua</string>
     <string name="coords_format_descr">Koordenatu geografikoen formatua</string>
-  	<string name="app_mode_bus">Bus</string>
+  	<string name="app_mode_bus">Autobus</string>
  	<string name="app_mode_train">Trena</string>
     <string name="current_track">Uneko arrastroa</string>
     <string name="map_widget_battery">Bateriaren maila</string>
