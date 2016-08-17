@@ -57,7 +57,7 @@ public class CurrentPositionHelper {
 		if (loc == null || loc.getAccuracy() > 50) {
 			return null;
 		}
-		if(last != null && last.distanceTo(loc) < 20) {
+		if(last != null && last.distanceTo(loc) < 10) {
 			return r;
 		}
 		if (r == null) {
@@ -65,7 +65,7 @@ public class CurrentPositionHelper {
 			return null;
 		}
 		double d = getOrthogonalDistance(r, loc);
-		if (d > 25) {
+		if (d > 15) {
 			scheduleRouteSegmentFind(loc, true, null, null);
 		}
 		if (d < 70) {
