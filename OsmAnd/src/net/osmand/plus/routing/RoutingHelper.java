@@ -755,14 +755,14 @@ public class RoutingHelper {
 			if(next != null) {
 				next[0] = n.directionInfo.getTurnType();
 			}
-			return formatStreetName(nm, rf, dn, "»");
+			return formatStreetName(nm, rf, dn, ">>");
 		}
 		RouteSegmentResult rs = getCurrentSegmentResult();
 		if(rs != null) {
 			String nm = rs.getObject().getName(settings.MAP_PREFERRED_LOCALE.get());
 			String rf = rs.getObject().getRef();
 			String dn = rs.getObject().getDestinationName(settings.MAP_PREFERRED_LOCALE.get());
-			return formatStreetName(nm, rf, dn, "»");
+			return formatStreetName(nm, rf, dn, ">>");
 		}
 		return null;
 	}
