@@ -2402,4 +2402,6 @@ Si necesitas ayuda con la aplicación OsmAnd, contacte con nuestro equipo de sop
     <string name="skip_map_downloading_desc">Sin mapas descargados. Puedes elegirlos desde la lista o descargarlos luego mediante el Menú - %1$s.</string>
     <string name="search_another_country">Buscar para otro país</string>
     <string name="search_map">Buscando mapa…</string>
+    <string name="first_usage_wizard_desc">Nos gustaría determinar tu ubicación y sugerirte descargar el mapa para esta región.</string>
+    <string name="location_not_found">Ubicación no encontrada</string>
     </resources>
