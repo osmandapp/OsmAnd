@@ -2395,4 +2395,5 @@ OsmAnd Mapas y Navegación - encuentra ubicaciones en el mapa y calcula rutas si
     <string name="storage_free_space">Espacio libre</string>
     <string name="storage_place_description">Almacenamiento de datos de OsmAnd (para mapas, trazas, etc.): %1$s.</string>
     <string name="give_permission">Dar permiso</string>
+    <string name="allow_access_location">Permitir acceso a la ubicación</string>
     </resources>
