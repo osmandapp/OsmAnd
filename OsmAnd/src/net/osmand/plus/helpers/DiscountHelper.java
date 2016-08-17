@@ -2,6 +2,8 @@ package net.osmand.plus.helpers;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import net.osmand.AndroidNetworkUtils;
 import net.osmand.plus.OsmandApplication;
@@ -33,24 +35,32 @@ public class DiscountHelper {
 	private static String mIcon;
 	private static String mUrl;
 	private static boolean mBannerVisible;
+	private static final String URL = "http://osmand.net/api/motd";
 
 
 	public static void checkAndDisplay(final MapActivity mapActivity) {
 		if (mBannerVisible) {
 			showDiscountBanner(mapActivity, mTitle, mDescription, mIcon, mUrl);
 		}
+		OsmandApplication app = mapActivity.getMyApplication();
 		if (System.currentTimeMillis() - mLastCheckTime < 1000 * 60 * 60 * 24
-				|| !mapActivity.getMyApplication().getSettings().isInternetConnectionAvailable()) {
+				|| !app.getSettings().isInternetConnectionAvailable()
+				|| app.getSettings().NO_DISCOUNT_INFO.get()) {
 			return;
 		}
 		mLastCheckTime = System.currentTimeMillis();
+		final Map<String, String> pms = new LinkedHashMap<>();
+		pms.put("name", Version.getAppName(app));
+		pms.put("version", Version.getAppVersion(app));
+		pms.put("nd", app.getAppInitializer().getFirstInstalledDays() +"");
+		pms.put("ns", app.getAppInitializer().getNumberOfStarts() + "");
 		new AsyncTask<Void, Void, String>() {
 
 			@Override
 			protected String doInBackground(Void... params) {
 				try {
 					String res = AndroidNetworkUtils.sendRequest(mapActivity.getMyApplication(),
-							"http://osmand.net/api/motd", null, "Requesting discount info...", false);
+							URL, pms, "Requesting discount info...", false);
 					return res;
 				} catch (Exception e) {
 					logError("Requesting discount info error: ", e);
@@ -81,7 +91,8 @@ public class DiscountHelper {
 			Date start = df.parse(obj.getString("start"));
 			Date end = df.parse(obj.getString("end"));
 			int showStartFrequency = obj.getInt("show_start_frequency");
-			int showDayFrequency = obj.getInt("show_day_frequency");
+			double showDayFrequency = obj.getDouble("show_day_frequency");
+			int maxTotalShow = obj.getInt("max_total_show");
 			JSONObject application = obj.getJSONObject("application");
 
 			String appName = app.getPackageName();
@@ -91,14 +102,21 @@ public class DiscountHelper {
 
 				OsmandSettings settings = app.getSettings();
 				int discountId = getDiscountId(message, description, start, end);
-				if (settings.DISCOUNT_ID.get() != discountId
+				boolean discountChanged = settings.DISCOUNT_ID.get() != discountId;
+				if(discountChanged) {
+					settings.DISCOUNT_TOTAL_SHOW.set(0);
+				}
+				if (discountChanged
 						|| app.getAppInitializer().getNumberOfStarts() - settings.DISCOUNT_SHOW_NUMBER_OF_STARTS.get() >= showStartFrequency
 						|| System.currentTimeMillis() - settings.DISCOUNT_SHOW_DATETIME_MS.get() > 1000L * 60 * 60 * 24 * showDayFrequency) {
-
-					settings.DISCOUNT_ID.set(discountId);
-					settings.DISCOUNT_SHOW_NUMBER_OF_STARTS.set(app.getAppInitializer().getNumberOfStarts());
-					settings.DISCOUNT_SHOW_DATETIME_MS.set(System.currentTimeMillis());
-					showDiscountBanner(mapActivity, message, description, icon, url);
+					if(settings.DISCOUNT_TOTAL_SHOW.get() < maxTotalShow){
+						settings.DISCOUNT_ID.set(discountId);
+						settings.DISCOUNT_TOTAL_SHOW.set(settings.DISCOUNT_TOTAL_SHOW.get() + 1);
+						settings.DISCOUNT_SHOW_NUMBER_OF_STARTS.set(app.getAppInitializer().getNumberOfStarts());
+						settings.DISCOUNT_SHOW_DATETIME_MS.set(System.currentTimeMillis());
+						showDiscountBanner(mapActivity, message, description, icon, url);	
+					}
+					
 				}
 			}
 

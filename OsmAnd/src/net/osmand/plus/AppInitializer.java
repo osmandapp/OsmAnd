@@ -10,7 +10,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AlertDialog;
-
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
@@ -60,7 +59,6 @@ import java.util.List;
 import java.util.Random;
 
 import btools.routingapp.BRouterServiceConnection;
-
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.getPendingIntent;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceLastCheck;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceLiveUpdatesOn;
@@ -181,11 +179,13 @@ public class AppInitializer implements IProgress {
 		return startPrefs.getInt(NUMBER_OF_STARTS, 1);
 	}
 
-	public long getFirstInstalled() {
+	public long getFirstInstalledDays() {
 		if(startPrefs == null) {
 			return 0;
 		}
-		return startPrefs.getLong(FIRST_INSTALLED, 0);
+		long nd = startPrefs.getLong(FIRST_INSTALLED, 0);
+		
+		return (System.currentTimeMillis() - nd) / (1000l * 24l * 60l * 60l);
 	}
 
 	public void resetFirstTimeRun() {

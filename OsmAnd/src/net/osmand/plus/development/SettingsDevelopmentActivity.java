@@ -39,7 +39,8 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 		super.onCreate(savedInstanceState);
 		getToolbar().setTitle(R.string.debugging_and_development);
 		PreferenceScreen cat = getPreferenceScreen();
-
+		
+		
 		CheckBoxPreference dbg = createCheckBoxPreference(settings.DEBUG_RENDERING_INFO,
 				R.string.trace_rendering, R.string.trace_rendering_descr);
 		cat.addPreference(dbg);
@@ -81,6 +82,10 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 		cat.addPreference(createCheckBoxPreference(settings.SHOULD_SHOW_FREE_VERSION_BANNER,
 				R.string.show_free_version_banner,
 				R.string.show_free_version_banner_description));
+		
+		cat.addPreference(createCheckBoxPreference(settings.NO_DISCOUNT_INFO,
+				R.string.no_update_info, R.string.no_update_info_desc));
+
 
 		// FIXME delete USE_MAP_MARKERS
 //		cat.addPreference(createCheckBoxPreference(settings.USE_MAP_MARKERS,
@@ -110,6 +115,8 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 			}
 		});
 		cat.addPreference(pref);
+		
+
 
 		pref = new Preference(this);
 		pref.setTitle(R.string.test_voice_prompts);
