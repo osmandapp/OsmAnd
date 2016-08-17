@@ -11,6 +11,8 @@
     -->
 
     <!-- Not translatable -->
+    <string name="skip_map_downloading">Skip map downloading</string>
+    <string name="skip_map_downloading_desc">You do not have any offline map installed. You may choose map from the list or download it later via Menu - %1$s.</string>
     <string name="search_another_country">Search for another country</string>
     <string name="search_map">Searching map…</string>
     <string name="first_usage_wizard_desc">We would like to determine your location and suggest to download map of this region.</string>

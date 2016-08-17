@@ -1,6 +1,7 @@
 package net.osmand.plus.firstusage;
 
 import android.Manifest;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.AppCompatButton;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -82,6 +84,7 @@ public class FirstUsageWizardFragment extends Fragment implements OsmAndLocation
 	private static IndexItem baseMapIndexItem;
 	private static boolean firstMapDownloadCancelled;
 	private static boolean secondMapDownloadCancelled;
+	private static boolean wizardClosed;
 
 	enum WizardType {
 		SEARCH_LOCATION,
@@ -119,8 +122,23 @@ public class FirstUsageWizardFragment extends Fragment implements OsmAndLocation
 		skipButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				// todo show dialog
-				closeWizard();
+				AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+				builder.setTitle(getString(R.string.skip_map_downloading));
+				builder.setMessage(getString(R.string.skip_map_downloading_desc, getString(R.string.index_settings)));
+				builder.setNegativeButton(R.string.shared_string_skip, new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						closeWizard();
+					}
+				});
+				builder.setNeutralButton(R.string.shared_string_cancel, null);
+				builder.setPositiveButton(R.string.shared_string_select, new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						searchCountryMap();
+					}
+				});
+				builder.show();
 			}
 		});
 
@@ -552,6 +570,7 @@ public class FirstUsageWizardFragment extends Fragment implements OsmAndLocation
 		location = null;
 		localMapIndexItem = null;
 		baseMapIndexItem = null;
+		wizardClosed = true;
 	}
 
 	public void processLocationPermission(boolean granted) {
@@ -704,10 +723,12 @@ public class FirstUsageWizardFragment extends Fragment implements OsmAndLocation
 	}
 
 	private static void showFragment(FragmentActivity activity, Fragment fragment) {
-		activity.getSupportFragmentManager()
-				.beginTransaction()
-				.replace(R.id.fragmentContainer, fragment, FirstUsageWizardFragment.TAG)
-				.commit();
+		if (!wizardClosed) {
+			activity.getSupportFragmentManager()
+					.beginTransaction()
+					.replace(R.id.fragmentContainer, fragment, FirstUsageWizardFragment.TAG)
+					.commit();
+		}
 	}
 
 	private OsmandApplication getMyApplication() {
