@@ -1448,7 +1448,7 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="osmo_user_joined">El usuario %1$s se ha unido al grupo %2$s</string>
     <string name="osmo_user_left">El usuario %1$s ha abandonado el grupo %2$s</string>
     <string name="osmo_show_group_notifications">Mostrar notificaciones de grupo</string>
-    <string name="osmo_show_group_notifications_descr">Mostrar mensajes emergentes cuando usuarios se unen o abandonan el grupo</string>
+    <string name="osmo_show_group_notifications_descr">Muestra mensajes emergentes cuando los usuarios se unen o abandonan el grupo</string>
     <string name="shared_string_my_favorites">Mis favoritos</string>
     <string name="shared_string_my_places">Mis Sitios</string>
     <string name="gpx_selection_number_of_points"> %1$s puntos</string>
@@ -1527,7 +1527,7 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="osmo_group_information">¡Lee antes de crear un grupo!</string>
     <string name="osmo_not_signed_in">Fallo al iniciar sesión en OsMo</string>
     <string name="osmo_gpx_points_downloaded">Puntos OsMo %1$s descargados.</string>
-    <string name="osmo_auto_connect_descr">Conectar automáticamente al servicio después de iniciar la aplicación</string>
+    <string name="osmo_auto_connect_descr">Conecta automáticamente al servicio después de iniciar la aplicación</string>
     <string name="osmo_auto_connect">Autoconectar</string>
     <string name="osmo_start_service">Servicio OsMo</string>
     <string name="osmo_gpx_track_downloaded">Traza OsMo %1$s descargada.</string>
