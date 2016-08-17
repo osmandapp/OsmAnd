@@ -727,7 +727,7 @@ public class FirstUsageWizardFragment extends Fragment implements OsmAndLocation
 			activity.getSupportFragmentManager()
 					.beginTransaction()
 					.replace(R.id.fragmentContainer, fragment, FirstUsageWizardFragment.TAG)
-					.commit();
+					.commitAllowingStateLoss();
 		}
 	}
 

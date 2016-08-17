@@ -281,7 +281,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			FirstUsageWelcomeFragment.SHOW = false;
 			getSupportFragmentManager().beginTransaction()
 					.add(R.id.fragmentContainer, new FirstUsageWelcomeFragment(),
-							FirstUsageWelcomeFragment.TAG).commit();
+							FirstUsageWelcomeFragment.TAG).commitAllowingStateLoss();
 		}
 		mapActions.updateDrawerMenu();
 		drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
