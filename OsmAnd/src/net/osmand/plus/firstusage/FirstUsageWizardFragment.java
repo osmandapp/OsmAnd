@@ -294,44 +294,47 @@ public class FirstUsageWizardFragment extends Fragment implements OsmAndLocation
 
 		switch (wizardType) {
 			case SEARCH_LOCATION:
-				if (searchLocationByIp) {
-					new AsyncTask<Void, Void, String>() {
+			if (searchLocationByIp) {
+				new AsyncTask<Void, Void, String>() {
 
-						@Override
-						protected String doInBackground(Void... params) {
-							try {
-								return AndroidNetworkUtils.sendRequest(app,
-										"http://osmand.net/api/geo-ip", null, "Requesting location by IP...", false);
+					@Override
+					protected String doInBackground(Void... params) {
+						try {
+							return AndroidNetworkUtils.sendRequest(app, "http://osmand.net/api/geo-ip", null,
+									"Requesting location by IP...", false);
 
-							} catch (Exception e) {
-								logError("Requesting location by IP error: ", e);
-								return null;
-							}
+						} catch (Exception e) {
+							logError("Requesting location by IP error: ", e);
+							return null;
 						}
+					}
 
-						@Override
-						protected void onPostExecute(String response) {
-							if (response != null) {
-								try {
-									JSONObject obj = new JSONObject(response);
-									double latitude = obj.getDouble("latitude");
-									double longitude = obj.getDouble("longitude");
+					@Override
+					protected void onPostExecute(String response) {
+						if (response != null) {
+							try {
+								JSONObject obj = new JSONObject(response);
+								double latitude = obj.getDouble("latitude");
+								double longitude = obj.getDouble("longitude");
+								if (latitude == 0 && longitude == 0) {
+									showNoLocationFragment(getActivity());
+								} else {
 									location = new Location("geo-ip");
 									location.setLatitude(latitude);
 									location.setLongitude(longitude);
-
 									showSearchMapFragment(getActivity());
-								} catch (Exception e) {
-									logError("JSON parsing error: ", e);
-									showNoLocationFragment(getActivity());
 								}
-							} else {
+							} catch (Exception e) {
+								logError("JSON parsing error: ", e);
 								showNoLocationFragment(getActivity());
 							}
+						} else {
+							showNoLocationFragment(getActivity());
 						}
-					}.execute();
+					}
+				}.execute();
 
-				} else {
+			} else {
 					FragmentActivity activity = getActivity();
 					if (!OsmAndLocationProvider.isLocationPermissionAvailable(activity)) {
 						ActivityCompat.requestPermissions(activity,
@@ -398,17 +401,19 @@ public class FirstUsageWizardFragment extends Fragment implements OsmAndLocation
 	@Override
 	public void updateLocation(final Location loc) {
 		final OsmandApplication app = getMyApplication();
-		app.runInUIThread(new Runnable() {
-			@Override
-			public void run() {
-				cancelLocationSearchTimer();
-				app.getLocationProvider().removeLocationListener(FirstUsageWizardFragment.this);
-				if (location == null) {
-					location = new Location(loc);
-					showSearchMapFragment(getActivity());
+		if (loc != null) {
+			app.runInUIThread(new Runnable() {
+				@Override
+				public void run() {
+					cancelLocationSearchTimer();
+					app.getLocationProvider().removeLocationListener(FirstUsageWizardFragment.this);
+					if (location == null) {
+						location = new Location(loc);
+						showSearchMapFragment(getActivity());
+					}
 				}
-			}
-		});
+			});
+		}
 	}
 
 	@Override
