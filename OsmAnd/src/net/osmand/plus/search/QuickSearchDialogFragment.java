@@ -255,7 +255,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 								searchResult.location.getLatitude(), searchResult.location.getLongitude(),
 								searchResult.preferredZoom, pointDescription, true, searchResult.object);
 
-						if (searchResult.object != null && searchResult.object instanceof City) {
+						if (searchResult.object != null && searchResult.location != null) {
 							hideToolbar();
 						} else {
 							showToolbar();
