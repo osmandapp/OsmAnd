@@ -207,7 +207,7 @@
 
 	<string name="poi_recycling">Перапрацоўка адыходаў</string>
 	<string name="poi_landfill">Звалка</string>
-	<string name="poi_waste_disposal">Смецьцевы кантэйнер</string>
+	<string name="poi_waste_disposal">Сьмецьцевы кантэйнэр</string>
 	<string name="poi_waste_basket">Сьметніца</string>
 
 	<string name="poi_pier">Пірс</string>
@@ -924,14 +924,14 @@
 	<string name="poi_maxheight">Максімальная вышыня</string>
 	<string name="poi_service_times">Гадзіны абслугоўвання</string>
 	<string name="poi_abandoned_poi">Закінуты аб\'ект</string>
-	<string name="poi_icn_ref">Сетка вузлоў міжнародных веламаршрутаў</string>
-	<string name="poi_ncn_ref">Сетка вузлоў нацыянальных веламаршрутаў</string>
-	<string name="poi_rcn_ref">Сетка вузлоў рэгіянальных веламаршрутаў</string>
-	<string name="poi_lcn_ref">Сетка вузлоў лякальных веламаршрутаў</string>
-	<string name="poi_iwn_ref">Сетка вузлоў міжнародных пешых маршрутаў</string>
-	<string name="poi_nwn_ref">Сетка вузлоў нацыянальных пешых маршрутаў</string>
-	<string name="poi_rwn_ref">Сетка вузлоў рэгіянальных пешых маршрутаў</string>
-	<string name="poi_lwn_ref">Сетка вузлоў лякальных пешых маршрутаў</string>
+	<string name="poi_icn_ref">Пункт міжнароднай роварнай сеткі</string>
+	<string name="poi_ncn_ref">Пункт нацыянальнай роварнай сеткі</string>
+	<string name="poi_rcn_ref">Пункт рэгіянальнай роварнай сеткі</string>
+	<string name="poi_lcn_ref">Пункт лякальнай роварнай сеткі</string>
+	<string name="poi_iwn_ref">Пункт міжнароднай сеткі пешых маршрутаў</string>
+	<string name="poi_nwn_ref">Пункт нацыянальнай сеткі пешых маршрутаў</string>
+	<string name="poi_rwn_ref">Пункт рэгіянальнай сеткі пешых маршрутаў</string>
+	<string name="poi_lwn_ref">Пункт лякальнай сеткі пешых маршрутаў</string>
 
 	<string name="poi_route_hiking_iwn_poi">Міжнародны пешы маршрут</string>
 	<string name="poi_route_hiking_nwn_poi">Нацыянальны пешы маршрут</string>
@@ -1092,7 +1092,7 @@
 	<string name="poi_denomination_reformed">Кальвінізм</string>
 	<string name="poi_denomination_seventh_day_adventist">Адвентысты сёмага дня</string>
 	<string name="poi_denomination_new_apostolic">Новаапостальская царква</string>
-	<string name="poi_denomination_church_of_england">Царква Ангельшчыны</string>
+	<string name="poi_denomination_church_of_england">Царква Англіі</string>
 	<string name="poi_denomination_episcopal">Епіскапальная царква</string>
 	<string name="poi_denomination_united">Аб\'яднаная царква</string>
 	<string name="poi_denomination_greek_catholic">Грэка-каталіцызм</string>
@@ -1111,8 +1111,8 @@
 	<string name="poi_ele">Вышыня над узроўнем мора</string>
 	<string name="poi_start_date">Дата пачатку будаўніцтва</string>
 	<string name="poi_wheelchair">Даступна для інвалідных крэслаў</string>
-	<string name="poi_parking_underground">Падземная</string>
-	<string name="poi_parking_multi_storey">Шматпавярховая</string>
+	<string name="poi_parking_underground">Тып: падземная</string>
+	<string name="poi_parking_multi_storey">Тып: шматпавярховая</string>
 
 	<string name="poi_trees_kiwi">Ківі</string>
 	<string name="poi_trees_coca">Кока</string>
@@ -1524,4 +1524,31 @@
 	<string name="poi_resource_zircon">Цыркон</string>
 
 	<string name="poi_highway_steps">Сходы</string>
+	<string name="poi_content_silage">Зьмесьціва: сілас</string>
+	<string name="poi_content_water">Зьмесьціва: вада</string>
+	<string name="poi_content_oil">Зьмесьціва: нафта</string>
+	<string name="poi_content_fuel">Зьмесьціва: паліва</string>
+	<string name="poi_content_manure">Зьмесьціва: гной</string>
+	<string name="poi_content_wine">Зьмесьціва: віно</string>
+	<string name="poi_content_sewage">Зьмесьціва: стокавыя воды</string>
+	<string name="poi_content_gas">Зьмесьціва: газ</string>
+	<string name="poi_content_biomass">Зьмесьціва: біямаса</string>
+	<string name="poi_content_crop">Зьмесьціва: ураджай</string>
+	<string name="poi_content_fodder">Зьмесьціва: корм</string>
+	<string name="poi_content_beer">Зьмесьціва: піва</string>
+	<string name="poi_content_salt">Зьмесьціва: соль</string>
+	<string name="poi_content_grain">Зьмесьціва: збожжа</string>
+
+	<string name="poi_nudism_yes">Нудызм дазволены</string>
+	<string name="poi_nudism_no">Нудызм забаронены</string>
+	<string name="poi_nudism_obligatory">Нудызм: абавязкова</string>
+	<string name="poi_nudism_customary">Нудызм: вітаецца</string>
+	<string name="poi_nudism_permissive">Нудызм: з дазволу</string>
+
+	<string name="poi_trade_building_supplies">Будаўнічыя матэрыялы</string>
+	<string name="poi_trade_plumbing">Матэрыялы для вадавода</string>
+	<string name="poi_trade_wood">Лесаматэрыялы</string>
+	<string name="poi_trade_agricultural_supplies">Сельгаспрадукцыя</string>
+	<string name="poi_trade_tile">Кафля</string>
+
 	</resources>
