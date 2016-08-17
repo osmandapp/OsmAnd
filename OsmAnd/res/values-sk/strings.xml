@@ -2399,7 +2399,7 @@ Ak potrebuje pomoc s aplikáciou OsmAnd, kontaktuje podporu: support@osmand.net.
     <string name="routing_attr_short_way_name">Ekonomická trasa</string>
     <string name="routing_attr_short_way_description">Použiť ekonomickú trasu (obyčajne kratšia)</string>
     <string name="replace_favorite_confirmation">Naozaj chcete nahradiť obľúbený bod %1$s?</string>
-    <string name="skip_map_downloading">Preskočiť sťahovanie mapy</string>
+    <string name="skip_map_downloading">Preskočiť sťahovanie máp</string>
     <string name="skip_map_downloading_desc">Nemáte nainštalovanú žiadnu offline mapu. Môžete vybrať mapu zo zoznamu alebo stiahnuť ju neskôr cez Menu - %1$s.</string>
     <string name="search_another_country">Hľadať inú krajinu</string>
     <string name="search_map">Hľadá sa mapa…</string>
@@ -2416,4 +2416,6 @@ Ak potrebuje pomoc s aplikáciou OsmAnd, kontaktuje podporu: support@osmand.net.
     <string name="search_my_location">Hľadať moju polohu</string>
     <string name="no_update_info_desc">Nekontrolovať aktualizácie nových verzií a zľavy súvisiace s OsmAnd</string>
     <string name="no_update_info">Nezobrazovať aktualizácie</string>
+    <string name="update_all_maps_now">Chcete teraz aktualizovať všetky mapy?</string>
+    <string name="clear_tile_data">Vymazať všetky dlaždice</string>
     </resources>
