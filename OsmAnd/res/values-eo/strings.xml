@@ -2426,7 +2426,7 @@ Se vi bezonas helpon pri OsmAnd aplikaĵo, bonvolu kontakti nian helpantaron: su
     <string name="clear_tile_data">Vakigi ĉiujn kahelojn</string>
     <string name="update_all_maps_now">Ĉu vi volas ĝisdatigi ĉiujn mapojn nun?</string>
     <string name="skip_map_downloading">Transsalti elŝuto de mapoj</string>
-    <string name="skip_map_downloading_desc">Vi ne havas iun ajn eksterretan mapon instalitan. Vi povus elekti iun el la listo aŭ elŝuti ĝin poste per la Menuo - %1$s.</string>
+    <string name="skip_map_downloading_desc">Vi havas neniun eksterretan mapon instalitan. Vi povus elekti iun el la listo aŭ elŝuti mapojn poste per la Menuo - %1$s.</string>
     <string name="search_another_country">Serĉi en alia lando</string>
     <string name="search_map">Serĉanta mapon…</string>
     <string name="first_usage_wizard_desc">Bonvolu permesi al OsmAnd trovi vian pozicion kaj sugesti elŝuti mapojn de tiu regiono.</string>
