@@ -165,7 +165,7 @@ public class DownloadIndexesThread {
 		boolean americanSigns = "american".equals(params.getRegionRoadSigns());
 		boolean leftHand = "yes".equals(params.getRegionLeftHandDriving());
 		MetricsConstants mc = "miles".equals(params.getRegionMetric()) ?
-				MetricsConstants.MILES_AND_FOOTS : MetricsConstants.KILOMETERS_AND_METERS;
+				MetricsConstants.MILES_AND_METERS : MetricsConstants.KILOMETERS_AND_METERS;
 		for (DrivingRegion r : DrivingRegion.values()) {
 			if (r.americanSigns == americanSigns && r.leftHandDriving == leftHand &&
 					r.defMetrics == mc) {

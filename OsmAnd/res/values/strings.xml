@@ -9,6 +9,8 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    
+    <string name="si_mi_meters">Miles/meters</string>
     <string name="skip_map_downloading">Skip downloading maps</string>
     <string name="skip_map_downloading_desc">You have no offline map installed. You may choose a map from the list or download maps later via Menu - %1$s.</string>
     <string name="search_another_country">Select another region</string>
