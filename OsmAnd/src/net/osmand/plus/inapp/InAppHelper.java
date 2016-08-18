@@ -38,7 +38,9 @@ public class InAppHelper {
 	private static boolean mSubscribedToLiveUpdates = false;
 	private static String mLiveUpdatesPrice;
 	private static long lastValidationCheckTime;
+	private static String mFullVersionPrice;
 
+	private static final String SKU_FULL_VERSION_PRICE = "osmand_full_version_price";
 	private static final String SKU_LIVE_UPDATES_FULL = "osm_live_subscription_2";
 	private static final String SKU_LIVE_UPDATES_FREE = "osm_free_live_subscription_2";
 	private static String SKU_LIVE_UPDATES;
@@ -51,6 +53,7 @@ public class InAppHelper {
 	private IabHelper mHelper;
 	private boolean stopAfterResult = false;
 	private boolean isDeveloperVersion = false;
+	private boolean forceRequestInventory = false;
 	private String token = "";
 
 	private OsmandApplication ctx;
@@ -80,12 +83,21 @@ public class InAppHelper {
 		return mLiveUpdatesPrice;
 	}
 
+	public static String getFullVersionPrice() {
+		return mFullVersionPrice;
+	}
+
 	public static String getSkuLiveUpdates() {
 		return SKU_LIVE_UPDATES;
 	}
 
-	public InAppHelper(OsmandApplication ctx) {
+	public static boolean hasPrices() {
+		return !Algorithms.isEmpty(mLiveUpdatesPrice) && !Algorithms.isEmpty(mFullVersionPrice);
+	}
+
+	public InAppHelper(OsmandApplication ctx, boolean forceRequestInventory) {
 		this.ctx = ctx;
+		this.forceRequestInventory = forceRequestInventory;
 		if (SKU_LIVE_UPDATES == null) {
 			if (Version.isFreeVersion(ctx)) {
 				SKU_LIVE_UPDATES = SKU_LIVE_UPDATES_FREE;
@@ -148,14 +160,17 @@ public class InAppHelper {
 				if (mHelper == null) return;
 
 				// IAB is fully set up. Now, let's get an inventory of stuff we own if needed.
-				if (!isDeveloperVersion &&
+				if (forceRequestInventory || (!isDeveloperVersion &&
 						(!mSubscribedToLiveUpdates
 								|| !ctx.getSettings().BILLING_PURCHASE_TOKEN_SENT.get()
-								|| System.currentTimeMillis() - lastValidationCheckTime > PURCHASE_VALIDATION_PERIOD_MSEC)) {
+								|| System.currentTimeMillis() - lastValidationCheckTime > PURCHASE_VALIDATION_PERIOD_MSEC))) {
 
 					logDebug("Setup successful. Querying inventory.");
 					List<String> skus = new ArrayList<>();
 					skus.add(SKU_LIVE_UPDATES);
+					if (forceRequestInventory) {
+						skus.add(SKU_FULL_VERSION_PRICE);
+					}
 					mHelper.queryInventoryAsync(true, skus, mGotInventoryListener);
 				} else {
 					notifyDismissProgress();
@@ -195,7 +210,7 @@ public class InAppHelper {
 
 			// Do we have the live updates?
 			Purchase liveUpdatesPurchase = inventory.getPurchase(SKU_LIVE_UPDATES);
-			mSubscribedToLiveUpdates = (liveUpdatesPurchase != null && liveUpdatesPurchase.getPurchaseState() == 0);
+			mSubscribedToLiveUpdates = isDeveloperVersion || (liveUpdatesPurchase != null && liveUpdatesPurchase.getPurchaseState() == 0);
 			if (mSubscribedToLiveUpdates) {
 				ctx.getSettings().LIVE_UPDATES_PURCHASED.set(true);
 			}
@@ -208,8 +223,13 @@ public class InAppHelper {
 				mLiveUpdatesPrice = liveUpdatesDetails.getPrice();
 			}
 
+			if (inventory.hasDetails(SKU_FULL_VERSION_PRICE)) {
+				SkuDetails fullPriceDetails = inventory.getSkuDetails(SKU_FULL_VERSION_PRICE);
+				mFullVersionPrice = fullPriceDetails.getPrice();
+			}
+
 			boolean needSendToken = false;
-			if (liveUpdatesPurchase != null) {
+			if (!isDeveloperVersion && liveUpdatesPurchase != null) {
 				OsmandSettings settings = ctx.getSettings();
 				if (Algorithms.isEmpty(settings.BILLING_USER_ID.get())
 						&& !Algorithms.isEmpty(liveUpdatesPurchase.getDeveloperPayload())) {

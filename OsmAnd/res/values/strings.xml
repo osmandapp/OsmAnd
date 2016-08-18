@@ -9,7 +9,10 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
-    
+    <string name="get_for">Get for %1$s</string>
+    <string name="get_for_month">Get for %1$s month</string>
+    <string name="osm_live_banner_desc">Get unlimited map downloads and updates more than once a month: hourly, daily or weekly.</string>
+    <string name="osmand_plus_banner_desc">Full version of OsmAnd with unlimited map downloads and monthly map updates.</string>
     <string name="si_mi_meters">Miles/meters</string>
     <string name="skip_map_downloading">Skip downloading maps</string>
     <string name="skip_map_downloading_desc">You have no offline map installed. You may choose a map from the list or download maps later via Menu - %1$s.</string>
