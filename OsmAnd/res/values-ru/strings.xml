@@ -1828,7 +1828,7 @@
     <string name="share_geo">гео:</string>
     <string name="share_menu_location">Поделиться местоположением</string>
     <string name="shared_string_send">Отправить</string>
-    <string name="application_dir_description">Выберите, где вы хотите сохранить файлы карт.</string>
+    <string name="application_dir_description">Выберите где вы хотите хранить файлы карт и другие данные</string>
     <string name="show_on_start_description">\"Отключено\" непосредственно запускает экран карты</string>
     <string name="map_downloaded">Карта загружена</string>
     <string name="shared_string_qr_code">QR-код</string>
