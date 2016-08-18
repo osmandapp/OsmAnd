@@ -63,4 +63,17 @@
 	<string name="poi_supermarket">Prekybos centras</string>
 	<string name="poi_tea">Arbatos parduotuvė</string>
 	<string name="poi_pasta">Pastos parduotuvė</string>
+	<string name="poi_books">Knygynas</string>
+	<string name="poi_bicycle">Dviračių parduotuvė</string>
+	<string name="poi_antiques">Antikvariatas</string>
+	<string name="poi_art">Meno dirbinių parduotuvė</string>
+	<string name="poi_baby_goods">Prekės kūdikiams</string>
+	<string name="poi_bathroom_furnishing">Vonios kambario įranga</string>
+	<string name="poi_camera">Fotoaparatai ir objektyvai</string>
+	<string name="poi_carpet">Kilimų parduotuvė</string>
+	<string name="poi_clothes">Rūbų parduotuvė</string>
+	<string name="poi_clothes_children">Rūbai vaikams</string>
+	<string name="poi_shoes">Batų parduotuvė</string>
+	<string name="poi_computer">Kompiuterių parduotuvė</string>
+	<string name="poi_curtain">Užuolaidų parduotuvė</string>
 	</resources>
