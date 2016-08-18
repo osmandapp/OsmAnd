@@ -2283,4 +2283,20 @@ Facebook: https://www.facebook.com/osmandapp
 
 Если вам нужна помощь с применением OsmAnd, пожалуйста, свяжитесь с нашей службой поддержки: support@osmand.net. 
  "</string>
+    <string name="search_my_location">Определить моё местоположение</string>
+    <string name="first_usage_greeting">Прокладывайте маршруты и открывайте новые для себя места без подключения к интернету</string>
+    <string name="allow_access_location">Разрешить доступ к местоположению</string>
+    <string name="give_permission">Дать разрешение</string>
+    <string name="storage_place_description">Хранилище данных OsmAnd (для карт, треков и т.д.): %1$s.</string>
+    <string name="storage_free_space">Свободное место</string>
+    <string name="search_location">Определение местоположения…</string>
+    <string name="no_inet_connection_desc_map">Требуется загрузить карты</string>
+    <string name="no_inet_connection">Соединение с интернетом отсутствует</string>
+    <string name="location_not_found">Не удалось определить местоположение</string>
+    <string name="first_usage_wizard_desc">OsmAnd определит ваше местоположение и предложит карты для загрузки для этого региона</string>
+    <string name="search_map">Поиск карты…</string>
+    <string name="search_another_country">Выберите другой регион</string>
+    <string name="skip_map_downloading">Пропустить загрузку карт</string>
+    <string name="skip_map_downloading_desc">У вас нет загруженных карт. Вы можете выбрать карту из списка или загрузить её позже с помощью меню - %1$s.</string>
+
     </resources>
