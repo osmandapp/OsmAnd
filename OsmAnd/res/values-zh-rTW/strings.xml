@@ -2577,7 +2577,14 @@ Facebook：https://www.facebook.com/osmandapp
     <string name="storage_place_description">OsmAnd 資料存儲 (給地圖、軌跡等)：%1$s。</string>
     <string name="give_permission">給予許可</string>
     <string name="allow_access_location">允許進入位置</string>
-    <string name="first_usage_greeting">取得指引、探索新地點，沒有網路連線</string>
+    <string name="first_usage_greeting">在沒有網路連線的情況下，取得指引與探索新地點</string>
     <string name="search_my_location">查詢我的位置</string>
     <string name="no_update_info">不要顯示更新</string>
+    <string name="osm_live_banner_desc">獲得無限制的地圖下載和每個月超過一次以上的更新︰每小時、每天或每週。</string>
+    <string name="osmand_plus_banner_desc">OsmAnd 完整版擁有無限制的地圖下載和每個月的地圖更新。</string>
+    <string name="si_mi_meters">英哩/公尺</string>
+    <string name="first_usage_wizard_desc">讓 OsmAnd 確定您所在的位置和建議下載該區域的地圖。</string>
+    <string name="get_for">獲得 %1$s</string>
+    <string name="get_for_month">每個月獲得 %1$s</string>
+    <string name="no_update_info_desc">不要檢查任何有關 OsmAnd 新版本更新與相關的折扣</string>
     </resources>
