@@ -2304,4 +2304,7 @@ Actuellement {2} Mo sont disponibles.</string>
     <string name="search_my_location">Rechercher ma position</string>
     <string name="storage_place_description">Espace utilisé par OsmAnd (pour les cartes, les traces, etc.) : %1$s.</string>
     <string name="first_usage_greeting">Être guidé, découvrir de nouveaux lieux sans connexion Internet</string>
+    <string name="get_for">Obtenir pour %1$s</string>
+    <string name="get_for_month">Obtenir pour %1$s mois</string>
+    <string name="si_mi_meters">Miles / Mètres</string>
     </resources>
