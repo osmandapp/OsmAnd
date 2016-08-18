@@ -2553,7 +2553,7 @@ OsmAnd aplikazioarekin laguntza behar baduzu, jarri kontaktuan gure laguntza tal
     <string name="get_started">Hasi</string>
     <string name="skip_map_downloading">Saltatu mapen deskarga</string>
     <string name="skip_map_downloading_desc">"Ez duzu lineaz kanpoko maparik instalatuta. Zerrendako mapa bat deskargatzea erabaki dezakezu edo geroago egin menuko  %1$s aukeran."</string>
-    <string name="search_another_country">Bilatu beste herrialde bat</string>
+    <string name="search_another_country">Bilatu beste eskualde bat</string>
     <string name="search_map">Mapa bilatzen…</string>
     <string name="first_usage_wizard_desc">Baimendu OsmAnd aplikazioari zure kokalekua zehaztea eta eskualderako mapa egokia deskargatzea iradokitzea.</string>
     <string name="location_not_found">Ez da kokapena aurkitu</string>
