@@ -274,4 +274,33 @@
 	<string name="poi_video">Bideokluba</string>
 	<string name="poi_window_blind">Pertsiana-denda</string>
 	<string name="poi_swimming_pool_shop">Piszinarako gaiak</string>
+	<string name="poi_square">Enparantza</string>
+	<string name="poi_street_lamp">Kale-argia</string>
+
+	<string name="poi_hardware">Burdindegia</string>
+	<string name="poi_hifi">HiFi denda</string>
+	<string name="poi_houseware">Etxerako gaiak</string>
+	<string name="poi_scuba_diving_shop">Urpekaritza gaiak</string>
+	<string name="poi_trade">Merkataritza postua</string>
+	<string name="poi_electronics">Elektronika denda</string>
+	<string name="poi_car">Kotxe salmenta</string>
+	<string name="poi_car_parts">Kotxerako piezak</string>
+	<string name="poi_model">Modelismoa</string>
+	<string name="poi_trophy">Garaikurrak, sariak</string>
+	<string name="poi_fire_hydrant">Ur-hargunea</string>
+	<string name="poi_fire_hydrant_diameter">Ur-hargunearen diametroa</string>
+	<string name="poi_fire_hydrant_pressure">Ur-hargunearen presioa</string>
+	<string name="poi_fire_hydrant_count">Ur-hargune kopurua</string>
+	<string name="poi_fire_hydrant_flow_capacity">Ur-hargunearen emaria</string>
+	<string name="poi_fire_hydrant_position_sidewalk">Ur-hargunearen posizioa: espaloia</string>
+	<string name="poi_fire_hydrant_position_green">Ur-hargunearen posizioa: bedartza</string>
+	<string name="poi_fire_hydrant_position_lane">Ur-hargunearen posizioa: erreia</string>
+	<string name="poi_fire_hydrant_position_parking_lot">Ur-hargunearen posizioa: aparkalekua</string>
+	<string name="poi_fire_hydrant_position_street">Ur-hargunearen posizioa: kalea</string>
+	<string name="poi_fire_hydrant_position_underground">Ur-hargunearen posizioa: lurrazpian</string>
+	<string name="poi_fire_hydrant_style_wsh">Ur-hargune mota: wsh</string>
+	<string name="poi_fire_hydrant_style_water_source_main">Ur-hargunearen jatorria: nagusia</string>
+	<string name="poi_fire_hydrant_style_water_source_pond">Ur-hargunearen jatorria: urmaela</string>
+	<string name="poi_fire_hydrant_style_water_source_stream">Ur-hargunearen jatorria: erreka</string>
+	<string name="poi_fire_hydrant_style_water_source_cistern">Ur-hargunearen jatorria: zisterna</string>
 	</resources>
