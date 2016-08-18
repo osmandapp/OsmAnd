@@ -2231,4 +2231,5 @@ V současnosti je k dispozici {2} MB.</string>
     <string name="clear_tile_data">Vymazat všechny dlaždice</string>
     <string name="routing_attr_short_way_name">Ekonomická trasa</string>
     <string name="routing_attr_short_way_description">Použít ekonomickou trasu (obvykle kratší)</string>
+    <string name="replace_favorite_confirmation">Opravdu chcete nahradit oblíbený %1$s?</string>
     </resources>
