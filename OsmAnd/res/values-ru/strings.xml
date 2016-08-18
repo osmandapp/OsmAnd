@@ -206,9 +206,7 @@
     <string name="global_settings">Общие настройки</string>
     <string name="global_app_settings">Общие настройки приложения</string>
     <string name="download_files_not_enough_space">Недостаточно места на диске для загрузки %1$s MB (свободно: %2$s).</string>
-    <string name="download_files_question_space">Загрузить {0} файл(ов)?
-Необходимо {1} Мб на постоянной основе.
-В настоящее время доступно {2} Мб свободного места.</string>
+    <string name="download_files_question_space">Загрузить {0} файл(ов)? Необходимо {1} Мб на постоянной основе. В настоящее время доступно {2} Мб свободного места.</string>
     <string name="use_transparent_map_theme">Прозрачная тема</string>
     <string name="native_library_not_supported">Нативная библиотека не поддерживается на этом устройстве.</string>
     <string name="init_native_library">Инициализация нативной библиотеки…</string>
@@ -2115,9 +2113,7 @@
     <string name="shared_string_from">из</string>
     <string name="follow_us">Подписывайтесь на нас</string>
     <string name="osm_live_email_desc">Она нужна нам, чтобы предоставить вам информацию о взносах</string>
-    <string name="download_files_question_space_with_temp">Действительно загрузить {0} файл (ов)?
-Для этого необходимо {3} MB временно и {1} МБ на постоянной основе.
-В настоящее время существует {2} МБ свободного места.</string>
+    <string name="download_files_question_space_with_temp">Действительно загрузить {0} файл (ов)? Для этого необходимо {3} Мб временно и {1} Мб на постоянной основе. В настоящее время существует {2} Мб свободного места.</string>
     <string name="search_my_location">Определить моё местоположение</string>
     <string name="first_usage_greeting">Прокладывайте маршруты и открывайте новые для себя места без подключения к интернету</string>
     <string name="allow_access_location">Разрешить доступ к местоположению</string>
