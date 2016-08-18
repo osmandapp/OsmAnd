@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='UTF-8'?>
 <resources><string name="poi_bakery">Pekařství</string>
 	<string name="poi_alcohol">Obchod s alkoholem</string>
 	<string name="poi_convenience">Samoobsluha</string>
@@ -199,7 +199,7 @@
 	<string name="poi_herbalist">Obchod bylinkami</string>
 	<string name="poi_houseware">Domácí potřeby</string>
 	<string name="poi_interior_decoration">Dekorace interiéru</string>
-	<string name="poi_newsagent">Zpravodajská agentura</string>
+	<string name="poi_newsagent">Trafika</string>
 	<string name="poi_stationery">Kancelářské potřeby</string>
 	<string name="poi_trade">Obchodní místo</string>
 	<string name="poi_palaeontological_site">Paleontologické naleziště</string>
@@ -591,7 +591,7 @@
 	<string name="poi_historic_monastery">Historický klášter</string>
 	<string name="poi_wayside_cross">Boží muka</string>
 	<string name="poi_wayside_shrine">Malá kaplička</string>
-	<string name="poi_information">Turistické informace</string>
+	<string name="poi_information">Informace</string>
 	<string name="poi_travel_agent">Cestovní kancelář</string>
 	<string name="poi_viewpoint">Rozhledna/Vyhlídka</string>
 	<string name="poi_camp_site">Kemp</string>
@@ -1346,8 +1346,8 @@
 	<string name="poi_toilets_no">Bez toalet</string>
 	<string name="poi_toilets_wheelchair_yes">Toalety dostupné na vozíku: ano</string>
 	<string name="poi_toilets_wheelchair_no">Toalety dostupné na vozíku: ne</string>
-	<string name="poi_toilets_access_customers">Toalety pro: zaměstnance</string>
-	<string name="poi_toilets_access_public">Toalety pro: veřejnost</string>
+	<string name="poi_toilets_access_customers">Přístup na toalety: zákazníci</string>
+	<string name="poi_toilets_access_public">Přístup na toalety: veřejnost</string>
 
 	<string name="poi_vending_parking_tickets">Parkovací lístky</string>
 	<string name="poi_vending_cigarettes">Cigarety</string>
@@ -1385,10 +1385,10 @@
 	<string name="poi_bin_yes">S odpadkovým košem</string>
 	<string name="poi_bin_no">Bez odpadkového koše</string>
 
-	<string name="poi_shelter_type_public_transport">Přístřešek pro: hromadnou dopravu</string>
-	<string name="poi_shelter_type_picnic_shelter">Přístřešek pro: piknik</string>
-	<string name="poi_shelter_type_weather_shelter">Přístřešek pro: špatné počasí</string>
-	<string name="poi_internet_access_type_wlan">Připojení k internetu: kabel</string>
+	<string name="poi_shelter_type_public_transport">Přístřešek: hromadná doprava</string>
+	<string name="poi_shelter_type_picnic_shelter">Přístřešek: piknik</string>
+	<string name="poi_shelter_type_weather_shelter">Přístřešek: špatné počasí</string>
+	<string name="poi_internet_access_type_wlan">Přístup k internetu: kabel</string>
 	<string name="poi_internet_access_type_no">Bez přístupu k internetu</string>
 	<string name="poi_internet_access_type_yes">S přístupem k internetu</string>
 
@@ -1661,4 +1661,193 @@
 	<string name="poi_denomination_anglican">Anglikánské</string>
 	<string name="poi_denomination_presbyterian">Presbyteriánství</string>
 	<string name="poi_denomination_episcopal">Episkopální</string>
+	<string name="poi_length">Délka</string>
+
+<string name="poi_organic_only">Pouze bio-potraviny</string>
+
+	<string name="poi_traffic_mirror">Dopravní zrcadlo</string>
+
+	<string name="poi_diplomatic_consulate">Konzulát</string>
+	<string name="poi_diplomatic_consulate_general">Generální konzulát</string>
+	<string name="poi_diplomatic_honorary_consulate">Honorární konzulát</string>
+	<string name="poi_diplomatic_permanent_mission">Stálá mise</string>
+	<string name="poi_diplomatic_delegation">Delegace</string>
+	<string name="poi_diplomatic_ambassadors_residence">Sídlo velvyslance</string>
+	<string name="poi_diplomatic_high_commission">Vysoký komisariát</string>
+
+	<string name="poi_diaper_table_count">Počet přebalovacích stolů</string>
+
+	<string name="poi_water_tank">Vodní nádrž</string>
+
+	<string name="poi_toilets_disposal_flush">Likvidace obsahu toalet: splachování</string>
+	<string name="poi_toilets_disposal_pitlatrine">Likvidace obsahu toalet: latrína</string>
+	<string name="poi_toilets_disposal_chemical">Likvidace obsahu toalet: chemické</string>
+	<string name="poi_toilets_disposal_bucket">Likvidace obsahu toalet: nádoba</string>
+
+	<string name="poi_aquaculture">Akvakultura</string>
+	<string name="poi_aquaculture_shrimp">Akvakultura: garnát</string>
+	<string name="poi_aquaculture_fish">Akvakultura: ryby</string>
+	<string name="poi_aquaculture_mussels">Akvakultura: mušle</string>
+
+	<string name="poi_mdf">Hlavní rozvaděč</string>
+	<string name="poi_min_age">Minimální věk</string>
+
+	<string name="poi_organic_yes">Bio-potraviny: ano</string>
+	<string name="poi_organic_no">Bio-potraviny: ne</string>
+	<string name="poi_support_pole">Podpora: sloup</string>
+	<string name="poi_support_wall_mounted">Podpora: zeď</string>
+	<string name="poi_support_tree">Podpora: strom</string>
+	<string name="poi_support_pedestal">Podpora: podstavec</string>
+	<string name="poi_support_ground">Podpora: zem</string>
+	<string name="poi_support_billboard">Podpora: reklamní tabule</string>
+	<string name="poi_support_ceiling">Podpora: strop</string>
+	<string name="poi_support_suspended">Podpora: zavěšený</string>
+	<string name="poi_support_roof">Podpora: střecha</string>
+	<string name="poi_support_tower">Podpora: věž</string>
+
+	<string name="poi_passenger_information_display_yes">Zobrazování informací pro cestující: ano</string>
+	<string name="poi_passenger_information_display_no">Zobrazování informací pro cestující: ne</string>
+
+	<string name="poi_barometer_yes">Barometr: ano</string>
+	<string name="poi_barometer_no">Barometr: ne</string>
+	<string name="poi_thermometer_yes">Teploměr: ano</string>
+	<string name="poi_thermometer_no">Teploměr: ne</string>
+	<string name="poi_hygrometer_yes">Vlhkoměr: ano</string>
+	<string name="poi_hygrometer_no">Vlhkoměr: ne</string>
+	<string name="poi_date_yes">Zobrazení data: ano</string>
+	<string name="poi_date_no">Zobrazení data: ne</string>
+
+	<string name="poi_cocktails_yes">Koktejly</string>
+
+	<string name="poi_second_hand_yes">Zboží z druhé ruky</string>
+	<string name="poi_second_hand_no">Žádné zboží z druhé ruky</string>
+	<string name="poi_second_hand_only">Pouze zboží z druhé ruky</string>
+
+	<string name="poi_service_parts">Díly</string>
+	<string name="poi_service_dealer">Prodejce</string>
+	<string name="poi_service_repair">Opravy</string>
+	<string name="poi_service_repair_no">Žádné opravy</string>
+	<string name="poi_service_electrical">Opravy elektrických vozidel</string>
+	<string name="poi_self_service_yes">Samoobsluha</string>
+	<string name="poi_self_service_no">Bez samoobsluhy</string>
+	<string name="poi_automated_yes">Automatizované</string>
+	<string name="poi_automated_no">Neautomatizované</string>
+	<string name="poi_full_service_yes">Všechny služby</string>
+	<string name="poi_brushless_yes">Bez kartáčů</string>
+	<string name="poi_brushless_no">Bez kartáčů: ne</string>
+	<string name="poi_car_wash_no">Automyčka: ne</string>
+
+	<string name="poi_public_bath">Veřejná sprcha</string>
+
+	<string name="poi_male_yes">Muži</string>
+	<string name="poi_male_no">Zakázané pro muže</string>
+	<string name="poi_female_yes">Ženy</string>
+	<string name="poi_female_no">Zakázané pro ženy</string>
+	<string name="poi_indoor_yes">V budově</string>
+	<string name="poi_indoor_no">Venku</string>
+	<string name="poi_toilets_access_permissive">Přístup na toalety: povolen</string>
+	<string name="poi_toilets_access_community">Přístup na toalety: komunita</string>
+	<string name="poi_diaper_yes">Přebalovací stůl</string>
+	<string name="poi_diaper_no">Bez přebalovacího stolu</string>
+	<string name="poi_diaper_room">Přebalovací místnost</string>
+
+	<string name="poi_maxstay">Časový limit na parkování</string>
+
+	<string name="poi_vending_fuel">Palivo</string>
+	<string name="poi_vending_bread">Chléb</string>
+	<string name="poi_vending_animal_food">Krmivo pro zvířata</string>
+	<string name="poi_vending_vouchers">Poukázky</string>
+	<string name="poi_vending_dvd">DVD</string>
+	<string name="poi_vending_candles">Svíčky</string>
+	<string name="poi_memorial_plaque">Plaketa</string>
+	<string name="poi_memorial_statue">Socha</string>
+	<string name="poi_memorial_stone">Kámen</string>
+	<string name="poi_memorial_vehicle">Vozidlo</string>
+	<string name="poi_memorial_obelisk">Obelisk</string>
+	<string name="poi_memorial_column">Sloup</string>
+	<string name="poi_inscription">Nápis</string>
+	<string name="poi_historic_quarry">Historický lom</string>
+
+	<string name="poi_resource_antimony">Antimon</string>
+	<string name="poi_resource_asbestos">Azbest</string>
+	<string name="poi_resource_barite">Baryt</string>
+	<string name="poi_resource_basalt">Čedič</string>
+	<string name="poi_resource_bauxite">Bauxit</string>
+	<string name="poi_resource_beryl">Beryl</string>
+	<string name="poi_resource_bismuth">Vizmut</string>
+	<string name="poi_resource_cereal">Obilnina</string>
+	<string name="poi_resource_chromite">Chromit</string>
+	<string name="poi_resource_copper">Měď</string>
+	<string name="poi_resource_diamond">Diamant</string>
+	<string name="poi_resource_dimension_stone">Rozměrný kámen</string>
+	<string name="poi_resource_dolomite">Dolomit</string>
+	<string name="poi_resource_gas">Plyn</string>
+	<string name="poi_resource_gold">Zlato</string>
+	<string name="poi_resource_graphite">Grafit</string>
+	<string name="poi_resource_gravel">Štěrk</string>
+	<string name="poi_resource_gypsum">Sádrovec</string>
+	<string name="poi_resource_iron_ore">Železná ruda</string>
+	<string name="poi_resource_lead">Olovo</string>
+	<string name="poi_resource_lignite">Hnědé uhlí</string>
+	<string name="poi_resource_limestone">Vápenec</string>
+	<string name="poi_resource_marble">Mramor</string>
+	<string name="poi_resource_mercury">Rtuť</string>
+	<string name="poi_resource_mica">Slída</string>
+	<string name="poi_resource_mineral_oil">Minerální olej</string>
+	<string name="poi_resource_nickel">Nikl</string>
+	<string name="poi_resource_oil">Nafta</string>
+	<string name="poi_resource_opal">Opál</string>
+	<string name="poi_resource_peat">Rašelina</string>
+	<string name="poi_resource_platinum">Platina</string>
+	<string name="poi_resource_radium">Rádium</string>
+	<string name="poi_resource_ruby">Rubín</string>
+	<string name="poi_resource_salt">Sůl</string>
+	<string name="poi_resource_sand">Písek</string>
+	<string name="poi_resource_sandstone">Pískovec</string>
+	<string name="poi_resource_silica">Křemen</string>
+	<string name="poi_resource_silver">Stříbro</string>
+	<string name="poi_resource_slate_iron_ore_copper">Břidlice;železná ruda;měď</string>
+	<string name="poi_resource_slate">Břidlice</string>
+	<string name="poi_resource_stone">Kámen</string>
+	<string name="poi_resource_uranium">Uran</string>
+	<string name="poi_resource_vanadium">Vanadium</string>
+	<string name="poi_resource_water">Voda</string>
+	<string name="poi_resource_zinc">Zinek</string>
+	<string name="poi_resource_zircon">Zirkon</string>
+
+	<string name="poi_wetland_wet_meadow">Mokrá louka</string>
+	<string name="poi_wetland_bog">Vrchoviště</string>
+	<string name="poi_wetland_marsh">Bažina</string>
+	<string name="poi_wetland_reedbed">Rákosina</string>
+	<string name="poi_wetland_swamp">Močál</string>
+	<string name="poi_wetland_saltern">Salina</string>
+	<string name="poi_wetland_tidalflat">Wattové pobřeží</string>
+	<string name="poi_wetland_saltmarsh">Slanisko</string>
+	<string name="poi_wetland_mangrove">Mangrovy</string>
+	<string name="poi_wetland_string_bog">Žilnaté rašeliniště</string>
+	<string name="poi_wetland_fen">Slatiniště</string>
+	<string name="poi_wetland_mud">Bahno</string>
+
+	<string name="poi_flagpole">Stožár</string>
+
+	<string name="poi_shelter_type_lean_to">Přístřešek: úkryt z jedné strany otevřený</string>
+	<string name="poi_shelter_type_basic_hut">Přístřešek: prostá bouda</string>
+	<string name="poi_shelter_type_building">Přístřešek: budova</string>
+	<string name="poi_shelter_type_wildlife_hide">Přístřešek: pro živočichy</string>
+	<string name="poi_shelter_type_rock_shelter">Přístřešek: skalní úkryt</string>
+	<string name="poi_shelter_type_sun_shelter">Přístřešek: sluneční úkryt</string>
+	<string name="poi_shelter_type_field_shelter">Přístřešek: Polní</string>
+	<string name="poi_shelter_type_tent">Přístřešek: stan</string>
+	<string name="poi_shelter_type_abandoned">Přístřešek: opuštěný</string>
+
+	<string name="poi_maxwidth">Maximální šířka</string>
+	<string name="poi_iata">IATA kód</string>
+	<string name="poi_icao">ICAO kód</string>
+	<string name="poi_faa">FAA kód</string>
+	
+	<string name="poi_artwork_type_sculpture">Typ díla: plastika</string>
+	<string name="poi_artwork_type_statue">Typ díla: socha</string>
+	<string name="poi_artwork_type_mural">Typ díla: freska</string>
+	<string name="poi_artwork_type_architecture">Typ díla: architektura</string>
+	<string name="poi_artwork_type_painting">Typ díla: malba</string>
 	</resources>
