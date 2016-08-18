@@ -1850,4 +1850,14 @@
 	<string name="poi_artwork_type_mural">Typ díla: freska</string>
 	<string name="poi_artwork_type_architecture">Typ díla: architektura</string>
 	<string name="poi_artwork_type_painting">Typ díla: malba</string>
+	<string name="poi_artwork_type_stone">Typ díla: kámen</string>
+	<string name="poi_artwork_type_bust">Typ díla: busta</string>
+	<string name="poi_artwork_type_installation">Typ díla: zařízení</string>
+	<string name="poi_artwork_type_mosaic">Typ díla: mozaika</string>
+	<string name="poi_artwork_type_relief">Typ díla: reliéf</string>
+	<string name="poi_artwork_type_graffiti">Typ díla: grafiti</string>
+	<string name="poi_artwork_type_fountain">Typ díla: fontána</string>
+
+	<string name="poi_width">Šířka</string>
+
 	</resources>
