@@ -2632,7 +2632,7 @@ Hvis du er fan af OsmAnd og OSM og ønsker at støtte dem, er det den perfekte m
     <string name="skip_map_downloading_desc">Der ikke nogen offline kort installeret. Vælg et kort fra listen eller hent senere via Menu - %1$s.</string>
     <string name="search_another_country">Vælg en anden region</string>
     <string name="search_map">Søger kort…</string>
-    <string name="first_usage_wizard_desc">Lad OsmAnd bestemme din placering og foreslå for at hente kort i denne region.</string>
+    <string name="first_usage_wizard_desc">Lad OsmAnd bestemme placeringen og foreslå at hente kort for denne region.</string>
     <string name="location_not_found">Placering ikke fundet</string>
     <string name="no_inet_connection">Ingen internetforbindelse</string>
     <string name="no_inet_connection_desc_map">Nødvendigt for at hente kort.</string>
