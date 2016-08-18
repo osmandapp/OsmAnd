@@ -2501,7 +2501,7 @@ Wenn Sie OsmAnd und OSM lieben und unterstützen wollen, so ist dies die perfekt
     <string name="storage_place_description">OsmAnd speichert die Daten (Karten, Tracks, etc.) in \'%1$s\'.</string>
     <string name="give_permission">Berechtigung erteilen</string>
     <string name="allow_access_location">Zugriff auf den Standort</string>
-    <string name="first_usage_greeting">Lassen Sie sich leiten, entdecken Sie neue Orte, ohne Internetverbindung</string>
+    <string name="first_usage_greeting">Erhalten Sie Wegbeschreibungen und entdecken Sie neue Orte ohne Internetverbindung</string>
     <string name="search_my_location">Meinen Standort suchen</string>
     <string name="no_update_info">Keine Aktualisierungen anzeigen</string>
     <string name="skip_map_downloading">Herunterladen der Karten überspringen</string>
