@@ -2587,4 +2587,5 @@ Facebook：https://www.facebook.com/osmandapp
     <string name="get_for">獲得 %1$s</string>
     <string name="get_for_month">每個月獲得 %1$s</string>
     <string name="no_update_info_desc">不要檢查任何有關 OsmAnd 新版本更新與相關的折扣</string>
+    <string name="get_it">獲得</string>
     </resources>
