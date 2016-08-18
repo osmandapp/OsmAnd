@@ -2641,5 +2641,5 @@ Hvis du er fan af OsmAnd og OSM og ønsker at støtte dem, er det den perfekte m
     <string name="storage_place_description">OsmAnd datalagring (for kort, spor, etc.): %1$s.</string>
     <string name="give_permission">Giv tilladelse</string>
     <string name="allow_access_location">Tillad adgang til placering</string>
-    <string name="first_usage_greeting">Få rutevejledning, opdag nye steder, uden internetforbindelse</string>
+    <string name="first_usage_greeting">Få rutevejledning og opdag nye steder uden internetforbindelse</string>
     </resources>
