@@ -3021,4 +3021,11 @@
 	<string name="poi_hockey">Хоккей</string>
 	<string name="poi_denomination_uniting">Обьеденить</string>
 	<string name="poi_denomination_reform">Реформа</string>
+	<string name="poi_fuel_svo">СВО</string>
+	<string name="poi_fuel_e10">Е10</string>
+	<string name="poi_fuel_e20">Е20</string>
+	<string name="poi_fuel_e85">E85</string>
+	<string name="poi_seamark_dyke">Знак дамбы</string>
+	<string name="poi_seamark_light_float">Бакен с маяком</string>
+	<string name="poi_seamark_light_vessel">Плавучий маяк</string>
 	</resources>
