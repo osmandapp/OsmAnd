@@ -9,91 +9,248 @@
     android:layout_height="wrap_content"
     android:background="@color/osmo_header_dark"
     android:orientation="vertical"
-    android:paddingBottom="@dimen/list_header_padding"
-    android:paddingLeft="@dimen/list_content_padding"
-    android:paddingRight="@dimen/list_content_padding"
-    android:paddingTop="@dimen/list_header_padding"
-    android:theme="@style/FreeVersionBanner"
-    tools:showIn="@layout/local_index_fragment_header">
+    android:theme="@style/FreeVersionBanner">
 
-    <LinearLayout
-        android:id="@+id/freeVersionBannerTitle"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="4dp">
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/free_version_title"/>
-
-        <TextView
-            android:id="@+id/downloadsLeftTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="@string/downloads_left_template"/>
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/freeVersionDescriptionTextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="4dp"
-        tools:text="@string/free_version_message"/>
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="8dp"
-        android:layout_margin="4dp">
-
-        <ProgressBar
-            android:id="@+id/downloadsLeftProgressBar"
-            style="@android:style/Widget.ProgressBar.Horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:max="10"
-            android:progressDrawable="@drawable/number_of_downloads_progress_bar_drawable"
-            android:saveEnabled="false"
-            tools:progress="6"/>
+        android:paddingBottom="@dimen/list_header_padding"
+        android:paddingTop="@dimen/list_header_padding">
 
         <LinearLayout
-            android:id="@+id/marksLinearLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"/>
-    </FrameLayout>
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    <LinearLayout
-        android:id="@+id/buttonsLinearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/list_content_padding">
+            <LinearLayout
+                android:id="@+id/bannerTopLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/list_content_padding"
+                android:paddingRight="@dimen/list_content_padding">
 
-        <net.osmand.plus.widgets.ButtonEx
-            android:id="@+id/getFullVersionButton"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/list_header_height"
-            android:layout_weight="1"
-            android:background="@drawable/blue_button_drawable"
-            android:text="@string/get_full_version"
-            android:textSize="@dimen/default_desc_text_size"
-            android:textStyle="bold"
-            osmand:textAllCapsCompat="true"/>
+                <LinearLayout
+                    android:id="@+id/freeVersionBannerTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="4dp">
 
-        <net.osmand.plus.widgets.ButtonEx
-            android:id="@+id/laterButton"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/list_header_height"
-            android:layout_marginLeft="@dimen/list_content_padding"
-            android:layout_weight="1"
-            android:background="@drawable/later_button_drawable"
-            android:text="@string/later"
-            android:textSize="@dimen/default_desc_text_size"
-            android:textStyle="bold"
-            osmand:textAllCapsCompat="true"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/free_version_title"/>
 
-    </LinearLayout>
+                    <TextView
+                        android:id="@+id/downloadsLeftTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:text="@string/downloads_left_template"/>
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/freeVersionDescriptionTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    tools:text="@string/free_version_message"/>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="8dp"
+                    android:layout_margin="4dp">
+
+                    <ProgressBar
+                        android:id="@+id/downloadsLeftProgressBar"
+                        style="@android:style/Widget.ProgressBar.Horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:max="10"
+                        android:progressDrawable="@drawable/number_of_downloads_progress_bar_drawable"
+                        android:saveEnabled="false"
+                        tools:progress="6"/>
+
+                    <LinearLayout
+                        android:id="@+id/marksLinearLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"/>
+                </FrameLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/priceInfoLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/list_content_padding"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/dashboard_divider_dark"/>
+
+                <LinearLayout
+                    android:id="@+id/fullVersionLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/list_content_padding"
+                    android:orientation="horizontal">
+
+                    <android.support.v7.widget.AppCompatImageView
+                        android:layout_width="54dp"
+                        android:layout_height="32dp"
+                        android:scaleType="center"
+                        android:src="@drawable/ic_action_osmand_logo"
+                        android:tint="@color/osmand_orange"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/list_content_padding"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/fullVersionTitle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="OsmAnd+"
+                            android:textSize="@dimen/default_list_text_size_large"
+                            android:textStyle="bold"/>
+
+                        <TextView
+                            android:id="@+id/fullVersionDescription"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp"
+                            android:text="@string/osmand_plus_banner_desc"/>
+
+                        <ProgressBar
+                            android:id="@+id/fullVersionProgress"
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:layout_marginTop="16dp"
+                            android:indeterminate="true"
+                            android:visibility="gone"/>
+
+                        <android.support.v7.widget.AppCompatButton
+                            android:id="@+id/fullVersionButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:background="@drawable/blue_button_drawable"
+                            android:paddingBottom="10dp"
+                            android:paddingLeft="14dp"
+                            android:paddingRight="14dp"
+                            android:paddingTop="10dp"
+                            android:textColor="@color/color_white"
+                            android:visibility="visible"
+                            tools:text="GET FOR E5"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="54dp"
+                    android:layout_marginTop="@dimen/list_content_padding"
+                    android:background="@color/dashboard_divider_dark"/>
+
+                <LinearLayout
+                    android:id="@+id/osmLiveLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/list_content_padding"
+                    android:orientation="horizontal">
+
+                    <android.support.v7.widget.AppCompatImageView
+                        android:layout_width="54dp"
+                        android:layout_height="32dp"
+                        android:scaleType="center"
+                        android:src="@drawable/ic_action_osm_live"
+                        android:tint="@color/osmand_orange"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/list_content_padding"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/osmLiveTitle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/osm_live_subscription"
+                            android:textSize="@dimen/default_list_text_size_large"
+                            android:textStyle="bold"/>
+
+                        <TextView
+                            android:id="@+id/osmLiveDescription"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp"
+                            android:text="@string/osm_live_banner_desc"/>
+
+                        <ProgressBar
+                            android:id="@+id/osmLiveProgress"
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:layout_marginTop="16dp"
+                            android:indeterminate="true"
+                            android:visibility="gone"/>
+
+                        <android.support.v7.widget.AppCompatButton
+                            android:id="@+id/osmLiveButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:background="@drawable/blue_button_drawable"
+                            android:paddingBottom="10dp"
+                            android:paddingLeft="14dp"
+                            android:paddingRight="14dp"
+                            android:paddingTop="10dp"
+                            android:textColor="@color/color_white"
+                            tools:text="GET FOR 1,5E PER MONTH"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="54dp"
+                    android:layout_marginTop="@dimen/list_content_padding"
+                    android:background="@color/dashboard_divider_dark"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/buttonsLinearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp">
+
+                <android.support.v7.widget.AppCompatButton
+                    android:id="@+id/laterButton"
+                    style="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/list_header_height"
+                    android:layout_marginLeft="40dp"
+                    android:text="@string/later"
+                    android:textColor="@color/color_white"
+                    android:textSize="@dimen/default_desc_text_size"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
 </LinearLayout>
 
     

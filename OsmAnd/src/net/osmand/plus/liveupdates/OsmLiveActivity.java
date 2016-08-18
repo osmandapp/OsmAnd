@@ -35,7 +35,7 @@ public class OsmLiveActivity extends AbstractDownloadActivity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_livie_updates);
 
-		inAppHelper = new InAppHelper(getMyApplication());
+		inAppHelper = new InAppHelper(getMyApplication(), false);
 		if (Version.isDeveloperVersion(getMyApplication())) {
 			inAppHelper = null;
 		}

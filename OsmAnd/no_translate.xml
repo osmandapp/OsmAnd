@@ -11,6 +11,8 @@
     -->
 
     <!-- Not translatable -->
+    <string name="full_version_price">€5</string>
+    <string name="osm_live_price">€1.5</string>
     <string name="osm_live">OSM Live (Beta)</string>
     <string name="ga_api_key">UA-28342846-2</string>
     <string name="ga_dispatchPeriod">10</string>
