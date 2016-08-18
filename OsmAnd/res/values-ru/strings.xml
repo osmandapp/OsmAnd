@@ -2057,8 +2057,7 @@
     </string>
     <string name="rendering_attr_hideOverground_name">Надземные объекты</string>
 
-<<<<<<< HEAD
-<string name="no_update_info_desc">Не проверять информацию о новых версиях и скидках от OsmAnd</string>
+    <string name="no_update_info_desc">Не проверять информацию о новых версиях и скидках от OsmAnd</string>
     <string name="no_update_info">Не показывать обновления</string>
     <string name="update_all_maps_now">Вы хотите обновить все карты сейчас?</string>
     <string name="clear_tile_data">Очистить всю плитку</string>
