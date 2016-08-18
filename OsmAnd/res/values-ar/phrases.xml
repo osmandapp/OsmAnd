@@ -386,4 +386,28 @@
 
 	<string name="poi_stadium">ملعب</string>
 	<string name="poi_sports_centre">مركز رياضي</string>
+	<string name="poi_note">ملاحظة</string>
+	<string name="poi_watering_place">مكان سقي</string>
+	<string name="poi_animal_boarding">مصعد للحيوان</string>
+	<string name="poi_animal_boarding_dog">نوع المصعد لـ: كلب</string>
+	<string name="poi_animal_boarding_cat">نوع المصعد لـ: قط</string>
+	<string name="poi_animal_boarding_dog_cat">نوع المصعد لـ: كلب، قط</string>
+	<string name="poi_animal_boarding_horse">نوع المصعد لـ: حصان</string>
+
+	<string name="poi_historic_aircraft">طائرات تاريخية</string>
+
+	<string name="poi_honey">متجرعسل</string>
+
+	<string name="poi_elevator_yes">بمصعد</string>
+	<string name="poi_elevator_no">بدون مصعد</string>
+
+	<string name="poi_office_camping">مكتب التخييم</string>
+	<string name="poi_guide">مكتب توجيه</string>
+	<string name="poi_consulting">مكتب استشارة</string>
+	<string name="poi_cooperative">مكتب تعاونية</string>
+	<string name="poi_office_forestry">مكتب الغابات</string>
+	<string name="poi_logistics">مكتب النقل والإمداد</string>
+	<string name="poi_parish">مكتب الرعية</string>
+	<string name="poi_publisher">مكتب النشر</string>
+
 	</resources>
