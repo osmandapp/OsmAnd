@@ -816,7 +816,7 @@ Honek {1} MB behar ditu behin betiko.
   
   <string name="search_position_map_view">Uneko maparen zentroa</string>
   <string name="select_search_position">Jatorria:</string>
-  <string name="context_menu_item_search">Honen ondoan bilatu</string>
+  <string name="context_menu_item_search">Bilatu honen inguruan</string>
   
   <string name="shared_string_save_as_gpx">Gorde GPX lorratz gisa</string>
   <string name="route_successfully_saved_at">Ibilbidea \'%1$s\' bezala ongi gorde da.</string>
