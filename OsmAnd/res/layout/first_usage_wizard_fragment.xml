@@ -13,8 +13,8 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingTop="8dp"
-        android:fillViewport="true">
+        android:fillViewport="true"
+        android:paddingTop="8dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -486,13 +486,13 @@
                 style="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
                 android:layout_gravity="center"
+                android:layout_marginBottom="8dp"
                 android:paddingLeft="16dp"
                 android:paddingRight="16dp"
-                android:visibility="gone"
                 android:text="@string/search_another_country"
-                android:textColor="@color/color_dialog_buttons_light"/>
+                android:textColor="@color/color_dialog_buttons_light"
+                android:visibility="gone"/>
 
             <android.support.v7.widget.CardView
                 android:id="@+id/map_downloading_card"
@@ -534,27 +534,45 @@
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginRight="14dp"
-                                android:gravity="center_vertical"
-                                android:minHeight="35dp"
-                                android:orientation="vertical">
+                                android:orientation="horizontal">
 
-                                <TextView
-                                    android:id="@+id/map_downloading_title"
-                                    android:layout_width="wrap_content"
+                                <LinearLayout
+                                    android:layout_width="0dp"
                                     android:layout_height="wrap_content"
-                                    android:textColor="?android:attr/textColorPrimary"
-                                    android:textSize="@dimen/default_list_text_size"
-                                    tools:text="The Netherlands"/>
+                                    android:layout_weight="1"
+                                    android:gravity="center_vertical"
+                                    android:minHeight="35dp"
+                                    android:orientation="vertical">
 
-                                <TextView
-                                    android:id="@+id/map_downloading_desc"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="2dp"
-                                    android:textColor="?android:attr/textColorSecondary"
-                                    android:textSize="@dimen/default_sub_text_size"
-                                    tools:text="255 MB"/>
+                                    <TextView
+                                        android:id="@+id/map_downloading_title"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textColor="?android:attr/textColorPrimary"
+                                        android:textSize="@dimen/default_list_text_size"
+                                        tools:text="The Netherlands"/>
+
+                                    <TextView
+                                        android:id="@+id/map_downloading_desc"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="2dp"
+                                        android:textColor="?android:attr/textColorSecondary"
+                                        android:textSize="@dimen/default_sub_text_size"
+                                        tools:text="255 MB"/>
+
+                                </LinearLayout>
+
+                                <ImageButton
+                                    android:id="@+id/map_redownload_button"
+                                    style="@style/Widget.AppCompat.ActionButton"
+                                    android:layout_width="44dp"
+                                    android:layout_height="60dp"
+                                    android:layout_marginTop="-14dp"
+                                    android:contentDescription="@string/shared_string_cancel"
+                                    android:src="@drawable/ic_action_refresh_dark"
+                                    android:tint="@color/map_widget_blue"
+                                    android:visibility="gone"/>
 
                             </LinearLayout>
 
@@ -569,8 +587,8 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="-8dp"
-                                android:visibility="visible"
-                                android:orientation="horizontal">
+                                android:orientation="horizontal"
+                                android:visibility="visible">
 
                                 <LinearLayout
                                     android:layout_width="0dp"
@@ -633,27 +651,45 @@
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginRight="14dp"
-                                android:gravity="center_vertical"
-                                android:minHeight="35dp"
-                                android:orientation="vertical">
+                                android:orientation="horizontal">
 
-                                <TextView
-                                    android:id="@+id/map2_downloading_title"
-                                    android:layout_width="wrap_content"
+                                <LinearLayout
+                                    android:layout_width="0dp"
                                     android:layout_height="wrap_content"
-                                    android:textColor="?android:attr/textColorPrimary"
-                                    android:textSize="@dimen/default_list_text_size"
-                                    tools:text="The Netherlands"/>
+                                    android:layout_weight="1"
+                                    android:gravity="center_vertical"
+                                    android:minHeight="35dp"
+                                    android:orientation="vertical">
 
-                                <TextView
-                                    android:id="@+id/map2_downloading_desc"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="2dp"
-                                    android:textColor="?android:attr/textColorSecondary"
-                                    android:textSize="@dimen/default_sub_text_size"
-                                    tools:text="255 MB"/>
+                                    <TextView
+                                        android:id="@+id/map2_downloading_title"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textColor="?android:attr/textColorPrimary"
+                                        android:textSize="@dimen/default_list_text_size"
+                                        tools:text="The Netherlands"/>
+
+                                    <TextView
+                                        android:id="@+id/map2_downloading_desc"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="2dp"
+                                        android:textColor="?android:attr/textColorSecondary"
+                                        android:textSize="@dimen/default_sub_text_size"
+                                        tools:text="255 MB"/>
+
+                                </LinearLayout>
+
+                                <ImageButton
+                                    android:id="@+id/map2_redownload_button"
+                                    style="@style/Widget.AppCompat.ActionButton"
+                                    android:layout_width="44dp"
+                                    android:layout_height="60dp"
+                                    android:layout_marginTop="-14dp"
+                                    android:contentDescription="@string/shared_string_cancel"
+                                    android:src="@drawable/ic_action_refresh_dark"
+                                    android:tint="@color/map_widget_blue"
+                                    android:visibility="gone"/>
 
                             </LinearLayout>
 
