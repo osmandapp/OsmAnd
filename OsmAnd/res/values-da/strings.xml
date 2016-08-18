@@ -2642,4 +2642,5 @@ Hvis du er fan af OsmAnd og OSM og ønsker at støtte dem, er det den perfekte m
     <string name="give_permission">Giv tilladelse</string>
     <string name="allow_access_location">Tillad adgang til placering</string>
     <string name="first_usage_greeting">Få rutevejledning og opdag nye steder uden brug af internetforbindelse</string>
+    <string name="si_mi_meters">Mil/meter</string>
     </resources>
