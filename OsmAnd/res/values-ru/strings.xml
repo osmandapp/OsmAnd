@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
     <string name="number_of_gpx_files_selected_pattern">%s GPX трека(ов) выбрано</string>
     <string name="change_markers_position">Переместить курсор</string>
     <string name="current_track">Текущий путь</string>
@@ -1202,12 +1201,7 @@
     <string name="share_route_as_gpx">Поделиться маршрутом используя файл GPX</string>
     <string name="osmo_settings_uuid">Ключ доступа</string>
     <string name="osmo_settings_descr">Настройка параметров мониторинга и установка персонального канала мониторинга</string>
-    <string name="osmo_plugin_description">"Плагин обеспечивает функциональность для расширенного живого мониторинга OsMo, см. http://osmo.mobi.
-
-Вы можете отслеживать все устройства из вашей группы в режиме реального времени. Вы также можете увидеть точки и треки в группе, к которой вы принадлежите.
-
-Группа не была удалена после нескольких месяцев, приведите её в соответствие с правилами, которые вы найдёта на сайте OsMo.mobi
- "</string>
+    <string name="osmo_plugin_description">"Плагин обеспечивает функциональность для расширенного живого мониторинга OsMo, см. http://osmo.mobi.\n\nОн позволяет отслеживать другие устройства и отслеживаться самому. Вы можете создавать анонимные группы, делиться друг с другом местоположением и общаться. Возможны различные варианты опций для отслеживания сессии или постоянного слежения.\n\nАнонимные группы создаются для указанного количества дней и ограниченным функционалом, то есть нет дистанционного управления и нет администратора группы. Полностью функциональные группы, с другой стороны, могут быть созданы на веб-сайте и только зарегистрированные пользователи имеют к ним доступ. "</string>
     <string name="osmo_plugin_name">OpenStreetMap Мониторинг</string>
     <string name="osmo_settings">OsMo</string>
     <string name="navigation_intent_invalid">Неправильный формат: %s</string>
@@ -1389,21 +1383,7 @@
     <string name="arrival_distance_factor_normally">Как обычно</string>
     <string name="arrival_distance_factor_late">Попозже</string>
     <string name="arrival_distance_factor_at_last">На последних метрах</string>
-    <string name="osmo_group_information_desc">"
- - Создание группы, пожалуйста, дайте ей имя и заполните описание
-
-- Из группы приложений создаются только с простым типом, читать больше на сайте https://osmo.mobi/g/new
-
-- Через веб-сайт можно управлять группой, чтобы поместить треки и  все доступные точки
-
-- Мы не поддерживаем использование группы только из одного пользователя, если это не группа POI
-
-- Частные группы ограничены 8 человек
-
-- Подробные условия всегда имеют на сайте OsMo.mobi
-
-- Если вам нужны специальные условия - пожалуйста, свяжитесь со службой поддержки: osmo.mobi@gmail.com
- "</string>
+    <string name="osmo_group_information_desc">" - Все созданные группы являются открытыми! Если вы хотите сохранить анонимность, подключите устройства непосредственно через ID трекера.\n - Приватные группы ограничены 8 человеками.\n - Если в группе не будет активным хотя бы 1 человек в течении 2-х недель группа будет удалена.\n - Вы можете ограничить вход в группу, только по приглашениям, но для управления группой вы должны войти в консоль администратора.\n - Если вам нужно создать группу, но с другими условиями, пожалуйста, свяжитесь со службой поддержки http://osmo.mobi</string>
     <string name="rendering_attr_alpineHiking_name">Пеший горный туризм по шкале (SAC)</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Визуализация пути согласно трассам OSMC</string>
     <string name="rendering_attr_coloredBuildings_name">Цветовая маркировка зданий по типу</string>
@@ -1454,10 +1434,7 @@
     <string name="osmo_device_not_found">Устройство не обнаружено</string>
     <string name="anonymous_user">Анонимный пользователь</string>
     <string name="osmo_no_connection_msg">Сервис OsMo не доступен:\n- проверьте интернет соединение;\n- проверьте настройки;\n- проверьте наш Twitter: https://twitter.com/OsMomobi</string>
-    <string name="anonymous_user_hint">Анонимному пользователю недоступно:
-- создание групп;
-- синхронизация групп и устройств с сервером;
-- управление группами и устройствами в личном кабинете.</string>
+    <string name="anonymous_user_hint">Анонимному пользователю недоступно:\n- создание групп;\n- синхронизация групп и устройств с сервером;\n- управление группами и устройствами в личном кабинете.</string>
     <string name="logged_as">Вы вошли как %1$s</string>
     <string name="rendering_category_routes">Маршруты</string>
     <string name="rendering_category_details">Подробности</string>
@@ -1956,9 +1933,7 @@
     <string name="osm_live_subscription_settings">Параметры подписки</string>
     <string name="osm_live_ask_for_purchase">Пожалуйста сначала приобретите подписку OSM Live</string>
 
-    <string name="osm_live_header">Эта подписка позволяет получать ежечасное обновление для всех карт мира.
-Основная часть доходов переводится в OSM сообщество и выплачивается за каждого взноса OSM.
-В случае, если вы любите OsmAnd и OSM и хотите поддержать его, это идеальный способ сделать это.</string>
+    <string name="osm_live_header">Эта подписка позволяет получать ежечасное обновление для всех карт мира. Основная часть доходов переводится в OSM сообщество и выплачивается за каждого взноса OSM. В случае, если вы любите OsmAnd и OSM и хотите поддержать его, это идеальный способ сделать это.</string>
     
     <string name="select_map_marker">Выберите маркер</string>
     <string name="map_markers_other">Другие маркеры</string>
@@ -1990,10 +1965,8 @@
     <string name="osm_live_active">Активные</string>
     <string name="osm_live_not_active">Неактивные</string>
     <string name="osm_live_region_desc">Часть вашего пожертвования будет направляться пользователям OpenStreetMap внесшим изменения в карту этого региона</string>
-    <string name="download_files_error_not_enough_space">Недостаточно места!
-Необходимо {3} Мб временно и {1} Мб на постоянной основе.
-В настоящее время доступно только {2} Мб свободного места.</string>
-    <string name="upload_osm_note_description">Вы можете загрузить вашу OSM заметку анонимно, или используя свой профиль OpenStreetMap.org.</string>
+    <string name="download_files_error_not_enough_space">Недостаточно места! Необходимо {3} Мб временно и {1} Мб на постоянной основе. В настоящее время доступно только {2} Мб свободного места.</string>
+    <string name="upload_osm_note_description">Вы можете загрузить вашу OSM заметку анонимно, или используя свой профиль OpenStreetMap.org</string>
     <string name="upload_osm_note">Загрузить OSM заметку</string>
     <string name="use_drawer_btn">Использовать меню</string>
     <string name="use_dashboard_btn">Использовать домашнюю страницу</string>
@@ -2002,24 +1975,7 @@
     <string name="updates_size">Размер обновления</string>
     <string name="reports_for">Отчет для</string>
 <string name="storage_permission_restart_is_required">Приложение получило разрешение на запись во внешнее хранилище. Требуется перезагрузка приложения.</string>
-    <string name="release_2_3">"
- • OSM Live. Поддержка авторов и разработчиков карт и получение почасовых обновлений карты.
-
-
-• Маркеры. Новый способ для быстрого выбора мест на карте.
-
-
-• Более подробные OSM карты со специфическими дорожными знаками стран и с большим количеством новых функций.
-
-
-• Улучшен внешний вид и подготовка маршрута.
-
-
-• Множество улучшений в контекстном меню карты таких как поиск адреса.
-
-
-И многое другое...
- "</string>
+    <string name="release_2_3">" • OSM Live. Поддержка авторов и разработчиков карт и получение почасовых обновлений карты.\n\n• Маркеры. Новый способ для быстрого выбора мест на карте.\n\n• Более подробные OSM карты со специфическими дорожными знаками стран и с большим количеством новых функций.\n\n• Улучшен внешний вид и подготовка маршрута.\n\n• Множество улучшений в контекстном меню карты таких как поиск адреса.\n\nИ многое другое... "</string>
     <string name="report">Отчёт</string>
     <string name="shared_string_move_up">Переместить вверх</string>
     <string name="shared_string_move_down">Переместить вниз</string>
@@ -2101,6 +2057,7 @@
     </string>
     <string name="rendering_attr_hideOverground_name">Надземные объекты</string>
 
+<<<<<<< HEAD
 <string name="no_update_info_desc">Не проверять информацию о новых версиях и скидках от OsmAnd</string>
     <string name="no_update_info">Не показывать обновления</string>
     <string name="update_all_maps_now">Вы хотите обновить все карты сейчас?</string>
@@ -2132,3 +2089,6 @@
 
     <string name="si_mi_meters">Мили/метры</string>
     </resources>
+=======
+</resources>
+>>>>>>> parent of f4080b7... Translated using Weblate (Russian)
