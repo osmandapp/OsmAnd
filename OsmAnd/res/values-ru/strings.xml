@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
     <string name="number_of_gpx_files_selected_pattern">%s GPX трека(ов) выбрано</string>
     <string name="change_markers_position">Переместить курсор</string>
     <string name="current_track">Текущий путь</string>
@@ -2087,4 +2088,5 @@
     <string name="skip_map_downloading_desc">У вас нет загруженных карт. Вы можете выбрать карту из списка или загрузить её позже с помощью меню - %1$s.</string>
 
     <string name="si_mi_meters">Мили/метры</string>
-</resources>
+<string name="get_for">Доберётесь за %1$s</string>
+    </resources>
