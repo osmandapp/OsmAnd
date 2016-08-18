@@ -3059,4 +3059,5 @@
 
 <string name="poi_length">Longitud</string>
 
-</resources>
+<string name="poi_osmand_additional_atm_yes">Con cajero automático</string>
+	</resources>
