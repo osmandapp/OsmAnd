@@ -2555,4 +2555,5 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="osm_live_banner_desc">تحصل على تحميل خرائط غير محدود وتحديثات أكثر من مرة في شهر: كل ساعة أو يوميا أو أسبوعيا.</string>
     <string name="osmand_plus_banner_desc">نسخة كاملة من التطبيق مع تحميل غير محدود وتحديثات شهرية للخرائط .</string>
     <string name="si_mi_meters">أميال/أمتار</string>
+    <string name="get_it">تحصل عليه</string>
     </resources>
