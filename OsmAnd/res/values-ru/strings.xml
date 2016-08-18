@@ -2066,7 +2066,7 @@
     <string name="replace_favorite_confirmation">Вы уверены, что хотите заменить любимые %1$s?</string>
     <string name="shared_string_change">Изменить</string>
     <string name="get_started">Начать</string>
-    <string name="shared_string_from">из</string>
+    <string name="shared_string_from">от</string>
     <string name="follow_us">Подписывайтесь на нас</string>
     <string name="osm_live_email_desc">Она нужна нам, чтобы предоставить вам информацию о взносах</string>
     <string name="download_files_question_space_with_temp">Действительно загрузить {0} файл (ов)? Для этого необходимо {3} Мб временно и {1} Мб на постоянной основе. В настоящее время существует {2} Мб свободного места.</string>
