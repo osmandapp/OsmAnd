@@ -354,7 +354,7 @@
 
     <string name="shared_string_select_all">Velg alle</string>
     <string name="fast_route_mode">Raskeste rute</string>
-    <string name="fast_route_mode_descr">Aktiver for å beregne raskeste rute eller deaktiver for korteste rute </string>
+    <string name="fast_route_mode_descr">"Aktiver for å beregne raskeste rute eller deaktiver for drivstoffbesparende rute "</string>
     <string name="tiles_to_download_estimated_size">Ved zoom {0} last ned {1} fliser ({2} MB)</string>
     <string name="shared_string_download_map">Last ned kart</string>
     <string name="renderers">Vektor-opptegning</string>
@@ -440,7 +440,7 @@
     <string name="search_offline_address">Offline-søk</string>
     <string name="search_online_address">Nettbasert søk</string>
     <string name="max_level_download_tile">Maks. nettbasert zoom</string>
-    <string name="max_level_download_tile_descr">Velg maksimalt zoomnivå å laste ned for nettbaserte kartseksjoner</string>
+    <string name="max_level_download_tile_descr">Velg maksimalt zoomnivå å laste ned for nettbaserte kartdeler</string>
     <string name="route_general_information">Total distanse %1$s, reisetid %2$d t %3$d min.</string>
     <string name="router_service_descr">Velg en nettbasert eller offline navigeringstjeneste</string>
     <string name="router_service">Navigeringstjeneste</string>
@@ -1400,7 +1400,7 @@
     <string name="file_size_in_mb">%.1f MB</string>
     <string name="update_all">Oppdater alle (%1$s MB)</string>
     <string name="free_downloads_used">Gratis nedlastinger brukt</string>
-    <string name="application_dir_description">Velg hvor du vil lagre kartfiler.</string>
+    <string name="application_dir_description">Velg hvor du vil lagre kart og andre datafiler.</string>
     <string name="enter_country_name">Oppgi navn på land</string>
     <string name="world_map_download_descr">Basiskart verden (som dekker hele verden ved lav zoom) mangler eller er utdatert. Vurder å laste det ned for en global oversikt.</string>
     <string name="shared_string_qr_code">QR-kode</string>
@@ -1701,4 +1701,13 @@
     <string name="advanced_coords_search">Avansert koordinatsøk</string>
     <string name="rendering_attr_hideOverground_name">Objekter over bakken</string>
 
+    <string name="skip_map_downloading">Hopp over nedlasting av kart</string>
+    <string name="skip_map_downloading_desc">Du har ingen offline-kart installert. Du kan velge et kart fra listen eller laste ned kart senere via Meny - %1$s.</string>
+    <string name="search_another_country">Velg en annen region</string>
+    <string name="no_inet_connection">Ingen internettforbindelse</string>
+    <string name="no_inet_connection_desc_map">Kreves for å laste ned kart.</string>
+    <string name="storage_free_space">Ledig lagerplass</string>
+    <string name="clear_tile_data">Slett alle kartfliser</string>
+    <string name="replace_favorite_confirmation">Er du sikker på at du vil erstatte favoritt %1$s?</string>
+    <string name="get_started">Kom i gang</string>
     </resources>
