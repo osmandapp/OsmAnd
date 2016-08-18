@@ -606,7 +606,7 @@ Aktuell sind {2} MB verfügbar.</string>
 	
 	<string name="osmand_routing_experimental">OsmAnd Offline-Navigation ist noch experimentell und funktioniert nicht gut für Entfernungen über 20 km.\n\nAls Navigationsdienst wird temporär online CloudMade verwendet.</string>
 	<string name="specified_dir_doesnt_exist">Angegebener Ordner kann nicht gefunden werden.</string>
-	<string name="application_dir">Datenspeicherungsordner</string>
+	<string name="application_dir">Datenordner</string>
 	
 	<string name="osmand_net_previously_installed">Eine Vorversion von OsmAnd ist installiert. Alle Offline-Daten werden weiter unterstützt. Favoriten müssen aber in der Vorversion exportiert und anschließend in die neue Version importiert werden.</string>
 	<string name="build_installed">Build {0} erfolgreich installiert ({1}).</string>
@@ -2485,7 +2485,7 @@ Wenn Sie OsmAnd und OSM lieben und unterstützen wollen, so ist dies die perfekt
     <string name="routing_attr_short_way_name">Kraftstoff sparende Route</string>
     <string name="routing_attr_short_way_description">Nutze Kraftstoff sparende Route (in der Regel kürzer)</string>
     <string name="replace_favorite_confirmation">Wollen sie Favorit \'%1$s\' wirklich ersetzen?</string>
-    <string name="shared_string_change">Änderung</string>
+    <string name="shared_string_change">Ändern</string>
     <string name="get_started">Erste Schritte</string>
     <string name="update_all_maps_now">Wollen sie alle Karten jetzt aktualisieren?</string>
     <string name="clear_tile_data">Alle Kartenkacheln löschen</string>
@@ -2501,9 +2501,10 @@ Wenn Sie OsmAnd und OSM lieben und unterstützen wollen, so ist dies die perfekt
     <string name="storage_place_description">OsmAnd speichert die Daten (Karten, Tracks, etc.) in \'%1$s\'.</string>
     <string name="give_permission">Berechtigung erteilen</string>
     <string name="allow_access_location">Zugriff auf den Standort</string>
-    <string name="first_usage_greeting">Lassen Sie sich leiten, entdecken Sie neue Orte, ohne Internetverbindung</string>
+    <string name="first_usage_greeting">Erhalten Sie Wegbeschreibungen und entdecken Sie neue Orte ohne Internetverbindung</string>
     <string name="search_my_location">Meinen Standort suchen</string>
     <string name="no_update_info">Keine Aktualisierungen anzeigen</string>
     <string name="skip_map_downloading">Herunterladen der Karten überspringen</string>
     <string name="no_update_info_desc">Nicht auf Aktualisierungen und Rabatte im Bezug auf OsmAnd prüfen.</string>
+    <string name="si_mi_meters">Meilen/Meter</string>
     </resources>

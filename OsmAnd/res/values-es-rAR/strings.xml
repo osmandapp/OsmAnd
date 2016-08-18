@@ -2411,5 +2411,6 @@ Si necesitas ayuda con la aplicación OsmAnd, contacte con nuestro equipo de sop
     <string name="storage_place_description">Almacenamiento de datos OsmAnd (para mapas, trazas, etc.): %1$s.</string>
     <string name="give_permission">Conceder permiso</string>
     <string name="allow_access_location">Permitir acceso a la ubicación</string>
-    <string name="first_usage_greeting">Obtén direcciones, descubre lugares nuevos, sin conexión a Internet</string>
+    <string name="first_usage_greeting">Obtén direcciones y descubre lugares nuevos sin conexión a Internet</string>
+    <string name="si_mi_meters">Millas/Metros</string>
     </resources>

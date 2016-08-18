@@ -2436,4 +2436,5 @@ Si aprecieu OsmAnd  i OSM i vulgueu ajudar-los, és la via perfecta per fer-ho."
     <string name="skip_map_downloading_desc">"No disposeu de cap mapa instal·lat localment. Podeu triar un mapa de la llista o baixar-ne més tard,  via Menú -  %1$s."</string>
     <string name="search_another_country">Selecciona un altre país</string>
     <string name="first_usage_greeting">Obteniu indicacions i descobriu nous llocs sense connexió a Internet</string>
+    <string name="si_mi_meters">Milles/metres</string>
     </resources>

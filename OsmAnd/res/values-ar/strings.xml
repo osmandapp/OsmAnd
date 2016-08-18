@@ -2548,6 +2548,6 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="storage_place_description">مخزن بيانات التطبيق (للخرائط، المسارات، إلخ.): %1$s.</string>
     <string name="give_permission">إعطاء الإذن</string>
     <string name="allow_access_location">الإذن بالوصول إلى الموقع</string>
-    <string name="first_usage_greeting">الحصول على الاتجاهات، اكتشاف أماكن جديدة، دون الاتصال بالإنترنت</string>
+    <string name="first_usage_greeting">أحصل على التوجيهات واكتشف أماكن جديدة دون اتصال بالإنترنت</string>
     <string name="search_my_location">البحث في موقعي</string>
     </resources>

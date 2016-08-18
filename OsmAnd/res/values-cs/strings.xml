@@ -47,7 +47,7 @@
     <string name="left">vlevo</string>
     <string name="front_left">doleva vpřed</string>
     <string name="oclock">hodin</string>
-    <string name="towards">směrem</string>
+    <string name="towards">směrem k</string>
     <string name="accuracy">Přesnost</string>
     <string name="altitude">Nadmořská výška</string>
     <string name="no_info">Žádné informace</string>
@@ -181,7 +181,7 @@ Nyní je k dispozici {2} MB.</string>
     <string name="favorite_places_category">Místa</string>
     <string name="shared_string_others">Ostatní</string>
     <string name="shared_string_no_thanks">Není potřeba</string>
-    <string name="basemap_missing">Chybí základní mapa světa. Prosím stáhněte ji pro správnou funkci programu.</string>
+    <string name="basemap_missing">Chybí základní mapa světa (pokrývající celý svět v malém přiblížení). Prosím zvažte stažení World_basemap_x.obf pro celkový přehled.</string>
     <string name="vector_data_missing">Na SD kartě nejsou uložena žádná offline data. Prosím zvažte jejich stažení pro použití v offline módu.</string>
     <string name="local_index_gpx_info_show">\n\nDlouhým kliknutím zobrazíte na mapě</string>
     <string name="local_index_installed">Místní verze</string>
@@ -337,7 +337,7 @@ Nyní je k dispozici {2} MB.</string>
     <string name="shared_string_select_all">Vybrat vše</string>
     <string name="shared_string_refresh">Načíst znovu</string>
     <string name="fast_route_mode">Nejrychlejší trasa</string>
-    <string name="fast_route_mode_descr">Zapněte pro výpočet nejrychlejší trasy, vypněte, pokud chcete hledat tu nejkratší </string>
+    <string name="fast_route_mode_descr">"Zapněte pro výpočet nejrychlejší trasy, vypněte, pokud chcete hledat ekonomickou "</string>
     <string name="tiles_to_download_estimated_size">Pro zvětšení {0} je třeba stáhnout {1} mapových dlaždic, celkem {2} MB</string>
     <string name="shared_string_download_map">Stáhnout mapu</string>
     <string name="select_max_zoom_preload_area">Vyberte maximální zvětšení stahovaných map</string>
@@ -494,7 +494,7 @@ Nyní je k dispozici {2} MB.</string>
     <string name="search_online_address">Internet</string>
     <string name="max_level_download_tile">Maximální zvětšení</string>
     <string name="max_level_download_tile_descr">Jaké nejvyšší zvětšení mapy stahovat</string>
-    <string name="route_general_information">Celková vzdálenost %1$s, doba cesty %2$d h %3$d m.</string>
+    <string name="route_general_information">Celková vzdálenost %1$s, doba cesty %2$d h %3$d min.</string>
     <string name="router_service_descr">Vyberte navigační službu</string>
     <string name="router_service">Navigace</string>
     <string name="sd_dir_not_accessible">Úložný datový adresář na SD kartě není dostupný!</string>
@@ -1893,9 +1893,9 @@ Aktivováním tohoto pohledu se změní styl mapy na \"Winter and ski\", který 
     <string name="shared_string_send">Odeslat</string>
     <string name="simulate_initial_startup_descr">Nastavit příznak označující první start aplikace, ostatní nastavení ponechat nezměněné</string>
     <string name="confirm_download_roadmaps">Opravdu chcete stáhnout silniční mapu, když už máte standardní podrobnou mapu?</string>
-    <string name="application_dir_description">Zvolte, kam chcete uložit mapové soubory.</string>
+    <string name="application_dir_description">Zvolte, kam chcete uložit mapové a ostatní datové soubory.</string>
     <string name="show_on_start_description">\'Vypnuto\' spouští přímo mapovou obrazovku</string>
-    <string name="world_map_download_descr">Základní mapa světa (pokrývající celý svět při malých detailech) chybí nebo je zastaralá. Prosím zvažte její stažení, aby vaše prostředí bylo kompletní.</string>
+    <string name="world_map_download_descr">Základní mapa světa (pokrývající celý svět při malých detailech) chybí nebo je zastaralá. Prosím zvažte její stažení pro celkový přehled.</string>
     <string name="shared_string_qr_code">QR kód</string>
     <string name="map_downloaded">Mapa stažena</string>
     <string name="map_downloaded_descr">Mapa %1$s byla stažena. Pro její použití se vraťte zpět na mapu.</string>
@@ -2115,8 +2115,8 @@ Aktuálně je volných pouze {2} MB.</string>
     <string name="osm_live_ask_for_purchase">Prosím zakupte nejdříve předplatné OSM</string>
 
     <string name="osm_live_header">Registrace umožní hodinové aktualizace pro všechny mapy světa.
-Velká část příjmu jde zpět do OSM komunity a za každý příspěvek do OSM je vyplacena odměna.
-Pokud máte rádi OsmAnd a chcete je podpořit, toto je výborný způsob jak to udělat.</string>
+Většina příjmu jde zpět do OSM komunity a za každý příspěvek do OSM je vyplacena odměna.
+Pokud máte rádi OsmAnd a OSM a chcete je podpořit, toto je výborný způsob jak to udělat.</string>
     
     <string name="download_files_question_space_with_temp">Opravdu stáhnout {0} soubor(ů)?
 Dočasně je potřeba {3} MB a {1} MB trvale.
@@ -2173,7 +2173,7 @@ V současnosti je k dispozici {2} MB.</string>
     <string name="no_waypoints_found">Žádné body cesty nenalezeny</string>
     <string name="follow_us">Sleduj nás</string>
     <string name="access_direction_audio_feedback_descr">Indikovat směr k cílovému bodu zvukem</string>
-    <string name="access_direction_haptic_feedback">Haptická zpětná vazba směru</string>
+    <string name="access_direction_haptic_feedback">Hmatová indikace směru</string>
     <string name="access_direction_haptic_feedback_descr">Indikovat směr k cílovému bodu vibrováním</string>
     <string name="use_osm_live_routing">OSM Live navigace</string>
     <string name="map_widget_battery">Stav baterie</string>
@@ -2232,4 +2232,28 @@ V současnosti je k dispozici {2} MB.</string>
     <string name="routing_attr_short_way_name">Ekonomická trasa</string>
     <string name="routing_attr_short_way_description">Použít ekonomickou trasu (obvykle kratší)</string>
     <string name="replace_favorite_confirmation">Opravdu chcete nahradit oblíbený %1$s?</string>
+    <string name="rendering_attr_hideOverground_name">Nadzemní objekty</string>
+    <string name="shared_string_change">Změnit</string>
+    <string name="get_started">Začít</string>
+    <string name="release_2_4">"
+ • Nové mocné vyhledávání libovolného textu
+
+
+ • Připojení s audiosystémem v autě přes Bluetooth
+
+
+ • Vylepšená navigace, hlasové pokyny a indikace jízdních pruhů
+
+
+ • Vylepšená dopravní vrstva s vykreslením tras
+
+
+ • Přidané další jazyky a regionální verze
+
+
+ • Mnoho dalších vylepšení a oprav chyb
+
+
+ a další…
+ "</string>
     </resources>

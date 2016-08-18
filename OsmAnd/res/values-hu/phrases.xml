@@ -1674,4 +1674,118 @@
 	<string name="poi_internet_access_type_no">Nincs internetelérés</string>
 	<string name="poi_internet_access_type_yes">Interneteléréssel</string>
 
+	<string name="poi_maxwidth">Maximális szélesség</string>
+	<string name="poi_iata">IATA-kód</string>
+	<string name="poi_icao">ICAO-kód</string>
+	<string name="poi_faa">FAA-kód</string>
+	
+	<string name="poi_artwork_type_sculpture">Műalkotás típusa: szobor</string>
+	<string name="poi_artwork_type_statue">Műalkotás típusa: szobor</string>
+	<string name="poi_artwork_type_mural">Műalkotás típusa: freskó</string>
+	<string name="poi_artwork_type_architecture">Műalkotás típusa: építészeti</string>
+	<string name="poi_artwork_type_painting">Műalkotás típusa: festmény</string>
+	<string name="poi_artwork_type_stone">Műalkotás típusa: kőtömb</string>
+	<string name="poi_artwork_type_bust">Műalkotás típusa: mellszobor</string>
+	<string name="poi_artwork_type_installation">Műalkotás típusa: installáció</string>
+	<string name="poi_artwork_type_mosaic">Műalkotás típusa: mozaik</string>
+	<string name="poi_artwork_type_relief">Műalkotás típusa: dombormű</string>
+	<string name="poi_artwork_type_graffiti">Műalkotás típusa: graffiti</string>
+	<string name="poi_artwork_type_stele">Műalkotás típusa: sztélé</string>
+	<string name="poi_artwork_type_fountain">Műalkotás típusa: szökőkút</string>
+
+	<string name="poi_width">Szélesség</string>
+
+	<string name="poi_architect_name">Építész</string>
+
+	<string name="poi_architecture_modern">Stílus: modern</string>
+	<string name="poi_architecture_stalinist_neoclassicism">Stílus: sztálini neoklasszcista</string>
+	<string name="poi_architecture_eclectic">Stílus: eklektikus</string>
+	<string name="poi_architecture_new_objectivity">Stílus: neoobjektivista</string>
+	<string name="poi_architecture_contemporary">Stílus: kortárs</string>
+	<string name="poi_architecture_constructivism">Stílus: konstruktivista</string>
+	<string name="poi_architecture_umgebinde">Stílus: umgebinde</string>
+	<string name="poi_architecture_timber_frame">Stílus: favázas</string>
+	<string name="poi_architecture_art_nouveau">Stílus: szecessziós</string>
+	<string name="poi_architecture_neoclassicism">Stílus: neoklasszcista</string>
+	<string name="poi_architecture_victorian">Stílus: viktoriánus</string>
+	<string name="poi_architecture_brutalism">Stílus: brutalista</string>
+	<string name="poi_architecture_classicism">Stílus: klasszicista</string>
+	<string name="poi_architecture_gothic">Stílus: gótikus</string>
+	<string name="poi_architecture_oldrussian">Stílus: orosz</string>
+	<string name="poi_architecture_baroque">Stílus: barokk</string>
+	<string name="poi_architecture_postconstructivism">Stílus: posztkonstruktivista</string>
+	<string name="poi_architecture_wilhelminian_style">Stílus: gründerzeit</string>
+	<string name="poi_architecture_renaissance">Stílus: reneszánsz</string>
+	<string name="poi_architecture_romanesque">Stílus: román</string>
+
+	<string name="poi_tunnel_waterway">Vízi alagút</string>
+	<string name="poi_tunnel_car">Alagút</string>
+	<string name="poi_tunnel_pedestrian">Gyalogos aluljáró</string>
+	<string name="poi_tunnel_railway">Vasúti alagút</string>
+	<string name="poi_bridge_car">Közúti híd</string>
+	<string name="poi_bridge_pedestrian">Gyalogos híd</string>
+	<string name="poi_bridge_bicycle">Kerékpáros híd</string>
+	<string name="poi_bridge_railway">Vasúti híd</string>
+	<string name="poi_bridge_waterway">Vízi híd</string>
+	<string name="poi_bridge_structure_beam">Hídszerkezet: gerenda</string>
+	<string name="poi_bridge_structure_simple_suspension">Hídszerkezet: egyszerű függőhíd</string>
+	<string name="poi_bridge_structure_suspension">Hídszerkezet: függesztett</string>
+	<string name="poi_bridge_structure_arch">Hídszerkezet: ívtartós</string>
+	<string name="poi_bridge_structure_truss">Hídszerkezet: rácsos</string>
+	<string name="poi_bridge_structure_floating">Hídszerkezet: úszó</string>
+	<string name="poi_bridge_structure_humpback">Hídszerkezet: szamárhátas</string>
+	<string name="poi_bridge_structure_cable_stayed">Hídszerkezet: ferdekábeles</string>
+	<string name="poi_bridge_structure_boardwalk">deszkajárda</string>
+	<string name="poi_bridge_structure_simple_wooden">Hídszerkezet: egyszerű fahíd</string>
+	<string name="poi_bridge_structure_viaduct">Hídszerkezet: viadukt</string>
+	<string name="poi_bridge_structure_aqueduct">Hídszerkezet: akvadukt</string>
+	<string name="poi_bridge_structure_log">Hídszerkezet: farönk</string>
+	<string name="poi_bridge_type_movable">Híd típusa: mozgatható</string>
+	<string name="poi_bridge_movable_bascule">Mozgatható híd típusa: billenthető</string>
+	<string name="poi_bridge_movable_swing">Mozgatható híd típusa: forgatható</string>
+	<string name="poi_bridge_movable_lift">Mozgatható híd típusa: emelős</string>
+	<string name="poi_bridge_movable_drawbridge">Mozgatható híd típusa: felvonóhíd</string>
+	<string name="poi_bridge_movable_submersible">Mozgatható híd típusa: merülő</string>
+	<string name="poi_bridge_movable_transporter">Mozgatható híd típusa: komphíd</string>
+	<string name="poi_bridge_movable_retractable">Mozgatható híd típusa: behúzható</string>
+
+	<string name="poi_lit_yes">Kivilágított</string>
+	<string name="poi_lit_no">Kiviláígatlan</string>
+
+	<string name="poi_surface_unpaved">Felület: burkolatlan</string>
+	<string name="poi_surface_paved">Felület: burkolt</string>
+	<string name="poi_surface_asphalt">Felület: aszfalt</string>
+	<string name="poi_surface_concrete">Felület: beton</string>
+	<string name="poi_surface_sett">Felület: macskakő</string>
+	<string name="poi_surface_cobblestone">Felület: kőburkolat (durva kavics)</string>
+	<string name="poi_surface_paving_stones">Felület: térkő</string>
+	<string name="poi_surface_pebblestone">Felület: kavics</string>
+	<string name="poi_surface_stone">Felület: kő</string>
+	<string name="poi_surface_metal">Felület: fém</string>
+	<string name="poi_surface_wood">Felület: fa</string>
+	<string name="poi_surface_gravel">Felület: zúzottkő</string>
+	<string name="poi_surface_fine_gravel">Felület: murva</string>
+	<string name="poi_surface_compacted">Felület: tömörített (makadám)</string>
+	<string name="poi_surface_sand">Felület: homok</string>
+	<string name="poi_surface_grass">Felület: fű</string>
+	<string name="poi_surface_grass_paver">Felület: gyephézagos térkő</string>
+	<string name="poi_surface_ground">Felület: föld</string>
+	<string name="poi_surface_dirt">Felület: sár</string>
+	<string name="poi_surface_mud">Felület: sár (vizenyő)</string>
+	<string name="poi_surface_ice">Felület: jég</string>
+	<string name="poi_surface_salt">Felület: só</string>
+	<string name="poi_surface_snow">Felület: hó</string>
+
+	<string name="poi_route_bus_ref">Busz</string>
+	<string name="poi_route_trolleybus_ref">Trolibusz</string>
+	<string name="poi_route_tram_ref">Villamos</string>
+	<string name="poi_route_train_ref">Vonat</string>
+	<string name="poi_route_light_rail_ref">HÉV</string>
+	<string name="poi_route_monorail_ref">Egysínű vasút</string>
+	<string name="poi_route_funicular_ref">Sikló</string>
+	<string name="poi_route_ferry_ref">Komp</string>
+
+	<string name="poi_route_railway_ref">Vasútvonal</string>
+
+	<string name="poi_historic_yes">Történelmi objektum</string>
 	</resources>

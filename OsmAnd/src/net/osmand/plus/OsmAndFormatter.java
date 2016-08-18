@@ -39,6 +39,9 @@ public class OsmAndFormatter {
 		if (mc == MetricsConstants.MILES_AND_FOOTS) {
 			mainUnitInMeter = FOOTS_IN_ONE_METER;
 			metersInSecondUnit = METERS_IN_ONE_MILE;
+		} else if (mc == MetricsConstants.MILES_AND_METERS) {
+			mainUnitInMeter = 1;
+			metersInSecondUnit = METERS_IN_ONE_MILE;
 		} else if (mc == MetricsConstants.NAUTICAL_MILES) {
 			mainUnitInMeter = 1;
 			metersInSecondUnit = METERS_IN_ONE_NAUTICALMILE;
@@ -66,8 +69,12 @@ public class OsmAndFormatter {
 				pointer = 1;
 			}
 		}
-		//Miles exceptions: 2000ft->0.5mi, 1000ft->0.25mi, 1000yd->0.5mi, 500yd->0.25mi
-		if (mc == MetricsConstants.MILES_AND_FOOTS && roundDist == 2000 / (double) FOOTS_IN_ONE_METER) {
+		//Miles exceptions: 2000ft->0.5mi, 1000ft->0.25mi, 1000yd->0.5mi, 500yd->0.25mi, 1000m ->0.5mi, 500m -> 0.3mi
+		if (mc == MetricsConstants.MILES_AND_METERS && roundDist == 500) {
+			roundDist = 0.5f * METERS_IN_ONE_MILE;
+		} else if (mc == MetricsConstants.MILES_AND_METERS && roundDist == 500) {
+			roundDist = 0.3f * METERS_IN_ONE_MILE;
+		} else if (mc == MetricsConstants.MILES_AND_FOOTS && roundDist == 2000 / (double) FOOTS_IN_ONE_METER) {
 			roundDist = 0.5f * METERS_IN_ONE_MILE;
 		} else if (mc == MetricsConstants.MILES_AND_FOOTS && roundDist == 1000 / (double) FOOTS_IN_ONE_METER) {
 			roundDist = 0.25f * METERS_IN_ONE_MILE;
@@ -115,12 +122,14 @@ public class OsmAndFormatter {
 			return MessageFormat.format("{0,number,#.##} " + ctx.getString(mainUnitStr), ((float) meters) / mainUnitInMeters).replace('\n', ' '); //$NON-NLS-1$
 		} else if (mc == MetricsConstants.MILES_AND_FOOTS && meters > 0.249f * mainUnitInMeters) {
 			return MessageFormat.format("{0,number,#.##} " + ctx.getString(mainUnitStr), ((float) meters) / mainUnitInMeters).replace('\n', ' '); //$NON-NLS-1$
+		} else if (mc == MetricsConstants.MILES_AND_METERS && meters > 0.499f * mainUnitInMeters) {
+			return MessageFormat.format("{0,number,#.##} " + ctx.getString(mainUnitStr), ((float) meters) / mainUnitInMeters).replace('\n', ' '); //$NON-NLS-1$
 		} else if (mc == MetricsConstants.MILES_AND_YARDS && meters > 0.249f * mainUnitInMeters) {
 			return MessageFormat.format("{0,number,#.##} " + ctx.getString(mainUnitStr), ((float) meters) / mainUnitInMeters).replace('\n', ' '); //$NON-NLS-1$
 		} else if (mc == MetricsConstants.NAUTICAL_MILES && meters > 0.99f * mainUnitInMeters) {
 			return MessageFormat.format("{0,number,#.##} " + ctx.getString(mainUnitStr), ((float) meters) / mainUnitInMeters).replace('\n', ' '); //$NON-NLS-1$
 		} else {
-			if (mc == MetricsConstants.KILOMETERS_AND_METERS) {
+			if (mc == MetricsConstants.KILOMETERS_AND_METERS || mc == MetricsConstants.MILES_AND_METERS) {
 				return ((int) (meters + 0.5)) + " " + ctx.getString(R.string.m); //$NON-NLS-1$
 			} else if (mc == MetricsConstants.MILES_AND_FOOTS) {
 				int foots = (int) (meters * FOOTS_IN_ONE_METER + 0.5);

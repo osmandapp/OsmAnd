@@ -2631,15 +2631,16 @@ Hvis du er fan af OsmAnd og OSM og ønsker at støtte dem, er det den perfekte m
     <string name="skip_map_downloading">Spring over hentning af kort</string>
     <string name="skip_map_downloading_desc">Der ikke nogen offline kort installeret. Vælg et kort fra listen eller hent senere via Menu - %1$s.</string>
     <string name="search_another_country">Vælg en anden region</string>
-    <string name="search_map">Søger kort…</string>
+    <string name="search_map">Søger efter kort…</string>
     <string name="first_usage_wizard_desc">Lad OsmAnd bestemme placeringen og foreslå at hente kort for denne region.</string>
     <string name="location_not_found">Placering ikke fundet</string>
     <string name="no_inet_connection">Ingen internetforbindelse</string>
     <string name="no_inet_connection_desc_map">Nødvendigt for at hente kort.</string>
     <string name="search_location">Søger efter placering…</string>
     <string name="storage_free_space">Ledig lagerplads</string>
-    <string name="storage_place_description">OsmAnd datalagring (for kort, spor, etc.): %1$s.</string>
+    <string name="storage_place_description">OsmAnds datalagring (for kort, spor, mv.): %1$s.</string>
     <string name="give_permission">Giv tilladelse</string>
     <string name="allow_access_location">Tillad adgang til placering</string>
-    <string name="first_usage_greeting">Få rutevejledning, opdag nye steder, uden internetforbindelse</string>
+    <string name="first_usage_greeting">Få rutevejledning og opdag nye steder uden brug af internetforbindelse</string>
+    <string name="si_mi_meters">Mil/meter</string>
     </resources>
