@@ -3,7 +3,7 @@
     <string name="starting_point_too_far">Pradžios taškas yra per toli nuo artimiausio kelio.</string>
     <string name="shared_location">Bendrinta vieta</string>
     <string name="osmand_parking_warning">Dėmesio</string>
-    <string name="osmand_parking_warning_text">Perspėjimas pasiimti automobilį jau buvo įtrauktas į jūsų kalendorių. Perspėjimas ten liks tol, kol jo nepanaikinsite.</string>
+    <string name="osmand_parking_warning_text">Perspėjimas pasiimti automobilį jau buvo įtrauktas į jūsų kalendorių. Perspėjimas ten liks tol, kol jį panaikinsite.</string>
     <string name="osmand_parking_time_limit_title">Nustatyti statymo trukmę</string>
     <string name="osmand_parking_delete_confirm">Ar norite panaikinti automobilio statymo vietą?</string>
     <string name="osmand_parking_delete">Panaikinti statymo žymę</string>
@@ -18,7 +18,9 @@
     <string name="osmand_parking_pm">po piet</string>
     <string name="osmand_parking_am">ryto</string>
     <string name="osmand_parking_position_name">Statymo vieta</string>
-    <string name="osmand_parking_plugin_description">Šis įskiepis leidžia įsiminti vietą, kada palikote savo automobilį ir kiek laiko liko iki parkavimo pabaigos. Parkavimo vietą ir laiką galite surasti dashboard\'e bei žemėlapio widget\'e.\nTaip pat šis įskiepis įrašo priminimą į kalendorių, jei jūs to pageidaujate.</string>
+    <string name="osmand_parking_plugin_description">Šis įskiepis leidžia įsiminti vietą, kada palikote savo automobilį ir kiek laiko liko iki parkavimo pabaigos. Parkavimo vietą ir laiką galite surasti dashboard\'e bei žemėlapio widget\'e.
+
+Tiek vieta, tiek laikas yra matomi OsmAnd valdymo skydelyje bei widget\'e žemėlapyje. Taip pat šis įskiepis įrašo priminimą į kalendorių, jei jūs to pageidaujate.</string>
     <string name="osmand_parking_plugin_name">Statymo vieta</string>
     <string name="context_menu_item_add_parking_point">Žymėti statymo vietą</string>
     <string name="context_menu_item_delete_parking_point">Naikinti statymo žymę</string>
@@ -70,7 +72,14 @@
     <string name="online_map_settings_descr">Nustatykite interneto ar laikinai išsaugotų žemėlapių šaltinius</string>
 
 
-    <string name="osmand_rastermaps_plugin_description">"Šio įskiepio pagalba galite pasiekti daugybę žemėlapių rūšių internete, pradedant Openstreetmap (Mapnik), baigiant palydovinėmis nuotraukomis ir specialios paskirties sluoksnių, tokių kaip orų, klimato, geologinių žemėlapiai, bei kalvų šešėliavimo sluoksnius.\n\nKiekvienas iš šių žemėlapių gali būti atvaizduotas OsmAnd ekrane kaip pagrindinis (bazinis) arba kaip papildomas antsluoksnis ar posluoksnis kitame baziniame žemėlapyje (pvz., OsmAnd offline žemėlapiuose). Tam, kad posluoksninie žemėlapis būtų aiškiai matomas, galima išjungti OsmAnd vektorinių žemėlapių tam tikrus elementus meniu \"Konfigūruoti žemėlapį\".\n\nTailinius žemėlapius galimi atsisiųsti iš interneto arba paruošti naudojimui neprisijungus (ir rankiniu būdu įkelti į OsmAnd duomenų katalogą) kaip SQLite duomenų bazė, kurią galima paruošti įvairiais trečių šalių įrankiais. "</string>
+    <string name="osmand_rastermaps_plugin_description">"Šio įskiepio pagalba galite pasiekti daugybę žemėlapių rūšių internete, pradedant Openstreetmap (Mapnik), baigiant palydovinėmis nuotraukomis ir specialios paskirties sluoksnių, tokių kaip orų, klimato, geologinių žemėlapiai, bei kalvų šešėliavimo sluoksnius.
+
+
+Kiekvienas iš šių žemėlapių gali būti atvaizduotas OsmAnd ekrane kaip pagrindinis (bazinis) arba kaip papildomas antsluoksnis ar posluoksnis kitame baziniame žemėlapyje (pvz., OsmAnd offline žemėlapiuose). Tam, kad posluoksninie žemėlapis būtų aiškiai matomas, galima išjungti OsmAnd vektorinių žemėlapių tam tikrus elementus meniu \"Konfigūruoti žemėlapį\".
+
+
+Tailinius žemėlapius galimi atsisiųsti iš interneto arba paruošti naudojimui neprisijungus (ir rankiniu būdu įkelti į OsmAnd duomenų katalogą) kaip SQLite duomenų bazė, kurią galima paruošti įvairiais trečių šalių įrankiais.
+ "</string>
     <string name="osmand_background_plugin_description">Rodyti nustatymus sekimui ir navigacijai foniniame režime (išjungus ekraną) periodiškai žadinant GPS įrenginį.</string>
     <string name="osmand_accessibility_description">Šis įskiepis įgalina įrenginio specialiuosius nustatymus tiesiai OsmAnd. Tai, pavyzdžiui, palengvina TTS balso greičio reguliavimą, navigacijos ekrano kryptį, mąstelio reguliavimą.</string>
 
@@ -221,7 +230,9 @@
 
 
     <string name="download_files_not_enough_space">Neužtenka vietos parsiųsti %1$s MB (laisva: %2$s).</string>
-    <string name="download_files_question_space">Tikrai parsiųsti {0} failą(-us)? Tam prireiks {1} MB pastoviam saugojimui. Dabar laisvos vietos yra {2} MB.</string>
+    <string name="download_files_question_space">Tikrai parsiųsti {0} failą(-us)? 
+Tam prireiks {1} MB pastoviam saugojimui. 
+Dabar laisvos vietos yra {2} MB.</string>
 
 
     <string name="use_transparent_map_theme">Permatoma tema</string>
@@ -291,7 +302,7 @@
     <string name="favourites_edit_dialog_name">Pavadinimas</string>
     <string name="favourites_edit_dialog_category">Kategorija</string>
     <string name="shared_string_no_thanks">Ačiū, ne</string>
-    <string name="basemap_missing">Trūksta bazinio viso pasaulio (mažo mastelio, dengiančio visą pasaulį) žemėlapio. Kad programa galėtų sklandžiai veikti parsisiųskite World_basemap_x.obf.</string>
+    <string name="basemap_missing">Trūksta bazinio viso pasaulio (stmbaus mastelio, dengiančio visą pasaulį) žemėlapio. Kad programa galėtų sklandžiai veikti, parsisiųskite World_basemap_x.obf.</string>
     <string name="vector_data_missing">SD kortelėje nėra parsiųstų žemėlapių. Pirmiausia parsisiųskite žemėlapius, kad vėliau galėtumėte jais naudotis be interneto.</string>
     <string name="local_index_gpx_info_show">\n\nPaspauskite ir laikykite nustatymams atidaryti</string>
 
@@ -340,7 +351,7 @@
 \n\t\n\tJo aktyvavimui nueikite į \'Meniu\' → \'Konfigūruoti žemėlapį\' → \'Žemėlapių šaltiniai…\' → \'Parsiųsti vektoriniai žemėlapiai\'.</string>
     <string name="choose_audio_stream">Balso nurodymų išvestis</string>
     <string name="choose_audio_stream_descr">Pasirinkite kanalą, kuriuo skambės balso nurodymai</string>
-    <string name="voice_stream_voice_call">Balso skambučio audio</string>
+    <string name="voice_stream_voice_call">Balso skambučio audio (taip pat bando nutraukti automobilio BT stereosistemą)</string>
     <string name="voice_stream_notification">Perspėjimų audio</string>
     <string name="voice_stream_music">Multimedijos/muzikos audio</string>
     <string name="warning_tile_layer_not_downloadable">Programai neišeina parsiųsti žemėlapio sluoksnio %1$s, todėl įdiekite programą iš naujo.</string>
@@ -625,7 +636,7 @@
     <string name="search_online_address">Internete</string>
     <string name="max_level_download_tile">Didžiausias mastelis interneto žemėlapiui</string>
     <string name="max_level_download_tile_descr">Pasirinkti didžiausią internetinio žemėlapio mastelį parsiuntimui</string>
-    <string name="route_general_information">Visas atstumas %1$s, kelionės trukmė %2$d h %3$d m.</string>
+    <string name="route_general_information">Visas atstumas %1$s, kelionės trukmė %2$d h %3$d min.</string>
     <string name="router_service_descr">Pasirinkti navigacijos paslaugą internete arba įrenginyje</string>
     <string name="router_service">Navigacijos paslauga</string>
     <string name="sd_dir_not_accessible">Duomenų išsaugojimo segtuvas SD kortelėje nepasiekiamas!</string>
@@ -827,7 +838,7 @@
     <string name="select_animate_speedup">Pasirinkti animuotą maršruto pagreitinimą</string>
     <string name="osmand_parking_hours">Valandos</string>
     <string name="osmand_parking_minutes">Minutės</string>
-    <string name="osmand_parking_position_description_add_time">Mašina pastatyta</string>
+    <string name="osmand_parking_position_description_add_time">Automobilis pastatytas</string>
     <string name="use_compass_navigation_descr">Naudoti kompasą, kai neina nustatyti krypties</string>
     <string name="use_compass_navigation">Naudoti kompasą</string>
     <string name="route_updated_loc_found">Maršrutas bus perskaičiuotas, kai bus gauta dabartinė vieta</string>
@@ -897,9 +908,51 @@
 
     <string name="snap_to_road_descr">Poziciją rodyti ant kelių kai naviguojama</string>
     <string name="snap_to_road">Rodyti ant kelio</string>
-    <string name="osmand_long_description_1000_chars">" OsmAnd (OSM Automated Navigation Directions) OsmAnd yra atviro kodo programa naudojanti visą spektrą OpenStreetMap (OSM) duomenų. Visi žemėlapiai (vektoriniai ar lakštiniai) gali būti išsaugoti telefone ir naudojami be interneto prieigos. OsmAnd taip pat gali pasiūlyti maršruto skaičiavimo paslaugas internete ar įrenginyje, bei balso nurodymus kalionei apskaičiuotu maršrutu. Kelios pagrindinės savybės: - Veikia be interneto (išsaugokite parsiųstus žemėlapius ar jų lakštus įrenginyje) - Kompaktiški vektoriniai viso pasaulio žemėlapiai - Galimybė atsisiųsti šalies ar regiono žemėlapius tiesiog programoje - Adresų ir LV paieška nenaudojant interneto - Automobilio, dviračio ir pėsčiojo režimai Šios nemokamos OsmAnd versijos apribojimai: - Ribojamas žemėlapių parsiuntimų skaičius - Nėra prieigos prie iš Wikipedia parsiunčiamų LV OsmAnd yra aktyviai tobulinama ir mūsų projektas bei jo tolesnis progresas priklauso nuo finansinės paramos, kuri įgalina tolesnį vystymą ir naujų funkcijų kūrimą. Norime paskatinti jus nusipirkti OsmAnd+ programą arba finansiškai prisidėti prie specifinių funkcijų kūrimo arba šiaip paremti programą osmand.net puslapyje. "</string>
+    <string name="osmand_long_description_1000_chars">"
+ OsmAnd (OSM Automated Navigation Directions) 
+
+OsmAnd yra atviro kodo programa naudojanti visą spektrą OpenStreetMap (OSM) duomenų. Visi žemėlapiai (vektoriniai ar lakštiniai) gali būti išsaugoti telefone ir naudojami be interneto prieigos. OsmAnd taip pat gali pasiūlyti maršruto skaičiavimo paslaugas internete ar įrenginyje, bei balso nurodymus kalionei apskaičiuotu maršrutu. 
+
+Kelios pagrindinės savybės: 
+- Veikia be interneto (išsaugokite parsiųstus žemėlapius ar jų lakštus įrenginyje)
+- Kompaktiški vektoriniai viso pasaulio žemėlapiai 
+- Overlay of several map layers possible, like GPX or navigation tracks, Points of Interest, favorites, contour lines, public transport stops, additional maps with customizable transparency
+- Adresų ir LV paieška nenaudojant interneto
+- Offline routing for medium-range distances
+- Automobilio, dviračio ir pėsčiojo režimai:
+- optional automated day/night view switching
+- optional speed-dependent map zooming
+- optional map alignment according to compass or direction of motion
+- optional lane guidance, speed limit display, recorded and TTS voices
+
+Šios nemokamos OsmAnd versijos apribojimai: 
+- Ribojamas žemėlapių parsiuntimų skaičius 
+- Nėra prieigos prie iš Wikipedia parsiunčiamų LV 
+
+OsmAnd yra aktyviai tobulinama ir mūsų projektas bei jo tolesnis progresas priklauso nuo finansinės paramos, kuri įgalina tolesnį vystymą ir naujų funkcijų kūrimą. Norime paskatinti jus nusipirkti OsmAnd+ programą arba finansiškai prisidėti prie specifinių funkcijų kūrimo arba šiaip paremti programą osmand.net puslapyje.
+ "</string>
     <string name="osmand_plus_short_description_80_chars">OsmAnd - atviro kodo navigacijos programa su žemėlapiais</string>
-    <string name="osmand_plus_long_description_1000_chars">" OsmAnd+ (OSM Automated Navigation Directions) OsmAnd+ yra atviro kodo programa naudojanti visą spektrą OpenStreetMap (OSM) duomenų. Visi žemėlapiai (vektoriniai ar lakštiniai) gali būti išsaugoti telefono atmintyje ar atminties kortelėje ir naudojami be interneto prieigos. OsmAnd taip pat gali pasiūlyti maršruto skaičiavimo paslaugas internete ar įrenginyje, bei balso nurodymus kelionei apskaičiuotu maršrutu. OsmAnd+ yra mokama programos versiją, kurią pirkdami jūs remiate šį projektą, skiriate lėšas naujų funkcijų kūrimui ir tuo pačiu gaunate naujausius atnaujinimus. Savybės: - Veikia visiškai be interneto (išsaugokite parsiųstus žemėlapius ar jų lakštus įrenginyje) - Kompaktiški vektoriniai viso pasaulio žemėlapiai - Neribota galimybė parsisiųsti šalies ar regiono žemėlapius pačioje programoje - Parsiųstos Vikpedijos funkcionalumas (parsisiųskite LV iš Vikipedijos) puikiai tinkantis lankytinų objektų pažinimui - Galimybė sudėti kelis žemėlapių sluoksnius, pvz. GPX ar kelionės istoriją, Lankytinas, Išsaugotas vietas, kontūrų linijas, viešo transporto sustojimus, papildomus žemėlapius pasirenkant jų permatomumą - Adresų ir LV paieška nenaudojant interneto - Trumpų maršrutų skaičiavimas nenaudojant interneto (eksperimentinė funkcija) - Automobilio, dviračio ir pėsčiojo režimai su: - pasirenkamu automatiniu dienos/nakties vaizdo perjungimu - pasirenkamas prie judėjimo greičio priderinamas žemėlapio didinimas - pasirenkamas žemėlapio pasukimas pagal kompasą arba judėjimo kryptį - pasirenkamas eismo juostų keitimo nurodymų įjungimas, greičių apribojimo rodymas, įrašyti arba sintetiniai (TTS) balsai "</string>
+    <string name="osmand_plus_long_description_1000_chars">"
+ OsmAnd+ (OSM Automated Navigation Directions) 
+
+OsmAnd+ yra atviro kodo programa naudojanti visą spektrą OpenStreetMap (OSM) duomenų. Visi žemėlapiai (vektoriniai ar lakštiniai) gali būti išsaugoti telefono atmintyje ar atminties kortelėje ir naudojami be interneto prieigos. OsmAnd taip pat gali pasiūlyti maršruto skaičiavimo paslaugas internete ar įrenginyje, bei balso nurodymus kelionei apskaičiuotu maršrutu. 
+
+OsmAnd+ yra mokama programos versiją, kurią pirkdami jūs remiate šį projektą, skiriate lėšas naujų funkcijų kūrimui ir tuo pačiu gaunate naujausius atnaujinimus. 
+
+Savybės: 
+- Veikia visiškai be interneto (išsaugokite parsiųstus žemėlapius ar jų lakštus įrenginyje)
+ - Kompaktiški vektoriniai viso pasaulio žemėlapiai 
+- Neribota galimybė parsisiųsti šalies ar regiono žemėlapius pačioje programoje 
+- Parsiųstos Vikpedijos funkcionalumas (parsisiųskite LV iš Vikipedijos) puikiai tinkantis lankytinų objektų pažinimui 
+- Galimybė sudėti kelis žemėlapių sluoksnius, pvz. GPX ar kelionės istoriją, Lankytinas, Išsaugotas vietas, kontūrų linijas, viešo transporto sustojimus, papildomus žemėlapius pasirenkant jų permatomumą 
+- Adresų ir LV paieška nenaudojant interneto 
+- Trumpų maršrutų skaičiavimas nenaudojant interneto (eksperimentinė funkcija) 
+- Automobilio, dviračio ir pėsčiojo režimai su: 
+- pasirenkamu automatiniu dienos/nakties vaizdo perjungimu 
+- pasirenkamas prie judėjimo greičio priderinamas žemėlapio didinimas 
+- pasirenkamas žemėlapio pasukimas pagal kompasą arba judėjimo kryptį 
+- pasirenkamas eismo juostų keitimo nurodymų įjungimas, greičių apribojimo rodymas, įrašyti arba sintetiniai (TTS) balsai
+ "</string>
 
     <string name="osmand_parking_event">Pasiimti automobilį iš stovėjimo vietos</string>
 
@@ -908,7 +961,7 @@
     <string name="add_as_last_destination_point">Pridėti kaip paskutinį tarpinį tikslą</string>
     <string name="add_as_first_destination_point">Pridėti kaip pirmą tarpinį tikslą</string>
     <string name="replace_destination_point">Pakeisti kelionės tikslą</string>
-    <string name="new_destination_point_dialog">Jūs jau turite nustatę kelionės tikslą.</string>
+    <string name="new_destination_point_dialog">Jūs jau turite nustatę kelionės tikslą:</string>
     <string name="target_point">Tikslas %1$s</string>
     <string name="target_points">Tikslai</string>
     <string name="intermediate_point_too_far">Tarpinis tikslas %1$s yra per toli nuo artimiausio kelio.</string>
@@ -1051,8 +1104,79 @@
     <string name="osmand_play_title_30_chars">OsmAnd žemėlapiai ir navigacija</string>
     <string name="osmand_plus_play_title_30_chars">OsmAnd+ žemėlapiai ir navigacija</string>
 
-    <string name="osmand_plus_extended_description_4000_chars">" OsmAnd (OSM Automated Navigation Directions) yra žemėlapių ir navigacijos programa naudojanti nemokamus, visą pasaulį dengiančius, aukštos kokybės OpenStreetMap (OSM) žemėlapius. Visi žemėlapiai gali būti išsaugoti jūsų įrenginio atminties kortelėje ir naudojami be interneto ryšio. Naudodama jūsų įrenginio GPS imtuvą OsmAnd apskaičiuoja maršrutą, kelionės nuorodas teikia vizualiai ir balsu tiek automobiliui, tiek ir dviračiui bei pėsčiajam. Visas pagrindinis funkcionalumas veikia tiek su, tiek ir be interneto ryšio. OsmAnd+ yra mokama programos versiją, kurią pirkdami jūs remiate šį projektą, skiriate lėšas naujų funkcijų kūrimui ir tuo pačiu gaunate naujausius atnaujinimus. Pagrindinės funkcijos: Navigacija - Naudoja internetą (greita) arba be interneto (nereikalingas joks ryšys kai jūs užsienyje) - Kelionės nuorodos balsu (įrašyti arba kompiuteriniai balsai) - Galima įjungti nuorodas eismo juostų laikymosi, gatvių pavadinimų rodymo, numatomo atvykimo laiko - Galima nurodyti tarpinius maršruto tikslus - Automatinis maršruto perskaičiavimas jei nukrypstate nuo maršruto - Ieškokite vietų pagal adresus, pagal tipus (t.y.: restoranas, viešbutis, kuro kolonėlė, muziejus), arba pagal koordinates Žemėlapio peržiūra - Jūsų vietos ir orientacijos rodymas žemėlapyje - Galite pasirinkti žemėlapio orientavimą pagal kompasą ar jūsų judėjimo kryptį - Išsaugokite svarbias vietas kaip Įsimintas - LV (Lankytinų vietų) aplink jus rodymas - Gali naudoti kitus žemėlapius lakštus tiesiogiai iš interneto - Gali rodyti palydovo vaizdą (iš Bing) - Gali rodyti įvairius papildomus sluoksnius kaip pvz. turistinius/navigacijos GPX maršrutus ar papildomus žemėlapius su keičiamu skaidrumu - Pasirinktinai vietų pavadinimus galima rodyti angliškai, vietine kalba arba fonetiškai Naudokitės OpenStreeMap ir Vikipedijos informacija - Kokybiška informacija iš geriausių pasaulio kolaboravimo projektų - Pasaulio žemėlapiai iš OpenStreeMap, atskirai šalims ar regionams - LV rekomendacijos iš Vikipedijos - Neribotas nemokamas atsisiuntimas tiesiai iš programos - Visada naujausi žemėlapiai (atnaujinami mažiausiai kartą per mėnesį) - Kompaktiški parsisiunčiami vektoriniai žemėlapiai - Galimybė pasirinkti pilną arba tik kelių tinklo žemėlapį (Pvz. Visa Japonija užima 700MB, o kelių žemėlapis tik 200MB) - Taip pat palaikomi internetiniai ar laikinai išsaugoti žemėlapiai Saugumo funkcionalmas - Pasirenkamas automatizuotas dienos/nakties rodinio perjungimas - Pasirenkamas greičio apribojimų rodymas su priminimu jei jį viršijate - Pasirenkamas žemėlapio mąstelio pagal judėjimo greitį nustatymas - Dalykitės savo buvimo vieta, kad jūsų draugai galėtų jus rasti Dviračio ar pėsčiojo funkcionalumas - Žemėlapiuose pateikiami takeliai, pėsčiųjų ar dviračių takai - Maršruto skaičiavimo režimai pėstiesiems ir dviratininkams - Pasirinktinai rodomos viešojo transporto (autobusų, tramvajų, traukinių) stotelės su maršrutų pavadinimais - Galimybė išsaugoti nukeliautą maršrutą į GPX failą ar internete - Pasirenkamas greičio ir aukščio rodymas - Kontūrinių linijų ir kalnų šešėlių (su įskiepiu) rodymas Tiesiogiai prisidėkite prie OpenStreetMap - Praneškite apie žemėlapių klaidas - Įkelkite nuvažiuotų maršrutų GPX failus tiesiogiai iš programos - Pridėkite LV ir iš karto įkelkite į OSM (arba galite padaryti tai ir vėliau jei neturite interneto) - Pasirinktinai galima įrašyti judėjimo istoriją (kai įrenginys yra užmogdytas) OsmAnd yra atviro kodo programa, kuri aktyviai tobulinama. Kiekvienas gali prisidėti prie programos vystymo pranešdamas apie klaidas, vertimais ar programuodamas naujas funckcijas. Šis projektas yra labai gyvas ir pastoviai vystomas įvairiapusio kurėjų ir naudotojų bendradarbiavimo pagalba. Projekto progresas taip pat priklauso nuo finansinės paramos, kuri reikalinga naujų funkcijų vystymui, programavimui ir testavimui. Pirkdami OsmAnd+ jūs padėsite programą padaryti dar geresne! Taip pat galima finansuoti specifinį naują funkcionalumą arba tiesiog paremti projektą tiesiogiai osmand.net puslapyje. Apytikslis žemėlapių padengimas ir kokybė - Vakarų Europa: **** - Rytų Europa: *** - Rusija: *** - Šiaurės Amerika: *** - Pietų Amerika: ** - Azija: ** - Japonija ir Korėja: *** - Artimieji Rytai: ** - Afrika: ** - Antarktida: * Šalių žemėlapių sąrašas (praktiškai visas pasaulis!), pavadinimai angliški: Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, Argentina, Armenia, Aruba, Australia, Austria, Azerbaijan, Bahamas, Bahrain, Bangladesh, Barbados, Belarus, Belgium, Belize, Benin, Bermuda, Bhutan, Bolivia, Bonaire, Bosnia and Herzegovina, Botswana, Brazil, British Virgin Islands, Brunei, Bulgaria, Burkina Faso, Burundi, Cambodia, Cameroon, Canada, Cape Verde, Central African Republic, Chad, Chile, China, Colombia, Comoros, Congo, Costa Rica, Ivory Coast, Croatia, Cuba, Curaçao, Cyprus, Czech Republic, Denmark, Djibouti, Dominica, Dominican Republic, Ecuador, Egypt, El Salvador, Equatorial Guinea, Eritrea, Estonia, Ethiopia, Fiji, Finland, France, French Guiana, French Polynesia, Gabon, Gambia, Georgia, Germany, Ghana, Gibraltar, Greece, Greenland, Grenada, Guadeloupe, Guam, Guatemala, Guernsey, Guinea, Guinea-Bissau, Guyana, Haiti, Vatican, Honduras, Hong Kong, Hungary, Iceland, India, Indonesia, Iran, Iraq, Ireland, Isle of Man, Israel, Italy, Jamaica, Japan, Jersey, Jordan, Kazakhstan, Kenya, Kiribati, North Korea and South Korea, Kuwait, Kyrgyzstan, Laos, Latvia, Lebanon, Lesotho, Liberia, Libya, Liechtenstein, Lithuania, Luxembourg, Macao, Macedonia, Madagascar, Malawi, Malaysia, Maldives, Mali, Malta, Martinique, Mauritania, Mauritius, Mayotte, Mexico, Micronesia, Moldova, Monaco, Mongolia, Montenegro, Montserrat, Morocco, Mozambique, Myanmar, Namibia, Nauru, Nepal, Netherlands, Netherlands Antilles, New Caledonia, New Zealand, Nicaragua, Niger, Nigeria, Norway, Oman, Pakistan, Palau, Palestinian Territory, Panama, Papua New Guinea, Paraguay, Peru, Philippines, Poland, Portugal, Puerto Rico, Qatar, Romania, Russia, Rwanda, Saint Barthelemy, Saint Helena, Saint Kitts and Nevis, Saint Lucia, Saint Martin, Saint Pierre and Miquelon, Saint Vincent and the Grenadines, Samoa, San Marino, Saudi Arabia, Senegal, Serbia, Seychelles, Sierra Leone, Singapore, Slovakia, Slovenia, Somalia, South Africa, South Georgia, South Sudan, Spain, Sri Lanka, Sudan, Suriname, Swaziland, Sweden, Switzerland, Syria, Taiwan, Tajikistan, Tanzania, Thailand, Timor-Leste, Togo, Tokelau, Tonga, Trinidad and Tobago, Tunisia, Turkey, Turkmenistan, Tuvalu, Uganda, Ukraine, United Arab Emirates, United Kingdom (UK), United States of America (USA), Uruguay, Uzbekistan, Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Zimbabwe. "</string>
-    <string name="osmand_extended_description_4000_chars">" OsmAnd (OSM Automated Navigation Directions) yra žemėlapių ir navigacijos programa naudojanti nemokamus, visą pasaulį dengiančius, aukštos kokybės OpenStreetMap (OSM) žemėlapius. Visi žemėlapiai gali būti išsaugoti jūsų įrenginio atminties kortelėje ir naudojami be interneto ryšio. Naudodama jūsų įrenginio GPS imtuvą OsmAnd apskaičiuoja maršrutą, kelionės nuorodas teikia vizualiai ir balsu tiek automobiliui, tiek ir dviračiui bei pėsčiajam. Visas pagrindinis funkcionalumas veikia tiek su, tiek ir be interneto ryšio. Pagrindinės funkcijos: Navigacija - Naudoja internetą (greita) arba be interneto (nereikalingas joks ryšys kai jūs užsienyje) - Kelionės nuorodos balsu (įrašyti arba kompiuteriniai balsai) - Galima įjungti nuorodas eismo juostų laikymosi, gatvių pavadinimų rodymo, numatomo atvykimo laiko - Galima nurodyti tarpinius maršruto tikslus - Automatinis maršruto perskaičiavimas jei nukrypstate nuo maršruto - Ieškokite vietų pagal adresus, pagal tipus (t.y.: restoranas, viešbutis, kuro kolonėlė, muziejus), arba pagal koordinates Žemėlapio peržiūra - Jūsų vietos ir orientacijos rodymas žemėlapyje - Galite pasirinkti žemėlapio orientavimą pagal kompasą ar jūsų judėjimo kryptį - Išsaugokite svarbias vietas kaip Įsimintas - LV (Lankytinų vietų) aplink jus rodymas - Gali naudoti kitus žemėlapius lakštus tiesiogiai iš interneto - Gali rodyti palydovo vaizdą (iš Bing) - Gali rodyti įvairius papildomus sluoksnius kaip pvz. turistinius/navigacijos GPX maršrutus ar papildomus žemėlapius su keičiamu skaidrumu - Pasirinktinai vietų pavadinimus galima rodyti angliškai, vietine kalba arba fonetiškai Naudokitės OpenStreeMap ir Vikipedijos informacija - Kokybiška informacija iš geriausių pasaulio kolaboravimo projektų - Pasaulio žemėlapiai iš OpenStreeMap, atskirai šalims ar regionams - LV rekomendacijos iš Vikipedijos (tik mokamoje versijoje) - Neribotas nemokamas atsisiuntimas tiesiai iš programos (nemokamoje versijoje ribojama iki 16 žemėlapių) - Visada naujausi žemėlapiai (atnaujinami mažiausiai kartą per mėnesį) - Kompaktiški parsisiunčiami vektoriniai žemėlapiai - Galimybė pasirinkti pilną arba tik kelių tinklo žemėlapį (Pvz., visa Japonija užima 700MB, o kelių žemėlapis tik 200MB) - Taip pat palaikomi internetiniai ar laikinai išsaugoti žemėlapiai Saugumo funkcionalumas - Pasirenkamas automatizuotas dienos/nakties rodinio perjungimas - Pasirenkamas greičio apribojimų rodymas su priminimu jei jį viršijate - Pasirenkamas žemėlapio mastelio pagal judėjimo greitį nustatymas - Dalykitės savo buvimo vieta, kad jūsų draugai galėtų jus rasti Dviračio ar pėsčiojo funkcionalumas - Žemėlapiuose pateikiami takeliai, pėsčiųjų ar dviračių takai - Maršruto skaičiavimo režimai pėstiesiems ir dviratininkams - Pasirinktinai rodomos viešojo transporto (autobusų, tramvajų, traukinių) stotelės su maršrutų pavadinimais - Galimybė išsaugoti nukeliautą maršrutą į GPX failą ar internete - Pasirenkamas greičio ir aukščio rodymas - Kontūrinių linijų ir kalnų šešėlių (su įskiepiu) rodymas Tiesiogiai prisidėkite prie OpenStreetMap - Praneškite apie žemėlapių pastabas - Įkelkite nuvažiuotų maršrutų GPX failus tiesiogiai iš programos - Pridėkite LV ir iš karto įkelkite į OSM (arba galite padaryti tai ir vėliau jei neturite interneto) - Pasirinktinai galima įrašyti judėjimo istoriją (kai įrenginys yra užmigdytas) OsmAnd yra atviro kodo programa, kuri aktyviai tobulinama. Kiekvienas gali prisidėti prie programos vystymo pranešdamas apie pastabas, vertimais ar programuodamas naujas funkcijas. Šis projektas yra labai gyvas ir pastoviai vystomas įvairiapusio kūrėjų ir naudotojų bendradarbiavimo pagalba. Projekto progresas taip pat priklauso nuo finansinės paramos, kuri reikalinga naujų funkcijų vystymui, programavimui ir testavimui. Pirkdami OsmAnd+ jūs padėsite programą padaryti dar geresne! Taip pat galima finansuoti specifinį naują funkcionalumą arba tiesiog paremti projektą tiesiogiai osmand.net puslapyje. Apytikslis žemėlapių padengimas ir kokybė - Vakarų Europa: **** - Rytų Europa: *** - Rusija: *** - Šiaurės Amerika: *** - Pietų Amerika: ** - Azija: ** - Japonija ir Korėja: *** - Artimieji Rytai: ** - Afrika: ** - Antarktida: * Šalių žemėlapių sąrašas (praktiškai visas pasaulis!), pavadinimai angliški: Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, Argentina, Armenia, Aruba, Australia, Austria, Azerbaijan, Bahamas, Bahrain, Bangladesh, Barbados, Belarus, Belgium, Belize, Benin, Bermuda, Bhutan, Bolivia, Bonaire, Bosnia and Herzegovina, Botswana, Brazil, British Virgin Islands, Brunei, Bulgaria, Burkina Faso, Burundi, Cambodia, Cameroon, Canada, Cape Verde, Central African Republic, Chad, Chile, China, Colombia, Comoros, Congo, Costa Rica, Ivory Coast, Croatia, Cuba, Curaçao, Cyprus, Czech Republic, Denmark, Djibouti, Dominica, Dominican Republic, Ecuador, Egypt, El Salvador, Equatorial Guinea, Eritrea, Estonia, Ethiopia, Fiji, Finland, France, French Guiana, French Polynesia, Gabon, Gambia, Georgia, Germany, Ghana, Gibraltar, Greece, Greenland, Grenada, Guadeloupe, Guam, Guatemala, Guernsey, Guinea, Guinea-Bissau, Guyana, Haiti, Vatican, Honduras, Hong Kong, Hungary, Iceland, India, Indonesia, Iran, Iraq, Ireland, Isle of Man, Israel, Italy, Jamaica, Japan, Jersey, Jordan, Kazakhstan, Kenya, Kiribati, North Korea and South Korea, Kuwait, Kyrgyzstan, Laos, Latvia, Lebanon, Lesotho, Liberia, Libya, Liechtenstein, Lithuania, Luxembourg, Macao, Macedonia, Madagascar, Malawi, Malaysia, Maldives, Mali, Malta, Martinique, Mauritania, Mauritius, Mayotte, Mexico, Micronesia, Moldova, Monaco, Mongolia, Montenegro, Montserrat, Morocco, Mozambique, Myanmar, Namibia, Nauru, Nepal, Netherlands, Netherlands Antilles, New Caledonia, New Zealand, Nicaragua, Niger, Nigeria, Norway, Oman, Pakistan, Palau, Palestinian Territory, Panama, Papua New Guinea, Paraguay, Peru, Philippines, Poland, Portugal, Puerto Rico, Qatar, Romania, Russia, Rwanda, Saint Barthelemy, Saint Helena, Saint Kitts and Nevis, Saint Lucia, Saint Martin, Saint Pierre and Miquelon, Saint Vincent and the Grenadines, Samoa, San Marino, Saudi Arabia, Senegal, Serbia, Seychelles, Sierra Leone, Singapore, Slovakia, Slovenia, Somalia, South Africa, South Georgia, South Sudan, Spain, Sri Lanka, Sudan, Suriname, Swaziland, Sweden, Switzerland, Syria, Taiwan, Tajikistan, Tanzania, Thailand, Timor-Leste, Togo, Tokelau, Tonga, Trinidad and Tobago, Tunisia, Turkey, Turkmenistan, Tuvalu, Uganda, Ukraine, United Arab Emirates, United Kingdom (UK), United States of America (USA), Uruguay, Uzbekistan, Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Zimbabwe. "</string>
+    <string name="osmand_plus_extended_description_4000_chars">"
+OsmAnd (OSM Automated Navigation Directions) yra žemėlapių ir navigacijos programa naudojanti nemokamus, visą pasaulį dengiančius, aukštos kokybės OpenStreetMap (OSM) žemėlapius. Visi žemėlapiai gali būti išsaugoti jūsų įrenginio atminties kortelėje ir naudojami be interneto ryšio. Naudodama jūsų įrenginio GPS imtuvą OsmAnd apskaičiuoja maršrutą, kelionės nuorodas teikia vizualiai ir balsu tiek automobiliui, tiek ir dviračiui bei pėsčiajam. Visas pagrindinis funkcionalumas veikia tiek su, tiek ir be interneto ryšio. OsmAnd+ yra mokama programos versiją, kurią pirkdami jūs remiate šį projektą, skiriate lėšas naujų funkcijų kūrimui ir tuo pačiu gaunate naujausius atnaujinimus. Pagrindinės funkcijos: Navigacija - Naudoja internetą (greita) arba be interneto (nereikalingas joks ryšys kai jūs užsienyje) - Kelionės nuorodos balsu (įrašyti arba kompiuteriniai balsai) - Galima įjungti nuorodas eismo juostų laikymosi, gatvių pavadinimų rodymo, numatomo atvykimo laiko - Galima nurodyti tarpinius maršruto tikslus - Automatinis maršruto perskaičiavimas jei nukrypstate nuo maršruto - Ieškokite vietų pagal adresus, pagal tipus (t.y.: restoranas, viešbutis, kuro kolonėlė, muziejus), arba pagal koordinates Žemėlapio peržiūra - Jūsų vietos ir orientacijos rodymas žemėlapyje - Galite pasirinkti žemėlapio orientavimą pagal kompasą ar jūsų judėjimo kryptį - Išsaugokite svarbias vietas kaip Įsimintas - LV (Lankytinų vietų) aplink jus rodymas - Gali naudoti kitus žemėlapius lakštus tiesiogiai iš interneto - Gali rodyti palydovo vaizdą (iš Bing) - Gali rodyti įvairius papildomus sluoksnius kaip pvz. turistinius/navigacijos GPX maršrutus ar papildomus žemėlapius su keičiamu skaidrumu - Pasirinktinai vietų pavadinimus galima rodyti angliškai, vietine kalba arba fonetiškai Naudokitės OpenStreeMap ir Vikipedijos informacija - Kokybiška informacija iš geriausių pasaulio kolaboravimo projektų - Pasaulio žemėlapiai iš OpenStreeMap, atskirai šalims ar regionams - LV rekomendacijos iš Vikipedijos - Neribotas nemokamas atsisiuntimas tiesiai iš programos - Visada naujausi žemėlapiai (atnaujinami mažiausiai kartą per mėnesį) - Kompaktiški parsisiunčiami vektoriniai žemėlapiai - Galimybė pasirinkti pilną arba tik kelių tinklo žemėlapį (Pvz. Visa Japonija užima 700MB, o kelių žemėlapis tik 200MB) - Taip pat palaikomi internetiniai ar laikinai išsaugoti žemėlapiai Saugumo funkcionalmas - Pasirenkamas automatizuotas dienos/nakties rodinio perjungimas - Pasirenkamas greičio apribojimų rodymas su priminimu jei jį viršijate - Pasirenkamas žemėlapio mąstelio pagal judėjimo greitį nustatymas - Dalykitės savo buvimo vieta, kad jūsų draugai galėtų jus rasti Dviračio ar pėsčiojo funkcionalumas - Žemėlapiuose pateikiami takeliai, pėsčiųjų ar dviračių takai - Maršruto skaičiavimo režimai pėstiesiems ir dviratininkams - Pasirinktinai rodomos viešojo transporto (autobusų, tramvajų, traukinių) stotelės su maršrutų pavadinimais - Galimybė išsaugoti nukeliautą maršrutą į GPX failą ar internete - Pasirenkamas greičio ir aukščio rodymas - Kontūrinių linijų ir kalnų šešėlių (su įskiepiu) rodymas Tiesiogiai prisidėkite prie OpenStreetMap - Praneškite apie žemėlapių klaidas - Įkelkite nuvažiuotų maršrutų GPX failus tiesiogiai iš programos - Pridėkite LV ir iš karto įkelkite į OSM (arba galite padaryti tai ir vėliau jei neturite interneto) - Pasirinktinai galima įrašyti judėjimo istoriją (kai įrenginys yra užmogdytas) OsmAnd yra atviro kodo programa, kuri aktyviai tobulinama. Kiekvienas gali prisidėti prie programos vystymo pranešdamas apie klaidas, vertimais ar programuodamas naujas funckcijas. Šis projektas yra labai gyvas ir pastoviai vystomas įvairiapusio kurėjų ir naudotojų bendradarbiavimo pagalba. Projekto progresas taip pat priklauso nuo finansinės paramos, kuri reikalinga naujų funkcijų vystymui, programavimui ir testavimui. Pirkdami OsmAnd+ jūs padėsite programą padaryti dar geresne! Taip pat galima finansuoti specifinį naują funkcionalumą arba tiesiog paremti projektą tiesiogiai osmand.net puslapyje. Apytikslis žemėlapių padengimas ir kokybė - Vakarų Europa: **** - Rytų Europa: *** - Rusija: *** - Šiaurės Amerika: *** - Pietų Amerika: ** - Azija: ** - Japonija ir Korėja: *** - Artimieji Rytai: ** - Afrika: ** - Antarktida: * Šalių žemėlapių sąrašas (praktiškai visas pasaulis!), pavadinimai angliški: Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, Argentina, Armenia, Aruba, Australia, Austria, Azerbaijan, Bahamas, Bahrain, Bangladesh, Barbados, Belarus, Belgium, Belize, Benin, Bermuda, Bhutan, Bolivia, Bonaire, Bosnia and Herzegovina, Botswana, Brazil, British Virgin Islands, Brunei, Bulgaria, Burkina Faso, Burundi, Cambodia, Cameroon, Canada, Cape Verde, Central African Republic, Chad, Chile, China, Colombia, Comoros, Congo, Costa Rica, Ivory Coast, Croatia, Cuba, Curaçao, Cyprus, Czech Republic, Denmark, Djibouti, Dominica, Dominican Republic, Ecuador, Egypt, El Salvador, Equatorial Guinea, Eritrea, Estonia, Ethiopia, Fiji, Finland, France, French Guiana, French Polynesia, Gabon, Gambia, Georgia, Germany, Ghana, Gibraltar, Greece, Greenland, Grenada, Guadeloupe, Guam, Guatemala, Guernsey, Guinea, Guinea-Bissau, Guyana, Haiti, Vatican, Honduras, Hong Kong, Hungary, Iceland, India, Indonesia, Iran, Iraq, Ireland, Isle of Man, Israel, Italy, Jamaica, Japan, Jersey, Jordan, Kazakhstan, Kenya, Kiribati, North Korea and South Korea, Kuwait, Kyrgyzstan, Laos, Latvia, Lebanon, Lesotho, Liberia, Libya, Liechtenstein, Lithuania, Luxembourg, Macao, Macedonia, Madagascar, Malawi, Malaysia, Maldives, Mali, Malta, Martinique, Mauritania, Mauritius, Mayotte, Mexico, Micronesia, Moldova, Monaco, Mongolia, Montenegro, Montserrat, Morocco, Mozambique, Myanmar, Namibia, Nauru, Nepal, Netherlands, Netherlands Antilles, New Caledonia, New Zealand, Nicaragua, Niger, Nigeria, Norway, Oman, Pakistan, Palau, Palestinian Territory, Panama, Papua New Guinea, Paraguay, Peru, Philippines, Poland, Portugal, Puerto Rico, Qatar, Romania, Russia, Rwanda, Saint Barthelemy, Saint Helena, Saint Kitts and Nevis, Saint Lucia, Saint Martin, Saint Pierre and Miquelon, Saint Vincent and the Grenadines, Samoa, San Marino, Saudi Arabia, Senegal, Serbia, Seychelles, Sierra Leone, Singapore, Slovakia, Slovenia, Somalia, South Africa, South Georgia, South Sudan, Spain, Sri Lanka, Sudan, Suriname, Swaziland, Sweden, Switzerland, Syria, Taiwan, Tajikistan, Tanzania, Thailand, Timor-Leste, Togo, Tokelau, Tonga, Trinidad and Tobago, Tunisia, Turkey, Turkmenistan, Tuvalu, Uganda, Ukraine, United Arab Emirates, United Kingdom (UK), United States of America (USA), Uruguay, Uzbekistan, Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Zimbabwe.
+ "</string>
+    <string name="osmand_extended_description_4000_chars">"
+OsmAnd (OSM Automated Navigation Directions) yra žemėlapių ir navigacijos programa naudojanti nemokamus, visą pasaulį dengiančius, aukštos kokybės OpenStreetMap (OSM) žemėlapius. Visi žemėlapiai gali būti išsaugoti jūsų įrenginio atminties kortelėje ir naudojami be interneto ryšio. Naudodama jūsų įrenginio GPS imtuvą OsmAnd apskaičiuoja maršrutą, kelionės nuorodas teikia vizualiai ir balsu tiek automobiliui, tiek ir dviračiui bei pėsčiajam. Visas pagrindinis funkcionalumas veikia tiek su, tiek ir be interneto ryšio. 
+
+Pagrindinės funkcijos:
+ 
+Navigacija
+ - Naudoja internetą (greita) arba be interneto (nereikalingas joks ryšys kai jūs užsienyje) 
+ - Kelionės nuorodos balsu (įrašyti arba kompiuteriniai balsai) 
+ - Galima įjungti nuorodas eismo juostų laikymosi, gatvių pavadinimų rodymo, numatomo atvykimo laiko
+ - Galima nurodyti tarpinius maršruto tikslus
+ - Automatinis maršruto perskaičiavimas jei nukrypstate nuo maršruto
+ - Ieškokite vietų pagal adresus, pagal tipus (t.y.: restoranas, viešbutis, kuro kolonėlė, muziejus), arba pagal koordinates 
+
+Žemėlapio peržiūra
+ - Jūsų vietos ir orientacijos rodymas žemėlapyje
+ - Galite pasirinkti žemėlapio orientavimą pagal kompasą ar jūsų judėjimo kryptį 
+ - Išsaugokite svarbias vietas kaip Įsimintas
+ - LV (Lankytinų vietų) aplink jus rodymas
+ - Gali naudoti kitus žemėlapius lakštus tiesiogiai iš interneto
+ - Gali rodyti palydovo vaizdą (iš Bing)
+ - Gali rodyti įvairius papildomus sluoksnius kaip pvz. turistinius/navigacijos GPX maršrutus ar papildomus žemėlapius su keičiamu skaidrumu
+ - Pasirinktinai vietų pavadinimus galima rodyti angliškai, vietine kalba arba fonetiškai 
+
+Naudokitės OpenStreetMap ir Vikipedijos informacija:
+ - Kokybiška informacija iš geriausių pasaulio kolaboravimo projektų
+ - Pasaulio žemėlapiai iš OpenStreeMap, atskirai šalims ar regionams
+ - LV rekomendacijos iš Vikipedijos (tik mokamoje versijoje)
+ - Neribotas nemokamas atsisiuntimas tiesiai iš programos (nemokamoje versijoje ribojama iki 16 žemėlapių)
+ - Visada naujausi žemėlapiai (atnaujinami mažiausiai kartą per mėnesį)
+ - Kompaktiški parsisiunčiami vektoriniai žemėlapiai
+ - Galimybė pasirinkti pilną arba tik kelių tinklo žemėlapį (Pvz., visa Japonija užima 700MB, o kelių žemėlapis tik 200MB)
+ - Taip pat palaikomi internetiniai ar laikinai išsaugoti žemėlapiai 
+
+Saugumo funkcionalumas
+ - Pasirenkamas automatizuotas dienos/nakties rodinio perjungimas
+ - Pasirenkamas greičio apribojimų rodymas su priminimu jei jį viršijate
+ - Pasirenkamas žemėlapio mastelio pagal judėjimo greitį nustatymas
+ - Dalykitės savo buvimo vieta, kad jūsų draugai galėtų jus rasti 
+
+Dviračio ar pėsčiojo funkcionalumas
+ - Žemėlapiuose pateikiami takeliai, pėsčiųjų ar dviračių takai
+ - Maršruto skaičiavimo režimai pėstiesiems ir dviratininkams
+ - Pasirinktinai rodomos viešojo transporto (autobusų, tramvajų, traukinių) stotelės su maršrutų pavadinimais
+ - Galimybė išsaugoti nukeliautą maršrutą į GPX failą ar internete
+ - Pasirenkamas greičio ir aukščio rodymas
+ - Kontūrinių linijų ir kalnų šešėlių (su įskiepiu) rodymas
+
+Tiesiogiai prisidėkite prie OpenStreetMap
+ - Praneškite apie žemėlapių pastabas
+ - Įkelkite nuvažiuotų maršrutų GPX failus tiesiogiai iš programos
+ - Pridėkite LV ir iš karto įkelkite į OSM (arba galite padaryti tai ir vėliau, jei neturite interneto)
+ - Pasirinktinai galima įrašyti judėjimo istoriją (kai įrenginys yra užmigdytas) 
+
+OsmAnd yra atviro kodo programa, kuri aktyviai tobulinama. Kiekvienas gali prisidėti prie programos vystymo pranešdamas apie pastabas, vertimais ar programuodamas naujas funkcijas. Šis projektas yra labai gyvas ir pastoviai vystomas įvairiapusio kūrėjų ir naudotojų bendradarbiavimo pagalba. Projekto progresas taip pat priklauso nuo finansinės paramos, kuri reikalinga naujų funkcijų vystymui, programavimui ir testavimui. Pirkdami OsmAnd+ jūs padėsite programą padaryti dar geresne! Taip pat galima finansuoti specifinį naują funkcionalumą arba tiesiog paremti projektą tiesiogiai osmand.net puslapyje.
+
+Apytikslis žemėlapių padengimas ir kokybė
+ - Vakarų Europa: **** 
+ - Rytų Europa: ***
+ - Rusija: ***
+ - Šiaurės Amerika: ***
+ - Pietų Amerika: **
+ - Azija: **
+ - Japonija ir Korėja: ***
+ - Artimieji Rytai: **
+ - Afrika: **
+ - Antarktida: * 
+
+Šalių žemėlapių sąrašas (praktiškai visas pasaulis!), pavadinimai angliški:
+Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, Argentina, Armenia, Aruba, Australia, Austria, Azerbaijan, Bahamas, Bahrain, Bangladesh, Barbados, Belarus, Belgium, Belize, Benin, Bermuda, Bhutan, Bolivia, Bonaire, Bosnia and Herzegovina, Botswana, Brazil, British Virgin Islands, Brunei, Bulgaria, Burkina Faso, Burundi, Cambodia, Cameroon, Canada, Cape Verde, Central African Republic, Chad, Chile, China, Colombia, Comoros, Congo, Costa Rica, Ivory Coast, Croatia, Cuba, Curaçao, Cyprus, Czech Republic, Denmark, Djibouti, Dominica, Dominican Republic, Ecuador, Egypt, El Salvador, Equatorial Guinea, Eritrea, Estonia, Ethiopia, Fiji, Finland, France, French Guiana, French Polynesia, Gabon, Gambia, Georgia, Germany, Ghana, Gibraltar, Greece, Greenland, Grenada, Guadeloupe, Guam, Guatemala, Guernsey, Guinea, Guinea-Bissau, Guyana, Haiti, Vatican, Honduras, Hong Kong, Hungary, Iceland, India, Indonesia, Iran, Iraq, Ireland, Isle of Man, Israel, Italy, Jamaica, Japan, Jersey, Jordan, Kazakhstan, Kenya, Kiribati, North Korea and South Korea, Kuwait, Kyrgyzstan, Laos, Latvia, Lebanon, Lesotho, Liberia, Libya, Liechtenstein, Lithuania, Luxembourg, Macao, Macedonia, Madagascar, Malawi, Malaysia, Maldives, Mali, Malta, Martinique, Mauritania, Mauritius, Mayotte, Mexico, Micronesia, Moldova, Monaco, Mongolia, Montenegro, Montserrat, Morocco, Mozambique, Myanmar, Namibia, Nauru, Nepal, Netherlands, Netherlands Antilles, New Caledonia, New Zealand, Nicaragua, Niger, Nigeria, Norway, Oman, Pakistan, Palau, Palestinian Territory, Panama, Papua New Guinea, Paraguay, Peru, Philippines, Poland, Portugal, Puerto Rico, Qatar, Romania, Russia, Rwanda, Saint Barthelemy, Saint Helena, Saint Kitts and Nevis, Saint Lucia, Saint Martin, Saint Pierre and Miquelon, Saint Vincent and the Grenadines, Samoa, San Marino, Saudi Arabia, Senegal, Serbia, Seychelles, Sierra Leone, Singapore, Slovakia, Slovenia, Somalia, South Africa, South Georgia, South Sudan, Spain, Sri Lanka, Sudan, Suriname, Swaziland, Sweden, Switzerland, Syria, Taiwan, Tajikistan, Tanzania, Thailand, Timor-Leste, Togo, Tokelau, Tonga, Trinidad and Tobago, Tunisia, Turkey, Turkmenistan, Tuvalu, Uganda, Ukraine, United Arab Emirates, United Kingdom (UK), United States of America (USA), Uruguay, Uzbekistan, Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Zimbabwe.
+ "</string>
     <string name="street_name">Gatvės pavadinimas</string>
     <string name="hno">Namo numeris</string>
 
@@ -1095,7 +1219,13 @@
     <string name="gpx_saved_sucessfully">GPX failas sėkmingai išsaugotas {0}</string>
     <string name="osmand_distance_planning_plugin_description">Įskiepis prideda programėle žemėlapio ekrane, kuri leidžia kurti maršrutus spūstelėjus žemėlapį, taip pat naudoti/keisti egzistuojančius GPX failus, planuoti maršrutus bei matuoti atstumus tarp taškų. Išsaugotą GPX failą galima naudoti maršruto planavimui.</string>
     <string name="osmand_distance_planning_plugin_name">Atstumo skaičiavimo ir planavimo įrankis</string>
-    <string name="use_distance_measurement_help">* Palieskit etaškui pažymėti.\n * Paspauskite ant žemėlapio ir laikykite ankstesnio taško pašalinimui.\n * Paspauskite ant taško ir laikykite aprašymo peržiūrai ar sukūrimui.\n * Paspauskite ant matavimo įrankio kitiems veiksmams.</string>
+    <string name="use_distance_measurement_help">* Palieskite taškui pažymėti.
+
+ * Paspauskite ant žemėlapio ir laikykite ankstesnio taško pašalinimui.
+
+ * Paspauskite ant taško ir laikykite aprašymo peržiūrai ar sukūrimui.
+
+ * Paspauskite ant matavimo įrankio kitiems veiksmams.</string>
     <string name="shared_string_do_not_show_again">Daugiau neberodyti</string>
     <string name="distance_measurement_start_editing">Pradėti redagavimą</string>
     <string name="distance_measurement_finish_editing">Baigti redagavimą</string>
@@ -1475,7 +1605,11 @@
     <string name="osmo_group_information">Perskaitykite prieš kurdami grupę!</string>
     <string name="osmo_not_signed_in">Prisijungti prie OsMo nepavyko</string>
     <string name="osmo_auth_error_short">Autorizavimas nepavyko</string>
-    <string name="osmo_auth_error">OsMo autorizavimo metu įvyko klaida : %1$s.\n Gali būti, kad paslauga laikinai neveikia arba baigėsi jūsų prisijungimo laikas.\n Ar norite registruotis iš naujo?</string>
+    <string name="osmo_auth_error">OsMo autorizavimo metu įvyko klaida : %1$s.
+
+Gali būti, kad paslauga laikinai neveikia arba baigėsi jūsų prisijungimo laikas.
+
+Ar norite registruotis iš naujo?</string>
     <string name="rendering_attr_hideBuildings_name">Pastatai</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Ne automobiliams skirti greitkeliai</string>
     <string name="rendering_attr_hideText_name">Tekstas</string>
@@ -1484,7 +1618,7 @@
     <string name="rendering_attr_moreDetailed_name">Detaliau</string>
     <string name="rendering_attr_lessDetailed_name">Mažiau detalių</string>
     <string name="rendering_attr_hideAccess_name">Prieigos apribojimai</string>
-    <string name="rendering_attr_showAccess_name">Rodyti prieigos tipą</string>
+    <string name="rendering_attr_showAccess_name">Rodyti prieigos tipą bei rinkliavą</string>
     <string name="rendering_attr_showSurfaceGrade_name">Rodyti kelių kokybę</string>
     <string name="rendering_attr_showSurfaces_name">Rodyti kelių paviršiaus tipą</string>
     <string name="rendering_attr_showCycleRoutes_name">Rodyti dviračių maršrutus</string>
@@ -1555,7 +1689,11 @@
     <string name="save_track_to_gpx_globally">Įrašyti maršrutą į GPX failą</string>
     <string name="save_track_interval_globally">Įrašymo intervalas</string>
     <string name="save_track_to_gpx_globally_descr">Bendras vietos išsaugojimas į GPX failą gali būti įjungtas ar išjungtas panaudojant GPX įrankį žemėlapio ekrane</string>
-    <string name="record_plugin_description">"Išsaugo kelionės istoriją vieno mygtuko ekrane paspaudimu bei pateikia nustatymus, leidžiančius kelionės istoriją išsaugoti GPX faile ar naudojantis internetine paslauga.\nĮrašytus maršrutus galima pasidalinti su draugais arba OSM. Sportininkai gali naudoti įrašytus maršrutus norėdami stebėti savo treniruotes. Elementarią analizę, tokią kaip ratų laikai, vidutinis greitis, ir t.t., galima atlikti tiesiai OsmAnd bei, be abejo, vėliau išanalizuoti su trečių šalių progamine įranga. "</string>
+    <string name="record_plugin_description">"Išsaugo kelionės istoriją vieno mygtuko ekrane paspaudimu bei pateikia nustatymus, leidžiančius kelionės istoriją išsaugoti GPX faile ar naudojantis internetine paslauga.
+
+
+Įrašytus maršrutus galima pasidalinti su draugais arba OSM. Sportininkai gali naudoti įrašytus maršrutus norėdami stebėti savo treniruotes. Elementarią analizę, tokią kaip ratų laikai, vidutinis greitis, ir t.t., galima atlikti tiesiai OsmAnd bei, be abejo, vėliau išanalizuoti su trečių šalių progamine įranga.
+ "</string>
     <string name="confirm_every_run">Visada klausti</string>
     <string name="save_global_track_interval_descr">Pasirinkite bendrojo maršruto įrašymo intervalą (įjungiama per GPX valdiklį žemėlapio rodinyje)</string>
     <string name="save_global_track_interval">Bendras įrašymo intervalas</string>
@@ -1697,7 +1835,14 @@
     <string name="location_on_map">Vieta:\n Plat. %1$s\n Ilg. %2$s</string>
     <string name="shared_string_export">Eksportuoti</string>
     <string name="days_behind">dienų senumo</string>
-    <string name="plugin_nautical_descr">"Šis įskiepis papildo OsmAnd programą jūrlapiais skirtais laivybai, būriavimui ir kitoms vandens sporto veikloms.\n\nSpecialus OsmAnd žemėlpaio įskiepis pateiks visus navigacinius ženklus ir jūrlapių simbolius reikalingus jūros ir vidaus vandenų navigacijai. Kiekvieno navigacinio žeklo aprašymas pateiks informaciją apie jų reikšmę (kategorija, forma, spalva, eiliškumas, nuoroda ir kt.).\n\nNorėdami grįžti į įprastinių OsmAnd žemėlapių atvaizdavimą papraščiausiai išjunkite šį įskiepį arba pakeiskite \'Žemėlapio nustatymų\' skirsnyje pakeiskite \'Žemėlapio stilių\' į pageidaujamą. "</string>
+    <string name="plugin_nautical_descr">"Šis įskiepis papildo OsmAnd programą jūrlapiais skirtais laivybai, būriavimui ir kitoms vandens sporto veikloms.
+
+
+Specialus OsmAnd žemėlpaio įskiepis pateiks visus navigacinius ženklus ir jūrlapių simbolius reikalingus jūros ir vidaus vandenų navigacijai. Kiekvieno navigacinio žeklo aprašymas pateiks informaciją apie jų reikšmę (kategorija, forma, spalva, eiliškumas, nuoroda ir kt.).
+
+
+Norėdami grįžti į įprastinių OsmAnd žemėlapių atvaizdavimą papraščiausiai išjunkite šį įskiepį arba \'Žemėlapio nustatymų\' skirsnyje pakeiskite \'Žemėlapio stilių\' į pageidaujamą.
+ "</string>
     <string name="rename_failed">Nepavyko pervardinti.</string>
     <string name="back_to_map">Grįžti į žemėlapį</string>
     <string name="shared_string_selected">Pasirinkta</string>
@@ -1775,7 +1920,23 @@
     <string name="application_dir_change_warning3">Ar norite, kad OsmAnd taip pat nukopijuotų duomenų failus į naują vietą?</string>
     <string name="osmand_parking_overdue">pradelsta</string>
     <string name="shared_string_currently_recording_track">Šiuo metu įrašomas maršrutas</string>
-    <string name="plugin_touringview_descr">"Aktyvus šį rodinį pasikeis OsmAnd\'s žemėlapių stilius į \"Touring view\", kuris yra detalus duomenų rodinys turistas ir profesionaliems vairuotojams. "</string>
+    <string name="plugin_touringview_descr">"Aktyvus šį rodinį pasikeis OsmAnd\'s žemėlapių stilius į \"Touring view\", kuris yra detalus duomenų rodinys turistas ir profesionaliems vairuotojams. 
+ 
+
+This view provides, at any given map zoom, the maximum amount of travel details available in the map data (particularly roads, tracks, paths, and orientation marks).
+ 
+
+It also clearly depicts all types of roads unambiguously by color coding, which is useful when e.g. driving large vehicles.
+ 
+
+And it provides special touring options like showing bicycle routes or Alpine mountain routes.
+ 
+
+Specialiai atskiro žemėlapio atsisiųsti nereikia, šis rodinys bus sukurtas iš standartinių žemėlapių.
+ 
+
+This view can be reverted by either de-activating it again here, or by changing the \'Map style\' under \'Configure map\' as desired.
+ "</string>
     
     <string name="routing_attr_avoid_borders_description">Vengti kirsti sieną išvažiuojant užsienio šalin</string>
     <string name="routing_attr_height_name">Aukščio ribojimas</string>
@@ -1947,7 +2108,7 @@
     <string name="map_downloaded">Žemėlapis atsiųstas</string>
     <string name="map_downloaded_descr">%1$s žemėlapio jau atsiųsta. Norėdami pradėti juo naudotis, grįžkite į žemėlapį.</string>
     <string name="go_to_map">Atidaryti žemėlapį</string>
-    <string name="application_dir_description">Pasirinkite vietą, kurioje norėsite išsaugoti žemėlapius.</string>
+    <string name="application_dir_description">Pasirinkite vietą, kurioje norėsite išsaugoti žemėlapius ir kitus duomenų failus.</string>
     <string name="shared_string_qr_code">QR kodas</string>
     <string name="share_menu_location">Pasidalinti esama vietove</string>
     <string name="confirm_download_roadmaps">Ar tikrai norite atsisiųsti tik kelių žemėlapį, nors jau turite visą?</string>
@@ -2088,7 +2249,33 @@
     <string name="shared_string_near">Netoliese</string>
     <string name="av_audio_bitrate">Audio bitų sparta</string>
     <string name="av_audio_bitrate_descr">Pasirinkite audio bitų spartą</string>
-    <string name="release_2_2">" • New context-sensitive UI for tapping locations on the map and on other screens\n\n • Map screen is now launched directly unless \'Show dashboard on app start\' is selected\n\n • Configure which and how cards are displayed on the dashboard\n\n • Bypass the dashboard if you like menu-based app control\n\n • Tam, kad būtų atsiųsti žemėlapiai, pakanka paliesti regioną pasaulio žemėlapyje\n\n • POI Search now supports more specific queries\n\n • Pagerintas LV ir OSM redagavimo funkcionalumas\n\n • Perdaryti žemėlapio atsisiuntimo struktūra bei sąsaja\n\n ir dar daugiau… "</string>
+    <string name="release_2_2">"
+ • New context-sensitive UI for tapping locations on the map and on other screens
+
+
+ • Žemėlapio ekranas rodomas iš karto, nebent \"Rodyti valdymo skydelį startuojant programai\" yra pažymėtas
+
+
+ • Configure which and how cards are displayed on the dashboard
+
+
+ • Bypass the dashboard if you like menu-based app control
+
+
+ • Tam, kad būtų atsiųsti žemėlapiai, pakanka paliesti regioną pasaulio žemėlapyje
+
+
+ • POI Search now supports more specific queries
+
+
+ • Pagerintas LV ir OSM redagavimo funkcionalumas
+
+
+ • Perdaryti žemėlapio atsisiuntimo struktūra bei sąsaja
+
+
+ ir dar daugiau…
+ "</string>
     <string name="access_from_map_description">Meniu mygtukas aktyvuoja valdymo skydelį, ne meniu</string>
     <string name="use_dashboard_btn">Naudoti duomenų skydelį</string>
     <string name="dashboard_or_drawer_description">Sukurta nauja galimybė naudoti programėlę duomenų skydelio arba statinio meniu pagalba. Savo pasirinkimą galite bet kada pakeisti duomenų skydelio nustatymuose.</string>
@@ -2136,7 +2323,9 @@
     <string name="osm_live_subscription_settings">Prenumeratos nustatymai</string>
     <string name="osm_live_ask_for_purchase">Prašome pirma įsigyti OSM Live prenumeratą</string>
 
-    <string name="download_files_error_not_enough_space">Nepakanka vietos! Failams reikalinga {3} MB laikinam ir {1} MB pastoviam saugojimui. Šiuo metu prieinama tik {2} MB vietos.</string>
+    <string name="download_files_error_not_enough_space">Nepakanka vietos!
+Failams reikalinga {3} MB laikinam ir {1} MB pastoviam saugojimui.
+Šiuo metu prieinama tik {2} MB vietos.</string>
     <string name="report">Ataskaita</string>
     <string name="shared_string_move_up">Perkelti viršun</string>
     <string name="shared_string_move_down">Perkelti žemyn</string>
@@ -2183,9 +2372,13 @@
     <string name="access_widget_expand">Išskleisti</string>
     <string name="osm_editors_ranking">OSM Redaktorių reitingas</string>
     <string name="osm_live_subscription">OSM Live prenumerata</string>
-    <string name="osm_live_header">Prenumerata leidžia kas valandą gauti viso žemėlapio atnaujinimus. Didžioji pajamų dalis grįžta OSM bendruomenei ir apmokamaas kiekvienas indėlis į OSM. Jei jums patinka OsmAnd ir OSMir norite jį patemti, tai yra idealus būdas tai padaryti.</string>
+    <string name="osm_live_header">Prenumerata leidžia kas valandą gauti viso žemėlapio atnaujinimus. 
+Didžioji pajamų dalis grįžta OSM bendruomenei ir apmokamas kiekvienas indėlis į OSM. 
+Jei jums patinka OsmAnd ir OSM, ir norite juos patemti, tai yra idealus būdas tai padaryti.</string>
     
-    <string name="download_files_question_space_with_temp">Ar siųsti {0} failų? Failams reikalinga {3} MB laikinam ir {1} MB pastoviam saugojimui. Šiuo metu prieinama tik {2} MB vietos.</string>
+    <string name="download_files_question_space_with_temp">Ar siųsti {0} failų
+Failams reikalinga {3} MB laikinam ir {1} MB pastoviam saugojimui.
+Šiuo metu prieinama tik {2} MB vietos.</string>
     <string name="lang_es_us">Ispanų (Amerikos)</string>
     <string name="lang_en_gb">Anglų (Junginė Karalystė)</string>
     <string name="lang_be_BY">Belarusų (Lotynų)</string>
@@ -2262,4 +2455,34 @@
     <string name="dist_away_from_my_location">Ieškoti %1$s spinduliu</string>
     <string name="show_on_map">Rodyti žemėlapyje</string>
     <string name="share_history_subject">" bendrinta iš OsmAnd"</string>
+    <string name="update_all_maps_now">Ar norite atnaujinti visus žemėlapius?</string>
+    <string name="routing_attr_short_way_name">Taupus kelias</string>
+    <string name="routing_attr_short_way_description">Važiuoti taupiuoju keliu (paprastai trumpesnis)</string>
+    <string name="rendering_attr_hideOverground_name">Antžeminiai objektai</string>
+    <string name="shared_string_change">Pakeisti</string>
+    <string name="get_started">Pradėti</string>
+    <string name="release_2_3">"
+ • OSM Live. Paremkite žemėlapių braižytojus ir programuotojus bei gaukite žemėlapių atnaujinimus kas valandą. 
+
+
+ • Map markers. A new way to quickly select places on the map.
+
+
+ • More detailed OSM maps with country specific road shields and lots of new map features.
+
+
+ • Improved Look and Feel of Route preparation. 
+
+
+ • Many improvements in the map context menu such as contextual address lookup.
+
+
+ and more…
+ "</string>
+    <string name="clear_updates_proposition_message">Tu gali pašalinti atsisiųstus atnaujinimus ir grįžti prie pradinio žemėlapio</string>
+    <string name="search_another_country">Pasirinkite kitą regioną</string>
+    <string name="search_map">Ieškomas žemėlapis…</string>
+    <string name="search_location">Nustatoma vietos padėtis…</string>
+    <string name="storage_free_space">Laisva vieta</string>
+    <string name="no_update_info">Nerodyti atnaujinimų</string>
     </resources>
