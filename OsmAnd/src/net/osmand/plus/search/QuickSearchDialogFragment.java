@@ -1,14 +1,42 @@
 package net.osmand.plus.search;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import android.annotation.SuppressLint;
+import android.app.Dialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.res.Resources;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.FileProvider;
+import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.ResultMatcher;
-import net.osmand.data.City;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.osm.AbstractPoiType;
@@ -43,39 +71,11 @@ import net.osmand.search.core.SearchSettings;
 import net.osmand.search.core.SearchWord;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
-import android.annotation.SuppressLint;
-import android.app.Dialog;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.res.Resources;
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.content.FileProvider;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.Toolbar;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.ProgressBar;
-import android.widget.TextView;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class QuickSearchDialogFragment extends DialogFragment implements OsmAndCompassListener, OsmAndLocationListener {
 
@@ -752,9 +752,11 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 				@Override
 				public void onFinish(AppInitializer init) {
-					reloadCategoriesInternal();
-					if (!searching) {
-						hideProgressBar();
+					if (!paused) {
+						reloadCategoriesInternal();
+						if (!searching) {
+							hideProgressBar();
+						}
 					}
 				}
 			});
@@ -791,9 +793,11 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 				@Override
 				public void onFinish(AppInitializer init) {
-					reloadHistoryInternal();
-					if (!searching) {
-						hideProgressBar();
+					if (!paused) {
+						reloadHistoryInternal();
+						if (!searching) {
+							hideProgressBar();
+						}
 					}
 				}
 			});
@@ -848,7 +852,9 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 				@Override
 				public void onFinish(AppInitializer init) {
-					runCoreSearchInternal(text, updateResult, searchMore);
+					if (!paused) {
+						runCoreSearchInternal(text, updateResult, searchMore);
+					}
 				}
 			});
 		} else {
