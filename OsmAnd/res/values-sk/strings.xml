@@ -2000,7 +2000,7 @@ Aktivovanie tohto pohľadu zmení štýl mapy na \"Zima a lyžovanie\", ktorý z
     <string name="share_geo">geo:</string>
     <string name="share_menu_location">Zdieľať polohu</string>
     <string name="shared_string_send">Odoslať</string>
-    <string name="application_dir_description">Zvoľte kam chcete uložiť súbory máp.</string>
+    <string name="application_dir_description">Zvoľte kam chcete uložiť súbory máp a iných údajov.</string>
     <string name="osm_edit_created_poi">Vytvorený OSM POI</string>
     
     <string name="world_map_download_descr">Svetová základná mapa (pokrývajúca celý svet pri malom priblížení) chýba alebo je zastaralá. Prosím zvážte jej stiahnutie pre celkový prehľad.</string>
@@ -2400,16 +2400,16 @@ Ak potrebuje pomoc s aplikáciou OsmAnd, kontaktuje podporu: support@osmand.net.
     <string name="routing_attr_short_way_description">Použiť ekonomickú trasu (obyčajne kratšia)</string>
     <string name="replace_favorite_confirmation">Naozaj chcete nahradiť obľúbený bod %1$s?</string>
     <string name="skip_map_downloading">Preskočiť sťahovanie máp</string>
-    <string name="skip_map_downloading_desc">Nemáte nainštalovanú žiadnu offline mapu. Môžete vybrať mapu zo zoznamu alebo stiahnuť ju neskôr cez Menu - %1$s.</string>
-    <string name="search_another_country">Hľadať inú krajinu</string>
+    <string name="skip_map_downloading_desc">Nemáte nainštalovanú žiadnu offline mapu. Môžete vybrať mapu zo zoznamu alebo stiahnuť mapy neskôr cez Menu - %1$s.</string>
+    <string name="search_another_country">Vybrať iný región</string>
     <string name="search_map">Hľadá sa mapa…</string>
-    <string name="first_usage_wizard_desc">Chceli by sme určiť Vašu polohu a navrhnúť stiahnutie mapy tohto regiónu.</string>
+    <string name="first_usage_wizard_desc">Povoliť aby OsmAnd mohol určiť Vašu polohu a navrhnúť mapy, ktoré sa dajú stiahnuť pre daný región.</string>
     <string name="location_not_found">Poloha sa nenašla</string>
     <string name="no_inet_connection">Nie je pripojenie na internet</string>
-    <string name="no_inet_connection_desc_map">Potrebné pre stiahnutie mapy</string>
+    <string name="no_inet_connection_desc_map">Potrebné pre stiahnutie máp.</string>
     <string name="search_location">Hľadá sa poloha…</string>
     <string name="storage_free_space">Voľné miesto</string>
-    <string name="storage_place_description">OsmAnd ukladá údaje (mapy, stopy, atď.) do %1$s.</string>
+    <string name="storage_place_description">Úložisko údajov pre OsmAnd (mapy, stopy, atď.): %1$s.</string>
     <string name="give_permission">Udeliť povolenie</string>
     <string name="allow_access_location">Povoliť prístup k polohe</string>
     <string name="first_usage_greeting">Získajte pokyny, objavte nové miesta, bez pripojenia na internet</string>
