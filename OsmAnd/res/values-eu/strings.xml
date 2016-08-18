@@ -2564,6 +2564,6 @@ OsmAnd aplikazioarekin laguntza behar baduzu, jarri kontaktuan gure laguntza tal
     <string name="storage_place_description">OsmAnd datuen biltegiratzea (mapak, lorratzak, eta abar): %1$s.</string>
     <string name="give_permission">Eman baimena</string>
     <string name="allow_access_location">Eman kokapena atzitzeko baimena</string>
-    <string name="first_usage_greeting">Jaso jarraibideak, aurkitu toki berriak, internet konexiorik gabe</string>
+    <string name="first_usage_greeting">Jaso jarraibideak eta aurkitu toki berriak internet konexiorik gabe</string>
     <string name="search_my_location">Bilatu nire kokalekua</string>
     </resources>
