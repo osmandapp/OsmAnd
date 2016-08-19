@@ -2223,7 +2223,7 @@ V současnosti je k dispozici {2} MB.</string>
     <string name="storage_place_description">Úložiště dat OsmAnd (pro mapy, trasy, atd.): %1$s.</string>
     <string name="give_permission">Udělit oprávnění</string>
     <string name="allow_access_location">Povolit přístup k poloze</string>
-    <string name="first_usage_greeting">Získejte pokyny, objevte nová místa, bez internetového připojení</string>
+    <string name="first_usage_greeting">Získejte pokyny a objevte nová místa, bez internetového připojení</string>
     <string name="search_my_location">Hledat mou polohu</string>
     <string name="no_update_info_desc">Nekontrolovat žádné aktualizace nových verzí a slevy související s OsmAnd</string>
     <string name="no_update_info">Nezobrazovat aktualizace</string>
