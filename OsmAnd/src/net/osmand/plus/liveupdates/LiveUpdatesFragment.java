@@ -210,6 +210,11 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppList
 			helper.addListener(this);
 			helper.start(false);
 		}
+		if (((OsmLiveActivity) getActivity()).shouldOpenSubscription()) {
+			SubscriptionFragment subscriptionFragment = new SubscriptionFragment();
+			subscriptionFragment.show(getChildFragmentManager(), SubscriptionFragment.TAG);
+		}
+
 	}
 
 	@Override

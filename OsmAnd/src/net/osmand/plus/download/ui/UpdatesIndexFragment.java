@@ -168,6 +168,7 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 		if (listAdapter.isShowOsmLiveBanner() && position == 0) {
 			Intent intent = new Intent(getMyActivity(), OsmLiveActivity.class);
 			intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+			intent.putExtra(OsmLiveActivity.OPEN_SUBSCRIPTION_INTENT_PARAM, true);
 			getMyActivity().startActivity(intent);
 		} else {
 			final IndexItem e = (IndexItem) getListAdapter().getItem(position);

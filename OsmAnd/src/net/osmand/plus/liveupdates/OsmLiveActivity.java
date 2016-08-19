@@ -22,8 +22,10 @@ import org.apache.commons.logging.Log;
 public class OsmLiveActivity extends AbstractDownloadActivity
 		implements DownloadIndexesThread.DownloadEvents{
 	private final static Log LOG = PlatformUtil.getLog(OsmLiveActivity.class);
+	public final static String OPEN_SUBSCRIPTION_INTENT_PARAM = "open_subscription_intent_param";
 	private LiveUpdatesFragmentPagerAdapter pagerAdapter;
 	private InAppHelper inAppHelper;
+	private boolean openSubscription;
 
 	public InAppHelper getInAppHelper() {
 		return inAppHelper;
@@ -38,6 +40,11 @@ public class OsmLiveActivity extends AbstractDownloadActivity
 		inAppHelper = new InAppHelper(getMyApplication(), false);
 		if (Version.isDeveloperVersion(getMyApplication())) {
 			inAppHelper = null;
+		}
+
+		Intent intent = getIntent();
+		if (intent != null && intent.getExtras() != null) {
+			openSubscription = intent.getExtras().getBoolean(OPEN_SUBSCRIPTION_INTENT_PARAM, false);
 		}
 
 		ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
@@ -92,6 +99,10 @@ public class OsmLiveActivity extends AbstractDownloadActivity
 	@Override
 	public void downloadHasFinished() {
 		((LiveUpdatesFragment) pagerAdapter.fragments[0]).notifyLiveUpdatesChanged();
+	}
+
+	public boolean shouldOpenSubscription() {
+		return openSubscription;
 	}
 
 	public static class LiveUpdatesFragmentPagerAdapter extends FragmentPagerAdapter {
