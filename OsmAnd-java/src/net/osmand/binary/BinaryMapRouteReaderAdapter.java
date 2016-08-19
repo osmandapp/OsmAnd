@@ -234,7 +234,7 @@ public class BinaryMapRouteReaderAdapter {
 				refTypeRule = id;
 			} else if (tags.equals("destination") || tags.equals("destination:forward") || tags.equals("destination:backward")) {
 				destinationTypeRule = id;
-			} else if (tags.equals("destination:ref")) {
+			} else if (tags.equals("destination:ref") || tags.equals("destination:ref:forward") || tags.equals("destination:ref:backward")) {
 				destinationRefTypeRule = id;
 			}
 		}
