@@ -35,13 +35,12 @@ public class BinaryMapRouteReaderAdapter {
 	protected static final Log LOG = PlatformUtil.getLog(BinaryMapRouteReaderAdapter.class);
 	private static final int SHIFT_COORDINATES = 4;
 
-    private static class RouteTypeCondition {
+	private static class RouteTypeCondition {
+		String condition = "";
+		OpeningHoursParser.OpeningHours hours = null;
+		float floatValue;
+	}
 
-        String condition = "";
-        OpeningHoursParser.OpeningHours hours = null;
-        float floatValue;
-    }
-	
 	public static class RouteTypeRule {
 		private final static int ACCESS = 1;
 		private final static int ONEWAY = 2;
@@ -56,7 +55,7 @@ public class BinaryMapRouteReaderAdapter {
 		private int intValue;
 		private float floatValue;
 		private int type;
-        private List<RouteTypeCondition> conditions = null;
+		private List<RouteTypeCondition> conditions = null;
 		private int forward;
 
 		public RouteTypeRule(String t, String v) {
@@ -75,61 +74,61 @@ public class BinaryMapRouteReaderAdapter {
 				throw e;
 			}
 		}
-		
+
 		public int isForward() {
 			return forward;
 		}
-		
+
 		public String getTag() {
 			return t;
 		}
-		
+
 		public String getValue(){
 			return v;
 		}
-		
+
 		public boolean roundabout(){
 			return type == ROUNDABOUT;
 		}
-		
+
 		public int getType() {
 			return type;
 		}
 
-        public boolean conditional() {
-            return conditions != null;
-        }
-		
+		public boolean conditional() {
+			return conditions != null;
+		}
+
 		public int onewayDirection(){
 			if(type == ONEWAY){
 				return intValue;
 			}
 			return 0;
 		}
-		
+
 		public float maxSpeed(){
 			if(type == MAXSPEED){
-                if(conditions != null) {
-                    Calendar i = Calendar.getInstance();
-                    i.setTimeInMillis(System.currentTimeMillis());
-                    for(RouteTypeCondition c : conditions) {
-                        if(c.hours != null && c.hours.isOpenedForTime(i)) {
-                            return c.floatValue;
-                        }
-                    }
-                }
+				if(conditions != null) {
+					Calendar i = Calendar.getInstance();
+					i.setTimeInMillis(System.currentTimeMillis());
+					for(RouteTypeCondition c : conditions) {
+						if(c.hours != null && c.hours.isOpenedForTime(i)) {
+							return c.floatValue;
+						}
+					}
+				}
 				return floatValue;
 			}
 			return -1;
 		}
-		
+
 		public int lanes(){
 			if(type == LANES){
 				return intValue;
 			}
 			return -1;
 		}
-		
+
 		public String highwayRoad(){
 			if(type == HIGHWAY_TYPE){
 				return v;
@@ -159,23 +158,23 @@ public class BinaryMapRouteReaderAdapter {
 				type = HIGHWAY_TYPE;
 			} else if(t.startsWith("access") && v != null){
 				type = ACCESS;
-            } else if(t.equalsIgnoreCase("maxspeed:conditional") && v != null){
-                conditions = new ArrayList<RouteTypeCondition>();
-                String[] cts = v.split(";");
-                for(String c : cts) {
-                    int ch = c.indexOf('@');
-	                if (ch > 0) {
-		                RouteTypeCondition cond = new RouteTypeCondition();
-		                cond.floatValue = RouteDataObject.parseSpeed(c.substring(0, ch), 0);
-		                cond.condition = c.substring(ch + 1).trim();
-		                if (cond.condition.startsWith("(") && cond.condition.endsWith(")")) {
-			                cond.condition = cond.condition.substring(1, cond.condition.length() - 1).trim();
-		                }
-		                cond.hours = OpeningHoursParser.parseOpenedHours(cond.condition);
-		                conditions.add(cond);
-	                }
-                }
-                type = MAXSPEED;
+			} else if(t.equalsIgnoreCase("maxspeed:conditional") && v != null){
+				conditions = new ArrayList<RouteTypeCondition>();
+				String[] cts = v.split(";");
+				for(String c : cts) {
+					int ch = c.indexOf('@');
+					if (ch > 0) {
+						RouteTypeCondition cond = new RouteTypeCondition();
+						cond.floatValue = RouteDataObject.parseSpeed(c.substring(0, ch), 0);
+						cond.condition = c.substring(ch + 1).trim();
+						if (cond.condition.startsWith("(") && cond.condition.endsWith(")")) {
+							cond.condition = cond.condition.substring(1, cond.condition.length() - 1).trim();
+						}
+						cond.hours = OpeningHoursParser.parseOpenedHours(cond.condition);
+						conditions.add(cond);
+					}
+				}
+				type = MAXSPEED;
 			} else if(t.equalsIgnoreCase("maxspeed") && v != null){
 				type = MAXSPEED;
 				floatValue = RouteDataObject.parseSpeed(v, 0);
@@ -187,7 +186,7 @@ public class BinaryMapRouteReaderAdapter {
 				type = MAXSPEED;
 				forward = -1;
 				floatValue = RouteDataObject.parseSpeed(v, 0);
-            } else if (t.equalsIgnoreCase("lanes") && v != null) {
+			} else if (t.equalsIgnoreCase("lanes") && v != null) {
 				intValue = -1;
 				int i = 0;
 				type = LANES;
@@ -198,12 +197,9 @@ public class BinaryMapRouteReaderAdapter {
 					intValue = Integer.parseInt(v.substring(0, i));
 				}
 			}
-			
 		}
-
-		
 	}
-	
+
 	public static class RouteRegion extends BinaryIndexPart {
 		public int regionsRead;
 		List<RouteSubregion> subregions = new ArrayList<RouteSubregion>();
