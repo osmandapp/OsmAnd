@@ -313,4 +313,6 @@
 	<string name="poi_traffic_calming_hump">Konkorra</string>
 	<string name="poi_traffic_calming_cushion">Kuxina</string>
 	<string name="poi_traffic_calming_rumble_strip">Burrunba-banda</string>
+	<string name="poi_car_repair">Kotxe konponketa</string>
+	<string name="poi_vehicle_inspection">Ibilgailuen azterketa</string>
 	</resources>
