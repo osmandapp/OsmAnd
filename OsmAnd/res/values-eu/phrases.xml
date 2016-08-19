@@ -386,4 +386,6 @@
 	<string name="poi_recycling_scrap_metal">Burdin hondakina</string>
 	<string name="poi_recycling_cardboard">Kartoi mehea</string>
 	<string name="poi_ford_stepping_stones">Harpausoa</string>
+	<string name="poi_boundary_stone">Mugarria</string>
+	<string name="poi_resource_stone">Harria</string>
 	</resources>
