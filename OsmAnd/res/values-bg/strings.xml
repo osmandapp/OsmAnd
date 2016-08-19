@@ -2156,4 +2156,5 @@
     <string name="give_permission">даде разрешение</string>
     <string name="allow_access_location">За да се позволи достъп до място</string>
     <string name="first_usage_greeting">Изтеглете упътвания и да открият нови места без интернет връзка</string>
+    <string name="shared_string_change">Промяна</string>
     </resources>
