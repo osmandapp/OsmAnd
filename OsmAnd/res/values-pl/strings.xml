@@ -2478,5 +2478,5 @@ Włączenie tego widoku zmienia styl mapy na „Zima i narty”, ukazujący tere
     <string name="skip_map_downloading">Przejdź Pobieranie map</string>
     <string name="first_usage_greeting">Wskazówki dojazdu i odkrywać nowe miejsca bez połączenia z Internetem</string>
     <string name="search_another_country">Wybierz inny region</string>
-    <string name="skip_map_downloading_desc">Trzeba nie zainstalowano map w trybie offline. Można wybrać mapę z listy lub pobrać mapy później poprzez menu -% 1 $ S.</string>
+    <string name="skip_map_downloading_desc">Trzeba nie zainstalowano map w trybie offline. Można wybrać mapę z listy lub pobrać mapy później poprzez menu - %1$s.</string>
     </resources>
