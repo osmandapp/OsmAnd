@@ -341,4 +341,48 @@
 	<string name="poi_artwork_type_relief">Artelan mota: erliebea</string>
 	<string name="poi_artwork_type_graffiti">Artelan mota: graffitia</string>
 	<string name="poi_artwork_type_stele">Artelan mota: estela</string>
+	<string name="poi_museum">Museoa</string>
+	<string name="poi_viewpoint">Behatokia</string>
+	<string name="poi_free_flying">Paraxutismo gaiak</string>
+	<string name="poi_garden_centre">Lorategi gaiak</string>
+	<string name="poi_gas">Gas likido denda</string>
+	<string name="poi_shop_yes">Denda orokorra</string>
+	<string name="poi_glaziery">Beira-denda</string>
+	<string name="poi_hearing_aids">Audiofonoak</string>
+	<string name="poi_herbalist">Belar-denda</string>
+	<string name="poi_interior_decoration">Interiorismo denda</string>
+	<string name="poi_outdoor">Estalperik gabeko kiroletarako denda</string>
+	<string name="poi_radiotechnics">Irrati eta elektronika denda</string>
+	<string name="poi_tyres">Pneumatiko denda</string>
+	<string name="poi_variety_store">Bazarra</string>
+	<string name="poi_department_store">Saltegi handia</string>
+	<string name="poi_fire_hose">Suteetako mahuka</string>
+	<string name="poi_fire_water_pond">Suteetako urmaela</string>
+	<string name="poi_mountain_pass">Mendatea</string>
+	<string name="poi_traffic_calming_island">Mediana</string>
+	<string name="poi_runway">Pista</string>
+	<string name="poi_aeroway_terminal">Aireportu terminala</string>
+	<string name="poi_aeroway_gate">Ontziratze-atea</string>
+
+	<string name="poi_aerialway_chair_lift"/>
+	<string name="poi_aerialway_gondola">Telekabina</string>
+	<string name="poi_aerialway_t_bar">Teleski bikoitza</string>
+	<string name="poi_aerialway_j_bar">Teleski bakuna</string>
+	<string name="poi_motorway_junction">Autobide irteera</string>
+	<string name="poi_boatyard">Ontziola</string>
+	<string name="poi_wastewater_plant">Uren tratamendurako planta</string>
+	<string name="poi_lock_gate">Esklusa</string>
+	<string name="poi_breakwater">Olatu horma</string>
+	<string name="poi_power_substation">Azpiestazioa</string>
+	<string name="poi_power_plant">Zentral elektrikoa</string>
+	<string name="poi_power_tower">Goi-tentsioko dorrea</string>
+	<string name="poi_power_pole">Elektrizitate zutoina</string>
+
+	<string name="poi_cooling_tower">Hozte-dorrea</string>
+	<string name="poi_lighting_tower">Argi dorrea</string>
+	<string name="poi_telephone_exchange">Telefono-zentrala</string>
+
+	<string name="poi_recycling_container">Mota: kontainerra</string>
+	<string name="poi_recycling_scrap_metal">Burdin hondakina</string>
+	<string name="poi_recycling_cardboard">Kartoi mehea</string>
 	</resources>
