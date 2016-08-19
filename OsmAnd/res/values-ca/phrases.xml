@@ -121,8 +121,8 @@
 	<string name="poi_public_transport_platform">Parada de transport públic</string>
 	<string name="poi_bus_station">Estació d\'autobusos</string>
 	<string name="poi_railway_station">Estació de tren</string>
-	<string name="poi_railway_platform">Andana</string>
-	<string name="poi_halt">Parada de tren (obsolet)</string>
+	<string name="poi_railway_platform">Andana de tren</string>
+	<string name="poi_halt">Parada de tren</string>
 	<string name="poi_subway_entrance">Entrada de metro</string>
 	<string name="poi_subway_station">Estació de metro</string>
 	<string name="poi_taxi">Parada de taxis</string>
@@ -2252,4 +2252,23 @@
 	<string name="poi_home_visit_yes">Visites a domicili: sí</string>
 	<string name="poi_home_visit_no">Visites a domicili: no</string>
 
-	</resources>
+	<string name="poi_traffic_calming_island">Illot de tràfic</string>
+	<string name="poi_min_age">Edat mínima</string>
+
+	<string name="poi_organic_yes">Menjar orgànic: sí</string>
+	<string name="poi_organic_no">Menjar orgànic: no</string>
+	<string name="poi_organic_only">Només menjar orgànic</string>
+
+	<string name="poi_diplomatic_consulate">Consolat</string>
+	<string name="poi_diplomatic_consulate_general">Consolat general</string>
+	<string name="poi_diplomatic_honorary_consulate">Consolat honorari</string>
+	<string name="poi_diplomatic_permanent_mission">Missió permanent</string>
+	<string name="poi_diplomatic_delegation">Delegació</string>
+	<string name="poi_diplomatic_ambassadors_residence">Residència de l\'ambaixador</string>
+	<string name="poi_diplomatic_high_commission">Alt Comissionat</string>
+
+	<string name="poi_water_tank">Dipòsit d\'aigua</string>
+
+	<string name="poi_length">Llargada</string>
+
+</resources>
