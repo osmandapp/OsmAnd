@@ -317,4 +317,10 @@
 	<string name="poi_vehicle_inspection">Ibilgailuen azterketa</string>
 	<string name="poi_charging_station">Birkargarako estazioa</string>
 	<string name="poi_medical_supply">Medikuntza gaiak</string>
+	<string name="poi_vehicle_ramp">Ibilgailuen arrapala</string>
+	<string name="poi_public_transport_stop_position">Garraio publikoaren geldigunea</string>
+	<string name="poi_railway_buffer_stop">Trenbidearen amaiera</string>
+	<string name="poi_aerialway_goods">Karga-jasogailua</string>
+	<string name="poi_rest_area">Atsedenleku</string>
+
 	</resources>
