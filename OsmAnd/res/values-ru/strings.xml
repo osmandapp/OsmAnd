@@ -2088,5 +2088,6 @@
     <string name="skip_map_downloading_desc">У вас нет загруженных карт. Вы можете выбрать карту из списка или загрузить её позже с помощью меню - %1$s.</string>
 
     <string name="si_mi_meters">Мили/метры</string>
-<string name="get_for">Доберётесь за %1$s</string>
+    <string name="get_for">Получить за %1$s</string>
+    <string name="get_for_month">Получить за %1$s в месяц</string>
     </resources>
