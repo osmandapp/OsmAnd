@@ -2589,5 +2589,5 @@ Se ami OsmAnd e OSM e vuoi sostenerli è un modo perfetto farlo.</string>
     <string name="skip_map_downloading">Skip mappe download</string>
     <string name="first_usage_greeting">Ottieni indicazioni e scoprire nuovi luoghi senza connessione internet</string>
     <string name="search_another_country">Scegliere un\'altra regione</string>
-    <string name="skip_map_downloading_desc">Non hai mappa offline installato. Si può scegliere una mappa dalla lista o scaricare le mappe in seguito tramite Menu -% 1 $ s.</string>
+    <string name="skip_map_downloading_desc">Non hai mappa offline installato. Si può scegliere una mappa dalla lista o scaricare le mappe in seguito tramite Menu - %1$s.</string>
     </resources>
