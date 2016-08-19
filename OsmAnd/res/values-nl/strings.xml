@@ -2236,7 +2236,7 @@ Het activeren van deze weergave verandert de kaartstijl in \'Winter en ski\', me
     <string name="free_downloads_used">Gebruikte gratis downloads</string>
     <string name="free_downloads_used_description">Bekijk hoeveel gratis downloads er al gebruikt zijn</string>
 
-    <string name="application_dir_description">Kies waar kaartbestanden bewaard worden.</string>
+    <string name="application_dir_description">"Kies waar kaarten en andere gegevens  opgeslagen worden."</string>
     <string name="show_on_start_description">\'Uit\' toont direct de kaart</string>
     <string name="enter_country_name">Kies het land</string>
     <string name="new_version">Nieuwe versie</string>
@@ -2620,4 +2620,19 @@ Als je hulp nodig hebt met OsmAnd: neem contact op met ons support team: support
     <string name="routing_attr_short_way_description">Economische route gebruiken (meestal korter)</string>
     <string name="replace_favorite_confirmation">Wil je favoriet %1$s inderdaad vervangen?</string>
     <string name="update_all_maps_now">Wil u alle kaarten nu updaten?</string>
+    <string name="si_mi_meters">Mijlen/meters</string>
+    <string name="skip_map_downloading">Kaarten downloaden overslaan</string>
+    <string name="search_another_country">Kies een andere regio</string>
+    <string name="search_map">Kaarte zoeken…</string>
+    <string name="location_not_found">Positie niet gevonden</string>
+    <string name="no_inet_connection">Geen internetverbinding</string>
+    <string name="no_inet_connection_desc_map">Noodzakelijk om kaarten te downloaden.</string>
+    <string name="search_location">Zoeken naar positie…</string>
+    <string name="storage_free_space">Vrije geheugenruimte</string>
+    <string name="give_permission">Geef toestemming</string>
+    <string name="allow_access_location">Locatiegegevens toestaan</string>
+    <string name="first_usage_greeting">"Krijg routebeschrijvingen en ontdek nieuwe plaatsen,  zonder internetverbinding"</string>
+    <string name="search_my_location">Zoek mijn positie</string>
+    <string name="no_update_info">Geen updates tonen</string>
+    <string name="clear_tile_data">Alle opgeslagen kaarttegels wissen</string>
     </resources>
