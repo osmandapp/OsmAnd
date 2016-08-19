@@ -2475,4 +2475,8 @@ Włączenie tego widoku zmienia styl mapy na „Zima i narty”, ukazujący tere
     <string name="routing_attr_short_way_name">Paliwo-oszczędna trasa</string>
     <string name="routing_attr_short_way_description">Oblicza paliwo-oszczędną trasę (zwykle najkrótszą)</string>
     <string name="replace_favorite_confirmation">Czy chcesz zastąpić ulubiony punkt %1$s?</string>
+    <string name="skip_map_downloading">Przejdź Pobieranie map</string>
+    <string name="first_usage_greeting">Wskazówki dojazdu i odkrywać nowe miejsca bez połączenia z Internetem</string>
+    <string name="search_another_country">Wybierz inny region</string>
+    <string name="skip_map_downloading_desc">Trzeba nie zainstalowano map w trybie offline. Można wybrać mapę z listy lub pobrać mapy później poprzez menu -% 1 $ S.</string>
     </resources>
