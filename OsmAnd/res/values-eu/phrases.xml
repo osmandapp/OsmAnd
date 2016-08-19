@@ -325,4 +325,20 @@
 
 	<string name="poi_power_transformer">Tranformadorea</string>
 	<string name="poi_post_office">Postetxea</string>
+	<string name="poi_fountain">Iturria</string>
+	<string name="poi_artwork_type_fountain">Artelan mota: iturria</string>
+
+	<string name="poi_artwork">Artelana</string>
+	<string name="poi_artwork_type_sculpture">Artelan mota: eskultura</string>
+	<string name="poi_artwork_type_statue">Artelan mota: estatua</string>
+	<string name="poi_artwork_type_mural">Artelan mota: murala</string>
+	<string name="poi_artwork_type_architecture">Artelan mota: arkitektura</string>
+	<string name="poi_artwork_type_painting">Artelan mota: margolana</string>
+	<string name="poi_artwork_type_stone">Artelan mota: harria</string>
+	<string name="poi_artwork_type_bust">Artelan mota: bustoa</string>
+	<string name="poi_artwork_type_installation">Artelan mota: instalazioa</string>
+	<string name="poi_artwork_type_mosaic">Artelan mota: mosaikoa</string>
+	<string name="poi_artwork_type_relief">Artelan mota: erliebea</string>
+	<string name="poi_artwork_type_graffiti">Artelan mota: graffitia</string>
+	<string name="poi_artwork_type_stele">Artelan mota: estela</string>
 	</resources>
