@@ -2138,7 +2138,7 @@
     <string name="map_widget_magnetic_bearing">Посока по магнитния компас</string>
     <string name="map_widget_bearing">Относителна посока</string>
     <string name="access_disable_offroute_recalc">Маршрутът да не се променя, когато сте извън пътя</string>
-    <string name="get_for_month">Вземете за% 1 $ S месец</string>
+    <string name="get_for_month">Вземете за %1$s месец</string>
     <string name="osm_live_banner_desc">Вземи неограничен картата тегления и актуализации на повече от един път в месеца: почасово, ежедневно или ежеседмично.</string>
     <string name="osmand_plus_banner_desc">Пълната версия на OsmAnd с неограничени картата изтегляния и месечни известия картата.</string>
     <string name="si_mi_meters">Мили / м</string>
