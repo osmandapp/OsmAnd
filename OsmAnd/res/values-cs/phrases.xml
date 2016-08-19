@@ -1860,4 +1860,23 @@
 
 	<string name="poi_width">Šířka</string>
 
+	<string name="poi_crossing_supervision_yes">Dozor na přejezd</string>
+	<string name="poi_crossing_supervision_no">Dozor na přejezd: ne</string>
+	<string name="poi_crossing_supervision_attendant">Dozor na přejezd: obsluha</string>
+	<string name="poi_crossing_supervision_camera">Dozor na přejezd: kamera</string>
+
+	<string name="poi_dispensing_yes">Léky na předpis: ano</string>
+	<string name="poi_dispensing_no">Léky na předpis: ne</string>
+
+	<string name="poi_aerodrome_type_international">Mezinárodní</string>
+	<string name="poi_aerodrome_type_regional">Regionální</string>
+	<string name="poi_aerodrome_type_public">Civilní</string>
+	<string name="poi_aerodrome_type_military">Vojenské</string>
+	<string name="poi_aerodrome_type_military_public">Vojenské/civilní</string>
+	<string name="poi_aerodrome_type_private">Soukromé</string>
+
+	<string name="poi_valley_balka">Suché koryto</string>
+
+	<string name="poi_ventilation_shaft">Větrací šachta</string>
+
 	</resources>
