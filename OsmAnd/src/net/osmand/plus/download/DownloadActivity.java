@@ -330,40 +330,6 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 		fragment.show(activity.getSupportFragmentManager(), "dialog");
 	}
 
-	private static class ToggleCollapseFreeVersionBanner implements OnClickListener {
-		private final View freeVersionDescriptionTextView;
-		private final View buttonsLinearLayout;
-		private final View freeVersionTitle;
-		private final View priceInfoLayout;
-		private final OsmandSettings settings;
-
-		private ToggleCollapseFreeVersionBanner(View freeVersionDescriptionTextView,
-												View buttonsLinearLayout, View freeVersionTitle,
-												View priceInfoLayout, OsmandSettings settings) {
-			this.freeVersionDescriptionTextView = freeVersionDescriptionTextView;
-			this.buttonsLinearLayout = buttonsLinearLayout;
-			this.freeVersionTitle = freeVersionTitle;
-			this.priceInfoLayout = priceInfoLayout;
-			this.settings = settings;
-		}
-
-		@Override
-		public void onClick(View v) {
-
-			if (freeVersionDescriptionTextView.getVisibility() == View.VISIBLE
-					&& isDownlodingPermitted(settings)) {
-				freeVersionDescriptionTextView.setVisibility(View.GONE);
-				buttonsLinearLayout.setVisibility(View.GONE);
-				priceInfoLayout.setVisibility(View.GONE);
-			} else {
-				freeVersionDescriptionTextView.setVisibility(View.VISIBLE);
-				buttonsLinearLayout.setVisibility(View.VISIBLE);
-				freeVersionTitle.setVisibility(View.VISIBLE);
-				priceInfoLayout.setVisibility(View.VISIBLE);
-			}
-		}
-	}
-
 	public static boolean isDownlodingPermitted(OsmandSettings settings) {
 		final Integer mapsDownloaded = settings.NUMBER_OF_FREE_DOWNLOADS.get();
 		int downloadsLeft = DownloadValidationManager.MAXIMUM_AVAILABLE_FREE_DOWNLOADS - mapsDownloaded;
@@ -393,6 +359,20 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 		private final View freeVersionBannerTitle;
 		private boolean showSpace;
 		private boolean updatingPrices;
+
+		private static boolean wasCollapsed;
+		private OnClickListener onCollapseListener = new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if (freeVersionDescriptionTextView.getVisibility() == View.VISIBLE
+						&& isDownlodingPermitted(application.getSettings())) {
+					collapseBanner();
+					wasCollapsed = true;
+				} else {
+					expandBanner();
+				}
+			}
+		};
 
 		public BannerAndDownloadFreeVersion(View view, final DownloadActivity ctx, boolean showSpace) {
 			this.ctx = ctx;
@@ -473,6 +453,20 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 			}
 		}
 
+		private void collapseBanner() {
+			freeVersionDescriptionTextView.setVisibility(View.GONE);
+			buttonsLinearLayout.setVisibility(View.GONE);
+			priceInfoLayout.setVisibility(View.GONE);
+			freeVersionBannerTitle.setVisibility(View.VISIBLE);
+		}
+
+		private void expandBanner() {
+			freeVersionDescriptionTextView.setVisibility(View.VISIBLE);
+			buttonsLinearLayout.setVisibility(View.VISIBLE);
+			priceInfoLayout.setVisibility(View.VISIBLE);
+			freeVersionBannerTitle.setVisibility(View.VISIBLE);
+		}
+
 		public void hideDownloadProgressLayout() {
 			downloadProgressLayout.setVisibility(View.GONE);
 		}
@@ -510,10 +504,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 					ctx.startActivity(intent);
 				}
 			});
-			ToggleCollapseFreeVersionBanner clickListener =
-					new ToggleCollapseFreeVersionBanner(freeVersionDescriptionTextView,
-							buttonsLinearLayout, freeVersionBannerTitle, priceInfoLayout, application.getSettings());
-			laterButton.setOnClickListener(clickListener);
+			laterButton.setOnClickListener(onCollapseListener);
 
 			LinearLayout marksLinearLayout = (LinearLayout) freeVersionBanner.findViewById(R.id.marksLinearLayout);
 			Space spaceView = new Space(ctx);
@@ -536,8 +527,10 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 				marksLinearLayout.addView(spaceView);
 			}
 
-
 			updateFreeVersionBanner();
+			if (wasCollapsed) {
+				collapseBanner();
+			}
 		}
 
 		private void updateFreeVersionBanner() {
@@ -554,8 +547,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 				laterButton.setVisibility(View.GONE);
 			}
 			downloadsLeftTextView.setText(ctx.getString(R.string.downloads_left_template, downloadsLeft));
-			freeVersionBanner.findViewById(R.id.bannerTopLayout).setOnClickListener(new ToggleCollapseFreeVersionBanner(freeVersionDescriptionTextView,
-					buttonsLinearLayout, freeVersionBannerTitle, priceInfoLayout, settings));
+			freeVersionBanner.findViewById(R.id.bannerTopLayout).setOnClickListener(onCollapseListener);
 
 			if (InAppHelper.hasPrices() || !updatingPrices) {
 				if (!InAppHelper.hasPrices()) {
@@ -586,15 +578,10 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 
 		private void setMinimizedFreeVersionBanner(boolean minimize) {
 			if (minimize && isDownlodingPermitted(application.getSettings())) {
-				freeVersionDescriptionTextView.setVisibility(View.GONE);
-				buttonsLinearLayout.setVisibility(View.GONE);
+				collapseBanner();
 				freeVersionBannerTitle.setVisibility(View.GONE);
-				priceInfoLayout.setVisibility(View.GONE);
 			} else {
-				freeVersionDescriptionTextView.setVisibility(View.VISIBLE);
-				buttonsLinearLayout.setVisibility(View.VISIBLE);
 				freeVersionBannerTitle.setVisibility(View.VISIBLE);
-				priceInfoLayout.setVisibility(View.VISIBLE);
 			}
 		}
 	}
