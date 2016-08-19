@@ -167,8 +167,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 		viewPager.setCurrentItem(currentTab);
 		visibleBanner = new BannerAndDownloadFreeVersion(findViewById(R.id.mainLayout), this, true);
 
-		if (Version.isFreeVersion(getMyApplication()) &&
-				(!getMyApplication().getSettings().LIVE_UPDATES_PURCHASED.get() || Version.isDeveloperVersion(getMyApplication()))) {
+		if (shouldShowFreeVersionBanner(getMyApplication())) {
 			inAppHelper = new InAppHelper(getMyApplication(), true);
 			inAppHelper.addListener(this);
 			visibleBanner.setUpdatingPrices(true);
@@ -336,6 +335,11 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 		return Math.max(downloadsLeft, 0) > 0;
 	}
 
+	private static boolean shouldShowFreeVersionBanner(OsmandApplication application) {
+		return (Version.isFreeVersion(application) && !application.getSettings().LIVE_UPDATES_PURCHASED.get())
+				|| application.getSettings().SHOULD_SHOW_FREE_VERSION_BANNER.get();
+	}
+
 	public static class BannerAndDownloadFreeVersion {
 		private final View freeVersionBanner;
 		private final View downloadProgressLayout;
@@ -397,9 +401,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 			osmLiveProgress = freeVersionBanner.findViewById(R.id.osmLiveProgress);
 			osmLiveButton = (AppCompatButton) freeVersionBanner.findViewById(R.id.osmLiveButton);
 
-			shouldShowFreeVersionBanner =
-					(Version.isFreeVersion(application) && !application.getSettings().LIVE_UPDATES_PURCHASED.get())
-					|| application.getSettings().SHOULD_SHOW_FREE_VERSION_BANNER.get();
+			shouldShowFreeVersionBanner = shouldShowFreeVersionBanner(application);
 
 			initFreeVersionBanner();
 			updateBannerInProgress();
