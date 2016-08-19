@@ -9,6 +9,8 @@ import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
+import net.osmand.Location;
+
 
 public class RouteDataObject {
 	/*private */static final int RESTRICTION_SHIFT = 3;
@@ -409,7 +411,16 @@ public class RouteDataObject {
 		// So it should be fix in both places
 		return directionRoute(startPoint, plus, 5);
 	}
-	
+
+	public boolean bearingVsRouteDirection(Location loc) {
+		boolean direction = true;
+		if(loc != null && loc.hasBearing()) {
+			double diff = MapUtils.alignAngleDifference(directionRoute(0, true) - loc.getBearing() / 180f * Math.PI);
+			direction = Math.abs(diff) < Math.PI / 2f;
+		}
+		return direction;
+	}
+
 	public double distance(int startPoint, int endPoint) {
 		if(startPoint > endPoint) {
 			int k = endPoint;

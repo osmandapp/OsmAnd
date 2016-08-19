@@ -262,13 +262,7 @@ public class WaypointHelper {
 	}
 
 	public AlarmInfo calculateMostImportantAlarm(RouteDataObject ro, Location loc, MetricsConstants mc, boolean showCameras) {
-		boolean direction = true;
-		if (loc.hasBearing()) {
-			double diff = MapUtils.alignAngleDifference(ro.directionRoute(0, true) -
-					loc.getBearing() / 180f * Math.PI);
-			direction = Math.abs(diff) < Math.PI / 2f;
-		}
-		float mxspeed = ro.getMaximumSpeed(direction);
+		float mxspeed = ro.getMaximumSpeed(ro.bearingVsRouteDirection(loc));
 		float delta = app.getSettings().SPEED_LIMIT_EXCEED.get() / 3.6f;
 		AlarmInfo speedAlarm = createSpeedAlarm(mc, mxspeed, loc, delta);
 		if (speedAlarm != null) {

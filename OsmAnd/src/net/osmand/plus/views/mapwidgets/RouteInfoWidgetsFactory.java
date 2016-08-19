@@ -390,14 +390,7 @@ public class RouteInfoWidgetsFactory {
 						&& trackingUtilities.isMapLinkedToLocation()) {
 					RouteDataObject ro = locationProvider.getLastKnownRouteSegment();
 					if(ro != null) {
-						boolean direction = true;
-						Location loc = locationProvider.getLastKnownLocation();
-						if(loc != null && loc.hasBearing()) {
-							double diff = MapUtils.alignAngleDifference(ro.directionRoute(0, true) -  
-									loc.getBearing() / 180f * Math.PI);
-							direction = Math.abs(diff) < Math.PI / 2f;
-						}
-						mx = ro.getMaximumSpeed(direction);
+						mx = ro.getMaximumSpeed(ro.bearingVsRouteDirection(locationProvider.getLastKnownLocation()));
 					}
 				} else if (rh != null) {
 					mx = rh.getCurrentMaxSpeed();
