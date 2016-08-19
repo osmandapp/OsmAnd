@@ -2564,8 +2564,8 @@ Como bi sunt {2} MB ebbia disponìbiles.</string>
     <string name="no_update_info">No ammustres sos agiornamentos</string>
     <string name="update_all_maps_now">Cheres agiornare totu sas mapas como?</string>
     <string name="clear_tile_data">Iscantzella totu sos tasseddos</string>
-    <string name="first_usage_greeting">Otene indicatziones e iscoberi logos noos chene una connessione a ìnternet</string>
-    <string name="get_for">Otenne pro %1$s</string>
-    <string name="get_for_month">Otenne pro %1$s a su mese</string>
-    <string name="osm_live_banner_desc">Otenne iscarrigamentos de mapas chene lìmites e agiornamentos pro pus de una borta a su mese: cada ora, cada die o cada chida.</string>
+    <string name="first_usage_greeting">Retzi indicatziones e iscoberi logos noos chene una connessione a ìnternet</string>
+    <string name="get_for">Retzi pro %1$s</string>
+    <string name="get_for_month">Retzi pro %1$s a su mese</string>
+    <string name="osm_live_banner_desc">Retzi iscarrigamentos de mapas chene lìmites e agiornamentos pro pus de una borta a su mese: cada ora, cada die o cada chida.</string>
     </resources>
