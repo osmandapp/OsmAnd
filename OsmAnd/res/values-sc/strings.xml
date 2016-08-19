@@ -2144,7 +2144,7 @@ Memòria in proportzione %4$s MB (lìmite de Android %5$s MB, Dalvik %6$s MB).</
     <string name="share_menu_location">Cumpartzi sa positzione</string>
     <string name="shared_string_send">Imbia</string>
 
-    <string name="application_dir_description">Issèbera in ue boles pònnere sos documentos de sas mapas.</string>
+    <string name="application_dir_description">Issèbera in ue boles pònnere sos documentos de sas mapas e sos àteros datos.</string>
     <string name="map_downloaded">Mapa iscarrigada</string>
     <string name="map_downloaded_descr">Sa mapa de %1$s est istada iscarrigada. Torra a sa mapa pro incumintzare a l’impreare.</string>
     <string name="go_to_map">Bae a sa mapa</string>
@@ -2544,4 +2544,28 @@ Como bi sunt {2} MB ebbia disponìbiles.</string>
     <string name="rendering_attr_hideOverground_name">Ogetos subra de terra</string>
     <string name="shared_string_change">Càmbia</string>
     <string name="get_started">Incumintza</string>
+    <string name="osmand_plus_banner_desc">Versione cumprida de OsmAnd cun iscarrigamentos de mapas illimitados e agiornamentos cada mese.</string>
+    <string name="si_mi_meters">Mìglios/metros</string>
+    <string name="skip_map_downloading">Brinca s\'iscarrigamentu de sas mapas</string>
+    <string name="skip_map_downloading_desc">Non tenes mapas non in lìnia installadas. Podes isseberare una mapa dae sa lista o iscarrigare mapas prus a tardu pro mèdiu de Menù - %1$s.</string>
+    <string name="search_another_country">Issèbera un\'àtera regione</string>
+    <string name="search_map">Chirchende sa mapa…</string>
+    <string name="first_usage_wizard_desc">Lassa agatare sa positzione tua a OsmAnd e faghe·ti impositare sas mapas de iscarrigare pro cussa regione.</string>
+    <string name="location_not_found">Positzione non agatada</string>
+    <string name="no_inet_connection">Peruna connessione a ìnternet</string>
+    <string name="no_inet_connection_desc_map">Nde b\'est bisòngiu pro iscarrigare mapas.</string>
+    <string name="search_location">Chirchende sa positzione…</string>
+    <string name="storage_free_space">Ispàtziu lìberu</string>
+    <string name="storage_place_description">"Ispàtziu impreadu pro sos  datos de OsmAnd (mapas, rastas etc.): %1$s."</string>
+    <string name="give_permission">Dae su permissu</string>
+    <string name="allow_access_location">Dae su permissu pro s\'atzessu a sa positzione</string>
+    <string name="search_my_location">Chirca sa positzione mea</string>
+    <string name="no_update_info_desc">Non chircare pro perunu agiornamentu nou chi pertochet a versiones noas o a ofertas promotzionales pro OsmAnd</string>
+    <string name="no_update_info">No ammustres sos agiornamentos</string>
+    <string name="update_all_maps_now">Cheres agiornare totu sas mapas como?</string>
+    <string name="clear_tile_data">Iscantzella totu sos tasseddos</string>
+    <string name="first_usage_greeting">Otene indicatziones e iscoberi logos noos chene una connessione a ìnternet</string>
+    <string name="get_for">Otenne pro %1$s</string>
+    <string name="get_for_month">Otenne pro %1$s a su mese</string>
+    <string name="osm_live_banner_desc">Otenne iscarrigamentos de mapas chene lìmites e agiornamentos pro pus de una borta a su mese: cada ora, cada die o cada chida.</string>
     </resources>
