@@ -410,4 +410,11 @@
 	<string name="poi_parish">مكتب الرعية</string>
 	<string name="poi_publisher">مكتب النشر</string>
 
+	<string name="poi_toilets_wheelchair_yes">الوصول إلى المراحيض بالكراسي المتحركة: نعم</string>
+	<string name="poi_toilets_wheelchair_no">الوصول إلى المراحيض بالكراسي المتحركة: لا</string>
+	<string name="poi_toilets_access_customers">الوصول إلى المراحيض: العملاء</string>
+	<string name="poi_diaper_yes">طاولة تغيير الحفاض</string>
+	<string name="poi_diaper_no">لا توجد طاولة تغيير الحفاض</string>
+	<string name="poi_diaper_room">غرفة تغيير الحفاضات</string>
+
 	</resources>
