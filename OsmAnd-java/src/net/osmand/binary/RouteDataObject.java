@@ -102,7 +102,8 @@ public class RouteDataObject {
 		if (names != null) {
 			int[] kt = names.keys();
 			String refTag = (direction == true) ? "destination:ref:forward" : "destination:ref:backward";
-			String ref = null;
+			String refTagDefault = "destination:ref";
+			String refDefault = null;
 
 			for(int i = 0 ; i < kt.length; i++) {
 				int k = kt[i];
@@ -110,11 +111,13 @@ public class RouteDataObject {
 					if(refTag.equals(region.routeEncodingRules.get(k).getTag())) {
 						return names.get(k);
 					}
+					if(refTagDefault.equals(region.routeEncodingRules.get(k).getTag())) {
+						refDefault = names.get(k);
+					}
 				}
 			}
-			ref = names.get(region.destinationRefTypeRule);
-			if (ref != null) {
-				return ref;
+			if (refDeafult != null) {
+				return refDefault;
 			}
 			return names.get(region.refTypeRule);
 		}
@@ -128,6 +131,8 @@ public class RouteDataObject {
 			if(!Algorithms.isEmpty(lang)) {
 				destinationTag = "destination:" + lang;
 			}
+			String destinationTagDefault = "destination";
+			String destinationDefault = null;
 
 			for(int i = 0 ; i < kt.length; i++) {
 				int k = kt[i];
@@ -135,9 +140,12 @@ public class RouteDataObject {
 					if(destinationTag.equals(region.routeEncodingRules.get(k).getTag())) {
 						return names.get(k);
 					}
+					if(destinationTagDefault.equals(region.routeEncodingRules.get(k).getTag())) {
+						destinationDefault = names.get(k);
+					}
 				}
 			}
-			return names.get(region.destinationTypeRule);
+			return destinationDefault;
 		}
 		return null;
 	}
