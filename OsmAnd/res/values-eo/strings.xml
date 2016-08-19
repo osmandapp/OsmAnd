@@ -2442,4 +2442,10 @@ Se vi bezonas helpon pri OsmAnd aplikaĵo, bonvolu kontakti nian helpantaron: su
     <string name="search_my_location">Serĉi mian pozicion</string>
     <string name="no_update_info">Ne montri ĝisdatigojn</string>
     <string name="no_update_info_desc">Ne serĉas informojn pri novaj versioj kaj rabatoj por OsmAnd</string>
+    <string name="get_it">Havigu ĝin</string>
+    <string name="get_for">Havigu ĝin por</string>
+    <string name="get_for_month">Havigu ĝin por %1$s monatoj</string>
+    <string name="osm_live_banner_desc">Havigu senlimigitan mapojn kaj ĝisdatigojn pli ofte ol unu foje en monato: ĉiuhore, ĉiutage aŭ ĉiusemajne.</string>
+    <string name="osmand_plus_banner_desc">Plena versio de OsmAnd kun senlimigitaj mapoj kaj ĝisdatigoj ĉiumonate.</string>
+    <string name="si_mi_meters">Mejloj/metroj</string>
     </resources>
