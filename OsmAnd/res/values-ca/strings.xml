@@ -2441,4 +2441,5 @@ Si aprecieu OsmAnd  i OSM i vulgueu ajudar-los, és la via perfecta per fer-ho."
     <string name="get_for_month">Obteniu-lo per %1$s mesos</string>
     <string name="osm_live_banner_desc">Obteniu baixada de mapes sense límit i actualitzacions més freqüents al mes: cada hora, dia o setmana.</string>
     <string name="osmand_plus_banner_desc">Versió completa d\'OsmAnd amb baixada de mapes sense límit i amb actualitzacions mensuals de mapes.</string>
+    <string name="get_it">Obteniu-lo</string>
     </resources>
