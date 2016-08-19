@@ -2610,8 +2610,8 @@ Ha segítségre van szükséged az OsmAnd alkalmazással kapcsolatban, keresd a 
     <string name="rendering_attr_hideOverground_name">Felszíni objektumok</string>
     <string name="shared_string_change">Módosítás</string>
     <string name="get_started">Kezdj hozzá</string>
-    <string name="skip_map_downloading">Ugrás a térképek letöltéséhez</string>
-    <string name="first_usage_greeting">Útvonal és új helyek internetkapcsolat nélkül</string>
+    <string name="skip_map_downloading">Térképletöltés kihagyása</string>
+    <string name="first_usage_greeting">Navigálj és fedezz fel új helyeket internetkapcsolat nélkül</string>
     <string name="search_another_country">Válasszon másik régiót</string>
     <string name="skip_map_downloading_desc">Nincs offline térkép telepítve. Lehet választani egy térképet a listából, vagy töltse le a térképeket később a Menü -% 1 $ s.</string>
     </resources>
