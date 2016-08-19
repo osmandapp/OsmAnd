@@ -277,6 +277,15 @@ public class WaypointHelper {
 					RouteTypeRule typeRule = reg.quickGetEncodingRule(pointTypes[r]);
 					AlarmInfo info = AlarmInfo.createAlarmInfo(typeRule, 0, loc);
 
+					//Check if stop sign is tagged with direction=forward/backward
+					if (info.getType() == AlarmInfoType.STOP) {
+						//TODO: better than bearingVsRouteDirection would be routeVsWayDirection analysis
+						if (ro.isStopDirectionOpposite(ro.bearingVsRouteDirection(loc))) {
+							info = null;
+						}
+					//TODO: Still missing here is analysis if a stop without direction=* tagging is _behind_ an intersection
+					}
+
 					// Issue #2873 may indicate we need some sort of check here if Alarm is in forward direction
 					// But cannot reproduce the issue for now
 					//if (loc.hasBearing()) {

@@ -441,6 +441,23 @@ public class RouteDataObject {
 		return direction;
 	}
 
+	public boolean isStopDirectionOpposite(boolean direction) {
+		for(int i=0; i<types.length; i++) {
+			RouteTypeRule r = region.quickGetEncodingRule(types[i]);
+			if (r.getTag().equals("highway") && r.getValue().equals("stop")) {
+				for (int j=0; j<types.length; j++) {
+					if (direction = true && r.getTag().equals("direction") && r.getValue().equals("backward")) {
+						return true;
+					}
+					if (direction = false && r.getTag().equals("direction") && r.getValue().equals("forward")) {
+						return true;
+					}
+				}
+			}
+		}
+		return false;
+	}
+
 	public double distance(int startPoint, int endPoint) {
 		if(startPoint > endPoint) {
 			int k = endPoint;
