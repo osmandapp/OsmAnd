@@ -10,6 +10,7 @@ import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
@@ -152,7 +153,11 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppList
 			});
 		}
 
-		loadLocalIndexesTask = new LoadLocalIndexTask(adapter, this).execute();
+		if(Build.VERSION.SDK_INT >= 11) {
+			loadLocalIndexesTask = new LoadLocalIndexTask(adapter, this).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		} else {
+			loadLocalIndexesTask = new LoadLocalIndexTask(adapter, this).execute();
+		}
 		return view;
 	}
 
