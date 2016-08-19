@@ -700,19 +700,23 @@ public class FirstUsageWizardFragment extends Fragment implements OsmAndLocation
 			freeSpaceValue.setText(getFreeSpace(settings.getExternalStorageDirectory()));
 
 			AppCompatButton changeStorageButton = (AppCompatButton) storageView.findViewById(R.id.storage_change_button);
-			changeStorageButton.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					if (!DownloadActivity.hasPermissionToWriteExternalStorage(getContext())) {
-						ActivityCompat.requestPermissions(getActivity(),
-								new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-								FIRST_USAGE_REQUEST_WRITE_EXTERNAL_STORAGE_PERMISSION);
+			if (wizardType == WizardType.MAP_DOWNLOAD) {
+				changeStorageButton.setEnabled(false);
+			} else {
+				changeStorageButton.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						if (!DownloadActivity.hasPermissionToWriteExternalStorage(getContext())) {
+							ActivityCompat.requestPermissions(getActivity(),
+									new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+									FIRST_USAGE_REQUEST_WRITE_EXTERNAL_STORAGE_PERMISSION);
 
-					} else {
-						DataStoragePlaceDialogFragment.showInstance(getActivity().getSupportFragmentManager(), false);
+						} else {
+							DataStoragePlaceDialogFragment.showInstance(getActivity().getSupportFragmentManager(), false);
+						}
 					}
-				}
-			});
+				});
+			}
 		}
 	}
 

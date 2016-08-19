@@ -2,6 +2,7 @@ package net.osmand.plus.download.ui;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBar;
@@ -18,12 +19,15 @@ import android.widget.TextView;
 
 import net.osmand.map.OsmandRegions;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.base.OsmAndListFragment;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
+import net.osmand.plus.liveupdates.OsmLiveActivity;
+import net.osmand.util.Algorithms;
 
 import java.util.Comparator;
 import java.util.List;
@@ -31,6 +35,7 @@ import java.util.List;
 public class UpdatesIndexFragment extends OsmAndListFragment implements DownloadEvents {
 	private static final int RELOAD_ID = 5;
 	private UpdateIndexAdapter listAdapter;
+	private String errorMessage;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -86,7 +91,9 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 
 		final OsmandRegions osmandRegions =
 				getMyApplication().getResourceManager().getOsmandRegions();
-		listAdapter = new UpdateIndexAdapter(a, R.layout.download_index_list_item, indexItems);
+		OsmandSettings settings = getMyApplication().getSettings();
+		listAdapter = new UpdateIndexAdapter(a, R.layout.download_index_list_item, indexItems,
+				!settings.LIVE_UPDATES_PURCHASED.get() || settings.SHOULD_SHOW_FREE_VERSION_BANNER.get());
 		listAdapter.sort(new Comparator<IndexItem>() {
 			@Override
 			public int compare(IndexItem indexItem, IndexItem indexItem2) {
@@ -102,17 +109,16 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 	private void updateErrorMessage() {
 		final View view = getView();
 		if (view == null) return;
-		TextView listMessageTextView = (TextView) view.findViewById(R.id.listMessageTextView);
 
 		if (getListAdapter() != null && getListAdapter().getCount() == 0) {
 			final DownloadResources indexes = getMyActivity().getDownloadThread().getIndexes();
 			int messageId = indexes.isDownloadedFromInternet ? R.string.everything_up_to_date
 					: R.string.no_index_file_to_download;
-			listMessageTextView.setText(messageId);
-			listMessageTextView.setVisibility(View.VISIBLE);
+			errorMessage = getString(messageId);
 		} else {
-			listMessageTextView.setVisibility(View.GONE);
+			errorMessage = null;
 		}
+		updateUpdateAllButton();
 	}
 
 	private void updateUpdateAllButton() {
@@ -125,9 +131,16 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 		final List<IndexItem> indexItems = indexes.getItemsToUpdate();
 		final TextView updateAllButton = (TextView) view.findViewById(R.id.updateAllButton);
 		if (indexItems.size() == 0 || indexItems.get(0).getType() == null) {
-			updateAllButton.setVisibility(View.GONE);
+			if (!Algorithms.isEmpty(errorMessage)) {
+				updateAllButton.setText(errorMessage);
+				updateAllButton.setEnabled(false);
+				updateAllButton.setVisibility(View.VISIBLE);
+			} else {
+				updateAllButton.setVisibility(View.GONE);
+			}
 		} else {
 			updateAllButton.setVisibility(View.VISIBLE);
+			updateAllButton.setEnabled(true);
 			long downloadsSize = 0;
 			for (IndexItem indexItem : indexItems) {
 				downloadsSize += indexItem.getSize();
@@ -151,10 +164,16 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
-		final IndexItem e = (IndexItem) getListAdapter().getItem(position);
-		ItemViewHolder vh = (ItemViewHolder) v.getTag();
-		OnClickListener ls = vh.getRightButtonAction(e, vh.getClickAction(e));
-		ls.onClick(v);
+		if (listAdapter.isShowOsmLiveBanner() && position == 0) {
+			Intent intent = new Intent(getMyActivity(), OsmLiveActivity.class);
+			intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+			getMyActivity().startActivity(intent);
+		} else {
+			final IndexItem e = (IndexItem) getListAdapter().getItem(position);
+			ItemViewHolder vh = (ItemViewHolder) v.getTag();
+			OnClickListener ls = vh.getRightButtonAction(e, vh.getClickAction(e));
+			ls.onClick(v);
+		}
 	}
 
 	public DownloadActivity getMyActivity() {
@@ -189,27 +208,73 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 	}
 
 	private class UpdateIndexAdapter extends ArrayAdapter<IndexItem> {
-		List<IndexItem> items;
 
-		public UpdateIndexAdapter(Context context, int resource, List<IndexItem> items) {
+		static final int INDEX_ITEM = 0;
+		static final int OSM_LIVE_BANNER = 1;
+
+		List<IndexItem> items;
+		boolean showOsmLiveBanner;
+
+		public UpdateIndexAdapter(Context context, int resource, List<IndexItem> items, boolean showOsmLiveBanner) {
 			super(context, resource, items);
 			this.items = items;
+			this.showOsmLiveBanner = showOsmLiveBanner;
+		}
+
+		public boolean isShowOsmLiveBanner() {
+			return showOsmLiveBanner;
+		}
+
+		@Override
+		public int getCount() {
+			return super.getCount() + (showOsmLiveBanner ? 1 : 0);
+		}
+
+		@Override
+		public IndexItem getItem(int position) {
+			if (showOsmLiveBanner && position == 0) {
+				return null;
+			} else {
+				return super.getItem(position - (showOsmLiveBanner ? 1 : 0));
+			}
+		}
+
+		@Override
+		public int getPosition(IndexItem item) {
+			return super.getPosition(item) + (showOsmLiveBanner ? 1 : 0);
+		}
+
+		@Override
+		public int getViewTypeCount() {
+			return showOsmLiveBanner ? 2 : 1;
+		}
+
+		@Override
+		public int getItemViewType(int position) {
+			return showOsmLiveBanner && position == 0 ? OSM_LIVE_BANNER : INDEX_ITEM;
 		}
 
 		@Override
 		public View getView(final int position, final View convertView, final ViewGroup parent) {
 			View v = convertView;
+			int viewType = getItemViewType(position);
 			if (v == null) {
-				LayoutInflater inflater = LayoutInflater.from(getMyActivity());
-				v = inflater.inflate(R.layout.two_line_with_images_list_item, parent, false);
-				v.setTag(new ItemViewHolder(v, getMyActivity()));
-				
+				if (viewType == INDEX_ITEM) {
+					LayoutInflater inflater = LayoutInflater.from(getMyActivity());
+					v = inflater.inflate(R.layout.two_line_with_images_list_item, parent, false);
+					v.setTag(new ItemViewHolder(v, getMyActivity()));
+				} else if (viewType == OSM_LIVE_BANNER) {
+					LayoutInflater inflater = LayoutInflater.from(getMyActivity());
+					v = inflater.inflate(R.layout.osm_live_banner_list_item, parent, false);
+				}
 			}
-			ItemViewHolder holder = (ItemViewHolder) v.getTag();
-			holder.setShowRemoteDate(true);
-			holder.setShowTypeInDesc(true);
-			holder.setShowParentRegionName(true);
-			holder.bindIndexItem(items.get(position));
+			if (viewType == INDEX_ITEM) {
+				ItemViewHolder holder = (ItemViewHolder) v.getTag();
+				holder.setShowRemoteDate(true);
+				holder.setShowTypeInDesc(true);
+				holder.setShowParentRegionName(true);
+				holder.bindIndexItem(getItem(position));
+			}
 			return v;
 		}
 	}
