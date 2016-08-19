@@ -2409,4 +2409,8 @@ Si amas a OsmAnd, OSM y quieres apoyarlos, esta es una perfecta manera de hacerl
     <string name="allow_access_location">Permitir acceso a la ubicación</string>
     <string name="first_usage_greeting">Obtén direcciones y descubre lugares nuevos sin conexión a Internet</string>
     <string name="si_mi_meters">Millas/Metros</string>
+    <string name="get_for">Obtener por %1$s</string>
+    <string name="get_for_month">Obtener por %1$s mes(es)</string>
+    <string name="osm_live_banner_desc">Obtenga descargas ilimitada de mapas y más actualizaciones por mes: cada hora, día o semana.</string>
+    <string name="osmand_plus_banner_desc">Versión OsmAnd de pago con descargas ilimitadas y actualizaciones mensuales de mapas.</string>
     </resources>
