@@ -2435,7 +2435,7 @@ Se vi bezonas helpon pri OsmAnd aplikaĵo, bonvolu kontakti nian helpantaron: su
     <string name="no_inet_connection_desc_map">Bezonata por elŝuti mapojn.</string>
     <string name="search_location">Serĉanta lokon…</string>
     <string name="storage_free_space">Libera loko</string>
-    <string name="storage_place_description">Datum-memorejo de OsmAnd (por mapoj, kursoj, ktp.): %1%s.</string>
+    <string name="storage_place_description">Datum-memorejo de OsmAnd (por mapoj, kursoj, ktp.): %1$s.</string>
     <string name="give_permission">Permesi</string>
     <string name="allow_access_location">Permesi aliron al loko</string>
     <string name="first_usage_greeting">Navigu kaj esploru novajn lokojn eksterrete</string>
@@ -2443,7 +2443,7 @@ Se vi bezonas helpon pri OsmAnd aplikaĵo, bonvolu kontakti nian helpantaron: su
     <string name="no_update_info">Ne montri ĝisdatigojn</string>
     <string name="no_update_info_desc">Ne serĉas informojn pri novaj versioj kaj rabatoj por OsmAnd</string>
     <string name="get_it">Havigu ĝin</string>
-    <string name="get_for">Havigu ĝin por</string>
+    <string name="get_for">Havigu ĝin por %1$s</string>
     <string name="get_for_month">Havigu ĝin por %1$s monatoj</string>
     <string name="osm_live_banner_desc">Havigu senlimigitan mapojn kaj ĝisdatigojn pli ofte ol unu foje en monato: ĉiuhore, ĉiutage aŭ ĉiusemajne.</string>
     <string name="osmand_plus_banner_desc">Plena versio de OsmAnd kun senlimigitaj mapoj kaj ĝisdatigoj ĉiumonate.</string>
