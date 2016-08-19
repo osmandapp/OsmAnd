@@ -280,9 +280,7 @@ public class WaypointHelper {
 					// Issue #2873 may indicate we need some sort of check here if Alarm is in forward direction
 					// But cannot reproduce the issue for now
 					//if (loc.hasBearing()) {
-					//TODO: Check would be needed using bearingTo("actual alarm location"), not alignment with routeDataObject
-					//	if (Math.abs(MapUtils.alignAngleDifference(ro.directionRoute(0, true) -
-					//			loc.getBearing() / 180f * Math.PI)) >= Math.PI / 2f) {
+					//	if (Math.abs(MapUtils.alignAngleDifference(bearingTo("actual alarm location") - loc.getBearing() / 180f * Math.PI)) >= Math.PI / 2f) {
 					//		info = null;
 					//	}
 					//Toast.makeText(app.getApplicationContext(), Double.toString(ro.directionRoute(0, true)) + ",\n" + Double.toString(loc.getBearing()) + ",\n" + Double.toString(MapUtils.alignAngleDifference(ro.directionRoute(0, true) - loc.getBearing() / 180f * Math.PI))), Toast.LENGTH_LONG).show();
