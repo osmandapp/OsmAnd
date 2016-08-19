@@ -2566,4 +2566,9 @@ OsmAnd aplikazioarekin laguntza behar baduzu, jarri kontaktuan gure laguntza tal
     <string name="allow_access_location">Eman kokapena atzitzeko baimena</string>
     <string name="first_usage_greeting">Jaso jarraibideak eta aurkitu toki berriak internet konexiorik gabe</string>
     <string name="search_my_location">Bilatu nire kokalekua</string>
+    <string name="get_for">Eskuratu %1$sren truke</string>
+    <string name="get_for_month">Eskuratu hilean %1$sen truke</string>
+    <string name="osm_live_banner_desc">Eskuratu mapen deskarga mugagabea eta eguneraketak hilean behin baino sarriago: orduro, egunero edo astero.</string>
+    <string name="osmand_plus_banner_desc">OsmAnd bertsio osoa mapen deskarga mugagabearekin eta hileroko mapen eguneraketa.</string>
+    <string name="si_mi_meters">Miliak/metroak</string>
     </resources>
