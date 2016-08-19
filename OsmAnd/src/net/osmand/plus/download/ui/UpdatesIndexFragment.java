@@ -110,8 +110,9 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 		final View view = getView();
 		if (view == null) return;
 
-		if (getListAdapter() != null && getListAdapter().getCount() == 0) {
-			final DownloadResources indexes = getMyActivity().getDownloadThread().getIndexes();
+		DownloadResources indexes = getMyApplication().getDownloadThread().getIndexes();
+		List<IndexItem> indexItems = indexes.getItemsToUpdate();
+		if (getListAdapter() != null && indexItems.size() == 0) {
 			int messageId = indexes.isDownloadedFromInternet ? R.string.everything_up_to_date
 					: R.string.no_index_file_to_download;
 			errorMessage = getString(messageId);
