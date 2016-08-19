@@ -255,7 +255,7 @@ public class RouteCalculationResult {
 					RouteSegmentResult next = list.get(lind);
 					info.setRef(next.getObject().getRef());
 					info.setStreetName(next.getObject().getName(ctx.getSettings().MAP_PREFERRED_LOCALE.get()));
-					info.setDestinationName(next.getObject().getDestinationName(ctx.getSettings().MAP_PREFERRED_LOCALE.get()));
+					info.setDestinationName(next.getObject().getDestinationName(ctx.getSettings().MAP_PREFERRED_LOCALE.get(), next.isForwardDirection()));
 				}
 
 		                String description = toString(turn, ctx) + " " + RoutingHelper.formatStreetName(info.getStreetName(),

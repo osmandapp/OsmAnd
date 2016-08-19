@@ -109,20 +109,21 @@ public class RouteDataObject {
 		return null;
 	}
 
-	public String getDestinationName(String lang){
+	public String getDestinationName(String lang, boolean direction){
 		if(names != null) {
-			if(Algorithms.isEmpty(lang)) {
-				return names.get(region.destinationTypeRule);
-			}
 			int[] kt = names.keys();
+			String destinationTag = (direction == true) ? "destination:forward" : "destination:backward";
+			if(!Algorithms.isEmpty(lang)) {
+				destinationTag = "destination:" + lang;
+			}
+
 			for(int i = 0 ; i < kt.length; i++) {
 				int k = kt[i];
 				if(region.routeEncodingRules.size() > k) {
-					if(("destination:"+lang).equals(region.routeEncodingRules.get(k).getTag())) {
+					if(destinationTag.equals(region.routeEncodingRules.get(k).getTag())) {
 						return names.get(k);
 					}
 				}
- 				
 			}
 			return names.get(region.destinationTypeRule);
 		}

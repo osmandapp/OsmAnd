@@ -236,7 +236,7 @@ public class BinaryMapRouteReaderAdapter {
 				nameTypeRule = id;
 			} else if (tags.equals("ref")) {
 				refTypeRule = id;
-			} else if (tags.equals("destination")) {
+			} else if (tags.equals("destination") || tags.equals("destination:forward") || tags.equals("destination:backward")) {
 				destinationTypeRule = id;
 			} else if (tags.equals("destination:ref")) {
 				destinationRefTypeRule = id;

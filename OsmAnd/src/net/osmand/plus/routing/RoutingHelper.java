@@ -761,7 +761,7 @@ public class RoutingHelper {
 		if(rs != null) {
 			String nm = rs.getObject().getName(settings.MAP_PREFERRED_LOCALE.get());
 			String rf = rs.getObject().getRef();
-			String dn = rs.getObject().getDestinationName(settings.MAP_PREFERRED_LOCALE.get());
+			String dn = rs.getObject().getDestinationName(settings.MAP_PREFERRED_LOCALE.get(), rs.isForwardDirection());
 			return formatStreetName(nm, rf, dn, "»");
 		}
 		return null;
