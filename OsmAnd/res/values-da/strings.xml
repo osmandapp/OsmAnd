@@ -2643,7 +2643,7 @@ Hvis du er fan af OsmAnd og OSM og ønsker at støtte dem, er det den perfekte m
     <string name="allow_access_location">Tillad adgang til placering</string>
     <string name="first_usage_greeting">Få rutevejledning og opdag nye steder uden brug af internetforbindelse</string>
     <string name="si_mi_meters">Mil/Meter</string>
-    <string name="get_for">Hent til %1$s</string>
+    <string name="get_for">Hent for %1$s</string>
     <string name="get_for_month">Hent for %1$s måned</string>
     <string name="osm_live_banner_desc">Få ubegrænset hentning af kort og opdateringer mere end en gang om måneden: hver time, dagligt eller ugentligt.</string>
     <string name="osmand_plus_banner_desc">Fuld version af OsmAnd med ubegrænset hentning af kort og månedlige kort opdateringer.</string>
