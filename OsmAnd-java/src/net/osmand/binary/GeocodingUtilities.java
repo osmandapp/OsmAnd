@@ -173,14 +173,14 @@ public class GeocodingUtilities {
 				continue;
 			}
 //			System.out.println(road.toString() +  " " + Math.sqrt(p.distSquare));
-			boolean emptyName = Algorithms.isEmpty(road.getName()) && Algorithms.isEmpty(road.getRef());
+			boolean emptyName = Algorithms.isEmpty(road.getName()) && Algorithms.isEmpty(road.getRef(true));
 			if (!emptyName) {
 				if (distSquare == 0 || distSquare > p.distSquare) {
 					distSquare = p.distSquare;
 				}
 				GeocodingResult sr = new GeocodingResult();
 				sr.searchPoint = new LatLon(lat, lon);
-				sr.streetName = Algorithms.isEmpty(road.getName()) ? road.getRef() : road.getName();
+				sr.streetName = Algorithms.isEmpty(road.getName()) ? road.getRef(true) : road.getName();
 				sr.point = p;
 				sr.connectionPoint = new LatLon(MapUtils.get31LatitudeY(p.preciseY), MapUtils.get31LongitudeX(p.preciseX));
 				sr.regionFP = road.region.getFilePointer();

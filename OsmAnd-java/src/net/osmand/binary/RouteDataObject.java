@@ -98,9 +98,21 @@ public class RouteDataObject {
 		return names;
 	}
 	
-	public String getRef(){
+	public String getRef(boolean direction) {
 		if (names != null) {
-			String ref = names.get(region.destinationRefTypeRule);
+			int[] kt = names.keys();
+			String refTag = (direction == true) ? "destination:ref:forward" : "destination:ref:backward";
+			String ref = null;
+
+			for(int i = 0 ; i < kt.length; i++) {
+				int k = kt[i];
+				if(region.routeEncodingRules.size() > k) {
+					if(refTag.equals(region.routeEncodingRules.get(k).getTag())) {
+						return names.get(k);
+					}
+				}
+			}
+			ref = names.get(region.destinationRefTypeRule);
 			if (ref != null) {
 				return ref;
 			}
@@ -521,7 +533,7 @@ public class RouteDataObject {
 	@Override
 	public String toString() {
 		String name = getName();
-		String rf = getRef();
+		String rf = getRef(true);
 		return MessageFormat.format("Road id {0} name {1} ref {2}", (getId() / 64) + "", name == null ? "" : name,
 				rf == null ? "" : rf);
 	}

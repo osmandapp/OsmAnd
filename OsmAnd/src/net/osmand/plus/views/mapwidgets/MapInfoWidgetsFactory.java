@@ -581,7 +581,7 @@ public class MapInfoWidgetsFactory {
 				RouteDataObject rt = locationProvider.getLastKnownRouteSegment();
 				if (rt != null) {
 					text = RoutingHelper.formatStreetName(rt.getName(settings.MAP_PREFERRED_LOCALE.get()), 
-							rt.getRef(), rt.getDestinationName(settings.MAP_PREFERRED_LOCALE.get(), rt.bearingVsRouteDirection(locationProvider.getLastKnownLocation())), "»");
+							rt.getRef(rt.bearingVsRouteDirection(locationProvider.getLastKnownLocation())), rt.getDestinationName(settings.MAP_PREFERRED_LOCALE.get(), rt.bearingVsRouteDirection(locationProvider.getLastKnownLocation())), "»");
 				} 
 				if (text == null) {
 					text = "";

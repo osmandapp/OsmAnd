@@ -158,7 +158,7 @@ public class GeocodingLookupService {
 								if (Algorithms.isEmpty(sname)) {
 									sname = "";
 								}
-								String ref = rd.getRef();
+								String ref = rd.getRef(true);
 								if (!Algorithms.isEmpty(ref)) {
 									if (!Algorithms.isEmpty(sname)) {
 										sname += ", ";
