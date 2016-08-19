@@ -405,13 +405,8 @@ public class FirstUsageWizardFragment extends Fragment implements OsmAndLocation
 			case MAP_FOUND:
 				break;
 			case MAP_DOWNLOAD:
-				int i = 0;
-				for (IndexItem indexItem : indexItems) {
-					if (!downloadThread.isDownloading(indexItem) && !indexItem.isDownloaded()
-							&& (i == 0 && !firstMapDownloadCancelled) || (i == 1 && !secondMapDownloadCancelled)) {
-						validationManager.startDownload(getActivity(), indexItem);
-					}
-					i++;
+				if (!startDownload(0)) {
+					startDownload(1);
 				}
 				if (localDownloadRegion != null) {
 					downloadThread.initSettingsFirstMap(localDownloadRegion);
@@ -505,6 +500,29 @@ public class FirstUsageWizardFragment extends Fragment implements OsmAndLocation
 	@Override
 	public void downloadHasFinished() {
 		updateDownloadedItems();
+		startDownload(1);
+	}
+
+	private boolean startDownload(int itemIndex) {
+		boolean downloadStarted = false;
+		if (itemIndex == 0 && indexItems.size() > 0) {
+			IndexItem indexItem = indexItems.get(0);
+			if (!downloadThread.isDownloading(indexItem)
+					&& !indexItem.isDownloaded()
+					&& !firstMapDownloadCancelled) {
+				validationManager.startDownload(getActivity(), indexItem);
+				downloadStarted = true;
+			}
+		} else if (itemIndex == 1 && indexItems.size() > 1) {
+			IndexItem indexItem = indexItems.get(1);
+			if (!downloadThread.isDownloading(indexItem)
+					&& !indexItem.isDownloaded()
+					&& !secondMapDownloadCancelled) {
+				validationManager.startDownload(getActivity(), indexItem);
+				downloadStarted = true;
+			}
+		}
+		return downloadStarted;
 	}
 
 	private void updateDownloadedItems() {
