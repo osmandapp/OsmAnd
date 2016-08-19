@@ -105,10 +105,8 @@ public class OsmLiveActivity extends AbstractDownloadActivity implements Downloa
 	}
 
 	public static class LiveUpdatesFragmentPagerAdapter extends FragmentPagerAdapter {
-		private final Fragment[] fragments = new Fragment[]{new LiveUpdatesFragment(),
-				new ReportsFragment()};
-		private static final int[] titleIds = new int[]{LiveUpdatesFragment.TITLE,
-				ReportsFragment.TITLE};
+		private final Fragment[] fragments = new Fragment[] { new LiveUpdatesFragment(), new ReportsFragment() };
+		private static final int[] titleIds = new int[] { LiveUpdatesFragment.TITLE, ReportsFragment.TITLE };
 		private final String[] titles;
 
 		public LiveUpdatesFragmentPagerAdapter(FragmentManager fm, Resources res) {
