@@ -2141,5 +2141,5 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="search_another_country">Selecione outra região</string>
     <string name="shared_string_change">Alterar</string>
     <string name="storage_directory_card">Cartão de memória</string>
-    <string name="skip_map_downloading_desc">Você não tem o mapa offline instalado. Você pode escolher um mapa na lista ou fazer download de mapas mais tarde através do menu -% 1 $ s.</string>
+    <string name="skip_map_downloading_desc">Você não tem o mapa offline instalado. Você pode escolher um mapa na lista ou fazer download de mapas mais tarde através do menu - %1$s.</string>
     </resources>
