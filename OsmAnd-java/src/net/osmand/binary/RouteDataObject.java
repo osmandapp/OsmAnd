@@ -221,10 +221,10 @@ public class RouteDataObject {
 	public int[] getTypes() {
 		return types;
 	}
-	
+
 	public float getMaximumSpeed(boolean direction){
 		int sz = types.length;
-        float maxSpeed = 0;
+		float maxSpeed = 0;
 		for (int i = 0; i < sz; i++) {
 			RouteTypeRule r = region.quickGetEncodingRule(types[i]);
 			if(r.isForward() != 0) {
@@ -232,19 +232,18 @@ public class RouteDataObject {
 					continue;
 				}
 			}
-            float mx = r.maxSpeed();
-            if (mx > 0) {
-                maxSpeed = mx;
-                // conditional has priority
-                if(r.conditional()) {
-                    break;
-                }
-            }
+			float mx = r.maxSpeed();
+			if (mx > 0) {
+				maxSpeed = mx;
+				// conditional has priority
+				if(r.conditional()) {
+					break;
+				}
+			}
 		}
 		return maxSpeed ;
 	}
-	
-	
+
 	public static float parseSpeed(String v, float def) {
 		if(v.equals("none")) {
 			return RouteDataObject.NONE_MAX_SPEED;
