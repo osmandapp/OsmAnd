@@ -9,6 +9,7 @@ public class Version {
 	private final String appVersion; 
 	private final String appName;
 	private final static String FREE_VERSION_NAME = "net.osmand";
+	private final static String FREE_DEV_VERSION_NAME = "net.osmand.dev";
 	private final static String SHERPAFY_VERSION_NAME = "net.osmand.sherpafy";
 	
 	
@@ -91,7 +92,7 @@ public class Version {
 	}
 	
 	public static boolean isFreeVersion(OsmandApplication ctx){
-		return ctx.getPackageName().equals(FREE_VERSION_NAME);
+		return ctx.getPackageName().equals(FREE_VERSION_NAME) || ctx.getPackageName().equals(FREE_DEV_VERSION_NAME);
 		
 	}
 	

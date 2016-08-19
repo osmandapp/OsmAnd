@@ -34,7 +34,6 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import net.osmand.IProgress;
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibilityAssistant;
@@ -55,6 +54,7 @@ import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.ui.ActiveDownloadsDialogFragment;
 import net.osmand.plus.download.ui.DataStoragePlaceDialogFragment;
 import net.osmand.plus.download.ui.DownloadResourceGroupFragment;
+import net.osmand.plus.download.ui.FreeVersionDialogFragment;
 import net.osmand.plus.download.ui.LocalIndexesFragment;
 import net.osmand.plus.download.ui.UpdatesIndexFragment;
 import net.osmand.plus.inapp.InAppHelper;
@@ -347,16 +347,16 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 		private final TextView freeVersionDescriptionTextView;
 		private final TextView downloadsLeftTextView;
 		private final ProgressBar downloadsLeftProgressBar;
-		private final View laterButton;
 		
-		private final View buttonsLinearLayout;
-		
+//		private final View laterButton;
+//		private final View buttonsLinearLayout;
 		
 		private final View fullVersionProgress;
 		private final AppCompatButton fullVersionButton;
 		private final View osmLiveProgress;
 		private final AppCompatButton osmLiveButton;
 		private DownloadActivity ctx;
+		private boolean dialog;
 
 		
 		private OnClickListener onCollapseListener = new OnClickListener() {
@@ -366,22 +366,24 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 						&& isDownlodingPermitted(ctx.getMyApplication().getSettings())) {
 					collapseBanner();
 				} else {
-					expandBanner();
+					new FreeVersionDialogFragment().show(ctx.getSupportFragmentManager(), "dialog");
+					// expandBanner();
 				}
 			}
 		};
 		
-		public FreeVersionDialog(View view, final DownloadActivity ctx) {
+		public FreeVersionDialog(View view, final DownloadActivity ctx, boolean dialog) {
 			this.ctx = ctx;
+			this.dialog = dialog;
 			freeVersionBanner = view.findViewById(R.id.freeVersionBanner);
 			downloadsLeftTextView = (TextView) freeVersionBanner.findViewById(R.id.downloadsLeftTextView);
 			downloadsLeftProgressBar = (ProgressBar) freeVersionBanner.findViewById(R.id.downloadsLeftProgressBar);
 			priceInfoLayout = freeVersionBanner.findViewById(R.id.priceInfoLayout);
 			freeVersionDescriptionTextView = (TextView) freeVersionBanner
 					.findViewById(R.id.freeVersionDescriptionTextView);
-			laterButton = freeVersionBanner.findViewById(R.id.laterButton);
 			freeVersionBannerTitle = freeVersionBanner.findViewById(R.id.freeVersionBannerTitle);
-			buttonsLinearLayout = freeVersionBanner.findViewById(R.id.buttonsLinearLayout);
+			// laterButton = freeVersionBanner.findViewById(R.id.laterButton);
+			// buttonsLinearLayout = freeVersionBanner.findViewById(R.id.buttonsLinearLayout);
 			
 			fullVersionProgress = freeVersionBanner.findViewById(R.id.fullVersionProgress);
 			fullVersionButton = (AppCompatButton) freeVersionBanner.findViewById(R.id.fullVersionButton);
@@ -396,20 +398,20 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 
 		private void collapseBanner() {
 			freeVersionDescriptionTextView.setVisibility(View.GONE);
-			buttonsLinearLayout.setVisibility(View.GONE);
+			// buttonsLinearLayout.setVisibility(View.GONE);
 			priceInfoLayout.setVisibility(View.GONE);
 			freeVersionBannerTitle.setVisibility(View.VISIBLE);
 		}
 
-		private void expandBanner() {
+		public void expandBanner() {
 			freeVersionDescriptionTextView.setVisibility(View.VISIBLE);
-			buttonsLinearLayout.setVisibility(View.VISIBLE);
+			// buttonsLinearLayout.setVisibility(View.VISIBLE);
 			priceInfoLayout.setVisibility(View.VISIBLE);
 			freeVersionBannerTitle.setVisibility(View.VISIBLE);
 		}
 
 
-		private void initFreeVersionBanner() {
+		public void initFreeVersionBanner() {
 			if (!shouldShowFreeVersionBanner(ctx.getMyApplication())) {
 				freeVersionBanner.setVisibility(View.GONE);
 				return;
@@ -438,7 +440,6 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 					ctx.startActivity(intent);
 				}
 			});
-			laterButton.setOnClickListener(onCollapseListener);
 
 			LinearLayout marksLinearLayout = (LinearLayout) freeVersionBanner.findViewById(R.id.marksLinearLayout);
 			Space spaceView = new Space(ctx);
@@ -462,10 +463,14 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 			}
 
 			updateFreeVersionBanner();
-			collapseBanner();
+			if(dialog) {
+				expandBanner();
+			} else {
+				collapseBanner();
+			}
 		}
 
-		private void updateFreeVersionBanner() {
+		public void updateFreeVersionBanner() {
 			if (!shouldShowFreeVersionBanner(ctx.getMyApplication())) {
 				return;
 			}
@@ -476,7 +481,9 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 			int downloadsLeft = DownloadValidationManager.MAXIMUM_AVAILABLE_FREE_DOWNLOADS - mapsDownloaded;
 			downloadsLeft = Math.max(downloadsLeft, 0);
 			downloadsLeftTextView.setText(ctx.getString(R.string.downloads_left_template, downloadsLeft));
-			freeVersionBanner.findViewById(R.id.bannerTopLayout).setOnClickListener(onCollapseListener);
+			if(!dialog) {
+				freeVersionBanner.findViewById(R.id.bannerTopLayout).setOnClickListener(onCollapseListener);
+			}
 
 			if (InAppHelper.hasPrices() || !updatingPrices) {
 				if (!InAppHelper.hasPrices()) {
@@ -530,7 +537,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 		public BannerAndDownloadFreeVersion(View view, final DownloadActivity ctx, boolean showSpace) {
 			this.ctx = ctx;
 			this.showSpace = showSpace;
-			freeVersionDialog = new FreeVersionDialog(view, ctx);
+			freeVersionDialog = new FreeVersionDialog(view, ctx, false);
 			
 			downloadProgressLayout = view.findViewById(R.id.downloadProgressLayout);
 			progressBar = (ProgressBar) view.findViewById(R.id.progressBar);

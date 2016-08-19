@@ -4,7 +4,8 @@
 
     <application
         android:icon="@drawable/icon_free"
-        tools:replace="android:icon">
+		android:label="@string/app_name_free"
+        tools:replace="android:icon, android:label">
 
         <service
             android:name="net.osmand.plus.NavigationService"
