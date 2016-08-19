@@ -2090,8 +2090,8 @@
     <string name="si_mi_meters">Мили/метры</string>
     <string name="get_for">Получить за %1$s</string>
     <string name="get_for_month">Получить за %1$s в месяц</string>
-    <string name="get_it">Возьмите</string>
-    <string name="osm_live_banner_desc">Получите неограниченные загрузки карт и обновления более чем один раз в месяц: ежечасно, ежедневно или еженедельно.</string>
-    <string name="osmand_plus_banner_desc">Полная версия OsmAnd с неограниченной загрузкой карт и ежемесячных обновлений карты.</string>
-    <string name="select_voice_provider">Выберите голосовое руководство</string>
+    <string name="get_it">Получить</string>
+    <string name="osm_live_banner_desc">Получите неограниченные загрузки карт и обновления более чем один раз в месяц: ежечасно, ежедневно или еженедельно</string>
+    <string name="osmand_plus_banner_desc">Полная версия OsmAnd с неограниченной загрузкой карт и ежемесячных обновлений карты</string>
+    <string name="select_voice_provider">Выберите голосовое сопровождение</string>
     </resources>
