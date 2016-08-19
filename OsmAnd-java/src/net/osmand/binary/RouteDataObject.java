@@ -116,7 +116,7 @@ public class RouteDataObject {
 					}
 				}
 			}
-			if (refDeafult != null) {
+			if (refDefault != null) {
 				return refDefault;
 			}
 			return names.get(region.refTypeRule);
