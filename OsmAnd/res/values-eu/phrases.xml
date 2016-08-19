@@ -303,4 +303,8 @@
 	<string name="poi_fire_hydrant_style_water_source_pond">Ur-hargunearen jatorria: urmaela</string>
 	<string name="poi_fire_hydrant_style_water_source_stream">Ur-hargunearen jatorria: erreka</string>
 	<string name="poi_fire_hydrant_style_water_source_cistern">Ur-hargunearen jatorria: zisterna</string>
+	<string name="poi_fire_extinguisher">Su-itzalgailua</string>
+	<string name="poi_ambulance_station">Anbulantzia geltokia</string>
+	<string name="poi_ford">Ibia</string>
+	<string name="poi_gate">Atea</string>
 	</resources>
