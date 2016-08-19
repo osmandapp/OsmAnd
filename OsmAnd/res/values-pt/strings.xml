@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources><string name="amenity_type_administrative">Administrativo</string>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="amenity_type_administrative">Administrativo</string>
   <string name="amenity_type_barrier">Barreira</string>
   <string name="amenity_type_education">Educação</string>
   <string name="amenity_type_emergency">Emergência</string>
@@ -2134,4 +2135,11 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="move_marker_bottom_sheet_title">Mova o mapa para alterar a posição do marcador</string>
     <string name="lat_lon_pattern">Lat: %1$.6f Lon: %2$.6f</string>
     <string name="follow_us">Siga-nos</string>
+    <string name="skip_map_downloading">Ir download de mapas</string>
+    <string name="first_usage_greeting">Obter instruções e descobrir novos lugares sem conexão com a internet</string>
+    <string name="shared_string_skip">Pular</string>
+    <string name="search_another_country">Selecione outra região</string>
+    <string name="shared_string_change">Alterar</string>
+    <string name="storage_directory_card">Cartão de memória</string>
+    <string name="skip_map_downloading_desc">Você não tem o mapa offline instalado. Você pode escolher um mapa na lista ou fazer download de mapas mais tarde através do menu -% 1 $ s.</string>
     </resources>
