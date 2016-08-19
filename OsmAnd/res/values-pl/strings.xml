@@ -2105,7 +2105,7 @@ Włączenie tego widoku zmienia styl mapy na „Zima i narty”, ukazujący tere
     <string name="file_size_in_mb">%.1f MB</string>
     <string name="update_all">Uaktualnij wszystko (%1$s MB)</string>
     <string name="free_downloads_used">Wykorzystano darmowe pobrania</string>
-    <string name="application_dir_description">Proszę wybrać położenie zapisywania plików map.</string>
+    <string name="application_dir_description">Proszę wybrać położenie zapisywania plików map i innych plików danych.</string>
     <string name="value_downloaded_of_max">%1$.1f z %2$.1f MB</string>
     <string name="shared_string_qr_code">Kod QR</string>
     <string name="enter_country_name">Proszę wybrać kraj</string>
@@ -2479,4 +2479,25 @@ Włączenie tego widoku zmienia styl mapy na „Zima i narty”, ukazujący tere
     <string name="first_usage_greeting">Wskazówki dojazdu i odkrywać nowe miejsca bez połączenia z Internetem</string>
     <string name="search_another_country">Wybierz inny region</string>
     <string name="skip_map_downloading_desc">Trzeba nie zainstalowano map w trybie offline. Można wybrać mapę z listy lub pobrać mapy później poprzez menu - %1$s.</string>
+    <string name="get_it">Ściągnij</string>
+    <string name="get_for">Ŝciągnij na %1$s</string>
+    <string name="get_for_month">Pobierz na %1$s miesięcy</string>
+    <string name="osm_live_banner_desc">Zdobądź nielimitowaną liczbę pobrań map i aktualizacje częściej niż raz na miesiąc: co godzinę, dziennie lub co tydzień.</string>
+    <string name="osmand_plus_banner_desc">Pełna wersja OsmAnd z nielimitowaną liczbą pobrań map i aktualizacjami co miesiąc.</string>
+    <string name="si_mi_meters">Mile/metry</string>
+    <string name="search_map">Wyszukiwanie map…</string>
+    <string name="first_usage_wizard_desc">Niech OsmAnd określi Twoją lokalizację i zasugeruje pobranie mapy Twojego regionu.</string>
+    <string name="location_not_found">Pozycja nieznana</string>
+    <string name="no_inet_connection">Brak połączenia z Internetem</string>
+    <string name="no_inet_connection_desc_map">Wymagane aby pobrać mapy.</string>
+    <string name="search_location">Szukanie pozycji…</string>
+    <string name="storage_free_space">Wolne miejsce</string>
+    <string name="storage_place_description">Katalog danych OsmAnd (na mapy, trasy, itp.): %1$s.</string>
+    <string name="give_permission">Zezwól</string>
+    <string name="allow_access_location">Zezwól na dostęp do lokacji</string>
+    <string name="search_my_location">Wyszukaj moją pozycję</string>
+    <string name="no_update_info_desc">Nie wyszukuj aktualizacji dotyczących nowych wersji, rabatów na OsmAnd</string>
+    <string name="no_update_info">Nie wyszukuj aktualizacji</string>
+    <string name="update_all_maps_now">Czy chcesz teraz zaktualizować wszystkie mapy?</string>
+    <string name="clear_tile_data">Wyczyść wszystkie kafelki</string>
     </resources>
