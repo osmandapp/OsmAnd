@@ -2143,7 +2143,7 @@
     <string name="osmand_plus_banner_desc">Пълната версия на OsmAnd с неограничени картата изтегляния и месечни известия картата.</string>
     <string name="si_mi_meters">Мили / м</string>
     <string name="skip_map_downloading">Напред изтеглянето на карти</string>
-    <string name="skip_map_downloading_desc">Вие имате инсталиран никакъв офлайн карта. Можете да изберете карта от списъка или да изтеглите карти по-късно чрез Меню -% 1 $ S.</string>
+    <string name="skip_map_downloading_desc">Вие имате инсталиран никакъв офлайн карта. Можете да изберете карта от списъка или да изтеглите карти по-късно чрез Меню - %1$s.</string>
     <string name="search_another_country">Изберете друг регион</string>
     <string name="search_map">Търсене на сайта …</string>
     <string name="first_usage_wizard_desc">Нека OsmAnd определи местоположението си и да предложи карти, за да свалите този регион.</string>
@@ -2152,7 +2152,7 @@
     <string name="no_inet_connection_desc_map">Задължително за изтегляне на карти.</string>
     <string name="search_location">Търсене място …</string>
     <string name="storage_free_space">Свободно пространство</string>
-    <string name="storage_place_description">OsmAnd за съхранение на данни (за карти, записи и т.н.):% 1 $ S.</string>
+    <string name="storage_place_description">OsmAnd за съхранение на данни (за карти, записи и т.н.): %1$s.</string>
     <string name="give_permission">даде разрешение</string>
     <string name="allow_access_location">За да се позволи достъп до място</string>
     <string name="first_usage_greeting">Изтеглете упътвания и да открият нови места без интернет връзка</string>
