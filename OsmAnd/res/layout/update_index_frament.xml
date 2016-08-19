@@ -6,18 +6,6 @@
               android:layout_height="match_parent"
               android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/listMessageTextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="?android:textColorPrimary"
-        android:textSize="@dimen/default_list_text_size"
-        android:padding="@dimen/list_content_padding"
-        tools:text="Germany"
-        android:gravity="center"
-        tools:visibility="visible"
-        android:visibility="gone"/>
-
     <ListView
         android:id="@android:id/list"
         android:layout_width="fill_parent"
