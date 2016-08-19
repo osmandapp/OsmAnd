@@ -307,4 +307,10 @@
 	<string name="poi_ambulance_station">Anbulantzia geltokia</string>
 	<string name="poi_ford">Ibia</string>
 	<string name="poi_gate">Atea</string>
+	<string name="poi_toll_booth">Bidesari-kabina</string>
+	<string name="poi_border_control">Mugako kontrola</string>
+	<string name="poi_traffic_calming_bump">Koskorra</string>
+	<string name="poi_traffic_calming_hump">Konkorra</string>
+	<string name="poi_traffic_calming_cushion">Kuxina</string>
+	<string name="poi_traffic_calming_rumble_strip">Burrunba-banda</string>
 	</resources>
