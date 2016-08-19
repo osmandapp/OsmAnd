@@ -12,14 +12,12 @@ import android.os.StatFs;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.UiThread;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityCompat.OnRequestPermissionsResultCallback;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
-import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.support.v4.widget.Space;
 import android.support.v7.widget.AppCompatButton;
 import android.text.method.LinkMovementMethod;
@@ -35,6 +33,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import net.osmand.IProgress;
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibilityAssistant;
@@ -53,7 +52,6 @@ import net.osmand.plus.base.BasicProgressAsyncTask;
 import net.osmand.plus.base.BottomSheetDialogFragment;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.ui.ActiveDownloadsDialogFragment;
-import net.osmand.plus.download.ui.DataStoragePlaceDialogFragment;
 import net.osmand.plus.download.ui.DownloadResourceGroupFragment;
 import net.osmand.plus.download.ui.FreeVersionDialogFragment;
 import net.osmand.plus.download.ui.LocalIndexesFragment;
@@ -76,8 +74,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class DownloadActivity extends AbstractDownloadActivity implements DownloadEvents,
 		OnRequestPermissionsResultCallback, InAppListener {
@@ -197,7 +193,6 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 			filterCat = intent.getExtras().getString(FILTER_CAT);
 			filterGroup = intent.getExtras().getString(FILTER_GROUP);
 		}
-		showFirstTimeExternalStorage();
 	}
 
 	@Override
@@ -695,49 +690,10 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 		}
 	}
 
-	private void showFirstTimeExternalStorage() {
-		final boolean firstTime = getMyApplication().getAppInitializer().isFirstTime();
-		if (firstTime && DataStoragePlaceDialogFragment.isInterestedInFirstTime) {
-			if (!hasPermissionToWriteExternalStorage(this)) {
-				ActivityCompat.requestPermissions(this,
-						new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-						PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
-
-			} else {
-				chooseDataStorage();
-			}
-		}
-	}
-
-	private void chooseDataStorage() {
-		DataStoragePlaceDialogFragment.showInstance(getSupportFragmentManager(), false);
-	}
-
 	public static boolean hasPermissionToWriteExternalStorage(Context ctx) {
 		return ContextCompat.checkSelfPermission(ctx, Manifest.permission.WRITE_EXTERNAL_STORAGE)
 				== PackageManager.PERMISSION_GRANTED;
 	}
-
-	@Override
-	public void onRequestPermissionsResult(int requestCode,
-										   String permissions[], int[] grantResults) {
-		if (requestCode == PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE
-				&& grantResults.length > 0
-				&& grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-			new Timer().schedule(new TimerTask() {
-				@Override
-				public void run() {
-					chooseDataStorage();
-				}
-			}, 1);
-		} else {
-			Toast.makeText(this,
-					R.string.missing_write_external_storage_permission,
-					Toast.LENGTH_LONG).show();
-		}
-		return;
-	}
-
 
 	public String getFilterAndClear() {
 		String res = filter;
