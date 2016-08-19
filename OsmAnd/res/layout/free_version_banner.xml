@@ -141,10 +141,10 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="12dp"
                             android:background="@drawable/blue_button_drawable"
-                            android:paddingBottom="10dp"
+                            android:paddingBottom="4dp"
                             android:paddingLeft="14dp"
                             android:paddingRight="14dp"
-                            android:paddingTop="10dp"
+                            android:paddingTop="4dp"
                             android:textColor="@color/color_white"
                             android:visibility="visible"
                             tools:text="GET FOR E5"/>
@@ -209,10 +209,10 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="12dp"
                             android:background="@drawable/blue_button_drawable"
-                            android:paddingBottom="10dp"
+                            android:paddingBottom="4dp"
                             android:paddingLeft="14dp"
                             android:paddingRight="14dp"
-                            android:paddingTop="10dp"
+                            android:paddingTop="4dp"
                             android:textColor="@color/color_white"
                             tools:text="GET FOR 1,5E PER MONTH"/>
 

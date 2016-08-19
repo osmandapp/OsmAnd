@@ -19,6 +19,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.support.v4.widget.Space;
 import android.support.v7.widget.AppCompatButton;
 import android.text.method.LinkMovementMethod;
@@ -162,8 +163,24 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 
 		viewPager.setAdapter(new TabActivity.OsmandFragmentPagerAdapter(getSupportFragmentManager(), mTabs));
 		mSlidingTabLayout.setViewPager(viewPager);
-		mSlidingTabLayout.setOnPageChangeListener(accessibilityAssistant);
-
+		mSlidingTabLayout.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+			
+			@Override
+			public void onPageSelected(int position) {
+				accessibilityAssistant.onPageSelected(position);
+				visibleBanner.updateBannerInProgress();
+			}
+			
+			@Override
+			public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+				accessibilityAssistant.onPageScrolled(position, positionOffset, positionOffsetPixels);
+			}
+			
+			@Override
+			public void onPageScrollStateChanged(int state) {
+				accessibilityAssistant.onPageScrollStateChanged(state);				
+			}
+		});
 		viewPager.setCurrentItem(currentTab);
 		visibleBanner = new BannerAndDownloadFreeVersion(findViewById(R.id.mainLayout), this, true);
 
