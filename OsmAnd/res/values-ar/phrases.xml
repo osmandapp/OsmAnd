@@ -417,4 +417,36 @@
 	<string name="poi_diaper_no">لا توجد طاولة تغيير الحفاض</string>
 	<string name="poi_diaper_room">غرفة تغيير الحفاضات</string>
 
+	<string name="poi_maxstay">الوقت المحدد للركن</string>
+
+	<string name="poi_vending_cigarettes">السجائر</string>
+	<string name="poi_vending_excrement_bags">أكياس البراز</string>
+	<string name="poi_vending_public_transport_tickets">تذاكر النقل العمومي</string>
+	<string name="poi_vending_drinks">المشروبات</string>
+	<string name="poi_vending_sweets">حلويات</string>
+	<string name="poi_vending_condoms">واقيات ذكرية</string>
+	<string name="poi_vending_stamps">طوابع بريدية</string>
+	<string name="poi_vending_food">أكل</string>
+	<string name="poi_vending_drinks_food">الأغذية والمشروبات</string>
+	<string name="poi_vending_fuel">بيع وقود</string>
+	<string name="poi_vending_milk">حليب</string>
+	<string name="poi_vending_elongated_coin">عملة نقدية ممددة الشكل</string>
+	<string name="poi_vending_bread">خبز</string>
+	<string name="poi_vending_chewing_gums">علك</string>
+	<string name="poi_vending_coffee">قهوة</string>
+	<string name="poi_vending_tickets">بيع التذاكر</string>
+	<string name="poi_vending_water">بيع المياه</string>
+	<string name="poi_vending_animal_food">أغذية حيوانات</string>
+	<string name="poi_vending_drinks_sweets">مشروبات وحلويات</string>
+	<string name="poi_vending_vouchers">قسائم</string>
+	<string name="poi_vending_dvd">دي في دي</string>
+	<string name="poi_vending_candles">شموع</string>
+	<string name="poi_vending_toys">ألعاب</string>
+	<string name="poi_vending_ice_cream">مثلجات</string>
+	<string name="poi_vending_sim_cards">بطاقات سيم</string>
+
+	<string name="poi_branch">فرع</string>
+
+	<string name="poi_memorial_plaque">لوحة</string>
+	<string name="poi_memorial_statue">تمثال</string>
 	</resources>

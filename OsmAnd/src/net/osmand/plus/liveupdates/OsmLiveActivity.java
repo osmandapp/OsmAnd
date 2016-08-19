@@ -19,8 +19,7 @@ import net.osmand.plus.inapp.InAppHelper;
 
 import org.apache.commons.logging.Log;
 
-public class OsmLiveActivity extends AbstractDownloadActivity
-		implements DownloadIndexesThread.DownloadEvents{
+public class OsmLiveActivity extends AbstractDownloadActivity implements DownloadIndexesThread.DownloadEvents {
 	private final static Log LOG = PlatformUtil.getLog(OsmLiveActivity.class);
 	public final static String OPEN_SUBSCRIPTION_INTENT_PARAM = "open_subscription_intent_param";
 	private LiveUpdatesFragmentPagerAdapter pagerAdapter;

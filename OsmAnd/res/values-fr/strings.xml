@@ -2307,4 +2307,7 @@ Actuellement {2} Mo sont disponibles.</string>
     <string name="get_for">Obtenir pour %1$s</string>
     <string name="get_for_month">Obtenir pour %1$s mois</string>
     <string name="si_mi_meters">Miles / Mètres</string>
+    <string name="get_it">Obtenir</string>
+    <string name="osm_live_banner_desc">Obtenez le téléchargement illimité de cartes et des mises à jour plus régulières (chaque semaine, chaque jour, chaque heure; au lieu de chaque mois).</string>
+    <string name="osmand_plus_banner_desc">Version OsmAnd complète avec téléchargement illimité des cartes et mises à jour mensuelles des cartes.</string>
     </resources>

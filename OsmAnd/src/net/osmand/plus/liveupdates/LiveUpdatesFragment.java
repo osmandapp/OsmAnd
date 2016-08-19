@@ -642,6 +642,8 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppList
 		protected void onPostExecute(List<LocalIndexInfo> result) {
 			//this.result = result;
 			adapter.sort();
+			adapter.notifyLiveUpdatesChanged();
+			adapter.notifyDataSetInvalidated();
 		}
 	}
 
