@@ -2448,4 +2448,8 @@ Se vi bezonas helpon pri OsmAnd aplikaĵo, bonvolu kontakti nian helpantaron: su
     <string name="osm_live_banner_desc">Havigu senlimigitan mapojn kaj ĝisdatigojn pli ofte ol unu foje en monato: ĉiuhore, ĉiutage aŭ ĉiusemajne.</string>
     <string name="osmand_plus_banner_desc">Plena versio de OsmAnd kun senlimigitaj mapoj kaj ĝisdatigoj ĉiumonate.</string>
     <string name="si_mi_meters">Mejloj/metroj</string>
+    <string name="osm_live_payment_desc">Abon-pagoj estos prenitaj ĉiumonate. Vi ĉiam povos rezigni el la abono per Google Play.</string>
+    <string name="donation_to_osm">Donacoj por la OpenStreetMap komunumo</string>
+    <string name="donation_to_osm_desc">Parto de viaj donatoj estos senditaj al OSM-uzantoj kiuj kontribuas al la OpenStreetMap. Abon-pago estas la sama.</string>
+    <string name="osm_live_subscription_desc">Abonoj ebligas al vi ĉiuhorajn, ĉiutagajn, ĉiusemajnajn ĝisdatigojn kaj senlimigitajn elŝutaĵojn de mapoj de la tuta mondo.</string>
     </resources>
