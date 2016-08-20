@@ -463,10 +463,10 @@ public class InAppHelper {
 												ctx.getSettings().BILLING_USER_COUNTRY_DOWNLOAD_NAME.set(prefferedCountry);
 												CountrySelectionFragment countrySelectionFragment = new CountrySelectionFragment();
 												countrySelectionFragment.initCountries(ctx);
-												CountryItem countryItem;
+												CountryItem countryItem = null;
 												if (Algorithms.isEmpty(prefferedCountry)) {
 													countryItem = countrySelectionFragment.getCountryItems().get(0);
-												} else {
+												} else if (!prefferedCountry.equals(OsmandSettings.BILLING_USER_DONATION_NONE_PARAMETER)) {
 													countryItem = countrySelectionFragment.getCountryItem(prefferedCountry);
 												}
 												if (countryItem != null) {
