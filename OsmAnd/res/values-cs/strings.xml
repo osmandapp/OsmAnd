@@ -2256,4 +2256,15 @@ V současnosti je k dispozici {2} MB.</string>
 
  a další…
  "</string>
+    <string name="osm_live_payment_desc">Poplatek za předplatné bude strhnuto každý měsíc. Předplatné můžete zrušit kdykoli na Google Play.</string>
+    <string name="donation_to_osm">Příspěvek komunitě OpenStreetMap</string>
+    <string name="donation_to_osm_desc">Část příspěvku bude zaslaná uživatelům, kteří zasílají změny do OpenStreetMap. Cena předplatného zůstává stejná.</string>
+    <string name="osm_live_subscription_desc">Předplatné umožňuje hodinové, denní, týdenní aktualizace a neomezené stahování map celého světa.</string>
+    <string name="get_it">Získat</string>
+    <string name="get_for">Získat za %1$s</string>
+    <string name="get_for_month">Získat za %1$s měsíc</string>
+    <string name="osm_live_banner_desc">Získejte neomezené stahování map a aktualizací více než jednou za měsíc: každou hodinu, den nebo týden.</string>
+    <string name="osmand_plus_banner_desc">Plná verze OsmAnd s neomezeným stahováním map a měsíčními aktualizacemi.</string>
+    <string name="si_mi_meters">Míle/metry</string>
+    <string name="lang_hsb">Hornolužická srbština</string>
     </resources>
