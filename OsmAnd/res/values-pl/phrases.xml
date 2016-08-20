@@ -70,7 +70,7 @@
 	<string name="poi_paint">Farby</string>
 	<string name="poi_pet">Zoologiczny</string>
 	<string name="poi_radiotechnics">Art. RTV</string>
-	<string name="poi_second_hand">Ciuchland</string>
+	<string name="poi_second_hand">Sklep z odzieżą używaną</string>
 	<string name="poi_ship_chandler">Armator</string>
 	<string name="poi_sports">Sportowy</string>
 	<string name="poi_stationery">Papierniczy</string>
@@ -417,7 +417,7 @@
 	<string name="poi_dock">Dok</string>
 	<string name="poi_toilets">Toalety</string>
 	<string name="poi_sauna">Sauna</string>
-	<string name="poi_brothel">Burdel</string>
+	<string name="poi_brothel">Dom publiczny</string>
 	<string name="poi_mortuary">Kostnica</string>
 	<string name="poi_crematorium">Krematorium</string>
 	<string name="poi_internet_cafe">Kawiarenka internetowa</string>
@@ -513,7 +513,7 @@
 	<string name="poi_rest_area">Miejsce obsługi podróżnych</string>
 
 	<string name="poi_industrial">Tereny przemysłowe</string>
-	<string name="poi_emergency">SOR</string>
+	<string name="poi_emergency">Nagły wypadek</string>
 	<string name="poi_aerialway_transport">Transport w powietrzu</string>
 	<string name="poi_landuse">Przeznaczenie obszaru</string>
 	<string name="poi_service">Usługi</string>
@@ -1156,7 +1156,7 @@
 
 	<string name="poi_lit_yes">Oświetlenie: tak</string>
 	<string name="poi_cross">Krzyż</string>
-	<string name="poi_ford_stepping_stones">Przejście przez bród po przygotowanych kamieniach</string>
+	<string name="poi_ford_stepping_stones">Przejście przez bród po kamieniach</string>
 	<string name="poi_traffic_calming_island">Wysepka spowalniająca</string>
 	<string name="poi_power_tower">Słup wysokiego napięcia</string>
 	<string name="poi_denomination_greek_catholic">Grekokatolicki</string>
@@ -1541,5 +1541,19 @@
 
 	<string name="poi_toll_yes">Opłata drogowa</string>
 	<string name="poi_traffic_signals_sound_walk">Z dźwiękiem, gdy przejście jest dozwolone</string>
+
+	<string name="poi_ventilation_shaft">Szyb wentylacyjny</string>
+
+	<string name="poi_telescope">Teleskop</string>
+	<string name="poi_telescope_type_optical">Teleskop: optyczny</string>
+	<string name="poi_telescope_type_radio">Teleskop: radioteleskop</string>
+	<string name="poi_telescope_type_gamma">Teleskop: promieniowanie gamma</string>
+	<string name="poi_pumping_station">Pompownia</string>
+
+	<string name="poi_spoil_heap">Hałda górnicza</string>
+	
+	<string name="poi_fitness_station">Przyrządy do ćwiczeń</string>
+
+	<string name="poi_water_tank">Zbiornik na wodę</string>
 
 	</resources>
