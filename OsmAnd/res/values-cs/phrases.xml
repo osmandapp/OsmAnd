@@ -1900,4 +1900,32 @@
 	<string name="poi_observatory_type_meteorological">Použití: meteorologický</string>
 	<string name="poi_observatory_type_gravitational">Použití: gravitační</string>
 
+	<string name="poi_greenhouse_horticulture">Skleníkové zahradnictví</string>
+
+	<string name="poi_voltage">Elektrické napětí</string>
+	<string name="poi_generator_output_electricity">Výstupní výkon</string>
+	<string name="poi_generator_output_electricity_yes">Výstup: elektřina</string>
+	<string name="poi_generator_output_hot_water">Výstupní výkon teplé vody</string>
+	<string name="poi_generator_output_hot_water_yes">Výstup: horká voda</string>
+	<string name="poi_generator_output_steam_yes">Výstup: pára</string>
+	<string name="poi_generator_output_hot_air_yes">Výstup: horký vzduch</string>
+	<string name="poi_generator_output_cold_water_yes">Výstup: studená voda</string>
+	<string name="poi_generator_output_compressed_air">Výstupní výkon stlačeným vzduchem</string>
+	<string name="poi_generator_output_compressed_air_yes">Výstup: stlačený vzduch</string>
+	<string name="poi_generator_output_vacuum_yes">Výstup: vákuum</string>
+	<string name="poi_generator_output_biogas">Výstupní výkon bioplynem</string>
+	<string name="poi_generator_output_biogas_yes">Výstup: bioplyn</string>
+
+	<string name="poi_pumping_station">Čerpací stanice</string>
+
+	<string name="poi_display_yes">Zobrazování: ano</string>
+	<string name="poi_display_no">Zobrazování: ne</string>
+	<string name="poi_display_analog_yes">Analogové zobrazení</string>
+	<string name="poi_display_digital_yes">Digitální zobrazení</string>
+	<string name="poi_display_sundial_yes">Sluneční hodiny</string>
+
+	<string name="poi_denomination_pentecostal">Letniční</string>
+	<string name="poi_denomination_shia">Šítský</string>
+	<string name="poi_denomination_church_of_scotland">Skotská církev</string>
+	<string name="poi_denomination_mennonite">Mennonité</string>
 	</resources>
