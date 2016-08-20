@@ -2234,7 +2234,7 @@ V súčasnosti je voľných len {2} MB.</string>
     <string name="osm_live_ask_for_purchase">Prosím zakúpte si najprv OSM Naživo</string>
 
     <string name="osm_live_header">Registrácia umožní hodinové aktualizácie všetkých máp sveta.
-Väčšina príjmu ide späť do OSM komunity a za každý príspevok do OSM je vyplatená odmena.
+Časť príjmu ide späť do OSM komunity a za každý príspevok do OSM je vyplatená odmena.
 Ak máte radi OsmAnd a OSM a chcete ich podporiť, toto je výborný spôsob ako to urobiť.</string>
     
     <string name="show_transparency_seekbar">Zobraziť panel priesvitnosti</string>
