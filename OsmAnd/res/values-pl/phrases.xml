@@ -245,7 +245,7 @@
 	<string name="poi_city">Miasto</string>
 	<string name="poi_town">Małe miasto</string>
 	<string name="poi_village">Wieś</string>
-	<string name="poi_hamlet">Część wsi</string>
+	<string name="poi_hamlet">Przysiółek</string>
 	<string name="poi_hospital">Szpital</string>
 	<string name="poi_doctors">Przychodnia</string>
 	<string name="poi_clinic">Klinika</string>
@@ -1560,4 +1560,7 @@
 
 	<string name="poi_suction_point">Punkt pompowania wody</string>
 
+	<string name="poi_prison_camp">Były obóz jeniecki</string>
+	<string name="poi_summer_camp">Obóz letni</string>
+	<string name="poi_firepit">Ognisko</string>
 	</resources>
