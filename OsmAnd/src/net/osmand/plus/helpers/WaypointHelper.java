@@ -278,7 +278,7 @@ public class WaypointHelper {
 					AlarmInfo info = AlarmInfo.createAlarmInfo(typeRule, 0, loc);
 
 					//Check if stop sign is tagged with direction=forward/backward
-					if (info.getType() == AlarmInfoType.STOP) {
+					if (info != null && info.getType() != null && info.getType() == AlarmInfoType.STOP) {
 						//TODO: better than bearingVsRouteDirection would be routeVsWayDirection analysis
 						if (ro.isStopDirectionOpposite(ro.bearingVsRouteDirection(loc))) {
 							info = null;
