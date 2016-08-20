@@ -2418,4 +2418,8 @@ Si necesitas ayuda con la aplicación OsmAnd, contacte con nuestro equipo de sop
     <string name="osm_live_banner_desc">Obtenga descargas ilimitada de mapas y más actualizaciones por mes: cada hora, día o semana.</string>
     <string name="osmand_plus_banner_desc">Versión OsmAnd de pago con descargas ilimitadas y actualizaciones mensuales de mapas.</string>
     <string name="get_it">Obtener</string>
+    <string name="osm_live_payment_desc">La suscripción se pagará mensualmente. Siempre puedes cancelar tu suscripción en Google Play.</string>
+    <string name="donation_to_osm">Donaciones a la comunidad de OpenStreetMap</string>
+    <string name="donation_to_osm_desc">Parte de tu donación se envía a usuarios que realicen cambios en OpenStreetMap. El costo de la suscripción sigue siendo la misma.</string>
+    <string name="osm_live_subscription_desc">La suscripción permite actualizaciones cada hora, día o semana y descargas ilimitadas para todos los mapas del mundo.</string>
     </resources>
