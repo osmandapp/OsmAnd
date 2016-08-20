@@ -2512,4 +2512,8 @@ Wenn Sie OsmAnd und OSM lieben und unterstützen wollen, so ist dies die perfekt
     <string name="get_for">Holen für %1$s</string>
     <string name="get_for_month">Holen für %1$s im Monat</string>
     <string name="get_it">Hole es</string>
+    <string name="osm_live_payment_desc">Die Abonnentengebühr wird monatlich berechnet. Sie können das Abonnement jederzeit auf Google Play kündigen.</string>
+    <string name="donation_to_osm">Spende an die OpenStreetMap Gemeinschaft</string>
+    <string name="donation_to_osm_desc">Ein Teil Ihrer Spende erhalten OSM-Benutzern, die Änderungen an OpenStreetMaps übermitteln. Die Kosten für das Abonnement bleiben unverändert.</string>
+    <string name="osm_live_subscription_desc">Das Abonnement ermöglicht stündliche, tägliche, wöchentliche Updates und unbegrenzte Downloads für alle Karten auf der ganzen Welt.</string>
     </resources>
