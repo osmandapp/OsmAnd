@@ -2556,4 +2556,8 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="osmand_plus_banner_desc">نسخة كاملة من التطبيق مع تحميل غير محدود وتحديثات شهرية للخرائط .</string>
     <string name="si_mi_meters">أميال/أمتار</string>
     <string name="get_it">تحصل عليه</string>
+    <string name="osm_live_payment_desc">رسوم الاشتراك ستفرض كل شهر. يمكنك دوماً إلغاء اشتراكك في جوجل بلاي.</string>
+    <string name="donation_to_osm">التبرع لمجتمع OpenStreetMap</string>
+    <string name="donation_to_osm_desc">سيتم إرسال جزء من تبرعك إلى مستخدمي OSM الذين يقومون بإرسال التغييرات إلى الموقع. تكلفة الاشتراك تبقى نفسها.</string>
+    <string name="osm_live_subscription_desc">اشتراك يتيح تحديثات كل ساعة، يوميا، أسبوعيا وتحميل غير محدود لجميع الخرائط حول العالم.</string>
     </resources>
