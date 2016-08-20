@@ -118,7 +118,6 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppList
 		View bottomShadowView = inflater.inflate(R.layout.card_bottom_divider, listView, false);
 		listView.addFooterView(bottomShadowView);
 		adapter = new LocalIndexesAdapter(this);
-		listView.setAdapter(adapter);
 		listView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
 			@Override
 			public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
@@ -152,6 +151,7 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppList
 				}
 			});
 		}
+		listView.setAdapter(adapter);
 
 		if(Build.VERSION.SDK_INT >= 11) {
 			loadLocalIndexesTask = new LoadLocalIndexTask(adapter, this).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
