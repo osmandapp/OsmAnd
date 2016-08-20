@@ -2412,10 +2412,16 @@ Ak potrebuje pomoc s aplikáciou OsmAnd, kontaktuje podporu: support@osmand.net.
     <string name="storage_place_description">Úložisko údajov pre OsmAnd (mapy, stopy, atď.): %1$s.</string>
     <string name="give_permission">Udeliť povolenie</string>
     <string name="allow_access_location">Povoliť prístup k polohe</string>
-    <string name="first_usage_greeting">Získajte pokyny, objavte nové miesta, bez pripojenia na internet</string>
+    <string name="first_usage_greeting">Získajte pokyny a objavte nové miesta bez pripojenia na internet</string>
     <string name="search_my_location">Hľadať moju polohu</string>
     <string name="no_update_info_desc">Nekontrolovať aktualizácie nových verzií a zľavy súvisiace s OsmAnd</string>
     <string name="no_update_info">Nezobrazovať aktualizácie</string>
     <string name="update_all_maps_now">Chcete teraz aktualizovať všetky mapy?</string>
     <string name="clear_tile_data">Vymazať všetky dlaždice</string>
+    <string name="get_it">Získať</string>
+    <string name="get_for">Získať za %1$s</string>
+    <string name="get_for_month">Získať za %1$s mesiac</string>
+    <string name="osm_live_banner_desc">Získajte neobmedzené sťahovanie máp a aktualizácií častejšie ako raz za mesiac: každú hodinu, deň alebo týždeň.</string>
+    <string name="osmand_plus_banner_desc">Plná verzia OsmAnd s neobmedzeným sťahovaním máp a mesačnými aktualizáciami.</string>
+    <string name="si_mi_meters">Míle/metre</string>
     </resources>
