@@ -4,12 +4,14 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.AppCompatCheckBox;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -41,10 +43,12 @@ public class SubscriptionFragment extends BaseOsmAndDialogFragment implements In
 	private static final String EMAIL_ID = "email_id";
 	private static final String COUNTRY_ITEM_ID = "country_id";
 	private static final String HIDE_USER_NAME_ID = "hide_user_name_id";
+	private static final String DONATION_ID = "donation_id";
 
 	private OsmandSettings settings;
 	private ProgressDialog dlg;
 	private boolean editMode;
+	private boolean donation;
 
 	private String prevEmail;
 	private CountryItem selectedCountryItem;
@@ -76,6 +80,8 @@ public class SubscriptionFragment extends BaseOsmAndDialogFragment implements In
 			outState.putString(EMAIL_ID, emailEdit.getText().toString());
 			CheckBox hideUserNameCheckbox = (CheckBox) view.findViewById(R.id.hideUserNameCheckbox);
 			outState.putBoolean(HIDE_USER_NAME_ID, hideUserNameCheckbox.isChecked());
+			CheckBox donationCheckbox = (CheckBox) view.findViewById(R.id.donationCheckbox);
+			outState.putBoolean(DONATION_ID, donationCheckbox.isChecked());
 			if (selectedCountryItem != null) {
 				outState.putSerializable(COUNTRY_ITEM_ID, selectedCountryItem);
 			}
@@ -109,17 +115,20 @@ public class SubscriptionFragment extends BaseOsmAndDialogFragment implements In
 		String email = settings.BILLING_USER_EMAIL.get();
 		String countryDownloadName = settings.BILLING_USER_COUNTRY_DOWNLOAD_NAME.get();
 		boolean hideUserName = settings.BILLING_HIDE_USER_NAME.get();
+		donation = !countryDownloadName.equals(OsmandSettings.BILLING_USER_DONATION_NONE_PARAMETER);
 
 		if (savedInstanceState != null) {
 			userName = savedInstanceState.getString(USER_NAME_ID);
 			email = savedInstanceState.getString(EMAIL_ID);
 			hideUserName = savedInstanceState.getBoolean(HIDE_USER_NAME_ID);
+			donation = savedInstanceState.getBoolean(DONATION_ID);
 			Object obj = savedInstanceState.getSerializable(COUNTRY_ITEM_ID);
 			if (obj instanceof CountryItem) {
 				selectedCountryItem = (CountryItem) obj;
 				countryDownloadName = selectedCountryItem.getDownloadName();
 			} else {
-				countryDownloadName = "";
+				countryDownloadName =
+						donation ? OsmandSettings.BILLING_USER_DONATION_WORLD_PARAMETER : OsmandSettings.BILLING_USER_DONATION_NONE_PARAMETER;
 			}
 		}
 
@@ -144,6 +153,20 @@ public class SubscriptionFragment extends BaseOsmAndDialogFragment implements In
 			title.setText(getString(R.string.osm_live_subscription));
 		}
 
+		final View headerLayout = view.findViewById(R.id.headerLayout);
+		final View paramsLayout = view.findViewById(R.id.paramsLayout);
+		AppCompatCheckBox donationCheckbox = (AppCompatCheckBox) view.findViewById(R.id.donationCheckbox);
+		donationCheckbox.setChecked(donation);
+		donationCheckbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				donation = isChecked;
+				paramsLayout.setVisibility(isChecked ? View.VISIBLE : View.GONE);
+			}
+		});
+		headerLayout.setVisibility(View.VISIBLE);
+		paramsLayout.setVisibility(donation ? View.VISIBLE : View.GONE);
+
 		final EditText userNameEdit = (EditText) view.findViewById(R.id.userNameEdit);
 		if (!Algorithms.isEmpty(userName)) {
 			userNameEdit.setText(userName);
@@ -155,7 +178,7 @@ public class SubscriptionFragment extends BaseOsmAndDialogFragment implements In
 		}
 
 		countrySelectionFragment.initCountries(getMyApplication());
-		if (Algorithms.isEmpty(countryDownloadName)) {
+		if (Algorithms.isEmpty(countryDownloadName) || countryDownloadName.equals(OsmandSettings.BILLING_USER_DONATION_NONE_PARAMETER)) {
 			selectedCountryItem = countrySelectionFragment.getCountryItems().get(0);
 		} else {
 			selectedCountryItem = countrySelectionFragment.getCountryItem(countryDownloadName);
@@ -297,16 +320,23 @@ public class SubscriptionFragment extends BaseOsmAndDialogFragment implements In
 	}
 
 	private boolean applySettings(String userName, String email, boolean hideUserName) {
-		String countryName = selectedCountryItem != null ? selectedCountryItem.getLocalName() : "";
-		String countryDownloadName = selectedCountryItem != null ? selectedCountryItem.getDownloadName() : "";
-
-		if (Algorithms.isEmpty(email) || !AndroidUtils.isValidEmail(email)) {
-			getMyApplication().showToastMessage(getString(R.string.osm_live_enter_email));
-			return false;
-		}
-		if (Algorithms.isEmpty(userName) && !hideUserName) {
-			getMyApplication().showToastMessage(getString(R.string.osm_live_enter_user_name));
-			return false;
+		String countryName;
+		String countryDownloadName;
+		if (!donation) {
+			countryName = "";
+			countryDownloadName = OsmandSettings.BILLING_USER_DONATION_NONE_PARAMETER;
+		} else {
+			countryName = selectedCountryItem != null ? selectedCountryItem.getLocalName() : "";
+			countryDownloadName = selectedCountryItem != null ?
+					selectedCountryItem.getDownloadName() : OsmandSettings.BILLING_USER_DONATION_WORLD_PARAMETER;
+			if (Algorithms.isEmpty(email) || !AndroidUtils.isValidEmail(email)) {
+				getMyApplication().showToastMessage(getString(R.string.osm_live_enter_email));
+				return false;
+			}
+			if (Algorithms.isEmpty(userName) && !hideUserName) {
+				getMyApplication().showToastMessage(getString(R.string.osm_live_enter_user_name));
+				return false;
+			}
 		}
 
 		settings.BILLING_USER_NAME.set(userName);
