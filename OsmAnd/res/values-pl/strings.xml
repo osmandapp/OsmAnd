@@ -2500,4 +2500,8 @@ Włączenie tego widoku zmienia styl mapy na „Zima i narty”, ukazujący tere
     <string name="no_update_info">Nie wyszukuj aktualizacji</string>
     <string name="update_all_maps_now">Uaktualnić wszystkie mapy?</string>
     <string name="clear_tile_data">Wyczyść wszystkie kafelki</string>
+    <string name="osm_live_payment_desc">Opłaty za subskrypcję pobierane będą co miesiąc. Zawsze możesz się z niej wypisać przez Google Play.</string>
+    <string name="donation_to_osm">Dotacja dla społeczności OpenStreetMap</string>
+    <string name="donation_to_osm_desc">Część z Twoich dotacji zostanie przekazana użytkownikom OSM którzy nanoszą poprawki na mapy OpenStreetMap. Koszt subskrypcji pozostaje taki sam.</string>
+    <string name="osm_live_subscription_desc">Subskrypcje pozwalają na cogodzinne, codzienne i cotygodniowe aktualizacje i nielimitowane pobierania map całego świata.</string>
     </resources>
