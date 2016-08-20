@@ -2259,7 +2259,7 @@ Si necesitas ayuda con la aplicación OsmAnd, contacte con nuestro equipo de sop
     <string name="osm_live_ask_for_purchase">Primero compra la suscripción de OSM Live</string>
 
     <string name="osm_live_header">Esta suscripción, permite actualizaciones cada hora para todos los mapa del mundo.
- La mayor parte de los ingresos vuelven a la comunidad de OSM y se paga por cada contribución OSM.
+ Parte de los ingresos vuelven a la comunidad de OSM y se paga por cada contribución OSM.
 Si amas a OsmAnd, OSM y quieres apoyarlos, esta es una perfecta manera de hacerlo.</string>
     
     <string name="select_map_marker">Elegir marcador del mapa</string>
