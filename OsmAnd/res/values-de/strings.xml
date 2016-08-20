@@ -2372,7 +2372,7 @@ Aktuell sind {2} MB verfügbar.</string>
     <string name="osm_live_subscription_settings">Abonnementeinstellungen</string>
     <string name="osm_live_ask_for_purchase">Bitte kaufen Sie zuerst ein OSM-Live-Abonnement</string>
 
-    <string name="osm_live_region_desc">Teile Ihrer Spende werden an OSM-Mitwirkende weitergegeben, welche diese Region bearbeiten</string>
+    <string name="osm_live_region_desc">Teile Ihrer Spende werden an OSM-Mitwirkende weitergegeben, welche diese Region bearbeiten.</string>
     <string name="osm_live_header">Dieses Abonnement schaltet stündliche Updates für die gesamten weltweiten Karten frei. 
 Ein Großteil dieser Einnahmen geht zurück an die OSM-Gemeinschaft, eine Auszahlung erfolgt je nach Anzahl der Beiträge zu den OSM-Daten. 
 Wenn Sie OsmAnd und OSM lieben und unterstützen wollen, so ist dies die perfekte Möglichkeit.</string>
@@ -2386,7 +2386,7 @@ Wenn Sie OsmAnd und OSM lieben und unterstützen wollen, so ist dies die perfekt
 \n\n und mehr… "</string>
     <string name="full_report">Vollständiger Report</string>
     <string name="open_street_map_login_and_pass">OpenStreetMap Zugang und Passwort</string>
-    <string name="osm_live_email_desc">Wir brauchen dies um dir Informationen über Beiträge zur Verfügung zu stellen</string>
+    <string name="osm_live_email_desc">Wir brauchen diese um Ihnen Informationen über die Beiträge zur Verfügung zu stellen.</string>
     <string name="osm_live_support_region">Unterstützter Region</string>
     <string name="report">Bericht</string>
     <string name="storage_permission_restart_is_required">Die Anwendung darf nun auf den externen Speicher schreiben. Ein manueller Neustart der Anwendung ist nötig.</string>
