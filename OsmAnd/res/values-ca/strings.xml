@@ -2314,8 +2314,8 @@ Ara mateix, es disposa de {2} MB.</string>
     <string name="file_name_containes_illegal_char">El nom de fitxer inclou un caràcter il·legal</string>
 <string name="no_map_markers_found">Afegiu els marcadors de mapa amb el mapa</string>
     <string name="osm_live_header">"Aquesta subscripció permet actualitzacions horàries de tots els mapes del món. 
-La majoria dels ingressos es retornen a la comunitat OSM en retribuir cada contribució OSM. 
-Si aprecieu OsmAnd  i OSM i vulgueu ajudar-los, és la via perfecta per fer-ho."</string>
+Part dels ingressos es retornen a la comunitat OSM en retribuir cada contribució OSM. 
+Si aprecieu OsmAnd  i OSM i voleu ajudar-los, és la via perfecta per fer-ho."</string>
     
     <string name="upload_osm_note_description">Podeu pujar la vostra nota OSM anònimament si utilitzeu el vostre perfil OpenStreetMap.org.</string>
     <string name="add_time_span">Afegeix un lapse de temps</string>
