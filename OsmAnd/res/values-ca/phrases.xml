@@ -2273,4 +2273,21 @@
 
 <string name="poi_seamark_dyke">Indicació de dic</string>
 	<string name="poi_content_oil">Contingut: petroli</string>
+	<string name="poi_date_yes">Mostra la data: sí</string>
+	<string name="poi_date_no">Mostra la data: no</string>
+
+	<string name="poi_thermometer_no">Termòmetre: no</string>
+	<string name="poi_barometer_yes">Baròmetre:sí</string>
+	<string name="poi_barometer_no">Baròmetre: no</string>
+	<string name="poi_thermometer_yes">Termòmetre: sí</string>
+	<string name="poi_display_digital_yes">Tauler digital</string>
+	<string name="poi_pumping_station">Central de bombament</string>
+
+	<string name="poi_display_yes">Tauler: sí</string>
+	<string name="poi_display_no">Tauler: no</string>
+	<string name="poi_display_analog_yes">Tauler analògic</string>
+	<string name="poi_display_sundial_yes">Rellotge de sol</string>
+
+	<string name="poi_hygrometer_yes">Higròmetre: sí</string>
+	<string name="poi_hygrometer_no">Higròmetre: no</string>
 	</resources>
