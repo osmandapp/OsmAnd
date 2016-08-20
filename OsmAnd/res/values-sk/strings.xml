@@ -2424,4 +2424,8 @@ Ak potrebuje pomoc s aplikáciou OsmAnd, kontaktuje podporu: support@osmand.net.
     <string name="osm_live_banner_desc">Získajte neobmedzené sťahovanie máp a aktualizácií častejšie ako raz za mesiac: každú hodinu, deň alebo týždeň.</string>
     <string name="osmand_plus_banner_desc">Plná verzia OsmAnd s neobmedzeným sťahovaním máp a mesačnými aktualizáciami.</string>
     <string name="si_mi_meters">Míle/metre</string>
+    <string name="osm_live_payment_desc">Poplatok za predplatné bude strhnutý každý mesiac. Predplatné môžete zrušiť kedykoľvek na Google Play.</string>
+    <string name="donation_to_osm">Príspevok komunite OpenStreetMap</string>
+    <string name="donation_to_osm_desc">Časť príspevku bude zaslaná používateľom, ktorí zasielajú zmeny do OpenStreetMap. Cena predplatného zostáva rovnaká.</string>
+    <string name="osm_live_subscription_desc">Predplatné umožňuje hodinové, denné, týždenné aktualizácie a neobmedzené sťahovanie máp celého sveta.</string>
     </resources>
