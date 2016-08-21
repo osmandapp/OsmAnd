@@ -25,8 +25,113 @@ public class TurnPathHelper {
 	public static final int FIRST_TURN = 1;
 	public static final int SECOND_TURN = 2;
 	public static final int THIRD_TURN = 3;
-	private static final boolean USE_NEW_RNDB = true;
 	private static final boolean SHOW_STEPS = true;
+	
+	private static class TurnVariables {
+		
+		float radEndOfArrow = 44;
+		float radInnerCircle = 10;
+		float radOuterCircle = radInnerCircle + 8;
+	
+		float radBottom = radOuterCircle + 10;
+		float radStepInter = radOuterCircle + 6;
+		float radArrowTriangle1 = radOuterCircle + 7;
+	
+		float widthStepIn = 8;
+		float widthStepInter = 6;
+		float widthArrow = 22;
+		float radArrowTriangle2;
+		private double dfL;
+		private double dfAr2;
+		private double dfStepInter;
+		private double dfAr;
+		private double dfOut;
+		private double dfStepOut;
+		private double dfIn;
+		private double minDelta;
+		private double rot;
+		private float cx;
+		private float cy;
+		private float scaleTriangle;
+		
+		private TurnVariables(boolean leftSide, float turnAngle, int out, int wa, int ha, float scaleTriangle) {
+			this.scaleTriangle = scaleTriangle;
+			widthArrow = widthArrow * scaleTriangle;
+			radArrowTriangle2 = radArrowTriangle1 + 1 * scaleTriangle * scaleTriangle;
+			
+			dfL = (leftSide ? 1 : -1) * Math.asin(widthStepIn / (2.0 * radBottom));
+			dfAr2 = (leftSide ? 1 : -1) * Math.asin(widthArrow / (2.0 * radArrowTriangle2));
+			dfStepInter = (leftSide ? 1 : -1) * Math.asin(widthStepInter / radStepInter);
+			dfAr = Math.asin(radBottom * Math.sin(dfL) / radArrowTriangle1);
+			dfOut = Math.asin(radBottom * Math.sin(dfL) / radOuterCircle);
+			dfStepOut = Math.asin(radStepInter * Math.sin(dfStepInter) / radOuterCircle);
+			dfIn = Math.asin(radBottom * Math.sin(dfL) / radInnerCircle);
+			minDelta = Math.abs(dfIn * 2 / Math.PI * 180) + 2;
+
+			// System.out.println("Angle " + dfL + " " + dfOut + " " + dfIn + " " + minDelta + " ");
+			rot = alignRotation(turnAngle, leftSide, minDelta, out) / 180 * Math.PI;
+
+			cx = wa / 2;
+			cy = ha / 2;
+			// align center
+			float potentialArrowEndX = (float) (Math.sin(rot) * radEndOfArrow);
+			float potentialArrowEndY = (float) (Math.cos(rot) * radEndOfArrow);
+			if (potentialArrowEndX > cx) {
+				cx = potentialArrowEndX;
+			} else if (potentialArrowEndX < -cx) {
+				cx = 2 * cx + potentialArrowEndX;
+			}
+			if (potentialArrowEndY > cy) {
+				cy = 2 * cy - potentialArrowEndY;
+			} else if (potentialArrowEndY < -cy) {
+				cy = -potentialArrowEndY;
+			}
+		}
+		
+		private float getProjX(double angle, double radius) {
+			return getX(angle, radius) + cx;
+		}
+		
+		private float getProjY(double angle, double radius) {
+			return getY(angle, radius) + cy;
+		}
+		
+		public float getTriangle2X() {
+			return getProjX(rot + dfAr, radArrowTriangle1);
+		}
+		
+		public float getTriangle1X() {
+			return getProjX(rot - dfAr, radArrowTriangle1);
+		}
+		
+		public float getTriangle2Y() {
+			return getProjY(rot + dfAr, radArrowTriangle1);
+		}
+		
+		public float getTriangle1Y() {
+			return getProjY(rot - dfAr, radArrowTriangle1);
+		}
+
+		public void drawTriangle(Path pathForTurn) {
+			// up from arc
+			arcLineTo(pathForTurn, rot - dfAr, cx, cy, radArrowTriangle1);
+			// left triangle
+			// arcLineTo(pathForTurn, rot - dfAr2, cx, cy, radAr2); // 1.
+			// arcQuadTo(pathForTurn, rot - dfAr2, radAr2, rot, radArrow, 0.9f, cx, cy); // 2.
+			arcQuadTo(pathForTurn, rot - dfAr, radArrowTriangle1, rot - dfAr2, radArrowTriangle2, rot, radEndOfArrow,
+					4.5f * scaleTriangle, cx, cy); // 3.
+			// arcLineTo(pathForTurn, rot, cx, cy, radArrow); // 1.
+			arcQuadTo(pathForTurn, rot - dfAr2, radArrowTriangle2, rot, radEndOfArrow, rot + dfAr2, radArrowTriangle2,
+					4.5f, cx, cy);
+			// right triangle
+			// arcLineTo(pathForTurn, rot + dfAr2, cx, cy, radAr2); // 1.
+			arcQuadTo(pathForTurn, rot, radEndOfArrow, rot + dfAr2, radArrowTriangle2, rot + dfAr, radArrowTriangle1,
+					4.5f * scaleTriangle, cx, cy);
+			arcLineTo(pathForTurn, rot + dfAr, cx, cy, radArrowTriangle1);
+
+		}
+		
+	}
 
 	// 72x72
 	public static void calcTurnPath(Path pathForTurn, Path outlay, TurnType turnType, 
@@ -40,203 +145,160 @@ public class TurnPathHelper {
 		}
 		int ha = 72;
 		int wa = 72;
-
-		int th = 12; // thickness
-		pathForTurn.moveTo(wa / 2, ha - 1);
-		float sarrowL = 22; // side of arrow ?
-		float harrowL = (float) Math.sqrt(2) * sarrowL; // hypotenuse of arrow
-		float spartArrowL = (float) ((sarrowL - th / Math.sqrt(2)) / 2);
-		float hpartArrowL = (float) (harrowL - th) / 2;
-
+		int lowMargin = 6;
 		if (TurnType.C == turnType.getValue()) {
-			int h = (int) (ha - hpartArrowL - 16);
-			pathForTurn.rMoveTo(th, 0);
-			pathForTurn.rLineTo(0, -h);
-			pathForTurn.rLineTo(hpartArrowL, 0);
-			pathForTurn.rLineTo(-harrowL / 2, -harrowL / 2); // center
-			pathForTurn.rLineTo(-harrowL / 2, harrowL / 2);
-			pathForTurn.rLineTo(hpartArrowL, 0);
-			pathForTurn.rLineTo(0, h);
+			TurnVariables tv = new TurnVariables(false, 0, 0, wa, ha, 1.5f);
+			pathForTurn.moveTo(wa / 2 + tv.widthStepIn / 2, ha - lowMargin);
+			tv.drawTriangle(pathForTurn);
+			pathForTurn.lineTo(wa / 2 - tv.widthStepIn / 2, ha - lowMargin);
+		} else if (TurnType.OFFR == turnType.getValue()){
+			TurnVariables tv = new TurnVariables(false, 0, 0, wa, ha, 1.5f);
+			float rightX = wa / 2 + tv.widthStepIn / 2;
+			float leftX = wa / 2 - tv.widthStepIn / 2;
+			int step = 7;
+			
+			pathForTurn.moveTo(rightX, ha - lowMargin);
+			pathForTurn.rLineTo(0, -step);
+			pathForTurn.rLineTo(-tv.widthStepIn , 0);
+			pathForTurn.rLineTo(0 , step);
+			pathForTurn.rLineTo(tv.widthStepIn, 0);
+			
+			pathForTurn.moveTo(rightX, ha - 2 * lowMargin - step);
+			pathForTurn.rLineTo(0, -step);
+			pathForTurn.rLineTo(-tv.widthStepIn , 0);
+			pathForTurn.rLineTo(0 , step);
+			pathForTurn.rLineTo(tv.widthStepIn, 0);
+			
+			pathForTurn.moveTo(rightX, ha - 3 * lowMargin - 2 * step);
+			pathForTurn.rLineTo(0, -step);
+			pathForTurn.rLineTo(-tv.widthStepIn , 0);
+			pathForTurn.rLineTo(0 , step);
+			pathForTurn.rLineTo(tv.widthStepIn, 0);
+			
+			pathForTurn.moveTo(rightX, ha - 4 * lowMargin - 3 * step);
+			tv.drawTriangle(pathForTurn);
+			pathForTurn.lineTo(leftX, ha - 4 * lowMargin - 3 * step);
 		} else if (TurnType.TR == turnType.getValue()|| TurnType.TL == turnType.getValue()) {
 			int b = TurnType.TR == turnType.getValue()? 1 : -1;
-			float quadShiftX = 18;
-			float quadShiftY = 18;
-			int wl = 10; // width
-			int h = (int) (ha - quadShiftY - harrowL + hpartArrowL - 5);
-			int sl = wl + th / 2;
+			TurnVariables tv = new TurnVariables(b != 1, b == 1 ? 90 : -90, 0, wa, ha / 2, 1.5f);
+			float centerCurveX = wa / 2 + b * 4;
+			float centerCurveY = ha / 2;
+			// calculated
+			float h = centerCurveY - lowMargin;
+			float r = tv.cy - tv.widthStepIn / 2;
+			float centerLineX = centerCurveX - b * (r + tv.widthStepIn / 2);
+			RectF innerOval = new RectF(centerCurveX - r, centerCurveY - r, centerCurveX + r, centerCurveY + r);
+			RectF outerOval = new RectF(innerOval);
+			outerOval.inset(-tv.widthStepIn, -tv.widthStepIn);
 			
-			pathForTurn.rMoveTo(-b * sl, 0);
+			pathForTurn.moveTo(centerLineX + b * tv.widthStepIn / 2, ha - lowMargin);
 			pathForTurn.rLineTo(0, -h);
-			pathForTurn.rQuadTo(0, -quadShiftY, b * quadShiftX, -quadShiftY);
-			pathForTurn.rLineTo(b * wl, 0);
-			
-			pathForTurn.rLineTo(0, hpartArrowL);
-			pathForTurn.rLineTo(b * harrowL / 2, -harrowL / 2); // center
-			pathForTurn.rLineTo(-b * harrowL / 2, -harrowL / 2);
-			pathForTurn.rLineTo(0, hpartArrowL);
-			
-			pathForTurn.rLineTo(-b * wl, 0);
-			pathForTurn.rQuadTo(-b * (quadShiftX + th), 0, -b * (quadShiftX + th), quadShiftY + th);
-			pathForTurn.rLineTo(0, h);
-		} else if (TurnType.KL == turnType.getValue() || TurnType.KR == turnType.getValue()) {
-			int b = TurnType.KR == turnType.getValue()? 1 : -1;
-			float quadShiftX = 14;
-			float quadShiftY = 14;
-			th = 10;
-			spartArrowL = (float) ((sarrowL - th / Math.sqrt(2)) / 2);
-			hpartArrowL = (float) (harrowL - th) / 2;
-			int h = 12;
-			int lh = 15;
-			int sl = th / 2;
-			
-			pathForTurn.rMoveTo(-b * (sl + 10), 0);
-			pathForTurn.rLineTo(0, -lh);
-			// 1st arc
-			pathForTurn.rQuadTo(0, -quadShiftY, b * quadShiftX, -quadShiftY);
-			// 2nd arc
-			pathForTurn.rQuadTo(b * quadShiftX, 0, b * quadShiftX, -quadShiftY);
-			// center
-			pathForTurn.rLineTo(0, -h);
-			pathForTurn.rLineTo(b*hpartArrowL, 0);
-			pathForTurn.rLineTo(-b*harrowL / 2, -harrowL / 2); // center
-			pathForTurn.rLineTo(-b*harrowL / 2, harrowL / 2);
-			pathForTurn.rLineTo(b*hpartArrowL, 0);
-			pathForTurn.rLineTo(0, h );
-			// 2nd arc
-			pathForTurn.rQuadTo(0, quadShiftY - th, -b * (quadShiftX - th), quadShiftY- th);
-			//1st arc
-			pathForTurn.rQuadTo(-b * (quadShiftX + th), 0, -b * (quadShiftX + th ), quadShiftY + th);
-			pathForTurn.rLineTo(0, lh );
-
+			pathForTurn.arcTo(innerOval, b == 1 ? -180 : 0, b*  90);
+			tv.drawTriangle(pathForTurn);
+			pathForTurn.arcTo(outerOval, -90, - b *90);
+			pathForTurn.rLineTo(0, h);			
 		} else if (TurnType.TSLR == turnType.getValue() || TurnType.TSLL == turnType.getValue()) {
 			int b = TurnType.TSLR == turnType.getValue() ? 1 : -1;
-			int h = 24;
-			int quadShiftY = 22;
-			float quadShiftX = (float) (quadShiftY / (1 + Math.sqrt(2)));
-			float nQuadShiftX = (sarrowL - 2 * spartArrowL) - quadShiftX - th;
-			float nQuadShifty = quadShiftY + (sarrowL - 2 * spartArrowL);
-
-			pathForTurn.rMoveTo(-b * 4, 0);
-			pathForTurn.rLineTo(0, -h /* + partArrowL */);
-			pathForTurn.rQuadTo(0, -quadShiftY + quadShiftX /*- partArrowL*/, b * quadShiftX, -quadShiftY /*- partArrowL*/);
-			pathForTurn.rLineTo(b * spartArrowL, spartArrowL);
-			pathForTurn.rLineTo(0, -sarrowL); // center
-			pathForTurn.rLineTo(-b * sarrowL, 0);
-			pathForTurn.rLineTo(b * spartArrowL, spartArrowL);
-			pathForTurn.rQuadTo(b * nQuadShiftX, -nQuadShiftX, b * nQuadShiftX, nQuadShifty);
-			pathForTurn.rLineTo(0, h);
+			TurnVariables tv = new TurnVariables(b != 1, b == 1 ? 45 : -45, 0, wa, ha, 1.5f);
+			tv.cx -= b * 7;
+			float centerBottomX = wa / 2 - b * 6; 
+			float centerCurveY = ha / 2 + 8;
+			float centerCurveX = centerBottomX + b * (wa / 2);
+			// calculated
+			float rx1 =  Math.abs(centerCurveX - centerBottomX) - tv.widthStepIn / 2;
+			float rx2 =  Math.abs(centerCurveX - centerBottomX) + tv.widthStepIn / 2;
+			double t1 = Math.acos(Math.abs(tv.getTriangle1X() - centerCurveX) / rx1) ;
+			float rb1 = (float) (Math.abs(tv.getTriangle1Y() - centerCurveY) / Math.sin(t1));
+			float ellipseAngle1 = (float) (t1 / Math.PI * 180);
+			double t2 = Math.acos(Math.abs(tv.getTriangle2X() - centerCurveX) / rx2) ;
+			float rb2 = (float) (Math.abs(tv.getTriangle2Y() - centerCurveY) / Math.sin(t2));
+			float ellipseAngle2 = (float) (t2 / Math.PI * 180);
+			
+			RectF innerOval = new RectF(centerCurveX - rx1, centerCurveY - rb1, centerCurveX + rx1, centerCurveY + rb1);
+			RectF outerOval = new RectF(centerCurveX - rx2, centerCurveY - rb2, centerCurveX + rx2, centerCurveY + rb2);
+			
+			pathForTurn.moveTo(centerBottomX + b * tv.widthStepIn / 2, ha - lowMargin);
+			pathForTurn.arcTo(innerOval, -90 - b * 90, b * (ellipseAngle1));
+			tv.drawTriangle(pathForTurn);
+			pathForTurn.arcTo(outerOval, -90 - b * (90 - (ellipseAngle2)), -b * (ellipseAngle2));
+			pathForTurn.lineTo(centerBottomX - b * tv.widthStepIn / 2, ha - lowMargin);
 		} else if (TurnType.TSHR == turnType.getValue() || TurnType.TSHL == turnType.getValue()) {
 			int b = TurnType.TSHR == turnType.getValue() ? 1 : -1;
-			int h = 28;
-			float quadShiftX = 22;
-			int sh = 10;
-			float quadShiftY = -(float) (quadShiftX / (1 + Math.sqrt(2)));
-			float nQuadShiftX = -(sarrowL - 2 * spartArrowL) - quadShiftX - th;
-			float nQuadShiftY = -quadShiftY + (sarrowL - 2 * spartArrowL);
-
-			pathForTurn.rMoveTo(-b * sh, 0);
-			pathForTurn.rLineTo(0, -h);
-			pathForTurn.rQuadTo(0, -(quadShiftX - quadShiftY), b * quadShiftX, quadShiftY);
-			pathForTurn.rLineTo(-b * spartArrowL, spartArrowL);
-			pathForTurn.rLineTo(b * sarrowL, 0); // center
-			pathForTurn.rLineTo(0, -sarrowL);
-			pathForTurn.rLineTo(-b * spartArrowL, spartArrowL);
-			pathForTurn.rCubicTo(b * nQuadShiftX / 2, nQuadShiftX / 2, b * nQuadShiftX, nQuadShiftX / 2, b * nQuadShiftX, nQuadShiftY);
-			pathForTurn.rLineTo(0, h);
+			float centerCircleY = ha / 4;
+			float centerCircleX = wa / 2 - b * (wa / 5);
+			TurnVariables tv = new TurnVariables(b != 1, b == 1 ? 135 : -135, 0, wa, ha, 1.5f);
+			// calculated
+			float angle = 45;
+			float r = tv.widthStepIn / 2; 
+			tv.cx = centerCircleX;
+			tv.cy = centerCircleY;
+			RectF innerOval = new RectF(centerCircleX - r, centerCircleY - r, centerCircleX + r, centerCircleY + r);
+			pathForTurn.moveTo(centerCircleX + b * tv.widthStepIn / 2, ha - lowMargin);
+			pathForTurn.lineTo(centerCircleX + b * tv.widthStepIn / 2, (float) (centerCircleY +
+					2 * r));
+//			pathForTurn.arcTo(innerOval, -90 - b * 90, b * 45);
+			tv.drawTriangle(pathForTurn);
+//			pathForTurn.lineTo(centerCircleX - b * tv.widthStepIn / 2, (float) (centerCircleY - 2 *r));
+			pathForTurn.arcTo(innerOval, -90  + b * angle,  - b * (90 + angle));
+			pathForTurn.lineTo(centerCircleX - b * tv.widthStepIn / 2, ha - lowMargin);
 		} else if(TurnType.TU == turnType.getValue() || TurnType.TRU == turnType.getValue()) {
-			int h = 40;
-			// right left
-			int b = TurnType.TU == turnType.getValue() ? 1 : -1;
-			float quadShiftX = 10; // 13
-			float quadShiftY = 10; // 13
-			int sm = 10;
-
-			pathForTurn.rMoveTo(b * 28, 0);
-			pathForTurn.rLineTo(0, -h);
-			pathForTurn.rQuadTo(0, -(quadShiftY+th), -b * (quadShiftX+th), -(quadShiftY+th));
-			pathForTurn.rQuadTo(-b * (quadShiftX+th), 0, -b * (quadShiftX+th), (quadShiftY+th));
-			pathForTurn.rLineTo(0, sm);
-
-			pathForTurn.rLineTo(-b * hpartArrowL, 0);
-			pathForTurn.rLineTo(b * harrowL/2, harrowL/2); // center
-			pathForTurn.rLineTo(b * harrowL/2, -harrowL/2);
-			pathForTurn.rLineTo(-b  *hpartArrowL, 0);
-
-			pathForTurn.rLineTo(0, -sm);
-			pathForTurn.rQuadTo(0, -quadShiftX, b *quadShiftX, -quadShiftY);
-			pathForTurn.rQuadTo(b * quadShiftX, 0, b * quadShiftX, quadShiftY);
-			pathForTurn.rLineTo(0, h);
-		} else if (TurnType.OFFR == turnType.getValue()){
-			int h = (int) (ha - hpartArrowL - 16);
-			pathForTurn.rMoveTo(th, 0); //12 0
-			//first square
-			pathForTurn.rLineTo(0, -h / 4); //0 -7
-			pathForTurn.rLineTo(-th, 0); //-12 0
-			pathForTurn.rLineTo(0, h / 4); //0 7
-			pathForTurn.rLineTo(th, 0); //12 0
-			pathForTurn.rMoveTo(0, -h / 2); //12 0
-			//second square
-			pathForTurn.rLineTo(0, -h / 4); //0 -7
-			pathForTurn.rLineTo(-th, 0); //-12 0
-			pathForTurn.rLineTo(0, h / 4); //0 7
-			pathForTurn.rLineTo(th, 0); //12 0
-			pathForTurn.rMoveTo(0, -h / 2 + 1); //31 0
-			//arrow
-			pathForTurn.rLineTo(hpartArrowL, 0); //9 0
-			pathForTurn.rLineTo(-harrowL / 2, -harrowL / 2); // center -15 -15
-			pathForTurn.rLineTo(-harrowL / 2, harrowL / 2); // -15 15
-			pathForTurn.rLineTo(hpartArrowL + th, 0); //9 0
-		} else if(turnType != null && turnType.isRoundAbout() && USE_NEW_RNDB) {
+			int b = TurnType.TU == turnType.getValue() ? -1 : 1;
+			float radius = 16;
+			float centerRadiusY = ha / 2 - 10;
+			float extraMarginBottom = 5;
+			TurnVariables tv = new TurnVariables(b != 1, 180, 0, wa, ha, 1.5f);
+			// calculated
+			float centerRadiusX = wa / 2;
+			tv.cx = centerRadiusX + b * radius;
+			tv.cy = centerRadiusY  - extraMarginBottom;
+			lowMargin += extraMarginBottom;
+			tv.rot = 0;
+			
+			float r = radius - tv.widthStepIn / 2;
+			float r2 = radius + tv.widthStepIn / 2;
+			RectF innerOval = new RectF(centerRadiusX - r, centerRadiusY - r, centerRadiusX + r, centerRadiusY + r);
+			RectF outerOval = new RectF(centerRadiusX - r2, centerRadiusY - r2, centerRadiusX + r2, centerRadiusY + r2);
+			
+			pathForTurn.moveTo(centerRadiusX - b * (radius - tv.widthStepIn / 2), ha - lowMargin);
+			pathForTurn.lineTo(centerRadiusX - b * (radius - tv.widthStepIn / 2), centerRadiusY);
+			pathForTurn.arcTo(innerOval, -90 - b * 90, b * 180);
+			tv.drawTriangle(pathForTurn);
+			pathForTurn.arcTo(outerOval, -90 + b * 90, -b * 180);
+			pathForTurn.lineTo(centerRadiusX - b * (radius + tv.widthStepIn / 2), ha - lowMargin);
+		} else if (TurnType.KL == turnType.getValue() || TurnType.KR == turnType.getValue()) {
+			int b = TurnType.KR == turnType.getValue()? 1 : -1;
+			float shiftX = 8;
+			float firstH = 18;
+			float secondH = 20;
+			TurnVariables tv = new TurnVariables(false, 0, 0, wa, ha, 1.5f);
+			// calculated
+			tv.cx += b * shiftX;
+			pathForTurn.moveTo(wa / 2 + tv.widthStepIn / 2 - b * shiftX, ha - lowMargin);
+			pathForTurn.lineTo(wa / 2 + tv.widthStepIn / 2 - b * shiftX, ha - lowMargin - firstH);
+			// pathForTurn.lineTo(wa / 2 + tv.widthStepIn / 2 + b * shiftX, ha - lowMargin - firstH - secondH);
+			pathForTurn.cubicTo(
+					wa / 2 + tv.widthStepIn / 2 - b * shiftX, ha - lowMargin - firstH - secondH / 2 + b * 3,
+					wa / 2 + tv.widthStepIn / 2 + b * shiftX, ha - lowMargin - firstH - secondH / 2 + b * 3,
+					wa / 2 + tv.widthStepIn / 2 + b * shiftX, ha - lowMargin - firstH - secondH);
+			tv.drawTriangle(pathForTurn);
+			pathForTurn.lineTo(wa / 2 - tv.widthStepIn / 2 + b * shiftX, ha - lowMargin - firstH - secondH);
+			pathForTurn.cubicTo(
+					wa / 2 - tv.widthStepIn / 2 + b * shiftX, ha - lowMargin - firstH - secondH / 2 - b * 2,
+					wa / 2 - tv.widthStepIn / 2 - b * shiftX, ha - lowMargin - firstH - secondH / 2 - b * 2,
+					wa / 2 - tv.widthStepIn / 2 - b * shiftX, ha - lowMargin - firstH );
+//			pathForTurn.lineTo(wa / 2 - tv.widthStepIn / 2 - b * shiftX, ha - lowMargin - firstH);
+			pathForTurn.lineTo(wa / 2 - tv.widthStepIn / 2 - b * shiftX, ha - lowMargin);
+		} else if(turnType != null && turnType.isRoundAbout() ) {
 			int out = turnType.getExitOut();
 			boolean leftSide = turnType.isLeftSide();
-			float radEndOfArrow = 44;
-			float radInnerCircle = 10;
-			float radOuterCircle = radInnerCircle + 8;
-		
-			float radBottom = radOuterCircle + 10;
-			float radStepInter = radOuterCircle + 6;
-			float radArrowTriangle1 = radOuterCircle + 7;
-			float radArrowTriangle2 = radOuterCircle + 8;
-		
-			float widthStepIn = 8;
-			float widthStepInter = 6;
-			float widthArrow = 22;
-			
-			
-			double dfL = (leftSide ? 1 : -1) * Math.asin(widthStepIn / (2.0 * radBottom)); 
-			double dfAr2 = (leftSide ? 1 : -1) * Math.asin(widthArrow / (2.0 * radArrowTriangle2));
-			double dfStepInter = (leftSide ? 1 : -1) * Math.asin(widthStepInter / radStepInter);
-			double dfAr = Math.asin(radBottom * Math.sin(dfL) / radArrowTriangle1);
-			double dfOut = Math.asin(radBottom * Math.sin(dfL) / radOuterCircle);
-			double dfStepOut = Math.asin(radStepInter * Math.sin(dfStepInter) / radOuterCircle);
-			double dfIn = Math.asin(radBottom * Math.sin(dfL) / radInnerCircle);
-			double minDelta = Math.abs(dfIn * 2 / Math.PI * 180 ) + 2;
 			boolean showSteps = SHOW_STEPS && !mini;
-//			System.out.println("Angle " + dfL + " " + dfOut + " " + dfIn + " " + minDelta + " ");
-			double rot = alignRotation(turnType.getTurnAngle(), leftSide, minDelta, out) / 180 * Math.PI;
-			
-			float cx = wa / 2 ;
-			float cy = ha / 2 ;
-			// align center
-			float potentialArrowEndX = (float) (Math.sin(rot) * radEndOfArrow);
-			float potentialArrowEndY = (float) (Math.cos(rot) * radEndOfArrow);
-			if (potentialArrowEndX > cx) {
-				cx = potentialArrowEndX;
-			} else if (potentialArrowEndX < -cx) {
-				cx = 2 * cx + potentialArrowEndX;
-			}
-			if(potentialArrowEndY > cy) {
-				cy = 2 * cy - potentialArrowEndY;
-			} else if(potentialArrowEndY < -cy) {
-				cy = -potentialArrowEndY;
-			}
+			TurnVariables tv = new TurnVariables(leftSide, turnType.getTurnAngle(), out, wa, ha, 1);
 			if(center != null) {
-				center.set(cx, cy);
+				center.set(tv.cx, tv.cy);
 			}
-			
-			
-			RectF qrOut = new RectF(cx - radOuterCircle, cy - radOuterCircle, cx + radOuterCircle, cy + radOuterCircle);
-			RectF qrIn = new RectF(cx - radInnerCircle, cy - radInnerCircle, cx + radInnerCircle, cy + radInnerCircle);
+			RectF qrOut = new RectF(tv.cx - tv.radOuterCircle, tv.cy - tv.radOuterCircle, 
+					tv.cx + tv.radOuterCircle, tv.cy + tv.radOuterCircle);
+			RectF qrIn = new RectF(tv.cx - tv.radInnerCircle, tv.cy - tv.radInnerCircle, tv.cx + tv.radInnerCircle, tv.cy + tv.radInnerCircle);
 			if(outlay != null && !mini) {
 				outlay.addArc(qrOut, 0, 360);
 				outlay.addArc(qrIn, 0, -360);
@@ -245,14 +307,14 @@ public class TurnPathHelper {
 			}
 			
 			// move to bottom ring
-			pathForTurn.moveTo(getProjX(dfOut, cx, cy, radOuterCircle), getProjY(dfOut, cx, cy, radOuterCircle));
+			pathForTurn.moveTo(tv.getProjX(tv.dfOut, tv.radOuterCircle), tv.getProjY(tv.dfOut, tv.radOuterCircle));
 			if (out <= 1) {
 				showSteps = false;
 			}
 			if (showSteps && outlay != null) {
-				double totalStepInter = (out - 1) * dfStepOut;
-				double st = (rot - 2 * dfOut - totalStepInter) / out;
-				if ((rot > 0) != (st > 0)) {
+				double totalStepInter = (out - 1) * tv.dfStepOut;
+				double st = (tv.rot - 2 * tv.dfOut - totalStepInter) / out;
+				if ((tv.rot > 0) != (st > 0)) {
 					showSteps = false;
 				}
 				if (Math.abs(st) < Math.PI / 60) {
@@ -261,127 +323,41 @@ public class TurnPathHelper {
 				// double st = (rot - 2 * dfOut ) / (2 * out - 1);
 				// dfStepOut = st;
 				if (showSteps) {
-					outlay.moveTo(getProjX(dfOut, cx, cy, radOuterCircle), getProjY(dfOut, cx, cy, radOuterCircle));
+					outlay.moveTo(tv.getProjX(tv.dfOut, tv.radOuterCircle), tv.getProjY(tv.dfOut, tv.radOuterCircle));
 					for (int i = 0; i < out - 1; i++) {
-						outlay.arcTo(qrOut, startArcAngle(dfOut + i * (st + dfStepOut)), sweepArcAngle(st));
+						outlay.arcTo(qrOut, startArcAngle(tv.dfOut + i * (st + tv.dfStepOut)), sweepArcAngle(st));
 						arcLineTo(outlay,
-								dfOut + (i + 1) * (st + dfStepOut) - dfStepOut / 2 - dfStepInter / 2, cx, cy, radStepInter);
-						arcLineTo(outlay, dfOut + (i + 1) * (st + dfStepOut) - dfStepOut / 2 + dfStepInter / 2, cx, cy, radStepInter);
-						arcLineTo(outlay, dfOut + (i + 1) * (st + dfStepOut), cx, cy, radOuterCircle);
+								tv.dfOut + (i + 1) * (st + tv.dfStepOut) - tv.dfStepOut / 2 - tv.dfStepInter / 2, 
+								tv.cx, tv.cy, tv.radStepInter);
+						arcLineTo(outlay, tv.dfOut + (i + 1) * (st + tv.dfStepOut) - tv.dfStepOut / 2 + tv.dfStepInter / 2, 
+								tv.cx, tv.cy, tv.radStepInter);
+						arcLineTo(outlay, tv.dfOut + (i + 1) * (st + tv.dfStepOut), tv.cx, tv.cy, tv.radOuterCircle);
 						// pathForTurn.arcTo(qr1, startArcAngle(dfOut), sweepArcAngle(rot - dfOut - dfOut));
 					}
-					outlay.arcTo(qrOut, startArcAngle(rot - dfOut - st), sweepArcAngle(st));
+					outlay.arcTo(qrOut, startArcAngle(tv.rot - tv.dfOut - st), sweepArcAngle(st));
 					// swipe back
-					arcLineTo(outlay, rot - dfIn, cx, cy, radInnerCircle);
-					outlay.arcTo(qrIn, startArcAngle(rot - dfIn), -sweepArcAngle(rot - dfIn - dfIn));
+					arcLineTo(outlay, tv.rot - tv.dfIn, tv.cx, tv.cy, tv.radInnerCircle);
+					outlay.arcTo(qrIn, startArcAngle(tv.rot - tv.dfIn), -sweepArcAngle(tv.rot - tv.dfIn - tv.dfIn));
 				}
 			} 
 //			if(!showSteps) {
 //				// arc
 //				pathForTurn.arcTo(qrOut, startArcAngle(dfOut), sweepArcAngle(rot - dfOut - dfOut));
 //			}
-			pathForTurn.arcTo(qrOut, startArcAngle(dfOut), sweepArcAngle(rot - dfOut - dfOut));
+			pathForTurn.arcTo(qrOut, startArcAngle(tv.dfOut), sweepArcAngle(tv.rot - tv.dfOut - tv.dfOut));
 			
-			// up from arc
-			arcLineTo(pathForTurn, rot - dfAr, cx, cy, radArrowTriangle1);
-			// left triangle 
-//			arcLineTo(pathForTurn, rot - dfAr2, cx, cy, radAr2); // 1.
-//			arcQuadTo(pathForTurn, rot - dfAr2, radAr2, rot, radArrow, 0.9f, cx, cy); // 2.
-			arcQuadTo(pathForTurn, rot - dfAr, radArrowTriangle1, rot - dfAr2, radArrowTriangle2, rot, radEndOfArrow, 4.5f, cx, cy); // 3.
-			
-//			arcLineTo(pathForTurn, rot, cx, cy, radArrow); // 1.
-			arcQuadTo(pathForTurn, rot - dfAr2, radArrowTriangle2, rot, radEndOfArrow, rot + dfAr2, radArrowTriangle2, 4.5f, cx, cy);
-			// right triangle 
-//			arcLineTo(pathForTurn, rot + dfAr2, cx, cy, radAr2); // 1.
-			arcQuadTo(pathForTurn, rot, radEndOfArrow, rot + dfAr2, radArrowTriangle2, rot + dfAr, radArrowTriangle1, 4.5f, cx, cy);
-			
-			arcLineTo(pathForTurn, rot + dfAr, cx, cy, radArrowTriangle1);
+			tv.drawTriangle(pathForTurn);
 			// down to arc
-			arcLineTo(pathForTurn, rot + dfIn, cx, cy, radInnerCircle);
+			arcLineTo(pathForTurn, tv.rot + tv.dfIn, tv.cx, tv.cy, tv.radInnerCircle);
 			// arc
-			pathForTurn.arcTo(qrIn, startArcAngle(rot + dfIn), sweepArcAngle(-rot - dfIn - dfIn));
+			pathForTurn.arcTo(qrIn, startArcAngle(tv.rot + tv.dfIn), sweepArcAngle(-tv.rot - tv.dfIn - tv.dfIn));
 			// down
-			arcLineTo(pathForTurn, -dfL, cx, cy, radBottom);
+			arcLineTo(pathForTurn, -tv.dfL, tv.cx, tv.cy, tv.radBottom);
 			// left
-			arcLineTo(pathForTurn, dfL, cx, cy, radBottom);
+			arcLineTo(pathForTurn, tv.dfL, tv.cx, tv.cy, tv.radBottom);
 			
 		
-		} else if (turnType != null && turnType.isRoundAbout()) {
-			float t = turnType.getTurnAngle();
-			boolean leftSide = turnType.isLeftSide();
-			double minTurn = 25;
-			if (t >= 170 && t < 215) {
-				t = 215;
-			} else if (t > 155 && t < 170) {
-				t = 155;
-			}
-			
-			float sweepAngle = (t - 360) - 180;
-			if (sweepAngle < -360) {
-				sweepAngle += 360;
-			}
-			if(leftSide && sweepAngle < 0) {
-				sweepAngle += 360;
-			}
-			
-			float r1 = ha / 3f - 1;
-			float r2 = r1 - 9;
-			float angleToRot = leftSide ? -0.3f : 0.3f;
-			int cx = wa / 2 ;
-			int cy = ha / 2 - 2;
-			if (leftSide) {
-				pathForTurn.moveTo(cx - 8, ha - 1);
-				pathForTurn.lineTo(cx - 8, cy + r1);
-			} else {
-				pathForTurn.moveTo(cx, ha - 1);
-				pathForTurn.lineTo(cx, cy + r1);
-			}
-			RectF r = new RectF(cx - r1, cy - r1, cx + r1, cy + r1);
-			
-			int out = turnType.getExitOut();
-			if (out < 1) {
-				out = 1;
-			}
-			float prev = 90;
-			float init = 90;
-			
-			float step = sweepAngle / out;
-			for (int i = 1; i <= out; i++) {
-				float to = step * i;
-				if (i == out) {
-					pathForTurn.arcTo(r, prev, to - prev + init);
-				} else {
-					float tsRad = (float) ((to - step / 8 + 180) * Math.PI / 180f);
-					float tsRad2 = (float) ((to + step / 8 + 180) * Math.PI / 180f);
-					pathForTurn.arcTo(r, prev, to - step / 6 - prev + init );
-					pathForTurn.lineTo(cx + (r1 + 10) * (float) Math.sin(tsRad), cy - (r1 + 10) * (float) Math.cos(tsRad));
-					pathForTurn.lineTo(cx + (r1 + 10) * (float) Math.sin(tsRad2), cy - (r1 + 10) * (float) Math.cos(tsRad2));
-					// not necessary for next arcTo
-					//pathForTurn.lineTo(cx + (r1 + 0) * (float) Math.sin(tsRad2), cy - (r1 + 0) * (float) Math.cos(tsRad2));
-					prev = to + step / 6 + init;
-				}
-			}
-		
-			float angleRad = (float) ((180 + sweepAngle) * Math.PI / 180f);
-			
-			pathForTurn.lineTo(cx + (r1 + 4) * (float) Math.sin(angleRad), cy - (r1 + 4) * (float) Math.cos(angleRad));
-			pathForTurn.lineTo(cx + (r1 + 6) * (float) Math.sin(angleRad + angleToRot/2), cy - (r1 + 6) * (float) Math.cos(angleRad + angleToRot/2));
-			pathForTurn.lineTo(cx + (r1 + 14) * (float) Math.sin(angleRad - angleToRot/2), cy - (r1 + 12) * (float) Math.cos(angleRad - angleToRot/2));
-			pathForTurn.lineTo(cx + (r1 + 6) * (float) Math.sin(angleRad - 3*angleToRot/2), cy - (r1 + 6) * (float) Math.cos(angleRad - 3*angleToRot/2));
-			pathForTurn.lineTo(cx + (r1 + 4) * (float) Math.sin(angleRad - angleToRot), cy - (r1 + 4) * (float) Math.cos(angleRad - angleToRot));
-			pathForTurn.lineTo(cx + r2 * (float) Math.sin(angleRad - angleToRot), cy - r2 * (float) Math.cos(angleRad - angleToRot));
-			
-			r.set(cx - r2, cy - r2, cx + r2, cy + r2);
-			pathForTurn.arcTo(r, 360 + sweepAngle + 90, -sweepAngle);
-			if (leftSide) {
-				pathForTurn.lineTo(cx, cy + r2);
-				pathForTurn.lineTo(cx, ha - 1);
-			} else {
-				pathForTurn.lineTo(cx - 8, cy + r2);
-				pathForTurn.lineTo(cx - 8, ha - 1);
-			}
-			pathForTurn.close();
-		}
+		} 
 		pathForTurn.close();
 		if(transform != null){
 			pathForTurn.transform(transform);
