@@ -142,7 +142,7 @@
 	<string name="poi_bus_station">Dworzec autobusowy</string>
 	<string name="poi_railway_station">Stacja kolejowa</string>
 	<string name="poi_railway_platform">Peron kolejowy</string>
-	<string name="poi_subway_entrance">Metro - wejście</string>
+	<string name="poi_subway_entrance">Wejście do metra</string>
 	<string name="poi_subway_station">Stacja metra</string>
 	<string name="poi_taxi">Postój TAXI</string>
 
@@ -249,7 +249,7 @@
 	<string name="poi_hospital">Szpital</string>
 	<string name="poi_doctors">Przychodnia</string>
 	<string name="poi_clinic">Klinika</string>
-	<string name="poi_dentist">Dentysta</string>
+	<string name="poi_dentist">Stomatolog</string>
 	<string name="poi_nursing_home">Dom opieki</string>
 	<string name="poi_baby_hatch">Okno życia</string>
 	<string name="poi_veterinary">Weterynarz</string>
@@ -569,7 +569,7 @@
 	<string name="poi_place_farm">Gospodarstwo rolne</string>
 	<string name="poi_residential">Teren zamieszkania</string>
 
-	<string name="poi_podiatrist">Podiatra (od stóp)</string>
+	<string name="poi_podiatrist">Podiatra</string>
 	<string name="poi_it">Biuro IT</string>
 	<string name="poi_architect">Biuro architekta</string>
 	<string name="poi_leisure_track">Tor sportowy</string>
@@ -899,10 +899,10 @@
 	<string name="poi_ncn_ref">Punkt krajowej trasy rowerowej</string>
 	<string name="poi_rcn_ref">Punkt regionalnej trasy rowerowej</string>
 	<string name="poi_lcn_ref">Punkt lokalnej trasy rowerowej</string>
-	<string name="poi_iwn_ref">Punkt sieci węzłów międzynarodowej sieci pieszej</string>
-	<string name="poi_nwn_ref">Sieć węzłów krajowej sieci pieszej</string>
-	<string name="poi_rwn_ref">Sieć węzłów regionalnej sieci pieszej</string>
-	<string name="poi_lwn_ref">Sieć węzłów lokalnej sieci pieszej</string>
+	<string name="poi_iwn_ref">Punkt międzynarodowej trasy pieszej</string>
+	<string name="poi_nwn_ref">Punkt krajowej trasy pieszej</string>
+	<string name="poi_rwn_ref">Punkt regionalnej trasy pieszej</string>
+	<string name="poi_lwn_ref">Punkt lokalnej trasy pieszej</string>
 
 	<string name="poi_route_hiking_iwn_poi">Międzynarodowa trasa piesza</string>
 	<string name="poi_route_hiking_nwn_poi">Krajowa trasa piesza</string>
@@ -914,7 +914,7 @@
 	<string name="poi_collection_times">Godziny odbioru przesyłek</string>
 	<string name="poi_description">Opis</string>
 	<string name="poi_phone">Telefon</string>
-	<string name="poi_website">Strona www</string>
+	<string name="poi_website">Strona internetowa</string>
 	<string name="poi_service_times">Godziny usług</string>
 	<string name="poi_maxheight">Maksymalna wysokość</string>
 	<string name="poi_maxweight">Maksymalna waga</string>
@@ -1579,4 +1579,9 @@
 
 	<string name="poi_fitness_centre">Klub fitness</string>
 	<string name="poi_bandstand">Scena</string>
+	<string name="poi_traffic_mirror">Lustro drogowe</string>
+
+	<string name="poi_motorcycle_repair">Warsztat motocyklowy</string>
+	<string name="poi_honey">Sklep z miodem</string>
+
 	</resources>
