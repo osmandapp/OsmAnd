@@ -568,7 +568,7 @@
 	<string name="poi_volcano">Vulkan</string>
 	<string name="poi_volleyball">Volleyball</string>
 	<string name="poi_waste_basket">Mülleimer</string>
-	<string name="poi_waste_disposal">Deponie</string>
+	<string name="poi_waste_disposal">Mülldeponie</string>
 	<string name="poi_wastewater_plant">Abwasseranlage</string>
 	<string name="poi_craft_watchmaker">Uhrmacher</string>
 	<string name="poi_watermill">Wassermühle</string>
@@ -2640,16 +2640,16 @@
 	<string name="poi_vacuum_cleaner_no">Staubsauger: Nein</string>
 	<string name="poi_amenity_vacuum_cleaner">Staubsauger</string>
 
-	<string name="poi_sport_free_flying">Freie Fliegen (Sport)</string>
+	<string name="poi_sport_free_flying">Freies Fliegen (Sport)</string>
 	<string name="poi_bicycle_repair_station">Selbstreparaturstation für Fahrräder</string>
 	<string name="poi_water_tap">Wasserhahn</string>
 	<string name="poi_button_operated_yes">Tastenbetätigung: Ja</string>
 	<string name="poi_button_operated_no">Tastenbetätigung: Nein</string>
 
-	<string name="poi_free_flying_site_takeoff">Freies Flugfeld : Start</string>
+	<string name="poi_free_flying_site_takeoff">Freies Flugfeld : Startplatz</string>
 	<string name="poi_free_flying_site_landing">Freies Flugfeld : Landeplatz</string>
 	<string name="poi_free_flying_site_toplanding">Freies Flugfeld: Landepunkt</string>
-	<string name="poi_free_flying_site_towing">Freies Flugfeld: Abschleppen</string>
+	<string name="poi_free_flying_site_towing">Freies Flugfeld: Schleppen</string>
 	<string name="poi_free_flying_site_training">Freies Flugfeld: Ausbildung</string>
 	<string name="poi_free_flying_official_yes">Freies Fliegen offiziell: Ja</string>
 	<string name="poi_free_flying_official_no">Freies Fliegen offiziell: Nein</string>
@@ -2692,7 +2692,7 @@
 	<string name="poi_health_service_prevention_no">Gesundheitswesen: Prävention: Nein</string>
 	<string name="poi_health_service_prevention_vaccination_yes">Gesundheitswesen: Impfung: Ja</string>
 	<string name="poi_health_service_prevention_vaccination_no">Gesundheitswesen: Impfung: Nein</string>
-	<string name="poi_health_facility_type_office">Gesundheitseinrichtung: Büro</string>
+	<string name="poi_health_facility_type_office">Arztpraxis</string>
 	<string name="poi_health_facility_type_hospital">Gesundheit-Einrichtungstyp: Krankenhaus</string>
 	<string name="poi_health_facility_type_field_hospital">Gesundheit-Einrichtungstyp: Feldlazarett</string>
 	<string name="poi_health_facility_type_clinic">Gesundheit-Einrichtungstyp: Klinik</string>
