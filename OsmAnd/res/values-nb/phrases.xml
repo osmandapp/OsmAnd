@@ -372,4 +372,12 @@
 
 	<string name="poi_display_sundial_yes">Solur</string>
 
+	<string name="poi_toilets">Toalett</string>
+	<string name="poi_toilets_yes">Med toaletter</string>
+	<string name="poi_toilets_no">Uten toaletter</string>
+	<string name="poi_toilets_access_customers">Toalettadgang: kunder</string>
+	<string name="poi_toilets_access_public">Toalettadgang: offentlig</string>
+
+	<string name="poi_cinema">Kino</string>
+	<string name="poi_townhall">Rådhus</string>
 	</resources>
