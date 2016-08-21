@@ -2310,4 +2310,6 @@ Actuellement {2} Mo sont disponibles.</string>
     <string name="get_it">Obtenir</string>
     <string name="osm_live_banner_desc">Obtenez le téléchargement illimité de cartes et des mises à jour plus régulières (chaque semaine, chaque jour, chaque heure; au lieu de chaque mois).</string>
     <string name="osmand_plus_banner_desc">Version OsmAnd complète avec téléchargement illimité des cartes et mises à jour mensuelles des cartes.</string>
+    <string name="donation_to_osm">Faire un don à la communauté OpenStreetMap</string>
+    <string name="osm_live_subscription_desc">L\'abonnement permet de bénéficier des mises à jour horaires, quotidiennes, hebdomadaires et de télécharger de nouvelles cartes sans limite.</string>
     </resources>
