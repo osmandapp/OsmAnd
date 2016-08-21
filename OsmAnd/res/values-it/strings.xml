@@ -2590,4 +2590,11 @@ Se ami OsmAnd e OSM e vuoi sostenerli è un modo perfetto farlo.</string>
     <string name="first_usage_greeting">Ottieni indicazioni e scoprire nuovi luoghi senza connessione internet</string>
     <string name="search_another_country">Scegliere un\'altra regione</string>
     <string name="skip_map_downloading_desc">Non hai mappa offline installato. Si può scegliere una mappa dalla lista o scaricare le mappe in seguito tramite Menu - %1$s.</string>
+    <string name="osm_live_payment_desc">Il costo di sottoscrizione verrà addebitato ogni mese. Puoi sempre scegliere di annullare la sottoscrizione su Google Play.</string>
+    <string name="donation_to_osm">Donazione per la comunità di OpenStreetMap</string>
+    <string name="donation_to_osm_desc">Parte della tua donazione verrà inviata agli utenti che fanno modifiche su OpenStreetMap. Il costo della sottoscrizione rimane inalterato.</string>
+    <string name="osm_live_subscription_desc">La sottoscrizione attiva aggiornamenti orari, quotidiani e settimanali e la possibilità di scaricare senza limiti tutte le mappe del mondo.</string>
+    <string name="get_it">Fallo</string>
+    <string name="get_for">Fallo per %1$s</string>
+    <string name="get_for_month">Fallo per %1$s mese</string>
     </resources>
