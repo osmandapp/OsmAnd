@@ -585,7 +585,7 @@
     <string name="osb_comment_dialog_error">Wystąpił błąd: nie dodano komentarza</string>
 
 
-    <string name="poi_edit_title">Edytuj UM</string>
+    <string name="poi_edit_title">Edytowanie użytecznego miejsca</string>
     <string name="poi_create_title">Dodawanie użytecznego miejsca</string>
     <string name="poi_error_poi_not_found">Nie można odnaleźć węzła albo udogodnienie (amenity) nie jest pojedynczym węzłem</string>
     <string name="poi_remove_confirm_template">Usunąć {0} (wprowadź komentarz)?</string>
@@ -1803,7 +1803,7 @@ Nagrane ślady można udostępnić znajomym lub wykorzystać na rzecz rowoju map
     <string name="plugin_install_needs_network">Zainstalowanie tej wtyczki wymaga połączenia internetowego.</string>
     <string name="osmand_parking_overdue">Przestarzały</string>
     <string name="action_create">Utworzenie</string>
-    <string name="action_modify">Zmodyfikuj</string>
+    <string name="action_modify">Zmodyfikowanie</string>
     <string name="action_delete">Usuń</string>
     <string name="osm_edits">Edycje OSM</string>
     <string name="osmand_parking_hour">h</string>
@@ -2196,7 +2196,7 @@ Włączenie tego widoku zmienia styl mapy na „Zima i narty”, ukazujący tere
     <string name="dashboard_or_drawer_description">To jest nowy wybór podstawowej kontroli aplikacja za pomocą konfigurowalnego panelu lub statycznego menu. Wybór zawsze można zmienić w ustawieniach panelu.</string>
     <string name="osm_save_offline">Zapisz lokalnie</string>
     <string name="please_specify_poi_type_only_from_list">Proszę określić rodzaj użytecznego miejsca lub pominąć go</string>
-    <string name="osm_edit_modified_poi">Zmodyfikowano użyteczne miejsce OSM</string>
+    <string name="osm_edit_modified_poi">Zmodyfikowane użyteczne miejsce OSM</string>
     <string name="osm_edit_deleted_poi">Usunięto użyteczne miejce OSM</string>
     <string name="osm_edit_reopened_note">Otwarto ponownie notatkę OSM</string>
     <string name="osm_edit_commented_note">Skomentowano uwagę OSM</string>
@@ -2285,7 +2285,7 @@ Włączenie tego widoku zmienia styl mapy na „Zima i narty”, ukazujący tere
  To potrzebuje {3} MB tymczasowo i {1} MB na stałe.
  Obecnie posiadasz dostępne {2} MB.</string>
     <string name="upload_osm_note_description">Można przesłać uwagi OSM anonimowo za pośrednictwem profilu na OpenStreetMap.org.</string>
-    <string name="upload_osm_note">Wyślij uwagę OSM</string>
+    <string name="upload_osm_note">Wysyłanie uwagi OSM</string>
     <string name="upload_anonymously">Wysłanie anonimowo</string>
 
     <string name="map_marker_1st">Pierwszy znacznik mapy</string>
