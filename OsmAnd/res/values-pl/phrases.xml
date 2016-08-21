@@ -59,17 +59,17 @@
 	<string name="poi_interior_decoration">Dekoracja wnętrz</string>
 	<string name="poi_jewelry">Jubiler</string>
 	<string name="poi_kiosk">Kiosk</string>
-	<string name="poi_kitchen">Art. kuchenne</string>
+	<string name="poi_kitchen">Artykuły kuchenne</string>
 	<string name="poi_mobile_phone">Telefony komórkowe</string>
 	<string name="poi_motorcycle">Motocykle</string>
 	<string name="poi_musical_instrument">Instrumenty muzyczne</string>
 	<string name="poi_newsagent">Kiosk gazetowy</string>
 	<string name="poi_optician">Optyk</string>
 	<string name="poi_organic">Żywność ekologiczna</string>
-	<string name="poi_outdoor">Art. wyposażenia zewnętrznego</string>
+	<string name="poi_outdoor">Artykuły wyposażenia zewnętrznego</string>
 	<string name="poi_paint">Farby</string>
 	<string name="poi_pet">Zoologiczny</string>
-	<string name="poi_radiotechnics">Art. RTV</string>
+	<string name="poi_radiotechnics">Sklep elektroniczny</string>
 	<string name="poi_second_hand">Sklep z odzieżą używaną</string>
 	<string name="poi_ship_chandler">Armator</string>
 	<string name="poi_sports">Sportowy</string>
@@ -458,7 +458,7 @@
 	<string name="poi_transportation">Transport</string>
 	<string name="poi_man_made">Przemysł</string>
 	<string name="poi_education">Edukacja</string>
-	<string name="poi_administrative">Administracyjne</string>
+	<string name="poi_administrative">Administracja</string>
 	<string name="poi_healthcare">Opieka zdrowotna</string>
 	<string name="poi_sport">Sport</string>
 	<string name="poi_tourism">Turystyka</string>
@@ -574,7 +574,7 @@
 	<string name="poi_architect">Biuro architekta</string>
 	<string name="poi_leisure_track">Tor sportowy</string>
 	<string name="poi_bicycle_track">Tor rowerowy</string>
-	<string name="poi_9pin">Kręgle klasyczne (9 kręgli)</string>
+	<string name="poi_9pin">Kręgle klasyczne (9 pionów)</string>
 	<string name="poi_climbing">Wspinaczka</string>
 	<string name="poi_canoe">Kajak</string>
 	<string name="poi_croquet">Krokiet</string>
@@ -633,12 +633,12 @@
 
 	<string name="poi_charity">Sklep charytatywny</string>
 	<string name="poi_photo">Sklep fotograficzny</string>
-	<string name="poi_10pin">Bowling (10 kręgli)</string>
+	<string name="poi_10pin">Bowling (10 pionów)</string>
 	<string name="poi_bowls">Bowls</string>
 	<string name="poi_sport_motor">Sporty motorowe</string>
 	<string name="poi_rugby_union">Rugby union</string>
 	<string name="poi_rugby_league">Rugby league</string>
-	<string name="poi_shooting">Strzelanie</string>
+	<string name="poi_shooting">Strzelectwo</string>
 	<string name="poi_lodging">Noclegi/Kwatery</string>
 	<string name="poi_alpine_hut">Chata alpejska</string>
 	<string name="poi_chalet">Szalet</string>
@@ -651,7 +651,7 @@
 	<string name="poi_beach_resort">Ośrodek nadmorski</string>
 	<string name="poi_dog_park">Park dla psów</string>
 	<string name="poi_hunting_stand">Myśliwski punkt obserwacyjny</string>
-	<string name="poi_marina">Przystań</string>
+	<string name="poi_marina">Marina</string>
 	<string name="poi_bench">Ławka</string>
 	<string name="poi_seamark_wreck">Wrak, znak morski</string>
 
@@ -722,7 +722,7 @@
 	<string name="poi_attraction_animal">Zwierzę (atrakcja)</string>
 	<string name="poi_attraction_swing_carousel">Bujana karuzela</string>
 	<string name="poi_attraction_train">Pociąg (atrakcja)</string>
-	<string name="poi_cabin">Chatka</string>
+	<string name="poi_cabin">Chata</string>
 	<string name="poi_lean_to">Szałas</string>
 	<string name="poi_hunting_lodge">Ambona myśliwska</string>
 
@@ -734,7 +734,7 @@
 	<string name="poi_piste_snow_park">Snow park</string>
 	<string name="poi_piste_ice_skate">Lodowisko</string>
 	<string name="poi_community_centre">Centrum kultury</string>
-	<string name="poi_social_centre">Centrum kulturalne</string>
+	<string name="poi_social_centre">Klub towarzyski</string>
 	<string name="poi_trail_riding_station">Przejażdżki konne</string>
 
 	<string name="poi_craft_agricultural_engines">Silniki rolnicze (wystawa)</string>
@@ -1563,4 +1563,20 @@
 	<string name="poi_prison_camp">Były obóz jeniecki</string>
 	<string name="poi_summer_camp">Obóz letni</string>
 	<string name="poi_firepit">Ognisko</string>
+	<string name="poi_club_sailing">Klub żeglarski</string>
+	<string name="poi_boxing">Boks</string>
+
+	<string name="poi_ice_hockey">Hokej na lodzie</string>
+	<string name="poi_running">Biegi lekkoatletyczne</string>
+	<string name="poi_rc_car">Wyścigi zdalnie sterowanych samochodów</string>
+	<string name="poi_religion">Dewocjonalia</string>
+
+	<string name="poi_love_hotel">Hotel miłości</string>
+
+	<string name="poi_scout_yes">Obóz harcerski: tak</string>
+	<string name="poi_scout_no">Obóz harcerski: nie</string>
+	<string name="poi_club_scout">Drużyna harcerska</string>
+
+	<string name="poi_fitness_centre">Klub fitness</string>
+	<string name="poi_bandstand">Scena</string>
 	</resources>
