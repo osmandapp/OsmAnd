@@ -2588,4 +2588,7 @@ Facebook：https://www.facebook.com/osmandapp
     <string name="get_for_month">每個月獲得 %1$s</string>
     <string name="no_update_info_desc">不要檢查任何有關 OsmAnd 新版本更新與相關的折扣</string>
     <string name="get_it">獲得</string>
+    <string name="osm_live_payment_desc">每個月會收取認購費用。您可以隨時取消在 Google Play 的訂購。</string>
+    <string name="donation_to_osm">捐贈給 OpenStreetMap 的社群</string>
+    <string name="osm_live_subscription_desc">啟用認購每小時、每天、每週的更新和世界各地所有的地圖無限制的下載。</string>
     </resources>
