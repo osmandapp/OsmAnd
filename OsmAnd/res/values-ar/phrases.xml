@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources><string name="poi_shop">متجر</string>
-		<string name="poi_personal_transport">نقل خاصّ</string>
-		<string name="poi_public_transport">نقل عامّ</string>
+		<string name="poi_personal_transport">نقل خاص</string>
+		<string name="poi_public_transport">نقل عام</string>
 		<string name="poi_healthcare">مركز صحّيّ</string>
 	<string name="poi_office">مكتب</string>
 	<string name="poi_club">نادي</string>
@@ -19,7 +19,7 @@
 	<string name="poi_emergency">حالات الطوارئ</string>
 	<string name="poi_transportation">النقل</string>
 		<string name="poi_filling_station">محطة بنزين</string>
-		<string name="poi_air_transport">النقل الجوي</string>
+		<string name="poi_air_transport">نقل جوي</string>
 		<string name="poi_water_transport">النقل البحري</string>
 		<string name="poi_man_made">من صنع الإنسان</string>
 		<string name="poi_water_supply">الإمداد بالمياه</string>
