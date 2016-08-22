@@ -2935,4 +2935,15 @@
 	<string name="poi_historic_civilization_dacian">Civilizace: dákové</string>
 	<string name="poi_historic_civilization_greek_egyptian">Civilizace: řecko-egyptská (332 př. n. l. - 30 př. n. l.)</string>
 	<string name="poi_historic_civilization_helladic">Civilizace: helladská</string>
+	<string name="poi_historic_period_nuragic">Historické období: nuragské</string>
+	<string name="poi_historic_period_dominate">Historické období: dominát (285 n. l. - 476 n. l.)</string>
+	<string name="poi_historic_era_neolithic">Historické období: mladší doba kamenná</string>
+	<string name="poi_historic_era_chalcolithic">Historické období: doba měděná (IV-III tisíciletí př.n.l.)</string>
+
+	<string name="poi_site_type_petroglyph">Typ: petroglyf</string>
+	<string name="poi_megalith_type_menhir">Typ megalitu: menhir</string>
+	<string name="poi_megalith_type_dolmen">Typ megalitu: dolmen</string>
+	<string name="poi_megalith_type_nuraghe">Typ megalitu: nuragy (ochranné opevnění)</string>
+	<string name="poi_megalith_type_stone_circle">Typ megalitu: kamenný kruh</string>
+	<string name="poi_megalith_type_passage_grave">Typ megalitu: chodbový hrob</string>
 	</resources>
