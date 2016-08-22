@@ -269,27 +269,27 @@
 
                         </LinearLayout>
 
-                        <LinearLayout
-                            android:id="@+id/editModeBottomView"
-                            android:layout_width="match_parent"
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/editModeBottomView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        android:layout_marginTop="16dp"
+                        android:visibility="gone">
+
+                        <Button
+                            android:id="@+id/saveChangesButton"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="16dp"
-                            android:layout_marginTop="16dp"
-                            android:visibility="gone">
-
-                            <Button
-                                android:id="@+id/saveChangesButton"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="72dp"
-                                android:layout_marginRight="16dp"
-                                android:background="@drawable/btn_round_blue"
-                                android:paddingLeft="16dp"
-                                android:paddingRight="16dp"
-                                android:text="@string/shared_string_save_changes"
-                                android:textColor="@color/color_white"/>
-
-                        </LinearLayout>
+                            android:layout_marginLeft="72dp"
+                            android:layout_marginRight="16dp"
+                            android:background="@drawable/btn_round_blue"
+                            android:paddingLeft="16dp"
+                            android:paddingRight="16dp"
+                            android:text="@string/shared_string_save_changes"
+                            android:textColor="@color/color_white"/>
 
                     </LinearLayout>
 
