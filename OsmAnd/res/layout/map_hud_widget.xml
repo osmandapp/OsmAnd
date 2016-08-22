@@ -38,6 +38,8 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="@dimen/map_widget_height"
+        android:id="@+id/widget_bottom_layout"
+        
         android:orientation="horizontal" >
 
         <ImageView

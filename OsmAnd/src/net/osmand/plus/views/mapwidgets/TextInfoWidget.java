@@ -8,9 +8,13 @@ import android.graphics.Paint.Style;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class TextInfoWidget  {
@@ -30,11 +34,13 @@ public class TextInfoWidget  {
 	private int dayIcon;
 	private int nightIcon;
 	private boolean isNight;
+	private ViewGroup bottomLayout;
 
 
 	public TextInfoWidget(Activity activity) {
 		app = (OsmandApplication) activity.getApplication();
 		view = activity.getLayoutInflater().inflate(R.layout.map_hud_widget, null);
+		bottomLayout = (ViewGroup) view.findViewById(R.id.widget_bottom_layout);
 		topImageView = (ImageView) view.findViewById(R.id.widget_top_icon);
 		topTextView = (TextView) view.findViewById(R.id.widget_top_icon_text);
 		imageView = (ImageView) view.findViewById(R.id.widget_icon);
@@ -75,12 +81,20 @@ public class TextInfoWidget  {
 		if(imageDrawable != null) {
 			topImageView.setImageDrawable(imageDrawable);
 			topImageView.setVisibility(View.VISIBLE);
+			LinearLayout.LayoutParams lp = (android.widget.LinearLayout.LayoutParams) bottomLayout.getLayoutParams();
+			lp.gravity = Gravity.CENTER_HORIZONTAL;
+			bottomLayout.setLayoutParams(lp);
+			bottomLayout.invalidate();
 			topTextView.setVisibility(View.VISIBLE);
 			topTextView.setText(topText == null ? "" : topText);
 		} else {
 			topImageView.setVisibility(View.GONE );
 			topTextView.setVisibility(View.GONE );
+			LinearLayout.LayoutParams lp = (android.widget.LinearLayout.LayoutParams) bottomLayout.getLayoutParams();
+			lp.gravity = Gravity.NO_GRAVITY;
+			bottomLayout.setLayoutParams(lp);
 		}
+		
 		topTextView.invalidate();
 		topImageView.invalidate();
 	}
