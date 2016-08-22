@@ -202,6 +202,12 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 	public void clearPreviousZoom() {
 		distanceInd = 0;
 	}
+	
+	public void clearCurrentResults() {
+		if (currentSearchResult != null) {
+			currentSearchResult = new ArrayList<>();
+		}
+	}
 
 	public List<Amenity> initializeNewSearch(double lat, double lon, int firstTimeLimit, ResultMatcher<Amenity> matcher) {
 		clearPreviousZoom();
@@ -236,7 +242,7 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 		double bottomLatitude = Math.max(lat - (distance / baseDistY), -84.);
 		double leftLongitude = Math.max(lon - (distance / baseDistX), -180);
 		double rightLongitude = Math.min(lon + (distance / baseDistX), 180);
-		return searchAmenitiesInternal(lat, lon, topLatitude, bottomLatitude, leftLongitude, rightLongitude, matcher);
+		return searchAmenitiesInternal(lat, lon, topLatitude, bottomLatitude, leftLongitude, rightLongitude, -1, matcher);
 	}
 
 	public List<Amenity> searchAmenities(double top, double left, double bottom, double right, int zoom,
@@ -254,8 +260,8 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 				}
 			}
 		}
-		List<Amenity> amenities = app.getResourceManager().searchAmenities(this, top, left, bottom, right, zoom,
-				wrapResultMatcher(matcher));
+		List<Amenity> amenities = searchAmenitiesInternal(top / 2 + bottom / 2, left / 2 + right / 2, 
+				top, bottom, left, right, zoom, matcher);
 		results.addAll(amenities);
 		return results;
 	}
@@ -265,9 +271,9 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 	}
 
 	protected List<Amenity> searchAmenitiesInternal(double lat, double lon, double topLatitude,
-			double bottomLatitude, double leftLongitude, double rightLongitude, final ResultMatcher<Amenity> matcher) {
+			double bottomLatitude, double leftLongitude, double rightLongitude, int zoom, final ResultMatcher<Amenity> matcher) {
 		return app.getResourceManager().searchAmenities(this, 
-				topLatitude, leftLongitude, bottomLatitude, rightLongitude, -1, wrapResultMatcher(matcher));
+				topLatitude, leftLongitude, bottomLatitude, rightLongitude, zoom, wrapResultMatcher(matcher));
 	}
 
 	public AmenityNameFilter getNameFilter(String filter) {
