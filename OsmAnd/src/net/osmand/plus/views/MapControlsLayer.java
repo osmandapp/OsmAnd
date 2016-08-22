@@ -26,6 +26,7 @@ import android.widget.TextView;
 import net.osmand.AndroidUtils;
 import net.osmand.core.android.MapRendererContext;
 import net.osmand.data.LatLon;
+import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
@@ -40,6 +41,8 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivity.ShowQuickSearchMode;
 import net.osmand.plus.activities.search.SearchAddressFragment;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
+import net.osmand.plus.dialogs.DirectionsDialogs;
+import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.other.MapRouteInfoMenu;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.corenative.NativeCoreContext;
@@ -54,6 +57,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 	private static final int TIMEOUT_TO_SHOW_BUTTONS = 7000;
 	public static final int REQUEST_ADDRESS_SELECT = 2;
 	private static final int REQUEST_LOCATION_FOR_NAVIGATION_PERMISSION = 200;
+	private static final int REQUEST_LOCATION_FOR_NAVIGATION_FAB_PERMISSION = 201;
 
 	public MapHudButton createHudButton(View iv, int resId) {
 		MapHudButton mc = new MapHudButton();
@@ -413,6 +417,69 @@ public class MapControlsLayer extends OsmandMapLayer {
 		hasTargets = false;
 	}
 
+	public void navigateFab() {
+		if (!OsmAndLocationProvider.isLocationPermissionAvailable(mapActivity)) {
+			ActivityCompat.requestPermissions(mapActivity,
+					new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+					REQUEST_LOCATION_FOR_NAVIGATION_FAB_PERMISSION);
+		} else {
+			final MapContextMenu menu = mapActivity.getContextMenu();
+			final LatLon latLon = menu.getLatLon();
+			final PointDescription pointDescription = menu.getPointDescriptionForTarget();
+			menu.hide();
+			final TargetPointsHelper targets = mapActivity.getMyApplication().getTargetPointsHelper();
+			RoutingHelper routingHelper = mapActivity.getMyApplication().getRoutingHelper();
+			if (routingHelper.isFollowingMode() || routingHelper.isRoutePlanningMode()) {
+				DirectionsDialogs.addWaypointDialogAndLaunchMap(mapActivity, latLon.getLatitude(),
+						latLon.getLongitude(), pointDescription);
+			} else if (targets.getIntermediatePoints().isEmpty()) {
+				boolean hasPointToStart = settings.restorePointToStart();
+				targets.navigateToPoint(latLon, true, -1, pointDescription);
+				if (!hasPointToStart) {
+					mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(null, null, null, true, true);
+				} else {
+					TargetPoint start = targets.getPointToStart();
+					if (start != null) {
+						mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(null, start.point, start.getOriginalPointDescription(), true, true);
+					} else {
+						mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(null, null, null, true, true);
+					}
+				}
+				menu.close();
+			} else {
+				AlertDialog.Builder bld = new AlertDialog.Builder(mapActivity);
+				bld.setTitle(R.string.new_directions_point_dialog);
+				final int[] defaultVls = new int[]{0};
+				bld.setSingleChoiceItems(new String[]{
+						mapActivity.getString(R.string.clear_intermediate_points),
+						mapActivity.getString(R.string.keep_intermediate_points)
+				}, 0, new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						defaultVls[0] = which;
+					}
+				});
+				bld.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
+
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						if (defaultVls[0] == 0) {
+							targets.removeAllWayPoints(false, true);
+							targets.navigateToPoint(latLon, true, -1, pointDescription);
+							mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(null, null, null, true, true);
+							menu.close();
+						} else {
+							targets.navigateToPoint(latLon, true, -1, pointDescription);
+							mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(null, null, null, true, true);
+							menu.close();
+						}
+					}
+				});
+				bld.setNegativeButton(R.string.shared_string_cancel, null);
+				bld.show();
+			}
+		}
+	}
 
 	public void switchToRouteFollowingLayout() {
 		touchEvent = 0;
@@ -928,6 +995,9 @@ public class MapControlsLayer extends OsmandMapLayer {
 		if (requestCode == REQUEST_LOCATION_FOR_NAVIGATION_PERMISSION
 				&& grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 			onNavigationClick();
+		} else if (requestCode == REQUEST_LOCATION_FOR_NAVIGATION_FAB_PERMISSION
+				&& grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+			navigateFab();
 		}
 	}
 }
