@@ -2429,8 +2429,8 @@ Facebook：https://www.facebook.com/osmandapp
     <string name="osm_live_ask_for_purchase">請先購買 OSM 即時捐助</string>
 
     <string name="osm_live_header">此捐助能夠為世界各地所有的地圖每小時更新一次。
-大多數收入又回到了 OSM 社群和支付每個 OSM 的貢獻。
-假如您喜愛 OsmAnd 和 OSM 並且想要支援它，這是一個完美方式的作法。</string>
+部分收入又回到了 OSM 社群和支付每個 OSM 的貢獻。
+假如您喜愛 OsmAnd 和 OSM 並且想要支持它，這是個完美方式的作法。</string>
     
     <string name="recalculate_route">重新計算路線</string>
     <string name="shared_string_topbar">頂端列</string>
