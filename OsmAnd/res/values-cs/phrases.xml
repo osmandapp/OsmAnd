@@ -1361,7 +1361,7 @@
 	<string name="poi_vending_bicycle_tube">Cykloduše</string>
 	<string name="poi_vending_food">Jídlo</string>
 	<string name="poi_vending_drinks_food">Jídlo a nápoje</string>
-	<string name="poi_vending_parcel_pickup">Balíky</string>
+	<string name="poi_vending_parcel_pickup">Vyzvednutí balíků</string>
 	<string name="poi_vending_milk">Mléko</string>
 	<string name="poi_vending_chewing_gums">Žvýkačky</string>
 	<string name="poi_vending_parking_tickets_public_transport_tickets">Parkovací lístky; lístky na veřejnou dopravu</string>
@@ -2908,4 +2908,31 @@
 
 	<string name="poi_social_facility_for_underprivileged">Zaměření na sociální skupinu: sociálně slabí</string>
 	<string name="poi_architecture_umgebinde">Architektura: podstávková</string>
+	<string name="poi_denomination_united">Sjednocená církev Kanady</string>
+	<string name="poi_denomination_united_reformed">Sjednocená reformovaná</string>
+	<string name="poi_denomination_iglesia_ni_cristo">Iglesia ni cristo (křesťanská církev původně z Filipín)</string>
+	<string name="poi_denomination_uniting">Sjednocující církev v Austrálii</string>
+	<string name="poi_denomination_united_methodist">Evangelická metodistická</string>
+	<string name="poi_denomination_congregational">Kongregační</string>
+	<string name="poi_denomination_spiritist">Spiritistický</string>
+	<string name="poi_denomination_reform">Reformní judaismus</string>
+	<string name="poi_denomination_scientist">Křesťanská věda</string>
+	<string name="poi_denomination_unitarian">Unitářství</string>
+	<string name="poi_denomination_wesleyan">Metodismus</string>
+	<string name="poi_denomination_shaktism">Šaktismus</string>
+	<string name="poi_denomination_shingon_shu">Šingon</string>
+	<string name="poi_denomination_maronite">Maronitský</string>
+	<string name="poi_denomination_mahayana">Mahájána</string>
+
+	<string name="poi_information_trail_blaze">Turistická značka</string>
+	<string name="poi_vending_parcel_mail_in">Odeslání balíků</string>
+	<string name="poi_architecture_new_objectivity">Architektura: nová věcnost</string>
+	<string name="poi_architecture_timber_frame">Architektura: hrázděné zdivo</string>
+	<string name="poi_architecture_art_nouveau">Architektura: secesní</string>
+	<string name="poi_architecture_brutalism">Architektura: brutalismus</string>
+	<string name="poi_industrial_wellsite">Typ: těžařská oblast</string>
+	<string name="poi_historic_civilization_nuragic">Civilizace: nuragská (18. st. př. n. l. - 2. st. n. l.)</string>
+	<string name="poi_historic_civilization_dacian">Civilizace: dákové</string>
+	<string name="poi_historic_civilization_greek_egyptian">Civilizace: řecko-egyptská (332 př. n. l. - 30 př. n. l.)</string>
+	<string name="poi_historic_civilization_helladic">Civilizace: helladská</string>
 	</resources>
