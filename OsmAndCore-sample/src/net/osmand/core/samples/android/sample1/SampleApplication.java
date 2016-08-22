@@ -1,9 +1,13 @@
 package net.osmand.core.samples.android.sample1;
 
+import android.Manifest;
 import android.app.Application;
+import android.content.pm.PackageManager;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 
 import net.osmand.core.android.CoreResourcesFromAndroidAssets;
 import net.osmand.core.android.NativeCore;
@@ -15,8 +19,8 @@ import net.osmand.osm.MapPoiTypes;
 import java.io.File;
 import java.lang.reflect.Field;
 
-public class SampleApplication extends Application
-{
+public class SampleApplication extends Application {
+	public static final int PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 5 ;
 	private CoreResourcesFromAndroidAssets assetsCustom;
 	private MapPoiTypes poiTypes;
 	private IconsCache iconsCache;
@@ -27,8 +31,13 @@ public class SampleApplication extends Application
 	{
 		super.onCreate();
 		uiHandler = new Handler();
+		poiTypes = MapPoiTypes.getDefaultNoInit();
+		if(ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+				== PackageManager.PERMISSION_GRANTED) {
+			initPoiTypes();
+		}
 
-		initPoiTypes();
+
 
 		// Initialize native core
 		if (NativeCore.isAvailable() && !NativeCore.isLoaded()) {
@@ -48,8 +57,8 @@ public class SampleApplication extends Application
 		return iconsCache;
 	}
 
-	private void initPoiTypes() {
-		poiTypes = MapPoiTypes.getDefaultNoInit();
+	public void initPoiTypes() {
+
 		poiTypes.init(Environment.getExternalStorageDirectory() + "/osmand/poi_types.xml");
 		poiTypes.setPoiTranslator(new MapPoiTypes.PoiTranslator() {
 
