@@ -380,7 +380,7 @@ Jelenleg {2} MB érhető el.</string>
     <string name="shared_string_select_all">Minden kijelölése</string>
     <string name="shared_string_refresh">Frissítés</string>
     <string name="fast_route_mode">Leggyorsabb útvonal</string>
-    <string name="fast_route_mode_descr">Leggyorsabb útvonal kiszámításának engedélyezése, vagy tiltása a legrövidebb útért </string>
+    <string name="fast_route_mode_descr">"Leggyorsabb útvonal kiszámításának engedélyezése, vagy tiltása az üzemanyag-takarékos útvonal útért "</string>
     <string name="tiles_to_download_estimated_size">{0} nagyításnál {1} térképcsempe letöltése ({2} Mb )</string>
     <string name="shared_string_download_map">Térkép letöltése</string>
     <string name="select_max_zoom_preload_area">Maximális nagyítás kiválasztása a látható terület előtöltéséhez</string>
@@ -413,7 +413,7 @@ Jelenleg {2} MB érhető el.</string>
     <string name="map_route_by_gpx">Útvonal GPX alapján</string>
     <string name="gpx_files_not_found">Nem található GPX fálj a tracks könyvtárban</string>
     <string name="layer_gpx_layer">GPX útvonal…</string>
-    <string name="error_reading_gpx">GPX adat olvasási hiba</string>
+    <string name="error_reading_gpx">Nem sikerült olvasni a GPX-adatot</string>
     <string name="vector_data">Vektoros OSM térkép</string>
     <string name="transport_context_menu">Közlekedés keresése a célnál</string>
 
@@ -2219,7 +2219,7 @@ A nézet aktiválása megváltoztatja a térképstílust „Tél és síelésre�
     <string name="map_downloaded">Térkép letöltve</string>
     <string name="map_downloaded_descr">%1$s térképe letöltődött. A használatához menj vissza a térképre.</string>
     <string name="go_to_map">Tovább a térképre</string>
-    <string name="application_dir_description">Válaszd ki, hova szeretnéd menteni a térképfájlokat.</string>
+    <string name="application_dir_description">Válaszd ki, hol szeretnéd tárolni a térképeket és egyéb adatokat.</string>
     <string name="show_on_start_description">Kikapcsolva közvetlenül a térkép képernyőt indítja</string>
     <string name="enter_country_name">Add meg az ország nevét</string>
     <string name="new_version">Új verzió</string>
@@ -2391,7 +2391,7 @@ A nézet aktiválása megváltoztatja a térképstílust „Tél és síelésre�
     <string name="osm_live_ask_for_purchase">Előbb kérlek vásárolj OSM Live előfizetést</string>
 
     <string name="osm_live_header">Ez az előfizetés a világ bármely térképének óránkénti frissítését teszi lehetővé.
-A bevételek nagy része az OSM közösségnek jut vissza, és OSM szerkesztésenként kerül kifizetésre.
+A bevételek egy része az OSM közösségnek jut vissza, és OSM szerkesztésenként kerül kifizetésre.
 Ha szereted az OsmAndot és az OSM-et, és szeretnéd támogatni a fejlődésüket, ez ennek a tökéletes módja.</string>
     
     <string name="select_map_marker">Térképjelölő kiválasztása</string>
@@ -2614,4 +2614,31 @@ Ha segítségre van szükséged az OsmAnd alkalmazással kapcsolatban, keresd a 
     <string name="first_usage_greeting">Navigálj és fedezz fel új helyeket internetkapcsolat nélkül</string>
     <string name="search_another_country">Válassz másik régiót</string>
     <string name="skip_map_downloading_desc">"Nincs offline térkép telepítve. Választhatsz egy térképet a listából, vagy tölts le később innen: Menü  - %1$s."</string>
+    <string name="osm_live_payment_desc">Az előfizetési díj havonta lesz felszámítva. Az előfizetést bármikor lemondhatod a Google Play-en.</string>
+    <string name="donation_to_osm">Adomány az OpenStreetMap közösségnek</string>
+    <string name="donation_to_osm_desc">Az adományod egy részét továbbítjuk azon OSM szerkesztőknek, akik módosításokat küldtek be OpenStreetMapre. Az előfizetési díj változatlan marad.</string>
+    <string name="osm_live_subscription_desc">Az előfizetés lehetővé teszi bármely térkép óránkénti, napi vagy heti frissítését, valamint korlátlan számú letöltést.</string>
+    <string name="get_it">Beszerzés</string>
+    <string name="osm_live_banner_desc">Szerezz korlátlan térékpletöltési és havi egynél gyakoribb frissítési lehetőséget: óránkénti, napi, heti.</string>
+    <string name="get_for_month">Beszerzés %1$s hónapra</string>
+    <string name="osmand_plus_banner_desc">Az OsmAnd teljes verziója körlátlan térképletöltéssel és havi térképfrissítéssel.</string>
+    <string name="si_mi_meters">Mérföld/méter</string>
+    <string name="search_map">Keresés a térképen…</string>
+    <string name="first_usage_wizard_desc">Engedd az OsmAnd-nek a pozíciód meghatározását, hogy letölthető térképet javasolhasson a régióhoz.</string>
+    <string name="location_not_found">Hely nem található</string>
+    <string name="no_inet_connection">Nincs internetkapcsolat</string>
+    <string name="no_inet_connection_desc_map">A térképek letöltéséhez szükséges.</string>
+    <string name="search_location">Hely keresése…</string>
+    <string name="storage_free_space">Szabad hely</string>
+    <string name="storage_place_description">Az OsmAnd tárolt adatai (térképek, nyomvonalak, stb.): %1$s.</string>
+    <string name="give_permission">Engedélyezés</string>
+    <string name="allow_access_location">Adj hozzáférést a pozíciódhoz</string>
+    <string name="search_my_location">Pozícióm meghatározása</string>
+    <string name="no_update_info_desc">Ne keressen frissítéseket új verziókról és OsmAnd-del kapcsolatos kedvezményekről</string>
+    <string name="no_update_info">Ne mutass frissítéseket</string>
+    <string name="update_all_maps_now">Szeretnéd most frissíteni az összes térképet?</string>
+    <string name="clear_tile_data">Összes csempe törlése</string>
+    <string name="routing_attr_short_way_name">Üzemanyag-takarékos útvonal</string>
+    <string name="routing_attr_short_way_description">Üzemanyag-takarékos útvonal tervezése (általában rövidebb)</string>
+    <string name="replace_favorite_confirmation">Le szeretnéd cserélni a(z) %1$s kedvenc helyet?</string>
     </resources>
