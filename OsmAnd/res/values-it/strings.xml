@@ -2189,7 +2189,7 @@ Attivando questa vista lo stile della mappa diventerà \'Inverno e sci\', mostra
     <string name="simulate_initial_startup">Simula il primo avvio dell\'app</string>
     <string name="share_menu_location">Condividi la posizione</string>
 
-    <string name="application_dir_description">Scegli dove vuoi salvare i file delle mappe.</string>
+    <string name="application_dir_description">Scegli dove vuoi salvare i file delle mappe e gli altri file.</string>
     <string name="osm_edit_created_poi">POI OSM creato</string>
 
     <string name="shared_string_qr_code">QR-code</string>
@@ -2463,7 +2463,7 @@ Ora, sono disponibili solo {2} MB.</string>
     <string name="osm_live_ask_for_purchase">Per favore acquista prima la sottoscrizione a OSM Live</string>
 
     <string name="osm_live_header">La sottoscrizione abilita agli aggiornamenti orari per tutte le mappe del mondo.
-La maggior parte degli incassi ritornano alla comunità OSM ed è corrisposto per ogni contributo OSM.
+Parte degli incassi ritornano alla comunità OSM ed è corrisposto per ogni contributo OSM.
 Se ami OsmAnd e OSM e vuoi sostenerli è un modo perfetto farlo.</string>
     
     <string name="upload_anonymously">Invia anonimamente</string>
@@ -2597,4 +2597,22 @@ Se ami OsmAnd e OSM e vuoi sostenerli è un modo perfetto farlo.</string>
     <string name="get_it">Fallo</string>
     <string name="get_for">Fallo per %1$s</string>
     <string name="get_for_month">Fallo per %1$s mese</string>
+    <string name="osm_live_banner_desc">Ottieni download delle mappe illimitati e aggiornamenti più frequenti che mensili, orari, giornalieri o settimanali.</string>
+    <string name="osmand_plus_banner_desc">Versione completa di OsmAnd con download illimitati e aggiornamenti mensili delle mappe.</string>
+    <string name="si_mi_meters">Miglia/metri</string>
+    <string name="search_map">Cercando la mappa…</string>
+    <string name="first_usage_wizard_desc">Permetti a OsmAnd di determinate la tua posizione e suggerire le mappe da scaricare per quella regione.</string>
+    <string name="location_not_found">Posizione non trovata</string>
+    <string name="no_inet_connection">Connessione internet assente</string>
+    <string name="no_inet_connection_desc_map">Necessaria per scaricare le mappe.</string>
+    <string name="search_location">Ricercando la posizione …</string>
+    <string name="storage_free_space">Spazio libero</string>
+    <string name="storage_place_description">Spazio di memorizzazione dei dati di OsmAnd (per le mappe, tracce, ecc.): %1$s.</string>
+    <string name="give_permission">Concedi il permesso</string>
+    <string name="allow_access_location">Permetti l\'accesso alla posizione</string>
+    <string name="search_my_location">Cerca la mia posizione</string>
+    <string name="no_update_info_desc">Non controllare per aggiornamenti alle nuove versioni e sconti per OsmAnd.</string>
+    <string name="no_update_info">Non mostrare gli aggiornamenti</string>
+    <string name="update_all_maps_now">Vuoi aggiornare tutte le mappe ora?</string>
+    <string name="clear_tile_data">Cancella tutte le mattonelle</string>
     </resources>
