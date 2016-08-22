@@ -1760,7 +1760,7 @@ No cal baixar un mapa específic, aquesta vista es crea amb els nostres mapes es
 Aquesta vista es pot desfer tornant a fer la mateixa selecció, o en canviar l\'«Estil del mapa» de «Configuració del mapa» a la vista que es desitgi.
  "</string>
     <string name="osmo_grop_name_length_alert">El nom de grup ha de tenir una mida mínima de 3 caràcters!</string>
-    <string name="local_osm_changes_upload_all_confirm">Esteu a punt de pujar %1$d modificacions a OSM. N\'esteu segur?</string>
+    <string name="local_osm_changes_upload_all_confirm">"Esteu a punt de pujar %1$d modificacio(ns)  a OSM. N\'esteu segur?"</string>
     <string name="confirmation_to_clear_history">Voleu esborrar l\'històric?</string>
     <string name="delay_to_start_navigation_descr">Indiqueu el temps d\'espera sense canvis per tancar la pantalla de planificació de la ruta</string>
     <string name="delay_to_start_navigation">Inici de navegació gir a gir després de…</string>
