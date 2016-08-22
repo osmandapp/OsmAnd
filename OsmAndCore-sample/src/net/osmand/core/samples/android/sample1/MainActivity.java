@@ -1,13 +1,17 @@
 package net.osmand.core.samples.android.sample1;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.content.pm.PackageManager;
 import android.graphics.PointF;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPropertyAnimatorListener;
 import android.text.Editable;
@@ -138,6 +142,15 @@ public class MainActivity extends Activity {
 	}
 
 	@Override
+	public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+		super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+		if(requestCode == SampleApplication.PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE &&
+				grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+			getSampleApplication().initPoiTypes();
+		}
+	}
+
+	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
@@ -148,6 +161,13 @@ public class MainActivity extends Activity {
 
 		// Inflate views
 		setContentView(R.layout.activity_main);
+
+		if(ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+				!= PackageManager.PERMISSION_GRANTED) {
+			ActivityCompat.requestPermissions(this,
+					new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+					SampleApplication.PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
+		}
 
 		// Get map view
 		mapView = (AtlasMapRendererView) findViewById(R.id.mapRendererView);
@@ -643,8 +663,8 @@ public class MainActivity extends Activity {
 		public void onLongPress(MotionEvent e) {
 			PointI point31 = new PointI();
 			mapView.getLocationFromScreenPoint(new PointI((int) e.getX(), (int) e.getY()), point31);
-			geocode(point31);
-			Toast.makeText(MainActivity.this, "Geocoding...", Toast.LENGTH_SHORT).show();
+			// geocode(point31);
+			//Toast.makeText(MainActivity.this, "Geocoding...", Toast.LENGTH_SHORT).show();
 		}
 
 		@Override
