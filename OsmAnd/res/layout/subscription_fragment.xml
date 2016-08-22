@@ -322,7 +322,7 @@
                             android:layout_height="48dp"
                             android:scaleType="center"
                             android:tint="?attr/color_dialog_buttons"
-                            android:src="@drawable/ic_action_foot_dark"/>
+                            android:src="@drawable/ic_action_payment_card"/>
 
                         <LinearLayout
                             android:layout_width="match_parent"
