@@ -2372,7 +2372,7 @@ Włączenie tego widoku zmienia styl mapy na „Zima i narty”, ukazujący tere
     <string name="osm_live_ask_for_purchase">Należy najpierw zakupić subskrypcję OSM Live</string>
 
     <string name="osm_live_header">Ten abonament umożliwia cogodzinną aktualizację dla map z całego świata.
- Większa część dochodów powraca do społeczności OSM i jest wypłacana za każdą edycję OSM.
+ Część dochodów powraca do społeczności OSM i jest wypłacana za każdą edycję OSM.
  Jeśli lubisz OsmAnd i OSM i chcesz je wspierać, jest to doskonały sposób, aby to zrobić.</string>
     
     <string name="file_name_containes_illegal_char">Nazwa pliku zawiera niedozwolony znak</string>
