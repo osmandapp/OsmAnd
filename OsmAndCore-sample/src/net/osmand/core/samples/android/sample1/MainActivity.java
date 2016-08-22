@@ -663,8 +663,8 @@ public class MainActivity extends Activity {
 		public void onLongPress(MotionEvent e) {
 			PointI point31 = new PointI();
 			mapView.getLocationFromScreenPoint(new PointI((int) e.getX(), (int) e.getY()), point31);
-			geocode(point31);
-			Toast.makeText(MainActivity.this, "Geocoding...", Toast.LENGTH_SHORT).show();
+			// geocode(point31);
+			//Toast.makeText(MainActivity.this, "Geocoding...", Toast.LENGTH_SHORT).show();
 		}
 
 		@Override
