@@ -2189,7 +2189,7 @@ Attivando questa vista lo stile della mappa diventerà \'Inverno e sci\', mostra
     <string name="simulate_initial_startup">Simula il primo avvio dell\'app</string>
     <string name="share_menu_location">Condividi la posizione</string>
 
-    <string name="application_dir_description">Scegli dove vuoi salvare i file delle mappe e gli altri file.</string>
+    <string name="application_dir_description">Scegli dove vuoi salvare i file delle mappe e gli altri file di dati.</string>
     <string name="osm_edit_created_poi">POI OSM creato</string>
 
     <string name="shared_string_qr_code">QR-code</string>
