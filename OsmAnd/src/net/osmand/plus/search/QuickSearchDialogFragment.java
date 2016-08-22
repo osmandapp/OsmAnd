@@ -219,9 +219,10 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 				} else if (searchPhrase.isNoSelectedType() || searchPhrase.isLastWord(ObjectType.POI_TYPE)) {
 					PoiUIFilter filter;
 					if (searchPhrase.isNoSelectedType()) {
-						filter = new PoiUIFilter(null, app, "");
+						filter = app.getPoiFilters().getSearchByNamePOIFilter();
 						if (!Algorithms.isEmpty(searchPhrase.getUnknownSearchWord())) {
 							filter.setFilterByName(searchPhrase.getUnknownSearchWord());
+							filter.clearCurrentResults();
 						}
 					} else if (searchPhrase.getLastSelectedWord().getResult().object instanceof AbstractPoiType) {
 						if (searchPhrase.isNoSelectedType()) {

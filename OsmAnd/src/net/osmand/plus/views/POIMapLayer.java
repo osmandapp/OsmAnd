@@ -80,7 +80,6 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 	private Bitmap poiBackgroundSmall;
 
 	private OsmandMapTileView view;
-	private final static int MAXIMUM_SHOW_AMENITIES = 5;
 
 	private RoutingHelper routingHelper;
 	private Set<PoiUIFilter> filters = new TreeSet<>();
