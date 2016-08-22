@@ -10,13 +10,15 @@
 
     <FrameLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal" >
 
         <TextView
             android:id="@+id/widget_top_icon_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:gravity="center"
             android:layout_marginTop="2dp"
             android:textColor="@color/color_black"
             android:textSize="@dimen/map_widget_text_size"
@@ -28,6 +30,7 @@
             android:layout_height="@dimen/map_widget_image"
             android:layout_marginTop="2dp"
             android:layout_gravity="center"
+            android:gravity="center"
             android:src="@drawable/ic_action_test_light"
             android:visibility="gone" />
     </FrameLayout>
