@@ -388,4 +388,9 @@
 	<string name="poi_ford_stepping_stones">Harpausoak</string>
 	<string name="poi_boundary_stone">Mugarria</string>
 	<string name="poi_resource_stone">Harria</string>
+	<string name="poi_monument">Monumentua</string>
+	<string name="poi_monument_yes">Objektu monumentala</string>
+
+	<string name="poi_technical_monument">Monumentu teknikoa</string>
+
 	</resources>
