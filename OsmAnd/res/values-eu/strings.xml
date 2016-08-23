@@ -1976,7 +1976,7 @@ Honek {1} MB behar ditu behin betiko.
     <string name="osm_live_ask_for_purchase">Erosi OSM Live harpidetza aurretik</string>
 
     <string name="osm_live_header">Harpidetza honek mundu osoko mapen eguneraketak orduero jasotzea baimentzen dizu. 
-Diru sarreraren parte handiena OSM komunitateari ematen zaio eta kontribuzioen arabera ordaintzen da. 
+Diru sarreraren parte bat OSM komunitateari ematen zaio eta kontribuzioen arabera ordaintzen da. 
 OsmAnd eta OSM maite badituzu eta babestu nahi badituzu, hau modu egokia da.</string>
     
     <string name="show_transparency_seekbar">Bistaratu bilaketa barra gardena</string>
@@ -2572,4 +2572,8 @@ OsmAnd aplikazioarekin laguntza behar baduzu, jarri kontaktuan gure laguntza tal
     <string name="osmand_plus_banner_desc">OsmAnd bertsio osoa mapen deskarga mugagabearekin eta hileroko mapen eguneraketa.</string>
     <string name="si_mi_meters">Miliak/metroak</string>
     <string name="get_it">Eskuratu</string>
+    <string name="osm_live_payment_desc">Harpidetzaren kuota hilabetero kargatuko da. Zure harpidetza noiznahi eten dezakezu Google Play bitartez.</string>
+    <string name="donation_to_osm">Dohaintza OpenStreetMap komunitateari</string>
+    <string name="donation_to_osm_desc">Zure dohaintzaren zati bat OpenStreetMaps gunera aldaketak bidaltzen dituzten erabiltzaileei emango zaie. harpidetzaren kostua berbera da.</string>
+    <string name="osm_live_subscription_desc">Harpidetzak orduro, egunero edo astergo eguneraketak jasotzea eta mugarik gabe mapak deskargatzea ahalbidetzen du.</string>
     </resources>
