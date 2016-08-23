@@ -2426,9 +2426,9 @@ Het activeren van deze weergave verandert de kaartstijl in \'Winter en ski\', me
     <string name="osm_live_subscription_settings">Abonnementsgegevens</string>
     <string name="osm_live_ask_for_purchase">Neem alsjeblieft eerst een OSM Live Abonnement</string>
 
-    <string name="osm_live_header">Met dit abonnement ontvang je dagelijks updates voor kaarten over de hele wereld. 
-Het grootste gedeelte van uw bijdrage gaat naar de OSM-gemeenschap en wordt uitbetaald naar het aantal OSM-bewerkingen.
-Als je OsmAnd en OSM wil ondersteunen, is dit de perfecte manier om dat te doen.</string>
+    <string name="osm_live_header">"Met dit abonnement ontvang je dagelijks updates voor kaarten over de hele wereld. 
+Een  gedeelte van uw bijdrage gaat naar de OSM-gemeenschap en wordt uitbetaald naar het aantal OSM-bewerkingen.
+Als je OsmAnd en OSM wil ondersteunen, is dit de perfecte manier om dat te doen."</string>
     
     <string name="select_map_marker">Kies markeervlaggetjes</string>
     <string name="map_markers_other">Andere markeervlaggetjes</string>
