@@ -885,9 +885,9 @@
     <string name="gpx_selection_point">Punkt %1$s</string>
     <string name="osmo_center_location">Sentrer på skjermen</string>
     
-    <string name="rendering_value_pink_name">rosa</string>
+    <string name="rendering_value_pink_name">Rosa</string>
     
-    <string name="rendering_value_brown_name">brun</string>
+    <string name="rendering_value_brown_name">Brun</string>
     
     
     
@@ -1710,4 +1710,11 @@
     <string name="clear_tile_data">Slett alle kartfliser</string>
     <string name="replace_favorite_confirmation">Er du sikker på at du vil erstatte favoritt %1$s?</string>
     <string name="get_started">Kom i gang</string>
+    <string name="routing_attr_short_way_name">Drivstoff-effektiv vei</string>
+    <string name="routing_attr_short_way_description">Bruk drivstoff-effektiv vei (vanligvis kortere)</string>
+    <string name="edit_tilesource_expiration_time">Utløper (minutter)</string>
+    <string name="local_index_tile_data_expire">Utløper (minutter): %1$s</string>
+    <string name="current_track">Aktuelle spor</string>
+    <string name="show_current_gpx_title">Vis aktuelle spor</string>
+    <string name="rendering_attr_currentTrackWidth_description">GPX-bredde</string>
     </resources>
