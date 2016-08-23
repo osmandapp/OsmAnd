@@ -15,17 +15,18 @@ import java.io.RandomAccessFile;
 import java.text.DecimalFormat;
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Map.Entry;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import net.osmand.ResultMatcher;
@@ -35,7 +36,6 @@ import net.osmand.binary.BinaryMapIndexReader.MapIndex;
 import net.osmand.binary.BinaryMapIndexReader.MapObjectStat;
 import net.osmand.binary.BinaryMapIndexReader.MapRoot;
 import net.osmand.binary.BinaryMapIndexReader.SearchFilter;
-import net.osmand.binary.BinaryMapIndexReader.SearchPoiTypeFilter;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
 import net.osmand.binary.BinaryMapPoiReaderAdapter.PoiRegion;
@@ -49,8 +49,9 @@ import net.osmand.data.Building;
 import net.osmand.data.City;
 import net.osmand.data.MapObject;
 import net.osmand.data.Street;
+import net.osmand.data.TransportRoute;
+import net.osmand.data.TransportStop;
 import net.osmand.osm.MapRenderingTypes;
-import net.osmand.osm.PoiCategory;
 import net.osmand.util.MapUtils;
 
 import com.google.protobuf.CodedOutputStream;
@@ -70,16 +71,17 @@ public class BinaryInspector {
 		}
 		// test cases show info
 		if ("test".equals(args[0])) {
-			in.inspector(new String[]{
-					"-vpoi",
+			in.inspector(new String[] {
+//					"-vpoi",
 //					"-vmap", "-vmapobjects", // "-vmapcoordinates",
-					"-vrouting",
+//					"-vrouting",
+					"-vtransport",
 //					"-vaddress", "-vcities","-vstreetgroups",
 //					"-vstreets", "-vbuildings", "-vintersections",
 //					"-lang=ru",
 //					"-bbox=4.8486,52.3084,4.8747,52.2970",
 //					"-osm="+System.getProperty("maps.dir")+"/map.obf.osm", 
-					System.getProperty("maps.dir")+"/Map.obf"
+					System.getProperty("maps.dir")+"/Terminus_3518858.obf"
 			});
 		} else {
 			in.inspector(args);
@@ -483,6 +485,9 @@ public class BinaryInspector {
 					int sh = (31 - BinaryMapIndexReader.TRANSPORT_STOP_ZOOM);
 					println("\tBounds " + formatBounds(ti.getLeft() << sh, ti.getRight() << sh,
 							ti.getTop() << sh, ti.getBottom() << sh));
+					if ((vInfo != null && vInfo.isVtransport())) {
+						printTransportDetailInfo(vInfo, index, (TransportIndex) p);
+					}
 				} else if (p instanceof RouteRegion) {
 					RouteRegion ri = ((RouteRegion) p);
 					println("\tBounds " + formatLatBounds(ri.getLeftLongitude(), ri.getRightLongitude(),
@@ -505,6 +510,8 @@ public class BinaryInspector {
 					}
 				} else if (p instanceof PoiRegion && (vInfo != null && vInfo.isVpoi())) {
 					printPOIDetailInfo(vInfo, index, (PoiRegion) p);
+				} else if (p instanceof TransportIndex && (vInfo != null && vInfo.isVtransport())) {
+					
 				} else if (p instanceof AddressRegion) {
 					List<CitiesBlock> cities = ((AddressRegion) p).cities;
 					for (CitiesBlock c : cities) {
@@ -1160,6 +1167,46 @@ public class BinaryInspector {
 		}
 		b.append("</way>\n");
 		return id;
+	}
+	
+	private void printTransportDetailInfo(VerboseInfo verbose, BinaryMapIndexReader index, TransportIndex p) throws IOException {
+		SearchRequest<TransportStop> sr = BinaryMapIndexReader.buildSearchTransportRequest(
+				MapUtils.get31TileNumberX(verbose.lonleft),
+				MapUtils.get31TileNumberX(verbose.lonright),
+				MapUtils.get31TileNumberY(verbose.lattop),
+				MapUtils.get31TileNumberY(verbose.latbottom),
+				-1, null);
+		List<TransportStop> stops = index.searchTransportIndex(sr);
+		Map<Long, TransportRoute> rs = new LinkedHashMap<>();
+		List<String> lrs = new ArrayList<>();
+		println("\nStops:");
+		for (TransportStop s : stops) {
+			lrs.clear();
+			for (int pnt : s.getReferencesToRoutes()) {
+				TransportRoute route;
+				if (!lrs.contains(pnt)) {
+					TIntObjectHashMap<TransportRoute> pts = index.getTransportRoutes(new int[] { pnt });
+					route = pts.valueCollection().iterator().next();
+					rs.put((long) pnt, route);
+				} else {
+					route = rs.get(pnt);
+				}
+				if (route != null) {
+					//lrs.add(route.getRef() + " " + route.getName(verbose.lang));
+					lrs.add(route.getRef() + " " + route.getType());
+				}
+			}
+
+			println("  " + s.getName(verbose.lang) + ": " + lrs + " " + s.getLocation());
+		}
+		println("\nRoutes:");
+		for(TransportRoute s : rs.values()) {
+			List<String> stopsString = new ArrayList<>();
+			for(TransportStop st : s.getForwardStops()) {
+				stopsString.add(st.getName(verbose.lang));
+			}
+			println("  " + s.getRef() + " " + s.getType() + " " + s.getName(verbose.lang) + ": " + stopsString);
+		}
 	}
 
 
