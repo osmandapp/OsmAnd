@@ -2115,7 +2115,7 @@ Aktuálně je volných pouze {2} MB.</string>
     <string name="osm_live_ask_for_purchase">Prosím zakupte nejdříve předplatné OSM</string>
 
     <string name="osm_live_header">Registrace umožní hodinové aktualizace pro všechny mapy světa.
-Většina příjmu jde zpět do OSM komunity a za každý příspěvek do OSM je vyplacena odměna.
+Část příjmu jde zpět do OSM komunity a za každý příspěvek do OSM je vyplacena odměna.
 Pokud máte rádi OsmAnd a OSM a chcete je podpořit, toto je výborný způsob jak to udělat.</string>
     
     <string name="download_files_question_space_with_temp">Opravdu stáhnout {0} soubor(ů)?
