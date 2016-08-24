@@ -2315,7 +2315,7 @@ OsmAnd Mapas y Navegación - encuentra ubicaciones en el mapa y calcula rutas si
     <string name="access_tree_list">Lista de árbol</string>
     <string name="access_shared_string_not_installed">No instalado</string>
     <string name="access_widget_expand">Expandir</string>
-    <string name="access_shared_string_navigate_up">Desplazarse al comienzo</string>
+    <string name="access_shared_string_navigate_up">Desplazarse arriba</string>
     <string name="access_sort">Ordenar</string>
     <string name="move_marker_bottom_sheet_title">Mover el mapa para cambiar la posición del marcador</string>
     <string name="lat_lon_pattern">Lat: %1$.6f Lon: %2$.6f</string>
@@ -2398,7 +2398,7 @@ OsmAnd Mapas y Navegación - encuentra ubicaciones en el mapa y calcula rutas si
     <string name="allow_access_location">Permitir acceso a la ubicación</string>
     <string name="first_usage_greeting">Conseguir indicaciones y descubrir sitios nuevos sin conexión a Internet</string>
     <string name="search_my_location">Buscar mi ubicación</string>
-    <string name="no_update_info_desc">No comprueba las actualizaciones sobre nuevas versiones, descuenta relacionado con OsmAnd</string>
+    <string name="no_update_info_desc">No comprueba las actualizaciones sobre nuevas versiones o descuentos relacionados con OsmAnd</string>
     <string name="no_update_info">No mostrar actualizaciones</string>
     <string name="osm_live_payment_desc">Se aplicará un cargo mensual por suscripción. Siempre puedes cancelar tu suscripción en Google Play.</string>
     <string name="donation_to_osm">Donación a la comunidad de OpenStreetMap</string>
