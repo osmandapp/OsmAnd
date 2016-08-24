@@ -227,4 +227,7 @@
     <string name="shared_string_type">Anaw</string>
     <string name="live_updates">Isdɣiten usriden</string>
     <string name="route_duration">Tanazagt:</string>
+    <string name="no_inet_connection">Ulac tuqqna n Internet</string>
+    <string name="no_update_info">Ur d skanay isdɣiten</string>
+    <string name="shared_string_change">Senfel</string>
     </resources>
