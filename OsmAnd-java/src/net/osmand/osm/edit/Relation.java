@@ -3,18 +3,51 @@ package net.osmand.osm.edit;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 import net.osmand.data.LatLon;
+import net.osmand.osm.edit.Entity.EntityId;
+import net.osmand.osm.edit.Relation.RelationMember;
 
 public class Relation extends Entity {
 	
-	// lazy loading
-	Map<EntityId, String> members = null;
-	Map<Entity, String> memberEntities = null;
+	public static class RelationMember {
+		private EntityId entityId;
+		private Entity entity;
+		private String role;
+		
+		public RelationMember(EntityId entityId, String role) {
+			this.entityId = entityId;
+			this.role = role;
+		}
+
+		public EntityId getEntityId() {
+			if(entityId == null && entity != null) {
+				return EntityId.valueOf(entity);
+			}
+			return entityId;
+		}
+		
+		public String getRole() {
+			return role;
+		}
+		
+		public Entity getEntity() {
+			return entity;
+		}
+		
+		@Override
+		public String toString() {
+			return entityId.toString() + " " + role;
+		}
+		
+	}
 	
+	// lazy loading
+	List<RelationMember> members = null;
 	
 	public Relation(long id) {
 		super(id);
@@ -22,94 +55,56 @@ public class Relation extends Entity {
 	
 	public void addMember(Long id, EntityType type, String role){
 		if(members == null){
-			members = new LinkedHashMap<EntityId, String>(); 
+			members = new ArrayList<>(); 
 		}
-		members.put(new EntityId(type, id), role);
+		members.add(new RelationMember(new EntityId(type, id), role));
 	}
 	
-	public String removeMember(EntityType e, Long id){
-		if(members == null){
-			return null; 
-		}
-		return members.remove(id);
-	}
-	
-	public String getRole(Entity e){
-		return members.get(e.getId());
-	}
-	
-	public String getRole(Long id){
-		return members.get(id);
-	}
-	
-	public Collection<EntityId> getMemberIds() {
-		return getMemberIds(null);
-	}
-	
-	public Map<EntityId, String> getMembersMap() {
-		if(members == null){
-			return Collections.emptyMap();
-		}
-		return Collections.unmodifiableMap(members);
-	}
-	
-	public Map<EntityId, String> getModifiableMembersMap() {
-		if(members == null){
-			return Collections.emptyMap();
-		}
-		return members;
-	}
-	
-	public Collection<EntityId> getMemberIds(String role) {
+	public List<RelationMember> getMembers(String role) {
 		if (members == null) {
 			return Collections.emptyList();
 		}
 		if (role == null) {
-			return members.keySet();
+			return members;
 		}
-		List<EntityId> l = new ArrayList<EntityId>();
-		for (EntityId m : members.keySet()) {
-			if (role.equals(members.get(m))) {
+		List<RelationMember> l = new ArrayList<>();
+		for (RelationMember m : members) {
+			if (role.equals(m.role)) {
 				l.add(m);
 			}
 		}
 		return l;
 	}
 	
-	public Map<Entity, String> getMemberEntities() {
-		if(memberEntities == null){
-			return Collections.emptyMap();
-		}
-		return memberEntities;
-	}
-	
-	public Collection<Entity> getMembers(String role) {
-		if (memberEntities == null) {
+	public List<Entity> getMemberEntities(String role) {
+		if (members == null) {
 			return Collections.emptyList();
 		}
-		if (role == null) {
-			return memberEntities.keySet();
-		}
-		List<Entity> l = new ArrayList<Entity>();
-		for (Entity m : memberEntities.keySet()) {
-			if (role.equals(memberEntities.get(m))) {
-				l.add(m);
+		List<Entity> l = new ArrayList<>();
+		for (RelationMember m : members) {
+			if (role == null || role.equals(m.role)) {
+				if(m.entity != null) {
+					l.add(m.entity);
+				}
 			}
 		}
 		return l;
 	}
+	
+	public List<RelationMember> getMembers() {
+		if(members == null){
+			return Collections.emptyList();
+		}
+		return members;
+	}
+	
 	
 	@Override
 	public void initializeLinks(Map<EntityId, Entity> entities){
 		if (members != null) {
-			if(memberEntities == null){
-				memberEntities = new LinkedHashMap<Entity, String>();
-			} else {
-				memberEntities.clear();
-			}
-			for(EntityId l : members.keySet()){
-				if(l != null && entities.get(l) != null){
-					memberEntities.put(entities.get(l), members.get(l));
+			for(RelationMember rm : members) {
+				if(rm.entityId != null && entities.containsKey(rm.entityId)) {
+					rm.entity = entities.get(rm.entityId);
 				}
 			}
 		}
@@ -119,6 +114,32 @@ public class Relation extends Entity {
 	@Override
 	public LatLon getLatLon() {
 		return null;
+	}
+
+	public boolean remove(EntityId key) {
+		if(members != null) {
+			Iterator<RelationMember> it = members.iterator();
+			while(it.hasNext()) {
+				RelationMember rm = it.next();
+				if(key.equals(rm.getEntityId())) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	public boolean remove(RelationMember key) {
+		if(members != null) {
+			Iterator<RelationMember> it = members.iterator();
+			while(it.hasNext()) {
+				RelationMember rm = it.next();
+				if(rm == key) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 }

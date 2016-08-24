@@ -54,7 +54,7 @@ public abstract class Entity implements Serializable {
 			result = prime * result + ((type == null) ? 0 : type.hashCode());
 			return result;
 		}
-
+		
 		@Override
 		public String toString() {
 			return type + " " + id; //$NON-NLS-1$

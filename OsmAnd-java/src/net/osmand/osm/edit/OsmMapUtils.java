@@ -7,6 +7,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import net.osmand.data.LatLon;
+import net.osmand.osm.edit.Relation.RelationMember;
 import net.osmand.util.MapAlgorithms;
 import net.osmand.util.MapUtils;
 
@@ -31,11 +32,11 @@ public class OsmMapUtils {
 			return getWeightCenterForWay(((Way) e));
 		} else if (e instanceof Relation) {
 			List<LatLon> list = new ArrayList<LatLon>();
-			for (Entity fe : ((Relation) e).getMembers(null)) {
+			for (RelationMember fe : ((Relation) e).getMembers()) {
 				LatLon c = null;
 				// skip relations to avoid circular dependencies
-				if (!(fe instanceof Relation)) {
-					c = getCenter(fe);
+				if (!(fe.getEntity() instanceof Relation) && fe.getEntity() != null) {
+					c = getCenter(fe.getEntity());
 				}
 				if (c != null) {
 					list.add(c);
