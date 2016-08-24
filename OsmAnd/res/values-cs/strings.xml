@@ -2209,7 +2209,7 @@ V současnosti je k dispozici {2} MB.</string>
     <string name="share_history_subject">" sdílené přes OsmAnd"</string>
     <string name="coords_search">Hledání souřadnic</string>
     <string name="advanced_coords_search">Rozšířené hledání souřadnic</string>
-    <string name="route_stops_before">před %1$s zastávkami</string>
+    <string name="route_stops_before">%1$s zastávek před</string>
     <string name="skip_map_downloading">Přeskočit stahování map</string>
     <string name="skip_map_downloading_desc">Nemáte instalovanou žádnou mapu. Můžete si vybrat mapu ze seznamu, nebo stáhnout mapy později přes Menu - %1$s.</string>
     <string name="search_another_country">Vybrat jiný region</string>
