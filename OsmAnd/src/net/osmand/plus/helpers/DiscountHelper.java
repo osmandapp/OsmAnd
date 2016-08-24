@@ -21,6 +21,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.provider.Settings.Secure;
 import android.util.Log;
 import android.view.View;
 
@@ -50,17 +51,21 @@ public class DiscountHelper {
 		}
 		mLastCheckTime = System.currentTimeMillis();
 		final Map<String, String> pms = new LinkedHashMap<>();
-		pms.put("name", Version.getAppName(app));
-		pms.put("version", Version.getAppVersion(app));
+		pms.put("version", Version.getFullVersion(app));
 		pms.put("nd", app.getAppInitializer().getFirstInstalledDays() +"");
 		pms.put("ns", app.getAppInitializer().getNumberOfStarts() + "");
+		try {
+			pms.put("aid", Secure.getString(app.getContentResolver(), Secure.ANDROID_ID));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		new AsyncTask<Void, Void, String>() {
 
 			@Override
 			protected String doInBackground(Void... params) {
 				try {
 					String res = AndroidNetworkUtils.sendRequest(mapActivity.getMyApplication(),
-							URL, pms, "Requesting discount info...", false);
+							URL, pms, "Requesting discount info...", false, false);
 					return res;
 				} catch (Exception e) {
 					logError("Requesting discount info error: ", e);
