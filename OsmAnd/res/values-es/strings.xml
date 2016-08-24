@@ -2270,7 +2270,7 @@ OsmAnd Mapas y Navegación - encuentra ubicaciones en el mapa y calcula rutas si
     <string name="osm_live_ask_for_purchase">Por favor adquiere primero una suscripción a OSM en directo</string>
 
     <string name="osm_live_header">"Esta suscripción permite actualizaciones cada hora para  los mapas de todo el mundo.
- La mayoría de los ingresos va a la comunidad OSM y se paga por cada contribución a OSM.
+ Parte de los ingresos va a la comunidad OSM y se paga por cada contribución a OSM.
  Si te gustan OsmAnd y OSM y quieres apoyarlos, ésta es la manera perfecta de hacerlo."</string>
     
     <string name="show_transparency_seekbar">Mostrar transparencia de la barra de búsqueda</string>
@@ -2384,8 +2384,8 @@ OsmAnd Mapas y Navegación - encuentra ubicaciones en el mapa y calcula rutas si
     <string name="shared_string_change">Cambiar</string>
     <string name="get_started">Empezar</string>
     <string name="skip_map_downloading">Saltar descarga de mapas</string>
-    <string name="skip_map_downloading_desc">No tienes un mapa descargado instalado. Puedes elegir uno de la lista o descargarlo más tarde vía menú - %1$s.</string>
-    <string name="search_another_country">Buscar otro país</string>
+    <string name="skip_map_downloading_desc">No tienes un mapa descargado instalado. Puedes elegir uno de la lista o descargarlo más tarde vía Menú - %1$s.</string>
+    <string name="search_another_country">Seleccionar otra región</string>
     <string name="search_map">Buscando mapa…</string>
     <string name="first_usage_wizard_desc">Deja que OsmAnd determine tu ubicación y sugiera mapas que descargar para esa región.</string>
     <string name="location_not_found">Ubicación no encontrada</string>
@@ -2396,8 +2396,18 @@ OsmAnd Mapas y Navegación - encuentra ubicaciones en el mapa y calcula rutas si
     <string name="storage_place_description">Almacenamiento de datos de OsmAnd (para mapas, trazas, etc.): %1$s.</string>
     <string name="give_permission">Dar permiso</string>
     <string name="allow_access_location">Permitir acceso a la ubicación</string>
-    <string name="first_usage_greeting">Conseguir indicaciones, descubrir sitios nuevos, sin conexión a Internet</string>
+    <string name="first_usage_greeting">Conseguir indicaciones y descubrir sitios nuevos sin conexión a Internet</string>
     <string name="search_my_location">Buscar mi ubicación</string>
     <string name="no_update_info_desc">No comprueba las actualizaciones sobre nuevas versiones, descuenta relacionado con OsmAnd</string>
     <string name="no_update_info">No mostrar actualizaciones</string>
+    <string name="osm_live_payment_desc">Se aplicará un cargo mensual por suscripción. Siempre puedes cancelar tu suscripción en Google Play.</string>
+    <string name="donation_to_osm">Donación a la comunidad de OpenStreetMap</string>
+    <string name="donation_to_osm_desc">Parte de la donación se enviará a los usuarios de OSM que enviaron cambios a OpenStreetMaps. El coste de la suscripción es el mismo.</string>
+    <string name="osm_live_subscription_desc">La suscripción habilita actualizaciones cada hora, cada día o cada semana, y descargas ilimitadas de todos los mapas del mundo.</string>
+    <string name="get_it">Obtener</string>
+    <string name="get_for">Obtener por %1$s</string>
+    <string name="get_for_month">Obtener por %1$s al mes</string>
+    <string name="osm_live_banner_desc">Conseguir descargas ilimitadas de mapas y actualizaciones más frecuentes que las mensuales: cada hora, día o semana.</string>
+    <string name="osmand_plus_banner_desc">Versión completa de OsmAnd con descargas ilimitadas de mapas y actualizaciones mensuales de los mapas.</string>
+    <string name="si_mi_meters">Millas/metros</string>
     </resources>
