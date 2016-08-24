@@ -53,7 +53,7 @@ public class Version {
 
 	private static Version ver = null;
 	private static Version getVersion(OsmandApplication ctx){
-		if(ver == null){
+		if (ver == null) {
 			ver = new Version(ctx);
 		}
 		return ver;
