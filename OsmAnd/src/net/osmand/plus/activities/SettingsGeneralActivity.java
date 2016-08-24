@@ -91,7 +91,7 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 
 		registerListPreference(settings.MAP_SCREEN_ORIENTATION, screen,
 				new String[]{getString(R.string.map_orientation_portrait), getString(R.string.map_orientation_landscape), getString(R.string.map_orientation_default)},
-				new Integer[]{ActivityInfo.SCREEN_ORIENTATION_PORTRAIT, ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE, ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED});
+				new Integer[]{ActivityInfo.SCREEN_ORIENTATION_PORTRAIT, ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE, ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED});
 
 		addLocalPrefs((PreferenceGroup) screen.findPreference("localization"));
 		addVoicePrefs((PreferenceGroup) screen.findPreference("voice"));
