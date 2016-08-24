@@ -113,7 +113,7 @@
 	<string name="poi_volleyball">Volejbal</string>
 
 	<string name="poi_attraction">Turistická atrakce</string>
-	<string name="poi_memorial">Památník</string>
+	<string name="poi_memorial">Pomník</string>
 	<string name="poi_castle">Hrad</string>
 	<string name="poi_city_gate">Městská brána</string>
 	<string name="poi_fort">Pevnost</string>
@@ -186,7 +186,7 @@
 	<string name="poi_seamark_harbour">Přístav</string>
 	<string name="poi_military_barracks">Kasárna</string>
 	<string name="poi_military_danger_area">Nebezpečná oblast</string>
-	<string name="poi_confectionery">Cukrárna</string>
+	<string name="poi_confectionery">Cukrářské výrobky</string>
 	<string name="poi_tea">Obchod čajem</string>
 	<string name="poi_dairy">Mlékárna</string>
 	<string name="poi_vending_machine">Prodejní automat</string>
@@ -391,7 +391,7 @@
 	<string name="poi_water_tower">Vodojem</string>
 	<string name="poi_lock_gate">Vrata plavební komory</string>
 	<string name="poi_waterway_turning_point">Vodní obratiště</string>
-	<string name="poi_weir">Hráz</string>
+	<string name="poi_weir">Jez</string>
 	<string name="poi_dam">Přehrada</string>
 	<string name="poi_watermill">Vodní mlýn</string>
 
@@ -514,7 +514,7 @@
 	<string name="poi_canoe">Pádlování</string>
 	<string name="poi_climbing">Šplh</string>
 	<string name="poi_cycling">Jízda na kole</string>
-	<string name="poi_diving">Potápění</string>
+	<string name="poi_diving">Skoky do vody</string>
 	<string name="poi_scuba_diving">Potápění</string>
 	<string name="poi_equestrian">Jezdectví</string>
 	<string name="poi_field_hockey">Pozemní hokej</string>
@@ -724,7 +724,7 @@
 	<string name="poi_anchor_berth">Kotvící místo</string>
 	<string name="poi_beacon_cardinal">Směrový maják</string>
 	<string name="poi_beacon_special_purpose">Maják pro speciální účely</string>
-	<string name="poi_berth">Kotviště</string>
+	<string name="poi_berth">Kotvící místo</string>
 	<string name="poi_seamark_building">Vodní značka - budova</string>
 	<string name="poi_seamark_bridge">Vodní značka - most</string>
 	<string name="poi_buoy_cardinal">Orientační bój</string>
@@ -2152,7 +2152,7 @@
 	<string name="poi_architecture_renaissance">Architektura: renesance</string>
 	<string name="poi_architecture_romanesque">Architektura: románský</string>
 
-	<string name="poi_monument_yes">Památník</string>
+	<string name="poi_monument_yes">Velký památník</string>
 
 	<string name="poi_industrial_oil">Typ: ropný průmysl</string>
 	<string name="poi_industrial_factory">Typ: továrna</string>
