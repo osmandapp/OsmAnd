@@ -1774,7 +1774,7 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="delay_to_start_navigation">Iniciar navegación giro-a-giro después de…</string>
     <string name="shared_string_go">Ir</string>
     <string name="delay_to_start_navigation_descr">Especifica el tiempo de espera para permanecer en la pantalla de planificación de ruta</string>
-    <string name="local_osm_changes_upload_all_confirm">Subirá %1$d cambio(s) a OSM. ¿Está seguro?</string>
+    <string name="local_osm_changes_upload_all_confirm">Va a subir %1$d cambio(s) a OSM. ¿Está seguro?</string>
     <string name="confirmation_to_clear_history">¿Quiere limpiar el historial?</string>
     <string name="osmo_grop_name_length_alert">¡El nombre del grupo debe tener al menos una longitud de 3 caracteres!</string>
     <string name="osm_changes_added_to_local_edits">Cambios OSM añadidos al conjunto de cambios locales</string>
