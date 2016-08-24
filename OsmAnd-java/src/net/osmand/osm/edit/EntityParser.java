@@ -17,6 +17,7 @@ import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.MapRenderingTypes;
 import net.osmand.osm.edit.Entity.EntityType;
 import net.osmand.osm.edit.OSMSettings.OSMTagKey;
+import net.osmand.osm.edit.Relation.RelationMember;
 import net.osmand.util.Algorithms;
 
 public class EntityParser {
@@ -73,9 +74,9 @@ public class EntityParser {
 			nodes = ((Way) e).getNodes();
 		} else if (e instanceof Relation) {
 			nodes = new ArrayList<Node>();
-			for (Entity member : ((Relation) e).getMembers(null)) {
-				if (member instanceof Way) {
-					nodes.addAll(((Way) member).getNodes());
+			for (RelationMember member : ((Relation) e).getMembers(null)) {
+				if (member.getEntity() instanceof Way) {
+					nodes.addAll(((Way) member.getEntity()).getNodes());
 				}
 			}
 		}
