@@ -30,6 +30,7 @@ public class AndroidNetworkUtils {
 										final Map<String, String> parameters,
 										final String userOperation,
 										final boolean toastAllowed,
+										final boolean post,
 										final OnRequestResultListener listener) {
 
 		new AsyncTask<Void, Void, String>() {
@@ -37,7 +38,7 @@ public class AndroidNetworkUtils {
 			@Override
 			protected String doInBackground(Void... params) {
 				try {
-					return sendRequest(ctx, url, parameters, userOperation, toastAllowed);
+					return sendRequest(ctx, url, parameters, userOperation, toastAllowed, post);
 				} catch (Exception e) {
 					return null;
 				}
@@ -55,15 +56,11 @@ public class AndroidNetworkUtils {
 
 
 	public static String sendRequest(OsmandApplication ctx, String url, Map<String, String> parameters,
-									 String userOperation, boolean toastAllowed) {
+									 String userOperation, boolean toastAllowed, boolean post) {
 		HttpURLConnection connection = null;
 		try {
-			connection = NetworkUtils.getHttpURLConnection(url);
-
-			connection.setRequestProperty("Accept-Charset", "UTF-8");
-			connection.setRequestProperty("User-Agent", Version.getFullVersion(ctx));
-			connection.setConnectTimeout(15000);
-
+			
+			String params = null;
 			if (parameters != null && parameters.size() > 0) {
 				StringBuilder sb = new StringBuilder();
 				for (Map.Entry<String, String> entry : parameters.entrySet()) {
@@ -72,13 +69,17 @@ public class AndroidNetworkUtils {
 					}
 					sb.append(entry.getKey()).append("=").append(URLEncoder.encode(entry.getValue(), "UTF-8"));
 				}
-				String params = sb.toString();
-
+				params = sb.toString();
+			}
+			connection = NetworkUtils.getHttpURLConnection(params == null || post ? url : url + "&" + params);
+			connection.setRequestProperty("Accept-Charset", "UTF-8");
+			connection.setRequestProperty("User-Agent", Version.getFullVersion(ctx));
+			connection.setConnectTimeout(15000);
+			if (params != null && post) {
 				connection.setDoInput(true);
 				connection.setDoOutput(true);
 				connection.setUseCaches(false);
 				connection.setRequestMethod("POST");
-
 				connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8");
 				connection.setRequestProperty("Content-Length", String.valueOf(params.getBytes("UTF-8").length));
 				connection.setFixedLengthStreamingMode(params.getBytes("UTF-8").length);
@@ -89,6 +90,7 @@ public class AndroidNetworkUtils {
 				output.close();
 
 			} else {
+				
 				connection.setRequestMethod("GET");
 				connection.connect();
 			}
@@ -96,7 +98,7 @@ public class AndroidNetworkUtils {
 			if (connection.getResponseCode() != HttpURLConnection.HTTP_OK) {
 				if (toastAllowed) {
 					String msg = userOperation
-							+ " " + ctx.getString(R.string.failed_op) + " : " + connection.getResponseMessage();
+							+ " " + ctx.getString(R.string.failed_op) + ": " + connection.getResponseMessage();
 					showToast(ctx, msg);
 				}
 			} else {

@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StatFs;
+import android.provider.Settings.Secure;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
@@ -19,7 +20,6 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
 import net.osmand.AndroidNetworkUtils;
 import net.osmand.Location;
 import net.osmand.ValueHolder;
@@ -33,6 +33,7 @@ import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadActivityType;
@@ -53,9 +54,11 @@ import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -326,13 +329,20 @@ public class FirstUsageWizardFragment extends Fragment implements OsmAndLocation
 		switch (wizardType) {
 			case SEARCH_LOCATION:
 			if (searchLocationByIp) {
+				final Map<String, String> pms = new LinkedHashMap<>();
+				pms.put("version", Version.getFullVersion(app));
+				try {
+					pms.put("aid", Secure.getString(app.getContentResolver(), Secure.ANDROID_ID));
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 				new AsyncTask<Void, Void, String>() {
 
 					@Override
 					protected String doInBackground(Void... params) {
 						try {
-							return AndroidNetworkUtils.sendRequest(app, "http://osmand.net/api/geo-ip", null,
-									"Requesting location by IP...", false);
+							return AndroidNetworkUtils.sendRequest(app, "http://osmand.net/api/geo-ip", pms,
+									"Requesting location by IP...", false, false);
 
 						} catch (Exception e) {
 							logError("Requesting location by IP error: ", e);
