@@ -1895,8 +1895,8 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="do_you_like_osmand">¿Te gusta OsmAnd?</string>
     <string name="rate_this_app">Califica la aplicación</string>
     <string name="rate_this_app_long">Por favor, califica a OsmAnd en Google Play</string>
-    <string name="user_hates_app_get_feedback">Dinos por que.</string>
-    <string name="user_hates_app_get_feedback_long">Por favor, díganos lo que cambiaría en esta aplicación.</string>
+    <string name="user_hates_app_get_feedback">Dinos por qué.</string>
+    <string name="user_hates_app_get_feedback_long">Por favor, dinos lo que cambiarías en la aplicación.</string>
     <string name="download_live_updates">Actualizaciones en vivo</string>
     <string name="failed_to_upload">Subida fallida</string>
     <string name="delete_change">Borrar cambio</string>
@@ -2303,7 +2303,7 @@ Si necesitas ayuda con la aplicación OsmAnd, contacte con nuestro equipo de sop
     <string name="rendering_value_thin_name">Fino</string>
     <string name="rendering_value_medium_name">Mediano</string>
     <string name="rendering_value_bold_name">Grueso</string>
-    <string name="map_mode">Modo mapa</string>
+    <string name="map_mode">Modo del mapa</string>
     <string name="number_of_gpx_files_selected_pattern">%s archivos GPX elegidos</string>
     <string name="access_default_color">Color predefinido</string>
     <string name="access_category_choice">Elegir categoría</string>
@@ -2317,7 +2317,7 @@ Si necesitas ayuda con la aplicación OsmAnd, contacte con nuestro equipo de sop
     <string name="access_tree_list">Lista de árbol</string>
     <string name="access_shared_string_not_installed">No instalado</string>
     <string name="access_widget_expand">Abrir</string>
-    <string name="access_shared_string_navigate_up">Navegar hacia arriba</string>
+    <string name="access_shared_string_navigate_up">Subir</string>
     <string name="access_sort">Ordenar</string>
     <string name="access_disable_offroute_recalc">No cambiar de ruta al salirme del camino</string>
     <string name="access_disable_offroute_recalc_descr">Previene el recálculo automático de ruta, al alejarse del camino correcto</string>
