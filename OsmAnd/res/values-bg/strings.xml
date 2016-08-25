@@ -529,7 +529,9 @@
 
 
     <string name="download_files_not_enough_space">Няма достатъчно свободна памет за свалянето на %1$s MB (свободно място: %2$s).</string>
-    <string name="download_files_question_space">Наистина ли искате да изтеглите {0} файл(а)? Ще се нуждаете от {1} MB памет за постоянно. В момента има само {2} MB достъпни.</string>
+    <string name="download_files_question_space">Наистина ли искате да изтеглите {0} файл(а)?
+ Ще се нуждаете от {1} MB памет за постоянно.
+ В момента има само {2} MB достъпни.</string>
 
 
     <string name="use_transparent_map_theme">Прозрачна тема на приложението</string>
@@ -1339,7 +1341,10 @@
     <string name="rendering_attr_shareTaxiRoutes_name">Линии на маршрутки</string>
     <string name="search_radius_proximity">В близост до</string>
     <string name="osmo_device_not_found">Устройството не е намерено</string>
-    <string name="osmo_no_connection_msg">OsMo услугата е недостъпна:\n- проверете връзката;\n- проверете настройките;\n- намерете ни в Twitter: https://twitter.com/OsMomobi</string>
+    <string name="osmo_no_connection_msg">Невъзможно свързване с OsMo сървър:
+- проверете вашата интернет връзка;
+- проверете настройките;
+- намерете ни в Twitter: https://twitter.com/OsMomobi</string>
     <string name="specified_directiory_not_writeable">Картите не могат да бъдат създадени в посочената папка</string>
     <string name="storage_directory_external">Външно съхраняване</string>
     <string name="copying_osmand_file_failed">Копирането на файловете се провали</string>
@@ -1522,7 +1527,10 @@
     
     
     <string name="coordinates">Координати</string>
-    <string name="anonymous_user_hint">"Анонимен потребител не може  да:\n-създава групи;\n-синхронизира групи и устройства със сървъра;\n-управлява групи и устройства в частен режим."</string>
+    <string name="anonymous_user_hint">Анонимен потребител не може да:
+- създава групи;
+- синхронизира групи и устройства със сървъра;
+- управлява групи и устройства в частен режим.</string>
     <string name="anonymous_user">Анонимен потребител</string>
     <string name="logged_as">Влезли сте като %1$s</string>
     <string name="print_route">Печат на маршрут</string>
@@ -1664,7 +1672,14 @@
     <string name="lang_ceb">Себуански</string>
     <string name="lang_ms">Малайски</string>
     <string name="lang_ht">Хаитянски</string>
-    <string name="osmo_plugin_description">"Това разширение добавя функционалност за наблюдение на OsMo в реално време, за справка http://osmo.mobi.\nМожете да следите всички устройства от дадена група в реално време и да общувате помежду си. Разширението предлага различни възможности за проследяване по време на връзката или постоянно.\nАнонимните групи могат да бъдат създадени временно за определен брой дни и имат ограничени възможности, например без отдалечено управление и администратор. Пълноценните групи, от друга страна, могат да се създават на сайта и само регистрираните потребители имат достъп до тях. "</string>
+    <string name="osmo_plugin_description">"Това разширение добавя функционалност за наблюдение на OsMo в реално време, за справка: http://osmo.mobi.
+
+
+Можете да следите всички устройства от дадена група в реално време и да общувате помежду си. Разширението предлага различни възможности за проследяване по време на връзката или постоянно.
+
+
+Анонимните групи могат да бъдат създадени временно за определен брой дни и имат ограничени възможности, например без отдалечено управление и администратор. Пълноценните групи, от друга страна, могат да се създават на сайта и само регистрираните потребители имат достъп до тях.
+ "</string>
     <string name="plugin_nautical_descr">"Добавката обогатява приложението OsmAnd карти и навигация като създава карти за гребане, ветроходство и други водни спортове.\n\nСпециалната добавка за карти на OsmAnd добавя морски навигационни символи и диаграми за вътрешна и крайбрежна навигация. Описанието на всеки навигационен символ показва подробностите, необходими за разпознаването и значението му (категория, фигура, цвят, последователност, препратка и др.).\n\nЗа да се върнете към някой от обикновените режими на картите на OsmAnd, просто изключете добавката или сменете \"Стил на картата\" в менюто \"Настройка на картата\". "</string>
     <string name="plugin_settings">Добавки</string>
     <string name="rendering_attr_currentTrackColor_name">цвят на GPX</string>
@@ -2079,7 +2094,9 @@
     <string name="select_map_marker">Изберете маркер на картата</string>
     <string name="map_markers_other">Други маркери</string>
     <string name="upload_anonymously">Анонимно качване</string>
-    <string name="download_files_error_not_enough_space">Няма достатъчно място! За това ще трябват {3} MB памет временно и {1} MB за постоянно. В момента има само {2} MB достъпни.</string>
+    <string name="download_files_error_not_enough_space">Няма достатъчно място!
+За това ще трябват {3} MB памет временно и {1} MB за постоянно.
+В момента има само {2} MB достъпни.</string>
     <string name="upload_osm_note_description">Можете да качите вашата OSM бележка анонимно, ако използвате профила си в OpenStreetMap.org.</string>
     <string name="upload_osm_note">Качване на OSM бележка</string>
     <string name="map_marker_1st">Първи маркер на картата</string>
@@ -2113,7 +2130,7 @@
     <string name="file_name_containes_illegal_char">Името на файла съдържа неправилен символ</string>
 <string name="storage_directory_readonly_desc">Понастоящем, избраната от Вас папка за съхранение е само за четене. Временно папката за съхранение е прехвърлена във вътрешната памет на устройството. Моля, изберете валидна папка за запис.</string>
     <string name="osm_live_region_desc">Част от вашето дарение ще бъде изпратено до други потребители на OSM, които са допринесли за картата в този район</string>
-    <string name="osm_live_header">Този абонамент позволява актуализиране на всички карти на всеки час. Голяма част от прихода отива за общността на OSM, за потребителите които са допринесли за картата. В случай че харесвате OsmAnd и OSM и искате да помогнете, това е перфектният начин да го сторите.</string>
+    <string name="osm_live_header">Този абонамент позволява актуализиране на всички карти на всеки час. Част от прихода отива за общността на OSM, за потребителите които са допринесли за картата. В случай че харесвате OsmAnd и OSM и искате да помогнете, това е перфектният начин да го сторите.</string>
     
     <string name="show_transparency_seekbar">Показване на прозрачна лента</string>
     <string name="search_categories">Категории</string>
@@ -2139,11 +2156,11 @@
     <string name="map_widget_bearing">Относителна посока</string>
     <string name="access_disable_offroute_recalc">Маршрутът да не се променя, когато сте извън пътя</string>
     <string name="get_for_month">Вземете за %1$s месец</string>
-    <string name="osm_live_banner_desc">Вземи неограничен картата тегления и актуализации на повече от един път в месеца: почасово, ежедневно или ежеседмично.</string>
-    <string name="osmand_plus_banner_desc">Пълната версия на OsmAnd с неограничени картата изтегляния и месечни известия картата.</string>
+    <string name="osm_live_banner_desc">Вземете неограничени сваляния на карти и актуализации на повече от един път в месеца: почасово, ежедневно или ежеседмично.</string>
+    <string name="osmand_plus_banner_desc">Пълната версия на OsmAnd с неограничени сваляния на карти месечни актуализации.</string>
     <string name="si_mi_meters">Мили / м</string>
     <string name="skip_map_downloading">Напред изтеглянето на карти</string>
-    <string name="skip_map_downloading_desc">Вие имате инсталиран никакъв офлайн карта. Можете да изберете карта от списъка или да изтеглите карти по-късно чрез Меню - %1$s.</string>
+    <string name="skip_map_downloading_desc">Вие нямате инсталирана никаква офлайн карта. Можете да изберете карта от списъка или да изтеглите карти по-късно чрез Меню - %1$s.</string>
     <string name="search_another_country">Изберете друг регион</string>
     <string name="search_map">Търсене на сайта …</string>
     <string name="first_usage_wizard_desc">Нека OsmAnd определи местоположението си и да предложи карти, за да свалите този регион.</string>
@@ -2155,6 +2172,22 @@
     <string name="storage_place_description">OsmAnd за съхранение на данни (за карти, записи и т.н.): %1$s.</string>
     <string name="give_permission">даде разрешение</string>
     <string name="allow_access_location">За да се позволи достъп до място</string>
-    <string name="first_usage_greeting">Изтеглете упътвания и да открият нови места без интернет връзка</string>
+    <string name="first_usage_greeting">Вземете упътвания и открийте нови места без да ползвате интернет връзка</string>
     <string name="shared_string_change">Промяна</string>
+    <string name="search_my_location">Намери моето място</string>
+    <string name="no_update_info_desc">Да не се проверява за нови версии, промоции свързани с OsmAnd</string>
+    <string name="no_update_info">Да не се показват актуализации</string>
+    <string name="update_all_maps_now">Искате ли да обновите всички карти сега?</string>
+    <string name="clear_tile_data">Изчистване на всички плочки</string>
+    <string name="routing_attr_short_way_name">Икономичен маршрут</string>
+    <string name="routing_attr_short_way_description">Използване на икономичен маршрут (по-къс)</string>
+    <string name="replace_favorite_confirmation">Наистина ли искате да заместите %1$s?</string>
+    <string name="rendering_attr_hideOverground_name">Надземни обекти</string>
+    <string name="osm_live_payment_desc">Абонаментна такса се начислява всеки месец. Винаги можете да отмените абонамента си за Google Play.</string>
+    <string name="donation_to_osm">Дарение за OpenStreetMap Общността</string>
+    <string name="donation_to_osm_desc">Част от вашето дарение ще бъде изпратено на OSM потребители, които работят върху OpenStreetMaps. Цената на абонамента остава същата.</string>
+    <string name="get_it">Вземи го</string>
+    <string name="get_for">Вземи за %1$s</string>
+    <string name="get_started">Първи стъпки</string>
+    <string name="route_stops_before">%1$s спирания преди</string>
     </resources>
