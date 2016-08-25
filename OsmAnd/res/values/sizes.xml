@@ -102,7 +102,7 @@
 	<dimen name="map_alarm_text_size">25sp</dimen>
 	<dimen name="map_widget_text_bottom_margin">1sp</dimen>
 	<dimen name="map_widget_text_small_bottom_margin">3sp</dimen>
-	<dimen name="map_widget_icon_margin">4dp</dimen>
+	<dimen name="map_widget_icon_margin">2dp</dimen>
 	
 	<dimen name="dash_margin">2dp</dimen>
 	<dimen name="dash_margin_h">6dp</dimen>
