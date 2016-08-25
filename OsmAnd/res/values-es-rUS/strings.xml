@@ -1895,8 +1895,8 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="do_you_like_osmand">¿Te gusta OsmAnd?</string>
     <string name="rate_this_app">Califica la aplicación</string>
     <string name="rate_this_app_long">Por favor, califica a OsmAnd en Google Play</string>
-    <string name="user_hates_app_get_feedback">Dinos por que.</string>
-    <string name="user_hates_app_get_feedback_long">Por favor, díganos lo que cambiaría en esta aplicación.</string>
+    <string name="user_hates_app_get_feedback">Dinos por qué.</string>
+    <string name="user_hates_app_get_feedback_long">Por favor, dinos lo que cambiarías en la aplicación.</string>
     <string name="download_live_updates">Actualizaciones en vivo</string>
     <string name="failed_to_upload">Subida fallida</string>
     <string name="delete_change">Borrar cambio</string>
@@ -2299,7 +2299,7 @@ Si amas a OsmAnd, OSM y quieres apoyarlos, esta es una perfecta manera de hacerl
     <string name="rendering_value_thin_name">Fino</string>
     <string name="rendering_value_medium_name">Mediano</string>
     <string name="rendering_value_bold_name">Grueso</string>
-    <string name="map_mode">Modo mapa</string>
+    <string name="map_mode">Modo del mapa</string>
     <string name="number_of_gpx_files_selected_pattern">%s archivos GPX elegidos</string>
     <string name="access_default_color">Color predefinido</string>
     <string name="access_category_choice">Elegir categoría</string>
