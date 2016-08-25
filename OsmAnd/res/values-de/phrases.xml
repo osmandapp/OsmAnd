@@ -3011,4 +3011,6 @@
 	<string name="poi_diaper_table_count">Anzahl Wickeltische</string>
 
 	<string name="poi_toilets_disposal_pitlatrine">Toilettenspülung: Plumpsklo</string>
-	</resources>
+	<string name="poi_wiki_link">Wikipedia</string>
+
+</resources>
