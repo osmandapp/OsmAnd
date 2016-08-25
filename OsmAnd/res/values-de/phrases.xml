@@ -191,7 +191,7 @@
 	<string name="poi_emergency_access_point">Rettungspunkt</string>
 	<string name="poi_emergency_phone">Notfalltelefon</string>
 	<string name="poi_employment_agency">Arbeitsamt</string>
-	<string name="poi_equestrian">Reiter</string>
+	<string name="poi_equestrian">Pferdesport</string>
 	<string name="poi_erotic">Sex-Shop</string>
 	<string name="poi_estate_agent">Immobilienmakler</string>
 	<string name="poi_fabric">Textilgeschäft</string>
@@ -1972,7 +1972,7 @@
 	<string name="poi_vending_dvd">DVD</string>
 	<string name="poi_vending_candles">Kerzen</string>
 	<string name="poi_vending_toys">Spielzeug</string>
-	<string name="poi_vending_ice_cream">Eis</string>
+	<string name="poi_vending_ice_cream">Eiscream</string>
 	<string name="poi_vending_sim_cards">SIM Karten</string>
 
 	<string name="poi_branch">Niederlassung</string>
