@@ -393,4 +393,32 @@
 
 	<string name="poi_technical_monument">Monumentu teknikoa</string>
 
+	<string name="poi_memorial_stone">Harria</string>
+	<string name="poi_resource_dimension_stone">Harlandua</string>
+	<string name="poi_resource_limestone">Kareharria</string>
+	<string name="poi_resource_sandstone">Hareharria</string>
+	<string name="poi_surface_paving_stones">Gainazala: zoladura</string>
+	<string name="poi_surface_pebblestone">Gainazala: errekarriak</string>
+	<string name="poi_surface_stone">Gainazala: harria</string>
+	<string name="poi_historic_stone">Harri historikoa</string>
+	<string name="poi_material_stone">Materiala: harria</string>
+	<string name="poi_material_sandstone">Materiala: hareharria</string>
+	<string name="poi_material_granite_stone">Materiala: granito harria</string>
+	<string name="poi_material_limestone">Materiala: kareharria</string>
+	<string name="poi_megalith_type_stone_circle">Megalito mota: harri zirkuloa</string>
+	<string name="poi_material_wood">Materiala: zura</string>
+	<string name="poi_material_metal">Materiala: metala</string>
+	<string name="poi_material_reinforced_concrete">Materiala: hormigoi armatua</string>
+	<string name="poi_material_concrete">Materiala: hormigoia</string>
+	<string name="poi_material_steel">Materiala: altzairua</string>
+	<string name="poi_material_brick">Materiala: adreilua</string>
+	<string name="poi_material_plastic">Materiala: plastikoa</string>
+	<string name="poi_material_metal_wood">Materiala: metala;zura</string>
+	<string name="poi_material_glass">Materiala: beira</string>
+	<string name="poi_material_bronze">Materiala: brontzea</string>
+	<string name="poi_material_earth">Materiala: lurra</string>
+	<string name="poi_material_composite">Materiala: konposatua</string>
+	<string name="poi_material_marble">Materiala: haitzurdina</string>
+	<string name="poi_material_aluminium">Materiala: aluminioa</string>
+
 	</resources>
