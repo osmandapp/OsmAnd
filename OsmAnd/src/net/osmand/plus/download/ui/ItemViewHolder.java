@@ -315,7 +315,12 @@ public class ItemViewHolder {
 						break;
 					case ASK_FOR_SRTM_PLUGIN_PURCHASE:
 						OsmandPlugin plugin = OsmandPlugin.getPlugin(SRTMPlugin.class);
-						context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(plugin.getInstallURL())));
+						if(plugin == null || plugin.getInstallURL() == null) {
+							Toast.makeText(context.getApplicationContext(),
+									context.getString(R.string.activate_srtm_plugin), Toast.LENGTH_LONG).show();
+						} else {
+							context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(plugin.getInstallURL())));
+						}
 						break;
 					case ASK_FOR_SRTM_PLUGIN_ENABLE:
 						context.startActivity(new Intent(context, context.getMyApplication().getAppCustomization()

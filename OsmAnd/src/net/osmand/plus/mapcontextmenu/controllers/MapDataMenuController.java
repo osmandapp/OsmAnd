@@ -96,6 +96,9 @@ public class MapDataMenuController extends MenuController {
 							OsmandPlugin plugin = OsmandPlugin.getPlugin(SRTMPlugin.class);
 							if (plugin != null) {
 								mapActivity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(plugin.getInstallURL())));
+							} else {
+								Toast.makeText(mapActivity.getApplicationContext(),
+										mapActivity.getString(R.string.activate_srtm_plugin), Toast.LENGTH_LONG).show();
 							}
 						} else {
 							mapActivity.startActivity(new Intent(mapActivity, mapActivity.getMyApplication().getAppCustomization()
