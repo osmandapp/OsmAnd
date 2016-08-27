@@ -212,7 +212,7 @@ public class BasicEditPoiFragment extends BaseOsmAndFragment
 				linearLayout.addView(getView(i));
 			}
 			if (!data.isInEdit()) {
-				String openingHoursString = openingHours.toStringNoMonths();
+				String openingHoursString = openingHours.toString();
 				if (!TextUtils.isEmpty(openingHoursString)) {
 					data.putTag(OSMSettings.OSMTagKey.OPENING_HOURS.getValue(),
 							openingHoursString);
@@ -313,7 +313,7 @@ public class BasicEditPoiFragment extends BaseOsmAndFragment
 					}
 				});
 			} else if (openingHours.getRules().get(position) instanceof OpeningHoursParser.UnparseableRule) {
-				daysTextView.setText(openingHours.getRules().get(position).toRuleString(false));
+				daysTextView.setText(openingHours.getRules().get(position).toRuleString());
 				timeListContainer.removeAllViews();
 
 				deleteItemImageButton.setVisibility(View.VISIBLE);
