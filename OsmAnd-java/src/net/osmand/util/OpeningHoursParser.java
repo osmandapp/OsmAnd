@@ -186,6 +186,35 @@ public class OpeningHoursParser {
 		}
 
 		public String getCurrentRuleTime(Calendar cal) {
+			// make exception for overlapping times i.e.
+			// (1) Mo 14:00-16:00; Tu off
+			// (2) Mo 14:00-02:00; Tu off
+			// in (2) we need to check first rule even though it is against specification
+			String ruleClosed = null;
+			boolean overlap = false;
+			for (int i = rules.size() - 1; i >= 0; i--) {
+				OpeningHoursRule r = rules.get(i);
+				if (r.hasOverlapTimes()) {
+					overlap = true;
+					break;
+				}
+			}
+			// start from the most specific rule
+			for (int i = rules.size() - 1; i >= 0; i--) {
+				OpeningHoursRule r = rules.get(i);
+				if (r.contains(cal)) {
+					boolean open = r.isOpenedForTime(cal);
+					if (!open && overlap) {
+						ruleClosed = r.toLocalRuleString();
+					} else {
+						return r.toLocalRuleString();
+					}
+				}
+			}
+			return ruleClosed;
+		}
+		
+		public String getCurrentRuleTimeV1(Calendar cal) {
 			String ruleOpen = null;
 			String ruleClosed = null;
 			for (OpeningHoursRule r : rules) {
