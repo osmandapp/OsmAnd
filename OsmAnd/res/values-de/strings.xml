@@ -2352,7 +2352,7 @@ Aktuell sind {2} MB verfügbar.</string>
     <string name="upload_osm_note_description">Sie können Ihre OSM-Hinweise anonym hochladen, wenn Sie Ihr OpenStreetMap.org-Profil nutzen.</string>
     <string name="upload_osm_note">OSM Notiz hochladen</string>
     <string name="upload_anonymously">Anonym hochladen</string>
-<string name="show_transparency_seekbar">Transparente Suchleiste anzeigen</string>
+<string name="show_transparency_seekbar">Regler zum einstellen der Transparenz anzeigen</string>
     <string name="recalculate_route">Route neu berechnen</string>
     <string name="donations">Spenden</string>
     <string name="number_of_recipients">Anzahl der Empfänger</string>
