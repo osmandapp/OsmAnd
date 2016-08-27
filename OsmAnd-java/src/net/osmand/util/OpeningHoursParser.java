@@ -333,15 +333,9 @@ public class OpeningHoursParser {
 		 */
 		private TIntArrayList startTimes = new TIntArrayList(), endTimes = new TIntArrayList();
 		
-		/**
-		 * Public holiday flag
-		 */
 		private boolean publicHoliday = false;
-		
-		/**
-		 * School holiday flag
-		 */
 		private boolean schoolHoliday = false;
+		private boolean easter = false;
 		
 		/**
 		 * Flag that means that time is off
@@ -377,9 +371,14 @@ public class OpeningHoursParser {
 			return publicHoliday;
 		}
 		
+		public boolean appliesEaster() {
+			return easter;
+		}
+		
 		public boolean appliesToSchoolHolidays() {
 			return schoolHoliday;
 		}
+		
 
 		/**
 		 * set a single start time, erase all previously added start times
@@ -730,6 +729,13 @@ public class OpeningHoursParser {
 				builder.append("SH");
 				first = false;
 			}
+			if (easter) {
+				if (!first) {
+					builder.append(", ");
+				}
+				builder.append("Easter");
+				first = false;
+			}
 			if(!first) {
 				builder.append(" ");
 			}
@@ -932,7 +938,7 @@ public class OpeningHoursParser {
 		r = r.toLowerCase();
 		final String[] daysStr = new String[]{"mo", "tu", "we", "th", "fr", "sa", "su"};
 		final String[] monthsStr = new String[]{"jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"};
-		final String[] holidayStr = new String[]{"ph", "sh"};
+		final String[] holidayStr = new String[]{"ph", "sh", "easter"};
 		String sunrise = "07:00";
 		String sunset = "21:00";
 		String endOfDay = "24:00";
@@ -1066,6 +1072,8 @@ public class OpeningHoursParser {
 									basic.publicHoliday = true;
 								} else if(pair[0].mainNumber == 1) {
 									basic.schoolHoliday = true;
+								} else if(pair[0].mainNumber == 2) {
+									basic.easter = true;
 								}
 							} else {
 								array[pair[0].mainNumber] = true;
@@ -1620,10 +1628,21 @@ public class OpeningHoursParser {
 		testOpened("24.12.2015 22:00", hours, true);
 		testOpened("25.12.2015 08:00", hours, true);
 		testOpened("25.12.2015 22:00", hours, false);
-
-		// not supported
-		// hours = parseOpenedHours("Mo-Su 07:00-23:00, Fr 08:00-20:00");
 		
+		hours = parseOpenedHours("Mo-Su 07:00-23:00; Dec 25 off");
+		System.out.println(hours);
+		testOpened("25.12.2015 14:00", hours, false);
+		testOpened("24.12.2015 08:00", hours, true);
+		
+		// easter itself as public holiday is not supported
+		hours = parseOpenedHours("Mo-Su 07:00-23:00; Easter off; Dec 25 off");
+		System.out.println(hours);
+		testOpened("25.12.2015 14:00", hours, false);
+		testOpened("24.12.2015 08:00", hours, true);
+
+		// not supported (,)
+		// hours = parseOpenedHours("Mo-Su 07:00-23:00, Fr 08:00-20:00");
+		 
 		// Test holidays
 		String hoursString = "mo-fr 11:00-21:00; PH off";
 		hours = parseOpenedHoursHandleErrors(hoursString);
