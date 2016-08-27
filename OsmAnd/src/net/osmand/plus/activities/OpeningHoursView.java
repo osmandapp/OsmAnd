@@ -131,7 +131,7 @@ public class OpeningHoursView {
 				label.setTextSize(20);
 			}
 
-			label.setText(item.toRuleString(false));
+			label.setText(item.toRuleString());
 			icon.setOnClickListener(new View.OnClickListener(){
 				@Override
 				public void onClick(View v) {
