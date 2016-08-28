@@ -139,7 +139,7 @@
 	<string name="poi_gas">Gas-vendejo</string>
 	<string name="poi_gift">Suvenir-vendejo</string>
 	<string name="poi_hardware">Il-vendejo</string>
-	<string name="poi_glaziery">Vitristejo</string>
+	<string name="poi_glaziery">Pordoj k fenestroj vendejo</string>
 	<string name="poi_newsagent">Gazet-vendejo</string>
 	<string name="poi_fire_hydrant">Hidranto</string>
 	<string name="poi_fuel">Benzinejo</string>
@@ -195,7 +195,7 @@
 	<string name="poi_wiki_lang_vo">Vikipedio Volapuka</string>
 	<string name="poi_highway_crossing">Pasejo zebrostria</string>
 
-	<string name="poi_kitchen">Kuiril-vendejo</string>
+	<string name="poi_kitchen">Kuirej-meblo-vendejo</string>
 	<string name="poi_leather">Ledaĵ-vendejo</string>
 	<string name="poi_medical_supply">Medicinaĵ-vendejo</string>
 	<string name="poi_mobile_phone">Poŝtelefon-vendejo</string>
@@ -542,8 +542,8 @@
 	<string name="poi_place_farm">Farmejo</string>
 	<string name="poi_residential">Privatdoma tereno</string>
 
-	<string name="poi_doctors">Kuracistejo</string>
-	<string name="poi_clinic">Kliniko</string>
+	<string name="poi_doctors">Kabineto de kuracisto</string>
+	<string name="poi_clinic">Kuracistejo</string>
 	<string name="poi_first_aid">Tujhelpejo</string>
 	<string name="poi_dentist">Dentistejo</string>
 	<string name="poi_townhall">Urbodomo</string>
@@ -1397,8 +1397,8 @@
 	<string name="poi_stars_2s">Steloj: 2S (pli-bona norma)</string>
 	<string name="poi_stars_3">Steloj: 3 (komforta)</string>
 	<string name="poi_stars_3s">Steloj: 3S (pli-bona komforta)</string>
-	<string name="poi_stars_4">Staloj: 4 (unua klaso)</string>
-	<string name="poi_stars_4s">Staloj: 4S (pli-bona unua klaso)</string>
+	<string name="poi_stars_4">Steloj: 4 (unua klaso)</string>
+	<string name="poi_stars_4s">Steloj: 4S (pli-bona unua klaso)</string>
 	<string name="poi_stars_5">Steloj: 5 (luksa)</string>
 	<string name="poi_stars_5s">Steloj: 5S (pli-bona luksa)</string>
 	<string name="poi_stars_6">Steloj: 6</string>
