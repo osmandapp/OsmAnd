@@ -1,5 +1,6 @@
 package net.osmand.router;
 
+import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.set.hash.TIntHashSet;
 
 public class TurnType {
@@ -20,6 +21,18 @@ public class TurnType {
 	
 	public static TurnType straight() {
 		return valueOf(C, false);
+	}
+	
+	public int getActiveCommonLaneTurn() {
+		if(lanes == null || lanes.length == 0) {
+			return C;
+		}
+		for(int i = 0; i < lanes.length; i++) {
+			if(lanes[i] % 2 == 1) {
+				return TurnType.getPrimaryTurn(lanes[i]);
+			}
+		}
+		return C;
 	}
 	
 	public String toXmlString() {
