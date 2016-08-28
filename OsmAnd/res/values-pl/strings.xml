@@ -9,7 +9,7 @@
     <string name="pref_raster_map">Zasoby mapy</string>
     <string name="pref_vector_map">Ustawienia mapy wektorowej</string>
     <string name="choose_auto_follow_route">Automatyczne środkowanie mapy</string>
-    <string name="choose_auto_follow_route_descr">Ustala opóźnienie podążania mapy za aktualną lokalizacją</string>
+    <string name="choose_auto_follow_route_descr">Ustala opóźnienie podążania mapy za aktualnym położeniem</string>
     
     <string name="auto_follow_route_navigation">Automatyczne podążanie za położeniem</string>
     <string name="auto_follow_route_navigation_descr">Włącz podążanie za pozycją tylko w trybie nawigacji.</string>
@@ -114,8 +114,10 @@
 
 
     <string name="switch_to_raster_map_to_see">Żadna z map offline nie zawiera tego położenia. Można pobrać nową mapę na ekranie ustawień programu (Zarządzaj mapami) lub przełączyć na mapy online (wymaga włączenia wtyczki map online).</string>
-  <string name="switch_to_vector_map_to_see">Dla bieżącej lokalizacji dostępna jest wektorowa mapa offline.
-\n\t\n\tAby jej użyć, proszę wybrać „Menu” → „Skonfiguruj mapę” → „Zasób mapy…” → „Wektorowe mapy offline”.</string>
+  <string name="switch_to_vector_map_to_see">Dla bieżącego położenia dostępna jest wektorowa mapa offline.
+
+\t
+\tAby jej użyć, proszę wybrać „Menu” → „Skonfiguruj mapę” → „Zasób mapy…” → „Wektorowe mapy offline”.</string>
 
     <string name="choose_audio_stream">Wyjście dźwięku nawigacji głosowej</string>
     <string name="choose_audio_stream_descr">Określa głośnik do odtwarzania nawigacji głosowej</string>
@@ -164,11 +166,11 @@
     <string name="foot">stopa</string>
     <string name="mile_per_hour">mil/godzinę</string>
     <string name="mile">mila</string>
-    <string name="send_location_way_choose_title">Udostępnij pozycję używając</string>
+    <string name="send_location_way_choose_title">Udostępnij położenie używając</string>
     <string name="send_location_sms_pattern">Pozycja: %1$s\n%2$s</string>
     <string name="send_location_email_pattern">Aby zobaczyć lokację użyj linku w przeglądarce %1$s lub linku do intentu androidowego %2$s</string>
-    <string name="send_location">Wyślij lokalizację</string>
-    <string name="context_menu_item_share_location">Udostępnij lokalizację</string>
+    <string name="send_location">Wyślij położenie</string>
+    <string name="context_menu_item_share_location">Udostępnij położenie</string>
     <string name="add_waypoint_dialog_added">Punkt GPX \'\'{0}\'\' został pomyślnie dodany</string>
     <string name="add_waypoint_dialog_title">Dodaj punkt pośredni do śladu GPX</string>
     <string name="context_menu_item_add_waypoint">Dodaj punkt do GPX</string>
@@ -248,7 +250,7 @@
     <string name="osmand_service">Tryb działania w tle</string>
     <string name="osmand_service_descr">Działanie aplikacji, gdy ekran jest wygaszony</string>
     <string name="fast_route_mode">Najszybsza trasa</string>
-    <string name="fast_route_mode_descr">"Wyznacza najszybszą trasę zamiast paliwo-oszczędnej "</string>
+    <string name="fast_route_mode_descr">"Wyznacza najszybszą trasę zamiast ekonomicznej "</string>
     <string name="tiles_to_download_estimated_size">Do pobrania {1} kafelków na poziomie {0} ({2} MB)</string>
     <string name="shared_string_download_map">Pobierz mapę</string>
     <string name="select_max_zoom_preload_area">Proszę wybrać maksymalne przybliżenie do pobrania</string>
@@ -257,7 +259,7 @@
     <string name="continuous_rendering_descr">Używaj ciągłego rysowania podczas wyświetlania zamiast rysować jeden obrazek na raz</string>
     <string name="rendering_exception">Wystąpił błąd podczas rysowania wybranej powierzchni</string>
     <string name="rendering_out_of_memory">Brak wystarczającej ilości pamięci, aby wyświetlić wybrany obszar</string>
-    <string name="show_point_options">Użyj lokalizacji…</string>
+    <string name="show_point_options">Użyj położenia…</string>
     <string name="renderer_load_sucess">Wczytano renderer</string>
     <string name="renderer_load_exception">Wystąpił błąd: nie wczytano renderera</string>
     <string name="renderers">Renderer wektorowy</string>
@@ -320,7 +322,7 @@
 
     <string name="use_trackball_descr">Umożliwia przesuwanie mapy za pomocą trackballa</string>
     <string name="use_trackball">Używanie trackballa</string>
-    <string name="background_service_wait_int_descr">Czas oczekiwania na poprawną pozycję GPS</string>
+    <string name="background_service_wait_int_descr">Czas oczekiwania na poprawne położenie GPS</string>
     <string name="background_service_wait_int">Czas oczekiwania</string>
 
     <string name="where_am_i">Gdzie jestem?</string>
@@ -331,8 +333,8 @@
     <string name="int_min">min.</string>
     <string name="background_service_int_descr">Ustaw czas pomiędzy wybudzeniami używany przez usługę działania w tle</string>
     <string name="background_service_int">Częstość wybudzania GPS</string>
-    <string name="background_service_provider_descr">Wybierz dostawcę lokalizacji dla trybu działania w tle</string>
-    <string name="background_service_provider">Sposób lokalizacji</string>
+    <string name="background_service_provider_descr">Wybierz dostawcę położenia dla trybu działania w tle</string>
+    <string name="background_service_provider">Określanie położenia</string>
     <string name="background_router_service_descr">Uruchamia usługę śledzenia położenia w tle podczas kiedy ekran jest wyłączony</string>
     <string name="background_router_service">Uruchom OsmAnd w tle</string>
     <string name="off_router_service_no_gps_available">Usługa nawigacji w tle wymaga wybrania dostawcy lokacji zanim zostanie włączona.</string>
@@ -708,7 +710,7 @@ Mapy kafelkowe można uzyskać bezpośrednio z zasobów sieciowych, jak i przygo
     <string name="direction_style_sidewise">Przeciwnie do ruchu wskazówek zegara (8 sektorów)</string>
     <string name="direction_style_clockwise">Zgodnie z ruchem zegara (12 sektorów)</string>
     <string name="settings_direction_style">Styl celu</string>
-    <string name="settings_direction_style_descr">Wybierz styl określania kierunków względnych podczas ruchu</string>
+    <string name="settings_direction_style_descr">Wybiera styl określania kierunków względnych podczas ruchu</string>
     <string name="auto_announce_on">Włącz automatyczne ogłaszanie</string>
     <string name="auto_announce_off">Wyłącz automatyczne ogłaszanie</string>
     <string name="i_am_here">Jestem tutaj</string>
@@ -913,7 +915,7 @@ OsmAnd jest otwarto-źródłowym programem do nawigacji z dostępem do szerokiej
  "</string>
     <string name="osmand_plus_short_description_80_chars">OsmAnd to aplikacja open source do nawigacji obsługująca mapy offline i online</string>
     <string name="avoid_motorway">Autostrad</string>
-    <string name="snap_to_road_descr">Przyciąga pozycję do dróg podczas nawigowania</string>
+    <string name="snap_to_road_descr">Przyciąga położenie do dróg podczas nawigowania</string>
     <string name="snap_to_road">Przyciąganie do drogi</string>
 
     <string name="day_night_info">Informacja o dniu/nocy</string>
@@ -1009,9 +1011,9 @@ OsmAnd jest otwarto-źródłowym programem do nawigacji z dostępem do szerokiej
     <string name="index_srtm_parts">części</string>
 
 
-    <string name="audionotes_plugin_description">Dostarcza funkcje tworzenia notatek zdjęciowych/audio/video podczas podróżowania aktywowaną poprzez przycisk na ekranie mapy lub menu kontekstowe dla wybranej lokalizacji.</string>
+    <string name="audionotes_plugin_description">Dostarcza funkcje tworzenia notatek zdjęciowych/audio/video podczas podróżowania aktywowaną poprzez przycisk na ekranie mapy lub menu kontekstowe dla wybranego położenia.</string>
     <string name="audionotes_plugin_name">Notatki głosowe</string>
-    <string name="audionotes_location_not_defined">Lokalizacja dla notatki głosowej nie jest jeszcze ustalona. \"Użyj lokalizacji…\", aby przypisać notatkę do wybranej lokalizacji</string>
+    <string name="audionotes_location_not_defined">Nie ustalono jeszcze położenia dla notatki głosowej. Proszę wybrać polecenie „Użyj położenia…”, aby przypisać notatkę do wybranego położenia</string>
 
     <string name="map_widget_audionotes">Notatki głosowe</string>
 
@@ -1063,7 +1065,7 @@ OsmAnd jest otwarto-źródłowym programem do nawigacji z dostępem do szerokiej
     <string name="recording_photo_description">Zdjęcie %1$s %2$s</string>
     <string name="av_def_action_picture">Zrobienie zdjęcia</string>
     <string name="recording_context_menu_precord">Zrób zdjęcie</string>
-    <string name="stop_routing_confirm">Zatrzymać nawigację?</string>
+    <string name="stop_routing_confirm">Zatrzymać nawigowanie?</string>
     <string name="clear_dest_confirm">Usunąć cel trasy i jej cele pośrednie?</string>
     <string name="precise_routing_mode">Precyzyjne trasy (alpha)</string>
     <string name="precise_routing_mode_descr">Włącz obliczanie precyzyjnych tras w nawigacji. Funkcja dość powolna, nadal jest ograniczona odległością.</string>
@@ -1145,7 +1147,7 @@ OsmAnd jest otwarto-źródłowym programem do nawigacji z dostępem do szerokiej
     <string name="local_osm_changes_backup_successful">Plik zmian OSM został pomyślnie wygenerowany %1$s</string>
     <string name="local_osm_changes_backup_failed">Wystąpił błąd podczas tworzenia kopii zapasowej zmian OSM</string>
     <string name="local_osm_changes_backup">Stwórz kopię w formacie zmian OSM</string>
-    <string name="intermediate_items_sort_by_distance">Posortuj door-to-door</string>
+    <string name="intermediate_items_sort_by_distance">Posortuj wg odległości</string>
     <string name="intermediate_items_sort_return">Optymalizacja kolejności celów pośrednich w drodze z bieżącej pozycji do miejsca docelowego.</string>
     <string name="search_street_in_neighborhood_cities">Szukaj ulicy w sąsiadujących miastach</string>
 
@@ -1336,9 +1338,11 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="copying_osmand_files_descr">Kopiowanie plików OsmAnd do nowego położenia (%s)…</string>
     <string name="copying_osmand_files">Kopiowanie plików danych OsmAnd…</string>
     
-    <string name="android_19_location_disabled">Od wersji 4.4 KitKat nie można pobierać ani aktualizować map w poprzedniej lokalizacji (%s). Czy chcesz ją zmienić na lokalizację dozwoloną i skopiować do niej wszystkie pliki?
-\n Uwaga 1: Twoje stare pliki zostaną nienaruszone (mogą być usunięte manualnie).
-\n Uwaga 2: W nowej lokalizacji nie będzie możliwe współdzielenie tych samych plików pomiędzy OsmAnd i OsmAnd+.</string>
+    <string name="android_19_location_disabled">"Od wersji 4.4 KitKat nie można pobierać ani aktualizować map do poprzedniego katalogu przechowywania (%s). Zmienić  położenie przechowywania na prawidłowe i skopiować do niego wszystkie pliki?
+
+ Uwaga 1: stare pliki pozostaną nienaruszone (mogą być usunięte ręcznie).
+
+ Uwaga 2: w nowym położeniu nie będzie możliwe współdzielenie tych samych plików pomiędzy OsmAnd i OsmAnd+."</string>
     <string name="routing_attr_prefer_motorway_name">Preferowanie autostrad</string>
     <string name="routing_attr_prefer_motorway_description">Preferowanie autostrad</string>
     
@@ -1351,7 +1355,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="routing_attr_avoid_ferries_description">Omijanie przepraw promowych</string>
     <string name="routing_attr_avoid_motorway_name">Omijanie autostrad</string>
     <string name="routing_attr_avoid_motorway_description">Omijanie autostrad</string>
-    <string name="routing_attr_weight_name">Limit wagi</string>
+    <string name="routing_attr_weight_name">Ograniczenie wagi</string>
     <string name="routing_attr_weight_description">Określa maksymalną, dozwoloną masę pojazdu</string>
     <string name="select_gpx">Wybierz GPX…</string>
     <string name="route_descr_select_destination">Proszę wybrać cel trasy</string>
@@ -1361,7 +1365,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="route_info">Informacje o trasie</string>
     <string name="calculate_osmand_route_gpx">Wyznacz trasę offline w OsmAnd</string>
     <string name="keep_and_add_destination_point">Dodaj kolejny cel</string>
-    <string name="use_displayed_track_for_navigation">Wykorzystać wyświetlaną trasę do nawigacji?</string>
+    <string name="use_displayed_track_for_navigation">Wykorzystać wyświetlany ślad do nawigacji?</string>
 
     <string name="calculate_osmand_route_without_internet">Wyznacz segment trasy OsmAnd offline</string>
     <string name="gpx_option_calculate_first_last_segment">Wyznacza trasę usługi OsmAnd dla pierwszego i ostatniego segmentu</string>
@@ -1421,7 +1425,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="always_center_position_on_map">Zawsze wyśrodkowane położenie</string>
     <string name="voice_pref_title">Głos</string>
     <string name="misc_pref_title">Różne</string>
-    <string name="localization_pref_title">Lokalizacja</string>
+    <string name="localization_pref_title">Położenie</string>
     <string name="share_route_as_gpx">Udostępnij trasę jako plik GPX</string>
     <string name="share_route_subject">Trasa udostępniona przez OsmAnd</string>
     <string name="navigation_intent_invalid">Nieprawidłowy format: %s</string>
@@ -1477,7 +1481,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="osmo_group_share">W celu dołączenia do grupy %2$s, proszę określić identyfikator grupy (%1$s) lub kliknąć %3$s.</string>
     <string name="osmo_share_connect_device">Pozwól na stałe śledzenie tego urządzenia</string>
     <string name="osmo_share_current_session">Udostępnij bieżącą sesję w przeglądarce</string>
-    <string name="osmo_session_not_available">Sesja niedostępna, sprawdź, czy \'Wyślij lokalizację\' jest włączone.</string>
+    <string name="osmo_session_not_available">Sesja niedostępna, proszę sprawdzić, czy „Wyślij położenie” jest włączone.</string>
     <string name="osmo_share_session">Udostępnij sesję</string>
     <string name="osmo_session_id_share">Adres sesji, aby śledzić urządzenie (%1$s)</string>
     <string name="osmo_tracker_id_share">W celu połączenia się z docelowym urządzeniem %2$s, kliknij w link %3$s lub określ identyfikator trackera (%1$s)</string>
@@ -1770,7 +1774,7 @@ Nagrane ślady można udostępnić znajomym lub wykorzystać na rzecz rowoju map
     <string name="traffic_warning_pedestrian">Przejście dla pieszych</string>
     <string name="show_railway_warnings">Przejazdy kolejowe</string>
     <string name="show_pedestrian_warnings">Przejścia dla pieszych</string>
-    <string name="speak_pedestrian">Omijanie przejść dla pieszych</string>
+    <string name="speak_pedestrian">Przejścia dla pieszych</string>
 
     <string name="gps_status">Status GPS</string>
     <string name="version_settings_descr">Pobierz nocne kompilacje</string>
@@ -1787,7 +1791,9 @@ Nagrane ślady można udostępnić znajomym lub wykorzystać na rzecz rowoju map
     <string name="rename_failed">Nie udało się zmienić nazwy.</string>
     <string name="back_to_map">Powrót do mapy</string>
     <string name="share_note">Udostępnij uwagę</string>
-    <string name="location_on_map">Lokalizacja:\n Szer. %1$s\n Dł. %2$s</string>
+    <string name="location_on_map">Położenie:
+ Szer. %1$s
+ Dł. %2$s</string>
     <string name="notes">Uwagi</string>
     <string name="online_map">Mapa online</string>
     <string name="roads_only">Tylko drogi</string>
@@ -1927,7 +1933,7 @@ Włączenie tego widoku zmienia styl mapy na „Zima i narty”, ukazujący tere
     <string name="storage_directory_multiuser">Pamięć użytkownika</string>
 
     <string name="routing_attr_avoid_borders_description">Omija przejścia graniczne z innym państwem</string>
-    <string name="routing_attr_height_name">Limit wysokości</string>
+    <string name="routing_attr_height_name">Ograniczenie wysokości</string>
     <string name="routing_attr_height_description">Określa maksymalną, dozwoloną wysokość pojazdu</string>
     <string name="use_fast_recalculation">Inteligentne przeliczanie trasy</string>
     <string name="use_fast_recalculation_desc">Wyznacza ponownie tylko początkową część trasy dla długich podróży</string>
@@ -2031,7 +2037,7 @@ Włączenie tego widoku zmienia styl mapy na „Zima i narty”, ukazujący tere
     <string name="poi_dialog_poi_type">Rodzaj użytecznego miejsca</string>
     <string name="poi_action_delete">usuń</string>
     <string name="building_number">Numer budynku</string>
-    <string name="av_locations_descr">Plik GPS z notatkami o lokalizacjach</string>
+    <string name="av_locations_descr">Plik GPS z notatkami o położeniach</string>
     <string name="rendering_value_boldOutline_name">Pogrubione kontury</string>
     <string name="download_live_updates">Aktualizowanie na bieżąco</string>
     <string name="commit_poi">Wyślij UM</string>
@@ -2242,7 +2248,7 @@ Włączenie tego widoku zmienia styl mapy na „Zima i narty”, ukazujący tere
     <string name="select_voice_provider_descr">Wskazuje lub pobiera komunikaty głosowe właściwe dla danego języka</string>
     <string name="impassable_road_desc">Wskazuje drogi, które należy unikać podczas nawigowania</string>
     <string name="shared_string_sound">Dźwięk</string>
-    <string name="no_location_permission">Program nie ma uprawnień dostępu do danych o lokalizacji.</string>
+    <string name="no_location_permission">Program nie ma uprawnień dostępu do danych o położeniu.</string>
     <string name="no_camera_permission">Program nie ma uprawnień dostępu do aparatu.</string>
     <string name="no_microphone_permission">Program nie ma uprawnień dostępu do mikrofonu.</string>
     <string name="available_maps">Dostępne mapy</string>
@@ -2472,12 +2478,12 @@ Włączenie tego widoku zmienia styl mapy na „Zima i narty”, ukazujący tere
 
     <string name="shared_string_change">Zmień</string>
     <string name="get_started">Rozpocznij</string>
-    <string name="routing_attr_short_way_name">Paliwo-oszczędna trasa</string>
-    <string name="routing_attr_short_way_description">Oblicza paliwo-oszczędną trasę (zwykle najkrótszą)</string>
+    <string name="routing_attr_short_way_name">Ekonomiczna trasa</string>
+    <string name="routing_attr_short_way_description">Wyznacza ekonomiczną trasę (zwykle najkrótszą)</string>
     <string name="replace_favorite_confirmation">Zastąpić ulubiony punkt %1$s?</string>
     <string name="skip_map_downloading">Pomijanie pobierania map</string>
     <string name="first_usage_greeting">Otrzymuj wskazówki dojazdu i odkrywaj nowe miejsca bez połączenia z Internetem</string>
-    <string name="search_another_country">Wybierz inny region</string>
+    <string name="search_another_country">Proszę wybrać inny region</string>
     <string name="skip_map_downloading_desc">Nie zainstalowano map w trybie offline. Można wybrać mapę z listy lub pobrać mapy później za pośrednictwem polecenia menu - %1$s.</string>
     <string name="get_it">Pobierz</string>
     <string name="get_for">Pobierz na %1$s</string>
@@ -2495,13 +2501,13 @@ Włączenie tego widoku zmienia styl mapy na „Zima i narty”, ukazujący tere
     <string name="storage_place_description">Katalog przechowywania danych OsmAnd (mapy, trasy, itp.): %1$s.</string>
     <string name="give_permission">Zezwól</string>
     <string name="allow_access_location">Zezwól na dostęp do położenia</string>
-    <string name="search_my_location">Wyszukaj moją pozycję</string>
+    <string name="search_my_location">Wyszukaj aktualne położenie</string>
     <string name="no_update_info_desc">Nie wyszukuj aktualizacji dotyczących nowych wersji, rabatów na OsmAnd</string>
     <string name="no_update_info">Nie wyszukuj aktualizacji</string>
     <string name="update_all_maps_now">Uaktualnić wszystkie mapy?</string>
     <string name="clear_tile_data">Wyczyść wszystkie kafelki</string>
-    <string name="osm_live_payment_desc">Opłaty za subskrypcję pobierane będą co miesiąc. Zawsze możesz się z niej wypisać przez Google Play.</string>
+    <string name="osm_live_payment_desc">Opłaty za subskrypcję pobierane będą co miesiąc. Zawsze można z niej zrezygnować za pośrednictwem Google Play.</string>
     <string name="donation_to_osm">Dotacja dla społeczności OpenStreetMap</string>
-    <string name="donation_to_osm_desc">Część z Twoich dotacji zostanie przekazana użytkownikom OSM którzy nanoszą poprawki na mapy OpenStreetMap. Koszt subskrypcji pozostaje taki sam.</string>
-    <string name="osm_live_subscription_desc">Subskrypcje pozwalają na cogodzinne, codzienne i cotygodniowe aktualizacje i nielimitowane pobierania map całego świata.</string>
+    <string name="donation_to_osm_desc">Część z dotacji zostanie przekazana użytkownikom OSM, którzy wprowadzają zmiany na mapie OpenStreetMap. Koszt subskrypcji pozostaje taki sam.</string>
+    <string name="osm_live_subscription_desc">Subskrypcje pozwalają na cogodzinne, codzienne i cotygodniowe uaktualnienia i nieograniczone liczbą pobieranie map całego świata.</string>
     </resources>
