@@ -185,7 +185,7 @@ public class RouteSegmentResult {
 
 	@Override
 	public String toString() {
-		return object.toString() + " : " + startPointIndex + "-" + endPointIndex;
+		return object.toString() + ": " + startPointIndex + "-" + endPointIndex;
 	}
 	
 }

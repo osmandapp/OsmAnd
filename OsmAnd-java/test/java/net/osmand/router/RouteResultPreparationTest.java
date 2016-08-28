@@ -103,7 +103,7 @@ public class RouteResultPreparationTest {
                     	if(!Algorithms.objectEquals(expectedResult, turnLanes) &&
                     			!Algorithms.objectEquals(expectedResult, lanes) && 
                     			!Algorithms.objectEquals(expectedResult, turn)) {
-                    		Assert.assertEquals("Segment " + segmentId, expectedResult, turnLanes);
+                    		Assert.assertEquals("Segment " + segmentId, turnLanes, expectedResult);
                     	}
                     }
 

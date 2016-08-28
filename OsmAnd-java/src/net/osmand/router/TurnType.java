@@ -117,6 +117,8 @@ public class TurnType {
 	private float turnAngle;
 	private boolean skipToSpeak;
 	private int[] lanes;
+	private boolean possiblyLeftTurn;
+	private boolean possiblyRightTurn;
 
 	public static TurnType getExitTurn(int out, float angle, boolean leftSide) {
 		TurnType r = valueOf(RNDB, leftSide); //$NON-NLS-1$
@@ -248,6 +250,22 @@ public class TurnType {
 		return lanes;
 	}
 	
+	public void setPossibleLeftTurn(boolean possiblyLeftTurn) {
+		this.possiblyLeftTurn = possiblyLeftTurn;
+	}
+	
+	public void setPossibleRightTurn(boolean possiblyRightTurn) {
+		this.possiblyRightTurn = possiblyRightTurn;
+	}
+	
+	public boolean isPossibleLeftTurn() {
+		return possiblyLeftTurn;
+	}
+	
+	public boolean isPossibleRightTurn() {
+		return possiblyRightTurn;
+	}
+	
 	public boolean keepLeft() {
 		return value == KL;
 	}
@@ -270,32 +288,39 @@ public class TurnType {
 	
 	@Override
 	public String toString() {
+		String vl = null;
 		if (isRoundAbout()) {
-			return "Take " + getExitOut() + " exit";
+			vl = "Take " + getExitOut() + " exit";
 		} else if (value == C) {
-			return "Go ahead";
+			vl = "Go ahead";
 		} else if (value == TSLL) {
-			return "Turn slightly left";
+			vl = "Turn slightly left";
 		} else if (value == TL) {
-			return "Turn left";
+			vl = "Turn left";
 		} else if (value == TSHL) {
-			return "Turn sharply left";
+			vl = "Turn sharply left";
 		} else if (value == TSLR) {
-			return "Turn slightly right";
+			vl = "Turn slightly right";
 		} else if (value == TR) {
-			return "Turn right";
+			vl = "Turn right";
 		} else if (value == TSHR) {
-			return "Turn sharply right";
+			vl = "Turn sharply right";
 		} else if (value == TU) {
-			return "Make uturn";
+			vl = "Make uturn";
 		} else if (value == TRU) {
-			return "Make uturn";
+			vl = "Make uturn";
 		} else if (value == KL) {
-			return "Keep left";
+			vl = "Keep left";
 		} else if (value == KR) {
-			return "Keep right";
+			vl = "Keep right";
 		} else if (value == OFFR) {
-			return "Off route";
+			vl = "Off route";
+		}
+		if(vl != null) {
+			if(lanes != null) {
+				vl += "(" + toString(lanes) +")";
+			}
+			return vl;
 		}
 		return super.toString();
 	}
@@ -364,4 +389,5 @@ public class TurnType {
 	}
 
 	
+
 }
