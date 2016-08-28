@@ -667,17 +667,25 @@ public class RouteResultPreparation {
 				}
 			}
 		}
-		int singleTurn ;
+		int singleTurn = 0;
 		if(turnSet.size() == 1) {
 			singleTurn = turnSet.iterator().next();
-		} else if(currentTurn.goAhead() && nextTurn.goAhead()) {
-			singleTurn = currentTurn.getValue();
-		} else if(currentTurn.goAhead() && turnSet.contains(nextTurn.getValue()) &&
-				(currentTurn.isPossibleLeftTurn() && TurnType.isLeftTurn(nextTurn.getValue()) ) ||
-						(currentTurn.isPossibleRightTurn() && TurnType.isRightTurn(nextTurn.getValue()))
-				) {
-			singleTurn = nextTurn.getValue();
-		} else {
+		} else if(currentTurn.goAhead() && turnSet.contains(nextTurn.getValue())) {
+			if(currentTurn.isPossibleLeftTurn() && 
+					TurnType.isLeftTurn(nextTurn.getValue())) {
+				singleTurn = nextTurn.getValue();	
+			} else if(currentTurn.isPossibleLeftTurn() && 
+					TurnType.isLeftTurn(nextTurn.getActiveCommonLaneTurn())) {
+				singleTurn = nextTurn.getActiveCommonLaneTurn();
+			} else if(currentTurn.isPossibleRightTurn() && 
+					TurnType.isRightTurn(nextTurn.getValue())) {
+				singleTurn = nextTurn.getValue();
+			} else if(currentTurn.isPossibleRightTurn() && 
+					TurnType.isRightTurn(nextTurn.getActiveCommonLaneTurn())) {
+				singleTurn = nextTurn.getActiveCommonLaneTurn();
+			}
+		}
+		if (singleTurn == 0) {
 			singleTurn = currentTurn.getValue();
 		}
 		for(int i = 0; i < lanes.length; i++) {
@@ -924,6 +932,22 @@ public class RouteResultPreparation {
 		// Maybe going straight at a 90-degree intersection
 		TurnType t = TurnType.valueOf(TurnType.C, leftSide);
 		int[] rawLanes = calculateRawTurnLanes(turnLanes, TurnType.C);
+		boolean possiblyLeftTurn = rs.roadsOnLeft == 0;
+		boolean possiblyRightTurn = rs.roadsOnRight == 0;
+		for (int k = 0; k < rawLanes.length; k++) {
+			int turn = TurnType.getPrimaryTurn(rawLanes[k]);
+			int sturn = TurnType.getSecondaryTurn(rawLanes[k]);
+			int tturn = TurnType.getTertiaryTurn(rawLanes[k]);
+			if (turn == TurnType.TU || sturn == TurnType.TU || tturn == TurnType.TU) {
+				possiblyLeftTurn = true;
+			}
+			if (turn == TurnType.TRU || sturn == TurnType.TRU || sturn == TurnType.TRU) {
+				possiblyRightTurn = true;
+			}
+		}
+		
+		t.setPossibleLeftTurn(possiblyLeftTurn);
+		t.setPossibleRightTurn(possiblyRightTurn);
 		if (rs.keepLeft || rs.keepRight) {
 			String[] splitLaneOptions = turnLanes.split("\\|", -1);
 			int activeBeginIndex = findActiveIndex(rawLanes, splitLaneOptions, rs.leftLanes, true, 
@@ -944,13 +968,11 @@ public class RouteResultPreparation {
 				t = TurnType.valueOf(tp, leftSide);
 			}
 		} else {
-			boolean possiblyLeftTurn = rs.roadsOnLeft == 0;
-			boolean possiblyRightTurn = rs.roadsOnRight == 0;
-			t.setPossibleLeftTurn(possiblyLeftTurn);
-			t.setPossibleRightTurn(possiblyRightTurn);
 			for (int k = 0; k < rawLanes.length; k++) {
 				int turn = TurnType.getPrimaryTurn(rawLanes[k]);
 				int sturn = TurnType.getSecondaryTurn(rawLanes[k]);
+				int tturn = TurnType.getTertiaryTurn(rawLanes[k]);
+				
 				boolean active = false;
 				// some turns go through many segments (to turn right or left)
 				// so on one first segment the lane could be available and may be only 1 possible
@@ -959,8 +981,13 @@ public class RouteResultPreparation {
 						(TurnType.isLeftTurn(sturn) && possiblyLeftTurn)) {
 					// we can't predict here whether it will be a left turn or straight on, 
 					// it could be done during 2nd pass
-//					TurnType.setPrimaryTurn(rawLanes, k, sturn);
-//					TurnType.setSecondaryTurn(rawLanes, k, turn);
+					TurnType.setPrimaryTurn(rawLanes, k, sturn);
+					TurnType.setSecondaryTurn(rawLanes, k, turn);
+					active = true;
+				} else if((TurnType.isRightTurn(tturn) && possiblyRightTurn) ||
+						(TurnType.isLeftTurn(tturn) && possiblyLeftTurn)) {
+					TurnType.setPrimaryTurn(rawLanes, k, tturn);
+					TurnType.setTertiaryTurn(rawLanes, k, turn);
 					active = true;
 				} else if((TurnType.isRightTurn(turn) && possiblyRightTurn) ||
 						(TurnType.isLeftTurn(turn) && possiblyLeftTurn)) {
