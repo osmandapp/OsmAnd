@@ -2205,137 +2205,137 @@
 
 	<string name="poi_bandstand">Асобная сцэна</string>
 	<string name="poi_kiln">Печ для абпалу</string>
-	<string name="poi_product_brick">Вырабляны прадукт: цэгла</string>
-	<string name="poi_product_quicklime">Вырабляны прадукт: нягашаная вапна</string>
-	<string name="poi_product_leather">Вырабляны прадукт: скура</string>
-	<string name="poi_product_lime">Вырабляны прадукт: вапна</string>
-	<string name="poi_product_beer">Вырабляны прадукт: піва</string>
-	<string name="poi_product_charcoal">Вырабляны прадукт: драўняны вугаль</string>
-	<string name="poi_product_meat">Вырабляны прадукт: мяса</string>
+	<string name="poi_product_brick">Вырабляецца: цэгла</string>
+	<string name="poi_product_quicklime">Вырабляецца: нягашаная вапна</string>
+	<string name="poi_product_leather">Вырабляецца: скура</string>
+	<string name="poi_product_lime">Вырабляецца: вапна</string>
+	<string name="poi_product_beer">Вырабляецца: піва</string>
+	<string name="poi_product_charcoal">Вырабляецца: драўняны вугаль</string>
+	<string name="poi_product_meat">Вырабляецца: мяса</string>
 
-	<string name="poi_wheelchair_description">Апісанне для людзей на інвалідных калысках</string>
-	<string name="poi_blind_description">Апісанне для сляпых</string>
-	<string name="poi_deaf_description">Апісанне для глухіх</string>
+	<string name="poi_wheelchair_description">Апісаньне для людзей на інвалідных вазках</string>
+	<string name="poi_blind_description">Апісаньне для сьляпых</string>
+	<string name="poi_deaf_description">Апісаньне для глухіх</string>
 
 	<string name="poi_handrail_yes">Поручань: ёсць</string>
 	<string name="poi_handrail_no">Поручань: адсутнічае</string>
-	<string name="poi_ramp_yes">Пахіл: ёсць</string>
-	<string name="poi_ramp_no">Пахіл: адсутнічае</string>
-	<string name="poi_ramp_wheelchair_yes">Пахіл для інвалідных калысак: ёсць</string>
-	<string name="poi_ramp_wheelchair_no">Пахіл для інвалідных калысак: адсутнічае</string>
-	<string name="poi_ramp_stroller_yes">Пахіл (падвойны): ёсць</string>
-	<string name="poi_ramp_stroller_no">Пахіл (падвойны): адсутнічае</string>
-	<string name="poi_ramp_bicycle_yes">Пахіл для ровараў: ёсць</string>
-	<string name="poi_ramp_bicycle_no">Пахіл для ровараў: адсутнічае</string>
-	<string name="poi_ramp_luggage_yes">Пахіл для багажу: ёсць</string>
-	<string name="poi_ramp_luggage_no">Пахіл для багажу: адсутнічае</string>
-	<string name="poi_step_count">Колькасць прыступак</string>
-	<string name="poi_step_condition_even">Стан прыступак: добрае</string>
-	<string name="poi_step_condition_uneven">Стан прыступак: сярэдняе</string>
-	<string name="poi_step_condition_rough">Стан прыступак: дрэннае</string>
+	<string name="poi_ramp_yes">Рампа: ёсьць</string>
+	<string name="poi_ramp_no">Рампа: адсутнічае</string>
+	<string name="poi_ramp_wheelchair_yes">Рампа для інвалідных вазкоў: ёсьць</string>
+	<string name="poi_ramp_wheelchair_no">Рампа для інвалідных вазкоў: адсутнічае</string>
+	<string name="poi_ramp_stroller_yes">Рампа (падвойная): ёсьць</string>
+	<string name="poi_ramp_stroller_no">Рампа (падвойная): адсутнічае</string>
+	<string name="poi_ramp_bicycle_yes">Рампа для ровараў: ёсьць</string>
+	<string name="poi_ramp_bicycle_no">Рампа для ровараў: адсутнічае</string>
+	<string name="poi_ramp_luggage_yes">Рампа для багажу: ёсьць</string>
+	<string name="poi_ramp_luggage_no">Рампа для багажу: адсутнічае</string>
+	<string name="poi_step_count">Колькасьць прыступак</string>
+	<string name="poi_step_condition_even">Стан прыступак: добры</string>
+	<string name="poi_step_condition_uneven">Стан прыступак: сярэдні</string>
+	<string name="poi_step_condition_rough">Стан прыступак: дрэнны</string>
 
 	<string name="poi_cairn">Піраміда з камянёў</string>
 
 	<string name="poi_memorial_fassade_decoration">Фасадная дэкарацыя</string>
-	<string name="poi_defibrillator">Дефибриллятор</string>
-	<string name="poi_defibrillator_yes">Дефибриллятор: ёсць</string>
+	<string name="poi_defibrillator">Дэфібрылятар</string>
+	<string name="poi_defibrillator_yes">Дэфібрылятар: ёсьць</string>
 
 	<string name="poi_tomb_war_grave">Тып: брацкая магіла</string>
 	<string name="poi_tomb_tumulus">Тып: тумулус</string>
 	<string name="poi_tomb_rock_cut">Тып: выразаная ў камені</string>
-	<string name="poi_tomb_hypogeum">Тып: гипогей</string>
+	<string name="poi_tomb_hypogeum">Тып: гіпагей</string>
 	<string name="poi_tomb_vault">Тып: магільны склеп</string>
 	<string name="poi_tomb_columbarium">Тып: калумбарый</string>
 	<string name="poi_tomb_mausoleum">Тып: маўзалей</string>
 	<string name="poi_tomb_sarcophagus">Тып: саркафаг</string>
-	<string name="poi_tomb_crypt">Тып: крипта</string>
+	<string name="poi_tomb_crypt">Тып: крыпта</string>
 	<string name="poi_tomb_pyramid">Тып: піраміда</string>
 
 	<string name="poi_historic_civilization_ancient_roman">Цывілізацыя: старажытнарымская (753 г. да н.э. – 284 г. н.э.)</string>
-	<string name="poi_historic_civilization_nuragic">Цывілізацыя: нурагическая (18 у. да н.э. – 2 у. н.э.)</string>
+	<string name="poi_historic_civilization_nuragic">Цывілізацыя: нурагіцкая (18 ст. да н.э. – 2 ст. н.э.)</string>
 	<string name="poi_historic_civilization_etruscan">Цывілізацыя: этруская</string>
 	<string name="poi_historic_civilization_prehistoric">Цывілізацыя: дагістарычная</string>
 	<string name="poi_historic_civilization_ancient_greek">Цывілізацыя: старажытнагрэцкая</string>
 	<string name="poi_historic_civilization_roman">Цывілізацыя: рымская</string>
-	<string name="poi_historic_civilization_byzantine">Цывілізацыя: візантыйская (285 н.э. – 1453 г. н.э.)</string>
+	<string name="poi_historic_civilization_byzantine">Цывілізацыя: бізантыйская (285 н.э. – 1453 г. н.э.)</string>
 	<string name="poi_historic_civilization_imperial_chinese">Цывілізацыя: кітайская (221 г. да н.э. – 1911 г. н.э.)</string>
 	<string name="poi_historic_civilization_ancient_egyptian">Цывілізацыя: старажытнаегіпецкая (да 332 г. да н.э.)</string>
 	<string name="poi_historic_civilization_celtic">Цывілізацыя: кельцкая</string>
 	<string name="poi_historic_civilization_western_roman">Цывілізацыя: заходняя рымская (285 н.э. - 476 г. н.э.)</string>
 	<string name="poi_historic_civilization_mycenaean">Цывілізацыя: мікенская</string>
-	<string name="poi_historic_civilization_dacian">Цывілізацыя: гето-дакская</string>
-	<string name="poi_historic_civilization_hernici">Цывілізацыя: герники</string>
+	<string name="poi_historic_civilization_dacian">Цывілізацыя: дакская</string>
+	<string name="poi_historic_civilization_hernici">Цывілізацыя: гернікі</string>
 	<string name="poi_historic_civilization_greek_egyptian">Цывілізацыя: грэка-егіпецкая (332 г. да н.э. – 30 г. да н.э.)</string>
 	<string name="poi_historic_civilization_roman_and_byzantine_egyptian">Цывілізацыя: рымская і візантыйска-егіпецкая</string>
-	<string name="poi_historic_civilization_helladic">Цывілізацыя: элладская</string>
-	<string name="poi_historic_civilization_cycladic">Цывілізацыя: кикладская</string>
-	<string name="poi_historic_civilization_minoan">Цывілізацыя: минойская</string>
-	<string name="poi_historic_civilization_tiahuanacota">Цывілізацыя: тиуанако</string>
+	<string name="poi_historic_civilization_helladic">Цывілізацыя: эладзкая</string>
+	<string name="poi_historic_civilization_cycladic">Цывілізацыя: кікладзкая</string>
+	<string name="poi_historic_civilization_minoan">Цывілізацыя: мінойская</string>
+	<string name="poi_historic_civilization_tiahuanacota">Цывілізацыя: тыўанако</string>
 
 	<string name="poi_animal_training">Дрэсіроўка жывёл</string>
 	<string name="poi_animal_training_dog">Дрэсіроўка сабак</string>
-	<string name="poi_animal_training_horse">Дрэсіроўка канёў</string>
+	<string name="poi_animal_training_horse">Дрэсіроўка коней</string>
 
-	<string name="poi_horse_yes">Доступ для канёў дазволены</string>
-	<string name="poi_horse_no">Доступ для канёў забаронены</string>
+	<string name="poi_horse_yes">Доступ для коней дазволены</string>
+	<string name="poi_horse_no">Доступ для коней забаронены</string>
 	<string name="poi_animal_yes">Доступ для жывёл дазволены</string>
 	<string name="poi_animal_no">Доступ для жывёл забаронены</string>
 
-	<string name="poi_historic_period_nuragic">Гістарычны перыяд: нурагический</string>
-	<string name="poi_historic_period_stone_bronze_undetermined">Гістарычны перыяд: каменны / бронзавыя вякі (не вызначана)</string>
-	<string name="poi_historic_period_bronze_age">Гістарычны перыяд: бронзавы век</string>
-	<string name="poi_historic_period_principate">Гістарычны перыяд: прынцыпат (27 г. да н.э. – 284 г. н.э.)</string>
-	<string name="poi_historic_period_classical_greece">Гістарычны перыяд: класічная Грэцыя (5-й – 4-й у. да н.э.)</string>
-	<string name="poi_historic_period_archaic_greece">Гістарычны перыяд: архаічная Грэцыя</string>
-	<string name="poi_historic_period_iron_age">Гістарычны перыяд: жалезнае стагоддзе</string>
-	<string name="poi_historic_period_roman_republic">Гістарычны перыяд: Рымская рэспубліка (508 г. да н.э. – 27 г. да н.э.)</string>
-	<string name="poi_historic_period_hellenistic_greece">Гістарычны перыяд: эліністычная Грэцыя</string>
-	<string name="poi_historic_period_new_kingdom">Гістарычны перыяд: новае царства(1550 – 1069 г. да н.э.)</string>
-	<string name="poi_historic_period_middle_kingdom">Гістарычны перыяд: сярэдняе царства(2055 – 1650 г. да н.э.)</string>
-	<string name="poi_historic_period_predynastic_egypt">Гістарычны перыяд: додинастический Егіпет</string>
-	<string name="poi_historic_period_early_dynastic_period">Гістарычны перыяд: ранняе царства (3100 – 2686 г. да н.э.)</string>
-	<string name="poi_historic_period_old_kingdom">Гістарычны перыяд: старажытнае царства (2686 – 2181 г. да н.э.)</string>
-	<string name="poi_historic_period_first_intermediate_period">Гістарычны перыяд: першы пераходны перыяд (2181 – 2055 г. да н.э.)</string>
-	<string name="poi_historic_period_second_intermediate_period">Гістарычны перыяд: другі пераходны перыяд (1650 – 1550 г. да н.э.)</string>
-	<string name="poi_historic_period_third_intermediate_period">"Гістарычны перыяд: трэці пераходны перыяд (1069 – 664 г. да н.э.) "</string>
-	<string name="poi_historic_period_first_persian_period">Гістарычны перыяд: першы персідскі перыяд</string>
-	<string name="poi_historic_period_late_period">Гістарычны перыяд: позняе царства (664 – 332 г. да н.э.)</string>
-	<string name="poi_historic_period_second_persian_period">Гістарычны перыяд: другі персідскі перыяд</string>
-	<string name="poi_historic_period_alexander_the_great">Гістарычны перыяд: Аляксандр Вялікі</string>
-	<string name="poi_historic_period_ptolemaic_egypt">Гістарычны перыяд: эліністычны Егіпет(305 г. да н.э. – 30 г. да н.э.)</string>
-	<string name="poi_historic_period_christian_egypt">Гістарычны перыяд: хрысціянскі Егіпет</string>
-	<string name="poi_historic_period_byzantine_egypt">Гістарычны перыяд: візантыйскі Егіпет(30 г. да н.э. – 641 г. н.э.)</string>
-	<string name="poi_historic_period_persian_occupation">Гістарычны перыяд: персідская акупацыя</string>
-	<string name="poi_historic_period_greek_dark_ages">Гістарычны перыяд: цёмныя стагоддзі (Грэцыя) (1100 – 800 г. да н.э.)</string>
-	<string name="poi_historic_period_roman_greece">Гістарычны перыяд: Рымская Грэцыя (146 г. да н.э. – 330 г. н.э.)</string>
-	<string name="poi_historic_period_roman_kingdom">Гістарычны перыяд: Рымскае царства (753 – 509 г. да н.э.)</string>
-	<string name="poi_historic_period_dominate">Гістарычны перыяд: дамінантны</string>
-	<string name="poi_historic_period_villager">Гістарычны перыяд: земляробчы (перыяд I і II, 1580 г. да н.э. – 133 г. н.э.)</string>
-	<string name="poi_historic_period_urban">Гістарычны перыяд: гарадскі (перыяд III, 133 – 374 г. н.э.)</string>
-	<string name="poi_historic_period_classical">Гістарычны перыяд: класічны (перыяд IV, 374 – 900 г. н.э.)</string>
-	<string name="poi_historic_period_imperial">Гістарычны перыяд: імперскі (перыяд V, 900 – 1200 г. н.э.)</string>
+	<string name="poi_historic_period_nuragic">Гістарычны пэрыяд: нурагіцкі</string>
+	<string name="poi_historic_period_stone_bronze_undetermined">Гістарычны пэрыяд: каменны / бронзавыя вякі (не вызначана)</string>
+	<string name="poi_historic_period_bronze_age">Гістарычны пэрыяд: бронзавы век</string>
+	<string name="poi_historic_period_principate">Гістарычны пэрыяд: прынцыпат (27 г. да н.э. – 284 г. н.э.)</string>
+	<string name="poi_historic_period_classical_greece">Гістарычны пэрыяд: клясічная Грэцыя (5-й – 4-й у. да н.э.)</string>
+	<string name="poi_historic_period_archaic_greece">Гістарычны пэрыяд: архаічная Грэцыя</string>
+	<string name="poi_historic_period_iron_age">Гістарычны пэрыяд: жалезны век</string>
+	<string name="poi_historic_period_roman_republic">Гістарычны пэрыяд: Рымская рэспубліка (508 г. да н.э. – 27 г. да н.э.)</string>
+	<string name="poi_historic_period_hellenistic_greece">Гістарычны пэрыяд: эліністычная Грэцыя</string>
+	<string name="poi_historic_period_new_kingdom">Гістарычны пэрыяд: новае царства(1550 – 1069 г. да н.э.)</string>
+	<string name="poi_historic_period_middle_kingdom">Гістарычны пэрыяд: сярэдняе царства(2055 – 1650 г. да н.э.)</string>
+	<string name="poi_historic_period_predynastic_egypt">Гістарычны пэрыяд: дадынастычны Егіпет</string>
+	<string name="poi_historic_period_early_dynastic_period">Гістарычны пэрыяд: ранняе царства (3100 – 2686 г. да н.э.)</string>
+	<string name="poi_historic_period_old_kingdom">Гістарычны пэрыяд: старажытнае царства (2686 – 2181 г. да н.э.)</string>
+	<string name="poi_historic_period_first_intermediate_period">Гістарычны пэрыяд: першы пераходны пэрыяд (2181 – 2055 г. да н.э.)</string>
+	<string name="poi_historic_period_second_intermediate_period">Гістарычны пэрыяд: другі пераходны пэрыяд (1650 – 1550 г. да н.э.)</string>
+	<string name="poi_historic_period_third_intermediate_period">"Гістарычны пэрыяд: трэці пераходны пэрыяд (1069 – 664 г. да н.э.) "</string>
+	<string name="poi_historic_period_first_persian_period">Гістарычны пэрыяд: першы пэрсідзкі пэрыяд</string>
+	<string name="poi_historic_period_late_period">Гістарычны пэрыяд: позняе царства (664 – 332 г. да н.э.)</string>
+	<string name="poi_historic_period_second_persian_period">Гістарычны пэрыяд: другі пэрсідскі пэрыяд</string>
+	<string name="poi_historic_period_alexander_the_great">Гістарычны пэрыяд: Аляксандар Вялікі</string>
+	<string name="poi_historic_period_ptolemaic_egypt">Гістарычны пэрыяд: эліністычны Егіпет(305 г. да н.э. – 30 г. да н.э.)</string>
+	<string name="poi_historic_period_christian_egypt">Гістарычны пэрыяд: хрысьціянскі Егіпет</string>
+	<string name="poi_historic_period_byzantine_egypt">Гістарычны пэрыяд: бізантыйскі Егіпет(30 г. да н.э. – 641 г. н.э.)</string>
+	<string name="poi_historic_period_persian_occupation">Гістарычны пэрыяд: пэрсідская акупацыя</string>
+	<string name="poi_historic_period_greek_dark_ages">Гістарычны пэрыяд: цёмныя стагодзьдзі (Грэцыя) (1100 – 800 г. да н.э.)</string>
+	<string name="poi_historic_period_roman_greece">Гістарычны пэрыяд: Рымская Грэцыя (146 г. да н.э. – 330 г. н.э.)</string>
+	<string name="poi_historic_period_roman_kingdom">Гістарычны пэрыяд: Рымскае царства (753 – 509 г. да н.э.)</string>
+	<string name="poi_historic_period_dominate">Гістарычны пэрыяд: дамінантны</string>
+	<string name="poi_historic_period_villager">Гістарычны пэрыяд: земляробчы (пэрыяд I і II, 1580 г. да н.э. – 133 г. н.э.)</string>
+	<string name="poi_historic_period_urban">Гістарычны пэрыяд: гарадзкі (пэрыяд III, 133 – 374 г. н.э.)</string>
+	<string name="poi_historic_period_classical">Гістарычны пэрыяд: клясічны (пэрыяд IV, 374 – 900 г. н.э.)</string>
+	<string name="poi_historic_period_imperial">Гістарычны пэрыяд: імпэрскі (пэрыяд V, 900 – 1200 г. н.э.)</string>
 
 	<string name="poi_historic_era_paleolithic">Эра: палеаліт (2.6 млн. гадоў да н.э. – 10000 гадоў да н.э.)</string>
-	<string name="poi_historic_era_mesolithic">Эра: мезаліт</string>
-	<string name="poi_historic_era_neolithic">Эра: неаліт</string>
-	<string name="poi_historic_era_chalcolithic">Эра: халколит (медны век) (IV—III тысячагоддзі да н.э.)</string>
+	<string name="poi_historic_era_mesolithic">Эра: мэзаліт</string>
+	<string name="poi_historic_era_neolithic">Эра: нэаліт</string>
+	<string name="poi_historic_era_chalcolithic">Эра: халкаліт (медны век) (IV—III тысячагодзьдзі да н.э.)</string>
 
 	<string name="poi_historic_stone">Гістарычны камень</string>
 	<string name="poi_stone_type_conciliation_cross">Тып: прымірэнчы крыж</string>
 	<string name="poi_stone_type_coat_of_arms">Тып: герб</string>
 
 	<string name="poi_material_wood">Матэрыял: дрэва</string>
-	<string name="poi_material_metal">Матэрыял: метал</string>
+	<string name="poi_material_metal">Матэрыял: мэталь</string>
 	<string name="poi_material_reinforced_concrete">Матэрыял: жалезабетон</string>
 	<string name="poi_material_concrete">Матэрыял: бетон</string>
 	<string name="poi_material_steel">Матэрыял: сталь</string>
 	<string name="poi_material_stone">Матэрыял: камень</string>
 	<string name="poi_material_masonry">Матэрыял: каменны мур</string>
 	<string name="poi_material_brick">Матэрыял: цэгла</string>
-	<string name="poi_material_plastic">Матэрыял: пластык</string>
+	<string name="poi_material_plastic">Матэрыял: плястык</string>
 	<string name="poi_material_sandstone">Матэрыял: пяшчанік</string>
 	<string name="poi_material_granite_stone">Матэрыял: граніт</string>
-	<string name="poi_material_metal_wood">Матэрыял: метал, дрэва</string>
+	<string name="poi_material_metal_wood">Матэрыял: мэталь, дрэва</string>
 	<string name="poi_material_glass">Матэрыял: шкло</string>
 	<string name="poi_material_bronze">Матэрыял: бронза</string>
 	<string name="poi_material_earth">Матэрыял: зямля</string>
@@ -2344,16 +2344,16 @@
 	<string name="poi_material_marble">Матэрыял: мармур</string>
 	<string name="poi_material_aluminium">Матэрыял: алюміній</string>
 
-	<string name="poi_site_type_megalith">Тып: мегалит</string>
-	<string name="poi_site_type_tumulus">Тып: тумулус</string>
-	<string name="poi_site_type_fortification">Тып: умацаванне</string>
+	<string name="poi_site_type_megalith">Тып: мэгаліт</string>
+	<string name="poi_site_type_tumulus">Тып: тумулюс</string>
+	<string name="poi_site_type_fortification">Тып: умацаваньне</string>
 	<string name="poi_site_type_settlement">Тып: селішча</string>
 	<string name="poi_site_type_city">Тып: горад</string>
 	<string name="poi_site_type_hut_circle">Тып: круг з халуп</string>
-	<string name="poi_site_type_necropolis">Тып: некропаль</string>
-	<string name="poi_site_type_petroglyph">Тып: петрагліф</string>
-	<string name="poi_site_type_earthwork">Тып: земляное ўмацаванне</string>
-	<string name="poi_megalith_type_menhir">Тып мегалита: менгір</string>
+	<string name="poi_site_type_necropolis">Тып: нэкропаль</string>
+	<string name="poi_site_type_petroglyph">Тып: пэтрагліф</string>
+	<string name="poi_site_type_earthwork">Тып: земляное ўмацаваньне</string>
+	<string name="poi_megalith_type_menhir">Тып мэгаліта: мэнгір</string>
 	<string name="poi_megalith_type_dolmen">Тып мегалита: дольмен</string>
 	<string name="poi_megalith_type_nuraghe">Тып мегалита: нураги</string>
 	<string name="poi_megalith_type_stone_circle">Тып мегалита: каменны круг</string>
@@ -2369,8 +2369,8 @@
 	<string name="poi_historic_railway_station">Гістарычная чыгуначная станцыя</string>
 
 	<string name="poi_club_freemasonry">Масонскае Ложа</string>
-	<string name="poi_club_sailing">Клуб ветразнага спорту</string>
-	<string name="poi_club_scout">Клуб скаўтаў</string>
+	<string name="poi_club_sailing">Клюб ветразьнага спорту</string>
+	<string name="poi_club_scout">Клюб скаўтаў</string>
 
 	<string name="poi_historic_threshing_floor">Гістарычнае гумно</string>
 	<string name="poi_historic_gallows">Гістарычная шыбеніца</string>
@@ -2388,25 +2388,25 @@
 	<string name="poi_building_type_monastery">Тып будынка: манастыр</string>
 	<string name="poi_building_type_basilica">Тып будынка: базіліка</string>
 	<string name="poi_building_type_synagogue">Тып будынка: сінагога</string>
-	<string name="poi_building_type_shrine">Тып будынка: святыня</string>
+	<string name="poi_building_type_shrine">Тып будынка: сьвятыня</string>
 
 	<string name="poi_cross">Крыж</string>
-	<string name="poi_summit_cross">Крыж на вяршыні: ёсць</string>
+	<string name="poi_summit_cross">Крыж на вяршыні: ёсьць</string>
 
-	<string name="poi_prison_camp">Былы турэмны лагер</string>
-	<string name="poi_concentration_camp">Тып: канцэнтрацыйны лагер</string>
+	<string name="poi_prison_camp">Былы турэмны лягер</string>
+	<string name="poi_concentration_camp">Тып: канцэнтрацыйны лягер</string>
 	<string name="poi_pow_camp">Тып: для ваеннапалонных</string>
 	<string name="poi_labor_camp">Тып: выпраўленча-працоўны</string>
 	<string name="poi_concentration_camp_nazism">Тып: нацысцкі</string>
 	<string name="poi_concentration_camp_gulag">Тып: гулаг</string>
 
-	<string name="poi_temperature">Тэмпература</string>
-	<string name="poi_bathing_yes">Купанне: так</string>
-	<string name="poi_bathing_no">Купанне: не</string>
+	<string name="poi_temperature">Тэмпэратура</string>
+	<string name="poi_bathing_yes">Купаньне: так</string>
+	<string name="poi_bathing_no">Купаньне: не</string>
 
-	<string name="poi_boat_storage">Месца для захоўвання лодак</string>
+	<string name="poi_boat_storage">Месца для захоўваньня лодак</string>
 
-	<string name="poi_conveying_yes">Эскалатар/траволатор</string>
+	<string name="poi_conveying_yes">Эскалятар/травалятар</string>
 
 	<string name="poi_bridge_ref">Пазнака моста</string>
 	<string name="poi_tunnel_ref">Пазнака тунэля</string>
@@ -2416,14 +2416,14 @@
 	<string name="poi_cargo_passengers">Груз: пасажыры</string>
 	<string name="poi_cargo_vehicle">Груз: аўтамабілі</string>
 	<string name="poi_cargo_bicycle">Груз: ровары</string>
-	<string name="poi_cargo_container">Груз: кантэйнеры</string>
+	<string name="poi_cargo_container">Груз: кантэйнэры</string>
 	<string name="poi_cargo_hgv">Груз: грузавікі</string>
 
 	<string name="poi_fitness_station">Фітнэс-станцыя</string>
 
-	<string name="poi_hackerspace">Хакерспейс</string>
+	<string name="poi_hackerspace">Хакерспэйс</string>
 
-	<string name="poi_wiki_lang_af">Вікіпедыя на афрыкаанс</string>
+	<string name="poi_wiki_lang_af">Вікіпэдыя на афрыкаанс</string>
 	<string name="poi_wiki_lang_als">Вікіпедыя на алеманнском</string>
 	<string name="poi_wiki_lang_az">Вікіпедыя на азербайджанскім</string>
 	<string name="poi_wiki_lang_bn">Вікіпедыя на бенгальскім</string>
