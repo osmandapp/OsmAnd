@@ -1584,7 +1584,7 @@
 	<string name="poi_motorcycle_repair">Warsztat motocyklowy</string>
 	<string name="poi_honey">Sklep z miodem</string>
 
-	<string name="poi_denomination_wesleyan">Wesleyanism (Metodyzm)</string>
+	<string name="poi_denomination_wesleyan">Wesleyanizm (Metodyzm)</string>
 	<string name="poi_jersey_barrier">Bariera pomiędzy pasami (jersey)</string>
 	<string name="poi_content_silage">Zawartość: kiszonka</string>
 	<string name="poi_content_slurry">Zawartość: szlam</string>
@@ -1837,4 +1837,87 @@
 	<string name="poi_payment_meal_voucher_no">Kartki na mięso nieakceptowane</string>
 	<string name="poi_payment_paypal_yes">PayPal akceptowany</string>
 	<string name="poi_payment_paypal_no">PayPal nieakceptowany</string>
+	<string name="poi_payment_u_key_yes">U-Key akceptowany</string>
+	<string name="poi_payment_u_key_no">U-Key nieakceptowany</string>
+	<string name="poi_payment_token_yes">Płatność żetonami</string>
+	<string name="poi_payment_token_no">Brak płatności żetonami</string>
+	<string name="poi_payment_gift_card_yes">Karty podarunkowe akceptowane</string>
+	<string name="poi_payment_gift_card_no">Karty podarunkowe nieakceptowane</string>
+	<string name="poi_payment_golden_crown_yes">Karty Golden Crown akceptowane</string>
+	<string name="poi_payment_golden_crown_no">Karty Golden Crown nieakceptowane</string>
+	<string name="poi_payment_pro100_yes">Karty PRO100 akceptowane</string>
+	<string name="poi_payment_pro100_no">Karty PRO100 nieakceptowane</string>
+	<string name="poi_payment_union_card_yes">Karty Union Card akceptowane</string>
+	<string name="poi_payment_union_card_no">Karty Union Card nieakceptowane</string>
+	<string name="poi_payment_mtsmoney_yes">MTS-Money akceptowany</string>
+	<string name="poi_payment_mtsmoney_no">MTS-Money nieakceptowany</string>
+	<string name="poi_payment_yandexmoney_yes">Yandex.Money akceptowany</string>
+	<string name="poi_payment_yandexmoney_no">Yandex.Money nieakceptowany</string>
+	<string name="poi_description_payment">Opis płatności</string>
+
+	<string name="poi_events_venue">Dom uroczystości</string>
+
+	<string name="poi_diet_vegetarian_few">Dieta wegetariańska: kilka potraw</string>
+	<string name="poi_diet_gluten_free_only">Tylko dieta bezglutenowa</string>
+	<string name="poi_diet_gluten_free_yes">Dieta bezglutenowa</string>
+	<string name="poi_diet_gluten_free_no">Dieta bezglutenowa: nie</string>
+	<string name="poi_diet_kosher_only">Tylko koszerne potrawy</string>
+	<string name="poi_diet_kosher_yes">Koszerne potrawy</string>
+	<string name="poi_diet_kosher_no">Koszerne potrawy: nie</string>
+	<string name="poi_diet_halal_only">Tylko potrawy halal</string>
+	<string name="poi_diet_halal_yes">Potrawy halal</string>
+	<string name="poi_diet_halal_no">Potrawy halal: nie</string>
+	<string name="poi_diet_lactose_free_only">Tylko dieta bezlaktozowa</string>
+	<string name="poi_diet_lactose_free_yes">Dieta bezlaktozowa</string>
+	<string name="poi_diet_lactose_free_no">Dieta bezlaktozowa: nie</string>
+	<string name="poi_diet_pescetarian_yes">Potrawy bezmięsne z rybami</string>
+
+	<string name="poi_drive_in_yes">Obsługa bez wysiadania z auta: tak</string>
+	<string name="poi_drive_in_no">Obsługa bez wysiadania z auta: nie</string>
+	<string name="poi_drive_through_yes">Drive-through: tak</string>
+	<string name="poi_drive_through_no">Drive-through: nie</string>
+
+	<string name="poi_brewery_additional">Nazwa browaru</string>
+	<string name="poi_outdoor_seating_yes">Siedzenia na zewnątrz</string>
+	<string name="poi_outdoor_seating_no">Brak siedzeń na zewnątrz</string>
+	<string name="poi_outdoor_seating_terrace">Siedzenia na zewnątrz: taras</string>
+	<string name="poi_outdoor_seating_sidewalk">Siedzenia na zewnątrz: chodnik</string>
+	<string name="poi_outdoor_seating_pedestrian_zone">Siedzenia na zewnątrz: deptak</string>
+	<string name="poi_outdoor_seating_garden">Siedzenia na zewnątrz: ogród</string>
+	<string name="poi_outdoor_seating_patio">Siedzenia na zewnątrz: patio</string>
+
+	<string name="poi_cocktails_yes">Koktajle</string>
+
+	<string name="poi_second_hand_yes">Towary używane</string>
+	<string name="poi_second_hand_no">Brak towarów używanych</string>
+	<string name="poi_second_hand_only">Tylko towary używane</string>
+
+	<string name="poi_service_parts">Części</string>
+	<string name="poi_service_dealer">Diler samochodowy</string>
+	<string name="poi_service_repair">Naprawa</string>
+	<string name="poi_service_repair_no">Brak napraw</string>
+	<string name="poi_service_electrical">Naprawa aut elektrycznych</string>
+	<string name="poi_self_service_yes">Samoobsługa</string>
+	<string name="poi_self_service_no">Brak samoobsługi</string>
+	<string name="poi_automated_yes">Automatyczny</string>
+	<string name="poi_automated_no">Nie-automatyczny</string>
+	<string name="poi_full_service_yes">Pełna obsługa</string>
+	<string name="poi_brushless_yes">Bezszczotkowa</string>
+	<string name="poi_brushless_no">Bezszczotkowa: nie</string>
+	<string name="poi_car_wash_no">Myjnia samochodowa: nie</string>
+
+	<string name="poi_aeroway_fuel">Stacja benzynowa dla samolotów</string>
+	<string name="poi_public_bath">Łaźnia publiczna</string>
+
+	<string name="poi_indoor_yes">Wewnątrz</string>
+	<string name="poi_indoor_no">Na zewnątrz</string>
+	<string name="poi_toilets_yes">Toalety</string>
+	<string name="poi_toilets_no">Brak toalet</string>
+	<string name="poi_toilets_wheelchair_yes">Dostęp dla niepełnosprawnych: tak</string>
+	<string name="poi_toilets_wheelchair_no">Dostęp dla niepełnosprawnych: nie</string>
+	<string name="poi_toilets_access_customers">Toaleta: tylko dla klientów</string>
+	<string name="poi_toilets_access_permissive">Toaleta: chyba dostępna</string>
+	<string name="poi_toilets_access_community">Toaleta: tylko dla społeczności</string>
+	<string name="poi_toilets_access_public">Toaleta: publiczne</string>
+
 	</resources>
