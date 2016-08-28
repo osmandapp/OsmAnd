@@ -2169,7 +2169,7 @@ Vrnitev na običajni pogled je mogoče na dva načina. Ali odklopite prekrivni s
     <string name="share_geo">geo:</string>
     <string name="share_menu_location">Objavi trenutni položaj</string>
     <string name="shared_string_send">Pošlji</string>
-    <string name="application_dir_description">Izberite mapo za shranjevanje datotek zemljevidov.</string>
+    <string name="application_dir_description">Izberite mapo za shranjevanje datotek zemljevidov in drugih podatkov.</string>
     <string name="new_version">Nova različica</string>
     <string name="begin_with_osmand_menu_group">Prvi koraki z OsmAnd</string>
     <string name="features_menu_group">Zmožnosti</string>
@@ -2417,7 +2417,7 @@ Trenutno je na voljo {2} MB.</string>
     <string name="release_2_3">" • Uporabljajte OSM v živo. Pridobite si možnost urnih posodobitev zemljevidov. S podporo razvijalcem in skupnosti si pridobite dostop do trenutnih podatkov.\n\n • Z oznakami zemljevidov je mogoča enostavna izbira mest na zemljevidu.\n\n • Zemljevidi OSM so opremljeni s specifičnimi oznakami cest, dodani so tudi drugi podatki.\n\n • Uvedene so izboljšave uporabniške izkušnje pri pripravi poti potovanj.
 \n\n • Omogočene so različne posodobitve vsebinskega menija, kot je vsebinsko iskanje naslova.\n\n • Še in še in še ... "</string>
     <string name="osm_live_header">Prijava omogoča dostop do urnih posodobitev vseh zemljevidov sveta.
-Večji del prihodka se vrne skupnosti OSM in se izplačuje za vsako opravljeno dejavnost. Če sta vam OsmAnd in OSM všeč, je to dober način za začetek sodelovanja.</string>
+Del prihodka se vrne skupnosti OSM in se izplačuje za vsako opravljeno dejavnost. Če sta vam OsmAnd in OSM všeč, je to dober način za začetek sodelovanja.</string>
     
     <string name="rendering_value_thin_name">Tanko</string>
     <string name="rendering_value_medium_name">Srednje</string>
@@ -2556,15 +2556,15 @@ V kolikor naletite na težave s programom OsmAnd, prosimo, stopite v stik s skup
     <string name="replace_favorite_confirmation">Ali ste prepričani, da želite zamenjati priljubljeno točko %1$s?</string>
     <string name="shared_string_change">Spremeni</string>
     <string name="get_started">Kako začeti ...</string>
-    <string name="skip_map_downloading">Preskoči prejemanje zemljevida</string>
-    <string name="search_another_country">Poišči drugo državo</string>
+    <string name="skip_map_downloading">Preskoči prejemanje zemljevidov</string>
+    <string name="search_another_country">Izberi drugo državo</string>
     <string name="search_map">Iskanje zemljevidov …</string>
     <string name="location_not_found">Mesta ni mogoče najti</string>
     <string name="no_inet_connection">Ni internetne povezave</string>
-    <string name="no_inet_connection_desc_map">Zahtevano je prejemanje zemljevida</string>
+    <string name="no_inet_connection_desc_map">Zahtevano je prejemanje zemljevidov</string>
     <string name="search_location">Iskanje mesta …</string>
     <string name="storage_free_space">Razpoložljiv prostor</string>
-    <string name="storage_place_description">Program OsmAnd shranjuje podatke (zemljevide, sledi in drugo) v mapi %1$s.</string>
+    <string name="storage_place_description">Shranjevanje podatkov OsmAnd (zemljevidi, sledi in drugo): %1$s.</string>
     <string name="give_permission">Dodeli dovoljenje</string>
     <string name="allow_access_location">Dovoli dostop do mesta</string>
     <string name="first_usage_greeting">Pridobi mesta in razišči nove kraje brez internetne povezave</string>
@@ -2572,7 +2572,12 @@ V kolikor naletite na težave s programom OsmAnd, prosimo, stopite v stik s skup
     <string name="no_update_info">Ne pokaži posodobitev</string>
     <string name="update_all_maps_now">Ali želite posodobiti vse zemljevide?</string>
     <string name="clear_tile_data">Počisti vse sličice</string>
-    <string name="skip_map_downloading_desc">Nameščenega ni nobenega zemljevida za delo brez povezave. Izbrati je mogoče zemljevid iz seznama, ali pa ga prejeti preko menija %1$s.</string>
-    <string name="first_usage_wizard_desc">Za predlog prejema zemljevida trenutnega mesta, je treba določiti vaš položaj.</string>
+    <string name="skip_map_downloading_desc">Nameščenega ni nobenega zemljevida za delo brez povezave. Izbrati je mogoče zemljevid s seznama, ali pa ga prejeti preko menija %1$s.</string>
+    <string name="first_usage_wizard_desc">Naj program OsmAnd določi trenutno mesto in predlaga zemljevid za prejem.</string>
     <string name="no_update_info_desc">Ne preveri posodobitev in novih različic programa OsmAnd</string>
+    <string name="donation_to_osm">Doniraj skupinosti OpenStreetMap</string>
+    <string name="get_it">Pridobi</string>
+    <string name="get_for">Pridobi za %1$s</string>
+    <string name="get_for_month">Pridobi za %1$s na mesec</string>
+    <string name="si_mi_meters">Milje/Metri</string>
     </resources>
