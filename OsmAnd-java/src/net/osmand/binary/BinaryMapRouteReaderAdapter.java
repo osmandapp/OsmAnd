@@ -167,8 +167,11 @@ public class BinaryMapRouteReaderAdapter {
 						RouteTypeCondition cond = new RouteTypeCondition();
 						cond.floatValue = RouteDataObject.parseSpeed(c.substring(0, ch), 0);
 						cond.condition = c.substring(ch + 1).trim();
-						if (cond.condition.startsWith("(") && cond.condition.endsWith(")")) {
-							cond.condition = cond.condition.substring(1, cond.condition.length() - 1).trim();
+						if (cond.condition.startsWith("(")) {
+							cond.condition = cond.condition.substring(1, cond.condition.length()).trim();
+						}
+						if(cond.condition.endsWith(")")) {
+							cond.condition = cond.condition.substring(0, cond.condition.length() - 1).trim();
 						}
 						cond.hours = OpeningHoursParser.parseOpenedHours(cond.condition);
 						conditions.add(cond);

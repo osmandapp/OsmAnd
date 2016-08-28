@@ -965,12 +965,15 @@ public class OpeningHoursParser {
 
 	public static OpeningHoursParser.OpeningHoursRule parseRuleV2(String r) {
 		r = r.toLowerCase();
+		
 		final String[] daysStr = new String[]{"mo", "tu", "we", "th", "fr", "sa", "su"};
 		final String[] monthsStr = new String[]{"jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"};
 		final String[] holidayStr = new String[]{"ph", "sh", "easter"};
 		String sunrise = "07:00";
 		String sunset = "21:00";
 		String endOfDay = "24:00";
+		r = r.replace('(', ' '); // avoid "(mo-su 17:00-20:00"
+		r = r.replace(')', ' ');
 		String localRuleString = r.replaceAll("sunset", sunset).replaceAll("sunrise", sunrise)
 				.replaceAll("\\+", "-" + endOfDay);
 		BasicOpeningHourRule basic = new BasicOpeningHourRule();
