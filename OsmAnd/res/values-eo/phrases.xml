@@ -2835,7 +2835,7 @@
 	<string name="poi_toilets_disposal_flush">Necesej-speco: akvoŝpruca</string>
 	<string name="poi_toilets_disposal_pitlatrine">Necesej-speco: ter-truo (latrino)</string>
 	<string name="poi_toilets_disposal_chemical">Necesej-speco: ter-truo kun ĥemiaĵo</string>
-	<string name="poi_toilets_disposal_bucket">Necesej-speco: sitelo</string>
+	<string name="poi_toilets_disposal_bucket">Necesej-speco: ujo</string>
 
 	<string name="poi_provided_for_infant_yes">Por beboj (pli junaj ol 1 jaro): jes</string>
 	<string name="poi_provided_for_infant_no">Por beboj (pli junaj ol 1 jaro): ne</string>
@@ -3009,4 +3009,7 @@
 
 	<string name="poi_osmand_additional_atm_yes">Bankaŭtomato: jes</string>
 	<string name="poi_additional_atm_yes">Bankaŭtomato: jes</string>
+	<string name="poi_wiki_link">Vikipedio</string>
+
+<string name="poi_resource_slate_iron_ore_copper">Ardezo, fer-erco, kupro</string>
 	</resources>
