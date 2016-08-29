@@ -2492,7 +2492,7 @@ Wenn Sie OsmAnd und OSM lieben und unterstützen wollen, so ist dies die perfekt
     <string name="skip_map_downloading_desc">Sie haben keine Offline Karten installiert. Sie können jetzt eine Karte auswählen oder später Karten über “Menü - %1$s“ herunterladen.</string>
     <string name="search_another_country">Eine andere Region auswählen</string>
     <string name="search_map">Suche Karte…</string>
-    <string name="first_usage_wizard_desc">OsmAnd erlauben ihren Standort zu ermitteln um ihnen eine Karte dieser Region zum herunterladen vorzuschlagen.</string>
+    <string name="first_usage_wizard_desc">Lassen Sie OsmAnd Ihren Standort ermitteln, um Ihnen eine Karte dieser Region zum herunterladen vorzuschlagen.</string>
     <string name="location_not_found">Position nicht gefunden</string>
     <string name="no_inet_connection">Keine Internetverbindung</string>
     <string name="no_inet_connection_desc_map">Erforderlich, um Karten herunterzuladen.</string>
