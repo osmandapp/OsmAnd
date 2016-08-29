@@ -1939,7 +1939,7 @@ Diese Ansicht kann zurückgestellt werden indem Sie hier wieder deaktiviert oder
 	<string name="current_route">Aktuelle Route</string>
 	<string name="mark_to_delete">Zum Löschen markieren</string>
 	<string name="osmo_grop_name_length_alert">Der Gruppenname sollte mindestens 3 Zeichen lang sein!</string>
-	<string name="local_osm_changes_upload_all_confirm">%1$d Änderungen werden jetzt zu OSM hoch geladen. Sind Sie sicher?</string>
+	<string name="local_osm_changes_upload_all_confirm">%1$d Änderung(en) jetzt zu OSM hoch laden. Sind Sie sicher?</string>
 	<string name="confirmation_to_clear_history">Soll der Verlauf gelöscht werden?</string>
 	<string name="osmand_parking_hour">h</string>
 	<string name="osmand_parking_minute">min</string>
