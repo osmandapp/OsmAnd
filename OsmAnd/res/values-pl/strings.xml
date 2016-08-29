@@ -185,7 +185,7 @@
     <string name="amenity_type_historic">Historia</string>
     <string name="amenity_type_landuse">Obszar</string>
     <string name="amenity_type_leisure">Wypoczynek</string>
-    <string name="amenity_type_man_made">Przemysł</string>
+    <string name="amenity_type_man_made">Zagospodarowanie terenu</string>
     <string name="amenity_type_military">Wojsko</string>
     <string name="amenity_type_natural">Natura</string>
     <string name="amenity_type_office">Biura</string>
