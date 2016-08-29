@@ -640,7 +640,7 @@
 	<string name="poi_attraction_roller_coaster">Rutschebane</string>
 	<string name="poi_attraction_slide">Rutsjebane, legeplads</string>
 	<string name="poi_attraction_summer_toboggan">Sommer kælkning</string>
-	<string name="poi_attraction_swing_carousel">Gynge karrusel</string>
+	<string name="poi_attraction_swing_carousel">Gyngekarrusel</string>
 	<string name="poi_attraction_train">Tog (attraktion)</string>
 	<string name="poi_attraction_water_slide">Vandrutsjebane</string>
 
@@ -890,7 +890,7 @@
 	<string name="poi_pyrotechnics">Pyroteknik</string>
 	<string name="poi_weapons">Våbenbutik</string>
 
-	<string name="poi_furnace">Opvarmningsartikler</string>
+	<string name="poi_furnace">Varmeapparater</string>
 	<string name="poi_free_flying">Freeflying udstyr</string>
 	<string name="poi_kent_carriage_gap">Kent carriage gap</string>
 	<string name="poi_scuba_diving_shop">Scuba dykning udstyr</string>
@@ -1659,7 +1659,7 @@
 	<string name="poi_brushless_yes">Børsteløs</string>
 	<string name="poi_brushless_no">Børsteløs: nej</string>
 
-	<string name="poi_aeroway_fuel">Fly tankstation</string>
+	<string name="poi_aeroway_fuel">Flytankstation</string>
 	<string name="poi_public_bath">Offentligt bad</string>
 
 	<string name="poi_male_yes">Mand</string>
@@ -2443,7 +2443,7 @@
 	<string name="poi_cargo_container">Fragt: container</string>
 	<string name="poi_cargo_hgv">Fragt: modulvogntog</string>
 
-<string name="poi_fitness_station">Fitness station</string>
+<string name="poi_fitness_station">Fitnessstation</string>
 
 <string name="poi_hackerspace">Hacklab</string>
 
