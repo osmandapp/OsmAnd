@@ -1472,7 +1472,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="rendering_attr_hideHouseNumbers_name">أرقام المنازل</string>
     <string name="confirm_usage_speed_cameras">غير مسموح استخدام تحذيرات كاميرا السرعة بالقانون في العديد من البلدان (ألمانيا وفرنسا، وإيطاليا، وغيرها). أوسماند لا تتحمل أي مسؤولية إذا كنت تنتهك القانون. الرجاء انقر فوق \"نعم\" فقط إذا كنت مؤهلاً استخدام هذه الميزة.</string>
 	<string name="osm_changes_added_to_local_edits">تم إضافة تعديلات OSM إلى التغييرات المحلية</string>
-   	<string name="local_osm_changes_upload_all_confirm">"أنت ستقوم برفع تغييرات  %1$d  إلى OSM. هل أنت متأكد؟"</string>
+   	<string name="local_osm_changes_upload_all_confirm">ستقوم برفع %1$d تغيير إلى الموقع. هل أنت متأكد؟</string>
     <string name="delay_to_start_navigation_descr">تحديد وقت الانتظار للبقاء في شاشة تخطيط الطريق</string>
     <string name="delay_to_start_navigation">ابدأ الملاحة دوران بدوران بعد…</string>
     <string name="action_create">إنشاء إجراء</string>
