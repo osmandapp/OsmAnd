@@ -248,7 +248,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 
 				OpeningHoursParser.OpeningHours rs = OpeningHoursParser.parseOpenedHours(amenity.getOpeningHours());
 				if (rs != null) {
-					vl = rs.toLocalStringNoMonths();
+					vl = rs.toLocalString();
 					Calendar inst = Calendar.getInstance();
 					inst.setTimeInMillis(System.currentTimeMillis());
 					boolean opened = rs.isOpenedForTime(inst);
