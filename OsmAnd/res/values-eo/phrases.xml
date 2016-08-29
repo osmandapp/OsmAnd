@@ -2854,7 +2854,7 @@
 	<string name="poi_provided_for_man_yes">Por viroj: jes</string>
 	<string name="poi_provided_for_man_no">Por virinoj: ne</string>
 	<string name="poi_provided_for_boy_yes">Por knaboj: jes</string>
-	<string name="poi_provided_for_boy_no">Por knabinoj: ne</string>
+	<string name="poi_provided_for_boy_no">Por knaboj: ne</string>
 
 	<string name="poi_treat_inpatient_yes">Por tranoktataj pacientoj: jes</string>
 	<string name="poi_treat_inpatient_no">Por tranoktataj pacientoj: ne</string>
