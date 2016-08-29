@@ -421,4 +421,36 @@
 	<string name="poi_material_marble">Materiala: haitzurdina</string>
 	<string name="poi_material_aluminium">Materiala: aluminioa</string>
 
+	<string name="poi_ship_chandler">Ontziaren hornitzailea</string>
+	<string name="poi_power_generator">Elektrizitate-sorgailua</string>
+	<string name="poi_waste_disposal">Zaborrontzia</string>
+	<string name="poi_farmyard"/>
+	<string name="poi_pier">Kaia</string>
+	<string name="poi_surveillance">Zaintza</string>
+	<string name="poi_observatory">Behatokia</string>
+	<string name="poi_astronomical_observatory">Behatoki astronomikoa</string>
+	<string name="poi_monitoring_station">Monitorizazio estazioa</string>
+	<string name="poi_crane">Garabia</string>
+	<string name="poi_construction">Eraikuntza</string>
+	<string name="poi_salt_pond">Gatzaga</string>
+	<string name="poi_reservoir">Urtegia</string>
+	<string name="poi_silo">Silo</string>
+	<string name="poi_college">Institutua</string>
+	<string name="poi_kindergarten">Haurtzaindegia</string>
+	<string name="poi_school">Eskola</string>
+	<string name="poi_university">Unibertsitatea</string>
+
+	<string name="poi_courthouse">Epaitegia</string>
+	<string name="poi_prison">Kartzela</string>
+	<string name="poi_migration">Migrazioa</string>
+	<string name="poi_tax_inspection">Ogasun ikuskaritza</string>
+	<string name="poi_capital">Hiriburua</string>
+	<string name="poi_town">Herria</string>
+	<string name="poi_neighbourhood">Auzoa</string>
+	<string name="poi_place_allotments">Baratza komunitarioak</string>
+	<string name="poi_pharmacy">Farmazia</string>
+	<string name="poi_hospital">Ospitalea</string>
+	<string name="poi_nursing_home">Zahar etxea</string>
+	<string name="poi_veterinary">Albaitaria</string>
+	<string name="poi_blood_bank">Odol bankua</string>
 	</resources>
