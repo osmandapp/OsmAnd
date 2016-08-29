@@ -2569,6 +2569,95 @@
 	<string name="poi_crossing_on_demand_no">Otwierany na żądanie: nie</string>
 	<string name="poi_crossing_saltire_yes">Krzyż św. Andrzeja</string>
 	<string name="poi_crossing_saltire_no">Krzyż św. Andrzeja: brak</string>
-	<string name="poi_crossing_supervision_yes">Nadzór: dróżnik</string>
+	<string name="poi_crossing_supervision_yes">Nadzór: tak</string>
 	<string name="poi_crossing_supervision_no">Nadzór: brak</string>
+	<string name="poi_crossing_supervision_attendant">Nadzór: dróżnik</string>
+	<string name="poi_crossing_supervision_camera">Nadzór: kamera</string>
+
+	<string name="poi_dispensing_yes">Recepty: tak</string>
+	<string name="poi_dispensing_no">Recepty: nie</string>
+
+	<string name="poi_aerodrome_type_international">Międzynarodowe</string>
+	<string name="poi_aerodrome_type_regional">Regionalne</string>
+	<string name="poi_aerodrome_type_public">Publiczne</string>
+	<string name="poi_aerodrome_type_military">Wojskowe</string>
+	<string name="poi_aerodrome_type_military_public">Wojskowe/publiczne</string>
+	<string name="poi_aerodrome_type_private">Prywatne</string>
+
+	<string name="poi_valley_balka">Parów (dolina)</string>
+
+	<string name="poi_resource_slate_iron_ore_copper">Łupek, ruda żelaza, miedź</string>
+	<string name="poi_aquaculture_shrimp">Akwakultura: krewetki</string>
+	<string name="poi_aquaculture_fish">Akwakultura: ryby</string>
+	<string name="poi_aquaculture_mussels">Akwakultura: małże</string>
+
+	<string name="poi_min_age">Minimalny wiek</string>
+
+	<string name="poi_organic_yes">Ekologiczna żywność: dostępna</string>
+	<string name="poi_organic_no">Ekologiczna żywność: brak</string>
+	<string name="poi_organic_only">Tylko ekologiczna żywność</string>
+
+	<string name="poi_diaper_table_count">Stołów do przewijania pieluch</string>
+
+	<string name="poi_toilets_disposal_flush">Rodzaj toalety: spłukiwana wodą</string>
+	<string name="poi_toilets_disposal_pitlatrine">Rodzaj toalety: latryna</string>
+	<string name="poi_toilets_disposal_chemical">Rodzaj toalety: latryna z chemikaliami</string>
+	<string name="poi_toilets_disposal_bucket">Rodzaj toalety: zbiornik</string>
+
+	<string name="poi_fire_operator">Odpowiedzialna jednostka SP</string>
+
+	<string name="poi_payment_troika_yes">Karty Troika (Тройка) akceptowane</string>
+	<string name="poi_payment_troika_no">Karty Troika (Тройка) nieakceptowane</string>
+
+	<string name="poi_telescope_diameter">Średnica</string>
+	<string name="poi_telescope_spectrum">Spektrum</string>
+	<string name="poi_telescope_usage_education">Wykorzystanie: edukacyjne</string>
+	<string name="poi_telescope_usage_espionage">Wykorzystanie: szpiegowskie</string>
+	<string name="poi_telescope_usage_research">Wykorzystanie: badawcze</string>
+
+	<string name="poi_observatory_type_espionage">Typ: szpiegowskie</string>
+	<string name="poi_observatory_type_meteorological">Typ: meteorologiczne</string>
+	<string name="poi_observatory_type_gravitational">Typ: fal grawitacyjnych</string>
+
+	<string name="poi_display_yes">Wyświetlacz: tak</string>
+	<string name="poi_display_no">Wyświetlacz: brak</string>
+	<string name="poi_display_analog_yes">Wyświetlacz analogowy</string>
+	<string name="poi_display_digital_yes">Wyświetlacz cyfrowy</string>
+	<string name="poi_date_yes">Wyświetlanie daty: tak</string>
+	<string name="poi_date_no">Wyświetlanie daty: nie</string>
+
+	<string name="poi_support_pole">Przytwierdzony do: słupa</string>
+	<string name="poi_support_wall_mounted">Przytwierdzony do: muru</string>
+	<string name="poi_support_tree">Przytwierdzony do: drzewa</string>
+	<string name="poi_support_pedestal">Przytwierdzony do: piedestału</string>
+	<string name="poi_support_ground">Przytwierdzony do: ziemi</string>
+	<string name="poi_support_billboard">Przytwierdzony do: bilbordu</string>
+	<string name="poi_support_ceiling">Przytwierdzony do: sufitu</string>
+	<string name="poi_support_suspended">Przytwierdzony do: zawieszony</string>
+	<string name="poi_support_roof">Przytwierdzony do: dachu</string>
+	<string name="poi_support_tower">Przytwierdzony do: wieży</string>
+
+	<string name="poi_passenger_information_display_yes">Informacje dla pasażerów: tak</string>
+	<string name="poi_passenger_information_display_no">Informacje dla pasażerów: nie</string>
+
+	<string name="poi_voltage">Napięcie</string>
+	<string name="poi_generator_output_electricity">Moc wyjściowa</string>
+	<string name="poi_generator_output_electricity_yes">Wyjściowa energia: elektryczność</string>
+	<string name="poi_generator_output_hot_water">Moc wyjściowa gorącej wody</string>
+	<string name="poi_generator_output_hot_water_yes">Wyjściowa energia: gorąca woda</string>
+	<string name="poi_generator_output_steam_yes">Wyjściowa energia: para</string>
+	<string name="poi_generator_output_hot_air_yes">Wyjściowa energia: gorące powietrze</string>
+	<string name="poi_generator_output_cold_water_yes">Wyjściowa energia: zimna woda</string>
+	<string name="poi_generator_output_compressed_air_yes">Wyjściowa energia: sprzężone powietrze</string>
+	<string name="poi_generator_output_vacuum_yes">Wyjściowa energia: próżnia</string>
+	<string name="poi_generator_output_biogas_yes">Wyjściowa energia: biogaz</string>
+
+	<string name="poi_generator_output_compressed_air">Moc wyjściowa sprzężonego powietrza</string>
+	<string name="poi_generator_output_biogas">Moc wyjściowa biogazu</string>
+	<string name="poi_pump_type_beam_pump">Typ pompy: zasilana silnikiem parowym</string>
+	<string name="poi_pump_type_india_mk_2_3">Typ pompy: India Mk II lub III</string>
+	<string name="poi_pump_type_gravity">Typ pompy: grawitacyjna (z syfonem)</string>
+	<string name="poi_pump_style_modern">Styl pompy: nowoczesna</string>
+	<string name="poi_pump_style_historic">Styl pompy: zabytkowa</string>
+	<string name="poi_pump_status_ok">Stan pompy: działa</string>
 	</resources>
