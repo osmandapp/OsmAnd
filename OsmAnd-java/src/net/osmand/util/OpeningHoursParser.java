@@ -254,14 +254,14 @@ public class OpeningHoursParser {
 			return s.substring(0, s.length() - 2);
 		}
 
-		public String toLocalStringNoMonths() {
+		public String toLocalString() {
 			StringBuilder s = new StringBuilder();
 			if (rules.isEmpty()) {
 				return "";
 			}
 
 			for (OpeningHoursRule r : rules) {
-				s.append(r.toLocalRuleString()).append(";");
+				s.append(r.toLocalRuleString()).append("; ");
 			}
 
 			return s.substring(0, s.length() - 2);
