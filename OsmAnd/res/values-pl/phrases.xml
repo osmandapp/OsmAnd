@@ -2660,4 +2660,7 @@
 	<string name="poi_pump_style_modern">Styl pompy: nowoczesna</string>
 	<string name="poi_pump_style_historic">Styl pompy: zabytkowa</string>
 	<string name="poi_pump_status_ok">Stan pompy: działa</string>
+	<string name="poi_pump_status_broken">Stan pompy: zepsuta</string>
+	<string name="poi_pump_status_locked">Stan pompy: zablokowana</string>
+
 	</resources>
