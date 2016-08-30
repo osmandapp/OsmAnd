@@ -47,7 +47,7 @@
 	<string name="poi_palaeontological_site">Paleontologia ejo</string>
 
 	<string name="poi_alcohol">Alkohol-vendejo</string>
-	<string name="poi_cheese">Framaĝ-vendejo</string>
+	<string name="poi_cheese">Fromaĝ-vendejo</string>
 	<string name="poi_chocolate">Ĉokolad-vendejo</string>
 	<string name="poi_coffee">Kaf-vendejo</string>
 	<string name="poi_convenience">Butiko oportuna</string>
@@ -243,12 +243,12 @@
 	<string name="poi_library">Biblioteko</string>
 	<string name="poi_retail">Komercejo</string>
 
-	<string name="poi_atv">Ĉiuterenveurilo-vendejo</string>
+	<string name="poi_atv">Ĉiuterenveturilo-vendejo</string>
 	<string name="poi_cosmetics">Kosmetikaĵ-vendejo</string>
 	<string name="poi_sewing">Pasamentejo</string>
 	<string name="poi_watches">Horloĝ-vendejo</string>
 	<string name="poi_swimming_pool_shop">Naĝejilo vendejo</string>
-	<string name="poi_games">Ludil-vendejo</string>
+	<string name="poi_games">Lud-vendejo</string>
 	<string name="poi_model">Modelfar-vendejo</string>
 	<string name="poi_trophy">Pokaloj k premioj vendejo</string>
 	<string name="poi_video_games">Videolud-vendejo</string>
@@ -1229,7 +1229,7 @@
 	<string name="poi_enforcement_maxspeed">Kontrolo: rapido</string>
 	<string name="poi_enforcement_maxheight">Kontrolo: alto de veturilo</string>
 	<string name="poi_enforcement_mindistance">Kontrolo: minimuma distanco</string>
-	<string name="poi_enforcement_check">Kontrolo: norma kontrolo</string>
+	<string name="poi_enforcement_check">Kontrolo: ĝenerala kontrolo</string>
 	<string name="poi_enforcement_access">Kontrolo: aliro</string>
 	<string name="poi_enforcement_toll">Kontrolo: imposto</string>
 
@@ -1330,7 +1330,7 @@
 	<string name="poi_windfall">Faligita de vento</string>
 	<string name="poi_dead_wood">Malviva arbo</string>
 
-	<string name="poi_passing_place">Preterveturejoj</string>
+	<string name="poi_passing_place">Preterpasejo</string>
 	<string name="poi_level">Etaĝo</string>
 	<string name="poi_rtsa_scale">RTSA-skalo</string>
 
@@ -2245,7 +2245,7 @@
 	<string name="poi_historic_civilization_mycenaean">Civilizo: Mikena-kulturo</string>
 	<string name="poi_historic_civilization_dacian">Civilizo: Dakujo</string>
 	<string name="poi_historic_civilization_hernici">Civilizo: Ernici-kulturo</string>
-	<string name="poi_historic_civilization_greek_egyptian">Civilizo: Greka Egiptujo (332 a.K. – 30 p.K.)</string>
+	<string name="poi_historic_civilization_greek_egyptian">Civilizo: Greka Egiptujo (332 – 30 a.K.)</string>
 	<string name="poi_historic_civilization_roman_and_byzantine_egyptian">Civilizo: Romia kaj Bizanca Egiptujo</string>
 	<string name="poi_historic_civilization_helladic">Civilizo: Helada kulturo</string>
 	<string name="poi_historic_civilization_cycladic">Civilizo: Ciklada kulturo</string>
@@ -2436,7 +2436,7 @@
 	<string name="poi_wiki_lang_my">Vikipedio Birma</string>
 	<string name="poi_wiki_lang_yo">Vikipedio Joruba</string>
 	<string name="poi_wiki_lang_an">Vikipedio Aragona</string>
-	<string name="poi_wiki_lang_ne">Vikipedio Nepala</string>
+	<string name="poi_wiki_lang_ne">Vikipedio Nepalia</string>
 	<string name="poi_wiki_lang_gu">Vikipedio Guĝarata</string>
 	<string name="poi_wiki_lang_scn">Vikipedio Sicilia</string>
 	<string name="poi_wiki_lang_bar">Vikipedio Bavara</string>
@@ -2505,7 +2505,7 @@
 	<string name="poi_protection_object_water">Protekto de: akvo</string>
 
 	<string name="poi_nuclear_explosion_country">Eksplodo: lando</string>
-	<string name="poi_nuclear_explosion_site">Eksplodo:ejo</string>
+	<string name="poi_nuclear_explosion_site">Eksplodo: ejo</string>
 	<string name="poi_nuclear_explosion_type_underground_shaft">Eksploda speco: subtera, ŝakto</string>
 	<string name="poi_nuclear_explosion_type_underground_tunnel">Eksploda speco: subtera: tunelo</string>
 	<string name="poi_nuclear_explosion_type_atmospheric">Eksploda speco: atmosfera</string>
