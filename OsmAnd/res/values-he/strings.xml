@@ -516,7 +516,7 @@
 	<string name="shared_string_previous">הקודם</string>
 	<string name="unit_of_length_descr">שינוי יחידות האורך והמהירות</string>
 	<string name="unit_of_length">יחידת המידה</string>
-	<string name="si_mi_foots">מיילים/רגל</string>
+	<string name="si_mi_feet">מיילים/רגל</string>
 	<string name="si_mi_yard">מיילים/יארדים</string>
 	<string name="si_km_m">קילומטרים/מטרים</string>
 	<string name="yard">יארד</string>

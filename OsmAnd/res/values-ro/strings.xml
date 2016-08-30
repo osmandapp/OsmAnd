@@ -523,7 +523,7 @@
 	<string name="shared_string_previous">Precedentul</string>
 	<string name="unit_of_length_descr">Schimbă unitățile de măsură ale distanței și vitezei</string>
 	<string name="unit_of_length">Unități de măsură</string>
-	<string name="si_mi_foots">Mile/picioare</string>
+	<string name="si_mi_feet">Mile/picioare</string>
 	<string name="si_mi_yard">Mile/yarzi</string>
 	<string name="si_km_m">Kilometri/metri</string>
 	<string name="yard">yd</string>

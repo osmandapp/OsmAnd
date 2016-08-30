@@ -295,7 +295,7 @@ Jelenleg {2} MB érhető el.</string>
     <string name="shared_string_previous">Előző</string>
     <string name="unit_of_length_descr">Hosszúság mértékegységének megváltoztatása</string>
     <string name="unit_of_length">Hosszmértékegység</string>
-    <string name="si_mi_foots">Mérföld/láb</string>
+    <string name="si_mi_feet">Mérföld/láb</string>
     <string name="si_mi_yard">Mérföld/yard</string>
     <string name="si_km_m">Kilométer/méter</string>
     <string name="yard">yd</string>

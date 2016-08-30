@@ -937,7 +937,7 @@ Honek {1} MB behar ditu behin betiko.
   <string name="shared_string_previous">Aurrekoa</string>
   <string name="unit_of_length_descr">Aldatu luzera unitateak</string>
   <string name="unit_of_length">Luzera unitatea</string>
-  <string name="si_mi_foots">Miliak/oinak</string>
+  <string name="si_mi_feet">Miliak/oinak</string>
   <string name="si_mi_yard">Miliak/yardak</string>
   <string name="si_km_m">Kilometroak/metroak</string>
   <string name="yard">yd</string>

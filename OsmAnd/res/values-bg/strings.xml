@@ -685,7 +685,7 @@
     <string name="shared_string_previous">Предишен</string>
     <string name="unit_of_length_descr">Промяна на мерните единици за разстояние и скорост</string>
     <string name="unit_of_length">Мерни единици</string>
-    <string name="si_mi_foots">Мили/фута</string>
+    <string name="si_mi_feet">Мили/фута</string>
     <string name="si_mi_yard">Мили/ярда</string>
     <string name="si_km_m">Километри/метри</string>
     <string name="yard">ярда</string>

@@ -328,7 +328,7 @@
   <string name="shared_string_previous">Atpakaļ</string>
   <string name="unit_of_length_descr">Mainīt garuma mērvienības</string>
   <string name="unit_of_length">Garuma mērvienības</string>
-  <string name="si_mi_foots">Jūdzes/pēdas</string>
+  <string name="si_mi_feet">Jūdzes/pēdas</string>
   <string name="si_mi_yard">Jūdzes/jardi</string>
   <string name="si_km_m">Kilometri/metri</string>
   <string name="yard">Jards</string>

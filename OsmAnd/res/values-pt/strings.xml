@@ -773,7 +773,7 @@
   <string name="shared_string_previous">Anterior</string>
   <string name="unit_of_length_descr">Alterar unidades de medida de distância e velocidade</string>
   <string name="unit_of_length">Unidade de medida</string>
-  <string name="si_mi_foots">Milhas/Pés</string>
+  <string name="si_mi_feet">Milhas/Pés</string>
   <string name="si_mi_yard">Milhas/Jardas</string>
   <string name="si_km_m">Quilômetros/Metros</string>
   <string name="yard">yd</string>

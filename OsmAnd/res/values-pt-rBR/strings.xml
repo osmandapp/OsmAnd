@@ -1312,7 +1312,7 @@
 	
 	<string name="unit_of_length_descr">Alterar unidades de distância e velocidade</string>
 	<string name="unit_of_length">Unidade de medida</string>
-	<string name="si_mi_foots">Milhas/pés</string>
+	<string name="si_mi_feet">Milhas/pés</string>
 	<string name="si_mi_yard">Milhas/jardas</string>
 	<string name="si_km_m">Quilômetros/metros</string>
 	<string name="yard">yd</string>

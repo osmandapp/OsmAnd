@@ -1274,7 +1274,7 @@ Memòria in proportzione %4$s MB (lìmite de Android %5$s MB, Dalvik %6$s MB).</
     <string name="shared_string_previous">Pretzedente</string>
     <string name="unit_of_length_descr">Muda sas unidades de longària</string>
     <string name="unit_of_length">Unidade de longària</string>
-    <string name="si_mi_foots">Mìglios/pedes</string>
+    <string name="si_mi_feet">Mìglios/pedes</string>
     <string name="si_mi_yard">Mìglios/iardas</string>
     <string name="si_km_m">Chilòmetros/metros</string>
     <string name="yard">iarda</string>

@@ -218,7 +218,7 @@
 
     <string name="unit_of_length_descr">Spremeni enote za dolžino</string>
     <string name="unit_of_length">Enote dolžine</string>
-    <string name="si_mi_foots">Milje/Čevlji</string>
+    <string name="si_mi_feet">Milje/Čevlji</string>
     <string name="si_mi_yard">Milje/Jardi</string>
     <string name="si_km_m">Kilometri/Metri</string>
     <string name="yard">yd</string>

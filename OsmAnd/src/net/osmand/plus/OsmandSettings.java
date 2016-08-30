@@ -2885,7 +2885,7 @@ public class OsmandSettings {
 
 	public enum MetricsConstants {
 		KILOMETERS_AND_METERS(R.string.si_km_m, "km-m"),
-		MILES_AND_FOOTS(R.string.si_mi_foots, "mi-f"),
+		MILES_AND_FEET(R.string.si_mi_feet, "mi-f"),
 		MILES_AND_METERS(R.string.si_mi_meters, "mi-m"),
 		MILES_AND_YARDS(R.string.si_mi_yard, "mi-y"),
 		NAUTICAL_MILES(R.string.si_nm, "nm");
@@ -2932,7 +2932,7 @@ public class OsmandSettings {
 	public enum DrivingRegion {
 
 		EUROPE_ASIA(R.string.driving_region_europe_asia, MetricsConstants.KILOMETERS_AND_METERS, false, false),
-		US(R.string.driving_region_us, MetricsConstants.MILES_AND_FOOTS, false, true),
+		US(R.string.driving_region_us, MetricsConstants.MILES_AND_FEET, false, true),
 		CANADA(R.string.driving_region_canada, MetricsConstants.KILOMETERS_AND_METERS, false, true),
 		UK_AND_OTHERS(R.string.driving_region_uk, MetricsConstants.MILES_AND_METERS, true, false),
 		JAPAN(R.string.driving_region_japan, MetricsConstants.KILOMETERS_AND_METERS, true, false);

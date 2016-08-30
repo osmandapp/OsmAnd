@@ -389,7 +389,7 @@ Dabar laisvos vietos yra {2} MB.</string>
     <string name="shared_string_previous">Ankstesnis</string>
     <string name="unit_of_length_descr">Pakeisti ilgio matavimo vienetus</string>
     <string name="unit_of_length">Ilgio matavimo vienetai</string>
-    <string name="si_mi_foots">Mylios/pėdos</string>
+    <string name="si_mi_feet">Mylios/pėdos</string>
     <string name="si_mi_yard">Mylios/jardai</string>
     <string name="si_km_m">Kilometrai/metrai</string>
     <string name="yard">jd</string>

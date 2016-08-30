@@ -627,7 +627,7 @@
     <string name="recording_delete_confirm">Haluatko poistaa tämän nauhoituksen?</string>
     <string name="unit_of_length">Mittayksiköt</string>
 	<string name="unit_of_length_descr">Vaihda pituuden ja nopeuden yksiköitä</string>
-	<string name="si_mi_foots">Mailia/jalkaa</string>
+	<string name="si_mi_feet">Mailia/jalkaa</string>
 	<string name="si_mi_yard">Mailia/jaardia</string>
 	<string name="si_km_m">Kilometrejä/metrejä</string>
 	<string name="shared_string_previous">Edellinen</string>

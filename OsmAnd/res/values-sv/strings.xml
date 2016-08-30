@@ -476,7 +476,7 @@ För tillfället finns det {2} MB ledigt.</string>
     <string name="shared_string_previous">Föregående</string>
     <string name="unit_of_length_descr">Ändra enheter för avstånd</string>
     <string name="unit_of_length">Enhet för avstånd</string>
-    <string name="si_mi_foots">Eng. mil/fot</string>
+    <string name="si_mi_feet">Eng. mil/fot</string>
     <string name="si_mi_yard">Eng. mil/yard</string>
     <string name="si_km_m">Kilometer/meter</string>
     <string name="yard">yd</string>

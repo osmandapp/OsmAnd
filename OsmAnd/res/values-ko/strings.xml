@@ -318,7 +318,7 @@
 	
 	<string name="unit_of_length_descr">거리와 속도 단위를 변경합니다</string>
 	<string name="unit_of_length">측정 단위</string>
-	<string name="si_mi_foots">마일/피트</string>
+	<string name="si_mi_feet">마일/피트</string>
 	<string name="si_mi_yard">마일/야드</string>
 	<string name="si_km_m">킬로미터/미터</string>
 	<string name="yard">야드</string>

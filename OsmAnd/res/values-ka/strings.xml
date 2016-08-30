@@ -350,7 +350,7 @@
   <string name="shared_string_previous">წინა</string>
   <string name="unit_of_length_descr">სიგრძისა და სიჩქარის ერთეულები</string>
   <string name="unit_of_length">გაზომვის ერთეული</string>
-  <string name="si_mi_foots">მილი/ფუტი</string>
+  <string name="si_mi_feet">მილი/ფუტი</string>
   <string name="si_mi_yard">მილი/იარდი</string>
   <string name="si_km_m">კილომეტრი/მეტრი</string>
   <string name="yard">იარდი</string>

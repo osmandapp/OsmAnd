@@ -322,7 +322,7 @@ Er is nu {2} MB beschikbaar.</string>
   
   <string name="unit_of_length_descr">Kies eenheid van afstand</string>
   <string name="unit_of_length">Eenheid van afstand</string>
-  <string name="si_mi_foots">Mijlen/voeten</string>
+  <string name="si_mi_feet">Mijlen/voeten</string>
   <string name="si_mi_yard">Mijlen/yards</string>
   <string name="si_km_m">Kilometers/meters</string>
   <string name="yard">yd</string>

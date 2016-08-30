@@ -1908,7 +1908,7 @@ If you need help with OsmAnd application, please contact our support team: suppo
     <string name="incomplete_locale">incomplete</string>
     <string name="unit_of_length_descr">Change units of length</string>
     <string name="unit_of_length">Unit of length</string>
-    <string name="si_mi_foots">Miles/feet</string>
+    <string name="si_mi_feet">Miles/feet</string>
     <string name="si_mi_yard">Miles/yards</string>
     <string name="si_km_m">Kilometers/meters</string>
     <string name="yard">yd</string>

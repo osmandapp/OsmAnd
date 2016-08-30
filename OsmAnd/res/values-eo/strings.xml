@@ -1729,7 +1729,7 @@ Kaj la loko kaj tempo estas montrataj ĉe la OsmAnd stirpanelo, kaj ĉe la fenes
     <string name="preferred_locale_descr">Elektu lingvon de fasado (bonvolu restarti OsmAnd post ŝanĝo)</string>
     <string name="unit_of_length">Long-unuo</string>
     <string name="unit_of_length_descr">Ŝanĝu unuon de longo</string>
-    <string name="si_mi_foots">Mejloj/futoj</string>
+    <string name="si_mi_feet">Mejloj/futoj</string>
     <string name="si_mi_yard">Mejloj/jardoj</string>
     <string name="si_km_m">Kilometroj/metroj</string>
     <string name="yard">yd</string>

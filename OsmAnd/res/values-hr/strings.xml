@@ -541,7 +541,7 @@
 	<string name="send_location_way_choose_title">Dijelite lokaciju pomoću</string>
 	<string name="send_location_sms_pattern">Lokacija: %1$s\n%2$s</string>
 	<string name="unit_of_length">Mjerne jedinice</string>
-	<string name="si_mi_foots">Milje/stope</string>
+	<string name="si_mi_feet">Milje/stope</string>
 	<string name="si_mi_yard">Milje/jardi</string>
 	<string name="si_km_m">Kilometri/metri</string>
 	<string name="unit_of_length_descr">Promjenite jedinice duljine i brzine</string>

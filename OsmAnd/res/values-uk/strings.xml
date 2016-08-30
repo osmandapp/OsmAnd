@@ -364,7 +364,7 @@
   <string name="shared_string_previous">Попередній</string>
   <string name="unit_of_length_descr">Змінити одиниці вимірювання довжини</string>
   <string name="unit_of_length">Одиниці вимірювання довжини</string>
-  <string name="si_mi_foots">Милі/фути</string>
+  <string name="si_mi_feet">Милі/фути</string>
   <string name="si_mi_yard">Милі/ярди</string>
   <string name="si_km_m">Кілометри/метри</string>
   <string name="yard">ярд</string>

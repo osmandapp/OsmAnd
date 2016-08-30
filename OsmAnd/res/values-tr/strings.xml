@@ -855,7 +855,7 @@
 	<string name="overlay_transparency">Katman şeffaflığı</string>
 	<string name="internet_not_available">İşlem için gerekli genel ağ (internet) bağlantısı mevcut değil</string>
 	<string name="install_more">Daha fazla yükle…</string>
-	<string name="si_mi_foots">Mil/metre</string>
+	<string name="si_mi_feet">Mil/metre</string>
 	<string name="mile_per_hour">mph</string>
 	<string name="send_location_way_choose_title">Konumu paylaş</string>
 	<string name="send_location_sms_pattern">Konum: %1$s\n%2$s</string>

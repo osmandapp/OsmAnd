@@ -212,7 +212,7 @@
     <string name="shared_string_previous">Anterior</string>
     <string name="unit_of_length_descr">Cambia las unidades de longitud</string>
     <string name="unit_of_length">Unidad de longitud</string>
-    <string name="si_mi_foots">Millas/pies</string>
+    <string name="si_mi_feet">Millas/pies</string>
     <string name="si_mi_yard">Millas/yardas</string>
     <string name="si_km_m">Kilómetros/metros</string>
     <string name="yard">yarda</string>

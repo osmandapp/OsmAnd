@@ -1093,7 +1093,7 @@
 	<string name="shared_string_previous">Anterior</string>
 	<string name="unit_of_length_descr">Cambiar as unidades de distancia e de velocidade</string>
 	<string name="unit_of_length">Unidade de medida</string>
-	<string name="si_mi_foots">Millas/pés</string>
+	<string name="si_mi_feet">Millas/pés</string>
 	<string name="si_mi_yard">Millas/iardas</string>
 	<string name="si_km_m">Quilómetros/metros</string>
 	<string name="yard">yd</string>

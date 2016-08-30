@@ -905,7 +905,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	
 	<string name="unit_of_length_descr">Зьмяніць адзінкі адлегласьці</string>
 	<string name="unit_of_length">Адзінка вымярэньня адлегласьці</string>
-	<string name="si_mi_foots">Мілі/футы</string>
+	<string name="si_mi_feet">Мілі/футы</string>
 	<string name="si_mi_yard">Мілі/ярды</string>
 	<string name="si_km_m">Кілямэтры/мэтры</string>
 	<string name="yard">ярд</string>

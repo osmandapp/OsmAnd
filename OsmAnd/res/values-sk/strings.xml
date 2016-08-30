@@ -329,7 +329,7 @@ Dlaždicové mapy môžete získať priamo zo zdrojov na Internete, alebo ich m�
     <string name="preferred_locale">Jazyk zobrazenia</string>
     <string name="unit_of_length_descr">Zmeniť jednotky dĺžky</string>
     <string name="unit_of_length">Jednotka dĺžky</string>
-    <string name="si_mi_foots">Míle/stopy</string>
+    <string name="si_mi_feet">Míle/stopy</string>
     <string name="si_mi_yard">Míle/yardy</string>
     <string name="si_km_m">Kilometre/metre</string>
     <string name="yard">yd</string>

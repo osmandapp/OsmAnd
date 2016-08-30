@@ -227,7 +227,7 @@ Actuellement {2} Mo sont disponibles.</string>
     <string name="shared_string_previous">Précédent</string>
     <string name="unit_of_length_descr">Modifier les unités de mesure des distances</string>
     <string name="unit_of_length">Unités de distance</string>
-    <string name="si_mi_foots">Miles/pieds</string>
+    <string name="si_mi_feet">Miles/pieds</string>
     <string name="si_mi_yard">Miles/yards</string>
     <string name="si_km_m">Kilomètres/mètres</string>
     <string name="yard">yd</string>

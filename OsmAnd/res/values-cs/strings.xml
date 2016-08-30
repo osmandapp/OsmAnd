@@ -300,7 +300,7 @@ Nyní je k dispozici {2} MB.</string>
     <string name="shared_string_previous">Předchozí</string>
     <string name="unit_of_length_descr">Zvolte jednotku vzdálenosti</string>
     <string name="unit_of_length">Jednotka vzdálenosti</string>
-    <string name="si_mi_foots">Míle/stopy</string>
+    <string name="si_mi_feet">Míle/stopy</string>
     <string name="si_mi_yard">Míle/yardy</string>
     <string name="si_km_m">Kilometry/metry</string>
     <string name="yard">yd</string>

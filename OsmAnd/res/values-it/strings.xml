@@ -207,7 +207,7 @@ Ora, sono disponibili solo {2} MB.</string>
 
     <string name="unit_of_length_descr">Cambia le unità di misura di lunghezza</string>
     <string name="unit_of_length">Unità di misura di lunghezza</string>
-    <string name="si_mi_foots">Miglia/piede</string>
+    <string name="si_mi_feet">Miglia/piede</string>
     <string name="si_mi_yard">Miglia/iarde</string>
     <string name="si_km_m">Chilometri/metri</string>
     <string name="yard">iarda</string>

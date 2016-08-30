@@ -238,7 +238,7 @@
 	<string name="shared_string_previous">上一页</string>
 	<string name="unit_of_length_descr">变更单位的长度和速度</string>
 	<string name="unit_of_length">度量单位</string>
-	<string name="si_mi_foots">万里/英尺</string>
+	<string name="si_mi_feet">万里/英尺</string>
 	<string name="si_mi_yard">英里/码</string>
 	<string name="si_km_m">公里/米</string>
 	<string name="yard">码</string>

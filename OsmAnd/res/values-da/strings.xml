@@ -788,7 +788,7 @@ Liste over understøttede lande (dybest set hele verden!): Afghanistan, Albanien
 
     <string name="unit_of_length_descr">Vælg enhed for afstand</string>
     <string name="unit_of_length">Afstand</string>
-    <string name="si_mi_foots">Mil/fod</string>
+    <string name="si_mi_feet">Mil/fod</string>
     <string name="si_mi_yard">Mil/yards</string>
     <string name="si_km_m">Kilometer/meter</string>
     <string name="yard">yd</string>

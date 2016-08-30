@@ -89,7 +89,7 @@
 
      <string name="unit_of_length_descr">長さの単位を変更出来ます</string>
      <string name="unit_of_length">長さの単位</string>
-     <string name="si_mi_foots">マイル/フィート</string>
+     <string name="si_mi_feet">マイル/フィート</string>
      <string name="si_mi_yard">マイル/ヤード</string>
      <string name="si_km_m">キロメートル/メートル</string>
      <string name="yard">ヤード</string>

@@ -547,7 +547,7 @@ Aktuell sind {2} MB verfügbar.</string>
 	<string name="shared_string_previous">Zurück</string>
 	<string name="unit_of_length_descr">Längeneinheiten auswählen</string>
 	<string name="unit_of_length">Längeneinheiten</string>
-	<string name="si_mi_foots">Meilen/Fuß</string>
+	<string name="si_mi_feet">Meilen/Fuß</string>
 	<string name="si_mi_yard">Meilen/Yards</string>
 	<string name="si_km_m">Kilometer/Meter</string>
 	<string name="yard">yd</string>

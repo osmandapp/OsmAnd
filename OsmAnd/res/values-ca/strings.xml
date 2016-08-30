@@ -297,7 +297,7 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="shared_string_previous">Enrere</string>
     <string name="unit_of_length_descr">Canvia les unitats de longitud</string>
     <string name="unit_of_length">Unitat de longitud</string>
-    <string name="si_mi_foots">Milles/peus</string>
+    <string name="si_mi_feet">Milles/peus</string>
     <string name="si_mi_yard">Milles/iardes</string>
     <string name="si_km_m">Quilòmetres/metres</string>
     <string name="send_location_sms_pattern">Ubicació: %1$s\n%2$s</string>
