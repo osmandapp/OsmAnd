@@ -421,7 +421,7 @@
   <string name="continuous_rendering">Nepārtrauktā renderēšana</string>
   <string name="continuous_rendering_descr">Attēlot, nepārtraukti renderējot, viena attēla vietā</string>
   <string name="rendering_exception">Kļūda, renderējot izvēlēto apgabalu</string>
-  <string name="show_point_options">Lietot vietu …</string>
+  <string name="show_point_options">Mana vieta …</string>
   <string name="renderer_load_sucess">Renderētājs veiksmīgi ielādēts</string>
   <string name="renderer_load_exception">Sistēmas atteice: renderētājs netika ielādēts</string>
   <string name="renderers">Vektoru renderētājs</string>
@@ -534,7 +534,7 @@
   <string name="map_orientation_landscape">Ainava</string>
   <string name="map_screen_orientation">Ekrāna orientācija</string>
   <string name="map_screen_orientation_descr">Portrets, ainava vai iekārtas</string>
-  <string name="opening_hours_not_supported">Darba laika formāts nav domāts labošanai</string>
+  <string name="opening_hours_not_supported">Darba laika formāts nav paredzēts mainīšanai</string>
   <string name="add_new_rule">Pievienot jaunu noteikumu</string>
   <string name="transport_Routes">Maršruti</string>
   <string name="transport_Stop">Pietura</string>
@@ -872,7 +872,7 @@ Atrašanās koordinātes un laiks ir redzami gan pārskatā, gan zīmes veidā u
   <string name="avoid_toll_roads">Izvairīties no maksas ceļiem</string>
   
   <string name="map_widget_top_text">Ielas nosaukums</string>
-  <string name="map_widget_config">Ekrāna uzstādījumi</string>
+  <string name="map_widget_config">Konfigurācija</string>
   
   <string name="map_widget_back_to_loc">Kur es atrodos</string>
   <string name="map_widget_lock_screen">Noslēgt ekrānu</string>
@@ -900,7 +900,7 @@ Atrašanās koordinātes un laiks ir redzami gan pārskatā, gan zīmes veidā u
   <string name="bg_service_sleep_mode_on">Izslēgt\n aplikācijas darbību fonā</string>
 
 
-<string name="layer_map_appearance">Ekrāna uzstādījumi</string>
+<string name="layer_map_appearance">Ekrāna panelis</string>
 <string name="show_lanes">Joslas</string>
 <string name="avoid_unpaved">Izvairīties no grants ceļiem</string>
 <string name="avoid_ferries">Izvairīties no pārceltuvēm</string>
@@ -2476,22 +2476,22 @@ Aktivizējot spraudni, kartes stils tiek nomainīts uz \"Ziema un slēpes,\" att
     <string name="lang_be_BY">Baltkrievu (latīņu)</string>
     <string name="lang_hu_formal">Hungāru (formālā)</string>
     <string name="lang_kn">Kannada</string>
-    <string name="osm_live_payment_desc">Abonoments tiks apmaksāts automātiski katru mēnesi. Jūs variet atteikties no abonomenta Google Play jebkurā laikā.</string>
+    <string name="osm_live_payment_desc">Abonoments tiks apmaksāts automātiski katru mēnesi. Jūs varat atteikties no abonomenta Google Play jebkurā laikā.</string>
     <string name="donation_to_osm">Ziedojums OpenStreetMap kopienai</string>
     <string name="donation_to_osm_desc">Daļa no jūsu ziedojuma tiks OSM lietotājiem, kuri piedalās OpenStreetMaps kartes veidošanā. Abonomenta izmaksas paliek nemainīgas.</string>
     <string name="osm_live_subscription_desc">Abonoments iespējo ik stundu, dienu vai nedēļu jauninājumus un neierobežotas lejupielādes visām kartēm pasaulē.</string>
     <string name="get_it">Saņemt</string>
     <string name="get_for">Saņemt par %1$s</string>
     <string name="get_for_month">Saņemt par %1$s mēnesī</string>
-    <string name="osm_live_banner_desc">Saņemt neierobežotas karšu lejupielādes un jauninājumus vairāk kā reizi mēnesī: ik stundu, dienu vai nedēļu.</string>
-    <string name="osmand_plus_banner_desc">Pilnā OsmAnd versija ar neierobežotām karšu lejupielādēm un ikmēneša jauninājumiem.</string>
+    <string name="osm_live_banner_desc">Saņemt neierobežotas karšu lejupielādes un atjauninājumus biežāk nekā reizi mēnesī: reizi stundā, dienā vai nedēļā.</string>
+    <string name="osmand_plus_banner_desc">Pilnā OsmAnd versija ar bez neierobežotām karšu lejupielādēm un ikmēneša atjauninājumiem.</string>
     <string name="si_mi_meters">Jūdzes/metri</string>
-    <string name="skip_map_downloading">Izlaist karšu lejupielādi</string>
-    <string name="skip_map_downloading_desc">You nav instalētas nevienas bezsaistes kartes. Izvēlieties kartes no saraksta vai lejuielādējiet tās caur izvēlni - %1$s.</string>
+    <string name="skip_map_downloading">Izlaist lejupielādēt kartes</string>
+    <string name="skip_map_downloading_desc">Jums nav instalētas nevienas bezsaistes kartes. Izvēlieties kartes no saraksta vai lejuielādējiet tās caur izvēlni - %1$s.</string>
     <string name="search_another_country">Izvēlieties citu reģionu</string>
     <string name="search_map">Meklē karti…</string>
     <string name="first_usage_wizard_desc">Ļaut OsmAnd noteikt jūsu atrašanās vietu un dot karšu ieteikumus reģionam.</string>
-    <string name="location_not_found">Atrašanās vieta nav atrasta</string>
+    <string name="location_not_found">Atrašanās vieta nav zināma</string>
     <string name="no_inet_connection">Nav interneta savienojuma</string>
     <string name="no_inet_connection_desc_map">Nepieciešams lejupielādēt kartes.</string>
     <string name="search_location">Meklē atrašanās vietu…</string>
