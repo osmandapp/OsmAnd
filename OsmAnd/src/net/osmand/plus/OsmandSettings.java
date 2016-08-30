@@ -2887,8 +2887,8 @@ public class OsmandSettings {
 		KILOMETERS_AND_METERS(R.string.si_km_m, "km-m"),
 		MILES_AND_FOOTS(R.string.si_mi_foots, "mi-f"),
 		MILES_AND_METERS(R.string.si_mi_meters, "mi-m"),
-		NAUTICAL_MILES(R.string.si_nm, "nm"),
-		MILES_AND_YARDS(R.string.si_mi_yard, "mi-y");
+		MILES_AND_YARDS(R.string.si_mi_yard, "mi-y"),
+		NAUTICAL_MILES(R.string.si_nm, "nm");
 
 		private final int key;
 		private final String ttsString;
