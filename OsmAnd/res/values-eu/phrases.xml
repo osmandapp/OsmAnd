@@ -453,4 +453,27 @@
 	<string name="poi_nursing_home">Zahar etxea</string>
 	<string name="poi_veterinary">Albaitaria</string>
 	<string name="poi_blood_bank">Odol bankua</string>
+	<string name="poi_surface_unpaved">Gainazala: zolatu gabe</string>
+	<string name="poi_surface_paved">Gainazala: zolatua</string>
+	<string name="poi_surface_asphalt">Gainazala: asfaltoa</string>
+	<string name="poi_surface_concrete">Gainazala: hormigoia</string>
+	<string name="poi_surface_sett">Gainazala: galtzada-harrizko zoladura</string>
+	<string name="poi_surface_metal">Gainazala: metala</string>
+	<string name="poi_surface_wood">Gainazala: zura</string>
+	<string name="poi_surface_gravel">Gainazala: legarra</string>
+	<string name="poi_surface_fine_gravel">Gainazala: legar fina</string>
+	<string name="poi_surface_compacted">Gainazala: lur trinkotua</string>
+	<string name="poi_surface_sand">Gainazala: area</string>
+	<string name="poi_surface_grass">Gainazala: belarra</string>
+	<string name="poi_surface_ground">Gainazala: lurzorua</string>
+	<string name="poi_surface_dirt">Gainazala: lurra</string>
+	<string name="poi_surface_mud">Gainazala: lokatza</string>
+	<string name="poi_surface_ice">Gainazala: izotza</string>
+	<string name="poi_surface_salt">Gainazala: gatza</string>
+	<string name="poi_surface_snow">Gainazala: elurra</string>
+
+	<string name="poi_parking_surface">Mota: gainazala</string>
+	<string name="poi_military_danger_area">Zonalde arriskutsua</string>
+	<string name="poi_highway_crossing">Zebrabidea</string>
+
 	</resources>
