@@ -3054,8 +3054,8 @@
 	<string name="poi_support_roof">Support: tag</string>
 	<string name="poi_support_tower">Support: tårn</string>
 
-	<string name="poi_passenger_information_display_yes">Passager informationsskærm: ja</string>
-	<string name="poi_passenger_information_display_no">Passager informationsskærm: nej</string>
+	<string name="poi_passenger_information_display_yes">Informationsskærm for passagerer: ja</string>
+	<string name="poi_passenger_information_display_no">Informationsskærm for passagerer: nej</string>
 
 <string name="poi_aquaculture">Akvakultur</string>
 	<string name="poi_aquaculture_shrimp">Akvakultur: rejer</string>
