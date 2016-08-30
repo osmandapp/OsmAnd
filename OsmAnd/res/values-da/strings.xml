@@ -2486,9 +2486,9 @@ I øjeblikket er {2} MB til rådighed.</string>
     <string name="osm_live_subscription_settings">Indstillinger for abonnement</string>
     <string name="osm_live_ask_for_purchase">Køb først OSM Live-abonnement</string>
 
-    <string name="osm_live_header">Abonnementet giver timebaserede opdateringer til alle kort i hele verden. 
+    <string name="osm_live_header">"Abonnementet giver timebaserede opdateringer til alle kort i hele verden. 
 En del af indtægten går tilbage til OSM fællesskabet og udbetales for hvert OSM bidrag. 
-Hvis du kan lide OsmAnd og OSM og ønsker at støtte dem, er dette en god måde at gøre det på.</string>
+Hvis du  ønsker at støtte OsmAnd og OSM, er dette en god måde at gøre det på."</string>
     
     <string name="recalculate_route">Genberegn ruten</string>
     <string name="shared_string_topbar">Topbjælke</string>
