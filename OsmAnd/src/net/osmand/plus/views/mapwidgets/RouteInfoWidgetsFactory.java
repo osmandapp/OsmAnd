@@ -1086,7 +1086,7 @@ public class RouteInfoWidgetsFactory {
 						pixDensity, view.getApplication());
 
 				int cacheRulerDistPix = (int) (pixDensity * roundedDist);
-				cacheRulerText = OsmAndFormatter.getFormattedDistance((float) roundedDist, view.getApplication());
+				cacheRulerText = OsmAndFormatter.getFormattedDistance((float) roundedDist, view.getApplication(), false);
 				textShadow.setText(cacheRulerText);
 				text.setText(cacheRulerText);
 				ViewGroup.LayoutParams lp = layout.getLayoutParams();
