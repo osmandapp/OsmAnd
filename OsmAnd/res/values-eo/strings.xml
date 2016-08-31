@@ -1363,7 +1363,7 @@ Proporcia memoro %4$s MB (Limito de Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="route_kr">Veturu je dekstra koridoro</string>
     <string name="map_widget_battery">Pila nivelo</string>
     <string name="move_marker_bottom_sheet_title">Movi la mapon por ŝanĝi pozicion de marko</string>
-    <string name="lat_lon_pattern">Lat: %1$.6f Lon: %2$.6f</string>
+    <string name="lat_lon_pattern">Lat: %1$.5f Lon: %2$.5f</string>
     <string name="rendering_attr_noPolygons_name">Pluranguloj</string>
     <string name="rendering_attr_noPolygons_description">Igas ĉiujn landajn aĵojn sur mapo travideblajn</string>
     <string name="rendering_attr_appMode_name">Desegnata reĝimo</string>

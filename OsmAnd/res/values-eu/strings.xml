@@ -2029,7 +2029,7 @@ Orain, {2} MB daude eskuragarri.</string>
     <string name="map_widget_battery">Bateriaren maila</string>
     <string name="change_markers_position">Aldatu markatzailearen posizioa</string>
     <string name="move_marker_bottom_sheet_title">Mugitu mapa markatzailearen posizioa aldatzeko</string>
-    <string name="lat_lon_pattern">Lat: %1$.6f Lon: %2$.6f</string>
+    <string name="lat_lon_pattern">Lat: %1$.5f Lon: %2$.5f</string>
     <string name="follow_us">Jarraitu gaitzazu</string>
     <string name="access_direction_audio_feedback">Norabidearen soinu erantzuna</string>
     <string name="access_direction_audio_feedback_descr">Helburura norabidearen berri eman soinu bidez</string>

@@ -2562,7 +2562,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="access_direction_haptic_feedback">Тактыльная індыкацыя кірунку</string>
     <string name="access_direction_haptic_feedback_descr">Індыцыраваць вібрацыяй кірунак на мэтавы пункт</string>
     <string name="map_widget_battery">Зарад батарэі</string>
-    <string name="lat_lon_pattern">Шыр: %1$.6f Даў: %2$.6f</string>
+    <string name="lat_lon_pattern">Шыр: %1$.5f Даў: %2$.5f</string>
     <string name="lang_hu_formal">Вугорская (афіцыйная)</string>
     <string name="move_marker_bottom_sheet_title">Перасуньце мапу, каб зьмяніць становішча курсору</string>
     <string name="change_markers_position">Перамясьціць курсор</string>

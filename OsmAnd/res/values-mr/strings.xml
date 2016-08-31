@@ -511,7 +511,7 @@
     <string name="welmode_download_maps">नकाशे डाउनलोड करा</string>
 	<string name="current_route">सद्ध्याचा मार्ग</string>
     <string name="shared_string_do_not_use">वापरू नका</string>
-	<string name="lat_lon_pattern">अक्शांश: %1$.6f रेखांश: %2$.6f</string>
+	<string name="lat_lon_pattern">अक्शांश: %1$.5f रेखांश: %2$.5f</string>
     <string name="access_default_color">मुळ रंग</string>
     <string name="night">रात्र</string>
     <string name="select_month_and_country">महिना आणि देश निवडा</string>

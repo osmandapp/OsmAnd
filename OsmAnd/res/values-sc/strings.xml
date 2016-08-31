@@ -2482,7 +2482,7 @@ Como bi sunt {2} MB ebbia disponìbiles.</string>
     <string name="access_autoannounce_period_descr">Tempus mìnimu intre sos annùntzios</string>
     <string name="map_widget_battery">Livellu bateria</string>
     <string name="move_marker_bottom_sheet_title">Move sa mapa pro mudare sa positzione de su marcadore</string>
-    <string name="lat_lon_pattern">Lat: %1$.6f Lon: %2$.6f</string>
+    <string name="lat_lon_pattern">Lat: %1$.5f Lon: %2$.5f</string>
     <string name="access_direction_audio_feedback">Reatzione sonora de diretzione</string>
     <string name="access_direction_audio_feedback_descr">Indicat sa diretzione de destinatzione cun unu sonu</string>
     <string name="access_direction_haptic_feedback">Reatzione àptica de diretzione</string>

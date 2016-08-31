@@ -2334,7 +2334,7 @@ Si amas a OsmAnd, OSM y quieres apoyarlos, esta es una perfecta manera de hacerl
     <string name="access_direction_haptic_feedback">Retroalimentación háptica de la dirección</string>
     <string name="access_direction_haptic_feedback_descr">Indica la dirección del destino mediante vibración</string>
     <string name="move_marker_bottom_sheet_title">Mueve el mapa para cambiar la ubicación del marcador</string>
-    <string name="lat_lon_pattern">Lat: %1$.6f Lon: %2$.6f</string>
+    <string name="lat_lon_pattern">Lat: %1$.5f Lon: %2$.5f</string>
     <string name="map_widget_battery">Nivel de batería</string>
     <string name="lang_hu_formal">Húngaro (formal)</string>
     <string name="current_track">Traza actual</string>

@@ -1833,7 +1833,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
 <string name="reports_for">تقرير عن</string>
     <string name="world_maps">خرائط العالم</string>
     <string name="move_marker_bottom_sheet_title">حرك الخريطة لتغيير مكان العلامة</string>
-    <string name="lat_lon_pattern">خط العرض: %1$.6f خط الطول: %2$.6f</string>
+    <string name="lat_lon_pattern">خط العرض: %1$.5f خط الطول: %2$.5f</string>
     <string name="access_direction_audio_feedback_descr">اشر صوتيا عن اتجاه نقطة الوصول</string>
     <string name="access_direction_haptic_feedback_descr">اشر عن اتجاه نقطة الهدف بالاهتزاز</string>
     <string name="use_osm_live_routing_description">تمكين الملاحة لتغييرات OSM Live (تجريبي)</string>

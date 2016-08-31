@@ -2503,7 +2503,7 @@ Facebook：https://www.facebook.com/osmandapp
     <string name="access_direction_haptic_feedback">方向觸感反饋</string>
     <string name="access_direction_haptic_feedback_descr">由振動指示目標點方向</string>
     <string name="move_marker_bottom_sheet_title">移動地圖到要變更標記的位置</string>
-    <string name="lat_lon_pattern">緯度：%1$.6f 經度：%2$.6f</string>
+    <string name="lat_lon_pattern">緯度：%1$.5f 經度：%2$.5f</string>
     <string name="map_widget_battery">電池位準</string>
     <string name="lang_hu_formal">匈牙利（正式的）</string>
     <string name="change_markers_position">變更標記的位置</string>

@@ -2318,7 +2318,7 @@ OsmAnd Mapas y Navegación - encuentra ubicaciones en el mapa y calcula rutas si
     <string name="access_shared_string_navigate_up">Desplazarse arriba</string>
     <string name="access_sort">Ordenar</string>
     <string name="move_marker_bottom_sheet_title">Mover el mapa para cambiar la posición del marcador</string>
-    <string name="lat_lon_pattern">Lat: %1$.6f Lon: %2$.6f</string>
+    <string name="lat_lon_pattern">Lat: %1$.5f Lon: %2$.5f</string>
     <string name="follow_us">Síguenos</string>
     <string name="access_direction_audio_feedback">Realimentación por audio de la dirección</string>
     <string name="access_direction_audio_feedback_descr">Indica la dirección del punto objetivo mediante sonido</string>

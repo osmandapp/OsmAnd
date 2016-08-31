@@ -2519,7 +2519,7 @@ Se ami OsmAnd e OSM e vuoi sostenerli è un modo perfetto farlo.</string>
     <string name="access_autoannounce_period">Intervallo annuncio automatico</string>
     <string name="access_autoannounce_period_descr">Tempo minimo fra annunci</string>
     <string name="move_marker_bottom_sheet_title">Muovi la mappa per cambiare la posizione del marcatore</string>
-    <string name="lat_lon_pattern">Lat: %1$.6f Lon: %2$.6f</string>
+    <string name="lat_lon_pattern">Lat: %1$.5f Lon: %2$.5f</string>
     <string name="follow_us">Seguici</string>
     <string name="access_direction_audio_feedback">Feedback sonoro di direzione</string>
     <string name="access_direction_audio_feedback_descr">Indica la direzione di destinazione con il suono</string>

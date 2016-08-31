@@ -2025,7 +2025,7 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
     <string name="change_markers_position">تغییر محل علامتگذاری شده</string>
     <string name="current_track">مسیر فعلی</string>
     <string name="move_marker_bottom_sheet_title">حرکت به سمت موقعیت علامتگذاری شده</string>
-    <string name="lat_lon_pattern">طول: %1$.6f عرض: %2$.6f</string>
+    <string name="lat_lon_pattern">طول: %1$.5f عرض: %2$.5f</string>
     <string name="access_sort">مرتب سازی</string>
     <string name="number_of_gpx_files_selected_pattern">انتخاب فایل GPX %s</string>
     <string name="osm_live_email_desc">ما به اطلاعات شما برای ارائه خدمات نیازمندیم</string>

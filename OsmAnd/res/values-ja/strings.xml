@@ -2268,7 +2268,7 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="map_widget_battery">バッテリ ーレベル</string>
     <string name="change_markers_position">マーカーの位置を変更</string>
     <string name="move_marker_bottom_sheet_title">マップ画面のドラッグでマーカー位置を調整できます</string>
-    <string name="lat_lon_pattern">"緯度:%1$.6f  経度:%2$.6f"</string>
+    <string name="lat_lon_pattern">"緯度:%1$.5f  経度:%2$.5f"</string>
     <string name="access_direction_audio_feedback_descr">進行方向をビープ音で示して案内します</string>
     <string name="access_direction_haptic_feedback_descr">進行方向を振動で示して案内します</string>
     <string name="use_osm_live_routing_description">OSMライブ更新(ベータ版)でのナビゲーションを有効化</string>

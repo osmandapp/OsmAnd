@@ -2566,7 +2566,7 @@ Als je hulp nodig hebt met OsmAnd: neem contact op met ons support team: support
     <string name="access_direction_haptic_feedback">Richting aangeven met trilling</string>
     <string name="access_direction_haptic_feedback_descr">Geef de richting van de bestemming aan met trillingen</string>
     <string name="move_marker_bottom_sheet_title">Schuif de kaart om de marker-positie te wijzigen</string>
-    <string name="lat_lon_pattern">Lat: %1$.6f Lon: %2$.6f</string>
+    <string name="lat_lon_pattern">Lat: %1$.5f Lon: %2$.5f</string>
     <string name="map_widget_battery">Accuniveau</string>
     <string name="lang_hu_formal">Hongaars (formeel)</string>
     <string name="current_track">Huidig pad</string>

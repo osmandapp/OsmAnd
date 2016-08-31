@@ -2509,7 +2509,7 @@ Jelenleg csak {2} MB érhető el.</string>
     <string name="access_no_destination">Nincs beállítva cél</string>
     <string name="map_widget_battery">Akkumulátor töltöttség</string>
     <string name="move_marker_bottom_sheet_title">A jelölő helyének módosításához mozgasd a térképet</string>
-    <string name="lat_lon_pattern">Szél.: %1$.6f Hossz.: %2$.6f</string>
+    <string name="lat_lon_pattern">Szél.: %1$.5f Hossz.: %2$.5f</string>
     <string name="access_direction_audio_feedback">Irány hangjelzés</string>
     <string name="access_direction_audio_feedback_descr">Hanggal jelzi a célpont irányát</string>
     <string name="access_direction_haptic_feedback">Irány rezgő visszajelzés</string>

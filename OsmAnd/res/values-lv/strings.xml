@@ -2446,7 +2446,7 @@ un vēl...
 Aktivizējot spraudni, kartes stils tiek nomainīts uz \"Ziema un slēpes,\" attēlojot visus ainavas elementus ziemas apstākļiem atbilstošus. Deaktivizēt spraudni un atgriezties normālā kartes skatā var vai nu šeit vai mainot kartes stilu kartes uzstādījumos.
  "</string>
     <string name="move_marker_bottom_sheet_title">Pārvietojiet karti, lai mainītu marķiera pozīciju</string>
-    <string name="lat_lon_pattern">Plat: %1$.6f Gar: %2$.6f</string>
+    <string name="lat_lon_pattern">Plat: %1$.5f Gar: %2$.5f</string>
     <string name="follow_us">Sekojiet mums</string>
     <string name="access_direction_audio_feedback">Skaņas indikācija kustībai</string>
     <string name="access_direction_audio_feedback_descr">Kustība uz mērķa virzienu pēc skaņas</string>

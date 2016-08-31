@@ -2220,7 +2220,7 @@ Actuellement {2} Mo sont disponibles.</string>
     <string name="use_osm_live_routing_description">Activer la navigation OSM Live prenant en comptes les modifications en temps réel (Bêta)</string>
 	<string name="use_osm_live_routing">Navigation OSM Live</string>
     <string name="follow_us">Suivez nous</string>
-    <string name="lat_lon_pattern">Lat. : %1$.6f Lon. : %2$.6f</string>
+    <string name="lat_lon_pattern">Lat. : %1$.5f Lon. : %2$.5f</string>
     <string name="map_widget_battery">Niveau de batterie</string>
     <string name="lang_hu_formal">Hongrois (formel)</string>
     <string name="move_marker_bottom_sheet_title">Déplacez la carte pour modifier la position du marqueur</string>
