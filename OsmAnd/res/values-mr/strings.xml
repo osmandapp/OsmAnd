@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources><string name="left_side_navigation">डाव्या बाजूने ड्रायव्हिंग</string>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="left_side_navigation">डाव्या बाजूने ड्रायव्हिंग</string>
   <string name="unknown_location">अजून स्थान माहित नाही</string>
   <string name="modify_transparency">पारदर्शकता बदला (० - पारदर्शक, २५५ - अपारदर्शक)</string>
   <string name="confirm_interrupt_download">फाइल डाउनलोड थांबवायचे का?</string>
@@ -92,7 +93,9 @@
   <string name="user_password">तुमचा ओएसएम पासवर्ड</string>
   
   <string name="download_files_not_enough_space">%1$s एमबी डाउनलोड करण्यसाठी पुरेशी जागा शिल्लक नाही (शिल्लक जागा: %2$s).</string>
-  <string name="download_files_question_space">{0} फाइल डाउनलोड करायच्या का? {1} एमबी जागा लागेल. सध्या शिल्लक जागा {2} एमबी.</string>
+  <string name="download_files_question_space">{0} फाइल डाउनलोड करायच्या का?
+{1} एमबी जागा लागेल.
+सध्या शिल्लक जागा {2} एमबी.</string>
   
   
   <string name="pref_vector_map">वेक्टर नकाशाचे पर्याय</string>
@@ -237,7 +240,7 @@
   <string name="searching_address">पत्ता शोधत आहे…</string>
   <string name="search_offline_address">ऑफलाएन शोध</string>
   <string name="search_online_address">ऑनलाएन शोध</string>
-  <string name="route_general_information">एकुण अंतर %1$s,\nप्रवासाचा वेळ %2$d ता %3$d मि.</string>
+  <string name="route_general_information">एकुण अंतर %1$s, प्रवासाचा वेळ %2$d ता %3$d मि.</string>
   <string name="download_question">डाउनलोड {0} - {1} ?</string>
   <string name="address">पत्ता</string>
   <string name="shared_string_download_successful">डाउनलोड यशस्वी</string>
@@ -448,8 +451,8 @@
 	<string name="amenity_type_man_made">मानव निर्मित</string>
 	<string name="amenity_type_administrative">प्रशासकीय</string>
 	<string name="amenity_type_barrier">अडथळे</string>
-	<string name="unit_of_length_descr">लांबी आणि वेगाचे माप बदला</string>
-	<string name="unit_of_length">मोजमापाचे एकक</string>
+	<string name="unit_of_length_descr">लांबीचे माप बदला</string>
+	<string name="unit_of_length">लांबीचे एकक</string>
 	
 	
 	
@@ -524,4 +527,8 @@
     <string name="opening_at">उघडण्याची वेळ</string>
     <string name="closing_at">बंद होण्याची वेळ</string>
     <string name="error_calculating_route">मार्ग निवडण्यात अडथळा</string>
+    <string name="weekly">आठवड्याला</string>
+    <string name="last_map_change">शेवटचा नकाशा बदल: %s</string>
+    <string name="hourly">तासाला</string>
+    <string name="daily">दिवसाला</string>
     </resources>
