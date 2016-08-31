@@ -131,7 +131,7 @@ public class LocationConvert {
 			coordinate = -coordinate;
 		}
 
-		DecimalFormat df = new DecimalFormat("###.#####", new DecimalFormatSymbols(Locale.US)); //$NON-NLS-1$
+		DecimalFormat df = new DecimalFormat("##0.00000", new DecimalFormatSymbols(Locale.US)); //$NON-NLS-1$
 		if (outputType == FORMAT_MINUTES || outputType == FORMAT_SECONDS) {
 			int degrees = (int) Math.floor(coordinate);
 			sb.append(degrees);
