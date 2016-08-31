@@ -99,6 +99,13 @@ public class OsmAndFormatter {
 	}
 	
 	public static String getFormattedDistance(float meters, OsmandApplication ctx) {
+		return getFormattedDistance(meters, ctx, true);
+	}
+
+	public static String getFormattedDistance(float meters, OsmandApplication ctx, boolean forceTrailingZeros) {
+		String format1 = forceTrailingZeros ? "{0,number,0.0} " : "{0,number,0.#} ";
+		String format2 = forceTrailingZeros ? "{0,number,0.00} " : "{0,number,0.##} ";
+
 		OsmandSettings settings = ctx.getSettings();
 		MetricsConstants mc = settings.METRIC_SYSTEM.get();
 		int mainUnitStr;
@@ -117,17 +124,17 @@ public class OsmAndFormatter {
 		if (meters >= 100 * mainUnitInMeters) {
 			return (int) (meters / mainUnitInMeters + 0.5) + " " + ctx.getString(mainUnitStr); //$NON-NLS-1$
 		} else if (meters > 9.99f * mainUnitInMeters) {
-			return MessageFormat.format("{0,number,0.0} " + ctx.getString(mainUnitStr), ((float) meters) / mainUnitInMeters).replace('\n', ' '); //$NON-NLS-1$
+			return MessageFormat.format(format1 + ctx.getString(mainUnitStr), ((float) meters) / mainUnitInMeters).replace('\n', ' '); //$NON-NLS-1$
 		} else if (meters > 0.999f * mainUnitInMeters) {
-			return MessageFormat.format("{0,number,0.00} " + ctx.getString(mainUnitStr), ((float) meters) / mainUnitInMeters).replace('\n', ' '); //$NON-NLS-1$
+			return MessageFormat.format(format2 + ctx.getString(mainUnitStr), ((float) meters) / mainUnitInMeters).replace('\n', ' '); //$NON-NLS-1$
 		} else if (mc == MetricsConstants.MILES_AND_FEET && meters > 0.249f * mainUnitInMeters) {
-			return MessageFormat.format("{0,number,0.00} " + ctx.getString(mainUnitStr), ((float) meters) / mainUnitInMeters).replace('\n', ' '); //$NON-NLS-1$
+			return MessageFormat.format(format2 + ctx.getString(mainUnitStr), ((float) meters) / mainUnitInMeters).replace('\n', ' '); //$NON-NLS-1$
 		} else if (mc == MetricsConstants.MILES_AND_METERS && meters > 0.249f * mainUnitInMeters) {
-			return MessageFormat.format("{0,number,0.00} " + ctx.getString(mainUnitStr), ((float) meters) / mainUnitInMeters).replace('\n', ' '); //$NON-NLS-1$
+			return MessageFormat.format(format2 + ctx.getString(mainUnitStr), ((float) meters) / mainUnitInMeters).replace('\n', ' '); //$NON-NLS-1$
 		} else if (mc == MetricsConstants.MILES_AND_YARDS && meters > 0.249f * mainUnitInMeters) {
-			return MessageFormat.format("{0,number,0.00} " + ctx.getString(mainUnitStr), ((float) meters) / mainUnitInMeters).replace('\n', ' '); //$NON-NLS-1$
+			return MessageFormat.format(format2 + ctx.getString(mainUnitStr), ((float) meters) / mainUnitInMeters).replace('\n', ' '); //$NON-NLS-1$
 		} else if (mc == MetricsConstants.NAUTICAL_MILES && meters > 0.99f * mainUnitInMeters) {
-			return MessageFormat.format("{0,number,0.00} " + ctx.getString(mainUnitStr), ((float) meters) / mainUnitInMeters).replace('\n', ' '); //$NON-NLS-1$
+			return MessageFormat.format(format2 + ctx.getString(mainUnitStr), ((float) meters) / mainUnitInMeters).replace('\n', ' '); //$NON-NLS-1$
 		} else {
 			if (mc == MetricsConstants.KILOMETERS_AND_METERS || mc == MetricsConstants.MILES_AND_METERS) {
 				return ((int) (meters + 0.5)) + " " + ctx.getString(R.string.m); //$NON-NLS-1$
