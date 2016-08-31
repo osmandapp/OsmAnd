@@ -371,8 +371,8 @@
 	<string name="poi_park">Park</string>
 
 	<string name="poi_restaurant">Restauracja</string>
-	<string name="poi_bar">Bar</string>
-	<string name="poi_pub">Pub</string>
+	<string name="poi_bar">Drink-bar</string>
+	<string name="poi_pub">Knajpa</string>
 	<string name="poi_drinking_water">Woda pitna</string>
 	<string name="poi_barbecue">Grill</string>
 
