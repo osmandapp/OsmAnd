@@ -524,6 +524,34 @@
     "expectedResults": {
       "118669511": "TSLR:+TSLR,C"
     }
+  },
+  {
+    "testName": "29.1.Reichsstraße TR Steubenplatz",
+    "startPoint": {
+      "latitude": 45.641390502389285,
+      "longitude": 35.57718708356862
+    },
+    "endPoint": {
+      "latitude": 45.641863065524895,
+      "longitude": 35.57690276941304
+    },
+    "expectedResults": {
+      "4515869": "TL,C|C|+TR"
+    }
+  },
+  {
+    "testName": "29.2.Reichsstraße TL Steubenplatz",
+    "startPoint": {
+      "latitude": 45.641390502389285,
+      "longitude": 35.57718708356862
+    },
+    "endPoint": {
+      "latitude": 45.64190900895048,
+      "longitude": 35.57607396682744
+    },
+    "expectedResults": {
+      "4604862": "+TL|+TL,C|C"
+    }
   }
 
 ]
