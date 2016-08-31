@@ -80,7 +80,7 @@
 	<string name="poi_toys">Zabawki</string>
 	<string name="poi_trade">Stoisko handlowe</string>
 	<string name="poi_vacuum_cleaner">Odkurzacze</string>
-	<string name="poi_variety_store">Sklep \'wszystko po X zł\'</string>
+	<string name="poi_variety_store">Sklep z tandetą</string>
 	<string name="poi_video">Filmy</string>
 	<string name="poi_window_blind">Zasłony</string>
 	<string name="poi_department_store">Dom handlowy</string>
@@ -641,7 +641,7 @@
 	<string name="poi_shooting">Strzelectwo</string>
 	<string name="poi_lodging">Noclegi/Kwatery</string>
 	<string name="poi_alpine_hut">Chata alpejska</string>
-	<string name="poi_chalet">Szalet</string>
+	<string name="poi_chalet">Domek letniskowy</string>
 	<string name="poi_apartment">Apartament</string>
 	<string name="poi_piste_hike">Trasa piesza</string>
 	<string name="poi_piste_sleigh">Trasa saneczkarska</string>
@@ -2674,7 +2674,7 @@
 	<string name="poi_historic_civilization_ancient_egyptian">Cywilizacja: starożytny Egipt (do 332 p.n.e.)</string>
 	<string name="poi_historic_civilization_celtic">Cywilizacja: Celtowie</string>
 	<string name="poi_historic_civilization_western_roman">Cywilizacja: Cesarstwo zachodniorzymskie (285 – 476 n.e.)</string>
-	<string name="poi_historic_civilization_mycenaean">Cywilizacja: kultura kykeńska</string>
+	<string name="poi_historic_civilization_mycenaean">Cywilizacja: kultura mykeńska</string>
 	<string name="poi_historic_civilization_dacian">Cywilizacja: Dacja</string>
 	<string name="poi_historic_civilization_hernici">Cywilizacja: Hernici (plemię italskie)</string>
 	<string name="poi_historic_civilization_greek_egyptian">Cywilizacja: Egipt ptolemejski (332 – 30 p.n.e.)</string>
@@ -2712,7 +2712,7 @@
 	<string name="poi_historic_period_greek_dark_ages">Okres: wieki ciemne Grecji (1100 – 800 p.n.e.)</string>
 	<string name="poi_historic_period_roman_greece">Okres: Grecja w cesarstwie rzymskim (146 p.n.e. – 330 n.e.)</string>
 	<string name="poi_historic_period_roman_kingdom">Okres: królestwo rzymskie (753 – 509 p.n.e.)</string>
-	<string name="poi_historic_period_dominate">Okres: Dominat (285 – 476 p.n.e.)</string>
+	<string name="poi_historic_period_dominate">Okres: Dominat (285 – 476 n.e.)</string>
 	<string name="poi_historic_period_villager">Okres: wiejski (epoki I i II, 1580 p.n.e. – 133 n.e.)</string>
 	<string name="poi_historic_period_urban">Okres: miejski (epoka III, 133 – 374 n.e.)</string>
 	<string name="poi_historic_period_classical">Okres: klasyczny (epoka IV, 374 – 900 n.e.)</string>
