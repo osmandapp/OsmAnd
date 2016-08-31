@@ -60,7 +60,7 @@
 	<string name="osn_close_dialog_error">Asocedió una esceición: nun se zarró la nota</string>
 	<string name="osn_close_dialog_success">La nota zarróse con ésitu</string>
 	<string name="share_osm_edits_subject">Ediciones d\'OSM compartíes per OsmAnd</string>
-	<string name="map_downloaded_descr">Baxóse\'l mapa %1$s. Vuelvi al mapa pa entamar a usalu.</string>
+	<string name="map_downloaded_descr">Baxóse\'l mapa %1$s. Volvi al mapa pa entamar a usalu.</string>
 	<string name="favorite_category_name">Nome d\'estaya</string>
 	<string name="world_maps">Mapes mundiales</string>
 	<string name="regions">Rexones</string>
@@ -247,7 +247,7 @@
 	<string name="access_no_destination">Nun s\'afitó\'l destín</string>
 	<string name="access_smart_autoannounce_descr">Avisa namái al camudar la direición haza\'l puntu oxetivu</string>
 	<string name="access_autoannounce_period">Periodu d\'auto-anunciu</string>
-	<string name="access_autoannounce_period_descr">Intervalu de tiempu mínimu ente anuncios</string>
+	<string name="access_autoannounce_period_descr">Intervalu mínimu de tiempu ente anuncios</string>
 	<string name="access_default_color">Color por defeutu</string>
 	<string name="access_map_linked_to_location">El mapa ta enllazáu al allugamientu</string>
 	<string name="access_shared_string_not_installed">Nun s\'instaló</string>
@@ -491,7 +491,7 @@ Llo %2$s</string>
     <string name="av_video_quality_descr">Esbilla la calidá de salida de videu</string>
     <string name="av_audio_format_descr">Esbilla la calidá de salida d\'audiu</string>
     <string name="av_audio_bitrate_descr">Esbilla la tasa de bits d\'audiu</string>
-    <string name="access_from_map_description">El botón de menu llancia\'l cuadru de mandos, non el menú</string>
+    <string name="access_from_map_description">El botón de menú llancia\'l cuadru de mandos, non el menú</string>
     <string name="show_on_start_description">«Off» llancia direutamente la pantalla\'l mapa</string>
     <string name="default_speed_system_descr">Define la unidá de velocidá</string>
     <string name="osmand_parking_plugin_description">El complementu de posición d\'aparcaderu déxate memorizar u ta aparcáu\'l to coche y cuantu tiempu-y queda (si hai llende de tiempu).
@@ -709,4 +709,21 @@ Puntos</string>
     <string name="km_h">km/h</string>
     <string name="m">m</string>
     <string name="install_selected_build">¿Quies instalar OsmAnd - {0} of {1} {2} MB?</string>
+    <string name="shared_string_topbar">Barra cimera</string>
+    <string name="text_size_descr">Afita\'l tamañu\'l testu nel mapa.</string>
+    <string name="use_osm_live_routing_description">Habilita la navegación pa camudancies d\'OSM Live (Beta)</string>
+	<string name="access_disable_offroute_recalc_descr">Evita\'l recálculu automáticu de ruta al tar daqué lloñe del camín correutu</string>
+    <string name="access_disable_wrong_direction_recalc_descr">Evita\'l recálculu automáticu de ruta cuando teas diendo pela direición incorreuta</string>
+    <string name="osmo_tracker_id_descr">Primi pa ver la ID del rastrexador</string>
+    <string name="osmo_plugin_description">"Esti complementu apurre de mou parcial la funcionalidá del monitoréu d\'OpenStreetMap, mira https://osmo.mobi
+ 
+
+Pues rastrexar en tiempu real tolos preseos d\'un grupu participante. Tamién pues ver el puntu y les pistes xubíes al grupu que perteneces.
+ 
+
+El grupu que nun se desanició dempués de meses, adáutalu coles regles que crees nel sitiu web d\'OsMo.mobi
+ "</string>
+    <string name="simulate_your_location_stop_descr">Para de simular el to allugamientu</string>
+    <string name="simulate_your_location_descr">Simula usando una ruta calculada o un GPX grabáu</string>
+    <string name="disable_recording_once_app_killed_descrp">Posaráse\'l rexistru de GPX cuando s\'amortie l\'aplicación (per aplicaciones recientes). (La indicación de fondu d\'OsmAnd desapaecerá de la barra d\'avisos d\'Android).</string>
     </resources>
