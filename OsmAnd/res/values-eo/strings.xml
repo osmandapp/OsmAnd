@@ -1536,8 +1536,8 @@ Proporcia memoro %4$s MB (Limito de Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="pref_raster_map">Map-fontaj agordoj</string>
     <string name="pref_vector_map">Vektor-mapaj agordoj</string>
     <string name="delete_confirmation_msg">Ĉu forigi na %1$s?</string>
-    <string name="city_type_town">Urbeto</string>
-    <string name="city_type_city">Urbo</string>
+    <string name="city_type_town">Urbo</string>
+    <string name="city_type_city">Urbego</string>
 
     <string name="animate_route_off">Ĉesigi simuladon</string>
     <string name="animate_route">Eki simuladon</string>
