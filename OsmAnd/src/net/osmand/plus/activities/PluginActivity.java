@@ -1,5 +1,6 @@
 package net.osmand.plus.activities;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -13,7 +14,6 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
@@ -121,6 +121,7 @@ public class PluginActivity extends OsmandActionBarActivity {
 		return false;
 	}
 
+	@SuppressLint("NewApi")
 	private void updateState() {
 		CompoundButton enableDisableButton = (CompoundButton)findViewById(
 				R.id.plugin_enable_disable);
