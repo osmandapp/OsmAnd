@@ -476,4 +476,6 @@
 	<string name="poi_military_danger_area">Zonalde arriskutsua</string>
 	<string name="poi_highway_crossing">Zebrabidea</string>
 
+	<string name="poi_tableware">Ontziteria denda</string>
+	<string name="poi_traffic_calming_choker">Estutzea</string>
 	</resources>
