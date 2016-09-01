@@ -1107,7 +1107,7 @@ public class OpeningHoursParser {
 								} else if(pair[0].mainNumber == 2) {
 									basic.easter = true;
 								}
-							} else {
+							} else if(pair[0].mainNumber >= 0){
 								array[pair[0].mainNumber] = true;
 							}
 						}
