@@ -91,7 +91,7 @@
     <string name="map_widget_battery">Aku laetuse tase</string>
     <string name="change_markers_position">Muuda markeri asukohta</string>
     <string name="move_marker_bottom_sheet_title">Liiguta markeri asukoha muutmiseks kaarti</string>
-    <string name="lat_lon_pattern">Laius: %1$.5f pikkus: %2$.5f</string>
+    <!-- string name="lat_lon_pattern">Laius: %1$.5f pikkus: %2$.5f</string -->
     <string name="follow_us">Järgi meid</string>
     <string name="access_direction_audio_feedback">Suunamise tagasiside heliga</string>
     <string name="access_direction_audio_feedback_descr">Näita sihtpunkti suunda heliga</string>

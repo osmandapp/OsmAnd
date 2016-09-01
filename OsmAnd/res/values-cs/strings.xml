@@ -2177,7 +2177,7 @@ V současnosti je k dispozici {2} MB.</string>
     <string name="access_direction_haptic_feedback_descr">Indikovat směr k cílovému bodu vibrováním</string>
     <string name="use_osm_live_routing">OSM Live navigace</string>
     <string name="map_widget_battery">Stav baterie</string>
-    <string name="lat_lon_pattern">Šíř: %1$.5f Dél: %2$.5f</string>
+    <!-- string name="lat_lon_pattern">Šíř: %1$.5f Dél: %2$.5f</string -->
     <string name="access_direction_audio_feedback">Zvuková zpětná vazba směru</string>
     <string name="use_osm_live_routing_description">Povolit navigaci pro OSM Live změny (beta)</string>
 	<string name="change_markers_position">Změnit umístění značky</string>

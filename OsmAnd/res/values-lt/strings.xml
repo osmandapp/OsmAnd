@@ -2341,7 +2341,7 @@ Failams reikalinga {3} MB laikinam ir {1} MB pastoviam saugojimui.
     <string name="shared_string_reverse_order">Atvirkštine tvarka</string>
     <string name="switch_start_finish">Sukeisti vietomis pradžios tašką ir galutinį tikslą</string>
     <string name="routing_attr_avoid_borders_name">Vengti sienų kirtimo</string>
-    <string name="lat_lon_pattern">Platuma: %1$.5f Ilguma: %2$.5f</string>
+    <!-- string name="lat_lon_pattern">Platuma: %1$.5f Ilguma: %2$.5f</string -->
     <string name="follow_us">Sekite mus</string>
     <string name="use_osm_live_routing">OSM Live navigacija</string>
     <string name="access_no_destination">Tikslas nenustatytas</string>

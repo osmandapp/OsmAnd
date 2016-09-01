@@ -1609,7 +1609,7 @@
     <string name="night">Natt</string>
     <string name="map_widget_battery">Batterinivå</string>
     <string name="move_marker_bottom_sheet_title">Beveg kartet for å endre markørens posisjon</string>
-    <string name="lat_lon_pattern">Br: %1$.5f Le: %2$.5f</string>
+    <!-- string name="lat_lon_pattern">Br: %1$.5f Le: %2$.5f</string -->
     <string name="access_default_color">Standardfarge</string>
     <string name="access_category_choice">Velg kategori</string>
     <string name="access_hint_enter_name">Oppfør navn</string>

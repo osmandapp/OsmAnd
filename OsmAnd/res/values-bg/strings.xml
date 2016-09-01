@@ -2149,7 +2149,7 @@
     <string name="map_widget_battery">Ниво на батерията</string>
     <string name="change_markers_position">Промяна позицията на маркера</string>
     <string name="move_marker_bottom_sheet_title">Преместете картата за да смените позицията на маркера</string>
-    <string name="lat_lon_pattern">Шир.: %1$.5f Дълж.: %2$.5f</string>
+    <!-- string name="lat_lon_pattern">Шир.: %1$.5f Дълж.: %2$.5f</string -->
     <string name="follow_us">Следвайте ни</string>
     <string name="access_no_destination">Не е зададено местоназначение</string>
     <string name="map_widget_magnetic_bearing">Посока по магнитния компас</string>

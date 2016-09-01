@@ -2237,7 +2237,7 @@ Om du tycker om OsmAnd och OSM och vill stödja dem så är detta ett utmärkt s
     <string name="rec_split_clip_length">Klipplängd</string>
     <string name="file_name_containes_illegal_char">Filnamnet innehåller ogiltiga tecken</string>
 <string name="move_marker_bottom_sheet_title">Flytta på kartan för att ändra markörens plats</string>
-    <string name="lat_lon_pattern">Lat: %1$.5f Lon: %2$.5f</string>
+    <!-- string name="lat_lon_pattern">Lat: %1$.5f Lon: %2$.5f</string -->
     <string name="follow_us">Följ oss</string>
     <string name="current_track">Nuvarande spår</string>
     <string name="map_widget_battery">Batterinivå</string>

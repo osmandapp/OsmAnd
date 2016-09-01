@@ -2496,7 +2496,7 @@ V kolikor naletite na težave s programom OsmAnd, prosimo, stopite v stik s skup
     <string name="access_direction_haptic_feedback">Vibracijsko najavljanje smeri</string>
     <string name="access_direction_haptic_feedback_descr">Določi smer ciljne točke z vibriranjem naprave</string>
     <string name="move_marker_bottom_sheet_title">Premakni zemljevid za spremembo položaja oznake</string>
-    <string name="lat_lon_pattern">ZŠir: %1$.5f ZDol: %2$.5f</string>
+    <!-- string name="lat_lon_pattern">ZŠir: %1$.5f ZDol: %2$.5f</string -->
     <string name="map_widget_battery">Stanje baterije</string>
     <string name="lang_hu_formal">Madžarščina (uradna)</string>
     <string name="current_track">Trenutna sled</string>

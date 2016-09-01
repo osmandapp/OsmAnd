@@ -2340,7 +2340,7 @@ Ak potrebuje pomoc s aplikáciou OsmAnd, kontaktuje podporu: support@osmand.net.
     <string name="access_direction_haptic_feedback_descr">Indikovať smer k cieľu pomocou vibrácie</string>
     <string name="map_widget_battery">Úroveň batérie</string>
     <string name="move_marker_bottom_sheet_title">Posuňte mapu pre zmenu pozície značky</string>
-    <string name="lat_lon_pattern">Šírka: %1$.5f Dĺžka: %2$.5f</string>
+    <!-- string name="lat_lon_pattern">Šírka: %1$.5f Dĺžka: %2$.5f</string -->
     <string name="lang_hu_formal">Maďarsky (formálne)</string>
     <string name="current_track">Súčasná stopa</string>
     <string name="change_markers_position">Zmeniť polohu značky</string>

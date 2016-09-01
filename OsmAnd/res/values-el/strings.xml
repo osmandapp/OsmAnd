@@ -1707,7 +1707,7 @@
     <string name="app_mode_bus">Λεωφορείο</string>
  	<string name="app_mode_train">Τρένο</string>
     <string name="map_widget_battery">Στάθμη μπαταρίας</string>
-    <string name="lat_lon_pattern">Γ. Πλ:%1$.5f Γ. Μηκ: %2$.5f</string>
+    <!-- string name="lat_lon_pattern">Γ. Πλ:%1$.5f Γ. Μηκ: %2$.5f</string -->
     <string name="follow_us">Ακολούθησε μας</string>
     <string name="access_no_destination">Δεν έχει τεθεί προορισμός</string>
     <string name="map_widget_magnetic_bearing">Μαγνητική πυξίδα</string>

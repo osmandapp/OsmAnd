@@ -3,7 +3,7 @@
  	<string name="app_mode_train">Ćah</string>
     <string name="map_widget_battery">Staw baterije</string>
     <string name="move_marker_bottom_sheet_title">Pohibńće kartu, zo by so pozicija pokazowaka změniła</string>
-    <string name="lat_lon_pattern">šěr: %1$.5f doł: %2$.5f</string>
+    <!-- string name="lat_lon_pattern">šěr: %1$.5f doł: %2$.5f</string -->
     <string name="follow_us">Slědujće nas</string>
 	<string name="use_osm_live_routing">OSM live-nawigacija</string>
     <string name="access_no_destination">Žadyn cil wubrany njeje</string>

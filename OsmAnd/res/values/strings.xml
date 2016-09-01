@@ -77,7 +77,7 @@
     <string name="map_widget_battery">Battery level</string>
     <string name="change_markers_position">Change marker\'s position</string>
     <string name="move_marker_bottom_sheet_title">Move the map to change marker\'s position</string>
-    <string name="lat_lon_pattern">Lat: %1$.5f Lon: %2$.5f</string>
+    <!-- string name="lat_lon_pattern">Lat: %1$.5f Lon: %2$.5f</string -->
     <string name="follow_us">Follow us</string>
     <string name="access_direction_audio_feedback">Direction audio feedback</string>
     <string name="access_direction_audio_feedback_descr">Indicate target point direction by sound</string>

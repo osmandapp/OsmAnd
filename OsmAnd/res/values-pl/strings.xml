@@ -2528,7 +2528,7 @@ Jeśli potrzebujesz pomocy podczas używania OsmAnd, prosimy o kontakt z naszym 
     <string name="map_widget_battery">Poziom akumulatora</string>
     <string name="access_direction_audio_feedback_descr">Wskazuje kierunek do celu używając dźwięku</string>
     <string name="access_direction_audio_feedback">Dźwiękowe powiadomienia o kierunku</string>
-    <string name="lat_lon_pattern">Długość: %1$.5f Szerokość: %2$.5f</string>
+    <!-- string name="lat_lon_pattern">Długość: %1$.5f Szerokość: %2$.5f</string -->
     <string name="access_smart_autoannounce_descr">Informuje tylko jeśli zmieni się kierunek do punktu docelowego</string>
     <string name="access_smart_autoannounce">Inteligentne powiadamianie</string>
     <string name="access_autoannounce_period_descr">Określa minimalny odstęp czasu pomiędzy powiadomieniami</string>

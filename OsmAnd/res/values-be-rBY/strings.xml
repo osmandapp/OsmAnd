@@ -1842,7 +1842,7 @@ Zaraz jo {2} MB volnaha miesca.</string>
 	<string name="map_widget_battery">Zarad batareі</string>
     <string name="change_markers_position">Pieramiaścіć kursor</string>
     <string name="move_marker_bottom_sheet_title">Pierasuńcie mapu, kab źmianіć stanovіšča kursoru</string>
-    <string name="lat_lon_pattern">Šyr: %1$.5f Daŭ: %2$.5f</string>
+    <!-- string name="lat_lon_pattern">Šyr: %1$.5f Daŭ: %2$.5f</string -->
     <string name="follow_us">Sačycie za namі</string>
     <string name="access_direction_audio_feedback">Hukavaja іndykacyja kіrunku</string>
     <string name="access_direction_audio_feedback_descr">Іndycyravać hukam kіrunak na metavy punkt</string>

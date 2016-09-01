@@ -1287,7 +1287,7 @@
     <string name="osm_edit_deleted_poi">OSM POI წაშლილია</string>
     <string name="map_widget_battery">ელემენტის დონე</string>
     <string name="follow_us">გამოგვყევით</string>
-    <string name="lat_lon_pattern">გრძედი: %1$.5f განედი: %2$.5f</string>
+    <!-- string name="lat_lon_pattern">გრძედი: %1$.5f განედი: %2$.5f</string -->
     <string name="move_marker_bottom_sheet_title">მარკერის შესაცვლელად გაამოძრავეთ რუკა</string>
     <string name="access_direction_audio_feedback">მიმართულებების აუდიოკარნახი</string>
     <string name="use_osm_live_routing">OSM ცოცხალი ნავიგაცია</string>

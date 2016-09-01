@@ -2207,7 +2207,6 @@
     <string name="file_size_in_mb">%.1f MB</string>
 <string name="value_downloaded_of_max">%2$.1f MB 에서 %1$.1f</string>
     <string name="move_marker_bottom_sheet_title"/>
-    <string name="lat_lon_pattern"/>
     <string name="follow_us"/>
     <string name="access_direction_audio_feedback"/>
     <string name="access_direction_audio_feedback_descr"/>
