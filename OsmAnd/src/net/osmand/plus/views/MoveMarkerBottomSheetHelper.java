@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import net.osmand.data.RotatedTileBox;
+import net.osmand.data.PointDescription;
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -47,7 +48,8 @@ public class MoveMarkerBottomSheetHelper {
 		PointF point = mContextMenuLayer.getMovableCenterPoint(rt);
 		double lat = rt.getLatFromPixel(point.x, point.y);
 		double lon = rt.getLonFromPixel(point.x, point.y);
-		mDescription.setText(mContext.getString(R.string.lat_lon_pattern, lat, lon));
+		//mDescription.setText(mContext.getString(R.string.lat_lon_pattern, lat, lon));
+		mDescription.setText(PointDescription.getLocationName(mContext, lat, lon, true));
 	}
 	
 	public boolean isVisible() {
