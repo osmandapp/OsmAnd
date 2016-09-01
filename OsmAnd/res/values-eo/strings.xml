@@ -510,7 +510,7 @@ Vi povas spuri ĉiujn aparatojn de partoprenanta grupo realtempe. Ankaŭ vi pova
     <string name="mark_to_delete">Marki por forigi</string>
     <string name="osmo_grop_name_length_alert">Grupa nomo devas enhavi almenaŭ 3 signojn!</string>
     <string name="local_recordings_delete_all_confirm">Ĉu vi certe volas forigi %1$d notojn?</string>
-    <string name="local_osm_changes_upload_all_confirm">Ĉu vi certe volas alŝuti %1$d ŝanĝojn al OSM?</string>
+    <string name="local_osm_changes_upload_all_confirm">Ĉu vi certe volas alŝuti %1$d ŝanĝo(j)n al OSM?</string>
     <string name="confirmation_to_clear_history">Ĉu vi volas vakigi la historion?</string>
     <string name="delay_to_start_navigation">Eki navigadon turnon-post-turno post…</string>
     <string name="shared_string_go">Eki</string>
