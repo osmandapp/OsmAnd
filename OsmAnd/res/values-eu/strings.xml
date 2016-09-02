@@ -1424,7 +1424,7 @@ Honek {1} MB behar ditu behin betiko.
 	<string name="stop_navigation_service">Gelditu</string>
 	<string name="sleep_mode_stop_dialog">Gelditu GPSaren bigarren planoko modua?</string>
 	<string name="local_map_names">Izen lokalak</string>
-    <string name="lang_sw">Swahili</string>
+    <string name="lang_sw">Swahilia</string>
     <string name="lang_he">Hebreera</string>
     <string name="forward">Aurrera</string>
     <string name="home">Kontrol panela</string>
@@ -1556,7 +1556,7 @@ Honek {1} MB behar ditu behin betiko.
     <string name="voice_pref_title">Ahotsa</string>
     <string name="misc_pref_title">Denetarik</string>
     <string name="localization_pref_title">Kokapena</string>
-    <string name="lang_zh">Txinoa</string>
+    <string name="lang_zh">Txinera</string>
     <string name="lang_pt_br">Portugalera (Brasil)</string>
     <string name="lang_en">Ingelesa</string>
 	<string name="lang_af">Afrikarra</string>
@@ -1575,10 +1575,10 @@ Honek {1} MB behar ditu behin betiko.
 	<string name="lang_fi">Finlandiera</string>
 	<string name="lang_fr">Frantsesa</string>
 	<string name="lang_ka">Georgiera</string>
-	<string name="lang_de">Aleman</string>
-	<string name="lang_el">Greko</string>
+	<string name="lang_de">Alemanera</string>
+	<string name="lang_el">Greziera</string>
 	<string name="lang_iw">Hebreera</string>
-	<string name="lang_hi">Hindi</string>
+	<string name="lang_hi">Hindia</string>
 	<string name="lang_hu">Hungariera</string>
 	<string name="lang_id">Indonesiera</string>
 	<string name="lang_it">Italiera</string>
