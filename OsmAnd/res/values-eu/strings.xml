@@ -1954,8 +1954,16 @@ Honek {1} MB behar ditu behin betiko.
     <string name="routing_attr_avoid_borders_name">Saihestu herrialde-mugak gurutzatzea</string>
     <string name="routing_attr_avoid_borders_description">Saihestu beste herrialdera muga gurutzatzea</string>
     <string name="access_shared_string_navigate_up">Nabigatu gorantz</string>
-    <string name="osmo_group_information_desc">" - Taldea sortzean eman izen bat eta bete deskripzioa\n - Aplikaziotik mota sinplekoak sortzen dira, irakurri gehiago webgunean https://osmo.mobi/g/new
-\n - Webgune baten bidez taldea kudeatu dezakezu, lorratzak eta bide-puntuak guztientzat erabilgarri eginez\n - Ez ditugu erabiltzaile bakarreko taldeak ontzat ematen, ez bada PIO taldea\n - Talde pribatuak 8 pertsonetara daude mugatuta\n - Termino eta baldintzen xehetasunak OsMo.mobi webgunean daude\n - Baldintza bereziak behar badituzu - jarri kontaktuan: osmo.mobi@gmail.com "</string>
+    <string name="osmo_group_information_desc">"
+ - Taldea sortzean eman izen bat eta bete deskripzioa
+ - Aplikaziotik mota sinplekoak sortzen dira, irakurri gehiago webgunean https://osmo.mobi/g/new
+
+ - Webgune baten bidez taldea kudeatu dezakezu, lorratzak eta bide-puntuak guztientzat erabilgarri eginez
+ - Ez ditugu erabiltzaile bakarreko taldeak ontzat ematen, ez bada POI taldea
+ - Talde pribatuak 8 pertsonetara daude mugatuta
+ - Termino eta baldintzen xehetasunak OsMo.mobi webgunean daude
+ - Baldintza bereziak behar badituzu - jarri kontaktuan: osmo.mobi@gmail.com
+ "</string>
     <string name="osmo_no_connection_msg">Ezin da OsMo zerbitzariarekin konektatu:\n- egiaztatu internet konexioa;\n- egiaztatu ezarpenak;\n- begiratu gure Twitter kontua: https://twitter.com/OsMomobi</string>
     <string name="anonymous_user_hint">Erabiltzaile anonimo batek ezin du:
 - talde bat sortu;
@@ -2025,7 +2033,7 @@ Orain, {2} MB daude eskuragarri.</string>
     <string name="coords_format_descr">Koordenatu geografikoen formatua</string>
   	<string name="app_mode_bus">Autobus</string>
  	<string name="app_mode_train">Trena</string>
-    <string name="current_track">Uneko arrastroa</string>
+    <string name="current_track">Uneko arrastoa</string>
     <string name="map_widget_battery">Bateriaren maila</string>
     <string name="change_markers_position">Aldatu markatzailearen posizioa</string>
     <string name="move_marker_bottom_sheet_title">Mugitu mapa markatzailearen posizioa aldatzeko</string>
