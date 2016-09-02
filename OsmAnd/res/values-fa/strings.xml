@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources><string name="local_osm_changes_backup_failed">پشتیبان‌گیری از تغییرات OsmAnd ناموفق بود</string>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="local_osm_changes_backup_failed">پشتیبان‌گیری از تغییرات OsmAnd ناموفق بود</string>
     <string name="plugin_distance_point_time">زمان</string>
     <string name="plugin_distance_point_hdop">دقت</string>
     <string name="plugin_distance_point_speed">سرعت</string>
@@ -866,7 +867,7 @@
     
     <string name="download_hillshade_maps">تپه سایه</string>
     
-    <string name="osmand_srtm_long_description_1000_chars">"این افزونه، منحنی‌های هم‌تراز را که در نقشه‌&#157;های آفلاین OsmAnd نمایش داده میشوند فراهم میکند. داده‌های جهانی (بین 70 درجه شمالی و 70 درجه جنوبی) در این زمینه براساس اندازه گیری‌های SRTM (مأموریت توپوگرافی رادار شاتل) و ASTER (رادیومتر انعکاسی و پرتویی حرارتی هوایی پیشرفته)، یک ابزار تصویربرداری پردازنده ترا و ماهواره فوق پیشرفته سیستم نظارتی زمین ناسا مییباشند. ASTER محصول تلاش مشترک میان ناسا، وزارت اقتصاد ژاپن، صنعت و تجارت (متی)، و سیستم های فضایی ژاپن (جی-اسپیس سیستم) است. "</string>
+    <string name="osmand_srtm_long_description_1000_chars">"این افزونه، منحنی‌های هم‌تراز را که در نقشه‌های آفلاین OsmAnd نمایش داده میشوند فراهم میکند. داده‌های جهانی (بین 70 درجه شمالی و 70 درجه جنوبی) در این زمینه براساس اندازه گیری‌های SRTM (مأموریت توپوگرافی رادار شاتل) و ASTER (رادیومتر انعکاسی و پرتویی حرارتی هوایی پیشرفته)، یک ابزار تصویربرداری پردازنده ترا و ماهواره فوق پیشرفته سیستم نظارتی زمین ناسا مییباشند. ASTER محصول تلاش مشترک میان ناسا، وزارت اقتصاد ژاپن، صنعت و تجارت (متی)، و سیستم های فضایی ژاپن (جی-اسپیس سیستم) است. "</string>
     <string name="srtm_plugin_description">"این افزونه هم یک لایه خطوط هم‌تراز و هم یک لایه تپه سایه بر روی نقشه‌های استاندارد OsmAnd اضافه میکند. این قابلیت بسیار به درد قهرمانان، کوهنوردان، جهانگردان و هرکسی که به ساختار زمین علاقمند است می‌خورد.\nداده‌های جهانی (بین ۷۰ درجه شمالی و ۷۰ درجه جنوبی) توسط اندازه‌گیریهای SRTM (مأموریت رادار توپوگرافی شاتل) و ASTER (تابش حرارتی فضاپایه پیشرفته و رادیومتری انعکاسی)، ایزار تصویربرداری Terra، ماهواره پرچمدار سیستم نظاره‌گر زمین ناسا انجام شده است. ASTER یک پروژه همکاری مشترک بین ناسا، وزارت اقتصاد ژاپن، وزارت صنعت و بازرگانی و سیستمهای فضایی ژاپن (J-spacesystems) می‌باشد. "</string>
     <string name="monitoring_control_start">جی پی ایکس</string>
     <string name="rendering_attr_noPolygons_description">محو کردن همه عوارض زمین روی نقشه</string>
@@ -1389,7 +1390,7 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
     
     <string name="route_descr_destination">مقصد</string>
     <string name="create_poi_link_to_osm_doc">  <u>Online OSM</u> map classification with images</string>
-	<string name="app_mode_hiking">پیاده‌&#157;روی</string>
+	<string name="app_mode_hiking">پیاده‌روی</string>
     <string name="app_mode_motorcycle">موتورسیکلت</string>
     <string name="app_mode_boat">قایق</string>
     <string name="app_mode_aircraft">هواپیما</string>
@@ -1492,13 +1493,15 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
     <string name="index_name_gb">اروپا-بریتانیا</string>
     <string name="osmo_settings_uuid">شماره شناسايي یکتای دستگاه</string>
     <string name="osmo_settings_descr">مشاهده کلید ثبت یکتای دستگاه و سایر تنظیمات نظارت</string>
-    <string name="osmo_plugin_description">"نظارت -OpenStreetMap- فراهم آوردن امکان پیگیری افراد از طریق دستگاه اشتراک اطلاعات مکانشان، ایجاد گروه های ناشناس و مخابره و به اشتراک گذاری مکان های مختلف، دارای امکان تنظیم ردیابی موقت و دائم، ایجاد گروه های ناشناس برای چند روز دارای برخی از ویژگی های محدود، یعنی مدیر گروه هیچ کنترلی از راه دور بر روی اعضای گروه ندارد. همچنین کاربران با ثبت نام قابلیت دسترسی به گروه های کاملا کاربردی با بسیاری از امکانات برای مشاهده و نظارت از راه دور را بدست می آورند. لطفا برای ادامه مطلب به این آدرس بروید.\n http://osmo.mobi "</string>
+    <string name="osmo_plugin_description">"نظارت -OpenStreetMap- فراهم آوردن امکان پیگیری افراد از طریق دستگاه اشتراک اطلاعات مکانشان، ایجاد گروه های ناشناس و مخابره و به اشتراک گذاری مکان های مختلف، دارای امکان تنظیم ردیابی موقت و دائم، ایجاد گروه های ناشناس برای چند روز دارای برخی از ویژگی های محدود، یعنی مدیر گروه هیچ کنترلی از راه دور بر روی اعضای گروه ندارد. همچنین کاربران با ثبت نام قابلیت دسترسی به گروه های کاملا کاربردی با بسیاری از امکانات برای مشاهده و نظارت از راه دور را بدست می آورند. لطفا برای ادامه مطلب به این آدرس بروید.
+ http://osmo.mobi
+ "</string>
     <string name="osmo_settings">OsMo</string>
    	<string name="always_center_position_on_map">موقعیت را همیشه وسط صفحه نشان بده</string>
     <string name="voice_pref_title">صدا</string>
     <string name="misc_pref_title">متفرقه</string>
     <string name="localization_pref_title">محلی‌سازی</string>
-    <string name="osmo_plugin_name">OsMo (مونیتورینگ OSM)</string>
+    <string name="osmo_plugin_name">مونیتورینگ OSM</string>
     <string name="interrupt_music_descr">در زمان اعلانها موسیقی را قطغ شود</string>
 	<string name="interrupt_music">قطع موسیقی</string>
 	<string name="share_route_as_gpx">به اشتراک گذاری فایل GPX</string>
@@ -1519,14 +1522,14 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
     <string name="minutes_ago">چند دقیقه قبل</string>
     <string name="seconds_ago">چند ثانیه قبل</string>
     <string name="osmo_connect_to_device_name">نام کاربری</string>
-    <string name="osmo_connect_to_device_tracker_id">شناسه افزار</string>
+    <string name="osmo_connect_to_device_tracker_id">ID ردیاب</string>
     <string name="osmo_connect_to_device">پیوند با دستگاه</string>
     
     
     <string name="osmo_connected_devices">دستگاه های متصل</string>
-    <string name="osmo_groups">OsMo گروه / دستگاه</string>
+    <string name="osmo_groups">OsMo گروه</string>
     <string name="osmo_auto_send_locations_descr">شروع خودکار پس از راه اندازی و ارسال موقعیت</string>
-    <string name="osmo_auto_send_locations">آمار را به صورت خودکار در مان شروع وارد نمایید</string>
+    <string name="osmo_auto_send_locations">شروع خودکار سفر</string>
     <string name="osmo_tracker_id">شناسه شخصی ردیاب</string>
     <string name="osmo_tracker_id_descr">برای مشاهده و یا به اشتراک گذاشتن شناسه ردیاب کلیک کنید. ↵ 
         با استفاده از شناسه ردیاب دستگاه قادر خواهد بود برای نظارت بر تمام جابجایی های این دستگاه! برای قطع اتصال گزینه باز سازی مجدد را انتخاب کنید.</string>
@@ -1580,7 +1583,7 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
     <string name="osmo_connect_to_group_id">شناسه گروه</string>
     <string name="osmo_group_name">نام گروه</string>
     <string name="osmo_connect_to_group">پیوند به گروه</string>
-    <string name="osmo_connect">اتصال به</string>
+    <string name="osmo_connect">پیوستن</string>
     <string name="osmo_create_group">ساخت گروه</string>
     <string name="osmo_server_operation_failed">OsMo بهره برداری انجام نشد</string>
     <string name="osmo_activity">مونیتورینگ OpenStreetMap</string>
@@ -1933,7 +1936,10 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
 	<string name="free">"آزاد %1$s… "</string>
 	<string name="rendering_value__name">پیشفرض</string>
     <string name="rendering_value_highContrastRoads_name">جاده‌های کنتراست بالا</string>
-	<string name="osmo_no_connection_msg">سرویس OsMo موجود نیست:\n- ارتباط را بررسی کنید؛\n- تنظیمات را بررسی کنید؛\n- توییتر ما را بررسی کنید: https://twitter.com/OsMomobi</string>
+	<string name="osmo_no_connection_msg">سرویس OsMo موجود نیست:
+- ارتباط را بررسی کنید؛
+- تنظیمات را بررسی کنید؛
+- توییتر ما را بررسی کنید: https://twitter.com/OsMomobi</string>
     <string name="anonymous_user_hint">کاربر ناشناس قادر به:\n- ایجاد گروه نیست؛\n- همزمان سازی گروهها و دستگاهها با سرور نمیباشد؛\n- مدیریت گروهها و دستگاهها در دفتر خصوصی نمیباشد.</string>
     <string name="index_name_netherlands">اروپا - هلند</string>
 	<string name="no_updates_available">به روزرسانی وجود ندارد</string>
@@ -1987,7 +1993,7 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
     <string name="rendering_value_disabled_name">غیرفعال</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">رنگ‌بندی براساس دامنه مسیر</string>
     <string name="rendering_value_walkingRoutesOSMC_name">رنگ‌بندی براساس OSMC</string>
-    <string name="osmo_share_my_location">اشتراک گذاری مکان من</string>
+    <string name="osmo_share_my_location">اشتراک گذاری موقعیت</string>
     <string name="no_address_found">آدرسی مشخص نشد</string>
 	<string name="shared_string_near">نزدیک</string>
     <string name="shared_string_hide">مخقی کردن</string>
@@ -2042,4 +2048,97 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
     <string name="rendering_attr_alpineHiking_name">مقیاس پیاده روی آلپاین (SAC)</string>
     <string name="opening_at">بازکردن در</string>
     <string name="closing_at">بستن در</string>
+    <string name="osm_live_payment_desc">هزینه اشتراک ماهانه میباشد. شما هر زمان که بخواهید میتوانید اشتراک گوگل پلی را لغو کنید.</string>
+    <string name="donation_to_osm">کمک مالی به OpenStreetMap</string>
+    <string name="donation_to_osm_desc">بخشی از کمکهای مالی به مشترکین OpenStreetMapp که به تغییرات کمک میکنند ارسال میشود.هزینه اشتراک یکسان باقی میماند.</string>
+    <string name="osm_live_subscription_desc">این اشتراک ساعتی، روزانه یا هفتگی میباشد و به شما اجازه دانلود نامحدود همه نقشه ها در سراسر دنیا را میدهد.</string>
+    <string name="get_it">انجام بده</string>
+    <string name="get_for">پرداخت برای %1$s</string>
+    <string name="get_for_month">پرداخت ماهانه %1$s</string>
+    <string name="osm_live_banner_desc">دانلود نامحدود نقشه ها و آپدیت بیش از یک بار در ماه : ساعتی ، روزانه یا هفتگی.</string>
+    <string name="osmand_plus_banner_desc">"ورژن نهایی OSMAnd  به همراه دانلود نامحدود نقشه ها و آپدیت ماهانه نقشه ها."</string>
+    <string name="si_mi_meters">مایل/متر</string>
+    <string name="skip_map_downloading">صرفه نظر از دانلود نقشه ها</string>
+    <string name="skip_map_downloading_desc">شما نقشه های آفلاین را نصب نکرده اید. شما میتوانید از نقشه مورد نظر را از لیست دانلودها بعدا انتخاب کنید - %1$s.</string>
+    <string name="search_another_country">انتخاب منطقه دیگر</string>
+    <string name="search_map">جستجوی نقشه…</string>
+    <string name="first_usage_wizard_desc">اجازه دهید برنامه موقعیت شما را پیدا کند و نقشه آنجا را دانلود کند.</string>
+    <string name="location_not_found">موقعیت پیدا نشد</string>
+    <string name="no_inet_connection">عدم دسترسی به اینترنت</string>
+    <string name="no_inet_connection_desc_map">نیاز به دانلود نقشه ها.</string>
+    <string name="search_location">جستجوی موقعیت…</string>
+    <string name="storage_free_space">فضای خالی</string>
+    <string name="storage_place_description">محل ذخیره دیتا ( برای نقشه ها ، ترکها و... ): %1$s.</string>
+    <string name="give_permission">اجازه دسترسی</string>
+    <string name="allow_access_location">اجازه دسترسی به موقعیت</string>
+    <string name="first_usage_greeting">دریافت مسیر و کشف مکان های جدید بدون اتصال به اینترنت</string>
+    <string name="search_my_location">جستجوی موقعیت من</string>
+    <string name="no_update_info_desc">نیازی به پیدا کردن آپدیت جدید نیست، تخفیف ویژه OSMAnd</string>
+    <string name="no_update_info">آپدیت نشان داده نشود</string>
+    <string name="update_all_maps_now">آیا میخواهید همه نقشه ها را آپدیت کنید ؟</string>
+    <string name="clear_tile_data">پاک کردن همه قسمتها</string>
+    <string name="routing_attr_short_way_name">راه صرفه جویی سوخت</string>
+    <string name="routing_attr_short_way_description">انتخاب کوتاهترین راه برای مصرف سوخت کمتر</string>
+    <string name="replace_favorite_confirmation">آیا مطمئن هستید که %1$s جایگزین علاقمندیها شود ؟</string>
+    <string name="rendering_attr_hideOverground_name">اشیاء زیرزمینی</string>
+    <string name="shared_string_change">تغییر</string>
+    <string name="get_started">شروع کن</string>
+    <string name="route_stops_before">%1$s قبل از توقف</string>
+    <string name="coords_search">جستجوی مختصات</string>
+    <string name="advanced_coords_search">جستجوی پیشرفته مختصات</string>
+    <string name="back_to_search">برگشت به جستجو</string>
+    <string name="confirmation_to_delete_history_items">آیا میخواهید آیتم انتخاب شده را حذف کنید ؟</string>
+    <string name="show_something_on_map">نشان دادن %1$s در نقشه</string>
+    <string name="dist_away_from_my_location">جستجوی %1$s دور</string>
+    <string name="share_history_subject">" اشتراک با OSMAnd"</string>
+    <string name="search_categories">دسته بندیها</string>
+    <string name="postcode">کد پستی</string>
+    <string name="shared_string_from">از</string>
+    <string name="city_type_district">ناحیه</string>
+    <string name="city_type_neighbourhood">محله</string>
+    <string name="map_widget_search">جستجو</string>
+	<string name="shared_string_is_open_24_7">ساعت کار 24/7</string>
+    <string name="storage_directory_card">حافظه جانبی</string>
+    <string name="coords_format">هماهنگ با فرمت</string>
+    <string name="coords_format_descr">قالب برای مختصات جغرافیایی</string>
+  	<string name="app_mode_bus">اتوبوس</string>
+ 	<string name="app_mode_train">قطار</string>
+    <string name="follow_us">دنبال کنید</string>
+    <string name="access_direction_audio_feedback">مسیر پیامهای صوتی</string>
+    <string name="access_direction_audio_feedback_descr">اعلان صوتی مقصد</string>
+    <string name="access_direction_haptic_feedback">مسیر پیام لمسی</string>
+    <string name="access_direction_haptic_feedback_descr">اعلان مقصد از طریق ویبره</string>
+    <string name="use_osm_live_routing_description">فعال کردن مسیریاب OSM آنلاین (بتا)</string>
+	<string name="use_osm_live_routing">مسیریاب آنلان OSM</string>
+    <string name="access_no_destination">مقصد مشخص نیست</string>
+    <string name="map_widget_magnetic_bearing">حالت آهن ربای گوشی</string>
+    <string name="map_widget_bearing">وضعیت نسبی</string>
+    <string name="access_disable_offroute_recalc">هنگامی که مسیر درست است آنرا تغییر نده</string>
+    <string name="access_disable_offroute_recalc_descr">هنگامی که از مسیر خارج شدید مسیر جدید را اتوماتیک تعیین میکند</string>
+    <string name="access_disable_wrong_direction_recalc">عدم تغییر مسیر یا مقصد اشتباه</string>
+    <string name="access_disable_wrong_direction_recalc_descr">در صورت انتخاب مقصد نادرست مسیر اتوماتیک تغییر کند</string>
+    <string name="access_smart_autoannounce">اعلام هوشمند اتوماتیک</string>
+    <string name="access_smart_autoannounce_descr">در صورت تغییر مقصد آنرا اعلام کن</string>
+    <string name="access_autoannounce_period">اعلام دوره اتوماتیک</string>
+    <string name="access_autoannounce_period_descr">حداقل زمان تکرار اعلامها</string>
+    <string name="access_default_color">رنگ پیش فرض</string>
+    <string name="access_category_choice">انتخاب دسته بندی</string>
+    <string name="access_hint_enter_name">نام</string>
+    <string name="access_hint_enter_category">دسته بندی</string>
+    <string name="access_hint_enter_description">توضیحات</string>
+    <string name="access_map_linked_to_location">نقشه به موقعیت متصل شد</string>
+    <string name="access_collapsed_list">جمع کردن</string>
+    <string name="access_expanded_list">باز کردن</string>
+    <string name="access_empty_list">لیست خالیست</string>
+    <string name="access_tree_list">لیست درختی</string>
+    <string name="access_shared_string_not_installed">نصب نیست</string>
+    <string name="access_widget_expand">باز</string>
+    <string name="access_shared_string_navigate_up">برو به بالا</string>
+    <string name="map_mode">حالت نقشه</string>
+    <string name="rendering_value_thin_name">باریک</string>
+    <string name="rendering_value_medium_name">متوسط</string>
+    <string name="rendering_value_bold_name">کلفت</string>
+    <string name="no_map_markers_found">لطفا در نقشه علامت بزنید</string>
+    <string name="no_waypoints_found">هیچ نقطه ای پیدا نشد</string>
+    <string name="report">گزارش</string>
     </resources>
