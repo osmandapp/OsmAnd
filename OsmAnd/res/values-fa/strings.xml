@@ -2141,4 +2141,33 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
     <string name="no_map_markers_found">لطفا در نقشه علامت بزنید</string>
     <string name="no_waypoints_found">هیچ نقطه ای پیدا نشد</string>
     <string name="report">گزارش</string>
+    <string name="storage_permission_restart_is_required">برنامه اجازه ذخیره سازی در کارت حافظه را دارد. برنامه را به صورت دستی ریستارت کنید.</string>
+    <string name="shared_string_move_up">برو بالا</string>
+    <string name="shared_string_move_down">برو پایین</string>
+    <string name="finish_navigation">پایان مسیریابی</string>
+    <string name="avoid_road">اجتناب از جاده</string>
+    <string name="storage_directory_readonly_desc">پوشه ذخیره سازی فقط خواندنی است. پوشه ذخیره سازی به طور موقت به حافظه داخلی تغییر پیدا کرد. لطفا مکان ذخیره سازی معتبر را انتخاب نمایید.</string>
+    <string name="storage_directory_shared">اشتراک گذاری حافظه</string>
+    <string name="shared_string_topbar">نوار بالا</string>
+    <string name="full_report">گزارش کامل</string>
+    <string name="recalculate_route">پیدا کردن مجدد مسیر</string>
+    <string name="open_street_map_login_and_pass">OpenStreetMap یوزر و پسورد</string>
+    <string name="donations">کمک مالی</string>
+    <string name="number_of_recipients">تعداد گیرنده ها</string>
+    <string name="osm_user_stat">اصلاح %1$s، رتبه %2$s، اصلاح نهایی %3$s</string>
+    <string name="osm_editors_ranking">رتبه بند ویراستاران OSM</string>
+    <string name="osm_live_subscription">اشتراک آنلاین OSM</string>
+    <string name="osm_live_subscribe_btn">اشتراک</string>
+    <string name="osm_live_user_public_name">اسم جهانی</string>
+    <string name="osm_live_hide_user_name">اسم من را در گزارش نشان نده</string>
+    <string name="osm_live_support_region">پشتیبانی منطقه ای</string>
+    <string name="osm_live_month_cost">هزینه ماهانه</string>
+    <string name="osm_live_month_cost_desc">پرداخت ماهیانه</string>
+    <string name="osm_live_active">فعال</string>
+    <string name="osm_live_not_active">غیر فعال</string>
+    <string name="osm_live_enter_email">لطفا آدرس ایمیل درست وارد کنید</string>
+    <string name="osm_live_enter_user_name">اسم جهانی را وارد کنید</string>
+    <string name="osm_live_thanks">تشکر از شما برای به اشتراک به روز رسانی آنلاین!</string>
+    <string name="osm_live_region_desc">بخشی از کمکهای مالی به کاربرانی که در مناطق اصلاحات انجام میدهند پرداخت میشود</string>
+    <string name="osm_live_subscription_settings">تنظیمات اشتراک</string>
     </resources>
