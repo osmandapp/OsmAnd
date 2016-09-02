@@ -128,15 +128,18 @@ public class EntityParser {
 	}
 	
 
-	private static String getWebSiteURL(Map<String, String> tagValues) {
-		String siteUrl = tagValues.get(OSMTagKey.WIKIPEDIA.getValue());
-		if (siteUrl != null) {
-			if (!siteUrl.startsWith("http://")) { //$NON-NLS-1$
-				int i = siteUrl.indexOf(':');
-				if (i == -1) {
-					siteUrl = "http://en.wikipedia.org/wiki/" + siteUrl; //$NON-NLS-1$
-				} else {
-					siteUrl = "http://" + siteUrl.substring(0, i) + ".wikipedia.org/wiki/" + siteUrl.substring(i + 1); //$NON-NLS-1$ //$NON-NLS-2$
+	private static String getWebSiteURL(Map<String, String> tagValues, boolean checkWikipedia) {
+		String siteUrl = null;
+		if (checkWikipedia) {
+			siteUrl = tagValues.get(OSMTagKey.WIKIPEDIA.getValue());
+			if (siteUrl != null) {
+				if (!siteUrl.startsWith("http://")) { //$NON-NLS-1$
+					int i = siteUrl.indexOf(':');
+					if (i == -1) {
+						siteUrl = "http://en.wikipedia.org/wiki/" + siteUrl; //$NON-NLS-1$
+					} else {
+						siteUrl = "http://" + siteUrl.substring(0, i) + ".wikipedia.org/wiki/" + siteUrl.substring(i + 1); //$NON-NLS-1$ //$NON-NLS-2$
+					}
 				}
 			}
 		} else {
@@ -167,9 +170,13 @@ public class EntityParser {
 				Amenity am = poiTypes.parseAmenity(e.getKey(), e.getValue(), purerelation, ts);
 				if (am != null) {
 					parseMapObject(am, entity, ts);
-					String wbs = getWebSiteURL(ts);
+					String wbs = getWebSiteURL(ts, false);
 					if (wbs != null) {
 						am.setAdditionalInfo("website", wbs);
+					}
+					wbs = getWebSiteURL(ts, true);
+					if (wbs != null) {
+						am.setAdditionalInfo("wikipedia", wbs);
 					}
 					if (checkAmenitiesToAdd(am, amenitiesList) && !"no".equals(am.getSubType())) {
 						amenitiesList.add(am);
