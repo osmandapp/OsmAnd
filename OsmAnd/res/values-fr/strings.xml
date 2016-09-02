@@ -312,7 +312,7 @@ Actuellement {2} Mo sont disponibles.</string>
     <string name="shared_string_select_all">Sélectionner tout</string>
     <string name="shared_string_refresh">Recharger</string>
     <string name="fast_route_mode">Itinéraire le plus rapide</string>
-    <string name="fast_route_mode_descr">"Activer pour calculer l\'itinéraire le plus rapide et désactiver pour calculer l\'itinéraire le plus court "</string>
+    <string name="fast_route_mode_descr">"Activer pour calculer l\'itinéraire le plus rapide et désactiver pour calculer l\'itinéraire le plus économique "</string>
     <string name="tiles_to_download_estimated_size">Le zoom {0} télécharge {1} carreaux ({2} Mb )</string>
     <string name="shared_string_download_map">Télécharger la carte</string>
     <string name="select_max_zoom_preload_area">Sélectionnez le zoom maximum pour précharger la zone visible</string>
@@ -479,7 +479,7 @@ Actuellement {2} Mo sont disponibles.</string>
     <string name="search_online_address">Internet</string>
     <string name="max_level_download_tile">Niveau de zoom maximum</string>
     <string name="max_level_download_tile_descr">Sélectionnez un niveau de zoom maximum pour le téléchargement des cartes (tuiles) en ligne</string>
-    <string name="route_general_information">Distance totale : %1$s, Durée estimée : %2$d h %3$d m.</string>
+    <string name="route_general_information">Distance totale : %1$s, Durée estimée : %2$d h %3$d min.</string>
     <string name="router_service_descr">Sélectionnez un service de navigation, hors-ligne ou en ligne</string>
     <string name="router_service">Service de navigation</string>
     <string name="sd_dir_not_accessible">Le dossier contenant les données sur la carte SD est inaccessible !</string>
@@ -1732,7 +1732,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="shared_string_go">Aller</string>
 
     <string name="confirmation_to_clear_history">Souhaitez-vous effacer l\'historique ?</string>
-    <string name="local_osm_changes_upload_all_confirm">%1$d modification(s) vont être envoyé(s) vers OSM. Confirmez-vous cet envoi ?</string>
+    <string name="local_osm_changes_upload_all_confirm">%1$d modification(s) vont être envoyée(s) vers OSM. Confirmez-vous cet envoi ?</string>
     <string name="delay_to_start_navigation">Démarrer la navigation après</string>
     <string name="osmo_grop_name_length_alert">Le nom d\'un groupe doit être de 3 caractères minimum !</string>
     <string name="osm_changes_added_to_local_edits">Modifications OSM mémorisées localement</string>
@@ -1959,7 +1959,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
 
     <string name="share_menu_location">Partager ce lieu</string>
     <string name="shared_string_send">Envoyer</string>
-    <string name="application_dir_description">Sélectionnez l\'emplacement pour enregistrer les cartes.</string>
+    <string name="application_dir_description">Sélectionnez l\'emplacement pour enregistrer les cartes et autres données.</string>
     <string name="simulate_initial_startup">Simuler un premier démarrage</string>
     <string name="simulate_initial_startup_descr">Efface le compteur de démarrages afin de simuler un premier démarrage (conserve tous les autres paramètres)</string>
 
@@ -1969,7 +1969,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="map_downloaded_descr">La carte %1$s a été téléchargée. Allez à la carte pour l’utiliser.</string>
     <string name="shared_string_qr_code">QR-code</string>
     <string name="enter_country_name">Saisissez le pays</string>
-    <string name="world_map_download_descr">La carte mondiale de base est manquante ou périmée. Merci de télécharger la carte mondiale de base afin que l\'application puisse fonctionner.</string>
+    <string name="world_map_download_descr">La carte mondiale de base est manquante ou périmée. Merci de télécharger cette carte mondiale de base pour permettre un affichage sommaire.</string>
     <string name="new_version">Nouvelle version</string>
     <string name="begin_with_osmand_menu_group">Premiers pas avec OsmAnd</string>
     <string name="features_menu_group">Fonctionnalités</string>
@@ -2187,7 +2187,9 @@ Actuellement {2} Mo sont disponibles.</string>
     <string name="map_markers">Marqueurs</string>
     <string name="map_marker">Marqueur</string>
     <string name="file_name_containes_illegal_char">Le nom de fichier contient des caractères interdits</string>
-<string name="osm_live_header">Cet abonnement active les mises à jour horaires pour toutes les cartes. Les dons sont reversés à la Communauté OSM. Si vous appréciez OsmAnd et OSM et que vous souhaitez supporter ces projets, c\'est la meilleure façon de le faire.</string>
+<string name="osm_live_header">Cet abonnement active les mises à jour horaires pour toutes les cartes.
+Les dons sont en partie reversés à la Communauté OSM.
+Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'est la meilleure façon de le faire.</string>
     
     <string name="rendering_value_thin_name">Fin</string>
     <string name="rendering_value_medium_name">Moyen</string>
@@ -2263,10 +2265,10 @@ Actuellement {2} Mo sont disponibles.</string>
  • Nouveau moteur de recherche performant à texte libre
 
 
- • Intégration avec les systèmes audio voiture et haut-parleur par Bluetooth
+ • Intégration avec les systèmes audio voiture et haut-parleur Bluetooth
 
 
- • Instructions de guidage, annonces vocales, et indications de voies directionnelles améliorées, 
+ • Instructions de guidage, annonces vocales, et indications de voies directionnelles améliorées
 
 
  • Amélioration du calque de transport en commun et affichage de l\'itinéraire
@@ -2290,8 +2292,8 @@ Actuellement {2} Mo sont disponibles.</string>
     <string name="no_update_info_desc">Ne pas vérifier les mises à jour ni les offres promotionnelles OsmAnd</string>
     <string name="no_update_info">Ne pas afficher les mises à jour</string>
     <string name="skip_map_downloading">Ignorer le téléchargement des cartes</string>
-    <string name="skip_map_downloading_desc">"Aucune carte hors-ligne n\'est installée. Vous pouvez  sélectionner un carte dans la liste ou télécharger une carte ultérieurement depuis le menu - %1$s."</string>
-    <string name="search_another_country">Rechercher un autre pays</string>
+    <string name="skip_map_downloading_desc">"Aucune carte hors-ligne n\'est installée. Vous pouvez  sélectionner un carte dans la liste ou télécharger ultérieurement une carte depuis le menu - %1$s."</string>
+    <string name="search_another_country">Sélectionnez une autre région</string>
     <string name="search_map">Recherche de la carte…</string>
     <string name="first_usage_wizard_desc">Laissez OsmAnd déterminer votre position et vous suggérer les cartes de la région.</string>
     <string name="location_not_found">Position non trouvée</string>
@@ -2303,7 +2305,7 @@ Actuellement {2} Mo sont disponibles.</string>
     <string name="allow_access_location">Autoriser l\'accès à la position</string>
     <string name="search_my_location">Rechercher ma position</string>
     <string name="storage_place_description">Espace utilisé par OsmAnd (pour les cartes, les traces, etc.) : %1$s.</string>
-    <string name="first_usage_greeting">Être guidé, découvrir de nouveaux lieux sans connexion Internet</string>
+    <string name="first_usage_greeting">Suivez des itinéraires et découvrez de nouveaux lieux sans connexion Internet</string>
     <string name="get_for">Obtenir pour %1$s</string>
     <string name="get_for_month">Obtenir pour %1$s mois</string>
     <string name="si_mi_meters">Miles / Mètres</string>
@@ -2312,4 +2314,6 @@ Actuellement {2} Mo sont disponibles.</string>
     <string name="osmand_plus_banner_desc">Version OsmAnd complète avec téléchargement illimité des cartes et mises à jour mensuelles des cartes.</string>
     <string name="donation_to_osm">Faire un don à la communauté OpenStreetMap</string>
     <string name="osm_live_subscription_desc">L\'abonnement permet de bénéficier des mises à jour horaires, quotidiennes, hebdomadaires et de télécharger de nouvelles cartes sans limite.</string>
+    <string name="osm_live_payment_desc">Le coût de l\'abonnement sera prélevé chaque mois. Vous avez la possibilité d\'annuler votre abonnement sur Google Play.</string>
+    <string name="donation_to_osm_desc">Une partie de votre don sera reversée aux contributeurs OSM qui mettent à jour OpenStreetMaps. Le coût de l\'abonnement reste identique.</string>
     </resources>
