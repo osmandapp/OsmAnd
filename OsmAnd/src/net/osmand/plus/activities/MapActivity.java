@@ -128,6 +128,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	private static final int SHOW_POSITION_MSG_ID = OsmAndConstants.UI_HANDLER_MAP_VIEW + 1;
 	private static final int LONG_KEYPRESS_MSG_ID = OsmAndConstants.UI_HANDLER_MAP_VIEW + 2;
 	private static final int LONG_KEYPRESS_DELAY = 500;
+	private static final int ZOOM_LABEL_DISPLAY = 16;
+	private static final int MIN_ZOOM_LABEL_DISPLAY = 12;
 
 	private static final Log LOG = PlatformUtil.getLog(MapActivity.class);
 
@@ -749,7 +751,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			}
 			// remember if map should come back to isMapLinkedToLocation=true
 			mapViewTrackingUtilities.setMapLinkedToLocation(false);
-
 			if (mapLabelToShow != null && !mapLabelToShow.contextMenuDisabled()) {
 				mapContextMenu.setMapCenter(latLonToShow);
 				mapContextMenu.setMapPosition(mapView.getMapPosition());
@@ -764,7 +765,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				tb.setPixelDimensions(tbw, tbh);
 
 				tb.setLatLonCenter(latLonToShow.getLatitude(), latLonToShow.getLongitude());
-				while (!tb.containsLatLon(prevCenter.getLatitude(), prevCenter.getLongitude()) && tb.getZoom() > 10) {
+				tb.setZoom(ZOOM_LABEL_DISPLAY);
+				while (!tb.containsLatLon(prevCenter.getLatitude(), prevCenter.getLongitude()) && tb.getZoom() > MIN_ZOOM_LABEL_DISPLAY) {
 					tb.setZoom(tb.getZoom() - 1);
 				}
 				//mapContextMenu.setMapZoom(settings.getMapZoomToShow());
