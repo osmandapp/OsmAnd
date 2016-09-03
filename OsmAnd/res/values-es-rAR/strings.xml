@@ -613,7 +613,7 @@
     <string name="app_mode_motorcycle">Motocicleta</string>
     <string name="app_mode_boat">Barco</string>
     <string name="app_mode_aircraft">Avión</string>
-    <string name="local_osm_changes_delete_all_confirm">Borrarás %1$d cambio(s) OSM. ¿Estás seguro?</string>
+    <string name="local_osm_changes_delete_all_confirm">¿Quieres borrar %1$d cambio(s) en OSM?</string>
     <string name="animate_routing_route_not_calculated">Primero calcula la ruta</string>
     <string name="animate_routing_route">"Simular, usando la ruta calculada "</string>
     <string name="animate_routing_gpx">Simular, usando la traza GPX</string>
@@ -1350,7 +1350,7 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="show_more_map_detail">Mostrar más detalle del mapa</string>
     <string name="show_more_map_detail_descr">Muestra detalles del mapa vectorial (caminos, etc.) a niveles inferiores de ampliación</string>
     <string name="favourites_delete_multiple_succesful">Punto(s) favorito(s) correctamente borrado(s).</string>
-    <string name="favorite_delete_multiple">Borrarás %1$d favorito(s) y %2$d grupo(s) de favoritos. ¿Estás seguro?</string>
+    <string name="favorite_delete_multiple">¿Quieres borrar %1$d favorito(s) y %2$d grupo(s) de favoritos?</string>
     <string name="favorite_home_category">Inicio</string>
     <string name="favorite_friends_category">Amigos</string>
     <string name="favorite_places_category">Lugares</string>
