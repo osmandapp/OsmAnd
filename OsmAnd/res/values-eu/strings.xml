@@ -109,7 +109,7 @@
   <string name="choose_osmand_theme">Aplikazioaren gaia</string>
   <string name="accessibility_options">Irisgarritasun aukerak</string>
   <string name="select_address_activity">Hautatu helbidea</string>
-  <string name="favourites_list_activity">Aukeratu gogokoena</string>
+  <string name="favourites_list_activity">Aukeratu gogokoa</string>
   <string name="local_openstreetmap_act_title">OSM aldaketak</string>
   <string name="shared_string_more_actions">Bestelako ekintzak</string>
   
@@ -282,7 +282,7 @@ Datu globalak (iparraldean 70 gradutan eta hegoaldean 70 gradutan) STRM (Shuttle
 ⇥⇥- Lineaz kanpoko erabateko erabilpena (bektore edo tesela mapak gorde ondoren aukeratu daitezken karpetetan)⏎
 ⇥⇥- Lineaz kanpoko mundu guztiko mapa konpaktuak eskuragarri⏎
 ⇥⇥- Herrialde edo eskualdeetako mapen deskarga, aplikaziotik zuzenean⏎
-⇥⇥- Gain-geruza desberdin asko ikusi daitezke, GPX edo ibilbide bidea, interes puntuak (POI), gogokoenak, sestra-kurbak, garraio publikoaren geltokiak, geruza gardeneko mapa gehigarriak.⏎
+⇥⇥- Gain-geruza desberdin asko ikusi daitezke, GPX edo ibilbide bidea, interes puntuak (POI), gogokoak, sestra-kurbak, garraio publikoaren geltokiak, geruza gardeneko mapa gehigarriak.⏎
 ⇥⇥- Lineaz kanpoko helbide eta lekuen bilatzailea (POIak)⏎
 ⇥⇥- Lineaz kanpoko ibilbide motzetarako nabigazioa⏎
 ⇥⇥- Kotxea, bizikleta eta oinezkoentzat modua:⏎
@@ -385,7 +385,7 @@ Afganistan, Albania, Aljeria, Andorra, Angola, Aingira, Antigua eta Barbuda, Arg
 ⇥⇥- Lineaz kanpoko mundu guztiko mapa konpaktuak eskuragarri⏎
 ⇥⇥- Muga gabeko herrialde edo eskualdeetako mapen deskarga, aplikaziotik zuzenean⏎
 ⇥⇥- Lineaz kanpoko WIkipediako erabilpena (deskargatu Wikipediako POIak), turismorako erabilgarriak⏎
-⇥⇥- Gain-geruza desberdin asko ikusi daitezke, GPX edo ibilbide bidea, interes puntuak (POI), gogokoenak, sestra-kurbak, garraio publikoaren geltokiak, geruza gardeneko mapa gehigarriak.⏎
+⇥⇥- Gain-geruza desberdin asko ikusi daitezke, GPX edo ibilbide bidea, interes puntuak (POI), gogokoak, sestra-kurbak, garraio publikoaren geltokiak, geruza gardeneko mapa gehigarriak.⏎
 ⇥⇥- Lineaz kanpoko helbide eta lekuen bilatzailea (POIak)⏎
 ⇥⇥- Lineaz kanpoko ibilbide ertainetarako nabigazioa⏎
 ⇥⇥- Kotxea, txirrinda eta oinezkoentzat modua:⏎
@@ -587,7 +587,7 @@ Kokalekua eta denbora OsmAnd kontrol panelean ikusgai daude eta maparen pantaila
   <string name="address_search_desc">Helbide bilaketa</string>
   <string name="navpoint_search_desc">Koordinatuak</string>
   <string name="transport_search_desc">Garraio publikoaren bilaketa</string>
-  <string name="favourites_search_desc">Gogokoenen bilaketa</string>
+  <string name="favourites_search_desc">Gogokoen bilaketa</string>
   
   <string name="offline_navigation_not_available">Lineaz kanpoko nabigazioa ez dago erabilgarri orain.</string>
   <string name="left_side_navigation">Ezkerretik gidatzea</string>
@@ -742,7 +742,7 @@ Tesela mapak zuzenean sareko iturburuetatik eskuratu daitezke, edo lineaz kanpor
   <string name="index_name_tts_voice">Ahots paketeak (TTS bidez sintetizatuak, hobetsia)</string>
   <string name="amenity_type_osmwiki">Wikipedia (lineaz kanpo)</string>
   <string name="amenity_type_user_defined">Erabiltzaileak definituak</string>
-  <string name="fav_export_confirmation">Aurretik esportaturiko Gogokoenak dagoeneko existitzen dira. Ordeztu nahi dituzu?</string>
+  <string name="fav_export_confirmation">Badago aurretik esportatutako gogokoen fitxategi bat. Ordeztu nahi dituzu?</string>
   <string name="profile_settings">Profilaren Ezarpenak</string>
   <string name="routing_settings">Nabigazioa</string>
   <string name="routing_settings_descr">Zehaztu nabigaziorako aukerak</string>
@@ -810,7 +810,7 @@ Honek {1} MB behar ditu behin betiko.
   <string name="search_position_current_location_search">Kokapena bilatzen…</string>
   <string name="search_position_current_location_found">Nire kokapena (aurkitua)</string>
   <string name="search_position_address">Helbidea…</string>
-  <string name="search_position_favorites">Gogokoenak…</string>
+  <string name="search_position_favorites">Gogokoak…</string>
   <string name="search_position_undefined">Indefinitua</string>
   
   
@@ -994,7 +994,7 @@ Honek {1} MB behar ditu behin betiko.
   <string name="specified_dir_doesnt_exist">Ezin izan da zehaztutako karpeta aurkitu.</string>
   <string name="application_dir">Datuak gordetzeko direktorioa</string>
   
-  <string name="osmand_net_previously_installed">OsmAnden bertsio zaharrago bat dago instalatuta. Aplikazio berriak lineaz kanpoko datu guztiak erabili ditzake. Hala ere, Puntu Gogokoenak aplikazio zaharrean esportatu eta berrian inportatuak izan beharko lirateke.</string>
+  <string name="osmand_net_previously_installed">OsmAnd aplikazioaren bertsio zaharrago bat dago instalatuta. Aplikazio berriak lineaz kanpoko datu guztiak erabili ditzake. Baina gogoko puntuak aplikazio zaharrean esportatu eta gero berrian inportatu beharko lirateke.</string>
   <string name="build_installed">{0} eraikitzea ongi instalatuta ({1}).</string>
   <string name="downloading_build">Eraikitzeko deskargatzen…</string>
   <string name="install_selected_build">OsmAnd instalatu nahi al duzu - {0} {1}tik {2} MB ?</string>
@@ -1060,10 +1060,10 @@ Honek {1} MB behar ditu behin betiko.
   <string name="rotate_map_to_bearing_descr">Aukeratu maparen alineazioa</string>
   <string name="rotate_map_to_bearing">Maparen orientazioa</string>
   <string name="show_route">Ibilbidearen xehetasunak</string>
-  <string name="fav_imported_sucessfully">Gogokoenak arrakastaz inportatuak</string>
-  <string name="fav_file_to_load_not_found">Gogokoenak dituen GPX fitxategia ez da {0}-n aurkitua izan</string>
-  <string name="fav_saved_sucessfully">Gogokoenak arrakastaz gordeak {0} fitxategira</string>
-  <string name="no_fav_to_save">Ez dago gogokoenik gordetzeko</string>
+  <string name="fav_imported_sucessfully">Gogokoak ongi inportatu dira</string>
+  <string name="fav_file_to_load_not_found">Ez da aurkitu gogokoak dituen GPX fitxategia {0} helbidean</string>
+  <string name="fav_saved_sucessfully">Gogokoak ongi gorde dira {0} fitxategira</string>
+  <string name="no_fav_to_save">Ez dago gogoko punturik gordetzeko</string>
   <string name="shared_string_import">Inportatu</string>
   
   <string name="error_occurred_loading_gpx">GPX kargatzean errore bat gertatu da</string>
@@ -1075,7 +1075,7 @@ Honek {1} MB behar ditu behin betiko.
   <string name="thanks_yandex_traffic">Eskerrak Yandexi trafikoari buruzko informazioagatik.</string>
   <string name="layer_yandex_traffic">Yandex trafikoa</string>
   <string name="layer_route">Ibilbidea</string>
-  <string name="shared_string_favorites">Gogokoenak</string>
+  <string name="shared_string_favorites">Gogokoak</string>
   <string name="layer_osm_bugs">OSM Oharrak (sarean)</string>
   
   <string name="layer_poi">POI…</string>
@@ -1161,7 +1161,7 @@ Honek {1} MB behar ditu behin betiko.
   <string name="search_history_street">Kalea: {0}, {1}</string>
   <string name="search_history_int_streets">Bidegurutzea: {0} x {1} {2}en</string>
   <string name="search_history_building">Eraikina: {0}, {1}, {2}</string>
-  <string name="favorite">Gogokoena</string>
+  <string name="favorite">Gogokoa</string>
   <string name="shared_string_clear_all">Garbitu guztiak</string>
   <string name="shared_string_history">Historiala</string>
   <string name="uploading_data">Datuak igotzen…</string>
@@ -1189,8 +1189,8 @@ Honek {1} MB behar ditu behin betiko.
   <string name="downloading_list_indexes">Eskugarri dauden eskualdeen zerrenda deskargatzen…</string>
   <string name="list_index_files_was_not_loaded">Ez da eskualdeen zerrenda eskuratu osmand.net webgunetik.</string>
   
-  <string name="fav_points_edited">Gogokoen puntua editatua izan da</string>
-  <string name="fav_points_not_exist">Ez da gogokoen punturik existitzen</string>
+  <string name="fav_points_edited">Gogoko puntua editatu da</string>
+  <string name="fav_points_not_exist">Ez dago gogoko punturik</string>
   <string name="update_existing">Ordezkatu</string>
   <string name="only_show">Bistaratu ibilbidea</string>
   <string name="follow">Hasi nabigazioa</string>
@@ -1250,7 +1250,7 @@ Honek {1} MB behar ditu behin betiko.
   
   
   
-  <string name="shared_string_add_to_favorites">Gogokoenetara gehitu</string>
+  <string name="shared_string_add_to_favorites">Gehitu gogokoetara</string>
   <string name="use_english_names_descr">Aukeratu izen ingeles eta autoktonoen hartean</string>
   <string name="use_english_names">Erabili izen Ingelesak mapetan</string>
   <string name="app_settings">Aplikazioaren ezarpenak</string>
@@ -1318,12 +1318,12 @@ Honek {1} MB behar ditu behin betiko.
   <string name="shared_string_add">Gehitu</string>
   <string name="shared_string_no">Ez</string>
   <string name="add_favorite_dialog_top_text">Gogokoaren izena sartu</string>
-  <string name="add_favorite_dialog_default_favourite_name">Gogokoena</string>
-  <string name="add_favorite_dialog_favourite_added_template">Gogokoen \"{0}\" puntua arrakastaz gehitu da.</string>
-  <string name="favourites_context_menu_edit">Gogokoena editatu</string>
-  <string name="favourites_context_menu_delete">Gogokoena ezabatu</string>
+  <string name="add_favorite_dialog_default_favourite_name">Gogokoa</string>
+  <string name="add_favorite_dialog_favourite_added_template">\"{0}\" gogoko puntua ongi gehitu da.</string>
+  <string name="favourites_context_menu_edit">Editatu gogokoa</string>
+  <string name="favourites_context_menu_delete">Ezabatu gogokoa</string>
   <string name="favourites_remove_dialog_msg">Ezabatu \'%s\' gogoko puntua?</string>
-  <string name="favourites_remove_dialog_success">{0} punto gogokoena arrakastaz ezabatu da.</string>
+  <string name="favourites_remove_dialog_success">{0} gogoko puntua ongi ezabatu da.</string>
   
   
   
@@ -1519,7 +1519,7 @@ Honek {1} MB behar ditu behin betiko.
 \nPuntu</string>
     <string name="gpx_selection_track">%1$s
 \nLorratza %2$s</string>
-    <string name="shared_string_my_favorites">Nire Gogokoenak</string>
+    <string name="shared_string_my_favorites">Nire gogokoak</string>
     <string name="shared_string_my_places">Nire Lekuak</string>
     
     <string name="osmo_follow">Jarraitu</string>
@@ -2033,7 +2033,7 @@ Orain, {2} MB daude eskuragarri.</string>
     <string name="coords_format_descr">Koordenatu geografikoen formatua</string>
   	<string name="app_mode_bus">Autobus</string>
  	<string name="app_mode_train">Trena</string>
-    <string name="current_track">Uneko arrastoa</string>
+    <string name="current_track">Uneko lorratza</string>
     <string name="map_widget_battery">Bateriaren maila</string>
     <string name="change_markers_position">Aldatu markatzailearen posizioa</string>
     <string name="move_marker_bottom_sheet_title">Mugitu mapa markatzailearen posizioa aldatzeko</string>
