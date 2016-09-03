@@ -1512,7 +1512,7 @@ Proporcia memoro %4$s MB (Limito de Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="general_settings_descr">Agordu vidigon kaj ĝenerale la aplikaĵon</string>
     <string name="global_app_settings">Ĝeneralaj agordoj de aplikaĵo</string>
     <string name="user_name">Via OSM-uzantnomo</string>
-    <string name="open_street_map_login_descr">Bezonata por sendadoj al openstreetmap.org</string>
+    <string name="open_street_map_login_descr">Bezonata por sendoj al openstreetmap.org</string>
     <string name="user_password">Via OSM-pasvorto</string>
     <string name="osmand_service">Fona reĝimo</string>
     <string name="osmand_service_descr">OsmAnd funkcias fone kiam la ekrano estas malaktiva</string>
@@ -1973,7 +1973,7 @@ Kaj la loko kaj tempo estas montrataj ĉe la OsmAnd stirpanelo, kaj ĉe la fenes
     <string name="use_online_routing_descr">Uzas Interreton por kalkuli kurson</string>
     <string name="use_online_routing">Uzi enretan navigadon</string>
     <string name="data_settings_descr">Agordi lingvon, elŝuti/reŝargi datumojn</string>
-    <string name="osm_settings_descr">Agordoj bezonataj por sendadoj al Openstreetmap.org (OSM)</string>
+    <string name="osm_settings_descr">Agordoj bezonataj por sendoj al Openstreetmap.org (OSM)</string>
     <string name="data_settings">Datumoj</string>
     <string name="additional_settings">Neĉefaj agordoj</string>
     <string name="reload_tile">Reŝargi kahelojn</string>
