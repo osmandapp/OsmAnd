@@ -637,4 +637,18 @@
 	<string name="poi_volleyball">Boleibola</string>
 
 	<string name="poi_memorial">Oroitarria</string>
+	<string name="poi_archaeological_site">Aztarnategi arkeologikoa</string>
+	<string name="poi_battlefield">Gudu-zelaia</string>
+	<string name="poi_historic_cannon">Kanoi historikoa</string>
+	<string name="poi_castle">Gaztelua</string>
+	<string name="poi_city_gate">Hiriko atea</string>
+	<string name="poi_fort">Gotorlekua</string>
+	<string name="poi_historic_ruins">Aurri historikoak</string>
+	<string name="poi_wreck">Hondoratzea</string>
+	<string name="poi_historic_ship">Ontzi historikoa</string>
+	<string name="poi_historic_mine">Mehatz historikoa</string>
+	<string name="poi_zoo">Zoologikoa</string>
+	<string name="poi_aquarium">Akuarioa</string>
+	<string name="poi_theme_park">Parke tematikoa</string>
+
 	</resources>
