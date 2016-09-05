@@ -107,6 +107,7 @@ public class MapRenderRepositories {
 	private boolean interrupted = false;
 	private int renderedState = 0; 	// (1 (if basemap) + 2 (if normal map)
 	private RenderingContext currentRenderingContext;
+	private RenderingContext visibleRenderingContext;
 	private SearchRequest<BinaryMapDataObject> searchRequest;
 	private OsmandSettings prefs;
 
@@ -781,6 +782,7 @@ public class MapRenderRepositories {
 			}
 			String renderingDebugInfo = currentRenderingContext.renderingDebugInfo;
 			currentRenderingContext.ended = true;
+			visibleRenderingContext = currentRenderingContext;
 			if (checkWhetherInterrupted()) {
 				// revert if it was interrupted 
 				// (be smart a bit do not revert if road already drawn) 
