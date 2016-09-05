@@ -1950,13 +1950,13 @@
 	<string name="poi_vending_condoms">Kondome</string>
 	<string name="poi_vending_stamps">Briefmarken</string>
 	<string name="poi_vending_food">Essen</string>
-	<string name="poi_vending_bicycle_tube">Fahrraschscläuche</string>
-	<string name="poi_vending_drinks_food">Getränke und Essne</string>
+	<string name="poi_vending_bicycle_tube">Fahrradschläuche</string>
+	<string name="poi_vending_drinks_food">Getränke und Essen</string>
 	<string name="poi_vending_fuel">Kraftstoffverkauf</string>
 	<string name="poi_vending_parcel_pickup">Paketaufnahmestelle</string>
-	<string name="poi_vending_parcel_mail_in">Paketeannahmestelle</string>
+	<string name="poi_vending_parcel_mail_in">Paketannahmestelle</string>
 	<string name="poi_vending_milk">Milch</string>
-	<string name="poi_vending_elongated_coin">Souvenirmünze</string>
+	<string name="poi_vending_elongated_coin">Souvenir-Medaille</string>
 	<string name="poi_vending_bread">Brot</string>
 	<string name="poi_vending_chewing_gums">Kaugummi</string>
 	<string name="poi_vending_parking_tickets_public_transport_tickets">Parkschein; Fahrschein</string>
