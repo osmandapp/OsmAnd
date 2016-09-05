@@ -226,7 +226,7 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 		addButton(ll, "(9.3)  Attention, border control", builder(p).attention("BORDER_CONTROL"));
 		addButton(ll, "(9.4)  Attention, railroad crossing", builder(p).attention("RAILWAY"));
 		addButton(ll, "(9.5)  Attention, traffic calming", builder(p).attention("TRAFFIC_CALMING"));
-		addButton(ll, "(9.6)  Attention, toll both", builder(p).attention("TOLL_BOOTH"));
+		addButton(ll, "(9.6)  Attention, toll booth", builder(p).attention("TOLL_BOOTH"));
 		addButton(ll, "(9.7)  Attention, stop sign", builder(p).attention("STOP"));
 		addButton(ll, "(9.8)  Attention, pedestrian crosswalk", builder(p).attention("PEDESTRIAN"));
 
