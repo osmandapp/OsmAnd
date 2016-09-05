@@ -1674,10 +1674,13 @@ public class OpeningHoursParser {
 
 		// not supported (,)
 		// hours = parseOpenedHours("Mo-Su 07:00-23:00, Fr 08:00-20:00");
-		 
+		
 		// Test holidays
 		String hoursString = "mo-fr 11:00-21:00; PH off";
 		hours = parseOpenedHoursHandleErrors(hoursString);
 		testParsedAndAssembledCorrectly(hoursString, hours);
+		
+		// not properly supported
+		// hours = parseOpenedHours("Mo-Su (sunrise-00:30)-(sunset+00:30)");
 	}
 }

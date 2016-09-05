@@ -141,6 +141,8 @@ public class NativeLibrary {
 	/**/
 	protected static native NativeRouteSearchResult loadRoutingData(RouteRegion reg, String regName, int regfp, RouteSubregion subreg,
 			boolean loadObjects);
+	
+	protected static native void deleteRenderingContextHandle(long handle);
 
 	protected static native void deleteRouteSearchResult(long searchResultHandle);
 

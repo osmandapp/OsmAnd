@@ -27,7 +27,6 @@ public class RenderingContext {
 
 	public RenderingContext() {
 	}
-	
 
 	public double leftX;
 	public double topY;
@@ -53,6 +52,7 @@ public class RenderingContext {
 	public int shadowRenderingColor = 0xff969696;
 	public String renderingDebugInfo;
 	public double polygonMinSizeToDisplay;
+	public long renderingContextHandle;
 	
 	private float density = 1;
 	
@@ -74,5 +74,13 @@ public class RenderingContext {
 	
 	protected byte[] getIconRawData(String data) {
 		return null;
+	}
+	
+	protected void finalize() throws Throwable {
+		super.finalize();
+		if (renderingContextHandle != 0) {
+			NativeLibrary.deleteRenderingContextHandle(renderingContextHandle);
+			renderingContextHandle = 0;
+		}
 	}
 }
