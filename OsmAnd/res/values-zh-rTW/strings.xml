@@ -1919,7 +1919,7 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="shared_string_go">執行</string>
 
     <string name="confirmation_to_clear_history">您想要清除過去的記錄嗎？</string>
-    <string name="local_osm_changes_upload_all_confirm">您要上載 %1$d 更改到 OSM。您確定嗎？</string>
+    <string name="local_osm_changes_upload_all_confirm">您要上傳 %1$d 以更改 OSM。您確定嗎？</string>
     <string name="osmo_grop_name_length_alert">群組名稱至少須要有 3 個字元長！</string>
     <string name="osm_changes_added_to_local_edits">OSM 的變更已加到本機更改設定</string>
     <string name="mark_to_delete">刪除標記</string>
