@@ -869,7 +869,7 @@
 	<string name="poi_sally_port">Ausfalltor</string>
 	<string name="poi_turnstile">Drehkreuz</string>
 	<string name="poi_kent_carriage_gap">Kutschendurchlass</string>
-	<string name="poi_highway_crossing">Kreuzung</string>
+	<string name="poi_highway_crossing">Fußgängerübergang</string>
 
 	<string name="poi_icn_ref">Knotenpunkt Internationales Fahrradnetzwerk</string>
 	<string name="poi_ncn_ref">Knotenpunkt Nationale Radroute</string>
