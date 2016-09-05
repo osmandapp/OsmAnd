@@ -579,7 +579,7 @@ För tillfället finns det {2} MB ledigt.</string>
     <string name="filter_existing_indexes">Visa nerladdat</string>
 
     <string name="fast_route_mode">Snabbaste vägen</string>
-    <string name="fast_route_mode_descr">Aktivera för att beräkna den snabbaste vägen eller inaktivera för den kortaste vägen </string>
+    <string name="fast_route_mode_descr">"Aktivera för att beräkna den snabbaste vägen eller inaktivera för den bränslesnålaste vägen "</string>
     <string name="tiles_to_download_estimated_size">Vid zoom {0} hämta {1} kartbitar ({2} MB)</string>
     <string name="shared_string_download_map">Ladda ner karta</string>
     <string name="poi_filter_sightseeing">Sevärdheter</string>
@@ -1731,7 +1731,7 @@ Vill du fortsätta med en ny registrering?</string>
     <string name="delay_to_start_navigation_descr">Ange väntetid att bli kvar på ruttplaneringsskärmen</string>
     <string name="delay_to_start_navigation">Börja sväng-efter-sväng-navigering efter …</string>
     <string name="shared_string_go">Kör</string>
-    <string name="local_osm_changes_upload_all_confirm">Du håller på att skicka %1$d ändringar till OSM. Är du säker?</string>
+    <string name="local_osm_changes_upload_all_confirm">Du håller på att skicka %1$d ändring(ar) till OSM. Är du säker?</string>
     <string name="confirmation_to_clear_history">Vill du tömma historiken?</string>
     <string name="osmo_grop_name_length_alert">Gruppnamn bör vara minst tre tecken långa!</string>
     <string name="current_route">Aktuell rutt</string>
@@ -1949,7 +1949,7 @@ Vill du fortsätta med en ny registrering?</string>
 
     <string name="share_geo">geo:</string>
 
-    <string name="application_dir_description">Välj var du vill spara kartfilerna.</string>
+    <string name="application_dir_description">Välj var du vill spara kartfilerna och andra datafiler.</string>
     <string name="share_menu_location">Dela platsen</string>
     <string name="shared_string_send">Sänd</string>
     <string name="hillshade_layer_disabled">Skuggad relief-lager inaktiverat</string>
@@ -2229,7 +2229,7 @@ För tillfället finns det bara {2} MB tillgängligt.</string>
     <string name="storage_permission_restart_is_required">Nu har appen tillåtelse att skriva till extern lagringsplats. En manuell omstart av appen krävs.</string>
     <string name="osm_live_support_region">Stödregion</string>
     <string name="osm_live_header">Denna prenumeration aktiverar uppdateringar varje timme av kartor runt omkring i världen.
-Den större delen av inkomsterna går tillbaka till OSM-gemenskapen och betalas ut för varje OSM-bidrag.
+En del av inkomsterna går tillbaka till OSM-gemenskapen och betalas ut för varje OSM-bidrag.
 Om du tycker om OsmAnd och OSM och vill stödja dem så är detta ett utmärkt sätt att göra det på.</string>
     
     <string name="access_no_destination">Ingen destination angiven</string>
