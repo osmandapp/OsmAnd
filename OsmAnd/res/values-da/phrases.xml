@@ -2139,7 +2139,7 @@
 	<string name="poi_massage_therapeutic">Massage: terapeutisk</string>
 
 	<string name="poi_sauna_yes">Sauna</string>
-	<string name="poi_solarium_yes">Solarium</string>
+	<string name="poi_solarium_yes">Solarieserviceydelser</string>
 
 	<string name="poi_tents_yes">Telte tilladt</string>
 	<string name="poi_tents_no">Telte ikke tilladt</string>
@@ -2738,7 +2738,7 @@
 	<string name="poi_free_flying_guest_guidelines_yes">Gæsteretningslinjer for freeflying: ja</string>
 	<string name="poi_free_flying_guest_guidelines_no">Gæsteretningslinjer for freeflying: nej</string>
 
-	<string name="poi_tanning_salon">Solarium</string>
+	<string name="poi_tanning_salon">Solarie</string>
 
 <string name="poi_free_flying_site_takeoff">Freeflying flyveplads: start</string>
 	<string name="poi_free_flying_site_landing">Freeflying flyveplads: landing</string>
