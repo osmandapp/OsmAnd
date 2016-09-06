@@ -2087,11 +2087,15 @@
     <string name="skip_map_downloading">Пропустить загрузку карт</string>
     <string name="skip_map_downloading_desc">У вас нет загруженных карт. Вы можете выбрать карту из списка или загрузить её позже с помощью меню - %1$s.</string>
 
-    <string name="si_mi_meters">Мили/метры</string>
+    <string name="si_mi_meters">Мили/ метры</string>
     <string name="get_for">Получить за %1$s</string>
     <string name="get_for_month">Получить за %1$s в месяц</string>
-    <string name="get_it">Получить</string>
-    <string name="osm_live_banner_desc">Получите неограниченные загрузки карт и обновления более чем один раз в месяц: ежечасно, ежедневно или еженедельно</string>
-    <string name="osmand_plus_banner_desc">Полная версия OsmAnd с неограниченной загрузкой карт и ежемесячных обновлений карты</string>
+    <string name="get_it">Получить его</string>
+    <string name="osm_live_banner_desc">Получите неограниченные загрузки для карт, а также обновления чаще чем один раз в месяц: ежечасно, ежедневно или еженедельно.</string>
+    <string name="osmand_plus_banner_desc">Полная версия OsmAnd с неограниченным количеством загрузок и ежемесячных обновлений для карт.</string>
     <string name="select_voice_provider">Выберите голосовое сопровождение</string>
+    <string name="osm_live_payment_desc">Абонентская плата будет взиматься ежемесячно. Вы всегда можете отменить подписку на Google Play.</string>
+    <string name="donation_to_osm">Пожертвование для сообщества OpenStreetMap</string>
+    <string name="donation_to_osm_desc">Часть вашего пожертвования будет отправлена пользователям OSM, которые вносят изменения в OpenStreetMaps. Стоимость подписки при этом остается прежней.</string>
+    <string name="osm_live_subscription_desc">Подписка включает в себя ежечасные, ежедневные и еженедельные обновления, а также неограниченное количество доступных загрузок для всех карт со всего мира.</string>
     </resources>
