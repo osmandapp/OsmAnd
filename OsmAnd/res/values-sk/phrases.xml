@@ -1887,4 +1887,107 @@
 	<string name="poi_organic_no">Biopotraviny: nie</string>
 	<string name="poi_organic_only">Len biopotraviny</string>
 
+	<string name="poi_wiki_link">Wikipédia</string>
+
+<string name="poi_min_age">Minimálny vek</string>
+
+	<string name="poi_generator_output_electricity">Výstupná energia</string>
+	<string name="poi_generator_output_electricity_yes">Výstup: elektrina</string>
+	<string name="poi_generator_output_hot_water">Výstupná energia horúcej vody</string>
+	<string name="poi_generator_output_hot_water_yes">Výstup: horúca voda</string>
+	<string name="poi_generator_output_steam_yes">Výstup: para</string>
+	<string name="poi_generator_output_hot_air_yes">Výstup: horúci vzduch</string>
+	<string name="poi_generator_output_cold_water_yes">Výstup: studená voda</string>
+	<string name="poi_generator_output_compressed_air">Výstupná energia stlačeného vzduchu</string>
+	<string name="poi_generator_output_compressed_air_yes">Výstup: stlačený vzduch</string>
+	<string name="poi_generator_output_vacuum_yes">Výstup: vákuum</string>
+	<string name="poi_generator_output_biogas">Výstupná energia bioplynu</string>
+	<string name="poi_generator_output_biogas_yes">Výstup: bioplyn</string>
+
+	<string name="poi_pumping_station">Čerpadlo</string>
+
+	<string name="poi_aquaculture">Akvakultúra</string>
+	<string name="poi_aquaculture_shrimp">Akvakultúra: krevety</string>
+	<string name="poi_aquaculture_fish">Akvakultúra: ryby</string>
+	<string name="poi_aquaculture_mussels">Akvakultúra: mušle</string>
+
+	<string name="poi_telescope">Teleskop/Ďalekohľad</string>
+	<string name="poi_telescope_type_optical">Teleskop: optický</string>
+	<string name="poi_telescope_type_radio">Teleskop: rádiový</string>
+	<string name="poi_telescope_type_gamma">Teleskop: gamma-žiarenie</string>
+	<string name="poi_nuclear_explosion_crater_diameter">Výbuch: priemer krátera</string>
+	<string name="poi_fire_hydrant_diameter">Priemer hydrantu</string>
+	<string name="poi_telescope_diameter">Priemer</string>
+	<string name="poi_fire_hydrant_pressure">Tlak v hydrante</string>
+	<string name="poi_fire_hydrant_count">Počet hydrantov</string>
+	<string name="poi_fire_hydrant_flow_capacity">Prietok v hydrante</string>
+	<string name="poi_fire_hydrant_position_sidewalk">Umiestnenie hydrantu: na chodníku</string>
+	<string name="poi_fire_hydrant_position_green">Umiestnenie hydrantu: na trávniku</string>
+	<string name="poi_fire_hydrant_position_lane">Umiestnenie hydrantu: v jazdnom pruhu</string>
+	<string name="poi_fire_hydrant_position_parking_lot">Umiestnenie hydrantu: na parkovisku</string>
+	<string name="poi_fire_hydrant_position_street">Umiestnenie hydrantu: na ulici</string>
+	<string name="poi_fire_hydrant_position_underground">Umiestnenie hydrantu: pod zemou</string>
+	<string name="poi_fire_hydrant_style_wsh">Vzhľad hydrantu: wsh</string>
+	<string name="poi_fire_hydrant_style_water_source_main">Zdroj vody: vodovod</string>
+	<string name="poi_fire_hydrant_style_water_source_pond">Zdroj vody: rybník</string>
+	<string name="poi_fire_hydrant_style_water_source_stream">Zdroj vody: potok</string>
+	<string name="poi_fire_hydrant_style_water_source_cistern">Zdroj vody: cisterna</string>
+	<string name="poi_additional_atm_yes">Bankomat: áno</string>
+	<string name="poi_material_wood">Materiál: drevo</string>
+	<string name="poi_material_metal">Materiál: kov</string>
+	<string name="poi_material_reinforced_concrete">Materiál: posilnený betón</string>
+	<string name="poi_material_concrete">Materiál: betón</string>
+	<string name="poi_material_steel">Materiál: oceľ</string>
+	<string name="poi_material_stone">Materiál: kameň</string>
+	<string name="poi_material_masonry">Materiál: murivo</string>
+	<string name="poi_material_brick">Materiál: tehly</string>
+	<string name="poi_material_plastic">Materiál: plast</string>
+	<string name="poi_material_sandstone">Materiál: prieskovec</string>
+	<string name="poi_material_granite_stone">Materiál: granit/žula</string>
+	<string name="poi_material_metal_wood">Materiál: kov a drevo</string>
+	<string name="poi_material_glass">Materiál: sklo</string>
+	<string name="poi_material_bronze">Materiál: bronz</string>
+	<string name="poi_material_earth">Materiál: hlina</string>
+	<string name="poi_material_composite">Materiál: kompozit</string>
+	<string name="poi_material_limestone">Materiál: vápenec</string>
+	<string name="poi_material_marble">Materiál: mramor</string>
+	<string name="poi_material_aluminium">Materiál: hliník</string>
+
+	<string name="poi_step_count">Počet schodov</string>
+	<string name="poi_step_condition_even">Stav schodov: rovné</string>
+	<string name="poi_step_condition_uneven">Stav schodov: nerovné</string>
+	<string name="poi_step_condition_rough">Stav schodov: drsné</string>
+
+	<string name="poi_lit_no">Osvetlené: nie</string>
+
+	<string name="poi_memorial_bust">Busta</string>
+	<string name="poi_route_bus_ref">Autobus</string>
+	<string name="poi_route_share_taxi_ref">Zdieľaný taxík</string>
+	<string name="poi_route_trolleybus_ref">Trolejbus</string>
+	<string name="poi_route_tram_ref">Električka</string>
+	<string name="poi_route_train_ref">Vlak</string>
+	<string name="poi_route_light_rail_ref">Rýchloelektrička</string>
+	<string name="poi_route_monorail_ref">Jednokoľajka</string>
+	<string name="poi_route_funicular_ref">Lanovka</string>
+	<string name="poi_route_ferry_ref">Trajekt</string>
+
+	<string name="poi_route_railway_ref">Trasa železnice</string>
+
+	<string name="poi_historic_yes">Historický objekt</string>
+	<string name="poi_service_bicycle_retail_no">Predaj bicyklov: nie</string>
+	<string name="poi_service_bicycle_repair_no">Oprava bicyklov: nie</string>
+	<string name="poi_service_bicycle_rental_no">Požičovňa bicyklov: nie</string>
+	<string name="poi_service_bicycle_pump_no">Pumpa na bicykle: nie</string>
+	<string name="poi_service_bicycle_diy_no">Nástroje na opravu bicyklov: nie</string>
+	<string name="poi_service_bicycle_cleaning_no">Čistenie bicyklov: nie</string>
+	<string name="poi_service_bicycle_chaintool_yes">Nástroje na reťaz bicykla: áno</string>
+	<string name="poi_service_bicycle_chaintool_no">Nástroje na reťaz bicykla: nie</string>
+	<string name="poi_service_bicycle_second_hand_no">Predaj použitých bicyklov: nie</string>
+
+	<string name="poi_wildlife_hide">Miesto na sledovanie voľnej zveri</string>
+
+	<string name="poi_memorial_war">Vojnový pamätník</string>
+	<string name="poi_memorial_plaque">Pamätná doska</string>
+	<string name="poi_memorial_stone">Pamätný kameň</string>
+	<string name="poi_memorial_stele">Stéla</string>
 	</resources>
