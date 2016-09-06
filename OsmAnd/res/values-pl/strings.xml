@@ -315,7 +315,7 @@
     <string name="shared_string_favorites">Ulubione</string>
     <string name="layer_osm_bugs">Uwagi OSM (online)</string>
     
-    <string name="layer_poi">Użyteczne miejsca…</string>
+    <string name="layer_poi">Użyteczne miejsce…</string>
     <string name="layer_map">Zasób mapy…</string>
     <string name="menu_layers">Warstwy mapy</string>
     <string name="context_menu_item_search_poi">Szukaj Miejsc</string>
@@ -789,7 +789,7 @@ Mapy kafelkowe można uzyskać bezpośrednio z zasobów sieciowych, jak i przygo
     <string name="rendering_attr_noPolygons_name">Wielokąty</string>
     <string name="rendering_attr_appMode_name">Tryb renderowania</string>
     <string name="rendering_attr_appMode_description">Optymalizuj mapę dla</string>
-    <string name="rendering_attr_contourLines_description">Wyświetlanie od poziomu powiększenia (wymagane dane poziomicowe):</string>
+    <string name="rendering_attr_contourLines_description">Wyświetlanie od stopnia przybliżenia (wymaga danych poziomic):</string>
     <string name="rendering_attr_contourLines_name">Poziomice</string>
     <string name="rendering_attr_hmRendered_description">Zwiększ ilość detali pokazywanych na mapie</string>
     <string name="rendering_attr_hmRendered_name">Wyświetl więcej szczegółów na mapie</string>
@@ -1197,7 +1197,7 @@ OsmAnd jest otwarto-źródłowym programem do nawigacji z dostępem do szerokiej
     <string name="driving_region">Region ruchu</string>
     <string name="driving_region_canada">Kanada</string>
     <string name="map_widget_fps_info">Informacje diagnozowania błędów FPS</string>
-    <string name="local_index_tile_data_zooms">Pobrane poziomy: %1$s</string>
+    <string name="local_index_tile_data_zooms">Pobrane stopnie przybliżenia: %1$s</string>
     <string name="local_index_tile_data_expire">Wygaśnięcie (minuty): %1$s</string>
     <string name="local_index_tile_data_downloadable">Do pobrania: %1$s</string>
     <string name="local_index_tile_data_maxzoom">Maksymalne przybliżenie: %1$s</string>
@@ -1742,7 +1742,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="targets">Kierunki</string>
     <string name="way_alarms">Ostrzeżenia ruchu drogowego</string>
     <string name="speak_favorites">Pobliskie ulubione</string>
-    <string name="speak_poi">Pobliskie użyteczne miejsca</string>
+    <string name="speak_poi">Pobliskie użyteczne miejsce</string>
     <string name="save_track_to_gpx_globally">Rejestrowanie śladu do pliku GPX</string>
     <string name="save_track_to_gpx_globally_descr">Rejestrowanie położenia do pliku GPX można włączyć lub wyłączyć używając widżetu rejestrowania GPX na ekranie mapy</string>
     <string name="save_track_interval_globally">Częstość rejestrowania</string>
@@ -2387,11 +2387,11 @@ Włączenie tego widoku zmienia styl mapy na „Zima i narty”, ukazujący tere
     <string name="road_blocked">Droga zablokowana</string>
     <string name="switch_start_finish">Odwróć kolejność</string>
     <string name="rendering_attr_hideIcons_name">Ikony użytecznych miejsc</string>
-    <string name="rec_split">Podział rejestratora</string>
-    <string name="rec_split_title">Użyj podziału rejestratora</string>
-    <string name="rec_split_desc">Przenieś pliki gdy wykorzystana przestrzeń przekracza rozmiar pamięci nośnika</string>
-    <string name="rec_split_clip_length_desc">Długość każdego nagranego pliku nie będzie dłuższa niż określony przedział czasu</string>
-    <string name="rec_split_storage_size_desc">Ilość miejsca, jaka może być zajmowana przez wszystkie nagrane pliki</string>
+    <string name="rec_split">Dzielenie nagrań</string>
+    <string name="rec_split_title">Dzielenie rejestrowanych nagrań</string>
+    <string name="rec_split_desc">Przenosi pliki po wykorzystaniu określonej wielkości pamięci</string>
+    <string name="rec_split_clip_length_desc">Określa maksymalną długość każdego nagrania</string>
+    <string name="rec_split_storage_size_desc">Deklaruje maksymalną wielkość pamięci przeznaczoną dla wszystkich nagrań</string>
     <string name="osmand_plus_extended_description_4000_chars_v2">"
 OsmAnd Mapy i Nawigacja - znajdowanie lokalizacji na mapie i obliczanie tras bez połączenia z Internetem. Pobierz mapę danego kraju przed wyjazdem w podróż, aby znaleźć miejsca i trasy w nieznanym obszarze.
  
@@ -2525,7 +2525,7 @@ Jeśli potrzebujesz pomocy podczas używania OsmAnd, prosimy o kontakt z naszym 
     <string name="access_disable_wrong_direction_recalc">Utrzymywanie trasy po obraniu niewłaściwego kierunku</string>
     <string name="use_osm_live_routing_description">Włącza nawigację dla bieżących aktualizacji mapy (beta)</string>
 	<string name="access_disable_wrong_direction_recalc_descr">Zapobiega zmianie wyznaczonej trasy podczas poruszania się w niewłaściwym kierunku</string>
-    <string name="map_widget_battery">Poziom akumulatora</string>
+    <string name="map_widget_battery">Stan akumulatora</string>
     <string name="access_direction_audio_feedback_descr">Wskazuje kierunek do celu używając dźwięku</string>
     <string name="access_direction_audio_feedback">Dźwiękowe powiadomienia o kierunku</string>
     <!-- string name="lat_lon_pattern">Długość: %1$.5f Szerokość: %2$.5f</string -->
@@ -2618,8 +2618,8 @@ Jeśli potrzebujesz pomocy podczas używania OsmAnd, prosimy o kontakt z naszym 
     <string name="give_permission">Zezwól</string>
     <string name="allow_access_location">Zezwól na dostęp do położenia</string>
     <string name="search_my_location">Wyszukaj aktualne położenie</string>
-    <string name="no_update_info_desc">Nie wyszukuj aktualizacji dotyczących nowych wersji, rabatów na OsmAnd</string>
-    <string name="no_update_info">Nie wyszukuj aktualizacji</string>
+    <string name="no_update_info_desc">Nie sprawdza aktualizacji dotyczących nowych wersji, rabatów związanych z OsmAnd</string>
+    <string name="no_update_info">Pomijanie aktualizacji</string>
     <string name="update_all_maps_now">Uaktualnić wszystkie mapy?</string>
     <string name="clear_tile_data">Wyczyść wszystkie kafelki</string>
     <string name="osm_live_payment_desc">Opłaty za subskrypcję pobierane będą co miesiąc. Zawsze można z niej zrezygnować za pośrednictwem Google Play.</string>
