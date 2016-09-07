@@ -12,10 +12,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteSubregion;
 import net.osmand.binary.RouteDataObject;
+import net.osmand.data.MapObject;
+import net.osmand.data.QuadRect;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.router.PrecalculatedRouteDirection;
@@ -169,6 +173,12 @@ public class NativeLibrary {
 			String msgIfNothingFound);
 
 	protected static native boolean initFontType(byte[] byteData, String name, boolean bold, boolean italic);
+	
+	protected static native RenderedObject[] searchRenderedObjects(RenderingContext context, int x, int y);
+	
+	public RenderedObject[] searchRenderedObjectsFromContext(RenderingContext context, int x, int y) {
+		return searchRenderedObjects(context, x, y);
+	}
 
 	/**/
 	// Empty native impl
@@ -336,5 +346,41 @@ public class NativeLibrary {
 	
 
 
+	public static class RenderedObject extends MapObject {
+		private Map<String, String> tags = new LinkedHashMap<>();
+		private QuadRect bbox = new QuadRect(); 
+		private int x;
+		private int y;
+		
+		public Map<String, String> getTags() {
+			return tags;
+		}
+		
+		public boolean isText() {
+			return !getName().isEmpty();
+		}
+		
+		public void setLocation(int x, int y) {
+			this.x = x;
+			this.y = y;
+		}
+		
+		public void setBbox(int left, int top, int right, int bottom) {
+			bbox = new QuadRect(left, top, right, bottom);
+		}
+		
+		public QuadRect getBbox() {
+			return bbox;
+		}
+		
+		public void setNativeId(long id) {
+			setId(id);
+		}
+		
+		public void putTag(String t, String v) {
+			tags.put(t, v);
+		}
+			
+	}
 
 }
