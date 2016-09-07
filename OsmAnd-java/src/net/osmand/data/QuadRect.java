@@ -67,5 +67,10 @@ public class QuadRect {
 		right -= dx;
 		bottom -= dy;
 	}
+	
+	@Override
+	public String toString() {
+		return "[" + (float) left + "," + (float) top + " - " + (float) right + "," + (float) bottom + "]";
+	}
 
 }
