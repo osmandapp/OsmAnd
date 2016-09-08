@@ -1109,7 +1109,7 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="osmand_parking_warning">Advertencia</string>
     <string name="osmand_parking_warning_text">Una notificación para recoger tu automóvil se añadió al Calendario. Permanecerá allí hasta que la borres manualmente.</string>
     <string name="osmand_parking_time_limit_title">Definir el tiempo límite del estacionamiento</string>
-    <string name="osmand_parking_delete_confirm">¿Borrar marcador del estacionamiento?</string>
+    <string name="osmand_parking_delete_confirm">¿Quieres borrar el marcador del estacionamiento?</string>
     <string name="osmand_parking_delete">Quitar marcador de estacionamiento</string>
     <string name="osmand_parking_choose_type">Elige el tipo de estacionamiento</string>
     <string name="osmand_parking_lim_text">Tiempo limitado</string>
@@ -1758,7 +1758,7 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="add_favorite_dialog_favourite_added_template">El punto favorito \'\'{0}\'\' se añadió correctamente.</string>
     <string name="favourites_context_menu_edit">Editar favorito</string>
     <string name="favourites_context_menu_delete">Borrar favorito</string>
-    <string name="favourites_remove_dialog_msg">¿Borrar el favorito \'%s\'?</string>
+    <string name="favourites_remove_dialog_msg">¿Quieres borrar el favorito \'%s\'?</string>
     <string name="favourites_remove_dialog_success">El punto favorito {0} se borró correctamente.</string>
     
     
@@ -1796,7 +1796,7 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="default_buttons_commit">Confirmar</string>
     <string name="filter_current_poiButton">Filtro</string>
     <string name="edit_filter_save_as_menu_item">Guardar como</string>
-    <string name="edit_filter_delete_dialog_title">¿Borrar filtro elegido?</string>
+    <string name="edit_filter_delete_dialog_title">¿Quieres borrar el filtro elegido?</string>
     <string name="edit_filter_delete_message">Se borró el filtro {0}</string>
     <string name="edit_filter_create_message">Se creó el filtro {0}</string>
     <string name="email">correo electrónico</string>
@@ -2058,7 +2058,7 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
 	<string name="osn_close_dialog_error">Error: no se cerró el informe</string>
 	<string name="shared_string_commit">Confirmar</string>
 	
-    <string name="context_menu_item_delete_waypoint">¿Borrar punto de ruta GPX?</string>
+    <string name="context_menu_item_delete_waypoint">¿Quieres borrar el punto de ruta GPX?</string>
     <string name="context_menu_item_edit_waypoint">Editar punto de ruta GPX</string>
     <string name="rendering_attr_currentTrackColor_description">Color del GPX</string>
     <string name="rendering_attr_currentTrackWidth_description">Ancho del GPX</string>
@@ -2193,7 +2193,7 @@ Opciones adicionales:
 
 Complementos:
 • Mapas de curvas de nivel y sombreado del terreno: https://goo.gl/7mojP8
- Datos de curvas de nivel y visualización del terreno se agrega al mapa básico de OsmAnd.
+ Añade al mapa básico de OsmAnd, datos de curvas de nivel y visualización del terreno.
 
 • Mapa invernal: https://goo.gl/pX6DxJ
  Información sobre pistas de esquí, pistas de esquí de fondo, teleféricos y telesillas.
@@ -2373,7 +2373,7 @@ Si necesitas ayuda con la aplicación OsmAnd, contacte con nuestro equipo de sop
 
  • Mejoras en la capa de transporte con visualización del recorrido
 
- • Se agregaron más idiomas y ahora soporta idiomas regionales
+ • Se añadieron más idiomas y ahora soporta idiomas regionales
 
  • Muchas otras mejoras y correcciones de errores
 
