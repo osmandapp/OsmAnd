@@ -397,7 +397,7 @@
 	<string name="poi_raceway">Gerinne</string>
 	<string name="poi_racquet">Schläger</string>
 	<string name="poi_radiotechnics">Radiotechniker</string>
-	<string name="poi_halt">Eisenbahnhaltestelle (obsolet)</string>
+	<string name="poi_halt">Eisenbahnhaltestelle</string>
 	<string name="poi_railway_platform">Bahnsteig</string>
 	<string name="poi_railway_station">Bahnhof</string>
 	<string name="poi_rapids">Stromschnelle</string>
@@ -518,7 +518,7 @@
 	<string name="poi_swimming">Schwimmen</string>
 	<string name="poi_swimming_pool">Schwimmbecken</string>
 	<string name="poi_table_tennis">Tischtennis</string>
-	<string name="poi_tableware">Tischgeschirr</string>
+	<string name="poi_tableware">Tafelgeschirrgeschäft</string>
 	<string name="poi_craft_tailor">Schneider</string>
 	<string name="poi_tattoo">Tattoo-Studio</string>
 	<string name="poi_tax_inspection">Steuerprüfung</string>
@@ -529,7 +529,7 @@
 	<string name="poi_tennis">Tennis</string>
 	<string name="poi_theatre">Theater</string>
 	<string name="poi_theme_park">Vergnügungspark</string>
-	<string name="poi_ticket">Ticket-Shop</string>
+	<string name="poi_ticket">Ticketverkauf</string>
 	<string name="poi_craft_tiler">Dachdecker</string>
 	<string name="poi_craft_tinsmith">Klempner</string>
 	<string name="poi_tobacco">Tabakwarengeschäft</string>
@@ -2396,7 +2396,7 @@
 	<string name="poi_historic_period_ptolemaic_egypt">Historisches Zeitalter: Ptolemäisches Königreich (305 - 30 v. Chr.)</string>
 	<string name="poi_historic_period_villager">Historisches Zeitalter: Spiedler (Epoche I, II, 1580 v. Chr. - 133 n. Chr.)</string>
 	<string name="poi_historic_period_urban">Historisches Zeitalter: städtisch (Epoche III, 133 - 374 n. Chr.)</string>
-	<string name="poi_historic_period_classical">Historisches Zeitalter: Klassik (Epache IV, 374 - 900 n. Chr.)</string>
+	<string name="poi_historic_period_classical">Historisches Zeitalter: Klassik (Epoche IV, 374 - 900 n. Chr.)</string>
 	<string name="poi_historic_period_imperial">"Historisches Zeitalter: Imperialismus  (Epoch V, 900 - 1200 n. Chr.)"</string>
 
 	<string name="poi_historic_era_paleolithic">Historische Epoche: Altsteinzeit (2,6 millionen Jahre - 10000 BP (vor heute))</string>
@@ -2838,7 +2838,7 @@
 	<string name="poi_fire_hydrant_position_street">Hydrant Position: Straße</string>
 	<string name="poi_fire_hydrant_position_underground">Hydrant Position: Untergrund</string>
 	<string name="poi_fire_hydrant_style_wsh">Hydrantart: Schacht</string>
-	<string name="poi_fire_hydrant_style_water_source_main">Hydrant Wasserquelle : Haupt</string>
+	<string name="poi_fire_hydrant_style_water_source_main">Hydrantwasserquelle: Haupt</string>
 	<string name="poi_fire_hydrant_style_water_source_pond">Hydrant Wasserquelle : Teich</string>
 	<string name="poi_fire_hydrant_style_water_source_stream">Hydrant Wasserquelle : Wasserlauf</string>
 	<string name="poi_fire_hydrant_style_water_source_cistern">Hydrant Wasserquelle : Zisterne</string>
@@ -2913,7 +2913,7 @@
 <string name="poi_crossing_bell_yes">Kreuzungssignalton</string>
 	<string name="poi_crossing_bell_no">Kreuzungssignalton: nein</string>
 	<string name="poi_crossing_light_yes">Fußgängerampel</string>
-	<string name="poi_crossing_light_no">Fußgängerampel: nein</string>
+	<string name="poi_crossing_light_no">Kreuzungsampel: nein</string>
 	<string name="poi_crossing_on_demand_yes">Übergang auf Anfrage</string>
 	<string name="poi_crossing_on_demand_no">Übergang auf Anfrage: nein</string>
 	<string name="poi_crossing_saltire_yes">Andreaskreuz</string>
