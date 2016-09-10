@@ -1517,8 +1517,8 @@ Honek {1} MB behar ditu behin betiko.
 \nIbilbideko puntuak %2$s</string>
     <string name="gpx_selection_points">%1$s
 \nPuntu</string>
-    <string name="gpx_selection_track">%1$s
-\nLorratza %2$s</string>
+    <string name="gpx_selection_track">%1$s 
+Lorratza %2$s</string>
     <string name="shared_string_my_favorites">Nire gogokoak</string>
     <string name="shared_string_my_places">Nire Lekuak</string>
     
@@ -1969,9 +1969,11 @@ Honek {1} MB behar ditu behin betiko.
 - talde bat sortu;
 - gailu eta taldeak zerbitzariarekin sinkronizatu;
 - talde eta gailuak kudeatu webguneko kontrol panel pertsonal batean.</string>
-    <string name="osmo_plugin_description">"Gehigarri honek OpenStreetMap Monitoring webgunearen funtzio batzuk ematen dizkizu, ikusi https://osmo.mobi
-\n\nTalde batean parte hartzen duten gailuak denbora errealean jarraitu ditzakezu. Taldera gehitutako puntu eta lorratzak ere ikusi ditzakezu partaide bazara.
-\n\nTaldea ez da hilabeteetan ezabatu, bete OsMo.mobi webgunean taldea sortzean onartutako baldintzak "</string>
+    <string name="osmo_plugin_description">"Gehigarri honek OpenStreetMap Monitoring webgunearen funtzio batzuk ematen dizkizu, ikusi https://osmo.mobi 
+
+Talde batean parte hartzen duten gailuak denbora errealean jarraitu ditzakezu. Taldera gehitutako puntu eta lorratzak ere ikusi ditzakezu partaide bazara. 
+
+Taldea ez da hilabeteetan ezabatu, bete OsMo.mobi webgunean taldea sortzean onartutako baldintzak "</string>
     <string name="release_2_3">" • OSM Live. Babestu mapa egileak eta garatzaileak eta jaso orduz orduko eguneraketak.
 \n\n • Mapa-markatzaileak. Mapako lekuak atoan hautatzeko modu berri bat.\n\n • Xehetasun gehiagoko OSM mapak, herrialdeko bide seinaleekin eta mapa ezaugarri berri mordoarekin.\n\n • Ibilbide prestaketaren itxura berritua.\n\n • Maparen laster menuan hobekuntza ugari, hala nola helbide bilaketa zuzena.\n\n eta gehiago… "</string>
     <string name="storage_directory_readonly_desc">Hautatutako biltegiratze karpeta irakurtzeko soilik da. Biltegiratze karpeta barne memoriara aldatu da bitartean. Hautatu baliozko biltegiratze direktorio bat.</string>
