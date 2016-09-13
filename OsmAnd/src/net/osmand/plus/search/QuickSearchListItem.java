@@ -258,6 +258,10 @@ public class QuickSearchListItem {
 	}
 
 	public static Drawable getIcon(OsmandApplication app, SearchResult searchResult) {
+		if (searchResult == null || searchResult.objectType == null) {
+			return null;
+		}
+		
 		switch (searchResult.objectType) {
 			case CITY:
 				return app.getIconsCache().getIcon(R.drawable.ic_action_building_number,

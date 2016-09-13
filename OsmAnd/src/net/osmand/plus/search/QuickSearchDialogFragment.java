@@ -1078,7 +1078,6 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 	@Override
 	public void updateLocation(final Location location) {
-		this.location = location;
 		final Float heading = this.heading;
 		app.runInUIThread(new Runnable() {
 			@Override
@@ -1089,6 +1088,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	}
 
 	private void updateLocationUI(Location location, Float heading) {
+		this.location = location;
 		LatLon latLon = null;
 		if (location != null) {
 			latLon = new LatLon(location.getLatitude(), location.getLongitude());
