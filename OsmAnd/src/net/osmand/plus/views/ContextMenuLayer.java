@@ -61,6 +61,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	private IContextMenuProvider selectedObjectContextMenuProvider;
 	private boolean cancelApplyingNewMarkerPosition;
 	private LatLon applyingMarkerLatLon;
+	private boolean wasCollapseButtonVisible;
 
 	public ContextMenuLayer(MapActivity activity) {
 		this.activity = activity;
@@ -268,6 +269,12 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		mInChangeMarkerPositionMode = false;
 		mark(View.VISIBLE, R.id.map_ruler_layout,
 				R.id.map_left_widgets_panel, R.id.map_right_widgets_panel, R.id.map_center_info);
+
+		View collapseButton = activity.findViewById(R.id.map_collapse_button);
+		if (collapseButton != null && wasCollapseButtonVisible) {
+			collapseButton.setVisibility(View.VISIBLE);
+		}
+
 	}
 
 	private void enterMovingMode(RotatedTileBox tileBox) {
@@ -289,6 +296,14 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		mMoveMarkerBottomSheetHelper.show(menu.getLeftIcon());
 		mark(View.INVISIBLE, R.id.map_ruler_layout,
 				R.id.map_left_widgets_panel, R.id.map_right_widgets_panel, R.id.map_center_info);
+
+		View collapseButton = activity.findViewById(R.id.map_collapse_button);
+		if (collapseButton != null && collapseButton.getVisibility() == View.VISIBLE) {
+			wasCollapseButtonVisible = true;
+			collapseButton.setVisibility(View.INVISIBLE);
+		} else {
+			wasCollapseButtonVisible = false;
+		}
 
 		view.refreshMap();
 	}
