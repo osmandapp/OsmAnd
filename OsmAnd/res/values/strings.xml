@@ -9,9 +9,9 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
-    <string name="osm_live_payment_desc">Subscription fee will be charged each month. You can always cancel your subscription on Google Play.</string>
+    <string name="osm_live_payment_desc">Subscription fee will be charged each month. You can cancel your subscription on Google Play at any time.</string>
     <string name="donation_to_osm">Donation to OpenStreetMap community</string>
-    <string name="donation_to_osm_desc">Part of your donation will be sent to OSM users who submit changes to the OpenStreetMaps. Cost of the subscription remains the same.</string>
+    <string name="donation_to_osm_desc">Part of your donation will be sent to OSM users who submit changes to OpenStreetMap. The cost of the subscription remains the same.</string>
     <string name="osm_live_subscription_desc">Subscription enables hourly, daily, weekly updates and unlimited downloads for all maps around the world.</string>
     <string name="get_it">Get it</string>
     <string name="get_for">Get for %1$s</string>
