@@ -22,6 +22,7 @@
         android:layout_margin="8dp"
         android:background="?attr/downloadButtonBackground"
         android:text="@string/update_all"
+        android:textColor="?android:textColorPrimary"
         osmand:textAllCapsCompat="true"
         tools:visibility="visible"
         android:visibility="gone"/>
