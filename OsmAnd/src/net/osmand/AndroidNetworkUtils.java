@@ -71,7 +71,8 @@ public class AndroidNetworkUtils {
 				}
 				params = sb.toString();
 			}
-			connection = NetworkUtils.getHttpURLConnection(params == null || post ? url : url + "&" + params);
+			String paramsSeparator = url.indexOf('?') == -1 ? "?" : "&";
+			connection = NetworkUtils.getHttpURLConnection(params == null || post ? url : url + paramsSeparator + params);
 			connection.setRequestProperty("Accept-Charset", "UTF-8");
 			connection.setRequestProperty("User-Agent", Version.getFullVersion(ctx));
 			connection.setConnectTimeout(15000);

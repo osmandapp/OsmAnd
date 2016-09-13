@@ -262,19 +262,25 @@ public class IabHelper {
             }
         };
 
-        Intent serviceIntent = new Intent("com.android.vending.billing.InAppBillingService.BIND");
-        serviceIntent.setPackage("com.android.vending");
-        if (!mContext.getPackageManager().queryIntentServices(serviceIntent, 0).isEmpty()) {
-            // service available to handle that Intent
-            mContext.bindService(serviceIntent, mServiceConn, Context.BIND_AUTO_CREATE);
-        }
-        else {
-            // no service available to handle that Intent
-			mServiceConn = null;
+        try {
+            Intent serviceIntent = new Intent("com.android.vending.billing.InAppBillingService.BIND");
+            serviceIntent.setPackage("com.android.vending");
+            if (!mContext.getPackageManager().queryIntentServices(serviceIntent, 0).isEmpty()) {
+                // service available to handle that Intent
+                mContext.bindService(serviceIntent, mServiceConn, Context.BIND_AUTO_CREATE);
+            } else {
+                // no service available to handle that Intent
+                mServiceConn = null;
+                if (listener != null) {
+                    listener.onIabSetupFinished(
+                            new IabResult(BILLING_RESPONSE_RESULT_BILLING_UNAVAILABLE,
+                                    "Billing service unavailable on device."));
+                }
+            }
+        } catch (Exception e) {
             if (listener != null) {
-                listener.onIabSetupFinished(
-                        new IabResult(BILLING_RESPONSE_RESULT_BILLING_UNAVAILABLE,
-                        "Billing service unavailable on device."));
+                listener.onIabSetupFinished(new IabResult(IABHELPER_SUBSCRIPTIONS_NOT_AVAILABLE,
+                        "InAppBillingService not available"));
             }
         }
     }
@@ -290,7 +296,13 @@ public class IabHelper {
         mSetupDone = false;
         if (mServiceConn != null) {
             logDebug("Unbinding from service.");
-            if (mContext != null) mContext.unbindService(mServiceConn);
+			try {
+				if (mContext != null) {
+					mContext.unbindService(mServiceConn);
+				}
+			} catch (Exception e) {
+				logError("Unbinding failed.");
+			}
         }
         mDisposed = true;
         mContext = null;
