@@ -289,8 +289,8 @@
     <string name="transport_context_menu">Wyszukaj komunikację na przystanku</string>
 
 
-    <string name="poi_context_menu_modify">Modyfikuj UM</string>
-    <string name="poi_context_menu_delete">Usuń UM</string>
+    <string name="poi_context_menu_modify">Modyfikuj użyteczne miejsce</string>
+    <string name="poi_context_menu_delete">Usuń użyteczne miejsce</string>
     <string name="rotate_map_compass_opt">Względem kompasu</string>
     <string name="rotate_map_bearing_opt">Względem kierunku ruchu</string>
     <string name="rotate_map_none_opt">Bez obracania (północ na górze)</string>
@@ -392,12 +392,12 @@
     <string name="show_transport_over_map_description">Wyświetla na mapie przystanki transportu publicznego</string>
     <string name="show_transport_over_map">Pokaż przystanki</string>
     <string name="hello">Program do nawigacji satelitarnej OsmAnd</string>
-    <string name="update_poi_success">Uaktualniono dane UM (wczytano {0})</string>
+    <string name="update_poi_success">Uaktualniono dane użytecznych miejsc (wczytano {0})</string>
     <string name="update_poi_error_local">Błąd uaktualniania lokalnej listy UM</string>
     <string name="update_poi_error_loading">Błąd pobierania danych z serwera</string>
     <string name="update_poi_no_offline_poi_index">Brak danych offline UM dla tego rejonu</string>
     <string name="update_poi_is_not_available_for_zoom">Uaktualnianie UM jest niedostępne dla małych poziomów przybliżenia</string>
-    <string name="context_menu_item_update_poi">Uaktualnij UM</string>
+    <string name="context_menu_item_update_poi">Uaktualnij użyteczne miejsce</string>
     <string name="context_menu_item_update_map_confirm">Uaktualnić dane lokalne przez Internet?</string>
     <string name="search_history_city">Miasto: {0}</string>
     <string name="search_history_street">Ulica: {0}, {1}</string>
@@ -444,7 +444,7 @@
     <string name="opening_changeset">Otwieranie zestawu zmian…</string>
     <string name="closing_changeset">Zamykanie zestawu zmian…</string>
     <string name="commiting_node">Zapisywanie węzła…</string>
-    <string name="loading_poi_obj">Wczytywanie UM…</string>
+    <string name="loading_poi_obj">Wczytywanie użytecznego miejsca…</string>
     <string name="auth_failed">Autoryzacja nie powiodła się</string>
     <string name="failed_op">nie powiodło się</string>
     <string name="converting_names">Konwertowanie natywnych/angielskich nazw…</string>
@@ -591,9 +591,9 @@
     <string name="poi_create_title">Dodawanie użytecznego miejsca</string>
     <string name="poi_error_poi_not_found">Nie można odnaleźć węzła albo udogodnienie (amenity) nie jest pojedynczym węzłem</string>
     <string name="poi_remove_confirm_template">Usunąć {0} (wprowadź komentarz)?</string>
-    <string name="poi_remove_title">Usuń UM</string>
+    <string name="poi_remove_title">Usuń użyteczne miejsce</string>
     <string name="shared_string_delete">Usuń</string>
-    <string name="poi_remove_success">Usunięto UM</string>
+    <string name="poi_remove_success">Usunięto użyteczne miejsce</string>
     <string name="poi_action_add">dodaj</string>
     <string name="poi_action_change">zmień</string>
     <string name="poi_action_succeded_template">Zakończono czynność {0}.</string>
@@ -603,7 +603,7 @@
     <string name="poi_dialog_name">Nazwa</string>
     <string name="poi_dialog_opening_hours">Otwarte</string>
     <string name="poi_dialog_comment">Komentarz</string>
-    <string name="poi_dialog_comment_default">Zmiana UM</string>
+    <string name="poi_dialog_comment_default">Zmienianie użytecznego miejsca</string>
     <string name="poi_dialog_other_tags_message">Wszystkie pozostałe tagi pozostają bez zmian</string>
     <string name="default_buttons_commit">Wyślij</string>
     <string name="shared_string_clear">Wyczyść</string>
@@ -756,7 +756,7 @@ Mapy kafelkowe można uzyskać bezpośrednio z zasobów sieciowych, jak i przygo
     <string name="index_name_asia">Azja</string>
     <string name="index_name_oceania">Australia i Oceania</string>
     <string name="index_name_other">Mapy świata i tematyczne</string>
-    <string name="index_name_wiki">Wikipedia dla UM</string>
+    <string name="index_name_wiki">Wikipedia dla użytecznych miejsc</string>
     <string name="index_name_voice">Komunikaty głosowe (nagrane, ograniczone możliwości)</string>
     <string name="index_name_tts_voice">Komunikaty głosowe (syntezowane, zalecane)</string>
     <string name="amenity_type_osmwiki">Wikipedia (offline)</string>
@@ -2110,7 +2110,7 @@ Włączenie tego widoku zmienia styl mapy na „Zima i narty”, ukazujący tere
     <string name="av_locations_descr">Plik GPS z notatkami o położeniach</string>
     <string name="rendering_value_boldOutline_name">Pogrubione kontury</string>
     <string name="download_live_updates">Aktualizowanie na bieżąco</string>
-    <string name="commit_poi">Wyślij UM</string>
+    <string name="commit_poi">Wyślij użyteczne miejsce</string>
     <string name="tab_title_basic">Podstawowe</string>
     <string name="tab_title_advanced">Zaawansowane</string>
     <string name="next_proceed">Naprzód</string>
