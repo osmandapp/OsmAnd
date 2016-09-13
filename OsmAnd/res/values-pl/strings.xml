@@ -29,11 +29,11 @@
     <string name="gpx_navigation">Trasa GPX</string>
     <string name="data_to_search_poi_not_available">Brak danych lokalnych do wyszukania UM.</string>
     <string name="poi_filter_by_name">Szukaj wg nazwy</string>
-    <string name="old_poi_file_should_be_deleted">Plik \'%1$s\' z danymi UM jest nadmiarowy i można go usunąć.</string>
+    <string name="old_poi_file_should_be_deleted">Plik „%1$s” z danymi użytecznych miejsc jest zbędny i można go usunąć.</string>
     <string name="update_poi_file_not_found">Nie odnaleziono lokalnego pliku z użytecznymi miejscami i nie można go utworzyć.</string>
     <string name="update_poi_does_not_change_indexes">Zmiana UM w aplikacji nie powoduje zmian w mapie, a jedynie jest zapisywana w pliku lokalnym.</string>
     <string name="button_upgrade_osmandplus">Uaktualnij OsmAnd+</string>
-    <string name="map_version_changed_info">Na serwerze są mapy, które są niekompatybilne z tą wersją programu. Aby je pobrać i używać, musisz zaktualizować program do nowszej wersji.</string>
+    <string name="map_version_changed_info">Na serwerze są mapy, które są niekompatybilne z tą wersją programu. Aby je pobrać i używać, należy zaktualizować program do nowszej wersji.</string>
     <string name="shared_string_rename">Zmień nazwę</string>
 
     <string name="poi_filter_nominatim">Nominatim Online</string>
@@ -59,14 +59,14 @@
     <string name="local_index_mi_upload_gpx">Wyślij do OSM</string>
     <string name="show_more_map_detail">Wyświetl więcej szczegółów na mapie</string>
     <string name="show_more_map_detail_descr">Wyświetla więcej szczegółów na mapie wektorowej na niższych stopniach przybliżenia</string>
-    <string name="favourites_delete_multiple_succesful">Usunięto ulubiony punkt.</string>
-    <string name="favorite_delete_multiple">Usunąć %1$d ulubiony punkt i %2$d grupę ulubionych?</string>
+    <string name="favourites_delete_multiple_succesful">Usunięto ulubione miejsce.</string>
+    <string name="favorite_delete_multiple">Usunąć %1$d ulubione miejsca i %2$d grupę ulubionych?</string>
     <string name="favorite_home_category">Dom</string>
     <string name="favorite_friends_category">Znajomi</string>
     <string name="favorite_places_category">Miejsca</string>
     <string name="shared_string_others">Inne</string>
     <string name="shared_string_no_thanks">Niepotrzebne</string>
-    <string name="basemap_missing">Podstawowa mapa świata jest niezainstalowana. Pobierz plik World_basemap_x.obf aby mieć widok całego świata.</string>
+    <string name="basemap_missing">Nie zainstalowano podstawowej mapy świata. Proszę pobrać plik World_basemap_x.obf, aby wyświetlać mapę poglądową całego świata.</string>
     <string name="vector_data_missing">Brak danych (\'offline\') w urządzeniu na karcie SD. Proszę zwrócić uwagę pobierając ją, aby używać map w trybie offline.</string>
     <string name="local_index_gpx_info_show">\n\nProszę nacisnąć i przytrzymać, aby wyświetlić opcje</string>
 
@@ -81,10 +81,10 @@
     <string name="local_index_mi_restore">Przywróć</string>
     <string name="local_index_mi_backup">Zarchiwizuj</string>
 
-    <string name="local_index_mi_reload">Odśwież</string>
+    <string name="local_index_mi_reload">Wczytaj ponownie</string>
     <string name="shared_string_download">Pobierz</string>
 
-    <string name="local_index_poi_data">Dane UM</string>
+    <string name="local_index_poi_data">Dane użytecznych miejsc</string>
     <string name="local_index_address_data">Dane adresowe</string>
     <string name="local_index_transport_data">Dane transportu publicznego</string>
     <string name="local_index_map_data">Dane mapy</string>
@@ -94,7 +94,7 @@
 
     <string name="local_indexes_cat_tile">Mapy online i buforowane kafelki</string>
     <string name="local_indexes_cat_map">Mapy standardowe (wektorowe)</string>
-    <string name="local_indexes_cat_poi">Dane UM</string>
+    <string name="local_indexes_cat_poi">Dane użytecznych miejsc</string>
     <string name="ttsvoice">Głos syntezowany</string>
     <string name="search_offline_clear_search">Nowe wyszukiwanie</string>
     <string name="map_text_size_descr">Wybierz rozmiar tekstu dla nazw na mapie</string>
@@ -139,7 +139,7 @@
     <string name="map_overlay_descr">Wybierz nakładkę (overlay)</string>
     <string name="tile_source_already_installed">Mapa jest już zainstalowana, ustawienia zostaną zaktualizowane</string>
     <string name="select_tile_source_to_install">Proszę wybrać mapy (kafelkowe) do zainstalowania lub uaktualnienia</string>
-    <string name="internet_not_available">Połączenie internetowe, wymagane dla tej operacji, jest niedostępne</string>
+    <string name="internet_not_available">Połączenie internetowe, wymagane dla tej czynności jest niedostępne</string>
     <string name="install_more">Zainstaluj więcej…</string>
 
 
@@ -148,7 +148,7 @@
 
 
     <string name="error_doing_search">Wystąpił błąd podczas wyszukiwania offline</string>
-    <string name="search_offline_geo_error">Nie można zinterpretować \'%s\'</string>
+    <string name="search_offline_geo_error">Nie można przetworzyć „%s”</string>
     <string name="search_osm_offline">Wyszukaj adres korzystając z map offline</string>
     <string name="system_locale">Systemowy</string>
     <string name="preferred_locale_descr">Wybiera język interfejsu (po zmianie należy uruchomić program ponownie)</string>
@@ -1741,8 +1741,8 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="waypoints">Punkty trasy</string>
     <string name="targets">Kierunki</string>
     <string name="way_alarms">Ostrzeżenia ruchu drogowego</string>
-    <string name="speak_favorites">Pobliskie ulubione</string>
-    <string name="speak_poi">Pobliskie użyteczne miejsce</string>
+    <string name="speak_favorites">Pobliskie ulubione miejsca</string>
+    <string name="speak_poi">Pobliskie użyteczne miejsca</string>
     <string name="save_track_to_gpx_globally">Rejestrowanie śladu do pliku GPX</string>
     <string name="save_track_to_gpx_globally_descr">Rejestrowanie położenia do pliku GPX można włączyć lub wyłączyć używając widżetu rejestrowania GPX na ekranie mapy</string>
     <string name="save_track_interval_globally">Częstość rejestrowania</string>
@@ -1764,13 +1764,13 @@ Nagrane ślady można udostępnić znajomym lub wykorzystać na rzecz rowoju map
     <string name="local_index_description">Kliknij istniejący element, aby zobaczyć szczegóły, naciśnij i przytrzymaj, aby wyłączyć lub usunąć. Aktualne dane na urządzeniu (%1$s wolne):</string>
     <string name="text_size_descr">Ustaw rozmiar tekstu na mapie.</string>
     <string name="text_size">Rozmiar tekstu</string>
-    <string name="fav_point_dublicate">Powielona nazwa ulubionego punktu</string>
+    <string name="fav_point_dublicate">Powielona nazwa ulubionego miejsca</string>
     <string name="fav_point_dublicate_message">Określone ulubiona nazwa jest już w użyciu, nazwa została zmieniona na %1$s aby uniknąć powielania.</string>
 
 
     <string name="speed_limit_exceed">Tolerancja ograniczenia prędkości</string>
     <string name="speed_limit_exceed_message">Wybiera zakres tolerancji ograniczenia prędkości, powyżej którego zostanie użyte ostrzeżenie głosowe.</string>
-    <string name="fav_point_emoticons_message">Nazwa ulubionego punktu została zmieniona na %1$s, aby prawidłowo ułatwić zapisywanie do pliku ciągu z emotikonem.</string>
+    <string name="fav_point_emoticons_message">Nazwa ulubionego miejsca została zmieniona na %1$s, aby prawidłowo ułatwić zapisywanie do pliku ciągu z emotikonem.</string>
     <string name="print_route">Drukuj trasę</string>
     <string name="osmo_device_not_found">Nie odnaleziono urządzenia</string>
     <string name="osmo_no_connection_msg">Nie można połączyć się z serwisem OsMo:\n- sprawdź połączenie internetowe,\n- sprawdź ustawienia,\n- sprawdź nasz Twitter: https://twitter.com/OsMomobi</string>
