@@ -838,4 +838,136 @@
 	<string name="poi_payment_cryptocurrencies_no">Ez dira kripto-monetak onartzen</string>
 	<string name="poi_payment_others_yes">Bestelako ordainketa metodoak onartzen dira</string>
 	<string name="poi_payment_others_no">Ez dira bestelako ordainketa metodoak onartzen</string>
+	<string name="poi_chimney">Tximinia</string>
+	<string name="poi_palm">Palmera</string>
+	<string name="poi_cypress">Altzifrea</string>
+	<string name="poi_bench_yes">Eserlekuekin</string>
+	<string name="poi_bench_no">Eserleku gabe</string>
+	<string name="poi_shelter_type_public_transport">Aterpe mota: Garraio publikoa</string>
+	<string name="poi_shelter_type_picnic_shelter">Aterpe mota: Picnic aterpea</string>
+	<string name="poi_shelter_type_weather_shelter">Aterpe mota: Eguraldirako aterpea</string>
+	<string name="poi_shelter_type_basic_hut">Aterpe mota: oinarrizko txabola</string>
+	<string name="poi_shelter_type_building">Aterpe mota: eraikina</string>
+	<string name="poi_shelter_type_wildlife_hide">Aterpe mota: Basabizitza parada</string>
+	<string name="poi_shelter_type_rock_shelter">Aterpe mota: Arkaitzezko aterpea</string>
+	<string name="poi_shelter_type_sun_shelter">Aterpe mota: eguzkitarako aterpea</string>
+	<string name="poi_shelter_type_tent">Aterpe mota: Denda</string>
+	<string name="poi_shelter_type_abandoned">Aterpe mota: utzitakoa</string>
+
+	<string name="poi_internet_access_type_wlan">Internet sarbide mota: wlan</string>
+	<string name="poi_internet_access_type_terminal">Internet sarbide mota: terminala</string>
+	<string name="poi_internet_access_type_wired">Internet sarbide mota: kableatuta</string>
+	<string name="poi_internet_access_type_public">Internet sarbide mota: publikoa</string>
+	<string name="poi_internet_access_type_service">Internet sarbide mota: zerbitzua</string>
+	<string name="poi_internet_access_type_no">Internet sarbideik ez</string>
+	<string name="poi_internet_access_type_yes">Internet sarbidearekin</string>
+
+	<string name="poi_maxwidth">Gehieneko zabalera</string>
+	<string name="poi_width">Zabalera</string>
+
+	<string name="poi_architect_name">Arkitektoa</string>
+
+	<string name="poi_architecture_modern">Arkitektura: modernoa</string>
+	<string name="poi_architecture_stalinist_neoclassicism">Arkitektura: neoklasizismo estalinista</string>
+	<string name="poi_architecture_eclectic">Arkitektura: eklektikoa</string>
+	<string name="poi_architecture_new_objectivity">Arkitektura: objektibitate berria</string>
+	<string name="poi_architecture_contemporary">Arkitektura: garaikidea</string>
+	<string name="poi_architecture_constructivism">Arkitektura: konstruktuibismoa</string>
+	<string name="poi_architecture_art_nouveau">Arkitektura: art nouveau</string>
+	<string name="poi_architecture_neoclassicism">Arkitektura: neoklasizismoa</string>
+	<string name="poi_architecture_brutalism">Arkitektura: brutalismoa</string>
+	<string name="poi_architecture_classicism">Arkitektura: klasizismoa</string>
+	<string name="poi_architecture_gothic">Arkitektura: gotikoa</string>
+	<string name="poi_architecture_baroque">Arkitektura: barrokoa</string>
+	<string name="poi_tunnel_car">Errepide tunela</string>
+	<string name="poi_tunnel_pedestrian">Oinezkoentzako tunela</string>
+	<string name="poi_tunnel_railway">Trenbide tunela</string>
+	<string name="poi_bridge_car">Errepide zubia</string>
+	<string name="poi_bridge_pedestrian">Oinezkoentzako zubia</string>
+	<string name="poi_bridge_bicycle">Bizikletentzako zubia</string>
+	<string name="poi_bridge_railway">Trenbide zubia</string>
+	<string name="poi_stone">Arkaitz aipagarria</string>
+	<string name="poi_cape">Lurmuturra</string>
+	<string name="poi_beach">Hondartza</string>
+	<string name="poi_sand">Hondarra</string>
+
+	<string name="poi_beach_sand">Hondartza mota: hondarra</string>
+	<string name="poi_beach_resort">Hondartzako opor-lekua</string>
+	<string name="poi_beach_shingle">Hondartza mota: harri-koskorrak</string>
+	<string name="poi_beach_rocky">Hondartza mota: arrokak</string>
+
+	<string name="poi_entrance_main">Sarrera nagusia</string>
+	<string name="poi_entrance">Sarrera</string>
+	<string name="poi_entrance_exit">Irteera</string>
+
+	<string name="poi_icn_ref">Txirrindularitza sare intenazionalaren nodoa</string>
+	<string name="poi_ncn_ref">Txirrindularitza sare nazionalaren nodoa</string>
+	<string name="poi_rcn_ref">Eskualdeko txirrindularitza sarearen nodoa</string>
+	<string name="poi_lcn_ref">Tokiko txirrindularitza sarearen nodoa</string>
+	<string name="poi_seasonal_yes">Sasoikoa</string>
+	<string name="poi_seasonal_no">Urte osokoa</string>
+	<string name="poi_seasonal_dry_season">Sasoi lehorra</string>
+	<string name="poi_seasonal_wet_season">Sasoi hezea</string>
+	<string name="poi_seasonal_spring">Udaberria</string>
+	<string name="poi_seasonal_summer">Uda</string>
+	<string name="poi_seasonal_autumn">Udazkena</string>
+	<string name="poi_seasonal_winter">Negua</string>
+	<string name="poi_crossing_traffic_signals">Semaforoekin</string>
+	<string name="poi_crossing_uncontrolled">Kontrolatu gabea</string>
+	<string name="poi_crossing_unmarked">Markatu gabea</string>
+	<string name="poi_start_date">Hasiera data</string>
+	<string name="poi_wheelchair">Gurpil-aulkia</string>
+	<string name="poi_wheelchair_no">Gurpil-aulkia: Ez irisgarria</string>
+	<string name="poi_wheelchair_limited">Gurpil-aulkia: mugatua</string>
+	<string name="poi_wholesale">Handizkako salmenta</string>
+
+	<string name="poi_access_private">Sarbide pribatua</string>
+	<string name="poi_access_no">Sarbiderik ez</string>
+	<string name="poi_access_destination">Helburura sarbidea</string>
+	<string name="poi_access_permissive">Sarbide permisiboa</string>
+	<string name="poi_access_customers">Bezeroentzako sarbidea</string>
+	<string name="poi_access_delivery">Banaketarako sarbidea</string>
+	<string name="poi_access_agricultural">Nekazal sarbidea</string>
+
+	<string name="poi_content_water">Edukia: ura</string>
+	<string name="poi_content_oil">Edukia: Petroleoa</string>
+	<string name="poi_content_fuel">Edukia: erregaia</string>
+	<string name="poi_content_wine">Edukia: ardoa</string>
+	<string name="poi_content_gas">Edukia: gasa</string>
+	<string name="poi_content_biomass">Edukia: biomasa</string>
+	<string name="poi_content_beer">Edukia: garagardoa</string>
+	<string name="poi_content_salt">Edukia: gatza</string>
+	<string name="poi_nudism_yes">Nudismoa: onartua</string>
+	<string name="poi_nudism_no">Nudismoa: debekatua</string>
+	<string name="poi_nudism_obligatory">Nudismoa: derrigorrezkoa</string>
+	<string name="poi_nudism_customary">Nudismoa: ohikoa</string>
+	<string name="poi_nudism_permissive">Nudismoa: permisiboa</string>
+
+	<string name="poi_trade_building_supplies">Eraikuntzarako gaiak</string>
+	<string name="poi_grass">Belarra</string>
+	<string name="poi_grassland">Belardia</string>
+	<string name="poi_level">Maila</string>
+	<string name="poi_rtsa_scale">RTSA eskala</string>
+
+	<string name="poi_piste_difficulty_easy">Pistaren zailtasuna: erraza</string>
+	<string name="poi_piste_difficulty_intermediate">Pistaren zailtasuna: tartekoa</string>
+	<string name="poi_piste_difficulty_advanced">Pistaren zailtasuna: aurreratua</string>
+	<string name="poi_piste_difficulty_novice">Pistaren zailtasuna: hasberria</string>
+	<string name="poi_piste_difficulty_expert">Pistaren zailtasuna: Aditua</string>
+	<string name="poi_piste_difficulty_freeride">Pistaren zailtasuna: pistatik kanpo</string>
+	<string name="poi_wiki_place">Wikipedia</string>
+	<string name="poi_wiki_lang_en">Wikia ingelesez</string>
+	<string name="poi_wiki_lang_ar">Wikia Arabieraz</string>
+	<string name="poi_wiki_lang_be">Wikia Bieloerrusieraz</string>
+	<string name="poi_wiki_lang_bg">Wikia Bulgarieraz</string>
+	<string name="poi_wiki_lang_ca">Wikia Katalanez</string>
+	<string name="poi_beacon">Itsasargia</string>
+	<string name="poi_craft_basket_maker">Otzaragina</string>
+	<string name="poi_craft_blacksmith">Errementaria</string>
+	<string name="poi_craft_brewery">Garagardo-lantegia</string>
+	<string name="poi_craft_boatbuilder">Ontzigilea</string>
+	<string name="poi_craft_carpenter">Arotza</string>
+	<string name="poi_craft_clockmaker">Erlojugilea</string>
+	<string name="poi_craft_dressmaker">Jostuna</string>
+	<string name="poi_craft_electrician">Argiketaria</string>
 	</resources>
