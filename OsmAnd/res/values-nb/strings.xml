@@ -1720,4 +1720,10 @@
     <string name="storage_place_description">OsmAnds datalagring (for kart, spor, etc.): %1$s.</string>
     <string name="first_usage_greeting">Få anvisninger og oppdag nye steder uten å ha internettforbindelse</string>
     <string name="update_all_maps_now">Vil du oppdatere alle kart nå?</string>
+    <string name="osm_live_payment_desc">Abonnementsavgift belastes hver måned. Du kan alltid avbryte ditt abonnement på Google Play.</string>
+    <string name="donation_to_osm">Donasjon til OpenStreetMap fellesskapet</string>
+    <string name="donation_to_osm_desc">En del av donasjonen sendes til OSM brukere som sender endringer i OpenStreetMaps. Kostnadene for abonnementet forblir uendret.</string>
+    <string name="osm_live_subscription_desc">Abonnement muliggjør oppdateringer for hver time, daglig, ukentlig og ubegrenset nedlastinger av alle kart over hele verden.</string>
+    <string name="get_it">Få det</string>
+    <string name="get_for">Få for %1$s</string>
     </resources>
