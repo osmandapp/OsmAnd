@@ -1104,7 +1104,7 @@ Les dades globals (entre 70 graus nord i 70 graus sud) estan basades en mesures 
     <string name="driving_region_us">Estats Units</string>
     <string name="driving_region_canada">Canadà</string>
     <string name="driving_region_europe_asia">Europa i Àsia</string>
-    <string name="driving_region_uk">Regne Unit, Austràlia i altres</string>
+    <string name="driving_region_uk">Regne Unit, Índia o semblant</string>
     <string name="guidance_preferences_descr">Preferències de navegació</string>
     <string name="routing_preferences_descr">Preferències de càlcul de la ruta</string>
     <string name="speech_rate_descr">Especifiqueu la velocitat de síntesi de veu</string>
@@ -2446,4 +2446,5 @@ Si aprecieu OsmAnd  i OSM i voleu ajudar-los, és la via perfecta per fer-ho."</
     <string name="donation_to_osm">Donació a la comunitat OpenStreetMap</string>
     <string name="donation_to_osm_desc">"Part de la vostra donació s\'enviarà als usuaris d\'OSM que facin edicions a OpenStreetMaps.  El cost de la subscripció és el mateix."</string>
     <string name="osm_live_subscription_desc">La subscripció permet actualitzacions setmanals, diàries i horàries i baixades de tants mapes com vulgueu de qualsevol lloc del món.</string>
+    <string name="driving_region_australia">Austràlia</string>
     </resources>
