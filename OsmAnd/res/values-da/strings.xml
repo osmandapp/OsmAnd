@@ -2648,8 +2648,8 @@ Hvis du  ønsker at støtte OsmAnd og OSM, er dette en god måde at gøre det p�
     <string name="osm_live_banner_desc">Få ubegrænset hentning af kort og opdateringer mere end en gang om måneden: hver time, dagligt eller ugentligt.</string>
     <string name="osmand_plus_banner_desc">Fuld version af OsmAnd med ubegrænset hentning af kort og månedlige kort opdateringer.</string>
     <string name="get_it">Få det</string>
-    <string name="osm_live_payment_desc">Abonnementsafgift opkræves hver måned. Kan altid annulleres på Google Play.</string>
+    <string name="osm_live_payment_desc">Abonnementsafgift opkræves hver måned. Kan opsiges på Google Play når som helst.</string>
     <string name="donation_to_osm">Donation til OpenStreetMap fællesskabet</string>
-    <string name="donation_to_osm_desc">En del af donationen vil blive sendt til OSM brugere, som laver ændringer til OpenStreetMaps. Prisen på abonnementet forbliver den samme.</string>
+    <string name="donation_to_osm_desc">En del af donationen vil blive sendt til OSM brugere, som laver ændringer til OpenStreetMap. Prisen på abonnementet forbliver den samme.</string>
     <string name="osm_live_subscription_desc">Abonnement giver mulighed for opdateringer hver time, dagligt, ugentligt og ubegrænset hentning af alle kort i verden.</string>
     </resources>
