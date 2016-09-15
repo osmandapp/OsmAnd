@@ -1082,7 +1082,8 @@
     <string name="driving_region_us">United States</string>
     <string name="driving_region_canada">Canada</string>
     <string name="driving_region_europe_asia">Europe &amp; Asia</string>
-    <string name="driving_region_uk">UK, India, Australia &amp; Others</string>
+    <string name="driving_region_uk">UK, India, &amp; similar</string>
+    <string name="driving_region_australia">Australia</string>
     <string name="speak_title">Announce…</string>
     <string name="speak_descr">Configure to announce street names, traffic warnings (forced stops, speed bumps), speed camera warnings, speed limits</string>
     <string name="speak_street_names">Street names (TTS)</string>

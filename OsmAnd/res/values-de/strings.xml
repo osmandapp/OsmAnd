@@ -1269,7 +1269,8 @@ Die globalen Daten (zwischen N 70° und S 70°) basieren auf Messungen von SRTM 
 	<string name="driving_region_us">USA</string>
 	<string name="driving_region_canada">Kanada</string>
 	<string name="driving_region_europe_asia">Europa und Asien</string>
-	<string name="driving_region_uk">GB, Indien, Australien u.a.</string>
+	<string name="driving_region_uk">GB, Indien, u.ä.</string>
+	<string name="driving_region_australia">Australien</string>
 	<string name="announce_gpx_waypoints">GPX-Wegpunkte</string>
 	<string name="driving_region">Fahrgebiet</string>
 	<string name="about_version">Version:</string>
