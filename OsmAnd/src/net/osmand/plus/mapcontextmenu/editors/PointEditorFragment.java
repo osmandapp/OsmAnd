@@ -35,6 +35,7 @@ public abstract class PointEditorFragment extends Fragment {
 
 	private View view;
 	private EditText nameEdit;
+	private boolean cancelled;
 
 	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 	@Override
@@ -72,6 +73,7 @@ public abstract class PointEditorFragment extends Fragment {
 		cancelButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				cancelled = true;
 				dismiss();
 			}
 		});
@@ -205,7 +207,7 @@ public abstract class PointEditorFragment extends Fragment {
 
 	@Override
 	public void onDestroyView() {
-		if (!wasSaved() && !getEditor().isNew()) {
+		if (!wasSaved() && !getEditor().isNew() && !cancelled) {
 			save(false);
 		}
 		super.onDestroyView();
