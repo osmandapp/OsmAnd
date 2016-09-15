@@ -351,8 +351,8 @@ public class NativeLibrary {
 	public static class RenderedObject extends MapObject {
 		private Map<String, String> tags = new LinkedHashMap<>();
 		private QuadRect bbox = new QuadRect(); 
-		private TIntArrayList x;
-		private TIntArrayList y;
+		private TIntArrayList x = new TIntArrayList();
+		private TIntArrayList y = new TIntArrayList();
 		
 		public Map<String, String> getTags() {
 			return tags;
