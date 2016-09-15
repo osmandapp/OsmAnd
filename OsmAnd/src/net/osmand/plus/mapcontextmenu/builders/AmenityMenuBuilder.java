@@ -301,6 +301,10 @@ public class AmenityMenuBuilder extends MenuBuilder {
 				}
 			}
 
+			if (vl.startsWith("http://") || vl.startsWith("https://") || vl.startsWith("HTTP://") || vl.startsWith("HTTPS://")) {
+				vl = vl.replace(' ', '_');
+			}
+
 			if (isDescription) {
 				descriptions.add(new AmenityInfoRow(key, R.drawable.ic_action_note_dark, textPrefix,
 						vl, 0, false, true, true, 0, "", false, false));
