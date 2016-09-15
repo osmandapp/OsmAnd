@@ -1,5 +1,7 @@
 package net.osmand;
 
+import gnu.trove.list.array.TIntArrayList;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -349,8 +351,8 @@ public class NativeLibrary {
 	public static class RenderedObject extends MapObject {
 		private Map<String, String> tags = new LinkedHashMap<>();
 		private QuadRect bbox = new QuadRect(); 
-		private int x;
-		private int y;
+		private TIntArrayList x;
+		private TIntArrayList y;
 		
 		public Map<String, String> getTags() {
 			return tags;
@@ -360,9 +362,17 @@ public class NativeLibrary {
 			return !getName().isEmpty();
 		}
 		
-		public void setLocation(int x, int y) {
-			this.x = x;
-			this.y = y;
+		public void addLocation(int x, int y) {
+			this.x.add(x);
+			this.y.add(y);
+		}
+		
+		public TIntArrayList getX() {
+			return x;
+		}
+		
+		public TIntArrayList getY() {
+			return y;
 		}
 		
 		public void setBbox(int left, int top, int right, int bottom) {
