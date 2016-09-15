@@ -1134,7 +1134,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="driving_region_descr">Sélectionnez la région de conduite : États-Unis, Europe, Royaume-Uni, Asie et autres</string>
     <string name="driving_region">Région de conduite</string>
     <string name="driving_region_europe_asia">Europe &amp; Asie</string>
-    <string name="driving_region_uk">Angleterre, Inde, Australie et autres</string>
+    <string name="driving_region_uk">Royaume-Uni, Inde et équivalents</string>
 
 
     <string name="speak_title">Annonces vocale</string>
@@ -2316,4 +2316,5 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="osm_live_subscription_desc">L\'abonnement permet de bénéficier des mises à jour horaires, quotidiennes, hebdomadaires et de télécharger de nouvelles cartes sans limite.</string>
     <string name="osm_live_payment_desc">Le coût de l\'abonnement sera prélevé chaque mois. Vous avez la possibilité d\'annuler votre abonnement sur Google Play.</string>
     <string name="donation_to_osm_desc">Une partie de votre don sera reversée aux contributeurs OSM qui mettent à jour OpenStreetMaps. Le coût de l\'abonnement reste identique.</string>
+    <string name="driving_region_australia">Australie</string>
     </resources>
