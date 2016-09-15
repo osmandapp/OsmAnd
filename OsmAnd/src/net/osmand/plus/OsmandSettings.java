@@ -756,7 +756,9 @@ public class OsmandSettings {
 				return DrivingRegion.CANADA;
 			} else if (df.getCountry().equalsIgnoreCase(Locale.JAPAN.getCountry())) {
 				return DrivingRegion.JAPAN;
-				// potentially wrong in europe
+			} else if (df.getCountry().equalsIgnoreCase(Locale.AU.getCountry())) {
+				return DrivingRegion.AUSTRALIA;
+// potentially wrong in Europe
 //			} else if(df.getCountry().equalsIgnoreCase(Locale.UK.getCountry())) {
 //				return DrivingRegion.UK_AND_OTHERS;
 			}
