@@ -477,7 +477,7 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 		view.findViewById(R.id.context_menu_bottom_view).setBackgroundColor(nightMode ?
 				getResources().getColor(R.color.ctx_menu_info_view_bg_dark) : getResources().getColor(R.color.ctx_menu_info_view_bg_light));
 
-		getMapActivity().getMapLayers().getMapControlsLayer().setControlsClickable(false);
+		//getMapActivity().getMapLayers().getMapControlsLayer().setControlsClickable(false);
 
 		return view;
 	}
@@ -782,7 +782,7 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 		}
 		menu.setMapCenter(null);
 		menu.setMapZoom(0);
-		getMapActivity().getMapLayers().getMapControlsLayer().setControlsClickable(true);
+		//getMapActivity().getMapLayers().getMapControlsLayer().setControlsClickable(true);
 	}
 
 	public void rebuildMenu() {
