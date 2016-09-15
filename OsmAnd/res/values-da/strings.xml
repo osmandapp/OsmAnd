@@ -1308,7 +1308,7 @@ Liste over understøttede lande (dybest set hele verden!): Afghanistan, Albanien
     <string name="driving_region_us">USA</string>
     <string name="driving_region_canada">Canada</string>
     <string name="driving_region_europe_asia">Europa &amp; Asien</string>
-    <string name="driving_region_uk">Storbritannien, Indien, Australien m.fl.</string>
+    <string name="driving_region_uk">Storbritannien, Indien og lignende</string>
     <string name="driving_region">Område</string>
     <string name="driving_region_descr">Vælg område: USA, Europa, England, Asien m.fl.</string>
     <string name="map_widget_fps_info">FPS-fejlsøgningssinfo</string>
@@ -2652,4 +2652,5 @@ Hvis du  ønsker at støtte OsmAnd og OSM, er dette en god måde at gøre det p�
     <string name="donation_to_osm">Donation til OpenStreetMap fællesskabet</string>
     <string name="donation_to_osm_desc">En del af donationen vil blive sendt til OSM brugere, som laver ændringer til OpenStreetMap. Prisen på abonnementet forbliver den samme.</string>
     <string name="osm_live_subscription_desc">Abonnement giver mulighed for opdateringer hver time, dagligt, ugentligt og ubegrænset hentning af alle kort i verden.</string>
+    <string name="driving_region_australia">Australien</string>
     </resources>
