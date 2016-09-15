@@ -928,7 +928,7 @@
     <string name="add_as_last_destination_point">Добавить как последний промежуточный пункт</string>
     <string name="add_as_first_destination_point">Добавить как первый промежуточный пункт</string>
     <string name="replace_destination_point">Заменить пункт назначения</string>
-    <string name="new_destination_point_dialog">Вы уже установили пункт назначения.</string>
+    <string name="new_destination_point_dialog">Пункт назначения уже установлен:</string>
     <string name="target_point">Пункт %1$s</string>
     <string name="target_points">Пункты назначения</string>
     <string name="intermediate_point">Промежуточный пункт %1$s</string>
@@ -1064,7 +1064,7 @@
     <string name="driving_region_japan">Япония</string>
     <string name="driving_region_us">США</string>
     <string name="driving_region_europe_asia">Европа и Азия</string>
-    <string name="driving_region_uk">Англия, Индия, Австралия и др.</string>
+    <string name="driving_region_uk">Великобритания, Индия и др.</string>
     <string name="context_menu_item_directions_to">Проложить маршрут</string>
     <string name="context_menu_item_directions_from">Пункт отправления</string>
     <string name="driving_region_canada">Канада</string>
@@ -1617,7 +1617,7 @@
     <string name="shared_string_go">Поехали</string>
     <string name="plugin_nautical_descr">"Плагин расширяет возможности OsmAnd, делая доступными морские карты для катания на лодках, парусного спорта и других видов спорта.
 \n\nСпециальная дополнительная карта для OsmAnd добавляет морские навигационные и условные знаки как для внутренней, так и для прибрежной навигации. Описание навигационных отметок содержит информацию, необходимую для их идентификации, а также их характеристики (категория, форма, цвет, последовательность мерцания огней и т.д.).\n\nЧтобы вернуться к одному из традиционных стилей карт в OsmAnd, просто деактивируйте этот плагин или измените на желаемый \"Стиль карты\" в разделе \"Настройка карты\". "</string>
-    <string name="local_osm_changes_upload_all_confirm">Вы собираетесь загрузить %1$d изменений OSM. Вы уверены?</string>
+    <string name="local_osm_changes_upload_all_confirm">Вы собираетесь отправить %1$d изменений в OSM. Вы уверены?</string>
     <string name="confirmation_to_clear_history">Вы хотите очистить историю?</string>
     <string name="plugin_ski_descr">"Плагин обеспечивает вам доступ к данным о горнолыжных трассах, маршрутах для беговых лыж, альпийских спусках, фуникулерах и горнолыжных подъемниках. Маршруты и спуски отмечены разными цветами в зависимости от их сложности и изображены с использованием специального \"зимнего\" стиля карты, который заключается в том, что используются \"снежные\" цвета зимнего пейзажа.\n\nВ случае активации этого вида, стиль карты меняется на \"Winter and ski\", показывая все детали пейзажа так, как они выглядят зимой. Такой (зимний) вид может быть отменен либо путем деактивации здесь, либо если вы поменяете \"Стиль карты\" в меню \"Настройка карты\" на желаемый вид. "</string>
     <string name="osmo_grop_name_length_alert">Имя группы должно быть минимум 3 символа!</string>
@@ -1829,7 +1829,7 @@
     <string name="share_geo">гео:</string>
     <string name="share_menu_location">Поделиться местоположением</string>
     <string name="shared_string_send">Отправить</string>
-    <string name="application_dir_description">Выберите где вы хотите хранить файлы карт и другие данные</string>
+    <string name="application_dir_description">Выберите, где вы хотите хранить файлы карт и другие данные.</string>
     <string name="show_on_start_description">\"Отключено\" непосредственно запускает экран карты</string>
     <string name="map_downloaded">Карта загружена</string>
     <string name="shared_string_qr_code">QR-код</string>
@@ -1934,7 +1934,9 @@
     <string name="osm_live_subscription_settings">Параметры подписки</string>
     <string name="osm_live_ask_for_purchase">Пожалуйста сначала приобретите подписку OSM Live</string>
 
-    <string name="osm_live_header">Эта подписка позволяет получать ежечасное обновление для всех карт мира. Основная часть доходов переводится в OSM сообщество и выплачивается за каждого взноса OSM. В случае, если вы любите OsmAnd и OSM и хотите поддержать его, это идеальный способ сделать это.</string>
+    <string name="osm_live_header">Эта подписка позволяет получать ежечасное обновление для всех карт мира.
+Часть доходов переводится сообществу OSM и выплачивается за каждый вклад в OSM.
+Если вы любите OsmAnd и OSM и хотите поддержать их, это отличный способ сделать это.</string>
     
     <string name="select_map_marker">Выберите маркер</string>
     <string name="map_markers_other">Другие маркеры</string>
@@ -1967,7 +1969,7 @@
     <string name="osm_live_not_active">Неактивные</string>
     <string name="osm_live_region_desc">Часть вашего пожертвования будет направляться пользователям OpenStreetMap внесшим изменения в карту этого региона</string>
     <string name="download_files_error_not_enough_space">Недостаточно места! Необходимо {3} Мб временно и {1} Мб на постоянной основе. В настоящее время доступно только {2} Мб свободного места.</string>
-    <string name="upload_osm_note_description">Вы можете загрузить вашу OSM заметку анонимно, или используя свой профиль OpenStreetMap.org</string>
+    <string name="upload_osm_note_description">Можно отправить заметку OSM анонимно или используя свой профиль OpenStreetMap.org.</string>
     <string name="upload_osm_note">Загрузить OSM заметку</string>
     <string name="use_drawer_btn">Использовать меню</string>
     <string name="use_dashboard_btn">Использовать домашнюю страницу</string>
@@ -2075,13 +2077,13 @@
     <string name="first_usage_greeting">Прокладывайте маршруты и открывайте новые для себя места без подключения к интернету</string>
     <string name="allow_access_location">Разрешить доступ к местоположению</string>
     <string name="give_permission">Дать разрешение</string>
-    <string name="storage_place_description">OsmAnd будет хранить ваши данные в %1$s</string>
+    <string name="storage_place_description">OsmAnd будет хранить данные (карты, маршруты и пр.) в %1$s.</string>
     <string name="storage_free_space">Свободное место</string>
     <string name="search_location">Определение местоположения…</string>
     <string name="no_inet_connection_desc_map">Требуется загрузить карты</string>
     <string name="no_inet_connection">Соединение с интернетом отсутствует</string>
     <string name="location_not_found">Не удалось определить местоположение</string>
-    <string name="first_usage_wizard_desc">OsmAnd определит ваше местоположение и предложит загрузить карты для этой области</string>
+    <string name="first_usage_wizard_desc">OsmAnd определит ваше местоположение и предложит загрузить карты для этой области.</string>
     <string name="search_map">Поиск карты…</string>
     <string name="search_another_country">Выберите другой регион</string>
     <string name="skip_map_downloading">Пропустить загрузку карт</string>
@@ -2094,8 +2096,13 @@
     <string name="osm_live_banner_desc">Получите неограниченные загрузки для карт, а также обновления чаще чем один раз в месяц: ежечасно, ежедневно или еженедельно.</string>
     <string name="osmand_plus_banner_desc">Полная версия OsmAnd с неограниченным количеством загрузок и ежемесячных обновлений для карт.</string>
     <string name="select_voice_provider">Выберите голосовое сопровождение</string>
-    <string name="osm_live_payment_desc">Абонентская плата будет взиматься ежемесячно. Вы всегда можете отменить подписку на Google Play.</string>
+    <string name="osm_live_payment_desc">Абонентская плата будет взиматься ежемесячно. Отменить подписку можно на Google Play в любой момент.</string>
     <string name="donation_to_osm">Пожертвование для сообщества OpenStreetMap</string>
-    <string name="donation_to_osm_desc">Часть вашего пожертвования будет отправлена пользователям OSM, которые вносят изменения в OpenStreetMaps. Стоимость подписки при этом остается прежней.</string>
+    <string name="donation_to_osm_desc">Часть вашего пожертвования будет отправлена пользователям OSM, вносящим изменения в OpenStreetMaps. Стоимость подписки при этом остаётся прежней.</string>
     <string name="osm_live_subscription_desc">Подписка включает в себя ежечасные, ежедневные и еженедельные обновления, а также неограниченное количество доступных загрузок для всех карт со всего мира.</string>
+    <string name="av_locations_descr">Файл GPX с координатами заметок</string>
+    <string name="lang_ast">Астурийский</string>
+    <string name="lang_hsb">Верхнелужицкий</string>
+    <string name="lang_be_BY">Белорусский (латиница)</string>
+    <string name="driving_region_australia">Австралия</string>
     </resources>
