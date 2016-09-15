@@ -1100,7 +1100,7 @@ Dessa globala data (mellan 70 grader norr och 70 grader syd) är baserade på SR
     <string name="driving_region_us">USA</string>
     <string name="driving_region_canada">Kanada</string>
     <string name="driving_region_europe_asia">Europa &amp; Asien</string>
-    <string name="driving_region_uk">UK, Indien, Australien &amp; andra</string>
+    <string name="driving_region_uk">UK, Indien och liknande</string>
     <string name="local_osm_changes_backup_successful">Ändrad OSM-fil skapad utan problem %1$s</string>
     <string name="about_version">Version:</string>
     <string name="shared_string_about">Om</string>
