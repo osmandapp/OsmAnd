@@ -56,9 +56,9 @@
 
 
     <string name="download_files_not_enough_space">Non c\'è abbastanza spazio per scaricare %1$s MB (liberi: %2$s).</string>
-    <string name="download_files_question_space">Scaricare {0} file(s)?
+    <string name="download_files_question_space">Vuoi veramente scaricare {0} file?
 Servirebbero {1} MB permanentemente.
-Ora, sono disponibili solo {2} MB.</string>
+Attualmente sono disponibili solo {2} MB.</string>
 
 
     <string name="use_transparent_map_theme">Tema trasparente</string>
@@ -1296,7 +1296,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="route_to">A:</string>
     <string name="route_via">Per:</string>
     <string name="route_from">Da:</string>
-    <string name="osb_author_dialog_password">Password OSM (opzionale)</string>
+    <string name="osb_author_dialog_password">Password di OSM (opzionale)</string>
     <string name="speak_title">Annuncia…</string>
     <string name="speak_descr">Configura per annunciare i nomi delle strade, gli avvertimenti di traffico (fermate forzate, dossi), gli avvisi autovelox, i limiti di velocità</string>
     <string name="speak_street_names">Nomi delle strade (TTS)</string>
@@ -1461,9 +1461,11 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="navigation_intent_invalid">Formato non valido: %s</string>
     <string name="osmo_settings_uuid">ID univoco del dispositivo</string>
     <string name="osmo_settings_descr">Configura le impostazioni di monitoraggio e imposta il canale di monitoraggio personale</string>
-    <string name="osmo_plugin_description">"Questo componente aggiuntivo fornisce parzialmente le funzionalità del monitoraggio avanzato in diretta OsMo, vedi http://osmo.mobi.
+    <string name="osmo_plugin_description">"Questo componente aggiuntivo fornisce parzialmente le funzionalità del monitoraggio di OpenStreetMap, vedi http://osmo.mobi.
+
 
 Puoi tracciare in tempo reale tutti i dispositivi di un gruppo di partecipanti. Puoi anche visualizzare i punti e le tracce caricate dal gruppo a cui appartieni.
+
 
 Il gruppo che non è stato rimosso da mesi viene allineato con le tue regole per la creazione di gruppi nel sito OsMo.mobi
  "</string>
@@ -1483,7 +1485,7 @@ Il gruppo che non è stato rimosso da mesi viene allineato con le tue regole per
 
     <string name="osmo_auto_send_locations_descr">Avvia automaticamente il viaggio e invia la localizzazione dopo l\'avvio dell\'applicazione</string>
     <string name="osmo_auto_send_locations">Avvia automaticamente il viaggio</string>
-    <string name="osmo_tracker_id">ID tracciamento</string>
+    <string name="osmo_tracker_id">ID del tracciamento</string>
     <string name="osmo_tracker_id_descr">Clicca per visualizzare l\'ID della tracciabilità</string>
     <string name="osmo_session_token">Token della sessione: %1$s</string>
     <string name="osmo_auth_pending">In attesa di autorizzazione…</string>
@@ -1495,7 +1497,7 @@ Il gruppo che non è stato rimosso da mesi viene allineato con le tue regole per
     <string name="minutes_ago">minuti fa</string>
     <string name="seconds_ago">secondi fa</string>
     <string name="osmo_connect_to_device_name">Nome utente</string>
-    <string name="osmo_connect_to_device_tracker_id">ID tracciabilità</string>
+    <string name="osmo_connect_to_device_tracker_id">ID del tracciatore</string>
     <string name="osmo_connect_to_device">Collegamento con il dispositivo</string>
 
 
@@ -1517,7 +1519,7 @@ Il gruppo che non è stato rimosso da mesi viene allineato con le tue regole per
     <string name="osmo_expire_group">Scade fra</string>
     <string name="osmo_group_description">Descrizione</string>
     <string name="osmo_group_policy">Regole</string>
-    <string name="osmo_connect_to_group_id">ID gruppo</string>
+    <string name="osmo_connect_to_group_id">ID del gruppo</string>
     <string name="osmo_group_name">Nome gruppo</string>
     <string name="osmo_connect_to_group">Collegamento con il gruppo</string>
     <string name="osmo_connect">Entra</string>
@@ -1549,7 +1551,7 @@ Il gruppo che non è stato rimosso da mesi viene allineato con le tue regole per
     <string name="osmo_center_location">Centra nello schermo</string>
     <string name="osmo_set_moving_target">Imposta come obiettivo mobile</string>
     <string name="osmo_use_server_name">Nome registrato</string>
-    <string name="osmo_connect_to_my_nickname">Nickname</string>
+    <string name="osmo_connect_to_my_nickname">Soprannome</string>
     <string name="osmo_user_name">Utente</string>
 
 
@@ -1610,7 +1612,7 @@ Il gruppo che non è stato rimosso da mesi viene allineato con le tue regole per
     <string name="osmo_group_information_desc">"
  - Quando crei un gruppo, per favore, dagli un nome e una descrizione
 
- - Dall\'app possono essere creati solo gruppi di tipo Semplice, più informazioni su sito https://osmo.mobi/g/new
+ - Dall\'app possono essere creati solo gruppi di tipo semplice, più informazioni su sito https://osmo.mobi/g/new
  
  - Attraverso il sito è possibile gestire il gruppo e aggiungere tracce e punti disponibili per tutti
  
@@ -1950,7 +1952,7 @@ Attivando questa vista lo stile della mappa diventerà \'Inverno e sci\', mostra
     <string name="waypoint_visit_before">Visita prima</string>
     <string name="shared_string_collapse">Compatta</string>
     <string name="action_create">Azione crea</string>
-    <string name="action_modify">Azione modifica</string>
+    <string name="action_modify">Modificato</string>
     <string name="action_delete">Azione elimina</string>
     <string name="osm_edits">Modifiche OSM</string>
     <string name="osmand_parking_hour">h</string>
@@ -2200,7 +2202,7 @@ Attivando questa vista lo stile della mappa diventerà \'Inverno e sci\', mostra
     <string name="enter_country_name">Inserisci il nome della nazione</string>
     <string name="new_version">Nuova versione</string>
     <string name="begin_with_osmand_menu_group">Primi passi con OsmAnd</string>
-    <string name="features_menu_group">Funzionalità</string>
+    <string name="features_menu_group">Funzioni</string>
     <string name="help_us_to_improve_menu_group">Aiutaci a migliorare OsmAnd</string>
     <string name="other_menu_group">Altro</string>
     <string name="plugins_menu_group">Componenti aggiuntivi</string>
@@ -2231,26 +2233,26 @@ Attivando questa vista lo stile della mappa diventerà \'Inverno e sci\', mostra
     <string name="rendering_attr_hideProposed_name">Oggetti proposti</string>
     <string name="read_more">Altro</string>
     <string name="whats_new">Novità di</string>
-    <string name="share_osm_edits_subject">Modifiche OSM condivise tramite OsmAnd</string>
+    <string name="share_osm_edits_subject">Modifiche di OSM condivise tramite OsmAnd</string>
     <string name="lang_nds">Basso tedesco</string>
     <string name="lang_mk">Macedone</string>
     <string name="save_poi_without_poi_type_message">Vuoi davvero salvare il PDI senza specificarne il tipo?</string>
-    <string name="context_menu_item_delete_waypoint">Cancellare il waypoint del GPX?</string>
-    <string name="context_menu_item_edit_waypoint">Modifica il waypoint del GPX</string>
+    <string name="context_menu_item_delete_waypoint">Cancellare i waypoint del GPX?</string>
+    <string name="context_menu_item_edit_waypoint">Modifica i waypoint del GPX</string>
     <string name="shared_string_location">Posizione</string>
-    <string name="poi_context_menu_modify_osm_change">Modifica gli edit OSM</string>
-    <string name="access_from_map_description">"Il pulsante  del menu apre il pannello di controllo, non il menu"</string>
+    <string name="poi_context_menu_modify_osm_change">Modifica i cambiamenti di OSM</string>
+    <string name="access_from_map_description">Il pulsante del menù apre il pannello di controllo, non il menù</string>
     <string name="access_from_map">Accedi dalla mappa</string>
     <string name="copied_to_clipboard">Copiato negli appunti</string>
     <string name="osm_save_offline">Salva offline</string>
-    <string name="osm_edit_modified_poi">PDI OSM modificato</string>
-    <string name="osm_edit_deleted_poi">PDI OSM eliminato</string>
-    <string name="context_menu_item_open_note">Apri una nota OSM</string>
-    <string name="osm_edit_reopened_note">Nota OSM riaperta</string>
-    <string name="osm_edit_commented_note">Nota OSM commentata</string>
-    <string name="osm_edit_removed_note">Nota OSM eliminata</string>
-	<string name="osm_edit_created_note">Nota OSM creata</string>
-	<string name="osn_bug_name">Nota OSM</string>
+    <string name="osm_edit_modified_poi">PDI di OSM modificato</string>
+    <string name="osm_edit_deleted_poi">PDI di OSM eliminato</string>
+    <string name="context_menu_item_open_note">Apri una nota di OSM</string>
+    <string name="osm_edit_reopened_note">Nota di OSM riaperta</string>
+    <string name="osm_edit_commented_note">Nota di OSM commentata</string>
+    <string name="osm_edit_removed_note">Nota di OSM eliminata</string>
+	<string name="osm_edit_created_note">Nota di OSM creata</string>
+	<string name="osn_bug_name">Nota di OSM</string>
 	<string name="osn_add_dialog_title">Crea nota</string>
 	<string name="osn_comment_dialog_title">Aggiungi un commento</string>
 	<string name="osn_reopen_dialog_title">Riapri la nota</string>
@@ -2266,7 +2268,7 @@ Attivando questa vista lo stile della mappa diventerà \'Inverno e sci\', mostra
     <string name="rendering_attr_roadStyle_description">Stile delle strade</string>
     <string name="poi_dialog_reopen">Riapri</string>
 	<string name="use_dashboard_btn">Usa il pannello di controllo</string>
-    <string name="use_drawer_btn">Utilizza menu</string>
+    <string name="use_drawer_btn">Utilizza menù</string>
     <string name="dashboard_or_drawer_title">Pannello di controllo o menù</string>
     <string name="please_specify_poi_type_only_from_list">Specifica il corretto tipo di PDI o salta questo passaggio</string>
     <string name="routing_attr_avoid_stairs_name">Evita le scale</string>
@@ -2281,7 +2283,7 @@ Attivando questa vista lo stile della mappa diventerà \'Inverno e sci\', mostra
  • Configura quali e come vengono visualizzate le voci nel pannello di controllo
 
 
- • Salta il pannello di controllo se preferisci i controlli dell\'app tipo menu
+ • Salta il pannello di controllo se preferisci i controlli dell\'app tipo menù
 
 
  • Per scaricare mappe, regioni è possibile selezionarle direttamente tappando sulla mappa mondiale
@@ -2322,14 +2324,14 @@ Attivando questa vista lo stile della mappa diventerà \'Inverno e sci\', mostra
 <string name="route_distance">Distanza:</string>
     <string name="route_duration">Tempo:</string>
     <string name="missing_write_external_storage_permission">L\'app non ha l\'autorizzazione per usare la SD card</string>
-<string name="no_location_permission">"L\'app non ha i permessi per accedere ai dati della  posizione."</string>
+<string name="no_location_permission">L\'app non ha i permessi per accedere ai dati della posizione.</string>
     <string name="no_camera_permission">L\'app non ha i permessi per accedere alla fotocamera.</string>
     <string name="no_microphone_permission">L\'app non ha i permessi per accedere al microfono.</string>
     <string name="impassable_road_desc">Seleziona le strade che vuoi evitare nella navigazione</string>
     <string name="shared_string_sound">Suono</string>
     <string name="select_voice_provider">Selezionare la guida vocale</string>
     <string name="select_voice_provider_descr">Seleziona o scarica la guida vocale per la tua lingua</string>
-    <string name="live_updates">Aggiornamenti</string>
+    <string name="live_updates">Aggiornamenti Live</string>
     <string name="available_maps">Mappe disponibili</string>
     <string name="last_update">Ultimo aggiornamento: %s</string>
 
@@ -2338,7 +2340,7 @@ Attivando questa vista lo stile della mappa diventerà \'Inverno e sci\', mostra
     <string name="rec_split_clip_length">Lunghezza della nota</string>
     <string name="rec_split_clip_length_desc">Ogni nota registrata non supererà la durata impostata</string>
     <string name="rec_split_storage_size">Dimensione della memoria</string>
-    <string name="rec_split_storage_size_desc">Quantità di spazio che può essere occupato dal totale delle note</string>
+    <string name="rec_split_storage_size_desc">Quantità di spazio che può essere occupata dal totale delle note</string>
     <string name="update_time">Ora di aggiornamento</string>
     <string name="updates_size">Dimensione aggiornamenti</string>
     <string name="last_map_change">Ultimo cambiamento della mappa: %s</string>
@@ -2368,7 +2370,7 @@ Attivando questa vista lo stile della mappa diventerà \'Inverno e sci\', mostra
     <string name="data_is_not_available">Dati non disponibili</string>
     <string name="rendering_attr_hideUnderground_name">Oggetti sotterranei</string>
     <string name="shared_string_read_more">Approfondisci</string>
-    <string name="shared_string_email_address">Indirizzo email</string>
+    <string name="shared_string_email_address">Indirizzo e-mail</string>
     <string name="shared_string_status">Stato</string>
     <string name="shared_string_save_changes">Salva le modifiche</string>
     <string name="show_polygons">Mostra i poligoni</string>
@@ -2413,34 +2415,34 @@ Sito: http://osmand.net
 
 Se hai bisogno di assistenza con l\'app OsmAnd, contatta il nostro team di supporto: support@osmand.net. 
  "</string>
-    <string name="rendering_attr_showMtbRoutes_name">Mostra i percorsi MTB</string>
-    <string name="select_map_markers">Scegli i marcatori della mappa</string>
+    <string name="rendering_attr_showMtbRoutes_name">Mostra i percorsi per mountain bike</string>
+    <string name="select_map_markers">Scegli i marcatori</string>
     <string name="shared_string_reverse_order">Inverti l\'ordine</string>
     
-    <string name="show_map_markers_description">Attiva la funzionalità marcatori mappa</string>
+    <string name="show_map_markers_description">Attiva la funzionalità dei marcatori</string>
     <string name="clear_active_markers_q">Vuoi eliminare tutti i marcatori attivi?</string>
-    <string name="clear_markers_history_q">Vuoi eliminare la cronologia dei marcatori della mappa?</string>
+    <string name="clear_markers_history_q">Vuoi eliminare la cronologia dei marcatori?</string>
     <string name="active_markers">Marcatori attivi</string>
-    <string name="map_markers">Marcatori mappa</string>
-    <string name="map_marker">Marcatore mappa</string>
-    <string name="add_points_to_map_markers_q">Vuoi aggiungere tutti i punti ai marcatori mappa?</string>
-    <string name="shared_string_add_to_map_markers">Aggiungi marcatori alla mappa</string>
+    <string name="map_markers">Marcatori</string>
+    <string name="map_marker">Marcatore</string>
+    <string name="add_points_to_map_markers_q">Vuoi aggiungere tutti i punti ai marcatori?</string>
+    <string name="shared_string_add_to_map_markers">Aggiungi ai marcatori</string>
     <string name="consider_turning_polygons_off">È consigliato disabilitare il disegno dei poligoni.</string>
     
-    <string name="map_marker_1st">Primo marcatore mappa</string>
-    <string name="map_marker_2nd">Secondo marcatore mappa</string>
-    <string name="shared_string_toolbar">Barra strumenti</string>
-    <string name="shared_string_widgets">Widgets</string>
-    <string name="select_map_marker">Scegli marcatore mappa</string>
+    <string name="map_marker_1st">Primo marcatore</string>
+    <string name="map_marker_2nd">Secondo marcatore</string>
+    <string name="shared_string_toolbar">Barra degli strumenti</string>
+    <string name="shared_string_widgets">Widget</string>
+    <string name="select_map_marker">Scegli marcatore</string>
     <string name="map_markers_other">Altri marcatori</string>
     <string name="download_files_error_not_enough_space">Manca spazio!
 Servirebbero {3} MB temporaneamente e {1} MB permanentemente.
-Ora, sono disponibili solo {2} MB.</string>
-    <string name="download_files_question_space_with_temp">Scaricare veramente {0} file(s)?
+Attualmente sono disponibili solo {2} MB.</string>
+    <string name="download_files_question_space_with_temp">Vuoi veramente scaricare {0} file?
 Servirebbero {3} MB temporaneamente e {1} MB permanentemente.
-Ora, sono disponibili solo {2} MB.</string>
-    <string name="upload_osm_note_description">Puoi inviare le tue Note OSM anonimamente se utilizzi il tuo profilo OpenStreetMap.org.</string>
-    <string name="upload_osm_note">Invia Nota OSM</string>
+Attualmente sono disponibili solo {2} MB.</string>
+    <string name="upload_osm_note_description">Puoi inviare le tue note OSM anonimamente se utilizzi il tuo profilo di OpenStreetMap.org.</string>
+    <string name="upload_osm_note">Carica nota OSM</string>
     <string name="donations">Donazioni</string>
     <string name="number_of_recipients">Numero di destinatari</string>
     <string name="osm_user_stat">Modifiche %1$s, posizione %2$s, modifiche totali %3$s</string>
@@ -2455,37 +2457,52 @@ Ora, sono disponibili solo {2} MB.</string>
     <string name="osm_live_month_cost_desc">Pagamento mensile</string>
     <string name="osm_live_active">Attivo</string>
     <string name="osm_live_not_active">Non attivo</string>
-    <string name="osm_live_enter_email">Per favore inserire un indirizzo email valida</string>
-    <string name="osm_live_enter_user_name">Prego inserire il Nome Pubblico</string>
-    <string name="osm_live_thanks">Geazie di aver sottoscritto il live updates!</string>
-    <string name="osm_live_region_desc">Parte della tua donazione sarà inviata agli utilizzatori OSM che sottopongono modifiche alla mappa in quella regione</string>
+    <string name="osm_live_enter_email">Per favore inserisci un indirizzo email valido</string>
+    <string name="osm_live_enter_user_name">Per favore inserisci il nome pubblico</string>
+    <string name="osm_live_thanks">Grazie per aver sottoscritto gli aggiornamenti live!</string>
+    <string name="osm_live_region_desc">Parte della tua donazione sarà inviata agli utenti OSM che sottopongono modifiche alla mappa in quella regione</string>
     <string name="osm_live_subscription_settings">Impostazioni della sottoscrizione</string>
     <string name="osm_live_ask_for_purchase">Per favore acquista prima la sottoscrizione a OSM Live</string>
 
-    <string name="osm_live_header">La sottoscrizione abilita agli aggiornamenti orari per tutte le mappe del mondo.
+    <string name="osm_live_header">La sottoscrizione abilita gli aggiornamenti orari per tutte le mappe del mondo.
 Parte degli incassi ritornano alla comunità OSM ed è corrisposto per ogni contributo OSM.
-Se ami OsmAnd e OSM e vuoi sostenerli è un modo perfetto farlo.</string>
+Se ami OsmAnd e OSM e vuoi sostenerli, questo è un modo perfetto per farlo.</string>
     
-    <string name="upload_anonymously">Invia anonimamente</string>
+    <string name="upload_anonymously">Carica anonimamente</string>
     <string name="show_transparency_seekbar">Mostra la barra di ricerca trasparente</string>
     <string name="shared_string_topbar">Barra superiore</string>
     <string name="recalculate_route">Ricalcola il percorso</string>
     <string name="shared_string_move_up">Sposta in alto</string>
     <string name="shared_string_move_down">Sposta in basso</string>
     <string name="finish_navigation">Termina la navigazione</string>
-    <string name="avoid_road">Evita la strada</string>
+    <string name="avoid_road">Evita strada</string>
     <string name="storage_directory_shared">Memoria condivisa</string>
-    <string name="storage_directory_readonly_desc">La cartella di memorizzazione selezionata è in sola lettura. La cartella di memorizzazione sarà temporaneamente cambiata nella memoria interna. Per favore scegliere una cartella di destinazione valida.</string>
+    <string name="storage_directory_readonly_desc">La cartella di memorizzazione selezionata è in sola lettura. La cartella di memorizzazione sarà temporaneamente cambiata nella memoria interna. Per favore scegli una cartella di destinazione valida.</string>
     <string name="report">Rapporto</string>
-    <string name="storage_permission_restart_is_required">Ora l\'applicazione ha i permessi per scrivere sulla memoria esterna. È necessario riavviare l\'applicazione.</string>
+    <string name="storage_permission_restart_is_required">Ora l\'applicazione ha i permessi per scrivere sulla memoria esterna. È necessario riavviare manualmente l\'applicazione.</string>
     <string name="full_report">Rapporto completo</string>
-    <string name="open_street_map_login_and_pass">Nome utente e password OpenStreetMap</string>
+    <string name="open_street_map_login_and_pass">Nome utente e password di OpenStreetMap</string>
     <string name="file_name_containes_illegal_char">Il nome del file contiene caratteri non ammessi</string>
-<string name="no_map_markers_found">Aggiungi i marcatori della mappa sulla mappa</string>
+<string name="no_map_markers_found">Aggiungi i marcatori sulla mappa</string>
     <string name="no_waypoints_found">Nessun punto intermedio trovato</string>
-    <string name="release_2_3">" • OSM Live. Sostiene i contributori della mappa e gli sviluppatori e si hanno gli aggiornamenti orari della mappa.\n\n • Marcatori mappa. Un nuovo modo per selezionare facilmente i luoghi sulla mappa.\n\n • Mappe OSM più dettagliate con scudetti dei nomi delle strade specifici per ogni nazione  e molte nuove caratteristiche.
-\n\n • Aspetto e gestione migliorati della preparazione del percorso.
-\n\n • Molti miglioramenti nel menu contestuale della mappa e nella ricerca contestuale degli indirizzi.\n\n e altro… "</string>
+    <string name="release_2_3">"
+ • OSM Live. Supporto ai contributori della mappa e gli sviluppatori e aggiornamenti orari della mappa.
+
+
+ • Marcatori mappa. Un nuovo modo per selezionare facilmente i luoghi sulla mappa.
+
+
+ • Mappe OSM più dettagliate con scudetti dei nomi delle strade specifici per ogni nazione  e molte nuove caratteristiche.
+
+
+ • Aspetto e gestione migliorati della preparazione del percorso.
+
+
+ • Molti miglioramenti nel menu contestuale della mappa e nella ricerca contestuale degli indirizzi.
+
+
+ e altro…
+ "</string>
     <string name="rec_split">Frazionatore delle registrazioni</string>
     <string name="rec_split_title">Usa il frazionamento delle registrazioni</string>
     <string name="rendering_value_thin_name">Sottile</string>
@@ -2578,7 +2595,7 @@ Se ami OsmAnd e OSM e vuoi sostenerli è un modo perfetto farlo.</string>
     <string name="city_type_district">Distretto</string>
     <string name="city_type_neighbourhood">Dintorni</string>
     <string name="map_widget_search">Cerca</string>
-	<string name="lang_hsb">Sorabo (Superiore)</string>
+	<string name="lang_hsb">Sorabo superiore</string>
     <string name="rendering_attr_hideOverground_name">Oggetti sopra il terreno</string>
 
     <string name="routing_attr_short_way_name">Percorso più efficiente rispetto ai consumi</string>
