@@ -279,13 +279,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 		mapView.refreshMap(true);
 
-		if (((app.getAppInitializer().isFirstTime() && Version.isDeveloperVersion(app))
-				|| !app.getResourceManager().isAnyMapIstalled()) && FirstUsageWelcomeFragment.SHOW) {
-			FirstUsageWelcomeFragment.SHOW = false;
-			getSupportFragmentManager().beginTransaction()
-					.add(R.id.fragmentContainer, new FirstUsageWelcomeFragment(),
-							FirstUsageWelcomeFragment.TAG).commitAllowingStateLoss();
-		}
 		mapActions.updateDrawerMenu();
 		drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
@@ -628,6 +621,14 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			}
 		}
 		enableDrawer();
+
+		if (((app.getAppInitializer().isFirstTime() && Version.isDeveloperVersion(app))
+				|| !app.getResourceManager().isAnyMapIstalled()) && FirstUsageWelcomeFragment.SHOW) {
+			FirstUsageWelcomeFragment.SHOW = false;
+			getSupportFragmentManager().beginTransaction()
+					.add(R.id.fragmentContainer, new FirstUsageWelcomeFragment(),
+							FirstUsageWelcomeFragment.TAG).commitAllowingStateLoss();
+		}
 	}
 
 	@Override
