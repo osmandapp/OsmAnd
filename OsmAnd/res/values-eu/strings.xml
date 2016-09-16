@@ -2295,7 +2295,7 @@ eta gehiago…
     <string name="coords_search">Koordenatuen bilaketa</string>
     <string name="advanced_coords_search">Koordenatuen bilaketa aurreratua</string>
     <string name="back_to_search">Itzuli bilaketara</string>
-    <string name="confirmation_to_delete_history_items">Hautatutako elementuak historialetik ezabatu nahi dituzu?</string>
+    <string name="confirmation_to_delete_history_items">Hautatutako elementuak historialetik kendu nahi dituzu?</string>
     <string name="dahboard_options_dialog_title">Konfiguratu kontrol panela</string>
 
     <string name="use_dashboard_btn">Erabili kontrol panela</string>
