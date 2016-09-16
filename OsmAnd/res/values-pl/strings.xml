@@ -93,7 +93,7 @@
     <string name="local_indexes_cat_voice">Komunikaty głosowe (nagrane)</string>
 
     <string name="local_indexes_cat_tile">Mapy online i buforowane kafelki</string>
-    <string name="local_indexes_cat_map">Mapy standardowe (wektorowe)</string>
+    <string name="local_indexes_cat_map">Mapy zwykłe (wektorowe)</string>
     <string name="local_indexes_cat_poi">Dane użytecznych miejsc</string>
     <string name="ttsvoice">Głos syntezowany</string>
     <string name="search_offline_clear_search">Nowe wyszukiwanie</string>
@@ -808,7 +808,7 @@ Mapy kafelkowe można uzyskać bezpośrednio z zasobów sieciowych, jak i przygo
     <string name="osmand_parking_warning_text">Dodano do kalendarza powiadomienie o odebraniu samochodu. Pozostanie ono tam, dopóki zostanie ręcznie usunięte.</string>
     <string name="osmand_parking_time_limit_title">Ustal limit czasu parkowania</string>
     <string name="osmand_parking_delete_confirm">Usunąć znacznik położenia zaparkowanego samochodu?</string>
-    <string name="osmand_parking_delete">Usuń znacznik parkowania</string>
+    <string name="osmand_parking_delete">Usuwanie znacznika parkowania</string>
     <string name="osmand_parking_choose_type">Wybierz typ parkingu</string>
     <string name="osmand_parking_lim_text">Ograniczony czasowo</string>
     <string name="osmand_parking_no_lim_text">Nieograniczony czasowo</string>
@@ -837,7 +837,7 @@ Miejsce parkowania oraz czas można znaleźć na karcie w panelu oraz na widżec
     <string name="select_animate_speedup">Wybierz prędkość symulacji trasy</string>
     <string name="osmand_parking_hours">Godziny</string>
     <string name="osmand_parking_minutes">Minuty</string>
-    <string name="osmand_parking_position_description_add_time">Samochód zaparkowano na</string>
+    <string name="osmand_parking_position_description_add_time">Zaparkowano samochód o</string>
     <string name="use_compass_navigation_descr">Użyj kompasu, gdy nie zostanie wykryty kierunek</string>
     <string name="use_compass_navigation">Użyj kompasu</string>
     <string name="route_updated_loc_found">Trasa zostanie wyznaczona po określeniu aktualnego położenia</string>
@@ -858,7 +858,7 @@ Miejsce parkowania oraz czas można znaleźć na karcie w panelu oraz na widżec
     <string name="map_widget_reset">Przywróć domyślne</string>
 
 
-    <string name="map_widget_parking">Parking</string>
+    <string name="map_widget_parking">Miejsce parkowania</string>
     <string name="map_widget_monitoring">Rejestrowanie GPX</string>
     <string name="map_widget_speed">Prędkość</string>
     <string name="map_widget_distance">Cel trasy</string>
@@ -1104,10 +1104,10 @@ OsmAnd jest otwarto-źródłowym programem do nawigacji z dostępem do szerokiej
 
     <string name="monitoring_settings">Rejestrowanie śladu</string>
 
-    <string name="select_address_activity">Wybierz adres</string>
+    <string name="select_address_activity">Wybieranie adresu</string>
     <string name="local_openstreetmap_act_title">Modyfikacje OSM</string>
     <string name="shared_string_more_actions">Więcej akcji</string>
-    <string name="favourites_list_activity">Wybierz ulubione</string>
+    <string name="favourites_list_activity">Wybieranie ulubionego miejsca</string>
     <string name="download_using_mobile_internet">Nie nawiązano połączenia za pośrednictwem Wi-Fi. Kontynuować pobieranie używając obecnego połączenia?</string>
     <string name="clear_destination">Usuń cel trasy</string>
     <string name="cancel_navigation">Zatrzymaj nawigację</string>
@@ -1825,8 +1825,8 @@ Nagrane ślady można udostępnić znajomym lub wykorzystać na rzecz rowoju map
     <string name="dash_download_manage">Zarządzaj</string>
     <string name="map_locale">Język mapy</string>
     <string name="navigate_point_zone">Strefa</string>
-    <string name="download_tab_downloads">Do pobrania</string>
-    <string name="download_tab_updates">Aktualizacje</string>
+    <string name="download_tab_downloads">Dostępne</string>
+    <string name="download_tab_updates">Uaktualnienia</string>
     <string name="rendering_attr_roadStyle_name">Styl dróg</string>
     <string name="rendering_value_default_name">Domyślnie</string>
     <string name="rendering_value_orange_name">Pomarańczowy</string>
@@ -1837,7 +1837,7 @@ Nagrane ślady można udostępnić znajomym lub wykorzystać na rzecz rowoju map
     <string name="navigate_point_northing">Linia współrzędnych y\"</string>
     <string name="rendering_attr_transportStops_name">Przystanki transportu miejskiego</string>
     <string name="navigate_point_easting">Linia współrzędnych x\"</string>
-    <string name="download_tab_local">W urządzeniu</string>
+    <string name="download_tab_local">Pobrane</string>
     <string name="no_internet_connection">Pobieranie niemożliwe. Proszę sprawdzić połączenie internetowe.</string>
     <string name="voices">Komunikaty głosowe</string>
     <string name="traffic_warning_railways">Przejazd kolejowy</string>
@@ -2549,7 +2549,7 @@ Jeśli potrzebujesz pomocy podczas używania OsmAnd, prosimy o kontakt z naszym 
     <string name="lang_hu_formal">Węgierski (formalny)</string>
     <string name="lang_kn">Kannada</string>
     <string name="coords_format">Format współrzędnych</string>
-    <string name="coords_format_descr">Format współrzędnych geograficznych</string>
+    <string name="coords_format_descr">Ustala format współrzędnych geograficznych</string>
   	<string name="storage_directory_card">Karta pamięci</string>
     <string name="shared_string_is_open">Otwarte teraz</string>
     <string name="shared_string_is_open_24_7">Otwarte 24/7</string>
