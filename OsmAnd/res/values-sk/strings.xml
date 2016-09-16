@@ -1048,7 +1048,7 @@ Globálne údaje (medzi 70 stupňami severne a 70 stupňami južne) sú založen
     <string name="driving_region_us">Spojené štáty</string>
     <string name="driving_region_canada">Kanada</string>
     <string name="driving_region_europe_asia">Európa a Ázia</string>
-    <string name="driving_region_uk">UK, India, Austrália a ostatné</string>
+    <string name="driving_region_uk">UK, India a podobné</string>
     <string name="announce_gpx_waypoints">GPX waypointy</string>
     <string name="speak_title">Ohlásiť…</string>
     <string name="speak_descr">Konfigurácia ohlásení názvov ulíc, dopravných varovaní (vynútené zastavenia, spomaľovače), upozornení na radary, obmedzení rýchlosti</string>
@@ -2428,4 +2428,5 @@ Ak potrebuje pomoc s aplikáciou OsmAnd, kontaktuje podporu: support@osmand.net.
     <string name="donation_to_osm">Príspevok komunite OpenStreetMap</string>
     <string name="donation_to_osm_desc">Časť príspevku bude zaslaná používateľom, ktorí zasielajú zmeny do OpenStreetMap. Cena predplatného zostáva rovnaká.</string>
     <string name="osm_live_subscription_desc">Predplatné umožňuje hodinové, denné, týždenné aktualizácie a neobmedzené sťahovanie máp celého sveta.</string>
+    <string name="driving_region_australia">Austrália</string>
     </resources>
