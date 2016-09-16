@@ -126,6 +126,10 @@ public class MapRenderRepositories {
 		return renderer;
 	}
 
+	public RenderingContext getVisibleRenderingContext() {
+		return visibleRenderingContext;
+	}
+
 	public void initializeNewResource(final IProgress progress, File file, BinaryMapIndexReader reader) {
 		if (files.containsKey(file.getName())) {
 			closeConnection(file.getName());
