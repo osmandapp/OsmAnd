@@ -2611,7 +2611,7 @@ Hvis du  ønsker at støtte OsmAnd og OSM, er dette en god måde at gøre det p�
  "</string>
     <string name="show_something_on_map">Vis %1$s på kortet</string>
     <string name="dist_away_from_my_location">Søg %1$s væk</string>
-    <string name="confirmation_to_delete_history_items">Slet valgte elementer fra historik?</string>
+    <string name="confirmation_to_delete_history_items">Fjern de valgte elementer fra historikken?</string>
     <string name="back_to_search">Tilbage til søg</string>
     <string name="coords_search">Koordinatsøgning</string>
     <string name="advanced_coords_search">Avanceret koordinatsøgning</string>
