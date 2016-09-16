@@ -1309,7 +1309,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="driving_region_us">Stati Uniti</string>
     <string name="driving_region_canada">Canada</string>
     <string name="driving_region_europe_asia">Europa &amp; Asia</string>
-    <string name="driving_region_uk">UK, India, Australia e Altri</string>
+    <string name="driving_region_uk">UK, India, Australia e simili</string>
     <string name="map_widget_fps_info">Informazioni FPS</string>
     <string name="local_index_tile_data_zooms">Zoom scaricati: %1$s</string>
     <string name="local_index_tile_data_expire">Scadenza (minuti): %1$s</string>
@@ -2516,8 +2516,8 @@ Se ami OsmAnd e OSM e vuoi sostenerli è un modo perfetto farlo.</string>
     <string name="access_disable_wrong_direction_recalc_descr">Previene il ricalcolo automatico del percorso quando ci muove nella direzione sbagliata</string>
     <string name="access_smart_autoannounce">Annuncio automatico intelligente</string>
     <string name="access_smart_autoannounce_descr">Notifica solo quando la direzione verso la destinazione è cambiata</string>
-    <string name="access_autoannounce_period">Intervallo annuncio automatico</string>
-    <string name="access_autoannounce_period_descr">Tempo minimo fra annunci</string>
+    <string name="access_autoannounce_period">Intervallo di annuncio automatico</string>
+    <string name="access_autoannounce_period_descr">Intervallo di tempo minimo fra annunci</string>
     <string name="move_marker_bottom_sheet_title">Muovi la mappa per cambiare la posizione del marcatore</string>
     <!-- string name="lat_lon_pattern">Lat: %1$.5f Lon: %2$.5f</string -->
     <string name="follow_us">Seguici</string>
@@ -2543,8 +2543,8 @@ Se ami OsmAnd e OSM e vuoi sostenerli è un modo perfetto farlo.</string>
     <string name="coords_format">Formato coordinate</string>
     <string name="coords_format_descr">Formato per le coordinate geografiche</string>
   	<string name="route_stops_before">%1$s fermate prima</string>
-    <string name="coords_search">Ricerca coordinate</string>
-    <string name="advanced_coords_search">Ricerca coordinate avanzata</string>
+    <string name="coords_search">Ricerca per coordinate</string>
+    <string name="advanced_coords_search">Ricerca avanzata per coordinate</string>
     <string name="back_to_search">Ritorna alla ricerca</string>
     <string name="confirmation_to_delete_history_items">Vuoi cancellare gli elementi della cronologia selezionati?</string>
     <string name="show_something_on_map">Mostra %1$s sulla mappa</string>
@@ -2558,7 +2558,7 @@ Se ami OsmAnd e OSM e vuoi sostenerli è un modo perfetto farlo.</string>
  • Annunci vocali delle indicazioni vocali del percorso, cambio di corsia migliorati 
 
 
- • Strato trasporti pubblici migliorato con calcolo del percorso
+ • Mappa dei trasporti pubblici migliorata con calcolo del percorso
 
 
  • Aggiunte più lingue e ora sono supportati anche i dialetti
@@ -2567,9 +2567,9 @@ Se ami OsmAnd e OSM e vuoi sostenerli è un modo perfetto farlo.</string>
  • Molte altre migliorie e correzioni di errori
 
 
- e altro …
+ e altro…
  "</string>
-    <string name="dist_away_from_my_location">Cerca %1$s lontano</string>
+    <string name="dist_away_from_my_location">Cerca a %1$s di distanza</string>
     <string name="show_on_map">Mostra sulla mappa</string>
     <string name="share_history_subject">" condiviso attraverso OsmAnd"</string>
     <string name="search_categories">Categorie</string>
@@ -2586,33 +2586,34 @@ Se ami OsmAnd e OSM e vuoi sostenerli è un modo perfetto farlo.</string>
     <string name="replace_favorite_confirmation">Sei sicuro di voler sostituire il preferito %1$s?</string>
     <string name="shared_string_change">Cambia</string>
     <string name="get_started">Inizia</string>
-    <string name="skip_map_downloading">Skip mappe download</string>
-    <string name="first_usage_greeting">Ottieni indicazioni e scoprire nuovi luoghi senza connessione internet</string>
-    <string name="search_another_country">Scegliere un\'altra regione</string>
-    <string name="skip_map_downloading_desc">Non hai mappa offline installato. Si può scegliere una mappa dalla lista o scaricare le mappe in seguito tramite Menu - %1$s.</string>
-    <string name="osm_live_payment_desc">Il costo di sottoscrizione verrà addebitato ogni mese. Puoi sempre scegliere di annullare la sottoscrizione su Google Play.</string>
+    <string name="skip_map_downloading">Salta download delle mappe</string>
+    <string name="first_usage_greeting">Ottieni indicazioni e scopri nuovi luoghi senza connessione internet</string>
+    <string name="search_another_country">Scegli un\'altra regione</string>
+    <string name="skip_map_downloading_desc">Non hai mappe offline installate. Si può scegliere una mappa dalla lista o scaricarle in seguito andando su Menù - %1$s.</string>
+    <string name="osm_live_payment_desc">Il costo di sottoscrizione verrà addebitato ogni mese. Puoi scegliere di annullare la sottoscrizione su Google Play in ogni momento.</string>
     <string name="donation_to_osm">Donazione per la comunità di OpenStreetMap</string>
     <string name="donation_to_osm_desc">Parte della tua donazione verrà inviata agli utenti che fanno modifiche su OpenStreetMap. Il costo della sottoscrizione rimane inalterato.</string>
     <string name="osm_live_subscription_desc">La sottoscrizione attiva aggiornamenti orari, quotidiani e settimanali e la possibilità di scaricare senza limiti tutte le mappe del mondo.</string>
     <string name="get_it">Fallo</string>
     <string name="get_for">Fallo per %1$s</string>
     <string name="get_for_month">Fallo per %1$s mese</string>
-    <string name="osm_live_banner_desc">Ottieni download delle mappe illimitati e aggiornamenti più frequenti che mensili, orari, giornalieri o settimanali.</string>
+    <string name="osm_live_banner_desc">Ottieni download delle mappe illimitati e aggiornamenti più frequenti di una volta al mese: a ogni ora, giorno o settimana.</string>
     <string name="osmand_plus_banner_desc">Versione completa di OsmAnd con download illimitati e aggiornamenti mensili delle mappe.</string>
     <string name="si_mi_meters">Miglia/metri</string>
-    <string name="search_map">Cercando la mappa…</string>
+    <string name="search_map">Ricerca della mappa…</string>
     <string name="first_usage_wizard_desc">Permetti a OsmAnd di determinate la tua posizione e suggerire le mappe da scaricare per quella regione.</string>
     <string name="location_not_found">Posizione non trovata</string>
     <string name="no_inet_connection">Connessione internet assente</string>
     <string name="no_inet_connection_desc_map">Necessaria per scaricare le mappe.</string>
-    <string name="search_location">Ricercando la posizione …</string>
+    <string name="search_location">Ricerca della posizione…</string>
     <string name="storage_free_space">Spazio libero</string>
-    <string name="storage_place_description">Spazio di memorizzazione dei dati di OsmAnd (per le mappe, tracce, ecc.): %1$s.</string>
-    <string name="give_permission">Concedi il permesso</string>
+    <string name="storage_place_description">Spazio di memorizzazione dei dati di OsmAnd (per le mappe, tracce, ecc): %1$s.</string>
+    <string name="give_permission">Permetti</string>
     <string name="allow_access_location">Permetti l\'accesso alla posizione</string>
     <string name="search_my_location">Cerca la mia posizione</string>
-    <string name="no_update_info_desc">Non controllare per aggiornamenti alle nuove versioni e sconti per OsmAnd.</string>
+    <string name="no_update_info_desc">Non controllare aggiornamenti alle nuove versioni e sconti per OsmAnd</string>
     <string name="no_update_info">Non mostrare gli aggiornamenti</string>
     <string name="update_all_maps_now">Vuoi aggiornare tutte le mappe ora?</string>
     <string name="clear_tile_data">Cancella tutte le mattonelle</string>
+    <string name="driving_region_australia">Australia</string>
     </resources>
