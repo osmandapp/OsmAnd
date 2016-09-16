@@ -435,6 +435,18 @@ public class FirstUsageWizardFragment extends Fragment implements OsmAndLocation
 	}
 
 	@Override
+	public void onResume() {
+		super.onResume();
+		((MapActivity)getActivity()).disableDrawer();
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		((MapActivity)getActivity()).enableDrawer();
+	}
+
+	@Override
 	public void updateLocation(final Location loc) {
 		final OsmandApplication app = getMyApplication();
 		if (loc != null) {
