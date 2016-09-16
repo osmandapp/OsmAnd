@@ -22,7 +22,7 @@
   <string name="driving_region_us">EEBB</string>
   <string name="driving_region_canada">Kanada</string>
   <string name="driving_region_europe_asia">Europa &amp; Asia</string>
-  <string name="driving_region_uk">EB, India, Australia &amp; Bestelakoak</string>
+  <string name="driving_region_uk">Erresuma Batua, India edo antzekoa</string>
   
   
   <string name="announce_gpx_waypoints">GPX bide-puntuak</string>
@@ -829,7 +829,7 @@ Honek {1} MB behar ditu behin betiko.
   <string name="local_index_mi_upload_gpx">OSMra bidali</string>
   <string name="show_more_map_detail">Xehetasun gehiago erakutsi mapan</string>
   <string name="show_more_map_detail_descr">Erakutsi bektore mapen xehetasun gehiago (bideak etab.) zoom maila baxuetan</string>
-  <string name="favourites_delete_multiple_succesful">Gogoko puntua(k) ongi ezabatu d(ir)a</string>
+  <string name="favourites_delete_multiple_succesful">Gogoko puntua(k) ongi ezabatu d(ir)a.</string>
   <string name="favorite_delete_multiple">%1$d gogoko eta %2$d gogokoen talde ezabatuko dituzu. Ziur al zaude?</string>
   <string name="favorite_home_category">Hasiera</string>
   <string name="favorite_friends_category">Lagunak</string>
@@ -2185,7 +2185,7 @@ eta gehiago…
     <string name="no_internet_connection">Ezin izan da deskargatu, egiaztatu zure internet konexioa.</string>
     <string name="everything_up_to_date">Fitxategi guztiak egunean daude</string>
     <string name="use_opengl_render">Erabili OpenGL marrazketa</string>
-    <string name="use_opengl_render_descr">Erabili hardware bidez azkartutako OpenGL errendatzea (ez dabil gailu guztietan)</string>
+    <string name="use_opengl_render_descr">Erabili hardware bidez azkartutako OpenGL marrazketa (ez dabil gailu guztietan)</string>
     <string name="error_avoid_specific_road">Ez da saihesbiderik aurkitu</string>
     <string name="home_button">Hasiera</string>
     <string name="map_update">Eguneraketak eskuragarri %1$s mapentzako</string>
@@ -2586,6 +2586,7 @@ OsmAnd aplikazioarekin laguntza behar baduzu, jarri kontaktuan gure laguntza tal
     <string name="get_it">Eskuratu</string>
     <string name="osm_live_payment_desc">Harpidetzaren kuota hilabetero kargatuko da. Zure harpidetza noiznahi eten dezakezu Google Play bitartez.</string>
     <string name="donation_to_osm">Dohaintza OpenStreetMap komunitateari</string>
-    <string name="donation_to_osm_desc">Zure dohaintzaren zati bat OpenStreetMaps gunera aldaketak bidaltzen dituzten erabiltzaileei emango zaie. harpidetzaren kostua berbera da.</string>
+    <string name="donation_to_osm_desc">Zure dohaintzaren zati bat OpenStreetMap gunera aldaketak bidaltzen dituzten erabiltzaileei emango zaie. harpidetzaren kostua berbera da.</string>
     <string name="osm_live_subscription_desc">Harpidetzak orduro, egunero edo astergo eguneraketak jasotzea eta mugarik gabe mapak deskargatzea ahalbidetzen du.</string>
+    <string name="driving_region_australia">Australia</string>
     </resources>
