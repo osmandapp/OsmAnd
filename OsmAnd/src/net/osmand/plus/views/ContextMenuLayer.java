@@ -13,6 +13,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresPermission;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
@@ -21,6 +22,7 @@ import android.widget.FrameLayout.LayoutParams;
 import android.widget.ImageView;
 
 import net.osmand.CallbackWithObject;
+import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
@@ -30,11 +32,15 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.other.MapMultiSelectionMenu;
+import net.osmand.plus.render.MapRenderRepositories;
+import net.osmand.plus.render.NativeOsmandLibrary;
+import net.osmand.plus.render.OsmandRenderer.RenderingContext;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 public class ContextMenuLayer extends OsmandMapLayer {
 	//private static final Log LOG = PlatformUtil.getLog(ContextMenuLayer.class);
@@ -494,6 +500,26 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			boolean res = showContextMenu(point, tileBox, false);
 			if (res) {
 				return true;
+			} else {
+				NativeOsmandLibrary nativeLib = NativeOsmandLibrary.getLoadedLibrary();
+				if (nativeLib != null) {
+					//RenderingContext rc = new RenderingContext(activity.getMyApplication());
+					MapRenderRepositories maps = activity.getMyApplication().getResourceManager().getRenderer();
+					RenderedObject[] renderedObjects = nativeLib.searchRenderedObjectsFromContext(maps.getVisibleRenderingContext(), (int)point.x, (int)point.y);
+					if (renderedObjects != null) {
+						Log.e("111", "found " + renderedObjects.length + " object(s) at x=" + point.x + " y=" + point.y);
+						for (RenderedObject renderedObject : renderedObjects) {
+							Log.e("111", "++++ object=" + renderedObject.getName());
+							for (Entry<String, String> entry : renderedObject.getTags().entrySet()) {
+								Log.e("111", "tag=" + entry.getKey() + " value=" + entry.getValue());
+							}
+							Log.e("111", "------------------");
+						}
+					} else {
+						Log.e("111", "objects not found at x=" + point.x + " y=" + point.y);
+					}
+				}
+
 			}
 		}
 
