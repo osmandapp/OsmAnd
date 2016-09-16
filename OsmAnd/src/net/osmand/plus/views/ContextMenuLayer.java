@@ -519,7 +519,6 @@ public class ContextMenuLayer extends OsmandMapLayer {
 						Log.e("111", "objects not found at x=" + point.x + " y=" + point.y);
 					}
 				}
-
 			}
 		}
 
