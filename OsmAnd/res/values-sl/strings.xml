@@ -1336,7 +1336,7 @@ Afganistan, Albanija, Alžirija, Andora, Angola, Angvila, Antigva in Barbuda, Ar
     <string name="driving_region_us">Združene države</string>
     <string name="driving_region_canada">Kanada</string>
     <string name="driving_region_europe_asia">Evropa in Azija</string>
-    <string name="driving_region_uk">Velika Britanija, Indija, Avstralija in drugo</string>
+    <string name="driving_region_uk">Velika Britanija, Indija in drugo</string>
 
     <string name="about_version">Različica:</string>
     <string name="shared_string_about">O programu</string>
