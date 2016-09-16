@@ -576,7 +576,7 @@
     <string name="driving_region_us">USA</string>
     <string name="driving_region_canada">Canada</string>
     <string name="driving_region_europe_asia">Europa og Asia</string>
-    <string name="driving_region_uk">England, India, Australia og andre</string>
+    <string name="driving_region_uk">Storbritannia, India og lignende</string>
     <string name="driving_region_descr">Velg region for bilkjøring: USA, Europa, Storbritannia, Asia, og andre</string>
     <string name="driving_region_japan">Japan</string>
     <string name="driving_region">Region for bilkjøring</string>
@@ -1720,7 +1720,7 @@
     <string name="storage_place_description">OsmAnds datalagring (for kart, spor, etc.): %1$s.</string>
     <string name="first_usage_greeting">Få anvisninger og oppdag nye steder uten å ha internettforbindelse</string>
     <string name="update_all_maps_now">Vil du oppdatere alle kart nå?</string>
-    <string name="osm_live_payment_desc">Abonnementsavgift belastes hver måned. Du kan alltid avbryte ditt abonnement på Google Play.</string>
+    <string name="osm_live_payment_desc">Abonnementsavgift belastes hver måned. Du kan avbryte ditt abonnement på Google Play når som helst.</string>
     <string name="donation_to_osm">Donasjon til OpenStreetMap-fellesskapet</string>
     <string name="donation_to_osm_desc">En del av donasjonen sendes til OSM-brukere som formidler endringer til OpenStreetMap. Kostnadene for abonnementet forblir uendret.</string>
     <string name="osm_live_subscription_desc">Abonnement muliggjør oppdateringer hver time, daglig, ukentlig og ubegrensede nedlastinger av alle kart over hele verden.</string>
@@ -1732,4 +1732,6 @@
     <string name="search_location">Søker etter posisjon…</string>
     <string name="search_my_location">Søk etter min posisjon</string>
     <string name="search_map">Søker etter kart…</string>
+    <string name="driving_region_australia">Australia</string>
+    <string name="no_update_info">Ikke vis oppdateringer</string>
     </resources>
