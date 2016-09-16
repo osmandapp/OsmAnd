@@ -479,6 +479,28 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			boolean res = showContextMenu(point, tileBox, false);
 			if (res) {
 				return true;
+<<<<<<< HEAD
+=======
+			} else {
+				NativeOsmandLibrary nativeLib = NativeOsmandLibrary.getLoadedLibrary();
+				if (nativeLib != null) {
+					//RenderingContext rc = new RenderingContext(activity.getMyApplication());
+					MapRenderRepositories maps = activity.getMyApplication().getResourceManager().getRenderer();
+					RenderedObject[] renderedObjects = nativeLib.searchRenderedObjectsFromContext(maps.getVisibleRenderingContext(), (int)point.x, (int)point.y);
+					if (renderedObjects != null) {
+						Log.e("111", "found " + renderedObjects.length + " object(s) at x=" + point.x + " y=" + point.y);
+						for (RenderedObject renderedObject : renderedObjects) {
+							Log.e("111", "++++ object=" + renderedObject.getName());
+							for (Entry<String, String> entry : renderedObject.getTags().entrySet()) {
+								Log.e("111", "tag=" + entry.getKey() + " value=" + entry.getValue());
+							}
+							Log.e("111", "------------------");
+						}
+					} else {
+						Log.e("111", "objects not found at x=" + point.x + " y=" + point.y);
+					}
+				}
+>>>>>>> 45cd256... Removed transparent status bar from first screen
 			}
 		}
 

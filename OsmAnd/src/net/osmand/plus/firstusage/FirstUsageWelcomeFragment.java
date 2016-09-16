@@ -33,11 +33,12 @@ public class FirstUsageWelcomeFragment extends Fragment {
 		skipButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-
+				/*
 				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
 					Window w = getActivity().getWindow();
 					w.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 				}
+				*/
 				FirstUsageWizardFragment.startWizard(getActivity());
 			}
 		});
@@ -49,10 +50,22 @@ public class FirstUsageWelcomeFragment extends Fragment {
 	@Override
 	public void onResume() {
 		super.onResume();
+		/*
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
 			Window w = getActivity().getWindow(); // in Activity's onCreate() for instance
 			w.setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS,
 					WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 		}
+<<<<<<< HEAD
+=======
+		*/
+		((MapActivity)getActivity()).disableDrawer();
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		((MapActivity)getActivity()).enableDrawer();
+>>>>>>> 45cd256... Removed transparent status bar from first screen
 	}
 }
