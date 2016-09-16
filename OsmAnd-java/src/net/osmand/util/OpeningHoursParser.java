@@ -1500,9 +1500,21 @@ public class OpeningHoursParser {
 	}
 
 	public static void main(String[] args) throws ParseException {
+		// FIXME bug
+		// parseOpenedHours("Feb 16-Oct 15: 09:00-18:30; Oct 16-Nov 15: 09:00-17:30; Nov 16-Feb 15: 09:00-16:30");
+		
+		// not supported (,)
+		// hours = parseOpenedHours("Mo-Su 07:00-23:00, Fr 08:00-20:00");
+		
+		// parseOpenedHours("Sa-Su 10:00-17:00 || \"by appointment\"");
+		// comment is dropped
+		
+		
+		// not properly supported
+		// hours = parseOpenedHours("Mo-Su (sunrise-00:30)-(sunset+00:30)");
+		
 		// Test basic case
 		OpeningHours hours = parseOpenedHours("Mo-Fr 08:30-14:40"); //$NON-NLS-1$
-		System.out.println(hours);
 		testOpened("09.08.2012 11:00", hours, true);
 		testOpened("09.08.2012 16:00", hours, false);
 		hours = parseOpenedHours("mo-fr 07:00-19:00; sa 12:00-18:00");
@@ -1584,9 +1596,6 @@ public class OpeningHoursParser {
 		testOpened("06.05.2013 10:00", hours, false);
 
 		// test day wrap as seen on OSM
-		// Incorrectly evaluated: https://wiki.openstreetmap.org/w/index.php?title=Key:opening_hours/specification#explain:additional_rule_separator
-		// <normal_rule_separator> does overwrite previous definitions.
-		// VICTOR: Do we have a test for incorrectly evaluated?
 		hours = parseOpenedHours("Tu-Th 07:00-2:00; Fr 17:00-4:00; Sa 18:00-05:00; Su,Mo off");
 		System.out.println(hours);
 		testOpened("05.05.2013 04:59", hours, true); // sunday 05.05.2013
@@ -1672,15 +1681,12 @@ public class OpeningHoursParser {
 		testOpened("25.12.2015 14:00", hours, false);
 		testOpened("24.12.2015 08:00", hours, true);
 
-		// not supported (,)
-		// hours = parseOpenedHours("Mo-Su 07:00-23:00, Fr 08:00-20:00");
 		
 		// Test holidays
 		String hoursString = "mo-fr 11:00-21:00; PH off";
 		hours = parseOpenedHoursHandleErrors(hoursString);
 		testParsedAndAssembledCorrectly(hoursString, hours);
 		
-		// not properly supported
-		// hours = parseOpenedHours("Mo-Su (sunrise-00:30)-(sunset+00:30)");
+
 	}
 }

@@ -135,6 +135,7 @@ public class Relation extends Entity {
 			while(it.hasNext()) {
 				RelationMember rm = it.next();
 				if(rm == key) {
+					it.remove();
 					return true;
 				}
 			}
