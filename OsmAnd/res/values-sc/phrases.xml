@@ -1900,4 +1900,8 @@
 
 	<string name="poi_tanning_salon">Solàrium</string>
 
+<string name="poi_payment_icsf_yes">Atzetat cartas IC Stored Fare</string>
+	<string name="poi_payment_icsf_no">No atzetat cartas IC Stored Fare</string>
+	<string name="poi_spices">Butega de ispètzias</string>
+
 </resources>
