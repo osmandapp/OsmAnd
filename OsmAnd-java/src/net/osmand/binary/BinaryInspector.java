@@ -75,13 +75,13 @@ public class BinaryInspector {
 //					"-vpoi",
 //					"-vmap", "-vmapobjects", // "-vmapcoordinates",
 //					"-vrouting",
-					"-vtransport",
-//					"-vaddress", "-vcities","-vstreetgroups",
+//					"-vtransport",
+					"-vaddress", "-vcities","-vstreetgroups",
 //					"-vstreets", "-vbuildings", "-vintersections",
 //					"-lang=ru",
 //					"-bbox=4.8486,52.3084,4.8747,52.2970",
 //					"-osm="+System.getProperty("maps.dir")+"/map.obf.osm", 
-					System.getProperty("maps.dir")+"/Terminus_3518858.obf"
+					System.getProperty("maps.dir")+"/Map.obf"
 			});
 		} else {
 			in.inspector(args);
