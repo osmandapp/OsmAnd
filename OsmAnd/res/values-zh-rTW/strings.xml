@@ -1271,7 +1271,7 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="driving_region_us">美國</string>
     <string name="driving_region_canada">加拿大</string>
     <string name="driving_region_europe_asia">歐洲和亞洲</string>
-    <string name="driving_region_uk">英國、印度、澳洲和其他</string>
+    <string name="driving_region_uk">英國、印度和其他</string>
     <string name="driving_region">駕駛區域</string>
     <string name="map_widget_fps_info">FPS 除錯資訊</string>
 
@@ -2588,7 +2588,8 @@ Facebook：https://www.facebook.com/osmandapp
     <string name="get_for_month">每個月獲得 %1$s</string>
     <string name="no_update_info_desc">不要檢查任何有關 OsmAnd 新版本更新與相關的折扣</string>
     <string name="get_it">獲得</string>
-    <string name="osm_live_payment_desc">每個月會收取認購費用。您可以隨時取消在 Google Play 的訂購。</string>
+    <string name="osm_live_payment_desc">每個月會收取認購費用。您可以在 Google Play 隨時取消您的訂購。</string>
     <string name="donation_to_osm">捐贈給 OpenStreetMap 的社群</string>
     <string name="osm_live_subscription_desc">啟用認購每小時、每天、每週的更新和世界各地所有的地圖無限制的下載。</string>
+    <string name="driving_region_australia">澳洲</string>
     </resources>
