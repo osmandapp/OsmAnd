@@ -552,6 +552,21 @@
     "expectedResults": {
       "4604862": "+TL|+TL,C|C"
     }
+  },
+  {
+    "testName": "30.South Kent Des Moines Road straight",
+    "startPoint": {
+      "latitude": 45.63984413581538,
+      "longitude": 35.607624174931516
+    },
+    "endPoint": {
+      "latitude": 45.64101806770461,
+      "longitude": 35.60625088391589
+    },
+    "expectedResults": {
+      "265002602": "TL|TL|+C|+C|TSLR",
+      "362433819": "TL|TL|+C|+C"
+    }
   }
 
 ]
