@@ -14,6 +14,7 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 
 public class FirstUsageWelcomeFragment extends Fragment {
 	public static final String TAG = "FirstUsageWelcomeFragment";
@@ -54,5 +55,12 @@ public class FirstUsageWelcomeFragment extends Fragment {
 			w.setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS,
 					WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 		}
+		((MapActivity)getActivity()).disableDrawer();
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		((MapActivity)getActivity()).enableDrawer();
 	}
 }
