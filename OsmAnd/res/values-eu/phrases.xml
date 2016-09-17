@@ -976,4 +976,21 @@
 	<string name="poi_smoking_yes">Erretzea baimenduta</string>
 	<string name="poi_smoking_separated">Erretzea baimentzen da aparteko gela batean</string>
 	<string name="poi_smoking_isolated">Erretzea baimentzen da isolatutako gela batean</string>
+	<string name="poi_denomination_catholic">Katolikoa</string>
+	<string name="poi_denomination_baptist">Baptista</string>
+	<string name="poi_denomination_roman_catholic">Erromatar eliza katolikoa</string>
+	<string name="poi_denomination_orthodox">Ortodoxoa</string>
+	<string name="poi_denomination_lutheran">Luteranoa</string>
+	<string name="poi_denomination_sunni">Sunia</string>
+	<string name="poi_denomination_protestant">Protestantea</string>
+	<string name="poi_denomination_methodist">Metodista</string>
+	<string name="poi_denomination_anglican">Anglikanoa</string>
+	<string name="poi_denomination_presbyterian">Presbiterianoa</string>
+	<string name="poi_denomination_evangelical">Ebanjelikoa</string>
+	<string name="poi_denomination_russian_orthodox">Errusiar ortodoxoa</string>
+	<string name="poi_denomination_mormon">Mormoia</string>
+	<string name="poi_denomination_jehovahs_witness">Jehovaren Lekukoak</string>
+	<string name="poi_denomination_greek_orthodox">Greziar ortodoxoa</string>
+	<string name="poi_denomination_church_of_england">Ingalaterrako eliza</string>
+	<string name="poi_denomination_episcopal">Episkopalianoa</string>
 	</resources>
