@@ -1313,7 +1313,7 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="pref_overlay">Superpuesta / subyacente</string>
     <string name="pref_raster_map">Ajustes de fuente del mapa</string>
     <string name="pref_vector_map">Ajustes del mapa vectorial</string>
-    <string name="delete_confirmation_msg">¿Borrar %1$s?</string>
+    <string name="delete_confirmation_msg">¿Quieres borrar %1$s?</string>
     <string name="city_type_suburb">Suburbio</string>
     <string name="city_type_hamlet">Aldea</string>
     <string name="city_type_village">Villa</string>
@@ -1779,7 +1779,7 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="poi_edit_title">Editar PDI</string>
     <string name="poi_create_title">Crear PDI</string>
     <string name="poi_error_poi_not_found">No se encontró el nodo o el PDI, se compone de varios nodos</string>
-    <string name="poi_remove_confirm_template">¿Borrar {0} (añadir comentario)?</string>
+    <string name="poi_remove_confirm_template">¿Quieres borrar {0} (añadir comentario)?</string>
     <string name="poi_remove_title">Borrar PDI</string>
     <string name="poi_remove_success">PDI borrado correctamente</string>
     <string name="poi_action_add">añadir</string>
