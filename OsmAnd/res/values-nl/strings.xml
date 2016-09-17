@@ -1343,7 +1343,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 	<string name="driving_region_us">Verenigde Staten</string>
 	<string name="driving_region_canada">Canada</string>
 	<string name="driving_region_europe_asia">Europa en Azië</string>
-	<string name="driving_region_uk">GB, India, Australië en andere</string>
+	<string name="driving_region_uk">Verenigd Koninkrijk, India, etc.</string>
 	<string name="map_widget_fps_info">FPS-debuginformatie</string>
 	<string name="local_index_tile_data_zooms">Zoomniveau\'s gedownload: %1$s</string>
     <string name="local_index_tile_data_expire">Verlopen (minuten): %1$s</string>
@@ -2003,7 +2003,7 @@ Het activeren van deze weergave verandert de kaartstijl in \'Winter en ski\', me
 	<string name="shared_string_my_favorites">Favorieten</string>
 	<string name="shared_string_my_tracks">GPX-tracks</string>
 	<string name="shared_string_currently_recording_track">Huidige GPX-track</string>
-	<string name="local_osm_changes_upload_all_confirm">Je gaat %1$d wijzigingen ophalen. Weet je dat zeker?</string>
+	<string name="local_osm_changes_upload_all_confirm">Je gaat %1$d wijziging(en) naar OSM sturen. Weet je dat zeker?</string>
     <string name="confirmation_to_clear_history">Wil je de geschiedenis verwijderen?</string>
     <string name="osmand_parking_overdue">overschreden</string>
 	
@@ -2621,9 +2621,9 @@ Als je hulp nodig hebt met OsmAnd: neem contact op met ons support team: support
     <string name="replace_favorite_confirmation">Wil je favoriet %1$s inderdaad vervangen?</string>
     <string name="update_all_maps_now">Wil u alle kaarten nu updaten?</string>
     <string name="si_mi_meters">Mijlen/meters</string>
-    <string name="skip_map_downloading">Kaarten downloaden overslaan</string>
+    <string name="skip_map_downloading">Kaarten later downloaden</string>
     <string name="search_another_country">Kies een andere regio</string>
-    <string name="search_map">Kaarte zoeken…</string>
+    <string name="search_map">Kaart zoeken…</string>
     <string name="location_not_found">Positie niet gevonden</string>
     <string name="no_inet_connection">Geen internetverbinding</string>
     <string name="no_inet_connection_desc_map">Noodzakelijk om kaarten te downloaden.</string>
@@ -2635,4 +2635,18 @@ Als je hulp nodig hebt met OsmAnd: neem contact op met ons support team: support
     <string name="search_my_location">Zoek mijn positie</string>
     <string name="no_update_info">Geen updates tonen</string>
     <string name="clear_tile_data">Alle opgeslagen kaarttegels wissen</string>
+    <string name="osm_live_payment_desc">Het abonnementsgeld is maandelijks. Het abonnement kan elk moment via Google Play worden gestopt.</string>
+    <string name="donation_to_osm">Doneer aan de OpenStreetMap-community</string>
+    <string name="donation_to_osm_desc">Een deel van de donatie wordt gegeven aan OSM-gebruikers die de kaart verbeteren. Het abonnementsgeld verandert niet.</string>
+    <string name="osm_live_subscription_desc">Het abonnement geeft toegang tot elk uur, elke dag en elke week verse updates en onbeperkte downloads van kaarten van de gehele wereld.</string>
+    <string name="get_it">Neem het</string>
+    <string name="get_for">Neem voor %1$s</string>
+    <string name="get_for_month">Neem het voor %1$s maanden</string>
+    <string name="osm_live_banner_desc">Krijg onbeperkte downloads van kaarten en updates vaker dan eens per maand: elk uur, elke dag en elke week.</string>
+    <string name="osmand_plus_banner_desc">Volledige versie van OsmAnd met onbeperkte downloads van kaarten en maandelijkse kaart-updates.</string>
+    <string name="skip_map_downloading_desc">Er is geen kaart geïnstalleerd. Kies een kaart uit de lijst, of download later kaarten via Menu - %1$s.</string>
+    <string name="first_usage_wizard_desc">Kies kaarten om te downloaden aan de hand van uw huidige locatie.</string>
+    <string name="storage_place_description">OsmAnd bewaart gegevens (kaarten, tracks, enz.) in: %1$s</string>
+    <string name="no_update_info_desc">Controleer niet op nieuwe versies en aanbiedingen van OsmAnd</string>
+    <string name="driving_region_australia">Australië</string>
     </resources>
