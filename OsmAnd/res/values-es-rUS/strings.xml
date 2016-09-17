@@ -2375,7 +2375,7 @@ Si amas a OsmAnd, OSM y quieres apoyarlos, esta es una perfecta manera de hacerl
 
  y más…
  "</string>
-    <string name="confirmation_to_delete_history_items">¿Quieres borrar los elementos del historial marcados?</string>
+    <string name="confirmation_to_delete_history_items">¿Quieres quitar del historial los elementos marcados?</string>
     <string name="show_something_on_map">Mostrar %1$s en el mapa</string>
     <string name="dist_away_from_my_location">Buscar en %1$s alrededor</string>
     <string name="back_to_search">Volver a la búsqueda</string>
