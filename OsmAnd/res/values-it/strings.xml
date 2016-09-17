@@ -265,7 +265,7 @@ Attualmente sono disponibili solo {2} MB.</string>
     
     <string name="osmand_routing_experimental">Il routing offline di OsmAnd è sperimentale e non funziona per distanze superiori ai 20 km.\n\nIl servizio routing viene fornito temporaneamente tramite CloudMade online.</string>
     <string name="specified_dir_doesnt_exist">Impossibile trovare la cartella specificata.</string>
-    <string name="application_dir">Cartella salvataggio dati</string>
+    <string name="application_dir">Cartella salvataggio dei dati</string>
 
     <string name="osmand_net_previously_installed">C\'è installata una versione precedente di OsmAnd. Tutti i dati verranno supportati dalla nuova applicazione. I Preferiti devono essere esportati dalla vecchia applicazione e importati manualmente nella nuova.</string>
     <string name="build_installed">Build {0} installata correttamente({1}).</string>
@@ -1532,9 +1532,9 @@ Il gruppo che non è stato rimosso da mesi viene allineato con le tue regole per
     <string name="import_file_favourites">Salvare i punti come file GPX o importare i waypoint nei favoriti?</string>
 
 
-    <string name="rendering_value_pink_name">rosa</string>
+    <string name="rendering_value_pink_name">Rosa</string>
 
-    <string name="rendering_value_brown_name">marrone</string>
+    <string name="rendering_value_brown_name">Marrone</string>
 
 
 
@@ -1869,10 +1869,10 @@ Attivando questa vista lo stile della mappa diventerà \'Inverno e sci\', mostra
     <string name="route_points">Punti del percorso</string>
     <string name="shared_string_release">Rilasciata</string>
     <string name="shared_string_ellipsis">…</string>
-    <string name="shared_string_ok">OK</string>
+    <string name="shared_string_ok">Ok</string>
     <string name="shared_string_cancel">Annulla</string>
     <string name="shared_string_dismiss">Chiudi</string>
-    <string name="shared_string_yes">Si</string>
+    <string name="shared_string_yes">Sì</string>
     <string name="shared_string_no">No</string>
     <string name="shared_string_on">Acceso</string>
     <string name="shared_string_off">Spento</string>
@@ -1914,10 +1914,10 @@ Attivando questa vista lo stile della mappa diventerà \'Inverno e sci\', mostra
     <string name="shared_string_do_not_show_again">Non mostrare nuovamente</string>
     <string name="shared_string_remember_my_choice">Ricorda la scelta</string>
     <string name="shared_string_refresh">Ricarica</string>
-    <string name="shared_string_download">Download</string>
-    <string name="shared_string_downloading">In download</string>
-    <string name="shared_string_download_successful">Download completato</string>
-    <string name="shared_string_io_error">Errore di I/O</string>
+    <string name="shared_string_download">Scarica</string>
+    <string name="shared_string_downloading">Scaricamento in corso</string>
+    <string name="shared_string_download_successful">Scaricamento completato</string>
+    <string name="shared_string_io_error">Errore di lettura/scrittura</string>
     <string name="shared_string_unexpected_error">Si è verificato un errore imprevisto</string>
     <string name="shared_string_action_template">"Azione {0}"</string>
     <string name="shared_string_close">Chiudi</string>
@@ -1944,7 +1944,7 @@ Attivando questa vista lo stile della mappa diventerà \'Inverno e sci\', mostra
     <string name="routing_settings_2">Impostazioni di navigazione</string>
     <string name="general_settings_2">Impostazioni generali</string>
     <string name="shared_string_clear_all">Cancella tutto</string>
-    <string name="shared_string_my_location">Mia posizione</string>
+    <string name="shared_string_my_location">La mia posizione</string>
     <string name="shared_string_my_favorites">I miei preferiti</string>
     <string name="shared_string_my_tracks">Le mie tracce</string>
     <string name="shared_string_currently_recording_track">Traccia in corso di registrazione</string>
@@ -1957,7 +1957,7 @@ Attivando questa vista lo stile della mappa diventerà \'Inverno e sci\', mostra
     <string name="osm_edits">Modifiche OSM</string>
     <string name="osmand_parking_hour">h</string>
     <string name="osmand_parking_minute">min</string>
-    <string name="osmand_parking_time_left">mancano</string>
+    <string name="osmand_parking_time_left">rimasto</string>
     <string name="parking_place_limited">Parcheggio a tempo limitato a</string>
     <string name="your_edits">Le tue modifiche</string>
     <string name="osmand_parking_overdue">obsoleto</string>
@@ -1968,10 +1968,10 @@ Attivando questa vista lo stile della mappa diventerà \'Inverno e sci\', mostra
     <string name="confirmation_to_clear_history">Vuoi cancellare la cronologia?</string>
     <string name="local_osm_changes_upload_all_confirm">Stai per inviare %1$d cambiamento/i a OSM. Sei sicuro?</string>
     <string name="agps_info">Info A-GPS</string>
-    <string name="agps_data_last_downloaded">A-GPS ultimo aggiornamento dati: %1$s</string>
+    <string name="agps_data_last_downloaded">ultimo aggiornamento dei dati dell\'A-GPS: %1$s</string>
     <string name="welmode_download_maps">Scarica mappe</string>
     <string name="welcome_select_region">Per rappresentare correttamente i segnali stradali e le restrizioni per favore seleziona la tua regione di guida:</string>
-    <string name="confirm_usage_speed_cameras">In molti paesi (Germania, Francia, Italia, e altri) l\'utilizzo degli avvertimenti di presenza di autovelox non è legale. OsmAnd non si assume alcuna responsabilità in caso di violazione della legge. Si prega di cliccare si solo in caso di utilizzo autorizzato di questa funzionalità.</string>
+    <string name="confirm_usage_speed_cameras">In molti Paesi (Germania, Francia, Italia, e altri) l\'utilizzo degli avvertimenti di presenza di autovelox non è legale. OsmAnd non si assume alcuna responsabilità in caso di violazione della legge. Si prega di accettare solo in caso di utilizzo autorizzato di questa funzionalità.</string>
     <string name="welcome_text">OsmAnd fornisce mappe consultabili e di navigazione offline globali!</string>
     <string name="welcome_header">Benvenuto</string>
     <string name="current_route">Percorso attuale</string>
@@ -1984,12 +1984,12 @@ Attivando questa vista lo stile della mappa diventerà \'Inverno e sci\', mostra
     <string name="shared_string_show_description">Mostra la descrizione</string>
     <string name="shared_string_places">Luoghi</string>
     <string name="shared_string_search">Cerca</string>
-    <string name="shared_string_is_open">Apri</string>
+    <string name="shared_string_is_open">Apri ora</string>
     <string name="rendering_attr_OSMMapperAssistant_name">Assistente mappatore OSM</string>
     <string name="shared_string_manage">Gestisci</string>
     <string name="shared_string_edit">Modifica</string>
     <string name="filter_poi_hint">Filtra per nome</string>
-    <string name="search_poi_category_hint">Scrivi per cercare fra tutti i PDI</string>
+    <string name="search_poi_category_hint">Scrivi per cercare</string>
     <string name="index_name_netherlands">Europa - Paesi Bassi</string>
     <string name="copying_osmand_file_failed">Copia dei file fallita</string>
     <string name="storage_directory_external">Memoria esterna</string>
@@ -1999,7 +1999,7 @@ Attivando questa vista lo stile della mappa diventerà \'Inverno e sci\', mostra
     <string name="storage_directory_default">Memoria interna</string>
     <string name="storage_directory">Posizione di memorizzazione delle mappe</string>
     <string name="shared_string_copy">Copia</string>
-    <string name="storage_directory_internal_app">Memoria interna applicazione</string>
+    <string name="storage_directory_internal_app">Memoria interna dell\'applicazione</string>
     <string name="rendering_value__name">Default</string>
     <string name="rendering_value_highContrastRoads_name">Strade ad alto contrasto</string>
     <string name="storage_directory_multiuser">Memorizzazione multiutente</string>
@@ -2015,12 +2015,12 @@ Attivando questa vista lo stile della mappa diventerà \'Inverno e sci\', mostra
     <string name="rendering_value_disabled_name">Disabilitato</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Colorazione in base al tipo di percorso</string>
     <string name="rendering_value_walkingRoutesOSMC_name">Colorazione in base a OSMC</string>
-    <string name="osm_edit_context_menu_delete">Cancella modifica OSM</string>
-    <string name="archive_wikipedia_data">Ci sono dati Wikipedia scaricati desueti e incompatibili. Vuoi archiviarli?</string>
-    <string name="download_wikipedia_files">Vuoi scaricare i dati aggiuntivi di Wikipedia (%1$s MB) ?</string>
+    <string name="osm_edit_context_menu_delete">Cancella la modifica di OSM</string>
+    <string name="archive_wikipedia_data">Ci sono dati Wikipedia scaricati vecchi e incompatibili. Vuoi archiviarli?</string>
+    <string name="download_wikipedia_files">Vuoi scaricare i dati aggiuntivi di Wikipedia (%1$s MB)?</string>
     <string name="gps_network_not_enabled">Il servizio di localizzazione non è attivo. Vuoi avviarlo?</string>
     <string name="disable_recording_once_app_killed">Previeni il login remoto</string>
-    <string name="disable_recording_once_app_killed_descrp">Metterà in pausa la registrazione GPX quando l\'app viene chiusa (attraverso le app recenti). (L\'indicatore della modalità background di OsmAnd sparisce dalla barra delle notifiche di Android.)</string>
+    <string name="disable_recording_once_app_killed_descrp">Metterà in pausa la registrazione GPX quando l\'app viene chiusa (attraverso le app recenti). L\'indicatore della modalità background di OsmAnd sparisce dalla barra delle notifiche di Android</string>
     <string name="shared_string_import2osmand">Importa in OsmAnd</string>
     <string name="read_full_article">Leggi l\'articolo intero (online)</string>
     <string name="shared_string_wikipedia">Wikipedia</string>
@@ -2028,7 +2028,7 @@ Attivando questa vista lo stile della mappa diventerà \'Inverno e sci\', mostra
     <string name="shared_string_show_details">Mostra i dettagli</string>
     <string name="local_recordings_delete_all_confirm">Stai per cancellare %1$d nota/e. Sei sicuro?</string>
     <string name="download_wikipedia_maps">Wikipedia</string>
-    <string name="lang_es_ar">Spagnolo (Argentino)</string>
+    <string name="lang_es_ar">Spagnolo argentino</string>
     <string name="lang_nb">Norvegese (Bokmål)</string>
     <string name="lang_vo">Volapuk</string>
     <string name="lang_th">Thailandese</string>
@@ -2039,7 +2039,7 @@ Attivando questa vista lo stile della mappa diventerà \'Inverno e sci\', mostra
     <string name="lang_pms">Piemontese</string>
     <string name="lang_bn">Bengalese</string>
     <string name="lang_tl">Tagalog</string>
-    <string name="lang_sh">Serbo-Croato</string>
+    <string name="lang_sh">Serbo-croato</string>
     <string name="lang_az">Azero</string>
     <string name="lang_br">Bretone</string>
     <string name="lang_sq">Albanese</string>
@@ -2058,8 +2058,8 @@ Attivando questa vista lo stile della mappa diventerà \'Inverno e sci\', mostra
     <string name="lang_gl">Gallego</string>
     <string name="lang_et">Estone</string>
     <string name="lang_ceb">Cebuano</string>
-    <string name="rendering_attr_currentTrackColor_name">Colore traccia GPX</string>
-    <string name="rendering_attr_currentTrackWidth_name">Spessore traccia GPX</string>
+    <string name="rendering_attr_currentTrackColor_name">Colore della traccia GPX</string>
+    <string name="rendering_attr_currentTrackWidth_name">Spessore della traccia GPX</string>
     <string name="rendering_value_translucent_red_name">Rosso traslucido</string>
     <string name="rendering_value_translucent_orange_name">Arancione traslucido</string>
     <string name="rendering_value_yellow_name">Giallo</string>
@@ -2068,15 +2068,15 @@ Attivando questa vista lo stile della mappa diventerà \'Inverno e sci\', mostra
     <string name="rendering_value_translucent_lightgreen_name">Verde chiaro traslucido</string>
     <string name="rendering_value_green_name">Verde</string>
     <string name="rendering_value_translucent_green_name">Verde traslucido</string>
-    <string name="rendering_value_lightblue_name">Blu chiaro</string>
-    <string name="rendering_value_translucent_lightblue_name">Blu chiaro traslucido</string>
+    <string name="rendering_value_lightblue_name">Azzurro</string>
+    <string name="rendering_value_translucent_lightblue_name">Azzurro traslucido</string>
     <string name="rendering_value_blue_name">Blu</string>
     <string name="rendering_value_translucent_blue_name">Blu traslucido</string>
-    <string name="rendering_value_purple_name">Porpora</string>
-    <string name="rendering_value_translucent_purple_name">Porpora traslucido</string>
-    <string name="restart_is_required">Per applicare le modifiche è necessario un riavvio manuale.</string>
+    <string name="rendering_value_purple_name">Viola</string>
+    <string name="rendering_value_translucent_purple_name">Viola traslucido</string>
+    <string name="restart_is_required">Per applicare le modifiche è necessario un riavvio manuale dell\'app.</string>
     <string name="rendering_value_default13_name">Predefinito (13)</string>
-    <string name="rendering_value_defaultTranslucentCyan_name">Default (Ciano traslucido)</string>
+    <string name="rendering_value_defaultTranslucentCyan_name">Predefinito (ciano traslucido)</string>
     <string name="rendering_value_red_name">Rosso</string>
     <string name="lang_ht">Haitiano</string>
     <string name="do_you_like_osmand">Ti piace OsmAnd?</string>
@@ -2101,7 +2101,7 @@ Attivando questa vista lo stile della mappa diventerà \'Inverno e sci\', mostra
     <string name="shared_string_skip">Salta</string>
     <string name="app_name_osmand">OsmAnd</string>
     <string name="offline_maps_and_navigation">Mappe offline &amp; Navigazione</string>
-    <string name="lang_new">Newa / Bhasa del Nepal</string>
+    <string name="lang_new">Newa/Bhasa del Nepal</string>
     <string name="plugin_settings">Componenti aggiuntivi</string>
     <string name="routing_attr_avoid_shuttle_train_name">Evita i treni navetta</string>
     <string name="routing_attr_avoid_shuttle_train_description">Evita i treni navetta</string>
@@ -2151,7 +2151,7 @@ Attivando questa vista lo stile della mappa diventerà \'Inverno e sci\', mostra
     <string name="si_m_s">Metri al secondo</string>
     <string name="si_min_km">Minuti al chilometro</string>
     <string name="si_min_m">Minuti per miglia</string>
-    <string name="si_nm_h">Miglia nautiche per ora (knot)</string>
+    <string name="si_nm_h">Miglia nautiche per ora (nodi)</string>
     <string name="nm_h">kn</string>
     <string name="min_mile">min/m</string>
     <string name="min_km">min/km</string>
@@ -2164,7 +2164,7 @@ Attivando questa vista lo stile della mappa diventerà \'Inverno e sci\', mostra
     <string name="show_free_version_banner">Mostra il banner della versione gratuita</string>
     <string name="show_free_version_banner_description">Anche se hai la versione a pagamento puoi comunque vedere il banner della versione gratuita</string>
     <string name="downloading_number_of_files">In download - %1$d file</string>
-    <string name="hillshade_layer_disabled">Livello Ombreggiatura rilievi disabilitato</string>
+    <string name="hillshade_layer_disabled">Livello di ombreggiatura per i rilievi disabilitato</string>
     <string name="buy">ACQUISTA</string>
     <string name="activate_srtm_plugin">Attiva il componente aggiuntivo SRTM</string>
     <string name="later">In seguito</string>
@@ -2192,9 +2192,9 @@ Attivando questa vista lo stile della mappa diventerà \'Inverno e sci\', mostra
     <string name="share_menu_location">Condividi la posizione</string>
 
     <string name="application_dir_description">Scegli dove vuoi salvare i file delle mappe e gli altri file di dati.</string>
-    <string name="osm_edit_created_poi">POI OSM creato</string>
+    <string name="osm_edit_created_poi">POI di OSM creato</string>
 
-    <string name="shared_string_qr_code">QR-code</string>
+    <string name="shared_string_qr_code">codice QR</string>
     <string name="map_downloaded">Mappa scaricata</string>
     <string name="map_downloaded_descr">Mappa di %1$s scaricata. Torna alla mappa per iniziare a utilizzarla.</string>
     <string name="go_to_map">Vai alla mappa</string>
@@ -2221,7 +2221,7 @@ Attivando questa vista lo stile della mappa diventerà \'Inverno e sci\', mostra
     <string name="techical_articles_item">Articoli tecnici</string>
     <string name="versions_item">Versioni</string>
     <string name="contact_us">Contattaci</string>
-    <string name="world_map_download_descr">"La mappa di base (copertura mondiale a piccoli livelli di zoom) è mancante o non aggiornata. Valutate di scaricare  per un ambiente completo."</string>
+    <string name="world_map_download_descr">La mappa di base (copertura mondiale a piccoli livelli di zoom) è mancante o non aggiornata. Valuta se scaricarla per un ambiente completo.</string>
 
     <string name="map_legend">Legenda della mappa</string>
 <string name="shared_string_upload">Carica</string>
@@ -2548,7 +2548,7 @@ Se ami OsmAnd e OSM e vuoi sostenerli, questo è un modo perfetto per farlo.</st
     <string name="lang_hu_formal">Ungherese (formale)</string>
     <string name="current_track">Tracciato attuale</string>
     <string name="change_markers_position">Cambia la posizione del marcatore</string>
-    <string name="lang_es_us">Spagnolo (Americano)</string>
+    <string name="lang_es_us">Spagnolo americano</string>
     <string name="lang_ast">Asturiano</string>
     <string name="lang_en_gb">Inglese (Regno Unito)</string>
     <string name="lang_kn">Kannada</string>
