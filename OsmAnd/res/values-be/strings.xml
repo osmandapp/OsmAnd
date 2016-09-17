@@ -2590,7 +2590,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="coords_search">Пошук па каардынатах</string>
     <string name="advanced_coords_search">Пашыраны пошук па каардынатах</string>
     <string name="back_to_search">Вярнуцца да пошука</string>
-    <string name="confirmation_to_delete_history_items">Выдаліць абранае з гісторыі пошуку?</string>
+    <string name="confirmation_to_delete_history_items">Выдаліць абраныя элемэнты з гісторыі?</string>
     <string name="show_something_on_map">Паказаць %1$s на мапе</string>
     <string name="rendering_attr_hideOverground_name">Надземныя аб\'екты</string>
 
