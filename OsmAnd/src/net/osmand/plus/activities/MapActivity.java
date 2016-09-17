@@ -624,11 +624,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 		if (((app.getAppInitializer().isFirstTime() && Version.isDeveloperVersion(app))
 				|| !app.getResourceManager().isAnyMapIstalled()) && FirstUsageWelcomeFragment.SHOW) {
-			FirstUsageWelcomeFragment.SHOW = false;
 			getSupportFragmentManager().beginTransaction()
 					.add(R.id.fragmentContainer, new FirstUsageWelcomeFragment(),
 							FirstUsageWelcomeFragment.TAG).commitAllowingStateLoss();
 		}
+		FirstUsageWelcomeFragment.SHOW = false;
 	}
 
 	@Override
