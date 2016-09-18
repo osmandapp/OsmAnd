@@ -48,7 +48,7 @@
     <string name="coords_search">Coordinates search</string>
     <string name="advanced_coords_search">Advanced coordinates search</string>
     <string name="back_to_search">Back to search</string>
-    <string name="confirmation_to_delete_history_items">Do you want to delete selected history items?</string>
+    <string name="confirmation_to_delete_history_items">Do you want to remove the selected items from history?</string>
     <string name="show_something_on_map">Show %1$s on the map</string>
     <string name="release_2_4">
 	\u2022 New very powerful free text search\n\n
