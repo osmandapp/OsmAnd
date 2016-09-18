@@ -129,6 +129,11 @@ public class TransportStopController extends MenuController {
 
 	@Override
 	public void addPlainMenuItems(String typeStr, PointDescription pointDescription, final LatLon latLon) {
+		addPlainMenuItems(builder, latLon);
+		super.addPlainMenuItems(typeStr, pointDescription, latLon);
+	}
+
+	public void addPlainMenuItems(MenuBuilder builder, final LatLon latLon) {
 		for (final TransportStopRoute r : routes) {
 			OnClickListener listener = new OnClickListener() {
 				@Override
@@ -144,14 +149,13 @@ public class TransportStopController extends MenuController {
 				}
 			};
 			if (r.type == null) {
-				addPlainMenuItem(R.drawable.ic_action_polygom_dark, r.getDescription(getMapActivity().getMyApplication(), true),
+				builder.addPlainMenuItem(R.drawable.ic_action_polygom_dark, r.getDescription(getMapActivity().getMyApplication(), true),
 						false, false, listener );
 			} else {
-				addPlainMenuItem(r.type.getResourceId(), r.getDescription(getMapActivity().getMyApplication(), true), 
+				builder.addPlainMenuItem(r.type.getResourceId(), r.getDescription(getMapActivity().getMyApplication(), true),
 						false, false, listener);
 			}
 		}
-		super.addPlainMenuItems(typeStr, pointDescription, latLon);
 	}
 
 	private void processTransportStop() {

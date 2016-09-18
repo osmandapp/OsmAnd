@@ -24,7 +24,7 @@ public class FavoritePointEditor extends PointEditor {
 		return favorite;
 	}
 
-	public void add(LatLon latLon, String title) {
+	public void add(LatLon latLon, String title, String originObjectName) {
 		if (latLon == null) {
 			return;
 		}
@@ -35,6 +35,7 @@ public class FavoritePointEditor extends PointEditor {
 		}
 		favorite = new FavouritePoint(latLon.getLatitude(), latLon.getLongitude(), title, lastCategory);
 		favorite.setDescription("");
+		favorite.setOriginObjectName(originObjectName);
 		FavoritePointEditorFragment.showInstance(mapActivity);
 	}
 

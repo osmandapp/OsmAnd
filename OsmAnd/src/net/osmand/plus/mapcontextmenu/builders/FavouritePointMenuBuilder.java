@@ -2,32 +2,104 @@ package net.osmand.plus.mapcontextmenu.builders;
 
 import android.view.View;
 
+import net.osmand.ResultMatcher;
+import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.data.Amenity;
 import net.osmand.data.FavouritePoint;
+import net.osmand.data.QuadRect;
+import net.osmand.data.TransportStop;
+import net.osmand.osm.PoiCategory;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
-import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
+
+import java.util.List;
 
 public class FavouritePointMenuBuilder extends MenuBuilder {
 
 	private final FavouritePoint fav;
+	private Object originObject;
 
 	public FavouritePointMenuBuilder(OsmandApplication app, final FavouritePoint fav) {
 		super(app);
 		this.fav = fav;
+		acquireOriginObject();
 	}
 
-	@Override
-	protected boolean needBuildPlainMenuItems() {
-		return false;
+	public void acquireOriginObject()
+	{
+		String originObjectName = fav.getOriginObjectName();
+		if (originObjectName.length() > 0) {
+			if (originObjectName.startsWith(Amenity.class.getSimpleName())) {
+				originObject = findAmenity(originObjectName, fav.getLatitude(), fav.getLongitude());
+			} else if (originObjectName.startsWith(TransportStop.class.getSimpleName())) {
+				originObject = findTransportStop(originObjectName, fav.getLatitude(), fav.getLongitude());
+			}
+		}
+	}
+
+	public Object getOriginObject() {
+		return originObject;
 	}
 
 	@Override
 	public void buildInternal(View view) {
-		if (!Algorithms.isEmpty(fav.getDescription())) {
-			buildRow(view, R.drawable.ic_action_note_dark, fav.getDescription(), 0, true, 0, false, null);
+		if (originObject != null) {
+			if (originObject instanceof Amenity) {
+				AmenityMenuBuilder builder = new AmenityMenuBuilder(app, (Amenity) originObject);
+				builder.setLight(light);
+				builder.buildInternal(view);
+			}
 		}
+	}
 
-		buildPlainMenuItems(view);
+	private Amenity findAmenity(String nameStringEn, double lat, double lon) {
+		QuadRect rect = MapUtils.calculateLatLonBbox(lat, lon, 15);
+		List<Amenity> amenities = app.getResourceManager().searchAmenities(
+				new BinaryMapIndexReader.SearchPoiTypeFilter() {
+					@Override
+					public boolean accept(PoiCategory type, String subcategory) {
+						return true;
+					}
+
+					@Override
+					public boolean isEmpty() {
+						return false;
+					}
+				}, rect.top, rect.left, rect.bottom, rect.right, -1, null);
+
+		for (Amenity amenity : amenities) {
+			String stringEn = amenity.toStringEn();
+			if (stringEn.equals(nameStringEn)) {
+				return amenity;
+			}
+		}
+		return null;
+	}
+
+	private TransportStop findTransportStop(String nameStringEn, double lat, double lon) {
+
+		QuadRect rect = MapUtils.calculateLatLonBbox(lat, lon, 15);
+		List<TransportStop> res = app.getResourceManager().searchTransportSync(rect.top, rect.left,
+				rect.bottom, rect.right, new ResultMatcher<TransportStop>() {
+
+					@Override
+					public boolean publish(TransportStop object) {
+						return true;
+					}
+
+					@Override
+					public boolean isCancelled() {
+						return false;
+					}
+				});
+
+		for (TransportStop stop : res) {
+			String stringEn = stop.toStringEn();
+			if (stringEn.equals(nameStringEn)) {
+				return stop;
+			}
+		}
+		return null;
 	}
 }

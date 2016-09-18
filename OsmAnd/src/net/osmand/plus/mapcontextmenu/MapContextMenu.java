@@ -1,14 +1,22 @@
 package net.osmand.plus.mapcontextmenu;
 
-import java.lang.ref.WeakReference;
-import java.util.LinkedList;
-import java.util.List;
+import android.app.Dialog;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
+import android.view.View;
+import android.widget.LinearLayout;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.StateChangedListener;
+import net.osmand.data.Amenity;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.data.TransportStop;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.GPXUtilities.GPXFile;
@@ -18,12 +26,10 @@ import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.MapMarkersHelper.MapMarkerChangedListener;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
-import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.TargetPointsHelper.TargetPointChangedListener;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.DashboardOnMap;
-import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.mapcontextmenu.MenuController.ContextMenuToolbarController;
 import net.osmand.plus.mapcontextmenu.MenuController.MenuState;
@@ -42,16 +48,10 @@ import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControllerType;
 import net.osmand.util.MapUtils;
-import android.app.Dialog;
-import android.app.ProgressDialog;
-import android.content.DialogInterface;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AlertDialog.Builder;
-import android.view.View;
-import android.widget.LinearLayout;
+
+import java.lang.ref.WeakReference;
+import java.util.LinkedList;
+import java.util.List;
 
 public class MapContextMenu extends MenuTitleController implements StateChangedListener<ApplicationMode>,
 		MapMarkerChangedListener, TargetPointChangedListener {
@@ -673,7 +673,15 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 					if (pointDescription.isFavorite() || !hasValidTitle()) {
 						title = "";
 					}
-					getFavoritePointEditor().add(latLon, title);
+					String originObjectName = "";
+					if (object != null) {
+						if (object instanceof Amenity) {
+							originObjectName = ((Amenity) object).toStringEn();
+						} else if (object instanceof TransportStop) {
+							originObjectName = ((TransportStop) object).toStringEn();
+						}
+					}
+					getFavoritePointEditor().add(latLon, title, originObjectName);
 				}
 			});
 		}

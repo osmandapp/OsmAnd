@@ -206,6 +206,10 @@ public abstract class MapObject implements Comparable<MapObject> {
 		this.fileOffset = fileOffset;
 	}
 
+	public String toStringEn() {
+		return getClass().getSimpleName() + ":" + getEnName(true);
+	}
+
 	@Override
 	public String toString() {
 		return getClass().getSimpleName() + " " + name + "(" + id + ")"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$

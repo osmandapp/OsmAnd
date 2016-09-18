@@ -144,6 +144,10 @@ public class Amenity extends MapObject {
 		}
 	}
 
+	@Override
+	public String toStringEn() {
+		return super.toStringEn() + ":" + type.getKeyName() + ":" + subType;
+	}
 
 	@Override
 	public String toString() {

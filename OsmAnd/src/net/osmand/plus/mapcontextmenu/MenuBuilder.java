@@ -113,7 +113,7 @@ public class MenuBuilder {
 		return firstRow;
 	}
 
-	protected void rowBuilt() {
+	public void rowBuilt() {
 		firstRow = false;
 	}
 

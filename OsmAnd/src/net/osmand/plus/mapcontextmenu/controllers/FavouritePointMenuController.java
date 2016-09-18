@@ -3,8 +3,11 @@ package net.osmand.plus.mapcontextmenu.controllers;
 import android.graphics.drawable.Drawable;
 import android.support.v4.app.Fragment;
 
+import net.osmand.data.Amenity;
 import net.osmand.data.FavouritePoint;
+import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.data.TransportStop;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -13,6 +16,7 @@ import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.mapcontextmenu.builders.FavouritePointMenuBuilder;
 import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditor;
 import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditorFragment;
+import net.osmand.util.Algorithms;
 
 public class FavouritePointMenuController extends MenuController {
 
@@ -89,5 +93,31 @@ public class FavouritePointMenuController extends MenuController {
 	public String getTypeStr() {
 		return fav.getCategory().length() == 0 ?
 				getMapActivity().getString(R.string.shared_string_favorites) : fav.getCategory();
+	}
+
+	private FavouritePointMenuBuilder getBuilder() {
+		return (FavouritePointMenuBuilder) builder;
+	}
+
+	@Override
+	public void addPlainMenuItems(String typeStr, PointDescription pointDescription, LatLon latLon) {
+		if (!Algorithms.isEmpty(fav.getDescription())) {
+			addPlainMenuItem(R.drawable.ic_action_note_dark, fav.getDescription(), true, false, null);
+		}
+		Object originObject = getBuilder().getOriginObject();
+		if (originObject != null) {
+			if (originObject instanceof Amenity) {
+				Amenity amenity = (Amenity) originObject;
+				AmenityMenuController.addPlainMenuItems(amenity, AmenityMenuController.getTypeStr(amenity), builder);
+			} else if (originObject instanceof TransportStop) {
+				TransportStop stop = (TransportStop) originObject;
+				TransportStopController transportStopController =
+						new TransportStopController(getMapActivity().getMyApplication(), getMapActivity(), pointDescription, stop);
+				transportStopController.addPlainMenuItems(builder, latLon);
+				addMyLocationToPlainItems(latLon);
+			}
+		} else {
+			addMyLocationToPlainItems(latLon);
+		}
 	}
 }

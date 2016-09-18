@@ -9,6 +9,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 	private String name = "";
 	private String description;
 	private String category = "";
+	private String originObjectName = "";
 	private double latitude;
 	private double longitude;
 	private int color;
@@ -35,6 +36,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		this.color = favouritePoint.color;
 		this.description = favouritePoint.description;
 		this.visible = favouritePoint.visible;
+		this.originObjectName = favouritePoint.originObjectName;
 	}
 
 	public int getColor() {
@@ -61,7 +63,14 @@ public class FavouritePoint implements Serializable, LocationPoint {
 	public void setVisible(boolean visible) {
 		this.visible = visible;
 	}
-	
+
+	public String getOriginObjectName() {
+		return originObjectName;
+	}
+
+	public void setOriginObjectName(String originObjectName) {
+		this.originObjectName = originObjectName;
+	}
 
 	public double getLatitude() {
 		return latitude;

@@ -99,6 +99,7 @@ public class GPXUtilities {
 		// previous undocumented feature 'category' ,now 'type'
 		public String category = null;
 		public String desc = null;
+		public String comment = null;
 		// by default
 		public long time = 0;
 		public double ele = Double.NaN;
@@ -182,6 +183,7 @@ public class GPXUtilities {
 			result = prime * result + ((name == null) ? 0 : name.hashCode());
 			result = prime * result + ((category == null) ? 0 : category.hashCode());
 			result = prime * result + ((desc == null) ? 0 : desc.hashCode());
+			result = prime * result + ((comment == null) ? 0 : comment.hashCode());
 			result = prime * result + ((lat == 0) ? 0 : Double.valueOf(lat).hashCode());
 			result = prime * result + ((lon == 0) ? 0 : Double.valueOf(lon).hashCode());
 			return result;
@@ -933,6 +935,9 @@ public class GPXUtilities {
 			serializer.endTag(null, "link");
 		}
 		writeNotNullText(serializer, "type", p.category);
+		if (p.comment != null) {
+			writeNotNullText(serializer, "cmt", p.comment);
+		}
 		if (!Double.isNaN(p.hdop)) {
 			writeNotNullText(serializer, "hdop", p.hdop + "");
 		}
@@ -1093,6 +1098,8 @@ public class GPXUtilities {
 								((WptPt) parse).name = readText(parser, "name");
 							} else if (parser.getName().equals("desc")) {
 								((WptPt) parse).desc = readText(parser, "desc");
+							} else if (parser.getName().equals("cmt")) {
+								((WptPt) parse).comment = readText(parser, "cmt");
 							} else if (parser.getName().equals("link")) {
 								((WptPt) parse).link = parser.getAttributeValue("", "href");
 							} else if (tag.equals("category")) {

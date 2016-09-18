@@ -8,6 +8,7 @@ import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.mapcontextmenu.builders.AmenityMenuBuilder;
 import net.osmand.plus.render.RenderingIcons;
@@ -52,6 +53,10 @@ public class AmenityMenuController extends MenuController {
 
 	@Override
 	public int getLeftIconId() {
+		return getLeftIconId(amenity);
+	}
+
+	public static int getLeftIconId(Amenity amenity) {
 		String id = null;
 		PoiType st = amenity.getType().getPoiTypeByKeyName(amenity.getSubType());
 		if (st != null) {
@@ -74,6 +79,10 @@ public class AmenityMenuController extends MenuController {
 
 	@Override
 	public String getTypeStr() {
+		return getTypeStr(amenity);
+	}
+
+	public static String getTypeStr(Amenity amenity) {
 		PoiCategory pc = amenity.getType();
 		PoiType pt = pc.getPoiTypeByKeyName(amenity.getSubType());
 		String typeStr = amenity.getSubType();
@@ -93,8 +102,12 @@ public class AmenityMenuController extends MenuController {
 
 	@Override
 	public void addPlainMenuItems(String typeStr, PointDescription pointDescription, LatLon latLon) {
+		addPlainMenuItems(amenity, typeStr, builder);
+	}
+
+	public static void addPlainMenuItems(Amenity amenity, String typeStr, MenuBuilder builder) {
 		if (!Algorithms.isEmpty(typeStr)) {
-			int resId = getLeftIconId();
+			int resId = getLeftIconId(amenity);
 			if (resId == 0) {
 				PoiCategory pc = amenity.getType();
 				resId = RenderingIcons.getBigIconResourceId(pc.getIconKeyName());
@@ -102,7 +115,7 @@ public class AmenityMenuController extends MenuController {
 			if (resId == 0) {
 				resId = R.drawable.ic_action_folder_stroke;
 			}
-			addPlainMenuItem(resId, typeStr, false, false, null);
+			builder.addPlainMenuItem(resId, typeStr, false, false, null);
 		}
 	}
 }

@@ -76,7 +76,7 @@ public abstract class MenuController extends BaseMenuController {
 		MULTI_LINE
 	}
 
-	private MenuBuilder builder;
+	protected MenuBuilder builder;
 	private int currentMenuState;
 	private MenuType menuType = MenuType.STANDARD;
 	private PointDescription pointDescription;

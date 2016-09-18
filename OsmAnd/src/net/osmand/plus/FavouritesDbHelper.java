@@ -405,6 +405,9 @@ public class FavouritesDbHelper {
 			pt.desc = p.getDescription();
 			if (p.getCategory().length() > 0)
 				pt.category = p.getCategory();
+			if (p.getOriginObjectName().length() > 0) {
+				pt.comment = p.getOriginObjectName();
+			}
 			gpx.points.add(pt);
 		}
 		return gpx;
@@ -559,6 +562,9 @@ public class FavouritesDbHelper {
 			}
 			FavouritePoint fp = new FavouritePoint(p.lat, p.lon, name, categoryName);
 			fp.setDescription(p.desc);
+			if (p.comment != null) {
+				fp.setOriginObjectName(p.comment);
+			}
 			fp.setColor(p.getColor(0));
 			fp.setVisible(!p.getExtensionsToRead().containsKey(HIDDEN));
 			points.put(getKey(fp), fp);
