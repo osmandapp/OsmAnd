@@ -1209,7 +1209,7 @@ A globális adatok (az északi 70° és déli 70° szélesség között) az SRTM
     <string name="driving_region_us">USA</string>
     <string name="driving_region_canada">Kanada</string>
     <string name="driving_region_europe_asia">Európa és Ázsia</string>
-    <string name="driving_region_uk">UK, India, Ausztrália &amp; továbbiak</string>
+    <string name="driving_region_uk">UK, India, Ausztrália, stb.</string>
 
 
     <string name="announce_gpx_waypoints">GPX útpontok</string>
@@ -2641,4 +2641,6 @@ Ha segítségre van szükséged az OsmAnd alkalmazással kapcsolatban, keresd a 
     <string name="routing_attr_short_way_name">Üzemanyag-takarékos útvonal</string>
     <string name="routing_attr_short_way_description">Üzemanyag-takarékos útvonal tervezése (általában rövidebb)</string>
     <string name="replace_favorite_confirmation">Le szeretnéd cserélni a(z) %1$s kedvenc helyet?</string>
+    <string name="driving_region_australia">Ausztrália</string>
+    <string name="get_for">Beszerzés ennyi időre</string>
     </resources>
