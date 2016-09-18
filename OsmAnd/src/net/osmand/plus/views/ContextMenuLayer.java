@@ -23,6 +23,7 @@ import android.widget.ImageView;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.NativeLibrary.RenderedObject;
+import net.osmand.RenderingContext;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
@@ -510,7 +511,16 @@ public class ContextMenuLayer extends OsmandMapLayer {
 				if (nativeLib != null) {
 					//RenderingContext rc = new RenderingContext(activity.getMyApplication());
 					MapRenderRepositories maps = activity.getMyApplication().getResourceManager().getRenderer();
-					RenderedObject[] renderedObjects = nativeLib.searchRenderedObjectsFromContext(maps.getVisibleRenderingContext(), (int)point.x, (int)point.y);
+
+					RenderingContext rc = maps.getVisibleRenderingContext();
+					RenderedObject[] renderedObjects = null;
+					if(rc.zoom == tileBox.getZoom()) {
+						double lat = MapUtils.get31LatitudeY((int)(rc.topY*rc.tileDivisor));
+						double lon = MapUtils.get31LongitudeX((int)(rc.leftX*rc.tileDivisor));
+						float x = tileBox.getPixXFromLatLon(lat, lon);
+						float y = tileBox.getPixYFromLatLon(lat, lon);
+						renderedObjects = nativeLib.searchRenderedObjectsFromContext(rc, (int)( point.x - x), (int)( point.y- y));
+					}
 					if (renderedObjects != null) {
 						Log.e("111", "found " + renderedObjects.length + " object(s) at x=" + point.x + " y=" + point.y);
 						for (RenderedObject renderedObject : renderedObjects) {
