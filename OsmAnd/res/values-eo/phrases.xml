@@ -2484,7 +2484,7 @@
 	<string name="poi_forestry_compartment">Vojmontrilo: arbara sekcio</string>
 	<string name="poi_forestry_allotment">Vojmontrilo: arbara parcelo</string>
 	<string name="poi_construction_yes">Dum konstruado</string>
-	<string name="poi_atm_yes">Bankaŭtomato: jes</string>
+	<string name="poi_additional_atm_yes">Bankaŭtomato: jes</string>
 	<string name="poi_atm_no">Bankaŭtomato: ne</string>
 
 	<string name="poi_firepit">Lignofajrejo</string>
@@ -3007,8 +3007,6 @@
 	<string name="poi_health_specialty_depth_psychology_yes">Specialisto: profunda psikologiisto</string>
 	<string name="poi_health_specialty_behavior_yes">Specialisto: isto de konduta terapio</string>
 
-	<string name="poi_osmand_additional_atm_yes">Bankaŭtomato: jes</string>
-	<string name="poi_additional_atm_yes">Bankaŭtomato: jes</string>
 	<string name="poi_wiki_link">Vikipedio</string>
 
 <string name="poi_resource_slate_iron_ore_copper">Ardezo, fer-erco, kupro</string>

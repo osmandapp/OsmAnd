@@ -123,7 +123,7 @@
 	<string name="poi_architecture_umgebinde">Arquitectura: casa grande alemã</string>
 	<string name="poi_dolphin">Estrutura maritíma</string>
 
-	<string name="poi_atm_yes">ATM: sim</string>
+	<string name="poi_additional_atm_yes">ATM: sim</string>
 	<string name="poi_gas">Loja de gás líquido</string>
 	<string name="poi_shop_yes">Loja genérica</string>
 	<string name="poi_gift">Loja de presentes</string>

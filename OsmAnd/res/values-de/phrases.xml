@@ -2565,7 +2565,7 @@
 	<string name="poi_inscription_ne">Inschrift: NO</string>
 
 	<string name="poi_construction_yes">Im Bau</string>
-	<string name="poi_atm_yes">Geldautomat: Ja</string>
+	<string name="poi_additional_atm_yes">Geldautomat: Ja</string>
 	<string name="poi_atm_no">Geldautomat: Nein</string>
 
 	<string name="poi_firepit">Feuergrube</string>
@@ -2997,7 +2997,6 @@
 	<string name="poi_support_suspended">Unterstützung: ausgesetzt</string>
 	<string name="poi_diplomatic_consulate_general">Generalkonsulat</string>
 	<string name="poi_diplomatic_honorary_consulate">Honorarkonsulat</string>
-	<string name="poi_additional_atm_yes">Geldautomat: Ja</string>
 	<string name="poi_observatory_type_gravitational">Verwendung: Schwerkraft</string>
 
 	<string name="poi_generator_output_hot_water">Ausgangsleistung: heißes Wasser</string>

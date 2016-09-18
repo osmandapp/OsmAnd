@@ -1046,6 +1046,6 @@
 
 	<string name="poi_dolphin">Yunus</string>
 
-	<string name="poi_atm_yes">Atm: evet</string>
+	<string name="poi_additional_atm_yes">Atm: evet</string>
 	<string name="poi_medical_system_unknown_yes">Tıp sistemi: bilinmeyen geleneksel</string>
 	</resources>
