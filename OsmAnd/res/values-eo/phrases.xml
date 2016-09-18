@@ -675,7 +675,7 @@
 
 	<string name="poi_artwork">Artverko</string>
 	<string name="poi_archaeological_site">Arĥeologia ejo</string>
-	<string name="poi_battlefield">Batalejo</string>
+	<string name="poi_battlefield">Batalejo historia</string>
 	<string name="poi_boundary_stone">Limŝtono</string>
 	<string name="poi_historic_cannon">Pafilego historia</string>
 	<string name="poi_city_gate">Pordego urba</string>
@@ -1323,7 +1323,7 @@
 	<string name="poi_scrub">Arbustaro</string>
 	<string name="poi_grass">Herbotapiŝo</string>
 	<string name="poi_grassland">Herbejo</string>
-	<string name="poi_farmland">Farmejo</string>
+	<string name="poi_farmland">Agrokultura tereno</string>
 	<string name="poi_logging">Arbar-ekspluatadejo</string>
 	<string name="poi_sand">Sabla tereno</string>
 
@@ -1693,7 +1693,7 @@
 	<string name="poi_memorial_column">Kolono</string>
 	<string name="poi_memorial_stupa">Stupao</string>
 	<string name="poi_inscription">Skribaĵo</string>
-	<string name="poi_historic_quarry">Historia minejo subĉiela</string>
+	<string name="poi_historic_quarry">Minejo subĉiela historia</string>
 
 	<string name="poi_resource_aggregate">Volumenaĵo</string>
 	<string name="poi_resource_antimony">Antimono</string>
