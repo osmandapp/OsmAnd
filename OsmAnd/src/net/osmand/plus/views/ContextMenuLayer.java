@@ -532,8 +532,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 							boolean objectFound = false;
 							String name = renderedObject.getTags().get("name");
 							if (!Algorithms.isEmpty(name)) {
-								String value = renderedObject.getTags().get(name);
-								Amenity amenity = findAmenity(value, latLon.getLatitude(), latLon.getLongitude());
+								Amenity amenity = findAmenity(name, latLon.getLatitude(), latLon.getLongitude());
 								if (amenity != null) {
 									PointDescription pointDescription = new PointDescription(PointDescription.POINT_TYPE_POI,
 											amenity.getName(activity.getMyApplication().getSettings().MAP_PREFERRED_LOCALE.get()));
@@ -543,6 +542,8 @@ public class ContextMenuLayer extends OsmandMapLayer {
 							}
 							if (!objectFound) {
 								activity.getContextMenu().show(latLon, null, null);
+							} else {
+								break;
 							}
 							Log.e("111", "------------------");
 						}
@@ -559,7 +560,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	}
 
 	private Amenity findAmenity(String name, double lat, double lon) {
-		QuadRect rect = MapUtils.calculateLatLonBbox(lat, lon, 15);
+		QuadRect rect = MapUtils.calculateLatLonBbox(lat, lon, 150);
 		List<Amenity> amenities = activity.getMyApplication().getResourceManager().searchAmenities(
 				new BinaryMapIndexReader.SearchPoiTypeFilter() {
 					@Override
