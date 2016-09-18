@@ -23,9 +23,13 @@ import android.widget.ImageView;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.NativeLibrary.RenderedObject;
+import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.osm.PoiCategory;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.R;
@@ -34,7 +38,8 @@ import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.other.MapMultiSelectionMenu;
 import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.render.NativeOsmandLibrary;
-import net.osmand.plus.render.OsmandRenderer.RenderingContext;
+import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -513,6 +518,22 @@ public class ContextMenuLayer extends OsmandMapLayer {
 							for (Entry<String, String> entry : renderedObject.getTags().entrySet()) {
 								Log.e("111", "tag=" + entry.getKey() + " value=" + entry.getValue());
 							}
+							LatLon latLon = tileBox.getLatLonFromPixel(point.x, point.y);
+							boolean objectFound = false;
+							String name = renderedObject.getTags().get("name");
+							if (!Algorithms.isEmpty(name)) {
+								String value = renderedObject.getTags().get(name);
+								Amenity amenity = findAmenity(value, latLon.getLatitude(), latLon.getLongitude());
+								if (amenity != null) {
+									PointDescription pointDescription = new PointDescription(PointDescription.POINT_TYPE_POI,
+											amenity.getName(activity.getMyApplication().getSettings().MAP_PREFERRED_LOCALE.get()));
+									activity.getContextMenu().show(amenity.getLocation(), pointDescription, amenity);
+									objectFound = true;
+								}
+							}
+							if (!objectFound) {
+								activity.getContextMenu().show(latLon, null, null);
+							}
 							Log.e("111", "------------------");
 						}
 					} else {
@@ -525,6 +546,29 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		hideVisibleMenues();
 		menu.onSingleTapOnMap();
 		return false;
+	}
+
+	private Amenity findAmenity(String name, double lat, double lon) {
+		QuadRect rect = MapUtils.calculateLatLonBbox(lat, lon, 15);
+		List<Amenity> amenities = activity.getMyApplication().getResourceManager().searchAmenities(
+				new BinaryMapIndexReader.SearchPoiTypeFilter() {
+					@Override
+					public boolean accept(PoiCategory type, String subcategory) {
+						return true;
+					}
+
+					@Override
+					public boolean isEmpty() {
+						return false;
+					}
+				}, rect.top, rect.left, rect.bottom, rect.right, -1, null);
+
+		for (Amenity amenity : amenities) {
+			if (amenity.getName().equals(name)) {
+				return amenity;
+			}
+		}
+		return null;
 	}
 
 	private void hideVisibleMenues() {
