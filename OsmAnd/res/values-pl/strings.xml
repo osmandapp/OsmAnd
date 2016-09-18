@@ -2627,4 +2627,5 @@ Jeśli potrzebujesz pomocy podczas używania OsmAnd, prosimy o kontakt z naszym 
     <string name="donation_to_osm_desc">Część z dotacji zostanie przekazana użytkownikom OSM, którzy wprowadzają zmiany na mapie OpenStreetMap. Koszt subskrypcji pozostaje taki sam.</string>
     <string name="osm_live_subscription_desc">Subskrypcje pozwalają na cogodzinne, codzienne i cotygodniowe uaktualnienia i nieograniczone liczbą pobieranie map całego świata.</string>
     <string name="driving_region_australia">Australia</string>
+    <string name="lang_kab">Kabylski</string>
     </resources>
