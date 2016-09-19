@@ -2653,4 +2653,5 @@ Hvis du  ønsker at støtte OsmAnd og OSM, er dette en god måde at gøre det p�
     <string name="donation_to_osm_desc">En del af donationen vil blive sendt til OSM brugere, som laver ændringer til OpenStreetMap. Prisen på abonnementet forbliver den samme.</string>
     <string name="osm_live_subscription_desc">Abonnement giver mulighed for opdateringer hver time, dagligt, ugentligt og ubegrænset hentning af alle kort i verden.</string>
     <string name="driving_region_australia">Australien</string>
+    <string name="lang_kab">Kabylsk</string>
     </resources>
