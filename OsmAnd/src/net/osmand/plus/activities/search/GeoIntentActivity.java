@@ -287,7 +287,7 @@ public class GeoIntentActivity extends OsmandListActivity {
 			((Amenity) point).setType(getMyApplication().getPoiTypes().getUserDefinedCategory());
 			((Amenity) point).setSubType("");
 			point.setLocation(lat, lon);
-			point.setName("Lat: " + lat + ",Lon:" + lon);
+			point.setName("Lat: " + lat + ", Lon:" + lon);
 			return point;
 		}
 
@@ -401,7 +401,7 @@ public class GeoIntentActivity extends OsmandListActivity {
 		}
 
 		public GeoPointSearch(double lat, double lon, int zoom) {
-			this(lat, lon, "Lat: " + lat + ",Lon: " + lon, zoom);
+			this(lat, lon, "Lat: " + lat + ", Lon: " + lon, zoom);
 		}
 
 		public GeoPointSearch(double lat, double lon, String name) {
