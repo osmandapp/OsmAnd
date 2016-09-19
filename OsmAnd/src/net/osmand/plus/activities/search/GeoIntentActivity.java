@@ -287,7 +287,7 @@ public class GeoIntentActivity extends OsmandListActivity {
 			((Amenity) point).setType(getMyApplication().getPoiTypes().getUserDefinedCategory());
 			((Amenity) point).setSubType("");
 			point.setLocation(lat, lon);
-			point.setName("Lat: " + lat + ", Lon:" + lon);
+			point.setName("Lat: " + lat + ", Lon: " + lon);
 			return point;
 		}
 
