@@ -1262,7 +1262,7 @@
 
 	<string name="poi_water_characteristic_mineral">Akvospeco: minerala</string>
 	<string name="poi_water_characteristic_mud">Akvospeco: sediment-riĉa</string>
-	<string name="poi_water_characteristic_sulfuric">Akvospeco: sulfat(VI)-riĉa</string>
+	<string name="poi_water_characteristic_sulfuric">Akvospeco: sulfat(6)-oza</string>
 
 	<string name="poi_water_point">Akvoĉerpejo</string>
 
@@ -2134,7 +2134,7 @@
 	<string name="poi_animal_training">Dresejo</string>
 	<string name="poi_historic_stone">Ŝtonego historia</string>
 	<string name="poi_historic_farm">Farmejo historia</string>
-	<string name="poi_historic_railway_station">Fervoja stacio historia</string>
+	<string name="poi_historic_railway_station">Fervoja stacidomo historia</string>
 
 	<string name="poi_historic_railway">Fervojo historia</string>
 
@@ -3010,6 +3010,6 @@
 	<string name="poi_wiki_link">Vikipedio</string>
 
 <string name="poi_resource_slate_iron_ore_copper">Ardezo, fer-erco, kupro</string>
-	<string name="poi_spices">Spico-vendejo</string>
+	<string name="poi_spices">Spic-vendejo</string>
 
 </resources>
