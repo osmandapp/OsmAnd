@@ -993,4 +993,58 @@
 	<string name="poi_denomination_greek_orthodox">Greziar ortodoxoa</string>
 	<string name="poi_denomination_church_of_england">Ingalaterrako eliza</string>
 	<string name="poi_denomination_episcopal">Episkopalianoa</string>
+	<string name="poi_restaurant">Jatetxea</string>
+	<string name="poi_theatre">Antzokia</string>
+	<string name="poi_circus">Zirkoa</string>
+	<string name="poi_gallery">Arte galeria</string>
+	<string name="poi_dance_floor">Dantzarako pista</string>
+	<string name="poi_nightclub">Gau kluba</string>
+	<string name="poi_stripclub">Striptease kluba</string>
+	<string name="poi_ski_resort">Ski estazioa</string>
+	<string name="poi_dog_park">Txakur parkea</string>
+	<string name="poi_leisure_fishing">Arrantzarako tokia</string>
+	<string name="poi_hunting_stand">Ehizarako postua</string>
+	<string name="poi_harbour">Kaia</string>
+	<string name="poi_marina">Kirol portua</string>
+	<string name="poi_miniature_golf">Minigolfa</string>
+	<string name="poi_playground">Dindanak</string>
+	<string name="poi_bench">Bankua (eserlekua)</string>
+	<string name="poi_swimming_pool">Piszina</string>
+	<string name="poi_water_park">Ur parkea</string>
+	<string name="poi_park">Parkea</string>
+	<string name="poi_recreation_ground">Jolas area</string>
+	<string name="poi_cafe">Kafetegia</string>
+	<string name="poi_biergarten">Garagardotegia</string>
+	<string name="poi_fast_food">Janari azkarra</string>
+	<string name="poi_bar">Taberna</string>
+	<string name="poi_pub">Pub</string>
+	<string name="poi_drinking_water">Ur edangarria</string>
+	<string name="poi_barbecue">Barbakoa</string>
+
+	<string name="poi_craft_agricultural_engines">Nekazaritzarako motorrak</string>
+	<string name="poi_toilets_yes">Komunak ditu</string>
+	<string name="poi_toilets_no">Ez du komunik</string>
+	<string name="poi_toilets_wheelchair_yes">Gurpildun aulkiekin komunera sartzea dago: bai</string>
+	<string name="poi_toilets_wheelchair_no">Gurpildun aulkiekin komunera sartzea dago: ez</string>
+	<string name="poi_toilets_access_customers">Komunera sarbidea: bezeroak</string>
+	<string name="poi_toilets_access_permissive">Komunera sarbidea: malgua</string>
+	<string name="poi_toilets_access_community">Komunera sarbidea: komunitatea</string>
+	<string name="poi_toilets_access_public">Komunera sarbidea: publikoa</string>
+
+	<string name="poi_diaper_yes">Pixohiala aldatzeko mahaia</string>
+	<string name="poi_diaper_no">Ez du pixohiala aldatzeko mahairik</string>
+	<string name="poi_diaper_room">Pixoihala aldatzeko gela</string>
+
+	<string name="poi_maxstay">Aparkatzeko denbora mugatua</string>
+
+	<string name="poi_vending_parking_tickets">Aparkaleku tiketak</string>
+	<string name="poi_vending_cigarettes">Zigarretak</string>
+	<string name="poi_vending_excrement_bags">Gorotzentzako poltsak</string>
+	<string name="poi_vending_public_transport_tickets">Garraio publikoaren tiketak</string>
+	<string name="poi_vending_drinks">Edariak</string>
+	<string name="poi_vending_sweets">Goxokiak</string>
+	<string name="poi_vending_condoms">Preserbatiboak</string>
+	<string name="poi_vending_stamps">Seiluak</string>
+	<string name="poi_vending_food">Janaria</string>
+	<string name="poi_vending_drinks_food">Edariak eta janaria</string>
 	</resources>
