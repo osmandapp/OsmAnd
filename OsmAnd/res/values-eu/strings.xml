@@ -2589,4 +2589,5 @@ OsmAnd aplikazioarekin laguntza behar baduzu, jarri kontaktuan gure laguntza tal
     <string name="donation_to_osm_desc">Zure dohaintzaren zati bat OpenStreetMap gunera aldaketak bidaltzen dituzten erabiltzaileei emango zaie. harpidetzaren kostua berbera da.</string>
     <string name="osm_live_subscription_desc">Harpidetzak orduro, egunero edo astergo eguneraketak jasotzea eta mugarik gabe mapak deskargatzea ahalbidetzen du.</string>
     <string name="driving_region_australia">Australia</string>
+    <string name="lang_kab">Kabiliera</string>
     </resources>
