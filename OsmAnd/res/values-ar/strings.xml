@@ -2561,4 +2561,5 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="donation_to_osm_desc">سيتم إرسال جزء من تبرعك إلى مستخدمي OSM الذين يقومون باحداث التغييرات على الموقع، تكلفة الاشتراك تبقى نفسها.</string>
     <string name="osm_live_subscription_desc">الاشتراك يتيح تحديثات كل ساعة، يوميا، أسبوعيا والتحميل الغير محدود لجميع الخرائط حول العالم.</string>
     <string name="driving_region_australia">أستراليا</string>
+    <string name="lang_kab">قبائلي</string>
     </resources>
