@@ -2429,4 +2429,5 @@ Ak potrebuje pomoc s aplikáciou OsmAnd, kontaktuje podporu: support@osmand.net.
     <string name="donation_to_osm_desc">Časť príspevku bude zaslaná používateľom, ktorí zasielajú zmeny do OpenStreetMap. Cena predplatného zostáva rovnaká.</string>
     <string name="osm_live_subscription_desc">Predplatné umožňuje hodinové, denné, týždenné aktualizácie a neobmedzené sťahovanie máp celého sveta.</string>
     <string name="driving_region_australia">Austrália</string>
+    <string name="lang_kab">Kabylsky</string>
     </resources>
