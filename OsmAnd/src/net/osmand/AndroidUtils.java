@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.graphics.PointF;
 import android.os.Build;
 import android.os.IBinder;
 import android.text.TextUtils;
@@ -24,6 +25,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.util.Date;
+import java.util.List;
 
 import static android.util.TypedValue.COMPLEX_UNIT_DIP;
 
@@ -183,5 +185,15 @@ public class AndroidUtils {
 		} catch (Exception e) {
 			return null;
 		}
+	}
+
+	public static PointF centroidForPoly(PointF[] points) {
+		float centroidX = 0, centroidY = 0;
+
+		for (PointF point : points) {
+			centroidX += point.x / points.length;
+			centroidY += point.y / points.length;
+		}
+		return new PointF(centroidX, centroidY);
 	}
 }

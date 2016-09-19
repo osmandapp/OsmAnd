@@ -6,6 +6,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 import net.osmand.IndexConstants;
+import net.osmand.NativeLibrary;
+import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.Amenity;
@@ -38,6 +40,7 @@ import net.osmand.plus.mapcontextmenu.controllers.MapDataMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.MapMarkerMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.MyLocationMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.PointDescriptionMenuController;
+import net.osmand.plus.mapcontextmenu.controllers.RenderedObjectMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.TargetPointMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.TransportRouteController;
 import net.osmand.plus.mapcontextmenu.controllers.TransportStopController;
@@ -152,8 +155,9 @@ public abstract class MenuController extends BaseMenuController {
 					menuController = new MyLocationMenuController(app, mapActivity, pointDescription);
 				}
 			} else if (object instanceof RouteDataObject) {
-				menuController = new ImpassibleRoadsMenuController(app, mapActivity,
-						pointDescription, (RouteDataObject) object);
+				menuController = new ImpassibleRoadsMenuController(app, mapActivity, pointDescription, (RouteDataObject) object);
+			} else if (object instanceof RenderedObject) {
+				menuController = new RenderedObjectMenuController(app, mapActivity, pointDescription, (RenderedObject) object);
 			}
 		}
 		if (menuController == null) {

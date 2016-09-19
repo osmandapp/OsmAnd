@@ -21,15 +21,18 @@ import android.widget.ArrayAdapter;
 import android.widget.FrameLayout.LayoutParams;
 import android.widget.ImageView;
 
+import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
 import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.RenderingContext;
+import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.data.TransportStop;
 import net.osmand.osm.PoiCategory;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
@@ -39,7 +42,6 @@ import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.other.MapMultiSelectionMenu;
 import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.render.NativeOsmandLibrary;
-import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
@@ -350,6 +352,11 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		selectedObjectContextMenuProvider = provider;
 		hideVisibleMenues();
 		activity.getMapViewTrackingUtilities().setMapLinkedToLocation(false);
+		if (!activity.getMapView().getCurrentRotatedTileBox().containsLatLon(latLon)) {
+			menu.setMapCenter(latLon);
+			menu.setMapPosition(activity.getMapView().getMapPosition());
+			menu.setCenterMarker(true);
+		}
 		menu.show(latLon, pointDescription, object);
 		return true;
 	}
@@ -383,6 +390,27 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			menu.show(latLon, null, null);
 			return true;
 		}
+		return false;
+	}
+
+	private boolean showContextMenu(LatLon latLon, Map<Object, IContextMenuProvider> selectedObjects) {
+		if (selectedObjects.size() == 1) {
+			Object selectedObj = selectedObjects.keySet().iterator().next();
+			PointDescription pointDescription = null;
+			final IContextMenuProvider provider = selectedObjects.get(selectedObj);
+			if (provider != null) {
+				latLon = provider.getObjectLocation(selectedObj);
+				pointDescription = provider.getObjectName(selectedObj);
+			}
+			showContextMenu(latLon, pointDescription, selectedObj, provider);
+			return true;
+
+		} else if (selectedObjects.size() > 1) {
+			selectedObjectContextMenuProvider = null;
+			showContextMenuForSelectedObjects(latLon, selectedObjects);
+			return true;
+		}
+
 		return false;
 	}
 
@@ -522,30 +550,52 @@ public class ContextMenuLayer extends OsmandMapLayer {
 						renderedObjects = nativeLib.searchRenderedObjectsFromContext(rc, (int)( point.x - x), (int)( point.y- y));
 					}
 					if (renderedObjects != null) {
+						Map<Object, IContextMenuProvider> selectedObjects = new HashMap<>();
+						IContextMenuProvider poiMenuProvider = activity.getMapLayers().getPoiMapLayer();
+						IContextMenuProvider transportStopMenuProvider = activity.getMapLayers().getTransportStopsLayer();
 						Log.e("111", "found " + renderedObjects.length + " object(s) at x=" + point.x + " y=" + point.y);
+						LatLon latLon = null;
 						for (RenderedObject renderedObject : renderedObjects) {
 							Log.e("111", "++++ object=" + renderedObject.getName());
 							for (Entry<String, String> entry : renderedObject.getTags().entrySet()) {
 								Log.e("111", "tag=" + entry.getKey() + " value=" + entry.getValue());
 							}
-							LatLon latLon = tileBox.getLatLonFromPixel(point.x, point.y);
-							boolean objectFound = false;
-							String name = renderedObject.getTags().get("name");
-							if (!Algorithms.isEmpty(name)) {
-								Amenity amenity = findAmenity(name, latLon.getLatitude(), latLon.getLongitude());
-								if (amenity != null) {
-									PointDescription pointDescription = new PointDescription(PointDescription.POINT_TYPE_POI,
-											amenity.getName(activity.getMyApplication().getSettings().MAP_PREFERRED_LOCALE.get()));
-									activity.getContextMenu().show(amenity.getLocation(), pointDescription, amenity);
-									objectFound = true;
-								}
-							}
-							if (!objectFound) {
-								activity.getContextMenu().show(latLon, null, null);
+							if (renderedObject.getX() != null && renderedObject.getX().size() == 1
+									&& renderedObject.getY() != null && renderedObject.getY().size() == 1) {
+								latLon = new LatLon(MapUtils.get31LatitudeY(renderedObject.getY().get(0)),
+										MapUtils.get31LongitudeX(renderedObject.getX().get(0)));
 							} else {
-								break;
+								latLon = tileBox.getLatLonFromPixel(point.x, point.y);
+							}
+							if (renderedObject.getId() != null) {
+								TransportStop transportStop = findTransportStop(renderedObject.getId() >> 6, latLon.getLatitude(), latLon.getLongitude());
+								if (transportStop != null) {
+									selectedObjects.put(transportStop, transportStopMenuProvider);
+									continue;
+								}
+								Amenity amenity = findAmenity(renderedObject.getId() >> 6, latLon.getLatitude(), latLon.getLongitude());
+								if (amenity != null) {
+									selectedObjects.put(amenity, poiMenuProvider);
+									continue;
+								}
+								if (renderedObject.getX() != null && renderedObject.getX().size() > 1
+										&& renderedObject.getY() != null && renderedObject.getY().size() > 1) {
+
+									PointF[] points = new PointF[renderedObject.getX().size()];
+									for (int i = 0; i < points.length; i++) {
+										points[i] = new PointF(renderedObject.getX().get(i), renderedObject.getY().get(i));
+									}
+									PointF center = AndroidUtils.centroidForPoly(points);
+									latLon = new LatLon(MapUtils.get31LatitudeY((int)center.y),
+											MapUtils.get31LongitudeX((int)center.x));
+								}
+								selectedObjects.put(renderedObject, null);
 							}
 							Log.e("111", "------------------");
+						}
+						if (selectedObjects.size() > 0 && latLon != null) {
+							showContextMenu(latLon, selectedObjects);
+							return true;
 						}
 					} else {
 						Log.e("111", "objects not found at x=" + point.x + " y=" + point.y);
@@ -559,7 +609,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		return false;
 	}
 
-	private Amenity findAmenity(String name, double lat, double lon) {
+	private Amenity findAmenity(long id, double lat, double lon) {
 		QuadRect rect = MapUtils.calculateLatLonBbox(lat, lon, 150);
 		List<Amenity> amenities = activity.getMyApplication().getResourceManager().searchAmenities(
 				new BinaryMapIndexReader.SearchPoiTypeFilter() {
@@ -575,8 +625,48 @@ public class ContextMenuLayer extends OsmandMapLayer {
 				}, rect.top, rect.left, rect.bottom, rect.right, -1, null);
 
 		for (Amenity amenity : amenities) {
-			if (amenity.getName().equals(name)) {
+			Long amenityId = amenity.getId();
+			if (amenityId != null && amenityId == id) {
 				return amenity;
+			}
+		}
+		for (Amenity amenity : amenities) {
+			Long amenityId = amenity.getId();
+			if (amenityId != null && Math.abs(amenityId - id) < 2) {
+				return amenity;
+			}
+		}
+		return null;
+	}
+
+	private TransportStop findTransportStop(long id, double lat, double lon) {
+
+		QuadRect rect = MapUtils.calculateLatLonBbox(lat, lon, 150);
+		List<TransportStop> res = activity.getMyApplication().getResourceManager()
+				.searchTransportSync(rect.top, rect.left, rect.bottom, rect.right,
+						new ResultMatcher<TransportStop>() {
+
+							@Override
+							public boolean publish(TransportStop object) {
+								return true;
+							}
+
+							@Override
+							public boolean isCancelled() {
+								return false;
+							}
+						});
+
+		for (TransportStop stop : res) {
+			Long stopId = stop.getId();
+			if (stopId != null && stopId == id) {
+				return stop;
+			}
+		}
+		for (TransportStop stop : res) {
+			Long stopId = stop.getId();
+			if (stopId != null && Math.abs(stopId - id) < 2) {
+				return stop;
 			}
 		}
 		return null;
