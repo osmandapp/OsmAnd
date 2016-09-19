@@ -353,6 +353,7 @@ public class NativeLibrary {
 		private QuadRect bbox = new QuadRect(); 
 		private TIntArrayList x = new TIntArrayList();
 		private TIntArrayList y = new TIntArrayList();
+		private String iconRes;
 		
 		public Map<String, String> getTags() {
 			return tags;
@@ -369,6 +370,14 @@ public class NativeLibrary {
 		
 		public TIntArrayList getX() {
 			return x;
+		}
+		
+		public String getIconRes() {
+			return iconRes;
+		}
+		
+		public void setIconRes(String iconRes) {
+			this.iconRes = iconRes;
 		}
 		
 		public TIntArrayList getY() {
