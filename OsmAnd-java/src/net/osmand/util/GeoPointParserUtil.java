@@ -895,7 +895,7 @@ public class GeoPointParserUtil {
 							if (fragment.startsWith("map=")) {
 								fragment = fragment.substring("map=".length());
 							}
-							String[] vls = fragment.split("/");
+							String[] vls = fragment.split("/|&"); //"&" to split off trailing extra parameters
 							if (vls.length >= 3) {
 								zoom = parseZoom(vls[0]);
 								lat = parseSilentDouble(vls[1]);
