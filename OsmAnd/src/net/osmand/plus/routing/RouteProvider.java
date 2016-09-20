@@ -60,6 +60,7 @@ import net.osmand.util.MapUtils;
 import net.osmand.util.GeoPolylineParserUtil;
 
 import org.json.JSONObject;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -1159,13 +1160,13 @@ public class RouteProvider {
 	}
 
 	private void appendOSRMLoc(StringBuilder uri, LatLon il) {
-		uri.append("&loc=").append(String.valueOf(il.getLatitude()));
-		uri.append(",").append(String.valueOf(il.getLongitude()));
+		uri.append(";").append(String.valueOf(il.getLongitude()));
+		uri.append(",").append(String.valueOf(il.getLatitude()));
 	}
 
 	protected RouteCalculationResult findOSRMRoute(RouteCalculationParams params)
 			throws MalformedURLException, IOException, JSONException {
-		// https://router.project-osrm.org/viaroute?loc=52.28,4.83&loc=52.35,4.95&alt=false&output=gpx
+		// http://router.project-osrm.org/route/v1/driving/4.83,52.28;4.95,52.28
 		List<Location> res = new ArrayList<Location>();
 		StringBuilder uri = new StringBuilder();
 		// possibly hide that API key because it is privacy of osmand
@@ -1177,15 +1178,17 @@ public class RouteProvider {
 //		} else {
 			scheme = "http";
 //		}
-		uri.append(scheme + "://router.project-osrm.org/viaroute?alt=false"); //$NON-NLS-1$
-		uri.append("&loc=").append(String.valueOf(params.start.getLatitude()));
-		uri.append(",").append(String.valueOf(params.start.getLongitude()));
+		uri.append(scheme + "://router.project-osrm.org/route/v1/driving/"); //$NON-NLS-1$
+		uri.append(String.valueOf(params.start.getLongitude()));
+		uri.append(",").append(String.valueOf(params.start.getLatitude()));
 		if(params.intermediates != null && params.intermediates.size() > 0) {
 			for(LatLon il : params.intermediates) {
 				appendOSRMLoc(uri, il);
 			}
 		}
 		appendOSRMLoc(uri, params.end);
+// to get more waypoints, add overview=full option
+//		uri.append("?overview=full")
 
 		log.info("URL route " + uri);
 
@@ -1202,7 +1205,7 @@ public class RouteProvider {
 			rs.close();
 		} catch(IOException e){
 		}
-		List<LatLon> route = GeoPolylineParserUtil.parse(obj.get("route_geometry").toString());
+		List<LatLon> route = GeoPolylineParserUtil.parse(obj.getJSONArray("routes").getJSONObject(0).getString("geometry"));
 		if (route.isEmpty()) {
 			return new RouteCalculationResult("Route is empty");
 		}
