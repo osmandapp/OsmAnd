@@ -2649,4 +2649,5 @@ Als je hulp nodig hebt met OsmAnd: neem contact op met ons support team: support
     <string name="storage_place_description">OsmAnd bewaart gegevens (kaarten, tracks, enz.) in: %1$s</string>
     <string name="no_update_info_desc">Controleer niet op nieuwe versies en aanbiedingen van OsmAnd</string>
     <string name="driving_region_australia">Australië</string>
+    <string name="lang_kab">Kabylisch</string>
     </resources>
