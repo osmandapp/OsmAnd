@@ -2638,11 +2638,11 @@ Als je hulp nodig hebt met OsmAnd: neem contact op met ons support team: support
     <string name="osm_live_payment_desc">Het abonnementsgeld is maandelijks. Het abonnement kan elk moment via Google Play worden gestopt.</string>
     <string name="donation_to_osm">Doneer aan de OpenStreetMap-community</string>
     <string name="donation_to_osm_desc">Een deel van de donatie wordt gegeven aan OSM-gebruikers die de kaart verbeteren. Het abonnementsgeld verandert niet.</string>
-    <string name="osm_live_subscription_desc">Het abonnement geeft toegang tot elk uur, elke dag en elke week verse updates en onbeperkte downloads van kaarten van de gehele wereld.</string>
-    <string name="get_it">Neem het</string>
-    <string name="get_for">Neem voor %1$s</string>
-    <string name="get_for_month">Neem het voor %1$s maanden</string>
-    <string name="osm_live_banner_desc">Krijg onbeperkte downloads van kaarten en updates vaker dan eens per maand: elk uur, elke dag en elke week.</string>
+    <string name="osm_live_subscription_desc">Het abonnement geeft toegang tot elk uur, elke dag of elke week Live Updates en onbeperkte downloads van kaarten van de gehele wereld.</string>
+    <string name="get_it">Abonnement nemen</string>
+    <string name="get_for">Abonneren voor %1$s</string>
+    <string name="get_for_month">Abonneren voor %1$s per maand</string>
+    <string name="osm_live_banner_desc">Krijg onbeperkte downloads van kaarten en updates vaker dan eens per maand: elk uur, elke dag of elke week.</string>
     <string name="osmand_plus_banner_desc">Volledige versie van OsmAnd met onbeperkte downloads van kaarten en maandelijkse kaart-updates.</string>
     <string name="skip_map_downloading_desc">Er is geen kaart geïnstalleerd. Kies een kaart uit de lijst, of download later kaarten via Menu - %1$s.</string>
     <string name="first_usage_wizard_desc">Kies kaarten om te downloaden aan de hand van uw huidige locatie.</string>
