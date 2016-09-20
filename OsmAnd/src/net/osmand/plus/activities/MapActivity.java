@@ -462,6 +462,12 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	@Override
+	protected void onRestart() {
+		super.onRestart();
+		parseLaunchIntentLocation();
+	}
+
+	@Override
 	protected void onResume() {
 		super.onResume();
 		long tm = System.currentTimeMillis();
