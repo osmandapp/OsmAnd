@@ -219,25 +219,24 @@ public class GeoPointParserUtil {
 		actual = GeoPointParserUtil.parse(url);
 		assertGeoPoint(actual, new GeoParsedPoint(dlat, dlon, z));
 
-		// http://osmand.net/go?lat=34&lon=-106&z=11
-		url = "http://www.osmand.net/go.html?lat=" + ilat + "&lon=" + ilon + "&z=" + z;
-		System.out.println("url: " + url);
-		actual = GeoPointParserUtil.parse(url);
-		assertGeoPoint(actual, new GeoParsedPoint(ilat, ilon, z));
-
 		// http://maps.google.com/maps?q=N34.939,E-106
 		url = "http://maps.google.com/maps?q=N" + dlat + ",E" + Math.abs(dlon);
 		System.out.println("url: " + url);
 		actual = GeoPointParserUtil.parse(url);
 		assertGeoPoint(actual, new GeoParsedPoint(dlat, -Math.abs(dlon)));
-		
-		
+
 		url = "http://maps.google.com/maps?f=d&saddr=" + dlat +"," +dlon +"&daddr=" +dlat +"," +dlon+"&hl=en"; 
 		System.out.println("url: " + url);
 		actual = GeoPointParserUtil.parse(url);
 		assertGeoPoint(actual, new GeoParsedPoint(dlat, dlon));
 
-		// http://www.osmand.net/go?lat=34.99393&lon=-106.61568&z=11
+		// http://www.osmand.net/go.html?lat=34&lon=-106&z=11
+		url = "http://www.osmand.net/go.html?lat=" + ilat + "&lon=" + ilon + "&z=" + z;
+		System.out.println("url: " + url);
+		actual = GeoPointParserUtil.parse(url);
+		assertGeoPoint(actual, new GeoParsedPoint(ilat, ilon, z));
+
+		// http://www.osmand.net/go.html?lat=34.99393&lon=-106.61568&z=11
 		url = "http://www.osmand.net/go.html?lat=" + dlat + "&lon=" + dlon + "&z=" + z;
 		System.out.println("url: " + url);
 		actual = GeoPointParserUtil.parse(url);
@@ -254,7 +253,6 @@ public class GeoPointParserUtil {
 		System.out.println("url: " + url);
 		actual = GeoPointParserUtil.parse(url);
 		assertGeoPoint(actual, new GeoParsedPoint(dlat, dlon, z));
-
 
 		// http://openstreetmap.org/#map=11/34/-106
 		z = 11;
