@@ -1104,7 +1104,7 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
  Memoria proporcional %4$s MB (Límite Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="native_app_allocated_memory">Memoria nativa total</string>
     <string name="starting_point_too_far">Punto de inicio demasiado lejos de la carretera más cercana.</string>
-    <string name="shared_location">Compartir ubicación</string>
+    <string name="shared_location">Ubicación compartida</string>
     <string name="osmand_parking_event">Buscar el auto del estacionamiento</string>
     <string name="osmand_parking_warning">Advertencia</string>
     <string name="osmand_parking_warning_text">Una notificación para recoger tu automóvil se añadió al Calendario. Permanecerá allí hasta que la borres manualmente.</string>
