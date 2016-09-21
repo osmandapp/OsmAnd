@@ -138,7 +138,7 @@ public class MapActivityLayers {
 		mFavouritesLayer = new FavouritesLayer();
 		mapView.addLayer(mFavouritesLayer, 4);
 		// 5. transport layer
-		transportStopsLayer = new TransportStopsLayer();
+		transportStopsLayer = new TransportStopsLayer(activity);
 		// 5.95 all text labels
 		// 6. point location layer 
 		locationLayer = new PointLocationLayer(activity.getMapViewTrackingUtilities());

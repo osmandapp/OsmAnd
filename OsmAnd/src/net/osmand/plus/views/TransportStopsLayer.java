@@ -1,12 +1,14 @@
 package net.osmand.plus.views;
 
-import gnu.trove.list.array.TIntArrayList;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import java.util.TreeSet;
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.Path;
+import android.graphics.PointF;
+import android.util.DisplayMetrics;
+import android.view.WindowManager;
 
 import net.osmand.ResultMatcher;
 import net.osmand.data.LatLon;
@@ -19,20 +21,21 @@ import net.osmand.data.TransportStop;
 import net.osmand.osm.edit.Node;
 import net.osmand.osm.edit.Way;
 import net.osmand.plus.R;
-import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.graphics.Path;
-import android.graphics.PointF;
-import android.util.DisplayMetrics;
-import android.view.WindowManager;
+import net.osmand.plus.activities.MapActivity;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.TreeSet;
+
+import gnu.trove.list.array.TIntArrayList;
 
 public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider {
 	private static final int startZoom = 12;
 	private static final int startZoomRoute = 10;
-	
+
+	private final MapActivity mapActivity;
 	private OsmandMapTileView view;
 
 	private Paint paintIcon;
@@ -44,6 +47,10 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 	private TransportRoute route = null;
 
 	private Path path;
+
+	public TransportStopsLayer(MapActivity mapActivity) {
+		this.mapActivity = mapActivity;
+	}
 
 	@SuppressWarnings("deprecation")
 	@Override
@@ -242,7 +249,7 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 	@Override
 	public PointDescription getObjectName(Object o) {
 		if(o instanceof TransportStop){
-			return new PointDescription(PointDescription.POINT_TYPE_TRANSPORT_STOP, view.getContext().getString(R.string.transport_Stop),
+			return new PointDescription(PointDescription.POINT_TYPE_TRANSPORT_STOP, mapActivity.getString(R.string.transport_Stop),
 					((TransportStop)o).getName()); 
 		}
 		return null;
