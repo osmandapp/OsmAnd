@@ -1104,7 +1104,7 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
  Memoria proporcional %4$s MB (Límite Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="native_app_allocated_memory">Memoria nativa total</string>
     <string name="starting_point_too_far">Punto de inicio demasiado lejos del camino más cercano.</string>
-    <string name="shared_location">Compartir ubicación</string>
+    <string name="shared_location">Ubicación compartida</string>
     <string name="osmand_parking_event">Buscar el auto del estacionamiento</string>
     <string name="osmand_parking_warning">Advertencia</string>
     <string name="osmand_parking_warning_text">Una notificación para recoger tu automóvil se añadió al Calendario. Permanecerá allí hasta que la borres manualmente.</string>
@@ -2381,7 +2381,7 @@ Si necesitas ayuda con la aplicación OsmAnd, contacte con nuestro equipo de sop
  "</string>
     <string name="show_something_on_map">Mostrar %1$s en el mapa</string>
     <string name="dist_away_from_my_location">Buscar en %1$s alrededor</string>
-    <string name="confirmation_to_delete_history_items">¿Quieres quitar los elementos marcados del historial?</string>
+    <string name="confirmation_to_delete_history_items">¿Quieres quitar del historial los elementos marcados?</string>
     <string name="back_to_search">Volver a la búsqueda</string>
     <string name="coords_search">Búsqueda de coordenadas</string>
     <string name="advanced_coords_search">Búsqueda avanzada de coordenadas</string>
