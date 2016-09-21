@@ -13,7 +13,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresPermission;
 import android.support.v4.content.ContextCompat;
-import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
@@ -21,7 +20,6 @@ import android.widget.ArrayAdapter;
 import android.widget.FrameLayout.LayoutParams;
 import android.widget.ImageView;
 
-import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
 import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.RenderingContext;
@@ -33,7 +31,12 @@ import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.data.TransportStop;
+import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
+import net.osmand.osm.PoiFilter;
+import net.osmand.osm.PoiType;
+import net.osmand.osm.edit.Node;
+import net.osmand.osm.edit.OsmMapUtils;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.R;
@@ -42,9 +45,12 @@ import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.other.MapMultiSelectionMenu;
 import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.render.NativeOsmandLibrary;
+import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -77,6 +83,8 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	private LatLon applyingMarkerLatLon;
 	private boolean wasCollapseButtonVisible;
 
+	private List<String> publicTransportTypes;
+
 	public ContextMenuLayer(MapActivity activity) {
 		this.activity = activity;
 		menu = activity.getContextMenu();
@@ -105,6 +113,19 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		paint = new Paint();
 		pressedBitmap = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_shield_tap);
 		pressedBitmapSmall = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_shield_tap_small);
+
+		publicTransportTypes = new ArrayList<>();
+		List<PoiFilter> filters = activity.getMyApplication().getPoiTypes().getPoiCategoryByName("transportation").getPoiFilters();
+		for (PoiFilter poiFilter : filters) {
+			if (poiFilter.getKeyName().equals("public_transport")) {
+				for (PoiType poiType : poiFilter.getPoiTypes()) {
+					publicTransportTypes.add(poiType.getKeyName());
+					for (PoiType poiAdditionalType : poiType.getPoiAdditionals()) {
+						publicTransportTypes.add(poiAdditionalType.getKeyName());
+					}
+				}
+			}
+		}
 	}
 
 	public boolean isVisible() {
@@ -537,9 +558,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			} else {
 				NativeOsmandLibrary nativeLib = NativeOsmandLibrary.getLoadedLibrary();
 				if (nativeLib != null) {
-					//RenderingContext rc = new RenderingContext(activity.getMyApplication());
 					MapRenderRepositories maps = activity.getMyApplication().getResourceManager().getRenderer();
-
 					RenderingContext rc = maps.getVisibleRenderingContext();
 					RenderedObject[] renderedObjects = null;
 					if(rc.zoom == tileBox.getZoom()) {
@@ -553,13 +572,8 @@ public class ContextMenuLayer extends OsmandMapLayer {
 						Map<Object, IContextMenuProvider> selectedObjects = new HashMap<>();
 						IContextMenuProvider poiMenuProvider = activity.getMapLayers().getPoiMapLayer();
 						IContextMenuProvider transportStopMenuProvider = activity.getMapLayers().getTransportStopsLayer();
-						Log.e("111", "found " + renderedObjects.length + " object(s) at x=" + point.x + " y=" + point.y);
 						LatLon latLon = null;
 						for (RenderedObject renderedObject : renderedObjects) {
-							Log.e("111", "++++ object=" + renderedObject.getName());
-							for (Entry<String, String> entry : renderedObject.getTags().entrySet()) {
-								Log.e("111", "tag=" + entry.getKey() + " value=" + entry.getValue());
-							}
 							if (renderedObject.getX() != null && renderedObject.getX().size() == 1
 									&& renderedObject.getY() != null && renderedObject.getY().size() == 1) {
 								latLon = new LatLon(MapUtils.get31LatitudeY(renderedObject.getY().get(0)),
@@ -568,37 +582,48 @@ public class ContextMenuLayer extends OsmandMapLayer {
 								latLon = tileBox.getLatLonFromPixel(point.x, point.y);
 							}
 							if (renderedObject.getId() != null) {
-								TransportStop transportStop = findTransportStop(renderedObject.getId() >> 6, latLon.getLatitude(), latLon.getLongitude());
+								TransportStop transportStop = findTransportStop(renderedObject.getId() >> 1, latLon.getLatitude(), latLon.getLongitude());
 								if (transportStop != null) {
 									selectedObjects.put(transportStop, transportStopMenuProvider);
 									continue;
 								}
-								Amenity amenity = findAmenity(renderedObject.getId() >> 6, latLon.getLatitude(), latLon.getLongitude());
+								List<String> names = new ArrayList<>();
+								if (!Algorithms.isEmpty(renderedObject.getName())) {
+									names.add(renderedObject.getName());
+								}
+								for (Entry<String, String> entry : renderedObject.getTags().entrySet()) {
+									if (entry.getKey().startsWith("name")) {
+										names.add(entry.getValue());
+									}
+								}
+								Amenity amenity = findAmenity(renderedObject.getId() >> 6, names,
+										latLon.getLatitude(), latLon.getLongitude());
 								if (amenity != null) {
 									selectedObjects.put(amenity, poiMenuProvider);
+									continue;
+								}
+								TransportStop nearestTransportStop = findNearestTransportStop(latLon.getLatitude(), latLon.getLongitude());
+								if (nearestTransportStop != null) {
+									selectedObjects.put(nearestTransportStop, transportStopMenuProvider);
 									continue;
 								}
 								if (renderedObject.getX() != null && renderedObject.getX().size() > 1
 										&& renderedObject.getY() != null && renderedObject.getY().size() > 1) {
 
-									PointF[] points = new PointF[renderedObject.getX().size()];
-									for (int i = 0; i < points.length; i++) {
-										points[i] = new PointF(renderedObject.getX().get(i), renderedObject.getY().get(i));
+									List<Node> nodes = new ArrayList<>(renderedObject.getX().size());
+									for (int i = 0; i < renderedObject.getX().size(); i++) {
+										nodes.add(new Node(MapUtils.get31LatitudeY(renderedObject.getY().get(i)),
+												MapUtils.get31LongitudeX(renderedObject.getX().get(i)), 0));
 									}
-									PointF center = AndroidUtils.centroidForPoly(points);
-									latLon = new LatLon(MapUtils.get31LatitudeY((int)center.y),
-											MapUtils.get31LongitudeX((int)center.x));
+									latLon = OsmMapUtils.getMathWeightCenterForNodes(nodes);
 								}
 								selectedObjects.put(renderedObject, null);
 							}
-							Log.e("111", "------------------");
 						}
 						if (selectedObjects.size() > 0 && latLon != null) {
 							showContextMenu(latLon, selectedObjects);
 							return true;
 						}
-					} else {
-						Log.e("111", "objects not found at x=" + point.x + " y=" + point.y);
 					}
 				}
 			}
@@ -609,7 +634,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		return false;
 	}
 
-	private Amenity findAmenity(long id, double lat, double lon) {
+	private Amenity findAmenity(long id, List<String> names, double lat, double lon) {
 		QuadRect rect = MapUtils.calculateLatLonBbox(lat, lon, 150);
 		List<Amenity> amenities = activity.getMyApplication().getResourceManager().searchAmenities(
 				new BinaryMapIndexReader.SearchPoiTypeFilter() {
@@ -624,19 +649,43 @@ public class ContextMenuLayer extends OsmandMapLayer {
 					}
 				}, rect.top, rect.left, rect.bottom, rect.right, -1, null);
 
+		Amenity res = null;
 		for (Amenity amenity : amenities) {
 			Long amenityId = amenity.getId();
 			if (amenityId != null && amenityId == id) {
-				return amenity;
+				res = amenity;
+				break;
 			}
 		}
-		for (Amenity amenity : amenities) {
-			Long amenityId = amenity.getId();
-			if (amenityId != null && Math.abs(amenityId - id) < 2) {
-				return amenity;
+		if (res == null && (id & 1) == 0) {
+			id++;
+			for (Amenity amenity : amenities) {
+				Long amenityId = amenity.getId();
+				if (amenityId != null && amenityId == id) {
+					res = amenity;
+					break;
+				}
 			}
 		}
-		return null;
+		if (res == null && names != null && names.size() > 0) {
+			for (Amenity amenity : amenities) {
+				for (String name : names) {
+					if (name.equals(amenity.getName())) {
+						res = amenity;
+						break;
+					}
+				}
+				if (res != null) {
+					break;
+				}
+			}
+		}
+
+		if (res != null && publicTransportTypes.contains(res.getSubType())) {
+			return findNearestTransportStop(lat, lon) == null ? res : null;
+		}
+
+		return res;
 	}
 
 	private TransportStop findTransportStop(long id, double lat, double lon) {
@@ -663,11 +712,35 @@ public class ContextMenuLayer extends OsmandMapLayer {
 				return stop;
 			}
 		}
-		for (TransportStop stop : res) {
-			Long stopId = stop.getId();
-			if (stopId != null && Math.abs(stopId - id) < 2) {
-				return stop;
-			}
+		return null;
+	}
+
+	private TransportStop findNearestTransportStop(final double lat, final double lon) {
+
+		QuadRect rect = MapUtils.calculateLatLonBbox(lat, lon, 50);
+		List<TransportStop> res = activity.getMyApplication().getResourceManager()
+				.searchTransportSync(rect.top, rect.left, rect.bottom, rect.right,
+						new ResultMatcher<TransportStop>() {
+
+							@Override
+							public boolean publish(TransportStop object) {
+								return true;
+							}
+
+							@Override
+							public boolean isCancelled() {
+								return false;
+							}
+						});
+
+		if (res.size() > 0) {
+			Collections.sort(res, new Comparator<TransportStop>() {
+				@Override
+				public int compare(TransportStop stop1, TransportStop stop2) {
+					return Double.compare(MapUtils.getDistance(stop1.getLocation(), lat, lon), MapUtils.getDistance(stop2.getLocation(), lat, lon));
+				}
+			});
+			return res.get(0);
 		}
 		return null;
 	}
