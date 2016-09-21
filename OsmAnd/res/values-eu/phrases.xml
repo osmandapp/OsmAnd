@@ -1047,4 +1047,14 @@
 	<string name="poi_vending_stamps">Seiluak</string>
 	<string name="poi_vending_food">Janaria</string>
 	<string name="poi_vending_drinks_food">Edariak eta janaria</string>
+	<string name="poi_information_sign">Seinalea</string>
+	<string name="poi_information_audioguide">Audio-gida</string>
+	<string name="poi_information_bicyclemap">Bizikletarako mapa</string>
+	<string name="poi_payment_discover_card_yes">Discover txartela onartzen da</string>
+	<string name="poi_payment_discover_card_no">Ez da Discover txartela onartzen</string>
+	<string name="poi_running">Korrika egitea</string>
+	<string name="poi_karting">Karting</string>
+	<string name="poi_badminton">Badminton</string>
+	<string name="poi_judo">Judo</string>
+	<string name="poi_squash">Squash</string>
 	</resources>
