@@ -15,7 +15,7 @@ public class GeoPolylineParserUtil {
 		List<LatLon> track = new ArrayList<LatLon>();
 		int index = 0;
 		int lat = 0, lng = 0;
-		double precision = 1E6;
+		double precision = 1E5;
 
 		while (index < encoded.length()) {
 			int b, shift = 0, result = 0;
