@@ -3035,4 +3035,6 @@
 	<string name="poi_payment_efectivo_no">Płatności Efectivo nieakceptowane</string>
 	<string name="poi_spices">Sklep z przyprawami</string>
 
-</resources>
+<string name="poi_deadlock">Zastój</string>
+
+	</resources>
