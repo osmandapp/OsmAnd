@@ -603,7 +603,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			System.err.println("OnCreate for MapActivity took " + (System.currentTimeMillis() - tm) + " ms");
 		}
 
-		if (!permissionDone && !app.getAppInitializer().isFirstTime()) {
+		boolean showWelcomeScreen = ((app.getAppInitializer().isFirstTime() && Version.isDeveloperVersion(app))
+				|| !app.getResourceManager().isAnyMapIstalled()) && FirstUsageWelcomeFragment.SHOW;
+
+		if (!showWelcomeScreen && !permissionDone && !app.getAppInitializer().isFirstTime()) {
 			if (!permissionAsked) {
 				if (app.isExternalStorageDirectoryReadOnly()
 						&& getSupportFragmentManager().findFragmentByTag(DataStoragePlaceDialogFragment.TAG) == null) {
@@ -628,8 +631,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 		enableDrawer();
 
-		if (((app.getAppInitializer().isFirstTime() && Version.isDeveloperVersion(app))
-				|| !app.getResourceManager().isAnyMapIstalled()) && FirstUsageWelcomeFragment.SHOW) {
+		if (showWelcomeScreen) {
 			getSupportFragmentManager().beginTransaction()
 					.add(R.id.fragmentContainer, new FirstUsageWelcomeFragment(),
 							FirstUsageWelcomeFragment.TAG).commitAllowingStateLoss();
