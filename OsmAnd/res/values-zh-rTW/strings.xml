@@ -2528,7 +2528,7 @@ Facebook：https://www.facebook.com/osmandapp
     <string name="share_history_subject">" 透過 OsmAnd  分享"</string>
     <string name="lang_hsb">索布語 (上游)</string>
     <string name="back_to_search">返回查詢</string>
-    <string name="confirmation_to_delete_history_items">您要刪除所選取的歷程項目嗎？</string>
+    <string name="confirmation_to_delete_history_items">您要從歷程移除已選取的項目嗎？</string>
     <string name="show_something_on_map">在地圖上顯示 %1$s</string>
     <string name="dist_away_from_my_location">查詢 %1$s 路線</string>
     <string name="show_on_map">顯示在地圖上</string>
