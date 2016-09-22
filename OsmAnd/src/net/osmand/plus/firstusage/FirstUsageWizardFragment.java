@@ -1,6 +1,7 @@
 package net.osmand.plus.firstusage;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -653,13 +654,16 @@ public class FirstUsageWizardFragment extends Fragment implements OsmAndLocation
 	}
 
 	public void closeWizard() {
-		getActivity().getSupportFragmentManager().beginTransaction()
-				.remove(FirstUsageWizardFragment.this).commit();
-		location = null;
-		localDownloadRegion = null;
-		localMapIndexItem = null;
-		baseMapIndexItem = null;
-		wizardClosed = true;
+		FragmentActivity activity = getActivity();
+		if (activity != null) {
+			activity.getSupportFragmentManager().beginTransaction()
+					.remove(FirstUsageWizardFragment.this).commit();
+			location = null;
+			localDownloadRegion = null;
+			localMapIndexItem = null;
+			baseMapIndexItem = null;
+			wizardClosed = true;
+		}
 	}
 
 	public void processLocationPermission(boolean granted) {
