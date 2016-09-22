@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='UTF-8'?>
 <resources><string name="poi_shop">കട</string>
 		<string name="poi_internet_access">ഇന്റെര്‍നെറ്റ്</string>
 	<string name="poi_natural">നാച്ചുറല്‍</string>
@@ -12,7 +12,7 @@
 <string name="poi_boatyard">ബോട്ട് യാര്‍ഡ്</string>
 	<string name="poi_shop_food">കട</string>
 	<string name="poi_emergency">എമെര്‍ജന്‍സി (അടിയന്തിരം)</string>
-	<string name="poi_filling_station">"പെട്രോള്‍ പംമ്പ് "</string>
+	<string name="poi_filling_station">പെട്റോള്‍ പംബ്</string>
 		<string name="poi_public_transport">പൊതു ഗതാഗത സംവിധാനം</string>
 		<string name="poi_air_transport">വ്യോമയാനം</string>
 		<string name="poi_water_transport">ജലയാനം</string>
@@ -49,7 +49,7 @@
 	<string name="poi_mall">മാള്‍</string>
 	<string name="poi_beverages">"ബീവറേജ് "</string>
 	<string name="poi_butcher">"ഇറച്ചിക്കട "</string>
-	<string name="poi_farm">"പച്ചക്കറി കട "</string>
+	<string name="poi_farm">പച്ചക്കറി കട</string>
 	<string name="poi_greengrocer">"ഓര്‍ഗാനിക്ക് ഷോപ് "</string>
 	<string name="poi_seafood">"മീന്‍ കട "</string>
 	<string name="poi_confectionery">"മിടായ് കട "</string>
@@ -60,22 +60,22 @@
 	<string name="poi_pastry">"പേസ്ട്രീ ഷോപ് "</string>
 	<string name="poi_dairy">"പാല്‍ കട "</string>
 	<string name="poi_vending_machine">"വെന്ഡിങ്ങ് മെഷിന്‍ "</string>
-	<string name="poi_wine">"വൈന്‍ ഷോപ് "</string>
+	<string name="poi_wine">വൈന്‍ ഷോപ്</string>
 
 	<string name="poi_books">"പുസ്തക കട "</string>
-	<string name="poi_bicycle">"സൈക്കിള്‍ കട "</string>
+	<string name="poi_bicycle">സൈക്കിള്‍ കട</string>
 	<string name="poi_anime">"ആനിമെ ഷോപ് "</string>
 	<string name="poi_antiques">"പുരാവസ്തുവില്പന ശാല "</string>
-	<string name="poi_art">"ആര്‍ട് ഷോപ് "</string>
+	<string name="poi_art">ആര്‍ട് ഷോപ്</string>
 	<string name="poi_baby_goods">ബേബി സ്ടോര്‍</string>
-	<string name="poi_bag">"ബാഗ് സ്ടോര്‍ "</string>
+	<string name="poi_bag">ബാഗ് സ്ടോര്‍</string>
 	<string name="poi_bathroom_furnishing">"പ്ലംബിംഗ് കട "</string>
-	<string name="poi_bed">"ബെഡ് റൂം ഫര്‍ണീഷിങ്ങ് "</string>
+	<string name="poi_bed">ബെഡ് റൂം ഫര്‍ണീഷിങ്ങ്</string>
 	<string name="poi_boutique">"ഫാഷ്യന്‍ ബോട്ടീക് "</string>
 	<string name="poi_camera">ക്യാമറ കട
 \n</string>
-	<string name="poi_carpet">"പരവതാനി കട "</string>
-	<string name="poi_charity">"ചാരിറ്റി ഷോപ് "</string>
+	<string name="poi_carpet">പരവതാനി കട</string>
+	<string name="poi_charity">ചാരിറ്റി ഷോപ്</string>
 	<string name="poi_chemist">"മരുന്നു കട "</string>
 	<string name="poi_clothes">"തുണിക്കട "</string>
 	<string name="poi_clothes_children">കുട്ടികളുടെ വസ്ത്രങ്ങള്‍</string>
@@ -83,23 +83,42 @@
 	<string name="poi_candles">കാന്ഡില്‍ സ്ടോര്‍</string>
 	<string name="poi_computer">കംപ്യൂട്ടര്‍ സ്ടോര്‍</string>
 	<string name="poi_copyshop">"കോപ്പീ ഷോപ് "</string>
-	<string name="poi_curtain">"കര്‍ടെയ്ന് സ്ടോര്‍ "</string>
-	<string name="poi_fabric">"ഡ്രാപെരി ഷോപ് "</string>
+	<string name="poi_curtain">കര്‍ടെയ്ന് സ്ടോര്‍</string>
+	<string name="poi_fabric">ഡ്രാപെരി ഷോപ്</string>
 	<string name="poi_bedding">"ബെഡ്ഡിങ്ങ് സ്ടോര്‍ "</string>
 	<string name="poi_dive">ഡൈവിങ്ങ് ഉപകരണങ്ങള്‍</string>
 	<string name="poi_doityourself">"ഹോം ഇംപ്രൂവ്മെന്റ് സ്ടോര്‍ "</string>
-	<string name="poi_erotic">"ഇറോട്ടിക് ഷോപ് "</string>
-	<string name="poi_fashion">"ഫാഷ്യന്‍ ഷോപ് "</string>
+	<string name="poi_erotic">ഇറോട്ടിക് ഷോപ്</string>
+	<string name="poi_fashion">ഫാഷ്യന്‍ ഷോപ്</string>
 	<string name="poi_fishing">"ഫിഷിങ്ങ് ടാക്കിള്‍ "</string>
 	<string name="poi_florist">"പൂക്കട "</string>
 	<string name="poi_frame">"പിക്ചര്‍ ഫ്രേം ഷോപ് "</string>
 	<string name="poi_free_flying">"ഫ്രീ ഫ്ലയിംഗ് ഗുഡ്സ് സ്ടോര്‍ "</string>
-	<string name="poi_furnace">"ഹീറ്റിങ്ങ് യൂണിട് സ്ടോര്‍ "</string>
+	<string name="poi_furnace">ഹീറ്റിങ്ങ് യൂണിട് സ്ടോര്‍</string>
 	<string name="poi_furniture">"ഫര്‍ണിച്ചര്‍ കട "</string>
 	<string name="poi_garden_centre">ഗാര്‍ഡന്‍ സെന്റര്‍</string>
 	<string name="poi_garden_furniture">"ഗാര്‍ഡന്‍ ഫര്‍ണിച്ചര്‍ കട "</string>
 	<string name="poi_gas">"ഗ്യാസ് ഏജന്സി "</string>
-	<string name="poi_shop_yes">"പലവ്യഞ്ജന കട "</string>
+	<string name="poi_shop_yes">പലവ്യഞ്ജന കട</string>
 	<string name="poi_gift">"ഗിഫ്ട് കട "</string>
 	<string name="poi_glaziery">"ഗ്ലേസിയെരി "</string>
+	<string name="poi_transportation">ഗതാഗതം</string>
+		<string name="poi_road_obstacle">മാര്‍ഗതടസം</string>
+		<string name="poi_personal_transport"/>
+		<string name="poi_aerialway_transport"/>
+		<string name="poi_node_networks"/>
+		<string name="poi_hiking_routes">ഹൈക്കിങ്ങ് റൂട്ട്</string>
+		<string name="poi_traffic_enforcement">ഗതാഗത നിയന്ത്റണം</string>
+	<string name="poi_man_made">മനുഷ്യ നിര്‍മ്മിതം</string>
+		<string name="poi_transport_construction">ട്റാന്സ്പോര്‍ട്ട് കണ്‍സ്ട്ര്ക്ഷന്‍</string>
+		<string name="poi_palaeontological_site"/>
+
+	<string name="poi_deli">ഡെലി</string>
+	<string name="poi_doors">വാതിലുകള്‍</string>
+	<string name="poi_hardware">ഹാര്‍ഡ്വേര്‍ സ്ടോര്‍</string>
+	<string name="poi_hearing_aids">സ്റവണ സഹായി</string>
+	<string name="poi_herbalist">പച്ച മരുന്നു കട</string>
+	<string name="poi_hifi">ഹൈഫൈ സ്ടോര്‍</string>
+	<string name="poi_houseware">കട (വീട്ട് സാധനങ്ങള്‍)</string>
+	<string name="poi_hunting">കട (നായാട്ട് ഉപകരണങ്ങള്‍)</string>
 	</resources>
