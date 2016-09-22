@@ -104,14 +104,14 @@
 	<string name="poi_glaziery">"ഗ്ലേസിയെരി "</string>
 	<string name="poi_transportation">ഗതാഗതം</string>
 		<string name="poi_road_obstacle">മാര്‍ഗതടസം</string>
-		<string name="poi_personal_transport"/>
+		<string name="poi_personal_transport">സ്വ്കാര്യ വാഹനം</string>
 		<string name="poi_aerialway_transport"/>
-		<string name="poi_node_networks"/>
+		<string name="poi_node_networks">\t\t\t\t</string>
 		<string name="poi_hiking_routes">ഹൈക്കിങ്ങ് റൂട്ട്</string>
 		<string name="poi_traffic_enforcement">ഗതാഗത നിയന്ത്റണം</string>
 	<string name="poi_man_made">മനുഷ്യ നിര്‍മ്മിതം</string>
 		<string name="poi_transport_construction">ട്റാന്സ്പോര്‍ട്ട് കണ്‍സ്ട്ര്ക്ഷന്‍</string>
-		<string name="poi_palaeontological_site"/>
+		<string name="poi_palaeontological_site">പാലിയന്തോളജി സൈറ്റ്</string>
 
 	<string name="poi_deli">ഡെലി</string>
 	<string name="poi_doors">വാതിലുകള്‍</string>
@@ -121,4 +121,14 @@
 	<string name="poi_hifi">ഹൈഫൈ സ്ടോര്‍</string>
 	<string name="poi_houseware">കട (വീട്ട് സാധനങ്ങള്‍)</string>
 	<string name="poi_hunting">കട (നായാട്ട് ഉപകരണങ്ങള്‍)</string>
+	<string name="poi_interior_decoration">കട (ഇന്റീരിയര്‍ ഡെക്കറേഷന്‍)</string>
+	<string name="poi_jewelry">ജുവലറി</string>
+	<string name="poi_kitchen">കട (അടുക്കള ഉപകരണങ്ങള്‍)</string>
+	<string name="poi_leather">കട (ലെതര്‍)</string>
+	<string name="poi_motorcycle">കട (മോട്ടൊര്‍ സൈക്കിള്‍)</string>
+	<string name="poi_music">കട (മ്യൂസിക്)</string>
+	<string name="poi_musical_instrument">കട (സംഗീതോപകരണങ്ങള്‍)</string>
+	<string name="poi_newsagent">പത്റം ഏജന്റ്</string>
+	<string name="poi_optician">കണ്ണ് ഡോക്ടര്‍</string>
+	<string name="poi_organic">ആഹാരം(ഓര്‍ഗാനിക് )</string>
 	</resources>
