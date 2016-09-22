@@ -139,6 +139,7 @@ public class MapActivityLayers {
 		mapView.addLayer(mFavouritesLayer, 4);
 		// 5. transport layer
 		transportStopsLayer = new TransportStopsLayer(activity);
+		mapView.addLayer(transportStopsLayer, 5);
 		// 5.95 all text labels
 		// 6. point location layer 
 		locationLayer = new PointLocationLayer(activity.getMapViewTrackingUtilities());
@@ -179,13 +180,7 @@ public class MapActivityLayers {
 		OsmandSettings settings = getApplication().getSettings();
 		updateMapSource(mapView, settings.MAP_TILE_SOURCES);
 		boolean showStops = settings.getCustomRenderBooleanProperty(OsmandSettings.TRANSPORT_STOPS_OVER_MAP).get();
-		if (mapView.getLayers().contains(transportStopsLayer) != showStops) {
-			if (showStops) {
-				mapView.addLayer(transportStopsLayer, 5);
-			} else {
-				mapView.removeLayer(transportStopsLayer);
-			}
-		}
+		transportStopsLayer.setShowTransportStops(showStops);
 		OsmandPlugin.refreshLayers(mapView, activity);
 	}
 
