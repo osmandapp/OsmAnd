@@ -46,6 +46,7 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 	private MapLayerData<List<TransportStop>> data;
 	private TransportRoute route = null;
 
+	private boolean showTransportStops;
 	private Path path;
 
 	public TransportStopsLayer(MapActivity mapActivity) {
@@ -149,9 +150,15 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 	public void setRoute(TransportRoute route) {
 		this.route = route;
 	}
-	
 
-	
+	public boolean isShowTransportStops() {
+		return showTransportStops;
+	}
+
+	public void setShowTransportStops(boolean showTransportStops) {
+		this.showTransportStops = showTransportStops;
+	}
+
 	public int getRadiusPoi(RotatedTileBox tb){
 		final double zoom = tb.getZoom();
 		int r;
@@ -171,7 +178,7 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 	
 
 	@Override
-	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tb,DrawSettings settings) {
+	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tb, DrawSettings settings) {
 		List<TransportStop> objects = null;
 		if (tb.getZoom() >= startZoomRoute) {
 			if (route != null) {
@@ -200,10 +207,12 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 				}
 			}
 		}
-		if (tb.getZoom() >= startZoom && objects == null) {
+
+		if (showTransportStops && tb.getZoom() >= startZoom && objects == null) {
 			data.queryNewData(tb);
 			objects = data.getResults();
 		}
+		
 		if (objects != null) {
 			float iconSize = stopBus.getWidth() * 3 / 2.5f;
 			QuadTree<QuadRect> boundIntersections = initBoundIntersections(tb);
