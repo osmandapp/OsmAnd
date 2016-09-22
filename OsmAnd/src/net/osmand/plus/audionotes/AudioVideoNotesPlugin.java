@@ -828,7 +828,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		((AudioManager) activity.getSystemService(Context.AUDIO_SERVICE)).registerMediaButtonEventReceiver(
 				new ComponentName(activity, MediaRemoteControlReceiver.class));
 		if (runAction != -1) {
-			takeAction(activity, actionLat, actionLon, runAction);
+			takeAction(activity, actionLon, actionLat, runAction);
 			runAction = -1;
 		}
 	}
@@ -1275,7 +1275,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 						}
 						if (parameters.getSupportedFlashModes() != null
 								&& parameters.getSupportedFlashModes().contains(Parameters.FLASH_MODE_AUTO)) {
-							parameters.setFlashMode(Parameters.FLASH_MODE_AUTO);
+							//parameters.setFlashMode(Parameters.FLASH_MODE_AUTO);
 						}
 
 						int cameraOrientation = getCamOrientation(mapActivity, Camera.CameraInfo.CAMERA_FACING_BACK);
@@ -1313,24 +1313,29 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 
 
 	private void internalShoot() {
-		if (!autofocus) {
-			cam.takePicture(null, null, new JpegPhotoHandler());
-		} else {
-			cam.autoFocus(new Camera.AutoFocusCallback() {
-				@Override
-				public void onAutoFocus(boolean success, Camera camera) {
-					try {
-						cam.takePicture(null, null, new JpegPhotoHandler());
-					} catch (Exception e) {
-						logErr(e);
-						closeRecordingMenu();
-						closeCamera();
-						finishRecording();
-						e.printStackTrace();
-					}
+		getMapActivity().getMyApplication().runInUIThread(new Runnable() {
+			@Override
+			public void run() {
+				if (!autofocus) {
+					cam.takePicture(null, null, new JpegPhotoHandler());
+				} else {
+					cam.autoFocus(new Camera.AutoFocusCallback() {
+						@Override
+						public void onAutoFocus(boolean success, Camera camera) {
+							try {
+								cam.takePicture(null, null, new JpegPhotoHandler());
+							} catch (Exception e) {
+								logErr(e);
+								closeRecordingMenu();
+								closeCamera();
+								finishRecording();
+								e.printStackTrace();
+							}
+						}
+					});
 				}
-			});
-		}
+			}
+		}, 200);
 	}
 
 	private Camera.Size getOptimalPreviewSize(List<Camera.Size> sizes, int w, int h) {
@@ -1902,11 +1907,13 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				app.showToastMessage(R.string.no_microphone_permission);
 			}
 		}
+		/*
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null && !mapActivity.isDestroyed()) {
-			takeAction(mapActivity, actionLat, actionLon, runAction);
+			takeAction(mapActivity, actionLon, actionLat, runAction);
 			runAction = -1;
 		}
+		*/
 	}
 
 	public class JpegPhotoHandler implements PictureCallback {
