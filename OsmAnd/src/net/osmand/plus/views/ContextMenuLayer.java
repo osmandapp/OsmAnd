@@ -113,23 +113,28 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		paint = new Paint();
 		pressedBitmap = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_shield_tap);
 		pressedBitmapSmall = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_shield_tap_small);
-
-		publicTransportTypes = new ArrayList<>();
-		List<PoiFilter> filters = activity.getMyApplication().getPoiTypes().getPoiCategoryByName("transportation").getPoiFilters();
-		for (PoiFilter poiFilter : filters) {
-			if (poiFilter.getKeyName().equals("public_transport")) {
-				for (PoiType poiType : poiFilter.getPoiTypes()) {
-					publicTransportTypes.add(poiType.getKeyName());
-					for (PoiType poiAdditionalType : poiType.getPoiAdditionals()) {
-						publicTransportTypes.add(poiAdditionalType.getKeyName());
-					}
-				}
-			}
-		}
 	}
 
 	public boolean isVisible() {
 		return menu.isActive();
+	}
+
+	private List<String> getPublicTransportTypes() {
+		if (publicTransportTypes == null) {
+			publicTransportTypes = new ArrayList<>();
+			List<PoiFilter> filters = activity.getMyApplication().getPoiTypes().getPoiCategoryByName("transportation").getPoiFilters();
+			for (PoiFilter poiFilter : filters) {
+				if (poiFilter.getKeyName().equals("public_transport")) {
+					for (PoiType poiType : poiFilter.getPoiTypes()) {
+						publicTransportTypes.add(poiType.getKeyName());
+						for (PoiType poiAdditionalType : poiType.getPoiAdditionals()) {
+							publicTransportTypes.add(poiAdditionalType.getKeyName());
+						}
+					}
+				}
+			}
+		}
+		return publicTransportTypes;
 	}
 
 	@Override
@@ -681,7 +686,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			}
 		}
 
-		if (res != null && publicTransportTypes.contains(res.getSubType())) {
+		if (res != null && getPublicTransportTypes().contains(res.getSubType())) {
 			return findNearestTransportStop(lat, lon) == null ? res : null;
 		}
 
