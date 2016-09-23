@@ -2580,4 +2580,6 @@ V kolikor naletite na težave s programom OsmAnd, prosimo, stopite v stik s skup
     <string name="get_for">Pridobi za %1$s</string>
     <string name="get_for_month">Pridobi za %1$s na mesec</string>
     <string name="si_mi_meters">Milje/Metri</string>
+    <string name="lang_kab">Kabili</string>
+    <string name="driving_region_australia">Avstralija</string>
     </resources>
