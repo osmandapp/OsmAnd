@@ -133,4 +133,24 @@
 	<string name="poi_organic">ആഹാരം(ഓര്‍ഗാനിക് )</string>
 	<string name="poi_outdoor">കട (ഔട് ഡോര്‍)</string>
 	<string name="poi_paint">പെയിന്റ് കട</string>
+	<string name="poi_pet">കട ( പെറ്റ്സ് )</string>
+	<string name="poi_photo">ഫോട്ടോ സ്റ്റുഡിയൊ</string>
+	<string name="poi_radiotechnics">കട (റേഡിയൊ ഉപകരണങ്ങള്‍)</string>
+	<string name="poi_second_hand">കട (സെക്കന്റ് ഹാന്ഡ്)</string>
+	<string name="poi_scuba_diving_shop">കട (സ്കൂബ ഡൈവിങ്ങ് ഉപകരണങ്ങള്‍)</string>
+	<string name="poi_ship_chandler">കട (കപ്പല്‍ ഉപകരണങ്ങള്‍)</string>
+	<string name="poi_sports">കട (സ്പോര്‍ട്സ്)</string>
+	<string name="poi_stationery">സ്ടേഷ്നറി കട</string>
+	<string name="poi_tableware">കട (മേശവിരികള്‍)</string>
+	<string name="poi_ticket">ടിക്കറ്റ് കൗണ്ടര്‍</string>
+	<string name="poi_tobacco">കട (പുകയില ഉല്പന്നങ്ങള്‍ )</string>
+	<string name="poi_toys">കളിപ്പാട്ടക്കട</string>
+	<string name="poi_trade">വ്യാപാര സ്ഥാപനം</string>
+	<string name="poi_tyres">ടയര്‍ കട</string>
+	<string name="poi_vacuum_cleaner">കട (വാക്യും ക്ളീനര്‍)</string>
+	<string name="poi_variety_store">കട (വെറൈറ്റി)</string>
+	<string name="poi_video">കട (വീഡിയൊ )</string>
+	<string name="poi_window_blind">കട (കര്‍ട്ടന്‍)</string>
+	<string name="poi_department_store">ഡിപ്പാര്‍ട്ട്മെന്റ് സ്ടോര്‍</string>
+	<string name="poi_electronics">കട (ഇലെക്ട്രോണിക്സ് )</string>
 	</resources>
