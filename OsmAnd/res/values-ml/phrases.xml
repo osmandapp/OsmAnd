@@ -153,4 +153,49 @@
 	<string name="poi_window_blind">കട (കര്‍ട്ടന്‍)</string>
 	<string name="poi_department_store">ഡിപ്പാര്‍ട്ട്മെന്റ് സ്ടോര്‍</string>
 	<string name="poi_electronics">കട (ഇലെക്ട്രോണിക്സ് )</string>
+	<string name="poi_energy">കട ( ഊര്‍ജം)</string>
+	<string name="poi_car">കാര്‍ ഡീലര്‍</string>
+	<string name="poi_car_parts">കട(വാഹന സ്പേയര്‍ പാര്‍ട്സ്)</string>
+	<string name="poi_cosmetics">കട (കോസ്മെടിക്സ്)</string>
+	<string name="poi_marketplace">ചന്ത</string>
+	<string name="poi_sewing">കട (ഡ്രൈ ഗുഡ്സ്)</string>
+	<string name="poi_watches">വാച്ച് കട</string>
+	<string name="poi_swimming_pool_shop">കട (നീന്തലുപകരണങ്ങള്‍)</string>
+	<string name="poi_games">കളിക്കളം</string>
+	<string name="poi_trophy">ട്രോഫികള്‍ അവാര്ഡുകള്‍</string>
+	<string name="poi_video_games">വീഡിയോ ഗേംസ്</string>
+	<string name="poi_pyrotechnics">വെടിക്കെട്ട്ശാല</string>
+	<string name="poi_weapons">കട (ആയുധങ്ങള്‍)</string>
+	<string name="poi_perfumery">കട (പെര്‍ഫ്യൂം)</string>
+
+	<string name="poi_police">പോലിസ്</string>
+	<string name="poi_fire_station">ഫയര്‍ സ്ടേഷന്‍</string>
+	<string name="poi_emergency_phone">എമെര്‍ജെന്സി ഫോണ്‍</string>
+	<string name="poi_fire_hydrant">അഗ്നിശമനി (fire hydrant)</string>
+	<string name="poi_fire_extinguisher">അഗ്നിശമനി</string>
+	<string name="poi_fire_flapper">അഗ്നിശമനോപകരണം (ഫയര്‍ ഫ്ളാപ്പര്‍)</string>
+	<string name="poi_fire_hose">ഫയര്‍ ഹോസ്</string>
+	<string name="poi_fire_water_pond">കുളം (അഗ്നിശമനം)</string>
+	<string name="poi_grit_bin">ഉപ്പ് കയം</string>
+	<string name="poi_ambulance_station">ആംബുലന്‍സ്</string>
+	<string name="poi_ses_station">ഏസ് ഈ എസ് സ്ടേഷന്‍</string>
+	<string name="poi_emergency_access_point">എമെര്‍ജെന്‍സി അക്സെസ് പോയിന്റ്</string>
+
+	<string name="poi_ford">ചപ്പാത്ത്</string>
+	<string name="poi_mountain_pass">ചുരം</string>
+	<string name="poi_gate">ഗേറ്റ്</string>
+	<string name="poi_city_wall">നഗര കോട്ട</string>
+	<string name="poi_lift_gate">ഗേറ്റ് (ലിഫ്ടിങ്ങ്)</string>
+	<string name="poi_toll_booth">ടോള്‍ ബൂത്ത്</string>
+	<string name="poi_border_control">ബോര്‍ഡര്‍ കണ്ട്റോള്‍</string>
+	<string name="poi_traffic_calming_bump">ബംപ്</string>
+	<string name="poi_traffic_calming_hump">ഹംപ്</string>
+	<string name="poi_traffic_calming_cushion">വേഗനിയന്ത്റണം (കുഷ്യന്‍)</string>
+	<string name="poi_traffic_calming_chicane">വേഗനിയന്ത്റണം(ചിക്കേന്‍)</string>
+	<string name="poi_traffic_calming_rumble_strip">വേഗനിയന്ത്റണം (റംബിള്‍ സ്ട്റിപ് )</string>
+	<string name="poi_traffic_calming_table">വേഗനിയന്ത്റണം (ടേബിള്‍)</string>
+	<string name="poi_traffic_calming_choker">വേഗനിയന്ത്റണം (ചോക്കര്‍)</string>
+	<string name="poi_traffic_calming_island">വേഗനിയന്ത്റണം (ഐലന്റ്)</string>
+	<string name="poi_traffic_signals">ട്റാഫിക്ക് ലൈറ്റ്</string>
+
 	</resources>
