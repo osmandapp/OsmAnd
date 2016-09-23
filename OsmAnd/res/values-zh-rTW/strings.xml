@@ -2592,4 +2592,5 @@ Facebook：https://www.facebook.com/osmandapp
     <string name="donation_to_osm">捐贈給 OpenStreetMap 的社群</string>
     <string name="osm_live_subscription_desc">啟用認購每小時、每天、每週的更新和世界各地所有的地圖無限制的下載。</string>
     <string name="driving_region_australia">澳洲</string>
+    <string name="lang_kab">卡拜爾</string>
     </resources>
