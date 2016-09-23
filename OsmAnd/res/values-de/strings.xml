@@ -1269,7 +1269,7 @@ Die globalen Daten (zwischen N 70° und S 70°) basieren auf Messungen von SRTM 
 	<string name="driving_region_us">USA</string>
 	<string name="driving_region_canada">Kanada</string>
 	<string name="driving_region_europe_asia">Europa und Asien</string>
-	<string name="driving_region_uk">GB, Indien, u.ä.</string>
+	<string name="driving_region_uk">UK, Indien, &amp; andere</string>
 	<string name="driving_region_australia">Australien</string>
 	<string name="announce_gpx_waypoints">GPX-Wegpunkte</string>
 	<string name="driving_region">Fahrgebiet</string>
@@ -2458,7 +2458,7 @@ Wenn Sie OsmAnd und OSM lieben und unterstützen wollen, so ist dies die perfekt
     <string name="search_categories">Kategorien</string>
     <string name="lang_hsb">Obersorbisch</string>
     <string name="back_to_search">Zurück zur Suche</string>
-    <string name="confirmation_to_delete_history_items">Ausgewählte Verlaufselemente löschen?</string>
+    <string name="confirmation_to_delete_history_items">Möchten Sie die ausgewählten Elemente aus dem Verlauf löschen?</string>
     <string name="show_something_on_map">%1$s auf der Karte anzeigen</string>
     <string name="release_2_4">"
  • Neue sehr leistungsfähige Freitextsuche
@@ -2513,7 +2513,7 @@ Wenn Sie OsmAnd und OSM lieben und unterstützen wollen, so ist dies die perfekt
     <string name="get_for">Holen für %1$s</string>
     <string name="get_for_month">Für %1$s Monat holen</string>
     <string name="get_it">Holen</string>
-    <string name="osm_live_payment_desc">Abonnementsgebühr wird jeden Monat berechnet. Sie können jederzeit Ihr Abonnement auf Google Play kündigen.</string>
+    <string name="osm_live_payment_desc">Abonnementsgebühr wird jeden Monat berechnet. Sie können Ihr Abonnement auf Google Play jederzeit kündigen.</string>
     <string name="donation_to_osm">Spende an die OpenStreetMap-Gemeinschaft</string>
     <string name="donation_to_osm_desc">Ein Teil Ihrer Spende erhalten OSM-Benutzern, die Änderungen an OpenStreetMap übermitteln. Die Kosten für das Abonnement bleiben unverändert.</string>
     <string name="osm_live_subscription_desc">Das Abonnement ermöglicht stündliche, tägliche, wöchentliche Updates und unbegrenzte Downloads für alle Karten auf der ganzen Welt.</string>
