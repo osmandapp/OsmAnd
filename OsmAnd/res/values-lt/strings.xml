@@ -2372,9 +2372,9 @@ Failams reikalinga {3} MB laikinam ir {1} MB pastoviam saugojimui.
     <string name="access_widget_expand">Išskleisti</string>
     <string name="osm_editors_ranking">OSM Redaktorių reitingas</string>
     <string name="osm_live_subscription">OSM Live prenumerata</string>
-    <string name="osm_live_header">Prenumerata leidžia kas valandą gauti viso žemėlapio atnaujinimus. 
-Didžioji pajamų dalis grįžta OSM bendruomenei ir apmokamas kiekvienas indėlis į OSM. 
-Jei jums patinka OsmAnd ir OSM, ir norite juos patemti, tai yra idealus būdas tai padaryti.</string>
+    <string name="osm_live_header">Prenumerata leidžia kas valandą gauti visų pasaulio žemėlapių atnaujinimus. 
+Dalis pajamų grįžta OSM bendruomenei ir apmokamas kiekvienas indėlis į OSM kūrimą. 
+Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     
     <string name="download_files_question_space_with_temp">Ar siųsti {0} failų
 Failams reikalinga {3} MB laikinam ir {1} MB pastoviam saugojimui.
@@ -2429,7 +2429,7 @@ Failams reikalinga {3} MB laikinam ir {1} MB pastoviam saugojimui.
     <string name="coords_search">Paieška pagal koordinates</string>
     <string name="advanced_coords_search">Platesnė paieška pagal koordinates</string>
     <string name="back_to_search">Atgal į paiešką</string>
-    <string name="confirmation_to_delete_history_items">Ar norite ištrinti pasirinktus istorijos įrašus?</string>
+    <string name="confirmation_to_delete_history_items">Ar norite ištrinti pasirinktus įrašus iš istorijos?</string>
     <string name="show_something_on_map">Rodyti %1$s žemėlapyje</string>
     <string name="release_2_4">"
  • Nauja labai galinga tekstinė paieška
@@ -2462,22 +2462,22 @@ Failams reikalinga {3} MB laikinam ir {1} MB pastoviam saugojimui.
     <string name="shared_string_change">Pakeisti</string>
     <string name="get_started">Pradėti</string>
     <string name="release_2_3">"
- • OSM Live. Paremkite žemėlapių braižytojus ir programuotojus bei gaukite žemėlapių atnaujinimus kas valandą. 
+ • OSM Live. Paremkite žemėlapių sudarytojus ir programuotojus bei gaukite žemėlapių atnaujinimus kas valandą. 
 
 
- • Map markers. A new way to quickly select places on the map.
+ • Žemėlapio žymekliai. Naujas būdas greitai pasirinkti vietas žemėlapyje.
 
 
- • More detailed OSM maps with country specific road shields and lots of new map features.
+ • Detalesni OSM žemėlapiai su šalies specifiką atitinkančiais kelio ženklais ir daug naujų žemėlapio savybių.
 
 
- • Improved Look and Feel of Route preparation. 
+ • Nauja maršruto sudarymo išvaizda ir veiksena. 
 
 
- • Many improvements in the map context menu such as contextual address lookup.
+ • Daug žemėlapio kontekstinio meniu pakeitimų, pvz. kaip kontekstinė adreso paieška.
 
 
- and more…
+ ir dar daugiau…
  "</string>
     <string name="clear_updates_proposition_message">Tu gali pašalinti atsisiųstus atnaujinimus ir grįžti prie pradinio žemėlapio</string>
     <string name="search_another_country">Pasirinkite kitą regioną</string>
