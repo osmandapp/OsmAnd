@@ -297,7 +297,7 @@ El servicio de navegación se ha cambiado temporalmente al servicio con conexió
     <string name="shared_string_select_all">Marcar todo</string>
     <string name="shared_string_refresh">Actualizar</string>
     <string name="fast_route_mode">Ruta más rápida</string>
-    <string name="fast_route_mode_descr">"Activar para calcular la ruta más rápida o desactivar para la ruta que ahora combustible "</string>
+    <string name="fast_route_mode_descr">"Activar para calcular la ruta más rápida o desactivar para la ruta que ahorra combustible "</string>
     <string name="tiles_to_download_estimated_size">En acercamiento {0} descarga {1} teselas ({2} MB)</string>
     <string name="shared_string_download_map">Descargar mapa</string>
     <string name="select_max_zoom_preload_area">Seleccione el acercamiento máximo para precargar</string>
@@ -2356,7 +2356,7 @@ OsmAnd Mapas y Navegación - encuentra ubicaciones en el mapa y calcula rutas si
     <string name="coords_search">Búsqueda de coordenadas</string>
     <string name="advanced_coords_search">Búsqueda avanzada de coordenadas</string>
     <string name="back_to_search">Volver a buscar</string>
-    <string name="confirmation_to_delete_history_items">¿Quieres quitar los elementos seleccionados del historial?</string>
+    <string name="confirmation_to_delete_history_items">¿Quieres quitar del historial los elementos seleccionados?</string>
     <string name="show_something_on_map">Mostrar %1$s en el mapa</string>
     <string name="dist_away_from_my_location">Buscar en %1$s alrededor</string>
     <string name="release_2_4">"
@@ -2411,4 +2411,5 @@ OsmAnd Mapas y Navegación - encuentra ubicaciones en el mapa y calcula rutas si
     <string name="osmand_plus_banner_desc">Versión completa de OsmAnd con descargas ilimitadas de mapas y actualizaciones mensuales de los mapas.</string>
     <string name="si_mi_meters">Millas/metros</string>
     <string name="driving_region_australia">Australia</string>
+    <string name="lang_kab">Cabilio</string>
     </resources>
