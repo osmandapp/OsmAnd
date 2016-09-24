@@ -59,6 +59,16 @@ public class WptPtMenuBuilder extends MenuBuilder {
 				}
 			});
 		}
+		if (!Algorithms.isEmpty(wpt.comment)) {
+			final View rowc = buildRow(view, R.drawable.ic_action_note_dark, wpt.comment, 0, true, 10, false, null);
+			rowc.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					POIMapLayer.showDescriptionDialog(rowc.getContext(), app, wpt.comment,
+							rowc.getResources().getString(R.string.poi_dialog_comment));
+				}
+			});
+		}
 
 		buildPlainMenuItems(view);
 	}
