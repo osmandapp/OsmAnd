@@ -70,6 +70,7 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 import btools.routingapp.IBRouterService;
 
@@ -1172,12 +1173,11 @@ public class RouteProvider {
 		// possibly hide that API key because it is privacy of osmand
 		// A6421860EBB04234AB5EF2D049F2CD8F key is compromised
 		String scheme = "";
-		// https certificate doesn't seem to be accepted on Android
-//		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD && false) {
-//			scheme = "https";
-//		} else {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD) {
+			scheme = "https";
+		} else {
 			scheme = "http";
-//		}
+		}
 		uri.append(scheme + "://router.project-osrm.org/route/v1/driving/"); //$NON-NLS-1$
 		uri.append(String.valueOf(params.start.getLongitude()));
 		uri.append(",").append(String.valueOf(params.start.getLatitude()));
