@@ -2255,7 +2255,7 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="share_history_subject">" Partagé via OsmAnd"</string>
     <string name="show_on_map">Afficher sur la carte</string>
     <string name="back_to_search">Retour à la recherche</string>
-    <string name="confirmation_to_delete_history_items">Souhaitez-vous supprimer les éléments d\'historique sélectionnés ?</string>
+    <string name="confirmation_to_delete_history_items">Souhaitez-vous supprimer les éléments sélectionnés de l\'historique ?</string>
     <string name="show_something_on_map">Afficher %1$s sur la carte</string>
     <string name="route_stops_before">%1$s arrêts avant</string>
     <string name="coords_search">Recherche de coordonnées</string>
@@ -2317,4 +2317,5 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="osm_live_payment_desc">Le coût de l\'abonnement sera prélevé chaque mois. Vous avez la possibilité d\'annuler votre abonnement sur Google Play.</string>
     <string name="donation_to_osm_desc">Une partie de votre don sera reversée aux contributeurs OSM qui mettent à jour OpenStreetMaps. Le coût de l\'abonnement reste identique.</string>
     <string name="driving_region_australia">Australie</string>
+    <string name="lang_kab">Kabyle</string>
     </resources>
