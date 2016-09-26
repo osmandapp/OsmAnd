@@ -286,7 +286,7 @@ Er is nu {2} MB beschikbaar.</string>
   <string name="layer_underlay">Underlay-kaart…</string>
   <string name="map_underlay">Underlay kaart</string>
   <string name="map_underlay_descr">Kies underlay-kaart</string>
-  <string name="layer_overlay">Overlay-kaart…</string>
+  <string name="layer_overlay">Overlay kaart…</string>
   <string name="map_overlay">Overlay kaart</string>
   <string name="map_overlay_descr">Kies overlay-kaart</string>
   <string name="tile_source_already_installed">Kaart is al geïnstalleerd, instellingen worden geactualiseerd</string>
@@ -2087,7 +2087,7 @@ Het activeren van deze weergave verandert de kaartstijl in \'Winter en ski\', me
     <string name="download_wikipedia_maps">Wikipedia</string>
     <string name="rendering_value_default13_name">Standaard (13)</string>
 	<string name="rendering_value_defaultTranslucentCyan_name">Standaard (doorschijnend cyaan)</string>
-    <string name="rendering_attr_currentTrackColor_name">GPX kleur</string>
+    <string name="rendering_attr_currentTrackColor_name">GPX-kleur</string>
     <string name="rendering_attr_currentTrackWidth_name">GPX breedte</string>
     <string name="rendering_value_red_name">Rood</string>
     <string name="rendering_value_translucent_red_name">Doorschijnend rood</string>
@@ -2383,7 +2383,7 @@ Het activeren van deze weergave verandert de kaartstijl in \'Winter en ski\', me
     <string name="shared_string_type">Type</string>
     <string name="item_removed">Item verwijderd</string>
     <string name="n_items_removed">items verwijderd</string>
-    <string name="shared_string_undo_all">Alles terugzetten</string>
+    <string name="shared_string_undo_all">Alles ongedaan maken</string>
     <string name="rendering_attr_hideIcons_name">POI-iconen</string>
     <string name="switch_start_finish">Start en bestemming verwisselen</string>
     <string name="number_of_contributors">Aantal Bijdragers</string>
@@ -2502,7 +2502,7 @@ Als je hulp nodig hebt met OsmAnd: neem contact op met ons support team: support
  "</string>
     <string name="recalculate_route">Route opnieuw berekenen</string>
     <string name="shared_string_topbar">Topbalk</string>
-    <string name="storage_directory_readonly_desc">De geselecteerde opslagmap is niet schrijfbaar. Er wordt tijdelijk intern geheugen gebruikt. Kies een geldige opslagmap.</string>
+    <string name="storage_directory_readonly_desc">De geselecteerde opslagmap is niet schrijfbaar. Daarom wordt nu intern geheugen gebruikt. Kies een geldige opslagmap.</string>
     <string name="storage_directory_shared">Gedeeld geheugen</string>
     <string name="avoid_road">Deze weg vermijden</string>
     <string name="shared_string_move_up">Omhoog</string>
@@ -2611,7 +2611,7 @@ Als je hulp nodig hebt met OsmAnd: neem contact op met ons support team: support
     <string name="share_history_subject">" gedeeld via OsmAnd"</string>
     <string name="lang_hsb">Oppersorbisch</string>
     <string name="route_stops_before">nog %1$s haltes</string>
-    <string name="coords_search">Zoeken met Coördinaten</string>
+    <string name="coords_search">Zoeken met coördinaten</string>
     <string name="advanced_coords_search">Zoeken met Coördinaten</string>
     <string name="rendering_attr_hideOverground_name">Bovengrondse objecten</string>
     <string name="shared_string_change">Wijzig</string>
