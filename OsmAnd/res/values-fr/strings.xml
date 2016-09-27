@@ -2318,4 +2318,6 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="donation_to_osm_desc">Une partie de votre don sera reversée aux contributeurs OSM qui mettent à jour OpenStreetMaps. Le coût de l\'abonnement reste identique.</string>
     <string name="driving_region_australia">Australie</string>
     <string name="lang_kab">Kabyle</string>
+    <string name="rendering_attr_hideOverground_name">Objets au sol</string>
+    <string name="lang_hsb">Sorabe (haut)</string>
     </resources>
