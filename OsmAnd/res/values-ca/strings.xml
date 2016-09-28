@@ -2448,4 +2448,10 @@ Si aprecieu OsmAnd  i OSM i voleu ajudar-los, és la via perfecta per fer-ho."</
     <string name="osm_live_subscription_desc">La subscripció permet actualitzacions setmanals, diàries i horàries i baixades de tants mapes com vulgueu de qualsevol lloc del món.</string>
     <string name="driving_region_australia">Austràlia</string>
     <string name="lang_kab">Cabil</string>
+    <string name="shared_string_filters">Filtres</string>
+    <string name="apply_filters">Aplica els filtres</string>
+    <string name="save_filter">Desa el filtre</string>
+    <string name="delete_filter">Esborra el filtre</string>
+    <string name="new_filter">Filtre nou</string>
+    <string name="new_filter_desc">Introduïu un nom pel nou filtre. El trobareu a la llista de categories.</string>
     </resources>
