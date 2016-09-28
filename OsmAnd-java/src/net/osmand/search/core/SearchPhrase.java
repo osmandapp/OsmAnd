@@ -354,7 +354,13 @@ public class SearchPhrase {
 		}
 		return false;
 	}
-	
+
+	public void syncWordsWithResults() {
+		for(SearchWord w : words) {
+			w.syncWordWithResult();
+		}
+	}
+
 	public String getText(boolean includeLastWord) {
 		StringBuilder sb = new StringBuilder();
 		for(SearchWord s : words) {

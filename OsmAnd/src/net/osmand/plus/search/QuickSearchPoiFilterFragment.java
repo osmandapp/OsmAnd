@@ -269,6 +269,9 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 					Toast.makeText(getContext(), MessageFormat.format(getContext().getText(R.string.edit_filter_delete_message).toString(),
 									filter.getName()), Toast.LENGTH_SHORT).show();
 					app.getSearchUICore().refreshCustomPoiFilters();
+					QuickSearchDialogFragment quickSearchDialogFragment = (QuickSearchDialogFragment) getParentFragment();
+					quickSearchDialogFragment.reloadCategories();
+					quickSearchDialogFragment.clearLastWord();
 					QuickSearchPoiFilterFragment.this.dismiss();
 				}
 			}
@@ -301,13 +304,15 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 				PoiUIFilter nFilter = new PoiUIFilter(editText.getText().toString(), null, filter.getAcceptedTypes(), app);
 				applyFilterFields();
 				if (!Algorithms.isEmpty(filter.getFilterByName())) {
+					nFilter.setFilterByName(filter.getFilterByName());
 					nFilter.setSavedFilterByName(filter.getFilterByName());
 				}
 				if (app.getPoiFilters().createPoiFilter(nFilter)) {
 					Toast.makeText(getContext(), MessageFormat.format(getContext().getText(R.string.edit_filter_create_message).toString(),
 									editText.getText().toString()), Toast.LENGTH_SHORT).show();
-					((QuickSearchDialogFragment) getParentFragment()).replaceQueryWithUiFilter(filter);
 					app.getSearchUICore().refreshCustomPoiFilters();
+					((QuickSearchDialogFragment) getParentFragment()).replaceQueryWithUiFilter(nFilter);
+					((QuickSearchDialogFragment) getParentFragment()).reloadCategories();
 					QuickSearchPoiFilterFragment.this.dismiss();
 				}
 			}

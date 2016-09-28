@@ -1053,8 +1053,21 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		if (searchPhrase.isLastWord(POI_TYPE)) {
 			SearchResult sr = searchPhrase.getLastSelectedWord().getResult();
 			sr.object = filter;
+			sr.localeName = filter.getName();
+			searchUICore.getPhrase().syncWordsWithResults();
 			String txt = searchUICore.getPhrase().getText(true);
+			searchQuery = txt;
+			searchEditText.setText(txt);
+			searchEditText.setSelection(txt.length());
 			runCoreSearch(txt, false, false);
+		}
+	}
+
+	public void clearLastWord() {
+		if (searchEditText.getText().length() > 0) {
+			String newText = searchUICore.getPhrase().getTextWithoutLastWord();
+			searchEditText.setText(newText);
+			searchEditText.setSelection(newText.length());
 		}
 	}
 

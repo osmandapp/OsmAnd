@@ -22,6 +22,10 @@ public class SearchWord {
 	public SearchResult getResult() {
 		return result;
 	}
+
+	public void syncWordWithResult() {
+		word = result.wordsSpan != null ? result.wordsSpan : result.localeName.trim();
+	}
 	
 	public LatLon getLocation() {
 		return result == null ? null : result.location;
