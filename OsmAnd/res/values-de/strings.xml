@@ -2518,4 +2518,10 @@ Wenn Sie OsmAnd und OSM lieben und unterstützen wollen, so ist dies die perfekt
     <string name="donation_to_osm_desc">Ein Teil Ihrer Spende erhalten OSM-Benutzern, die Änderungen an OpenStreetMap übermitteln. Die Kosten für das Abonnement bleiben unverändert.</string>
     <string name="osm_live_subscription_desc">Das Abonnement ermöglicht stündliche, tägliche, wöchentliche Updates und unbegrenzte Downloads für alle Karten auf der ganzen Welt.</string>
     <string name="lang_kab">Kabylisch</string>
+    <string name="shared_string_filters">Filter</string>
+    <string name="apply_filters">Filter anwenden</string>
+    <string name="save_filter">Filter speichern</string>
+    <string name="delete_filter">Filter löschen</string>
+    <string name="new_filter">Neuer Filter</string>
+    <string name="new_filter_desc">Bitte geben sie einen Namen für den neuen Filter ein. Sie finden ihn in der Liste der Kategorien.</string>
     </resources>
