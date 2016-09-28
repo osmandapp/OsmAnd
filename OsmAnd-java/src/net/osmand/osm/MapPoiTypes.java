@@ -47,7 +47,8 @@ public class MapPoiTypes {
 
 	public interface PoiTranslator {
 
-		public String getTranslation(AbstractPoiType type);
+		String getTranslation(AbstractPoiType type);
+		String getTranslation(String keyName);
 
 	}
 
@@ -276,6 +277,7 @@ public class MapPoiTypes {
 			PoiCategory lastCategory = null;
 			PoiFilter lastFilter = null;
 			PoiType lastType = null;
+			String lastPoiAdditionalCategory = null;
 			while ((tok = parser.next()) != XmlPullParser.END_DOCUMENT) {
 				if (tok == XmlPullParser.START_TAG) {
 					String name = parser.getName();
@@ -302,12 +304,17 @@ public class MapPoiTypes {
 						if (lastCategory == null) {
 							lastCategory = getOtherMapCategory();
 						}
-						PoiType baseType = parsePoiAdditional(parser, lastCategory, lastFilter, lastType, null, null);
+						PoiType baseType = parsePoiAdditional(parser, lastCategory, lastFilter, lastType, null, null, lastPoiAdditionalCategory);
 						if ("true".equals(parser.getAttributeValue("", "lang"))) {
 							for (String lng : MapRenderingTypes.langs) {
-								parsePoiAdditional(parser, lastCategory, lastFilter, lastType, lng, baseType);
+								parsePoiAdditional(parser, lastCategory, lastFilter, lastType, lng, baseType, lastPoiAdditionalCategory);
 							}
-							parsePoiAdditional(parser, lastCategory, lastFilter, lastType, "en", baseType);
+							parsePoiAdditional(parser, lastCategory, lastFilter, lastType, "en", baseType, lastPoiAdditionalCategory);
+						}
+
+					} else if (name.equals("poi_additional_category")) {
+						if (lastPoiAdditionalCategory == null) {
+							lastPoiAdditionalCategory = parser.getAttributeValue("", "name");
 						}
 
 					} else if (name.equals("poi_type")) {
@@ -336,6 +343,8 @@ public class MapPoiTypes {
 						lastType = null;
 					} else if (name.equals("poi_category")) {
 						lastCategory = null;
+					} else if (name.equals("poi_additional_category")) {
+						lastPoiAdditionalCategory = null;
 					}
 				}
 			}
@@ -368,7 +377,7 @@ public class MapPoiTypes {
 
 
 	private PoiType parsePoiAdditional(XmlPullParser parser, PoiCategory lastCategory, PoiFilter lastFilter,
-			PoiType lastType, String lang, PoiType langBaseType) {
+			PoiType lastType, String lang, PoiType langBaseType, String poiAdditionalCategory) {
 		String oname = parser.getAttributeValue("", "name");
 		if (lang != null) {
 			oname += ":" + lang;
@@ -393,6 +402,7 @@ public class MapPoiTypes {
 		tp.setOsmValue(parser.getAttributeValue("", "value"));
 		tp.setOsmTag2(parser.getAttributeValue("", "tag2"));
 		tp.setOsmValue2(parser.getAttributeValue("", "value2"));
+		tp.setPoiAdditionalCategory(poiAdditionalCategory);
 		if (lastType != null) {
 			lastType.addPoiAdditional(tp);
 		} else if (lastFilter != null) {
@@ -548,6 +558,17 @@ public class MapPoiTypes {
 		return Algorithms.capitalizeFirstLetterAndLowercase(name);
 	}
 
+	public String getPoiTranslation(String keyName) {
+		if (poiTranslator != null) {
+			String translation = poiTranslator.getTranslation(keyName);
+			if (!Algorithms.isEmpty(translation)) {
+				return translation;
+			}
+		}
+		String name = keyName;
+		name = name.replace('_', ' ');
+		return Algorithms.capitalizeFirstLetterAndLowercase(name);
+	}
 
 	public boolean isRegisteredType(PoiCategory t) {
 		return getPoiCategoryByName(t.getKeyName()) != otherCategory;

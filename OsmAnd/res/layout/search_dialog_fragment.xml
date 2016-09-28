@@ -179,6 +179,15 @@
                     android:textColor="?attr/color_dialog_buttons"
                     android:textSize="@dimen/default_desc_text_size"/>
 
+                <ImageButton
+                    android:id="@+id/filterButton"
+                    style="@style/Widget.AppCompat.ActionButton"
+                    android:layout_width="48dp"
+                    android:layout_height="match_parent"
+                    android:contentDescription="@string/poi_filter_custom_filter"
+                    android:visibility="gone"
+                    android:src="@drawable/ic_action_filter_dark"/>
+
             </LinearLayout>
 
         </LinearLayout>

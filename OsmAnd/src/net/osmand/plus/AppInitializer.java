@@ -317,14 +317,19 @@ public class AppInitializer implements IProgress {
 				if(type.getBaseLangType() != null) {
 					return getTranslation(type.getBaseLangType()) +  " (" + app.getLangTranslation(type.getLang()).toLowerCase() +")";
 				}
+				return getTranslation(type.getIconKeyName());
+			}
+
+			@Override
+			public String getTranslation(String keyName) {
 				try {
-					Field f = R.string.class.getField("poi_" + type.getIconKeyName());
+					Field f = R.string.class.getField("poi_" + keyName);
 					if (f != null) {
 						Integer in = (Integer) f.get(null);
 						return app.getString(in);
 					}
 				} catch (Exception e) {
-					System.err.println("No translation for "+ type.getIconKeyName() + " " + e.getMessage());
+					System.err.println("No translation for "+ keyName + " " + e.getMessage());
 				}
 				return null;
 			}

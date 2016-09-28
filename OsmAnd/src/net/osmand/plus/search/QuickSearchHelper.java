@@ -135,13 +135,20 @@ public class QuickSearchHelper implements ResourceListener {
 		// Register WptPt search api
 		core.registerAPI(new SearchWptAPI(app));
 		core.registerAPI(new SearchHistoryAPI(app));
-		
+
+		refreshCustomPoiFilters();
+
+		PoiFiltersHelper poiFilters = app.getPoiFilters();
+		core.addCustomSearchPoiFilter(poiFilters.getLocalWikiPOIFilter(), 1);
+		core.addCustomSearchPoiFilter(poiFilters.getShowAllPOIFilter(), 1);
+	}
+
+	public void refreshCustomPoiFilters() {
+		core.clearCustomSearchPoiFilters();
 		PoiFiltersHelper poiFilters = app.getPoiFilters();
 		for(CustomSearchPoiFilter udf : poiFilters.getUserDefinedPoiFilters()) {
 			core.addCustomSearchPoiFilter(udf, 0);
 		}
-		core.addCustomSearchPoiFilter(poiFilters.getLocalWikiPOIFilter(), 1);
-		core.addCustomSearchPoiFilter(poiFilters.getShowAllPOIFilter(), 1);
 	}
 
 	public void setRepositoriesForSearchUICore(final OsmandApplication app) {

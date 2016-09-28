@@ -257,7 +257,15 @@ public class SearchUICore {
 		apis.add(cityApi);
 		apis.add(new SearchCoreFactory.SearchAddressByNameAPI(streetsApi, cityApi));
 	}
-	
+
+	public void clearCustomSearchPoiFilters() {
+		for(SearchCoreAPI capi : apis) {
+			if(capi instanceof SearchAmenityTypesAPI) {
+				((SearchAmenityTypesAPI) capi).clearCustomFilters();
+			}
+		}
+	}
+
 	public void addCustomSearchPoiFilter(CustomSearchPoiFilter poiFilter, int priority) {
 		for(SearchCoreAPI capi : apis) {
 			if(capi instanceof SearchAmenityTypesAPI) {

@@ -495,7 +495,12 @@ public class SearchCoreFactory {
 		public SearchAmenityTypesAPI(MapPoiTypes types) {
 			this.types = types;
 		}
-		
+
+		public void clearCustomFilters() {
+			this.customPoiFilters.clear();
+			this.customPoiFiltersPriorites.clear();
+		}
+
 		public void addCustomFilter(CustomSearchPoiFilter poiFilter, int priority) {
 			this.customPoiFilters.add(poiFilter);
 			this.customPoiFiltersPriorites.add(priority);

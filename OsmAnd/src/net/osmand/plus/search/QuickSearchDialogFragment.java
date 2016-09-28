@@ -62,7 +62,6 @@ import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControll
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControllerType;
 import net.osmand.search.SearchUICore;
 import net.osmand.search.SearchUICore.SearchResultCollection;
-import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchCoreAPI;
 import net.osmand.search.core.SearchCoreFactory.SearchAmenityTypesAPI;
 import net.osmand.search.core.SearchPhrase;
@@ -76,6 +75,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import static net.osmand.search.core.ObjectType.POI_TYPE;
 
 public class QuickSearchDialogFragment extends DialogFragment implements OsmAndCompassListener, OsmAndLocationListener {
 
@@ -98,6 +99,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	private View searchView;
 	private View buttonToolbarView;
 	private ImageView buttonToolbarImage;
+	private ImageButton buttonToolbarFilter;
 	private TextView buttonToolbarText;
 	private QuickSearchMainListFragment mainSearchFragment;
 	private QuickSearchHistoryListFragment historySearchFragment;
@@ -146,7 +148,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	}
 
 	@Override
-	@SuppressLint("PrivateResource")
+	@SuppressLint("PrivateResource, ValidFragment")
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
 		final MapActivity mapActivity = getMapActivity();
@@ -209,127 +211,172 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		buttonToolbarView = view.findViewById(R.id.button_toolbar_layout);
 		buttonToolbarImage = (ImageView) view.findViewById(R.id.buttonToolbarImage);
 		buttonToolbarImage.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_action_marker_dark));
-		buttonToolbarText = (TextView) view.findViewById(R.id.buttonToolbarTitle);
-		view.findViewById(R.id.buttonToolbar).setOnClickListener(new OnClickListener() {
+		buttonToolbarFilter = (ImageButton) view.findViewById(R.id.filterButton);
+		buttonToolbarFilter.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_action_filter_dark));
+		buttonToolbarFilter.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				SearchPhrase searchPhrase = searchUICore.getPhrase();
-				if (foundPartialLocation) {
-					QuickSearchCoordinatesFragment.showDialog(QuickSearchDialogFragment.this, searchPhrase.getUnknownSearchWord());
-				} else if (searchPhrase.isNoSelectedType() || searchPhrase.isLastWord(ObjectType.POI_TYPE)) {
-					PoiUIFilter filter;
-					if (searchPhrase.isNoSelectedType()) {
-						filter = app.getPoiFilters().getSearchByNamePOIFilter();
-						if (!Algorithms.isEmpty(searchPhrase.getUnknownSearchWord())) {
-							filter.setFilterByName(searchPhrase.getUnknownSearchWord());
-							filter.clearCurrentResults();
+				if (searchPhrase.isLastWord(POI_TYPE)) {
+					String filterId = null;
+					String filterByName = searchPhrase.getUnknownSearchPhrase();
+					Object object = searchPhrase.getLastSelectedWord().getResult().object;
+					if (object instanceof PoiUIFilter) {
+						PoiUIFilter model = (PoiUIFilter) object;
+						if (!Algorithms.isEmpty(model.getSavedFilterByName())) {
+							model.setFilterByName(model.getSavedFilterByName());
 						}
-					} else if (searchPhrase.getLastSelectedWord().getResult().object instanceof AbstractPoiType) {
-						if (searchPhrase.isNoSelectedType()) {
-							filter = new PoiUIFilter(null, app, "");
-						} else {
-							AbstractPoiType abstractPoiType = (AbstractPoiType) searchPhrase.getLastSelectedWord()
-									.getResult().object;
-							filter = new PoiUIFilter(abstractPoiType, app, "");
+						filterId = model.getFilterId();
+					} else if (object instanceof AbstractPoiType) {
+						AbstractPoiType abstractPoiType = (AbstractPoiType) object;
+						PoiUIFilter custom = app.getPoiFilters().getFilterById(PoiUIFilter.STD_PREFIX + abstractPoiType.getKeyName());
+						if (custom != null) {
+							custom.setFilterByName(null);
+							custom.clearFilter();
+							custom.updateTypesToAccept(abstractPoiType);
+							filterId = custom.getFilterId();
 						}
-						if (!Algorithms.isEmpty(searchPhrase.getUnknownSearchWord())) {
-							filter.setFilterByName(searchPhrase.getUnknownSearchWord());
-						}
-					} else {
-						filter = (PoiUIFilter) searchPhrase.getLastSelectedWord().getResult().object;
 					}
-					app.getPoiFilters().clearSelectedPoiFilters();
-					app.getPoiFilters().addSelectedPoiFilter(filter);
-
-					mapActivity.getContextMenu().closeActiveToolbar();
-					showToolbar();
-					getMapActivity().refreshMap();
-					hide();
-				} else {
-					SearchWord word = searchPhrase.getLastSelectedWord();
-					if (word != null && word.getLocation() != null) {
-						SearchResult searchResult = word.getResult();
-						String name = QuickSearchListItem.getName(app, searchResult);
-						String typeName = QuickSearchListItem.getTypeName(app, searchResult);
-						PointDescription pointDescription = new PointDescription(PointDescription.POINT_TYPE_ADDRESS, typeName, name);
-						app.getSettings().setMapLocationToShow(
-								searchResult.location.getLatitude(), searchResult.location.getLongitude(),
-								searchResult.preferredZoom, pointDescription, true, searchResult.object);
-
-						hideToolbar();
-						MapActivity.launchMapActivityMoveToTop(getActivity());
-						reloadHistory();
-						hide();
+					if (filterId != null) {
+						QuickSearchPoiFilterFragment.showDialog(
+								QuickSearchDialogFragment.this, filterByName, filterId);
 					}
 				}
 			}
 		});
+
+		buttonToolbarText = (TextView) view.findViewById(R.id.buttonToolbarTitle);
+		view.findViewById(R.id.buttonToolbar).setOnClickListener(
+				new OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						SearchPhrase searchPhrase = searchUICore.getPhrase();
+						if (foundPartialLocation) {
+							QuickSearchCoordinatesFragment.showDialog(QuickSearchDialogFragment.this, searchPhrase.getUnknownSearchWord());
+						} else if (searchPhrase.isNoSelectedType() || searchPhrase.isLastWord(POI_TYPE)) {
+							PoiUIFilter filter;
+							if (searchPhrase.isNoSelectedType()) {
+								filter = app.getPoiFilters().getSearchByNamePOIFilter();
+								if (!Algorithms.isEmpty(searchPhrase.getUnknownSearchWord())) {
+									filter.setFilterByName(searchPhrase.getUnknownSearchWord());
+									filter.clearCurrentResults();
+								}
+							} else if (searchPhrase.getLastSelectedWord().getResult().object instanceof AbstractPoiType) {
+								if (searchPhrase.isNoSelectedType()) {
+									filter = new PoiUIFilter(null, app, "");
+								} else {
+									AbstractPoiType abstractPoiType = (AbstractPoiType) searchPhrase.getLastSelectedWord()
+											.getResult().object;
+									filter = new PoiUIFilter(abstractPoiType, app, "");
+								}
+								if (!Algorithms.isEmpty(searchPhrase.getUnknownSearchWord())) {
+									filter.setFilterByName(searchPhrase.getUnknownSearchWord());
+								}
+							} else {
+								filter = (PoiUIFilter) searchPhrase.getLastSelectedWord().getResult().object;
+							}
+							app.getPoiFilters().clearSelectedPoiFilters();
+							app.getPoiFilters().addSelectedPoiFilter(filter);
+
+							mapActivity.getContextMenu().closeActiveToolbar();
+							showToolbar();
+							getMapActivity().refreshMap();
+							hide();
+						} else {
+							SearchWord word = searchPhrase.getLastSelectedWord();
+							if (word != null && word.getLocation() != null) {
+								SearchResult searchResult = word.getResult();
+								String name = QuickSearchListItem.getName(app, searchResult);
+								String typeName = QuickSearchListItem.getTypeName(app, searchResult);
+								PointDescription pointDescription = new PointDescription(PointDescription.POINT_TYPE_ADDRESS, typeName, name);
+								app.getSettings().setMapLocationToShow(
+										searchResult.location.getLatitude(), searchResult.location.getLongitude(),
+										searchResult.preferredZoom, pointDescription, true, searchResult.object);
+
+								hideToolbar();
+								MapActivity.launchMapActivityMoveToTop(getActivity());
+								reloadHistory();
+								hide();
+							}
+						}
+					}
+				}
+
+		);
 
 		toolbar = (Toolbar) view.findViewById(R.id.toolbar);
 		toolbar.setNavigationIcon(app.getIconsCache().getThemedIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha));
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
-		toolbar.setNavigationOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				dismiss();
-			}
-		});
+		toolbar.setNavigationOnClickListener(
+				new OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						dismiss();
+					}
+				}
+		);
 
 		toolbarEdit = (Toolbar) view.findViewById(R.id.toolbar_edit);
 		toolbarEdit.setNavigationIcon(app.getIconsCache().getIcon(R.drawable.ic_action_remove_dark));
 		toolbarEdit.setNavigationContentDescription(R.string.shared_string_cancel);
-		toolbarEdit.setNavigationOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				enableSelectionMode(false, -1);
-			}
-		});
+		toolbarEdit.setNavigationOnClickListener(
+				new OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						enableSelectionMode(false, -1);
+					}
+				}
+		);
 
 		titleEdit = (TextView) view.findViewById(R.id.titleEdit);
-		view.findViewById(R.id.shareButton).setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				List<HistoryEntry> historyEntries = new ArrayList<HistoryEntry>();
-				List<QuickSearchListItem> selectedItems = historySearchFragment.getListAdapter().getSelectedItems();
-				for (QuickSearchListItem searchListItem : selectedItems) {
-					HistoryEntry historyEntry = (HistoryEntry) searchListItem.getSearchResult().object;
-					historyEntries.add(historyEntry);
-				}
-				if (historyEntries.size() > 0) {
-					shareHistory(historyEntries);
-					enableSelectionMode(false, -1);
-				}
-			}
-		});
-		view.findViewById(R.id.deleteButton).setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-
-				new DialogFragment() {
-					@NonNull
+		view.findViewById(R.id.shareButton).setOnClickListener(
+				new OnClickListener() {
 					@Override
-					public Dialog onCreateDialog(Bundle savedInstanceState) {
-						AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-						builder.setTitle(R.string.confirmation_to_delete_history_items)
-								.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
-									@Override
-									public void onClick(DialogInterface dialog, int which) {
-										SearchHistoryHelper helper = SearchHistoryHelper.getInstance(app);
-										List<QuickSearchListItem> selectedItems = historySearchFragment.getListAdapter().getSelectedItems();
-										for (QuickSearchListItem searchListItem : selectedItems) {
-											HistoryEntry historyEntry = (HistoryEntry) searchListItem.getSearchResult().object;
-											helper.remove(historyEntry);
-										}
-										reloadHistory();
-										enableSelectionMode(false, -1);
-									}
-								})
-								.setNegativeButton(R.string.shared_string_no, null);
-						return builder.create();
+					public void onClick(View v) {
+						List<HistoryEntry> historyEntries = new ArrayList<HistoryEntry>();
+						List<QuickSearchListItem> selectedItems = historySearchFragment.getListAdapter().getSelectedItems();
+						for (QuickSearchListItem searchListItem : selectedItems) {
+							HistoryEntry historyEntry = (HistoryEntry) searchListItem.getSearchResult().object;
+							historyEntries.add(historyEntry);
+						}
+						if (historyEntries.size() > 0) {
+							shareHistory(historyEntries);
+							enableSelectionMode(false, -1);
+						}
 					}
-				}.show(getChildFragmentManager(), "DeleteHistoryConfirmationFragment");
-			}
-		});
+				}
+		);
+		view.findViewById(R.id.deleteButton).setOnClickListener(
+				new OnClickListener() {
+					@Override
+					public void onClick(View v) {
+
+						new DialogFragment() {
+							@NonNull
+							@Override
+							public Dialog onCreateDialog(Bundle savedInstanceState) {
+								AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+								builder.setTitle(R.string.confirmation_to_delete_history_items)
+										.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
+											@Override
+											public void onClick(DialogInterface dialog, int which) {
+												SearchHistoryHelper helper = SearchHistoryHelper.getInstance(app);
+												List<QuickSearchListItem> selectedItems = historySearchFragment.getListAdapter().getSelectedItems();
+												for (QuickSearchListItem searchListItem : selectedItems) {
+													HistoryEntry historyEntry = (HistoryEntry) searchListItem.getSearchResult().object;
+													helper.remove(historyEntry);
+												}
+												reloadHistory();
+												enableSelectionMode(false, -1);
+											}
+										})
+										.setNegativeButton(R.string.shared_string_no, null);
+								return builder.create();
+							}
+						}.show(getChildFragmentManager(), "DeleteHistoryConfirmationFragment");
+					}
+				}
+		);
 
 		viewPager = (LockableViewPager) view.findViewById(R.id.pager);
 		pagerAdapter = new SearchFragmentPagerAdapter(getChildFragmentManager(), getResources());
@@ -340,73 +387,80 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 		tabLayout = (TabLayout) view.findViewById(R.id.tab_layout);
 		tabLayout.setupWithViewPager(viewPager);
-		viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-			@Override
-			public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-			}
+		viewPager.addOnPageChangeListener(
+				new ViewPager.OnPageChangeListener() {
+					@Override
+					public void onPageScrolled(int position, float positionOffset,
+											   int positionOffsetPixels) {
+					}
 
-			@Override
-			public void onPageSelected(int position) {
-				hideKeyboard();
-			}
+					@Override
+					public void onPageSelected(int position) {
+						hideKeyboard();
+					}
 
-			@Override
-			public void onPageScrollStateChanged(int state) {
-			}
-		});
-
-		searchEditText = (EditText) view.findViewById(R.id.searchEditText);
-		searchEditText.addTextChangedListener(new TextWatcher() {
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-			}
-
-			@Override
-			public void onTextChanged(CharSequence s, int start, int before, int count) {
-			}
-
-			@Override
-			public void afterTextChanged(Editable s) {
-				String newQueryText = s.toString();
-				updateClearButtonAndHint();
-				updateClearButtonVisibility(true);
-				updateTabbarVisibility(newQueryText.length() == 0);
-				if (!searchQuery.equalsIgnoreCase(newQueryText)) {
-					searchQuery = newQueryText;
-					if (Algorithms.isEmpty(searchQuery)) {
-						searchUICore.resetPhrase();
-					} else {
-						runSearch();
+					@Override
+					public void onPageScrollStateChanged(int state) {
 					}
 				}
-			}
-		});
+		);
+
+		searchEditText = (EditText) view.findViewById(R.id.searchEditText);
+		searchEditText.addTextChangedListener(
+				new TextWatcher() {
+					@Override
+					public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+					}
+
+					@Override
+					public void onTextChanged(CharSequence s, int start, int before, int count) {
+					}
+
+					@Override
+					public void afterTextChanged(Editable s) {
+						String newQueryText = s.toString();
+						updateClearButtonAndHint();
+						updateClearButtonVisibility(true);
+						updateTabbarVisibility(newQueryText.length() == 0);
+						if (!searchQuery.equalsIgnoreCase(newQueryText)) {
+							searchQuery = newQueryText;
+							if (Algorithms.isEmpty(searchQuery)) {
+								searchUICore.resetPhrase();
+							} else {
+								runSearch();
+							}
+						}
+					}
+				}
+		);
 
 		progressBar = (ProgressBar) view.findViewById(R.id.searchProgressBar);
 		clearButton = (ImageButton) view.findViewById(R.id.clearButton);
 		clearButton.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_action_remove_dark));
-		clearButton.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if (searchEditText.getText().length() > 0) {
-					String newText = searchUICore.getPhrase().getTextWithoutLastWord();
-					searchEditText.setText(newText);
-					searchEditText.setSelection(newText.length());
-				} else if (useMapCenter && location != null) {
-					useMapCenter = false;
-					centerLatLon = null;
-					updateUseMapCenterUI();
-					startLocationUpdate();
-					LatLon centerLatLon = new LatLon(location.getLatitude(), location.getLongitude());
-					SearchSettings ss = searchUICore.getSearchSettings().setOriginalLocation(
-							new LatLon(centerLatLon.getLatitude(), centerLatLon.getLongitude()));
-					searchUICore.updateSettings(ss);
-					updateClearButtonAndHint();
-					updateClearButtonVisibility(true);
+		clearButton.setOnClickListener(
+				new OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						if (searchEditText.getText().length() > 0) {
+							String newText = searchUICore.getPhrase().getTextWithoutLastWord();
+							searchEditText.setText(newText);
+							searchEditText.setSelection(newText.length());
+						} else if (useMapCenter && location != null) {
+							useMapCenter = false;
+							centerLatLon = null;
+							updateUseMapCenterUI();
+							startLocationUpdate();
+							LatLon centerLatLon = new LatLon(location.getLatitude(), location.getLongitude());
+							SearchSettings ss = searchUICore.getSearchSettings().setOriginalLocation(
+									new LatLon(centerLatLon.getLatitude(), centerLatLon.getLongitude()));
+							searchUICore.updateSettings(ss);
+							updateClearButtonAndHint();
+							updateClearButtonVisibility(true);
+						}
+						updateToolbarButton();
+					}
 				}
-				updateToolbarButton();
-			}
-		});
+		);
 
 		setupSearch(mapActivity);
 
@@ -515,10 +569,10 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	}
 
 	private void updateToolbarButton() {
+		SearchWord word = searchUICore.getPhrase().getLastSelectedWord();
 		if (foundPartialLocation) {
 			buttonToolbarText.setText(app.getString(R.string.advanced_coords_search).toUpperCase());
 		} else if (searchEditText.getText().length() > 0) {
-			SearchWord word = searchUICore.getPhrase().getLastSelectedWord();
 			if (word != null && word.getResult() != null) {
 				buttonToolbarText.setText(app.getString(R.string.show_something_on_map, word.getResult().localeName).toUpperCase());
 			} else {
@@ -527,6 +581,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		} else {
 			buttonToolbarText.setText(app.getString(R.string.shared_string_show_on_map).toUpperCase());
 		}
+		buttonToolbarFilter.setVisibility(word != null && word.getType() != null && word.getType().equals(POI_TYPE) ? View.VISIBLE : View.GONE);
 	}
 
 	private void setupSearch(final MapActivity mapActivity) {
@@ -991,6 +1046,16 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			searchUICore.updateSettings(settings.setRadiusLevel(1));
 		}
 		runCoreSearch(txt, false, false);
+	}
+
+	public void replaceQueryWithUiFilter(PoiUIFilter filter) {
+		SearchPhrase searchPhrase = searchUICore.getPhrase();
+		if (searchPhrase.isLastWord(POI_TYPE)) {
+			SearchResult sr = searchPhrase.getLastSelectedWord().getResult();
+			sr.object = filter;
+			String txt = searchUICore.getPhrase().getText(true);
+			runCoreSearch(txt, false, false);
+		}
 	}
 
 	private void addMoreButton() {

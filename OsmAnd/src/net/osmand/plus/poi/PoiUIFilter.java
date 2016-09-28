@@ -44,9 +44,8 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 	public final static String CUSTOM_FILTER_ID = USER_PREFIX + "custom_id"; //$NON-NLS-1$
 	public final static String BY_NAME_FILTER_ID = USER_PREFIX + "by_name"; //$NON-NLS-1$
 
-	private Map<PoiCategory, LinkedHashSet<String>> acceptedTypes = new LinkedHashMap<PoiCategory,
-			LinkedHashSet<String>>();
-	private Map<String, PoiType> poiAdditionals = new HashMap<String, PoiType>();
+	private Map<PoiCategory, LinkedHashSet<String>> acceptedTypes = new LinkedHashMap<>();
+	private Map<String, PoiType> poiAdditionals = new HashMap<>();
 
 	protected String filterId;
 	protected String standardIconId = "";
@@ -455,7 +454,7 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 	}
 
 	public void clearFilter() {
-		acceptedTypes = new LinkedHashMap<PoiCategory, LinkedHashSet<String>>();
+		acceptedTypes = new LinkedHashMap<>();
 		poiAdditionals.clear();
 	}
 

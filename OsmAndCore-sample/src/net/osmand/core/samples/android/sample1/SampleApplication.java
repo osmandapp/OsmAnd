@@ -78,6 +78,11 @@ public class SampleApplication extends Application {
 				}
 				return null;
 			}
+
+			@Override
+			public String getTranslation(String keyName) {
+				return null;
+			}
 		});
 	}
 

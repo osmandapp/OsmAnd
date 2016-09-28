@@ -1,5 +1,8 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
 <resources>
+	<string name="poi_fuel_type">Fuel type</string>
+	<string name="poi_payment_type">Payment type</string>
+	<string name="poi_additional_type">Additional</string>
 <!--  categories -->
 	<string name="poi_shop">Store</string>
 		<string name="poi_shop_food">Food store</string>
