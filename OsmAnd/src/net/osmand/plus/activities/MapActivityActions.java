@@ -703,7 +703,7 @@ public class MapActivityActions implements DialogProvider {
 					}
 				}).createItem());
 
-		if (Version.isGooglePlayEnabled(app)) {
+		if (Version.isGooglePlayEnabled(app) || Version.isDeveloperVersion(app)) {
 			optionsMenuHelper.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.osm_live, mapActivity)
 					.setIcon(R.drawable.ic_action_osm_live)
 					.setListener(new ContextMenuAdapter.ItemClickListener() {
