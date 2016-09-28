@@ -2562,4 +2562,10 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="osm_live_subscription_desc">الاشتراك يتيح تحديثات كل ساعة، يوميا، أسبوعيا والتحميل الغير محدود لجميع الخرائط حول العالم.</string>
     <string name="driving_region_australia">أستراليا</string>
     <string name="lang_kab">قبائلي</string>
+    <string name="shared_string_filters">فلترات</string>
+    <string name="apply_filters">تطبيق الفلترات</string>
+    <string name="save_filter">حفظ الفلتر</string>
+    <string name="delete_filter">حذف الفلتر</string>
+    <string name="new_filter">فلتر جديد</string>
+    <string name="new_filter_desc">رجاءا أدخل اسم للفلتر الجديد. ستجده ضمن لائحة الفئات.</string>
     </resources>
