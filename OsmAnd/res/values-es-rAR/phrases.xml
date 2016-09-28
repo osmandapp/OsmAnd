@@ -958,7 +958,7 @@
 
 <string name="poi_recycling_centre">Tipo: Centro de reciclaje</string>
 	<string name="poi_recycling_container">Tipo: Contenedor</string>
-	<string name="poi_recycling_glass">Vidrio</string>
+	<string name="poi_recycling_glass">Reciclado de vidrio</string>
 	<string name="poi_recycling_paper">Papel</string>
 	<string name="poi_recycling_clothes">Ropa</string>
 	<string name="poi_recycling_cans">Latas</string>
