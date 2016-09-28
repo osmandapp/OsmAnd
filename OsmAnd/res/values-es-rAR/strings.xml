@@ -2113,7 +2113,7 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="update">Actualizar</string>
     <string name="only_download_over_wifi">Descargar sólo por WiFi</string>
     <string name="live_update">Actualización en vivo</string>
-    <string name="update_now">Actualizar</string>
+    <string name="update_now">Actualizar ahora</string>
 <string name="route_distance">Distancia:</string>
     <string name="route_duration">Duración:</string>
     <string name="missing_write_external_storage_permission">La aplicación no tiene permiso para usar la tarjeta SD</string>
