@@ -2423,4 +2423,11 @@ Si necesitas ayuda con la aplicación OsmAnd, contacte con nuestro equipo de sop
     <string name="donation_to_osm_desc">Parte de tu donación se envía a usuarios que realicen cambios en OpenStreetMap. El costo de la suscripción sigue siendo la misma.</string>
     <string name="osm_live_subscription_desc">La suscripción permite actualizaciones cada hora, día o semana y descargas ilimitadas para todos los mapas del mundo.</string>
     <string name="driving_region_australia">Australia</string>
+    <string name="shared_string_filters">Filtros</string>
+    <string name="apply_filters">Aplicar filtros</string>
+    <string name="save_filter">Guardar filtro</string>
+    <string name="delete_filter">Borrar filtro</string>
+    <string name="new_filter">Nuevo filtro</string>
+    <string name="new_filter_desc">Ingresa el nombre para el nuevo filtro. Puedes buscarlo en la lista de Categorías.</string>
+    <string name="lang_kab">Cabilio</string>
     </resources>
