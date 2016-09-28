@@ -2320,4 +2320,10 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="lang_kab">Kabyle</string>
     <string name="rendering_attr_hideOverground_name">Objets au sol</string>
     <string name="lang_hsb">Sorabe (haut)</string>
+    <string name="shared_string_filters">Filtres</string>
+    <string name="apply_filters">Appliquer les filtres</string>
+    <string name="save_filter">Mémoriser les filtres</string>
+    <string name="delete_filter">Retirer les filtres</string>
+    <string name="new_filter">Nouveau filtre</string>
+    <string name="new_filter_desc">Merci de saisir un nom pour ce filtre. Vous le retrouverez dans la liste des Catégories.</string>
     </resources>
