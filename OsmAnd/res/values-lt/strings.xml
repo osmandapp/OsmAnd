@@ -1859,7 +1859,7 @@ Norėdami grįžti į įprastinių OsmAnd žemėlapių atvaizdavimą papraščia
     <string name="osm_changes_added_to_local_edits">OSM pakeitimai įtraukti į lokalius pakeitimus</string>
     <string name="mark_to_delete">Pažymėkite, jei norite ištrinti</string>
     <string name="osmo_grop_name_length_alert">Grupės pavadinimą privalo sudaryti mažiausiai 3 simboliai!</string>
-    <string name="local_osm_changes_upload_all_confirm">Jūs ketinate nusiųsti %1$d pakitimų į OSM. Ar tikrai?</string>
+    <string name="local_osm_changes_upload_all_confirm">Jūs ketinate nusiųsti %1$d pakeitimų į OSM. Ar tikrai?</string>
     <string name="confirmation_to_clear_history">Ar norite išvalyti istoriją?</string>
     <string name="delay_to_start_navigation_descr">Nurodykite maršuto planavimo ekrane delsos laiką</string>
     <string name="shared_string_go">Pirmyn</string>
@@ -2128,7 +2128,7 @@ This view can be reverted by either de-activating it again here, or by changing 
     <string name="instalation_troubleshooting_item">Diegimas ir problemų sprendimas</string>
     <string name="versions_item">Versijos</string>
     <string name="contact_us">Susisiekti</string>
-    <string name="world_map_download_descr">Pasaulio žemėlapis (padengiantis visą pasauli stambiu masteliu) neįdiegtas arba pasenęs. Prašome atsisiųsti arba atnaujinti.</string>
+    <string name="world_map_download_descr">Pasaulio žemėlapis (padengiantis visą pasauli stambiu masteliu) neįdiegtas arba pasenęs. Prašome atsisiųsti arba atnaujinti kad galėtumėte matyti pasaulinę apžvalgą.</string>
     <string name="share_geo">geo:</string>
     <string name="nm">jm</string>
     <string name="shared_string_trip_recording">Kelionės įrašymas</string>
@@ -2250,22 +2250,22 @@ This view can be reverted by either de-activating it again here, or by changing 
     <string name="av_audio_bitrate">Audio bitų sparta</string>
     <string name="av_audio_bitrate_descr">Pasirinkite audio bitų spartą</string>
     <string name="release_2_2">"
- • New context-sensitive UI for tapping locations on the map and on other screens
+ • Nauja kontekstinė sąsaja skirta vietovės pasirinkimui žemėlapyje ir kituose languose
 
 
- • Žemėlapio ekranas rodomas iš karto, nebent \"Rodyti valdymo skydelį startuojant programai\" yra pažymėtas
+ • Žemėlapio ekranas rodomas iš karto, nebent pasirinkimas \"Rodyti valdymo skydelį startuojant programai\" yra pažymėtas
 
 
- • Configure which and how cards are displayed on the dashboard
+ • Nustatykite kaip ir kurios kortelės bus rodomos valdymo skydelyje
 
 
- • Bypass the dashboard if you like menu-based app control
+ • Nenaudokite valdymo skydelio jei jums patinka programos valdymas meniu pagalba
 
 
  • Tam, kad būtų atsiųsti žemėlapiai, pakanka paliesti regioną pasaulio žemėlapyje
 
 
- • POI Search now supports more specific queries
+ • LV paieškoje galima naudoti tikslesnes užklausas
 
 
  • Pagerintas LV ir OSM redagavimo funkcionalumas
