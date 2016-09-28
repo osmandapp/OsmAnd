@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="poi_shop">Compras</string>
-		<string name="poi_shop_food">Alimentación</string>
+<resources><string name="poi_shop">Tienda</string>
+		<string name="poi_shop_food">Tienda de comestibles</string>
 	<string name="poi_emergency">Emergencia</string>
 	<string name="poi_transportation">Transporte</string>
-		<string name="poi_road_obstacle">Obstáculo de carretera</string>
+		<string name="poi_road_obstacle">Obstáculo en la carretera</string>
 		<string name="poi_filling_station">Gasolineras</string>
 		<string name="poi_personal_transport">Transporte particular</string>
 		<string name="poi_public_transport">Transporte público</string>
@@ -11,7 +11,7 @@
 		<string name="poi_water_transport">Transporte fluvial</string>
 		<string name="poi_bicycle_transport">Transporte ciclista</string>
 		<string name="poi_aerialway_transport">Transporte elevado</string>
-	<string name="poi_man_made">Artificial</string>
+	<string name="poi_man_made">Estructura artificial</string>
 		<string name="poi_transport_construction">Transporte en construcción</string>
 		<string name="poi_water_supply">Suministro de agua</string>
 		<string name="poi_power">Energía</string>
@@ -2827,6 +2827,6 @@
 <string name="poi_spices">Tienda de especias</string>
 
 <string name="poi_fuel_type">Tipo de combustible</string>
-	<string name="poi_payment_type">Tipo de pago</string>
+	<string name="poi_payment_type">Forma de pago</string>
 	<string name="poi_additional_type">Adicional</string>
 </resources>
