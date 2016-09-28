@@ -2654,4 +2654,10 @@ Hvis du  ønsker at støtte OsmAnd og OSM, er dette en god måde at gøre det p�
     <string name="osm_live_subscription_desc">Abonnement giver mulighed for opdateringer hver time, dagligt, ugentligt og ubegrænset hentning af alle kort i verden.</string>
     <string name="driving_region_australia">Australien</string>
     <string name="lang_kab">Kabylsk</string>
+    <string name="shared_string_filters">Filtre</string>
+    <string name="apply_filters">Anvend filtre</string>
+    <string name="save_filter">Gem filter</string>
+    <string name="delete_filter">Slet filter</string>
+    <string name="new_filter">Nyt filter</string>
+    <string name="new_filter_desc">Angiv et navn til det nye filter. Find det på listen over kategorier.</string>
     </resources>
