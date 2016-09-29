@@ -2430,4 +2430,10 @@ Ak potrebuje pomoc s aplikáciou OsmAnd, kontaktuje podporu: support@osmand.net.
     <string name="osm_live_subscription_desc">Predplatné umožňuje hodinové, denné, týždenné aktualizácie a neobmedzené sťahovanie máp celého sveta.</string>
     <string name="driving_region_australia">Austrália</string>
     <string name="lang_kab">Kabylsky</string>
+    <string name="shared_string_filters">Filtre</string>
+    <string name="apply_filters">Použiť filtre</string>
+    <string name="save_filter">Uložiť filter</string>
+    <string name="delete_filter">Vymazať filter</string>
+    <string name="new_filter">Nový filter</string>
+    <string name="new_filter_desc">Prosím zadajte názov pre nový filter. Nájdete ho v zozname kategórií.</string>
     </resources>
