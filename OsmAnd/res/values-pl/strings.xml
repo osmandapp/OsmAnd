@@ -2628,4 +2628,10 @@ Jeśli potrzebujesz pomocy podczas używania OsmAnd, prosimy o kontakt z naszym 
     <string name="osm_live_subscription_desc">Subskrypcje pozwalają na cogodzinne, codzienne i cotygodniowe uaktualnienia i nieograniczone liczbą pobieranie map całego świata.</string>
     <string name="driving_region_australia">Australia</string>
     <string name="lang_kab">Kabylski</string>
+    <string name="shared_string_filters">Filtry</string>
+    <string name="apply_filters">Zastosuj filtry</string>
+    <string name="save_filter">Zapisz filtr</string>
+    <string name="delete_filter">Usuń filtr</string>
+    <string name="new_filter">Nowy filtr</string>
+    <string name="new_filter_desc">Proszę wprowadzić nazwę nowego filtra. Będzie on dostępny na liście kategorii.</string>
     </resources>
