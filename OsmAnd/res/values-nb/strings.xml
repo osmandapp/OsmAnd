@@ -1689,7 +1689,7 @@
     <string name="shared_string_from">fra</string>
     <string name="search_categories">Kategorier</string>
     <string name="back_to_search">Tilbake til søk</string>
-    <string name="confirmation_to_delete_history_items">Slette valgte historikkelementer?</string>
+    <string name="confirmation_to_delete_history_items">Vil du fjerne de valgte elementene fra historikken?</string>
     <string name="show_something_on_map">Vis %1$s på kartet</string>
     <string name="dist_away_from_my_location">Søk %1$s unna</string>
     <string name="show_on_map">Vis på kartet</string>
@@ -1734,4 +1734,10 @@
     <string name="search_map">Søker etter kart…</string>
     <string name="driving_region_australia">Australia</string>
     <string name="no_update_info">Ikke vis oppdateringer</string>
+    <string name="shared_string_filters">Filtre</string>
+    <string name="apply_filters">Bruk filtre</string>
+    <string name="save_filter">Lagre filter</string>
+    <string name="delete_filter">Slett filter</string>
+    <string name="new_filter">Nytt filter</string>
+    <string name="new_filter_desc">Angi navn for det nye filteret. Du finner det i kategorilisten.</string>
     </resources>
