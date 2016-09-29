@@ -1788,4 +1788,8 @@
 	<string name="poi_route_railway_ref">Vasútvonal</string>
 
 	<string name="poi_historic_yes">Történelmi objektum</string>
+	<string name="poi_fuel_type">Üzemanyag típus</string>
+	<string name="poi_payment_type">Fizetési mód</string>
+	<string name="poi_trash_disposal">Hulladék konténer</string>
+		<string name="poi_beacon">Jeladó</string>
 	</resources>
