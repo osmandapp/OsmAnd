@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources><string name="poi_shop">Compras</string>
-		<string name="poi_shop_food">Alimentación</string>
+		<string name="poi_shop_food">Tienda de comidas</string>
 	<string name="poi_emergency">Emergencia</string>
 	<string name="poi_transportation">Transporte</string>
 		<string name="poi_road_obstacle">Obstáculo en el camino</string>
