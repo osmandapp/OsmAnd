@@ -212,7 +212,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		buttonToolbarImage = (ImageView) view.findViewById(R.id.buttonToolbarImage);
 		buttonToolbarImage.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_action_marker_dark));
 		buttonToolbarFilter = (ImageButton) view.findViewById(R.id.filterButton);
-		buttonToolbarFilter.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_action_filter_dark));
+		buttonToolbarFilter.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_action_filter));
 		buttonToolbarFilter.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
