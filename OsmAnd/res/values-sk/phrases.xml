@@ -2011,4 +2011,85 @@
 	<string name="poi_payment_troika_yes">Prijíma karty Troika</string>
 	<string name="poi_ventilation_shaft">Vetracia šachta</string>
 
+	<string name="poi_disease_malaria_yes">Malária: áno</string>
+	<string name="poi_disease_malaria_no">Malária: nie</string>
+	<string name="poi_disease_ebola_yes">Ebola: áno</string>
+	<string name="poi_disease_ebola_no">Ebola: nie</string>
+	<string name="poi_disease_autism_yes">Autizmus: áno</string>
+	<string name="poi_disease_autism_no">Autizmus: nie</string>
+	<string name="poi_disease_aids_yes">AIDS: áno</string>
+	<string name="poi_disease_aids_no">AIDS: nie</string>
+
+	<string name="poi_capacity_beds">Kapacita (postele)</string>
+
+	<string name="poi_health_amenity_type_first_aid_kit">Lekárnička na prvú pomoc</string>
+	<string name="poi_health_amenity_type_scales">Verejná váha</string>
+
+	<string name="poi_health_person_type_assistant">Úloha zdravotníka: asistent</string>
+	<string name="poi_health_person_type_healer">Úloha zdravotníka: liečiteľ</string>
+	<string name="poi_health_person_type_midwife">Úloha zdravotníka: pôrodná asistentka</string>
+	<string name="poi_health_person_type_nurse">Úloha zdravotníka: sestra</string>
+	<string name="poi_health_person_type_paramedic">Úloha zdravotníka: zdravotník</string>
+	<string name="poi_health_person_type_physician">Úloha zdravotníka: lekár</string>
+	<string name="poi_health_person_type_podologist">Úloha zdravotníka: doktor anatómie</string>
+	<string name="poi_health_person_type_psychologist">Úloha zdravotníka: psychológ</string>
+	<string name="poi_health_person_type_therapist">Úloha zdravotníka: terapeut</string>
+	<string name="poi_health_person_type_physician_assitant">Úloha zdravotníka: asistujúci lekár</string>
+	<string name="poi_health_person_type_technician">Úloha zdravotníka: technik</string>
+	<string name="poi_health_person_type_witchdoctor">Úloha zdravotníka: šaman</string>
+
+	<string name="poi_counselling_type_addiction_yes">Poradenstvo (závislosti): áno</string>
+	<string name="poi_counselling_type_addiction_no">Poradenstvo (závislosti): nie</string>
+	<string name="poi_counselling_type_antenatal_yes">Poradenstvo (predpôrodné): áno</string>
+	<string name="poi_counselling_type_antenatal_no">Poradenstvo (predpôrodné): nie</string>
+	<string name="poi_counselling_type_child_guidance_yes">Poradenstvo (výchova detí): áno</string>
+	<string name="poi_counselling_type_child_guidance_no">Poradenstvo (výchova detí): nie</string>
+	<string name="poi_counselling_type_couple_yes">Poradenstvo (partnerské): áno</string>
+	<string name="poi_counselling_type_couple_no">Poradenstvo (partnerské): nie</string>
+	<string name="poi_counselling_type_crisis_yes">Poradenstvo (krízové): áno</string>
+	<string name="poi_counselling_type_crisis_no">Poradenstvo (krízové): nie</string>
+	<string name="poi_counselling_type_drugs_yes">Poradenstvo (drogové): áno</string>
+	<string name="poi_counselling_type_drugs_no">Poradenstvo (drogové): nie</string>
+	<string name="poi_counselling_type_education_yes">Poradenstvo (vzdelávanie): áno</string>
+	<string name="poi_counselling_type_education_no">Poradenstvo (vzdelávanie): nie</string>
+	<string name="poi_counselling_type_family_yes">Poradenstvo (rodinné): áno</string>
+	<string name="poi_counselling_type_family_no">Poradenstvo (rodinné): nie</string>
+	<string name="poi_counselling_type_homeless_yes">Poradenstvo (pre bezdomovcov): áno</string>
+	<string name="poi_counselling_type_homeless_no">Poradenstvo (pre bezdomovcov): nie</string>
+	<string name="poi_counselling_type_immigrant_yes">Poradenstvo (prisťahovalecké): áno</string>
+	<string name="poi_counselling_type_immigrant_no">Poradenstvo (prisťahovalecké): nie</string>
+	<string name="poi_counselling_type_marriage_yes">Poradenstvo (manželské): áno</string>
+	<string name="poi_counselling_type_marriage_no">Poradenstvo (manželské): nie</string>
+	<string name="poi_counselling_type_nutrition_yes">Poradenstvo (výživové): áno</string>
+	<string name="poi_counselling_type_nutrition_nfire_hydo">Poradenstvo (výživové): nie</string>
+	<string name="poi_counselling_type_rehabilitation_yes">Poradenstvo (rehabilitačné): áno</string>
+	<string name="poi_counselling_type_rehabilitation_no">Poradenstvo (rehabilitačné): nie</string>
+	<string name="poi_counselling_type_sexual_yes">Poradenstvo (sexuálne): áno</string>
+	<string name="poi_counselling_type_sexual_no">Poradenstvo (sexuálne): nie</string>
+	<string name="poi_counselling_type_sexual_abuse_yes">Poradenstvo (sexuálne zneužívanie): áno</string>
+	<string name="poi_counselling_type_sexual_abuse_no">Poradenstvo (sexuálne zneužívanie): nie</string>
+	<string name="poi_counselling_type_victim_yes">Poradenstvo (pre obete): áno</string>
+	<string name="poi_counselling_type_victim_no">Poradenstvo (pre obete): nie</string>
+	<string name="poi_counselling_type_violence_yes">Poradenstvo (násilie): áno</string>
+	<string name="poi_counselling_type_violence_no">Poradenstvo (násilie): nie</string>
+
+	<string name="poi_provided_for_infant_yes">Poskytované dojčatám: áno</string>
+	<string name="poi_provided_for_infant_no">Poskytované dojčatám: nie</string>
+	<string name="poi_provided_for_toddler_yes">Poskytované batoľatám: áno</string>
+	<string name="poi_provided_for_toddler_no">Poskytované batoľatám: nie</string>
+	<string name="poi_provided_for_child_yes">Poskytované deťom: áno</string>
+	<string name="poi_provided_for_child_no">Poskytované deťom: nie</string>
+	<string name="poi_provided_for_adult_yes">Poskytované dospelým: áno</string>
+	<string name="poi_provided_for_adult_no">Poskytované dospelým: nie</string>
+	<string name="poi_provided_for_woman_yes">Poskytované ženám: áno</string>
+	<string name="poi_provided_for_woman_no">Poskytované ženám: nie</string>
+	<string name="poi_provided_for_senior_yes">Poskytované seniorom: áno</string>
+	<string name="poi_provided_for_senior_no">Poskytované seniorom: nie</string>
+	<string name="poi_provided_for_girl_yes">Poskytované dievčatám: áno</string>
+	<string name="poi_provided_for_girl_no">Poskytované dievčatám: nie</string>
+	<string name="poi_provided_for_man_yes">Poskytované mužom: áno</string>
+	<string name="poi_provided_for_man_no">Poskytované mužom: nie</string>
+	<string name="poi_provided_for_boy_yes">Poskytované chlapcom: áno</string>
+	<string name="poi_provided_for_boy_no">Poskytované chlapcom: nie</string>
+
 	</resources>
