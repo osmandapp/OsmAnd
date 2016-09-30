@@ -39,7 +39,8 @@ public class MapPoiTypes {
 	private boolean init;
 	Map<String, PoiType> poiTypesByTag = new LinkedHashMap<String, PoiType>();
 	Map<String, String> deprecatedTags = new LinkedHashMap<String, String>();
-	
+	Map<String, String> poiAdditionalCategoryIcons = new LinkedHashMap<String, String>();
+
 
 	public MapPoiTypes(String fileName) {
 		this.resourceName = fileName;
@@ -86,6 +87,10 @@ public class MapPoiTypes {
 			otherMapCategory = getPoiCategoryByName("Other", true);
 		}
 		return otherMapCategory;
+	}
+
+	public String getPoiAdditionalCategoryIcon(String category) {
+		return poiAdditionalCategoryIcons.get(category);
 	}
 
 	public List<PoiFilter> getTopVisibleFilters() {
@@ -315,6 +320,10 @@ public class MapPoiTypes {
 					} else if (name.equals("poi_additional_category")) {
 						if (lastPoiAdditionalCategory == null) {
 							lastPoiAdditionalCategory = parser.getAttributeValue("", "name");
+							String icon = parser.getAttributeValue("", "icon");
+							if (!Algorithms.isEmpty(icon)) {
+								poiAdditionalCategoryIcons.put(lastPoiAdditionalCategory, icon);
+							}
 						}
 
 					} else if (name.equals("poi_type")) {

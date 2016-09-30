@@ -29,6 +29,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import net.osmand.AndroidUtils;
+import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmandApplication;
@@ -405,6 +406,7 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 
 	private List<PoiFilterListItem> getListItems() {
 		OsmandApplication app = getMyApplication();
+		MapPoiTypes poiTypes = app.getPoiTypes();
 		int groupId = 0;
 		List<PoiFilterListItem> items = new ArrayList<>();
 		items.add(new PoiFilterListItem(PoiFilterListItemType.DIVIDER, 0, null, -1, false, false, false, null, null));
@@ -418,7 +420,7 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 				selectedPoiAdditionals.contains(keyNameOpen24), null, keyNameOpen24));
 
 		Map<String, PoiType> poiAdditionals = filter.getPoiAdditionals();
-		List<PoiType> otherAdditionalCategories = app.getPoiTypes().getOtherMapCategory().getPoiAdditionalsCategorized();
+		List<PoiType> otherAdditionalCategories = poiTypes.getOtherMapCategory().getPoiAdditionalsCategorized();
 		if (poiAdditionals != null) {
 			Map<String, Set<String>> additionalsMap = new TreeMap<>();
 			extractPoiAdditionals(poiAdditionals.values(), additionalsMap, false);
@@ -427,11 +429,22 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 			if (additionalsMap.size() > 0) {
 				for (Entry<String, Set<String>> entry : additionalsMap.entrySet()) {
 					String category = entry.getKey();
+					String categoryLocalizedName = poiTypes.getPoiTranslation(category);
 					boolean expanded = !collapsedCategories.contains(category);
 					boolean showAll = showAllCategories.contains(category);
 					items.add(new PoiFilterListItem(PoiFilterListItemType.DIVIDER, 0, null, -1, false, false, false, null, null));
+
+					String categoryIconStr = poiTypes.getPoiAdditionalCategoryIcon(category);
+					int categoryIconId = 0;
+					if (!Algorithms.isEmpty(categoryIconStr)) {
+						categoryIconId = getResources().getIdentifier(categoryIconStr, "drawable", app.getPackageName());
+					}
+					if (categoryIconId == 0) {
+						categoryIconId = R.drawable.ic_action_folder_stroke;
+					}
+
 					items.add(new PoiFilterListItem(PoiFilterListItemType.GROUP_HEADER,
-							R.drawable.ic_action_folder_stroke, category, ++groupId, true, expanded, false, category, null));
+							categoryIconId, categoryLocalizedName, ++groupId, true, expanded, false, category, null));
 					List<String> poiTypeNames = new ArrayList<>(entry.getValue());
 					Collections.sort(poiTypeNames);
 					for (String poiTypeName : poiTypeNames) {
@@ -451,7 +464,7 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 
 	private void extractPoiAdditionals(Collection<PoiType> poiAdditionals, Map<String, Set<String>> additionalsMap, boolean extractAll) {
 		for (PoiType poiType : poiAdditionals) {
-			String category = poiType.getPoiAdditionalCategoryTranslation();
+			String category = poiType.getPoiAdditionalCategory();
 			if (category == null) {
 				category = "";
 			}
