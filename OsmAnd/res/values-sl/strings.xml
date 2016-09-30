@@ -2582,4 +2582,15 @@ V kolikor naletite na težave s programom OsmAnd, prosimo, stopite v stik s skup
     <string name="si_mi_meters">Milje/Metri</string>
     <string name="lang_kab">Kabili</string>
     <string name="driving_region_australia">Avstralija</string>
+    <string name="shared_string_filters">Filtri</string>
+    <string name="apply_filters">Uveljavi filtre</string>
+    <string name="save_filter">Shrani filter</string>
+    <string name="delete_filter">Izbriši filter</string>
+    <string name="new_filter">Nov filter</string>
+    <string name="new_filter_desc">Ime novega filtra, ki se bo pojavilo na seznamu kategorij.</string>
+    <string name="osm_live_payment_desc">Naročnina bo obračunana vsak mesec. Naročnino je mogoče kadarkoli preklicati na Google Play.</string>
+    <string name="donation_to_osm_desc">Del donacije bo poslan uporabnikom OSM, ki so poslali spremembe na OpenStreetMap. Vsota naročnine ostaja nespremenjena.</string>
+    <string name="osm_live_subscription_desc">Naročnina omogoča urne, dnevne ali tedenske posodobitve in neomejene prejeme kateregakoli dela zemljevida.</string>
+    <string name="osm_live_banner_desc">Pridobite neomejene prejeme zemljevidov in drugih posodobitev več kot le enkrat mesečno: vsako uro, enkrat na dan ali enkrat tedensko.</string>
+    <string name="osmand_plus_banner_desc">Polna različica OsmAnd z neomejenimi posodobitvami zemljevidov in mesečne posodobitve.</string>
     </resources>
