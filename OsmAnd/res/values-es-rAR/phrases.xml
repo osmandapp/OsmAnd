@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="poi_shop">Compras</string>
+<resources><string name="poi_shop">Negocio</string>
 		<string name="poi_shop_food">Tienda de comidas</string>
 	<string name="poi_emergency">Emergencia</string>
 	<string name="poi_transportation">Transporte</string>
