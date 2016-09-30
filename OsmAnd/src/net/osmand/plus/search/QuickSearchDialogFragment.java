@@ -133,6 +133,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	private boolean newSearch;
 	private boolean interruptedSearch;
 	private long hideTimeMs;
+	private boolean poiFilterApplied;
 
 	private static final double DISTANCE_THRESHOLD = 70000; // 70km
 	private static final int EXPIRATION_TIME_MIN = 10; // 10 minutes
@@ -219,7 +220,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 				SearchPhrase searchPhrase = searchUICore.getPhrase();
 				if (searchPhrase.isLastWord(POI_TYPE)) {
 					String filterId = null;
-					String filterByName = searchPhrase.getUnknownSearchPhrase();
+					String filterByName = searchPhrase.getUnknownSearchPhrase().trim();
 					Object object = searchPhrase.getLastSelectedWord().getResult().object;
 					if (object instanceof PoiUIFilter) {
 						PoiUIFilter model = (PoiUIFilter) object;
@@ -421,7 +422,12 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 						String newQueryText = s.toString();
 						updateClearButtonAndHint();
 						updateClearButtonVisibility(true);
-						updateTabbarVisibility(newQueryText.length() == 0);
+						boolean textEmpty = newQueryText.length() == 0;
+						updateTabbarVisibility(textEmpty);
+						if (textEmpty && poiFilterApplied) {
+							poiFilterApplied = false;
+							reloadCategories();
+						}
 						if (!searchQuery.equalsIgnoreCase(newQueryText)) {
 							searchQuery = newQueryText;
 							if (Algorithms.isEmpty(searchQuery)) {
@@ -581,7 +587,16 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		} else {
 			buttonToolbarText.setText(app.getString(R.string.shared_string_show_on_map).toUpperCase());
 		}
-		buttonToolbarFilter.setVisibility(word != null && word.getType() != null && word.getType().equals(POI_TYPE) ? View.VISIBLE : View.GONE);
+		boolean filterButtonVisible = word != null && word.getType() != null && word.getType().equals(POI_TYPE);
+		buttonToolbarFilter.setVisibility(filterButtonVisible ? View.VISIBLE : View.GONE);
+		if (filterButtonVisible) {
+			if (word.getResult().object instanceof PoiUIFilter) {
+				buttonToolbarFilter.setImageDrawable(app.getIconsCache().getIcon(R.drawable.ic_action_filter,
+						app.getSettings().isLightContent() ? R.color.color_dialog_buttons_light : R.color.color_dialog_buttons_dark));
+			} else{
+				buttonToolbarFilter.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_action_filter));
+			}
+		}
 	}
 
 	private void setupSearch(final MapActivity mapActivity) {
@@ -1048,17 +1063,20 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		runCoreSearch(txt, false, false);
 	}
 
-	public void replaceQueryWithUiFilter(PoiUIFilter filter) {
+	public void replaceQueryWithUiFilter(PoiUIFilter filter, String nameFilter) {
 		SearchPhrase searchPhrase = searchUICore.getPhrase();
 		if (searchPhrase.isLastWord(POI_TYPE)) {
+			poiFilterApplied = true;
 			SearchResult sr = searchPhrase.getLastSelectedWord().getResult();
 			sr.object = filter;
 			sr.localeName = filter.getName();
 			searchUICore.getPhrase().syncWordsWithResults();
-			String txt = searchUICore.getPhrase().getText(true);
+			String txt = filter.getName()
+					+ (!Algorithms.isEmpty(nameFilter) && filter.isStandardFilter() ? " " + nameFilter : " ");
 			searchQuery = txt;
 			searchEditText.setText(txt);
 			searchEditText.setSelection(txt.length());
+			updateToolbarButton();
 			runCoreSearch(txt, false, false);
 		}
 	}

@@ -542,7 +542,7 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 	}
 
 	public Map<PoiCategory, LinkedHashSet<String>> getAcceptedTypes() {
-		return new LinkedHashMap<PoiCategory, LinkedHashSet<String>>(acceptedTypes);
+		return new LinkedHashMap<>(acceptedTypes);
 	}
 
 	public void selectSubTypesToAccept(PoiCategory t, LinkedHashSet<String> accept) {

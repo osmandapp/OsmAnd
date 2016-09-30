@@ -66,8 +66,11 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 	private PoiUIFilter filter;
 	private String filterId;
 	private String nameFilterText = "";
+	private String nameFilterTextOrig = "";
 	private EditText editText;
+	private AppCompatButton applyFilterButton;
 	private Set<String> selectedPoiAdditionals = new TreeSet<>();
+	private Set<String> selectedPoiAdditionalsOrig = new TreeSet<>();
 	private ArrayList<String> collapsedCategories = new ArrayList<>();
 	private ArrayList<String> showAllCategories = new ArrayList<>();
 
@@ -111,6 +114,8 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 			}
 		}
 
+		nameFilterTextOrig = "" + nameFilterText;
+
 		if (filterId != null) {
 			filter = app.getPoiFilters().getFilterById(filterId);
 		}
@@ -121,8 +126,12 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 		if (selectedPoiAdditionals.size() == 0) {
 			processFilterFields();
 		}
+		selectedPoiAdditionalsOrig = new TreeSet<>(selectedPoiAdditionals);
 
 		view = inflater.inflate(R.layout.search_poi_filter, container, false);
+
+		TextView description = (TextView) view.findViewById(R.id.description);
+		description.setText(filter.getName());
 
 		Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
 		toolbar.setNavigationIcon(app.getIconsCache().getIcon(R.drawable.ic_action_remove_dark));
@@ -191,6 +200,7 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 			@Override
 			public void afterTextChanged(Editable s) {
 				nameFilterText = s.toString();
+				updateApplyButton();
 			}
 		});
 
@@ -207,20 +217,8 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 		listView.addHeaderView(editTextView);
 
 		View bottomShadowView = inflater.inflate(R.layout.card_bottom_divider, listView, false);
+		bottomShadowView.setMinimumHeight(AndroidUtils.dpToPx(getContext(), 16f));
 		listView.addFooterView(bottomShadowView);
-		View applyFilterButtonView = inflater.inflate(R.layout.list_item_button, listView, false);
-		AppCompatButton applyFilterButton = (AppCompatButton) applyFilterButtonView.findViewById(R.id.button);
-		applyFilterButton.setText(app.getString(R.string.apply_filters));
-		applyFilterButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				applyFilterFields();
-				((QuickSearchDialogFragment) getParentFragment()).replaceQueryWithUiFilter(filter);
-				dismiss();
-			}
-		});
-		listView.addFooterView(applyFilterButtonView);
-
 		adapter = new PoiFilterListAdapter(getMyApplication(), getListItems());
 		listView.setAdapter(adapter);
 		listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -254,7 +252,34 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 			}
 		});
 
+		applyFilterButton = (AppCompatButton) view.findViewById(R.id.bottomButton);
+		applyFilterButton.setText(app.getString(R.string.apply_filters));
+		applyFilterButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				applyFilterFields();
+				if (!filter.isStandardFilter()) {
+					filter.setSavedFilterByName(filter.getFilterByName());
+					if (app.getPoiFilters().editPoiFilter(filter)) {
+						app.getSearchUICore().refreshCustomPoiFilters();
+						((QuickSearchDialogFragment) getParentFragment()).replaceQueryWithUiFilter(filter, "");
+						((QuickSearchDialogFragment) getParentFragment()).reloadCategories();
+						dismiss();
+					}
+				} else {
+					((QuickSearchDialogFragment) getParentFragment()).replaceQueryWithUiFilter(filter, nameFilterText.trim());
+					dismiss();
+				}
+			}
+		});
+		updateApplyButton();
+
 		return view;
+	}
+
+	private void updateApplyButton() {
+		boolean hasChanges = !nameFilterText.equals(nameFilterTextOrig) || !selectedPoiAdditionals.equals(selectedPoiAdditionalsOrig);
+		applyFilterButton.setVisibility(hasChanges ? View.VISIBLE : View.GONE);
 	}
 
 	private void deleteFilter() {
@@ -305,14 +330,13 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 				PoiUIFilter nFilter = new PoiUIFilter(editText.getText().toString(), null, filter.getAcceptedTypes(), app);
 				applyFilterFields();
 				if (!Algorithms.isEmpty(filter.getFilterByName())) {
-					nFilter.setFilterByName(filter.getFilterByName());
 					nFilter.setSavedFilterByName(filter.getFilterByName());
 				}
 				if (app.getPoiFilters().createPoiFilter(nFilter)) {
 					Toast.makeText(getContext(), MessageFormat.format(getContext().getText(R.string.edit_filter_create_message).toString(),
 									editText.getText().toString()), Toast.LENGTH_SHORT).show();
 					app.getSearchUICore().refreshCustomPoiFilters();
-					((QuickSearchDialogFragment) getParentFragment()).replaceQueryWithUiFilter(nFilter);
+					((QuickSearchDialogFragment) getParentFragment()).replaceQueryWithUiFilter(nFilter, "");
 					((QuickSearchDialogFragment) getParentFragment()).reloadCategories();
 					QuickSearchPoiFilterFragment.this.dismiss();
 				}
@@ -332,9 +356,9 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 	}
 
 	@Override
-	public void onPause() {
-		super.onPause();
+	public void onDismiss(DialogInterface dialog) {
 		hideKeyboard();
+		super.onDismiss(dialog);
 	}
 
 	private void hideKeyboard() {
@@ -537,6 +561,7 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 			} else {
 				selectedPoiAdditionals.remove(item.keyName);
 			}
+			updateApplyButton();
 		}
 
 		public void toggleCheckbox(PoiFilterListItem item, CheckBox checkBox, boolean isChecked) {
@@ -549,6 +574,7 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 			} else {
 				selectedPoiAdditionals.remove(item.keyName);
 			}
+			updateApplyButton();
 		}
 
 		@NonNull
