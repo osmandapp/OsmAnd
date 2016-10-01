@@ -2460,4 +2460,7 @@ Se vi bezonas helpon pri OsmAnd aplikaĵo, bonvolu kontakti nian helpantaron: su
     <string name="delete_filter">Forigi filtrilon</string>
     <string name="new_filter">Nova filtrilo</string>
     <string name="new_filter_desc">Bonvolu entajpi nomon por la nova filtrilo. Ĝi estos disponebla en la listo de kategorioj.</string>
+    <string name="selected_categories">Elektitaj kategorioj</string>
+    <string name="create_custom_poi">Krei propran Interesejon</string>
+    <string name="custom_search">Propra serĉado</string>
     </resources>
