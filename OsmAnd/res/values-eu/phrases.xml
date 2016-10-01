@@ -1057,4 +1057,11 @@
 	<string name="poi_badminton">Badminton</string>
 	<string name="poi_judo">Judo</string>
 	<string name="poi_squash">Squash</string>
+	<string name="poi_additional_type">Gehigarria</string>
+<string name="poi_payment_type">Ordaintzeko modua</string>
+	<string name="poi_fuel_type">Erregai mota</string>
+	<string name="poi_fuel_1_25">1:25 erregaia</string>
+	<string name="poi_fuel_e20">E20 erregaia</string>
+	<string name="poi_fuel_e10">E10 erregaia</string>
+	<string name="poi_fuel_e85">E85 erregaia</string>
 	</resources>
