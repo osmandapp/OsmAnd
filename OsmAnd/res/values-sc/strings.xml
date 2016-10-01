@@ -2581,4 +2581,7 @@ Como bi sunt {2} MB ebbia disponìbiles.</string>
     <string name="delete_filter">Iscantzella sos filtros</string>
     <string name="new_filter">Filtru nou</string>
     <string name="new_filter_desc">Pro praghere inserta unu nùmene pro su filtru nou. L\'as a agatare in sa lista de sas Categorias.</string>
+    <string name="selected_categories">Categorias ischertadas</string>
+    <string name="create_custom_poi">Crea unu PDI personalizadu</string>
+    <string name="custom_search">Chirca personalizada</string>
     </resources>
