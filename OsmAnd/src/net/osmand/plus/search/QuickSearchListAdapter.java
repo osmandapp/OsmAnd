@@ -18,6 +18,7 @@ import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.dashboard.DashLocationFragment;
+import net.osmand.plus.search.QuickSearchDialogFragment.CustomSearchButton;
 import net.osmand.search.core.SearchPhrase;
 import net.osmand.util.Algorithms;
 import net.osmand.util.OpeningHoursParser;
@@ -37,6 +38,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 
 	private int searchMoreItemPosition;
 	private int selectAllItemPosition;
+	private int customSearchItemPosition;
 
 	private int screenOrientation;
 	private int dp56;
@@ -50,6 +52,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 	private static final int ITEM_TYPE_REGULAR = 0;
 	private static final int ITEM_TYPE_SEARCH_MORE = 1;
 	private static final int ITEM_TYPE_SELECT_ALL = 2;
+	private static final int ITEM_TYPE_CUSTOM_SEARCH = 3;
 
 	public interface OnSelectionListener {
 
@@ -166,11 +169,13 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 	private void acquireAdditionalItemsPositions() {
 		selectAllItemPosition = -1;
 		searchMoreItemPosition = -1;
+		customSearchItemPosition = -1;
 		if (getCount() > 0) {
 			QuickSearchListItem first = getItem(0);
 			QuickSearchListItem last = getItem(getCount() - 1);
 			selectAllItemPosition = first instanceof QuickSearchSelectAllListItem ? 0 : -1;
 			searchMoreItemPosition = last instanceof QuickSearchMoreListItem ? getCount() - 1 : -1;
+			customSearchItemPosition = last instanceof CustomSearchButton ? getCount() - 1 : -1;
 		}
 	}
 
@@ -183,6 +188,8 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 	public int getItemViewType(int position) {
 		if (position == searchMoreItemPosition) {
 			return ITEM_TYPE_SEARCH_MORE;
+		} else if (position == customSearchItemPosition) {
+			return ITEM_TYPE_CUSTOM_SEARCH;
 		} else if (position == selectAllItemPosition) {
 			return ITEM_TYPE_SELECT_ALL;
 		} else {
@@ -192,7 +199,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 
 	@Override
 	public int getViewTypeCount() {
-		return 3;
+		return 4;
 	}
 
 	@Override
@@ -211,6 +218,15 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 			}
 
 			((TextView) view.findViewById(R.id.title)).setText(listItem.getName());
+		} else if (viewType == ITEM_TYPE_CUSTOM_SEARCH) {
+			if (convertView == null) {
+				LayoutInflater inflater = (LayoutInflater) app
+						.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+				view = (LinearLayout) inflater.inflate(
+						R.layout.search_custom_list_item, null);
+			} else {
+				view = (LinearLayout) convertView;
+			}
 		} else if (viewType == ITEM_TYPE_SELECT_ALL) {
 			if (convertView == null) {
 				LayoutInflater inflater = (LayoutInflater) app

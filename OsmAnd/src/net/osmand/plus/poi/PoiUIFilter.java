@@ -541,6 +541,10 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 		combineWithPoiFilter(f);
 	}
 
+	public int getAcceptedTypesCount() {
+		return acceptedTypes.size();
+	}
+
 	public Map<PoiCategory, LinkedHashSet<String>> getAcceptedTypes() {
 		return new LinkedHashMap<>(acceptedTypes);
 	}

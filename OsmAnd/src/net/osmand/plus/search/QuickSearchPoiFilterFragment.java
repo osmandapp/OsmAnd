@@ -216,10 +216,9 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 		editTextView.findViewById(R.id.checkboxItem).setVisibility(View.GONE);
 		listView.addHeaderView(editTextView);
 
-		View bottomShadowView = inflater.inflate(R.layout.card_bottom_divider, listView, false);
-		bottomShadowView.setMinimumHeight(AndroidUtils.dpToPx(getContext(), 16f));
-		listView.addFooterView(bottomShadowView);
-		adapter = new PoiFilterListAdapter(getMyApplication(), getListItems());
+		View bottomShadowView = inflater.inflate(R.layout.list_shadow_footer, listView, false);
+		listView.addFooterView(bottomShadowView, null, false);
+		adapter = new PoiFilterListAdapter(app, getListItems());
 		listView.setAdapter(adapter);
 		listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
