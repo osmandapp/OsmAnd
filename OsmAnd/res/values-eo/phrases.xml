@@ -97,8 +97,8 @@
 	<string name="poi_capital">Ĉefurbo</string>
 	<string name="poi_town">Urbo</string>
 	<string name="poi_village">Vilaĝo</string>
-	<string name="poi_hamlet">Vilaĝego</string>
-	<string name="poi_suburb">Kvartalego</string>
+	<string name="poi_hamlet">Vilaĝeto</string>
+	<string name="poi_suburb">Suburbo</string>
 	<string name="poi_hospital">Malsanulejo</string>
 	<string name="poi_ice_rink">Glitkurejo (halo)</string>
 	<string name="poi_attraction_maze">Labirinto</string>
@@ -178,7 +178,7 @@
 
 	<string name="poi_tower">Turo</string>
 	<string name="poi_prison">Mallibrejo</string>
-	<string name="poi_neighbourhood">Kvartaleto</string>
+	<string name="poi_neighbourhood">Najbaraĵo</string>
 	<string name="poi_pharmacy">Apoteko</string>
 	<string name="poi_zoo">Bestoĝardeno</string>
 	<string name="poi_place_of_worship">Preĝejo</string>
