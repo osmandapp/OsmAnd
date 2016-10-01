@@ -9,6 +9,9 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="selected_categories">Selected categories</string>
+    <string name="create_custom_poi">Create custom POI</string>
+    <string name="custom_search">Custom search</string>
     <string name="shared_string_filters">Filters</string>
     <string name="apply_filters">Apply filters</string>
     <string name="save_filter">Save filter</string>

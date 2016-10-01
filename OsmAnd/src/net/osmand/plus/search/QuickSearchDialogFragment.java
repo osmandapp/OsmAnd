@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -62,6 +63,7 @@ import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControll
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControllerType;
 import net.osmand.search.SearchUICore;
 import net.osmand.search.SearchUICore.SearchResultCollection;
+import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchCoreAPI;
 import net.osmand.search.core.SearchCoreFactory.SearchAmenityTypesAPI;
 import net.osmand.search.core.SearchPhrase;
@@ -845,6 +847,15 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 				for (SearchResult sr : res.getCurrentSearchResults()) {
 					rows.add(new QuickSearchListItem(app, sr));
 				}
+				rows.add(new CustomSearchButton(app, new OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						PoiUIFilter filter = app.getPoiFilters().getCustomPOIFilter();
+						filter.clearFilter();
+						QuickSearchCustomPoiFragment.showDialog(
+								QuickSearchDialogFragment.this, filter.getFilterId());
+					}
+				}));
 				categoriesSearchFragment.updateListAdapter(rows, false);
 			}
 		} catch (IOException e) {
@@ -1286,6 +1297,28 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		}
 	}
 
+	public void showFilter(String filterId) {
+		PoiUIFilter filter = app.getPoiFilters().getFilterById(filterId);
+
+		SearchResult sr = new SearchResult(searchUICore.getPhrase());
+		sr.localeName = filter.getName();
+		sr.object = filter;
+		sr.priority = 0;
+		sr.objectType = ObjectType.POI_TYPE;
+		searchUICore.selectSearchResult(sr);
+
+		String txt = filter.getName() + " ";
+		searchQuery = txt;
+		searchEditText.setText(txt);
+		searchEditText.setSelection(txt.length());
+		updateToolbarButton();
+		SearchSettings settings = searchUICore.getPhrase().getSettings();
+		if (settings.getRadiusLevel() != 1) {
+			searchUICore.updateSettings(settings.setRadiusLevel(1));
+		}
+		runCoreSearch(txt, false, false);
+	}
+
 	public class SearchFragmentPagerAdapter extends FragmentPagerAdapter {
 		private final String[] fragments = new String[]{QuickSearchHistoryListFragment.class.getName(),
 				QuickSearchCategoriesListFragment.class.getName()};
@@ -1395,6 +1428,30 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 		public QuickSearchToolbarController() {
 			super(TopToolbarControllerType.QUICK_SEARCH);
+		}
+	}
+
+	public static class CustomSearchButton extends QuickSearchListItem {
+
+		private OnClickListener onClickListener;
+
+		public CustomSearchButton(OsmandApplication app, OnClickListener onClickListener) {
+			super(app, null);
+			this.onClickListener = onClickListener;
+		}
+
+		@Override
+		public Drawable getIcon() {
+			return app.getIconsCache().getIcon(R.drawable.ic_action_search_dark);
+		}
+
+		@Override
+		public String getName() {
+			return app.getString(R.string.custom_search);
+		}
+
+		public OnClickListener getOnClickListener() {
+			return onClickListener;
 		}
 	}
 }
