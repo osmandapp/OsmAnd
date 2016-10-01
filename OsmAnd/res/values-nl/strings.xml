@@ -2650,4 +2650,13 @@ Als je hulp nodig hebt met OsmAnd: neem contact op met ons support team: support
     <string name="no_update_info_desc">Controleer niet op nieuwe versies en aanbiedingen van OsmAnd</string>
     <string name="driving_region_australia">Australië</string>
     <string name="lang_kab">Kabylisch</string>
+    <string name="selected_categories">Gekozen categorieën</string>
+    <string name="create_custom_poi">Maak custom POI</string>
+    <string name="shared_string_filters">Filters</string>
+    <string name="apply_filters">Filter toepassen</string>
+    <string name="save_filter">Filter opslaan</string>
+    <string name="delete_filter">Wis filter</string>
+    <string name="new_filter">Nieuw filter</string>
+    <string name="new_filter_desc">Geen een naam aan het nieuwe filter. Deze naam vindt u dan in de lijst Categorieën.</string>
+    <string name="custom_search">Eigen zoekfilter</string>
     </resources>
