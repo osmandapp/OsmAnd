@@ -1517,8 +1517,8 @@ Proporcia memoro %4$s MB (Limito de Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="osmand_service">Fona reĝimo</string>
     <string name="osmand_service_descr">OsmAnd funkcias fone kiam la ekrano estas malaktiva</string>
     <string name="city_type_village">Vilaĝo</string>
-    <string name="city_type_hamlet">Vilaĝego</string>
-    <string name="city_type_suburb">Antaŭurbo</string>
+    <string name="city_type_hamlet">Vilaĝeto</string>
+    <string name="city_type_suburb">Suburbo</string>
     <string name="download_files_not_enough_space">Mankas libera loko por elŝuti %1$s MB (disponebla: %2$s).</string>
     <string name="use_transparent_map_theme">Diafana etoso</string>
     <string name="init_native_library">Pravalorizanta indiĝenan bibliotekon…</string>
@@ -2169,8 +2169,8 @@ Kaj la loko kaj tempo estas montrataj ĉe la OsmAnd stirpanelo, kaj ĉe la fenes
     <string name="shared_string_is_open_24_7">Malfermaj 24/7</string>
     <string name="map_widget_search">Serĉilo</string>
 	<string name="shared_string_from">el</string>
-    <string name="city_type_district">Distrikto</string>
-    <string name="city_type_neighbourhood">Kvartaleto</string>
+    <string name="city_type_district">Kvartalo</string>
+    <string name="city_type_neighbourhood">Najbaraĵo</string>
     <string name="postcode">Poŝtkodo</string>
     <string name="search_categories">Kategorioj</string>
     <string name="lang_hsb">Soraba Supra</string>
