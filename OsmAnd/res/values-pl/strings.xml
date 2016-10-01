@@ -2634,4 +2634,7 @@ Jeśli potrzebujesz pomocy podczas używania OsmAnd, prosimy o kontakt z naszym 
     <string name="delete_filter">Usuń filtr</string>
     <string name="new_filter">Nowy filtr</string>
     <string name="new_filter_desc">Proszę wprowadzić nazwę nowego filtra. Będzie on dostępny na liście kategorii.</string>
+    <string name="selected_categories">Wybrane kategorie</string>
+    <string name="create_custom_poi">Utwórz własne użyteczne miejsce</string>
+    <string name="custom_search">Własne wyszukiwanie</string>
     </resources>
