@@ -2454,4 +2454,7 @@ Si aprecieu OsmAnd  i OSM i voleu ajudar-los, és la via perfecta per fer-ho."</
     <string name="delete_filter">Esborra el filtre</string>
     <string name="new_filter">Filtre nou</string>
     <string name="new_filter_desc">Introduïu un nom pel nou filtre. El trobareu a la llista de categories.</string>
+    <string name="selected_categories">Categories seleccionades</string>
+    <string name="create_custom_poi">Crear PDI fet a mida</string>
+    <string name="custom_search">Cerca personalitzada</string>
     </resources>
