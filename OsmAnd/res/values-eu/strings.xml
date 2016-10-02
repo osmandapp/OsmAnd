@@ -2590,4 +2590,13 @@ OsmAnd aplikazioarekin laguntza behar baduzu, jarri kontaktuan gure laguntza tal
     <string name="osm_live_subscription_desc">Harpidetzak orduro, egunero edo astergo eguneraketak jasotzea eta mugarik gabe mapak deskargatzea ahalbidetzen du.</string>
     <string name="driving_region_australia">Australia</string>
     <string name="lang_kab">Kabiliera</string>
+    <string name="selected_categories">Aukeratutako kategoriak</string>
+    <string name="create_custom_poi">Sortu POI pertsonalizatua</string>
+    <string name="custom_search">Bilaketa pertsonalizatua</string>
+    <string name="shared_string_filters">Iragazkiak</string>
+    <string name="apply_filters">Aplikatu iragazkiak</string>
+    <string name="save_filter">Gorde iragazkia</string>
+    <string name="delete_filter">Ezabatu iragazkia</string>
+    <string name="new_filter">Iragazki berria</string>
+    <string name="new_filter_desc">Idatzi iragazki berriaren izena, Kategorien zerrendan aurkituko duzu.</string>
     </resources>
