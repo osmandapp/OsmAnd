@@ -2430,4 +2430,7 @@ Si necesitas ayuda con la aplicación OsmAnd, contacte con nuestro equipo de sop
     <string name="new_filter">Nuevo filtro</string>
     <string name="new_filter_desc">Ingresa el nombre para el nuevo filtro. Puedes buscarlo en la lista de Categorías.</string>
     <string name="lang_kab">Cabilio</string>
+    <string name="selected_categories">Categorías elegidas</string>
+    <string name="create_custom_poi">Crear PDI personalizado</string>
+    <string name="custom_search">Personalizar búsqueda</string>
     </resources>
