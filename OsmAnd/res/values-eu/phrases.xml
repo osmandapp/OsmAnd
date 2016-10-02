@@ -121,7 +121,7 @@
 	<string name="poi_car_wash">Auto garbiketa</string>
 	<string name="poi_fuel">Gasolindegia</string>
 	<string name="poi_fuel_diesel">Diesel</string>
-	<string name="poi_fuel_gtl_diesel"/>
+	<string name="poi_fuel_gtl_diesel">GTL diesel gasolioa</string>
 	<string name="poi_fuel_biodiesel">Bio diesel</string>
 	<string name="poi_fuel_octane_80">80 oktano</string>
 	<string name="poi_fuel_octane_91">91 oktano</string>
@@ -1057,11 +1057,12 @@
 	<string name="poi_badminton">Badminton</string>
 	<string name="poi_judo">Judo</string>
 	<string name="poi_squash">Squash</string>
-	<string name="poi_additional_type">Gehigarria</string>
+	<string name="poi_additional_type">Osagarria</string>
 <string name="poi_payment_type">Ordaintzeko modua</string>
 	<string name="poi_fuel_type">Erregai mota</string>
 	<string name="poi_fuel_1_25">1:25 erregaia</string>
 	<string name="poi_fuel_e20">E20 erregaia</string>
-	<string name="poi_fuel_e10">E10 erregaia</string>
+	<string name="poi_fuel_e10">E10 erregaia (% 10 etanola % 90% parafina)</string>
 	<string name="poi_fuel_e85">E85 erregaia</string>
+	<string name="poi_fuel_hgv_diesel">HGV diesel gasolioa (kamioiena)</string>
 	</resources>
