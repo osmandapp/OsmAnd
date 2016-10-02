@@ -1065,4 +1065,7 @@
 	<string name="poi_fuel_e10">E10 erregaia (% 10 etanola % 90 parafina)</string>
 	<string name="poi_fuel_e85">E85 erregaia (% 85 etanola eta % 15 gasolina)</string>
 	<string name="poi_fuel_hgv_diesel">HGV diesel gasolioa (kamioiena)</string>
+	<string name="poi_craft_handicraft">Eskulangintza</string>
+	<string name="poi_craft_insulation">Isolamendua</string>
+	<string name="poi_craft_jeweller">Bitxigilea</string>
 	</resources>
