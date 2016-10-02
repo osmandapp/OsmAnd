@@ -2569,6 +2569,6 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="new_filter">فلتر جديد</string>
     <string name="new_filter_desc">رجاءا أدخل اسم للفلتر الجديد. ستجده ضمن لائحة الفئات.</string>
     <string name="selected_categories">الفئات المحددة</string>
-    <string name="create_custom_poi">انشاء نقطة POI خاصة</string>
+    <string name="create_custom_poi">انشاء نقطة POI مخصصة</string>
     <string name="custom_search">بحث مخصص</string>
     </resources>
