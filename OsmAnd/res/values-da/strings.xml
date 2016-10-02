@@ -2661,6 +2661,6 @@ Hvis du  ønsker at støtte OsmAnd og OSM, er dette en god måde at gøre det p�
     <string name="new_filter">Nyt filter</string>
     <string name="new_filter_desc">Angiv et navn til det nye filter. Find det på listen over Kategorier.</string>
     <string name="selected_categories">Valgte kategorier</string>
-    <string name="create_custom_poi">Opret brugerdefinerede IP</string>
+    <string name="create_custom_poi">Opret brugerdefineret IP</string>
     <string name="custom_search">Brugerdefineret søgning</string>
     </resources>
