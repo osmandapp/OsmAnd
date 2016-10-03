@@ -2429,4 +2429,6 @@ Si amas a OsmAnd, OSM y quieres apoyarlos, esta es una perfecta manera de hacerl
     <string name="selected_categories">Categorías elegidas</string>
     <string name="create_custom_poi">Crear PDI personalizado</string>
     <string name="custom_search">Personalizar búsqueda</string>
+    <string name="edit_filter">Editar filtro</string>
+    <string name="subcategories">Subcategorías</string>
     </resources>
