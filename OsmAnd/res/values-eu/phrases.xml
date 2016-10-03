@@ -1061,9 +1061,9 @@
 <string name="poi_payment_type">Ordaintzeko modua</string>
 	<string name="poi_fuel_type">Erregai mota</string>
 	<string name="poi_fuel_1_25">1:25 erregaia</string>
-	<string name="poi_fuel_e20">E20 erregaia (%% 20 etanol eta %% 80 gasolina)</string>
-	<string name="poi_fuel_e10">E10 erregaia (%% 10 etanola %% 90 parafina)</string>
-	<string name="poi_fuel_e85">E85 erregaia (%% 85 etanola eta %% 15 gasolina)</string>
+	<string name="poi_fuel_e10">E10</string>
+	<string name="poi_fuel_e20">E20</string>
+	<string name="poi_fuel_e85">E85</string>
 	<string name="poi_fuel_hgv_diesel">HGV diesel gasolioa (kamioiena)</string>
 	<string name="poi_craft_handicraft">Eskulangintza</string>
 	<string name="poi_craft_insulation">Isolamendua</string>
