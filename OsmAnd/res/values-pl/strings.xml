@@ -2637,4 +2637,6 @@ Jeśli potrzebujesz pomocy podczas używania OsmAnd, prosimy o kontakt z naszym 
     <string name="selected_categories">Wybrane kategorie</string>
     <string name="create_custom_poi">Utwórz własne użyteczne miejsce</string>
     <string name="custom_search">Własne wyszukiwanie</string>
+    <string name="edit_filter">Edytuj filtr</string>
+    <string name="subcategories">Podkategorie</string>
     </resources>
