@@ -2599,4 +2599,6 @@ OsmAnd aplikazioarekin laguntza behar baduzu, jarri kontaktuan gure laguntza tal
     <string name="delete_filter">Ezabatu iragazkia</string>
     <string name="new_filter">Iragazki berria</string>
     <string name="new_filter_desc">Idatzi iragazki berriaren izena, Kategorien zerrendan aurkituko duzu.</string>
+    <string name="edit_filter">Editatu iragazkia</string>
+    <string name="subcategories">Azpikategoriak</string>
     </resources>
