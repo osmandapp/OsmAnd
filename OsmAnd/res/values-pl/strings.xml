@@ -2639,4 +2639,5 @@ Jeśli potrzebujesz pomocy podczas używania OsmAnd, prosimy o kontakt z naszym 
     <string name="custom_search">Własne wyszukiwanie</string>
     <string name="edit_filter">Edytuj filtr</string>
     <string name="subcategories">Podkategorie</string>
+    <string name="translit_names">Transliteracja nazw</string>
     </resources>
