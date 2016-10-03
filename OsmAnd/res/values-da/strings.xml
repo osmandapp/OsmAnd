@@ -2665,4 +2665,5 @@ Hvis du  ønsker at støtte OsmAnd og OSM, er dette en god måde at gøre det p�
     <string name="custom_search">Brugerdefineret søgning</string>
     <string name="edit_filter">Rediger filter</string>
     <string name="subcategories">Underkategorier</string>
+    <string name="translit_names">Omskriv navne</string>
     </resources>
