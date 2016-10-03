@@ -2431,4 +2431,5 @@ Si amas a OsmAnd, OSM y quieres apoyarlos, esta es una perfecta manera de hacerl
     <string name="custom_search">Personalizar búsqueda</string>
     <string name="edit_filter">Editar filtro</string>
     <string name="subcategories">Subcategorías</string>
+    <string name="translit_names">Transliterar nombres</string>
     </resources>
