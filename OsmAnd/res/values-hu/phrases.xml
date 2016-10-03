@@ -9,26 +9,26 @@
 	<string name="poi_deli">Delikatesz bolt</string>
 	<string name="poi_farm">Farm bolt</string>
 	<string name="poi_greengrocer">Zöldséges</string>
-	<string name="poi_seafood">Halárus</string>
-	<string name="poi_confectionery">Cukrászda</string>
-	<string name="poi_ice_cream">Fagyizó</string>
+	<string name="poi_seafood">Halbolt</string>
+	<string name="poi_confectionery">Édességbolt</string>
+	<string name="poi_ice_cream">Fagylaltozó</string>
 	<string name="poi_supermarket">Szupermarket</string>
 	<string name="poi_tea">Teabolt</string>
-	<string name="poi_dairy">Tejtermék bolt</string>
+	<string name="poi_dairy">Tejtermékbolt</string>
 	<string name="poi_vending_machine">Árusító automata</string>
 
 	<string name="poi_books">Könyvesbolt</string>
 	<string name="poi_bicycle">Kerékpárbolt</string>
-	<string name="poi_anime">Anime bolt</string>
+	<string name="poi_anime">Animebolt</string>
 	<string name="poi_antiques">Antikvárius</string>
 	<string name="poi_chemist">Drogéria</string>
 	<string name="poi_copyshop">Fénymásoló</string>
 	<string name="poi_florist">Virágárus</string>
 	<string name="poi_garden_centre">Kertészet</string>
 	<string name="poi_gift">Ajándékbolt</string>
-	<string name="poi_hardware">Háztartási bolt</string>
+	<string name="poi_hardware">Vasbolt</string>
 	<string name="poi_jewelry">Ékszerbolt</string>
-	<string name="poi_motorcycle">Motorkerékpár kereskedés</string>
+	<string name="poi_motorcycle">Motorkerékpárbolt</string>
 	<string name="poi_sports">Sportbolt</string>
 	<string name="poi_ticket">Jegyárus</string>
 	<string name="poi_tobacco">Dohánybolt</string>
@@ -50,7 +50,7 @@
 	<string name="poi_lift_gate">Sorompó</string>
 	<string name="poi_toll_booth">Fizetőkapu</string>
 	<string name="poi_border_control">Határellenőrzés</string>
-	<string name="poi_traffic_signals">Villanyrendőr</string>
+	<string name="poi_traffic_signals">Jelzőlámpa</string>
 
 	<string name="poi_car_repair">Autószerviz</string>
 	<string name="poi_service_tyres">Autógumis</string>
@@ -59,22 +59,22 @@
 	<string name="poi_charging_station">Elektromos töltőállomás</string>
 	<string name="poi_compressed_air">Sűrített levegő</string>
 	<string name="poi_parking">Parkoló</string>
-	<string name="poi_motorcycle_parking">Motor parkoló</string>
-	<string name="poi_parking_entrance">Parkolóház bejárat</string>
+	<string name="poi_motorcycle_parking">Motorparkoló</string>
+	<string name="poi_parking_entrance">Parkolóház-bejárat</string>
 	<string name="poi_garages">Garázsok</string>
 
 	<string name="poi_public_transport_platform">Tömegközlekedési megálló</string>
 	<string name="poi_public_transport_platform_bus">Buszmegálló</string>
 	<string name="poi_public_transport_platform_trolleybus">Trolimegálló</string>
 	<string name="poi_public_transport_platform_tram">Villamosmegálló</string>
-	<string name="poi_subway_entrance">Metró lejárat</string>
-	<string name="poi_subway_station">Metrómegálló</string>
+	<string name="poi_subway_entrance">Metrólejárat</string>
+	<string name="poi_subway_station">Metróállomás</string>
 	<string name="poi_taxi">Taxidroszt</string>
 
 	<string name="poi_aerodrome">Repülőtér</string>
 	<string name="poi_runway">Kifutópálya</string>
 	<string name="poi_aeroway_terminal">Utasterminál</string>
-	<string name="poi_aeroway_gate">Reptéri kapu</string>
+	<string name="poi_aeroway_gate">Repülőtéri kapu</string>
 
 	<string name="poi_slipway">Sólya</string>
 	<string name="poi_ferry_terminal">Kompkikötő</string>
@@ -87,7 +87,7 @@
 	<string name="poi_bridge">Híd</string>
 
 	<string name="poi_speed_camera">Traffipax</string>
-	<string name="poi_motorway_junction">Autópálya csomópont</string>
+	<string name="poi_motorway_junction">Autópálya-csomópont</string>
 
 	<string name="poi_water_tower">Víztorony</string>
 	<string name="poi_post_office">Posta</string>
@@ -113,7 +113,7 @@
 	<string name="poi_town">Város</string>
 	<string name="poi_village">Falu</string>
 	<string name="poi_hamlet">Falucska</string>
-	<string name="poi_locality">Lakatlan hely</string>
+	<string name="poi_locality">Település</string>
 
 	<string name="poi_pharmacy">Gyógyszertár</string>
 	<string name="poi_hospital">Kórház</string>
@@ -127,10 +127,10 @@
 	<string name="poi_sports_centre">Sportközpont</string>
 	<string name="poi_golf_course">Golfpálya</string>
 	<string name="poi_ice_rink">Műjégpálya</string>
-	<string name="poi_pitch">Pálya</string>
-	<string name="poi_raceway">Versenypálya</string>
+	<string name="poi_pitch">Sportpálya</string>
+	<string name="poi_raceway">Autóversenypálya</string>
 	<string name="poi_museum">Múzeum</string>
-	<string name="poi_attraction">Turista látványosság</string>
+	<string name="poi_attraction">Turistalátványosság</string>
 	<string name="poi_memorial">Emlékmű</string>
 	<string name="poi_artwork">Műalkotás</string>
 	<string name="poi_castle">Kastély</string>
@@ -138,11 +138,11 @@
 	<string name="poi_fort">Erőd</string>
 	<string name="poi_fountain">Szökőkút</string>
 	<string name="poi_historic_ruins">Romok</string>
-	<string name="poi_monument">Műemlék</string>
+	<string name="poi_monument">Nagy emlékmű</string>
 	<string name="poi_zoo">Állatkert</string>
 	<string name="poi_theme_park">Vidámpark</string>
 
-	<string name="poi_hotel">Hotel</string>
+	<string name="poi_hotel">Szálloda</string>
 	<string name="poi_guest_house">Vendégház</string>
 	<string name="poi_motel">Motel</string>
 	<string name="poi_alpine_hut">Menedékház</string>
@@ -161,7 +161,7 @@
 	<string name="poi_clock">Óra</string>
 	<string name="poi_viewpoint">Kilátóhely</string>
 	<string name="poi_camp_site">Kemping</string>
-	<string name="poi_caravan_site">Lakóautó hely</string>
+	<string name="poi_caravan_site">Lakóautóhely</string>
 	<string name="poi_picnic_site">Piknikezőhely</string>
 	<string name="poi_spring">Forrás</string>
 	<string name="poi_hot_spring">Hőforrás</string>
@@ -192,7 +192,7 @@
 	<string name="poi_pub">Kocsma</string>
 	<string name="poi_drinking_water">Ivóvíz</string>
 	<string name="poi_craft_beekeeper">Méhész</string>
-	<string name="poi_craft_blacksmith">Patkolókovács</string>
+	<string name="poi_craft_blacksmith">Kovács</string>
 	<string name="poi_craft_brewery">Sörfőzde</string>
 	<string name="poi_craft_bookbinder">Könyvkötő</string>
 	<string name="poi_craft_carpenter">Asztalos</string>
@@ -233,7 +233,7 @@
 	<string name="poi_nature_reserve">Természetvédelmi terület</string>
 	<string name="poi_island">Sziget</string>
 	<string name="poi_shop">Üzlet</string>
-	<string name="poi_shop_food">Élelmiszerüzlet</string>
+	<string name="poi_shop_food">Élelmiszerbolt</string>
 	<string name="poi_emergency">Vészhelyzet</string>
 	<string name="poi_road_obstacle">Útakadály</string>
 		<string name="poi_filling_station">Benzinkút</string>
@@ -268,7 +268,7 @@
 	<string name="poi_seamark">Hajózás</string>
 	<string name="poi_military">Katonai</string>
 	<string name="poi_osmwiki">Wikipédia</string>
-	<string name="poi_alcohol">Alkohol üzlet</string>
+	<string name="poi_alcohol">Alkoholüzlet</string>
 	<string name="poi_wine">Borszaküzlet</string>
 
 	<string name="poi_bag">Táskabolt</string>
@@ -466,7 +466,7 @@
 	<string name="poi_aquarium">Akvárium</string>
 	<string name="poi_general_tourist_attraction_yes">Turistalátványosság</string>
 	<string name="poi_attraction_amusement_ride">Vidámparki játék</string>
-	<string name="poi_attraction_animal">Állat (látnivaló)</string>
+	<string name="poi_attraction_animal">Állat (látványosság)</string>
 	<string name="poi_attraction_big_wheel">Óriáskerék</string>
 	<string name="poi_attraction_carousel">Körhinta</string>
 	<string name="poi_attraction_maze">Labirintus</string>
@@ -474,7 +474,7 @@
 	<string name="poi_attraction_slide">Csúszda</string>
 	<string name="poi_attraction_summer_toboggan">Nyári bob</string>
 	<string name="poi_attraction_swing_carousel">Billegő körhinta</string>
-	<string name="poi_attraction_train">Vonat (látnivaló)</string>
+	<string name="poi_attraction_train">Vonat (látványosság)</string>
 	<string name="poi_attraction_water_slide">Vízi csúszda</string>
 
 	<string name="poi_hunting_lodge">Vadászház</string>
@@ -499,7 +499,7 @@
 	<string name="poi_club_astronomy">Csillagász klub</string>
 	<string name="poi_club_computer">Számítógép klub</string>
 	<string name="poi_club_board_games">Társasjáték klub</string>
-	<string name="poi_club_motorcycle">Motorkerékpár klub</string>
+	<string name="poi_club_motorcycle">Motorosklub</string>
 	<string name="poi_club_game">Játék klub</string>
 	<string name="poi_club_automobile">Autóklub</string>
 	<string name="poi_club_chess">Sakk klub</string>
@@ -521,13 +521,13 @@
 
 	<string name="poi_piste">Sípálya</string>
 	<string name="poi_piste_downhill">Lesikló pálya</string>
-	<string name="poi_piste_nordic">Nordic pálya</string>
-	<string name="poi_piste_skitour">Túrasí pálya</string>
-	<string name="poi_piste_hike">Túra pálya</string>
-	<string name="poi_piste_sleigh">Szán pálya</string>
-	<string name="poi_piste_sled">Szánkó pálya</string>
+	<string name="poi_piste_nordic">Sífutónyom</string>
+	<string name="poi_piste_skitour">Túrasínyom</string>
+	<string name="poi_piste_hike">Túrapálya</string>
+	<string name="poi_piste_sleigh">Lovas- vagy kutyaszánpálya</string>
+	<string name="poi_piste_sled">Szánkópálya</string>
 	<string name="poi_piste_snow_park">Sípark</string>
-	<string name="poi_piste_playground">Játszó pálya</string>
+	<string name="poi_piste_playground">Gyermeksípálya</string>
 	<string name="poi_piste_ice_skate">Korcsolya</string>
 	<string name="poi_ski_rental">Síkölcsönző</string>
 
@@ -595,7 +595,7 @@
 	<string name="poi_wiki_lang_hu">Magyar wiki</string>
 	<string name="poi_bollard">Oszlop</string>
 	<string name="poi_cycle_barrier">Kerékpáros akadály</string>
-	<string name="poi_motorcycle_barrier">Motorkerékpár akadály</string>
+	<string name="poi_motorcycle_barrier">Motorkerékpár-akadály</string>
 	<string name="poi_block">Tömb</string>
 	<string name="poi_cattle_grid">Marharács</string>
 	<string name="poi_full_height_turnstile">Teljes forgóajtó</string>
@@ -653,7 +653,7 @@
 	<string name="poi_breakwater">Hullámtörő</string>
 	<string name="poi_power_cable_distribution_cabinet">Elosztó szekrény</string>
 	<string name="poi_power_tower">Távvezeték oszlop</string>
-	<string name="poi_power_pole">Villanypózna</string>
+	<string name="poi_power_pole">Villanyoszlop</string>
 
 	<string name="poi_cooling_tower">Hűtőtorony</string>
 	<string name="poi_lighting_tower">Reflektor torony</string>
@@ -744,7 +744,7 @@
 	<string name="poi_recycling_drugs">Gyógyszerek</string>
 	<string name="poi_recycling_compost">Komposzt</string>
 	<string name="poi_recycling_christmas_trees">Karácsonyfa</string>
-	<string name="poi_recycling_light_bulbs">Villanykörte</string>
+	<string name="poi_recycling_light_bulbs">Izzó</string>
 	<string name="poi_recycling_chipboard">Faforgácslap</string>
 	<string name="poi_recycling_polyester">Poliészter</string>
 	<string name="poi_recycling_plasterboard">Gipszkartonlap</string>
@@ -800,9 +800,9 @@
 	<string name="poi_foundation">Alapítványi iroda</string>
 	<string name="poi_tax_advisor">Adótanácsadó iroda</string>
 
-	<string name="poi_leisure_track">Sportpálya</string>
+	<string name="poi_leisure_track">Futópálya</string>
 	<string name="poi_bicycle_track">Kerékpárpálya</string>
-	<string name="poi_horse_track">Lovas pálya</string>
+	<string name="poi_horse_track">Lóversenypálya</string>
 	<string name="poi_boules">Petanque</string>
 	<string name="poi_bowls">Gyepteke</string>
 	<string name="poi_canadian_football">Kanadai futball</string>
@@ -1289,7 +1289,7 @@
 	<string name="poi_service_repair">Szerviz</string>
 	<string name="poi_service_repair_no">Nincs szerviz</string>
 	<string name="poi_service_electrical">Elektromos autó szerviz</string>
-	<string name="poi_motorcycle_repair">Motorkerékpár szerviz</string>
+	<string name="poi_motorcycle_repair">Motorkerékpár-szerviz</string>
 	<string name="poi_self_service_yes">Önkiszolgáló</string>
 	<string name="poi_self_service_no">Nem önkiszolgáló</string>
 	<string name="poi_automated_yes">Automatizált</string>
@@ -1351,7 +1351,7 @@
 	<string name="poi_vending_dvd">DVD</string>
 	<string name="poi_vending_candles">Gyertya</string>
 	<string name="poi_vending_toys">Játék</string>
-	<string name="poi_vending_ice_cream">Jégkrém</string>
+	<string name="poi_vending_ice_cream">Fagylalt</string>
 	<string name="poi_vending_sim_cards">SIM-kártya</string>
 
 	<string name="poi_memorial_war">Háborús emlékmű</string>
@@ -1509,24 +1509,24 @@
 	<string name="poi_level">Szint</string>
 	<string name="poi_rtsa_scale">RTSA skála</string>
 
-	<string name="poi_piste_difficulty_easy">Pálya nehézség: könnyű</string>
-	<string name="poi_piste_difficulty_intermediate">Pálya nehézség: közepes</string>
-	<string name="poi_piste_difficulty_advanced">Pálya nehézség: haladó</string>
-	<string name="poi_piste_difficulty_novice">Pálya nehézség: kezdő</string>
-	<string name="poi_piste_difficulty_expert">Pálya nehézség: profi</string>
-	<string name="poi_piste_difficulty_freeride">Pálya nehézség: freeride</string>
-	<string name="poi_piste_grooming_classic">Pálya kezelés: klasszikus</string>
+	<string name="poi_piste_difficulty_easy">Pályanehézség: könnyű</string>
+	<string name="poi_piste_difficulty_intermediate">Pályanehézség: közepes</string>
+	<string name="poi_piste_difficulty_advanced">Pályanehézség: haladó</string>
+	<string name="poi_piste_difficulty_novice">Pályanehézség: kezdő</string>
+	<string name="poi_piste_difficulty_expert">Pályanehézség: profi</string>
+	<string name="poi_piste_difficulty_freeride">Pályanehézség: freeride</string>
+	<string name="poi_piste_grooming_classic">Pályakezelés: klasszikus</string>
 	<string name="poi_debris">Törmelék</string>
 	<string name="poi_jersey_barrier">Betonelem</string>
 	<string name="poi_horse_stile">Lovaskapu</string>
 	<string name="poi_kissing_gate">Lengőkapu</string>
 	<string name="poi_leisure_common">Közös pihenőterület</string>
-	<string name="poi_piste_grooming_classic_skating">Pálya kezelés: klasszikus- és szabadsítlus</string>
-	<string name="poi_piste_grooming_backcountry">Pálya kezelés: kezeletlen</string>
-	<string name="poi_piste_grooming_scooter">Pálya kezelés: motorosszán</string>
-	<string name="poi_piste_grooming_skating">Pálya kezelés: szabadsítlus</string>
-	<string name="poi_piste_grooming_no">Pálya kezelés: nincs</string>
-	<string name="poi_piste_grooming_mogul">Pálya kezelés: buckasí</string>
+	<string name="poi_piste_grooming_classic_skating">Pályakezelés: klasszikus és szabadsítlus</string>
+	<string name="poi_piste_grooming_backcountry">Pályakezelés: kezeletlen</string>
+	<string name="poi_piste_grooming_scooter">Pályakezelés: motoros szán</string>
+	<string name="poi_piste_grooming_skating">Pályakezelés: szabad stílus</string>
+	<string name="poi_piste_grooming_no">Pályakezelés: nincs</string>
+	<string name="poi_piste_grooming_mogul">Pályakezelés: buckasí</string>
 
 	<string name="poi_garden_type_residential">Kerttípus: udvari</string>
 	<string name="poi_garden_type_community">Kerttípus: közösségi</string>
@@ -1788,8 +1788,29 @@
 	<string name="poi_route_railway_ref">Vasútvonal</string>
 
 	<string name="poi_historic_yes">Történelmi objektum</string>
-	<string name="poi_fuel_type">Üzemanyag típus</string>
+	<string name="poi_fuel_type">Üzemanyagtípus</string>
 	<string name="poi_payment_type">Fizetési mód</string>
-	<string name="poi_trash_disposal">Hulladék konténer</string>
+	<string name="poi_trash_disposal">Hulladékkonténer</string>
 		<string name="poi_beacon">Jeladó</string>
+	<string name="poi_free_flying">Siklóernyőbolt</string>
+	<string name="poi_standpipe">Föld feletti tűzcsap</string>
+	<string name="poi_groyne">Sarkantyú</string>
+
+	<string name="poi_recycling_hardcore">Építési hulladék</string>
+	<string name="poi_podiatrist">Lábápoló</string>
+	<string name="poi_denomination_mennonite">Mennonita</string>
+	<string name="poi_denomination_united_methodist">Egyesült metodista</string>
+	<string name="poi_denomination_congregational">Kongregacionalista</string>
+	<string name="poi_denomination_old_believers">Orosz óhitű</string>
+	<string name="poi_denomination_latter_day_saints">Utolsó Napok Szentjei (mormonok)</string>
+	<string name="poi_denomination_church_of_christ">Krisztus Egyháza</string>
+	<string name="poi_denomination_united_church_of_christ">Krisztus Egyesült Egyháza</string>
+	<string name="poi_denomination_ethiopian_orthodox_tewahedo">Etióp Ortodox Tewahedo Egyház</string>
+	<string name="poi_berth">Kikötőhely</string>
+	<string name="poi_traffic_mirror">Közlekedési tükör</string>
+
+	<string name="poi_technical_monument">Ipari műemlék</string>
+
+	<string name="poi_love_hotel">Love hotel</string>
+
 	</resources>
