@@ -1068,4 +1068,53 @@
 	<string name="poi_craft_handicraft">Eskulangintza</string>
 	<string name="poi_craft_insulation">Isolamendua</string>
 	<string name="poi_craft_jeweller">Bitxigilea</string>
+	<string name="poi_wiki_link">Wikipedia</string>
+
+	<string name="poi_attraction_slide">Txirrista</string>
+	<string name="poi_attraction_maze">Labirinto</string>
+	<string name="poi_attraction_carousel">Tiobiboa</string>
+	<string name="poi_attraction_water_slide">Ur-txirrista</string>
+
+	<string name="poi_hotel">Hotela</string>
+	<string name="poi_hostel">Hostatua</string>
+	<string name="poi_chalet">Txaleta</string>
+	<string name="poi_alpine_hut">Mendi-aterpea</string>
+	<string name="poi_apartment">Etxebizitza</string>
+	<string name="poi_wilderness_hut">Borda</string>
+	<string name="poi_cabin">Etxola</string>
+	<string name="poi_hunting_lodge">Ehiztari-aterpea</string>
+
+	<string name="poi_place_of_worship">Gurtzalekua</string>
+	<string name="poi_religion_christian">Kristautasuna</string>
+	<string name="poi_religion_jewish">Judaismoa</string>
+	<string name="poi_religion_muslim">Islama</string>
+	<string name="poi_religion_sikh">Sijismoa</string>
+	<string name="poi_religion_buddhist">Budismoa</string>
+	<string name="poi_religion_hindu">Hinduismoa</string>
+	<string name="poi_religion_taoist">Taoismoa</string>
+	<string name="poi_religion_shinto">Sintoismoa</string>
+	<string name="poi_religion_voodoo">Budua</string>
+	<string name="poi_religion_unitarian_universalist">Unitarianismo unibertsala</string>
+	<string name="poi_religion_scientologist">Zientziologia</string>
+	<string name="poi_religion_zoroastrian">Zoroastrismoa</string>
+
+	<string name="poi_religion_bahai">Bahaismoa</string>
+	<string name="poi_religion_jain">Jainismoa</string>
+	<string name="poi_religion_spiritualist">Espiritualismoa</string>
+	<string name="poi_religion_pagan">Paganismoa</string>
+	<string name="poi_religion_tenrikyo">Tenrikyo</string>
+	<string name="poi_payment_v_pay_yes">V PAY txartelak onartzen dira</string>
+	<string name="poi_payment_v_pay_no">V PAY txartelak ez dira onartzen</string>
+	<string name="poi_payment_cibus_yes">Cibus txartelak onartzen dira</string>
+	<string name="poi_payment_cibus_no">Cibus txartelak ez dira onartzen</string>
+	<string name="poi_payment_wire_transfer_yes">Transferentzia elektronikoak onartzen dira</string>
+	<string name="poi_payment_wire_transfer_no">Transferentzia elektronikoak ez dira onartzen</string>
+	<string name="poi_payment_ep_cash_yes">Txanpon-txartela onartzen da (Geldkarte)</string>
+	<string name="poi_payment_ep_cash_no">Txanpon-txartelik ez da onartzen (Geldkarte)</string>
+	<string name="poi_payment_ep_proton_yes">Proton txartelak onartzen dira</string>
+	<string name="poi_payment_ep_proton_no">Proton txartelak ez dira onartzen</string>
+	<string name="poi_payment_ep_avant_yes">"AvantCard  onartzen da"</string>
+	<string name="poi_payment_ep_avant_no">AvantCard ez da onartzen</string>
+	<string name="poi_payment_ep_mep_yes">MEP onartzen da</string>
+	<string name="poi_payment_ep_mep_no">MEP ez da onartzen</string>
 	</resources>
