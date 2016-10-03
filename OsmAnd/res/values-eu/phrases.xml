@@ -1128,4 +1128,57 @@
 	<string name="poi_support_roof">Euskarria: teilatua</string>
 	<string name="poi_support_tower">Euskarria: dorrea</string>
 
+	<string name="poi_clock">Erlojua</string>
+	<string name="poi_travel_agent">Bidaia-agentea</string>
+	<string name="poi_spring">Iturria</string>
+	<string name="poi_hot_spring">Iturri termala</string>
+	<string name="poi_geyser">Geiser</string>
+	<string name="poi_cemetery">Hilerria</string>
+	<string name="poi_grave_yard">Kanposantua</string>
+	<string name="poi_tomb">Hilobia</string>
+	<string name="poi_shelter">Aterpea</string>
+	<string name="poi_funicular">Funikularra</string>
+	<string name="poi_resort">Opor-lekua</string>
+	<string name="poi_hanami">Hanami</string>
+	<string name="poi_wine_cellar">Upeltegia</string>
+	<string name="poi_craft_winery">Upategia</string>
+
+	<string name="poi_club_art">Arte elkartea</string>
+	<string name="poi_club_astronomy">Astronomia elkartea</string>
+	<string name="poi_club_computer">Hacker elkartea</string>
+	<string name="poi_club_board_games">Mahai jokoen elkartea</string>
+	<string name="poi_club_motorcycle">Motozaleen elkartea</string>
+	<string name="poi_club_sport">Kirol elkartea</string>
+	<string name="poi_club_game">Jolas elkartea</string>
+	<string name="poi_club_automobile">Autozaleen elkartea</string>
+	<string name="poi_club_chess">Xake elkartea</string>
+	<string name="poi_club_cinema">Zinema elkartea</string>
+	<string name="poi_club_fan">Zaleen elkartea</string>
+	<string name="poi_club_fishing">Arrantzaleen elkartea</string>
+	<string name="poi_club_veterans">Beteranoen elkartea</string>
+	<string name="poi_club_linux">Linux elkartea</string>
+	<string name="poi_club_theatre">Antzerki elkartea</string>
+	<string name="poi_club_history">Historia elkartea</string>
+	<string name="poi_club_music">Musika elkartea</string>
+	<string name="poi_club_ethnic">Elkarte etnikoa</string>
+	<string name="poi_club_nature">Naturazaleen elkartea</string>
+	<string name="poi_club_photography">Argazkizaleen elkartea</string>
+	<string name="poi_club_hunting">Ehiztarien elkartea</string>
+	<string name="poi_club_shooting">Tiro elkartea</string>
+	<string name="poi_club_tourism">Turismo elkartea</string>
+	<string name="poi_club_charity">Karitate elkartea</string>
+
+	<string name="poi_piste">Pista</string>
+	<string name="poi_piste_downhill">Jaitsiera pista</string>
+	<string name="poi_piste_nordic">Pista nordikoa</string>
+	<string name="poi_piste_skitour">Mendiko eskia</string>
+	<string name="poi_piste_hike">Iblilaldi-pista</string>
+	<string name="poi_piste_sleigh">Lera-pista</string>
+	<string name="poi_piste_sled">Lera-pista</string>
+	<string name="poi_piste_snow_park">Elur-parkea</string>
+	<string name="poi_piste_playground">Haur eskirako pista</string>
+	<string name="poi_piste_ice_skate">izotz-irristailu</string>
+	<string name="poi_ski_rental">Eski alokairua</string>
+
+	<string name="poi_library">Biblioteka</string>
 	</resources>
