@@ -364,7 +364,7 @@
 	<string name="poi_aeroway_terminal">Aireportu terminala</string>
 	<string name="poi_aeroway_gate">Ontziratze-atea</string>
 
-	<string name="poi_aerialway_chair_lift"/>
+	<string name="poi_aerialway_chair_lift">Teleaulki</string>
 	<string name="poi_aerialway_gondola">Telekabina</string>
 	<string name="poi_aerialway_t_bar">Teleski bikoitza</string>
 	<string name="poi_aerialway_j_bar">Teleski bakuna</string>
@@ -1119,4 +1119,6 @@
 	<string name="poi_payment_ep_mep_no">MEP ez da onartzen</string>
 	<string name="poi_toboggan">Txirrista</string>
 	<string name="poi_rune_stone">Erruna-harria</string>
+	<string name="poi_recycling_green_waste">Hondakin organikoa</string>
+	<string name="poi_locality">Herria</string>
 	</resources>
