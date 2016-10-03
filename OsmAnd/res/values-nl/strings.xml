@@ -2661,4 +2661,5 @@ Als je hulp nodig hebt met OsmAnd: neem contact op met ons support team: support
     <string name="custom_search">Eigen zoekfilter</string>
     <string name="edit_filter">Filter bewerken</string>
     <string name="subcategories">Subcategorieën</string>
+    <string name="translit_names">Transliteratie van namen</string>
     </resources>
