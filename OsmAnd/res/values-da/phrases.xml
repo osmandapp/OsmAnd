@@ -743,7 +743,7 @@
 	<string name="poi_fuel_lpg">LPG</string>
 	<string name="poi_fuel_octane_80">Oktan 80</string>
 	<string name="poi_fuel_octane_91">Oktan 91</string>
-	<string name="poi_fuel_octane_92">Oktan 92</string>
+	<string name="poi_fuel_octane_92">Oktan %%92</string>
 	<string name="poi_fuel_octane_95">Oktan 95</string>
 	<string name="poi_fuel_octane_98">Oktan 98</string>
 	<string name="poi_fuel_octane_100">Oktan 100</string>
