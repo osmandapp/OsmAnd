@@ -2441,4 +2441,5 @@ Ak potrebuje pomoc s aplikáciou OsmAnd, kontaktuje podporu: support@osmand.net.
     <string name="custom_search">Vlastné vyhľadávanie</string>
     <string name="edit_filter">Upraviť filter</string>
     <string name="subcategories">Podkategórie</string>
+    <string name="translit_names">Transliterovať názvy</string>
     </resources>
