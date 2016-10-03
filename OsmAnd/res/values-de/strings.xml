@@ -2529,4 +2529,5 @@ Wenn Sie OsmAnd und OSM lieben und unterstützen wollen, so ist dies die perfekt
     <string name="custom_search">Benutzerdefinierte Suche</string>
     <string name="edit_filter">Filter bearbeiten</string>
     <string name="subcategories">Unterkategorien</string>
+    <string name="translit_names">Namen umschreiben</string>
     </resources>
