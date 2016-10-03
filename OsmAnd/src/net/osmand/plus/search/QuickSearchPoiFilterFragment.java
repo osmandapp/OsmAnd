@@ -152,8 +152,25 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 				DirectionsDialogs.setupPopUpMenuIcon(optionsMenu);
 				MenuItem item;
 
-				item = optionsMenu.getMenu().add(R.string.save_filter).setIcon(
-						iconsCache.getThemedIcon(R.drawable.ic_action_save));
+				if (!filter.isStandardFilter()) {
+					item = optionsMenu.getMenu().add(R.string.edit_filter).setIcon(
+							iconsCache.getThemedIcon(R.drawable.ic_action_edit_dark));
+					item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+						@Override
+						public boolean onMenuItemClick(MenuItem item) {
+							editFilter();
+							return true;
+						}
+					});
+				}
+
+				if (!filter.isStandardFilter()) {
+					item = optionsMenu.getMenu().add(R.string.edit_filter_save_as_menu_item).setIcon(
+							iconsCache.getThemedIcon(R.drawable.ic_action_save));
+				} else {
+					item = optionsMenu.getMenu().add(R.string.save_filter).setIcon(
+							iconsCache.getThemedIcon(R.drawable.ic_action_save));
+				}
 				item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 					@Override
 					public boolean onMenuItemClick(MenuItem item) {
@@ -304,13 +321,19 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 		builder.create().show();
 	}
 
+	private void editFilter() {
+		QuickSearchCustomPoiFragment.showDialog(this, filter.getFilterId());
+	}
+
 	private void saveFilter() {
 		final OsmandApplication app = getMyApplication();
 		AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
 		builder.setTitle(R.string.access_hint_enter_name);
+
 		final EditText editText = new EditText(getContext());
 		editText.setHint(R.string.new_filter);
 		editText.setText(filter.getName());
+
 		final TextView textView = new TextView(getContext());
 		textView.setText(app.getString(R.string.new_filter_desc));
 		textView.setTextAppearance(getContext(), R.style.TextAppearance_ContextMenuSubtitle);
@@ -321,7 +344,9 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 		ll.addView(editText, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
 		textView.setPadding(AndroidUtils.dpToPx(getContext(), 4f), AndroidUtils.dpToPx(getContext(), 6f), AndroidUtils.dpToPx(getContext(), 4f), AndroidUtils.dpToPx(getContext(), 4f));
 		ll.addView(textView, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+
 		builder.setView(ll);
+
 		builder.setNegativeButton(R.string.shared_string_cancel, null);
 		builder.setPositiveButton(R.string.shared_string_save, new DialogInterface.OnClickListener() {
 			@Override

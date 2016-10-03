@@ -456,6 +456,8 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 	public void clearFilter() {
 		acceptedTypes = new LinkedHashMap<>();
 		poiAdditionals.clear();
+		filterByName = null;
+		clearCurrentResults();
 	}
 
 	public boolean areAllTypesAccepted() {

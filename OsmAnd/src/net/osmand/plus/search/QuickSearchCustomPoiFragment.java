@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatTextView;
@@ -15,7 +16,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
@@ -50,6 +54,8 @@ public class QuickSearchCustomPoiFragment extends DialogFragment {
 	private View bottomBar;
 	private AppCompatTextView barTitle;
 	private AppCompatTextView barButton;
+	private boolean editMode;
+
 
 	public QuickSearchCustomPoiFragment() {
 	}
@@ -83,6 +89,7 @@ public class QuickSearchCustomPoiFragment extends DialogFragment {
 			filter = helper.getCustomPOIFilter();
 			filter.clearFilter();
 		}
+		editMode = !filterId.equals(helper.getCustomPOIFilter().getFilterId());
 
 		view = inflater.inflate(R.layout.search_custom_poi, container, false);
 
@@ -95,6 +102,11 @@ public class QuickSearchCustomPoiFragment extends DialogFragment {
 				dismiss();
 			}
 		});
+
+		TextView title = (TextView) view.findViewById(R.id.title);
+		if (editMode) {
+			title.setText(filter.getName());
+		}
 
 		listView = (ListView) view.findViewById(android.R.id.list);
 		listView.setBackgroundColor(getResources().getColor(
@@ -111,7 +123,7 @@ public class QuickSearchCustomPoiFragment extends DialogFragment {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				PoiCategory category = listAdapter.getItem(position - listView.getHeaderViewsCount());
-				showDialog(category);
+				showDialog(category, false);
 			}
 		});
 
@@ -122,7 +134,10 @@ public class QuickSearchCustomPoiFragment extends DialogFragment {
 			@Override
 			public void onClick(View v) {
 				dismiss();
-				((QuickSearchDialogFragment) getParentFragment()).showFilter(filterId);
+				QuickSearchDialogFragment quickSearchDialogFragment = getQuickSearchDialogFragment();
+				if (quickSearchDialogFragment != null) {
+					quickSearchDialogFragment.showFilter(filterId);
+				}
 			}
 		});
 
@@ -133,6 +148,31 @@ public class QuickSearchCustomPoiFragment extends DialogFragment {
 	public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
 		outState.putString(QUICK_SEARCH_CUSTOM_POI_FILTER_ID_KEY, filterId);
+	}
+
+	@Override
+	public void onDismiss(DialogInterface dialog) {
+		if (editMode) {
+			QuickSearchDialogFragment quickSearchDialogFragment = getQuickSearchDialogFragment();
+			if (quickSearchDialogFragment != null) {
+				getMyApplication().getSearchUICore().refreshCustomPoiFilters();
+				quickSearchDialogFragment.replaceQueryWithUiFilter(filter, "");
+				quickSearchDialogFragment.reloadCategories();
+			}
+		}
+		super.onDismiss(dialog);
+	}
+
+	private QuickSearchDialogFragment getQuickSearchDialogFragment() {
+		Fragment parent = getParentFragment();
+		if (parent instanceof QuickSearchDialogFragment) {
+			return (QuickSearchDialogFragment) parent;
+		} else if (parent instanceof QuickSearchPoiFilterFragment
+				&& parent.getParentFragment() instanceof QuickSearchDialogFragment) {
+			return (QuickSearchDialogFragment) parent.getParentFragment();
+		} else {
+			return null;
+		}
 	}
 
 	private int getIconId(PoiCategory category) {
@@ -197,6 +237,7 @@ public class QuickSearchCustomPoiFragment extends DialogFragment {
 					iconView.setImageDrawable(null);
 				}
 				secondaryIconView.setImageDrawable(ic.getThemedIcon(R.drawable.ic_action_additional_option));
+				check.setOnCheckedChangeListener(null);
 				check.setChecked(filter.isTypeAccepted(category));
 				String textString = category.getTranslation();
 				titleView.setText(textString);
@@ -225,17 +266,16 @@ public class QuickSearchCustomPoiFragment extends DialogFragment {
 		}
 
 		private void addRowListener(final PoiCategory category, final SwitchCompat check) {
-			check.setOnClickListener(new View.OnClickListener() {
+			check.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 				@Override
-				public void onClick(View v) {
+				public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 					if (check.isChecked()) {
-						filter.setTypeToAccept(category, true);
-						showDialog(category);
+						showDialog(category, true);
 					} else {
 						filter.setTypeToAccept(category, false);
 						saveFilter();
+						notifyDataSetChanged();
 					}
-					notifyDataSetChanged();
 				}
 			});
 		}
@@ -243,19 +283,21 @@ public class QuickSearchCustomPoiFragment extends DialogFragment {
 
 	private void saveFilter() {
 		helper.editPoiFilter(filter);
-		if (filter.isEmpty()) {
-			bottomBar.setVisibility(View.GONE);
-		} else {
-			barTitle.setText(getContext().getString(R.string.selected_categories) + ": " + filter.getAcceptedTypesCount());
-			bottomBar.setVisibility(View.VISIBLE);
+		if (!editMode) {
+			if (filter.isEmpty()) {
+				bottomBar.setVisibility(View.GONE);
+			} else {
+				barTitle.setText(getContext().getString(R.string.selected_categories) + ": " + filter.getAcceptedTypesCount());
+				bottomBar.setVisibility(View.VISIBLE);
+			}
 		}
 	}
 
-	private void showDialog(final PoiCategory poiCategory) {
+	private void showDialog(final PoiCategory poiCategory, boolean selectAll) {
 		final int index = listView.getFirstVisiblePosition();
 		View v = listView.getChildAt(0);
 		final int top = (v == null) ? 0 : v.getTop();
-		AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+		final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
 		final LinkedHashMap<String, String> subCategories = new LinkedHashMap<String, String>();
 		Set<String> acceptedCategories = filter.getAcceptedSubtypes(poiCategory);
 		if (acceptedCategories != null) {
@@ -281,17 +323,27 @@ public class QuickSearchCustomPoiFragment extends DialogFragment {
 		});
 		final String[] visibleNames = new String[array.length];
 		final boolean[] selected = new boolean[array.length];
-
+		boolean allSelected = true;
 		for (int i = 0; i < array.length; i++) {
 			final String subcategory = array[i];
 			visibleNames[i] = subCategories.get(subcategory);
-			if (acceptedCategories == null) {
+			if (acceptedCategories == null || selectAll) {
 				selected[i] = true;
 			} else {
+				if (allSelected) {
+					allSelected = false;
+				}
 				selected[i] = acceptedCategories.contains(subcategory);
 			}
 		}
-		builder.setTitle(poiCategory.getTranslation());
+
+		View titleView = LayoutInflater.from(getActivity())
+				.inflate(R.layout.subcategories_dialog_title, null);
+		TextView titleTextView = (TextView) titleView.findViewById(R.id.title);
+		titleTextView.setText(poiCategory.getTranslation());
+		SwitchCompat check = (SwitchCompat) titleView.findViewById(R.id.check);
+		check.setChecked(allSelected);
+		builder.setCustomTitle(titleView);
 
 		builder.setCancelable(true);
 		builder.setNegativeButton(getContext().getText(R.string.shared_string_cancel), new DialogInterface.OnClickListener() {
@@ -323,16 +375,6 @@ public class QuickSearchCustomPoiFragment extends DialogFragment {
 			}
 		});
 
-		/*
-		builder.setPositiveButton(getContext().getText(R.string.shared_string_select_all), new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				selectAllFromCategory(poiCategory);
-				listView.setSelectionFromTop(index, top);
-			}
-		});
-		*/
-
 		builder.setMultiChoiceItems(visibleNames, selected, new DialogInterface.OnMultiChoiceClickListener() {
 
 			@Override
@@ -340,13 +382,19 @@ public class QuickSearchCustomPoiFragment extends DialogFragment {
 				selected[item] = isChecked;
 			}
 		});
-		builder.show();
-
-	}
-
-	public void selectAllFromCategory(PoiCategory poiCategory) {
-		filter.updateTypesToAccept(poiCategory);
-		saveFilter();
-		listAdapter.notifyDataSetChanged();
+		final AlertDialog dialog = builder.show();
+		check.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				if (isChecked) {
+					Arrays.fill(selected, true);
+				} else {
+					Arrays.fill(selected, false);
+				}
+				for (int i = 0; i < selected.length; i++) {
+					dialog.getListView().setItemChecked(i, selected[i]);
+				}
+			}
+		});
 	}
 }
