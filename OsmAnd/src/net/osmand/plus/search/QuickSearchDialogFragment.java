@@ -31,9 +31,11 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import net.osmand.AndroidUtils;
 import net.osmand.Location;
@@ -75,6 +77,7 @@ import net.osmand.util.MapUtils;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -91,6 +94,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	private static final String QUICK_SEARCH_HIDDEN_KEY = "quick_search_hidden_key";
 	private static final String QUICK_SEARCH_TOOLBAR_TITLE_KEY = "quick_search_toolbar_title_key";
 	private static final String QUICK_SEARCH_TOOLBAR_VISIBLE_KEY = "quick_search_toolbar_visible_key";
+	private static final String QUICK_SEARCH_FAB_VISIBLE_KEY = "quick_search_fab_visible_key";
 
 	private Toolbar toolbar;
 	private LockableViewPager viewPager;
@@ -110,6 +114,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 	private Toolbar toolbarEdit;
 	private TextView titleEdit;
+	private View fab;
 
 	private EditText searchEditText;
 	private ProgressBar progressBar;
@@ -136,6 +141,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	private boolean interruptedSearch;
 	private long hideTimeMs;
 	private boolean poiFilterApplied;
+	private boolean fabVisible;
 
 	private static final double DISTANCE_THRESHOLD = 70000; // 70km
 	private static final int EXPIRATION_TIME_MIN = 10; // 10 minutes
@@ -189,6 +195,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			hidden = savedInstanceState.getBoolean(QUICK_SEARCH_HIDDEN_KEY, false);
 			toolbarTitle = savedInstanceState.getString(QUICK_SEARCH_TOOLBAR_TITLE_KEY);
 			toolbarVisible = savedInstanceState.getBoolean(QUICK_SEARCH_TOOLBAR_VISIBLE_KEY, false);
+			fabVisible = savedInstanceState.getBoolean(QUICK_SEARCH_FAB_VISIBLE_KEY, false);
 		}
 		if (searchQuery == null && arguments != null) {
 			searchQuery = arguments.getString(QUICK_SEARCH_QUERY_KEY);
@@ -429,6 +436,10 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 						if (textEmpty && poiFilterApplied) {
 							poiFilterApplied = false;
 							reloadCategories();
+							if (fabVisible) {
+								fabVisible = false;
+								updateFab();
+							}
 						}
 						if (!searchQuery.equalsIgnoreCase(newQueryText)) {
 							searchQuery = newQueryText;
@@ -470,6 +481,15 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 				}
 		);
 
+		fab = view.findViewById(R.id.fab);
+		fab.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				saveCustomFilter();
+			}
+		});
+		updateFab();
+
 		setupSearch(mapActivity);
 
 		return view;
@@ -488,6 +508,51 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			searchEditText.requestFocus();
 			AndroidUtils.softKeyboardDelayed(searchEditText);
 		}
+	}
+
+	public void saveCustomFilter() {
+		final OsmandApplication app = getMyApplication();
+		final PoiUIFilter filter = app.getPoiFilters().getCustomPOIFilter();
+		AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+		builder.setTitle(R.string.access_hint_enter_name);
+
+		final EditText editText = new EditText(getContext());
+		editText.setHint(R.string.new_filter);
+
+		final TextView textView = new TextView(getContext());
+		textView.setText(app.getString(R.string.new_filter_desc));
+		textView.setTextAppearance(getContext(), R.style.TextAppearance_ContextMenuSubtitle);
+		LinearLayout ll = new LinearLayout(getContext());
+		ll.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+		ll.setOrientation(LinearLayout.VERTICAL);
+		ll.setPadding(AndroidUtils.dpToPx(getContext(), 20f), AndroidUtils.dpToPx(getContext(), 12f), AndroidUtils.dpToPx(getContext(), 20f), AndroidUtils.dpToPx(getContext(), 12f));
+		ll.addView(editText, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+		textView.setPadding(AndroidUtils.dpToPx(getContext(), 4f), AndroidUtils.dpToPx(getContext(), 6f), AndroidUtils.dpToPx(getContext(), 4f), AndroidUtils.dpToPx(getContext(), 4f));
+		ll.addView(textView, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+
+		builder.setView(ll);
+
+		builder.setNegativeButton(R.string.shared_string_cancel, null);
+		builder.setPositiveButton(R.string.shared_string_save, new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				PoiUIFilter nFilter = new PoiUIFilter(editText.getText().toString(), null, filter.getAcceptedTypes(), app);
+				if (!Algorithms.isEmpty(filter.getFilterByName())) {
+					nFilter.setSavedFilterByName(filter.getFilterByName());
+				}
+				if (app.getPoiFilters().createPoiFilter(nFilter)) {
+					Toast.makeText(getContext(), MessageFormat.format(getContext().getText(R.string.edit_filter_create_message).toString(),
+							editText.getText().toString()), Toast.LENGTH_SHORT).show();
+					app.getSearchUICore().refreshCustomPoiFilters();
+					replaceQueryWithUiFilter(nFilter, "");
+					reloadCategories();
+
+					fabVisible = false;
+					updateFab();
+				}
+			}
+		});
+		builder.create().show();
 	}
 
 	public void restoreToolbar() {
@@ -680,6 +745,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			outState.putDouble(QUICK_SEARCH_LAT_KEY, centerLatLon.getLatitude());
 			outState.putDouble(QUICK_SEARCH_LON_KEY, centerLatLon.getLongitude());
 		}
+		outState.putBoolean(QUICK_SEARCH_FAB_VISIBLE_KEY, fabVisible);
 	}
 
 	@Override
@@ -1297,8 +1363,14 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		}
 	}
 
-	public void showFilter(String filterId) {
+	public void showFilter(@NonNull String filterId) {
 		PoiUIFilter filter = app.getPoiFilters().getFilterById(filterId);
+		boolean isCustomFilter = filterId.equals(app.getPoiFilters().getCustomPOIFilter().getFilterId());
+		if (isCustomFilter) {
+			fabVisible = true;
+			poiFilterApplied = true;
+			updateFab();
+		}
 
 		SearchResult sr = new SearchResult(searchUICore.getPhrase());
 		sr.localeName = filter.getName();
@@ -1317,6 +1389,10 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			searchUICore.updateSettings(settings.setRadiusLevel(1));
 		}
 		runCoreSearch(txt, false, false);
+	}
+
+	private void updateFab() {
+		fab.setVisibility(fabVisible ? View.VISIBLE : View.GONE);
 	}
 
 	public class SearchFragmentPagerAdapter extends FragmentPagerAdapter {
