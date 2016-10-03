@@ -207,24 +207,20 @@ public class OsmEditingPlugin extends OsmandPlugin {
 			adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.poi_context_menu_modify, mapActivity)
 					.setIcon(R.drawable.ic_action_edit_dark)
 					.setListener(listener)
-					.setPosition(1)
 					.createItem());
 			adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.poi_context_menu_delete, mapActivity)
 					.setIcon(R.drawable.ic_action_delete_dark)
 					.setListener(listener)
-					.setPosition(2)
 					.createItem());
 		} else if (selectedObj instanceof OpenstreetmapPoint && ((OpenstreetmapPoint) selectedObj).getAction() != Action.DELETE) {
 			adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.poi_context_menu_modify_osm_change, mapActivity)
 					.setIcon(R.drawable.ic_action_edit_dark)
 					.setListener(listener)
-					.setPosition(1)
 					.createItem());
 		} else {
 			adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.context_menu_item_create_poi, mapActivity)
 					.setIcon(R.drawable.ic_action_plus_dark)
 					.setListener(listener)
-					.setPosition(-1)
 					.createItem());
 		}
 		adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.context_menu_item_open_note, mapActivity)

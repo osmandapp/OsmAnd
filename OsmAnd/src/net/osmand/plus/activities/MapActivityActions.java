@@ -286,6 +286,7 @@ public class MapActivityActions implements DialogProvider {
 		final AlertDialog.Builder builder = new AlertDialog.Builder(mapActivity);
 		final ArrayAdapter<ContextMenuItem> listAdapter =
 				adapter.createListAdapter(mapActivity, getMyApplication().getSettings().isLightContent());
+		builder.setTitle(R.string.shared_string_more_actions);
 		builder.setAdapter(listAdapter, new DialogInterface.OnClickListener() {
 
 			@Override
@@ -315,6 +316,7 @@ public class MapActivityActions implements DialogProvider {
 				}
 			}
 		});
+		builder.setNegativeButton(R.string.shared_string_cancel, null);
 		builder.create().show();
 	}
 

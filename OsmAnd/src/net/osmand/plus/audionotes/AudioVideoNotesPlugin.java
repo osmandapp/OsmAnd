@@ -631,7 +631,6 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 						return true;
 					}
 				})
-				.setPosition(6)
 				.createItem());
 		adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.recording_context_menu_vrecord, app)
 				.setIcon(R.drawable.ic_action_video_dark)
@@ -643,7 +642,6 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 						return true;
 					}
 				})
-				.setPosition(7)
 				.createItem());
 		adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.recording_context_menu_precord, app)
 				.setIcon(R.drawable.ic_action_photo_dark)
@@ -655,7 +653,6 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 					}
 
 				})
-				.setPosition(8)
 				.createItem());
 	}
 

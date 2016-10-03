@@ -385,7 +385,17 @@ public abstract class OsmandPlugin {
 
 	public static void registerMapContextMenu(MapActivity map, double latitude, double longitude, ContextMenuAdapter adapter, Object selectedObj) {
 		for (OsmandPlugin plugin : getEnabledPlugins()) {
-			plugin.registerMapContextMenuActions(map, latitude, longitude, adapter, selectedObj);
+			if (plugin instanceof ParkingPositionPlugin) {
+				plugin.registerMapContextMenuActions(map, latitude, longitude, adapter, selectedObj);
+			} else if (plugin instanceof OsmandMonitoringPlugin) {
+				plugin.registerMapContextMenuActions(map, latitude, longitude, adapter, selectedObj);
+			}
+		}
+		for (OsmandPlugin plugin : getEnabledPlugins()) {
+			if (!(plugin instanceof ParkingPositionPlugin) && !(plugin instanceof OsmandMonitoringPlugin)) {
+				adapter.addItem(new ContextMenuItem.ItemBuilder().setLayout(R.layout.context_menu_list_divider).createItem());
+				plugin.registerMapContextMenuActions(map, latitude, longitude, adapter, selectedObj);
+			}
 		}
 	}
 
