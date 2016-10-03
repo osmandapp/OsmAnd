@@ -2527,4 +2527,6 @@ Wenn Sie OsmAnd und OSM lieben und unterstützen wollen, so ist dies die perfekt
     <string name="selected_categories">Ausgewählte Kategorien</string>
     <string name="create_custom_poi">Benutzerdefinierten POI erstellen</string>
     <string name="custom_search">Benutzerdefinierte Suche</string>
+    <string name="edit_filter">Filter bearbeiten</string>
+    <string name="subcategories">Unterkategorien</string>
     </resources>
