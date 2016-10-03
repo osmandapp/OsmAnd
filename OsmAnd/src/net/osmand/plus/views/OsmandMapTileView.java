@@ -287,6 +287,14 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		return null;
 	}
 
+	public int getViewHeight() {
+		if (view != null) {
+			return view.getHeight();
+		} else {
+			return 0;
+		}
+	}
+
 	public OsmandApplication getApplication() {
 		return application;
 	}

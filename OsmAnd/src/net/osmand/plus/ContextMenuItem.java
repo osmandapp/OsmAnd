@@ -33,6 +33,7 @@ public class ContextMenuItem {
 	private final ContextMenuAdapter.ItemClickListener itemClickListener;
 	private final ContextMenuAdapter.OnIntegerValueChangedListener integerListener;
 	private final boolean hideDivider;
+	private final int minHeight;
 
 	private ContextMenuItem(@StringRes int titleId,
 							String title,
@@ -48,7 +49,8 @@ public class ContextMenuItem {
 							String description,
 							ContextMenuAdapter.ItemClickListener itemClickListener,
 							ContextMenuAdapter.OnIntegerValueChangedListener integerListener,
-							boolean hideDivider) {
+							boolean hideDivider,
+							int minHeight) {
 		this.titleId = titleId;
 		this.title = title;
 		this.mIcon = icon;
@@ -65,6 +67,7 @@ public class ContextMenuItem {
 		this.itemClickListener = itemClickListener;
 		this.integerListener = integerListener;
 		this.hideDivider = hideDivider;
+		this.minHeight = minHeight;
 	}
 
 	@StringRes
@@ -178,6 +181,10 @@ public class ContextMenuItem {
 		this.description = description;
 	}
 
+	public int getMinHeight() {
+		return minHeight;
+	}
+
 	public static ItemBuilder createBuilder(String title) {
 		return new ItemBuilder().setTitle(title);
 	}
@@ -204,6 +211,7 @@ public class ContextMenuItem {
 		private ContextMenuAdapter.OnIntegerValueChangedListener mIntegerListener = null;
 		private boolean mSkipPaintingWithoutColor;
 		private boolean mHideDivider;
+		private int mMinHeight;
 
 		public ItemBuilder setTitleId(@StringRes int titleId, @Nullable Context context) {
 			this.mTitleId = titleId;
@@ -289,10 +297,15 @@ public class ContextMenuItem {
 			return this;
 		}
 
+		public ItemBuilder setMinHeight(int minHeight) {
+			this.mMinHeight = minHeight;
+			return this;
+		}
+
 		public ContextMenuItem createItem() {
 			return new ContextMenuItem(mTitleId, mTitle, mIcon, mColorRes, mSecondaryIcon,
 					mSelected, mProgress, mLayout, mLoading, mIsCategory, mSkipPaintingWithoutColor,
-					mPosition, mDescription, mItemClickListener, mIntegerListener, mHideDivider);
+					mPosition, mDescription, mItemClickListener, mIntegerListener, mHideDivider, mMinHeight);
 		}
 	}
 }

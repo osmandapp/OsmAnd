@@ -21,6 +21,7 @@ import android.widget.ProgressBar;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.activities.HelpActivity;
 import net.osmand.plus.activities.actions.AppModeDialog;
@@ -138,6 +139,9 @@ public class ContextMenuAdapter {
 				convertView = View.inflate(new ContextThemeWrapper(getContext(), themeRes), layoutId, null);
 				convertView.setTag(layoutId);
 			}
+			if (item.getMinHeight() > 0) {
+				convertView.setMinimumHeight(item.getMinHeight());
+			}
 			if (layoutId == R.layout.help_to_improve_item) {
 				TextView feedbackButton = (TextView) convertView.findViewById(R.id.feedbackButton);
 				Drawable pollIcon = app.getIconsCache().getThemedIcon(R.drawable.ic_action_big_poll);
@@ -171,18 +175,23 @@ public class ContextMenuAdapter {
 			}
 
 			TextView tv = (TextView) convertView.findViewById(R.id.title);
-			tv.setText(item.getTitle());
+			if (tv != null) {
+				tv.setText(item.getTitle());
+			}
 
 			if (this.layoutId == R.layout.simple_list_menu_item) {
 				@ColorRes
 				int color = lightTheme ? R.color.icon_color : R.color.dashboard_subheader_text_dark;
-				Drawable drawable = mIconsCache.getIcon(item.getIcon(), color);
-				float density = getContext().getResources().getDisplayMetrics().density;
-				int paddingInPixels = (int) (24 * density);
-				int drawableSizeInPixels = (int) (24 * density); // 32
-				drawable.setBounds(0, 0, drawableSizeInPixels, drawableSizeInPixels);
-				tv.setCompoundDrawables(drawable, null, null, null);
-				tv.setCompoundDrawablePadding(paddingInPixels);
+				Drawable drawable = item.getIcon() != ContextMenuItem.INVALID_ID
+						? mIconsCache.getIcon(item.getIcon(), color) : null;
+				if (drawable != null && tv != null) {
+					float density = getContext().getResources().getDisplayMetrics().density;
+					int paddingInPixels = (int) (24 * density);
+					int drawableSizeInPixels = (int) (24 * density); // 32
+					drawable.setBounds(0, 0, drawableSizeInPixels, drawableSizeInPixels);
+					tv.setCompoundDrawables(drawable, null, null, null);
+					tv.setCompoundDrawablePadding(paddingInPixels);
+				}
 			} else {
 				if (item.getIcon() != ContextMenuItem.INVALID_ID) {
 					int colorRes = item.getColorRes();
