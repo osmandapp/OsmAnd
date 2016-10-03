@@ -2459,4 +2459,5 @@ Si aprecieu OsmAnd  i OSM i voleu ajudar-los, és la via perfecta per fer-ho."</
     <string name="custom_search">Cerca personalitzada</string>
     <string name="edit_filter">Edita el filtre</string>
     <string name="subcategories">Subcategories</string>
+    <string name="translit_names">Translitera els noms</string>
     </resources>
