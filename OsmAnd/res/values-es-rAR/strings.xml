@@ -2435,4 +2435,5 @@ Si necesitas ayuda con la aplicación OsmAnd, contacte con nuestro equipo de sop
     <string name="custom_search">Personalizar búsqueda</string>
     <string name="edit_filter">Editar filtro</string>
     <string name="subcategories">Subcategorías</string>
+    <string name="translit_names">Transliterar nombres</string>
     </resources>
