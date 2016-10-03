@@ -2659,4 +2659,6 @@ Als je hulp nodig hebt met OsmAnd: neem contact op met ons support team: support
     <string name="new_filter">Nieuw filter</string>
     <string name="new_filter_desc">Geen een naam aan het nieuwe filter. Deze naam vindt u dan in de lijst Categorieën.</string>
     <string name="custom_search">Eigen zoekfilter</string>
+    <string name="edit_filter">Filter bewerken</string>
+    <string name="subcategories">Subcategorieën</string>
     </resources>
