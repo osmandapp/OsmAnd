@@ -2465,4 +2465,5 @@ Se vi bezonas helpon pri OsmAnd aplikaĵo, bonvolu kontakti nian helpantaron: su
     <string name="custom_search">Propra serĉado</string>
     <string name="edit_filter">Redakti filtrilon</string>
     <string name="subcategories">Subkategorioj</string>
+    <string name="translit_names">Transliterumi nomojn</string>
     </resources>
