@@ -2463,4 +2463,6 @@ Se vi bezonas helpon pri OsmAnd aplikaĵo, bonvolu kontakti nian helpantaron: su
     <string name="selected_categories">Elektitaj kategorioj</string>
     <string name="create_custom_poi">Krei propran Interesejon</string>
     <string name="custom_search">Propra serĉado</string>
+    <string name="edit_filter">Redakti filtrilon</string>
+    <string name="subcategories">Subkategorioj</string>
     </resources>
