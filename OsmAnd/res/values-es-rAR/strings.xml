@@ -2433,4 +2433,6 @@ Si necesitas ayuda con la aplicación OsmAnd, contacte con nuestro equipo de sop
     <string name="selected_categories">Categorías elegidas</string>
     <string name="create_custom_poi">Crear PDI personalizado</string>
     <string name="custom_search">Personalizar búsqueda</string>
+    <string name="edit_filter">Editar filtro</string>
+    <string name="subcategories">Subcategorías</string>
     </resources>
