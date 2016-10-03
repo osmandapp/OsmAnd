@@ -340,7 +340,10 @@ public class PoiFiltersHelper {
 	public void loadSelectedPoiFilters() {
 		Set<String> filters = application.getSettings().getSelectedPoiFilters();
 		for (String f : filters) {
-			selectedPoiFilters.add(getFilterById(f));
+			PoiUIFilter filter = getFilterById(f);
+			if (filter != null) {
+				selectedPoiFilters.add(filter);
+			}
 		}
 	}
 
