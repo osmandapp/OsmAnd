@@ -3020,4 +3020,6 @@
 <string name="poi_service_bicycle_charging_yes">Fahrrad laden: Ja</string>
 	<string name="poi_service_bicycle_charging_no">Fahrrad laden: Nein</string>
 
-</resources>
+<string name="poi_shop_craft">Kunst und Handwerk Zubehörgeschäft</string>
+
+	</resources>
