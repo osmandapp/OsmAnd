@@ -161,13 +161,13 @@
 	<string name="poi_clock">Óra</string>
 	<string name="poi_viewpoint">Kilátóhely</string>
 	<string name="poi_camp_site">Kemping</string>
-	<string name="poi_caravan_site">Lakóautóhely</string>
+	<string name="poi_caravan_site">Lakókocsihely</string>
 	<string name="poi_picnic_site">Piknikezőhely</string>
 	<string name="poi_spring">Forrás</string>
 	<string name="poi_hot_spring">Hőforrás</string>
 	<string name="poi_geyser">Gejzír</string>
 	<string name="poi_cemetery">Temető</string>
-	<string name="poi_grave_yard">Sírkert</string>
+	<string name="poi_grave_yard">Templom körüli temető</string>
 	<string name="poi_shelter">Menedék</string>
 	<string name="poi_funicular">Sikló</string>
 	<string name="poi_library">Könyvtár</string>
@@ -205,7 +205,7 @@
 	<string name="poi_craft_key_cutter">Kulcsmásoló</string>
 	<string name="poi_craft_photographer">Fotográfus</string>
 	<string name="poi_craft_photographic_laboratory">Fotólabor</string>
-	<string name="poi_craft_plumber">Vízvezeték szerelő</string>
+	<string name="poi_craft_plumber">Vízvezeték-szerelő</string>
 	<string name="poi_craft_roofer">Tetőfedő</string>
 	<string name="poi_craft_shoemaker">Cipész</string>
 	<string name="poi_hairdresser">Fodrász</string>
@@ -1044,7 +1044,7 @@
 	<string name="poi_nudism_permissive">Nudizmus: engedélyköteles</string>
 
 	<string name="poi_trade_building_supplies">Építőanyag</string>
-	<string name="poi_trade_plumbing">Vízvezeték szerelési anyagok</string>
+	<string name="poi_trade_plumbing">Vízvezeték-szerelési anyagok</string>
 	<string name="poi_trade_wood">Faanyag</string>
 	<string name="poi_trade_agricultural_supplies">Mezőgazdasági anyagok</string>
 	<string name="poi_trade_tile">Burkolóanyagok</string>
@@ -1763,7 +1763,7 @@
 	<string name="poi_surface_stone">Felület: kő</string>
 	<string name="poi_surface_metal">Felület: fém</string>
 	<string name="poi_surface_wood">Felület: fa</string>
-	<string name="poi_surface_gravel">Felület: zúzottkő</string>
+	<string name="poi_surface_gravel">Felület: zúzott kő</string>
 	<string name="poi_surface_fine_gravel">Felület: murva</string>
 	<string name="poi_surface_compacted">Felület: tömörített (makadám)</string>
 	<string name="poi_surface_sand">Felület: homok</string>
@@ -1813,4 +1813,8 @@
 
 	<string name="poi_love_hotel">Love hotel</string>
 
+	<string name="poi_caravans_yes">Lakókocsival: igen</string>
+	<string name="poi_caravans_no">Lakókocsival: nem</string>
+	<string name="poi_capacity_caravans">Lakókocsik legnagyobb száma</string>
+	<string name="poi_tomb_war_grave">Típus: hadisír</string>
 	</resources>
