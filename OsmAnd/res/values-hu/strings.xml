@@ -2534,7 +2534,7 @@ Jelenleg csak {2} MB érhető el.</string>
     <string name="lang_en_gb">angol (Egyesült Királyság)</string>
     <string name="postcode">Irányítószám</string>
     <string name="back_to_search">Vissza a kereséshez</string>
-    <string name="confirmation_to_delete_history_items">Törölni akarod a kiválasztott előzményeket?</string>
+    <string name="confirmation_to_delete_history_items">Törölni szeretnéd a kiválasztott elemeket az előzményekből?</string>
     <string name="show_something_on_map">%1$s megjelenítése a térképen</string>
     <string name="release_2_4">"
  • Új, hatékony szabad szavas kereső
@@ -2643,4 +2643,16 @@ Ha segítségre van szükséged az OsmAnd alkalmazással kapcsolatban, keresd a 
     <string name="replace_favorite_confirmation">Le szeretnéd cserélni a(z) %1$s kedvenc helyet?</string>
     <string name="driving_region_australia">Ausztrália</string>
     <string name="get_for">Beszerzés ennyi időre</string>
+    <string name="edit_filter">Szűrő szerkesztése</string>
+    <string name="subcategories">Alkategóriák</string>
+    <string name="selected_categories">Kiválasztott kategóriák</string>
+    <string name="create_custom_poi">Egyéni POI létrehozása</string>
+    <string name="custom_search">Egyéni keresés</string>
+    <string name="shared_string_filters">Szűrők</string>
+    <string name="apply_filters">Szűrők alkalmazása</string>
+    <string name="save_filter">Szűrő mentése</string>
+    <string name="delete_filter">Szűrő törlése</string>
+    <string name="new_filter">Új szűrő</string>
+    <string name="new_filter_desc">Kérlek add meg az új szűrő nevét. Később a Kategóriák listájában fogod megtalálni.</string>
+    <string name="lang_kab">kabil</string>
     </resources>
