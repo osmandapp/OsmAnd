@@ -1213,4 +1213,21 @@
 	<string name="poi_craft_saddler">Zelagilea</string>
 	<string name="poi_craft_sailmaker">Ontziola txikia</string>
 	<string name="poi_craft_sawmill">Zerratokia</string>
+	<string name="poi_craft_scaffolder">Aldamioen muntatzailea</string>
+	<string name="poi_craft_sculptor">Eskultorea</string>
+	<string name="poi_craft_shoemaker">Zapataria</string>
+	<string name="poi_craft_stonemason">Igeltseroa</string>
+	<string name="poi_craft_sweep">kedar-garbitzailea</string>
+	<string name="poi_craft_tailor">Jostuna</string>
+	<string name="poi_craft_upholsterer">Tapizatzailea</string>
+	<string name="poi_craft_watchmaker">Erlojugilea</string>
+	<string name="poi_craft_window_construction">Leiho tailerra</string>
+
+	<string name="poi_funeral_directors">Ehorztetxea</string>
+	<string name="poi_craft_computer">Ordenagailuen muntaketa</string>
+	<string name="poi_hairdresser">Ileapaintzailea</string>
+	<string name="poi_car_rental">Autoen alokairua</string>
+	<string name="poi_car_sharing">Auto partekatzea</string>
+	<string name="poi_boat_sharing">Ontzi partekatzea</string>
+	<string name="poi_dock">Kaia</string>
 	</resources>
