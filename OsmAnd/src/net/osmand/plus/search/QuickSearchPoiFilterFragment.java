@@ -205,6 +205,7 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 
 		View editTextView = inflater.inflate(R.layout.poi_filter_list_item, listView, false);
 		editText = (EditText) editTextView.findViewById(R.id.editText);
+		editTextView.findViewById(R.id.divider).setVisibility(View.GONE);
 		editText.setText(nameFilterText);
 		editText.addTextChangedListener(new TextWatcher() {
 			@Override
@@ -465,10 +466,12 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 			if (entry.getKey().getExcludedPoiAdditionalCategories() != null) {
 				excludedPoiAdditionalCategories.addAll(entry.getKey().getExcludedPoiAdditionalCategories());
 			}
-			for (String keyName : entry.getValue()) {
-				List<String> categories = poiTypes.getPoiTypeByKey(keyName).getExcludedPoiAdditionalCategories();
-				if (categories != null) {
-					excludedPoiAdditionalCategories.addAll(categories);
+			if (entry.getValue() != null) {
+				for (String keyName : entry.getValue()) {
+					List<String> categories = poiTypes.getPoiTypeByKey(keyName).getExcludedPoiAdditionalCategories();
+					if (categories != null) {
+						excludedPoiAdditionalCategories.addAll(categories);
+					}
 				}
 			}
 		}
@@ -681,7 +684,7 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 			final SwitchCompat switchItem = (SwitchCompat) view.findViewById(R.id.switchItem);
 			final CheckBox checkBoxItem = (CheckBox) view.findViewById(R.id.checkboxItem);
 			final ImageView expandItem = (ImageView) view.findViewById(R.id.expandItem);
-			final View divider = view.findViewById(R.id.item_divider);
+			final View divider = view.findViewById(R.id.divider);
 
 			if (item != null) {
 				if (nextItem != null && nextItem.groupIndex == item.groupIndex) {
