@@ -1183,4 +1183,6 @@
 	<string name="poi_library">Biblioteka</string>
 	<string name="poi_length">Luzera</string>
 
-	</resources>
+	<string name="poi_spices">Espezia denda</string>
+
+</resources>
