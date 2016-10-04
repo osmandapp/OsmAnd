@@ -3028,4 +3028,9 @@
 
 	<string name="poi_spices">Специи</string>
 
+	<string name="poi_shop_craft">Товары для рукоделия</string>
+
+	<string name="poi_service_bicycle_charging_yes">Зарядка электровелосипедов: есть</string>
+	<string name="poi_service_bicycle_charging_no">Зарядка электровелосипедов: нет</string>
+
 </resources>
