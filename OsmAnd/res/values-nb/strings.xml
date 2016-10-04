@@ -1743,4 +1743,6 @@
     <string name="selected_categories">Valgte kategorier</string>
     <string name="create_custom_poi">Opprett egendefinert interessepunkt</string>
     <string name="custom_search">Egendefinert søk</string>
+    <string name="edit_filter">Rediger filter</string>
+    <string name="subcategories">Underkategorier</string>
     </resources>
