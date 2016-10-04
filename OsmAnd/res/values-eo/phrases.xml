@@ -3015,4 +3015,9 @@
 <string name="poi_fuel_type">Brulaĵ-speco</string>
 	<string name="poi_payment_type">Pagmaniero</string>
 	<string name="poi_additional_type">Aldona</string>
+<string name="poi_shop_craft">Materialoj-por-metio vendejo</string>
+
+	<string name="poi_service_bicycle_charging_yes">Ŝargado de bicikloj: jes</string>
+	<string name="poi_service_bicycle_charging_no">Ŝargado de bicikloj: ne</string>
+
 </resources>
