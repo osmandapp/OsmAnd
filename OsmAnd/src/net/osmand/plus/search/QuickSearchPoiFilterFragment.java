@@ -30,6 +30,7 @@ import android.widget.Toast;
 
 import net.osmand.AndroidUtils;
 import net.osmand.osm.MapPoiTypes;
+import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmandApplication;
@@ -37,6 +38,7 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.poi.PoiUIFilter;
+import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.util.Algorithms;
 
@@ -44,6 +46,7 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -426,12 +429,14 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 				filterByName = filterByName.replaceAll(keyNameOpen24, "");
 			}
 
+			MapPoiTypes poiTypes = app.getPoiTypes();
 			Map<String, PoiType> poiAdditionals = filter.getPoiAdditionals();
-			List<PoiType> otherAdditionalCategories = app.getPoiTypes().getOtherMapCategory().getPoiAdditionalsCategorized();
+			Set<String> excludedPoiAdditionalCategories = getExcludedPoiAdditionalCategories();
+			List<PoiType> otherAdditionalCategories = poiTypes.getOtherMapCategory().getPoiAdditionalsCategorized();
 			if (poiAdditionals != null) {
 				Map<String, Set<String>> additionalsMap = new TreeMap<>();
-				extractPoiAdditionals(poiAdditionals.values(), additionalsMap, true);
-				extractPoiAdditionals(otherAdditionalCategories, additionalsMap, true);
+				extractPoiAdditionals(poiAdditionals.values(), additionalsMap, excludedPoiAdditionalCategories, true);
+				extractPoiAdditionals(otherAdditionalCategories, additionalsMap, excludedPoiAdditionalCategories, true);
 
 				if (additionalsMap.size() > 0) {
 					for (Entry<String, Set<String>> entry : additionalsMap.entrySet()) {
@@ -452,6 +457,24 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 		}
 	}
 
+	@NonNull
+	private Set<String> getExcludedPoiAdditionalCategories() {
+		MapPoiTypes poiTypes = getMyApplication().getPoiTypes();
+		Set<String> excludedPoiAdditionalCategories = new LinkedHashSet<>();
+		for (Entry<PoiCategory, LinkedHashSet<String>> entry : filter.getAcceptedTypes().entrySet()) {
+			if (entry.getKey().getExcludedPoiAdditionalCategories() != null) {
+				excludedPoiAdditionalCategories.addAll(entry.getKey().getExcludedPoiAdditionalCategories());
+			}
+			for (String keyName : entry.getValue()) {
+				List<String> categories = poiTypes.getPoiTypeByKey(keyName).getExcludedPoiAdditionalCategories();
+				if (categories != null) {
+					excludedPoiAdditionalCategories.addAll(categories);
+				}
+			}
+		}
+		return excludedPoiAdditionalCategories;
+	}
+
 	private List<PoiFilterListItem> getListItems() {
 		OsmandApplication app = getMyApplication();
 		MapPoiTypes poiTypes = app.getPoiTypes();
@@ -468,11 +491,12 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 				selectedPoiAdditionals.contains(keyNameOpen24), null, keyNameOpen24));
 
 		Map<String, PoiType> poiAdditionals = filter.getPoiAdditionals();
+		Set<String> excludedPoiAdditionalCategories = getExcludedPoiAdditionalCategories();
 		List<PoiType> otherAdditionalCategories = poiTypes.getOtherMapCategory().getPoiAdditionalsCategorized();
 		if (poiAdditionals != null) {
 			Map<String, Set<String>> additionalsMap = new TreeMap<>();
-			extractPoiAdditionals(poiAdditionals.values(), additionalsMap, false);
-			extractPoiAdditionals(otherAdditionalCategories, additionalsMap, false);
+			extractPoiAdditionals(poiAdditionals.values(), additionalsMap, excludedPoiAdditionalCategories, false);
+			extractPoiAdditionals(otherAdditionalCategories, additionalsMap, excludedPoiAdditionalCategories, false);
 
 			if (additionalsMap.size() > 0) {
 				for (Entry<String, Set<String>> entry : additionalsMap.entrySet()) {
@@ -483,9 +507,11 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 					items.add(new PoiFilterListItem(PoiFilterListItemType.DIVIDER, 0, null, -1, false, false, false, null, null));
 
 					String categoryIconStr = poiTypes.getPoiAdditionalCategoryIcon(category);
-					int categoryIconId = 0;
+					int categoryIconId;
 					if (!Algorithms.isEmpty(categoryIconStr)) {
 						categoryIconId = getResources().getIdentifier(categoryIconStr, "drawable", app.getPackageName());
+					} else {
+						categoryIconId = RenderingIcons.getBigIconResourceId(category);
 					}
 					if (categoryIconId == 0) {
 						categoryIconId = R.drawable.ic_action_folder_stroke;
@@ -510,21 +536,38 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 		return items;
 	}
 
-	private void extractPoiAdditionals(Collection<PoiType> poiAdditionals, Map<String, Set<String>> additionalsMap, boolean extractAll) {
+	private void extractPoiAdditionals(Collection<PoiType> poiAdditionals,
+									   Map<String, Set<String>> additionalsMap,
+									   Set<String> excludedPoiAdditionalCategories,
+									   boolean extractAll) {
+		Set<String> topTrueOnlyCategories = new LinkedHashSet<>();
+		for (PoiType poiType : poiAdditionals) {
+			String category = poiType.getPoiAdditionalCategory();
+			if (category != null) {
+				topTrueOnlyCategories.add(category);
+			}
+		}
 		for (PoiType poiType : poiAdditionals) {
 			String category = poiType.getPoiAdditionalCategory();
 			if (category == null) {
 				category = "";
 			}
+			if (excludedPoiAdditionalCategories != null && excludedPoiAdditionalCategories.contains(category)) {
+				continue;
+			}
 			if (collapsedCategories.contains(category) && !extractAll) {
 				if (!additionalsMap.containsKey(category)) {
 					additionalsMap.put(category, new TreeSet<String>());
 				}
+				topTrueOnlyCategories.remove(category);
 				continue;
 			}
 			boolean showAll = showAllCategories.contains(category) || extractAll;
 			String name = poiType.getTranslation();
 			String keyName = name.replace(' ', ':').toLowerCase();
+			if (!poiType.isTopVisible()) {
+				topTrueOnlyCategories.remove(category);
+			}
 			if (showAll || poiType.isTopVisible() || selectedPoiAdditionals.contains(keyName)) {
 				Set<String> adds = additionalsMap.get(category);
 				if (adds == null) {
@@ -532,6 +575,11 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 					additionalsMap.put(category, adds);
 				}
 				adds.add(name);
+			}
+		}
+		for (String category : topTrueOnlyCategories) {
+			if (!showAllCategories.contains(category)) {
+				showAllCategories.add(category);
 			}
 		}
 	}
@@ -633,7 +681,7 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 			final SwitchCompat switchItem = (SwitchCompat) view.findViewById(R.id.switchItem);
 			final CheckBox checkBoxItem = (CheckBox) view.findViewById(R.id.checkboxItem);
 			final ImageView expandItem = (ImageView) view.findViewById(R.id.expandItem);
-			final View divider = view.findViewById(R.id.divider);
+			final View divider = view.findViewById(R.id.item_divider);
 
 			if (item != null) {
 				if (nextItem != null && nextItem.groupIndex == item.groupIndex) {
@@ -641,8 +689,10 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 				} else {
 					divider.setVisibility(View.GONE);
 				}
+
 				if (item.iconId != 0) {
-					icon.setImageDrawable(app.getIconsCache().getThemedIcon(item.iconId));
+					icon.setImageDrawable(app.getIconsCache().getIcon(item.iconId,
+							app.getSettings().isLightContent() ? R.color.icon_color : R.color.color_white));
 					icon.setVisibility(View.VISIBLE);
 				} else {
 					icon.setVisibility(View.GONE);

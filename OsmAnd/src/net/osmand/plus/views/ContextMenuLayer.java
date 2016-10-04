@@ -31,7 +31,6 @@ import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.data.TransportStop;
-import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiFilter;
 import net.osmand.osm.PoiType;
@@ -601,7 +600,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 										names.add(entry.getValue());
 									}
 								}
-								Amenity amenity = findAmenity(renderedObject.getId() >> 6, names,
+								Amenity amenity = findAmenity(renderedObject.getId() >> 7, names,
 										latLon.getLatitude(), latLon.getLongitude());
 								if (amenity != null) {
 									selectedObjects.put(amenity, poiMenuProvider);
@@ -610,7 +609,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 								TransportStop nearestTransportStop = findNearestTransportStop(latLon.getLatitude(), latLon.getLongitude());
 								if (nearestTransportStop != null) {
 									selectedObjects.put(nearestTransportStop, transportStopMenuProvider);
-									continue;
+									//continue;
 								}
 								if (renderedObject.getX() != null && renderedObject.getX().size() > 1
 										&& renderedObject.getY() != null && renderedObject.getY().size() > 1) {
@@ -640,7 +639,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	}
 
 	private Amenity findAmenity(long id, List<String> names, double lat, double lon) {
-		QuadRect rect = MapUtils.calculateLatLonBbox(lat, lon, 150);
+		QuadRect rect = MapUtils.calculateLatLonBbox(lat, lon, 50);
 		List<Amenity> amenities = activity.getMyApplication().getResourceManager().searchAmenities(
 				new BinaryMapIndexReader.SearchPoiTypeFilter() {
 					@Override
@@ -656,20 +655,10 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 		Amenity res = null;
 		for (Amenity amenity : amenities) {
-			Long amenityId = amenity.getId();
-			if (amenityId != null && amenityId == id) {
+			Long amenityId = amenity.getId() >> 1;
+			if (amenityId == id) {
 				res = amenity;
 				break;
-			}
-		}
-		if (res == null && (id & 1) == 0) {
-			id++;
-			for (Amenity amenity : amenities) {
-				Long amenityId = amenity.getId();
-				if (amenityId != null && amenityId == id) {
-					res = amenity;
-					break;
-				}
 			}
 		}
 		if (res == null && names != null && names.size() > 0) {
@@ -695,7 +684,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 	private TransportStop findTransportStop(long id, double lat, double lon) {
 
-		QuadRect rect = MapUtils.calculateLatLonBbox(lat, lon, 150);
+		QuadRect rect = MapUtils.calculateLatLonBbox(lat, lon, 50);
 		List<TransportStop> res = activity.getMyApplication().getResourceManager()
 				.searchTransportSync(rect.top, rect.left, rect.bottom, rect.right,
 						new ResultMatcher<TransportStop>() {

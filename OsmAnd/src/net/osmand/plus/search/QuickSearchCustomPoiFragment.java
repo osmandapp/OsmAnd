@@ -19,8 +19,10 @@ import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import net.osmand.AndroidUtils;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.IconsCache;
@@ -204,7 +206,7 @@ public class QuickSearchCustomPoiFragment extends DialogFragment {
 		private OsmandApplication app;
 
 		CategoryListAdapter(OsmandApplication app, List<PoiCategory> items) {
-			super(app, R.layout.list_item_icon_and_menu, items);
+			super(app, R.layout.list_item_icon24_and_menu, items);
 			this.app = app;
 		}
 
@@ -214,7 +216,7 @@ public class QuickSearchCustomPoiFragment extends DialogFragment {
 			LayoutInflater inflater = (LayoutInflater) app.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			View row = convertView;
 			if (row == null) {
-				row = inflater.inflate(R.layout.list_item_icon_and_menu, parent, false);
+				row = inflater.inflate(R.layout.list_item_icon24_and_menu, parent, false);
 			}
 			PoiCategory category = getItem(position);
 			if (category != null) {
@@ -350,6 +352,7 @@ public class QuickSearchCustomPoiFragment extends DialogFragment {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				dialog.dismiss();
+				listAdapter.notifyDataSetChanged();
 			}
 		});
 		builder.setPositiveButton(getContext().getText(R.string.shared_string_apply), new DialogInterface.OnClickListener() {

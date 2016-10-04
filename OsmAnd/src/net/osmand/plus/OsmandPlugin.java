@@ -393,8 +393,14 @@ public abstract class OsmandPlugin {
 		}
 		for (OsmandPlugin plugin : getEnabledPlugins()) {
 			if (!(plugin instanceof ParkingPositionPlugin) && !(plugin instanceof OsmandMonitoringPlugin)) {
-				adapter.addItem(new ContextMenuItem.ItemBuilder().setLayout(R.layout.context_menu_list_divider).createItem());
+				int itemsCount = adapter.length();
 				plugin.registerMapContextMenuActions(map, latitude, longitude, adapter, selectedObj);
+				if (adapter.length() > itemsCount) {
+					adapter.addItem(new ContextMenuItem.ItemBuilder()
+							.setPosition(itemsCount)
+							.setLayout(R.layout.context_menu_list_divider)
+							.createItem());
+				}
 			}
 		}
 	}
