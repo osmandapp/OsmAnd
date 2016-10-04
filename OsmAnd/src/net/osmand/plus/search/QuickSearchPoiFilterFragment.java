@@ -128,6 +128,7 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 		}
 		if (selectedPoiAdditionals.size() == 0) {
 			processFilterFields();
+			initListItems();
 		}
 		selectedPoiAdditionalsOrig = new TreeSet<>(selectedPoiAdditionals);
 
@@ -313,7 +314,7 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 
 				if (app.getPoiFilters().removePoiFilter(filter)) {
 					Toast.makeText(getContext(), MessageFormat.format(getContext().getText(R.string.edit_filter_delete_message).toString(),
-									filter.getName()), Toast.LENGTH_SHORT).show();
+							filter.getName()), Toast.LENGTH_SHORT).show();
 					app.getSearchUICore().refreshCustomPoiFilters();
 					QuickSearchDialogFragment quickSearchDialogFragment = (QuickSearchDialogFragment) getParentFragment();
 					quickSearchDialogFragment.reloadCategories();
@@ -362,7 +363,7 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 				}
 				if (app.getPoiFilters().createPoiFilter(nFilter)) {
 					Toast.makeText(getContext(), MessageFormat.format(getContext().getText(R.string.edit_filter_create_message).toString(),
-									editText.getText().toString()), Toast.LENGTH_SHORT).show();
+							editText.getText().toString()), Toast.LENGTH_SHORT).show();
 					app.getSearchUICore().refreshCustomPoiFilters();
 					((QuickSearchDialogFragment) getParentFragment()).replaceQueryWithUiFilter(nFilter, "");
 					((QuickSearchDialogFragment) getParentFragment()).reloadCategories();
@@ -543,13 +544,6 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 									   Map<String, Set<String>> additionalsMap,
 									   Set<String> excludedPoiAdditionalCategories,
 									   boolean extractAll) {
-		Set<String> topTrueOnlyCategories = new LinkedHashSet<>();
-		for (PoiType poiType : poiAdditionals) {
-			String category = poiType.getPoiAdditionalCategory();
-			if (category != null) {
-				topTrueOnlyCategories.add(category);
-			}
-		}
 		for (PoiType poiType : poiAdditionals) {
 			String category = poiType.getPoiAdditionalCategory();
 			if (category == null) {
@@ -562,15 +556,11 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 				if (!additionalsMap.containsKey(category)) {
 					additionalsMap.put(category, new TreeSet<String>());
 				}
-				topTrueOnlyCategories.remove(category);
 				continue;
 			}
 			boolean showAll = showAllCategories.contains(category) || extractAll;
 			String name = poiType.getTranslation();
 			String keyName = name.replace(' ', ':').toLowerCase();
-			if (!poiType.isTopVisible()) {
-				topTrueOnlyCategories.remove(category);
-			}
 			if (showAll || poiType.isTopVisible() || selectedPoiAdditionals.contains(keyName)) {
 				Set<String> adds = additionalsMap.get(category);
 				if (adds == null) {
@@ -580,8 +570,61 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 				adds.add(name);
 			}
 		}
+	}
+
+	private void initListItems() {
+		Map<String, PoiType> poiAdditionals = filter.getPoiAdditionals();
+		Set<String> excludedPoiAdditionalCategories = getExcludedPoiAdditionalCategories();
+		List<PoiType> otherAdditionalCategories = getMyApplication().getPoiTypes().getOtherMapCategory().getPoiAdditionalsCategorized();
+		if (poiAdditionals != null) {
+			initPoiAdditionals(poiAdditionals.values(), excludedPoiAdditionalCategories);
+			initPoiAdditionals(otherAdditionalCategories, excludedPoiAdditionalCategories);
+		}
+	}
+
+	private void initPoiAdditionals(Collection<PoiType> poiAdditionals,
+									Set<String> excludedPoiAdditionalCategories) {
+		Set<String> selectedCategories = new LinkedHashSet<>();
+		Set<String> topTrueOnlyCategories = new LinkedHashSet<>();
+		Set<String> topFalseOnlyCategories = new LinkedHashSet<>();
+		for (PoiType poiType : poiAdditionals) {
+			String category = poiType.getPoiAdditionalCategory();
+			if (category != null) {
+				topTrueOnlyCategories.add(category);
+				topFalseOnlyCategories.add(category);
+			}
+		}
+		for (PoiType poiType : poiAdditionals) {
+			String category = poiType.getPoiAdditionalCategory();
+			if (category == null) {
+				category = "";
+			}
+			if (excludedPoiAdditionalCategories != null && excludedPoiAdditionalCategories.contains(category)) {
+				topTrueOnlyCategories.remove(category);
+				topFalseOnlyCategories.remove(category);
+				continue;
+			}
+			if (!poiType.isTopVisible()) {
+				topTrueOnlyCategories.remove(category);
+			} else {
+				topFalseOnlyCategories.remove(category);
+			}
+			String name = poiType.getTranslation();
+			String keyName = name.replace(' ', ':').toLowerCase();
+			if (selectedPoiAdditionals.contains(keyName)) {
+				selectedCategories.add(category);
+			}
+		}
 		for (String category : topTrueOnlyCategories) {
 			if (!showAllCategories.contains(category)) {
+				showAllCategories.add(category);
+			}
+		}
+		for (String category : topFalseOnlyCategories) {
+			if (!collapsedCategories.contains(category) && !showAllCategories.contains(category)) {
+				if (!selectedCategories.contains(category)) {
+					collapsedCategories.add(category);
+				}
 				showAllCategories.add(category);
 			}
 		}
