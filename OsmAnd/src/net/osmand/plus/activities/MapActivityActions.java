@@ -628,6 +628,8 @@ public class MapActivityActions implements DialogProvider {
 				.setListener(new ContextMenuAdapter.ItemClickListener() {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked) {
+						mapActivity.showQuickSearch(MapActivity.ShowQuickSearchMode.NEW_IF_EXPIRED, false);
+						/*
 						Intent newIntent = new Intent(mapActivity, mapActivity.getMyApplication().getAppCustomization()
 								.getSearchActivity());
 						LatLon loc = mapActivity.getMapLocation();
@@ -638,6 +640,7 @@ public class MapActivityActions implements DialogProvider {
 						}
 						newIntent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 						mapActivity.startActivity(newIntent);
+						*/
 						return true;
 					}
 				}).createItem());

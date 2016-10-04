@@ -17,24 +17,25 @@ public abstract class AbstractPoiType {
 	private AbstractPoiType baseLangType;
 	private boolean notEditableOsm;
 	private String poiAdditionalCategory;
+	private List<String> excludedPoiAdditionalCategoies;
 
 	public AbstractPoiType(String keyName, MapPoiTypes registry) {
 		this.keyName = keyName;
 		this.registry = registry;
 	}
-	
+
 	public void setBaseLangType(AbstractPoiType baseLangType) {
 		this.baseLangType = baseLangType;
 	}
-	
+
 	public AbstractPoiType getBaseLangType() {
 		return baseLangType;
 	}
-	
+
 	public void setLang(String lang) {
 		this.lang = lang;
 	}
-	
+
 	public String getLang() {
 		return lang;
 	}
@@ -42,28 +43,28 @@ public abstract class AbstractPoiType {
 	public String getKeyName() {
 		return keyName;
 	}
-	
+
 	public String getIconKeyName() {
 		String kn = getKeyName();
-		if(kn.startsWith("osmand_")) {
+		if (kn.startsWith("osmand_")) {
 			kn = kn.substring("osmand_".length());
 		}
 		return kn.replace(':', '_');
 	}
-	
+
 	public void setTopVisible(boolean topVisible) {
 		this.topVisible = topVisible;
 	}
-	
+
 	public boolean isTopVisible() {
 		return topVisible;
 	}
-	
+
 	public boolean isAdditional() {
 		return this instanceof PoiType && this.isAdditional();
 	}
-	
-	
+
+
 	public String getTranslation() {
 		return registry.getTranslation(this);
 	}
@@ -88,7 +89,18 @@ public abstract class AbstractPoiType {
 			poiAdditionalsCategorized.add(tp);
 		}
 	}
-	
+
+	public void addPoiAdditionalsCategorized(List<PoiType> tps) {
+		if (poiAdditionals == null) {
+			poiAdditionals = new ArrayList<>();
+		}
+		poiAdditionals.addAll(tps);
+		if (poiAdditionalsCategorized == null) {
+			poiAdditionalsCategorized = new ArrayList<>();
+		}
+		poiAdditionalsCategorized.addAll(tps);
+	}
+
 	public List<PoiType> getPoiAdditionals() {
 		if (poiAdditionals == null) {
 			return Collections.emptyList();
@@ -119,10 +131,21 @@ public abstract class AbstractPoiType {
 		this.poiAdditionalCategory = poiAdditionalCategory;
 	}
 
+	public List<String> getExcludedPoiAdditionalCategories() {
+		return excludedPoiAdditionalCategoies;
+	}
+
+	public void addExcludedPoiAdditionalCategories(String[] excludedPoiAdditionalCategories) {
+		if (excludedPoiAdditionalCategoies == null) {
+			excludedPoiAdditionalCategoies = new ArrayList<>();
+		}
+		Collections.addAll(excludedPoiAdditionalCategoies, excludedPoiAdditionalCategories);
+	}
+
 	public abstract Map<PoiCategory, LinkedHashSet<String>> putTypes(Map<PoiCategory, LinkedHashSet<String>> acceptedTypes);
-	
+
 	@Override
 	public String toString() {
 		return keyName;
-	}	
+	}
 }

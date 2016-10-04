@@ -24,8 +24,8 @@
 
             <ImageView
                 android:id="@+id/icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:src="@drawable/ic_action_search_dark"/>
 
         </LinearLayout>
@@ -98,10 +98,11 @@
     </LinearLayout>
 
     <View
-        android:id="@+id/divider"
+        android:id="@+id/item_divider"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginLeft="54dp"
+        android:layout_marginStart="54dp"
         android:background="?attr/dashboard_divider"/>
 
 </LinearLayout>
