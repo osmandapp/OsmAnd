@@ -2664,4 +2664,5 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="selected_categories">Абраныя катэгорыі</string>
     <string name="create_custom_poi">Стварыць уласныя POI</string>
     <string name="custom_search">Уласны пошук</string>
+    <string name="translit_names">Транслітарацыя назваў</string>
     </resources>
