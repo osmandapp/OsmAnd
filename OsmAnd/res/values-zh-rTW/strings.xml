@@ -2593,4 +2593,15 @@ Facebook：https://www.facebook.com/osmandapp
     <string name="osm_live_subscription_desc">啟用認購每小時、每天、每週的更新和世界各地所有的地圖無限制的下載。</string>
     <string name="driving_region_australia">澳洲</string>
     <string name="lang_kab">卡拜爾</string>
+    <string name="edit_filter">編輯篩選</string>
+    <string name="shared_string_filters">篩選</string>
+    <string name="selected_categories">已選取分類</string>
+    <string name="subcategories">子分類</string>
+    <string name="create_custom_poi">建立自訂 POI</string>
+    <string name="custom_search">自訂搜尋</string>
+    <string name="apply_filters">套用篩選</string>
+    <string name="save_filter">儲存篩選</string>
+    <string name="delete_filter">刪除篩選</string>
+    <string name="new_filter">新的篩選</string>
+    <string name="new_filter_desc">請輸入新的篩選名稱。您可以在分類清單裡找到它。</string>
     </resources>
