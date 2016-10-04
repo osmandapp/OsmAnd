@@ -1203,4 +1203,14 @@
 
 	<string name="poi_honey">Ezti denda</string>
 
+	<string name="poi_craft_painter">Margolaria</string>
+	<string name="poi_craft_photographer">Argazkilaria</string>
+	<string name="poi_craft_photographic_laboratory">Argazki-laborategia</string>
+	<string name="poi_craft_plasterer">Igeltseroa</string>
+	<string name="poi_craft_plumber">Iturgina</string>
+	<string name="poi_craft_rigger">Muntatzailea</string>
+	<string name="poi_craft_roofer">Teilatu-emailea</string>
+	<string name="poi_craft_saddler">Zelagilea</string>
+	<string name="poi_craft_sailmaker">Ontziola txikia</string>
+	<string name="poi_craft_sawmill">Zerratokia</string>
 	</resources>
