@@ -2659,4 +2659,9 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="delete_filter">Выдаліць фільтар</string>
     <string name="new_filter">Новы фільтар</string>
     <string name="new_filter_desc">Калі ласка, задайце імя для новага фільтра. Будзе даступны праз сьпіс катэгорый.</string>
+    <string name="edit_filter">Зьмяніць фільтар</string>
+    <string name="subcategories">Падкатэгорыі</string>
+    <string name="selected_categories">Абраныя катэгорыі</string>
+    <string name="create_custom_poi">Стварыць уласныя POI</string>
+    <string name="custom_search">Уласны пошук</string>
     </resources>
