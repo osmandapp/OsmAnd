@@ -2077,7 +2077,7 @@ A nézet aktiválása megváltoztatja a térképstílust „Tél és síelésre�
     <string name="lang_br">breton</string>
     <string name="lang_sq">albán</string>
     <string name="lang_is">izlandi</string>
-    <string name="lang_bpy">bishnupriya</string>
+    <string name="lang_bpy">bisnuprija manipuri</string>
     <string name="lang_nv">navajo</string>
     <string name="lang_ga">ír</string>
     <string name="lang_la">latin</string>
@@ -2555,7 +2555,7 @@ Jelenleg csak {2} MB érhető el.</string>
     <string name="search_categories">Kategóriák</string>
     <string name="city_type_district">Kerület</string>
     <string name="map_widget_search">Keresés</string>
-	<string name="lang_hsb">Szorb (felső)</string>
+	<string name="lang_hsb">szorb (felső)</string>
     <string name="shared_string_from">innen</string>
     <string name="coords_search">Koordináta keresés</string>
     <string name="city_type_neighbourhood">Városrész</string>
