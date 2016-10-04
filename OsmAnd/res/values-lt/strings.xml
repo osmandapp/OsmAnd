@@ -351,7 +351,7 @@ Dabar laisvos vietos yra {2} MB.</string>
 \n\t\n\tJo aktyvavimui nueikite į \'Meniu\' → \'Konfigūruoti žemėlapį\' → \'Žemėlapių šaltiniai…\' → \'Parsiųsti vektoriniai žemėlapiai\'.</string>
     <string name="choose_audio_stream">Balso nurodymų išvestis</string>
     <string name="choose_audio_stream_descr">Pasirinkite kanalą, kuriuo skambės balso nurodymai</string>
-    <string name="voice_stream_voice_call">Balso skambučio audio (taip pat bando nutraukti automobilio BT stereosistemą)</string>
+    <string name="voice_stream_voice_call">Balso skambučio audio (taip pat bando įsiterpti į automobilio Bluetooth audio sistemą)</string>
     <string name="voice_stream_notification">Perspėjimų audio</string>
     <string name="voice_stream_music">Multimedijos/muzikos audio</string>
     <string name="warning_tile_layer_not_downloadable">Programai neišeina parsiųsti žemėlapio sluoksnio %1$s, todėl įdiekite programą iš naujo.</string>
@@ -474,7 +474,7 @@ Dabar laisvos vietos yra {2} MB.</string>
     <string name="shared_string_select_all">Pasirinkti viską</string>
     <string name="shared_string_refresh">Atnaujinti</string>
     <string name="fast_route_mode">Greičiausias maršrutas</string>
-    <string name="fast_route_mode_descr">Įjunkite, kad būtų skaičiuojamas greičiausias maršrutas. Priešingu atveju bus skaičiuojamas trumpiausias maršrutas </string>
+    <string name="fast_route_mode_descr">"Įjunkite, kad būtų skaičiuojamas greičiausias maršrutas arba išjunkite kad skaičiuotų taupiausią maršrutą. "</string>
     <string name="tiles_to_download_estimated_size">Esant {0} dydžiui parsiųsti {1} žemėlapio lakštus ({2} MB)</string>
     <string name="shared_string_download_map">Parsiųsti žemėlapį</string>
     <string name="select_max_zoom_preload_area">Pasirinkite didžiausią dydį, kurį parsiųsti</string>
@@ -1131,7 +1131,7 @@ Navigacija
 - Pasirinktinai vietų pavadinimus galima rodyti angliškai, vietine kalba arba fonetiškai
 
 Naudokitės OpenStreeMap ir Vikipedijos informacija:
-- Kokybiška informacija iš geriausių pasaulio kolaboravimo projektų
+- Kokybiška informacija iš geriausių pasaulio bendradarbiavimo projektų
 - Pasaulio žemėlapiai iš OpenStreeMap, atskirai šalims ar regionams
 - LV rekomendacijos iš Vikipedijos
 - Neribotas nemokamas atsisiuntimas tiesiai iš programos
@@ -1140,10 +1140,10 @@ Naudokitės OpenStreeMap ir Vikipedijos informacija:
 - Galimybė pasirinkti pilną arba tik kelių tinklo žemėlapį (Pvz. Visa Japonija užima 700MB, o kelių žemėlapis tik 200MB)
 - Taip pat palaikomi internetiniai ar laikinai išsaugoti žemėlapiai
 
-Saugumo funkcionalmas
+Saugumo funkcionalumas
 - Pasirenkamas automatizuotas dienos/nakties rodinio perjungimas
 - Pasirenkamas greičio apribojimų rodymas su priminimu jei jį viršijate
-- Pasirenkamas žemėlapio mąstelio pagal judėjimo greitį nustatymas
+- Pasirenkamas žemėlapio mastelio pagal judėjimo greitį nustatymas
 - Dalykitės savo buvimo vieta, kad jūsų draugai galėtų jus rasti Dviračio ar pėsčiojo funkcionalumas
 - Žemėlapiuose pateikiami takeliai, pėsčiųjų ar dviračių takai
 - Maršruto skaičiavimo režimai pėstiesiems ir dviratininkams
@@ -1158,7 +1158,7 @@ Tiesiogiai prisidėkite prie OpenStreetMap
 - Pridėkite LV ir iš karto įkelkite į OSM (arba galite padaryti tai ir vėliau jei neturite interneto)
 - Pasirinktinai galima įrašyti judėjimo istoriją (kai įrenginys yra užmigdytas)
 
-OsmAnd yra atviro kodo programa, kuri aktyviai tobulinama. Kiekvienas gali prisidėti prie programos vystymo pranešdamas apie klaidas, vertimais ar programuodamas naujas funckcijas. Šis projektas yra labai gyvas ir pastoviai vystomas įvairiapusio kurėjų ir naudotojų bendradarbiavimo pagalba. Projekto progresas taip pat priklauso nuo finansinės paramos, kuri reikalinga naujų funkcijų vystymui, programavimui ir testavimui. Pirkdami OsmAnd+ jūs padėsite programą padaryti dar geresne! Taip pat galima finansuoti specifinį naują funkcionalumą arba tiesiog paremti projektą tiesiogiai osmand.net puslapyje.
+OsmAnd yra atviro kodo programa, kuri aktyviai tobulinama. Kiekvienas gali prisidėti prie programos vystymo pranešdamas apie klaidas, vertimais ar programuodamas naujas funkcijas. Šis projektas yra labai gyvas ir pastoviai vystomas įvairiapusio kūrėjų ir naudotojų bendradarbiavimo pagalba. Projekto progresas taip pat priklauso nuo finansinės paramos, kuri reikalinga naujų funkcijų vystymui, programavimui ir testavimui. Pirkdami OsmAnd+ jūs padėsite programą padaryti dar geresne! Taip pat galima finansuoti specifinį naują funkcionalumą arba tiesiog paremti projektą tiesiogiai osmand.net puslapyje.
 
 Apytikslis žemėlapių padengimas ir kokybė:
 - Vakarų Europa: ****
@@ -2553,4 +2553,11 @@ Failams reikalinga {3} MB laikinam ir {1} MB pastoviam saugojimui.
     <string name="search_location">Nustatoma vietos padėtis…</string>
     <string name="storage_free_space">Laisva vieta</string>
     <string name="no_update_info">Nerodyti atnaujinimų</string>
+    <string name="edit_filter">Redaguoti filtrą</string>
+    <string name="subcategories">Subkategorijos</string>
+    <string name="selected_categories">Pasirinktos kategorijos</string>
+    <string name="create_custom_poi">Sukurti naudotojo LV</string>
+    <string name="custom_search">Naudotojo nustatyta paieška</string>
+    <string name="shared_string_filters">Filtrai</string>
+    <string name="apply_filters">Pritaikyti filtrus</string>
     </resources>
