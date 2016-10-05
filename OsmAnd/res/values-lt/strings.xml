@@ -2566,4 +2566,13 @@ Failams reikalinga {3} MB laikinam ir {1} MB pastoviam saugojimui.
     <string name="new_filter_desc">Įveskite pavadinimą naujam filtrui. Jį galėsite rasti Kategorijų sąraše.</string>
     <string name="osm_live_payment_desc">Prenumeratos mokestis bus nuskaitomas kas mėnesį. Prenumeratą galite nutraukti bet kuriuo metu Google Play programoje.</string>
     <string name="donation_to_osm">Parama OpenStreeMap bendruomenei</string>
+    <string name="donation_to_osm_desc">Dalis jūsų paramos bus nusiųsta OSM nariams, kurie teikia OpenStreetMap papildymus. Prenumeratos kaina liks nepakitusi.</string>
+    <string name="osm_live_subscription_desc">Prenumerata įgalins savaitinius, kasdienius ar kas valandinius atnaujinimus ir neribotą parsiuntimų kiekį visiems pasaulio žemėlapiams.</string>
+    <string name="get_it">Gauti</string>
+    <string name="get_for">Gauti už %1$s</string>
+    <string name="get_for_month">Gauti už %1$s kas mėnesį</string>
+    <string name="osm_live_banner_desc">Gaukite neribotą kiekį žemėlapių parsiuntimų ir atnaujinimus dažniau nei kas mėnesį: kas valandą, kas dieną ar kas savaitę.</string>
+    <string name="osmand_plus_banner_desc">Pilna OsmAnd versija su neribotais žemėlapių parsiuntimais ir kas mėnesį atnaujinamais žemėlapiais.</string>
+    <string name="si_mi_meters">Mylios/metrai</string>
+    <string name="skip_map_downloading">Praleisti žemėlapių parsiuntimą</string>
     </resources>
