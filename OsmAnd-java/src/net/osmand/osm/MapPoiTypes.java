@@ -429,6 +429,7 @@ public class MapPoiTypes {
 				gt.setReferenceType(pt);
 			}
 		}
+		/*
 		for (Entry<AbstractPoiType, Set<String>> entry : abstractTypeAdditionalCategories.entrySet()) {
 			for (String category : entry.getValue()) {
 				List<PoiType> poiAdditionals = categoryPoiAdditionalMap.get(category);
@@ -437,6 +438,7 @@ public class MapPoiTypes {
 				}
 			}
 		}
+		*/
 		findDefaultOtherCategory();
 		init = true;
 		log.info("Time to init poi types " + (System.currentTimeMillis() - time)); //$NON-NLS-1$
