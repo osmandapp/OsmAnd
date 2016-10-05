@@ -269,6 +269,7 @@ public class MapPoiTypes {
 		final Map<String, PoiType> allTypes = new LinkedHashMap<String, PoiType>();
 		final Map<String, List<PoiType>> categoryPoiAdditionalMap = new LinkedHashMap<String, List<PoiType>>();
 		final Map<AbstractPoiType, Set<String>> abstractTypeAdditionalCategories = new LinkedHashMap<AbstractPoiType, Set<String>>();
+		final Map<String, AbstractPoiType> additionalCategoryOriginMap = new LinkedHashMap<String, AbstractPoiType>();
 		if (resourceName != null) {
 			this.resourceName = resourceName;
 		}
@@ -354,6 +355,13 @@ public class MapPoiTypes {
 							if (!Algorithms.isEmpty(icon)) {
 								poiAdditionalCategoryIcons.put(lastPoiAdditionalCategory, icon);
 							}
+							if (lastType != null) {
+								additionalCategoryOriginMap.put(lastPoiAdditionalCategory, lastType);
+							} else if (lastFilter != null) {
+								additionalCategoryOriginMap.put(lastPoiAdditionalCategory, lastFilter);
+							} else if (lastCategory != null) {
+								additionalCategoryOriginMap.put(lastPoiAdditionalCategory, lastCategory);
+							}
 						}
 
 					} else if (name.equals("poi_type")) {
@@ -429,16 +437,18 @@ public class MapPoiTypes {
 				gt.setReferenceType(pt);
 			}
 		}
-		/*
 		for (Entry<AbstractPoiType, Set<String>> entry : abstractTypeAdditionalCategories.entrySet()) {
 			for (String category : entry.getValue()) {
 				List<PoiType> poiAdditionals = categoryPoiAdditionalMap.get(category);
 				if (poiAdditionals != null) {
+					boolean reference = additionalCategoryOriginMap.get(category) != entry.getKey();
+					for (PoiType poiType : poiAdditionals) {
+						poiType.setPoiAdditionalReference(reference);
+					}
 					entry.getKey().addPoiAdditionalsCategorized(poiAdditionals);
 				}
 			}
 		}
-		*/
 		findDefaultOtherCategory();
 		init = true;
 		log.info("Time to init poi types " + (System.currentTimeMillis() - time)); //$NON-NLS-1$
@@ -662,7 +672,7 @@ public class MapPoiTypes {
 
 
 	private void initPoiType(PoiType p) {
-		if (!p.isReference()) {
+		if (!p.isReference() && !p.isPoiAdditionalReference()) {
 			String key = null;
 			if (p.isAdditional()) {
 				key = p.isText() ? p.getRawOsmTag() :
