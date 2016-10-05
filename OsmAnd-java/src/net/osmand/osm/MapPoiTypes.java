@@ -382,7 +382,7 @@ public class MapPoiTypes {
 							lastTypePoiAdditionalsCategories.addAll(lastCategoryPoiAdditionalsCategories);
 							lastTypePoiAdditionalsCategories.addAll(lastFilterPoiAdditionalsCategories);
 							if(!Algorithms.isEmpty(parser.getAttributeValue("", "poi_additional_category"))) {
-								Collections.addAll(lastFilterPoiAdditionalsCategories, parser.getAttributeValue("", "poi_additional_category").split(","));
+								Collections.addAll(lastTypePoiAdditionalsCategories, parser.getAttributeValue("", "poi_additional_category").split(","));
 							}
 							if(!Algorithms.isEmpty(parser.getAttributeValue("", "excluded_poi_additional_category"))) {
 								lastType.addExcludedPoiAdditionalCategories(parser.getAttributeValue("", "excluded_poi_additional_category").split(","));
