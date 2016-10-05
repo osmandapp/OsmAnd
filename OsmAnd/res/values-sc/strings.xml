@@ -2584,4 +2584,6 @@ Como bi sunt {2} MB ebbia disponìbiles.</string>
     <string name="selected_categories">Categorias ischertadas</string>
     <string name="create_custom_poi">Crea unu PDI personalizadu</string>
     <string name="custom_search">Chirca personalizada</string>
+    <string name="edit_filter">Acontza su filtru</string>
+    <string name="subcategories">Suta-categorias</string>
     </resources>
