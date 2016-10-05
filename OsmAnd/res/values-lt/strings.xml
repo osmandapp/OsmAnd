@@ -2560,4 +2560,10 @@ Failams reikalinga {3} MB laikinam ir {1} MB pastoviam saugojimui.
     <string name="custom_search">Naudotojo nustatyta paieška</string>
     <string name="shared_string_filters">Filtrai</string>
     <string name="apply_filters">Pritaikyti filtrus</string>
+    <string name="save_filter">Išsaugoti filtrą</string>
+    <string name="delete_filter">Ištrinti filtrą</string>
+    <string name="new_filter">Naujas filtras</string>
+    <string name="new_filter_desc">Įveskite pavadinimą naujam filtrui. Jį galėsite rasti Kategorijų sąraše.</string>
+    <string name="osm_live_payment_desc">Prenumeratos mokestis bus nuskaitomas kas mėnesį. Prenumeratą galite nutraukti bet kuriuo metu Google Play programoje.</string>
+    <string name="donation_to_osm">Parama OpenStreeMap bendruomenei</string>
     </resources>
