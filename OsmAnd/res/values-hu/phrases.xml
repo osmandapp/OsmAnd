@@ -1820,4 +1820,9 @@
 	<string name="poi_additional_type">További</string>
 <string name="poi_payment_meal_voucher_yes">Étkezési utalványokat elfogad</string>
 	<string name="poi_payment_meal_voucher_no">Étkezési utalványokat nem fogad el</string>
+	<string name="poi_dry_dock">Szárazdokk</string>
+	<string name="poi_fog_signal">Ködjelzés</string>
+	<string name="poi_harbour_basin">Kikötőmedence</string>
+	<string name="poi_pile">Cölöp</string>
+	<string name="poi_radio_station">Rádióállomás</string>
 	</resources>
