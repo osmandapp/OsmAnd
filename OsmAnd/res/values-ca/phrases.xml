@@ -1142,7 +1142,7 @@
 	<string name="poi_landfill_waste_nuclear">Residus radioactius</string>
 	<string name="poi_brownfield">Camp per rehabilitar</string>
 	<string name="poi_start_date">Data d\'inici</string>
-	<string name="poi_wheelchair">Cadira de rodes</string>
+	<string name="poi_wheelchair_yes">Cadira de rodes</string>
 
 	<string name="poi_generator_source_diesel">Font d\'energia: dièsel</string>
 

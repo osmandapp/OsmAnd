@@ -1007,7 +1007,7 @@
 	<string name="poi_crossing_uncontrolled">Szabályozatlan</string>
 	<string name="poi_crossing_unmarked">Jelzetlen</string>
 	<string name="poi_start_date">Kezdő dátum</string>
-	<string name="poi_wheelchair">Kerekesszékes</string>
+	<string name="poi_wheelchair_yes">Kerekesszékes</string>
 	<string name="poi_wheelchair_no">Kerekesszékkel nem elérhető</string>
 	<string name="poi_wheelchair_limited">Kerekesszékkel korlátozottan elérhető</string>
 	<string name="poi_wholesale">Nagykereskedés</string>
