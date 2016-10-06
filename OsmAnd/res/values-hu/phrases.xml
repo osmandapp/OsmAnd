@@ -1817,4 +1817,5 @@
 	<string name="poi_caravans_no">Lakókocsival: nem</string>
 	<string name="poi_capacity_caravans">Lakókocsik legnagyobb száma</string>
 	<string name="poi_tomb_war_grave">Típus: hadisír</string>
-	</resources>
+	<string name="poi_additional_type">További</string>
+</resources>
