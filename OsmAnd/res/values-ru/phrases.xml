@@ -149,6 +149,8 @@
 	<string name="poi_traffic_signals">Светофор</string>
 
 	<string name="poi_car_repair">Автосервис</string>
+
+	<string name="poi_service_car">Услуги</string>
 	<string name="poi_service_tyres">Шиномонтаж</string>
 	<string name="poi_vehicle_inspection">Пункт техосмотра</string>
 	<string name="poi_car_wash">Автомойка</string>
@@ -172,7 +174,9 @@
 	<string name="poi_railway_station">Железнодорожная станция</string>
 	<string name="poi_railway_platform">Железнодорожная платформа</string>
 	<string name="poi_subway_entrance">Вход в метро</string>
-	<string name="poi_subway_station">Станция метро</string>
+
+	<string name="poi_subway_station_filter">Станция метро</string>
+	<string name="poi_subway_station">Да</string>
 	<string name="poi_taxi">Стоянка такси</string>
 
 	<string name="poi_aerodrome">Аэропорт</string>
@@ -476,6 +480,9 @@
 	<string name="poi_chalet">Шале</string>
 
 	<string name="poi_place_of_worship">Место поклонения</string>
+
+	<string name="poi_religion">Религия</string>
+
 	<string name="poi_religion_christian">Христианство</string>
 	<string name="poi_religion_jewish">Иудаизм</string>
 	<string name="poi_religion_muslim">Мусульманство</string>
@@ -701,7 +708,9 @@
 	<string name="poi_military_office">Военкомат</string>
 	<string name="poi_country">Страна</string>
 	<string name="poi_city">Город</string>
-	<string name="poi_capital">Столица</string>
+
+	<string name="poi_city_capital">Столица</string>
+	<string name="poi_capital">Да</string>
 	<string name="poi_town">Город (небольшой)</string>
 	<string name="poi_village">Деревня</string>
 	<string name="poi_hamlet">Деревня (небольшая)</string>
@@ -718,7 +727,7 @@
 	<string name="poi_military">Военное</string>
 	<string name="poi_pier">Пирс</string>
 	<string name="poi_observatory">Обсерватория</string>
-	<string name="poi_astronomical_observatory">Астрономическая обсерватория</string>
+	<string name="poi_astronomical_observatory">Астрономическая</string>
 	<string name="poi_hot_spring">Горячий источник</string>
 	<string name="poi_geyser">Гейзер</string>
 	<string name="poi_leisure_track">Спортивная дорожка</string>
@@ -891,8 +900,9 @@
 
 	<string name="poi_operator">Оператор</string>
 	<string name="poi_brand">Торговая марка</string>
-	<string name="poi_fee_yes">Взимается оплата</string>
-	<string name="poi_fee_no">Оплата не взимается</string>
+	<string name="poi_fee">Взимается оплата</string>
+	<string name="poi_fee_yes">Да</string>
+	<string name="poi_fee_no">Нет</string>
 	<string name="poi_drinking_water_yes">Питьевая вода: да</string>
 	<string name="poi_drinking_water_no">Питьевая вода: нет</string>
 	<string name="poi_supervised_yes">Контролируемый объект</string>
@@ -911,12 +921,17 @@
 
 	<string name="poi_population">Население</string>
 	<string name="poi_start_date">Дата открытия</string>
-	<string name="poi_wheelchair">Доступно для инвалидных кресел</string>
-	<string name="poi_wheelchair_no">Недоступно для инвалидных кресел</string>
-	<string name="poi_wheelchair_limited">Инвалидные кресла: ограничено</string>
+	<string name="poi_wheelchair_accessibility">Доступноcть для инвалидных кресел</string>
+	<string name="poi_wheelchair_yes">Есть</string>
+	<string name="poi_wheelchair_no">Нет</string>
+	<string name="poi_wheelchair_limited">Ограничено</string>
 	<string name="poi_wholesale">Опт</string>
-	<string name="poi_parking_underground">Тип: подземная</string>
-	<string name="poi_parking_multi_storey">Тип: многоэтажная</string>
+
+	<string name="poi_parking_type">Тип</string>
+	<string name="poi_parking_underground">Подземная</string>
+	<string name="poi_parking_multi_storey">Многоэтажная</string>
+
+	<string name="poi_bicycle_parking_type">Тип</string>
 
 	<string name="poi_bicycle_parking_anchors">Закреплённое кольцо</string>
 	<string name="poi_bicycle_parking_stands">Стойка</string>
@@ -935,6 +950,7 @@
 	<string name="poi_access_delivery">Доступ только для доставки</string>
 	<string name="poi_access_agricultural">Доступ только для с/х техники</string>
 
+	<string name="poi_denomination">Религиозное направление</string>
 	<string name="poi_denomination_catholic">Католицизм</string>
 	<string name="poi_denomination_baptist">Баптизм</string>
 	<string name="poi_denomination_roman_catholic">Римский католицизм</string>
@@ -1038,10 +1054,11 @@
 	<string name="poi_old_name">Историческое название</string>
 	<string name="poi_alt_name">Альтернативное название</string>
 
-	<string name="poi_pump_manual">Ручной насос</string>
-	<string name="poi_pump_powered">Автоматический насос</string>
+	<string name="poi_pump">Насос</string>
+	<string name="poi_pump_manual">Ручной</string>
+	<string name="poi_pump_powered">Автоматический</string>
 	<string name="poi_pump_no">Без насоса</string>
-	<string name="poi_pump_yes">Насос</string>
+	<string name="poi_pump_yes">Есть</string>
 
 	<string name="poi_water_characteristic_mineral">Характеристика воды: минеральная</string>
 	<string name="poi_water_characteristic_mud">Характеристика воды: грязь</string>
@@ -1083,7 +1100,9 @@
 
 	<string name="poi_fireplace_yes">C местом для разведения огня</string>
 	<string name="poi_fireplace_no">Без места для разведения огня</string>
-	<string name="poi_covered_yes">С укрытием</string>
+
+	<string name="poi_covered">Укрытие</string>
+	<string name="poi_covered_yes">Есть</string>
 	<string name="poi_covered_no">Без укрытия</string>
 
 	<string name="poi_smoking_no">Курение запрещено</string>
@@ -1096,11 +1115,15 @@
 	<string name="poi_toll_yes">Платно</string>
 	<string name="poi_toll_no">Бесплатно</string>
 	<string name="poi_toll_hgv_yes">Платно для грузовых автомобилей</string>
-	<string name="poi_tactile_paving_yes">С тактильным покрытием</string>
+
+	<string name="poi_tactile_paving">Тактильное покрытие</string>
+	<string name="poi_tactile_paving_yes">Есть</string>
 	<string name="poi_tactile_paving_no">Без тактильного покрытия</string>
-	<string name="poi_traffic_signals_sound_yes">Со звуковым сигналом</string>
-	<string name="poi_traffic_signals_sound_no">Без звукового сигнала</string>
-	<string name="poi_traffic_signals_sound_walk">Со звуковым сигналом, когда переход разрешён</string>
+
+	<string name="poi_traffic_signals_sound">Звуковой сигнал</string>
+	<string name="poi_traffic_signals_sound_yes">Есть</string>
+	<string name="poi_traffic_signals_sound_no">Нет</string>
+	<string name="poi_traffic_signals_sound_walk">Только когда переход разрешён</string>
 
 	<string name="poi_rescue_station">Спасательная станция</string>
 
@@ -1217,7 +1240,7 @@
 	<string name="poi_garden_style_japanese">Стиль сада: японский</string>
 
 	<string name="poi_capacity">Вместимость</string>
-	<string name="poi_capacity_disabled_yes">Места для инвалидов</string>
+	<string name="poi_capacity_disabled_yes">Есть</string>
 	<string name="poi_capacity_disabled_no">Нет выделенных мест для инвалидов</string>
 	<string name="poi_capacity_disabled">Места для инвалидов</string>
 	<string name="poi_capacity_women_yes">Места для женщин</string>
@@ -1234,11 +1257,15 @@
 	<string name="poi_aerialway_duration">Среднее время движения, минут</string>
 	<string name="poi_aerialway_bubble_yes">Остекление</string>
 	<string name="poi_aerialway_bubble_no">Нет остекления</string>
-	<string name="poi_aerialway_heating_yes">Обогрев</string>
+
+	<string name="poi_aerialway_heating">Обогрев</string>
+	<string name="poi_aerialway_heating_yes">Есть</string>
 	<string name="poi_aerialway_heating_no">Без обогрева</string>
-	<string name="poi_aerialway_bicycle_yes">Провоз велосипедов разрешён</string>
+
+	<string name="poi_aerialway_bicycle">Провоз велосипедов</string>
+	<string name="poi_aerialway_bicycle_yes">Разрешён</string>
 	<string name="poi_aerialway_bicycle_no">Провоз велосипедов запрещён</string>
-	<string name="poi_aerialway_bicycle_summer">Провоз велосипедов разрешен только летом</string>
+	<string name="poi_aerialway_bicycle_summer">Только летом</string>
 	<string name="poi_aerialway_access_entry">Только вход</string>
 	<string name="poi_aerialway_access_exit">Только выход</string>
 	<string name="poi_aerialway_access_both">Вход и выход</string>
@@ -1246,161 +1273,165 @@
 	<string name="poi_aerialway_summer_access_exit">Доступ летом: только выход</string>
 	<string name="poi_aerialway_summer_access_both">Доступ летом: вход и выход</string>
 
-	<string name="poi_stars_1">Число звёзд: 1 (туристский класс)</string>
-	<string name="poi_stars_1s">Число звёзд: 1S (улучшенный туристский класс)</string>
-	<string name="poi_stars_2">Число звёзд: 2 (стандартный класс)</string>
-	<string name="poi_stars_2s">Число звёзд: 2S (улучшенный стандартный класс)</string>
-	<string name="poi_stars_3">Число звёзд: 3 (комфортный класс)</string>
-	<string name="poi_stars_3s">Число звёзд: 3S (улучшенный комфортный класс)</string>
-	<string name="poi_stars_4">Число звёзд: 4 (первый класс)</string>
-	<string name="poi_stars_4s">Число звёзд: 4S (улучшенный первый класс)</string>
-	<string name="poi_stars_5">Число звёзд: 5 (категория люкс)</string>
-	<string name="poi_stars_5s">Число звёзд: 5S (категория люкс+)</string>
-	<string name="poi_stars_6">Число звёзд: 6</string>
-	<string name="poi_stars_7">Число звёзд: 7</string>
+	<string name="poi_star_rating">Число звёзд</string>
+	<string name="poi_stars_1">1 (туристский класс)</string>
+	<string name="poi_stars_1s">1S (улучшенный туристский класс)</string>
+	<string name="poi_stars_2">2 (стандартный класс)</string>
+	<string name="poi_stars_2s">2S (улучшенный стандартный класс)</string>
+	<string name="poi_stars_3">3 (комфортный класс)</string>
+	<string name="poi_stars_3s">3S (улучшенный комфортный класс)</string>
+	<string name="poi_stars_4">4 (первый класс)</string>
+	<string name="poi_stars_4s">4S (улучшенный первый класс)</string>
+	<string name="poi_stars_5">5 (категория люкс)</string>
+	<string name="poi_stars_5s">5S (категория люкс+)</string>
+
 	<string name="poi_rooms">Количество номеров</string>
 
 	<string name="poi_love_hotel">Love-отель</string>
 
-	<string name="poi_payment_coins_yes">Принимаются монеты</string>
+	<string name="poi_payment_type">Тип оплаты</string>
+	<string name="poi_payment_fuel_type">Тип оплаты</string>
+	<string name="poi_fuel_type">Вид топлива</string>
+	<string name="poi_fuel_avia_type">Вид топлива</string>
+
+	<string name="poi_payment_coins_yes">Монеты</string>
 	<string name="poi_payment_coins_no">Монеты не принимаются</string>
-	<string name="poi_payment_coins_0.5">Принимаются монеты по $0.5</string>
-	<string name="poi_payment_coins_50c12">Принимаются монеты по 50c, 1€ и 2€</string>
-	<string name="poi_payment_telephone_cards_yes">Принимаются телефонные карты</string>
+	<string name="poi_payment_coins_0.5">Монеты по $0.5</string>
+	<string name="poi_payment_coins_50c12">Монеты по 50c, 1€ и 2€</string>
+	<string name="poi_payment_telephone_cards_yes">Телефонные карты</string>
 	<string name="poi_payment_telephone_cards_no">Телефонные карты не принимаются</string>
-	<string name="poi_payment_credit_cards_yes">Принимаются кредитные карты</string>
+	<string name="poi_payment_credit_cards_yes">Кредитные карты</string>
 	<string name="poi_payment_credit_cards_no">Кредитные карты не принимаются</string>
-	<string name="poi_payment_notes_yes">Принимаются банкноты</string>
+	<string name="poi_payment_notes_yes">Банкноты</string>
 	<string name="poi_payment_notes_no">Банкноты не принимаются</string>
-	<string name="poi_payment_electronic_purses_yes">Принимаются электронные кошельки</string>
+	<string name="poi_payment_electronic_purses_yes">Электронные кошельки</string>
 	<string name="poi_payment_electronic_purses_no">Электронные кошельки не принимаются</string>
-	<string name="poi_payment_cash_yes">Принимаются наличные</string>
+	<string name="poi_payment_cash_yes">Наличные</string>
 	<string name="poi_payment_cash_no">Наличные не принимаются</string>
-	<string name="poi_payment_debit_cards_yes">Принимаются дебетовые карты</string>
-	<string name="poi_payment_debit_cards_no">Дбетовые карты не принимаются</string>
-	<string name="poi_payment_bitcoin_yes">Принимаются биткоины</string>
+	<string name="poi_payment_debit_cards_yes">Дебетовые карты</string>
+	<string name="poi_payment_debit_cards_no">Дебетовые карты не принимаются</string>
+	<string name="poi_payment_bitcoin_yes">Биткоины</string>
 	<string name="poi_payment_bitcoin_no">Биткоины не принимаются</string>
-	<string name="poi_payment_visa_yes">Принимаются карты Visa</string>
+	<string name="poi_payment_visa_yes">Visa</string>
 	<string name="poi_payment_visa_no">Карты Visa не принимаются</string>
-	<string name="poi_payment_mastercard_yes">Принимаются карты MasterCard</string>
+	<string name="poi_payment_mastercard_yes">MasterCard</string>
 	<string name="poi_payment_mastercard_no">Карты MasterCard не принимаются</string>
-	<string name="poi_payment_none">Бесплатно</string>
-	<string name="poi_payment_maestro_yes">Принимаются карты Maestro</string>
+	<string name="poi_payment_maestro_yes">Maestro</string>
 	<string name="poi_payment_maestro_no">Карты Maestro не принимаются</string>
-	<string name="poi_payment_american_express_yes">Принимаются карты American Express (AMEX)</string>
+	<string name="poi_payment_american_express_yes">American Express (AMEX)</string>
 	<string name="poi_payment_american_express_no">Карты American Express (AMEX) не принимаются</string>
-	<string name="poi_payment_diners_club_yes">Принимаются карты Diners Club</string>
+	<string name="poi_payment_diners_club_yes">Diners Club</string>
 	<string name="poi_payment_diners_club_no">Карты Diners Club не принимаются</string>
-	<string name="poi_payment_dkv_yes">Принимаются DKV</string>
+	<string name="poi_payment_dkv_yes">DKV</string>
 	<string name="poi_payment_dkv_no">DKV не принимаются</string>
-	<string name="poi_payment_uta_yes">Принимаются карты UTA</string>
+	<string name="poi_payment_uta_yes">UTA</string>
 	<string name="poi_payment_uta_no">Карты UTA не принимаются</string>
-	<string name="poi_payment_efectivo_yes">Принимаются Efectivo</string>
+	<string name="poi_payment_efectivo_yes">Efectivo</string>
 	<string name="poi_payment_efectivo_no">Efectivo не принимаются</string>
-	<string name="poi_payment_girocard_yes">Принимаются Girocard</string>
+	<string name="poi_payment_girocard_yes">Girocard</string>
 	<string name="poi_payment_girocard_no">Girocard не принимаются</string>
-	<string name="poi_payment_discover_card_yes">Принимаются Discover Card</string>
+	<string name="poi_payment_discover_card_yes">Discover Card</string>
 	<string name="poi_payment_discover_card_no">Discover Card не принимаются</string>
-	<string name="poi_payment_visa_electron_yes">Принимаются карты Visa Electron</string>
+	<string name="poi_payment_visa_electron_yes">Visa Electron</string>
 	<string name="poi_payment_visa_electron_no">Карты Visa Electron не принимаются</string>
-	<string name="poi_payment_litecoin_yes">Принимаются Litecoins</string>
+	<string name="poi_payment_litecoin_yes">Litecoins</string>
 	<string name="poi_payment_litecoin_no">Litecoins не принимаются</string>
-	<string name="poi_payment_cheque_yes">Принимаются чеки</string>
+	<string name="poi_payment_cheque_yes">Чеки</string>
 	<string name="poi_payment_cheque_no">Чеки не принимаются</string>
-	<string name="poi_payment_pikepass_yes">Принимается PIKEPASS</string>
+	<string name="poi_payment_pikepass_yes">PIKEPASS</string>
 	<string name="poi_payment_pikepass_no">PIKEPASS не принимается</string>
 	<string name="poi_payment_pikepass_designated">Только для оплаты через PIKEPASS</string>
-	<string name="poi_payment_visa_debit_yes">Принимаются дебетовые карты Visa</string>
+	<string name="poi_payment_visa_debit_yes">Дебетовые карты Visa</string>
 	<string name="poi_payment_visa_debit_no">Дебетовые карты Visa не принимаются</string>
 	<string name="poi_payment_cryptocurrencies_no">Криптовалюты не принимаются</string>
-	<string name="poi_payment_others_yes">Принимаются другие методы оплаты</string>
+	<string name="poi_payment_others_yes">Другие</string>
 	<string name="poi_payment_others_no">Другие методы оплаты не принимаются</string>
-	<string name="poi_payment_routex_yes">Принимаются топливные карты Routex</string>
+	<string name="poi_payment_routex_yes">Карты Routex</string>
 	<string name="poi_payment_routex_no">Топливные карты Routex не принимаются</string>
-	<string name="poi_payment_bancomat_yes">Принимается Bancomat</string>
+	<string name="poi_payment_bancomat_yes">Bancomat</string>
 	<string name="poi_payment_bancomat_no">Bancomat не принимается</string>
-	<string name="poi_payment_icsf_yes">Принимаются карты IC Stored Fare</string>
+	<string name="poi_payment_icsf_yes">Карты IC Stored Fare</string>
 	<string name="poi_payment_icsf_no">Карты IC Stored Fare не принимаются</string>
-	<string name="poi_payment_prepaid_ticket_yes">Принимаются prepaid tickets</string>
-	<string name="poi_payment_jcb_yes">Принимаются карты JCB</string>
+	<string name="poi_payment_prepaid_ticket_yes">Prepaid tickets</string>
+	<string name="poi_payment_jcb_yes">JCB</string>
 	<string name="poi_payment_jcb_no">Карты JCB не принимаются</string>
-	<string name="poi_payment_laser_yes">Принимаются карты Laser</string>
+	<string name="poi_payment_laser_yes">Laser</string>
 	<string name="poi_payment_laser_no">Карты Laser не принимаются</string>
-	<string name="poi_payment_ep_quick_yes">Принимаются карты Quick</string>
+	<string name="poi_payment_ep_quick_yes">Quick</string>
 	<string name="poi_payment_ep_quick_no">Карты Quick не принимаются</string>
-	<string name="poi_payment_eurowag_yes">Принимаются карты Eurowag</string>
+	<string name="poi_payment_eurowag_yes">Eurowag</string>
 	<string name="poi_payment_eurowag_no">Карты Eurowag не принимаются</string>
-	<string name="poi_payment_e_zpass_yes">Принимается E‑ZPass</string>
+	<string name="poi_payment_e_zpass_yes">E‑ZPass</string>
 	<string name="poi_payment_e_zpass_no">E‑ZPass не принимается</string>
-	<string name="poi_payment_euroshell_yes">Принимаются топливные карты Euroshell</string>
+	<string name="poi_payment_euroshell_yes">Euroshell</string>
 	<string name="poi_payment_euroshell_no">Топливные карты Euroshell не принимаются</string>
-	<string name="poi_payment_kitcard_yes">Принимается KITCard</string>
+	<string name="poi_payment_kitcard_yes">KITCard</string>
 	<string name="poi_payment_kitcard_no">KITCard не принимается</string>
-	<string name="poi_payment_westfalen_card_yes">Принимаются карты Westfalen</string>
+	<string name="poi_payment_westfalen_card_yes">Westfalen</string>
 	<string name="poi_payment_westfalen_card_no">Карты Westfalen не принимаются</string>
-	<string name="poi_payment_v_pay_yes">Принимаются карты V PAY</string>
+	<string name="poi_payment_v_pay_yes">V PAY</string>
 	<string name="poi_payment_v_pay_no">Карты V PAY не принимаются</string>
-	<string name="poi_payment_dogecoin_yes">Принимаются Dogecoin</string>
+	<string name="poi_payment_dogecoin_yes">Dogecoin</string>
 	<string name="poi_payment_dogecoin_no">Dogecoin не принимаются</string>
-	<string name="poi_payment_cibus_yes">Принимаются карты Cibus</string>
+	<string name="poi_payment_cibus_yes">Cibus</string>
 	<string name="poi_payment_cibus_no">Карты Cibus не принимаются</string>
-	<string name="poi_payment_wire_transfer_yes">Принимаются денежные переводы</string>
+	<string name="poi_payment_wire_transfer_yes">Денежные переводы</string>
 	<string name="poi_payment_wire_transfer_no">Денежные переводы не принимаются</string>
-	<string name="poi_payment_ep_cash_yes">Принимаются карты Cash (Geldkarte)</string>
+	<string name="poi_payment_ep_cash_yes">Cash (Geldkarte)</string>
 	<string name="poi_payment_ep_cash_no">Cash (Geldkarte) карты не принимаются</string>
-	<string name="poi_payment_ep_proton_yes">Принимаются карты Proton</string>
+	<string name="poi_payment_ep_proton_yes">Proton</string>
 	<string name="poi_payment_ep_proton_no">Карты Proton не принимаются</string>
-	<string name="poi_payment_ep_avant_yes">Принимаются AvantCard</string>
+	<string name="poi_payment_ep_avant_yes">AvantCard</string>
 	<string name="poi_payment_ep_avant_no">AvantCard не принимаются</string>
-	<string name="poi_payment_ep_mep_yes">Принимается MEP</string>
+	<string name="poi_payment_ep_mep_yes">MEP</string>
 	<string name="poi_payment_ep_mep_no">MEP не принимется</string>
-	<string name="poi_payment_ep_minipay_yes">Принимается Minipay</string>
+	<string name="poi_payment_ep_minipay_yes">Minipay</string>
 	<string name="poi_payment_ep_minipay_no">Minipay не принимается</string>
-	<string name="poi_payment_ep_minicash_yes">Принимается miniCash</string>
+	<string name="poi_payment_ep_minicash_yes">miniCash</string>
 	<string name="poi_payment_ep_minicash_no">miniCash не принимается</string>
-	<string name="poi_payment_ep_moneo_yes">Принимается Moneo</string>
+	<string name="poi_payment_ep_moneo_yes">Moneo</string>
 	<string name="poi_payment_ep_moneo_no">Moneo не принимается</string>
-	<string name="poi_payment_ep_monedero4b_yes">Принимается Monedero 4B</string>
+	<string name="poi_payment_ep_monedero4b_yes">Monedero 4B</string>
 	<string name="poi_payment_ep_monedero4b_no">Monedero 4B не принимается</string>
-	<string name="poi_payment_ep_monedero_yes">Принимается Monedero</string>
+	<string name="poi_payment_ep_monedero_yes">Monedero</string>
 	<string name="poi_payment_ep_monedero_no">Monedero не принимается</string>
-	<string name="poi_payment_bankaxess_yes">Принимается BankAxess</string>
+	<string name="poi_payment_bankaxess_yes">BankAxess</string>
 	<string name="poi_payment_bankaxess_no">BankAxess не принимается</string>
-	<string name="poi_payment_coinkite_yes">Принимается оплата через Coinkite</string>
+	<string name="poi_payment_coinkite_yes">Coinkite</string>
 	<string name="poi_payment_coinkite_no">Оплата через Coinkite не принимается</string>
-	<string name="poi_payment_roadrunner_yes">Принимаются карты Roadrunner</string>
+	<string name="poi_payment_roadrunner_yes">Roadrunner</string>
 	<string name="poi_payment_roadrunner_no">Roadrunner карты не принимаются</string>
-	<string name="poi_payment_svg_yes">Принимаются SVG</string>
+	<string name="poi_payment_svg_yes">SVG</string>
 	<string name="poi_payment_svg_no">SVG не принимаются</string>
-	<string name="poi_payment_sms_yes">Принимаются СМС-платежи</string>
-	<string name="poi_payment_sms_no">СМС-платежи не принимаются</string>
-	<string name="poi_payment_ov_chipkaart_yes">Принимаются OV-Chipkaart</string>
+	<string name="poi_payment_sms_yes">SMS-платежи</string>
+	<string name="poi_payment_sms_no">SMS-платежи не принимаются</string>
+	<string name="poi_payment_ov_chipkaart_yes">OV-Chipkaart</string>
 	<string name="poi_payment_ov_chipkaart_no">OV-Chipkaart не принимаются</string>
-	<string name="poi_payment_oyster_yes">Принимаются карты Oyster</string>
+	<string name="poi_payment_oyster_yes">Oyster</string>
 	<string name="poi_payment_oyster_no">Карты Oyster не принимаются</string>
-	<string name="poi_payment_sube_yes">Принимаются карты SUBE</string>
+	<string name="poi_payment_sube_yes">SUBE</string>
 	<string name="poi_payment_sube_no">Карты SUBE не принимаются</string>
-	<string name="poi_payment_via_verde_yes">Принимается Via Verde</string>
+	<string name="poi_payment_via_verde_yes">Via Verde</string>
 	<string name="poi_payment_via_verde_no">Via Verde не принимается</string>
-	<string name="poi_payment_meal_voucher_yes">Принимаются талоны на питание</string>
+	<string name="poi_payment_meal_voucher_yes">Талоны на питание</string>
 	<string name="poi_payment_meal_voucher_no">Талоны на питание не принимаются</string>
-	<string name="poi_payment_paypal_yes">Принимается оплата через PayPal</string>
+	<string name="poi_payment_paypal_yes">PayPal</string>
 	<string name="poi_payment_paypal_no">Оплата через PayPal не принимается</string>
-	<string name="poi_payment_u_key_yes">Принимаются U-Key</string>
+	<string name="poi_payment_u_key_yes">U-Key</string>
 	<string name="poi_payment_u_key_no">U-Key не принимаются</string>
-	<string name="poi_payment_token_yes">Принимаются жетоны</string>
+	<string name="poi_payment_token_yes">Жетоны</string>
 	<string name="poi_payment_token_no">Жетоны не принимаются</string>
-	<string name="poi_payment_gift_card_yes">Принимаются подарочные карты</string>
+	<string name="poi_payment_gift_card_yes">Подарочные карты</string>
 	<string name="poi_payment_gift_card_no">Подарочные карты не принимаются</string>
-	<string name="poi_payment_golden_crown_yes">Принимаются карты Золотая Корона</string>
+	<string name="poi_payment_golden_crown_yes">Золотая Корона</string>
 	<string name="poi_payment_golden_crown_no">Карты Золотая Корона не принимаются</string>
-	<string name="poi_payment_pro100_yes">Принимаются карты ПРО100</string>
+	<string name="poi_payment_pro100_yes">ПРО100</string>
 	<string name="poi_payment_pro100_no">Карты ПРО100 не принимаются</string>
-	<string name="poi_payment_union_card_yes">Принимаются карты Union Card</string>
+	<string name="poi_payment_union_card_yes">Union Card</string>
 	<string name="poi_payment_union_card_no">Карты Union Card не принимаются</string>
-	<string name="poi_payment_mtsmoney_yes">Принимается оплата через MТС-Деньги</string>
+	<string name="poi_payment_mtsmoney_yes">MТС-Деньги</string>
 	<string name="poi_payment_mtsmoney_no">Оплата через MТС-Деньги не принимается</string>
-	<string name="poi_payment_yandexmoney_yes">Принимается оплата через Яндекс.Деньги</string>
+	<string name="poi_payment_yandexmoney_yes">Яндекс.Деньги</string>
 	<string name="poi_payment_yandexmoney_no">Оплата через Яндекс.Деньги не принимается</string>
 	<string name="poi_description_payment">Описание способа оплаты</string>
 
@@ -1467,12 +1498,16 @@
 	<string name="poi_service_repair_no">Ремонт не производится</string>
 	<string name="poi_service_electrical">Ремонт электротранспорта</string>
 	<string name="poi_motorcycle_repair">Ремонт мотоциклов</string>
-	<string name="poi_self_service_yes">Самообслуживание</string>
+
+	<string name="poi_self_service">Самообслуживание</string>
+	<string name="poi_self_service_yes">Да</string>
 	<string name="poi_self_service_no">Самообслуживание: отсутствует</string>
-	<string name="poi_automated_yes">Автоматизация</string>
+	<string name="poi_automated">Автоматизация</string>
+	<string name="poi_automated_yes">Есть</string>
 	<string name="poi_automated_no">Без автоматизации</string>
 	<string name="poi_full_service_yes">Полный комплекс услуг</string>
-	<string name="poi_brushless_yes">Бесконтактная</string>
+	<string name="poi_brushless">Бесконтактная</string>
+	<string name="poi_brushless_yes">Да</string>
 	<string name="poi_brushless_no">Контактная</string>
 	<string name="poi_car_wash_no">Без автомойки</string>
 
@@ -1498,6 +1533,7 @@
 
 	<string name="poi_maxstay">Максимальное время стоянки</string>
 
+	<string name="poi_vending_type">В продаже</string>
 	<string name="poi_vending_parking_tickets">Парковочные талоны</string>
 	<string name="poi_vending_cigarettes">Сигареты</string>
 	<string name="poi_vending_excrement_bags">Пакеты для экскрементов животных</string>
@@ -1632,7 +1668,7 @@
 	<string name="poi_cypress">Кипарис</string>
 	<string name="poi_flagpole">Флагшток</string>
 
-	<string name="poi_bench_yes">Со скамейкой</string>
+	<string name="poi_bench_yes">Есть</string>
 	<string name="poi_bench_no">Без скамейки</string>
 	<string name="poi_bin_yes">С мусорной корзиной</string>
 	<string name="poi_bin_no">Без мусорной корзины</string>
@@ -1650,8 +1686,8 @@
 	<string name="poi_shelter_type_tent">Тип укрытия: тент</string>
 	<string name="poi_shelter_type_abandoned">Тип укрытия: заброшенное</string>
 
-	<string name="poi_internet_access_type_wlan">Беспроводной интернет</string>
-	<string name="poi_internet_access_type_wired">Интернет через кабель</string>
+	<string name="poi_internet_access_type_wlan">Беспроводной</string>
+	<string name="poi_internet_access_type_wired">Через кабель</string>
 	<string name="poi_internet_access_type_public">Публичный доступ в интернет</string>
 	<string name="poi_internet_access_type_no">Без доступа в интернет</string>
 	<string name="poi_internet_access_type_yes">C доступом в интернет</string>
@@ -1774,21 +1810,23 @@
 	<string name="poi_surveillance_yes">С видеонаблюдением</string>
 	<string name="poi_shop_additional_yes">С магазином</string>
 
-	<string name="poi_service_bicycle_retail_yes">Продажа велосипедов: да</string>
+	<string name="poi_bicycle_service">Услуги</string>
+
+	<string name="poi_service_bicycle_retail_yes">Продажа</string>
 	<string name="poi_service_bicycle_retail_no">Продажа велосипедов: отсутствует</string>
-	<string name="poi_service_bicycle_repair_yes">Ремонт велосипедов: да</string>
+	<string name="poi_service_bicycle_repair_yes">Ремонт</string>
 	<string name="poi_service_bicycle_repair_no">Ремонт велосипедов: отсутствует</string>
-	<string name="poi_service_bicycle_rental_yes">Прокат велосипедов: да</string>
+	<string name="poi_service_bicycle_rental_yes">Прокат</string>
 	<string name="poi_service_bicycle_rental_no">Прокат велосипедов: отсутствует</string>
-	<string name="poi_service_bicycle_pump_yes">Подкачка велосипедных шин: да</string>
+	<string name="poi_service_bicycle_pump_yes">Подкачка шин</string>
 	<string name="poi_service_bicycle_pump_no">Подкачка велосипедных шин: отсутствует</string>
-	<string name="poi_service_bicycle_diy_yes">Инструменты для самостоятельного ремонта велосипеда: да</string>
+	<string name="poi_service_bicycle_diy_yes">Инструменты для самостоятельного ремонта</string>
 	<string name="poi_service_bicycle_diy_no">Инструменты для самостоятельного ремонта велосипеда: нет</string>
-	<string name="poi_service_bicycle_cleaning_yes">Мойка велосипедов: да</string>
+	<string name="poi_service_bicycle_cleaning_yes">Мойка</string>
 	<string name="poi_service_bicycle_cleaning_no">Мойка велосипедов: отсутствует</string>
-	<string name="poi_service_bicycle_chaintool_yes">Выжимка цепи для велосипедов: да</string>
+	<string name="poi_service_bicycle_chaintool_yes">Выжимка цепи</string>
 	<string name="poi_service_bicycle_chaintool_no">Выжимка цепи для велосипедов: отсутствует</string>
-	<string name="poi_service_bicycle_second_hand_yes">Продажа подержанных велосипедов: да</string>
+	<string name="poi_service_bicycle_second_hand_yes">Продажа подержанных велосипедов</string>
 	<string name="poi_service_bicycle_second_hand_no">Продажа подержанных велосипедов: отсутствует</string>
 
 	<string name="poi_wildlife_hide">Укрытие для наблюдения за дикой природой</string>
@@ -2038,37 +2076,39 @@
 	<string name="poi_surveillance_outdoor">Видеонаблюдение: снаружи</string>
 	<string name="poi_surveillance_public">Видеонаблюдение: в общественных местах</string>
 
-	<string name="poi_clothes_women">Женская одежда</string>
+	<string name="poi_clothes_type">Тип одежды</string>
+	<string name="poi_clothes_women">Женская</string>
 	<string name="poi_clothes_underwear">Нижнее бельё</string>
-	<string name="poi_clothes_men">Мужская одежда</string>
+	<string name="poi_clothes_men">Мужская</string>
 	<string name="poi_clothes_wedding">Свадебные платья</string>
-	<string name="poi_clothes_sports">Спортивная одежда</string>
-	<string name="poi_clothes_babies">Одежда для новорождённых</string>
-	<string name="poi_clothes_denim">Одежда из джинсовой ткани</string>
-	<string name="poi_clothes_workwear">Рабочая одежда</string>
+	<string name="poi_clothes_sports">Спортивная</string>
+	<string name="poi_clothes_babies">Для новорождённых</string>
+	<string name="poi_clothes_denim">Из джинсовой ткани</string>
+	<string name="poi_clothes_workwear">Рабочая</string>
 	<string name="poi_clothes_hats">Шляпы</string>
-	<string name="poi_clothes_fur">Меховая одежда</string>
-	<string name="poi_clothes_leather">Кожаная одежда</string>
+	<string name="poi_clothes_fur">Меховая</string>
+	<string name="poi_clothes_leather">Кожаная</string>
 	<string name="poi_clothes_costumes">Карнавальные костюмы</string>
-	<string name="poi_clothes_traditional">Традиционная одежда</string>
+	<string name="poi_clothes_traditional">Традиционная</string>
 	<string name="poi_clothes_suits">Костюмы, смокинги</string>
-	<string name="poi_clothes_maternity">Одежда для беременных</string>
-	<string name="poi_clothes_vintage">Старинная одежда</string>
-	<string name="poi_clothes_oversize">Одежда для больших людей</string>
+	<string name="poi_clothes_maternity">Для беременных</string>
+	<string name="poi_clothes_vintage">Старинная</string>
+	<string name="poi_clothes_oversize">Для больших людей</string>
 	<string name="poi_clothes_schoolwear">Школьная форма</string>
 	<string name="poi_clothes_swimwear">Купальные костюмы</string>
 	<string name="poi_clothes_socks">Носки</string>
 	<string name="poi_clothes_shirts">Футболки</string>
-	<string name="poi_clothes_dance">Одежда для танцев</string>
-	<string name="poi_clothes_military">Военная одежда</string>
+	<string name="poi_clothes_dance">Для танцев</string>
+	<string name="poi_clothes_military">Военная</string>
 
 	<string name="poi_historic_milestone">Исторический дистанционный столб</string>
 
-	<string name="poi_shoes_children">Детская обувь</string>
-	<string name="poi_shoes_women">Женская обувь</string>
-	<string name="poi_shoes_sport">Спортивная обувь</string>
-	<string name="poi_shoes_men">Мужская обувь</string>
-	<string name="poi_shoes_orthopedic">Ортопедическая обувь</string>
+	<string name="poi_shoes_type">Тип обуви</string>
+	<string name="poi_shoes_children">Детская</string>
+	<string name="poi_shoes_women">Женская</string>
+	<string name="poi_shoes_sport">Спортивная</string>
+	<string name="poi_shoes_men">Мужская</string>
+	<string name="poi_shoes_orthopedic">Ортопедическая</string>
 
 	<string name="poi_historic_manor">Историческое поместье</string>
 
@@ -2235,9 +2275,10 @@
 	<string name="poi_historic_civilization_minoan">Цивилизация: минойская</string>
 	<string name="poi_historic_civilization_tiahuanacota">Цивилизация: тиуанако</string>
 
+	<string name="poi_animal_training_type">Тип</string>
 	<string name="poi_animal_training">Дрессировка животных</string>
-	<string name="poi_animal_training_dog">Дрессировка собак</string>
-	<string name="poi_animal_training_horse">Дрессировка лошадей</string>
+	<string name="poi_animal_training_dog">Для собак</string>
+	<string name="poi_animal_training_horse">Для лошадей</string>
 	<string name="poi_horse_yes">Доступ для лошадей разрешён</string>
 	<string name="poi_horse_no">Доступ для лошадей запрещён</string>
 	<string name="poi_animal_yes">Доступ для животных разрешён</string>
@@ -2305,15 +2346,16 @@
 	<string name="poi_material_marble">Материал: мрамор</string>
 	<string name="poi_material_aluminium">Материал: алюминий</string>
 
-	<string name="poi_site_type_megalith">Тип: мегалит</string>
-	<string name="poi_site_type_tumulus">Тип: тумулус</string>
-	<string name="poi_site_type_fortification">Тип: укрепление</string>
-	<string name="poi_site_type_settlement">Тип: поселение</string>
-	<string name="poi_site_type_city">Тип: город</string>
-	<string name="poi_site_type_hut_circle">Тип: круг из хижин</string>
-	<string name="poi_site_type_necropolis">Тип: некрополь</string>
-	<string name="poi_site_type_petroglyph">Тип: петроглиф</string>
-	<string name="poi_site_type_earthwork">Тип: земляное укрепление</string>
+	<string name="poi_archaeological_site_type">Тип</string>
+	<string name="poi_site_type_megalith">Мегалит</string>
+	<string name="poi_site_type_tumulus">Тумулус</string>
+	<string name="poi_site_type_fortification">Укрепление</string>
+	<string name="poi_site_type_settlement">Поселение</string>
+	<string name="poi_site_type_city">Город</string>
+	<string name="poi_site_type_hut_circle">Круг из хижин</string>
+	<string name="poi_site_type_necropolis">Некрополь</string>
+	<string name="poi_site_type_petroglyph">Петроглиф</string>
+	<string name="poi_site_type_earthwork">Земляное укрепление</string>
 	<string name="poi_megalith_type_menhir">Тип мегалита: менгир</string>
 	<string name="poi_megalith_type_dolmen">Тип мегалита: дольмен</string>
 	<string name="poi_megalith_type_nuraghe">Тип мегалита: нураги</string>
@@ -2377,7 +2419,7 @@
 	<string name="poi_skype">Скайп</string>
 	<string name="poi_garden_style_kitchen">Стиль сада: кухня</string>
 	<string name="poi_toilets_access_community">Туалет: общественный</string>
-	<string name="poi_internet_access_type_terminal">Тип доступа к Интернет: терминал</string>
+	<string name="poi_internet_access_type_terminal">Терминал</string>
 	<string name="poi_historic_period_dominate">Исторический период: доминантный</string>
 
 	<string name="poi_conveying_yes">Эскалатор/траволатор</string>
@@ -2387,11 +2429,12 @@
 
 	<string name="poi_ref">Метка</string>
 
-	<string name="poi_cargo_passengers">Груз: пассажиры</string>
-	<string name="poi_cargo_vehicle">Груз: автомобили</string>
-	<string name="poi_cargo_bicycle">Груз: велосипеды</string>
-	<string name="poi_cargo_container">Груз: контейнеры</string>
-	<string name="poi_cargo_hgv">Груз: грузовики</string>
+	<string name="poi_ferry_terminal_cargo">Перевозимый груз</string>
+	<string name="poi_cargo_passengers">Пассажиры</string>
+	<string name="poi_cargo_vehicle">Автомобили</string>
+	<string name="poi_cargo_bicycle">Велосипеды</string>
+	<string name="poi_cargo_container">Контейнеры</string>
+	<string name="poi_cargo_hgv">Грузовики</string>
 
 	<string name="poi_fitness_station">Фитнесс-станция</string>
 
@@ -2464,6 +2507,8 @@
 
 	<string name="poi_aerialway_length">Протяжённость</string>
 
+	<string name="poi_healthcare_alternative_types">Специализация</string>
+
 	<string name="poi_health_specialty_general_yes">Специализация: семейная медицина</string>
 	<string name="poi_health_specialty_ophthalmology_yes">Специализация: офтальмология</string>
 	<string name="poi_health_specialty_gynaecology_yes">Специализация: гинекология</string>
@@ -2482,7 +2527,7 @@
 	<string name="poi_health_specialty_cardiology_yes">Специализация: кардиология</string>
 	<string name="poi_health_specialty_trauma_yes">Специализация: травматология</string>
 	<string name="poi_health_specialty_biology_yes">Специализация: лабораторная медицина</string>
-	<string name="poi_health_specialty_osteopathy_yes">Специализация: остеопатия</string>
+	<string name="poi_health_specialty_osteopathy_yes">Остеопатия</string>
 	<string name="poi_health_specialty_anaesthetics_yes">Специализация: анестезиология и реанимация</string>
 	<string name="poi_health_specialty_pulmonology_yes">Специализация: пульмонология</string>
 	<string name="poi_health_specialty_dental_oral_maxillo_facial_surgery_yes">Специализация: челюстно-лицевая, зубная хирургия</string>
@@ -2525,13 +2570,13 @@
 	<string name="poi_health_specialty_sports_medicine_yes">Специализация: спортивная медицина</string>
 	<string name="poi_health_specialty_podology_yes">Специализация: подология</string>
 	<string name="poi_health_specialty_adult_psychiatry_yes">Специализация: психиатрия для взрослых</string>
-	<string name="poi_health_specialty_acupuncture_yes">Специализация: акупунктура</string>
-	<string name="poi_health_specialty_homeopathy_yes">Специализация: гомеопатия</string>
-	<string name="poi_health_specialty_traditional_chinese_medicine_yes">Специализация: традиционная китайская медицина</string>
-	<string name="poi_health_specialty_reiki_yes">Специализация: рейки</string>
-	<string name="poi_health_specialty_herbalism_yes">Специализация: травничество</string>
-	<string name="poi_health_specialty_chiropractic_yes">Специализация: хиропрактика</string>
-	<string name="poi_health_specialty_naturopathy_yes">Специализация: натуропатия</string>
+	<string name="poi_health_specialty_acupuncture_yes">Акупунктура</string>
+	<string name="poi_health_specialty_homeopathy_yes">Гомеопатия</string>
+	<string name="poi_health_specialty_traditional_chinese_medicine_yes">Традиционная китайская медицина</string>
+	<string name="poi_health_specialty_reiki_yes">Рейки</string>
+	<string name="poi_health_specialty_herbalism_yes">Травничество</string>
+	<string name="poi_health_specialty_chiropractic_yes">Хиропрактика</string>
+	<string name="poi_health_specialty_naturopathy_yes">Натуропатия</string>
 	<string name="poi_health_specialty_depth_psychology_yes">Специализация: глубинная психология</string>
 	<string name="poi_health_specialty_behavior_yes">Специализация: бихевиоральная (поведенческая) психотерапия</string>
 
@@ -2548,8 +2593,8 @@
 	<string name="poi_water_heater_no">Водонагреватель: отсутствует</string>
 
 	<string name="poi_parking_surface">Тип: на поверхности</string>
-	<string name="poi_parking_garage_boxes">Тип: гаражи</string>
-	<string name="poi_parking_carports">Тип: навес</string>
+	<string name="poi_parking_garage_boxes">Гаражи</string>
+	<string name="poi_parking_carports">Навес</string>
 
 	<string name="poi_dojo">Додзё</string>
 
@@ -2660,18 +2705,20 @@
 	<string name="poi_button_operated_yes">Включается кнопкой: да</string>
 	<string name="poi_button_operated_no">Включается кнопкой: нет</string>
 
-	<string name="poi_free_flying_site_takeoff">Свободный полёт: подъём</string>
-	<string name="poi_free_flying_site_landing">Свободный полёт: посадка</string>
-	<string name="poi_free_flying_site_toplanding">Свободный полёт: посадка на вершине</string>
-	<string name="poi_free_flying_site_towing">Свободный полёт: буксировка</string>
-	<string name="poi_free_flying_site_training">Свободный полёт: тренировка</string>
-	<string name="poi_free_flying_official_yes">Официальное место для свободного полёта: да</string>
+	<string name="poi_free_flying_characteristic">Характеристика</string>
+
+	<string name="poi_free_flying_site_takeoff">Подъём</string>
+	<string name="poi_free_flying_site_landing">Посадка</string>
+	<string name="poi_free_flying_site_toplanding">Посадка на вершине</string>
+	<string name="poi_free_flying_site_towing">Буксировка</string>
+	<string name="poi_free_flying_site_training">Тренировка</string>
+	<string name="poi_free_flying_official_yes">Официальное место для свободного полёта</string>
 	<string name="poi_free_flying_official_no">Официальное место для свободного полёта: нет</string>
-	<string name="poi_free_flying_paragliding_yes">Парапланеризм: да</string>
+	<string name="poi_free_flying_paragliding_yes">Парапланеризм</string>
 	<string name="poi_free_flying_paragliding_no">Парапланеризм: нет</string>
-	<string name="poi_free_flying_hanggliding_yes">Дельтапланеризм: да</string>
+	<string name="poi_free_flying_hanggliding_yes">Дельтапланеризм</string>
 	<string name="poi_free_flying_hanggliding_no">Дельтапланеризм: нет</string>
-	<string name="poi_free_flying_rigid_yes">Дельтаплан с жестким крылом: да</string>
+	<string name="poi_free_flying_rigid_yes">Дельтаплан с жестким крылом</string>
 	<string name="poi_free_flying_rigid_no">Дельтаплан с жестким крылом: нет</string>
 	<string name="poi_free_flying_site_orientation_n">Ориентация площадки для свободного полёта: С</string>
 	<string name="poi_free_flying_site_orientation_ne">Ориентация площадки для свободного полёта: СВ</string>
@@ -2732,10 +2779,12 @@
 
 	<string name="poi_suction_point">Точка забора воды</string>
 
-	<string name="poi_fire_hydrant_type_underground">Тип: подземный</string>
-	<string name="poi_fire_hydrant_type_pillar">Тип: надземный</string>
-	<string name="poi_fire_hydrant_type_pond">Тип: пруд</string>
-	<string name="poi_fire_hydrant_type_wall">Тип: пожарный кран</string>
+	<string name="poi_fire_hydrant_type">Тип</string>
+
+	<string name="poi_fire_hydrant_type_underground">Подземный</string>
+	<string name="poi_fire_hydrant_type_pillar">Надземный</string>
+	<string name="poi_fire_hydrant_type_pond">Пруд</string>
+	<string name="poi_fire_hydrant_type_wall">Пожарный кран</string>
 
 	<string name="poi_health_amenity_type_first_aid_kit">Аптечка первой помощи</string>
 	<string name="poi_health_amenity_type_scales">Весы для публичного пользования</string>
@@ -2839,14 +2888,18 @@
 	<string name="poi_fire_hydrant_pressure">Давление воды в гидранте</string>
 	<string name="poi_fire_hydrant_count">Количество гидрантов</string>
 	<string name="poi_fire_hydrant_flow_capacity">Пропускная способность гидранта</string>
-	<string name="poi_fire_hydrant_position_sidewalk">Расположение гидранта: тротуар</string>
-	<string name="poi_fire_hydrant_position_parking_lot">Расположение гидранта: парковка</string>
-	<string name="poi_fire_hydrant_position_street">Расположение гидранта: улица</string>
-	<string name="poi_fire_hydrant_position_underground">Расположение гидранта: подземный</string>
-	<string name="poi_fire_hydrant_style_water_source_main">Источник воды гидранта: основной</string>
-	<string name="poi_fire_hydrant_style_water_source_pond">Источник воды гидранта: пруд</string>
-	<string name="poi_fire_hydrant_style_water_source_stream">Источник воды гидранта: поток</string>
-	<string name="poi_fire_hydrant_style_water_source_cistern">Источник воды гидранта: ёмкость</string>
+
+	<string name="poi_fire_hydrant_position">Расположение</string>
+	<string name="poi_fire_hydrant_position_sidewalk">Тротуар</string>
+	<string name="poi_fire_hydrant_position_parking_lot">Парковка</string>
+	<string name="poi_fire_hydrant_position_street">Улица</string>
+	<string name="poi_fire_hydrant_position_underground">Подземный</string>
+
+	<string name="poi_fire_hydrant_water_source">Источник воды</string>
+	<string name="poi_fire_hydrant_style_water_source_main">Основной</string>
+	<string name="poi_fire_hydrant_style_water_source_pond">Пруд</string>
+	<string name="poi_fire_hydrant_style_water_source_stream">Поток</string>
+	<string name="poi_fire_hydrant_style_water_source_cistern">Ёмкость</string>
 	<string name="poi_in_service_yes">Используется: да</string>
 
 	<string name="poi_street_cabinet_power">Тип шкафа: электрический</string>
@@ -2895,7 +2948,8 @@
 	<string name="poi_crossing_supervision_attendant">Наблюдение за переездом: смотрящий</string>
 	<string name="poi_crossing_supervision_camera">Наблюдение за переездом: камера</string>
 
-	<string name="poi_dispensing_yes">Продажа лекарств по рецептам</string>
+	<string name="poi_pharmacy_dispensing">Продажа лекарств по рецептам</string>
+	<string name="poi_dispensing_yes">Есть</string>
 	<string name="poi_dispensing_no">Продажа лекарств по рецептам: нет</string>
 
 	<string name="poi_aerodrome_type_international">Международный</string>
@@ -2922,18 +2976,21 @@
 	<string name="poi_payment_troika_no">Карты Тройка не принимаются</string>
 
 	<string name="poi_telescope">Телескоп</string>
-	<string name="poi_telescope_type_optical">Телескоп: оптический</string>
-	<string name="poi_telescope_type_radio">Телескоп: радио</string>
-	<string name="poi_telescope_type_gamma">Телескоп: гамма</string>
+
+	<string name="poi_telescope_type">Тип</string>
+	<string name="poi_telescope_type_optical">Оптический</string>
+	<string name="poi_telescope_type_radio">Радио</string>
+	<string name="poi_telescope_type_gamma">Гамма</string>
 	<string name="poi_telescope_diameter">Диаметр</string>
 	<string name="poi_telescope_spectrum">Рабочий диапазон частот</string>
 	<string name="poi_telescope_usage_education">Назначение: образование</string>
 	<string name="poi_telescope_usage_espionage">Назначение: шпионаж</string>
 	<string name="poi_telescope_usage_research">Назначение: исследования</string>
 
+	<string name="poi_observatory_designation">Назначение</string>
 	<string name="poi_observatory_type_espionage">Назначение: шпионаж</string>
-	<string name="poi_observatory_type_meteorological">Назначение: метеорологическая</string>
-	<string name="poi_observatory_type_gravitational">Назначение: гравитационная</string>
+	<string name="poi_observatory_type_meteorological">Метеорологическая</string>
+	<string name="poi_observatory_type_gravitational">Гравитационная</string>
 
 	<string name="poi_greenhouse_horticulture">Парниковое садоводство</string>
 
@@ -2996,6 +3053,7 @@
 
 	<string name="poi_traffic_mirror">Дорожное зеркало</string>
 
+	<string name="poi_embassy_type">Вид</string>
 	<string name="poi_diplomatic_consulate">Консульство</string>
 	<string name="poi_diplomatic_consulate_general">Генеральное консульство</string>
 	<string name="poi_diplomatic_honorary_consulate">Почетное консульство</string>
@@ -3032,5 +3090,10 @@
 
 	<string name="poi_service_bicycle_charging_yes">Зарядка электровелосипедов: есть</string>
 	<string name="poi_service_bicycle_charging_no">Зарядка электровелосипедов: нет</string>
+
+	<string name="poi_internet_access_type">Тип доступа в интернет</string>
+
+	<string name="poi_payment_toll_type">Тип оплаты</string>
+
 
 </resources>
