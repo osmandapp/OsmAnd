@@ -2598,4 +2598,5 @@ V kolikor naletite na težave s programom OsmAnd, prosimo, stopite v stik s skup
     <string name="selected_categories">Izbrane kategorije</string>
     <string name="create_custom_poi">Ustvari točko POI po meri</string>
     <string name="custom_search">Iskanje po meri</string>
+    <string name="translit_names">Prečrkovanje imen</string>
     </resources>
