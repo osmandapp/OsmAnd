@@ -243,7 +243,7 @@
 		<string name="poi_water_transport">Vízi közlekedés</string>
 		<string name="poi_bicycle_transport">Kerékpáros közlekedés</string>
 		<string name="poi_aerialway_transport">Felvonók</string>
-	<string name="poi_man_made">Ember alkotta</string>
+	<string name="poi_man_made">Építmény</string>
 		<string name="poi_water_supply">Vízellátás</string>
 		<string name="poi_power">Energia</string>
 		<string name="poi_communication">Kommunikáció</string>
@@ -309,12 +309,12 @@
 	<string name="poi_fuel_diesel">Dízel</string>
 	<string name="poi_fuel_biodiesel">Biodízel</string>
 	<string name="poi_fuel_lpg">LPG autógáz</string>
-	<string name="poi_fuel_octane_80">80 oktános</string>
-	<string name="poi_fuel_octane_91">91 oktános</string>
-	<string name="poi_fuel_octane_92">92 oktános</string>
-	<string name="poi_fuel_octane_95">95 oktános</string>
-	<string name="poi_fuel_octane_98">98 oktános</string>
-	<string name="poi_fuel_octane_100">100 oktános</string>
+	<string name="poi_fuel_octane_80">80-as oktánszámú</string>
+	<string name="poi_fuel_octane_91">91-es oktánszámú</string>
+	<string name="poi_fuel_octane_92">92-es oktánszámú</string>
+	<string name="poi_fuel_octane_95">95-ös oktánszámú</string>
+	<string name="poi_fuel_octane_98">98-as oktánszámú</string>
+	<string name="poi_fuel_octane_100">100-as oktánszámú</string>
 	<string name="poi_fuel_cng">CNG</string>
 	<string name="poi_fuel_ethanol">Etanol</string>
 	<string name="poi_fuel_methanol">Metanol</string>
@@ -897,7 +897,7 @@
 	<string name="poi_craft_optician">Optikus</string>
 	<string name="poi_craft_painter">Festő</string>
 	<string name="poi_craft_watchmaker">Órásmester</string>
-	<string name="poi_cutline">Irtás</string>
+	<string name="poi_cutline">Nyiladék</string>
 	<string name="poi_shower">Zuhany</string>
 	<string name="poi_payment_terminal">Fizető terminál</string>
 	<string name="poi_tree">Fa</string>
