@@ -2593,4 +2593,9 @@ V kolikor naletite na težave s programom OsmAnd, prosimo, stopite v stik s skup
     <string name="osm_live_subscription_desc">Naročnina omogoča urne, dnevne ali tedenske posodobitve in neomejene prejeme kateregakoli dela zemljevida.</string>
     <string name="osm_live_banner_desc">Pridobite neomejene prejeme zemljevidov in drugih posodobitev več kot le enkrat mesečno: vsako uro, enkrat na dan ali enkrat tedensko.</string>
     <string name="osmand_plus_banner_desc">Polna različica OsmAnd z neomejenimi posodobitvami zemljevidov in mesečne posodobitve.</string>
+    <string name="edit_filter">Uredi filter</string>
+    <string name="subcategories">Podkategorije</string>
+    <string name="selected_categories">Izbrane kategorije</string>
+    <string name="create_custom_poi">Ustvari točko POI po meri</string>
+    <string name="custom_search">Iskanje po meri</string>
     </resources>
