@@ -328,6 +328,7 @@ public class ConfigureMapMenu {
 							}
 
 						});
+						bld.setNegativeButton(R.string.shared_string_dismiss, null);
 						bld.show();
 						return false;
 					}
@@ -359,6 +360,7 @@ public class ConfigureMapMenu {
 								// ad.notifyDataSetInvalidated();
 							}
 						});
+						bld.setNegativeButton(R.string.shared_string_dismiss, null);
 						bld.show();
 						return false;
 					}
@@ -419,6 +421,7 @@ public class ConfigureMapMenu {
 										dialog.dismiss();
 									}
 								});
+						bld.setNegativeButton(R.string.shared_string_dismiss, null);
 						bld.show();
 						return false;
 					}
@@ -453,6 +456,7 @@ public class ConfigureMapMenu {
 								dialog.dismiss();
 							}
 						});
+						b.setNegativeButton(R.string.shared_string_dismiss, null);
 						b.show();
 						return false;
 					}
@@ -494,6 +498,7 @@ public class ConfigureMapMenu {
 								dialog.dismiss();
 							}
 						});
+						b.setNegativeButton(R.string.shared_string_dismiss, null);
 						b.show();
 						return false;
 					}
@@ -833,6 +838,7 @@ public class ConfigureMapMenu {
 								ad.notifyDataSetInvalidated();
 							}
 						});
+						b.setNegativeButton(R.string.shared_string_dismiss, null);
 						b.show();
 						return false;
 					}
