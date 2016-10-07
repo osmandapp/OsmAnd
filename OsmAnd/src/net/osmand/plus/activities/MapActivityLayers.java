@@ -539,6 +539,7 @@ public class MapActivityLayers {
 			}
 
 		});
+		builder.setNegativeButton(R.string.shared_string_dismiss, null);
 		builder.show();
 	}
 
