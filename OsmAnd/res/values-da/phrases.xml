@@ -490,7 +490,7 @@
         <string name="poi_funeral_directors">Bedemand</string>
         <string name="poi_craft_computer">Computerværksted</string>
         <string name="poi_beauty">Skønhedssalon</string>
-        <string name="poi_beauty_salon_nails">Neglesalon</string>
+        <string name="poi_beauty_salon_nails">Manicure</string>
         <string name="poi_hairdresser">Frisør</string>
         <string name="poi_massage">Massagesalon</string>
         <string name="poi_tattoo">Tatovør</string>
@@ -974,8 +974,8 @@
 	<string name="poi_animal_shelter_bird">Internat: fugl</string>
 
 <string name="poi_shower">Bruser</string>
-	<string name="poi_recycling_centre">Type: genbrugsplads</string>
-	<string name="poi_recycling_container">Type: container</string>
+	<string name="poi_recycling_centre">Genbrugsplads</string>
+	<string name="poi_recycling_container">Container</string>
 	<string name="poi_recycling_glass">Glas</string>
 	<string name="poi_recycling_paper">Papir</string>
 	<string name="poi_recycling_clothes">Tøj</string>
@@ -1042,12 +1042,12 @@
 	<string name="poi_recycling_cars">Biler</string>
 	<string name="poi_recycling_bicycles">Cykler</string>
 
-	<string name="poi_drinking_water_yes">Drikkevand: ja</string>
-	<string name="poi_drinking_water_no">Drikkevand: nej</string>
+	<string name="poi_drinking_water_yes">Ja</string>
+	<string name="poi_drinking_water_no">Nej</string>
 	<string name="poi_supervised_yes">Overvåget</string>
 	<string name="poi_supervised_no">Ikke overvåget</string>
-	<string name="poi_seasonal_yes">Sæsonbestemt</string>
-	<string name="poi_seasonal_no">Ikke sæsonbestemt</string>
+	<string name="poi_seasonal_yes">Ja</string>
+	<string name="poi_seasonal_no">Nej</string>
 	<string name="poi_seasonal_dry_season">Tørre årstid</string>
 	<string name="poi_seasonal_wet_season">Våde årstid</string>
 	<string name="poi_seasonal_spring">Forår</string>
@@ -1225,11 +1225,11 @@
 
 	<string name="poi_parking_underground">Parkeringskælder</string>
 	<string name="poi_bicycle_parking_rack">Cykelsstativ</string>
-	<string name="poi_nudism_yes">Naturisme: tilladt</string>
-	<string name="poi_nudism_no">Naturisme: forbudt</string>
-	<string name="poi_nudism_obligatory">Naturisme: obligatorisk</string>
-	<string name="poi_nudism_customary">Naturisme: sædvane</string>
-	<string name="poi_nudism_permissive">Naturisme: med tilladelse</string>
+	<string name="poi_nudism_yes">Tilladt</string>
+	<string name="poi_nudism_no">Forbudt</string>
+	<string name="poi_nudism_obligatory">Obligatorisk</string>
+	<string name="poi_nudism_customary">Sædvanlig</string>
+	<string name="poi_nudism_permissive">Med tilladelse</string>
 
 	<string name="poi_height">Højde</string>
 	<string name="poi_ele">Højde over havoverfladen</string>
@@ -1274,9 +1274,9 @@
 	<string name="poi_pump_powered">Motordrevet</string>
 	<string name="poi_pump_no">Ingen pumpe</string>
 
-	<string name="poi_water_characteristic_mineral">Vandkarakteristisk: mineralsk</string>
+	<string name="poi_water_characteristic_mineral">Mineralsk</string>
 	<string name="poi_water_characteristic_mud">Vandkarakteristisk: mudret</string>
-	<string name="poi_water_characteristic_sulfuric">Vandkarakteristisk: svovlholdig</string>
+	<string name="poi_water_characteristic_sulfuric">Svovlholdig</string>
 
 	<string name="poi_water_point">Vandtilslutning</string>
 
@@ -1312,17 +1312,17 @@
 	<string name="poi_commercial">Forretningsområde</string>
 	<string name="poi_retail">Detailhandelsområde</string>
 
-	<string name="poi_fireplace_yes">Ildsted</string>
+	<string name="poi_fireplace_yes">Ja</string>
 	<string name="poi_fireplace_no">Intet ildsted</string>
 
 	<string name="poi_covered_yes">Ja</string>
 	<string name="poi_covered_no">Ikke overdækket</string>
 
-	<string name="poi_smoking_no">Rygning forbudt</string>
-	<string name="poi_smoking_outside">Rygning er kun tilladt udendørs</string>
-	<string name="poi_smoking_yes">Rygning tilladt</string>
-	<string name="poi_smoking_separated">Rygning tilladt i et adskilt lokale</string>
-	<string name="poi_smoking_isolated">Rygning tilladt i et isoleret rum</string>
+	<string name="poi_smoking_no">Ikke tilladt</string>
+	<string name="poi_smoking_outside">Kun tilladt udendørs</string>
+	<string name="poi_smoking_yes">Tilladt</string>
+	<string name="poi_smoking_separated">I et adskilt lokale</string>
+	<string name="poi_smoking_isolated">I et isoleret rum</string>
 	<string name="poi_smoking_dedicated">Dedikeret til rygere</string>
 
 	<string name="poi_toll_no">Ingen vejafgift</string>
@@ -1370,19 +1370,19 @@
 
 <string name="poi_pump_yes">Ja</string>
 
-	<string name="poi_piste_difficulty_easy">Pistesværhedsgrad: let</string>
-	<string name="poi_piste_difficulty_intermediate">Pistesværhedsgrad: medium</string>
-	<string name="poi_piste_difficulty_advanced">Pistesværhedsgrad: avanceret</string>
-	<string name="poi_piste_difficulty_novice">Pistesværhedsgrad: nybegynder</string>
-	<string name="poi_piste_difficulty_expert">Pistesværhedsgrad: ekspert</string>
-	<string name="poi_piste_difficulty_freeride">Pistesværhedsgrad: freeride</string>
-	<string name="poi_piste_grooming_classic">Pistepreparering: klassisk</string>
-	<string name="poi_piste_grooming_classic_skating">Pistepreparering: klassisk+skating</string>
-	<string name="poi_piste_grooming_backcountry">Pistepreparering: offpiste</string>
-	<string name="poi_piste_grooming_scooter">Pistepreparering: snescooter</string>
-	<string name="poi_piste_grooming_skating">Pistepreparering: skating</string>
-	<string name="poi_piste_grooming_no">Pistepreparering: nej</string>
-	<string name="poi_piste_grooming_mogul">Pistepreparering: pukkelpist</string>
+	<string name="poi_piste_difficulty_easy">Let</string>
+	<string name="poi_piste_difficulty_intermediate">Mellem</string>
+	<string name="poi_piste_difficulty_advanced">Avanceret</string>
+	<string name="poi_piste_difficulty_novice">Nybegynder</string>
+	<string name="poi_piste_difficulty_expert">Ekspert</string>
+	<string name="poi_piste_difficulty_freeride">Freeride</string>
+	<string name="poi_piste_grooming_classic">Klassisk</string>
+	<string name="poi_piste_grooming_classic_skating">Klassisk+skating</string>
+	<string name="poi_piste_grooming_backcountry">Offpiste</string>
+	<string name="poi_piste_grooming_scooter">Snescooter</string>
+	<string name="poi_piste_grooming_skating">Skating</string>
+	<string name="poi_piste_grooming_no">Nej</string>
+	<string name="poi_piste_grooming_mogul">Pukkelpist</string>
 
 <string name="poi_garden_type_residential">Havetype: beboelse</string>
 	<string name="poi_garden_type_community">Havetype: fælles</string>
@@ -1614,32 +1614,32 @@
 	<string name="poi_diet_lactose_free_no">Laktosefri kost: nej</string>
 	<string name="poi_diet_pescetarian_yes">pesco-vegetarkost</string>
 
-	<string name="poi_drive_in_yes">Drive-in: ja</string>
+	<string name="poi_drive_in_yes">Ja</string>
 	<string name="poi_drive_in_no">Drive-in: nej</string>
-	<string name="poi_drive_through_yes">Drive-through: ja</string>
+	<string name="poi_drive_through_yes">Ja</string>
 	<string name="poi_drive_through_no">Drive-through: nej</string>
 
 	<string name="poi_brewery_additional">Bryggerinavn</string>
 	<string name="poi_microbrewery_yes">Mikrobryggeri</string>
 	<string name="poi_microbrewery_no">Ingen mikrobryggeri</string>
 
-	<string name="poi_takeaway_yes">Takeaway</string>
+	<string name="poi_takeaway_yes">Ja</string>
 	<string name="poi_takeaway_no">Ingen takeaway</string>
 	<string name="poi_takeaway_only">Kun takeaway</string>
 
-	<string name="poi_delivery_yes">Levering</string>
+	<string name="poi_delivery_yes">Ja</string>
 	<string name="poi_delivery_no">Ingen levering</string>
 	<string name="poi_delivery_only">Kun levering</string>
 
-	<string name="poi_outdoor_seating_yes">Udendørsservering</string>
+	<string name="poi_outdoor_seating_yes">Ja</string>
 	<string name="poi_outdoor_seating_no">Ingen udendørsservering</string>
-	<string name="poi_outdoor_seating_terrace">Udendørsservering: terrasse</string>
-	<string name="poi_outdoor_seating_sidewalk">Udendørsservering: fortov</string>
-	<string name="poi_outdoor_seating_pedestrian_zone">Udendørsservering: gågade</string>
-	<string name="poi_outdoor_seating_garden">Udendørsservering: have</string>
-	<string name="poi_outdoor_seating_patio">Udendørsservering: gårdhave</string>
+	<string name="poi_outdoor_seating_terrace">Terrasse</string>
+	<string name="poi_outdoor_seating_sidewalk">Fortov</string>
+	<string name="poi_outdoor_seating_pedestrian_zone">Gågade</string>
+	<string name="poi_outdoor_seating_garden">Have</string>
+	<string name="poi_outdoor_seating_patio">Gårdhave</string>
 
-	<string name="poi_cocktails_yes">Cocktails</string>
+	<string name="poi_cocktails_yes">Ja</string>
 
 	<string name="poi_second_hand_yes">Brugte varer</string>
 	<string name="poi_second_hand_no">Ingen brugte varer</string>
@@ -1808,9 +1808,9 @@
 	<string name="poi_wetland_palsa_bog">Pals</string>
 	<string name="poi_wetland_mud">Mudder</string>
 
-	<string name="poi_beach_sand">Strandtype: sand</string>
-	<string name="poi_beach_shingle">Strandtype: rullesten</string>
-	<string name="poi_beach_rocky">Strandtype: stenet</string>
+	<string name="poi_beach_sand">Sand</string>
+	<string name="poi_beach_shingle">Rullesten</string>
+	<string name="poi_beach_rocky">Stenet</string>
 
 	<string name="poi_chimney">Skorsten</string>
 	<string name="poi_palm">Palme</string>
@@ -1822,16 +1822,16 @@
 	<string name="poi_bin_yes">Med affaldskurv</string>
 	<string name="poi_bin_no">Uden affaldskurv</string>
 
-	<string name="poi_shelter_type_public_transport">Sheltertype: stoppested</string>
-	<string name="poi_shelter_type_picnic_shelter">Sheltertype: skovtur</string>
-	<string name="poi_shelter_type_weather_shelter">Sheltertype: Tarp</string>
-	<string name="poi_shelter_type_lean_to">Sheltertype: Bivuak</string>
-	<string name="poi_shelter_type_basic_hut">Sheltertype: hytte</string>
-	<string name="poi_shelter_type_building">Sheltertype: bygning</string>
-	<string name="poi_shelter_type_wildlife_hide">Sheltertype: vildtskjul</string>
-	<string name="poi_shelter_type_rock_shelter">Sheltertype: klippehule</string>
-	<string name="poi_shelter_type_sun_shelter">Sheltertype: solafskærming</string>
-	<string name="poi_shelter_type_field_shelter">Sheltertype: dyreshelter</string>
+	<string name="poi_shelter_type_public_transport">Offentlig transport</string>
+	<string name="poi_shelter_type_picnic_shelter">Skovtur</string>
+	<string name="poi_shelter_type_weather_shelter">Tarp</string>
+	<string name="poi_shelter_type_lean_to">Bivuak</string>
+	<string name="poi_shelter_type_basic_hut">Hytte</string>
+	<string name="poi_shelter_type_building">Bygning</string>
+	<string name="poi_shelter_type_wildlife_hide">Vildtskjul</string>
+	<string name="poi_shelter_type_rock_shelter">Klippehule</string>
+	<string name="poi_shelter_type_sun_shelter">Solafskærming</string>
+	<string name="poi_shelter_type_field_shelter">Dyreshelter</string>
 	<string name="poi_shelter_type_tent">Sheltertype: telt</string>
 	<string name="poi_shelter_type_abandoned">Sheltertype: forladt</string>
 
@@ -3149,5 +3149,26 @@
 	<string name="poi_scout_camp">Spejderlejr</string>
 	<string name="poi_backcountry">Bagland</string>
 	<string name="poi_resort_type">Type</string>
+
+<string name="poi_piste_difficulty">Pistesværhedsgrad</string>
+	<string name="poi_piste_grooming">Piste pleje</string>
+	<string name="poi_theatre_genre">Genre</string>
+	<string name="poi_outdoor_seating">Udendørs siddepladser</string>
+	<string name="poi_smoking">Rygning</string>
+	<string name="poi_delivery">Levering</string>
+	<string name="poi_drive_in">Drive in</string>
+	<string name="poi_drive_through">Drive through</string>
+	<string name="poi_takeaway">Takeaway</string>
+	<string name="poi_cocktails">Cocktails</string>
+	<string name="poi_microbrewery">Mikrobryggeri</string>
+	<string name="poi_beauty_salon_service">Service</string>
+	<string name="poi_recycling_type">Type</string>
+	<string name="poi_recycling_accepted_waste">Accepteret affald</string>
+	<string name="poi_shelter_type">Type</string>
+	<string name="poi_fireplace">Ildsted</string>
+	<string name="poi_seasonal">Sæsonbestemt</string>
+	<string name="poi_water_characteristic">Vand egenskab</string>
+	<string name="poi_beach_surface_type">Overflade</string>
+	<string name="poi_nudism">Nudisme</string>
 
 </resources>
