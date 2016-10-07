@@ -117,7 +117,7 @@
 	<string name="poi_fuel_avia_type">Tipas</string>
 	<string name="poi_internet_access_type">Interneto prieigos tipas</string>
 	<string name="poi_clothes_type">Tipas</string>
-	<string name="poi_bicycle_service">Dviračių priežiūra</string>
+	<string name="poi_bicycle_service">Dviračių aptarnavimas</string>
 	<string name="poi_shoes_type">Tipas</string>
 	<string name="poi_fire_hydrant_type">Tipas</string>
 	<string name="poi_fire_hydrant_water_source">Vandens šaltinis</string>
@@ -136,7 +136,7 @@
 	<string name="poi_animal_training_type">Tipas</string>
 	<string name="poi_embassy_type">Tipas</string>
 	<string name="poi_city_capital">Sostinė</string>
-	<string name="poi_healthcare_alternative_types">Specializaciją</string>
+	<string name="poi_healthcare_alternative_types">Specializacija</string>
 	<string name="poi_archaeological_site_type">Tipas</string>
 	<string name="poi_religion_type">Religija</string>
 	<string name="poi_information_type">Tipas</string>
@@ -161,4 +161,30 @@
 
 <string name="poi_jewelry">Juvelyrinė parduotuvė</string>
 	<string name="poi_kiosk">Kioskas</string>
+	<string name="poi_additional_type">Papildomas</string>
+	<string name="poi_vending_type">Pardavimų tipas</string>
+	<string name="poi_fire_hydrant_position">Vieta</string>
+	<string name="poi_traffic_signals_sound">Garsas</string>
+	<string name="poi_tactile_paving">Taktilinė danga</string>
+	<string name="poi_brushless">Bekontaktis</string>
+	<string name="poi_covered">Dengtas</string>
+	<string name="poi_aerialway_bicycle">Dviračių transportas</string>
+	<string name="poi_observatory_designation">Žymėjimas</string>
+	<string name="poi_pharmacy_dispensing">Išdavimas</string>
+	<string name="poi_free_flying_characteristics">Sąvybės</string>
+	<string name="poi_star_rating">Žvaigždučių kiekis</string>
+	<string name="poi_denomination">Tikyba</string>
+	<string name="poi_backcountry">Užmiestis</string>
+	<string name="poi_piste_grooming">Trasų tvarkymas</string>
+	<string name="poi_outdoor_seating">Sėdimos vietos lauke</string>
+	<string name="poi_drive_in">Klientų aptarnavimas automobiliuose</string>
+	<string name="poi_drive_through">Klientų aptarnavimas automobiliuose</string>
+	<string name="poi_microbrewery">Smulki alaus darykla</string>
+	<string name="poi_recycling_accepted_waste">Priimamos šiukšlės</string>
+	<string name="poi_water_characteristic">Vandens sąvybės</string>
+	<string name="poi_hunting">Medžioklės įranga</string>
+	<string name="poi_interior_decoration">Vidaus dekoro parduotuvė</string>
+	<string name="poi_kitchen">Virtuvės baldai</string>
+	<string name="poi_leather">Odos parduotuvė</string>
+	<string name="poi_medical_supply">Medicinos priemonės</string>
 	</resources>
