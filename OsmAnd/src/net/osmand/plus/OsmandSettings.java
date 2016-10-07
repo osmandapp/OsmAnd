@@ -889,6 +889,7 @@ public class OsmandSettings {
 	public static final String TRANSPORT_STOPS_OVER_MAP = "transportStops";
 
 	public final OsmandPreference<String> MAP_PREFERRED_LOCALE = new StringPreference("map_preferred_locale", "").makeGlobal().cache();
+	public final OsmandPreference<Boolean> MAP_TRANSLITERATE_NAMES = new BooleanPreference("map_transliterate_names", false).makeGlobal().cache();
 
 	public boolean usingEnglishNames() {
 		return MAP_PREFERRED_LOCALE.get().equals("en");

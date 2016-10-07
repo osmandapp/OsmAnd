@@ -1,17 +1,19 @@
 package net.osmand.plus.dialogs;
 
-import gnu.trove.list.array.TIntArrayList;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnMultiChoiceClickListener;
+import android.content.Intent;
+import android.support.annotation.DrawableRes;
+import android.support.annotation.StringRes;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.SwitchCompat;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.CompoundButton;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import net.osmand.PlatformUtil;
 import net.osmand.core.android.MapRendererContext;
@@ -44,17 +46,18 @@ import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnMultiChoiceClickListener;
-import android.content.Intent;
-import android.support.annotation.DrawableRes;
-import android.support.annotation.StringRes;
-import android.support.v7.app.AlertDialog;
-import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.CompoundButton;
-import android.widget.Toast;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+
+import gnu.trove.list.array.TIntArrayList;
 
 public class ConfigureMapMenu {
 	private static final Log LOG = PlatformUtil.getLog(ConfigureMapMenu.class);
@@ -473,8 +476,19 @@ public class ConfigureMapMenu {
 							final int pos, boolean isChecked) {
 						final OsmandMapTileView view = activity.getMapView();
 						AlertDialog.Builder b = new AlertDialog.Builder(view.getContext());
-						// test old descr as title
-						b.setTitle(R.string.map_preferred_locale);
+
+						View titleView = LayoutInflater.from(activity)
+								.inflate(R.layout.language_dialog_title, null);
+						SwitchCompat check = (SwitchCompat) titleView.findViewById(R.id.check);
+						check.setChecked(view.getSettings().MAP_TRANSLITERATE_NAMES.get());
+						b.setCustomTitle(titleView);
+						check.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+							@Override
+							public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+								view.getSettings().MAP_TRANSLITERATE_NAMES.set(isChecked);
+							}
+						});
+
 						final String[] txtIds = getSortedMapNamesIds(activity, mapNamesIds,
 								getMapNamesValues(activity, mapNamesIds));
 						final String[] txtValues = getMapNamesValues(activity, txtIds);
