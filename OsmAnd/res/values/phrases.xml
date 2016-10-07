@@ -3097,4 +3097,17 @@
 	<string name="poi_service_bicycle_charging_yes">Bicycle charging: yes</string>
 	<string name="poi_service_bicycle_charging_no">Bicycle charging: no</string>
 
+	<string name="poi_xmas">Christmas</string>
+	<string name="poi_xmas_event">Christmas event</string>
+	<string name="poi_xmas_market">Christmas market</string>
+	<string name="poi_xmas_pyramid">Christmas pyramid</string>
+	<string name="poi_xmas_shop">Christmas shop</string>
+	<string name="poi_xmas_shop_christmas_tree">Tree shop</string>
+	<string name="poi_xmas_tree">Christmas tree</string>
+	<string name="poi_xmas_day_date">Xmas: period for the event</string>
+	<string name="poi_xmas_note">Xmas: note</string>
+	<string name="poi_xmas_opening_hours">Xmas: opening hours</string>
+	<string name="poi_xmas_location">Xmas: location</string>
+	<string name="poi_xmas_url">Xmas: website</string>
+
 </resources>
