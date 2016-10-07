@@ -48,6 +48,27 @@
 	<string name="poi_scout_camp">Scout camp</string>
 	<string name="poi_backcountry">Backcountry</string>
 	<string name="poi_resort_type">Type</string>
+	<string name="poi_piste_difficulty">Piste difficulty</string>
+	<string name="poi_piste_grooming">Piste grooming</string>
+	<string name="poi_theatre_genre">Genre</string>
+	<string name="poi_outdoor_seating">Outdoor seating</string>
+	<string name="poi_fee">Fee</string>
+	<string name="poi_smoking">Smoking</string>
+	<string name="poi_delivery">Delivery</string>
+	<string name="poi_drive_in">Drive in</string>
+	<string name="poi_drive_through">Drive through</string>
+	<string name="poi_takeaway">Takeaway</string>
+	<string name="poi_cocktails">Cocktails</string>
+	<string name="poi_microbrewery">Microbrewery</string>
+	<string name="poi_beauty_salon_service">Service</string>
+	<string name="poi_recycling_type">Type</string>
+	<string name="poi_recycling_accepted_waste">Accepted waste</string>
+	<string name="poi_shelter_type">Type</string>
+	<string name="poi_fireplace">Fireplace</string>
+	<string name="poi_seasonal">Seasonal</string>
+	<string name="poi_water_characteristic">Water characteristic</string>
+	<string name="poi_beach_surface_type">Surface</string>
+	<string name="poi_nudism">Nudism</string>
 
 <!--  categories -->
 	<string name="poi_shop">Store</string>
@@ -370,8 +391,8 @@
 
 	<string name="poi_recycling">Recycling</string>
 
-	<string name="poi_recycling_centre">Type: recycling center</string>
-	<string name="poi_recycling_container">Type: container</string>
+	<string name="poi_recycling_centre">Recycling center</string>
+	<string name="poi_recycling_container">Container</string>
 	<string name="poi_recycling_glass">Glass</string>
 	<string name="poi_recycling_paper">Paper</string>
 	<string name="poi_recycling_clothes">Clothes</string>
@@ -841,7 +862,7 @@
 	<string name="poi_community_centre">Community center</string>
 	<string name="poi_social_centre">Social center</string>
 	<string name="poi_theatre">Theater</string>
-	<string name="poi_circus">Circus</string>
+	<string name="poi_theathe_genre_circus">Circus</string>
 	<string name="poi_gallery">Art gallery</string>
 	<string name="poi_dance_floor">Dance floor</string>
 	<string name="poi_nightclub">Nightclub</string>
@@ -925,7 +946,7 @@
 	<string name="poi_funeral_directors">Funeral directors</string>
 	<string name="poi_craft_computer">Computer craft</string>
 	<string name="poi_beauty">Beauty salon</string>
-	<string name="poi_beauty_salon_nails">Nail salon</string>
+	<string name="poi_beauty_salon_nails">Manicure</string>
 	<string name="poi_hairdresser">Hairdresser</string>
 	<string name="poi_massage">Massage salon</string>
 	<string name="poi_tattoo">Tattoo salon</string>
@@ -1150,15 +1171,14 @@
 
 	<string name="poi_operator">Operator</string>
 	<string name="poi_brand">Brand</string>
-	<string name="poi_fee">Fee</string>
 	<string name="poi_fee_yes">Yes</string>
 	<string name="poi_fee_no">No</string>
-	<string name="poi_drinking_water_yes">Drinking water: yes</string>
-	<string name="poi_drinking_water_no">Drinking water: no</string>
+	<string name="poi_drinking_water_yes">Yes</string>
+	<string name="poi_drinking_water_no">No</string>
 	<string name="poi_supervised_yes">Supervised</string>
 	<string name="poi_supervised_no">Without supervision</string>
-	<string name="poi_seasonal_yes">Seasonal</string>
-	<string name="poi_seasonal_no">Not seasonal</string>
+	<string name="poi_seasonal_yes">Yes</string>
+	<string name="poi_seasonal_no">No</string>
 	<string name="poi_seasonal_dry_season">Dry season</string>
 	<string name="poi_seasonal_wet_season">Wet season</string>
 	<string name="poi_seasonal_spring">Spring</string>
@@ -1200,11 +1220,11 @@
 	<string name="poi_content_salt">Content: salt</string>
 	<string name="poi_content_grain">Content: grain</string>
 
-	<string name="poi_nudism_yes">Nudism: allowed</string>
-	<string name="poi_nudism_no">Nudism: prohibited</string>
-	<string name="poi_nudism_obligatory">Nudism: obligatory</string>
-	<string name="poi_nudism_customary">Nudism: customary</string>
-	<string name="poi_nudism_permissive">Nudism: permissive</string>
+	<string name="poi_nudism_yes">Allowed</string>
+	<string name="poi_nudism_no">Prohibited</string>
+	<string name="poi_nudism_obligatory">Obligatory</string>
+	<string name="poi_nudism_customary">Customary</string>
+	<string name="poi_nudism_permissive">Permissive</string>
 
 	<string name="poi_trade_building_supplies">Building supplies</string>
 	<string name="poi_trade_plumbing">Plumbing supplies</string>
@@ -1305,9 +1325,9 @@
 	<string name="poi_pump_no">No pump</string>
 	<string name="poi_pump_yes">Yes</string>
 
-	<string name="poi_water_characteristic_mineral">Water characteristic: mineral</string>
+	<string name="poi_water_characteristic_mineral">Mineral</string>
 	<string name="poi_water_characteristic_mud">Water characteristic: mud</string>
-	<string name="poi_water_characteristic_sulfuric">Water characteristic: sulfuric</string>
+	<string name="poi_water_characteristic_sulfuric">Sulfuric</string>
 
 	<string name="poi_water_point">Water point</string>
 
@@ -1338,17 +1358,17 @@
 	<string name="poi_commercial">Commercial landuse</string>
 	<string name="poi_retail">Retail landuse</string>
 
-	<string name="poi_fireplace_yes">Fireplace</string>
+	<string name="poi_fireplace_yes">Yes</string>
 	<string name="poi_fireplace_no">No fireplace</string>
 
 	<string name="poi_covered_yes">Yes</string>
 	<string name="poi_covered_no">Not covered</string>
 
-	<string name="poi_smoking_no">No smoking</string>
-	<string name="poi_smoking_outside">Smoking allowed outside only</string>
-	<string name="poi_smoking_yes">Smoking allowed</string>
-	<string name="poi_smoking_separated">Smoking allowed in a separated room</string>
-	<string name="poi_smoking_isolated">Smoking allowed in a isolated room</string>
+	<string name="poi_smoking_no">Not allowed</string>
+	<string name="poi_smoking_outside">Outside only</string>
+	<string name="poi_smoking_yes">Allowed</string>
+	<string name="poi_smoking_separated">In a separated room</string>
+	<string name="poi_smoking_isolated">In a isolated room</string>
 	<string name="poi_smoking_dedicated">Dedicated to smokers</string>
 
 	<string name="poi_toll_yes">Toll</string>
@@ -1386,19 +1406,19 @@
 	<string name="poi_level">Level</string>
 	<string name="poi_rtsa_scale">RTSA scale</string>
 
-	<string name="poi_piste_difficulty_easy">Piste difficulty: easy</string>
-	<string name="poi_piste_difficulty_intermediate">Piste difficulty: intermediate</string>
-	<string name="poi_piste_difficulty_advanced">Piste difficulty: advanced</string>
-	<string name="poi_piste_difficulty_novice">Piste difficulty: novice</string>
-	<string name="poi_piste_difficulty_expert">Piste difficulty: expert</string>
-	<string name="poi_piste_difficulty_freeride">Piste difficulty: freeride</string>
-	<string name="poi_piste_grooming_classic">Piste grooming: classic</string>
-	<string name="poi_piste_grooming_classic_skating">Piste grooming: classic+skating</string>
-	<string name="poi_piste_grooming_backcountry">Piste grooming: backcountry</string>
-	<string name="poi_piste_grooming_scooter">Piste grooming: scooter</string>
-	<string name="poi_piste_grooming_skating">Piste grooming: skating</string>
-	<string name="poi_piste_grooming_no">Piste grooming: no</string>
-	<string name="poi_piste_grooming_mogul">Piste grooming: mogul</string>
+	<string name="poi_piste_difficulty_easy">Easy</string>
+	<string name="poi_piste_difficulty_intermediate">Intermediate</string>
+	<string name="poi_piste_difficulty_advanced">Advanced</string>
+	<string name="poi_piste_difficulty_novice">Novice</string>
+	<string name="poi_piste_difficulty_expert">Expert</string>
+	<string name="poi_piste_difficulty_freeride">Freeride</string>
+	<string name="poi_piste_grooming_classic">Classic</string>
+	<string name="poi_piste_grooming_classic_skating">Classic+skating</string>
+	<string name="poi_piste_grooming_backcountry">Backcountry</string>
+	<string name="poi_piste_grooming_scooter">Scooter</string>
+	<string name="poi_piste_grooming_skating">Skating</string>
+	<string name="poi_piste_grooming_no">No</string>
+	<string name="poi_piste_grooming_mogul">Mogul</string>
 
 	<string name="poi_garden_type_residential">Garden type: residential</string>
 	<string name="poi_garden_type_community">Garden type: community</string>
@@ -1624,32 +1644,32 @@
 	<string name="poi_diet_lactose_free_no">Lactose-free diet: no</string>
 	<string name="poi_diet_pescetarian_yes">Pescetarian diet</string>
 
-	<string name="poi_drive_in_yes">Drive-in: yes</string>
+	<string name="poi_drive_in_yes">Yes</string>
 	<string name="poi_drive_in_no">Drive-in: no</string>
-	<string name="poi_drive_through_yes">Drive-through: yes</string>
+	<string name="poi_drive_through_yes">Yes</string>
 	<string name="poi_drive_through_no">Drive-through: no</string>
 
 	<string name="poi_brewery_additional">Brewery name</string>
 	<string name="poi_microbrewery_yes">Microbrewery</string>
 	<string name="poi_microbrewery_no">No microbrewery</string>
 
-	<string name="poi_takeaway_yes">Takeaway</string>
+	<string name="poi_takeaway_yes">Yes</string>
 	<string name="poi_takeaway_no">No takeaway</string>
 	<string name="poi_takeaway_only">Takeaway only</string>
 
-	<string name="poi_delivery_yes">Delivery</string>
+	<string name="poi_delivery_yes">Yes</string>
 	<string name="poi_delivery_no">No delivery</string>
 	<string name="poi_delivery_only">Delivery only</string>
 
-	<string name="poi_outdoor_seating_yes">Outdoor seating</string>
+	<string name="poi_outdoor_seating_yes">Yes</string>
 	<string name="poi_outdoor_seating_no">No outdoor seating</string>
-	<string name="poi_outdoor_seating_terrace">Outdoor seating: terrace</string>
-	<string name="poi_outdoor_seating_sidewalk">Outdoor seating: sidewalk</string>
-	<string name="poi_outdoor_seating_pedestrian_zone">Outdoor seating: pedestrian zone</string>
-	<string name="poi_outdoor_seating_garden">Outdoor seating: garden</string>
-	<string name="poi_outdoor_seating_patio">Outdoor seating: patio</string>
+	<string name="poi_outdoor_seating_terrace">Terrace</string>
+	<string name="poi_outdoor_seating_sidewalk">Sidewalk</string>
+	<string name="poi_outdoor_seating_pedestrian_zone">Pedestrian zone</string>
+	<string name="poi_outdoor_seating_garden">Garden</string>
+	<string name="poi_outdoor_seating_patio">Patio</string>
 
-	<string name="poi_cocktails_yes">Cocktails</string>
+	<string name="poi_cocktails_yes">Yes</string>
 
 	<string name="poi_second_hand_yes">Second-hand goods</string>
 	<string name="poi_second_hand_no">No second-hand goods</string>
@@ -1818,9 +1838,9 @@
 	<string name="poi_wetland_palsa_bog">Palsa bog</string>
 	<string name="poi_wetland_mud">Mud</string>
 
-	<string name="poi_beach_sand">Beach type: sand</string>
-	<string name="poi_beach_shingle">Beach type: shingle</string>
-	<string name="poi_beach_rocky">Beach type: rocky</string>
+	<string name="poi_beach_sand">Sand</string>
+	<string name="poi_beach_shingle">Shingle</string>
+	<string name="poi_beach_rocky">Rocky</string>
 
 	<string name="poi_chimney">Chimney</string>
 	<string name="poi_palm">Palm</string>
@@ -1832,16 +1852,16 @@
 	<string name="poi_bin_yes">With basket</string>
 	<string name="poi_bin_no">Without basket</string>
 
-	<string name="poi_shelter_type_public_transport">Shelter type: public transport</string>
-	<string name="poi_shelter_type_picnic_shelter">Shelter type: picnic shelter</string>
-	<string name="poi_shelter_type_weather_shelter">Shelter type: weather shelter</string>
-	<string name="poi_shelter_type_lean_to">Shelter type: lean-to</string>
-	<string name="poi_shelter_type_basic_hut">Shelter type: basic hut</string>
-	<string name="poi_shelter_type_building">Shelter type: building</string>
-	<string name="poi_shelter_type_wildlife_hide">Shelter type: wildlife hide</string>
-	<string name="poi_shelter_type_rock_shelter">Shelter type: rock shelter</string>
-	<string name="poi_shelter_type_sun_shelter">Shelter type: sun shelter</string>
-	<string name="poi_shelter_type_field_shelter">Shelter type: field shelter</string>
+	<string name="poi_shelter_type_public_transport">Public transport</string>
+	<string name="poi_shelter_type_picnic_shelter">Picnic</string>
+	<string name="poi_shelter_type_weather_shelter">Weather</string>
+	<string name="poi_shelter_type_lean_to">Lean-to</string>
+	<string name="poi_shelter_type_basic_hut">Basic hut</string>
+	<string name="poi_shelter_type_building">Building</string>
+	<string name="poi_shelter_type_wildlife_hide">Wildlife hide</string>
+	<string name="poi_shelter_type_rock_shelter">Rock shelter</string>
+	<string name="poi_shelter_type_sun_shelter">Sun shelter</string>
+	<string name="poi_shelter_type_field_shelter">Field shelter</string>
 	<string name="poi_shelter_type_tent">Shelter type: tent</string>
 	<string name="poi_shelter_type_abandoned">Shelter type: abandoned</string>
 
