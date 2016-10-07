@@ -2460,4 +2460,5 @@ Si aprecieu OsmAnd  i OSM i voleu ajudar-los, és la via perfecta per fer-ho."</
     <string name="edit_filter">Edita el filtre</string>
     <string name="subcategories">Subcategories</string>
     <string name="translit_names">Translitera els noms</string>
+    <string name="translit_name_if_miss">Si no hi ha noms en %1$s translitera els propis</string>
     </resources>
