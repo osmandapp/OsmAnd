@@ -2840,8 +2840,8 @@
 	<string name="poi_fire_hydrant_style_wsh">Hydrantart: Schacht</string>
 	<string name="poi_fire_hydrant_style_water_source_main">Hydrantwasserquelle: Haupt</string>
 	<string name="poi_fire_hydrant_style_water_source_pond">Hydrant Wasserquelle : Teich</string>
-	<string name="poi_fire_hydrant_style_water_source_stream">Hydrant Wasserquelle : Wasserlauf</string>
-	<string name="poi_fire_hydrant_style_water_source_cistern">Hydrant Wasserquelle : Zisterne</string>
+	<string name="poi_fire_hydrant_style_water_source_stream">Wasserlauf</string>
+	<string name="poi_fire_hydrant_style_water_source_cistern">Zisterne</string>
 	<string name="poi_in_service_yes">Im Dienst: Ja</string>
 
 	<string name="poi_street_cabinet_power">Kasten-Typ: Strom</string>
@@ -2907,7 +2907,7 @@
 	<string name="poi_telescope_usage_research">Nutzung: Forschung</string>
 
 	<string name="poi_observatory_type_espionage">Nutzung: Spionage</string>
-	<string name="poi_observatory_type_meteorological">Nutzung: meteorologische</string>
+	<string name="poi_observatory_type_meteorological">meteorologisch</string>
 	<string name="poi_length">Länge</string>
 
 <string name="poi_crossing_bell_yes">Kreuzungssignalton</string>
@@ -2997,7 +2997,7 @@
 	<string name="poi_support_suspended">Unterstützung: ausgesetzt</string>
 	<string name="poi_diplomatic_consulate_general">Generalkonsulat</string>
 	<string name="poi_diplomatic_honorary_consulate">Honorarkonsulat</string>
-	<string name="poi_observatory_type_gravitational">Verwendung: Schwerkraft</string>
+	<string name="poi_observatory_type_gravitational">Schwerkraft</string>
 
 	<string name="poi_generator_output_hot_water">Ausgangsleistung: heißes Wasser</string>
 	<string name="poi_generator_output_compressed_air">Ausgangsleistung: Druckluft</string>
@@ -3014,7 +3014,7 @@
 
 <string name="poi_spices">Gewürzgeschäft</string>
 
-<string name="poi_fuel_type">Kraftstoffart</string>
+<string name="poi_fuel_type">Typ</string>
 	<string name="poi_payment_type">Art der Zahlung</string>
 	<string name="poi_additional_type">Zusätzlich</string>
 <string name="poi_service_bicycle_charging_yes">Fahrrad laden: Ja</string>
@@ -3022,4 +3022,29 @@
 
 <string name="poi_shop_craft">Kunst und Handwerk Zubehörgeschäft</string>
 
+	<string name="poi_fuel_avia_type">Typ</string>
+	<string name="poi_payment_fuel_type">Art der Zahlung</string>
+	<string name="poi_internet_access_type">Internet Zugangsart</string>
+	<string name="poi_clothes_type">Typ</string>
+	<string name="poi_shoes_type">Typ</string>
+	<string name="poi_fire_hydrant_type">Typ</string>
+	<string name="poi_fire_hydrant_position">Position</string>
+	<string name="poi_fire_hydrant_water_source">Wasserquelle</string>
+	<string name="poi_payment_toll_type">Zahlungsart</string>
+	<string name="poi_highway_crossing_type">Typ</string>
+	<string name="poi_tactile_paving">Ertastbares Pflaster</string>
+	<string name="poi_brushless">Bürstenlos</string>
+	<string name="poi_automated">Automatisiert</string>
+	<string name="poi_parking_type">Typ</string>
+	<string name="poi_covered">Überdacht</string>
+	<string name="poi_ferry_terminal_cargo">Fracht</string>
+	<string name="poi_bicycle_parking_type">Typ</string>
+	<string name="poi_aerialway_bicycle">Radtransport</string>
+	<string name="poi_aerialway_heating">Heizung</string>
+	<string name="poi_pump">Pumpe</string>
+	<string name="poi_observatory_designation">Bezeichnung</string>
+	<string name="poi_telescope_type">Typ</string>
+	<string name="poi_animal_training_type">Typ</string>
+	<string name="poi_embassy_type">Typ</string>
+	<string name="poi_city_capital">Hauptstadt</string>
 	</resources>
