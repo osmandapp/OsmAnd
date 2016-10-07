@@ -137,4 +137,28 @@
 	<string name="poi_embassy_type">Tipas</string>
 	<string name="poi_city_capital">Sostinė</string>
 	<string name="poi_healthcare_alternative_types">Specializaciją</string>
+	<string name="poi_archaeological_site_type">Tipas</string>
+	<string name="poi_religion_type">Religija</string>
+	<string name="poi_information_type">Tipas</string>
+	<string name="poi_information_contents">Turinys</string>
+	<string name="poi_clock_option">Papildomai</string>
+	<string name="poi_scout_camp">Skautų stovykla</string>
+	<string name="poi_resort_type">Tipas</string>
+	<string name="poi_piste_difficulty">Trasos sudėtingumas</string>
+	<string name="poi_theatre_genre">Žanras</string>
+	<string name="poi_fee">Mokamas</string>
+	<string name="poi_smoking">Rūkymas</string>
+	<string name="poi_delivery">Pristatymas</string>
+	<string name="poi_takeaway">Išsinešti</string>
+	<string name="poi_cocktails">Kokteiliai</string>
+	<string name="poi_beauty_salon_service">Paslauga</string>
+	<string name="poi_recycling_type">Tipas</string>
+	<string name="poi_shelter_type">Tipas</string>
+	<string name="poi_fireplace">Laužavietė</string>
+	<string name="poi_seasonal">Sezoniškumas</string>
+	<string name="poi_beach_surface_type">Paviršius</string>
+	<string name="poi_nudism">Nudizmas</string>
+
+<string name="poi_jewelry">Juvelyrinė parduotuvė</string>
+	<string name="poi_kiosk">Kioskas</string>
 	</resources>
