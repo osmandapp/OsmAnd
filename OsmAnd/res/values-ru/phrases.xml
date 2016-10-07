@@ -244,8 +244,11 @@
 	<string name="poi_waste_disposal">Мусорный контейнер</string>
 	<string name="poi_waste_basket">Урна для мусора</string>
 
-	<string name="poi_recycling_centre">Тип: пункт приёма</string>
-	<string name="poi_recycling_container">Тип: контейнер</string>
+	<string name="poi_recycling_type">Тип</string>
+	<string name="poi_recycling_centre">Пункт приёма</string>
+	<string name="poi_recycling_container">Контейнер</string>
+
+	<string name="poi_recycling_accepted_waste">Принимаемые отходы</string>
 	<string name="poi_recycling_glass">Стекло</string>
 	<string name="poi_recycling_paper">Бумага</string>
 	<string name="poi_recycling_clothes">Одежда</string>
@@ -543,7 +546,7 @@
 	<string name="poi_community_centre">Общественный центр</string>
 	<string name="poi_social_centre">Общество, клуб</string>
 	<string name="poi_theatre">Театр, концертный зал</string>
-	<string name="poi_circus">Цирк</string>
+	<string name="poi_theathe_genre_circus">Цирк</string>
 	<string name="poi_dance_floor">Танцплощадка</string>
 	<string name="poi_nightclub">Ночной клуб</string>
 	<string name="poi_stripclub">Стрипклуб</string>
@@ -620,7 +623,8 @@
 	<string name="poi_funeral_directors">Ритуальные услуги</string>
 	<string name="poi_craft_computer">Сборка компьютеров</string>
 	<string name="poi_beauty">Салон красоты</string>
-	<string name="poi_beauty_salon_nails">Маникюрный салон</string>
+	<string name="poi_beauty_salon_service">Услуги</string>
+	<string name="poi_beauty_salon_nails">Маникюр</string>
 	<string name="poi_hairdresser">Парикмахерская</string>
 	<string name="poi_massage">Массажный салон</string>
 	<string name="poi_tattoo">Тату салон</string>
@@ -905,12 +909,13 @@
 	<string name="poi_fee">Взимается оплата</string>
 	<string name="poi_fee_yes">Да</string>
 	<string name="poi_fee_no">Нет</string>
-	<string name="poi_drinking_water_yes">Питьевая вода: да</string>
-	<string name="poi_drinking_water_no">Питьевая вода: нет</string>
+	<string name="poi_drinking_water_yes">Да</string>
+	<string name="poi_drinking_water_no">Нет</string>
 	<string name="poi_supervised_yes">Контролируемый объект</string>
 	<string name="poi_supervised_no">Неконтролируемый объект</string>
-	<string name="poi_seasonal_yes">Сезонный объект</string>
-	<string name="poi_seasonal_no">Не зависит от сезона</string>
+	<string name="poi_seasonal">Сезонность</string>
+	<string name="poi_seasonal_yes">Да</string>
+	<string name="poi_seasonal_no">Нет</string>
 	<string name="poi_seasonal_dry_season">Сухой сезон</string>
 	<string name="poi_seasonal_wet_season">Сезон дождей</string>
 	<string name="poi_seasonal_spring">Весна</string>
@@ -1062,9 +1067,10 @@
 	<string name="poi_pump_no">Без насоса</string>
 	<string name="poi_pump_yes">Есть</string>
 
-	<string name="poi_water_characteristic_mineral">Характеристика воды: минеральная</string>
+	<string name="poi_water_characteristic">Характеристика воды</string>
+	<string name="poi_water_characteristic_mineral">Минеральная</string>
 	<string name="poi_water_characteristic_mud">Характеристика воды: грязь</string>
-	<string name="poi_water_characteristic_sulfuric">Характеристика воды: серная</string>
+	<string name="poi_water_characteristic_sulfuric">Серная</string>
 
 	<string name="poi_water_point">Пункт водоснабжения</string>
 
@@ -1102,19 +1108,21 @@
 	<string name="poi_commercial">Коммерческое землепользование</string>
 	<string name="poi_retail">Розничная торговля (землепользование)</string>
 
-	<string name="poi_fireplace_yes">C местом для разведения огня</string>
+	<string name="poi_fireplace">Место для разведения огня</string>
+	<string name="poi_fireplace_yes">Есть</string>
 	<string name="poi_fireplace_no">Без места для разведения огня</string>
 
 	<string name="poi_covered">Укрытие</string>
 	<string name="poi_covered_yes">Есть</string>
 	<string name="poi_covered_no">Без укрытия</string>
 
-	<string name="poi_smoking_no">Курение запрещено</string>
-	<string name="poi_smoking_outside">Курение разрешено только снаружи</string>
-	<string name="poi_smoking_yes">Курение разрешено</string>
-	<string name="poi_smoking_separated">Курение разрешено в отдельном помещении</string>
-	<string name="poi_smoking_isolated">Курение разрешено в специальной комнате</string>
-	<string name="poi_smoking_dedicated">Специализированное заведение для курящих</string>
+	<string name="poi_smoking">Курение</string>
+	<string name="poi_smoking_no">Запрещено</string>
+	<string name="poi_smoking_outside">Только снаружи</string>
+	<string name="poi_smoking_yes">Разрешено</string>
+	<string name="poi_smoking_separated">В отдельном помещении</string>
+	<string name="poi_smoking_isolated">В специальной комнате</string>
+	<string name="poi_smoking_dedicated">Только для курящих</string>
 
 	<string name="poi_toll_yes">Платно</string>
 	<string name="poi_toll_no">Бесплатно</string>
@@ -1220,19 +1228,22 @@
 
 	<string name="poi_rtsa_scale">Категория сложности перевала</string>
 
-	<string name="poi_piste_difficulty_easy">Сложность трассы: низкая</string>
-	<string name="poi_piste_difficulty_intermediate">Сложность трассы: средняя</string>
-	<string name="poi_piste_difficulty_advanced">Сложность трассы: высокая</string>
-	<string name="poi_piste_difficulty_novice">Сложность трассы: простейшая</string>
-	<string name="poi_piste_difficulty_expert">Сложность трассы: эксперт</string>
-	<string name="poi_piste_difficulty_freeride">Сложность трассы: фрирайд</string>
-	<string name="poi_piste_grooming_classic">Обслуживание трассы: классика</string>
-	<string name="poi_piste_grooming_classic_skating">Обслуживание трассы: классика+конёк</string>
-	<string name="poi_piste_grooming_backcountry">Обслуживание трассы: кросс-кантри</string>
-	<string name="poi_piste_grooming_scooter">Обслуживание трассы: снежный скутер</string>
-	<string name="poi_piste_grooming_skating">Обслуживание трассы: конёк</string>
-	<string name="poi_piste_grooming_no">Обслуживание трассы: необслуживаемая</string>
-	<string name="poi_piste_grooming_mogul">Обслуживание трассы: могул</string>
+	<string name="poi_piste_difficulty">Сложность трассы</string>
+	<string name="poi_piste_difficulty_easy">Низкая</string>
+	<string name="poi_piste_difficulty_intermediate">Средняя</string>
+	<string name="poi_piste_difficulty_advanced">Высокая</string>
+	<string name="poi_piste_difficulty_novice">Простейшая</string>
+	<string name="poi_piste_difficulty_expert">Эксперт</string>
+	<string name="poi_piste_difficulty_freeride">Фрирайд</string>
+
+	<string name="poi_piste_grooming">Обслуживание трассы</string>
+	<string name="poi_piste_grooming_classic">Классика</string>
+	<string name="poi_piste_grooming_classic_skating">Классика+конёк</string>
+	<string name="poi_piste_grooming_backcountry">Кросс-кантри</string>
+	<string name="poi_piste_grooming_scooter">Снежный скутер</string>
+	<string name="poi_piste_grooming_skating">Конёк</string>
+	<string name="poi_piste_grooming_no">Необслуживаемая</string>
+	<string name="poi_piste_grooming_mogul">Могул</string>
 
 	<string name="poi_garden_type_community">Тип сада: общественный</string>
 	<string name="poi_garden_type_private">Тип сада: частный</string>
@@ -1465,32 +1476,41 @@
 	<string name="poi_diet_lactose_free_no">Безлактозные продукты не предлагаются</string>
 	<string name="poi_diet_pescetarian_yes">Пескетарианская диета</string>
 
-	<string name="poi_drive_in_yes">Обслуживание клиентов сидящих в автомобиле</string>
+	<string name="poi_drive_in">Обслуживание клиентов сидящих в автомобиле</string>
+	<string name="poi_drive_in_yes">Да</string>
 	<string name="poi_drive_in_no">Клиенты, сидящие в автомобиле, не обслуживаются</string>
-	<string name="poi_drive_through_yes">Обслуживание клиентов сидящих в автомобиле</string>
+
+	<string name="poi_drive_through">Обслуживание клиентов, сидящих в автомобиле</string>
+	<string name="poi_drive_through_yes">Да</string>
 	<string name="poi_drive_through_no">Клиенты, сидящие в автомобиле, не обслуживаются</string>
 
 	<string name="poi_brewery_additional">Пивоварня поставщик</string>
-	<string name="poi_microbrewery_yes">Собственная пивоварня</string>
+
+	<string name="poi_microbrewery">Собственная пивоварня</string>
+	<string name="poi_microbrewery_yes">Есть</string>
 	<string name="poi_microbrewery_no">Нет собственной пивоварни</string>
 
-	<string name="poi_takeaway_yes">На вынос</string>
+	<string name="poi_takeaway">На вынос</string>
+	<string name="poi_takeaway_yes">Да</string>
 	<string name="poi_takeaway_no">На вынос: нет</string>
 	<string name="poi_takeaway_only">Только на вынос</string>
 
-	<string name="poi_delivery_yes">С доставкой</string>
+	<string name="poi_delivery">Доставка</string>
+	<string name="poi_delivery_yes">Есть</string>
 	<string name="poi_delivery_no">Без доставки</string>
 	<string name="poi_delivery_only">Только с доставкой</string>
 
-	<string name="poi_outdoor_seating_yes">Места на открытом воздухе</string>
+	<string name="poi_outdoor_seating">Места на открытом воздухе</string>
+	<string name="poi_outdoor_seating_yes">Есть</string>
 	<string name="poi_outdoor_seating_no">Нет мест на открытом воздухе</string>
-	<string name="poi_outdoor_seating_terrace">Места на открытом воздухе: терраса</string>
-	<string name="poi_outdoor_seating_sidewalk">Места на открытом воздухе: тротуар</string>
-	<string name="poi_outdoor_seating_pedestrian_zone">Места на открытом воздухе: пешеходная зона</string>
-	<string name="poi_outdoor_seating_garden">Места на открытом воздухе: сад</string>
-	<string name="poi_outdoor_seating_patio">Места на открытом воздухе: патио</string>
+	<string name="poi_outdoor_seating_terrace">На террасе</string>
+	<string name="poi_outdoor_seating_sidewalk">На тротуаре</string>
+	<string name="poi_outdoor_seating_pedestrian_zone">Пешеходная зона</string>
+	<string name="poi_outdoor_seating_garden">В саду</string>
+	<string name="poi_outdoor_seating_patio">Патио</string>
 
-	<string name="poi_cocktails_yes">Коктейли</string>
+	<string name="poi_cocktails">Коктейли</string>
+	<string name="poi_cocktails_yes">Есть</string>
 
 	<string name="poi_second_hand_yes">Подержанный товар</string>
 	<string name="poi_second_hand_no">Подержанный товар отсутствует</string>
@@ -1662,9 +1682,10 @@
 	<string name="poi_wetland_palsa_bog">Пальза</string>
 	<string name="poi_wetland_mud">Грязь</string>
 
-	<string name="poi_beach_sand">Тип пляжа: песчаный</string>
-	<string name="poi_beach_shingle">Тип пляжа: галька</string>
-	<string name="poi_beach_rocky">Тип пляжа: каменистый</string>
+	<string name="poi_beach_surface_type">Поверхность</string>
+	<string name="poi_beach_sand">Песок</string>
+	<string name="poi_beach_shingle">Галька</string>
+	<string name="poi_beach_rocky">Камни</string>
 
 	<string name="poi_chimney">Дымовая труба</string>
 
@@ -1677,17 +1698,18 @@
 	<string name="poi_bin_yes">С мусорной корзиной</string>
 	<string name="poi_bin_no">Без мусорной корзины</string>
 
-	<string name="poi_shelter_type_public_transport">Тип укрытия: остановка общественного транспорта</string>
-	<string name="poi_shelter_type_picnic_shelter">Тип укрытия: для пикника</string>
-	<string name="poi_shelter_type_weather_shelter">Тип укрытия: от непогоды</string>
-	<string name="poi_shelter_type_lean_to">Тип укрытия: навес</string>
-	<string name="poi_shelter_type_basic_hut">Тип укрытия: хижина</string>
-	<string name="poi_shelter_type_building">Тип укрытия: здание</string>
-	<string name="poi_shelter_type_wildlife_hide">Тип укрытия: для наблюдения за дикой природой</string>
-	<string name="poi_shelter_type_rock_shelter">Тип укрытия: в камнях</string>
-	<string name="poi_shelter_type_sun_shelter">Тип укрытия: от солнца</string>
-	<string name="poi_shelter_type_field_shelter">Тип укрытия: в поле</string>
-	<string name="poi_shelter_type_tent">Тип укрытия: тент</string>
+	<string name="poi_shelter_type">Тип</string>
+	<string name="poi_shelter_type_public_transport">Остановка общественного транспорта</string>
+	<string name="poi_shelter_type_picnic_shelter">Для пикника</string>
+	<string name="poi_shelter_type_weather_shelter">От непогоды</string>
+	<string name="poi_shelter_type_lean_to">Навес</string>
+	<string name="poi_shelter_type_basic_hut">Хижина</string>
+	<string name="poi_shelter_type_building">Здание</string>
+	<string name="poi_shelter_type_wildlife_hide">Для наблюдения за дикой природой</string>
+	<string name="poi_shelter_type_rock_shelter">В камнях</string>
+	<string name="poi_shelter_type_sun_shelter">От солнца</string>
+	<string name="poi_shelter_type_field_shelter">В поле</string>
+	<string name="poi_shelter_type_tent">Тип укрытия: палатка</string>
 	<string name="poi_shelter_type_abandoned">Тип укрытия: заброшенное</string>
 
 	<string name="poi_internet_access_type_wlan">Беспроводной</string>
@@ -2029,11 +2051,12 @@
 	<string name="poi_content_salt">Содержимое: соль</string>
 	<string name="poi_content_grain">Содержимое: зерно</string>
 
-	<string name="poi_nudism_yes">Нудизм разрешен</string>
-	<string name="poi_nudism_no">Нудизм запрещён</string>
-	<string name="poi_nudism_obligatory">Нудизм: обязательно</string>
-	<string name="poi_nudism_customary">Нудизм: приветствуется</string>
-	<string name="poi_nudism_permissive">Нудизм: с разрешения</string>
+	<string name="poi_nudism">Нудизм</string>
+	<string name="poi_nudism_yes">Разрешен</string>
+	<string name="poi_nudism_no">Запрещён</string>
+	<string name="poi_nudism_obligatory">Обязательно</string>
+	<string name="poi_nudism_customary">Приветствуется</string>
+	<string name="poi_nudism_permissive">С разрешения</string>
 
 	<string name="poi_trade_building_supplies">Строительные материалы</string>
 	<string name="poi_trade_plumbing">Материалы для водопровода</string>
@@ -2200,6 +2223,7 @@
 	<string name="poi_social_facility_for_diseased">Целевая социальная группа: больные</string>
 	<string name="poi_social_facility_for_child_juvenile">Целевая социальная группа: дети и подростки</string>
 
+	<string name="poi_theatre_genre">Жанр</string>
 	<string name="poi_theatre_genre_philharmonic">Филармония</string>
 	<string name="poi_theatre_genre_musical">Жанр: музыкальный</string>
 	<string name="poi_theatre_genre_drama">Жанр: драматический</string>
