@@ -353,6 +353,8 @@
 	<string name="poi_nursing_home">Дом престарелых</string>
 	<string name="poi_baby_hatch">Бэби-бокс</string>
 	<string name="poi_veterinary">Ветеринарная лечебница</string>
+
+	<string name="poi_resort_type">Тип</string>
 	<string name="poi_sanatorium">Санаторий</string>
 	<string name="poi_healthcare_alternative">Альтернативная медицина</string>
 	<string name="poi_audiologist">Отоларинголог</string>
@@ -481,7 +483,7 @@
 
 	<string name="poi_place_of_worship">Место поклонения</string>
 
-	<string name="poi_religion">Религия</string>
+	<string name="poi_religion_type">Религия</string>
 
 	<string name="poi_religion_christian">Христианство</string>
 	<string name="poi_religion_jewish">Иудаизм</string>
@@ -1070,28 +1072,30 @@
 
 	<string name="poi_monitoring_station">Станция наблюдения</string>
 
+	<string name="poi_information_type">Тип</string>
+	<string name="poi_information_contents">Содержание</string>
 	<string name="poi_information_guidepost">Указатель</string>
 	<string name="poi_information_board">Информационный щит</string>
 	<string name="poi_information_map">Карта</string>
 	<string name="poi_information_office">Информационный офис</string>
 	<string name="poi_information_trail_blaze">Метка пути</string>
-	<string name="poi_information_terminal">Информационный терминал</string>
+	<string name="poi_information_terminal">Терминал</string>
 	<string name="poi_information_route_marker">Метка маршрута</string>
 	<string name="poi_information_hikingmap">Карта для пешего туризма</string>
-	<string name="poi_information_nature">Информация: о природе</string>
-	<string name="poi_information_wildlife">Информация: о дикой природе</string>
-	<string name="poi_information_history">Информация: историческая</string>
+	<string name="poi_information_nature">Природа</string>
+	<string name="poi_information_wildlife">Дикая природа</string>
+	<string name="poi_information_history">История</string>
 	<string name="poi_information_sign">Знак</string>
 	<string name="poi_information_audioguide">Аудиогид</string>
 	<string name="poi_information_bicyclemap">Карта для велосипедистов</string>
 	<string name="poi_information_tactile_model">Тактильная модель</string>
 	<string name="poi_information_tactile_map">Тактильная карта</string>
 	<string name="poi_board_type_notice">Доска объявлений</string>
-	<string name="poi_board_type_plants">Информация: о растениях</string>
-	<string name="poi_board_type_geology">Информация: о геологии</string>
-	<string name="poi_board_type_public_transport">Информация: расписание общественного транспорта</string>
-	<string name="poi_board_type_technology">Информация: о технологии</string>
-	<string name="poi_board_type_astronomy">Информация: об астрономии</string>
+	<string name="poi_board_type_plants">Растения</string>
+	<string name="poi_board_type_geology">Геология</string>
+	<string name="poi_board_type_public_transport">Расписание общественного транспорта</string>
+	<string name="poi_board_type_technology">Технология</string>
+	<string name="poi_board_type_astronomy">Астрономия</string>
 
 	<string name="poi_tourism_attraction">Достопримечательность</string>
 
@@ -2134,9 +2138,12 @@
 	<string name="poi_tents_no">Установка палаток запрещена</string>
 	<string name="poi_openfire_yes">Разведение открытого огня разрешено</string>
 	<string name="poi_openfire_no">Разведение открытого огня запрещено</string>
-	<string name="poi_backcountry_yes">Место для лагеря на природе без удобств</string>
+	<string name="poi_backcountry">Место для лагеря на природе без удобств</string>
+	<string name="poi_backcountry_yes">Да</string>
 	<string name="poi_backcountry_no">Место для лагеря на природе без удобств: нет</string>
-	<string name="poi_scout_yes">Лагерь скаутов</string>
+
+	<string name="poi_scout_camp">Лагерь скаутов</string>
+	<string name="poi_scout_yes">Да</string>
 	<string name="poi_scout_no">Лагерь скаутов: нет</string>
 	<string name="poi_group_only_yes">Доступно только для групп: да</string>
 	<string name="poi_group_only_no">Доступно только для групп: нет</string>
@@ -3016,13 +3023,15 @@
 	<string name="poi_display_digital_yes">Цифровой дисплей</string>
 	<string name="poi_display_sundial_yes">Солнечные часы</string>
 
-	<string name="poi_barometer_yes">Барометр: есть</string>
+	<string name="poi_clock_option">Дополнительно</string>
+
+	<string name="poi_barometer_yes">Барометр</string>
 	<string name="poi_barometer_no">Барометр: отсутствует</string>
-	<string name="poi_thermometer_yes">Термометр: есть</string>
+	<string name="poi_thermometer_yes">Термометр:</string>
 	<string name="poi_thermometer_no">Термометр: отсутствует</string>
-	<string name="poi_hygrometer_yes">Гигрометр: есть</string>
+	<string name="poi_hygrometer_yes">Гигрометр</string>
 	<string name="poi_hygrometer_no">Гигрометр: отсутствует</string>
-	<string name="poi_date_yes">Дата: есть</string>
+	<string name="poi_date_yes">Дата</string>
 	<string name="poi_date_no">Дата: нет</string>
 
 	<string name="poi_support_pole">Опора: столб</string>

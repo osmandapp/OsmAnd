@@ -40,8 +40,14 @@
 	<string name="poi_free_flying_characteristics">Characteristic</string>
 	<string name="poi_archaeological_site_type">Type</string>
 	<string name="poi_star_rating">Star rating</string>
-	<string name="poi_religion">Religion</string>
+	<string name="poi_religion_type">Religion</string>
 	<string name="poi_denomination">Denomination</string>
+	<string name="poi_information_type">Type</string>
+	<string name="poi_information_contents">Contents</string>
+	<string name="poi_clock_option">Additional</string>
+	<string name="poi_scout_camp">Scout camp</string>
+	<string name="poi_backcountry">Backcountry</string>
+	<string name="poi_resort_type">Type</string>
 
 <!--  categories -->
 	<string name="poi_shop">Store</string>
@@ -1308,27 +1314,26 @@
 	<string name="poi_cuisine">Cuisine</string>
 
 	<string name="poi_information_guidepost">Guidepost</string>
-	<string name="poi_information_board">Information board</string>
+	<string name="poi_information_board">Board</string>
 	<string name="poi_information_map">Map</string>
-	<string name="poi_information_office">Information office</string>
+	<string name="poi_information_office">Office</string>
 	<string name="poi_information_trail_blaze">Trail blaze</string>
-	<string name="poi_information_terminal">Information terminal</string>
+	<string name="poi_information_terminal">Terminal</string>
 	<string name="poi_information_route_marker">Route marker</string>
 	<string name="poi_information_hikingmap">Hiking map</string>
-	<string name="poi_information_nature">Information marker: nature</string>
-	<string name="poi_information_wildlife">Information marker: wildlife</string>
-	<string name="poi_information_history">Information marker: history</string>
+	<string name="poi_information_nature">Nature</string>
+	<string name="poi_information_history">History</string>
 	<string name="poi_information_sign">Sign</string>
 	<string name="poi_information_audioguide">Audioguide</string>
 	<string name="poi_information_bicyclemap">Bicycle map</string>
 	<string name="poi_information_tactile_model">Tactile model</string>
 	<string name="poi_information_tactile_map">Tactile map</string>
 	<string name="poi_board_type_notice">Bulletin board</string>
-	<string name="poi_board_type_plants">Information marker: plants</string>
-	<string name="poi_board_type_geology">Information marker: geology</string>
-	<string name="poi_board_type_public_transport">Information marker: public transport</string>
-	<string name="poi_board_type_technology">Information marker: technology</string>
-	<string name="poi_board_type_astronomy">Information marker: astronomy</string>
+	<string name="poi_board_type_plants">Plants</string>
+	<string name="poi_board_type_geology">Geology</string>
+	<string name="poi_board_type_public_transport">Public transport</string>
+	<string name="poi_board_type_technology">Technology</string>
+	<string name="poi_board_type_astronomy">Astronomy</string>
 
 	<string name="poi_commercial">Commercial landuse</string>
 	<string name="poi_retail">Retail landuse</string>
@@ -3005,13 +3010,13 @@
 	<string name="poi_display_digital_yes">Digital display</string>
 	<string name="poi_display_sundial_yes">Sundial</string>
 
-	<string name="poi_barometer_yes">Barometer: yes</string>
+	<string name="poi_barometer_yes">Barometer</string>
 	<string name="poi_barometer_no">Barometer: no</string>
-	<string name="poi_thermometer_yes">Thermometer: yes</string>
+	<string name="poi_thermometer_yes">Thermometer</string>
 	<string name="poi_thermometer_no">Thermometer: no</string>
-	<string name="poi_hygrometer_yes">Hygrometer: yes</string>
+	<string name="poi_hygrometer_yes">Hygrometer</string>
 	<string name="poi_hygrometer_no">Hygrometer: no</string>
-	<string name="poi_date_yes">Date display: yes</string>
+	<string name="poi_date_yes">Date display</string>
 	<string name="poi_date_no">Date display: no</string>
 
 	<string name="poi_support_pole">Support: pole</string>
