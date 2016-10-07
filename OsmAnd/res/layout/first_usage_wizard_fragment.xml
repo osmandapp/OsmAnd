@@ -503,7 +503,8 @@
                 android:layout_marginRight="40dp"
                 android:layout_marginTop="24dp"
                 android:visibility="gone"
-                osmand:cardBackgroundColor="@color/color_white">
+                osmand:cardBackgroundColor="@color/color_white"
+                tools:visibility="visible">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -514,6 +515,7 @@
                         android:id="@+id/map_downloading_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackground"
                         android:minHeight="48dp"
                         android:orientation="horizontal">
 
@@ -631,6 +633,7 @@
                         android:id="@+id/map2_downloading_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackground"
                         android:minHeight="48dp"
                         android:orientation="horizontal">
 
@@ -745,13 +748,13 @@
 
                     <android.support.v7.widget.AppCompatButton
                         android:id="@+id/map_downloading_action_button"
-                        style="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:background="@drawable/btn_round_blue_bottom"
                         android:gravity="center"
                         android:minHeight="47dp"
                         android:text="@string/go_to_map"
-                        android:textColor="@color/color_dialog_buttons_light"/>
+                        android:textColor="@color/color_white"/>
 
                 </LinearLayout>
 

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+	<color name="disabled_btn_text_color">#a0a0a0</color>
 	<color name="discount_bar_bg">#357ef2</color>
 
     <color name="searchbar_text_dark">#fff</color>
