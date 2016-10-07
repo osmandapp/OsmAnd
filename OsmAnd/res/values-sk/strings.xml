@@ -2442,4 +2442,5 @@ Ak potrebuje pomoc s aplikáciou OsmAnd, kontaktuje podporu: support@osmand.net.
     <string name="edit_filter">Upraviť filter</string>
     <string name="subcategories">Podkategórie</string>
     <string name="translit_names">Transliterovať názvy</string>
+    <string name="translit_name_if_miss">Transliterovať ak %1$s názov chýba</string>
     </resources>
