@@ -1296,10 +1296,10 @@
 	<string name="poi_covered_no">Al descubierto</string>
 
 	<string name="poi_smoking_no">Prohibido</string>
-	<string name="poi_smoking_outside">Sólo permitido fumar afuera</string>
-	<string name="poi_smoking_yes">Permitido fumar</string>
-	<string name="poi_smoking_separated">Permitido fumar en sala separada</string>
-	<string name="poi_smoking_isolated">Permitido fumar en sala aislada</string>
+	<string name="poi_smoking_outside">Permitido sólo afuera</string>
+	<string name="poi_smoking_yes">Permitido</string>
+	<string name="poi_smoking_separated">Permitido en sala separada</string>
+	<string name="poi_smoking_isolated">Permitido en sala aislada</string>
 	<string name="poi_smoking_dedicated">Solo fumadores</string>
 
 	<string name="poi_toll_no">Sin peaje</string>
@@ -1349,19 +1349,19 @@
 
 <string name="poi_pump_yes">Si</string>
 
-	<string name="poi_piste_difficulty_easy">Dificultad de la pista: Fácil</string>
-	<string name="poi_piste_difficulty_intermediate">Dificultad de la pista: Intermedia</string>
-	<string name="poi_piste_difficulty_advanced">Dificultad de la pista: Avanzada</string>
-	<string name="poi_piste_difficulty_novice">Dificultad de la pista: Novato</string>
-	<string name="poi_piste_difficulty_expert">Dificultad de la pista: Experto</string>
-	<string name="poi_piste_difficulty_freeride">Dificultad de la pista: Estilo libre</string>
-	<string name="poi_piste_grooming_classic">Pista de entrenamiento: Clásico</string>
-	<string name="poi_piste_grooming_classic_skating">Pista de entrenamiento: Patinaje clásico</string>
-	<string name="poi_piste_grooming_backcountry">Pista de entrenamiento: Fuera de pista</string>
-	<string name="poi_piste_grooming_scooter">Pista de entrenamiento: Scooter</string>
-	<string name="poi_piste_grooming_skating">Pista de entrenamiento: Patinaje</string>
-	<string name="poi_piste_grooming_no">Sin preparación de la pista</string>
-	<string name="poi_piste_grooming_mogul">Pista de entrenamiento: Magnate</string>
+	<string name="poi_piste_difficulty_easy">Fácil</string>
+	<string name="poi_piste_difficulty_intermediate">Intermedia</string>
+	<string name="poi_piste_difficulty_advanced">Avanzada</string>
+	<string name="poi_piste_difficulty_novice">Novato</string>
+	<string name="poi_piste_difficulty_expert">Experto</string>
+	<string name="poi_piste_difficulty_freeride">Estilo libre</string>
+	<string name="poi_piste_grooming_classic">Clásico</string>
+	<string name="poi_piste_grooming_classic_skating">Patinaje clásico</string>
+	<string name="poi_piste_grooming_backcountry">Fuera de pista</string>
+	<string name="poi_piste_grooming_scooter">Scooter</string>
+	<string name="poi_piste_grooming_skating">Patinaje</string>
+	<string name="poi_piste_grooming_no">No</string>
+	<string name="poi_piste_grooming_mogul">Magnate</string>
 
 <string name="poi_garden_type_residential">Jardín residencial</string>
 	<string name="poi_garden_type_community">Jardín comunitario</string>
@@ -1595,32 +1595,32 @@
 	<string name="poi_diet_lactose_free_no">Sin dieta libre de lactosa</string>
 	<string name="poi_diet_pescetarian_yes">Dieta pescetariana</string>
 
-	<string name="poi_drive_in_yes">Conducir dentro: Si</string>
+	<string name="poi_drive_in_yes">Si</string>
 	<string name="poi_drive_in_no">Conducir dentro: No</string>
-	<string name="poi_drive_through_yes">Con servicio dentro del coche</string>
+	<string name="poi_drive_through_yes">Si</string>
 	<string name="poi_drive_through_no">Sin servicio dentro del coche</string>
 
 	<string name="poi_brewery_additional">Nombre de cervecería</string>
 	<string name="poi_microbrewery_yes">Micro-cervecería</string>
 	<string name="poi_microbrewery_no">Sin micro-cervecería</string>
 
-	<string name="poi_takeaway_yes">Comidas para llevar: Si</string>
+	<string name="poi_takeaway_yes">Si</string>
 	<string name="poi_takeaway_no">Comidas para llevar: No</string>
 	<string name="poi_takeaway_only">Sólo comidas para llevar</string>
 
 	<string name="poi_delivery_no">Sin servicio a domicilio</string>
-	<string name="poi_delivery_yes">Con servicio a domicilio</string>
+	<string name="poi_delivery_yes">Si</string>
 	<string name="poi_delivery_only">Sólo servicio a domicilio</string>
 
-	<string name="poi_outdoor_seating_yes">Con asientos exteriores</string>
+	<string name="poi_outdoor_seating_yes">Si</string>
 	<string name="poi_outdoor_seating_no">Sin asientos exteriores</string>
-	<string name="poi_outdoor_seating_terrace">Asientos exteriores: Terraza</string>
-	<string name="poi_outdoor_seating_sidewalk">Asientos exteriores: Vereda</string>
-	<string name="poi_outdoor_seating_pedestrian_zone">Asientos exteriores: Zona peatonal</string>
-	<string name="poi_outdoor_seating_garden">Asientos exteriores: Jardín</string>
-	<string name="poi_outdoor_seating_patio">Asientos exteriores: Patio</string>
+	<string name="poi_outdoor_seating_terrace">Terraza</string>
+	<string name="poi_outdoor_seating_sidewalk">Vereda</string>
+	<string name="poi_outdoor_seating_pedestrian_zone">Zona peatonal</string>
+	<string name="poi_outdoor_seating_garden">Jardín</string>
+	<string name="poi_outdoor_seating_patio">Patio</string>
 
-	<string name="poi_cocktails_yes">Con cócteles</string>
+	<string name="poi_cocktails_yes">Si</string>
 
 	<string name="poi_second_hand_yes">Con artículos usados</string>
 	<string name="poi_second_hand_no">Sin artículos usados</string>
@@ -1782,9 +1782,9 @@
 	<string name="poi_wetland_mangrove">Manglar</string>
 	<string name="poi_wetland_mud">Lodazal</string>
 
-	<string name="poi_beach_sand">Playa arenosa</string>
-	<string name="poi_beach_shingle">Playa rocosa</string>
-	<string name="poi_beach_rocky">Playa rocosa</string>
+	<string name="poi_beach_sand">Arenosa</string>
+	<string name="poi_beach_shingle">Rocosa</string>
+	<string name="poi_beach_rocky">Rocosa</string>
 
 	<string name="poi_chimney">Chimenea</string>
 	<string name="poi_palm">Palmera</string>
@@ -1796,14 +1796,14 @@
 	<string name="poi_bin_yes">Con cesto de basura</string>
 	<string name="poi_bin_no">Sin cesto de basura</string>
 
-	<string name="poi_shelter_type_public_transport">Refugio para transporte público</string>
-	<string name="poi_shelter_type_picnic_shelter">Refugio para campamentos</string>
-	<string name="poi_shelter_type_weather_shelter">Refugio contra el clima</string>
-	<string name="poi_shelter_type_lean_to">Refugio colgadizo</string>
-	<string name="poi_shelter_type_basic_hut">Tipo de refugio: Cabaña precaria</string>
-	<string name="poi_shelter_type_building">Tipo de refugio: Edificio</string>
-	<string name="poi_shelter_type_wildlife_hide">Tipo de refugio: Fauna oculta</string>
-	<string name="poi_shelter_type_rock_shelter">Tipo de refugio: Roca</string>
+	<string name="poi_shelter_type_public_transport">Transporte público</string>
+	<string name="poi_shelter_type_picnic_shelter">Campamento</string>
+	<string name="poi_shelter_type_weather_shelter">Contra el clima</string>
+	<string name="poi_shelter_type_lean_to">Colgadizo</string>
+	<string name="poi_shelter_type_basic_hut">Cabaña precaria</string>
+	<string name="poi_shelter_type_building">Edificio</string>
+	<string name="poi_shelter_type_wildlife_hide">Fauna oculta</string>
+	<string name="poi_shelter_type_rock_shelter">Refugio de las rocas</string>
 	<string name="poi_shelter_type_sun_shelter">Refugio del sol</string>
 	<string name="poi_shelter_type_abandoned">Refugio abandonado</string>
 
@@ -3001,11 +3001,11 @@
 	<string name="poi_display_digital_yes">Con pantalla digital</string>
 	<string name="poi_display_sundial_yes">Con reloj solar</string>
 
-	<string name="poi_barometer_yes">Con barómetro</string>
+	<string name="poi_barometer_yes">Barómetro</string>
 	<string name="poi_barometer_no">Sin barómetro</string>
-	<string name="poi_thermometer_yes">Con termómetro</string>
+	<string name="poi_thermometer_yes">Termómetro</string>
 	<string name="poi_thermometer_no">Sin termómetro</string>
-	<string name="poi_hygrometer_yes">Con higrómetro</string>
+	<string name="poi_hygrometer_yes">Higrómetro</string>
 	<string name="poi_hygrometer_no">Sin higrómetro</string>
 	<string name="poi_date_yes">Muestra la fecha</string>
 	<string name="poi_date_no">No muestra la fecha</string>
@@ -3125,7 +3125,7 @@
 	<string name="poi_smoking">Fumar</string>
 	<string name="poi_delivery">Servicio a domicilio</string>
 	<string name="poi_drive_in">Conducir por dentro</string>
-	<string name="poi_drive_through">Servicio al automóvil</string>
+	<string name="poi_drive_through">Servicio dentro del coche</string>
 	<string name="poi_takeaway">Comida para llevar</string>
 	<string name="poi_cocktails">Cócteles</string>
 	<string name="poi_microbrewery">Cervecería</string>
