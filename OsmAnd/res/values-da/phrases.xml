@@ -1287,25 +1287,25 @@
 	<string name="poi_cuisine">Køkken</string>
 
 <string name="poi_information_guidepost">Vejvisning</string>
-	<string name="poi_information_board">Informationstavle</string>
+	<string name="poi_information_board">Tavle</string>
 	<string name="poi_information_map">Kort</string>
-	<string name="poi_information_office">Informationskontor</string>
-	<string name="poi_information_terminal">Informationsstander</string>
+	<string name="poi_information_office">Kontor</string>
+	<string name="poi_information_terminal">Terminal</string>
 	<string name="poi_information_route_marker">Ruteskilte</string>
 	<string name="poi_information_hikingmap">Vandrekort</string>
-	<string name="poi_information_nature">Informationsmarkør: natur</string>
+	<string name="poi_information_nature">Natur</string>
 	<string name="poi_information_wildlife">Informationsmarkør: dyreliv</string>
-	<string name="poi_information_history">Informationsmarkør: historie</string>
+	<string name="poi_information_history">Historie</string>
 	<string name="poi_information_sign">Skilt</string>
 	<string name="poi_information_audioguide">Audioguide</string>
 	<string name="poi_information_bicyclemap">Cykelkort</string>
 	<string name="poi_information_tactile_model">Taktilmodel</string>
 	<string name="poi_information_tactile_map">Taktilkort</string>
-	<string name="poi_board_type_plants">Informationsmarkør: planter</string>
-	<string name="poi_board_type_geology">Informationsmarkør: geologi</string>
-	<string name="poi_board_type_public_transport">Informationsmarkør: offentlig transport</string>
-	<string name="poi_board_type_technology">Informationsmarkør: teknologi</string>
-	<string name="poi_board_type_astronomy">Informationsmarkør: astronomi</string>
+	<string name="poi_board_type_plants">Planter</string>
+	<string name="poi_board_type_geology">Geologi</string>
+	<string name="poi_board_type_public_transport">Offentlig transport</string>
+	<string name="poi_board_type_technology">Teknologi</string>
+	<string name="poi_board_type_astronomy">Astronomi</string>
 
 <string name="poi_information_trail_blaze">Stiafmærkning</string>
 	<string name="poi_board_type_notice">Opslagstavle</string>
@@ -3034,13 +3034,13 @@
 	<string name="poi_display_digital_yes">Digital skærm</string>
 	<string name="poi_display_sundial_yes">Solur</string>
 
-	<string name="poi_barometer_yes">Barometer: ja</string>
+	<string name="poi_barometer_yes">Barometer</string>
 	<string name="poi_barometer_no">Barometer: nej</string>
-	<string name="poi_thermometer_yes">Termometer: ja</string>
+	<string name="poi_thermometer_yes">Termometer</string>
 	<string name="poi_thermometer_no">Termometer: nej</string>
-	<string name="poi_hygrometer_yes">Hygrometer: ja</string>
+	<string name="poi_hygrometer_yes">Hygrometer</string>
 	<string name="poi_hygrometer_no">Hygrometer: nej</string>
-	<string name="poi_date_yes">Datovisning: ja</string>
+	<string name="poi_date_yes">Datovisning</string>
 	<string name="poi_date_no">Datovisning: nej</string>
 
 	<string name="poi_support_pole">Support: pæl</string>
@@ -3142,4 +3142,12 @@
 
 <string name="poi_fee">Gebyr</string>
 	<string name="poi_wheelchair_accessibility">Kørestolstilgængelighed</string>
-	</resources>
+	<string name="poi_religion_type">Religion</string>
+	<string name="poi_information_type">Type</string>
+	<string name="poi_information_contents">Indhold</string>
+	<string name="poi_clock_option">Yderligere</string>
+	<string name="poi_scout_camp">Spejderlejr</string>
+	<string name="poi_backcountry">Bagland</string>
+	<string name="poi_resort_type">Type</string>
+
+</resources>
