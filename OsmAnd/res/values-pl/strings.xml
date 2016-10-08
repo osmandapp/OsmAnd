@@ -2640,4 +2640,5 @@ Jeśli potrzebujesz pomocy podczas używania OsmAnd, prosimy o kontakt z naszym 
     <string name="edit_filter">Edytuj filtr</string>
     <string name="subcategories">Podkategorie</string>
     <string name="translit_names">Transliteracja nazw</string>
+    <string name="translit_name_if_miss">Transliteruje nazwy, jeżeli nazwa w %1$s nie jest dostępna</string>
     </resources>
