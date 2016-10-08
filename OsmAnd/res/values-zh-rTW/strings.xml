@@ -2604,4 +2604,5 @@ Facebook：https://www.facebook.com/osmandapp
     <string name="delete_filter">刪除篩選</string>
     <string name="new_filter">新的篩選</string>
     <string name="new_filter_desc">請輸入新的篩選名稱。您可以在分類清單裡找到它。</string>
+    <string name="translit_names">音譯名稱</string>
     </resources>
