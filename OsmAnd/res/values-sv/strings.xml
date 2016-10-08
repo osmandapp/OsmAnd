@@ -2275,4 +2275,16 @@ Om du tycker om OsmAnd och OSM och vill stödja dem så är detta ett utmärkt s
     <string name="confirmation_to_delete_history_items">Vill du radera de markerade posterna från historiken?</string>
     <string name="show_something_on_map">Visa %1$s på kartan</string>
     <string name="dist_away_from_my_location">Sök %1$s bort</string>
+    <string name="translit_names">Transkribera namn</string>
+    <string name="edit_filter">Redigera filter</string>
+    <string name="subcategories">Underkategorier</string>
+    <string name="selected_categories">Markerade kategorier</string>
+    <string name="create_custom_poi">Skapa egen POI</string>
+    <string name="custom_search">Egen sökning</string>
+    <string name="shared_string_filters">Filter</string>
+    <string name="apply_filters">Applicera filter</string>
+    <string name="save_filter">Spara filter</string>
+    <string name="delete_filter">Radera filter</string>
+    <string name="new_filter">Nytt filter</string>
+    <string name="new_filter_desc">Ange ett namn på det nya filtret. Det kommer att finnas i kategorilistan.</string>
     </resources>
