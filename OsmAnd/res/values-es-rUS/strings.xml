@@ -2432,4 +2432,5 @@ Si amas a OsmAnd, OSM y quieres apoyarlos, esta es una perfecta manera de hacerl
     <string name="edit_filter">Editar filtro</string>
     <string name="subcategories">Subcategorías</string>
     <string name="translit_names">Transliterar nombres</string>
+    <string name="translit_name_if_miss">Transliterar nombre, si %1$s no se encuentra</string>
     </resources>
