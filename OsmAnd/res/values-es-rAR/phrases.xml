@@ -199,7 +199,7 @@
 	<string name="poi_compressed_air">Aire comprimido</string>
 	<string name="poi_parking">Estacionamiento</string>
 	<string name="poi_motorcycle_parking">Estacionamiento de motocicletas</string>
-	<string name="poi_parking_entrance">Entrada del estacionamiento</string>
+	<string name="poi_parking_entrance">Entrada al estacionamiento</string>
 	<string name="poi_garages">Garajes</string>
 
 	<string name="poi_public_transport_platform">Parada de transporte público</string>
@@ -1357,8 +1357,8 @@
 	<string name="poi_piste_difficulty_freeride">Estilo libre</string>
 	<string name="poi_piste_grooming_classic">Clásico</string>
 	<string name="poi_piste_grooming_classic_skating">Patinaje clásico</string>
-	<string name="poi_piste_grooming_backcountry">Fuera de pista</string>
-	<string name="poi_piste_grooming_scooter">Scooter</string>
+	<string name="poi_piste_grooming_backcountry">Travesía</string>
+	<string name="poi_piste_grooming_scooter">Motoneta</string>
 	<string name="poi_piste_grooming_skating">Patinaje</string>
 	<string name="poi_piste_grooming_no">No</string>
 	<string name="poi_piste_grooming_mogul">Magnate</string>
@@ -1460,7 +1460,7 @@
 	<string name="poi_payment_dkv_no">No acepta DKV</string>
 	<string name="poi_payment_uta_yes">UTA</string>
 	<string name="poi_payment_uta_no">No acepta tarjetas UTA</string>
-	<string name="poi_payment_efectivo_yes">Efectivo</string>
+	<string name="poi_payment_efectivo_yes">Dinero en efectivo</string>
 	<string name="poi_payment_efectivo_no">No acepta efectivo</string>
 	<string name="poi_payment_girocard_yes">Girocard</string>
 	<string name="poi_payment_girocard_no">No acepta tarjetas Girocard</string>
@@ -1542,7 +1542,7 @@
 	<string name="poi_payment_token_no">No acepta Tokens</string>
 	<string name="poi_payment_gift_card_yes">Tarjetas de regalo</string>
 	<string name="poi_payment_gift_card_no">No acepta tarjetas de regalo</string>
-	<string name="poi_payment_pro100_yes">"PRO100 "</string>
+	<string name="poi_payment_pro100_yes">PRO100</string>
 	<string name="poi_payment_pro100_no">No acepta tarjetas PRO100</string>
 	<string name="poi_payment_union_card_yes">Union Card</string>
 	<string name="poi_payment_union_card_no">No acepta tarjetas Union card</string>
@@ -1598,7 +1598,7 @@
 	<string name="poi_drive_in_yes">Si</string>
 	<string name="poi_drive_in_no">Conducir dentro: No</string>
 	<string name="poi_drive_through_yes">Si</string>
-	<string name="poi_drive_through_no">Sin servicio dentro del coche</string>
+	<string name="poi_drive_through_no">Sin servicio en el automóvil</string>
 
 	<string name="poi_brewery_additional">Nombre de cervecería</string>
 	<string name="poi_microbrewery_yes">Micro-cervecería</string>
@@ -1783,7 +1783,7 @@
 	<string name="poi_wetland_mud">Lodazal</string>
 
 	<string name="poi_beach_sand">Arenosa</string>
-	<string name="poi_beach_shingle">Rocosa</string>
+	<string name="poi_beach_shingle">Piedras</string>
 	<string name="poi_beach_rocky">Rocosa</string>
 
 	<string name="poi_chimney">Chimenea</string>
@@ -2091,7 +2091,7 @@
 	<string name="poi_clothes_dance">De baile</string>
 	<string name="poi_clothes_military">Militar</string>
 
-<string name="poi_clothes_denim">De mezclilla (vaqueros / jeans)</string>
+<string name="poi_clothes_denim">De mezclilla (vaqueros/jeans)</string>
 	<string name="poi_historic_milestone">Hito histórico</string>
 
 	<string name="poi_shoes_children">De niños</string>
@@ -3063,7 +3063,7 @@
 
 <string name="poi_spices">Tienda de especias</string>
 
-<string name="poi_fuel_type">Tipo</string>
+<string name="poi_fuel_type">Tipo de combustible</string>
 	<string name="poi_payment_type">Forma de pago</string>
 	<string name="poi_additional_type">Adicional</string>
 <string name="poi_shop_craft">Artículos para arte y artesanías</string>
@@ -3071,68 +3071,68 @@
 	<string name="poi_service_bicycle_charging_yes">Con cargador eléctrico para bicicletas</string>
 	<string name="poi_service_bicycle_charging_no">Sin cargador eléctrico para bicicletas</string>
 
-<string name="poi_fuel_avia_type">Tipo</string>
+<string name="poi_fuel_avia_type">Tipo de combustible (aviones)</string>
 	<string name="poi_payment_fuel_type">Forma de pago</string>
 	<string name="poi_internet_access_type">Tipo de acceso a Internet</string>
 	<string name="poi_vending_type">Tipo de expendedora</string>
-	<string name="poi_bicycle_service">Servicio de bicicleta</string>
-	<string name="poi_clothes_type">Tipo</string>
-	<string name="poi_shoes_type">Tipo</string>
-	<string name="poi_fire_hydrant_type">Tipo</string>
-	<string name="poi_fire_hydrant_position">Posición</string>
+	<string name="poi_bicycle_service">Servicio para bicicleta</string>
+	<string name="poi_clothes_type">Tipo de ropa</string>
+	<string name="poi_shoes_type">Tipo de calzado</string>
+	<string name="poi_fire_hydrant_type">Tipo de hidrante</string>
+	<string name="poi_fire_hydrant_position">Posición del hidrante</string>
 	<string name="poi_fire_hydrant_water_source">Fuente del agua</string>
 	<string name="poi_payment_toll_type">Forma de pago</string>
 	<string name="poi_traffic_signals_sound">Sonoro</string>
-	<string name="poi_highway_crossing_type">Tipo</string>
+	<string name="poi_highway_crossing_type">Tipo de cruce</string>
 	<string name="poi_tactile_paving">Pavimento táctil</string>
-	<string name="poi_service_car">Servicio</string>
-	<string name="poi_self_service">Auto-servicio</string>
+	<string name="poi_service_car">Servicio para el automóvil</string>
+	<string name="poi_self_service">Autoservicio</string>
 	<string name="poi_automated">Automatizado</string>
-	<string name="poi_parking_type">Tipo</string>
+	<string name="poi_parking_type">Tipo de estacionamiento</string>
 	<string name="poi_covered">Cubierto</string>
 	<string name="poi_subway_station_filter">Estación de subte</string>
 	<string name="poi_ferry_terminal_cargo">Cargamento</string>
-	<string name="poi_bicycle_parking_type">Tipo</string>
-	<string name="poi_aerialway_bicycle">Transporte de bicicletas</string>
-	<string name="poi_aerialway_heating">Calefacción</string>
+	<string name="poi_bicycle_parking_type">Tipo de bicicletero</string>
+	<string name="poi_aerialway_bicycle">Transporte para bicicletas</string>
+	<string name="poi_aerialway_heating">Calefaccionado</string>
 	<string name="poi_pump">Surtidor</string>
 	<string name="poi_observatory_designation">Designación</string>
-	<string name="poi_telescope_type">Tipo</string>
-	<string name="poi_animal_training_type">Tipo</string>
-	<string name="poi_embassy_type">Tipo</string>
-	<string name="poi_city_capital">Capital</string>
-	<string name="poi_pharmacy_dispensing">Dispensadora</string>
+	<string name="poi_telescope_type">Tipo de telescopio</string>
+	<string name="poi_animal_training_type">Tipo de amaestramiento</string>
+	<string name="poi_embassy_type">Tipo de embajada</string>
+	<string name="poi_city_capital">Ciudad capital</string>
+	<string name="poi_pharmacy_dispensing">Receta médica</string>
 	<string name="poi_healthcare_alternative_types">Especialidad</string>
-	<string name="poi_free_flying_characteristics">Característica</string>
-	<string name="poi_archaeological_site_type">Tipo</string>
+	<string name="poi_free_flying_characteristics">Característica de vuelo</string>
+	<string name="poi_archaeological_site_type">Tipo de sitio arqueológico</string>
 	<string name="poi_star_rating">Clasificación de estrellas</string>
 	<string name="poi_denomination">Denominación</string>
 
 <string name="poi_fee">Tarifa</string>
-	<string name="poi_wheelchair_accessibility">Accesible para sillas de rueda</string>
+	<string name="poi_wheelchair_accessibility">Accesibilidad para sillas de rueda</string>
 	<string name="poi_brushless">Cepillo giratorio</string>
-	<string name="poi_religion_type">Religión</string>
-	<string name="poi_information_type">Tipo</string>
+	<string name="poi_religion_type">Tipo de religión</string>
+	<string name="poi_information_type">Tipo de información</string>
 	<string name="poi_information_contents">Contenido</string>
 	<string name="poi_clock_option">Adicional</string>
 	<string name="poi_scout_camp">Campamento scout</string>
 	<string name="poi_backcountry">Travesía</string>
-	<string name="poi_resort_type">Tipo</string>
+	<string name="poi_resort_type">Tipo de complejo</string>
 	<string name="poi_piste_difficulty">Dificultad de la pista</string>
-	<string name="poi_piste_grooming">Limpieza de la pista</string>
+	<string name="poi_piste_grooming">Estado de la pista</string>
 	<string name="poi_theatre_genre">Género</string>
 	<string name="poi_outdoor_seating">Asientos exteriores</string>
-	<string name="poi_smoking">Fumar</string>
+	<string name="poi_smoking">Permisos para fumar</string>
 	<string name="poi_delivery">Servicio a domicilio</string>
 	<string name="poi_drive_in">Conducir por dentro</string>
-	<string name="poi_drive_through">Servicio dentro del coche</string>
+	<string name="poi_drive_through">Servicio en el automóvil</string>
 	<string name="poi_takeaway">Comida para llevar</string>
 	<string name="poi_cocktails">Cócteles</string>
 	<string name="poi_microbrewery">Cervecería</string>
-	<string name="poi_beauty_salon_service">Servicio</string>
-	<string name="poi_recycling_type">Tipo</string>
+	<string name="poi_beauty_salon_service">Servicio de belleza</string>
+	<string name="poi_recycling_type">Tipo de reciclado</string>
 	<string name="poi_recycling_accepted_waste">Acepta residuos</string>
-	<string name="poi_shelter_type">Tipo</string>
+	<string name="poi_shelter_type">Tipo de refugio</string>
 	<string name="poi_fireplace">Chimenea</string>
 	<string name="poi_seasonal">Estacional</string>
 	<string name="poi_water_characteristic">Características del agua</string>
