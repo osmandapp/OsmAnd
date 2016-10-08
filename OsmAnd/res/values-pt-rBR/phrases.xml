@@ -428,7 +428,7 @@
 	<string name="poi_chess">Xadrez</string>
 	<string name="poi_climbing">Escalada</string>
 	<string name="poi_cricket">Críquete</string>
-	<string name="poi_croquet">Croquet</string>
+	<string name="poi_croquet">Croquete</string>
 	<string name="poi_cycling">Ciclismo</string>
 	<string name="poi_diving">Mergulho</string>
 	<string name="poi_scuba_diving">Mergulho</string>
@@ -477,7 +477,7 @@
 	<string name="poi_historic_cannon">Canhão histórico</string>
 	<string name="poi_castle">Castelo</string>
 	<string name="poi_city_gate">Portão da cidade</string>
-	<string name="poi_fort">Fort</string>
+	<string name="poi_fort">Forte</string>
 	<string name="poi_fountain">Chafariz</string>
 	<string name="poi_historic_ruins">Ruínas históricas</string>
 	<string name="poi_rune_stone">Pedra rúnica</string>
@@ -2379,7 +2379,7 @@
 	<string name="poi_bridge_ref">Ponte ref</string>
 	<string name="poi_tunnel_ref">Túnel ref</string>
 
-	<string name="poi_ref">Ref</string>
+	<string name="poi_ref">Referência</string>
 
 	<string name="poi_cargo_passengers">Carga: passageiros</string>
 	<string name="poi_cargo_vehicle">Carga: veículos</string>
@@ -2577,7 +2577,7 @@
 	<string name="poi_parking_garage_boxes">Tipo: garagem box</string>
 	<string name="poi_parking_carports">Tipo: garagem coberta</string>
 
-	<string name="poi_dojo">Dojo</string>
+	<string name="poi_dojo">Dojô</string>
 
 	<string name="poi_gaelic_games">Jogos gaélicos</string>
 	<string name="poi_running">Corrida</string>
@@ -2696,4 +2696,94 @@
 	<string name="poi_fire_hydrant_water_source">Fonte de água</string>
 	<string name="poi_payment_toll_type">Tipo de pagamento</string>
 	<string name="poi_traffic_signals_sound">Som</string>
+	<string name="poi_highway_crossing_type">Tipo</string>
+	<string name="poi_tactile_paving">Pavimentação tátil</string>
+	<string name="poi_service_car">Serviço</string>
+	<string name="poi_self_service">Self-service</string>
+	<string name="poi_automated">Automatizado</string>
+	<string name="poi_parking_type">Tipo</string>
+	<string name="poi_covered">Coberto</string>
+	<string name="poi_subway_station_filter">Estação de metrô</string>
+	<string name="poi_ferry_terminal_cargo">Carga</string>
+	<string name="poi_bicycle_parking_type">Tipo</string>
+	<string name="poi_aerialway_bicycle">Transporte de bicicleta</string>
+	<string name="poi_aerialway_heating">Aquecimento</string>
+	<string name="poi_observatory_designation">Designação</string>
+	<string name="poi_telescope_type">Tipo</string>
+	<string name="poi_animal_training_type">Tipo</string>
+	<string name="poi_embassy_type">Tipo</string>
+	<string name="poi_city_capital">Capital</string>
+	<string name="poi_pharmacy_dispensing">Dispensa</string>
+	<string name="poi_healthcare_alternative_types">Especialidade</string>
+	<string name="poi_free_flying_characteristics">Características</string>
+	<string name="poi_archaeological_site_type">Tipo</string>
+	<string name="poi_star_rating">Avaliação</string>
+	<string name="poi_religion_type">Religião</string>
+	<string name="poi_denomination">Denominação</string>
+	<string name="poi_information_type">Tipo</string>
+	<string name="poi_information_contents">Conteúdos</string>
+	<string name="poi_clock_option">Adicional</string>
+	<string name="poi_resort_type">Tipo</string>
+	<string name="poi_theatre_genre">Gênero</string>
+	<string name="poi_fee">Taxa</string>
+	<string name="poi_delivery">Entrega</string>
+	<string name="poi_beauty_salon_service">Serviço</string>
+	<string name="poi_recycling_type">Tipo</string>
+	<string name="poi_shelter_type">Tipo</string>
+	<string name="poi_seasonal">Sazonal</string>
+	<string name="poi_beach_surface_type">Superfície</string>
+	<string name="poi_nudism">Nudismo</string>
+
+<string name="poi_military_checkpoint">Checkpoint militar</string>
+
+	<string name="poi_bicycle_parking_lockers">Cadeados</string>
+	<string name="poi_depth">Profundidade</string>
+
+	<string name="poi_summer_camp">Acampamento de verão</string>
+	<string name="poi_recreation_center">Centro de recreação</string>
+
+	<string name="poi_aerodrome_type_international">Internacional</string>
+	<string name="poi_aerodrome_type_regional">Regional</string>
+	<string name="poi_aerodrome_type_public">Público</string>
+	<string name="poi_aerodrome_type_military">Militar</string>
+	<string name="poi_aerodrome_type_military_public">Militar/público</string>
+	<string name="poi_aerodrome_type_private">Privado</string>
+
+	<string name="poi_telescope_diameter">Diâmetro</string>
+	<string name="poi_telescope_spectrum">Espectro</string>
+	<string name="poi_telescope_usage_education">Uso: educação</string>
+	<string name="poi_telescope_usage_espionage">Uso: espionagem</string>
+	<string name="poi_telescope_usage_research">Uso: pesquisa</string>
+
+	<string name="poi_observatory_type_espionage">Uso: espionagem</string>
+	<string name="poi_observatory_type_meteorological">Meteorológico</string>
+	<string name="poi_observatory_type_gravitational">Gravitacional</string>
+
+	<string name="poi_voltage">Voltagem</string>
+	<string name="poi_generator_output_electricity">Saída de energia</string>
+	<string name="poi_display_yes">Display: sim</string>
+	<string name="poi_display_no">Display: não</string>
+	<string name="poi_display_analog_yes">Display analógico</string>
+	<string name="poi_display_digital_yes">Display digital</string>
+	<string name="poi_barometer_yes">Barômetro</string>
+	<string name="poi_barometer_no">Barômetro: não</string>
+	<string name="poi_thermometer_yes">Termômetro</string>
+	<string name="poi_thermometer_no">Termômetro: não</string>
+	<string name="poi_min_age">Idade mínima</string>
+
+	<string name="poi_organic_yes">Alimentos orgânicos: sim</string>
+	<string name="poi_organic_no">Alimentos orgânicos: não</string>
+	<string name="poi_organic_only">Somente alimentos orgânigos</string>
+
+	<string name="poi_diplomatic_consulate">Consulado</string>
+	<string name="poi_diplomatic_consulate_general">Consulado Geral</string>
+	<string name="poi_diplomatic_honorary_consulate">Consulado Honorário</string>
+	<string name="poi_diplomatic_permanent_mission">Missão permanente</string>
+	<string name="poi_diplomatic_delegation">Delegação</string>
+	<string name="poi_water_tank">Tanque de água</string>
+
+	<string name="poi_length">Comprimento</string>
+
+	<string name="poi_wiki_link">Wikipedia</string>
+
 	</resources>
