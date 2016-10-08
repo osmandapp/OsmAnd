@@ -220,8 +220,8 @@
 	<string name="poi_seasonal_winter">Vinter</string>
 	<string name="poi_start_date">Startdato</string>
 	<string name="poi_wheelchair_yes">Rullestol</string>
-	<string name="poi_wheelchair_no">Rullestol: ikke tilgjengelig</string>
-	<string name="poi_wheelchair_limited">Rullestol: begrenset</string>
+	<string name="poi_wheelchair_no">Nei</string>
+	<string name="poi_wheelchair_limited">Begrenset</string>
 	<string name="poi_building_type_shrine">Bygningstype: helligdom</string>
 
 	<string name="poi_building_type_church">Bygningstype: kirke</string>
@@ -237,10 +237,10 @@
 	<string name="poi_megalith_type_nuraghe">Megalittype: nurage</string>
 	<string name="poi_megalith_type_passage_grave">Megalittype: ganggrav</string>
 	<string name="poi_megalith_type_menhir">Megalittype: bautastein</string>
-	<string name="poi_site_type_petroglyph">Type: helleristning</string>
-	<string name="poi_site_type_city">Type: by</string>
-	<string name="poi_site_type_settlement">Type: bosetting</string>
-	<string name="poi_site_type_megalith">Type: megalitt</string>
+	<string name="poi_site_type_petroglyph">Helleristning</string>
+	<string name="poi_site_type_city">By</string>
+	<string name="poi_site_type_settlement">Bosetting</string>
+	<string name="poi_site_type_megalith">Megalitt</string>
 	<string name="poi_fountain">Fontene</string>
 	<string name="poi_salt_no">Salt: nei</string>
 	<string name="poi_ticket">Billettsalg</string>
@@ -298,19 +298,19 @@
 	<string name="poi_tunnel_pedestrian">Fotgjengertunnel</string>
 	<string name="poi_summer_camp">Sommerleir</string>
 	<string name="poi_information_bicyclemap">Sykkelkart</string>
-	<string name="poi_aerialway_bicycle_yes">Sykkel: tillatt</string>
+	<string name="poi_aerialway_bicycle_yes">Tillatt</string>
 	<string name="poi_aerialway_bicycle_no">Sykkel: ikke tillatt</string>
-	<string name="poi_aerialway_bicycle_summer">Sykkel: tillatt bare om sommeren</string>
-	<string name="poi_service_bicycle_retail_yes">Sykkelsalg: ja</string>
+	<string name="poi_aerialway_bicycle_summer">Tillatt bare om sommeren</string>
+	<string name="poi_service_bicycle_retail_yes">Salg</string>
 	<string name="poi_service_bicycle_retail_no">Sykkelsalg: nei</string>
-	<string name="poi_service_bicycle_repair_yes">Sykkelreparasjon: ja</string>
+	<string name="poi_service_bicycle_repair_yes">Reparasjon</string>
 	<string name="poi_service_bicycle_repair_no">Sykkelreparasjon: nei</string>
-	<string name="poi_service_bicycle_rental_yes">Sykkelutleie: ja</string>
+	<string name="poi_service_bicycle_rental_yes">Utleie</string>
 	<string name="poi_service_bicycle_rental_no">Sykkelutleie: nei</string>
 	<string name="poi_landuse">Arealbruk</string>
 	<string name="poi_toll_booth">Bomstasjon</string>
 	<string name="poi_border_control">Grensekontroll</string>
-	<string name="poi_fee_no">Ingen gebyr</string>
+	<string name="poi_fee_no">Nei</string>
 	<string name="poi_internet_access_fee_yes">Internettilgang - gebyr</string>
 	<string name="poi_internet_access_fee_no">Internettilgang - ingen gebyr</string>
 
@@ -361,13 +361,13 @@
 
 <string name="poi_water_tank">Vanntank</string>
 
-	<string name="poi_barometer_yes">Barometer: ja</string>
+	<string name="poi_barometer_yes">Barometer</string>
 	<string name="poi_barometer_no">Barometer: nei</string>
-	<string name="poi_thermometer_yes">Termometer: ja</string>
+	<string name="poi_thermometer_yes">Termometer</string>
 	<string name="poi_thermometer_no">Termometer: nei</string>
-	<string name="poi_hygrometer_yes">Hygrometer: ja</string>
+	<string name="poi_hygrometer_yes">Hygrometer</string>
 	<string name="poi_hygrometer_no">Hygrometer: nei</string>
-	<string name="poi_date_yes">Datovisning: ja</string>
+	<string name="poi_date_yes">Datovisning</string>
 	<string name="poi_date_no">Datovisning: nei</string>
 
 	<string name="poi_display_sundial_yes">Solur</string>
@@ -393,5 +393,12 @@
 	<string name="poi_outdoor">Friluftslivsbutikk</string>
 	<string name="poi_paint">Fargehandel</string>
 	<string name="poi_payment_type">Betalingstype</string>
-	<string name="poi_fuel_type">Drivstofftype</string>
+	<string name="poi_fuel_type">Type</string>
+	<string name="poi_aerodrome_type_public">Offentlig</string>
+	<string name="poi_aerodrome_type_military_public">Militær/offentlig</string>
+	<string name="poi_aerodrome_type_private">Privat</string>
+
+	<string name="poi_aerodrome_type_military">Militær</string>
+	<string name="poi_aerodrome_type_international">Internasjonal</string>
+	<string name="poi_aerodrome_type_regional">Regional</string>
 	</resources>
