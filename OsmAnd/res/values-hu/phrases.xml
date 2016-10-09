@@ -245,7 +245,7 @@
 		<string name="poi_aerialway_transport">Felvonók</string>
 	<string name="poi_man_made">Építmény</string>
 		<string name="poi_water_supply">Vízellátás</string>
-		<string name="poi_power">Energia</string>
+		<string name="poi_power">Villamos energia</string>
 		<string name="poi_communication">Kommunikáció</string>
 		<string name="poi_landuse">Területhasználat</string>
 	<string name="poi_education">Oktatás</string>
@@ -371,7 +371,7 @@
 	<string name="poi_power_substation">Alállomás</string>
 	<string name="poi_power_transformer">Transzformátor</string>
 	<string name="poi_power_plant">Erőmű</string>
-	<string name="poi_power_generator">Erőmű</string>
+	<string name="poi_power_generator">Villamosenergia-előállító egység</string>
 
 	<string name="poi_observation_tower">Kilátótorony</string>
 	<string name="poi_bell_tower">Harangtorony</string>
@@ -407,7 +407,7 @@
 	<string name="poi_driving_school">Autósiskola</string>
 	<string name="poi_prosecutor">Ügyész</string>
 	<string name="poi_pension_fund">Nyugdíjpénztár</string>
-	<string name="poi_office_administrative">Közigazgatási iroda</string>
+	<string name="poi_office_administrative">Közigazgatási hivatal</string>
 	<string name="poi_customs">Vámhatóság</string>
 	<string name="poi_isolated_dwelling">Magányos lakóhely</string>
 	<string name="poi_suburb">Városrész</string>
@@ -652,7 +652,7 @@
 
 	<string name="poi_breakwater">Hullámtörő</string>
 	<string name="poi_power_cable_distribution_cabinet">Elosztó szekrény</string>
-	<string name="poi_power_tower">Távvezeték oszlop</string>
+	<string name="poi_power_tower">Távvezetékoszlop</string>
 	<string name="poi_power_pole">Villanyoszlop</string>
 
 	<string name="poi_cooling_tower">Hűtőtorony</string>
@@ -783,22 +783,22 @@
 	<string name="poi_healthcare_yes">Egészségügyi létesítmény</string>
 	<string name="poi_paediatrics">Gyermekgyógyászat</string>
 
-	<string name="poi_office_telecommunication">Telekommunikációs iroda</string>
-	<string name="poi_research">Kutatóközpont</string>
+	<string name="poi_office_telecommunication">Távközlési cég irodája</string>
+	<string name="poi_research">Kutatóintézet</string>
 	<string name="poi_it">IT-iroda</string>
-	<string name="poi_newspaper">Lapkiadó</string>
-	<string name="poi_architect">Építész iroda</string>
+	<string name="poi_newspaper">Újságszerkesztőség</string>
+	<string name="poi_architect">Építésziroda</string>
 	<string name="poi_advertising_agency">Hirdetési ügynökség</string>
 	<string name="poi_educational_institution">Oktatási intézmény irodája</string>
 	<string name="poi_studio">Stúdió</string>
 	<string name="poi_bookmaker">Könyvkészítő</string>
 	<string name="poi_office_religion">Vallási iroda</string>
 	<string name="poi_association">Egyesületi iroda</string>
-	<string name="poi_financial">Pénzügyi iroda</string>
-	<string name="poi_political_party">Politikai pártiroda</string>
+	<string name="poi_financial">Pénzügyi vállalat irodája</string>
+	<string name="poi_political_party">Pártiroda</string>
 	<string name="poi_notary">Jegyző</string>
 	<string name="poi_foundation">Alapítványi iroda</string>
-	<string name="poi_tax_advisor">Adótanácsadó iroda</string>
+	<string name="poi_tax_advisor">Adótanácsadói iroda</string>
 
 	<string name="poi_leisure_track">Futópálya</string>
 	<string name="poi_bicycle_track">Kerékpárpálya</string>
@@ -902,7 +902,7 @@
 	<string name="poi_payment_terminal">Fizető terminál</string>
 	<string name="poi_tree">Fa</string>
 	<string name="poi_anchor_berth">Horgonyzóhely</string>
-	<string name="poi_military_office">Hadsereg iroda</string>
+	<string name="poi_military_office">Katonai iroda</string>
 	<string name="poi_wiki_lang_ar">Arab wiki</string>
 	<string name="poi_wiki_lang_be">Belorusz wiki</string>
 	<string name="poi_wiki_lang_bg">Bolgár wiki</string>
@@ -1140,7 +1140,7 @@
 	<string name="poi_generator_source_diesel">Energiaforrás: dízel</string>
 
 	<string name="poi_pump_manual">Kézipumpa</string>
-	<string name="poi_pump_powered">Szivattyú</string>
+	<string name="poi_pump_powered">Meghajtott szivattyúval</string>
 	<string name="poi_pump_no">Pumpa nélkül</string>
 	<string name="poi_pump_yes">Pumpa</string>
 
@@ -1153,7 +1153,7 @@
 	<string name="poi_information_guidepost">Útirányjelző tábla</string>
 	<string name="poi_information_board">Információs tábla</string>
 	<string name="poi_information_map">Térkép</string>
-	<string name="poi_information_office">Információs iroda</string>
+	<string name="poi_information_office">Tourinform iroda</string>
 	<string name="poi_information_trail_blaze">Turistajelzés</string>
 	<string name="poi_information_terminal">Információs terminál</string>
 	<string name="poi_information_route_marker">Útjelzés</string>
@@ -1825,4 +1825,28 @@
 	<string name="poi_harbour_basin">Kikötőmedence</string>
 	<string name="poi_pile">Cölöp</string>
 	<string name="poi_radio_station">Rádióállomás</string>
+	<string name="poi_power_supply_yes">Villamos energiával ellátva</string>
+	<string name="poi_power_supply_no">Villamos energiával nincs ellátva</string>
+	<string name="poi_generator_output_electricity">Kimeneti teljesítmény</string>
+	<string name="poi_generator_output_hot_water">Kimeneti teljesítmény: forró víz</string>
+	<string name="poi_generator_output_compressed_air">Kimeneti teljesítmény: sűrített levegő</string>
+	<string name="poi_generator_output_biogas">Kimeneti teljesítmény: biogáz</string>
+	<string name="poi_office_camping">Kempingrecepció</string>
+	<string name="poi_guide">Idegenvezetői iroda</string>
+	<string name="poi_consulting">Tanácsadói iroda</string>
+	<string name="poi_office_forestry">Erdészeti iroda</string>
+	<string name="poi_cooperative">Szövetkezeti iroda</string>
+	<string name="poi_logistics">Logisztikai iroda</string>
+	<string name="poi_parish">Egyházközségi iroda</string>
+	<string name="poi_publisher">Könyvkiadó</string>
+
+	<string name="poi_health_facility_type_office">Orvosi rendelő</string>
+	<string name="poi_office_physician">Orvosi rendelő</string>
+	<string name="poi_office_therapist">Terapeutairoda</string>
+	<string name="poi_office_podologist">Lábgyógyászati rendelő</string>
+	<string name="poi_office_healer">Alternatív gyógyászati rendelő</string>
+	<string name="poi_office_psychologist">Pszichológiai rendelő</string>
+	<string name="poi_office_midwife">Szülészeti rendelő</string>
+
+	<string name="poi_badminton">Tollaslabda</string>
 	</resources>
