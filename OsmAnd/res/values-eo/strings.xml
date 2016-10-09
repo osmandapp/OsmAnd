@@ -2466,4 +2466,5 @@ Se vi bezonas helpon pri OsmAnd aplikaĵo, bonvolu kontakti nian helpantaron: su
     <string name="edit_filter">Redakti filtrilon</string>
     <string name="subcategories">Subkategorioj</string>
     <string name="translit_names">Transliterumi nomojn</string>
+    <string name="translit_name_if_miss">Transliterumas se %1$s nomo mankas</string>
     </resources>
