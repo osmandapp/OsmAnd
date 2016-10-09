@@ -2611,9 +2611,9 @@ Se ami OsmAnd e OSM e vuoi sostenerli, questo è un modo perfetto per farlo.</st
     <string name="donation_to_osm">Donazione per la comunità di OpenStreetMap</string>
     <string name="donation_to_osm_desc">Parte della tua donazione verrà inviata agli utenti che fanno modifiche su OpenStreetMap. Il costo della sottoscrizione rimane inalterato.</string>
     <string name="osm_live_subscription_desc">La sottoscrizione attiva aggiornamenti orari, quotidiani e settimanali e la possibilità di scaricare senza limiti tutte le mappe del mondo.</string>
-    <string name="get_it">Fallo</string>
-    <string name="get_for">Fallo per %1$s</string>
-    <string name="get_for_month">Fallo per %1$s mese</string>
+    <string name="get_it">Ottieni</string>
+    <string name="get_for">Ottieni per %1$s</string>
+    <string name="get_for_month">Ottieni per %1$s mese</string>
     <string name="osm_live_banner_desc">Ottieni download delle mappe illimitati e aggiornamenti più frequenti di una volta al mese: a ogni ora, giorno o settimana.</string>
     <string name="osmand_plus_banner_desc">Versione completa di OsmAnd con download illimitati e aggiornamenti mensili delle mappe.</string>
     <string name="si_mi_meters">Miglia/metri</string>
@@ -2634,4 +2634,16 @@ Se ami OsmAnd e OSM e vuoi sostenerli, questo è un modo perfetto per farlo.</st
     <string name="clear_tile_data">Cancella tutte le mattonelle</string>
     <string name="driving_region_australia">Australia</string>
     <string name="lang_kab">Cabila</string>
+    <string name="translit_names">Nomi traslitterati</string>
+    <string name="edit_filter">Modifica il filtro</string>
+    <string name="subcategories">Sottocategorie</string>
+    <string name="selected_categories">Seleziona le categorie</string>
+    <string name="create_custom_poi">Crea un PDI personalizzato</string>
+    <string name="custom_search">Ricerca personalizzata</string>
+    <string name="shared_string_filters">Filtri</string>
+    <string name="apply_filters">Applica i filtri</string>
+    <string name="save_filter">Salva il filtro</string>
+    <string name="delete_filter">Cancella il filtro</string>
+    <string name="new_filter">Nuovo filtro</string>
+    <string name="new_filter_desc">Immetti il nome del tuo nuovo filtro. Lo troverai nella lista delle Categorie.</string>
     </resources>
