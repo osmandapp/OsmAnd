@@ -533,7 +533,7 @@ Vi povas spuri ĉiujn aparatojn de partoprenanta grupo realtempe. Ankaŭ vi pova
     <string name="shared_string_selected_lowercase">elektitaj</string>
     <string name="shared_string_none">Nenia</string>
     <string name="shared_string_save_as_gpx">Konservi kiel GPX-kurson</string>
-    <string name="shared_string_more_actions">Pli agadoj</string>
+    <string name="shared_string_more_actions">Pli da agoj</string>
     <string name="shared_string_do_not_show_again">Ne montri plue</string>
     <string name="shared_string_remember_my_choice">Memori mian elekton</string>
     <string name="shared_string_refresh">Aktualigi</string>
@@ -1746,7 +1746,7 @@ Kaj la loko kaj tempo estas montrataj ĉe la OsmAnd stirpanelo, kaj ĉe la fenes
     <string name="context_menu_item_add_waypoint">Aldoni GPX-navigadpunkton</string>
     <string name="amenity_type_landuse">Utilkampo</string>
     <string name="amenity_type_leisure">Ripozejo</string>
-    <string name="amenity_type_man_made">Hom-kreaĵo</string>
+    <string name="amenity_type_man_made">Artefarita objekto</string>
     <string name="amenity_type_military">Militejo</string>
     <string name="amenity_type_natural">Naturo</string>
     <string name="amenity_type_office">Oficejo</string>
@@ -2133,8 +2133,8 @@ Kaj la loko kaj tempo estas montrataj ĉe la OsmAnd stirpanelo, kaj ĉe la fenes
     <string name="instalation_troubleshooting_item">Instalado kaj problemoj</string>
     <string name="techical_articles_item">Teĥnikaj artikoloj</string>
     <string name="versions_item">Versioj</string>
-    <string name="feedback">Sendu opinion</string>
-    <string name="contact_us">Kontaktu nin</string>
+    <string name="feedback">Sendi opinion</string>
+    <string name="contact_us">Kontakti nin</string>
     <string name="map_legend">Mapklarigo</string>
     <string name="save_poi_without_poi_type_message">Ĉu vere konservi Interesejon sen determinita speco?</string>
     <string name="poi_context_menu_modify_osm_change">Modifi OSM ŝanĝoj</string>
