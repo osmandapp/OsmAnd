@@ -2312,4 +2312,26 @@
 	<string name="poi_covered">Cobert</string>
 	<string name="poi_subway_station_filter">Estació de metro</string>
 	<string name="poi_bicycle_parking_type">Tipus</string>
+	<string name="poi_aerialway_bicycle">Transport de bicicletes</string>
+	<string name="poi_aerialway_heating">Calefacció</string>
+	<string name="poi_telescope_type">Tipus</string>
+	<string name="poi_animal_training_type">Tipus</string>
+	<string name="poi_embassy_type">Tipus</string>
+	<string name="poi_city_capital">Capital</string>
+	<string name="poi_healthcare_alternative_types">Especialitat</string>
+	<string name="poi_free_flying_characteristics">Característica</string>
+	<string name="poi_archaeological_site_type">Tipus</string>
+	<string name="poi_star_rating">Valoració en estrelles</string>
+	<string name="poi_religion_type">Religió</string>
+	<string name="poi_denomination">Denominació</string>
+	<string name="poi_information_type">Tipus</string>
+	<string name="poi_information_contents">Continguts</string>
+	<string name="poi_clock_option">Addicional</string>
+	<string name="poi_scout_camp">Campament scout</string>
+	<string name="poi_resort_type">Tipus</string>
+	<string name="poi_piste_difficulty">Dificultat de la pista</string>
+	<string name="poi_theatre_genre">Gènere</string>
+	<string name="poi_outdoor_seating">Seients exteriors</string>
+	<string name="poi_fee">Cost</string>
+	<string name="poi_delivery">Lliurament</string>
 	</resources>
