@@ -3110,4 +3110,6 @@
 	<string name="poi_xmas_location">Xmas: location</string>
 	<string name="poi_xmas_url">Xmas: website</string>
 
+	<string name="poi_public_bookcase">Public bookcase</string>
+
 </resources>
