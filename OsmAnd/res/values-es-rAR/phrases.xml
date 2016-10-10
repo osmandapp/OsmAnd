@@ -1538,7 +1538,7 @@
 	<string name="poi_payment_paypal_no">No acepta Paypal</string>
 	<string name="poi_payment_u_key_yes">U-Key</string>
 	<string name="poi_payment_u_key_no">No acepta U-Key</string>
-	<string name="poi_payment_token_yes">Tokens</string>
+	<string name="poi_payment_token_yes">Monetiformes o fichas</string>
 	<string name="poi_payment_token_no">No acepta Tokens</string>
 	<string name="poi_payment_gift_card_yes">Tarjetas de regalo</string>
 	<string name="poi_payment_gift_card_no">No acepta tarjetas de regalo</string>
