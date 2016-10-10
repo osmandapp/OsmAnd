@@ -3125,4 +3125,11 @@
 	<string name="poi_xmas_location">Miejsce</string>
 	<string name="poi_xmas_url">Strona internetowa</string>
 
+<string name="poi_public_bookcase">Półka wymiany książek</string>
+	<string name="poi_public_bookcase_type_phone_box">Rodzaj: budka telefoniczna</string>
+	<string name="poi_public_bookcase_type_reading_box">Rodzaj: skrzynka</string>
+	<string name="poi_public_bookcase_type_wooden_cabinet">Rodzaj: drewniana szafa</string>
+	<string name="poi_public_bookcase_type_metal_cabinet">Rodzaj: metalowa szafa</string>
+	<string name="poi_public_bookcase_type_shelf">Rodzaj: szafa (w budynku)</string>
+
 </resources>
