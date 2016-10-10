@@ -3111,5 +3111,10 @@
 	<string name="poi_xmas_url">Xmas: website</string>
 
 	<string name="poi_public_bookcase">Public bookcase</string>
+	<string name="poi_public_bookcase_type_phone_box">Type: phone box</string>
+	<string name="poi_public_bookcase_type_reading_box">Type: reading box</string>
+	<string name="poi_public_bookcase_type_wooden_cabinet">Type: wooden cabinet</string>
+	<string name="poi_public_bookcase_type_metal_cabinet">Type: metal cabinet</string>
+	<string name="poi_public_bookcase_type_shelf">Type: shelf</string>
 
 </resources>
