@@ -2294,4 +2294,15 @@
 	<string name="poi_fuel_avia_type">Tipus</string>
 	<string name="poi_payment_type">Tipus de pagament</string>
 	<string name="poi_payment_fuel_type">Tipus de pagament</string>
+	<string name="poi_additional_type">Addicional</string>
+	<string name="poi_internet_access_type">Tipus d\'accés d\'Internet</string>
+	<string name="poi_bicycle_service">Servei de bicicletes</string>
+	<string name="poi_clothes_type">Tipus</string>
+	<string name="poi_shoes_type">Tipus</string>
+	<string name="poi_fire_hydrant_type">Tipus</string>
+	<string name="poi_fire_hydrant_position">Posició</string>
+	<string name="poi_fire_hydrant_water_source">Origen de l\'aigua</string>
+	<string name="poi_payment_toll_type">Tipus de pagament</string>
+	<string name="poi_traffic_signals_sound">So</string>
+	<string name="poi_highway_crossing_type">Tipus</string>
 	</resources>
