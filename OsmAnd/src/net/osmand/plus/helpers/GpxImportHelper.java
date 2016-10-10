@@ -81,9 +81,11 @@ public class GpxImportHelper {
 		final Cursor returnCursor = application.getContentResolver().query(contentUri, null, null, null, null);
 		if (returnCursor != null && returnCursor.moveToFirst()) {
 			name = returnCursor.getString(returnCursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
-			returnCursor.close();
 		} else {
 			name = null;
+		}
+		if (returnCursor != null && !returnCursor.isClosed()) {
+			returnCursor.close();
 		}
 		return name;
 	}
