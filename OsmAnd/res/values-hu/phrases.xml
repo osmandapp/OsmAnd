@@ -1849,4 +1849,42 @@
 	<string name="poi_office_midwife">Szülészeti rendelő</string>
 
 	<string name="poi_badminton">Tollaslabda</string>
+	<string name="poi_brushless">Kefe nélküli</string>
+	<string name="poi_internet_access_type">Internet hozzáférés módja</string>
+	<string name="poi_fire_hydrant_position">Pozíció</string>
+	<string name="poi_fire_hydrant_water_source">Vízforrás</string>
+	<string name="poi_payment_toll_type">Fizetési mód</string>
+	<string name="poi_traffic_signals_sound">Hang</string>
+	<string name="poi_highway_crossing_type">Típus</string>
+	<string name="poi_tactile_paving">Vakvezető sáv</string>
+	<string name="poi_payment_fuel_type">Fizetési mód</string>
+	<string name="poi_automated">Automatizált</string>
+	<string name="poi_fee">Díj</string>
+	<string name="poi_self_service">Önkiszolgáló</string>
+	<string name="poi_ramp_wheelchair_yes">Rámpa kerekesszékhez: van</string>
+	<string name="poi_ramp_wheelchair_no">Rámpa kerekesszékhez: nincs</string>
+	<string name="poi_wheelchair_designated">Kizárólag kerekesszékhez</string>
+	<string name="poi_covered">Fedett</string>
+	<string name="poi_subway_station_filter">Metróállomás</string>
+	<string name="poi_fire_hydrant_type">Típus</string>
+	<string name="poi_aerialway_bicycle">Kerékpár szállítás</string>
+	<string name="poi_outdoor_seating">Kiülős hely</string>
+	<string name="poi_smoking">Dohányzás</string>
+	<string name="poi_takeaway">Elvitelre</string>
+	<string name="poi_spices">Fűszerbolt</string>
+
+	<string name="poi_length">Hossz</string>
+
+	<string name="poi_diaper_table_count">Pelenkázó asztalok száma</string>
+
+	<string name="poi_diplomatic_ambassadors_residence">Nagykövetségi rezidencia</string>
+	<string name="poi_site_type_city">Nagyváros</string>
+	<string name="poi_capacity_beds">Ágyak száma</string>
+
+	<string name="poi_fire_hydrant_flow_capacity">Átfolyási kapacitás</string>
+	<string name="poi_site_type_earthwork">Földsánc</string>
+	<string name="poi_site_type_fortification">Erődítmény</string>
+	<string name="poi_fortification_type_hill_fort">Erődítmény típusa: földvár</string>
+	<string name="poi_fortification_type_limes">Erődítmény típusa: limes</string>
+	<string name="poi_site_type_hut_circle">Kerek kunyhó</string>
 	</resources>
