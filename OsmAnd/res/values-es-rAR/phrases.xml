@@ -3139,4 +3139,24 @@
 	<string name="poi_beach_surface_type">Superficie</string>
 	<string name="poi_nudism">Nudismo</string>
 
+<string name="poi_xmas">Navidad</string>
+	<string name="poi_xmas_event">Evento navideño</string>
+	<string name="poi_xmas_market">Mercado navideño</string>
+	<string name="poi_xmas_pyramid">Pirámide navideña</string>
+	<string name="poi_xmas_shop">Tienda navideña</string>
+	<string name="poi_xmas_shop_christmas_tree">Venta de árboles</string>
+	<string name="poi_xmas_tree">Árbol navideño</string>
+	<string name="poi_xmas_day_date">Período de fecha para evento navideño</string>
+	<string name="poi_xmas_note">Navidad: Nota</string>
+	<string name="poi_xmas_opening_hours">Navidad: Horario de atención</string>
+	<string name="poi_xmas_location">Navidad: Ubicación</string>
+	<string name="poi_xmas_url">Navidad: Sitio web</string>
+
+	<string name="poi_public_bookcase">Biblioteca libre</string>
+	<string name="poi_public_bookcase_type_phone_box">Tipo: Cabina telefónica</string>
+	<string name="poi_public_bookcase_type_reading_box">Tipo: Cajón de libros</string>
+	<string name="poi_public_bookcase_type_wooden_cabinet">Tipo: Cabina de madera</string>
+	<string name="poi_public_bookcase_type_metal_cabinet">Tipo: Cabina de metal</string>
+	<string name="poi_public_bookcase_type_shelf">Tipo: Estantería abierta</string>
+
 </resources>
