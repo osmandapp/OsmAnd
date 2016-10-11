@@ -1904,4 +1904,8 @@
 	<string name="poi_payment_icsf_no">No atzetat cartas IC Stored Fare</string>
 	<string name="poi_spices">Butega de ispètzias</string>
 
-</resources>
+<string name="poi_fuel_type">Casta</string>
+	<string name="poi_fuel_avia_type">Casta</string>
+	<string name="poi_payment_type">Casta de pagamentu</string>
+	<string name="poi_payment_fuel_type">Casta de pagamentu</string>
+	</resources>
