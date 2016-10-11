@@ -728,8 +728,13 @@ public class MapRenderRepositories {
 			if(requestedBox.getZoom() <= zoomOnlyForBasemaps && 
 					"".equals(prefs.MAP_PREFERRED_LOCALE.get())) {
 				currentRenderingContext.preferredLocale = app.getLanguage();
+				currentRenderingContext.transliterate = true;
 			} else {
 				currentRenderingContext.preferredLocale = prefs.MAP_PREFERRED_LOCALE.get();
+				currentRenderingContext.transliterate = prefs.MAP_TRANSLITERATE_NAMES.get();
+				if(currentRenderingContext.preferredLocale.equals("en")) {
+					currentRenderingContext.transliterate = true;
+				}
 			}
 			final float mapDensity = (float) requestedBox.getMapDensity();
 			currentRenderingContext.setDensityValue(mapDensity);

@@ -23,6 +23,7 @@ public class RenderingContext {
 	public boolean interrupted = false;
 	public boolean nightMode = false;
 	public String preferredLocale = "";
+	public boolean transliterate = false;
 	public int defaultColor = 0xf1eee8;
 
 	public RenderingContext() {
