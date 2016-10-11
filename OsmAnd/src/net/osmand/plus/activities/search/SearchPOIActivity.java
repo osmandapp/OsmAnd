@@ -587,7 +587,8 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 		final Amenity amenity = ((AmenityAdapter) getListAdapter()).getItem(position);
 		final OsmandSettings settings = app.getSettings();
 		String poiSimpleFormat = OsmAndFormatter.getPoiStringWithoutType(amenity,
-				app.getSettings().MAP_PREFERRED_LOCALE.get());
+				app.getSettings().MAP_PREFERRED_LOCALE.get(), 
+				app.getSettings().MAP_TRANSLITERATE_NAMES.get());
 		PointDescription name = new PointDescription(PointDescription.POINT_TYPE_POI, poiSimpleFormat);
 		int z = Math.max(16, settings.getLastKnownMapZoom());
 
@@ -818,7 +819,9 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 			if (mes != null) {
 				distance = " " + OsmAndFormatter.getFormattedDistance((int) mes[0], getMyApplication()) + "  "; //$NON-NLS-1$
 			}
-			String poiType = OsmAndFormatter.getPoiStringWithoutType(amenity, app.getSettings().MAP_PREFERRED_LOCALE.get());
+			String poiType = OsmAndFormatter.getPoiStringWithoutType(amenity, 
+					app.getSettings().MAP_PREFERRED_LOCALE.get(),
+					app.getSettings().MAP_TRANSLITERATE_NAMES.get());
 			label.setText(poiType);
 			distanceText.setText(distance);
 			ViewCompat.setAccessibilityDelegate(row, accessibilityAssistant);
@@ -867,35 +870,6 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 		}
 	}
 
-	private void showPOIDetails(final Amenity amenity, String lang) {
-		AlertDialog.Builder b = new AlertDialog.Builder(SearchPOIActivity.this);
-		b.setTitle(OsmAndFormatter.getPoiStringWithoutType(amenity, lang));
-		b.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int id) {
-				dialog.cancel();
-			}
-		});
-		List<String> attributes = new ArrayList<String>();
-		String direction = navigationInfo.getDirectionString(amenity.getLocation(), heading);
-		if (direction != null) {
-			attributes.add(direction);
-		}
-		String[] as = OsmAndFormatter.getAmenityDescriptionContent(getMyApplication(), amenity, false).split("\n");
-		for (String s : as) {
-			attributes.add(s.replace(':', ' '));
-		}
-		attributes.add(getString(R.string.navigate_point_latitude) + " "
-				+ Double.toString(amenity.getLocation().getLatitude()));
-		attributes.add(getString(R.string.navigate_point_longitude) + " "
-				+ Double.toString(amenity.getLocation().getLongitude()));
-		b.setItems(attributes.toArray(new String[attributes.size()]), new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-			}
-		});
-		b.show();
-	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {

@@ -161,22 +161,23 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 		if (searchResult.location != null) {
 			OsmandApplication app = getMyApplication();
 			String lang = searchResult.requiredSearchPhrase.getSettings().getLang();
+			boolean transliterate = searchResult.requiredSearchPhrase.getSettings().isTransliterate();
 			PointDescription pointDescription = null;
 			Object object = searchResult.object;
 			switch (searchResult.objectType) {
 				case POI:
-					String poiSimpleFormat = OsmAndFormatter.getPoiStringWithoutType((Amenity) object, lang);
+					String poiSimpleFormat = OsmAndFormatter.getPoiStringWithoutType((Amenity) object, lang, transliterate);
 					pointDescription = new PointDescription(PointDescription.POINT_TYPE_POI, poiSimpleFormat);
 					break;
 				case RECENT_OBJ:
 					HistoryEntry entry = (HistoryEntry) object;
 					pointDescription = entry.getName();
 					if (pointDescription.isPoi()) {
-						Amenity amenity = findAmenity(entry.getName().getName(), entry.getLat(), entry.getLon(), lang);
+						Amenity amenity = findAmenity(entry.getName().getName(), entry.getLat(), entry.getLon(), lang, transliterate);
 						if (amenity != null) {
 							object = amenity;
 							pointDescription = new PointDescription(PointDescription.POINT_TYPE_POI,
-									OsmAndFormatter.getPoiStringWithoutType(amenity, lang));
+									OsmAndFormatter.getPoiStringWithoutType(amenity, lang, transliterate));
 						}
 					} else if (pointDescription.isFavorite()) {
 						LatLon entryLatLon = new LatLon(entry.getLat(), entry.getLon());
@@ -239,7 +240,7 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 		}
 	}
 
-	private Amenity findAmenity(String name, double lat, double lon, String lang) {
+	private Amenity findAmenity(String name, double lat, double lon, String lang, boolean transliterate) {
 		OsmandApplication app = getMyApplication();
 		QuadRect rect = MapUtils.calculateLatLonBbox(lat, lon, 15);
 		List<Amenity> amenities = app.getResourceManager().searchAmenities(
@@ -257,13 +258,13 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 
 		MapPoiTypes types = app.getPoiTypes();
 		for (Amenity amenity : amenities) {
-			String poiSimpleFormat = OsmAndFormatter.getPoiStringWithoutType(amenity, lang);
+			String poiSimpleFormat = OsmAndFormatter.getPoiStringWithoutType(amenity, lang, transliterate);
 			if (poiSimpleFormat.equals(name)) {
 				return amenity;
 			}
 		}
 		for (Amenity amenity : amenities) {
-			String amenityName = amenity.getName(lang, true);
+			String amenityName = amenity.getName(lang, transliterate);
 			if (Algorithms.isEmpty(amenityName)) {
 				AbstractPoiType st = types.getAnyPoiTypeByKey(amenity.getSubType());
 				if (st != null) {

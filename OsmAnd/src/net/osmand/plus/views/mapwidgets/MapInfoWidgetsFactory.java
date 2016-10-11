@@ -580,8 +580,11 @@ public class MapInfoWidgetsFactory {
 					settings.SHOW_STREET_NAME.get()) {
 				RouteDataObject rt = locationProvider.getLastKnownRouteSegment();
 				if (rt != null) {
-					text = RoutingHelper.formatStreetName(rt.getName(settings.MAP_PREFERRED_LOCALE.get()), 
-							rt.getRef(rt.bearingVsRouteDirection(locationProvider.getLastKnownLocation())), rt.getDestinationName(settings.MAP_PREFERRED_LOCALE.get(), rt.bearingVsRouteDirection(locationProvider.getLastKnownLocation())), "»");
+					text = RoutingHelper.formatStreetName(
+							rt.getName(settings.MAP_PREFERRED_LOCALE.get()), 
+							rt.getRef(rt.bearingVsRouteDirection(locationProvider.getLastKnownLocation())), 
+							rt.getDestinationName(settings.MAP_PREFERRED_LOCALE.get(), rt.bearingVsRouteDirection(locationProvider.getLastKnownLocation())), 
+									"»");
 				} 
 				if (text == null) {
 					text = "";
