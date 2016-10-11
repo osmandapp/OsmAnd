@@ -658,14 +658,14 @@ public class MapActivityActions implements DialogProvider {
 					}
 				}).createItem());
 
-		String d = getString(R.string.index_settings);
+		String d = getString(R.string.welmode_download_maps);
 		if (app.getDownloadThread().getIndexes().isDownloadedFromInternet) {
 			List<IndexItem> updt = app.getDownloadThread().getIndexes().getItemsToUpdate();
 			if (updt != null && updt.size() > 0) {
 				d += " (" + updt.size() + ")";
 			}
 		}
-		optionsMenuHelper.addItem(new ItemBuilder().setTitleId(R.string.index_settings, null)
+		optionsMenuHelper.addItem(new ItemBuilder().setTitleId(R.string.welmode_download_maps, null)
 				.setTitle(d).setIcon(R.drawable.ic_type_archive)
 				.setListener(new ContextMenuAdapter.ItemClickListener() {
 					@Override
