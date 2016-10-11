@@ -759,9 +759,10 @@ public class RoutingHelper {
 		}
 		RouteSegmentResult rs = getCurrentSegmentResult();
 		if(rs != null) {
-			String nm = rs.getObject().getName(settings.MAP_PREFERRED_LOCALE.get());
+			String nm = rs.getObject().getName(settings.MAP_PREFERRED_LOCALE.get(), settings.MAP_TRANSLITERATE_NAMES.get());
 			String rf = rs.getObject().getRef(rs.isForwardDirection());
-			String dn = rs.getObject().getDestinationName(settings.MAP_PREFERRED_LOCALE.get(), rs.isForwardDirection());
+			String dn = rs.getObject().getDestinationName(settings.MAP_PREFERRED_LOCALE.get(), 
+					settings.MAP_TRANSLITERATE_NAMES.get(), rs.isForwardDirection());
 			return formatStreetName(nm, rf, dn, "»");
 		}
 		return null;

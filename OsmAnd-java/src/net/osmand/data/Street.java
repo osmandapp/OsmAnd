@@ -78,8 +78,8 @@ public class Street extends MapObject {
 		copyNames(street);
 	}
 
-	public String getNameWithoutCityPart(String lang) {
-		String nm = getName(lang);
+	public String getNameWithoutCityPart(String lang, boolean transliterate) {
+		String nm = getName(lang, transliterate);
 		int t = nm.lastIndexOf('(');
 		if (t > 0) {
 			return nm.substring(0, t);

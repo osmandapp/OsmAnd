@@ -46,11 +46,14 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 	private final Map<String, City> postCodes;
 	private final Collator collator;
 	private OsmandPreference<String> langSetting;
+	private OsmandPreference<Boolean> transliterateSetting;
 	private BinaryMapReaderResource resource;
+
 
 	public RegionAddressRepositoryBinary(ResourceManager mgr, BinaryMapReaderResource resource ) {
 		this.resource = resource;
 		langSetting = mgr.getContext().getSettings().MAP_PREFERRED_LOCALE;
+		transliterateSetting = mgr.getContext().getSettings().MAP_TRANSLITERATE_NAMES;
 		this.collator = OsmAndCollator.primaryCollator();
 		this.postCodes = new TreeMap<String, City>(OsmAndCollator.primaryCollator());
 	}
@@ -234,6 +237,11 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 	public String getLang() {
 		return langSetting.get();
 	}
+	
+	@Override
+	public boolean isTransliterateNames() {
+		return transliterateSetting.get();
+	}
 
 	@Override
 	public List<Street> getStreetsIntersectStreets(Street st) {
@@ -245,8 +253,9 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 	public Building getBuildingByName(Street street, String name) {
 		preloadBuildings(street, null);
 		String lang = getLang();
+		boolean transliterateNames = isTransliterateNames();
 		for (Building b : street.getBuildings()) {
-			String bName = b.getName(lang);
+			String bName = b.getName(lang, transliterateNames);
 			if (bName.equals(name)) {
 				return b;
 			}
@@ -327,8 +336,9 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 		preloadStreets(o, null);
 		Collection<Street> streets = o.getStreets();
 		String lang = getLang();
+		boolean transliterateNames = isTransliterateNames();
 		for (Street s : streets) {
-			String sName = s.getName(lang).toLowerCase();
+			String sName = s.getName(lang, transliterateNames).toLowerCase();
 			if (collator.equals(sName, name)) {
 				return s;
 			}

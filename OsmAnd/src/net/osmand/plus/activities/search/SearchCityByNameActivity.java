@@ -77,7 +77,8 @@ public class SearchCityByNameActivity extends SearchByNameAbstractActivity<City>
 	@Override
 	protected Comparator<? super City> createComparator() {
 		final StringMatcherMode startsWith = CollatorStringMatcher.StringMatcherMode.CHECK_ONLY_STARTS_WITH;
-		return new CityComparator(startsWith, getMyApplication().getSettings().MAP_PREFERRED_LOCALE.get());
+		return new CityComparator(startsWith, getMyApplication().getSettings().MAP_PREFERRED_LOCALE.get(),
+				getMyApplication().getSettings().MAP_TRANSLITERATE_NAMES.get());
 	}
 
 	@Override
@@ -183,7 +184,7 @@ public class SearchCityByNameActivity extends SearchByNameAbstractActivity<City>
 		String name = getShortText(obj);
 		if (isVillagesSearchEnabled()) {
 			if (obj.getClosestCity() != null) {
-				name += " - " + obj.getClosestCity().getName(region.getLang());
+				name += " - " + obj.getClosestCity().getName(region.getLang(), region.isTransliterateNames());
 				LatLon loc = obj.getClosestCity().getLocation();
 				if (loc != null && l != null) {
 					name += " " + OsmAndFormatter.getFormattedDistance((int) MapUtils.getDistance(l, loc), getMyApplication());
@@ -200,7 +201,7 @@ public class SearchCityByNameActivity extends SearchByNameAbstractActivity<City>
 
 	@Override
 	public String getShortText(City obj) {
-		String lName = obj.getName(region.getLang());
+		String lName = obj.getName(region.getLang(), region.isTransliterateNames());
 		String name = obj.getName();
 		if (!lName.equals(name)) {
 			return lName + " / " + name;
@@ -210,8 +211,8 @@ public class SearchCityByNameActivity extends SearchByNameAbstractActivity<City>
 
 	@Override
 	public void itemSelected(City obj) {
-		settings.setLastSearchedCity(obj.getId(), obj.getName(region.getLang()), obj.getLocation());
-		if (region.getCityById(obj.getId(), obj.getName(region.getLang())) == null) {
+		settings.setLastSearchedCity(obj.getId(), obj.getName(region.getLang(), region.isTransliterateNames()), obj.getLocation());
+		if (region.getCityById(obj.getId(), obj.getName(region.getLang(), region.isTransliterateNames())) == null) {
 			region.addCityToPreloadedList(obj);
 		}
 		quitActivity(SearchStreetByNameActivity.class);
@@ -226,9 +227,11 @@ public class SearchCityByNameActivity extends SearchByNameAbstractActivity<City>
 		private final StringMatcherMode startsWith;
 		private final net.osmand.Collator cs;
 		private final String lang;
+		private boolean transliterate;
 
-		private CityComparator(StringMatcherMode startsWith, String lang) {
+		private CityComparator(StringMatcherMode startsWith, String lang, boolean transliterate) {
 			this.startsWith = startsWith;
+			this.transliterate = transliterate;
 			this.cs = OsmAndCollator.primaryCollator();
 			this.lang = lang;
 		}
@@ -241,8 +244,8 @@ public class SearchCityByNameActivity extends SearchByNameAbstractActivity<City>
 			if (compare != 0) {
 				return compare;
 			}
-			boolean st1 = CollatorStringMatcher.cmatches(cs, lhs.getName(lang), part, startsWith);
-			boolean st2 = CollatorStringMatcher.cmatches(cs, rhs.getName(lang), part, startsWith);
+			boolean st1 = CollatorStringMatcher.cmatches(cs, lhs.getName(lang, transliterate), part, startsWith);
+			boolean st2 = CollatorStringMatcher.cmatches(cs, rhs.getName(lang, transliterate), part, startsWith);
 			if (st1 != st2) {
 				return st1 ? 1 : -1;
 			}

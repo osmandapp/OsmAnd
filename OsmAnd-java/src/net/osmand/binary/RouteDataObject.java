@@ -10,6 +10,7 @@ import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 import net.osmand.Location;
+import net.sf.junidecode.Junidecode;
 
 
 public class RouteDataObject {
@@ -72,6 +73,10 @@ public class RouteDataObject {
 	
 	
 	public String getName(String lang){
+		return getName(lang, false);
+	}
+	
+	public String getName(String lang, boolean transliterate){
 		if(names != null ) {
 			if(Algorithms.isEmpty(lang)) {
 				return names.get(region.nameTypeRule);
@@ -85,7 +90,11 @@ public class RouteDataObject {
 					}
 				}
 			}
-			return names.get(region.nameTypeRule);
+			String nmDef = names.get(region.nameTypeRule);
+			if(transliterate && nmDef != null && nmDef.length() > 0) {
+				return Junidecode.unidecode(nmDef);
+			}
+			return nmDef;
 		}
 		return null;
 	}
@@ -124,7 +133,7 @@ public class RouteDataObject {
 		return null;
 	}
 
-	public String getDestinationName(String lang, boolean direction){
+	public String getDestinationName(String lang, boolean transliterate, boolean direction){
 		if(names != null) {
 			int[] kt = names.keys();
 			String destinationTag = (direction == true) ? "destination:forward" : "destination:backward";
@@ -144,6 +153,9 @@ public class RouteDataObject {
 						destinationDefault = names.get(k);
 					}
 				}
+			}
+			if(transliterate && destinationDefault != null) {
+				return Junidecode.unidecode(destinationDefault);
 			}
 			return destinationDefault;
 		}

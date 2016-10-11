@@ -22,7 +22,8 @@ public class SearchStreet2ByNameActivity extends SearchByNameAbstractActivity<St
 
 	@Override
 	protected Comparator<? super Street> createComparator() {
-		return new MapObjectComparator(getMyApplication().getSettings().MAP_PREFERRED_LOCALE.get());
+		return new MapObjectComparator(getMyApplication().getSettings().MAP_PREFERRED_LOCALE.get(),
+				getMyApplication().getSettings().MAP_TRANSLITERATE_NAMES.get());
 	}
 
 	@Override
@@ -71,12 +72,12 @@ public class SearchStreet2ByNameActivity extends SearchByNameAbstractActivity<St
 	
 	@Override
 	public String getText(Street obj) {
-		return obj.getName(region.getLang());
+		return obj.getName(region.getLang(), region.isTransliterateNames());
 	}
 	
 	@Override
 	public void itemSelected(Street obj) {
-		settings.setLastSearchedIntersectedStreet(obj.getName(region.getLang()), obj.getLocation());
+		settings.setLastSearchedIntersectedStreet(obj.getName(region.getLang(), region.isTransliterateNames()), obj.getLocation());
 		if(isSelectAddres()) {
 			finish();
 		} else {

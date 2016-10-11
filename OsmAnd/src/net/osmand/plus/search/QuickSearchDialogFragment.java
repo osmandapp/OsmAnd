@@ -36,7 +36,6 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import net.osmand.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.ResultMatcher;
@@ -669,6 +668,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	private void setupSearch(final MapActivity mapActivity) {
 		// Setup search core
 		String locale = app.getSettings().MAP_PREFERRED_LOCALE.get();
+		boolean transliterate = app.getSettings().MAP_TRANSLITERATE_NAMES.get();
 		searchHelper = app.getSearchUICore();
 		searchUICore = searchHelper.getCore();
 		if (newSearch) {
@@ -699,7 +699,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		}
 		SearchSettings settings = searchUICore.getSearchSettings().setOriginalLocation(
 				new LatLon(searchLatLon.getLatitude(), searchLatLon.getLongitude()));
-		settings = settings.setLang(locale, false);
+		settings = settings.setLang(locale, transliterate);
 		searchUICore.updateSettings(settings);
 		searchUICore.setOnSearchStart(new Runnable() {
 			@Override

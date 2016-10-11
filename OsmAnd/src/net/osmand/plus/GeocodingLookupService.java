@@ -137,24 +137,25 @@ public class GeocodingLookupService {
 						if (object != null) {
 							OsmandSettings settings = app.getSettings();
 							String lang = settings.MAP_PREFERRED_LOCALE.get();
+							boolean transliterate = settings.MAP_TRANSLITERATE_NAMES.get();
 							String geocodingResult = "";
 							double relevantDistance = -1;
 
 							if (object.building != null) {
-								String bldName = object.building.getName(lang);
+								String bldName = object.building.getName(lang, transliterate);
 								if (!Algorithms.isEmpty(object.buildingInterpolation)) {
 									bldName = object.buildingInterpolation;
 								}
-								geocodingResult = object.street.getName(lang) + " " + bldName + ", "
-										+ object.city.getName(lang);
+								geocodingResult = object.street.getName(lang, transliterate) + " " + bldName + ", "
+										+ object.city.getName(lang, transliterate);
 							} else if (object.street != null) {
-								geocodingResult = object.street.getName(lang) + ", " + object.city.getName(lang);
+								geocodingResult = object.street.getName(lang, transliterate) + ", " + object.city.getName(lang, transliterate);
 								relevantDistance = object.getDistanceP();
 							} else if (object.city != null) {
-								geocodingResult = object.city.getName(lang);
+								geocodingResult = object.city.getName(lang, transliterate);
 							} else if (object.point != null) {
 								RouteDataObject rd = object.point.getRoad();
-								String sname = rd.getName(lang);
+								String sname = rd.getName(lang, transliterate);
 								if (Algorithms.isEmpty(sname)) {
 									sname = "";
 								}

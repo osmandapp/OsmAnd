@@ -36,7 +36,8 @@ public class QuickSearchHelper implements ResourceListener {
 
 	public QuickSearchHelper(OsmandApplication app) {
 		this.app = app;
-		core = new SearchUICore(app.getPoiTypes(), app.getSettings().MAP_PREFERRED_LOCALE.get(), false);
+		core = new SearchUICore(app.getPoiTypes(), app.getSettings().MAP_PREFERRED_LOCALE.get(), 
+				app.getSettings().MAP_TRANSLITERATE_NAMES.get());
 		app.getResourceManager().addResourceListener(this);
 	}
 	

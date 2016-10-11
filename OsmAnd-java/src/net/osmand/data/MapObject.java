@@ -243,13 +243,15 @@ public abstract class MapObject implements Comparable<MapObject> {
 	public static class MapObjectComparator implements Comparator<MapObject> {
 		private final String l;
 		Collator collator = OsmAndCollator.primaryCollator();
+		private boolean transliterate;
 
 		public MapObjectComparator() {
 			this.l = null;
 		}
 
-		public MapObjectComparator(String lang) {
+		public MapObjectComparator(String lang, boolean transliterate) {
 			this.l = lang;
+			this.transliterate = transliterate;
 		}
 
 		@Override
@@ -259,7 +261,7 @@ public abstract class MapObject implements Comparable<MapObject> {
 			} else if (o1 == o2) {
 				return 0;
 			} else {
-				return collator.compare(o1.getName(l), o2.getName(l));
+				return collator.compare(o1.getName(l, transliterate), o2.getName(l, transliterate));
 			}
 		}
 
@@ -269,7 +271,7 @@ public abstract class MapObject implements Comparable<MapObject> {
 			} else if (o1 == o2) {
 				return true;
 			} else {
-				return collator.equals(o1.getName(l), o2.getName(l));
+				return collator.equals(o1.getName(l, transliterate), o2.getName(l, transliterate));
 			}
 		}
 	}

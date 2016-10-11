@@ -5,8 +5,6 @@ import java.util.Comparator;
 import java.util.List;
 
 import net.osmand.ResultMatcher;
-import net.osmand.binary.BinaryMapIndexReader;
-import net.osmand.binary.GeocodingUtilities.GeocodingResult;
 import net.osmand.data.Building;
 import net.osmand.data.City;
 import net.osmand.data.LatLon;
@@ -24,6 +22,8 @@ public interface RegionAddressRepository {
 	public String getFileName() ;
 	
 	public String getLang();
+	
+	public boolean isTransliterateNames();
 
 	
 	public LatLon getEstimatedRegionCenter();

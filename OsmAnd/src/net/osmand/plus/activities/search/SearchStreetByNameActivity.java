@@ -39,7 +39,8 @@ public class SearchStreetByNameActivity extends SearchByNameAbstractActivity<Str
 
 	@Override
 	protected Comparator<? super Street> createComparator() {
-		return new MapObjectComparator(getMyApplication().getSettings().MAP_PREFERRED_LOCALE.get()) {
+		return new MapObjectComparator(getMyApplication().getSettings().MAP_PREFERRED_LOCALE.get(),
+				getMyApplication().getSettings().MAP_TRANSLITERATE_NAMES.get()) {
 			@Override
 			public int compare(MapObject o1, MapObject o2) {
 				if(searchWithCity >= 0 && city != null) {
@@ -180,11 +181,15 @@ public class SearchStreetByNameActivity extends SearchByNameAbstractActivity<Str
 			if (namesFilter.isCancelled) {
 				break;
 			}
-			if (emptyQuery || CollatorStringMatcher.cmatches(collator, obj.getNameWithoutCityPart(settings.MAP_PREFERRED_LOCALE.get()), 
+			if (emptyQuery || CollatorStringMatcher.cmatches(collator,
+					obj.getNameWithoutCityPart(settings.MAP_PREFERRED_LOCALE.get(),
+							settings.MAP_TRANSLITERATE_NAMES.get()), 
 					query, StringMatcherMode.CHECK_ONLY_STARTS_WITH)) {
 				streetsToSend.add(obj);
 			}
-			if (!emptyQuery && CollatorStringMatcher.cmatches(collator, obj.getNameWithoutCityPart(settings.MAP_PREFERRED_LOCALE.get()),
+			if (!emptyQuery && CollatorStringMatcher.cmatches(collator, 
+					obj.getNameWithoutCityPart(settings.MAP_PREFERRED_LOCALE.get(),
+							settings.MAP_TRANSLITERATE_NAMES.get()),
 					query, StringMatcherMode.CHECK_STARTS_FROM_SPACE_NOT_BEGINNING)) {
 				streetsToSend.add(obj);
 			}

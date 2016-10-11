@@ -186,7 +186,7 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 	}
 	
 	public String getLangPreferredName(MapObject mo) {
-		return mo.getName(settings.MAP_PREFERRED_LOCALE.get());
+		return mo.getName(settings.MAP_PREFERRED_LOCALE.get(), settings.MAP_TRANSLITERATE_NAMES.get());
 	}
 	
 	protected void addFooterViews() {

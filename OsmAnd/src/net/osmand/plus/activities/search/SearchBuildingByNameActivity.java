@@ -97,10 +97,10 @@ public class SearchBuildingByNameActivity extends SearchByNameAbstractActivity<B
 		if(obj.getInterpolationInterval() > 0 || obj.getInterpolationType() != null){
 			String hno = getCurrentFilter();
 			if(hno.length() > 0 && obj.belongsToInterpolation(hno)) {
-				return hno + " [" + obj.getName(region.getLang())+"]";
+				return hno + " [" + obj.getName(region.getLang(), region.isTransliterateNames())+"]";
 			}
 		}
-		return obj.getName(region.getLang());
+		return obj.getName(region.getLang(), region.isTransliterateNames());
 	}
 	
 	@Override
