@@ -232,7 +232,7 @@ public class TransportStopController extends MenuController {
 		public String getDescription(OsmandApplication ctx, boolean useDistance) {
 			if (useDistance && distance > 0) {
 				String nm = OsmAndFormatter.getFormattedDistance(distance, ctx);
-				if (!refStop.getName().equals(stop.getName())) {
+				if (refStop != null && !refStop.getName().equals(stop.getName())) {
 					nm = refStop.getName() + ", " + nm;
 				}
 				return desc + " (" + nm + ")";
