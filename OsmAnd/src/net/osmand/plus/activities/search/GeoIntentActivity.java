@@ -179,8 +179,9 @@ public class GeoIntentActivity extends OsmandListActivity {
 
 	private PointDescription getString(MapObject o) {
 		if (o instanceof Amenity) {
+			OsmandSettings settings = ((OsmandApplication) getApplication()).getSettings();
 			return new PointDescription(PointDescription.POINT_TYPE_POI,
-					OsmAndFormatter.getPoiStringWithoutType((Amenity) o, ((OsmandApplication) getApplication()).getSettings().MAP_PREFERRED_LOCALE.get()));
+					OsmAndFormatter.getPoiStringWithoutType((Amenity) o, settings.MAP_PREFERRED_LOCALE.get(), settings.MAP_TRANSLITERATE_NAMES.get()));
 		}
 		if (o instanceof Street) {
 			return new PointDescription(PointDescription.POINT_TYPE_ADDRESS, ((Street) o).getCity().getName() + " " + o.getName());

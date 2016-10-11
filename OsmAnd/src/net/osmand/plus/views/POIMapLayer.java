@@ -174,13 +174,6 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 		}
 	}
 
-	private StringBuilder buildPoiInformation(StringBuilder res, Amenity n) {
-		String format = OsmAndFormatter.getPoiStringWithoutType(n,
-				view.getSettings().MAP_PREFERRED_LOCALE.get());
-		res.append(" ").append(format).append("\n").append(
-				OsmAndFormatter.getAmenityDescriptionContent(view.getApplication(), n, true));
-		return res;
-	}
 
 	@Override
 	public void initLayer(OsmandMapTileView view) {
@@ -482,7 +475,8 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 	public PointDescription getObjectName(Object o) {
 		if (o instanceof Amenity) {
 			return new PointDescription(PointDescription.POINT_TYPE_POI, ((Amenity) o).getName(
-					view.getSettings().MAP_PREFERRED_LOCALE.get()));
+					view.getSettings().MAP_PREFERRED_LOCALE.get(),
+					view.getSettings().MAP_TRANSLITERATE_NAMES.get()));
 		}
 		return null;
 	}
@@ -529,7 +523,8 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 
 	@Override
 	public String getText(Amenity o) {
-		return o.getName(view.getSettings().MAP_PREFERRED_LOCALE.get());
+		return o.getName(view.getSettings().MAP_PREFERRED_LOCALE.get(),
+				view.getSettings().MAP_TRANSLITERATE_NAMES.get());
 	}
 
 	@Override

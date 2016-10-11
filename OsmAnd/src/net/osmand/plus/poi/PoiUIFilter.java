@@ -320,7 +320,8 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 			@Override
 			public boolean accept(Amenity a) {
 				if (sm != null) {
-					String lower = OsmAndFormatter.getPoiStringWithoutType(a, app.getSettings().MAP_PREFERRED_LOCALE.get());
+					String lower = OsmAndFormatter.getPoiStringWithoutType(a, 
+							app.getSettings().MAP_PREFERRED_LOCALE.get(), app.getSettings().MAP_TRANSLITERATE_NAMES.get());
 					if (!sm.matches(lower)) {
 						return false;
 					}
