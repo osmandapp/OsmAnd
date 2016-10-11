@@ -2331,4 +2331,5 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="custom_search">Recherche personnalisée</string>
     <string name="edit_filter">Modifier le filtre</string>
     <string name="subcategories">Sous-catégories</string>
+    <string name="translit_names">Transcrire les noms</string>
     </resources>
