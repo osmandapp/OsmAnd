@@ -2530,4 +2530,5 @@ Wenn Sie OsmAnd und OSM lieben und unterstützen wollen, so ist dies die perfekt
     <string name="edit_filter">Filter bearbeiten</string>
     <string name="subcategories">Unterkategorien</string>
     <string name="translit_names">Namen umschreiben</string>
+    <string name="translit_name_if_miss">Umschreiben, wenn Namen in %1$s fehlen</string>
     </resources>
