@@ -1545,7 +1545,7 @@
 	<string name="poi_male_no">Für Männer verboten</string>
 	<string name="poi_female_yes">Weiblich</string>
 	<string name="poi_female_no">Für Frauen verboten</string>
-	<string name="poi_toilets_yes">Mit Toiletten</string>
+	<string name="poi_toilets_yes">Ja</string>
 	<string name="poi_toilets_no">Keine Toiletten</string>
 	<string name="poi_religion_bahai">Bahaitum</string>
 	<string name="poi_religion_pagan">Heidentum</string>
