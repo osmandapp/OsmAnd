@@ -1,5 +1,17 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
+
+    <string name="translit_names">Транслитерация названий</string>
+    <string name="edit_filter">Редактировать фильтр</string>
+    <string name="subcategories">Подкатегории</string>
+    <string name="selected_categories">Выбранные подкатегории</string>
+    <string name="create_custom_poi">Настройка поиска</string>
+    <string name="custom_search">Настроить поиск</string>
+    <string name="shared_string_filters">Фильтры</string>
+    <string name="apply_filters">Применить фильтры</string>
+    <string name="save_filter">Сохранить фильтр</string>
+    <string name="delete_filter">Удалить фильтр</string>
+    <string name="new_filter">Новый фильтр</string>
     <string name="number_of_gpx_files_selected_pattern">%s GPX трека(ов) выбрано</string>
     <string name="change_markers_position">Переместить курсор</string>
     <string name="current_track">Текущий путь</string>
