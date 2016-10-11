@@ -1626,7 +1626,7 @@
 	<string name="poi_aeroway_fuel">Benzinejo por aviadiloj</string>
 	<string name="poi_indoor_yes">Ene</string>
 	<string name="poi_indoor_no">Ekstere</string>
-	<string name="poi_toilets_yes">Kun necesejo</string>
+	<string name="poi_toilets_yes">Tak</string>
 	<string name="poi_toilets_no">Sen necesejo</string>
 	<string name="poi_toilets_wheelchair_yes">Kun necesejo por malkapabluloj</string>
 	<string name="poi_toilets_wheelchair_no">Sen necesejo por malkapabluloj</string>
