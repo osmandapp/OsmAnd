@@ -12,7 +12,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import net.osmand.PlatformUtil;
@@ -475,11 +474,12 @@ public class ConfigureMapMenu {
 					public boolean onContextMenuClick(final ArrayAdapter<ContextMenuItem> ad, int itemId,
 							final int pos, boolean isChecked) {
 						final OsmandMapTileView view = activity.getMapView();
-						AlertDialog.Builder b = new AlertDialog.Builder(view.getContext());
+						final AlertDialog.Builder b = new AlertDialog.Builder(view.getContext());
+						final AlertDialog alertDialog;
 
 						View titleView = LayoutInflater.from(activity)
 								.inflate(R.layout.language_dialog_title, null);
-						SwitchCompat check = (SwitchCompat) titleView.findViewById(R.id.check);
+						final SwitchCompat check = (SwitchCompat) titleView.findViewById(R.id.check);
 						check.setChecked(view.getSettings().MAP_TRANSLITERATE_NAMES.get());
 						b.setCustomTitle(titleView);
 						check.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -502,18 +502,43 @@ public class ConfigureMapMenu {
 						b.setSingleChoiceItems(txtValues, selected, new DialogInterface.OnClickListener() {
 							@Override
 							public void onClick(DialogInterface dialog, int which) {
-								view.getSettings().MAP_PREFERRED_LOCALE.set(txtIds[which]);
+								if (which != 1 && check.isChecked()) {
+									check.setTag(false);
+									check.setChecked(false);
+								}
+							}
+						});
+						b.setNegativeButton(R.string.shared_string_cancel, null);
+						b.setPositiveButton(R.string.shared_string_apply, new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+								view.getSettings().MAP_TRANSLITERATE_NAMES.set(check.isChecked());
+								AlertDialog dlg = (AlertDialog) dialog;
+								int index = dlg.getListView().getCheckedItemPosition();
+								view.getSettings().MAP_PREFERRED_LOCALE.set(
+										txtIds[index]);
 								refreshMapComplete(activity);
-								String localeDescr = txtIds[which];
+								String localeDescr = txtIds[index];
 								localeDescr = localeDescr == null || localeDescr.equals("") ? activity
 										.getString(R.string.local_map_names) : localeDescr;
 								adapter.getItem(pos).setDescription(localeDescr);
 								ad.notifyDataSetInvalidated();
-								dialog.dismiss();
 							}
 						});
-						b.setNegativeButton(R.string.shared_string_dismiss, null);
-						b.show();
+						alertDialog = b.show();
+						check.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+							@Override
+							public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+								int index = alertDialog.getListView().getCheckedItemPosition();
+								if (index != 1) {
+									if (check.getTag() == null) {
+										alertDialog.getListView().setItemChecked(1, true);
+									} else {
+										check.setTag(null);
+									}
+								}
+							}
+						});
 						return false;
 					}
 				}).createItem());
