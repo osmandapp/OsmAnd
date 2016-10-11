@@ -1668,7 +1668,7 @@
 	<string name="poi_female_no">Forbudt for kvinder</string>
 	<string name="poi_indoor_yes">Indendørs</string>
 	<string name="poi_indoor_no">Udendørs</string>
-	<string name="poi_toilets_yes">Med toiletter</string>
+	<string name="poi_toilets_yes">Ja</string>
 	<string name="poi_toilets_no">Uden toiletter</string>
 	<string name="poi_toilets_wheelchair_yes">Adgang til toiletter for kørestole: ja</string>
 	<string name="poi_toilets_wheelchair_no">Adgang til toiletter for kørestole: nej</string>
