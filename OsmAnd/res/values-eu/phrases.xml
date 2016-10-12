@@ -1428,4 +1428,12 @@
 	<string name="poi_bitcoin_yes">Bitcoin bidezko ordainketa</string>
 
 	<string name="poi_cave_entrance">Haitzulora sarrera</string>
+	<string name="poi_backcountry">Pistaz kanpo</string>
+	<string name="poi_drive_through">Autoz zeharkatu</string>
+	<string name="poi_nudism">Nudismoa</string>
+
+<string name="poi_seasonal">Urtaroen araberakoa</string>
+	<string name="poi_fireplace">Supazter</string>
+	<string name="poi_beach_surface_type">Gainazala</string>
+	<string name="poi_water_characteristic">Uraren ezaugarriak</string>
 	</resources>
