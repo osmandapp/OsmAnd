@@ -1901,4 +1901,10 @@
 	<string name="poi_theatre_genre_ballet">Műfaj: balett</string>
 	<string name="poi_theatre_genre_shadow_play">Műfaj: árnyjáték</string>
 
-	</resources>
+	<string name="poi_drive_through">Áthajtás</string>
+	<string name="poi_cocktails">Koktélok</string>
+	<string name="poi_microbrewery">Házi sörfőzde</string>
+	<string name="poi_beach_surface_type">Felület</string>
+	<string name="poi_nudism">Nudista</string>
+
+</resources>
