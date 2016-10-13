@@ -2667,4 +2667,5 @@ Hvis du  ønsker at støtte OsmAnd og OSM, er dette en god måde at gøre det p�
     <string name="subcategories">Underkategorier</string>
     <string name="translit_names">Translitterere navne</string>
     <string name="translit_name_if_miss">Transliter hvis %1$s navn mangler</string>
+    <string name="search_hint">Skriv city, adresse, poi</string>
     </resources>
