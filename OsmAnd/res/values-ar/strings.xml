@@ -2575,4 +2575,5 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="subcategories">فئات فرعية</string>
     <string name="translit_names">أسماء بترجمة حرفية</string>
     <string name="translit_name_if_miss">ترجمة حرفية اذا %1$s من الاسم مفقودة</string>
+    <string name="search_hint">أدخل المدينة، العنوان أو اسم المرغوب فيه</string>
     </resources>
