@@ -2664,4 +2664,5 @@ Als je hulp nodig hebt met OsmAnd: neem contact op met ons support team: support
     <string name="edit_filter">Filter bewerken</string>
     <string name="subcategories">Subcategorieën</string>
     <string name="translit_names">Transliteratie van namen</string>
+    <string name="translit_name_if_miss">Weergeven in europese tekens als naam in %1$s ontbreekt</string>
     </resources>
