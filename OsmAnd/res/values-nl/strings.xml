@@ -1495,9 +1495,11 @@ Wil je een nieuwe map maken op de toegestane locatie en de OsmAnd-bestanden daar
 	<string name="navigation_intent_invalid">Ongeldig formaat: %s</string>
 <string name="osmo_settings_uuid">Uniek device-ID</string>
     <string name="osmo_settings_descr">Configureer monitor instellingen en maak een persoonlijk monitor-kanaal</string>
-    <string name="osmo_plugin_description">"Deze plug-in is voor OpenStreetMap Monitoring\", zie https://osmo.mobi.
+    <string name="osmo_plugin_description">"Deze plug-in is voor OpenStreetMap Monitoring, zie https://osmo.mobi.
+
 
 Je kunt alle toestellen van een groep deelnemers volgen. Er zijn mogelijkheden voor het permanent of tijdelijk volgen.
+
 
 Anonieme groepen kunnen makkelijk gemaakt worden, bestaan maar een beperkt aantal dagen en zijn beperkt in de mogelijkheden, zoals het ontbreken van beheer op afstand en een groepsbeheerder. Volledig functionele groepen moeten worden aangemaakt op de website en alleen geregistreerde leden kunnen ze gebruiken.
  "</string>
@@ -1705,7 +1707,7 @@ Wilt u verder gaan met een nieuwe registratie?</string>
 	<string name="rendering_attr_subwayMode_name">Metrolijnen</string>
  	<string name="continue_navigation">Navigatie voortzetten</string>
     <string name="pause_navigation">navigatie pauzeren</string>
-	<string name="rendering_attr_alpineHiking_name">Alpine wandelschaal (SAC)</string>
+	<string name="rendering_attr_alpineHiking_name">Alpinewandelschaal (SAC)</string>
     <string name="rendering_attr_alpineHiking_description">Paden volgens SAC-schaal kleuren</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Wandelroutes Kleuren</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Paden speciaal kleuren</string>
@@ -1983,9 +1985,9 @@ Het activeren van deze weergave verandert de kaartstijl in \'Winter en ski\', me
     <string name="delay_to_start_navigation">Start navigatie na…</string>
     <string name="shared_string_go">Start</string>
 	
-	<string name="action_create">Actie: maak</string>
-	<string name="action_modify">Actie: wijzig</string>
-	<string name="action_delete">Actie: verwijder</string>
+	<string name="action_create">Actie maken</string>
+	<string name="action_modify">Actie wijzigen</string>
+	<string name="action_delete">Actie verwijderen</string>
 	<string name="osm_edits">OSM wijzigingen</string>
 	<string name="osmand_parking_hour">u</string><string name="osmand_parking_minute">min</string><string name="osmand_parking_time_left">over</string> <string name="parking_place_limited">Parkeertijd beperkt tot</string>
 	<string name="your_edits">Uw wijzigingen</string>
@@ -2411,7 +2413,7 @@ Het activeren van deze weergave verandert de kaartstijl in \'Winter en ski\', me
     <string name="osm_editors_ranking">OSM-Bijdragers Ranglijst</string>
     <string name="osm_live_subscription">OSM Live abonnement</string>
     <string name="osm_live_subscribe_btn">Abonneren</string>
-    <string name="osm_live_email_desc">Dit is nodig om je op de hoogte te houden over je abonnement</string>
+    <string name="osm_live_email_desc">Dit is nodig om je informatie te geven over bijdragen</string>
     <string name="osm_live_user_public_name">Openbare Naam</string>
     <string name="osm_live_hide_user_name">Mijn naam niet tonen in verslagen</string>
     <string name="osm_live_support_region">Ondersteunde regio</string>
@@ -2651,7 +2653,7 @@ Als je hulp nodig hebt met OsmAnd: neem contact op met ons support team: support
     <string name="driving_region_australia">Australië</string>
     <string name="lang_kab">Kabylisch</string>
     <string name="selected_categories">Gekozen categorieën</string>
-    <string name="create_custom_poi">Maak custom POI</string>
+    <string name="create_custom_poi">Maak aangepaste POI</string>
     <string name="shared_string_filters">Filters</string>
     <string name="apply_filters">Filter toepassen</string>
     <string name="save_filter">Filter opslaan</string>
