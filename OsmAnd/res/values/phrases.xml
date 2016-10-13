@@ -78,7 +78,7 @@
 	<string name="poi_power_supply">Power supply</string>
 	<string name="poi_medical_system">Medical system</string>
 	<string name="poi_home_visit">Home visit</string>
-	<string name="poi_dishes">Dishes</string>
+	<string name="poi_dish">Dish</string>
 
 <!--  categories -->
 	<string name="poi_shop">Store</string>
