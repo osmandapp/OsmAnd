@@ -5,9 +5,11 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnMultiChoiceClickListener;
 import android.content.Intent;
 import android.support.annotation.DrawableRes;
+import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.AppCompatCheckedTextView;
 import android.support.v7.widget.SwitchCompat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +17,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
-import android.widget.ImageView;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -68,6 +70,8 @@ public class ConfigureMapMenu {
 	private static final Log LOG = PlatformUtil.getLog(ConfigureMapMenu.class);
 	private static final String HIKING_ROUTES_OSMC_ATTR = "hikingRoutesOSMC";
 	private int hikingRouteOSMCValue;
+	private int selectedLanguageIndex;
+	private boolean transliterateNames;
 
 	public interface OnClickListener {
 		void onClick();
@@ -483,19 +487,8 @@ public class ConfigureMapMenu {
 													  final int pos, boolean isChecked) {
 						final OsmandMapTileView view = activity.getMapView();
 						final AlertDialog.Builder b = new AlertDialog.Builder(view.getContext());
-						final AlertDialog alertDialog;
 
-						View titleView = LayoutInflater.from(activity)
-								.inflate(R.layout.language_dialog_title, null);
-						final SwitchCompat check = (SwitchCompat) titleView.findViewById(R.id.check);
-						check.setChecked(view.getSettings().MAP_TRANSLITERATE_NAMES.get());
-						b.setCustomTitle(titleView);
-						check.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-							@Override
-							public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-								view.getSettings().MAP_TRANSLITERATE_NAMES.set(isChecked);
-							}
-						});
+						b.setTitle(activity.getString(R.string.map_locale));
 
 						final String[] txtIds = getSortedMapNamesIds(activity, mapNamesIds,
 								getMapNamesValues(activity, mapNamesIds));
@@ -507,20 +500,57 @@ public class ConfigureMapMenu {
 								break;
 							}
 						}
+						selectedLanguageIndex = selected;
+						transliterateNames = view.getSettings().MAP_TRANSLITERATE_NAMES.get();
+
+						final OnCheckedChangeListener translitChangdListener = new OnCheckedChangeListener() {
+							@Override
+							public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+								transliterateNames = isChecked;
+							}
+						};
+
+						final ArrayAdapter<CharSequence> singleChoiceAdapter = new ArrayAdapter<CharSequence>(activity, R.layout.single_choice_switch_item, R.id.text1, txtValues) {
+							@NonNull
+							@Override
+							public View getView(int position, View convertView, ViewGroup parent) {
+								View v = super.getView(position, convertView, parent);
+								AppCompatCheckedTextView checkedTextView = (AppCompatCheckedTextView) v.findViewById(R.id.text1);
+								if (position == selectedLanguageIndex && position > 0) {
+									checkedTextView.setChecked(true);
+									v.findViewById(R.id.topDivider).setVisibility(View.VISIBLE);
+									v.findViewById(R.id.bottomDivider).setVisibility(View.VISIBLE);
+									v.findViewById(R.id.switchLayout).setVisibility(View.VISIBLE);
+									TextView switchText = (TextView) v.findViewById(R.id.switchText);
+									switchText.setText(activity.getString(R.string.translit_name_if_miss, txtValues[position]));
+									SwitchCompat check = (SwitchCompat) v.findViewById(R.id.check);
+									check.setChecked(transliterateNames);
+									check.setOnCheckedChangeListener(translitChangdListener);
+								} else {
+									checkedTextView.setChecked(position == selectedLanguageIndex);
+									v.findViewById(R.id.topDivider).setVisibility(View.GONE);
+									v.findViewById(R.id.bottomDivider).setVisibility(View.GONE);
+									v.findViewById(R.id.switchLayout).setVisibility(View.GONE);
+								}
+								return v;
+							}
+						};
+
+						b.setAdapter(singleChoiceAdapter, null);
 						b.setSingleChoiceItems(txtValues, selected, new DialogInterface.OnClickListener() {
 							@Override
 							public void onClick(DialogInterface dialog, int which) {
-								if (which != 1 && check.isChecked()) {
-									check.setTag(false);
-									check.setChecked(false);
-								}
+								selectedLanguageIndex = which;
+								((AlertDialog) dialog).getListView().setSelection(which);
+								singleChoiceAdapter.notifyDataSetChanged();
 							}
 						});
+
 						b.setNegativeButton(R.string.shared_string_cancel, null);
 						b.setPositiveButton(R.string.shared_string_apply, new DialogInterface.OnClickListener() {
 							@Override
 							public void onClick(DialogInterface dialog, int which) {
-								view.getSettings().MAP_TRANSLITERATE_NAMES.set(check.isChecked());
+								view.getSettings().MAP_TRANSLITERATE_NAMES.set(transliterateNames);
 								AlertDialog dlg = (AlertDialog) dialog;
 								int index = dlg.getListView().getCheckedItemPosition();
 								view.getSettings().MAP_PREFERRED_LOCALE.set(
@@ -533,20 +563,7 @@ public class ConfigureMapMenu {
 								ad.notifyDataSetInvalidated();
 							}
 						});
-						alertDialog = b.show();
-						check.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-							@Override
-							public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-								int index = alertDialog.getListView().getCheckedItemPosition();
-								if (index != 1) {
-									if (check.getTag() == null) {
-										alertDialog.getListView().setItemChecked(1, true);
-									} else {
-										check.setTag(null);
-									}
-								}
-							}
-						});
+						b.show();
 						return false;
 					}
 				}).createItem());
