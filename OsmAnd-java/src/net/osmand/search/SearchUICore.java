@@ -191,7 +191,7 @@ public class SearchUICore {
 						} else if (subType1.equals(subType2)) {
 							if (subType1.contains("cn_ref") || subType1.contains("wn_ref")
 									|| (subType1.startsWith("route_hiking_") && subType1.endsWith("n_poi"))) {
-								similarityRadius = 10000;
+								similarityRadius = 50000;
 							}
 						}
 					} else if(ObjectType.isAddress(r1.objectType) && ObjectType.isAddress(r2.objectType)) {
