@@ -550,7 +550,7 @@ public class ConfigureMapMenu {
 						b.setPositiveButton(R.string.shared_string_apply, new DialogInterface.OnClickListener() {
 							@Override
 							public void onClick(DialogInterface dialog, int which) {
-								view.getSettings().MAP_TRANSLITERATE_NAMES.set(transliterateNames);
+								view.getSettings().MAP_TRANSLITERATE_NAMES.set(selectedLanguageIndex > 0 && transliterateNames);
 								AlertDialog dlg = (AlertDialog) dialog;
 								int index = dlg.getListView().getCheckedItemPosition();
 								view.getSettings().MAP_PREFERRED_LOCALE.set(
