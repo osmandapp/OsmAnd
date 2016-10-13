@@ -29,28 +29,13 @@
             android:textStyle="bold"
             tools:text="Hiking symbols overlay"/>
 
-        <LinearLayout
+        <Spinner
+            android:id="@+id/spinner"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:orientation="horizontal">
-
-            <Spinner
-                android:id="@+id/spinner"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="-8dp"
-                android:layout_marginTop="16dp"
-                android:layout_weight="1"
-                android:background="@null"
-                android:textSize="@dimen/default_list_text_size"/>
-
-            <ImageView
-                android:id="@+id/dropDownIcon"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:src="@drawable/ic_action_arrow_drop_down"/>
-
-        </LinearLayout>
+            android:layout_marginLeft="-8dp"
+            android:layout_marginTop="12dp"
+            android:textSize="@dimen/default_list_text_size"/>
 
         <View
             android:layout_width="match_parent"

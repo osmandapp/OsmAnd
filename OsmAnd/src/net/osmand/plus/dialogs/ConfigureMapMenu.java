@@ -859,15 +859,6 @@ public class ConfigureMapMenu {
 					TextView title = (TextView) spinnerView.findViewById(R.id.title);
 					final Spinner spinner = (Spinner) spinnerView.findViewById(R.id.spinner);
 					TextView description = (TextView) spinnerView.findViewById(R.id.description);
-					ImageView dropDownIcon = (ImageView) spinnerView.findViewById(R.id.dropDownIcon);
-					dropDownIcon.setImageDrawable(
-							app.getIconsCache().getIcon(R.drawable.ic_action_arrow_drop_down, app.getSettings().isLightContent()));
-					dropDownIcon.setOnClickListener(new View.OnClickListener() {
-						@Override
-						public void onClick(View v) {
-							spinner.performClick();
-						}
-					});
 
 					title.setText(p.getName());
 					description.setText(p.getDescription());
