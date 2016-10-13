@@ -2287,4 +2287,5 @@ Om du tycker om OsmAnd och OSM och vill stödja dem så är detta ett utmärkt s
     <string name="delete_filter">Radera filter</string>
     <string name="new_filter">Nytt filter</string>
     <string name="new_filter_desc">Ange ett namn på det nya filtret. Det kommer att finnas i kategorilistan.</string>
+    <string name="translit_name_if_miss">"Transkribera om  %1$s namn saknas"</string>
     </resources>
