@@ -1436,4 +1436,29 @@
 	<string name="poi_fireplace">Supazter</string>
 	<string name="poi_beach_surface_type">Gainazala</string>
 	<string name="poi_water_characteristic">Uraren ezaugarriak</string>
+	<string name="poi_payment_sms_yes">SMS bidezko ordainketak</string>
+	<string name="poi_payment_sms_no">Ez dira SMS bidezko ordainketak onartzen</string>
+	<string name="poi_social_facility_for_senior">Gizarte talde xehea: adinekoak</string>
+	<string name="poi_social_facility_for_child">Gizarte talde xehea: haurrak</string>
+	<string name="poi_social_facility_for_orphan">Gizarte talde xehea: umezurtzak</string>
+	<string name="poi_social_facility_for_disabled">Gizarte talde xehea: ezgaituak</string>
+	<string name="poi_social_facility_for_mental_health">Gizarte talde xehea: arazo mentalak dituzten gaixoak</string>
+	<string name="poi_social_facility_for_juvenile">Gizarte talde xehea: gazteak</string>
+	<string name="poi_social_facility_for_homeless">Gizarte talde xehea: etxegabeak</string>
+	<string name="poi_social_facility_for_migrant">Gizarte talde xehea: etorkinak</string>
+	<string name="poi_social_facility_for_underprivileged">Gizarte talde xehea: txiroak</string>
+	<string name="poi_social_facility_for_drug_addicted">Gizarte talde xehea: drogamenpekoak</string>
+	<string name="poi_social_facility_for_unemployed">Gizarte talde xehea: langabeak</string>
+	<string name="poi_social_facility_for_diseased">Gizarte talde xehea: gaixoak</string>
+	<string name="poi_social_facility_for_child_juvenile">Gizarte talde xehea: haurrak;gazteak</string>
+
+	<string name="poi_additional_atm_yes">Kutxazain automatikoa: bai</string>
+	<string name="poi_atm_no">Kutxazain automatikoa: ez</string>
+
+	<string name="poi_construction_yes">Eraikuntzan</string>
+	<string name="poi_protected_area">Babestutako area</string>
+	<string name="poi_protection_title">Babes titulua</string>
+	<string name="poi_protection_object_historic">Babestutakoa: historikoa</string>
+	<string name="poi_protection_object_nature">Babestutakoa: natura</string>
+	<string name="poi_protection_object_habitat">Babestutakoa: ingurugiroa</string>
 	</resources>
