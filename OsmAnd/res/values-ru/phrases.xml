@@ -1303,7 +1303,7 @@
 	<string name="poi_love_hotel">Love-отель</string>
 
 	<string name="poi_payment_type">Тип оплаты</string>
-	<string name="poi_payment_fuel_type">Тип оплаты</string>
+	<string name="poi_payment_fuel_type">Топливные карты</string>
 	<string name="poi_fuel_type">Вид топлива</string>
 	<string name="poi_fuel_avia_type">Вид топлива</string>
 
@@ -3321,5 +3321,7 @@
 	<string name="poi_cuisine_jewish">Еврейская</string>
 	<string name="poi_cuisine_bulgarian">Болгарская</string>
 	<string name="poi_cuisine_tibetan">Тибетская</string>
+
+	<string name="poi_payment_transport_type">Тип оплаты (транспорт)</string>
 
 </resources>
