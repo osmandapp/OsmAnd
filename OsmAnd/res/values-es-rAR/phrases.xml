@@ -1604,21 +1604,21 @@
 	<string name="poi_microbrewery_yes">Micro-cervecería</string>
 	<string name="poi_microbrewery_no">Sin micro-cervecería</string>
 
-	<string name="poi_takeaway_yes">Si</string>
+	<string name="poi_takeaway_yes">Comidas para llevar: Si</string>
 	<string name="poi_takeaway_no">Comidas para llevar: No</string>
 	<string name="poi_takeaway_only">Sólo comidas para llevar</string>
 
 	<string name="poi_delivery_no">Sin servicio a domicilio</string>
-	<string name="poi_delivery_yes">Si</string>
+	<string name="poi_delivery_yes">Con servicio a domicilio</string>
 	<string name="poi_delivery_only">Sólo servicio a domicilio</string>
 
-	<string name="poi_outdoor_seating_yes">Si</string>
+	<string name="poi_outdoor_seating_yes">Con asientos exteriores</string>
 	<string name="poi_outdoor_seating_no">Sin asientos exteriores</string>
-	<string name="poi_outdoor_seating_terrace">Terraza</string>
-	<string name="poi_outdoor_seating_sidewalk">Vereda</string>
-	<string name="poi_outdoor_seating_pedestrian_zone">Zona peatonal</string>
-	<string name="poi_outdoor_seating_garden">Jardín</string>
-	<string name="poi_outdoor_seating_patio">Patio</string>
+	<string name="poi_outdoor_seating_terrace">Asientos exteriores: Terraza</string>
+	<string name="poi_outdoor_seating_sidewalk">Asientos exteriores: Vereda</string>
+	<string name="poi_outdoor_seating_pedestrian_zone">Asientos exteriores: Zona peatonal</string>
+	<string name="poi_outdoor_seating_garden">Asientos exteriores: Jardín</string>
+	<string name="poi_outdoor_seating_patio">Asientos exteriores: Patio</string>
 
 	<string name="poi_cocktails_yes">Si</string>
 
@@ -2131,12 +2131,12 @@
 	<string name="poi_group_only_no">Sólo para grupos: No</string>
 	<string name="poi_washing_machine_yes">Si</string>
 	<string name="poi_washing_machine_no">Sin lavarropa</string>
-	<string name="poi_shower_yes">Si</string>
+	<string name="poi_shower_yes">Con ducha</string>
 	<string name="poi_shower_no">Sin ducha</string>
-	<string name="poi_shower_hot">Caliente</string>
-	<string name="poi_shower_outdoor">Exterior</string>
-	<string name="poi_shower_cold">Fría</string>
-	<string name="poi_shower_indoor">Interior</string>
+	<string name="poi_shower_hot">Ducha caliente</string>
+	<string name="poi_shower_outdoor">Ducha exterior</string>
+	<string name="poi_shower_cold">Ducha fría</string>
+	<string name="poi_shower_indoor">Ducha interior</string>
 	<string name="poi_caravans_yes">Si</string>
 	<string name="poi_caravans_no">No</string>
 	<string name="poi_impromptu_yes">Improvisado: Si</string>
@@ -3323,4 +3323,17 @@
 	<string name="poi_cuisine_brasserie">Comida a las brasas (brasserie)</string>
 	<string name="poi_cuisine_pita">Pan pita</string>
 	<string name="poi_cuisine_tex_mex">Comida mexicano-estadounidense (tex-mex)</string>
+	<string name="poi_outdoor_seating_filter_yes">Si</string>
+	<string name="poi_delivery_filter_yes">Si</string>
+	<string name="poi_diet_vegetarian_filter_yes">Vegetariana</string>
+	<string name="poi_diet_vegan_filter_yes">Vegana</string>
+	<string name="poi_diet_gluten_free_filter_yes">Libre de gluten</string>
+	<string name="poi_diet_kosher_filter_yes">Kosher</string>
+	<string name="poi_diet_halal_filter_yes">Halal</string>
+	<string name="poi_diet_lactose_free_filter_yes">Libre de lactosa</string>
+	<string name="poi_takeaway_filter_yes">Comida para llevar</string>
+	<string name="poi_shower_filter_yes">Ducha</string>
+
+<string name="poi_cuisine_gyros">Carne asada en horno giratorio vertical (gyros)</string>
+	<string name="poi_cuisine_yakiniku">Carne asada estilo japonés (yakiniku)</string>
 	</resources>
