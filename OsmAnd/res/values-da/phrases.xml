@@ -3103,7 +3103,7 @@
 <string name="poi_shop_craft">Kunst og håndværk tilbehørsbutik</string>
 
 	<string name="poi_fuel_avia_type">Type</string>
-	<string name="poi_payment_fuel_type">Betalingstype</string>
+	<string name="poi_payment_fuel_type">Benzinkort</string>
 	<string name="poi_internet_access_type">Internet adgangstype</string>
 	<string name="poi_vending_type">Automattype</string>
 	<string name="poi_bicycle_service">Cykelservice</string>
@@ -3374,5 +3374,7 @@
 	<string name="poi_diet_lactose_free_filter_yes">Laktosefri</string>
 <string name="poi_takeaway_filter_yes">Takeaway</string>
 	<string name="poi_shower_filter_yes">Bruser</string>
+
+<string name="poi_payment_transport_type">Betalingstype (transport)</string>
 
 </resources>
