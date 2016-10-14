@@ -906,7 +906,7 @@
 
 	<string name="poi_operator">Оператор</string>
 	<string name="poi_brand">Торговая марка</string>
-	<string name="poi_fee">Взимается оплата</string>
+	<string name="poi_fee">Оплата</string>
 	<string name="poi_fee_yes">Да</string>
 	<string name="poi_fee_no">Нет</string>
 	<string name="poi_drinking_water_yes">Да</string>
@@ -928,8 +928,8 @@
 
 	<string name="poi_population">Население</string>
 	<string name="poi_start_date">Дата открытия</string>
-	<string name="poi_wheelchair_accessibility">Доступноcть для инвалидных кресел</string>
-	<string name="poi_wheelchair_yes">Есть</string>
+	<string name="poi_wheelchair_accessibility">Доступно для инвалидных кресел</string>
+	<string name="poi_wheelchair_yes">Да</string>
 	<string name="poi_wheelchair_no">Нет</string>
 	<string name="poi_wheelchair_limited">Ограничено</string>
 	<string name="poi_wholesale">Опт</string>
@@ -1359,7 +1359,7 @@
 	<string name="poi_payment_cryptocurrencies_no">Криптовалюты не принимаются</string>
 	<string name="poi_payment_others_yes">Другие</string>
 	<string name="poi_payment_others_no">Другие методы оплаты не принимаются</string>
-	<string name="poi_payment_routex_yes">Карты Routex</string>
+	<string name="poi_payment_routex_yes">Routex</string>
 	<string name="poi_payment_routex_no">Топливные карты Routex не принимаются</string>
 	<string name="poi_payment_bancomat_yes">Bancomat</string>
 	<string name="poi_payment_bancomat_no">Bancomat не принимается</string>
