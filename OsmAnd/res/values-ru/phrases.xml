@@ -1454,21 +1454,27 @@
 	<string name="poi_events_venue">Место проведения мероприятий</string>
 
 	<string name="poi_diet">Пищевые ограничения</string>
+	<string name="poi_diet_vegetarian_filter_yes">Для вегетарианцев</string>
 	<string name="poi_diet_vegetarian_only">Только вегетарианское питание</string>
 	<string name="poi_diet_vegetarian_yes">Вегетарианское питание</string>
 	<string name="poi_diet_vegetarian_no">Вегетарианское питание не предлагается</string>
+	<string name="poi_diet_vegan_filter_yes">Для веганов</string>
 	<string name="poi_diet_vegan_only">Только веганское питание</string>
 	<string name="poi_diet_vegan_yes">Веганское питание</string>
 	<string name="poi_diet_vegan_no">Веганское питание не предлагается</string>
+	<string name="poi_diet_gluten_free_filter_yes">Безглютеновое питание</string>
 	<string name="poi_diet_gluten_free_only">Только безглютеновое питание</string>
 	<string name="poi_diet_gluten_free_yes">Безглютеновое питание</string>
 	<string name="poi_diet_gluten_free_no">Безглютеновое питание не предлагается</string>
+	<string name="poi_diet_kosher_filter_yes">Кошерное питание</string>
 	<string name="poi_diet_kosher_only">Только кошерное питание</string>
 	<string name="poi_diet_kosher_yes">Кошерное питание</string>
 	<string name="poi_diet_kosher_no">Кошерное питание не предлагается</string>
+	<string name="poi_diet_halal_filter_yes">Халяль</string>
 	<string name="poi_diet_halal_only">Только халяльная пища</string>
 	<string name="poi_diet_halal_yes">Халяльная пища</string>
 	<string name="poi_diet_halal_no">Халяльная пища не предлагается</string>
+	<string name="poi_diet_lactose_free_filter_yes">Безлактозные продукты</string>
 	<string name="poi_diet_lactose_free_only">Только безлактозные продукты</string>
 	<string name="poi_diet_lactose_free_yes">Безлактозные продукты</string>
 	<string name="poi_diet_lactose_free_no">Безлактозные продукты не предлагаются</string>
@@ -1494,11 +1500,13 @@
 	<string name="poi_takeaway_only">Только на вынос</string>
 
 	<string name="poi_delivery">Доставка</string>
+	<string name="poi_delivery_filter_yes">С доставкой</string>
 	<string name="poi_delivery_yes">Есть</string>
 	<string name="poi_delivery_no">Без доставки</string>
 	<string name="poi_delivery_only">Только с доставкой</string>
 
 	<string name="poi_outdoor_seating">Места на открытом воздухе</string>
+	<string name="poi_outdoor_seating_filter_yes">Места на открытом воздухе</string>
 	<string name="poi_outdoor_seating_yes">Есть</string>
 	<string name="poi_outdoor_seating_no">Нет мест на открытом воздухе</string>
 	<string name="poi_outdoor_seating_terrace">На террасе</string>
