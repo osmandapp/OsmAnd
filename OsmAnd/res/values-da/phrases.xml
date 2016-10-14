@@ -1631,7 +1631,7 @@
 	<string name="poi_delivery_no">Ingen levering</string>
 	<string name="poi_delivery_only">Kun levering</string>
 
-	<string name="poi_outdoor_seating_yes">Udendørs siddepladser: Ja</string>
+	<string name="poi_outdoor_seating_yes">Udendørs siddepladser: ja</string>
 	<string name="poi_outdoor_seating_no">Ingen udendørsservering</string>
 	<string name="poi_outdoor_seating_terrace">Udendørs siddepladser: terrasse</string>
 	<string name="poi_outdoor_seating_sidewalk">Udendørs siddepladser: fortov</string>
@@ -2153,12 +2153,12 @@
 	<string name="poi_group_only_no">Kun grupper: nej</string>
 	<string name="poi_washing_machine_yes">Ja</string>
 	<string name="poi_washing_machine_no">Vaskemaskine: nej</string>
-	<string name="poi_shower_yes">Brusebad: Ja</string>
+	<string name="poi_shower_yes">Bruser: ja</string>
 	<string name="poi_shower_no">Brusebad: nej</string>
-	<string name="poi_shower_hot">Brusebad: varmtvand</string>
-	<string name="poi_shower_outdoor">Brusebad: udendørs</string>
-	<string name="poi_shower_cold">Brusebad: koldtvand</string>
-	<string name="poi_shower_indoor">Brusebad: indendørs</string>
+	<string name="poi_shower_hot">Bruser: varmtvand</string>
+	<string name="poi_shower_outdoor">Bruser: udendørs</string>
+	<string name="poi_shower_cold">Bruser: koldtvand</string>
+	<string name="poi_shower_indoor">Bruser: indendørs</string>
 	<string name="poi_caravans_yes">Ja</string>
 	<string name="poi_caravans_no">Campingvogne: nej</string>
 	<string name="poi_impromptu_yes">Improviseret: ja</string>
@@ -3367,12 +3367,12 @@
 	<string name="poi_outdoor_seating_filter_yes">Ja</string>
 	<string name="poi_delivery_filter_yes">Ja</string>
 	<string name="poi_diet_vegetarian_filter_yes">Vegetar</string>
-	<string name="poi_diet_vegan_filter_yes">Veganer</string>
+	<string name="poi_diet_vegan_filter_yes">Vegan</string>
 	<string name="poi_diet_gluten_free_filter_yes">Glutenfri</string>
 	<string name="poi_diet_kosher_filter_yes">Kosher</string>
 	<string name="poi_diet_halal_filter_yes">Halal</string>
 	<string name="poi_diet_lactose_free_filter_yes">Laktosefri</string>
 <string name="poi_takeaway_filter_yes">Takeaway</string>
-	<string name="poi_shower_filter_yes">Brusebad</string>
+	<string name="poi_shower_filter_yes">Bruser</string>
 
 </resources>
