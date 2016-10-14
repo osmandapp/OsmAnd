@@ -2603,4 +2603,5 @@ OsmAnd aplikazioarekin laguntza behar baduzu, jarri kontaktuan gure laguntza tal
     <string name="subcategories">Azpikategoriak</string>
     <string name="translit_name_if_miss">Transliteratu %1$s izena falta bada</string>
     <string name="translit_names">Transliteratu izenak</string>
+    <string name="search_hint">Idatzi hiria, helbidea, POI izena</string>
     </resources>
