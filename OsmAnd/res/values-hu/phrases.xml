@@ -1907,4 +1907,51 @@
 	<string name="poi_beach_surface_type">Felület</string>
 	<string name="poi_nudism">Nudista</string>
 
-</resources>
+<string name="poi_diet">Diéta</string>
+	<string name="poi_delivery">Házhoz szállítás</string>
+	<string name="poi_cuisine_chicken">Csirke</string>
+	<string name="poi_cuisine_fried_chicken">Rántott csirke</string>
+	<string name="poi_cuisine_coffee">Kávé</string>
+	<string name="poi_cuisine_burger">Hamburger</string>
+	<string name="poi_cuisine_ice_cream">Fagylalt</string>
+	<string name="poi_cuisine_kebab">Kebab</string>
+	<string name="poi_cuisine_sandwich">Szendvics</string>
+	<string name="poi_cuisine_sushi">Szusi</string>
+	<string name="poi_cuisine_swedish">Svéd</string>
+	<string name="poi_dish">Konyha jellege</string>
+
+<string name="poi_wiki_lang_ku">Kurd wiki</string>
+	<string name="poi_cuisine_latin_american">Latin-amerikai</string>
+	<string name="poi_cuisine_american">Amerikai</string>
+	<string name="poi_cuisine_asian">Ázsiai</string>
+	<string name="poi_massage_chinese">Kínai</string>
+	<string name="poi_health_specialty_traditional_chinese_medicine_yes">Hagyományos kínai orvoslás</string>
+	<string name="poi_medical_system_chinese_yes">Hagyományos kínai</string>
+	<string name="poi_cuisine_chinese">Kínai</string>
+	<string name="poi_cuisine_german">Német</string>
+	<string name="poi_cuisine_indian">Indiai</string>
+	<string name="poi_cuisine_italian">Olasz</string>
+	<string name="poi_cuisine_japanese">Japán</string>
+	<string name="poi_cuisine_mexican">Mexikói</string>
+	<string name="poi_cuisine_regional">Regionális</string>
+	<string name="poi_cuisine_african">Afrikai</string>
+	<string name="poi_cuisine_arab">Arab</string>
+	<string name="poi_cuisine_argentinian">Argentin</string>
+	<string name="poi_cuisine_austrian">Osztrák</string>
+	<string name="poi_cuisine_australian">Ausztrál</string>
+	<string name="poi_cuisine_bakery">Pékség</string>
+	<string name="poi_cuisine_balkan">Balkán</string>
+	<string name="poi_wiki_lang_bar">Bajor wiki</string>
+	<string name="poi_cuisine_bavarian">Bajor</string>
+	<string name="poi_cuisine_barbecue">Grill</string>
+	<string name="poi_wiki_lang_eu">Baszk wiki</string>
+	<string name="poi_cuisine_basque">Baszk</string>
+	<string name="poi_cuisine_belgian">Belga</string>
+	<string name="poi_cuisine_bistro">Bisztró</string>
+	<string name="poi_cuisine_bolivian">Bolíviai</string>
+	<string name="poi_cuisine_pizza">Pizza</string>
+	<string name="poi_cuisine_fish_and_chips">Hal sültkrumplival</string>
+	<string name="poi_cuisine_seafood">Tenger gyümölcsei</string>
+	<string name="poi_cuisine_noodle">Nudli</string>
+	<string name="poi_cuisine_donut">Fánk</string>
+	</resources>
