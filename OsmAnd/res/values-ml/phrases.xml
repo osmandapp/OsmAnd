@@ -848,7 +848,7 @@
 
 	<string name="poi_payment_coins_no">"നാണയം സ്വീകരിക്കില്ല "</string>
 	<string name="poi_fuel_avia_type">ഇനം</string>
-	<string name="poi_payment_fuel_type">പേയ്മെന്റ് ടൈപ്പ്</string>
+	<string name="poi_payment_fuel_type">ഇന്ധന കാര്‍ഡുകള്‍</string>
 	<string name="poi_internet_access_type">ഇന്റെര്‍നെറ്റ് ഉപയോഗിക്കാനുള്ള വിധം</string>
 	<string name="poi_vending_type">"വെന്ഡിങ്ങ് മെഷിന്‍ "</string>
 	<string name="poi_bicycle_service">"സൈക്കിള്‍ ഷോപ്പ് "</string>
@@ -1476,16 +1476,16 @@
 	<string name="poi_diet_vegan_yes">വെജിറ്റെറിയന്‍ ഭക്ഷണം</string>
 	<string name="poi_diet_vegan_no">വെജിറ്റെറിയന്‍ ഭക്ഷണം ഇല്ല</string>
 	<string name="poi_diet_gluten_free_only">ഗ്ളൂടെന്‍ ഫ്രീ ഭക്ഷണം മാത്രം</string>
-	<string name="poi_diet_gluten_free_yes">"ഗ്ളൂടെന്‍ ഫ്രീ ഭക്ഷണം "</string>
+	<string name="poi_diet_gluten_free_yes">ഗ്ളൂടെന്‍ ഫ്രീ ഭക്ഷണം</string>
 	<string name="poi_diet_gluten_free_no">ഗ്ളൂടെന്‍ ഫ്രീ ഭക്ഷണം ഇല്ല</string>
 	<string name="poi_diet_kosher_only">കോഷര്‍ ഭക്ഷണം മാത്ര‌ം</string>
-	<string name="poi_diet_kosher_yes">"കോഷര്‍ ഭക്ഷണം "</string>
+	<string name="poi_diet_kosher_yes">കോഷര്‍ ഭക്ഷണം</string>
 	<string name="poi_diet_kosher_no">കോഷര്‍ ഭക്ഷണം ഇല്ല</string>
 	<string name="poi_diet_halal_only">ഹലാല്‍ ഭക്ഷണം മാത്ര‌ം</string>
-	<string name="poi_diet_halal_yes">"ഹലാല്‍ ഭക്ഷണം "</string>
+	<string name="poi_diet_halal_yes">ഹലാല്‍ ഭക്ഷണം</string>
 	<string name="poi_diet_halal_no">"ഹലാല്‍ ഭക്ഷണം ഇല്ല "</string>
 	<string name="poi_diet_lactose_free_only">പാലുപയോഗിക്കാത്ത ഭക്ഷണം മാത്രം</string>
-	<string name="poi_diet_lactose_free_yes">"പാലുപയോഗിക്കാത്ത ഭക്ഷണം "</string>
+	<string name="poi_diet_lactose_free_yes">പാലുപയോഗിക്കാത്ത ഭക്ഷണം</string>
 	<string name="poi_diet_lactose_free_no">"പാലുപയോഗിക്കാത്ത ഭക്ഷണം ഇല്ല "</string>
 	<string name="poi_diet_pescetarian_yes">"മത്സ്യോത്പന്ന  ഭക്ഷണം"</string>
 
@@ -1498,18 +1498,18 @@
 	<string name="poi_microbrewery_yes">മൈക്രോബ്രൂവറി</string>
 	<string name="poi_microbrewery_no">മൈക്രോ‌ബ്രൂ‌വറി ഇല്ല</string>
 
-	<string name="poi_takeaway_yes">ഉണ്ട്</string>
+	<string name="poi_takeaway_yes">പാര്‍സല്‍</string>
 	<string name="poi_takeaway_no">പാര്‍സല്‍ ഇല്ല</string>
 	<string name="poi_takeaway_only">പാര്‍സല്‍ മാത്രം</string>
 
-	<string name="poi_delivery_yes">ഉണ്ട്</string>
+	<string name="poi_delivery_yes">വിതരണം</string>
 	<string name="poi_delivery_no">വിതരണം ഇല്ല</string>
 	<string name="poi_delivery_only">വിതരണം മാത്രം</string>
 
-	<string name="poi_outdoor_seating_yes">ഉണ്ട്</string>
+	<string name="poi_outdoor_seating_yes">പുറത്ത് സീറ്റിങ്ങ്:ഉണ്ട്</string>
 	<string name="poi_outdoor_seating_no">"ഔട് ഡോര്‍ സീറ്റിങ്ങില്ല "</string>
-	<string name="poi_outdoor_seating_terrace">ടെറസ്സ്</string>
-	<string name="poi_outdoor_seating_sidewalk">"നടപ്പാത "</string>
+	<string name="poi_outdoor_seating_terrace">ഔട്ട്ഡോര്‍ സീറ്റിങ്ങ്:ടെറസ്സ്</string>
+	<string name="poi_outdoor_seating_sidewalk">നടപ്പാത</string>
 	<string name="poi_outdoor_seating_pedestrian_zone">നടവഴി</string>
 	<string name="poi_outdoor_seating_garden">ഉദ്യാനം</string>
 	<string name="poi_outdoor_seating_patio">പേഷിയൊ</string>
