@@ -1550,26 +1550,26 @@
 
 	<string name="poi_events_venue">Domo de ceremonioj</string>
 
-	<string name="poi_diet_vegetarian_only">Nur senvianda dieto</string>
-	<string name="poi_diet_vegetarian_yes">Senvianda dieto</string>
+	<string name="poi_diet_vegetarian_only">Nur senvianda</string>
+	<string name="poi_diet_vegetarian_yes">Senvianda</string>
 	<string name="poi_diet_vegetarian_no">Senvianda dieto: ne</string>
 	<string name="poi_diet_vegetarian_few">Senvianda dieto: kelkaj manĝaĵoj</string>
-	<string name="poi_diet_vegan_only">Nur senkreskaĵa dieto</string>
-	<string name="poi_diet_vegan_yes">Senreskaĵa dieto</string>
+	<string name="poi_diet_vegan_only">Nur senkreskaĵa</string>
+	<string name="poi_diet_vegan_yes">Senreskaĵa</string>
 	<string name="poi_diet_vegan_no">Senkreskaĵa dieto: ne</string>
-	<string name="poi_diet_gluten_free_only">Nur sen-glutena dieto</string>
-	<string name="poi_diet_gluten_free_yes">Sen-glutena dieto</string>
+	<string name="poi_diet_gluten_free_only">Nur sen-glutena</string>
+	<string name="poi_diet_gluten_free_yes">Sen-glutena</string>
 	<string name="poi_diet_gluten_free_no">Senglutena dieto: ne</string>
-	<string name="poi_diet_kosher_only">Nur koŝera dieto</string>
-	<string name="poi_diet_kosher_yes">Koŝera dieto</string>
+	<string name="poi_diet_kosher_only">Nur koŝera</string>
+	<string name="poi_diet_kosher_yes">Koŝera</string>
 	<string name="poi_diet_kosher_no">Koŝera dieto: ne</string>
-	<string name="poi_diet_halal_only">Nur halala dieto</string>
-	<string name="poi_diet_halal_yes">Halala dieto</string>
+	<string name="poi_diet_halal_only">Nur halala</string>
+	<string name="poi_diet_halal_yes">Halala</string>
 	<string name="poi_diet_halal_no">Halala dieto: ne</string>
-	<string name="poi_diet_lactose_free_only">Nur sen-laktoza dieto</string>
-	<string name="poi_diet_lactose_free_yes">Sen-laktoza dieto</string>
+	<string name="poi_diet_lactose_free_only">Nur sen-laktoza</string>
+	<string name="poi_diet_lactose_free_yes">Sen-laktoza</string>
 	<string name="poi_diet_lactose_free_no">Sen-laktoza dieto: ne</string>
-	<string name="poi_diet_pescetarian_yes">Sen-vianda-kun-fiŝa dieto</string>
+	<string name="poi_diet_pescetarian_yes">Sen-vianda-kun-fiŝa</string>
 
 	<string name="poi_drive_in_yes">Jes</string>
 	<string name="poi_public_bath">Banejo publika</string>
@@ -2075,41 +2075,41 @@
 	<string name="poi_castle_type_castrum">Speco de kastelo: kastrumo (romia fortikaĵo)</string>
 	<string name="poi_castle_type_shiro">Speco de kastelo: shiro (japana kastelo)</string>
 
-	<string name="poi_massage_thai">Masaĝo: taja</string>
-	<string name="poi_massage_sexual">Masaĝo: seksa</string>
-	<string name="poi_massage_chinese">Masaĝo: ĉina</string>
+	<string name="poi_massage_thai">Taja</string>
+	<string name="poi_massage_sexual">Seksa</string>
+	<string name="poi_massage_chinese">Ĉina</string>
 	<string name="poi_massage_yes">Masaĝo</string>
-	<string name="poi_massage_therapeutic">Masaĝo: terapia</string>
+	<string name="poi_massage_therapeutic">Terapia</string>
 
 	<string name="poi_sauna_yes">Ŝvitbanejo</string>
 	<string name="poi_solarium_yes">Sunbrunigejo</string>
 
-	<string name="poi_tents_yes">Tendoj permesitaj</string>
+	<string name="poi_tents_yes">Permesataj</string>
 	<string name="poi_tents_no">Tendoj malpermesitaj</string>
 	<string name="poi_openfire_yes">Fajro permesita</string>
 	<string name="poi_openfire_no">Fajro malpermesita</string>
-	<string name="poi_backcountry_yes">Kampadejo sen oportunaĵoj (sovaĝa)</string>
-	<string name="poi_backcountry_no">Kampadejo kun oportunaĵoj</string>
+	<string name="poi_backcountry_yes">Jes</string>
+	<string name="poi_backcountry_no">Ne</string>
 	<string name="poi_scout_yes">Skolta kampadejo: jes</string>
 	<string name="poi_scout_no">Skolta kampadejo: ne</string>
 	<string name="poi_group_only_yes">Nur por grupoj: jes</string>
 	<string name="poi_group_only_no">Nur por grupoj: ne</string>
-	<string name="poi_washing_machine_yes">Lavmaŝino: jes</string>
+	<string name="poi_washing_machine_yes">Jes</string>
 	<string name="poi_washing_machine_no">Lavmaŝino: ne</string>
-	<string name="poi_shower_yes">Duŝejo: jes</string>
+	<string name="poi_shower_yes">Jes</string>
 	<string name="poi_shower_no">Duŝejo: ne</string>
-	<string name="poi_shower_hot">Duŝejo: varma akvo</string>
-	<string name="poi_shower_outdoor">Duŝejo: ekster-dome</string>
-	<string name="poi_shower_cold">Duŝejo: malvarma akvo</string>
-	<string name="poi_shower_indoor">Duŝejo: en-dome</string>
-	<string name="poi_caravans_yes">Kampadveturiloj: permesitaj</string>
+	<string name="poi_shower_hot">Varma akvo</string>
+	<string name="poi_shower_outdoor">Ekster-dome</string>
+	<string name="poi_shower_cold">Malvarma akvo</string>
+	<string name="poi_shower_indoor">En-dome</string>
+	<string name="poi_caravans_yes">Jes</string>
 	<string name="poi_caravans_no">Kampadveturiloj: malpermesitaj</string>
 	<string name="poi_impromptu_yes">Neformala: jes</string>
 	<string name="poi_impromptu_no">Neformala: ne</string>
 	<string name="poi_sanitary_dump_station_yes">Ejo por forigado de fekaĵoj: jes</string>
 	<string name="poi_sanitary_dump_station_no">Ejo por forigado de fekaĵoj: ne</string>
 	<string name="poi_sanitary_dump_station_customers">Ejo por forigado de fekaĵoj: nur por klientoj</string>
-	<string name="poi_power_supply_yes">Energifonto: jes</string>
+	<string name="poi_power_supply_yes">Jes</string>
 	<string name="poi_power_supply_no">Energifonto: ne</string>
 	<string name="poi_power_supply_cee_17_blue">Energifonto (ŝtopilo): CEE 17 blua (IEC 60309)</string>
 	<string name="poi_power_supply_cee_7_4">Energifonto (ŝtopilo): CEE 7/4 (F-tipo)</string>
@@ -2925,16 +2925,16 @@
 
 	<string name="poi_payment_account_cards_yes">Bankokartoj</string>
 	<string name="poi_payment_account_cards_no">Bankokartoj malakceptataj</string>
-	<string name="poi_health_specialty_general_yes">Specialisto: kuracisto familia</string>
-	<string name="poi_health_specialty_ophthalmology_yes">Specialisto: okul-kuracisto (oftalmologiisto)</string>
-	<string name="poi_health_specialty_gynaecology_yes">Specialisto: virin-kuracisto (ginekologiisto)</string>
-	<string name="poi_health_specialty_internal_medicine_yes">Specialisto: isto de interna medicino</string>
-	<string name="poi_health_specialty_orthopaedics_yes">Specialisto: ortopediisto</string>
-	<string name="poi_health_specialty_otolaryngology_yes">Specialisto: orel-naz-gorĝ-isto (otorinolaringologiisto)</string>
-	<string name="poi_health_specialty_paediatrics_yes">Specialisto: infan-kuracisto (pediatro)</string>
+	<string name="poi_health_specialty_general_yes">Ĝenerala (familia kuracado)</string>
+	<string name="poi_health_specialty_ophthalmology_yes">Okul-medicino (oftalmologio)</string>
+	<string name="poi_health_specialty_gynaecology_yes">Inseksorganoscienco (ginekologio)</string>
+	<string name="poi_health_specialty_internal_medicine_yes">Interna medicino</string>
+	<string name="poi_health_specialty_orthopaedics_yes">Ortopedio</string>
+	<string name="poi_health_specialty_otolaryngology_yes">Orel-naz-gorĝ-medicino (otorinolaringologio)</string>
+	<string name="poi_health_specialty_paediatrics_yes">Infan-medicino (pediatrio)</string>
 	<string name="poi_health_specialty_paediatrics_no">Sen specialisto de infan-medicino (pediatro)</string>
-	<string name="poi_health_specialty_dermatology_yes">Specialisto: haŭt-kuracisto (dermatologiisto)</string>
-	<string name="poi_health_specialty_urology_yes">Specialisto: urin-sistem-kuracisto (urologiisto)</string>
+	<string name="poi_health_specialty_dermatology_yes">Haŭt-medicino (dermatologio)</string>
+	<string name="poi_health_specialty_urology_yes">Urin-sistem-scienco (urologio)</string>
 	<string name="poi_health_specialty_surgery_yes">Specialisto: ĥirurgiisto</string>
 	<string name="poi_health_specialty_radiology_yes">Specialisto: radi-kuracisto (radiologiisto)</string>
 	<string name="poi_health_specialty_palliative_medicine_yes">Specialisto: isto de zorgado pri nekuracebluloj</string>
@@ -3110,4 +3110,13 @@
 	<string name="poi_public_bookcase_type_metal_cabinet">Speco: metala ŝranko</string>
 	<string name="poi_public_bookcase_type_shelf">Speco: ŝranko (endoma)</string>
 
-</resources>
+<string name="poi_diet">Dieto</string>
+	<string name="poi_health_specialty">Kurac-specialo</string>
+	<string name="poi_massage_type">Masaĝ-speco</string>
+	<string name="poi_tents">Tendoj</string>
+	<string name="poi_washing_machine">Lavmaŝino</string>
+	<string name="poi_caravans">Kampadveturiloj</string>
+	<string name="poi_power_supply">Energifonto</string>
+	<string name="poi_medical_system">Medicina sistemo</string>
+	<string name="poi_home_visit">Vizitoj en hejmo</string>
+	</resources>
