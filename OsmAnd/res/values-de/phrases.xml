@@ -3023,7 +3023,7 @@
 <string name="poi_shop_craft">Kunst und Handwerk Zubehörgeschäft</string>
 
 	<string name="poi_fuel_avia_type">Typ</string>
-	<string name="poi_payment_fuel_type">Art der Zahlung</string>
+	<string name="poi_payment_fuel_type">Tankkarten</string>
 	<string name="poi_internet_access_type">Internet Zugangsart</string>
 	<string name="poi_clothes_type">Typ</string>
 	<string name="poi_shoes_type">Typ</string>
@@ -3273,4 +3273,17 @@
 	<string name="poi_cuisine_yakitori">Yakitori</string>
 	<string name="poi_cuisine_teriyaki">Teriyaki</string>
 
-	</resources>
+	<string name="poi_payment_transport_type">Zahlungsart (Transport)</string>
+
+<string name="poi_outdoor_seating_filter_yes">Ja</string>
+	<string name="poi_delivery_filter_yes">Ja</string>
+	<string name="poi_diet_vegetarian_filter_yes">Vegetarisch</string>
+	<string name="poi_diet_vegan_filter_yes">Vegan</string>
+	<string name="poi_diet_gluten_free_filter_yes">Glutenfrei</string>
+	<string name="poi_diet_kosher_filter_yes">Koscher</string>
+	<string name="poi_diet_halal_filter_yes">Halal</string>
+	<string name="poi_diet_lactose_free_filter_yes">Laktosefrei</string>
+	<string name="poi_takeaway_filter_yes">Zum mitnehmen</string>
+	<string name="poi_shower_filter_yes">Dusche</string>
+
+</resources>
