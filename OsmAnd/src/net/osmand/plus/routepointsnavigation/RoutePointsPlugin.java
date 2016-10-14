@@ -58,7 +58,7 @@ public class RoutePointsPlugin extends OsmandPlugin {
 	private RoutePointsLayer routePointsLayer;
 
 	public RoutePointsPlugin(OsmandApplication app) {
-		ApplicationMode.regWidget("route_steps", ApplicationMode.CAR, ApplicationMode.DEFAULT);
+		ApplicationMode.regWidgetVisibility("route_steps", ApplicationMode.CAR, ApplicationMode.DEFAULT);
 		this.app = app;
 	}
 

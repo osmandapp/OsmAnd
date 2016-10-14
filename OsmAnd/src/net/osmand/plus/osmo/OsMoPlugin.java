@@ -74,7 +74,7 @@ public class OsMoPlugin extends OsmandPlugin implements OsMoReactor {
 			deviceControl = new OsMoControlDevice(app, this, service, tracker);
 			groups = new OsMoGroups(this, service, tracker, app);
 		}
-		ApplicationMode.regWidget("osmo_control", (ApplicationMode[]) null);
+		ApplicationMode.regWidgetVisibility("osmo_control", (ApplicationMode[]) null);
 		if (app.getSettings().OSMO_AUTO_CONNECT.get() ||
 				(System.currentTimeMillis() - app.getSettings().OSMO_LAST_PING.get() < 5 * 60 * 1000)) {
 			service.connect(true);

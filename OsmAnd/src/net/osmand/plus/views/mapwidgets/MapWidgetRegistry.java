@@ -36,6 +36,7 @@ import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.zip.GZIPOutputStream;
 
 public class MapWidgetRegistry {
 
@@ -68,14 +69,13 @@ public class MapWidgetRegistry {
 									 ApplicationMode mode, boolean left, boolean expanded) {
 		Set<MapWidgetRegInfo> s = left ? this.leftWidgetSet : this.rightWidgetSet;
 		for (MapWidgetRegInfo r : s) {
-			if (r.visible(mode) || r.widget.isExplicitlyVisible()) {
+			if (r.widget != null && (r.visible(mode) || r.widget.isExplicitlyVisible())) {
 				stack.addView(r.widget.getView());
 			}
 		}
 		if (expanded) {
 			for (MapWidgetRegInfo r : s) {
-				if (r.visibleCollapsed(mode) &&
-						!r.widget.isExplicitlyVisible()) {
+				if (r.widget != null && r.visibleCollapsed(mode) && !r.widget.isExplicitlyVisible()) {
 					stack.addView(r.widget.getView());
 				}
 			}
@@ -104,7 +104,7 @@ public class MapWidgetRegistry {
 
 	private void update(ApplicationMode mode, DrawSettings drawSettings, boolean expanded, Set<MapWidgetRegInfo> l) {
 		for (MapWidgetRegInfo r : l) {
-			if (r.visible(mode) || (r.visibleCollapsed(mode) && expanded)) {
+			if (r.widget != null && (r.visible(mode) || (r.visibleCollapsed(mode) && expanded))) {
 				r.widget.updateInfo(drawSettings);
 			}
 		}
@@ -212,6 +212,12 @@ public class MapWidgetRegistry {
 				set.add(HIDE_PREFIX + m.key);
 			}
 		}
+	}
+
+	public boolean isVisible(String key) {
+		ApplicationMode mode = settings.APPLICATION_MODE.get();
+		Set<String> elements = visibleElementsFromSettings.get(mode);
+		return elements != null && elements.contains(key);
 	}
 
 	private void setVisibility(MapWidgetRegInfo m, boolean visible, boolean collapsed) {
@@ -352,14 +358,15 @@ public class MapWidgetRegistry {
 
 
 	public void addControls(MapActivity map, ContextMenuAdapter cm, ApplicationMode mode) {
+		// Right panel
 		cm.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.map_widget_right, map)
 				.setCategory(true).setLayout(R.layout.list_group_title_with_switch).createItem());
 		addControls(map, cm, rightWidgetSet, mode);
-		if (mode != ApplicationMode.DEFAULT) {
-			cm.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.map_widget_left, map)
-					.setCategory(true).setLayout(R.layout.list_group_title_with_switch).createItem());
-			addControls(map, cm, leftWidgetSet, mode);
-		}
+		// Left panel
+		cm.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.map_widget_left, map)
+				.setCategory(true).setLayout(R.layout.list_group_title_with_switch).createItem());
+		addControls(map, cm, leftWidgetSet, mode);
+		// Remaining items
 		cm.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.map_widget_appearance_rem, map)
 				.setCategory(true).setLayout(R.layout.list_group_title_with_switch).createItem());
 		addControlsAppearance(map, cm, mode);
@@ -380,14 +387,7 @@ public class MapWidgetRegistry {
 	private void addControls(final MapActivity mapActivity, final ContextMenuAdapter contextMenuAdapter,
 							 Set<MapWidgetRegInfo> groupTitle, final ApplicationMode mode) {
 		for (final MapWidgetRegInfo r : groupTitle) {
-			if (mode == ApplicationMode.DEFAULT) {
-				if ("intermediate_distance".equals(r.key)
-						|| "distance".equals(r.key)
-						|| "time".equals(r.key)) {
-					continue;
-				}
-			}
-			if ("map_marker_1st".equals(r.key) || "map_marker_2nd".equals(r.key)) {
+			if (!mode.isWidgetAvailable(r.key)) {
 				continue;
 			}
 
@@ -397,7 +397,7 @@ public class MapWidgetRegistry {
 					.setIcon(r.getDrawableMenu())
 					.setSelected(selected)
 					.setColor(selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
-					.setSecondaryIcon(R.drawable.ic_action_additional_option)
+					.setSecondaryIcon(r.widget != null ? R.drawable.ic_action_additional_option : ContextMenuItem.INVALID_ID)
 					.setDescription(r.visibleCollapsed(mode) ? desc : null)
 					.setListener(new ContextMenuAdapter.OnRowItemClick() {
 						@Override
@@ -405,6 +405,10 @@ public class MapWidgetRegistry {
 													  final View view,
 													  final int itemId,
 													  final int pos) {
+							if (r.widget == null) {
+								setVisibility(adapter, pos, !r.visible(mode), false);
+								return false;
+							}
 							View textWrapper = view.findViewById(R.id.text_wrapper);
 							IconPopupMenu popup = new IconPopupMenu(view.getContext(), textWrapper);
 							MenuInflater inflater = popup.getMenuInflater();
@@ -686,11 +690,15 @@ public class MapWidgetRegistry {
 		}
 
 		public abstract int getMenuTitleId();
+
 		public abstract int getMenuIconId();
+
 		public abstract int getMenuItemId();
 
 		public abstract int[] getMenuTitleIds();
+
 		public abstract int[] getMenuIconIds();
+
 		public abstract int[] getMenuItemIds();
 
 		public abstract void changeState(int stateId);

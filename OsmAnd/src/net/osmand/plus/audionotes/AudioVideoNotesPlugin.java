@@ -505,7 +505,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	public AudioVideoNotesPlugin(OsmandApplication app) {
 		this.app = app;
 		OsmandSettings settings = app.getSettings();
-		ApplicationMode.regWidget("audionotes", (ApplicationMode[]) null);
+		ApplicationMode.regWidgetVisibility("audionotes", (ApplicationMode[]) null);
 		AV_EXTERNAL_RECORDER = settings.registerBooleanPreference("av_external_recorder", false).makeGlobal();
 		AV_EXTERNAL_PHOTO_CAM = settings.registerBooleanPreference("av_external_cam", true).makeGlobal();
 		AV_VIDEO_FORMAT = settings.registerIntPreference("av_video_format", VIDEO_OUTPUT_MP4).makeGlobal();

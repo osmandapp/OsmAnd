@@ -17,6 +17,7 @@ import android.support.v7.app.AlertDialog;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -96,6 +97,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 	private long lastZoom;
 	private boolean hasTargets;
 	private ContextMenuLayer contextMenuLayer;
+	private boolean forceShowCompass;
 
 	public MapControlsLayer(MapActivity activity) {
 		this.mapActivity = activity;
@@ -126,6 +128,39 @@ public class MapControlsLayer extends OsmandMapLayer {
 	public void initDasboardRelatedControls() {
 		initControls();
 		initRouteControls();
+	}
+
+	public View moveCompassButton(ViewGroup destLayout, ViewGroup.LayoutParams layoutParams, boolean night) {
+		View compassView = compassHud.iv;
+		ViewGroup parent = (ViewGroup) compassView.getParent();
+		if (parent != null) {
+			forceShowCompass = true;
+			parent.removeView(compassView);
+			compassView.setLayoutParams(layoutParams);
+			destLayout.addView(compassView);
+			updateCompass(night);
+			return compassView;
+		}
+		return null;
+	}
+
+	public void restoreCompassButton(boolean night) {
+		View compassView = compassHud.iv;
+		ViewGroup parent = (ViewGroup) compassView.getParent();
+		if (parent != null) {
+			forceShowCompass = false;
+			parent.removeView(compassView);
+			LinearLayout mapCompassContainer = (LinearLayout) mapActivity.findViewById(R.id.layers_compass_layout);
+			if (mapCompassContainer != null) {
+				int buttonSizePx = mapActivity.getResources().getDimensionPixelSize(R.dimen.map_small_button_size);
+				int topMarginPx = mapActivity.getResources().getDimensionPixelSize(R.dimen.map_small_button_margin);
+				LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(buttonSizePx, buttonSizePx);
+				params.topMargin = topMarginPx;
+				compassView.setLayoutParams(params);
+				mapCompassContainer.addView(compassView);
+				updateCompass(night);
+			}
+		}
 	}
 
 	private class CompassDrawable extends Drawable {
@@ -566,8 +601,8 @@ public class MapControlsLayer extends OsmandMapLayer {
 	}
 
 	@SuppressWarnings("deprecation")
-	private void updateControls(@NonNull RotatedTileBox tileBox, DrawSettings nightMode) {
-		boolean isNight = nightMode != null && nightMode.isNightMode();
+	private void updateControls(@NonNull RotatedTileBox tileBox, DrawSettings drawSettings) {
+		boolean isNight = drawSettings != null && drawSettings.isNightMode();
 		int shadw = isNight ? Color.TRANSPARENT : Color.WHITE;
 		int textColor = isNight ? mapActivity.getResources().getColor(R.color.widgettext_night) : Color.BLACK;
 		if (shadowColor != shadw) {
@@ -634,23 +669,34 @@ public class MapControlsLayer extends OsmandMapLayer {
 		}
 	}
 
-	private void updateCompass(boolean isNight) {
+	public void updateCompass(boolean isNight) {
 		float mapRotate = mapActivity.getMapView().getRotate();
+		boolean showCompass = forceShowCompass || mapRotate != 0
+				|| settings.ROTATE_MAP.get() != OsmandSettings.ROTATE_MAP_NONE
+				|| mapActivity.getMapLayers().getMapInfoLayer().getMapInfoControls().isVisible("compass");
 		if (mapRotate != cachedRotate) {
 			cachedRotate = mapRotate;
 			// Apply animation to image view
 			compassHud.iv.invalidate();
+			compassHud.updateVisibility(showCompass);
 		}
 		if (settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_NONE) {
 			compassHud.setIconResId(isNight ? R.drawable.map_compass_niu_white : R.drawable.map_compass_niu);
 			compassHud.iv.setContentDescription(mapActivity.getString(R.string.rotate_map_none_opt));
+			compassHud.updateVisibility(showCompass);
 		} else if (settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_BEARING) {
 			compassHud.setIconResId(isNight ? R.drawable.map_compass_bearing_white : R.drawable.map_compass_bearing);
 			compassHud.iv.setContentDescription(mapActivity.getString(R.string.rotate_map_bearing_opt));
+			compassHud.updateVisibility(true);
 		} else {
 			compassHud.setIconResId(isNight ? R.drawable.map_compass_white : R.drawable.map_compass);
 			compassHud.iv.setContentDescription(mapActivity.getString(R.string.rotate_map_compass_opt));
+			compassHud.updateVisibility(true);
 		}
+	}
+
+	public CompassDrawable getCompassDrawable(Drawable originalDrawable) {
+		return new CompassDrawable(originalDrawable);
 	}
 
 	private void updateMyLocation(RoutingHelper rh, boolean dialogOpened) {

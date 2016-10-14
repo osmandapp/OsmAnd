@@ -76,7 +76,7 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 
 	public DistanceCalculatorPlugin(OsmandApplication app) {
 		this.app = app;
-		ApplicationMode.regWidget("distance.measurement", ApplicationMode.DEFAULT);
+		ApplicationMode.regWidgetVisibility("distance.measurement", ApplicationMode.DEFAULT);
 	}
 	
 	@Override
