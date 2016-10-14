@@ -6,6 +6,7 @@ import java.util.Map;
 public class PoiType extends AbstractPoiType {
 	
 	private PoiCategory category;
+	private PoiFilter filter;
 	private AbstractPoiType parentType;
 	private PoiType referenceType;
 	private String osmTag;
@@ -22,11 +23,12 @@ public class PoiType extends AbstractPoiType {
 	private int order = 90;
 
 
-	public PoiType(MapPoiTypes poiTypes, PoiCategory category, String name) {
+	public PoiType(MapPoiTypes poiTypes, PoiCategory category, PoiFilter filter, String name) {
 		super(name, poiTypes);
 		this.category = category;
+		this.filter = filter;
 	}
-	
+
 	public PoiType getReferenceType() {
 		return referenceType;
 	}
@@ -104,7 +106,11 @@ public class PoiType extends AbstractPoiType {
 	public PoiCategory getCategory() {
 		return category;
 	}
-	
+
+	public PoiFilter getFilter() {
+		return filter;
+	}
+
 	public Map<PoiCategory, LinkedHashSet<String>> putTypes(Map<PoiCategory, LinkedHashSet<String>> acceptedTypes) {
 		if (isAdditional()) {
 			return parentType.putTypes(acceptedTypes);
