@@ -952,9 +952,9 @@
 	<string name="poi_piste_difficulty_easy">Pistaren zailtasuna: erraza</string>
 	<string name="poi_piste_difficulty_intermediate">Pistaren zailtasuna: tartekoa</string>
 	<string name="poi_piste_difficulty_advanced">Pistaren zailtasuna: aurreratua</string>
-	<string name="poi_piste_difficulty_novice">Pistaren zailtasuna: hasberria</string>
-	<string name="poi_piste_difficulty_expert">Pistaren zailtasuna: Aditua</string>
-	<string name="poi_piste_difficulty_freeride">Pistaren zailtasuna: pistatik kanpo</string>
+	<string name="poi_piste_difficulty_novice">Hasberria</string>
+	<string name="poi_piste_difficulty_expert">Aditua</string>
+	<string name="poi_piste_difficulty_freeride">Pistatik kanpo</string>
 	<string name="poi_wiki_place">Wikipedia</string>
 	<string name="poi_wiki_lang_en">Wikia ingelesez</string>
 	<string name="poi_wiki_lang_ar">Wikia Arabieraz</string>
@@ -973,9 +973,9 @@
 	<string name="poi_smoking_area">Erretzaileen area</string>
 	<string name="poi_smoking_no">Ezin da erre</string>
 	<string name="poi_smoking_outside">Erretzea kanpoan besterik ez da baimentzen</string>
-	<string name="poi_smoking_yes">Erretzea baimenduta</string>
-	<string name="poi_smoking_separated">Erretzea baimentzen da aparteko gela batean</string>
-	<string name="poi_smoking_isolated">Erretzea baimentzen da isolatutako gela batean</string>
+	<string name="poi_smoking_yes">Baimenduta</string>
+	<string name="poi_smoking_separated">Aparteko gela batean</string>
+	<string name="poi_smoking_isolated">Isolatutako gela batean</string>
 	<string name="poi_denomination_catholic">Katolikoa</string>
 	<string name="poi_denomination_baptist">Baptista</string>
 	<string name="poi_denomination_roman_catholic">Erromatar eliza katolikoa</string>
@@ -1461,4 +1461,49 @@
 	<string name="poi_protection_object_historic">Babestutakoa: historikoa</string>
 	<string name="poi_protection_object_nature">Babestutakoa: natura</string>
 	<string name="poi_protection_object_habitat">Babestutakoa: ingurugiroa</string>
+	<string name="poi_generator_source_coal">Energia iturria: ikatza</string>
+	<string name="poi_generator_source_gas">Energia iturria: gasa</string>
+	<string name="poi_generator_source_nuclear">Energia iturria: nuklearra</string>
+	<string name="poi_generator_source_solar">Energia iturria: eguzkia</string>
+	<string name="poi_generator_source_hydro">Energia iturria: hidraulikoa</string>
+	<string name="poi_generator_source_wind">Energia iturria: haizea</string>
+	<string name="poi_generator_source_geothermal">Energia iturria: geotermikoa</string>
+	<string name="poi_generator_source_oil">Energia iturria: petroleoa</string>
+	<string name="poi_generator_source_diesel">Energia iturria: diesela</string>
+
+	<string name="poi_information_map">Mapa</string>
+	<string name="poi_information_office">Bulegoa</string>
+	<string name="poi_information_terminal">Terminala</string>
+	<string name="poi_information_nature">Natura</string>
+	<string name="poi_information_history">Historia</string>
+	<string name="poi_board_type_geology">Geologia</string>
+	<string name="poi_board_type_public_transport">Garraio publikoa</string>
+	<string name="poi_board_type_technology">Teknologia</string>
+	<string name="poi_board_type_astronomy">Astronomia</string>
+
+	<string name="poi_smoking_dedicated">Erretzaileentzat besterik ez</string>
+
+	<string name="poi_toll_yes">Bide-saria</string>
+	<string name="poi_toll_no">Bide-saririk ez</string>
+	<string name="poi_toll_hgv_yes">Ibilgailu astunentzako bide-saria</string>
+	<string name="poi_traffic_signals_sound_walk">Ibiltzea baimenduta dagoenean besterik ez</string>
+
+	<string name="poi_rescue_station">Erreskate estazioa</string>
+
+	<string name="poi_services">Zerbitzu area</string>
+	<string name="poi_bird_hide">Txorien behatokia</string>
+	<string name="poi_garden">Lorategia</string>
+
+	<string name="poi_heath">Txilardia</string>
+	<string name="poi_passing_place">Pasabidea</string>
+	<string name="poi_piste_grooming_classic">Klasikoa</string>
+	<string name="poi_piste_grooming_classic_skating">Klasikoa+patinajea</string>
+	<string name="poi_garden_type_residential">Lorategi mota: Egoitza-lorategia</string>
+	<string name="poi_garden_type_community">Lorategi mota: komunitarioa</string>
+	<string name="poi_garden_type_private">Lorategi mota: pribatua</string>
+	<string name="poi_garden_type_botanical">Lorategi mota: botanikoa</string>
+
+	<string name="poi_garden_style_kitchen">Lorategi estiloa: baratza</string>
+	<string name="poi_garden_style_rosarium">Lorategi estiloa: arrosadia</string>
+	<string name="poi_garden_style_french">Lorategi estiloa: frantzesa</string>
 	</resources>
