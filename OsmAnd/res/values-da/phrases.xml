@@ -3364,4 +3364,12 @@
 	<string name="poi_cuisine_diner">Spisested</string>
 	<string name="poi_cuisine_fine_dining">Haute cuisine</string>
 	<string name="poi_cuisine_tea_shop">Tehus</string>
-	</resources>
+	<string name="poi_outdoor_seating_filter_yes">Udendørs siddepladser</string>
+	<string name="poi_delivery_filter_yes">Levering</string>
+	<string name="poi_diet_vegetarian_filter_yes">Vegetar</string>
+	<string name="poi_diet_vegan_filter_yes">Veganer</string>
+	<string name="poi_diet_gluten_free_filter_yes">Glutenfri</string>
+	<string name="poi_diet_kosher_filter_yes">Kosher</string>
+	<string name="poi_diet_halal_filter_yes">Halal</string>
+	<string name="poi_diet_lactose_free_filter_yes">Laktosefri</string>
+</resources>
