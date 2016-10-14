@@ -1237,12 +1237,12 @@
 	<string name="poi_openfire_no">Offenes Feuer verboten</string>
 	<string name="poi_washing_machine_yes">Ja</string>
 	<string name="poi_washing_machine_no">Waschmaschine: Nein</string>
-	<string name="poi_shower_yes">Ja</string>
+	<string name="poi_shower_yes">Dusche: Ja</string>
 	<string name="poi_shower_no">Dusche: Nein</string>
-	<string name="poi_shower_hot">Heiß</string>
-	<string name="poi_shower_outdoor">Im Freien</string>
-	<string name="poi_shower_cold">Kalt</string>
-	<string name="poi_shower_indoor">Drinnen</string>
+	<string name="poi_shower_hot">Dusche: Heiß</string>
+	<string name="poi_shower_outdoor">Dusche: im Freien</string>
+	<string name="poi_shower_cold">Dusche: Kalt</string>
+	<string name="poi_shower_indoor">Dusche: Drinnen</string>
 	<string name="poi_caravans_yes">Ja</string>
 	<string name="poi_caravans_no">Wohnwagen: Nein</string>
 	<string name="poi_power_supply_yes">Ja</string>
@@ -1523,11 +1523,11 @@
 	<string name="poi_microbrewery_yes">Minibrauereien</string>
 	<string name="poi_microbrewery_no">Keine Minibrauereien</string>
 
-	<string name="poi_takeaway_yes">Ja</string>
+	<string name="poi_takeaway_yes">Zum mitnehmen</string>
 	<string name="poi_takeaway_no">Nicht zum Mitnehmen</string>
 	<string name="poi_takeaway_only">nur zum Mitnehmen</string>
 
-	<string name="poi_delivery_yes">Ja</string>
+	<string name="poi_delivery_yes">Lieferung</string>
 	<string name="poi_delivery_no">Kein Lieferservice</string>
 	<string name="poi_delivery_only">Nur Lieferung</string>
 
@@ -1904,13 +1904,13 @@
 	<string name="poi_diet_lactose_free_no">laktosefrei: Nein</string>
 	<string name="poi_diet_pescetarian_yes">Pescetarismus</string>
 
-	<string name="poi_outdoor_seating_yes">Ja</string>
+	<string name="poi_outdoor_seating_yes">Sitzplätze im Freien: Ja</string>
 	<string name="poi_outdoor_seating_no">keine Sitzgelegenheiten im Freien</string>
-	<string name="poi_outdoor_seating_terrace">Terrasse</string>
-	<string name="poi_outdoor_seating_sidewalk">Gehweg</string>
-	<string name="poi_outdoor_seating_pedestrian_zone">Fußgängerzone</string>
-	<string name="poi_outdoor_seating_garden">Garten</string>
-	<string name="poi_outdoor_seating_patio">Innenhof</string>
+	<string name="poi_outdoor_seating_terrace">Sitzplätze im Freien: Terrasse</string>
+	<string name="poi_outdoor_seating_sidewalk">Sitzplätze im Freien: Bürgersteig</string>
+	<string name="poi_outdoor_seating_pedestrian_zone">Sitzplätze im Freien: Fußgängerzone</string>
+	<string name="poi_outdoor_seating_garden">Sitzplätze im Freien: Garten</string>
+	<string name="poi_outdoor_seating_patio">Sitzplätze im Freien: Innenhof</string>
 
 	<string name="poi_second_hand_yes">Gebrauchtwaren</string>
 	<string name="poi_second_hand_no">keine Gebrauchtwaren</string>
