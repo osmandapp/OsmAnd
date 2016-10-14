@@ -27,7 +27,16 @@ public class PoiCategory extends PoiFilter {
 	public List<PoiFilter> getPoiFilters() {
 		return poiFilters;
 	}
-	
+
+	public PoiFilter getPoiFilterByName(String keyName) {
+		for (PoiFilter f : poiFilters) {
+			if (f.getKeyName().equals(keyName)) {
+				return f;
+			}
+		}
+		return null;
+	}
+
 	public String getDefaultTag() {
 		if(defaultTag == null) {
 			return keyName;
