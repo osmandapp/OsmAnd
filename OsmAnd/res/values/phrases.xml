@@ -4,7 +4,7 @@
 	<string name="poi_fuel_type">Type</string>
 	<string name="poi_fuel_avia_type">Type</string>
 	<string name="poi_payment_type">Payment type</string>
-	<string name="poi_payment_fuel_type">Payment type</string>
+	<string name="poi_payment_fuel_type">Fuel cards</string>
 	<string name="poi_additional_type">Additional</string>
 	<string name="poi_internet_access_type">Internet access type</string>
 	<string name="poi_vending_type">Vending type</string>
@@ -79,6 +79,7 @@
 	<string name="poi_medical_system">Medical system</string>
 	<string name="poi_home_visit">Home visit</string>
 	<string name="poi_dish">Dish</string>
+	<string name="poi_payment_transport_type">Payment type (transport)</string>
 
 <!--  categories -->
 	<string name="poi_shop">Store</string>
