@@ -1943,7 +1943,7 @@
 	<string name="poi_cuisine_balkan">Balkán</string>
 	<string name="poi_wiki_lang_bar">Bajor wiki</string>
 	<string name="poi_cuisine_bavarian">Bajor</string>
-	<string name="poi_cuisine_barbecue">Grill</string>
+	<string name="poi_cuisine_barbecue"/>
 	<string name="poi_wiki_lang_eu">Baszk wiki</string>
 	<string name="poi_cuisine_basque">Baszk</string>
 	<string name="poi_cuisine_belgian">Belga</string>
@@ -1954,4 +1954,18 @@
 	<string name="poi_cuisine_seafood">Tenger gyümölcsei</string>
 	<string name="poi_cuisine_noodle">Nudli</string>
 	<string name="poi_cuisine_donut">Fánk</string>
+	<string name="poi_cuisine_crepe">Palacsinta (crepe)</string>
+	<string name="poi_cuisine_breakfast">Reggeli</string>
+	<string name="poi_cuisine_pancake">Palacsinta (pancake)</string>
+	<string name="poi_cuisine_fast_food">Gyorsétterem</string>
+	<string name="poi_cuisine_tea">Tea</string>
+	<string name="poi_cuisine_tea_shop">Teázó</string>
+	<string name="poi_cuisine_soup">Leves</string>
+	<string name="poi_cuisine_pie">Pite</string>
+	<string name="poi_cuisine_hotdog">Hotdog</string>
+	<string name="poi_cuisine_deli">Delikátesz</string>
+	<string name="poi_cuisine_salad">Saláta</string>
+	<string name="poi_cuisine_frozen_yogurt">Fagyasztott joghurt</string>
+	<string name="poi_cuisine_savory_pancakes">Sós palacsinta</string>
+	<string name="poi_cuisine_dessert">Desszert</string>
 	</resources>
