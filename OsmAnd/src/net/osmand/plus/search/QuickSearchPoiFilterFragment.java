@@ -466,33 +466,34 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 		MapPoiTypes poiTypes = getMyApplication().getPoiTypes();
 		Set<String> excludedPoiAdditionalCategories = new LinkedHashSet<>();
 		for (Entry<PoiCategory, LinkedHashSet<String>> entry : filter.getAcceptedTypes().entrySet()) {
-			for (PoiFilter f : entry.getKey().getPoiFilters()) {
-				for (PoiType t : f.getPoiTypes()) {
-					collectExcludedCategories(poiTypes, t, null, excludedPoiAdditionalCategories);
+			if (entry.getKey().getExcludedPoiAdditionalCategories() != null) {
+				excludedPoiAdditionalCategories.addAll(entry.getKey().getExcludedPoiAdditionalCategories());
+			}
+			if (entry.getValue() != null) {
+				for (String keyName : entry.getValue()) {
+					PoiType poiType = poiTypes.getPoiTypeByKey(keyName);
+					if (poiType != null) {
+						collectExcludedPoiAdditionalCategories(poiType, excludedPoiAdditionalCategories);
+						PoiFilter poiFilter = poiType.getFilter();
+						if (poiFilter != null) {
+							collectExcludedPoiAdditionalCategories(poiFilter, excludedPoiAdditionalCategories);
+						}
+						PoiCategory poiCategory = poiType.getCategory();
+						if (poiCategory != null) {
+							collectExcludedPoiAdditionalCategories(poiCategory, excludedPoiAdditionalCategories);
+						}
+					}
 				}
-				collectExcludedCategories(poiTypes, f, null, excludedPoiAdditionalCategories);
 			}
-			for (PoiType t : entry.getKey().getPoiTypes()) {
-				collectExcludedCategories(poiTypes, t, null, excludedPoiAdditionalCategories);
-			}
-			collectExcludedCategories(poiTypes, entry.getKey(), entry.getValue(), excludedPoiAdditionalCategories);
 		}
 		return excludedPoiAdditionalCategories;
 	}
 
-	private void collectExcludedCategories(MapPoiTypes poiTypes,
-										   AbstractPoiType type, LinkedHashSet<String> names,
-										   Set<String> excludedPoiAdditionalCategories) {
-		if (type.getExcludedPoiAdditionalCategories() != null) {
-			excludedPoiAdditionalCategories.addAll(type.getExcludedPoiAdditionalCategories());
-		}
-		if (names != null) {
-			for (String keyName : names) {
-				List<String> categories = poiTypes.getPoiTypeByKey(keyName).getExcludedPoiAdditionalCategories();
-				if (categories != null) {
-					excludedPoiAdditionalCategories.addAll(categories);
-				}
-			}
+	private void collectExcludedPoiAdditionalCategories(AbstractPoiType abstractPoiType,
+														Set<String> excludedPoiAdditionalCategories) {
+		List<String> categories = abstractPoiType.getExcludedPoiAdditionalCategories();
+		if (categories != null) {
+			excludedPoiAdditionalCategories.addAll(categories);
 		}
 	}
 
@@ -528,11 +529,9 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 					items.add(new PoiFilterListItem(PoiFilterListItemType.DIVIDER, 0, null, -1, false, false, false, null, null));
 
 					String categoryIconStr = poiTypes.getPoiAdditionalCategoryIcon(category);
-					int categoryIconId;
+					int categoryIconId = 0;
 					if (!Algorithms.isEmpty(categoryIconStr)) {
-						categoryIconId = getResources().getIdentifier(categoryIconStr, "drawable", app.getPackageName());
-					} else {
-						categoryIconId = RenderingIcons.getBigIconResourceId(category);
+						categoryIconId = RenderingIcons.getBigIconResourceId(categoryIconStr);
 					}
 					if (categoryIconId == 0) {
 						categoryIconId = R.drawable.ic_action_folder_stroke;

@@ -321,7 +321,7 @@ public class MapPoiTypes {
 						}
 						lastCategory.addPoiType(tp);
 					} else if (name.equals("poi_reference")) {
-						PoiType tp = new PoiType(this, lastCategory, parser.getAttributeValue("", "name"));
+						PoiType tp = new PoiType(this, lastCategory, lastFilter, parser.getAttributeValue("", "name"));
 						referenceTypes.add(tp);
 						tp.setReferenceType(tp);
 						if (lastFilter != null) {
@@ -465,7 +465,7 @@ public class MapPoiTypes {
 		if (lang != null) {
 			otag += ":" + lang;
 		}
-		PoiType tp = new PoiType(this, lastCategory, oname);
+		PoiType tp = new PoiType(this, lastCategory, lastFilter, oname);
 		tp.setBaseLangType(langBaseType);
 		tp.setLang(lang);
 		tp.setAdditional(lastType != null ? lastType :
@@ -499,7 +499,7 @@ public class MapPoiTypes {
 		if (lang != null) {
 			oname += ":" + lang;
 		}
-		PoiType tp = new PoiType(this, lastCategory, oname);
+		PoiType tp = new PoiType(this, lastCategory, lastFilter, oname);
 		String otag = parser.getAttributeValue("", "tag");
 		if (lang != null) {
 			otag += ":" + lang;
