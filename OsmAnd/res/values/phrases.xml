@@ -1662,21 +1662,21 @@
 	<string name="poi_microbrewery_yes">Microbrewery</string>
 	<string name="poi_microbrewery_no">No microbrewery</string>
 
-	<string name="poi_takeaway_yes">Yes</string>
+	<string name="poi_takeaway_yes">Takeaway</string>
 	<string name="poi_takeaway_no">No takeaway</string>
 	<string name="poi_takeaway_only">Takeaway only</string>
 
-	<string name="poi_delivery_yes">Yes</string>
+	<string name="poi_delivery_yes">Delivery</string>
 	<string name="poi_delivery_no">No delivery</string>
 	<string name="poi_delivery_only">Delivery only</string>
 
-	<string name="poi_outdoor_seating_yes">Yes</string>
+	<string name="poi_outdoor_seating_yes">Outdoor seating: yes</string>
 	<string name="poi_outdoor_seating_no">No outdoor seating</string>
-	<string name="poi_outdoor_seating_terrace">Terrace</string>
-	<string name="poi_outdoor_seating_sidewalk">Sidewalk</string>
-	<string name="poi_outdoor_seating_pedestrian_zone">Pedestrian zone</string>
-	<string name="poi_outdoor_seating_garden">Garden</string>
-	<string name="poi_outdoor_seating_patio">Patio</string>
+	<string name="poi_outdoor_seating_terrace">Outdoor seating: terrace</string>
+	<string name="poi_outdoor_seating_sidewalk">Outdoor seating: sidewalk</string>
+	<string name="poi_outdoor_seating_pedestrian_zone">Outdoor seating: pedestrian zone</string>
+	<string name="poi_outdoor_seating_garden">Outdoor seating: garden</string>
+	<string name="poi_outdoor_seating_patio">Outdoor seating: patio</string>
 
 	<string name="poi_cocktails_yes">Yes</string>
 
@@ -2186,12 +2186,12 @@
 	<string name="poi_group_only_no">Group only: no</string>
 	<string name="poi_washing_machine_yes">Yes</string>
 	<string name="poi_washing_machine_no">Washing machine: no</string>
-	<string name="poi_shower_yes">Yes</string>
+	<string name="poi_shower_yes">Shower: yes</string>
 	<string name="poi_shower_no">Shower: no</string>
-	<string name="poi_shower_hot">Hot</string>
-	<string name="poi_shower_outdoor">Outdoor</string>
-	<string name="poi_shower_cold">Cold</string>
-	<string name="poi_shower_indoor">Indoor</string>
+	<string name="poi_shower_hot">Shower: hot</string>
+	<string name="poi_shower_outdoor">Shower: outdoor</string>
+	<string name="poi_shower_cold">Shower: cold</string>
+	<string name="poi_shower_indoor">Shower: indoor</string>
 	<string name="poi_caravans_yes">Yes</string>
 	<string name="poi_caravans_no">Caravans: no</string>
 	<string name="poi_impromptu_yes">Impromptu: yes</string>
@@ -3286,12 +3286,15 @@
 	<string name="poi_cuisine_bulgarian">Bulgarian</string>
 	<string name="poi_cuisine_tibetan">Tibetan</string>
 
-	<string name="poi_outdoor_seating_filter_yes">Outdoor seating</string>
-	<string name="poi_delivery_filter_yes">Delivery</string>
+	<string name="poi_outdoor_seating_filter_yes">Yes</string>
+	<string name="poi_delivery_filter_yes">Yes</string>
 	<string name="poi_diet_vegetarian_filter_yes">Vegetarian</string>
 	<string name="poi_diet_vegan_filter_yes">Vegan</string>
 	<string name="poi_diet_gluten_free_filter_yes">Gluten free</string>
 	<string name="poi_diet_kosher_filter_yes">Kosher</string>
 	<string name="poi_diet_halal_filter_yes">Halal</string>
 	<string name="poi_diet_lactose_free_filter_yes">Lactose free</string>
+	<string name="poi_takeaway_filter_yes">Takeaway</string>
+	<string name="poi_shower_filter_yes">Shower</string>
+
 </resources>
