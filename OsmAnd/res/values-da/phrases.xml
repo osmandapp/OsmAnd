@@ -1623,21 +1623,21 @@
 	<string name="poi_microbrewery_yes">Mikrobryggeri</string>
 	<string name="poi_microbrewery_no">Ingen mikrobryggeri</string>
 
-	<string name="poi_takeaway_yes">Ja</string>
+	<string name="poi_takeaway_yes">Takeaway</string>
 	<string name="poi_takeaway_no">Ingen takeaway</string>
 	<string name="poi_takeaway_only">Kun takeaway</string>
 
-	<string name="poi_delivery_yes">Ja</string>
+	<string name="poi_delivery_yes">Levering</string>
 	<string name="poi_delivery_no">Ingen levering</string>
 	<string name="poi_delivery_only">Kun levering</string>
 
-	<string name="poi_outdoor_seating_yes">Ja</string>
+	<string name="poi_outdoor_seating_yes">Udendørs siddepladser: Ja</string>
 	<string name="poi_outdoor_seating_no">Ingen udendørsservering</string>
-	<string name="poi_outdoor_seating_terrace">Terrasse</string>
-	<string name="poi_outdoor_seating_sidewalk">Fortov</string>
-	<string name="poi_outdoor_seating_pedestrian_zone">Gågade</string>
-	<string name="poi_outdoor_seating_garden">Have</string>
-	<string name="poi_outdoor_seating_patio">Gårdhave</string>
+	<string name="poi_outdoor_seating_terrace">Udendørs siddepladser: terrasse</string>
+	<string name="poi_outdoor_seating_sidewalk">Udendørs siddepladser: fortov</string>
+	<string name="poi_outdoor_seating_pedestrian_zone">Udendørs siddepladser: gågade</string>
+	<string name="poi_outdoor_seating_garden">Udendørs siddepladser: have</string>
+	<string name="poi_outdoor_seating_patio">Udendørs siddepladser: gårdhave</string>
 
 	<string name="poi_cocktails_yes">Ja</string>
 
@@ -2153,12 +2153,12 @@
 	<string name="poi_group_only_no">Kun grupper: nej</string>
 	<string name="poi_washing_machine_yes">Ja</string>
 	<string name="poi_washing_machine_no">Vaskemaskine: nej</string>
-	<string name="poi_shower_yes">Ja</string>
+	<string name="poi_shower_yes">Brusebad: Ja</string>
 	<string name="poi_shower_no">Brusebad: nej</string>
-	<string name="poi_shower_hot">Varmtvand</string>
-	<string name="poi_shower_outdoor">Udendørs</string>
-	<string name="poi_shower_cold">Koldtvand</string>
-	<string name="poi_shower_indoor">Indendørs</string>
+	<string name="poi_shower_hot">Brusebad: varmtvand</string>
+	<string name="poi_shower_outdoor">Brusebad: udendørs</string>
+	<string name="poi_shower_cold">Brusebad: koldtvand</string>
+	<string name="poi_shower_indoor">Brusebad: indendørs</string>
 	<string name="poi_caravans_yes">Ja</string>
 	<string name="poi_caravans_no">Campingvogne: nej</string>
 	<string name="poi_impromptu_yes">Improviseret: ja</string>
@@ -3364,12 +3364,15 @@
 	<string name="poi_cuisine_diner">Spisested</string>
 	<string name="poi_cuisine_fine_dining">Haute cuisine</string>
 	<string name="poi_cuisine_tea_shop">Tehus</string>
-	<string name="poi_outdoor_seating_filter_yes">Udendørs siddepladser</string>
-	<string name="poi_delivery_filter_yes">Levering</string>
+	<string name="poi_outdoor_seating_filter_yes">Ja</string>
+	<string name="poi_delivery_filter_yes">Ja</string>
 	<string name="poi_diet_vegetarian_filter_yes">Vegetar</string>
 	<string name="poi_diet_vegan_filter_yes">Veganer</string>
 	<string name="poi_diet_gluten_free_filter_yes">Glutenfri</string>
 	<string name="poi_diet_kosher_filter_yes">Kosher</string>
 	<string name="poi_diet_halal_filter_yes">Halal</string>
 	<string name="poi_diet_lactose_free_filter_yes">Laktosefri</string>
+<string name="poi_takeaway_filter_yes">Takeaway</string>
+	<string name="poi_shower_filter_yes">Brusebad</string>
+
 </resources>
