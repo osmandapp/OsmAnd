@@ -788,4 +788,198 @@
     <string name="update">" പരിഷ്ക്കരണം"</string>
     <string name="update_now">"ഇപ്പോള്‍ തന്നെ  പരിഷ്ക്കരിക്കുക "</string>
     <string name="update_time">സമയം പരിഷ്ക്കരിക്കുക</string>
+    <string name="subcategories">ഉപവിഭാഗങ്ങള്‍</string>
+    <string name="selected_categories">തെരഞ്ഞെടുത്ത വിഭാഗങ്ങള്‍</string>
+    <string name="osm_live_payment_desc">എല്ലാ മാസവും വരിസംഖ്യ പിരിക്കുന്നതായിരിക്കും. നിങ്ങള്‍ക്ക് ഗൂഗിള്‍ പ്ളേയിലൂടെ ഇത് എപ്പോള്‍ വേണമെങ്കിലും റദ്ദുചെയ്യാവുന്നതാണ്.</string>
+    <string name="donation_to_osm">"ഓപ്പണ്‍സ്ട്രീറ്റ്മാപ്  സമൂഹത്തിനുള്ള സംഭാവന"</string>
+    <string name="osm_live_subscription_desc">സബ്സ്ക്രിപ്ഷന്‍ എടുത്തവര്‍ക്ക് മണിക്കൂര്‍ , ദിന, വാര അപ്ഡേറ്റുകളും ലോകത്തെവിടെയുള്ള മാപ്പുകളും സൗജന്യമായി പരിധിയില്ലാതെ ഡൗണ്‍ലോഡ് ചെയ്യാന്‍ സാധിക്കും.</string>
+    <string name="get_it">മനസിലായി</string>
+    <string name="osm_live_banner_desc">പരിധിയില്ലാത്ത ഭൂപട ഡൗണ്‍ലോഡുകളും മണിക്കൂര്‍, ദിന, വാര അപ്ഡേറ്റുകളും വേണം.</string>
+    <string name="osmand_plus_banner_desc">ഓഎസ്എംആന്റ് സംപൂര്‍ണ പതിപ്പ് പരിധിയില്ലാത്ത ഭൂപട ഡൗണ്‍ലോഡുകളും മാസത്തിലൊരിക്കലുള്ള പരിഷ്കരിച്ച ഭൂപടവുമായി.</string>
+    <string name="skip_map_downloading_desc">"ഓഫ്ലൈന്‍ ഭൂപടങ്ങള്‍ ഒന്നും നിങ്ങള്‍ ഇന്സ്റ്റാള്‍ ചെയ്തിട്ടില്ല.  തന്നിരിക്കുന്ന പട്ടികയില്‍ നിന്നും ഒരു ഭൂപടം തെരഞ്ഞെടുക്കുക, അല്ലെങ്കില്‍ മെനുവില്‍ നിന്നു ഭൂപടങ്ങള്‍ പിന്നീട് ഡൗണ്‍ലോഡ് ചെയ്യാവുന്നതാണ് - %1$s."</string>
+    <string name="search_another_country">"വേറോരു പ്രദേശം(region) തെരഞ്ഞെടുക്കുക "</string>
+    <string name="search_map">ഭൂപടം തെരയുന്നു…</string>
+    <string name="first_usage_wizard_desc">ഓഎസ്എംആന്റ് നിങ്ങളുടെ സ്ഥാനം കണ്ട്പിടിച്ച് ആ പ്രദേശം ഉള്‍പെട്ട ഭൂപടം നിര്‍ദേശിക്കാന്‍ അനുവദിക്കുക.</string>
+    <string name="location_not_found">"തല്‍സ്ഥലം ക്ണ്ടെത്താനായില്ല "</string>
+    <string name="no_inet_connection">"ഇന്റര്‍നെറ്റ് കണക്ഷന്‍ ഇല്ല "</string>
+    <string name="no_inet_connection_desc_map">ആവശ്യമുള്ള മാപ്പുകള്‍ ഡൗണ്‍ലോഡ് ചെയ്യാന്‍.</string>
+    <string name="search_location">സ്ഥാനം തിരയുന്നു…</string>
+    <string name="storage_place_description">ഓഎസ്എംആന്റിന്റെ വിവരസഭരണസ്ഥലം(മാപ്പുകള്‍ ,പാതകള്‍ മുതലായവക്കായി): %1$s.</string>
+    <string name="give_permission">അനുമതി തരുക</string>
+    <string name="allow_access_location">ഈ സ്ഥലത്ത് പ്രവേഷനാനുമതി നല്‍കുക</string>
+    <string name="no_update_info_desc">"ഓഎസ്എംആന്റിന്റെ  പുതിയപതിപ്പുകളേക്കുറിച്ചുള്ളതൊ, വിലക്കുറവ് സംബന്ധമായതോ ആയ ഒരു അപ്ഡേറ്റും കാണിക്കരുത്"</string>
+    <string name="no_update_info">അപ്ഡേറ്റുകള്‍ കാണിക്കരുത്</string>
+    <string name="update_all_maps_now">എല്ലാ ഭൂപടങ്ങളും ഇപ്പോള്‍ അപ്ഡേറ്റ് ചെയ്യട്ടെ?</string>
+    <string name="show_something_on_map">%1$s നെ ഭൂപടത്തില്‍ കാണിക്കുക</string>
+    <string name="share_history_subject">ഓഎസ്എംആന്ഡ് വഴി പങ്കുവച്ചത്</string>
+    <string name="search_categories">വിഭാഗങ്ങള്‍</string>
+    <string name="postcode">പോസ്റ്റ്കോഡ്</string>
+    <string name="shared_string_from">ഫ്രം</string>
+    <string name="coords_format">കോഓര്‍ഡിനേറ്റ് രൂപഘടന</string>
+    <string name="coords_format_descr">ഭൂമിശാസ്ത്ര കോഓര്‍ഡിനേറ്റുകളുടെ ഘടന</string>
+  	<string name="move_marker_bottom_sheet_title">മാര്‍ക്കറിന്റെ സ്ഥാനം മാറ്റാനായി ഭൂപടം നീക്കുക</string>
+    <string name="use_osm_live_routing_description">"വഴികാട്ടി ഓ എസ് എം  ലൈവ് മാറ്റങ്ങള്‍ക്കനുസൃതമായി സജ്ജീകരിക്കുക"</string>
+	<string name="use_osm_live_routing">"ഓ എസ് എം  ലൈവ് നാവിഗേഷന്‍"</string>
+    <string name="rendering_value_bold_name">കട്ടികൂടിയ</string>
+    <string name="no_map_markers_found">"ഭൂപടത്തില്‍ നിന്നും മാപ് മാര്‍ക്കേര്‍സ് ചേര്‍ക്കുക "</string>
+    <string name="osmo_group_information_desc">"
+- ദയവായി ഇപ്പോള്‍ ഉണ്ടാക്കുന്ന ഗ്രൂപ്പിന്റെ പേര് വിവരങ്ങള്‍ നല്‍കുക
+
+- ഈ ആപ്പ്ളിക്കേഷന്‍ വഴി ലളിതമായ ഗ്രൂപ്പുകളെ  ഉണ്ടാക്കാനാകു. കൂടുതല്‍ വിവരങ്ങള്‍ https://osmo.mobi/g/new എന്ന വിലാസത്തില്‍ ലഭ്യമാണ്
+
+ - ഈ വെബ്സൈറ്റ് വഴി നിങ്ങള്‍ക്ക് ഗ്രൂപ്പ് മാനേജ് ചെയ്യാനും ട്രാക്ക്, പി ഓ ഐ എന്നിവ മറ്റുള്ളവരുമായി പങ്ക് വെക്കാനും സാധിക്കും
+
+ഒറ്റ യൂസര്‍ ഉള്ള ഗ്രൂപ്പ് അനുവദനീയമല്ല, പിഓഐ ഗ്രൂപ്പ് ഒഴിച്ച് 
+
+
+
+
+-സ്വകാര്യ ഗ്രൂപ്പുകളില്‍ 8 ആളുകള്‍ മാത്രം
+
+കൂടുതല്‍ വിവരങ്ങള്‍ക്ക് https://osmo.mobi/ സന്ദര്‍ശിക്കുക 
+
+നിബന്ധനകളില്‍ ഇളവുകള്‍ക്ക് ദയവായി osmo.mobi@gmail.com എന്ന വിലാസത്തില്‍ ഈ-മെയില്‍ ചെയ്യുക "</string>
+    <string name="osmo_connect_to_device_tracker_id">ട്രാക്കര്‍ ഐഡി</string>
+    <string name="osmo_tracker_id">ട്രാക്കര്‍ ഐഡി</string>
+    <string name="osmo_connect_to_my_nickname">വിളിപേര്</string>
+    <string name="osmo_share_my_location">സ്ഥാനം അയക്കുക</string>
+    <string name="osmo_plugin_name">"ഒപ്പണ്‍ സ്ട്രീറ്റ് മാപ്പ്  നിരീക്ഷിക്കുക"</string>
+    <string name="shared_string_move_up">മുകളിലോട്ട് കയറ്റുക</string>
+    <string name="shared_string_move_down">താഴോട്ട് ഇറക്കുക</string>
+    <string name="finish_navigation">"വഴികാട്ടി നിര്‍ത്തുക "</string>
+    <string name="recalculate_route">റൂട്ട് വീണ്ടും കണക്കാക്കുക</string>
+    <string name="open_street_map_login_and_pass">ഓപ്പണ്‍സ്ട്രീറ്റ് മാപ്പ് ലോഘിന് പാസ്വോഡ്</string>
+    <string name="osm_live_user_public_name">സമൂഹ നാമം</string>
+    <string name="download_files_question_space_with_temp">" {0} ഫയല്‍(കള്‍ ) ഡൗണ്‍ലോഡ് ചെയ്യണോ?
+ ഇതിനായി തല്‍ക്കാലം  {3} MB യും സ്ഥിരമായി  {1} MB യും ആവശ്യമുണ്ട് .
+ ഇപ്പോള്‍  {2} MB ലഭ്യമാണ്."</string>
+    <string name="download_files_question_space">" {0} ഫയല്‍(കള്‍ ) ഡൗണ്‍ലോഡ് ചെയ്യണോ?
+ ഇതിനായി  സ്ഥിരമായി  {1} MB ആവശ്യമുണ്ട് .
+ ഇപ്പോള്‍  {2} MB ലഭ്യമാണ്."</string>
+    <string name="map_marker_1st">അദ്യത്തെ മാപ്പ് മാര്‍ക്കര്‍</string>
+    <string name="map_marker_2nd">രണ്ടാമത്തെ മാപ്പ് മാര്‍ക്കര്‍</string>
+    <string name="shared_string_toolbar">ടൂള്‍ബാര്‍</string>
+    <string name="shared_string_widgets">വിഡ്ജെറ്റ്</string>
+    <string name="select_map_markers">മാപ്പ് മാര്‍ക്കറുകള്‍ തെരഞ്ഞെടുക്കുക</string>
+    <string name="show_map_markers_description">"മാപ്പ് മാര്‍ക്കറുകള്‍ എന്ന സവിശേഷത സജീവമാക്കുക "</string>
+    <string name="clear_markers_history_q">മാപ്പ് മാര്‍ക്കറുകളുടെ ഉപയോഗ ചരിത്രം മായ്ച്കളയട്ടെ?</string>
+    <string name="map_markers">മാപ്പ് മാര്‍ക്കറുകള്‍</string>
+    <string name="rendering_attr_showMtbRoutes_name">എം ടി ബി റൂട്ടുകള്‍ കാണിക്കുക</string>
+    <string name="show_polygons">ബഹുഭുജങ്ങള്‍ കാണിക്കുക</string>
+    <string name="find_parking">പാര്‍ക്കിങ്ങ് കണ്ട്പിടിക്കുക</string>
+    <string name="shared_string_save_changes">മാറ്റങ്ങള്‍ പരിരക്ഷിക്കുക</string>
+    <string name="shared_string_email_address">ഈ-മെയില്‍ വിലാസം</string>
+    <string name="rendering_attr_hideUnderground_name">ഭൂഗര്‍ഭവസ്തുക്കള്‍</string>
+    <string name="shared_string_read_more">കൂടുതല്‍ വായിക്കുക</string>
+    <string name="rendering_attr_hideIcons_name">പി ഓ ഐ ചിത്രങ്ങള്‍</string>
+    <string name="item_removed">ഇനം നീക്കിയിരിക്കുന്നു</string>
+    <string name="n_items_removed">ഇനങ്ങള്‍ നീക്കിയിരിക്കുന്നു</string>
+    <string name="shared_string_undo_all">മാറ്റങ്ങള്‍ എല്ലാം വേണ്ടെന്ന് വെക്കുക</string>
+    <string name="select_voice_provider">ശബ്ദ മാര്‍ഗനിര്‍ദേശം തെരഞ്ഞെടുക്കുക</string>
+    <string name="select_voice_provider_descr">"നിങ്ങളുടെ ഭാക്ഷക്ക് യോജിച്ച ശബ്ദ മാര്‍ഗനിര്‍ദേശം തെരഞ്ഞെടുക്കുക/ഡൗണ്‍ലോഡ് ചെയ്യുക "</string>
+    <string name="impassable_road_desc">വഴികാട്ടി ഒഴിവാക്കേണ്ട റോഡുകള്‍ തെരഞ്ഞെടുക്കുക</string>
+    <string name="no_location_permission">ആപ്പിന് സ്ഥാനവിവരങ്ങള്‍ ഉപയോഗിക്കാനുള്ള അനുമതിയില്ലാ.</string>
+    <string name="no_camera_permission">ആപ്പിന് ക്യാമറ ഉപയോഗിക്കാനുള്ള അനുമതിയില്ല.</string>
+    <string name="no_microphone_permission">"ആപ്പിന് മൈക്ക്  ഉപയോഗിക്കാനുള്ള അനുമതിയില്ല."</string>
+    <string name="rendering_attr_horseRoutes_name">കുതിര പാതകള്‍</string>
+    <string name="no_address_found">"വിലാസം കണ്ട്പിടിക്കാനയില്ല "</string>
+    <string name="shared_string_near">"സമീപത്ത് "</string>
+    <string name="shared_string_hide">മറക്കുക</string>
+    <string name="av_video_quality_descr">വീഡിയൊ ഔട്ട്പുട്ട് നിലവാരം തെരഞ്ഞെടുക്കുക</string>
+    <string name="show_on_start_description">"\'ഓഫ്\'  നേരെ ഭുപടം കാണിക്കുന്നു"</string>
+    <string name="osn_comment_dialog_title">വിവരണം(കമന്റ്) ചേര്‍ക്കുക</string>
+    <string name="osn_reopen_dialog_title">കുറിപ്പ് വീണ്ടും തുറക്കുക</string>
+    <string name="osn_close_dialog_title">കുറിപ്പ് അടക്കുക</string>
+    <string name="osn_add_dialog_success">കുറിപ്പ് സൃഷ്ടിച്ചിരിക്കുന്നു</string>
+    <string name="osn_add_dialog_error">കുറിപ്പ് സൃഷ്ടിക്കാനായില്ല : പരാജയപ്പെട്ടിരിക്കുന്നു</string>
+    <string name="osn_close_dialog_success">കുറിപ്പ് അടച്ചിരിക്കുന്നു</string>
+    <string name="osn_close_dialog_error">"കുറിപ്പ് അടക്കാന്‍ സാധിച്ചില്ല "</string>
+    <string name="osb_comment_dialog_error">"വിവരണം(കമന്റ്) ചേര്‍ക്കാന്‍ സാധിച്ചില്ല "</string>
+    <string name="osb_comment_dialog_success">വിവരണം(കമന്റ്) ചേര്‍ത്തിരിക്കുന്നു</string>
+    <string name="shared_string_commit">ഉറപ്പിക്കുക (കമ്മിറ്റ്)</string>
+
+    <string name="context_menu_item_edit_waypoint">ജിപിഎക്സ് പാതബിന്ദുക്കള്‍ ക്രമീകരിക്കുക(എഡിറ്റ്)</string>
+    <string name="share_osm_edits_subject">ഓഎസ്എംആന്ഡ് വഴി പങ്ക് വെച്ച ഓഎസ്എം എഡിറ്റുകള്‍</string>
+    <string name="lang_nds">ലോ ജര്‍മന്‍ ഭാഷ</string>
+    <string name="lang_mk">മാസിഡോണിയന്‍</string>
+    <string name="read_more">കൂടുതല്‍ വായിക്കുക</string>
+    <string name="rendering_attr_hideProposed_name">പരിഗണന(മാത്രം)യിലുള്ള വസ്തുക്കള്‍</string>
+    <string name="shared_string_update">പരിഷ്കരിക്കുക(അപ്ഡേറ്റ്)</string>
+    <string name="shared_string_upload">അപ്ലോഡ്</string>
+    <string name="world_map_download_descr">"അടിസ്ഥാന ലോക ഭൂപടം ഇല്ല അല്ലെങ്കില്‍ പഴയതായി.  ദയവായ് അത് ഡൗണ്‍ലോഡ് ചെയ്യുക(നിര്‍ബന്ധമല്ലാ )."</string>
+    <string name="shared_string_qr_code">ക്യൂ ആര്‍ കോഡ്</string>
+    <string name="map_downloaded">ഭൂപടം ഡൗണ്‍ലോഡായി</string>
+    <string name="map_downloaded_descr">%1$s ലെ ഭൂപടം ഡൗണ്‍ലോഡായി. അതുപയോഗിക്കാന്‍ ഭൂപടത്തിലേക്ക് തിരിച്ച് പോവുക.</string>
+    <string name="share_geo">ഭൗമമായ(geo):</string>
+    <string name="share_menu_location">"സ്ഥാനം പങ്ക് വെക്കുക "</string>
+    <string name="shared_string_send">അയക്കുക</string>
+    <string name="favorite_category_dublicate_message">നിര്‍ദ്ദിഷ്‌ടമായ ഇനം പേര് നിലവിലുണ്ട്. ദയവായ് വേറൊരു പേര് ഉപയോഗിക്കൂ.</string>
+    <string name="regions">പ്രദേശങ്ങള്‍</string>
+    <string name="si_nm_h">നോടിക്കല്‍ മൈല്‍ / മണിക്കൂര്‍ (ക്നോട്)</string>
+    <string name="nm_h">നോ. മൈല്‍/മണി</string>
+    <string name="min_mile">മിനു/മൈല്‍</string>
+    <string name="min_km">മിനു/കിമി</string>
+    <string name="m_s">മീ/സെ.</string>
+    <string name="shared_string_trip_recording">സഞ്ചാരം രേഖപെടുത്തുന്നു</string>
+    <string name="shared_string_navigation">വഴികാട്ടി</string>
+    <string name="osmand_running_in_background">ബാക്ക്ഗ്രൗണ്ടില്‍ പ്രവര്‍ത്തിക്കുന്നു</string>
+    <string name="looking_up_address">വിലാസം നോക്കികണ്ട്പിടിച്ച്കൊണ്ടിരിക്കുന്നു</string>
+    <string name="plugin_settings">പ്ളഗ്-ഇനുകള്‍</string>
+    <string name="traffic_warning_hazard">അപായം</string>
+    <string name="rendering_value_boldOutline_name">തടിച്ച അതിര്‍രേഖ</string>
+    <string name="no_updates_available">"അപ്ഡേറ്റുകള്‍ ലഭ്യമല്ല "</string>
+    <string name="rendering_attr_currentTrackColor_name">ജിപിഎക്സ് നിറം</string>
+    <string name="rendering_attr_currentTrackColor_description">ജിപിഎക്സ് നിറം</string>
+    <string name="rendering_attr_currentTrackWidth_name">ജിപിഎക്സ് വീതി</string>
+    <string name="rendering_attr_currentTrackWidth_description">ജിപിഎക്സ് വീതി</string>
+    <string name="rendering_value_red_name">"ചുമപ്പ് "</string>
+    <string name="rendering_value_translucent_red_name">"മങ്ങിയ ചുമപ്പ് "</string>
+    <string name="rendering_value_yellow_name">മഞ്ഞ</string>
+    <string name="rendering_value_translucent_yellow_name">മങ്ങിയ മഞ്ഞ</string>
+    <string name="rendering_value_lightgreen_name">ഇളം പച്ച</string>
+    <string name="rendering_value_translucent_lightgreen_name">മങ്ങിയ ഇളം പച്ച</string>
+    <string name="rendering_value_translucent_lightblue_name">"മങ്ങിയ ഇളം നീല "</string>
+    <string name="rendering_value_purple_name">പര്‍പ്പിള്‍</string>
+    <string name="rendering_value_pink_name">പിങ്ക്</string>
+    <string name="rendering_value_brown_name">തവിട്ടുനിറം</string>
+    <string name="rendering_value_translucent_purple_name">മങ്ങിയ പര്‍പ്പിള്‍</string>
+    <string name="restart_is_required">മാറ്റങ്ങളെല്ലാം സ്വീകരിക്കാനായി ആപ്പ്ളികേഷന്‍ റീസ്ടാര്‍ട്ട് ചെയ്യണം.</string>
+    <string name="dark_theme">ഇരുണ്ടത്</string>
+    <string name="lang_bn">ബെഗളി</string>
+    <string name="lang_es_us">സ്പാനിഷ്(അമേരിക്കന്‍)</string>
+    <string name="lang_es_ar">സ്പാനിഷ്(അര്‍ജെന്റീനിയന്‍)</string>
+    <string name="lang_te">തെലുങ്ക്</string>
+    <string name="archive_wikipedia_data">പഴയ ഡൗണ്‍ലോഡ് ചെയ്ത വിക്കിപീഡിയ വിവരങ്ങള്‍ ചേര്‍ച്ചയില്ലാത്തതാണ്, അത് ആര്‍കൈവ് ചെയ്യണോ?</string>
+    <string name="download_wikipedia_files">"കൂടുതല്‍ വിക്കിപീഡിയ വിവരങ്ങള്‍ (%1$s MB)  ഡൗണ്‍ലോഡ് ചെയ്യണോ?"</string>
+    <string name="gps_network_not_enabled">സ്ഥലസേവനങ്ങള്‍ സജീവമല്ല. സജീവമാക്കട്ടെ?</string>
+    <string name="read_full_article">"പൂര്‍ണ്ണ ലേഖനം ഓണ്‍ലൈനില്‍ വായിക്കുക "</string>
+    <string name="shared_string_show_details">വിശദാംശങ്ങള്‍ കാണിക്കുക</string>
+    <string name="shared_string_places">സ്ഥലങ്ങള്‍</string>
+    <string name="record_plugin_name">സഞ്ചാരം രേഖപെടുത്തുന്നു</string>
+	<string name="roads_only">വഴികൾ മാത്രമുള്ളത്</string>
+    <string name="show_pedestrian_warnings">സീബ്രക്രോസിങ്ങ്</string>
+    <string name="rendering_category_hide">മറയ്ക്കുക</string>
+    <string name="rendering_category_transport">ഗതാഗത സംവിധാനം</string>
+    <string name="way_alarms">ഗതാഗത മുന്നറിയിപ്പു്</string>
+    <string name="monitoring_settings">സഞ്ചാരം രേഖപെടുത്തുന്നു</string>
+    <string name="osmo_activity">"ഒപ്പണ്‍ സ്ട്രീറ്റ് മാപ്പ്  നിരീക്ഷിക്കുക"</string>
+    <string name="install_paid">"പൂര്‍ണ്ണമായ പതുപ്പ് "</string>
+    <string name="prefer_motorways">അതിവേഗപാതകള്‍ തെരഞ്ഞെടുക്കുക</string>
+    <string name="prefer_in_routing_descr">അതിവേഗപാതകള്‍ തെരഞ്ഞെടുക്കുക</string>
+    <string name="local_indexes_cat_srtm">"കോണ്ടൂര്‍ ലൈനുകള്‍ "</string>
+    <string name="index_srtm_ele">"കോണ്ടൂര്‍ ലൈനുകള്‍ "</string>
+    <string name="map_widget_max_speed">വേഗപരിധി</string>
+    <string name="map_widget_top_text">തെരുവ് നാമം</string>
+    <string name="show_cameras">സ്പീഡ് ക്യാമറ</string>
+    <string name="show_traffic_warnings">ഗതാഗത മുന്നറിയിപ്പു്</string>
+    <string name="plugins_screen">പ്ളഗ്-ഇനുകള്‍</string>
+    <string name="prefs_plugins">പ്ളഗ്-ഇനുകള്‍</string>
+    <string name="context_menu_item_share_location">"സ്ഥാനം പങ്ക് വെക്കുക "</string>
+    <string name="amenity_type_transportation">ഗതാഗത സംവിധാനം</string>
+    <string name="context_menu_item_update_map">"ഭൂപടം  പരിഷ്ക്കരിക്കുക"</string>
+
+    <string name="default_buttons_commit">ഉറപ്പിക്കുക (കമ്മിറ്റ്)</string>
+    <string name="later">"പിന്നീട് "</string>
+    <string name="plugins_menu_group">പ്ളഗ്-ഇനുകള്‍</string>
+    <string name="night">"രാത്രി "</string>
     </resources>
