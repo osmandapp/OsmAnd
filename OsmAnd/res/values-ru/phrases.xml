@@ -1494,26 +1494,27 @@
 	<string name="poi_microbrewery_yes">Есть</string>
 	<string name="poi_microbrewery_no">Нет собственной пивоварни</string>
 
+	<string name="poi_takeaway_filter_yes">На вынос</string>
 	<string name="poi_takeaway">На вынос</string>
-	<string name="poi_takeaway_yes">Да</string>
+	<string name="poi_takeaway_yes">На вынос</string>
 	<string name="poi_takeaway_no">На вынос: нет</string>
 	<string name="poi_takeaway_only">Только на вынос</string>
 
 	<string name="poi_delivery">Доставка</string>
-	<string name="poi_delivery_filter_yes">С доставкой</string>
-	<string name="poi_delivery_yes">Есть</string>
+	<string name="poi_delivery_filter_yes">Есть</string>
+	<string name="poi_delivery_yes">Доставка</string>
 	<string name="poi_delivery_no">Без доставки</string>
 	<string name="poi_delivery_only">Только с доставкой</string>
 
 	<string name="poi_outdoor_seating">Места на открытом воздухе</string>
-	<string name="poi_outdoor_seating_filter_yes">Места на открытом воздухе</string>
-	<string name="poi_outdoor_seating_yes">Есть</string>
+	<string name="poi_outdoor_seating_filter_yes">Есть</string>
+	<string name="poi_outdoor_seating_yes">Места на открытом воздухе: есть</string>
 	<string name="poi_outdoor_seating_no">Нет мест на открытом воздухе</string>
-	<string name="poi_outdoor_seating_terrace">На террасе</string>
-	<string name="poi_outdoor_seating_sidewalk">На тротуаре</string>
-	<string name="poi_outdoor_seating_pedestrian_zone">Пешеходная зона</string>
-	<string name="poi_outdoor_seating_garden">В саду</string>
-	<string name="poi_outdoor_seating_patio">Патио</string>
+	<string name="poi_outdoor_seating_terrace">Места на открытом воздухе: на террасе</string>
+	<string name="poi_outdoor_seating_sidewalk">Места на открытом воздухе: на тротуаре</string>
+	<string name="poi_outdoor_seating_pedestrian_zone">Места на открытом воздухе: пешеходная зона</string>
+	<string name="poi_outdoor_seating_garden">Места на открытом воздухе: в саду</string>
+	<string name="poi_outdoor_seating_patio">Места на открытом воздухе: патио</string>
 
 	<string name="poi_cocktails">Коктейли</string>
 	<string name="poi_cocktails_yes">Есть</string>
@@ -2183,12 +2184,13 @@
 	<string name="poi_washing_machine">Стиральная машина</string>
 	<string name="poi_washing_machine_yes">Есть</string>
 	<string name="poi_washing_machine_no">Стиральная машина: отсутствует</string>
-	<string name="poi_shower_yes">Есть</string>
+	<string name="poi_shower_filter_yes">Душ</string>
+	<string name="poi_shower_yes">Душ</string>
 	<string name="poi_shower_no">Душ: отсутствует</string>
-	<string name="poi_shower_hot">Горячий</string>
-	<string name="poi_shower_outdoor">Снаружи</string>
-	<string name="poi_shower_cold">Холодный</string>
-	<string name="poi_shower_indoor">Внутри</string>
+	<string name="poi_shower_hot">Душ: горячий</string>
+	<string name="poi_shower_outdoor">Душ: снаружи</string>
+	<string name="poi_shower_cold">Душ: холодный</string>
+	<string name="poi_shower_indoor">Душ: внутри</string>
 
 	<string name="poi_caravans">Автоприцепы</string>
 	<string name="poi_caravans_yes">Разрешены</string>
