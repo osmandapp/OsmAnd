@@ -1593,7 +1593,7 @@
 	<string name="poi_internet_access_fee_yes">Internetadgang - gebyr</string>
 	<string name="poi_internet_access_fee_no">Internetadgang - inget gebyr</string>
 
-<string name="poi_diet_vegetarian_only">Kun vegetar</string>
+<string name="poi_diet_vegetarian_only">Kun vegetarisk</string>
 	<string name="poi_diet_vegetarian_yes">Vegetar</string>
 	<string name="poi_diet_vegetarian_no">Vegetarkost: nej</string>
 	<string name="poi_diet_vegetarian_few">Vegetarkost: kun få</string>
@@ -3191,14 +3191,14 @@
 	<string name="poi_public_bookcase_type_metal_cabinet">Type: metalkabinet</string>
 	<string name="poi_public_bookcase_type_shelf">Type: hylde</string>
 
-<string name="poi_diet">Diæt</string>
+<string name="poi_diet">Kost</string>
 	<string name="poi_health_specialty">Sundhedsspeciale</string>
 	<string name="poi_massage_type">Massagetype</string>
 	<string name="poi_tents">Telte</string>
 	<string name="poi_washing_machine">Vaskemaskine</string>
 	<string name="poi_caravans">Campingvogne</string>
 	<string name="poi_power_supply">Strømforsyning</string>
-	<string name="poi_medical_system">Medicinsksystem</string>
+	<string name="poi_medical_system">Medicinsystem</string>
 	<string name="poi_home_visit">Hjemmebesøg</string>
 	<string name="poi_dishes">Retter</string>
 
@@ -3233,13 +3233,13 @@
 	<string name="poi_cuisine_soba">Soba</string>
 	<string name="poi_cuisine_tea">Te</string>
 	<string name="poi_cuisine_barbecue">Barbecue</string>
-	<string name="poi_cuisine_noodle">Noodle</string>
+	<string name="poi_cuisine_noodle">Nudler</string>
 	<string name="poi_cuisine_soup">Suppe</string>
 	<string name="poi_cuisine_pie">Pie</string>
 	<string name="poi_cuisine_hotdog">Hotdog</string>
-	<string name="poi_cuisine_deli">Deli</string>
+	<string name="poi_cuisine_deli">Delikatesser</string>
 	<string name="poi_cuisine_salad">Salat</string>
-	<string name="poi_cuisine_frozen_yogurt">Frosen yoghurt</string>
+	<string name="poi_cuisine_frozen_yogurt">Yoghurtis</string>
 	<string name="poi_cuisine_fried_food">Friturestegt mad</string>
 	<string name="poi_cuisine_savory_pancakes">Krydrede pandekager</string>
 	<string name="poi_cuisine_bistro">Bistro</string>
@@ -3262,12 +3262,12 @@
 	<string name="poi_cuisine_suki">Suki</string>
 	<string name="poi_cuisine_udon">Udon</string>
 	<string name="poi_cuisine_brasserie">Brasserie</string>
-	<string name="poi_cuisine_bubble_tea">Boble te</string>
+	<string name="poi_cuisine_bubble_tea">Boblete</string>
 	<string name="poi_cuisine_yakitori">Yakitori</string>
 	<string name="poi_cuisine_sagardotegia">Sagardotegia</string>
 	<string name="poi_cuisine_meat">Kød</string>
 	<string name="poi_cuisine_wings">Vinger</string>
-	<string name="poi_cuisine_waffle">Vafler</string>
+	<string name="poi_cuisine_waffle">Vaffel</string>
 	<string name="poi_cuisine_chocolate">Chokolade</string>
 	<string name="poi_cuisine_wine">Vin</string>
 	<string name="poi_cuisine_potato">Kartoffel</string>
@@ -3310,7 +3310,7 @@
 	<string name="poi_cuisine_danish">Dansk</string>
 	<string name="poi_cuisine_indonesian">Indonesisk</string>
 	<string name="poi_cuisine_african">Afrikansk</string>
-	<string name="poi_cuisine_caribbean">Caraibien</string>
+	<string name="poi_cuisine_caribbean">Caribisk</string>
 	<string name="poi_cuisine_argentinian">Argentinsk</string>
 	<string name="poi_cuisine_balkan">Balkan</string>
 	<string name="poi_cuisine_peruvian">Peruviansk</string>
@@ -3343,12 +3343,12 @@
 	<string name="poi_cuisine_swedish">Svensk</string>
 	<string name="poi_cuisine_jamaican">Jamaicansk</string>
 	<string name="poi_cuisine_armenian">Armensk</string>
-	<string name="poi_cuisine_hawaiian">Hawaiian</string>
+	<string name="poi_cuisine_hawaiian">Hawaiiansk</string>
 	<string name="poi_cuisine_english">Engelsk</string>
 	<string name="poi_cuisine_pakistani">Pakistansk</string>
 	<string name="poi_cuisine_taiwanese">Taiwansk</string>
 	<string name="poi_cuisine_tex_mex">Tex-Mex</string>
-	<string name="poi_cuisine_dutch">nederlandsk</string>
+	<string name="poi_cuisine_dutch">Hollandsk</string>
 	<string name="poi_cuisine_syrian">Syrisk</string>
 	<string name="poi_cuisine_australian">Australsk</string>
 	<string name="poi_cuisine_cajun">Cajun</string>
