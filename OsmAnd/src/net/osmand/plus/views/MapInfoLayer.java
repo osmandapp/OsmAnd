@@ -137,6 +137,8 @@ public class MapInfoLayer extends OsmandMapLayer {
 		rulerControl.setVisibility(false);
 		
 		// register left stack
+		registerSideWidget(null, R.drawable.ic_action_aircraft, R.string.map_widget_compass, "compass", true, 4);
+
 		NextTurnInfoWidget bigInfoControl = ric.createNextInfoControl(map, app, false);
 		registerSideWidget(bigInfoControl, R.drawable.ic_action_next_turn, R.string.map_widget_next_turn, "next_turn", true, 5);
 		NextTurnInfoWidget smallInfoControl = ric.createNextInfoControl(map, app, true);
@@ -255,7 +257,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 	}
 
 	private void updateReg(TextState ts, MapWidgetRegInfo reg) {
-		View v = reg.widget.getView().findViewById(R.id.widget_bg);
+		View v = reg.widget != null ? reg.widget.getView().findViewById(R.id.widget_bg) : null;
 		if(v != null) {
 			v.setBackgroundResource(reg.left ? ts.leftRes : ts.rightRes);
 			reg.widget.updateTextColor(ts.textColor, ts.textShadowColor, ts.textBold, ts.textShadowRadius);

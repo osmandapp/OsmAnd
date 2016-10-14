@@ -14,37 +14,38 @@ import java.util.Set;
 
 
 public class ApplicationMode {
-	private static Map<String, Set<ApplicationMode>> widgets = new LinkedHashMap<String, Set<ApplicationMode>>(); 
-	private static List<ApplicationMode> values = new ArrayList<ApplicationMode>();
-	private static List<ApplicationMode> cachedFilteredValues = new ArrayList<ApplicationMode>();
+	private static Map<String, Set<ApplicationMode>> widgetsVisibilityMap = new LinkedHashMap<>();
+	private static Map<String, Set<ApplicationMode>> widgetsAvailabilityMap = new LinkedHashMap<>();
+	private static List<ApplicationMode> values = new ArrayList<>();
+	private static List<ApplicationMode> cachedFilteredValues = new ArrayList<>();
 	/*
 	 * DEFAULT("Browse map"), CAR("Car"), BICYCLE("Bicycle"), PEDESTRIAN("Pedestrian");
 	 */
 	public static final ApplicationMode DEFAULT = create(R.string.app_mode_default, "default").speed(1.5f, 5).arrivalDistance(90).defLocation().
 			icon(R.drawable.ic_browse_map, R.drawable.ic_world_globe_dark).reg();
-	
+
 	public static final ApplicationMode CAR = create(R.string.app_mode_car, "car").speed(15.3f, 35).carLocation().
 			icon(R.drawable.ic_car, R.drawable.ic_action_car_dark).reg();
-	
+
 	public static final ApplicationMode BICYCLE = create(R.string.app_mode_bicycle, "bicycle").speed(5.5f, 15).arrivalDistance(60).bicycleLocation().
 			icon(R.drawable.ic_bicycle, R.drawable.ic_action_bicycle_dark).reg();
-	
+
 	public static final ApplicationMode PEDESTRIAN = create(R.string.app_mode_pedestrian, "pedestrian").speed(1.5f, 5).arrivalDistance(45).
 			icon(R.drawable.ic_pedestrian, R.drawable.ic_action_pedestrian_dark).reg();
-	
+
 	public static final ApplicationMode AIRCRAFT = create(R.string.app_mode_aircraft, "aircraft").speed(40f, 100).carLocation().
-			icon(R.drawable.ic_aircraft,R.drawable.ic_action_aircraft).reg();
-	
+			icon(R.drawable.ic_aircraft, R.drawable.ic_action_aircraft).reg();
+
 	public static final ApplicationMode BOAT = create(R.string.app_mode_boat, "boat").speed(5.5f, 20).carLocation().
 			icon(R.drawable.ic_sail_boat, R.drawable.ic_action_sail_boat_dark).reg();
-	
+
 	public static final ApplicationMode HIKING = create(R.string.app_mode_hiking, "hiking").speed(1.5f, 5).parent(PEDESTRIAN).
 			icon(R.drawable.ic_trekking, R.drawable.ic_action_trekking_dark).reg();
-	
+
 	public static final ApplicationMode MOTORCYCLE = create(R.string.app_mode_motorcycle, "motorcycle").speed(15.3f, 40).
 			carLocation().parent(CAR).
 			icon(R.drawable.ic_motorcycle, R.drawable.ic_action_motorcycle_dark).reg();
-	
+
 	public static final ApplicationMode TRUCK = create(R.string.app_mode_truck, "truck").speed(15.3f, 40).
 			carLocation().parent(CAR).
 			icon(R.drawable.ic_truck, R.drawable.ic_action_truck_dark).reg();
@@ -55,87 +56,95 @@ public class ApplicationMode {
 
 	public static final ApplicationMode TRAIN = create(R.string.app_mode_train, "train").speed(25f, 40).
 			carLocation().icon(R.drawable.ic_action_train, R.drawable.ic_action_train).reg();
-	
+
 	static {
-		ApplicationMode[] exceptDefault = new ApplicationMode[] { CAR, PEDESTRIAN, BICYCLE, BOAT, AIRCRAFT, BUS, TRAIN };
-		ApplicationMode[] exceptPedestrianAndDefault = new ApplicationMode[] { CAR, BICYCLE, BOAT, AIRCRAFT, BUS, TRAIN };
-		ApplicationMode[] exceptAirBoatDefault = new ApplicationMode[] { CAR, BICYCLE, PEDESTRIAN };
-		ApplicationMode[] pedestrian = new ApplicationMode[] { PEDESTRIAN };
-		ApplicationMode[] pedestrianBicycle = new ApplicationMode[] { PEDESTRIAN, BICYCLE };
-		
+		ApplicationMode[] exceptDefault = new ApplicationMode[]{CAR, PEDESTRIAN, BICYCLE, BOAT, AIRCRAFT, BUS, TRAIN};
+		ApplicationMode[] exceptPedestrianAndDefault = new ApplicationMode[]{CAR, BICYCLE, BOAT, AIRCRAFT, BUS, TRAIN};
+		ApplicationMode[] exceptAirBoatDefault = new ApplicationMode[]{CAR, BICYCLE, PEDESTRIAN};
+		ApplicationMode[] pedestrian = new ApplicationMode[]{PEDESTRIAN};
+		ApplicationMode[] pedestrianBicycle = new ApplicationMode[]{PEDESTRIAN, BICYCLE};
+
 		ApplicationMode[] all = null;
-		ApplicationMode[] none = new ApplicationMode[] {};
-		
+		ApplicationMode[] none = new ApplicationMode[]{};
+
 		// left
-		regWidget("next_turn", exceptPedestrianAndDefault);
-		regWidget("next_turn_small", pedestrian);
-		regWidget("next_next_turn", exceptPedestrianAndDefault);
-		
+		regWidgetVisibility("next_turn", exceptPedestrianAndDefault);
+		regWidgetVisibility("next_turn_small", pedestrian);
+		regWidgetVisibility("next_next_turn", exceptPedestrianAndDefault);
+		regWidgetAvailability("next_turn", exceptDefault);
+		regWidgetAvailability("next_turn_small", exceptDefault);
+		regWidgetAvailability("next_next_turn", exceptDefault);
+
 		// right
-		regWidget("intermediate_distance", exceptDefault);
-		regWidget("distance", exceptDefault);
-		regWidget("time", exceptDefault);
-		regWidget("speed", exceptPedestrianAndDefault);
-		regWidget("max_speed", CAR);
-		regWidget("altitude", pedestrianBicycle);
-		regWidget("gps_info", none);
-		
+		regWidgetVisibility("intermediate_distance", exceptDefault);
+		regWidgetVisibility("distance", exceptDefault);
+		regWidgetVisibility("time", exceptDefault);
+		regWidgetVisibility("speed", exceptPedestrianAndDefault);
+		regWidgetVisibility("max_speed", CAR);
+		regWidgetVisibility("altitude", pedestrianBicycle);
+		regWidgetVisibility("gps_info", none);
+		regWidgetAvailability("intermediate_distance", exceptDefault);
+		regWidgetAvailability("distance", exceptDefault);
+		regWidgetAvailability("time", exceptDefault);
+		regWidgetAvailability("map_marker_1st", none);
+		regWidgetAvailability("map_marker_2nd", none);
+
 		// top
-		regWidget("config", none);
-		regWidget("layers", none);
-		regWidget("compass", all);
-		regWidget("street_name", exceptAirBoatDefault);
-		regWidget("back_to_location", all);
-		regWidget("monitoring_services", none);
-		regWidget("bgService", none);
+		regWidgetVisibility("config", none);
+		regWidgetVisibility("layers", none);
+		regWidgetVisibility("compass", none);
+		regWidgetVisibility("street_name", exceptAirBoatDefault);
+		regWidgetVisibility("back_to_location", all);
+		regWidgetVisibility("monitoring_services", none);
+		regWidgetVisibility("bgService", none);
 	}
-	
-	
+
+
 	private static class ApplicationModeBuilder {
-		
-	
+
+
 		private ApplicationMode applicationMode;
 
 		public ApplicationMode reg() {
 			values.add(applicationMode);
 			return applicationMode;
 		}
-		
+
 		public ApplicationModeBuilder icon(int bigIcon, int smallIconDark) {
 			applicationMode.iconId = bigIcon;
 			applicationMode.smallIconDark = smallIconDark;
 			return this;
 		}
-		
-		public ApplicationModeBuilder carLocation(){
+
+		public ApplicationModeBuilder carLocation() {
 			applicationMode.bearingIconDay = R.drawable.map_car_bearing;
 			applicationMode.bearingIconNight = R.drawable.map_car_bearing_night;
 			applicationMode.locationIconDay = R.drawable.map_car_location;
 			applicationMode.locationIconNight = R.drawable.map_car_location_night;
 			return this;
 		}
-		
-		public ApplicationModeBuilder parent(ApplicationMode parent){
+
+		public ApplicationModeBuilder parent(ApplicationMode parent) {
 			applicationMode.parent = parent;
 			return this;
 		}
-		
-		public ApplicationModeBuilder bicycleLocation(){
+
+		public ApplicationModeBuilder bicycleLocation() {
 			applicationMode.bearingIconDay = R.drawable.map_bicycle_bearing;
 			applicationMode.bearingIconNight = R.drawable.map_bicycle_bearing_night;
 			applicationMode.locationIconDay = R.drawable.map_bicycle_location;
 			applicationMode.locationIconNight = R.drawable.map_bicycle_location_night;
 			return this;
 		}
-		
-		public ApplicationModeBuilder defLocation(){
+
+		public ApplicationModeBuilder defLocation() {
 			applicationMode.bearingIconDay = R.drawable.map_pedestrian_bearing;
 			applicationMode.bearingIconNight = R.drawable.map_pedestrian_bearing_night;
 			applicationMode.locationIconDay = R.drawable.map_pedestrian_location;
 			applicationMode.locationIconNight = R.drawable.map_pedestrian_location_night;
 			return this;
 		}
-		
+
 		public ApplicationModeBuilder speed(float defSpeed, int distForTurn) {
 			applicationMode.defaultSpeed = defSpeed;
 			applicationMode.minDistanceForTurn = distForTurn;
@@ -147,7 +156,7 @@ public class ApplicationMode {
 			return this;
 		}
 	}
-	
+
 	private static ApplicationModeBuilder create(int key, String stringKey) {
 		ApplicationModeBuilder builder = new ApplicationModeBuilder();
 		builder.applicationMode = new ApplicationMode(key, stringKey);
@@ -158,7 +167,7 @@ public class ApplicationMode {
 		this.key = key;
 		this.stringKey = stringKey;
 	}
-	
+
 	public static List<ApplicationMode> values(OsmandSettings settings) {
 		if (cachedFilteredValues.isEmpty()) {
 			if (listener == null) {
@@ -180,66 +189,89 @@ public class ApplicationMode {
 		}
 		return cachedFilteredValues;
 	}
-	
+
 	public static List<ApplicationMode> allPossibleValues() {
 		return new ArrayList<ApplicationMode>(values);
 	}
-	
-	
+
+
 	// returns modifiable ! Set<ApplicationMode> to exclude non-wanted derived
-	public static Set<ApplicationMode> regWidget(String widgetId, ApplicationMode... am) {
-		HashSet<ApplicationMode> set = new HashSet<ApplicationMode>();
-		if(am == null) {
-			set.addAll(values); 
+	public static Set<ApplicationMode> regWidgetVisibility(String widgetId, ApplicationMode... am) {
+		HashSet<ApplicationMode> set = new HashSet<>();
+		if (am == null) {
+			set.addAll(values);
 		} else {
 			Collections.addAll(set, am);
 		}
-		for(ApplicationMode m : values) {
+		for (ApplicationMode m : values) {
 			// add derived modes
-			if(set.contains(m.getParent())) {
+			if (set.contains(m.getParent())) {
 				set.add(m);
 			}
 		}
-		widgets.put(widgetId, set);
+		widgetsVisibilityMap.put(widgetId, set);
 		return set;
 	}
-	
+
 	public boolean isWidgetCollapsible(String key) {
 		return false;
 	}
-	
+
 	public boolean isWidgetVisible(String key) {
-		Set<ApplicationMode> set = widgets.get(key);
-		if(set == null) {
+		Set<ApplicationMode> set = widgetsVisibilityMap.get(key);
+		if (set == null) {
 			return false;
 		}
 		return set.contains(this);
 	}
-	
-	
-	
+
+	public static Set<ApplicationMode> regWidgetAvailability(String widgetId, ApplicationMode... am) {
+		HashSet<ApplicationMode> set = new HashSet<>();
+		if (am == null) {
+			set.addAll(values);
+		} else {
+			Collections.addAll(set, am);
+		}
+		for (ApplicationMode m : values) {
+			// add derived modes
+			if (set.contains(m.getParent())) {
+				set.add(m);
+			}
+		}
+		widgetsAvailabilityMap.put(widgetId, set);
+		return set;
+	}
+
+	public boolean isWidgetAvailable(String key) {
+		Set<ApplicationMode> set = widgetsAvailabilityMap.get(key);
+		if (set == null) {
+			return true;
+		}
+		return set.contains(this);
+	}
+
 	public static List<ApplicationMode> getModesDerivedFrom(ApplicationMode am) {
 		List<ApplicationMode> list = new ArrayList<ApplicationMode>();
-		for(ApplicationMode a : values) {
-			if(a == am || a.getParent() == am) {
+		for (ApplicationMode a : values) {
+			if (a == am || a.getParent() == am) {
 				list.add(a);
 			}
 		}
 		return list;
 	}
-	
+
 	public ApplicationMode getParent() {
 		return parent;
 	}
-	
+
 	public int getSmallIconDark() {
-		return smallIconDark ;
+		return smallIconDark;
 	}
-	
-	public boolean hasFastSpeed(){
+
+	public boolean hasFastSpeed() {
 		return getDefaultSpeed() > 10;
 	}
-	
+
 	public int getResourceBearingDay() {
 		return bearingIconDay;
 	}
@@ -248,7 +280,7 @@ public class ApplicationMode {
 		//return bearingIconDay;
 		return bearingIconNight;
 	}
-	
+
 	public int getResourceLocationDay() {
 		return locationIconDay;
 	}
@@ -257,15 +289,15 @@ public class ApplicationMode {
 		//return locationIconDay;
 		return locationIconNight;
 	}
-	
+
 	public String getStringKey() {
 		return stringKey;
 	}
-	
+
 	public int getIconId() {
 		return iconId;
 	}
-	
+
 	public int getStringResource() {
 		return key;
 	}
@@ -273,24 +305,24 @@ public class ApplicationMode {
 	public String toHumanString(Context ctx) {
 		return ctx.getString(key);
 	}
-	
+
 	public String toHumanStringCtx(Context ctx) {
 		return ctx.getString(key);
 	}
-	
+
 	public static ApplicationMode valueOfStringKey(String key, ApplicationMode def) {
-		for(ApplicationMode p : values) {
-			if(p.getStringKey().equals(key)) {
+		for (ApplicationMode p : values) {
+			if (p.getStringKey().equals(key)) {
 				return p;
 			}
 		}
 		return def;
 	}
-	
+
 	public float getDefaultSpeed() {
 		return defaultSpeed;
 	}
-	
+
 	public int getMinDistanceForTurn() {
 		return minDistanceForTurn;
 	}
@@ -308,7 +340,7 @@ public class ApplicationMode {
 
 	private ApplicationMode parent;
 	private int iconId = R.drawable.ic_browse_map;
-	private int smallIconDark = R.drawable.ic_world_globe_dark ;
+	private int smallIconDark = R.drawable.ic_world_globe_dark;
 	private float defaultSpeed = 10f;
 	private int minDistanceForTurn = 50;
 	private int arrivalDistance = 90;

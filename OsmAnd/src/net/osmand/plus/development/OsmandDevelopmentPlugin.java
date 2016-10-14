@@ -24,7 +24,7 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 
 	public OsmandDevelopmentPlugin(OsmandApplication app) {
 		this.app = app;
-		//ApplicationMode.regWidget("fps", new ApplicationMode[0]);
+		//ApplicationMode.regWidgetVisibility("fps", new ApplicationMode[0]);
 	}
 
 

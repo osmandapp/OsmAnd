@@ -127,7 +127,9 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 
 	private MapActivity mapActivity;
 	private ImageView actionButton;
+	private View compassButton;
 	private FrameLayout dashboardView;
+	private float cachedRotate = 0;
 
 	private ArrayAdapter<?> listAdapter;
 	private OnItemClickListener listAdapterOnClickListener;
@@ -547,19 +549,19 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 		}
 	}
 
+	private FrameLayout.LayoutParams getActionButtonLayoutParams(int btnSizePx) {
+		int topPadPx = mapActivity.getResources().getDimensionPixelSize(R.dimen.dashboard_map_top_padding);
+		FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(btnSizePx, btnSizePx);
+		int marginRight = btnSizePx / 4;
+		params.setMargins(0, landscape ? 0 : topPadPx - 2 * btnSizePx, marginRight, landscape ? marginRight : 0);
+		params.gravity = landscape ? Gravity.BOTTOM | Gravity.RIGHT : Gravity.TOP | Gravity.RIGHT;
+		return params;
+	}
 
 	private void initActionButtons() {
 		actionButton = new ImageView(mapActivity);
-		int btnSize = (int) mapActivity.getResources().getDimension(R.dimen.map_button_size);
-		int topPad = (int) mapActivity.getResources().getDimension(R.dimen.dashboard_map_top_padding);
-		FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
-				btnSize, btnSize
-		);
-		int marginRight = btnSize / 4;
-		params.setMargins(0, landscape ? 0 : topPad - 2 * btnSize,
-				marginRight, landscape ? marginRight : 0);
-		params.gravity = landscape ? Gravity.BOTTOM | Gravity.RIGHT : Gravity.TOP | Gravity.RIGHT;
-		actionButton.setLayoutParams(params);
+		int btnSizePx = mapActivity.getResources().getDimensionPixelSize(R.dimen.map_button_size);
+		actionButton.setLayoutParams(getActionButtonLayoutParams(btnSizePx));
 		actionButton.setScaleType(ScaleType.CENTER);
 		actionButton.setBackgroundResource(R.drawable.btn_circle_blue);
 		hideActionButton();
@@ -690,6 +692,9 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 
 	private void hideActionButton() {
 		actionButton.setVisibility(View.GONE);
+		if (compassButton != null) {
+			compassButton.setVisibility(View.GONE);
+		}
 	}
 
 	public net.osmand.Location getMyLocation() {
@@ -784,6 +789,11 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 				actionButton.setVisibility(View.VISIBLE);
 			} else {
 				hideActionButton();
+				if (visibleType == DashboardType.CONFIGURE_MAP) {
+					int btnSizePx = mapActivity.getResources().getDimensionPixelSize(R.dimen.map_small_button_size);
+					compassButton = mapActivity.getMapLayers().getMapControlsLayer()
+							.moveCompassButton(dashboardView, getActionButtonLayoutParams(btnSizePx), nightMode);
+				}
 			}
 			updateDownloadBtn();
 			View listViewLayout = dashboardView.findViewById(R.id.dash_list_view_layout);
@@ -1111,6 +1121,10 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 	}
 
 	private void hide(View view, boolean animation) {
+		if (compassButton != null) {
+			mapActivity.getMapLayers().getMapControlsLayer().restoreCompassButton(nightMode);
+			compassButton = null;
+		}
 		if (!animation) {
 			dashboardView.setVisibility(View.GONE);
 		} else {
@@ -1281,7 +1295,18 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 				lp.topMargin = originalPosition - scrollY;
 				((FrameLayout) actionButton.getParent()).updateViewLayout(actionButton, lp);
 			}
-
+		} else if (compassButton != null) {
+			double scale = mapActivity.getResources().getDisplayMetrics().density;
+			int originalPosition = mFlexibleSpaceImageHeight - (int) (64 * scale);
+			int minTop = mFlexibleBlurSpaceHeight + (int) (5 * scale);
+			FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) compassButton.getLayoutParams();
+			if (minTop > originalPosition - scrollY) {
+				hideActionButton();
+			} else {
+				compassButton.setVisibility(View.VISIBLE);
+				lp.topMargin = originalPosition - scrollY;
+				((FrameLayout) compassButton.getParent()).updateViewLayout(compassButton, lp);
+			}
 		}
 	}
 

@@ -56,7 +56,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		this.app = app;
 		liveMonitoringHelper = new LiveMonitoringHelper(app);
 		final List<ApplicationMode> am = ApplicationMode.allPossibleValues();
-		ApplicationMode.regWidget("monitoring", am.toArray(new ApplicationMode[am.size()]));
+		ApplicationMode.regWidgetVisibility("monitoring", am.toArray(new ApplicationMode[am.size()]));
 		settings = app.getSettings();
 	}
 	
