@@ -9,6 +9,7 @@ import net.osmand.data.QuadRect;
 import net.osmand.data.TransportRoute;
 import net.osmand.data.TransportStop;
 import net.osmand.osm.PoiCategory;
+import net.osmand.osm.PoiFilter;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -39,7 +40,19 @@ public class AmenityMenuController extends MenuController {
 		super(new AmenityMenuBuilder(app, amenity), pointDescription, mapActivity);
 		this.amenity = amenity;
 		if (amenity.getType().getKeyName().equals("transportation")) {
-			processTransportStop();
+			boolean showTransportStops = false;
+			PoiFilter f = amenity.getType().getPoiFilterByName("public_transport");
+			if (f != null) {
+				for (PoiType t : f.getPoiTypes()) {
+					if (t.getKeyName().equals(amenity.getSubType())) {
+						showTransportStops = true;
+						break;
+					}
+				}
+			}
+			if (showTransportStops) {
+				processTransportStop();
+			}
 		}
 	}
 
@@ -139,7 +152,7 @@ public class AmenityMenuController extends MenuController {
 			};
 			if (r.type == null) {
 				builder.addPlainMenuItem(R.drawable.ic_action_polygom_dark, r.getDescription(getMapActivity().getMyApplication(), true),
-						false, false, listener );
+						false, false, listener);
 			} else {
 				builder.addPlainMenuItem(r.type.getResourceId(), r.getDescription(getMapActivity().getMyApplication(), true),
 						false, false, listener);
@@ -202,7 +215,7 @@ public class AmenityMenuController extends MenuController {
 				TransportStopController.TransportStopType type = TransportStopController.TransportStopType.findType(rs.getType());
 				TransportStopRoute r = new TransportStopRoute();
 				r.type = type;
-				r.desc = rs.getRef() + " " + (useEnglishNames ?  rs.getEnName(true) : rs.getName());
+				r.desc = rs.getRef() + " " + (useEnglishNames ? rs.getEnName(true) : rs.getName());
 				r.route = rs;
 				r.stop = s;
 				r.distance = dist;

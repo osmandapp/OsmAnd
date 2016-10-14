@@ -29,8 +29,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import net.osmand.AndroidUtils;
+import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
+import net.osmand.osm.PoiFilter;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmandApplication;
@@ -464,19 +466,34 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 		MapPoiTypes poiTypes = getMyApplication().getPoiTypes();
 		Set<String> excludedPoiAdditionalCategories = new LinkedHashSet<>();
 		for (Entry<PoiCategory, LinkedHashSet<String>> entry : filter.getAcceptedTypes().entrySet()) {
-			if (entry.getKey().getExcludedPoiAdditionalCategories() != null) {
-				excludedPoiAdditionalCategories.addAll(entry.getKey().getExcludedPoiAdditionalCategories());
+			for (PoiFilter f : entry.getKey().getPoiFilters()) {
+				for (PoiType t : f.getPoiTypes()) {
+					collectExcludedCategories(poiTypes, t, null, excludedPoiAdditionalCategories);
+				}
+				collectExcludedCategories(poiTypes, f, null, excludedPoiAdditionalCategories);
 			}
-			if (entry.getValue() != null) {
-				for (String keyName : entry.getValue()) {
-					List<String> categories = poiTypes.getPoiTypeByKey(keyName).getExcludedPoiAdditionalCategories();
-					if (categories != null) {
-						excludedPoiAdditionalCategories.addAll(categories);
-					}
+			for (PoiType t : entry.getKey().getPoiTypes()) {
+				collectExcludedCategories(poiTypes, t, null, excludedPoiAdditionalCategories);
+			}
+			collectExcludedCategories(poiTypes, entry.getKey(), entry.getValue(), excludedPoiAdditionalCategories);
+		}
+		return excludedPoiAdditionalCategories;
+	}
+
+	private void collectExcludedCategories(MapPoiTypes poiTypes,
+										   AbstractPoiType type, LinkedHashSet<String> names,
+										   Set<String> excludedPoiAdditionalCategories) {
+		if (type.getExcludedPoiAdditionalCategories() != null) {
+			excludedPoiAdditionalCategories.addAll(type.getExcludedPoiAdditionalCategories());
+		}
+		if (names != null) {
+			for (String keyName : names) {
+				List<String> categories = poiTypes.getPoiTypeByKey(keyName).getExcludedPoiAdditionalCategories();
+				if (categories != null) {
+					excludedPoiAdditionalCategories.addAll(categories);
 				}
 			}
 		}
-		return excludedPoiAdditionalCategories;
 	}
 
 	private List<PoiFilterListItem> getListItems() {
