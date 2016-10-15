@@ -3336,4 +3336,9 @@
 
 <string name="poi_cuisine_gyros">Carne asada en horno giratorio vertical (gyros)</string>
 	<string name="poi_cuisine_yakiniku">Carne asada estilo japonés (yakiniku)</string>
+	<string name="poi_cuisine_sub">Sándwich submarino (torpedo)</string>
+	<string name="poi_cuisine_teriyaki">Carne asada en salsa dulce (teriyaki)</string>
+
+	<string name="poi_cuisine_souvlaki">Brocheta griega de carne (souvlaki)</string>
+	<string name="poi_cuisine_buschenschank">Buschenschank</string>
 	</resources>
