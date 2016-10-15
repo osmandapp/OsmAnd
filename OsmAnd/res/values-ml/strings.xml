@@ -982,4 +982,127 @@
     <string name="later">"പിന്നീട് "</string>
     <string name="plugins_menu_group">പ്ളഗ്-ഇനുകള്‍</string>
     <string name="night">"രാത്രി "</string>
+    <string name="storage_free_space">ഫ്രീ സ്പേസ്</string>
+    <string name="clear_tile_data">"എല്ലാ ടൈലുകളും കളയുക "</string>
+    <string name="anonymous_user_hint">പേരുവയ്‌ക്കാത്ത ഉപയോക്താവിനു:
+-ഗ്രൂപ്പുണ്ടാക്കാനവില്ല; 
+-ഗ്രൂപ്പുകളും ഉപകരണങ്ങളും സേര്‍വറുമായ് പൊരുത്തപെടുത്താനവില്ല;
+-ഗ്രൂപ്പുകളും ഉപകരണങ്ങളും വെബ് സൈറ്റിലെ സ്വകാര്യ ഡാഷ്ബോര്‍ഡ് ഉപയോഗിച്ച് നിയന്ത്രിക്കാനാവില്ല.</string>
+    <string name="download_files_error_not_enough_space">"ആവശ്യത്തിന് സ്ഥലമില്ല !
+ഇതിനായി തല്‍ക്കാലം  {3} MB യും സ്ഥിരമായി  {1} MB യും ആവശ്യമുണ്ട് .
+ ഇപ്പോള്‍  {2} MB മാത്രം ലഭ്യമാണ്."</string>
+    <string name="switch_start_finish">പ്രാരംഭ സ്ഥലം ലക്ഷ്യസ്ഥാനവും തിരിച്ചിടുക</string>
+    <string name="simulate_your_location_stop_descr">"നിങ്ങളുടെ സ്ഥാനം  സിമുലേറ്റ് ചെയ്യുന്നത് നിര്‍ത്തുക"</string>
+    <string name="download_live_updates">"പരിഷ്കരണങ്ങള്‍ "</string>
+    <string name="disable_recording_once_app_killed_descrp">"ആപ്പിനെ (അടുത്തകാലത്തുള്ള അപ്പുകള്‍ -ആന്ഡ്രോയിഡ് വഴി)നിര്‍ത്തിയാല്‍ ജി പി എക്സ് റിക്കോഡിങ്ങ് നിര്‍ത്തും. (ഓഎസ്എംആന്ഡിന്റെ ബാക്ക്ഗ്രൗണ്ട് സൂചിക ആന്ഡ്രോയിഡില്‍ നോട്ടിഫിക്കേഷന്‍ പലകയില്‍ നിന്നും  അപ്രത്യ്ക്ഷമാകും"</string>
+    <string name="application_dir_change_warning3">പുതിയ സ്ഥലത്തെക്ക് ഓഎസ്എംആന്ഡിന്റെ വിവരങ്ങളടങ്ങിയ ഫയലുകളും പകര്‍ത്തണോ?</string>
+    <string name="storage_directory_multiuser">ഒന്നിലധികം ഉപഭോക്താക്കളുടെ സംഭരണസ്ഥലം</string>
+    <string name="agps_data_last_downloaded">അവസാനം ഡൗണ്‍ലോഡ് ചെയ്തത്: %1$s</string>
+    <string name="delay_to_start_navigation_descr">റൂട്ട് തയ്യാറാക്കുള്ള സ്ക്രീനില്‍ എത്രസമയം ചെലവഴിക്കണം എന്ന് പറയുക</string>
+    <string name="delay_to_start_navigation">"ടേണ്-ബൈ-ടേണ്‍ നിര്‍ദേശങ്ങള്‍ ആരംഭിക്കുന്നതിനു മുമ്പ്  …"</string>
+    <string name="simulate_your_location">"നിങ്ങളുടെ സ്ഥാനം  സിമുലേറ്റ് ചെയ്യുക "</string>
+    <string name="shared_string_video">വീഡിയോ</string>
+    <string name="audionotes_plugin_description">"ഓഡിയോ/ വീഡിയൊ കുറിപ്പ്     അനുബന്ധം യാത്രക്കിടക്ക് ഏതു സ്ഥലത്തെക്കുറിച്ചും സ്ക്രീനിലെ ബട്ടണ്‍ / കോണ്ടെക്സ്റ്റ് മെനു ഉപയോഗിച്ച്  ഓഡിയോ/വീഡിയോ/ഫോട്ടോ കുറിപ്പുകള്‍ തയ്യാറാക്കാന്‍ ഉള്ളതാണ്."</string>
+    <string name="share_note">കുറിപ്പ് പങ്ക് വക്കുക</string>
+    <string name="notes">കുറിപ്പുകള്‍</string>
+    <string name="online_map">ഓണ്‍ലൈന്‍ ഭൂപടം</string>
+    <string name="version_settings">ബില്‍ഡുകള്‍</string>
+    <string name="show_railway_warnings">റയില്‍വെ ക്രോ‌സിങ്ങ്</string>
+    <string name="use_opengl_render">"ഓപ്പണ്‍ ജി എല്‍ ഉപയോഗിച്ച് വരച്ച് കാണിക്കുക "</string>
+    <string name="wake_on_voice_descr">"വളവുകള്‍ക്കടുത്തെത്തുമ്പൊള്‍  സ്ക്രീന്‍  ഓണക്കുക (ഓഫ്  ആണെങ്കില്‍)"</string>
+    <string name="configure_map">ഭൂപടം സജ്ജീകരിക്കുക</string>
+    <string name="text_size">അക്ഷരവലിപ്പം</string>
+    <string name="background_service_is_enabled_question">ഓഎസ്എംആന്ഡ് ബാക്ക്ഗ്രൗണ്ട് സേവനങ്ങള്‍ പ്രവര്‍ത്തിച്ചു കൊണ്ടിരിക്കുന്നു. അതും സ്ടോപ് ചെയ്യണോ?</string>
+    <string name="voice_provider_descr">വഴികാട്ടിക്കായി ശബ്ദ മാര്‍ഗനിര്‍ദേശം തെരഞ്ഞെടുക്കുക</string>
+    <string name="voice_provider">"ശബ്ദ മാര്‍ഗനിര്‍ദേശം "</string>
+
+    <string name="show_zoom_buttons_navigation">സൂം ബട്ടണുകള്‍ കാണിക്കുക</string>
+    <string name="delay_navigation_start">തന്നെ ടേണ്-ബൈ-ടേണ്‍ നിര്‍ദേശങ്ങള്‍ ആരംഭിക്കുക</string>
+    <string name="use_points_as_intermediates">"ബിന്ദുക്കള്‍ക്കിടയില്‍ റൂട്ട് കണ്ട്പിടിക്കുക "</string>
+    <string name="voice_pref_title">ശബ്ദം</string>
+    <string name="android_19_location_disabled">"ആ‌ന്‍ഡ്രോയിഡ് പതിപ്പ് 4.4 കിറ്റ്കാറ്റു മുതല്‍ പഴയ ഫോള്‍ഡറില്‍  (%s) ഭൂപടങ്ങളും മറ്റു വിവരങ്ങളും സൂക്ഷിക്കാന്‍ പറ്റാതായി. പുതിയ സ്ഥലത്തെക്ക് ഓഎസ്എംആന്ഡിന്റെ ഫയലുകള്‍ പകര്‍ത്തി മാറ്റി ഉപയോഗിക്കട്ടെ?
+
+കുറിപ്പ് 1. നിങ്ങളുടെ പഴയ ഫയലുകള്‍ സുരക്ഷിതമാണ്(വേണമെങ്കില്‍ നിങ്ങള്ക്ക് മായ്ക്കാവുന്നതാണ് ).
+
+കുറിപ്പ് 2. ഓഎസ്എംആന്ഡിനും  ഓഎസ്എംആന്ഡ്+നും പുതിയ സംഭരണ സ്ഥലത്ത് ഫയലുകള്‍ പങ്ക്വയ്ക്കാന്‍ പറ്റില്ല."</string>
+    <string name="speech_rate">സംസാരത്തിന്റെ തോത്</string>
+    <string name="disable_complex_routing_descr">"വഴികാട്ടിയുടെ  2-നിലയിലുള്ള റൂട്ടിങ്ങ് നിര്‍ജീവമാക്കുക"</string>
+    <string name="app_modes_choose_descr">ആപ്പ്ളിക്കേഷനില്‍ കാണിക്കുന്ന ഉപയോഗരീതികള്‍(പ്രൊഫൈലുകള്‍) തെരഞ്ഞെടുക്കുക</string>
+    <string name="base_world_map">അടിസ്ഥാന ലോക ഭൂപടം</string>
+    <string name="clear_destination">ലക്ഷ്യസ്ഥാനങ്ങള്‍ കളയുക</string>
+    <string name="download_hillshade_maps">പര്‍വതഛായകള്‍</string>
+    <string name="index_srtm_parts">കഷണങ്ങള്‍</string>
+    <string name="close_changeset">"ചേഞ്ച്സെറ്റ്  അടയ്ക്കുക"</string>
+    <string name="show_warnings_title">മുന്നറിയിപ്പുകള്‍ കാണിക്കുക…</string>
+    <string name="snap_to_road_descr">സ്ഥാനം പുറത്താണെങ്കിലും റോഡില്‍ തന്നെ നിന്ന് വഴികാട്ടുക</string>
+    <string name="context_menu_item_add_parking_point">"പാര്‍ക്കിങ്ങ് ആയി രേഖപ്പെടുത്തുക "</string>
+    <string name="support_new_features">"പുതിയതായുള്ള  സവിശേഷതകള്‍ "</string>
+    <string name="show_ruler_level">സ്കേല്‍ കാണിക്കുക</string>
+    <string name="north">"നോര്‍ത്ത് "</string>
+    <string name="north_north_east">"വടക്ക് -വടക്ക് -കിഴക്ക് "</string>
+    <string name="north_east">"വടക്ക് - കിഴക്ക് "</string>
+    <string name="north_west">വടക്ക്-പടിഞ്ഞാറ്</string>
+    <string name="north_north_west">വടക്ക്-വടക്ക്-പടിഞ്ഞാറ്</string>
+    <string name="offline_edition">ഓഫ്‌ലൈന്‍ എഡിറ്റിങ്ങ്</string>
+    <string name="show_current_gpx_title">നിലവിലെ വഴി കാണിക്കുക</string>
+    <string name="index_name_wiki">"ലോകമെങ്ങുമുള്ള വിക്കിപീഡിയ പിഓഐ-കള്‍ "</string>
+    <string name="user_name">നിങ്ങളുടെ ഓഎസ്എം ഉസര്‍ നേം</string>
+    <string name="animate_route_off">"സിമുലേഷന്‍  നിര്‍ത്തുക"</string>
+    <string name="voice_stream_notification">അറിയിപ്പു് ഓഡിയോ</string>
+    <string name="voice_stream_music">മീഡിയ/സംഗീതം ഓഡിയോ</string>
+    <string name="amenity_type_sustenance">ഉപജീവനമാര്‍ഗ്ഗം</string>
+    <string name="version_index_is_not_supported">"\'\'{0}\'\' ടെത്  സപ്പോര്‍ട്ടില്ലാത്ത പതിപ്പാണ് "</string>
+    <string name="downloading_build">ബില്‍ഡ് ഡൗണ്‍ലോഡ് ചെയ്തു കൊണ്ടിരിക്കുന്നു…</string>
+    <string name="voice_is_not_available_title">"ശബ്ദ മാര്‍ഗനിര്‍ദേശം തെരഞ്ഞെടുത്തിട്ടില്ല "</string>
+    <string name="daynight_mode_auto">സൂര്യോദയം/സൂര്യാസ്തമയം</string>
+    <string name="download_files_question">" {0} ഫയലുകള്‍ ഡൗണ്‍ലോഡ്  ({1} MB)ചെയ്യട്ടെ?"</string>
+    <string name="show_point_options">സ്ഥാനം ഉപയോഗിക്കു …</string>
+    <string name="voice">റിക്കോഡ് ചെയ്ത ശബ്ദം</string>
+    <string name="voices">വോയിസ് സൂചനകള്‍</string>
+    <string name="vector_data">ഓഫ്ലൈന്‍ വെക്ടര്‍ ഭൂപടങ്ങള്‍</string>
+    <string name="background_service_int_descr">ബാക്ക്ഗ്രൌണ്ട് സേവനങ്ങളുടെ ഇടവേള സജ്ജീകരിക്കുക</string>
+    <string name="background_service_provider">സ്ഥലസേവന ദാതാവു്</string>
+    <string name="show_poi_filter">അരിപ്പ (ഫില്‍ട്ടര്‍) കാണിക്കുക</string>
+    <string name="voice_data_initializing">ശബ്ദ വിവരങ്ങള്‍ തയ്യാറാക്കുന്നു…</string>
+    <string name="voice_data_unavailable">"തെരഞ്ഞെടുത്ത ശബ്ദ വിവരങ്ങള്‍ ലഭ്യമല്ല "</string>
+    <string name="show_transport_over_map">"സ്ടോപ്പുകള്‍ (ട്രാന്‍സ്പോര്‍ട്ട്) കാണിക്കുക "</string>
+    <string name="downloading_list_indexes">ലഭ്യമായ പ്രദേശങ്ങളുടെ പട്ടിക ഡൗണ്‍ലോഡ് ചെയ്തു കൊണ്ടിരിക്കുന്നു…</string>
+    <string name="only_show">റൂട്ട് പ്രദര്‍ശിപ്പിക്കുക</string>
+    <string name="show_poi_over_map">പി ഓ ഐ കാണിക്കൂ</string>
+    <string name="Closest_Amenities">"അടുത്തുള്ള  സൗകര്യങ്ങള്‍"</string>
+    <string name="av_camera_focus_descr">ക്യാമറ ഫോക്കസ് രീതി തെരഞ്ഞെടുക്കുക</string>
+    <string name="av_camera_focus_edof">വികസിത ആഴമുള്ള ഫീ‌ല്‍ഡ് (ഇഡിഓഎഫ്)</string>
+    <string name="av_camera_focus_macro">ക്ളോസപ്പില്‍ ഫോക്ക്സ് ചെയ്യുക</string>
+    <string name="av_camera_focus_continuous">ക്യാമറ തുടര്‍ച്ചയായി ഫോക്കസ് ചെയ്യാന്‍ ശ്രമിക്കുന്നു</string>
+    <string name="av_camera_pic_size_descr">ക്യാമറയിലെ പടത്തിന്റെ വലിപ്പം തെരഞ്ഞെടുക്കുക</string>
+    <string name="user_hates_app_get_feedback">എന്ത് കൊണ്ട് എന്ന് പറയുക.</string>
+    <string name="shared_string_undo">കഴിഞ്ഞ നീക്കം ഉപേക്ഷിച്ചു പൂര്‍വ്വസ്ഥിതിയിലേക്കു തിരിച്ചു പോകുക</string>
+    <string name="shared_string_skip">ഒഴിവാക്കുക</string>
+    <string name="offline_maps_and_navigation">ഓഫ് ലൈന്‍ ഭൂപടങ്ങളും
+വഴികാട്ടിയും</string>
+    <string name="downloading_number_of_files">" %1$d ഫയല്‍  ഡൗണ്‍ലോഡ് ചെയ്തു കൊണ്ടിരിക്കുന്നു"</string>
+    <string name="application_dir_description">എവിടെയാണ് ഭൂപടങ്ങളും മറ്റ് വിവരങ്ങളും സംഭരിക്കേണ്ടത് എന്ന് തെരഞ്ഞെടുക്കുക.</string>
+
+    <string name="techical_articles_item">സാങ്കേതിക ലേഖനങ്ങള്‍</string>
+    <string name="versions_item">പതിപ്പുകള്‍</string>
+    <string name="weekly">വാരം</string>
+    <string name="enable_proxy_descr">എച്ച് ടി ടി പി പ്രോക്സി ക്രമീകരിക്കുക (ഇന്റെര്‍നെറ്റിനാവശ്യമുണ്ടെങ്കില്‍)</string>
+    <string name="edit_tilesource_successfully">"%1$s ടൈല്‍ സോര്‍സ് വിജയകരമായി സംഭരിച്ചിരിക്കുന്നു "</string>
+    <string name="edit_tilesource_elliptic_tile">എലിപ്ടിക് മെര്‍കേറ്റര്‍</string>
+    <string name="download_using_mobile_internet">ഇപ്പോഴത്തെ ഇന്റര്‍നെറ്റ് കണക്ഷന്‍ വൈ-ഫൈ അല്ല. ഈ കണക്ഷനിലൂടെ ഡൗണ്‍ലോഡ് ചെയ്തോട്ടെ?</string>
+    <string name="dropbox_plugin_description">ഡ്രോപ്ബോക്സ് അനുബന്ധം പാതകളും ഓഡിയോ, വീഡിയൊ കുറിപ്പുകളും നിങ്ങളുടെ ഡ്രോപ്ബോക്സ് അക്കൗണ്ടുമായി സമകാലികമാക്കാന്‍ അനുവദിക്കുന്നു.</string>
+    <string name="enable_plugin_monitoring_services">പാത റിക്കോഡ് ചെയ്യാന്‍(ജിപിഎക്സ് റിക്കോഡിങ്ങ്, ഓണ്‍ലൈനില്‍ പിന്തുടരാനും ) ട്രിപ് റിക്കോഡിങ്ങ് അനുബന്ധം സജീവമാക്കുക</string>
+    <string name="ending_point_too_far">അടുത്തുള്ള റോഡില്‍ നിന്നും വളരെ അകലെയാണു അവസാനബിന്ദു.</string>
+    <string name="favorite_delete_multiple">"%1$d ല്‍പര്യമുള്ളവയും  %2$d താത്പര്യമുള്ളവയുടെ കൂട്ടവും നീക്കം ചെയ്യാന്‍ പോവുന്നു. ഉറപ്പാണോ?"</string>
+    <string name="favorite_friends_category">ചങ്ങാതിമാര്‍</string>
+    <string name="error_reading_gpx">ജിപിഎക്സ് വിവരങ്ങള്‍ വായിക്കുന്നതില്‍ പിശകുണ്ടായിരിക്കുന്നു</string>
+    <string name="fav_imported_sucessfully">താല്‍പര്യമുള്ളവ വിജയകരമായി ഇറക്കുമതി ചെയ്തിരിക്കുന്നു</string>
+    <string name="error_occurred_loading_gpx">ജിപിഎക്സ് നിറക്കുന്നതില്‍ പിശകുണ്ടായിരിക്കുന്നു</string>
+    <string name="download_question_exist">" {0} യുടെ വിവരങ്ങള്‍ ഓഫ് ലൈനായി ഉണ്ട് ({1}). അത്  ({2}) പരിഷ്കരിക്കണോ?"</string>
+    <string name="error_occurred_saving_gpx">ജിപിഎക്സ് സംഭരിക്കുന്നതില്‍ പിശകുണ്ടായിരിക്കുന്നു</string>
+    <string name="error_calculating_route_occured">റൂട്ട് കണ്ടെത്തുന്നതില്‍ പിശകുണ്ടായിരിക്കുന്നു</string>
+    <string name="empty_route_calculated">"തെറ്റ്: കണ്ട് പിടിച്ച റൂട്ട് ശൂന്യമാണ് "</string>
+    <string name="favourites_context_menu_edit">താല്‍പര്യമുള്ളവ ക്രമീകരിക്കുക</string>
+    <string name="edit_filter_delete_message">"{0} അരിപ്പ (ഫില്‍ട്ടര്‍) നീക്കം ചെയ്തിരിക്കുന്നു "</string>
+    <string name="edit_filter_create_message">{0} അരിപ്പക്ക് (ഫില്‍ട്ടര്‍) രൂപം നല്‍കിയിരിയിരിക്കുന്നു</string>
     </resources>
