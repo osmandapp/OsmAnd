@@ -2436,5 +2436,5 @@ Si necesitas ayuda con la aplicación OsmAnd, contacte con nuestro equipo de sop
     <string name="edit_filter">Editar filtro</string>
     <string name="subcategories">Subcategorías</string>
     <string name="translit_names">Transliterar nombres</string>
-    <string name="translit_name_if_miss">Transliterar nombre, si %1$s no se encuentra</string>
+    <string name="translit_name_if_miss">Transliterar nombres si no se encuentran en %1$s</string>
     </resources>
