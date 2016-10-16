@@ -657,13 +657,13 @@
 	<string name="poi_paragliding">Glisparaŝutado</string>
 	<string name="poi_pelota">Pilkludo (pelota)</string>
 	<string name="poi_racquet">Rakedopilkado</string>
-	<string name="poi_roller_skating">Rolŝuado</string>
+	<string name="poi_roller_skating">Rulglitado</string>
 	<string name="poi_rowing">Remado</string>
 	<string name="poi_rugby_union">Rugbeo 15</string>
 	<string name="poi_rugby_league">Rugbeo 13</string>
 	<string name="poi_sailing">Velado</string>
 	<string name="poi_shooting">Pafada sporto</string>
-	<string name="poi_skating">Rolŝuado aŭ glitkurado</string>
+	<string name="poi_skating">Rulglitado aŭ glitkurado</string>
 	<string name="poi_skateboard">Rultabulumado</string>
 	<string name="poi_skiing">Skiado</string>
 	<string name="poi_soccer">Futbalo</string>
