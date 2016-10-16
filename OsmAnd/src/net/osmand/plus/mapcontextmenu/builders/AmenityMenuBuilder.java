@@ -269,6 +269,18 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			} else if (Amenity.WEBSITE.equals(key)) {
 				iconId = R.drawable.ic_world_globe_dark;
 				isUrl = true;
+			} else if (Amenity.CUISINE.equals(key)) {
+				iconId = R.drawable.ic_action_cuisine;
+				StringBuilder sb = new StringBuilder();
+				for (String c : e.getValue().split(";")) {
+					if (sb.length() > 0) {
+						sb.append(", ");
+					} else {
+						sb.append(app.getString(R.string.poi_cuisine)).append(": ");
+					}
+					sb.append(poiTypes.getPoiTranslation("cuisine_" + c).toLowerCase());
+				}
+				vl = sb.toString();
 			} else {
 				if (key.contains(Amenity.DESCRIPTION)) {
 					iconId = R.drawable.ic_action_note_dark;
@@ -283,7 +295,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 					}
 					if (!pType.isText()) {
 						if (!Algorithms.isEmpty(pType.getPoiAdditionalCategory())) {
-							vl = pType.getPoiAdditionalCategoryTranslation() + ": " + pType.getTranslation();
+							vl = pType.getPoiAdditionalCategoryTranslation() + ": " + pType.getTranslation().toLowerCase();
 						} else {
 							vl = pType.getTranslation();
 						}

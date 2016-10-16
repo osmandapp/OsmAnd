@@ -25,6 +25,7 @@ public class Amenity extends MapObject {
 	public static final String DESCRIPTION = "description";
 	public static final String OPENING_HOURS = "opening_hours";
 	public static final String CONTENT = "content";
+	public static final String CUISINE = "cuisine";
 
 	private String subType;
 	private PoiCategory type;
