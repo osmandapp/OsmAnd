@@ -420,23 +420,26 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 		OsmandApplication app = getMyApplication();
 		String filterByName = filter.getFilterByName();
 		if (!Algorithms.isEmpty(filterByName)) {
-			String keyNameOpen = app.getString(R.string.shared_string_is_open).replace(' ', '_').toLowerCase();
-			String keyNameOpen24 = app.getString(R.string.shared_string_is_open_24_7).replace(' ', '_').toLowerCase();
-			int index = filterByName.indexOf(keyNameOpen);
-			if (index != -1) {
-				selectedPoiAdditionals.add(keyNameOpen);
-				filterByName = filterByName.replaceAll(keyNameOpen, "");
-			}
-			index = filterByName.indexOf(keyNameOpen24);
-			if (index != -1) {
-				selectedPoiAdditionals.add(keyNameOpen24);
-				filterByName = filterByName.replaceAll(keyNameOpen24, "");
-			}
-
+			int index;
 			MapPoiTypes poiTypes = app.getPoiTypes();
 			Map<String, PoiType> poiAdditionals = filter.getPoiAdditionals();
 			Set<String> excludedPoiAdditionalCategories = getExcludedPoiAdditionalCategories();
 			List<PoiType> otherAdditionalCategories = poiTypes.getOtherMapCategory().getPoiAdditionalsCategorized();
+
+			if (!excludedPoiAdditionalCategories.contains("opening_hours")) {
+				String keyNameOpen = app.getString(R.string.shared_string_is_open).replace(' ', '_').toLowerCase();
+				String keyNameOpen24 = app.getString(R.string.shared_string_is_open_24_7).replace(' ', '_').toLowerCase();
+				index = filterByName.indexOf(keyNameOpen);
+				if (index != -1) {
+					selectedPoiAdditionals.add(keyNameOpen);
+					filterByName = filterByName.replaceAll(keyNameOpen, "");
+				}
+				index = filterByName.indexOf(keyNameOpen24);
+				if (index != -1) {
+					selectedPoiAdditionals.add(keyNameOpen24);
+					filterByName = filterByName.replaceAll(keyNameOpen24, "");
+				}
+			}
 			if (poiAdditionals != null) {
 				Map<String, Set<String>> additionalsMap = new TreeMap<>();
 				extractPoiAdditionals(poiAdditionals.values(), additionalsMap, excludedPoiAdditionalCategories, true);
@@ -500,21 +503,25 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 	private List<PoiFilterListItem> getListItems() {
 		OsmandApplication app = getMyApplication();
 		MapPoiTypes poiTypes = app.getPoiTypes();
+
 		int groupId = 0;
 		List<PoiFilterListItem> items = new ArrayList<>();
-		items.add(new PoiFilterListItem(PoiFilterListItemType.DIVIDER, 0, null, -1, false, false, false, null, null));
-		String keyNameOpen = app.getString(R.string.shared_string_is_open).replace(' ', '_').toLowerCase();
-		items.add(new PoiFilterListItem(PoiFilterListItemType.SWITCH_ITEM,
-				R.drawable.ic_action_time, app.getString(R.string.shared_string_is_open), ++groupId,
-				false, false, selectedPoiAdditionals.contains(keyNameOpen), null, keyNameOpen));
-		String keyNameOpen24 = app.getString(R.string.shared_string_is_open_24_7).replace(' ', '_').toLowerCase();
-		items.add(new PoiFilterListItem(PoiFilterListItemType.SWITCH_ITEM,
-				0, app.getString(R.string.shared_string_is_open_24_7), groupId, false, false,
-				selectedPoiAdditionals.contains(keyNameOpen24), null, keyNameOpen24));
 
 		Map<String, PoiType> poiAdditionals = filter.getPoiAdditionals();
 		Set<String> excludedPoiAdditionalCategories = getExcludedPoiAdditionalCategories();
 		List<PoiType> otherAdditionalCategories = poiTypes.getOtherMapCategory().getPoiAdditionalsCategorized();
+
+		if (!excludedPoiAdditionalCategories.contains("opening_hours")) {
+			items.add(new PoiFilterListItem(PoiFilterListItemType.DIVIDER, 0, null, -1, false, false, false, null, null));
+			String keyNameOpen = app.getString(R.string.shared_string_is_open).replace(' ', '_').toLowerCase();
+			items.add(new PoiFilterListItem(PoiFilterListItemType.SWITCH_ITEM,
+					R.drawable.ic_action_time, app.getString(R.string.shared_string_is_open), ++groupId,
+					false, false, selectedPoiAdditionals.contains(keyNameOpen), null, keyNameOpen));
+			String keyNameOpen24 = app.getString(R.string.shared_string_is_open_24_7).replace(' ', '_').toLowerCase();
+			items.add(new PoiFilterListItem(PoiFilterListItemType.SWITCH_ITEM,
+					0, app.getString(R.string.shared_string_is_open_24_7), groupId, false, false,
+					selectedPoiAdditionals.contains(keyNameOpen24), null, keyNameOpen24));
+		}
 		if (poiAdditionals != null) {
 			Map<String, Set<String>> additionalsMap = new TreeMap<>();
 			extractPoiAdditionals(poiAdditionals.values(), additionalsMap, excludedPoiAdditionalCategories, false);
