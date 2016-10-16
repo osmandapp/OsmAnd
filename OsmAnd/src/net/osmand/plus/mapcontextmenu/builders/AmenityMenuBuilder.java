@@ -214,6 +214,9 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			String poiTypeKeyName = "";
 
 			AbstractPoiType pt = poiTypes.getAnyPoiAdditionalTypeByKey(key);
+			if (pt == null && !Algorithms.isEmpty(vl) && vl.length() < 50) {
+				pt = poiTypes.getAnyPoiAdditionalTypeByKey(key + "_" + vl);
+			}
 			PoiType pType = null;
 			if (pt != null) {
 				pType = (PoiType) pt;
