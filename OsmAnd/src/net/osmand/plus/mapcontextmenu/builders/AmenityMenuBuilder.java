@@ -282,7 +282,11 @@ public class AmenityMenuBuilder extends MenuBuilder {
 						icon = getRowIcon(view.getContext(), ((PoiType) pType.getParentType()).getOsmTag() + "_" + pType.getOsmTag().replace(':', '_') + "_" + pType.getOsmValue());
 					}
 					if (!pType.isText()) {
-						vl = pType.getTranslation();
+						if (!Algorithms.isEmpty(pType.getPoiAdditionalCategory())) {
+							vl = pType.getPoiAdditionalCategoryTranslation() + ": " + pType.getTranslation();
+						} else {
+							vl = pType.getTranslation();
+						}
 					} else {
 						isText = true;
 						isDescription = iconId == R.drawable.ic_action_note_dark;
