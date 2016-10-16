@@ -134,6 +134,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		View compassView = compassHud.iv;
 		ViewGroup parent = (ViewGroup) compassView.getParent();
 		if (parent != null) {
+			compassHud.compassOutside = true;
 			forceShowCompass = true;
 			parent.removeView(compassView);
 			compassView.setLayoutParams(layoutParams);
@@ -148,6 +149,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		View compassView = compassHud.iv;
 		ViewGroup parent = (ViewGroup) compassView.getParent();
 		if (parent != null) {
+			compassHud.compassOutside = false;
 			forceShowCompass = false;
 			parent.removeView(compassView);
 			LinearLayout mapCompassContainer = (LinearLayout) mapActivity.findViewById(R.id.layers_compass_layout);
@@ -829,6 +831,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		boolean nightMode = false;
 		boolean f = true;
 		boolean compass;
+		boolean compassOutside;
 
 		public MapHudButton setRoundTransparent() {
 			setBg(R.drawable.btn_circle_trans, R.drawable.btn_circle_night);
@@ -847,7 +850,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		}
 
 		public boolean updateVisibility(boolean visible) {
-			if (visible != (iv.getVisibility() == View.VISIBLE)) {
+			if (!compassOutside && visible != (iv.getVisibility() == View.VISIBLE)) {
 				if (visible) {
 					iv.setVisibility(View.VISIBLE);
 				} else {
