@@ -534,6 +534,9 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 						categoryIconId = RenderingIcons.getBigIconResourceId(categoryIconStr);
 					}
 					if (categoryIconId == 0) {
+						categoryIconId = getResources().getIdentifier("mx_" + category, "drawable", app.getPackageName());
+					}
+					if (categoryIconId == 0) {
 						categoryIconId = R.drawable.ic_action_folder_stroke;
 					}
 
