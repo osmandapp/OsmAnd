@@ -314,15 +314,15 @@
 	<string name="poi_internet_access_fee_yes">Internettilgang - gebyr</string>
 	<string name="poi_internet_access_fee_no">Internettilgang - ingen gebyr</string>
 
-	<string name="poi_diet_vegetarian_only">Bare vegetarkost</string>
-	<string name="poi_diet_vegetarian_yes">Vegetarkost</string>
+	<string name="poi_diet_vegetarian_only">Bare vegetarisk</string>
+	<string name="poi_diet_vegetarian_yes">Vegetarisk</string>
 	<string name="poi_diet_vegetarian_no">Vegetarkost: nei</string>
 	<string name="poi_diet_vegetarian_few">Vegetarkost: noen</string>
-	<string name="poi_diet_vegan_only">Bare vegankost</string>
-	<string name="poi_diet_vegan_yes">Vegankost</string>
+	<string name="poi_diet_vegan_only">Bare vegansk</string>
+	<string name="poi_diet_vegan_yes">Vegansk</string>
 	<string name="poi_diet_vegan_no">Vegankost: nei</string>
-	<string name="poi_diet_gluten_free_only">Bare glutenfri kost</string>
-	<string name="poi_diet_gluten_free_yes">Glutenfri kost</string>
+	<string name="poi_diet_gluten_free_only">Bare glutenfri</string>
+	<string name="poi_diet_gluten_free_yes">Glutenfri</string>
 	<string name="poi_diet_gluten_free_no">Glutenfri kost: nei</string>
 	<string name="poi_traffic_signals">Trafikklys</string>
 
@@ -373,7 +373,7 @@
 	<string name="poi_display_sundial_yes">Solur</string>
 
 	<string name="poi_toilets">Toalett</string>
-	<string name="poi_toilets_yes">Med toaletter</string>
+	<string name="poi_toilets_yes">Ja</string>
 	<string name="poi_toilets_no">Uten toaletter</string>
 	<string name="poi_toilets_access_customers">Toalettadgang: kunder</string>
 	<string name="poi_toilets_access_public">Toalettadgang: offentlig</string>
@@ -401,4 +401,21 @@
 	<string name="poi_aerodrome_type_military">Militær</string>
 	<string name="poi_aerodrome_type_international">Internasjonal</string>
 	<string name="poi_aerodrome_type_regional">Regional</string>
+	<string name="poi_internet_access_type">Internettilgangstype</string>
+	<string name="poi_bicycle_service">Sykkelservice</string>
+	<string name="poi_fire_hydrant_water_source">Vannkilde</string>
+	<string name="poi_payment_toll_type">Betalingstype</string>
+	<string name="poi_traffic_signals_sound">Lyd</string>
+	<string name="poi_self_service">Selvbetjening</string>
+	<string name="poi_automated">Automatisert</string>
+	<string name="poi_subway_station_filter">T-banestasjon</string>
+	<string name="poi_aerialway_bicycle">Sykkeltransport</string>
+	<string name="poi_aerialway_heating">Oppvarming</string>
+	<string name="poi_city_capital">Hovedstad</string>
+	<string name="poi_religion_type">Religion</string>
+	<string name="poi_cuisine">Kjøkken</string>
+
+	<string name="poi_information_trail_blaze">Stimerking</string>
+	<string name="poi_information_map">Kart</string>
+	<string name="poi_information_hikingmap">Vandrekart</string>
 	</resources>
