@@ -14,6 +14,7 @@ public class PoiType extends AbstractPoiType {
 	private String osmValue;
 	private String osmValue2;
 	private boolean poiAdditionalReference;
+	private boolean filterOnly;
 
 	
 	private String nameTag;
@@ -101,6 +102,14 @@ public class PoiType extends AbstractPoiType {
 
 	public void setPoiAdditionalReference(boolean poiAdditionalReference) {
 		this.poiAdditionalReference = poiAdditionalReference;
+	}
+
+	public boolean isFilterOnly() {
+		return filterOnly;
+	}
+
+	public void setFilterOnly(boolean filterOnly) {
+		this.filterOnly = filterOnly;
 	}
 
 	public PoiCategory getCategory() {

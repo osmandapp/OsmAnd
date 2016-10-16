@@ -482,6 +482,7 @@ public class MapPoiTypes {
 		tp.setOsmTag2(parser.getAttributeValue("", "tag2"));
 		tp.setOsmValue2(parser.getAttributeValue("", "value2"));
 		tp.setPoiAdditionalCategory(poiAdditionalCategory);
+		tp.setFilterOnly(Boolean.parseBoolean(parser.getAttributeValue("", "filter_only")));
 		if (lastType != null) {
 			lastType.addPoiAdditional(tp);
 		} else if (lastFilter != null) {

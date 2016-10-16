@@ -217,6 +217,9 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			PoiType pType = null;
 			if (pt != null) {
 				pType = (PoiType) pt;
+				if (pType.isFilterOnly()) {
+					continue;
+				}
 				poiTypeOrder = pType.getOrder();
 				poiTypeKeyName = pType.getKeyName();
 			}
