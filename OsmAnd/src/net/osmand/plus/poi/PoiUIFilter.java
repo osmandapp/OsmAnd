@@ -1,18 +1,8 @@
 package net.osmand.plus.poi;
 
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-import java.util.TreeSet;
+import android.content.Context;
+import android.support.annotation.NonNull;
 
 import net.osmand.CollatorStringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
@@ -34,8 +24,19 @@ import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 import net.osmand.util.OpeningHoursParser;
 import net.osmand.util.OpeningHoursParser.OpeningHours;
-import android.content.Context;
-import android.support.annotation.NonNull;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>, CustomSearchPoiFilter {
 
@@ -289,7 +290,7 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 		String[] items = filter.split(" ");
 		boolean allTime = false;
 		boolean open = false;
-		Map<PoiType, String> poiAdditionalsFilter = null;
+		List<PoiType> poiAdditionalsFilter = null;
 		for (String s : items) {
 			s = s.trim();
 			if (!Algorithms.isEmpty(s)) {
@@ -299,9 +300,12 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 					open = true;
 				} else if (poiAdditionals.containsKey(s.toLowerCase())) {
 					if (poiAdditionalsFilter == null) {
-						poiAdditionalsFilter = new LinkedHashMap<PoiType, String>();
+						poiAdditionalsFilter = new ArrayList<>();
 					}
-					poiAdditionalsFilter.put(poiAdditionals.get(s.toLowerCase()), null);
+					PoiType pt = poiAdditionals.get(s.toLowerCase());
+					if (pt != null) {
+						poiAdditionalsFilter.add(pt);
+					}
 				} else {
 					nmFilter.append(s).append(" ");
 				}
@@ -311,7 +315,7 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 	}
 
 	private AmenityNameFilter getNameFilterInternal(StringBuilder nmFilter, 
-			final boolean allTime, final boolean open, final Map<PoiType, String> poiAdditionals) {
+			final boolean allTime, final boolean open, final List<PoiType> poiAdditionals) {
 		final CollatorStringMatcher sm =
 				nmFilter.length() > 0 ?
 				new CollatorStringMatcher(nmFilter.toString().trim(), StringMatcherMode.CHECK_CONTAINS) : null;
@@ -327,13 +331,26 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 					}
 				}
 				if (poiAdditionals != null) {
-					Iterator<Entry<PoiType, String>> it = poiAdditionals.entrySet().iterator();
-					while (it.hasNext()) {
-						Entry<PoiType, String> e = it.next();
-						String inf = a.getAdditionalInfo(e.getKey().getKeyName());
-						if (inf == null) {
-							return false;
-						} else if (e.getValue() != null && !e.getValue().equalsIgnoreCase(inf)) {
+					Map<String, List<PoiType>> poiAdditionalCategoriesMap = new HashMap<>();
+ 					for (PoiType pt : poiAdditionals) {
+ 						String category = pt.getPoiAdditionalCategory();
+						List<PoiType> types = poiAdditionalCategoriesMap.get(category);
+						if (types == null) {
+							types = new ArrayList<>();
+							poiAdditionalCategoriesMap.put(category, types);
+						}
+						types.add(pt);
+					}
+					for (List<PoiType> types : poiAdditionalCategoriesMap.values()) {
+						boolean acceptedAnyInCategory = false;
+						for (PoiType p : types) {
+							String inf = a.getAdditionalInfo(p.getKeyName());
+							if (inf != null) {
+								acceptedAnyInCategory = true;
+								break;
+							}
+						}
+						if (!acceptedAnyInCategory) {
 							return false;
 						}
 					}
