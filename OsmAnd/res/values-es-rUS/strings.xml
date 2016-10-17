@@ -2433,4 +2433,5 @@ Si amas a OsmAnd, OSM y quieres apoyarlos, esta es una perfecta manera de hacerl
     <string name="subcategories">Subcategorías</string>
     <string name="translit_names">Transliterar nombres</string>
     <string name="translit_name_if_miss">Transliterar nombres si no se encuentran en %1$s</string>
+    <string name="search_hint">Ingresa nombre de ciudad, dirección o PDI</string>
     </resources>
