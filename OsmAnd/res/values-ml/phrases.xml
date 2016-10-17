@@ -1509,10 +1509,10 @@
 	<string name="poi_outdoor_seating_yes">പുറത്ത് സീറ്റിങ്ങ്:ഉണ്ട്</string>
 	<string name="poi_outdoor_seating_no">"ഔട് ഡോര്‍ സീറ്റിങ്ങില്ല "</string>
 	<string name="poi_outdoor_seating_terrace">ഔട്ട്ഡോര്‍ സീറ്റിങ്ങ്:ടെറസ്സ്</string>
-	<string name="poi_outdoor_seating_sidewalk">നടപ്പാത</string>
+	<string name="poi_outdoor_seating_sidewalk">നടപ്പാതയിലെ ഇരിപ്പിടങ്ങള്‍</string>
 	<string name="poi_outdoor_seating_pedestrian_zone">നടവഴി</string>
 	<string name="poi_outdoor_seating_garden">ഉദ്യാനം</string>
-	<string name="poi_outdoor_seating_patio">പേഷിയൊ</string>
+	<string name="poi_outdoor_seating_patio">പേഷിയൊയിലെ ഇരുപ്പിടങ്ങള്‍</string>
 
 	<string name="poi_cocktails_yes">ഉണ്ട്</string>
 
@@ -1544,7 +1544,7 @@
 	<string name="poi_female_no">"സ്ത്രീകള്‍ക്ക്  പ്രവേശനമില്ല "</string>
 	<string name="poi_indoor_yes">ഇന്‍ഡോര്‍</string>
 	<string name="poi_indoor_no">ഔട് ഡോര്‍</string>
-	<string name="poi_toilets_yes">ടോയിലെറ്റ്</string>
+	<string name="poi_toilets_yes">ഉണ്ട്</string>
 	<string name="poi_toilets_no">ടോയിലെറ്റ് ഇല്ലാ</string>
 	<string name="poi_toilets_wheelchair_yes">"വീല്‍ചെയര്‍ സൗകര്യത്തൊടെയുള്ള ടോയിലെറ്റ് "</string>
 	<string name="poi_toilets_wheelchair_no">"വീല്‍ചെയര്‍ സൗകര്യത്തൊടെയുള്ള ടോയിലെറ്റ് ഇല്ല "</string>
@@ -1984,41 +1984,41 @@
 	<string name="poi_castle_type_castrum">കോട്ട : കാസ്ട്രം</string>
 	<string name="poi_castle_type_shiro">കോട്ട :ഷിറോ</string>
 
-	<string name="poi_massage_thai">മസ്സാജ് :തായി</string>
-	<string name="poi_massage_sexual">മസ്സാജ്: സെക്സ്വല്‍</string>
-	<string name="poi_massage_chinese">മസ്സാജ് : ചൈനീസ്</string>
+	<string name="poi_massage_thai">തായി</string>
+	<string name="poi_massage_sexual">സെക്സ്വല്‍</string>
+	<string name="poi_massage_chinese">ചൈനീസ്</string>
 	<string name="poi_massage_yes">മസ്സാജ് സേവനങ്ങള്‍</string>
-	<string name="poi_massage_therapeutic">മസ്സാജ് : ചികിത്സ</string>
+	<string name="poi_massage_therapeutic">ചികിത്സ</string>
 
 	<string name="poi_sauna_yes">സോന സേവനം</string>
 	<string name="poi_solarium_yes">സൊളെരിയം സേവനം</string>
 
-	<string name="poi_tents_yes">ടെന്റ് അനുവദനീയം</string>
+	<string name="poi_tents_yes">അനുവദനീയം</string>
 	<string name="poi_tents_no">ടെന്റ് അനുവദനീയമല്ല</string>
 	<string name="poi_openfire_yes">തീ അനുവദനീയം</string>
 	<string name="poi_openfire_no">തീ അനുവദനീയമല്ല</string>
-	<string name="poi_backcountry_yes">ഗ്രാമീണ ക്യാംപ് സൈറ്റ്</string>
-	<string name="poi_backcountry_no">"ക്യാംപ് സൈറ്റ്:അല്ല "</string>
+	<string name="poi_backcountry_yes">അതെ</string>
+	<string name="poi_backcountry_no">അല്ല</string>
 	<string name="poi_scout_yes">സ്കൗട്ട് ക്യാംപ്</string>
 	<string name="poi_scout_no">"സ്കൗട്ട് ക്യാംപ് ഇല്ല "</string>
 	<string name="poi_group_only_yes">ഗ്രൂപ്പായി മാത്രം</string>
 	<string name="poi_group_only_no">"ഗ്രൂപ്പ് പറ്റില്ല "</string>
-	<string name="poi_washing_machine_yes">"വാഷിങ്ങ് മെഷിന്‍ "</string>
+	<string name="poi_washing_machine_yes">ഉണ്ട്</string>
 	<string name="poi_washing_machine_no">"വാഷിങ്ങ് മെഷിന്‍ ഇല്ല "</string>
 	<string name="poi_shower_yes">ഷവര്‍</string>
 	<string name="poi_shower_no">"ഷവര്‍ ഇല്ല "</string>
-	<string name="poi_shower_hot">ഷവര്‍ : ചൂട്വെള്ളം</string>
+	<string name="poi_shower_hot">ഷവര്‍ : ചൂട് വെള്ളം</string>
 	<string name="poi_shower_outdoor">ഷവര്‍ : ഔട്ട്ഡോര്‍</string>
 	<string name="poi_shower_cold">ഷവര്‍: തണുത്ത വെള്ളം</string>
 	<string name="poi_shower_indoor">ഷവര്‍ : ഇന്‍ഡോര്‍</string>
-	<string name="poi_caravans_yes">കാരവാന്‍</string>
+	<string name="poi_caravans_yes">അതെ</string>
 	<string name="poi_caravans_no">"കാരവാന്‍ പാടില്ല "</string>
 	<string name="poi_impromptu_yes">"ഇമ്പ്രോപ്ടു "</string>
 	<string name="poi_impromptu_no">"ഇമ്പ്രോപ്ടു അല്ല "</string>
 	<string name="poi_sanitary_dump_station_yes">സാനിട്ടറി ഡമ്പ് സ്ടേഷന്‍</string>
 	<string name="poi_sanitary_dump_station_no">"സാനിട്ടറി ഡമ്പ് സ്ടേഷന്‍ അല്ല "</string>
 	<string name="poi_sanitary_dump_station_customers">സാനിട്ടറി ഡമ്പ് സ്ടേഷന്‍ : ഇടപാടുകാര്‍ക്ക് മാത്രം</string>
-	<string name="poi_power_supply_yes">"പവര്‍ സപ്ളൈ "</string>
+	<string name="poi_power_supply_yes">ഉണ്ട്</string>
 	<string name="poi_power_supply_no">"പവര്‍ സപ്ളൈ ഇല്ല "</string>
 	<string name="poi_power_supply_cee_17_blue">പവര്‍ സപ്ളൈ (സോക്കറ്റ്): CEE 17 ബ്ളൂ</string>
 	<string name="poi_power_supply_cee_7_4">സോക്കറ്റ് : CEE 7/4 ( 3 പിന്‍ ജര്‍മന്‍)</string>
