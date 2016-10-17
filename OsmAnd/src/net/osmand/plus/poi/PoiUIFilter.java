@@ -26,6 +26,7 @@ import net.osmand.util.OpeningHoursParser;
 import net.osmand.util.OpeningHoursParser.OpeningHours;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.HashMap;
@@ -331,6 +332,7 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 					}
 				}
 				if (poiAdditionals != null) {
+					Map<PoiType, PoiType> textPoiAdditionalsMap = new HashMap<>();
 					Map<String, List<PoiType>> poiAdditionalCategoriesMap = new HashMap<>();
  					for (PoiType pt : poiAdditionals) {
  						String category = pt.getPoiAdditionalCategory();
@@ -340,6 +342,14 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 							poiAdditionalCategoriesMap.put(category, types);
 						}
 						types.add(pt);
+
+						String osmTag = pt.getOsmTag();
+						if (osmTag.length() < pt.getKeyName().length()) {
+							PoiType textPoiType = poiTypes.getTextPoiAdditionalByKey(osmTag);
+							if (textPoiType != null) {
+								textPoiAdditionalsMap.put(pt, textPoiType);
+							}
+						}
 					}
 					for (List<PoiType> types : poiAdditionalCategoriesMap.values()) {
 						boolean acceptedAnyInCategory = false;
@@ -348,6 +358,24 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 							if (inf != null) {
 								acceptedAnyInCategory = true;
 								break;
+							} else {
+								PoiType textPoiType = textPoiAdditionalsMap.get(p);
+								if (textPoiType != null) {
+									inf = a.getAdditionalInfo(textPoiType.getKeyName());
+									if (!Algorithms.isEmpty(inf)) {
+										String[] items = inf.split(";");
+										String val = p.getOsmValue().trim().toLowerCase();
+										for (String item : items) {
+											if (item.trim().toLowerCase().equals(val)) {
+												acceptedAnyInCategory = true;
+												break;
+											}
+										}
+										if (acceptedAnyInCategory) {
+											break;
+										}
+									}
+								}
 							}
 						}
 						if (!acceptedAnyInCategory) {

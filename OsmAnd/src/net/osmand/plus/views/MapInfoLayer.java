@@ -137,7 +137,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		rulerControl.setVisibility(false);
 		
 		// register left stack
-		registerSideWidget(null, R.drawable.ic_action_aircraft, R.string.map_widget_compass, "compass", true, 4);
+		registerSideWidget(null, R.drawable.ic_action_compass, R.string.map_widget_compass, "compass", true, 4);
 
 		NextTurnInfoWidget bigInfoControl = ric.createNextInfoControl(map, app, false);
 		registerSideWidget(bigInfoControl, R.drawable.ic_action_next_turn, R.string.map_widget_next_turn, "next_turn", true, 5);

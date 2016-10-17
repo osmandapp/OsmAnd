@@ -42,6 +42,7 @@ public class MapPoiTypes {
 	Map<String, PoiType> poiTypesByTag = new LinkedHashMap<String, PoiType>();
 	Map<String, String> deprecatedTags = new LinkedHashMap<String, String>();
 	Map<String, String> poiAdditionalCategoryIcons = new LinkedHashMap<String, String>();
+	List<PoiType> textPoiAdditionals = new ArrayList<PoiType>();
 
 
 	public MapPoiTypes(String fileName) {
@@ -93,6 +94,10 @@ public class MapPoiTypes {
 
 	public String getPoiAdditionalCategoryIcon(String category) {
 		return poiAdditionalCategoryIcons.get(category);
+	}
+
+	public List<PoiType> getTextPoiAdditionals() {
+		return textPoiAdditionals;
 	}
 
 	public List<PoiFilter> getTopVisibleFilters() {
@@ -285,11 +290,11 @@ public class MapPoiTypes {
 			int tok;
 			parser.setInput(is, "UTF-8");
 			PoiCategory lastCategory = null;
-			Set<String> lastCategoryPoiAdditionalsCategories = new TreeSet<>();
+			Set<String> lastCategoryPoiAdditionalsCategories = new TreeSet<String>();
 			PoiFilter lastFilter = null;
-			Set<String> lastFilterPoiAdditionalsCategories = new TreeSet<>();
+			Set<String> lastFilterPoiAdditionalsCategories = new TreeSet<String>();
 			PoiType lastType = null;
-			Set<String> lastTypePoiAdditionalsCategories = new TreeSet<>();
+			Set<String> lastTypePoiAdditionalsCategories = new TreeSet<String>();
 			String lastPoiAdditionalCategory = null;
 			while ((tok = parser.next()) != XmlPullParser.END_DOCUMENT) {
 				if (tok == XmlPullParser.START_TAG) {
@@ -395,19 +400,19 @@ public class MapPoiTypes {
 					if (name.equals("poi_filter")) {
 						if (lastFilterPoiAdditionalsCategories.size() > 0) {
 							abstractTypeAdditionalCategories.put(lastFilter, lastFilterPoiAdditionalsCategories);
-							lastFilterPoiAdditionalsCategories = new TreeSet<>();
+							lastFilterPoiAdditionalsCategories = new TreeSet<String>();
 						}
 						lastFilter = null;
 					} else if (name.equals("poi_type")) {
 						if (lastTypePoiAdditionalsCategories.size() > 0) {
 							abstractTypeAdditionalCategories.put(lastType, lastTypePoiAdditionalsCategories);
-							lastTypePoiAdditionalsCategories = new TreeSet<>();
+							lastTypePoiAdditionalsCategories = new TreeSet<String>();
 						}
 						lastType = null;
 					} else if (name.equals("poi_category")) {
 						if (lastCategoryPoiAdditionalsCategories.size() > 0) {
 							abstractTypeAdditionalCategories.put(lastCategory, lastCategoryPoiAdditionalsCategories);
-							lastCategoryPoiAdditionalsCategories = new TreeSet<>();
+							lastCategoryPoiAdditionalsCategories = new TreeSet<String>();
 						}
 						lastCategory = null;
 					} else if (name.equals("poi_additional_category")) {
@@ -490,6 +495,9 @@ public class MapPoiTypes {
 		} else if (lastCategory != null) {
 			lastCategory.addPoiAdditional(tp);
 		}
+		if (tp.isText()) {
+			textPoiAdditionals.add(tp);
+		}
 		return tp;
 	}
 
@@ -558,7 +566,6 @@ public class MapPoiTypes {
 			}
 			print(" ", p);
 		}
-
 	}
 
 	private PoiType getPoiAdditionalByKey(AbstractPoiType p, String name) {
@@ -571,7 +578,15 @@ public class MapPoiTypes {
 			}
 		}
 		return null;
+	}
 
+	public PoiType getTextPoiAdditionalByKey(String name) {
+		for (PoiType pt : textPoiAdditionals) {
+			if (pt.getKeyName().equals(name)) {
+				return pt;
+			}
+		}
+		return null;
 	}
 
 	public AbstractPoiType getAnyPoiAdditionalTypeByKey(String name) {
