@@ -532,7 +532,11 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 			poiAdditionals.put(add.getKeyName().replace('_', ':').replace(' ', ':'), add);
 			poiAdditionals.put(add.getTranslation().replace(' ', ':').toLowerCase(), add);
 		}
-		if (pt instanceof PoiFilter && !(pt instanceof PoiCategory)) {
+		if (pt instanceof PoiCategory) {
+			for (PoiFilter pf : ((PoiCategory) pt).getPoiFilters()) {
+				fillPoiAdditionals(pf);
+			}
+		} else if (pt instanceof PoiFilter) {
 			for (PoiType ps : ((PoiFilter) pt).getPoiTypes()) {
 				fillPoiAdditionals(ps);
 			}
