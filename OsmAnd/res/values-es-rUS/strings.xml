@@ -1096,7 +1096,7 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="route_updated_loc_found">La ruta será calculada cuando se encuentre la ubicación</string>
     <string name="osmand_parking_hours">Horas</string>
     <string name="osmand_parking_minutes">Minutos</string>
-    <string name="osmand_parking_position_description_add_time">Se estacionó el automóvil a las</string>
+    <string name="osmand_parking_position_description_add_time">Automóvil estacionado a las</string>
     <string name="select_animate_speedup">Elige la velocidad del simulador de ruta</string>
     <string name="global_app_allocated_memory_descr">Memoria asignada %1$s MB (Límite Android %2$s MB, Dalvik %3$s MB).</string>
     <string name="global_app_allocated_memory">Memoria asignada</string>
@@ -1121,7 +1121,7 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="osmand_parking_position_description_add">Buscar el automóvil a las:</string>
     <string name="osmand_parking_pm">PM</string>
     <string name="osmand_parking_am">AM</string>
-    <string name="osmand_parking_position_name">Lugar del estacionamiento</string>
+    <string name="osmand_parking_position_name">Ubicación del estacionamiento</string>
     <string name="context_menu_item_add_parking_point">Marcar como estacionamiento</string>
     <string name="context_menu_item_delete_parking_point">Quitar marcador de estacionamiento</string>
     <string name="gpxup_public">Público</string>
@@ -2432,5 +2432,5 @@ Si amas a OsmAnd, OSM y quieres apoyarlos, esta es una perfecta manera de hacerl
     <string name="edit_filter">Editar filtro</string>
     <string name="subcategories">Subcategorías</string>
     <string name="translit_names">Transliterar nombres</string>
-    <string name="translit_name_if_miss">Transliterar nombre, si %1$s no se encuentra</string>
+    <string name="translit_name_if_miss">Transliterar nombres si no se encuentran en %1$s</string>
     </resources>
