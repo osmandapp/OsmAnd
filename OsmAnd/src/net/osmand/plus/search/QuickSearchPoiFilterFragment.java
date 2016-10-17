@@ -432,15 +432,15 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 			if (!excludedPoiAdditionalCategories.contains("opening_hours")) {
 				String keyNameOpen = app.getString(R.string.shared_string_is_open).replace(' ', '_').toLowerCase();
 				String keyNameOpen24 = app.getString(R.string.shared_string_is_open_24_7).replace(' ', '_').toLowerCase();
-				index = filterByName.indexOf(keyNameOpen);
-				if (index != -1) {
-					selectedPoiAdditionals.add(keyNameOpen);
-					filterByName = filterByName.replaceAll(keyNameOpen, "");
-				}
 				index = filterByName.indexOf(keyNameOpen24);
 				if (index != -1) {
 					selectedPoiAdditionals.add(keyNameOpen24);
 					filterByName = filterByName.replaceAll(keyNameOpen24, "");
+				}
+				index = filterByName.indexOf(keyNameOpen);
+				if (index != -1) {
+					selectedPoiAdditionals.add(keyNameOpen);
+					filterByName = filterByName.replaceAll(keyNameOpen, "");
 				}
 			}
 			if (poiAdditionals != null) {
@@ -472,24 +472,36 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 		MapPoiTypes poiTypes = getMyApplication().getPoiTypes();
 		Set<String> excludedPoiAdditionalCategories = new LinkedHashSet<>();
 		for (Entry<PoiCategory, LinkedHashSet<String>> entry : filter.getAcceptedTypes().entrySet()) {
-			if (entry.getKey().getExcludedPoiAdditionalCategories() != null) {
-				excludedPoiAdditionalCategories.addAll(entry.getKey().getExcludedPoiAdditionalCategories());
-			}
+			boolean needTopLevelExclude = false;
+			Set<String> excluded = new LinkedHashSet<>();
 			if (entry.getValue() != null) {
 				for (String keyName : entry.getValue()) {
 					PoiType poiType = poiTypes.getPoiTypeByKey(keyName);
 					if (poiType != null) {
-						collectExcludedPoiAdditionalCategories(poiType, excludedPoiAdditionalCategories);
-						PoiFilter poiFilter = poiType.getFilter();
-						if (poiFilter != null) {
-							collectExcludedPoiAdditionalCategories(poiFilter, excludedPoiAdditionalCategories);
-						}
-						PoiCategory poiCategory = poiType.getCategory();
-						if (poiCategory != null) {
-							collectExcludedPoiAdditionalCategories(poiCategory, excludedPoiAdditionalCategories);
+						collectExcludedPoiAdditionalCategories(poiType, excluded);
+						if (!poiType.isReference()) {
+							needTopLevelExclude = true;
+							PoiFilter poiFilter = poiType.getFilter();
+							if (poiFilter != null) {
+								collectExcludedPoiAdditionalCategories(poiFilter, excluded);
+							}
+							PoiCategory poiCategory = poiType.getCategory();
+							if (poiCategory != null) {
+								collectExcludedPoiAdditionalCategories(poiCategory, excluded);
+							}
 						}
 					}
 				}
+			} else {
+				needTopLevelExclude = true;
+			}
+			if (excludedPoiAdditionalCategories.size() == 0) {
+				excludedPoiAdditionalCategories.addAll(excluded);
+			} else {
+				excludedPoiAdditionalCategories.retainAll(excluded);
+			}
+			if (needTopLevelExclude && entry.getKey().getExcludedPoiAdditionalCategories() != null) {
+				excludedPoiAdditionalCategories.addAll(entry.getKey().getExcludedPoiAdditionalCategories());
 			}
 		}
 		return excludedPoiAdditionalCategories;
