@@ -13,6 +13,9 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.view.ViewCompat;
+import android.support.v4.view.ViewPropertyAnimatorCompat;
+import android.support.v4.view.ViewPropertyAnimatorListener;
 import android.support.v7.app.AlertDialog;
 import android.view.MotionEvent;
 import android.view.View;
@@ -134,6 +137,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		View compassView = compassHud.iv;
 		ViewGroup parent = (ViewGroup) compassView.getParent();
 		if (parent != null) {
+			compassHud.cancelHideAnimation();
 			compassHud.compassOutside = true;
 			forceShowCompass = true;
 			parent.removeView(compassView);
@@ -642,7 +646,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 		mapZoomIn.updateVisibility(!dialogOpened);
 		mapZoomOut.updateVisibility(!dialogOpened);
-		compassHud.updateVisibility(!dialogOpened);
+		compassHud.updateVisibility(!dialogOpened && shouldShowCompass());
 		layersHud.updateVisibility(!dialogOpened);
 		quickSearchHud.updateVisibility(!dialogOpened);
 
@@ -673,9 +677,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 	public void updateCompass(boolean isNight) {
 		float mapRotate = mapActivity.getMapView().getRotate();
-		boolean showCompass = forceShowCompass || mapRotate != 0
-				|| settings.ROTATE_MAP.get() != OsmandSettings.ROTATE_MAP_NONE
-				|| mapActivity.getMapLayers().getMapInfoLayer().getMapInfoControls().isVisible("compass");
+		boolean showCompass = shouldShowCompass();
 		if (mapRotate != cachedRotate) {
 			cachedRotate = mapRotate;
 			// Apply animation to image view
@@ -695,6 +697,13 @@ public class MapControlsLayer extends OsmandMapLayer {
 			compassHud.iv.setContentDescription(mapActivity.getString(R.string.rotate_map_compass_opt));
 			compassHud.updateVisibility(true);
 		}
+	}
+
+	private boolean shouldShowCompass() {
+		float mapRotate = mapActivity.getMapView().getRotate();
+		return forceShowCompass || mapRotate != 0
+					|| settings.ROTATE_MAP.get() != OsmandSettings.ROTATE_MAP_NONE
+					|| mapActivity.getMapLayers().getMapInfoLayer().getMapInfoControls().isVisible("compass");
 	}
 
 	public CompassDrawable getCompassDrawable(Drawable originalDrawable) {
@@ -827,11 +836,11 @@ public class MapControlsLayer extends OsmandMapLayer {
 		int resClrLight = R.color.icon_color;
 		int resClrDark = 0;
 
-
 		boolean nightMode = false;
 		boolean f = true;
 		boolean compass;
 		boolean compassOutside;
+		ViewPropertyAnimatorCompat hideAnimator;
 
 		public MapHudButton setRoundTransparent() {
 			setBg(R.drawable.btn_circle_trans, R.drawable.btn_circle_night);
@@ -849,15 +858,61 @@ public class MapControlsLayer extends OsmandMapLayer {
 			return this;
 		}
 
+		public void hideDelayed(long msec) {
+			if (!compassOutside && (iv.getVisibility() == View.VISIBLE)) {
+				if (hideAnimator != null) {
+					hideAnimator.cancel();
+				}
+				hideAnimator = ViewCompat.animate(iv).alpha(0f).setDuration(250).setStartDelay(msec).setListener(new ViewPropertyAnimatorListener() {
+					@Override
+					public void onAnimationStart(View view) {
+					}
+
+					@Override
+					public void onAnimationEnd(View view) {
+						iv.setVisibility(View.GONE);
+						ViewCompat.setAlpha(iv, 1f);
+						hideAnimator = null;
+					}
+
+					@Override
+					public void onAnimationCancel(View view) {
+						iv.setVisibility(View.GONE);
+						ViewCompat.setAlpha(iv, 1f);
+						hideAnimator = null;
+					}
+				});
+				hideAnimator.start();
+			}
+		}
+
+		public void cancelHideAnimation() {
+			if (hideAnimator != null) {
+				hideAnimator.cancel();
+			}
+		}
+
 		public boolean updateVisibility(boolean visible) {
 			if (!compassOutside && visible != (iv.getVisibility() == View.VISIBLE)) {
 				if (visible) {
+					if (hideAnimator != null) {
+						hideAnimator.cancel();
+					}
 					iv.setVisibility(View.VISIBLE);
-				} else {
-					iv.setVisibility(View.GONE);
+					iv.invalidate();
+				} else if (hideAnimator == null) {
+					if (compass) {
+						hideDelayed(5000);
+					} else {
+						iv.setVisibility(View.GONE);
+						iv.invalidate();
+					}
 				}
-				iv.invalidate();
 				return true;
+			} else if (visible && hideAnimator != null) {
+				hideAnimator.cancel();
+				iv.setVisibility(View.VISIBLE);
+				iv.invalidate();
 			}
 			return false;
 		}
