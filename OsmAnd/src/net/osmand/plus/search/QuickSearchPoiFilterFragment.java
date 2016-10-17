@@ -48,6 +48,8 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
@@ -78,6 +80,7 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 	private Set<String> selectedPoiAdditionalsOrig = new TreeSet<>();
 	private ArrayList<String> collapsedCategories = new ArrayList<>();
 	private ArrayList<String> showAllCategories = new ArrayList<>();
+	private Map<PoiType, String> poiAdditionalsTranslations = new HashMap<>();
 
 	public QuickSearchPoiFilterFragment() {
 	}
@@ -441,14 +444,14 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 				}
 			}
 			if (poiAdditionals != null) {
-				Map<String, Set<String>> additionalsMap = new TreeMap<>();
+				Map<String, List<PoiType>> additionalsMap = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
 				extractPoiAdditionals(poiAdditionals.values(), additionalsMap, excludedPoiAdditionalCategories, true);
 				extractPoiAdditionals(otherAdditionalCategories, additionalsMap, excludedPoiAdditionalCategories, true);
 
 				if (additionalsMap.size() > 0) {
-					for (Entry<String, Set<String>> entry : additionalsMap.entrySet()) {
-						for (String poiTypeName : entry.getValue()) {
-							String keyName = poiTypeName.replace(' ', ':').toLowerCase();
+					for (Entry<String, List<PoiType>> entry : additionalsMap.entrySet()) {
+						for (PoiType poiType : entry.getValue()) {
+							String keyName = poiType.getKeyName().replace('_', ':').toLowerCase();
 							index = filterByName.indexOf(keyName);
 							if (index != -1) {
 								selectedPoiAdditionals.add(keyName);
@@ -523,12 +526,12 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 					selectedPoiAdditionals.contains(keyNameOpen24), null, keyNameOpen24));
 		}
 		if (poiAdditionals != null) {
-			Map<String, Set<String>> additionalsMap = new TreeMap<>();
+			Map<String, List<PoiType>> additionalsMap = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
 			extractPoiAdditionals(poiAdditionals.values(), additionalsMap, excludedPoiAdditionalCategories, false);
 			extractPoiAdditionals(otherAdditionalCategories, additionalsMap, excludedPoiAdditionalCategories, false);
 
 			if (additionalsMap.size() > 0) {
-				for (Entry<String, Set<String>> entry : additionalsMap.entrySet()) {
+				for (Entry<String, List<PoiType>> entry : additionalsMap.entrySet()) {
 					String category = entry.getKey();
 					String categoryLocalizedName = poiTypes.getPoiTranslation(category);
 					boolean expanded = !collapsedCategories.contains(category);
@@ -549,14 +552,26 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 
 					items.add(new PoiFilterListItem(PoiFilterListItemType.GROUP_HEADER,
 							categoryIconId, categoryLocalizedName, ++groupId, true, expanded, false, category, null));
-					List<String> poiTypeNames = new ArrayList<>(entry.getValue());
-					Collections.sort(poiTypeNames);
-					for (String poiTypeName : poiTypeNames) {
-						String keyName = poiTypeName.replace(' ', ':').toLowerCase();
+					List<PoiType> categoryPoiAdditionals = new ArrayList<>(entry.getValue());
+					Collections.sort(categoryPoiAdditionals, new Comparator<PoiType>() {
+						@Override
+						public int compare(PoiType p1, PoiType p2) {
+							String firstPoiTypeTranslation = poiAdditionalsTranslations.get(p1);
+							String secondPoiTypeTranslation = poiAdditionalsTranslations.get(p2);
+							if (firstPoiTypeTranslation != null && secondPoiTypeTranslation != null) {
+								return firstPoiTypeTranslation.compareTo(secondPoiTypeTranslation);
+							} else {
+								return 0;
+							}
+						}
+					});
+					for (PoiType poiType : categoryPoiAdditionals) {
+						String keyName = poiType.getKeyName().replace('_', ':').toLowerCase();
+						String translation = poiAdditionalsTranslations.get(poiType);
 						items.add(new PoiFilterListItem(PoiFilterListItemType.CHECKBOX_ITEM,
-								0, poiTypeName, groupId, false, false, selectedPoiAdditionals.contains(keyName), category, keyName));
+								0, translation, groupId, false, false, selectedPoiAdditionals.contains(keyName), category, keyName));
 					}
-					if (!showAll && poiTypeNames.size() > 0) {
+					if (!showAll && categoryPoiAdditionals.size() > 0) {
 						items.add(new PoiFilterListItem(PoiFilterListItemType.BUTTON_ITEM,
 								0, app.getString(R.string.shared_string_show_all).toUpperCase(), groupId, false, false, false, category, null));
 					}
@@ -567,7 +582,7 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 	}
 
 	private void extractPoiAdditionals(Collection<PoiType> poiAdditionals,
-									   Map<String, Set<String>> additionalsMap,
+									   Map<String, List<PoiType>> additionalsMap,
 									   Set<String> excludedPoiAdditionalCategories,
 									   boolean extractAll) {
 		for (PoiType poiType : poiAdditionals) {
@@ -580,20 +595,24 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 			}
 			if (collapsedCategories.contains(category) && !extractAll) {
 				if (!additionalsMap.containsKey(category)) {
-					additionalsMap.put(category, new TreeSet<String>());
+					additionalsMap.put(category, new ArrayList<PoiType>());
 				}
 				continue;
 			}
 			boolean showAll = showAllCategories.contains(category) || extractAll;
-			String name = poiType.getTranslation();
-			String keyName = name.replace(' ', ':').toLowerCase();
-			if (showAll || poiType.isTopVisible() || selectedPoiAdditionals.contains(keyName)) {
-				Set<String> adds = additionalsMap.get(category);
+			String keyName = poiType.getKeyName().replace('_', ':').toLowerCase();
+			if (!poiAdditionalsTranslations.containsKey(poiType)) {
+				poiAdditionalsTranslations.put(poiType, poiType.getTranslation());
+			}
+			if (showAll || poiType.isTopVisible() || selectedPoiAdditionals.contains(keyName.replace(' ', ':'))) {
+				List<PoiType> adds = additionalsMap.get(category);
 				if (adds == null) {
-					adds = new TreeSet<>();
+					adds = new ArrayList<>();
 					additionalsMap.put(category, adds);
 				}
-				adds.add(name);
+				if (!adds.contains(poiType)) {
+					adds.add(poiType);
+				}
 			}
 		}
 	}
@@ -635,8 +654,7 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 			} else {
 				topFalseOnlyCategories.remove(category);
 			}
-			String name = poiType.getTranslation();
-			String keyName = name.replace(' ', ':').toLowerCase();
+			String keyName = poiType.getKeyName().replace('_', ':').replace(' ', ':').toLowerCase();
 			if (selectedPoiAdditionals.contains(keyName)) {
 				selectedCategories.add(category);
 			}
