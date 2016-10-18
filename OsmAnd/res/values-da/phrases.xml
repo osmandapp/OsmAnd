@@ -685,7 +685,7 @@
 	<string name="poi_railway_buffer_stop">Jernbanesporstopper</string>
 	<string name="poi_wine">Vinhandel</string>
 
-	<string name="poi_shop_food">Fødevarer</string>
+	<string name="poi_shop_food">Dagligvarebutik og supermarked</string>
 	<string name="poi_road_obstacle">Vejforhindring</string>
 		<string name="poi_filling_station">Tankstation</string>
 		<string name="poi_personal_transport">Personlig transport</string>
