@@ -2427,7 +2427,7 @@ Si amas a OsmAnd, OSM y quieres apoyarlos, esta es una perfecta manera de hacerl
     <string name="new_filter_desc">Ingresa el nombre del nuevo filtro. Puedes buscarlo en la lista de Categorías.</string>
     <string name="lang_kab">Cabilio</string>
     <string name="selected_categories">Categorías elegidas</string>
-    <string name="create_custom_poi">Crear PDI personalizado</string>
+    <string name="create_custom_poi">Crear filtro personalizado</string>
     <string name="custom_search">Personalizar búsqueda</string>
     <string name="edit_filter">Editar filtro</string>
     <string name="subcategories">Subcategorías</string>
@@ -2438,4 +2438,7 @@ Si amas a OsmAnd, OSM y quieres apoyarlos, esta es una perfecta manera de hacerl
     <string name="rendering_value_dark_brown_name">Marrón oscuro</string>
     <string name="rendering_attr_contourColorScheme_name">Esquema de color del contorno</string>
     <string name="rendering_attr_surfaceIntegrity_name">Integridad de la superficie de la carretera</string>
+    <string name="christmas_poi">PDI navideño</string>
+    <string name="christmas_desc">Anticipando Navidad y Año Nuevo, puedes elegir mostrar el PDI asociado con la Navidad: el árbol navideño, las tiendas.</string>
+    <string name="christmas_desc_q">¿Mostrar el PDI navideño?</string>
     </resources>
