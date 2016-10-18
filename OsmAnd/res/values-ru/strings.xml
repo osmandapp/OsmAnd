@@ -1,6 +1,12 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
-
+    <string name="rendering_value_light_brown_name">Светло-коричневый</string>
+    <string name="rendering_value_dark_brown_name">Тёмно-коричневый</string>
+    <string name="rendering_attr_contourColorScheme_name">Цветовая схема горизонталей</string>
+    <string name="rendering_attr_surfaceIntegrity_name">Качество дорожного покрытия</string>
+    <string name="search_hint">Введите название города, адрес, POI</string>
+    <string name="new_filter_desc">Введите имя для нового фильтра. Вы сможете его найти в списке Категории.</string>
+    <string name="translit_name_if_miss">Транслитерация если имя на %1$s отсутствует</string>
     <string name="translit_names">Транслитерация названий</string>
     <string name="edit_filter">Редактировать фильтр</string>
     <string name="subcategories">Подкатегории</string>
