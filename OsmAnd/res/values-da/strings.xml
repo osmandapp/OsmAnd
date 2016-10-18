@@ -2668,4 +2668,8 @@ Hvis du  ønsker at støtte OsmAnd og OSM, er dette en god måde at gøre det p�
     <string name="translit_names">Translitterere navne</string>
     <string name="translit_name_if_miss">Transliter hvis %1$s navn mangler</string>
     <string name="search_hint">"Indtast by, adresse,  IP navn"</string>
+    <string name="rendering_value_light_brown_name">Lysebrun</string>
+    <string name="rendering_value_dark_brown_name">Mørkebrun</string>
+    <string name="rendering_attr_contourColorScheme_name">Farveskema for konturer</string>
+    <string name="rendering_attr_surfaceIntegrity_name">Vejoverflade integritet</string>
     </resources>
