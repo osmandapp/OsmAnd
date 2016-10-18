@@ -141,6 +141,13 @@ public class MapPoiTypes {
 		return null;
 	}
 
+	public PoiType getPoiTypeByKeyInCategory(PoiCategory category, String keyName) {
+		if (category != null) {
+			return category.getPoiTypeByKeyName(keyName);
+		}
+		return null;
+	}
+
 	public AbstractPoiType getAnyPoiTypeByKey(String name) {
 		for (PoiCategory pc : categories) {
 			if (pc.getKeyName().equals(name)) {
