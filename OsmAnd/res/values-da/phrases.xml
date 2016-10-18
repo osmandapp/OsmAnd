@@ -2181,40 +2181,40 @@
 <string name="poi_refugee_yes">Flygtningefaciliteter</string>
 	<string name="poi_refugee_no">Flygtninge: nej</string>
 
-	<string name="poi_social_facility_group_home">Socialfacilitet: bosted</string>
-	<string name="poi_social_facility_assisted_living">Socialfacilitet: plejehjem</string>
-	<string name="poi_social_facility_outreach">Socialfacilitet: privat humanitær organisation</string>
-	<string name="poi_social_facility_food_bank">Socialfacilitet: madcentral</string>
-	<string name="poi_social_facility_shelter">Socialfacilitet: herberg</string>
-	<string name="poi_social_facility_ambulatory_care">Socialfacilitet: ambulant behandling</string>
-	<string name="poi_social_facility_workshop">Socialfacilitet: workshop</string>
-	<string name="poi_social_facility_day_care">Socialfacilitet: dagpleje</string>
+	<string name="poi_social_facility_group_home">Bosted</string>
+	<string name="poi_social_facility_assisted_living">Plejehjem</string>
+	<string name="poi_social_facility_outreach">Privat humanitær organisation</string>
+	<string name="poi_social_facility_food_bank">Madcentral</string>
+	<string name="poi_social_facility_shelter">Herberg</string>
+	<string name="poi_social_facility_ambulatory_care">Ambulant behandling</string>
+	<string name="poi_social_facility_workshop">Workshop</string>
+	<string name="poi_social_facility_day_care">Dagpleje</string>
 
-	<string name="poi_social_facility_for_senior">Socialmålgruppe: seniorer</string>
-	<string name="poi_social_facility_for_child">Socialmålgruppe: børn</string>
-	<string name="poi_social_facility_for_orphan">Socialmålgruppe: forældreløse</string>
-	<string name="poi_social_facility_for_disabled">Socialmålgruppe: handicappede</string>
-	<string name="poi_social_facility_for_mental_health">Socialmålgruppe: patienter med psykiske lidelser</string>
-	<string name="poi_social_facility_for_juvenile">Socialmålgruppe: unge</string>
-	<string name="poi_social_facility_for_homeless">Socialmålgruppe: hjemløse</string>
-	<string name="poi_social_facility_for_migrant">Socialmålgruppe: indvandrere</string>
-	<string name="poi_social_facility_for_underprivileged">Socialmålgruppe: dårligt stillede</string>
-	<string name="poi_social_facility_for_drug_addicted">Socialmålgruppe: stofmisbrugere</string>
-	<string name="poi_social_facility_for_unemployed">Socialmålgruppe: arbejdsløse</string>
-	<string name="poi_social_facility_for_diseased">Socialmålgruppe: syge</string>
-	<string name="poi_social_facility_for_child_juvenile">Socialmålgruppe: børn og unge</string>
+	<string name="poi_social_facility_for_senior">Seniorer</string>
+	<string name="poi_social_facility_for_child">Børn</string>
+	<string name="poi_social_facility_for_orphan">Forældreløse</string>
+	<string name="poi_social_facility_for_disabled">Handicappede</string>
+	<string name="poi_social_facility_for_mental_health">Patienter med psykiske lidelser</string>
+	<string name="poi_social_facility_for_juvenile">Unge</string>
+	<string name="poi_social_facility_for_homeless">Hjemløse</string>
+	<string name="poi_social_facility_for_migrant">Indvandrere</string>
+	<string name="poi_social_facility_for_underprivileged">Dårligt stillede</string>
+	<string name="poi_social_facility_for_drug_addicted">Stofmisbrugere</string>
+	<string name="poi_social_facility_for_unemployed">Arbejdsløse</string>
+	<string name="poi_social_facility_for_diseased">Syge</string>
+	<string name="poi_social_facility_for_child_juvenile">Børn og unge</string>
 
-	<string name="poi_theatre_genre_philharmonic">Genre: filharmonisk</string>
-	<string name="poi_theatre_genre_musical">Genre: musical</string>
-	<string name="poi_theatre_genre_drama">Genre: drama</string>
-	<string name="poi_theatre_genre_opera">Genre: opera</string>
-	<string name="poi_theatre_genre_cabaret">Genre: cabaret</string>
-	<string name="poi_theatre_genre_puppet">Genre: dukketeater</string>
-	<string name="poi_theatre_genre_comedy">Genre: komedie</string>
-	<string name="poi_theatre_genre_chamber_music">Genre: kammermusik</string>
-	<string name="poi_theatre_genre_marionette">Genre: dukketeater</string>
-	<string name="poi_theatre_genre_ballet">Genre: ballet</string>
-	<string name="poi_theatre_genre_shadow_play">Genre: skyggespil</string>
+	<string name="poi_theatre_genre_philharmonic">Filharmonisk</string>
+	<string name="poi_theatre_genre_musical">Musical</string>
+	<string name="poi_theatre_genre_drama">Drama</string>
+	<string name="poi_theatre_genre_opera">Opera</string>
+	<string name="poi_theatre_genre_cabaret">Cabaret</string>
+	<string name="poi_theatre_genre_puppet">Dukketeater</string>
+	<string name="poi_theatre_genre_comedy">Komedie</string>
+	<string name="poi_theatre_genre_chamber_music">Kammermusik</string>
+	<string name="poi_theatre_genre_marionette">Marionetdukker</string>
+	<string name="poi_theatre_genre_ballet">Ballet</string>
+	<string name="poi_theatre_genre_shadow_play">Skyggespil</string>
 
 	<string name="poi_bandstand">Musikpavillon</string>
 
@@ -2705,12 +2705,12 @@
 
 <string name="poi_plant_nursery">Planteskole</string>
 
-<string name="poi_compressed_air_yes">Trykluft: ja</string>
+<string name="poi_compressed_air_yes">Ja</string>
 	<string name="poi_compressed_air_no">Trykluft: nej</string>
 
-	<string name="poi_car_wash_yes">Bilvask: ja</string>
+	<string name="poi_car_wash_yes">Ja</string>
 
-	<string name="poi_vacuum_cleaner_yes">Støvsuger: ja</string>
+	<string name="poi_vacuum_cleaner_yes">Ja</string>
 	<string name="poi_vacuum_cleaner_no">Støvsuger: nej</string>
 	<string name="poi_amenity_vacuum_cleaner">Støvsuger</string>
 
@@ -2942,7 +2942,7 @@
 <string name="poi_salt_yes">Salt: ja</string>
 	<string name="poi_salt_no">Salt: nej</string>
 
-<string name="poi_wheelchair_designated">Egnet for kørestole</string>
+<string name="poi_wheelchair_designated">Egnet</string>
 	<string name="poi_spoil_heap">Slaggebjerg</string>
 
 <string name="poi_summer_camp">Sommerlejr</string>
@@ -3377,4 +3377,12 @@
 
 <string name="poi_payment_transport_type">Betalingstype (transport)</string>
 
-</resources>
+<string name="poi_social_facility_type">Type</string>
+	<string name="poi_social_facility_for">Målgruppe</string>
+	<string name="poi_compressed_air_filter">Trykluft</string>
+	<string name="poi_vacuum_cleaner_filter">Støvsuger</string>
+
+<string name="poi_cuisine_doner">Doner kebab (shawarma)</string>
+	<string name="poi_cuisine_shawarma">Shawarma</string>
+
+	</resources>
