@@ -2642,4 +2642,8 @@ Jeśli potrzebujesz pomocy podczas używania OsmAnd, prosimy o kontakt z naszym 
     <string name="translit_names">Transliteracja nazw</string>
     <string name="translit_name_if_miss">Transliteruje nazwy, jeżeli nazwa w %1$s nie jest dostępna</string>
     <string name="search_hint">Wpisz miasto, adres, nazwę użytecznego miejsca</string>
+    <string name="rendering_value_light_brown_name">Jasno-brązowy</string>
+    <string name="rendering_value_dark_brown_name">Ciemno-brązowy</string>
+    <string name="rendering_attr_contourColorScheme_name">Schemat kolorów konturów</string>
+    <string name="rendering_attr_surfaceIntegrity_name">Spójność nawierzchni dróg</string>
     </resources>
