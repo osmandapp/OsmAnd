@@ -3,6 +3,7 @@ package net.osmand.util;
 import net.osmand.data.LatLon;
 
 import java.util.Arrays;
+
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -13,6 +14,8 @@ import org.junit.Test;
 public class GeoPolylineParserUtilTest {
 	@Test
 	public void testDecode() {
+
+
 		Assert.assertEquals(Arrays.asList(
 				new LatLon(52.503032, 13.420526),
 				new LatLon(52.503240, 13.420671),
@@ -83,6 +86,7 @@ public class GeoPolylineParserUtilTest {
 				GeoPolylineParserUtil.parse("" +
 						"o~occB{}brX_LaHyY{QaW}OoN{IoHuEcIcFeM}HoKyGuBsARmG`@yJVwKXaZIqT_@sUi@kNgCk`@wAePsCwTwDuTsG}Y" +
 						"wIsZgFuMmB_F_HmQ}NoVgFyGoCsDmK}KgLaJuHeEgEyCiHcFgE}BeGo@mIKoQW{JwBwHeFmFmDePcNuJqIqk@sf@{EiE" +
-						"mU}RoGkDwPoGeD|K{U`z@_Vpy@}\\pbAsJ}B}NqCyEy@yI}A_WeFeSyEqToJu^_Nmv@ge@{MyI}TcJkTeGcg@oMgCm@"));
+						"mU}RoGkDwPoGeD|K{U`z@_Vpy@}\\pbAsJ}B}NqCyEy@yI}A_WeFeSyEqToJu^_Nmv@ge@{MyI}TcJkTeGcg@oMgCm@",
+						GeoPolylineParserUtil.PRECISION_6));
 	}
 }
