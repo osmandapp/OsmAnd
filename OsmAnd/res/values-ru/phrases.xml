@@ -450,7 +450,7 @@
 	<string name="poi_skating">Катание на роликах (коньках)</string>
 	<string name="poi_skateboard">Скейтборд</string>
 	<string name="poi_skiing">Лыжный спорт</string>
-	<string name="poi_soccer">Традиционный футбол</string>
+	<string name="poi_soccer">Футбол</string>
 	<string name="poi_swimming">Плавание</string>
 	<string name="poi_table_tennis">Пинг-понг</string>
 	<string name="poi_tennis">Теннис</string>
@@ -509,7 +509,7 @@
 	<string name="poi_picnic_site">Место для пикника</string>
 	<string name="poi_spring">Родник</string>
 	<string name="poi_cemetery">Кладбище</string>
-	<string name="poi_grave_yard">Кладбище (небольшое)</string>
+	<string name="poi_grave_yard">Захоронение (небольшое)</string>
 	<string name="poi_shelter">Укрытие от непогоды</string>
 	<string name="poi_funicular">Фуникулёр</string>
 	<string name="poi_resort">Курорт</string>
@@ -546,7 +546,7 @@
 	<string name="poi_community_centre">Общественный центр</string>
 	<string name="poi_social_centre">Общество, клуб</string>
 	<string name="poi_theatre">Театр, концертный зал</string>
-	<string name="poi_theathe_genre_circus">Цирк</string>
+	<string name="poi_theatre_genre_circus">Цирк</string>
 	<string name="poi_dance_floor">Танцплощадка</string>
 	<string name="poi_nightclub">Ночной клуб</string>
 	<string name="poi_stripclub">Стрипклуб</string>
@@ -2216,41 +2216,43 @@
 	<string name="poi_refugee_yes">Удобства, предназначенные для беженцев</string>
 	<string name="poi_refugee_no">Беженцы: нет</string>
 
-	<string name="poi_social_facility_group_home">Социальное учреждение: групповое проживание</string>
-	<string name="poi_social_facility_assisted_living">Социальное учреждение: дом престарелых</string>
-	<string name="poi_social_facility_outreach">Социальное учреждение: социальные услуги без проживания</string>
-	<string name="poi_social_facility_food_bank">Социальное учреждение: раздача еды</string>
-	<string name="poi_social_facility_shelter">Социальное учреждение: временное укрытие</string>
-	<string name="poi_social_facility_ambulatory_care">Социальное учреждение: амбулаторное лечение</string>
-	<string name="poi_social_facility_workshop">Социальное учреждение: работа</string>
-	<string name="poi_social_facility_day_care">Социальное учреждение: дневной уход</string>
+	<string name="poi_social_facility_type">Тип</string>
+	<string name="poi_social_facility_for">Целевая социальная группа</string>
+	<string name="poi_social_facility_group_home">Групповое проживание</string>
+	<string name="poi_social_facility_assisted_living">Дом престарелых</string>
+	<string name="poi_social_facility_outreach">Социальные услуги без проживания</string>
+	<string name="poi_social_facility_food_bank">Раздача еды</string>
+	<string name="poi_social_facility_shelter">Временное укрытие</string>
+	<string name="poi_social_facility_ambulatory_care">Амбулаторное лечение</string>
+	<string name="poi_social_facility_workshop">Мастерская</string>
+	<string name="poi_social_facility_day_care">Дневной уход</string>
 
-	<string name="poi_social_facility_for_senior">Целевая социальная группа: пожилые</string>
-	<string name="poi_social_facility_for_child">Целевая социальная группа: дети</string>
-	<string name="poi_social_facility_for_orphan">Целевая социальная группа: сироты</string>
-	<string name="poi_social_facility_for_disabled">Целевая социальная группа: инвалиды</string>
-	<string name="poi_social_facility_for_mental_health">Целевая социальная группа: пациенты с расстройствами психики</string>
-	<string name="poi_social_facility_for_juvenile">Целевая социальная группа: подростки</string>
-	<string name="poi_social_facility_for_homeless">Целевая социальная группа: бездомные</string>
-	<string name="poi_social_facility_for_migrant">Целевая социальная группа: мигранты</string>
-	<string name="poi_social_facility_for_underprivileged">Целевая социальная группа: бедняки</string>
-	<string name="poi_social_facility_for_drug_addicted">Целевая социальная группа: наркоманы</string>
-	<string name="poi_social_facility_for_unemployed">Целевая социальная группа: безработные</string>
-	<string name="poi_social_facility_for_diseased">Целевая социальная группа: больные</string>
-	<string name="poi_social_facility_for_child_juvenile">Целевая социальная группа: дети и подростки</string>
+	<string name="poi_social_facility_for_senior">Пожилые</string>
+	<string name="poi_social_facility_for_child">Дети</string>
+	<string name="poi_social_facility_for_orphan">Сироты</string>
+	<string name="poi_social_facility_for_disabled">Инвалиды</string>
+	<string name="poi_social_facility_for_mental_health">Пациенты с расстройствами психики</string>
+	<string name="poi_social_facility_for_juvenile">Подростки</string>
+	<string name="poi_social_facility_for_homeless">Бездомные</string>
+	<string name="poi_social_facility_for_migrant">Мигранты</string>
+	<string name="poi_social_facility_for_underprivileged">Бедняки</string>
+	<string name="poi_social_facility_for_drug_addicted">Наркоманы</string>
+	<string name="poi_social_facility_for_unemployed">Безработные</string>
+	<string name="poi_social_facility_for_diseased">Больные</string>
+	<string name="poi_social_facility_for_child_juvenile">Дети и подростки</string>
 
 	<string name="poi_theatre_genre">Жанр</string>
 	<string name="poi_theatre_genre_philharmonic">Филармония</string>
-	<string name="poi_theatre_genre_musical">Жанр: музыкальный</string>
-	<string name="poi_theatre_genre_drama">Жанр: драматический</string>
-	<string name="poi_theatre_genre_opera">Жанр: оперный</string>
-	<string name="poi_theatre_genre_cabaret">Жанр: кабаре</string>
-	<string name="poi_theatre_genre_puppet">Жанр: кукольный театр</string>
-	<string name="poi_theatre_genre_comedy">Жанр: комедийный</string>
-	<string name="poi_theatre_genre_chamber_music">Жанр: камерная музыка</string>
-	<string name="poi_theatre_genre_marionette">Жанр: марионетки</string>
-	<string name="poi_theatre_genre_ballet">Жанр: балет</string>
-	<string name="poi_theatre_genre_shadow_play">Жанр: театр теней</string>
+	<string name="poi_theatre_genre_musical">Музыкальный</string>
+	<string name="poi_theatre_genre_drama">Драматический</string>
+	<string name="poi_theatre_genre_opera">Оперный</string>
+	<string name="poi_theatre_genre_cabaret">Кабаре</string>
+	<string name="poi_theatre_genre_puppet">Кукольный театр</string>
+	<string name="poi_theatre_genre_comedy">Комедийный</string>
+	<string name="poi_theatre_genre_chamber_music">Камерная музыка</string>
+	<string name="poi_theatre_genre_marionette">Марионетки</string>
+	<string name="poi_theatre_genre_ballet">Балет</string>
+	<string name="poi_theatre_genre_shadow_play">Театр теней</string>
 
 	<string name="poi_bandstand">Отдельностоящая сцена</string>
 	<string name="poi_kiln">Печь для обжига</string>
@@ -2739,11 +2741,13 @@
 
 	<string name="poi_plant_nursery">Питомник растений</string>
 
-	<string name="poi_compressed_air_yes">С подкачкой шин</string>
+	<string name="poi_compressed_air_filter">Подкачка шин</string>
+	<string name="poi_compressed_air_yes">Есть</string>
 	<string name="poi_compressed_air_no">Без подкачки шин</string>
 
-	<string name="poi_car_wash_yes">С автомойкой</string>
-	<string name="poi_vacuum_cleaner_yes">С пылесосом</string>
+	<string name="poi_car_wash_yes">Есть</string>
+	<string name="poi_vacuum_cleaner_filter">Пылесос</string>
+	<string name="poi_vacuum_cleaner_yes">Есть</string>
 	<string name="poi_vacuum_cleaner_no">Без пылесоса</string>
 	<string name="poi_amenity_vacuum_cleaner">Пылесос</string>
 
@@ -2972,7 +2976,7 @@
 
 	<string name="poi_salt_yes">Соль</string>
 	<string name="poi_salt_no">Соль: нет</string>
-	<string name="poi_wheelchair_designated">Предназначено для инвалидных кресел</string>
+	<string name="poi_wheelchair_designated">Только для инвалидных кресел</string>
 	<string name="poi_spoil_heap">Отвал породы</string>
 
 	<string name="poi_summer_camp">Детский летний лагерь</string>
@@ -3171,6 +3175,7 @@
 	<string name="poi_cuisine_coffee">Кофе</string>
 	<string name="poi_cuisine_sandwich">Сандвич</string>
 	<string name="poi_cuisine_kebab">Кебаб</string>
+	<string name="poi_cuisine_doner">Донер кебаб (шаурма)</string>
 	<string name="poi_cuisine_chicken">Курица</string>
 	<string name="poi_cuisine_ice_cream">Мороженое</string>
 	<string name="poi_cuisine_sushi">Суши</string>

@@ -80,6 +80,10 @@
 	<string name="poi_home_visit">Home visit</string>
 	<string name="poi_dish">Dish</string>
 	<string name="poi_payment_transport_type">Payment type (transport)</string>
+	<string name="poi_social_facility_type">Type</string>
+	<string name="poi_social_facility_for">Target group</string>
+	<string name="poi_compressed_air_filter">Compressed air</string>
+	<string name="poi_vacuum_cleaner_filter">Vacuum cleaner</string>
 
 <!--  categories -->
 	<string name="poi_shop">Store</string>
@@ -873,7 +877,7 @@
 	<string name="poi_community_centre">Community center</string>
 	<string name="poi_social_centre">Social center</string>
 	<string name="poi_theatre">Theater</string>
-	<string name="poi_theathe_genre_circus">Circus</string>
+	<string name="poi_theatre_genre_circus">Circus</string>
 	<string name="poi_gallery">Art gallery</string>
 	<string name="poi_dance_floor">Dance floor</string>
 	<string name="poi_nightclub">Nightclub</string>
@@ -2214,40 +2218,40 @@
 	<string name="poi_refugee_yes">Amenities for refugees</string>
 	<string name="poi_refugee_no">Refugees: no</string>
 
-	<string name="poi_social_facility_group_home">Social facility: group home</string>
-	<string name="poi_social_facility_assisted_living">Social facility: assisted living</string>
-	<string name="poi_social_facility_outreach">Social facility: outreach</string>
-	<string name="poi_social_facility_food_bank">Social facility: food bank</string>
-	<string name="poi_social_facility_shelter">Social facility: shelter</string>
-	<string name="poi_social_facility_ambulatory_care">Social facility: ambulatory care</string>
-	<string name="poi_social_facility_workshop">Social facility: workshop</string>
-	<string name="poi_social_facility_day_care">Social facility: day care</string>
+	<string name="poi_social_facility_group_home">Group home</string>
+	<string name="poi_social_facility_assisted_living">Assisted living</string>
+	<string name="poi_social_facility_outreach">Outreach</string>
+	<string name="poi_social_facility_food_bank">Food bank</string>
+	<string name="poi_social_facility_shelter">Shelter</string>
+	<string name="poi_social_facility_ambulatory_care">Ambulatory care</string>
+	<string name="poi_social_facility_workshop">Workshop</string>
+	<string name="poi_social_facility_day_care">Day care</string>
 
-	<string name="poi_social_facility_for_senior">Target social group: seniors</string>
-	<string name="poi_social_facility_for_child">Target social group: children</string>
-	<string name="poi_social_facility_for_orphan">Target social group: orphans</string>
-	<string name="poi_social_facility_for_disabled">Target social group: disabled</string>
-	<string name="poi_social_facility_for_mental_health">Target social group: patients with mental disorders</string>
-	<string name="poi_social_facility_for_juvenile">Target social group: juvenile</string>
-	<string name="poi_social_facility_for_homeless">Target social group: homeless</string>
-	<string name="poi_social_facility_for_migrant">Target social group: migrants</string>
-	<string name="poi_social_facility_for_underprivileged">Target social group: underprivileged</string>
-	<string name="poi_social_facility_for_drug_addicted">Target social group: drug addicted</string>
-	<string name="poi_social_facility_for_unemployed">Target social group: unemployed</string>
-	<string name="poi_social_facility_for_diseased">Target social group: diseased</string>
-	<string name="poi_social_facility_for_child_juvenile">Target social group: child;juvenile</string>
+	<string name="poi_social_facility_for_senior">Seniors</string>
+	<string name="poi_social_facility_for_child">Children</string>
+	<string name="poi_social_facility_for_orphan">Orphans</string>
+	<string name="poi_social_facility_for_disabled">Disabled</string>
+	<string name="poi_social_facility_for_mental_health">Patients with mental disorders</string>
+	<string name="poi_social_facility_for_juvenile">Juvenile</string>
+	<string name="poi_social_facility_for_homeless">Homeless</string>
+	<string name="poi_social_facility_for_migrant">Migrants</string>
+	<string name="poi_social_facility_for_underprivileged">Underprivileged</string>
+	<string name="poi_social_facility_for_drug_addicted">Drug addicted</string>
+	<string name="poi_social_facility_for_unemployed">Unemployed</string>
+	<string name="poi_social_facility_for_diseased">Diseased</string>
+	<string name="poi_social_facility_for_child_juvenile">Child;juvenile</string>
 
-	<string name="poi_theatre_genre_philharmonic">Genre: philharmonic</string>
-	<string name="poi_theatre_genre_musical">Genre: musical</string>
-	<string name="poi_theatre_genre_drama">Genre: drama</string>
-	<string name="poi_theatre_genre_opera">Genre: opera</string>
-	<string name="poi_theatre_genre_cabaret">Genre: cabaret</string>
-	<string name="poi_theatre_genre_puppet">Genre: puppet</string>
-	<string name="poi_theatre_genre_comedy">Genre: comedy</string>
-	<string name="poi_theatre_genre_chamber_music">Genre: chamber music</string>
-	<string name="poi_theatre_genre_marionette">Genre: marionette</string>
-	<string name="poi_theatre_genre_ballet">Genre: ballet</string>
-	<string name="poi_theatre_genre_shadow_play">Genre: shadow play</string>
+	<string name="poi_theatre_genre_philharmonic">Philharmonic</string>
+	<string name="poi_theatre_genre_musical">Musical</string>
+	<string name="poi_theatre_genre_drama">Drama</string>
+	<string name="poi_theatre_genre_opera">Opera</string>
+	<string name="poi_theatre_genre_cabaret">Cabaret</string>
+	<string name="poi_theatre_genre_puppet">Puppet</string>
+	<string name="poi_theatre_genre_comedy">Comedy</string>
+	<string name="poi_theatre_genre_chamber_music">Chamber music</string>
+	<string name="poi_theatre_genre_marionette">Marionette</string>
+	<string name="poi_theatre_genre_ballet">Ballet</string>
+	<string name="poi_theatre_genre_shadow_play">Shadow play</string>
 
 	<string name="poi_bandstand">Bandstand</string>
 	<string name="poi_kiln">Kiln</string>
@@ -2722,12 +2726,12 @@
 
 	<string name="poi_plant_nursery">Plant nursery</string>
 
-	<string name="poi_compressed_air_yes">Compressed air: yes</string>
+	<string name="poi_compressed_air_yes">Yes</string>
 	<string name="poi_compressed_air_no">Compressed air: no</string>
 
-	<string name="poi_car_wash_yes">Car wash: yes</string>
+	<string name="poi_car_wash_yes">Yes</string>
 
-	<string name="poi_vacuum_cleaner_yes">Vacuum cleaner: yes</string>
+	<string name="poi_vacuum_cleaner_yes">Yes</string>
 	<string name="poi_vacuum_cleaner_no">Vacuum cleaner: no</string>
 	<string name="poi_amenity_vacuum_cleaner">Vacuum cleaner</string>
 
@@ -2948,7 +2952,7 @@
 
 	<string name="poi_salt_yes">Salt</string>
 	<string name="poi_salt_no">Salt: no</string>
-	<string name="poi_wheelchair_designated">Designated for wheelchairs</string>
+	<string name="poi_wheelchair_designated">Designated</string>
 	<string name="poi_spoil_heap">Spoil heap</string>
 	
 	<string name="poi_summer_camp">Summer camp</string>
@@ -3132,6 +3136,7 @@
 	<string name="poi_cuisine_coffee">Coffee</string>
 	<string name="poi_cuisine_sandwich">Sandwich</string>
 	<string name="poi_cuisine_kebab">Kebab</string>
+	<string name="poi_cuisine_doner">Doner kebab (shawarma)</string>
 	<string name="poi_cuisine_chicken">Chicken</string>
 	<string name="poi_cuisine_ice_cream">Ice cream</string>
 	<string name="poi_cuisine_sushi">Sushi</string>
@@ -3208,6 +3213,7 @@
 	<string name="poi_cuisine_pastel">Pastel</string>
 	<string name="poi_cuisine_burrito">Burrito</string>
 	<string name="poi_cuisine_teriyaki">Teriyaki</string>
+	<string name="poi_cuisine_shawarma">Shawarma</string>
 
 	<string name="poi_cuisine_regional">Regional</string>
 	<string name="poi_cuisine_italian">Italian</string>
