@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources><string name="poi_shop">Tienda</string>
-		<string name="poi_shop_food">Tienda de comidas</string>
+		<string name="poi_shop_food">Tienda de conveniencia y supermercado</string>
 	<string name="poi_emergency">Emergencia</string>
 	<string name="poi_transportation">Transporte</string>
 		<string name="poi_road_obstacle">Obstáculo en la carretera</string>
@@ -42,7 +42,7 @@
 	<string name="poi_palaeontological_site">Yacimiento paleontológico</string>
 	<string name="poi_bakery">Panadería</string>
 	<string name="poi_alcohol">Licorería</string>
-	<string name="poi_convenience">Almacén</string>
+	<string name="poi_convenience">Tienda de conveniencia</string>
 	<string name="poi_mall">Centro comercial</string>
 	<string name="poi_beverages">Venta de bebidas</string>
 	<string name="poi_butcher">Carnicería</string>
@@ -3102,7 +3102,7 @@
 	<string name="poi_diet_kosher_filter_yes">Kosher</string>
 	<string name="poi_diet_halal_filter_yes">Halal</string>
 	<string name="poi_diet_lactose_free_filter_yes">Libre de lactosa</string>
-	<string name="poi_takeaway_filter_yes">Comida para llevar</string>
-	<string name="poi_shower_filter_yes">Ducha</string>
+	<string name="poi_takeaway_filter_yes">Si</string>
+	<string name="poi_shower_filter_yes">Si</string>
 
 </resources>
