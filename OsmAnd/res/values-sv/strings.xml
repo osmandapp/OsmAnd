@@ -2288,4 +2288,25 @@ Om du tycker om OsmAnd och OSM och vill stödja dem så är detta ett utmärkt s
     <string name="new_filter">Nytt filter</string>
     <string name="new_filter_desc">Ange ett namn på det nya filtret. Det kommer att finnas i kategorilistan.</string>
     <string name="translit_name_if_miss">"Transkribera om  %1$s namn saknas"</string>
+    <string name="skip_map_downloading">Hoppa över nerladdning av kartor</string>
+    <string name="search_another_country">Välj en annan region</string>
+    <string name="osmand_plus_banner_desc">Full version av OsmAnd med obegränsade kartnerladdningar och månatliga kartuppdateringar.</string>
+    <string name="si_mi_meters">Mil/metrar</string>
+    <string name="first_usage_wizard_desc">Låt OsmAnd avgöra din plats och föreslå kartor att ladda ner för den regionen.</string>
+    <string name="location_not_found">Platsen hittades inte</string>
+    <string name="no_inet_connection">Ingen internetanslutning</string>
+    <string name="no_inet_connection_desc_map">Krävs för att ladda ner kartor.</string>
+    <string name="search_location">Söker plats…</string>
+    <string name="storage_free_space">Oanvänt utrymme</string>
+    <string name="storage_place_description">OsmAnd\'s lagringsplats för data (för kartor, spår, osv.): %1$s.</string>
+    <string name="give_permission">Ge tillåtelse</string>
+    <string name="allow_access_location">Tillåt åtkomst till plats</string>
+    <string name="no_update_info">Visa inte uppdateringar</string>
+    <string name="update_all_maps_now">Vill du uppdatera alla kartor nu?</string>
+    <string name="routing_attr_short_way_name">Bränslesnål väg</string>
+    <string name="routing_attr_short_way_description">Använd bränslesnål väg (oftast kortare)</string>
+    <string name="shared_string_change">Ändra</string>
+    <string name="get_started">Kom igång</string>
+    <string name="replace_favorite_confirmation">Är du säker på att du vill ersätta favoriten %1$s?</string>
+    <string name="clear_tile_data">Rensa alla brickor</string>
     </resources>
