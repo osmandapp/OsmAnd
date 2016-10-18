@@ -2438,4 +2438,8 @@ Si necesitas ayuda con la aplicación OsmAnd, contacte con nuestro equipo de sop
     <string name="translit_names">Transliterar nombres</string>
     <string name="translit_name_if_miss">Transliterar nombres si no se encuentran en %1$s</string>
     <string name="search_hint">Ingresa nombre de ciudad, dirección o PDI</string>
+    <string name="rendering_value_light_brown_name">Marrón claro</string>
+    <string name="rendering_value_dark_brown_name">Marrón oscuro</string>
+    <string name="rendering_attr_contourColorScheme_name">Esquema de color del contorno</string>
+    <string name="rendering_attr_surfaceIntegrity_name">Integridad de la superficie del camino</string>
     </resources>
