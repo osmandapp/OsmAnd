@@ -2332,4 +2332,9 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="edit_filter">Modifier le filtre</string>
     <string name="subcategories">Sous-catégories</string>
     <string name="translit_names">Transcrire les noms</string>
+    <string name="rendering_value_light_brown_name">Marron clair</string>
+    <string name="rendering_value_dark_brown_name">Marron foncé</string>
+    <string name="search_hint">Saisissez une ville, une adresse ou un nom de point d\'intérêt</string>
+    <string name="rendering_attr_contourColorScheme_name">Couleur des contours</string>
+    <string name="rendering_attr_surfaceIntegrity_name">État de la route</string>
     </resources>
