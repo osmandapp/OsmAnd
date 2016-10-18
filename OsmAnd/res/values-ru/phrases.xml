@@ -806,7 +806,7 @@
 		<string name="poi_internet_access">Доступ в Интернет</string>
 	<string name="poi_club">Клуб</string>
 	<string name="poi_cafe_and_restaurant">Кафе и ресторан</string>
-	<string name="poi_shop_food">Продуктовый магазин</string>
+	<string name="poi_shop_food">Продуктовый магазин и супермаркет</string>
 	<string name="poi_filling_station">Заправочная станция</string>
 		<string name="poi_aerialway_transport">Канатный транспорт</string>
 	<string name="poi_transport_construction">Транспортное сооружение</string>

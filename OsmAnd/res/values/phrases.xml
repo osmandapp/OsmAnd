@@ -83,7 +83,7 @@
 
 <!--  categories -->
 	<string name="poi_shop">Store</string>
-		<string name="poi_shop_food">Food store</string>
+		<string name="poi_shop_food">Convenience store and supermarket</string>
 	<string name="poi_emergency">Emergency</string>
 	<string name="poi_transportation">Transportation</string>
 		<string name="poi_road_obstacle">Road obstacle</string>
