@@ -567,6 +567,20 @@
       "265002602": "TL|TL|+C|+C|TSLR",
       "362433819": "TL|TL|+C|+C"
     }
+  },
+  {
+    "testName": "33.E19 to A9",
+    "startPoint": {
+      "latitude": 45.64749648785519,
+      "longitude": 35.640286803245544
+    },
+    "endPoint": {
+      "latitude": 45.638630530702,
+      "longitude": 35.63677579164505
+    },
+    "expectedResults": {
+      "138581966": "C|C|C|+C|+C|C"
+    }
   }
 
 ]

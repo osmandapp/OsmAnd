@@ -1494,7 +1494,7 @@
 	<string name="poi_microbrewery_yes">Есть</string>
 	<string name="poi_microbrewery_no">Нет собственной пивоварни</string>
 
-	<string name="poi_takeaway_filter_yes">На вынос</string>
+	<string name="poi_takeaway_filter_yes">Да</string>
 	<string name="poi_takeaway">На вынос</string>
 	<string name="poi_takeaway_yes">На вынос</string>
 	<string name="poi_takeaway_no">На вынос: нет</string>
@@ -2184,7 +2184,7 @@
 	<string name="poi_washing_machine">Стиральная машина</string>
 	<string name="poi_washing_machine_yes">Есть</string>
 	<string name="poi_washing_machine_no">Стиральная машина: отсутствует</string>
-	<string name="poi_shower_filter_yes">Душ</string>
+	<string name="poi_shower_filter_yes">Есть</string>
 	<string name="poi_shower_yes">Душ</string>
 	<string name="poi_shower_no">Душ: отсутствует</string>
 	<string name="poi_shower_hot">Душ: горячий</string>

@@ -3295,7 +3295,7 @@
 	<string name="poi_diet_kosher_filter_yes">Kosher</string>
 	<string name="poi_diet_halal_filter_yes">Halal</string>
 	<string name="poi_diet_lactose_free_filter_yes">Lactose free</string>
-	<string name="poi_takeaway_filter_yes">Takeaway</string>
-	<string name="poi_shower_filter_yes">Shower</string>
+	<string name="poi_takeaway_filter_yes">Yes</string>
+	<string name="poi_shower_filter_yes">Yes</string>
 
 </resources>
