@@ -7,6 +7,7 @@ import net.osmand.plus.R;
 import net.osmand.util.Algorithms;
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import com.jwetherell.openmap.common.LatLonPoint;
 import com.jwetherell.openmap.common.UTMPoint;
@@ -15,6 +16,7 @@ public class PointDescription {
 	private String type = "";
 	private String name = "";
 	private String typeName;
+	private String iconName;
 
 	private double lat = 0;
 	private double lon = 0;
@@ -89,6 +91,15 @@ public class PointDescription {
 
 	public String getTypeName() {
 		return typeName;
+	}
+
+	@Nullable
+	public String getIconName() {
+		return iconName;
+	}
+
+	public void setIconName(String iconName) {
+		this.iconName = iconName;
 	}
 
 	@NonNull
@@ -281,7 +292,11 @@ public class PointDescription {
 		if(!Algorithms.isEmpty(p.typeName)) {
 			tp = tp +'.' + p.typeName;
 		}
-		return tp + "#" + p.name;
+		String res = tp + "#" + p.name;
+		if (!Algorithms.isEmpty(p.iconName)) {
+			res += "#" + p.iconName;
+		}
+		return res;
 	}
 
 	public static PointDescription deserializeFromString(String s, LatLon l) {
@@ -289,12 +304,23 @@ public class PointDescription {
 		if (s != null && s.length() > 0) {
 			int in = s.indexOf('#');
 			if (in >= 0) {
-				String nm = s.substring(in + 1).trim();
+				int ii = s.indexOf('#', in + 1);
+				String name;
+				String icon = null;
+				if (ii > 0) {
+					name = s.substring(in + 1, ii).trim();
+					icon = s.substring(ii + 1).trim();
+				} else {
+					name = s.substring(in + 1).trim();
+				}
 				String tp = s.substring(0, in);
 				if(tp.contains(".")) {
-					pd = new PointDescription(tp.substring(0, tp.indexOf('.')), tp.substring(tp.indexOf('.') + 1), nm);
+					pd = new PointDescription(tp.substring(0, tp.indexOf('.')), tp.substring(tp.indexOf('.') + 1), name);
 				} else {
-					pd = new PointDescription(tp, nm);
+					pd = new PointDescription(tp, name);
+				}
+				if (!Algorithms.isEmpty(icon)) {
+					pd.setIconName(icon);
 				}
 			}
 		}
