@@ -2605,4 +2605,6 @@ Facebook：https://www.facebook.com/osmandapp
     <string name="new_filter">新的篩選</string>
     <string name="new_filter_desc">請輸入新的篩選名稱。您可以在分類清單裡找到它。</string>
     <string name="translit_names">音譯名稱</string>
+    <string name="search_hint">輸入城市、地址、poi 名稱</string>
+    <string name="translit_name_if_miss">如果 %1$s 的名稱缺失則音譯</string>
     </resources>
