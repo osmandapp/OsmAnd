@@ -1601,8 +1601,8 @@
 	<string name="poi_drive_through_no">Sin servicio en el automóvil</string>
 
 	<string name="poi_brewery_additional">Nombre de cervecería</string>
-	<string name="poi_microbrewery_yes">Micro-cervecería</string>
-	<string name="poi_microbrewery_no">Sin micro-cervecería</string>
+	<string name="poi_microbrewery_yes">Con cerveza artesanal</string>
+	<string name="poi_microbrewery_no">Sin cerveza artesanal</string>
 
 	<string name="poi_takeaway_yes">Si</string>
 	<string name="poi_takeaway_no">Comida para llevar: No</string>
@@ -3128,7 +3128,7 @@
 	<string name="poi_drive_through">Servicio en el automóvil</string>
 	<string name="poi_takeaway">Comida para llevar</string>
 	<string name="poi_cocktails">Cócteles</string>
-	<string name="poi_microbrewery">Cervecería</string>
+	<string name="poi_microbrewery">Cervecería artesanal</string>
 	<string name="poi_beauty_salon_service">Servicio de belleza</string>
 	<string name="poi_recycling_type">Tipo de reciclado</string>
 	<string name="poi_recycling_accepted_waste">Acepta residuos</string>
