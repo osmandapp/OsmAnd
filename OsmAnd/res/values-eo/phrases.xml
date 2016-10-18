@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources><string name="poi_shop">Vendejo</string>
-		<string name="poi_shop_food">Butiko oportuna kaj superbazaro</string>
+		<string name="poi_shop_food">Manĝovendejo</string>
 	<string name="poi_emergency">Vivsavado</string>
 	<string name="poi_transportation">Transporto</string>
 		<string name="poi_road_obstacle">Voja barilo</string>
@@ -2158,40 +2158,40 @@
 	<string name="poi_refugee_yes">Servo por rifuĝintoj</string>
 	<string name="poi_refugee_no">Por rifuĝintoj: ne</string>
 
-	<string name="poi_social_facility_group_home">Socia servejo: grupa hejmo</string>
-	<string name="poi_social_facility_assisted_living">Socia servejo: subtenata loĝado</string>
-	<string name="poi_social_facility_outreach">Socia servejo: senpag-konsilejo</string>
-	<string name="poi_social_facility_food_bank">Socia servejo: manĝ-disdonejo</string>
-	<string name="poi_social_facility_shelter">Socia servejo: azilo</string>
-	<string name="poi_social_facility_ambulatory_care">Socia servejo: sanhelpejo</string>
-	<string name="poi_social_facility_workshop">Socia servejo: laborejo</string>
-	<string name="poi_social_facility_day_care">Socia servejo: tag-prizorgejo</string>
+	<string name="poi_social_facility_group_home">Grupa hejmo</string>
+	<string name="poi_social_facility_assisted_living">Subtenata loĝado</string>
+	<string name="poi_social_facility_outreach">Senpag-konsilejo</string>
+	<string name="poi_social_facility_food_bank">Manĝ-disdonejo</string>
+	<string name="poi_social_facility_shelter">Azilo</string>
+	<string name="poi_social_facility_ambulatory_care">Sanhelpejo</string>
+	<string name="poi_social_facility_workshop">Laborejo</string>
+	<string name="poi_social_facility_day_care">Tag-prizorgejo</string>
 
-	<string name="poi_social_facility_for_senior">Alcela grupo: maljunuloj</string>
-	<string name="poi_social_facility_for_child">Alcela grupo: infanoj</string>
-	<string name="poi_social_facility_for_orphan">Alcela grupo: orfoj</string>
-	<string name="poi_social_facility_for_disabled">Alcela grupo: malkapabluloj</string>
-	<string name="poi_social_facility_for_mental_health">Alcela grupo: afekci-perturb-uloj</string>
-	<string name="poi_social_facility_for_juvenile">Alcela grupo: junuloj</string>
-	<string name="poi_social_facility_for_homeless">Alcela grupo: senhejmuloj</string>
-	<string name="poi_social_facility_for_migrant">Alcela grupo: enmigrantoj</string>
-	<string name="poi_social_facility_for_underprivileged">Alcela grupo: malriĉuloj</string>
-	<string name="poi_social_facility_for_drug_addicted">Alcela grupo: drog-dependuloj</string>
-	<string name="poi_social_facility_for_unemployed">Alcela grupo: senlaboruloj</string>
-	<string name="poi_social_facility_for_diseased">Alcela grupo: malsanuloj</string>
-	<string name="poi_social_facility_for_child_juvenile">Alcela grupo: infanoj, junuloj</string>
+	<string name="poi_social_facility_for_senior">Maljunuloj</string>
+	<string name="poi_social_facility_for_child">Infanoj</string>
+	<string name="poi_social_facility_for_orphan">Orfoj</string>
+	<string name="poi_social_facility_for_disabled">Malkapabluloj</string>
+	<string name="poi_social_facility_for_mental_health">Afekci-perturb-uloj</string>
+	<string name="poi_social_facility_for_juvenile">Junuloj</string>
+	<string name="poi_social_facility_for_homeless">Senhejmuloj</string>
+	<string name="poi_social_facility_for_migrant">Enmigrantoj</string>
+	<string name="poi_social_facility_for_underprivileged">Malriĉuloj</string>
+	<string name="poi_social_facility_for_drug_addicted">Drog-dependuloj</string>
+	<string name="poi_social_facility_for_unemployed">Senlaboruloj</string>
+	<string name="poi_social_facility_for_diseased">Malsanuloj</string>
+	<string name="poi_social_facility_for_child_juvenile">Infanoj, junuloj</string>
 
-	<string name="poi_theatre_genre_philharmonic">Tipo: filharmonio</string>
-	<string name="poi_theatre_genre_musical">Tipo: muzikala teatro</string>
-	<string name="poi_theatre_genre_drama">Tipo: drama teatro</string>
-	<string name="poi_theatre_genre_opera">Tipo: operdomo</string>
-	<string name="poi_theatre_genre_cabaret">Tipo: kabareto</string>
-	<string name="poi_theatre_genre_puppet">Tipo: pupteatro</string>
-	<string name="poi_theatre_genre_comedy">Tipo: farsa teatro</string>
-	<string name="poi_theatre_genre_marionette">Tipo: teatro de marionetoj</string>
-	<string name="poi_theatre_genre_chamber_music">Tipo: teatro de solisto</string>
-	<string name="poi_theatre_genre_ballet">Tipo: baleta teatro</string>
-	<string name="poi_theatre_genre_shadow_play">Tipo: teatro de ombroj</string>
+	<string name="poi_theatre_genre_philharmonic">Filharmonio</string>
+	<string name="poi_theatre_genre_musical">Muzikala teatro</string>
+	<string name="poi_theatre_genre_drama">Drama teatro</string>
+	<string name="poi_theatre_genre_opera">Operdomo</string>
+	<string name="poi_theatre_genre_cabaret">Kabareto</string>
+	<string name="poi_theatre_genre_puppet">Pupteatro</string>
+	<string name="poi_theatre_genre_comedy">Farsa teatro</string>
+	<string name="poi_theatre_genre_marionette">Teatro de marionetoj</string>
+	<string name="poi_theatre_genre_chamber_music">Teatro de solisto</string>
+	<string name="poi_theatre_genre_ballet">Baleta teatro</string>
+	<string name="poi_theatre_genre_shadow_play">Teatro de ombroj</string>
 
 	<string name="poi_product_brick">Produktaĵo: brikoj</string>
 	<string name="poi_product_quicklime">Produktaĵo: kalko neestingita (CaO)</string>
@@ -2528,12 +2528,12 @@
 
 	<string name="poi_religion">Religiaĵ-vendejo</string>
 
-	<string name="poi_compressed_air_yes">Kunpremilo: jes</string>
+	<string name="poi_compressed_air_yes">Jes</string>
 	<string name="poi_compressed_air_no">Kunpremilo: ne</string>
 
-	<string name="poi_car_wash_yes">Aŭtopurigejo: jes</string>
+	<string name="poi_car_wash_yes">Jes</string>
 
-	<string name="poi_vacuum_cleaner_yes">Polvosuĉilo: jes</string>
+	<string name="poi_vacuum_cleaner_yes">Jes</string>
 	<string name="poi_vacuum_cleaner_no">Polvosuĉilo: ne</string>
 	<string name="poi_amenity_vacuum_cleaner">Polvosuĉilo</string>
 
@@ -2700,7 +2700,7 @@
 	<string name="poi_bicycle_parking_tree">Bicikl-pendigilo</string>
 	<string name="poi_bicycle_parking_streetpod">Duon-ŝranketo</string>
 
-	<string name="poi_wheelchair_designated">Adaptita por rulseĝoj</string>
+	<string name="poi_wheelchair_designated">Adaptita</string>
 	<string name="poi_spoil_heap">Skori-monto</string>
 	
 	<string name="poi_summer_camp">Kampadejo somera (por infanoj)</string>
@@ -3292,5 +3292,11 @@
 
 <string name="poi_social_facility_type">Speco</string>
 	<string name="poi_social_facility_for">Alcela grupo</string>
-	<string name="poi_compressed_air_filter">Kunpremita aero</string>
+	<string name="poi_compressed_air_filter">Gaskunpremilo</string>
+	<string name="poi_vacuum_cleaner_filter">Polvosuĉilo</string>
+
+<string name="poi_cuisine_doner">Turnkebabo (ŝavarma)</string>
+	<string name="poi_cuisine_shawarma">Turnkebabo (ŝavarma)</string>
+
+	<string name="poi_cuisine_bistro">Bistroo</string>
 	</resources>
