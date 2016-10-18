@@ -606,7 +606,7 @@ public class RouteResultPreparation {
 		} else if (target.isActiveTurnMostRight()) {
 			// next turn is right
 			// let only the most right lanes be enabled
-			if (target.activeLen < active.activeLen) {
+			if (target.activeLen < active.activeLen ) {
 				active.activeStartIndex += (active.activeLen - target.activeLen);
 				changed = true;
 			}
@@ -687,6 +687,9 @@ public class RouteResultPreparation {
 		}
 		if (singleTurn == 0) {
 			singleTurn = currentTurn.getValue();
+			if(singleTurn == TurnType.KL || singleTurn == TurnType.KR) {
+				return;
+			}
 		}
 		for(int i = 0; i < lanes.length; i++) {
 			if(lanes[i] % 2 == 1 && TurnType.getPrimaryTurn(lanes[i]) != singleTurn) {
