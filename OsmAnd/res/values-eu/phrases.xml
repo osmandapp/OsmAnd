@@ -1253,7 +1253,7 @@
 	<string name="poi_bicycle_parking_anchors">Aingurak</string>
 	<string name="poi_bicycle_parking_stands">Euskarriak</string>
 	<string name="poi_fuel_avia_type">Mota</string>
-	<string name="poi_payment_fuel_type">Ordainketa mota</string>
+	<string name="poi_payment_fuel_type">Erregai txartelak</string>
 	<string name="poi_internet_access_type">Internet sarbide mota</string>
 	<string name="poi_vending_type">Makina automatiko mota</string>
 	<string name="poi_bicycle_service">Bizikleta zerbitzua</string>
@@ -1546,4 +1546,25 @@
 	<string name="poi_microbrewery_no">Ez da mikro-garagardotegia</string>
 
 	<string name="poi_piste_grooming_skating">Patinajea</string>
+	<string name="poi_historic_yes">Objektu historikoa</string>
+	<string name="poi_surveillance_yes">Zaintza: bai</string>
+	<string name="poi_shop_additional_yes">Dendarekin</string>
+
+	<string name="poi_service_bicycle_repair_no">Bizikleta konponketa: ez</string>
+	<string name="poi_service_bicycle_rental_yes">Alokairua</string>
+	<string name="poi_service_bicycle_rental_no">Bizikleta alokairua: ez</string>
+	<string name="poi_service_bicycle_cleaning_yes">Garbiketa</string>
+	<string name="poi_service_bicycle_cleaning_no">Bizikleta garbiketa: ez</string>
+	<string name="poi_training_language">Heziketa: hizkuntza</string>
+	<string name="poi_training_music">Heziketa: musika</string>
+	<string name="poi_training_dance">Heziketa: dantza</string>
+	<string name="poi_training_sport">Heziketa: kirola</string>
+	<string name="poi_training_art">Heziketa: artea</string>
+	<string name="poi_training_cooking">Heziketa: sukaldaritza</string>
+	<string name="poi_training_computer">Heziketa: informatika</string>
+	<string name="poi_training_yoga">Heziketa: yoga</string>
+	<string name="poi_training_martial_art">Heziketa: arte martzialak</string>
+	<string name="poi_training_aviation">Heziketa: abiazioa</string>
+	<string name="poi_training_hairdressing">Heziketa: ile-apaintzailea</string>
+
 	</resources>
