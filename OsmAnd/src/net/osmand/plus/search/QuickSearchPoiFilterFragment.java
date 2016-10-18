@@ -469,18 +469,23 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 
 	@NonNull
 	private Set<String> getExcludedPoiAdditionalCategories() {
-		MapPoiTypes poiTypes = getMyApplication().getPoiTypes();
 		Set<String> excludedPoiAdditionalCategories = new LinkedHashSet<>();
+		if (filter.getAcceptedTypes().size() == 0) {
+			return excludedPoiAdditionalCategories;
+		}
+		MapPoiTypes poiTypes = getMyApplication().getPoiTypes();
+		PoiCategory topCategory = null;
 		for (Entry<PoiCategory, LinkedHashSet<String>> entry : filter.getAcceptedTypes().entrySet()) {
-			boolean needTopLevelExclude = false;
-			Set<String> excluded = new LinkedHashSet<>();
+			if (topCategory == null) {
+				topCategory = entry.getKey();
+			}
 			if (entry.getValue() != null) {
+				Set<String> excluded = new LinkedHashSet<>();
 				for (String keyName : entry.getValue()) {
-					PoiType poiType = poiTypes.getPoiTypeByKey(keyName);
+					PoiType poiType = poiTypes.getPoiTypeByKeyInCategory(topCategory, keyName);
 					if (poiType != null) {
 						collectExcludedPoiAdditionalCategories(poiType, excluded);
 						if (!poiType.isReference()) {
-							needTopLevelExclude = true;
 							PoiFilter poiFilter = poiType.getFilter();
 							if (poiFilter != null) {
 								collectExcludedPoiAdditionalCategories(poiFilter, excluded);
@@ -491,19 +496,19 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 							}
 						}
 					}
+					if (excludedPoiAdditionalCategories.size() == 0) {
+						excludedPoiAdditionalCategories.addAll(excluded);
+					} else {
+						excludedPoiAdditionalCategories.retainAll(excluded);
+					}
+					excluded.clear();
 				}
-			} else {
-				needTopLevelExclude = true;
-			}
-			if (excludedPoiAdditionalCategories.size() == 0) {
-				excludedPoiAdditionalCategories.addAll(excluded);
-			} else {
-				excludedPoiAdditionalCategories.retainAll(excluded);
-			}
-			if (needTopLevelExclude && entry.getKey().getExcludedPoiAdditionalCategories() != null) {
-				excludedPoiAdditionalCategories.addAll(entry.getKey().getExcludedPoiAdditionalCategories());
 			}
 		}
+		if (topCategory != null && topCategory.getExcludedPoiAdditionalCategories() != null) {
+			excludedPoiAdditionalCategories.addAll(topCategory.getExcludedPoiAdditionalCategories());
+		}
+
 		return excludedPoiAdditionalCategories;
 	}
 
