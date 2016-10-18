@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='UTF-8'?>
 <resources>
 	<!--
 		Our app defaults to American English with default strings in res/values
@@ -144,4 +144,16 @@
 	<string name="poi_counselling_type_victim_no">Counselling (victim): no</string>
 	<string name="poi_counselling_type_violence_yes">Counselling (violence): yes</string>
 	<string name="poi_counselling_type_violence_no">Counselling (violence): no</string>
-</resources>
+<string name="poi_fuel_type">Type</string>
+	<string name="poi_fuel_avia_type">Type</string>
+	<string name="poi_payment_type">Payment type</string>
+	<string name="poi_payment_fuel_type">Fuel cards</string>
+	<string name="poi_additional_type">Additional</string>
+	<string name="poi_internet_access_type">Internet access type</string>
+	<string name="poi_vending_type">Vending type</string>
+	<string name="poi_bicycle_service">Bicycle service</string>
+	<string name="poi_clothes_type">Type</string>
+	<string name="poi_shoes_type">Type</string>
+	<string name="poi_fire_hydrant_type">Type</string>
+	<string name="poi_fire_hydrant_position">Position</string>
+	</resources>
