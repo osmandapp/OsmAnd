@@ -2309,4 +2309,13 @@ Om du tycker om OsmAnd och OSM och vill stödja dem så är detta ett utmärkt s
     <string name="get_started">Kom igång</string>
     <string name="replace_favorite_confirmation">Är du säker på att du vill ersätta favoriten %1$s?</string>
     <string name="clear_tile_data">Rensa alla brickor</string>
+    <string name="search_hint">Skriv in stad, adress och POI-namn</string>
+    <string name="donation_to_osm">Gåva till gemenskapen OpenStreetMap</string>
+    <string name="get_it">Skaffa det</string>
+    <string name="get_for">Skaffa för %1$s</string>
+    <string name="get_for_month">Skaffa för %1$s månad</string>
+    <string name="skip_map_downloading_desc">"Du har inte några offline-kartor installerade. Du kan välja en karta från listan eller hämta kartor senare via menyn  - %1$s."</string>
+    <string name="search_map">Söker efter karta …</string>
+    <string name="first_usage_greeting">Få anvisningar och upptäck nya platser utan internetuppkoppling</string>
+    <string name="search_my_location">Sök efter min plats</string>
     </resources>
