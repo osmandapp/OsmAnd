@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources><string name="poi_shop">Vendejo</string>
-		<string name="poi_shop_food">Manĝovendejo</string>
+		<string name="poi_shop_food">Butiko oportuna kaj superbazaro</string>
 	<string name="poi_emergency">Vivsavado</string>
 	<string name="poi_transportation">Transporto</string>
 		<string name="poi_road_obstacle">Voja barilo</string>
@@ -3021,7 +3021,7 @@
 	<string name="poi_service_bicycle_charging_no">Ŝargado de bicikloj: ne</string>
 
 <string name="poi_fuel_avia_type">Speco</string>
-	<string name="poi_payment_fuel_type">Pagmaniero</string>
+	<string name="poi_payment_fuel_type">Brulaĵ-kartoj</string>
 	<string name="poi_internet_access_type">Speco de interret-aliro</string>
 	<string name="poi_vending_type">Vendado de</string>
 	<string name="poi_bicycle_service">Bicikla servo</string>
@@ -3162,9 +3162,9 @@
 	<string name="poi_cuisine_frozen_yogurt">Glacigitaj jogurtoj</string>
 	<string name="poi_cuisine_fried_food">Frititaj manĝaĵoj</string>
 	<string name="poi_cuisine_savory_pancakes">Akraj patkukoj</string>
-	<string name="poi_shower_filter_yes">Duŝejo</string>
+	<string name="poi_shower_filter_yes">Jes</string>
 
-<string name="poi_takeaway_filter_yes">Elportado</string>
+<string name="poi_takeaway_filter_yes">Jes</string>
 	<string name="poi_diet_lactose_free_filter_yes">Sen-laktoza</string>
 	<string name="poi_outdoor_seating_filter_yes">Jes</string>
 	<string name="poi_delivery_filter_yes">Jes</string>
@@ -3288,4 +3288,6 @@
 	<string name="poi_cuisine_bulgarian">Bulgara</string>
 	<string name="poi_cuisine_tibetan">Tibeta</string>
 
-	</resources>
+	<string name="poi_payment_transport_type">Pagmaniero (transporto)</string>
+
+</resources>
