@@ -2443,4 +2443,9 @@ Ak potrebuje pomoc s aplikáciou OsmAnd, kontaktuje podporu: support@osmand.net.
     <string name="subcategories">Podkategórie</string>
     <string name="translit_names">Transliterovať názvy</string>
     <string name="translit_name_if_miss">Transliterovať ak %1$s názov chýba</string>
+    <string name="rendering_value_light_brown_name">Svetlohnedá</string>
+    <string name="rendering_value_dark_brown_name">Tmavohnedá</string>
+    <string name="rendering_attr_contourColorScheme_name">Farebná schéma vrstevníc</string>
+    <string name="rendering_attr_surfaceIntegrity_name">Celistvosť povrchu ciest</string>
+    <string name="search_hint">Zadajte mesto, adresu, názov bodu</string>
     </resources>
