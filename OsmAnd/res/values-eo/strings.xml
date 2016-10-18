@@ -2468,4 +2468,8 @@ Se vi bezonas helpon pri OsmAnd aplikaĵo, bonvolu kontakti nian helpantaron: su
     <string name="translit_names">Transliterumi nomojn</string>
     <string name="translit_name_if_miss">Transliterumas se %1$s nomo mankas</string>
     <string name="search_hint">Entajpu urbon, adreson, nomon de interesejo</string>
+    <string name="rendering_value_light_brown_name">Bronzkolora hela</string>
+    <string name="rendering_value_dark_brown_name">Bronzkolora malhela</string>
+    <string name="rendering_attr_contourColorScheme_name">Kontura skemkoloro</string>
+    <string name="rendering_attr_surfaceIntegrity_name">Kohero de vojpavimo</string>
     </resources>
