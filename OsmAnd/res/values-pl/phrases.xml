@@ -1293,9 +1293,9 @@
 	<string name="poi_service_bicycle_cleaning_no">Czyszczenie rowerów: nie</string>
 	<string name="poi_wildlife_hide">Miejsce do obserwacji zwierzyny</string>
 
-	<string name="poi_theatre_genre_cabaret">Typ: kabaret</string>
-	<string name="poi_theatre_genre_opera">Typ: opera</string>
-	<string name="poi_theatre_genre_ballet">Typ: balet</string>
+	<string name="poi_theatre_genre_cabaret">Kabaret</string>
+	<string name="poi_theatre_genre_opera">Opera</string>
+	<string name="poi_theatre_genre_ballet">Balet</string>
 	<string name="poi_ramp_yes">Rampa: tak</string>
 	<string name="poi_ramp_no">Rampa: nie</string>
 	<string name="poi_step_count">Liczba stopni</string>
@@ -2316,37 +2316,37 @@
 	<string name="poi_refugee_yes">Placówka dla uchodźców</string>
 	<string name="poi_refugee_no">Uchodźcy: nie</string>
 
-	<string name="poi_social_facility_group_home">Placówka społeczna: dom grupowy</string>
-	<string name="poi_social_facility_assisted_living">Placówka społeczna: dom opieki domowej</string>
-	<string name="poi_social_facility_outreach">Placówka społeczna: bezpłatne doradztwo, ochronka</string>
-	<string name="poi_social_facility_food_bank">Placówka społeczna: bank żywności</string>
-	<string name="poi_social_facility_shelter">Placówka społeczna: schronisko</string>
-	<string name="poi_social_facility_ambulatory_care">Placówka społeczna: opieka pielęgniarska</string>
-	<string name="poi_social_facility_workshop">Placówka społeczna: warsztaty pracy</string>
-	<string name="poi_social_facility_day_care">Placówka społeczna: dom opieki dziennej</string>
+	<string name="poi_social_facility_group_home">Dom grupowy</string>
+	<string name="poi_social_facility_assisted_living">Dom opieki domowej</string>
+	<string name="poi_social_facility_outreach">Bezpłatne doradztwo, ochronka</string>
+	<string name="poi_social_facility_food_bank">Bank żywności</string>
+	<string name="poi_social_facility_shelter">Schronisko</string>
+	<string name="poi_social_facility_ambulatory_care">Opieka pielęgniarska</string>
+	<string name="poi_social_facility_workshop">Warsztaty pracy</string>
+	<string name="poi_social_facility_day_care">Dom opieki dziennej</string>
 
-	<string name="poi_social_facility_for_senior">Grupa docelowa: seniorzy</string>
-	<string name="poi_social_facility_for_child">Grupa docelowa: dzieci</string>
-	<string name="poi_social_facility_for_orphan">Grupa docelowa: sieroty</string>
-	<string name="poi_social_facility_for_disabled">Grupa docelowa: niepełnosprawni ruchowo</string>
-	<string name="poi_social_facility_for_mental_health">Grupa docelowa: pacjenci z psychozami</string>
-	<string name="poi_social_facility_for_juvenile">Grupa docelowa: młodzież</string>
-	<string name="poi_social_facility_for_homeless">Grupa docelowa: bezdomni</string>
-	<string name="poi_social_facility_for_migrant">Grupa docelowa: imigranci</string>
-	<string name="poi_social_facility_for_underprivileged">Grupa docelowa: niezamożni</string>
-	<string name="poi_social_facility_for_drug_addicted">Grupa docelowa: uzależnieni od narkotyków</string>
-	<string name="poi_social_facility_for_unemployed">Grupa docelowa: bezrobotni</string>
-	<string name="poi_social_facility_for_diseased">Grupa docelowa: chorzy</string>
-	<string name="poi_social_facility_for_child_juvenile">Grupa docelowa: dzieci i młodzież</string>
+	<string name="poi_social_facility_for_senior">Seniorzy</string>
+	<string name="poi_social_facility_for_child">Dzieci</string>
+	<string name="poi_social_facility_for_orphan">Sieroty</string>
+	<string name="poi_social_facility_for_disabled">Niepełnosprawni ruchowo</string>
+	<string name="poi_social_facility_for_mental_health">Pacjenci z psychozami</string>
+	<string name="poi_social_facility_for_juvenile">Młodzież</string>
+	<string name="poi_social_facility_for_homeless">Bezdomni</string>
+	<string name="poi_social_facility_for_migrant">Imigranci</string>
+	<string name="poi_social_facility_for_underprivileged">Niezamożni</string>
+	<string name="poi_social_facility_for_drug_addicted">Uzależnieni od narkotyków</string>
+	<string name="poi_social_facility_for_unemployed">Bezrobotni</string>
+	<string name="poi_social_facility_for_diseased">Chorzy</string>
+	<string name="poi_social_facility_for_child_juvenile">Dzieci i młodzież</string>
 
-	<string name="poi_theatre_genre_philharmonic">Typ: filharmonia</string>
-	<string name="poi_theatre_genre_musical">Typ: teatr muzyczny</string>
-	<string name="poi_theatre_genre_drama">Typ: teatr dramatyczny</string>
-	<string name="poi_theatre_genre_puppet">Typ: lalkowy</string>
-	<string name="poi_theatre_genre_comedy">Typ: teatr bulwarowy</string>
-	<string name="poi_theatre_genre_chamber_music">Typ: teatr kameralny (solisty)</string>
-	<string name="poi_theatre_genre_marionette">Typ: marionetkowy</string>
-	<string name="poi_theatre_genre_shadow_play">Typ: teatr cieni</string>
+	<string name="poi_theatre_genre_philharmonic">Filharmonia</string>
+	<string name="poi_theatre_genre_musical">Teatr muzyczny</string>
+	<string name="poi_theatre_genre_drama">Teatr dramatyczny</string>
+	<string name="poi_theatre_genre_puppet">Lalkowy</string>
+	<string name="poi_theatre_genre_comedy">Teatr bulwarowy</string>
+	<string name="poi_theatre_genre_chamber_music">Teatr kameralny (solisty)</string>
+	<string name="poi_theatre_genre_marionette">Marionetkowy</string>
+	<string name="poi_theatre_genre_shadow_play">Teatr cieni</string>
 
 	<string name="poi_product_brick">Produkcja: cegły</string>
 	<string name="poi_product_quicklime">Produkcja: wapno palone (CaO)</string>
@@ -2471,12 +2471,12 @@
 	<string name="poi_protection_object_water">Ochrona: wody</string>
 
 	<string name="poi_addr_housename">Nazwa budynku</string>
-	<string name="poi_compressed_air_yes">Kompresor: tak</string>
+	<string name="poi_compressed_air_yes">Tak</string>
 	<string name="poi_compressed_air_no">Kompresor: brak</string>
 
-	<string name="poi_car_wash_yes">Myjnia: tak</string>
+	<string name="poi_car_wash_yes">Tak</string>
 
-	<string name="poi_vacuum_cleaner_yes">Odkurzacz: tak</string>
+	<string name="poi_vacuum_cleaner_yes">Tak</string>
 	<string name="poi_vacuum_cleaner_no">Odkurzacz: brak</string>
 	<string name="poi_sport_free_flying">Sporty lotnicze</string>
 	<string name="poi_button_operated_yes">Na przycisk: tak</string>
@@ -2549,7 +2549,7 @@
 
 	<string name="poi_salt_yes">Słona woda</string>
 	<string name="poi_salt_no">Słodka woda</string>
-	<string name="poi_wheelchair_designated">Przystosowany do niepełnosprawnych</string>
+	<string name="poi_wheelchair_designated">Przystosowany</string>
 	<string name="poi_recreation_center">Ośrodek wypoczynkowy</string>
 
 	<string name="poi_crossing_activation_automatic">Uruchamiane automatycznie</string>
@@ -3312,4 +3312,13 @@
 	<string name="poi_cuisine_bulgarian">Bułgarska</string>
 	<string name="poi_cuisine_tibetan">Tybetańska</string>
 
+	<string name="poi_social_facility_type">Rodzaj</string>
+	<string name="poi_social_facility_for">Grupa docelowa</string>
+	<string name="poi_compressed_air_filter">Kompresor</string>
+	<string name="poi_vacuum_cleaner_filter">Odkurzacz</string>
+
+<string name="poi_cuisine_doner">Kebab (szawarma)</string>
+	<string name="poi_cuisine_shawarma">Kebab (szawarma)</string>
+
+	<string name="poi_cuisine_bistro">Bistro</string>
 	</resources>
