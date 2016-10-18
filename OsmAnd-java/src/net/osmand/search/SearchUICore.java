@@ -526,6 +526,31 @@ public class SearchUICore {
 			if(cmp != 0) {
 				return cmp;
 			}
+
+			Amenity a1 = null;
+			if(o1.object instanceof Amenity) {
+				a1 = (Amenity) o1.object;
+			}
+			Amenity a2 = null;
+			if(o2.object instanceof Amenity) {
+				a2 = (Amenity) o2.object;
+			}
+			if (a1 != null && a2 != null) {
+				// here 2 points are amenity
+				String type1 = a1.getType().getKeyName();
+				String type2 = a2.getType().getKeyName();
+				String subType1 = a1.getSubType();
+				String subType2 = a2.getSubType();
+				cmp = collator.compare(type1, type2);
+				if(cmp != 0) {
+					return cmp;
+				}
+				cmp = collator.compare(subType1, subType2);
+				if(cmp != 0) {
+					return cmp;
+				}
+			}
+
 			s1 = o1.getSearchDistance(loc, 1);
 			s2 = o2.getSearchDistance(loc, 1);
 			return Double.compare(s1, s2);
