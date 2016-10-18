@@ -964,7 +964,7 @@
 	<string name="poi_beacon">Itsasargia</string>
 	<string name="poi_craft_basket_maker">Otzaragina</string>
 	<string name="poi_craft_blacksmith">Errementaria</string>
-	<string name="poi_craft_brewery">Garagardo-lantegia</string>
+	<string name="poi_craft_brewery">Garagardotegia</string>
 	<string name="poi_craft_boatbuilder">Ontzigilea</string>
 	<string name="poi_craft_carpenter">Arotza</string>
 	<string name="poi_craft_clockmaker">Erlojugilea</string>
@@ -1506,4 +1506,44 @@
 	<string name="poi_garden_style_kitchen">Lorategi estiloa: baratza</string>
 	<string name="poi_garden_style_rosarium">Lorategi estiloa: arrosadia</string>
 	<string name="poi_garden_style_french">Lorategi estiloa: frantzesa</string>
+	<string name="poi_internet_access_wlan">Internet sarbidea: wlan</string>
+	<string name="poi_internet_access_terminal">Internet sarbidea: terminala</string>
+	<string name="poi_internet_access_wired">Internet sarbidea: hariduna</string>
+	<string name="poi_internet_access_public">Internet sarbidea: publikoa</string>
+	<string name="poi_internet_access_service">Internet sarbidea: zerbitzua</string>
+	<string name="poi_internet_access_yes">Internet sarbidea: bai</string>
+	<string name="poi_internet_access_no">Internet sarbidea: ez</string>
+
+	<string name="poi_arts_centre">Arte zentroa</string>
+	<string name="poi_cinema">Zinema</string>
+	<string name="poi_casino">Kasinoa</string>
+	<string name="poi_community_centre">Komunitate zentroa</string>
+	<string name="poi_social_centre">Gizarte zentroa</string>
+	<string name="poi_ferry_terminal_cargo"/>
+	<string name="poi_scout_camp"/>
+	<string name="poi_diet_vegetarian_only">Begetarianoa besterik ez</string>
+	<string name="poi_diet_vegetarian_yes">Begetarianoa</string>
+	<string name="poi_diet_vegetarian_no">Dieta begetarianoa: ez</string>
+	<string name="poi_diet_vegan_only">Beganoa besterik ez</string>
+	<string name="poi_diet_vegan_yes">Beganoa</string>
+	<string name="poi_diet_vegan_no">Dieta beganoa: ez</string>
+	<string name="poi_diet_gluten_free_only">Glutenik gabekoa besterik ez</string>
+	<string name="poi_diet_gluten_free_yes">Glutenik gabekoa</string>
+	<string name="poi_diet_gluten_free_no">Glutenik gabeko dieta: ez</string>
+	<string name="poi_diet_kosher_only">Kosher besterik ez</string>
+	<string name="poi_diet_kosher_yes">Kosher</string>
+	<string name="poi_diet_kosher_no">Kosher dieta: ez</string>
+	<string name="poi_diet_halal_only">Halal besterik ez</string>
+	<string name="poi_diet_halal_yes">Halal</string>
+	<string name="poi_diet_halal_no">Halal dieta: ez</string>
+	<string name="poi_diet_lactose_free_only">Laktosa gabekoa besterik ez</string>
+	<string name="poi_diet_lactose_free_yes">Laktosa gabekoa</string>
+	<string name="poi_diet_lactose_free_no">Laktosa gabeko dieta: ez</string>
+	<string name="poi_diet_pescetarian_yes">Peszetarianoa</string>
+
+	<string name="poi_brewery_additional">Garagardotegiaren izena</string>
+	<string name="poi_microbrewery_yes">Mikro-garagardotegia</string>
+	<string name="poi_microbrewery_no">Ez da mikro-garagardotegia</string>
+
+	<string name="poi_piste_grooming_skating">Patinajea</string>
 	</resources>
