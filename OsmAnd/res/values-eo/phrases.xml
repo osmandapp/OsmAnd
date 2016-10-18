@@ -3290,4 +3290,7 @@
 
 	<string name="poi_payment_transport_type">Pagmaniero (transporto)</string>
 
-</resources>
+<string name="poi_social_facility_type">Speco</string>
+	<string name="poi_social_facility_for">Alcela grupo</string>
+	<string name="poi_compressed_air_filter">Kunpremita aero</string>
+	</resources>
