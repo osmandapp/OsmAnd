@@ -1205,7 +1205,8 @@ public class RouteProvider {
 			rs.close();
 		} catch(IOException e){
 		}
-		List<LatLon> route = GeoPolylineParserUtil.parse(obj.getJSONArray("routes").getJSONObject(0).getString("geometry"));
+		List<LatLon> route = GeoPolylineParserUtil.parse(obj.getJSONArray("routes").getJSONObject(0).getString("geometry"),
+				GeoPolylineParserUtil.PRECISION_5);
 		if (route.isEmpty()) {
 			return new RouteCalculationResult("Route is empty");
 		}
