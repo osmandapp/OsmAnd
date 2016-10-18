@@ -166,8 +166,10 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 			Object object = searchResult.object;
 			switch (searchResult.objectType) {
 				case POI:
-					String poiSimpleFormat = OsmAndFormatter.getPoiStringWithoutType((Amenity) object, lang, transliterate);
+					Amenity a = (Amenity) object;
+					String poiSimpleFormat = OsmAndFormatter.getPoiStringWithoutType(a, lang, transliterate);
 					pointDescription = new PointDescription(PointDescription.POINT_TYPE_POI, poiSimpleFormat);
+					pointDescription.setIconName(QuickSearchListItem.getAmenityIconName(a));
 					break;
 				case RECENT_OBJ:
 					HistoryEntry entry = (HistoryEntry) object;
@@ -178,6 +180,7 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 							object = amenity;
 							pointDescription = new PointDescription(PointDescription.POINT_TYPE_POI,
 									OsmAndFormatter.getPoiStringWithoutType(amenity, lang, transliterate));
+							pointDescription.setIconName(QuickSearchListItem.getAmenityIconName(amenity));
 						}
 					} else if (pointDescription.isFavorite()) {
 						LatLon entryLatLon = new LatLon(entry.getLat(), entry.getLon());
@@ -209,10 +212,12 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 						name = searchResult.localeRelatedObjectName + " " + name;
 					}
 					pointDescription = new PointDescription(PointDescription.POINT_TYPE_ADDRESS, typeNameHouse, name);
+					pointDescription.setIconName("ic_action_building");
 					break;
 				case LOCATION:
 					LatLon latLon = (LatLon) object;
 					pointDescription = new PointDescription(latLon.getLatitude(), latLon.getLongitude());
+					pointDescription.setIconName("ic_action_world_globe");
 					break;
 				case STREET_INTERSECTION:
 					String typeNameIntersection = QuickSearchListItem.getTypeName(app, searchResult);
@@ -221,6 +226,7 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 					}
 					pointDescription = new PointDescription(PointDescription.POINT_TYPE_ADDRESS,
 							typeNameIntersection, QuickSearchListItem.getName(app, searchResult));
+					pointDescription.setIconName("ic_action_intersection");
 					break;
 				case WPT:
 					GPXUtilities.WptPt wpt = (GPXUtilities.WptPt) object;
