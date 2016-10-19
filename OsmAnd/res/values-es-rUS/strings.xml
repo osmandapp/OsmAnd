@@ -2451,4 +2451,5 @@ Si amas a OsmAnd, OSM y quieres apoyarlos, esta es una perfecta manera de hacerl
     <string name="save_track_min_distance_descr">Elige la distancia mínima de activación del registro</string>
     <string name="save_track_precision">Precisión del registro</string>
     <string name="save_track_precision_descr">Elige la precisión del registro</string>
+    <string name="rendering_attr_contourColorScheme_description">Esquema de color para las curvas de nivel</string>
     </resources>
