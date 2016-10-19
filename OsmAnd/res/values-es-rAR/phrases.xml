@@ -3351,4 +3351,6 @@
 <string name="poi_cuisine_doner">Carne a la parrilla en horno giratorio vertical (Döner kebab)</string>
 	<string name="poi_cuisine_shawarma">Carne a las brasas en horno giratorio horizontal (Shawarma)</string>
 
-	</resources>
+	<string name="poi_waterway_fuel">Estación de combustible para barcos</string>
+
+</resources>
