@@ -2672,7 +2672,7 @@ Hvis du  ønsker at støtte OsmAnd og OSM, er dette en god måde at gøre det p�
     <string name="rendering_value_dark_brown_name">Mørkebrun</string>
     <string name="rendering_attr_contourColorScheme_name">Farveskema for konturer</string>
     <string name="rendering_attr_surfaceIntegrity_name">Vejoverflade integritet</string>
-    <string name="christmas_poi">Jule IP</string>
-    <string name="christmas_desc">I anledning af jul og nytår, kan du vælge at få vist IP\'er tilknyttet jul: juletræer, markeder.</string>
-    <string name="christmas_desc_q">Vis jule IP?</string>
+    <string name="christmas_poi">Jule interessepunkter (IP)</string>
+    <string name="christmas_desc">I anledning af jul og nytår, vælg at få vist interessepunkter tilknyttet jul: juletræer, markeder.</string>
+    <string name="christmas_desc_q">Vis jule-interessepunkter?</string>
     </resources>
