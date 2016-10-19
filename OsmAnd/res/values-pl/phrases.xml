@@ -1219,7 +1219,7 @@
 	<string name="poi_seasonal_no">Nie</string>
 	<string name="poi_seasonal_dry_season">Pora sucha</string>
 	<string name="poi_seasonal_wet_season">Pora deszczowa</string>
-	<string name="poi_wheelchair_yes">Wózki inwalidzkie</string>
+	<string name="poi_wheelchair_yes">Tak</string>
 	<string name="poi_wheelchair_no">Brak</string>
 	<string name="poi_access_private">Dostęp prywatny</string>
 	<string name="poi_content_fuel">Zawartość: paliwo</string>
@@ -3215,11 +3215,11 @@
 	<string name="poi_cuisine_wine">Wina</string>
 	<string name="poi_cuisine_potato">Kartofle</string>
 	<string name="poi_cuisine_brunch">Drugie śniadania (brunch)</string>
-	<string name="poi_cuisine_sub">Bagietki</string>
+	<string name="poi_cuisine_sub">Bagietki i kanapki</string>
 	<string name="poi_cuisine_pita">Pita (miękkie placki)</string>
 	<string name="poi_cuisine_fondue">Fondue (potrawa serowa)</string>
 	<string name="poi_cuisine_baguette">Bagietki</string>
-	<string name="poi_cuisine_pastel">Empanada/pastel (pierożek)</string>
+	<string name="poi_cuisine_pastel">Pastel/empanada (pierożek)</string>
 	<string name="poi_cuisine_burrito">Burrito (meksykańskie mięsne potrawy)</string>
 	<string name="poi_cuisine_teriyaki">Teriyaki (mięso na słodko z soją)</string>
 
@@ -3321,4 +3321,5 @@
 	<string name="poi_cuisine_shawarma">Kebab (szawarma)</string>
 
 	<string name="poi_cuisine_bistro">Bistro</string>
+	<string name="poi_dish">Potrawa</string>
 	</resources>
