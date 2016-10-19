@@ -1519,8 +1519,8 @@
 	<string name="poi_casino">Kasinoa</string>
 	<string name="poi_community_centre">Komunitate zentroa</string>
 	<string name="poi_social_centre">Gizarte zentroa</string>
-	<string name="poi_ferry_terminal_cargo"/>
-	<string name="poi_scout_camp"/>
+	<string name="poi_ferry_terminal_cargo">Kargaontzia</string>
+	<string name="poi_scout_camp">Ikuskatzaileen kanpamentua</string>
 	<string name="poi_diet_vegetarian_only">Begetarianoa besterik ez</string>
 	<string name="poi_diet_vegetarian_yes">Begetarianoa</string>
 	<string name="poi_diet_vegetarian_no">Dieta begetarianoa: ez</string>
@@ -1567,4 +1567,26 @@
 	<string name="poi_training_aviation">Heziketa: abiazioa</string>
 	<string name="poi_training_hairdressing">Heziketa: ile-apaintzailea</string>
 
+	<string name="poi_tactile_paving">Ukimen zoladura</string>
+	<string name="poi_piste_grooming">Pisten prestaketa</string>
+	<string name="poi_drive_in">Drive in</string>
+	<string name="poi_diet">Dieta</string>
+	<string name="poi_health_specialty">Osasun espezialitatea</string>
+	<string name="poi_massage_type">Masaje mota</string>
+	<string name="poi_tents">Dendak</string>
+	<string name="poi_washing_machine">Garbigailua</string>
+	<string name="poi_caravans">Karabanak</string>
+	<string name="poi_power_supply">Elektrizitate iturria</string>
+	<string name="poi_medical_system">Medikuntza sistema</string>
+	<string name="poi_home_visit">Etxera bisita</string>
+	<string name="poi_dish">Platerra</string>
+	<string name="poi_payment_transport_type">Ordainketa mota (garraioa)</string>
+	<string name="poi_social_facility_type">Mota</string>
+	<string name="poi_social_facility_for">Talde xedea</string>
+	<string name="poi_compressed_air_filter">Aire konprimatua</string>
+	<string name="poi_vacuum_cleaner_filter">Xurgagailua</string>
+
+<string name="poi_aerialway_platter">Plater igogailua</string>
+	<string name="poi_aerialway_mixed_lift">Igogailu nahasia</string>
+	<string name="poi_aerialway_drag_lift">Arrastatze igogailua</string>
 	</resources>
