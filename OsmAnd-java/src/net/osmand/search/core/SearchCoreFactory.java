@@ -488,6 +488,7 @@ public class SearchCoreFactory {
 
 		private Map<String, PoiType> translatedNames = new LinkedHashMap<>();
 		private List<PoiFilter> topVisibleFilters;
+		private List<PoiCategory> categories;
 		private List<CustomSearchPoiFilter> customPoiFilters = new ArrayList<>();
 		private TIntArrayList customPoiFiltersPriorites = new TIntArrayList();
 		private MapPoiTypes types;
@@ -511,6 +512,7 @@ public class SearchCoreFactory {
 			if(translatedNames.isEmpty()) {
 				translatedNames = types.getAllTranslatedNames(false);
 				topVisibleFilters = types.getTopVisibleFilters();
+				categories = types.getCategories(false);
 			}
 //			results.clear();
 			TreeMap<String, AbstractPoiType> results = new TreeMap<String, AbstractPoiType>() ;
@@ -521,6 +523,11 @@ public class SearchCoreFactory {
 				}
 			}
 			if (phrase.isUnknownSearchWordPresent()) {
+				for (PoiCategory c : categories) {
+					if (!phrase.isUnknownSearchWordPresent() || nm.matches(c.getTranslation())) {
+						results.put(c.getTranslation(), c);
+					}
+				}
 				Iterator<Entry<String, PoiType>> it = translatedNames.entrySet().iterator();
 				while (it.hasNext()) {
 					Entry<String, PoiType> e = it.next();
