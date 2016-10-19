@@ -411,4 +411,8 @@
         <item name="android:textSize">@dimen/default_desc_text_size</item>
     </style>
 
+    <style name="XmasDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:background">@color/xmas_blue</item>
+    </style>
+
 </resources>

@@ -12,6 +12,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.content.res.ColorStateList;
 import android.media.AudioManager;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -25,19 +26,24 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityCompat.OnRequestPermissionsResultCallback;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.SwitchCompat;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewStub;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
@@ -635,6 +641,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			getSupportFragmentManager().beginTransaction()
 					.add(R.id.fragmentContainer, new FirstUsageWelcomeFragment(),
 							FirstUsageWelcomeFragment.TAG).commitAllowingStateLoss();
+		} else {
+			//showXMasDialog();
 		}
 		FirstUsageWelcomeFragment.SHOW = false;
 	}
@@ -1499,6 +1507,44 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	public void hideTopToolbar(TopToolbarController controller) {
 		MapInfoLayer mapInfoLayer = getMapLayers().getMapInfoLayer();
 		mapInfoLayer.removeTopToolbarController(controller);
+	}
+
+	private void showXMasDialog() {
+		final AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.XmasDialogTheme);
+		View titleView = getLayoutInflater().inflate(R.layout.xmas_dialog_title, null);
+		builder.setCustomTitle(titleView);
+		builder.setCancelable(true);
+		builder.setNegativeButton(getString(R.string.shared_string_cancel), new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.dismiss();
+			}
+		});
+		builder.setPositiveButton(getString(R.string.shared_string_show), new DialogInterface.OnClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+			//showQuickSearch();
+			}
+		});
+
+		builder.setView(getLayoutInflater().inflate(R.layout.xmas_dialog, null));
+
+		AlertDialog dialog = builder.create();
+		dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+			@Override
+			public void onShow(DialogInterface dialog) {
+				// Customize POSITIVE, NEGATIVE and NEUTRAL buttons.
+				Button positiveButton = ((AlertDialog) dialog).getButton(DialogInterface.BUTTON_POSITIVE);
+				positiveButton.setTextColor(getResources().getColor(R.color.color_white));
+				positiveButton.invalidate();
+
+				Button negativeButton = ((AlertDialog) dialog).getButton(DialogInterface.BUTTON_NEGATIVE);
+				negativeButton.setTextColor(getResources().getColor(R.color.color_white));
+				negativeButton.invalidate();
+			}
+		});
+		dialog.show();
 	}
 
 	public enum ShowQuickSearchMode {

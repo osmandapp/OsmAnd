@@ -108,7 +108,6 @@ public class SearchUICore {
 								searchResults.add(addedResult);
 							}
 							j++;
-							i = searchResults.size();
 							continue;
 						}
 						SearchResult existingResult = searchResults.get(i);
@@ -119,7 +118,6 @@ public class SearchUICore {
 						int compare = cmp.compare(existingResult, addedResult);
 						if(compare == 0) {
 							// existingResult == addedResult
-							this.searchResults.add(addedResults.get(j));
 							j++;
 						} else if(compare > 0) {
 							// existingResult > addedResult
