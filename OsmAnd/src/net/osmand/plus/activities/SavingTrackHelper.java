@@ -365,16 +365,16 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 						&& locationTime - lastTimeUpdated > settings.SAVE_GLOBAL_TRACK_INTERVAL.get()) {
 					record = true;
 				}
-				int minDistance = settings.SAVE_TRACK_MIN_DISTANCE.get();
+				float minDistance = settings.SAVE_TRACK_MIN_DISTANCE.get();
 				if(minDistance > 0 && lastPoint != null && MapUtils.getDistance(lastPoint, location.getLatitude(), location.getLongitude()) < 
 						minDistance) {
 					record = false;
 				}
-				int precision = settings.SAVE_TRACK_PRECISION.get();
+				float precision = settings.SAVE_TRACK_PRECISION.get();
 				if(precision > 0 && (!location.hasAccuracy() || location.getAccuracy() < precision)) {
 					record = false;
 				}
-				int minSpeed = settings.SAVE_TRACK_MIN_SPEED.get();
+				float minSpeed = settings.SAVE_TRACK_MIN_SPEED.get();
 				if(minSpeed > 0 && (!location.hasSpeed() || location.getSpeed() < minSpeed)) {
 					record = false;
 				}
