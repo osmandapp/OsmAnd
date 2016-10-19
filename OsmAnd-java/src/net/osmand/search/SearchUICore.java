@@ -108,6 +108,7 @@ public class SearchUICore {
 								searchResults.add(addedResult);
 							}
 							j++;
+							i = searchResults.size();
 							continue;
 						}
 						SearchResult existingResult = searchResults.get(i);
@@ -118,6 +119,7 @@ public class SearchUICore {
 						int compare = cmp.compare(existingResult, addedResult);
 						if(compare == 0) {
 							// existingResult == addedResult
+							this.searchResults.add(addedResults.get(j));
 							j++;
 						} else if(compare > 0) {
 							// existingResult > addedResult
@@ -526,17 +528,10 @@ public class SearchUICore {
 			if(cmp != 0) {
 				return cmp;
 			}
-
-			Amenity a1 = null;
-			if(o1.object instanceof Amenity) {
-				a1 = (Amenity) o1.object;
-			}
-			Amenity a2 = null;
-			if(o2.object instanceof Amenity) {
-				a2 = (Amenity) o2.object;
-			}
-			if (a1 != null && a2 != null) {
+			if (o1.object instanceof Amenity && o2.object instanceof Amenity) {
 				// here 2 points are amenity
+				Amenity a1 = (Amenity) o1.object;
+				Amenity a2 = (Amenity) o2.object;
 				String type1 = a1.getType().getKeyName();
 				String type2 = a2.getType().getKeyName();
 				String subType1 = a1.getSubType();
