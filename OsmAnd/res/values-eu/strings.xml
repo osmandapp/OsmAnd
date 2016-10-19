@@ -2604,4 +2604,8 @@ OsmAnd aplikazioarekin laguntza behar baduzu, jarri kontaktuan gure laguntza tal
     <string name="translit_name_if_miss">Transliteratu %1$s izena falta bada</string>
     <string name="translit_names">Transliteratu izenak</string>
     <string name="search_hint">Idatzi hiria, helbidea, POI izena</string>
+    <string name="rendering_value_light_brown_name">Marroi argia</string>
+    <string name="rendering_value_dark_brown_name">Marroi iluna</string>
+    <string name="rendering_attr_contourColorScheme_name">Ingeraden kolore eskema</string>
+    <string name="rendering_attr_surfaceIntegrity_name">Errepidearen gainazalaren integritatea</string>
     </resources>
