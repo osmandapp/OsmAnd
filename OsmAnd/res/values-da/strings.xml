@@ -2661,7 +2661,7 @@ Hvis du  ønsker at støtte OsmAnd og OSM, er dette en god måde at gøre det p�
     <string name="new_filter">Nyt filter</string>
     <string name="new_filter_desc">Angiv et navn til det nye filter. Find det på listen over Kategorier.</string>
     <string name="selected_categories">Valgte kategorier</string>
-    <string name="create_custom_poi">Opret brugerdefineret IP</string>
+    <string name="create_custom_poi">Opret brugerdefineret filter</string>
     <string name="custom_search">Brugerdefineret søgning</string>
     <string name="edit_filter">Rediger filter</string>
     <string name="subcategories">Underkategorier</string>
@@ -2672,4 +2672,7 @@ Hvis du  ønsker at støtte OsmAnd og OSM, er dette en god måde at gøre det p�
     <string name="rendering_value_dark_brown_name">Mørkebrun</string>
     <string name="rendering_attr_contourColorScheme_name">Farveskema for konturer</string>
     <string name="rendering_attr_surfaceIntegrity_name">Vejoverflade integritet</string>
+    <string name="christmas_poi">Jule IP</string>
+    <string name="christmas_desc">I anledning af jul og nytår, kan du vælge at få vist IP\'er tilknyttet jul: juletræer, markeder.</string>
+    <string name="christmas_desc_q">Vis jule IP?</string>
     </resources>
