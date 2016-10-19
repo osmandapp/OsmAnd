@@ -2666,4 +2666,8 @@ Als je hulp nodig hebt met OsmAnd: neem contact op met ons support team: support
     <string name="translit_names">Transliteratie van namen</string>
     <string name="translit_name_if_miss">Weergeven in westers schrift als naam in %1$s ontbreekt</string>
     <string name="search_hint">Tik stad, adres of naam</string>
+    <string name="rendering_value_light_brown_name">Lichtbruin</string>
+    <string name="rendering_value_dark_brown_name">Donkerbruin</string>
+    <string name="rendering_attr_contourColorScheme_name">Kleur van hoogtelijnen</string>
+    <string name="rendering_attr_surfaceIntegrity_name">Kwaliteit van het wegdek</string>
     </resources>
