@@ -2653,7 +2653,7 @@ Als je hulp nodig hebt met OsmAnd: neem contact op met ons support team: support
     <string name="driving_region_australia">Australië</string>
     <string name="lang_kab">Kabylisch</string>
     <string name="selected_categories">Gekozen categorieën</string>
-    <string name="create_custom_poi">Maak aangepaste POI</string>
+    <string name="create_custom_poi">Maak eigen filter</string>
     <string name="shared_string_filters">Filters</string>
     <string name="apply_filters">Filter toepassen</string>
     <string name="save_filter">Filter opslaan</string>
@@ -2670,4 +2670,7 @@ Als je hulp nodig hebt met OsmAnd: neem contact op met ons support team: support
     <string name="rendering_value_dark_brown_name">Donkerbruin</string>
     <string name="rendering_attr_contourColorScheme_name">Kleur van hoogtelijnen</string>
     <string name="rendering_attr_surfaceIntegrity_name">Kwaliteit van het wegdek</string>
+    <string name="christmas_poi">Kerstmis-POI</string>
+    <string name="christmas_desc">Voor kerst en het nieuwjaar: de POI voor kerstbomen en kerstmarkten...</string>
+    <string name="christmas_desc_q">Kerst-POI tonen?</string>
     </resources>
