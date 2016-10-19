@@ -2445,4 +2445,10 @@ Si amas a OsmAnd, OSM y quieres apoyarlos, esta es una perfecta manera de hacerl
     <string name="christmas_poi">PDI navideño</string>
     <string name="christmas_desc">Anticipando Navidad y Año Nuevo, puedes elegir mostrar el PDI asociado con la Navidad: el árbol navideño, las tiendas.</string>
     <string name="christmas_desc_q">¿Mostrar el PDI navideño?</string>
+    <string name="save_track_min_speed">Velocidad mínima del registro</string>
+    <string name="save_track_min_speed_descr">Elige la velocidad mínima de activación del registro</string>
+    <string name="save_track_min_distance">Distancia mínima del registro</string>
+    <string name="save_track_min_distance_descr">Elige la distancia mínima de activación del registro</string>
+    <string name="save_track_precision">Precisión del registro</string>
+    <string name="save_track_precision_descr">Elige la precisión del registro</string>
     </resources>
