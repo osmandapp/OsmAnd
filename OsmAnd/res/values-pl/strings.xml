@@ -2646,4 +2646,6 @@ Jeśli potrzebujesz pomocy podczas używania OsmAnd, prosimy o kontakt z naszym 
     <string name="rendering_value_dark_brown_name">Ciemno-brązowy</string>
     <string name="rendering_attr_contourColorScheme_name">Schemat kolorów konturów</string>
     <string name="rendering_attr_surfaceIntegrity_name">Spójność nawierzchni dróg</string>
+    <string name="christmas_poi">Bożonarodzeniowe miejsca</string>
+    <string name="save_track_min_speed_descr">Wybierz minimalną prędkość przy rejestrowania tras</string>
     </resources>
