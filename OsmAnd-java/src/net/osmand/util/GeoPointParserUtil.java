@@ -85,12 +85,19 @@ public class GeoPointParserUtil {
 		assertUrlEquals(url, actual.getGeoUriString());
 		assertGeoPoint(actual, new GeoParsedPoint(ilat, ilon));
 
+		// google.navigation:q=34.99393,-106.61568
+		url = "google.navigation:q=" + dlat + "," + dlon;
+		System.out.println("url: " + url);
+		actual = GeoPointParserUtil.parse(url);
+		assertGeoPoint(actual, new GeoParsedPoint(dlat, dlon));
+		
 		// geo:34.99393,-106.61568
 		url = "geo:" + dlat + "," + dlon;
 		System.out.println("url: " + url);
 		actual = GeoPointParserUtil.parse(url);
 		assertUrlEquals(url, actual.getGeoUriString());
 		assertGeoPoint(actual, new GeoParsedPoint(dlat, dlon));
+
 
 		// geo:34.99393,-106.61568?z=11
 		z = 11;
@@ -852,12 +859,23 @@ public class GeoPointParserUtil {
 		else
 			scheme = scheme.toLowerCase(Locale.US);
 
-		if ("http".equals(scheme) || "https".equals(scheme)) {
+		if ("http".equals(scheme) || "https".equals(scheme) || "google.navigation".equals(scheme)) {
 			String host = uri.getHost();
-			if (host == null)
+			Map<String, String> params = getQueryParameters(uri);
+			if("google.navigation".equals(scheme)) {
+				host = scheme;
+				if(uri.getSchemeSpecificPart() == null) {
+					return null;
+				} else if(!uri.getSchemeSpecificPart().contains("=")) {
+					params = getQueryParameters("q="+uri.getSchemeSpecificPart());	
+				} else {
+					params = getQueryParameters(uri.getSchemeSpecificPart());
+				}
+			} else if (host == null) {
 				return null;
-			else
+			} else {
 				host = host.toLowerCase(Locale.US);
+			}
 			String path = uri.getPath();
 			if (path == null) {
 				path = "";
@@ -914,7 +932,6 @@ public class GeoPointParserUtil {
 				} else if (host.startsWith("map.baidu.")) { // .com and .cn both work
 					/* Baidu Map uses a custom format for lat/lon., it is basically standard lat/lon
                      * multiplied by 100,000, then rounded to an integer */
-					Map<String, String> params = getQueryParameters(uri);
 					String zm = params.get("l");
 					String[] vls = silentSplit(params.get("c"), ",");
 					if (vls != null && vls.length >= 2) {
@@ -924,7 +941,6 @@ public class GeoPointParserUtil {
 						return new GeoParsedPoint(lat, lon, zoom);
 					}
 				} else if (simpleDomains.contains(host)) {
-					Map<String, String> params = getQueryParameters(uri);
 					if (uri.getQuery() == null && params.size() == 0) {
 						// DOUBLE check this may be wrong test of openstreetmap.de (looks very weird url and server doesn't respond)
 						params = getQueryParameters(path.substring(1));
@@ -941,7 +957,6 @@ public class GeoPointParserUtil {
 						return new GeoParsedPoint(lat, lon, zoom);
 					}
 				} else if (host.matches("(?:www\\.)?(?:maps\\.)?yandex\\.[a-z]+")) {
-					Map<String, String> params = getQueryParameters(uri);
 					String ll = params.get("ll");
 					if (ll != null) {
 						Matcher matcher = commaSeparatedPairPattern.matcher(ll);
@@ -954,7 +969,7 @@ public class GeoPointParserUtil {
 					String latString = null;
 					String lonString = null;
 					String z = String.valueOf(GeoParsedPoint.NO_ZOOM);
-					Map<String, String> params = getQueryParameters(uri);
+					
 					if (params.containsKey("q")) {
 						System.out.println("q=" + params.get("q"));
 						Matcher matcher = commaSeparatedPairPattern.matcher(params.get("q"));
@@ -1033,7 +1048,6 @@ public class GeoPointParserUtil {
 						}
 					}
 				} else if (host.equals("here.com") || host.endsWith(".here.com")) { // www.here.com, share.here.com, here.com 
-					Map<String, String> params = getQueryParameters(uri);
 					String z = String.valueOf(GeoParsedPoint.NO_ZOOM);
 					String label = null;
 					if (params.containsKey("msg")) {
@@ -1058,7 +1072,6 @@ public class GeoPointParserUtil {
 						}
 					}
 				} else if (host.endsWith(".qq.com")) {
-					Map<String, String> params = getQueryParameters(uri);
 					String x = null;
 					String y = null;
 					String z = String.valueOf(GeoParsedPoint.NO_ZOOM);
@@ -1112,7 +1125,6 @@ public class GeoPointParserUtil {
 						return new GeoParsedPoint(y, x, z, label);
 				} else if (host.equals("maps.apple.com")) {
 					// https://developer.apple.com/library/iad/featuredarticles/iPhoneURLScheme_Reference/MapLinks/MapLinks.html
-					Map<String, String> params = getQueryParameters(uri);
 					String z = String.valueOf(GeoParsedPoint.NO_ZOOM);
 					String label = null;
 					if (params.containsKey("q")) {
