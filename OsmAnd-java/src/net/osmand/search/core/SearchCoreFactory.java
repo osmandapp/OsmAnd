@@ -547,7 +547,7 @@ public class SearchCoreFactory {
 				res.objectType = ObjectType.POI_TYPE;
 				resultMatcher.publish(res);
 			}
-			for(int i =0 ; i< customPoiFilters.size(); i++) {
+			for (int i = 0; i < customPoiFilters.size(); i++) {
 				CustomSearchPoiFilter csf = customPoiFilters.get(i);
 				int p = customPoiFiltersPriorites.get(i);
 				if (!phrase.isUnknownSearchWordPresent() || nm.matches(csf.getName())) {
