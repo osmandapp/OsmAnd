@@ -150,7 +150,7 @@ public class MapTileLayer extends BaseMapLayer {
 
 		boolean useInternet = OsmandPlugin.getEnabledPlugin(OsmandRasterMapsPlugin.class) != null && 
 				settings.USE_INTERNET_TO_DOWNLOAD_TILES.get() && settings.isInternetConnectionAvailable() && map.couldBeDownloadedFromInternet();
-		int maxLevel = Math.min(view.getSettings().MAX_LEVEL_TO_DOWNLOAD_TILE.get(), map.getMaximumZoomSupported());
+		int maxLevel = map.getMaximumZoomSupported();
 		int tileSize = map.getTileSize();
 		boolean oneTileShown = false;
 
