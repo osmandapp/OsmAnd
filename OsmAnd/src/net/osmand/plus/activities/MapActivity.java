@@ -77,6 +77,7 @@ import net.osmand.plus.base.FailSafeFuntions;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.dialogs.ErrorBottomSheetDialog;
+import net.osmand.plus.dialogs.OtherDialogs;
 import net.osmand.plus.dialogs.RateUsBottomSheetDialog;
 import net.osmand.plus.dialogs.WhatsNewDialogFragment;
 import net.osmand.plus.download.DownloadActivity;
@@ -642,7 +643,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 					.add(R.id.fragmentContainer, new FirstUsageWelcomeFragment(),
 							FirstUsageWelcomeFragment.TAG).commitAllowingStateLoss();
 		} else {
-			//showXMasDialog();
+			//OtherDialogs.showXMasDialog(this);
 		}
 		FirstUsageWelcomeFragment.SHOW = false;
 	}
@@ -1507,44 +1508,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	public void hideTopToolbar(TopToolbarController controller) {
 		MapInfoLayer mapInfoLayer = getMapLayers().getMapInfoLayer();
 		mapInfoLayer.removeTopToolbarController(controller);
-	}
-
-	private void showXMasDialog() {
-		final AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.XmasDialogTheme);
-		View titleView = getLayoutInflater().inflate(R.layout.xmas_dialog_title, null);
-		builder.setCustomTitle(titleView);
-		builder.setCancelable(true);
-		builder.setNegativeButton(getString(R.string.shared_string_cancel), new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				dialog.dismiss();
-			}
-		});
-		builder.setPositiveButton(getString(R.string.shared_string_show), new DialogInterface.OnClickListener() {
-
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-			//showQuickSearch();
-			}
-		});
-
-		builder.setView(getLayoutInflater().inflate(R.layout.xmas_dialog, null));
-
-		AlertDialog dialog = builder.create();
-		dialog.setOnShowListener(new DialogInterface.OnShowListener() {
-			@Override
-			public void onShow(DialogInterface dialog) {
-				// Customize POSITIVE, NEGATIVE and NEUTRAL buttons.
-				Button positiveButton = ((AlertDialog) dialog).getButton(DialogInterface.BUTTON_POSITIVE);
-				positiveButton.setTextColor(getResources().getColor(R.color.color_white));
-				positiveButton.invalidate();
-
-				Button negativeButton = ((AlertDialog) dialog).getButton(DialogInterface.BUTTON_NEGATIVE);
-				negativeButton.setTextColor(getResources().getColor(R.color.color_white));
-				negativeButton.invalidate();
-			}
-		});
-		dialog.show();
 	}
 
 	public enum ShowQuickSearchMode {
