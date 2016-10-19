@@ -2801,7 +2801,7 @@
 
 	<string name="poi_fire_hydrant_type_underground">Underjordisk</string>
 	<string name="poi_fire_hydrant_type_pillar">Søjle</string>
-	<string name="poi_fire_hydrant_type_dry_barrel">Dry barrel</string>
+	<string name="poi_fire_hydrant_type_dry_barrel">Frostsikker</string>
 	<string name="poi_fire_hydrant_type_pond">Dam</string>
 	<string name="poi_fire_hydrant_type_wall">Væg</string>
 
@@ -3272,7 +3272,7 @@
 	<string name="poi_cuisine_wine">Vin</string>
 	<string name="poi_cuisine_potato">Kartoffel</string>
 	<string name="poi_cuisine_brunch">Brunch</string>
-	<string name="poi_cuisine_sub">Sub</string>
+	<string name="poi_cuisine_sub">Baguette sandwich</string>
 	<string name="poi_cuisine_pita">Pita</string>
 	<string name="poi_cuisine_fondue">Fondue</string>
 	<string name="poi_cuisine_baguette">Baguette</string>
