@@ -19,10 +19,8 @@ import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import net.osmand.AndroidUtils;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.IconsCache;
@@ -53,9 +51,10 @@ public class QuickSearchCustomPoiFragment extends DialogFragment {
 	private String filterId;
 	private PoiUIFilter filter;
 	private PoiFiltersHelper helper;
+	private View bottomBarShadow;
 	private View bottomBar;
-	private AppCompatTextView barTitle;
-	private AppCompatTextView barButton;
+	private TextView barTitle;
+	private TextView barButton;
 	private boolean editMode;
 
 
@@ -129,9 +128,10 @@ public class QuickSearchCustomPoiFragment extends DialogFragment {
 			}
 		});
 
+		bottomBarShadow = view.findViewById(R.id.bottomBarShadow);
 		bottomBar = view.findViewById(R.id.bottomBar);
-		barTitle = (AppCompatTextView) view.findViewById(R.id.barTitle);
-		barButton = (AppCompatTextView) view.findViewById(R.id.barButton);
+		barTitle = (TextView) view.findViewById(R.id.barTitle);
+		barButton = (TextView) view.findViewById(R.id.barButton);
 		bottomBar.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -238,7 +238,8 @@ public class QuickSearchCustomPoiFragment extends DialogFragment {
 				} else {
 					iconView.setImageDrawable(null);
 				}
-				secondaryIconView.setImageDrawable(ic.getThemedIcon(R.drawable.ic_action_additional_option));
+				secondaryIconView.setImageDrawable(
+						ic.getIcon(R.drawable.ic_action_additional_option, app.getSettings().isLightContent() ? R.color.icon_color_light : 0));
 				check.setOnCheckedChangeListener(null);
 				check.setChecked(filter.isTypeAccepted(category));
 				String textString = category.getTranslation();
@@ -287,9 +288,11 @@ public class QuickSearchCustomPoiFragment extends DialogFragment {
 		helper.editPoiFilter(filter);
 		if (!editMode) {
 			if (filter.isEmpty()) {
+				bottomBarShadow.setVisibility(View.GONE);
 				bottomBar.setVisibility(View.GONE);
 			} else {
 				barTitle.setText(getContext().getString(R.string.selected_categories) + ": " + filter.getAcceptedTypesCount());
+				bottomBarShadow.setVisibility(View.VISIBLE);
 				bottomBar.setVisibility(View.VISIBLE);
 			}
 		}
