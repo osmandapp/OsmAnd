@@ -1135,7 +1135,7 @@
 	<string name="poi_crossing_uncontrolled">Sen trafiklumoj</string>
 	<string name="poi_crossing_unmarked">Nemarkita</string>
 	<string name="poi_start_date">Ekestis je</string>
-	<string name="poi_wheelchair_yes">Rulseĝoj</string>
+	<string name="poi_wheelchair_yes">Jes</string>
 	<string name="poi_wheelchair_no">Ne</string>
 	<string name="poi_wheelchair_limited">Parte</string>
 	<string name="poi_wholesale">Pogranda komerco</string>
@@ -3086,7 +3086,7 @@
 	<string name="poi_beach_surface_type">Strand-speco</string>
 	<string name="poi_nudism">Nudeco</string>
 
-<string name="poi_wheelchair_accessibility">Alirebla por rulseĝoj</string>
+<string name="poi_wheelchair_accessibility">Rulseĝa alireblo</string>
 	<string name="poi_payment_efectivo_yes">Efectivo</string>
 	<string name="poi_resource_cereal">Panherboj</string>
 	<string name="poi_xmas">Kristnasko</string>
@@ -3202,11 +3202,11 @@
 	<string name="poi_cuisine_wine">Vinoj</string>
 	<string name="poi_cuisine_potato">Terpomaĵoj</string>
 	<string name="poi_cuisine_brunch">Frutagmanĝo</string>
-	<string name="poi_cuisine_sub">Bastopanoj</string>
+	<string name="poi_cuisine_sub">Bastopanoj k sandviĉoj</string>
 	<string name="poi_cuisine_pita">Pita (mola panaĵo)</string>
 	<string name="poi_cuisine_fondue">Fonduo (fromaĝa manĝaĵo)</string>
 	<string name="poi_cuisine_baguette">Bastopanoj</string>
-	<string name="poi_cuisine_pastel">Empanada/pastel (pana ĉirkaŭvolvaĵo)</string>
+	<string name="poi_cuisine_pastel">Pastel/empanada (pana ĉirkaŭvolvaĵo)</string>
 	<string name="poi_cuisine_burrito">Burrito (meksika vianda manĝaĵo)</string>
 	<string name="poi_cuisine_teriyaki">Terijakio (sojmielita viando)</string>
 
