@@ -2337,4 +2337,7 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="search_hint">Saisissez une ville, une adresse ou un nom de point d\'intérêt</string>
     <string name="rendering_attr_contourColorScheme_name">Couleur des contours</string>
     <string name="rendering_attr_surfaceIntegrity_name">État de la route</string>
+    <string name="christmas_poi">PI de Noël</string>
+    <string name="christmas_desc">Anticipez Noël et le Nouvel An en affichant les Points d\'Intérêts associés à ces évènements de fin d\'année comme : les arbres de Noël, les marchés ...</string>
+    <string name="christmas_desc_q">Afficher les PI de Noël ?</string>
     </resources>
