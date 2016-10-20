@@ -2607,4 +2607,8 @@ Facebook：https://www.facebook.com/osmandapp
     <string name="translit_names">音譯名稱</string>
     <string name="search_hint">輸入城市、地址、poi 名稱</string>
     <string name="translit_name_if_miss">如果 %1$s 的名稱缺失則音譯</string>
+    <string name="rendering_attr_contourColorScheme_description">等高線的色彩調配</string>
+    <string name="save_track_min_speed">記錄最小的速度</string>
+    <string name="save_track_min_speed_descr">選擇最小速度以觸發記錄</string>
+    <string name="save_track_min_distance">記錄最短距離</string>
     </resources>
