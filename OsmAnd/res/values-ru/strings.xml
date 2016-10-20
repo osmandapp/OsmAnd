@@ -1,5 +1,16 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
+    <string name="save_track_min_speed">Минимальная скорость для записи</string>
+    <string name="save_track_min_speed_descr">Выберите минимальную скорость, при превышении которой точка будет записана в трек</string>
+    <string name="save_track_min_distance">Минимальная дистанция для записи</string>
+    <string name="save_track_min_distance_descr">Выберите расстояние, при превышении которого точка будет записана в трек</string>
+    <string name="save_track_precision">Точность записи</string>
+    <string name="save_track_precision_descr">Выберите точность записи</string>
+    <string name="christmas_poi">Рождественские POI</string>
+    <string name="christmas_desc">В преддверии рождественских и новогодних праздников, вы можете выбрать для отображения POI, связанные с Рождеством: елки, ярмарки.</string>
+    <string name="christmas_desc_q">Показать рождественские POI?</string>
+
+    <string name="rendering_attr_contourColorScheme_description">Цветовая схема горизонталей</string>
     <string name="rendering_value_light_brown_name">Светло-коричневый</string>
     <string name="rendering_value_dark_brown_name">Тёмно-коричневый</string>
     <string name="rendering_attr_contourColorScheme_name">Цветовая схема горизонталей</string>
