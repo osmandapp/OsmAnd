@@ -2545,4 +2545,5 @@ Wenn Sie OsmAnd und OSM lieben und unterstützen wollen, so ist dies die perfekt
     <string name="save_track_min_distance_descr">Wählen Sie die Mindestentfernung, damit die Protokollierung ausgelöst wird</string>
     <string name="save_track_precision">Genauigkeit der Protokollierung</string>
     <string name="save_track_precision_descr">Genauigkeit der Protokollierung auswählen</string>
+    <string name="rendering_attr_contourColorScheme_description">Farbschema der Konturen</string>
     </resources>
