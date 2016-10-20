@@ -2340,4 +2340,11 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="christmas_poi">PI de Noël</string>
     <string name="christmas_desc">Anticipez Noël et le Nouvel An en affichant les Points d\'Intérêts associés à ces évènements de fin d\'année comme : les arbres de Noël, les marchés ...</string>
     <string name="christmas_desc_q">Afficher les PI de Noël ?</string>
+    <string name="rendering_attr_contourColorScheme_description">Couleurs des contours</string>
+    <string name="save_track_min_speed">Vitesse minimale pour enregistrer</string>
+    <string name="save_track_min_speed_descr">Indiquez une vitesse minimale à partir de laquelle déclencher l\'enregistrement</string>
+    <string name="save_track_min_distance">Distance minimale pour enregistrer</string>
+    <string name="save_track_min_distance_descr">Indiquez une distance minimale à partir de laquelle déclencher l\'enregistrement</string>
+    <string name="save_track_precision">Précision d\'enregistrement</string>
+    <string name="save_track_precision_descr">Sélectionnez une précision pour l’enregistrement</string>
     </resources>
