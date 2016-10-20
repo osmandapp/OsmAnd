@@ -42,6 +42,7 @@ import net.osmand.ResultMatcher;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.osm.AbstractPoiType;
+import net.osmand.osm.PoiCategory;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.GPXUtilities;
@@ -81,6 +82,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static net.osmand.search.core.ObjectType.POI_TYPE;
+import static net.osmand.search.core.SearchCoreFactory.SEARCH_AMENITY_TYPE_PRIORITY;
 
 public class QuickSearchDialogFragment extends DialogFragment implements OsmAndCompassListener, OsmAndLocationListener {
 
@@ -94,6 +96,9 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	private static final String QUICK_SEARCH_TOOLBAR_TITLE_KEY = "quick_search_toolbar_title_key";
 	private static final String QUICK_SEARCH_TOOLBAR_VISIBLE_KEY = "quick_search_toolbar_visible_key";
 	private static final String QUICK_SEARCH_FAB_VISIBLE_KEY = "quick_search_fab_visible_key";
+
+	private static final String QUICK_SEARCH_RUN_SEARCH_FIRST_TIME_KEY = "quick_search_run_search_first_time_key";
+	private static final String QUICK_SEARCH_PHRASE_DEFINED_KEY = "quick_search_phrase_defined_key";
 
 	private Toolbar toolbar;
 	private LockableViewPager viewPager;
@@ -141,6 +146,8 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	private long hideTimeMs;
 	private boolean poiFilterApplied;
 	private boolean fabVisible;
+	private boolean runSearchFirstTime;
+	private boolean phraseDefined;
 
 	private static final double DISTANCE_THRESHOLD = 70000; // 70km
 	private static final int EXPIRATION_TIME_MIN = 10; // 10 minutes
@@ -198,6 +205,8 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		}
 		if (searchQuery == null && arguments != null) {
 			searchQuery = arguments.getString(QUICK_SEARCH_QUERY_KEY);
+			runSearchFirstTime = arguments.getBoolean(QUICK_SEARCH_RUN_SEARCH_FIRST_TIME_KEY, false);
+			phraseDefined = arguments.getBoolean(QUICK_SEARCH_PHRASE_DEFINED_KEY, false);
 			double lat = arguments.getDouble(QUICK_SEARCH_LAT_KEY, Double.NaN);
 			double lon = arguments.getDouble(QUICK_SEARCH_LON_KEY, Double.NaN);
 			if (!Double.isNaN(lat) && !Double.isNaN(lon)) {
@@ -447,6 +456,9 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 							} else {
 								runSearch();
 							}
+						} else if (runSearchFirstTime) {
+							runSearchFirstTime = false;
+							runSearch();
 						}
 					}
 				}
@@ -673,7 +685,10 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		searchUICore = searchHelper.getCore();
 		if (newSearch) {
 			setResultCollection(null);
-			searchUICore.resetPhrase();
+			if (!phraseDefined) {
+				searchUICore.resetPhrase();
+			}
+			phraseDefined = false;
 		}
 
 		location = app.getLocationProvider().getLastKnownLocation();
@@ -1197,8 +1212,11 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		}
 	}
 
-	public static boolean showInstance(final MapActivity mapActivity, final String searchQuery,
-									   boolean showCategories, final LatLon latLon) {
+	public static boolean showInstance(@NonNull MapActivity mapActivity,
+									   @NonNull String searchQuery,
+									   @Nullable Object object,
+									   boolean showCategories,
+									   @Nullable LatLon latLon) {
 		try {
 
 			if (mapActivity.isActivityDestroyed()) {
@@ -1206,6 +1224,33 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			}
 
 			Bundle bundle = new Bundle();
+
+			if (object != null) {
+				bundle.putBoolean(QUICK_SEARCH_RUN_SEARCH_FIRST_TIME_KEY, true);
+				String objectLocalizedName = searchQuery;
+
+				if (object instanceof PoiCategory) {
+					PoiCategory c = (PoiCategory) object;
+					objectLocalizedName = c.getTranslation();
+
+					SearchUICore searchUICore = mapActivity.getMyApplication().getSearchUICore().getCore();
+					SearchPhrase phrase = searchUICore.resetPhrase(objectLocalizedName + " ");
+					SearchResult sr = new SearchResult(phrase);
+					sr.localeName = objectLocalizedName;
+					sr.object = c;
+					sr.priority = SEARCH_AMENITY_TYPE_PRIORITY;
+					sr.priorityDistance = 0;
+					sr.objectType = ObjectType.POI_TYPE;
+					searchUICore.selectSearchResult(sr);
+
+					bundle.putBoolean(QUICK_SEARCH_PHRASE_DEFINED_KEY, true);
+				}
+				searchQuery = objectLocalizedName.trim() + " ";
+
+			} else if (!Algorithms.isEmpty(searchQuery)) {
+				bundle.putBoolean(QUICK_SEARCH_RUN_SEARCH_FIRST_TIME_KEY, true);
+			}
+
 			bundle.putString(QUICK_SEARCH_QUERY_KEY, searchQuery);
 			bundle.putBoolean(QUICK_SEARCH_SHOW_CATEGORIES_KEY, showCategories);
 			if (latLon != null) {

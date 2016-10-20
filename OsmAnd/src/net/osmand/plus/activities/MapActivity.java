@@ -12,7 +12,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
-import android.content.res.ColorStateList;
 import android.media.AudioManager;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -26,20 +25,16 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityCompat.OnRequestPermissionsResultCallback;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.SwitchCompat;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.KeyEvent;
-import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewStub;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -643,7 +638,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 					.add(R.id.fragmentContainer, new FirstUsageWelcomeFragment(),
 							FirstUsageWelcomeFragment.TAG).commitAllowingStateLoss();
 		} else {
-			//OtherDialogs.showXMasDialog(this);
+			OtherDialogs.showXMasDialog(this);
 		}
 		FirstUsageWelcomeFragment.SHOW = false;
 	}
@@ -1448,32 +1443,46 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	public void showQuickSearch(double latitude, double longitude) {
-		mapContextMenu.hide();
+		hideContextMenu();
 		QuickSearchDialogFragment fragment = getQuickSearchDialogFragment();
 		if (fragment != null) {
 			fragment.dismiss();
 			refreshMap();
 		}
-		QuickSearchDialogFragment.showInstance(this, "", true, new LatLon(latitude, longitude));
+		QuickSearchDialogFragment.showInstance(this, "", null, true, new LatLon(latitude, longitude));
+	}
+
+	public void showQuickSearch(Object object) {
+		hideContextMenu();
+		QuickSearchDialogFragment fragment = getQuickSearchDialogFragment();
+		if (fragment != null) {
+			fragment.dismiss();
+			refreshMap();
+		}
+		QuickSearchDialogFragment.showInstance(this, "", object, true, null);
 	}
 
 	public void showQuickSearch(ShowQuickSearchMode mode, boolean showCategories) {
-		if (mapContextMenu.isVisible()) {
-			mapContextMenu.hide();
-		} else if (mapContextMenu.getMultiSelectionMenu().isVisible()) {
-			mapContextMenu.getMultiSelectionMenu().hide();
-		}
+		hideContextMenu();
 		QuickSearchDialogFragment fragment = getQuickSearchDialogFragment();
 		if (fragment != null) {
 			if (mode == ShowQuickSearchMode.NEW || (mode == ShowQuickSearchMode.NEW_IF_EXPIRED && fragment.isExpired())) {
 				fragment.dismiss();
-				QuickSearchDialogFragment.showInstance(this, "", showCategories, null);
+				QuickSearchDialogFragment.showInstance(this, "", null, showCategories, null);
 			} else {
 				fragment.show();
 			}
 			refreshMap();
 		} else {
-			QuickSearchDialogFragment.showInstance(this, "", showCategories, null);
+			QuickSearchDialogFragment.showInstance(this, "", null, showCategories, null);
+		}
+	}
+
+	private void hideContextMenu() {
+		if (mapContextMenu.isVisible()) {
+			mapContextMenu.hide();
+		} else if (mapContextMenu.getMultiSelectionMenu().isVisible()) {
+			mapContextMenu.getMultiSelectionMenu().hide();
 		}
 	}
 
