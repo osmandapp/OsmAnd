@@ -1050,8 +1050,8 @@
 	<string name="poi_trade_tile">Burkolóanyagok</string>
 
 	<string name="poi_population">Lakosság</string>
-	<string name="poi_parking_underground">Típus: földalatti</string>
-	<string name="poi_parking_multi_storey">Típus: többszintes</string>
+	<string name="poi_parking_underground">Föld alatti</string>
+	<string name="poi_parking_multi_storey">Többszintes</string>
 
 	<string name="poi_bicycle_parking_anchors">Horgony</string>
 	<string name="poi_bicycle_parking_stands">Korlát</string>
@@ -1973,4 +1973,18 @@
 	<string name="poi_diet_lactose_free_filter_yes">Laktózmentes</string>
 	<string name="poi_diet_vegan_filter_yes">Vegán</string>
 	<string name="poi_diet_vegetarian_filter_yes">Vegetáriánus</string>
+	<string name="poi_fuel_avia_type">Üzemanyag típus</string>
+	<string name="poi_vending_type">Árusított termék</string>
+	<string name="poi_bicycle_service">Kerékpáros szolgáltatás</string>
+	<string name="poi_service_bicycle_pump_yes">Pumpa</string>
+	<string name="poi_service_bicycle_pump_no">Nincs kerékpár pumpa</string>
+	<string name="poi_water_characteristic">Víz jelleg</string>
+	<string name="poi_shoes_type">Cipőfajta</string>
+	<string name="poi_parking_type">Parkoló típus</string>
+	<string name="poi_parking_carports">Fedett beállók</string>
+
+	<string name="poi_parking_garage_boxes">Garázsok</string>
+	<string name="poi_bicycle_parking_type">Kerékpárparkoló típus</string>
+	<string name="poi_piste_difficulty">Pálya nehézség</string>
+	<string name="poi_piste_grooming">Pálya kezelés</string>
 	</resources>
