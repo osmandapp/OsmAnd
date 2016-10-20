@@ -2198,7 +2198,7 @@ Kaj la loko kaj tempo estas montrataj ĉe la OsmAnd stirpanelo, kaj ĉe la fenes
 
  kaj pli...
  "</string>
-    <string name="dist_away_from_my_location">Serĉi en radiuso de %1$s</string>
+    <string name="dist_away_from_my_location">Serĉi %1$s for</string>
     <string name="confirmation_to_delete_history_items">Ĉu vi volas forigi elektitajn erojn el historio?</string>
     <string name="back_to_search">Reveni al serĉo</string>
     <string name="coords_search">Koordinat-serĉo</string>
