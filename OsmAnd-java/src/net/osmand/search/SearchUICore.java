@@ -323,8 +323,14 @@ public class SearchUICore {
 		return true;
 	}
 	
-	public void resetPhrase() {
+	public SearchPhrase resetPhrase() {
 		this.phrase = this.phrase.generateNewPhrase("", searchSettings);
+		return this.phrase;
+	}
+
+	public SearchPhrase resetPhrase(String text) {
+		this.phrase = this.phrase.generateNewPhrase(text, searchSettings);
+		return this.phrase;
 	}
 
 	public SearchResultCollection search(final String text, final ResultMatcher<SearchResult> matcher) {
