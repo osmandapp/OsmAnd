@@ -2681,4 +2681,5 @@ Hvis du  ønsker at støtte OsmAnd og OSM, er dette en god måde at gøre det p�
     <string name="save_track_min_distance_descr">Vælg minimumsafstand som logning vil blive udløst ved</string>
     <string name="save_track_precision">Logning præcision</string>
     <string name="save_track_precision_descr">Vælg lognings præcision</string>
+    <string name="rendering_attr_contourColorScheme_description">Farveskema for konturer</string>
     </resources>
