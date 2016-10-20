@@ -2635,7 +2635,7 @@ Jeśli potrzebujesz pomocy podczas używania OsmAnd, prosimy o kontakt z naszym 
     <string name="new_filter">Nowy filtr</string>
     <string name="new_filter_desc">Proszę wprowadzić nazwę nowego filtra. Będzie on dostępny na liście kategorii.</string>
     <string name="selected_categories">Wybrane kategorie</string>
-    <string name="create_custom_poi">Utwórz własne użyteczne miejsce</string>
+    <string name="create_custom_poi">Utwórz własny filtr</string>
     <string name="custom_search">Własne wyszukiwanie</string>
     <string name="edit_filter">Edytuj filtr</string>
     <string name="subcategories">Podkategorie</string>
@@ -2648,4 +2648,12 @@ Jeśli potrzebujesz pomocy podczas używania OsmAnd, prosimy o kontakt z naszym 
     <string name="rendering_attr_surfaceIntegrity_name">Spójność nawierzchni dróg</string>
     <string name="christmas_poi">Bożonarodzeniowe miejsca</string>
     <string name="save_track_min_speed_descr">Wybierz minimalną prędkość przy rejestrowania tras</string>
+    <string name="rendering_attr_contourColorScheme_description">Schemat kolorów dla konturów</string>
+    <string name="save_track_min_speed">Minimalna prędkość rejestrowania</string>
+    <string name="save_track_min_distance">Minimalna odległość rejestrowania</string>
+    <string name="save_track_min_distance_descr">Wybierz minimalną odległość przy której rejestrowanie będzie aktywne</string>
+    <string name="save_track_precision">Precyzja rejestrowania</string>
+    <string name="save_track_precision_descr">Wybierz precyzję rejestrowania</string>
+    <string name="christmas_desc">Oczekując Świąt Bożego Narodzenia i Nowego Roku, możesz włączyć wyświetlanie użytecznych miejsc związanych ze Świętami: choinki, jarmarki.</string>
+    <string name="christmas_desc_q">Pokazywać świąteczne miejsca?</string>
     </resources>
