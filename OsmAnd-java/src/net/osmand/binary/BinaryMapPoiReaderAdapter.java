@@ -549,6 +549,9 @@ public class BinaryMapPoiReaderAdapter {
 						if (!matches) {
 							Map<String, String> lt = am.getAdditionalInfo();
 							for (Entry<String, String> e : lt.entrySet()) {
+								if(!e.getKey().contains("_name")) {
+									continue;
+								}
 								matches = matcher.matches(e.getValue());
 								if (matches) {
 									break;
