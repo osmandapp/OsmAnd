@@ -3300,4 +3300,6 @@
 
 	<string name="poi_cuisine_bistro">Bistroo</string>
 	<string name="poi_dish">Manĝaĵo</string>
-	</resources>
+	<string name="poi_waterway_fuel">Benzinejo por boatoj</string>
+
+</resources>
