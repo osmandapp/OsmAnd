@@ -2461,7 +2461,7 @@ Se vi bezonas helpon pri OsmAnd aplikaĵo, bonvolu kontakti nian helpantaron: su
     <string name="new_filter">Nova filtrilo</string>
     <string name="new_filter_desc">Bonvolu entajpi nomon por la nova filtrilo. Ĝi estos disponebla en la listo de kategorioj.</string>
     <string name="selected_categories">Elektitaj kategorioj</string>
-    <string name="create_custom_poi">Krei propran Interesejon</string>
+    <string name="create_custom_poi">Krei propran filtrilon</string>
     <string name="custom_search">Propra serĉado</string>
     <string name="edit_filter">Redakti filtrilon</string>
     <string name="subcategories">Subkategorioj</string>
@@ -2472,4 +2472,14 @@ Se vi bezonas helpon pri OsmAnd aplikaĵo, bonvolu kontakti nian helpantaron: su
     <string name="rendering_value_dark_brown_name">Bronzkolora malhela</string>
     <string name="rendering_attr_contourColorScheme_name">Kontura skemkoloro</string>
     <string name="rendering_attr_surfaceIntegrity_name">Kohero de vojpavimo</string>
+    <string name="rendering_attr_contourColorScheme_description">Kolor-skemo de konturoj</string>
+    <string name="save_track_min_speed">Minimuma rapido por registrado</string>
+    <string name="save_track_min_speed_descr">Elektu minimuman rapidon dum kiu registrado de kurso haltos</string>
+    <string name="save_track_min_distance">Minimuma distanco por registrado</string>
+    <string name="save_track_min_distance_descr">Elektu minimuman distancon dum kiu registrado de kurso haltos</string>
+    <string name="save_track_precision">Registrada precizo</string>
+    <string name="save_track_precision_descr">Elektu precizon de registrado de kurso</string>
+    <string name="christmas_poi">Kristnaskaj interesejoj</string>
+    <string name="christmas_desc">Atendante Kristnaskon kaj la novan jaron, vi povas aktivigi vidigadon la interesejoj rilataj al Kristnasko: kristnaskaj arbeoj, foiroj, ktp.</string>
+    <string name="christmas_desc_q">Ĉu montri kristnaskaj interesejoj?</string>
     </resources>
