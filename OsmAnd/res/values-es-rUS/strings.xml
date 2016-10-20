@@ -446,8 +446,12 @@
     <string name="map_update">Actualización disponible para %1$s mapa(s)</string>
     <string name="wake_on_voice">Encender pantalla</string>
     <string name="osmand_rastermaps_plugin_description">"Este complemento puede acceder a muchos tipos de mapas en línea (llamados teselas o ráster), desde teselas predefinidas de OpenStreetMap (como Mapnik) a imágenes satelitales y capas de propósito especial como mapas del tiempo, mapas del clima, mapas geológicos, capas de sombreado, etc.
-\n\nCualquiera de estos mapas puede ser usado como el mapa (base) principal que se mostrará en la pantalla del mapa de OsmAnd, o como una superposición o subyacente de otro mapa base (como los mapas normales de OsmAnd en línea). Para hacer cualquier mapa subyacente más visible, ciertos elementos de los mapas vectoriales OsmAnd se pueden ocultar fácilmente a través del menú \'Configurar mapa\' cuando lo desees.
-\n\nLos mapas de teselas se pueden obtener directamente a través de fuentes en línea, o se pueden preparar para tu uso sin conexión (y copiar manualmente en la carpeta de datos OsmAnd) como una base de datos SQLite que puede ser producida por una variedad de herramientas de preparación de mapas de terceros. "</string>
+
+
+Cualquiera de estos mapas puede ser usado como el mapa (base) principal que se mostrará en la pantalla del mapa de OsmAnd, o como una superposición o subyacencia de otro mapa base (como los mapas estándar de OsmAnd en línea). Para hacer más visible cualquier mapa subyacente, ciertos elementos de los mapas vectoriales OsmAnd se pueden ocultar fácilmente a través del menú \'Configurar mapa\' cuando lo desees.
+
+
+Los mapas de teselas se pueden obtener directamente a través de fuentes en línea, o se pueden preparar para tu uso sin conexión (y copiar manualmente en la carpeta de datos OsmAnd) como una base de datos SQLite que puede ser producida por una variedad de herramientas de preparación de mapas de terceros. "</string>
     <string name="record_plugin_description">"Este complemento activa la funcionalidad para registrar y guardar tus trazas manualmente tocando el control de grabación GPX en la pantalla del mapa, o automáticamente registrando todas tus rutas navegadas en un archivo GPX.
 \n\nLas trazas grabadas pueden ser compartidas con tus amigos o ser usadas para contribuir a OSM. Los atletas pueden usar las trazas grabadas para seguir sus entrenamientos. Algunos análisis básicos de trazas se pueden realizar directamente en OsmAnd, como tiempos por vuelta, velocidad media, etc., y por supuesto las trazas pueden analizarse posteriormente con herramientas de análisis de terceros. "</string>
     <string name="osmo_plugin_description">"Este complemento proporciona parcialmente la funcionalidad para el rastreo en directo de OpenStreetMap, ver http://osmo.mobi
@@ -703,7 +707,7 @@
     <string name="distance_measurement_load_gpx">Abrir GPX existente</string>
     <string name="wait_current_task_finished">Espere hasta que termine la tarea actual</string>
     <string name="use_kalman_filter_compass_descr">Reduce el ruido en las lecturas de la brújula pero añade inercia</string>
-    <string name="use_kalman_filter_compass">Usar filtro Kalman</string>
+    <string name="use_kalman_filter_compass">Filtro de Kalman</string>
     <string name="use_magnetic_sensor_descr">Usa el sensor magnético para determinar el valor de la brújula en vez del sensor de orientación</string>
     <string name="use_magnetic_sensor">Usar sensor magnético</string>
     <string name="other_location">Otra</string>
@@ -811,7 +815,7 @@
     <string name="rendering_attr_roadColors_description">Elige un esquema de color vial:</string>
     <string name="rendering_attr_roadColors_name">Esquema de color de carreteras</string>
     <string name="map_widget_show_destination_arrow">Mostrar dirección de destino</string>
-    <string name="enable_plugin_monitoring_services">Activa el complemento de rastreo para usar el servicio de registro de posición (grabación GPX, rastreo en línea)</string>
+    <string name="enable_plugin_monitoring_services">Activa el complemento de rastreo para usar el servicio de registro de ubicación (grabación GPX, rastreo en línea)</string>
     <string name="non_optimal_route_calculation">Calcular ruta posiblemente no óptima en largas distancias</string>
     <string name="gps_not_available">Activa el GPS en ajustes</string>
     <string name="map_widget_monitoring_services">Servicios de registro</string>
@@ -851,7 +855,7 @@
     <string name="avoid_motorway">Evitar autopistas</string>
     <string name="auto_zoom_map_descr">Ampliación automática del mapa, según la velocidad (mientras el mapa se sincroniza con la ubicación actual)</string>
     <string name="auto_zoom_map">Ampliación automática del mapa</string>
-    <string name="snap_to_road_descr">﻿Ajustar posición a las carreteras durante la navegación</string>
+    <string name="snap_to_road_descr">﻿Ajusta la ubicación a las carreteras durante la navegación</string>
     <string name="snap_to_road">Ajustar a carreteras</string>
     <string name="interrupt_music_descr">Pausa totalmente cualquier sonido al realizar anuncios (no sólo reduce el volumen)</string>
     <string name="interrupt_music">Pausar música</string>
@@ -897,7 +901,7 @@ OsmAnd+ es la versión de pago de la aplicación. Comprándola das soporte al pr
 - Búsqueda de lugares por dirección, por tipo (por ejemplo: restaurante, hotel, gasolinera, museo), o mediante coordenadas geográficas
 
 * Visualización del mapa:
-- Muestra tu posición y orientación en el mapa
+- Muestra tu ubicación y orientación en el mapa
 - Orientación opcional del mapa según la brújula o el sentido del movimiento
 - Guarda tus lugares más importantes como Favoritos
 - Muestra PDIs (puntos de interés) a tu alrededor
@@ -990,7 +994,7 @@ OsmAnd+ es la versión de pago de la aplicación. Comprándola soportas al proye
 - Búsqueda de lugares por dirección, por tipo (por ejemplo: restaurante, hotel, gasolinera, museo), o mediante coordenadas geográficas
 
 * Visualización del mapa:
-- Muestra tu posición y orientación en el mapa
+- Muestra tu ubicación y orientación en el mapa
 - Opcionalmente orienta el mapa según la brújula o el sentido del movimiento
 - Guarda tus lugares más importantes como Favoritos
 - Muestra PDIs (Puntos De Interés) a tu alrededor
@@ -1225,8 +1229,8 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="direction_style_clockwise">Según el reloj (12 sectores)</string>
     <string name="settings_direction_style">Estilo de dirección</string>
     <string name="settings_direction_style_descr">Elige el estilo para expresar direcciones relativas en movimiento</string>
-    <string name="auto_announce_on">Iniciar auto-anuncios</string>
-    <string name="auto_announce_off">Parar auto-anuncios</string>
+    <string name="auto_announce_on">Iniciar anuncios automáticos</string>
+    <string name="auto_announce_off">Parar anuncios automáticos</string>
     <string name="i_am_here">Estoy aquí</string>
     <string name="zoom_by_trackball_descr">Cambia la ampliación del mapa con movimientos horizontales de la rueda de desplazamiento</string>
     <string name="zoom_by_trackball">Usar la rueda de desplazamiento para controlar la ampliación</string>
@@ -1300,15 +1304,15 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="use_transparent_map_theme">Tema transparente</string>
     <string name="native_library_not_supported">La biblioteca nativa no está soportada en este dispositivo.</string>
     <string name="init_native_library">Inicializando biblioteca nativa…</string>
-    <string name="choose_auto_follow_route">Auto-centrar vista del mapa</string>
+    <string name="choose_auto_follow_route">Centrado automático del mapa</string>
     <string name="choose_auto_follow_route_descr">Tiempo hasta que la vista del mapa vuelve a sincronizarse con la ubicación actual</string>
     
     <string name="keep_informing_never">Sólo manualmente (pulsa la flecha)</string>
     <string name="keep_informing_descr">Repite instrucciones de navegación a intervalos regulares</string>
     <string name="keep_informing">Repetir instrucciones de navegación</string>
-    <string name="auto_follow_route_navigation">Auto-centrar al navegar</string>
-    <string name="auto_follow_route_navigation_descr">Auto-centra la vista del mapa sólo durante la navegación.</string>
-    <string name="auto_follow_location_enabled">Auto-centrar vista del mapa activado.</string>
+    <string name="auto_follow_route_navigation">Centrar automáticamente al navegar</string>
+    <string name="auto_follow_route_navigation_descr">Sólo centra la vista del mapa automáticamente, durante la navegación.</string>
+    <string name="auto_follow_location_enabled">Centrado automático del mapa activado.</string>
     <string name="pref_vector_rendering">Opciones específicas de dibujo vectorial</string>
     <string name="pref_overlay">Superpuesta / subyacente</string>
     <string name="pref_raster_map">Ajustes de fuente del mapa</string>
@@ -1358,7 +1362,7 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="favourites_edit_dialog_name">Nombre</string>
     <string name="favourites_edit_dialog_category">Categoría</string>
     <string name="shared_string_no_thanks">No, gracias</string>
-    <string name="basemap_missing">El mapa base mundial (abarca todo el mundo en ampliaciones pequeñas), no está disponible. Por favor, considera descargar World_basemap_x.obf para una vista global.</string>
+    <string name="basemap_missing">El mapa base mundial (abarca todo el mundo en ampliaciones pequeñas), no está disponible. Considera descargar World_basemap_x.obf para una vista global.</string>
     <string name="vector_data_missing">Sin datos (\'descargados\') en la tarjeta SD. Considera descargarlos para usar los mapas sin conexión.</string>
     <string name="shared_string_release">Liberado</string>
     <string name="local_index_installed">Versión local</string>
@@ -1525,7 +1529,7 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="transport_searching_route">Resultados de transporte ({0} al destino):</string>
     <string name="transport_search_again">Reiniciar búsqueda de transporte</string>
     <string name="voice">Voz grabada</string>
-    <string name="voices">Avisos de voz</string>
+    <string name="voices">Voces</string>
     <string name="no_vector_map_loaded">Los mapas vectoriales no están cargados</string>
     <string name="map_route_by_gpx">Navegar usando GPX</string>
     <string name="gpx_files_not_found">Sin archivos GPX en la carpeta de trazas</string>
@@ -1836,7 +1840,7 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="shared_string_import2osmand">Importar a OsmAnd</string>
     <string name="local_recordings_delete_all_confirm">¿Quieres borrar %1$d nota(s)?</string>
     <string name="disable_recording_once_app_killed">Prevenir grabación independiente</string>
-    <string name="disable_recording_once_app_killed_descrp">La grabación GPX se pausará cuando se cierre la aplicación (mediante aplicaciones recientes). (La indicación de fondo de OsmAnd, desaparecerá de la barra de notificaciones de Android.)</string>
+    <string name="disable_recording_once_app_killed_descrp">La grabación GPX se pausará al cerrar la aplicación (mediante aplicaciones recientes). (La indicación de fondo de OsmAnd, desaparecerá de la barra de notificaciones de Android.)</string>
     <string name="gps_network_not_enabled">El servicio de ubicación está desactivado. ¿Quieres activarlo?</string>
     <string name="archive_wikipedia_data">Tienes descargado datos de Wikipedia viejos e incompatibles. ¿Quieres archivarlos?</string>
     <string name="download_wikipedia_files">¿Descargar datos adicionales de Wikipedia (%1$s MB)?</string>
@@ -2189,11 +2193,11 @@ Opciones adicionales:
 • Añade, edita y quita PDI (para usuarios de OpenStreetMap.org)
 • OsMo - monitoriza en vivo otros dispositivos.
 
-Obtén un navegador confiable en tu país - ya sea Francia, Alemania, México, Reino Unido, España, los Países Bajos, EUA, Rusia, Brasil o cualquier otro estado.
+ Obtén un navegador confiable en tu país - ya sea Francia, Alemania, México, Reino Unido, España, los Países Bajos, EUA, Rusia, Brasil o cualquier otro estado.
 
 Complementos:
 • Mapas de curvas de nivel y sombreado del terreno: https://goo.gl/7mojP8
- Se añade al mapa básico de OsmAnd, datos de curvas de nivel y visualización del terreno.
+ Añade al mapa básico de OsmAnd, datos de curvas de nivel y visualización del terreno.
 
 • Mapa invernal: https://goo.gl/pX6DxJ
  Información sobre pistas de esquí, pistas de esquí de fondo, teleféricos y telesillas.
@@ -2239,7 +2243,7 @@ Si necesitas ayuda con la aplicación OsmAnd, contacte con nuestro equipo de sop
     <string name="download_files_question_space_with_temp">¿Descargar realmente {0} archivo(s)? Se necesitará {3} MB temporalmente y {1} MB constantemente. Actualmente, hay disponible {2} MB.</string>
     <string name="donations">Donaciones</string>
     <string name="number_of_recipients">Número de destinatarios</string>
-    <string name="osm_user_stat">Ediciones %1$s, posición %2$s, ediciones totales %3$s</string>
+    <string name="osm_user_stat">Ediciones %1$s de %3$s, posición %2$s</string>
     <string name="osm_editors_ranking">Clasificación de editores OSM</string>
     <string name="osm_live_subscription">Suscripción de OSM Live</string>
     <string name="osm_live_subscribe_btn">Suscribir</string>
@@ -2384,7 +2388,7 @@ Si amas a OsmAnd, OSM y quieres apoyarlos, esta es una perfecta manera de hacerl
     <string name="route_stops_before">%1$s parada(s) anterior(es)</string>
     <string name="rendering_attr_hideOverground_name">Objetos en superficie</string>
 
-    <string name="routing_attr_short_way_name">Carretera más eficiente</string>
+    <string name="routing_attr_short_way_name">Ruta más eficiente</string>
     <string name="routing_attr_short_way_description">Usa la ruta más eficiente en combustible (usualmente la más corta)</string>
     <string name="replace_favorite_confirmation">¿Quieres reemplazar el favorito %1$s?</string>
     <string name="shared_string_change">Cambiar</string>
@@ -2427,7 +2431,7 @@ Si amas a OsmAnd, OSM y quieres apoyarlos, esta es una perfecta manera de hacerl
     <string name="new_filter_desc">Ingresa el nombre del nuevo filtro. Puedes buscarlo en la lista de Categorías.</string>
     <string name="lang_kab">Cabilio</string>
     <string name="selected_categories">Categorías elegidas</string>
-    <string name="create_custom_poi">Crear PDI personalizado</string>
+    <string name="create_custom_poi">Crear filtro personalizado</string>
     <string name="custom_search">Personalizar búsqueda</string>
     <string name="edit_filter">Editar filtro</string>
     <string name="subcategories">Subcategorías</string>
@@ -2438,4 +2442,13 @@ Si amas a OsmAnd, OSM y quieres apoyarlos, esta es una perfecta manera de hacerl
     <string name="rendering_value_dark_brown_name">Marrón oscuro</string>
     <string name="rendering_attr_contourColorScheme_name">Esquema de color del contorno</string>
     <string name="rendering_attr_surfaceIntegrity_name">Integridad de la superficie de la carretera</string>
+    <string name="christmas_poi">PDI navideño</string>
+    <string name="christmas_desc">Anticipando Navidad y Año Nuevo, puedes elegir mostrar el PDI asociado con la Navidad: el árbol navideño, las tiendas.</string>
+    <string name="christmas_desc_q">¿Mostrar el PDI navideño?</string>
+    <string name="save_track_min_speed">Velocidad mínima del registro</string>
+    <string name="save_track_min_speed_descr">Elige la velocidad mínima de activación del registro</string>
+    <string name="save_track_min_distance">Distancia mínima del registro</string>
+    <string name="save_track_min_distance_descr">Elige la distancia mínima de activación del registro</string>
+    <string name="save_track_precision">Precisión del registro</string>
+    <string name="save_track_precision_descr">Elige la precisión del registro</string>
     </resources>

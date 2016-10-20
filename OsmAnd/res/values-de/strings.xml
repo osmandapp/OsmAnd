@@ -2525,7 +2525,7 @@ Wenn Sie OsmAnd und OSM lieben und unterstützen wollen, so ist dies die perfekt
     <string name="new_filter">Neuer Filter</string>
     <string name="new_filter_desc">Bitte geben sie einen Namen für den neuen Filter ein. Sie finden ihn in der Liste der Kategorien.</string>
     <string name="selected_categories">Ausgewählte Kategorien</string>
-    <string name="create_custom_poi">Benutzerdefinierten POI erstellen</string>
+    <string name="create_custom_poi">Benutzerdefinierten Filter erstellen</string>
     <string name="custom_search">Benutzerdefinierte Suche</string>
     <string name="edit_filter">Filter bearbeiten</string>
     <string name="subcategories">Unterkategorien</string>
@@ -2536,4 +2536,13 @@ Wenn Sie OsmAnd und OSM lieben und unterstützen wollen, so ist dies die perfekt
     <string name="rendering_attr_contourColorScheme_name">Farbschema der Konturen</string>
     <string name="rendering_attr_surfaceIntegrity_name">Straßenoberflächenbeschaffenheit</string>
     <string name="search_hint">Stadt, Adresse, POI Name eingeben</string>
+    <string name="christmas_poi">Weihnachts POI</string>
+    <string name="christmas_desc">Im Vorgriff auf Weihnachten und Neujahr, können Sie Weihnachts POI anzeigen: Weihnachtsbaum, Märkte.</string>
+    <string name="christmas_desc_q">Weihnachts POI anzeigen?</string>
+    <string name="save_track_min_speed">Mindestgeschwindigkeit für die Protokollierung</string>
+    <string name="save_track_min_speed_descr">Wählen Sie die Minimalgeschwindigkeit, bei der die Protokollierung ausgelöst wird</string>
+    <string name="save_track_min_distance">Mindestentfernung für die Protokollierung</string>
+    <string name="save_track_min_distance_descr">Wählen Sie die Mindestentfernung, damit die Protokollierung ausgelöst wird</string>
+    <string name="save_track_precision">Protokollierungsgenauigkeit</string>
+    <string name="save_track_precision_descr">Genauigkeit der Protokollierung auswählen</string>
     </resources>

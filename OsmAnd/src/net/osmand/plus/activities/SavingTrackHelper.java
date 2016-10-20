@@ -4,7 +4,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.text.format.DateFormat;
-
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.plus.GPXUtilities;
@@ -19,6 +18,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
+import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
 
@@ -364,6 +364,19 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 				} else if (settings.SAVE_GLOBAL_TRACK_TO_GPX.get()
 						&& locationTime - lastTimeUpdated > settings.SAVE_GLOBAL_TRACK_INTERVAL.get()) {
 					record = true;
+				}
+				float minDistance = settings.SAVE_TRACK_MIN_DISTANCE.get();
+				if(minDistance > 0 && lastPoint != null && MapUtils.getDistance(lastPoint, location.getLatitude(), location.getLongitude()) < 
+						minDistance) {
+					record = false;
+				}
+				float precision = settings.SAVE_TRACK_PRECISION.get();
+				if(precision > 0 && (!location.hasAccuracy() || location.getAccuracy() < precision)) {
+					record = false;
+				}
+				float minSpeed = settings.SAVE_TRACK_MIN_SPEED.get();
+				if(minSpeed > 0 && (!location.hasSpeed() || location.getSpeed() < minSpeed)) {
+					record = false;
 				}
 			}
 		}

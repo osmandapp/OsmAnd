@@ -9,6 +9,12 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="save_track_min_speed">Logging minimal speed</string>
+    <string name="save_track_min_speed_descr">Choose minimal speed that logging will be triggered</string>
+    <string name="save_track_min_distance">Logging minimal distance</string>
+    <string name="save_track_min_distance_descr">Choose minimal distance that logging will be triggered</string>
+    <string name="save_track_precision">Logging precision</string>
+    <string name="save_track_precision_descr">Choose logging precision</string>
     <string name="christmas_poi">Christmas POI</string>
     <string name="christmas_desc">Anticipating Christmas and New Year holidays, you can choose to display the POI associated with Christmas: the Christmas tree, markets.</string>
     <string name="christmas_desc_q">Show Christmas POI?</string>

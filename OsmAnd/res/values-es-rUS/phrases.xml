@@ -1101,8 +1101,8 @@
 	<string name="poi_population">Población</string>
 	<string name="poi_parking_underground">Subterráneo</string>
 	<string name="poi_parking_multi_storey">De varios pisos</string>
-	<string name="poi_bicycle_parking_stands">Anclajes</string>
-	<string name="poi_bicycle_parking_wall_loops">Anclajes de pared</string>
+	<string name="poi_bicycle_parking_stands">U invertida</string>
+	<string name="poi_bicycle_parking_wall_loops">Anclajes de rueda</string>
 	<string name="poi_bicycle_parking_informal">Informal</string>
 	<string name="poi_leaf_type_broadleaved">Hoja ancha</string>
 	<string name="poi_leaf_type_needleleaved">Hoja acicular</string>
@@ -2891,8 +2891,8 @@
 	<string name="poi_cocktails">Cócteles</string>
 	<string name="poi_microbrewery">Cervecería artesanal</string>
 	<string name="poi_beauty_salon_service">Servicio de belleza</string>
-	<string name="poi_recycling_type">Tipo de reciclado</string>
-	<string name="poi_recycling_accepted_waste">Acepta residuos</string>
+	<string name="poi_recycling_type">Tipo de reciclaje</string>
+	<string name="poi_recycling_accepted_waste">Residuo admitido</string>
 	<string name="poi_shelter_type">Tipo de refugio</string>
 	<string name="poi_fireplace">Chimenea</string>
 	<string name="poi_seasonal">Estacional</string>
