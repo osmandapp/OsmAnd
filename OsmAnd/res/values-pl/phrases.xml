@@ -3322,4 +3322,6 @@
 
 	<string name="poi_cuisine_bistro">Bistro</string>
 	<string name="poi_dish">Potrawa</string>
-	</resources>
+	<string name="poi_waterway_fuel">Stacja benzynowa dla łodzi</string>
+
+</resources>
