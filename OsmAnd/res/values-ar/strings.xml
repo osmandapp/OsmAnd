@@ -2583,4 +2583,11 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="rendering_attr_contourColorScheme_name">نظام ألوان المحيط</string>
     <string name="rendering_attr_surfaceIntegrity_name">سلامة سطح الطرق</string>
     <string name="christmas_poi">POI عيد الميلاد</string>
+    <string name="rendering_attr_contourColorScheme_description">نظام ألوان المعالم</string>
+    <string name="save_track_min_speed">تسجيل السرعة الأدنى</string>
+    <string name="save_track_min_speed_descr">اختر السرعة الأدنى لتشغيل التسجيل</string>
+    <string name="save_track_min_distance">تسجيل المسافة الأدنى</string>
+    <string name="save_track_min_distance_descr">اختر حد المسافة الأدنى لتشغيل التسجيل</string>
+    <string name="save_track_precision">دقة التسجيل</string>
+    <string name="save_track_precision_descr">اختر دقة التسجيل</string>
     </resources>
