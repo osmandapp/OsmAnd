@@ -107,11 +107,13 @@ public class AudioVideoNoteRecordingMenuFullScreen extends AudioVideoNoteRecordi
 	}
 
 	public void showFinalPhoto(final byte[] jpeg, long duration) {
-		setImage(jpeg);
-		imageview.setVisibility(View.VISIBLE);
-		viewfinder.setVisibility(View.GONE);
+		if (getMapActivity() != null) {
+			setImage(jpeg);
+			imageview.setVisibility(View.VISIBLE);
+			viewfinder.setVisibility(View.GONE);
 
-		startProgress(duration);
+			startProgress(duration);
+		}
 	}
 
 	public void hideFinalPhoto() {
@@ -151,17 +153,20 @@ public class AudioVideoNoteRecordingMenuFullScreen extends AudioVideoNoteRecordi
 	}
 
 	private void setImage(final byte[] jpeg) {
-		Bitmap bmp = BitmapFactory.decodeByteArray(jpeg, 0, jpeg.length);
-		DisplayMetrics dm = new DisplayMetrics();
-		Display display = getMapActivity().getWindowManager().getDefaultDisplay();
-		display.getMetrics(dm);
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			Bitmap bmp = BitmapFactory.decodeByteArray(jpeg, 0, jpeg.length);
+			DisplayMetrics dm = new DisplayMetrics();
+			Display display = mapActivity.getWindowManager().getDefaultDisplay();
+			display.getMetrics(dm);
 
-		int imageOrientation = getOrientation(jpeg);
+			int imageOrientation = getOrientation(jpeg);
 
-		imageview.setMinimumHeight(dm.heightPixels);
-		imageview.setMinimumWidth(dm.widthPixels);
-		bmp = rotateBitmap(bmp, imageOrientation, dm.widthPixels, dm.heightPixels);
-		imageview.setImageBitmap(bmp);
+			imageview.setMinimumHeight(dm.heightPixels);
+			imageview.setMinimumWidth(dm.widthPixels);
+			bmp = rotateBitmap(bmp, imageOrientation, dm.widthPixels, dm.heightPixels);
+			imageview.setImageBitmap(bmp);
+		}
 	}
 
 	private static Bitmap rotateBitmap(Bitmap src, int angle, int screenWidth, int screenHeight) {
