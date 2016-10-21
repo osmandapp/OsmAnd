@@ -2448,4 +2448,8 @@ Ak potrebuje pomoc s aplikáciou OsmAnd, kontaktuje podporu: support@osmand.net.
     <string name="rendering_attr_contourColorScheme_name">Farebná schéma vrstevníc</string>
     <string name="rendering_attr_surfaceIntegrity_name">Celistvosť povrchu ciest</string>
     <string name="search_hint">Zadajte mesto, adresu, názov bodu</string>
+    <string name="rendering_attr_contourColorScheme_description">Farebná schéma pre vrstevnice</string>
+    <string name="save_track_min_speed">Minimálna rýchlosť pre záznam</string>
+    <string name="save_track_min_speed_descr">Zvoľte minimálnu rýchlosť, pri ktorej sa zapne záznam</string>
+    <string name="save_track_min_distance">Minimálna vzdialenosť pre záznam</string>
     </resources>
