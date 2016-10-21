@@ -2673,4 +2673,10 @@ Als je hulp nodig hebt met OsmAnd: neem contact op met ons support team: support
     <string name="christmas_poi">Kerstmis-POI</string>
     <string name="christmas_desc">Voor kerst en het nieuwjaar: de POI voor kerstbomen en kerstmarkten...</string>
     <string name="christmas_desc_q">Kerst-POI tonen?</string>
+    <string name="rendering_attr_contourColorScheme_description">Kleur van hoogtelijnen</string>
+    <string name="save_track_min_speed">Minimum snelheid om te registreren</string>
+    <string name="save_track_min_speed_descr">Kies de snelheid waarboven het loggen wordt geactiveerd</string>
+    <string name="save_track_min_distance">Minimum afstand om te registereren</string>
+    <string name="save_track_min_distance_descr">Kies de afstand waarboven het loggen wordt geactiveerd</string>
+    <string name="save_track_precision">Nauwkeurigheid van het registreren</string>
     </resources>
