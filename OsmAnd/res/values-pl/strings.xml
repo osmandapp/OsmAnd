@@ -2652,8 +2652,8 @@ Jeśli potrzebujesz pomocy podczas używania OsmAnd, prosimy o kontakt z naszym 
     <string name="save_track_min_speed">Minimalna prędkość rejestrowania</string>
     <string name="save_track_min_distance">Minimalna odległość rejestrowania</string>
     <string name="save_track_min_distance_descr">Wybierz minimalną odległość przy której rejestrowanie będzie aktywne</string>
-    <string name="save_track_precision">Precyzja rejestrowania</string>
-    <string name="save_track_precision_descr">Wybierz precyzję rejestrowania</string>
+    <string name="save_track_precision">Minimalna precyzja rejestrowania</string>
+    <string name="save_track_precision_descr">Wybierz minimalną akceptowalną precyzję rejestrowania</string>
     <string name="christmas_desc">Oczekując Świąt Bożego Narodzenia i Nowego Roku, możesz włączyć wyświetlanie użytecznych miejsc związanych ze Świętami: choinki, jarmarki.</string>
     <string name="christmas_desc_q">Pokazywać świąteczne miejsca?</string>
     </resources>
