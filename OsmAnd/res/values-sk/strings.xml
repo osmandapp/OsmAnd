@@ -2457,5 +2457,5 @@ Ak potrebuje pomoc s aplikáciou OsmAnd, kontaktuje podporu: support@osmand.net.
     <string name="save_track_precision_descr">Zvoľte presnosť záznamu</string>
     <string name="christmas_poi">Vianočné body záujmu</string>
     <string name="christmas_desc">Ako prípravu na Vianoce a Nový rok môžete zobraziť body záujmu spojené s Vianocami: Vianočné stromčeky, trhy.</string>
-    <string name="christmas_desc_q">Zobraziť vianočné body?</string>
+    <string name="christmas_desc_q">Zobraziť vianočné objekty?</string>
     </resources>
