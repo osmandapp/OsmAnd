@@ -1498,14 +1498,14 @@
 	<string name="poi_passing_place">Pasabidea</string>
 	<string name="poi_piste_grooming_classic">Klasikoa</string>
 	<string name="poi_piste_grooming_classic_skating">Klasikoa+patinajea</string>
-	<string name="poi_garden_type_residential">Lorategi mota: Egoitza-lorategia</string>
+	<string name="poi_garden_type_residential">Lorategi mota: egoitza-lorategia</string>
 	<string name="poi_garden_type_community">Lorategi mota: komunitarioa</string>
 	<string name="poi_garden_type_private">Lorategi mota: pribatua</string>
 	<string name="poi_garden_type_botanical">Lorategi mota: botanikoa</string>
 
 	<string name="poi_garden_style_kitchen">Lorategi estiloa: baratza</string>
 	<string name="poi_garden_style_rosarium">Lorategi estiloa: arrosadia</string>
-	<string name="poi_garden_style_french">Lorategi estiloa: frantzesa</string>
+	<string name="poi_garden_style_french">Lorategi estiloa: frantziarra</string>
 	<string name="poi_internet_access_wlan">Internet sarbidea: wlan</string>
 	<string name="poi_internet_access_terminal">Internet sarbidea: terminala</string>
 	<string name="poi_internet_access_wired">Internet sarbidea: hariduna</string>
@@ -1531,7 +1531,7 @@
 	<string name="poi_diet_gluten_free_yes">Glutenik gabekoa</string>
 	<string name="poi_diet_gluten_free_no">Glutenik gabeko dieta: ez</string>
 	<string name="poi_diet_kosher_only">Kosher besterik ez</string>
-	<string name="poi_diet_kosher_yes">Kosher</string>
+	<string name="poi_diet_kosher_yes">Koxer</string>
 	<string name="poi_diet_kosher_no">Kosher dieta: ez</string>
 	<string name="poi_diet_halal_only">Halal besterik ez</string>
 	<string name="poi_diet_halal_yes">Halal</string>
@@ -1738,5 +1738,16 @@
 	<string name="poi_microwave_oven_no">Mikrouhin labea: ez</string>
 	<string name="poi_water_heater_yes">Ur berogailua: bai</string>
 	<string name="poi_water_heater_no">Ur berogailua: ez</string>
+
+	<string name="poi_megalith_type_menhir">Megalito mota: menhirra</string>
+	<string name="poi_megalith_type_dolmen">Megalito mota: dolmena</string>
+	<string name="poi_megalith_type_nuraghe">Megalito mota: nuraga</string>
+	<string name="poi_megalith_type_passage_grave">Megalito mota: igarobide hilobia</string>
+	<string name="poi_animal_training_dog">Txakurra</string>
+	<string name="poi_animal_training_horse">Zaldia</string>
+
+	<string name="poi_craft_gardener">Lorezaina</string>
+	<string name="poi_garden_style_english">Lorategi estiloa: ingelesa</string>
+	<string name="poi_garden_style_japanese">Lorategi mota: japoniarra</string>
 
 	</resources>
