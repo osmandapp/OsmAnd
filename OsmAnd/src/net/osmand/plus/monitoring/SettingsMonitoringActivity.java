@@ -95,7 +95,7 @@ public class SettingsMonitoringActivity extends SettingsBaseActivity {
 		}
 		cat.addPreference(createListPreference(settings.SAVE_TRACK_MIN_DISTANCE, names, floatValues,  
 				R.string.save_track_min_distance, R.string.save_track_min_distance_descr));
-		floatValues = new Float[] {0.f, 2.0f, 5.0f, 10.0f, 15.0f, 20.0f, 30.0f, 50.0f};
+		floatValues = new Float[] {0.f, 1.0f, 2.0f, 5.0f, 10.0f, 15.0f, 25.0f, 50.0f, 100.0f};
 		names = new String[floatValues.length];
 		names[0] = getString(R.string.shared_string_not_selected);
 		for(int i = 1; i < floatValues.length; i++) {
