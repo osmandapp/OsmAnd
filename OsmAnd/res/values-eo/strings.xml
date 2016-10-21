@@ -2477,8 +2477,8 @@ Se vi bezonas helpon pri OsmAnd aplikaĵo, bonvolu kontakti nian helpantaron: su
     <string name="save_track_min_speed_descr">Elektu minimuman rapidon dum kiu registrado de kurso haltos</string>
     <string name="save_track_min_distance">Minimuma distanco por registrado</string>
     <string name="save_track_min_distance_descr">Elektu minimuman distancon dum kiu registrado de kurso haltos</string>
-    <string name="save_track_precision">Registrada precizo</string>
-    <string name="save_track_precision_descr">Elektu precizon de registrado de kurso</string>
+    <string name="save_track_precision">Minimuma precizo por registrado</string>
+    <string name="save_track_precision_descr">Elektu minimuman akceptan precizon de registrado de kurso</string>
     <string name="christmas_poi">Kristnaskaj interesejoj</string>
     <string name="christmas_desc">Atendante Kristnaskon kaj la novan jaron, vi povas aktivigi vidigadon la interesejoj rilataj al Kristnasko: kristnaskaj arbeoj, foiroj, ktp.</string>
     <string name="christmas_desc_q">Ĉu montri kristnaskaj interesejoj?</string>
