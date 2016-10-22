@@ -2279,7 +2279,7 @@ Om du tycker om OsmAnd och OSM och vill stödja dem så är detta ett utmärkt s
     <string name="edit_filter">Redigera filter</string>
     <string name="subcategories">Underkategorier</string>
     <string name="selected_categories">Markerade kategorier</string>
-    <string name="create_custom_poi">Skapa egen POI</string>
+    <string name="create_custom_poi">Skapa eget filter</string>
     <string name="custom_search">Egen sökning</string>
     <string name="shared_string_filters">Filter</string>
     <string name="apply_filters">Applicera filter</string>
@@ -2318,4 +2318,16 @@ Om du tycker om OsmAnd och OSM och vill stödja dem så är detta ett utmärkt s
     <string name="search_map">Söker efter karta …</string>
     <string name="first_usage_greeting">Få anvisningar och upptäck nya platser utan internetuppkoppling</string>
     <string name="search_my_location">Sök efter min plats</string>
+    <string name="rendering_attr_contourColorScheme_description">Färgschema för konturer</string>
+    <string name="save_track_min_speed">Minimal loggningshastighet</string>
+    <string name="save_track_min_speed_descr">Välj minimal hastighet som startar loggning</string>
+    <string name="save_track_min_distance">Minimal loggningsdistans</string>
+    <string name="save_track_min_distance_descr">Välj minimal distans som startar loggning</string>
+    <string name="save_track_precision">Minimal loggningsprecision</string>
+    <string name="save_track_precision_descr">Välj minimal precision som startar loggning</string>
+    <string name="christmas_poi">Jul-POI</string>
+    <string name="christmas_desc_q">Visa Jul-POI?</string>
+    <string name="rendering_value_light_brown_name">Ljusbrun</string>
+    <string name="rendering_value_dark_brown_name">Mörkbrun</string>
+    <string name="rendering_attr_contourColorScheme_name">Färgschema för konturer</string>
     </resources>
