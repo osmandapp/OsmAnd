@@ -2596,8 +2596,20 @@ V kolikor naletite na težave s programom OsmAnd, prosimo, stopite v stik s skup
     <string name="edit_filter">Uredi filter</string>
     <string name="subcategories">Podkategorije</string>
     <string name="selected_categories">Izbrane kategorije</string>
-    <string name="create_custom_poi">Ustvari točko POI po meri</string>
+    <string name="create_custom_poi">Ustvari filter po meri</string>
     <string name="custom_search">Iskanje po meri</string>
     <string name="translit_names">Prečrkovanje imen</string>
     <string name="translit_name_if_miss">Uporabi prečrkovanje, če ime %1$s ni na voljo</string>
+    <string name="shared_string_continue">Nadaljuj</string>
+    <string name="shared_string_pause">Premor</string>
+    <string name="shared_string_trip">Potovanje</string>
+    <string name="shared_string_recorded">Shranjeno</string>
+    <string name="shared_string_record">Zabeleži</string>
+    <string name="gpx_logging_no_data">Ni podatkov</string>
+    <string name="christmas_poi">Božične točke POI</string>
+    <string name="christmas_desc_q">Ali želite prikaz Božičnih točk POI?</string>
+    <string name="rendering_value_light_brown_name">Svetlorjava</string>
+    <string name="rendering_value_dark_brown_name">Temnorjava</string>
+    <string name="rendering_attr_surfaceIntegrity_name">Kakovost površine ceste</string>
+    <string name="search_hint">Vpišite mesto, naslov ali ime točke</string>
     </resources>
