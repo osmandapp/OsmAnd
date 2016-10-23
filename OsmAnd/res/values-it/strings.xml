@@ -1833,7 +1833,7 @@ Le tracce registrate possono essere condivise con i tuoi amici o essere usate pe
     <string name="plugin_nautical_name">Visualizzazione mappa nautica</string>
     <string name="world_ski_missing">Per visualizzare le mappe per lo sci è necessario scaricare la mappa speciale offline</string>
     <string name="nautical_maps_missing">Per visualizzare le mappe nautiche è necessario scaricare la mappa speciale offline</string>
-    <string name="rendering_attr_pisteGrooming_name">Piste da fondo</string>
+    <string name="rendering_attr_pisteGrooming_name">Preparazione della pista</string>
     <string name="free">"Libera %1$s "</string>
     <string name="device_memory">Memoria dispositivo</string>
     <string name="rendering_attr_pisteRoutes_name">Piste da sci</string>
@@ -2638,7 +2638,7 @@ Se ami OsmAnd e OSM e vuoi sostenerli, questo è un modo perfetto per farlo.</st
     <string name="edit_filter">Modifica il filtro</string>
     <string name="subcategories">Sottocategorie</string>
     <string name="selected_categories">Seleziona le categorie</string>
-    <string name="create_custom_poi">Crea un PDI personalizzato</string>
+    <string name="create_custom_poi">Crea un POI personalizzato</string>
     <string name="custom_search">Ricerca personalizzata</string>
     <string name="shared_string_filters">Filtri</string>
     <string name="apply_filters">Applica i filtri</string>
@@ -2646,4 +2646,10 @@ Se ami OsmAnd e OSM e vuoi sostenerli, questo è un modo perfetto per farlo.</st
     <string name="delete_filter">Cancella il filtro</string>
     <string name="new_filter">Nuovo filtro</string>
     <string name="new_filter_desc">Immetti il nome del tuo nuovo filtro. Lo troverai nella lista delle Categorie.</string>
+    <string name="christmas_poi">POI di Natale</string>
+    <string name="christmas_desc">Anticipando le vacanze di Natale e Capodanno, è possibile scegliere di visualizzare il POI associato al Natale: l\'albero di Natale, i mercati.</string>
+    <string name="christmas_desc_q">Mostrare POI di Natale?</string>
+    <string name="rendering_value_light_brown_name">Marrone chiaro</string>
+    <string name="rendering_value_dark_brown_name">Marrone scuro</string>
+    <string name="rendering_attr_surfaceIntegrity_name">integrità superficiale stradale</string>
     </resources>

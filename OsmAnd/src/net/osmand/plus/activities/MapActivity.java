@@ -72,7 +72,7 @@ import net.osmand.plus.base.FailSafeFuntions;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.dialogs.ErrorBottomSheetDialog;
-import net.osmand.plus.dialogs.OtherDialogs;
+import net.osmand.plus.dialogs.XMasDialog;
 import net.osmand.plus.dialogs.RateUsBottomSheetDialog;
 import net.osmand.plus.dialogs.WhatsNewDialogFragment;
 import net.osmand.plus.download.DownloadActivity;
@@ -391,17 +391,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	private void changeKeyguardFlags() {
 		if (settings.WAKE_ON_VOICE_INT.get() > 0) {
-			getWindow()
-					.setFlags(
-							WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD
-									| WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED,
-							WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD
-									| WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED);
+			getWindow().setFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD | WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED,
+							WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD | WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED);
 		} else {
-			getWindow()
-					.clearFlags(
-							WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD
-									| WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED);
+			getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD | WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED);
 		}
 	}
 
@@ -638,7 +631,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 					.add(R.id.fragmentContainer, new FirstUsageWelcomeFragment(),
 							FirstUsageWelcomeFragment.TAG).commitAllowingStateLoss();
 		} else {
-			OtherDialogs.showXMasDialog(this);
+			XMasDialog.showXMasDialog(this);
 		}
 		FirstUsageWelcomeFragment.SHOW = false;
 	}

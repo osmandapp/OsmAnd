@@ -2679,4 +2679,5 @@ Als je hulp nodig hebt met OsmAnd: neem contact op met ons support team: support
     <string name="save_track_min_distance">Minimum afstand om te registereren</string>
     <string name="save_track_min_distance_descr">Kies de afstand waarboven het loggen wordt geactiveerd</string>
     <string name="save_track_precision">Nauwkeurigheid van het registreren</string>
+    <string name="save_track_precision_descr">Minimaal gewenste nauwkeurigheid van het loggen instellen</string>
     </resources>

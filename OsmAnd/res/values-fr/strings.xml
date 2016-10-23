@@ -2327,7 +2327,7 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="new_filter">Nouveau filtre</string>
     <string name="new_filter_desc">Merci de saisir un nom pour ce filtre. Vous le retrouverez dans la liste des Catégories.</string>
     <string name="selected_categories">Catégories sélectionnées</string>
-    <string name="create_custom_poi">Créer des points d\'intérêt personnels</string>
+    <string name="create_custom_poi">Créer un filtre personnalisé</string>
     <string name="custom_search">Recherche personnalisée</string>
     <string name="edit_filter">Modifier le filtre</string>
     <string name="subcategories">Sous-catégories</string>
@@ -2345,6 +2345,6 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="save_track_min_speed_descr">Indiquez une vitesse minimale à partir de laquelle déclencher l\'enregistrement</string>
     <string name="save_track_min_distance">Distance minimale pour enregistrer</string>
     <string name="save_track_min_distance_descr">Indiquez une distance minimale à partir de laquelle déclencher l\'enregistrement</string>
-    <string name="save_track_precision">Précision d\'enregistrement</string>
-    <string name="save_track_precision_descr">Sélectionnez une précision pour l’enregistrement</string>
+    <string name="save_track_precision">Seuils d\'enregistrement</string>
+    <string name="save_track_precision_descr">Sélectionnez un seuil minimal pour l’enregistrement</string>
     </resources>
