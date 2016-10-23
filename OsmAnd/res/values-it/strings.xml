@@ -2652,4 +2652,11 @@ Se ami OsmAnd e OSM e vuoi sostenerli, questo è un modo perfetto per farlo.</st
     <string name="rendering_value_light_brown_name">Marrone chiaro</string>
     <string name="rendering_value_dark_brown_name">Marrone scuro</string>
     <string name="rendering_attr_surfaceIntegrity_name">integrità superficiale stradale</string>
+    <string name="save_track_min_speed_descr">Scegli la velocità minima che verrà attivata la registrazione</string>
+    <string name="save_track_min_distance">Distanza minima di registrazione</string>
+    <string name="save_track_min_distance_descr">Scegliere la distanza minima che verrà attivata la registrazione</string>
+    <string name="save_track_precision">Registrazione minima precisione</string>
+    <string name="save_track_precision_descr">Scegliere registrazione minima accettabile precisione</string>
+    <string name="rendering_attr_contourColorScheme_name">Combinazione di colori dei contorni</string>
+    <string name="search_hint">Digitare il nome del poi, città, indirizzo</string>
     </resources>
