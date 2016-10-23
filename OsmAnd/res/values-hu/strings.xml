@@ -2646,7 +2646,7 @@ Ha segítségre van szükséged az OsmAnd alkalmazással kapcsolatban, keresd a 
     <string name="edit_filter">Szűrő szerkesztése</string>
     <string name="subcategories">Alkategóriák</string>
     <string name="selected_categories">Kiválasztott kategóriák</string>
-    <string name="create_custom_poi">Egyéni POI létrehozása</string>
+    <string name="create_custom_poi">Egyéni szűrő létrehozása</string>
     <string name="custom_search">Egyéni keresés</string>
     <string name="shared_string_filters">Szűrők</string>
     <string name="apply_filters">Szűrők alkalmazása</string>
@@ -2655,4 +2655,7 @@ Ha segítségre van szükséged az OsmAnd alkalmazással kapcsolatban, keresd a 
     <string name="new_filter">Új szűrő</string>
     <string name="new_filter_desc">Kérlek add meg az új szűrő nevét. Később a Kategóriák listájában fogod megtalálni.</string>
     <string name="lang_kab">kabil</string>
+    <string name="shared_string_continue">Folytatás</string>
+    <string name="gpx_logging_no_data">Nincs adat</string>
+    <string name="rendering_attr_contourColorScheme_description">Körvonalak színsémája</string>
     </resources>
