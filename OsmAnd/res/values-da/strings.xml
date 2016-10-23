@@ -7,7 +7,7 @@
     <string name="av_widget_action">Standard modulhandling</string>
     <string name="av_video_format_descr">Vælg videoformat</string>
     <string name="av_use_external_recorder_descr">Brug systemoptager for video</string>
-    <string name="av_use_external_recorder">Indbygget optager</string>
+    <string name="av_use_external_recorder">Brug systemoptager</string>
     <string name="av_settings_descr">Konfigurer audio- og videoindstillinger</string>
     <string name="av_settings">Indstillinger for audio og video </string>
     <string name="recording_error">Fejl opstod under optagelse </string>
@@ -76,7 +76,7 @@
     <string name="rendering_attr_roadColors_description">Vælg et farveskema til veje:</string>
     <string name="rendering_attr_roadColors_name">Farveskema for veje</string>
     <string name="map_widget_show_destination_arrow">Vis destinationsretning</string>
-    <string name="enable_plugin_monitoring_services">Aktiver Optag ture udvidelse for at bruge positionlogning tjenester (GPX-logning, online sporing)</string>
+    <string name="enable_plugin_monitoring_services">Aktiver Optag ture udvidelsen for at bruge positionlogningstjenester (GPX-logning, online sporing)</string>
     <string name="non_optimal_route_calculation">Beregn en muligvis ikke-optimal rute over lange afstande</string>
     <string name="gps_not_available">Aktiver GPS i indstillinger</string>
     <string name="map_widget_monitoring_services">Logningstjenester</string>
@@ -1720,7 +1720,7 @@ Optagede spor kan deles med venner eller anvendes til OSM bidrag. Sportsfolk kan
     <string name="save_track_interval_globally">Logningsinterval</string>
     <string name="save_track_to_gpx_globally_descr">Generel positionsslogning til en GPX-fil kan slås til/fra med \'GPX logning\' på hovedskærmen</string>
     <string name="confirm_every_run">Spørg altid</string>
-    <string name="save_global_track_interval_descr">Vælg logningsinterval for den almindelige sporregistrering (aktiveres via \'GPX logning\' på hovedskærmen)</string>
+    <string name="save_global_track_interval_descr">Vælg logningsinterval for den almindelige optagelse af spor(aktiveres via \'GPX logning\' på hovedskærmen)</string>
     <string name="save_global_track_interval">Generelt logningsinterval</string>
     <string name="traffic_warning_speed_limit">Hastighedsgrænse</string>
     <string name="traffic_warning_border_control">Grænsekontrol</string>
@@ -2359,7 +2359,7 @@ For at vende tilbage til en af OsmAnd konventionelle kortformater, enten deaktiv
     <string name="rec_split_clip_length">Kliplængde</string>
     <string name="rec_split_clip_length_desc">Længden af hver optaget klip bliver ikke længere end det angivne tidsinterval</string>
     <string name="rec_split_storage_size">Lagerplads</string>
-    <string name="rec_split_storage_size_desc">Lagerplads, der kan bruges af alle optagne klip</string>
+    <string name="rec_split_storage_size_desc">Lagerplads, der kan bruges af alle optagede klip</string>
     <string name="hourly">Time</string>
     <string name="daily">Daglig</string>
     <string name="weekly">Ugentlig</string>
@@ -2685,7 +2685,7 @@ Hvis du  ønsker at støtte OsmAnd og OSM, er dette en god måde at gøre det p�
     <string name="shared_string_continue">Fortsæt</string>
     <string name="shared_string_pause">Pause</string>
     <string name="shared_string_trip">Tur</string>
-    <string name="shared_string_recorded">Indspillet</string>
+    <string name="shared_string_recorded">Optaget</string>
     <string name="shared_string_record">Optag</string>
     <string name="gpx_logging_no_data">Ingen data</string>
     </resources>
