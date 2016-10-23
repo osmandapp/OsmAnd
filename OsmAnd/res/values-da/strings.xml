@@ -2688,4 +2688,25 @@ Hvis du  ønsker at støtte OsmAnd og OSM, er dette en god måde at gøre det p�
     <string name="shared_string_recorded">Optaget</string>
     <string name="shared_string_record">Optag</string>
     <string name="gpx_logging_no_data">Ingen data</string>
+    <string name="release_2_5">"
+ • Klikbare ikoner på kortet
+
+
+  • Kraftige Ip Filter Søg: Søgning restauranter ved køkken, campingpladser med særlige behov
+
+
+  • Nyt Osmand Topo Stil for cyklister og vandrere
+
+
+  • Forbedret Tur optagelse (nye indstillinger)
+
+
+  • Forbedret navigation meddelelser (Android Wear)
+
+
+  • Mange andre forbedringer og fejlrettelser
+
+
+  og mere…
+ "</string>
     </resources>
