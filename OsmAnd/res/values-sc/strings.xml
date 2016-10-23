@@ -2609,4 +2609,25 @@ Como bi sunt {2} MB ebbia disponìbiles.</string>
     <string name="rendering_value_dark_brown_name">Castàngiu iscuru</string>
     <string name="rendering_attr_contourColorScheme_name">Ischema de colores pro sos contornos</string>
     <string name="rendering_attr_surfaceIntegrity_name">Integridade superfitziale istradale</string>
+    <string name="release_2_5">"
+ • Iconas incarcàbiles in sa mapa
+
+
+ • Chirca filtrada de PDI potente meda: chirca sos ristorantes pro casta de coghina, o sos campègios cun caraterìsticas particulares
+
+
+ • Istile topogràficu nou pro tziclistas e escursionistas
+
+
+ • Registratzione de sos biàgios megiorada (impostatziones noas)
+
+
+ • Notìficas pro su nàvigu megioradas (Android Wear)
+
+
+ • Meda àteros megioramentos e errores isoltos
+
+
+ e àteru…
+ "</string>
     </resources>
