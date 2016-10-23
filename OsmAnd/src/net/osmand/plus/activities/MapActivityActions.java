@@ -796,17 +796,7 @@ public class MapActivityActions implements DialogProvider {
 	}
 
 	public void stopNavigationWithoutConfirm() {
-		if (getMyApplication().getLocationProvider().getLocationSimulation().isRouteAnimating()) {
-			getMyApplication().getLocationProvider().getLocationSimulation().startStopRouteAnimation(mapActivity);
-		}
-		routingHelper.getVoiceRouter().interruptRouteCommands();
-		routingHelper.clearCurrentRoute(null, new ArrayList<LatLon>());
-		routingHelper.setRoutePlanningMode(false);
-		settings.LAST_ROUTING_APPLICATION_MODE = settings.APPLICATION_MODE.get();
-		settings.APPLICATION_MODE.set(settings.DEFAULT_APPLICATION_MODE.get());
-		if (settings.USE_MAP_MARKERS.get()) {
-			getMyApplication().getTargetPointsHelper().removeAllWayPoints(false, false);
-		}
+		getMyApplication().stopNavigation();
 		mapActivity.updateApplicationModeSettings();
 		mapActivity.getDashboard().clearDeletedPoints();
 	}

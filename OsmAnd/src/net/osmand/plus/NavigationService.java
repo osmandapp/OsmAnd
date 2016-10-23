@@ -1,9 +1,7 @@
 package net.osmand.plus;
 
-import net.osmand.PlatformUtil;
-import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
-import net.osmand.plus.osmo.OsMoPlugin;
 import android.app.AlarmManager;
+import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
@@ -21,6 +19,10 @@ import android.os.SystemClock;
 import android.support.v4.app.NotificationCompat.Builder;
 import android.util.Log;
 import android.widget.Toast;
+
+import net.osmand.PlatformUtil;
+import net.osmand.plus.notifications.OsmandNotification;
+import net.osmand.plus.osmo.OsMoPlugin;
 
 public class NavigationService extends Service implements LocationListener {
 
@@ -99,6 +101,8 @@ public class NavigationService extends Service implements LocationListener {
 		if (usedBy == 0) {
 			final Intent serviceIntent = new Intent(ctx, NavigationService.class);
 			ctx.stopService(serviceIntent);
+		} else {
+			((OsmandApplication) getApplication()).getNotificationHelper().refreshNotifications();
 		}
 	}
 
@@ -147,9 +151,14 @@ public class NavigationService extends Service implements LocationListener {
 
 		// registering icon at top level
 		// Leave icon visible even for navigation for proper display
-		Builder ntf = app.getNotificationHelper().buildNotificationInStatusBar();
-		if (ntf != null) {
-			startForeground(NotificationHelper.NOTIFICATION_SERVICE_ID, ntf.build());
+		OsmandNotification osmandNotification = app.getNotificationHelper().getTopNotification();
+		if (osmandNotification != null) {
+			Builder notification = osmandNotification.buildNotification();
+			if (notification != null) {
+				Notification n = notification.build();
+				osmandNotification.setupNotification(n);
+				startForeground(osmandNotification.getUniqueId(), n);
+			}
 		}
 		return START_REDELIVER_INTENT;
 	}
@@ -170,7 +179,8 @@ public class NavigationService extends Service implements LocationListener {
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		((OsmandApplication) getApplication()).setNavigationService(null);
+		final OsmandApplication app = (OsmandApplication) getApplication();
+		app.setNavigationService(null);
 		usedBy = 0;
 		// remove updates
 		LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
@@ -190,8 +200,13 @@ public class NavigationService extends Service implements LocationListener {
 		AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
 		alarmManager.cancel(pendingIntent);
 		// remove notification
-		((OsmandApplication) getApplication()).getNotificationHelper().removeServiceNotification();
 		stopForeground(Boolean.TRUE);
+		app.runInUIThread(new Runnable() {
+			@Override
+			public void run() {
+				app.getNotificationHelper().refreshNotifications();
+			}
+		}, 500);
 	}
 
 	@Override
@@ -242,7 +257,7 @@ public class NavigationService extends Service implements LocationListener {
 					plugin.getTracker().disableTracker();
 				}
 			}
-			app.getNotificationHelper().removeServiceNotificationCompletely();
+			//app.getNotificationHelper().removeNotifications();
 			NavigationService.this.stopSelf();
 		}
 	}
