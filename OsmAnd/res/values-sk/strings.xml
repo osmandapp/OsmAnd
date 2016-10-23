@@ -2458,4 +2458,10 @@ Ak potrebuje pomoc s aplikáciou OsmAnd, kontaktuje podporu: support@osmand.net.
     <string name="christmas_poi">Vianočné body záujmu</string>
     <string name="christmas_desc">Ako prípravu na Vianoce a Nový rok môžete zobraziť body záujmu spojené s Vianocami: Vianočné stromčeky, trhy.</string>
     <string name="christmas_desc_q">Zobraziť vianočné objekty?</string>
+    <string name="shared_string_continue">Pokračovať</string>
+    <string name="shared_string_pause">Pozastaviť</string>
+    <string name="shared_string_trip">Výlet</string>
+    <string name="shared_string_recorded">Zaznamenané</string>
+    <string name="shared_string_record">Záznam</string>
+    <string name="gpx_logging_no_data">Žiadne údaje</string>
     </resources>
