@@ -15,6 +15,7 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
+import net.osmand.plus.notifications.OsmandNotification.NotificationType;
 import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RouteProvider.RouteService;
@@ -28,6 +29,8 @@ import java.lang.ref.WeakReference;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+
+import static net.osmand.plus.notifications.OsmandNotification.NotificationType.NAVIGATION;
 
 public class RoutingHelper {
 	
@@ -66,6 +69,8 @@ public class RoutingHelper {
 	private static final int RECALCULATE_THRESHOLD_CAUSING_FULL_RECALCULATE_INTERVAL = 120000;
 	private Thread currentRunningJob;
 	private long lastTimeEvaluatedRoute = 0;
+	private String lastRouteCalcError;
+	private String lastRouteCalcErrorShort;
 	private long recalculateCountInInterval = 0;
 	private int evalWaitInterval = 0;
 	
@@ -105,7 +110,15 @@ public class RoutingHelper {
 	public OsmandApplication getApplication() {
 		return app;
 	}
-	
+
+	public String getLastRouteCalcError() {
+		return lastRouteCalcError;
+	}
+
+	public String getLastRouteCalcErrorShort() {
+		return lastRouteCalcErrorShort;
+	}
+
 	public void setPauseNaviation(boolean b) {
 		this.isPauseNavigation = b;
 		if (b) {
@@ -472,6 +485,7 @@ public class RoutingHelper {
 				// that node already passed
 				route.updateCurrentRoute(newCurrentRoute + 1);
 				currentRoute = newCurrentRoute + 1;
+				app.getNotificationHelper().refreshNotification(NotificationType.NAVIGATION);
 			} else {
 				break;
 			}
@@ -830,7 +844,9 @@ public class RoutingHelper {
 				synchronized (RoutingHelper.this) {
 					currentRunningJob = this;
 				}
-			} 
+			}
+			lastRouteCalcError = null;
+			lastRouteCalcErrorShort = null;
 			RouteCalculationResult res = provider.calculateRouteImpl(params);
 			if (params.calculationProgress.isCancelled) {
 				synchronized (RoutingHelper.this) {
@@ -856,17 +872,24 @@ public class RoutingHelper {
 			}
 			if(res.isCalculated()){
 				setNewRoute(prev, res, params.start);
-				
+
 			} else if (onlineSourceWithoutInternet) {
-				showMessage(app.getString(R.string.error_calculating_route)
-						+ ":\n" + app.getString(R.string.internet_connection_required_for_online_route)); //$NON-NLS-1$
+				lastRouteCalcError = app.getString(R.string.error_calculating_route)
+						+ ":\n" + app.getString(R.string.internet_connection_required_for_online_route);
+				lastRouteCalcErrorShort = app.getString(R.string.error_calculating_route);
+				showMessage(lastRouteCalcError); //$NON-NLS-1$
 			} else {
 				if (res.getErrorMessage() != null) {
-					showMessage(app.getString(R.string.error_calculating_route) + ":\n" + res.getErrorMessage()); //$NON-NLS-1$
+					lastRouteCalcError = app.getString(R.string.error_calculating_route) + ":\n" + res.getErrorMessage();
+					lastRouteCalcErrorShort = app.getString(R.string.error_calculating_route);
+					showMessage(lastRouteCalcError); //$NON-NLS-1$
 				} else {
-					showMessage(app.getString(R.string.empty_route_calculated));
+					lastRouteCalcError = app.getString(R.string.empty_route_calculated);
+					lastRouteCalcErrorShort = app.getString(R.string.empty_route_calculated);
+					showMessage(lastRouteCalcError);
 				}
 			}
+			app.getNotificationHelper().refreshNotification(NAVIGATION);
 			lastTimeEvaluatedRoute = System.currentTimeMillis();
 		}
 

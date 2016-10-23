@@ -59,7 +59,13 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		ApplicationMode.regWidgetVisibility("monitoring", am.toArray(new ApplicationMode[am.size()]));
 		settings = app.getSettings();
 	}
-	
+
+	@Override
+	public void disable(OsmandApplication app) {
+		super.disable(app);
+		app.getNotificationHelper().refreshNotifications();
+	}
+
 	@Override
 	public void updateLocation(Location location) {
 		liveMonitoringHelper.updateLocation(location);
@@ -334,9 +340,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 			@Override
 			protected void onPreExecute() {
 				isSaving = true;
-				if (monitoringControl != null) {
-					monitoringControl.updateInfo(null);
-				}
+				updateControl();
 			}
 
 			@Override
@@ -346,7 +350,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 					helper.saveDataToGpx(app.getAppCustomization().getTracksDir());
 					helper.close();
 				} finally {
-					app.getNotificationHelper().showNotification();
+					app.getNotificationHelper().showNotifications();
 				}
 				return null;
 			}
@@ -354,18 +358,21 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 			@Override
 			protected void onPostExecute(Void aVoid) {
 				isSaving = false;
-				if (monitoringControl != null) {
-					monitoringControl.updateInfo(null);
-				}
+				updateControl();
 			}
 		}, (Void) null);
+	}
+
+	public void updateControl() {
+		if (monitoringControl != null) {
+			monitoringControl.updateInfo(null);
+		}
 	}
 
 	public void stopRecording(){
 		settings.SAVE_GLOBAL_TRACK_TO_GPX.set(false);
 		if (app.getNavigationService() != null) {
 			app.getNavigationService().stopIfNeeded(app, NavigationService.USED_BY_GPX);
-			app.getNotificationHelper().showNotification();
 		}
 	}
 

@@ -25,6 +25,7 @@ import android.widget.Toast;
 import net.osmand.CallbackWithObject;
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibilityPlugin;
+import net.osmand.data.LatLon;
 import net.osmand.map.OsmandRegions;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
@@ -56,6 +57,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintStream;
 import java.lang.Thread.UncaughtExceptionHandler;
+import java.util.ArrayList;
 import java.util.Locale;
 
 import btools.routingapp.BRouterServiceConnection;
@@ -196,7 +198,7 @@ public class OsmandApplication extends MultiDexApplication {
         if(RateUsBottomSheetDialog.shouldShow(this)) {
             osmandSettings.RATE_US_STATE.set(RateUsBottomSheetDialog.RateUsState.IGNORED);
         }
-        getNotificationHelper().removeServiceNotification();
+        getNotificationHelper().removeNotifications();
 	}
 
 	public RendererRegistry getRendererRegistry() {
@@ -430,6 +432,19 @@ public class OsmandApplication extends MultiDexApplication {
 		this.navigationService = navigationService;
 	}
 
+	public void stopNavigation() {
+		if (locationProvider.getLocationSimulation().isRouteAnimating()) {
+			locationProvider.getLocationSimulation().stop();
+		}
+		routingHelper.getVoiceRouter().interruptRouteCommands();
+		routingHelper.clearCurrentRoute(null, new ArrayList<LatLon>());
+		routingHelper.setRoutePlanningMode(false);
+		osmandSettings.LAST_ROUTING_APPLICATION_MODE = osmandSettings.APPLICATION_MODE.get();
+		osmandSettings.APPLICATION_MODE.set(osmandSettings.DEFAULT_APPLICATION_MODE.get());
+		if (osmandSettings.USE_MAP_MARKERS.get()) {
+			targetPointsHelper.removeAllWayPoints(false, false);
+		}
+	}
 
 	private void fullExit() {
 		// http://stackoverflow.com/questions/2092951/how-to-close-android-application
@@ -745,7 +760,7 @@ public class OsmandApplication extends MultiDexApplication {
 		serviceIntent.putExtra(NavigationService.USAGE_INTENT, intent);
 		serviceIntent.putExtra(NavigationService.USAGE_OFF_INTERVAL, interval);
 		startService(serviceIntent);
-		getNotificationHelper().showNotification();
+		//getNotificationHelper().showNotifications();
 	}
 
 

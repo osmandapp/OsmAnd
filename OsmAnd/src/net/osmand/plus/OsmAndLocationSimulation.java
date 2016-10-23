@@ -179,7 +179,7 @@ public class OsmAndLocationSimulation {
 		return directions.isEmpty() ? 20.0f : Math.max(20.0f, current.distanceTo(directions.get(0)) / 2 );
 	}
 
-	private void stop() {
+	public void stop() {
 		routeAnimation = null;
 	}
 

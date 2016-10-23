@@ -881,7 +881,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	protected void onStart() {
 		super.onStart();
 		wakeLockHelper.onStart(this);
-		getMyApplication().getNotificationHelper().showNotification();
+		getMyApplication().getNotificationHelper().showNotifications();
 	}
 
 	protected void setProgressDlg(Dialog progressDlg) {
@@ -901,15 +901,14 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	//		}
 	//	}
 		wakeLockHelper.onStop(this);
-		if (getMyApplication().getNavigationService() == null) {
-			getMyApplication().getNotificationHelper().removeServiceNotificationCompletely();
-		}
+		getMyApplication().getNotificationHelper().refreshNotifications();
 		super.onStop();
 	}
 
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
+		getMyApplication().getNotificationHelper().removeNotifications();
 		unregisterReceiver(screenOffReceiver);
 		FailSafeFuntions.quitRouteRestoreDialog();
 		OsmandPlugin.onMapActivityDestroy(this);
