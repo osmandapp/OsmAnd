@@ -2364,4 +2364,10 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="save_track_min_distance_descr">Indiquez une distance minimale à partir de laquelle déclencher l\'enregistrement</string>
     <string name="save_track_precision">Seuils d\'enregistrement</string>
     <string name="save_track_precision_descr">Sélectionnez un seuil minimal pour l’enregistrement</string>
+    <string name="shared_string_continue">Continuer</string>
+    <string name="shared_string_pause">Pause</string>
+    <string name="shared_string_trip">Itinéraire</string>
+    <string name="shared_string_recorded">Enregistré</string>
+    <string name="shared_string_record">Enregistrer</string>
+    <string name="gpx_logging_no_data">Aucune donnée</string>
     </resources>
