@@ -2590,4 +2590,10 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="save_track_min_distance_descr">اختر حد المسافة الأدنى لتشغيل التسجيل</string>
     <string name="save_track_precision">تسجيل حد الدقة الأدنى</string>
     <string name="save_track_precision_descr">اختر حد دقة التسجيل الأدنى المقبول</string>
+    <string name="shared_string_continue">واصل</string>
+    <string name="shared_string_pause">إيقاف</string>
+    <string name="shared_string_trip">رحلة</string>
+    <string name="shared_string_recorded">مسجل</string>
+    <string name="shared_string_record">تسيجل</string>
+    <string name="gpx_logging_no_data">لا توجد بيانات</string>
     </resources>
