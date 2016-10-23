@@ -2678,6 +2678,10 @@ Als je hulp nodig hebt met OsmAnd: neem contact op met ons support team: support
     <string name="save_track_min_speed_descr">Kies de snelheid waarboven het loggen wordt geactiveerd</string>
     <string name="save_track_min_distance">Minimum afstand om te registereren</string>
     <string name="save_track_min_distance_descr">Kies de afstand waarboven het loggen wordt geactiveerd</string>
-    <string name="save_track_precision">Nauwkeurigheid van het registreren</string>
+    <string name="save_track_precision">Minimale nauwkeurigheid van het registreren</string>
     <string name="save_track_precision_descr">Minimaal gewenste nauwkeurigheid van het loggen instellen</string>
+    <string name="shared_string_continue">Doorgaan</string>
+    <string name="shared_string_pause">Pauze</string>
+    <string name="shared_string_trip">Reis</string>
+    <string name="gpx_logging_no_data">Geen gegevens</string>
     </resources>
