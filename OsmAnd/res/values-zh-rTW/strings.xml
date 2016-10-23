@@ -2597,7 +2597,7 @@ Facebook：https://www.facebook.com/osmandapp
     <string name="shared_string_filters">篩選</string>
     <string name="selected_categories">已選取分類</string>
     <string name="subcategories">子分類</string>
-    <string name="create_custom_poi">建立自訂 POI</string>
+    <string name="create_custom_poi">建立自訂篩選</string>
     <string name="custom_search">自訂搜尋</string>
     <string name="apply_filters">套用篩選</string>
     <string name="save_filter">儲存篩選</string>
@@ -2608,7 +2608,16 @@ Facebook：https://www.facebook.com/osmandapp
     <string name="search_hint">輸入城市、地址、poi 名稱</string>
     <string name="translit_name_if_miss">如果 %1$s 的名稱缺失則音譯</string>
     <string name="rendering_attr_contourColorScheme_description">等高線的色彩調配</string>
-    <string name="save_track_min_speed">記錄最小的速度</string>
-    <string name="save_track_min_speed_descr">選擇最小速度以觸發記錄</string>
+    <string name="save_track_min_speed">記錄最低的速度</string>
+    <string name="save_track_min_speed_descr">選擇最低速度以觸發記錄</string>
     <string name="save_track_min_distance">記錄最短距離</string>
+    <string name="save_track_min_distance_descr">選擇最短距離以觸發記錄</string>
+    <string name="save_track_precision">記錄最低的精確度</string>
+    <string name="save_track_precision_descr">選擇最低可容忍的記錄精確度</string>
+    <string name="christmas_poi">聖誕節 POI</string>
+    <string name="christmas_desc_q">顯示聖誕節 POI？</string>
+    <string name="rendering_value_light_brown_name">淺棕色</string>
+    <string name="rendering_value_dark_brown_name">深棕色</string>
+    <string name="rendering_attr_contourColorScheme_name">等高線的顏色調配</string>
+    <string name="rendering_attr_surfaceIntegrity_name">路面的整體狀態</string>
     </resources>
