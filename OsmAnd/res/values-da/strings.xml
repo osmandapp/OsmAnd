@@ -2671,15 +2671,15 @@ Hvis du  ønsker at støtte OsmAnd og OSM, er dette en god måde at gøre det p�
     <string name="rendering_value_light_brown_name">Lysebrun</string>
     <string name="rendering_value_dark_brown_name">Mørkebrun</string>
     <string name="rendering_attr_contourColorScheme_name">Farveskema for konturer</string>
-    <string name="rendering_attr_surfaceIntegrity_name">Vejoverflade integritet</string>
+    <string name="rendering_attr_surfaceIntegrity_name">Vejoverfladens beskaffenhed</string>
     <string name="christmas_poi">Jule interessepunkter (IP)</string>
     <string name="christmas_desc">I anledning af jul og nytår, vælg at få vist interessepunkter tilknyttet jul: juletræer, markeder.</string>
     <string name="christmas_desc_q">Vis jule-interessepunkter (IP)?</string>
     <string name="save_track_min_speed">Minimumshastighed for logning</string>
-    <string name="save_track_min_speed_descr">Vælg minimumshastighed, som logning vil blive udløst ved</string>
+    <string name="save_track_min_speed_descr">Vælg mindste hastighed, som logning udføres ved</string>
     <string name="save_track_min_distance">Minimumsafstand for logning</string>
-    <string name="save_track_min_distance_descr">Vælg minimumsafstand som logning vil blive udløst ved</string>
-    <string name="save_track_precision">Mindste præcision for logning</string>
-    <string name="save_track_precision_descr">"Vælg mindste acceptable  præcision for logning"</string>
+    <string name="save_track_min_distance_descr">Vælg mindste afstand som logning udføres ved</string>
+    <string name="save_track_precision">Mindste nøjagtighed for logning</string>
+    <string name="save_track_precision_descr">Vælg mindste acceptable nøjagtighed for logning</string>
     <string name="rendering_attr_contourColorScheme_description">Farveskema for konturer</string>
     </resources>
