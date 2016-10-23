@@ -1274,7 +1274,7 @@
 	<string name="poi_theatre_genre_cabaret">Kabarett</string>
 	<string name="poi_theatre_genre_comedy">Comedy</string>
 	<string name="poi_theatre_genre_marionette">Puppenspiel</string>
-	<string name="poi_theatre_genre_ballet">Ballet</string>
+	<string name="poi_theatre_genre_ballet">Ballett</string>
 	<string name="poi_theatre_genre_shadow_play">Schattenspiel</string>
 
 	<string name="poi_product_leather">Produkt: Leder</string>
@@ -3062,7 +3062,7 @@
 	<string name="poi_fee">Gebühr</string>
 	<string name="poi_smoking">Rauchen</string>
 	<string name="poi_delivery">Lieferung</string>
-	<string name="poi_takeaway">Zum mitnehmen</string>
+	<string name="poi_takeaway">Zum Mitnehmen</string>
 	<string name="poi_cocktails">Cocktails</string>
 	<string name="poi_microbrewery">Kleinbrauerei</string>
 	<string name="poi_recycling_accepted_waste">Angenommene Abfälle</string>
@@ -3131,7 +3131,7 @@
 	<string name="poi_cuisine_crepe">Crepes</string>
 	<string name="poi_cuisine_ramen">Ramen</string>
 	<string name="poi_cuisine_breakfast">Frühstück</string>
-	<string name="poi_cuisine_beef_bowl">Gyudon</string>
+	<string name="poi_cuisine_beef_bowl">Gyudon (Rindfleisch Schüssel)</string>
 	<string name="poi_cuisine_steak">Steak</string>
 	<string name="poi_cuisine_tapas">Tapas</string>
 	<string name="poi_cuisine_curry">Curry</string>
@@ -3147,7 +3147,7 @@
 	<string name="poi_cuisine_tea_shop">Teeladen</string>
 	<string name="poi_cuisine_soup">Suppe</string>
 	<string name="poi_cuisine_hotdog">Hotdog</string>
-	<string name="poi_cuisine_deli">Deli</string>
+	<string name="poi_cuisine_deli">Feinkost</string>
 	<string name="poi_cuisine_salad">Salat</string>
 	<string name="poi_cuisine_frozen_yogurt">Gefrorener Joghurt</string>
 	<string name="poi_cuisine_fried_food">Frittiertes Essen</string>
@@ -3293,7 +3293,7 @@
 <string name="poi_cuisine_doner">Döner Kebab (shawarma)</string>
 	<string name="poi_cuisine_shawarma">Shawarma</string>
 
-	<string name="poi_diet">Nahrung</string>
+	<string name="poi_diet">Speisen</string>
 	<string name="poi_social_facility_type">Typ</string>
 	<string name="poi_cuisine_sagardotegia">Sagardotegie</string>
 	<string name="poi_cuisine_sub">Baguetterie</string>
