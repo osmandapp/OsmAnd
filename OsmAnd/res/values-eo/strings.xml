@@ -2482,4 +2482,10 @@ Se vi bezonas helpon pri OsmAnd aplikaĵo, bonvolu kontakti nian helpantaron: su
     <string name="christmas_poi">Kristnaskaj interesejoj</string>
     <string name="christmas_desc">Atendante Kristnaskon kaj la novan jaron, vi povas aktivigi vidigadon la interesejoj rilataj al Kristnasko: kristnaskaj arbeoj, foiroj, ktp.</string>
     <string name="christmas_desc_q">Ĉu montri kristnaskaj interesejoj?</string>
+    <string name="shared_string_continue">Pluigi</string>
+    <string name="shared_string_pause">Paŭzigi</string>
+    <string name="shared_string_trip">Kurso</string>
+    <string name="shared_string_recorded">Registrita</string>
+    <string name="shared_string_record">Registri</string>
+    <string name="gpx_logging_no_data">Sen datumoj</string>
     </resources>
