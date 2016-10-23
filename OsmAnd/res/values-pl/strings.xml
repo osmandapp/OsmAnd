@@ -2656,4 +2656,10 @@ Jeśli potrzebujesz pomocy podczas używania OsmAnd, prosimy o kontakt z naszym 
     <string name="save_track_precision_descr">Wybierz minimalną akceptowalną precyzję rejestrowania</string>
     <string name="christmas_desc">Oczekując Świąt Bożego Narodzenia i Nowego Roku, możesz włączyć wyświetlanie użytecznych miejsc związanych ze Świętami: choinki, jarmarki.</string>
     <string name="christmas_desc_q">Pokazywać świąteczne miejsca?</string>
+    <string name="shared_string_continue">Kontynuuj</string>
+    <string name="shared_string_pause">Wstrzymaj</string>
+    <string name="shared_string_trip">Trasa</string>
+    <string name="shared_string_recorded">Zarejestrowana</string>
+    <string name="shared_string_record">Zarejestruj</string>
+    <string name="gpx_logging_no_data">Bez danych</string>
     </resources>
