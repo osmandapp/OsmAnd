@@ -146,7 +146,7 @@ Actuellement {2} Mo sont disponibles.</string>
     <string name="local_index_items_backuped">%1$d sur %2$d élément(s) désactivé(s).</string>
     <string name="local_index_items_deleted">%1$d sur %2$d éléments supprimés.</string>
     <string name="local_index_items_restored">%1$d sur %2$d éléments restaurés.</string>
-    <string name="local_index_no_items_to_do">Pas d\'éléments à %1$s</string>
+    <string name="local_index_no_items_to_do">Aucun élément à %1$s</string>
     <string name="local_index_action_do">Vous allez %1$s %2$s éléments. Continuer ?</string>
     <string name="local_index_descr_title">Gérer les données hors-ligne</string>
     <string name="local_index_mi_restore">Restaurer</string>
@@ -770,8 +770,8 @@ Actuellement {2} Mo sont disponibles.</string>
     <string name="favourites_edit_dialog_name">Nom</string>
     <string name="favourites_edit_dialog_category">Catégorie</string>
     <string name="navigate_point_format_D">DDD.DDDDD</string>
-    <string name="navigate_point_format_DM">DDD MM.MMMMM</string>
-    <string name="navigate_point_format_DMS">DDD MM SS.SSSSS</string>
+    <string name="navigate_point_format_DM">DDD:MM.MMMMM</string>
+    <string name="navigate_point_format_DMS">DDD:MM:SS.SSSSS</string>
     <string name="local_index_routing_data">Données de navigation</string>
     <string name="navigate_point_format">Format</string>
     <string name="poi_search_desc">Recherche par point d\'intérêt</string>
@@ -955,7 +955,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="download_roads_only_maps">Carte routière uniquement</string>
     <string name="incomplete_locale">incomplet</string>
     <string name="no_buildings_found">Aucun numéro de bâtiment trouvé.</string>
-    <string name="search_villages_and_postcodes">Rechercher plus de villages et codes postaux</string>
+    <string name="search_villages_and_postcodes">Rechercher plus de villes et codes postaux</string>
     <string name="route_descr_lat_lon">Lat %1$.3f lon %2$.3f</string>
     
 
@@ -1308,7 +1308,10 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="share_route_subject">Itinéraire partagé grâce à OsmAnd</string>
     <string name="osmo_settings_uuid">Identifiant unique de l\'appareil</string>
     <string name="osmo_settings_descr">Configurer les paramètres de suivi et définir votre canal de suivi personnel</string>
-    <string name="osmo_plugin_description">"Ce greffon offre la possibilité d\'un suivi en temps-réel via OpenStreetMap, voir http://osmo.mobi.\n\nVous avez la possibilité de suivre tous les appareils d\'un groupe en temps réel. Ce greffon permet aussi de voir les points et trajets partagés avec le groupe auquel vous appartenez.\n\nSi le groupe n\'a pas été supprimé depuis des mois, réactivez-le en suivant les règles de création de groupe sur le site OsMo.mobi "</string>
+    <string name="osmo_plugin_description">"Ce greffon offre la possibilité d\'un suivi en temps-réel via OpenStreetMap Monitoring, voir http://osmo.mobi.
+
+Vous pouvez suivre tous les appareils d\'un groupe en temps réel. Ce greffon permet aussi de voir les points et trajets du groupe dont vous êtes membre.
+ "</string>
     <string name="osmo_plugin_name">Suivi OpenStreetMap</string>
     <string name="osmo_settings">OsMo</string>
 
@@ -1449,7 +1452,21 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="none_selected_gpx">Aucun fichier GPX sélectionné. Pour sélectionner, presser longuement sur une trace disponible.</string>
 
     <string name="local_index_select_gpx_file">Sélectionnez pour afficher</string>
-    <string name="osmo_group_information_desc">" - En créant un groupe donnez-lui un nom et remplissez la description\n- Depuis l\'application les groupes sont créés uniquement avec le type Simple, apprenez-en plus sur https://osmo.mobi/g/new\n- A partir d\'un site vous pouvez gérer un groupe, pour créer des trajets et points disponibles pour le groupe\n- Nous ne cautionnons pas les groupes avec un seul utilisateur, si ce n\'est un groupe POI\n- Les groupes privés sont limités à 8 personnes.\n- Une version plus détaillé du contrat se trouve sur le site OsMo.mobi\n- Si vous souhaitez créer un groupe sous d\'autres conditions, veuillez contacter le support: osmo.mobi@gmail.com "</string>
+    <string name="osmo_group_information_desc">"
+ - Créez un groupe : donnez-lui un nom et indiquez une description
+
+- Depuis l\'application les groupes sont créés uniquement avec le type Simple, apprenez-en plus sur https://osmo.mobi/g/new
+
+- Depuis le site web vous pouvez gérer les groupes, créer des trajets et points disponibles pour les groupes
+
+- Nous ne cautionnons pas les groupes avec un seul membre, sauf s\'il s\'agit d\'un groupe Points d\'Intérêt
+
+- Les groupes privés sont limités à 8 membres
+
+- Une version plus détaillée du contrat est disponible sur le site web OsMo.mobi
+
+- Si vous souhaitez créer un groupe sous d\'autres conditions, veuillez contacter le support : osmo.mobi@gmail.com
+ "</string>
     <string name="osmo_group_information">Veuillez lire ceci avant de créer un groupe !</string>
     <string name="osmo_not_signed_in">L\'authentification OsMo a échoué</string>
     <string name="osmo_gpx_points_downloaded">Points OsMo %1$s téléchargés.</string>
@@ -1982,7 +1999,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="faq_item">FAQ</string>
     <string name="faq_item_description">Foire aux questions</string>
     <string name="map_viewing_item">Affichage de la carte</string>
-    <string name="search_on_the_map_item">Rechercher de carte</string>
+    <string name="search_on_the_map_item">Rechercher sur la carte</string>
     <string name="planning_trip_item">Préparer un trajet</string>
 
     
