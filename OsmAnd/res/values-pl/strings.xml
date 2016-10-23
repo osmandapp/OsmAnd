@@ -2662,4 +2662,25 @@ Jeśli potrzebujesz pomocy podczas używania OsmAnd, prosimy o kontakt z naszym 
     <string name="shared_string_recorded">Zarejestrowana</string>
     <string name="shared_string_record">Zarejestruj</string>
     <string name="gpx_logging_no_data">Bez danych</string>
+    <string name="release_2_5">"
+ • Klikalne ikony na mapie
+
+
+• Wszechstronna selektywna wyszukiwarka użytecznych miejsc: wyszukuj restauracji po kuchni, kempingów według potrzeb
+
+
+• Nowy styl mapy \'OsmAnd Topo\' dla rowerzystów i pieszych turystów
+
+
+• Ulepszone rejestrowanie tras (nowe opcje)
+
+
+• Ulepszone powiadomienia nawigacji (Android Wear)
+
+
+• Mnóstwo innych ulepszeń i poprawek błędów
+
+
+i więcej...
+ "</string>
     </resources>
