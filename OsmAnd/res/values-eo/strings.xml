@@ -2488,4 +2488,25 @@ Se vi bezonas helpon pri OsmAnd aplikaĵo, bonvolu kontakti nian helpantaron: su
     <string name="shared_string_recorded">Registrita</string>
     <string name="shared_string_record">Registri</string>
     <string name="gpx_logging_no_data">Sen datumoj</string>
+    <string name="release_2_5">"
+ • Alklakeblaj piktogramoj sur la mapo
+
+
+• Ebloplena filtrebla serĉado de interesejoj: serĉu restoraciojn laŭ kuirarto, kampadejojn kun difinitaj ebloj
+
+
+• Nova \'OsmAnd Topo\' map-aspekto por biciklistoj kaj piediradaj turistoj
+
+
+• Plibonigita registrado de kurso (novaj agordoj)
+
+
+• Plibonigitaj navigadaj sciigoj (Android Wear)
+
+
+• Multe da aliaj plibonigoj kaj korektoj
+
+
+kaj pli...
+ "</string>
     </resources>
