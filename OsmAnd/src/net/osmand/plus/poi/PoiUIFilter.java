@@ -521,24 +521,25 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 	public void updateTypesToAccept(AbstractPoiType pt) {
 		pt.putTypes(acceptedTypes);
 		if (pt instanceof PoiType && ((PoiType) pt).isAdditional() && ((PoiType) pt).getParentType() != null) {
-			fillPoiAdditionals(((PoiType) pt).getParentType());
+			fillPoiAdditionals(((PoiType) pt).getParentType(), true);
 		} else {
-			fillPoiAdditionals(pt);
+			fillPoiAdditionals(pt, true);
 		}
+		addOtherPoiAdditionals();
 	}
 
-	private void fillPoiAdditionals(AbstractPoiType pt) {
+	private void fillPoiAdditionals(AbstractPoiType pt, boolean allFromCategory) {
 		for (PoiType add : pt.getPoiAdditionals()) {
 			poiAdditionals.put(add.getKeyName().replace('_', ':').replace(' ', ':'), add);
 			poiAdditionals.put(add.getTranslation().replace(' ', ':').toLowerCase(), add);
 		}
-		if (pt instanceof PoiCategory) {
+		if (pt instanceof PoiCategory && allFromCategory) {
 			for (PoiFilter pf : ((PoiCategory) pt).getPoiFilters()) {
-				fillPoiAdditionals(pf);
+				fillPoiAdditionals(pf, true);
 			}
-		} else if (pt instanceof PoiFilter) {
+		} else if (pt instanceof PoiFilter && !(pt instanceof PoiCategory)) {
 			for (PoiType ps : ((PoiFilter) pt).getPoiTypes()) {
-				fillPoiAdditionals(ps);
+				fillPoiAdditionals(ps, false);
 			}
 		}
 	}
@@ -548,15 +549,23 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 		poiAdditionals.clear();
 		while (e.hasNext()) {
 			Entry<PoiCategory, LinkedHashSet<String>> pc = e.next();
-			fillPoiAdditionals(pc.getKey());
+			fillPoiAdditionals(pc.getKey(), pc.getValue() == null);
 			if (pc.getValue() != null) {
 				for (String s : pc.getValue()) {
 					PoiType subtype = poiTypes.getPoiTypeByKey(s);
 					if (subtype != null) {
-						fillPoiAdditionals(subtype);
+						fillPoiAdditionals(subtype, false);
 					}
 				}
 			}
+		}
+		addOtherPoiAdditionals();
+	}
+
+	private void addOtherPoiAdditionals() {
+		for (PoiType add : poiTypes.getOtherMapCategory().getPoiAdditionalsCategorized()) {
+			poiAdditionals.put(add.getKeyName().replace('_', ':').replace(' ', ':'), add);
+			poiAdditionals.put(add.getTranslation().replace(' ', ':').toLowerCase(), add);
 		}
 	}
 
@@ -603,7 +612,7 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 
 	public void selectSubTypesToAccept(PoiCategory t, LinkedHashSet<String> accept) {
 		acceptedTypes.put(t, accept);
-		fillPoiAdditionals(t);
+		updatePoiAdditionals();
 	}
 
 	public void setTypeToAccept(PoiCategory poiCategory, boolean b) {
