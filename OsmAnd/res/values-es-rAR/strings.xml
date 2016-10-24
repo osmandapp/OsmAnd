@@ -2463,4 +2463,25 @@ Si necesitas ayuda con la aplicación OsmAnd, contacte con nuestro equipo de sop
     <string name="shared_string_recorded">Grabado</string>
     <string name="shared_string_record">Grabar</string>
     <string name="gpx_logging_no_data">Sin datos</string>
+    <string name="release_2_5">"
+ • Se pueden pulsar los iconos del mapa
+
+
+ • Poderoso filtro de búsqueda PDI: busca restaurantes por gastronomía o campamentos con necesidades especificas
+
+
+ • Nuevo estilo topográfico para ciclistas y senderistas
+
+
+ • Mejoras en la grabación de viaje (nuevos ajustes)
+
+
+ • Mejoras en la notificación de navegación (Android Wear)
+
+
+ • Muchas otras mejoras y correcciones de errores
+
+
+ y más…
+ "</string>
     </resources>
