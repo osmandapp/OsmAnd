@@ -2611,7 +2611,7 @@ Se ami OsmAnd e OSM e vuoi sostenerli, questo è un modo perfetto per farlo.</st
     <string name="donation_to_osm">Donazione per la comunità di OpenStreetMap</string>
     <string name="donation_to_osm_desc">Parte della tua donazione verrà inviata agli utenti che fanno modifiche su OpenStreetMap. Il costo della sottoscrizione rimane inalterato.</string>
     <string name="osm_live_subscription_desc">La sottoscrizione attiva aggiornamenti orari, quotidiani e settimanali e la possibilità di scaricare senza limiti tutte le mappe del mondo.</string>
-    <string name="get_it">Ottieni</string>
+    <string name="get_it">Ottienilo</string>
     <string name="get_for">Ottieni per %1$s</string>
     <string name="get_for_month">Ottieni per %1$s mese</string>
     <string name="osm_live_banner_desc">Ottieni download delle mappe illimitati e aggiornamenti più frequenti di una volta al mese: a ogni ora, giorno o settimana.</string>
@@ -2634,24 +2634,24 @@ Se ami OsmAnd e OSM e vuoi sostenerli, questo è un modo perfetto per farlo.</st
     <string name="clear_tile_data">Cancella tutte le mattonelle</string>
     <string name="driving_region_australia">Australia</string>
     <string name="lang_kab">Cabila</string>
-    <string name="translit_names">Nomi traslitterati</string>
+    <string name="translit_names">Traslittera i nomi</string>
     <string name="edit_filter">Modifica il filtro</string>
     <string name="subcategories">Sottocategorie</string>
     <string name="selected_categories">Seleziona le categorie</string>
-    <string name="create_custom_poi">Crea un POI personalizzato</string>
+    <string name="create_custom_poi">Crea un filtro personalizzato</string>
     <string name="custom_search">Ricerca personalizzata</string>
     <string name="shared_string_filters">Filtri</string>
     <string name="apply_filters">Applica i filtri</string>
     <string name="save_filter">Salva il filtro</string>
     <string name="delete_filter">Cancella il filtro</string>
     <string name="new_filter">Nuovo filtro</string>
-    <string name="new_filter_desc">Immetti il nome del tuo nuovo filtro. Lo troverai nella lista delle Categorie.</string>
+    <string name="new_filter_desc">Inserisci il nome del nuovo filtro. Lo troverai nella lista delle Categorie.</string>
     <string name="christmas_poi">POI di Natale</string>
-    <string name="christmas_desc">Anticipando le vacanze di Natale e Capodanno, è possibile scegliere di visualizzare il POI associato al Natale: l\'albero di Natale, i mercati.</string>
+    <string name="christmas_desc">Anticipando le vacanze di Natale e Capodanno, è possibile scegliere di visualizzare i PDI associati al Natale: l\'albero di Natale, i mercati.</string>
     <string name="christmas_desc_q">Mostrare POI di Natale?</string>
     <string name="rendering_value_light_brown_name">Marrone chiaro</string>
     <string name="rendering_value_dark_brown_name">Marrone scuro</string>
-    <string name="rendering_attr_surfaceIntegrity_name">integrità superficiale stradale</string>
+    <string name="rendering_attr_surfaceIntegrity_name">Integrità della superficie stradale</string>
     <string name="save_track_min_speed_descr">Scegli la velocità minima a cui verrà attivata la registrazione</string>
     <string name="save_track_min_distance">Distanza minima di registrazione</string>
     <string name="save_track_min_distance_descr">Scegliere la distanza minima che verrà attivata la registrazione</string>
@@ -2686,7 +2686,7 @@ Se ami OsmAnd e OSM e vuoi sostenerli, questo è un modo perfetto per farlo.</st
 
  e altro…
  "</string>
-    <string name="rendering_attr_contourColorScheme_description">Schema del colore del contorno</string>
+    <string name="rendering_attr_contourColorScheme_description">Schema di colore dei contorni</string>
     <string name="save_track_min_speed">Velocità minima di registrazione</string>
     <string name="translit_name_if_miss">Traslittera se manca il nome in %1$s</string>
     </resources>
