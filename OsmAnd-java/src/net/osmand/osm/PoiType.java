@@ -13,7 +13,6 @@ public class PoiType extends AbstractPoiType {
 	private String osmTag2;
 	private String osmValue;
 	private String osmValue2;
-	private boolean poiAdditionalReference;
 	private boolean filterOnly;
 
 	
@@ -94,14 +93,6 @@ public class PoiType extends AbstractPoiType {
 
 	public void setOsmValue2(String osmValue2) {
 		this.osmValue2 = osmValue2;
-	}
-
-	public boolean isPoiAdditionalReference() {
-		return poiAdditionalReference;
-	}
-
-	public void setPoiAdditionalReference(boolean poiAdditionalReference) {
-		this.poiAdditionalReference = poiAdditionalReference;
 	}
 
 	public boolean isFilterOnly() {

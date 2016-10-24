@@ -453,11 +453,9 @@ public class MapPoiTypes {
 			for (String category : entry.getValue()) {
 				List<PoiType> poiAdditionals = categoryPoiAdditionalMap.get(category);
 				if (poiAdditionals != null) {
-					boolean reference = additionalCategoryOriginMap.get(category) != entry.getKey();
 					for (PoiType poiType : poiAdditionals) {
-						poiType.setPoiAdditionalReference(reference);
+						buildPoiAdditionalReference(poiType, entry.getKey());
 					}
-					entry.getKey().addPoiAdditionalsCategorized(poiAdditionals);
 				}
 			}
 		}
@@ -466,6 +464,55 @@ public class MapPoiTypes {
 		log.info("Time to init poi types " + (System.currentTimeMillis() - time)); //$NON-NLS-1$
 	}
 
+	private PoiType buildPoiAdditionalReference(PoiType poiAdditional, AbstractPoiType parent) {
+		PoiCategory lastCategory = null;
+		PoiFilter lastFilter = null;
+		PoiType lastType = null;
+		PoiType ref = null;
+		if (parent instanceof PoiCategory) {
+			lastCategory = (PoiCategory) parent;
+			ref = new PoiType(this, lastCategory, null, poiAdditional.getKeyName());
+		} else if (parent instanceof PoiFilter) {
+			lastFilter = (PoiFilter) parent;
+			ref = new PoiType(this, lastFilter.getPoiCategory(), lastFilter, poiAdditional.getKeyName());
+		} else if (parent instanceof PoiType) {
+			lastType = (PoiType) parent;
+			ref = new PoiType(this, lastType.getCategory(), lastType.getFilter(), poiAdditional.getKeyName());
+		}
+		if (ref == null) {
+			return null;
+		}
+		if (poiAdditional.isReference()) {
+			ref.setReferenceType(poiAdditional.getReferenceType());
+		} else {
+			ref.setReferenceType(poiAdditional);
+		}
+		ref.setBaseLangType(poiAdditional.getBaseLangType());
+		ref.setLang(poiAdditional.getLang());
+		ref.setAdditional(lastType != null ? lastType :
+				(lastFilter != null ? lastFilter : lastCategory));
+		ref.setTopVisible(poiAdditional.isTopVisible());
+		ref.setText(poiAdditional.isText());
+		ref.setOrder(poiAdditional.getOrder());
+		ref.setOsmTag(poiAdditional.getOsmTag());
+		ref.setNotEditableOsm(poiAdditional.isNotEditableOsm());
+		ref.setOsmValue(poiAdditional.getOsmValue());
+		ref.setOsmTag2(poiAdditional.getOsmTag2());
+		ref.setOsmValue2(poiAdditional.getOsmValue2());
+		ref.setPoiAdditionalCategory(poiAdditional.getPoiAdditionalCategory());
+		ref.setFilterOnly(poiAdditional.isFilterOnly());
+		if (lastType != null) {
+			lastType.addPoiAdditional(ref);
+		} else if (lastFilter != null) {
+			lastFilter.addPoiAdditional(ref);
+		} else if (lastCategory != null) {
+			lastCategory.addPoiAdditional(ref);
+		}
+		if (ref.isText()) {
+			textPoiAdditionals.add(ref);
+		}
+		return ref;
+	}
 
 	private PoiType parsePoiAdditional(XmlPullParser parser, PoiCategory lastCategory, PoiFilter lastFilter,
 			PoiType lastType, String lang, PoiType langBaseType, String poiAdditionalCategory) {
@@ -695,7 +742,7 @@ public class MapPoiTypes {
 
 
 	private void initPoiType(PoiType p) {
-		if (!p.isReference() && !p.isPoiAdditionalReference()) {
+		if (!p.isReference()) {
 			String key = null;
 			if (p.isAdditional()) {
 				key = p.isText() ? p.getRawOsmTag() :
