@@ -8,9 +8,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.PorterDuff;
-import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.v4.app.NotificationCompat;
@@ -18,7 +16,6 @@ import android.support.v4.app.NotificationCompat.BigTextStyle;
 import android.support.v4.app.NotificationCompat.Builder;
 import android.view.View;
 
-import net.osmand.AndroidUtils;
 import net.osmand.plus.NavigationService;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
@@ -147,15 +144,18 @@ public class NavigationNotification extends OsmandNotification {
 					}
 				}
 
-				TurnDrawable drawable = new TurnDrawable(app, false);
-				int height = (int) app.getResources().getDimension(android.R.dimen.notification_large_icon_height);
-				int width = (int) app.getResources().getDimension(android.R.dimen.notification_large_icon_width);
-				drawable.setBounds(0, 0, width, height);
-				drawable.setTurnType(turnType);
-				drawable.setTurnImminent(turnImminent, deviatedFromRoute);
-				turnBitmap = drawableToBitmap(drawable);
+				if (turnType != null) {
+					TurnDrawable drawable = new TurnDrawable(app, false);
+					int height = (int) app.getResources().getDimension(android.R.dimen.notification_large_icon_height);
+					int width = (int) app.getResources().getDimension(android.R.dimen.notification_large_icon_width);
+					drawable.setBounds(0, 0, width, height);
+					drawable.setTurnType(turnType);
+					drawable.setTurnImminent(turnImminent, deviatedFromRoute);
+					turnBitmap = drawableToBitmap(drawable);
+				}
 
-				notificationTitle = OsmAndFormatter.getFormattedDistance(nextTurnDistance, app) + " • " + RouteCalculationResult.toString(turnType, app);
+				notificationTitle = OsmAndFormatter.getFormattedDistance(nextTurnDistance, app)
+						+ (turnType != null ? " • " + RouteCalculationResult.toString(turnType, app) : "");
 				if (ri != null && !Algorithms.isEmpty(ri.getDescriptionRoutePart())) {
 					notificationText.append(ri.getDescriptionRoutePart());
 					notificationText.append("\n");
