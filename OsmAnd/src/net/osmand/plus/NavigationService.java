@@ -196,9 +196,13 @@ public class NavigationService extends Service implements LocationListener {
 				lock.release();
 			}
 		}
-		// remove alarm
-		AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-		alarmManager.cancel(pendingIntent);
+
+		if (pendingIntent != null) {
+			// remove alarm
+			AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+			alarmManager.cancel(pendingIntent);
+		}
+
 		// remove notification
 		stopForeground(Boolean.TRUE);
 		app.runInUIThread(new Runnable() {
