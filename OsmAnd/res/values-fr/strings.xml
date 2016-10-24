@@ -975,7 +975,10 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
 
 
     <string name="index_srtm_ele">Courbes de niveau</string>
-    <string name="srtm_plugin_description">"Ce greffon permet l\'affichage de courbes de niveau ainsi que du relief (ombres) qui s\'ajoutent au-dessus des cartes standards d\'OsmAnd. Ces informations sont particulièrement utiles pour les sportifs, les randonneurs, les cyclistes et d\'une manière générale par toutes les personnes qui souhaitent connaitre le relief.↵\n↵\nLes données globales (entre 70 degrés Nord et 70 degrés Sud) sont basées sur des mesures de SRTM (Shuttle Radar Topography Mission) et ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), un instrument d\'imagerie embarqués à bord de Terra, le satellite phare du système d\'observation de la terre de la NASA. ASTER est un effort de coopération entre la NASA, le ministère japonais de l\'économie, du commerce et de l\'industrie (METI) et \"Japan Space Systems\" (J-Spacesystems). "</string>
+    <string name="srtm_plugin_description">"Ce greffon permet l\'affichage de courbes de niveau ainsi que du relief (ombres) qui s\'ajoutent au-dessus des cartes standards d\'OsmAnd. Ces informations sont particulièrement utiles pour les sportifs, les randonneurs, les cyclistes et d\'une manière générale par toutes les personnes qui souhaitent connaitre le relief.↵
+↵
+Les données globales (entre 70 degrés Nord et 70 degrés Sud) sont basées sur des mesures de SRTM (Shuttle Radar Topography Mission) et ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), un instrument d\'imagerie embarqués à bord de Terra, le satellite phare du système d\'observation de la terre de la NASA. ASTER est un effort de coopération entre la NASA, le ministère japonais de l\'économie, du commerce et de l\'industrie (METI) et \"Japan Space Systems\" (J-Spacesystems).
+ "</string>
     <string name="srtm_plugin_name">Courbes de niveau</string>
     <string name="download_select_map_types">Autres cartes</string>
     <string name="download_srtm_maps">Courbes de niveau</string>
@@ -1729,7 +1732,12 @@ Les traces ainsi enregistrées peuvent être partagées avec vos amis ou utilis�
 \n\nCet affichage, quel que soit le niveau de zoom, fournit le maximum de détails disponibles. Chaque type de voie (routes, pistes, chemins …) est distingué de manière explicite grâce à des codes couleurs, ce qui est particulièrement utile en cas de conduite de grands véhicules. Il existe aussi des options pour l\'affichage desitinéraires cyclables ou des chemins de randonnée.\n\nIl n\'est pas nécessaire de télécharger une carte supplémentaire, cet affichage s\'appuyant sur les cartes standards.
 \n\nCet affichage peut être annulé soit en le désactivant ici, soit en modifiant le Style de la carte dans \"Configurer la carte\". "</string>
     <string name="plugin_touringview_name">Grand tourisme</string>
-	<string name="plugin_nautical_descr">"Ce greffon enrichit la carte OsmAnd ainsi que l\'application de navigation afin d\'afficher des cartes marines pour la navigation de plaisance, la voile et tous les sports nautiques.\n\nCe greffon OsmAnd affichera les marques nautiques et symboles graphiques utiles à la navigation aussi bien sur terre que le long des côtes. Chaque marque de navigation est détaillée afin de permettre son identification et de connaître sa signification (catégorie, forme, couleur, fréquence, référence, etc.).\n\nPour revenir à l’un des styles de carte classique de OsmAnd, désactivez simplement ce greffon ou modifiez le « Style de carte » dans le menu « Configurer la carte ». "</string>
+	<string name="plugin_nautical_descr">"Ce greffon enrichit la carte OsmAnd ainsi que l\'application de navigation afin d\'afficher des cartes marines pour la navigation de plaisance, la voile et tous les sports nautiques.
+
+Ce greffon OsmAnd affichera les marques nautiques et symboles graphiques utiles à la navigation aussi bien sur terre que le long des côtes. Chaque marque de navigation est détaillée afin de permettre son identification et de connaître sa signification (catégorie, forme, couleur, fréquence, référence, etc.).
+
+Pour revenir à l’un des styles de carte classique de OsmAnd, désactivez simplement ce greffon ou modifiez le « Style de carte » dans le menu « Configurer la carte ».
+ "</string>
     <string name="location_on_map">Position :\n Lat. %1$s\n Lon. %2$s</string>
     <string name="days_behind">jours passés</string>
     <string name="rename_failed">Échec du renommage.</string>
@@ -2224,7 +2232,19 @@ Actuellement {2} Mo sont disponibles.</string>
     <string name="storage_permission_restart_is_required">L\'application est maintenant autorisée à écrire sur le stockage externe. Redémarrez l\'application pour prendre en compte cette modification.</string>
     <string name="full_report">Rapport complet</string>
     <string name="open_street_map_login_and_pass">Identifiant et mot de passe OpenStreetMap</string>
-    <string name="release_2_3">" • OSM Live. Soutenez les contributeurs de carte et les développeurs pour obtenir des mises à jour horaires.\n\n • Map markers. Une nouvelle façon de marquer des emplacements sur les cartes.\n\n • Cartes OSM plus détaillées avec des spécificités par pays et beaucoup de nouvelles fonctionnalités.\n\n • Amélioration de l\'expérience utilisateur lors de la préparation d\'un trajet.\n\n • Plein d\'autres améliorations sur les cartes ou encore la recherche d\'adresses contextuelles.\n\net bien plus encore... "</string>
+    <string name="release_2_3">"
+ • OSM Live. Soutenez les contributeurs de carte et les développeurs pour obtenir des mises à jour horaires
+
+ • Marqueurs : Une nouvelle façon de marquer des emplacements sur la carte
+
+ • Cartes OSM plus détaillées avec des spécificités par pays et beaucoup de nouvelles fonctionnalités
+
+ • Amélioration de l\'expérience utilisateur lors de la préparation d\'un itinéraire
+
+ • Beaucoup d\'autres améliorations sur les menus contextuels comme la recherche d\'adresses
+
+et bien plus encore...
+ "</string>
     <string name="storage_directory_readonly_desc">L\'emplacement de stockage sélectionné est en lecture seule. L\'emplacement de stockage a donc été modifié pour utiliser la mémoire interne. Merci de sélectionner un dossier valide.</string>
     <string name="osm_user_stat">Modifications %1$s, classement %2$s, nombre total de modifications %3$s</string>
     <string name="osm_live_subscription">Abonnement à OSM Live</string>
@@ -2411,4 +2431,25 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="shared_string_recorded">Enregistré</string>
     <string name="shared_string_record">Enregistrer</string>
     <string name="gpx_logging_no_data">Aucune donnée</string>
+    <string name="release_2_5">"
+ • Icônes cliquables sur la carte
+
+
+ • Recherche avancée des Points d\'Intérêts (PI), exemple : recherche de restaurants par spécialité ...
+
+
+ • Nouveau style OsmAnd Topo pour les cyclistes et les randonneurs
+
+
+ • Amélioration de l’enregistrement de l\'itinéraire (nouveaux paramètres)
+
+
+ • Android Wear : amélioration des notifications de navigation
+
+
+ • Nombreuses améliorations et corrections de bugs
+
+
+ et bien plus…
+ "</string>
     </resources>
