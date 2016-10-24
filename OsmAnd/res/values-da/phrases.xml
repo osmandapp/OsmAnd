@@ -3281,7 +3281,7 @@
 	<string name="poi_cuisine_teriyaki">Teriyaki</string>
 
 	<string name="poi_cuisine_regional">Regional</string>
-	<string name="poi_cuisine_italian">italiensk</string>
+	<string name="poi_cuisine_italian">Italiensk</string>
 	<string name="poi_cuisine_chinese">Kinesisk</string>
 	<string name="poi_cuisine_mexican">Mexicansk</string>
 	<string name="poi_cuisine_japanese">Japansk</string>
@@ -3321,7 +3321,7 @@
 	<string name="poi_cuisine_moroccan">Marokkansk</string>
 	<string name="poi_cuisine_austrian">Østrigsk</string>
 	<string name="poi_cuisine_malaysian">Malaysisk</string>
-	<string name="poi_cuisine_irish">irsk</string>
+	<string name="poi_cuisine_irish">Irsk</string>
 	<string name="poi_cuisine_ethiopian">Etiopisk</string>
 	<string name="poi_cuisine_hungarian">Ungarsk</string>
 	<string name="poi_cuisine_lao">Laotisk</string>
