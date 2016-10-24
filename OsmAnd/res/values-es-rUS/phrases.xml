@@ -580,7 +580,7 @@
 	<string name="poi_village_green">Zona verde</string>
 	<string name="poi_trail_riding_station">Estación de equitación</string>
 	<string name="poi_cafe">Cafetería</string>
-	<string name="poi_biergarten">Terraza</string>
+	<string name="poi_biergarten">Patio cervecero</string>
 	<string name="poi_restaurant">Restaurante</string>
 	<string name="poi_fast_food">Comida rápida</string>
 	<string name="poi_bar">Bar</string>
@@ -1488,9 +1488,9 @@
 	<string name="poi_drive_through_yes">Si</string>
 	<string name="poi_drive_through_no">Sin servicio en el automóvil</string>
 	<string name="poi_brewery_additional">Nombre de cervecería</string>
-	<string name="poi_microbrewery_yes">Con cerveza artesanal</string>
+	<string name="poi_microbrewery_yes">Si</string>
 	<string name="poi_microbrewery_no">Sin cerveza artesanal</string>
-	<string name="poi_takeaway_yes">Si</string>
+	<string name="poi_takeaway_yes">Con comida para llevar</string>
 	<string name="poi_takeaway_no">Comida para llevar: No</string>
 	<string name="poi_takeaway_only">Comida para llevar: Solamente</string>
 	<string name="poi_delivery_no">Sin servicio a domicilio</string>
@@ -1659,7 +1659,7 @@
 	<string name="poi_cypress">Ciprés</string>
 	<string name="poi_flagpole">Mástil de bandera</string>
 	<string name="poi_bench_yes">Si</string>
-	<string name="poi_bench_no">No</string>
+	<string name="poi_bench_no">Sin asientos</string>
 	<string name="poi_bin_yes">Con cesto de basura</string>
 	<string name="poi_bin_no">Sin cesto de basura</string>
 	<string name="poi_shelter_type_public_transport">Transporte público</string>
@@ -2844,7 +2844,7 @@
 	<string name="poi_fire_hydrant_type">Tipo de hidrante</string>
 	<string name="poi_fire_hydrant_position">Ubicación del hidrante</string>
 	<string name="poi_fire_hydrant_water_source">Fuente del agua</string>
-	<string name="poi_payment_toll_type">Forma de pago</string>
+	<string name="poi_payment_toll_type">Forma de pago (peaje)</string>
 	<string name="poi_traffic_signals_sound">Sonoro</string>
 	<string name="poi_highway_crossing_type">Tipo de cruce</string>
 	<string name="poi_tactile_paving">Pavimento táctil</string>
@@ -2988,7 +2988,7 @@
 	<string name="poi_cuisine_snack">Picadas</string>
 	<string name="poi_cuisine_yogurt">Yogur</string>
 	<string name="poi_cuisine_empanada">Empanadas</string>
-	<string name="poi_cuisine_crepes">Panqueques (crepe)</string>
+	<string name="poi_cuisine_crepes">Panqueques (crepes)</string>
 	<string name="poi_cuisine_suki">Suki</string>
 	<string name="poi_cuisine_udon">Sopa de fideos (udon)</string>
 	<string name="poi_cuisine_brasserie">Comida a las brasas (brasserie)</string>
