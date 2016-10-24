@@ -2552,4 +2552,20 @@ Wenn Sie OsmAnd und OSM lieben und unterstützen wollen, so ist dies die perfekt
     <string name="gpx_logging_no_data">Keine Daten</string>
     <string name="shared_string_trip">Reise</string>
     <string name="shared_string_record">Auszeichnung</string>
+    <string name="release_2_5">"
+ • Anklickbare Symbole auf der Karte 
+
+• leistungsstarke POI Filtersuche: Restaurants nach Küchenart, Campingplätz nach spezifischen Bedürfnissen, ...
+
+• neue OsmAnd Topo Stil, für Radfahrer und Wanderer 
+
+• verbesserte Streckenaufzeichnung (neue Einstellungen) 
+
+• verbesserte Navigationsbenachrichtigungen (Android Wear) 
+
+• viele weitere Verbesserungen und Fehlerbehebungen
+
+
+und vieles mehr ...
+ "</string>
     </resources>
