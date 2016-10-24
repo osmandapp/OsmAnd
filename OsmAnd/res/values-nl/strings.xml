@@ -2684,4 +2684,27 @@ Als je hulp nodig hebt met OsmAnd: neem contact op met ons support team: support
     <string name="shared_string_pause">Pauze</string>
     <string name="shared_string_trip">Reis</string>
     <string name="gpx_logging_no_data">Geen gegevens</string>
+    <string name="shared_string_recorded">Opgenomen</string>
+    <string name="shared_string_record">Opname</string>
+    <string name="release_2_5">"
+ • De iconen op de kaart zijn nu aanklikbaar
+
+
+ • Krachtige POI Filter Zoekfunctie: Zoek naar restaurants per keuken, campings met speciale voorzieningen
+
+
+ • Nieuwe OsmAnd Topo Kaartstijl voor fietsers en wandelaars
+
+
+ • Verbeterde GPX-opname, met nieuwe instellingen
+
+
+ • Verbeterde navigatie-aanwijzingen (Android Wear)
+
+
+ • Vele andere verbeteringen en bug fixes
+
+
+ en nog meer…
+ "</string>
     </resources>
