@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
     <string name="shared_string_continue">Продолжить</string>
-    <string name="shared_string_pause">Паузка</string>
+    <string name="shared_string_pause">Пауза</string>
     <string name="shared_string_trip">Поездка</string>
     <string name="shared_string_recorded">Записано</string>
     <string name="shared_string_record">Запись</string>
