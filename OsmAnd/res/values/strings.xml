@@ -15,6 +15,15 @@
     <string name="shared_string_recorded">Recorded</string>
     <string name="shared_string_record">Record</string>
     <string name="gpx_logging_no_data">No data</string>
+    <string name="release_2_5">
+	\u2022 Clickable icons on the map\n\n
+	\u2022 Powerful POI Filter Search: search restaurants by cuisine, campings with specific needs\n\n
+	\u2022 New OsmAnd Topo Style for cyclists and hikers\n\n
+	\u2022 Improved Trip recording (new settings)\n\n
+	\u2022 Improved navigation notifications (Android Wear)\n\n
+	\u2022 Many other improvements and bug fixes\n\n
+	and more…
+    </string>
     <string name="rendering_attr_contourColorScheme_description">Color scheme of contours</string>
     <string name="save_track_min_speed">Logging minimal speed</string>
     <string name="save_track_min_speed_descr">Choose minimal speed that logging will be triggered</string>
