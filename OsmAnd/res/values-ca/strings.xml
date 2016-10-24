@@ -2482,4 +2482,25 @@ Si aprecieu OsmAnd  i OSM i voleu ajudar-los, és la via perfecta per fer-ho."</
     <string name="shared_string_recorded">Enregistrat</string>
     <string name="shared_string_record">Registre</string>
     <string name="gpx_logging_no_data">No hi ha dades</string>
+    <string name="release_2_5">"
+ • Icones seleccionables al mapa
+
+
+ • Potent filtre per cercar PDI: cerca restaurants per tipus de cuina, càmpings amb equipaments determinats
+
+
+ • Nou estil topològic OsmAnd  per ciclistes i senderistes
+
+
+ • Enregistrament de la ruta millorat (nous paràmetres)
+
+
+ • Notificacions de navegació millorades (Android Wear)
+
+
+ • Moltes més millores i correccions d\'errors
+
+
+ i més…
+ "</string>
     </resources>
