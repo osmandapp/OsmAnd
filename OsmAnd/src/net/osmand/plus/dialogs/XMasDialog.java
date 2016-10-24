@@ -1,20 +1,16 @@
 package net.osmand.plus.dialogs;
 
-import android.app.Activity;
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.Button;
 
-import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 
 public class XMasDialog {
 
@@ -48,6 +44,8 @@ public class XMasDialog {
 				}
 				return;
 			}
+		} else {
+			return;
 		}
 
 		final AlertDialog.Builder builder = new AlertDialog.Builder(mapActivity, R.style.XmasDialogTheme);
