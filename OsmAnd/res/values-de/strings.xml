@@ -2546,4 +2546,10 @@ Wenn Sie OsmAnd und OSM lieben und unterstützen wollen, so ist dies die perfekt
     <string name="save_track_precision">Minimale Genauigkeit der Protokollierung</string>
     <string name="save_track_precision_descr">Minimale Genauigkeit der Protokollierung auswählen</string>
     <string name="rendering_attr_contourColorScheme_description">Farbschema der Konturen</string>
+    <string name="shared_string_continue">Fortsetzen</string>
+    <string name="shared_string_pause">Pause</string>
+    <string name="shared_string_recorded">Aufgezeichnet</string>
+    <string name="gpx_logging_no_data">Keine Daten</string>
+    <string name="shared_string_trip">Reise</string>
+    <string name="shared_string_record">Auszeichnung</string>
     </resources>
