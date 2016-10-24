@@ -1,5 +1,20 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
+    <string name="shared_string_continue">Продолжить</string>
+    <string name="shared_string_pause">Паузка</string>
+    <string name="shared_string_trip">Поездка</string>
+    <string name="shared_string_recorded">Записано</string>
+    <string name="shared_string_record">Запись</string>
+    <string name="gpx_logging_no_data">Нет данных</string>
+    <string name="release_2_5">
+	\u2022 Нажимаемые иконки на карте\n\n
+	\u2022 Гибкая фильтрация POI в поиске: ищите рестораны по типу кухни, кемпинги по наличию удобств\n\n
+	\u2022 Новый стиль карты Topo для пешего туризма и велосипедистов\n\n
+	\u2022 Улучшена запись поездки (новые настройки)\n\n
+	\u2022 Улучшенные навигационные уведомления (Android Wear)\n\n
+	\u2022 Множество других улучшений и исправлений ошибок\n\n
+	и многое другое…
+    </string>
     <string name="save_track_min_speed">Минимальная скорость для записи</string>
     <string name="save_track_min_speed_descr">Выберите минимальную скорость, при превышении которой точка будет записана в трек</string>
     <string name="save_track_min_distance">Минимальная дистанция для записи</string>
