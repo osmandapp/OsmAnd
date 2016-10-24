@@ -2652,11 +2652,40 @@ Se ami OsmAnd e OSM e vuoi sostenerli, questo è un modo perfetto per farlo.</st
     <string name="rendering_value_light_brown_name">Marrone chiaro</string>
     <string name="rendering_value_dark_brown_name">Marrone scuro</string>
     <string name="rendering_attr_surfaceIntegrity_name">integrità superficiale stradale</string>
-    <string name="save_track_min_speed_descr">Scegli la velocità minima che verrà attivata la registrazione</string>
+    <string name="save_track_min_speed_descr">Scegli la velocità minima a cui verrà attivata la registrazione</string>
     <string name="save_track_min_distance">Distanza minima di registrazione</string>
     <string name="save_track_min_distance_descr">Scegliere la distanza minima che verrà attivata la registrazione</string>
-    <string name="save_track_precision">Registrazione minima precisione</string>
+    <string name="save_track_precision">Precisione minima a cui attivare la registrazione</string>
     <string name="save_track_precision_descr">Scegliere registrazione minima accettabile precisione</string>
     <string name="rendering_attr_contourColorScheme_name">Combinazione di colori dei contorni</string>
     <string name="search_hint">Digitare il nome del poi, città, indirizzo</string>
+    <string name="shared_string_continue">Continua</string>
+    <string name="shared_string_pause">Pausa</string>
+    <string name="shared_string_trip">Viaggio</string>
+    <string name="shared_string_recorded">Registrato</string>
+    <string name="shared_string_record">Registra</string>
+    <string name="gpx_logging_no_data">Nessun dato</string>
+    <string name="release_2_5">"
+ • Icone sulla mappa ckiccalickabli
+
+
+ • Filtro di ricerca dei PDI più potente: ricerca dei ristoranti per tipo di cucina, campeggi per esigenze specifiche
+
+
+ • Nuovo stile OsmAnd Topo per ciclisti ed escursionisti
+
+
+ • Registrazione viaggio migliorata (nuove impostazioni)
+
+
+ • Notifiche di navigazione migliorate (Android Wear)
+
+
+ • Molti altri miglioramenti e correzioni di bug
+
+
+ e altro…
+ "</string>
+    <string name="rendering_attr_contourColorScheme_description">Schema del colore del contorno</string>
+    <string name="save_track_min_speed">Velocità minima di registrazione</string>
     </resources>
