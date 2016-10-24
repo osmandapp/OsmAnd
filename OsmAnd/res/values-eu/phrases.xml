@@ -1778,4 +1778,26 @@
 	<string name="poi_cuisine_ramen">Ramen</string>
 	<string name="poi_cuisine_crepe">Krepeak</string>
 	<string name="poi_cuisine_breakfast">Gosaria</string>
+	<string name="poi_maxheight">Gehieneko altuera</string>
+	<string name="poi_maxweight">Gehieneko pisua</string>
+	<string name="poi_height">Altuera</string>
+	<string name="poi_mobile">Mugikorra</string>
+	<string name="poi_email">E-posta</string>
+	<string name="poi_fax">Faxa</string>
+	<string name="facebook">Facebook</string>
+	<string name="twitter">Twitter</string>
+	<string name="poi_skype">Skype</string>
+	<string name="poi_youtube">YouTube</string>
+	<string name="poi_instagram">Instagram</string>
+	<string name="vk">VKontakte</string>
+	<string name="poi_google_plus">Google+</string>
+	<string name="poi_service_times">Zerbitzu orduak</string>
+	<string name="poi_abandoned">Abandonatuta</string>
+	<string name="poi_abandoned_poi">Abandonatutako objektua</string>
+	<string name="poi_disused">Utzita</string>
+
+	<string name="poi_operator">Operadorea</string>
+	<string name="poi_brand">Marka</string>
+	<string name="poi_supervised_yes">Gainbegiratua</string>
+	<string name="poi_supervised_no">Gainbegiratu gabe</string>
 	</resources>
