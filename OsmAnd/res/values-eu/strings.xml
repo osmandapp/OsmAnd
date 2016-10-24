@@ -2618,4 +2618,31 @@ OsmAnd aplikazioarekin laguntza behar baduzu, jarri kontaktuan gure laguntza tal
     <string name="christmas_poi">Eguberriko POI</string>
     <string name="christmas_desc">Eguberria eta urte berria datozela, Eguberriarekin zerikusia duten POIak bistaratzea erabaki dezakezu: Eguberri zuhaitzak, merkatuak...</string>
     <string name="christmas_desc_q">Erakutsi eguberriko POI</string>
+    <string name="shared_string_continue">Jarraitu</string>
+    <string name="shared_string_pause">Pausatu</string>
+    <string name="shared_string_trip">Bidaia</string>
+    <string name="shared_string_recorded">Grabatuta</string>
+    <string name="shared_string_record">Grabatu</string>
+    <string name="gpx_logging_no_data">Daturik ez</string>
+    <string name="release_2_5">"
+ • klikatu daitezkeen ikonoak mapan
+
+
+ • Iragazki bidezko POI bilaketa ahaltsua: bilatu jatetxeak sukaldaritza motaren arabera, behar zehatzetarako kanpingak
+
+
+ • OsmAnd Topo estilo berria txirrindularieta mendizaleentzat
+
+
+ • Hobetutako bidai grabaketa (ezarpen berriak)
+
+
+ • Jakinarazpen hobetuak nabigazioan (Android Wear)
+
+
+ • Beste hobekuntza eta konponketa ugari
+
+
+ eta gehiago…
+ "</string>
     </resources>
