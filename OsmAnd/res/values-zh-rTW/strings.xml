@@ -2620,4 +2620,12 @@ Facebook：https://www.facebook.com/osmandapp
     <string name="rendering_value_dark_brown_name">深棕色</string>
     <string name="rendering_attr_contourColorScheme_name">等高線的顏色調配</string>
     <string name="rendering_attr_surfaceIntegrity_name">路面的整體狀態</string>
+    <string name="shared_string_continue">繼續</string>
+    <string name="shared_string_pause">暫停</string>
+    <string name="shared_string_trip">旅程</string>
+    <string name="shared_string_recorded">已記錄</string>
+    <string name="shared_string_record">記錄</string>
+    <string name="gpx_logging_no_data">沒有資料</string>
+    <string name="christmas_desc">預知聖誕節和新年假期，您可以選擇顯示與聖誕節關聯的 POI：聖誕樹、市場。</string>
+    <string name="donation_to_osm_desc">您捐款的一部分將發送給向 OpenStreetMap 提交更改的 OSM 使用者。訂閱的成本保持不變。</string>
     </resources>
