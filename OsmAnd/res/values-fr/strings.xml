@@ -683,7 +683,12 @@ Actuellement {2} Mo sont disponibles.</string>
     <string name="online_map_settings_descr">Configurer la source de la carte en ligne ou en cache</string>
 
 
-    <string name="osmand_rastermaps_plugin_description">"Ce greffon permet d\'accéder à une grande gamme de cartes en ligne (aussi appelées tuiles ou cartes raster) qui vont de cartes OpenStreetMap (comme les tuiles Mapnik) jusqu\'aux images satellites en passant par des cartes spécialisées comme des cartes météo, des cartes de climat, des cartes géologiques, etc …\n\nChacune de ces cartes est utilisable soit comme carte principale soit comme sur ou sous couche d\'une autre carte. Afin de gérer au mieux la superposition des cartes, vous pouvez masquer certains éléments des cartes vectorielles hors ligne depuis le menu \"Configurer la carte\".\n\nCes cartes tuiles peuvent être obtenues directement en ligne et peuvent également être préparées grâce à des outils tiers puis copiées dans le dossier de données d\'OsmAnd sous forme de base de données SQLite. "</string>
+    <string name="osmand_rastermaps_plugin_description">"Ce greffon permet d\'accéder à une grand nombre de cartes en ligne (aussi appelées tuiles ou cartes raster) qui vont de cartes OpenStreetMap (comme Mapnik) jusqu\'aux images satellites en passant par des cartes spécialisées comme des cartes météo, des cartes de climat, des cartes géologiques, des couches de relief, etc …
+
+Chacune de ces cartes est utilisable soit comme carte principale soit comme sur ou sous couche d\'une autre carte. Afin de gérer au mieux la superposition des cartes, vous pouvez masquer certains éléments des cartes vectorielles hors ligne depuis le menu \"Configurer la carte\".
+
+Les cartes tuiles peuvent être obtenues directement en ligne ou peuvent être préparées pour un usage hors ligne grâce à des outils tiers puis copiées dans le dossier de données d\'OsmAnd sous forme de base de données SQLite.
+ "</string>
     <string name="osmand_background_plugin_description">Affiche les préférences afin d\'activer le suivi et la navigation en tâche de fond (écran éteint) en réveillant périodiquement le GPS.</string>
     <string name="osmand_accessibility_description">Ce greffon donne accès directement dans OsmAnd aux options d\'accessibilité de votre appareil (réglage de la vitesse des voix TTS, utilisation du trackball pour zoomer ou annonce automatique de votre position).</string>
 
@@ -815,7 +820,9 @@ Actuellement {2} Mo sont disponibles.</string>
     <string name="osmand_parking_pm">PM</string>
     <string name="osmand_parking_am">AM</string>
     <string name="osmand_parking_position_name">Lieu de stationnement</string>
-    <string name="osmand_parking_plugin_description">Ce greffon permet d\'enregistrer l\'emplacement de stationnement de votre véhicule et, si besoin, de mesurer la durée de stationnement restante. Ces informations sont visibles sur le Tableau de bord comme sur la carte. Un rappel peut même être ajouté à votre calendrier.</string>
+    <string name="osmand_parking_plugin_description">Ce greffon permet d\'enregistrer l\'emplacement de stationnement de votre véhicule et, si besoin, de mesurer la durée de stationnement restante.
+
+Ces informations sont visibles sur le Tableau de bord comme sur la carte. Un rappel peut même être ajouté à votre calendrier.</string>
     <string name="osmand_parking_plugin_name">Emplacement de stationnement</string>
     <string name="context_menu_item_add_parking_point">Marquer comme lieu de stationnement</string>
     <string name="context_menu_item_delete_parking_point">Supprimer un emplacement de stationnement</string>
@@ -982,7 +989,10 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="audionotes_plugin_name">Notes audio/vidéo</string>
 
     <string name="osmand_srtm_short_description_80_chars">Greffon OsmAnd pour les courbes de niveau hors-ligne</string>
-    <string name="osmand_srtm_long_description_1000_chars">"Ce greffon permet l\'affichage de courbes de niveau ainsi que du relief (ombres) qui s\'ajoutent au-dessus des cartes standard d\'OsmAnd. Ces informations sont particulièrement utiles pour les sportifs, les randonneurs, les cyclistes et d\'une manière générale par toutes les personnes qui souhaitent connaitre le relief.\n\nLes données globales (entre 70 degrés Nord et 70 degrés Sud) sont basées sur des mesures de SRTM (Shuttle Radar Topography Mission) et ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), un instrument d\'imagerie embarqués à bord de Terra, le satellite phare du système d\'observation de la terre de la NASA. ASTER est un effort de coopération entre la NASA, le ministère japonais de l\'économie, du commerce et de l\'industrie (METI) et \"Japan Space Systems\" (J-Spacesystems). "</string>
+    <string name="osmand_srtm_long_description_1000_chars">"Ce greffon permet l\'affichage de courbes de niveau ainsi que du relief (ombres) qui s\'ajoutent au-dessus des cartes standard d\'OsmAnd. Ces informations sont particulièrement utiles pour les sportifs, les randonneurs, les cyclistes et d\'une manière générale par toutes les personnes qui souhaitent connaitre le relief.
+
+Les données globales (entre 70 degrés Nord et 70 degrés Sud) sont basées sur des mesures SRTM (Shuttle Radar Topography Mission) et ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), des instruments d\'imagerie embarqués à bord de Terra, le satellite phare du système d\'observation de la terre de la NASA. ASTER est un effort de coopération entre la NASA, le ministère japonais de l\'économie, du commerce et de l\'industrie (METI) et \"Japan Space Systems\" (J-Spacesystems).
+ "</string>
 
 
     <string name="map_widget_distancemeasurement">Mesure de distance</string>
@@ -1101,7 +1111,13 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="local_osm_changes_backup">Sauvegarder comme une modification OSM</string>
     <string name="delete_point">Supprimer le point de mesure</string>
     <string name="plugin_distance_point">Point</string>
-    <string name="use_distance_measurement_help">* Ajout d\'un point : appui bref sur la carte\n* Suppression du dernier point : appui long sur la carte\n* Pour plus d\'actions : appuyez sur le gadget de mesure.</string>
+    <string name="use_distance_measurement_help">* Ajouter un point : appui bref sur la carte
+
+* Supprimer le dernier point : appui long sur la carte
+
+* Ajouter ou modifier une description : appui long sur le point
+
+* Autres actions : appui sur le gadget de mesure.</string>
     <string name="distance_measurement_finish_subtrack">Ajouter une nouvelle mesure</string>
     <string name="distance_measurement_clear_route">Supprimer la mesure</string>
     <string name="shared_string_downloading">Téléchargement en cours</string>
@@ -1476,7 +1492,11 @@ Vous pouvez suivre tous les appareils d\'un groupe en temps réel. Ce greffon pe
     <string name="osmo_gpx_track_downloaded">Trace OsMo %1$s téléchargée.</string>
     <string name="osmo_group_by_invite">Admission sur invitation</string>
     <string name="osmo_auth_error_short">Échec de l\'autorisation</string>
-    <string name="osmo_auth_error">Erreur d\\\'autorisation OsMo : %1$s.\n Le service est momentanément inutilisable ou votre inscription a expiré.\n Voulez-vous procéder à une nouvelle inscription ?</string>
+    <string name="osmo_auth_error">Erreur d\'autorisation OsMo : %1$s.
+
+Le service est momentanément inutilisable ou votre inscription a expiré.
+
+Voulez-vous effectuer à une nouvelle inscription ?</string>
     <string name="keep_navigation_service">Conserver</string>
     <string name="stop_navigation_service">Arrêter</string>
     <string name="enable_sleep_mode">Démarrer l’exécution de la tâche de fond GPS ?</string>
@@ -1550,7 +1570,10 @@ Vous pouvez suivre tous les appareils d\'un groupe en temps réel. Ce greffon pe
     <string name="speak_poi">Points d\'intérêt proches</string>
     <string name="shared_string_all">Tous</string>
     <string name="index_tours">Tours</string>
-    <string name="record_plugin_description">"Ce greffon permet d\'enregistrer vos itinéraires au format GPX : soit automatiquement soit grâce à un bouton supplémentaire affiché sur la carte.\n\nLes traces ainsi enregistrées peuvent être partagées avec vos amis ou utilisées pour contribuer à OSM. Les sportifs peuvent utiliser ces enregistrements pour leurs entraînements. Certaines analyses des traces peuvent être réalisées directement dans OmsAnd (comme la vitesse moyenne, la durée de l\'itinéraire …). Enfin les fichiers GPX locaux peuvent être exportés pour être utilisés par d\'autres applications. "</string>
+    <string name="record_plugin_description">"Ce greffon permet d\'enregistrer vos itinéraires dans un fichier au format GPX : soit automatiquement soit manuellement grâce à un bouton supplémentaire affiché sur la carte.
+
+Les traces ainsi enregistrées peuvent être partagées avec vos amis ou utilisées pour contribuer à OSM. Les sportifs peuvent utiliser ces enregistrements pour leurs entraînements. Certaines analyses des traces peuvent être réalisées directement dans OmsAnd (comme la vitesse moyenne, la durée de l\'itinéraire …). Enfin les fichiers GPX locaux peuvent être exportés pour être utilisés par d\'autres applications.
+ "</string>
     <string name="record_plugin_name">Enregistrement d\'itinéraire</string>
     <string name="int_hour">h</string>
     <string name="duration">Durée</string>
@@ -2064,7 +2087,25 @@ Vous pouvez suivre tous les appareils d\'un groupe en temps réel. Ce greffon pe
     <string name="routing_attr_avoid_stairs_name">Éviter les escaliers</string>
 	<string name="routing_attr_avoid_borders_name">Éviter le franchissement de frontières</string>
 	<string name="routing_attr_avoid_stairs_description">Éviter les escaliers</string>
-	<string name="release_2_2">" • Nouveaux menus contextuels sur un point de la carte\n\n • Choix de l\'affichage au démarrage (tableau de bord ou carte)\n\n • Personnalisation du contenu du tableau de bord\n\n • Possibilité d\'ignorer le tableau de bord et de n\'utiliser que les menus\n\n • Téléchargement des cartes des régions en appuyant directement sur la carte mondiale\n\n • Amélioration de la recherche des PI (Point d\'Intérêt)\n\n • Amélioration des PI (Point d\'Intérêt) et des contributions OSM (Open Street Map)\n\n • Refonte du téléchargement des cartes\n\n et bien plus encore … "</string>
+	<string name="release_2_2">"
+ • Nouveaux menus contextuels sur un point de la carte
+
+ • Choix de l\'affichage au démarrage (tableau de bord ou carte)
+
+ • Personnalisation du contenu du tableau de bord
+
+ • Possibilité d\'ignorer le tableau de bord et de n\'utiliser que les menus
+
+ • Téléchargement des cartes des régions en appuyant directement sur la carte mondiale
+
+ • Amélioration de la recherche des PI (Point d\'Intérêt)
+
+ • Amélioration des PI (Point d\'Intérêt) et des contributions OSM (Open Street Map)
+
+ • Refonte du téléchargement des cartes
+
+ et bien plus encore …
+ "</string>
     <string name="poi_context_menu_modify_osm_change">Modifier la contribution OSM</string>
     <string name="shared_string_near">Proche</string>
     <string name="shared_string_hide">Masquer</string>
