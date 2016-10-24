@@ -2688,4 +2688,5 @@ Se ami OsmAnd e OSM e vuoi sostenerli, questo è un modo perfetto per farlo.</st
  "</string>
     <string name="rendering_attr_contourColorScheme_description">Schema del colore del contorno</string>
     <string name="save_track_min_speed">Velocità minima di registrazione</string>
+    <string name="translit_name_if_miss">Traslittera se manca il nome in %1$s</string>
     </resources>
