@@ -87,42 +87,42 @@
 
 <!--  categories -->
 	<string name="poi_shop">Store</string>
-		<string name="poi_shop_food">Convenience store and supermarket</string>
+	<string name="poi_shop_food">Convenience store and supermarket</string>
 	<string name="poi_emergency">Emergency</string>
 	<string name="poi_transportation">Transportation</string>
-		<string name="poi_road_obstacle">Road obstacle</string>
-		<string name="poi_filling_station">Gas station</string>
-		<string name="poi_personal_transport">Personal transport</string>
-		<string name="poi_public_transport">Public transport</string>
-		<string name="poi_air_transport">Air transport</string>
-		<string name="poi_water_transport">Water transport</string>
-		<string name="poi_bicycle_transport">Bicycle transport</string>
-		<string name="poi_aerialway_transport">Aerialway transport</string>
-		<string name="poi_node_networks">Hiking/cycling network nodes</string>
-		<string name="poi_hiking_routes">Hiking routes</string>
-		<string name="poi_traffic_enforcement">Traffic enforcement</string>
+	<string name="poi_road_obstacle">Road obstacle</string>
+	<string name="poi_filling_station">Gas station</string>
+	<string name="poi_personal_transport">Personal transport</string>
+	<string name="poi_public_transport">Public transport</string>
+	<string name="poi_air_transport">Air transport</string>
+	<string name="poi_water_transport">Water transport</string>
+	<string name="poi_bicycle_transport">Bicycle transport</string>
+	<string name="poi_aerialway_transport">Aerialway transport</string>
+	<string name="poi_node_networks">Hiking/cycling network nodes</string>
+	<string name="poi_hiking_routes">Hiking routes</string>
+	<string name="poi_traffic_enforcement">Traffic enforcement</string>
 	<string name="poi_man_made">Man made</string>
-		<string name="poi_transport_construction">Transport construction</string>
-		<string name="poi_water_supply">Water supply</string>
-		<string name="poi_power">Power</string>
-		<string name="poi_communication">Communication</string>
-		<string name="poi_trash_disposal">Trash disposal</string>
-		<string name="poi_landuse">Landuse</string>
+	<string name="poi_transport_construction">Transport construction</string>
+	<string name="poi_water_supply">Water supply</string>
+	<string name="poi_power">Power</string>
+	<string name="poi_communication">Communication</string>
+	<string name="poi_trash_disposal">Trash disposal</string>
+	<string name="poi_landuse">Landuse</string>
 	<string name="poi_education">Education</string>
 	<string name="poi_administrative">Administrative</string>
 	<string name="poi_healthcare">Healthcare</string>
 	<string name="poi_office">Office</string>
 	<string name="poi_sport">Sport</string>
 	<string name="poi_tourism">Tourism</string>
-		<string name="poi_sightseeing">Sightseeing</string>
-		<string name="poi_accomodation">Accommodation</string>
-		<string name="poi_internet_access">Internet access</string>
+	<string name="poi_sightseeing">Sightseeing</string>
+	<string name="poi_accomodation">Accommodation</string>
+	<string name="poi_internet_access">Internet access</string>
 	<string name="poi_entertainment">Leisure</string>
-		<string name="poi_club">Club</string>
+	<string name="poi_club">Club</string>
 	<string name="poi_sustenance">Food</string>
 	<string name="poi_cafe_and_restaurant">Cafe and restaurant</string>
 	<string name="poi_service">Service</string>
-		<string name="poi_craft">Craft</string>
+	<string name="poi_craft">Craft</string>
 	<string name="poi_finance">Finance</string>
 	<string name="poi_natural">Natural</string>
 	<string name="poi_seamark">Nautical</string>
@@ -251,6 +251,10 @@
 	<string name="poi_pyrotechnics">Pyrotechnics</string>
 	<string name="poi_weapons">Weapons store</string>
 	<string name="poi_perfumery">Perfume store</string>
+	<string name="poi_spices">Spices store</string>
+	<string name="poi_shop_craft">Arts and crafts supply store</string>
+	<string name="poi_honey">Honey store</string>
+	<string name="poi_religion">Religious goods</string>
 
 	<string name="poi_police">Police</string>
 	<string name="poi_fire_station">Fire station</string>
@@ -311,6 +315,8 @@
 	<string name="poi_fuel_biogas">Biogas</string>
 	<string name="poi_fuel_lh2">Liquid hydrogen</string>
 	<string name="poi_fuel_electricity">Electricity</string>
+	<string name="poi_aeroway_fuel">Aircraft fuel station</string>
+	<string name="poi_waterway_fuel">Gas station for boats</string>
 	<string name="poi_charging_station">Charging station</string>
 	<string name="poi_vehicle_ramp">Vehicle ramp</string>
 	<string name="poi_compressed_air">Compressed air</string>
@@ -479,7 +485,12 @@
 	<string name="poi_waste_disposal">Trash disposal</string>
 	<string name="poi_waste_basket">Trash can</string>
 
+	<string name="poi_residential">Residential area</string>
 	<string name="poi_industrial">Industrial area</string>
+	<string name="poi_landuse_railway">Railroad area</string>
+	<string name="poi_commercial">Commercial landuse</string>
+	<string name="poi_retail">Retail landuse</string>
+
 	<string name="poi_quarry">Quarry</string>
 	<string name="poi_vineyard">Vineyard</string>
 	<string name="poi_orchard">Orchard</string>
@@ -487,7 +498,6 @@
 	<string name="poi_forest">Human maintained forest</string>
 	<string name="poi_farmyard">Farmyard</string>
 	<string name="poi_meadow">Meadow</string>
-	<string name="poi_landuse_railway">Railroad area</string>
 	<string name="poi_basin">Basin</string>
 	<string name="poi_conservation">Conservation land</string>
 
@@ -551,7 +561,7 @@
 	<string name="poi_locality">Locality</string>
 	<string name="poi_place_allotments">Allotments</string>
 	<string name="poi_place_farm">Farm</string>
-	<string name="poi_residential">Residential area</string>
+
 
 	<string name="poi_pharmacy">Pharmacy</string>
 	<string name="poi_hospital">Hospital</string>
@@ -637,6 +647,7 @@
 	<string name="poi_dog_racing">Dog racing</string>
 	<string name="poi_equestrian">Equestrian</string>
 	<string name="poi_field_hockey">Field hockey</string>
+	<string name="poi_ice_hockey">Ice hockey</string>
 	<string name="poi_golf">Golf</string>
 	<string name="poi_gymnastics">Gymnastics</string>
 	<string name="poi_handball">Handball</string>
@@ -806,6 +817,8 @@
 	<string name="poi_internet_access_service">Internet access: service</string>
 	<string name="poi_internet_access_yes">Internet access: yes</string>
 	<string name="poi_internet_access_no">Internet access: no</string>
+	<string name="poi_internet_access_fee_yes">Internet access - fee charged</string>
+	<string name="poi_internet_access_fee_no">Internet access - no fee</string>
 
 	<string name="poi_monastery">Monastery</string>
 <!--	<string name="poi_historic_monastery">Historic monastery</string>-->
@@ -857,6 +870,9 @@
 	<string name="poi_club_shooting">Shooting club</string>
 	<string name="poi_club_tourism">Tourism club</string>
 	<string name="poi_club_charity">Charity club</string>
+	<string name="poi_club_freemasonry">Masonic Lodge</string>
+	<string name="poi_club_sailing">Sailing club</string>
+	<string name="poi_club_scout">Scout club</string>
 
 	<string name="poi_piste">Piste</string>
 	<string name="poi_piste_downhill">Downhill piste</string>
@@ -1118,6 +1134,66 @@
 	<string name="poi_wiki_lang_vi">Vietnamese wiki</string>
 	<string name="poi_wiki_lang_vo">Volapük wiki</string>
 	<string name="poi_wiki_lang_zh">Chinese wiki</string>
+	<string name="poi_wiki_lang_af">Africaans wiki</string>
+	<string name="poi_wiki_lang_als">Alsatian wiki</string>
+	<string name="poi_wiki_lang_az">Azeri wiki</string>
+	<string name="poi_wiki_lang_bn">Bengali wiki</string>
+	<string name="poi_wiki_lang_bpy">Bishnupriya wiki</string>
+	<string name="poi_wiki_lang_br">Breton wiki</string>
+	<string name="poi_wiki_lang_bs">Bosnian wiki</string>
+	<string name="poi_wiki_lang_cy">Welsh wiki</string>
+	<string name="poi_wiki_lang_eo">Esperanto wiki</string>
+	<string name="poi_wiki_lang_eu">Basque wiki</string>
+	<string name="poi_wiki_lang_fa">Farsi wiki</string>
+	<string name="poi_wiki_lang_fy">Frysk wiki</string>
+	<string name="poi_wiki_lang_ga">Irish wiki</string>
+	<string name="poi_wiki_lang_hy">Armenian wiki</string>
+	<string name="poi_wiki_lang_is">Icelandic wiki</string>
+	<string name="poi_wiki_lang_ka">Georgian wiki</string>
+	<string name="poi_wiki_lang_ku">Kurdish wiki</string>
+	<string name="poi_wiki_lang_la">Latin wiki</string>
+	<string name="poi_wiki_lang_lb">Luxembourgish wiki</string>
+	<string name="poi_wiki_lang_mk">Macedonian wiki</string>
+	<string name="poi_wiki_lang_ml">Malayalam wiki</string>
+	<string name="poi_wiki_lang_mr">Marathi wiki</string>
+	<string name="poi_wiki_lang_nds">Low Saxon wiki</string>
+	<string name="poi_wiki_lang_nv">Navajo wiki</string>
+	<string name="poi_wiki_lang_os">Ossetian wiki</string>
+	<string name="poi_wiki_lang_pms">Piedmontese wiki</string>
+	<string name="poi_wiki_lang_sc">Sardinian wiki</string>
+	<string name="poi_wiki_lang_sh">Serbo-Croatian wiki</string>
+	<string name="poi_wiki_lang_sq">Albanian wiki</string>
+	<string name="poi_wiki_lang_ta">Tamil wiki</string>
+	<string name="poi_wiki_lang_tl">Filipino wiki</string>
+	<string name="poi_wiki_lang_war">Waray wiki</string>
+	<string name="poi_wiki_lang_min">Minangkabau wiki</string>
+	<string name="poi_wiki_lang_kk">Kazakh wiki</string>
+	<string name="poi_wiki_lang_uz">Uzbek wiki</string>
+	<string name="poi_wiki_lang_ce">Chechen wiki</string>
+	<string name="poi_wiki_lang_ur">Urdu wiki</string>
+	<string name="poi_wiki_lang_oc">Occitan wiki</string>
+	<string name="poi_wiki_lang_zhminnan">Southern Min wiki</string>
+	<string name="poi_wiki_lang_mg">Malagasy wiki</string>
+	<string name="poi_wiki_lang_tt">Tatar wiki</string>
+	<string name="poi_wiki_lang_jv">Javanese wiki</string>
+	<string name="poi_wiki_lang_ky">Kyrgyz wiki</string>
+	<string name="poi_wiki_lang_zhyue">Cantonese wiki</string>
+	<string name="poi_wiki_lang_ast">Astur-Leonese wiki</string>
+	<string name="poi_wiki_lang_tg">Tajik wiki</string>
+	<string name="poi_wiki_lang_ba">Bashkir wiki</string>
+	<string name="poi_wiki_lang_sco">Scots wiki</string>
+	<string name="poi_wiki_lang_pnb">Punjabi wiki</string>
+	<string name="poi_wiki_lang_cv">Chuvash wiki</string>
+	<string name="poi_wiki_lang_lmo">Lombard wiki</string>
+	<string name="poi_wiki_lang_my">Burmese wiki</string>
+	<string name="poi_wiki_lang_yo">Yoruba wiki</string>
+	<string name="poi_wiki_lang_an">Aragonese wiki</string>
+	<string name="poi_wiki_lang_ne">Nepali wiki</string>
+	<string name="poi_wiki_lang_gu">Gujarati wiki</string>
+	<string name="poi_wiki_lang_scn">Sicilian wiki</string>
+	<string name="poi_wiki_lang_bar">Bavarian wiki</string>
+	<string name="poi_wiki_lang_mn">Mongolian wiki</string>
+	<string name="poi_wiki_lang_nap">Neapolitan wiki</string>
 
 	<string name="poi_bollard">Bollard</string>
 	<string name="poi_cycle_barrier">Cycle barrier</string>
@@ -1346,8 +1422,6 @@
 
 	<string name="poi_water_point">Water point</string>
 
-	<string name="poi_cuisine">Cuisine</string>
-
 	<string name="poi_information_guidepost">Guidepost</string>
 	<string name="poi_information_board">Board</string>
 	<string name="poi_information_map">Map</string>
@@ -1369,9 +1443,6 @@
 	<string name="poi_board_type_public_transport">Public transport</string>
 	<string name="poi_board_type_technology">Technology</string>
 	<string name="poi_board_type_astronomy">Astronomy</string>
-
-	<string name="poi_commercial">Commercial landuse</string>
-	<string name="poi_retail">Retail landuse</string>
 
 	<string name="poi_fireplace_yes">Yes</string>
 	<string name="poi_fireplace_no">No fireplace</string>
@@ -1633,26 +1704,29 @@
 	<string name="poi_payment_yandexmoney_no">Yandex.Money not accepted</string>
 	<string name="poi_description_payment">Payment description</string>
 
-	<string name="poi_internet_access_fee_yes">Internet access - fee charged</string>
-	<string name="poi_internet_access_fee_no">Internet access - no fee</string>
-
 	<string name="poi_events_venue">Events venue</string>
 
+	<string name="poi_diet_vegetarian_filter_yes">Vegetarian</string>
 	<string name="poi_diet_vegetarian_only">Vegetarian only</string>
 	<string name="poi_diet_vegetarian_yes">Vegetarian</string>
 	<string name="poi_diet_vegetarian_no">Vegetarian diet: no</string>
+	<string name="poi_diet_vegan_filter_yes">Vegan</string>
 	<string name="poi_diet_vegan_only">Vegan only</string>
 	<string name="poi_diet_vegan_yes">Vegan</string>
 	<string name="poi_diet_vegan_no">Vegan diet: no</string>
+	<string name="poi_diet_gluten_free_filter_yes">Gluten free</string>
 	<string name="poi_diet_gluten_free_only">Gluten-free only</string>
 	<string name="poi_diet_gluten_free_yes">Gluten-free</string>
 	<string name="poi_diet_gluten_free_no">Gluten-free diet: no</string>
+	<string name="poi_diet_kosher_filter_yes">Kosher</string>
 	<string name="poi_diet_kosher_only">Kosher only</string>
 	<string name="poi_diet_kosher_yes">Kosher</string>
 	<string name="poi_diet_kosher_no">Kosher diet: no</string>
+	<string name="poi_diet_halal_filter_yes">Halal</string>
 	<string name="poi_diet_halal_only">Halal only</string>
 	<string name="poi_diet_halal_yes">Halal</string>
 	<string name="poi_diet_halal_no">Halal diet: no</string>
+	<string name="poi_diet_lactose_free_filter_yes">Lactose free</string>
 	<string name="poi_diet_lactose_free_only">Lactose-free only</string>
 	<string name="poi_diet_lactose_free_yes">Lactose-free</string>
 	<string name="poi_diet_lactose_free_no">Lactose-free diet: no</string>
@@ -1667,14 +1741,17 @@
 	<string name="poi_microbrewery_yes">Microbrewery</string>
 	<string name="poi_microbrewery_no">No microbrewery</string>
 
+	<string name="poi_takeaway_filter_yes">Yes</string>
 	<string name="poi_takeaway_yes">Takeaway</string>
 	<string name="poi_takeaway_no">No takeaway</string>
 	<string name="poi_takeaway_only">Takeaway only</string>
 
+	<string name="poi_delivery_filter_yes">Yes</string>
 	<string name="poi_delivery_yes">Delivery</string>
 	<string name="poi_delivery_no">No delivery</string>
 	<string name="poi_delivery_only">Delivery only</string>
 
+	<string name="poi_outdoor_seating_filter_yes">Yes</string>
 	<string name="poi_outdoor_seating_yes">Outdoor seating: yes</string>
 	<string name="poi_outdoor_seating_no">No outdoor seating</string>
 	<string name="poi_outdoor_seating_terrace">Outdoor seating: terrace</string>
@@ -1704,7 +1781,7 @@
 	<string name="poi_brushless_no">Brushless: no</string>
 	<string name="poi_car_wash_no">Car wash: no</string>
 
-	<string name="poi_aeroway_fuel">Aircraft fuel station</string>
+
 	<string name="poi_public_bath">Public bath</string>
 
 	<string name="poi_male_yes">Male</string>
@@ -1722,6 +1799,7 @@
 	<string name="poi_toilets_access_community">Toilets access: community</string>
 	<string name="poi_toilets_access_public">Toilets access: public</string>
 
+	<string name="poi_diaper_table_count">Diaper table count</string>
 	<string name="poi_diaper_yes">Diaper changing table</string>
 	<string name="poi_diaper_no">No diaper changing table</string>
 	<string name="poi_diaper_room">Diaper changing room</string>
@@ -1781,6 +1859,7 @@
 	<string name="poi_memorial_column">Column</string>
 	<string name="poi_memorial_stupa">Stupa</string>
 	<string name="poi_memorial_prasat">Prasat</string>
+	<string name="poi_memorial_fassade_decoration">Fassade decoration</string>
 
 	<string name="poi_inscription">Inscription</string>
 	<string name="poi_historic_quarry">Historic quarry</string>
@@ -2021,6 +2100,9 @@
 	<string name="poi_service_bicycle_chaintool_no">Bicycle chaintool: no</string>
 	<string name="poi_service_bicycle_second_hand_yes">Retail sale of second-hand bicycles</string>
 	<string name="poi_service_bicycle_second_hand_no">Retail sale of second-hand bicycles: no</string>
+	<string name="poi_service_bicycle_charging_yes">Bicycle charging: yes</string>
+	<string name="poi_service_bicycle_charging_no">Bicycle charging: no</string>
+	<string name="poi_bicycle_repair_station">Bicycle self-repair station</string>
 
 	<string name="poi_wildlife_hide">Place to observe wildlife</string>
 
@@ -2064,8 +2146,6 @@
 	<string name="poi_animal_boarding_horse">Boarding type: horse</string>
 
 	<string name="poi_historic_aircraft">Historic aircraft</string>
-
-	<string name="poi_honey">Honey store</string>
 
 	<string name="poi_elevator_yes">With elevator</string>
 	<string name="poi_elevator_no">Without elevator</string>
@@ -2175,7 +2255,6 @@
 	<string name="poi_massage_therapeutic">Therapeutic</string>
 
 	<string name="poi_massage_yes">Massage services</string>
-
 	<string name="poi_sauna_yes">Sauna services</string>
 	<string name="poi_solarium_yes">Solarium services</string>
 
@@ -2191,6 +2270,7 @@
 	<string name="poi_group_only_no">Group only: no</string>
 	<string name="poi_washing_machine_yes">Yes</string>
 	<string name="poi_washing_machine_no">Washing machine: no</string>
+	<string name="poi_shower_filter_yes">Yes</string>
 	<string name="poi_shower_yes">Shower: yes</string>
 	<string name="poi_shower_no">Shower: no</string>
 	<string name="poi_shower_hot">Shower: hot</string>
@@ -2287,7 +2367,6 @@
 
 	<string name="poi_cairn">Cairn</string>
 
-	<string name="poi_memorial_fassade_decoration">Fassade decoration</string>
 	<string name="poi_defibrillator">Defibrillator</string>
 	<string name="poi_defibrillator_yes">Defibrillator: yes</string>
 
@@ -2419,10 +2498,6 @@
 	<string name="poi_historic_farm">Historic farm</string>
 	<string name="poi_historic_railway_station">Historic railroad station</string>
 
-	<string name="poi_club_freemasonry">Masonic Lodge</string>
-	<string name="poi_club_sailing">Sailing club</string>
-	<string name="poi_club_scout">Scout club</string>
-
 	<string name="poi_historic_threshing_floor">Historic threshing floor</string>
 	<string name="poi_historic_gallows">Historic gallows</string>
 	<string name="poi_historic_railway">Historic railroad</string>
@@ -2474,67 +2549,6 @@
 
 	<string name="poi_hackerspace">Hackerspace</string>
 
-	<string name="poi_wiki_lang_af">Africaans wiki</string>
-	<string name="poi_wiki_lang_als">Alsatian wiki</string>
-	<string name="poi_wiki_lang_az">Azeri wiki</string>
-	<string name="poi_wiki_lang_bn">Bengali wiki</string>
-	<string name="poi_wiki_lang_bpy">Bishnupriya wiki</string>
-	<string name="poi_wiki_lang_br">Breton wiki</string>
-	<string name="poi_wiki_lang_bs">Bosnian wiki</string>
-	<string name="poi_wiki_lang_cy">Welsh wiki</string>
-	<string name="poi_wiki_lang_eo">Esperanto wiki</string>
-	<string name="poi_wiki_lang_eu">Basque wiki</string>
-	<string name="poi_wiki_lang_fa">Farsi wiki</string>
-	<string name="poi_wiki_lang_fy">Frysk wiki</string>
-	<string name="poi_wiki_lang_ga">Irish wiki</string>
-	<string name="poi_wiki_lang_hy">Armenian wiki</string>
-	<string name="poi_wiki_lang_is">Icelandic wiki</string>
-	<string name="poi_wiki_lang_ka">Georgian wiki</string>
-	<string name="poi_wiki_lang_ku">Kurdish wiki</string>
-	<string name="poi_wiki_lang_la">Latin wiki</string>
-	<string name="poi_wiki_lang_lb">Luxembourgish wiki</string>
-	<string name="poi_wiki_lang_mk">Macedonian wiki</string>
-	<string name="poi_wiki_lang_ml">Malayalam wiki</string>
-	<string name="poi_wiki_lang_mr">Marathi wiki</string>
-	<string name="poi_wiki_lang_nds">Low Saxon wiki</string>
-	<string name="poi_wiki_lang_nv">Navajo wiki</string>
-	<string name="poi_wiki_lang_os">Ossetian wiki</string>
-	<string name="poi_wiki_lang_pms">Piedmontese wiki</string>
-	<string name="poi_wiki_lang_sc">Sardinian wiki</string>
-	<string name="poi_wiki_lang_sh">Serbo-Croatian wiki</string>
-	<string name="poi_wiki_lang_sq">Albanian wiki</string>
-	<string name="poi_wiki_lang_ta">Tamil wiki</string>
-	<string name="poi_wiki_lang_tl">Filipino wiki</string>
-
-	<string name="poi_wiki_lang_war">Waray wiki</string>
-	<string name="poi_wiki_lang_min">Minangkabau wiki</string>
-	<string name="poi_wiki_lang_kk">Kazakh wiki</string>
-	<string name="poi_wiki_lang_uz">Uzbek wiki</string>
-	<string name="poi_wiki_lang_ce">Chechen wiki</string>
-	<string name="poi_wiki_lang_ur">Urdu wiki</string>
-	<string name="poi_wiki_lang_oc">Occitan wiki</string>
-	<string name="poi_wiki_lang_zhminnan">Southern Min wiki</string>
-	<string name="poi_wiki_lang_mg">Malagasy wiki</string>
-	<string name="poi_wiki_lang_tt">Tatar wiki</string>
-	<string name="poi_wiki_lang_jv">Javanese wiki</string>
-	<string name="poi_wiki_lang_ky">Kyrgyz wiki</string>
-	<string name="poi_wiki_lang_zhyue">Cantonese wiki</string>
-	<string name="poi_wiki_lang_ast">Astur-Leonese wiki</string>
-	<string name="poi_wiki_lang_tg">Tajik wiki</string>
-	<string name="poi_wiki_lang_ba">Bashkir wiki</string>
-	<string name="poi_wiki_lang_sco">Scots wiki</string>
-	<string name="poi_wiki_lang_pnb">Punjabi wiki</string>
-	<string name="poi_wiki_lang_cv">Chuvash wiki</string>
-	<string name="poi_wiki_lang_lmo">Lombard wiki</string>
-	<string name="poi_wiki_lang_my">Burmese wiki</string>
-	<string name="poi_wiki_lang_yo">Yoruba wiki</string>
-	<string name="poi_wiki_lang_an">Aragonese wiki</string>
-	<string name="poi_wiki_lang_ne">Nepali wiki</string>
-	<string name="poi_wiki_lang_gu">Gujarati wiki</string>
-	<string name="poi_wiki_lang_scn">Sicilian wiki</string>
-	<string name="poi_wiki_lang_bar">Bavarian wiki</string>
-	<string name="poi_wiki_lang_mn">Mongolian wiki</string>
-	<string name="poi_wiki_lang_nap">Neapolitan wiki</string>
 
 	<string name="poi_craft_electronics">Electronics repair</string>
 	<string name="poi_fireworks">Fireworks store</string>
@@ -2611,6 +2625,7 @@
 	<string name="poi_health_specialty_naturopathy_yes">Naturopathy</string>
 	<string name="poi_health_specialty_depth_psychology_yes">Depth psychology</string>
 	<string name="poi_health_specialty_behavior_yes">Behavior</string>
+	<string name="poi_health_specialty_palliative_medicine_yes">Health specialty: palliative medicine</string>
 
 	<string name="poi_building_type_pyramid">Building type: pyramid</string>
 
@@ -2671,7 +2686,7 @@
 	<string name="poi_fair_trade_no">Fair trade: no</string>
 	<string name="poi_fair_trade_only">Only fair trade products</string>
 
-	<string name="poi_ice_hockey">Ice hockey</string>
+
 	<string name="poi_bandy">Bandy</string>
 
 	<string name="poi_protected_area">Protected area</string>
@@ -2722,7 +2737,7 @@
 	<string name="poi_nuclear_explosion_device">Explosion: device</string>
 
 	<string name="poi_addr_housename">House name</string>
-	<string name="poi_religion">Religious goods</string>
+
 
 	<string name="poi_plant_nursery">Plant nursery</string>
 
@@ -2736,7 +2751,7 @@
 	<string name="poi_amenity_vacuum_cleaner">Vacuum cleaner</string>
 
 	<string name="poi_sport_free_flying">Free flying (sport)</string>
-	<string name="poi_bicycle_repair_station">Bicycle self-repair station</string>
+
 	<string name="poi_water_tap">Water tap</string>
 	<string name="poi_button_operated_yes">Button operated: yes</string>
 	<string name="poi_button_operated_no">Button operated: no</string>
@@ -2806,8 +2821,6 @@
 	<string name="poi_health_facility_type_first_aid">Health facility type: first aid</string>
 	<string name="poi_health_facility_type_nursing_home">Health facility type: nursing home</string>
 	<string name="poi_health_facility_type_support_group_home">Health facility type: support group home</string>
-
-	<string name="poi_health_specialty_palliative_medicine_yes">Health specialty: palliative medicine</string>
 
 	<string name="poi_suction_point">Suction point</string>
 
@@ -3090,8 +3103,6 @@
 
 	<string name="poi_fire_operator">Fire operator</string>
 
-	<string name="poi_diaper_table_count">Diaper table count</string>
-
 	<string name="poi_water_tank">Water tank</string>
 
 	<string name="poi_toilets_disposal_flush">Toilets disposal: flush</string>
@@ -3102,13 +3113,6 @@
 	<string name="poi_length">Length</string>
 
 	<string name="poi_wiki_link">Wikipedia</string>
-
-	<string name="poi_spices">Spices store</string>
-
-	<string name="poi_shop_craft">Arts and crafts supply store</string>
-
-	<string name="poi_service_bicycle_charging_yes">Bicycle charging: yes</string>
-	<string name="poi_service_bicycle_charging_no">Bicycle charging: no</string>
 
 	<string name="poi_xmas">Christmas</string>
 	<string name="poi_xmas_event">Christmas event</string>
@@ -3130,7 +3134,7 @@
 	<string name="poi_public_bookcase_type_metal_cabinet">Type: metal cabinet</string>
 	<string name="poi_public_bookcase_type_shelf">Type: shelf</string>
 
-
+	<string name="poi_cuisine">Cuisine</string>
 	<string name="poi_cuisine_pizza">Pizza</string>
 	<string name="poi_cuisine_burger">Burger</string>
 	<string name="poi_cuisine_coffee">Coffee</string>
@@ -3292,18 +3296,4 @@
 	<string name="poi_cuisine_jewish">Jewish</string>
 	<string name="poi_cuisine_bulgarian">Bulgarian</string>
 	<string name="poi_cuisine_tibetan">Tibetan</string>
-
-	<string name="poi_outdoor_seating_filter_yes">Yes</string>
-	<string name="poi_delivery_filter_yes">Yes</string>
-	<string name="poi_diet_vegetarian_filter_yes">Vegetarian</string>
-	<string name="poi_diet_vegan_filter_yes">Vegan</string>
-	<string name="poi_diet_gluten_free_filter_yes">Gluten free</string>
-	<string name="poi_diet_kosher_filter_yes">Kosher</string>
-	<string name="poi_diet_halal_filter_yes">Halal</string>
-	<string name="poi_diet_lactose_free_filter_yes">Lactose free</string>
-	<string name="poi_takeaway_filter_yes">Yes</string>
-	<string name="poi_shower_filter_yes">Yes</string>
-
-	<string name="poi_waterway_fuel">Gas station for boats</string>
-
 </resources>
