@@ -3303,4 +3303,6 @@
 	<string name="poi_cuisine_cajun">Cajun</string>
 	<string name="poi_waterway_fuel">Tankstelle für Boote</string>
 
+<string name="poi_feeding_place">Ort für die Tierfütterung</string>
+
 </resources>
