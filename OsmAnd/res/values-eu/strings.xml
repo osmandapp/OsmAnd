@@ -2645,4 +2645,7 @@ OsmAnd aplikazioarekin laguntza behar baduzu, jarri kontaktuan gure laguntza tal
 
  eta gehiago…
  "</string>
+    <string name="trip_rec_notification_settings">Bidaiaren grabaketa (daturik ez)</string>
+    <string name="trip_rec_notification_settings_desc">Erakutsi grabatu botoia zapalduz bidaiaren grabaketa abiatzea baimentzen duen jakinarazpen bat</string>
+    <string name="shared_string_notifications">Jakinarazpenak</string>
     </resources>
