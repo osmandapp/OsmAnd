@@ -1683,7 +1683,7 @@
 	<string name="poi_pump_powered">Angetrieben</string>
 	<string name="poi_water_characteristic_mineral">Mineral</string>
 	<string name="poi_water_characteristic_mud">Wassercharakteristik: schlammig</string>
-	<string name="poi_water_characteristic_sulfuric">Schwefelsäure</string>
+	<string name="poi_water_characteristic_sulfuric">Schweflig</string>
 
 	<string name="poi_water_point">Wasseranschluss</string>
 
@@ -1727,7 +1727,7 @@
 	<string name="poi_information_tactile_map">Tastbare Karte</string>
 	<string name="poi_retail">Einzelhandel</string>
 
-	<string name="poi_smoking_isolated">in einem abgetrennten Raum</string>
+	<string name="poi_smoking_isolated">In einem abgetrennten Raum</string>
 	<string name="poi_smoking_dedicated">Nur für Raucher</string>
 
 	<string name="poi_toll_yes">Maut</string>
@@ -1748,7 +1748,7 @@
 	<string name="poi_piste_difficulty_freeride">Freeride</string>
 	<string name="poi_piste_grooming_classic">Klassisch</string>
 	<string name="poi_piste_grooming_classic_skating">Klassisch und Skaten</string>
-	<string name="poi_piste_grooming_backcountry">Tourenskilauf</string>
+	<string name="poi_piste_grooming_backcountry">Tourenski</string>
 	<string name="poi_piste_grooming_scooter">Schneemobil</string>
 	<string name="poi_piste_grooming_skating">Skaten</string>
 	<string name="poi_piste_grooming_no">Nein</string>
@@ -1812,7 +1812,7 @@
 	<string name="poi_payment_e_zpass_no">E‑ZPass nicht akzeptiert</string>
 	<string name="poi_payment_kitcard_yes">KIT Karte</string>
 	<string name="poi_payment_kitcard_no">KIT Karte nicht akzeptiert</string>
-	<string name="poi_payment_v_pay_yes">V PAYKIT</string>
+	<string name="poi_payment_v_pay_yes">V PAY</string>
 	<string name="poi_payment_v_pay_no">V PAYKIT Karte nicht akzeptiert</string>
 	<string name="poi_payment_dogecoin_yes">Dogecoin</string>
 	<string name="poi_payment_dogecoin_no">Dogecoin nicht akzeptiert</string>
