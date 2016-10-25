@@ -114,7 +114,10 @@ public class ContextMenuAdapter {
 		@Override
 		public boolean isEnabled(int position) {
 			final ContextMenuItem item = getItem(position);
-			return item != null && item.getItemClickListener() != null;
+			if (item != null) {
+				return !item.isCategory() && item.getLayout() != R.layout.drawer_divider;
+			}
+			return true;
 		}
 
 		@Override
