@@ -2683,4 +2683,7 @@ Jeśli potrzebujesz pomocy podczas używania OsmAnd, prosimy o kontakt z naszym 
 
 i więcej...
  "</string>
+    <string name="trip_rec_notification_settings">Nagrywanie trasy (brak danych)</string>
+    <string name="trip_rec_notification_settings_desc">Pokaż komunikat który pozwoli rozpocząć nagrywanie trasy przez naciśnięcie przycisku Nagrywaj</string>
+    <string name="shared_string_notifications">Powiadomienia</string>
     </resources>
