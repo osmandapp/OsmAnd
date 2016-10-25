@@ -838,7 +838,9 @@ Tiu ĉi vido oni povas nuligi per malaktivigi ĝin tie ĉi, aŭ per ŝanĝi la \
     <string name="loading_smth">Ŝarganta %1$s…</string>
     <string name="map_widget_plain_time">Nuna tempo</string>
     <string name="gpx_wpt">Navigadpunkto</string>
-    <string name="selected_gpx_info_show">\n\nPremtrenu por vidi sur la mapo</string>
+    <string name="selected_gpx_info_show">
+
+Premtenu por vidi sur la mapo</string>
     <string name="delay_navigation_start">Eki turnon-post-turno navigadon aŭtomate</string>
     <string name="local_index_gpx_info_show">\n\nPremtenu por montri agordojn</string>
     <string name="gpx_info_waypoints">"Navigadpunktoj: %1$s "</string>
@@ -2466,7 +2468,7 @@ Se vi bezonas helpon pri OsmAnd aplikaĵo, bonvolu kontakti nian helpantaron: su
     <string name="edit_filter">Redakti filtrilon</string>
     <string name="subcategories">Subkategorioj</string>
     <string name="translit_names">Transliterumi nomojn</string>
-    <string name="translit_name_if_miss">Transliterumas se %1$s nomo mankas</string>
+    <string name="translit_name_if_miss">Transliterumas se nomo en %1$s mankas</string>
     <string name="search_hint">Entajpu urbon, adreson aŭ nomon de interesejo</string>
     <string name="rendering_value_light_brown_name">Bronzkolora hela</string>
     <string name="rendering_value_dark_brown_name">Bronzkolora malhela</string>
@@ -2510,6 +2512,6 @@ Se vi bezonas helpon pri OsmAnd aplikaĵo, bonvolu kontakti nian helpantaron: su
 kaj pli...
  "</string>
     <string name="trip_rec_notification_settings">Registrado de kurso (sen datumoj)</string>
-    <string name="trip_rec_notification_settings_desc">Montras sciigon kiu ebligos eki registradon de kurso per premo de butono \'Registri\'</string>
+    <string name="trip_rec_notification_settings_desc">Montras sciigon kiu ebligos eki registradon de kurso per premo de Registri-butono</string>
     <string name="shared_string_notifications">Sciigoj</string>
     </resources>
