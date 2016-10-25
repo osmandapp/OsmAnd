@@ -27,6 +27,8 @@ public class GpxNotification extends OsmandNotification {
 	public final static String OSMAND_START_GPX_SERVICE_ACTION = "OSMAND_START_GPX_SERVICE_ACTION";
 	public final static String OSMAND_STOP_GPX_SERVICE_ACTION = "OSMAND_STOP_GPX_SERVICE_ACTION";
 
+	private boolean wasDismissed;
+
 	public GpxNotification(OsmandApplication app) {
 		super(app);
 	}
@@ -93,6 +95,11 @@ public class GpxNotification extends OsmandNotification {
 	}
 
 	@Override
+	public void onNotificationDismissed() {
+		wasDismissed = true;
+	}
+
+	@Override
 	public Builder buildNotification() {
 		if (!isEnabled()) {
 			return null;
@@ -123,6 +130,10 @@ public class GpxNotification extends OsmandNotification {
 			}
 		}
 
+		if ((wasDismissed || !app.getSettings().SHOW_TRIP_REC_NOTIFICATION.get()) && !ongoing) {
+			return null;
+		}
+
 		final Builder notificationBuilder = createBuilder()
 				.setContentTitle(notificationTitle)
 				.setStyle(new BigTextStyle().bigText(notificationText));
@@ -134,11 +145,14 @@ public class GpxNotification extends OsmandNotification {
 			Intent stopIntent = new Intent(OSMAND_STOP_GPX_SERVICE_ACTION);
 			PendingIntent stopPendingIntent = PendingIntent.getBroadcast(app, 0, stopIntent,
 					PendingIntent.FLAG_UPDATE_CURRENT);
-			notificationBuilder.addAction(R.drawable.ic_pause,
-					app.getString(R.string.shared_string_pause), stopPendingIntent);
 			if (app.getSavingTrackHelper().getDistance() > 0) {
+				notificationBuilder.addAction(R.drawable.ic_pause,
+						app.getString(R.string.shared_string_pause), stopPendingIntent);
 				notificationBuilder.addAction(R.drawable.ic_action_save, app.getString(R.string.shared_string_save),
 						savePendingIntent);
+			} else {
+				notificationBuilder.addAction(R.drawable.ic_action_rec_stop,
+						app.getString(R.string.shared_string_control_stop), stopPendingIntent);
 			}
 		} else {
 			Intent startIntent = new Intent(OSMAND_START_GPX_SERVICE_ACTION);

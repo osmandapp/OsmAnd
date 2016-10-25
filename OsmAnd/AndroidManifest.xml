@@ -717,6 +717,8 @@
 		</service>
 
 		<receiver android:name="net.osmand.plus.OnNavigationServiceAlarmReceiver" />
+		<receiver android:name="net.osmand.plus.notifications.NotificationDismissReceiver" />
+
 		<activity android:name="net.osmand.plus.activities.PrintDialogActivity" />
 		
 		<receiver
