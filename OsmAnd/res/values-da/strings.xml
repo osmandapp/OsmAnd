@@ -2709,4 +2709,7 @@ Hvis du  ønsker at støtte OsmAnd og OSM, er dette en god måde at gøre det p�
 
   og mere…
  "</string>
+    <string name="trip_rec_notification_settings">Tur optagelse (ingen data)</string>
+    <string name="trip_rec_notification_settings_desc">Vis meddelelse, som giver mulighed for at starte turoptagelse ved at trykke på knappen Optag</string>
+    <string name="shared_string_notifications">Meddelelser</string>
     </resources>
