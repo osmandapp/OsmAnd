@@ -260,7 +260,7 @@ public class RouteDataObject {
 		for (int i = 0; i < sz; i++) {
 			RouteTypeRule r = region.quickGetEncodingRule(types[i]);
 			if(r.isForward() != 0) {
-				if((r.isForward() > 1) != direction) {
+				if((r.isForward() == 1) != direction) {
 					continue;
 				}
 			}
