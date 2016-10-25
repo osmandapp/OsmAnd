@@ -2330,4 +2330,12 @@ Om du tycker om OsmAnd och OSM och vill stödja dem så är detta ett utmärkt s
     <string name="rendering_value_light_brown_name">Ljusbrun</string>
     <string name="rendering_value_dark_brown_name">Mörkbrun</string>
     <string name="rendering_attr_contourColorScheme_name">Färgschema för konturer</string>
+    <string name="shared_string_notifications">Aviseringar</string>
+    <string name="shared_string_continue">Fortsätt</string>
+    <string name="shared_string_pause">Pausa</string>
+    <string name="shared_string_trip">Tripp</string>
+    <string name="shared_string_recorded">Inspelat</string>
+    <string name="shared_string_record">Spela in</string>
+    <string name="gpx_logging_no_data">Inga data</string>
+    <string name="trip_rec_notification_settings_desc">Visa avisering som gör att du kan starta trippinspelning genom att trycka på knappen Spela in</string>
     </resources>
