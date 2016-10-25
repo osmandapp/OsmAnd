@@ -1165,11 +1165,11 @@
 	<string name="poi_content_salt">Enhavo: salo</string>
 	<string name="poi_content_grain">Enhavo: panherbo</string>
 
-	<string name="poi_nudism_yes">Permesita</string>
-	<string name="poi_nudism_no">Malpermesita</string>
+	<string name="poi_nudism_yes">Permesata</string>
+	<string name="poi_nudism_no">Malpermesata</string>
 	<string name="poi_nudism_obligatory">Deviga</string>
 	<string name="poi_nudism_customary">Konsilinda</string>
-	<string name="poi_nudism_permissive">Verŝajne permesita</string>
+	<string name="poi_nudism_permissive">Verŝajne permesata</string>
 
 	<string name="poi_trade_building_supplies">Konstrumaterialoj</string>
 	<string name="poi_trade_plumbing">Tuboj</string>
@@ -1293,9 +1293,9 @@
 	<string name="poi_covered_yes">Jes</string>
 	<string name="poi_covered_no">Sen-tegmenta</string>
 
-	<string name="poi_smoking_no">Malpermesita</string>
-	<string name="poi_smoking_outside">Permesita nur ekstere</string>
-	<string name="poi_smoking_yes">Permesita</string>
+	<string name="poi_smoking_no">Malpermesata</string>
+	<string name="poi_smoking_outside">Permesata nur ekstere</string>
+	<string name="poi_smoking_yes">Permesata</string>
 	<string name="poi_smoking_separated">Nur en aparta ĉambro</string>
 	<string name="poi_smoking_isolated">Nur en izolita ĉambro</string>
 	<string name="poi_smoking_dedicated">Destinita por fumantoj</string>
@@ -1307,7 +1307,7 @@
 	<string name="poi_tactile_paving_no">Sen reliefo por blinduloj</string>
 	<string name="poi_traffic_signals_sound_yes">Jes</string>
 	<string name="poi_traffic_signals_sound_no">Ne</string>
-	<string name="poi_traffic_signals_sound_walk">Tiam kiam irado permesita</string>
+	<string name="poi_traffic_signals_sound_walk">Tiam kiam irado permesata</string>
 
 	<string name="poi_leisure_common">Publika ripoza tereno</string>
 	<string name="poi_highway_steps">Ŝtuparo</string>
@@ -1380,7 +1380,7 @@
 	<string name="poi_aerialway_heating_yes">Jes</string>
 	<string name="poi_aerialway_heating_no">Sen hejtado</string>
 	<string name="poi_aerialway_bicycle_yes">Jes</string>
-	<string name="poi_aerialway_bicycle_no">Bicikloj: malpermesitaj</string>
+	<string name="poi_aerialway_bicycle_no">Bicikloj: malpermesataj</string>
 	<string name="poi_aerialway_bicycle_summer">Nur somere</string>
 	<string name="poi_aerialway_access_entry">Nur eniro</string>
 	<string name="poi_aerialway_access_exit">Nur eliro</string>
@@ -2085,9 +2085,9 @@
 	<string name="poi_solarium_yes">Sunbrunigejo</string>
 
 	<string name="poi_tents_yes">Permesataj</string>
-	<string name="poi_tents_no">Tendoj malpermesitaj</string>
-	<string name="poi_openfire_yes">Fajro permesita</string>
-	<string name="poi_openfire_no">Fajro malpermesita</string>
+	<string name="poi_tents_no">Tendoj malpermesataj</string>
+	<string name="poi_openfire_yes">Fajro permesata</string>
+	<string name="poi_openfire_no">Fajro malpermesata</string>
 	<string name="poi_backcountry_yes">Jes</string>
 	<string name="poi_backcountry_no">Ne</string>
 	<string name="poi_scout_yes">Skolta kampadejo: jes</string>
@@ -2103,7 +2103,7 @@
 	<string name="poi_shower_cold">Duŝejo: malvarma akvo</string>
 	<string name="poi_shower_indoor">Duŝejo: en-dome</string>
 	<string name="poi_caravans_yes">Jes</string>
-	<string name="poi_caravans_no">Kampadveturiloj: malpermesitaj</string>
+	<string name="poi_caravans_no">Kampadveturiloj: malpermesataj</string>
 	<string name="poi_impromptu_yes">Neformala: jes</string>
 	<string name="poi_impromptu_no">Neformala: ne</string>
 	<string name="poi_sanitary_dump_station_yes">Ejo por forigado de fekaĵoj: jes</string>
@@ -2118,8 +2118,8 @@
 
 	<string name="poi_capacity_tents">Nombro da tendoj</string>
 	<string name="poi_capacity_caravans">Nombro da kampadveturiloj</string>
-	<string name="poi_dog_yes">Hundoj permesitaj</string>
-	<string name="poi_dog_no">Hundoj malpermesitaj</string>
+	<string name="poi_dog_yes">Hundoj permesataj</string>
+	<string name="poi_dog_no">Hundoj malpermesataj</string>
 
 	<string name="poi_bandstand">Orkestrejeto</string>
 	<string name="poi_kiln">Forno industria</string>
@@ -2255,10 +2255,10 @@
 	<string name="poi_animal_training_dog">Hundoj</string>
 	<string name="poi_animal_training_horse">Ĉevaloj</string>
 
-	<string name="poi_horse_yes">Ĉevaloj permesitaj</string>
-	<string name="poi_horse_no">Ĉevaloj malpermesitaj</string>
+	<string name="poi_horse_yes">Ĉevaloj permesataj</string>
+	<string name="poi_horse_no">Ĉevaloj malpermesataj</string>
 	<string name="poi_animal_yes">Bestoj permesitaj</string>
-	<string name="poi_animal_no">Bestoj malpermesitaj</string>
+	<string name="poi_animal_no">Bestoj malpermesataj</string>
 
 	<string name="poi_historic_period_nuragic">Historia periodo: Nuraga</string>
 	<string name="poi_historic_period_stone_bronze_undetermined">Historia periodo: ŝtona epoko aŭ bronza epoko (nadeterminita)</string>
@@ -2564,7 +2564,7 @@
 	<string name="poi_free_flying_site_orientation_sw">Direkto de liber-flugado: sud-okcidento</string>
 	<string name="poi_free_flying_site_orientation_w">Direkto de liber-flugado: okcidento</string>
 	<string name="poi_free_flying_site_orientation_nw">Direkto de liber-flugado: nord-okcidento</string>
-	<string name="poi_free_flying_no_flight_time">Libera flugado malpermesita je</string>
+	<string name="poi_free_flying_no_flight_time">Libera flugado malpermesata je</string>
 	<string name="poi_free_flying_guest_guidelines_yes">Instrukcioj por gastoj: jes</string>
 	<string name="poi_free_flying_guest_guidelines_no">Instrukcioj por gastoj: ne</string>
 
