@@ -1,5 +1,8 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
+    <string name="trip_rec_notification_settings">Запись поездки (нет данных)</string>
+    <string name="trip_rec_notification_settings_desc">Показывать уведомление, которое позволит начать запись с помощью кнопки \"Запись поездки\"</string>
+    <string name="shared_string_notifications">Уведомления</string>
     <string name="shared_string_continue">Продолжить</string>
     <string name="shared_string_pause">Пауза</string>
     <string name="shared_string_trip">Поездка</string>
