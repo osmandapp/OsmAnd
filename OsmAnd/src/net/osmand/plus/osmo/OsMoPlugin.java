@@ -17,6 +17,7 @@ import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.NavigationService;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
@@ -94,6 +95,9 @@ public class OsMoPlugin extends OsmandPlugin implements OsMoReactor {
 	@Override
 	public void disable(OsmandApplication app) {
 		super.disable(app);
+		if (app.getNavigationService() != null) {
+			app.getNavigationService().stopIfNeeded(app, NavigationService.USED_BY_LIVE);
+		}
 		tracker.disableTracker();
 		service.disconnect();
 	}

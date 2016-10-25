@@ -21,6 +21,8 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
+import net.osmand.plus.notifications.OsmandNotification;
+import net.osmand.plus.notifications.OsmandNotification.NotificationType;
 
 import org.apache.commons.logging.Log;
 import org.json.JSONArray;
@@ -174,6 +176,7 @@ public class OsMoService implements OsMoReactor {
 		}
 		thread = new OsMoThread(this);
 		enabled = true;
+		app.getNotificationHelper().refreshNotification(NotificationType.OSMO);
 		return true;
 	}
 	
@@ -186,6 +189,7 @@ public class OsMoService implements OsMoReactor {
 			enabled = false;
 			thread.stopConnection();
 			app.getSettings().OSMO_LAST_PING.set(0l);
+			app.getNotificationHelper().refreshNotification(NotificationType.OSMO);
 		}
 	}
 	

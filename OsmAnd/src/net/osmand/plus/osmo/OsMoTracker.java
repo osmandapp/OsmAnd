@@ -3,6 +3,8 @@ package net.osmand.plus.osmo;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
+import net.osmand.plus.notifications.OsmandNotification;
+import net.osmand.plus.notifications.OsmandNotification.NotificationType;
 import net.osmand.plus.osmo.OsMoGroupsStorage.OsMoDevice;
 
 import org.apache.commons.logging.Log;
@@ -67,6 +69,7 @@ public class OsMoTracker implements OsMoReactor {
 	public void enableTracker() {
 		if (!isEnabledTracker()) {
 			enableTrackerCmd();
+			service.getMyApplication().getNotificationHelper().refreshNotification(NotificationType.OSMO);
 		}
 	}
 
@@ -80,6 +83,7 @@ public class OsMoTracker implements OsMoReactor {
 			stateSendLocation.set(false);
 			service.pushCommand("TRACKER_SESSION_CLOSE");
 		}
+		service.getMyApplication().getNotificationHelper().refreshNotification(NotificationType.OSMO);
 	}
 
 	public void startTrackingId(OsMoDevice d) {
