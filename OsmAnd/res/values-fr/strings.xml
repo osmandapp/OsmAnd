@@ -2455,4 +2455,7 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
 
  et bien plus…
  "</string>
+    <string name="shared_string_notifications">Notifications</string>
+    <string name="trip_rec_notification_settings">Enregistrement de l\'itinéraire (aucune donnée)</string>
+    <string name="trip_rec_notification_settings_desc">Afficher une notification permettant de démarrer l\'enregistrement de l\'itinéraire</string>
     </resources>
