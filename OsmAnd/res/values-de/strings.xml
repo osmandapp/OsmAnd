@@ -2571,4 +2571,5 @@ und vieles mehr ...
     <string name="trip_rec_notification_settings">Streckenaufzeichnung (keine Daten)</string>
     <string name="trip_rec_notification_settings_desc">Benachrichtigung anzeigen, die es erlaubt die Streckenaufzeichnung durch Betätigen der Schaltfläche “Aufzeichnen“ zu starten</string>
     <string name="shared_string_notifications">Benachrichtigungen</string>
+    <string name="osmo_service_running">OsMo Dienst wird ausgeführt</string>
     </resources>
