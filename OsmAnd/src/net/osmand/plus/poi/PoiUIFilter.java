@@ -537,6 +537,9 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 			for (PoiFilter pf : ((PoiCategory) pt).getPoiFilters()) {
 				fillPoiAdditionals(pf, true);
 			}
+			for (PoiType ps : ((PoiCategory) pt).getPoiTypes()) {
+				fillPoiAdditionals(ps, false);
+			}
 		} else if (pt instanceof PoiFilter && !(pt instanceof PoiCategory)) {
 			for (PoiType ps : ((PoiFilter) pt).getPoiTypes()) {
 				fillPoiAdditionals(ps, false);
