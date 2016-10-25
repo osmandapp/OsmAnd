@@ -2457,5 +2457,8 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
  "</string>
     <string name="shared_string_notifications">Notifications</string>
     <string name="trip_rec_notification_settings">Enregistrement de l\'itinéraire (aucune donnée)</string>
-    <string name="trip_rec_notification_settings_desc">Afficher une notification permettant de démarrer l\'enregistrement de l\'itinéraire</string>
+    <string name="trip_rec_notification_settings_desc">Afficher une notification contenant un bouton pour débuter l’Enregistrement de l\'itinéraire</string>
+    <string name="osmo_share_location">Partager la position</string>
+    <string name="osmo_service_running">Le service OsMo est actif</string>
+    <string name="osmo_pause_location">Interrompre la localisation</string>
     </resources>
