@@ -477,7 +477,7 @@
 	<string name="poi_zoo">Зоопарк</string>
 	<string name="poi_theme_park">Парк развлечений</string>
 
-	<string name="poi_hotel">Гостиница</string>
+	<string name="poi_hotel">Гостиница, отель</string>
 	<string name="poi_guest_house">Гостевой дом</string>
 	<string name="poi_hostel">Хостел</string>
 	<string name="poi_motel">Мотель</string>
@@ -1720,7 +1720,7 @@
 	<string name="poi_shelter_type_abandoned">Тип укрытия: заброшенное</string>
 
 	<string name="poi_internet_access_type_wlan">Беспроводной</string>
-	<string name="poi_internet_access_type_wired">Через кабель</string>
+	<string name="poi_internet_access_type_wired">Кабельный</string>
 	<string name="poi_internet_access_type_public">Публичный доступ в интернет</string>
 	<string name="poi_internet_access_type_no">Без доступа в интернет</string>
 	<string name="poi_internet_access_type_yes">C доступом в интернет</string>
