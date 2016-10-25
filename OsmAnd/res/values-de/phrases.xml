@@ -780,7 +780,7 @@
 	<string name="poi_wiki_lang_nn">Neu-Norwegisches Wiki</string>
 	<string name="poi_wiki_lang_no">Norwegisches Wiki</string>
 	<string name="poi_wiki_lang_hr">Kroatisches Wiki</string>
-	<string name="poi_wiki_lang_ht">Haïtianisches Wiki</string>
+	<string name="poi_wiki_lang_ht">Haitianisches Wiki</string>
 	<string name="poi_wiki_lang_ca">Katalanisches Wiki</string>
 	<string name="poi_wiki_place">Wikipedia</string>
 	<string name="poi_wiki_lang_en">Englisches Wiki</string>
@@ -2343,7 +2343,7 @@
 	<string name="poi_historic_civilization_etruscan">Zivilisation: Etrusker (12. - 6. Jh. v.Chr.)</string>
 	<string name="poi_historic_civilization_prehistoric">Civilization: Prähistorisch</string>
 	<string name="poi_historic_civilization_ancient_greek">Zivilisation: Altgriechisch</string>
-	<string name="poi_historic_civilization_roman">Zivilisation: römisch</string>
+	<string name="poi_historic_civilization_roman">Zivilisation: Römer</string>
 	<string name="poi_historic_civilization_byzantine">"Zivilisation: Byzantinisches Reich (285 - 1453  v.Chr.)"</string>
 	<string name="poi_historic_civilization_imperial_chinese">"Zivilisation: kaiserliches China (221 - 1911  v.Chr.)"</string>
 	<string name="poi_historic_civilization_ancient_egyptian">Zivilisation: Altes Ägypten (bis 332 v.Chr.)</string>
@@ -2421,7 +2421,7 @@
 	<string name="poi_wiki_lang_br">Bretonisches Wiki</string>
 	<string name="poi_wiki_lang_cy">Walisisches Wiki</string>
 	<string name="poi_wiki_lang_eo">Esperantoisches Wiki</string>
-	<string name="poi_wiki_lang_eu">baskisches Wiki</string>
+	<string name="poi_wiki_lang_eu">Baskisches Wiki</string>
 	<string name="poi_wiki_lang_fa">Farsisches Wiki</string>
 	<string name="poi_wiki_lang_ml">Malayalamisches Wiki</string>
 	<string name="poi_wiki_lang_mr">Marathisches Wiki</string>
@@ -2431,7 +2431,7 @@
 	<string name="poi_wiki_lang_zhminnan">Minnanisches Wiki</string>
 	<string name="poi_wiki_lang_mg">Malagasisches Wiki</string>
 	<string name="poi_wiki_lang_tt">Tatarisches Wiki</string>
-	<string name="poi_wiki_lang_ky">kirgisisches Wiki</string>
+	<string name="poi_wiki_lang_ky">Kirgisisches Wiki</string>
 	<string name="poi_wiki_lang_tg">Tadschikisches Wiki</string>
 	<string name="poi_wiki_lang_ba">baschkirisches Wiki</string>
 	<string name="poi_wiki_lang_sco">Schottisches Wiki</string>
@@ -2912,8 +2912,8 @@
 
 <string name="poi_crossing_bell_yes">Kreuzungssignalton</string>
 	<string name="poi_crossing_bell_no">Kreuzungssignalton: nein</string>
-	<string name="poi_crossing_light_yes">Fußgängerampel</string>
-	<string name="poi_crossing_light_no">Kreuzungsampel: nein</string>
+	<string name="poi_crossing_light_yes">Warnlicht</string>
+	<string name="poi_crossing_light_no">Warnlicht: nein</string>
 	<string name="poi_crossing_on_demand_yes">Übergang auf Anfrage</string>
 	<string name="poi_crossing_on_demand_no">Übergang auf Anfrage: nein</string>
 	<string name="poi_crossing_saltire_yes">Andreaskreuz</string>
@@ -2923,7 +2923,7 @@
 	<string name="poi_crossing_supervision_attendant">Kreuzungsaufsicht: Begleiter</string>
 	<string name="poi_crossing_supervision_camera">Kreuzungsaufsicht: Kamera</string>
 
-	<string name="poi_dispensing_yes">Dosierung: Ja</string>
+	<string name="poi_dispensing_yes">Spender: Ja</string>
 	<string name="poi_dispensing_no">Spender: Nein</string>
 
 	<string name="poi_pumping_station">Pumpstation</string>
@@ -3015,7 +3015,7 @@
 <string name="poi_spices">Gewürzgeschäft</string>
 
 <string name="poi_fuel_type">Typ</string>
-	<string name="poi_payment_type">Art der Zahlung</string>
+	<string name="poi_payment_type">Zahlungsart</string>
 	<string name="poi_additional_type">Zusätzlich</string>
 <string name="poi_service_bicycle_charging_yes">Fahrrad laden: Ja</string>
 	<string name="poi_service_bicycle_charging_no">Fahrrad laden: Nein</string>
@@ -3047,7 +3047,7 @@
 	<string name="poi_animal_training_type">Typ</string>
 	<string name="poi_embassy_type">Typ</string>
 	<string name="poi_city_capital">Hauptstadt</string>
-	<string name="poi_traffic_signals_sound">Ton</string>
+	<string name="poi_traffic_signals_sound">Signalton</string>
 	<string name="poi_subway_station_filter">U-Bahnstation</string>
 	<string name="poi_healthcare_alternative_types">Spezialisierung</string>
 	<string name="poi_free_flying_characteristics">Charakteristisch</string>
@@ -3070,7 +3070,7 @@
 	<string name="poi_seasonal">Saisonal</string>
 	<string name="poi_water_characteristic">Wassermerkmal</string>
 	<string name="poi_beach_surface_type">Oberfläche</string>
-	<string name="poi_nudism">Freie Körper Kultur (FKK)</string>
+	<string name="poi_nudism">FKK</string>
 
 <string name="poi_wheelchair_accessibility">Rollstuhlzugänglichkeit</string>
 	<string name="poi_resort_type">Typ</string>
@@ -3083,7 +3083,7 @@
 	<string name="poi_xmas_pyramid">Weihnachtspyramide</string>
 	<string name="poi_xmas_shop">Weihnachtesgeschäft</string>
 	<string name="poi_xmas_shop_christmas_tree">Teeladen</string>
-	<string name="poi_xmas_tree">Weihnachtesbaum</string>
+	<string name="poi_xmas_tree">Weihnachtsbaum</string>
 	<string name="poi_xmas_day_date">Weihnachten: Zeit für die Veranstaltung</string>
 	<string name="poi_xmas_note">Weihnachten: Hinweis</string>
 	<string name="poi_xmas_opening_hours">Weihnachten: Öffnungszeiten</string>
