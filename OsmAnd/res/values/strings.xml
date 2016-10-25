@@ -9,6 +9,9 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="trip_rec_notification_settings">Trip recording (no data)</string>
+    <string name="trip_rec_notification_settings_desc">Show notification which allows to start trip recording by pressing Record button</string>
+    <string name="shared_string_notifications">Notifications</string>
     <string name="shared_string_continue">Continue</string>
     <string name="shared_string_pause">Pause</string>
     <string name="shared_string_trip">Trip</string>

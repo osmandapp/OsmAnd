@@ -3,6 +3,7 @@ package net.osmand.plus.notifications;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.NotificationCompat.Builder;
@@ -48,7 +49,8 @@ public abstract class OsmandNotification {
 				.setVisibility(android.support.v7.app.NotificationCompat.VISIBILITY_PUBLIC)
 				.setPriority(getPriority())
 				.setOngoing(ongoing)
-				.setContentIntent(contentPendingIntent);
+				.setContentIntent(contentPendingIntent)
+				.setDeleteIntent(NotificationDismissReceiver.createIntent(app, getType()));
 
 		if (color != 0) {
 			builder.setColor(color);
@@ -71,6 +73,9 @@ public abstract class OsmandNotification {
 	public abstract boolean isEnabled();
 
 	public void setupNotification(Notification notification) {
+	}
+
+	public void onNotificationDismissed() {
 	}
 
 	public boolean showNotification() {

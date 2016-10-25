@@ -71,6 +71,23 @@ public class NotificationHelper {
 		}
 	}
 
+	public void onNotificationDismissed(NotificationType notificationType) {
+		switch (notificationType) {
+			case NAVIGATION:
+				navigationNotification.onNotificationDismissed();
+				break;
+			case GPX:
+				gpxNotification.onNotificationDismissed();
+				break;
+			case OSMO:
+				osMoNotification.onNotificationDismissed();
+				break;
+			case GPS:
+				gpsWakeUpNotification.onNotificationDismissed();
+				break;
+		}
+	}
+
 	public void refreshNotifications() {
 		boolean navNotificationVisible = navigationNotification.refreshNotification();
 		gpxNotification.refreshNotification();

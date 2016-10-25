@@ -41,6 +41,7 @@ public class SettingsMonitoringActivity extends SettingsBaseActivity {
 		
 		createLoggingSection(grp);
 		createLiveSection(grp);
+		createNotificationSection(grp);
 		profileDialog();
     }
 
@@ -132,6 +133,16 @@ public class SettingsMonitoringActivity extends SettingsBaseActivity {
 				MINUTES, 1000, R.string.live_monitoring_interval, R.string.live_monitoring_interval_descr));
 	}
 
+	private void createNotificationSection(PreferenceScreen grp) {
+		PreferenceCategory cat;
+		cat = new PreferenceCategory(this);
+		cat.setTitle(R.string.shared_string_notifications);
+		grp.addPreference(cat);
+
+		final CheckBoxPreference tripRecording = createCheckBoxPreference(settings.SHOW_TRIP_REC_NOTIFICATION, R.string.trip_rec_notification_settings,
+				R.string.trip_rec_notification_settings_desc);
+		cat.addPreference(tripRecording);
+	}
 
 	public void updateAllSettings() {
 		super.updateAllSettings();
