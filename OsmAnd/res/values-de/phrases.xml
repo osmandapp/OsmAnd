@@ -166,7 +166,7 @@
 	<string name="poi_croquet">Krocket</string>
 	<string name="poi_bureau_de_change">Wechselstube</string>
 	<string name="poi_curtain">Vorhanggeschäft</string>
-	<string name="poi_customs">Benutzerdefiniert</string>
+	<string name="poi_customs">Zollamt</string>
 	<string name="poi_cycling">Radsport</string>
 	<string name="poi_dairy">Molkerei </string>
 	<string name="poi_dam">Staudamm</string>
@@ -189,7 +189,7 @@
 	<string name="poi_electronics">Elektronikgeschäft</string>
 	<string name="poi_embassy">Botschaft</string>
 	<string name="poi_emergency_access_point">Rettungspunkt</string>
-	<string name="poi_emergency_phone">Notfalltelefon</string>
+	<string name="poi_emergency_phone">Notruftelefon</string>
 	<string name="poi_employment_agency">Arbeitsamt</string>
 	<string name="poi_equestrian">Pferdesport</string>
 	<string name="poi_erotic">Sex-Shop</string>
@@ -297,7 +297,7 @@
 	<string name="poi_memorial">Gedenkstätte</string>
 	<string name="poi_craft_metal_construction">Metallbau</string>
 	<string name="poi_midwife">Hebamme</string>
-	<string name="poi_migration">Wanderung</string>
+	<string name="poi_migration">Migration</string>
 	<string name="poi_military">Militär</string>
 	<string name="poi_military_airfield">Fliegerhorst</string>
 	<string name="poi_military_barracks">Barracke</string>
@@ -394,7 +394,7 @@
 	<string name="poi_public_transport_platform_trolleybus">Oberleitungsbushaltestelle</string>
 	<string name="poi_public_transport_station">Öff. Verkehrsmittel-Station</string>
 	<string name="poi_quarry">Steinbruch</string>
-	<string name="poi_raceway">Gerinne</string>
+	<string name="poi_raceway">Rennstrecke</string>
 	<string name="poi_racquet">Schläger</string>
 	<string name="poi_radiotechnics">Radiotechniker</string>
 	<string name="poi_halt">Eisenbahnhaltestelle</string>
@@ -409,7 +409,7 @@
 	<string name="poi_restaurant">Restaurant</string>
 	<string name="poi_ridge">Bergrücken</string>
 	<string name="poi_craft_rigger">Ausleger</string>
-	<string name="poi_river">Fluß</string>
+	<string name="poi_river">Fluss</string>
 	<string name="poi_roller_skating">Rollschuhe</string>
 	<string name="poi_craft_roofer">Dachdecker</string>
 	<string name="poi_rowing">Rudersport</string>
@@ -476,7 +476,7 @@
 	<string name="poi_service_tyres">Reifenhändler</string>
 	<string name="poi_ses_station">SES-Station</string>
 	<string name="poi_sewing">Schneiderei</string>
-	<string name="poi_shelter">Schuppen</string>
+	<string name="poi_shelter">Unterstand</string>
 	<string name="poi_ship_chandler">Schiffsausrüster</string>
 	<string name="poi_historic_ship">Historisches Schiff</string>
 	<string name="poi_craft_shoemaker">Schuster</string>
@@ -499,13 +499,13 @@
 	<string name="poi_spring">Quelle</string>
 	<string name="poi_stadium">Stadion</string>
 	<string name="poi_craft_stand_builder">Messebauer</string>
-	<string name="poi_standpipe">Brunnen</string>
+	<string name="poi_standpipe">Wasserhahn</string>
 	<string name="poi_stationery">Bürobedarf</string>
 	<string name="poi_stone">Auffallender Stein</string>
 	<string name="poi_craft_stonemason">Steinmetz</string>
 	<string name="poi_strait">Straße</string>
 	<string name="poi_stream">Bach</string>
-	<string name="poi_stripclub">Striplokal</string>
+	<string name="poi_stripclub">Stripclub</string>
 	<string name="poi_studio">Studio</string>
 	<string name="poi_suburb">Stadtteil</string>
 	<string name="poi_subway_entrance">U-Bahnhofeingang</string>
@@ -513,7 +513,7 @@
 	<string name="poi_craft_sun_protection">Lichtschutz</string>
 	<string name="poi_supermarket">Supermarkt</string>
 	<string name="poi_surveillance">Überwachung</string>
-	<string name="poi_survey_point">Messstation</string>
+	<string name="poi_survey_point">Vermessungspunkt</string>
 	<string name="poi_craft_sweep">Kaminkehrer</string>
 	<string name="poi_swimming">Schwimmen</string>
 	<string name="poi_swimming_pool">Schwimmbecken</string>
@@ -533,7 +533,7 @@
 	<string name="poi_craft_tiler">Dachdecker</string>
 	<string name="poi_craft_tinsmith">Klempner</string>
 	<string name="poi_tobacco">Tabakwarengeschäft</string>
-	<string name="poi_toboggan">Rodelschlitten</string>
+	<string name="poi_toboggan">Rodel</string>
 	<string name="poi_toilets">Toilette</string>
 	<string name="poi_toll_booth">Mautstelle</string>
 	<string name="poi_information">Informationen</string>
@@ -603,7 +603,7 @@
 	<string name="poi_attraction_maze">Labyrinth</string>
 	<string name="poi_attraction_roller_coaster">Achterbahn</string>
 	<string name="poi_attraction_slide">Rutschbahn</string>
-	<string name="poi_attraction_summer_toboggan">Kunstbahnrodeln</string>
+	<string name="poi_attraction_summer_toboggan">Sommerrodelbahn</string>
 	<string name="poi_attraction_swing_carousel">Schaukel-Karussell</string>
 	<string name="poi_attraction_train">Eisenbahn (Attraktion)</string>
 	<string name="poi_attraction_water_slide">Wasserrutsche</string>
@@ -622,7 +622,7 @@
 		<string name="poi_water_supply">Wasserversorgung</string>
 		<string name="poi_communication">Kommunikation</string>
 		<string name="poi_trash_disposal">Müllentsorgung</string>
-		<string name="poi_landuse">Landnutzung o</string>
+		<string name="poi_landuse">Landnutzung</string>
 	<string name="poi_education">Bildung</string>
 	<string name="poi_administrative">Verwaltung</string>
 	<string name="poi_healthcare">Gesundheitssektor</string>
@@ -932,7 +932,7 @@
 	<string name="poi_recycling_metal">Metalle</string>
 	<string name="poi_recycling_electrical_items">Elektroschrott</string>
 	<string name="poi_recycling_plastic_bags">Plastiktüten</string>
-	<string name="poi_recycling_mobile_phones">Mobiltelefone</string>
+	<string name="poi_recycling_mobile_phones">Handys</string>
 	<string name="poi_recycling_computers">Computer</string>
 	<string name="poi_recycling_tyres">Reifen</string>
 	<string name="poi_recycling_tv_monitor">TV und Monitore</string>
@@ -954,10 +954,10 @@
 
 	<string name="poi_capital">Hauptstadt</string>
 	<string name="poi_shower">Dusche</string>
-	<string name="poi_email">Email</string>
+	<string name="poi_email">E-Mail</string>
 	<string name="poi_fax">Fax</string>
 	<string name="facebook">Facebook</string>
-	<string name="poi_mobile">Mobiltelefon</string>
+	<string name="poi_mobile">Handy</string>
 	<string name="poi_fee_no">Nein</string>
 	<string name="poi_drinking_water_yes">Ja</string>
 	<string name="poi_drinking_water_no">Nein</string>
@@ -1057,7 +1057,7 @@
 
 	<string name="poi_debris">Trümmer</string>
 	<string name="poi_height">Höhe</string>
-	<string name="poi_ele">Höhe über dem Meer</string>
+	<string name="poi_ele">Meereshöhe</string>
 	<string name="poi_start_date">Anfangsdatum</string>
 	<string name="poi_wheelchair_yes">Rollstuhlgerecht</string>
 	<string name="poi_wheelchair_no">Nein</string>
@@ -1139,7 +1139,7 @@
 	<string name="poi_aerialway_length">Länge</string>
 
 <string name="poi_craft_electronics">Elektrogeräte-Reparatur</string>
-	<string name="poi_aerialway_pylon">Seilbahnmast</string>
+	<string name="poi_aerialway_pylon">Stütze</string>
 
 	<string name="poi_memorial_war">Kriegsdenkmal</string>
 	<string name="poi_memorial_statue">Statue</string>
@@ -1186,7 +1186,7 @@
 	<string name="poi_architect_name">Architekt</string>
 
 	<string name="poi_architecture_modern">Architektur: modern</string>
-	<string name="poi_tunnel_car">Strassentunnel</string>
+	<string name="poi_tunnel_car">Straßentunnel</string>
 	<string name="poi_tunnel_pedestrian">Fußgängertunnel</string>
 	<string name="poi_tunnel_railway">Eisenbahntunnel</string>
 	<string name="poi_bridge_car">Straßenbrücke</string>
@@ -1283,8 +1283,8 @@
 
 	<string name="poi_wheelchair_description">Beschreibung für Rollstuhlnutzer</string>
 	<string name="poi_blind_description">Beschreibung für Blinde</string>
-	<string name="poi_handrail_yes">Handgelender: Ja</string>
-	<string name="poi_handrail_no">Handgelender: Nein</string>
+	<string name="poi_handrail_yes">Handlauf: Ja</string>
+	<string name="poi_handrail_no">Handlauf: Nein</string>
 	<string name="poi_ramp_yes">Rampe: Ja</string>
 	<string name="poi_ramp_no">Rampe: Nein</string>
 	<string name="poi_ramp_wheelchair_yes">Rampe für Rollstuhl: Ja</string>
@@ -1443,11 +1443,11 @@
 
 	<string name="poi_capacity">Kapazität</string>
 	<string name="poi_capacity_disabled_yes">Ja</string>
-	<string name="poi_capacity_disabled_no">keine reservierten Plätze für Behinderte</string>
-	<string name="poi_capacity_disabled">reservierte Plätze Behinderte</string>
-	<string name="poi_capacity_women_yes">reservierte Plätze für Frauen</string>
-	<string name="poi_capacity_women_no">keine reservierten Plätze für Frauen</string>
-	<string name="poi_capacity_women">reservierte Plätze für Frauen</string>
+	<string name="poi_capacity_disabled_no">Keine reservierten Plätze für Behinderte</string>
+	<string name="poi_capacity_disabled">Reservierte Plätze für Behinderte</string>
+	<string name="poi_capacity_women_yes">Reservierte Plätze für Frauen</string>
+	<string name="poi_capacity_women_no">Keine reservierten Plätze für Frauen</string>
+	<string name="poi_capacity_women">Reservierte Plätze für Frauen</string>
 	<string name="poi_capacity_pupils">reservierte Plätze für Schüler</string>
 	<string name="poi_capacity_teachers">reservierte Plätze für Lehrer</string>
 	<string name="poi_capacity_parent_yes">reservierte Plätze für Eltern</string>
@@ -1520,8 +1520,8 @@
 	<string name="poi_drive_through_no">Durchfahrt: Nein</string>
 
 	<string name="poi_brewery_additional">Brauereiname</string>
-	<string name="poi_microbrewery_yes">Minibrauereien</string>
-	<string name="poi_microbrewery_no">Keine Minibrauereien</string>
+	<string name="poi_microbrewery_yes">Minibrauerei</string>
+	<string name="poi_microbrewery_no">Keine Minibrauerei</string>
 
 	<string name="poi_takeaway_yes">Zum mitnehmen</string>
 	<string name="poi_takeaway_no">Nicht zum Mitnehmen</string>
@@ -1628,9 +1628,9 @@
 	<string name="poi_boat_storage">Bootslager</string>
 
 	<string name="poi_bridge_ref">Brücken Nr</string>
-	<string name="poi_tunnel_ref">"Tunnel  REF"</string>
+	<string name="poi_tunnel_ref">Tunnel Nr</string>
 
-	<string name="poi_ref">Referenz</string>
+	<string name="poi_ref">Nr</string>
 
 	<string name="poi_cargo_passengers">Passagiere</string>
 	<string name="poi_cargo_vehicle">Fahrzeuge</string>
@@ -1638,7 +1638,7 @@
 	<string name="poi_cargo_container">Container</string>
 	<string name="poi_cargo_hgv">LKW</string>
 
-	<string name="poi_fitness_station">Fitness Station</string>
+	<string name="poi_fitness_station">Fitnessstation</string>
 
 	<string name="poi_hackerspace">Hackerspace</string>
 
@@ -1923,7 +1923,7 @@
 	<string name="poi_self_service_no">keine Selbstbedienung</string>
 	<string name="poi_full_service_yes">Rundumservice</string>
 	<string name="poi_aeroway_fuel">Flugzeugtankstelle</string>
-	<string name="poi_public_bath">öffentliches Bad</string>
+	<string name="poi_public_bath">Öffentliches Bad</string>
 
 	<string name="poi_indoor_no">im Freien</string>
 	<string name="poi_indoor_yes">Innen</string>
@@ -2104,8 +2104,8 @@
 	<string name="poi_bridge_movable_transporter">Beweglicher Brückentyp: Transporter</string>
 	<string name="poi_bridge_movable_retractable">Beweglicher Brückentyp: einziehbar</string>
 
-	<string name="poi_lit_yes">Nachtbeleuchtung: Ja</string>
-	<string name="poi_lit_no">Nachtbeleuchtung: Nein</string>
+	<string name="poi_lit_yes">Beleuchtung: Ja</string>
+	<string name="poi_lit_no">Beleuchtung: Nein</string>
 
 	<string name="poi_surface_unpaved">Oberfläche: unbefestigte</string>
 	<string name="poi_surface_paved">Oberfläche: befestigte</string>
@@ -2134,9 +2134,9 @@
 	<string name="poi_route_bus_ref">Bus</string>
 	<string name="poi_route_share_taxi_ref">geteiltes Taxi</string>
 	<string name="poi_route_trolleybus_ref">Oberleitungsbus</string>
-	<string name="poi_route_tram_ref">Stadtbahn</string>
+	<string name="poi_route_tram_ref">Straßenbahn</string>
 	<string name="poi_route_train_ref">Zug</string>
-	<string name="poi_route_light_rail_ref">Stadtbahn</string>
+	<string name="poi_route_light_rail_ref">S-Bahn</string>
 	<string name="poi_route_monorail_ref">Einschienenbahn</string>
 	<string name="poi_route_funicular_ref">Seilbahn</string>
 	<string name="poi_route_ferry_ref">Fähre</string>
@@ -2153,14 +2153,14 @@
 	<string name="poi_service_bicycle_repair_no">Fahrradreparatur: Nein</string>
 	<string name="poi_service_bicycle_rental_yes">Verleih</string>
 	<string name="poi_service_bicycle_rental_no">Fahrradverleih: Nein</string>
-	<string name="poi_service_bicycle_pump_yes">Pumpe</string>
+	<string name="poi_service_bicycle_pump_yes">Fahrradpumpe</string>
 	<string name="poi_service_bicycle_pump_no">Fahrradpumpe: Nein</string>
 	<string name="poi_service_bicycle_diy_no">Fahrradwerkzeuge für Eigenreparatur: Nein</string>
 	<string name="poi_service_bicycle_diy_yes">Werkzeuge für Eigenreparatur</string>
-	<string name="poi_service_bicycle_cleaning_yes">Rreinigung</string>
+	<string name="poi_service_bicycle_cleaning_yes">Reinigung</string>
 	<string name="poi_service_bicycle_cleaning_no">Fahrradreinigung: Nein</string>
-	<string name="poi_service_bicycle_chaintool_yes">Kettenwerkzeug</string>
-	<string name="poi_service_bicycle_chaintool_no">Fahrradwerkzeugkette: Nein</string>
+	<string name="poi_service_bicycle_chaintool_yes">Fahrradkettenwerkzeug</string>
+	<string name="poi_service_bicycle_chaintool_no">Fahrradkettenwerkzeug: Nein</string>
 	<string name="poi_service_bicycle_second_hand_yes">Verkauf von Gebrauchtfahrräder</string>
 	<string name="poi_service_bicycle_second_hand_no">Verkauf von Gebrauchtfahrrädern: Nein</string>
 
@@ -2173,7 +2173,7 @@
 	<string name="poi_training_art">Ausbildung: Kunst</string>
 	<string name="poi_training_cooking">Ausbildung: Kochen</string>
 	<string name="poi_training_computer">Ausbildung: Computer</string>
-	<string name="poi_training_yoga">Ausbildung: Yoha</string>
+	<string name="poi_training_yoga">Ausbildung: Yoga</string>
 	<string name="poi_training_martial_art">Ausbildung: Kampfkunst</string>
 	<string name="poi_training_aviation">Ausbildung: Luftfahrt</string>
 	<string name="poi_training_hairdressing">Ausbildung: Frisör</string>
@@ -2197,7 +2197,7 @@
 	<string name="poi_industrial_port">Typ: Haven</string>
 	<string name="poi_industrial_depot">Typ: Lagerhaus</string>
 
-	<string name="poi_watering_place">Badeort</string>
+	<string name="poi_watering_place">Trog</string>
 	<string name="poi_animal_boarding">Tierbeförderung</string>
 	<string name="poi_animal_boarding_dog">Beförderungstype: Hund</string>
 	<string name="poi_animal_boarding_cat">Beförderungstype: Katze</string>
@@ -2249,11 +2249,11 @@
 
 	<string name="poi_surveillance_indoor">Überwachung: Innen</string>
 	<string name="poi_surveillance_outdoor">Überwachung: Außen</string>
-	<string name="poi_surveillance_public">Überwachung: offentlich</string>
+	<string name="poi_surveillance_public">Überwachung: öffentlicher Bereich</string>
 
 	<string name="poi_clothes_denim">Jeans</string>
 	<string name="poi_clothes_fur">Pelz</string>
-	<string name="poi_clothes_maternity">Umstand</string>
+	<string name="poi_clothes_maternity">Mutterschaft</string>
 	<string name="poi_clothes_vintage">Historisch</string>
 	<string name="poi_clothes_shirts">Hemden</string>
 	<string name="poi_historic_manor">Historischer Gutshof</string>
