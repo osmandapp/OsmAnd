@@ -770,6 +770,14 @@ public class MapActivityActions implements DialogProvider {
 		//////////// Others
 		OsmandPlugin.registerOptionsMenu(mapActivity, optionsMenuHelper);
 
+		int pluginsItemIndex = -1;
+		for (int i = 0; i < optionsMenuHelper.length(); i++) {
+			if (optionsMenuHelper.getItem(i).getTitleId() == R.string.prefs_plugins) {
+				pluginsItemIndex = i;
+				break;
+			}
+		}
+
 		ItemBuilder divider = new ItemBuilder().setLayout(R.layout.drawer_divider);
 		if (viewHeight > 0) {
 			int listItemHeight = app.getResources().getDimensionPixelSize(R.dimen.list_item_height);
@@ -780,7 +788,7 @@ public class MapActivityActions implements DialogProvider {
 				divider.setMinHeight(AndroidUtils.dpToPx(app, 16f));
 			}
 		}
-		divider.setPosition(7);
+		divider.setPosition(pluginsItemIndex >= 0 ? pluginsItemIndex : 7);
 		optionsMenuHelper.addItem(divider.createItem());
 
 		getMyApplication().getAppCustomization().prepareOptionsMenu(mapActivity, optionsMenuHelper);
