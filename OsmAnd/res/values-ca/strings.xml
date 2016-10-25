@@ -2480,7 +2480,7 @@ Si aprecieu OsmAnd  i OSM i voleu ajudar-los, és la via perfecta per fer-ho."</
     <string name="shared_string_pause">Pausa</string>
     <string name="shared_string_trip">Viatge</string>
     <string name="shared_string_recorded">Enregistrat</string>
-    <string name="shared_string_record">Registre</string>
+    <string name="shared_string_record">Enegistra</string>
     <string name="gpx_logging_no_data">No hi ha dades</string>
     <string name="release_2_5">"
  • Icones seleccionables al mapa
@@ -2505,5 +2505,5 @@ Si aprecieu OsmAnd  i OSM i voleu ajudar-los, és la via perfecta per fer-ho."</
  "</string>
     <string name="shared_string_notifications">Notificacions</string>
     <string name="trip_rec_notification_settings">Enregistrament de la ruta (no hi ha dades)</string>
-    <string name="trip_rec_notification_settings_desc">Mostra una notificació que permet començar l\'enregistrament de la ruta prement el botó de registre</string>
+    <string name="trip_rec_notification_settings_desc">Mostra una notificació que permet començar l\'enregistrament de la ruta prement el botó Enregistra</string>
     </resources>
