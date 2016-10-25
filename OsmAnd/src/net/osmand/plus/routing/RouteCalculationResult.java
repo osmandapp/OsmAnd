@@ -728,7 +728,11 @@ public class RouteCalculationResult {
 	public void passIntermediatePoint(){
 		nextIntermediate ++ ;
 	}
-	
+
+	public int getNextIntermediate() {
+		return nextIntermediate;
+	}
+
 	public Location getLocationFromRouteDirection(RouteDirectionInfo i){
 		if(i != null && locations != null && i.routePointOffset < locations.size()){
 			return locations.get(i.routePointOffset);

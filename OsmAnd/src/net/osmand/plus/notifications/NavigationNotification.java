@@ -20,6 +20,7 @@ import net.osmand.plus.NavigationService;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
 import net.osmand.plus.routing.RouteDirectionInfo;
@@ -33,6 +34,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static net.osmand.plus.NavigationService.USED_BY_NAVIGATION;
@@ -160,6 +162,20 @@ public class NavigationNotification extends OsmandNotification {
 					notificationText.append(ri.getDescriptionRoutePart());
 					notificationText.append("\n");
 				}
+
+				int distanceToNextIntermediate = routingHelper.getLeftDistanceNextIntermediate();
+				if (distanceToNextIntermediate > 0) {
+					int nextIntermediateIndex = routingHelper.getRoute().getNextIntermediate();
+					List<TargetPoint> intermediatePoints = app.getTargetPointsHelper().getIntermediatePoints();
+					if (nextIntermediateIndex < intermediatePoints.size()) {
+						TargetPoint nextIntermediate = intermediatePoints.get(nextIntermediateIndex);
+						notificationText.append(OsmAndFormatter.getFormattedDistance(distanceToNextIntermediate, app))
+								.append(" • ")
+								.append(nextIntermediate.getOnlyName());
+						notificationText.append("\n");
+					}
+				}
+
 				notificationText.append(distanceStr).append(" • ").append(durationStr);
 
 			} else {
