@@ -2484,4 +2484,7 @@ Si necesitas ayuda con la aplicación OsmAnd, contacte con nuestro equipo de sop
 
  y más…
  "</string>
+    <string name="trip_rec_notification_settings">Grabando viaje (sin datos)</string>
+    <string name="trip_rec_notification_settings_desc">Muestra una notificación con el botón Grabar, el cuál permite iniciar la grabación del viaje</string>
+    <string name="shared_string_notifications">Notificaciones</string>
     </resources>
