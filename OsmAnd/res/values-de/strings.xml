@@ -2551,7 +2551,7 @@ Wenn Sie OsmAnd und OSM lieben und unterstützen wollen, so ist dies die perfekt
     <string name="shared_string_recorded">Aufgezeichnet</string>
     <string name="gpx_logging_no_data">Keine Daten</string>
     <string name="shared_string_trip">Tour</string>
-    <string name="shared_string_record">Aufzeichnung</string>
+    <string name="shared_string_record">Aufzeichnen</string>
     <string name="release_2_5">"
  • Anklickbare Symbole auf der Karte 
 
@@ -2569,6 +2569,6 @@ Wenn Sie OsmAnd und OSM lieben und unterstützen wollen, so ist dies die perfekt
 und vieles mehr ...
  "</string>
     <string name="trip_rec_notification_settings">Streckenaufzeichnung (keine Daten)</string>
-    <string name="trip_rec_notification_settings_desc">Benachrichtigung anzeigen, die es erlaubt die Streckenaufzeichnung durch Betätigen der Schaltfläche “Aufzeichnung“ zu starten</string>
+    <string name="trip_rec_notification_settings_desc">Benachrichtigung anzeigen, die es erlaubt die Streckenaufzeichnung durch Betätigen der Schaltfläche “Aufzeichnen“ zu starten</string>
     <string name="shared_string_notifications">Benachrichtigungen</string>
     </resources>
