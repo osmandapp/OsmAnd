@@ -2,29 +2,41 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
-              android:orientation="vertical"
-              android:paddingBottom="22dp"
-              android:padding="24dp">
+              android:orientation="vertical">
 
-    <ImageView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_christmas_illustration"/>
+        android:layout_height="wrap_content">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:textSize="@dimen/default_desc_text_size"
-        android:textColor="@color/color_white"
-        android:text="@string/christmas_desc"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="24dp">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="22dp"
-        android:textSize="@dimen/default_desc_text_size"
-        android:textColor="@color/color_white"
-        android:text="@string/christmas_desc_q"/>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_christmas_illustration"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="@string/christmas_desc"
+                android:textColor="@color/color_white"
+                android:textSize="@dimen/default_desc_text_size"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="22dp"
+                android:text="@string/christmas_desc_q"
+                android:textColor="@color/color_white"
+                android:textSize="@dimen/default_desc_text_size"/>
+
+        </LinearLayout>
+
+    </ScrollView>
 
 </LinearLayout>

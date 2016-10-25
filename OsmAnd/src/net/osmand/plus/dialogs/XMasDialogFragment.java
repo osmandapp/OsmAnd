@@ -1,6 +1,10 @@
 package net.osmand.plus.dialogs;
 
+import android.app.Dialog;
 import android.content.DialogInterface;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.Button;
@@ -12,18 +16,15 @@ import net.osmand.plus.activities.MapActivity;
 
 import java.util.Date;
 
-public class XMasDialog {
+public class XMasDialogFragment extends DialogFragment {
 
+	public static final String TAG = "XMasDialogFragment";
 	private static boolean XmasDialogWasProcessed = false;
 
-	public static void showXMasDialog(final MapActivity mapActivity) {
-
+	public static boolean shouldShowXmasDialog(OsmandApplication app) {
 		if (XmasDialogWasProcessed) {
-			return;
+			return false;
 		}
-		XmasDialogWasProcessed = true;
-
-		OsmandApplication app = mapActivity.getMyApplication();
 		int numberOfStarts = app.getAppInitializer().getNumberOfStarts();
 		if (numberOfStarts > 2) {
 			Date now = new Date();
@@ -36,17 +37,26 @@ public class XMasDialog {
 						app.getSettings().NUMBER_OF_STARTS_FIRST_XMAS_SHOWN.set(numberOfStarts);
 					}
 				} else {
-					return;
+					return false;
 				}
 			} else {
 				if (firstShownX != 0) {
 					app.getSettings().NUMBER_OF_STARTS_FIRST_XMAS_SHOWN.set(0);
 				}
-				return;
+				return false;
 			}
 		} else {
-			return;
+			return false;
 		}
+		return true;
+	}
+
+	@NonNull
+	@Override
+	public Dialog onCreateDialog(Bundle savedInstanceState) {
+
+		XmasDialogWasProcessed = true;
+		final MapActivity mapActivity = (MapActivity) getActivity();
 
 		final AlertDialog.Builder builder = new AlertDialog.Builder(mapActivity, R.style.XmasDialogTheme);
 		View titleView = mapActivity.getLayoutInflater().inflate(R.layout.xmas_dialog_title, null);
@@ -86,6 +96,6 @@ public class XMasDialog {
 				negativeButton.invalidate();
 			}
 		});
-		dialog.show();
+		return dialog;
 	}
 }

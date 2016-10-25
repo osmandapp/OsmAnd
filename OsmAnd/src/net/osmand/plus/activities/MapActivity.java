@@ -72,7 +72,7 @@ import net.osmand.plus.base.FailSafeFuntions;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.dialogs.ErrorBottomSheetDialog;
-import net.osmand.plus.dialogs.XMasDialog;
+import net.osmand.plus.dialogs.XMasDialogFragment;
 import net.osmand.plus.dialogs.RateUsBottomSheetDialog;
 import net.osmand.plus.dialogs.WhatsNewDialogFragment;
 import net.osmand.plus.download.DownloadActivity;
@@ -630,8 +630,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			getSupportFragmentManager().beginTransaction()
 					.add(R.id.fragmentContainer, new FirstUsageWelcomeFragment(),
 							FirstUsageWelcomeFragment.TAG).commitAllowingStateLoss();
-		} else {
-			XMasDialog.showXMasDialog(this);
+		} else if (!isFirstScreenShowing() && XMasDialogFragment.shouldShowXmasDialog(app)) {
+			new XMasDialogFragment().show(getSupportFragmentManager(), XMasDialogFragment.TAG);
 		}
 		FirstUsageWelcomeFragment.SHOW = false;
 	}
@@ -1276,6 +1276,13 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		} else {
 			return null;
 		}
+	}
+
+	public boolean isFirstScreenShowing() {
+		FirstUsageWelcomeFragment welcomeFragment = (FirstUsageWelcomeFragment) getSupportFragmentManager().findFragmentByTag(FirstUsageWelcomeFragment.TAG);
+		FirstUsageWizardFragment wizardFragment = (FirstUsageWizardFragment) getSupportFragmentManager().findFragmentByTag(FirstUsageWizardFragment.TAG);
+		return welcomeFragment != null && !welcomeFragment.isDetached()
+				|| wizardFragment != null && !wizardFragment.isDetached();
 	}
 
 	// DownloadEvents
