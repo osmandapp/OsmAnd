@@ -112,6 +112,12 @@ public class ContextMenuAdapter {
 		}
 
 		@Override
+		public boolean isEnabled(int position) {
+			final ContextMenuItem item = getItem(position);
+			return item != null && item.getItemClickListener() != null;
+		}
+
+		@Override
 		public View getView(final int position, View convertView, ViewGroup parent) {
 			// User super class to create the View
 			final ContextMenuItem item = getItem(position);
