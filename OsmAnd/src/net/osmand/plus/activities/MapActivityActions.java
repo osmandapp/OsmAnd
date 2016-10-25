@@ -860,7 +860,7 @@ public class MapActivityActions implements DialogProvider {
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				ContextMenuItem item = contextMenuAdapter.getItem(position);
 				ContextMenuAdapter.ItemClickListener click = item.getItemClickListener();
-				if (click.onContextMenuClick(simpleListAdapter, item.getTitleId(),
+				if (click != null && click.onContextMenuClick(simpleListAdapter, item.getTitleId(),
 						position, false)) {
 					mapActivity.closeDrawer();
 				}
