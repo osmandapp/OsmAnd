@@ -2509,4 +2509,7 @@ Se vi bezonas helpon pri OsmAnd aplikaĵo, bonvolu kontakti nian helpantaron: su
 
 kaj pli...
  "</string>
+    <string name="trip_rec_notification_settings">Registrado de kurso (sen datumoj)</string>
+    <string name="trip_rec_notification_settings_desc">Montras sciigon kiu ebligos eki registradon de kurso per premo de butono \'Registri\'</string>
+    <string name="shared_string_notifications">Sciigoj</string>
     </resources>
