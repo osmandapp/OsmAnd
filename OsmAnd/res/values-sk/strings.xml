@@ -2464,4 +2464,25 @@ Ak potrebuje pomoc s aplikáciou OsmAnd, kontaktuje podporu: support@osmand.net.
     <string name="shared_string_recorded">Zaznamenané</string>
     <string name="shared_string_record">Záznam</string>
     <string name="gpx_logging_no_data">Žiadne údaje</string>
+    <string name="trip_rec_notification_settings">Záznam výletu (žiadne dáta)</string>
+    <string name="trip_rec_notification_settings_desc">Zobraziť oznámenie, ktoré umožňuje spustiť nahrávanie stlačením tlačidla Nahrať</string>
+    <string name="shared_string_notifications">Oznámenia</string>
+    <string name="release_2_5">"
+ • Aktivovateľné ikony na mape
+
+
+ • Podrobné vyhľadávanie bodov záujmu: hľadajte reštaurácie podľa druhu kuchyne, kempingy so špeciálnymi službami
+
+
+ • Nový štýl Topo pre cyklistov a chodcov
+
+
+ • Vylepšené nahrávanie výletu (nové nastavenia)
+
+
+ • Vylepšené oznámenia navigácie (Android Wear)
+
+
+ • Mnohé ďalšie vylepšenia a opravy chýb
+ "</string>
     </resources>
