@@ -141,7 +141,7 @@ public class RouteDataObject {
 			//              destination:lang:XX:forward/backward
 			//              destination:forward/backward
 			//              destination:lang:XX
-			//              destination:lang:forward/backward
+			//              destination
 
 			String destinationTagLangFB = "destination:lang:XX";
 			if(!Algorithms.isEmpty(lang)) {
