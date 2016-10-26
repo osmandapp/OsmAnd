@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources><string name="close_changeset">Değişiklik listesini kapat</string>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="close_changeset">Değişiklik listesini kapat</string>
 	<string name="zxing_barcode_scanner_not_found">ZXing Barcode Scanner uygulaması kurulu değil. Uygulama marketinde aramak ister misiniz?</string>
 	<string name="rendering_attr_roadColors_description">Yol renk şemasını seç:</string>
 	<string name="rendering_attr_roadColors_name">Yol renk şeması</string>
@@ -93,7 +94,7 @@
     
     
 	<string name="local_indexes_cat_av">Ses/Video verisi</string>
-    <string name="stop_routing_confirm">Yolbulu durdurmak istediğinizden emin misiniz?</string>
+    <string name="stop_routing_confirm">Yolbulu durdurmak istediğinize emin misiniz?</string>
     <string name="clear_dest_confirm">Varış noktasını silmek istediğinizden emin misiniz (ve ara hedefler)?</string>
     <string name="precise_routing_mode">Hassas yönlendirme (alfa)</string>
     <string name="recording_context_menu_show">Göster</string>
@@ -261,7 +262,7 @@
 	<string name="index_name_tts_voice">Sesli uyarılar (TTS- yazıdan-sese sentezli, tercih edilen)</string>
 	<string name="amenity_type_osmwiki">Wikipedia (çevrimdışı)</string>
 	<string name="amenity_type_user_defined">Kullanıcı tanımlı</string>
-	<string name="settings_preset">kullanıcı profili</string>
+	<string name="settings_preset">Öntanımlı profil</string>
 	<string name="user_password">OSM şifreniz</string>
 	
 	<string name="download_files_not_enough_space">İndirme için yeterli yer yok: %1$s MB (free: %2$s).</string>
@@ -501,7 +502,7 @@
 	<string name="modify_transparency">"Şeffaflık değiştir(0 -Şeffaf,255-opak) "</string>
 	<string name="first_time_msg">OsmAnd kullandığınız için teşekkür ederiz. Bu uygulamanın bir çok özelliği için \'Ayarlar\' → \'Veri Yönetimi\' kısmından edinebileceğiniz bölgesel çevrimdışı veriye ihtiyacınız var. Daha sonra haritaları görebilir, adres bulabilir, POI (İhtiyaç Noktalarına) bakabilir ve toplu taşıma bulabilirsiniz.</string>    
 	<string name="basemap_was_selected_to_download">Baz haritası doğru uygulama çalışması için gereklidir ve indirmek için seçildi.</string>
-	<string name="local_indexes_cat_tile">Çevrimiçi ve önbelleğe çini haritaları</string>
+	<string name="local_indexes_cat_tile">Çevrim içi ve önbelleğe alınan döşeme haritalar</string>
 	
 	<string name="index_settings_descr">Aygıtınızda saklanan çevrim dışı harita dosyaları yönet ve indir</string>
 	<string name="map_online_plugin_is_not_installed">Farklı harita kaynaklarını seçmek için Online haritalar eklentisi etkinleştirme</string>
@@ -667,8 +668,8 @@
 	<string name="prefer_in_routing_descr">Otoyol tercih et</string>
     <string name="max_speed_none">Yok</string>
     <string name="av_def_action_choose">Talep üzerine seç</string>
-    <string name="osmand_play_title_30_chars">OsmAnd Haritalar &amp; Nevigasyon</string>
-	<string name="osmand_plus_play_title_30_chars">OsmAnd+ Haritalar &amp; Navigasyon</string>
+    <string name="osmand_play_title_30_chars">OsmAnd Haritalar &amp; Yolbul</string>
+	<string name="osmand_plus_play_title_30_chars">OsmAnd+ Haritalar &amp; Yolbul</string>
 	<string name="gpx_navigation">GPX Rotası</string>
 	<string name="poi_query_by_name_matches_categories">Sorgunuza uyan çeşitli POI kategorileri bulundu:</string>
 	<string name="data_to_search_poi_not_available">POI araması yapmak için yerel veri mevcut değil.</string>
@@ -707,8 +708,8 @@
 	<string name="local_index_transport_data">Toplu taşıma verileri</string>
 	<string name="local_index_map_data">Harita Verisi</string>
 	<string name="local_indexes_cat_backup">Pasifleştir</string>
-	<string name="local_indexes_cat_tts">Ses istemleri (TTS)</string>
-	<string name="local_indexes_cat_voice">Ses istemleri (kayıtlı)</string>
+	<string name="local_indexes_cat_tts">Sesli uyarılar (TTS)</string>
+	<string name="local_indexes_cat_voice">Sesli uyarılar (kayıtlı)</string>
 	
 	<string name="local_indexes_cat_poi">POI Verisi</string>
 	<string name="ttsvoice">TTS sesi</string>
@@ -902,7 +903,7 @@
 	<string name="poi_context_menu_modify">İÇN düzenle</string>
 	<string name="rotate_map_compass_opt">Pusulaya</string>
 	<string name="rotate_map_bearing_opt">Hareket yönüne</string>
-	<string name="rotate_map_none_opt">Döndürme (kuzey)</string>
+	<string name="rotate_map_none_opt">Döndürme (kuzey yukarısıdır)</string>
 	<string name="rotate_map_to_bearing_descr">Harita ekran hizalamasını seçin</string>
 	<string name="show_route">Güzergah ayrıntıları</string>
 	<string name="shared_string_import">İçe Aktar</string>
@@ -1091,13 +1092,13 @@
 	<string name="base_world_map">Dünya Haritası</string>
 	
 	<string name="local_index_tile_data_zooms">Zvmhay indirildi : %1$s</string>
-    <string name="local_index_tile_data_name">Çini bilgisi : %1$s</string>
+    <string name="local_index_tile_data_name">Döşeme verisi : %1$s</string>
     <string name="edit_tilesource_successfully">Kaydedilen Çini kaynağı %1$s</string>
     <string name="edit_tilesource_maxzoom">maksimum Yakınlaştırma</string>
     
     <string name="specified_directiory_not_writeable">Haritalar belirtilen dizinde oluşturulamadı</string>
 	<string name="copying_osmand_file_failed">Dosyaları kopyalama başarısız oldu</string>    
-    <string name="storage_directory_external">Harici depolama</string>
+    <string name="storage_directory_external">Dış depolama</string>
     <string name="storage_directory_multiuser">Çok kullanıcılı depolama</string>
     <string name="storage_directory_internal_app">Dahili uygulama belleği</string>
     <string name="storage_directory_manual">El ile belirtilmiş</string>
@@ -1258,7 +1259,7 @@
     <string name="rendering_value_bicycle_name">Bisiklet</string>
     <string name="rendering_value_pedestrian_name">Yaya</string>
     <string name="osmo_invite">Davet et…</string>
-    <string name="pause_navigation">Yolbulu Duraklat</string>
+    <string name="pause_navigation">Yolbulu duraklat</string>
  	<string name="continue_navigation">Navigasyona Devam Et</string>
     <string name="local_map_names">Yerel isimler</string>
     <string name="home">Pano</string>
@@ -1575,7 +1576,7 @@
 	<string name="route_head">Baş</string>
 	<string name="map_screen_orientation">Ekran yönlendirme</string>
 	<string name="no_address_found">Hiçbir adres tespit edilemedi</string>
-	<string name="voices">Ses istemleri</string>
+	<string name="voices">Sesli uyarılar</string>
 	<string name="layer_gpx_layer">GPX parça …</string>
 	<string name="transport_context_menu">Durakta Arama taşımacılığı</string>
 	<string name="rotate_map_to_bearing">Harita yönlendirme</string>
@@ -1862,7 +1863,7 @@
     <string name="rename_failed">Yeniden adlandırma başarısız oldu.</string>
     <string name="location_on_map">Yer:\nLat %1$s\nLon %2$s</string>
     <string name="rendering_attr_pisteRoutes_name">Kayak pistleri</string>
-    <string name="free">"Ücretsiz %1$s"</string>
+    <string name="free">"%1$s boş "</string>
     <string name="rendering_attr_pisteGrooming_name">Pist tımar</string>
     <string name="world_ski_missing">Kayak haritaları görüntülemek için, özel çevrimdışı harita indirimek gerekiyor</string>
     <string name="nautical_maps_missing">Deniz haritaları görüntülemek için, özel çevrimdışı harita indirimek gerekiyor</string>
@@ -2136,4 +2137,12 @@
     <string name="change_markers_position">İmlecin konumunu değiştir</string>
     <string name="follow_us">Bizi takip edin</string>
     <string name="map_widget_bearing">Nispi yön</string>
+    <string name="first_usage_greeting">İnternet bağlantısı olmadan yönergeler al ve yeni yerler keşfet</string>
+    <string name="get_started">Başlat</string>
+    <string name="search_location">Konum aranıyor…</string>
+    <string name="first_usage_wizard_desc">OsmAnd\'ın konumunuzu bulmasına ve o bölge için harita indirmeyi önermesine izin verin.</string>
+    <string name="search_another_country">Başka bölge seç</string>
+    <string name="storage_place_description">OsmAnd\'ın veri deposu (haritalar, izler, vb.): %1$s.</string>
+    <string name="shared_string_change">Değiştir</string>
+    <string name="get_it">Al</string>
     </resources>
