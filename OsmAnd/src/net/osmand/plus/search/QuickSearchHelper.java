@@ -187,7 +187,7 @@ public class QuickSearchHelper implements ResourceListener {
 						sr.priority = SEARCH_WPT_OBJECT_PRIORITY;
 						sr.objectType = ObjectType.WPT;
 						sr.location = new LatLon(point.getLatitude(), point.getLongitude());
-						sr.localeRelatedObjectName = app.getRegions().getCountryName(sr.location);
+						//sr.localeRelatedObjectName = app.getRegions().getCountryName(sr.location);
 						sr.relatedObject = selectedGpx.getGpxFile();
 						sr.preferredZoom = 17;
 						if (phrase.getUnknownSearchWordLength() <= 1 && phrase.isNoSelectedType()) {
