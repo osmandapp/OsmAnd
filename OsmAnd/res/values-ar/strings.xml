@@ -2596,7 +2596,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="shared_string_recorded">مسجل</string>
     <string name="shared_string_record">تسيجل</string>
     <string name="gpx_logging_no_data">لا توجد بيانات</string>
-    <string name="osmo_pause_location">توقيف الموقع</string>
+    <string name="osmo_pause_location">إيقاف مؤقت</string>
     <string name="osmo_service_running">خدمة OsMo مشغلة</string>
     <string name="trip_rec_notification_settings">تسجيل الرحلة (لا توجد بيانات)</string>
     <string name="trip_rec_notification_settings_desc">إظهار إشعار يسمح ببدء تسجيل الرحلة بالضغط على زر التسجيل</string>
