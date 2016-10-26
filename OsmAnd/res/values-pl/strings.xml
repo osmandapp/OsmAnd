@@ -2604,7 +2604,7 @@ Jeśli potrzebujesz pomocy podczas używania OsmAnd, prosimy o kontakt z naszym 
     <string name="get_it">Pobierz</string>
     <string name="get_for">Pobierz na %1$s</string>
     <string name="get_for_month">Pobierz na %1$s miesięcy</string>
-    <string name="osm_live_banner_desc">Zdobądź nieograniczoną liczbę pobrań map i aktualizacji częściej niż raz na miesiąc: co godzinę, co dzień lub co tydzień.</string>
+    <string name="osm_live_banner_desc">Zdobądź nieograniczoną liczbę pobrań map i aktualizacji map częściej niż raz na miesiąc: co tydzień, codziennie lub co godzinę.</string>
     <string name="osmand_plus_banner_desc">Pełna wersja OsmAnd z nieograniczoną liczbą pobrań map i aktualizacjami co miesiąc.</string>
     <string name="si_mi_meters">Mile/metry</string>
     <string name="search_map">Wyszukiwanie map…</string>
@@ -2633,7 +2633,7 @@ Jeśli potrzebujesz pomocy podczas używania OsmAnd, prosimy o kontakt z naszym 
     <string name="save_filter">Zapisz filtr</string>
     <string name="delete_filter">Usuń filtr</string>
     <string name="new_filter">Nowy filtr</string>
-    <string name="new_filter_desc">Proszę wprowadzić nazwę nowego filtra. Będzie on dostępny na liście kategorii.</string>
+    <string name="new_filter_desc">Proszę wprowadzić nazwę nowego filtra, zostanie on dodany do Twojej karty kategorii.</string>
     <string name="selected_categories">Wybrane kategorie</string>
     <string name="create_custom_poi">Utwórz własny filtr</string>
     <string name="custom_search">Własne wyszukiwanie</string>
@@ -2647,14 +2647,14 @@ Jeśli potrzebujesz pomocy podczas używania OsmAnd, prosimy o kontakt z naszym 
     <string name="rendering_attr_contourColorScheme_name">Schemat kolorów konturów</string>
     <string name="rendering_attr_surfaceIntegrity_name">Spójność nawierzchni dróg</string>
     <string name="christmas_poi">Bożonarodzeniowe miejsca</string>
-    <string name="save_track_min_speed_descr">Wybierz minimalną prędkość przy rejestrowania tras</string>
-    <string name="rendering_attr_contourColorScheme_description">Schemat kolorów dla konturów</string>
+    <string name="save_track_min_speed_descr">Wybierz minimalną prędkość, aby punkt został zarejestrowany</string>
+    <string name="rendering_attr_contourColorScheme_description">Schemat kolorów konturów</string>
     <string name="save_track_min_speed">Minimalna prędkość rejestrowania</string>
     <string name="save_track_min_distance">Minimalna odległość rejestrowania</string>
-    <string name="save_track_min_distance_descr">Wybierz minimalną odległość przy której rejestrowanie będzie aktywne</string>
+    <string name="save_track_min_distance_descr">Wybierz minimalną odległość, aby punkt został zarejestrowany</string>
     <string name="save_track_precision">Minimalna precyzja rejestrowania</string>
-    <string name="save_track_precision_descr">Wybierz minimalną akceptowalną precyzję rejestrowania</string>
-    <string name="christmas_desc">Oczekując Świąt Bożego Narodzenia i Nowego Roku, możesz włączyć wyświetlanie użytecznych miejsc związanych ze Świętami: choinki, jarmarki.</string>
+    <string name="save_track_precision_descr">Wybierz minimalną precyzję, aby punkt został zarejestrowany</string>
+    <string name="christmas_desc">Oczekując Świąt Bożego Narodzenia i Nowego Roku, możesz włączyć wyświetlanie użytecznych miejsc związanych ze Świętami: choinki, jarmarki, itp.</string>
     <string name="christmas_desc_q">Pokazywać świąteczne miejsca?</string>
     <string name="shared_string_continue">Kontynuuj</string>
     <string name="shared_string_pause">Wstrzymaj</string>
@@ -2666,13 +2666,13 @@ Jeśli potrzebujesz pomocy podczas używania OsmAnd, prosimy o kontakt z naszym 
  • Klikalne ikony na mapie
 
 
-• Wszechstronna selektywna wyszukiwarka użytecznych miejsc: wyszukuj restauracji po kuchni, kempingów według potrzeb
+• Wszechstronna selektywna wyszukiwarka użytecznych miejsc: wyszukuj restauracji po kuchni, kempingów według udogodnień
 
 
 • Nowy styl mapy \'OsmAnd Topo\' dla rowerzystów i pieszych turystów
 
 
-• Ulepszone rejestrowanie tras (nowe opcje)
+• Ulepszone rejestrowanie tras
 
 
 • Ulepszone powiadomienia nawigacji (Android Wear)
@@ -2686,7 +2686,7 @@ i więcej...
     <string name="trip_rec_notification_settings">Nagrywanie trasy (brak danych)</string>
     <string name="trip_rec_notification_settings_desc">Pokaż komunikat który pozwoli rozpocząć nagrywanie trasy przez naciśnięcie przycisku Nagrywaj</string>
     <string name="shared_string_notifications">Powiadomienia</string>
-    <string name="osmo_share_location">Udostępnij lokalizację</string>
-    <string name="osmo_pause_location">Wstrzymaj lokalizację</string>
+    <string name="osmo_share_location">Udostępnij</string>
+    <string name="osmo_pause_location">Wstrzymaj</string>
     <string name="osmo_service_running">Usługa OsMo jest uruchomiona</string>
     </resources>
