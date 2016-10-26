@@ -531,7 +531,8 @@ public class SearchCoreFactory {
 				Iterator<Entry<String, PoiType>> it = translatedNames.entrySet().iterator();
 				while (it.hasNext()) {
 					Entry<String, PoiType> e = it.next();
-					if (nm.matches(e.getKey()) || nm.matches(e.getValue().getTranslation())) {
+					if (e.getValue().getCategory() != types.getOtherMapCategory()
+							&& (nm.matches(e.getKey()) || nm.matches(e.getValue().getTranslation()))) {
 						results.put(e.getValue().getTranslation(), e.getValue());
 					}
 				}
