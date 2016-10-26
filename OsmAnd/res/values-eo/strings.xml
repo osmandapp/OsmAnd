@@ -2514,4 +2514,7 @@ kaj pli...
     <string name="trip_rec_notification_settings">Registrado de kurso (sen datumoj)</string>
     <string name="trip_rec_notification_settings_desc">Montras sciigon kiu ebligos eki registradon de kurso per premo de Registri-butono</string>
     <string name="shared_string_notifications">Sciigoj</string>
+    <string name="osmo_share_location">Kunhavigi lokon</string>
+    <string name="osmo_service_running">OsMo-servo estas aktiva</string>
+    <string name="osmo_pause_location">Paŭzi lokalizadon</string>
     </resources>
