@@ -3178,7 +3178,7 @@
 	<string name="poi_cuisine_sushi">Sushi</string>
 	<string name="poi_cuisine_fish_and_chips">Pescado frito y papas fritas</string>
 	<string name="poi_cuisine_seafood">Comida de mar</string>
-	<string name="poi_cuisine_barbecue">Comida a la parrilla (asado, barbacoa)</string>
+	<string name="poi_cuisine_barbecue">Comida asada (barbacoa, cocción lenta)</string>
 	<string name="poi_cuisine_noodle">Fideos</string>
 	<string name="poi_cuisine_donut">Rosquillas (donas)</string>
 	<string name="poi_cuisine_ramen">Ramen (sopa de fideos)</string>
@@ -3188,9 +3188,9 @@
 	<string name="poi_cuisine_steak">Comida a la estaca</string>
 	<string name="poi_cuisine_tapas">Tapas</string>
 	<string name="poi_cuisine_gastropub">Gastropub</string>
-	<string name="poi_cuisine_heuriger">Degustación de vinos</string>
+	<string name="poi_cuisine_heuriger">Heuriger (degustación de vinos)</string>
 	<string name="poi_cuisine_curry">Curri</string>
-	<string name="poi_cuisine_grill">Comida a la parrilla (contacto directo con el fuego)</string>
+	<string name="poi_cuisine_grill">Comida a la parrilla (asado, cocción rápida)</string>
 	<string name="poi_cuisine_bagel">Bagel (rosca de pan)</string>
 	<string name="poi_cuisine_diner">Cena</string>
 	<string name="poi_cuisine_sausage">Salchichas a la parrilla</string>
@@ -3320,7 +3320,7 @@
 
 <string name="poi_cuisine_fondue">Fondue</string>
 	<string name="poi_cuisine_fine_dining">Alta cocina</string>
-	<string name="poi_cuisine_brasserie">Comida a las brasas (brasserie)</string>
+	<string name="poi_cuisine_brasserie">Brasserie (café-restaurante de ambiente relajado)</string>
 	<string name="poi_cuisine_pita">Pan pita</string>
 	<string name="poi_cuisine_tex_mex">Comida mexicano-estadounidense (tex-mex)</string>
 	<string name="poi_outdoor_seating_filter_yes">Si</string>
