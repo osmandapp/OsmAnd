@@ -424,11 +424,11 @@
 	<string name="poi_ship_chandler">Ontziaren hornitzailea</string>
 	<string name="poi_power_generator">Elektrizitate-sorgailua</string>
 	<string name="poi_waste_disposal">Zaborrontzia</string>
-	<string name="poi_farmyard"/>
+	<string name="poi_farmyard">Eskorta</string>
 	<string name="poi_pier">Kaia</string>
 	<string name="poi_surveillance">Zaintza</string>
 	<string name="poi_observatory">Behatokia</string>
-	<string name="poi_astronomical_observatory">Behatoki astronomikoa</string>
+	<string name="poi_astronomical_observatory">Astronomikoa</string>
 	<string name="poi_monitoring_station">Monitorizazio estazioa</string>
 	<string name="poi_crane">Garabia</string>
 	<string name="poi_construction">Eraikuntza</string>
@@ -598,7 +598,7 @@
 	<string name="poi_beachvolleyball">Hondartza boleibola</string>
 	<string name="poi_bmx">BMX</string>
 	<string name="poi_boules">Petanka</string>
-	<string name="poi_bowls"/>
+	<string name="poi_bowls">Boulingrin</string>
 	<string name="poi_canadian_football">Futbol kanadarra</string>
 	<string name="poi_canoe">Kanoa</string>
 	<string name="poi_chess">Xakea</string>
@@ -1843,4 +1843,31 @@
 	<string name="poi_fuel_svo">Landare-olio erregaia</string>
 	<string name="poi_aerialway_station">Teleaulki geltokia</string>
 	<string name="poi_aerialway_magic_carpet">Tapiz magikoa (igogailua)</string>
+	<string name="poi_aerialway_rope_tow">Kable-igogailua</string>
+	<string name="poi_aerialway_pylon">Metalezko dorreak dituen teleaulkia</string>
+
+	<string name="poi_water_works">Edateko uren araztegia</string>
+	<string name="poi_waterway_turning_point">Ubidearen biraketa puntua</string>
+	<string name="poi_groyne">Olatu horma</string>
+
+	<string name="poi_power_cable_distribution_cabinet">Kableen banatze armairua</string>
+	<string name="poi_conservation">Kontserbazio landa</string>
+
+	<string name="poi_brownfield">Kutsaturiko orubea</string>
+	<string name="poi_greenfield">Orubea</string>
+	<string name="poi_mineshaft">Meazulo</string>
+	<string name="poi_training">Entrenatzeko gunea</string>
+	<string name="poi_baby_hatch">Zurtz tornua</string>
+	<string name="poi_podiatrist">Oin-sendagile</string>
+	<string name="poi_tax_advisor">Zerga aholkularien bulegoa</string>
+
+	<string name="poi_ice_stock">Ice stock kirola</string>
+	<string name="poi_korfbal">Korfbal</string>
+	<string name="poi_paddle_tennis">Paddle tenisa</string>
+	<string name="poi_racquet">Erraketa (kirol tresna)</string>
+	<string name="poi_rugby_union">Errugbi elkartea</string>
+	<string name="poi_rugby_league">Errugbi liga</string>
+	<string name="poi_attraction_big_wheel">Noria (atrakzioa)</string>
+	<string name="poi_attraction_animal">Animalia (atrakzioa)</string>
+	<string name="poi_attraction_roller_coaster">Errusiar mendia</string>
 	</resources>
