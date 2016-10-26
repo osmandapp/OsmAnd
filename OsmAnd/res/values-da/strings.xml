@@ -2659,7 +2659,7 @@ Hvis du  ønsker at støtte OsmAnd og OSM, er dette en god måde at gøre det p�
     <string name="save_filter">Gem filter</string>
     <string name="delete_filter">Slet filter</string>
     <string name="new_filter">Nyt filter</string>
-    <string name="new_filter_desc">Angiv et navn for det nye filter, det vil blive tilføjet til Kategorier fanen.</string>
+    <string name="new_filter_desc">Angiv et navn for det nye filter, det vil blive tilføjet til Kategorier.</string>
     <string name="selected_categories">Valgte kategorier</string>
     <string name="create_custom_poi">Opret brugerdefineret filter</string>
     <string name="custom_search">Brugerdefineret søgning</string>
@@ -2673,14 +2673,14 @@ Hvis du  ønsker at støtte OsmAnd og OSM, er dette en god måde at gøre det p�
     <string name="rendering_attr_contourColorScheme_name">Farveskema for højdekurver</string>
     <string name="rendering_attr_surfaceIntegrity_name">Vejoverfladens beskaffenhed</string>
     <string name="christmas_poi">Jule interessepunkter (IP)</string>
-    <string name="christmas_desc">I anledning af jul og nytår, vælg at få vist interessepunkter tilknyttet jul: juletræer, markeder mm.</string>
+    <string name="christmas_desc">I anledning af jul og nytår, vælg at få vist interessepunkter tilknyttet jul: juletræer, markeder, mm.</string>
     <string name="christmas_desc_q">Vis jule-interessepunkter (IP)?</string>
     <string name="save_track_min_speed">Minimumshastighed for logning</string>
-    <string name="save_track_min_speed_descr">Indstil minimumshastighed for et punkt logges</string>
+    <string name="save_track_min_speed_descr">Indstil minimumshastighed før et punkt logges</string>
     <string name="save_track_min_distance">Minimumsafstand for logning</string>
-    <string name="save_track_min_distance_descr">Indstil minimumsafstand fra sidste position for et punkt logges</string>
+    <string name="save_track_min_distance_descr">Indstil minimumsafstand fra sidste position før et punkt logges</string>
     <string name="save_track_precision">Mindste nøjagtighed for logning</string>
-    <string name="save_track_precision_descr">Indstil minimum præcision for et punkt logges</string>
+    <string name="save_track_precision_descr">Indstil minimum præcision før et punkt logges</string>
     <string name="rendering_attr_contourColorScheme_description">Farveskema for højdekurver</string>
     <string name="shared_string_continue">Fortsæt</string>
     <string name="shared_string_pause">Pause</string>
@@ -2692,7 +2692,7 @@ Hvis du  ønsker at støtte OsmAnd og OSM, er dette en god måde at gøre det p�
  • Klikbare ikoner på kortet
 
 
-  • Fleksibel IP-filter søgning: Søg fx. restauranter efter køkkenstil, e\'ller campingpladser med særlige faciliteter
+  • Fleksibel IP-filter søgning: Søg fx. restauranter efter køkkenstil, eller campingpladser med særlige faciliteter
 
 
   • Nyt Topo kortformat til vandre- og cykelture
