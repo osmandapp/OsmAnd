@@ -147,7 +147,7 @@ public class RouteDataObject {
 				int k = kt[i];
 				if(region.routeEncodingRules.size() > k) {
 					if(destinationTag.equals(region.routeEncodingRules.get(k).getTag())) {
-						return names.get(k);
+						return (transliterate) ? Junidecode.unidecode(names.get(k)) : names.get(k);
 					}
 					if(destinationTagDefault.equals(region.routeEncodingRules.get(k).getTag())) {
 						destinationDefault = names.get(k);
