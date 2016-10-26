@@ -2567,7 +2567,7 @@ Como bi sunt {2} MB ebbia disponìbiles.</string>
     <string name="first_usage_greeting">Retzi indicatziones e iscoberi logos noos chene una connessione a ìnternet</string>
     <string name="get_for">Retzi pro %1$s</string>
     <string name="get_for_month">Retzi pro %1$s a su mese</string>
-    <string name="osm_live_banner_desc">Retzi iscarrigamentos de mapas chene lìmites e agiornamentos pro pus de una borta a su mese: cada ora, cada die o cada chida.</string>
+    <string name="osm_live_banner_desc">Retzi iscarrigamentos de mapas chene lìmites e agiornamentos pro prus de una borta a su mese: cada ora, cada die o cada chida.</string>
     <string name="osm_live_payment_desc">Su gastu de iscritzione t\'at a èssere postu in contu cada mese. Podes iscantzellare s\'iscritzione tua pro mèdiu de Google Play cando boles.</string>
     <string name="donation_to_osm">Donatzione a sa comunidade de OpenStreetMap</string>
     <string name="donation_to_osm_desc">Parte de sa donatzione tua at a èssere imbiada a sos impreadores chi faghent modìficas in OpenStreetMap. Su gastu de iscritzione abarrat su matessi.</string>
@@ -2595,19 +2595,19 @@ Como bi sunt {2} MB ebbia disponìbiles.</string>
     <string name="shared_string_recorded">Registradu</string>
     <string name="shared_string_record">Registra</string>
     <string name="gpx_logging_no_data">Datu perunu</string>
-    <string name="rendering_attr_contourColorScheme_description">Ischema de colores de sos contornos</string>
+    <string name="rendering_attr_contourColorScheme_description">Ischema de colores de sas lìnias de livellu</string>
     <string name="save_track_min_speed">Lestresa mìnima pro sa registratzione</string>
-    <string name="save_track_min_speed_descr">Issèbera sa lestresa mìnima chi at a fàghere allùghere sa registratzione</string>
+    <string name="save_track_min_speed_descr">Issèbera sa lestresa mìnima pro registrare unu puntu</string>
     <string name="save_track_min_distance">Distàntzia mìnima pro sa registratzione</string>
-    <string name="save_track_min_distance_descr">Issèbera sa distàntzia mìnima chi at a fàghere incumintzare sa registratzione</string>
+    <string name="save_track_min_distance_descr">Issèbera sa distàntzia mìnima pro registrare unu puntu</string>
     <string name="save_track_precision">Pretzisione mìnima de registratzione</string>
     <string name="save_track_precision_descr">Issèbera sa pretzisione mìnima pro sa registratzione</string>
     <string name="christmas_poi">PDI de Nadale</string>
-    <string name="christmas_desc">Antitzipende sas vacàntzias de Nadale (Pasca de Nadale e sa Prima die de s\'annu) est possìbile isseberare de visualizare sos PDI assotziados a sa Pasca de Nadale: s\'àrbore de Nadale, sos mercados.</string>
+    <string name="christmas_desc">Antitzipende sas vacàntzias de Nadale (Pasca de Nadale e sa Prima die de s\'annu) est possìbile isseberare de visualizare sos PDI assotziados a sa Pasca de Nadale: s\'àrbore de Nadale, sos mercados, etz.</string>
     <string name="christmas_desc_q">Ammustrare sos PDI de Nadale?</string>
     <string name="rendering_value_light_brown_name">Castàngiu craru</string>
     <string name="rendering_value_dark_brown_name">Castàngiu iscuru</string>
-    <string name="rendering_attr_contourColorScheme_name">Ischema de colores pro sos contornos</string>
+    <string name="rendering_attr_contourColorScheme_name">Ischema de colores pro sas lìnias de livellu</string>
     <string name="rendering_attr_surfaceIntegrity_name">Integridade superfitziale istradale</string>
     <string name="release_2_5">"
  • Iconas incarcàbiles in sa mapa
@@ -2630,8 +2630,8 @@ Como bi sunt {2} MB ebbia disponìbiles.</string>
 
  e àteru…
  "</string>
-    <string name="osmo_share_location">Cumpartzi sa positzione</string>
-    <string name="osmo_pause_location">Firma sa localizatzione</string>
+    <string name="osmo_share_location">Cumpartzi</string>
+    <string name="osmo_pause_location">Firma</string>
     <string name="osmo_service_running">Su servìtziu OsMo est allutu</string>
     <string name="trip_rec_notification_settings">Registratzione biàgios (datu perunu)</string>
     <string name="trip_rec_notification_settings_desc">Ammustra sas notìficas chi permitint de incumintzare a registrare su biàgiu incarchende su butone Registra</string>
