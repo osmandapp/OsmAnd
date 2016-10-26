@@ -10,8 +10,8 @@
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
 
-    <string name="osmo_share_location">Share location</string>
-    <string name="osmo_pause_location">Pause location</string>
+    <string name="osmo_share_location">Share</string>
+    <string name="osmo_pause_location">Pause</string>
     <string name="osmo_service_running">OsMo service is running</string>
     <string name="trip_rec_notification_settings">Trip recording (no data)</string>
     <string name="trip_rec_notification_settings_desc">Show notification which allows to start trip recording by pressing Record button</string>
