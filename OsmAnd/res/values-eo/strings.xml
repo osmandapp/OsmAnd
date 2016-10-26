@@ -2447,7 +2447,7 @@ Se vi bezonas helpon pri OsmAnd aplikaĵo, bonvolu kontakti nian helpantaron: su
     <string name="get_it">Havigu ĝin</string>
     <string name="get_for">Havigu ĝin por %1$s</string>
     <string name="get_for_month">Havigu ĝin por %1$s monatoj</string>
-    <string name="osm_live_banner_desc">Havigu senlimigitan mapojn kaj ĝisdatigojn pli ofte ol unu foje en monato: ĉiuhore, ĉiutage aŭ ĉiusemajne.</string>
+    <string name="osm_live_banner_desc">Havigu senlimigitan mapojn kaj map-ĝisdatigojn pli ofte ol unu foje en monato: ĉiuhore, ĉiutage aŭ ĉiusemajne.</string>
     <string name="osmand_plus_banner_desc">Plena versio de OsmAnd kun senlimigitaj mapoj kaj ĝisdatigoj ĉiumonate.</string>
     <string name="si_mi_meters">Mejloj/metroj</string>
     <string name="osm_live_payment_desc">Abon-pagoj estos prenitaj ĉiumonate. Vi ĉiam povos rezigni el la abono per Google Play.</string>
@@ -2461,7 +2461,7 @@ Se vi bezonas helpon pri OsmAnd aplikaĵo, bonvolu kontakti nian helpantaron: su
     <string name="save_filter">Konservi filtrilon</string>
     <string name="delete_filter">Forigi filtrilon</string>
     <string name="new_filter">Nova filtrilo</string>
-    <string name="new_filter_desc">Bonvolu entajpi nomon por la nova filtrilo. Ĝi estos disponebla en la listo de kategorioj.</string>
+    <string name="new_filter_desc">Bonvolu entajpi nomon por la nova filtrilo, ĝi estos aldonita al vian kategorian langeton.</string>
     <string name="selected_categories">Elektitaj kategorioj</string>
     <string name="create_custom_poi">Krei propran filtrilon</string>
     <string name="custom_search">Propra serĉado</string>
@@ -2472,15 +2472,15 @@ Se vi bezonas helpon pri OsmAnd aplikaĵo, bonvolu kontakti nian helpantaron: su
     <string name="search_hint">Entajpu urbon, adreson aŭ nomon de interesejo</string>
     <string name="rendering_value_light_brown_name">Bronzkolora hela</string>
     <string name="rendering_value_dark_brown_name">Bronzkolora malhela</string>
-    <string name="rendering_attr_contourColorScheme_name">Kontura skemkoloro</string>
+    <string name="rendering_attr_contourColorScheme_name">Kolor-skemo de konturoj</string>
     <string name="rendering_attr_surfaceIntegrity_name">Kohero de vojpavimo</string>
     <string name="rendering_attr_contourColorScheme_description">Kolor-skemo de konturoj</string>
     <string name="save_track_min_speed">Minimuma rapido por registrado</string>
-    <string name="save_track_min_speed_descr">Elektu minimuman rapidon dum kiu registrado de kurso haltos</string>
+    <string name="save_track_min_speed_descr">Elektu minimuman rapidon por punkto esti registrita</string>
     <string name="save_track_min_distance">Minimuma distanco por registrado</string>
-    <string name="save_track_min_distance_descr">Elektu minimuman distancon dum kiu registrado de kurso haltos</string>
+    <string name="save_track_min_distance_descr">Elektu minimuman distancon por punkto esti registrita</string>
     <string name="save_track_precision">Minimuma precizo por registrado</string>
-    <string name="save_track_precision_descr">Elektu minimuman akceptan precizon de registrado de kurso</string>
+    <string name="save_track_precision_descr">Elektu minimuman precizon por punkto esti registrita</string>
     <string name="christmas_poi">Kristnaskaj interesejoj</string>
     <string name="christmas_desc">Atendante Kristnaskon kaj la novan jaron, vi povas aktivigi vidigadon la interesejoj rilataj al Kristnasko: kristnaskaj arbeoj, foiroj, ktp.</string>
     <string name="christmas_desc_q">Ĉu montri kristnaskaj interesejoj?</string>
@@ -2500,7 +2500,7 @@ Se vi bezonas helpon pri OsmAnd aplikaĵo, bonvolu kontakti nian helpantaron: su
 • Nova \'OsmAnd Topo\' map-aspekto por biciklistoj kaj piediradaj turistoj
 
 
-• Plibonigita registrado de kurso (novaj agordoj)
+• Plibonigita registrado de kurso
 
 
 • Plibonigitaj navigadaj sciigoj (Android Wear)
@@ -2514,7 +2514,7 @@ kaj pli...
     <string name="trip_rec_notification_settings">Registrado de kurso (sen datumoj)</string>
     <string name="trip_rec_notification_settings_desc">Montras sciigon kiu ebligos eki registradon de kurso per premo de Registri-butono</string>
     <string name="shared_string_notifications">Sciigoj</string>
-    <string name="osmo_share_location">Kunhavigi lokon</string>
+    <string name="osmo_share_location">Kunhavigi</string>
     <string name="osmo_service_running">OsMo-servo estas aktiva</string>
-    <string name="osmo_pause_location">Paŭzi lokalizadon</string>
+    <string name="osmo_pause_location">Paŭzi</string>
     </resources>
