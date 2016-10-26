@@ -151,6 +151,10 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 			if (menuController != null) {
 				menuController.addPlainMenuItems(typeStr, this.pointDescription, this.latLon);
 			}
+			if (searchDoneAction != null && searchDoneAction.dlg != null && searchDoneAction.dlg.getOwnerActivity() != mapActivity) {
+				searchDoneAction.dlg = buildSearchActionDialog();
+				searchDoneAction.dlg.show();
+			}
 		} else {
 			menuController = null;
 		}
@@ -593,10 +597,15 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 			fragmentRef.get().refreshTitle();
 
 		if (searchDoneAction != null) {
-			if (searchDoneAction.dlg != null) {
-				searchDoneAction.dlg.dismiss();
-				searchDoneAction.dlg = null;
-			}
+				if (searchDoneAction.dlg != null) {
+					try {
+						searchDoneAction.dlg.dismiss();
+					} catch (Exception e) {
+						// ignore
+					} finally {
+						searchDoneAction.dlg = null;
+					}
+				}
 			searchDoneAction.run();
 			searchDoneAction = null;
 		}
@@ -706,19 +715,24 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 
 	private void callMenuAction(boolean waitForAddressLookup, MenuAction menuAction) {
 		if (searchingAddress() && waitForAddressLookup) {
-			menuAction.dlg = new ProgressDialog(mapActivity);
-			menuAction.dlg.setTitle("");
-			menuAction.dlg.setMessage(searchAddressStr);
-			menuAction.dlg.setButton(Dialog.BUTTON_NEGATIVE, mapActivity.getResources().getString(R.string.shared_string_skip), new DialogInterface.OnClickListener() {
-				public void onClick(DialogInterface dialog, int which) {
-					cancelSearchAddress();
-				}
-			});
+			menuAction.dlg = buildSearchActionDialog();
 			menuAction.dlg.show();
 			searchDoneAction = menuAction;
 		} else {
 			menuAction.run();
 		}
+	}
+
+	private ProgressDialog buildSearchActionDialog() {
+		ProgressDialog dlg = new ProgressDialog(mapActivity);
+		dlg.setTitle("");
+		dlg.setMessage(searchAddressStr);
+		dlg.setButton(Dialog.BUTTON_NEGATIVE, mapActivity.getResources().getString(R.string.shared_string_skip), new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int which) {
+				cancelSearchAddress();
+			}
+		});
+		return dlg;
 	}
 
 	public void addAsLastIntermediate() {

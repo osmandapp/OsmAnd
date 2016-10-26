@@ -161,18 +161,20 @@ public abstract class MenuTitleController {
 		addressLookupRequest = new AddressLookupRequest(getLatLon(), new GeocodingLookupService.OnAddressLookupResult() {
 			@Override
 			public void geocodingDone(String address) {
-				addressLookupRequest = null;
-			    if (Algorithms.isEmpty(address)) {
-					streetStr = PointDescription.getAddressNotFoundStr(getMapActivity());
-				} else {
-					streetStr = address;
-				}
+				if (addressLookupRequest != null) {
+					addressLookupRequest = null;
+					if (Algorithms.isEmpty(address)) {
+						streetStr = PointDescription.getAddressNotFoundStr(getMapActivity());
+					} else {
+						streetStr = address;
+					}
 
-				if (displayStreetNameInTitle()) {
-					nameStr = streetStr;
-					getPointDescription().setName(nameStr);
+					if (displayStreetNameInTitle()) {
+						nameStr = streetStr;
+						getPointDescription().setName(nameStr);
+					}
+					onSearchAddressDone();
 				}
-				onSearchAddressDone();
 			}
 		}, new GeocodingLookupService.OnAddressLookupProgress() {
 			@Override
