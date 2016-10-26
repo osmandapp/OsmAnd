@@ -957,10 +957,10 @@
 	<string name="poi_piste_difficulty_freeride">Pistatik kanpo</string>
 	<string name="poi_wiki_place">Wikipedia</string>
 	<string name="poi_wiki_lang_en">Wikia ingelesez</string>
-	<string name="poi_wiki_lang_ar">Wikia Arabieraz</string>
-	<string name="poi_wiki_lang_be">Wikia Bieloerrusieraz</string>
-	<string name="poi_wiki_lang_bg">Wikia Bulgarieraz</string>
-	<string name="poi_wiki_lang_ca">Wikia Katalanez</string>
+	<string name="poi_wiki_lang_ar">Wikia arabieraz</string>
+	<string name="poi_wiki_lang_be">Wikia bielorrusieraz</string>
+	<string name="poi_wiki_lang_bg">Wikia bulgarieraz</string>
+	<string name="poi_wiki_lang_ca">Wikia katalanez</string>
 	<string name="poi_beacon">Itsasargia</string>
 	<string name="poi_craft_basket_maker">Otzaragina</string>
 	<string name="poi_craft_blacksmith">Errementaria</string>
@@ -1349,7 +1349,7 @@
 	<string name="poi_wiki_lang_sk">Wikia eslovakieraz</string>
 	<string name="poi_wiki_lang_sl">Wikia eslovenieraz</string>
 	<string name="poi_wiki_lang_sr">Wikia serbieraz</string>
-	<string name="poi_wiki_lang_sv">Wiki suitzarra</string>
+	<string name="poi_wiki_lang_sv">Wikia suedieraz</string>
 	<string name="poi_wiki_lang_sw">Wikia swahiliz</string>
 	<string name="poi_wiki_lang_te">Wikia teluguz</string>
 	<string name="poi_wiki_lang_th">Wikia thailandieraz</string>
