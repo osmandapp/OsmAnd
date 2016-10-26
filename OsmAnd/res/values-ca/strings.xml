@@ -2461,11 +2461,11 @@ Si aprecieu OsmAnd  i OSM i voleu ajudar-los, és la via perfecta per fer-ho."</
     <string name="subcategories">Subcategories</string>
     <string name="translit_names">Translitera els noms</string>
     <string name="translit_name_if_miss">Si no hi ha noms en %1$s translitera els propis</string>
-    <string name="rendering_attr_contourColorScheme_description">Esquema de color dels contorns</string>
-    <string name="save_track_min_speed">Velocitat mínima per registrar la traça</string>
-    <string name="save_track_min_speed_descr">Escolliu la velocitat mínima que provocarà l\'enregistrament</string>
+    <string name="rendering_attr_contourColorScheme_description">Esquema de color de les línies de contorn</string>
+    <string name="save_track_min_speed">Velocitat mínima per registrar la ruta</string>
+    <string name="save_track_min_speed_descr">Establiu la velocitat mínima d\'un element que provocarà l\'enregistrament</string>
     <string name="save_track_min_distance">Desplaçament mínim de registre</string>
-    <string name="save_track_min_distance_descr">Escolliu el desplaçament mínim que provocarà l\'enregistrament</string>
+    <string name="save_track_min_distance_descr">Establiu el desplaçament mínim que provocarà l\'enregistrament</string>
     <string name="save_track_precision">Precisió mínima de l\'enregistrament</string>
     <string name="save_track_precision_descr">Trieu la precisió mínima acceptable d\'enregistrament</string>
     <string name="christmas_poi">PDI Nadal</string>
@@ -2486,13 +2486,13 @@ Si aprecieu OsmAnd  i OSM i voleu ajudar-los, és la via perfecta per fer-ho."</
  • Icones seleccionables al mapa
 
 
- • Potent filtre per cercar PDI: cerca restaurants per tipus de cuina, càmpings amb equipaments determinats
+ • Potent filtre per cercar PDI: cerca, p.e.  restaurants per tipus de cuina o càmpings amb equipaments determinats
 
 
- • Nou estil topològic OsmAnd  per ciclistes i senderistes
+ • Nou estil de mapa topològic per ciclistes i senderistes
 
 
- • Enregistrament de la ruta millorat (nous paràmetres)
+ • Enregistrament de la ruta millorat
 
 
  • Notificacions de navegació millorades (Android Wear)
@@ -2506,7 +2506,7 @@ Si aprecieu OsmAnd  i OSM i voleu ajudar-los, és la via perfecta per fer-ho."</
     <string name="shared_string_notifications">Notificacions</string>
     <string name="trip_rec_notification_settings">Enregistrament de la ruta (no hi ha dades)</string>
     <string name="trip_rec_notification_settings_desc">Mostra una notificació que permet començar l\'enregistrament de la ruta prement el botó Enregistra</string>
-    <string name="osmo_share_location">Comparteix la ubicació</string>
-    <string name="osmo_pause_location">Atura la ubicació</string>
+    <string name="osmo_share_location">Comparteix</string>
+    <string name="osmo_pause_location">Atura</string>
     <string name="osmo_service_running">S\'està executant el servei OsmMo</string>
     </resources>
