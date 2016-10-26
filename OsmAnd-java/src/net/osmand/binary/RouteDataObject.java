@@ -138,7 +138,7 @@ public class RouteDataObject {
 			int[] kt = names.keys();
 			String destinationTag = (direction == true) ? "destination:forward" : "destination:backward";
 			if(!Algorithms.isEmpty(lang)) {
-				destinationTag = "destination:" + lang;
+				String destinationTagLang = "destination:lang:" + lang;
 			}
 			String destinationTagDefault = "destination";
 			String destinationDefault = null;
@@ -147,6 +147,9 @@ public class RouteDataObject {
 				int k = kt[i];
 				if(region.routeEncodingRules.size() > k) {
 					if(destinationTag.equals(region.routeEncodingRules.get(k).getTag())) {
+						return (transliterate) ? Junidecode.unidecode(names.get(k)) : names.get(k);
+					}
+					if(!Algorithms.isEmpty(lang) && destinationTagLang.equals(region.routeEncodingRules.get(k).getTag())) {
 						return (transliterate) ? Junidecode.unidecode(names.get(k)) : names.get(k);
 					}
 					if(destinationTagDefault.equals(region.routeEncodingRules.get(k).getTag())) {
