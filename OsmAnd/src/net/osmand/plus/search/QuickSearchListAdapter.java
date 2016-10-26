@@ -151,6 +151,9 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 	}
 
 	public void addListItem(QuickSearchListItem item) {
+		if (searchMoreItemPosition != -1 && item instanceof QuickSearchMoreListItem) {
+			return;
+		}
 		setNotifyOnChange(false);
 		add(item);
 		acquireAdditionalItemsPositions();
