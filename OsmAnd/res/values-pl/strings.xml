@@ -2686,4 +2686,7 @@ i więcej...
     <string name="trip_rec_notification_settings">Nagrywanie trasy (brak danych)</string>
     <string name="trip_rec_notification_settings_desc">Pokaż komunikat który pozwoli rozpocząć nagrywanie trasy przez naciśnięcie przycisku Nagrywaj</string>
     <string name="shared_string_notifications">Powiadomienia</string>
+    <string name="osmo_share_location">Udostępnij lokalizację</string>
+    <string name="osmo_pause_location">Wstrzymaj lokalizację</string>
+    <string name="osmo_service_running">Usługa OsMo jest uruchomiona</string>
     </resources>
