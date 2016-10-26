@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.NotificationCompat.BigTextStyle;
 import android.support.v4.app.NotificationCompat.Builder;
 
 import net.osmand.plus.NavigationService;
@@ -122,17 +121,18 @@ public class OsMoNotification extends OsmandNotification {
 			return null;
 		}
 
+		boolean shareLocation = osMoPlugin.getTracker() != null && osMoPlugin.getTracker().isEnabledTracker();
 		String notificationTitle;
 		String notificationText;
 		color = 0;
 		icon = R.drawable.ic_osmo_dark;
 		color = app.getResources().getColor(R.color.osmand_orange);
-		notificationTitle = app.getString(R.string.osmo_plugin_name);
-		notificationText = app.getString(R.string.osmo_service_running);
+		notificationTitle = app.getString(R.string.osmo_service_running);
+		notificationText = app.getString(R.string.osmo_share_my_location) + ": " + (shareLocation ? app.getString(R.string.shared_string_yes) : app.getString(R.string.shared_string_no)).toLowerCase();
 
 		final Builder notificationBuilder = createBuilder()
 				.setContentTitle(notificationTitle)
-				.setStyle(new BigTextStyle().bigText(notificationText));
+				.setContentText(notificationText);
 
 		if (osMoPlugin.getService().isEnabled()) {
 			Intent stopServiceIntent = new Intent(OSMAND_STOP_OSMO_SERVICE_ACTION);
@@ -146,13 +146,13 @@ public class OsMoNotification extends OsmandNotification {
 					Intent stopShareLocatiponIntent = new Intent(OSMAND_STOP_SHARE_LOCATION_ACTION);
 					PendingIntent stopShareLocatiponIntentPendingIntent = PendingIntent.getBroadcast(app, 0, stopShareLocatiponIntent,
 							PendingIntent.FLAG_UPDATE_CURRENT);
-					notificationBuilder.addAction(R.drawable.ic_action_remove_dark,
+					notificationBuilder.addAction(R.drawable.ic_action_marker_dark,
 							app.getString(R.string.osmo_pause_location), stopShareLocatiponIntentPendingIntent);
 				} else {
 					Intent startShareLocationIntent = new Intent(OSMAND_START_SHARE_LOCATION_ACTION);
 					PendingIntent startShareLocationPendingIntent = PendingIntent.getBroadcast(app, 0, startShareLocationIntent,
 							PendingIntent.FLAG_UPDATE_CURRENT);
-					notificationBuilder.addAction(R.drawable.ic_action_gshare_dark,
+					notificationBuilder.addAction(R.drawable.ic_action_marker_dark,
 							app.getString(R.string.osmo_share_location), startShareLocationPendingIntent);
 				}
 			}
