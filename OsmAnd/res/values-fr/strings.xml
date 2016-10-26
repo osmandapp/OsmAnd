@@ -2391,7 +2391,7 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="get_for_month">Obtenir pour %1$s mois</string>
     <string name="si_mi_meters">Miles / Mètres</string>
     <string name="get_it">Obtenir</string>
-    <string name="osm_live_banner_desc">Obtenez le téléchargement illimité de cartes et des mises à jour plus régulières (chaque semaine, chaque jour, chaque heure; au lieu de chaque mois).</string>
+    <string name="osm_live_banner_desc">Obtenez le téléchargement illimité des cartes et des mises à jour plus régulières (chaque semaine, chaque jour, chaque heure; au lieu de chaque mois).</string>
     <string name="osmand_plus_banner_desc">Version OsmAnd complète avec téléchargement illimité des cartes et mises à jour mensuelles des cartes.</string>
     <string name="donation_to_osm">Faire un don à la communauté OpenStreetMap</string>
     <string name="osm_live_subscription_desc">L\'abonnement permet de bénéficier des mises à jour horaires, quotidiennes, hebdomadaires et de télécharger de nouvelles cartes sans limite.</string>
@@ -2406,7 +2406,7 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="save_filter">Mémoriser les filtres</string>
     <string name="delete_filter">Retirer les filtres</string>
     <string name="new_filter">Nouveau filtre</string>
-    <string name="new_filter_desc">Merci de saisir un nom pour ce filtre. Vous le retrouverez dans la liste des Catégories.</string>
+    <string name="new_filter_desc">Merci de saisir un nom pour ce filtre, il sera ajouté à l\'onglet Catégories.</string>
     <string name="selected_categories">Catégories sélectionnées</string>
     <string name="create_custom_poi">Créer un filtre personnalisé</string>
     <string name="custom_search">Recherche personnalisée</string>
@@ -2416,18 +2416,18 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="rendering_value_light_brown_name">Marron clair</string>
     <string name="rendering_value_dark_brown_name">Marron foncé</string>
     <string name="search_hint">Saisissez une ville, une adresse ou un nom de point d\'intérêt</string>
-    <string name="rendering_attr_contourColorScheme_name">Couleur des contours</string>
+    <string name="rendering_attr_contourColorScheme_name">Couleurs des courbes de niveau</string>
     <string name="rendering_attr_surfaceIntegrity_name">État de la route</string>
     <string name="christmas_poi">PI de Noël</string>
     <string name="christmas_desc">Anticipez Noël et le Nouvel An en affichant les Points d\'Intérêts associés à ces évènements de fin d\'année comme : les arbres de Noël, les marchés ...</string>
     <string name="christmas_desc_q">Afficher les PI de Noël ?</string>
-    <string name="rendering_attr_contourColorScheme_description">Couleurs des contours</string>
+    <string name="rendering_attr_contourColorScheme_description">Couleurs des courbes de niveau</string>
     <string name="save_track_min_speed">Vitesse minimale pour enregistrer</string>
     <string name="save_track_min_speed_descr">Indiquez une vitesse minimale à partir de laquelle déclencher l\'enregistrement</string>
     <string name="save_track_min_distance">Distance minimale pour enregistrer</string>
     <string name="save_track_min_distance_descr">Indiquez une distance minimale à partir de laquelle déclencher l\'enregistrement</string>
     <string name="save_track_precision">Seuils d\'enregistrement</string>
-    <string name="save_track_precision_descr">Sélectionnez un seuil minimal pour l’enregistrement</string>
+    <string name="save_track_precision_descr">Sélectionnez un seuil minimal pour l’enregistrement d\'un point</string>
     <string name="shared_string_continue">Continuer</string>
     <string name="shared_string_pause">Pause</string>
     <string name="shared_string_trip">Itinéraire</string>
@@ -2458,7 +2458,7 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="shared_string_notifications">Notifications</string>
     <string name="trip_rec_notification_settings">Enregistrement de l\'itinéraire (aucune donnée)</string>
     <string name="trip_rec_notification_settings_desc">Afficher une notification contenant un bouton pour débuter l’Enregistrement de l\'itinéraire</string>
-    <string name="osmo_share_location">Partager la position</string>
+    <string name="osmo_share_location">Partager</string>
     <string name="osmo_service_running">Le service OsMo est actif</string>
-    <string name="osmo_pause_location">Interrompre la localisation</string>
+    <string name="osmo_pause_location">Mettre en pause</string>
     </resources>
