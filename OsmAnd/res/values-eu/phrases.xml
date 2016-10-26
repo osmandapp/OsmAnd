@@ -1831,4 +1831,11 @@
 	<string name="poi_nuclear_explosion_time_utc">Leherketaren ordua (UTC)</string>
 	<string name="poi_nuclear_explosion_yield">Leherketaren etekina</string>
 	<string name="poi_nuclear_explosion_hole">Leherketa-zuloa</string>
+	<string name="poi_wiki_lang_af">Wikia afrikaanseraz</string>
+	<string name="poi_wiki_lang_az">Wikia azerbaijaneraz</string>
+	<string name="poi_wiki_lang_bn">Wikia bengaleraz</string>
+	<string name="poi_wiki_lang_br">Wikia bretoieraz</string>
+	<string name="poi_wiki_lang_cy">Wikia galesez</string>
+	<string name="poi_wiki_lang_eo">Wikia esperantoz</string>
+	<string name="poi_wiki_lang_eu">Wikia euskaraz</string>
 	</resources>
