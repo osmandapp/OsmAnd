@@ -1,5 +1,8 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
+    <string name="osmo_share_location">Поделиться местоположением</string>
+    <string name="osmo_pause_location">Пауза</string>
+    <string name="osmo_service_running">OsMo запущен</string>
     <string name="trip_rec_notification_settings">Запись поездки (нет данных)</string>
     <string name="trip_rec_notification_settings_desc">Показывать уведомление, которое позволит начать запись с помощью кнопки \"Запись поездки\"</string>
     <string name="shared_string_notifications">Уведомления</string>
