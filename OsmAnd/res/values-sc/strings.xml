@@ -2630,4 +2630,10 @@ Como bi sunt {2} MB ebbia disponìbiles.</string>
 
  e àteru…
  "</string>
+    <string name="osmo_share_location">Cumpartzi sa positzione</string>
+    <string name="osmo_pause_location">Firma sa localizatzione</string>
+    <string name="osmo_service_running">Su servìtziu OsMo est allutu</string>
+    <string name="trip_rec_notification_settings">Registratzione biàgios (datu perunu)</string>
+    <string name="trip_rec_notification_settings_desc">Ammustra sas notìficas chi permitint de incumintzare a registrare su biàgiu incarchende su butone Registra</string>
+    <string name="shared_string_notifications">Notìficas</string>
     </resources>
