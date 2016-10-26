@@ -2580,14 +2580,14 @@ OsmAnd aplikazioarekin laguntza behar baduzu, jarri kontaktuan gure laguntza tal
     <string name="search_my_location">Bilatu nire kokalekua</string>
     <string name="get_for">Eskuratu %1$sren truke</string>
     <string name="get_for_month">Eskuratu hilean %1$s(r)en truke</string>
-    <string name="osm_live_banner_desc">Deskargatu nahi beste mapa, eta jaso eguneraketak hilean behin baino sarriago: orduro, egunero edo astero.</string>
+    <string name="osm_live_banner_desc">Deskargatu nahi beste mapa, eta jaso mapen eguneraketak hilean behin baino sarriago: astero, egunero, edo orduro.</string>
     <string name="osmand_plus_banner_desc">OsmAnd bertsio osoa mapen deskarga mugagabearekin eta hileroko mapen eguneraketa.</string>
     <string name="si_mi_meters">Miliak/metroak</string>
     <string name="get_it">Eskuratu</string>
     <string name="osm_live_payment_desc">Harpidetzaren kuota hilabetero kargatuko da. Zure harpidetza noiznahi eten dezakezu Google Play bitartez.</string>
     <string name="donation_to_osm">Dohaintza OpenStreetMap komunitateari</string>
     <string name="donation_to_osm_desc">Zure dohaintzaren zati bat OpenStreetMap gunera aldaketak bidaltzen dituzten erabiltzaileei emango zaie. harpidetzaren kostua berbera da.</string>
-    <string name="osm_live_subscription_desc">Harpidetzak orduro, egunero edo astergo eguneraketak jasotzea eta mugarik gabe mapak deskargatzea ahalbidetzen du.</string>
+    <string name="osm_live_subscription_desc">Harpidetzak orduro, egunero edo astero eguneraketak jasotzea eta mugarik gabe mapak deskargatzea ahalbidetzen du.</string>
     <string name="driving_region_australia">Australia</string>
     <string name="lang_kab">Kabiliera</string>
     <string name="selected_categories">Aukeratutako kategoriak</string>
@@ -2598,7 +2598,7 @@ OsmAnd aplikazioarekin laguntza behar baduzu, jarri kontaktuan gure laguntza tal
     <string name="save_filter">Gorde iragazkia</string>
     <string name="delete_filter">Ezabatu iragazkia</string>
     <string name="new_filter">Iragazki berria</string>
-    <string name="new_filter_desc">Idatzi iragazki berriaren izena, Kategorien zerrendan aurkituko duzu.</string>
+    <string name="new_filter_desc">Idatzi iragazki berriaren izena, zure kategorien fitxara gehituko da.</string>
     <string name="edit_filter">Editatu iragazkia</string>
     <string name="subcategories">Azpikategoriak</string>
     <string name="translit_name_if_miss">Transliteratu %1$s izena falta bada</string>
@@ -2606,17 +2606,17 @@ OsmAnd aplikazioarekin laguntza behar baduzu, jarri kontaktuan gure laguntza tal
     <string name="search_hint">Idatzi hiria, helbidea, POI izena</string>
     <string name="rendering_value_light_brown_name">Marroi argia</string>
     <string name="rendering_value_dark_brown_name">Marroi iluna</string>
-    <string name="rendering_attr_contourColorScheme_name">Ingeraden kolore eskema</string>
+    <string name="rendering_attr_contourColorScheme_name">Ingerada marren kolore eskema</string>
     <string name="rendering_attr_surfaceIntegrity_name">Errepidearen gainazalaren integritatea</string>
-    <string name="rendering_attr_contourColorScheme_description">Ingeraden kolore eskema</string>
+    <string name="rendering_attr_contourColorScheme_description">Ingerada marren kolore eskema</string>
     <string name="save_track_min_speed">Gutxieneko abiadura erregistratzeko</string>
-    <string name="save_track_min_speed_descr">Aukeratu erregistratzea eragingo duen gutxieneko abiadura</string>
+    <string name="save_track_min_speed_descr">Ezarri puntu bat erregistratzea eragingo duen gutxieneko abiadura</string>
     <string name="save_track_min_distance">Gutxieneko distantzia erregistratzeko</string>
-    <string name="save_track_min_distance_descr">Aukeratu erregistratzea eragingo duen gutxieneko distantzia</string>
+    <string name="save_track_min_distance_descr">Ezarri puntu bat erregistratzea eragingo duen gutxieneko distantzia aurreko posiziotik</string>
     <string name="save_track_precision">Erregistratzearen gutxieneko zehaztasuna</string>
-    <string name="save_track_precision_descr">Aukeratu erregistratzearen gutxieneko zehaztasun onargarria</string>
+    <string name="save_track_precision_descr">Ezarri erregistratzearen gutxieneko zehaztasuna</string>
     <string name="christmas_poi">Eguberriko POI</string>
-    <string name="christmas_desc">Eguberria eta urte berria datozela, Eguberriarekin zerikusia duten POIak bistaratzea erabaki dezakezu: Eguberri zuhaitzak, merkatuak...</string>
+    <string name="christmas_desc">Eguberria eta urte berria datozela, Eguberriarekin zerikusia duten POIak bistaratzea erabaki dezakezu: Eguberri zuhaitzak, merkatuak, eta abar.</string>
     <string name="christmas_desc_q">Erakutsi eguberriko POIak?</string>
     <string name="shared_string_continue">Jarraitu</string>
     <string name="shared_string_pause">Pausatu</string>
@@ -2628,13 +2628,13 @@ OsmAnd aplikazioarekin laguntza behar baduzu, jarri kontaktuan gure laguntza tal
  • klikatu daitezkeen ikonoak mapan
 
 
- • Iragazki bidezko POI bilaketa ahaltsua: bilatu jatetxeak sukaldaritza motaren arabera, behar zehatzetarako kanpingak
+ • Iragazki bidezko POI bilaketa ahaltsua: bilatu adibidez jatetxeak sukaldaritza motaren arabera, edo behar zehatzetarako kanpingak
 
 
- • OsmAnd Topo estilo berria txirrindularieta mendizaleentzat
+ • Topo estilo berria txirrindularieta mendizaleentzat
 
 
- • Hobetutako bidai grabaketa (ezarpen berriak)
+ • Hobetutako bidai grabaketa
 
 
  • Jakinarazpen hobetuak nabigazioan (Android Wear)
@@ -2648,4 +2648,7 @@ OsmAnd aplikazioarekin laguntza behar baduzu, jarri kontaktuan gure laguntza tal
     <string name="trip_rec_notification_settings">Bidaiaren grabaketa (daturik ez)</string>
     <string name="trip_rec_notification_settings_desc">Erakutsi grabatu botoia zapalduz bidaiaren grabaketa abiatzea baimentzen duen jakinarazpen bat</string>
     <string name="shared_string_notifications">Jakinarazpenak</string>
+    <string name="osmo_share_location">Partekatu</string>
+    <string name="osmo_pause_location">Pausatu</string>
+    <string name="osmo_service_running">OsMo zerbitzua exekutatzen ari da</string>
     </resources>
