@@ -1586,7 +1586,7 @@
 	<string name="poi_compressed_air_filter">Aire konprimatua</string>
 	<string name="poi_vacuum_cleaner_filter">Xurgagailua</string>
 
-<string name="poi_aerialway_platter">Plater igogailua</string>
+<string name="poi_aerialway_platter">Erretilu igogailua</string>
 	<string name="poi_aerialway_mixed_lift">Igogailu nahasia</string>
 	<string name="poi_aerialway_drag_lift">Arrastatze igogailua</string>
 	<string name="poi_beauty_salon_nails">Manikura</string>
@@ -1838,4 +1838,9 @@
 	<string name="poi_wiki_lang_cy">Wikia galesez</string>
 	<string name="poi_wiki_lang_eo">Wikia esperantoz</string>
 	<string name="poi_wiki_lang_eu">Wikia euskaraz</string>
+	<string name="poi_fuel_lpg">Petrolio gas likidotua (PGL)</string>
+	<string name="poi_fuel_cng">Gas natural konprimitua</string>
+	<string name="poi_fuel_svo">Landare-olio erregaia</string>
+	<string name="poi_aerialway_station">Teleaulki geltokia</string>
+	<string name="poi_aerialway_magic_carpet">Tapiz magikoa (igogailua)</string>
 	</resources>
