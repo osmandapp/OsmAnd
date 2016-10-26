@@ -2506,4 +2506,7 @@ Si aprecieu OsmAnd  i OSM i voleu ajudar-los, és la via perfecta per fer-ho."</
     <string name="shared_string_notifications">Notificacions</string>
     <string name="trip_rec_notification_settings">Enregistrament de la ruta (no hi ha dades)</string>
     <string name="trip_rec_notification_settings_desc">Mostra una notificació que permet començar l\'enregistrament de la ruta prement el botó Enregistra</string>
+    <string name="osmo_share_location">Comparteix la ubicació</string>
+    <string name="osmo_pause_location">Atura la ubicació</string>
+    <string name="osmo_service_running">S\'està executant el servei OsmMo</string>
     </resources>
