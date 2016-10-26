@@ -81,26 +81,29 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 
 	@Override
 	public void onListItemClick(ListView l, View view, int position, long id) {
-		QuickSearchListItem item = listAdapter.getItem(position - l.getHeaderViewsCount());
-		if (item != null) {
-			if (item instanceof QuickSearchMoreListItem) {
-				((QuickSearchMoreListItem) item).getOnClickListener().onClick(view);
-			} else if (item instanceof CustomSearchButton) {
-				((CustomSearchButton) item).getOnClickListener().onClick(view);
-			} else {
-				SearchResult sr = item.getSearchResult();
-
-				if (sr.objectType == ObjectType.POI
-						|| sr.objectType == ObjectType.LOCATION
-						|| sr.objectType == ObjectType.HOUSE
-						|| sr.objectType == ObjectType.FAVORITE
-						|| sr.objectType == ObjectType.RECENT_OBJ
-						|| sr.objectType == ObjectType.WPT
-						|| sr.objectType == ObjectType.STREET_INTERSECTION) {
-
-					showOnMap(sr);
+		int index = position - l.getHeaderViewsCount();
+		if (index < listAdapter.getCount()) {
+			QuickSearchListItem item = listAdapter.getItem(index);
+			if (item != null) {
+				if (item instanceof QuickSearchMoreListItem) {
+					((QuickSearchMoreListItem) item).getOnClickListener().onClick(view);
+				} else if (item instanceof CustomSearchButton) {
+					((CustomSearchButton) item).getOnClickListener().onClick(view);
 				} else {
-					dialogFragment.completeQueryWithObject(item.getSearchResult());
+					SearchResult sr = item.getSearchResult();
+
+					if (sr.objectType == ObjectType.POI
+							|| sr.objectType == ObjectType.LOCATION
+							|| sr.objectType == ObjectType.HOUSE
+							|| sr.objectType == ObjectType.FAVORITE
+							|| sr.objectType == ObjectType.RECENT_OBJ
+							|| sr.objectType == ObjectType.WPT
+							|| sr.objectType == ObjectType.STREET_INTERSECTION) {
+
+						showOnMap(sr);
+					} else {
+						dialogFragment.completeQueryWithObject(item.getSearchResult());
+					}
 				}
 			}
 		}
