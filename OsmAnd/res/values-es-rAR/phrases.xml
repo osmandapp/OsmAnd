@@ -3334,7 +3334,7 @@
 	<string name="poi_takeaway_filter_yes">Si</string>
 	<string name="poi_shower_filter_yes">Si</string>
 
-<string name="poi_cuisine_gyros">Gyros (carne asada en horno giratorio vertical)</string>
+<string name="poi_cuisine_gyros">Gyros (carne asada en horno vertical)</string>
 	<string name="poi_cuisine_yakiniku">Yakiniku (carne asada estilo japonés)</string>
 	<string name="poi_cuisine_sub">Sándwich submarino (torpedo)</string>
 	<string name="poi_cuisine_teriyaki">Teriyaki (carne asada en salsa dulce)</string>
@@ -3348,8 +3348,8 @@
 	<string name="poi_compressed_air_filter">Aire comprimido</string>
 	<string name="poi_vacuum_cleaner_filter">Aspiradora</string>
 
-<string name="poi_cuisine_doner">Döner kebab (carne a la parrilla en horno giratorio vertical)</string>
-	<string name="poi_cuisine_shawarma">Shawarma (carne a las brasas en horno giratorio horizontal)</string>
+<string name="poi_cuisine_doner">Döner kebab (carne cocinada en asador vertical)</string>
+	<string name="poi_cuisine_shawarma">Shawarma (carne a las brasas en asador horizontal)</string>
 
 	<string name="poi_waterway_fuel">Estación de combustible para barcos</string>
 
