@@ -136,8 +136,19 @@ public class RouteDataObject {
 	public String getDestinationName(String lang, boolean transliterate, boolean direction){
 		if(names != null) {
 			int[] kt = names.keys();
-			String destinationTag = (direction == true) ? "destination:forward" : "destination:backward";
-			String destinationTagLang = "destination:lang:";
+
+			// Issue #2181: Parse destination keys in this order:
+			//              destination:lang:XX:forward/backward
+			//              destination:forward/backward
+			//              destination:lang:XX
+			//              destination:lang:forward/backward
+
+			String destinationTagLangFB = "destination:lang:XX";
+			if(!Algorithms.isEmpty(lang)) {
+				destinationTagLangFB = (direction == true) ? "destination:lang:" + lang + ":forward" : "destination:lang:" + lang + ":backward";
+			}
+			String destinationTagFB = (direction == true) ? "destination:forward" : "destination:backward";
+			String destinationTagLang = "destination:lang:XX";
 			if(!Algorithms.isEmpty(lang)) {
 				destinationTagLang = "destination:lang:" + lang;
 			}
@@ -147,7 +158,10 @@ public class RouteDataObject {
 			for(int i = 0 ; i < kt.length; i++) {
 				int k = kt[i];
 				if(region.routeEncodingRules.size() > k) {
-					if(destinationTag.equals(region.routeEncodingRules.get(k).getTag())) {
+					if(!Algorithms.isEmpty(lang) && destinationTagLangFB.equals(region.routeEncodingRules.get(k).getTag())) {
+						return (transliterate) ? Junidecode.unidecode(names.get(k)) : names.get(k);
+					}
+					if(destinationTagFB.equals(region.routeEncodingRules.get(k).getTag())) {
 						return (transliterate) ? Junidecode.unidecode(names.get(k)) : names.get(k);
 					}
 					if(!Algorithms.isEmpty(lang) && destinationTagLang.equals(region.routeEncodingRules.get(k).getTag())) {
