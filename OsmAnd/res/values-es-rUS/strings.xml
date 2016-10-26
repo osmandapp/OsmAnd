@@ -2446,7 +2446,7 @@ Si amas a OsmAnd, OSM y quieres apoyarlos, esta es una perfecta manera de hacerl
     <string name="christmas_desc">Anticipando Navidad y Año Nuevo, puedes elegir mostrar el PDI asociado con la Navidad: el árbol navideño, las tiendas.</string>
     <string name="christmas_desc_q">¿Mostrar el PDI navideño?</string>
     <string name="save_track_min_speed">Velocidad mínima del registro</string>
-    <string name="save_track_min_speed_descr">Elige la velocidad mínima de activación del registro</string>
+    <string name="save_track_min_speed_descr">Define la velocidad mínima de activación del registro</string>
     <string name="save_track_min_distance">Distancia mínima del registro</string>
     <string name="save_track_min_distance_descr">Elige la distancia mínima de activación del registro</string>
     <string name="save_track_precision">Precisión mínima del registro</string>
@@ -2462,13 +2462,13 @@ Si amas a OsmAnd, OSM y quieres apoyarlos, esta es una perfecta manera de hacerl
  • Se pueden pulsar los iconos del mapa
 
 
- • Poderoso filtro de búsqueda PDI: busca restaurantes por gastronomía o campamentos con necesidades especificas
+ • Poderoso filtro de búsqueda PDI: Busca, p.e. restaurantes por gastronomía o campamentos con instalaciones especificas
 
 
- • Nuevo estilo topográfico para ciclistas y senderistas
+ • Nuevo estilo de mapa topográfico (Topo) para ciclistas y senderistas
 
 
- • Mejoras en la grabación de viaje (nuevos ajustes)
+ • Mejoras en la grabación de viaje
 
 
  • Mejoras en la notificación de navegación (Android Wear)
@@ -2482,7 +2482,7 @@ Si amas a OsmAnd, OSM y quieres apoyarlos, esta es una perfecta manera de hacerl
     <string name="trip_rec_notification_settings">Grabando viaje (sin datos)</string>
     <string name="trip_rec_notification_settings_desc">Muestra una notificación con el botón Grabar, el cuál permite iniciar la grabación del viaje</string>
     <string name="shared_string_notifications">Notificaciones</string>
-    <string name="osmo_share_location">Compartir ubicación</string>
-    <string name="osmo_pause_location">Pausar ubicación</string>
+    <string name="osmo_share_location">Compartir</string>
+    <string name="osmo_pause_location">Pausar</string>
     <string name="osmo_service_running">El servicio de OsMo está ejecutándose</string>
     </resources>
