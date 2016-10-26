@@ -2426,7 +2426,7 @@ Si necesitas ayuda con la aplicación OsmAnd, contacte con nuestro equipo de sop
     <string name="osm_live_payment_desc">La suscripción se pagará mensualmente y siempre podrás cancelar tu suscripción en Google Play.</string>
     <string name="donation_to_osm">Donaciones a la comunidad de OpenStreetMap</string>
     <string name="donation_to_osm_desc">Parte de tu donación se envía a usuarios que realicen cambios en OpenStreetMap. El costo de la suscripción sigue siendo la misma.</string>
-    <string name="osm_live_subscription_desc">La suscripción permite actualizaciones cada hora, día o semana y descargas ilimitadas para todos los mapas del mundo.</string>
+    <string name="osm_live_subscription_desc">La suscripción permite actualizaciones cada hora, día o semana y descargas ilimitadas para los mapas de todo el mundo.</string>
     <string name="driving_region_australia">Australia</string>
     <string name="shared_string_filters">Filtros</string>
     <string name="apply_filters">Aplicar filtros</string>
@@ -2451,9 +2451,9 @@ Si necesitas ayuda con la aplicación OsmAnd, contacte con nuestro equipo de sop
     <string name="christmas_desc">Anticipando Navidad y Año Nuevo, puedes elegir mostrar el PDI asociado con la Navidad: Árboles navideños, tiendas, etc.</string>
     <string name="christmas_desc_q">¿Mostrar el PDI navideño?</string>
     <string name="save_track_min_speed">Velocidad mínima del registro</string>
-    <string name="save_track_min_speed_descr">Define la velocidad mínima de un punto registrado</string>
+    <string name="save_track_min_speed_descr">Define la velocidad mínima de registro de un punto</string>
     <string name="save_track_min_distance">Distancia mínima del registro</string>
-    <string name="save_track_min_distance_descr">Define la distancia mínima desde el último punto de ubicación registrado</string>
+    <string name="save_track_min_distance_descr">Define la distancia mínima de registro entre puntos de ubicación</string>
     <string name="save_track_precision">Precisión mínima del registro</string>
     <string name="save_track_precision_descr">Define la precisión mínima de registro de un punto</string>
     <string name="rendering_attr_contourColorScheme_description">Esquema de color para las curvas de nivel</string>
