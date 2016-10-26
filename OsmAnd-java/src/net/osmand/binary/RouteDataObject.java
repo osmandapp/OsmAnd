@@ -137,8 +137,9 @@ public class RouteDataObject {
 		if(names != null) {
 			int[] kt = names.keys();
 			String destinationTag = (direction == true) ? "destination:forward" : "destination:backward";
+			String destinationTagLang = "destination:lang:";
 			if(!Algorithms.isEmpty(lang)) {
-				String destinationTagLang = "destination:lang:" + lang;
+				destinationTagLang = "destination:lang:" + lang;
 			}
 			String destinationTagDefault = "destination";
 			String destinationDefault = null;
