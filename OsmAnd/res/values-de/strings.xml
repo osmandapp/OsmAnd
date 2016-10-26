@@ -2508,7 +2508,7 @@ Wenn Sie OsmAnd und OSM lieben und unterstützen wollen, so ist dies die perfekt
     <string name="skip_map_downloading">Herunterladen der Karten überspringen</string>
     <string name="no_update_info_desc">Nicht auf Aktualisierungen und Rabatte im Bezug auf OsmAnd prüfen</string>
     <string name="si_mi_meters">Meilen/Meter</string>
-    <string name="osm_live_banner_desc">Erhalten Sie unbegrenzte Kartendownloads und -aktualisierungen mehr als einmal pro Monat: stündlich, täglich oder wöchentlich.</string>
+    <string name="osm_live_banner_desc">Erhalten Sie unbegrenzte Kartendownloads und -aktualisierungen mehr als einmal pro Monat: wöchentlich, täglich oder stündlich.</string>
     <string name="osmand_plus_banner_desc">Vollversion von OsmAnd mit unbegrenzten Kartendownloads und monatlichen Kartenaktualisierungen.</string>
     <string name="get_for">Holen für %1$s</string>
     <string name="get_for_month">Für %1$s Monat holen</string>
@@ -2516,14 +2516,14 @@ Wenn Sie OsmAnd und OSM lieben und unterstützen wollen, so ist dies die perfekt
     <string name="osm_live_payment_desc">Abonnementsgebühr wird jeden Monat berechnet. Sie können Ihr Abonnement auf Google Play jederzeit kündigen.</string>
     <string name="donation_to_osm">Spende an die OpenStreetMap-Gemeinschaft</string>
     <string name="donation_to_osm_desc">Ein Teil Ihrer Spende erhalten OSM-Benutzern, die Änderungen an OpenStreetMap übermitteln. Die Kosten für das Abonnement bleiben unverändert.</string>
-    <string name="osm_live_subscription_desc">Das Abonnement ermöglicht stündliche, tägliche, wöchentliche Updates und unbegrenzte Downloads für alle Karten auf der ganzen Welt.</string>
+    <string name="osm_live_subscription_desc">Das Abonnement ermöglicht stündliche, tägliche, wöchentliche Updates und unbegrenzte Downloads für alle weltweiten Karten.</string>
     <string name="lang_kab">Kabylisch</string>
     <string name="shared_string_filters">Filter</string>
     <string name="apply_filters">Filter anwenden</string>
     <string name="save_filter">Filter speichern</string>
     <string name="delete_filter">Filter löschen</string>
     <string name="new_filter">Neuer Filter</string>
-    <string name="new_filter_desc">Bitte geben sie einen Namen für den neuen Filter ein. Sie finden ihn in der Liste der Kategorien.</string>
+    <string name="new_filter_desc">Bitte geben sie einen Namen für den neuen Filter ein. Dieser wird in die Liste der Kategorien hinzugefügt.</string>
     <string name="selected_categories">Ausgewählte Kategorien</string>
     <string name="create_custom_poi">Benutzerdefinierten Filter erstellen</string>
     <string name="custom_search">Benutzerdefinierte Suche</string>
@@ -2537,15 +2537,15 @@ Wenn Sie OsmAnd und OSM lieben und unterstützen wollen, so ist dies die perfekt
     <string name="rendering_attr_surfaceIntegrity_name">Straßenoberflächenbeschaffenheit</string>
     <string name="search_hint">Stadt, Adresse, POI Name eingeben</string>
     <string name="christmas_poi">Weihnachts POI</string>
-    <string name="christmas_desc">Im Vorgriff auf Weihnachten und Neujahr, können Sie Weihnachts POI anzeigen: Weihnachtsbaum, Märkte.</string>
+    <string name="christmas_desc">Im Vorgriff auf Weihnachten und Neujahr, können Sie Weihnachts POI anzeigen: Weihnachtsbäume, Märkte, etc.</string>
     <string name="christmas_desc_q">Weihnachts POI anzeigen?</string>
     <string name="save_track_min_speed">Mindestgeschwindigkeit für die Protokollierung</string>
     <string name="save_track_min_speed_descr">Wählen Sie die Minimalgeschwindigkeit, bei der die Protokollierung ausgelöst wird</string>
     <string name="save_track_min_distance">Mindestentfernung für die Protokollierung</string>
-    <string name="save_track_min_distance_descr">Wählen Sie die Mindestentfernung, damit die Protokollierung ausgelöst wird</string>
+    <string name="save_track_min_distance_descr">Wählen Sie die Mindestentfernung von der letzten Position, damit die Protokollierung ausgelöst wird</string>
     <string name="save_track_precision">Minimale Genauigkeit der Protokollierung</string>
     <string name="save_track_precision_descr">Minimale Genauigkeit der Protokollierung auswählen</string>
-    <string name="rendering_attr_contourColorScheme_description">Farbschema der Konturen</string>
+    <string name="rendering_attr_contourColorScheme_description">Höhenlinien Farbschema</string>
     <string name="shared_string_continue">Fortsetzen</string>
     <string name="shared_string_pause">Pause</string>
     <string name="shared_string_recorded">Aufgezeichnet</string>
@@ -2555,7 +2555,7 @@ Wenn Sie OsmAnd und OSM lieben und unterstützen wollen, so ist dies die perfekt
     <string name="release_2_5">"
  • Anklickbare Symbole auf der Karte 
 
-• leistungsstarke POI Filtersuche: Restaurants nach Küchenart, Campingplätz nach spezifischen Bedürfnissen, ...
+• leistungsstarke POI Filtersuche z.B. Restaurants nach Küchenart, Campingplätz nach spezifischen Bedürfnissen, ...
 
 • neue OsmAnd Topo Stil, für Radfahrer und Wanderer 
 
@@ -2572,4 +2572,5 @@ und vieles mehr ...
     <string name="trip_rec_notification_settings_desc">Benachrichtigung anzeigen, die es erlaubt die Streckenaufzeichnung durch Betätigen der Schaltfläche “Aufzeichnen“ zu starten</string>
     <string name="shared_string_notifications">Benachrichtigungen</string>
     <string name="osmo_service_running">OsMo Dienst wird ausgeführt</string>
+    <string name="osmo_pause_location">Pause</string>
     </resources>
