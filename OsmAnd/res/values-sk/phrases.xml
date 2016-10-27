@@ -2265,4 +2265,9 @@
 	<string name="poi_cairn">Kamenná značka (mužik)</string>
 
 	<string name="poi_kiln">Pec (taviaca/sušiaca)</string>
+	<string name="poi_feeding_place">Miesto na kŕmenie zvierat</string>
+
+<string name="poi_shop_craft">Potreby pre umenie a remeslá</string>
+	<string name="poi_honey">Obchod s medom</string>
+	<string name="poi_waterway_fuel">Čerpacia stanica pre lode</string>
 	</resources>
