@@ -1741,7 +1741,10 @@ Optagede spor kan deles med venner eller anvendes til OSM bidrag. Sportsfolk kan
     <string name="speed_limit_exceed">Tolerance for hastighedsgrænse</string>
     <string name="speed_limit_exceed_message">Vælg hvor meget hastighedsgrænsen skal overskrides, for at få en taleadvarsel.</string>
     <string name="osmo_device_not_found">Enheden blev ikke fundet</string>
-    <string name="osmo_no_connection_msg">Kan ikke forbinde til OsMo serveren:\n- kontrollere internetforbindelsen;\n- kontrollere indstillingerne;\n- se på Twitter: https://twitter.com/OsMomobi</string>
+    <string name="osmo_no_connection_msg">Kan ikke forbinde til OsMo serveren:
+- kontroller Internetforbindelsen;
+- kontroller indstillingerne;
+- se på Twitter: https://twitter.com/OsMomobi</string>
     <string name="anonymous_user_hint">En anonym bruger kan ikke:
 - oprette grupper;
 - synkronisere grupper og enheder med serveren;
@@ -1815,7 +1818,7 @@ Optagede spor kan deles med venner eller anvendes til OSM bidrag. Sportsfolk kan
     <string name="avoid_roads_msg">Generere en alternativ rute ved at vælge veje der skal undgås</string>
 
     <string name="proxy_pref_title">Proxy</string>
-    <string name="proxy_pref_descr">Opsæt en proxy til internetkommunikation</string>
+    <string name="proxy_pref_descr">Opsæt en proxy til Internetkommunikation</string>
     <string name="settings_privacy">Privatliv</string>
     <string name="enable_proxy_title">Aktiver HTTP proxy</string>
     <string name="enable_proxy_descr">Konfigurer HTTP-proxy for alle netværksanmodninger</string>
@@ -2634,14 +2637,14 @@ Hvis du  ønsker at støtte OsmAnd og OSM, er dette en god måde at gøre det p�
     <string name="search_map">Søger efter kort…</string>
     <string name="first_usage_wizard_desc">Lad OsmAnd bestemme placeringen og foreslå at hente kort for denne region.</string>
     <string name="location_not_found">Placering ikke fundet</string>
-    <string name="no_inet_connection">Ingen internetforbindelse</string>
+    <string name="no_inet_connection">Ingen Internetforbindelse</string>
     <string name="no_inet_connection_desc_map">Nødvendigt for at hente kort.</string>
     <string name="search_location">Søger efter placering…</string>
     <string name="storage_free_space">Ledig lagerplads</string>
     <string name="storage_place_description">OsmAnds datalagring (for kort, spor, mv.): %1$s.</string>
     <string name="give_permission">Giv tilladelse</string>
     <string name="allow_access_location">Tillad adgang til placering</string>
-    <string name="first_usage_greeting">Få rutevejledning og opdag nye steder uden brug af internetforbindelse</string>
+    <string name="first_usage_greeting">Få rutevejledning og opdag nye steder uden brug af Internetforbindelse</string>
     <string name="si_mi_meters">Mil/Meter</string>
     <string name="get_for">Få for %1$s</string>
     <string name="get_for_month">Få for %1$s måned</string>
