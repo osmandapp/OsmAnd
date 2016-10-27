@@ -76,15 +76,15 @@ public class ApplicationMode {
 		regWidgetAvailability("next_next_turn", exceptDefault);
 
 		// right
-		regWidgetVisibility("intermediate_distance", exceptDefault);
-		regWidgetVisibility("distance", exceptDefault);
+		regWidgetVisibility("intermediate_distance", all);
+		regWidgetVisibility("distance", all);
 		regWidgetVisibility("time", exceptDefault);
 		regWidgetVisibility("speed", exceptPedestrianAndDefault);
 		regWidgetVisibility("max_speed", CAR);
 		regWidgetVisibility("altitude", pedestrianBicycle);
 		regWidgetVisibility("gps_info", none);
-		regWidgetAvailability("intermediate_distance", exceptDefault);
-		regWidgetAvailability("distance", exceptDefault);
+		regWidgetAvailability("intermediate_distance", all);
+		regWidgetAvailability("distance", all);
 		regWidgetAvailability("time", exceptDefault);
 		regWidgetAvailability("map_marker_1st", none);
 		regWidgetAvailability("map_marker_2nd", none);
