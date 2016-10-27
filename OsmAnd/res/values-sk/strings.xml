@@ -1569,7 +1569,10 @@ Zaznamenané stopy môžete zdieľať s priateľmi alebo odoslať ako príspevok
     <string name="osmo_device_not_found">Zariadenie sa nenašlo</string>
     <string name="anonymous_user">Anonymný používateľ</string>
     <string name="logged_as">Prihlásený ako %1$s</string>
-    <string name="osmo_no_connection_msg">Nedá sa pripojiť na server OsMo:\n- skontrolujte vaše pripojenie na internet;\n- skontrolujte nastavenia;\n- pozrite na náš Twitter: https://twitter.com/OsMomobi</string>
+    <string name="osmo_no_connection_msg">Nedá sa pripojiť na server OsMo:
+- skontrolujte vaše pripojenie na Internet;
+- skontrolujte nastavenia;
+- pozrite na náš Twitter: https://twitter.com/OsMomobi</string>
     <string name="anonymous_user_hint">Anonymný používateľ nemôže:\n- vytvárať skupiny;\n- synchronizovať skupiny a zariadenia so serverom;\n- spravovať skupiny a zariadenia na osobnej webovej stránke.</string>
     <string name="rendering_category_details">Podrobnosti</string>
     <string name="rendering_category_transport">Doprava</string>
@@ -2405,14 +2408,14 @@ Ak potrebuje pomoc s aplikáciou OsmAnd, kontaktuje podporu: support@osmand.net.
     <string name="search_map">Hľadá sa mapa…</string>
     <string name="first_usage_wizard_desc">Povoliť aby OsmAnd mohol určiť Vašu polohu a navrhnúť mapy, ktoré sa dajú stiahnuť pre daný región.</string>
     <string name="location_not_found">Poloha sa nenašla</string>
-    <string name="no_inet_connection">Nie je pripojenie na internet</string>
+    <string name="no_inet_connection">Nie je pripojenie na Internet</string>
     <string name="no_inet_connection_desc_map">Potrebné pre stiahnutie máp.</string>
     <string name="search_location">Hľadá sa poloha…</string>
     <string name="storage_free_space">Voľné miesto</string>
     <string name="storage_place_description">Úložisko údajov pre OsmAnd (mapy, stopy, atď.): %1$s.</string>
     <string name="give_permission">Udeliť povolenie</string>
     <string name="allow_access_location">Povoliť prístup k polohe</string>
-    <string name="first_usage_greeting">Získajte pokyny a objavte nové miesta bez pripojenia na internet</string>
+    <string name="first_usage_greeting">Získajte pokyny a objavte nové miesta bez pripojenia na Internet</string>
     <string name="search_my_location">Hľadať moju polohu</string>
     <string name="no_update_info_desc">Nekontrolovať aktualizácie nových verzií a zľavy súvisiace s OsmAnd</string>
     <string name="no_update_info">Nezobrazovať aktualizácie</string>
