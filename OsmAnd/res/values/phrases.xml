@@ -3296,4 +3296,20 @@
 	<string name="poi_cuisine_jewish">Jewish</string>
 	<string name="poi_cuisine_bulgarian">Bulgarian</string>
 	<string name="poi_cuisine_tibetan">Tibetan</string>
+
+	<string name="poi_outdoor_seating_filter_yes">Yes</string>
+	<string name="poi_delivery_filter_yes">Yes</string>
+	<string name="poi_diet_vegetarian_filter_yes">Vegetarian</string>
+	<string name="poi_diet_vegan_filter_yes">Vegan</string>
+	<string name="poi_diet_gluten_free_filter_yes">Gluten free</string>
+	<string name="poi_diet_kosher_filter_yes">Kosher</string>
+	<string name="poi_diet_halal_filter_yes">Halal</string>
+	<string name="poi_diet_lactose_free_filter_yes">Lactose free</string>
+	<string name="poi_takeaway_filter_yes">Yes</string>
+	<string name="poi_shower_filter_yes">Yes</string>
+
+	<string name="poi_waterway_fuel">Gas station for boats</string>
+
+	<string name="poi_feeding_place">Place for animal feeding</string>
+
 </resources>
