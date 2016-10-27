@@ -75,14 +75,14 @@
     <string name="search_map">Searching map…</string>
     <string name="first_usage_wizard_desc">Let OsmAnd determine your location and suggest maps to download for that region.</string>
     <string name="location_not_found">Location not found</string>
-    <string name="no_inet_connection">No internet connection</string>
+    <string name="no_inet_connection">No Internet connection</string>
     <string name="no_inet_connection_desc_map">Required to download maps.</string>
     <string name="search_location">Searching location…</string>
     <string name="storage_free_space">Free space</string>
     <string name="storage_place_description">OsmAnd\'s data storage (for maps, tracks, etc.): %1$s.</string>
     <string name="give_permission">Give permission</string>
     <string name="allow_access_location">Allow access to location</string>
-    <string name="first_usage_greeting">Get directions and discover new places without internet connection</string>
+    <string name="first_usage_greeting">Get directions and discover new places without Internet connection</string>
     <string name="search_my_location">Search my location</string>
     <string name="no_update_info_desc">Don\'t check any updates about new versions, discounts related to OsmAnd</string>
     <string name="no_update_info">Don\'t show updates</string>
@@ -177,7 +177,7 @@
         - If you need special conditions - please contact support: osmo.mobi@gmail.com
     </string>
     <string name="osmo_specify_tracker_id">Please specify ID</string>
-    <string name="osmo_no_connection_msg">Cannot connect to the server OsMo:\n- check your internet connection;\n- check the settings;\n- check out our Twitter: https://twitter.com/OsMomobi</string>
+    <string name="osmo_no_connection_msg">Cannot connect to the server OsMo:\n- check your Internet connection;\n- check the settings;\n- check out our Twitter: https://twitter.com/OsMomobi</string>
     <string name="anonymous_user_hint">An anonymous user cannot:\n- create groups;\n- synchronize groups and devices with the server;\n- manage groups and devices in a personal dashboard on website.</string>
     <string name="report">Report</string>
     <string name="osmo_connect_to_device_tracker_id">Tracker ID</string>
@@ -711,7 +711,7 @@
     <string name="version_settings">Builds</string>
     <string name="rendering_attr_streetLighting_name">Street lighting</string>
     <string name="proxy_pref_title">Proxy</string>
-    <string name="proxy_pref_descr">Setup a proxy internet communication</string>
+    <string name="proxy_pref_descr">Setup a proxy Internet communication</string>
     <string name="settings_privacy">Privacy</string>
     <string name="points">Points</string>
     <string name="navigation_over_track">Start navigation along track?</string>
