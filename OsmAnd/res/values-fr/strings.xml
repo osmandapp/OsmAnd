@@ -1607,7 +1607,10 @@ Les traces ainsi enregistrées peuvent être partagées avec vos amis ou utilis�
     <string name="speed_limit_exceed">Marge de tolérance aux limites de vitesse</string>
     <string name="speed_limit_exceed_message">Indiquez la marge de tolérance à ajouter à la limitations de vitesse et au dessus de laquelle vous recevrez une alerte vocale.</string>
     <string name="osmo_device_not_found">Périphérique introuvable</string>
-    <string name="osmo_no_connection_msg">Impossible de se connecter au serveur OsMo :\n- Vérifier votre connexion Internet;\n- Vérifier les paramètres;\n- Vérifier notre page Twitter: https://twitter.com/OsMomobi</string>
+    <string name="osmo_no_connection_msg">Impossible de se connecter au serveur OsMo :
+- Vérifiez votre connexion Internet;
+- Vérifiez les paramètres;
+- Vérifiez la page Twitter: https://twitter.com/OsMomobi</string>
     <string name="anonymous_user_hint">Un utilisateur anonyme ne peut pas :\n- Créer des groupes;\n- Synchroniser les groupes et les périphériques avec le serveur;\n- Gérer les groupes et les périphériques depuis un espace privé sur le site Web.</string>
     <string name="anonymous_user">Utilisateur anonyme</string>
     <string name="logged_as">Connecté entant que %1$s</string>
