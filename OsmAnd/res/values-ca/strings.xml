@@ -1635,7 +1635,10 @@ Les rutes enregistrades es poden compartir amb els vostres amics o aportar-les p
     <string name="speed_limit_exceed">Tolerància sobre el límit de velocitat</string>
     <string name="speed_limit_exceed_message">Trieu el marge de tolerància al límit de velocitat per sobre del que rebreu un avís de veu.</string>
     <string name="osmo_device_not_found">No s\'ha trobat el dispositiu</string>
-    <string name="osmo_no_connection_msg">No s\'ha pogut connectar al servei OsMo :\n- verifiqueu la connexió a internet;\n- verifiqueu la configuració;\n- consulteu el nostre Twitter: https://twitter.com/OsMomobi</string>
+    <string name="osmo_no_connection_msg">No s\'ha pogut connectar al servei OsMo :
+- verifiqueu la vostra connexió a Internet;
+- verifiqueu la configuració;
+- consulteu el nostre Twitter: https://twitter.com/OsMomobi</string>
     <string name="anonymous_user_hint">Un usuari anònim no pot:\n- crear grups;\n- sincronitzar grups i dispositius amb el servidor;\n- gestionar grups i dispositius en un tauler personal a la web.</string>
     <string name="anonymous_user">Usuari anònim</string>
     <string name="logged_as">S\'ha iniciat sessió com a %1$s</string>
@@ -1704,7 +1707,7 @@ Les rutes enregistrades es poden compartir amb els vostres amics o aportar-les p
     <string name="avoid_roads_msg">Podeu generar una ruta alternativa amb la selecció de les vies a evitar</string>
     <string name="save_track_to_gpx_globally_headline">Registre de traces a petició</string>
     <string name="proxy_pref_title">Servidor intermediari</string>
-    <string name="proxy_pref_descr">Configuració d\'un servidor intermediari per accedir a internet</string>
+    <string name="proxy_pref_descr">Configuració d\'un servidor intermediari per accedir a Internet</string>
     <string name="settings_privacy">Privacitat</string>
     <string name="enable_proxy_title">Activa el servidor intermediari HTTP</string>
     <string name="enable_proxy_descr">Configureu un servidor intermediari HTTP per totes les peticions de xarxa</string>
