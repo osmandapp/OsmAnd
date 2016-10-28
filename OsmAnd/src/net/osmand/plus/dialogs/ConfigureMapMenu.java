@@ -869,9 +869,7 @@ public class ConfigureMapMenu {
 					final OsmandSettings.CommonPreference<String> pref = activity.getMyApplication().getSettings()
 							.getCustomRenderProperty(p.getAttrName());
 
-					OsmandApplication app = activity.getMyApplication();
-
-					LayoutInflater inflater = (LayoutInflater) app.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+					LayoutInflater inflater = activity.getLayoutInflater();
 					View spinnerView = inflater.inflate(R.layout.spinner_rule_layout, null);
 					TextView title = (TextView) spinnerView.findViewById(R.id.title);
 					final Spinner spinner = (Spinner) spinnerView.findViewById(R.id.spinner);
