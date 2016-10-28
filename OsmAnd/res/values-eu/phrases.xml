@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources><string name="poi_shop">Denda</string>
-		<string name="poi_shop_food">Janari denda</string>
+		<string name="poi_shop_food">Auzoko denda eta supermerkatua</string>
 	<string name="poi_emergency">Larrialdia</string>
 	<string name="poi_transportation">Garraioa</string>
 		<string name="poi_road_obstacle">Errepideko oztopoa</string>
@@ -180,7 +180,7 @@
 	<string name="poi_bell_tower">Kanpai dorrea</string>
 	<string name="poi_recycling">Birziklatzea</string>
 
-	<string name="poi_recycling_centre">Mota: Birziklatze zentroa</string>
+	<string name="poi_recycling_centre">Birziklatze zentroa</string>
 	<string name="poi_recycling_glass">Beira</string>
 	<string name="poi_recycling_paper">Papera</string>
 	<string name="poi_recycling_clothes">Janzkiak</string>
@@ -382,7 +382,7 @@
 	<string name="poi_lighting_tower">Argi dorrea</string>
 	<string name="poi_telephone_exchange">Telefono-zentrala</string>
 
-	<string name="poi_recycling_container">Mota: kontainerra</string>
+	<string name="poi_recycling_container">Kontainerra</string>
 	<string name="poi_recycling_scrap_metal">Burdin hondakina</string>
 	<string name="poi_recycling_cardboard">Kartoi mehea</string>
 	<string name="poi_ford_stepping_stones">Harpausoak</string>
@@ -1951,4 +1951,5 @@
 	<string name="poi_craft_metal_construction">Eraikuntza metalikoen langintza</string>
 	<string name="poi_craft_tiler">Teila-jarlea</string>
 	<string name="poi_craft_tinsmith">Eztainugina</string>
+	<string name="poi_pawnbroker">Mailegu-emalea</string>
 	</resources>
