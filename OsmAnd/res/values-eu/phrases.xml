@@ -1933,7 +1933,7 @@
 
 	<string name="poi_monastery">Monasterioa</string>
 <string name="poi_religious">Area erlijiosoa</string>
-	<string name="poi_wayside_cross">Guruztokia</string>
+	<string name="poi_wayside_cross">Bide ondoko gurutzea</string>
 	<string name="poi_information">Informazioa</string>
 	<string name="poi_camp_site">Kanpalekua</string>
 	<string name="poi_caravan_site">Karabana gunea</string>
@@ -1952,4 +1952,14 @@
 	<string name="poi_craft_tiler">Teila-jarlea</string>
 	<string name="poi_craft_tinsmith">Eztainugina</string>
 	<string name="poi_pawnbroker">Mailegu-emalea</string>
-	</resources>
+	<string name="poi_commercial">Lurraren erabilpen komertziala</string>
+	<string name="poi_retail">Txikizkako lurraren erabilpena</string>
+
+	<string name="poi_attraction_swing_carousel">Zabu birakariak</string>
+	<string name="poi_wayside_shrine">Bide ondoko santutegia</string>
+	<string name="poi_trail_riding_station">Zaldizkoentzako zerbitzugunea</string>
+
+	<string name="poi_food_court">Jantoki irekia</string>
+	<string name="poi_feeding_place">Animaliek jateko tokia</string>
+
+</resources>
