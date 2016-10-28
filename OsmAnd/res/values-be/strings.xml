@@ -244,7 +244,7 @@
     <string name="context_menu_item_intermediate_point">Дадаць прамежкавым пунктам прызначэньня</string>
     <string name="map_widget_intermediate_distance">Прамежкавы пункт прызначэньня</string>
     <string name="ending_point_too_far">Канцавы пункт занадта далёка ад найбліжэйшай дарогі.</string>
-    <string name="add_tag">Дадаць адзнаку</string>
+    <string name="add_tag">Дадаць тэг</string>
     <string name="btn_advanced_mode">Пашыраны рэжым…</string>
     <string name="poi_filter_parking">Паркоўка</string>
     <string name="poi_filter_emergency">Аварыйныя службы</string>
@@ -2331,7 +2331,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="av_video_quality_low">Нізкая якасьць</string>
     <string name="av_video_quality_high">Высокая якасьць</string>
     <string name="no_address_found">Адрэса ня вызначаная</string> 
-	<string name="shared_string_near">Недалёка</string>
+	<string name="shared_string_near">Побач</string>
     <string name="looking_up_address">Пошук адрэсы</string>
     <string name="route_distance">Адлегласьць:</string>
     <string name="route_duration">Час:</string>
@@ -2665,4 +2665,14 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="create_custom_poi">Стварыць уласныя POI</string>
     <string name="custom_search">Уласны пошук</string>
     <string name="translit_names">Транслітарацыя назваў</string>
+    <string name="osmo_share_location">Падзяліцца</string>
+    <string name="osmo_pause_location">Прыпыніць</string>
+    <string name="trip_rec_notification_settings">Запіс падарожжа (няма зьвестак)</string>
+    <string name="shared_string_notifications">Паведамленьні</string>
+    <string name="shared_string_continue">Працягнуць</string>
+    <string name="shared_string_pause">Перапыніць</string>
+    <string name="shared_string_trip">Падарожжа</string>
+    <string name="shared_string_recorded">Запісана</string>
+    <string name="shared_string_record">Запіс</string>
+    <string name="gpx_logging_no_data">Няма зьвестак</string>
     </resources>
