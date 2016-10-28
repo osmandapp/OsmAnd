@@ -2587,11 +2587,11 @@ V kolikor naletite na težave s programom OsmAnd, prosimo, stopite v stik s skup
     <string name="save_filter">Shrani filter</string>
     <string name="delete_filter">Izbriši filter</string>
     <string name="new_filter">Nov filter</string>
-    <string name="new_filter_desc">Ime novega filtra, ki se bo pojavilo na seznamu kategorij.</string>
+    <string name="new_filter_desc">Vpisati je treba ime novega filtra, ki se bo pojavilo na seznamu kategorij.</string>
     <string name="osm_live_payment_desc">Naročnina bo obračunana vsak mesec. Naročnino je mogoče kadarkoli preklicati na Google Play.</string>
     <string name="donation_to_osm_desc">Del donacije bo poslan uporabnikom OSM, ki so poslali spremembe na OpenStreetMap. Vsota naročnine ostaja nespremenjena.</string>
-    <string name="osm_live_subscription_desc">Naročnina omogoča urne, dnevne ali tedenske posodobitve in neomejene prejeme kateregakoli dela zemljevida.</string>
-    <string name="osm_live_banner_desc">Pridobite neomejene prejeme zemljevidov in drugih posodobitev več kot le enkrat mesečno: vsako uro, enkrat na dan ali enkrat tedensko.</string>
+    <string name="osm_live_subscription_desc">Naročnina omogoča urne, dnevne ali tedenske posodobitve in neomejene prejeme kateregakoli zemljevida.</string>
+    <string name="osm_live_banner_desc">Pridobite si neomejene prejeme zemljevidov in drugih posodobitev več kot le enkrat mesečno: tedensko, dnevno ali vsako uro.</string>
     <string name="osmand_plus_banner_desc">Polna različica OsmAnd z neomejenimi posodobitvami zemljevidov in mesečne posodobitve.</string>
     <string name="edit_filter">Uredi filter</string>
     <string name="subcategories">Podkategorije</string>
@@ -2612,4 +2612,14 @@ V kolikor naletite na težave s programom OsmAnd, prosimo, stopite v stik s skup
     <string name="rendering_value_dark_brown_name">Temnorjava</string>
     <string name="rendering_attr_surfaceIntegrity_name">Kakovost površine ceste</string>
     <string name="search_hint">Vpišite mesto, naslov ali ime točke</string>
+    <string name="osmo_pause_location">Premor</string>
+    <string name="osmo_service_running">Storitev OsMo je zagnana</string>
+    <string name="trip_rec_notification_settings">Beleženje potovanja (brez podatkov)</string>
+    <string name="shared_string_notifications">Obvestila</string>
+    <string name="save_track_min_speed">Najmanjša hitrost beleženja</string>
+    <string name="save_track_min_speed_descr">Nastavitev najmanjše hitrosti beleženja točk na zemljevidu</string>
+    <string name="save_track_min_distance">Najmanjša razdalja beleženja</string>
+    <string name="save_track_min_distance_descr">Nastavitev najmanjše razdalje beleženja točk na zemljevidu</string>
+    <string name="save_track_precision">Najmanjša natančnost beleženja</string>
+    <string name="save_track_precision_descr">Nastavitev najmanjše natančnosti beleženja točk na zemljevidu</string>
     </resources>
