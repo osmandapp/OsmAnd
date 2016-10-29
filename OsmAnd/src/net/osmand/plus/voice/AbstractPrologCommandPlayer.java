@@ -332,7 +332,7 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer, Stat
 					  btScoInit = "BT SCO available:   YES\nBT SCO initializes: NO\n(" + e.getMessage() + ")";
 				return false;
 			}
-					  btScoInit = "BT SCO available:   YES\nBT SCO initializes: YES\nBT SCO init delay:  " + BT_SCO_DELAY;
+					  btScoInit = "BT SCO available:   YES\nBT SCO initializes: YES\nBT SCO init delay:  " + BT_SCO_DELAY + " ms";
 			return true;
 		} else {
 			AudioManager mAudioManager = (AudioManager) ctx.getSystemService(Context.AUDIO_SERVICE);
