@@ -629,4 +629,11 @@
 	<string name="poi_vacuum_cleaner_filter">Порохотяг</string>
 
 <string name="poi_spices">Спеції</string>
+	<string name="poi_shop_craft">Товари для рукоділля</string>
+	<string name="poi_honey">Мед</string>
+	<string name="poi_religion">Релігія</string>
+
+	<string name="poi_ford_stepping_stones">Рудиментарний міст з каменів</string>
+	<string name="poi_traffic_calming_island">Острівець (перешкода)</string>
+	<string name="poi_aeroway_fuel">Авіаційна заправка</string>
 	</resources>
