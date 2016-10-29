@@ -10,7 +10,7 @@
 	<string name="poi_animal_shelter_bird">ബെര്‍ഡ് ഷെല്ട്ടര്‍</string>
 
 <string name="poi_boatyard">ബോട്ട് യാര്‍ഡ്</string>
-	<string name="poi_shop_food">കട</string>
+	<string name="poi_shop_food">കടയും സൂപ്പര്‍മാര്‍ക്കറ്റും</string>
 	<string name="poi_emergency">എമെര്‍ജന്‍സി (അടിയന്തിരം)</string>
 	<string name="poi_filling_station">പെട്റോള്‍ പംബ്</string>
 		<string name="poi_public_transport">പൊതു ഗതാഗത സംവിധാനം</string>
@@ -2034,39 +2034,39 @@
 	<string name="poi_refugee_no">"അഭയാര്‍ത്ഥികള്‍ പാടില്ല "</string>
 
 	<string name="poi_social_facility_group_home">സാമൂഹികസൗകര്യം: ഗ്രൂപ് ഹോം</string>
-	<string name="poi_social_facility_assisted_living">സാമൂഹികസൗകര്യം: അസിസ്റ്റ്ഡ് ലിവിങ്ങ്</string>
-	<string name="poi_social_facility_outreach">"സോഷ്യല്‍ ഫസിലിറ്റി : ഔട്ട് റീച്ച് "</string>
-	<string name="poi_social_facility_food_bank">സാമൂഹികസൗകര്യം : ഭക്ഷണവിതരണം</string>
-	<string name="poi_social_facility_shelter">സോഷ്യല്‍ ഫസിലിറ്റി : ഷെല്‍ട്ടെര്‍</string>
-	<string name="poi_social_facility_ambulatory_care">സാമൂഹികസൗകര്യം : ആംബുലേറ്ററി കെയര്‍</string>
-	<string name="poi_social_facility_workshop">സാമൂഹികസൗകര്യം: പണിശാല</string>
-	<string name="poi_social_facility_day_care">സാമൂഹികസൗകര്യം : ഡേ കെയര്‍</string>
+	<string name="poi_social_facility_assisted_living">അസിസ്റ്റ്ഡ് ലിവിങ്ങ്</string>
+	<string name="poi_social_facility_outreach">ഔട്ട് റീച്ച്</string>
+	<string name="poi_social_facility_food_bank">ഭക്ഷണവിതരണം</string>
+	<string name="poi_social_facility_shelter">ഷെല്‍ട്ടെര്‍</string>
+	<string name="poi_social_facility_ambulatory_care">ആംബുലേറ്ററി കെയര്‍</string>
+	<string name="poi_social_facility_workshop">പണിശാല</string>
+	<string name="poi_social_facility_day_care">ഡേ കെയര്‍</string>
 
-	<string name="poi_social_facility_for_senior">ലക്ഷ്യസമൂഹം : വൃദ്ധര്‍</string>
-	<string name="poi_social_facility_for_child">ലക്ഷ്യസമൂഹം : കുട്ടികള്‍</string>
-	<string name="poi_social_facility_for_orphan">ലക്ഷ്യസമൂഹം : അനാഥര്‍</string>
-	<string name="poi_social_facility_for_disabled">ലക്ഷ്യസമൂഹം : അംഗപരിമിതര്‍</string>
-	<string name="poi_social_facility_for_mental_health">ലക്ഷ്യസമൂഹം : മാനസികാസ്വസ്ഥര്‍</string>
-	<string name="poi_social_facility_for_juvenile">ലക്ഷ്യസമൂഹം : യുവാക്കള്‍</string>
-	<string name="poi_social_facility_for_homeless">ലക്ഷ്യസമൂഹം : ഭവനരഹിതര്‍</string>
-	<string name="poi_social_facility_for_migrant">ലക്ഷ്യസമൂഹം : കുടിയേറ്റക്കാര്‍</string>
-	<string name="poi_social_facility_for_underprivileged">ലക്ഷ്യസമൂഹം : അവശസമൂഹങ്ങള്‍</string>
-	<string name="poi_social_facility_for_drug_addicted">ലക്ഷ്യസമൂഹം : ഡ്രഗ് അഡിക്ടുകള്‍</string>
-	<string name="poi_social_facility_for_unemployed">ലക്ഷ്യസമൂഹം : തൊഴില്‍രഹിതര്‍</string>
-	<string name="poi_social_facility_for_diseased">"ലക്ഷ്യസമൂഹം : രോഗികള്‍ "</string>
-	<string name="poi_social_facility_for_child_juvenile">ലക്ഷ്യസമൂഹം : കുട്ടികള്‍, യുവാക്കള്‍</string>
+	<string name="poi_social_facility_for_senior">വൃദ്ധര്‍</string>
+	<string name="poi_social_facility_for_child">കുട്ടികള്‍</string>
+	<string name="poi_social_facility_for_orphan">അനാഥര്‍</string>
+	<string name="poi_social_facility_for_disabled">അംഗപരിമിതര്‍</string>
+	<string name="poi_social_facility_for_mental_health">മാനസികാസ്വസ്ഥര്‍</string>
+	<string name="poi_social_facility_for_juvenile">യുവാക്കള്‍</string>
+	<string name="poi_social_facility_for_homeless">ഭവനരഹിതര്‍</string>
+	<string name="poi_social_facility_for_migrant">കുടിയേറ്റക്കാര്‍</string>
+	<string name="poi_social_facility_for_underprivileged">അവശസമൂഹങ്ങള്‍</string>
+	<string name="poi_social_facility_for_drug_addicted">ഡ്രഗ് അഡിക്ടുകള്‍</string>
+	<string name="poi_social_facility_for_unemployed">തൊഴില്‍രഹിതര്‍</string>
+	<string name="poi_social_facility_for_diseased">രോഗികള്‍</string>
+	<string name="poi_social_facility_for_child_juvenile">കുട്ടികള്‍, യുവാക്കള്‍</string>
 
 	<string name="poi_theatre_genre_philharmonic">ഫില്‍ഹാര്‍മോണിക് ഇനം</string>
 	<string name="poi_theatre_genre_musical">സംഗീതമയമായ</string>
-	<string name="poi_theatre_genre_drama">തരം : നാടകം</string>
-	<string name="poi_theatre_genre_opera">തരം : ഒപെറാ</string>
-	<string name="poi_theatre_genre_cabaret">"തരം: കാബറെ "</string>
-	<string name="poi_theatre_genre_puppet">തരം : പാവകളി</string>
-	<string name="poi_theatre_genre_comedy">തരം: കോമഡി</string>
-	<string name="poi_theatre_genre_chamber_music">"തരം: ചേംബര്‍ മ്യൂസിക് "</string>
-	<string name="poi_theatre_genre_marionette">തരം: മാരിയോനെറ്റ്</string>
-	<string name="poi_theatre_genre_ballet">തരം: ബാലറ്റ്</string>
-	<string name="poi_theatre_genre_shadow_play">"തരം : നിഴല്‍ക്കൂത്ത് "</string>
+	<string name="poi_theatre_genre_drama">നാടകം</string>
+	<string name="poi_theatre_genre_opera">ഒപെറാ</string>
+	<string name="poi_theatre_genre_cabaret">കാബറെ</string>
+	<string name="poi_theatre_genre_puppet">പാവകളി</string>
+	<string name="poi_theatre_genre_comedy">കോമഡി</string>
+	<string name="poi_theatre_genre_chamber_music">ചേംബര്‍ മ്യൂസിക്</string>
+	<string name="poi_theatre_genre_marionette">മാരിയോനെറ്റ്</string>
+	<string name="poi_theatre_genre_ballet">ബാലറ്റ്</string>
+	<string name="poi_theatre_genre_shadow_play">നിഴല്‍ക്കൂത്ത്</string>
 
 	<string name="poi_bandstand">"ബാന്റ് സ്ടാന്റ് "</string>
 	<string name="poi_kiln">ചൂള</string>
@@ -2310,11 +2310,11 @@
 	<string name="poi_health_specialty_urology_yes">യൂറോളജി (മൂത്രാശയ രോഗങ്ങള്‍)</string>
 	<string name="poi_health_specialty_surgery_yes">ജെനറല്‍ സര്‍ജറി</string>
 	<string name="poi_health_specialty_radiology_yes">റേഡിയോളജി</string>
-	<string name="poi_health_specialty_psychiatry_yes">പ്സൈക്ക്യാട്രി (മാനസികാരോഗ്യം)</string>
-	<string name="poi_health_specialty_neurology_yes">"ന്യൂറോളജി "</string>
+	<string name="poi_health_specialty_psychiatry_yes">സൈക്ക്യാട്രി (മാനസികാരോഗ്യം)</string>
+	<string name="poi_health_specialty_neurology_yes">ന്യൂറോളജി</string>
 	<string name="poi_health_specialty_dermatovenereology_yes">ഡെര്‍മടോ-വെനെരിയോളജി</string>
 	<string name="poi_health_specialty_cardiology_yes">കാര്‍ഡിയോളജി (ഹൃദ്രോഗം)</string>
-	<string name="poi_health_specialty_trauma_yes">ട്രോമടോളജി</string>
+	<string name="poi_health_specialty_trauma_yes">ട്രോമാടോളജി</string>
 	<string name="poi_health_specialty_biology_yes">ക്ളിനിക്കല്‍ ബയോളജി</string>
 	<string name="poi_health_specialty_anaesthetics_yes">അനസ്തീഷ്യനിസ്റ്റ്</string>
 	<string name="poi_health_specialty_pulmonology_yes">"റെസ്പിറേറ്ററി  മെഡിസിന്‍"</string>
@@ -2390,12 +2390,12 @@
 
 	<string name="poi_plant_nursery">ചെടി നര്‍സറി</string>
 
-	<string name="poi_compressed_air_yes">കാറ്റ്(ടയര്‍)</string>
+	<string name="poi_compressed_air_yes">കാറ്റ്(ടയര്‍) ഉണ്ട്</string>
 	<string name="poi_compressed_air_no">"കാറ്റ്(ടയര്‍) ഇല്ല "</string>
 
-	<string name="poi_car_wash_yes">കാര്‍ വാഷ്</string>
+	<string name="poi_car_wash_yes">കാര്‍ വാഷ് ഉണ്ട്</string>
 
-	<string name="poi_vacuum_cleaner_yes">വാക്യും ക്ളീനര്‍</string>
+	<string name="poi_vacuum_cleaner_yes">ഉണ്ട്</string>
 	<string name="poi_vacuum_cleaner_no">"വാക്യും ക്ളീനര്‍ ഇല്ല "</string>
 	<string name="poi_amenity_vacuum_cleaner">വാക്യും ക്ളീനര്‍</string>
 
@@ -2407,11 +2407,11 @@
 	<string name="poi_free_flying_site_landing">ലാന്റിങ്ങ്</string>
 	<string name="poi_free_flying_paragliding_yes">പാരഗ്ലൈഡിങ്ങ്</string>
 	<string name="poi_free_flying_paragliding_no">"പാരഗ്ലൈഡിങ്ങ് ഇല്ല "</string>
-	<string name="poi_medical_system_western_yes">അരോഗ്യ സംവിധാനം : പടിഞ്ഞാറന്‍</string>
-	<string name="poi_medical_system_chinese_yes">അരോഗ്യ സംവിധാനം :പരമ്പാഗത ചൈനീസ്</string>
-	<string name="poi_medical_system_ayurveeda_yes">അരോഗ്യ സംവിധാനം : ആയുര്‍വേദം</string>
-	<string name="poi_medical_system_sidda_yes">അരോഗ്യ സംവിധാനം : സിദ്ദാ</string>
-	<string name="poi_medical_system_unani_yes">അരോഗ്യ സംവിധാനം : യുനാനി</string>
+	<string name="poi_medical_system_western_yes">പടിഞ്ഞാറന്‍</string>
+	<string name="poi_medical_system_chinese_yes">പരമ്പാഗത ചൈനീസ്</string>
+	<string name="poi_medical_system_ayurveeda_yes">ആയുര്‍വേദം</string>
+	<string name="poi_medical_system_sidda_yes">സിദ്ദാ</string>
+	<string name="poi_medical_system_unani_yes">യുനാനി</string>
 
 	<string name="poi_health_service_nursing_yes">ആരോഗ്യ സേവനം: നര്‍സിങ്ങ്</string>
 	<string name="poi_health_service_nursing_no">"ആരോഗ്യ സേവനം: നര്‍സിങ്ങ് ഇല്ല "</string>
@@ -2463,7 +2463,7 @@
 	<string name="poi_treat_inpatient_only">കിടത്തി ചികിത്സ മാത്രം</string>
 	<string name="poi_emergency_yes">എമര്‍ജന്‍സി</string>
 	<string name="poi_emergency_no">"എമര്‍ജന്‍സി ഇല്ല "</string>
-	<string name="poi_home_visit_yes">ഗൃഹസന്ദര്‍ശനം</string>
+	<string name="poi_home_visit_yes">ഗൃഹസന്ദര്‍ശനം ഉണ്ട്</string>
 	<string name="poi_home_visit_no">"ഗൃഹസന്ദര്‍ശനമില്ല "</string>
 
 	<string name="poi_disease_malaria_yes">മലേറിയ</string>
@@ -2513,5 +2513,194 @@
 	<string name="poi_length">ദൂരം</string>
 
 	<string name="poi_wiki_link">വിക്കിപീഡിയ</string>
+
+	<string name="poi_diet">ഭക്ഷണം</string>
+	<string name="poi_massage_type">മസ്സാജ് ഇനം</string>
+	<string name="poi_tents">ടെന്റുകള്‍</string>
+	<string name="poi_caravans">കാരവാനുകള്‍</string>
+	<string name="poi_home_visit">ഗൃഹസന്ദര്‍ശനം</string>
+	<string name="poi_payment_transport_type">പേയ്മെന്റ് ടൈപ്പ്</string>
+	<string name="poi_social_facility_type">ഇനം</string>
+	<string name="poi_compressed_air_filter">എയര്‍</string>
+	<string name="poi_vacuum_cleaner_filter">വാക്യും ക്ളീനര്‍</string>
+
+<string name="poi_waterway_fuel">ബോട്ടുകള്‍ക്കുള്ള പെട്റോള്‍ പംബ്</string>
+	<string name="poi_ice_hockey">ഐസ് ഹോക്കീ</string>
+	<string name="poi_club_sailing">സെയിലിങ്ങ് ക്ളബ്</string>
+	<string name="poi_wiki_lang_bs">ബോസ്നിയന്‍ വിക്കി</string>
+	<string name="poi_wiki_lang_cy">വെല്‍ഷ് വിക്കീ</string>
+	<string name="poi_wiki_lang_eo">എസ്പെരന്തോ വിക്കീ</string>
+	<string name="poi_wiki_lang_eu">ബാസ്ക്യു വിക്കീ</string>
+	<string name="poi_wiki_lang_fy">ഫ്രിസ്ക് വിക്കി</string>
+	<string name="poi_wiki_lang_ga">ഐറിഷ് വിക്കി</string>
+	<string name="poi_wiki_lang_hy">അര്‍മേനിയന്‍ വിക്കി</string>
+	<string name="poi_wiki_lang_is">"ഐസ്‌ലാന്‍ഡിക്  വിക്കി"</string>
+	<string name="poi_wiki_lang_ka">ജൊര്‍ജിയന്‍ വിക്കി</string>
+	<string name="poi_wiki_lang_ku">കുര്‍ദിഷ് വിക്കി</string>
+	<string name="poi_wiki_lang_la">ലാറ്റിന്‍ വിക്കി</string>
+	<string name="poi_wiki_lang_lb">ലക്സെംബര്‍ഗിഷ് വിക്കി</string>
+	<string name="poi_wiki_lang_mk">മാസിഡോണിയന്‍ വിക്കി</string>
+	<string name="poi_wiki_lang_mr">മറാത്തി വിക്കി</string>
+	<string name="poi_wiki_lang_nv">നവാജൊ വിക്കി</string>
+	<string name="poi_wiki_lang_os">ഒസ്സെറ്റിയന്‍ വിക്കി</string>
+	<string name="poi_wiki_lang_pms">പൈഡ്മൊണ്ടെസ് വിക്കി</string>
+	<string name="poi_wiki_lang_sc">സാര്‍ഡിനിയന്‍ വിക്കി</string>
+	<string name="poi_wiki_lang_sh">സെര്‍ബോ-ക്രൊയേഷ്യന്‍ വിക്കി</string>
+	<string name="poi_wiki_lang_sq">അല്‍ബേനിയന്‍ വിക്കി</string>
+	<string name="poi_wiki_lang_mg">മാലാഗസി വിക്കി</string>
+	<string name="poi_wiki_lang_pnb">പഞ്ചാബി വിക്കി</string>
+	<string name="poi_wiki_lang_mn">മംഗോളിയന്‍ വിക്കി</string>
+	<string name="poi_bicycle_parking_rack">കള്ളികള്‍</string>
+	<string name="poi_information_route_marker">"റൂട്ട്  മാര്‍ക്കര്‍ "</string>
+	<string name="poi_information_hikingmap">ഹൈക്കിങ്ങ് ഭൂപടം</string>
+	<string name="poi_information_nature">"പ്രകൃതി "</string>
+	<string name="poi_information_sign">സൈന്‍(അടയാളം)</string>
+	<string name="poi_payment_sube_no">എസ്യൂബിഇ കാര്‍ഡ് സ്വീകാര്യമല്ല</string>
+	<string name="poi_description_payment">പണമടക്കാനുള്ള വിവരണം</string>
+
+	<string name="poi_diet_vegetarian_filter_yes">"വെജിറ്റെറിയന്‍ "</string>
+	<string name="poi_diet_vegan_filter_yes">"വെജിറ്റെറിയന്‍ "</string>
+	<string name="poi_diet_gluten_free_filter_yes">ഗ്ളൂടെന്‍ ഫ്രീ ഭക്ഷണം</string>
+	<string name="poi_diet_kosher_filter_yes">കോഷ</string>
+	<string name="poi_diet_halal_filter_yes">"ഹലാല്‍ "</string>
+	<string name="poi_diet_lactose_free_filter_yes">പാലുപയോഗിക്കാത്ത ഭക്ഷണം</string>
+	<string name="poi_takeaway_filter_yes">"ഉണ്ട് "</string>
+	<string name="poi_delivery_filter_yes">"ഉണ്ട് "</string>
+	<string name="poi_outdoor_seating_filter_yes">ഉണ്ട്</string>
+	<string name="poi_diaper_table_count">ഡയപ്പര്‍ ചേഞ്ച് ചെയ്യാനുള്ള മേശയുടെ എണ്ണം</string>
+	<string name="poi_wetland_bog">ബോഗ്</string>
+	<string name="poi_wetland_palsa_bog">പല്‍സ ബോഗ്</string>
+	<string name="poi_shower_filter_yes">"ഉണ്ട് "</string>
+	<string name="poi_health_specialty_maternity_yes">മാതാക്കള്‍ക്കായി</string>
+	<string name="poi_health_specialty_plastic_surgery_yes">പ്ളസ്റ്റിക് സര്‍ജറി</string>
+	<string name="poi_health_specialty_behavior_yes">പെരുമാറ്റം</string>
+	<string name="poi_water_heater_yes">വാട്ടര്‍ ഹീറ്റര്‍:ഉണ്ട്</string>
+	<string name="poi_water_heater_no">"വാട്ടര്‍ ഹീറ്റര്‍:ഇല്ല "</string>
+
+	<string name="poi_parking_surface">തരം: ഉപരിതലം</string>
+	<string name="poi_capacity_beds">ബെഡുകള്‍(ഇടം)</string>
+
+	<string name="poi_disease_malaria_no">മലേറിയ:ഇല്ല</string>
+	<string name="poi_office_midwife">പ്രസവശുശ്രൂഷികയുടെ ഓഫീസ്</string>
+
+	<string name="poi_fire_hydrant_diameter">അഗ്നിശമനി (fire hydrant) വ്യാസം</string>
+	<string name="poi_fire_hydrant_count">അഗ്നിശമനി (fire hydrant) എണ്ണം</string>
+	<string name="poi_fire_hydrant_flow_capacity">അഗ്നിശമനി (fire hydrant) ഫ്ളോ കപാസിറ്റി</string>
+	<string name="poi_fire_hydrant_position_green">അഗ്നിശമനി (fire hydrant)സ്ഥാനം: പുല്‍തകിടി</string>
+	<string name="poi_fire_hydrant_position_lane">അഗ്നിശമനി (fire hydrant)സ്ഥാനം: ലയിന്‍</string>
+	<string name="poi_bicycle_parking_lockers">ലോക്കറുകള്‍</string>
+	<string name="poi_depth">ആഴം</string>
+
+	<string name="poi_payment_troika_no">ട്രോയിക കാര്‍ഡ് സ്വീകാര്യമല്ല</string>
+
+	<string name="poi_display_yes">ഡിസ്പ്ളേ:ഉണ്ട്</string>
+	<string name="poi_display_no">"ഡിസ്പ്ളേ:ഇല്ല "</string>
+	<string name="poi_display_analog_yes">അനലോഗ് ഡിസ്പ്ളേ</string>
+	<string name="poi_display_digital_yes">" ഡിജിറ്റല്‍ ഡിസ്പ്ളേ"</string>
+	<string name="poi_barometer_yes">ബാരോമീറ്റര്‍</string>
+	<string name="poi_barometer_no">"ബാരോമീറ്റര്‍:ഇല്ല "</string>
+	<string name="poi_organic_yes">ആഹാരം(ഓര്‍ഗാനിക് ):അതെ</string>
+	<string name="poi_organic_no">"ആഹാരം(ഓര്‍ഗാനിക് ):അല്ല "</string>
+	<string name="poi_organic_only">ആഹാരം(ഓര്‍ഗാനിക് ) മാത്രം</string>
+
+	<string name="poi_diplomatic_consulate_general">കോണ്സുലേറ്റ് ജനറല്‍</string>
+	<string name="poi_diplomatic_high_commission">ഹൈക്കമ്മീഷന്‍</string>
+
+	<string name="poi_water_tank">ജലസംഭരണ ടാങ്ക്</string>
+
+	<string name="poi_toilets_disposal_chemical">ടോയ്ലറ്റ് ഇനം: കെമിക്കല്‍</string>
+	<string name="poi_toilets_disposal_bucket">ടോയ്ലറ്റ് ഇനം: ബക്കറ്റ്</string>
+
+	<string name="poi_xmas">ക്രിസ്മസ്</string>
+	<string name="poi_xmas_market">ക്രിസ്തുമസ് ചന്ത</string>
+	<string name="poi_xmas_pyramid">ക്രിസ്തുമസ് പിരമിഡ്</string>
+	<string name="poi_xmas_shop">"ക്രിസ്മസ് ഷോപ്പ് "</string>
+	<string name="poi_xmas_tree">"ക്രിസ്തുമസ് ട്രീ‌ "</string>
+	<string name="poi_xmas_note">"ക്രിസ്മസ്: കുറിപ്പ് "</string>
+	<string name="poi_xmas_opening_hours">ക്രിസ്മസ്: തുറക്കുന്ന സമയം</string>
+	<string name="poi_xmas_url">ക്രിസ്മസ്:വെബ്സൈറ്റ്</string>
+
+	<string name="poi_cuisine_coffee">കാപ്പി</string>
+	<string name="poi_cuisine_sandwich">സാന്‍ഡ്‌വിച്ച്</string>
+	<string name="poi_cuisine_ice_cream">ഐസ്ക്രീം</string>
+	<string name="poi_cuisine_seafood">മത്സ്യാഹാരം</string>
+	<string name="poi_cuisine_barbecue">ബാര്‍ബിക്യൂ</string>
+	<string name="poi_cuisine_pasta">പാസ്ത</string>
+	<string name="poi_cuisine_fast_food">തട്ടുകട</string>
+	<string name="poi_cuisine_tea">തെയിലച്ചെടി</string>
+	<string name="poi_cuisine_tea_shop">"ചായക്കട "</string>
+	<string name="poi_cuisine_deli">ഡെലി</string>
+	<string name="poi_cuisine_fried_food">വറുത്ത ആഹാരം</string>
+	<string name="poi_cuisine_bakery">ബേക്കറി</string>
+	<string name="poi_cuisine_udon">"യുഡോന്‍ "</string>
+	<string name="poi_cuisine_bubble_tea">" ബബിള്‍ ചായ"</string>
+	<string name="poi_cuisine_meat">"ഇറച്ചിക്കട "</string>
+	<string name="poi_cuisine_chocolate">ചോക്ളേറ്റ്</string>
+	<string name="poi_cuisine_wine">വൈ</string>
+	<string name="poi_cuisine_regional">റീജിയണല്‍</string>
+	<string name="poi_cuisine_italian">"ഇറ്റാലിയന്‍ "</string>
+	<string name="poi_cuisine_chinese">"ചൈനീസ് ഭാക്ഷ "</string>
+	<string name="poi_cuisine_mexican">മെക്സിക്കന്‍</string>
+	<string name="poi_cuisine_japanese">ജപ്പാനീസ്</string>
+	<string name="poi_cuisine_german">ജര്‍മ്മന്‍</string>
+	<string name="poi_cuisine_indian">"ഇന്ത്യന്‍ "</string>
+	<string name="poi_cuisine_american">അമേരിക്ക</string>
+	<string name="poi_cuisine_asian">ഏഷ്യന്‍</string>
+	<string name="poi_cuisine_french">"ഫ്രെഞ്ച് "</string>
+	<string name="poi_cuisine_greek">" ഗ്രീക്ക് "</string>
+	<string name="poi_cuisine_thai">തായി</string>
+	<string name="poi_cuisine_international">ഇന്റെര്‍നാഷണല്‍</string>
+	<string name="poi_cuisine_turkish">തുര്‍ക്കി</string>
+	<string name="poi_cuisine_spanish">സ്പാനിഷ്</string>
+	<string name="poi_cuisine_vietnamese">"വിയറ്റ്നാമീസ് "</string>
+	<string name="poi_cuisine_korean">കൊറിയ</string>
+	<string name="poi_cuisine_lebanese">ലെബനീസ്</string>
+	<string name="poi_cuisine_russian">"റഷ്യന്‍ "</string>
+	<string name="poi_cuisine_portuguese">"പോര്‍ട്ടുഗീസ് "</string>
+	<string name="poi_cuisine_georgian">"ജൊര്‍ജിയന്‍ "</string>
+	<string name="poi_cuisine_polish">"പോളീഷ് "</string>
+	<string name="poi_cuisine_brazilian">ബ്രസീലിയന്‍</string>
+	<string name="poi_cuisine_arab">അറബി</string>
+	<string name="poi_cuisine_danish">ഡാനിഷ്</string>
+	<string name="poi_cuisine_indonesian">"ഇന്‍ഡോനേഷ്യന്‍ "</string>
+	<string name="poi_cuisine_african">ആഫ്രിക്കന്‍</string>
+	<string name="poi_cuisine_caribbean">കരീബിയന്‍</string>
+	<string name="poi_cuisine_argentinian">അര്‍ജെന്റീനിയന്‍</string>
+	<string name="poi_cuisine_peruvian">പെറുവിയന്‍</string>
+	<string name="poi_cuisine_croatian">"ക്രൊയേഷ്യന്‍ "</string>
+	<string name="poi_cuisine_bolivian">ബൊളീവിയന്‍</string>
+	<string name="poi_cuisine_malagasy">മാലാഗസി</string>
+	<string name="poi_cuisine_persian">"പേര്‍ഷ്യന്‍ "</string>
+	<string name="poi_cuisine_moroccan">മൊറോക്ക</string>
+	<string name="poi_cuisine_austrian">ഓസ്ട്രിയ</string>
+	<string name="poi_cuisine_malaysian">"മലേഷ്യന്‍ "</string>
+	<string name="poi_cuisine_irish">ഐറിഷ്</string>
+	<string name="poi_cuisine_ethiopian">എത്യോപിയന്‍</string>
+	<string name="poi_cuisine_hungarian">"ഹംഗറിയന്‍ "</string>
+	<string name="poi_cuisine_lao">ലാവോ</string>
+	<string name="poi_cuisine_czech">"ചെക്ക് "</string>
+	<string name="poi_cuisine_cuban">ക്യുബന്‍</string>
+	<string name="poi_cuisine_british">ബ്രിട്ടീഷ്</string>
+	<string name="poi_cuisine_latin_american">ലാറ്റിന്‍അമേരിക്കന്‍</string>
+	<string name="poi_cuisine_nepalese">നേപ്പാളീസ്</string>
+	<string name="poi_cuisine_mongolian">മംഗോളിയന്‍</string>
+	<string name="poi_cuisine_middle_eastern">ഗള്‍ഫ്നാട്ടിലെ</string>
+	<string name="poi_cuisine_ukrainian">"ഉക്രേനിയന്‍ "</string>
+	<string name="poi_cuisine_afghan">അഫ്ഗാനി</string>
+	<string name="poi_cuisine_belgian">"ബെല്‍ജിയന്‍ "</string>
+	<string name="poi_cuisine_basque">ബാസ്ക്യു</string>
+	<string name="poi_cuisine_swiss">"സ്വിസ്സ് "</string>
+	<string name="poi_cuisine_swedish">"സ്വീഡിഷ് "</string>
+	<string name="poi_cuisine_jamaican">ജമൈക്കന്‍</string>
+	<string name="poi_cuisine_armenian">"അര്‍മേനിയന്‍ "</string>
+	<string name="poi_cuisine_hawaiian">ഹവായിയെന്‍</string>
+	<string name="poi_cuisine_english">" ഇംഗ്ലീഷ് "</string>
+	<string name="poi_cuisine_pakistani">"പാക്കിസ്ഥാനി "</string>
+	<string name="poi_cuisine_dutch">"ഡച്ച് "</string>
+	<string name="poi_cuisine_syrian">സിറിയ</string>
+	<string name="poi_cuisine_australian">"ഓസ്ട്രേലിയന്‍ "</string>
+	<string name="poi_cuisine_egyptian">"ഈജിപ്ടിയന്‍ "</string>
+	<string name="poi_cuisine_bulgarian">ബള്‍ഗേറിയന്‍ ഭാക്ഷ</string>
+	<string name="poi_cuisine_tibetan">ടിബെറ്റന്‍</string>
 
 	</resources>
