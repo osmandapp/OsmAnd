@@ -1,5 +1,10 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
+    <string name="gpx_no_tracks_title">У вас еще нет треков</string>
+    <string name="gpx_no_tracks_title_folder">Вы также можете добавить треки в папку</string>
+    <string name="gpx_add_track">Добавить трек</string>
+    <string name="gpx_appearance">Вид</string>
+
     <string name="osmo_share_location">Поделиться</string>
     <string name="osmo_pause_location">Пауза</string>
     <string name="osmo_service_running">OsMo запущен</string>
