@@ -1287,8 +1287,8 @@
 	<string name="poi_handrail_no">Handlauf: Nein</string>
 	<string name="poi_ramp_yes">Rampe: Ja</string>
 	<string name="poi_ramp_no">Rampe: Nein</string>
-	<string name="poi_ramp_wheelchair_yes">Rampe für Rollstuhl: Ja</string>
-	<string name="poi_ramp_wheelchair_no">Rampe für Rollstuhl: Nein</string>
+	<string name="poi_ramp_wheelchair_yes">Rollstuhlrampe: Ja</string>
+	<string name="poi_ramp_wheelchair_no">Rollstuhlrampe: Nein</string>
 	<string name="poi_ramp_bicycle_yes">Rampe für Fahrräder: Ja</string>
 	<string name="poi_ramp_bicycle_no">Rampe für Fahrräder: Nein</string>
 	<string name="poi_step_count">Anzahl Stufen</string>
@@ -1927,8 +1927,8 @@
 
 	<string name="poi_indoor_no">im Freien</string>
 	<string name="poi_indoor_yes">Innen</string>
-	<string name="poi_toilets_wheelchair_yes">Zugang zu den Toiletten für Rollstuhlfahrer: Ja</string>
-	<string name="poi_toilets_wheelchair_no">Zugang zu den Toiletten für Rollstuhlfahrer: Nein</string>
+	<string name="poi_toilets_wheelchair_yes">Rollstuhlgerechte Toilette: Ja</string>
+	<string name="poi_toilets_wheelchair_no">Rollstuhlgerechte Toilette: Nein</string>
 	<string name="poi_toilets_access_customers">Toilettenzugang: Kunden</string>
 	<string name="poi_toilets_access_permissive">Toilettenzugang: geduldet</string>
 	<string name="poi_toilets_access_community">Toilettenzugang: allgemein</string>
@@ -3094,7 +3094,7 @@
 	<string name="poi_bicycle_service">Fahrrad Dienstleitung</string>
 	<string name="poi_service_car">Dienstleistung</string>
 	<string name="poi_self_service">Selbstbedienung</string>
-	<string name="poi_pharmacy_dispensing">Dosirung</string>
+	<string name="poi_pharmacy_dispensing">Rezepte einlösbar</string>
 	<string name="poi_archaeological_site_type">Typ</string>
 	<string name="poi_star_rating">Bewertung in Sternen</string>
 	<string name="poi_denomination">Konfession</string>
