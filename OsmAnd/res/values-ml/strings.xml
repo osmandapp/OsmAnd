@@ -1615,4 +1615,166 @@
     <string name="last_update">" അവസാന പരിഷ്ക്കരണം : %s"</string>
     <string name="last_map_change">ഭൂപടത്തിലെ അവസാന മാറ്റം: %s</string>
     <string name="osmo_service_running">ഓസ്മോ സേവനം പ്രവൃത്തിച്ച് കൊണ്ടിരിക്കുന്നു</string>
-    </resources>
+    <string name="gpx_logging_no_data">"വിവരങ്ങളൊന്നുമില്ല "</string>
+    <string name="christmas_poi">ക്രിസ്മസ് താല്‍പര്യബിന്ദുക്ക</string>
+    <string name="christmas_desc">ക്രിസ്മസ് - പുതുവര്‍ഷം അടുത്തെത്തിയാല്‍ , നിങ്ങള്‍ക്ക് ക്രിസ്മസ് തല്‍പര്യബിന്ദുക്കള്‍ കാണിക്കാം: ക്രിസ്മസ് ട്രീസ്, ചന്തകള്, തുടങ്ങിയവ.</string>
+    <string name="christmas_desc_q">ക്രിസ്മസ് താല്‍പര്യബിന്ദുക്കള്‍ കാണിക്കട്ടെ?</string>
+    <string name="rendering_value_dark_brown_name">ഇരുണ്ട തവിട്ടുനിറം</string>
+    <string name="first_usage_greeting">ഇന്റര്‍നെറ്റ് ഇല്ലാതെ തന്നെ മാര്‍ഗദിശയും, പുതിയ സ്ഥലങ്ങളും കണ്ടെത്തുക</string>
+    <string name="access_map_linked_to_location">സ്ഥാനത്തോട് ബന്ധപ്പെട്ട ഭൂപടം</string>
+    <string name="osmo_auto_send_locations">തന്നത്താന്‍ യാത്ര ആരംഭിക്കുക</string>
+    <string name="clear_updates_proposition_message">നിങ്ങള്‍ക്ക് ഡൗണ്‍ലോഡ് ചെയ്ത പരിഷ്കാരങ്ങള്‍ നീക്കി ആദ്യ ഭൂപടത്തിലോട്ട് തിരിച്ച് പോവാം</string>
+    <string name="add_time_span">കാലയളവ് ചേര്‍ക്കുക</string>
+    <string name="welcome_select_region">ട്രാഫിക് സൈനുകളും നിയമങ്ങളും ശരിയായ് പാലിക്കാന്‍ ഡ്രൈവിങ്ങ് റീജിയന്‍ തെരഞ്ഞെടുക്കുക:</string>
+    <string name="welcome_text">ഓഎസ്എം ആന്ഡ് ഓഫ്ലൈനായ് ലോകമെമ്പാടുമുള്ള ഭൂപടങ്ങള്‍ കാണിച്ച് തരുകയും വഴികാട്ടുകയും ചെയ്യുന്നു!</string>
+    <string name="osm_edits">ഓഎസ്എം തിരുത്തലുകള്‍</string>
+    <string name="shared_string_on">ഓണ്‍</string>
+    <string name="shared_string_or">"അല്ലെങ്കില്‍ "</string>
+    <string name="osmand_parking_plugin_name">പാര്‍ക്കിങ്ങ് സ്ഥാനം</string>
+	<string name="osmand_parking_plugin_description">"പാര്‍ക്കിങ്ങ് സ്ഥാന അനുബന്ധം എവിടെയാണ് കാര്‍ പാര്‍ക്ക് ചെയ്തത് എന്നും എത്രസമയം കൂടി ലഭ്യമാണ്(സമയപരിമിതമെങ്കില്‍) ഓര്‍മിപ്പിക്കുന്നു.
+
+പാര്‍ക്കിങ്ങ് സ്ഥലവും സമയവും ഓഎസ്എംആന്ഡിന്റെ ഡാഷ്ബോഡിലും ഭൂപത്തിലും കാണാവുന്നതാണ്. കൂടാതെ ആന്ഡ്രോയിഡ് കലണ്ടറിലൊരു  ഓര്‍മ്മക്കത്ത് ചേര്‍ക്കാവുന്നതാണ്."</string>
+    <string name="osm_settings">ഓഎസ്എം തിരുത്തലുകള്‍</string>
+    <string name="watch">നിരീക്ഷണം</string>
+    <string name="use_opengl_render_descr">ഉപകരണ സഹായത്തോടെ ഓപണ്‍ജിഎല്‍ ഉപയോഗിച്ച് വരക്കുക (ചില ഉപകരണങ്ങളില്‍ പ്രവര്‍ത്തിക്കില്ല)</string>
+    <string name="map_update">%1$s ഭൂപടങ്ങള്‍ക്ക് പരിഷ്കാരങ്ങള്‍ ലഭ്യമാണ്</string>
+    <string name="rendering_attr_publicTransportMode_name">ബസ് ,ട്രോളിബസ് , ഷട്ടില്‍ റൂട്ടുകള്‍</string>
+    <string name="impassable_road">"റോഡുകള്‍  ഒഴിവാക്കുക…"</string>
+    <string name="fav_point_dublicate">ഇഷ്ടമുള്ളവയുടെ പേര് ഓന്നിലധികം പകര്‍പ്പിലുണ്ട്</string>
+    <string name="fav_point_dublicate_message">ഇഷ്ടമുള്ളവയുടെ പേര് നിലവിലുണ്ട്, അതിനാല്‍ അത് %1$s മാറ്റിയിരിക്കുന്നു.</string>
+    <string name="rendering_attr_coloredBuildings_name">കെട്ടിടങ്ങളുടെ തരമനുസരിച്ചുള്ള വര്‍ണ്ണക്രമം</string>
+    <string name="map_preferred_locale_descr">"മേല്‍ക്കുറിപ്പുകളുടെ ഭാക്ഷ തെരഞ്ഞെടുക്കുക( ഈ ഭാക്ഷ ലഭ്യമല്ലെങ്കില്‍ ഇംഗ്ളീഷ്/പ്രാദേശിക ഭാക്ഷയിലേക്ക് മാറും) "</string>
+    <string name="rendering_attr_moreDetailed_name">കൂടുതല്‍ വിവരങ്ങള്‍</string>
+    <string name="rendering_attr_lessDetailed_name">കുറച്ച് വിവരങ്ങള്‍</string>
+    <string name="gpx_wpt">പാതബിന്ദു(വേപോയിന്റ്)</string>
+    <string name="gpx_file_is_empty">ജിപിഎക്സ് പാത ശൂന്യമാണ്</string>
+    <string name="osmo_user_joined">"യൂസര്‍ %1$s  %2$s ഗ്രൂപ്പില്‍ ചേര്‍ന്നു"</string>
+    <string name="osmo_user_left">"യൂസര്‍ %1$s  %2$s ഗ്രൂപ്പില്‍ നിന്നും പോയി"</string>
+    <string name="osmo_use_server_name">ഔദ്യോഗിക നാമം</string>
+    <string name="osmo_user_name">യൂസര്‍</string>
+    <string name="osmo_share_connect_device">ഈ ഉപകരണത്തെ സ്ഥിരമായി പിന്തുടരാന്‍ അനുവദിക്കുക</string>
+    <string name="osmo_settings_uuid">അനന്യമായ ഉപകരണ ഐഡി</string>
+    <string name="index_item_nation_addresses">രാജ്യമെമ്പാടുമുള്ള വിലാസങ്ങള്‍</string>
+    <string name="index_item_world_basemap">"ലോക വിഹഗ ഭൂപടം  "</string>
+    <string name="use_displayed_track_for_navigation">കാണിച്ചിരിക്കുന്ന പാത വഴികാട്ടിക്കായ് ഉപയോഗിക്കണോ?</string>
+    <string name="guidance_preferences_descr">വഴികാട്ടിയുടെ മുന്‍ഗണനകള്‍</string>
+    <string name="maps_define_edit">നിശ്ചയിക്കുക/തിരുത്തുക…</string>
+    <string name="intermediate_items_sort_return">നിലവിലെ സ്ഥാനത്തു നിന്നും ലക്ഷ്യസ്ഥാനത്തെക്കുള്ള പാതയില്‍ വരത്തക്കവിധത്തില്‍ ഇടലക്ഷ്യങ്ങള്‍ മാറ്റിക്രമീകരിച്ചിരിക്കുന്നു.</string>
+    <string name="gpx_file_name">ജിപിഎക്സ് ഫയലിന്റെ പേര്</string>
+    <string name="use_distance_measurement_help">"* ഒരു ബിന്ദു അടയാളപ്പെടുത്താന്‍ മെല്ലെ തൊടുക.
+
+* പഴയ ബിന്ദു നീക്കം ചെയ്യാന്‍ ഭൂപടത്തില്‍ ദീര്‍ഘമായി അമര്‍ത്തുക
+
+* വിവരണം കാണാനും കൂട്ടിച്ചേര്‍ക്കാനും ബിന്ദുവില്‍ ദീര്‍ഘമായി അമര്‍ത്തുക.
+
+*കൂടുതല്‍ പ്രവൃത്തികള്‍ക്കായി  അളവുകോലില്‍ തൊടുക."</string>
+    <string name="wait_current_task_finished">ദയവായി ഈ പ്രവൃത്തി തീരുന്നതു വരെ കാത്തിരിക്കുക</string>
+    <string name="use_kalman_filter_compass_descr">വടക്ക്നോക്കിയുടെ ഓടിക്കളികുറക്കുന്നു(നോയിസ്), ചെറിയ ആലസ്യം ചേര്‍ക്കും</string>
+    <string name="index_name_openmaps">തുറന്ന യൂറൊപ്യന്‍ ഭൂപടം</string>
+    <string name="rendering_attr_noAdminboundaries_description">"പ്രാദേശിക ഭരണപരമായ അതിരുകള്‍ കാണിക്കാതിരിക്കുക(  നിലകള്‍ 5-9)"</string>
+    <string name="rendering_attr_roadColors_name">റോഡ് നിറക്കൂട്ട്</string>
+    <string name="intermediate_point_too_far">ഇടലക്ഷ്യസ്ഥാനം %1$s അടുത്തുള്ള പാതയില്‍ നിന്നും വളരെ അകലെയാണ്.</string>
+    <string name="use_compass_navigation_descr">മറ്റ് വിധത്തില്‍ ദിശ കണ്ട്പിടിക്കാനായില്ലെങ്കില്‍ വടക്കുനോക്കി ഉപയോഗിക്കുക</string>
+    <string name="osmand_plus_extended_description_4000_chars">"
+ഓഎസ്എംആന്ഡ്(ഓഎസ്എം ആട്ടോമേറ്റഡ് നാവിഗേഷന്‍ ഡൈറക്ഷന്‍സ് -വഴികാട്ടിയും മാര്‍ഗദര്‍ശിയും) ഒരു ഭൂപടവും വഴികാട്ടിയുമാണ്. അത് നിലവാരമുള്ളതും സൗജന്യവുമായ ആഗോള   ഒപെണ്‍സ്ട്രീറ്റ്മാപ്(ഓഎസ്എം) ഭൂപട വിവരങ്ങളാണ് ഉപയോഗിക്കുന്നത്. എല്ല ഭൂപടങ്ങളും മറ്റുവിവരങ്ങളും നിങ്ങളുടെ ഉപകരണത്തില്‍ തന്നെ ഓഫ്ലൈനായ് സൂക്ഷിക്കാവുന്നതാണ്. ജിപിഎസ് ഉപയോഗിച്ച് കാര്‍, ബൈക്ക്, കാല്‍നടയാത്രക്കാര്‍ എന്നിവര്‍ക്കായി ശബ്ദ/ദൃഷ്യ നിര്‍ദേശങ്ങളോടെ ഓഎസ്ംആന്ഡ് വഴികാട്ടിയായ് പ്രവര്‍ത്തിക്കുന്നു. ഇത്  ഓണ്‍ലൈനിലും ഓഫ്ലൈനിലും പ്രവര്‍ത്തിക്കും(ഇന്റെര്‍നെറ്റ് ആവശ്യമില്ല -മാപ്പ് ഡൗണ്‍ലോഡ് ചെയ്യാനല്ലാതെ).
+
+ഓഎസ്എംആന്ഡ്+ ഇതിന്റെ പണം മുടക്കിയ പതിപ്പാണ്. ഇത് മേടിക്കുന്നത് വഴി നിങ്ങള്‍ ഈ സംരംഭത്തെ, പുതിയ സവിശേഷതകള്‍ക്കായി   പിന്തുണക്കാം,കൂടാതെ പുതിയ പരിഷ്കാരങ്ങള്‍ നിങ്ങള്‍ക്ക് പെട്ടന്ന് ലഭ്യമാവുകയും ചെയ്യും. നിങ്ങള്‍ക്ക് ഈ ആപ്പ്ളിക്കേഷന്റെ എല്ല സവിശേഷതകളും സൗജന്യമായ് ഓഎസ്എംആന്ഡില്‍ ഉപയോഗിക്കാവുന്നതാണ്.
+
+ചില പ്രധാന സവിശേഷതകള്‍:
+
+വഴികാട്ടി
+
+ഭൂപടം
+
+ഓപണ്‍സ്ട്രീറ്റ്മാപ്പ് വിക്കീപീഡിയ വിവരങ്ങള്‍ ഉപയൊഗിച്ച്:
+
+സുരക്ഷാ ക്രമീകരണങ്ങള്‍
+
+സൈക്കിള്‍ ,കാല്‍നടയാതരക്കാര്‍ക്കായുള്ള സവിശേഷതകള്‍
+
+ഓപണ്‍സ്ട്രീറ്റ്മാപ്പിലെക്ക് നേരിട്ട് പങ്കെടുക്കുക
+
+ഓഎസ്എംആന്ഡ് 
+ ഓപ്പണ്‍ സോര്‍സും, സജീവമായി വികസിപ്പിക്കപെടുന്നതുമാണ്. എല്ലാവര്‍ക്കും ഇതില്‍ ബഗ് റിപ്പോട്ട് ചെയ്തും, പരിഭാക്ഷ മെച്ചപ്പെടുത്തിയോ, അല്ലെക്കില്‍ പുതിയ സവിശേഷതകള്‍ കോഡ് ചെയ്തോ സഹകരിക്കാവുന്നതാണ്. ഈ പ്രോജക്ടിന്റെ അഭിവൃത്തി ഡെവലപ്പര്‍മാരുടെയും ഉപയോക്താക്കളുടെയും സമ്പര്‍ക്കത്തെ ആശ്രയിച്ചിരിക്കുന്നു. അതുപോലെ ഒരുപരിധിവരെ പണവും ഇതിനാവശ്യമാണ്.  ഓഎസ്എംആന്ഡ്+ വാങ്ങുന്നത് ഇതിനു സഹായകരമാണ്. അതുപോലെ ഒരു പ്രത്യേക സവിശേഷതക്കായോ, അല്ലെങ്കില്‍ പൊതുവായൊ ഓഎസ്എംആന്ഡിന് osmand.net ല്‍ സംഭാവന ചെയ്യാവുന്നതാണ്.
+
+
+Approximate map coverage and quality:
+ - Western Europe: ****
+ - Eastern Europe: ***
+ - Russia: ***
+ - North America: ***
+ - South America: **
+ - Asia: **
+ - Japan &amp; Korea: ***
+ - Middle East: **
+ - Africa: **
+ - Antarctica: *
+
+List of countries supported (basically world wide!):
+Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, Argentina, Armenia, Aruba, Australia, Austria, Azerbaijan, Bahamas, Bahrain, Bangladesh, Barbados, Belarus, Belgium, Belize, Benin, Bermuda, Bhutan, Bolivia, Bonaire, Bosnia and Herzegovina, Botswana, Brazil, British Virgin Islands, Brunei, Bulgaria, Burkina Faso, Burundi, Cambodia, Cameroon, Canada, Cape Verde, Central African Republic, Chad, Chile, China, Colombia, Comoros, Congo, Costa Rica, Ivory Coast, Croatia, Cuba, Curaçao, Cyprus, Czech Republic, Denmark, Djibouti, Dominica, Dominican Republic, Ecuador, Egypt, El Salvador, Equatorial Guinea, Eritrea, Estonia, Ethiopia, Fiji, Finland, France, French Guiana, French Polynesia, Gabon, Gambia, Georgia, Germany, Ghana, Gibraltar, Greece, Greenland, Grenada, Guadeloupe, Guam, Guatemala, Guernsey, Guinea, Guinea-Bissau, Guyana, Haiti, Vatican, Honduras, Hong Kong, Hungary, Iceland, India, Indonesia, Iran, Iraq, Ireland, Isle of Man, Israel, Italy, Jamaica, Japan, Jersey, Jordan, Kazakhstan, Kenya, Kiribati, North Korea and South Korea, Kuwait, Kyrgyzstan, Laos, Latvia, Lebanon, Lesotho, Liberia, Libya, Liechtenstein, Lithuania, Luxembourg, Macao, Macedonia, Madagascar, Malawi, Malaysia, Maldives, Mali, Malta, Martinique, Mauritania, Mauritius, Mayotte, Mexico, Micronesia, Moldova, Monaco, Mongolia, Montenegro, Montserrat, Morocco, Mozambique, Myanmar, Namibia, Nauru, Nepal, Netherlands, Netherlands Antilles, New Caledonia, New Zealand, Nicaragua, Niger, Nigeria, Norway, Oman, Pakistan, Palau, Palestinian Territory, Panama, Papua New Guinea, Paraguay, Peru, Philippines, Poland, Portugal, Puerto Rico, Qatar, Romania, Russia, Rwanda, Saint Barthelemy, Saint Helena, Saint Kitts and Nevis, Saint Lucia, Saint Martin, Saint Pierre and Miquelon, Saint Vincent and the Grenadines, Samoa, San Marino, Saudi Arabia, Senegal, Serbia, Seychelles, Sierra Leone, Singapore, Slovakia, Slovenia, Somalia, South Africa, South Georgia, South Sudan, Spain, Sri Lanka, Sudan, Suriname, Swaziland, Sweden, Switzerland, Syria, Taiwan, Tajikistan, Tanzania, Thailand, Timor-Leste, Togo, Tokelau, Tonga, Trinidad and Tobago, Tunisia, Turkey, Turkmenistan, Tuvalu, Uganda, Ukraine, United Arab Emirates, United Kingdom (UK), United States of America (USA), Uruguay, Uzbekistan, Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Zimbabwe.
+ "</string>
+    <string name="global_app_allocated_memory_descr">"അനുവദിച്ചിരിക്കുന്ന മെമ്മറി  %1$s MB (ആന്ഡ്രോയിഡ് പരിധി  %2$s MB, ഡാല്വിക്  %3$s MB)."</string>
+    <string name="osmand_parking_warning_text">നിങ്ങളുടെ കാര്‍ എടുക്കാനുള്ള ഒരു അറിയിപ്പ്‌ കലണ്ടറില്‍ ചേര്‍ത്തിരിക്കുന്നു. അത് നിങ്ങള്‍ നീക്കം ചെയ്യുന്നത് വരെ അവിടെയുണ്ടാകും.</string>
+    <string name="osmand_parking_time_limit_title">പാര്‍ക്ക് ചെയ്യാവുന്ന സമയ പരിധി ചൂണ്ടിക്കാണിക്കുക</string>
+    <string name="osmand_parking_delete_confirm">പാര്‍ക്കിങ്ങ് സ്ഥാനം അടയാളം നീക്കം ചെയ്യട്ടെ?</string>
+    <string name="osmand_parking_lim_text">സമയ പരിമിതം</string>
+    <string name="osmand_parking_no_lim_text">സമയ-അപരിമിതം</string>
+    <string name="osmand_parking_position_description">നിങ്ങളുടെ കാറിന്റെ പാര്‍ക്കിങ്ങ് സ്ഥാനം. %1$s</string>
+    <string name="rendering_attr_noPolygons_name">"ബഹുഭുജങ്ങള്‍(പോളിഗണ്‍ ) മറയ്ക്കുക "</string>
+    <string name="favourites_search_desc">ഇഷ്ടമുള്ളവ തെരയുക</string>
+    <string name="first_time_msg">"ഓഎസ്എം ആന്ഡ് ഉപയോഗിക്കുന്നതിനു നന്ദി. ഈ ആപ്ളിക്കേഷന്റെ പ്രവര്‍ത്തനത്തിനാവശ്യമായ  ചില പ്രാദേശിക വിവരങ്ങള്‍ നിങ്ങള്‍ക്ക് \'സജ്ജീകരണങ്ങള്‍-&gt;ഭൂപട ഫയലുകളുടെ നിയന്ത്രണം\' വഴി ഡൗണ്‍ലോഡ് ചെയ്യാവുന്നതാണ്. അതിന് ശേഷം നിങ്ങള്‍ക്ക് ഭൂപടങ്ങള്‍ കാണനും, വിലാസങ്ങള്‍ കണ്ട്പിടിക്കാനും, താല്‍പര്യബിന്ദുക്കള്‍ തെരഞ്ഞെടുക്കനും, പൊതുഗതാഗതസംവിധാനം കണ്ടെത്താനും സാധിക്കും."</string>
+    <string name="validate_gpx_upload_name_pwd">ജിപിഎക്സ് ഫയല്‍ അപ്ലോഡ് ചെയ്യാനായ് ദയവായ് ഓഎസ്എം യൂസെര്‍നേം പാസ്വോഡ് എന്നിവ തരുക.</string>
+    <string name="i_am_here">ഞാന്‍ ഇവിടെയാണ്</string>
+    <string name="use_fluorescent_overlays_descr">തിളക്കമാര്‍ന്ന നിറങ്ങള്‍ പാതകളും റൂട്ടുകളും കാണിക്കാനുപയോഗിക്കുക</string>
+    <string name="free_version_message">ഈ സൗജന്യ ഓഎസ്എം ആന്ഡ് പതിപ്പ് %1$s ഡൗണ്‍ലോഡുകളെ അനുവദിക്കൂ, ഓഫ്ലൈന് വിക്കിപീഡിയ ലേഖനങ്ങളുമില്ല. ഈ നിയന്ത്രണമൊഴിവാക്കാന്‍ ദയവായി ഓഎസ്ംആന്ഡ്+ അല്ലെങ്കില്‍ എഫ്ഡ്രോയിഡ് പതിപ്പിലേക്ക് പരിഷ്കരിക്കുക.</string>
+    <string name="index_name_other">ലോകമെമ്പാടും പ്രത്യേക വിഷയം സംബന്ധിച്ചതുമായ ഭൂപടങ്ങള്‍</string>
+    <string name="fav_export_confirmation">ഇഷ്ടമുള്ളവ നേരത്തെ സംഭരിച്ച ഫയല്‍ ഉണ്ട്. അത് മാറ്റിയെഴുതണോ?</string>
+    <string name="general_settings_descr">"ആപ്പ്ളിക്കേഷന്റെ ഡിസ്പ്ളെയുടെയും പൊതുവായതും  സജ്ജീകരണള്‍ ക്രമീകരിക്കുക"</string>
+    <string name="global_app_settings">ആപ്പിന്റെ പൊതുവായ(ആഗോള) സജ്ജീകരണങ്ങള്‍</string>
+    <string name="file_can_not_be_renamed">ഫയലിന്റെ പേര്മാറ്റാനാവില്ല.</string>
+    <string name="map_version_changed_info">സേര്‍വറിലുള്ള ഭൂപട ഫയലുകള്‍ നിങ്ങളുടെ ഇപ്പഴത്തെ പതിപ്പിന് അനുയോജ്യമല്ല. ഈ ഭൂപടങ്ങള്‍ ഡൗണ്ലോഡ് ചെയ്ത് ഉപയോഗിക്കാന്‍ നിങ്ങള്‍ ഈ ആപ്ളിക്കേഷന്‍ പുതിയ പതിപ്പിലേക്ക് പരിഷ്കരിക്കുക.</string>
+    <string name="filename_input">"ഫയലിന്റെ പേര്: "</string>
+    <string name="favourites_delete_multiple_succesful">ഇഷ്ടപെട്ട ബിന്ദു(ക്കള്‍) നീക്കംചെയ്തിരിക്കുന്നു.</string>
+    <string name="vector_data_missing">എസ്ഡി കാര്‍ഡില്‍ ഓഫ്ല്ലൈനായുള്ള വിവരങ്ങള്‍ ലഭ്യമല്ല. ഓഫ്ലൈനില്‍ ഭൂപടങ്ങള്‍ ഉപയോഗിക്കാനായ് ദയവായി അത് ഡൗണ്ലോഡ് ചെയ്യുന്ന കാര്യം പരിഗണിക്കുക.</string>
+    <string name="local_index_poi_data">താല്‍പര്യ ബിന്ദു (പി ഓ ഐ ) വിവരങ്ങള്‍</string>
+    <string name="map_text_size_descr">"ഭൂപടത്തിലെ  നാമങ്ങളുടെ അക്ഷരവലിപ്പം ക്രമീകരിക്കുക"</string>
+    <string name="voice_stream_voice_call">ഫോണ്‍ കോളിന്റെ ഓഡിയോ(കാറിന്റെ ബ്ളൂടൂത്ത് സ്റ്റീരിയോയിലൂടെയും)</string>
+    <string name="warning_tile_layer_not_downloadable">"ഭൂപടപാളി  %1$s ഡൗണ്‍ലോഡ് ചെയ്യാനായില്ല, ദയവായി ഇത് റീഇന്‍സ്ടാള്‍ ചെയ്യന്‍ ശ്രമിക്കുക."</string>
+    <string name="map_transparency_descr">അടിസ്ഥാന ഭൂപടത്തിന്റെ സുതാര്യത മാറ്റുക</string>
+    <string name="incomplete_locale">അപൂര്‍ണ്ണം</string>
+    <string name="add_waypoint_dialog_added">"ജിപിഎക്സ് പാതബിന്ദു  \'\'{0}\'\' വിജയകരമായി ചേര്‍ത്തിരിക്കുന്നു"</string>
+    <string name="indexing_address">വിലാസങ്ങളുടെ പട്ടികയുണ്ടാക്കുന്നു…</string>
+    <string name="indexing_map">ഭൂപടങ്ങളുടെ പട്ടികയുണ്ടാക്കുന്നു…</string>
+    <string name="indexing_poi">താല്‍പര്യ ബിന്ദു (പി ഓ ഐ )ക്കളുടെ പട്ടികയുണ്ടാക്കുന്നു…</string>
+    <string name="indexing_transport">ഗതാഗത സംവിധാനങ്ങളുടെ പട്ടികയുണ്ടാക്കുന്നു…</string>
+    <string name="poi_context_menu_delete">താല്‍പര്യ ബിന്ദു (പിഓഐ) നീക്കം ചെയ്യുക</string>
+    <string name="import_file_favourites">വിവരങ്ങള്‍ ജിപിഎക്സ് ഫയലായി സൂക്ഷിക്കുകയൊ/പാതബിന്ദുക്കള്‍(വേപൊയിന്റ്) ഇഷ്ടമുള്ളവയില്‍ ചേര്‍ക്കുകയോ ചെയ്യട്ടെ?</string>
+    <string name="fav_file_to_load_not_found">{0} യില്‍ ഇഷ്ടപെട്ടവ അടങ്ങിയ ജിപിഎക്സ് ഫയല്‍ കണ്ടെത്താനായില്ല</string>
+    <string name="fav_saved_sucessfully">"ഇഷ്ടമുള്ളവ  {0} യില്‍ സംരക്ഷിച്ചിരിക്കുന്നു"</string>
+    <string name="use_trackball">ട്രാക്ക്ബോള്‍ ഉപയോഗിക്കുക</string>
+    <string name="hide_poi_filter">അരിപ്പകള്‍ മറക്കുക</string>
+    <string name="map_orientation_default">ഉപകരണത്തിലേതുപോലെ</string>
+    <string name="add_new_rule">പുതിയ നിയമങ്ങള്‍ ചേര്‍ക്കുക</string>
+    <string name="uploading">വിവരങ്ങള്‍ അപ്ലോഡ് ചെയ്തുകൊണ്ടിരിക്കുന്നു…</string>
+    <string name="hint_search_online">ഓണ്‍ലൈനില്‍ തെരയുക : വീട്ട് നമ്പര്‍, തെരുവ്, നഗരം</string>
+    <string name="fav_points_edited">ഇഷ്ടമുള്ള ബിന്ദു തിരുത്തിയിരിക്കുന്നു</string>
+    <string name="fav_points_not_exist">"ഇഷ്ടമുള്ള ബിന്ദുക്കളൊന്നും നിലവിലില്ല "</string>
+    <string name="use_english_names_descr">ഇംഗ്ളീഷ് അല്ലെങ്കില്‍ പ്രാദേശിക ഭാക്ഷയിലുള്ള പേരുകള്‍ തെരഞ്ഞെടുക്കുക</string>
+    <string name="use_internet_to_download_tile">ഇന്റര്‍നെറ്റ് ഉപയോഗിച്ച് ഇല്ലാത്ത ഭൂപട കഷണങ്ങള്‍ ഡൗണ്‍ലോഡ് ചെയ്യുക</string>
+    <string name="app_description">വഴികാട്ടി ആപ്ളിക്കേഷന്‍</string>
+    <string name="incremental_search_street">തെരുവുകള്‍ പടിപടിയായ് തെരയുക</string>
+    <string name="incremental_search_building">കെട്ടിടങ്ങള്‍ പടിപടിയായി തെരയുക</string>
+    <string name="edit_filter_save_as_menu_item">പേരുകൊടുത്ത് സംരക്ഷിക്കുക</string>
+    <string name="use_fast_recalculation_desc">ദീര്‍ഘയാത്രകളില്‍ തുടക്കത്തിലുള്ള പാതകള്‍ മാത്രം വീണ്ടും കണക്കാക്കുക</string>
+    <string name="we_really_care_about_your_opinion">"നിങ്ങളുടെ നിര്‍ദേശങ്ങള്‍ ഞങ്ങള്‍ക്ക്  വിലയേറിയതാണ്."</string>
+    <string name="user_hates_app_get_feedback_long">ഈ ആപ്പില്‍ എന്തെങ്കിലും മാറ്റമാവശ്യമെങ്കില്‍ ഞങ്ങളോട് പറയുക.</string>
+    <string name="show_free_version_banner_description">"നിങ്ങളുടെ പണം മുടക്കി വാങ്ങിയ  ആപ്പാണെങ്കിലും,സൗജന്യ പതിപ്പിന്റെ അറിയിപ്പുകള്‍ കാണാം"</string>
+    <string name="value_downloaded_of_max">"%1$.1f യുടെ  %2$.1f MB"</string>
+    <string name="free_downloads_used_description">ഇതുവരെയുപയോഗിച്ച സൗജന്യ ഡൗണ്‍ലോഡുകള്‍</string>
+
+    <string name="features_menu_group">" സവിശേഷതകള്‍ "</string>
+    <string name="first_usage_item_description">എങ്ങിനെയാണ് ഭൂപടം ഡൗണ്‍ലോഡ് ചെയ്യുന്നത്, അടിസ്ഥാന സജ്ജീകരണങ്ങള്‍ ചെയ്യുന്നത്</string>
+    <string name="feedback">പ്രതികരണം</string>
+    <string name="hourly">പ്രതിമണിക്കൂര്‍</string>
+    <string name="file_name_containes_illegal_char">ഫയലിന്റെ പേരില്‍ നിയമാനുസൃതമല്ലാത്ത അക്ഷരങ്ങള്‍ ഉണ്ട്</string>
+</resources>
