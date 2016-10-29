@@ -2512,4 +2512,8 @@ Si aprecieu OsmAnd  i OSM i voleu ajudar-los, és la via perfecta per fer-ho."</
     <string name="osmo_share_location">Comparteix</string>
     <string name="osmo_pause_location">Atura</string>
     <string name="osmo_service_running">S\'està executant el servei OsmMo</string>
+    <string name="gpx_no_tracks_title">No teniu encara cap traça, afegiu-ne una qualsevol</string>
+    <string name="gpx_no_tracks_title_folder">També podeu afegir traces a la carpeta</string>
+    <string name="gpx_add_track">Afegeix traça</string>
+    <string name="gpx_appearance">Aparença</string>
     </resources>
