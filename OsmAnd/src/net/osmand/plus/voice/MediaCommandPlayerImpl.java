@@ -86,7 +86,7 @@ public class MediaCommandPlayerImpl extends AbstractPrologCommandPlayer implemen
 			if (ctx != null && ctx.getSettings().AUDIO_STREAM_GUIDANCE.get() == 0) {
 				try {
 					log.debug("Delaying MediaCommandPlayer for BT SCO");
-					Thread.sleep(BT_SCO_DELAY);
+					Thread.sleep(ctx.getSettings().BT_SCO_DELAY.get());
 				} catch (InterruptedException e) {
 				}
 			}

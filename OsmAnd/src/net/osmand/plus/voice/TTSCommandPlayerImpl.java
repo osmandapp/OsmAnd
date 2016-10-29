@@ -114,9 +114,9 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 					ttsRequests++;
 					if (android.os.Build.VERSION.SDK_INT < 21) {
 						params.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID,""+System.currentTimeMillis());
-						mTts.playSilence(BT_SCO_DELAY, TextToSpeech.QUEUE_ADD, params);
+						mTts.playSilence(ctx.getSettings().BT_SCO_DELAY.get(), TextToSpeech.QUEUE_ADD, params);
 					} else {
-						mTts.playSilentUtterance(BT_SCO_DELAY, TextToSpeech.QUEUE_ADD, ""+System.currentTimeMillis());
+						mTts.playSilentUtterance(ctx.getSettings().BT_SCO_DELAY.get(), TextToSpeech.QUEUE_ADD, ""+System.currentTimeMillis());
 					}
 				}
 			}

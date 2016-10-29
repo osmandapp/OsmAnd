@@ -1205,6 +1205,9 @@ public class OsmandSettings {
 	public final OsmandPreference<Integer> AUDIO_STREAM_GUIDANCE = new IntPreference("audio_stream",
 			3/*AudioManager.STREAM_MUSIC*/).makeGlobal();
 
+	// For now this can be changed only in TestVoiceActivity
+	public final OsmandPreference<Integer> BT_SCO_DELAY = new IntPreference("bt_sco_delay",	1500).makeGlobal().cache();
+
 	// this value string is synchronized with settings_pref.xml preference name
 	public final CommonPreference<Boolean> MAP_ONLINE_DATA = new BooleanPreference("map_online_data", false).makeGlobal();
 

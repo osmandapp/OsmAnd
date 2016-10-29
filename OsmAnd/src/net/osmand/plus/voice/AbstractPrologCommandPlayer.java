@@ -307,7 +307,8 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer, Stat
 
 	public static boolean btScoStatus = false;
 
-	public static final int BT_SCO_DELAY = 1500;
+	// BT_SCO_DELAY now in Settings. 1500 ms works for most configurations.
+	//public static final int BT_SCO_DELAY = 1500;
 
 	// This only needed for init debugging in TestVoiceActivity:
 					  public static String btScoInit = "";
@@ -332,7 +333,7 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer, Stat
 					  btScoInit = "BT SCO available:   YES\nBT SCO initializes: NO\n(" + e.getMessage() + ")";
 				return false;
 			}
-					  btScoInit = "BT SCO available:   YES\nBT SCO initializes: YES\nBT SCO init delay:  " + BT_SCO_DELAY + " ms";
+					  btScoInit = "BT SCO available:   YES\nBT SCO initializes: YES";
 			return true;
 		} else {
 			AudioManager mAudioManager = (AudioManager) ctx.getSystemService(Context.AUDIO_SERVICE);
