@@ -167,7 +167,7 @@ public class GpxUiHelper {
 											 final CallbackWithObject<GPXFile[]> callbackWithObject) {
 		OsmandApplication app = (OsmandApplication) activity.getApplication();
 		final File dir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
-		final List<GPXInfo> allGpxList = getSortedGPXFilesInfo(dir, false);
+		final List<GPXInfo> allGpxList = getSortedGPXFilesInfo(dir, selectedGpxList, false);
 		if (allGpxList.isEmpty()) {
 			Toast.makeText(activity, R.string.gpx_files_not_found, Toast.LENGTH_LONG).show();
 		}
@@ -181,7 +181,7 @@ public class GpxUiHelper {
 											final boolean showCurrentGpx, final boolean multipleChoice, final CallbackWithObject<GPXFile[]> callbackWithObject) {
 		OsmandApplication app = (OsmandApplication) activity.getApplication();
 		final File dir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
-		final List<GPXInfo> list = getSortedGPXFilesInfo(dir, false);
+		final List<GPXInfo> list = getSortedGPXFilesInfo(dir, null, false);
 		if (list.isEmpty()) {
 			Toast.makeText(activity, R.string.gpx_files_not_found, Toast.LENGTH_LONG).show();
 		}
@@ -731,15 +731,28 @@ public class GpxUiHelper {
 	}
 
 
-	public static List<GPXInfo> getSortedGPXFilesInfo(File dir, boolean absolutePath) {
+	public static List<GPXInfo> getSortedGPXFilesInfo(File dir, final List<String> selectedGpxList, boolean absolutePath) {
 		final List<GPXInfo> list = new ArrayList<>();
 		readGpxDirectory(dir, list, "", absolutePath);
+		if (selectedGpxList != null) {
+			for (GPXInfo info : list) {
+				for (String fileName : selectedGpxList) {
+					if (fileName.endsWith(info.getFileName())) {
+						info.setSelected(true);
+						break;
+					}
+				}
+			}
+		}
 		Collections.sort(list, new Comparator<GPXInfo>() {
 			@Override
 			public int compare(GPXInfo i1, GPXInfo i2) {
+				int res = i1.isSelected() == i2.isSelected() ? 0 : i1.isSelected() ? -1 : 1;
+				if (res != 0) {
+					return res;
+				}
 				return -i1.getFileName().compareTo(i2.getFileName());
 			}
-
 		});
 		return list;
 	}
@@ -803,6 +816,7 @@ public class GpxUiHelper {
 		private String fileName;
 		private long lastModified;
 		private long fileSize;
+		private boolean selected;
 
 		public GPXInfo(String fileName, long lastModified, long fileSize) {
 			this.fileName = fileName;
@@ -820,6 +834,14 @@ public class GpxUiHelper {
 
 		public long getFileSize() {
 			return fileSize;
+		}
+
+		public boolean isSelected() {
+			return selected;
+		}
+
+		public void setSelected(boolean selected) {
+			this.selected = selected;
 		}
 	}
 }
