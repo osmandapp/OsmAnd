@@ -2517,4 +2517,8 @@ kaj pli...
     <string name="osmo_share_location">Kunhavigi</string>
     <string name="osmo_service_running">OsMo-servo estas aktiva</string>
     <string name="osmo_pause_location">Paŭzi</string>
+    <string name="gpx_no_tracks_title">Vi ne havas ankoraŭ iun kurson</string>
+    <string name="gpx_no_tracks_title_folder">Vi ankaŭ povas aldoni kursojn al la dosierujo</string>
+    <string name="gpx_add_track">Aldoni kurson</string>
+    <string name="gpx_appearance">Aspekto</string>
     </resources>
