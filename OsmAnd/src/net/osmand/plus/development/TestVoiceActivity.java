@@ -238,6 +238,7 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 
 		addButton(ll, "       System checks:", builder(p));
 		addButton(ll, "(11.1) Display BT SCO availability (Phone call audio only)", builder(p).attention(""));
+		addButton(ll, "(11.2) Tap to change Phone call audio delay (if car stereo cuts off prompts). Default is 1500 ms.", builder(p).attention(""));
 		ll.forceLayout();
 	}
 
@@ -259,7 +260,19 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 			public void onClick(View v) {
 				builder.play();
 				if (description.startsWith("(11.1)") && (((OsmandApplication) getApplication()).getSettings().AUDIO_STREAM_GUIDANCE.get() == 0)) {
-					Toast.makeText(TestVoiceActivity.this, AbstractPrologCommandPlayer.btScoInit, Toast.LENGTH_LONG).show();
+					Toast.makeText(TestVoiceActivity.this, AbstractPrologCommandPlayer.btScoInit + "\nBT SCO init delay:  " + ((OsmandApplication) getApplication()).getSettings().BT_SCO_DELAY.get() + " ms", Toast.LENGTH_LONG).show();
+				}
+				if (description.startsWith("(11.2)") && (((OsmandApplication) getApplication()).getSettings().AUDIO_STREAM_GUIDANCE.get() == 0)) {
+					if (((OsmandApplication) getApplication()).getSettings().BT_SCO_DELAY.get() == 1000) {
+						((OsmandApplication) getApplication()).getSettings().BT_SCO_DELAY.set(1500);
+					} else if (((OsmandApplication) getApplication()).getSettings().BT_SCO_DELAY.get() == 1500) {
+						((OsmandApplication) getApplication()).getSettings().BT_SCO_DELAY.set(2000);
+					} else if (((OsmandApplication) getApplication()).getSettings().BT_SCO_DELAY.get() == 2000) {
+						((OsmandApplication) getApplication()).getSettings().BT_SCO_DELAY.set(2500);
+					} else if (((OsmandApplication) getApplication()).getSettings().BT_SCO_DELAY.get() == 2500) {
+						((OsmandApplication) getApplication()).getSettings().BT_SCO_DELAY.set(1000);
+					}
+					Toast.makeText(TestVoiceActivity.this, "BT SCO init delay changed to " + ((OsmandApplication) getApplication()).getSettings().BT_SCO_DELAY.get() + " ms", Toast.LENGTH_LONG).show();
 				}
 			}
 		});
