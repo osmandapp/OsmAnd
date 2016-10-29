@@ -1702,7 +1702,10 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="speed_limit_exceed">速限容許餘裕</string>
     <string name="speed_limit_exceed_message">選擇速限容許餘裕界限，超過時您將會收到語音警告。</string>
     <string name="osmo_device_not_found">未找到裝置</string>
-    <string name="osmo_no_connection_msg">無法連接到 OsMo 伺服器：\n- 檢查您的網路連線；\n- 檢查設定；\n- 查看我們的 Twitter：https://twitter.com/OsMomobi</string>
+    <string name="osmo_no_connection_msg">無法連接到 OsMo 伺服器：
+- 檢查您的網際網路連線；
+- 檢查設定；
+- 查看我們的 Twitter：https://twitter.com/OsMomobi</string>
     <string name="anonymous_user_hint">匿名使用者不能：\n- 建立群組；\n- 以伺服器同步群組和裝置；\n- 在網站上的個人儀表板管理群組和裝置。</string>
     <string name="anonymous_user">匿名使用者</string>
     <string name="logged_as">已登入為 %1$s</string>
@@ -1773,7 +1776,7 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
 
     <string name="rendering_attr_streetLighting_name">街道照明</string>
     <string name="proxy_pref_title">代理伺服器</string>
-    <string name="proxy_pref_descr">設定代理伺服器網路通信</string>
+    <string name="proxy_pref_descr">設定代理伺服器網際網路通信</string>
     <string name="settings_privacy">隱私</string>
     <string name="enable_proxy_title">啟用 HTTP 代理伺服器</string>
     <string name="enable_proxy_descr">對所有的網路請求，組態 HTTP 代理伺服器</string>
@@ -2570,17 +2573,17 @@ Facebook：https://www.facebook.com/osmandapp
     <string name="search_another_country">選擇其它地區</string>
     <string name="search_map">搜尋地圖…</string>
     <string name="location_not_found">未找到地方</string>
-    <string name="no_inet_connection">沒有網路連線</string>
+    <string name="no_inet_connection">沒有網際網路連線</string>
     <string name="no_inet_connection_desc_map">需要下載地圖。</string>
     <string name="search_location">搜尋地方…</string>
     <string name="storage_free_space">可用空間</string>
     <string name="storage_place_description">OsmAnd 資料存儲 (給地圖、軌跡等)：%1$s。</string>
     <string name="give_permission">給予許可</string>
     <string name="allow_access_location">允許進入位置</string>
-    <string name="first_usage_greeting">在沒有網路連線的情況下，取得指引與探索新地點</string>
+    <string name="first_usage_greeting">在沒有網際網路連線的情況下，取得指引與探索新地點</string>
     <string name="search_my_location">查詢我的位置</string>
     <string name="no_update_info">不要顯示更新</string>
-    <string name="osm_live_banner_desc">獲得無限制的地圖下載和每個月超過一次以上的更新︰每小時、每天或每週。</string>
+    <string name="osm_live_banner_desc">獲得無限制的地圖下載和每個月超過一次以上的地圖更新︰每週、每天或每小時。</string>
     <string name="osmand_plus_banner_desc">OsmAnd 完整版擁有無限制的地圖下載和每個月的地圖更新。</string>
     <string name="si_mi_meters">英哩/公尺</string>
     <string name="first_usage_wizard_desc">讓 OsmAnd 確定您所在的位置和建議下載該區域的地圖。</string>
@@ -2590,7 +2593,7 @@ Facebook：https://www.facebook.com/osmandapp
     <string name="get_it">獲得</string>
     <string name="osm_live_payment_desc">每個月會收取認購費用。您可以在 Google Play 隨時取消您的訂購。</string>
     <string name="donation_to_osm">捐贈給 OpenStreetMap 的社群</string>
-    <string name="osm_live_subscription_desc">啟用認購每小時、每天、每週的更新和世界各地所有的地圖無限制的下載。</string>
+    <string name="osm_live_subscription_desc">啟用認購可每小時、每天、每週的更新以及世界各地所有的地圖無限制的下載。</string>
     <string name="driving_region_australia">澳洲</string>
     <string name="lang_kab">卡拜爾</string>
     <string name="edit_filter">編輯篩選</string>
@@ -2603,17 +2606,17 @@ Facebook：https://www.facebook.com/osmandapp
     <string name="save_filter">儲存篩選</string>
     <string name="delete_filter">刪除篩選</string>
     <string name="new_filter">新的篩選</string>
-    <string name="new_filter_desc">請輸入新的篩選名稱。您可以在分類清單裡找到它。</string>
+    <string name="new_filter_desc">請輸入新的篩選名稱。這會加到您的類別標籤裡。</string>
     <string name="translit_names">音譯名稱</string>
     <string name="search_hint">輸入城市、地址、poi 名稱</string>
     <string name="translit_name_if_miss">如果 %1$s 的名稱缺失則音譯</string>
     <string name="rendering_attr_contourColorScheme_description">等高線的色彩調配</string>
     <string name="save_track_min_speed">記錄最低的速度</string>
-    <string name="save_track_min_speed_descr">選擇最低速度以觸發記錄</string>
+    <string name="save_track_min_speed_descr">設定最低速度的一個點用以記錄</string>
     <string name="save_track_min_distance">記錄最短距離</string>
-    <string name="save_track_min_distance_descr">選擇最短距離以觸發記錄</string>
+    <string name="save_track_min_distance_descr">從最後位置的一個點設定最短距離用以記錄</string>
     <string name="save_track_precision">記錄最低的精確度</string>
-    <string name="save_track_precision_descr">選擇最低可容忍的記錄精確度</string>
+    <string name="save_track_precision_descr">設定最低精確度的一個點用以記錄</string>
     <string name="christmas_poi">聖誕節 POI</string>
     <string name="christmas_desc_q">顯示聖誕節 POI？</string>
     <string name="rendering_value_light_brown_name">淺棕色</string>
@@ -2626,6 +2629,30 @@ Facebook：https://www.facebook.com/osmandapp
     <string name="shared_string_recorded">已記錄</string>
     <string name="shared_string_record">記錄</string>
     <string name="gpx_logging_no_data">沒有資料</string>
-    <string name="christmas_desc">預知聖誕節和新年假期，您可以選擇顯示與聖誕節關聯的 POI：聖誕樹、市場。</string>
+    <string name="christmas_desc">預知聖誕節和新年假期，您可以選擇顯示與聖誕節關聯的 POI：聖誕樹、市場等等。</string>
     <string name="donation_to_osm_desc">您捐款的一部分將發送給向 OpenStreetMap 提交更改的 OSM 使用者。訂閱的成本保持不變。</string>
+    <string name="osmo_pause_location">暫停</string>
+    <string name="osmo_service_running">OsMo 服務正在運行</string>
+    <string name="shared_string_notifications">通知</string>
+    <string name="release_2_5">"
+ • 在地圖上可點擊圖示
+
+
+• 非常強大的 POI 篩選查詢：例如由餐館、或附有特定設施的露營場地
+
+
+• 新的地區地圖樣式給自行車和徒步旅行者
+
+
+• 加強的行程記錄
+
+
+• 改善了導航通知（Android Wear）
+
+
+• 許多其它的改善和錯誤修復
+
+
+和更多…
+ "</string>
     </resources>
