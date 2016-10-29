@@ -2622,4 +2622,30 @@ V kolikor naletite na težave s programom OsmAnd, prosimo, stopite v stik s skup
     <string name="save_track_min_distance_descr">Nastavitev najmanjše razdalje beleženja točk na zemljevidu</string>
     <string name="save_track_precision">Najmanjša natančnost beleženja</string>
     <string name="save_track_precision_descr">Nastavitev najmanjše natančnosti beleženja točk na zemljevidu</string>
+    <string name="osmo_share_location">Objavi</string>
+    <string name="trip_rec_notification_settings_desc">Pokaži obvestilo, ki omogoča začetek beleženja potovanja s pritiskom na gumb za beleženje</string>
+    <string name="release_2_5">"
+ • Kljikljive ikone na zemljevidu
+
+
+ • Zmogljivo iskanje točk POI: iskanje na primer restavracij po vrsti kuhinje, ali pa prostore  za kampiranje s posebnimi zahtevami
+
+
+ • Topo – Nov slog zemljevida za kolesarje in pohodnike
+
+
+ • Izboljšano beleženje potovanja
+
+
+ • Prilagojena obvestila navigacije za različne naprave (Android Wear)
+
+
+ • Mnogo posodobitev in razrešenih hroščev
+
+
+ in še veliko več …
+ "</string>
+    <string name="rendering_attr_contourColorScheme_description">Barvna shema izohips</string>
+    <string name="christmas_desc">Ob koncu leta je mogoče izbrati prikaz točk POI, ki so povezane z božičnimi in novoletnimi dogodki: božična in novoletna drevesca, prodajalne, razstave ...</string>
+    <string name="rendering_attr_contourColorScheme_name">Barvna shema izohips</string>
     </resources>
