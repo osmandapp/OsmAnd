@@ -313,7 +313,16 @@ public class RenderingRuleStorageProperties {
 	public List<RenderingRuleProperty> getCustomRules() {
 		return customRules;
 	}
-	
+
+	public RenderingRuleProperty getCustomRule(String attrName) {
+		for (RenderingRuleProperty p : customRules) {
+			if (p.getAttrName().equals(attrName)) {
+				return p;
+			}
+		}
+		return null;
+	}
+
 	private RenderingRuleProperty registerRuleInternal(RenderingRuleProperty p) {
 		RenderingRuleProperty existing = get(p.getAttrName());
 		properties.put(p.getAttrName(), p);

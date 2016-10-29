@@ -22,6 +22,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.core.android.MapRendererContext;
 import net.osmand.plus.ContextMenuAdapter;
@@ -46,6 +47,7 @@ import net.osmand.plus.views.GPXLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.RouteLayer;
 import net.osmand.plus.views.corenative.NativeCoreContext;
+import net.osmand.render.RenderingRule;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRuleStorageProperties;
 import net.osmand.render.RenderingRulesStorage;
@@ -68,7 +70,10 @@ import gnu.trove.list.array.TIntArrayList;
 
 public class ConfigureMapMenu {
 	private static final Log LOG = PlatformUtil.getLog(ConfigureMapMenu.class);
-	private static final String HIKING_ROUTES_OSMC_ATTR = "hikingRoutesOSMC";
+	public static final String HIKING_ROUTES_OSMC_ATTR = "hikingRoutesOSMC";
+	public static final String CURRENT_TRACK_COLOR_ATTR = "currentTrackColor";
+	public static final String CURRENT_TRACK_WIDTH_ATTR = "currentTrackWidth";
+	public static final String COLOR_ATTR = "color";
 	private int hikingRouteOSMCValue;
 	private int selectedLanguageIndex;
 	private boolean transliterateNames;
@@ -284,7 +289,7 @@ public class ConfigureMapMenu {
 		app.getAppCustomization().prepareLayerContextMenu(activity, adapter);
 	}
 
-	protected void refreshMapComplete(final MapActivity activity) {
+	public static void refreshMapComplete(final MapActivity activity) {
 		activity.getMyApplication().getResourceManager().getRenderer().clearCache();
 		activity.updateMapSettings();
 		GPXLayer gpx = activity.getMapView().getLayerByClass(GPXLayer.class);
@@ -949,7 +954,9 @@ public class ConfigureMapMenu {
 		for (final RenderingRuleProperty p : customRules) {
 			if (p.getAttrName().equals(RenderingRuleStorageProperties.A_APP_MODE) ||
 					p.getAttrName().equals(RenderingRuleStorageProperties.A_ENGINE_V1) ||
-					p.getAttrName().equals(HIKING_ROUTES_OSMC_ATTR)) {
+					p.getAttrName().equals(HIKING_ROUTES_OSMC_ATTR) ||
+					p.getAttrName().equals(CURRENT_TRACK_COLOR_ATTR) ||
+					p.getAttrName().equals(CURRENT_TRACK_WIDTH_ATTR)) {
 				continue;
 			}
 			String propertyName = SettingsActivity.getStringPropertyName(view.getContext(), p.getAttrName(),
@@ -1062,6 +1069,158 @@ public class ConfigureMapMenu {
 						ContextCompat.getColorStateList(getContext(), android.R.color.primary_text_dark) : ContextCompat.getColorStateList(getContext(), android.R.color.primary_text_light));
 
 			return label;
+		}
+	}
+
+	public static class GpxAppearanceAdapter extends ArrayAdapter<AppearanceListItem> {
+
+		private OsmandApplication app;
+
+		public GpxAppearanceAdapter(Context context) {
+			super(context, R.layout.rendering_prop_menu_item);
+			app = (OsmandApplication) getContext().getApplicationContext();
+
+			RenderingRuleProperty trackWidthProp = null;
+			RenderingRuleProperty trackColorProp = null;
+			RenderingRulesStorage renderer = app.getRendererRegistry().getCurrentSelectedRenderer();
+			if (renderer != null) {
+				trackWidthProp = renderer.PROPS.getCustomRule(CURRENT_TRACK_WIDTH_ATTR);
+				trackColorProp = renderer.PROPS.getCustomRule(CURRENT_TRACK_COLOR_ATTR);
+			}
+
+			if (trackWidthProp != null) {
+				final OsmandSettings.CommonPreference<String> pref
+						= app.getSettings().getCustomRenderProperty(CURRENT_TRACK_WIDTH_ATTR);
+
+				AppearanceListItem item = new AppearanceListItem(CURRENT_TRACK_WIDTH_ATTR, "",
+						SettingsActivity.getStringPropertyValue(getContext(), trackWidthProp.getDefaultValueDescription()));
+				add(item);
+				for (int j = 0; j < trackWidthProp.getPossibleValues().length; j++) {
+					item = new AppearanceListItem(CURRENT_TRACK_WIDTH_ATTR,
+							trackWidthProp.getPossibleValues()[j],
+							SettingsActivity.getStringPropertyValue(getContext(), trackWidthProp.getPossibleValues()[j]));
+					add(item);
+				}
+				item.setLastItem(true);
+			}
+			if (trackColorProp != null) {
+				final OsmandSettings.CommonPreference<String> pref
+						= app.getSettings().getCustomRenderProperty(CURRENT_TRACK_COLOR_ATTR);
+
+				AppearanceListItem item = new AppearanceListItem(CURRENT_TRACK_COLOR_ATTR, "",
+						SettingsActivity.getStringPropertyValue(getContext(), trackColorProp.getDefaultValueDescription()),
+						parseTrackColor(renderer, ""));
+				add(item);
+				for (int j = 0; j < trackColorProp.getPossibleValues().length; j++) {
+					item = new AppearanceListItem(CURRENT_TRACK_COLOR_ATTR,
+							trackColorProp.getPossibleValues()[j],
+							SettingsActivity.getStringPropertyValue(getContext(), trackColorProp.getPossibleValues()[j]),
+							parseTrackColor(renderer, trackColorProp.getPossibleValues()[j]));
+					add(item);
+				}
+				item.setLastItem(true);
+			}
+		}
+
+		public static int parseTrackColor(RenderingRulesStorage renderer, String colorName) {
+			int defaultColor = -1;
+			RenderingRule gpxRule = renderer.getRenderingAttributeRule("gpx");
+			if (gpxRule != null && gpxRule.getIfElseChildren().size() > 0) {
+				List<RenderingRule> rules = renderer.getRenderingAttributeRule("gpx").getIfElseChildren().get(0).getIfElseChildren();
+				for (RenderingRule r : rules) {
+					String cName = r.getStringPropertyValue(CURRENT_TRACK_COLOR_ATTR);
+					if (!Algorithms.isEmpty(cName) && cName.equals(colorName)) {
+						return r.getIntPropertyValue(COLOR_ATTR);
+					}
+					if (cName == null && defaultColor == -1) {
+						defaultColor = r.getIntPropertyValue(COLOR_ATTR);
+					}
+				}
+			}
+			return defaultColor;
+		}
+
+		@NonNull
+		@Override
+		public View getView(int position, View convertView, @NonNull ViewGroup parent) {
+			AppearanceListItem item = getItem(position);
+			View v = convertView;
+			if (v == null) {
+				v = LayoutInflater.from(getContext()).inflate(R.layout.rendering_prop_menu_item, null);
+			}
+			if (item != null) {
+				TextView textView = (TextView) v.findViewById(R.id.text1);
+				textView.setText(item.localizedValue);
+				if (item.attrName == CURRENT_TRACK_WIDTH_ATTR) {
+					int iconId;
+					if (item.value.equals("bold")) {
+						iconId = R.drawable.ic_action_gpx_width_bold;
+					} else if (item.value.equals("medium")) {
+						iconId = R.drawable.ic_action_gpx_width_medium;
+					} else {
+						iconId = R.drawable.ic_action_gpx_width_thin;
+					}
+					textView.setCompoundDrawablesWithIntrinsicBounds(null, null,
+							app.getIconsCache().getIcon(iconId, R.color.gpx_track_width_prop), null);
+				} else {
+					if (item.color == -1) {
+						textView.setCompoundDrawablesWithIntrinsicBounds(null, null,
+								app.getIconsCache().getThemedIcon(R.drawable.ic_action_circle), null);
+					} else {
+						textView.setCompoundDrawablesWithIntrinsicBounds(null, null,
+								app.getIconsCache().getPaintedIcon(R.drawable.ic_action_circle, item.color), null);
+					}
+				}
+				textView.setCompoundDrawablePadding(AndroidUtils.dpToPx(getContext(), 10f));
+				v.findViewById(R.id.divider).setVisibility(item.lastItem
+						&& position < getCount() - 1 ? View.VISIBLE : View.GONE);
+			}
+			return v;
+		}
+	}
+
+	public static class AppearanceListItem {
+		private String attrName;
+		private String value;
+		private String localizedValue;
+		private int color;
+		private boolean lastItem;
+
+		public AppearanceListItem(String attrName, String value, String localizedValue) {
+			this.attrName = attrName;
+			this.value = value;
+			this.localizedValue = localizedValue;
+		}
+
+		public AppearanceListItem(String attrName, String value, String localizedValue, int color) {
+			this.attrName = attrName;
+			this.value = value;
+			this.localizedValue = localizedValue;
+			this.color = color;
+		}
+
+		public String getAttrName() {
+			return attrName;
+		}
+
+		public String getValue() {
+			return value;
+		}
+
+		public String getLocalizedValue() {
+			return localizedValue;
+		}
+
+		public int getColor() {
+			return color;
+		}
+
+		public boolean isLastItem() {
+			return lastItem;
+		}
+
+		public void setLastItem(boolean lastItem) {
+			this.lastItem = lastItem;
 		}
 	}
 }

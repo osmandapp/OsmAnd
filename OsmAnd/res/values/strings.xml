@@ -10,6 +10,10 @@
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
 
+    <string name="gpx_no_tracks_title">You do not have any track yet, please add any track</string>
+    <string name="gpx_no_tracks_title_folder">You may also add tracks to the folder</string>
+    <string name="gpx_add_track">Add track</string>
+    <string name="gpx_appearance">Appearance</string>
     <string name="osmo_share_location">Share</string>
     <string name="osmo_pause_location">Pause</string>
     <string name="osmo_service_running">OsMo service is running</string>

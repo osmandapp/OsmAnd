@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+	<color name="gpx_track_width_prop">#853fc5</color>
     <color name="xmas_blue">#3f51b5</color>
 
 	<color name="disabled_btn_text_color">#a0a0a0</color>

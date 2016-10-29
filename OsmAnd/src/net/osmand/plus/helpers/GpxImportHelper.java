@@ -54,8 +54,17 @@ public class GpxImportHelper {
 
 	public void handleContentImport(final Uri contentUri) {
 		final String name = getNameFromContentUri(contentUri);
-
 		handleFileImport(contentUri, name);
+	}
+
+	public boolean handleGpxImport(final Uri contentUri) {
+		final String name = getNameFromContentUri(contentUri);
+		final boolean isOsmandSubdir = isSubDirectory(application.getAppPath(IndexConstants.GPX_INDEX_DIR), new File(contentUri.getPath()));
+		if (!isOsmandSubdir && name.endsWith(GPX_SUFFIX)) {
+			handleGpxImport(contentUri, name, true);
+			return true;
+		}
+		return false;
 	}
 
 	public void handleFileImport(final Uri intentUri, final String fileName) {
@@ -327,6 +336,9 @@ public class GpxImportHelper {
 			mapView.getAnimatedDraggingThread().startMoving(moveTo.lat, moveTo.lon, mapView.getZoom(), true);
 		}
 		mapView.refreshMap();
+		if (mapActivity.getDashboard().isVisible()) {
+			mapActivity.getDashboard().refreshContent(true);
+		}
 	}
 
 	private void importFavourites(final GPXUtilities.GPXFile gpxFile, final String fileName, final boolean save) {

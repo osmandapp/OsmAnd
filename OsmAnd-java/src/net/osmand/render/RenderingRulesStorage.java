@@ -432,7 +432,7 @@ public class RenderingRulesStorage {
 		return null;
 	}
 	
-	protected RenderingRule getRenderingAttributeRule(String attribute){
+	public RenderingRule getRenderingAttributeRule(String attribute){
 		return renderingAttributes.get(attribute);
 	}
 	

@@ -114,6 +114,7 @@ import org.apache.commons.logging.Log;
 import java.io.File;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -138,6 +139,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	private static MapViewTrackingUtilities mapViewTrackingUtilities;
 	private static MapContextMenu mapContextMenu = new MapContextMenu();
 	private static Intent prevActivityIntent = null;
+
+	private List<ActivityResultListener> activityResultListeners = new ArrayList<>();
 
 	private BroadcastReceiver screenOffReceiver;
 
@@ -396,6 +399,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		} else {
 			getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD | WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED);
 		}
+	}
+
+	public GpxImportHelper getGpxImportHelper() {
+		return gpxImportHelper;
 	}
 
 	@SuppressWarnings("rawtypes")
@@ -1215,6 +1222,12 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		for (ActivityResultListener listener : activityResultListeners) {
+			if (listener.processResult(requestCode, resultCode, data)) {
+				removeActivityResultListener(listener);
+				return;
+			}
+		}
 		OsmandPlugin.onMapActivityResult(requestCode, resultCode, data);
 		MapControlsLayer mcl = mapView.getLayerByClass(MapControlsLayer.class);
 		if (mcl != null) {
@@ -1516,6 +1529,14 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	public void hideTopToolbar(TopToolbarController controller) {
 		MapInfoLayer mapInfoLayer = getMapLayers().getMapInfoLayer();
 		mapInfoLayer.removeTopToolbarController(controller);
+	}
+
+	public void registerActivityResultListener(ActivityResultListener listener) {
+		activityResultListeners.add(listener);
+	}
+
+	public void removeActivityResultListener(ActivityResultListener listener) {
+		activityResultListeners.remove(listener);
 	}
 
 	public enum ShowQuickSearchMode {

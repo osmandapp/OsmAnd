@@ -242,12 +242,7 @@ public class MapActivityLayers {
 				return true;
 			}
 		};
-
-		if (files == null) {
-			return GpxUiHelper.selectGPXFile(activity, true, true, callbackWithObject);
-		} else {
-			return GpxUiHelper.selectGPXFile(files, activity, true, true, callbackWithObject);
-		}
+		return GpxUiHelper.selectGPXFiles(files, activity, callbackWithObject);
 	}
 
 
