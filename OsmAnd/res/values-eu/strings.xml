@@ -1964,7 +1964,10 @@ Lorratza %2$s</string>
  - Termino eta baldintzen xehetasunak OsMo.mobi webgunean daude
  - Baldintza bereziak behar badituzu - jarri kontaktuan: osmo.mobi@gmail.com
  "</string>
-    <string name="osmo_no_connection_msg">Ezin da OsMo zerbitzariarekin konektatu:\n- egiaztatu internet konexioa;\n- egiaztatu ezarpenak;\n- begiratu gure Twitter kontua: https://twitter.com/OsMomobi</string>
+    <string name="osmo_no_connection_msg">Ezin da OsMo zerbitzariarekin konektatu:
+- egiaztatu Internet konexioa;
+- egiaztatu ezarpenak;
+- begiratu gure Twitter kontua: https://twitter.com/OsMomobi</string>
     <string name="anonymous_user_hint">Erabiltzaile anonimo batek ezin du:
 - talde bat sortu;
 - gailu eta taldeak zerbitzariarekin sinkronizatu;
@@ -2161,7 +2164,7 @@ eta gehiago…
     <string name="version_settings">Konpilaketak</string>
     <string name="rendering_attr_streetLighting_name">Kale argitzea</string>
     <string name="proxy_pref_title">Proxya</string>
-    <string name="proxy_pref_descr">Ezarri proxy bidezko internet sarbidea</string>
+    <string name="proxy_pref_descr">Ezarri proxy bidezko Internet sarbidea</string>
     <string name="settings_privacy">Pribatutasuna</string>
     <string name="points">Puntuak</string>
     <string name="speak_pedestrian">Zebrabideak</string>
@@ -2569,14 +2572,14 @@ OsmAnd aplikazioarekin laguntza behar baduzu, jarri kontaktuan gure laguntza tal
     <string name="search_map">Mapa bilatzen…</string>
     <string name="first_usage_wizard_desc">Baimendu OsmAnd aplikazioari zure kokalekua zehaztea eta eskualderako mapa egokia deskargatzea iradokitzea.</string>
     <string name="location_not_found">Ez da kokapena aurkitu</string>
-    <string name="no_inet_connection">Ez dago internet konexiorik</string>
+    <string name="no_inet_connection">Ez dago Internet konexiorik</string>
     <string name="no_inet_connection_desc_map">Mapak deskargatzeko beharrezkoa da.</string>
     <string name="search_location">Kokalekua bilatzen…</string>
     <string name="storage_free_space">Espazio librea</string>
     <string name="storage_place_description">OsmAnd datuen biltegiratzea (mapak, lorratzak, eta abar): %1$s.</string>
     <string name="give_permission">Eman baimena</string>
     <string name="allow_access_location">Eman kokapena atzitzeko baimena</string>
-    <string name="first_usage_greeting">Jaso jarraibideak eta aurkitu toki berriak internet konexiorik gabe</string>
+    <string name="first_usage_greeting">Jaso jarraibideak eta aurkitu toki berriak Internet konexiorik gabe</string>
     <string name="search_my_location">Bilatu nire kokalekua</string>
     <string name="get_for">Eskuratu %1$sren truke</string>
     <string name="get_for_month">Eskuratu hilean %1$s(r)en truke</string>
