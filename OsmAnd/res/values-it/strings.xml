@@ -2686,7 +2686,7 @@ Se ami OsmAnd e OSM e vuoi sostenerli, questo è un modo perfetto per farlo.</st
 
  e altro…
  "</string>
-    <string name="rendering_attr_contourColorScheme_description">Schema di colore dei contorni</string>
+    <string name="rendering_attr_contourColorScheme_description">Colore dei contorni</string>
     <string name="save_track_min_speed">Velocità minima di registrazione</string>
     <string name="translit_name_if_miss">Traslittera se manca il nome in %1$s</string>
     <string name="trip_rec_notification_settings">Registrazione viaggio (nessun dato)</string>
