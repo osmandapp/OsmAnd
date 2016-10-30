@@ -1935,7 +1935,7 @@ Diese Ansicht kann zurückgestellt werden indem Sie hier wieder deaktiviert oder
 	<string name="shared_string_message">Nachricht</string>
 	<string name="agps_data_last_downloaded">A-GPS-Daten zuletzt heruntergeladen: %1$s</string>
 	<string name="confirm_usage_speed_cameras">In vielen Ländern (Deutschland, Frankreich, Italien und andere) ist die Verwendung von Blitzerwarnern gesetzlich nicht erlaubt. OsmAnd übernimmt keine Verantwortung im Fall von Gesetzesübertretungen. Klicken Sie nur auf Ja, wenn Sie zur Verwendung dieser Funktion berechtigt sind.</string>
-	<string name="welmode_download_maps">Karten herunterladen</string>
+	<string name="welmode_download_maps">Kartenmanager</string>
 	<string name="welcome_header">Willkommen</string>
 	<string name="current_route">Aktuelle Route</string>
 	<string name="mark_to_delete">Zum Löschen markieren</string>
@@ -2330,12 +2330,12 @@ Diese Ansicht kann zurückgestellt werden indem Sie hier wieder deaktiviert oder
     <string name="map_marker_1st">Erste Kartenmarkierung</string>
     <string name="map_marker_2nd">Zweite Kartenmarkierung</string>
     <string name="shared_string_toolbar">Werkzeugleiste</string>
-    <string name="add_points_to_map_markers_q">"Wollen Sie alle Punkte zu den Kartenmarkierungen hinzufügen?"</string>
+    <string name="add_points_to_map_markers_q">Alle Punkte zu den Kartenmarkierungen hinzufügen?</string>
     <string name="shared_string_add_to_map_markers">Zu Kartenmarkierungen hinzufügen</string>
     <string name="select_map_markers">Kartenmarkierungen auswählen</string>
     <string name="show_map_markers_description">Kartenmarkierungsfunktion aktivieren</string>
-    <string name="clear_active_markers_q">Wollen Sie alle aktiven Kartenmarkierungen entfernen?</string>
-    <string name="clear_markers_history_q">Wollen Sie den Verlauf der Kartenmarkierungen löschen?</string>
+    <string name="clear_active_markers_q">Alle aktiven Kartenmarkierungen entfernen?</string>
+    <string name="clear_markers_history_q">Verlauf der Kartenmarkierungen löschen?</string>
     <string name="active_markers">Aktive Kartenmarkierungen</string>
     <string name="map_markers">Kartenmarkierungen</string>
     <string name="map_marker">Kartenmarkierung</string>
@@ -2395,7 +2395,7 @@ Wenn Sie OsmAnd und OSM lieben und unterstützen wollen, so ist dies die perfekt
     <string name="shared_string_move_down">Nach unten verschieben</string>
     <string name="file_name_containes_illegal_char">Datenname beinhaltet nicht erlaubte Zeichen</string>
 <string name="no_waypoints_found">Keine Wegpunkte gefunden</string>
-    <string name="no_map_markers_found">Bitte fügen Sie Kartenmarkierungen über die Karte hinzu</string>
+    <string name="no_map_markers_found">Bitte Kartenmarkierungen über die Karte hinzufügen</string>
     <string name="rendering_value_thin_name">Dünn</string>
     <string name="rendering_value_medium_name">Mittel</string>
     <string name="rendering_value_bold_name">Fett</string>
@@ -2488,7 +2488,7 @@ Wenn Sie OsmAnd und OSM lieben und unterstützen wollen, so ist dies die perfekt
     <string name="replace_favorite_confirmation">Wollen sie Favorit \'%1$s\' wirklich ersetzen?</string>
     <string name="shared_string_change">Ändern</string>
     <string name="get_started">Erste Schritte</string>
-    <string name="update_all_maps_now">Wollen sie alle Karten jetzt aktualisieren?</string>
+    <string name="update_all_maps_now">Wollen sie jetzt alle Karten aktualisieren?</string>
     <string name="clear_tile_data">Alle Kartenkacheln löschen</string>
     <string name="skip_map_downloading_desc">Sie haben keine Offline Karten installiert. Sie können jetzt eine Karte auswählen oder später Karten über “Menü - %1$s“ herunterladen.</string>
     <string name="search_another_country">Eine andere Region auswählen</string>
@@ -2499,7 +2499,7 @@ Wenn Sie OsmAnd und OSM lieben und unterstützen wollen, so ist dies die perfekt
     <string name="no_inet_connection_desc_map">Erforderlich, um Karten herunterzuladen.</string>
     <string name="search_location">Standort wird gesucht…</string>
     <string name="storage_free_space">Freier Speicherplatz</string>
-    <string name="storage_place_description">OsmAnd speichert die Daten (Karten, Tracks, etc.) in \'%1$s\'.</string>
+    <string name="storage_place_description">OsmAnd speichert Daten (Karten, Tracks, usw.) in \'%1$s\'.</string>
     <string name="give_permission">Berechtigung erteilen</string>
     <string name="allow_access_location">Zugriff auf den Standort</string>
     <string name="first_usage_greeting">Erhalten Sie Wegbeschreibungen und entdecken Sie neue Orte ohne Internetverbindung</string>
