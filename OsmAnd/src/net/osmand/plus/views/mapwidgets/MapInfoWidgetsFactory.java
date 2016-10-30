@@ -108,63 +108,65 @@ public class MapInfoWidgetsFactory {
 		gpsInfoControl.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				if (app.getNavigationService() != null) {
-					AlertDialog.Builder dlg = new AlertDialog.Builder(map);
-					dlg.setTitle(app.getString(R.string.sleep_mode_stop_dialog));
+				// Issue #3185: GPS service now controlled fully automatically - no manual manipulation of back-stage parameters needed any more.
+				// TODO: Once we use the new notifications only, we can remove strings sleep_mode_stop_dialog, gps_wake_up_timer, keep_navigation_service, stop_navigation_service
+				//if (app.getNavigationService() != null) {
+				//	AlertDialog.Builder dlg = new AlertDialog.Builder(map);
+				//	dlg.setTitle(app.getString(R.string.sleep_mode_stop_dialog));
 
 					//Show currently active wake-up interval
-					int soi = app.getNavigationService().getServiceOffInterval();
-					if (soi == 0) {
-						dlg.setMessage(app.getString(R.string.gps_wake_up_timer) + ": " + app.getString(R.string.int_continuosly));
-					} else if (soi <= 90000) {
-						dlg.setMessage(app.getString(R.string.gps_wake_up_timer) + ": " + Integer.toString(soi / 1000) + " " + app.getString(R.string.int_seconds));
-					} else {
-						dlg.setMessage(app.getString(R.string.gps_wake_up_timer) + ": " + Integer.toString(soi / 1000 / 60) + " " + app.getString(R.string.int_min));
-					}
+				//	int soi = app.getNavigationService().getServiceOffInterval();
+				//	if (soi == 0) {
+				//		dlg.setMessage(app.getString(R.string.gps_wake_up_timer) + ": " + app.getString(R.string.int_continuosly));
+				//	} else if (soi <= 90000) {
+				//		dlg.setMessage(app.getString(R.string.gps_wake_up_timer) + ": " + Integer.toString(soi / 1000) + " " + app.getString(R.string.int_seconds));
+				//	} else {
+				//		dlg.setMessage(app.getString(R.string.gps_wake_up_timer) + ": " + Integer.toString(soi / 1000 / 60) + " " + app.getString(R.string.int_min));
+				//	}
 
-					dlg.setPositiveButton(app.getString(R.string.keep_navigation_service), null);
-					dlg.setNegativeButton(app.getString(R.string.stop_navigation_service), new DialogInterface.OnClickListener() {
-						@Override
-						public void onClick(DialogInterface dialogInterface, int i) {
-							Intent serviceIntent = new Intent(app, NavigationService.class);
-							app.stopService(serviceIntent);
-						}
-					});
-					dlg.show();
+				//	dlg.setPositiveButton(app.getString(R.string.keep_navigation_service), null);
+				//	dlg.setNegativeButton(app.getString(R.string.stop_navigation_service), new DialogInterface.OnClickListener() {
+				//		@Override
+				//		public void onClick(DialogInterface dialogInterface, int i) {
+				//			Intent serviceIntent = new Intent(app, NavigationService.class);
+				//			app.stopService(serviceIntent);
+				//		}
+				//	});
+				//	dlg.show();
 
-				} else {
-					final ValueHolder<Integer> vs = new ValueHolder<Integer>();
-					vs.value = 0;
-					final AlertDialog[] dlgshow = new AlertDialog[1];
-					AlertDialog.Builder dlg = new AlertDialog.Builder(map);
-					dlg.setTitle(app.getString(R.string.enable_sleep_mode));
-					WindowManager mgr = (WindowManager) map.getSystemService(Context.WINDOW_SERVICE);
-					DisplayMetrics dm = new DisplayMetrics();
-					mgr.getDefaultDisplay().getMetrics(dm);
-					LinearLayout ll = OsmandMonitoringPlugin.createIntervalChooseLayout(map,
-							app.getString(R.string.gps_wake_up_timer) + " : %s",
-							OsmandMonitoringPlugin.SECONDS,
-							OsmandMonitoringPlugin.MINUTES,
-							null, vs, dm);
-					if (Version.isGpsStatusEnabled(app)) {
-						dlg.setNeutralButton(R.string.gps_status, new DialogInterface.OnClickListener() {
-							@Override
-							public void onClick(DialogInterface dialog, int which) {
+				//} else {
+				//	final ValueHolder<Integer> vs = new ValueHolder<Integer>();
+				//	vs.value = 0;
+				//	final AlertDialog[] dlgshow = new AlertDialog[1];
+				//	AlertDialog.Builder dlg = new AlertDialog.Builder(map);
+				//	dlg.setTitle(app.getString(R.string.enable_sleep_mode));
+				//	WindowManager mgr = (WindowManager) map.getSystemService(Context.WINDOW_SERVICE);
+				//	DisplayMetrics dm = new DisplayMetrics();
+				//	mgr.getDefaultDisplay().getMetrics(dm);
+				//	LinearLayout ll = OsmandMonitoringPlugin.createIntervalChooseLayout(map,
+				//			app.getString(R.string.gps_wake_up_timer) + " : %s",
+				//			OsmandMonitoringPlugin.SECONDS,
+				//			OsmandMonitoringPlugin.MINUTES,
+				//			null, vs, dm);
+				//	if (Version.isGpsStatusEnabled(app)) {
+				//		dlg.setNeutralButton(R.string.gps_status, new DialogInterface.OnClickListener() {
+				//			@Override
+				//			public void onClick(DialogInterface dialog, int which) {
 								new StartGPSStatus(map).run();
-							}
-						});
-					}
-					dlg.setView(ll);
-					dlg.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							app.startNavigationService(NavigationService.USED_BY_WAKE_UP, vs.value);
-						}
-					});
-					dlg.setNegativeButton(R.string.shared_string_cancel, null);
-					dlgshow[0] = dlg.show();
+				//			}
+				//		});
+				//	}
+				//	dlg.setView(ll);
+				//	dlg.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
+				//		@Override
+				//		public void onClick(DialogInterface dialog, int which) {
+				//			app.startNavigationService(NavigationService.USED_BY_WAKE_UP, vs.value);
+				//		}
+				//	});
+				//	dlg.setNegativeButton(R.string.shared_string_cancel, null);
+				//	dlgshow[0] = dlg.show();
 
-				}
+				//}
 
 			}
 		});
