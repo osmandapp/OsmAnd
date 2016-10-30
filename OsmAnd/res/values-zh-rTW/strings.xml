@@ -2655,4 +2655,11 @@ Facebook：https://www.facebook.com/osmandapp
 
 和更多…
  "</string>
+    <string name="gpx_no_tracks_title">您尚未有軌跡</string>
+    <string name="gpx_no_tracks_title_folder">您也可以增加軌跡到資料夾</string>
+    <string name="gpx_add_track">增加軌跡</string>
+    <string name="gpx_appearance">外表</string>
+    <string name="osmo_share_location">分享</string>
+    <string name="trip_rec_notification_settings">旅程記錄（無資料）</string>
+    <string name="trip_rec_notification_settings_desc">顯示通知，藉由按下錄製按鈕允許開始旅程紀錄</string>
     </resources>
