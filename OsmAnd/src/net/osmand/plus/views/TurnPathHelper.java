@@ -292,7 +292,7 @@ public class TurnPathHelper {
 			int out = turnType.getExitOut();
 			boolean leftSide = turnType.isLeftSide();
 			boolean showSteps = SHOW_STEPS && !mini;
-			TurnVariables tv = new TurnVariables(leftSide, leftSide ? -turnType.getTurnAngle() : turnType.getTurnAngle(), out, wa, ha, 1);
+			TurnVariables tv = new TurnVariables(leftSide, turnType.getTurnAngle(), out, wa, ha, 1);
 			if(center != null) {
 				center.set(tv.cx, tv.cy);
 			}
