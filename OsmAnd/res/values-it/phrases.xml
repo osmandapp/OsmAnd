@@ -2,7 +2,7 @@
 <resources><string name="poi_mall">Centro commerciale</string>
 	<string name="poi_seafood">Pescheria</string>
 	<string name="poi_supermarket">Supermercato</string>
-	<string name="poi_bicycle">Negozio di biciclette</string>
+	<string name="poi_bicycle">Negozio biciclette</string>
 	<string name="poi_vending_machine">Distributore automatico</string>
 
 	<string name="poi_books">Libreria</string>
@@ -21,7 +21,7 @@
 	<string name="poi_tea">Negozio di té</string>
 	<string name="poi_dairy">Latteria</string>
 	<string name="poi_antiques">Antiquariato</string>
-	<string name="poi_art">Galleria d\'arte</string>
+	<string name="poi_art">Negozio d\'arte</string>
 	<string name="poi_baby_goods">Articoli per l\'infanzia</string>
 	<string name="poi_bag">Valigeria</string>
 	<string name="poi_bathroom_furnishing">Arredo bagno</string>
@@ -38,7 +38,7 @@
 	<string name="poi_bedding">Negozio materassi</string>
 	<string name="poi_dive">Negozio articoli per immersione</string>
 	<string name="poi_doityourself">Negozio per fai-da-te</string>
-	<string name="poi_erotic">Sexy shop</string>
+	<string name="poi_erotic">Negozio erotico</string>
 	<string name="poi_fishing">Negozio pesca</string>
 	<string name="poi_florist">Fioreria / fiorista</string>
 	<string name="poi_frame">Cornici</string>
@@ -85,7 +85,7 @@
 	<string name="poi_glaziery">Vetreria</string>
 	<string name="poi_hardware">Ferramenta</string>
 	<string name="poi_hearing_aids">Negozi apparecchi acustici</string>
-	<string name="poi_herbalist">Negozio erba</string>
+	<string name="poi_herbalist">Erboristeria</string>
 	<string name="poi_hifi">Negozio di HiFi</string>
 	<string name="poi_hunting">Negozio caccia-pesca</string>
 	<string name="poi_interior_decoration">Negozio decorazione d\'interni</string>
@@ -98,7 +98,7 @@
 	<string name="poi_optician">Optometrista</string>
 	<string name="poi_organic">Alimenti biologici</string>
 	<string name="poi_outdoor">Negozio articoli per l\'attività all\'aperto</string>
-	<string name="poi_paint">Negozio articoli per pittura</string>
+	<string name="poi_paint">Negozio articoli pittura</string>
 	<string name="poi_pet">Negozio animali domestici</string>
 	<string name="poi_second_hand">Negozio usato</string>
 	<string name="poi_tobacco">Tabaccheria</string>
@@ -559,7 +559,7 @@
 	<string name="poi_historic_mine">Miniera storica</string>
 	<string name="poi_aquarium">Acquario</string>
 	<string name="poi_shop_food">Alimentari</string>
-	<string name="poi_filling_station">Stazione di servizio</string>
+	<string name="poi_filling_station">Stazione di gas</string>
 		<string name="poi_public_transport">Trasporti pubblici</string>
 		<string name="poi_air_transport">Trasporto aereo</string>
 		<string name="poi_emergency">Emergenza</string>
@@ -686,7 +686,7 @@
 	<string name="poi_user_defined_other">Definito dall\'utente</string>
 
 	<string name="poi_cheese">Negozio di latticini</string>
-	<string name="poi_wine"/>
+	<string name="poi_wine">Vinoteca</string>
 
 	<string name="poi_camera">Foto-ottica</string>
 	<string name="poi_candles">Negozio di candele</string>
@@ -845,7 +845,7 @@
 	<string name="poi_public_transport_stop_position">Posizione stop del trasporto pubblico</string>
 	<string name="poi_railway_platform">Piattaforma ferroviaria</string>
 	<string name="poi_halt">Fermata ferroviaria</string>
-	<string name="poi_runway">Pista aerea</string>
+	<string name="poi_runway">Pista</string>
 	<string name="poi_rest_area">Area di sosta</string>
 
 	<string name="poi_groyne">Frangiflutti</string>
@@ -1274,4 +1274,12 @@
 	<string name="poi_diet_vegetarian_yes">Vegetariana</string>
 	<string name="poi_diet_vegan_only">Vegano solo</string>
 	<string name="poi_diet_vegan_yes">Vegana</string>
+	<string name="poi_archery">Tiro con l\'arco</string>
+	<string name="poi_club_ethnic">Club etnico</string>
+	<string name="poi_dyke">Frangiflutti</string>
+	<string name="poi_vending_type">Tipo vendita</string>
+	<string name="poi_scout_camp">Campo scout</string>
+	<string name="poi_drive_through">Guidare attraverso</string>
+	<string name="poi_charity">Negozio carità</string>
+	<string name="poi_scuba_diving_shop">Negozio immersioni subacquee</string>
 	</resources>
