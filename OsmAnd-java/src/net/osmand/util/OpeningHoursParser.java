@@ -1086,7 +1086,7 @@ public class OpeningHoursParser {
 					for (Token[] pair : listOfPairs) {
 						if (pair[0] != null && pair[1] != null) {
 							if (pair[0].mainNumber <= pair[1].mainNumber) {
-								for (int j = pair[0].mainNumber; j <= pair[1].mainNumber; j++) {
+								for (int j = pair[0].mainNumber; j <= pair[1].mainNumber && j < array.length; j++) {
 									array[j] = true;
 								}
 							} else {
