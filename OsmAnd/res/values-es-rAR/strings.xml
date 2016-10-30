@@ -2490,4 +2490,8 @@ Si necesitas ayuda con la aplicación OsmAnd, contacte con nuestro equipo de sop
     <string name="osmo_share_location">Compartir</string>
     <string name="osmo_pause_location">Pausar</string>
     <string name="osmo_service_running">El servicio de OsMo está ejecutándose</string>
+    <string name="gpx_no_tracks_title">No tienes trazas todavía</string>
+    <string name="gpx_no_tracks_title_folder">También puedes añadir trazas a la carpeta</string>
+    <string name="gpx_add_track">Añadir traza</string>
+    <string name="gpx_appearance">Apariencia</string>
     </resources>
