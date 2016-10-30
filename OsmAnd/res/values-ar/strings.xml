@@ -2548,18 +2548,18 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="storage_place_description">مخزن بيانات التطبيق (للخرائط، المسارات، إلخ.): %1$s.</string>
     <string name="give_permission">إعطاء الإذن</string>
     <string name="allow_access_location">الإذن بالوصول إلى الموقع</string>
-    <string name="first_usage_greeting">أحصل على التوجيهات واكتشف أماكن جديدة دون اتصال بالإنترنت</string>
+    <string name="first_usage_greeting">أحصل على التوجيهات واكتشف أماكن جديدة دون إنترنت</string>
     <string name="search_my_location">البحث في موقعي</string>
     <string name="get_for">تحصل عليه بـ %1$s</string>
     <string name="get_for_month">تحصل عليه لـ %1$s أشهر</string>
-    <string name="osm_live_banner_desc">تحصل على تحميل خرائط غير محدود وتحديثات أكثر من مرة في شهر: كل ساعة أو يوميا أو أسبوعيا.</string>
+    <string name="osm_live_banner_desc">تحصل على تحميل خرائط غير محدود، تحديثات خرائط أكثر من مرة في شهر: أسبوعيا، يوميا أو كل ساعة.</string>
     <string name="osmand_plus_banner_desc">نسخة كاملة من التطبيق مع تحميل غير محدود وتحديثات شهرية للخرائط .</string>
     <string name="si_mi_meters">أميال/أمتار</string>
     <string name="get_it">تحميل</string>
     <string name="osm_live_payment_desc">رسوم الاشتراك ستفرض كل شهر. يمكنك إلغاء اشتراكك متى أردت عبر جوجل بلاي.</string>
     <string name="donation_to_osm">التبرع لمجتمع OpenStreetMap</string>
     <string name="donation_to_osm_desc">سيتم إرسال جزء من تبرعك إلى مستخدمي OSM الذين يقومون باحداث التغييرات على الموقع، تكلفة الاشتراك تبقى نفسها.</string>
-    <string name="osm_live_subscription_desc">الاشتراك يتيح تحديثات كل ساعة، يوميا، أسبوعيا والتحميل الغير محدود لجميع الخرائط حول العالم.</string>
+    <string name="osm_live_subscription_desc">الاشتراك يتيح تحديثات كل ساعة، يوميا، أسبوعيا والتحميل الغير محدود لجميع خرائط العالم.</string>
     <string name="driving_region_australia">أستراليا</string>
     <string name="lang_kab">قبائلي</string>
     <string name="shared_string_filters">فلترات</string>
@@ -2585,11 +2585,11 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="christmas_poi">POI عيد الميلاد</string>
     <string name="rendering_attr_contourColorScheme_description">نظام ألوان المعالم</string>
     <string name="save_track_min_speed">تسجيل السرعة الأدنى</string>
-    <string name="save_track_min_speed_descr">اختر السرعة الأدنى لتشغيل التسجيل</string>
+    <string name="save_track_min_speed_descr">اختر السرعة الأدنى لبذأ تشغيل التسجيل</string>
     <string name="save_track_min_distance">تسجيل المسافة الأدنى</string>
-    <string name="save_track_min_distance_descr">اختر حد المسافة الأدنى لتشغيل التسجيل</string>
+    <string name="save_track_min_distance_descr">اختر حد المسافة الأدنى لتشغيل التسجيل من آخر موقع إلى نقطة مراد تسجيلها</string>
     <string name="save_track_precision">تسجيل حد الدقة الأدنى</string>
-    <string name="save_track_precision_descr">اختر حد دقة التسجيل الأدنى المقبول</string>
+    <string name="save_track_precision_descr">اختر حد دقة التسجيل الأدنى لنقطة تريد تسجيلها</string>
     <string name="shared_string_continue">واصل</string>
     <string name="shared_string_pause">إيقاف</string>
     <string name="shared_string_trip">رحلة</string>
@@ -2601,4 +2601,8 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="trip_rec_notification_settings">تسجيل الرحلة (لا توجد بيانات)</string>
     <string name="trip_rec_notification_settings_desc">إظهار إشعار يسمح ببدء تسجيل الرحلة بالضغط على زر التسجيل</string>
     <string name="shared_string_notifications">الإشعارات</string>
+    <string name="gpx_no_tracks_title_folder">يمكنك أيضا إضافة مسارات إلى المجلد</string>
+    <string name="gpx_add_track">إضافة مسار</string>
+    <string name="gpx_appearance">المظهر</string>
+    <string name="osmo_share_location">مشاركة</string>
     </resources>
