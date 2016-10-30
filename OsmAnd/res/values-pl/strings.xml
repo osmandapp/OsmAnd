@@ -242,7 +242,7 @@
     <string name="filter_existing_indexes">Pobrane</string>
 
     <string name="shared_string_select_all">Zaznacz wszystko</string>
-    <string name="shared_string_refresh">Odśwież</string>
+    <string name="shared_string_refresh">Wczytaj ponownie</string>
     <string name="general_settings_descr">Konfiguruje wyświetlanie i ogólne ustawienia programu</string>
     <string name="general_settings">Główne</string>
     <string name="index_settings_descr">Pobiera i zarządza plikami map przechowywanymi na urządzeniu</string>
@@ -1106,7 +1106,7 @@ OsmAnd jest otwarto-źródłowym programem do nawigacji z dostępem do szerokiej
 
     <string name="select_address_activity">Wybieranie adresu</string>
     <string name="local_openstreetmap_act_title">Modyfikacje OSM</string>
-    <string name="shared_string_more_actions">Więcej akcji</string>
+    <string name="shared_string_more_actions">Więcej czynności</string>
     <string name="favourites_list_activity">Wybieranie ulubionego miejsca</string>
     <string name="download_using_mobile_internet">Nie nawiązano połączenia za pośrednictwem Wi-Fi. Kontynuować pobieranie używając obecnego połączenia?</string>
     <string name="clear_destination">Usuń cel trasy</string>
@@ -2647,50 +2647,50 @@ Jeśli potrzebujesz pomocy podczas używania OsmAnd, prosimy o kontakt z naszym 
     <string name="rendering_attr_contourColorScheme_name">Schemat kolorów konturów</string>
     <string name="rendering_attr_surfaceIntegrity_name">Spójność nawierzchni dróg</string>
     <string name="christmas_poi">Bożonarodzeniowe miejsca</string>
-    <string name="save_track_min_speed_descr">Wybierz minimalną prędkość, aby punkt został zarejestrowany</string>
+    <string name="save_track_min_speed_descr">Rejestruje położenie po osiągnięciu określonej prędkości ruchu</string>
     <string name="rendering_attr_contourColorScheme_description">Schemat kolorów konturów</string>
     <string name="save_track_min_speed">Minimalna prędkość rejestrowania</string>
     <string name="save_track_min_distance">Minimalna odległość rejestrowania</string>
-    <string name="save_track_min_distance_descr">Wybierz minimalną odległość, aby punkt został zarejestrowany</string>
+    <string name="save_track_min_distance_descr">Rejestruje położenie po oddaleniu na określoną odległość od ostatniego położenia</string>
     <string name="save_track_precision">Minimalna precyzja rejestrowania</string>
-    <string name="save_track_precision_descr">Wybierz minimalną precyzję, aby punkt został zarejestrowany</string>
+    <string name="save_track_precision_descr">Rejestruje położenie po osiągnięciu zadanej precyzji</string>
     <string name="christmas_desc">Oczekując Świąt Bożego Narodzenia i Nowego Roku, możesz włączyć wyświetlanie użytecznych miejsc związanych ze Świętami: choinki, jarmarki, itp.</string>
-    <string name="christmas_desc_q">Pokazywać świąteczne miejsca?</string>
+    <string name="christmas_desc_q">Wyświetlać świąteczne miejsca?</string>
     <string name="shared_string_continue">Kontynuuj</string>
     <string name="shared_string_pause">Wstrzymaj</string>
-    <string name="shared_string_trip">Trasa</string>
-    <string name="shared_string_recorded">Zarejestrowana</string>
-    <string name="shared_string_record">Zarejestruj</string>
-    <string name="gpx_logging_no_data">Bez danych</string>
+    <string name="shared_string_trip">Ślad</string>
+    <string name="shared_string_recorded">Zarejestrowany</string>
+    <string name="shared_string_record">Rejestruj</string>
+    <string name="gpx_logging_no_data">Brak danych</string>
     <string name="release_2_5">"
- • Klikalne ikony na mapie
+ • Ikony mapy, które można kliknąć,
 
 
-• Wszechstronna selektywna wyszukiwarka użytecznych miejsc: wyszukuj restauracji po kuchni, kempingów według udogodnień
+• wszechstronna wyszukiwarka użytecznych miejsc: wyszukiwanie restauracji wg kuchni, kempingów wg udogodnień,
 
 
-• Nowy styl mapy \'OsmAnd Topo\' dla rowerzystów i pieszych turystów
+• nowy styl mapy „OsmAnd Topo” dla rowerzystów i pieszych turystów,
 
 
-• Ulepszone rejestrowanie tras
+• ulepszone rejestrowanie śladów,
 
 
-• Ulepszone powiadomienia nawigacji (Android Wear)
+• ulepszone powiadomienia nawigacji (Android Wear),
 
 
-• Mnóstwo innych ulepszeń i poprawek błędów
+• mnóstwo innych ulepszeń i poprawek błędów,
 
 
 i więcej...
  "</string>
-    <string name="trip_rec_notification_settings">Nagrywanie trasy (brak danych)</string>
-    <string name="trip_rec_notification_settings_desc">Pokaż komunikat który pozwoli rozpocząć nagrywanie trasy przez naciśnięcie przycisku Nagrywaj</string>
+    <string name="trip_rec_notification_settings">Rejestrowanie śladu (brak danych)</string>
+    <string name="trip_rec_notification_settings_desc">Wyświetla komunikat umożliwiający rozpoczęcie rejestrowania śladu po przyciśnięciu przycisku</string>
     <string name="shared_string_notifications">Powiadomienia</string>
     <string name="osmo_share_location">Udostępnij</string>
     <string name="osmo_pause_location">Wstrzymaj</string>
     <string name="osmo_service_running">Usługa OsMo jest uruchomiona</string>
-    <string name="gpx_no_tracks_title">Nie ma na razie żadnych tras. Proszę dodać jakąś trasę.</string>
-    <string name="gpx_no_tracks_title_folder">Można także dodać trasy do katalogu</string>
-    <string name="gpx_add_track">Dodaj trasę</string>
+    <string name="gpx_no_tracks_title">Nie ma na razie żadnych śladów. Proszę dodać ślad.</string>
+    <string name="gpx_no_tracks_title_folder">Można także dodać ślady do katalogu</string>
+    <string name="gpx_add_track">Dodaj ślad</string>
     <string name="gpx_appearance">Wygląd</string>
     </resources>
