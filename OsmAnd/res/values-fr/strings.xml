@@ -2464,4 +2464,8 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="osmo_share_location">Partager</string>
     <string name="osmo_service_running">Le service OsMo est actif</string>
     <string name="osmo_pause_location">Mettre en pause</string>
+    <string name="gpx_no_tracks_title">Vous n\'avez pas encore d’itinéraire enregistré</string>
+    <string name="gpx_no_tracks_title_folder">Vous pouvez aussi ajouter des itinéraires enregistrés au dossier</string>
+    <string name="gpx_add_track">Ajouter une trace</string>
+    <string name="gpx_appearance">Apparence</string>
     </resources>
