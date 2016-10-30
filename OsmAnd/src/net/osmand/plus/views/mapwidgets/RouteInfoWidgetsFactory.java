@@ -642,6 +642,7 @@ public class RouteInfoWidgetsFactory {
 
 		final TextInfoWidget bearingControl = new TextInfoWidget(map) {
 			private int cachedDegrees;
+			private float MIN_SPEED_FOR_HEADING = 1f;
 
 			public LatLon getPointToNavigate() {
 				TargetPoint p = map.getPointToNavigate();
@@ -687,7 +688,7 @@ public class RouteInfoWidgetsFactory {
 					if (relative) {
 						float b = -1000;
 						Float heading = getOsmandApplication().getLocationProvider().getHeading();
-						if (((myLocation.hasSpeed() && myLocation.getSpeed() < 11) || !myLocation.hasBearing())
+						if ((myLocation.getSpeed() < MIN_SPEED_FOR_HEADING || !myLocation.hasBearing())
 								&& heading != null) {
 							b = heading;
 						} else if (myLocation.hasBearing()) {
