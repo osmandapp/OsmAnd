@@ -2491,4 +2491,8 @@ Ak potrebuje pomoc s aplikáciou OsmAnd, kontaktuje podporu: support@osmand.net.
     <string name="osmo_share_location">Zdieľať</string>
     <string name="osmo_pause_location">Pozastaviť</string>
     <string name="osmo_service_running">Služba OsMo beží</string>
+    <string name="gpx_no_tracks_title">Nemáte zatiaľ žiadne stopy</string>
+    <string name="gpx_no_tracks_title_folder">Môžete pridať stopy do priečinka</string>
+    <string name="gpx_add_track">Pridať stopu</string>
+    <string name="gpx_appearance">Vzhľad</string>
     </resources>
