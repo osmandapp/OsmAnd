@@ -2689,8 +2689,8 @@ i więcej...
     <string name="osmo_share_location">Udostępnij</string>
     <string name="osmo_pause_location">Wstrzymaj</string>
     <string name="osmo_service_running">Usługa OsMo jest uruchomiona</string>
-    <string name="gpx_no_tracks_title">Nie masz na razie żadnych tras, prosimy dodać jakąś trasę</string>
-    <string name="gpx_no_tracks_title_folder">Możesz także dodać trasy do folderu</string>
+    <string name="gpx_no_tracks_title">Nie ma na razie żadnych tras. Proszę dodać jakąś trasę.</string>
+    <string name="gpx_no_tracks_title_folder">Można także dodać trasy do katalogu</string>
     <string name="gpx_add_track">Dodaj trasę</string>
     <string name="gpx_appearance">Wygląd</string>
     </resources>
