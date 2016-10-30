@@ -1822,7 +1822,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="proxy_host_descr">Задайце хостнэйм вашага проксі (напрыклад 127.0.0.1)</string>
 	<string name="proxy_port_title">Порт проксі</string>
 	<string name="proxy_port_descr">Задайце нумар парта вашага проксі (напрыклад 8118)</string>
-	<string name="proxy_pref_descr">Наладзіць Інтэрнэт сувязь праз проксі</string>
+	<string name="proxy_pref_descr">Наладзіць Інтэрнэт-сувязь праз проксі</string>
     <string name="settings_privacy">Прыватнасьць</string>
     <string name="rendering_attr_streetLighting_name">Вулічнае асьвятленьне</string>
     <string name="version_settings_descr">Сьцягваць начныя зборкі</string>
@@ -2662,7 +2662,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="edit_filter">Зьмяніць фільтар</string>
     <string name="subcategories">Падкатэгорыі</string>
     <string name="selected_categories">Абраныя катэгорыі</string>
-    <string name="create_custom_poi">Стварыць уласныя POI</string>
+    <string name="create_custom_poi">Стварыць уласны фільтар</string>
     <string name="custom_search">Уласны пошук</string>
     <string name="translit_names">Транслітарацыя назваў</string>
     <string name="osmo_share_location">Падзяліцца</string>
@@ -2675,4 +2675,15 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="shared_string_recorded">Запісана</string>
     <string name="shared_string_record">Запіс</string>
     <string name="gpx_logging_no_data">Няма зьвестак</string>
+    <string name="gpx_add_track">Дадаць сьлед</string>
+    <string name="gpx_appearance">Выгляд</string>
+    <string name="osmo_service_running">OsMo запушчаны</string>
+    <string name="trip_rec_notification_settings_desc">Паказваць апавяшчэньне, якое дазволіць пачаць запіс з дапамогай кнопкі \"Запіс падарожжа\"</string>
+    <string name="christmas_poi">Калядныя POI</string>
+    <string name="christmas_desc_q">Паказаць калядныя POI?</string>
+    <string name="rendering_value_light_brown_name">Сьветла-карычневы</string>
+    <string name="rendering_value_dark_brown_name">Цёмна-карычневы</string>
+    <string name="rendering_attr_surfaceIntegrity_name">Якасьць дарожнага пакрыцьця</string>
+    <string name="search_hint">Увядзіце назву горада, адрас, POI</string>
+    <string name="translit_name_if_miss">Транслітарацыя калі назва на %1$s адсутнічае</string>
     </resources>
