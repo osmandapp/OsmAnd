@@ -1779,7 +1779,10 @@ Opgenomen tracks kunnen worden gedeeld met vrienden of worden gebruikt als OSM-b
 	<string name="configure_map">Kaart instellen</string>
     <string name="search_radius_proximity">Binnen</string>
     <string name="osmo_device_not_found">Apparaat niet gevonden</string>
-    <string name="osmo_no_connection_msg">OsMo service is niet bereikbaar:\n- Controleer de verbinding;\n- Controleer de instellingen;\n- Kijk op Twitter: https://twitter.com/OsMomobi</string>
+    <string name="osmo_no_connection_msg">OsMo service is niet bereikbaar:
+- Controleer de Internetverbinding;
+- Controleer de instellingen;
+- Kijk op Twitter: https://twitter.com/OsMomobi</string>
     <string name="anonymous_user_hint">een anonieme gebruiker kan niet:\n- een groep aanmaken;\n- groepen en apparaten synchroniseren met de server;\n- groepen en apparaten beheren in een eigen omgeving.</string>
     <string name="anonymous_user">Anonieme gebruiker</string>
     <string name="logged_as">Ingelogd als %1$s</string>
@@ -1844,7 +1847,7 @@ Opgenomen tracks kunnen worden gedeeld met vrienden of worden gebruikt als OSM-b
     <string name="version_settings">Builds</string>
     <string name="rendering_attr_streetLighting_name">Straatverlichting</string>
     <string name="proxy_pref_title">Proxy</string>
-    <string name="proxy_pref_descr">Stel een proxy voor internetcommunicatie in</string>
+    <string name="proxy_pref_descr">Stel een proxy voor Internetcommunicatie in</string>
     <string name="settings_privacy">Privacy</string>
     <string name="points">Punten</string>
     
@@ -2627,24 +2630,24 @@ Als je hulp nodig hebt met OsmAnd: neem contact op met ons support team: support
     <string name="search_another_country">Kies een andere regio</string>
     <string name="search_map">Kaart zoeken…</string>
     <string name="location_not_found">Positie niet gevonden</string>
-    <string name="no_inet_connection">Geen internetverbinding</string>
+    <string name="no_inet_connection">Geen Internetverbinding</string>
     <string name="no_inet_connection_desc_map">Noodzakelijk om kaarten te downloaden.</string>
     <string name="search_location">Zoeken naar positie…</string>
     <string name="storage_free_space">Vrije geheugenruimte</string>
     <string name="give_permission">Geef toestemming</string>
     <string name="allow_access_location">Locatiegegevens toestaan</string>
-    <string name="first_usage_greeting">"Krijg routebeschrijvingen en ontdek nieuwe plaatsen,  zonder internetverbinding"</string>
+    <string name="first_usage_greeting">"Krijg routebeschrijvingen en ontdek nieuwe plaatsen,  zonder Internetverbinding"</string>
     <string name="search_my_location">Zoek mijn positie</string>
     <string name="no_update_info">Geen updates tonen</string>
     <string name="clear_tile_data">Alle opgeslagen kaarttegels wissen</string>
     <string name="osm_live_payment_desc">Het abonnementsgeld is maandelijks. Het abonnement kan elk moment via Google Play worden gestopt.</string>
     <string name="donation_to_osm">Doneer aan de OpenStreetMap-community</string>
     <string name="donation_to_osm_desc">Een deel van de donatie wordt gegeven aan OSM-gebruikers die de kaart verbeteren. Het abonnementsgeld verandert niet.</string>
-    <string name="osm_live_subscription_desc">Het abonnement geeft toegang tot elk uur, elke dag of elke week Live Updates en onbeperkte downloads van kaarten van de gehele wereld.</string>
+    <string name="osm_live_subscription_desc">Het abonnement geeft toegang tot Live Updates (elk uur, elke dag of elke week) en onbeperkte downloads van kaarten van de gehele wereld.</string>
     <string name="get_it">Abonnement nemen</string>
     <string name="get_for">Abonneren voor %1$s</string>
     <string name="get_for_month">Abonneren voor %1$s per maand</string>
-    <string name="osm_live_banner_desc">Krijg onbeperkte downloads van kaarten en updates vaker dan eens per maand: elk uur, elke dag of elke week.</string>
+    <string name="osm_live_banner_desc">Krijg onbeperkte downloads van kaarten en updates vaker dan eens per maand: wekelijks, dagelijks of elk uur.</string>
     <string name="osmand_plus_banner_desc">Volledige versie van OsmAnd met onbeperkte downloads van kaarten en maandelijkse kaart-updates.</string>
     <string name="skip_map_downloading_desc">Er is geen kaart geïnstalleerd. Kies een kaart uit de lijst, of download later kaarten via Menu - %1$s.</string>
     <string name="first_usage_wizard_desc">Kies kaarten om te downloaden aan de hand van uw huidige locatie.</string>
@@ -2659,7 +2662,7 @@ Als je hulp nodig hebt met OsmAnd: neem contact op met ons support team: support
     <string name="save_filter">Filter opslaan</string>
     <string name="delete_filter">Wis filter</string>
     <string name="new_filter">Nieuw filter</string>
-    <string name="new_filter_desc">Geen een naam aan het nieuwe filter. Deze naam vindt u dan in de lijst Categorieën.</string>
+    <string name="new_filter_desc">Geen een naam aan het nieuwe filter. Deze naam wordt aan de lijst Categorieën toegevoegd.</string>
     <string name="custom_search">Eigen zoekfilter</string>
     <string name="edit_filter">Filter bewerken</string>
     <string name="subcategories">Subcategorieën</string>
@@ -2671,14 +2674,14 @@ Als je hulp nodig hebt met OsmAnd: neem contact op met ons support team: support
     <string name="rendering_attr_contourColorScheme_name">Kleur van hoogtelijnen</string>
     <string name="rendering_attr_surfaceIntegrity_name">Kwaliteit van het wegdek</string>
     <string name="christmas_poi">Kerstmis-POI</string>
-    <string name="christmas_desc">Voor kerst en het nieuwjaar: de POI voor kerstbomen en kerstmarkten...</string>
+    <string name="christmas_desc">Voor Kerst en Oud en Nieuw: de POI voor kerstbomen en kerstmarkten enz.</string>
     <string name="christmas_desc_q">Kerst-POI tonen?</string>
     <string name="rendering_attr_contourColorScheme_description">Kleur van hoogtelijnen</string>
     <string name="save_track_min_speed">Minimum snelheid om te registreren</string>
     <string name="save_track_min_speed_descr">Kies de snelheid waarboven de GPX-opname wordt geactiveerd</string>
-    <string name="save_track_min_distance">Minimum afstand om te registereren</string>
-    <string name="save_track_min_distance_descr">Kies de afstand waarboven het loggen wordt geactiveerd</string>
-    <string name="save_track_precision">Minimale nauwkeurigheid van het registreren</string>
+    <string name="save_track_min_distance">GPX-opname: bewegingsdetectie</string>
+    <string name="save_track_min_distance_descr">Kies de minumumafstand vanaf het vorige punt, waarboven een nieuw GPX-punt wordt opgenomen</string>
+    <string name="save_track_precision">Minimale GPS-nauwkeurigheid</string>
     <string name="save_track_precision_descr">Minimaal gewenste nauwkeurigheid van GPX-opname instellen</string>
     <string name="shared_string_continue">Doorgaan</string>
     <string name="shared_string_pause">Pauze</string>
