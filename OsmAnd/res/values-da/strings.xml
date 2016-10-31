@@ -2680,7 +2680,7 @@ Hvis du  ønsker at støtte OsmAnd og OSM, er dette en god måde at gøre det p�
     <string name="christmas_desc_q">Vis jule-interessepunkter (IP)?</string>
     <string name="save_track_min_speed">Minimumshastighed for logning</string>
     <string name="save_track_min_speed_descr">Indstil minimumshastighed før et punkt logges</string>
-    <string name="save_track_min_distance">Minimumsafstand for logning</string>
+    <string name="save_track_min_distance">Logning ved detektering af bevægelse</string>
     <string name="save_track_min_distance_descr">Indstil minimumsafstand fra sidste position før et punkt logges</string>
     <string name="save_track_precision">Mindste nøjagtighed for logning</string>
     <string name="save_track_precision_descr">Indstil minimum præcision før et punkt logges</string>
