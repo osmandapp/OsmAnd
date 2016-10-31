@@ -251,6 +251,7 @@ public class NavigationService extends Service implements LocationListener {
 	@Override
 	public void onTaskRemoved(Intent rootIntent) {
 		OsmandApplication app = ((OsmandApplication) getApplication());
+		app.getNotificationHelper().removeNotifications();
 		if (app.getNavigationService() != null &&
 				app.getSettings().DISABLE_RECORDING_ONCE_APP_KILLED.get()) {
 			OsMoPlugin plugin = OsmandPlugin.getEnabledPlugin(OsMoPlugin.class);
@@ -259,7 +260,6 @@ public class NavigationService extends Service implements LocationListener {
 					plugin.getTracker().disableTracker();
 				}
 			}
-			//app.getNotificationHelper().removeNotifications();
 			NavigationService.this.stopSelf();
 		}
 	}
