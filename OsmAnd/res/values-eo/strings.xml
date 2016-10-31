@@ -2522,4 +2522,5 @@ kaj pli...
     <string name="gpx_add_track">Aldoni kurson</string>
     <string name="gpx_appearance">Aspekto</string>
     <string name="rendering_value_fine_name">Eteta</string>
+    <string name="route_calculation">Difinado de vojo</string>
     </resources>
