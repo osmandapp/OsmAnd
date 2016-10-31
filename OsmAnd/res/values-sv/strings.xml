@@ -243,7 +243,7 @@ Du hittar din parkeringsplats och -tid på instrumentbrädan och i widgeten på 
     <string name="prefs_plugins_descr">Insticksmoduler aktiverar avancerade inställningar samt ger ytterligare funktionalitet</string>
     <string name="prefs_plugins">Insticksmoduler</string>
 
-    <string name="osm_editing_plugin_description">"Med denna modul kan OsmAnd användas för att göra bidrag till OSM såsom samlande/modifierande av OSM POI-objekt, öppnande/kommenterande av OSM-buggar, och bidragande med inspelade GPX-filer. OSM är ett globalt kartprojekt inom public domain, För mer info, se  http://openstreetmap.org. Aktivt deltagande uppskattas och bidrag kan ges direkt i OsmAnd om du anger dina personiga OSM-referenser i appen."</string>
+    <string name="osm_editing_plugin_description">"Med denna modul kan OsmAnd användas för att göra bidrag till OSM såsom samlande/modifierande av OSM POI-objekt, öppnande/kommenterande av OSM-buggar, och bidragande med inspelade GPX-filer. OSM är ett globalt kartprojekt inom public domain, För mer info, se  https://openstreetmap.org. Aktivt deltagande uppskattas och bidrag kan ges direkt i OsmAnd om du anger dina personiga OSM-referenser i appen."</string>
     <string name="vector_maps_may_display_faster_on_some_devices">Vektorkartor ritas sannolikt upp snabbare. Fungerar kanske inte så bra på vissa enheter.</string>
     <string name="play_commands_of_currently_selected_voice">Spela upp kommandon med vald röst</string>
     <string name="test_voice_prompts">Test av röstmeddelanden</string>

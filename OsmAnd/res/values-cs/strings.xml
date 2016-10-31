@@ -690,7 +690,7 @@ Dlaždicové mapy můžete získat přímo z online zdrojů nebo si je můžete 
     <string name="plugins_screen">Správce modulů</string>
     <string name="prefs_plugins_descr">Moduly umožňují zapnout pokročilé nastavení a přídavné funkce</string>
     <string name="prefs_plugins">Moduly</string>
-    <string name="osm_editing_plugin_description">Pomocí tohoto modulu může být OsmAnd použit na přispívání do OSM, například vytvářením nebo úpravami POI, vytvářením nebo komentováním OSM chyb a přispíváním zaznamenanými GPX soubory. OSM je celosvětový komunitní projekt mapování. Pro více detailů se podívejte na http://openstreetmap.org. Aktivní účast je vítaná a příspěvky mohou být vytvářené přímo v OsmAnd, jestliže zadáte své osobní přihlašovací údaje do OSM.</string>
+    <string name="osm_editing_plugin_description">Pomocí tohoto modulu může být OsmAnd použit na přispívání do OSM, například vytvářením nebo úpravami POI, vytvářením nebo komentováním OSM chyb a přispíváním zaznamenanými GPX soubory. OSM je celosvětový komunitní projekt mapování. Pro více detailů se podívejte na https://openstreetmap.org. Aktivní účast je vítaná a příspěvky mohou být vytvářené přímo v OsmAnd, jestliže zadáte své osobní přihlašovací údaje do OSM.</string>
     <string name="vector_maps_may_display_faster_on_some_devices">Akcelerace vykreslování pomocí \'Android native\' knihovny. Vektorové mapy se zpravidla vykreslují rychleji, pokud je tato možnost zaškrtnuta. Avšak na některých zařízeních tato funkce nemusí fungovat.</string>
     <string name="play_commands_of_currently_selected_voice">Přehrát hlasové pokyny zvoleným hlasem</string>
     <string name="debugging_and_development">Vývoj a ladění OsmAnd</string>

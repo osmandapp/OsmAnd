@@ -90,7 +90,7 @@ Dlaždicové mapy môžete získať priamo zo zdrojov na Internete, alebo ich m�
     <string name="plugins_screen">Zásuvné moduly</string>
     <string name="prefs_plugins_descr">Zásuvné moduly aktivujú pokročilé nastavenia a dodatočné funkcie</string>
     <string name="prefs_plugins">Zásuvné moduly</string>
-    <string name="osm_editing_plugin_description">Pomocou tohto modulu môže byť OsmAnd použitý na prispievanie do OSM, napr. vytváraním alebo úpravami OSM objektov záujmu, otváraním alebo komentovaním OSM chýb a prispievaním zaznamenanými GPX súbormi. OSM je celosvetový komunitný projekt. Pozri http://openstreetmap.org pre podrobnosti. Aktívna účasť je vítaná a príspevky môžu byť vytvárané priamo v OsmAnd, ak v aplikácii uvediete svoje registračné údaje do OSM.</string>
+    <string name="osm_editing_plugin_description">Pomocou tohto modulu môže byť OsmAnd použitý na prispievanie do OSM, napr. vytváraním alebo úpravami OSM objektov záujmu, otváraním alebo komentovaním OSM chýb a prispievaním zaznamenanými GPX súbormi. OSM je celosvetový komunitný projekt. Pozri https://openstreetmap.org pre podrobnosti. Aktívna účasť je vítaná a príspevky môžu byť vytvárané priamo v OsmAnd, ak v aplikácii uvediete svoje registračné údaje do OSM.</string>
     <string name="vector_maps_may_display_faster_on_some_devices">Vektorové mapy môžu byť zobrazované rýchlejšie. Nemusí správne fungovať na niektorých zariadeniach.</string>
     <string name="play_commands_of_currently_selected_voice">Prehrať povely zvoleného hlasu</string>
     <string name="debugging_and_development">Vývoj OsmAndu</string>

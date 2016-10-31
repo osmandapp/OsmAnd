@@ -395,7 +395,7 @@
     <string name="prefs_plugins_descr">Добавките внасят допълнителна функционалност на приложението</string>
     <string name="prefs_plugins">Добавки</string>
 
-    <string name="osm_editing_plugin_description">Добавка за изпращане на данни към OSM - обекти (POI), бележки, GPX записани маршрути. За подробности по проекта OSM посетете http://openstreetmap.org. Вашият принос към проекта ще бъде оценен с благодарности. Необходимо е да се регистрирате на сайта на OSM и да въведете Вашето потребителско име и парола в това приложение.</string>
+    <string name="osm_editing_plugin_description">Добавка за изпращане на данни към OSM - обекти (POI), бележки, GPX записани маршрути. За подробности по проекта OSM посетете https://openstreetmap.org. Вашият принос към проекта ще бъде оценен с благодарности. Необходимо е да се регистрирате на сайта на OSM и да въведете Вашето потребителско име и парола в това приложение.</string>
     <string name="vector_maps_may_display_faster_on_some_devices">По-бързо изчертаване на векторни карти. Възможно е да не работи добре при някои устройства.</string>
     <string name="play_commands_of_currently_selected_voice">Анонсиране със зададения гласов пакет</string>
     <string name="debugging_and_development">За разработчици</string>

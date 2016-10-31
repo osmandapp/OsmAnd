@@ -248,7 +248,7 @@ Karten-Kacheln können direkt online bezogen werden, und werden im OsmAnd-Untero
 	<string name="plugins_screen">Plugins</string>
 	<string name="prefs_plugins_descr">Module aktivieren Experteneinstellungen und Zusatzdienste</string>
 	<string name="prefs_plugins">Plugins</string>
-	<string name="osm_editing_plugin_description">Dieses Plugin ermöglicht das Erstellen und Bearbeiten von OSM-POI-Objekten und -Fehlermeldungen, sowie das Hochladen von GPX-Dateien (benötigt ein OSM-Benutzerkonto).\n\nOSM ist ein globales Kartografierungsprojekt, Details siehe http://openstreetmap.org. Jeder ist eingeladen, aktiv mitzuarbeiten, Mitarbeit kann auch direkt via OsmAnd erfolgen, wenn man in den OsmAnd-Plugin-Einstellungen sein OSM-Benutzerkonto hinterlegt.</string>
+	<string name="osm_editing_plugin_description">Dieses Plugin ermöglicht das Erstellen und Bearbeiten von OSM-POI-Objekten und -Fehlermeldungen, sowie das Hochladen von GPX-Dateien (benötigt ein OSM-Benutzerkonto).\n\nOSM ist ein globales Kartografierungsprojekt, Details siehe https://openstreetmap.org. Jeder ist eingeladen, aktiv mitzuarbeiten, Mitarbeit kann auch direkt via OsmAnd erfolgen, wenn man in den OsmAnd-Plugin-Einstellungen sein OSM-Benutzerkonto hinterlegt.</string>
 	<string name="vector_maps_may_display_faster_on_some_devices">Vektorkarten werden eventuell schneller angezeigt. Funktioniert nur auf manchen Geräten.</string>
 	
 	<string name="play_commands_of_currently_selected_voice">Spiele Ansagen der ausgewählten Stimme ab</string>
