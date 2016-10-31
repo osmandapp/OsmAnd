@@ -38,7 +38,7 @@
     <string name="rendering_attr_contourColorScheme_description">Contour lines color scheme</string>
     <string name="save_track_min_speed">Logging minimum speed</string>
     <string name="save_track_min_speed_descr">Set minimum speed for a point to be logged</string>
-    <string name="save_track_min_distance">Logging minimum distance</string>
+    <string name="save_track_min_distance">Logging motion detection</string>
     <string name="save_track_min_distance_descr">Set minimum distance from last position for point to be logged</string>
     <string name="save_track_precision">Logging minimum precision</string>
     <string name="save_track_precision_descr">Set minimum precision for a point to be logged</string>
