@@ -2650,7 +2650,7 @@ Jeśli potrzebujesz pomocy podczas używania OsmAnd, prosimy o kontakt z naszym 
     <string name="save_track_min_speed_descr">Rejestruje położenie po osiągnięciu określonej prędkości ruchu</string>
     <string name="rendering_attr_contourColorScheme_description">Schemat kolorów konturów</string>
     <string name="save_track_min_speed">Minimalna prędkość rejestrowania</string>
-    <string name="save_track_min_distance">Minimalna odległość rejestrowania</string>
+    <string name="save_track_min_distance">Wykrywa</string>
     <string name="save_track_min_distance_descr">Rejestruje położenie po oddaleniu na określoną odległość od ostatniego położenia</string>
     <string name="save_track_precision">Minimalna precyzja rejestrowania</string>
     <string name="save_track_precision_descr">Rejestruje położenie po osiągnięciu zadanej precyzji</string>
@@ -2689,7 +2689,7 @@ i więcej...
     <string name="osmo_share_location">Udostępnij</string>
     <string name="osmo_pause_location">Wstrzymaj</string>
     <string name="osmo_service_running">Usługa OsMo jest uruchomiona</string>
-    <string name="gpx_no_tracks_title">Nie ma na razie żadnych śladów. Proszę dodać ślad.</string>
+    <string name="gpx_no_tracks_title">Nie ma na razie żadnych śladów</string>
     <string name="gpx_no_tracks_title_folder">Można także dodać ślady do katalogu</string>
     <string name="gpx_add_track">Dodaj ślad</string>
     <string name="gpx_appearance">Wygląd</string>
