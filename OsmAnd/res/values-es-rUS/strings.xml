@@ -2483,4 +2483,5 @@ Si amas a OsmAnd, OSM y quieres apoyarlos, esta es una perfecta manera de hacerl
     <string name="gpx_no_tracks_title_folder">También puedes añadir trazas a la carpeta</string>
     <string name="gpx_add_track">Añadir traza</string>
     <string name="gpx_appearance">Apariencia</string>
+    <string name="rendering_value_fine_name">Muy fino</string>
     </resources>
