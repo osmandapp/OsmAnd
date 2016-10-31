@@ -2465,7 +2465,7 @@ Se vi bezonas helpon pri OsmAnd aplikaĵo, bonvolu kontakti nian helpantaron: su
     <string name="selected_categories">Elektitaj kategorioj</string>
     <string name="create_custom_poi">Krei propran filtrilon</string>
     <string name="custom_search">Propra serĉado</string>
-    <string name="edit_filter">Redakti filtrilon</string>
+    <string name="edit_filter">Redakti kategoriojn</string>
     <string name="subcategories">Subkategorioj</string>
     <string name="translit_names">Transliterumi nomojn</string>
     <string name="translit_name_if_miss">Transliterumas se nomo en %1$s mankas</string>
@@ -2477,7 +2477,7 @@ Se vi bezonas helpon pri OsmAnd aplikaĵo, bonvolu kontakti nian helpantaron: su
     <string name="rendering_attr_contourColorScheme_description">Kolor-skemo de konturoj</string>
     <string name="save_track_min_speed">Minimuma rapido por registrado</string>
     <string name="save_track_min_speed_descr">Elektu minimuman rapidon por punkto esti registrita</string>
-    <string name="save_track_min_distance">Minimuma distanco por registrado</string>
+    <string name="save_track_min_distance">Detekto de movado por registrado</string>
     <string name="save_track_min_distance_descr">Elektu minimuman distancon por punkto esti registrita</string>
     <string name="save_track_precision">Minimuma precizo por registrado</string>
     <string name="save_track_precision_descr">Elektu minimuman precizon por punkto esti registrita</string>
