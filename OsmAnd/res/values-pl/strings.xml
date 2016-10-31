@@ -2694,4 +2694,5 @@ i więcej...
     <string name="gpx_add_track">Dodaj ślad</string>
     <string name="gpx_appearance">Wygląd</string>
     <string name="rendering_value_fine_name">Bardzo cienki</string>
+    <string name="route_calculation">Wyznaczanie trasy</string>
     </resources>
