@@ -2650,7 +2650,7 @@ Jeśli potrzebujesz pomocy podczas używania OsmAnd, prosimy o kontakt z naszym 
     <string name="save_track_min_speed_descr">Rejestruje położenie po osiągnięciu określonej prędkości ruchu</string>
     <string name="rendering_attr_contourColorScheme_description">Schemat kolorów konturów</string>
     <string name="save_track_min_speed">Minimalna prędkość rejestrowania</string>
-    <string name="save_track_min_distance">Wykrywa</string>
+    <string name="save_track_min_distance">Wykrywanie ruchu podczas rejestracji</string>
     <string name="save_track_min_distance_descr">Rejestruje położenie po oddaleniu na określoną odległość od ostatniego położenia</string>
     <string name="save_track_precision">Minimalna precyzja rejestrowania</string>
     <string name="save_track_precision_descr">Rejestruje położenie po osiągnięciu zadanej precyzji</string>
