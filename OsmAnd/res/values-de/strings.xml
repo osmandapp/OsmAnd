@@ -2527,7 +2527,7 @@ Wenn Sie OsmAnd und OSM lieben und unterstützen wollen, so ist dies die perfekt
     <string name="selected_categories">Ausgewählte Kategorien</string>
     <string name="create_custom_poi">Benutzerdefinierten Filter erstellen</string>
     <string name="custom_search">Benutzerdefinierte Suche</string>
-    <string name="edit_filter">Filter bearbeiten</string>
+    <string name="edit_filter">Kategorien bearbeiten</string>
     <string name="subcategories">Unterkategorien</string>
     <string name="translit_names">Namen umschreiben</string>
     <string name="translit_name_if_miss">Umschreiben, wenn Namen in %1$s fehlen</string>
@@ -2574,4 +2574,5 @@ und vieles mehr ...
     <string name="osmo_service_running">OsMo Dienst wird ausgeführt</string>
     <string name="osmo_pause_location">Pause</string>
     <string name="osmo_share_location">Teilen</string>
+    <string name="gpx_appearance">Aussehen</string>
     </resources>
