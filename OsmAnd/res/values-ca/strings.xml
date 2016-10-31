@@ -2460,14 +2460,14 @@ Si aprecieu OsmAnd  i OSM i voleu ajudar-los, és la via perfecta per fer-ho."</
     <string name="selected_categories">Categories seleccionades</string>
     <string name="create_custom_poi">Crea filtre personalitzat</string>
     <string name="custom_search">Cerca personalitzada</string>
-    <string name="edit_filter">Edita el filtre</string>
+    <string name="edit_filter">Edita les categories</string>
     <string name="subcategories">Subcategories</string>
     <string name="translit_names">Translitera els noms</string>
     <string name="translit_name_if_miss">Si no hi ha noms en %1$s translitera els propis</string>
     <string name="rendering_attr_contourColorScheme_description">Esquema de color de les línies de contorn</string>
     <string name="save_track_min_speed">Velocitat mínima per registrar la ruta</string>
     <string name="save_track_min_speed_descr">Establiu la velocitat mínima d\'un element que provocarà l\'enregistrament</string>
-    <string name="save_track_min_distance">Desplaçament mínim de registre</string>
+    <string name="save_track_min_distance">Detecció de moviment per l\'enregistrament</string>
     <string name="save_track_min_distance_descr">Establiu el desplaçament mínim que provocarà l\'enregistrament</string>
     <string name="save_track_precision">Precisió mínima de l\'enregistrament</string>
     <string name="save_track_precision_descr">Trieu la precisió mínima acceptable d\'una posició per enregistrar-la</string>
