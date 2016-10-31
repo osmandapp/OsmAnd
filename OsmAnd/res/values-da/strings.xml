@@ -2723,4 +2723,5 @@ Hvis du  ønsker at støtte OsmAnd og OSM, er dette en god måde at gøre det p�
     <string name="gpx_add_track">Tilføj spor</string>
     <string name="gpx_appearance">Udseende</string>
     <string name="rendering_value_fine_name">Fin</string>
+    <string name="route_calculation">Ruteberegning</string>
     </resources>
