@@ -1261,7 +1261,7 @@
 	<string name="poi_piste_grooming_scooter">Motoneta</string>
 	<string name="poi_piste_grooming_skating">Patinaje</string>
 	<string name="poi_piste_grooming_no">No</string>
-	<string name="poi_piste_grooming_mogul">Magnate</string>
+	<string name="poi_piste_grooming_mogul">Mogul (acrobático)</string>
 <string name="poi_garden_type_residential">Jardín residencial</string>
 	<string name="poi_garden_type_community">Jardín comunitario</string>
 	<string name="poi_garden_type_private">Jardín privado</string>
@@ -1507,8 +1507,8 @@
 	<string name="poi_second_hand_yes">Con artículos usados</string>
 	<string name="poi_second_hand_no">Sin artículos usados</string>
 	<string name="poi_second_hand_only">Sólo artículos usados</string>
-	<string name="poi_service_parts">Partes</string>
-	<string name="poi_service_dealer">Repartidor</string>
+	<string name="poi_service_parts">Autopartes</string>
+	<string name="poi_service_dealer">Concesionaria</string>
 	<string name="poi_service_repair">Reparación</string>
 	<string name="poi_service_repair_no">Sin reparación</string>
 	<string name="poi_service_electrical">Reparación de vehículos eléctricos</string>
@@ -1955,7 +1955,7 @@
 	<string name="poi_openfire_no">Prohibido encender fuego</string>
 	<string name="poi_backcountry_yes">Si</string>
 	<string name="poi_backcountry_no">No</string>
-	<string name="poi_scout_yes">Permitido campamento scout</string>
+	<string name="poi_scout_yes">Permitido</string>
 	<string name="poi_scout_no">Prohibido campamento scout</string>
 	<string name="poi_group_only_yes">Sólo para grupos</string>
 	<string name="poi_group_only_no">Sólo para grupos: No</string>
@@ -1968,7 +1968,7 @@
 	<string name="poi_shower_cold">Ducha fría</string>
 	<string name="poi_shower_indoor">Ducha interior</string>
 	<string name="poi_caravans_yes">Si</string>
-	<string name="poi_caravans_no">No</string>
+	<string name="poi_caravans_no">Casas rodante: No</string>
 	<string name="poi_impromptu_yes">Improvisado: Si</string>
 	<string name="poi_impromptu_no">Improvisado: No</string>
 	<string name="poi_sanitary_dump_station_yes">Con estación de descarga sanitaria</string>
@@ -1980,7 +1980,7 @@
 	<string name="poi_power_supply_cee_7_5">Fuente de alimentación (enchufe): CEE 7/5</string>
 	<string name="poi_power_supply_nema_5_15">Fuente de alimentación (enchufe): NEMA 5-15</string>
 	<string name="poi_capacity_tents">Carpas máximas</string>
-	<string name="poi_capacity_caravans">Casas rodantes máximas</string>
+	<string name="poi_capacity_caravans">Casas rodante máximas</string>
 	<string name="poi_dog_yes">Permitido perros</string>
 	<string name="poi_dog_no">Prohibido perros</string>
 <string name="poi_power_supply_cee_17_blue">Fuente de alimentación (enchufe): CEE 17 azul</string>
@@ -2527,7 +2527,7 @@
 	<string name="poi_health_facility_type_nursing_home">Tipo de centro médico: Geriátrico</string>
 	<string name="poi_health_facility_type_support_group_home">Tipo de centro médico: Grupo de apoyo domiciliario</string>
 
-	<string name="poi_health_specialty_palliative_medicine_yes">Especialidad médica: Medicina paliativa</string>
+	<string name="poi_health_specialty_palliative_medicine_yes">Medicina paliativa</string>
 
 <string name="poi_suction_point">Punto de succión</string>
 
@@ -2700,7 +2700,7 @@
 	<string name="poi_crossing_supervision_attendant">Cruce supervisado personalmente</string>
 	<string name="poi_crossing_supervision_camera">Cruce supervisado con cámara</string>
 
-<string name="poi_dispensing_yes">Vende con receta médica</string>
+<string name="poi_dispensing_yes">Si</string>
 	<string name="poi_dispensing_no">Vende sin receta médica</string>
 
 	<string name="poi_aerodrome_type_international">Tipo: Internacional</string>
@@ -2982,7 +2982,7 @@
 	<string name="poi_cuisine_dessert">Postres</string>
 	<string name="poi_cuisine_canteen">Cantina</string>
 	<string name="poi_cuisine_tacos">Tacos</string>
-	<string name="poi_cuisine_piadina">Piadina</string>
+	<string name="poi_cuisine_piadina">Piadina romañola</string>
 	<string name="poi_cuisine_falafel">Faláfel</string>
 	<string name="poi_cuisine_smoothie">Smoothie (batido espeso)</string>
 	<string name="poi_cuisine_snack">Picadas</string>
