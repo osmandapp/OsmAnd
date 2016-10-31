@@ -101,8 +101,8 @@ public class StartGPSStatus extends OsmAndAction {
 		for(GpsStatusApps g : values) {
 			res[i++] = g.stringRes;
 		}
-		OsmandMapTileView view = mapActivity.getMapView();
 		AlertDialog.Builder builder = new AlertDialog.Builder(mapActivity);
+		builder.setTitle(R.string.gps_status);
 		LinearLayout ll = new LinearLayout(activity);
 		final ListView lv = new ListView(activity);
 		lv.setPadding(7, 3, 7, 0);
