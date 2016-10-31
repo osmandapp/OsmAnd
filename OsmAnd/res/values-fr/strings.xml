@@ -2413,7 +2413,7 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="selected_categories">Catégories sélectionnées</string>
     <string name="create_custom_poi">Créer un filtre personnalisé</string>
     <string name="custom_search">Recherche personnalisée</string>
-    <string name="edit_filter">Modifier le filtre</string>
+    <string name="edit_filter">Modifier les catégories</string>
     <string name="subcategories">Sous-catégories</string>
     <string name="translit_names">Transcrire les noms</string>
     <string name="rendering_value_light_brown_name">Marron clair</string>
@@ -2427,7 +2427,7 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="rendering_attr_contourColorScheme_description">Couleurs des courbes de niveau</string>
     <string name="save_track_min_speed">Vitesse minimale pour enregistrer</string>
     <string name="save_track_min_speed_descr">Indiquez une vitesse minimale à partir de laquelle déclencher l\'enregistrement</string>
-    <string name="save_track_min_distance">Distance minimale pour enregistrer</string>
+    <string name="save_track_min_distance">Détection du déplacement pour enregistrer</string>
     <string name="save_track_min_distance_descr">Indiquez une distance minimale à partir de laquelle déclencher l\'enregistrement</string>
     <string name="save_track_precision">Seuils d\'enregistrement</string>
     <string name="save_track_precision_descr">Sélectionnez un seuil minimal pour l’enregistrement d\'un point</string>
@@ -2468,4 +2468,6 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="gpx_no_tracks_title_folder">Vous pouvez aussi ajouter des itinéraires enregistrés au dossier</string>
     <string name="gpx_add_track">Ajouter une trace</string>
     <string name="gpx_appearance">Apparence</string>
+    <string name="rendering_value_fine_name">Bien</string>
+    <string name="translit_name_if_miss">Transformer si le nom %1$s est absent</string>
     </resources>
