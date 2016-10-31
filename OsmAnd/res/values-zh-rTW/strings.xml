@@ -2596,7 +2596,7 @@ Facebook：https://www.facebook.com/osmandapp
     <string name="osm_live_subscription_desc">啟用認購可每小時、每天、每週的更新以及世界各地所有的地圖無限制的下載。</string>
     <string name="driving_region_australia">澳洲</string>
     <string name="lang_kab">卡拜爾</string>
-    <string name="edit_filter">編輯篩選</string>
+    <string name="edit_filter">編輯分類</string>
     <string name="shared_string_filters">篩選</string>
     <string name="selected_categories">已選取分類</string>
     <string name="subcategories">子分類</string>
@@ -2613,7 +2613,7 @@ Facebook：https://www.facebook.com/osmandapp
     <string name="rendering_attr_contourColorScheme_description">等高線的色彩調配</string>
     <string name="save_track_min_speed">記錄最低的速度</string>
     <string name="save_track_min_speed_descr">設定最低速度的一個點用以記錄</string>
-    <string name="save_track_min_distance">記錄最短距離</string>
+    <string name="save_track_min_distance">記錄移動檢測</string>
     <string name="save_track_min_distance_descr">從最後位置的一個點設定最短距離用以記錄</string>
     <string name="save_track_precision">記錄最低的精確度</string>
     <string name="save_track_precision_descr">設定最低精確度的一個點用以記錄</string>
