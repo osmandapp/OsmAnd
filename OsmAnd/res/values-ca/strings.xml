@@ -2517,4 +2517,5 @@ Si aprecieu OsmAnd  i OSM i voleu ajudar-los, és la via perfecta per fer-ho."</
     <string name="gpx_add_track">Afegeix traça</string>
     <string name="gpx_appearance">Aparença</string>
     <string name="rendering_value_fine_name">Bé</string>
+    <string name="route_calculation">Càlcul de ruta</string>
     </resources>
