@@ -16,7 +16,6 @@ import android.os.IBinder;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
 import android.os.SystemClock;
-import android.support.v4.app.NotificationCompat.Builder;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -102,7 +101,9 @@ public class NavigationService extends Service implements LocationListener {
 			final Intent serviceIntent = new Intent(ctx, NavigationService.class);
 			ctx.stopService(serviceIntent);
 		} else {
-			((OsmandApplication) getApplication()).getNotificationHelper().refreshNotifications();
+			NotificationHelper helper = ((OsmandApplication) getApplication()).getNotificationHelper();
+			helper.updateTopNotification();
+			helper.refreshNotifications();
 		}
 	}
 
@@ -151,14 +152,10 @@ public class NavigationService extends Service implements LocationListener {
 
 		// registering icon at top level
 		// Leave icon visible even for navigation for proper display
-		OsmandNotification osmandNotification = app.getNotificationHelper().getTopNotification();
-		if (osmandNotification != null) {
-			Builder notification = osmandNotification.buildNotification();
-			if (notification != null) {
-				Notification n = notification.build();
-				osmandNotification.setupNotification(n);
-				startForeground(osmandNotification.getUniqueId(), n);
-			}
+		Notification notification = app.getNotificationHelper().buildTopNotification();
+		if (notification != null) {
+			startForeground(OsmandNotification.TOP_NOTIFICATION_SERVICE_ID, notification);
+			app.getNotificationHelper().refreshNotifications();
 		}
 		return START_REDELIVER_INTENT;
 	}
@@ -205,6 +202,7 @@ public class NavigationService extends Service implements LocationListener {
 
 		// remove notification
 		stopForeground(Boolean.TRUE);
+		app.getNotificationHelper().updateTopNotification();
 		app.runInUIThread(new Runnable() {
 			@Override
 			public void run() {

@@ -1,11 +1,17 @@
 package net.osmand.plus;
 
+import android.app.Notification;
+import android.support.v4.app.NotificationCompat.Builder;
+
 import net.osmand.plus.notifications.GpsWakeUpNotification;
 import net.osmand.plus.notifications.GpxNotification;
 import net.osmand.plus.notifications.NavigationNotification;
 import net.osmand.plus.notifications.OsMoNotification;
 import net.osmand.plus.notifications.OsmandNotification;
 import net.osmand.plus.notifications.OsmandNotification.NotificationType;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class NotificationHelper {
 
@@ -15,14 +21,11 @@ public class NotificationHelper {
 	private GpxNotification gpxNotification;
 	private OsMoNotification osMoNotification;
 	private GpsWakeUpNotification gpsWakeUpNotification;
+	private List<OsmandNotification> all = new ArrayList<>();
 
 	public NotificationHelper(OsmandApplication app) {
 		this.app = app;
 		init();
-	}
-
-	public GpsWakeUpNotification getGpsWakeUpNotification() {
-		return gpsWakeUpNotification;
 	}
 
 	private void init() {
@@ -30,19 +33,46 @@ public class NotificationHelper {
 		gpxNotification = new GpxNotification(app);
 		osMoNotification = new OsMoNotification(app);
 		gpsWakeUpNotification = new GpsWakeUpNotification(app);
+		all.add(navigationNotification);
+		all.add(gpxNotification);
+		all.add(osMoNotification);
+		all.add(gpsWakeUpNotification);
 	}
 
-	public OsmandNotification getTopNotification() {
-		if (navigationNotification.isEnabled()) {
-			return navigationNotification;
-		} else if (gpxNotification.isEnabled() && gpxNotification.isActive()) {
-			return gpxNotification;
-		} else if (gpsWakeUpNotification.isEnabled()) {
-			return gpsWakeUpNotification;
-		} else if (osMoNotification.isEnabled()) {
-			return osMoNotification;
+	public Notification buildTopNotification() {
+		OsmandNotification notification = acquireTopNotification();
+		if (notification != null) {
+			removeNotification(notification.getType());
+			setTopNotification(notification);
+			Builder notificationBuilder = notification.buildNotification();
+			return notificationBuilder.build();
 		}
 		return null;
+	}
+
+	private OsmandNotification acquireTopNotification() {
+		OsmandNotification notification = null;
+		if (navigationNotification.isEnabled()) {
+			notification = navigationNotification;
+		} else if (gpxNotification.isEnabled() && gpxNotification.isActive()) {
+			notification = gpxNotification;
+		} else if (gpsWakeUpNotification.isEnabled()) {
+			notification = gpsWakeUpNotification;
+		} else if (osMoNotification.isEnabled() && osMoNotification.isActive()) {
+			notification = osMoNotification;
+		}
+		return notification;
+	}
+
+	public void updateTopNotification() {
+		OsmandNotification notification = acquireTopNotification();
+		setTopNotification(notification);
+	}
+
+	private void setTopNotification(OsmandNotification notification) {
+		for (OsmandNotification n : all) {
+			n.setTop(n == notification);
+		}
 	}
 
 	public void showNotifications() {
@@ -55,36 +85,20 @@ public class NotificationHelper {
 	}
 
 	public void refreshNotification(NotificationType notificationType) {
-		switch (notificationType) {
-			case NAVIGATION:
-				navigationNotification.refreshNotification();
+		for (OsmandNotification notification : all) {
+			if (notification.getType() == notificationType) {
+				notification.refreshNotification();
 				break;
-			case GPX:
-				gpxNotification.refreshNotification();
-				break;
-			case OSMO:
-				osMoNotification.refreshNotification();
-				break;
-			case GPS:
-				gpsWakeUpNotification.refreshNotification();
-				break;
+			}
 		}
 	}
 
 	public void onNotificationDismissed(NotificationType notificationType) {
-		switch (notificationType) {
-			case NAVIGATION:
-				navigationNotification.onNotificationDismissed();
+		for (OsmandNotification notification : all) {
+			if (notification.getType() == notificationType) {
+				notification.onNotificationDismissed();
 				break;
-			case GPX:
-				gpxNotification.onNotificationDismissed();
-				break;
-			case OSMO:
-				osMoNotification.onNotificationDismissed();
-				break;
-			case GPS:
-				gpsWakeUpNotification.onNotificationDismissed();
-				break;
+			}
 		}
 	}
 
@@ -99,10 +113,18 @@ public class NotificationHelper {
 		}
 	}
 
+	public void removeNotification(NotificationType notificationType) {
+		for (OsmandNotification notification : all) {
+			if (notification.getType() == notificationType) {
+				notification.removeNotification();
+				break;
+			}
+		}
+	}
+
 	public void removeNotifications() {
-		navigationNotification.removeNotification();
-		gpxNotification.removeNotification();
-		osMoNotification.removeNotification();
-		gpsWakeUpNotification.removeNotification();
+		for (OsmandNotification notification : all) {
+			notification.removeNotification();
+		}
 	}
 }

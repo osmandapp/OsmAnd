@@ -7,6 +7,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.NotificationCompat.Builder;
+import android.support.v7.app.NotificationCompat;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
@@ -17,11 +18,13 @@ public abstract class OsmandNotification {
 	public final static int GPX_NOTIFICATION_SERVICE_ID = 6;
 	public final static int OSMO_NOTIFICATION_SERVICE_ID = 7;
 	public final static int GPS_WAKE_UP_NOTIFICATION_SERVICE_ID = 8;
+	public final static int TOP_NOTIFICATION_SERVICE_ID = 100;
 
 	protected OsmandApplication app;
 	protected boolean ongoing = true;
 	protected int color;
 	protected int icon;
+	protected boolean top;
 
 	public enum NotificationType {
 		NAVIGATION,
@@ -40,6 +43,14 @@ public abstract class OsmandNotification {
 
 	public abstract NotificationType getType();
 
+	public boolean isTop() {
+		return top;
+	}
+
+	public void setTop(boolean top) {
+		this.top = top;
+	}
+
 	protected Builder createBuilder() {
 		Intent contentIntent = new Intent(app, MapActivity.class);
 		PendingIntent contentPendingIntent = PendingIntent.getActivity(app, 0, contentIntent,
@@ -47,7 +58,7 @@ public abstract class OsmandNotification {
 
 		Builder builder = new Builder(app)
 				.setVisibility(android.support.v7.app.NotificationCompat.VISIBILITY_PUBLIC)
-				.setPriority(getPriority())
+				.setPriority(top ? NotificationCompat.PRIORITY_HIGH : getPriority())
 				.setOngoing(ongoing)
 				.setContentIntent(contentPendingIntent)
 				.setDeleteIntent(NotificationDismissReceiver.createIntent(app, getType()));
@@ -85,7 +96,7 @@ public abstract class OsmandNotification {
 			if (newNotification != null) {
 				Notification notification = newNotification.build();
 				setupNotification(notification);
-				notificationManager.notify(getUniqueId(), notification);
+				notificationManager.notify(top ? TOP_NOTIFICATION_SERVICE_ID : getUniqueId(), notification);
 				return true;
 			}
 		}
@@ -99,8 +110,15 @@ public abstract class OsmandNotification {
 			if (newNotification != null) {
 				Notification notification = newNotification.build();
 				setupNotification(notification);
-				notificationManager.notify(getUniqueId(), notification);
+				if (top) {
+					notificationManager.cancel(getUniqueId());
+					notificationManager.notify(TOP_NOTIFICATION_SERVICE_ID, notification);
+				} else {
+					notificationManager.notify(getUniqueId(), notification);
+				}
 				return true;
+			} else {
+				notificationManager.cancel(getUniqueId());
 			}
 		} else {
 			notificationManager.cancel(getUniqueId());
