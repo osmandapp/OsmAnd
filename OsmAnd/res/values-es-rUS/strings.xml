@@ -2459,23 +2459,17 @@ Si amas a OsmAnd, OSM y quieres apoyarlos, esta es una perfecta manera de hacerl
     <string name="shared_string_record">Grabar</string>
     <string name="gpx_logging_no_data">Sin datos</string>
     <string name="release_2_5">"
- • Se pueden pulsar los iconos del mapa
+ • Ahora se pueden pulsar los iconos del mapa
 
-
- • Poderoso filtro de búsqueda PDI: Busca, p.e. restaurantes por gastronomía o campamentos con instalaciones especificas
-
+ • Nuevo filtro de búsqueda PDI potente: Busca, p.e. restaurantes por tipo de cocina o campamentos con instalaciones específicas
 
  • Nuevo estilo de mapa topográfico (Topo) para ciclistas y senderistas
 
-
  • Mejoras en la grabación de viaje
-
 
  • Mejoras en la notificación de navegación (Android Wear)
 
-
  • Muchas otras mejoras y correcciones de errores
-
 
  y más…
  "</string>
