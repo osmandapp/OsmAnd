@@ -2608,4 +2608,12 @@ Failams reikalinga {3} MB laikinam ir {1} MB pastoviam saugojimui.
     <string name="driving_region_australia">Australija</string>
     <string name="live_update">Tiesioginiai atnaujinimai</string>
     <string name="file_name_containes_illegal_char">Failo pavadinime yra neleistinas simbolis</string>
-</resources>
+<string name="osmo_share_location">Dalintis</string>
+    <string name="shared_string_notifications">Pranešimai</string>
+    <string name="shared_string_continue">Tęsti</string>
+    <string name="shared_string_trip">Kelionė</string>
+    <string name="shared_string_recorded">Įrašyta</string>
+    <string name="shared_string_record">Įrašymas</string>
+    <string name="rendering_value_light_brown_name">Šviesiai rudas</string>
+    <string name="rendering_value_dark_brown_name">Tamsiai rudas</string>
+    </resources>
