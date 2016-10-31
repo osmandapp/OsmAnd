@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
 	<string name="shared_string_no">לא</string>
 	<string name="shared_string_yes">כן</string>
 	<string name="close_changeset">סגירת ערכת השינויים</string>
@@ -1165,4 +1166,39 @@
     <string name="access_from_map">גישה מתצוגת המפה</string>
     <string name="show_on_start_description">במצב כבוי תוצג המפה מיד עם הכניסה ליישום</string>
     <string name="show_on_start">תצוגה בכניסה ליישום</string>
+    <string name="osmo_share_location">שתף</string>
+    <string name="shared_string_continue">המשך</string>
+    <string name="shared_string_record">רשומה</string>
+    <string name="gpx_logging_no_data">אין נתונים</string>
+    <string name="gpx_appearance">מראה</string>
+    <string name="osmo_service_running">שירות OsMo רץ כעת</string>
+    <string name="shared_string_trip">נסיעה</string>
+    <string name="shared_string_notifications">הודעות</string>
+    <string name="osmo_pause_location">הפסקה</string>
+    <string name="shared_string_pause">הפסקה</string>
+    <string name="map_markers_other">סַמָנים אחרים</string>
+    <string name="gpx_add_track">הוסף מסלול</string>
+    <string name="gpx_no_tracks_title">עוד אין לך מסלולים</string>
+    <string name="rendering_value_dark_brown_name">חום כהה</string>
+    <string name="rendering_value_light_brown_name">חום בהיר</string>
+    <string name="morning">בוקר</string>
+    <string name="weekly">שבועי</string>
+    <string name="night">לילה</string>
+    <string name="daily">יומי</string>
+    <string name="update_time">זמן עידכון</string>
+    <string name="update_now">עדכן עכשיו</string>
+    <string name="updates_size">גודל עידכון</string>
+    <string name="shared_string_filters">מַסנֵנים</string>
+    <string name="save_filter">שמור מסנן</string>
+    <string name="delete_filter">מחק מסנן</string>
+    <string name="apply_filters">השתמש במסנן</string>
+    <string name="new_filter">מסנן חדש</string>
+    <string name="app_mode_bus">אוטובוס</string>
+ 	<string name="app_mode_train">רכבת</string>
+    <string name="rendering_value_bicycle_name">אופניים</string>
+    <string name="osm_live_active">פעיל</string>
+    <string name="osm_live_not_active">לא פעיל</string>
+    <string name="osm_live_enter_email">נא להזין כתובת דואר אלקטרוני חוקית</string>
+    <string name="osm_live_enter_user_name">נא להזין שם פומבי</string>
+    <string name="osm_live_month_cost_desc">תשלום חודשי</string>
     </resources>
