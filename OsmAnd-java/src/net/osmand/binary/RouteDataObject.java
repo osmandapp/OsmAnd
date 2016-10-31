@@ -137,7 +137,7 @@ public class RouteDataObject {
 		if(names != null) {
 			int[] kt = names.keys();
 
-			// Issue #2181: Parse destination keys in this order:
+			// Issue #3181: Parse destination keys in this order:
 			//              destination:lang:XX:forward/backward
 			//              destination:forward/backward
 			//              destination:lang:XX
