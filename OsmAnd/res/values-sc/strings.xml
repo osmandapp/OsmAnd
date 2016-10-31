@@ -2385,7 +2385,7 @@ Si tenes bisòngiu de agiudu cun s\'aplicatzione OsmAnd, pro praghere cuntata su
     <string name="active_markers">Marcadores ativos</string>
     <string name="map_markers">Marcadores mapa</string>
     <string name="map_marker">Marcadore mapa</string>
-    <string name="add_points_to_map_markers_q">Boles annanghere totu sos puntos a sos Marcadores Mapa?</string>
+    <string name="add_points_to_map_markers_q">Boles annànghere totu sos puntos a sos Marcadores Mapa?</string>
     <string name="shared_string_add_to_map_markers">Annanghe a sos Marcadores Mapa</string>
     <string name="consider_turning_polygons_off">Ti cussigiamus de istudare sa renderizatzione de sos polìgonos.</string>
     <string name="shared_string_toolbar">Barra ainas</string>
@@ -2584,7 +2584,7 @@ Como bi sunt {2} MB ebbia disponìbiles.</string>
     <string name="selected_categories">Categorias ischertadas</string>
     <string name="create_custom_poi">Crea unu filtru personalizadu</string>
     <string name="custom_search">Chirca personalizada</string>
-    <string name="edit_filter">Acontza su filtru</string>
+    <string name="edit_filter">Acontza sas categorias</string>
     <string name="subcategories">Suta-categorias</string>
     <string name="translit_names">Translìtera sos nùmenes</string>
     <string name="translit_name_if_miss">Translìtera si non b\'est su nùmene in %1$s</string>
@@ -2598,7 +2598,7 @@ Como bi sunt {2} MB ebbia disponìbiles.</string>
     <string name="rendering_attr_contourColorScheme_description">Ischema de colores de sas lìnias de livellu</string>
     <string name="save_track_min_speed">Lestresa mìnima pro sa registratzione</string>
     <string name="save_track_min_speed_descr">Issèbera sa lestresa mìnima pro registrare unu puntu</string>
-    <string name="save_track_min_distance">Distàntzia mìnima pro sa registratzione</string>
+    <string name="save_track_min_distance">Rilevamentu de movimentu pro sa registratzione</string>
     <string name="save_track_min_distance_descr">Issèbera sa distàntzia mìnima pro registrare unu puntu</string>
     <string name="save_track_precision">Pretzisione mìnima de registratzione</string>
     <string name="save_track_precision_descr">Issèbera sa pretzisione mìnima pro sa registratzione</string>
@@ -2636,4 +2636,9 @@ Como bi sunt {2} MB ebbia disponìbiles.</string>
     <string name="trip_rec_notification_settings">Registratzione biàgios (datu perunu)</string>
     <string name="trip_rec_notification_settings_desc">Ammustra sas notìficas chi permitint de incumintzare a registrare su biàgiu incarchende su butone Registra</string>
     <string name="shared_string_notifications">Notìficas</string>
+    <string name="gpx_no_tracks_title">Non tenes galu rastas registradas</string>
+    <string name="gpx_no_tracks_title_folder">Podes fintzas annànghere rastas a sa cartella</string>
+    <string name="gpx_add_track">Annanghe una rasta</string>
+    <string name="gpx_appearance">Aparèntzia</string>
+    <string name="rendering_value_fine_name">Bonu</string>
     </resources>
