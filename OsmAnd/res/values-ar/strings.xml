@@ -2576,7 +2576,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="translit_names">أسماء بترجمة حرفية</string>
     <string name="translit_name_if_miss">ترجمة حرفية اذا كانت %1$s من الاسم مفقودة</string>
     <string name="search_hint">أدخل المدينة، العنوان أو اسم POI</string>
-    <string name="christmas_desc">في ارتقاب عطل عيد الميلاد ورأس السنة الجديدة، يمكنك اختيار عرض POI المرتبطة بعيد الميلاد: شجرة عيد الميلاد، أسواق.</string>
+    <string name="christmas_desc">في ارتقاب عطل عيد الميلاد ورأس السنة الجديدة، يمكنك اختيار عرض POI المرتبطة بعيد الميلاد: أشجار عيد الميلاد، أسواق...الخ.</string>
     <string name="christmas_desc_q">إظهار POI عيد الميلاد ؟</string>
     <string name="rendering_value_light_brown_name">بني فاتح</string>
     <string name="rendering_value_dark_brown_name">بني داكن</string>
@@ -2586,7 +2586,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="rendering_attr_contourColorScheme_description">نظام ألوان المعالم</string>
     <string name="save_track_min_speed">تسجيل السرعة الأدنى</string>
     <string name="save_track_min_speed_descr">اختر السرعة الأدنى لبذأ تشغيل التسجيل</string>
-    <string name="save_track_min_distance">تسجيل المسافة الأدنى</string>
+    <string name="save_track_min_distance">تسجيل كشف الحركة</string>
     <string name="save_track_min_distance_descr">اختر حد المسافة الأدنى لتشغيل التسجيل من آخر موقع إلى نقطة مراد تسجيلها</string>
     <string name="save_track_precision">تسجيل حد الدقة الأدنى</string>
     <string name="save_track_precision_descr">اختر حد دقة التسجيل الأدنى لنقطة تريد تسجيلها</string>
