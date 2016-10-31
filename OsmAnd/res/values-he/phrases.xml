@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='UTF-8'?>
 <resources><string name="poi_shop_food">חנות מזון</string>
 	<string name="poi_shop">חנות</string>
 		<string name="poi_emergency">שרותי חירום</string>
@@ -135,4 +135,19 @@
 	<string name="poi_trade">חנות מסחר</string>
 	<string name="poi_tyres">חנות צמיגים</string>
 	<string name="poi_vacuum_cleaner">חנות שואבי אבק</string>
+	<string name="poi_fuel_avia_type">סוג</string>
+	<string name="poi_fuel_type">סוג</string>
+	<string name="poi_additional_type">נוסף</string>
+	<string name="poi_payment_type">סוג תשלום</string>
+	<string name="poi_bicycle_service">שירות אופניים</string>
+	<string name="poi_fire_hydrant_water_source">מקור מים</string>
+	<string name="poi_service_car">שירות</string>
+	<string name="poi_subway_station_filter">תחנת רכבת תחתית</string>
+	<string name="poi_pump">משאבה</string>
+	<string name="poi_aerialway_bicycle">תחבורת אופניים</string>
+	<string name="poi_ferry_terminal_cargo">מטען</string>
+	<string name="poi_aerialway_heating">חימום</string>
+	<string name="poi_information_type">סוג</string>
+	<string name="poi_resort_type">סוג</string>
+	<string name="poi_smoking">עישון</string>
 	</resources>
