@@ -1065,8 +1065,8 @@ public class OsmandSettings {
 	}
 	public final CommonPreference<Float> SAVE_TRACK_MIN_SPEED = new FloatPreference("save_track_min_speed", 0.f).makeProfile();
 	{
-		SAVE_TRACK_MIN_SPEED.setModeDefaultValue(ApplicationMode.CAR, 5.f);
-		SAVE_TRACK_MIN_SPEED.setModeDefaultValue(ApplicationMode.BICYCLE, 4.f);
+//		SAVE_TRACK_MIN_SPEED.setModeDefaultValue(ApplicationMode.CAR, 5.f);
+//		SAVE_TRACK_MIN_SPEED.setModeDefaultValue(ApplicationMode.BICYCLE, 4.f);
 //		SAVE_TRACK_MIN_SPEED.setModeDefaultValue(ApplicationMode.PEDESTRIAN, 2.f);
 	}
 	public final CommonPreference<Float> SAVE_TRACK_MIN_DISTANCE = new FloatPreference("save_track_min_distance", 5).makeProfile();
