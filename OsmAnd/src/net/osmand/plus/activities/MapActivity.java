@@ -153,10 +153,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	private MapActivityActions mapActions;
 	private MapActivityLayers mapLayers;
 
-	// Notification status
-	private NotificationManager mNotificationManager;
-	private int APP_NOTIFICATION_ID = 1;
-
 	// handler to show/hide trackball position and to link map with delay
 	private Handler uiHandler = new Handler();
 	// App variables
@@ -491,7 +487,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 		dashboardOnMap.updateLocation(true, true, false);
 
-		cancelNotification();
+		getMyApplication().getNotificationHelper().refreshNotifications();
 		// fixing bug with action bar appearing on android 2.3.3
 		if (getSupportActionBar() != null) {
 			getSupportActionBar().hide();
@@ -914,21 +910,12 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		OsmandPlugin.onMapActivityDestroy(this);
 		getMyApplication().unsubscribeInitListener(initListener);
 		mapViewTrackingUtilities.setMapView(null);
-		cancelNotification();
+		getMyApplication().getNotificationHelper().removeNotifications();
 		app.getResourceManager().getMapTileDownloader().removeDownloaderCallback(mapView);
 		if (atlasMapRendererView != null) {
 			atlasMapRendererView.handleOnDestroy();
 		}
 		mIsDestroyed = true;
-	}
-
-	private void cancelNotification() {
-		if (mNotificationManager == null) {
-			mNotificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-		}
-		if (mNotificationManager != null) {
-			mNotificationManager.cancel(APP_NOTIFICATION_ID);
-		}
 	}
 
 	public LatLon getMapLocation() {
