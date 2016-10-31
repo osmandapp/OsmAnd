@@ -2438,7 +2438,7 @@ Si necesitas ayuda con la aplicación OsmAnd, contacte con nuestro equipo de sop
     <string name="selected_categories">Categorías elegidas</string>
     <string name="create_custom_poi">Crear filtro personalizado</string>
     <string name="custom_search">Personalizar búsqueda</string>
-    <string name="edit_filter">Editar filtro</string>
+    <string name="edit_filter">Editar categorías</string>
     <string name="subcategories">Subcategorías</string>
     <string name="translit_names">Transliterar nombres</string>
     <string name="translit_name_if_miss">Transliterar nombres si no se encuentran en %1$s</string>
@@ -2452,7 +2452,7 @@ Si necesitas ayuda con la aplicación OsmAnd, contacte con nuestro equipo de sop
     <string name="christmas_desc_q">¿Mostrar el PDI navideño?</string>
     <string name="save_track_min_speed">Velocidad mínima del registro</string>
     <string name="save_track_min_speed_descr">Define la velocidad mínima de registro de un punto</string>
-    <string name="save_track_min_distance">Distancia mínima del registro</string>
+    <string name="save_track_min_distance">Detección del registro de movimiento</string>
     <string name="save_track_min_distance_descr">Define la distancia mínima de registro entre puntos de ubicación</string>
     <string name="save_track_precision">Precisión mínima del registro</string>
     <string name="save_track_precision_descr">Define la precisión mínima de registro de un punto</string>
