@@ -520,7 +520,7 @@
 	<string name="prefs_plugins_descr">Eklentiler gelişmiş ayarlar ve ek işlevselliğini etkinleştirmek</string>
 	<string name="prefs_plugins">Eklentiler</string>
 	
-	<string name="osm_editing_plugin_description">Bu eklenti Osmand aracılığıyla oluşturma veya değiştirme OSM POI nesneleri açma veya OSM hataları yorumlama ve kaydedilen GPX dosyaları katkıda gibi OSM katkıda bulunmak için kullanılabilir. OSM bir topluluk odaklı, küresel kamu malı haritalama projesidir. Detaylar için http://openstreetmap.org başvurun. Aktif katılım takdir ve app kişisel OSM kimlik belirtirseniz katkıları, Osmand doğrudan yapılabilir.</string>
+	<string name="osm_editing_plugin_description">Bu eklenti Osmand aracılığıyla oluşturma veya değiştirme OSM POI nesneleri açma veya OSM hataları yorumlama ve kaydedilen GPX dosyaları katkıda gibi OSM katkıda bulunmak için kullanılabilir. OSM bir topluluk odaklı, küresel kamu malı haritalama projesidir. Detaylar için https://openstreetmap.org başvurun. Aktif katılım takdir ve app kişisel OSM kimlik belirtirseniz katkıları, Osmand doğrudan yapılabilir.</string>
 	<string name="vector_maps_may_display_faster_on_some_devices">Vektörel haritalar daha hızlı görüntülenir. Bazı aygıtlarda düzgün çalışmayabilir.</string>
 	<string name="play_commands_of_currently_selected_voice">Seçili ses komutları oynat</string>
 	<string name="debugging_and_development">OsmAnd gelişimi</string>

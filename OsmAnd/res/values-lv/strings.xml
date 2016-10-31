@@ -4,7 +4,7 @@
   <string name="prefs_plugins_descr">Spraudņi papildina aplikācijas iespējas un dod papildus funkcionalitāti</string>
   <string name="prefs_plugins">Spraudņi</string>
   
-  <string name="osm_editing_plugin_description">Rādīt uzstādījumus OSM pilnveidošanai - OSM POI objektu izveidei/labošanai, GPX treku izplatīšanai un ziņošanai par OSM kļūdām. Vairāk uzziniet http://openstreetmap.org vietnē. Ikviens ir aicināts ņemt aktīvu dalību, ko ir iespējams darīt caur OsmAnd aplikāciju, norādot jūsu OSM lietotāja datus.</string>
+  <string name="osm_editing_plugin_description">Rādīt uzstādījumus OSM pilnveidošanai - OSM POI objektu izveidei/labošanai, GPX treku izplatīšanai un ziņošanai par OSM kļūdām. Vairāk uzziniet https://openstreetmap.org vietnē. Ikviens ir aicināts ņemt aktīvu dalību, ko ir iespējams darīt caur OsmAnd aplikāciju, norādot jūsu OSM lietotāja datus.</string>
   <string name="vector_maps_may_display_faster_on_some_devices">Vektoru kartes tiks attēlotas ātrāk, bet var nestrādāt uz visām ierīcēm.</string>
   
   <string name="play_commands_of_currently_selected_voice">Atskaņot komandas izvēlētajai balsij</string>

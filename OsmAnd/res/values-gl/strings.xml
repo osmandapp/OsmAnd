@@ -790,7 +790,7 @@
 	<string name="prefs_plugins_descr">Os engadidos activan opcións avanzadas e funcionalidade adicional</string>
 	<string name="prefs_plugins">Engadidos</string>
 	
-	<string name="osm_editing_plugin_description">Con este engadido pódese usar OsmAnd para achegar mellorar a OSM, como crear ou modificar obxectos de punto de interese de OSM, abrir ou comentar fallos de OSM e enviar ficheiros GPX gravados. OSM é un proxecto comunitario de creación de mapas globais no dominio público. Para máis detalles, consulte http://openstreetmap.org. Agradécese a participación activa e as colaboracións pódense realizar directamente desde OsmAnd se se indican as credenciais persoais de OSM no aplicativo.</string>
+	<string name="osm_editing_plugin_description">Con este engadido pódese usar OsmAnd para achegar mellorar a OSM, como crear ou modificar obxectos de punto de interese de OSM, abrir ou comentar fallos de OSM e enviar ficheiros GPX gravados. OSM é un proxecto comunitario de creación de mapas globais no dominio público. Para máis detalles, consulte https://openstreetmap.org. Agradécese a participación activa e as colaboracións pódense realizar directamente desde OsmAnd se se indican as credenciais persoais de OSM no aplicativo.</string>
 	<string name="vector_maps_may_display_faster_on_some_devices">Os mapas vectoriais seguramente se mostran máis rápido. Poden non funcionar ben nalgúns dispositivos.</string>
 	<string name="play_commands_of_currently_selected_voice">Reproducir as ordes da voz que haxa seleccionada</string>
 	<string name="debugging_and_development">Desenvolvemento do OsmAnd</string>

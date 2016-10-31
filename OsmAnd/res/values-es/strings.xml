@@ -641,7 +641,7 @@ Las teselas de mapas, se pueden obtener directamente a través de fuentes con co
     <string name="plugins_screen">Complementos</string>
     <string name="prefs_plugins_descr">Los complementos activan ajustes avanzados y funcionalidades adicionales</string>
     <string name="prefs_plugins">Complementos</string>
-    <string name="osm_editing_plugin_description">Este complemento OsmAnd puede ser utilizado para hacer contribuciones en OSM como crear o modificar objetos PDI (puntos de interés) de OSM, abrir o comentar errores de OSM, y contribuir con archivos grabados de trazas GPX. OSM es un proyecto de mapeo impulsado por la comunidad y de dominio público mundial. Para más detalles consulte http://openstreetmap.org.
+    <string name="osm_editing_plugin_description">Este complemento OsmAnd puede ser utilizado para hacer contribuciones en OSM como crear o modificar objetos PDI (puntos de interés) de OSM, abrir o comentar errores de OSM, y contribuir con archivos grabados de trazas GPX. OSM es un proyecto de mapeo impulsado por la comunidad y de dominio público mundial. Para más detalles consulte https://openstreetmap.org.
 \n\nSe aprecia la participación activa, y las contribuciones se pueden hacer directamente desde OsmAnd, si especifica sus credenciales personales de OSM en la aplicación.</string>
     <string name="vector_maps_may_display_faster_on_some_devices">Los mapas vectoriales pueden mostrarse más rápido. Puede no funcionar correctamente en algunos dispositivos.</string>
     <string name="play_commands_of_currently_selected_voice">Reproduce frases con la voz seleccionada</string>
