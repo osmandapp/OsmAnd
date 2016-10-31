@@ -2521,4 +2521,5 @@ kaj pli...
     <string name="gpx_no_tracks_title_folder">Vi ankaŭ povas aldoni kursojn al la dosierujo</string>
     <string name="gpx_add_track">Aldoni kurson</string>
     <string name="gpx_appearance">Aspekto</string>
+    <string name="rendering_value_fine_name">Eteta</string>
     </resources>
