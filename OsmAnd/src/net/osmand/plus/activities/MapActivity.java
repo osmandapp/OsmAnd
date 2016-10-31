@@ -550,10 +550,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 					final Uri data = intent.getData();
 					final String scheme = data.getScheme();
 					if ("file".equals(scheme)) {
-						gpxImportHelper.handleFileImport(data, new File(data.getPath()).getName());
+						gpxImportHelper.handleFileImport(data, new File(data.getPath()).getName(), true);
 						setIntent(null);
 					} else if ("content".equals(scheme)) {
-						gpxImportHelper.handleContentImport(data);
+						gpxImportHelper.handleContentImport(data, true);
 						setIntent(null);
 					} else if ("google.navigation".equals(scheme) || "osmand.navigation".equals(scheme)) {
 						parseNavigationIntent(data);

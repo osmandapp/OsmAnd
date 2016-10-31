@@ -1075,8 +1075,9 @@ public class ConfigureMapMenu {
 	public static class GpxAppearanceAdapter extends ArrayAdapter<AppearanceListItem> {
 
 		private OsmandApplication app;
+		private int currentColor;
 
-		public GpxAppearanceAdapter(Context context) {
+		public GpxAppearanceAdapter(Context context, String currentColorValue) {
 			super(context, R.layout.rendering_prop_menu_item);
 			app = (OsmandApplication) getContext().getApplicationContext();
 
@@ -1089,9 +1090,6 @@ public class ConfigureMapMenu {
 			}
 
 			if (trackWidthProp != null) {
-				final OsmandSettings.CommonPreference<String> pref
-						= app.getSettings().getCustomRenderProperty(CURRENT_TRACK_WIDTH_ATTR);
-
 				AppearanceListItem item = new AppearanceListItem(CURRENT_TRACK_WIDTH_ATTR, "",
 						SettingsActivity.getStringPropertyValue(getContext(), trackWidthProp.getDefaultValueDescription()));
 				add(item);
@@ -1104,8 +1102,7 @@ public class ConfigureMapMenu {
 				item.setLastItem(true);
 			}
 			if (trackColorProp != null) {
-				final OsmandSettings.CommonPreference<String> pref
-						= app.getSettings().getCustomRenderProperty(CURRENT_TRACK_COLOR_ATTR);
+				currentColor = parseTrackColor(renderer, currentColorValue);
 
 				AppearanceListItem item = new AppearanceListItem(CURRENT_TRACK_COLOR_ATTR, "",
 						SettingsActivity.getStringPropertyValue(getContext(), trackColorProp.getDefaultValueDescription()),
@@ -1161,7 +1158,7 @@ public class ConfigureMapMenu {
 						iconId = R.drawable.ic_action_gpx_width_thin;
 					}
 					textView.setCompoundDrawablesWithIntrinsicBounds(null, null,
-							app.getIconsCache().getIcon(iconId, R.color.gpx_track_width_prop), null);
+							app.getIconsCache().getPaintedIcon(iconId, currentColor), null);
 				} else {
 					if (item.color == -1) {
 						textView.setCompoundDrawablesWithIntrinsicBounds(null, null,

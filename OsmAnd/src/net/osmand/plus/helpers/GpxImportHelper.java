@@ -52,36 +52,36 @@ public class GpxImportHelper {
 		this.mapView = mapView;
 	}
 
-	public void handleContentImport(final Uri contentUri) {
+	public void handleContentImport(final Uri contentUri, final boolean useImportDir) {
 		final String name = getNameFromContentUri(contentUri);
-		handleFileImport(contentUri, name);
+		handleFileImport(contentUri, name, useImportDir);
 	}
 
-	public boolean handleGpxImport(final Uri contentUri) {
+	public boolean handleGpxImport(final Uri contentUri, final boolean useImportDir) {
 		final String name = getNameFromContentUri(contentUri);
 		final boolean isOsmandSubdir = isSubDirectory(application.getAppPath(IndexConstants.GPX_INDEX_DIR), new File(contentUri.getPath()));
 		if (!isOsmandSubdir && name.endsWith(GPX_SUFFIX)) {
-			handleGpxImport(contentUri, name, true);
+			handleGpxImport(contentUri, name, true, useImportDir);
 			return true;
 		}
 		return false;
 	}
 
-	public void handleFileImport(final Uri intentUri, final String fileName) {
+	public void handleFileImport(final Uri intentUri, final String fileName, final boolean useImportDir) {
 		final boolean isFileIntent = "file".equals(intentUri.getScheme());
 		final boolean isOsmandSubdir = isSubDirectory(application.getAppPath(IndexConstants.GPX_INDEX_DIR), new File(intentUri.getPath()));
 
 		final boolean saveFile = !isFileIntent || !isOsmandSubdir;
 
 		if (fileName != null && fileName.endsWith(KML_SUFFIX)) {
-			handleKmlImport(intentUri, fileName, saveFile);
+			handleKmlImport(intentUri, fileName, saveFile, useImportDir);
 //Issue 2275
 //		} else if (fileName != null && (fileName.contains("favourite")|| 
 //				fileName.contains("favorite"))) {
 //			handleFavouritesImport(intentUri, fileName, saveFile);
 		} else {
 //			handleGpxImport(intentUri, fileName, saveFile);
-			handleFavouritesImport(intentUri, fileName, saveFile);
+			handleFavouritesImport(intentUri, fileName, saveFile, useImportDir);
 		}
 	}
 
@@ -99,7 +99,7 @@ public class GpxImportHelper {
 		return name;
 	}
 
-	private void handleGpxImport(final Uri gpxFile, final String fileName, final boolean save) {
+	private void handleGpxImport(final Uri gpxFile, final String fileName, final boolean save, final boolean useImportDir) {
 		new AsyncTask<Void, Void, GPXUtilities.GPXFile>() {
 			ProgressDialog progress = null;
 
@@ -132,12 +132,12 @@ public class GpxImportHelper {
 			@Override
 			protected void onPostExecute(GPXUtilities.GPXFile result) {
 				progress.dismiss();
-				handleResult(result, fileName, save);
+				handleResult(result, fileName, save, useImportDir);
 			}
 		}.execute();
 	}
 
-	private void handleFavouritesImport(final Uri gpxFile, final String fileName, final boolean save) {
+	private void handleFavouritesImport(final Uri gpxFile, final String fileName, final boolean save, final boolean useImportDir) {
 		new AsyncTask<Void, Void, GPXUtilities.GPXFile>() {
 			ProgressDialog progress = null;
 
@@ -170,7 +170,7 @@ public class GpxImportHelper {
 			@Override
 			protected void onPostExecute(final GPXUtilities.GPXFile result) {
 				progress.dismiss();
-				importFavourites(result, fileName, save);
+				importFavourites(result, fileName, save, useImportDir);
 			}
 		}.execute();
 	}
@@ -207,7 +207,7 @@ public class GpxImportHelper {
 		}.execute();
 	}
 
-	private void handleKmlImport(final Uri kmlFile, final String name, final boolean save) {
+	private void handleKmlImport(final Uri kmlFile, final String name, final boolean save, final boolean useImportDir) {
 		new AsyncTask<Void, Void, GPXUtilities.GPXFile>() {
 			ProgressDialog progress = null;
 
@@ -246,18 +246,18 @@ public class GpxImportHelper {
 			@Override
 			protected void onPostExecute(GPXUtilities.GPXFile result) {
 				progress.dismiss();
-				handleResult(result, name, save);
+				handleResult(result, name, save, useImportDir);
 			}
 		}.execute();
 	}
 
-	private void handleResult(final GPXUtilities.GPXFile result, final String name, final boolean save) {
+	private void handleResult(final GPXUtilities.GPXFile result, final String name, final boolean save, final boolean useImportDir) {
 		if (result != null) {
 			if (result.warning != null) {
 				Toast.makeText(mapActivity, result.warning, Toast.LENGTH_LONG).show();
 			} else {
 				if (save) {
-					new SaveAsyncTask(result, name).execute();
+					new SaveAsyncTask(result, name, useImportDir).execute();
 				} else {
 					showGpxOnMap(result);
 				}
@@ -267,19 +267,23 @@ public class GpxImportHelper {
 		}
 	}
 
-	private String saveImport(final GPXUtilities.GPXFile gpxFile, final String fileName) {
+	private String saveImport(final GPXUtilities.GPXFile gpxFile, final String fileName, final boolean useImportDir) {
 		final String warning;
 
 		if (gpxFile.isEmpty() || fileName == null) {
 			warning = application.getString(R.string.error_reading_gpx);
 		} else {
-			final File importDir = application.getAppPath(IndexConstants.GPX_IMPORT_DIR);
+			final File importDir;
+			if (useImportDir) {
+				importDir = application.getAppPath(IndexConstants.GPX_IMPORT_DIR);
+			} else {
+				importDir = application.getAppPath(IndexConstants.GPX_INDEX_DIR);
+			}
 			//noinspection ResultOfMethodCallIgnored
 			importDir.mkdirs();
 			if (importDir.exists() && importDir.isDirectory() && importDir.canWrite()) {
 				final GPXUtilities.WptPt pt = gpxFile.findPointToShow();
 				final File toWrite = getFileToSave(fileName, importDir, pt);
-
 				warning = GPXUtilities.writeGpxFile(toWrite, gpxFile, application);
 				if (warning == null) {
 					gpxFile.path = toWrite.getAbsolutePath();
@@ -308,15 +312,17 @@ public class GpxImportHelper {
 	private class SaveAsyncTask extends AsyncTask<Void, Void, String> {
 		private final GPXUtilities.GPXFile result;
 		private final String name;
+		private final boolean useImportDir;
 
-		private SaveAsyncTask(GPXUtilities.GPXFile result, final String name) {
+		private SaveAsyncTask(GPXUtilities.GPXFile result, final String name, boolean useImportDir) {
 			this.result = result;
 			this.name = name;
+			this.useImportDir = useImportDir;
 		}
 
 		@Override
 		protected String doInBackground(Void... nothing) {
-			return saveImport(result, name);
+			return saveImport(result, name, useImportDir);
 		}
 
 		@Override
@@ -341,9 +347,9 @@ public class GpxImportHelper {
 		}
 	}
 
-	private void importFavourites(final GPXUtilities.GPXFile gpxFile, final String fileName, final boolean save) {
+	private void importFavourites(final GPXUtilities.GPXFile gpxFile, final String fileName, final boolean save, final boolean useImportDir) {
 		if(gpxFile == null || gpxFile.points == null || gpxFile.points.size() == 0) {
-			handleResult(gpxFile, fileName, save);
+			handleResult(gpxFile, fileName, save, useImportDir);
 			return;
 		}
 		final DialogInterface.OnClickListener importFavouritesListener = new DialogInterface.OnClickListener() {
@@ -354,7 +360,7 @@ public class GpxImportHelper {
 						importFavoritesImpl(gpxFile);
 						break;
 					case DialogInterface.BUTTON_NEGATIVE:
-						handleResult(gpxFile, fileName, save);
+						handleResult(gpxFile, fileName, save, useImportDir);
 						break;
 				}
 			}
