@@ -897,20 +897,18 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	//		}
 	//	}
 		wakeLockHelper.onStop(this);
-		getMyApplication().getNotificationHelper().refreshNotifications();
+		getMyApplication().getNotificationHelper().removeNotifications();
 		super.onStop();
 	}
 
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		getMyApplication().getNotificationHelper().removeNotifications();
 		unregisterReceiver(screenOffReceiver);
 		FailSafeFuntions.quitRouteRestoreDialog();
 		OsmandPlugin.onMapActivityDestroy(this);
 		getMyApplication().unsubscribeInitListener(initListener);
 		mapViewTrackingUtilities.setMapView(null);
-		getMyApplication().getNotificationHelper().removeNotifications();
 		app.getResourceManager().getMapTileDownloader().removeDownloaderCallback(mapView);
 		if (atlasMapRendererView != null) {
 			atlasMapRendererView.handleOnDestroy();

@@ -18,6 +18,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -234,9 +236,9 @@ public class ConfigureMapMenu {
 		}
 	}
 
-	private void createLayersItems(List<RenderingRuleProperty> customRules, ContextMenuAdapter adapter, MapActivity activity) {
-		OsmandApplication app = activity.getMyApplication();
-		OsmandSettings settings = app.getSettings();
+	private void createLayersItems(List<RenderingRuleProperty> customRules, ContextMenuAdapter adapter, final MapActivity activity) {
+		final OsmandApplication app = activity.getMyApplication();
+		final OsmandSettings settings = app.getSettings();
 		LayerMenuListener l = new LayerMenuListener(activity, adapter);
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setTitleId(R.string.shared_string_show, activity)
@@ -258,11 +260,186 @@ public class ConfigureMapMenu {
 				.setIcon(R.drawable.ic_action_info_dark)
 				.setSecondaryIcon(R.drawable.ic_action_additional_option)
 				.setListener(l).createItem());
+
+		/*
 		ContextMenuItem item = createProperties(customRules, null, R.string.rendering_category_transport, R.drawable.ic_action_bus_dark,
 				"transport", settings.TRANSPORT_DEFAULT_SETTINGS, adapter, activity, false);
 		if (item != null) {
 			adapter.addItem(item);
 		}
+		*/
+
+		final List<RenderingRuleProperty> transportRules = new ArrayList<>();
+		final List<OsmandSettings.CommonPreference<Boolean>> transportPrefs = new ArrayList<>();
+		Iterator<RenderingRuleProperty> it = customRules.iterator();
+		while (it.hasNext()) {
+			RenderingRuleProperty p = it.next();
+			if ("transport".equals(p.getCategory()) && p.isBoolean()) {
+				transportRules.add(p);
+				final OsmandSettings.CommonPreference<Boolean> pref = activity.getMyApplication().getSettings()
+						.getCustomRenderBooleanProperty(p.getAttrName());
+				transportPrefs.add(pref);
+				it.remove();
+			}
+		}
+		selected = false;
+		for (OsmandSettings.CommonPreference<Boolean> p : transportPrefs) {
+			if (p.get()) {
+				selected = true;
+				break;
+			}
+		}
+		final boolean transportSelected = selected;
+		adapter.addItem(new ContextMenuItem.ItemBuilder()
+				.setTitleId(R.string.rendering_category_transport, activity)
+				.setIcon(R.drawable.ic_action_bus_dark)
+				.setSecondaryIcon(R.drawable.ic_action_additional_option)
+				.setSelected(transportSelected)
+				.setColor(transportSelected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
+				.setListener(new ContextMenuAdapter.OnRowItemClick() {
+					ArrayAdapter<CharSequence> adapter;
+					boolean transportSelectedInner = transportSelected;
+
+					@Override
+					public boolean onRowItemClick(ArrayAdapter<ContextMenuItem> adapter, View view, int itemId, int position) {
+						if (transportSelectedInner) {
+							showTransportDialog(adapter, position);
+							return false;
+						} else {
+							CompoundButton btn = (CompoundButton) view.findViewById(R.id.toggle_item);
+							if (btn != null && btn.getVisibility() == View.VISIBLE) {
+								btn.setChecked(!btn.isChecked());
+								adapter.getItem(position).setColorRes(btn.isChecked() ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
+								adapter.notifyDataSetChanged();
+								return false;
+							} else {
+								return onContextMenuClick(adapter, itemId, position, false);
+							}
+						}
+					}
+
+					@Override
+					public boolean onContextMenuClick(final ArrayAdapter<ContextMenuItem> ad, int itemId,
+													  final int pos, boolean isChecked) {
+						if (transportSelectedInner) {
+							for (int i = 0; i < transportPrefs.size(); i++) {
+								transportPrefs.get(i).set(false);
+							}
+							transportSelectedInner = false;
+							ad.getItem(pos).setColorRes(ContextMenuItem.INVALID_ID);
+							refreshMapComplete(activity);
+							activity.getMapLayers().updateLayers(activity.getMapView());
+						} else {
+							ad.getItem(pos).setColorRes(R.color.osmand_orange);
+							showTransportDialog(ad, pos);
+						}
+						ad.notifyDataSetChanged();
+						return false;
+					}
+
+					private void showTransportDialog(final ArrayAdapter<ContextMenuItem> ad, final int pos) {
+						final AlertDialog.Builder b = new AlertDialog.Builder(activity);
+						b.setTitle(activity.getString(R.string.rendering_category_transport));
+
+						final int[] iconIds = new int[transportPrefs.size()];
+						final boolean[] checkedItems = new boolean[transportPrefs.size()];
+						for (int i = 0; i < transportPrefs.size(); i++) {
+							checkedItems[i] = transportPrefs.get(i).get();
+						}
+						final String[] vals = new String[transportRules.size()];
+						for (int i = 0; i < transportRules.size(); i++) {
+							RenderingRuleProperty p = transportRules.get(i);
+							String propertyName = SettingsActivity.getStringPropertyName(activity, p.getAttrName(),
+									p.getName());
+							vals[i] = propertyName;
+							if ("transportStops".equals(p.getAttrName())) {
+								iconIds[i] = R.drawable.ic_action_transport_stop;
+							} else if ("publicTransportMode".equals(p.getAttrName())) {
+								iconIds[i] = R.drawable.ic_action_bus_dark;
+							} else if ("tramTrainRoutes".equals(p.getAttrName())) {
+								iconIds[i] = R.drawable.ic_action_transport_tram;
+							} else if ("subwayMode".equals(p.getAttrName())) {
+								iconIds[i] = R.drawable.ic_action_transport_subway;
+							} else {
+								iconIds[i] = R.drawable.ic_action_bus_dark;
+							}
+						}
+
+						adapter = new ArrayAdapter<CharSequence>(activity, R.layout.popup_list_item_icon24_and_menu, R.id.title, vals) {
+							@NonNull
+							@Override
+							public View getView(final int position, View convertView, ViewGroup parent) {
+								View v = super.getView(position, convertView, parent);
+								final ImageView icon = (ImageView) v.findViewById(R.id.icon);
+								if (checkedItems[position]) {
+									icon.setImageDrawable(app.getIconsCache().getIcon(iconIds[position], R.color.osmand_orange));
+								} else {
+									icon.setImageDrawable(app.getIconsCache().getThemedIcon(iconIds[position]));
+								}
+								v.findViewById(R.id.divider).setVisibility(View.GONE);
+								v.findViewById(R.id.description).setVisibility(View.GONE);
+								v.findViewById(R.id.secondary_icon).setVisibility(View.GONE);
+								final SwitchCompat check = (SwitchCompat) v.findViewById(R.id.toggle_item);
+								check.setOnCheckedChangeListener(null);
+								check.setChecked(checkedItems[position]);
+								check.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+									@Override
+									public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+										checkedItems[position] = isChecked;
+										if (checkedItems[position]) {
+											icon.setImageDrawable(app.getIconsCache().getIcon(iconIds[position], R.color.osmand_orange));
+										} else {
+											icon.setImageDrawable(app.getIconsCache().getThemedIcon(iconIds[position]));
+										}
+									}
+								});
+								return v;
+							}
+						};
+
+						final ListView listView = new ListView(activity);
+						listView.setDivider(null);
+						listView.setClickable(true);
+						listView.setAdapter(adapter);
+						listView.setOnItemClickListener(new ListView.OnItemClickListener() {
+							@Override
+							public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+								checkedItems[position] = !checkedItems[position];
+								adapter.notifyDataSetChanged();
+							}
+						});
+						b.setView(listView);
+
+						b.setOnDismissListener(new DialogInterface.OnDismissListener() {
+							@Override
+							public void onDismiss(DialogInterface dialog) {
+								ContextMenuItem item = ad.getItem(pos);
+								if (item != null) {
+									item.setSelected(transportSelectedInner);
+									item.setColorRes(transportSelectedInner ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
+									ad.notifyDataSetChanged();
+								}
+
+							}
+						});
+						b.setNegativeButton(R.string.shared_string_cancel, null);
+						b.setPositiveButton(R.string.shared_string_apply, new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+								transportSelectedInner = false;
+								for (int i = 0; i < transportPrefs.size(); i++) {
+									transportPrefs.get(i).set(checkedItems[i]);
+									if (!transportSelectedInner && checkedItems[i]) {
+										transportSelectedInner = true;
+									}
+								}
+								refreshMapComplete(activity);
+								activity.getMapLayers().updateLayers(activity.getMapView());
+							}
+						});
+						b.show();
+					}
+				}).createItem());
 		selected = settings.SHOW_POI_LABEL.get();
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setTitleId(R.string.layer_amenity_label, activity)
@@ -486,7 +663,8 @@ public class ConfigureMapMenu {
 				: localeDescr;
 		adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.map_locale, activity)
 				.setDescription(localeDescr).setLayout(R.layout.list_item_single_line_descrition_narrow)
-				.setIcon(R.drawable.ic_action_map_language).setListener(new ContextMenuAdapter.ItemClickListener() {
+				.setIcon(R.drawable.ic_action_map_language)
+				.setListener(new ContextMenuAdapter.ItemClickListener() {
 					@Override
 					public boolean onContextMenuClick(final ArrayAdapter<ContextMenuItem> ad, int itemId,
 													  final int pos, boolean isChecked) {
