@@ -45,7 +45,7 @@
     <string name="new_filter_desc">Введите имя для нового фильтра. Вы сможете его найти в списке Категории.</string>
     <string name="translit_name_if_miss">Транслитерация если имя на %1$s отсутствует</string>
     <string name="translit_names">Транслитерация названий</string>
-    <string name="edit_filter">Редактировать фильтр</string>
+    <string name="edit_filter">Редактировать категории</string>
     <string name="subcategories">Подкатегории</string>
     <string name="selected_categories">Выбранные подкатегории</string>
     <string name="create_custom_poi">Настройка поиска</string>

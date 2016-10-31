@@ -52,7 +52,7 @@
     <string name="search_hint">Type city, address, poi name</string>
     <string name="translit_name_if_miss">Transliterate if %1$s name is missing</string>
     <string name="translit_names">Transliterate names</string>
-    <string name="edit_filter">Edit filter</string>
+    <string name="edit_filter">Edit categories</string>
     <string name="subcategories">Subcategories</string>
     <string name="selected_categories">Selected categories</string>
     <string name="create_custom_poi">Create custom filter</string>
