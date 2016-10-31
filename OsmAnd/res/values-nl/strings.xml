@@ -2690,10 +2690,10 @@ Als je hulp nodig hebt met OsmAnd: neem contact op met ons support team: support
  • De iconen op de kaart zijn nu aanklikbaar
 
 
- • Krachtige POI Filter Zoekfunctie: Zoek naar restaurants per keuken, campings met speciale voorzieningen
+ • Krachtige POI Filter Zoekfunctie: Zoek naar bijvoorbeeld naar restaurants per keuken, campings met speciale voorzieningen
 
 
- • Nieuwe OsmAnd Topo Kaartstijl voor fietsers en wandelaars
+ • Nieuwe Topo Kaartstijl, speciaal voor fietsers en wandelaars
 
 
  • Verbeterde GPX-opname, met nieuwe instellingen
@@ -2707,4 +2707,14 @@ Als je hulp nodig hebt met OsmAnd: neem contact op met ons support team: support
 
  en nog meer…
  "</string>
+    <string name="gpx_no_tracks_title">Je hebt nog geen GPX-tracks</string>
+    <string name="gpx_no_tracks_title_folder">Je kunt ook GPX-tracks toevoegen aan de map</string>
+    <string name="gpx_add_track">GPX-track toevoegen</string>
+    <string name="gpx_appearance">GPX-stijl</string>
+    <string name="osmo_share_location">Delen</string>
+    <string name="osmo_pause_location">Pauzeren</string>
+    <string name="osmo_service_running">OsMo is actief</string>
+    <string name="trip_rec_notification_settings">GPX-opname (geen gegevens)</string>
+    <string name="trip_rec_notification_settings_desc">Toon Android-Melding, waarmee de GPX-opname gestart kan worden</string>
+    <string name="shared_string_notifications">Meldingen</string>
     </resources>
