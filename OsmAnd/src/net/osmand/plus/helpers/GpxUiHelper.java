@@ -429,7 +429,7 @@ public class GpxUiHelper {
 					return v;
 				}
 
-				tv.setText(item.getTitle());
+				tv.setText(item.getTitle().replace("/", " • "));
 				GPXInfo info = list.get(position);
 				StringBuilder sb = new StringBuilder();
 				if (info.getLastModified() > 0) {
@@ -526,7 +526,8 @@ public class GpxUiHelper {
 							popup.setDropDownGravity(Gravity.RIGHT | Gravity.TOP);
 							popup.setVerticalOffset(AndroidUtils.dpToPx(activity, -48f));
 							popup.setHorizontalOffset(AndroidUtils.dpToPx(activity, -6f));
-							final GpxAppearanceAdapter gpxApprAdapter = new GpxAppearanceAdapter(activity);
+							final GpxAppearanceAdapter gpxApprAdapter = new GpxAppearanceAdapter(activity,
+									gpxAppearanceParams.containsKey(CURRENT_TRACK_COLOR_ATTR) ? gpxAppearanceParams.get(CURRENT_TRACK_COLOR_ATTR) : prefColor.get());
 							popup.setAdapter(gpxApprAdapter);
 							popup.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -676,7 +677,7 @@ public class GpxUiHelper {
 					if (resultCode == Activity.RESULT_OK) {
 						if (resultData != null) {
 							Uri uri = resultData.getData();
-							if (mapActivity.getGpxImportHelper().handleGpxImport(uri)) {
+							if (mapActivity.getGpxImportHelper().handleGpxImport(uri, false)) {
 								dialog.dismiss();
 							}
 						}
