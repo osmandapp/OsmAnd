@@ -2637,7 +2637,7 @@ Jeśli potrzebujesz pomocy podczas używania OsmAnd, prosimy o kontakt z naszym 
     <string name="selected_categories">Wybrane kategorie</string>
     <string name="create_custom_poi">Utwórz własny filtr</string>
     <string name="custom_search">Własne wyszukiwanie</string>
-    <string name="edit_filter">Edytuj filtr</string>
+    <string name="edit_filter">Edytuj kategorie</string>
     <string name="subcategories">Podkategorie</string>
     <string name="translit_names">Transliteracja nazw</string>
     <string name="translit_name_if_miss">Transliteruje nazwy, jeżeli nazwa w %1$s nie jest dostępna</string>
