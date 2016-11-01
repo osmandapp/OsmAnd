@@ -2489,4 +2489,5 @@ Si necesitas ayuda con la aplicación OsmAnd, contacte con nuestro equipo de sop
     <string name="gpx_add_track">Añadir traza</string>
     <string name="gpx_appearance">Apariencia</string>
     <string name="rendering_value_fine_name">Muy fino</string>
+    <string name="route_calculation">Cálculo de la ruta</string>
     </resources>
