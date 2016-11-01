@@ -787,13 +787,15 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 					MapMarkerDialogHelper.getMapMarkerIcon(mapActivity.getMyApplication(), m.colorIndex),
 					m.getOnlyName()));
 		}
+		/*
 		if (markers.size() > 2) {
 			MapMarker m = markers.get(2);
 			actions.add(new RouteSpinnerRow(SPINNER_MAP_MARKER_3_ID,
 					MapMarkerDialogHelper.getMapMarkerIcon(mapActivity.getMyApplication(), m.colorIndex),
 					m.getOnlyName()));
 		}
-		if (markers.size() > 3) {
+		*/
+		if (markers.size() > 2) {
 			actions.add(new RouteSpinnerRow(SPINNER_MAP_MARKER_MORE_ID, 0,
 					mapActivity.getString(R.string.map_markers_other)));
 		}
