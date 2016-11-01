@@ -2496,4 +2496,5 @@ Ak potrebuje pomoc s aplikáciou OsmAnd, kontaktuje podporu: support@osmand.net.
     <string name="gpx_add_track">Pridať stopu</string>
     <string name="gpx_appearance">Vzhľad</string>
     <string name="rendering_value_fine_name">Jemné</string>
+    <string name="route_calculation">Výpočet trasy</string>
     </resources>
