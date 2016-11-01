@@ -3014,7 +3014,7 @@
 	<string name="poi_pump_status_broken">Pump status: broken</string>
 	<string name="poi_pump_status_locked">Pump status: locked</string>
 
-	<string name="poi_payment_troika_yes">Troika card accepted</string>
+	<string name="poi_payment_troika_yes">Troika</string>
 	<string name="poi_payment_troika_no">Troika card not accepted</string>
 
 	<string name="poi_telescope">Telescope</string>
@@ -3297,5 +3297,21 @@
 	<string name="poi_cuisine_tibetan">Tibetan</string>
 
 	<string name="poi_feeding_place">Place for animal feeding</string>
+
+	<string name="poi_party">Party supplies</string>
+	<string name="poi_electrical">Electrical store</string>
+	<string name="poi_locksmith">Locksmith store</string>
+	<string name="poi_lighting">Lighting fixtures</string>
+	<string name="poi_lottery">Lottery tickets</string>
+	<string name="poi_gambling">Gambling venue</string>
+
+	<string name="poi_gambling_type">Type</string>
+	<string name="poi_gambling_lottery">Lottery</string>
+	<string name="poi_gambling_pachinko">Pachinko</string>
+	<string name="poi_gambling_slot_machines">Slot machines</string>
+	<string name="poi_gambling_betting">Betting</string>
+	<string name="poi_gambling_bingo">Bingo</string>
+
+	<string name="poi_e_cigarette">Electronic cigarettes store</string>
 
 </resources>
