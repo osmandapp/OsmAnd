@@ -2485,4 +2485,5 @@ Si amas a OsmAnd, OSM y quieres apoyarlos, esta es una perfecta manera de hacerl
     <string name="gpx_appearance">Apariencia</string>
     <string name="rendering_value_fine_name">Muy fino</string>
     <string name="route_calculation">Cálculo de la ruta</string>
+    <string name="upload_poi">Subir PDI</string>
     </resources>
