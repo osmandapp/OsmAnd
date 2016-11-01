@@ -2442,7 +2442,7 @@ Ak potrebuje pomoc s aplikáciou OsmAnd, kontaktuje podporu: support@osmand.net.
     <string name="selected_categories">Vybrané kategórie</string>
     <string name="create_custom_poi">Vytvoriť vlastný filter</string>
     <string name="custom_search">Vlastné vyhľadávanie</string>
-    <string name="edit_filter">Upraviť filter</string>
+    <string name="edit_filter">Upraviť kategórie</string>
     <string name="subcategories">Podkategórie</string>
     <string name="translit_names">Transliterovať názvy</string>
     <string name="translit_name_if_miss">Transliterovať ak %1$s názov chýba</string>
@@ -2454,7 +2454,7 @@ Ak potrebuje pomoc s aplikáciou OsmAnd, kontaktuje podporu: support@osmand.net.
     <string name="rendering_attr_contourColorScheme_description">Farebná schéma pre vrstevnice</string>
     <string name="save_track_min_speed">Minimálna rýchlosť pre záznam</string>
     <string name="save_track_min_speed_descr">Zvoľte minimálnu rýchlosť, pri ktorej sa zaznamená bod</string>
-    <string name="save_track_min_distance">Minimálna vzdialenosť pre záznam</string>
+    <string name="save_track_min_distance">Detekcia pohybu pre záznam</string>
     <string name="save_track_min_distance_descr">Zvoľte minimálnu vzdialenosť, pri ktorej sa zaznamená bod</string>
     <string name="save_track_precision">Minimálna presnosť záznamu</string>
     <string name="save_track_precision_descr">Zvoľte minimálnu presnosť, pri ktorej sa zaznamená bod</string>
@@ -2495,4 +2495,5 @@ Ak potrebuje pomoc s aplikáciou OsmAnd, kontaktuje podporu: support@osmand.net.
     <string name="gpx_no_tracks_title_folder">Môžete pridať stopy do priečinka</string>
     <string name="gpx_add_track">Pridať stopu</string>
     <string name="gpx_appearance">Vzhľad</string>
+    <string name="rendering_value_fine_name">Jemné</string>
     </resources>
