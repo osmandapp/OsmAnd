@@ -2270,4 +2270,199 @@
 <string name="poi_shop_craft">Potreby pre umenie a remeslá</string>
 	<string name="poi_honey">Obchod s medom</string>
 	<string name="poi_waterway_fuel">Čerpacia stanica pre lode</string>
+	<string name="poi_vending_type">Predávaný produkt</string>
+	<string name="poi_club_freemasonry">Slobodomurárska lóža</string>
+	<string name="poi_club_sailing">Námornícky klub</string>
+	<string name="poi_club_scout">Skautský klub</string>
+
+	<string name="poi_wiki_lang_af">Wikipedia afrikánsky</string>
+	<string name="poi_wiki_lang_bn">Wikipedia bengálsky</string>
+	<string name="poi_wiki_lang_br">Wikipedia bretónsky</string>
+	<string name="poi_wiki_lang_ga">Wikipedia írsky</string>
+	<string name="poi_wiki_lang_hy">Wikipedia arménsky</string>
+	<string name="poi_wiki_lang_la">Wikipedia latinsky</string>
+	<string name="poi_wiki_lang_mk">Wikipedia macedónsky</string>
+	<string name="poi_wiki_lang_sc">Wikipedia sardínsky</string>
+	<string name="poi_wiki_lang_sh">Wikipedia srbochorvástky</string>
+	<string name="poi_wiki_lang_sq">Wikipedia albánsky</string>
+	<string name="poi_wiki_lang_kk">Wikipedia kazašsky</string>
+	<string name="poi_wiki_lang_uz">Wikipedia uzbecky</string>
+	<string name="poi_wiki_lang_ce">Wikipedia čečensky</string>
+	<string name="poi_wiki_lang_sco">Wikipedia škótsky</string>
+	<string name="poi_wiki_lang_lmo">Wikipedia lombardsky</string>
+	<string name="poi_wiki_lang_my">Wikipedia barmsky</string>
+	<string name="poi_wiki_lang_an">Wikipedia aragónsky</string>
+	<string name="poi_wiki_lang_ne">Wikipedia nepálsky</string>
+	<string name="poi_wiki_lang_scn">Wikipedia sicílsky</string>
+	<string name="poi_wiki_lang_bar">Wikipedia bavorsky</string>
+	<string name="poi_wiki_lang_mn">Wikipedia mongolsky</string>
+	<string name="poi_wiki_lang_nap">Wikipedia neapolsky</string>
+
+	<string name="poi_vending_parcel_mail_in">Odovzdanie balíkov</string>
+	<string name="poi_vending_milk">Mlieko</string>
+	<string name="poi_vending_elongated_coin">Razené mince</string>
+	<string name="poi_vending_bread">Chlieb</string>
+	<string name="poi_vending_chewing_gums">Žuvačky</string>
+	<string name="poi_vending_parking_tickets_public_transport_tickets">Parkovacie lísky a lísky na hromadnú dopravu</string>
+	<string name="poi_vending_coffee">Káva</string>
+	<string name="poi_vending_toll">Mýtny poplatok</string>
+	<string name="poi_vending_tickets">Vstupenky</string>
+	<string name="poi_vending_water">Voda</string>
+	<string name="poi_vending_telephone_vouchers">Telefónne poukážky</string>
+	<string name="poi_vending_animal_food">Potrava pre zvieratá</string>
+	<string name="poi_vending_public_transport_plans">Mapy hromadnej dopravy</string>
+	<string name="poi_vending_drinks_sweets">Nápoje a sladkosti</string>
+	<string name="poi_vending_vouchers">Poukážky</string>
+	<string name="poi_vending_dvd">DVD</string>
+	<string name="poi_vending_candles">Sviečky</string>
+	<string name="poi_vending_toys">Hračky</string>
+	<string name="poi_vending_ice_cream">Zmrzlina</string>
+	<string name="poi_vending_sim_cards">SIM karty</string>
+
+	<string name="poi_branch">Pobočka</string>
+
+	<string name="poi_memorial_blue_plaque">Modrá plaketa</string>
+	<string name="poi_memorial_cross">V tvare kríža</string>
+	<string name="poi_memorial_vehicle">Vozidlo</string>
+	<string name="poi_memorial_stolperstein">Značka na chodníku</string>
+	<string name="poi_memorial_obelisk">Obelist</string>
+	<string name="poi_memorial_column">Stĺp</string>
+	<string name="poi_memorial_stupa">Stupa</string>
+	<string name="poi_memorial_fassade_decoration">Ozdoba fasády</string>
+
+	<string name="poi_inscription">Nápis</string>
+	<string name="poi_historic_quarry">Historický lom</string>
+
+	<string name="poi_resource_aggregate">Kamenivo</string>
+	<string name="poi_resource_antimony">Antimón</string>
+	<string name="poi_resource_asbestos">Azbest</string>
+	<string name="poi_resource_barite">Barit</string>
+	<string name="poi_resource_basalt">Bazalt</string>
+	<string name="poi_resource_bauxite">Bauxit</string>
+	<string name="poi_resource_beryl">Beryl</string>
+	<string name="poi_resource_bismuth">Bizmut</string>
+	<string name="poi_resource_chromite">Chromit</string>
+	<string name="poi_resource_clay">Hlina</string>
+	<string name="poi_resource_coal">Uhlie</string>
+	<string name="poi_resource_copper">Meď</string>
+	<string name="poi_resource_diamond">Diamanty</string>
+	<string name="poi_resource_dimension_stone">Stavebný kameň</string>
+	<string name="poi_resource_dolomite">Dolomit</string>
+	<string name="poi_resource_gas">Plyn</string>
+	<string name="poi_resource_gold">Zlato</string>
+	<string name="poi_resource_graphite">Grafit</string>
+	<string name="poi_resource_gravel">Štrk</string>
+	<string name="poi_resource_gypsum">Sadra</string>
+	<string name="poi_resource_iron_ore">Železná ruda</string>
+	<string name="poi_resource_lead">Olovo</string>
+	<string name="poi_resource_lignite">Hnedé uhlie</string>
+	<string name="poi_resource_limestone">Vápenec</string>
+	<string name="poi_resource_marble">Mramor</string>
+	<string name="poi_resource_mercury">Ortuť</string>
+	<string name="poi_resource_mica">Sľuda</string>
+	<string name="poi_resource_mineral_oil">Minerálny olej</string>
+	<string name="poi_resource_nickel">Nikel</string>
+	<string name="poi_resource_oil">Ropa</string>
+	<string name="poi_resource_opal">Opál</string>
+	<string name="poi_resource_peat">Rašelina</string>
+	<string name="poi_resource_platinum">Platina</string>
+	<string name="poi_resource_radium">Rádium</string>
+	<string name="poi_resource_ruby">Rubíny</string>
+	<string name="poi_resource_rutile">Rutil</string>
+	<string name="poi_resource_salt">Soľ</string>
+	<string name="poi_resource_sand">Piesok</string>
+	<string name="poi_resource_sandstone">Pieskovec</string>
+	<string name="poi_resource_silica">Oxid kremičitý</string>
+	<string name="poi_resource_silver">Striebro</string>
+	<string name="poi_resource_slate_iron_ore_copper">Kryštalická bridlica;Železná ruda;Meď</string>
+	<string name="poi_resource_slate">Kryštalická bridlica</string>
+	<string name="poi_resource_stone">Kameň</string>
+	<string name="poi_resource_tin">Cín</string>
+	<string name="poi_resource_tuff">Sopečný tuf</string>
+	<string name="poi_resource_uranium">Urán</string>
+	<string name="poi_resource_vanadium">Vanád</string>
+	<string name="poi_resource_water">Voda</string>
+	<string name="poi_resource_zinc">Zinok</string>
+	<string name="poi_resource_zircon">Zirkóny</string>
+
+	<string name="poi_wetland_mud">Blato</string>
+
+	<string name="poi_beach_sand">Piesok</string>
+	<string name="poi_beach_shingle">Naplavenina</string>
+	<string name="poi_beach_rocky">Kamenistý</string>
+
+	<string name="poi_palm">Palma</string>
+	<string name="poi_cypress">Cyprus</string>
+	<string name="poi_flagpole">Vlajková žrď</string>
+
+	<string name="poi_bench_no">Bez lavičky</string>
+	<string name="poi_bin_yes">S košom</string>
+	<string name="poi_bin_no">Bez koša</string>
+
+	<string name="poi_shelter_type_public_transport">Prístrešok na zastávke dopravy</string>
+	<string name="poi_shelter_type_picnic_shelter">Piknikový</string>
+	<string name="poi_shelter_type_weather_shelter">Proti počasiu</string>
+	<string name="poi_shelter_type_lean_to">Trojstranný prístrešok</string>
+	<string name="poi_shelter_type_basic_hut">Jednoduchá chata</string>
+	<string name="poi_shelter_type_building">Budova</string>
+	<string name="poi_shelter_type_wildlife_hide">Na pozorovanie zvierat</string>
+	<string name="poi_shelter_type_rock_shelter">Skalný</string>
+	<string name="poi_shelter_type_sun_shelter">Proti slnku</string>
+	<string name="poi_shelter_type_field_shelter">Poľný prístrešok</string>
+	<string name="poi_shelter_type_tent">Typ prístrešku: Stan</string>
+	<string name="poi_shelter_type_abandoned">Typ prístrešku: neudržiavaný</string>
+
+	<string name="poi_architect_name">Architekt</string>
+
+	<string name="poi_architecture_modern">Architektúra: moderná</string>
+	<string name="poi_architecture_contemporary">Architektúra: súčasná</string>
+	<string name="poi_architecture_victorian">Architektúra: viktoriánska</string>
+	<string name="poi_architecture_classicism">Architektúra: klasicistická</string>
+	<string name="poi_architecture_gothic">Architektúra: gotická</string>
+	<string name="poi_architecture_baroque">Architektúra: baroková</string>
+	<string name="poi_architecture_renaissance">Architektúra: renesančná</string>
+	<string name="poi_architecture_romanesque">Architektúra: románska</string>
+
+	<string name="poi_watering_place">Napájadlo</string>
+	<string name="poi_historic_aircraft">Historické lietadlo</string>
+
+	<string name="poi_elevator_yes">S výťahom</string>
+	<string name="poi_elevator_no">Bez výťahu</string>
+
+	<string name="poi_parish">Farský úrad</string>
+	<string name="poi_publisher">Vydavateľstvo</string>
+
+	<string name="poi_fuel_91ul">Palivo 91UL</string>
+	<string name="poi_fuel_100ll">Palivo 100LL</string>
+	<string name="poi_fuel_jeta1">Letecké palivo A-1</string>
+	<string name="poi_fuel_adblue">Palivo AdBlue</string>
+
+	<string name="poi_fuel_wood">Palivo: drevo</string>
+	<string name="poi_fuel_charcoal">Palivo: drevné uhlie</string>
+	<string name="poi_fuel_coal">Palivo: uhlie</string>
+
+	<string name="poi_street_lamp">Pouličná lampa</string>
+
+	<string name="poi_escape_lane">Únikový pruh</string>
+
+	<string name="poi_historic_milestone">Historický míľnik</string>
+
+	<string name="poi_tents_yes">Povolené</string>
+	<string name="poi_tents_no">Stany nepovolené</string>
+	<string name="poi_openfire_yes">Otvorený oheň polovený</string>
+	<string name="poi_openfire_no">Otvorený oheň nepolovený</string>
+	<string name="poi_scout_yes">Skautský tábor: áno</string>
+	<string name="poi_scout_no">Skautský tábor: nie</string>
+	<string name="poi_group_only_yes">Len skupiny: áno</string>
+	<string name="poi_group_only_no">Len skupiny: nie</string>
+	<string name="poi_washing_machine_no">Práčka: nie</string>
+	<string name="poi_animal_training">Výcvik zvierat</string>
+	<string name="poi_animal_training_dog">Pes</string>
+	<string name="poi_animal_training_horse">Kôň</string>
+
+	<string name="poi_horse_yes">Kone povolené</string>
+	<string name="poi_horse_no">Kone nepovolené</string>
+	<string name="poi_animal_yes">Zvieratá povolené</string>
+	<string name="poi_animal_no">Zvieratá nepovolené</string>
+
 	</resources>
