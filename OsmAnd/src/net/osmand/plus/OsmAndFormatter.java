@@ -1,8 +1,6 @@
 package net.osmand.plus;
 
-import java.text.DecimalFormat;
-import java.text.MessageFormat;
-import java.util.Map.Entry;
+import android.content.Context;
 
 import net.osmand.data.Amenity;
 import net.osmand.data.City.CityType;
@@ -13,7 +11,10 @@ import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandSettings.MetricsConstants;
 import net.osmand.plus.OsmandSettings.SpeedConstants;
 import net.osmand.util.Algorithms;
-import android.content.Context;
+
+import java.text.DecimalFormat;
+import java.text.MessageFormat;
+import java.util.Map.Entry;
 
 public class OsmAndFormatter {
 	public final static float METERS_IN_KILOMETER = 1000f;
@@ -30,7 +31,20 @@ public class OsmAndFormatter {
 		fixed1.setMinimumIntegerDigits(1);
 		fixed2.setMinimumIntegerDigits(1);
 	}
-	
+
+	public static String getFormattedDuration(int seconds, OsmandApplication ctx) {
+		int hours = seconds / (60 * 60);
+		int minutes = (seconds / 60) % 60;
+		if (hours > 0) {
+			return hours + " "
+					+ ctx.getString(R.string.osmand_parking_hour)
+					+ (minutes > 0 ? " " + minutes + " "
+					+ ctx.getString(R.string.osmand_parking_minute) : "");
+		} else {
+			return minutes + " " + ctx.getString(R.string.osmand_parking_minute);
+		}
+	}
+
 	public static double calculateRoundedDist(double distInMeters, OsmandApplication ctx) {
 		OsmandSettings settings = ctx.getSettings();
 		MetricsConstants mc = settings.METRIC_SYSTEM.get();

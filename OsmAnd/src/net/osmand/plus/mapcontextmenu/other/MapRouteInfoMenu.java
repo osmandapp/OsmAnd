@@ -613,18 +613,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 			TextView distanceText = (TextView) mainView.findViewById(R.id.DistanceText);
 			TextView durationText = (TextView) mainView.findViewById(R.id.DurationText);
 			distanceText.setText(OsmAndFormatter.getFormattedDistance(ctx.getRoutingHelper().getLeftDistance(), ctx));
-			int leftTime = ctx.getRoutingHelper().getLeftTime();
-			int hours = leftTime / (60 * 60);
-			int minutes = (leftTime / 60) % 60;
-			if (hours > 0) {
-				durationText.setText(hours + " "
-						+ ctx.getString(R.string.osmand_parking_hour)
-						+ (minutes > 0 ? " " + minutes + " "
-						+ ctx.getString(R.string.osmand_parking_minute) : ""));
-			} else {
-				durationText.setText(minutes + " "
-						+ ctx.getString(R.string.osmand_parking_minute));
-			}
+			durationText.setText(OsmAndFormatter.getFormattedDuration(ctx.getRoutingHelper().getLeftTime(), ctx));
 		}
 	}
 
