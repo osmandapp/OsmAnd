@@ -520,7 +520,7 @@
     <string name="app_name_osmand">ഓഎസ്എം ആന്റ്</string>
     <string name="activate_seamarks_plugin">സീമാര്‍ക്ക് പ്ളഗ്-ഇന്‍ സജീവമാക്കുക</string>
     <string name="activate_srtm_plugin">"എസ്ആര്‍ടിഎം പ്ളഗ്-ഇന്‍ സജീവമാക്കുക "</string>
-    <string name="edit_filter">"ഫില്‍ട്ടര്‍ എഡിറ്റ് ചെയ്യുക "</string>
+    <string name="edit_filter">വിഭാഗങ്ങള്‍ എഡിറ്റ് ചെയ്യുക</string>
     <string name="delete_filter">ഫില്‍റ്റര്‍ നീക്കം ചെയ്യുക</string>
     <string name="donation_to_osm_desc">"സംഭാവനകളുടെ ഒരു ഭാഗം ഓഎസ്എംആന്റ് -ന്റെ കോണ്ട്രിബ്യൂട് ചെയ്തവര്‍ക്ക് കൊടുക്കുന്നതാണ്. സബ്സ്ക്രിപ്ഷന്‍ വില  മാറ്റമില്ലാതെ തുടരും."</string>
     <string name="get_for">%1$s മേടിക്കുക</string>
@@ -1408,7 +1408,7 @@
     <string name="shared_string_record">റിക്കോഡ്</string>
     <string name="rendering_attr_contourColorScheme_description">കോണ്ടൂര്‍ വരകളുടെ നിറങ്ങളുടെ സ്കീം</string>
     <string name="save_track_min_speed">"റിക്കോഡ് ചെയ്യാനുള്ള കുറഞ്ഞ  വേഗത"</string>
-    <string name="save_track_min_distance">"റിക്കോഡ് ചെയ്യാനുള്ള കുറഞ്ഞ  ദൂരം"</string>
+    <string name="save_track_min_distance">"ചലിക്കുന്നതറിഞ്ഞ് റിക്കോഡ്  ചെയ്യുക"</string>
     <string name="save_track_precision">"റിക്കോഡ് ചെയ്യാനുള്ള കുറഞ്ഞ  കൃത്യത"</string>
     <string name="rendering_value_light_brown_name">ഇളം തവിട്ടുനിറം</string>
     <string name="rendering_attr_contourColorScheme_name">കോണ്ടൂര്‍ വരകളുടെ നിറങ്ങളുടെ സ്കീം</string>
