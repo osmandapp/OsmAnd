@@ -2576,4 +2576,5 @@ und vieles mehr ...
     <string name="osmo_pause_location">Pause</string>
     <string name="osmo_share_location">Teilen</string>
     <string name="gpx_appearance">Aussehen</string>
+    <string name="route_calculation">Routenberechnung</string>
     </resources>
