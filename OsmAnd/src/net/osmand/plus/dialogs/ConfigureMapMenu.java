@@ -42,6 +42,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityLayers;
 import net.osmand.plus.activities.PluginActivity;
 import net.osmand.plus.activities.SettingsActivity;
+import net.osmand.plus.openseamapsplugin.NauticalMapsPlugin;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.render.RendererRegistry;
@@ -495,20 +496,27 @@ public class ConfigureMapMenu {
 						final OsmandApplication app = activity.getMyApplication();
 						Collection<String> rendererNames = app.getRendererRegistry().getRendererNames();
 						final String[] items = rendererNames.toArray(new String[rendererNames.size()]);
-						final String[] visibleNames = new String[items.length];
+						boolean nauticalPluginDisabled = OsmandPlugin.getEnabledPlugin(NauticalMapsPlugin.class) == null;
+						final List<String> visibleNamesList = new ArrayList<>();
 						int selected = -1;
 						final String selectedName = app.getRendererRegistry().getCurrentSelectedRenderer().getName();
-						for (int j = 0; j < items.length; j++) {
-							if (items[j].equals(selectedName)) {
-								selected = j;
+						int i = 0;
+						for (String item : items) {
+							if (nauticalPluginDisabled && item.equals(RendererRegistry.NAUTICAL_RENDER)) {
+								continue;
 							}
-							visibleNames[j] = items[j].replace('_', ' ').replace('-', ' ');
+							if (item.equals(selectedName)) {
+								selected = i;
+							}
+							visibleNamesList.add(item.replace('_', ' ').replace('-', ' '));
+							i++;
 						}
-						bld.setSingleChoiceItems(visibleNames, selected, new DialogInterface.OnClickListener() {
+
+						bld.setSingleChoiceItems(visibleNamesList.toArray(new String[visibleNamesList.size()]), selected, new DialogInterface.OnClickListener() {
 
 							@Override
 							public void onClick(DialogInterface dialog, int which) {
-								String renderer = items[which];
+								String renderer = visibleNamesList.get(which);
 								RenderingRulesStorage loaded = app.getRendererRegistry().getRenderer(renderer);
 								if (loaded != null) {
 									OsmandMapTileView view = activity.getMapView();
