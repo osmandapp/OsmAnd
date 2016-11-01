@@ -2743,7 +2743,7 @@
 	<string name="poi_pump_status_broken">Pumpila stato: difektita</string>
 	<string name="poi_pump_status_locked">Pumpila ŝtato: blokita</string>
 
-	<string name="poi_payment_troika_yes">Troika (Тройка) kartoj akceptataj</string>
+	<string name="poi_payment_troika_yes">Troika (Тройка)</string>
 	<string name="poi_payment_troika_no">Troika (Тройка) kartoj malakceptataj</string>
 
 	<string name="poi_telescope_type_optical">Teleskopo: optika</string>
@@ -3303,4 +3303,20 @@
 
 <string name="poi_feeding_place">Bestonutrejo</string>
 
-</resources>
+<string name="poi_party">Provizadoj por aranĝoj</string>
+	<string name="poi_electrical">Elektraĵa vendejo</string>
+	<string name="poi_locksmith">Seruristejo</string>
+	<string name="poi_lighting">Prilumigad-aparataj vendejo</string>
+	<string name="poi_lottery">Loteri-biletaj kiosko</string>
+	<string name="poi_gambling">Hazardludejo</string>
+
+	<string name="poi_gambling_type">Speco</string>
+	<string name="poi_gambling_lottery">Loterio</string>
+	<string name="poi_gambling_pachinko">Paĉinko</string>
+	<string name="poi_gambling_slot_machines">Unubrakaj banditoj</string>
+	<string name="poi_e_cigarette">Elektronik-cigaredaj vendejo</string>
+
+<string name="poi_gambling_bingo">Bingo</string>
+
+	<string name="poi_gambling_betting">Vetoj</string>
+	</resources>
