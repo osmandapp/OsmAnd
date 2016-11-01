@@ -2451,11 +2451,11 @@ Si necesitas ayuda con la aplicación OsmAnd, contacte con nuestro equipo de sop
     <string name="christmas_desc">Anticipando Navidad y Año Nuevo, puedes elegir mostrar el PDI asociado con la Navidad: Árboles navideños, tiendas, etc.</string>
     <string name="christmas_desc_q">¿Mostrar el PDI navideño?</string>
     <string name="save_track_min_speed">Velocidad mínima del registro</string>
-    <string name="save_track_min_speed_descr">Define la velocidad mínima de registro de un punto</string>
+    <string name="save_track_min_speed_descr">Define la velocidad mínima para registrar un punto</string>
     <string name="save_track_min_distance">Detección del registro de movimiento</string>
     <string name="save_track_min_distance_descr">Define la distancia mínima de registro entre puntos de ubicación</string>
     <string name="save_track_precision">Precisión mínima del registro</string>
-    <string name="save_track_precision_descr">Define la precisión mínima de registro de un punto</string>
+    <string name="save_track_precision_descr">Define la precisión mínima para registrar un punto</string>
     <string name="rendering_attr_contourColorScheme_description">Esquema de color para las curvas de nivel</string>
     <string name="shared_string_continue">Continuar</string>
     <string name="shared_string_pause">Pausar</string>
