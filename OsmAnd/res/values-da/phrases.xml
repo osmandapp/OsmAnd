@@ -2992,7 +2992,7 @@
 
 <string name="poi_pump_type_beam_pump">Pumpetype: pumpjack</string>
 	<string name="poi_pump_type_india_mk_2_3">Pumpetype: Indien Mk II eller III</string>
-	<string name="poi_payment_troika_yes">Troika kort accepteres</string>
+	<string name="poi_payment_troika_yes">Troika</string>
 	<string name="poi_payment_troika_no">Troika kort accepteres ikke</string>
 
 <string name="poi_telescope">Teleskop</string>
@@ -3387,5 +3387,21 @@
 	<string name="poi_waterway_fuel">Tankstation for både</string>
 
 <string name="poi_feeding_place">Foderplads</string>
+
+<string name="poi_party">Fest leverancer</string>
+	<string name="poi_electrical">El butik</string>
+	<string name="poi_locksmith">Låsesmed</string>
+	<string name="poi_lighting">Lysarmaturer</string>
+	<string name="poi_lottery">Lotterisedler</string>
+	<string name="poi_gambling">Spillehal</string>
+
+	<string name="poi_gambling_type">Type</string>
+	<string name="poi_gambling_lottery">Lotteri</string>
+	<string name="poi_gambling_pachinko">Pachinko</string>
+	<string name="poi_gambling_slot_machines">Enarmede tyveknægte</string>
+	<string name="poi_gambling_betting">Væddemål</string>
+	<string name="poi_gambling_bingo">Bingo</string>
+
+	<string name="poi_e_cigarette">E-cigaretter</string>
 
 </resources>
