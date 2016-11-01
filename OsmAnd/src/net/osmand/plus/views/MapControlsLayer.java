@@ -235,8 +235,8 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 	private void initTopControls() {
 		View configureMap = mapActivity.findViewById(R.id.map_layers_button);
-		layersHud = createHudButton(configureMap, R.drawable.map_layer_dark)
-				.setIconsId(R.drawable.map_layer_dark, R.drawable.map_layer_night)
+		layersHud = createHudButton(configureMap, R.drawable.ic_world_globe_dark)
+				.setIconColorId(R.color.on_map_icon_color, 0)
 				.setBg(R.drawable.btn_inset_circle_trans, R.drawable.btn_inset_circle_night);
 		controls.add(layersHud);
 		configureMap.setOnClickListener(new View.OnClickListener() {
@@ -673,6 +673,12 @@ public class MapControlsLayer extends OsmandMapLayer {
 		for (MapHudButton mc : controls) {
 			mc.update(mapActivity.getMyApplication(), isNight);
 		}
+	}
+
+	public void updateAppModeIcon(boolean isNight) {
+		appModeIcon.setImageDrawable(app.getIconsCache().getIcon(
+				settings.getApplicationMode().getSmallIconDark(),
+				isNight ? 0 : R.color.on_map_icon_color));
 	}
 
 	public void updateCompass(boolean isNight) {

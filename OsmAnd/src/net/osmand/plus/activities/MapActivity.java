@@ -985,6 +985,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			}
 		});
 		getMapView().refreshMap(true);
+		if (mapLayers.getMapControlsLayer() != null) {
+			mapLayers.getMapControlsLayer().updateAppModeIcon(app.getDaynightHelper().isNightMode());
+		}
 	}
 
 	public void updateMapSettings() {
