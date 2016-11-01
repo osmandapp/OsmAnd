@@ -3,6 +3,7 @@ package net.osmand.plus.views.mapwidgets;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.support.v7.app.AlertDialog;
 import android.util.DisplayMetrics;
 import android.view.View;
@@ -490,6 +491,7 @@ public class MapInfoWidgetsFactory {
 		private View waypointInfoBar;
 		private LocationPointWrapper lastPoint;
 		private TurnDrawable turnDrawable;
+		private boolean showMarker;
 		private int shadowRad;
 
 		public TopTextView(OsmandApplication app, MapActivity map) {
@@ -543,6 +545,7 @@ public class MapInfoWidgetsFactory {
 			String text = null;
 			TurnType[] type = new TurnType[1];
 			boolean showNextTurn = false;
+			boolean showMarker = this.showMarker;
 			if (routingHelper != null && routingHelper.isRouteCalculated() && !routingHelper.isDeviatedFromRoute()) {
 				if (routingHelper.isFollowingMode()) {
 					if (settings.SHOW_STREET_NAME.get()) {
@@ -551,8 +554,7 @@ public class MapInfoWidgetsFactory {
 							text = "";
 						} else {
 							if(type[0] == null){
-								type[0] = TurnType.valueOf(TurnType.C, false);
-								turnDrawable.setColor(R.color.color_myloc_distance);
+								showMarker = true;
 							} else {
 								turnDrawable.setColor(R.color.nav_arrow);
 							}
@@ -593,8 +595,7 @@ public class MapInfoWidgetsFactory {
 						double dist = 
 								CurrentPositionHelper.getOrthogonalDistance(rt, locationProvider.getLastKnownLocation());
 						if(dist < 50) {
-							type[0] = TurnType.valueOf(TurnType.C, false);
-							turnDrawable.setColor(R.color.color_myloc_distance);
+							showMarker = true;
 						} else {
 							text = map.getResources().getString(R.string.shared_string_near) + " " + text;
 						}
@@ -614,9 +615,8 @@ public class MapInfoWidgetsFactory {
 				updateVisibility(waypointInfoBar, false);
 				updateVisibility(addressText, true);
 				updateVisibility(addressTextShadow, shadowRad > 0);
-				boolean update = turnDrawable.setTurnType(type[0]);
-						
-
+				boolean update = turnDrawable.setTurnType(type[0]) || showMarker != this.showMarker;
+				this.showMarker = showMarker;
 				int h = addressText.getHeight() / 4 * 3;
 				if (h != turnDrawable.getBounds().bottom) {
 					turnDrawable.setBounds(0, 0, h, h);
@@ -626,6 +626,12 @@ public class MapInfoWidgetsFactory {
 						addressTextShadow.setCompoundDrawables(turnDrawable, null, null, null);
 						addressTextShadow.setCompoundDrawablePadding(4);
 						addressText.setCompoundDrawables(turnDrawable, null, null, null);
+						addressText.setCompoundDrawablePadding(4);
+					} else if (showMarker) {
+						Drawable marker = map.getMyApplication().getIconsCache().getIcon(R.drawable.ic_action_marker_dark, R.color.color_myloc_distance);
+						addressTextShadow.setCompoundDrawablesWithIntrinsicBounds(marker, null, null, null);
+						addressTextShadow.setCompoundDrawablePadding(4);
+						addressText.setCompoundDrawablesWithIntrinsicBounds(marker, null, null, null);
 						addressText.setCompoundDrawablePadding(4);
 					} else {
 						addressTextShadow.setCompoundDrawables(null, null, null, null);
