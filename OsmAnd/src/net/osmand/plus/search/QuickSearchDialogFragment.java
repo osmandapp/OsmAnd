@@ -479,13 +479,13 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 							useMapCenter = false;
 							centerLatLon = null;
 							updateUseMapCenterUI();
-							startLocationUpdate();
 							LatLon centerLatLon = new LatLon(location.getLatitude(), location.getLongitude());
 							SearchSettings ss = searchUICore.getSearchSettings().setOriginalLocation(
 									new LatLon(centerLatLon.getLatitude(), centerLatLon.getLongitude()));
 							searchUICore.updateSettings(ss);
 							updateClearButtonAndHint();
 							updateClearButtonVisibility(true);
+							startLocationUpdate();
 						}
 						updateToolbarButton();
 					}
