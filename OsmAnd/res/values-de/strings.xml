@@ -2542,7 +2542,7 @@ Wenn Sie OsmAnd und OSM lieben und unterstützen wollen, so ist dies die perfekt
     <string name="christmas_desc_q">Weihnachts POI anzeigen?</string>
     <string name="save_track_min_speed">Mindestgeschwindigkeit für die Protokollierung</string>
     <string name="save_track_min_speed_descr">Wählen Sie die Minimalgeschwindigkeit, bei der die Protokollierung ausgelöst wird</string>
-    <string name="save_track_min_distance">Mindestentfernung für die Protokollierung</string>
+    <string name="save_track_min_distance">Protokollierung der Bewegungserkennung</string>
     <string name="save_track_min_distance_descr">Wählen Sie die Mindestentfernung von der letzten Position, damit die Protokollierung ausgelöst wird</string>
     <string name="save_track_precision">Minimale Genauigkeit der Protokollierung</string>
     <string name="save_track_precision_descr">Minimale Genauigkeit der Protokollierung auswählen</string>
@@ -2577,4 +2577,7 @@ und vieles mehr ...
     <string name="osmo_share_location">Teilen</string>
     <string name="gpx_appearance">Aussehen</string>
     <string name="route_calculation">Routenberechnung</string>
+    <string name="gpx_no_tracks_title">Keine Tracks vorhanen</string>
+    <string name="gpx_no_tracks_title_folder">Tracks können dem Ordner hinzugefügt werden</string>
+    <string name="gpx_add_track">Track hinzufügen</string>
     </resources>
