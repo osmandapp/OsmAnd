@@ -3116,4 +3116,20 @@
 
 <string name="poi_feeding_place">Lugar para alimentar animales</string>
 
+<string name="poi_party">Artículos para fiestas</string>
+	<string name="poi_electrical">Artículos de electricidad</string>
+	<string name="poi_locksmith">Cerrajería</string>
+	<string name="poi_lighting">Artículos de iluminación</string>
+	<string name="poi_lottery">Agencia de lotería</string>
+	<string name="poi_gambling">Salón de juegos</string>
+
+	<string name="poi_gambling_type">Tipo de juego</string>
+	<string name="poi_gambling_lottery">Lotería</string>
+	<string name="poi_gambling_pachinko">Pachinko</string>
+	<string name="poi_gambling_slot_machines">Tragamonedas</string>
+	<string name="poi_gambling_betting">Apuestas</string>
+	<string name="poi_gambling_bingo">Bingo</string>
+
+	<string name="poi_e_cigarette">Cigarrillos eléctricos</string>
+
 </resources>
