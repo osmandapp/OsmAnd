@@ -2605,7 +2605,7 @@
 
 	<string name="poi_fire_operator">Odpowiedzialna jednostka SP</string>
 
-	<string name="poi_payment_troika_yes">Karty Troika (Тройка) akceptowane</string>
+	<string name="poi_payment_troika_yes">Troika (Тройка)</string>
 	<string name="poi_payment_troika_no">Karty Troika (Тройка) nieakceptowane</string>
 
 	<string name="poi_telescope_diameter">Średnica</string>
@@ -3324,5 +3324,21 @@
 	<string name="poi_waterway_fuel">Stacja benzynowa dla łodzi</string>
 
 <string name="poi_feeding_place">Paśnik</string>
+
+<string name="poi_party">Dostawy imprez</string>
+	<string name="poi_electrical">Sklep elektryczny</string>
+	<string name="poi_locksmith">Ślusarz</string>
+	<string name="poi_lighting">Artykuły oświetleniowe</string>
+	<string name="poi_lottery">Kupony loteryjne</string>
+	<string name="poi_gambling">Salon gier hazardowych</string>
+
+	<string name="poi_gambling_type">Rodzaj</string>
+	<string name="poi_gambling_lottery">Loteria</string>
+	<string name="poi_gambling_pachinko">Pachinko</string>
+	<string name="poi_gambling_slot_machines">Jednorękie bandyty</string>
+	<string name="poi_gambling_betting">Zakłady</string>
+	<string name="poi_gambling_bingo">Bingo</string>
+
+	<string name="poi_e_cigarette">Sklep z e-papierosami</string>
 
 </resources>
