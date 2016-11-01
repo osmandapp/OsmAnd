@@ -2,9 +2,11 @@ package net.osmand.plus.mapcontextmenu.builders;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.AppCompatButton;
 import android.text.Html;
 import android.text.TextUtils;
 import android.text.util.Linkify;
@@ -130,6 +132,24 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		llTextViewParams.gravity = Gravity.CENTER_VERTICAL;
 		llText.setLayoutParams(llTextViewParams);
 		llText.addView(textView);
+
+		if (isWiki) {
+			AppCompatButton wikiButton = new AppCompatButton(view.getContext());
+			LinearLayout.LayoutParams llWikiButtonParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+			llWikiButtonParams.setMargins(0, dpToPx(10f), 0, dpToPx(10f));
+			wikiButton.setLayoutParams(llWikiButtonParams);
+			wikiButton.setPadding(dpToPx(14f), 0, dpToPx(14f), 0);
+			wikiButton.setBackgroundResource(R.drawable.blue_button_drawable);
+			wikiButton.setTextColor(Color.WHITE);
+			wikiButton.setText(app.getString(R.string.read_more));
+			wikiButton.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					POIMapLayer.showWikipediaDialog(view.getContext(), app, amenity);
+				}
+			});
+			llText.addView(wikiButton);
+		}
 
 		((LinearLayout) view).addView(ll);
 

@@ -120,8 +120,9 @@ public class NavigationNotification extends OsmandNotification {
 		if (service != null && (service.getUsedBy() & USED_BY_NAVIGATION) != 0) {
 			color = app.getResources().getColor(R.color.osmand_orange);
 
-			String distanceStr = app.getString(R.string.route_distance) + OsmAndFormatter.getFormattedDistance(app.getRoutingHelper().getLeftDistance(), app);
-			String durationStr = app.getString(R.string.access_arrival_time) + ": " + SimpleDateFormat.getTimeInstance(DateFormat.SHORT)
+			String distanceStr = OsmAndFormatter.getFormattedDistance(app.getRoutingHelper().getLeftDistance(), app);
+			String timeStr = OsmAndFormatter.getFormattedDuration(app.getRoutingHelper().getLeftTime(), app);
+			String etaStr = SimpleDateFormat.getTimeInstance(DateFormat.SHORT)
 					.format(new Date(System.currentTimeMillis() + app.getRoutingHelper().getLeftTime() * 1000));
 
 			TurnType turnType = null;
@@ -176,13 +177,13 @@ public class NavigationNotification extends OsmandNotification {
 					}
 				}
 
-				notificationText.append(distanceStr).append(" • ").append(durationStr);
+				notificationText.append(distanceStr).append(" • ").append(timeStr).append(" • ").append(etaStr);
 
 			} else {
 				notificationTitle = app.getString(R.string.shared_string_navigation);
 				String error = routingHelper.getLastRouteCalcErrorShort();
 				if (Algorithms.isEmpty(error)) {
-					notificationText.append("Route calculation...");
+					notificationText.append(app.getString(R.string.route_calculation)).append("...");
 				} else {
 					notificationText.append(error);
 				}

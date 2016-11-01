@@ -40,7 +40,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:background="@drawable/btn_round_blue"
+            android:layout_marginBottom="16dp"
+            android:paddingLeft="14dp"
+            android:paddingRight="14dp"
+            android:background="@drawable/blue_button_drawable"
             android:textColor="@color/color_white"
             android:text="@string/gpx_add_track"/>
 
@@ -50,7 +53,6 @@
         android:id="@+id/dividerBottom"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginTop="16dp"
         android:background="?attr/dashboard_divider"/>
 
 </LinearLayout>
