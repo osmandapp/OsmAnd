@@ -1157,7 +1157,6 @@
 	<string name="poi_greenfield">Земли под застройку</string>
 	<string name="poi_bunker_silo">Сооружение для хранения силоса</string>
 	<string name="poi_power_cable_distribution_cabinet">Кабельный распределительный шкаф</string>
-	<string name="poi_conservation">Предохраняемая от застройки территория</string>
 	<string name="poi_crane">Кран</string>
 	<string name="poi_cutline">Просека</string>
 	<string name="poi_forest">Лес (обслуживаемый)</string>
@@ -3347,5 +3346,7 @@
 	<string name="poi_gambling_bingo">Бинго</string>
 
 	<string name="poi_e_cigarette">Электронные сигареты</string>
+
+	<string name="poi_locomotive">Локомотив</string>
 
 </resources>
