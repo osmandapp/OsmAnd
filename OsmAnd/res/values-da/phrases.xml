@@ -3388,8 +3388,8 @@
 
 <string name="poi_feeding_place">Foderplads</string>
 
-<string name="poi_party">Fest leverancer</string>
-	<string name="poi_electrical">El butik</string>
+<string name="poi_party">Festartikler</string>
+	<string name="poi_electrical">El forretning</string>
 	<string name="poi_locksmith">Låsesmed</string>
 	<string name="poi_lighting">Lysarmaturer</string>
 	<string name="poi_lottery">Lotterisedler</string>
