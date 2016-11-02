@@ -2692,5 +2692,12 @@ Se ami OsmAnd e OSM e vuoi sostenerli, questo è un modo perfetto per farlo.</st
     <string name="trip_rec_notification_settings">Registrazione viaggio (nessun dato)</string>
     <string name="trip_rec_notification_settings_desc">Mostra le notifiche che permettono di iniziare a registrare il viaggio premendo il pulsante Registra</string>
     <string name="shared_string_notifications">Notifiche</string>
-    <string name="route_calculation"></string>
+    <string name="route_calculation"/>
+    <string name="gpx_no_tracks_title">Non hai tracce al momento</string>
+    <string name="gpx_no_tracks_title_folder">Puoi anche aggiungere tracce alla cartella</string>
+    <string name="gpx_add_track">Aggiungi traccia</string>
+    <string name="gpx_appearance">Aspetto</string>
+    <string name="osmo_share_location">Condividi</string>
+    <string name="osmo_pause_location">Metti in pausa</string>
+    <string name="osmo_service_running">Il servizio OsMo è avviato</string>
     </resources>
