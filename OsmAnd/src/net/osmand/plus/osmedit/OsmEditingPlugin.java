@@ -201,7 +201,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		if (selectedObj instanceof Amenity) {
 			Amenity amenity = (Amenity) selectedObj;
 			final PoiType poiType = amenity.getType().getPoiTypeByKeyName(amenity.getSubType());
-			isEditable = !amenity.getType().isWiki() && !poiType.isNotEditableOsm();
+			isEditable = !amenity.getType().isWiki() && poiType !=null && !poiType.isNotEditableOsm();
 		}
 		if (isEditable) {
 			adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.poi_context_menu_modify, mapActivity)
