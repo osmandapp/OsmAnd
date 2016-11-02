@@ -339,7 +339,9 @@ public class MapMarkersWidgetsFactory {
 		@Override
 		public boolean updateInfo(DrawSettings drawSettings) {
 			MapMarker marker = getMarker();
-			if (marker == null || map.getMyApplication().getRoutingHelper().isFollowingMode()) {
+			if (marker == null
+					|| map.getMyApplication().getRoutingHelper().isRoutePlanningMode()
+					|| map.getMyApplication().getRoutingHelper().isFollowingMode()) {
 				cachedMeters = 0;
 				setText(null, null);
 				return false;
