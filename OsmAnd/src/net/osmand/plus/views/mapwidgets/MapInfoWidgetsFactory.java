@@ -628,7 +628,7 @@ public class MapInfoWidgetsFactory {
 						addressText.setCompoundDrawables(turnDrawable, null, null, null);
 						addressText.setCompoundDrawablePadding(4);
 					} else if (showMarker) {
-						Drawable marker = map.getMyApplication().getIconsCache().getIcon(R.drawable.ic_action_marker_dark, R.color.color_myloc_distance);
+						Drawable marker = map.getMyApplication().getIconsCache().getIcon(R.drawable.ic_action_start_navigation, R.color.color_myloc_distance);
 						addressTextShadow.setCompoundDrawablesWithIntrinsicBounds(marker, null, null, null);
 						addressTextShadow.setCompoundDrawablePadding(4);
 						addressText.setCompoundDrawablesWithIntrinsicBounds(marker, null, null, null);
