@@ -2892,7 +2892,7 @@
 	<string name="poi_pump_status_broken">Pumpenzustand: defekt</string>
 	<string name="poi_pump_status_locked">Pumpenzustand: gesperrt</string>
 
-<string name="poi_payment_troika_yes">Troika-Karte akzeptiert</string>
+<string name="poi_payment_troika_yes">Troika</string>
 	<string name="poi_payment_troika_no">Troika-Karte nicht akzeptiert</string>
 
 	<string name="poi_telescope">Teleskop</string>
@@ -3303,5 +3303,21 @@
 	<string name="poi_waterway_fuel">Tankstelle für Boote</string>
 
 <string name="poi_feeding_place">Ort für die Tierfütterung</string>
+
+<string name="poi_party">Partybedarf</string>
+	<string name="poi_electrical">Elektronikgeschäft</string>
+	<string name="poi_locksmith">Schlüsseldienst</string>
+	<string name="poi_lighting">Leuchten</string>
+	<string name="poi_lottery">Lotteriescheine</string>
+	<string name="poi_gambling">Spielhalle</string>
+
+	<string name="poi_gambling_type">Typ</string>
+	<string name="poi_gambling_lottery">Lotterie</string>
+	<string name="poi_gambling_pachinko">Pachinko</string>
+	<string name="poi_gambling_slot_machines">Münzautomaten</string>
+	<string name="poi_gambling_betting">Wetten</string>
+	<string name="poi_gambling_bingo">Bingo</string>
+
+	<string name="poi_e_cigarette">E-Zigarettengeschäft</string>
 
 </resources>
