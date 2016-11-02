@@ -2664,7 +2664,7 @@ Als je hulp nodig hebt met OsmAnd: neem contact op met ons support team: support
     <string name="new_filter">Nieuw filter</string>
     <string name="new_filter_desc">Geen een naam aan het nieuwe filter. Deze naam wordt aan de lijst Categorieën toegevoegd.</string>
     <string name="custom_search">Eigen zoekfilter</string>
-    <string name="edit_filter">Filter bewerken</string>
+    <string name="edit_filter">Bewerk categorieën</string>
     <string name="subcategories">Subcategorieën</string>
     <string name="translit_names">Transliteratie van namen</string>
     <string name="translit_name_if_miss">Weergeven in westers schrift als naam in %1$s ontbreekt</string>
@@ -2720,4 +2720,6 @@ Als je hulp nodig hebt met OsmAnd: neem contact op met ons support team: support
     <string name="trip_rec_notification_settings">GPX-opname (geen gegevens)</string>
     <string name="trip_rec_notification_settings_desc">Toon Android-Melding, waarmee de GPX-opname gestart kan worden</string>
     <string name="shared_string_notifications">Meldingen</string>
+    <string name="route_calculation">Route berekening</string>
+    <string name="rendering_value_fine_name">Fijn</string>
     </resources>
