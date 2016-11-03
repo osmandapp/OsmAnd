@@ -2202,7 +2202,7 @@ V současnosti je k dispozici {2} MB.</string>
     <string name="postcode">Poštovní směrovací číslo</string>
     <string name="search_categories">Kategorie</string>
     <string name="back_to_search">Zpět na hledání</string>
-    <string name="confirmation_to_delete_history_items">Chcete vymazat vybrané položky historie?</string>
+    <string name="confirmation_to_delete_history_items">Chcete odstranit vybrané položky z historie?</string>
     <string name="show_something_on_map">Zobrazit %1$s na mapě</string>
     <string name="dist_away_from_my_location">Hledat do vzdálenosti %1$s</string>
     <string name="show_on_map">Zobrazit na mapě</string>
@@ -2256,14 +2256,14 @@ V současnosti je k dispozici {2} MB.</string>
 
  a další…
  "</string>
-    <string name="osm_live_payment_desc">Poplatek za předplatné bude strhnuto každý měsíc. Předplatné můžete zrušit kdykoli na Google Play.</string>
+    <string name="osm_live_payment_desc">Poplatek za předplatné bude stržen každý měsíc. Předplatné můžete zrušit kdykoli na Google Play.</string>
     <string name="donation_to_osm">Příspěvek komunitě OpenStreetMap</string>
     <string name="donation_to_osm_desc">Část příspěvku bude zaslaná uživatelům, kteří zasílají změny do OpenStreetMap. Cena předplatného zůstává stejná.</string>
     <string name="osm_live_subscription_desc">Předplatné umožňuje hodinové, denní, týdenní aktualizace a neomezené stahování map celého světa.</string>
     <string name="get_it">Získat</string>
     <string name="get_for">Získat za %1$s</string>
     <string name="get_for_month">Získat za %1$s měsíc</string>
-    <string name="osm_live_banner_desc">Získejte neomezené stahování map a aktualizací více než jednou za měsíc: každou hodinu, den nebo týden.</string>
+    <string name="osm_live_banner_desc">Získejte neomezené stahování map a aktualizace více než jednou za měsíc: každý týden, den nebo hodinu.</string>
     <string name="osmand_plus_banner_desc">Plná verze OsmAnd s neomezeným stahováním map a měsíčními aktualizacemi.</string>
     <string name="si_mi_meters">Míle/metry</string>
     <string name="lang_hsb">Hornolužická srbština</string>
@@ -2314,4 +2314,5 @@ V současnosti je k dispozici {2} MB.</string>
     <string name="rendering_value_fine_name">Jemné</string>
     <string name="lang_kab">Kabylsky</string>
     <string name="driving_region_australia">Austrálie</string>
+    <string name="route_calculation">Kalkulace trasy</string>
     </resources>
