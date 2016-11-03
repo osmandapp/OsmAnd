@@ -343,7 +343,7 @@ public class MapMarkersHelper {
 				}
 				if (colorIndex == -1) {
 					if (sortedMapMarkers.size() > 0) {
-						colorIndex = (sortedMapMarkers.get(sortedMapMarkers.size() - 1).colorIndex + 1) % MAP_MARKERS_COLORS_COUNT;
+						colorIndex = (sortedMapMarkers.get(0).colorIndex + 1) % MAP_MARKERS_COLORS_COUNT;
 					} else {
 						colorIndex = 0;
 					}
