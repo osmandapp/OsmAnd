@@ -1093,7 +1093,12 @@ public class OsmandSettings {
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Boolean> SHOW_OSM_BUGS = new BooleanPreference("show_osm_bugs", false).makeGlobal();
 
-	public final OsmandPreference<String> MAP_INFO_CONTROLS = new StringPreference("map_info_controls", "").makeProfile();
+	public final CommonPreference<String> MAP_INFO_CONTROLS = new StringPreference("map_info_controls", "").makeProfile();
+	{
+		for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
+			MAP_INFO_CONTROLS.setModeDefaultValue(mode, "");
+		}
+	}
 
 	public final OsmandPreference<String> OSMO_DEVICE_KEY = new StringPreference("osmo_device_token", "").makeGlobal();
 
