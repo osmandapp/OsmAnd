@@ -2412,4 +2412,19 @@ OsmAnd Mapas y Navegación - encuentra ubicaciones en el mapa y calcula rutas si
     <string name="si_mi_meters">Millas/metros</string>
     <string name="driving_region_australia">Australia</string>
     <string name="lang_kab">Cabilio</string>
+    <string name="release_2_5">"
+ • Ahora se pueden pulsar los iconos del mapa
+
+ • Nuevo filtro de búsqueda PDI potente: Busca, p.e. restaurantes por tipo de cocina o campamentos con instalaciones específicas
+
+ • Nuevo estilo de mapa topográfico (Topo) para ciclistas y senderistas
+
+ • Mejoras en la grabación de viaje
+
+ • Mejoras en la notificación de navegación (Android Wear)
+
+ • Muchas otras mejoras y correcciones de errores
+
+ y más…
+ "</string>
     </resources>
