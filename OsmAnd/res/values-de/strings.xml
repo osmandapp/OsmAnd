@@ -1763,7 +1763,10 @@ Aufgenommene Tracks kann man z.B. mit Bekannten teilen, oder auch zum Upload fü
     <string name="speed_limit_exceed">Toleranz für Tempolimit</string>
 	<string name="speed_limit_exceed_message">Schwellenwert für Warnung bei Überschreiten der Höchstgeschwindigkeit.</string>
 	<string name="osmo_device_not_found">Gerät wurde nicht gefunden</string>
-    <string name="osmo_no_connection_msg">Keine Verbindung zum OsMo-Server:\n- überprüfen Sie Ihre Internetverbindung;\n- überprüfen Sie die Einstellungen;\n- probieren Sie Meldungen auf Twitter: https://twitter.com/OsMomobi</string>
+    <string name="osmo_no_connection_msg">Keine Verbindung zum OsMo-Server:
+- Internetverbindung prüfen;
+- Einstellungen prüfen;
+- Nach Meldungen auf Twitter schauen: https://twitter.com/OsMomobi</string>
     <string name="anonymous_user">Anonymer Benutzer</string>
     <string name="logged_as">Angemeldet als %1$s</string>
 	<string name="anonymous_user_hint">Anonyme Benutzer können folgendes nicht:
@@ -2509,7 +2512,7 @@ Wenn Sie OsmAnd und OSM lieben und unterstützen wollen, so ist dies die perfekt
     <string name="skip_map_downloading">Herunterladen der Karten überspringen</string>
     <string name="no_update_info_desc">Nicht auf Aktualisierungen und Rabatte im Bezug auf OsmAnd prüfen</string>
     <string name="si_mi_meters">Meilen/Meter</string>
-    <string name="osm_live_banner_desc">Erhalten Sie unbegrenzte Kartendownloads und -aktualisierungen mehr als einmal pro Monat: wöchentlich, täglich oder stündlich.</string>
+    <string name="osm_live_banner_desc">Erhalten Sie unbegrenzte Kartendownloads und erhalten Sie Aktualisierungen öfter als einmal pro Monat: wöchentlich, täglich oder stündlich.</string>
     <string name="osmand_plus_banner_desc">Vollversion von OsmAnd mit unbegrenzten Kartendownloads und monatlichen Kartenaktualisierungen.</string>
     <string name="get_for">Holen für %1$s</string>
     <string name="get_for_month">Für %1$s Monat holen</string>
@@ -2524,7 +2527,7 @@ Wenn Sie OsmAnd und OSM lieben und unterstützen wollen, so ist dies die perfekt
     <string name="save_filter">Filter speichern</string>
     <string name="delete_filter">Filter löschen</string>
     <string name="new_filter">Neuer Filter</string>
-    <string name="new_filter_desc">Bitte geben sie einen Namen für den neuen Filter ein. Dieser wird in die Liste der Kategorien hinzugefügt.</string>
+    <string name="new_filter_desc">Bitte geben sie einen Namen für den neuen Filter ein. Dieser wird zur Liste der Kategorien hinzugefügt.</string>
     <string name="selected_categories">Ausgewählte Kategorien</string>
     <string name="create_custom_poi">Benutzerdefinierten Filter erstellen</string>
     <string name="custom_search">Benutzerdefinierte Suche</string>
@@ -2541,8 +2544,8 @@ Wenn Sie OsmAnd und OSM lieben und unterstützen wollen, so ist dies die perfekt
     <string name="christmas_desc">Im Vorgriff auf Weihnachten und Neujahr, können Sie Weihnachts POI anzeigen: Weihnachtsbäume, Märkte, etc.</string>
     <string name="christmas_desc_q">Weihnachts POI anzeigen?</string>
     <string name="save_track_min_speed">Mindestgeschwindigkeit für die Protokollierung</string>
-    <string name="save_track_min_speed_descr">Wählen Sie die Minimalgeschwindigkeit, bei der die Protokollierung ausgelöst wird</string>
-    <string name="save_track_min_distance">Protokollierung der Bewegungserkennung</string>
+    <string name="save_track_min_speed_descr">Setzen Sie die Minimalgeschwindigkeit, bei der ein Punkt gespeichert wird</string>
+    <string name="save_track_min_distance">Bewegungserkennung für Protokollierung</string>
     <string name="save_track_min_distance_descr">Wählen Sie die Mindestentfernung von der letzten Position, damit die Protokollierung ausgelöst wird</string>
     <string name="save_track_precision">Minimale Genauigkeit der Protokollierung</string>
     <string name="save_track_precision_descr">Minimale Genauigkeit der Protokollierung auswählen</string>
@@ -2577,7 +2580,7 @@ und vieles mehr ...
     <string name="osmo_share_location">Teilen</string>
     <string name="gpx_appearance">Aussehen</string>
     <string name="route_calculation">Routenberechnung</string>
-    <string name="gpx_no_tracks_title">Keine Tracks vorhanen</string>
+    <string name="gpx_no_tracks_title">Keine Tracks vorhanden</string>
     <string name="gpx_no_tracks_title_folder">Tracks können dem Ordner hinzugefügt werden</string>
     <string name="gpx_add_track">Track hinzufügen</string>
     </resources>
