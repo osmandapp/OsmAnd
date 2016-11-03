@@ -88,7 +88,6 @@ public class MapControlsLayer extends OsmandMapLayer {
 	private MapHudButton compassHud;
 	private MapHudButton quickSearchHud;
 	private float cachedRotate = 0;
-	private ImageView appModeIcon;
 	private TextView zoomText;
 	private OsmandMapTileView mapView;
 	private OsmandApplication app;
@@ -404,7 +403,6 @@ public class MapControlsLayer extends OsmandMapLayer {
 				}
 			}
 		});
-		appModeIcon = (ImageView) mapActivity.findViewById(R.id.map_layers_button);
 		zoomText = (TextView) mapActivity.findViewById(R.id.map_app_mode_text);
 
 		View routePlanButton = mapActivity.findViewById(R.id.map_route_info_button);
@@ -647,6 +645,10 @@ public class MapControlsLayer extends OsmandMapLayer {
 		mapZoomIn.updateVisibility(!dialogOpened);
 		mapZoomOut.updateVisibility(!dialogOpened);
 		compassHud.updateVisibility(!dialogOpened && shouldShowCompass());
+
+		if (layersHud.setIconResId(settings.getApplicationMode().getSmallIconDark())) {
+			layersHud.update(app, isNight);
+		}
 		layersHud.updateVisibility(!dialogOpened);
 		quickSearchHud.updateVisibility(!dialogOpened);
 
@@ -657,9 +659,6 @@ public class MapControlsLayer extends OsmandMapLayer {
 			//if (!mapView.isZooming() || !OsmandPlugin.isDevelopment()) {
 			if ((System.currentTimeMillis() - lastZoom > 1000) || !OsmandPlugin.isDevelopment()) {
 				zoomText.setVisibility(View.GONE);
-				appModeIcon.setImageDrawable(app.getIconsCache().getIcon(
-						settings.getApplicationMode().getSmallIconDark(),
-						isNight ? 0 : R.color.on_map_icon_color));
 			} else {
 				zoomText.setVisibility(View.VISIBLE);
 				zoomText.setTextColor(textColor);
@@ -673,12 +672,6 @@ public class MapControlsLayer extends OsmandMapLayer {
 		for (MapHudButton mc : controls) {
 			mc.update(mapActivity.getMyApplication(), isNight);
 		}
-	}
-
-	public void updateAppModeIcon(boolean isNight) {
-		appModeIcon.setImageDrawable(app.getIconsCache().getIcon(
-				settings.getApplicationMode().getSmallIconDark(),
-				isNight ? 0 : R.color.on_map_icon_color));
 	}
 
 	public void updateCompass(boolean isNight) {
