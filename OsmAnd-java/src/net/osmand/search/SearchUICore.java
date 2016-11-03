@@ -30,7 +30,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -68,6 +70,7 @@ public class SearchUICore {
 	public static class SearchResultCollection {
 		private List<SearchResult> searchResults;
 		private SearchPhrase phrase;
+		private static final int DEPTH_TO_CHECK_SAME_SEARCH_RESULTS = 20;
 		
 		public SearchResultCollection(SearchPhrase phrase) {
 			searchResults = new ArrayList<>();
@@ -103,8 +106,16 @@ public class SearchUICore {
 					while(j < addedResults.size()) {
 						SearchResult addedResult = addedResults.get(j);
 						if(i >= searchResults.size()) {
-							if(searchResults.size() == 0 || 
-									!sameSearchResult(addedResult, searchResults.get(searchResults.size() - 1))) {
+							int k = 0;
+							boolean same = false;
+							while(searchResults.size() > k && k < DEPTH_TO_CHECK_SAME_SEARCH_RESULTS) {
+								if(sameSearchResult(addedResult, searchResults.get(searchResults.size() - k))) {
+									same = true;
+									break;
+								}
+								k++;
+							}
+							if(!same) {
 								searchResults.add(addedResult);
 							}
 							j++;
@@ -151,14 +162,24 @@ public class SearchUICore {
 		}
 		
 		private void filterSearchDuplicateResults(List<SearchResult> lst) {
-			Iterator<SearchResult> it = lst.iterator();
-			SearchResult found = null;
+			ListIterator<SearchResult> it = lst.listIterator();
+			LinkedList<SearchResult> lstUnique = new LinkedList<SearchResult>();
 			while(it.hasNext()) {
 				SearchResult r = it.next();
-				if(found != null && sameSearchResult(found, r)) {
+				boolean same = false;
+				for(SearchResult rs : lstUnique) {
+					same = sameSearchResult(rs, r);
+					if(same) {
+						break;
+					}
+				}
+				if(same) {
 					it.remove();
 				} else {
-					found = r;
+					lstUnique.add(r);
+					if(lstUnique.size() > DEPTH_TO_CHECK_SAME_SEARCH_RESULTS) {
+						lstUnique.remove(0);
+					}
 				}
 			}			
 		}
@@ -187,7 +208,7 @@ public class SearchUICore {
 							return false;
 						}
 						if (type1.equals("natural")) {
-							similarityRadius = 10000;
+							similarityRadius = 50000;
 						} else if (subType1.equals(subType2)) {
 							if (subType1.contains("cn_ref") || subType1.contains("wn_ref")
 									|| (subType1.startsWith("route_hiking_") && subType1.endsWith("n_poi"))) {
