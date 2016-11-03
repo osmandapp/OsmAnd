@@ -2583,4 +2583,5 @@ und vieles mehr ...
     <string name="gpx_no_tracks_title">Keine Tracks vorhanden</string>
     <string name="gpx_no_tracks_title_folder">Tracks können dem Ordner hinzugefügt werden</string>
     <string name="gpx_add_track">Track hinzufügen</string>
+    <string name="upload_poi">POI hochladen</string>
     </resources>
