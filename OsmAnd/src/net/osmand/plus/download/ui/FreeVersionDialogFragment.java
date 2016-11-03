@@ -7,6 +7,7 @@ import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.view.ContextThemeWrapper;
 import android.view.View;
 
 import net.osmand.plus.R;
@@ -23,7 +24,7 @@ public class FreeVersionDialogFragment extends DialogFragment {
 	@NonNull
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
-		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+		AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(getActivity(), R.style.OsmandDarkTheme));
 		builder.setNegativeButton(R.string.later, null);
 		View view = getActivity().getLayoutInflater().inflate(R.layout.free_version_banner, null);
 		boolean hidePlus = false;
