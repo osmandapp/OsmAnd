@@ -2643,4 +2643,5 @@ Como bi sunt {2} MB ebbia disponìbiles.</string>
     <string name="rendering_value_fine_name">Bonu</string>
     <string name="route_calculation">Càlculu de s\'àndala</string>
     <string name="upload_poi">Càrriga PDI</string>
+    <string name="route_roundabout_short">Piga sa %1$d essida e sighi</string>
     </resources>
