@@ -600,7 +600,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 				} else {
 					Toast.makeText(activity,
 							activity.getString(R.string.poi_error_poi_not_found),
-							Toast.LENGTH_SHORT).show();
+							Toast.LENGTH_LONG).show();
 				}
 			}
 		}.execute();
