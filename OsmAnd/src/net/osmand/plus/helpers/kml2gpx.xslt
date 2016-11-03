@@ -27,6 +27,44 @@
 			 		</name>
 			 	</author>
 			 </metadata>
+			 <xsl:for-each select="//kml:Folder">
+			 	<xsl:variable name="foldername" select="kml:name"/>
+			 	<xsl:for-each select="kml:Placemark">
+			 		<xsl:variable name="lonlat" select="kml:Point/kml:coordinates"/>
+					<xsl:variable name="lon" select="substring-before($lonlat,',')"/>
+					<xsl:variable name="latele" select="substring-after($lonlat,',')"/>
+					<xsl:variable name="lat">
+						<xsl:choose>
+							<xsl:when test="contains($latele,',')">
+								<xsl:value-of select="substring-before($latele,',')"/>
+							</xsl:when>
+								<xsl:otherwise>
+									<xsl:value-of select="$latele"/>
+							</xsl:otherwise>
+						</xsl:choose>
+					</xsl:variable>
+			 		<xsl:if test="$lon">
+			 			<wpt lon="{$lon}" lat="{$lat}">
+			 				<xsl:choose>
+								<xsl:when test="contains($latele,',')">
+									<ele> <xsl:value-of select="substring-after($latele,',')"/></ele>
+								</xsl:when>
+							</xsl:choose>
+							<type>
+			 					<xsl:value-of select="$foldername"/>
+			 				</type>
+			 				<name>
+			 					<xsl:value-of select="kml:name"/>
+			 				</name>
+			 				<xsl:if test="kml:description">
+			 					<desc>
+			 						<xsl:value-of select="kml:description"/>
+			 					</desc>
+			 				</xsl:if>
+			 			</wpt>
+			 		</xsl:if>
+			 	</xsl:for-each>
+			 </xsl:for-each>
 			 <xsl:for-each select="//gx:Track">
 				 <trk>
 					 <trkseg>
