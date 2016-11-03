@@ -129,6 +129,7 @@ public class NavigationNotification extends OsmandNotification {
 			boolean deviatedFromRoute;
 			int turnImminent = 0;
 			int nextTurnDistance = 0;
+			int nextNextTurnDistance = 0;
 			RouteDirectionInfo ri = null;
 			if (routingHelper.isRouteCalculated() && followingMode) {
 				deviatedFromRoute = routingHelper.isDeviatedFromRoute();
@@ -138,12 +139,15 @@ public class NavigationNotification extends OsmandNotification {
 					turnType = TurnType.valueOf(TurnType.OFFR, leftSide);
 					nextTurnDistance = (int) routingHelper.getRouteDeviation();
 				} else {
-					NextDirectionInfo r = routingHelper.getNextRouteDirectionInfo(new NextDirectionInfo(), true);
+					NextDirectionInfo calc1 = new NextDirectionInfo();
+					NextDirectionInfo r = routingHelper.getNextRouteDirectionInfo(calc1, true);
 					if (r != null && r.distanceTo > 0 && r.directionInfo != null) {
 						ri = r.directionInfo;
 						turnType = r.directionInfo.getTurnType();
 						nextTurnDistance = r.distanceTo;
 						turnImminent = r.imminent;
+						NextDirectionInfo next = routingHelper.getNextRouteDirectionInfoAfter(r, calc1, true);
+						nextNextTurnDistance = next.distanceTo;
 					}
 				}
 
@@ -161,6 +165,9 @@ public class NavigationNotification extends OsmandNotification {
 						+ (turnType != null ? " • " + RouteCalculationResult.toString(turnType, app) : "");
 				if (ri != null && !Algorithms.isEmpty(ri.getDescriptionRoutePart())) {
 					notificationText.append(ri.getDescriptionRoutePart());
+					if (nextNextTurnDistance > 0) {
+						notificationText.append(" ").append(OsmAndFormatter.getFormattedDistance(nextNextTurnDistance, app));
+					}
 					notificationText.append("\n");
 				}
 
