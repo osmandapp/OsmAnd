@@ -380,8 +380,14 @@ public class TurnPathHelper {
 		float delta = (float) minDelta;
 		if(rot > 360 - delta && rot <= 360) {
 			rot = 360 - delta;
+			if(out < 2) {
+				rot = delta;
+			}
 		} else if (rot < -360 + delta && rot >= -360) {
 			rot = -360 + delta;
+			if(out < 2) {
+				rot = -delta;
+			}
 		} else if (rot >= 0 && rot < delta) {
 			rot = delta;
 			if(out > 2) {
