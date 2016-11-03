@@ -304,6 +304,14 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 			}
 		};
 
+		if (overlayLayer.getMap() == null) {
+			settings.MAP_OVERLAY.set(null);
+			settings.MAP_OVERLAY_PREVIOUS.set(null);
+		}
+		if (underlayLayer.getMap() == null) {
+			settings.MAP_UNDERLAY.set(null);
+			settings.MAP_UNDERLAY_PREVIOUS.set(null);
+		}
 		String overlayMapDescr = settings.MAP_OVERLAY.get();
 		boolean hasOverlayDescription = overlayMapDescr != null;
 		overlayMapDescr = hasOverlayDescription ? overlayMapDescr : mapActivity.getString(R.string.shared_string_none);
