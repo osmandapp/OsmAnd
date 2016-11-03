@@ -2491,4 +2491,5 @@ Si necesitas ayuda con la aplicación OsmAnd, contacte con nuestro equipo de sop
     <string name="rendering_value_fine_name">Muy fino</string>
     <string name="route_calculation">Cálculo de la ruta</string>
     <string name="upload_poi">Subir PDI</string>
+    <string name="route_roundabout_short">Toma la %1$dª salida y continúa</string>
     </resources>
