@@ -10,6 +10,7 @@
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
 
+    <string name="upload_poi">Upload POI</string>
     <string name="route_calculation">Route calculation</string>
     <string name="gpx_no_tracks_title">You do not have tracks yet</string>
     <string name="gpx_no_tracks_title_folder">You may also add tracks to the folder</string>
