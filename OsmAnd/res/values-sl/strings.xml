@@ -2648,4 +2648,10 @@ V kolikor naletite na težave s programom OsmAnd, prosimo, stopite v stik s skup
     <string name="rendering_attr_contourColorScheme_description">Barvna shema izohips</string>
     <string name="christmas_desc">Ob koncu leta je mogoče izbrati prikaz točk POI, ki so povezane z božičnimi in novoletnimi dogodki: božična in novoletna drevesca, prodajalne, razstave ...</string>
     <string name="rendering_attr_contourColorScheme_name">Barvna shema izohips</string>
+    <string name="upload_poi">Pošlji točko POI</string>
+    <string name="route_calculation">Izračunavanje poti</string>
+    <string name="gpx_no_tracks_title">Ni še shranjenih poti</string>
+    <string name="gpx_no_tracks_title_folder">Mogoče je dodati tudi poti v mape</string>
+    <string name="gpx_add_track">Dodaj pot</string>
+    <string name="gpx_appearance">Videz</string>
     </resources>
