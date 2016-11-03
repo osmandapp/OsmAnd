@@ -59,17 +59,19 @@ public class SendPoiDialogFragment extends DialogFragment {
 				.getSettings();
 		userNameEditText.setText(settings.USER_NAME.get());
 		passwordEditText.setText(settings.USER_PASSWORD.get());
-		boolean hasOsmPOI = false;
+		boolean hasPoiGroup = false;
 		assert poi != null;
 		for (OsmPoint p : poi) {
 			if (p.getGroup() == OsmPoint.Group.POI) {
-				hasOsmPOI = true;
+				hasPoiGroup = true;
 				break;
 			}
 		}
-		messageLabel.setVisibility(hasOsmPOI ? View.VISIBLE : View.GONE);
-		messageEditText.setVisibility(hasOsmPOI ? View.VISIBLE : View.GONE);
-		closeChangeSetCheckBox.setVisibility(hasOsmPOI ? View.VISIBLE : View.GONE);
+		final boolean hasPOI = hasPoiGroup;
+		messageLabel.setVisibility(hasPOI ? View.VISIBLE : View.GONE);
+		messageEditText.setVisibility(hasPOI ? View.VISIBLE : View.GONE);
+		closeChangeSetCheckBox.setVisibility(hasPOI ? View.VISIBLE : View.GONE);
+		view.findViewById(R.id.osm_note_header).setVisibility(hasPOI ? View.GONE : View.VISIBLE);
 		uploadAnonymously.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -87,7 +89,7 @@ public class SendPoiDialogFragment extends DialogFragment {
 			progressDialogPoiUploader = (ProgressDialogPoiUploader) getParentFragment();
 		}
 
-		builder.setTitle(R.string.upload_osm_note)
+		builder.setTitle(hasPOI ? R.string.upload_poi : R.string.upload_osm_note)
 				.setView(view)
 				.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
 					@Override
@@ -105,7 +107,7 @@ public class SendPoiDialogFragment extends DialogFragment {
 						}
 						progressDialogPoiUploader.showProgressDialog(poi,
 								closeChangeSetCheckBox.isChecked(),
-								uploadAnonymously.isChecked());
+								!hasPOI && uploadAnonymously.isChecked());
 					}
 				})
 				.setNegativeButton(R.string.shared_string_cancel, null);
