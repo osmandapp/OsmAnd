@@ -1938,7 +1938,7 @@ Diese Ansicht kann zurückgestellt werden indem Sie hier wieder deaktiviert oder
 	<string name="shared_string_message">Nachricht</string>
 	<string name="agps_data_last_downloaded">A-GPS-Daten zuletzt heruntergeladen: %1$s</string>
 	<string name="confirm_usage_speed_cameras">In vielen Ländern (Deutschland, Frankreich, Italien und andere) ist die Verwendung von Blitzerwarnern gesetzlich nicht erlaubt. OsmAnd übernimmt keine Verantwortung im Fall von Gesetzesübertretungen. Klicken Sie nur auf Ja, wenn Sie zur Verwendung dieser Funktion berechtigt sind.</string>
-	<string name="welmode_download_maps">Kartenmanager</string>
+	<string name="welmode_download_maps">Kartenverwaltung</string>
 	<string name="welcome_header">Willkommen</string>
 	<string name="current_route">Aktuelle Route</string>
 	<string name="mark_to_delete">Zum Löschen markieren</string>
