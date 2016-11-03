@@ -90,14 +90,16 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="@color/dashboard_divider_dark"/>
+                    android:background="@color/dashboard_divider_dark"
+                    android:visibility="visible"/>
 
                 <LinearLayout
                     android:id="@+id/fullVersionLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/list_content_padding"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:visibility="gone">
 
                     <android.support.v7.widget.AppCompatImageView
                         android:layout_width="54dp"
@@ -154,17 +156,20 @@
                 </LinearLayout>
 
                 <View
+                    android:id="@+id/osmLiveLayoutTopDivider"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_marginLeft="54dp"
                     android:layout_marginTop="@dimen/list_content_padding"
-                    android:background="@color/dashboard_divider_dark"/>
+                    android:background="@color/dashboard_divider_dark"
+                    android:visibility="gone"/>
 
                 <LinearLayout
                     android:id="@+id/osmLiveLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/list_content_padding"
+                    android:layout_marginBottom="@dimen/list_content_padding"
                     android:orientation="horizontal">
 
                     <android.support.v7.widget.AppCompatImageView
@@ -219,13 +224,6 @@
                     </LinearLayout>
 
                 </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginLeft="54dp"
-                    android:layout_marginTop="@dimen/list_content_padding"
-                    android:background="@color/dashboard_divider_dark"/>
 
             </LinearLayout>
 
