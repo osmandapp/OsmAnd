@@ -2696,4 +2696,5 @@ i więcej...
     <string name="rendering_value_fine_name">Bardzo cienki</string>
     <string name="route_calculation">Wyznaczanie trasy</string>
     <string name="upload_poi">Prześlij użyteczne miejsca</string>
+    <string name="route_roundabout_short">Zjedź %1$d zjazdem</string>
     </resources>
