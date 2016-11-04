@@ -1,14 +1,16 @@
 package net.osmand.plus.mapcontextmenu;
 
-import java.io.IOException;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
+import android.graphics.drawable.Drawable;
+import android.support.annotation.NonNull;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.LinearLayout;
 
 import net.osmand.IndexConstants;
-import net.osmand.NativeLibrary;
 import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.binary.BinaryMapDataObject;
+import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.Amenity;
 import net.osmand.data.FavouritePoint;
@@ -60,11 +62,11 @@ import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControll
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControllerType;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
-import android.graphics.drawable.Drawable;
-import android.support.annotation.NonNull;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.LinearLayout;
+
+import java.io.IOException;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 
 public abstract class MenuController extends BaseMenuController {
 
@@ -520,11 +522,22 @@ public abstract class MenuController extends BaseMenuController {
 			Iterator<BinaryMapDataObject> it = mapDataObjects.iterator();
 			while (it.hasNext()) {
 				BinaryMapDataObject o = it.next();
-				if (!osmandRegions.contain(o, point31x, point31y)) {
-					it.remove();
+				if (o.getTypes() != null) {
+					boolean isRegion = true;
+					for (int i = 0; i < o.getTypes().length; i++) {
+						TagValuePair tp = o.getMapIndex().decodeType(o.getTypes()[i]);
+						if ("boundary".equals(tp.value)) {
+							isRegion = false;
+							break;
+						}
+					}
+					if (!isRegion || !osmandRegions.contain(o, point31x, point31y)) {
+						it.remove();
+					}
 				}
 			}
 			String selectedFullName = "";
+			double smallestArea = -1;
 			for (BinaryMapDataObject o : mapDataObjects) {
 				boolean downloaded = checkIfObjectDownloaded(rm, osmandRegions.getDownloadName(o));
 				if (downloaded) {
@@ -532,7 +545,13 @@ public abstract class MenuController extends BaseMenuController {
 					break;
 				} else {
 					String fullName = osmandRegions.getFullName(o);
-					if (fullName.length() > selectedFullName.length()) {
+					double area = OsmandRegions.getArea(o);
+					if (smallestArea == -1) {
+						smallestArea = area;
+						selectedFullName = fullName;
+						downloadMapDataObject = o;
+					} else if (area < smallestArea) {
+						smallestArea = area;
 						selectedFullName = fullName;
 						downloadMapDataObject = o;
 					}
