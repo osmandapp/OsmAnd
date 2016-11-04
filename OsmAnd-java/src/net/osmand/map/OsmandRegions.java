@@ -30,6 +30,7 @@ import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.data.QuadTree;
+import net.osmand.osm.edit.Node;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapAlgorithms;
 import net.osmand.util.MapUtils;
@@ -236,6 +237,20 @@ public class OsmandRegions {
 		}
 
 		return false;
+	}
+
+	public static double getArea(BinaryMapDataObject bo) {
+		double area = 0.0;
+		if (bo.getPointsLength() > 0) {
+			for (int i = 1; i < bo.getPointsLength(); i++) {
+				double ax = bo.getPoint31XTile(i - 1);
+				double bx = bo.getPoint31XTile(i);
+				double ay = bo.getPoint31YTile(i - 1);
+				double by = bo.getPoint31YTile(i);
+				area += (bx + ax) * (by - ay) / 1.631E10;
+			}
+		}
+		return Math.abs(area);
 	}
 
 	private List<BinaryMapDataObject> getCountries(int tile31x, int tile31y) {

@@ -13,6 +13,8 @@ import android.util.DisplayMetrics;
 import android.view.WindowManager;
 import net.osmand.IndexConstants;
 import net.osmand.binary.BinaryMapDataObject;
+import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
@@ -468,7 +470,15 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 			Iterator<BinaryMapDataObject> it = result.iterator();
 			while (it.hasNext()) {
 				BinaryMapDataObject o = it.next();
-				if (!osmandRegions.contain(o, point31x, point31y) ) {
+				boolean isRegion = true;
+				for (int i = 0; i < o.getTypes().length; i++) {
+					TagValuePair tp = o.getMapIndex().decodeType(o.getTypes()[i]);
+					if ("boundary".equals(tp.value)) {
+						isRegion = false;
+						break;
+					}
+				}
+				if (!isRegion || !osmandRegions.contain(o, point31x, point31y) ) {
 					it.remove();
 				}
 			}
