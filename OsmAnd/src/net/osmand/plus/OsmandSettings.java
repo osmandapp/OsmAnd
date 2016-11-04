@@ -1056,7 +1056,7 @@ public class OsmandSettings {
 		SAVE_TRACK_INTERVAL.setModeDefaultValue(ApplicationMode.PEDESTRIAN, 10000);
 	}
 	
-	
+	// Please note that SAVE_TRACK_PRECISION, SAVE_TRACK_MIN_SPEED, SAVE_TRACK_MIN_DISTANCE should all be "0" for the default profile, as we have no interface to change them
 	public final CommonPreference<Float> SAVE_TRACK_PRECISION = new FloatPreference("save_track_precision", 0).makeProfile();
 	{
 //		SAVE_TRACK_PRECISION.setModeDefaultValue(ApplicationMode.CAR, 50);
@@ -1069,11 +1069,11 @@ public class OsmandSettings {
 		SAVE_TRACK_MIN_SPEED.setModeDefaultValue(ApplicationMode.BICYCLE, 1.f);
 //		SAVE_TRACK_MIN_SPEED.setModeDefaultValue(ApplicationMode.PEDESTRIAN, 0.f);
 	}
-	public final CommonPreference<Float> SAVE_TRACK_MIN_DISTANCE = new FloatPreference("save_track_min_distance", 5).makeProfile();
+	public final CommonPreference<Float> SAVE_TRACK_MIN_DISTANCE = new FloatPreference("save_track_min_distance", 0).makeProfile();
 	{
-//		SAVE_TRACK_MIN_DISTANCE.setModeDefaultValue(ApplicationMode.CAR, 5);
-//		SAVE_TRACK_MIN_DISTANCE.setModeDefaultValue(ApplicationMode.BICYCLE, 5);
-//		SAVE_TRACK_MIN_DISTANCE.setModeDefaultValue(ApplicationMode.PEDESTRIAN, 5);	
+		SAVE_TRACK_MIN_DISTANCE.setModeDefaultValue(ApplicationMode.CAR, 5);
+		SAVE_TRACK_MIN_DISTANCE.setModeDefaultValue(ApplicationMode.BICYCLE, 5);
+		SAVE_TRACK_MIN_DISTANCE.setModeDefaultValue(ApplicationMode.PEDESTRIAN, 5);
 	}
 
 	public final CommonPreference<Boolean> SHOW_TRIP_REC_NOTIFICATION = new BooleanPreference("show_trip_recording_notification", true).makeGlobal();
