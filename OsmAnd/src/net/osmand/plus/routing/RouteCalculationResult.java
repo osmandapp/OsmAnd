@@ -260,7 +260,7 @@ public class RouteCalculationResult {
 							ctx.getSettings().MAP_TRANSLITERATE_NAMES.get(), next.isForwardDirection()));
 				}
 
-		                String description = toString(turn, ctx) + " " + RoutingHelper.formatStreetName(info.getStreetName(),
+		                String description = toString(turn, ctx, false) + " " + RoutingHelper.formatStreetName(info.getStreetName(),
 						info.getRef(), info.getDestinationName(), ctx.getString(R.string.towards));
 				description = description.trim();
 				String[] pointNames = s.getObject().getPointNames(s.getStartPointIndex());
@@ -454,9 +454,13 @@ public class RouteCalculationResult {
 	}
 	
 	
-	public static String toString(TurnType type, Context ctx) {
+	public static String toString(TurnType type, Context ctx, boolean shortName) {
 		if(type.isRoundAbout()){
-			return ctx.getString(R.string.route_roundabout, type.getExitOut());
+			if (shortName) {
+				return ctx.getString(R.string.route_roundabout_short, type.getExitOut());
+			} else {
+				return ctx.getString(R.string.route_roundabout, type.getExitOut());
+			}
 		} else if(type.getValue() == TurnType.C) {
 			return ctx.getString(R.string.route_head);
 		} else if(type.getValue() == TurnType.TSLL) {

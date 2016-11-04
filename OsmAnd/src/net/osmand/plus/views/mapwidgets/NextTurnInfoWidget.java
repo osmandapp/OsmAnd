@@ -97,7 +97,7 @@ public class NextTurnInfoWidget extends TextInfoWidget {
 			TurnType turnType = getTurnType();
 			RoutingHelper routingHelper = app.getRoutingHelper();
 			if ((turnType != null) && (routingHelper != null)) {
-				setContentDescription(ds + " " + routingHelper.getRoute().toString(turnType, app));
+				setContentDescription(ds + " " + routingHelper.getRoute().toString(turnType, app, false));
 			} else {
 				setContentDescription(ds);
 			}

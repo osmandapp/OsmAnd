@@ -162,7 +162,7 @@ public class NavigationNotification extends OsmandNotification {
 				}
 
 				notificationTitle = OsmAndFormatter.getFormattedDistance(nextTurnDistance, app)
-						+ (turnType != null ? " • " + RouteCalculationResult.toString(turnType, app) : "");
+						+ (turnType != null ? " • " + RouteCalculationResult.toString(turnType, app, true) : "");
 				if (ri != null && !Algorithms.isEmpty(ri.getDescriptionRoutePart())) {
 					notificationText.append(ri.getDescriptionRoutePart());
 					if (nextNextTurnDistance > 0) {
