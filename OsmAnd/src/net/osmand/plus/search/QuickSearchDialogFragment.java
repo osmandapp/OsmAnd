@@ -1110,7 +1110,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 				if (!paused && !cancelPrev) {
 					boolean append = getResultCollection() != null;
 					if (append) {
-						getResultCollection().addSearchResults(apiResults, false, true);
+						getResultCollection().addSearchResults(apiResults, true, true);
 					} else {
 						SearchResultCollection resCollection = new SearchResultCollection(phrase);
 						resCollection.addSearchResults(apiResults, true, true);
@@ -1131,7 +1131,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 				if (!paused && !cancelPrev) {
 					if (getResultCollection() != null) {
 						SearchResultCollection resCollection =
-								getResultCollection().combineWithCollection(regionResultCollection, false, true);
+								getResultCollection().combineWithCollection(regionResultCollection, true, true);
 						updateSearchResult(resCollection, true);
 					} else {
 						updateSearchResult(regionResultCollection, false);
