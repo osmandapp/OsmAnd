@@ -570,7 +570,7 @@ Vsi ti zemljevidi so lahko uporabljeni kot osnovni zemljevidi, ali pa so podloga
 
 Vektorske zemljevide je mogoče pridobiti preko spletnih virov, ali pa jih shraniti za delo brez povezave. Zemljevidi morajo biti shranjeni v osnovni mapi OsmAnd kot podatkovna zbirka SQLite.
  "</string>
-    <string name="osm_editing_plugin_description">Vstavek omogoča upravljanje nastavitev, ki so namenjene pošiljanju poročil, hroščev in odzivov na delovanje programa OsmAnd (posodabljanje podatkov točk POI, objavljanje sledi GPX (zahteva ustrezna poverila OSM) in drugo). OSM je javni odprtokodni projekt, katerega kakovost je odvisna tudi od vaše dejavnosti.</string>
+    <string name="osm_editing_plugin_description">Vstavek omogoča upravljanje nastavitev, ki so namenjene pošiljanju poročil, hroščev in odzivov na delovanje programa OsmAnd (posodabljanje podatkov točk POI, objavljanje sledi GPX (zahteva ustrezna poverila OSM) in drugo). OSM je javni odprtokodni projekt, katerega kakovost je odvisna tudi od vaše dejavnosti. Za več podrobnosti obiščite spletišče https://openstreetmap.org. Dejavno sodelovanje je zelo zaželeno, objave pa je mogoče narediti neposredno iz programa OsmAnd, če navedene osebna poverila OSM.</string>
     <string name="vector_maps_may_display_faster_on_some_devices">Vektorski zemljevidi se običajno izrisujejo hitreje, zgodi pa se, da na nekaterih napravah ne delujejo.</string>
     <string name="debugging_and_development">Razhroščevalnik OsmAnd</string>
     <string name="native_rendering">Izvorno izrisovanje</string>
@@ -2655,4 +2655,5 @@ V kolikor naletite na težave s programom OsmAnd, prosimo, stopite v stik s skup
     <string name="gpx_add_track">Dodaj pot</string>
     <string name="gpx_appearance">Videz</string>
     <string name="rendering_value_fine_name">Drobno</string>
+    <string name="route_roundabout_short">Pojdite na %1$d izhod in nadaljujte</string>
     </resources>
