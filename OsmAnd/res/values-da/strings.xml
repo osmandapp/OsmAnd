@@ -2725,5 +2725,5 @@ Hvis du  ønsker at støtte OsmAnd og OSM, er dette en god måde at gøre det p�
     <string name="rendering_value_fine_name">Fin</string>
     <string name="route_calculation">Ruteberegning</string>
     <string name="upload_poi">Overfør IP</string>
-    <string name="route_roundabout_short">Tag %1$d afkørsel og kør</string>
+    <string name="route_roundabout_short">Tag %1$d afkørsel og forsæt</string>
     </resources>
