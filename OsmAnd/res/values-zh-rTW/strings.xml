@@ -2664,4 +2664,5 @@ Facebook：https://www.facebook.com/osmandapp
     <string name="trip_rec_notification_settings_desc">顯示通知，藉由按下錄製按鈕允許開始旅程紀錄</string>
     <string name="rendering_value_fine_name">精細</string>
     <string name="route_calculation">路線估算</string>
+    <string name="upload_poi">上傳 POI</string>
     </resources>
