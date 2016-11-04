@@ -1,5 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
+    <string name="route_roundabout_short">Сверните на %1$d съезд</string>
+    <string name="upload_poi">Выгрузить POI</string>
+    <string name="route_calculation">Построение маршрута</string>
+
     <string name="gpx_no_tracks_title">У вас еще нет треков</string>
     <string name="gpx_no_tracks_title_folder">Вы также можете добавить треки в папку</string>
     <string name="gpx_add_track">Добавить</string>
@@ -1187,7 +1191,7 @@
     <string name="copying_osmand_one_file_descr">Копирование файла (%s) на новое место…</string>
     <string name="copying_osmand_files_descr">Копирование файлов данных OsmAnd на новое место (%s)…</string>
     <string name="disable_complex_routing_descr">Отключение 2-фазной маршрутизации для автомобильной навигации</string>
-    <string name="complex_route_calculation_failed">Быстрое вычисление маршрута не удалось (%s), отмените для возврата к медленному вычислению.</string>
+    <string name="complex_route_calculation_failed">Быстрое построение маршрута не удалось (%s), отмените для возврата к медленному построению.</string>
     <string name="map_magnifier">Масштаб</string>
     <string name="select_gpx">Выберите GPX…</string>
     <string name="route_descr_select_destination">Выберите пункт назначения</string>
