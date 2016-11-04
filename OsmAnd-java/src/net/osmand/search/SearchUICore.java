@@ -109,7 +109,7 @@ public class SearchUICore {
 							int k = 0;
 							boolean same = false;
 							while(searchResults.size() > k && k < DEPTH_TO_CHECK_SAME_SEARCH_RESULTS) {
-								if(sameSearchResult(addedResult, searchResults.get(searchResults.size() - k))) {
+								if(sameSearchResult(addedResult, searchResults.get(searchResults.size() - k - 1))) {
 									same = true;
 									break;
 								}
