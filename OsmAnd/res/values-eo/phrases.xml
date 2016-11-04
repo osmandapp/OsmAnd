@@ -3306,19 +3306,23 @@
 <string name="poi_party">Provizadoj por aranĝoj</string>
 	<string name="poi_electrical">Elektraĵa vendejo</string>
 	<string name="poi_locksmith">Seruristejo</string>
-	<string name="poi_lighting">Prilumigad-aparataj vendejo</string>
-	<string name="poi_lottery">Loteri-biletaj kiosko</string>
+	<string name="poi_lighting">Prilumigad-aparata vendejo</string>
+	<string name="poi_lottery">Loteri-bileta kiosko</string>
 	<string name="poi_gambling">Hazardludejo</string>
 
 	<string name="poi_gambling_type">Speco</string>
 	<string name="poi_gambling_lottery">Loterio</string>
 	<string name="poi_gambling_pachinko">Paĉinko</string>
 	<string name="poi_gambling_slot_machines">Unubrakaj banditoj</string>
-	<string name="poi_e_cigarette">Elektronik-cigaredaj vendejo</string>
+	<string name="poi_e_cigarette">Elektronik-cigareda vendejo</string>
 
 <string name="poi_gambling_bingo">Bingo</string>
 
 	<string name="poi_gambling_betting">Vetoj</string>
 	<string name="poi_locomotive">Lokomotivo</string>
+
+<string name="poi_nutrition_supplements">Diet-suplementa vendejo</string>
+	<string name="poi_photo_studio">Fotografa studio</string>
+
 
 </resources>
