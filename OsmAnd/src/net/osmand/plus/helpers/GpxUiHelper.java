@@ -133,6 +133,12 @@ public class GpxUiHelper {
 
 		// 3. Time moving, if any
 		if (analysis.isTimeMoving()) {
+			//*****Issue 3222, for testing only
+				final String formatDuration0 = Algorithms.formatDuration((int) (analysis.timeMoving0 / 1000), app.accessibilityEnabled());
+				description.append(nl).append(app.getString(R.string.gpx_timemoving,
+						getColorValue(timeSpanClr, formatDuration0, html)));
+				description.append(" (" + getColorValue(distanceClr, OsmAndFormatter.getFormattedDistance(analysis.totalDistanceMoving0, app), html) + ")");
+
 			final String formatDuration = Algorithms.formatDuration((int) (analysis.timeMoving / 1000), app.accessibilityEnabled());
 			description.append(nl).append(app.getString(R.string.gpx_timemoving,
 					getColorValue(timeSpanClr, formatDuration, html)));

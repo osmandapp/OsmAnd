@@ -251,6 +251,9 @@ public class GPXUtilities {
 		public long startTime = Long.MAX_VALUE;
 		public long endTime = Long.MIN_VALUE;
 		public long timeSpan = 0;
+			//*****Issue 3222, for testing only
+			public long timeMoving0 = 0;
+			public float totalDistanceMoving0 = 0;
 		public long timeMoving = 0;
 		public float totalDistanceMoving = 0;
 
@@ -418,8 +421,17 @@ public class GPXUtilities {
 						net.osmand.Location.distanceBetween(prev.lat, prev.lon, point.lat, point.lon, calculations);
 						totalDistance += calculations[0];
 
-						// Averaging speed values is less exact than totalDistance/timeMoving
-						if (speed > 0 && point.time != 0 && prev.time != 0) {
+						// Motion detection:
+						//   speed > 0  uses GPS chipset's motion detection
+						//   calculations[0] > minDisplacment * time  is heuristic needed because tracks may be filtered at recording time, so points at rest may not be present in file at all
+
+						//*****Issue 3222, for testing only
+							if (speed > 0 && point.time != 0 && prev.time != 0) {
+								timeMoving0 = timeMoving0 + (point.time - prev.time);
+								totalDistanceMoving0 += calculations[0];
+							}
+
+						if ((speed > 0) && (calculations[0] > 0.5 / 1000f * (point.time - prev.time)) && point.time != 0 && prev.time != 0) {
 							timeMoving = timeMoving + (point.time - prev.time);
 							totalDistanceMoving += calculations[0];
 						}
@@ -444,6 +456,7 @@ public class GPXUtilities {
 
 
 			// 5. Max speed and Average speed, if any. Average speed is NOT overall (effective) speed, but only calculated for "moving" periods.
+			//    Averaging speed values is less precise than totalDistanceMoving/timeMoving
 			if (speedCount > 0) {
 				if (timeMoving > 0) {
 					avgSpeed = (float) totalDistanceMoving / (float) timeMoving * 1000f;
