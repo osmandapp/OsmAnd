@@ -73,10 +73,10 @@ public class BinaryInspector {
 		if ("test".equals(args[0])) {
 			in.inspector(new String[] {
 //					"-vpoi",
-//					"-vmap", "-vmapobjects", // "-vmapcoordinates",
+					"-vmap", "-vmapobjects", // "-vmapcoordinates",
 //					"-vrouting",
 //					"-vtransport",
-					"-vaddress", "-vcities","-vstreetgroups",
+//					"-vaddress", "-vcities","-vstreetgroups",
 //					"-vstreets", "-vbuildings", "-vintersections",
 //					"-lang=ru",
 //					"-bbox=4.8486,52.3084,4.8747,52.2970",
@@ -132,10 +132,10 @@ public class BinaryInspector {
 		FileOutputStream osmOut = null;
 		double lattop = 85;
 		double latbottom = -85;
-		double lonleft = -180;
-		double lonright = 180;
+		double lonleft = -179.9;
+		double lonright = 179.9;
 		String lang = null;
-		int zoom = -1;
+		int zoom = 15;
 
 		public boolean isVaddress() {
 			return vaddress;
