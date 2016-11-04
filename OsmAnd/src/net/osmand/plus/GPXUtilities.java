@@ -251,9 +251,9 @@ public class GPXUtilities {
 		public long startTime = Long.MAX_VALUE;
 		public long endTime = Long.MIN_VALUE;
 		public long timeSpan = 0;
-			//*****Issue 3222, for testing only
-			public long timeMoving0 = 0;
-			public float totalDistanceMoving0 = 0;
+			//Next few lines for Issue 3222 heuristic testing only
+			//public long timeMoving0 = 0;
+			//public float totalDistanceMoving0 = 0;
 		public long timeMoving = 0;
 		public float totalDistanceMoving = 0;
 
@@ -424,17 +424,15 @@ public class GPXUtilities {
 						// Motion detection:
 						//   speed > 0  uses GPS chipset's motion detection
 						//   calculations[0] > minDisplacment * time  is heuristic needed because tracks may be filtered at recording time, so points at rest may not be present in file at all
-
-						//*****Issue 3222, for testing only
-							if (speed > 0 && point.time != 0 && prev.time != 0) {
-								timeMoving0 = timeMoving0 + (point.time - prev.time);
-								totalDistanceMoving0 += calculations[0];
-							}
-
 						if ((speed > 0) && (calculations[0] > 0.1 / 1000f * (point.time - prev.time)) && point.time != 0 && prev.time != 0) {
 							timeMoving = timeMoving + (point.time - prev.time);
 							totalDistanceMoving += calculations[0];
 						}
+						//Next few lines for Issue 3222 heuristic testing only
+						//	if (speed > 0 && point.time != 0 && prev.time != 0) {
+						//		timeMoving0 = timeMoving0 + (point.time - prev.time);
+						//		totalDistanceMoving0 += calculations[0];
+						//	}
 					}
 				}
 			}
