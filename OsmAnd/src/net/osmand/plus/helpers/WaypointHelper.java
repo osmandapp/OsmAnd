@@ -75,10 +75,12 @@ public class WaypointHelper {
 	private RouteCalculationResult route;
 
 	private long announcedAlarmTime;
+	private ApplicationMode appMode;
 
 
 	public WaypointHelper(OsmandApplication application) {
 		app = application;
+		appMode = app.getSettings().getApplicationMode();
 	}
 
 
@@ -206,17 +208,17 @@ public class WaypointHelper {
 		//An item will be displayed in the Waypoint list if either "Show..." or "Announce..." is selected for it in the Navigation settings
 		//Keep both "Show..." and "Announce..." Nav settings in sync when user changes what to display in the Waypoint list, as follows:
 		if (type == ALARMS) {
-			app.getSettings().SHOW_TRAFFIC_WARNINGS.set(enable);
-			app.getSettings().SPEAK_TRAFFIC_WARNINGS.set(enable);
-			app.getSettings().SHOW_PEDESTRIAN.set(enable);
-			app.getSettings().SPEAK_PEDESTRIAN.set(enable);
+			app.getSettings().SHOW_TRAFFIC_WARNINGS.setModeValue(appMode, enable);
+			app.getSettings().SPEAK_TRAFFIC_WARNINGS.setModeValue(appMode, enable);
+			app.getSettings().SHOW_PEDESTRIAN.setModeValue(appMode, enable);
+			app.getSettings().SPEAK_PEDESTRIAN.setModeValue(appMode, enable);
 			//But do not implicitly change speed_cam settings here because of legal restrictions in some countries, so Nav settings must prevail
 		} else if (type == POI) {
-			app.getSettings().SHOW_NEARBY_POI.set(enable);
-			app.getSettings().ANNOUNCE_NEARBY_POI.set(enable);
+			app.getSettings().SHOW_NEARBY_POI.setModeValue(appMode, enable);
+			app.getSettings().ANNOUNCE_NEARBY_POI.setModeValue(appMode, enable);
 		} else if (type == FAVORITES) {
-			app.getSettings().SHOW_NEARBY_FAVORITES.set(enable);
-			app.getSettings().ANNOUNCE_NEARBY_FAVORITES.set(enable);
+			app.getSettings().SHOW_NEARBY_FAVORITES.setModeValue(appMode, enable);
+			app.getSettings().ANNOUNCE_NEARBY_FAVORITES.setModeValue(appMode, enable);
 		} else if (type == WAYPOINTS) {
 			app.getSettings().SHOW_WPT.set(enable);
 			app.getSettings().ANNOUNCE_WPT.set(enable);
@@ -243,19 +245,13 @@ public class WaypointHelper {
 
 	public boolean isTypeEnabled(int type) {
 		if (type == ALARMS) {
-			return showAlarms() || announceAlarms();
+			return app.getSettings().SHOW_TRAFFIC_WARNINGS.getModeValue(appMode);
 		} else if (type == POI) {
-			//no SHOW item in nav settings, hence only query ANNOUNCE here (makes inital Waypoint dialogue consistent with nav settings)
-			//return showPOI() || announcePOI();
-			return announcePOI();
+			return app.getSettings().SHOW_NEARBY_POI.getModeValue(appMode);
 		} else if (type == FAVORITES) {
-			//no SHOW item in nav settings, hence only query ANNOUNCE here (makes inital Waypoint dialogue consistent with nav settings)
-			//return showFavorites() || announceFavorites();
-			return announceFavorites();
+			return app.getSettings().SHOW_NEARBY_FAVORITES.getModeValue(appMode);
 		} else if (type == WAYPOINTS) {
-			//no SHOW item in nav settings, hence only query ANNOUNCE here (makes inital Waypoint dialogue consistent with nav settings)
-			//return showGPXWaypoints() || announceGPXWaypoints();
-			return announceGPXWaypoints();
+			return app.getSettings().SHOW_WPT.get();
 		}
 		return true;
 	}
@@ -460,39 +456,48 @@ public class WaypointHelper {
 
 
 	protected void recalculatePoints(RouteCalculationResult route, int type, List<List<LocationPointWrapper>> locationPoints) {
-		//sync SHOW settings not otherwise accessible in settings menu (needed so that waypoint dialogue correctly inflates selected categories upon startup)
-		app.getSettings().SHOW_NEARBY_POI.set(app.getSettings().ANNOUNCE_NEARBY_POI.get());
-		app.getSettings().SHOW_NEARBY_FAVORITES.set(app.getSettings().ANNOUNCE_NEARBY_FAVORITES.get());
-		app.getSettings().SHOW_WPT.set(app.getSettings().ANNOUNCE_WPT.get());
-
 		boolean all = type == -1;
+		appMode = app.getSettings().getApplicationMode();
 		if (route != null && !route.isEmpty()) {
+			boolean showWaypoints = app.getSettings().SHOW_WPT.get(); // global
+			boolean announceWaypoints = app.getSettings().ANNOUNCE_WPT.get(); // global
+			
+			if(route.getAppMode() != null) {
+				appMode = route.getAppMode();
+			}
+			boolean showPOI = app.getSettings().SHOW_NEARBY_POI.getModeValue(appMode);
+			boolean showFavorites = app.getSettings().SHOW_NEARBY_FAVORITES.getModeValue(appMode);
+			boolean announceFavorites = app.getSettings().ANNOUNCE_NEARBY_FAVORITES.getModeValue(appMode);
+			boolean announcePOI = app.getSettings().ANNOUNCE_NEARBY_POI.getModeValue(appMode);
+			
 			if ((type == FAVORITES || all)) {
 				final List<LocationPointWrapper> array = clearAndGetArray(locationPoints, FAVORITES);
-				if (showFavorites()) {
+				if (showFavorites) {
 					findLocationPoints(route, FAVORITES, array, app.getFavorites().getFavouritePoints(),
-							announceFavorites());
+							announceFavorites);
 					sortList(array);
 				}
 			}
 			if ((type == ALARMS || all)) {
 				final List<LocationPointWrapper> array = clearAndGetArray(locationPoints, ALARMS);
-				calculateAlarms(route, array);
-				sortList(array);
+				if(route.getAppMode() != null) {
+					calculateAlarms(route, array, appMode);
+					sortList(array);
+				}
 			}
 			if ((type == WAYPOINTS || all)) {
 				final List<LocationPointWrapper> array = clearAndGetArray(locationPoints, WAYPOINTS);
-				if (showGPXWaypoints()) {
+				if (showWaypoints) {
 					findLocationPoints(route, WAYPOINTS, array, app.getAppCustomization().getWaypoints(),
-							announceGPXWaypoints());
-					findLocationPoints(route, WAYPOINTS, array, route.getLocationPoints(), announceGPXWaypoints());
+							announceWaypoints);
+					findLocationPoints(route, WAYPOINTS, array, route.getLocationPoints(), announceWaypoints);
 					sortList(array);
 				}
 			}
 			if ((type == POI || all)) {
 				final List<LocationPointWrapper> array = clearAndGetArray(locationPoints, POI);
-				if (showPOI()) {
-					calculatePoi(route, array);
+				if (showPOI) {
+					calculatePoi(route, array, announcePOI);
 					sortList(array);
 				}
 			}
@@ -550,7 +555,7 @@ public class WaypointHelper {
 	}
 
 
-	protected void calculatePoi(RouteCalculationResult route, List<LocationPointWrapper> locationPoints) {
+	protected void calculatePoi(RouteCalculationResult route, List<LocationPointWrapper> locationPoints, boolean announcePOI) {
 		if (app.getPoiFilters().isShowingAnyPoi()) {
 			final List<Location> locs = route.getImmutableAllLocations();
 			List<Amenity> amenities = new ArrayList<>();
@@ -564,7 +569,7 @@ public class WaypointHelper {
 					LocationPointWrapper lwp = new LocationPointWrapper(route, POI, new AmenityLocationPoint(a),
 							(float) rp.deviateDistance, i);
 					lwp.deviationDirectionRight = rp.deviationDirectionRight;
-					lwp.setAnnounce(announcePOI());
+					lwp.setAnnounce(announcePOI);
 					locationPoints.add(lwp);
 				}
 			}
@@ -572,16 +577,16 @@ public class WaypointHelper {
 	}
 
 
-	private void calculateAlarms(RouteCalculationResult route, List<LocationPointWrapper> array) {
+	private void calculateAlarms(RouteCalculationResult route, List<LocationPointWrapper> array, ApplicationMode mode) {
 		for (AlarmInfo i : route.getAlarmInfo()) {
 			if (i.getType() == AlarmInfoType.SPEED_CAMERA) {
-				if (app.getSettings().SHOW_CAMERAS.get() || app.getSettings().SPEAK_SPEED_CAMERA.get()) {
+				if (app.getSettings().SHOW_CAMERAS.getModeValue(mode) || app.getSettings().SPEAK_SPEED_CAMERA.getModeValue(mode)) {
 					LocationPointWrapper lw = new LocationPointWrapper(route, ALARMS, i, 0, i.getLocationIndex());
 					lw.setAnnounce(app.getSettings().SPEAK_SPEED_CAMERA.get());
 					array.add(lw);
 				}
 			} else {
-				if (app.getSettings().SHOW_TRAFFIC_WARNINGS.get() || app.getSettings().SPEAK_TRAFFIC_WARNINGS.get()) {
+				if (app.getSettings().SHOW_TRAFFIC_WARNINGS.getModeValue(mode) || app.getSettings().SPEAK_TRAFFIC_WARNINGS.getModeValue(mode)) {
 					LocationPointWrapper lw = new LocationPointWrapper(route, ALARMS, i, 0, i.getLocationIndex());
 					lw.setAnnounce(app.getSettings().SPEAK_TRAFFIC_WARNINGS.get());
 					array.add(lw);
@@ -625,39 +630,6 @@ public class WaypointHelper {
 	public Set<PoiUIFilter> getPoiFilters() {
 		return app.getPoiFilters().getSelectedPoiFilters();
 	}
-
-	public boolean showPOI() {
-		return app.getSettings().SHOW_NEARBY_POI.get();
-	}
-
-	public boolean announcePOI() {
-		return app.getSettings().ANNOUNCE_NEARBY_POI.get();
-	}
-
-	public boolean showGPXWaypoints() {
-		return app.getSettings().SHOW_WPT.get();
-	}
-
-	public boolean announceGPXWaypoints() {
-		return app.getSettings().ANNOUNCE_WPT.get();
-	}
-
-	public boolean showFavorites() {
-		return app.getSettings().SHOW_NEARBY_FAVORITES.get();
-	}
-
-	public boolean announceFavorites() {
-		return app.getSettings().ANNOUNCE_NEARBY_FAVORITES.get();
-	}
-
-	public boolean showAlarms() {
-		return app.getSettings().SHOW_TRAFFIC_WARNINGS.get();
-	}
-
-	public boolean announceAlarms() {
-		return app.getSettings().SPEAK_TRAFFIC_WARNINGS.get();
-	}
-
 
 	public static class LocationPointWrapper {
 		LocationPoint point;

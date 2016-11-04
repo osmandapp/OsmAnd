@@ -13,7 +13,6 @@ import android.preference.Preference;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
 import android.support.v7.app.AlertDialog;
-
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.DeviceAdminRecv;
 import net.osmand.plus.OsmandApplication;
@@ -363,29 +362,42 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 					settings.SHOW_PEDESTRIAN, settings.SHOW_CAMERAS, settings.SHOW_LANES }, preference.getTitle());
 			return true;
 		} else if (preference == speakAlarms) {
-			AlertDialog dlg = showBooleanSettings(new String[] { getString(R.string.speak_street_names), getString(R.string.speak_traffic_warnings),
-					getString(R.string.speak_pedestrian), getString(R.string.speak_speed_limit),
-					getString(R.string.speak_cameras),
-					getString(R.string.announce_gpx_waypoints),
-					getString(R.string.speak_favorites),
-					getString(R.string.speak_poi)},
-					new OsmandPreference[] { settings.SPEAK_STREET_NAMES, settings.SPEAK_TRAFFIC_WARNINGS,
-					settings.SPEAK_PEDESTRIAN, settings.SPEAK_SPEED_LIMIT,
-					settings.SPEAK_SPEED_CAMERA,
-					settings.ANNOUNCE_WPT, settings.ANNOUNCE_NEARBY_FAVORITES, settings.ANNOUNCE_NEARBY_POI}, preference.getTitle());
-			if (!settings.SPEAK_SPEED_CAMERA.get()) {
-				dlg.setOnDismissListener(new DialogInterface.OnDismissListener() {
+			AlertDialog dlg = showBooleanSettings(new String[] { getString(R.string.speak_street_names),
+					getString(R.string.speak_traffic_warnings), getString(R.string.speak_pedestrian),
+					getString(R.string.speak_speed_limit), getString(R.string.speak_cameras),
+					getString(R.string.announce_gpx_waypoints), getString(R.string.speak_favorites),
+					getString(R.string.speak_poi) }, new OsmandPreference[] { settings.SPEAK_STREET_NAMES,
+					settings.SPEAK_TRAFFIC_WARNINGS, settings.SPEAK_PEDESTRIAN, settings.SPEAK_SPEED_LIMIT,
+					settings.SPEAK_SPEED_CAMERA, settings.ANNOUNCE_WPT, settings.ANNOUNCE_NEARBY_FAVORITES,
+					settings.ANNOUNCE_NEARBY_POI }, preference.getTitle());
+			final boolean initialSpeedCam = settings.SPEAK_SPEED_CAMERA.get();
+			final boolean initialFavorites = settings.ANNOUNCE_NEARBY_FAVORITES.get();
+			final boolean initialPOI = settings.ANNOUNCE_NEARBY_POI.get();
+			// final boolean initialWpt = settings.ANNOUNCE_WPT.get();
 
-					@Override
-					public void onDismiss(DialogInterface dialog) {
+			dlg.setOnDismissListener(new DialogInterface.OnDismissListener() {
+
+				@Override
+				public void onDismiss(DialogInterface dialog) {
+					if (settings.ANNOUNCE_NEARBY_POI.get() != initialPOI) {
+						settings.SHOW_NEARBY_POI.set(settings.ANNOUNCE_NEARBY_POI.get());
+					}
+					if (settings.ANNOUNCE_NEARBY_FAVORITES.get() != initialFavorites) {
+						settings.SHOW_NEARBY_FAVORITES.set(settings.ANNOUNCE_NEARBY_FAVORITES.get());
+					}
+					if (settings.ANNOUNCE_WPT.get()) {
+						settings.SHOW_WPT.set(settings.ANNOUNCE_WPT.get());
+					}
+					if (!initialSpeedCam) {
 						if (settings.SPEAK_SPEED_CAMERA.get()) {
 							settings.SPEAK_SPEED_CAMERA.set(false);
 							confirmSpeedCamerasDlg();
 						}
 					}
 
-				});
-			}
+				}
+
+			});
 			return true;
 		}
 		return false;

@@ -41,6 +41,7 @@ public class RouteCalculationResult {
 	protected int nextIntermediate = 0;
 	protected int currentWaypointGPX = 0;
 	protected int lastWaypointGPX = 0;
+	protected ApplicationMode appMode;
 
 	public RouteCalculationResult(String errorMessage) {
 		this.errorMessage = errorMessage;
@@ -72,7 +73,7 @@ public class RouteCalculationResult {
 			// if there is no closest points to start - add it
 			introduceFirstPointAndLastPoint(locations, localDirections, null, params.start, params.end);
 		}
-		
+		this.appMode = params.mode;
 		this.locations = Collections.unmodifiableList(locations);
 		this.segments = new ArrayList<RouteSegmentResult>();
 		this.listDistance = new int[locations.size()];
@@ -84,7 +85,7 @@ public class RouteCalculationResult {
 	}
 
 	public RouteCalculationResult(List<RouteSegmentResult> list, Location start, LatLon end, List<LatLon> intermediates,  
-			OsmandApplication ctx, boolean leftSide, float routingTime, List<LocationPoint> waypoints) {
+			OsmandApplication ctx, boolean leftSide, float routingTime, List<LocationPoint> waypoints, ApplicationMode mode) {
 		this.routingTime = routingTime;
 		if(waypoints != null) {
 			this.locationPoints.addAll(waypoints);
@@ -102,10 +103,15 @@ public class RouteCalculationResult {
 		this.listDistance = new int[locations.size()];
 		calculateIntermediateIndexes(ctx, this.locations, intermediates, computeDirections, this.intermediatePoints);
 		updateListDistanceTime(this.listDistance, this.locations);
+		this.appMode = mode;
 		
 		this.directions = Collections.unmodifiableList(computeDirections);
 		updateDirectionsTime(this.directions, this.listDistance);
 		this.alarmInfo = Collections.unmodifiableList(alarms);
+	}
+	
+	public ApplicationMode getAppMode() {
+		return appMode;
 	}
 
 	public List<LocationPoint> getLocationPoints() {

@@ -808,7 +808,8 @@ public class RouteProvider {
 				return emptyResult();
 			} else {
 				RouteCalculationResult res = new RouteCalculationResult(result, params.start, params.end,
-						params.intermediates, params.ctx, params.leftSide, ctx.routingTime, params.gpxRoute  == null? null: params.gpxRoute.wpt);
+						params.intermediates, params.ctx, params.leftSide, ctx.routingTime, params.gpxRoute  == null? null: params.gpxRoute.wpt,
+								params.mode);
 				return res;
 			}
 		} catch (RuntimeException e) {
