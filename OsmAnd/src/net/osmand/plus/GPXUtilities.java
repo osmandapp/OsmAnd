@@ -935,7 +935,7 @@ public class GPXUtilities {
 		serializer.attribute(null, "lon", latLonFormat.format(p.lon)); //$NON-NLS-1$ //$NON-NLS-2$
 
 		if (!Double.isNaN(p.ele)) {
-			writeNotNullText(serializer, "ele", p.ele + "");
+			writeNotNullText(serializer, "ele", (float) p.ele + "");
 		}
 		if (p.time != 0) {
 			writeNotNullText(serializer, "time", format.format(new Date(p.time)));
