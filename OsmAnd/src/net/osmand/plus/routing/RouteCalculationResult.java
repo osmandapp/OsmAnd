@@ -638,6 +638,13 @@ public class RouteCalculationResult {
 		return Collections.emptyList();
 	}
 	
+	public int getRouteDistanceToFinish(int posFromCurrentIndex) {
+		if(listDistance != null && currentRoute + posFromCurrentIndex < listDistance.length){
+			return listDistance[currentRoute + posFromCurrentIndex];
+		}
+		return 0;
+	}
+	
 	public RouteSegmentResult getCurrentSegmentResult() {
 		int cs = currentRoute > 0 ? currentRoute - 1 : 0;
 		if(cs < segments.size()) {

@@ -1,19 +1,12 @@
 package net.osmand.plus.views;
 
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.ColorFilter;
-import android.graphics.Paint;
-import android.graphics.Path;
-import android.graphics.PointF;
-import android.graphics.PorterDuffColorFilter;
-import android.graphics.Paint.Cap;
-import android.graphics.Paint.Join;
-import android.graphics.Paint.Style;
-import android.graphics.PorterDuff.Mode;
-import android.os.AsyncTask;
-import android.support.annotation.NonNull;
-import android.view.MotionEvent;
+import gnu.trove.list.array.TIntArrayList;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.data.QuadTree;
@@ -26,13 +19,20 @@ import net.osmand.plus.render.OsmandRenderer.RenderingContext;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.MapAlgorithms;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-
-import gnu.trove.list.array.TIntArrayList;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.ColorFilter;
+import android.graphics.Paint;
+import android.graphics.Paint.Cap;
+import android.graphics.Paint.Join;
+import android.graphics.Paint.Style;
+import android.graphics.Path;
+import android.graphics.PointF;
+import android.graphics.PorterDuff.Mode;
+import android.graphics.PorterDuffColorFilter;
+import android.os.AsyncTask;
+import android.support.annotation.NonNull;
+import android.view.MotionEvent;
 
 public abstract class OsmandMapLayer {
 
@@ -118,49 +118,11 @@ public abstract class OsmandMapLayer {
 	}
 
 
-	private boolean isIn(int x, int y, int lx, int ty, int rx, int by) {
+	protected boolean isIn(int x, int y, int lx, int ty, int rx, int by) {
 		return x >= lx && x <= rx && y >= ty && y <= by;
 	}
 
-	public int calculateSplitPaths(RotatedTileBox tb, TIntArrayList xs, TIntArrayList ys,
-								   TIntArrayList results) {
-		int px = xs.get(0);
-		int py = ys.get(0);
-		int h = tb.getPixHeight();
-		int w = tb.getPixWidth();
-		int left =  -w / 4;
-		int right = w + w / 4;
-		int top = - h/4;
-		int bottom = h + h/4;
-		int cnt = 0;
-		
-		boolean pin = isIn(px, py, left, top, right, bottom);
-		for (int i = 1; i < xs.size(); i++) {
-			int x = xs.get(i);
-			int y = ys.get(i);
-			boolean in = isIn(x, y, left, top, right, bottom);
-			boolean draw = false;
-			if (pin && in) {
-				draw = true;
-			} else {
-				long intersection = MapAlgorithms.calculateIntersection(x, y,
-						px, py, left, right, bottom, top);
-				if (intersection != -1) {
-					draw = true;
-				}
-			}
-			if (draw) {
-				results.add(px);
-				results.add(py);
-				results.add(x);
-				results.add(y);
-			}
-			pin = in;
-			px = x;
-			py = y;
-		}
-		return cnt;
-	}
+	
 
 	public int calculatePath(RotatedTileBox tb, TIntArrayList xs, TIntArrayList ys, Path path) {
 		boolean start = false;

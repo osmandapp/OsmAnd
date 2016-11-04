@@ -1,33 +1,26 @@
 package net.osmand.plus.views;
 
+import gnu.trove.list.array.TByteArrayList;
 import gnu.trove.list.array.TIntArrayList;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
 import net.osmand.Location;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.render.OsmandRenderer;
-import net.osmand.plus.render.OsmandRenderer.RenderingContext;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
-import net.osmand.render.RenderingRuleSearchRequest;
-import net.osmand.render.RenderingRulesStorage;
+import net.osmand.util.MapUtils;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.ColorFilter;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Paint.Cap;
-import android.graphics.Paint.Join;
-import android.graphics.Paint.Style;
 import android.graphics.Path;
 import android.graphics.PointF;
 import android.graphics.PorterDuff.Mode;
@@ -35,11 +28,15 @@ import android.graphics.PorterDuffColorFilter;
 
 public class RouteLayer extends OsmandMapLayer {
 	
+	private static final float EPSILON_IN_DPI = 4;
+
 	private OsmandMapTileView view;
 	
 	private final RoutingHelper helper;
+	// keep array lists created
 	private List<Location> points = new ArrayList<Location>();
 	private List<Location> actionPoints = new ArrayList<Location>();
+	private TByteArrayList simplifyPoints = new TByteArrayList();
 
 	private Path path;
 
@@ -181,10 +178,41 @@ public class RouteLayer extends OsmandMapLayer {
 			}
 		}
 	}
+	
+	private void cullRamerDouglasPeucker(TByteArrayList survivor, List<Location> points,
+			int start, int end, double epsillon) {
+        double dmax = Double.NEGATIVE_INFINITY;
+        int index = -1;
+        Location startPt = points.get(start);
+        Location endPt = points.get(end);
 
-	private void drawSegment(RotatedTileBox tb, Canvas canvas) {
-		if (points.size() > 0) {
+        for (int i = start + 1; i < end; i++) {
+            Location pt = points.get(i);
+            double d = MapUtils.getOrthogonalDistance(pt.getLatitude(), pt.getLongitude(), 
+            		startPt.getLatitude(), startPt.getLongitude(), endPt.getLatitude(), endPt.getLongitude());
+            if (d > dmax) {
+                dmax = d;
+                index = i;
+            }
+        }
+        if (dmax > epsillon) {
+        	cullRamerDouglasPeucker(survivor, points, start, index, epsillon);
+        	cullRamerDouglasPeucker(survivor, points, index, end, epsillon);
+        } else {
+            survivor.set(end, (byte) 1);
+        }
+    }
+
+	private void drawSegment(List<Location> points, RotatedTileBox tb, Canvas canvas, int distToFinish) {
+		if (points.size() > 1) {
 			canvas.rotate(-tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
+			double distInPix = (tb.getDistance(0, 0, tb.getPixWidth(), 0) / tb.getPixWidth());
+			double cullDistance = (distInPix * (EPSILON_IN_DPI * Math.max(1, tb.getDensity())));
+			double distPixToFinish = distInPix * distToFinish;
+			simplifyPoints.resetQuick();
+			simplifyPoints.fill(0, points.size(), (byte) 0);
+			simplifyPoints.set(0, (byte) 1);
+			cullRamerDouglasPeucker(simplifyPoints, points, 0, points.size() - 1, cullDistance);
 			try {
 				TIntArrayList tx = new TIntArrayList();
 				TIntArrayList ty = new TIntArrayList();
@@ -192,15 +220,17 @@ public class RouteLayer extends OsmandMapLayer {
 					Location o = points.get(i);
 					int x = (int) tb.getPixXFromLatLon(o.getLatitude(), o.getLongitude());
 					int y = (int) tb.getPixYFromLatLon(o.getLatitude(), o.getLongitude());
-					tx.add(x);
-					ty.add(y);
+					if(simplifyPoints.get(i) > 0) {
+						tx.add(x);
+						ty.add(y);
+					}
+					
 				}
+				
 				calculatePath(tb, tx, ty, path);
 				attrs.drawPath(canvas, path);
 				if (tb.getZoomAnimation() == 0) {
-					TIntArrayList lst = new TIntArrayList(50);
-					calculateSplitPaths(tb, tx, ty, lst);
-					drawArrowsOverPath(canvas, lst, coloredArrowUp);
+					drawArrowsOverPath(canvas, tb, tx, ty, coloredArrowUp, distPixToFinish);
 				}
 			} finally {
 				canvas.rotate(tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
@@ -209,44 +239,53 @@ public class RouteLayer extends OsmandMapLayer {
 	}
 
 
-	private void drawArrowsOverPath(Canvas canvas, TIntArrayList lst, Bitmap arrow) {
+
+
+	private void drawArrowsOverPath(Canvas canvas, RotatedTileBox tb, TIntArrayList tx, TIntArrayList ty, Bitmap arrow, double distPixToFinish) {
+		int h = tb.getPixHeight();
+		int w = tb.getPixWidth();
+		int left =  -w / 4;
+		int right = w + w / 4;
+		int top = - h/4;
+		int bottom = h + h/4;
+		
 		double pxStep = arrow.getHeight() * 4f;
 		Matrix matrix = new Matrix();
 		double dist = 0;
-		for (int i = 0; i < lst.size(); i += 4) {
-			int px = lst.get(i);
-			int py = lst.get(i + 1);
-			int x = lst.get(i + 2);
-			int y = lst.get(i + 3);
+		if(distPixToFinish != 0) {
+			dist = distPixToFinish - pxStep * ((int) (distPixToFinish / pxStep)); // dist < 1
+		}
+		
+		for (int i = tx.size() - 2; i >= 0; i --) {
+			int px = tx.get(i);
+			int py = ty.get(i);
+			int x = tx.get(i + 1);
+			int y = ty.get(i + 1);
 			double angleRad = Math.atan2(y - py, x - px);
 			double angle = (angleRad * 180 / Math.PI) + 90f;
 			double distSegment = Math.sqrt((y - py) * (y - py) + (x - px) * (x - px));
 			if(distSegment == 0) {
 				continue;
 			}
-			int len = (int) (distSegment / pxStep);
-			if (len > 0) {
-				double pdx = ((x - px) / len);
-				double pdy = ((y - py) / len);
-				for (int k = 1; k <= len; k++) {
+			if(dist >= pxStep) {
+				dist = 0; // unnecessary but double check to avoid errors
+			}
+			double percent = 1 - (pxStep - dist) / distSegment;
+			dist += distSegment;
+			while(dist >= pxStep) {
+				double pdx = (x - px) * percent;
+				double pdy = (y - py) * percent;
+				if (isIn((int)(px + pdx), (int) (py + pdy), left, top, right, bottom)) {
+					float icony = (float) (py + pdy);
+					float iconx = (float) (px + pdx - arrow.getWidth() / 2);
 					matrix.reset();
 					matrix.postTranslate(0, -arrow.getHeight() / 2);
 					matrix.postRotate((float) angle, arrow.getWidth() / 2, 0);
-					matrix.postTranslate((float)(px + k * pdx- arrow.getWidth() / 2) , (float)(py + pdy * k));
+					matrix.postTranslate(iconx, icony);
 					canvas.drawBitmap(arrow, matrix, paintIcon);
-					dist = 0;
 				}
-			} else {
-				if(dist > pxStep) {
-					matrix.reset();
-					matrix.postTranslate(0, -arrow.getHeight() / 2);
-					matrix.postRotate((float) angle, arrow.getWidth() / 2, 0);
-					matrix.postTranslate(px + (x - px) / 2 - arrow.getWidth() / 2, py + (y - py) / 2);
-					canvas.drawBitmap(arrow, matrix, paintIcon);
-					dist = 0;
-				} else {
-					dist += distSegment;
-				}
+				dist -= pxStep;
+				percent -= pxStep / distSegment;
 			}
 		}
 	}
@@ -267,12 +306,14 @@ public class RouteLayer extends OsmandMapLayer {
 		int cd = helper.getRoute().getCurrentRoute();
 		List<RouteDirectionInfo> rd = helper.getRouteDirections();
 		Iterator<RouteDirectionInfo> it = rd.iterator();
+		int distToFinish = 0;
 		for (int i = 0; i < routeNodes.size(); i++) {
 			Location ls = routeNodes.get(i);
+			int dd = helper.getRoute().getRouteDistanceToFinish(i);
 			if (leftLongitude <= ls.getLongitude() && ls.getLongitude() <= rightLongitude && bottomLatitude <= ls.getLatitude()
 					&& ls.getLatitude() <= topLatitude) {
 				points.add(ls);
-				
+				distToFinish = dd;
 				if (!previousVisible) {
 					if (i > 0) {
 						points.add(0, routeNodes.get(i - 1));
@@ -283,12 +324,13 @@ public class RouteLayer extends OsmandMapLayer {
 				previousVisible = true;
 			} else if (previousVisible) {
 				points.add(ls);
-				drawSegment(tb, canvas);
+				distToFinish = dd;
+				drawSegment(points, tb, canvas, distToFinish);
 				previousVisible = false;
 				points.clear();
 			}
 		}
-		drawSegment(tb, canvas);
+		drawSegment(points, tb, canvas, distToFinish);
 		if (tb.getZoom() >= 14) {
 			calculateActionPoints(topLatitude, leftLongitude, bottomLatitude, rightLongitude, lastProjection,
 					routeNodes, cd, it, tb.getZoom());
