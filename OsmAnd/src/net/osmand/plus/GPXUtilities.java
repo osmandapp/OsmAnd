@@ -431,7 +431,7 @@ public class GPXUtilities {
 								totalDistanceMoving0 += calculations[0];
 							}
 
-						if ((speed > 0) && (calculations[0] > 0.5 / 1000f * (point.time - prev.time)) && point.time != 0 && prev.time != 0) {
+						if ((speed > 0) && (calculations[0] > 0.1 / 1000f * (point.time - prev.time)) && point.time != 0 && prev.time != 0) {
 							timeMoving = timeMoving + (point.time - prev.time);
 							totalDistanceMoving += calculations[0];
 						}
