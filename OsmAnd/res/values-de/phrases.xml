@@ -3322,4 +3322,8 @@
 
 <string name="poi_locomotive">Lokomotive</string>
 
+<string name="poi_nutrition_supplements">Nahrungsergänzungen</string>
+	<string name="poi_photo_studio">Fotostudio</string>
+
+
 </resources>
