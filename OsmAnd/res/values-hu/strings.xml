@@ -1653,7 +1653,10 @@ A rögzített nyomvonalak megoszthatók az ismerősökkel, vagy használhatók a
     <string name="fav_point_emoticons_message">A kedvenc hely neve módosítva lett erre: %1$s, lehetővé téve a hangulatjeleket tartalmazó szöveg fájlba mentését.</string>
     <string name="print_route">Útvonal nyomtatása</string>
     <string name="osmo_device_not_found">Eszköz nem található</string>
-    <string name="osmo_no_connection_msg">Nem sikerült csatlakozni az OsMo szerverhez:\n- ellenőrizze az internetkapcsolatot;\n- ellenőrizze a beállításokat;\n- nézzen rá a Twitterünkre: https://twitter.com/OsMomobi</string>
+    <string name="osmo_no_connection_msg">Nem sikerült csatlakozni az OsMo szerverhez:
+- ellenőrizd az internetkapcsolatot;
+- ellenőrizd a beállításokat;
+- nézz rá a Twitterünkre: https://twitter.com/OsMomobi</string>
     <string name="anonymous_user_hint">Egy anonim felhasználó nem tud:\n- csoportot létrehozni;\n- csoportokat és eszközöket szinkronizálni a kiszolgálóval;\n- csoportokat és eszközöket kezelni egy személyes beállítási felületen a weboldalon.</string>
     <string name="anonymous_user">Anonim felhasználó</string>
     <string name="logged_as">Bejelentkezve mint %1$s</string>
@@ -1872,7 +1875,7 @@ Afganisztán, Albánia, Algéria, Amerikai Egyesült Államok, Andorra, Anglia, 
     <string name="gps_status">GPS-állapot</string>
     <string name="rendering_attr_streetLighting_name">Közvilágítás</string>
     <string name="proxy_pref_title">Proxy</string>
-    <string name="proxy_pref_descr">Proxy internetkapcsolat beállítása</string>
+    <string name="proxy_pref_descr">Proxy-internetkapcsolat beállítása</string>
     <string name="settings_privacy">Adatvédelem</string>
     <string name="points">Pontok</string>
 
@@ -2617,9 +2620,9 @@ Ha segítségre van szükséged az OsmAnd alkalmazással kapcsolatban, keresd a 
     <string name="osm_live_payment_desc">Az előfizetési díj havonta lesz felszámítva. Az előfizetést bármikor lemondhatod a Google Play-en.</string>
     <string name="donation_to_osm">Adomány az OpenStreetMap közösségnek</string>
     <string name="donation_to_osm_desc">Az adományod egy részét továbbítjuk azon OSM szerkesztőknek, akik módosításokat küldtek be OpenStreetMapre. Az előfizetési díj változatlan marad.</string>
-    <string name="osm_live_subscription_desc">Az előfizetés lehetővé teszi bármely térkép óránkénti, napi vagy heti frissítését, valamint korlátlan számú letöltést.</string>
+    <string name="osm_live_subscription_desc">Az előfizetés lehetővé teszi bármely térkép óránkénti, napi vagy heti frissítését, valamint korlátlan számú térkép letöltését globálisan.</string>
     <string name="get_it">Beszerzés</string>
-    <string name="osm_live_banner_desc">Szerezz korlátlan térékpletöltési és havi egynél gyakoribb frissítési lehetőséget: óránkénti, napi, heti.</string>
+    <string name="osm_live_banner_desc">Szerezz korlátlan térékpletöltési és havi egynél gyakoribb térképfrissítési lehetőséget: hetente, naponta vagy óránként.</string>
     <string name="get_for_month">Beszerzés %1$s hónapra</string>
     <string name="osmand_plus_banner_desc">Az OsmAnd teljes verziója körlátlan térképletöltéssel és havi térképfrissítéssel.</string>
     <string name="si_mi_meters">Mérföld/méter</string>
@@ -2643,7 +2646,7 @@ Ha segítségre van szükséged az OsmAnd alkalmazással kapcsolatban, keresd a 
     <string name="replace_favorite_confirmation">Le szeretnéd cserélni a(z) %1$s kedvenc helyet?</string>
     <string name="driving_region_australia">Ausztrália</string>
     <string name="get_for">Beszerzés ennyi időre</string>
-    <string name="edit_filter">Szűrő szerkesztése</string>
+    <string name="edit_filter">Kategóriák szerkesztése</string>
     <string name="subcategories">Alkategóriák</string>
     <string name="selected_categories">Kiválasztott kategóriák</string>
     <string name="create_custom_poi">Egyéni szűrő létrehozása</string>
@@ -2653,7 +2656,7 @@ Ha segítségre van szükséged az OsmAnd alkalmazással kapcsolatban, keresd a 
     <string name="save_filter">Szűrő mentése</string>
     <string name="delete_filter">Szűrő törlése</string>
     <string name="new_filter">Új szűrő</string>
-    <string name="new_filter_desc">Kérlek add meg az új szűrő nevét. Később a Kategóriák listájában fogod megtalálni.</string>
+    <string name="new_filter_desc">Kérlek add meg az új szűrő nevét, ez hozzá lesz adva a Kategóriák fülhöz.</string>
     <string name="lang_kab">kabil</string>
     <string name="shared_string_continue">Folytatás</string>
     <string name="gpx_logging_no_data">Nincs adat</string>
