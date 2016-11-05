@@ -2008,7 +2008,7 @@
 
 	<string name="poi_payment_troika_no">Neprijíma karty Troika</string>
 
-	<string name="poi_payment_troika_yes">Prijíma karty Troika</string>
+	<string name="poi_payment_troika_yes">Karty Troika</string>
 	<string name="poi_ventilation_shaft">Vetracia šachta</string>
 
 	<string name="poi_disease_malaria_yes">Malária: áno</string>
