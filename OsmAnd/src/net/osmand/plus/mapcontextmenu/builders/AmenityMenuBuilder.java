@@ -8,7 +8,9 @@ import android.net.Uri;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.AppCompatButton;
 import android.text.Html;
+import android.text.SpannableString;
 import android.text.TextUtils;
+import android.text.style.URLSpan;
 import android.text.util.Linkify;
 import android.view.Gravity;
 import android.view.View;
@@ -110,8 +112,16 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		textView.setTextSize(16);
 		textView.setTextColor(app.getResources().getColor(light ? R.color.ctx_menu_info_text_light : R.color.ctx_menu_info_text_dark));
 
+		boolean textDefined = false;
 		if (isPhoneNumber || isUrl) {
-			textView.setTextColor(textView.getLinkTextColors());
+			if (!Algorithms.isEmpty(textPrefix)) {
+				SpannableString spannableString = new SpannableString(txt);
+				spannableString.setSpan(new URLSpan(txt), textPrefix.length() + 2, txt.length(), 0);
+				textView.setText(spannableString);
+				textDefined = true;
+			} else {
+				textView.setTextColor(textView.getLinkTextColors());
+			}
 		} else if (needLinks) {
 			textView.setAutoLinkMask(Linkify.ALL);
 			textView.setLinksClickable(true);
@@ -124,7 +134,9 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			textView.setMinLines(1);
 			textView.setMaxLines(10);
 		}
-		textView.setText(txt);
+		if (!textDefined) {
+			textView.setText(txt);
+		}
 		if (textColor > 0) {
 			textView.setTextColor(view.getResources().getColor(textColor));
 		}
@@ -401,7 +413,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			}
 
 			if (vl.startsWith("http://") || vl.startsWith("https://") || vl.startsWith("HTTP://") || vl.startsWith("HTTPS://")) {
-				vl = vl.replace(' ', '_');
+				isUrl = true;
 			}
 
 			if (isDescription) {
