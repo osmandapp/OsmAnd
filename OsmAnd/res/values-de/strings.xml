@@ -397,7 +397,7 @@ Karten-Kacheln können direkt online bezogen werden, und werden im OsmAnd-Untero
 	<string name="osmand_service_descr">OsmAnd läuft bei ausgeschalteter Anzeige im Hintergrund</string>
 
 	<string name="download_files_not_enough_space">Nicht genügend freier Speicher vorhanden zum Laden von %1$s MB (frei: %2$s).</string>
-	<string name="download_files_question_space">Wirklich {0} Datei(en) herunterladen?
+	<string name="download_files_question_space">{0} Datei(en) herunterladen?
 Dies benötigt dauerhaft {1} MB. 
 Aktuell sind {2} MB verfügbar.</string>
 	<string name="use_transparent_map_theme">Transparentes Layout</string>
@@ -2348,7 +2348,7 @@ Diese Ansicht kann zurückgestellt werden indem Sie hier wieder deaktiviert oder
     <string name="download_files_error_not_enough_space">"Nicht genug Speicher!
 Es werden vorübergehend {3} MB  und {1} MB dauerhaft benötigt.
 Aktuell sind nur {2} MB verfügbar."</string>
-    <string name="download_files_question_space_with_temp">Wirklich {0} Datei(en) herunterladen?
+    <string name="download_files_question_space_with_temp">{0} Datei(en) herunterladen?
 Dies benötigt vorübergehend {3} MB und dauerhaft {1} MB.
 Aktuell sind {2} MB verfügbar.</string>
     <string name="select_map_marker">Kartenmarkierung auswählen</string>
