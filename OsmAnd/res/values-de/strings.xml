@@ -2584,4 +2584,5 @@ und vieles mehr ...
     <string name="gpx_no_tracks_title_folder">Tracks können dem Ordner hinzugefügt werden</string>
     <string name="gpx_add_track">Track hinzufügen</string>
     <string name="upload_poi">POI hochladen</string>
+    <string name="route_roundabout_short">Nehmen Sie die %1$d Ausfahrt</string>
     </resources>
