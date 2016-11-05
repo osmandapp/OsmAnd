@@ -184,7 +184,7 @@
 	<string name="poi_pier">Moll</string>
 	<string name="poi_surveillance">Vigilància</string>
 	<string name="poi_observatory">Observatori</string>
-	<string name="poi_astronomical_observatory">Observatori astronòmic</string>
+	<string name="poi_astronomical_observatory">Astronòmic</string>
 	<string name="poi_tower">Torre</string>
 	<string name="poi_construction">En construcció</string>
 	<string name="poi_works">Fàbrica</string>
@@ -361,7 +361,7 @@
 	<string name="poi_dyke">Dic</string>
 	<string name="poi_floating_dock">Moll flotant</string>
 	<string name="poi_shop">Magatzem</string>
-		<string name="poi_shop_food">Queviures</string>
+		<string name="poi_shop_food">Botiga a l\'abast i supermercat</string>
 	<string name="poi_public_transport">Transport públic</string>
 		<string name="poi_air_transport">Transport aeri</string>
 		<string name="poi_personal_transport">Transport privat</string>
@@ -737,7 +737,7 @@
 	<string name="poi_stripclub">Club d\'striptease</string>
 	<string name="poi_craft_computer">Ordinadors a mida</string>
 	<string name="poi_beauty">Estètica</string>
-	<string name="poi_beauty_salon_nails">Manicur</string>
+	<string name="poi_beauty_salon_nails">Manicura</string>
 	<string name="poi_massage">Massatge</string>
 	<string name="poi_tattoo">Tatuatge</string>
 	<string name="poi_dry_cleaning">Neteja en sec</string>
@@ -928,7 +928,7 @@
 	<string name="poi_basin">Bassa</string>
 	<string name="poi_bump_gate">Porta batent de tancament controlat</string>
 	<string name="poi_country">País</string>
-	<string name="poi_fee_yes">Pagament</string>
+	<string name="poi_fee_yes">Sí</string>
 
 	<string name="poi_abandoned_poi">Objectes perduts</string>
 	<string name="poi_node_networks">Xarxa de nodes de senderisme/ciclisme</string>
@@ -950,7 +950,7 @@
 
 	<string name="poi_monitoring_station">Centre de control</string>
 	<string name="poi_capital">Capital</string>
-	<string name="poi_fee_no">Sense cap cost</string>
+	<string name="poi_fee_no">No</string>
 
 	<string name="poi_email">Correu electrònic</string>
 	<string name="poi_fax">Fax</string>
@@ -961,8 +961,8 @@
 	<string name="poi_animal_shelter_dog_cat">Tipus de refugi: per gossos i gats</string>
 	<string name="poi_animal_shelter_bird">Tipus de refugi: per ocells</string>
 
-<string name="poi_recycling_centre">Tipus: deixalleria</string>
-	<string name="poi_recycling_container">Tipus: contenidor</string>
+<string name="poi_recycling_centre">Deixalleria</string>
+	<string name="poi_recycling_container">Contenidor</string>
 	<string name="poi_recycling_glass">Vidre</string>
 	<string name="poi_recycling_paper">Paper</string>
 	<string name="poi_recycling_clothes">Roba</string>
@@ -1017,10 +1017,10 @@
 	<string name="poi_recycling_bicycles">Bicicletes</string>
 
 	<string name="poi_shower">Dutxa</string>
-	<string name="poi_drinking_water_yes">Aigua potable: sí</string>
-	<string name="poi_drinking_water_no">Aigua potable: no</string>
-	<string name="poi_seasonal_yes">De temporada</string>
-	<string name="poi_seasonal_no">Tot l\'any</string>
+	<string name="poi_drinking_water_yes">Sí</string>
+	<string name="poi_drinking_water_no">No</string>
+	<string name="poi_seasonal_yes">Sí</string>
+	<string name="poi_seasonal_no">No</string>
 	<string name="poi_seasonal_dry_season">Estació seca</string>
 	<string name="poi_seasonal_wet_season">Estació humida</string>
 	<string name="poi_seasonal_spring">Primavera</string>
@@ -1179,15 +1179,15 @@
 	<string name="poi_content_sewage">Contingut: aigües residuals</string>
 	<string name="poi_description_payment">Descripció de pagament</string>
 
-	<string name="poi_payment_gift_card_yes">S\'accepta targes de regal</string>
+	<string name="poi_payment_gift_card_yes">Targetes regal</string>
 	<string name="poi_payment_gift_card_no">No s\'accepta targes de regal</string>
 	<string name="poi_paediatrics">Pediatria</string>
 
 	<string name="poi_internet_access_yes">Accés a Internet: sí</string>
 	<string name="poi_internet_access_no">Accés a Internet: no</string>
 
-	<string name="poi_wheelchair_no">Cadira de rodes: no accessible</string>
-	<string name="poi_wheelchair_limited">Cadira de rodes: restringida</string>
+	<string name="poi_wheelchair_no">No</string>
+	<string name="poi_wheelchair_limited">Amb limitacions</string>
 	<string name="poi_content_fuel">Contingut: carburant</string>
 	<string name="poi_content_gas">Contingut: gas</string>
 	<string name="poi_content_biomass">Contingut: biomassa</string>
@@ -1196,9 +1196,9 @@
 	<string name="poi_content_salt">Contingut: sal</string>
 	<string name="poi_content_grain">Contingut: gra</string>
 
-	<string name="poi_nudism_yes">Nudisme: permès</string>
-	<string name="poi_nudism_no">Nudisme: prohibit</string>
-	<string name="poi_nudism_obligatory">Nudisme: obligatori</string>
+	<string name="poi_nudism_yes">Permès</string>
+	<string name="poi_nudism_no">Prohibit</string>
+	<string name="poi_nudism_obligatory">Obligatori</string>
 	<string name="poi_population">Població</string>
 	<string name="poi_bicycle_parking_building">Edifici especial</string>
 	<string name="poi_bicycle_parking_bollard">Pilona</string>
@@ -1228,10 +1228,10 @@
 	<string name="poi_vending_ice_cream">Gelat</string>
 	<string name="poi_vending_sim_cards">Targes SIM</string>
 
-	<string name="poi_nudism_customary">Nudisme: habitual</string>
-	<string name="poi_nudism_permissive">Nudisme: permissiu</string>
+	<string name="poi_nudism_customary">Habitual</string>
+	<string name="poi_nudism_permissive">Permissiu</string>
 
-	<string name="poi_parking_underground">Tipus: subterrani</string>
+	<string name="poi_parking_underground">Subterrani</string>
 	<string name="poi_bicycle_parking_anchors">Ancoratges</string>
 	<string name="poi_leaf_type_leafless">Sense fulles</string>
 	<string name="poi_species">Espècies</string>
@@ -1260,21 +1260,21 @@
 	<string name="poi_old_name">Nom antic</string>
 	<string name="poi_alt_name">Nom alternatiu</string>
 
-	<string name="poi_pump_manual">Bomba manual</string>
-	<string name="poi_pump_powered">Bomba motoritzada</string>
+	<string name="poi_pump_manual">Manual</string>
+	<string name="poi_pump_powered">Motoritzada</string>
 	<string name="poi_pump_no">Sense bomba</string>
-	<string name="poi_pump_yes">Bomba</string>
+	<string name="poi_pump_yes">Sí</string>
 
-	<string name="poi_water_characteristic_mineral">Característica de l\'aigua: mineral</string>
+	<string name="poi_water_characteristic_mineral">Mineral</string>
 	<string name="poi_water_characteristic_mud">Característica de l\'aigua: argilosa</string>
-	<string name="poi_water_characteristic_sulfuric">Característica de l\'aigua: sulfúrica</string>
+	<string name="poi_water_characteristic_sulfuric">Sulfúrica</string>
 
 	<string name="poi_cuisine">Cuina</string>
 
-	<string name="poi_information_board">Panell d\'informació</string>
+	<string name="poi_information_board">Panell</string>
 	<string name="poi_information_map">Mapa</string>
-	<string name="poi_information_office">Oficina d\'informació</string>
-	<string name="poi_information_terminal">Terminal d\'informació</string>
+	<string name="poi_information_office">Oficina</string>
+	<string name="poi_information_terminal">Terminal</string>
 	<string name="poi_information_route_marker">Marcador de ruta</string>
 	<string name="poi_information_hikingmap">Mapa de senderisme</string>
 	<string name="poi_information_audioguide">Audioguia</string>
@@ -1414,20 +1414,20 @@
 	<string name="poi_trees_date">Data</string>
 	<string name="poi_trees_coffea">Café</string>
 	<string name="poi_animal_shelter">Refugi d\'animals</string>
-	<string name="poi_covered_yes">Cobert</string>
+	<string name="poi_covered_yes">Sí</string>
 	<string name="poi_covered_no">Descobert</string>
 
-	<string name="poi_smoking_no">Prohibit fumar</string>
-	<string name="poi_smoking_outside">Només es permet fumar a l\'exterior</string>
-	<string name="poi_smoking_yes">Es permet fumar</string>
-	<string name="poi_smoking_separated">Es permet fumar a una sala separada</string>
-	<string name="poi_smoking_isolated">Es permet fumar a una sala aïllada</string>
+	<string name="poi_smoking_no">No es permet</string>
+	<string name="poi_smoking_outside">Només a l\'exterior</string>
+	<string name="poi_smoking_yes">Permès</string>
+	<string name="poi_smoking_separated">A una sala separada</string>
+	<string name="poi_smoking_isolated">A una sala aïllada</string>
 	<string name="poi_smoking_dedicated">Exclusiu per fumadors</string>
 
 	<string name="poi_toll_yes">Peatge</string>
 	<string name="poi_toll_no">Sense peatge</string>
 	<string name="poi_toll_hgv_yes">Peatge de vehicles pesants</string>
-	<string name="poi_tactile_paving_yes">Amb paviment tàctil</string>
+	<string name="poi_tactile_paving_yes">Sí</string>
 	<string name="poi_content_crop">Contingut: collita</string>
 	<string name="poi_trade_building_supplies">Subministraments de construcció</string>
 	<string name="poi_trade_plumbing">Subministraments de fontaneria</string>
@@ -1438,7 +1438,7 @@
 	<string name="poi_trees_oil">Oli de palma</string>
 	<string name="poi_trees_meadow_orchard">Hort de prat</string>
 	<string name="poi_trees_rubber">Plantes de cautxú</string>
-	<string name="poi_information_nature">Indicador informatiu: natura</string>
+	<string name="poi_information_nature">Natura</string>
 	<string name="poi_boat_storage">Varador</string>
 
 
@@ -1473,23 +1473,23 @@
 	<string name="poi_concentration_camp_gulag">Tipus: gulag</string>
 
 	<string name="poi_content_manure">Contingut: fems</string>
-	<string name="poi_information_history">Indicador informatiu: història</string>
-	<string name="poi_board_type_plants">Indicador informatiu: botànica</string>
-	<string name="poi_board_type_geology">Indicador informatiu: geologia</string>
-	<string name="poi_board_type_public_transport">Indicador informatiu: transport públic</string>
-	<string name="poi_board_type_technology">Indicador informatiu: tecnologia</string>
-	<string name="poi_board_type_astronomy">Indicador informatiu: astronomia</string>
+	<string name="poi_information_history">Història</string>
+	<string name="poi_board_type_plants">Botànica</string>
+	<string name="poi_board_type_geology">Geologia</string>
+	<string name="poi_board_type_public_transport">Transport públic</string>
+	<string name="poi_board_type_technology">Tecnologia</string>
+	<string name="poi_board_type_astronomy">Astronomia</string>
 
 	<string name="poi_commercial">Zona comercial</string>
 	<string name="poi_retail">Zona de botigues</string>
 
-	<string name="poi_fireplace_yes">Llar de foc</string>
+	<string name="poi_fireplace_yes">Sí</string>
 	<string name="poi_fireplace_no">Sense llar de foc</string>
 
 	<string name="poi_tactile_paving_no">Sense pavimentació tàctil</string>
-	<string name="poi_traffic_signals_sound_yes">Amb so</string>
-	<string name="poi_traffic_signals_sound_no">Sense so</string>
-	<string name="poi_traffic_signals_sound_walk">Indicació acústica quan es pot caminar</string>
+	<string name="poi_traffic_signals_sound_yes">Sí</string>
+	<string name="poi_traffic_signals_sound_no">No</string>
+	<string name="poi_traffic_signals_sound_walk">Només quan es pot caminar</string>
 
 	<string name="poi_rescue_station">Estació de rescat</string>
 
@@ -1512,12 +1512,12 @@
 
 	<string name="poi_passing_place">Lloc de pas</string>
 	<string name="poi_level">Nivell</string>
-	<string name="poi_piste_difficulty_easy">Dificultat de pista: fàcil</string>
-	<string name="poi_piste_difficulty_intermediate">Dificultat de pista: intermèdia</string>
-	<string name="poi_piste_difficulty_advanced">Dificultat de pista: avançada</string>
-	<string name="poi_piste_difficulty_novice">Dificultat de pista: principiant</string>
-	<string name="poi_piste_difficulty_expert">Dificultat de pista: expert</string>
-	<string name="poi_piste_difficulty_freeride">Dificultat de pista: lliure</string>
+	<string name="poi_piste_difficulty_easy">Fàcil</string>
+	<string name="poi_piste_difficulty_intermediate">Intermèdia</string>
+	<string name="poi_piste_difficulty_advanced">Avançada</string>
+	<string name="poi_piste_difficulty_novice">Novell</string>
+	<string name="poi_piste_difficulty_expert">Expert</string>
+	<string name="poi_piste_difficulty_freeride">Lliure</string>
 	<string name="poi_garden_type_residential">Tipus de jardí: residencial</string>
 	<string name="poi_garden_type_community">Tipus de jardí: comunitari</string>
 	<string name="poi_garden_type_private">Tipus de jardí: privat</string>
@@ -1530,7 +1530,7 @@
 	<string name="poi_garden_style_japanese">Estil de jardí: japonès</string>
 
 	<string name="poi_capacity">Capacitat</string>
-	<string name="poi_capacity_disabled_yes">Llocs reservats a persones amb discapacitat</string>
+	<string name="poi_capacity_disabled_yes">Sí</string>
 	<string name="poi_capacity_disabled_no">Sense llocs reservats a persones amb discapacitat</string>
 	<string name="poi_capacity_disabled">Llocs reservats a persones amb discapacitat</string>
 	<string name="poi_capacity_women_yes">Llocs reservats per a dones</string>
@@ -1545,11 +1545,11 @@
 	<string name="poi_aerialway_occupancy">Capacitat de cabina/cadira/cotxe</string>
 	<string name="poi_aerialway_capacity">Capacitat per hora</string>
 	<string name="poi_aerialway_duration">Temps de viatge de mitjana, minuts</string>
-	<string name="poi_aerialway_heating_yes">Amb calefacció</string>
+	<string name="poi_aerialway_heating_yes">Sí</string>
 	<string name="poi_aerialway_heating_no">Sense calefacció</string>
-	<string name="poi_aerialway_bicycle_yes">Bicicletes: permeses</string>
+	<string name="poi_aerialway_bicycle_yes">Permès</string>
 	<string name="poi_aerialway_bicycle_no">Bicicletes: no es permeten</string>
-	<string name="poi_aerialway_bicycle_summer">Bicicleta: permesses només a l\'estiu</string>
+	<string name="poi_aerialway_bicycle_summer">Nomès es permet a l\'estiu</string>
 	<string name="poi_aerialway_access_entry">Només entrada</string>
 	<string name="poi_aerialway_access_exit">Només sortida</string>
 	<string name="poi_aerialway_access_both">Entrada i sortida</string>
@@ -1557,183 +1557,183 @@
 	<string name="poi_aerialway_summer_access_exit">Accés d\'estiu: només sortida</string>
 	<string name="poi_aerialway_summer_access_both">Accés d\'estiu: entrada i sortida</string>
 
-	<string name="poi_stars_1">Estrelles: 1 (Turista)</string>
-	<string name="poi_stars_1s">Estrelles: 1S (Turista superior)</string>
-	<string name="poi_stars_2">Estrelles: 2 (estàndard)</string>
-	<string name="poi_stars_2s">Estrelles: 2S (Estàndard superior)</string>
-	<string name="poi_stars_3">Estrelles: 3 (Confort)</string>
-	<string name="poi_stars_3s">Estrelles: 3S (Confort superior)</string>
-	<string name="poi_stars_4">Estrelles: 4 (Primera classe)</string>
-	<string name="poi_stars_4s">Estrelles: 4S (Primera classe superior)</string>
-	<string name="poi_stars_5">Estrelles: 5 (Luxe)</string>
-	<string name="poi_stars_5s">Estrelles: 5S (Luxe superior)</string>
+	<string name="poi_stars_1">1 (Turista)</string>
+	<string name="poi_stars_1s">1S (Turista superior)</string>
+	<string name="poi_stars_2">2 (Estàndard)</string>
+	<string name="poi_stars_2s">2S (Estàndard superior)</string>
+	<string name="poi_stars_3">3 (Confort)</string>
+	<string name="poi_stars_3s">3S (Confort superior)</string>
+	<string name="poi_stars_4">4 (Primera classe)</string>
+	<string name="poi_stars_4s">4S (Primera classe superior)</string>
+	<string name="poi_stars_5">5 (Luxe)</string>
+	<string name="poi_stars_5s">5S (Luxe superior)</string>
 	<string name="poi_stars_6">Estrelles: 6</string>
 	<string name="poi_stars_7">Estrelles: 7</string>
 	<string name="poi_rooms">Habitacions</string>
 
 	<string name="poi_love_hotel">Hotel per parelles</string>
 
-	<string name="poi_payment_coins_yes">S\'accepten monedes</string>
+	<string name="poi_payment_coins_yes">Monedes</string>
 	<string name="poi_payment_coins_no">No s\'accepten monedes</string>
-	<string name="poi_payment_coins_0.5">S\'accepten monedes de 0,5$</string>
-	<string name="poi_payment_coins_50c12">S\'accepten monedes de 50c, 1€, i 2€</string>
-	<string name="poi_payment_telephone_cards_yes">S\'accepten targes de telèfon</string>
+	<string name="poi_payment_coins_0.5">monedes de $0,5</string>
+	<string name="poi_payment_coins_50c12">monedes de 50c, 1€, i 2€</string>
+	<string name="poi_payment_telephone_cards_yes">Targetes telefòniques</string>
 	<string name="poi_payment_telephone_cards_no">No s\'accepten targes de telèfon</string>
-	<string name="poi_payment_credit_cards_yes">S\'accepten targes de crèdit</string>
+	<string name="poi_payment_credit_cards_yes">Targetes de crèdit</string>
 	<string name="poi_payment_credit_cards_no">No s\'accepten targes de crèdit</string>
-	<string name="poi_payment_notes_yes">S\'accepten bitllets</string>
+	<string name="poi_payment_notes_yes">Bitllets</string>
 	<string name="poi_payment_notes_no">No s\'accepten bitllets</string>
-	<string name="poi_payment_electronic_purses_yes">S\'accepta moneda electrònica</string>
+	<string name="poi_payment_electronic_purses_yes">Moneda electrònica</string>
 	<string name="poi_payment_electronic_purses_no">No s\'accepta moneda electrònica</string>
-	<string name="poi_payment_cash_yes">S\'accepta efectiu</string>
+	<string name="poi_payment_cash_yes">Efectiu</string>
 	<string name="poi_payment_cash_no">No s\'accepta efectiu</string>
-	<string name="poi_payment_debit_cards_yes">S\'accepten targes de dèbit</string>
+	<string name="poi_payment_debit_cards_yes">Targetes de dèbit</string>
 	<string name="poi_payment_debit_cards_no">No s\'accepten targes de dèbit</string>
-	<string name="poi_payment_bitcoin_yes">S\'accepten bitcoins</string>
+	<string name="poi_payment_bitcoin_yes">Bitcoin</string>
 	<string name="poi_payment_bitcoin_no">No s\'accepten bitcoins</string>
-	<string name="poi_payment_visa_yes">S\'accepta tarja Visa</string>
+	<string name="poi_payment_visa_yes">Visa</string>
 	<string name="poi_payment_visa_no">No s\'accepta tarja Visa</string>
-	<string name="poi_payment_mastercard_yes">S\'accepta Mastercard</string>
+	<string name="poi_payment_mastercard_yes">MasterCard</string>
 	<string name="poi_payment_mastercard_no">No s\'accepta Mastercard</string>
 	<string name="poi_payment_none">Sense cost</string>
-	<string name="poi_payment_maestro_yes">S\'accepta tarja Maestro</string>
+	<string name="poi_payment_maestro_yes">Targetes Maestro</string>
 	<string name="poi_payment_maestro_no">No s\'accepta tarja Maestro</string>
-	<string name="poi_payment_american_express_yes">S\'accepta tarja American Express (AMEX)</string>
+	<string name="poi_payment_american_express_yes">American Express (AMEX)</string>
 	<string name="poi_payment_american_express_no">No s\'accepta tarja American Express (AMEX)</string>
-	<string name="poi_payment_diners_club_yes">S\'accepta tarja Dinners Club</string>
+	<string name="poi_payment_diners_club_yes">Diners Club</string>
 	<string name="poi_payment_diners_club_no">No s\'accepta tarja Dinners Club</string>
-	<string name="poi_payment_dkv_yes">Accepta DKV</string>
+	<string name="poi_payment_dkv_yes">DKV</string>
 	<string name="poi_payment_dkv_no">No s\'accepta DKV</string>
-	<string name="poi_payment_uta_yes">S\'accepten targes UTA</string>
+	<string name="poi_payment_uta_yes">UTA</string>
 	<string name="poi_payment_uta_no">No s\'accepten targes UTA</string>
 	<string name="poi_tourism_yes">Element turístic</string>
 	<string name="poi_water_point">Proveïment d\'aigua</string>
 
 	<string name="poi_information_wildlife">Indicador informatiu: fauna</string>
 	<string name="poi_information_sign">Signe</string>
-	<string name="poi_piste_grooming_classic">Pista condicionada: clàssica</string>
-	<string name="poi_piste_grooming_classic_skating">Pista condicionada: clàssica i patinatge</string>
-	<string name="poi_piste_grooming_backcountry">Pista condicionada: fora de pistes</string>
-	<string name="poi_piste_grooming_scooter">Pista condicionada: clàssica però estreta</string>
-	<string name="poi_piste_grooming_skating">Pista condicionada: patinatge</string>
-	<string name="poi_piste_grooming_no">Pista condicionada: no</string>
-	<string name="poi_piste_grooming_mogul">Pista condicionada: esquí acrobàtic</string>
+	<string name="poi_piste_grooming_classic">Clàssic</string>
+	<string name="poi_piste_grooming_classic_skating">Clàssic + Patinatge</string>
+	<string name="poi_piste_grooming_backcountry">Pora de pistes</string>
+	<string name="poi_piste_grooming_scooter">Motoneu</string>
+	<string name="poi_piste_grooming_skating">Patinatge</string>
+	<string name="poi_piste_grooming_no">No</string>
+	<string name="poi_piste_grooming_mogul">Esquí acrobàtic</string>
 
-	<string name="poi_payment_girocard_yes">S\'accepten targes Girocard</string>
+	<string name="poi_payment_girocard_yes">Girocard</string>
 	<string name="poi_payment_girocard_no">No s\'accepten targes Girocard</string>
-	<string name="poi_payment_discover_card_yes">S\'accepten targes Discover</string>
+	<string name="poi_payment_discover_card_yes">Discover Card</string>
 	<string name="poi_payment_discover_card_no">No s\'accepten targes Discover</string>
-	<string name="poi_payment_visa_electron_yes">S\'accepten targes Visa Electron</string>
+	<string name="poi_payment_visa_electron_yes">Visa Electron</string>
 	<string name="poi_payment_visa_electron_no">No s\'accepten targes Visa Electron</string>
-	<string name="poi_payment_litecoin_yes">S\'accepta Litecoin</string>
+	<string name="poi_payment_litecoin_yes">Litecoin</string>
 	<string name="poi_payment_litecoin_no">No s\'accepta Litecoin</string>
-	<string name="poi_payment_cheque_yes">S\'accepten xecs</string>
+	<string name="poi_payment_cheque_yes">Xecs</string>
 	<string name="poi_payment_cheque_no">No s\'accepten xecs</string>
-	<string name="poi_payment_pikepass_yes">S\'accepta PIKEPASS</string>
+	<string name="poi_payment_pikepass_yes">PIKEPASS</string>
 	<string name="poi_payment_pikepass_no">No s\'accepta PIKEPASS</string>
-	<string name="poi_payment_visa_debit_yes">S\'accepten targes Visa Debit</string>
+	<string name="poi_payment_visa_debit_yes">Targetes Visa Debit</string>
 	<string name="poi_payment_visa_debit_no">No s\'accepten targes Visa Debit</string>
-	<string name="poi_payment_others_yes">S\'accepten altres sistemes de pagament</string>
+	<string name="poi_payment_others_yes">Altres</string>
 	<string name="poi_payment_others_no">No s\'accepten altres sistemes de pagament</string>
-	<string name="poi_payment_routex_yes">S\'accepten targes de carburant Routex</string>
+	<string name="poi_payment_routex_yes">Routex</string>
 	<string name="poi_payment_routex_no">No s\'accepten targes de carburant Routex</string>
-	<string name="poi_payment_bancomat_yes">S\'accepten targes Bancomat</string>
+	<string name="poi_payment_bancomat_yes">Bancomat</string>
 	<string name="poi_payment_bancomat_no">No s\'accepten targes Bancomat</string>
-	<string name="poi_payment_prepaid_ticket_yes">S\'accepten tiquets de prepagament</string>
-	<string name="poi_payment_jcb_yes">S\'accepten targes JCB</string>
+	<string name="poi_payment_prepaid_ticket_yes">Tiquets de prepagament</string>
+	<string name="poi_payment_jcb_yes">JCB</string>
 	<string name="poi_payment_jcb_no">No s\'accepten targes JCB</string>
-	<string name="poi_payment_laser_yes">S\'accepten targes Laser</string>
+	<string name="poi_payment_laser_yes">Laser</string>
 	<string name="poi_payment_laser_no">No s\'accepten targes Laser</string>
-	<string name="poi_payment_ep_quick_yes">S\'accepten targes Quick</string>
+	<string name="poi_payment_ep_quick_yes">Quick</string>
 	<string name="poi_payment_ep_quick_no">No s\'accepten targes Quick</string>
-	<string name="poi_payment_eurowag_yes">S\'accepten targes Eurowag</string>
+	<string name="poi_payment_eurowag_yes">Eurowag</string>
 	<string name="poi_payment_eurowag_no">No s\'accepten targes Eurowag</string>
-	<string name="poi_payment_e_zpass_yes">S\'accepta E-ZPass</string>
+	<string name="poi_payment_e_zpass_yes">E‑ZPass</string>
 	<string name="poi_payment_e_zpass_no">No s\'accepta E-ZPass</string>
-	<string name="poi_payment_euroshell_yes">S\'accepten targes de carburant Euroshell</string>
+	<string name="poi_payment_euroshell_yes">Euroshell</string>
 	<string name="poi_payment_euroshell_no">No s\'accepten targes de carburant Euroshell</string>
-	<string name="poi_payment_kitcard_yes">S\'accepta KITCard</string>
+	<string name="poi_payment_kitcard_yes">KITCard</string>
 	<string name="poi_payment_kitcard_no">No s\'accepta KITCard</string>
-	<string name="poi_payment_westfalen_card_yes">S\'accepten targes Westfalen</string>
+	<string name="poi_payment_westfalen_card_yes">Westfalen</string>
 	<string name="poi_payment_westfalen_card_no">No s\'accepten targes Westfalen</string>
-	<string name="poi_payment_v_pay_yes">S\'accepten targes V PAY</string>
+	<string name="poi_payment_v_pay_yes">V PAY</string>
 	<string name="poi_payment_v_pay_no">No s\'accepten targes V PAY</string>
-	<string name="poi_payment_dogecoin_yes">S\'accepta Dogecoin</string>
+	<string name="poi_payment_dogecoin_yes">Dogecoin</string>
 	<string name="poi_payment_dogecoin_no">No s\'accepta Dogecoin</string>
-	<string name="poi_payment_cibus_yes">S\'accepten targes Cibus</string>
+	<string name="poi_payment_cibus_yes">Cibus</string>
 	<string name="poi_payment_cibus_no">No s\'accepten targes Cibus</string>
-	<string name="poi_payment_ep_proton_yes">S\'accepten targes Proton</string>
+	<string name="poi_payment_ep_proton_yes">Proton</string>
 	<string name="poi_payment_ep_proton_no">No s\'accepten targes Proton</string>
-	<string name="poi_payment_ep_avant_yes">S\'accepta AvantCard</string>
+	<string name="poi_payment_ep_avant_yes">AvantCard</string>
 	<string name="poi_payment_ep_avant_no">No s\'accepta AvantCard</string>
-	<string name="poi_payment_ep_mep_yes">S\'accepta MEP</string>
+	<string name="poi_payment_ep_mep_yes">MEP</string>
 	<string name="poi_payment_ep_mep_no">No s\'accepta MEP</string>
-	<string name="poi_payment_ep_minicash_yes">S\'accepta MiniCash</string>
+	<string name="poi_payment_ep_minicash_yes">MiniCash</string>
 	<string name="poi_payment_ep_minicash_no">No s\'accepta MiniCash</string>
-	<string name="poi_payment_ep_moneo_yes">S\'accepta Moneo</string>
+	<string name="poi_payment_ep_moneo_yes">Moneo</string>
 	<string name="poi_payment_ep_moneo_no">No s\'accepta Moneo</string>
-	<string name="poi_payment_ep_monedero4b_yes">S\'accepta Monedero 4B</string>
+	<string name="poi_payment_ep_monedero4b_yes">Monedero 4B</string>
 	<string name="poi_payment_ep_monedero4b_no">No s\'accepta Monedero 4B</string>
-	<string name="poi_payment_ep_monedero_yes">S\'accepta Monedero</string>
+	<string name="poi_payment_ep_monedero_yes">Monedero</string>
 	<string name="poi_payment_ep_monedero_no">No s\'accepta Monedero</string>
-	<string name="poi_payment_bankaxess_yes">S\'accepta BankAxess</string>
+	<string name="poi_payment_bankaxess_yes">BankAxess</string>
 	<string name="poi_payment_bankaxess_no">No s\'accepta BankAxess</string>
-	<string name="poi_payment_coinkite_yes">S\'accepta Coinkite</string>
+	<string name="poi_payment_coinkite_yes">Coinkite</string>
 	<string name="poi_payment_coinkite_no">No s\'accepta Coinkite</string>
-	<string name="poi_payment_roadrunner_yes">S\'accepten targes Roadrunner</string>
+	<string name="poi_payment_roadrunner_yes">Roadrunner</string>
 	<string name="poi_payment_roadrunner_no">No s\'accepten targes Roadrunner</string>
-	<string name="poi_payment_svg_yes">S\'accepta SVG</string>
+	<string name="poi_payment_svg_yes">SVG</string>
 	<string name="poi_payment_svg_no">No s\'accepta SVG</string>
-	<string name="poi_payment_sms_yes">S\'accepten pagaments SMS</string>
+	<string name="poi_payment_sms_yes">Pagaments amb SMS</string>
 	<string name="poi_payment_sms_no">No s\'accepten pagaments SMS</string>
-	<string name="poi_payment_ov_chipkaart_yes">S\'accepta OV-Chipkaart</string>
+	<string name="poi_payment_ov_chipkaart_yes">OV-Chipkaart</string>
 	<string name="poi_payment_ov_chipkaart_no">No s\'accepta OV-Chipkaart</string>
-	<string name="poi_payment_oyster_yes">S\'accepten targes Oyster</string>
+	<string name="poi_payment_oyster_yes">Oyster</string>
 	<string name="poi_payment_oyster_no">No s\'accepten targes Oyster</string>
-	<string name="poi_payment_sube_yes">S\'accepten targes SUBE</string>
+	<string name="poi_payment_sube_yes">SUBE</string>
 	<string name="poi_payment_sube_no">No s\'accepten targes SUBE</string>
-	<string name="poi_payment_via_verde_yes">S\'accepta Via Verde</string>
+	<string name="poi_payment_via_verde_yes">Via Verde</string>
 	<string name="poi_payment_via_verde_no">No s\'accepta Via Verde</string>
-	<string name="poi_payment_paypal_yes">S\'accepta PayPal</string>
+	<string name="poi_payment_paypal_yes">PayPal</string>
 	<string name="poi_payment_paypal_no">No s\'accepta PayPal</string>
-	<string name="poi_payment_u_key_yes">S\'accepta U-Key</string>
+	<string name="poi_payment_u_key_yes">U-Key</string>
 	<string name="poi_payment_u_key_no">No s\'accepta U-Key</string>
-	<string name="poi_payment_token_yes">S\'accepta Tokens</string>
+	<string name="poi_payment_token_yes">Tokens</string>
 	<string name="poi_payment_token_no">No s\'accepta Tokens</string>
-	<string name="poi_payment_golden_crown_yes">S\'accepten targes Golden Crown</string>
+	<string name="poi_payment_golden_crown_yes">Golden Crown</string>
 	<string name="poi_payment_golden_crown_no">No s\'accepten targes Golden Crown</string>
-	<string name="poi_payment_pro100_yes">S\'accepten targes PRO100</string>
+	<string name="poi_payment_pro100_yes">"PRO100 "</string>
 	<string name="poi_payment_pro100_no">No s\'accepten targes PRO100</string>
-	<string name="poi_payment_union_card_yes">S\'accepta Union Card</string>
+	<string name="poi_payment_union_card_yes">Union Card</string>
 	<string name="poi_payment_union_card_no">No s\'accepta Union Card</string>
-	<string name="poi_payment_mtsmoney_yes">S\'accepta MTS-Money</string>
+	<string name="poi_payment_mtsmoney_yes">MTS-Money</string>
 	<string name="poi_payment_mtsmoney_no">No s\'accepta MTS-Money</string>
-	<string name="poi_payment_yandexmoney_yes">S\'accepta Yandex.Money</string>
+	<string name="poi_payment_yandexmoney_yes">Yandex.Money</string>
 	<string name="poi_payment_yandexmoney_no">No s\'accepta Yandex.Money</string>
-	<string name="poi_diet_vegetarian_only">Només dieta vegetariana</string>
-	<string name="poi_diet_vegetarian_yes">Dieta vegetariana</string>
+	<string name="poi_diet_vegetarian_only">Només vegetarià</string>
+	<string name="poi_diet_vegetarian_yes">Vegetarià</string>
 	<string name="poi_diet_vegetarian_no">Dieta vegetariana: no</string>
 	<string name="poi_diet_vegetarian_few">Dieta vegetariana: algun plat</string>
-	<string name="poi_diet_vegan_only">Només dieta vegana</string>
-	<string name="poi_diet_vegan_yes">Dieta vegana</string>
+	<string name="poi_diet_vegan_only">Només vegà</string>
+	<string name="poi_diet_vegan_yes">Vegà</string>
 	<string name="poi_diet_vegan_no">Dieta vegana: no</string>
-	<string name="poi_diet_gluten_free_only">Només dieta per celíacs</string>
-	<string name="poi_diet_gluten_free_yes">Dieta per celíacs</string>
+	<string name="poi_diet_gluten_free_only">Tot sense gluten</string>
+	<string name="poi_diet_gluten_free_yes">Sense gluten</string>
 	<string name="poi_diet_gluten_free_no">Dieta per celíacs:no</string>
-	<string name="poi_payment_icsf_yes">S\'accepten targes IC Stored Fare</string>
+	<string name="poi_payment_icsf_yes">IC Stored Fare</string>
 	<string name="poi_payment_icsf_no">No s\'accepten targes IC Stored Fare</string>
-	<string name="poi_diet_kosher_only">Només dieta kosher</string>
-	<string name="poi_diet_kosher_yes">Dieta kosher</string>
+	<string name="poi_diet_kosher_only">Només kosher</string>
+	<string name="poi_diet_kosher_yes">Kosher</string>
 	<string name="poi_diet_kosher_no">Dieta kosher: no</string>
-	<string name="poi_diet_halal_only">Només dieta halal</string>
-	<string name="poi_diet_halal_yes">Dieta halal</string>
+	<string name="poi_diet_halal_only">Només halal</string>
+	<string name="poi_diet_halal_yes">Halal</string>
 	<string name="poi_diet_halal_no">Dieta halal: no</string>
-	<string name="poi_diet_lactose_free_only">Només dieta sense lactosa</string>
-	<string name="poi_diet_lactose_free_yes">Dieta sense lactosa</string>
+	<string name="poi_diet_lactose_free_only">Tot sense lactosa</string>
+	<string name="poi_diet_lactose_free_yes">Sense lactosa</string>
 	<string name="poi_diet_lactose_free_no">Dieta sense lactosa: no</string>
-	<string name="poi_drive_in_yes">Servei dins el vehicle: sí</string>
+	<string name="poi_drive_in_yes">Sí</string>
 	<string name="poi_drive_in_no">Servei dins el vehicle: no</string>
-	<string name="poi_drive_through_yes">Cua per vehicles: sí</string>
+	<string name="poi_drive_through_yes">Sí</string>
 	<string name="poi_drive_through_no">Cua per vehicles: no</string>
 
 	<string name="poi_takeaway_yes">Per emportar-se</string>
@@ -1744,7 +1744,7 @@
 	<string name="poi_delivery_no">Sense lliurament a domicili</string>
 	<string name="poi_delivery_only">Només per lliurament a domicili</string>
 
-	<string name="poi_outdoor_seating_yes">Seients exteriors</string>
+	<string name="poi_outdoor_seating_yes">Seients exteriors: sí</string>
 	<string name="poi_outdoor_seating_no">Sense seients exteriors</string>
 	<string name="poi_outdoor_seating_terrace">Seients exteriors: terrassa</string>
 	<string name="poi_outdoor_seating_sidewalk">Seients exteriors: vorera</string>
@@ -1752,7 +1752,7 @@
 	<string name="poi_outdoor_seating_garden">Seients exteriors: jardí</string>
 	<string name="poi_outdoor_seating_patio">Seients exteriors: pati</string>
 
-	<string name="poi_cocktails_yes">Còctels</string>
+	<string name="poi_cocktails_yes">Sí</string>
 
 	<string name="poi_second_hand_yes">Articles de segona mà</string>
 	<string name="poi_second_hand_no">Cap article de segona mà</string>
@@ -1764,12 +1764,12 @@
 	<string name="poi_service_repair_no">No es fan reparacions</string>
 	<string name="poi_service_electrical">Reparació de vehicles elèctrics</string>
 	<string name="poi_motorcycle_repair">Reparació de motos</string>
-	<string name="poi_self_service_yes">Autoservei</string>
+	<string name="poi_self_service_yes">Sí</string>
 	<string name="poi_self_service_no">No hi ha autoservei</string>
-	<string name="poi_automated_yes">Automatitzat</string>
+	<string name="poi_automated_yes">Sí</string>
 	<string name="poi_automated_no">No automatitzat</string>
 	<string name="poi_full_service_yes">Servei integral</string>
-	<string name="poi_brushless_yes">Rentacotxes de raspall</string>
+	<string name="poi_brushless_yes">Sí</string>
 	<string name="poi_brushless_no">Rentacotxes de raspall: no</string>
 	<string name="poi_car_wash_no">Rentacotxes: no</string>
 
@@ -1781,7 +1781,7 @@
 
 	<string name="poi_indoor_yes">Cobert</string>
 	<string name="poi_indoor_no">Exterior</string>
-	<string name="poi_toilets_yes">Amb lavabos</string>
+	<string name="poi_toilets_yes">Sí</string>
 	<string name="poi_toilets_no">Sense lavabos</string>
 	<string name="poi_toilets_wheelchair_yes">Accés al bany per cadira de rodes: sí</string>
 	<string name="poi_toilets_wheelchair_no">Accés al bany per cadira de rodes: no</string>
@@ -1810,33 +1810,33 @@
 	<string name="poi_resource_diamond">Diamants</string>
 	<string name="poi_wetland_mud">Fangar</string>
 
-	<string name="poi_beach_sand">Tipus de platja: sorra</string>
-	<string name="poi_beach_shingle">Tipus de platja: còdols</string>
-	<string name="poi_beach_rocky">Tipus de platja: roques</string>
+	<string name="poi_beach_sand">Sorra</string>
+	<string name="poi_beach_shingle">Còdols</string>
+	<string name="poi_beach_rocky">Roques</string>
 
 	<string name="poi_chimney">Xemeneia</string>
 	<string name="poi_palm">Palmera</string>
 	<string name="poi_cypress">Xiprer</string>
 	<string name="poi_flagpole">Asta</string>
 
-	<string name="poi_bench_yes">Amb seients</string>
+	<string name="poi_bench_yes">Sí</string>
 	<string name="poi_bench_no">Sense seients</string>
 	<string name="poi_bin_yes">Amb cossi de la brossa</string>
 	<string name="poi_bin_no">Sense cossi de la brossa</string>
 
-	<string name="poi_shelter_type_public_transport">Tipus de refugi: transport públic</string>
-	<string name="poi_shelter_type_picnic_shelter">Tipus de refugi: glorieta</string>
-	<string name="poi_shelter_type_weather_shelter">Tipus de refugi: refugi meteorològic</string>
-	<string name="poi_shelter_type_basic_hut">Tipus de refugi: cabana bàsica</string>
-	<string name="poi_shelter_type_building">Tipus de refugi: edifici</string>
-	<string name="poi_shelter_type_rock_shelter">Tipus de refugi: refugi de roca</string>
-	<string name="poi_shelter_type_sun_shelter">Tipus de refugi: refugi solar</string>
+	<string name="poi_shelter_type_public_transport">Transport públic</string>
+	<string name="poi_shelter_type_picnic_shelter">Glorieta</string>
+	<string name="poi_shelter_type_weather_shelter">Meteorològic</string>
+	<string name="poi_shelter_type_basic_hut">Cabana bàsica</string>
+	<string name="poi_shelter_type_building">Edifici</string>
+	<string name="poi_shelter_type_rock_shelter">Refugi de roca</string>
+	<string name="poi_shelter_type_sun_shelter">Refugi solar</string>
 	<string name="poi_shelter_type_tent">Tipus de refugi: tenda</string>
 	<string name="poi_shelter_type_abandoned">Tipus de refugi: abandonat</string>
 
-	<string name="poi_internet_access_type_wlan">Tipus d\'accés d\'Internet: wlan</string>
-	<string name="poi_internet_access_type_terminal">Tipus d\'accés d\'Internet: terminal</string>
-	<string name="poi_internet_access_type_wired">Tipus d\'accés d\'Internet: per cable</string>
+	<string name="poi_internet_access_type_wlan">Wi-Fi</string>
+	<string name="poi_internet_access_type_terminal">Terminal</string>
+	<string name="poi_internet_access_type_wired">Per cable</string>
 	<string name="poi_internet_access_type_public">Tipus d\'accés d\'Internet: públic</string>
 	<string name="poi_internet_access_type_service">Tipus d\'accés d\'Internet: servei</string>
 	<string name="poi_internet_access_type_no">Sense accés a Internet</string>
@@ -1886,9 +1886,9 @@
 	<string name="poi_bridge_structure_simple_wooden">Estructura del pont: fusta senzilla</string>
 	<string name="poi_bridge_structure_viaduct">Estructura del pont: viaducte</string>
 	<string name="poi_bridge_structure_aqueduct">Estructura del pont: aqüeducte</string>
-	<string name="poi_service_bicycle_chaintool_yes">Eines per la cadena de la bicicleta: sí</string>
+	<string name="poi_service_bicycle_chaintool_yes">Cadena</string>
 	<string name="poi_service_bicycle_chaintool_no">Eines per la cadena de la bicicleta: no</string>
-	<string name="poi_service_bicycle_second_hand_yes">Venda al detall de bicicletes de segona mà: sí</string>
+	<string name="poi_service_bicycle_second_hand_yes">Venda al detall de bicicletes de segona mà</string>
 	<string name="poi_service_bicycle_second_hand_no">Venda al detall de bicicletes de segona mà: no</string>
 
 	<string name="poi_training_language">Formació: idioma</string>
@@ -1934,14 +1934,14 @@
 	<string name="poi_surveillance_indoor">Vigilància: interior</string>
 	<string name="poi_surveillance_outdoor">Vigilància: exterior</string>
 	<string name="poi_clothes_hats">Barrets</string>
-	<string name="poi_clothes_sports">Roba esportiva</string>
-	<string name="poi_clothes_babies">Roba de nadons</string>
-	<string name="poi_clothes_denim">Roba texana</string>
+	<string name="poi_clothes_sports">Esports</string>
+	<string name="poi_clothes_babies">Nadons</string>
+	<string name="poi_clothes_denim">Texana</string>
 	<string name="poi_clothes_workwear">Roba de treball</string>
 	<string name="poi_clothes_fur">Pelleteria</string>
 	<string name="poi_clothes_leather">Roba de cuir</string>
-	<string name="poi_clothes_traditional">Roba tradicional</string>
-	<string name="poi_shoes_women">Sabates de dona</string>
+	<string name="poi_clothes_traditional">Tradicional</string>
+	<string name="poi_shoes_women">Dona</string>
 	<string name="poi_castle_type_stately">Tipus de castell: residencial</string>
 	<string name="poi_castle_type_defensive">Tipus de castell: defensiu</string>
 	<string name="poi_castle_type_fortress">Tipus de castell: fortalesa</string>
@@ -1951,22 +1951,22 @@
 	<string name="poi_castle_type_castrum">Tipus de castell: romà</string>
 	<string name="poi_castle_type_shiro">Tipus de castell: japonès</string>
 
-	<string name="poi_massage_thai">Massatge: tailandès</string>
-	<string name="poi_massage_sexual">Massatge: sexual</string>
-	<string name="poi_massage_chinese">Massatge: xinès</string>
+	<string name="poi_massage_thai">Tailandès</string>
+	<string name="poi_massage_sexual">Sexual</string>
+	<string name="poi_massage_chinese">Xinès</string>
 	<string name="poi_massage_yes">Serveis de massatge</string>
-	<string name="poi_massage_therapeutic">Massatge: terapèutic</string>
+	<string name="poi_massage_therapeutic">Terapèutic</string>
 
 	<string name="poi_sauna_yes">Serveis de sauna</string>
 	<string name="poi_solarium_yes">Serveis de solàrium</string>
 
-	<string name="poi_tents_yes">Es permet l\'acampada</string>
+	<string name="poi_tents_yes">Permès</string>
 	<string name="poi_tents_no">No es permet l\'acampada</string>
 	<string name="poi_scout_yes">Camp escolta: sí</string>
 	<string name="poi_scout_no">Camp escolta: no</string>
 	<string name="poi_group_only_yes">Només per grups: sí</string>
 	<string name="poi_group_only_no">Només per grups: no</string>
-	<string name="poi_washing_machine_yes">Rentadora: sí</string>
+	<string name="poi_washing_machine_yes">Sí</string>
 	<string name="poi_washing_machine_no">Rentadora: no</string>
 	<string name="poi_shower_yes">Dutxa: sí</string>
 	<string name="poi_shower_no">Dutxa: no</string>
@@ -1974,14 +1974,14 @@
 	<string name="poi_shower_outdoor">Dutxa: exterior</string>
 	<string name="poi_shower_cold">Dutxa: aigua freda</string>
 	<string name="poi_shower_indoor">Dutxa: coberta</string>
-	<string name="poi_caravans_yes">Caravanes: sí</string>
+	<string name="poi_caravans_yes">Sí</string>
 	<string name="poi_caravans_no">Caravanes: no</string>
 	<string name="poi_impromptu_yes">Acampada lliure: sí</string>
 	<string name="poi_impromptu_no">Acampada lliure: no</string>
 	<string name="poi_sanitary_dump_station_yes">Estació de buidatge sanitari: sí</string>
 	<string name="poi_sanitary_dump_station_no">Estació de buidatge sanitari: no</string>
 	<string name="poi_sanitary_dump_station_customers">Estació de buidatge sanitari: només clients</string>
-	<string name="poi_power_supply_yes">Subministrament elèctric: sí</string>
+	<string name="poi_power_supply_yes">Sí</string>
 	<string name="poi_power_supply_no">Subministrament elèctric: no</string>
 	<string name="poi_power_supply_cee_17_blue">Subministrament elèctric (endoll): CEE 17 blau</string>
 	<string name="poi_power_supply_cee_7_4">Subministrament elèctric (endoll): CEE 7/4</string>
@@ -1993,7 +1993,7 @@
 	<string name="poi_dog_yes">Es permeten els gossos</string>
 	<string name="poi_dog_no">No es permeten els gossos</string>
 
-	<string name="poi_clothes_military">Roba militar</string>
+	<string name="poi_clothes_military">Militar</string>
 
 	<string name="poi_historic_period_old_kingdom">Període històric: antic regnat (2686-2181 aC)</string>
 	<string name="poi_historic_period_first_intermediate_period">Període històric: primer període intermedi (2181-2055 aC)</string>
@@ -2047,11 +2047,11 @@
 	<string name="poi_consulting">Despatx de consultors</string>
 	<string name="poi_cooperative">Oficina de la cooperativa</string>
 	<string name="poi_parish">Rectoria</string>
-	<string name="poi_social_facility_workshop">Equipament social: taller</string>
+	<string name="poi_social_facility_workshop">Taller</string>
 	<string name="poi_historic_aircraft">Avió històric</string>
 
 	<string name="poi_service_bicycle_pump_no">Inflat de rodes de bicicleta: no</string>
-	<string name="poi_service_bicycle_cleaning_yes">Neteja de bicicletes: sí</string>
+	<string name="poi_service_bicycle_cleaning_yes">Neteja</string>
 	<string name="poi_service_bicycle_cleaning_no">Neteja de bicicletes: no</string>
 	<string name="poi_wildlife_hide">Lloc d\'observació de fauna en llibertat</string>
 
@@ -2063,7 +2063,7 @@
 
 	<string name="poi_billiards">Billar</string>
 
-<string name="poi_health_specialty_behavior_yes">Especialitat mèdica: conductisme</string>
+<string name="poi_health_specialty_behavior_yes">Conductisme</string>
 
 	<string name="poi_wiki_lang_bs">Wiki bosniana</string>
 	<string name="poi_wiki_lang_cy">Wiki gal·lesa</string>
@@ -2099,20 +2099,20 @@
 
 	<string name="poi_ref">Codi de referència</string>
 
-	<string name="poi_cargo_passengers">Càrrega: passatgers</string>
-	<string name="poi_cargo_vehicle">Càrrega: vehicles</string>
-	<string name="poi_cargo_bicycle">Càrrega: bicicletes</string>
-	<string name="poi_cargo_container">Càrrega: contenidors</string>
-	<string name="poi_cargo_hgv">Càrrega: vehicles pesants</string>
+	<string name="poi_cargo_passengers">Passatgers</string>
+	<string name="poi_cargo_vehicle">Vehicles</string>
+	<string name="poi_cargo_bicycle">Bicicletes</string>
+	<string name="poi_cargo_container">Contenidors</string>
+	<string name="poi_cargo_hgv">Vehicles pesants</string>
 
 	<string name="poi_clothes_swimwear">Vestits de bany</string>
 	<string name="poi_clothes_shirts">Camises</string>
-	<string name="poi_clothes_dance">Vestits per ballar</string>
+	<string name="poi_clothes_dance">Ball</string>
 	<string name="poi_historic_milestone">Fita històrica</string>
 
-	<string name="poi_shoes_children">Sabates per nens</string>
-	<string name="poi_shoes_sport">Sabatilles esportives</string>
-	<string name="poi_shoes_orthopedic">Sabates ortopèdiques</string>
+	<string name="poi_shoes_children">Nens</string>
+	<string name="poi_shoes_sport">Esports</string>
+	<string name="poi_shoes_orthopedic">Ortopèdia</string>
 
 	<string name="poi_badminton">Bàdminton</string>
 	<string name="poi_judo">*Judo</string>
@@ -2123,47 +2123,47 @@
 	<string name="poi_lacrosse">Lacrosse</string>
 	<string name="poi_official_name">Nom oficial</string>
 
-	<string name="poi_health_specialty_homeopathy_yes">Especialitat mèdica: homeopatia</string>
-	<string name="poi_health_specialty_traditional_chinese_medicine_yes">Especialitat mèdica: medicina tradicional xinesa</string>
-	<string name="poi_health_specialty_reiki_yes">Especialitat mèdica: reiki</string>
-	<string name="poi_health_specialty_herbalism_yes">Especialitat mèdica: herbologia</string>
-	<string name="poi_health_specialty_acupuncture_yes">Especialitat mèdica: acupuntura</string>
-	<string name="poi_health_specialty_chiropractic_yes">Especialitat mèdica: quiropràctica</string>
-	<string name="poi_health_specialty_naturopathy_yes">Especialitat mèdica: naturopatia</string>
-	<string name="poi_health_specialty_depth_psychology_yes">Especialitat mèdica: psicoanàlisi</string>
-	<string name="poi_health_specialty_radiology_yes">Especialitat mèdica: radiologia</string>
-	<string name="poi_health_specialty_psychiatry_yes">Especialitat mèdica: psiquiatria</string>
-	<string name="poi_health_specialty_neurology_yes">Especialitat mèdica: neurologia</string>
-	<string name="poi_health_specialty_dermatovenereology_yes">Especialitat mèdica:dermatologia i malalties venèries</string>
-	<string name="poi_health_specialty_cardiology_yes">Especialitat mèdica: cardiologia</string>
-	<string name="poi_health_specialty_trauma_yes">Especialitat mèdica: traumatologia</string>
-	<string name="poi_health_specialty_biology_yes">Especialitat mèdica: biologia clínica</string>
-	<string name="poi_health_specialty_osteopathy_yes">Especialitat mèdica: osteopatia</string>
-	<string name="poi_health_specialty_pulmonology_yes">Especialitat mèdica: pneumologia</string>
-	<string name="poi_health_specialty_dental_oral_maxillo_facial_surgery_yes">Especialitat mèdica: cirurgia dental, oral i maxil·lofacial</string>
-	<string name="poi_health_specialty_maternity_yes">Especialitat mèdica: maternitat</string>
-	<string name="poi_health_specialty_emergency_medicine_yes">Especialitat mèdica:servei d\'urgències</string>
+	<string name="poi_health_specialty_homeopathy_yes">Homeopatia</string>
+	<string name="poi_health_specialty_traditional_chinese_medicine_yes">Medicina tradicional xinesa</string>
+	<string name="poi_health_specialty_reiki_yes">Reiki</string>
+	<string name="poi_health_specialty_herbalism_yes">Herboristeria</string>
+	<string name="poi_health_specialty_acupuncture_yes">Acupuntura</string>
+	<string name="poi_health_specialty_chiropractic_yes">Quiropràctica</string>
+	<string name="poi_health_specialty_naturopathy_yes">Naturopatia</string>
+	<string name="poi_health_specialty_depth_psychology_yes">Psicoanàlisi</string>
+	<string name="poi_health_specialty_radiology_yes">Radiologia</string>
+	<string name="poi_health_specialty_psychiatry_yes">Psiquiatria</string>
+	<string name="poi_health_specialty_neurology_yes">Neurologia</string>
+	<string name="poi_health_specialty_dermatovenereology_yes">Dermatologia i malalties venèries</string>
+	<string name="poi_health_specialty_cardiology_yes">Cardiologia</string>
+	<string name="poi_health_specialty_trauma_yes">Traumatologia</string>
+	<string name="poi_health_specialty_biology_yes">Biologia clínica</string>
+	<string name="poi_health_specialty_osteopathy_yes">Osteopatia</string>
+	<string name="poi_health_specialty_pulmonology_yes">Pneumologia</string>
+	<string name="poi_health_specialty_dental_oral_maxillo_facial_surgery_yes">Cirurgia dental, oral i maxil·lofacial</string>
+	<string name="poi_health_specialty_maternity_yes">Maternitat</string>
+	<string name="poi_health_specialty_emergency_medicine_yes">Servei d\'urgències</string>
 	<string name="poi_health_specialty_emergency_medicine_no">Especialitat mèdica: sense servei d\'urgències</string>
-	<string name="poi_health_specialty_plastic_surgery_yes">Especialitat mèdica: cirurgia plàstica</string>
-	<string name="poi_health_specialty_orthodontics_yes">Especialitat mèdica: ortodòncia</string>
-	<string name="poi_health_specialty_physiotherapy_yes">Especialitat mèdica: psicoteràpia</string>
-	<string name="poi_health_specialty_biochemistry_yes">Especialitat mèdica: bioquímica</string>
-	<string name="poi_health_specialty_occupational_yes">Especialitat mèdica: teràpia ocupacional</string>
-	<string name="poi_health_specialty_child_psychiatry_yes">Especialitat mèdica: psiquiatria infantil</string>
-	<string name="poi_health_specialty_physiatry_yes">Especialitat mèdica: fisioteràpia i rehabilitació</string>
-	<string name="poi_health_specialty_maxillofacial_surgery_yes">Especialitat mèdica: cirurgia maxil·lofacial</string>
-	<string name="poi_health_specialty_diagnostic_radiology_yes">Especialitat mèdica: diagnòstic radiològic</string>
-	<string name="poi_health_specialty_gastroenterology_yes">Especialitat mèdica: gastroenterologia</string>
-	<string name="poi_health_specialty_dentistry_yes">Especialitat mèdica: odontologia</string>
-	<string name="poi_health_specialty_nephrology_yes">Especialitat mèdica: nefrologia (malalties renals)</string>
-	<string name="poi_health_specialty_ophthalmology_yes">Especialitat mèdica: oftalmologia</string>
-	<string name="poi_health_specialty_gynaecology_yes">Especialitat mèdica: ginecologia</string>
-	<string name="poi_health_specialty_orthopaedics_yes">Especialitat mèdica: ortopèdia</string>
-	<string name="poi_health_specialty_paediatrics_yes">Especialitat mèdica: pediatria</string>
+	<string name="poi_health_specialty_plastic_surgery_yes">Cirurgia plàstica</string>
+	<string name="poi_health_specialty_orthodontics_yes">Ortodòncia</string>
+	<string name="poi_health_specialty_physiotherapy_yes">Fisioteràpia</string>
+	<string name="poi_health_specialty_biochemistry_yes">Bioquímica</string>
+	<string name="poi_health_specialty_occupational_yes">Teràpia ocupacional</string>
+	<string name="poi_health_specialty_child_psychiatry_yes">Psiquiatria infantil</string>
+	<string name="poi_health_specialty_physiatry_yes">Fisioteràpia i rehabilitació</string>
+	<string name="poi_health_specialty_maxillofacial_surgery_yes">Cirurgia maxil·lofacial</string>
+	<string name="poi_health_specialty_diagnostic_radiology_yes">Radiologia diagnòstica</string>
+	<string name="poi_health_specialty_gastroenterology_yes">Gastroenterologia</string>
+	<string name="poi_health_specialty_dentistry_yes">Odontologia</string>
+	<string name="poi_health_specialty_nephrology_yes">Nefrologia (malalties renals)</string>
+	<string name="poi_health_specialty_ophthalmology_yes">Oftalmologia</string>
+	<string name="poi_health_specialty_gynaecology_yes">Ginecologia</string>
+	<string name="poi_health_specialty_orthopaedics_yes">Ortopèdia</string>
+	<string name="poi_health_specialty_paediatrics_yes">Pediatria</string>
 	<string name="poi_health_specialty_paediatrics_no">Especialitat mèdica: sense pediatria</string>
-	<string name="poi_health_specialty_dermatology_yes">Especialitat mèdica: dermatologia</string>
-	<string name="poi_health_specialty_urology_yes">Especialitat mèdica: urologia</string>
-	<string name="poi_health_specialty_surgery_yes">Especialitat mèdica: cirurgia general</string>
+	<string name="poi_health_specialty_dermatology_yes">Dermatologia</string>
+	<string name="poi_health_specialty_urology_yes">Urologia</string>
+	<string name="poi_health_specialty_surgery_yes">Cirurgia general</string>
 	<string name="poi_nuclear_explosion_type_atmospheric_rocket_or_missile">Tipus d\'explosió: atmosfèrica, coet o míssil</string>
 	<string name="poi_nuclear_explosion_type_atmospheric_atmospheric_surface">Tipus d\'explosió: atmosfèrica, de superfície</string>
 	<string name="poi_nuclear_explosion_type_underground_tunnel">Tipus d\'explosió: subterrània, túnel</string>
@@ -2192,7 +2192,7 @@
 
 	<string name="poi_suction_point">Punt d\'aspiració</string>
 
-	<string name="poi_fire_hydrant_type_underground">Tipus: soterrat</string>
+	<string name="poi_fire_hydrant_type_underground">Soterrat</string>
 	<string name="poi_health_amenity_type_first_aid_kit">Equip de primers auxilis</string>
 	<string name="poi_health_amenity_type_scales">Bàscules lliures</string>
 
@@ -2216,12 +2216,12 @@
 	<string name="poi_street_cabinet_water_management">Tipus d\'armari: gestió d\'aigua</string>
 	<string name="poi_street_cabinet_street_lighting">Tipus d\'armari: il·luminació vial</string>
 
-<string name="poi_health_specialty_oncology_yes">Especialitat mèdica: oncologia</string>
-	<string name="poi_health_specialty_tropical_medicine_yes">Especialitat mèdica:medicina tropical</string>
+<string name="poi_health_specialty_oncology_yes">Oncologia</string>
+	<string name="poi_health_specialty_tropical_medicine_yes">Medicina Tropical</string>
 	<string name="poi_health_specialty_tropical_medicine_no">Especialitat mèdica: sense medicina tropical</string>
-	<string name="poi_health_specialty_neurosurgery_yes">Especialitat mèdica: neurocirugia</string>
-	<string name="poi_free_flying_guest_guidelines_yes">Directius de convidat pel vol lliure: sí</string>
-	<string name="poi_free_flying_guest_guidelines_no">Directrius de convidat pel vol lliure: no</string>
+	<string name="poi_health_specialty_neurosurgery_yes">Cirurgia neurològica</string>
+	<string name="poi_free_flying_guest_guidelines_yes">Directius de convidat: sí</string>
+	<string name="poi_free_flying_guest_guidelines_no">Directrius de convidat: no</string>
 
 	<string name="poi_tanning_salon">Solàrium</string>
 
@@ -2248,7 +2248,7 @@
 
 	<string name="poi_emergency_yes">Urgències: sí</string>
 	<string name="poi_emergency_no">Urgències: no</string>
-	<string name="poi_home_visit_yes">Visites a domicili: sí</string>
+	<string name="poi_home_visit_yes">Sí</string>
 	<string name="poi_home_visit_no">Visites a domicili: no</string>
 
 	<string name="poi_traffic_calming_island">Illot de tràfic</string>
@@ -2272,13 +2272,13 @@
 
 <string name="poi_seamark_dyke">Indicació de dic</string>
 	<string name="poi_content_oil">Contingut: petroli</string>
-	<string name="poi_date_yes">Mostra la data: sí</string>
+	<string name="poi_date_yes">Visualització de la data</string>
 	<string name="poi_date_no">Mostra la data: no</string>
 
 	<string name="poi_thermometer_no">Termòmetre: no</string>
-	<string name="poi_barometer_yes">Baròmetre:sí</string>
+	<string name="poi_barometer_yes">Baròmetre</string>
 	<string name="poi_barometer_no">Baròmetre: no</string>
-	<string name="poi_thermometer_yes">Termòmetre: sí</string>
+	<string name="poi_thermometer_yes">Termòmetre</string>
 	<string name="poi_display_digital_yes">Tauler digital</string>
 	<string name="poi_pumping_station">Central de bombament</string>
 
@@ -2287,7 +2287,7 @@
 	<string name="poi_display_analog_yes">Tauler analògic</string>
 	<string name="poi_display_sundial_yes">Rellotge de sol</string>
 
-	<string name="poi_hygrometer_yes">Higròmetre: sí</string>
+	<string name="poi_hygrometer_yes">Higròmetre</string>
 	<string name="poi_hygrometer_no">Higròmetre: no</string>
 	<string name="poi_fuel_type">Tipus</string>
 	<string name="poi_fuel_avia_type">Tipus</string>
