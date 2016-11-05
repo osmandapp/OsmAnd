@@ -2525,4 +2525,5 @@ kaj pli...
     <string name="route_calculation">Difinado de vojo</string>
     <string name="upload_poi">Alŝuti interesejo(j)n</string>
     <string name="route_roundabout_short">Elveturu al %1$d-a elveturejo</string>
+    <string name="search_map_hint">Serĉi por urbo aŭ regiono</string>
     </resources>
