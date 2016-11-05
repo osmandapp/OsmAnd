@@ -119,9 +119,9 @@
     <string name="osmand_service">Služba na pozadí</string>
     <string name="osmand_service_descr">Umožní běh aplikace při vypnutém displeji</string>
     <string name="download_files_not_enough_space">Nedostatek místa pro stažení %1$s MB dat (volné: %2$s).</string>
-    <string name="download_files_question_space">Opravdu stáhnout {0} soubor(ů)?
-To trvale vyžaduje {1} MB.
-Nyní je k dispozici {2} MB.</string>
+    <string name="download_files_question_space">Stáhnout {0} soubor(ů)?
+ V úložišti je zapotřebí {1} MB.
+ (Aktuálně je k dispozici {2} MB.)</string>
     <string name="use_transparent_map_theme">Transparentní téma</string>
     <string name="native_library_not_supported">Android native library není podporovaná na tomto zařízení.</string>
     <string name="init_native_library">Inicializuji Android native library…</string>
@@ -1093,7 +1093,7 @@ Celosvětová výšková data (mezi 70 stupni severní šířky a 70 stupni již
     <string name="driving_region_us">Spojené státy</string>
     <string name="driving_region_canada">Kanada</string>
     <string name="driving_region_europe_asia">Evropa a Asie</string>
-    <string name="driving_region_uk">Británie, Indie, Austrálie a ostatní</string>
+    <string name="driving_region_uk">Británie, Indie a podobné</string>
     <string name="about_version">Verze:</string>
     <string name="shared_string_about">O aplikaci</string>
     <string name="about_settings_descr">Informace o verzi, licenci, členech projektu</string>
@@ -1668,7 +1668,7 @@ Zaznamenávané trasy můžete sdílet s vašimi přáteli nebo mohou být použ
     <string name="shared_string_search">Hledat</string>
     <string name="shared_string_manage">Spravovat</string>
     <string name="shared_string_edit">Upravit</string>
-    <string name="shared_string_is_open">Otevřít</string>
+    <string name="shared_string_is_open">Otevřeno nyní</string>
     <string name="rendering_attr_OSMMapperAssistant_name">Pomocník OSM editorů</string>
     <string name="filter_poi_hint">Filtrovat podle jména</string>
     <string name="search_poi_category_hint">Pište pro vyhledání ve všech</string>
@@ -2078,8 +2078,8 @@ Aktivováním tohoto pohledu se změní styl mapy na \"Winter and ski\", který 
     <string name="upload_anonymously">Nahrát anonymně</string>
     <string name="show_transparency_seekbar">Zobrazit posuvník průhlednosti</string>
     <string name="download_files_error_not_enough_space">Nedostatek místa!
-Toto zabere dočasně {3} MB a trvale {1} MB.
-Aktuálně je volných pouze {2} MB.</string>
+ V úložišti je zapotřebí dočasně {3} MB a trvale {1} MB.
+ Aktuálně je k dispozici pouze {2} MB.</string>
     <string name="upload_osm_note">Nahrát OSM poznámku</string>
     <string name="upload_osm_note_description">Můžete nahrát OSM poznámku anonymně, pokud použijete svůj OpenStreetMap.org profil.</string>
     <string name="shared_string_move_up">Posunout nahoru</string>
@@ -2118,9 +2118,9 @@ Aktuálně je volných pouze {2} MB.</string>
 Část příjmu jde zpět do OSM komunity a za každý příspěvek do OSM je vyplacena odměna.
 Pokud máte rádi OsmAnd a OSM a chcete je podpořit, toto je výborný způsob jak to udělat.</string>
     
-    <string name="download_files_question_space_with_temp">Opravdu stáhnout {0} soubor(ů)?
-Dočasně je potřeba {3} MB a {1} MB trvale.
-V současnosti je k dispozici {2} MB.</string>
+    <string name="download_files_question_space_with_temp">Stáhnout {0} soubor(ů)?
+ V úložišti je zapotřebí dočasně {3} MB a trvale {1} MB.
+ (Aktuálně je k dispozici pouze {2} MB.)</string>
     <string name="map_marker_1st">První mapová značka</string>
     <string name="map_marker_2nd">Druhá mapová značka</string>
     <string name="shared_string_toolbar">Panel nástrojů</string>
@@ -2315,4 +2315,6 @@ V současnosti je k dispozici {2} MB.</string>
     <string name="lang_kab">Kabylsky</string>
     <string name="driving_region_australia">Austrálie</string>
     <string name="route_calculation">Kalkulace trasy</string>
+    <string name="route_roundabout_short">Použijte výjezd %1$d a pokračujte</string>
+    <string name="upload_poi">Nahrát POI</string>
     </resources>
