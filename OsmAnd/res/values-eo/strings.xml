@@ -37,14 +37,14 @@
     <string name="osmand_parking_minute">min</string>
     <string name="show_transparency_seekbar">Montri travideblan serĉbreton</string>
     <string name="download_files_error_not_enough_space">Mankas spacon!
- Tiu ĉi bezonos {3} MB provizore kaj {1} MB daŭre.
- Nuntempe estas nur {2} MB disponebla.</string>
+ Bezonas spacon {3} MB provizore kaj {1} MB daŭre.
+ Estas nur {2} MB disponebla spaco.</string>
     <string name="download_files_question_space_with_temp">Ĉu vere elŝuti {0} dosiero(j)n?
- Tio ĉi bezonos {3} MB provizore kaj {1} MB daŭre.
- Nuntempe estas {2} MB disponebla.</string>
+ Bezonas spacon {3} MB provizore kaj {1} MB daŭre.
+ (Estas {2} MB disponebla spaco.)</string>
     <string name="download_files_question_space">Ĉu vere elŝuti {0} dosiero(j)n?
- Tio ĉi bezonos {1} MB daŭre.
- Nuntempe estas {2} MB disponebla.</string>
+ Bezonas spacon {1} MB daŭre.
+ (Estas {2} MB disponebla spaco.)</string>
     <string name="upload_osm_note_description">Vi povas alŝuti vian OSM-notojn anonime se vi uzos vian OpenStreetMap.org profilon.</string>
     <string name="upload_osm_note">Alŝuti OSM-notaĵon</string>
     <string name="shared_string_toolbar">Ilobreto</string>
