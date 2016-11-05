@@ -1987,4 +1987,5 @@
 	<string name="poi_piste_difficulty">Pálya nehézség</string>
 	<string name="poi_piste_grooming">Pálya kezelés</string>
 	<string name="poi_transport_construction">Út- vagy vasútépítés</string>
+	<string name="poi_square">Tér</string>
 	</resources>
