@@ -1133,8 +1133,8 @@
     
     <string name="download_files_not_enough_space">Det er ikke nok ledig plass til å laste ned %1$s MB (ledig: %2$s).</string>
     <string name="download_files_question_space">Laste ned {0} fil(er)?
- Dette krever {1} MB permanent.
- Nå er det {2} MB tilgjengelig.</string>
+ Lagringsplass brukt er {1} MB.
+ (Tilgjengelig plass er {2} MB.)</string>
     <string name="auto_follow_route_navigation">Auto-sentrer bare navigering</string>
     <string name="auto_follow_route_navigation_descr">Auto-sentrer kartvisning bare under navigering.</string>
     <string name="auto_follow_location_enabled">Auto-sentrer kartvisning i bruk.</string>
@@ -1743,7 +1743,7 @@
     <string name="selected_categories">Valgte kategorier</string>
     <string name="create_custom_poi">Opprett egendefinert filter</string>
     <string name="custom_search">Egendefinert søk</string>
-    <string name="edit_filter">Rediger filter</string>
+    <string name="edit_filter">Rediger kategorier</string>
     <string name="subcategories">Underkategorier</string>
     <string name="rendering_attr_contourColorScheme_description">Fargeskjema for koter</string>
     <string name="rendering_value_light_brown_name">Lysebrun</string>
