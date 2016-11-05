@@ -769,8 +769,8 @@ Mapy kafelkowe można uzyskać bezpośrednio z zasobów sieciowych, jak i przygo
 
     <string name="download_files_not_enough_space">Nie ma wystarczająco miejsca, aby pobrać %1$s MB (dostępne miejsce: %2$s).</string>
     <string name="download_files_question_space">Czy pobrać {0} plik(-i/-ów)?
- To potrzebuje {1} MB na stałe.
- Obecnie posiadasz dostępne {2} MB.</string>
+ Wymagane miejsce {1} MB na stałe.
+ (Dostępne miejsce {2} MB.)</string>
     <string name="poi_query_by_name_matches_categories">Znaleziono kilka kategorii UM odpowiadających zapytaniu:</string>
     <string name="favourites_edit_dialog_name">Nazwa</string>
     <string name="favourites_edit_dialog_category">Kategoria</string>
@@ -2355,11 +2355,11 @@ Włączenie tego widoku zmienia styl mapy na „Zima i narty”, ukazujący tere
     <string name="select_map_marker">Wybierz znacznik mapy</string>
     <string name="map_markers_other">Inne znaczniki</string>
     <string name="download_files_error_not_enough_space">Za mało miejsca!
- To potrzebuje {3} MB tymczasowo i {1} MB na stałe.
+ Wymagane miejsce {3} MB tymczasowo i {1} MB na stałe.
  Obecnie posiadasz dostępne tylko {2} MB.</string>
     <string name="download_files_question_space_with_temp">Czy pobrać {0} plik(-i/-ów)?
- To potrzebuje {3} MB tymczasowo i {1} MB na stałe.
- Obecnie posiadasz dostępne {2} MB.</string>
+ Wymagane miejsce {3} MB tymczasowo i {1} MB na stałe.
+ (Dostępne miejsce {2} MB.)</string>
     <string name="upload_osm_note_description">Można przesłać uwagi OSM anonimowo za pośrednictwem profilu na OpenStreetMap.org.</string>
     <string name="upload_osm_note">Wysyłanie uwagi OSM</string>
     <string name="upload_anonymously">Wysłanie anonimowo</string>
