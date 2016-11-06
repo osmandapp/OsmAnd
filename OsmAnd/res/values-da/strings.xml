@@ -2459,12 +2459,8 @@ Brug for hjælp med OsmAnd, kontakt supportteamet: support@osmand.net.
     <string name="download_files_error_not_enough_space">Ikke nok plads!
   Brug for {3} MB midlertidigt, {1} MB permanent lagerplads.
   Tilgængelig lagerplads er kun {2} MB.</string>
-    <string name="download_files_question_space_with_temp">Hent {0} filer? 
-Har brug for {3} MB midlertidigt og {1} MB permanent. 
-I øjeblikket er {2} MB til rådighed.
-
-Hent {0} filer?
- Lagerplads brugt {1} MB.
+    <string name="download_files_question_space_with_temp">Hent {0} filer?
+ Lagerplads brugt {3} MB midlertidigt, {1} MB permanent.
  (Ledig plads {2} MB.)</string>
     <string name="upload_osm_note">Overfør OSM Note</string>
     <string name="upload_anonymously">Overfør anonymt</string>
