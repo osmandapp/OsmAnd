@@ -765,9 +765,9 @@ Tesela mapak zuzenean sareko iturburuetatik eskuratu daitezke, edo lineaz kanpor
   
   
   <string name="download_files_not_enough_space">Ez dago leku nahikorik %1$s MB deskargatzeko (%2$s libre).</string>
-  <string name="download_files_question_space">Benetan {0} fitxategi deskargatu? 
-Honek {1} MB behar ditu behin betiko. 
-{2} MB daude libre orain.</string>
+  <string name="download_files_question_space">{0} fitxategi deskargatu? 
+Biltegiratzean {1} MB erabiliko dira. 
+(Eskuragarri {2} MB daude.)</string>
   
   
   
@@ -1996,11 +1996,11 @@ OsmAnd eta OSM maite badituzu eta babestu nahi badituzu, hau modu egokia da.</st
     
     <string name="show_transparency_seekbar">Bistaratu bilaketa barra gardena</string>
     <string name="download_files_error_not_enough_space">Ez dago espazio nahikoa!
-Honek {3} MB behar ditu une batez eta {1} MB behin betiko.
- Orain {2} MB daude eskuragarri.</string>
+Biltegiratzean {3} MB behar dira une batez, {1} MB behin betiko.
+Eskuragarri {2} MB besterik ez daude.</string>
     <string name="download_files_question_space_with_temp">{0} fitxategi deskargatu? 
-Honek {3} MB behar ditu une batez eta {1} MB behin betiko. 
-Orain, {2} MB daude eskuragarri.</string>
+Biltegiratzean {3} MB behar dira une batez, {1} MB behin betiko. 
+(Eskuragarri {2} MB daude.)</string>
     <string name="upload_osm_note_description">Zure OSM oharra anonimoki igo dezakezu zure OpenStreetMap.org profila erabiltzen baduzu.</string>
     <string name="rendering_attr_showMtbRoutes_name">Bistaratu MTB ibilbideak</string>
     <string name="rendering_attr_hideIcons_name">POI ikonoak</string>
@@ -2602,7 +2602,7 @@ OsmAnd aplikazioarekin laguntza behar baduzu, jarri kontaktuan gure laguntza tal
     <string name="delete_filter">Ezabatu iragazkia</string>
     <string name="new_filter">Iragazki berria</string>
     <string name="new_filter_desc">Idatzi iragazki berriaren izena, zure kategorien fitxara gehituko da.</string>
-    <string name="edit_filter">Editatu iragazkia</string>
+    <string name="edit_filter">Editatu kategoriak</string>
     <string name="subcategories">Azpikategoriak</string>
     <string name="translit_name_if_miss">Transliteratu %1$s izena falta bada</string>
     <string name="translit_names">Transliteratu izenak</string>
@@ -2614,7 +2614,7 @@ OsmAnd aplikazioarekin laguntza behar baduzu, jarri kontaktuan gure laguntza tal
     <string name="rendering_attr_contourColorScheme_description">Ingerada marren kolore eskema</string>
     <string name="save_track_min_speed">Gutxieneko abiadura erregistratzeko</string>
     <string name="save_track_min_speed_descr">Ezarri puntu bat erregistratzea eragingo duen gutxieneko abiadura</string>
-    <string name="save_track_min_distance">Gutxieneko distantzia erregistratzeko</string>
+    <string name="save_track_min_distance">Erregistroan mugimendua antzematea</string>
     <string name="save_track_min_distance_descr">Ezarri puntu bat erregistratzea eragingo duen gutxieneko distantzia aurreko posiziotik</string>
     <string name="save_track_precision">Erregistratzearen gutxieneko zehaztasuna</string>
     <string name="save_track_precision_descr">Ezarri erregistratzearen gutxieneko zehaztasuna</string>
@@ -2654,4 +2654,12 @@ OsmAnd aplikazioarekin laguntza behar baduzu, jarri kontaktuan gure laguntza tal
     <string name="osmo_share_location">Partekatu</string>
     <string name="osmo_pause_location">Pausatu</string>
     <string name="osmo_service_running">OsMo zerbitzua exekutatzen ari da</string>
+    <string name="route_roundabout_short">Hartu %1$d. irteera eta jarraitu</string>
+    <string name="upload_poi">Igo POI bat</string>
+    <string name="route_calculation">Ibilbidearen kalkulua</string>
+    <string name="gpx_no_tracks_title">Ez duzu lorratzik oraindik</string>
+    <string name="gpx_no_tracks_title_folder">Lorratzak karpetara gehitu ditzakezu ere</string>
+    <string name="gpx_add_track">Gehitu lorratza</string>
+    <string name="gpx_appearance">Itxura</string>
+    <string name="rendering_value_fine_name">Ongi</string>
     </resources>
