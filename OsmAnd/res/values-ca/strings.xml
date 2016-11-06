@@ -178,8 +178,8 @@
     <string name="user_password">La vostra contrasenya a OSM</string>
     <string name="download_files_not_enough_space">No hi ha prou espai lliure per baixar %1$s MB (lliure: %2$s).</string>
     <string name="download_files_question_space">"Voleu baixar {0} fitxer(s)?  
-Es necessita {1} MB permanentment. 
-Ara mateix hi ha {2} MB d\'espai lliure."</string>
+S\'ocuparà una memòria de {1} MB
+(La memòria disponible es de{2} MB)"</string>
     <string name="use_transparent_map_theme">Tema transparent</string>
     <string name="gps_wakeup_interval">Interval de despertament del GPS: %s</string>
     <string name="osmand_parking_event">Traieu el cotxe de l\'aparcament</string>
@@ -2269,11 +2269,11 @@ Si us cal ajut per l\'aplicació OsmAnd, contacteu amb el nostre equip de suport
     <string name="osm_live_subscription_settings">Configuració de la subscripció</string>
     <string name="upload_anonymously">Puja anònimament</string>
     <string name="download_files_error_not_enough_space">No hi ha prou espai! 
-Això requereix {3} MB temporals i {1} MB permanents. 
-Ara mateix, només hi ha {2} MB disponibles.</string>
+Cal una memòria de {3} MB temporals i {1} MB permanents. 
+L\'espai disponible és només de {2} MB.</string>
     <string name="download_files_question_space_with_temp">Voleu baixar {0} fitxer(s)? 
-Es necessita {3} MB temporals i {1} MB permanents. 
-Ara mateix, es disposa de {2} MB.</string>
+L\'ús de memòria serà de {3} MB temporalment i {1} MB permanentment. 
+(La memòria disponible és de {2} MB)</string>
     <string name="shared_string_move_up">Puja</string>
     <string name="shared_string_move_down">Baixa</string>
     <string name="avoid_road">Evita la via</string>
