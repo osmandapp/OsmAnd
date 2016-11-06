@@ -452,7 +452,7 @@
 	<string name="poi_craft_photographic_laboratory">Laboratoire photographique</string>
 	<string name="poi_craft_sailmaker">Maître voilier</string>
 	<string name="poi_craft_sculptor">Sculpteur</string>
-	<string name="poi_beauty_salon_nails">Salon de manucure</string>
+	<string name="poi_beauty_salon_nails">Manucure</string>
 	<string name="poi_internet_cafe">Café Internet</string>
 
 	<string name="poi_accountant">Comptable</string>
@@ -915,7 +915,7 @@
 	<string name="poi_bus_trap">Passe à bus</string>
 	<string name="poi_rwn_ref">Noeud du réseau régional de randonnée pédestre</string>
 	<string name="poi_country">Pays</string>
-	<string name="poi_fee_yes">Tarif</string>
+	<string name="poi_fee_yes">Oui</string>
 
 	<string name="poi_abandoned_poi">Structure à l\\\'abandon</string>
 	<string name="poi_access_private">Propriété privée</string>
@@ -972,8 +972,8 @@
 	<string name="poi_animal_shelter_dog_cat">Refuge pour chiens et chats</string>
 	<string name="poi_animal_shelter_bird">Refuge pour oiseaux</string>
 
-<string name="poi_recycling_centre">Type : centre de tri</string>
-	<string name="poi_recycling_container">Type : containeur</string>
+<string name="poi_recycling_centre">Déchèterie</string>
+	<string name="poi_recycling_container">Container</string>
 	<string name="poi_recycling_plastic_packaging">Emballage plastique</string>
 	<string name="poi_recycling_paper_packaging">Emballage en papier</string>
 	<string name="poi_recycling_fluorescent_tubes">Tubes fluorescents</string>
@@ -998,7 +998,7 @@
 	<string name="poi_route_hiking_nwn_poi">Chemin de randonnée national</string>
 	<string name="poi_route_hiking_rwn_poi">Chemin de randonnée régional</string>
 	<string name="poi_route_hiking_lwn_poi">Chemin de randonnée local</string>
-	<string name="poi_fee_no">Gratuit</string>
+	<string name="poi_fee_no">Non</string>
 	<string name="poi_supervised_yes">Surveillé</string>
 	<string name="poi_supervised_no">Non surveillé</string>
 	<string name="poi_monitoring_station">Station de contrôle</string>
