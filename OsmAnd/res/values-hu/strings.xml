@@ -134,9 +134,9 @@
 
 
     <string name="download_files_not_enough_space">Nincs elég hely %1$s MB letöltéséhez (szabad %2$s).</string>
-    <string name="download_files_question_space">Biztosan letöltesz {0} fájlt?
+    <string name="download_files_question_space">Letöltesz {0} fájlt?
 Ehhez {1} MB helyre van szükség.
-Jelenleg {2} MB érhető el.</string>
+(Jelenleg {2} MB érhető el.)</string>
 
 
     <string name="use_transparent_map_theme">Átlátszó téma</string>
@@ -2404,9 +2404,9 @@ Ha szereted az OsmAndot és az OSM-et, és szeretnéd támogatni a fejlődésük
     <string name="download_files_error_not_enough_space">Nincs elég hely!
 A művelethez {3} MB ideiglenes és {1} MB végleges hely szükséges.
 Jelenleg csak {2} MB érhető el.</string>
-    <string name="download_files_question_space_with_temp">Biztosan letöltesz {0} fájlt?
-Ehhez átmenetileg {3} MB, véglegesen {1} MB szükséges.
-Jelenleg csak {2} MB érhető el.</string>
+    <string name="download_files_question_space_with_temp">Letöltesz {0} fájlt?
+ Ehhez átmenetileg {3} MB, véglegesen {1} MB szükséges.
+ (Jelenleg {2} MB érhető el.)</string>
     <string name="upload_osm_note_description">Az OSM Jegyzeteket névtelenül is feltöltheted, ha az openstreetmap.org profilodat használod.</string>
     <string name="upload_osm_note">OSM Jegyzet feltöltése</string>
     <string name="map_marker_1st">Első térképjelölő</string>
@@ -2660,5 +2660,57 @@ Ha segítségre van szükséged az OsmAnd alkalmazással kapcsolatban, keresd a 
     <string name="lang_kab">kabil</string>
     <string name="shared_string_continue">Folytatás</string>
     <string name="gpx_logging_no_data">Nincs adat</string>
-    <string name="rendering_attr_contourColorScheme_description">Körvonalak színsémája</string>
+    <string name="rendering_attr_contourColorScheme_description">Szintvonalak színsémája</string>
+    <string name="route_roundabout_short">Hajts ki a(z) %1$d kijáraton és menj</string>
+    <string name="upload_poi">POI feltöltése</string>
+    <string name="route_calculation">Útvonalszámítás</string>
+    <string name="gpx_no_tracks_title">Még nincsenek nyomvonalaid</string>
+    <string name="gpx_no_tracks_title_folder">Te is hozzáadhatsz nyomvonalakat a könyvtárhoz</string>
+    <string name="gpx_add_track">Nyomvonal hozzáadása</string>
+    <string name="gpx_appearance">Megjelenés</string>
+    <string name="osmo_share_location">Megosztás</string>
+    <string name="osmo_pause_location">Szünet</string>
+    <string name="osmo_service_running">Az OsMo szolgáltatás fut</string>
+    <string name="trip_rec_notification_settings">Nyomvonalrögzítés (nincs adat)</string>
+    <string name="trip_rec_notification_settings_desc">Értesítés megjelenítése, amivel egy gombnyomással elindítható az útvonalrögzítés</string>
+    <string name="shared_string_notifications">Értesítések</string>
+    <string name="shared_string_pause">Szünet</string>
+    <string name="shared_string_trip">Túra</string>
+    <string name="shared_string_recorded">Felvett</string>
+    <string name="shared_string_record">Felvétel</string>
+    <string name="save_track_min_speed">Rögzítési minimum sebesség</string>
+    <string name="save_track_min_speed_descr">Megadhatod a legkisebb sebességet, aminél pontot fog rögzíteni</string>
+    <string name="save_track_min_distance">Rögzítési mozgásérzékelés</string>
+    <string name="save_track_min_distance_descr">Az előző pozíciódtól mért legkisebb távolság, ahol pontot fog rögzíteni</string>
+    <string name="save_track_precision">Rögzítési minimum pontosság</string>
+    <string name="save_track_precision_descr">Minimális GPS-vételi pontosság, aminél pontot fog rögzíteni</string>
+    <string name="christmas_poi">Karácsonyi POI</string>
+    <string name="christmas_desc">A karácsonyra és újévi ünnepekre készülve bekapcsolhatod a karácsonyi POI-k megjelenítését: karácsonyfák, vásárok, stb.</string>
+    <string name="christmas_desc_q">Megjeleníted a karácsonyi POI-kat?</string>
+    <string name="rendering_value_light_brown_name">Világosbarna</string>
+    <string name="rendering_value_dark_brown_name">Sötétbarna</string>
+    <string name="rendering_attr_contourColorScheme_name">Szintvonalak színsémája</string>
+    <string name="rendering_attr_surfaceIntegrity_name">Útfelület épsége</string>
+    <string name="search_hint">Város, cím, POI név megadása</string>
+    <string name="translit_name_if_miss">Átírás, ha a(z) %1$s név hiányzik</string>
+    <string name="translit_names">Nevek átírása</string>
+    <string name="rendering_value_fine_name">Finom</string>
+    <string name="release_2_5">"
+ • Kattintható ikonok a térképen
+
+
+ • Hatékony POI szűrő: pl. keress éttermeket konyha szerint, vagy kempingeket egy adott szolgáltatással
+
+
+ • Új Topográfiai térképstílus kerékpárosoknak és kirándulóknak
+
+
+ • Továbbfejlesztett útvonalrögzítés
+
+
+ • Tökéletesített navigációs értesítések (Android Wear)
+
+
+ • Sok egyéb fejlesztés és hibajavítás
+ "</string>
     </resources>
