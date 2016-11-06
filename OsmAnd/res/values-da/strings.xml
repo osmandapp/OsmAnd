@@ -2726,4 +2726,5 @@ Hvis du  ønsker at støtte OsmAnd og OSM, er dette en god måde at gøre det p�
     <string name="route_calculation">Ruteberegning</string>
     <string name="upload_poi">Overfør IP</string>
     <string name="route_roundabout_short">Tag %1$d afkørsel og forsæt</string>
+    <string name="search_map_hint">Søg efter by eller region</string>
     </resources>
