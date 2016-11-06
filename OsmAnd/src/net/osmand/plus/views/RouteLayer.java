@@ -31,7 +31,7 @@ import android.graphics.PorterDuffColorFilter;
 
 public class RouteLayer extends OsmandMapLayer {
 	
-	private static final float EPSILON_IN_DPI = 4;
+	private static final float EPSILON_IN_DPI = 2;
 
 	private OsmandMapTileView view;
 	
@@ -273,9 +273,13 @@ public class RouteLayer extends OsmandMapLayer {
 			distances = new ArrayList<Double>(locations.size());
 			angles = new ArrayList<Double>(locations.size());
 			simplifyPoints.fill(0, locations.size(), (byte)0);
+			if(locations.size() > 0) {
+				simplifyPoints.set(0, (byte) 1);
+			}
 			double distInPix = (tb.getDistance(0, 0, tb.getPixWidth(), 0) / tb.getPixWidth());
 			double cullDistance = (distInPix * (EPSILON_IN_DPI * Math.max(1, tb.getDensity())));
 			cullRamerDouglasPeucker(simplifyPoints, locations, 0, locations.size() - 1, cullDistance);
+			
 			int previousIndex = -1;
 			for(int i = 0; i < locations.size(); i++) {
 				double d = 0;
@@ -301,9 +305,6 @@ public class RouteLayer extends OsmandMapLayer {
 			}
 		}
 		
-		public List<Double> getAngles() {
-			return angles;
-		}
 		
 		public List<Double> getDistances() {
 			return distances;
