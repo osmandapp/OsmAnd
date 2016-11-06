@@ -1150,8 +1150,8 @@ Memòria in proportzione %4$s MB (lìmite de Android %5$s MB, Dalvik %6$s MB).</
 
     <string name="download_files_not_enough_space">Non b\'est memòria bastante pro iscarrigare %1$s MB (lìberos: %2$s).</string>
     <string name="download_files_question_space">Boles a beru iscarrigare {0} documentu(os)?
- Tenes bisòngiu de {1} MB permanentemente.
- Como, bi sunt disponìbiles {2} MB ebbia.</string>
+ Bi sunt {1} MB impreados permanentemente.
+ ({2} MB ebbia disponìbiles.)</string>
     <string name="use_transparent_map_theme">Tema transparente</string>
     <string name="native_library_not_supported">Sa libreria nativa no est suportada dae custu dispositivu.</string>
     <string name="init_native_library">Inizializatzione libreria nativa…</string>
