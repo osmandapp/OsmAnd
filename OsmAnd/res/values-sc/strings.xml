@@ -2419,11 +2419,11 @@ Si istimas OsmAnd e OSM e los boles suportare, custa est una manera perfeta pro 
     <string name="upload_anonymously">Imbia anonimamente</string>
     <string name="show_transparency_seekbar">Ammustra sa barra de chirca trasparente</string>
     <string name="download_files_error_not_enough_space">Non tènes ispàtziu bastante!
-Diant èssere netzessàrios {3} MB temporaneamente e {1} MB permanentemente.
-Como sunt disponìbiles {2} MB ebbia.</string>
-    <string name="download_files_question_space_with_temp">Boles a beru iscarrigare {0} documentu(os)?
-Tenes bisòngiu de {3} MB temporaneamente e {1} MB permanentemente.
-Como bi sunt {2} MB ebbia disponìbiles.</string>
+ Diant èssere netzessàrios {3} MB temporaneamente e {1} MB permanentemente.
+ Como sunt disponìbiles {2} MB ebbia.</string>
+    <string name="download_files_question_space_with_temp">Iscarrigare {0} documentu(os)?
+ Bi sunt {3} MB impreados temporaneamente e {1} MB permanentemente.
+ ({2} MB ebbia disponìbiles.)</string>
     <string name="upload_osm_note_description">Podes carrigare sas notas OSM tuas anonimamentes si impreas su profilu OpenStreetMap.org tuo.</string>
     <string name="upload_osm_note">Càrriga nota OSM</string>
     <string name="map_marker_1st">Primu marcadore mapa</string>
