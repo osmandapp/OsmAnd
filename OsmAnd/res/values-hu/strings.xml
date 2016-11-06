@@ -1372,7 +1372,7 @@ A csoport nem lesz törölve néhány hónap múlva, az OsMo.mobi weboldalon lé
     <string name="always_center_position_on_map">Pozíció megjelenítése mindig középen</string>
     <string name="voice_pref_title">Hang</string>
     <string name="misc_pref_title">Egyebek</string>
-    <string name="localization_pref_title">Fordítás</string>
+    <string name="localization_pref_title">Nyelv</string>
     <string name="index_item_nation_addresses">címek (egész ország)</string>
     <string name="index_item_world_altitude_correction">GPS magasságkorrekció</string>
     <string name="index_item_world_seamarks">Hajózási jelzések</string>
