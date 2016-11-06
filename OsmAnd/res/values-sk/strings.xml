@@ -2195,7 +2195,7 @@ Aktivovanie tohto pohľadu zmení štýl mapy na \"Zima a lyžovanie\", ktorý z
  Dostupné miesto je len {2} MB.</string>
     <string name="download_files_question_space_with_temp">Naozaj stiahnuť {0} súbor(ov)?
  V úložisku je dočasne je potrebných {3} MB, natrvalo {1} MB.
- (Dostupné miesto je len {2} MB.)</string>
+ (Dostupné miesto je {2} MB.)</string>
     <string name="upload_osm_note_description">OSM poznámku môžete odoslať anonymne ak použijete svoj účet na OpenStreetMap.org.</string>
     <string name="upload_osm_note">Odoslať OSM poznámku</string>
     
