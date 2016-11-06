@@ -25,6 +25,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.LocalIndexHelper.LocalIndexType;
 import net.osmand.plus.activities.LocalIndexInfo;
+import net.osmand.plus.download.CityItem;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadResourceGroup;
@@ -33,6 +34,7 @@ import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.download.ui.LocalIndexesFragment.LocalIndexOperationTask;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
+import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.text.DateFormat;
@@ -130,6 +132,10 @@ public class ItemViewHolder {
 	}
 
 	public void bindIndexItem(final IndexItem indexItem) {
+		bindIndexItem(indexItem, null);
+	}
+
+	public void bindIndexItem(final IndexItem indexItem, final String cityName) {
 		initAppStatusVariables();
 		boolean isDownloading = context.getDownloadThread().isDownloading(indexItem);
 		int progress = -1;
@@ -138,11 +144,14 @@ public class ItemViewHolder {
 		}
 		boolean disabled = checkDisabledAndClickAction(indexItem);
 		/// name and left item
+		String name;
 		if(showTypeInName) {
-			nameTextView.setText(indexItem.getType().getString(context));
+			name = indexItem.getType().getString(context);
 		} else {
-			nameTextView.setText(indexItem.getVisibleName(context, context.getMyApplication().getRegions(), showParentRegionName));
+			name = indexItem.getVisibleName(context, context.getMyApplication().getRegions(), showParentRegionName);
 		}
+		String text = (!Algorithms.isEmpty(cityName) && !cityName.equals(name) ? cityName + "\n" : "") + name;
+		nameTextView.setText(text);
 		if(!disabled) {
 			nameTextView.setTextColor(textColorPrimary);
 		} else {
@@ -209,6 +218,17 @@ public class ItemViewHolder {
 		}
 	}
 
+	public void bindIndexItem(final CityItem cityItem) {
+		if (cityItem.getIndexItem() != null) {
+			bindIndexItem(cityItem.getIndexItem(), cityItem.getName());
+		} else {
+			nameTextView.setText(cityItem.getName());
+			nameTextView.setTextColor(textColorPrimary);
+			leftImageView.setImageDrawable(getContentIcon(context, R.drawable.ic_map));
+			descrTextView.setVisibility(View.GONE);
+			progressBar.setVisibility(View.GONE);
+		}
+	}
 
 	protected void download(IndexItem indexItem, DownloadResourceGroup parentOptional) {
 		boolean handled = false;
