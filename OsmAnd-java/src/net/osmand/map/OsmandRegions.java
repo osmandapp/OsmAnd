@@ -1,8 +1,18 @@
 package net.osmand.map;
 
 
-import gnu.trove.iterator.TIntObjectIterator;
-import gnu.trove.list.array.TIntArrayList;
+import net.osmand.PlatformUtil;
+import net.osmand.ResultMatcher;
+import net.osmand.binary.BinaryMapDataObject;
+import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.binary.BinaryMapIndexReader.MapIndex;
+import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
+import net.osmand.data.LatLon;
+import net.osmand.data.QuadRect;
+import net.osmand.data.QuadTree;
+import net.osmand.util.Algorithms;
+import net.osmand.util.MapAlgorithms;
+import net.osmand.util.MapUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -21,19 +31,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
-import net.osmand.PlatformUtil;
-import net.osmand.ResultMatcher;
-import net.osmand.binary.BinaryMapDataObject;
-import net.osmand.binary.BinaryMapIndexReader;
-import net.osmand.binary.BinaryMapIndexReader.MapIndex;
-import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
-import net.osmand.data.LatLon;
-import net.osmand.data.QuadRect;
-import net.osmand.data.QuadTree;
-import net.osmand.osm.edit.Node;
-import net.osmand.util.Algorithms;
-import net.osmand.util.MapAlgorithms;
-import net.osmand.util.MapUtils;
+import gnu.trove.iterator.TIntObjectIterator;
+import gnu.trove.list.array.TIntArrayList;
 
 public class OsmandRegions {
 
@@ -684,6 +683,55 @@ public class OsmandRegions {
 				sortSubregions(r, comparator);
 			}
 		}
+	}
+
+	public BinaryMapDataObject findBinaryMapDataObject(LatLon latLon) {
+		int point31x = MapUtils.get31TileNumberX(latLon.getLongitude());
+		int point31y = MapUtils.get31TileNumberY(latLon.getLatitude());
+
+		BinaryMapDataObject res = null;
+		List<BinaryMapDataObject> mapDataObjects = null;
+		try {
+			mapDataObjects = queryBbox(point31x, point31x, point31y, point31y);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		if (mapDataObjects != null) {
+			Iterator<BinaryMapDataObject> it = mapDataObjects.iterator();
+			while (it.hasNext()) {
+				BinaryMapDataObject o = it.next();
+				if (o.getTypes() != null) {
+					boolean isRegion = true;
+					for (int i = 0; i < o.getTypes().length; i++) {
+						TagValuePair tp = o.getMapIndex().decodeType(o.getTypes()[i]);
+						if ("boundary".equals(tp.value)) {
+							isRegion = false;
+							break;
+						}
+					}
+					WorldRegion downloadRegion = getRegionData(getFullName(o));
+					if (!isRegion
+							|| downloadRegion == null
+							|| !downloadRegion.isRegionMapDownload()
+							|| !contain(o, point31x, point31y)) {
+						it.remove();
+					}
+				}
+			}
+			double smallestArea = -1;
+			for (BinaryMapDataObject o : mapDataObjects) {
+				double area = OsmandRegions.getArea(o);
+				if (smallestArea == -1) {
+					smallestArea = area;
+					res = o;
+				} else if (area < smallestArea) {
+					smallestArea = area;
+					res = o;
+				}
+			}
+		}
+		return res;
 	}
 
 }
