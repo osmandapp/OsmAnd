@@ -2644,4 +2644,5 @@ Si istimas OsmAnd e OSM e los boles suportare, custa est una manera perfeta pro 
     <string name="route_calculation">Càlculu de s\'àndala</string>
     <string name="upload_poi">Càrriga PDI</string>
     <string name="route_roundabout_short">Piga sa %1$d essida e sighi</string>
+    <string name="search_map_hint">Chirca una tzitade o una regione</string>
     </resources>
