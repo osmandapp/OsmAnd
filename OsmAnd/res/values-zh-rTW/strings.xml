@@ -367,9 +367,9 @@
 
 
     <string name="download_files_not_enough_space">空間不足以下載 %1$s MB (空間剩餘：%2$s)。</string>
-    <string name="download_files_question_space">"真的要下載 {0} MB 檔案嗎？
-這需要 {1} MB  的永久空間。
-現有 {2} MB 的可用空間。"</string>
+    <string name="download_files_question_space">下載 {0} 個檔案嗎？
+存儲空間會使用 {1} MB。
+ (可用空間有 {2} MB。)</string>
 
 
     <string name="use_transparent_map_theme">透明主題</string>
@@ -2399,11 +2399,11 @@ Facebook：https://www.facebook.com/osmandapp
     <string name="shared_string_toolbar">工具列</string>
     <string name="shared_string_widgets">小工具</string>
     <string name="download_files_error_not_enough_space">沒有足夠的空間！
-這會需要 {3} MB 的暫存空間和 {1} MB 的永久空間。
-目前只有 {2} MB 可用空間。</string>
-    <string name="download_files_question_space_with_temp">真的要下載 {0} 個檔案嗎？
-這需要 {3} MB 的暫存空間和 {1} MB 的永久空間。
-目前有 {2} MB 可用空間。</string>
+存儲需要 {3} MB 的暫存空間，{1} MB 的永久空間。
+可用空間只有 {2} MB 。</string>
+    <string name="download_files_question_space_with_temp">下載 {0} 個檔案嗎？
+存儲空間會使用 {3} MB 的暫存空間，{1} MB 的永久空間。
+(可用空間有 {2} MB。)</string>
     <string name="upload_osm_note">上傳 OSM 附註</string>
     <string name="upload_anonymously">匿名上傳</string>
 <string name="select_map_marker">選擇地圖標記</string>
@@ -2665,4 +2665,5 @@ Facebook：https://www.facebook.com/osmandapp
     <string name="rendering_value_fine_name">精細</string>
     <string name="route_calculation">路線估算</string>
     <string name="upload_poi">上傳 POI</string>
+    <string name="route_roundabout_short">利用 %1$d 退出並離開</string>
     </resources>
