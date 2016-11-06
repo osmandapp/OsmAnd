@@ -95,7 +95,11 @@ public class PluginActivity extends OsmandActionBarActivity {
 		getButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(plugin.getInstallURL())));
+				try {
+					startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(plugin.getInstallURL())));
+				} catch (Exception e) {
+					//ignored
+				}
 			}
 		});
 
