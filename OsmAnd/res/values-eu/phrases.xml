@@ -1970,4 +1970,48 @@
 	<string name="poi_beacon_special_purpose">Zeregin berezietarako itsasargia</string>
 	<string name="poi_beacon_safe_water">Segurtasun itsasargia</string>
 	<string name="poi_berth">Zenbakidun amarralekua</string>
+	<string name="poi_amenity_vacuum_cleaner">Xurgagailua</string>
+
+	<string name="poi_addr_housename">Etxearen izena</string>
+
+
+	<string name="poi_plant_nursery">Landare mintegia</string>
+
+	<string name="poi_compressed_air_yes">Bai</string>
+	<string name="poi_compressed_air_no">Aire konprimatua: ez</string>
+
+	<string name="poi_car_wash_yes">Bai</string>
+
+	<string name="poi_vacuum_cleaner_yes">Bai</string>
+	<string name="poi_vacuum_cleaner_no">Xurgagailua: ez</string>
+	<string name="poi_water_tap">Ur txorrota</string>
+	<string name="poi_button_operated_yes">Botoiekin eraginda: bai</string>
+	<string name="poi_button_operated_no">Botoiekin eraginda: ez</string>
+
+	<string name="poi_free_flying_site_takeoff">Aireratzea</string>
+	<string name="poi_free_flying_site_landing">Lurreratzea</string>
+	<string name="poi_free_flying_site_training">Entrenamendua</string>
+	<string name="poi_free_flying_official_yes">Ofiziala: bai</string>
+	<string name="poi_free_flying_official_no">Ofiziala: ez</string>
+	<string name="poi_medical_system_western_yes">Mendebaldekoa</string>
+	<string name="poi_medical_system_chinese_yes">Txinatar tradizionala</string>
+	<string name="poi_medical_system_ayurveeda_yes">Ayurveeda</string>
+	<string name="poi_medical_system_kampo_yes">Kampo</string>
+	<string name="poi_medical_system_mongolian_yes">Mongoliar tradizionala</string>
+	<string name="poi_medical_system_tibetan_yes">Tibetar tradizionala</string>
+	<string name="poi_medical_system_sidda_yes">Sidda</string>
+	<string name="poi_medical_system_unani_yes">Unani</string>
+
+	<string name="poi_health_service_nursing_yes">Osasun zerbitzua: erizaintza: bai</string>
+	<string name="poi_health_service_nursing_no">Osasun zerbitzua: erizaintza: ez</string>
+	<string name="poi_health_service_counselling_yes">Osasun zerbitzua: orientazioa: bai</string>
+	<string name="poi_health_service_counselling_no">Osasun zerbitzua: orientazioa: ez</string>
+	<string name="poi_health_service_examination_yes">Osasun zerbitzua: miaketa: bai</string>
+	<string name="poi_health_service_examination_no">Osasun zerbitzua: miaketa: ez</string>
+	<string name="poi_health_service_child_care_yes">Osasun zerbitzua: pediatria: bai</string>
+	<string name="poi_health_service_child_care_no">Osasun zerbitzua: pediatria: ez</string>
+	<string name="poi_health_service_prevention_yes">Osasun zerbitzua: prebentzioa: bai</string>
+	<string name="poi_health_service_prevention_no">Osasun zerbitzua: prebentzioa: ez</string>
+	<string name="poi_health_service_prevention_vaccination_yes">Osasun zerbitzua: txertaketa: bai</string>
+	<string name="poi_health_service_prevention_vaccination_no">Osasun zerbitzua: txertaketa: ez</string>
 	</resources>
