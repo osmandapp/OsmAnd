@@ -8,7 +8,6 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.view.ContextThemeWrapper;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -532,7 +531,7 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 					results.count = 0;
 				} else {
 					List<Object> filter = new ArrayList<>();
-					if (constraint.length() > 3) {
+					if (constraint.length() > 2) {
 						try {
 							filter.addAll(searchCities(getMyApplication(), constraint.toString()));
 						} catch (IOException e) {
