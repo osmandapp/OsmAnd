@@ -1987,7 +1987,7 @@ Attivando questa vista lo stile della mappa diventerà \'Inverno e sci\', mostra
     <string name="shared_string_show_description">Mostra la descrizione</string>
     <string name="shared_string_places">Luoghi</string>
     <string name="shared_string_search">Cerca</string>
-    <string name="shared_string_is_open">Apri ora</string>
+    <string name="shared_string_is_open">Aperto adesso</string>
     <string name="rendering_attr_OSMMapperAssistant_name">Assistente mappatore OSM</string>
     <string name="shared_string_manage">Gestisci</string>
     <string name="shared_string_edit">Modifica</string>
