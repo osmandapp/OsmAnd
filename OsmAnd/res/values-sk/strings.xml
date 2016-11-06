@@ -200,8 +200,8 @@ Dlaždicové mapy môžete získať priamo zo zdrojov na Internete, alebo ich m�
     <string name="global_app_settings">Globálne nastavenia aplikácie</string>
     <string name="download_files_not_enough_space">Nie je dostatok voľného miesta pre stiahnutie %1$s MB (voľné: %2$s).</string>
     <string name="download_files_question_space">Naozaj stiahnuť {0} súbor(ov)?
- To trvalo vyžaduje {1} MB.
- V súčasnosti je voľných len {2} MB.</string>
+ V úložisku je potrebných {1} MB.
+ (Dostupné miesto je {2} MB.)</string>
     <string name="use_transparent_map_theme">Priehľadná téma</string>
     <string name="native_library_not_supported">Natívna knižnica nie je podporovaná na tomto zariadení.</string>
     <string name="init_native_library">Inicializácia natívnej knižnice…</string>
@@ -2191,11 +2191,11 @@ Aktivovanie tohto pohľadu zmení štýl mapy na \"Zima a lyžovanie\", ktorý z
     <string name="select_map_marker">Zvoľte mapovú značku</string>
     <string name="map_markers_other">Iné značky</string>
     <string name="download_files_error_not_enough_space">Nedostatok miesta!
-Činnosť by dočasne potrebovala {3} MB a natrvalo {1} MB.
-V súčasnosti je voľných len {2} MB.</string>
+ V úložisku je dočasne je potrebných {3} MB, natrvalo {1} MB.
+ Dostupné miesto je len {2} MB.</string>
     <string name="download_files_question_space_with_temp">Naozaj stiahnuť {0} súbor(ov)?
-To by dočasne potrebovalo {3} MB a natrvalo {1} MB.
-V súčasnosti je voľných len {2} MB.</string>
+ V úložisku je dočasne je potrebných {3} MB, natrvalo {1} MB.
+ (Dostupné miesto je len {2} MB.)</string>
     <string name="upload_osm_note_description">OSM poznámku môžete odoslať anonymne ak použijete svoj účet na OpenStreetMap.org.</string>
     <string name="upload_osm_note">Odoslať OSM poznámku</string>
     
