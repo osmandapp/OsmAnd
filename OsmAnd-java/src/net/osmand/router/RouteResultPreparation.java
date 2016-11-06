@@ -20,6 +20,7 @@ import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
+import net.osmand.osm.MapRenderingTypes;
 import net.osmand.router.BinaryRoutePlanner.FinalRouteSegment;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
 import net.osmand.router.RoutePlannerFrontEnd.RouteCalculationMode;
@@ -1066,6 +1067,17 @@ public class RouteResultPreparation {
 		RoadSplitStructure rs = new RoadSplitStructure();
 		int speakPriority = Math.max(highwaySpeakPriority(prevSegm.getObject().getHighway()), highwaySpeakPriority(currentSegm.getObject().getHighway()));
 		for (RouteSegmentResult attached : attachedRoutes) {
+			boolean restricted = false;
+			for(int k = 0; k < prevSegm.getObject().getRestrictionLength(); k++) {
+				if(prevSegm.getObject().getRestrictionId(k) == attached.getObject().getId() && 
+						prevSegm.getObject().getRestrictionType(k) <= MapRenderingTypes.RESTRICTION_NO_STRAIGHT_ON) {
+					restricted = true;
+					break;
+				}
+			}
+			if(restricted) {
+				continue;
+			}
 			double ex = MapUtils.degreesDiff(attached.getBearingBegin(), currentSegm.getBearingBegin());
 			double mpi = Math.abs(MapUtils.degreesDiff(prevSegm.getBearingEnd(), attached.getBearingBegin()));
 			int rsSpeakPriority = highwaySpeakPriority(attached.getObject().getHighway());
