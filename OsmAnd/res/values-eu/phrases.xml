@@ -2014,4 +2014,14 @@
 	<string name="poi_health_service_prevention_no">Osasun zerbitzua: prebentzioa: ez</string>
 	<string name="poi_health_service_prevention_vaccination_yes">Osasun zerbitzua: txertaketa: bai</string>
 	<string name="poi_health_service_prevention_vaccination_no">Osasun zerbitzua: txertaketa: ez</string>
+	<string name="poi_bicycle_parking_lockers">Armairuak</string>
+	<string name="poi_bicycle_parking_tree">Bizikleta zuhaitza</string>
+	<string name="poi_depth">Sakonera</string>
+
+	<string name="poi_salt_yes">Gatza</string>
+	<string name="poi_salt_no">Gatza: ez</string>
+	<string name="poi_wheelchair_designated">Erreserbatuta</string>
+	<string name="poi_summer_camp">Udako kanpamentua</string>
+	<string name="poi_recreation_center">Aisialdirako zentroa</string>
+
 	</resources>
