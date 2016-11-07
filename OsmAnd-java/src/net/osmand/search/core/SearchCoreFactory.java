@@ -272,7 +272,7 @@ public class SearchCoreFactory {
 
 		private void searchByName(final SearchPhrase phrase, final SearchResultMatcher resultMatcher)
 				throws IOException {
-			if(phrase.getRadiusLevel() > 1 || phrase.getUnknownSearchWordLength() > 3) {
+			if(phrase.getRadiusLevel() > 1 || phrase.getUnknownSearchWordLength() > 3 || phrase.getUnknownSearchWords().size() > 0) {
 				final boolean locSpecified = phrase.getLastTokenLocation() != null;
 				LatLon loc = phrase.getLastTokenLocation();
 				final List<SearchResult> immediateResults = new ArrayList<>();
