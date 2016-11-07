@@ -1102,9 +1102,9 @@ Proportionaler Speicher %4$s MB (Android Limit %5$s MB, Dalvik %6$s MB).</string
 	<string name="enable_plugin_monitoring_services">"Standort-Aufzeichnungs-Modul aktivieren, um Aufzeichnungsdienste (GPX-Aufnahme, Online-Tracking) zu verwenden"</string>
 	<string name="zxing_barcode_scanner_not_found">Barcode-Scanner-Anwendung nicht installiert. Soll im Google Play-Store danach gesucht werden?</string>
 	<string name="close_changeset">Änderungssatz schließen</string>
-	<string name="incomplete_locale">unfertig</string>
+	<string name="incomplete_locale">unvollständig</string>
 	<string name="srtm_plugin_name">Höhenlinien</string>
-	<string name="srtm_plugin_description">"Das Plugin beinhaltet Höhenlinien und Relief-Schattierungen, die als Ergänzung zu den Standard Offline-Karten von OsmAnd angezeigt werden können. Diese Funktionalität ist vor allem für Sportler, sowie Wanderer, Radfahrer, Trekker und jeden interessant, der sich für die Relief-Struktur von Landschaften interessiert.
+	<string name="srtm_plugin_description">"Dieses Plugin beinhaltet Höhenlinien und Relief-Schattierungen, die als Ergänzung zu den Standard Offline-Karten von OsmAnd angezeigt werden können. Diese Funktionalität ist vor allem für Sportler, sowie Wanderer, Radfahrer, Trekker und jeden interessant, der sich für die Relief-Struktur von Landschaften interessiert.
 
 Die globalen Daten (zwischen N 70° und S 70°) basieren auf Messungen von SRTM (Shuttle Radar Topography Mission) und ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), einem bildgebenden System des Satelliten Terra, dem Flaggschiff des NASA-Erd-Beobachtungsprogramms. ASTER ist der Erfolg der Zusammenarbeit zwischen der NASA, dem japanischen Ministerium für Wirtschaft, Handel und Industrie (METI) und dem japanischen Raumfahrtsprogramm (J-spacesystems).
  "</string>
@@ -1164,7 +1164,7 @@ Die globalen Daten (zwischen N 70° und S 70°) basieren auf Messungen von SRTM 
 	<string name="audionotes_plugin_description">Das Audio/Video-Notiz-Plugin ermöglicht unterwegs die Aufnahme von ortsbezogenen Audio-/Fotografie-/Video-Notizen, entweder über eine Schaltfläche auf dem Kartenbildschirm, oder direkt im Kontext-Menü einer beliebigen Position auf der Karte.</string>
 	<string name="audionotes_plugin_name">Audio/Video-Notizen</string>
 	<string name="audionotes_location_not_defined">Ein Ort, der mit der Notiz verbunden wird, wurde nicht angegeben. Benutzen Sie \'Verwende Position…\', um der Notiz einen Ort zuzuweisen</string>
-	<string name="osmand_srtm_long_description_1000_chars">"Das Plugin beinhaltet Höhenlinien und Relief-Schattierungen, die als Ergänzung zu den Standard Offline-Karten von OsmAnd angezeigt werden können. Diese Funktionalität ist vor allem für Sportler, sowie Wanderer, Radfahrer, Trekker und jeden interessant, der sich für die Relief-Struktur von Landschaften interessiert.
+	<string name="osmand_srtm_long_description_1000_chars">"Dieses Plugin beinhaltet Höhenlinien und Relief-Schattierungen, die als Ergänzung zu den Standard Offline-Karten von OsmAnd angezeigt werden können. Diese Funktionalität ist vor allem für Sportler, sowie Wanderer, Radfahrer, Trekker und jeden interessant, der sich für die Relief-Struktur von Landschaften interessiert.
 
 Die globalen Daten (zwischen N 70° und S 70°) basieren auf Messungen von SRTM (Shuttle Radar Topography Mission) und ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), einem bildgebenden System des Satelliten Terra, dem Flaggschiff des NASA-Erd-Beobachtungsprogramms. ASTER ist der Erfolg der Zusammenarbeit zwischen der NASA, dem japanischen Ministerium für Wirtschaft, Handel und Industrie (METI) und dem japanischen Raumfahrtsprogramm (J-spacesystems).
  "</string>
