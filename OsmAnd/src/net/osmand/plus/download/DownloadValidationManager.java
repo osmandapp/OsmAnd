@@ -121,7 +121,7 @@ public class DownloadValidationManager {
 			builder.setMessage(MessageFormat.format(context.getString(R.string.download_files_error_not_enough_space), i, szChange, asz, szMaxTemp));
 			builder.setNegativeButton(R.string.shared_string_ok, null);
 			builder.show();
-		} else if (asz != -1 && asz > 0 && (szChange / asz > 0.8 || szMaxTemp / asz > 0.9)) {
+		} else if (asz != -1 && asz > 0 && ((szChange + 10 > asz) || (szMaxTemp + 10 > asz))) {
 			AlertDialog.Builder builder = new AlertDialog.Builder(context);
 			if (szChange != szMaxTemp) {
 				builder.setMessage(MessageFormat.format(context.getString(R.string.download_files_question_space_with_temp), i, szChange, asz, szMaxTemp));
