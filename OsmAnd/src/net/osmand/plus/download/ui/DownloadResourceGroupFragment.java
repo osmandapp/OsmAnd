@@ -49,6 +49,7 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 	private DownloadResourceGroup group;
 	private DownloadActivity activity;
 	private Toolbar toolbar;
+	private View searchView;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -101,11 +102,43 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 		}
 
 		listView = (ExpandableListView) view.findViewById(android.R.id.list);
+		addSearchRow();
 		listView.setOnChildClickListener(this);
 		listAdapter = new DownloadResourceGroupAdapter(activity);
 		listView.setAdapter(listAdapter);
 
 		return view;
+	}
+
+	private void addSearchRow() {
+		if (!openAsDialog() ) {
+			searchView = activity.getLayoutInflater().inflate(R.layout.simple_list_menu_item, null);
+			searchView.setBackgroundResource(android.R.drawable.list_selector_background);
+			TextView title = (TextView) searchView.findViewById(R.id.title);
+			title.setCompoundDrawablesWithIntrinsicBounds(getMyApplication().getIconsCache().getThemedIcon(R.drawable.ic_action_search_dark), null, null, null);
+			title.setHint(R.string.search_map_hint);
+			searchView.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					getDownloadActivity().showDialog(getActivity(), SearchDialogFragment.createInstance(""));
+				}
+			});
+			listView.addHeaderView(searchView);
+			listView.setHeaderDividersEnabled(false);
+			IndexItem worldBaseMapItem = activity.getDownloadThread().getIndexes().getWorldBaseMapItem();
+			if (worldBaseMapItem == null || !worldBaseMapItem.isDownloaded()) {
+				title.setVisibility(View.GONE);
+			}
+		}
+	}
+
+	private void updateSearchView() {
+		if (searchView != null && searchView.findViewById(R.id.title).getVisibility() == View.GONE) {
+			IndexItem worldBaseMapItem = activity.getDownloadThread().getIndexes().getWorldBaseMapItem();
+			if (worldBaseMapItem != null && worldBaseMapItem.isDownloaded()) {
+				searchView.findViewById(R.id.title).setVisibility(View.VISIBLE);
+			}
+		}
 	}
 
 	@Override
@@ -133,6 +166,9 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 	}
 
 	private void reloadData() {
+		if (!openAsDialog()) {
+			updateSearchView();
+		}
 		DownloadResources indexes = activity.getDownloadThread().getIndexes();
 		group = indexes.getGroupById(groupId);
 		if (group != null) {
