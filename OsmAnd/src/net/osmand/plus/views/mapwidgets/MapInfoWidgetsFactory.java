@@ -562,7 +562,8 @@ public class MapInfoWidgetsFactory {
 					}
 				} else {
 					int di = MapRouteInfoMenu.getDirectionInfo();
-					if (di >= 0 && MapRouteInfoMenu.isControlVisible() &&
+					MapRouteInfoMenu routeInfoMenu = map.getMapLayers().getMapControlsLayer().getMapRouteInfoMenu();
+					if (di >= 0 && routeInfoMenu != null && routeInfoMenu.isVisible() &&
 							di < routingHelper.getRouteDirections().size()) {
 						showNextTurn = true;
 						RouteDirectionInfo next = routingHelper.getRouteDirections().get(di);
@@ -575,7 +576,8 @@ public class MapInfoWidgetsFactory {
 						if (text == null) {
 							text = "";
 						}
-
+					} else {
+						text = null;
 					}
 				}
 			} else if (map.getMapViewTrackingUtilities().isMapLinkedToLocation() &&
