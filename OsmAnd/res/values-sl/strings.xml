@@ -2656,4 +2656,5 @@ V kolikor naletite na težave s programom OsmAnd, prosimo, stopite v stik s skup
     <string name="gpx_appearance">Videz</string>
     <string name="rendering_value_fine_name">Drobno</string>
     <string name="route_roundabout_short">Pojdite na %1$d izhod in nadaljujte</string>
+    <string name="search_map_hint">Poišči mesto ali območje</string>
     </resources>
