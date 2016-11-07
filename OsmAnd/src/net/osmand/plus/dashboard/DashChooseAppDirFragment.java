@@ -463,8 +463,12 @@ public class DashChooseAppDirFragment {
 					Toast.makeText(ctx, R.string.shared_string_io_error, Toast.LENGTH_LONG).show();
 				}
 			}
-			if(progress.getDialog().isShowing()) {
-				progress.getDialog().dismiss();
+			try {
+				if (progress.getDialog().isShowing()) {
+					progress.getDialog().dismiss();
+				}
+			} catch (Exception e) {
+				//ignored
 			}
 		}
 		
@@ -541,8 +545,12 @@ public class DashChooseAppDirFragment {
 
 		@Override
 		protected void onPostExecute(Boolean result) {
-			if (progress.getDialog().isShowing()) {
-				progress.getDialog().dismiss();
+			try {
+				if (progress.getDialog().isShowing()) {
+					progress.getDialog().dismiss();
+				}
+			} catch (Exception e) {
+				//ignored
 			}
 		}
 
