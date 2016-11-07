@@ -1,13 +1,14 @@
 package net.osmand.plus.download.ui;
 
 import android.content.res.TypedArray;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.view.ContextThemeWrapper;
-import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,13 +16,14 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
+import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
-import android.widget.RelativeLayout.LayoutParams;
+import android.widget.ProgressBar;
 
 import net.osmand.Collator;
 import net.osmand.CollatorStringMatcher;
@@ -67,7 +69,10 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 	private SearchListAdapter listAdapter;
 	private BannerAndDownloadFreeVersion banner;
 	private String searchText;
-	private SearchView searchView;
+	private View searchView;
+	private EditText searchEditText;
+	private ProgressBar progressBar;
+	private ImageButton clearButton;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -121,42 +126,48 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 
 		TypedValue typedValue = new TypedValue();
 		getActivity().getTheme().resolveAttribute(R.attr.toolbar_theme, typedValue, true);
-		searchView = new SearchView(new ContextThemeWrapper(getActivity(), typedValue.data));
-		RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
-				LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-		params.setMargins(0, 0, 0, 0);
-		searchView.setLayoutParams(params);
+
+		searchView = inflater.inflate(R.layout.search_text_layout, toolbar, false);
 		toolbar.addView(searchView);
 
-		searchView.setOnCloseListener(new SearchView.OnCloseListener() {
+		searchEditText = (EditText) view.findViewById(R.id.searchEditText);
+		searchEditText.setHint(R.string.search_map_hint);
+		searchEditText.setTextColor(Color.WHITE);
+		boolean isLight = getMyApplication().getSettings().isLightContent();
+		searchEditText.setHintTextColor(isLight ?
+				getMyApplication().getResources().getColor(R.color.inactive_item_orange) : getMyApplication().getResources().getColor(R.color.searchbar_tab_inactive_dark));
+
+		progressBar = (ProgressBar) view.findViewById(R.id.searchProgressBar);
+		clearButton = (ImageButton) view.findViewById(R.id.clearButton);
+		clearButton.setVisibility(View.GONE);
+
+		searchEditText.addTextChangedListener(new TextWatcher() {
 			@Override
-			public boolean onClose() {
-				if (searchView.getQuery().length() == 0) {
+			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+			}
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+			}
+
+			@Override
+			public void afterTextChanged(Editable s) {
+				updateSearchText(s.toString());
+			}
+		});
+
+		clearButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if (searchEditText.getText().length() == 0) {
 					dismiss();
-					return true;
+				} else {
+					searchEditText.setText("");
 				}
-				return false;
-			}
-		});
-		
-		searchView.setOnQueryTextFocusChangeListener(new View.OnFocusChangeListener() {
-			@Override
-			public void onFocusChange(View v, boolean hasFocus) {
 			}
 		});
 
-		searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-			@Override
-			public boolean onQueryTextSubmit(String query) {
-				return false;
-			}
-
-			@Override
-			public boolean onQueryTextChange(String newText) {
-				updateSearchText(newText);
-				return true;
-			}
-		});
+		searchEditText.requestFocus();
 
 		return view;
 	}
@@ -203,9 +214,8 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 	@Override
 	public void onResume() {
 		super.onResume();
-		searchView.setIconified(false);
 		if (!Algorithms.isEmpty(searchText)) {
-			searchView.setQuery(searchText, true);
+			searchEditText.setText(searchText);
 		}
 	}
 
@@ -245,6 +255,24 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 			ItemViewHolder vh = (ItemViewHolder) v.getTag();
 			View.OnClickListener ls = vh.getRightButtonAction(indexItem, vh.getClickAction(indexItem));
 			ls.onClick(v);
+		}
+	}
+
+	private void showProgressBar() {
+		updateClearButtonVisibility(false);
+		progressBar.setVisibility(View.VISIBLE);
+	}
+
+	private void hideProgressBar() {
+		updateClearButtonVisibility(true);
+		progressBar.setVisibility(View.GONE);
+	}
+
+	private void updateClearButtonVisibility(boolean show) {
+		if (show) {
+			clearButton.setVisibility(searchEditText.length() > 0 ? View.VISIBLE : View.GONE);
+		} else {
+			clearButton.setVisibility(View.GONE);
 		}
 	}
 
@@ -523,6 +551,14 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 
 			@Override
 			protected FilterResults performFiltering(CharSequence constraint) {
+
+				getMyApplication().runInUIThread(new Runnable() {
+					@Override
+					public void run() {
+						showProgressBar();
+					}
+				});
+
 				DownloadResources root = ctx.getDownloadThread().getIndexes();
 
 				FilterResults results = new FilterResults();
@@ -593,6 +629,14 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 					results.values = filter;
 					results.count = filter.size();
 				}
+
+				getMyApplication().runInUIThread(new Runnable() {
+					@Override
+					public void run() {
+						hideProgressBar();
+					}
+				});
+
 				return results;
 			}
 
