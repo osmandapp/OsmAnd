@@ -26,7 +26,7 @@
 	<string name="poi_florist">Virágárus</string>
 	<string name="poi_garden_centre">Kertészet</string>
 	<string name="poi_gift">Ajándékbolt</string>
-	<string name="poi_hardware">Vasbolt</string>
+	<string name="poi_hardware">Barkácsbolt</string>
 	<string name="poi_jewelry">Ékszerbolt</string>
 	<string name="poi_motorcycle">Motorkerékpárbolt</string>
 	<string name="poi_sports">Sportbolt</string>
@@ -284,7 +284,7 @@
 	<string name="poi_fabric">Szövetbolt</string>
 	<string name="poi_bedding">Ágyneműbolt</string>
 	<string name="poi_dive">Búvárfelszerelés</string>
-	<string name="poi_doityourself">Barkácsbolt</string>
+	<string name="poi_doityourself">Barkácsáruház</string>
 	<string name="poi_fishing">Horgászfelszerelés</string>
 	<string name="poi_frame">Képkeretbolt</string>
 	<string name="poi_furniture">Bútorbolt</string>
