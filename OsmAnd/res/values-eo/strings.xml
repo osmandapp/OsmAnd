@@ -527,7 +527,8 @@ Vi povas spuri ĉiujn aparatojn de partoprenanta grupo realtempe. Ankaŭ vi pova
     <string name="waypoint_visit_before">Viziti antaŭe</string>
     <string name="simulate_your_location">Simuli vian pozicion</string>
     <string name="drawer">Plata listo</string>
-    <string name="short_location_on_map">Lat %1$s\n Lon %2$s</string>
+    <string name="short_location_on_map">Lat %1$s
+Lon %2$s</string>
     <string name="tips_and_tricks_descr">Oftaj demandoj, lastaj ŝanĝoj, kaj aliaj</string>
     <string name="shared_string_do_not_use">Ne uzi</string>
     <string name="shared_string_selected_lowercase">elektitaj</string>
