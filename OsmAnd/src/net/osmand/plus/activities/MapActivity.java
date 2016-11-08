@@ -778,7 +778,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				}
 				//mapContextMenu.setMapZoom(settings.getMapZoomToShow());
 				mapContextMenu.setMapZoom(tb.getZoom());
-				if (mapLayers.getMapControlsLayer().getMapRouteInfoMenu().isVisible()) {
+				if (MapRouteInfoMenu.isVisible()) {
 					mapContextMenu.showMinimized(latLonToShow, mapLabelToShow, toShow);
 					mapLayers.getMapControlsLayer().getMapRouteInfoMenu().updateMenu();
 					mapView.getAnimatedDraggingThread().startMoving(latLonToShow.getLatitude(),

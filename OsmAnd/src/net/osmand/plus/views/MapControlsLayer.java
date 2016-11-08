@@ -623,7 +623,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 			routePlanningMode = true;
 		}
 		boolean routeFollowingMode = !routePlanningMode && rh.isFollowingMode();
-		boolean dialogOpened = mapRouteInfoMenu.isVisible();
+		boolean dialogOpened = MapRouteInfoMenu.isVisible();
 		boolean showRouteCalculationControls = routePlanningMode ||
 				((app.accessibilityEnabled() || (System.currentTimeMillis() - touchEvent < TIMEOUT_TO_SHOW_BUTTONS)) && routeFollowingMode);
 		updateMyLocation(rh, dialogOpened);

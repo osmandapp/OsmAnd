@@ -816,13 +816,15 @@ public class RouteInfoWidgetsFactory {
 					}
 				} else {
 					int di = MapRouteInfoMenu.getDirectionInfo();
-					if (di >= 0 && MapRouteInfoMenu.isControlVisible()
+					if (di >= 0 && MapRouteInfoMenu.isVisible()
 							&& di < rh.getRouteDirections().size()) {
 						RouteDirectionInfo next = rh.getRouteDirections().get(di);
 						if (next != null) {
 							loclanes = next.getTurnType().getLanes();
 							// primary = next.getTurnType();
 						}
+					} else {
+						loclanes = null;
 					}
 				}
 			}
