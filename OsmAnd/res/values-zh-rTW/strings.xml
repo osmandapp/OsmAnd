@@ -1898,7 +1898,8 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="shared_string_photo">照片</string>
 
     <string name="simulate_your_location">模擬您的位置</string>
-    <string name="short_location_on_map">緯度 %1$s\n 經度 %2$s</string>
+    <string name="short_location_on_map">緯度 %1$s
+經度 %2$s</string>
     <string name="tips_and_tricks_descr">常見的問題，最近的更改以及其它</string>
     <string name="routing_settings_2">導航設定</string>
     <string name="general_settings_2">一般設定</string>
