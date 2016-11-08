@@ -71,7 +71,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 	private boolean selectFromMapForTarget;
 
 	private boolean showMenu = false;
-	private boolean visible;
+	private static boolean visible;
 	private MapActivity mapActivity;
 	private MapControlsLayer mapControlsLayer;
 	public static final String TARGET_SELECT = "TARGET_SELECT";
@@ -510,7 +510,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 		return directionInfo;
 	}
 
-	public boolean isVisible() {
+	public static boolean isVisible() {
 		return visible;
 	}
 

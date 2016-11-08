@@ -562,8 +562,7 @@ public class MapInfoWidgetsFactory {
 					}
 				} else {
 					int di = MapRouteInfoMenu.getDirectionInfo();
-					MapRouteInfoMenu routeInfoMenu = map.getMapLayers().getMapControlsLayer().getMapRouteInfoMenu();
-					if (di >= 0 && routeInfoMenu != null && routeInfoMenu.isVisible() &&
+					if (di >= 0 && MapRouteInfoMenu.isVisible() &&
 							di < routingHelper.getRouteDirections().size()) {
 						showNextTurn = true;
 						RouteDirectionInfo next = routingHelper.getRouteDirections().get(di);

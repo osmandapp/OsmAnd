@@ -69,6 +69,7 @@ import net.osmand.plus.helpers.MapMarkerDialogHelper.MapMarkersDialogHelperCallb
 import net.osmand.plus.helpers.WaypointDialogHelper;
 import net.osmand.plus.helpers.WaypointDialogHelper.WaypointDialogHelperCallbacks;
 import net.osmand.plus.helpers.WaypointHelper.LocationPointWrapper;
+import net.osmand.plus.mapcontextmenu.other.MapRouteInfoMenu;
 import net.osmand.plus.mapcontextmenu.other.RoutePreferencesMenu;
 import net.osmand.plus.mapcontextmenu.other.RoutePreferencesMenu.LocalRoutingParameter;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
@@ -841,7 +842,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 			mapActivity.getMapViewTrackingUtilities().setDashboard(null);
 			hide(dashboardView.findViewById(R.id.animateContent), animation);
 
-			if (!mapActivity.getMapLayers().getMapControlsLayer().getMapRouteInfoMenu().isVisible()) {
+			if (!MapRouteInfoMenu.isVisible()) {
 				AndroidUiHelper.updateVisibility(mapActivity.findViewById(R.id.map_route_land_left_margin_external), false);
 				mapActivity.getMapView().setMapPositionX(0);
 				mapActivity.getMapView().refreshMap();
