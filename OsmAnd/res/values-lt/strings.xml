@@ -230,9 +230,9 @@ Tailinius žemėlapius galimi atsisiųsti iš interneto arba paruošti naudojimu
 
 
     <string name="download_files_not_enough_space">Neužtenka vietos parsiųsti %1$s MB (laisva: %2$s).</string>
-    <string name="download_files_question_space">Tikrai parsiųsti {0} failą(-us)? 
+    <string name="download_files_question_space">Parsiųsti {0} failą(-us)? 
 Tam prireiks {1} MB pastoviam saugojimui. 
-Dabar laisvos vietos yra {2} MB.</string>
+(Dabar laisvos vietos yra {2} MB.)</string>
 
 
     <string name="use_transparent_map_theme">Permatoma tema</string>
@@ -2444,9 +2444,9 @@ Failams reikalinga {3} MB laikinam ir {1} MB pastoviam saugojimui.
 Dalis pajamų grįžta OSM bendruomenei ir apmokamas kiekvienas indėlis į OSM kūrimą. 
 Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     
-    <string name="download_files_question_space_with_temp">Ar siųsti {0} failų
-Failams reikalinga {3} MB laikinam ir {1} MB pastoviam saugojimui.
-Šiuo metu prieinama tik {2} MB vietos.</string>
+    <string name="download_files_question_space_with_temp">Ar siųsti {0} failų?
+ Failams reikalinga {3} MB laikinam ir {1} MB pastoviam saugojimui.
+ (Šiuo metu prieinama tik {2} MB vietos.)</string>
     <string name="lang_es_us">Ispanų (Amerikos)</string>
     <string name="lang_en_gb">Anglų (Junginė Karalystė)</string>
     <string name="lang_be_BY">Belarusų (Lotynų)</string>
@@ -2553,7 +2553,7 @@ Failams reikalinga {3} MB laikinam ir {1} MB pastoviam saugojimui.
     <string name="search_location">Nustatoma vietos padėtis…</string>
     <string name="storage_free_space">Laisva vieta</string>
     <string name="no_update_info">Nerodyti atnaujinimų</string>
-    <string name="edit_filter">Redaguoti filtrą</string>
+    <string name="edit_filter">Redaguoti kategorijas</string>
     <string name="subcategories">Subkategorijos</string>
     <string name="selected_categories">Pasirinktos kategorijos</string>
     <string name="create_custom_poi">Sukurti naudotojo LV</string>
@@ -2567,11 +2567,11 @@ Failams reikalinga {3} MB laikinam ir {1} MB pastoviam saugojimui.
     <string name="osm_live_payment_desc">Prenumeratos mokestis bus nuskaitomas kas mėnesį. Prenumeratą galite nutraukti bet kuriuo metu Google Play programoje.</string>
     <string name="donation_to_osm">Parama OpenStreeMap bendruomenei</string>
     <string name="donation_to_osm_desc">Dalis jūsų paramos bus nusiųsta OSM nariams, kurie teikia OpenStreetMap papildymus. Prenumeratos kaina liks nepakitusi.</string>
-    <string name="osm_live_subscription_desc">Prenumerata įgalins savaitinius, kasdienius ar kas valandinius atnaujinimus ir neribotą parsiuntimų kiekį visiems pasaulio žemėlapiams.</string>
+    <string name="osm_live_subscription_desc">Prenumerata įgalins savaitinius, kasdienius ar kasvalandinius atnaujinimus ir neribotą parsiuntimų kiekį visiems pasaulio žemėlapiams.</string>
     <string name="get_it">Gauti</string>
     <string name="get_for">Gauti už %1$s</string>
     <string name="get_for_month">Gauti už %1$s kas mėnesį</string>
-    <string name="osm_live_banner_desc">Gaukite neribotą kiekį žemėlapių parsiuntimų ir atnaujinimus dažniau nei kas mėnesį: kas valandą, kas dieną ar kas savaitę.</string>
+    <string name="osm_live_banner_desc">Gaukite neribotą kiekį žemėlapių parsiuntimų ir atnaujinimus dažniau nei kas mėnesį: kas savaitę, kas dieną ar kas valandą.</string>
     <string name="osmand_plus_banner_desc">Pilna OsmAnd versija su neribotais žemėlapių parsiuntimais ir kas mėnesį atnaujinamais žemėlapiais.</string>
     <string name="si_mi_meters">Mylios/metrai</string>
     <string name="skip_map_downloading">Praleisti žemėlapių parsiuntimą</string>
@@ -2616,4 +2616,11 @@ Failams reikalinga {3} MB laikinam ir {1} MB pastoviam saugojimui.
     <string name="shared_string_record">Įrašymas</string>
     <string name="rendering_value_light_brown_name">Šviesiai rudas</string>
     <string name="rendering_value_dark_brown_name">Tamsiai rudas</string>
+    <string name="route_calculation">Maršruto apskaičiavimas</string>
+    <string name="gpx_logging_no_data">Nėra duomenų</string>
+    <string name="rendering_attr_contourColorScheme_description">Kontūro linijų spalvų schema</string>
+    <string name="christmas_poi">Kalėdinė LV</string>
+    <string name="christmas_desc_q">Parodyti Kalėdines LV?</string>
+    <string name="rendering_attr_contourColorScheme_name">Kontūro linijų spalvų schema</string>
+    <string name="search_hint">Įrašykite miesto pavadinimą, adresą ar LV</string>
     </resources>
