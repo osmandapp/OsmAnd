@@ -290,6 +290,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 					menu.show(ll, pointDescription, newObject);
 					view.refreshMap();
 				}
+				selectedObjectContextMenuProvider = null;
 				applyingMarkerLatLon = null;
 			}
 
