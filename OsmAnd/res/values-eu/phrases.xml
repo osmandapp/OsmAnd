@@ -2024,4 +2024,31 @@
 	<string name="poi_summer_camp">Udako kanpamentua</string>
 	<string name="poi_recreation_center">Aisialdirako zentroa</string>
 
+	<string name="poi_cuisine_tapas">Pintxoak</string>
+	<string name="poi_cuisine_european">Europearra</string>
+	<string name="poi_cuisine_irish">Irlandarra</string>
+	<string name="poi_cuisine_ethiopian">Etiopiarra</string>
+	<string name="poi_cuisine_hungarian">Hundariarra</string>
+	<string name="poi_cuisine_czech">Txekiarra</string>
+	<string name="poi_cuisine_cuban">Kubatarra</string>
+	<string name="poi_cuisine_latin_american">Hego Ameriketakoa</string>
+	<string name="poi_cuisine_nepalese">Nepaliarra</string>
+	<string name="poi_cuisine_british">Britainiarra</string>
+	<string name="poi_cuisine_mongolian">Mongoliarra</string>
+	<string name="poi_cuisine_ukrainian">Ukrainiarra</string>
+	<string name="poi_cuisine_swiss">Suitzarra</string>
+	<string name="poi_cuisine_swedish">Suediarra</string>
+	<string name="poi_cuisine_jamaican">Jamaikarra</string>
+	<string name="poi_cuisine_english">Ingelesa</string>
+	<string name="poi_cuisine_pakistani">Pakistaniarra</string>
+	<string name="poi_cuisine_armenian">Armeniarra</string>
+	<string name="poi_cuisine_tex_mex">Tex-mex</string>
+	<string name="poi_cuisine_syrian">Siriarra</string>
+	<string name="poi_cuisine_australian">Australiarra</string>
+	<string name="poi_cuisine_egyptian">Egiptoarra</string>
+	<string name="poi_cuisine_senegalese">Senegaldarra</string>
+	<string name="poi_cuisine_jewish">Judutarra</string>
+	<string name="poi_cuisine_bulgarian">Bulgariarra</string>
+	<string name="poi_cuisine_tibetan">Tibetarra</string>
+
 	</resources>
