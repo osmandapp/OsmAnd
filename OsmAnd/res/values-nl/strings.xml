@@ -160,8 +160,8 @@
   
   <string name="download_files_not_enough_space">Er is niet voldoende vrije ruimte %1$s MB te downloaden (vrij: %2$s).</string>
   <string name="download_files_question_space">{0} bestand(en) downloaden? 
-Deze beslaan {1} MB opslagruimte. 
-Er is nu {2} MB beschikbaar.</string>
+Hiervoor is {1} MB nodig.
+Er is nu {2} MB beschikbaar</string>
   
   
   <string name="use_transparent_map_theme">Transparant thema</string>
@@ -1998,7 +1998,8 @@ Het activeren van deze weergave verandert de kaartstijl in \'Winter en ski\', me
     <string name="waypoint_visit_before">Bezoek voor</string>
     <string name="simulate_your_location">Routesimulatie</string>
     <string name="drawer">Eenvoudige lijst</string>
-    <string name="short_location_on_map">Lat %1$s\n Lon %2$s</string>
+    <string name="short_location_on_map">Lengte %1$s
+Breedte %2$s</string>
     <string name="tips_and_tricks_descr">Veelgestelde vragen, recente wijzigingen en meer</string>
     <string name="routing_settings_2">Navigatie-instellingen</string>
     <string name="general_settings_2">Algemene instellingen</string>
@@ -2440,7 +2441,7 @@ Als je OsmAnd en OSM wil ondersteunen, is dit de perfecte manier om dat te doen.
     <string name="upload_anonymously">Anoniem uploaden</string>
     <string name="show_transparency_seekbar">Toon Transparantie-schuif op kaart</string>
     <string name="download_files_error_not_enough_space">Niet genoeg opslagruimte! 
-Tijdelijk is {3} MB nodig en permanent {1} MB. 
+Tijdelijk is {3} MB nodig en permanent {1} MB extra
 Nu is maar {2} MB beschikbaar.</string>
     <string name="download_files_question_space_with_temp">{0} bestanden downloaden? 
 Tijdelijk is {3} MB nodig en permanent {1} MB. 
@@ -2722,4 +2723,7 @@ Als je hulp nodig hebt met OsmAnd: neem contact op met ons support team: support
     <string name="shared_string_notifications">Meldingen</string>
     <string name="route_calculation">Route berekening</string>
     <string name="rendering_value_fine_name">Fijn</string>
+    <string name="search_map_hint">Zoek stad of regio</string>
+    <string name="route_roundabout_short">Neem afslag %1$d</string>
+    <string name="upload_poi">POI Uploaden</string>
     </resources>
