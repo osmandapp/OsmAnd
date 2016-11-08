@@ -51,7 +51,8 @@
     <string name="waypoint_visit_after">Visitar luego</string>
     <string name="waypoint_visit_before">Visitar antes</string>
     <string name="simulate_your_location">Simular tu ubicación</string>
-    <string name="short_location_on_map">Lat %1$s\n Lon %2$s</string>
+    <string name="short_location_on_map">Lat %1$s
+Lon %2$s</string>
     <string name="tips_and_tricks_descr">Preguntas frecuentes, cambios recientes y otros</string>
     <string name="routing_settings_2">Ajustes de navegación</string>
     <string name="general_settings_2">Ajustes generales</string>
@@ -2491,4 +2492,5 @@ Si amas a OsmAnd, OSM y quieres apoyarlos, esta es una perfecta manera de hacerl
     <string name="route_calculation">Cálculo de la ruta</string>
     <string name="upload_poi">Subir PDI</string>
     <string name="route_roundabout_short">Toma la %1$dª salida y continúa</string>
+    <string name="search_map_hint">Buscar ciudad o región</string>
     </resources>
