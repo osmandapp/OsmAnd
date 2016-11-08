@@ -1979,7 +1979,8 @@ Diese Ansicht kann zurückgestellt werden indem Sie hier wieder deaktiviert oder
 	<string name="index_name_netherlands">Europa - Niederlande</string>
 	<string name="shared_string_release">Veröffentlicht</string>
 	<string name="search_poi_category_hint">Suchbegriff</string>
-    <string name="short_location_on_map">Lat %1$s\n Lon %2$s</string>
+    <string name="short_location_on_map">Lat %1$s
+Lon %2$s</string>
     <string name="shared_string_logoff">Abmelden</string>
     <string name="osmo_share_my_location">Übertragen der Position</string>
     <string name="rendering_value_disabled_name">Deaktiviert</string>
