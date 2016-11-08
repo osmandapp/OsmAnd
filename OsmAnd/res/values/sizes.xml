@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<dimen name="dialog_button_height">36dp</dimen>
 	<dimen name="undo_bottom_offset">15dp</dimen>
 	<dimen name="touch_slop">32dp</dimen>
 
