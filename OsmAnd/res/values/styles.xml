@@ -50,6 +50,30 @@
         <item name="android:background">?attr/dashboard_button</item>
     </style>
 
+    <style name="DialogActionButton">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:minHeight">@dimen/dialog_button_height</item>
+        <item name="android:paddingLeft">16dp</item>
+        <item name="android:paddingRight">16dp</item>
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:paddingBottom">8dp</item>
+        <item name="android:textColor">@color/color_white</item>
+        <item name="android:background">@drawable/btn_round_blue</item>
+    </style>
+
+    <style name="DialogCancelButton">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:minHeight">@dimen/dialog_button_height</item>
+        <item name="android:paddingLeft">16dp</item>
+        <item name="android:paddingRight">16dp</item>
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:paddingBottom">8dp</item>
+        <item name="android:textColor">?attr/contextMenuButtonColor</item>
+        <item name="android:background">?attr/selectableItemBackground</item>
+    </style>
+
     <!-- Osmand themes styles -->
     <style name="OsmandLightTheme" parent="Theme.AppCompat.Light">
         <item name="ctx_menu_info_divider">@color/ctx_menu_info_divider_light</item>
