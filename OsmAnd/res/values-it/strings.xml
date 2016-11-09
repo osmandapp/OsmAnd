@@ -56,9 +56,9 @@
 
 
     <string name="download_files_not_enough_space">Non c\'è abbastanza spazio per scaricare %1$s MB (liberi: %2$s).</string>
-    <string name="download_files_question_space">Vuoi veramente scaricare {0} file?
-Servirebbero {1} MB permanentemente.
-Attualmente sono disponibili solo {2} MB.</string>
+    <string name="download_files_question_space">"Scaricare {0} file?
+La memoria utilizzata è  {1} MB.
+(Attualmente sono disponibili {2} MB.)"</string>
 
 
     <string name="use_transparent_map_theme">Tema trasparente</string>
@@ -2441,9 +2441,9 @@ Se hai bisogno di assistenza con l\'app OsmAnd, contatta il nostro team di suppo
     <string name="download_files_error_not_enough_space">Manca spazio!
 Servirebbero {3} MB temporaneamente e {1} MB permanentemente.
 Attualmente sono disponibili solo {2} MB.</string>
-    <string name="download_files_question_space_with_temp">Vuoi veramente scaricare {0} file?
-Servirebbero {3} MB temporaneamente e {1} MB permanentemente.
-Attualmente sono disponibili solo {2} MB.</string>
+    <string name="download_files_question_space_with_temp">Scaricare {0} file?
+ Servirebbero {3} MB temporaneamente e {1} MB permanentemente.
+ Attualmente sono disponibili {2} MB.</string>
     <string name="upload_osm_note_description">Puoi inviare le tue note OSM anonimamente se utilizzi il tuo profilo di OpenStreetMap.org.</string>
     <string name="upload_osm_note">Carica nota OSM</string>
     <string name="donations">Donazioni</string>
@@ -2650,7 +2650,7 @@ Se ami OsmAnd e OSM e vuoi sostenerli, questo è un modo perfetto per farlo.</st
     <string name="new_filter">Nuovo filtro</string>
     <string name="new_filter_desc">Inserisci il nome del nuovo filtro, verrà aggiunto nella tua scheda delle Categorie.</string>
     <string name="christmas_poi">POI di Natale</string>
-    <string name="christmas_desc">Anticipando le vacanze di Natale e Capodanno, è possibile scegliere di visualizzare i PDI associati al Natale: l\'albero di Natale, i mercati.</string>
+    <string name="christmas_desc">Anticipando le vacanze di Natale e Capodanno, è possibile scegliere di visualizzare i PDI associati al Natale: l\'alberi di Natale, i mercati, ecc.</string>
     <string name="christmas_desc_q">Mostrare PDI Natale?</string>
     <string name="rendering_value_light_brown_name">Marrone chiaro</string>
     <string name="rendering_value_dark_brown_name">Marrone scuro</string>
@@ -2705,4 +2705,5 @@ Se ami OsmAnd e OSM e vuoi sostenerli, questo è un modo perfetto per farlo.</st
     <string name="osmo_service_running">Il servizio OsMo è avviato</string>
     <string name="rendering_value_fine_name">Fine</string>
     <string name="upload_poi">Upload PDI</string>
+    <string name="route_roundabout_short">"Prendere la  %1$d uscita e proseguire"</string>
     </resources>
