@@ -2521,4 +2521,5 @@ Si aprecieu OsmAnd  i OSM i voleu ajudar-los, és la via perfecta per fer-ho."</
     <string name="upload_poi">Puja PDI</string>
     <string name="route_roundabout_short">Agafeu la %1$d sortida i continueu</string>
     <string name="search_map_hint">Cerca de ciutat o regió</string>
+    <string name="wiki_around">Articles relacionats a la Viquipèdia</string>
     </resources>
