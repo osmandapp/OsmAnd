@@ -9,7 +9,6 @@ import android.widget.LinearLayout;
 import net.osmand.IndexConstants;
 import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.binary.BinaryMapDataObject;
-import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.Amenity;
@@ -612,7 +611,14 @@ public abstract class MenuController extends BaseMenuController {
 				+ IndexConstants.BINARY_MAP_INDEX_EXT;
 		final String roadsRegionName = Algorithms.capitalizeFirstLetterAndLowercase(downloadName) + ".road"
 				+ IndexConstants.BINARY_MAP_INDEX_EXT;
-		return rm.getIndexFileNames().containsKey(regionName) || rm.getIndexFileNames().containsKey(roadsRegionName);
+		boolean downloaded = rm.getIndexFileNames().containsKey(regionName) || rm.getIndexFileNames().containsKey(roadsRegionName);
+		if (!downloaded) {
+			WorldRegion region = rm.getOsmandRegions().getRegionDataByDownloadName(downloadName);
+			if (region != null && region.getSuperregion() != null && region.getSuperregion().isRegionMapDownload()) {
+				return checkIfObjectDownloaded(rm, region.getSuperregion().getRegionDownloadName());
+			}
+		}
+		return downloaded;
 	}
 
 	public static class ContextMenuToolbarController extends TopToolbarController {
