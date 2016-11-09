@@ -1246,7 +1246,8 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="waypoint_visit_after">زيارة بعد</string>
     <string name="waypoint_visit_before">زيارة قبل</string>
     <string name="simulate_your_location">محاكاة الموقع الخاص بك</string>
-    <string name="short_location_on_map">العرض %1$s\nالطول %2$s</string>
+    <string name="short_location_on_map">خط العرض %1$s
+خط الطول %2$s</string>
     <string name="tips_and_tricks_descr">الأسئلة الشائعة، التغييرات الحديثة، وأخرى</string>
     <string name="routing_settings_2">إعدادات الملاحة</string>
     <string name="general_settings_2">إعدادات عامة</string>
@@ -2637,4 +2638,11 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
 
   و اكثر…
  "</string>
+    <string name="search_map_hint">تنصل:
+          إذا كنت تسير على ترجمة الجمل، يرجى التأكد من:
+          1. لا توجد سلاسل مكررة بالاسم
+          ويسبق 2. كل الفاصلة (الاقتباس) من قبل مائل (انظر غيرها).
+          إذا كنت ترغب بجعل / تصحيح ترجمة الإنجليزية تأكد من:
+          3. كل المعدلة / السلاسل التي تم إنشاؤها هي في الجزء العلوي من ملف (لجعل أسهل تجد ترجمتها \\ \'ق).
+     من فضلك: إلقاء نظرة على http://code.google.com/p/osmand/wiki/UIConsistency، قد حقا تحسين بك وعملنا :-) تشك - هاردي</string>
     </resources>
