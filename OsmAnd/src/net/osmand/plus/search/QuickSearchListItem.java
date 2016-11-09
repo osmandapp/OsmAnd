@@ -266,6 +266,9 @@ public class QuickSearchListItem {
 				((PoiType) abstractPoiType).getOsmTag() + "_" + ((PoiType) abstractPoiType).getOsmValue())) {
 			return ((PoiType) abstractPoiType).getOsmTag() + "_" + ((PoiType) abstractPoiType).getOsmValue();
 		}
+		if (abstractPoiType instanceof PoiType && ((PoiType) abstractPoiType).getParentType() != null) {
+			return getPoiTypeIconName(((PoiType) abstractPoiType).getParentType());
+		}
 		return null;
 	}
 

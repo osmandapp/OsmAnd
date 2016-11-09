@@ -1,20 +1,7 @@
 package net.osmand.search.core;
 
-import gnu.trove.list.array.TIntArrayList;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.TreeMap;
-import java.util.TreeSet;
+import com.jwetherell.openmap.common.LatLonPoint;
+import com.jwetherell.openmap.common.UTMPoint;
 
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.ResultMatcher;
@@ -44,8 +31,20 @@ import net.osmand.util.GeoPointParserUtil;
 import net.osmand.util.GeoPointParserUtil.GeoParsedPoint;
 import net.osmand.util.MapUtils;
 
-import com.jwetherell.openmap.common.LatLonPoint;
-import com.jwetherell.openmap.common.UTMPoint;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.TreeMap;
+
+import gnu.trove.list.array.TIntArrayList;
 
 
 public class SearchCoreFactory {
@@ -533,35 +532,43 @@ public class SearchCoreFactory {
 				categories = types.getCategories(false);
 			}
 //			results.clear();
-			TreeMap<String, AbstractPoiType> results = new TreeMap<String, AbstractPoiType>() ;
+			List<AbstractPoiType> results = new ArrayList<AbstractPoiType>() ;
 			NameStringMatcher nm = phrase.getNameStringMatcher();
 			for (PoiFilter pf : topVisibleFilters) {
 				if (!phrase.isUnknownSearchWordPresent() || nm.matches(pf.getTranslation())) {
-					results.put(pf.getTranslation(), pf);
+					results.add(pf);
 				}
 			}
 			if (phrase.isUnknownSearchWordPresent()) {
 				for (PoiCategory c : categories) {
-					if (!phrase.isUnknownSearchWordPresent() || nm.matches(c.getTranslation())) {
-						results.put(c.getTranslation(), c);
+					if (!results.contains(c) && nm.matches(c.getTranslation())) {
+						results.add(c);
 					}
 				}
 				Iterator<Entry<String, PoiType>> it = translatedNames.entrySet().iterator();
 				while (it.hasNext()) {
 					Entry<String, PoiType> e = it.next();
-					if (e.getValue().getCategory() != types.getOtherMapCategory()
-							&& (nm.matches(e.getKey()) || nm.matches(e.getValue().getTranslation()))) {
-						results.put(e.getValue().getTranslation(), e.getValue());
+					PoiType pt = e.getValue();
+					if (pt.getCategory() != types.getOtherMapCategory()) {
+						if (!results.contains(pt) && (nm.matches(e.getKey()) || nm.matches(pt.getTranslation()))) {
+							results.add(pt);
+						}
+						List<PoiType> additionals = pt.getPoiAdditionals();
+						if (additionals != null) {
+							for (PoiType a : additionals) {
+								if (!a.isReference() && !results.contains(a) && (nm.matches(a.getKeyName()) || nm.matches(a.getTranslation()))) {
+									results.add(a);
+								}
+							}
+						}
 					}
 				}
 			}
-			Iterator<Entry<String, AbstractPoiType>> it = results.entrySet().iterator();
-			while(it.hasNext()) {
-				Entry<String, AbstractPoiType> p = it.next();
+			for (AbstractPoiType pt : results) {
 				SearchResult res = new SearchResult(phrase);
-				res.localeName = p.getKey();
-				res.object = p.getValue();
-				res.priority = SEARCH_AMENITY_TYPE_PRIORITY;
+				res.localeName = pt.getTranslation();
+				res.object = pt;
+				res.priority = SEARCH_AMENITY_TYPE_PRIORITY + (pt instanceof PoiCategory ? 0.0 : 0.1);
 				res.priorityDistance = 0;
 				res.objectType = ObjectType.POI_TYPE;
 				resultMatcher.publish(res);

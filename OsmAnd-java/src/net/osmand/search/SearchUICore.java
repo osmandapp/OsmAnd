@@ -7,6 +7,7 @@ import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
+import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.search.core.CustomSearchPoiFilter;
 import net.osmand.search.core.ObjectType;
@@ -220,6 +221,8 @@ public class SearchUICore {
 					}
 					return MapUtils.getDistance(r1.location, r2.location) < similarityRadius;
 				}
+			} else if (r1.object != null && r2.object != null) {
+				return r1.object == r2.object;
 			}
 			return false;
 		}
