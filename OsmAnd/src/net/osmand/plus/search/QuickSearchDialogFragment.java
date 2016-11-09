@@ -36,6 +36,7 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import net.osmand.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.ResultMatcher;
@@ -43,6 +44,7 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.PoiCategory;
+import net.osmand.osm.PoiType;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.GPXUtilities;
@@ -611,16 +613,16 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	}
 
 	public void show() {
-		paused = false;
 		if (useMapCenter) {
 			LatLon mapCenter = getMapActivity().getMapView().getCurrentRotatedTileBox().getCenterLatLon();
 			SearchSettings ss = searchUICore.getSearchSettings().setOriginalLocation(
 					new LatLon(mapCenter.getLatitude(), mapCenter.getLongitude()));
 			searchUICore.updateSettings(ss);
 			updateUseMapCenterUI();
-			forceUpdateLocationUI(mapCenter, null);
+			updateLocationUI(mapCenter, null);
 		}
 		getDialog().show();
+		paused = false;
 		hidden = false;
 		if (interruptedSearch) {
 			interruptedSearch = false;
@@ -1142,6 +1144,26 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	}
 
 	public void completeQueryWithObject(SearchResult sr) {
+		if (sr.object instanceof PoiType && ((PoiType) sr.object).isAdditional()) {
+			PoiType additional = (PoiType) sr.object;
+			AbstractPoiType parent = additional.getParentType();
+			if (parent != null) {
+				PoiUIFilter custom = app.getPoiFilters().getFilterById(PoiUIFilter.STD_PREFIX + parent.getKeyName());
+				if (custom != null) {
+					custom.clearFilter();
+					custom.updateTypesToAccept(parent);
+					custom.setFilterByName(additional.getKeyName().replace('_', ':').toLowerCase());
+
+					SearchPhrase phrase = searchUICore.getPhrase();
+					sr = new SearchResult(phrase);
+					sr.localeName = custom.getName();
+					sr.object = custom;
+					sr.priority = SEARCH_AMENITY_TYPE_PRIORITY;
+					sr.priorityDistance = 0;
+					sr.objectType = ObjectType.POI_TYPE;
+				}
+			}
+		}
 		searchUICore.selectSearchResult(sr);
 		String txt = searchUICore.getPhrase().getText(true);
 		searchQuery = txt;
@@ -1321,20 +1343,6 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			} else if (historySearchFragment != null && viewPager.getCurrentItem() == 0) {
 				historySearchFragment.updateLocation(latLon, heading);
 			} else if (categoriesSearchFragment != null && viewPager.getCurrentItem() == 1) {
-				categoriesSearchFragment.updateLocation(latLon, heading);
-			}
-		}
-	}
-
-	private void forceUpdateLocationUI(LatLon latLon, Float heading) {
-		if (latLon != null) {
-			if (mainSearchFragment != null) {
-				mainSearchFragment.updateLocation(latLon, heading);
-			}
-			if (historySearchFragment != null) {
-				historySearchFragment.updateLocation(latLon, heading);
-			}
-			if (categoriesSearchFragment != null) {
 				categoriesSearchFragment.updateLocation(latLon, heading);
 			}
 		}
