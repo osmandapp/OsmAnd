@@ -611,16 +611,16 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	}
 
 	public void show() {
+		paused = false;
 		if (useMapCenter) {
 			LatLon mapCenter = getMapActivity().getMapView().getCurrentRotatedTileBox().getCenterLatLon();
 			SearchSettings ss = searchUICore.getSearchSettings().setOriginalLocation(
 					new LatLon(mapCenter.getLatitude(), mapCenter.getLongitude()));
 			searchUICore.updateSettings(ss);
 			updateUseMapCenterUI();
-			updateLocationUI(mapCenter, null);
+			forceUpdateLocationUI(mapCenter, null);
 		}
 		getDialog().show();
-		paused = false;
 		hidden = false;
 		if (interruptedSearch) {
 			interruptedSearch = false;
@@ -992,7 +992,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 	private void runSearch(String text) {
 		showProgressBar();
-		SearchSettings settings = searchUICore.getSearchSettings();
+		SearchSettings settings = searchUICore.getPhrase().getSettings();
 		if (settings.getRadiusLevel() != 1) {
 			searchUICore.updateSettings(settings.setRadiusLevel(1));
 		}
@@ -1321,6 +1321,20 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			} else if (historySearchFragment != null && viewPager.getCurrentItem() == 0) {
 				historySearchFragment.updateLocation(latLon, heading);
 			} else if (categoriesSearchFragment != null && viewPager.getCurrentItem() == 1) {
+				categoriesSearchFragment.updateLocation(latLon, heading);
+			}
+		}
+	}
+
+	private void forceUpdateLocationUI(LatLon latLon, Float heading) {
+		if (latLon != null) {
+			if (mainSearchFragment != null) {
+				mainSearchFragment.updateLocation(latLon, heading);
+			}
+			if (historySearchFragment != null) {
+				historySearchFragment.updateLocation(latLon, heading);
+			}
+			if (categoriesSearchFragment != null) {
 				categoriesSearchFragment.updateLocation(latLon, heading);
 			}
 		}
