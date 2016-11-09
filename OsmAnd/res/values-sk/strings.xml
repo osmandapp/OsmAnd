@@ -2499,4 +2499,5 @@ Ak potrebuje pomoc s aplikáciou OsmAnd, kontaktuje podporu: support@osmand.net.
     <string name="route_calculation">Výpočet trasy</string>
     <string name="route_roundabout_short">Použite výjazd %1$d a pokračujte</string>
     <string name="upload_poi">Odoslať POI</string>
+    <string name="search_map_hint">Hľadať mesto alebo región</string>
     </resources>
