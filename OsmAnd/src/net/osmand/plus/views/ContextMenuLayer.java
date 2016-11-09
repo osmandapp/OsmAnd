@@ -464,6 +464,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 		} else if (showUnknownLocation) {
 			hideVisibleMenues();
+			selectedObjectContextMenuProvider = null;
 			LatLon latLon = getLatLon(point, tileBox);
 			activity.getMapViewTrackingUtilities().setMapLinkedToLocation(false);
 			menu.show(latLon, null, null);
