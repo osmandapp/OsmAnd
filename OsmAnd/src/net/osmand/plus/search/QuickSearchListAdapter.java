@@ -405,6 +405,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 	private void updateDistanceDirection(View view, QuickSearchListItem listItem) {
 		TextView distanceText = (TextView) view.findViewById(R.id.distance);
 		ImageView direction = (ImageView) view.findViewById(R.id.direction);
+		/*
 		SearchPhrase phrase = listItem.getSearchResult().requiredSearchPhrase;
 		LatLon loc = location;
 		if(phrase != null && useMapCenter) {
@@ -413,7 +414,8 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 				loc = ol;
 			}
 		}
-		DashLocationFragment.updateLocationView(useMapCenter, loc,
+		*/
+		DashLocationFragment.updateLocationView(useMapCenter, location,
 				heading, direction, distanceText,
 				listItem.getSearchResult().location.getLatitude(),
 				listItem.getSearchResult().location.getLongitude(),
