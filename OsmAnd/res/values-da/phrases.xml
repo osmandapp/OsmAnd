@@ -3412,4 +3412,5 @@
 
 <string name="poi_free_flying_characteristic">Karakteristisk</string>
 
-</resources>
+<string name="poi_emergency_infrastructure">Nødsituation infrastruktur</string>
+	</resources>
