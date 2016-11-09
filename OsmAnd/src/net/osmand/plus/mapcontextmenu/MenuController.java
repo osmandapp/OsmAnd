@@ -204,7 +204,7 @@ public abstract class MenuController extends BaseMenuController {
 
 	protected void addMyLocationToPlainItems(LatLon latLon) {
 		addPlainMenuItem(R.drawable.ic_action_get_my_location, PointDescription.getLocationName(getMapActivity(),
-				latLon.getLatitude(), latLon.getLongitude(), true).replaceAll("\n", ""), false, false, null);
+				latLon.getLatitude(), latLon.getLongitude(), true).replaceAll("\n", " "), false, false, null);
 	}
 
 	public PointDescription getPointDescription() {

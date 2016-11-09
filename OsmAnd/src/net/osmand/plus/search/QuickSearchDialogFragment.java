@@ -992,7 +992,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 	private void runSearch(String text) {
 		showProgressBar();
-		SearchSettings settings = searchUICore.getPhrase().getSettings();
+		SearchSettings settings = searchUICore.getSearchSettings();
 		if (settings.getRadiusLevel() != 1) {
 			searchUICore.updateSettings(settings.setRadiusLevel(1));
 		}

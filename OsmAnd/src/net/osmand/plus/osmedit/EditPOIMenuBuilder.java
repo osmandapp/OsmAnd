@@ -73,6 +73,6 @@ public class EditPOIMenuBuilder extends MenuBuilder {
 
 		buildRow(view, R.drawable.ic_action_get_my_location, PointDescription.getLocationName(app,
 				osmPoint.getLatitude(), osmPoint.getLongitude(), true)
-				.replaceAll("\n", ""), 0, false, 0, false, null);
+				.replaceAll("\n", " "), 0, false, 0, false, null);
 	}
 }
