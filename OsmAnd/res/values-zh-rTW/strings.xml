@@ -2668,4 +2668,5 @@ Facebook：https://www.facebook.com/osmandapp
     <string name="upload_poi">上傳 POI</string>
     <string name="route_roundabout_short">利用 %1$d 退出並離開</string>
     <string name="search_map_hint">查詢城市或地區</string>
+    <string name="wiki_around">在整個維基百科文章</string>
     </resources>
