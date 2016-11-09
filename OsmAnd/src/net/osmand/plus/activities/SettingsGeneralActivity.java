@@ -209,6 +209,7 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 				"ko",
 				"lt",
 				"lv",
+				"ml",
 				"mr",
 				"nb",
 				"nl",
