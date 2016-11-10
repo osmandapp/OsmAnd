@@ -1898,7 +1898,8 @@ Memòria in proportzione %4$s MB (lìmite de Android %5$s MB, Dalvik %6$s MB).</
     <string name="waypoint_visit_before">Vìsita in antis</string>
     <string name="simulate_your_location">Dispinta/Sìmula sa positzione tua</string>
     <string name="drawer">Lista ebbia</string>
-    <string name="short_location_on_map">Lat %1$s\n Lon %2$s</string>
+    <string name="short_location_on_map">Lat %1$s
+Lon %2$s</string>
     <string name="tips_and_tricks_descr">Dimandas fitianas, ùrtimas modìficas e àteru</string>
     <string name="routing_settings_2">Impostatziones de nàvigu</string>
     <string name="general_settings_2">Impostatziones generales</string>
@@ -2645,4 +2646,5 @@ Si istimas OsmAnd e OSM e los boles suportare, custa est una manera perfeta pro 
     <string name="upload_poi">Càrriga PDI</string>
     <string name="route_roundabout_short">Piga sa %1$d essida e sighi</string>
     <string name="search_map_hint">Chirca una tzitade o una regione</string>
+    <string name="wiki_around">Artìculos de Wikipedia a curtzu</string>
     </resources>
