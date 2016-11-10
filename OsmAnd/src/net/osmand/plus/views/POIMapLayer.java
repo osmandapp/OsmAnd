@@ -352,7 +352,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 		MenuItem mi = topBar.getMenu().add(langSelected.toUpperCase()).setOnMenuItemClickListener(new OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(final MenuItem item) {
-				showPopupLangMenu(ctx, topBar, app, a, dialog);
+				showPopupLangMenu(ctx, topBar, app, a, dialog, langSelected);
 				return true;
 			}
 		});
@@ -449,7 +449,8 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 	}
 
 	protected static void showPopupLangMenu(final Context ctx, Toolbar tb,
-											final OsmandApplication app, final Amenity a, final Dialog dialog) {
+											final OsmandApplication app, final Amenity a,
+											final Dialog dialog, final String langSelected) {
 		final PopupMenu optionsMenu = new PopupMenu(ctx, tb, Gravity.RIGHT);
 		Set<String> namesSet = new TreeSet<>();
 		namesSet.addAll(a.getNames("content", "en"));
@@ -459,8 +460,23 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 		for (String n : namesSet) {
 			names.put(n, FileNameTranslationHelper.getVoiceName(ctx, n));
 		}
+		String selectedLangName = names.get(langSelected);
+		if (selectedLangName != null) {
+			names.remove(langSelected);
+		}
 		Map<String, String> sortedNames = AndroidUtils.sortByValue(names);
 
+		if (selectedLangName != null) {
+			MenuItem item = optionsMenu.getMenu().add(selectedLangName);
+			item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+				@Override
+				public boolean onMenuItemClick(MenuItem item) {
+					dialog.dismiss();
+					showWiki(ctx, app, a, langSelected);
+					return true;
+				}
+			});
+		}
 		for (final Map.Entry<String, String> e : sortedNames.entrySet()) {
 			MenuItem item = optionsMenu.getMenu().add(e.getValue());
 			item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
