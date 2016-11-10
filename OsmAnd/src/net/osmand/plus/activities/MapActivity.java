@@ -781,8 +781,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				if (MapRouteInfoMenu.isVisible()) {
 					mapContextMenu.showMinimized(latLonToShow, mapLabelToShow, toShow);
 					mapLayers.getMapControlsLayer().getMapRouteInfoMenu().updateMenu();
-					mapView.getAnimatedDraggingThread().startMoving(latLonToShow.getLatitude(),
-							latLonToShow.getLongitude(), settings.getMapZoomToShow(), true);
+					MapRouteInfoMenu.showLocationOnMap(this, latLonToShow.getLatitude(), latLonToShow.getLongitude());
 				} else {
 					mapContextMenu.show(latLonToShow, mapLabelToShow, toShow);
 				}
@@ -1381,6 +1380,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			OsmandPlugin.onMapActivityScreenOff(MapActivity.this);
 		}
 
+	}
+
+	public boolean isLandscapeLayout() {
+		return landscapeLayout;
 	}
 
 	@Override

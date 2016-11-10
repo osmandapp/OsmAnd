@@ -20,6 +20,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
+import net.osmand.Location;
 import net.osmand.ValueHolder;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
@@ -547,8 +548,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 							RouteDirectionInfo info = routingHelper.getRouteDirections().get(directionInfo);
 							net.osmand.Location l = routingHelper.getLocationFromRouteDirection(info);
 							contextMenu.showMinimized(new LatLon(l.getLatitude(), l.getLongitude()), null, info);
-							mapView.getAnimatedDraggingThread().startMoving(l.getLatitude(), l.getLongitude(),
-									mapView.getZoom(), true);
+							showLocationOnMap(mapActivity, l.getLatitude(), l.getLongitude());
 						}
 					}
 					mapView.refreshMap();
@@ -570,7 +570,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 					RouteDirectionInfo info = routingHelper.getRouteDirections().get(directionInfo);
 					net.osmand.Location l = routingHelper.getLocationFromRouteDirection(info);
 					contextMenu.showMinimized(new LatLon(l.getLatitude(), l.getLongitude()), null, info);
-					mapView.getAnimatedDraggingThread().startMoving(l.getLatitude(), l.getLongitude(), mapView.getZoom(), true);
+					showLocationOnMap(mapActivity, l.getLatitude(), l.getLongitude());
 				}
 				mapView.refreshMap();
 				updateInfo(mainView);
@@ -621,6 +621,25 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 			distanceText.setText(OsmAndFormatter.getFormattedDistance(ctx.getRoutingHelper().getLeftDistance(), ctx));
 			durationText.setText(OsmAndFormatter.getFormattedDuration(ctx.getRoutingHelper().getLeftTime(), ctx));
 		}
+	}
+
+	public static void showLocationOnMap(MapActivity mapActivity, double latitude, double longitude) {
+		RotatedTileBox tb = mapActivity.getMapView().getCurrentRotatedTileBox().copy();
+		int tileBoxWidthPx = 0;
+		int tileBoxHeightPx = 0;
+
+		MapRouteInfoMenu routeInfoMenu = mapActivity.getMapLayers().getMapControlsLayer().getMapRouteInfoMenu();
+		WeakReference<MapRouteInfoMenuFragment> fragmentRef = routeInfoMenu.findMenuFragment();
+		if (fragmentRef != null) {
+			MapRouteInfoMenuFragment f = fragmentRef.get();
+			if (mapActivity.isLandscapeLayout()) {
+				tileBoxWidthPx = tb.getPixWidth() - f.getWidth();
+			} else {
+				tileBoxHeightPx = tb.getPixHeight() - f.getHeight();
+			}
+		}
+		mapActivity.getMapView().fitLocationToMap(latitude, longitude, mapActivity.getMapView().getZoom(),
+				tileBoxWidthPx, tileBoxHeightPx, AndroidUtils.dpToPx(mapActivity, 40f));
 	}
 
 	@Override
