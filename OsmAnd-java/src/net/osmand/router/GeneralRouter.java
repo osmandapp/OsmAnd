@@ -574,6 +574,7 @@ public class GeneralRouter implements VehicleRouter {
 	public class RouteAttributeExpression {
 		public static final int LESS_EXPRESSION = 1;
 		public static final int GREAT_EXPRESSION = 2;
+		public static final int EQUAL_EXPRESSION = 3;
 		
 		public RouteAttributeExpression(String[] vs, String valueType, int expressionId) {
 			this.expressionType = expressionId;
@@ -609,6 +610,8 @@ public class GeneralRouter implements VehicleRouter {
 				return f1 <= f2;
 			} else if (expressionType == GREAT_EXPRESSION) {
 				return f1 >= f2;
+			} else if (expressionType == EQUAL_EXPRESSION) {
+				return f1 == f2;
 			}
 			return false;
 		}
@@ -760,6 +763,11 @@ public class GeneralRouter implements VehicleRouter {
 		public void registerGreatCondition(String value1, String value2, String valueType) {
 			expressions.add(new RouteAttributeExpression(new String[] { value1, value2 }, valueType,
 					RouteAttributeExpression.GREAT_EXPRESSION));
+		}
+		
+		public void registerEqualCondition(String value1, String value2, String valueType) {
+			expressions.add(new RouteAttributeExpression(new String[] { value1, value2 }, valueType,
+					RouteAttributeExpression.EQUAL_EXPRESSION));
 		}
 		
 		public void registerAndParamCondition(String param, boolean not) {

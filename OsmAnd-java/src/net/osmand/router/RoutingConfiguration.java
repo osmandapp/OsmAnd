@@ -283,7 +283,7 @@ public class RoutingConfiguration {
 
 	private static boolean checkTag(String pname) {
 		return "select".equals(pname) || "if".equals(pname) || "ifnot".equals(pname)
-				|| "gt".equals(pname) || "le".equals(pname);
+				|| "gt".equals(pname) || "le".equals(pname) || "eq".equals(pname);
 	}
 
 	private static void addSubclause(RoutingRule rr, RouteAttributeContext ctx) {
@@ -298,6 +298,8 @@ public class RoutingConfiguration {
 			ctx.getLastRule().registerGreatCondition(rr.value1, rr.value2, rr.type);
 		} else if (rr.tagName.equals("le")) {
 			ctx.getLastRule().registerLessCondition(rr.value1, rr.value2, rr.type);
+		} else if (rr.tagName.equals("eq")) {
+			ctx.getLastRule().registerEqualCondition(rr.value1, rr.value2, rr.type);
 		}
 	}
 
