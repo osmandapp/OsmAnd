@@ -2691,4 +2691,5 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="gpx_no_tracks_title_folder">Вы таксама можаце дадаць сьляды ў каталёг</string>
     <string name="route_roundabout_short">Збочце на %1$d зьезьдзе</string>
     <string name="upload_poi">Выгрузіць POI</string>
+    <string name="search_map_hint">Пошук горада ці краіны</string>
     </resources>
