@@ -1490,4 +1490,8 @@
 <string name="poi_fuel_type">Type</string>
 	<string name="poi_payment_type">Betaaltype</string>
 	<string name="poi_additional_type">Bijkomstig</string>
-</resources>
+<string name="poi_solarium_yes">Solarium</string>
+
+	<string name="poi_tanning_salon">Zonnestudio</string>
+
+	</resources>
