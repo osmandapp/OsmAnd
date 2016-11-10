@@ -800,7 +800,7 @@ Tegelkaarten zijn direct via online bronnen verkrijgbaar of kunnen voor offline 
   
   <string name="asap">z.s.m.</string>
   
-  <string name="route_roundabout">Rotonde: neem afslag %1$d en volg</string>
+  <string name="route_roundabout">"Rotonde: neem de %1$de afslag  en volg"</string>
   <string name="route_kl">Links aanhouden en volg</string>
   <string name="route_kr">Rechts aanhouden en volg</string>
   <string name="rendering_attr_noPolygons_description">Maak alle oppervlaktes op de kaart transparant</string>
@@ -1998,8 +1998,8 @@ Het activeren van deze weergave verandert de kaartstijl in \'Winter en ski\', me
     <string name="waypoint_visit_before">Bezoek voor</string>
     <string name="simulate_your_location">Routesimulatie</string>
     <string name="drawer">Eenvoudige lijst</string>
-    <string name="short_location_on_map">Breedtegr. %1$s
-Lengtegr. %2$s</string>
+    <string name="short_location_on_map">Breedtegraad: %1$s
+Lengtegraad: %2$s</string>
     <string name="tips_and_tricks_descr">Veelgestelde vragen, recente wijzigingen en meer</string>
     <string name="routing_settings_2">Navigatie-instellingen</string>
     <string name="general_settings_2">Algemene instellingen</string>
@@ -2724,6 +2724,6 @@ Als je hulp nodig hebt met OsmAnd: neem contact op met ons support team: support
     <string name="route_calculation">Route berekening</string>
     <string name="rendering_value_fine_name">Fijn</string>
     <string name="search_map_hint">Zoek stad of regio</string>
-    <string name="route_roundabout_short">Neem afslag %1$d</string>
+    <string name="route_roundabout_short">Neem de %1$de afslag</string>
     <string name="upload_poi">POI Uploaden</string>
     </resources>
