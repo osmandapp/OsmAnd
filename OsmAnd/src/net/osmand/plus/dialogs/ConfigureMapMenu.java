@@ -1066,8 +1066,13 @@ public class ConfigureMapMenu {
 					final Spinner spinner = (Spinner) spinnerView.findViewById(R.id.spinner);
 					TextView description = (TextView) spinnerView.findViewById(R.id.description);
 
-					title.setText(p.getName());
-					description.setText(p.getDescription());
+					String propertyName = SettingsActivity.getStringPropertyName(activity, p.getAttrName(),
+							p.getName());
+					String propertyDescr = SettingsActivity.getStringPropertyDescription(activity,
+							p.getAttrName(), p.getName());
+
+					title.setText(propertyName);
+					description.setText(propertyDescr);
 
 					int i = Arrays.asList(p.getPossibleValues()).indexOf(pref.get());
 					if (i >= 0) {
