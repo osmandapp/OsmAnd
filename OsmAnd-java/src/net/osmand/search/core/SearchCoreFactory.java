@@ -568,7 +568,7 @@ public class SearchCoreFactory {
 				SearchResult res = new SearchResult(phrase);
 				res.localeName = pt.getTranslation();
 				res.object = pt;
-				res.priority = SEARCH_AMENITY_TYPE_PRIORITY + (pt instanceof PoiCategory ? 0.0 : 0.1);
+				res.priority = SEARCH_AMENITY_TYPE_PRIORITY;
 				res.priorityDistance = 0;
 				res.objectType = ObjectType.POI_TYPE;
 				resultMatcher.publish(res);
