@@ -20,10 +20,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
+import net.osmand.data.MapObject.MapObjectComparator;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.osm.AbstractPoiType;
@@ -514,7 +514,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 
 		if (nearestWiki.size() > 0) {
 			AmenityInfoRow wikiInfo = new AmenityInfoRow(
-					"nearest_wiki", R.drawable.ic_action_wikipedia, null, app.getString(R.string.wiki_around) + " - " + nearestWiki.size(), true,
+					"nearest_wiki", R.drawable.ic_action_wikipedia, null, app.getString(R.string.wiki_around) + " (" + nearestWiki.size()+")", true,
 					getCollapsableWikiView(view.getContext(), true),
 					0, false, false, false, 1000, null, false, false);
 			buildAmenityRow(view, wikiInfo);
@@ -537,7 +537,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 
 	private void processNearstWiki() {
 		QuadRect rect = MapUtils.calculateLatLonBbox(
-				amenity.getLocation().getLatitude(), amenity.getLocation().getLongitude(), 100);
+				amenity.getLocation().getLatitude(), amenity.getLocation().getLongitude(), 250);
 		nearestWiki = app.getResourceManager().searchAmenities(
 				new BinaryMapIndexReader.SearchPoiTypeFilter() {
 					@Override
@@ -550,6 +550,15 @@ public class AmenityMenuBuilder extends MenuBuilder {
 						return false;
 					}
 				}, rect.top, rect.left, rect.bottom, rect.right, -1, null);
+		Collections.sort(nearestWiki, new Comparator<Amenity>() {
+
+			@Override
+			public int compare(Amenity o1, Amenity o2) {
+				double d1 = MapUtils.getDistance(amenity.getLocation(), o1.getLocation());
+				double d2 = MapUtils.getDistance(amenity.getLocation(), o2.getLocation());
+				return Double.compare(d1, d2);
+			}
+		});
 		for (Amenity wiki : nearestWiki) {
 			if (wiki.getId().equals(amenity.getId())) {
 				nearestWiki.remove(wiki);

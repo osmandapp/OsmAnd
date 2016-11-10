@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "521675454867",
+    "firebase_url": "https://osmand-1e236.firebaseio.com",
+    "project_id": "osmand-1e236",
+    "storage_bucket": "osmand-1e236.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:521675454867:android:be0477f14dc015f4",
+        "android_client_info": {
+          "package_name": "net.osmand"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "521675454867-ttjur3617a74qj0a9rkbkbcjavvuebjp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBMaRMiPY-mS3J_-aX30sRBFB-WGIm-M-U"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -352,6 +352,8 @@ repositories {
 
 dependencies {
 	compile project(path: ':OsmAnd-java', configuration: 'android')
+	
+	
 	// compile project(':eclipse-compile:design')
 	// compile project(':eclipse-compile:cardview')
 	// compile project(':eclipse-compile:gridlayout')
@@ -365,4 +367,9 @@ dependencies {
 	qtcoredebugCompile "net.osmand:OsmAndCore_android:0.1-SNAPSHOT@aar"
 	qtcoreCompile "net.osmand:OsmAndCore_androidNativeRelease:0.1-SNAPSHOT@aar"
 	qtcoreCompile "net.osmand:OsmAndCore_android:0.1-SNAPSHOT@aar"
+}
+if(System.getenv("APP_FEATURES") && System.getenv("APP_FEATURES").contains("+play_market") && 
+	System.getenv("PACKAGE_TO_BUILT").equals("net.osmand")) {
+	println "Apply GMS plugin"
+	apply plugin: 'com.google.gms.google-services'
 }
