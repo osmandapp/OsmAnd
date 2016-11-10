@@ -798,6 +798,29 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		animatedDraggingThread.startMoving(clat, clon, tb.getZoom(), true);
 	}
 
+	public void fitLocationToMap(double clat, double clon, int zoom,
+							 int tileBoxWidthPx, int tileBoxHeightPx, int marginTopPx) {
+		RotatedTileBox tb = currentViewport.copy();
+		int dy = 0;
+
+		int tbw = tb.getPixWidth();
+		int tbh = tb.getPixHeight();
+		if (tileBoxWidthPx > 0) {
+			tbw = tileBoxWidthPx;
+		} else if (tileBoxHeightPx > 0) {
+			tbh = tileBoxHeightPx;
+			dy = (tb.getPixHeight() - tileBoxHeightPx) / 2 - marginTopPx;
+		}
+		tb.setPixelDimensions(tbw, tbh);
+		tb.setLatLonCenter(clat, clon);
+		tb.setZoom(zoom);
+		if (dy != 0) {
+			clat = tb.getLatFromPixel(tb.getPixWidth() / 2, tb.getPixHeight() / 2 + dy);
+			clon = tb.getLonFromPixel(tb.getPixWidth() / 2, tb.getPixHeight() / 2);
+		}
+		animatedDraggingThread.startMoving(clat, clon, tb.getZoom(), true);
+	}
+
 	public boolean onGenericMotionEvent(MotionEvent event) {
 		if ((event.getSource() & InputDevice.SOURCE_CLASS_POINTER) != 0 &&
 				event.getAction() == MotionEvent.ACTION_SCROLL &&
