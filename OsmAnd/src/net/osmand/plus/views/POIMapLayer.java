@@ -33,6 +33,8 @@ import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.ScrollView;
 import android.widget.TextView;
+
+import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.ValueHolder;
@@ -43,16 +45,12 @@ import net.osmand.data.QuadRect;
 import net.osmand.data.QuadTree;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.osm.PoiType;
-import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
-import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.render.RenderingIcons;
-import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RoutingHelper.IRouteInformationListener;
 import net.osmand.plus.views.MapTextLayer.MapTextProvider;
@@ -61,7 +59,9 @@ import net.osmand.util.Algorithms;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -451,18 +451,23 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 	protected static void showPopupLangMenu(final Context ctx, Toolbar tb,
 											final OsmandApplication app, final Amenity a, final Dialog dialog) {
 		final PopupMenu optionsMenu = new PopupMenu(ctx, tb, Gravity.RIGHT);
-		Set<String> names = new TreeSet<>();
-		names.addAll(a.getNames("content", "en"));
-		names.addAll(a.getNames("description", "en"));
+		Set<String> namesSet = new TreeSet<>();
+		namesSet.addAll(a.getNames("content", "en"));
+		namesSet.addAll(a.getNames("description", "en"));
 
-		for (final String n : names) {
-			String vn = FileNameTranslationHelper.getVoiceName(ctx, n);
-			MenuItem item = optionsMenu.getMenu().add(vn);
+		Map<String, String> names = new HashMap<>();
+		for (String n : namesSet) {
+			names.put(n, FileNameTranslationHelper.getVoiceName(ctx, n));
+		}
+		Map<String, String> sortedNames = AndroidUtils.sortByValue(names);
+
+		for (final Map.Entry<String, String> e : sortedNames.entrySet()) {
+			MenuItem item = optionsMenu.getMenu().add(e.getValue());
 			item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 				@Override
 				public boolean onMenuItemClick(MenuItem item) {
 					dialog.dismiss();
-					showWiki(ctx, app, a, n);
+					showWiki(ctx, app, a, e.getKey());
 					return true;
 				}
 			});
