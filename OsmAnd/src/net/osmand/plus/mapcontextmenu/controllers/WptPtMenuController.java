@@ -5,7 +5,6 @@ import android.support.v4.content.ContextCompat;
 
 import net.osmand.data.PointDescription;
 import net.osmand.plus.GPXUtilities.WptPt;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.FavoriteImageDrawable;
@@ -17,8 +16,8 @@ public class WptPtMenuController extends MenuController {
 
 	private WptPt wpt;
 
-	public WptPtMenuController(OsmandApplication app, MapActivity mapActivity, PointDescription pointDescription, WptPt wpt) {
-		super(new WptPtMenuBuilder(app, wpt), pointDescription, mapActivity);
+	public WptPtMenuController(MapActivity mapActivity, PointDescription pointDescription, WptPt wpt) {
+		super(new WptPtMenuBuilder(mapActivity, wpt), pointDescription, mapActivity);
 		this.wpt = wpt;
 	}
 

@@ -5,8 +5,8 @@ import android.view.View;
 import net.osmand.data.PointDescription;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiType;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.render.RenderingIcons;
 
@@ -16,8 +16,8 @@ public class EditPOIMenuBuilder extends MenuBuilder {
 
 	private final OsmPoint osmPoint;
 
-	public EditPOIMenuBuilder(OsmandApplication app, final OsmPoint osmPoint) {
-		super(app);
+	public EditPOIMenuBuilder(MapActivity mapActivity, final OsmPoint osmPoint) {
+		super(mapActivity);
 		this.osmPoint = osmPoint;
 	}
 

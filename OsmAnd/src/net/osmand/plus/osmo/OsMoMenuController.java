@@ -19,8 +19,8 @@ public class OsMoMenuController extends MenuController {
 
 	private OsMoDevice device;
 
-	public OsMoMenuController(OsmandApplication app, MapActivity mapActivity, PointDescription pointDescription, OsMoDevice device) {
-		super(new MenuBuilder(app), pointDescription, mapActivity);
+	public OsMoMenuController(MapActivity mapActivity, PointDescription pointDescription, OsMoDevice device) {
+		super(new MenuBuilder(mapActivity), pointDescription, mapActivity);
 		this.device = device;
 
 		leftTitleButtonController = new TitleButtonController() {

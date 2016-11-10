@@ -3,7 +3,6 @@ package net.osmand.plus.parkingpoint;
 import android.graphics.drawable.Drawable;
 
 import net.osmand.data.PointDescription;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -16,8 +15,8 @@ public class ParkingPositionMenuController extends MenuController {
 	private ParkingPositionPlugin plugin;
 	private String parkingDescription = "";
 
-	public ParkingPositionMenuController(OsmandApplication app, MapActivity mapActivity, PointDescription pointDescription) {
-		super(new MenuBuilder(app), pointDescription, mapActivity);
+	public ParkingPositionMenuController(MapActivity mapActivity, PointDescription pointDescription) {
+		super(new MenuBuilder(mapActivity), pointDescription, mapActivity);
 		plugin = OsmandPlugin.getPlugin(ParkingPositionPlugin.class);
 		if (plugin != null) {
 			buildParkingDescription(mapActivity);

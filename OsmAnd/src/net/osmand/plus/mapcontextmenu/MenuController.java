@@ -122,47 +122,47 @@ public abstract class MenuController extends BaseMenuController {
 		MenuController menuController = null;
 		if (object != null) {
 			if (object instanceof Amenity) {
-				menuController = new AmenityMenuController(app, mapActivity, pointDescription, (Amenity) object);
+				menuController = new AmenityMenuController(mapActivity, pointDescription, (Amenity) object);
 			} else if (object instanceof FavouritePoint) {
-				menuController = new FavouritePointMenuController(app, mapActivity, pointDescription, (FavouritePoint) object);
+				menuController = new FavouritePointMenuController(mapActivity, pointDescription, (FavouritePoint) object);
 			} else if (object instanceof SearchHistoryHelper.HistoryEntry) {
-				menuController = new HistoryMenuController(app, mapActivity, pointDescription, (SearchHistoryHelper.HistoryEntry) object);
+				menuController = new HistoryMenuController(mapActivity, pointDescription, (SearchHistoryHelper.HistoryEntry) object);
 			} else if (object instanceof TargetPoint) {
-				menuController = new TargetPointMenuController(app, mapActivity, pointDescription, (TargetPoint) object);
+				menuController = new TargetPointMenuController(mapActivity, pointDescription, (TargetPoint) object);
 			} else if (object instanceof OsMoDevice) {
-				menuController = new OsMoMenuController(app, mapActivity, pointDescription, (OsMoDevice) object);
+				menuController = new OsMoMenuController(mapActivity, pointDescription, (OsMoDevice) object);
 			} else if (object instanceof Recording) {
-				menuController = new AudioVideoNoteMenuController(app, mapActivity, pointDescription, (Recording) object);
+				menuController = new AudioVideoNoteMenuController(mapActivity, pointDescription, (Recording) object);
 			} else if (object instanceof OsmPoint) {
-				menuController = new EditPOIMenuController(app, mapActivity, pointDescription, (OsmPoint) object);
+				menuController = new EditPOIMenuController(mapActivity, pointDescription, (OsmPoint) object);
 			} else if (object instanceof WptPt) {
-				menuController = new WptPtMenuController(app, mapActivity, pointDescription, (WptPt) object);
+				menuController = new WptPtMenuController(mapActivity, pointDescription, (WptPt) object);
 			} else if (object instanceof DownloadMapObject) {
-				menuController = new MapDataMenuController(app, mapActivity, pointDescription, (DownloadMapObject) object);
+				menuController = new MapDataMenuController(mapActivity, pointDescription, (DownloadMapObject) object);
 			} else if (object instanceof OpenStreetNote) {
-				menuController = new OsmBugMenuController(app, mapActivity, pointDescription, (OpenStreetNote) object);
+				menuController = new OsmBugMenuController(mapActivity, pointDescription, (OpenStreetNote) object);
 			} else if (object instanceof GpxDisplayItem) {
-				menuController = new GpxItemMenuController(app, mapActivity, pointDescription, (GpxDisplayItem) object);
+				menuController = new GpxItemMenuController(mapActivity, pointDescription, (GpxDisplayItem) object);
 			} else if (object instanceof MapMarker) {
-				menuController = new MapMarkerMenuController(app, mapActivity, pointDescription, (MapMarker) object);
+				menuController = new MapMarkerMenuController(mapActivity, pointDescription, (MapMarker) object);
 			} else if (object instanceof TransportStopRoute) {
-				menuController = new TransportRouteController(app, mapActivity, pointDescription, (TransportStopRoute) object);
+				menuController = new TransportRouteController(mapActivity, pointDescription, (TransportStopRoute) object);
 			} else if (object instanceof TransportStop) {
-				menuController = new TransportStopController(app, mapActivity, pointDescription, (TransportStop) object);
+				menuController = new TransportStopController(mapActivity, pointDescription, (TransportStop) object);
 			} else if (object instanceof LatLon) {
 				if (pointDescription.isParking()) {
-					menuController = new ParkingPositionMenuController(app, mapActivity, pointDescription);
+					menuController = new ParkingPositionMenuController(mapActivity, pointDescription);
 				} else if (pointDescription.isMyLocation()) {
-					menuController = new MyLocationMenuController(app, mapActivity, pointDescription);
+					menuController = new MyLocationMenuController(mapActivity, pointDescription);
 				}
 			} else if (object instanceof RouteDataObject) {
-				menuController = new ImpassibleRoadsMenuController(app, mapActivity, pointDescription, (RouteDataObject) object);
+				menuController = new ImpassibleRoadsMenuController(mapActivity, pointDescription, (RouteDataObject) object);
 			} else if (object instanceof RenderedObject) {
-				menuController = new RenderedObjectMenuController(app, mapActivity, pointDescription, (RenderedObject) object);
+				menuController = new RenderedObjectMenuController(mapActivity, pointDescription, (RenderedObject) object);
 			}
 		}
 		if (menuController == null) {
-			menuController = new PointDescriptionMenuController(app, mapActivity, pointDescription);
+			menuController = new PointDescriptionMenuController(mapActivity, pointDescription);
 		}
 		menuController.menuType = menuType;
 		menuController.setLatLon(latLon);

@@ -4,7 +4,6 @@ import android.graphics.drawable.Drawable;
 
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -17,8 +16,8 @@ public class OsmBugMenuController extends MenuController {
 	private OsmEditingPlugin plugin;
 	private OpenStreetNote bug;
 
-	public OsmBugMenuController(OsmandApplication app, MapActivity mapActivity, PointDescription pointDescription, OpenStreetNote bug) {
-		super(new MenuBuilder(app), pointDescription, mapActivity);
+	public OsmBugMenuController(MapActivity mapActivity, PointDescription pointDescription, OpenStreetNote bug) {
+		super(new MenuBuilder(mapActivity), pointDescription, mapActivity);
 		plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
 		this.bug = bug;
 

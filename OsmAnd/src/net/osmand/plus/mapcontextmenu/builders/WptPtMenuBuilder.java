@@ -4,8 +4,8 @@ import android.view.View;
 
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.OsmAndFormatter;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.views.POIMapLayer;
 import net.osmand.util.Algorithms;
@@ -17,8 +17,8 @@ public class WptPtMenuBuilder extends MenuBuilder {
 
 	private final WptPt wpt;
 
-	public WptPtMenuBuilder(OsmandApplication app, final WptPt wpt) {
-		super(app);
+	public WptPtMenuBuilder(MapActivity mapActivity, final WptPt wpt) {
+		super(mapActivity);
 		this.wpt = wpt;
 	}
 
