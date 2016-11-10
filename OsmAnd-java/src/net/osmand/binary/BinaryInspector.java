@@ -73,9 +73,9 @@ public class BinaryInspector {
 		if ("test".equals(args[0])) {
 			in.inspector(new String[] {
 //					"-vpoi",
-					"-vmap", "-vmapobjects", // "-vmapcoordinates",
+//					"-vmap", "-vmapobjects", // "-vmapcoordinates",
 //					"-vrouting",
-//					"-vtransport",
+					"-vtransport",
 //					"-vaddress", "-vcities","-vstreetgroups",
 //					"-vstreets", "-vbuildings", "-vintersections",
 //					"-lang=ru",
