@@ -1,5 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
+    <string name="wiki_around">Статьи Википедии рядом</string>
     <string name="search_map_hint">Поиск города или страны</string>
     <string name="route_roundabout_short">Сверните на %1$d съезд</string>
     <string name="upload_poi">Выгрузить POI</string>
