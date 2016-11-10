@@ -2,10 +2,8 @@ package net.osmand.plus.mapcontextmenu.controllers;
 
 import android.graphics.drawable.Drawable;
 
-import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.ApplicationMode;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
@@ -13,8 +11,8 @@ import net.osmand.plus.mapcontextmenu.MenuController;
 
 public class MyLocationMenuController  extends MenuController {
 
-	public MyLocationMenuController(OsmandApplication app, MapActivity mapActivity, PointDescription pointDescription) {
-		super(new MenuBuilder(app), pointDescription, mapActivity);
+	public MyLocationMenuController(MapActivity mapActivity, PointDescription pointDescription) {
+		super(new MenuBuilder(mapActivity), pointDescription, mapActivity);
 	}
 
 	@Override

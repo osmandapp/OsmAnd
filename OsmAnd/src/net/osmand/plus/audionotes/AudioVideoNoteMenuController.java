@@ -22,8 +22,8 @@ public class AudioVideoNoteMenuController extends MenuController {
 	private AudioVideoNotesPlugin mPlugin;
 	private boolean mIsFileAvailable;
 
-	public AudioVideoNoteMenuController(OsmandApplication app, MapActivity mapActivity, PointDescription pointDescription, final Recording recording) {
-		super(new AudioVideoNoteMenuBuilder(app, recording), pointDescription, mapActivity);
+	public AudioVideoNoteMenuController(MapActivity mapActivity, PointDescription pointDescription, final Recording recording) {
+		super(new AudioVideoNoteMenuBuilder(mapActivity, recording), pointDescription, mapActivity);
 		this.mRecording = recording;
 		mPlugin = OsmandPlugin.getPlugin(AudioVideoNotesPlugin.class);
 		mIsFileAvailable = mRecording.getFile().exists();

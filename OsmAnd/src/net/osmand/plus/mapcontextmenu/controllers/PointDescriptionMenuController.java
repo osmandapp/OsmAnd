@@ -3,7 +3,6 @@ package net.osmand.plus.mapcontextmenu.controllers;
 import android.graphics.drawable.Drawable;
 
 import net.osmand.data.PointDescription;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.search.SearchHistoryFragment;
@@ -15,8 +14,8 @@ public class PointDescriptionMenuController extends MenuController {
 
 	private boolean hasTypeInDescription;
 
-	public PointDescriptionMenuController(OsmandApplication app, MapActivity mapActivity, final PointDescription pointDescription) {
-		super(new MenuBuilder(app), pointDescription, mapActivity);
+	public PointDescriptionMenuController(MapActivity mapActivity, final PointDescription pointDescription) {
+		super(new MenuBuilder(mapActivity), pointDescription, mapActivity);
 		initData();
 	}
 

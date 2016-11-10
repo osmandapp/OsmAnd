@@ -52,11 +52,12 @@ public class MapDataMenuController extends MenuController {
 
 	private DownloadIndexesThread downloadThread;
 
-	public MapDataMenuController(final OsmandApplication app, final MapActivity mapActivity, PointDescription pointDescription, final DownloadMapObject mapObject) {
-		super(new MenuBuilder(app), pointDescription, mapActivity);
+	public MapDataMenuController(final MapActivity mapActivity, PointDescription pointDescription, final DownloadMapObject mapObject) {
+		super(new MenuBuilder(mapActivity), pointDescription, mapActivity);
 		this.mapObject = mapObject;
 		indexItem = mapObject.getIndexItem();
 		localIndexInfo = mapObject.getLocalIndexInfo();
+		final OsmandApplication app = mapActivity.getMyApplication();
 		downloadThread = app.getDownloadThread();
 		if (indexItem != null) {
 			downloaded = indexItem.isDownloaded();

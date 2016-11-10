@@ -1,11 +1,13 @@
 package net.osmand.plus.mapcontextmenu.builders;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.view.ContextThemeWrapper;
 import android.support.v7.widget.AppCompatButton;
 import android.text.Html;
 import android.text.SpannableString;
@@ -19,44 +21,54 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.Amenity;
+import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.data.QuadRect;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
+import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
+import net.osmand.plus.views.ContextMenuLayer;
 import net.osmand.plus.views.POIMapLayer;
 import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
 import net.osmand.util.OpeningHoursParser;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class AmenityMenuBuilder extends MenuBuilder {
 
 	private final Amenity amenity;
+	private List<Amenity> nearestWiki = new ArrayList<>();
 
-	public AmenityMenuBuilder(OsmandApplication app, final Amenity amenity) {
-		super(app);
+	public AmenityMenuBuilder(MapActivity mapActivity, final Amenity amenity) {
+		super(mapActivity);
 		this.amenity = amenity;
+		processNearstWiki();
 	}
 
 	private void buildRow(View view, int iconId, String text, String textPrefix,
-						  final String textDescription, boolean collapsable,
+						  boolean collapsable, final View collapsableView,
 						  int textColor, boolean isWiki, boolean isText, boolean needLinks,
 						  boolean isPhoneNumber, boolean isUrl) {
-		buildRow(view, getRowIcon(iconId), text, textPrefix, textDescription, collapsable, textColor,
+		buildRow(view, getRowIcon(iconId), text, textPrefix, collapsable, collapsableView, textColor,
 				isWiki, isText, needLinks, isPhoneNumber, isUrl);
 	}
 
 	protected void buildRow(final View view, Drawable icon, final String text, final String textPrefix,
-							final String textDescription, boolean collapsable,
+							boolean collapsable, final View collapsableView,
 							int textColor, boolean isWiki, boolean isText, boolean needLinks,
 							boolean isPhoneNumber, boolean isUrl) {
 
@@ -71,6 +83,11 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			txt = text;
 		}
 
+		LinearLayout baseView = new LinearLayout(view.getContext());
+		baseView.setOrientation(LinearLayout.VERTICAL);
+		LinearLayout.LayoutParams llBaseViewParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+		baseView.setLayoutParams(llBaseViewParams);
+
 		LinearLayout ll = new LinearLayout(view.getContext());
 		ll.setOrientation(LinearLayout.HORIZONTAL);
 		LinearLayout.LayoutParams llParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -83,6 +100,8 @@ public class AmenityMenuBuilder extends MenuBuilder {
 				return true;
 			}
 		});
+
+		baseView.addView(ll);
 
 		// Icon
 		LinearLayout llIcon = new LinearLayout(view.getContext());
@@ -149,7 +168,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		llText.addView(textView);
 
 		final ImageView iconViewCollapse = new ImageView(view.getContext());
-		if (collapsable && !Algorithms.isEmpty(textDescription)) {
+		if (collapsable && collapsableView != null) {
 			// Icon
 			LinearLayout llIconCollapse = new LinearLayout(view.getContext());
 			llIconCollapse.setLayoutParams(new LinearLayout.LayoutParams(dpToPx(40f), dpToPx(48f)));
@@ -162,47 +181,28 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			llIconCollapseParams.gravity = Gravity.CENTER_VERTICAL;
 			iconViewCollapse.setLayoutParams(llIconCollapseParams);
 			iconViewCollapse.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
-			iconViewCollapse.setImageDrawable(app.getIconsCache().getThemedIcon(iconViewCollapse.getTag() == null ?
+			iconViewCollapse.setImageDrawable(app.getIconsCache().getThemedIcon(collapsableView.getVisibility() == View.GONE ?
 					R.drawable.ic_action_arrow_down : R.drawable.ic_action_arrow_up));
 			llIconCollapse.addView(iconViewCollapse);
-		}
-
-		if (!Algorithms.isEmpty(textDescription)) {
-			final TextView textViewDesc = new TextView(view.getContext());
-			boolean collapsed = false;
-			if (collapsable) {
-				collapsed = textView.getTag() == null;
-				ll.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						if (iconViewCollapse.getTag() != null) {
-							textViewDesc.setVisibility(View.GONE);
-							iconViewCollapse.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_action_arrow_down));
-							iconViewCollapse.setTag(null);
-						} else {
-							textViewDesc.setVisibility(View.VISIBLE);
-							iconViewCollapse.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_action_arrow_up));
-							iconViewCollapse.setTag(1);
-						}
+			ll.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					if (collapsableView.getVisibility() == View.VISIBLE) {
+						collapsableView.setVisibility(View.GONE);
+						iconViewCollapse.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_action_arrow_down));
+					} else {
+						collapsableView.setVisibility(View.VISIBLE);
+						iconViewCollapse.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_action_arrow_up));
 					}
-				});
-			}
-
-			textViewDesc.setVisibility(collapsed ? View.GONE : View.VISIBLE);
-			LinearLayout.LayoutParams llTextDescParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-			llTextDescParams.setMargins(0, 0, 0, collapsable ? dpToPx(13f) : dpToPx(8f));
-			textViewDesc.setLayoutParams(llTextDescParams);
-			textViewDesc.setTextSize(16);
-			textViewDesc.setTextColor(app.getResources().getColor(light ? R.color.ctx_menu_info_text_light : R.color.ctx_menu_info_text_dark));
-			textViewDesc.setText(textDescription);
-
-			llText.addView(textViewDesc);
+				}
+			});
+			baseView.addView(collapsableView);
 		}
 
 		if (isWiki) {
 			AppCompatButton wikiButton = new AppCompatButton(view.getContext());
 			LinearLayout.LayoutParams llWikiButtonParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-			llWikiButtonParams.setMargins(0, dpToPx(10f), 0, dpToPx(10f));
+			llWikiButtonParams.setMargins(0, dpToPx(10f), dpToPx(2f), dpToPx(10f));
 			wikiButton.setLayoutParams(llWikiButtonParams);
 			wikiButton.setPadding(dpToPx(14f), 0, dpToPx(14f), 0);
 			wikiButton.setBackgroundResource(R.drawable.blue_button_drawable);
@@ -217,7 +217,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			llText.addView(wikiButton);
 		}
 
-		((LinearLayout) view).addView(ll);
+		((LinearLayout) view).addView(baseView);
 
 		if (isPhoneNumber) {
 			ll.setOnClickListener(new View.OnClickListener() {
@@ -271,6 +271,55 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		rowBuilt();
 	}
 
+	private View getCollapsableTextView(Context context, boolean collapsed, String text) {
+		final TextView textView = new TextView(context);
+		textView.setVisibility(collapsed ? View.GONE : View.VISIBLE);
+		LinearLayout.LayoutParams llTextDescParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+		llTextDescParams.setMargins(dpToPx(72f), 0, dpToPx(40f), dpToPx(13f));
+		textView.setLayoutParams(llTextDescParams);
+		textView.setTextSize(16);
+		textView.setTextColor(app.getResources().getColor(light ? R.color.ctx_menu_info_text_light : R.color.ctx_menu_info_text_dark));
+		textView.setText(text);
+		return textView;
+	}
+
+	private View getCollapsableWikiView(Context context, boolean collapsed) {
+		final LinearLayout view = new LinearLayout(context);
+		view.setOrientation(LinearLayout.VERTICAL);
+		view.setVisibility(collapsed ? View.GONE : View.VISIBLE);
+		LinearLayout.LayoutParams llParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+		llParams.setMargins(dpToPx(68f), 0, dpToPx(12f), dpToPx(13f));
+		view.setLayoutParams(llParams);
+
+		for (final Amenity wiki : nearestWiki) {
+			AppCompatButton wikiButton = new AppCompatButton(
+					new ContextThemeWrapper(view.getContext(), light ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme));
+			LinearLayout.LayoutParams llWikiButtonParams =
+					new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+			wikiButton.setLayoutParams(llWikiButtonParams);
+			wikiButton.setPadding(dpToPx(14f), 0, dpToPx(14f), 0);
+			wikiButton.setTextColor(app.getResources()
+					.getColor(light ? R.color.color_dialog_buttons_light : R.color.color_dialog_buttons_dark));
+			wikiButton.setText(wiki.getName());
+
+			wikiButton.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
+			wikiButton.setSingleLine(true);
+			wikiButton.setEllipsize(TextUtils.TruncateAt.END);
+			wikiButton.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					PointDescription pointDescription = mapActivity.getMapLayers().getPoiMapLayer().getObjectName(wiki);
+					mapActivity.getContextMenu().show(
+							new LatLon(wiki.getLocation().getLatitude(), wiki.getLocation().getLongitude()),
+							pointDescription, wiki);
+				}
+			});
+			view.addView(wikiButton);
+		}
+
+		return view;
+	}
+
 	@Override
 	public void buildInternal(View view) {
 		boolean hasWiki = false;
@@ -290,7 +339,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			String vl = e.getValue();
 
 			String textPrefix = "";
-			String textDescription = "";
+			View collapsableView = null;
 			boolean collapsable  = false;
 			boolean isWiki = false;
 			boolean isText = false;
@@ -339,7 +388,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 				continue;
 			} else if (Amenity.OPENING_HOURS.equals(key)) {
 				iconId = R.drawable.ic_action_time;
-				textDescription = amenity.getOpeningHours();
+				collapsableView = getCollapsableTextView(view.getContext(), true, amenity.getOpeningHours());
 				collapsable = true;
 				OpeningHoursParser.OpeningHours rs = OpeningHoursParser.parseOpenedHours(amenity.getOpeningHours());
 				if (rs != null) {
@@ -418,12 +467,12 @@ public class AmenityMenuBuilder extends MenuBuilder {
 
 			if (isDescription) {
 				descriptions.add(new AmenityInfoRow(key, R.drawable.ic_action_note_dark, textPrefix,
-						vl, textDescription, collapsable, 0, false, true, true, 0, "", false, false));
+						vl, collapsable, collapsableView, 0, false, true, true, 0, "", false, false));
 			} else if (icon != null) {
-				infoRows.add(new AmenityInfoRow(key, icon, textPrefix, vl, textDescription, collapsable,
+				infoRows.add(new AmenityInfoRow(key, icon, textPrefix, vl, collapsable, collapsableView,
 						textColor, isWiki, isText, needLinks, poiTypeOrder, poiTypeKeyName, isPhoneNumber, isUrl));
 			} else {
-				infoRows.add(new AmenityInfoRow(key, iconId, textPrefix, vl, textDescription, collapsable,
+				infoRows.add(new AmenityInfoRow(key, iconId, textPrefix, vl, collapsable, collapsableView,
 						textColor, isWiki, isText, needLinks, poiTypeOrder, poiTypeKeyName, isPhoneNumber, isUrl));
 			}
 		}
@@ -463,6 +512,14 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			buildAmenityRow(view, info);
 		}
 
+		if (nearestWiki.size() > 0) {
+			AmenityInfoRow wikiInfo = new AmenityInfoRow(
+					"nearest_wiki", R.drawable.ic_action_wikipedia, null, app.getString(R.string.wiki_around) + " - " + nearestWiki.size(), true,
+					getCollapsableWikiView(view.getContext(), true),
+					0, false, false, false, 1000, null, false, false);
+			buildAmenityRow(view, wikiInfo);
+		}
+
 		buildRow(view, R.drawable.ic_action_get_my_location, PointDescription.getLocationName(app,
 				amenity.getLocation().getLatitude(), amenity.getLocation().getLongitude(), true)
 				.replaceAll("\n", " "), 0, false, 0, false, null);
@@ -470,11 +527,34 @@ public class AmenityMenuBuilder extends MenuBuilder {
 
 	public void buildAmenityRow(View view, AmenityInfoRow info) {
 		if (info.icon != null) {
-			buildRow(view, info.icon, info.text, info.textPrefix, info.textDescription, info.collapsable,
+			buildRow(view, info.icon, info.text, info.textPrefix, info.collapsable, info.collapsableView,
 					info.textColor, info.isWiki, info.isText, info.needLinks, info.isPhoneNumber, info.isUrl);
 		} else if (info.iconId != 0) {
-			buildRow(view, info.iconId, info.text, info.textPrefix, info.textDescription, info.collapsable,
+			buildRow(view, info.iconId, info.text, info.textPrefix, info.collapsable, info.collapsableView,
 					info.textColor, info.isWiki, info.isText, info.needLinks, info.isPhoneNumber, info.isUrl);
+		}
+	}
+
+	private void processNearstWiki() {
+		QuadRect rect = MapUtils.calculateLatLonBbox(
+				amenity.getLocation().getLatitude(), amenity.getLocation().getLongitude(), 100);
+		nearestWiki = app.getResourceManager().searchAmenities(
+				new BinaryMapIndexReader.SearchPoiTypeFilter() {
+					@Override
+					public boolean accept(PoiCategory type, String subcategory) {
+						return type.isWiki();
+					}
+
+					@Override
+					public boolean isEmpty() {
+						return false;
+					}
+				}, rect.top, rect.left, rect.bottom, rect.right, -1, null);
+		for (Amenity wiki : nearestWiki) {
+			if (wiki.getId().equals(amenity.getId())) {
+				nearestWiki.remove(wiki);
+				break;
+			}
 		}
 	}
 
@@ -484,7 +564,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		private int iconId;
 		private String textPrefix;
 		private String text;
-		private String textDescription;
+		private View collapsableView;
 		private boolean collapsable;
 		private int textColor;
 		private boolean isWiki;
@@ -496,15 +576,15 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		private String name;
 
 		public AmenityInfoRow(String key, Drawable icon, String textPrefix, String text,
-							  String textDescription, boolean collapsable,
+							  boolean collapsable, View collapsableView,
 							  int textColor, boolean isWiki, boolean isText, boolean needLinks,
 							  int order, String name, boolean isPhoneNumber, boolean isUrl) {
 			this.key = key;
 			this.icon = icon;
 			this.textPrefix = textPrefix;
 			this.text = text;
-			this.textDescription = textDescription;
 			this.collapsable = collapsable;
+			this.collapsableView = collapsableView;
 			this.textColor = textColor;
 			this.isWiki = isWiki;
 			this.isText = isText;
@@ -516,15 +596,15 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		}
 
 		public AmenityInfoRow(String key, int iconId, String textPrefix, String text,
-							  String textDescription, boolean collapsable,
+							  boolean collapsable, View collapsableView,
 							  int textColor, boolean isWiki, boolean isText, boolean needLinks,
 							  int order, String name, boolean isPhoneNumber, boolean isUrl) {
 			this.key = key;
 			this.iconId = iconId;
 			this.textPrefix = textPrefix;
 			this.text = text;
-			this.textDescription = textDescription;
 			this.collapsable = collapsable;
+			this.collapsableView = collapsableView;
 			this.textColor = textColor;
 			this.isWiki = isWiki;
 			this.isText = isText;

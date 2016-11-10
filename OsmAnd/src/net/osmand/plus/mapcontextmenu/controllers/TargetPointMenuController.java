@@ -3,7 +3,6 @@ package net.osmand.plus.mapcontextmenu.controllers;
 import android.graphics.drawable.Drawable;
 
 import net.osmand.data.PointDescription;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
@@ -17,8 +16,8 @@ public class TargetPointMenuController extends MenuController {
 
 	private TargetPoint targetPoint;
 
-	public TargetPointMenuController(OsmandApplication app, MapActivity mapActivity, PointDescription pointDescription, TargetPoint targetPoint) {
-		super(new MenuBuilder(app), pointDescription, mapActivity);
+	public TargetPointMenuController(MapActivity mapActivity, PointDescription pointDescription, TargetPoint targetPoint) {
+		super(new MenuBuilder(mapActivity), pointDescription, mapActivity);
 		this.targetPoint = targetPoint;
 		final TargetPointsHelper targetPointsHelper = getMapActivity().getMyApplication().getTargetPointsHelper();
 		final int intermediatePointsCount = targetPointsHelper.getIntermediatePoints().size();

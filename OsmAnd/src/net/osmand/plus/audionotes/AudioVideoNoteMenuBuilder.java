@@ -11,8 +11,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin.Recording;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 
@@ -24,8 +24,8 @@ public class AudioVideoNoteMenuBuilder extends MenuBuilder {
 
 	private final Recording recording;
 
-	public AudioVideoNoteMenuBuilder(OsmandApplication app, final Recording recording) {
-		super(app);
+	public AudioVideoNoteMenuBuilder(MapActivity mapActivity, final Recording recording) {
+		super(mapActivity);
 		this.recording = recording;
 	}
 

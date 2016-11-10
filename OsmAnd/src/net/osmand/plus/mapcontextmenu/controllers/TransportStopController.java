@@ -78,9 +78,9 @@ public class TransportStopController extends MenuController {
 	private List<TransportStopRoute> routes = new ArrayList<>();
 	private TransportStopType topType;
 
-	public TransportStopController(OsmandApplication app, MapActivity mapActivity,
+	public TransportStopController(MapActivity mapActivity,
 								   PointDescription pointDescription, TransportStop transportStop) {
-		super(new MenuBuilder(app), pointDescription, mapActivity);
+		super(new MenuBuilder(mapActivity), pointDescription, mapActivity);
 		this.transportStop = transportStop;
 		processTransportStop();
 	}

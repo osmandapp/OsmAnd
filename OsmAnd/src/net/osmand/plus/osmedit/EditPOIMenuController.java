@@ -6,7 +6,6 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 
 import net.osmand.data.PointDescription;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -23,8 +22,8 @@ public class EditPOIMenuController extends MenuController {
 	private String pointTypeStr;
 	private ProgressDialogPoiUploader poiUploader;
 
-	public EditPOIMenuController(OsmandApplication app, final MapActivity mapActivity, PointDescription pointDescription, OsmPoint osmPoint) {
-		super(new EditPOIMenuBuilder(app, osmPoint), pointDescription, mapActivity);
+	public EditPOIMenuController(final MapActivity mapActivity, PointDescription pointDescription, OsmPoint osmPoint) {
+		super(new EditPOIMenuBuilder(mapActivity, osmPoint), pointDescription, mapActivity);
 		this.osmPoint = osmPoint;
 		plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
 

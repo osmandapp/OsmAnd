@@ -23,6 +23,7 @@ import android.widget.Toast;
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.render.RenderingIcons;
 
 import java.util.LinkedList;
@@ -33,6 +34,7 @@ public class MenuBuilder {
 
 	public static final float SHADOW_HEIGHT_TOP_DP = 17f;
 
+	protected MapActivity mapActivity;
 	protected OsmandApplication app;
 	protected LinkedList<PlainMenuItem> plainMenuItems;
 	private boolean firstRow;
@@ -74,8 +76,9 @@ public class MenuBuilder {
 		}
 	}
 
-	public MenuBuilder(OsmandApplication app) {
-		this.app = app;
+	public MenuBuilder(MapActivity mapActivity) {
+		this.mapActivity = mapActivity;
+		this.app = mapActivity.getMyApplication();
 		plainMenuItems = new LinkedList<>();
 	}
 

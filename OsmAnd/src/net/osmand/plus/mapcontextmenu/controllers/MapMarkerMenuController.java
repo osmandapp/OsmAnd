@@ -5,7 +5,6 @@ import android.graphics.drawable.Drawable;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.MapMarkerDialogHelper;
@@ -17,10 +16,10 @@ public class MapMarkerMenuController extends MenuController {
 
 	private MapMarker mapMarker;
 
-	public MapMarkerMenuController(OsmandApplication app, MapActivity mapActivity, PointDescription pointDescription, MapMarker mapMarker) {
-		super(new MenuBuilder(app), pointDescription, mapActivity);
+	public MapMarkerMenuController(MapActivity mapActivity, PointDescription pointDescription, MapMarker mapMarker) {
+		super(new MenuBuilder(mapActivity), pointDescription, mapActivity);
 		this.mapMarker = mapMarker;
-		final MapMarkersHelper markersHelper = app.getMapMarkersHelper();
+		final MapMarkersHelper markersHelper = mapActivity.getMyApplication().getMapMarkersHelper();
 		leftTitleButtonController = new TitleButtonController() {
 			@Override
 			public void buttonPressed() {
