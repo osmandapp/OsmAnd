@@ -8,7 +8,6 @@ import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.TransportStop;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.FavoriteImageDrawable;
@@ -22,8 +21,8 @@ public class FavouritePointMenuController extends MenuController {
 
 	private FavouritePoint fav;
 
-	public FavouritePointMenuController(OsmandApplication app, MapActivity mapActivity, PointDescription pointDescription, final FavouritePoint fav) {
-		super(new FavouritePointMenuBuilder(app, fav), pointDescription, mapActivity);
+	public FavouritePointMenuController(MapActivity mapActivity, PointDescription pointDescription, final FavouritePoint fav) {
+		super(new FavouritePointMenuBuilder(mapActivity, fav), pointDescription, mapActivity);
 		this.fav = fav;
 	}
 
@@ -112,7 +111,7 @@ public class FavouritePointMenuController extends MenuController {
 			} else if (originObject instanceof TransportStop) {
 				TransportStop stop = (TransportStop) originObject;
 				TransportStopController transportStopController =
-						new TransportStopController(getMapActivity().getMyApplication(), getMapActivity(), pointDescription, stop);
+						new TransportStopController(getMapActivity(), pointDescription, stop);
 				transportStopController.addPlainMenuItems(builder, latLon);
 				addMyLocationToPlainItems(latLon);
 			}

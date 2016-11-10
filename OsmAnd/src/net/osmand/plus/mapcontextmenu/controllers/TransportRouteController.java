@@ -7,7 +7,6 @@ import net.osmand.binary.OsmandOdb.TransportRouteStop;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.TransportStop;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
@@ -24,9 +23,9 @@ public class TransportRouteController extends MenuController {
 
 	private TransportStopRoute transportRoute;
 
-	public TransportRouteController(OsmandApplication app, final MapActivity mapActivity, PointDescription pointDescription,
+	public TransportRouteController(final MapActivity mapActivity, PointDescription pointDescription,
 									final TransportStopRoute transportRoute) {
-		super(new MenuBuilder(app), pointDescription, mapActivity);
+		super(new MenuBuilder(mapActivity), pointDescription, mapActivity);
 		this.transportRoute = transportRoute;
 		toolbarController = new ContextMenuToolbarController(this);
 		toolbarController.setTitle(getNameStr());

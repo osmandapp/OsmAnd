@@ -10,8 +10,8 @@ import android.widget.TextView;
 
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.OsmAndFormatter;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.util.Algorithms;
@@ -19,8 +19,8 @@ import net.osmand.util.Algorithms;
 public class GpxItemMenuBuilder extends MenuBuilder {
 	private GpxDisplayItem item;
 
-	public GpxItemMenuBuilder(OsmandApplication app, GpxDisplayItem item) {
-		super(app);
+	public GpxItemMenuBuilder(MapActivity mapActivity, GpxDisplayItem item) {
+		super(mapActivity);
 		this.item = item;
 	}
 

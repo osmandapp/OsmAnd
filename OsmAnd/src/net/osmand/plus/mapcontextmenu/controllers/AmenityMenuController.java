@@ -11,7 +11,6 @@ import net.osmand.data.TransportStop;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiFilter;
 import net.osmand.osm.PoiType;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
@@ -36,8 +35,8 @@ public class AmenityMenuController extends MenuController {
 	private Amenity amenity;
 	private List<TransportStopRoute> routes = new ArrayList<>();
 
-	public AmenityMenuController(OsmandApplication app, MapActivity mapActivity, PointDescription pointDescription, Amenity amenity) {
-		super(new AmenityMenuBuilder(app, amenity), pointDescription, mapActivity);
+	public AmenityMenuController(MapActivity mapActivity, PointDescription pointDescription, Amenity amenity) {
+		super(new AmenityMenuBuilder(mapActivity, amenity), pointDescription, mapActivity);
 		this.amenity = amenity;
 		if (amenity.getType().getKeyName().equals("transportation")) {
 			boolean showTransportStops = false;

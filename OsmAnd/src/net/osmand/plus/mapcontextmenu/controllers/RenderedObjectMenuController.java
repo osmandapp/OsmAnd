@@ -2,7 +2,6 @@ package net.osmand.plus.mapcontextmenu.controllers;
 
 import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
@@ -14,8 +13,8 @@ public class RenderedObjectMenuController extends MenuController {
 
 	private RenderedObject renderedObject;
 
-	public RenderedObjectMenuController(OsmandApplication app, MapActivity mapActivity, PointDescription pointDescription, final RenderedObject renderedObject) {
-		super(new MenuBuilder(app), pointDescription, mapActivity);
+	public RenderedObjectMenuController(MapActivity mapActivity, PointDescription pointDescription, final RenderedObject renderedObject) {
+		super(new MenuBuilder(mapActivity), pointDescription, mapActivity);
 		this.renderedObject = renderedObject;
 	}
 

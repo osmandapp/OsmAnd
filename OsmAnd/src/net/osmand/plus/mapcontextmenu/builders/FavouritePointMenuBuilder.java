@@ -9,7 +9,7 @@ import net.osmand.data.FavouritePoint;
 import net.osmand.data.QuadRect;
 import net.osmand.data.TransportStop;
 import net.osmand.osm.PoiCategory;
-import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.util.MapUtils;
 
@@ -20,8 +20,8 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 	private final FavouritePoint fav;
 	private Object originObject;
 
-	public FavouritePointMenuBuilder(OsmandApplication app, final FavouritePoint fav) {
-		super(app);
+	public FavouritePointMenuBuilder(MapActivity mapActivity, final FavouritePoint fav) {
+		super(mapActivity);
 		this.fav = fav;
 		acquireOriginObject();
 	}
@@ -46,7 +46,7 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 	public void buildInternal(View view) {
 		if (originObject != null) {
 			if (originObject instanceof Amenity) {
-				AmenityMenuBuilder builder = new AmenityMenuBuilder(app, (Amenity) originObject);
+				AmenityMenuBuilder builder = new AmenityMenuBuilder(mapActivity, (Amenity) originObject);
 				builder.setLight(light);
 				builder.buildInternal(view);
 			}

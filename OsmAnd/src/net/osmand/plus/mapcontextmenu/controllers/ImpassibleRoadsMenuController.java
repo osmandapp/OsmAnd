@@ -16,10 +16,11 @@ public class ImpassibleRoadsMenuController extends MenuController {
 
 	private RouteDataObject route;
 
-	public ImpassibleRoadsMenuController(final OsmandApplication app, final MapActivity mapActivity,
+	public ImpassibleRoadsMenuController(final MapActivity mapActivity,
 										 PointDescription pointDescription, RouteDataObject route) {
-		super(new MenuBuilder(app), pointDescription, mapActivity);
+		super(new MenuBuilder(mapActivity), pointDescription, mapActivity);
 		this.route = route;
+		final OsmandApplication app = mapActivity.getMyApplication();
 		rightTitleButtonController = new TitleButtonController() {
 			@Override
 			public void buttonPressed() {
