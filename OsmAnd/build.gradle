@@ -370,5 +370,6 @@ dependencies {
 }
 if(System.getenv("APP_FEATURES") && System.getenv("APP_FEATURES").contains("+play_market") && 
 	System.getenv("PACKAGE_TO_BUILT").equals("net.osmand")) {
+	println "Apply GMS plugin"
 	apply plugin: 'com.google.gms.google-services'
 }
