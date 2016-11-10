@@ -2473,4 +2473,5 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="route_calculation">Calcul de l\'itinéraire</string>
     <string name="upload_poi">Télécharger les PI</string>
     <string name="route_roundabout_short">Prenez la sortie %1$d</string>
+    <string name="search_map_hint">Rechercher une ville ou une région</string>
     </resources>
