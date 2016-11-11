@@ -999,4 +999,19 @@
     <string name="osmo_connect">Liity</string>
     <string name="osmo_groups">Osmo Joukot</string>
     <string name="osmo_connect_to_my_nickname">Lempinimi</string>
+    <string name="osmo_share_my_location">Lähetä sijainti</string>
+    <string name="shared_string_move_up">Siirrä ylös</string>
+    <string name="shared_string_move_down">Siirrä alas</string>
+    <string name="finish_navigation">Lopeta suunnistus</string>
+    <string name="avoid_road">Vältä teitä</string>
+    <string name="storage_directory_shared">Jaettu muisti</string>
+    <string name="recalculate_route">Laske reitti uudellen</string>
+    <string name="donations">Lahjoitukset</string>
+    <string name="number_of_recipients">Vastaanottajien lukumäärä</string>
+    <string name="osm_live_subscribe_btn">Tilaa</string>
+    <string name="osm_live_user_public_name">Julkinen nimi</string>
+    <string name="osm_live_hide_user_name">Älä näytä nimeäni raporteissa</string>
+    <string name="osm_live_active">Aktiivi</string>
+    <string name="osm_live_enter_email">Ole ystävällinen ja anna oikea email-osoite</string>
+    <string name="osm_live_subscription_settings">Tilauksen asetukset</string>
     </resources>
