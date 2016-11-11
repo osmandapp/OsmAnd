@@ -538,21 +538,24 @@ public abstract class MenuController extends BaseMenuController {
 			String selectedFullName = "";
 			double smallestArea = -1;
 			for (BinaryMapDataObject o : mapDataObjects) {
-				boolean downloaded = checkIfObjectDownloaded(rm, osmandRegions.getDownloadName(o));
-				if (downloaded) {
-					downloadMapDataObject = null;
-					break;
-				} else {
-					String fullName = osmandRegions.getFullName(o);
-					double area = OsmandRegions.getArea(o);
-					if (smallestArea == -1) {
-						smallestArea = area;
-						selectedFullName = fullName;
-						downloadMapDataObject = o;
-					} else if (area < smallestArea) {
-						smallestArea = area;
-						selectedFullName = fullName;
-						downloadMapDataObject = o;
+				String downloadName = osmandRegions.getDownloadName(o);
+				if (!Algorithms.isEmpty(downloadName)) {
+					boolean downloaded = checkIfObjectDownloaded(rm, downloadName);
+					if (downloaded) {
+						downloadMapDataObject = null;
+						break;
+					} else {
+						String fullName = osmandRegions.getFullName(o);
+						double area = OsmandRegions.getArea(o);
+						if (smallestArea == -1) {
+							smallestArea = area;
+							selectedFullName = fullName;
+							downloadMapDataObject = o;
+						} else if (area < smallestArea) {
+							smallestArea = area;
+							selectedFullName = fullName;
+							downloadMapDataObject = o;
+						}
 					}
 				}
 			}
