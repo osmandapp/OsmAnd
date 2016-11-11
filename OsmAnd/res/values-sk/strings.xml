@@ -1760,7 +1760,8 @@ Aktivovanie tohto pohľadu zmení štýl mapy na \"Zima a lyžovanie\", ktorý z
     <string name="shared_string_release">Vydaná</string>
     <string name="simulate_your_location">Simulovať pozíciu</string>
     <string name="drawer">Zoznam</string>
-    <string name="short_location_on_map">Šírka %1$s\n Dĺžka %2$s</string>
+    <string name="short_location_on_map">Šírka %1$s
+Dĺžka %2$s</string>
     <string name="tips_and_tricks_descr">Často kladené otázky, nedávne zmeny a iné</string>
     <string name="routing_settings_2">Navigačné nastavenia</string>
     <string name="general_settings_2">Všeobecné nastavenia</string>
@@ -2500,4 +2501,5 @@ Ak potrebuje pomoc s aplikáciou OsmAnd, kontaktuje podporu: support@osmand.net.
     <string name="route_roundabout_short">Použite výjazd %1$d a pokračujte</string>
     <string name="upload_poi">Odoslať POI</string>
     <string name="search_map_hint">Hľadať mesto alebo región</string>
+    <string name="wiki_around">Blízke články Wikipedie</string>
     </resources>
