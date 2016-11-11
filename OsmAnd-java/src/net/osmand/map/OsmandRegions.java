@@ -384,7 +384,11 @@ public class OsmandRegions {
 	}
 
 	public WorldRegion getRegionDataByDownloadName(String downloadName) {
-		return getRegionData(downloadNamesToFullNames.get(downloadName.toLowerCase()));
+		if (downloadName == null) {
+			return null;
+		} else {
+			return getRegionData(downloadNamesToFullNames.get(downloadName.toLowerCase()));
+		}
 	}
 
 	public String getDownloadName(BinaryMapDataObject o) {
