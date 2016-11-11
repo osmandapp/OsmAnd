@@ -2692,4 +2692,5 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="route_roundabout_short">Збочце на %1$d зьезьдзе</string>
     <string name="upload_poi">Выгрузіць POI</string>
     <string name="search_map_hint">Пошук горада ці краіны</string>
+    <string name="wiki_around">Артыкулы Вікіпэдыі побач</string>
     </resources>
