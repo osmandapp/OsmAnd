@@ -10,7 +10,7 @@
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
 
-    <string name="wiki_around">Wikipedia articles around</string>
+    <string name="wiki_around">Nearby Wikipedia articles</string>
     <string name="search_map_hint">Search city or region</string>
     <string name="route_roundabout_short">Take %1$d exit and go</string>
     <string name="upload_poi">Upload POI</string>

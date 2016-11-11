@@ -1,5 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
+    <string name="wiki_around">Wikipedia Artikel in der Nähe</string>
     <string name="osmand_plus_extended_description_4000_chars_v2">
 OsmAnd Maps &amp; Navigation - Orte finden und Routen berechnen ohne Interbetverbindung. Dazu einfach Landkarten für beliebuge Länder herunterladen, bevor man sich auf Reisen begibt.
 
