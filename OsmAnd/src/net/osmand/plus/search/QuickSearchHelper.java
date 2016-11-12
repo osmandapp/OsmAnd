@@ -22,13 +22,13 @@ import net.osmand.search.core.SearchResult;
 
 public class QuickSearchHelper implements ResourceListener {
 
-	public static final int SEARCH_FAVORITE_API_PRIORITY = 2;
-	public static final int SEARCH_FAVORITE_API_CATEGORY_PRIORITY = 7;
-	public static final int SEARCH_FAVORITE_OBJECT_PRIORITY = 10;
-	public static final int SEARCH_WPT_API_PRIORITY = 2;
-	public static final int SEARCH_WPT_OBJECT_PRIORITY = 10;
-	public static final int SEARCH_HISTORY_API_PRIORITY = 3;
-	public static final int SEARCH_HISTORY_OBJECT_PRIORITY = 10;
+	public static final int SEARCH_FAVORITE_API_PRIORITY = 1;
+	public static final int SEARCH_FAVORITE_API_CATEGORY_PRIORITY = 1;
+	public static final int SEARCH_FAVORITE_OBJECT_PRIORITY = 0;
+	public static final int SEARCH_WPT_API_PRIORITY = 1;
+	public static final int SEARCH_WPT_OBJECT_PRIORITY = 0;
+	public static final int SEARCH_HISTORY_API_PRIORITY = 1;
+	public static final int SEARCH_HISTORY_OBJECT_PRIORITY = 0;
 	private OsmandApplication app;
 	private SearchUICore core;
 	private SearchResultCollection resultCollection;
