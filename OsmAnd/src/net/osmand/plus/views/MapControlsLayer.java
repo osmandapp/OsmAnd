@@ -2,6 +2,7 @@ package net.osmand.plus.views;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -26,7 +27,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
-
 import net.osmand.AndroidUtils;
 import net.osmand.core.android.MapRendererContext;
 import net.osmand.data.LatLon;
@@ -582,6 +582,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 				mapRouteInfoMenu.show();
 			} else {
 				touchEvent = 0;
+				app.logEvent(mapActivity, "start_navigation");
 				app.getSettings().APPLICATION_MODE.set(routingHelper.getAppMode());
 				mapActivity.getMapViewTrackingUtilities().backToLocationImpl();
 				app.getSettings().FOLLOW_THE_ROUTE.set(true);
