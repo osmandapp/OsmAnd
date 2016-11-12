@@ -5,7 +5,7 @@
 	<!-- 	alwaysCopyOnFirstInstall - Copies file on first install, always -->
 	<!-- 	alwaysOverwriteOrCopy - Copies or overwrites file unconditionally -->
 	<!-- 	copyOnlyIfDoesNotExist - Copies file only this file is not present on target system -->
-	<asset source="voice/be/ttsconfig.p" destination="voice/ar-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" />
+	<asset source="voice/ar/ttsconfig.p" destination="voice/ar-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" />
 	<asset source="voice/be/ttsconfig.p" destination="voice/be-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" />
 	<asset source="voice/cs/ttsconfig.p" destination="voice/cs-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" />
 	<asset source="voice/da/ttsconfig.p" destination="voice/da-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" />
