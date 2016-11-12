@@ -11,6 +11,7 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Configuration;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.multidex.MultiDex;
@@ -57,6 +58,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintStream;
 import java.lang.Thread.UncaughtExceptionHandler;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Locale;
 
@@ -775,5 +777,19 @@ public class OsmandApplication extends MultiDexApplication {
 			System.err.println(e.getMessage());
 		}
 		return l;
+	}
+	
+	public void logEvent(Activity ctx, String event) {
+		try {
+			if(Version.isGooglePlayEnabled(this) && Version.isFreeVersion(this)) { 
+				Class<?> cl = Class.forName("com.google.firebase.analytics.FirebaseAnalytics");
+				Method mm = cl.getMethod("getInstance", Context.class);
+				Object inst = mm.invoke(null, ctx == null ? this : ctx);
+				Method log = cl.getMethod("logEvent", String.class, Bundle.class);
+				log.invoke(inst, event, new Bundle());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

@@ -264,6 +264,9 @@ public class DownloadIndexesThread {
 				return;
 			}	
 		}
+		if(uiActivity instanceof Activity) {
+			app.logEvent((Activity) uiActivity, "download_files");
+		}
 		for(IndexItem item : items) {
 			if (!item.equals(currentDownloadingItem) && !indexItemDownloading.contains(item)) {
 				indexItemDownloading.add(item);
