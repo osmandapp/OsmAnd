@@ -350,8 +350,16 @@ repositories {
 	// mavenCentral()
 }
 
+def analytics = (System.getenv("APP_FEATURES") && System.getenv("APP_FEATURES").contains("+play_market") && 
+	System.getenv("PACKAGE_TO_BUILT").equals("net.osmand") ) || System.getenv("USE_FIREBASE")
 dependencies {
 	compile project(path: ':OsmAnd-java', configuration: 'android')
+	
+	if(analytics) {
+	    compile 'com.google.firebase:firebase-core:9.8.0'
+	   	compile 'com.google.firebase:firebase-config:9.8.0'
+	    
+	}
 	
 	
 	// compile project(':eclipse-compile:design')
@@ -368,8 +376,7 @@ dependencies {
 	qtcoreCompile "net.osmand:OsmAndCore_androidNativeRelease:0.1-SNAPSHOT@aar"
 	qtcoreCompile "net.osmand:OsmAndCore_android:0.1-SNAPSHOT@aar"
 }
-if(System.getenv("APP_FEATURES") && System.getenv("APP_FEATURES").contains("+play_market") && 
-	System.getenv("PACKAGE_TO_BUILT").equals("net.osmand")) {
+if(analytics) {
 	println "Apply GMS plugin"
 	apply plugin: 'com.google.gms.google-services'
 }
