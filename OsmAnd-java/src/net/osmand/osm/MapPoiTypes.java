@@ -275,24 +275,37 @@ public class MapPoiTypes {
 	}
 
 	public void init(String resourceName) {
-		InputStream is;
-		long time = System.currentTimeMillis();
-		List<PoiType> referenceTypes = new ArrayList<PoiType>();
-		final Map<String, PoiType> allTypes = new LinkedHashMap<String, PoiType>();
-		final Map<String, List<PoiType>> categoryPoiAdditionalMap = new LinkedHashMap<String, List<PoiType>>();
-		final Map<AbstractPoiType, Set<String>> abstractTypeAdditionalCategories = new LinkedHashMap<AbstractPoiType, Set<String>>();
-		final Map<String, AbstractPoiType> additionalCategoryOriginMap = new LinkedHashMap<String, AbstractPoiType>();
 		if (resourceName != null) {
 			this.resourceName = resourceName;
 		}
-		this.categories.clear();
 		try {
+			InputStream is;
 			if (this.resourceName == null) {
 				is = MapPoiTypes.class.getResourceAsStream("poi_types.xml"); //$NON-NLS-1$
 			} else {
 				is = new FileInputStream(this.resourceName);
 			}
-			time = System.currentTimeMillis();
+			initFromInputStream(is);
+
+		} catch (IOException e) {
+			log.error("Unexpected error", e); //$NON-NLS-1$
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		} catch (RuntimeException e) {
+			log.error("Unexpected error", e); //$NON-NLS-1$
+			e.printStackTrace();
+			throw e;
+		}
+	}
+
+	public void initFromInputStream(InputStream is) {
+		long time = System.currentTimeMillis();
+		List<PoiType> referenceTypes = new ArrayList<PoiType>();
+		final Map<String, PoiType> allTypes = new LinkedHashMap<String, PoiType>();
+		final Map<String, List<PoiType>> categoryPoiAdditionalMap = new LinkedHashMap<String, List<PoiType>>();
+		final Map<AbstractPoiType, Set<String>> abstractTypeAdditionalCategories = new LinkedHashMap<AbstractPoiType, Set<String>>();
+		this.categories.clear();
+		try {
 			XmlPullParser parser = PlatformUtil.newXMLPullParser();
 			int tok;
 			parser.setInput(is, "UTF-8");
@@ -366,13 +379,6 @@ public class MapPoiTypes {
 							String icon = parser.getAttributeValue("", "icon");
 							if (!Algorithms.isEmpty(icon)) {
 								poiAdditionalCategoryIcons.put(lastPoiAdditionalCategory, icon);
-							}
-							if (lastType != null) {
-								additionalCategoryOriginMap.put(lastPoiAdditionalCategory, lastType);
-							} else if (lastFilter != null) {
-								additionalCategoryOriginMap.put(lastPoiAdditionalCategory, lastFilter);
-							} else if (lastCategory != null) {
-								additionalCategoryOriginMap.put(lastPoiAdditionalCategory, lastCategory);
 							}
 						}
 
