@@ -2663,4 +2663,5 @@ OsmAnd aplikazioarekin laguntza behar baduzu, jarri kontaktuan gure laguntza tal
     <string name="gpx_appearance">Itxura</string>
     <string name="rendering_value_fine_name">Ongi</string>
     <string name="search_map_hint">Bilatu hiria edo eskualdea</string>
+    <string name="wiki_around">Inguruko Wikipediako artikuluak</string>
     </resources>
