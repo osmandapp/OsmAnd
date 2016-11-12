@@ -5,8 +5,6 @@ import android.app.Application;
 import android.content.pm.PackageManager;
 import android.os.Environment;
 import android.os.Handler;
-import android.os.Message;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 
 import net.osmand.core.android.CoreResourcesFromAndroidAssets;
@@ -58,8 +56,12 @@ public class SampleApplication extends Application {
 	}
 
 	public void initPoiTypes() {
-
-		poiTypes.init(Environment.getExternalStorageDirectory() + "/osmand/poi_types.xml");
+		File poiTypesFile = new File(Environment.getExternalStorageDirectory() + "/osmand/poi_types.xml");
+		if (poiTypesFile.exists()) {
+			poiTypes.init(poiTypesFile.getAbsolutePath());
+		} else {
+			poiTypes.init();
+		}
 		poiTypes.setPoiTranslator(new MapPoiTypes.PoiTranslator() {
 
 			@Override
