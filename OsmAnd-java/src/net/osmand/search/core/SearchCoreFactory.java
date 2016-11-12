@@ -52,30 +52,30 @@ public class SearchCoreFactory {
 	public static final int MAX_DEFAULT_SEARCH_RADIUS = 7;
 	
 	//////////////// CONSTANTS //////////
-	public static final int SEARCH_REGION_API_PRIORITY = 3;
-	public static final int SEARCH_REGION_OBJECT_PRIORITY = 10;
+	public static final int SEARCH_REGION_API_PRIORITY = 300;
+	public static final int SEARCH_REGION_OBJECT_PRIORITY = 1000;
 	
 	// context less
 	public static final int SEARCH_LOCATION_PRIORITY = 0;
-	public static final int SEARCH_AMENITY_TYPE_PRIORITY = 1;
-	public static final int SEARCH_AMENITY_TYPE_API_PRIORITY = 1;
+	public static final int SEARCH_AMENITY_TYPE_PRIORITY = 100;
+	public static final int SEARCH_AMENITY_TYPE_API_PRIORITY = 100;
 	
 	// context	
-	public static final int SEARCH_STREET_BY_CITY_PRIORITY = 2;
-	public static final int SEARCH_BUILDING_BY_CITY_PRIORITY = 3;
-	public static final int SEARCH_BUILDING_BY_STREET_PRIORITY = 1;
-	public static final int SEARCH_AMENITY_BY_TYPE_PRIORITY = 3;
+	public static final int SEARCH_STREET_BY_CITY_PRIORITY = 200;
+	public static final int SEARCH_BUILDING_BY_CITY_PRIORITY = 300;
+	public static final int SEARCH_BUILDING_BY_STREET_PRIORITY = 100;
+	public static final int SEARCH_AMENITY_BY_TYPE_PRIORITY = 300;
 	
 	// context less (slow)
-	public static final int SEARCH_ADDRESS_BY_NAME_API_PRIORITY = 5;
-	public static final int SEARCH_ADDRESS_BY_NAME_API_PRIORITY_RADIUS2 = 5;
-	public static final int SEARCH_ADDRESS_BY_NAME_PRIORITY = 5; 
-	public static final int SEARCH_ADDRESS_BY_NAME_PRIORITY_RADIUS2 = 5;
+	public static final int SEARCH_ADDRESS_BY_NAME_API_PRIORITY = 500;
+	public static final int SEARCH_ADDRESS_BY_NAME_API_PRIORITY_RADIUS2 = 500;
+	public static final int SEARCH_ADDRESS_BY_NAME_PRIORITY = 500;
+	public static final int SEARCH_ADDRESS_BY_NAME_PRIORITY_RADIUS2 = 500;
 	
 	// context less (slower)	
-	public static final int SEARCH_AMENITY_BY_NAME_PRIORITY = 7;
-	public static final int SEARCH_AMENITY_BY_NAME_API_PRIORITY_IF_POI_TYPE = 7;
-	public static final int SEARCH_AMENITY_BY_NAME_API_PRIORITY_IF_3_CHAR = 7;
+	public static final int SEARCH_AMENITY_BY_NAME_PRIORITY = 700;
+	public static final int SEARCH_AMENITY_BY_NAME_API_PRIORITY_IF_POI_TYPE = 700;
+	public static final int SEARCH_AMENITY_BY_NAME_API_PRIORITY_IF_3_CHAR = 700;
 	protected static final double SEARCH_AMENITY_BY_NAME_CITY_PRIORITY_DISTANCE = 0.001;
 	protected static final double SEARCH_AMENITY_BY_NAME_TOWN_PRIORITY_DISTANCE = 0.005;
 	
