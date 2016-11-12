@@ -1014,4 +1014,10 @@
     <string name="osm_live_active">Aktiivi</string>
     <string name="osm_live_enter_email">Ole ystävällinen ja anna oikea email-osoite</string>
     <string name="osm_live_subscription_settings">Tilauksen asetukset</string>
+    <string name="christmas_desc">Ennakoitko Joulun ja Uudenvuoden pyhiä, voit valita näytää Jouluun liittyvät POIt: joulupuut, markkinat, jne.</string>
+    <string name="new_filter_desc">Ole hyvä ja anna nimi uudelle suodattimelle, tämä lisätään Luokat välilehdellesi</string>
+    <string name="osm_live_payment_desc">Tilausmaksu veloitetaan kuukausittain. Voit peruuttaa tilauksesi Google Playssa koska tahansa.</string>
+    <string name="donation_to_osm">Lahjoitus OpenStreetMap yhteisölle</string>
+    <string name="donation_to_osm_desc">Osa lahjoituksestasi lähetetään OSM käyttäjille jotka lähettämät muutoksia OpenStreetMapiin. Tilauksen hinta pysyy samana.</string>
+    <string name="osm_live_subscription_desc">Tilaus mahdollistaa päivitykset tunneittain, päivittäin, viikottain ja kaikkien karttojen rajoittamattoman latauksen maailmanlaajuisesti.</string>
     </resources>
