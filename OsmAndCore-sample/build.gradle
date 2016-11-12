@@ -32,6 +32,7 @@ android {
             jniLibs.srcDirs = ["libs"]
             java.srcDirs = ["src"]
             renderscript.srcDirs = ["src"]
+            resources.srcDirs = ["src"]
             res.srcDirs = ["res"]
             assets.srcDirs = ["assets"]
         }
@@ -72,6 +73,23 @@ android {
             signingConfig android.signingConfigs.debug
         }
     }
+}
+
+task collectMiscResources(type: Copy) {
+    into "src/net/osmand/osm"
+    from("../../resources/poi") {
+        include "poi_types.xml"
+    }
+}
+
+task collectRegionsInfoResources(type: Copy) {
+    from "../../resources/countries-info"
+    into "src/net/osmand/map"
+    include "regions.ocbf"
+}
+
+tasks.withType(JavaCompile) {
+    compileTask -> compileTask.dependsOn << [collectMiscResources, collectRegionsInfoResources]
 }
 
 repositories {
