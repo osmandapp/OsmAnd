@@ -22,13 +22,14 @@ import net.osmand.search.core.SearchResult;
 
 public class QuickSearchHelper implements ResourceListener {
 
-	public static final int SEARCH_FAVORITE_API_PRIORITY = 1;
-	public static final int SEARCH_FAVORITE_API_CATEGORY_PRIORITY = 1;
-	public static final int SEARCH_FAVORITE_OBJECT_PRIORITY = 0;
-	public static final int SEARCH_WPT_API_PRIORITY = 1;
-	public static final int SEARCH_WPT_OBJECT_PRIORITY = 0;
-	public static final int SEARCH_HISTORY_API_PRIORITY = 1;
-	public static final int SEARCH_HISTORY_OBJECT_PRIORITY = 0;
+	public static final int SEARCH_FAVORITE_API_PRIORITY = 50;
+	public static final int SEARCH_FAVORITE_API_CATEGORY_PRIORITY = 50;
+	public static final int SEARCH_FAVORITE_OBJECT_PRIORITY = 50;
+	public static final int SEARCH_FAVORITE_CATEGORY_PRIORITY = 51;
+	public static final int SEARCH_WPT_API_PRIORITY = 50;
+	public static final int SEARCH_WPT_OBJECT_PRIORITY = 52;
+	public static final int SEARCH_HISTORY_API_PRIORITY = 50;
+	public static final int SEARCH_HISTORY_OBJECT_PRIORITY = 53;
 	private OsmandApplication app;
 	private SearchUICore core;
 	private SearchResultCollection resultCollection;
@@ -113,7 +114,7 @@ public class QuickSearchHelper implements ResourceListener {
 					SearchResult sr = new SearchResult(phrase);
 					sr.localeName = point.getName();
 					sr.object = point;
-					sr.priority = SEARCH_FAVORITE_OBJECT_PRIORITY;
+					sr.priority = SEARCH_FAVORITE_CATEGORY_PRIORITY;
 					sr.objectType = ObjectType.FAVORITE;
 					sr.location = new LatLon(point.getLatitude(), point.getLongitude());
 					sr.preferredZoom = 17;
