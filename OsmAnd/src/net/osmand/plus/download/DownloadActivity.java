@@ -121,6 +121,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 	protected void onCreate(Bundle savedInstanceState) {
 		getMyApplication().applyTheme(this);
 		super.onCreate(savedInstanceState);
+		getMyApplication().fetchRemoteParams();
 		downloadThread = getMyApplication().getDownloadThread();
 		DownloadResources indexes = getDownloadThread().getIndexes();
 		if (!indexes.isDownloadedFromInternet) {
