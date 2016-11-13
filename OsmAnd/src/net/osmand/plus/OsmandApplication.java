@@ -23,6 +23,7 @@ import android.view.accessibility.AccessibilityManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import net.osmand.CallbackWithObject;
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibilityPlugin;
@@ -60,7 +61,9 @@ import java.io.PrintStream;
 import java.lang.Thread.UncaughtExceptionHandler;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 import btools.routingapp.BRouterServiceConnection;
 import btools.routingapp.IBRouterService;
@@ -68,6 +71,8 @@ import btools.routingapp.IBRouterService;
 public class OsmandApplication extends MultiDexApplication {
 	public static final String EXCEPTION_PATH = "exception.log"; //$NON-NLS-1$
 	private static final org.apache.commons.logging.Log LOG = PlatformUtil.getLog(OsmandApplication.class);
+
+	public static final String SHOW_PLUS_VERSION_PARAM = "show_plus_version";
 
 	final AppInitializer appInitializer = new AppInitializer(this);
 	OsmandSettings osmandSettings = null;
@@ -149,6 +154,7 @@ public class OsmandApplication extends MultiDexApplication {
 //			targetPointsHelper.clearPointToNavigate(false);
 //		}
 
+		initRemoteConfig();
 		startApplication();
 		System.out.println("Time to start application " + (System.currentTimeMillis() - timeToStart) + " ms. Should be less < 800 ms");
 		timeToStart = System.currentTimeMillis();
@@ -791,5 +797,65 @@ public class OsmandApplication extends MultiDexApplication {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	public void initRemoteConfig() {
+		try {
+			if(Version.isGooglePlayEnabled(this) && Version.isFreeVersion(this)) {
+				Class<?> cl = Class.forName("com.google.firebase.remoteconfig.FirebaseRemoteConfig");
+				Method mm = cl.getMethod("getInstance");
+				Object inst = mm.invoke(null);
+				Method log = cl.getMethod("setDefaults", Map.class);
+				Map<String, Object> defaults = new HashMap<>();
+				defaults.put(SHOW_PLUS_VERSION_PARAM, Boolean.FALSE);
+				log.invoke(inst, defaults);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void fetchRemoteParams() {
+		try {
+			if(Version.isGooglePlayEnabled(this) && Version.isFreeVersion(this)) {
+				Class<?> cl = Class.forName("com.google.firebase.remoteconfig.FirebaseRemoteConfig");
+				Method mm = cl.getMethod("getInstance");
+				Object inst = mm.invoke(null);
+				Method log = cl.getMethod("fetch");
+				log.invoke(inst);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void activateFetchedRemoteParams() {
+		try {
+			if(Version.isGooglePlayEnabled(this) && Version.isFreeVersion(this)) {
+				Class<?> cl = Class.forName("com.google.firebase.remoteconfig.FirebaseRemoteConfig");
+				Method mm = cl.getMethod("getInstance");
+				Object inst = mm.invoke(null);
+				Method log = cl.getMethod("activateFetched");
+				log.invoke(inst);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public boolean getRemoteBoolean(String key, boolean defaultValue) {
+		try {
+			if(Version.isGooglePlayEnabled(this) && Version.isFreeVersion(this)) {
+				Class<?> cl = Class.forName("com.google.firebase.remoteconfig.FirebaseRemoteConfig");
+				Method mm = cl.getMethod("getInstance");
+				Object inst = mm.invoke(null);
+				Method log = cl.getMethod("getBoolean", String.class);
+				Boolean res = (Boolean)log.invoke(inst, key);
+				return res == null ? defaultValue : res;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return defaultValue;
 	}
 }
