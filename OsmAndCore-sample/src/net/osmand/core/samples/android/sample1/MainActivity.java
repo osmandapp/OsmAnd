@@ -2,7 +2,7 @@ package net.osmand.core.samples.android.sample1;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.content.pm.PackageManager;
@@ -14,6 +14,8 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPropertyAnimatorListener;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.DisplayMetrics;
@@ -66,13 +68,14 @@ import net.osmand.search.core.SearchSettings;
 import net.osmand.util.MapUtils;
 
 import java.io.File;
+import java.io.FilenameFilter;
 import java.io.RandomAccessFile;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
-public class MainActivity extends Activity {
+public class MainActivity extends AppCompatActivity {
 	private static final String TAG = "OsmAndCoreSample";
 
 	private float displayDensityFactor;
@@ -113,6 +116,8 @@ public class MainActivity extends Activity {
 	private SearchListAdapter adapter;
 	private String queryText = "";
 
+	private boolean noMapsFound;
+
 	// Germany
 	private final static float INIT_LAT = 49.353953f;
 	private final static float INIT_LON = 11.214384f;
@@ -144,7 +149,7 @@ public class MainActivity extends Activity {
 	@Override
 	public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
 		super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-		if(requestCode == SampleApplication.PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE &&
+		if (requestCode == SampleApplication.PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE &&
 				grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 			getSampleApplication().initPoiTypes();
 		}
@@ -162,8 +167,9 @@ public class MainActivity extends Activity {
 		// Inflate views
 		setContentView(R.layout.activity_main);
 
-		if(ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-				!= PackageManager.PERMISSION_GRANTED) {
+		boolean externalStoragePermissionGranted = ContextCompat.checkSelfPermission(this,
+				Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
+		if (!externalStoragePermissionGranted) {
 			ActivityCompat.requestPermissions(this,
 					new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
 					SampleApplication.PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
@@ -342,6 +348,37 @@ public class MainActivity extends Activity {
 			}
 		});
 
+		if (!InstallOsmAndAppDialog.showIfNeeded(getSupportFragmentManager(), this)
+				&& externalStoragePermissionGranted) {
+			checkMapsInstalled();
+		}
+	}
+
+	private void checkMapsInstalled() {
+		File mapsDir = new File(getSampleApplication().getAbsoluteAppPath());
+		if (mapsDir.exists()) {
+			File[] maps = mapsDir.listFiles(new FilenameFilter() {
+				@Override
+				public boolean accept(File dir, String filename) {
+					return filename.toLowerCase().endsWith(".obf");
+				}
+			});
+			noMapsFound = maps == null || maps.length == 0;
+		}
+
+		if (noMapsFound) {
+			AlertDialog.Builder builder = new AlertDialog.Builder(this);
+			builder.setTitle(R.string.install_maps_title);
+			builder.setMessage(R.string.install_maps_desc);
+			builder.setNegativeButton(R.string.shared_string_cancel, null);
+			builder.setPositiveButton(R.string.restart_app, new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					SampleUtils.doRestart(MainActivity.this);
+				}
+			});
+			builder.create().show();
+		}
 	}
 
 	private void setupSearch() {
@@ -382,7 +419,6 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-
 		mapView.handleOnResume();
 	}
 
@@ -390,14 +426,12 @@ public class MainActivity extends Activity {
 	protected void onPause() {
 		saveMapState();
 		mapView.handleOnPause();
-
 		super.onPause();
 	}
 
 	@Override
 	protected void onDestroy() {
 		mapView.handleOnDestroy();
-
 		super.onDestroy();
 	}
 
@@ -538,7 +572,7 @@ public class MainActivity extends Activity {
 	private void runSearch(String text) {
 
 		SearchSettings settings = searchUICore.getPhrase().getSettings();
-		if(settings.getRadiusLevel() != 1){
+		if (settings.getRadiusLevel() != 1) {
 			searchUICore.updateSettings(settings.setRadiusLevel(1));
 		}
 		searchUICore.search(text, null);

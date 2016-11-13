@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="install_maps_title">Install maps</string>
+    <string name="install_maps_desc">You do not have maps in the OsmAnd application. Please download map(s) first and restart the Sample.\n\nDo not forget to set OsmAnd General settings > Data storage folder to Shared memory.</string>
+    <string name="shared_string_cancel">Cancel</string>
+    <string name="shared_string_error">Error</string>
+    <string name="restart_app">Restart app</string>
+    <string name="install_osmand_title">Install OsmAnd</string>
+    <string name="install_osmand_q">The OsmAnd application not found. Please install OsmAnd and download maps.</string>
+    <string name="install_osmand_note">NOTE: After OsmAnd will be installed, you need to set OsmAnd General settings > Data storage folder to Shared memory</string>
     <string name="app_name">OsmAnd Core API sample 1 for Android OS</string>
     <string name="title_activity_main">OsmAnd Core Sample 1</string>
     <string name="zoomIn">Zoom in</string>
