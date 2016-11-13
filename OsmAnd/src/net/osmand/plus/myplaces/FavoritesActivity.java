@@ -42,8 +42,12 @@ public class FavoritesActivity extends TabActivity {
 
 	@Override
 	public void onCreate(Bundle icicle) {
-		((OsmandApplication) getApplication()).applyTheme(this);
+		OsmandApplication app = (OsmandApplication) getApplication();
+		app.applyTheme(this);
 		super.onCreate(icicle);
+
+		app.logEvent(this, "myplaces_open");
+
 		//noinspection ConstantConditions
 		getSupportActionBar().setTitle(R.string.shared_string_my_places);
 		getSupportActionBar().setElevation(0);

@@ -1245,8 +1245,9 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 				return false;
 			}
 
-			Bundle bundle = new Bundle();
+			mapActivity.getMyApplication().logEvent(mapActivity, "search_open");
 
+			Bundle bundle = new Bundle();
 			if (object != null) {
 				bundle.putBoolean(QUICK_SEARCH_RUN_SEARCH_FIRST_TIME_KEY, true);
 				String objectLocalizedName = searchQuery;
