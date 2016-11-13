@@ -2347,7 +2347,7 @@ Si amas a OsmAnd, OSM y quieres apoyarlos, esta es una perfecta manera de hacerl
     <string name="map_widget_battery">Nivel de batería</string>
     <string name="lang_hu_formal">Húngaro (formal)</string>
     <string name="current_track">Traza actual</string>
-    <string name="change_markers_position">Cambiar ubicación del marcador</string>
+    <string name="change_markers_position">Mover el marcador</string>
     <string name="lang_es_us">Español (Estados Unidos)</string>
     <string name="lang_be_BY">Bielorruso (Latín)</string>
     <string name="lang_kn">Canarés</string>
