@@ -164,6 +164,9 @@ def replaceNoTranslate(line) {
 	if (line.contains("\"app_name\"") && System.getenv("TARGET_APP_NAME")) {
 		return line.replaceAll(">[^<]*<", ">" + System.getenv("TARGET_APP_NAME") + "<")
 	}
+	if (line.contains("\"app_name_free\"") && System.getenv("TARGET_APP_NAME")) {
+		return line.replaceAll(">[^<]*<", ">" + System.getenv("TARGET_APP_NAME") + "<")
+	}
 	if (line.contains("\"app_edition\"") && System.getenv("APP_EDITION")) {
 		return line.replaceAll(">[^<]*<", ">" + System.getenv("APP_EDITION") + "<")
 	}
