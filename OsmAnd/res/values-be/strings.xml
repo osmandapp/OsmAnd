@@ -2693,4 +2693,5 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="upload_poi">Выгрузіць POI</string>
     <string name="search_map_hint">Пошук горада ці краіны</string>
     <string name="wiki_around">Блізкія месцы ў Вікіпэдыі</string>
+    <string name="rendering_value_fine_name">Вельмі тонкі</string>
     </resources>
