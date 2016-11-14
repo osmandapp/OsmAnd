@@ -502,7 +502,7 @@
 	<string name="poi_pier">Marponto</string>
 	<string name="poi_surveillance">Fara kontrolado</string>
 	<string name="poi_observatory">Observejo</string>
-	<string name="poi_astronomical_observatory">Stelscienca</string>
+	<string name="poi_astronomical_observatory">Astroscienca</string>
 	<string name="poi_mast">Masto</string>
 	<string name="poi_monitoring_station">Kontrol-stacio</string>
 	<string name="poi_radar">Radaro</string>
@@ -814,7 +814,7 @@
 	<string name="poi_craft_winery">Vinejo</string>
 
 	<string name="poi_club_art">Artisma klubejo</string>
-	<string name="poi_club_astronomy">Stelscienca klubejo</string>
+	<string name="poi_club_astronomy">Astroscienca klubejo</string>
 	<string name="poi_club_computer">Komputila klubejo</string>
 	<string name="poi_club_board_games">Tabulluda klubejo</string>
 	<string name="poi_club_motorcycle">Motorcikla klubejo</string>
@@ -1287,7 +1287,7 @@
 	<string name="poi_board_type_geology">Terscienco</string>
 	<string name="poi_board_type_public_transport">Transporto publika</string>
 	<string name="poi_board_type_technology">Teĥnologio</string>
-	<string name="poi_board_type_astronomy">Stelscienco</string>
+	<string name="poi_board_type_astronomy">Astroscienco</string>
 
 	<string name="poi_commercial">Oficeja tereno</string>
 	<string name="poi_covered_yes">Jes</string>
