@@ -1209,7 +1209,8 @@
     <string name="osmand_parking_minute">min</string>
     <string name="parking_place_limited">Parkeringstid begrenset til</string>
     <string name="simulate_your_location">Simuler din posisjon</string>
-    <string name="short_location_on_map">Br %1$s\n Le %2$s</string>
+    <string name="short_location_on_map">Br %1$s
+Le %2$s</string>
     <string name="general_settings_2">Generelle innstillinger</string>
     <string name="shared_string_deselect">Fravelg</string>
     <string name="shared_string_deselect_all">Fravelg alle</string>
@@ -1750,4 +1751,5 @@
     <string name="rendering_value_dark_brown_name">Mørkebrun</string>
     <string name="rendering_attr_contourColorScheme_name">Fargeskjema for koter</string>
     <string name="search_hint">Tast by, adresse, interessepunktnavn</string>
+    <string name="search_map_hint">Søk etter by eller region</string>
     </resources>
