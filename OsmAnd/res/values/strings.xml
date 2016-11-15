@@ -262,6 +262,7 @@
     <string name="download_files_question_space">Download {0} file(s)?
         Storage space used is {1} MB.
         (Available space is {2} MB.)</string>
+    <string name="upload_osm_note_description">You can upload your OSM Note anonymously if you use your OpenStreetMap.org profile.</string>
     <string name="upload_osm_note">Upload OSM Note</string>
     <string name="map_marker_1st">First map marker</string>
     <string name="map_marker_2nd">Second map marker</string>
