@@ -1884,7 +1884,8 @@ Shranjene sledi je mogoče objavljati kot datoteke OSM. Z uporabo vstavka je mog
     <string name="parking_place_limited">Parkiranje je časovno omejeno na</string>
     <string name="your_edits">Vaša urejanja</string>
     <string name="drawer">Seznam</string>
-    <string name="short_location_on_map">ZD (λ) %1$s\n ZŠ (β) %2$s</string>
+    <string name="short_location_on_map">ZD (λ) %1$s
+ZŠ (β) %2$s</string>
     <string name="tips_and_tricks_descr">Pogosta vprašanja, nedavne spremembe in druge podrobnosti</string>
     <string name="routing_settings_2">Nastavitve navigacije</string>
     <string name="general_settings_2">Splošne nastavitve</string>
@@ -2657,4 +2658,5 @@ V kolikor naletite na težave s programom OsmAnd, prosimo, stopite v stik s skup
     <string name="rendering_value_fine_name">Drobno</string>
     <string name="route_roundabout_short">Pojdite na %1$d izhod in nadaljujte</string>
     <string name="search_map_hint">Poišči mesto ali območje</string>
+    <string name="wiki_around">Bližnja mesta s članki Wikipedije</string>
     </resources>
