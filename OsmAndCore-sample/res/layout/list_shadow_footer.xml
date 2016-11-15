@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:id="@+id/bottomShadowView"
+              xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:background="?attr/ctx_menu_info_view_bg"
+              android:orientation="vertical"
+              xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <net.osmand.core.samples.android.sample1.customcontrols.OsmandImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY"
+        app:osmandSrc="bg_shadow_list_bottom"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="16dp"/>
+
+</LinearLayout>

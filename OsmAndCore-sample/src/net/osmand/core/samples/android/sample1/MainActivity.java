@@ -7,38 +7,24 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.content.pm.PackageManager;
 import android.graphics.PointF;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.view.ViewCompat;
-import android.support.v4.view.ViewPropertyAnimatorListener;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.core.android.AtlasMapRendererView;
 import net.osmand.core.jni.IMapLayerProvider;
 import net.osmand.core.jni.IMapStylesCollection;
-import net.osmand.core.jni.IQueryController;
-import net.osmand.core.jni.ISearch;
 import net.osmand.core.jni.Logger;
 import net.osmand.core.jni.MapObjectsSymbolsProvider;
 import net.osmand.core.jni.MapPresentationEnvironment;
@@ -46,34 +32,20 @@ import net.osmand.core.jni.MapPrimitivesProvider;
 import net.osmand.core.jni.MapPrimitiviser;
 import net.osmand.core.jni.MapRasterLayerProvider_Software;
 import net.osmand.core.jni.MapStylesCollection;
-import net.osmand.core.jni.NullablePointI;
 import net.osmand.core.jni.ObfMapObjectsProvider;
 import net.osmand.core.jni.ObfsCollection;
-import net.osmand.core.jni.OsmAndCoreJNI;
 import net.osmand.core.jni.PointI;
 import net.osmand.core.jni.QIODeviceLogSink;
 import net.osmand.core.jni.ResolvedMapStyle;
-import net.osmand.core.jni.ReverseGeocoder;
 import net.osmand.core.jni.RoadLocator;
 import net.osmand.core.jni.Utilities;
 import net.osmand.core.samples.android.sample1.MultiTouchSupport.MultiTouchZoomListener;
-import net.osmand.core.samples.android.sample1.adapters.SearchListAdapter;
-import net.osmand.core.samples.android.sample1.adapters.SearchListItem;
+import net.osmand.core.samples.android.sample1.search.QuickSearchDialogFragment;
 import net.osmand.data.LatLon;
-import net.osmand.search.SearchUICore;
-import net.osmand.search.SearchUICore.SearchResultCollection;
-import net.osmand.search.core.ObjectType;
-import net.osmand.search.core.SearchResult;
-import net.osmand.search.core.SearchSettings;
 import net.osmand.util.MapUtils;
 
 import java.io.File;
 import java.io.FilenameFilter;
-import java.io.RandomAccessFile;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 	private static final String TAG = "OsmAndCoreSample";
@@ -95,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
 
 	private AtlasMapRendererView mapView;
 	private TextView textZoom;
+	private ImageButton searchButton;
 	private ImageButton azimuthNorthButton;
 
 	private GestureDetector gestureDetector;
@@ -103,18 +76,6 @@ public class MainActivity extends AppCompatActivity {
 	private float azimuth;
 	private float elevationAngle;
 	private MultiTouchSupport multiTouchSupport;
-
-	private SearchUICore searchUICore;
-
-	private EditText searchEditText;
-	private ImageView searchIcon;
-	private ProgressBar progressBar;
-
-	private final static int MAX_SEARCH_RESULTS_CORE = 0;
-	private final static int MAX_SEARCH_RESULTS_IU = 150;
-	private ListView searchListView;
-	private SearchListAdapter adapter;
-	private String queryText = "";
 
 	private boolean noMapsFound;
 
@@ -136,14 +97,8 @@ public class MainActivity extends AppCompatActivity {
 	private static final String PREF_MAP_ZOOM = "MAP_ZOOM";
 	private static final String PREF_MAP_ELEVATION_ANGLE = "MAP_ELEVATION_ANGLE";
 
-	public static final String LANGUAGE;
-
-	static {
-		String langCode = Locale.getDefault().getLanguage();
-		if (langCode.isEmpty()) {
-			langCode = "en";
-		}
-		LANGUAGE = langCode;
+	public SampleApplication getMyApplication() {
+		return (SampleApplication) getApplication();
 	}
 
 	@Override
@@ -179,8 +134,16 @@ public class MainActivity extends AppCompatActivity {
 		mapView = (AtlasMapRendererView) findViewById(R.id.mapRendererView);
 
 		textZoom = (TextView) findViewById(R.id.text_zoom);
-		azimuthNorthButton = (ImageButton) findViewById(R.id.map_azimuth_north_button);
 
+		searchButton = (ImageButton) findViewById(R.id.search_button);
+		searchButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				showQuickSearch(ShowQuickSearchMode.NEW_IF_EXPIRED, false);
+			}
+		});
+
+		azimuthNorthButton = (ImageButton) findViewById(R.id.map_azimuth_north_button);
 		azimuthNorthButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -237,7 +200,7 @@ public class MainActivity extends AppCompatActivity {
 				displayDensityFactor,
 				1.0f,
 				1.0f,
-				LANGUAGE);
+				SampleApplication.LANGUAGE);
 		//mapPresentationEnvironment->setSettings(configuration.styleSettings);
 		mapPrimitiviser = new MapPrimitiviser(
 				mapPresentationEnvironment);
@@ -261,94 +224,7 @@ public class MainActivity extends AppCompatActivity {
 
 		app.getIconsCache().setDisplayDensityFactor(displayDensityFactor);
 
-		setupSearch();
-
-		searchEditText = (EditText) findViewById(R.id.searchEditText);
-		searchEditText.addTextChangedListener(new TextWatcher() {
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-			}
-
-			@Override
-			public void onTextChanged(CharSequence s, int start, int before, int count) {
-			}
-
-			@Override
-			public void afterTextChanged(Editable s) {
-				String newQueryText = s.toString();
-				if (!queryText.equalsIgnoreCase(newQueryText)) {
-					queryText = newQueryText;
-					showProgressBar();
-					runSearch();
-				}
-			}
-		});
-		searchEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-			@Override
-			public void onFocusChange(View v, boolean hasFocus) {
-				if (hasFocus) {
-					net.osmand.core.jni.LatLon latLon = Utilities.convert31ToLatLon(target31);
-					SearchSettings settings = searchUICore.getPhrase().getSettings().setOriginalLocation(
-							new LatLon(latLon.getLatitude(), latLon.getLongitude()));
-					settings = settings.setLang(LANGUAGE, false);
-					searchUICore.updateSettings(settings);
-
-					adapter.setLocation(new LatLon(latLon.getLatitude(), latLon.getLongitude()));
-
-					if (isSearchListHidden()) {
-						showSearchList();
-						if (adapter.getCount() > 0) {
-							adapter.updateDistance(latLon.getLatitude(), latLon.getLongitude());
-							adapter.notifyDataSetChanged();
-						} else {
-							runSearch();
-						}
-					}
-				}
-			}
-		});
-
-		searchIcon = (ImageView) findViewById(R.id.searchIcon);
-		progressBar = (ProgressBar) findViewById(R.id.searchProgressBar);
-
-		ImageButton clearButton = (ImageButton) findViewById(R.id.clearButton);
-		clearButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				searchEditText.setText("");
-				adapter.clear();
-				adapter.notifyDataSetChanged();
-				hideSearchList();
-			}
-		});
-
-		searchListView = (ListView) findViewById(android.R.id.list);
-		adapter = new SearchListAdapter(this);
-		searchListView.setAdapter(adapter);
-		searchListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				SearchListItem item = adapter.getItem(position);
-				SearchResult sr = item.getSearchResult();
-
-				boolean updateEditText = true;
-				if (sr.objectType == ObjectType.POI
-						|| sr.objectType == ObjectType.LOCATION
-						|| sr.objectType == ObjectType.HOUSE
-						|| sr.objectType == ObjectType.FAVORITE
-						|| sr.objectType == ObjectType.RECENT_OBJ
-						|| sr.objectType == ObjectType.WPT
-						|| sr.objectType == ObjectType.STREET_INTERSECTION) {
-
-					hideSearchList();
-					mapView.requestFocus();
-					updateEditText = false;
-				}
-				completeQueryWithObject(item.getSearchResult(), updateEditText);
-			}
-		});
-
-		if (!InstallOsmAndAppDialog.showIfNeeded(getSupportFragmentManager(), this)
+		if (!InstallOsmandAppDialog.showIfNeeded(getSupportFragmentManager(), this)
 				&& externalStoragePermissionGranted) {
 			checkMapsInstalled();
 		}
@@ -381,41 +257,6 @@ public class MainActivity extends AppCompatActivity {
 		}
 	}
 
-	private void setupSearch() {
-		final SampleApplication app = getSampleApplication();
-		List<BinaryMapIndexReader> files = new ArrayList<>();
-		File file = new File(app.getAbsoluteAppPath());
-		if (file.exists() && file.listFiles() != null) {
-			for (File obf : file.listFiles()) {
-				if (!obf.isDirectory() && obf.getName().endsWith(".obf")) {
-					try {
-						BinaryMapIndexReader bmir = new BinaryMapIndexReader(new RandomAccessFile(obf, "r"), obf);
-						files.add(bmir);
-					} catch (Exception e1) {
-						e1.printStackTrace();
-					}
-				}
-			}
-		}
-
-		searchUICore = new SearchUICore(app.getPoiTypes(), LANGUAGE, false);
-		searchUICore.getSearchSettings().setOfflineIndexes(Arrays.asList(files.toArray(new BinaryMapIndexReader[files.size()])));
-		searchUICore.init();
-
-		searchUICore.setOnResultsComplete(new Runnable() {
-			@Override
-			public void run() {
-				app.runInUIThread(new Runnable() {
-					@Override
-					public void run() {
-						hideProgressBar();
-						updateSearchResult(searchUICore.getCurrentSearchResult(), true);
-					}
-				});
-			}
-		});
-	}
-
 	@Override
 	protected void onResume() {
 		super.onResume();
@@ -439,7 +280,7 @@ public class MainActivity extends AppCompatActivity {
 		return (SampleApplication) getApplication();
 	}
 
-	private void showOnMap(LatLon latLon, int zoom) {
+	public void showOnMap(LatLon latLon, int zoom) {
 		if (latLon != null) {
 			PointI target = Utilities.convertLatLonTo31(
 					new net.osmand.core.jni.LatLon(latLon.getLatitude(), latLon.getLongitude()));
@@ -448,51 +289,17 @@ public class MainActivity extends AppCompatActivity {
 		}
 	}
 
-	private PointI getScreenCenter31() {
+	public PointI getScreenCenter31() {
 		PointI point = new PointI();
 		mapView.getLocationFromScreenPoint(new PointI(mapView.getWidth() / 2, mapView.getHeight() / 2), point);
 		return point;
 	}
 
-	private void showProgressBar() {
-		searchIcon.setVisibility(View.GONE);
-		progressBar.setVisibility(View.VISIBLE);
-	}
-
-	private void hideProgressBar() {
-		progressBar.setVisibility(View.GONE);
-		searchIcon.setVisibility(View.VISIBLE);
-	}
-
-	private boolean isSearchListHidden() {
-		return searchListView.getVisibility() != View.VISIBLE;
-	}
-
-	private void showSearchList() {
-		if (isSearchListHidden()) {
-			ViewCompat.setAlpha(searchListView, 0f);
-			searchListView.setVisibility(View.VISIBLE);
-			ViewCompat.animate(searchListView).alpha(1f).setListener(null);
-		}
-	}
-
-	private void hideSearchList() {
-		ViewCompat.animate(searchListView).alpha(0f).setListener(new ViewPropertyAnimatorListener() {
-			@Override
-			public void onAnimationStart(View view) {
-
-			}
-
-			@Override
-			public void onAnimationEnd(View view) {
-				searchListView.setVisibility(View.GONE);
-			}
-
-			@Override
-			public void onAnimationCancel(View view) {
-				searchListView.setVisibility(View.GONE);
-			}
-		});
+	public LatLon getScreenCenter() {
+		PointI point = new PointI();
+		mapView.getLocationFromScreenPoint(new PointI(mapView.getWidth() / 2, mapView.getHeight() / 2), point);
+		net.osmand.core.jni.LatLon jniLatLon = Utilities.convert31ToLatLon(point);
+		return new LatLon(jniLatLon.getLatitude(), jniLatLon.getLongitude());
 	}
 
 	public void saveMapState() {
@@ -563,126 +370,6 @@ public class MainActivity extends AppCompatActivity {
 	public boolean onTouchEvent(MotionEvent event) {
 		return multiTouchSupport.onTouchEvent(event)
 				|| gestureDetector.onTouchEvent(event);
-	}
-
-	private void runSearch() {
-		runSearch(queryText);
-	}
-
-	private void runSearch(String text) {
-
-		SearchSettings settings = searchUICore.getPhrase().getSettings();
-		if (settings.getRadiusLevel() != 1) {
-			searchUICore.updateSettings(settings.setRadiusLevel(1));
-		}
-		searchUICore.search(text, null);
-		SearchResultCollection c = searchUICore.search(text, null);
-		updateSearchResult(c, false);
-	}
-
-	private void completeQueryWithObject(SearchResult sr, boolean updateEditText) {
-
-		if (sr.location != null) {
-			showOnMap(sr.location, sr.preferredZoom);
-		}
-		searchUICore.selectSearchResult(sr);
-		String txt = searchUICore.getPhrase().getText(true);
-		if (updateEditText) {
-			queryText = txt;
-			searchEditText.setText(txt);
-			searchEditText.setSelection(txt.length());
-		}
-
-		searchUICore.search(txt, null);
-	}
-
-	private void updateSearchResult(SearchResultCollection res, boolean addMore) {
-
-		SampleApplication app = getSampleApplication();
-
-		if (res.getCurrentSearchResults().size() > 0) {
-			List<SearchListItem> rows = new ArrayList<>();
-			for (final SearchResult sr : res.getCurrentSearchResults()) {
-
-				int count = 30;
-				/*
-				if(addMore) {
-					JMenuItem mi = new JMenuItem();
-					mi.setText("Results " + res.getCurrentSearchResults().size() + ", radius " + res.getPhrase().getRadiusLevel()+
-							" (show more...)");
-					mi.addActionListener(new ActionListener() {
-
-						@Override
-						public void actionPerformed(ActionEvent e) {
-							SearchSettings settings = searchUICore.getPhrase().getSettings();
-							searchUICore.updateSettings(settings.setRadiusLevel(settings.getRadiusLevel() + 1));
-							searchUICore.search(statusField.getText(), null);
-							updateSearchResult(statusField, new SearchResultCollection(), false);
-						}
-					});
-					popup.add(mi);
-				}
-				*/
-
-				count--;
-				if (count == 0) {
-//					break;
-				}
-				//LatLon location = res.getPhrase().getLastTokenLocation();
-				//String locationString = "";
-				//if (sr.location != null) {
-				//	locationString = ((int) MapUtils.getDistance(location, sr.location)) + " m";
-				//}
-				//mi.setText(sr.localeName + " [" + sr.objectType + "] " + locationString);
-
-				SearchListItem listItem = new SearchListItem(app, sr);
-				if (sr.location != null) {
-					LatLon location = res.getPhrase().getLastTokenLocation();
-					listItem.setDistance(MapUtils.getDistance(location, sr.location));
-				}
-				rows.add(listItem);
-			}
-			updateListAdapter(rows);
-			showSearchList();
-		}
-	}
-
-	private void updateListAdapter(List<SearchListItem> listItems) {
-		adapter.setListItems(listItems);
-		if (adapter.getCount() > 0) {
-			searchListView.setSelection(0);
-		}
-	}
-
-	public void geocode(@NonNull PointI point31) {
-		new AsyncTask<PointI, Void, String>() {
-			@Override
-			protected String doInBackground(PointI... params) {
-				final String[] resultString = {null};
-				ReverseGeocoder geocoder = new ReverseGeocoder(obfsCollection, roadLocator);
-				final ReverseGeocoder.Criteria criteria = new ReverseGeocoder.Criteria();
-				criteria.setPosition31(new NullablePointI(params[0]));
-				ISearch.INewResultEntryCallback geocoderResultCallback = new ISearch.INewResultEntryCallback() {
-					@Override
-					public void method(ISearch.Criteria criteria, ISearch.IResultEntry resultEntry) {
-						ReverseGeocoderResultEntry result = new ReverseGeocoderResultEntry(resultEntry);
-						resultString[0] = result.toString();
-					}
-				};
-				geocoder.performSearch(criteria, geocoderResultCallback.getBinding(), new IQueryController() {
-					@Override
-					public boolean isAborted() {
-						return false;
-					}
-				});
-				return resultString[0];
-			}
-
-			@Override
-			protected void onPostExecute(String s) {
-				Toast.makeText(MainActivity.this, s, Toast.LENGTH_SHORT).show();
-			}
-		}.execute(point31);
 	}
 
 	private class MapViewOnGestureListener extends SimpleOnGestureListener {
@@ -796,10 +483,68 @@ public class MainActivity extends AppCompatActivity {
 		}
 	}
 
-	private class ReverseGeocoderResultEntry extends ReverseGeocoder.ResultEntry {
-		protected ReverseGeocoderResultEntry(ISearch.IResultEntry resultEntry) {
-			super(OsmAndCoreJNI.ReverseGeocoder_ResultEntry_SWIGUpcast(ISearch.IResultEntry.getCPtr(resultEntry)), false);
+	public void showQuickSearch(double latitude, double longitude) {
+		hideContextMenu();
+		QuickSearchDialogFragment fragment = getQuickSearchDialogFragment();
+		if (fragment != null) {
+			fragment.dismiss();
+			//refreshMap();
+		}
+		QuickSearchDialogFragment.showInstance(this, "", null, true, new LatLon(latitude, longitude));
+	}
+
+	public void showQuickSearch(Object object) {
+		hideContextMenu();
+		QuickSearchDialogFragment fragment = getQuickSearchDialogFragment();
+		if (fragment != null) {
+			fragment.dismiss();
+			//refreshMap();
+		}
+		QuickSearchDialogFragment.showInstance(this, "", object, true, null);
+	}
+
+	public void showQuickSearch(ShowQuickSearchMode mode, boolean showCategories) {
+		hideContextMenu();
+		QuickSearchDialogFragment fragment = getQuickSearchDialogFragment();
+		if (fragment != null) {
+			if (mode == ShowQuickSearchMode.NEW || (mode == ShowQuickSearchMode.NEW_IF_EXPIRED && fragment.isExpired())) {
+				fragment.dismiss();
+				QuickSearchDialogFragment.showInstance(this, "", null, showCategories, null);
+			} else {
+				fragment.show();
+			}
+			//refreshMap();
+		} else {
+			QuickSearchDialogFragment.showInstance(this, "", null, showCategories, null);
 		}
 	}
 
+	public void closeQuickSearch() {
+		QuickSearchDialogFragment fragment = getQuickSearchDialogFragment();
+		if (fragment != null) {
+			fragment.closeSearch();
+			//refreshMap();
+		}
+	}
+
+	public QuickSearchDialogFragment getQuickSearchDialogFragment() {
+		Fragment fragment = getSupportFragmentManager().findFragmentByTag(QuickSearchDialogFragment.TAG);
+		return fragment != null && !fragment.isDetached() && !fragment.isRemoving() ? (QuickSearchDialogFragment) fragment : null;
+	}
+
+	private void hideContextMenu() {
+		/* todo
+		if (mapContextMenu.isVisible()) {
+			mapContextMenu.hide();
+		} else if (mapContextMenu.getMultiSelectionMenu().isVisible()) {
+			mapContextMenu.getMultiSelectionMenu().hide();
+		}
+		*/
+	}
+
+	public enum ShowQuickSearchMode {
+		NEW,
+		NEW_IF_EXPIRED,
+		CURRENT,
+	}
 }

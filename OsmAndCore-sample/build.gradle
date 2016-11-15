@@ -105,6 +105,7 @@ repositories {
 dependencies {
     compile project(path: ':OsmAnd-java', configuration: 'android')
     compile 'com.android.support:appcompat-v7:23.3.0'
+    compile 'com.android.support:design:23.3.0'
     compile fileTree(dir: "libs", include: ["*.jar"])
     compile "net.osmand:OsmAndCore_android:0.1-SNAPSHOT@aar"
     debugCompile "net.osmand:OsmAndCore_androidNativeRelease:0.1-SNAPSHOT@aar"
