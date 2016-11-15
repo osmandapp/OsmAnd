@@ -69,6 +69,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements SampleC
 
 	private Toolbar toolbar;
 	private View searchView;
+	private View categoriesView;
 	private View buttonToolbarView;
 	private ImageView buttonToolbarImage;
 	private TextView buttonToolbarText;
@@ -175,6 +176,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements SampleC
 		}
 
 		searchView = view.findViewById(R.id.search_view);
+		categoriesView = view.findViewById(R.id.categories_view);
 
 		buttonToolbarView = view.findViewById(R.id.button_toolbar_layout);
 		buttonToolbarImage = (ImageView) view.findViewById(R.id.buttonToolbarImage);
@@ -186,15 +188,14 @@ public class QuickSearchDialogFragment extends DialogFragment implements SampleC
 					@Override
 					public void onClick(View v) {
 						SearchPhrase searchPhrase = searchUICore.getPhrase();
-						if (!searchPhrase.isNoSelectedType() && !searchPhrase.isLastWord(POI_TYPE)) {
-							SearchWord word = searchPhrase.getLastSelectedWord();
-							if (word != null && word.getLocation() != null) {
-								SearchResult searchResult = word.getResult();
-								String name = QuickSearchListItem.getName(app, searchResult);
-								String typeName = QuickSearchListItem.getTypeName(app, searchResult);
-								PointDescription pointDescription = new PointDescription(PointDescription.POINT_TYPE_ADDRESS, typeName, name);
+						SearchWord word = searchPhrase.getLastSelectedWord();
+						if (word != null && word.getLocation() != null) {
+							SearchResult searchResult = word.getResult();
+							String name = QuickSearchListItem.getName(app, searchResult);
+							String typeName = QuickSearchListItem.getTypeName(app, searchResult);
+							PointDescription pointDescription = new PointDescription(PointDescription.POINT_TYPE_ADDRESS, typeName, name);
 
-								mainActivity.showOnMap(searchResult.location, searchResult.preferredZoom);
+							mainActivity.showOnMap(searchResult.location, searchResult.preferredZoom);
 								/* todo
 								app.getSettings().setMapLocationToShow(
 										searchResult.location.getLatitude(), searchResult.location.getLongitude(),
@@ -203,8 +204,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements SampleC
 								hideToolbar();
 								MainActivity.launchMainActivityMoveToTop(getActivity());
 								*/
-								hide();
-							}
+							hide();
 						}
 					}
 				}
@@ -239,7 +239,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements SampleC
 						updateClearButtonAndHint();
 						updateClearButtonVisibility(true);
 						boolean textEmpty = newQueryText.length() == 0;
-						updateTabbarVisibility(textEmpty);
+						updateViewsVisibility(textEmpty);
 						if (!searchQuery.equalsIgnoreCase(newQueryText)) {
 							searchQuery = newQueryText;
 							if (Algorithms.isEmpty(searchQuery)) {
@@ -294,6 +294,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements SampleC
 		updateToolbarButton();
 		updateClearButtonAndHint();
 		updateClearButtonVisibility(true);
+		addCategoriesFragment();
 		addMainSearchFragment();
 
 		if (centerLatLon == null) {
@@ -388,16 +389,29 @@ public class QuickSearchDialogFragment extends DialogFragment implements SampleC
 		childFragTrans.commit();
 	}
 
+	public void addCategoriesFragment() {
+		categoriesSearchFragment = (QuickSearchCategoriesListFragment) Fragment.instantiate(this.getContext(), QuickSearchCategoriesListFragment.class.getName());
+		FragmentManager childFragMan = getChildFragmentManager();
+		FragmentTransaction childFragTrans = childFragMan.beginTransaction();
+		childFragTrans.replace(R.id.categories_view, categoriesSearchFragment);
+		childFragTrans.commit();
+	}
+
 	private void updateToolbarButton() {
 		SearchWord word = searchUICore.getPhrase().getLastSelectedWord();
-		if (searchEditText.getText().length() > 0) {
-			if (word != null && word.getResult() != null) {
-				buttonToolbarText.setText(app.getString("show_something_on_map", word.getResult().localeName).toUpperCase());
+		if (word != null && word.getLocation() != null) {
+			if (searchEditText.getText().length() > 0) {
+				if (word.getResult() != null) {
+					buttonToolbarText.setText(app.getString("show_something_on_map", word.getResult().localeName).toUpperCase());
+				} else {
+					buttonToolbarText.setText(app.getString("shared_string_show_on_map").toUpperCase());
+				}
 			} else {
 				buttonToolbarText.setText(app.getString("shared_string_show_on_map").toUpperCase());
 			}
+			buttonToolbarView.setVisibility(View.VISIBLE);
 		} else {
-			buttonToolbarText.setText(app.getString("shared_string_show_on_map").toUpperCase());
+			buttonToolbarView.setVisibility(View.GONE);
 		}
 	}
 
@@ -565,13 +579,15 @@ public class QuickSearchDialogFragment extends DialogFragment implements SampleC
 		}
 	}
 
-	private void updateTabbarVisibility(boolean show) {
+	private void updateViewsVisibility(boolean show) {
 		if (show) {
 			buttonToolbarView.setVisibility(View.GONE);
 			searchView.setVisibility(View.GONE);
+			categoriesView.setVisibility(View.VISIBLE);
 		} else {
 			buttonToolbarView.setVisibility(View.VISIBLE);
 			searchView.setVisibility(View.VISIBLE);
+			categoriesView.setVisibility(View.GONE);
 		}
 	}
 
@@ -586,7 +602,6 @@ public class QuickSearchDialogFragment extends DialogFragment implements SampleC
 	public void onSearchListFragmentResume(QuickSearchListFragment searchListFragment) {
 		switch (searchListFragment.getType()) {
 			case CATEGORIES:
-				categoriesSearchFragment = (QuickSearchCategoriesListFragment) searchListFragment;
 				reloadCategories();
 				break;
 
@@ -689,7 +704,6 @@ public class QuickSearchDialogFragment extends DialogFragment implements SampleC
 						showRegionResults(regionResultCollection);
 						break;
 					case PARTIAL_LOCATION:
-						showLocationToolbar();
 						break;
 					default:
 						results.add(object);
@@ -714,15 +728,6 @@ public class QuickSearchDialogFragment extends DialogFragment implements SampleC
 		if (updateResult) {
 			updateSearchResult(c, false);
 		}
-	}
-
-	private void showLocationToolbar() {
-		app.runInUIThread(new Runnable() {
-			@Override
-			public void run() {
-				updateToolbarButton();
-			}
-		});
 	}
 
 	private void showApiResults(final List<SearchResult> apiResults, final SearchPhrase phrase,
