@@ -5,7 +5,7 @@ import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 
-public class OAResources {
+public class OsmandResources {
 
 	private static Resources osmandResources;
 	private static String packageName;
@@ -34,7 +34,7 @@ public class OAResources {
 			}
 		}
 		if (osmandResources != null) {
-			OAResources.packageName = packageName;
+			OsmandResources.packageName = packageName;
 		}
 	}
 

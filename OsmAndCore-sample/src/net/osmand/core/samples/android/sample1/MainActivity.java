@@ -224,7 +224,7 @@ public class MainActivity extends AppCompatActivity {
 
 		app.getIconsCache().setDisplayDensityFactor(displayDensityFactor);
 
-		if (!InstallOAAppDialog.showIfNeeded(getSupportFragmentManager(), this)
+		if (!InstallOsmandAppDialog.showIfNeeded(getSupportFragmentManager(), this)
 				&& externalStoragePermissionGranted) {
 			checkMapsInstalled();
 		}

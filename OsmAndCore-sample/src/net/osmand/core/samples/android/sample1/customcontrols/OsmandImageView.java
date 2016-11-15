@@ -6,7 +6,7 @@ import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 
-import net.osmand.core.samples.android.sample1.OAResources;
+import net.osmand.core.samples.android.sample1.OsmandResources;
 import net.osmand.core.samples.android.sample1.R;
 
 public class OsmandImageView extends ImageView {
@@ -52,6 +52,6 @@ public class OsmandImageView extends ImageView {
 		}
 
 		String osmandSrc = resolvedAttributes.getString(R.styleable.OsmandImageButton_osmandSrc);
-		target.setImageDrawable(OAResources.getDrawable(osmandSrc));
+		target.setImageDrawable(OsmandResources.getDrawable(osmandSrc));
 	}
 }

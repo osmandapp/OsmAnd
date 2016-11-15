@@ -13,8 +13,8 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatDialogFragment;
 import android.view.View;
 
-public class InstallOAAppDialog extends AppCompatDialogFragment {
-	private static final String TAG = "InstallOAAppDialog";
+public class InstallOsmandAppDialog extends AppCompatDialogFragment {
+	private static final String TAG = "InstallOsmandAppDialog";
 	private static final String OSMAND_PLUS_PACKAGE_NAME = "net.osmand.plus";
 	private static final String OSMAND_PACKAGE_NAME = "net.osmand";
 	private static boolean wasChecked = false;
@@ -69,7 +69,7 @@ public class InstallOAAppDialog extends AppCompatDialogFragment {
 		wasChecked = true;
 		if (!SampleUtils.isPackageInstalled(OSMAND_PACKAGE_NAME, ctx)
 				&& !SampleUtils.isPackageInstalled(OSMAND_PLUS_PACKAGE_NAME, ctx)) {
-			new InstallOAAppDialog().show(manager, TAG);
+			new InstallOsmandAppDialog().show(manager, TAG);
 			return true;
 		} else {
 			return false;

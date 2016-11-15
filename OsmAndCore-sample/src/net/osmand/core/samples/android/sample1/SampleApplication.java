@@ -55,7 +55,7 @@ public class SampleApplication extends Application {
 	@Override
 	public void onCreate() {
 		super.onCreate();
-		OAResources.init(this);
+		OsmandResources.init(this);
 		locationProvider = new SampleLocationProvider(this);
 		searchUICore = new QuickSearchHelper(this);
 		uiHandler = new Handler();
@@ -206,10 +206,10 @@ public class SampleApplication extends Application {
 	}
 
 	public String getString(String osmandId) {
-		return OAResources.getString(osmandId);
+		return OsmandResources.getString(osmandId);
 	}
 
 	public String getString(String osmandId, Object... formatArgs) {
-		return OAResources.getString(osmandId, formatArgs);
+		return OsmandResources.getString(osmandId, formatArgs);
 	}
 }

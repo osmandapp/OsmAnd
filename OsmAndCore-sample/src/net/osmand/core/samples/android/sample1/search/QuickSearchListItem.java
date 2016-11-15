@@ -3,7 +3,7 @@ package net.osmand.core.samples.android.sample1.search;
 import android.graphics.drawable.Drawable;
 
 import net.osmand.binary.BinaryMapIndexReader;
-import net.osmand.core.samples.android.sample1.OAResources;
+import net.osmand.core.samples.android.sample1.OsmandResources;
 import net.osmand.core.samples.android.sample1.R;
 import net.osmand.core.samples.android.sample1.SampleApplication;
 import net.osmand.core.samples.android.sample1.SampleFormatter;
@@ -202,11 +202,11 @@ public class QuickSearchListItem {
 	}
 
 	public static int getPoiTypeIconId(SampleApplication app, AbstractPoiType abstractPoiType) {
-		int res = OAResources.getDrawableId("mx_" + abstractPoiType.getIconKeyName());
+		int res = OsmandResources.getDrawableId("mx_" + abstractPoiType.getIconKeyName());
 		if (res != 0) {
 			return res;
 		} else if (abstractPoiType instanceof PoiType) {
-			res = OAResources.getDrawableId("mx_" + ((PoiType) abstractPoiType).getOsmTag()
+			res = OsmandResources.getDrawableId("mx_" + ((PoiType) abstractPoiType).getOsmTag()
 					+ "_" + ((PoiType) abstractPoiType).getOsmValue());
 			if (res != 0) {
 				return res;
@@ -222,9 +222,9 @@ public class QuickSearchListItem {
 		int res = 0;
 		PoiType st = amenity.getType().getPoiTypeByKeyName(amenity.getSubType());
 		if (st != null) {
-			res = OAResources.getDrawableId("mx_" + st.getIconKeyName());
+			res = OsmandResources.getDrawableId("mx_" + st.getIconKeyName());
 			if (res == 0) {
-				res = OAResources.getDrawableId("mx_" + st.getOsmTag() + "_" + st.getOsmValue());
+				res = OsmandResources.getDrawableId("mx_" + st.getOsmTag() + "_" + st.getOsmValue());
 			}
 		}
 		return res;
@@ -234,9 +234,9 @@ public class QuickSearchListItem {
 		PoiType st = amenity.getType().getPoiTypeByKeyName(amenity.getSubType());
 		if (st != null) {
 			String id = st.getIconKeyName();
-			if (OAResources.getDrawableId("mx_" + id) == 0) {
+			if (OsmandResources.getDrawableId("mx_" + id) == 0) {
 				id = st.getOsmTag() + "_" + st.getOsmValue();
-				if (OAResources.getDrawableId("mx_" + id) != 0) {
+				if (OsmandResources.getDrawableId("mx_" + id) != 0) {
 					return id;
 				}
 			} else {
