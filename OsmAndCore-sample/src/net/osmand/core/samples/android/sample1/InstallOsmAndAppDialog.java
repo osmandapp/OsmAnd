@@ -5,7 +5,6 @@ import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -14,8 +13,8 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatDialogFragment;
 import android.view.View;
 
-public class InstallOsmAndAppDialog extends AppCompatDialogFragment {
-	private static final String TAG = "InstallOsmAndAppDialog";
+public class InstallOsmandAppDialog extends AppCompatDialogFragment {
+	private static final String TAG = "InstallOsmandAppDialog";
 	private static final String OSMAND_PLUS_PACKAGE_NAME = "net.osmand.plus";
 	private static final String OSMAND_PACKAGE_NAME = "net.osmand";
 	private static boolean wasChecked = false;
@@ -70,7 +69,7 @@ public class InstallOsmAndAppDialog extends AppCompatDialogFragment {
 		wasChecked = true;
 		if (!SampleUtils.isPackageInstalled(OSMAND_PACKAGE_NAME, ctx)
 				&& !SampleUtils.isPackageInstalled(OSMAND_PLUS_PACKAGE_NAME, ctx)) {
-			new InstallOsmAndAppDialog().show(manager, TAG);
+			new InstallOsmandAppDialog().show(manager, TAG);
 			return true;
 		} else {
 			return false;

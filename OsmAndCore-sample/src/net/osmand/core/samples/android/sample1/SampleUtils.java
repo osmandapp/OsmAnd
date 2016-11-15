@@ -1,12 +1,21 @@
 package net.osmand.core.samples.android.sample1;
 
+import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.hardware.Sensor;
+import android.hardware.SensorManager;
+import android.view.WindowManager;
 
 public class SampleUtils {
+
+	private static final int ORIENTATION_0 = 0;
+	private static final int ORIENTATION_90 = 3;
+	private static final int ORIENTATION_270 = 1;
+	private static final int ORIENTATION_180 = 2;
 
 	public static void doRestart(Context c) {
 		boolean res = false;
@@ -58,5 +67,29 @@ public class SampleUtils {
 			//ignore
 		}
 		return installed;
+	}
+
+	public static int getScreenOrientation(Activity a) {
+		int screenOrientation = ((WindowManager) a.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getRotation();
+		switch (screenOrientation) {
+			case ORIENTATION_0:   // Device default (normally portrait)
+				screenOrientation = 0;
+				break;
+			case ORIENTATION_90:  // Landscape right
+				screenOrientation = 90;
+				break;
+			case ORIENTATION_270: // Landscape left
+				screenOrientation = 270;
+				break;
+			case ORIENTATION_180: // Upside down
+				screenOrientation = 180;
+				break;
+		}
+		//Looks like screenOrientation correction must not be applied for devices without compass?
+		Sensor compass = ((SensorManager) a.getSystemService(Context.SENSOR_SERVICE)).getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
+		if (compass == null) {
+			screenOrientation = 0;
+		}
+		return screenOrientation;
 	}
 }

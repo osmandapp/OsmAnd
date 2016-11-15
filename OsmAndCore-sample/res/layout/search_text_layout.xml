@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="56dp"
+              android:focusableInTouchMode="true"
+              android:gravity="center_vertical"
+              android:orientation="horizontal">
+    
+    <EditText
+        android:id="@+id/searchEditText"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@null"
+        android:gravity="center_vertical"
+        android:lines="1"
+        android:singleLine="true"
+        android:textColor="?attr/searchbar_text"
+        android:textColorHint="?attr/searchbar_text_hint"/>
+
+    <ProgressBar
+        android:id="@+id/searchProgressBar"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginRight="8dp"
+        android:indeterminate="true"
+        android:visibility="gone"/>
+
+    <ImageButton
+        android:id="@+id/clearButton"
+        style="@style/Widget.AppCompat.ActionButton"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:contentDescription="@string/shared_string_close"
+        android:src="@drawable/ic_action_remove_dark"/>
+
+</LinearLayout>
