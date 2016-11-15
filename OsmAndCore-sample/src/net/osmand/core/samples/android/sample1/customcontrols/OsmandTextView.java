@@ -6,7 +6,7 @@ import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
-import net.osmand.core.samples.android.sample1.OsmandResources;
+import net.osmand.core.samples.android.sample1.OAResources;
 import net.osmand.core.samples.android.sample1.R;
 
 public class OsmandTextView extends TextView {
@@ -52,6 +52,6 @@ public class OsmandTextView extends TextView {
 		}
 
 		String osmandText = resolvedAttributes.getString(R.styleable.OsmandTextView_osmandText);
-		target.setText(OsmandResources.getString(osmandText));
+		target.setText(OAResources.getString(osmandText));
 	}
 }

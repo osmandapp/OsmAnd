@@ -101,7 +101,7 @@ public class IconsCache {
 		long hash = ((long)resId << 31L) + clrId;
 		Drawable d = osmandDrawable.get(hash);
 		if (d == null) {
-			d = OsmandResources.getDrawable(resId);
+			d = OAResources.getDrawable(resId);
 			if (d != null) {
 				d = DrawableCompat.wrap(d);
 				d.mutate();
@@ -118,7 +118,7 @@ public class IconsCache {
 		long hash = ((long)resId << 31L) + color;
 		Drawable d = osmandDrawable.get(hash);
 		if(d == null) {
-			d = OsmandResources.getDrawable(resId);
+			d = OAResources.getDrawable(resId);
 			if (d != null) {
 				d = DrawableCompat.wrap(d);
 				d.mutate();
@@ -130,7 +130,7 @@ public class IconsCache {
 	}
 
 	public Drawable getPaintedIcon(String osmandId, @ColorInt int color){
-		int id = OsmandResources.getDrawableId(osmandId);
+		int id = OAResources.getDrawableId(osmandId);
 		if (id != 0) {
 			return getPaintedOsmandDrawable(id, color);
 		}
@@ -142,7 +142,7 @@ public class IconsCache {
 	}
 
 	public Drawable getIcon(String osmandId, @ColorRes int colorId) {
-		int id = OsmandResources.getDrawableId(osmandId);
+		int id = OAResources.getDrawableId(osmandId);
 		if (id != 0) {
 			return getOsmandDrawable(id, colorId);
 		}
@@ -150,8 +150,8 @@ public class IconsCache {
 	}
 
 	public Drawable getIcon(String osmandBackgroundId, String osmandId, @ColorRes int colorId) {
-		int backgroundId = OsmandResources.getDrawableId(osmandBackgroundId);
-		int id = OsmandResources.getDrawableId(osmandId);
+		int backgroundId = OAResources.getDrawableId(osmandBackgroundId);
+		int id = OAResources.getDrawableId(osmandId);
 		if (backgroundId != 0 && id != 0) {
 			Drawable b = getOsmandDrawable(backgroundId, 0);
 			Drawable f = getOsmandDrawable(id, colorId);
@@ -164,7 +164,7 @@ public class IconsCache {
 	}
 
 	public Drawable getThemedIcon(String osmandId) {
-		int id = OsmandResources.getDrawableId(osmandId);
+		int id = OAResources.getDrawableId(osmandId);
 		if (id != 0) {
 			return getOsmandDrawable(id, R.color.icon_color);
 		}
@@ -172,7 +172,7 @@ public class IconsCache {
 	}
 
 	public Drawable getIcon(String osmandId) {
-		int id = OsmandResources.getDrawableId(osmandId);
+		int id = OAResources.getDrawableId(osmandId);
 		if (id != 0) {
 			return getOsmandDrawable(id, 0);
 		}
@@ -180,7 +180,7 @@ public class IconsCache {
 	}
 
 	public Drawable getIcon(String osmandId, boolean light) {
-		int id = OsmandResources.getDrawableId(osmandId);
+		int id = OAResources.getDrawableId(osmandId);
 		if (id != 0) {
 			return getOsmandDrawable(id, light ? R.color.icon_color : 0);
 		}
