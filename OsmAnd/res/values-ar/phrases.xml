@@ -63,7 +63,7 @@
 	<string name="poi_pumping_station">محطة الضخ</string>
 
 	<string name="poi_road_obstacle">عائق طريق</string>
-		<string name="poi_shop_food">متجر أطعمة</string>
+		<string name="poi_shop_food">متجر وسوبرماركت</string>
 	<string name="poi_bicycle_transport">دراجات نقل</string>
 		<string name="poi_farm">مخزن المزرعة</string>
 	<string name="poi_accomodation">أماكن الإقامة</string>
@@ -529,4 +529,13 @@
 	<string name="poi_dish">صحن</string>
 	<string name="poi_payment_transport_type">نوع الدفع (نقل)</string>
 	<string name="poi_social_facility_type">نوع</string>
+	<string name="poi_fuel_type">نوع</string>
+	<string name="poi_drive_in">سق في</string>
+	<string name="poi_drive_through">سق عبر</string>
+	<string name="poi_social_facility_for">الفئة المستهدفة</string>
+	<string name="poi_compressed_air_filter">هواء مضغوط</string>
+	<string name="poi_vacuum_cleaner_filter">مكنسة كهربائية</string>
+	<string name="poi_free_flying_characteristic">مميزة</string>
+
+<string name="poi_stationery">محل وراقة</string>
 	</resources>
