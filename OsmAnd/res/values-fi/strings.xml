@@ -1090,7 +1090,7 @@ Pit %2$s</string>
     <string name="active_markers">Aktivoi markkerit</string>
     <string name="map_markers">Karttamarkerit</string>
     <string name="map_marker">Karttamarkkeri</string>
-    <string name="back_to_map">Takaisin kartalle</string>
+    <string name="back_to_map">Takaisin karttaan</string>
     <string name="rendering_category_transport">Julkinen liikenne</string>
     <string name="osmo_not_signed_in">OsMo:on kirjautuminen epäonnistui</string>
     <string name="map_widget_magnetic_bearing">Magneettinen suunta</string>
@@ -1260,8 +1260,8 @@ Pit %2$s</string>
     <string name="layer_underlay">Taustakartta…</string>
     <string name="map_underlay">Taustakartta</string>
     <string name="map_underlay_descr">Valitse taustakartta</string>
-    <string name="layer_overlay">Peitekartta…</string>
-    <string name="map_overlay">Peitekartta</string>
-    <string name="map_overlay_descr">Valitse peitekartta</string>
+    <string name="layer_overlay">Peittokartta…</string>
+    <string name="map_overlay">Peittokartta</string>
+    <string name="map_overlay_descr">Valitse peittokartta</string>
     <string name="number_of_edits">Muokkausten lukumäärä</string>
     </resources>
