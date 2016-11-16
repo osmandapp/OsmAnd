@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <nine-patch android:src="@drawable/bg_contextmenu_shadow_right_light" />
+    </item>
+    <item>
+        <shape>
+            <solid
+                android:color="@color/bg_color_light" />
+        </shape>
+    </item>
+</layer-list>

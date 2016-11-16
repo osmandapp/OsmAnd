@@ -202,11 +202,11 @@ public class QuickSearchListItem {
 	}
 
 	public static int getPoiTypeIconId(SampleApplication app, AbstractPoiType abstractPoiType) {
-		int res = OsmandResources.getDrawableId("mx_" + abstractPoiType.getIconKeyName());
+		int res = OsmandResources.getBigDrawableId(abstractPoiType.getIconKeyName());
 		if (res != 0) {
 			return res;
 		} else if (abstractPoiType instanceof PoiType) {
-			res = OsmandResources.getDrawableId("mx_" + ((PoiType) abstractPoiType).getOsmTag()
+			res = OsmandResources.getBigDrawableId(((PoiType) abstractPoiType).getOsmTag()
 					+ "_" + ((PoiType) abstractPoiType).getOsmValue());
 			if (res != 0) {
 				return res;
@@ -222,9 +222,9 @@ public class QuickSearchListItem {
 		int res = 0;
 		PoiType st = amenity.getType().getPoiTypeByKeyName(amenity.getSubType());
 		if (st != null) {
-			res = OsmandResources.getDrawableId("mx_" + st.getIconKeyName());
+			res = OsmandResources.getBigDrawableId(st.getIconKeyName());
 			if (res == 0) {
-				res = OsmandResources.getDrawableId("mx_" + st.getOsmTag() + "_" + st.getOsmValue());
+				res = OsmandResources.getBigDrawableId(st.getOsmTag() + "_" + st.getOsmValue());
 			}
 		}
 		return res;
@@ -234,9 +234,9 @@ public class QuickSearchListItem {
 		PoiType st = amenity.getType().getPoiTypeByKeyName(amenity.getSubType());
 		if (st != null) {
 			String id = st.getIconKeyName();
-			if (OsmandResources.getDrawableId("mx_" + id) == 0) {
+			if (OsmandResources.getBigDrawableId(id) == 0) {
 				id = st.getOsmTag() + "_" + st.getOsmValue();
-				if (OsmandResources.getDrawableId("mx_" + id) != 0) {
+				if (OsmandResources.getBigDrawableId(id) != 0) {
 					return id;
 				}
 			} else {

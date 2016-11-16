@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    android:id="@+id/context_menu_layout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent">
+
+    <LinearLayout
+        android:id="@+id/context_menu_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/context_menu_top_shadow"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/context_menu_top_shadow_h"
+            android:orientation="horizontal">
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/context_menu_top_shadow_all"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:background="?attr/bg_map_context_menu"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/context_menu_top_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/context_menu_first_line_bottom_margin"
+                android:baselineAligned="false"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/context_menu_icon_layout"
+                    android:layout_width="52dp"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/context_menu_icon_view"
+                        android:layout_width="@dimen/map_widget_icon"
+                        android:layout_height="@dimen/map_widget_icon"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginTop="@dimen/context_menu_icon_top_padding"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/context_menu_first_line_top_margin"
+                            android:layout_weight="1">
+
+                            <TextView
+                                android:id="@+id/context_menu_line1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                style="@style/TextAppearance.ContextMenuTitle"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/context_menu_close_btn_layout"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:minWidth="@dimen/context_menu_top_right_button_min_width"
+                            android:orientation="horizontal">
+
+                            <Button
+                                android:id="@+id/title_button_top_right"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="?attr/selectableItemBackground"
+                                android:gravity="center"
+                                android:paddingLeft="@dimen/context_menu_button_padding_x"
+                                android:paddingRight="@dimen/context_menu_button_padding_x"
+                                android:textColor="?attr/contextMenuButtonColor"
+                                android:textSize="@dimen/default_desc_text_size"/>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="@dimen/context_menu_second_line_top_margin"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <LinearLayout
+                                android:id="@+id/context_menu_line2_layout"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1">
+
+                                <TextView
+                                    android:id="@+id/context_menu_line2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    style="@style/TextAppearance.ContextMenuSubtitle"/>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/compass_layout"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:minWidth="@dimen/context_menu_top_right_button_min_width"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:id="@+id/direction"
+                                    android:layout_width="@dimen/directionIconSize"
+                                    android:layout_height="@dimen/directionIconSize"
+                                    android:layout_marginTop="1sp"
+                                    android:layout_gravity="center_vertical"/>
+
+                                <TextView
+                                    android:id="@+id/distance"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_marginLeft="2dp"
+                                    android:layout_marginRight="4dp"
+                                    android:textColor="?android:textColorSecondary"
+                                    android:textSize="@dimen/default_desc_text_size"
+                                    tools:text="100500 km"/>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/title_button_container"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="@dimen/context_menu_action_buttons_h"
+                android:layout_marginTop="@dimen/context_menu_buttons_top_margin"
+                android:clickable="true"
+                android:orientation="horizontal"
+                android:paddingBottom="@dimen/context_menu_buttons_padding_bottom"
+                android:paddingLeft="62dp"
+                android:paddingRight="2dp"
+                android:visibility="gone"
+                tools:visibility="visible">
+
+                <Button
+                    android:id="@+id/title_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackground"
+                    android:gravity="left|center_vertical"
+                    android:paddingLeft="@dimen/context_menu_button_padding_x"
+                    android:paddingRight="@dimen/context_menu_button_padding_x"
+                    android:textColor="?attr/contextMenuButtonColor"
+                    android:textSize="@dimen/default_desc_text_size"/>
+
+                <TextView
+                    android:id="@+id/title_button_right_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="-4dp"
+                    android:clickable="true"
+                    android:gravity="center_vertical"
+                    tools:text="— 00:26"
+                    android:textColor="?android:textColorSecondary"
+                    android:textSize="@dimen/default_desc_text_size"/>
+
+                <Button
+                    android:id="@+id/title_button_right"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackground"
+                    android:gravity="center"
+                    android:paddingLeft="@dimen/context_menu_button_padding_x"
+                    android:paddingRight="@dimen/context_menu_button_padding_x"
+                    android:textColor="?attr/contextMenuButtonColor"
+                    android:textSize="@dimen/default_desc_text_size"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:foreground="@drawable/bg_contextmenu_shadow"
+            android:foregroundGravity="top|fill_horizontal">
+
+            <ScrollView
+                android:id="@+id/context_menu_bottom_scroll"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="?attr/ctx_menu_info_view_bg">
+
+                <LinearLayout
+                    android:id="@+id/context_menu_bottom_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/ctx_menu_info_view_bg"
+                    android:orientation="vertical">
+
+                </LinearLayout>
+
+            </ScrollView>
+        </FrameLayout>
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/context_menu_fab_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/context_menu_fab_view"
+            android:layout_width="@dimen/fab_size_with_shadow"
+            android:layout_height="@dimen/fab_size_with_shadow"
+            android:layout_gravity="right"
+            android:layout_marginRight="@dimen/fab_margin_right"
+            android:background="@drawable/fab_background_style"
+            android:scaleType="center"/>
+
+    </FrameLayout>
+
+</FrameLayout>

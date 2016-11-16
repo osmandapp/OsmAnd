@@ -101,7 +101,7 @@ public class IconsCache {
 		long hash = ((long)resId << 31L) + clrId;
 		Drawable d = osmandDrawable.get(hash);
 		if (d == null) {
-			d = OsmandResources.getDrawable(resId);
+			d = OsmandResources.getDrawableNonCached(resId);
 			if (d != null) {
 				d = DrawableCompat.wrap(d);
 				d.mutate();
@@ -118,7 +118,7 @@ public class IconsCache {
 		long hash = ((long)resId << 31L) + color;
 		Drawable d = osmandDrawable.get(hash);
 		if(d == null) {
-			d = OsmandResources.getDrawable(resId);
+			d = OsmandResources.getDrawableNonCached(resId);
 			if (d != null) {
 				d = DrawableCompat.wrap(d);
 				d.mutate();
@@ -127,6 +127,10 @@ public class IconsCache {
 			}
 		}
 		return d;
+	}
+
+	public Drawable getPaintedOsmandIcon(int resId, @ColorInt int color){
+		return getPaintedOsmandDrawable(resId, color);
 	}
 
 	public Drawable getPaintedIcon(String osmandId, @ColorInt int color){

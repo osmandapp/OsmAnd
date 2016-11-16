@@ -5,10 +5,13 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
-import android.hardware.Sensor;
-import android.hardware.SensorManager;
-import android.view.WindowManager;
+import android.util.DisplayMetrics;
+import android.util.Log;
+import android.view.Surface;
+
+import net.osmand.PlatformUtil;
 
 public class SampleUtils {
 
@@ -69,6 +72,7 @@ public class SampleUtils {
 		return installed;
 	}
 
+	/*
 	public static int getScreenOrientation(Activity a) {
 		int screenOrientation = ((WindowManager) a.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getRotation();
 		switch (screenOrientation) {
@@ -92,4 +96,75 @@ public class SampleUtils {
 		}
 		return screenOrientation;
 	}
+	*/
+
+	public static int getScreenOrientation(Activity activity) {
+		int rotation = activity.getWindowManager().getDefaultDisplay().getRotation();
+		DisplayMetrics dm = new DisplayMetrics();
+		activity.getWindowManager().getDefaultDisplay().getMetrics(dm);
+		int width = dm.widthPixels;
+		int height = dm.heightPixels;
+		int orientation;
+		// if the device's natural orientation is portrait:
+		if ((rotation == Surface.ROTATION_0
+				|| rotation == Surface.ROTATION_180) && height > width ||
+				(rotation == Surface.ROTATION_90
+						|| rotation == Surface.ROTATION_270) && width > height) {
+			switch(rotation) {
+				case Surface.ROTATION_0:
+					orientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;
+					break;
+				case Surface.ROTATION_90:
+					orientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE;
+					break;
+				case Surface.ROTATION_180:
+					orientation =
+							ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT;
+					break;
+				case Surface.ROTATION_270:
+					orientation =
+							ActivityInfo.SCREEN_ORIENTATION_REVERSE_LANDSCAPE;
+					break;
+				default:
+					Log.e(PlatformUtil.TAG, "Unknown screen orientation. Defaulting to " +
+							"portrait.");
+					orientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;
+					break;
+			}
+		}
+		// if the device's natural orientation is landscape or if the device
+		// is square:
+		else {
+			switch(rotation) {
+				case Surface.ROTATION_0:
+					orientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE;
+					break;
+				case Surface.ROTATION_90:
+					orientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;
+					break;
+				case Surface.ROTATION_180:
+					orientation =
+							ActivityInfo.SCREEN_ORIENTATION_REVERSE_LANDSCAPE;
+					break;
+				case Surface.ROTATION_270:
+					orientation =
+							ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT;
+					break;
+				default:
+					Log.e(PlatformUtil.TAG, "Unknown screen orientation. Defaulting to " +
+							"landscape.");
+					orientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE;
+					break;
+			}
+		}
+
+		return orientation;
+	}
+
+	public static boolean isOrientationPortrait(Activity ctx) {
+		int orientation = getScreenOrientation(ctx);
+		return orientation == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT ||
+				orientation == ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT;
+	}
+
 }

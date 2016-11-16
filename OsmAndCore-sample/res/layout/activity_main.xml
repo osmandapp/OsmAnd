@@ -96,13 +96,10 @@
 
         </FrameLayout>
 
-        <ListView
-            android:id="@android:id/list"
+        <FrameLayout
+            android:id="@+id/fragmentContainer"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/listBackgroundColor"
-            android:drawSelectorOnTop="true"
-            android:visibility="gone"/>
+            android:layout_height="match_parent"/>
 
     </FrameLayout>
 

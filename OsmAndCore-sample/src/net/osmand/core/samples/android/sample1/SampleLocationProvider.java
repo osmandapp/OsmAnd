@@ -23,6 +23,10 @@ import android.support.v7.app.AlertDialog;
 import android.util.Log;
 
 import net.osmand.PlatformUtil;
+import net.osmand.ResultMatcher;
+import net.osmand.binary.GeocodingUtilities;
+import net.osmand.binary.GeocodingUtilities.GeocodingResult;
+import net.osmand.data.LatLon;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
@@ -513,16 +517,24 @@ public class SampleLocationProvider implements SensorEventListener {
 	public boolean getRouteSegment(net.osmand.Location loc, ResultMatcher<RouteDataObject> result) {
 		return currentPositionHelper.getRouteSegment(loc, result);
 	}
+    */
 
 	public boolean getGeocodingResult(net.osmand.Location loc, ResultMatcher<GeocodingResult> result) {
-		return currentPositionHelper.getGeocodingResult(loc, result);
+		return false; //currentPositionHelper.getGeocodingResult(loc, result); todo
 	}
-	*/
+
 
 	public net.osmand.Location getLastKnownLocation() {
 		return location;
 	}
 
+	public LatLon getLastKnownLocationLatLon() {
+		if (location != null) {
+			return new LatLon(location.getLatitude(), location.getLongitude());
+		} else {
+			return null;
+		}
+	}
 
 	public static class GPSInfo {
 		public int foundSatellites = 0;

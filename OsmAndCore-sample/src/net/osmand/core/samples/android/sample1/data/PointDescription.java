@@ -8,6 +8,7 @@ import com.jwetherell.openmap.common.LatLonPoint;
 import com.jwetherell.openmap.common.UTMPoint;
 
 import net.osmand.LocationConvert;
+import net.osmand.core.samples.android.sample1.OsmandResources;
 import net.osmand.core.samples.android.sample1.SampleApplication;
 import net.osmand.data.LatLon;
 import net.osmand.util.Algorithms;
@@ -354,4 +355,27 @@ public class PointDescription {
 		}
 	}
 
+	public int getIconId() {
+		int iconId;
+		if (isAddress()) {
+			iconId = OsmandResources.getDrawableId("ic_type_address");
+		} else if (isFavorite()) {
+			iconId = OsmandResources.getDrawableId("ic_type_favorites");
+		} else if (isLocation()) {
+			iconId = OsmandResources.getDrawableId("ic_type_coordinates");
+		} else if (isPoi()) {
+			iconId = OsmandResources.getDrawableId("ic_type_info");
+		} else if (isWpt()) {
+			iconId = OsmandResources.getDrawableId("ic_type_waypoint");
+		} else if (isAudioNote()) {
+			iconId = OsmandResources.getDrawableId("ic_type_audio");
+		} else if (isVideoNote()) {
+			iconId = OsmandResources.getDrawableId("ic_type_video");
+		}else if (isPhotoNote()) {
+			iconId = OsmandResources.getDrawableId("ic_type_img");
+		}  else {
+			iconId = OsmandResources.getDrawableId("ic_type_address");
+		}
+		return iconId;
+	}
 }

@@ -8,6 +8,8 @@ import android.content.SharedPreferences.Editor;
 import android.content.pm.PackageManager;
 import android.graphics.PointF;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
@@ -40,8 +42,12 @@ import net.osmand.core.jni.ResolvedMapStyle;
 import net.osmand.core.jni.RoadLocator;
 import net.osmand.core.jni.Utilities;
 import net.osmand.core.samples.android.sample1.MultiTouchSupport.MultiTouchZoomListener;
+import net.osmand.core.samples.android.sample1.data.PointDescription;
+import net.osmand.core.samples.android.sample1.mapcontextmenu.MapContextMenu;
+import net.osmand.core.samples.android.sample1.mapcontextmenu.MapMultiSelectionMenu;
 import net.osmand.core.samples.android.sample1.search.QuickSearchDialogFragment;
 import net.osmand.data.LatLon;
+import net.osmand.data.RotatedTileBox;
 import net.osmand.util.MapUtils;
 
 import java.io.File;
@@ -76,6 +82,9 @@ public class MainActivity extends AppCompatActivity {
 	private float azimuth;
 	private float elevationAngle;
 	private MultiTouchSupport multiTouchSupport;
+
+	private MapContextMenu menu;
+	private MapMultiSelectionMenu multiMenu;
 
 	private boolean noMapsFound;
 
@@ -224,6 +233,11 @@ public class MainActivity extends AppCompatActivity {
 
 		app.getIconsCache().setDisplayDensityFactor(displayDensityFactor);
 
+		menu = new MapContextMenu();
+		menu.setMainActivity(this);
+
+		multiMenu = new MapMultiSelectionMenu(this);
+
 		if (!InstallOsmandAppDialog.showIfNeeded(getSupportFragmentManager(), this)
 				&& externalStoragePermissionGranted) {
 			checkMapsInstalled();
@@ -280,6 +294,10 @@ public class MainActivity extends AppCompatActivity {
 		return (SampleApplication) getApplication();
 	}
 
+	public AtlasMapRendererView getMapView() {
+		return mapView;
+	}
+
 	public void showOnMap(LatLon latLon, int zoom) {
 		if (latLon != null) {
 			PointI target = Utilities.convertLatLonTo31(
@@ -287,6 +305,38 @@ public class MainActivity extends AppCompatActivity {
 			setTarget(target);
 			setZoom(zoom);
 		}
+	}
+
+	public void refreshMap() {
+		//todo
+	}
+
+	public MapContextMenu getContextMenu() {
+		return menu;
+	}
+
+	public boolean showContextMenu(@NonNull LatLon latLon,
+								   @Nullable PointDescription pointDescription,
+								   @Nullable Object object) {
+		if (multiMenu.isVisible()) {
+			multiMenu.hide();
+		}
+		if (!getBox().containsLatLon(latLon)) {
+			menu.setMapCenter(latLon);
+			menu.setCenterMarker(true);
+		}
+		menu.show(latLon, pointDescription, object);
+		return true;
+	}
+
+	public RotatedTileBox getBox() {
+		RotatedTileBox.RotatedTileBoxBuilder boxBuilder = new RotatedTileBox.RotatedTileBoxBuilder();
+		LatLon screenCenter = getScreenCenter();
+		boxBuilder.setLocation(screenCenter.getLatitude(), screenCenter.getLongitude());
+		boxBuilder.setPixelDimensions(mapView.getWidth(), mapView.getHeight(), 0.5f, 0.5f);
+		boxBuilder.setZoom((int)getZoom());
+		boxBuilder.setRotate(mapView.getRotation());
+		return boxBuilder.build();
 	}
 
 	public PointI getScreenCenter31() {
@@ -300,6 +350,10 @@ public class MainActivity extends AppCompatActivity {
 		mapView.getLocationFromScreenPoint(new PointI(mapView.getWidth() / 2, mapView.getHeight() / 2), point);
 		net.osmand.core.jni.LatLon jniLatLon = Utilities.convert31ToLatLon(point);
 		return new LatLon(jniLatLon.getLatitude(), jniLatLon.getLongitude());
+	}
+
+	public float getZoom() {
+		return zoom;
 	}
 
 	public void saveMapState() {

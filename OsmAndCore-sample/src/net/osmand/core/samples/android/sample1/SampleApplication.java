@@ -41,8 +41,10 @@ public class SampleApplication extends Application {
 
 	private SampleLocationProvider locationProvider;
 	private QuickSearchHelper searchUICore;
+	private GeocodingLookupService geocodingLookupService;
 
-	public static final String LANGUAGE;
+	public static String LANGUAGE;
+	public static boolean TRANSLITERATE = false;
 
 	static {
 		String langCode = Locale.getDefault().getLanguage();
@@ -58,6 +60,7 @@ public class SampleApplication extends Application {
 		OsmandResources.init(this);
 		locationProvider = new SampleLocationProvider(this);
 		searchUICore = new QuickSearchHelper(this);
+		geocodingLookupService = new GeocodingLookupService(this);
 		uiHandler = new Handler();
 
 		poiTypes = MapPoiTypes.getDefaultNoInit();
@@ -74,6 +77,10 @@ public class SampleApplication extends Application {
 		Logger.get().setSeverityLevelThreshold(LogSeverityLevel.Debug);
 
 		iconsCache = new IconsCache(assetsCustom, this);
+	}
+
+	public GeocodingLookupService getGeocodingLookupService() {
+		return geocodingLookupService;
 	}
 
 	public int getCoordinatesFormat() {

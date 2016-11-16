@@ -23,7 +23,7 @@ public class QuickSearchHelper {
 
 	public QuickSearchHelper(SampleApplication app) {
 		this.app = app;
-		core = new SearchUICore(app.getPoiTypes(), SampleApplication.LANGUAGE, false);
+		core = new SearchUICore(app.getPoiTypes(), SampleApplication.LANGUAGE, SampleApplication.TRANSLITERATE);
 	}
 
 	public SearchUICore getCore() {

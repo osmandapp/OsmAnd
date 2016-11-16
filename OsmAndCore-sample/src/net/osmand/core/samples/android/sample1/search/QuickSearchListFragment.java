@@ -198,13 +198,7 @@ public abstract class QuickSearchListFragment extends ListFragment {
 			dialogFragment.hide();
 
 			getMainActivity().showOnMap(searchResult.location, searchResult.preferredZoom);
-			/* todo
-			getMyApplication().getSettings().setMapLocationToShow(
-					searchResult.location.getLatitude(), searchResult.location.getLongitude(),
-					searchResult.preferredZoom, pointDescription, true, object);
-
-			MapActivity.launchMapActivityMoveToTop(getActivity());
-			*/
+			getMainActivity().getContextMenu().show(searchResult.location, pointDescription, object);
 		}
 	}
 
