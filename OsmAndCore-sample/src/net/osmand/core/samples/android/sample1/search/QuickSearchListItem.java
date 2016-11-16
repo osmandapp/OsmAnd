@@ -182,9 +182,8 @@ public class QuickSearchListItem {
 			case LOCATION:
 				LatLon latLon = (LatLon) searchResult.object;
 				if (searchResult.localeRelatedObjectName == null) {
-					// todo
-					//String locationCountry = app.getRegions().getCountryName(latLon);
-					//searchResult.localeRelatedObjectName = locationCountry == null ? "" : locationCountry;
+					String locationCountry = app.getRegions().getCountryName(latLon);
+					searchResult.localeRelatedObjectName = locationCountry == null ? "" : locationCountry;
 				}
 				return searchResult.localeRelatedObjectName;
 			case REGION:

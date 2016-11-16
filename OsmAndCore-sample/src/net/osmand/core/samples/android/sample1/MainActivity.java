@@ -567,7 +567,7 @@ public class MainActivity extends AppCompatActivity {
 			} else {
 				fragment.show();
 			}
-			//refreshMap();
+			refreshMap();
 		} else {
 			QuickSearchDialogFragment.showInstance(this, "", null, showCategories, null);
 		}
@@ -577,7 +577,7 @@ public class MainActivity extends AppCompatActivity {
 		QuickSearchDialogFragment fragment = getQuickSearchDialogFragment();
 		if (fragment != null) {
 			fragment.closeSearch();
-			//refreshMap();
+			refreshMap();
 		}
 	}
 
@@ -587,13 +587,11 @@ public class MainActivity extends AppCompatActivity {
 	}
 
 	private void hideContextMenu() {
-		/* todo
-		if (mapContextMenu.isVisible()) {
-			mapContextMenu.hide();
-		} else if (mapContextMenu.getMultiSelectionMenu().isVisible()) {
-			mapContextMenu.getMultiSelectionMenu().hide();
+		if (menu.isVisible()) {
+			menu.hide();
+		} else if (menu.getMultiSelectionMenu().isVisible()) {
+			menu.getMultiSelectionMenu().hide();
 		}
-		*/
 	}
 
 	public enum ShowQuickSearchMode {
