@@ -1092,7 +1092,7 @@ Pit %2$s</string>
     <string name="map_marker">Karttamarkkeri</string>
     <string name="back_to_map">Takaisin kartalle</string>
     <string name="rendering_category_transport">Julkinen liikenne</string>
-    <string name="osmo_not_signed_in">OsMo sisäänkirjoittautuminen epäonnistui</string>
+    <string name="osmo_not_signed_in">OsMo:on kirjautuminen epäonnistui</string>
     <string name="map_widget_magnetic_bearing">Magneettinen suunta</string>
     <string name="map_widget_bearing">Suhteellinen suunta</string>
     <string name="anonymous_user_hint">Anonyymi käyttäjä ei voi:
