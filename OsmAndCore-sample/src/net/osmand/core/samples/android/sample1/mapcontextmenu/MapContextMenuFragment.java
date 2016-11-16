@@ -224,7 +224,7 @@ public class MapContextMenuFragment extends Fragment {
 							thread.startZooming(ZOOM_IN_STANDARD,
 									map.getZoomFractionalPart(), true);
 							*/
-							map.setZoom(ZOOM_IN_STANDARD);
+							getMainActivity().setZoom(ZOOM_IN_STANDARD);
 						}
 					}
 					if (hasMoved) {
@@ -581,7 +581,7 @@ public class MapContextMenuFragment extends Fragment {
 		if (mapCenter != null) {
 			PointI centerI = Utilities.convertLatLonTo31(
 					new net.osmand.core.jni.LatLon(mapCenter.getLatitude(), mapCenter.getLongitude()));
-			map.setTarget(centerI);
+			getMainActivity().setTarget(centerI);
 		}
 		menu.setMapCenter(null);
 		menu.setMapZoom(0);
@@ -717,8 +717,8 @@ public class MapContextMenuFragment extends Fragment {
 		if (needMove) {
 			//thread.startMoving(flat, flon, fZoom, true); todo animation
 			PointI targetI = Utilities.convertLatLonTo31(new net.osmand.core.jni.LatLon(flat, flon));
-			map.setTarget(targetI);
-			map.setZoom(fZoom);
+			getMainActivity().setTarget(targetI);
+			getMainActivity().setZoom(fZoom);
 		}
 	}
 
@@ -866,7 +866,7 @@ public class MapContextMenuFragment extends Fragment {
 		} else {
 			PointI targetI = Utilities.convertLatLonTo31(
 					new net.osmand.core.jni.LatLon(latlon.getLatitude(), latlon.getLongitude()));
-			map.setTarget(targetI);
+			getMainActivity().setTarget(targetI);
 		}
 	}
 
@@ -968,7 +968,7 @@ public class MapContextMenuFragment extends Fragment {
 			if (mapCenter != null) {
 				PointI targetI = Utilities.convertLatLonTo31(
 						new net.osmand.core.jni.LatLon(mapCenter.getLatitude(), mapCenter.getLongitude()));
-				map.setTarget(targetI);
+				getMainActivity().setTarget(targetI);
 			}
 			adjustMapPosition(getPosY(), true, false);
 		} else {
