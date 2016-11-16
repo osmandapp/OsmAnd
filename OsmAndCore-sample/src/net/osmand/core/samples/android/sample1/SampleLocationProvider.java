@@ -75,7 +75,7 @@ public class SampleLocationProvider implements SensorEventListener {
 	private int currentScreenOrientation;
 
 	private SampleApplication app;
-	//private CurrentPositionHelper currentPositionHelper;
+	private CurrentPositionHelper currentPositionHelper;
 
 	private net.osmand.Location location = null;
 
@@ -91,7 +91,7 @@ public class SampleLocationProvider implements SensorEventListener {
 
 	public SampleLocationProvider(SampleApplication app) {
 		this.app = app;
-		//currentPositionHelper = new CurrentPositionHelper(app);
+		currentPositionHelper = new CurrentPositionHelper(app);
 	}
 
 	public void resumeAllUpdates() {
@@ -520,7 +520,7 @@ public class SampleLocationProvider implements SensorEventListener {
     */
 
 	public boolean getGeocodingResult(net.osmand.Location loc, ResultMatcher<GeocodingResult> result) {
-		return false; //currentPositionHelper.getGeocodingResult(loc, result); todo
+		return currentPositionHelper.getGeocodingResult(loc, result);
 	}
 
 

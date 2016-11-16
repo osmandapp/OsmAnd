@@ -13,6 +13,9 @@ import android.view.Surface;
 
 import net.osmand.PlatformUtil;
 
+import java.io.File;
+import java.util.List;
+
 public class SampleUtils {
 
 	private static final int ORIENTATION_0 = 0;
@@ -167,4 +170,18 @@ public class SampleUtils {
 				orientation == ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT;
 	}
 
+	public static List<File> collectFiles(File dir, String ext, List<File> files) {
+		if (dir.exists() && dir.canRead()) {
+			File[] lf = dir.listFiles();
+			if (lf == null || lf.length == 0) {
+				return files;
+			}
+			for (File f : lf) {
+				if (f.getName().endsWith(ext)) {
+					files.add(f);
+				}
+			}
+		}
+		return files;
+	}
 }

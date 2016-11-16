@@ -88,8 +88,14 @@ task collectRegionsInfoResources(type: Copy) {
     include "regions.ocbf"
 }
 
+task collectRoutingResources(type: Sync) {
+    from "../../resources/routing"
+    into "src/net/osmand/router"
+    include "routing.xml"
+}
+
 tasks.withType(JavaCompile) {
-    compileTask -> compileTask.dependsOn << [collectMiscResources, collectRegionsInfoResources]
+    compileTask -> compileTask.dependsOn << [collectMiscResources, collectRegionsInfoResources, collectRoutingResources]
 }
 
 repositories {

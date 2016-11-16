@@ -3,6 +3,7 @@ package net.osmand.core.samples.android.sample1.search;
 import net.osmand.IndexConstants;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.core.samples.android.sample1.SampleApplication;
+import net.osmand.core.samples.android.sample1.SampleUtils;
 import net.osmand.search.SearchUICore;
 import net.osmand.search.SearchUICore.SearchResultCollection;
 
@@ -47,8 +48,8 @@ public class QuickSearchHelper {
 	public void setRepositoriesForSearchUICore(final SampleApplication app) {
 		ArrayList<File> files = new ArrayList<File>();
 		File appPath = app.getAppPath(null);
-		collectFiles(appPath, IndexConstants.BINARY_MAP_INDEX_EXT, files);
-		collectFiles(app.getAppPath(IndexConstants.WIKI_INDEX_DIR), IndexConstants.BINARY_MAP_INDEX_EXT, files);
+		SampleUtils.collectFiles(appPath, IndexConstants.BINARY_MAP_INDEX_EXT, files);
+		SampleUtils.collectFiles(app.getAppPath(IndexConstants.WIKI_INDEX_DIR), IndexConstants.BINARY_MAP_INDEX_EXT, files);
 
 		List<BinaryMapIndexReader> readers = new ArrayList<>();
 		for (File f : files) {
@@ -61,20 +62,5 @@ public class QuickSearchHelper {
 			}
 		}
 		core.getSearchSettings().setOfflineIndexes(readers);
-	}
-
-	private List<File> collectFiles(File dir, String ext, List<File> files) {
-		if (dir.exists() && dir.canRead()) {
-			File[] lf = dir.listFiles();
-			if (lf == null || lf.length == 0) {
-				return files;
-			}
-			for (File f : lf) {
-				if (f.getName().endsWith(ext)) {
-					files.add(f);
-				}
-			}
-		}
-		return files;
 	}
 }

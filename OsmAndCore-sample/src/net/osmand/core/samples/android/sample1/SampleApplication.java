@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Build;
 import android.os.Environment;
 import android.os.Handler;
 import android.support.v4.content.ContextCompat;
@@ -17,10 +18,14 @@ import net.osmand.core.jni.Logger;
 import net.osmand.core.samples.android.sample1.SampleFormatter.MetricsConstants;
 import net.osmand.core.samples.android.sample1.SampleFormatter.SpeedConstants;
 import net.osmand.core.samples.android.sample1.search.QuickSearchHelper;
+import net.osmand.map.OsmandRegions;
+import net.osmand.map.WorldRegion;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
+import net.osmand.util.Algorithms;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.lang.reflect.Field;
 import java.util.Locale;
 
@@ -42,6 +47,7 @@ public class SampleApplication extends Application {
 	private SampleLocationProvider locationProvider;
 	private QuickSearchHelper searchUICore;
 	private GeocodingLookupService geocodingLookupService;
+	private OsmandRegions regions;
 
 	public static String LANGUAGE;
 	public static boolean TRANSLITERATE = false;
@@ -61,6 +67,10 @@ public class SampleApplication extends Application {
 		locationProvider = new SampleLocationProvider(this);
 		searchUICore = new QuickSearchHelper(this);
 		geocodingLookupService = new GeocodingLookupService(this);
+		regions = new OsmandRegions();
+		updateRegionVars();
+		indexRegionsBoundaries();
+
 		uiHandler = new Handler();
 
 		poiTypes = MapPoiTypes.getDefaultNoInit();
@@ -77,6 +87,57 @@ public class SampleApplication extends Application {
 		Logger.get().setSeverityLevelThreshold(LogSeverityLevel.Debug);
 
 		iconsCache = new IconsCache(assetsCustom, this);
+	}
+
+	private void updateRegionVars() {
+		regions.setTranslator(new OsmandRegions.RegionTranslation() {
+
+			@Override
+			public String getTranslation(String id) {
+				if(WorldRegion.AFRICA_REGION_ID.equals(id)){
+					return getString("index_name_africa");
+				} else if(WorldRegion.AUSTRALIA_AND_OCEANIA_REGION_ID.equals(id)){
+					return getString("index_name_oceania");
+				} else if(WorldRegion.ASIA_REGION_ID.equals(id)){
+					return getString("index_name_asia");
+				} else if(WorldRegion.CENTRAL_AMERICA_REGION_ID.equals(id)){
+					return getString("index_name_central_america");
+				} else if(WorldRegion.EUROPE_REGION_ID.equals(id)){
+					return getString("index_name_europe");
+				} else if(WorldRegion.RUSSIA_REGION_ID.equals(id)){
+					return getString("index_name_russia");
+				} else if(WorldRegion.NORTH_AMERICA_REGION_ID.equals(id)){
+					return getString("index_name_north_america");
+				} else if(WorldRegion.SOUTH_AMERICA_REGION_ID.equals(id)){
+					return getString("index_name_south_america");
+				}
+				return null;
+			}
+		});
+		regions.setLocale(LANGUAGE);
+	}
+
+	private void indexRegionsBoundaries() {
+		try {
+			File file = getAppPath("regions.ocbf");
+			if (file != null) {
+				if (!file.exists()) {
+					file = new File(getInternalAppPath(), "regions.ocbf");
+					if (!file.exists()) {
+						Algorithms.streamCopy(OsmandRegions.class.getResourceAsStream("regions.ocbf"),
+								new FileOutputStream(file));
+					}
+				}
+				regions.prepareFile(file.getAbsolutePath());
+
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public OsmandRegions getRegions() {
+		return regions;
 	}
 
 	public GeocodingLookupService getGeocodingLookupService() {
@@ -218,5 +279,15 @@ public class SampleApplication extends Application {
 
 	public String getString(String osmandId, Object... formatArgs) {
 		return OsmandResources.getString(osmandId, formatArgs);
+	}
+
+	public File getInternalAppPath() {
+		if (Build.VERSION.SDK_INT >= 21) {
+			File fl = getNoBackupFilesDir();
+			if (fl != null) {
+				return fl;
+			}
+		}
+		return getFilesDir();
 	}
 }

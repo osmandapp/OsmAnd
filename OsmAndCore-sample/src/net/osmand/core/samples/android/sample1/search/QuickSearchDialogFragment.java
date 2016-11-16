@@ -50,7 +50,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static net.osmand.search.core.ObjectType.POI_TYPE;
 import static net.osmand.search.core.SearchCoreFactory.SEARCH_AMENITY_TYPE_PRIORITY;
 
 public class QuickSearchDialogFragment extends DialogFragment implements SampleCompassListener, SampleLocationListener {
@@ -196,14 +195,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements SampleC
 							PointDescription pointDescription = new PointDescription(PointDescription.POINT_TYPE_ADDRESS, typeName, name);
 
 							mainActivity.showOnMap(searchResult.location, searchResult.preferredZoom);
-								/* todo
-								app.getSettings().setMapLocationToShow(
-										searchResult.location.getLatitude(), searchResult.location.getLongitude(),
-										searchResult.preferredZoom, pointDescription, true, searchResult.object);
-
-								hideToolbar();
-								MainActivity.launchMainActivityMoveToTop(getActivity());
-								*/
+							mainActivity.getContextMenu().show(searchResult.location, pointDescription, searchResult.object);
 							hide();
 						}
 					}
