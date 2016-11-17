@@ -17,7 +17,8 @@ public class InstallOsmandAppDialog extends AppCompatDialogFragment {
 	private static final String TAG = "InstallOsmandAppDialog";
 	private static final String OSMAND_PLUS_PACKAGE_NAME = "net.osmand.plus";
 	private static final String OSMAND_PACKAGE_NAME = "net.osmand";
-	private static boolean wasChecked = false;
+	private static boolean processed = false;
+	private static boolean shown = false;
 
 	@NonNull
 	@Override
@@ -62,17 +63,20 @@ public class InstallOsmandAppDialog extends AppCompatDialogFragment {
 		return false;
 	}
 
-	public static boolean showIfNeeded(FragmentManager manager, Context ctx) {
-		if (wasChecked) {
+	public static boolean wasShown() {
+		return shown;
+	}
+
+	public static boolean show(FragmentManager manager, Context ctx) {
+		if (processed) {
 			return false;
 		}
-		wasChecked = true;
+		processed = true;
 		if (!SampleUtils.isPackageInstalled(OSMAND_PACKAGE_NAME, ctx)
 				&& !SampleUtils.isPackageInstalled(OSMAND_PLUS_PACKAGE_NAME, ctx)) {
 			new InstallOsmandAppDialog().show(manager, TAG);
-			return true;
-		} else {
-			return false;
+			shown = true;
 		}
+		return shown;
 	}
 }
