@@ -253,6 +253,8 @@ public class MainActivity extends AppCompatActivity {
 				}
 			});
 			noMapsFound = maps == null || maps.length == 0;
+		} else {
+			noMapsFound = true;
 		}
 
 		if (noMapsFound) {
