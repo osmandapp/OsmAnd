@@ -39,7 +39,6 @@ import net.osmand.core.jni.ObfsCollection;
 import net.osmand.core.jni.PointI;
 import net.osmand.core.jni.QIODeviceLogSink;
 import net.osmand.core.jni.ResolvedMapStyle;
-import net.osmand.core.jni.RoadLocator;
 import net.osmand.core.jni.Utilities;
 import net.osmand.core.samples.android.sample1.MultiTouchSupport.MultiTouchZoomListener;
 import net.osmand.core.samples.android.sample1.data.PointDescription;
@@ -62,7 +61,6 @@ public class MainActivity extends AppCompatActivity {
 	private IMapStylesCollection mapStylesCollection;
 	private ResolvedMapStyle mapStyle;
 	private ObfsCollection obfsCollection;
-	private RoadLocator roadLocator;
 	private MapPresentationEnvironment mapPresentationEnvironment;
 	private MapPrimitiviser mapPrimitiviser;
 	private ObfMapObjectsProvider obfMapObjectsProvider;
@@ -115,6 +113,9 @@ public class MainActivity extends AppCompatActivity {
 		super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 		if (requestCode == SampleApplication.PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE &&
 				grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+			if (!InstallOsmandAppDialog.wasShown()) {
+				checkMapsInstalled();
+			}
 			getSampleApplication().initPoiTypes();
 		}
 	}
@@ -201,8 +202,6 @@ public class MainActivity extends AppCompatActivity {
 		Log.i(TAG, "Will load OBFs from " + app.getAbsoluteAppPath());
 		obfsCollection.addDirectory(app.getAbsoluteAppPath(), false);
 
-		roadLocator = new RoadLocator(obfsCollection);
-
 		Log.i(TAG, "Going to prepare all resources for renderer");
 		mapPresentationEnvironment = new MapPresentationEnvironment(
 				mapStyle,
@@ -238,7 +237,7 @@ public class MainActivity extends AppCompatActivity {
 
 		multiMenu = new MapMultiSelectionMenu(this);
 
-		if (!InstallOsmandAppDialog.showIfNeeded(getSupportFragmentManager(), this)
+		if (!InstallOsmandAppDialog.show(getSupportFragmentManager(), this)
 				&& externalStoragePermissionGranted) {
 			checkMapsInstalled();
 		}

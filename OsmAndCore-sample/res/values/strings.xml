@@ -27,7 +27,7 @@
     <string name="shared_string_hour_short">h</string>
     <string name="shared_string_minute_short">min</string>
     <string name="install_maps_title">Install maps</string>
-    <string name="install_maps_desc">You do not have maps in the OsmAnd application. Please download map(s) first and restart the Sample.\n\nDo not forget to set OsmAnd General settings > Data storage folder to Shared memory.</string>
+    <string name="install_maps_desc">You do not have maps in the OsmAnd application. Please download map(s) and restart the Sample.\n\nDo not forget to set OsmAnd General settings > Data storage folder to Shared memory.</string>
     <string name="shared_string_cancel">Cancel</string>
     <string name="shared_string_error">Error</string>
     <string name="restart_app">Restart app</string>
