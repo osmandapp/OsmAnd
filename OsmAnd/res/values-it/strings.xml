@@ -2443,7 +2443,7 @@ Servirebbero {3} MB temporaneamente e {1} MB permanentemente.
 Attualmente sono disponibili solo {2} MB.</string>
     <string name="download_files_question_space_with_temp">Scaricare {0} file?
  Servirebbero {3} MB temporaneamente e {1} MB permanentemente.
- Attualmente sono disponibili {2} MB.</string>
+ (Attualmente sono disponibili {2} MB.)</string>
     <string name="upload_osm_note_description">Puoi inviare le tue note OSM anonimamente se utilizzi il tuo profilo di OpenStreetMap.org.</string>
     <string name="upload_osm_note">Carica nota OSM</string>
     <string name="donations">Donazioni</string>
