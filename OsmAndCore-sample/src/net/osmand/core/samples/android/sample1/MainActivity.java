@@ -439,8 +439,9 @@ public class MainActivity extends AppCompatActivity {
 		public void onLongPress(MotionEvent e) {
 			PointI point31 = new PointI();
 			mapView.getLocationFromScreenPoint(new PointI((int) e.getX(), (int) e.getY()), point31);
-			// geocode(point31);
-			//Toast.makeText(MainActivity.this, "Geocoding...", Toast.LENGTH_SHORT).show();
+			net.osmand.core.jni.LatLon jniLatLon = Utilities.convert31ToLatLon(point31);
+			menu.show(new LatLon(jniLatLon.getLatitude(), jniLatLon.getLongitude()),
+					new PointDescription(jniLatLon.getLatitude(), jniLatLon.getLongitude()), null);
 		}
 
 		@Override
