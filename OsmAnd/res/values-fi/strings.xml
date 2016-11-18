@@ -1596,4 +1596,24 @@ Jälki %2$s</string>
     <string name="map_widget_monitoring_services">Kirjauspalvelut</string>
     <string name="osmand_play_title_30_chars">OsmAnd kartat &amp; suunnistus</string>
     <string name="osmand_plus_play_title_30_chars">OsmAnd+ kartat ja suunnistus</string>
+    <string name="bg_service_sleep_mode_off">Suorita
+ sovellutus taustalla</string>
+    <string name="map_widget_renderer">Karttatyyli</string>
+    <string name="bg_service_sleep_mode_on">Pysäytä
+ sovellutuksen suoritus taustalta</string>
+    <string name="gps_wakeup_interval">GPS virkistyksen aikaväli: %s</string>
+    <string name="map_widget_mini_route">Pienoisreittikartta</string>
+    <string name="bg_service_interval">Aseta virkistyksen aikaväli:</string>
+    <string name="select_animate_speedup">Aseta nopeus reitin simuloinnille</string>
+    <string name="global_app_allocated_memory_descr">Muistia varattu %1$s MB (Android raja %2$s MB, Dalvik %3$s MB).</string>
+    <string name="share_route_as_gpx">Jaa reitti GPX tiedostona</string>
+    <string name="share_route_subject">Reitti jaettu käyttäen OsmAnd</string>
+    <string name="rendering_attr_noPolygons_name">Piilota monikulmiot</string>
+    <string name="rendering_attr_appMode_name">Hahmotustila</string>
+    <string name="rendering_attr_appMode_description">Optimoi kartta</string>
+    <string name="rendering_attr_contourLines_description">Näytä alkaen zoomaustasosta (tarvitsee korkeuskäyrätietoja):</string>
+    <string name="rendering_attr_hmRendered_description">Lisää kartan näytettävien yksityiskohtien määrää</string>
+    <string name="rendering_attr_hmRendered_name">Näytä lisää kartan yksityiskohtia</string>
+    <string name="local_index_routing_data">Reititystiedot</string>
+    <string name="map_online_data">Online ja kuvakekartat</string>
     </resources>
