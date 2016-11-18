@@ -39,7 +39,7 @@
     <string name="save_track_precision">Минимально допустимая точность</string>
     <string name="save_track_precision_descr">Выберите минимально допустимую точность определения координат</string>
     <string name="christmas_poi">Рождественские POI</string>
-    <string name="christmas_desc">В преддверии рождественских и новогодних праздников, вы можете выбрать для отображения POI, связанные с Рождеством: елки, ярмарки.</string>
+    <string name="christmas_desc">В преддверии рождественских и новогодних праздников, вы можете выбрать для отображения POI, связанные с Рождеством: елки, ярмарки и т. п.</string>
     <string name="christmas_desc_q">Показать рождественские POI?</string>
 
     <string name="rendering_attr_contourColorScheme_description">Цветовая схема горизонталей</string>
@@ -1656,7 +1656,7 @@
     <string name="shared_string_clear_all">Очистить всё</string>
     <string name="drawer">Плоский список</string>
     <string name="short_location_on_map">Широта %1$s
-\nДолгота %2$s</string>
+Долгота %2$s</string>
     <string name="tips_and_tricks_descr">Часто задаваемые вопросы, последние изменения и другое</string>
     <string name="simulate_your_location">Моделировать ваше местоположение</string>
     <string name="shared_string_collapse">Свернуть</string>
@@ -2154,7 +2154,7 @@
     <string name="get_for">Получить за %1$s</string>
     <string name="get_for_month">Получить за %1$s в месяц</string>
     <string name="get_it">Получить</string>
-    <string name="osm_live_banner_desc">Получите неограниченные загрузки для карт, а также обновления чаще чем один раз в месяц: ежечасно, ежедневно или еженедельно.</string>
+    <string name="osm_live_banner_desc">Получите неограниченные загрузки для карт, а также обновления карт чаще чем один раз в месяц: еженедельно, ежедневно или ежечасно.</string>
     <string name="osmand_plus_banner_desc">Полная версия OsmAnd с неограниченным количеством загрузок и ежемесячных обновлений для карт.</string>
     <string name="select_voice_provider">Выберите голосовое сопровождение</string>
     <string name="osm_live_payment_desc">Абонентская плата будет взиматься ежемесячно. Отменить подписку можно на Google Play в любой момент.</string>
@@ -2166,4 +2166,5 @@
     <string name="lang_hsb">Верхнелужицкий</string>
     <string name="lang_be_BY">Белорусский (латиница)</string>
     <string name="driving_region_australia">Австралия</string>
+    <string name="lang_kab">Кабильский</string>
     </resources>
