@@ -2706,12 +2706,6 @@ Se ami OsmAnd e OSM e vuoi sostenerli, questo è un modo perfetto per farlo.</st
     <string name="rendering_value_fine_name">Fine</string>
     <string name="upload_poi">Upload PDI</string>
     <string name="route_roundabout_short">"Prendere la  %1$d uscita e proseguire"</string>
-    <string name="wiki_around">"Avviso:
-         Se stai per tradurre delle frasi accertati che:
-         1. Non ci siano frasi doppie
-         2. Tutti gli apostrofi siano preceduti da una barra retroversa (vedi altro).
-         Se stai correggere o o fare la traduzione inglese accertati che:
-         3. Tutte le stringhe che hai modificato o creato siano in cima al file (per fendere più facile individuare cosa è stato tradotto).
-    PER FAVORE: dai un\'occhiata a http://code.google.com/p/osmand/wiki/UIConsistency, può veramente migliorare il tuo e nostro lavoro :-)  Grz - Hardy"</string>
+    <string name="wiki_around">Articoli Wikipedia vicini</string>
     <string name="search_map_hint">Cerca città o regione</string>
     </resources>
