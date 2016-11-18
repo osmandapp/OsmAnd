@@ -2427,4 +2427,20 @@ OsmAnd Mapas y Navegación - encuentra ubicaciones en el mapa y calcula rutas si
 
  y más…
  "</string>
+    <string name="wiki_around">Artículos de Wikipedia cercanos</string>
+    <string name="route_roundabout_short">Toma la %1$d salida y ve</string>
+    <string name="upload_poi">Subir Punto de Interés</string>
+    <string name="route_calculation">Cálculo de rutas</string>
+    <string name="search_map_hint">Buscar ciudad o región</string>
+    <string name="gpx_no_tracks_title">Aún no tienes ninguna traza</string>
+    <string name="gpx_no_tracks_title_folder">También puedes añadir trazas a la carpeta</string>
+    <string name="gpx_add_track">Añadir traza</string>
+    <string name="gpx_appearance">Apariencia</string>
+    <string name="osmo_share_location">Compartir</string>
+    <string name="osmo_pause_location">Pausar</string>
+    <string name="osmo_service_running">El servicio OsMo está ejecutándose</string>
+    <string name="shared_string_notifications">Notificaciones</string>
+    <string name="shared_string_continue">Continuar</string>
+    <string name="shared_string_pause">Pausar</string>
+    <string name="gpx_logging_no_data">Sin datos</string>
     </resources>
