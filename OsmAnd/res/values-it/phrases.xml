@@ -23,9 +23,9 @@
 	<string name="poi_antiques">Antiquariato</string>
 	<string name="poi_art">Negozio d\'arte</string>
 	<string name="poi_baby_goods">Articoli per l\'infanzia</string>
-	<string name="poi_bag">Valigeria</string>
+	<string name="poi_bag">Negozio borsa</string>
 	<string name="poi_bathroom_furnishing">Arredo bagno</string>
-	<string name="poi_bed">Arredamento camera da letto</string>
+	<string name="poi_bed">Negozio biancheria da letto</string>
 	<string name="poi_carpet">Negozio tappeti</string>
 	<string name="poi_chemist">Mesticheria</string>
 	<string name="poi_clothes">Abbigliamento</string>
@@ -558,7 +558,7 @@
 	<string name="poi_man_made">Artificiale</string>
 	<string name="poi_historic_mine">Miniera storica</string>
 	<string name="poi_aquarium">Acquario</string>
-	<string name="poi_shop_food">Alimentari</string>
+	<string name="poi_shop_food">Negozio di alimentari e supermarket</string>
 	<string name="poi_filling_station">Stazione di gas</string>
 		<string name="poi_public_transport">Trasporti pubblici</string>
 		<string name="poi_air_transport">Trasporto aereo</string>
@@ -1282,4 +1282,5 @@
 	<string name="poi_drive_through">Guidare attraverso</string>
 	<string name="poi_charity">Negozio carità</string>
 	<string name="poi_scuba_diving_shop">Negozio immersioni subacquee</string>
+	<string name="poi_health_specialty">Specialità di salute</string>
 	</resources>
