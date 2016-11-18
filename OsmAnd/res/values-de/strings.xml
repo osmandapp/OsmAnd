@@ -1265,7 +1265,7 @@ Die globalen Daten (zwischen N 70° und S 70°) basieren auf Messungen von SRTM 
 	<string name="speak_descr">Einstellungen für Ansagen zu Straßennamen, Verkehrswarnungen, Blitzern oder Höchstgeschwindigkeit</string>
 	<string name="speak_street_names">Straßennamen ansagen (TTS)</string>
 	<string name="map_widget_fps_info">FPS-Debug-Info</string>
-	<string name="driving_region_descr">Region zum Fahren wählen: USA, Europa, GB, Asien etc.</string>
+	<string name="driving_region_descr">Region zum Fahren wählen: Europa, USA, GB, etc.</string>
 	<string name="driving_region_japan">Japan</string>
 	<string name="driving_region_us">USA</string>
 	<string name="driving_region_canada">Kanada</string>
@@ -1616,7 +1616,7 @@ Sie können in Echtzeit alle Geräte einer teilnehmenden Gruppe verfolgen. Sie k
 
 Anonym erstellte Gruppen können spontan eingerichtet werden, hier sind die Optionen etwas eingeschränkt: Lebensdauer der Gruppe nur für einige Tage, auch ist keine zentrale Steuerung der Gruppe möglich. Voll funktionsfähige Gruppen müssen auf der genannten Internetseite erstellt werden, auf die Gruppe haben nur registrierte Nutzer Zugriff.
  "</string>
-	<string name="osmo_plugin_name">OpenStreetMap Überwachung</string>
+	<string name="osmo_plugin_name">OsMo (OSM Monitoring)</string>
 	<string name="osmo_settings">OsMo</string>
 	<string name="osmo_io_error">"OsMo-Verbindungsproblem: "</string>
 	<string name="osmo_mode_on">OsMo-Sitzung beenden</string>
