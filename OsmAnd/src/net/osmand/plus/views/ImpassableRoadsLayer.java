@@ -169,11 +169,13 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 
 			for (RouteDataObject road : getMissingRoads()) {
 				Location location = getMissingRoadLocations().get(road.getId());
-				int x = (int) tileBox.getPixXFromLatLon(location.getLatitude(), location.getLongitude());
-				int y = (int) tileBox.getPixYFromLatLon(location.getLatitude(), location.getLongitude());
-				if (calculateBelongs(ex, ey, x, y, compare)) {
-					compare = radius;
-					o.add(road);
+				if (location != null) {
+					int x = (int) tileBox.getPixXFromLatLon(location.getLatitude(), location.getLongitude());
+					int y = (int) tileBox.getPixYFromLatLon(location.getLatitude(), location.getLongitude());
+					if (calculateBelongs(ex, ey, x, y, compare)) {
+						compare = radius;
+						o.add(road);
+					}
 				}
 			}
 		}

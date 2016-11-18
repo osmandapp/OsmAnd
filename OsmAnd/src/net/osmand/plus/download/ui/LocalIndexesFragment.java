@@ -342,7 +342,9 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 
 		@Override
 		public void loadFile(LocalIndexInfo... loaded) {
-			publishProgress(loaded);
+			if (!isCancelled()) {
+				publishProgress(loaded);
+			}
 		}
 
 		@Override
@@ -853,8 +855,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 					return i;
 				}
 			}
-			LocalIndexInfo newCat = new LocalIndexInfo(val.getType(), backuped, val.getSubfolder(),
-					getMyApplication());
+			LocalIndexInfo newCat = new LocalIndexInfo(val.getType(), backuped, val.getSubfolder());
 			category.add(newCat);
 			data.put(newCat, new ArrayList<LocalIndexInfo>());
 			return newCat;
@@ -931,8 +932,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 			}
 			if (found == -1) {
 				found = category.size();
-				category.add(new LocalIndexInfo(info.getType(), info.isBackupedData(),
-						info.getSubfolder(), getMyApplication()));
+				category.add(new LocalIndexInfo(info.getType(), info.isBackupedData(), info.getSubfolder()));
 			}
 			if (!data.containsKey(category.get(found))) {
 				data.put(category.get(found), new ArrayList<LocalIndexInfo>());

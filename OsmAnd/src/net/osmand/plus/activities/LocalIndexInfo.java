@@ -60,8 +60,7 @@ public class LocalIndexInfo {
 	}
 
 	// Special domain object represents category
-	public LocalIndexInfo(@NonNull LocalIndexType type, boolean backup, @NonNull String subfolder,
-						  @NonNull OsmandApplication app) {
+	public LocalIndexInfo(@NonNull LocalIndexType type, boolean backup, @NonNull String subfolder) {
 		this.type = type;
 		backupedData = backup;
 		this.subfolder = subfolder;

@@ -34,6 +34,7 @@ public class RendererRegistry {
 	public final static String WINTER_SKI_RENDER = "Winter and ski";  //$NON-NLS-1$
 	public final static String NAUTICAL_RENDER = "Nautical";  //$NON-NLS-1$
 	public final static String TOPO_RENDER = "Topo";  //$NON-NLS-1$
+	public final static String CITYVIEW_RENDER = "City view";  //$NON-NLS-1$
 
 	private RenderingRulesStorage defaultRender = null;
 	private RenderingRulesStorage currentSelectedRender = null;
@@ -61,6 +62,7 @@ public class RendererRegistry {
 		internalRenderers.put(NAUTICAL_RENDER, "nautical" + ".render.xml");
 		internalRenderers.put(WINTER_SKI_RENDER, "skimap" + ".render.xml");
 		internalRenderers.put(TOPO_RENDER, "topo" + ".render.xml");
+		internalRenderers.put(CITYVIEW_RENDER, "cityview" + ".render.xml");
 	}
 	
 	public RenderingRulesStorage defaultRender() {
