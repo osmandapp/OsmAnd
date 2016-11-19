@@ -224,6 +224,7 @@ public class MapContextMenu extends MenuTitleController {
 		if (!MapContextMenuFragment.showInstance(this, mainActivity, centerMarker)) {
 			active = false;
 		} else {
+			mainActivity.showContextMarker(latLon);
 			if (menuController != null) {
 				menuController.onShow();
 			}
@@ -262,6 +263,7 @@ public class MapContextMenu extends MenuTitleController {
 			if (menuController != null) {
 				menuController.setActive(false);
 			}
+			mainActivity.hideContextMarker();
 			mainActivity.refreshMap();
 		}
 	}

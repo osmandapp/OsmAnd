@@ -27,7 +27,6 @@ import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
 import net.osmand.Location;
-import net.osmand.core.android.AtlasMapRendererView;
 import net.osmand.core.jni.PointI;
 import net.osmand.core.jni.Utilities;
 import net.osmand.core.samples.android.sample1.IconsCache;
@@ -81,7 +80,6 @@ public class MapContextMenuFragment extends Fragment {
 	private int markerPaddingPx;
 	private int markerPaddingXPx;
 
-	private AtlasMapRendererView map;
 	private LatLon mapCenter;
 	private int origMarkerX;
 	private int origMarkerY;
@@ -121,8 +119,6 @@ public class MapContextMenuFragment extends Fragment {
 		leftTitleButtonController = menu.getLeftTitleButtonController();
 		rightTitleButtonController = menu.getRightTitleButtonController();
 		topRightTitleButtonController = menu.getTopRightTitleButtonController();
-
-		map = getMainActivity().getMapView();
 
 		RotatedTileBox box = getBox();
 		customMapCenter = menu.getMapCenter() != null;

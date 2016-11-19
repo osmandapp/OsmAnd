@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.content.pm.PackageManager;
 import android.graphics.PointF;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -28,6 +29,9 @@ import net.osmand.core.android.AtlasMapRendererView;
 import net.osmand.core.jni.IMapLayerProvider;
 import net.osmand.core.jni.IMapStylesCollection;
 import net.osmand.core.jni.Logger;
+import net.osmand.core.jni.MapMarker;
+import net.osmand.core.jni.MapMarkerBuilder;
+import net.osmand.core.jni.MapMarkersCollection;
 import net.osmand.core.jni.MapObjectsSymbolsProvider;
 import net.osmand.core.jni.MapPresentationEnvironment;
 import net.osmand.core.jni.MapPrimitivesProvider;
@@ -39,6 +43,7 @@ import net.osmand.core.jni.ObfsCollection;
 import net.osmand.core.jni.PointI;
 import net.osmand.core.jni.QIODeviceLogSink;
 import net.osmand.core.jni.ResolvedMapStyle;
+import net.osmand.core.jni.SwigUtilities;
 import net.osmand.core.jni.Utilities;
 import net.osmand.core.samples.android.sample1.MultiTouchSupport.MultiTouchZoomListener;
 import net.osmand.core.samples.android.sample1.data.PointDescription;
@@ -84,7 +89,13 @@ public class MainActivity extends AppCompatActivity {
 	private MapContextMenu menu;
 	private MapMultiSelectionMenu multiMenu;
 
-	private boolean noMapsFound;
+	// Context pin marker
+	private MapMarkersCollection contextPinMarkersCollection;
+	private MapMarker contextPinMarker;
+
+	// "My location" marker, "My course" marker and collection
+	private MapMarkersCollection myMarkersCollection;
+	private MapMarker myLocationMarker;
 
 	// Germany
 	private final static float INIT_LAT = 49.353953f;
@@ -232,9 +243,10 @@ public class MainActivity extends AppCompatActivity {
 
 		app.getIconsCache().setDisplayDensityFactor(displayDensityFactor);
 
+		initMapMarkers();
+
 		menu = new MapContextMenu();
 		menu.setMainActivity(this);
-
 		multiMenu = new MapMultiSelectionMenu(this);
 
 		if (!InstallOsmandAppDialog.show(getSupportFragmentManager(), this)
@@ -245,6 +257,7 @@ public class MainActivity extends AppCompatActivity {
 
 	private void checkMapsInstalled() {
 		File mapsDir = new File(getSampleApplication().getAbsoluteAppPath());
+		boolean noMapsFound;
 		if (mapsDir.exists()) {
 			File[] maps = mapsDir.listFiles(new FilenameFilter() {
 				@Override
@@ -270,6 +283,38 @@ public class MainActivity extends AppCompatActivity {
 			});
 			builder.create().show();
 		}
+	}
+
+	public void initMapMarkers() {
+		// Create context pin marker
+		Drawable pinDrawable = OsmandResources.getDrawable("map_pin_context_menu");
+		contextPinMarkersCollection = new MapMarkersCollection();
+		contextPinMarker = new MapMarkerBuilder()
+				.setIsAccuracyCircleSupported(false)
+				.setBaseOrder(-210000)
+				.setIsHidden(true)
+				.setPinIcon(SwigUtilities.createSkBitmapARGB888With(
+						pinDrawable.getIntrinsicWidth(), pinDrawable.getIntrinsicHeight(),
+						SampleUtils.getDrawableAsByteArray(pinDrawable)))
+				.setPinIconVerticalAlignment(MapMarker.PinIconVerticalAlignment.Top)
+				.setPinIconHorisontalAlignment(MapMarker.PinIconHorisontalAlignment.CenterHorizontal)
+		.buildAndAddToCollection(contextPinMarkersCollection);
+
+		mapView.addSymbolsProvider(contextPinMarkersCollection);
+	}
+
+	public void showContextMarker(@NonNull LatLon location) {
+		mapView.suspendSymbolsUpdate();
+		PointI locationI = Utilities.convertLatLonTo31(new net.osmand.core.jni.LatLon(location.getLatitude(), location.getLongitude()));
+		contextPinMarker.setPosition(locationI);
+		contextPinMarker.setIsHidden(false);
+		mapView.resumeSymbolsUpdate();
+	}
+
+	public void hideContextMarker() {
+		mapView.suspendSymbolsUpdate();
+		contextPinMarker.setIsHidden(true);
+		mapView.resumeSymbolsUpdate();
 	}
 
 	@Override
@@ -423,8 +468,7 @@ public class MainActivity extends AppCompatActivity {
 	}
 
 	public boolean onTouchEvent(MotionEvent event) {
-		return multiTouchSupport.onTouchEvent(event)
-				|| gestureDetector.onTouchEvent(event);
+		return multiTouchSupport.onTouchEvent(event) || gestureDetector.onTouchEvent(event);
 	}
 
 	private class MapViewOnGestureListener extends SimpleOnGestureListener {
@@ -437,11 +481,15 @@ public class MainActivity extends AppCompatActivity {
 
 		@Override
 		public void onLongPress(MotionEvent e) {
-			PointI point31 = new PointI();
-			mapView.getLocationFromScreenPoint(new PointI((int) e.getX(), (int) e.getY()), point31);
-			net.osmand.core.jni.LatLon jniLatLon = Utilities.convert31ToLatLon(point31);
-			menu.show(new LatLon(jniLatLon.getLatitude(), jniLatLon.getLongitude()),
-					new PointDescription(jniLatLon.getLatitude(), jniLatLon.getLongitude()), null);
+			if (!multiTouchSupport.isInMultiTouch()) {
+				PointI point31 = new PointI();
+				int[] offset = new int[]{0, 0};
+				mapView.getLocationInWindow(offset);
+				mapView.getLocationFromScreenPoint(new PointI((int) e.getX() - offset[0], (int) e.getY() - offset[1]), point31);
+				net.osmand.core.jni.LatLon jniLatLon = Utilities.convert31ToLatLon(point31);
+				showContextMenu(new LatLon(jniLatLon.getLatitude(), jniLatLon.getLongitude()),
+						new PointDescription(jniLatLon.getLatitude(), jniLatLon.getLongitude()), null);
+			}
 		}
 
 		@Override
@@ -460,6 +508,7 @@ public class MainActivity extends AppCompatActivity {
 			setTarget(newTarget);
 
 			mapView.requestFocus();
+			hideContextMenu(false);
 			return true;
 		}
 	}
@@ -589,7 +638,14 @@ public class MainActivity extends AppCompatActivity {
 	}
 
 	private void hideContextMenu() {
+		hideContextMenu(true);
+	}
+
+	private void hideContextMenu(boolean restorePosition) {
 		if (menu.isVisible()) {
+			if (!restorePosition) {
+				menu.updateMapCenter(null);
+			}
 			menu.hide();
 		} else if (menu.getMultiSelectionMenu().isVisible()) {
 			menu.getMultiSelectionMenu().hide();

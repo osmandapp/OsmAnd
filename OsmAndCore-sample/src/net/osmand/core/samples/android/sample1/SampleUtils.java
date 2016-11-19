@@ -7,6 +7,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Surface;
@@ -14,6 +17,7 @@ import android.view.Surface;
 import net.osmand.PlatformUtil;
 
 import java.io.File;
+import java.nio.ByteBuffer;
 import java.util.List;
 
 public class SampleUtils {
@@ -183,5 +187,20 @@ public class SampleUtils {
 			}
 		}
 		return files;
+	}
+
+	public static byte[] getDrawableAsByteArray(Drawable drawable) {
+		if (drawable instanceof BitmapDrawable) {
+			Bitmap bitmap = ((BitmapDrawable) drawable).getBitmap();
+			return getBitmapAsByteArray(bitmap);
+		}
+		return null;
+	}
+
+	public static byte[] getBitmapAsByteArray(Bitmap bitmap) {
+		int size = bitmap.getRowBytes() * bitmap.getHeight();
+		ByteBuffer byteBuffer = ByteBuffer.allocate(size);
+		bitmap.copyPixelsToBuffer(byteBuffer);
+		return byteBuffer.array();
 	}
 }
