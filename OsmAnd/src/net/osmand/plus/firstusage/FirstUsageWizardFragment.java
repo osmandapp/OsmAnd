@@ -692,13 +692,15 @@ public class FirstUsageWizardFragment extends Fragment implements OsmAndLocation
 	}
 
 	public static void startWizard(FragmentActivity activity) {
-		OsmandApplication app = (OsmandApplication) activity.getApplication();
-		if (!app.getSettings().isInternetConnectionAvailable()) {
-			showNoInternetFragment(activity);
-		} else if (location == null) {
-			findLocation(activity, true);
-		} else {
-			showSearchMapFragment(activity);
+		if (activity != null) {
+			OsmandApplication app = (OsmandApplication) activity.getApplication();
+			if (!app.getSettings().isInternetConnectionAvailable()) {
+				showNoInternetFragment(activity);
+			} else if (location == null) {
+				findLocation(activity, true);
+			} else {
+				showSearchMapFragment(activity);
+			}
 		}
 	}
 
@@ -730,19 +732,21 @@ public class FirstUsageWizardFragment extends Fragment implements OsmAndLocation
 	}
 
 	private static void findLocation(FragmentActivity activity, boolean searchLocationByIp) {
-		OsmandApplication app = (OsmandApplication) activity.getApplication();
-		if (searchLocationByIp) {
-			showSearchLocationFragment(activity, true);
-		} else if (OsmAndLocationProvider.isLocationPermissionAvailable(activity)) {
-			Location loc = app.getLocationProvider().getLastKnownLocation();
-			if (loc == null) {
-				showSearchLocationFragment(activity, false);
+		if (activity != null) {
+			OsmandApplication app = (OsmandApplication) activity.getApplication();
+			if (searchLocationByIp) {
+				showSearchLocationFragment(activity, true);
+			} else if (OsmAndLocationProvider.isLocationPermissionAvailable(activity)) {
+				Location loc = app.getLocationProvider().getLastKnownLocation();
+				if (loc == null) {
+					showSearchLocationFragment(activity, false);
+				} else {
+					location = new Location(loc);
+					showSearchMapFragment(activity);
+				}
 			} else {
-				location = new Location(loc);
-				showSearchMapFragment(activity);
+				showSearchLocationFragment(activity, false);
 			}
-		} else {
-			showSearchLocationFragment(activity, false);
 		}
 	}
 
@@ -870,7 +874,7 @@ public class FirstUsageWizardFragment extends Fragment implements OsmAndLocation
 	}
 
 	private static void showFragment(FragmentActivity activity, Fragment fragment) {
-		if (!wizardClosed) {
+		if (!wizardClosed && activity != null) {
 			activity.getSupportFragmentManager()
 					.beginTransaction()
 					.replace(R.id.fragmentContainer, fragment, FirstUsageWizardFragment.TAG)
