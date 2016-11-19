@@ -89,7 +89,7 @@ public class QuickSearchListItem {
 				PointDescription pd = historyEntry.getName();
 				return pd.getSimpleName(app, false);
 			case LOCATION:
-				LatLon latLon = (LatLon) searchResult.object;
+				LatLon latLon = searchResult.location;
 				return PointDescription.getLocationNamePlain(app, latLon.getLatitude(), latLon.getLongitude());
 		}
 		return searchResult.localeName;
