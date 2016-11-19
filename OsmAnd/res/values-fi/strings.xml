@@ -1884,4 +1884,13 @@ Jälki %2$s</string>
     <string name="lang_uk">Ukraina</string>
     <string name="lang_vi">Vietnami</string>
     <string name="lang_cy">Kymri</string>
+    <string name="opening_hours_not_supported">Aukioloaikojen formaattia ei tueta editoinnissa</string>
+    <string name="update_poi_no_offline_poi_index">Tälle alueelle ei ole käytettävissä offline POI tietoja</string>
+    <string name="update_poi_is_not_available_for_zoom">POI päivittäminen pienille zoomaustasoille ei ole käytettävissä</string>
+    <string name="max_level_download_tile">Maksimi online zoomaus</string>
+    <string name="max_level_download_tile_descr">Valitse maksimi zoomaustaso online karttakuvakkeiden lataamiseksi</string>
+    <string name="router_service_descr">Valitse online tai offline suunnistuspalvelu</string>
+    <string name="download_question_exist">Offline data {0} on jo olemassa ({1}). Haluatko päivittää sen ({2}) ?</string>
+    <string name="opening_changeset">Avataan muutosjoukkoa…</string>
+    <string name="closing_changeset">Suljetaan muutosjoukkoa…</string>
     </resources>
