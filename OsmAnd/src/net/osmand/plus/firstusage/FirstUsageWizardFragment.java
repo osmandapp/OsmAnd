@@ -621,9 +621,12 @@ public class FirstUsageWizardFragment extends Fragment implements OsmAndLocation
 
 	private void searchCountryMap() {
 		closeWizard();
-		final Intent intent = new Intent(getActivity(), DownloadActivity.class);
-		intent.putExtra(DownloadActivity.TAB_TO_OPEN, DownloadActivity.DOWNLOAD_TAB);
-		getActivity().startActivity(intent);
+		FragmentActivity activity = getActivity();
+		if (activity != null) {
+			final Intent intent = new Intent(activity, DownloadActivity.class);
+			intent.putExtra(DownloadActivity.TAB_TO_OPEN, DownloadActivity.DOWNLOAD_TAB);
+			activity.startActivity(intent);
+		}
 	}
 
 	private void searchMap() {
