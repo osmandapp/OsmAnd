@@ -367,7 +367,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			if (amenity.getType().isWiki()) {
 				if (!hasWiki) {
 					iconId = R.drawable.ic_action_note_dark;
-					String lng = amenity.getContentSelected("content", preferredLang, "en");
+					String lng = amenity.getContentLanguage("content", preferredLang, "en");
 					if (Algorithms.isEmpty(lng)) {
 						lng = "en";
 					}

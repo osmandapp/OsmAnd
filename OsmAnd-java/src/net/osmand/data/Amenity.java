@@ -171,7 +171,7 @@ public class Amenity extends MapObject {
 		setAdditionalInfo(PHONE, phone);
 	}
 
-	public String getContentSelected(String tag, String lang, String defLang) {
+	public String getContentLanguage(String tag, String lang, String defLang) {
 		if (lang != null) {
 			String translateName = getAdditionalInfo(tag + ":" + lang);
 			if (!Algorithms.isEmpty(translateName)) {
@@ -213,7 +213,7 @@ public class Amenity extends MapObject {
 		return l;
 	}
 
-	public String getContentLang(String tag, String lang) {
+	public String getTagContent(String tag, String lang) {
 		if (lang != null) {
 			String translateName = getAdditionalInfo(tag + ":" + lang);
 			if (!Algorithms.isEmpty(translateName)) {
@@ -237,11 +237,11 @@ public class Amenity extends MapObject {
 	}
 
 	public String getDescription(String lang) {
-		String info = getContentLang(DESCRIPTION, lang);
+		String info = getTagContent(DESCRIPTION, lang);
 		if (!Algorithms.isEmpty(info)) {
 			return info;
 		}
-		return getContentLang(CONTENT, lang);
+		return getTagContent(CONTENT, lang);
 	}
 
 	public void setDescription(String description) {

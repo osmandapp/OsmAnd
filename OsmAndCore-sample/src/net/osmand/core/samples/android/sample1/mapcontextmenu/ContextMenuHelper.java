@@ -67,7 +67,7 @@ public class ContextMenuHelper {
 		topBar.setBackgroundColor(ContextCompat.getColor(ctx, R.color.osmand_orange));
 		topBar.setTitleTextColor(ContextCompat.getColor(ctx, R.color.color_white));
 
-		String lng = a.getContentSelected("content", preferredLang, "en");
+		String lng = a.getContentLanguage("content", preferredLang, "en");
 		if (Algorithms.isEmpty(lng)) {
 			lng = "en";
 		}
