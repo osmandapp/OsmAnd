@@ -53,7 +53,7 @@ public class ContextMenuHelper {
 		if (Algorithms.isEmpty(preferredLang)) {
 			preferredLang = SampleApplication.LANGUAGE;
 		}
-		final Dialog dialog = new Dialog(ctx);
+		final Dialog dialog = new Dialog(ctx, R.style.AppTheme);
 		final String title = Algorithms.isEmpty(lang) ? a.getName() : a.getName(lang);
 		LinearLayout ll = new LinearLayout(ctx);
 		ll.setOrientation(LinearLayout.VERTICAL);
@@ -184,11 +184,7 @@ public class ContextMenuHelper {
 	public static String getLangName(Context ctx, String basename) {
 		try {
 			String nm = basename.replace('-', '_').replace(' ', '_');
-			Field f = R.string.class.getField("lang_"+nm);
-			if (f != null) {
-				Integer in = (Integer) f.get(null);
-				return ctx.getString(in);
-			}
+			return OsmandResources.getString("lang_" + nm);
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
