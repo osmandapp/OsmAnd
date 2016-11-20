@@ -28,9 +28,8 @@
         <item name="expandable_list_background">@color/list_item_light</item>
         <item name="osmo_header_background">@color/osmo_header_light</item>
         <item name="dashboard_subheader_text_color">@color/dashboard_subheader_text_light</item>
-        <item name="dashboard_general_button_text_color">
-            @color/dashboard_general_button_text_light
-        </item>
+        <item name="dashboard_general_button_text_color">@color/dashboard_general_button_text_light</item>
+        <item name="expandable_list_item_background">@drawable/expandable_list_item_background_light</item>
         <item name="android:textColorPrimary">@color/color_black</item>
         <item name="spinnerItemTextColor">@color/color_black</item>
         <item name="spinnerListBackground">@color/spinner_list_background_light</item>

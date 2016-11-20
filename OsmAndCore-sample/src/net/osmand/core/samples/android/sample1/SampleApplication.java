@@ -17,6 +17,7 @@ import net.osmand.core.jni.LogSeverityLevel;
 import net.osmand.core.jni.Logger;
 import net.osmand.core.samples.android.sample1.SampleFormatter.MetricsConstants;
 import net.osmand.core.samples.android.sample1.SampleFormatter.SpeedConstants;
+import net.osmand.core.samples.android.sample1.resources.ResourceManager;
 import net.osmand.core.samples.android.sample1.search.QuickSearchHelper;
 import net.osmand.map.OsmandRegions;
 import net.osmand.map.WorldRegion;
@@ -48,6 +49,7 @@ public class SampleApplication extends Application {
 	private QuickSearchHelper searchUICore;
 	private GeocodingLookupService geocodingLookupService;
 	private OsmandRegions regions;
+	private ResourceManager resourceManager;
 
 	public static String LANGUAGE;
 	public static boolean TRANSLITERATE = false;
@@ -67,6 +69,7 @@ public class SampleApplication extends Application {
 		locationProvider = new SampleLocationProvider(this);
 		searchUICore = new QuickSearchHelper(this);
 		geocodingLookupService = new GeocodingLookupService(this);
+		resourceManager = new ResourceManager(this);
 		regions = new OsmandRegions();
 		updateRegionVars();
 		indexRegionsBoundaries();
@@ -134,6 +137,10 @@ public class SampleApplication extends Application {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	public ResourceManager getResourceManager() {
+		return resourceManager;
 	}
 
 	public OsmandRegions getRegions() {

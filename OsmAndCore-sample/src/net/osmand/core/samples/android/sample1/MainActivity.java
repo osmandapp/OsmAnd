@@ -25,8 +25,8 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.core.android.AtlasMapRendererView;
-import net.osmand.core.jni.Amenity;
 import net.osmand.core.jni.AmenitySymbolsProvider.AmenitySymbolsGroup;
 import net.osmand.core.jni.AreaI;
 import net.osmand.core.jni.IBillboardMapSymbol;
@@ -59,14 +59,19 @@ import net.osmand.core.jni.Utilities;
 import net.osmand.core.samples.android.sample1.MultiTouchSupport.MultiTouchZoomListener;
 import net.osmand.core.samples.android.sample1.data.PointDescription;
 import net.osmand.core.samples.android.sample1.mapcontextmenu.MapContextMenu;
-import net.osmand.core.samples.android.sample1.mapcontextmenu.MapMultiSelectionMenu;
+import net.osmand.core.samples.android.sample1.mapcontextmenu.MenuController;
 import net.osmand.core.samples.android.sample1.search.QuickSearchDialogFragment;
+import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
+import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.osm.PoiCategory;
 import net.osmand.util.MapUtils;
 
 import java.io.File;
 import java.io.FilenameFilter;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 	private static final String TAG = "OsmAndCoreSample";
@@ -98,7 +103,6 @@ public class MainActivity extends AppCompatActivity {
 	private MultiTouchSupport multiTouchSupport;
 
 	private MapContextMenu menu;
-	private MapMultiSelectionMenu multiMenu;
 
 	// Context pin marker
 	private MapMarkersCollection contextPinMarkersCollection;
@@ -259,7 +263,6 @@ public class MainActivity extends AppCompatActivity {
 
 		menu = new MapContextMenu();
 		menu.setMainActivity(this);
-		multiMenu = new MapMultiSelectionMenu(this);
 
 		if (!InstallOsmandAppDialog.show(getSupportFragmentManager(), this)
 				&& externalStoragePermissionGranted) {
@@ -377,8 +380,8 @@ public class MainActivity extends AppCompatActivity {
 	public boolean showContextMenu(@NonNull LatLon latLon,
 								   @Nullable PointDescription pointDescription,
 								   @Nullable Object object) {
-		if (multiMenu.isVisible()) {
-			multiMenu.hide();
+		if (menu.getMultiSelectionMenu().isVisible()) {
+			menu.getMultiSelectionMenu().hide();
 		}
 		if (!getBox().containsLatLon(latLon)) {
 			menu.setMapCenter(latLon);
@@ -386,6 +389,16 @@ public class MainActivity extends AppCompatActivity {
 		}
 		menu.show(latLon, pointDescription, object);
 		return true;
+	}
+
+	private void showContextMenuForSelectedObjects(final LatLon latLon, final List<Object> selectedObjects) {
+		menu.getMultiSelectionMenu().show(latLon, selectedObjects);
+	}
+
+	private void hideMultiContextMenu() {
+		if (menu.getMultiSelectionMenu().isVisible()) {
+			menu.getMultiSelectionMenu().hide();
+		}
 	}
 
 	public RotatedTileBox getBox() {
@@ -501,6 +514,8 @@ public class MainActivity extends AppCompatActivity {
 			AreaI area = new AreaI(new PointI(touchPoint.getX() - delta, touchPoint.getY() - delta),
 					new PointI(touchPoint.getX() + delta, touchPoint.getY() + delta));
 
+			List<Object> selectedObjects = new ArrayList<>();
+
 			MapSymbolInformationList symbolInfos = mapView.getSymbolsIn(area, false);
 			for (int i = 0; i < symbolInfos.size(); i++) {
 				MapSymbolInformation symbolInfo = symbolInfos.get(i);
@@ -529,55 +544,122 @@ public class MainActivity extends AppCompatActivity {
 						}
 					}
 
-					Log.e("111", i + ". lat=" + lat + " lon=" + lon);
+					String name = null;
 					MapMarker mapMarker;
 					try {
 						SymbolsGroup markerSymbolsGroup = SymbolsGroup.dynamic_cast(symbolInfo.getMapSymbol().getGroupPtr());
 						mapMarker = markerSymbolsGroup.getMapMarker();
-						Log.e("111", "marker=" + mapMarker.getMarkerId());
 					} catch (Exception eMapMarker) {
 						mapMarker = null;
 					}
 					if (mapMarker != null && mapMarker.getMarkerId() == CONTEXT_MARKER_ID) {
-						// todo
+						hideMultiContextMenu();
+						menu.show();
+						return true;
 					} else {
-						Amenity amenity;
+						net.osmand.core.jni.Amenity amenity;
 						try {
-							AmenitySymbolsGroup amenitySymbolGroup = AmenitySymbolsGroup.dynamic_cast(symbolInfo.getMapSymbol().getGroupPtr());
+							AmenitySymbolsGroup amenitySymbolGroup =
+									AmenitySymbolsGroup.dynamic_cast(symbolInfo.getMapSymbol().getGroupPtr());
 							amenity = amenitySymbolGroup.getAmenity();
 						} catch (Exception eAmenity) {
 							amenity = null;
 						}
 						if (amenity != null) {
-							amenity.getId(); // todo
-							Log.e("111", "amenity=" + amenity.getNativeName());
+							name = amenity.getNativeName();
+							net.osmand.core.jni.LatLon aLatLon = Utilities.convert31ToLatLon(amenity.getPosition31());
+							Amenity osmandAmenity = findAmenity(amenity.getId().getId().longValue() >> 7,
+									aLatLon.getLatitude(), aLatLon.getLongitude());
+							if (osmandAmenity != null) {
+								if (!selectedObjects.contains(osmandAmenity)) {
+									selectedObjects.add(osmandAmenity);
+								}
+								continue;
+							}
 						} else {
 							MapObject mapObject;
 							try {
-								MapObjectSymbolsGroup objSymbolGroup = MapObjectSymbolsGroup.dynamic_cast(symbolInfo.getMapSymbol().getGroupPtr());
+								MapObjectSymbolsGroup objSymbolGroup =
+										MapObjectSymbolsGroup.dynamic_cast(symbolInfo.getMapSymbol().getGroupPtr());
 								mapObject = objSymbolGroup.getMapObject();
 							} catch (Exception eMapObject) {
 								mapObject = null;
 							}
 							ObfMapObject obfMapObject;
 							if (mapObject != null) {
-								Log.e("111", "mapObject=" + mapObject.getCaptionInNativeLanguage());
+								name = mapObject.getCaptionInNativeLanguage();
 								try {
 									obfMapObject = ObfMapObject.dynamic_pointer_cast(mapObject);
 								} catch (Exception eObfMapObject) {
 									obfMapObject = null;
 								}
 								if (obfMapObject != null) {
-									Log.e("111", "obfMapObject=" + obfMapObject.getId().getOsmId());
-									obfMapObject.getId(); // todo
+									name = obfMapObject.getCaptionInNativeLanguage();
+									Amenity osmandAmenity = findAmenity(
+											obfMapObject.getId().getId().longValue() >> 7, lat, lon);
+									if (osmandAmenity != null) {
+										if (!selectedObjects.contains(osmandAmenity)) {
+											selectedObjects.add(osmandAmenity);
+										}
+										continue;
+									}
 								}
 							}
+						}
+						if (name != null && name.trim().length() > 0) {
+							selectedObjects.add(new PointDescription("", name));
+						} else {
+							selectedObjects.add(new PointDescription(lat, lon));
 						}
 					}
 				}
 			}
 
+			if (selectedObjects.size() == 1) {
+				Object selectedObj = selectedObjects.get(0);
+				LatLon latLon = new LatLon(lat, lon); //MenuController.getObjectLocation(selectedObj);
+				PointDescription pointDescription = MenuController.getObjectName(selectedObj);
+				//if (latLon == null) {
+				//	latLon = new LatLon(lat, lon);
+				//}
+				showContextMenu(latLon, pointDescription, selectedObj);
+				return true;
+
+			} else if (selectedObjects.size() > 1) {
+				showContextMenuForSelectedObjects(new LatLon(lat, lon), selectedObjects);
+				return true;
+			}
+
+			hideMultiContextMenu();
+			hideContextMenu();
+
 			return true;
+		}
+
+		private Amenity findAmenity(long id, double lat, double lon) {
+			QuadRect rect = MapUtils.calculateLatLonBbox(lat, lon, 50);
+			List<Amenity> amenities = getMyApplication().getResourceManager().searchAmenities(
+					new BinaryMapIndexReader.SearchPoiTypeFilter() {
+						@Override
+						public boolean accept(PoiCategory type, String subcategory) {
+							return true;
+						}
+
+						@Override
+						public boolean isEmpty() {
+							return false;
+						}
+					}, rect.top, rect.left, rect.bottom, rect.right, -1, null);
+
+			Amenity res = null;
+			for (Amenity amenity : amenities) {
+				Long amenityId = amenity.getId() >> 1;
+				if (amenityId == id) {
+					res = amenity;
+					break;
+				}
+			}
+			return res;
 		}
 
 		@Override
