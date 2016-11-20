@@ -374,7 +374,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 
 					final String langSelected = lng;
 					String content = amenity.getDescription(langSelected);
-					vl = Html.fromHtml(content).toString();
+					vl = (content != null) ? Html.fromHtml(content).toString() : "";
 					if (vl.length() > 300) {
 						vl = vl.substring(0, 300);
 					}
