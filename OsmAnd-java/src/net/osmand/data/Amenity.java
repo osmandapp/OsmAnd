@@ -184,7 +184,7 @@ public class Amenity extends MapObject {
 		}
 		String enName = getAdditionalInfo(tag + ":en");
 		if (!Algorithms.isEmpty(enName)) {
-			return enName;
+			return "en";
 		}
 		int maxLen = 0;
 		String lng = defLang;
