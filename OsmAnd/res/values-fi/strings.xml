@@ -1940,4 +1940,9 @@ Paina ja pidä nähdäksesi kartalla</string>
     <string name="index_srtm_parts">osat</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Retkeilysymbolien peite</string>
     <string name="rendering_attr_noAdminboundaries_description">Pidä piilossa alueellisten rajojen näyttö (hallintotasot 5-9)</string>
+    <string name="safe_mode_description">Suorita sovellus turvatilassa (käyttäen hitaampaa Androidia natiivin koodin sijasta).</string>
+    <string name="native_library_not_running">Sovellutusta suoritetaan turvatilassa (poista tila Asetuksissa).</string>
+    <string name="close_changeset">Sulje muutosjoukko</string>
+    <string name="show_warnings_descr">Konfiguroi liikennevaroitukset (nopeusrajoitukset, pakolliset pysähdykset, hidasteet), nopeuskameravaroitukset ja kaistatiedot</string>
+    <string name="auto_zoom_map_descr">Automaattisesti zoomautuva kartta nopeutesi mukaan (kun kartta on synkronoitu nykyiseen sijaintiisi)</string>
     </resources>
