@@ -1983,7 +1983,7 @@ Lon %2$s</string>
     <string name="osm_changes_added_to_local_edits">OSM ændringer tilføjet til lokale ændringer</string>
     <string name="mark_to_delete">Marker for at slette</string>
     <string name="current_route">Aktuel rute</string>
-    <string name="welmode_download_maps">Hent kort</string>
+    <string name="welmode_download_maps">Korthåndtering</string>
     <string name="welcome_select_region">For korrekt at afspejle trafikskilte og regler, vælg region:</string>
     <string name="welcome_header">Velkommen</string>
     <string name="welcome_text">OsmAnd giver globale offline kortvisninger, og global offline navigation!</string>
