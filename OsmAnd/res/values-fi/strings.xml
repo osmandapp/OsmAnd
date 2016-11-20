@@ -1348,7 +1348,7 @@ Pit %2$s</string>
     <string name="show_on_start_description">\'Pois\' käynnistää suoraan karttanäytön</string>
     <string name="osm_save_offline">Tallenna offlineen</string>
     <string name="use_opengl_render_descr">Käytä hardware kiihdytettyä OpenGL hahmotusta (ei ehkä toimi kaikilla laitteilla)</string>
-    <string name="error_avoid_specific_road"/>
+    <string name="error_avoid_specific_road">Ohitusta ei löytynyt</string>
     <string name="home_button">Koti</string>
     <string name="map_update">Päivityksiä saatavana %1$s kartalle</string>
     <string name="rendering_attr_publicTransportMode_name">Bussi, trolleybussi, syöttöliikennebussi</string>
@@ -1893,4 +1893,51 @@ Jälki %2$s</string>
     <string name="download_question_exist">Offline data {0} on jo olemassa ({1}). Haluatko päivittää sen ({2}) ?</string>
     <string name="opening_changeset">Avataan muutosjoukkoa…</string>
     <string name="closing_changeset">Suljetaan muutosjoukkoa…</string>
+    <string name="text_size_descr">Aseta tekstin koko kartalle.</string>
+    <string name="background_service_is_enabled_question">OsmAnd taustapalvelu on vielä suorituksessa. Haluatko puysäyttää myös sen?</string>
+    <string name="save_track_to_gpx_globally">Kirjaa jälki GPX tiedostoon</string>
+    <string name="save_track_to_gpx_globally_headline">Jäljen kirjaus tarpeen vaatiessa</string>
+    <string name="selected_gpx_info_show">
+
+Paina ja pidä nähdäksesi kartalla</string>
+    <string name="local_index_gpx_info_show">
+
+Paina ja pidä nähdäksesi kartalla</string>
+    <string name="gpx_info_asc_altitude">Alas/Ylös: %1$s</string>
+    <string name="osmo_show_group_notifications_descr">Näytä tervehdysviestit kun käyttäjä liittyy tai eroaa ryhmästä</string>
+    <string name="osmo_share_current_session">Jaa nykyinen istunto selaimessa</string>
+    <string name="osmo_session_not_available">Istunto ei ole käytettävissä, ole hyvä ja tarkista onko \'Lähetä sijainnit\' päällä.</string>
+    <string name="osmo_share_session">Jaa istunto</string>
+    <string name="osmo_session_id_share">Istunnon url laitteen jäljittämiseksi (%1$s)</string>
+    <string name="osmo_control">OsMon nopea kayttö</string>
+    <string name="osmo_session_token">Istunnon symboli: %1$s</string>
+    <string name="osmo_settings_descr">Konfiguroi seurannan asetukset ja aseta henkilökohtainen seurantakanava</string>
+    <string name="calculate_osmand_route_without_internet">Laske OsmAnd reitin segmentti ilman internettiä</string>
+    <string name="gpx_option_calculate_first_last_segment">Laske OsmAnd reitti ensimmäiselle ja viimeiselle reitin segmentille</string>
+    <string name="use_displayed_track_for_navigation">Haluatko käyttää näytettävää jälkeä suunnistuksessa?</string>
+    <string name="keep_and_add_destination_point">Lisää myöhemmäksi päämääräksi</string>
+    <string name="speak_descr">Konfiguroi ilmoittamaan katunimet, liikennevaroitukset (pakolliset pysähdykset, hidasteet), nopeuskamera varoitukset, nopeusrajoitukset</string>
+    <string name="context_menu_item_directions_from">Suunnat lähtien</string>
+    <string name="route_to">Minne:</string>
+    <string name="route_from">Mistä:</string>
+
+    <string name="download_using_mobile_internet">Wi-Fi ei ole nyt yhdistetty. Haluatko käyttää nykyistä internet yhteytttä lataukseen?</string>
+    <string name="precise_routing_mode_descr">Ota käyttöön laskenta tarkalle reitille ilman pikkuvirheitä. Vielä etäisyysrajoitteinen ja hidas.</string>
+    <string name="av_def_action_choose">Valitse käytettäessä</string>
+    <string name="av_widget_action_descr">Valitse oletustyökalutoiminto</string>
+    <string name="av_widget_action">Oletustyökalutoiminto</string>
+    <string name="av_use_external_recorder_descr">Käytä järjestelmän nauhoitinta videolle</string>
+    <string name="av_use_external_camera_descr">Käytä järjestelmän sovellutusta kuvalle</string>
+    <string name="av_use_external_camera">Käytä kamerasovellutusta</string>
+    <string name="recording_is_recorded">Audio/video on nauhoituksessa. Lopettaaksesi sen paina AV työkalua.</string>
+    <string name="recording_context_menu_vrecord">Tee video huomautus</string>
+    <string name="layer_recordings">Nauhoitustaso</string>
+    <string name="recording_can_not_be_played">Nauhoitusta ei voida toistaa</string>
+    <string name="recording_context_menu_delete">Poista nauhoitus</string>
+    <string name="recording_default_name">Nauhoitetaan</string>
+    <string name="map_widget_av_notes">Audio/video huomautukset</string>
+    <string name="map_widget_audionotes">Audio huomautukset</string>
+    <string name="index_srtm_parts">osat</string>
+    <string name="rendering_attr_hikingRoutesOSMC_name">Retkeilysymbolien peite</string>
+    <string name="rendering_attr_noAdminboundaries_description">Pidä piilossa alueellisten rajojen näyttö (hallintotasot 5-9)</string>
     </resources>
