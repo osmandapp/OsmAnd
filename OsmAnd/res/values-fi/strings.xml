@@ -1954,4 +1954,48 @@ Paina ja pidä nähdäksesi kartalla</string>
     <string name="settings_direction_style_descr">Valitse tyyli ilmaistaksesi suhteelliset suunnat liikuttaessa</string>
     <string name="auto_announce_on">Käynnistä automaattiset ilmoitukset</string>
     <string name="auto_announce_off">Keskeytä automaattiset ilmoitukset</string>
+    <string name="access_direction_audio_feedback">Suunta (äänipalautteena)</string>
+    <string name="access_direction_haptic_feedback">Suunta (värinäpalautteena)</string>
+    <string name="osmo_group_information_desc">"
+ - Kun luot ryhmän, anna sille nimi ja täytä kuvaustieto
+
+ - Sovellusryhmästä on luotu vain Vaatimaton ryhmä, lue lisää verkkosivuiltae https://osmo.mobi/g/new 
+
+ - Verkkosivuilla voit hallita ryhmiä, sijoittaa jälkiä ja pisteitä kaikkien saataville
+
+ - Emme kannusta käyttämään ryhmää vain yhdelle käyttäjälle jollei tämä ole POI ryhmä
+
+ - Yksityisryhmät on rajoitettu 8 käyttäjälle
+
+ - Yksityiskohtaiset käyttöehdot on aina saatavilla verkko-osoitteessa OsMo.mobi
+
+ - Jos tarvitset erityisiä ehtoja - ole hyvä ja ota yhteyttä: osmo.mobi@gmail.com
+ "</string>
+    <string name="osmo_connect_to_device_tracker_id">Jälki-ID</string>
+    <string name="osmo_auto_send_locations_descr">Aloita matka automaattisesti ja lähetä sijainnit sovellutuksen käynnistyksen jälkeen</string>
+    <string name="osmo_auto_send_locations">Aloita matka automaattisesti</string>
+    <string name="osmo_tracker_id">Jälki-ID</string>
+    <string name="osmo_tracker_id_descr">Klikkaa nähdäksesi Jälki-ID</string>
+    <string name="release_2_3">"
+ • OSM Live. Tue kartta-avustajia ja kehittäjiä ja saa tunneittain karttapäivitykset.
+
+
+ • Map markerit. Uusi tapa nopeasti valita paikkoja kartalla.
+
+
+ • Yksityiskohtaisemmat OSM kartat maakohtaisin liikennemerkein sekä paljon uusia karttaominaisuuksia.
+
+
+ • Parannettu vaikutelma ja näkymä reitin valmistelussa.
+
+
+ • Monia parannuksia kartan sisältövalikoon kuten asiayhteyteydellinen osoitehaku.
+
+
+ ja lisää…
+ "</string>
+    <string name="storage_directory_readonly_desc">Nyt valittu Datavarsto hakemisto on ainoastaan-luku oikeudella. Varastohakemisto on hetkellisesti vaihdettu sisäiseen muistiin. Ole hyvä ja valitse oikea varastohekemisto.</string>
+    <string name="osm_live_email_desc">Tarvitsemme sen huolehtiaksemme tiedostasi maksuosuuksia varten</string>
+    <string name="translit_name_if_miss">Kirjoita jos %1$s nimi puuttuu</string>
+    <string name="translit_names">Kirjoita nimet</string>
     </resources>
