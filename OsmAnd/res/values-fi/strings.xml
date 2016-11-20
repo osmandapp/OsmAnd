@@ -1945,4 +1945,13 @@ Paina ja pidä nähdäksesi kartalla</string>
     <string name="close_changeset">Sulje muutosjoukko</string>
     <string name="show_warnings_descr">Konfiguroi liikennevaroitukset (nopeusrajoitukset, pakolliset pysähdykset, hidasteet), nopeuskameravaroitukset ja kaistatiedot</string>
     <string name="auto_zoom_map_descr">Automaattisesti zoomautuva kartta nopeutesi mukaan (kun kartta on synkronoitu nykyiseen sijaintiisi)</string>
+    <string name="interrupt_music_descr">Keskeytä musiikki täydellisesti ääniohjeiden ajaksi (ei ainoastaan hiljennystä)</string>
+    <string name="map_widget_next_next_turn">Toinen käännös</string>
+    <string name="native_app_allocated_memory_descr">Sovelluksen varaama natiivi muisti yhteensä %1$s MB (Dalvik %2$s MB, muut %3$s MB).
+ Suhteellinen muisti %4$s MB (Android raja %5$s MB, Dalvik %6$s MB).</string>
+    <string name="rendering_attr_noPolygons_description">Tee kaikki maankäyttäominaisuudet läpikuultaviksi kartalla</string>
+    <string name="direction_style_sidewise">Sivuittain (8 sektoria)</string>
+    <string name="settings_direction_style_descr">Valitse tyyli ilmaistaksesi suhteelliset suunnat liikuttaessa</string>
+    <string name="auto_announce_on">Käynnistä automaattiset ilmoitukset</string>
+    <string name="auto_announce_off">Keskeytä automaattiset ilmoitukset</string>
     </resources>
