@@ -26,18 +26,29 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import net.osmand.core.android.AtlasMapRendererView;
+import net.osmand.core.jni.Amenity;
+import net.osmand.core.jni.AmenitySymbolsProvider.AmenitySymbolsGroup;
+import net.osmand.core.jni.AreaI;
+import net.osmand.core.jni.IBillboardMapSymbol;
 import net.osmand.core.jni.IMapLayerProvider;
+import net.osmand.core.jni.IMapRenderer.MapSymbolInformation;
 import net.osmand.core.jni.IMapStylesCollection;
 import net.osmand.core.jni.Logger;
 import net.osmand.core.jni.MapMarker;
+import net.osmand.core.jni.MapMarker.SymbolsGroup;
 import net.osmand.core.jni.MapMarkerBuilder;
 import net.osmand.core.jni.MapMarkersCollection;
+import net.osmand.core.jni.MapObject;
 import net.osmand.core.jni.MapObjectsSymbolsProvider;
+import net.osmand.core.jni.MapObjectsSymbolsProvider.MapObjectSymbolsGroup;
 import net.osmand.core.jni.MapPresentationEnvironment;
 import net.osmand.core.jni.MapPrimitivesProvider;
 import net.osmand.core.jni.MapPrimitiviser;
 import net.osmand.core.jni.MapRasterLayerProvider_Software;
 import net.osmand.core.jni.MapStylesCollection;
+import net.osmand.core.jni.MapSymbolInformationList;
+import net.osmand.core.jni.MapSymbolsGroup.AdditionalBillboardSymbolInstanceParameters;
+import net.osmand.core.jni.ObfMapObject;
 import net.osmand.core.jni.ObfMapObjectsProvider;
 import net.osmand.core.jni.ObfsCollection;
 import net.osmand.core.jni.PointI;
@@ -92,6 +103,7 @@ public class MainActivity extends AppCompatActivity {
 	// Context pin marker
 	private MapMarkersCollection contextPinMarkersCollection;
 	private MapMarker contextPinMarker;
+	private static final int CONTEXT_MARKER_ID = 1;
 
 	// "My location" marker, "My course" marker and collection
 	private MapMarkersCollection myMarkersCollection;
@@ -290,6 +302,7 @@ public class MainActivity extends AppCompatActivity {
 		Drawable pinDrawable = OsmandResources.getDrawable("map_pin_context_menu");
 		contextPinMarkersCollection = new MapMarkersCollection();
 		contextPinMarker = new MapMarkerBuilder()
+				.setMarkerId(CONTEXT_MARKER_ID)
 				.setIsAccuracyCircleSupported(false)
 				.setBaseOrder(-210000)
 				.setIsHidden(true)
@@ -475,7 +488,95 @@ public class MainActivity extends AppCompatActivity {
 
 		@Override
 		public boolean onSingleTapUp(MotionEvent e) {
-			mapView.requestFocus();
+			PointI point31 = new PointI();
+			int[] offset = new int[]{0, 0};
+			mapView.getLocationInWindow(offset);
+			PointI touchPoint = new PointI((int) e.getX() - offset[0], (int) e.getY() - offset[1]);
+			mapView.getLocationFromScreenPoint(touchPoint, point31);
+			net.osmand.core.jni.LatLon jniLatLon = Utilities.convert31ToLatLon(point31);
+			double lat = jniLatLon.getLatitude();
+			double lon = jniLatLon.getLongitude();
+
+			int delta = 20;
+			AreaI area = new AreaI(new PointI(touchPoint.getX() - delta, touchPoint.getY() - delta),
+					new PointI(touchPoint.getX() + delta, touchPoint.getY() + delta));
+
+			MapSymbolInformationList symbolInfos = mapView.getSymbolsIn(area, false);
+			for (int i = 0; i < symbolInfos.size(); i++) {
+				MapSymbolInformation symbolInfo = symbolInfos.get(i);
+
+				IBillboardMapSymbol billboardMapSymbol;
+				try {
+					billboardMapSymbol = IBillboardMapSymbol.dynamic_pointer_cast(symbolInfo.getMapSymbol());
+				} catch (Exception eBillboard) {
+					billboardMapSymbol = null;
+				}
+
+				if (billboardMapSymbol != null) {
+					lon = Utilities.get31LongitudeX(billboardMapSymbol.getPosition31().getX());
+					lat = Utilities.get31LatitudeY(billboardMapSymbol.getPosition31().getY());
+
+					AdditionalBillboardSymbolInstanceParameters billboardAdditionalParams;
+					try {
+						billboardAdditionalParams = AdditionalBillboardSymbolInstanceParameters.dynamic_pointer_cast(symbolInfo.getInstanceParameters());
+					} catch (Exception eBillboardParams) {
+						billboardAdditionalParams = null;
+					}
+					if (billboardAdditionalParams != null) {
+						if (billboardAdditionalParams.getOverridesPosition31()) {
+							lon = Utilities.get31LongitudeX(billboardAdditionalParams.getPosition31().getX());
+							lat = Utilities.get31LatitudeY(billboardAdditionalParams.getPosition31().getY());
+						}
+					}
+
+					Log.e("111", i + ". lat=" + lat + " lon=" + lon);
+					MapMarker mapMarker;
+					try {
+						SymbolsGroup markerSymbolsGroup = SymbolsGroup.dynamic_cast(symbolInfo.getMapSymbol().getGroupPtr());
+						mapMarker = markerSymbolsGroup.getMapMarker();
+						Log.e("111", "marker=" + mapMarker.getMarkerId());
+					} catch (Exception eMapMarker) {
+						mapMarker = null;
+					}
+					if (mapMarker != null && mapMarker.getMarkerId() == CONTEXT_MARKER_ID) {
+						// todo
+					} else {
+						Amenity amenity;
+						try {
+							AmenitySymbolsGroup amenitySymbolGroup = AmenitySymbolsGroup.dynamic_cast(symbolInfo.getMapSymbol().getGroupPtr());
+							amenity = amenitySymbolGroup.getAmenity();
+						} catch (Exception eAmenity) {
+							amenity = null;
+						}
+						if (amenity != null) {
+							amenity.getId(); // todo
+							Log.e("111", "amenity=" + amenity.getNativeName());
+						} else {
+							MapObject mapObject;
+							try {
+								MapObjectSymbolsGroup objSymbolGroup = MapObjectSymbolsGroup.dynamic_cast(symbolInfo.getMapSymbol().getGroupPtr());
+								mapObject = objSymbolGroup.getMapObject();
+							} catch (Exception eMapObject) {
+								mapObject = null;
+							}
+							ObfMapObject obfMapObject;
+							if (mapObject != null) {
+								Log.e("111", "mapObject=" + mapObject.getCaptionInNativeLanguage());
+								try {
+									obfMapObject = ObfMapObject.dynamic_pointer_cast(mapObject);
+								} catch (Exception eObfMapObject) {
+									obfMapObject = null;
+								}
+								if (obfMapObject != null) {
+									Log.e("111", "obfMapObject=" + obfMapObject.getId().getOsmId());
+									obfMapObject.getId(); // todo
+								}
+							}
+						}
+					}
+				}
+			}
+
 			return true;
 		}
 
