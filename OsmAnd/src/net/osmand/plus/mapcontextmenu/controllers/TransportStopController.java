@@ -99,11 +99,6 @@ public class TransportStopController extends MenuController {
 	}
 
 	@Override
-	protected int getSupportedMenuStatesPortrait() {
-		return MenuState.HEADER_ONLY | MenuState.HALF_SCREEN | MenuState.FULL_SCREEN;
-	}
-
-	@Override
 	public int getLeftIconId() {
 		if (topType == null) {
 			return R.drawable.mx_public_transport;

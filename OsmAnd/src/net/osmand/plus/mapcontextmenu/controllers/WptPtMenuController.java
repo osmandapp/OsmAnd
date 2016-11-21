@@ -33,11 +33,6 @@ public class WptPtMenuController extends MenuController {
 		return wpt;
 	}
 
-	@Override
-	protected int getSupportedMenuStatesPortrait() {
-		return MenuState.HEADER_ONLY | MenuState.HALF_SCREEN | MenuState.FULL_SCREEN;
-	}
-
 /*
 	@Override
 	public boolean handleSingleTapOnMap() {

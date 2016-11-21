@@ -2,6 +2,7 @@ package net.osmand.plus.mapcontextmenu.controllers;
 
 import android.graphics.drawable.Drawable;
 
+import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
@@ -19,6 +20,7 @@ public class MapMarkerMenuController extends MenuController {
 	public MapMarkerMenuController(MapActivity mapActivity, PointDescription pointDescription, MapMarker mapMarker) {
 		super(new MenuBuilder(mapActivity), pointDescription, mapActivity);
 		this.mapMarker = mapMarker;
+		builder.setShowNearestWiki(true);
 		final MapMarkersHelper markersHelper = mapActivity.getMyApplication().getMapMarkersHelper();
 		leftTitleButtonController = new TitleButtonController() {
 			@Override
@@ -46,11 +48,6 @@ public class MapMarkerMenuController extends MenuController {
 
 	public MapMarker getMapMarker() {
 		return mapMarker;
-	}
-
-	@Override
-	protected int getSupportedMenuStatesPortrait() {
-		return MenuState.HEADER_ONLY | MenuState.HALF_SCREEN;
 	}
 
 	@Override

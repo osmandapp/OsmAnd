@@ -62,11 +62,6 @@ public class TransportRouteController extends MenuController {
 	}
 
 	@Override
-	protected int getSupportedMenuStatesPortrait() {
-		return MenuState.HEADER_ONLY | MenuState.HALF_SCREEN | MenuState.FULL_SCREEN;
-	}
-
-	@Override
 	public int getLeftIconId() {
 		return this.transportRoute.type == null ?
 				R.drawable.mx_public_transport :

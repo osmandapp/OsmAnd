@@ -23,6 +23,7 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 	public FavouritePointMenuBuilder(MapActivity mapActivity, final FavouritePoint fav) {
 		super(mapActivity);
 		this.fav = fav;
+		setShowNearestWiki(true);
 		acquireOriginObject();
 	}
 
@@ -43,13 +44,19 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 	}
 
 	@Override
+	protected void buildNearestWikiRow(View view) {
+		if (originObject == null || !(originObject instanceof Amenity)) {
+			super.buildNearestWikiRow(view);
+		}
+	}
+
+	@Override
 	public void buildInternal(View view) {
-		if (originObject != null) {
-			if (originObject instanceof Amenity) {
-				AmenityMenuBuilder builder = new AmenityMenuBuilder(mapActivity, (Amenity) originObject);
-				builder.setLight(light);
-				builder.buildInternal(view);
-			}
+		if (originObject != null && originObject instanceof Amenity) {
+			AmenityMenuBuilder builder = new AmenityMenuBuilder(mapActivity, (Amenity) originObject);
+			builder.setLatLon(getLatLon());
+			builder.setLight(light);
+			builder.buildInternal(view);
 		}
 	}
 

@@ -19,6 +19,7 @@ public class TargetPointMenuController extends MenuController {
 	public TargetPointMenuController(MapActivity mapActivity, PointDescription pointDescription, TargetPoint targetPoint) {
 		super(new MenuBuilder(mapActivity), pointDescription, mapActivity);
 		this.targetPoint = targetPoint;
+		builder.setShowNearestWiki(true);
 		final TargetPointsHelper targetPointsHelper = getMapActivity().getMyApplication().getTargetPointsHelper();
 		final int intermediatePointsCount = targetPointsHelper.getIntermediatePoints().size();
 		RoutingHelper routingHelper = getMapActivity().getMyApplication().getRoutingHelper();
@@ -64,11 +65,6 @@ public class TargetPointMenuController extends MenuController {
 
 	public TargetPoint getTargetPoint() {
 		return targetPoint;
-	}
-
-	@Override
-	protected int getSupportedMenuStatesPortrait() {
-		return MenuState.HEADER_ONLY | MenuState.HALF_SCREEN;
 	}
 
 	@Override

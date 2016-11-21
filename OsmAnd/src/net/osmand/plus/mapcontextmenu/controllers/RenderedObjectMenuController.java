@@ -15,6 +15,7 @@ public class RenderedObjectMenuController extends MenuController {
 
 	public RenderedObjectMenuController(MapActivity mapActivity, PointDescription pointDescription, final RenderedObject renderedObject) {
 		super(new MenuBuilder(mapActivity), pointDescription, mapActivity);
+		builder.setShowNearestWiki(true);
 		this.renderedObject = renderedObject;
 	}
 
@@ -28,11 +29,6 @@ public class RenderedObjectMenuController extends MenuController {
 	@Override
 	protected Object getObject() {
 		return renderedObject;
-	}
-
-	@Override
-	protected int getSupportedMenuStatesPortrait() {
-		return MenuState.HEADER_ONLY | MenuState.HALF_SCREEN | MenuState.FULL_SCREEN;
 	}
 
 	@Override

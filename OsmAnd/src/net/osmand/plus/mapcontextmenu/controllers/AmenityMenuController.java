@@ -68,11 +68,6 @@ public class AmenityMenuController extends MenuController {
 	}
 
 	@Override
-	protected int getSupportedMenuStatesPortrait() {
-		return MenuState.HEADER_ONLY | MenuState.HALF_SCREEN | MenuState.FULL_SCREEN;
-	}
-
-	@Override
 	public boolean needStreetName() {
 		if (amenity.getSubType() != null && amenity.getType() != null) {
 			PoiType pt = amenity.getType().getPoiTypeByKeyName(amenity.getSubType());
