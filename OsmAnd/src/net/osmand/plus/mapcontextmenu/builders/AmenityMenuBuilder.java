@@ -1,13 +1,11 @@
 package net.osmand.plus.mapcontextmenu.builders;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.view.ContextThemeWrapper;
 import android.support.v7.widget.AppCompatButton;
 import android.text.Html;
 import android.text.SpannableString;
@@ -20,43 +18,38 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import net.osmand.binary.BinaryMapIndexReader;
+
 import net.osmand.data.Amenity;
-import net.osmand.data.LatLon;
-import net.osmand.data.MapObject.MapObjectComparator;
 import net.osmand.data.PointDescription;
-import net.osmand.data.QuadRect;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
-import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
-import net.osmand.plus.views.ContextMenuLayer;
 import net.osmand.plus.views.POIMapLayer;
 import net.osmand.util.Algorithms;
-import net.osmand.util.MapUtils;
 import net.osmand.util.OpeningHoursParser;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 public class AmenityMenuBuilder extends MenuBuilder {
 
 	private final Amenity amenity;
-	private List<Amenity> nearestWiki = new ArrayList<>();
 
 	public AmenityMenuBuilder(MapActivity mapActivity, final Amenity amenity) {
 		super(mapActivity);
 		this.amenity = amenity;
-		processNearstWiki();
+		setShowNearestWiki(true, amenity.getId());
+	}
+
+	@Override
+	protected void buildNearestWikiRow(View view) {
 	}
 
 	private void buildRow(View view, int iconId, String text, String textPrefix,
@@ -271,55 +264,6 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		rowBuilt();
 	}
 
-	private View getCollapsableTextView(Context context, boolean collapsed, String text) {
-		final TextView textView = new TextView(context);
-		textView.setVisibility(collapsed ? View.GONE : View.VISIBLE);
-		LinearLayout.LayoutParams llTextDescParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-		llTextDescParams.setMargins(dpToPx(72f), 0, dpToPx(40f), dpToPx(13f));
-		textView.setLayoutParams(llTextDescParams);
-		textView.setTextSize(16);
-		textView.setTextColor(app.getResources().getColor(light ? R.color.ctx_menu_info_text_light : R.color.ctx_menu_info_text_dark));
-		textView.setText(text);
-		return textView;
-	}
-
-	private View getCollapsableWikiView(Context context, boolean collapsed) {
-		final LinearLayout view = new LinearLayout(context);
-		view.setOrientation(LinearLayout.VERTICAL);
-		view.setVisibility(collapsed ? View.GONE : View.VISIBLE);
-		LinearLayout.LayoutParams llParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-		llParams.setMargins(dpToPx(68f), 0, dpToPx(12f), dpToPx(13f));
-		view.setLayoutParams(llParams);
-
-		for (final Amenity wiki : nearestWiki) {
-			AppCompatButton wikiButton = new AppCompatButton(
-					new ContextThemeWrapper(view.getContext(), light ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme));
-			LinearLayout.LayoutParams llWikiButtonParams =
-					new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-			wikiButton.setLayoutParams(llWikiButtonParams);
-			wikiButton.setPadding(dpToPx(14f), 0, dpToPx(14f), 0);
-			wikiButton.setTextColor(app.getResources()
-					.getColor(light ? R.color.color_dialog_buttons_light : R.color.color_dialog_buttons_dark));
-			wikiButton.setText(wiki.getName());
-
-			wikiButton.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
-			wikiButton.setSingleLine(true);
-			wikiButton.setEllipsize(TextUtils.TruncateAt.END);
-			wikiButton.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					PointDescription pointDescription = mapActivity.getMapLayers().getPoiMapLayer().getObjectName(wiki);
-					mapActivity.getContextMenu().show(
-							new LatLon(wiki.getLocation().getLatitude(), wiki.getLocation().getLongitude()),
-							pointDescription, wiki);
-				}
-			});
-			view.addView(wikiButton);
-		}
-
-		return view;
-	}
-
 	@Override
 	public void buildInternal(View view) {
 		boolean hasWiki = false;
@@ -512,7 +456,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			buildAmenityRow(view, info);
 		}
 
-		if (nearestWiki.size() > 0) {
+		if (processNearstWiki() && nearestWiki.size() > 0) {
 			AmenityInfoRow wikiInfo = new AmenityInfoRow(
 					"nearest_wiki", R.drawable.ic_action_wikipedia, null, app.getString(R.string.wiki_around) + " (" + nearestWiki.size()+")", true,
 					getCollapsableWikiView(view.getContext(), true),
@@ -522,7 +466,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 
 		buildRow(view, R.drawable.ic_action_get_my_location, PointDescription.getLocationName(app,
 				amenity.getLocation().getLatitude(), amenity.getLocation().getLongitude(), true)
-				.replaceAll("\n", " "), 0, false, 0, false, null);
+				.replaceAll("\n", " "), 0, false, null, false, 0, false, null);
 	}
 
 	public void buildAmenityRow(View view, AmenityInfoRow info) {
@@ -532,38 +476,6 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		} else if (info.iconId != 0) {
 			buildRow(view, info.iconId, info.text, info.textPrefix, info.collapsable, info.collapsableView,
 					info.textColor, info.isWiki, info.isText, info.needLinks, info.isPhoneNumber, info.isUrl);
-		}
-	}
-
-	private void processNearstWiki() {
-		QuadRect rect = MapUtils.calculateLatLonBbox(
-				amenity.getLocation().getLatitude(), amenity.getLocation().getLongitude(), 250);
-		nearestWiki = app.getResourceManager().searchAmenities(
-				new BinaryMapIndexReader.SearchPoiTypeFilter() {
-					@Override
-					public boolean accept(PoiCategory type, String subcategory) {
-						return type.isWiki();
-					}
-
-					@Override
-					public boolean isEmpty() {
-						return false;
-					}
-				}, rect.top, rect.left, rect.bottom, rect.right, -1, null);
-		Collections.sort(nearestWiki, new Comparator<Amenity>() {
-
-			@Override
-			public int compare(Amenity o1, Amenity o2) {
-				double d1 = MapUtils.getDistance(amenity.getLocation(), o1.getLocation());
-				double d2 = MapUtils.getDistance(amenity.getLocation(), o2.getLocation());
-				return Double.compare(d1, d2);
-			}
-		});
-		for (Amenity wiki : nearestWiki) {
-			if (wiki.getId().equals(amenity.getId())) {
-				nearestWiki.remove(wiki);
-				break;
-			}
 		}
 	}
 

@@ -501,6 +501,9 @@ public abstract class MenuController extends BaseMenuController {
 
 	public void setLatLon(@NonNull LatLon latLon) {
 		this.latLon = latLon;
+		if (builder != null) {
+			builder.setLatLon(latLon);
+		}
 	}
 
 	public void buildMapDownloadButton(LatLon latLon) {

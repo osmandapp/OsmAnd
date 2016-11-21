@@ -86,11 +86,6 @@ public class AudioVideoNoteMenuController extends MenuController {
 	}
 
 	@Override
-	protected int getSupportedMenuStatesPortrait() {
-		return MenuState.HEADER_ONLY | MenuState.HALF_SCREEN | MenuState.FULL_SCREEN;
-	}
-
-	@Override
 	public Drawable getLeftIcon() {
 		if (mRecording.isPhoto()) {
 			return getIcon(R.drawable.ic_action_photo_dark, R.color.audio_video_icon_color);

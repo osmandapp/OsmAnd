@@ -7,7 +7,10 @@ import android.content.res.Resources;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.support.v7.view.ContextThemeWrapper;
+import android.support.v7.widget.AppCompatButton;
 import android.text.ClipboardManager;
+import android.text.TextUtils;
 import android.text.util.Linkify;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -20,13 +23,24 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.core.samples.android.sample1.IconsCache;
 import net.osmand.core.samples.android.sample1.MainActivity;
 import net.osmand.core.samples.android.sample1.OsmandResources;
 import net.osmand.core.samples.android.sample1.R;
 import net.osmand.core.samples.android.sample1.SampleApplication;
+import net.osmand.core.samples.android.sample1.data.PointDescription;
+import net.osmand.data.Amenity;
+import net.osmand.data.LatLon;
+import net.osmand.data.QuadRect;
+import net.osmand.osm.PoiCategory;
+import net.osmand.util.MapUtils;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.LinkedList;
+import java.util.List;
 
 import static android.util.TypedValue.COMPLEX_UNIT_DIP;
 
@@ -39,6 +53,10 @@ public class MenuBuilder {
 	protected LinkedList<PlainMenuItem> plainMenuItems;
 	private boolean firstRow;
 	protected boolean light;
+	private long objectId;
+	private LatLon latLon;
+	private boolean showNearestWiki = false;
+	protected List<Amenity> nearestWiki = new ArrayList<>();
 
 	public class PlainMenuItem {
 		private int iconId;
@@ -82,12 +100,34 @@ public class MenuBuilder {
 		plainMenuItems = new LinkedList<>();
 	}
 
+	public LatLon getLatLon() {
+		return latLon;
+	}
+
+	public void setLatLon(LatLon objectLocation) {
+		this.latLon = objectLocation;
+	}
+
+	public boolean isShowNearestWiki() {
+		return showNearestWiki;
+	}
+
+	public void setShowNearestWiki(boolean showNearestWiki) {
+		this.showNearestWiki = showNearestWiki;
+	}
+
+	public void setShowNearestWiki(boolean showNearestWiki, long objectId) {
+		this.objectId = objectId;
+		this.showNearestWiki = showNearestWiki;
+	}
+
 	public void setLight(boolean light) {
 		this.light = light;
 	}
 
 	public void build(View view) {
 		firstRow = true;
+		buildNearestWikiRow(view);
 		if (needBuildPlainMenuItems()) {
 			buildPlainMenuItems(view);
 		}
@@ -97,12 +137,21 @@ public class MenuBuilder {
 
 	protected void buildPlainMenuItems(View view) {
 		for (PlainMenuItem item : plainMenuItems) {
-			buildRow(view, item.getIconId(), item.getText(), 0, item.isNeedLinks(), 0, item.isUrl(), item.getOnClickListener());
+			buildRow(view, item.getIconId(), item.getText(), 0, false, null, item.isNeedLinks(),
+					0, item.isUrl(), item.getOnClickListener());
 		}
 	}
 
 	protected boolean needBuildPlainMenuItems() {
 		return true;
+	}
+
+	protected void buildNearestWikiRow(View view) {
+		if (processNearstWiki() && nearestWiki.size() > 0) {
+			buildRow(view, OsmandResources.getDrawableId("ic_action_wikipedia"), app.getString("wiki_around") + " (" + nearestWiki.size()+")", 0,
+					true, getCollapsableWikiView(view.getContext(), true),
+					false, 0, false, null);
+		}
 	}
 
 	protected void buildInternal(View view) {
@@ -120,15 +169,25 @@ public class MenuBuilder {
 		firstRow = false;
 	}
 
-	protected View buildRow(View view, int iconId, String text, int textColor, boolean needLinks, int textLinesLimit, boolean isUrl, OnClickListener onClickListener) {
-		return buildRow(view, getRowIcon(iconId), text, textColor, needLinks, textLinesLimit, isUrl, onClickListener);
+	protected View buildRow(View view, int iconId, String text, int textColor,
+							boolean collapsable, final View collapsableView, boolean needLinks,
+							int textLinesLimit, boolean isUrl, OnClickListener onClickListener) {
+		return buildRow(view, getRowIcon(iconId), text, textColor, collapsable, collapsableView,
+				needLinks, textLinesLimit, isUrl, onClickListener);
 	}
 
-	protected View buildRow(final View view, Drawable icon, final String text, int textColor, boolean needLinks, int textLinesLimit, boolean isUrl, OnClickListener onClickListener) {
+	protected View buildRow(final View view, Drawable icon, final String text, int textColor,
+							boolean collapsable, final View collapsableView, boolean needLinks,
+							int textLinesLimit, boolean isUrl, OnClickListener onClickListener) {
 
 		if (!isFirstRow()) {
 			buildRowDivider(view, false);
 		}
+
+		LinearLayout baseView = new LinearLayout(view.getContext());
+		baseView.setOrientation(LinearLayout.VERTICAL);
+		LinearLayout.LayoutParams llBaseViewParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+		baseView.setLayoutParams(llBaseViewParams);
 
 		LinearLayout ll = new LinearLayout(view.getContext());
 		ll.setOrientation(LinearLayout.HORIZONTAL);
@@ -142,6 +201,8 @@ public class MenuBuilder {
 				return true;
 			}
 		});
+
+		baseView.addView(ll);
 
 		// Icon
 		LinearLayout llIcon = new LinearLayout(view.getContext());
@@ -192,6 +253,38 @@ public class MenuBuilder {
 		llText.setLayoutParams(llTextViewParams);
 		llText.addView(textView);
 
+		final ImageView iconViewCollapse = new ImageView(view.getContext());
+		if (collapsable && collapsableView != null) {
+			// Icon
+			LinearLayout llIconCollapse = new LinearLayout(view.getContext());
+			llIconCollapse.setLayoutParams(new LinearLayout.LayoutParams(dpToPx(40f), dpToPx(48f)));
+			llIconCollapse.setOrientation(LinearLayout.HORIZONTAL);
+			llIconCollapse.setGravity(Gravity.CENTER_VERTICAL);
+			ll.addView(llIconCollapse);
+
+			LinearLayout.LayoutParams llIconCollapseParams = new LinearLayout.LayoutParams(dpToPx(24f), dpToPx(24f));
+			llIconCollapseParams.setMargins(0, dpToPx(12f), dpToPx(32f), dpToPx(12f));
+			llIconCollapseParams.gravity = Gravity.CENTER_VERTICAL;
+			iconViewCollapse.setLayoutParams(llIconCollapseParams);
+			iconViewCollapse.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+			iconViewCollapse.setImageDrawable(app.getIconsCache().getThemedIcon(collapsableView.getVisibility() == View.GONE ?
+					"ic_action_arrow_down" : "ic_action_arrow_up"));
+			llIconCollapse.addView(iconViewCollapse);
+			ll.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					if (collapsableView.getVisibility() == View.VISIBLE) {
+						collapsableView.setVisibility(View.GONE);
+						iconViewCollapse.setImageDrawable(app.getIconsCache().getThemedIcon("ic_action_arrow_down"));
+					} else {
+						collapsableView.setVisibility(View.VISIBLE);
+						iconViewCollapse.setImageDrawable(app.getIconsCache().getThemedIcon("ic_action_arrow_up"));
+					}
+				}
+			});
+			baseView.addView(collapsableView);
+		}
+
 		if (onClickListener != null) {
 			ll.setOnClickListener(onClickListener);
 		} else if (isUrl) {
@@ -205,7 +298,7 @@ public class MenuBuilder {
 			});
 		}
 
-		((LinearLayout) view).addView(ll);
+		((LinearLayout) view).addView(baseView);
 
 		rowBuilt();
 
@@ -318,5 +411,92 @@ public class MenuBuilder {
 				dp,
 				r.getDisplayMetrics()
 		);
+	}
+
+	protected View getCollapsableTextView(Context context, boolean collapsed, String text) {
+		final TextView textView = new TextView(context);
+		textView.setVisibility(collapsed ? View.GONE : View.VISIBLE);
+		LinearLayout.LayoutParams llTextDescParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+		llTextDescParams.setMargins(dpToPx(72f), 0, dpToPx(40f), dpToPx(13f));
+		textView.setLayoutParams(llTextDescParams);
+		textView.setTextSize(16);
+		textView.setTextColor(app.getResources().getColor(light ? R.color.ctx_menu_info_text_light : R.color.ctx_menu_info_text_dark));
+		textView.setText(text);
+		return textView;
+	}
+
+	protected View getCollapsableWikiView(Context context, boolean collapsed) {
+		final LinearLayout view = new LinearLayout(context);
+		view.setOrientation(LinearLayout.VERTICAL);
+		view.setVisibility(collapsed ? View.GONE : View.VISIBLE);
+		LinearLayout.LayoutParams llParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+		llParams.setMargins(dpToPx(68f), 0, dpToPx(12f), dpToPx(13f));
+		view.setLayoutParams(llParams);
+
+		for (final Amenity wiki : nearestWiki) {
+			AppCompatButton wikiButton = new AppCompatButton(new ContextThemeWrapper(view.getContext(), R.style.AppTheme));
+			LinearLayout.LayoutParams llWikiButtonParams =
+					new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+			wikiButton.setLayoutParams(llWikiButtonParams);
+			wikiButton.setPadding(dpToPx(14f), 0, dpToPx(14f), 0);
+			wikiButton.setTextColor(app.getResources()
+					.getColor(light ? R.color.color_dialog_buttons_light : R.color.color_dialog_buttons_dark));
+			wikiButton.setText(wiki.getName());
+
+			wikiButton.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
+			wikiButton.setSingleLine(true);
+			wikiButton.setEllipsize(TextUtils.TruncateAt.END);
+			wikiButton.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					PointDescription pointDescription = MenuController.getObjectName(wiki);
+					mainActivity.getContextMenu().show(
+							new LatLon(wiki.getLocation().getLatitude(), wiki.getLocation().getLongitude()),
+							pointDescription, wiki);
+				}
+			});
+			view.addView(wikiButton);
+		}
+
+		return view;
+	}
+
+	protected boolean processNearstWiki() {
+		if (showNearestWiki && latLon != null) {
+			QuadRect rect = MapUtils.calculateLatLonBbox(
+					latLon.getLatitude(), latLon.getLongitude(), 250);
+			nearestWiki = app.getResourceManager().searchAmenities(
+					new BinaryMapIndexReader.SearchPoiTypeFilter() {
+						@Override
+						public boolean accept(PoiCategory type, String subcategory) {
+							return type.isWiki();
+						}
+
+						@Override
+						public boolean isEmpty() {
+							return false;
+						}
+					}, rect.top, rect.left, rect.bottom, rect.right, -1, null);
+			Collections.sort(nearestWiki, new Comparator<Amenity>() {
+
+				@Override
+				public int compare(Amenity o1, Amenity o2) {
+					double d1 = MapUtils.getDistance(latLon, o1.getLocation());
+					double d2 = MapUtils.getDistance(latLon, o2.getLocation());
+					return Double.compare(d1, d2);
+				}
+			});
+			Long id = objectId;
+			if (id != 0) {
+				for (Amenity wiki : nearestWiki) {
+					if (wiki.getId().equals(id)) {
+						nearestWiki.remove(wiki);
+						break;
+					}
+				}
+			}
+			return true;
+		}
+		return false;
 	}
 }

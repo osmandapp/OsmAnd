@@ -13,6 +13,7 @@ public class MyLocationMenuController  extends MenuController {
 
 	public MyLocationMenuController(MainActivity mainActivity, PointDescription pointDescription) {
 		super(new MenuBuilder(mainActivity), pointDescription, mainActivity);
+		builder.setShowNearestWiki(true);
 	}
 
 	@Override

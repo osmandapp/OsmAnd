@@ -30,11 +30,6 @@ public class GpxItemMenuController extends MenuController {
 	}
 
 	@Override
-	protected int getSupportedMenuStatesPortrait() {
-		return MenuState.HEADER_ONLY | MenuState.HALF_SCREEN | MenuState.FULL_SCREEN;
-	}
-
-	@Override
 	public String getTypeStr() {
 		return getPointDescription().getTypeName();
 	}

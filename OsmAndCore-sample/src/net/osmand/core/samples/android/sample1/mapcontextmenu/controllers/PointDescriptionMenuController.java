@@ -15,6 +15,7 @@ public class PointDescriptionMenuController extends MenuController {
 
 	public PointDescriptionMenuController(MainActivity mainActivity, final PointDescription pointDescription) {
 		super(new MenuBuilder(mainActivity), pointDescription, mainActivity);
+		builder.setShowNearestWiki(true);
 		initData();
 	}
 
@@ -30,11 +31,6 @@ public class PointDescriptionMenuController extends MenuController {
 	@Override
 	protected Object getObject() {
 		return null;
-	}
-
-	@Override
-	protected int getSupportedMenuStatesPortrait() {
-		return MenuState.HEADER_ONLY | MenuState.HALF_SCREEN | MenuState.FULL_SCREEN;
 	}
 
 	@Override
