@@ -351,6 +351,8 @@ public abstract class MenuController extends BaseMenuController {
 		if (o instanceof Amenity) {
 			return new PointDescription(PointDescription.POINT_TYPE_POI, ((Amenity) o).getName(
 					SampleApplication.LANGUAGE, SampleApplication.TRANSLITERATE));
+		} else if (o instanceof PointDescription) {
+			return (PointDescription) o;
 		}
 		return null;
 	}

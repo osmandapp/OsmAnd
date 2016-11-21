@@ -569,7 +569,7 @@ public class MainActivity extends AppCompatActivity {
 							name = amenity.getNativeName();
 							net.osmand.core.jni.LatLon aLatLon = Utilities.convert31ToLatLon(amenity.getPosition31());
 							Amenity osmandAmenity = findAmenity(amenity.getId().getId().longValue() >> 7,
-									aLatLon.getLatitude(), aLatLon.getLongitude());
+									aLatLon.getLatitude(), aLatLon.getLongitude(), name);
 							if (osmandAmenity != null) {
 								if (!selectedObjects.contains(osmandAmenity)) {
 									selectedObjects.add(osmandAmenity);
@@ -596,7 +596,7 @@ public class MainActivity extends AppCompatActivity {
 								if (obfMapObject != null) {
 									name = obfMapObject.getCaptionInNativeLanguage();
 									Amenity osmandAmenity = findAmenity(
-											obfMapObject.getId().getId().longValue() >> 7, lat, lon);
+											obfMapObject.getId().getId().longValue() >> 7, lat, lon, name);
 									if (osmandAmenity != null) {
 										if (!selectedObjects.contains(osmandAmenity)) {
 											selectedObjects.add(osmandAmenity);
@@ -636,7 +636,7 @@ public class MainActivity extends AppCompatActivity {
 			return true;
 		}
 
-		private Amenity findAmenity(long id, double lat, double lon) {
+		private Amenity findAmenity(long id, double lat, double lon, String name) {
 			QuadRect rect = MapUtils.calculateLatLonBbox(lat, lon, 50);
 			List<Amenity> amenities = getMyApplication().getResourceManager().searchAmenities(
 					new BinaryMapIndexReader.SearchPoiTypeFilter() {
@@ -657,6 +657,16 @@ public class MainActivity extends AppCompatActivity {
 				if (amenityId == id) {
 					res = amenity;
 					break;
+				}
+			}
+			if (res == null && name != null && name.length() > 0) {
+				for (Amenity amenity : amenities) {
+					if (name.equals(amenity.getName())) {
+						res = amenity;
+					}
+					if (res != null) {
+						break;
+					}
 				}
 			}
 			return res;
