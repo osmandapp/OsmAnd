@@ -579,6 +579,7 @@ public class MapActivityActions implements DialogProvider {
 				.setListener(new ContextMenuAdapter.ItemClickListener() {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked) {
+						app.logEvent(mapActivity, "drawer_dashboard_open");
 						MapActivity.clearPrevActivityIntent();
 						mapActivity.closeDrawer();
 						mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.DASHBOARD);
@@ -591,6 +592,7 @@ public class MapActivityActions implements DialogProvider {
 					.setListener(new ContextMenuAdapter.ItemClickListener() {
 						@Override
 						public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked) {
+							app.logEvent(mapActivity, "drawer_markers_open");
 							MapActivity.clearPrevActivityIntent();
 							mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.MAP_MARKERS);
 							return false;
@@ -602,6 +604,7 @@ public class MapActivityActions implements DialogProvider {
 					.setListener(new ContextMenuAdapter.ItemClickListener() {
 						@Override
 						public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked) {
+							app.logEvent(mapActivity, "drawer_waypoints_open");
 							MapActivity.clearPrevActivityIntent();
 							mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.WAYPOINTS);
 							return false;
@@ -614,6 +617,7 @@ public class MapActivityActions implements DialogProvider {
 				.setListener(new ContextMenuAdapter.ItemClickListener() {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked) {
+						app.logEvent(mapActivity, "drawer_myplaces_open");
 						Intent newIntent = new Intent(mapActivity, mapActivity.getMyApplication().getAppCustomization()
 								.getFavoritesActivity());
 						newIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
@@ -627,6 +631,7 @@ public class MapActivityActions implements DialogProvider {
 				.setListener(new ContextMenuAdapter.ItemClickListener() {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked) {
+						app.logEvent(mapActivity, "drawer_search_open");
 						mapActivity.showQuickSearch(MapActivity.ShowQuickSearchMode.NEW_IF_EXPIRED, false);
 						return true;
 					}
@@ -638,6 +643,7 @@ public class MapActivityActions implements DialogProvider {
 					.setListener(new ContextMenuAdapter.ItemClickListener() {
 						@Override
 						public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked) {
+							app.logEvent(mapActivity, "drawer_legacy_search_open");
 							Intent newIntent = new Intent(mapActivity, mapActivity.getMyApplication().getAppCustomization()
 									.getSearchActivity());
 							LatLon loc = mapActivity.getMapLocation();
@@ -658,6 +664,7 @@ public class MapActivityActions implements DialogProvider {
 				.setListener(new ContextMenuAdapter.ItemClickListener() {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked) {
+						app.logEvent(mapActivity, "drawer_config_map_open");
 						MapActivity.clearPrevActivityIntent();
 						mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.CONFIGURE_MAP);
 						return false;
@@ -669,6 +676,7 @@ public class MapActivityActions implements DialogProvider {
 				.setListener(new ContextMenuAdapter.ItemClickListener() {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked) {
+						app.logEvent(mapActivity, "drawer_directions_open");
 						MapControlsLayer mapControlsLayer = mapActivity.getMapLayers().getMapControlsLayer();
 						if (mapControlsLayer != null) {
 							mapControlsLayer.doRoute(false);
@@ -689,6 +697,7 @@ public class MapActivityActions implements DialogProvider {
 				.setListener(new ContextMenuAdapter.ItemClickListener() {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked) {
+						app.logEvent(mapActivity, "drawer_download_maps_open");
 						Intent newIntent = new Intent(mapActivity, mapActivity.getMyApplication().getAppCustomization()
 								.getDownloadActivity());
 						newIntent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
@@ -703,6 +712,7 @@ public class MapActivityActions implements DialogProvider {
 					.setListener(new ContextMenuAdapter.ItemClickListener() {
 						@Override
 						public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked) {
+							app.logEvent(mapActivity, "drawer_osm_live_open");
 							Intent intent = new Intent(mapActivity, OsmLiveActivity.class);
 							intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 							mapActivity.startActivity(intent);
@@ -729,6 +739,7 @@ public class MapActivityActions implements DialogProvider {
 				.setListener(new ItemClickListener() {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked) {
+						app.logEvent(mapActivity, "drawer_plugins_open");
 						Intent newIntent = new Intent(mapActivity, mapActivity.getMyApplication().getAppCustomization()
 								.getPluginsActivity());
 						newIntent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
@@ -742,6 +753,7 @@ public class MapActivityActions implements DialogProvider {
 				.setListener(new ContextMenuAdapter.ItemClickListener() {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked) {
+						app.logEvent(mapActivity, "drawer_config_screen_open");
 						MapActivity.clearPrevActivityIntent();
 						mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.CONFIGURE_SCREEN);
 						return false;
@@ -753,6 +765,7 @@ public class MapActivityActions implements DialogProvider {
 				.setListener(new ContextMenuAdapter.ItemClickListener() {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked) {
+						app.logEvent(mapActivity, "drawer_settings_open");
 						final Intent settings = new Intent(mapActivity, getMyApplication().getAppCustomization()
 								.getSettingsActivity());
 						settings.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
@@ -779,6 +792,7 @@ public class MapActivityActions implements DialogProvider {
 				.setListener(new ContextMenuAdapter.ItemClickListener() {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked) {
+						app.logEvent(mapActivity, "drawer_help_open");
 						Intent intent = new Intent(mapActivity, HelpActivity.class);
 						intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 						mapActivity.startActivity(intent);

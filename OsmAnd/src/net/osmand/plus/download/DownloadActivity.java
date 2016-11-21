@@ -379,6 +379,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 						&& isDownlodingPermitted(ctx.getMyApplication().getSettings())) {
 					collapseBanner();
 				} else {
+					ctx.getMyApplication().logEvent(ctx, "click_free_dialog");
 					new FreeVersionDialogFragment().show(ctx.getSupportFragmentManager(), "dialog");
 					// expandBanner();
 				}
@@ -436,6 +437,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 			fullVersionButton.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
+					ctx.getMyApplication().logEvent(ctx, "click_buy_plus");
 					Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(Version.marketPrefix(
 							ctx.getMyApplication()) + "net.osmand.plus"));
 					try {
@@ -448,6 +450,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 			osmLiveButton.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
+					ctx.getMyApplication().logEvent(ctx, "click_subscribe_live_osm");
 					Intent intent = new Intent(ctx, OsmLiveActivity.class);
 					intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 					intent.putExtra(OsmLiveActivity.OPEN_SUBSCRIPTION_INTENT_PARAM, true);
