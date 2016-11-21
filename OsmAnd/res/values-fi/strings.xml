@@ -1998,4 +1998,8 @@ Paina ja pidä nähdäksesi kartalla</string>
     <string name="osm_live_email_desc">Tarvitsemme sen huolehtiaksemme tiedostasi maksuosuuksia varten</string>
     <string name="translit_name_if_miss">Kirjoita jos %1$s nimi puuttuu</string>
     <string name="translit_names">Kirjoita nimet</string>
+    <string name="osm_live_header">Tämä tilaus mahdollistaa päivitykset kaikkiin karttoihin ympäri maailmaa tunneittain.
+Osa tuloista menee takaisin OSM yhteisölle ja maksetaan jokaiselle OSM avustajalle. 
+Jos pidät OsmAndista ja OSMsta ja haluat tukea niitä, on tämä täydellinen tapa tehdä se.</string>
+    
     </resources>
