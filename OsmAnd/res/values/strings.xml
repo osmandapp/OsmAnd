@@ -10,6 +10,11 @@
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
 
+    <string name="legacy_search">Legacy search</string>
+    <string name="show_legacy_search">Show legacy search</string>
+    <string name="show_legacy_search_desc">Enable legacy search in the drawer list</string>
+    <string name="routing_attr_allow_motorway_name">Allow motorways</string>
+    <string name="routing_attr_allow_motorway_description">Allow motorways</string>
     <string name="upload_osm_note_description">You can upload your OSM Note anonymously or using your OpenStreetMap.org profile.</string>
     <string name="wiki_around">Nearby Wikipedia articles</string>
     <string name="search_map_hint">Search city or region</string>
