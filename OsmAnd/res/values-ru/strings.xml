@@ -1,5 +1,8 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
+    <string name="routing_attr_allow_motorway_name">Разрешить автомагистрали</string>
+    <string name="routing_attr_allow_motorway_description">Разрешить автомагистрали</string>
+    <string name="upload_osm_note_description">Вы можете выгрузить ваши заметки анонимно или с использованием вашего профиля OSM</string>
     <string name="wiki_around">Статьи Википедии рядом</string>
     <string name="search_map_hint">Поиск города или страны</string>
     <string name="route_roundabout_short">Сверните на %1$d съезд</string>
