@@ -571,7 +571,6 @@ public class MapActivityActions implements DialogProvider {
 
 	public ContextMenuAdapter createMainOptionsMenu() {
 		final OsmandMapTileView mapView = mapActivity.getMapView();
-		int viewHeight = mapView.getViewHeight();
 		final OsmandApplication app = mapActivity.getMyApplication();
 		ContextMenuAdapter optionsMenuHelper = new ContextMenuAdapter();
 
@@ -642,6 +641,17 @@ public class MapActivityActions implements DialogProvider {
 						mapActivity.startActivity(newIntent);
 						*/
 						return true;
+					}
+				}).createItem());
+
+		optionsMenuHelper.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.configure_map, mapActivity)
+				.setIcon(R.drawable.ic_action_layers_dark)
+				.setListener(new ContextMenuAdapter.ItemClickListener() {
+					@Override
+					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked) {
+						MapActivity.clearPrevActivityIntent();
+						mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.CONFIGURE_MAP);
+						return false;
 					}
 				}).createItem());
 
@@ -779,15 +789,6 @@ public class MapActivityActions implements DialogProvider {
 		}
 
 		ItemBuilder divider = new ItemBuilder().setLayout(R.layout.drawer_divider);
-		if (viewHeight > 0) {
-			int listItemHeight = app.getResources().getDimensionPixelSize(R.dimen.list_item_height);
-			int dividerHeight = viewHeight - optionsMenuHelper.length() * listItemHeight;
-			if (dividerHeight > 0) {
-				divider.setMinHeight(dividerHeight);
-			} else if (dividerHeight < 0) {
-				divider.setMinHeight(AndroidUtils.dpToPx(app, 16f));
-			}
-		}
 		divider.setPosition(pluginsItemIndex >= 0 ? pluginsItemIndex : 7);
 		optionsMenuHelper.addItem(divider.createItem());
 

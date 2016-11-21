@@ -13,6 +13,7 @@
     <string name="routing_attr_avoid_motorway_name">Avoid motorways</string>
     <string name="routing_attr_avoid_motorway_description">Avoid motorways</string>
     <string name="upload_osm_note_description">You can upload your OSM Note anonymously if you use your OpenStreetMap.org profile.</string>
+    <string name="upload_osm_note_description">You can upload your OSM Note anonymously or using your OpenStreetMap.org profile.</string>
     <string name="wiki_around">Nearby Wikipedia articles</string>
     <string name="search_map_hint">Search city or region</string>
     <string name="route_roundabout_short">Take %1$d exit and go</string>
