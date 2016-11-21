@@ -2694,4 +2694,8 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="search_map_hint">Пошук горада ці краіны</string>
     <string name="wiki_around">Блізкія месцы ў Вікіпэдыі</string>
     <string name="rendering_value_fine_name">Вельмі тонкі</string>
+    <string name="rendering_attr_contourColorScheme_description">Колеравая схема гарызанталяў</string>
+    <string name="save_track_min_speed">Мінімальная хуткасьць для запісу</string>
+    <string name="christmas_desc">Напярэдадні калядных і навагодніх сьвятаў, вы можаце выбраць для адлюстраваньня POI, зьвязаныя з Калядамі: елкі, кірмашы і да т.п.</string>
+    <string name="rendering_attr_contourColorScheme_name">Колеравая схема гарызанталяў</string>
     </resources>
