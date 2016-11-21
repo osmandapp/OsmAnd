@@ -86,6 +86,8 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 		cat.addPreference(createCheckBoxPreference(settings.NO_DISCOUNT_INFO,
 				R.string.no_update_info, R.string.no_update_info_desc));
 
+		cat.addPreference(createCheckBoxPreference(settings.SHOW_LEGACY_SEARCH,
+				R.string.show_legacy_search, R.string.show_legacy_search_desc));
 
 		// FIXME delete USE_MAP_MARKERS
 //		cat.addPreference(createCheckBoxPreference(settings.USE_MAP_MARKERS,

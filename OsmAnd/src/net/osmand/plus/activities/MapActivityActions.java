@@ -628,21 +628,30 @@ public class MapActivityActions implements DialogProvider {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked) {
 						mapActivity.showQuickSearch(MapActivity.ShowQuickSearchMode.NEW_IF_EXPIRED, false);
-						/*
-						Intent newIntent = new Intent(mapActivity, mapActivity.getMyApplication().getAppCustomization()
-								.getSearchActivity());
-						LatLon loc = mapActivity.getMapLocation();
-						newIntent.putExtra(SearchActivity.SEARCH_LAT, loc.getLatitude());
-						newIntent.putExtra(SearchActivity.SEARCH_LON, loc.getLongitude());
-						if (mapActivity.getMapViewTrackingUtilities().isMapLinkedToLocation()) {
-							newIntent.putExtra(SearchActivity.SEARCH_NEARBY, true);
-						}
-						newIntent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-						mapActivity.startActivity(newIntent);
-						*/
 						return true;
 					}
 				}).createItem());
+
+		if (settings.SHOW_LEGACY_SEARCH.get()) {
+			optionsMenuHelper.addItem(new ItemBuilder().setTitleId(R.string.legacy_search, mapActivity)
+					.setIcon(R.drawable.ic_action_search_dark)
+					.setListener(new ContextMenuAdapter.ItemClickListener() {
+						@Override
+						public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked) {
+							Intent newIntent = new Intent(mapActivity, mapActivity.getMyApplication().getAppCustomization()
+									.getSearchActivity());
+							LatLon loc = mapActivity.getMapLocation();
+							newIntent.putExtra(SearchActivity.SEARCH_LAT, loc.getLatitude());
+							newIntent.putExtra(SearchActivity.SEARCH_LON, loc.getLongitude());
+							if (mapActivity.getMapViewTrackingUtilities().isMapLinkedToLocation()) {
+								newIntent.putExtra(SearchActivity.SEARCH_NEARBY, true);
+							}
+							newIntent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+							mapActivity.startActivity(newIntent);
+							return true;
+						}
+					}).createItem());
+		}
 
 		optionsMenuHelper.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.configure_map, mapActivity)
 				.setIcon(R.drawable.ic_action_layers_dark)
