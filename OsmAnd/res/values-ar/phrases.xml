@@ -705,4 +705,25 @@
 	<string name="poi_historic_ship">سفينة تاريخية</string>
 	<string name="poi_monument">نصب تذكاري</string>
 	<string name="poi_zoo">حديقة الحيوانات</string>
+	<string name="poi_home_visit">زيارة منزلية</string>
+	<string name="poi_hearing_aids">أدوات مساعذة للسمع</string>
+	<string name="poi_ship_chandler">لوازم السفن والقوارب</string>
+	<string name="poi_window_blind">متجر ستائر</string>
+	<string name="poi_atv">متجر الدرجات الرباعية</string>
+	<string name="poi_marketplace">سوق</string>
+	<string name="poi_swimming_pool_shop">متجر لوازم المسبح</string>
+	<string name="poi_shop_craft">متجر لوازم الفنون والحرف</string>
+	<string name="poi_religion">لوازم دينية</string>
+
+	<string name="poi_fire_flapper">رفش اطفاء النار</string>
+	<string name="poi_ford_stepping_stones">معبر حجري</string>
+	<string name="poi_gate">بوابة</string>
+	<string name="poi_lift_gate">بوابة برافعة</string>
+	<string name="poi_toll_booth">كشك طريق مدفوع</string>
+	<string name="poi_traffic_calming_rumble_strip">مطب طريق تحذيري</string>
+	<string name="poi_traffic_calming_table">جدول</string>
+	<string name="poi_traffic_signals">اشارة توقف ضوئية</string>
+
+	<string name="poi_service_tyres">إطارات</string>
+	<string name="poi_fuel_hgv_diesel">نقل وقود الديزل</string>
 	</resources>
