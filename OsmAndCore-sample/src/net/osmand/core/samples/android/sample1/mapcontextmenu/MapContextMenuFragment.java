@@ -393,7 +393,7 @@ public class MapContextMenuFragment extends Fragment {
 			}
 		}
 		int newMenuState = menu.getCurrentMenuState();
-		boolean needMapAdjust = oldMenuState != newMenuState && newMenuState != MenuState.FULL_SCREEN;
+		boolean needMapAdjust = false;//oldMenuState != newMenuState && newMenuState != MenuState.FULL_SCREEN;
 
 		if (newMenuState != oldMenuState) {
 			doBeforeMenuStateChange(oldMenuState, newMenuState);

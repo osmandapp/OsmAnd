@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="compass">Compass</string>
+    <string name="shared_string_my_location">My location</string>
     <string name="shared_string_search">Search</string>
     <string name="yard">yd</string>
     <string name="foot">ft</string>
@@ -38,7 +40,6 @@
     <string name="title_activity_main">OsmAnd Core Sample 1</string>
     <string name="zoomIn">Zoom in</string>
     <string name="zoomOut">Zoom out</string>
-    <string name="azimuthNorth">Azimuth to North</string>
     <string name="search_hint">Type and Search</string>
     <string name="shared_string_close">Close</string>
 </resources>

@@ -26,11 +26,6 @@ public class MyLocationMenuController  extends MenuController {
 	}
 
 	@Override
-	protected int getSupportedMenuStatesPortrait() {
-		return MenuState.HEADER_ONLY | MenuState.HALF_SCREEN;
-	}
-
-	@Override
 	public String getTypeStr() {
 		return getPointDescription().getTypeName();
 	}

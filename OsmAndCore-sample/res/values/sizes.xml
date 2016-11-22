@@ -63,6 +63,7 @@
 
 	<dimen name="map_address_height">40dp</dimen>
 	<dimen name="map_button_size">52dp</dimen>
+	<dimen name="map_button_size_plus_spacing">63dp</dimen>
 	<dimen name="map_small_button_size">44dp</dimen>
 	<dimen name="map_small_button_margin">5dp</dimen>
 	

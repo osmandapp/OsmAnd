@@ -22,16 +22,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="top|right"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp">
+            android:layout_marginRight="@dimen/map_button_margin"
+            android:layout_marginTop="@dimen/map_button_margin">
 
             <ImageButton
-                android:id="@+id/map_azimuth_north_button"
-                android:layout_width="52dp"
-                android:layout_height="52dp"
-                android:background="@drawable/btn_circle"
-                android:contentDescription="@string/azimuthNorth"
-                android:src="@drawable/map_compass_niu"/>
+                android:id="@+id/map_compass_button"
+                android:layout_width="@dimen/map_small_button_size"
+                android:layout_height="@dimen/map_small_button_size"
+                android:background="@drawable/btn_inset_circle_trans"
+                android:src="@drawable/map_compass"
+                android:visibility="gone"/>
 
         </FrameLayout>
 
@@ -39,14 +39,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="top|left"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp">
+            android:layout_marginLeft="@dimen/map_button_margin"
+            android:layout_marginTop="@dimen/map_button_margin">
 
             <ImageButton
                 android:id="@+id/search_button"
-                android:layout_width="52dp"
-                android:layout_height="52dp"
-                android:background="@drawable/btn_circle"
+                android:layout_width="@dimen/map_small_button_size"
+                android:layout_height="@dimen/map_small_button_size"
+                android:background="@drawable/btn_inset_circle_trans"
                 android:contentDescription="@string/shared_string_search"
                 android:src="@drawable/map_search_dark"/>
 
@@ -56,13 +56,24 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|right"
-            android:layout_marginBottom="10dp"
-            android:layout_marginRight="10dp">
+            android:layout_marginBottom="@dimen/map_button_margin"
+            android:layout_marginRight="@dimen/map_button_margin">
+
+            <ImageButton
+                android:id="@+id/map_my_location_button"
+                android:layout_width="@dimen/map_button_size"
+                android:layout_height="@dimen/map_button_size"
+                android:layout_gravity="bottom"
+                android:layout_marginRight="@dimen/map_button_size_plus_spacing"
+                android:background="@drawable/btn_circle"
+                android:contentDescription="@string/shared_string_my_location"
+                android:src="@drawable/map_my_location"/>
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:layout_gravity="bottom|right">
 
                 <TextView
                     android:id="@+id/text_zoom"
@@ -76,18 +87,18 @@
 
                 <ImageButton
                     android:id="@+id/map_zoom_in_button"
-                    android:layout_width="52dp"
-                    android:layout_height="52dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_width="@dimen/map_button_size"
+                    android:layout_height="@dimen/map_button_size"
+                    android:layout_marginTop="@dimen/map_button_spacing"
                     android:background="@drawable/btn_circle"
                     android:contentDescription="@string/zoomIn"
                     android:src="@drawable/map_zoom_in"/>
 
                 <ImageButton
                     android:id="@+id/map_zoom_out_button"
-                    android:layout_width="52dp"
-                    android:layout_height="52dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_width="@dimen/map_button_size"
+                    android:layout_height="@dimen/map_button_size"
+                    android:layout_marginTop="@dimen/map_button_spacing"
                     android:background="@drawable/btn_circle"
                     android:contentDescription="@string/zoomOut"
                     android:src="@drawable/map_zoom_out"/>

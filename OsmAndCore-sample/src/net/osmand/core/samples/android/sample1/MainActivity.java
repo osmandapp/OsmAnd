@@ -6,6 +6,8 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.content.pm.PackageManager;
+import android.graphics.Canvas;
+import android.graphics.ColorFilter;
 import android.graphics.PointF;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -25,10 +27,12 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import net.osmand.Location;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.core.android.AtlasMapRendererView;
 import net.osmand.core.jni.AmenitySymbolsProvider.AmenitySymbolsGroup;
 import net.osmand.core.jni.AreaI;
+import net.osmand.core.jni.FColorRGB;
 import net.osmand.core.jni.IBillboardMapSymbol;
 import net.osmand.core.jni.IMapLayerProvider;
 import net.osmand.core.jni.IMapRenderer.MapSymbolInformation;
@@ -57,6 +61,8 @@ import net.osmand.core.jni.ResolvedMapStyle;
 import net.osmand.core.jni.SwigUtilities;
 import net.osmand.core.jni.Utilities;
 import net.osmand.core.samples.android.sample1.MultiTouchSupport.MultiTouchZoomListener;
+import net.osmand.core.samples.android.sample1.SampleLocationProvider.SampleCompassListener;
+import net.osmand.core.samples.android.sample1.SampleLocationProvider.SampleLocationListener;
 import net.osmand.core.samples.android.sample1.data.PointDescription;
 import net.osmand.core.samples.android.sample1.mapcontextmenu.MapContextMenu;
 import net.osmand.core.samples.android.sample1.mapcontextmenu.MenuController;
@@ -73,7 +79,11 @@ import java.io.FilenameFilter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+import static net.osmand.core.samples.android.sample1.SampleApplication.PERMISSION_REQUEST_LOCATION_ON_BUTTON;
+import static net.osmand.core.samples.android.sample1.SampleApplication.PERMISSION_REQUEST_LOCATION_ON_RESUME;
+import static net.osmand.core.samples.android.sample1.SampleApplication.PERMISSION_REQUEST_WRITE_EXTERNAL_STORAGE;
+
+public class MainActivity extends AppCompatActivity implements SampleLocationListener, SampleCompassListener {
 	private static final String TAG = "OsmAndCoreSample";
 
 	private float displayDensityFactor;
@@ -93,12 +103,13 @@ public class MainActivity extends AppCompatActivity {
 	private AtlasMapRendererView mapView;
 	private TextView textZoom;
 	private ImageButton searchButton;
-	private ImageButton azimuthNorthButton;
+	private ImageButton compassButton;
+	private CompassDrawable compassDrawable;
 
 	private GestureDetector gestureDetector;
 	private PointI target31;
 	private float zoom;
-	private float azimuth;
+	private float azimuth = 0;
 	private float elevationAngle;
 	private MultiTouchSupport multiTouchSupport;
 
@@ -107,11 +118,12 @@ public class MainActivity extends AppCompatActivity {
 	// Context pin marker
 	private MapMarkersCollection contextPinMarkersCollection;
 	private MapMarker contextPinMarker;
-	private static final int CONTEXT_MARKER_ID = 1;
+	private static final int MARKER_ID_CONTEXT_PIN = 1;
 
 	// "My location" marker, "My course" marker and collection
 	private MapMarkersCollection myMarkersCollection;
 	private MapMarker myLocationMarker;
+	private static final int MARKER_ID_MY_LOCATION = 2;
 
 	// Germany
 	private final static float INIT_LAT = 49.353953f;
@@ -136,14 +148,22 @@ public class MainActivity extends AppCompatActivity {
 	}
 
 	@Override
-	public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+	public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
 		super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-		if (requestCode == SampleApplication.PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE &&
-				grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-			if (!InstallOsmandAppDialog.wasShown()) {
-				checkMapsInstalled();
+		if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+			switch (requestCode) {
+				case PERMISSION_REQUEST_WRITE_EXTERNAL_STORAGE:
+					if (!InstallOsmandAppDialog.wasShown()) {
+						checkMapsInstalled();
+					}
+					getMyApplication().initPoiTypes();
+					break;
+				case PERMISSION_REQUEST_LOCATION_ON_BUTTON:
+					goToLocation();
+				case PERMISSION_REQUEST_LOCATION_ON_RESUME:
+					getMyApplication().getLocationProvider().resumeAllUpdates();
+					break;
 			}
-			getSampleApplication().initPoiTypes();
 		}
 	}
 
@@ -151,7 +171,7 @@ public class MainActivity extends AppCompatActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		SampleApplication app = getSampleApplication();
+		SampleApplication app = getMyApplication();
 
 		gestureDetector = new GestureDetector(this, new MapViewOnGestureListener());
 		multiTouchSupport = new MultiTouchSupport(this, new MapViewMultiTouchZoomListener());
@@ -164,7 +184,7 @@ public class MainActivity extends AppCompatActivity {
 		if (!externalStoragePermissionGranted) {
 			ActivityCompat.requestPermissions(this,
 					new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-					SampleApplication.PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
+					PERMISSION_REQUEST_WRITE_EXTERNAL_STORAGE);
 		}
 
 		// Get map view
@@ -180,11 +200,29 @@ public class MainActivity extends AppCompatActivity {
 			}
 		});
 
-		azimuthNorthButton = (ImageButton) findViewById(R.id.map_azimuth_north_button);
-		azimuthNorthButton.setOnClickListener(new View.OnClickListener() {
+		compassButton = (ImageButton) findViewById(R.id.map_compass_button);
+		compassButton.setContentDescription(app.getString("rotate_map_compass_opt"));
+		compassDrawable = new CompassDrawable(app.getIconsCache().getIcon(R.drawable.map_compass));
+		compassButton.setImageDrawable(compassDrawable);
+		compassButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				setAzimuth(0f);
+			}
+		});
+
+		ImageButton myLocationButton = (ImageButton) findViewById(R.id.map_my_location_button);
+		myLocationButton.setImageDrawable(app.getIconsCache().getIcon("map_my_location", R.color.color_myloc_distance));
+		myLocationButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if (SampleLocationProvider.isLocationPermissionAvailable(MainActivity.this)) {
+					goToLocation();
+				} else {
+					ActivityCompat.requestPermissions(MainActivity.this,
+							new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+							PERMISSION_REQUEST_LOCATION_ON_BUTTON);
+				}
 			}
 		});
 
@@ -271,7 +309,7 @@ public class MainActivity extends AppCompatActivity {
 	}
 
 	private void checkMapsInstalled() {
-		File mapsDir = new File(getSampleApplication().getAbsoluteAppPath());
+		File mapsDir = new File(getMyApplication().getAbsoluteAppPath());
 		boolean noMapsFound;
 		if (mapsDir.exists()) {
 			File[] maps = mapsDir.listFiles(new FilenameFilter() {
@@ -301,11 +339,31 @@ public class MainActivity extends AppCompatActivity {
 	}
 
 	public void initMapMarkers() {
+
+		// Create my location marker
+		Drawable myLocationDrawable = OsmandResources.getDrawable("map_pedestrian_location");
+		myMarkersCollection = new MapMarkersCollection();
+		myLocationMarker = new MapMarkerBuilder()
+				.setMarkerId(MARKER_ID_MY_LOCATION)
+				.setIsAccuracyCircleSupported(true)
+				.setAccuracyCircleBaseColor(new FColorRGB(32/255f, 173/255f, 229/255f))
+				.setBaseOrder(-206000)
+				.setIsHidden(true)
+				//.addOnMapSurfaceIcon(SwigUtilities.getOnSurfaceIconKey(0), SwigUtilities.createSkBitmapARGB888With(
+				//		myLocationDrawable.getIntrinsicWidth(), myLocationDrawable.getIntrinsicHeight(),
+				//		SampleUtils.getDrawableAsByteArray(myLocationDrawable)))
+				.setPinIcon(SwigUtilities.createSkBitmapARGB888With(
+						myLocationDrawable.getIntrinsicWidth(), myLocationDrawable.getIntrinsicHeight(),
+						SampleUtils.getDrawableAsByteArray(myLocationDrawable)))
+				.buildAndAddToCollection(myMarkersCollection);
+
+		mapView.addSymbolsProvider(myMarkersCollection);
+
 		// Create context pin marker
 		Drawable pinDrawable = OsmandResources.getDrawable("map_pin_context_menu");
 		contextPinMarkersCollection = new MapMarkersCollection();
 		contextPinMarker = new MapMarkerBuilder()
-				.setMarkerId(CONTEXT_MARKER_ID)
+				.setMarkerId(MARKER_ID_CONTEXT_PIN)
 				.setIsAccuracyCircleSupported(false)
 				.setBaseOrder(-210000)
 				.setIsHidden(true)
@@ -314,7 +372,7 @@ public class MainActivity extends AppCompatActivity {
 						SampleUtils.getDrawableAsByteArray(pinDrawable)))
 				.setPinIconVerticalAlignment(MapMarker.PinIconVerticalAlignment.Top)
 				.setPinIconHorisontalAlignment(MapMarker.PinIconHorisontalAlignment.CenterHorizontal)
-		.buildAndAddToCollection(contextPinMarkersCollection);
+				.buildAndAddToCollection(contextPinMarkersCollection);
 
 		mapView.addSymbolsProvider(contextPinMarkersCollection);
 	}
@@ -333,14 +391,89 @@ public class MainActivity extends AppCompatActivity {
 		mapView.resumeSymbolsUpdate();
 	}
 
+	public void goToLocation() {
+		if (mapView != null) {
+			SampleLocationProvider locationProvider = getMyApplication().getLocationProvider();
+			if (locationProvider.getLastKnownLocation() != null) {
+				net.osmand.Location lastKnownLocation = locationProvider.getLastKnownLocation();
+				int fZoom = zoom < 15 ? 15 : (int)zoom;
+				showOnMap(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude(), fZoom);
+				//todo animation
+				//AnimateDraggingMapThread thread = mapView.getAnimatedDraggingThread();
+				//thread.startMoving(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude(), fZoom, false);
+			}
+			if (locationProvider.getLastKnownLocation() == null) {
+				getMyApplication().showToastMessage(getMyApplication().getString("unknown_location"));
+			}
+		}
+	}
+
+	@Override
+	public void updateLocation(Location location) {
+		final SampleApplication app = getMyApplication();
+		final Location lastKnownLocation = app.getLocationProvider().getLastKnownLocation();
+		if (lastKnownLocation == null || mapView == null){
+			app.runInUIThread(new Runnable() {
+				@Override
+				public void run() {
+					if (!myLocationMarker.isHidden()) {
+						mapView.suspendSymbolsUpdate();
+						myLocationMarker.setIsHidden(true);
+						mapView.resumeSymbolsUpdate();
+					}
+				}
+			});
+			return;
+		}
+
+		final PointI target31 = Utilities.convertLatLonTo31(
+				new net.osmand.core.jni.LatLon(location.getLatitude(), location.getLongitude()));
+
+		app.runInUIThread(new Runnable() {
+			@Override
+			public void run() {
+				mapView.suspendSymbolsUpdate();
+				myLocationMarker.setIsHidden(false);
+				myLocationMarker.setPosition(target31);
+				myLocationMarker.setIsAccuracyCircleVisible(true);
+				myLocationMarker.setAccuracyCircleRadius(lastKnownLocation.getAccuracy());
+				mapView.resumeSymbolsUpdate();
+			}
+		});
+
+		if (menu != null) {
+			menu.updateMyLocation(location);
+		}
+	}
+
+	@Override
+	public void updateCompassValue(float value) {
+		if (menu != null) {
+			menu.updateCompassValue(value);
+		}
+	}
+
 	@Override
 	protected void onResume() {
 		super.onResume();
+		SampleApplication app = getMyApplication();
+		app.getLocationProvider().checkIfLastKnownLocationIsValid();
+		app.getLocationProvider().addLocationListener(this);
+		if (SampleLocationProvider.isLocationPermissionAvailable(this)) {
+			app.getLocationProvider().resumeAllUpdates();
+		} else {
+			ActivityCompat.requestPermissions(this,
+					new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+					PERMISSION_REQUEST_LOCATION_ON_RESUME);
+		}
 		mapView.handleOnResume();
 	}
 
 	@Override
 	protected void onPause() {
+		SampleApplication app = getMyApplication();
+		app.getLocationProvider().pauseAllUpdates();
+		app.getLocationProvider().removeLocationListener(this);
 		saveMapState();
 		mapView.handleOnPause();
 		super.onPause();
@@ -352,25 +485,24 @@ public class MainActivity extends AppCompatActivity {
 		super.onDestroy();
 	}
 
-	public SampleApplication getSampleApplication() {
-		return (SampleApplication) getApplication();
-	}
-
 	public AtlasMapRendererView getMapView() {
 		return mapView;
 	}
 
 	public void showOnMap(LatLon latLon, int zoom) {
 		if (latLon != null) {
-			PointI target = Utilities.convertLatLonTo31(
-					new net.osmand.core.jni.LatLon(latLon.getLatitude(), latLon.getLongitude()));
-			setTarget(target);
-			setZoom(zoom);
+			showOnMap(latLon.getLatitude(), latLon.getLongitude(), zoom);
 		}
 	}
 
+	public void showOnMap(double latitude, double longitude, int zoom) {
+		PointI target = Utilities.convertLatLonTo31(
+				new net.osmand.core.jni.LatLon(latitude, longitude));
+		setTarget(target);
+		setZoom(zoom);
+	}
+
 	public void refreshMap() {
-		//todo
 	}
 
 	public MapContextMenu getContextMenu() {
@@ -473,13 +605,16 @@ public class MainActivity extends AppCompatActivity {
 
 	public void setAzimuth(float angle) {
 		angle = MapUtils.unifyRotationTo360(angle);
-		this.azimuth = angle;
+		azimuth = angle;
 		mapView.setAzimuth(angle);
 
-		if (angle == 0f && azimuthNorthButton.getVisibility() == View.VISIBLE) {
-			azimuthNorthButton.setVisibility(View.INVISIBLE);
-		} else if (angle != 0f && azimuthNorthButton.getVisibility() == View.INVISIBLE) {
-			azimuthNorthButton.setVisibility(View.VISIBLE);
+		if (angle == 0f && compassButton.getVisibility() == View.VISIBLE) {
+			compassButton.setVisibility(View.INVISIBLE);
+		} else if (angle != 0f) {
+			if (compassButton.getVisibility() != View.VISIBLE) {
+				compassButton.setVisibility(View.VISIBLE);
+			}
+			compassButton.invalidate();
 		}
 	}
 
@@ -552,9 +687,17 @@ public class MainActivity extends AppCompatActivity {
 					} catch (Exception eMapMarker) {
 						mapMarker = null;
 					}
-					if (mapMarker != null && mapMarker.getMarkerId() == CONTEXT_MARKER_ID) {
-						hideMultiContextMenu();
-						menu.show();
+					if (mapMarker != null) {
+						if (mapMarker.getMarkerId() == MARKER_ID_CONTEXT_PIN) {
+							hideMultiContextMenu();
+							menu.show();
+						} else if (mapMarker.getMarkerId() == MARKER_ID_MY_LOCATION) {
+							hideMultiContextMenu();
+							LatLon latLon = new LatLon(lat, lon);
+							showContextMenu(latLon, new PointDescription(
+									PointDescription.POINT_TYPE_MY_LOCATION,
+									getMyApplication().getString("shared_string_my_location"), ""), latLon);
+						}
 						return true;
 					} else {
 						net.osmand.core.jni.Amenity amenity;
@@ -849,5 +992,69 @@ public class MainActivity extends AppCompatActivity {
 		NEW,
 		NEW_IF_EXPIRED,
 		CURRENT,
+	}
+
+	private class CompassDrawable extends Drawable {
+
+		private Drawable original;
+
+		public CompassDrawable(Drawable original) {
+			this.original = original;
+		}
+
+		@Override
+		public void draw(@NonNull Canvas canvas) {
+			canvas.save();
+			canvas.rotate(azimuth, getIntrinsicWidth() / 2, getIntrinsicHeight() / 2);
+			original.draw(canvas);
+			canvas.restore();
+		}
+
+		@Override
+		public int getMinimumHeight() {
+			return original.getMinimumHeight();
+		}
+
+		@Override
+		public int getMinimumWidth() {
+			return original.getMinimumWidth();
+		}
+
+		@Override
+		public int getIntrinsicHeight() {
+			return original.getIntrinsicHeight();
+		}
+
+		@Override
+		public int getIntrinsicWidth() {
+			return original.getIntrinsicWidth();
+		}
+
+		@Override
+		public void setChangingConfigurations(int configs) {
+			super.setChangingConfigurations(configs);
+			original.setChangingConfigurations(configs);
+		}
+
+		@Override
+		public void setBounds(int left, int top, int right, int bottom) {
+			super.setBounds(left, top, right, bottom);
+			original.setBounds(left, top, right, bottom);
+		}
+
+		@Override
+		public void setAlpha(int alpha) {
+			original.setAlpha(alpha);
+		}
+
+		@Override
+		public void setColorFilter(ColorFilter cf) {
+			original.setColorFilter(cf);
+		}
+
+		@Override
+		public int getOpacity() {
+			return original.getOpacity();
+		}
 	}
 }
