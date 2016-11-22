@@ -2002,4 +2002,17 @@ Paina ja pidä nähdäksesi kartalla</string>
 Osa tuloista menee takaisin OSM yhteisölle ja maksetaan jokaiselle OSM avustajalle. 
 Jos pidät OsmAndista ja OSMsta ja haluat tukea niitä, on tämä täydellinen tapa tehdä se.</string>
     
+    <string name="context_menu_item_search_poi">Etsi POI</string>
+    <string name="background_service_wait_int_descr">Aseta maksimi odotusaika jokaiselle taustan paikanmäritykselle</string>
+    <string name="background_service_wait_int">Maksimi aika paikanmääritykselle</string>
+    <string name="background_service_int_descr">Aseta virkistyksen väliaika taustapalvelulle</string>
+    <string name="background_service_provider_descr">Valitse taustapalvelun käyttämä sijainnin tarjoaja</string>
+    <string name="background_service_provider">Sijainnin tarjoaja</string>
+    <string name="off_router_service_no_gps_available">Taustasuunnistuspalvelu tarvitsee sijainnin tarjoajan asetettavaksi päälle.</string>
+    <string name="transport">Liikenne</string>
+    <string name="commiting_node">Lähetetään solmua…</string>
+    <string name="auth_failed">Valtuutus epäonnistui</string>
+    <string name="converting_names">Muunnetaan kotimaiset/englantilaiset nimet…</string>
+    <string name="osm_settings_descr">Määrittele Openstreetmap.org (OSM) asetukset jotka tarvitaan OSM huomautuksiin</string>
+    <string name="show_poi_over_map_description">Näytä POI kartalla (käytä viimeksi valittua suodatinta)</string>
     </resources>
