@@ -12,4 +12,42 @@
 		<string name="poi_sightseeing">Kiertoajelu</string>
 		<string name="poi_accomodation">Majoitus</string>
 		<string name="poi_entertainment">Vapaa-aika</string>
-		</resources>
+		<string name="poi_tobacco">Tupakkakauppa</string>
+	<string name="poi_public_transport_platform_bus">Bussipysäkki</string>
+	<string name="poi_public_transport_platform_trolleybus">Trolleybussin pysäkki</string>
+	<string name="poi_public_transport_platform_tram">Raitiovaunupysäkki</string>
+	<string name="poi_picnic_site">Piknic paikka</string>
+	<string name="poi_stone">Merkittävä kivi</string>
+	<string name="poi_anchor_berth">Ankkurointipaikka</string>
+	<string name="poi_beacon">Majakka/linjavalo</string>
+	<string name="poi_beacon_cardinal">Suuntamajakka</string>
+	<string name="poi_beacon_safe_water">Turvamajakka</string>
+	<string name="poi_berth">Laituri</string>
+	<string name="poi_seamark_building">Merimerkki rakennelma</string>
+	<string name="poi_buoy_safe_water">Turvapoiju</string>
+	<string name="poi_seamark_light_vessel">Alusvalo, merimerkki</string>
+	<string name="poi_wiki_lang_als">Elsassilainen wiki</string>
+	<string name="poi_trees_nectorine">Nektariini</string>
+	<string name="poi_deadlock">Umpikuja</string>
+
+	<string name="poi_architecture_umgebinde">Arkkitehtuuri: varatie</string>
+	<string name="poi_dolphin">Delfiini</string>
+
+	<string name="poi_fire_hydrant_count"/>
+	<string name="poi_fuel_type">Tyyppi</string>
+	<string name="poi_fuel_avia_type">Tyyppi</string>
+	<string name="poi_payment_type">Maksutapa</string>
+	<string name="poi_payment_fuel_type">Polttoainekortti</string>
+	<string name="poi_additional_type">Lisä</string>
+	<string name="poi_internet_access_type">Internetin käyttötapa</string>
+	<string name="poi_vending_type">Ostotapa</string>
+	<string name="poi_bicycle_service">Polkupyöräpalvelu</string>
+	<string name="poi_clothes_type">Tapa</string>
+	<string name="poi_shoes_type">Tapa</string>
+	<string name="poi_fire_hydrant_type">Tapa</string>
+	<string name="poi_fire_hydrant_position">Sijainti</string>
+	<string name="poi_fire_hydrant_water_source">Vesipiste</string>
+	<string name="poi_payment_toll_type">Maksutapa</string>
+	<string name="poi_traffic_signals_sound">Ääni</string>
+	<string name="poi_highway_crossing_type">Tapa</string>
+	</resources>
