@@ -540,15 +540,17 @@ public abstract class MenuController extends BaseMenuController {
 			}
 			String selectedFullName = "";
 			double smallestArea = -1;
+			downloadMapDataObject = null;
 			for (BinaryMapDataObject o : mapDataObjects) {
 				String downloadName = osmandRegions.getDownloadName(o);
-				if (!Algorithms.isEmpty(downloadName)) {
+				String fullName = osmandRegions.getFullName(o);
+				WorldRegion region = osmandRegions.getRegionData(fullName);
+				if (!Algorithms.isEmpty(downloadName) && region.isRegionMapDownload()) {
 					boolean downloaded = checkIfObjectDownloaded(rm, downloadName);
 					if (downloaded) {
 						downloadMapDataObject = null;
 						break;
 					} else {
-						String fullName = osmandRegions.getFullName(o);
 						double area = OsmandRegions.getArea(o);
 						if (smallestArea == -1) {
 							smallestArea = area;
