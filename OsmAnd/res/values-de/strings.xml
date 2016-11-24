@@ -2057,8 +2057,8 @@ Lon %2$s</string>
     <string name="lang_ceb">Cebuano</string>
     <string name="local_recordings_delete_all_confirm">%1$d Notizen werden gelöscht. Fortfahren?</string>
 	<string name="lang_te">Telugu</string>
-    <string name="rendering_value_walkingRoutesScopeOSMC_name">Einfärbung gemäß Routenbereich</string>
-    <string name="rendering_value_walkingRoutesOSMC_name">Routenfarbe gemäß OSMC</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">Einfärbung gemäß Routennetzwerk</string>
+    <string name="rendering_value_walkingRoutesOSMC_name">Einfärbung gemäß OSMC Wandersymbol</string>
     <string name="do_you_like_osmand">Gefällt Ihnen OsmAnd?</string>
 	<string name="rate_this_app">Bewerte diese App</string>
 	<string name="rate_this_app_long">Bitte gib OsmAnd eine Bewertung auf Google Play</string>

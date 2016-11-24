@@ -517,8 +517,8 @@
     <string name="shared_string_show_details">Show details</string>
     <string name="osm_edit_context_menu_delete">Delete OSM edit</string>
     <string name="rendering_value_disabled_name">Disabled</string>
-    <string name="rendering_value_walkingRoutesScopeOSMC_name">Coloring according to route scope</string>
-    <string name="rendering_value_walkingRoutesOSMC_name">Coloring according to OSMC</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">Color by network affiliation</string>
+    <string name="rendering_value_walkingRoutesOSMC_name">Color by OSMC hiking symbol</string>
     <string name="shared_string_logoff">Log Off</string>
     <string name="rendering_attr_hideHouseNumbers_name">House numbers</string>
     <string name="application_dir_change_warning3">Do you want OsmAnd to also copy its data files to the new destination?</string>
