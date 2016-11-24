@@ -311,7 +311,9 @@ public class FirstUsageWizardFragment extends Fragment implements OsmAndLocation
 				view.findViewById(R.id.map_downloading_action_button).setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						showOnMap(new LatLon(location.getLatitude(), location.getLongitude()), 13);
+						if (location != null) {
+							showOnMap(new LatLon(location.getLatitude(), location.getLongitude()), 13);
+						}
 					}
 				});
 				view.findViewById(R.id.map_downloading_card).setVisibility(View.VISIBLE);
