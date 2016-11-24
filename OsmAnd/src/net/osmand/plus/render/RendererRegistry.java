@@ -218,7 +218,7 @@ public class RendererRegistry {
 					if (f != null && f.getName().endsWith(IndexConstants.RENDERER_INDEX_EXT)) {
 						if(!internalRenderers.containsValue(f.getName())) {
 							String name = f.getName().substring(0, f.getName().length() - IndexConstants.RENDERER_INDEX_EXT.length());
-							externalRenderers.put(name, f);							
+							externalRenderers.put(name.replace('_', ' ').replace('-', ' '), f);
 						}
 					}
 				}
