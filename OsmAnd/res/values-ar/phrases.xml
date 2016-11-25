@@ -726,4 +726,23 @@
 
 	<string name="poi_service_tyres">إطارات</string>
 	<string name="poi_fuel_hgv_diesel">نقل وقود الديزل</string>
+	<string name="poi_photo_studio">استوديو صور</string>
+
+
+<string name="poi_locomotive">قاطرة</string>
+
+	<string name="poi_e_cigarette">متجر السجائر الإلكترونية</string>
+
+	<string name="poi_sewing">متجر البضائع الجافة</string>
+	<string name="poi_traffic_calming_choker">قلادة</string>
+	<string name="poi_traffic_calming_island">مكان وقوف المارة</string>
+	<string name="poi_fuel_cng">غاز طبيعي مضغوط</string>
+	<string name="poi_fuel_svo">زيت نباتي</string>
+	<string name="poi_vehicle_ramp">منحدر مركبة</string>
+	<string name="poi_public_transport_platform_trolleybus">موقف حافلات</string>
+	<string name="poi_railway_buffer_stop">موقف للسكك الحديدية</string>
+	<string name="poi_aerialway_cable_car">مركبة كهربائية</string>
+	<string name="poi_aerialway_gondola">زورق سياحي</string>
+	<string name="poi_aerialway_goods">رافعة بضائع</string>
+	<string name="poi_aerialway_magic_carpet">رافعة سجاد</string>
 	</resources>
