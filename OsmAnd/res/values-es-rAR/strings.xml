@@ -2251,7 +2251,7 @@ Si necesitas ayuda con la aplicación OsmAnd, contacte con nuestro equipo de sop
     <string name="map_markers_other">Otros marcadores</string>
     <string name="upload_anonymously">Subir anónimamente</string>
     <string name="show_transparency_seekbar">Mostrar transparencia en barra de búsqueda</string>
-    <string name="upload_osm_note_description">Puedes subir informes de problemas anónimos aunque uses tu perfil de OpenStreetMap.org.</string>
+    <string name="upload_osm_note_description">Puedes subir informes de problemas anónimos o usar tu perfil de OpenStreetMap.org.</string>
     <string name="upload_osm_note">Subir problema(s) del mapa</string>
     <string name="donations">Donaciones</string>
     <string name="number_of_recipients">Número de destinatarios</string>
@@ -2495,4 +2495,9 @@ Si necesitas ayuda con la aplicación OsmAnd, contacte con nuestro equipo de sop
     <string name="route_roundabout_short">Toma la %1$dª salida y continúa</string>
     <string name="search_map_hint">Buscar ciudad o región</string>
     <string name="wiki_around">Artículos de Wikipedia cercanos</string>
+    <string name="legacy_search">Búsqueda vieja</string>
+    <string name="show_legacy_search">Mostrar el modo antigüo de búsqueda</string>
+    <string name="show_legacy_search_desc">Activa el modo antigüo de búsqueda en la lista del panel lateral</string>
+    <string name="routing_attr_allow_motorway_name">Permitir autopistas</string>
+    <string name="routing_attr_allow_motorway_description">Permitir autopistas</string>
     </resources>
