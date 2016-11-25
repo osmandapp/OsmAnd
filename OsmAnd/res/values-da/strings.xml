@@ -2024,8 +2024,8 @@ Lon %2$s</string>
     <string name="osmo_share_my_location">Overfør placering</string>
     <string name="shared_string_logoff">Log af</string>
     <string name="rendering_value_disabled_name">Deaktiveret</string>
-    <string name="rendering_value_walkingRoutesScopeOSMC_name">Farvelægning ifølge ruteanvendelse</string>
-    <string name="rendering_value_walkingRoutesOSMC_name">Farvelægning ifølge OSMC</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">Farvelægning ifølge netværk tilhørsforhold</string>
+    <string name="rendering_value_walkingRoutesOSMC_name">Farvelægning ifølge OSMC vandresymbol</string>
     <string name="osm_edit_context_menu_delete">Slet OSM redigering</string>
     <string name="read_full_article">Læs hele artiklen (online)</string>
     <string name="shared_string_wikipedia">Wikipedia</string>
@@ -2465,7 +2465,7 @@ Brug for hjælp med OsmAnd, kontakt supportteamet: support@osmand.net.
  (Ledig plads {2} MB.)</string>
     <string name="upload_osm_note">Overfør OSM Note</string>
     <string name="upload_anonymously">Overfør anonymt</string>
-<string name="upload_osm_note_description">Overfør OSM-noter anonymt hvis OpenStreetMap.org profilen bruges.</string>
+<string name="upload_osm_note_description">Overfør OSM-noter anonymt eller ved brug af OpenStreetMap.org profilen.</string>
     <string name="select_map_marker">Vælg kortmarkør</string>
     <string name="map_markers_other">Andre markører</string>
     <string name="show_transparency_seekbar">Vis glider for gennemsigtighed</string>
@@ -2729,4 +2729,9 @@ Hvis du  ønsker at støtte OsmAnd og OSM, er dette en god måde at gøre det p�
     <string name="route_roundabout_short">Tag %1$d afkørsel og forsæt</string>
     <string name="search_map_hint">Søg efter by eller region</string>
     <string name="wiki_around">Wikipedia artikler i nærheden</string>
+    <string name="routing_attr_allow_motorway_name">Tillad motorveje</string>
+    <string name="routing_attr_allow_motorway_description">Tillad motorveje</string>
+    <string name="legacy_search">Legacy søgning</string>
+    <string name="show_legacy_search">Vis legacy søgning</string>
+    <string name="show_legacy_search_desc">Aktivere legacy søgning i listen skuffe</string>
     </resources>
