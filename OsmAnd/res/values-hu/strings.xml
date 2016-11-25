@@ -2714,6 +2714,6 @@ Ha segítségre van szükséged az OsmAnd alkalmazással kapcsolatban, keresd a 
 
  • Sok egyéb fejlesztés és hibajavítás
  "</string>
-    <string name="wiki_around">Közeli Wikipédia cikkek</string>
+    <string name="wiki_around">Közeli Wikipédia-cikkek</string>
     <string name="search_map_hint">Város, régió keresése</string>
     </resources>
