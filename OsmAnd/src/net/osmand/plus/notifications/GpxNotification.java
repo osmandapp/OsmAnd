@@ -14,23 +14,22 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.util.Algorithms;
 
 import static net.osmand.plus.NavigationService.USED_BY_GPX;
-import static net.osmand.plus.NavigationService.USED_BY_NAVIGATION;
 
 public class GpxNotification extends OsmandNotification {
 
 	public final static String OSMAND_SAVE_GPX_SERVICE_ACTION = "OSMAND_SAVE_GPX_SERVICE_ACTION";
 	public final static String OSMAND_START_GPX_SERVICE_ACTION = "OSMAND_START_GPX_SERVICE_ACTION";
 	public final static String OSMAND_STOP_GPX_SERVICE_ACTION = "OSMAND_STOP_GPX_SERVICE_ACTION";
+	public final static String GROUP_NAME = "GPX";
 
 	private boolean wasDismissed;
 
 	public GpxNotification(OsmandApplication app) {
-		super(app);
+		super(app, GROUP_NAME);
 	}
 
 	@Override
@@ -100,7 +99,7 @@ public class GpxNotification extends OsmandNotification {
 	}
 
 	@Override
-	public Builder buildNotification() {
+	public Builder buildNotification(boolean wearable) {
 		if (!isEnabled()) {
 			return null;
 		}
@@ -134,7 +133,7 @@ public class GpxNotification extends OsmandNotification {
 			return null;
 		}
 
-		final Builder notificationBuilder = createBuilder()
+		final Builder notificationBuilder = createBuilder(wearable)
 				.setContentTitle(notificationTitle)
 				.setStyle(new BigTextStyle().bigText(notificationText));
 
@@ -173,7 +172,12 @@ public class GpxNotification extends OsmandNotification {
 	}
 
 	@Override
-	public int getUniqueId() {
+	public int getOsmandNotificationId() {
 		return GPX_NOTIFICATION_SERVICE_ID;
+	}
+
+	@Override
+	public int getOsmandWearableNotificationId() {
+		return WEAR_GPX_NOTIFICATION_SERVICE_ID;
 	}
 }
