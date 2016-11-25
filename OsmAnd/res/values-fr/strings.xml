@@ -1834,7 +1834,7 @@ Pour revenir à l’un des styles de carte classique de OsmAnd, désactivez simp
     <string name="osmo_share_my_location">Partager ma position</string>
     <string name="shared_string_logoff">Se déconnecter</string>
     <string name="rendering_value_disabled_name">Désactivé</string>
-    <string name="rendering_value_walkingRoutesOSMC_name">Couleur de l\'itinéraire selon OSMC</string>
+    <string name="rendering_value_walkingRoutesOSMC_name">Couleur de l\'itinéraire basée sur les symboles de randonnée OSMC</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Couleur selon l\'étendue de l\'itinéraire</string>
     <string name="osm_edit_context_menu_delete">Supprimer la modification OSM</string>
     <string name="shared_string_show_details">Afficher les détails</string>
@@ -2199,7 +2199,7 @@ Pour revenir à l’un des styles de carte classique de OsmAnd, désactivez simp
     <string name="shared_string_widgets">Widgets</string>
     <string name="consider_turning_polygons_off">Il est recommandé de désactiver le rendu des polygones.</string>
     <string name="upload_anonymously">Envoyer de manière anonyme</string>
-<string name="upload_osm_note_description">Vous pouvez envoyer les Notes OSM anonymement grâce à votre compte OpenStreetMap.org.</string>
+<string name="upload_osm_note_description">Vous pouvez envoyer vos Notes OSM anonymement ou avec votre compte OpenStreetMap.org.</string>
     <string name="upload_osm_note">Envoyer la Note OSM</string>
     <string name="download_files_error_not_enough_space">Espace insuffisant !
 Cette opération requiert temporairement {3} Mo et {1} Mo seront utilisés de manière permanente.
@@ -2474,4 +2474,7 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="upload_poi">Télécharger les PI</string>
     <string name="route_roundabout_short">Prenez la sortie %1$d</string>
     <string name="search_map_hint">Rechercher une ville ou une région</string>
+    <string name="routing_attr_allow_motorway_description">Autoriser les trajets sur autoroutes</string>
+    <string name="routing_attr_allow_motorway_name">Autoriser les autoroutes</string>
+    <string name="wiki_around">Articles Wikipedia à proximité</string>
     </resources>
