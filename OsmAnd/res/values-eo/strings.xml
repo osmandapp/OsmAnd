@@ -45,7 +45,7 @@
     <string name="download_files_question_space">Ĉu vere elŝuti {0} dosiero(j)n?
  Bezonas spacon {1} MB daŭre.
  (Estas {2} MB disponebla spaco.)</string>
-    <string name="upload_osm_note_description">Vi povas alŝuti vian OSM-notojn anonime se vi uzos vian OpenStreetMap.org profilon.</string>
+    <string name="upload_osm_note_description">Vi povas alŝuti vian OSM-notojn anonime aŭ per via OpenStreetMap.org profilo.</string>
     <string name="upload_osm_note">Alŝuti OSM-notaĵon</string>
     <string name="shared_string_toolbar">Ilobreto</string>
     <string name="shared_string_widgets">Fenestraĵoj</string>
@@ -359,8 +359,8 @@
     <string name="shared_string_show_details">Montri detalojn</string>
     <string name="osm_edit_context_menu_delete">Forigi OSM-redaktojn</string>
     <string name="rendering_value_disabled_name">Malaktiva</string>
-    <string name="rendering_value_walkingRoutesScopeOSMC_name">Kolorigi laŭ speco de kurso</string>
-    <string name="rendering_value_walkingRoutesOSMC_name">Kolorigi laŭ OSMC</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">Kolorigi laŭ speco de reto</string>
+    <string name="rendering_value_walkingRoutesOSMC_name">Kolorigi laŭ OSMC piedirada simbolo</string>
     <string name="osmo_share_my_location">Transsendi mian pozicion</string>
     <string name="shared_string_logoff">Elsaluti</string>
     <string name="rendering_attr_hideHouseNumbers_name">Numeroj de domoj</string>
@@ -2528,4 +2528,9 @@ kaj pli...
     <string name="route_roundabout_short">Elveturu al %1$d-a elveturejo</string>
     <string name="search_map_hint">Serĉi por urbo aŭ regiono</string>
     <string name="wiki_around">Pri ĉirkaŭaĵo en Vikipedio</string>
+    <string name="legacy_search">Malnova serĉilo</string>
+    <string name="show_legacy_search">Montri malnovan serĉilon</string>
+    <string name="show_legacy_search_desc">Aktivigas malnovan serĉilon en la tirmenuo</string>
+    <string name="routing_attr_allow_motorway_name">Permesi aŭtovojojn</string>
+    <string name="routing_attr_allow_motorway_description">Permesas aŭtovojojn</string>
     </resources>
