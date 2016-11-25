@@ -359,7 +359,7 @@
     <string name="shared_string_show_details">Montri detalojn</string>
     <string name="osm_edit_context_menu_delete">Forigi OSM-redaktojn</string>
     <string name="rendering_value_disabled_name">Malaktiva</string>
-    <string name="rendering_value_walkingRoutesScopeOSMC_name">Kolorigi laŭ speco de reto</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">Kolorigi laŭ speco de kursoreto</string>
     <string name="rendering_value_walkingRoutesOSMC_name">Kolorigi laŭ OSMC piedirada simbolo</string>
     <string name="osmo_share_my_location">Transsendi mian pozicion</string>
     <string name="shared_string_logoff">Elsaluti</string>
