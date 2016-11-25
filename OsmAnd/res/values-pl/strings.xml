@@ -2361,7 +2361,7 @@ Włączenie tego widoku zmienia styl mapy na „Zima i narty”, ukazujący tere
     <string name="download_files_question_space_with_temp">Czy pobrać {0} plik(-i/-ów)?
  Wymagane miejsce {3} MB tymczasowo i {1} MB na stałe.
  (Dostępne miejsce {2} MB.)</string>
-    <string name="upload_osm_note_description">Można przesłać uwagi OSM anonimowo za pośrednictwem profilu na OpenStreetMap.org.</string>
+    <string name="upload_osm_note_description">Można przesłać uwagi OSM anonimowo lub używając swojego profilu na OpenStreetMap.org.</string>
     <string name="upload_osm_note">Wysyłanie uwagi OSM</string>
     <string name="upload_anonymously">Wysłanie anonimowo</string>
 
@@ -2700,4 +2700,9 @@ i więcej...
     <string name="route_roundabout_short">Zjedź %1$d zjazdem</string>
     <string name="search_map_hint">Szukaj miasta lub regionu</string>
     <string name="wiki_around">O pobliskich miejscach w Wikipedii</string>
+    <string name="legacy_search">Stara wyszukiwarka</string>
+    <string name="show_legacy_search">Pokaż starą wyszukiwarkę</string>
+    <string name="show_legacy_search_desc">Aktywuje starą wyszukiwarkę w menu rozwijanym</string>
+    <string name="routing_attr_allow_motorway_name">Zezwól na autostrady</string>
+    <string name="routing_attr_allow_motorway_description">Zezwala na autostrady</string>
     </resources>
