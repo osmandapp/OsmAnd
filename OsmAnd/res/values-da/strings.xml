@@ -2024,7 +2024,7 @@ Lon %2$s</string>
     <string name="osmo_share_my_location">Overfør placering</string>
     <string name="shared_string_logoff">Log af</string>
     <string name="rendering_value_disabled_name">Deaktiveret</string>
-    <string name="rendering_value_walkingRoutesScopeOSMC_name">Farvelægning ifølge netværk tilhørsforhold</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">Farvelægning ifølge netværkstilhørsforhold</string>
     <string name="rendering_value_walkingRoutesOSMC_name">Farvelægning ifølge OSMC vandresymbol</string>
     <string name="osm_edit_context_menu_delete">Slet OSM redigering</string>
     <string name="read_full_article">Læs hele artiklen (online)</string>
@@ -2733,5 +2733,5 @@ Hvis du  ønsker at støtte OsmAnd og OSM, er dette en god måde at gøre det p�
     <string name="routing_attr_allow_motorway_description">Tillad motorveje</string>
     <string name="legacy_search">Legacy søgning</string>
     <string name="show_legacy_search">Vis legacy søgning</string>
-    <string name="show_legacy_search_desc">Aktivere legacy søgning i listen skuffe</string>
+    <string name="show_legacy_search_desc">Aktiver legacy søgning i rullemenuen</string>
     </resources>
