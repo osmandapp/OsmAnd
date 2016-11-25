@@ -1,12 +1,11 @@
 package net.osmand.plus.notifications;
 
 import android.app.Notification;
-import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.NotificationCompat.Builder;
+import android.support.v4.app.NotificationManagerCompat;
 import android.support.v7.app.NotificationCompat;
 
 import net.osmand.plus.OsmandApplication;
@@ -20,11 +19,18 @@ public abstract class OsmandNotification {
 	public final static int GPS_WAKE_UP_NOTIFICATION_SERVICE_ID = 8;
 	public final static int TOP_NOTIFICATION_SERVICE_ID = 100;
 
+	public final static int WEAR_NAVIGATION_NOTIFICATION_SERVICE_ID = 1005;
+	public final static int WEAR_GPX_NOTIFICATION_SERVICE_ID = 1006;
+	public final static int WEAR_OSMO_NOTIFICATION_SERVICE_ID = 1007;
+	public final static int WEAR_GPS_WAKE_UP_NOTIFICATION_SERVICE_ID = 1008;
+
 	protected OsmandApplication app;
 	protected boolean ongoing = true;
 	protected int color;
 	protected int icon;
 	protected boolean top;
+
+	private String groupName;
 
 	public enum NotificationType {
 		NAVIGATION,
@@ -33,12 +39,17 @@ public abstract class OsmandNotification {
 		GPS
 	}
 
-	public OsmandNotification(OsmandApplication app) {
+	public OsmandNotification(OsmandApplication app, String groupName) {
 		this.app = app;
+		this.groupName = groupName;
 		init();
 	}
 
 	public void init() {
+	}
+
+	public String getGroupName() {
+		return groupName;
 	}
 
 	public abstract NotificationType getType();
@@ -51,17 +62,20 @@ public abstract class OsmandNotification {
 		this.top = top;
 	}
 
-	protected Builder createBuilder() {
+	protected Builder createBuilder(boolean wearable) {
 		Intent contentIntent = new Intent(app, MapActivity.class);
 		PendingIntent contentPendingIntent = PendingIntent.getActivity(app, 0, contentIntent,
 				PendingIntent.FLAG_UPDATE_CURRENT);
 
 		Builder builder = new Builder(app)
-				.setVisibility(android.support.v7.app.NotificationCompat.VISIBILITY_PUBLIC)
+				.setVisibility(android.support.v4.app.NotificationCompat.VISIBILITY_PUBLIC)
 				.setPriority(top ? NotificationCompat.PRIORITY_HIGH : getPriority())
-				.setOngoing(ongoing)
+				.setOngoing(ongoing && !wearable)
 				.setContentIntent(contentPendingIntent)
 				.setDeleteIntent(NotificationDismissReceiver.createIntent(app, getType()));
+		if (top) {
+			builder.setGroup(groupName).setGroupSummary(!wearable);
+		}
 
 		if (color != 0) {
 			builder.setColor(color);
@@ -73,9 +87,11 @@ public abstract class OsmandNotification {
 		return builder;
 	}
 
-	public abstract Builder buildNotification();
+	public abstract Builder buildNotification(boolean wearable);
 
-	public abstract int getUniqueId();
+	public abstract int getOsmandNotificationId();
+
+	public abstract int getOsmandWearableNotificationId();
 
 	public abstract int getPriority();
 
@@ -90,13 +106,20 @@ public abstract class OsmandNotification {
 	}
 
 	public boolean showNotification() {
-		NotificationManager notificationManager = (NotificationManager) app.getSystemService(Context.NOTIFICATION_SERVICE);
+		NotificationManagerCompat notificationManager = NotificationManagerCompat.from(app);
 		if (isEnabled()) {
-			Builder newNotification = buildNotification();
-			if (newNotification != null) {
-				Notification notification = newNotification.build();
+			Builder notificationBuilder = buildNotification(false);
+			if (notificationBuilder != null) {
+				Notification notification = notificationBuilder.build();
 				setupNotification(notification);
-				notificationManager.notify(top ? TOP_NOTIFICATION_SERVICE_ID : getUniqueId(), notification);
+				notificationManager.notify(top ? TOP_NOTIFICATION_SERVICE_ID : getOsmandNotificationId(), notification);
+				if (top) {
+					Builder wearNotificationBuilder = buildNotification(true);
+					if (wearNotificationBuilder != null) {
+						Notification wearNotification = wearNotificationBuilder.build();
+						notificationManager.notify(getOsmandWearableNotificationId(), wearNotification);
+					}
+				}
 				return true;
 			}
 		}
@@ -104,31 +127,39 @@ public abstract class OsmandNotification {
 	}
 
 	public boolean refreshNotification() {
-		NotificationManager notificationManager = (NotificationManager) app.getSystemService(Context.NOTIFICATION_SERVICE);
+		NotificationManagerCompat notificationManager = NotificationManagerCompat.from(app);
 		if (isEnabled()) {
-			Builder newNotification = buildNotification();
-			if (newNotification != null) {
-				Notification notification = newNotification.build();
+			Builder notificationBuilder = buildNotification(false);
+			if (notificationBuilder != null) {
+				Notification notification = notificationBuilder.build();
 				setupNotification(notification);
 				if (top) {
-					notificationManager.cancel(getUniqueId());
+					notificationManager.cancel(getOsmandNotificationId());
 					notificationManager.notify(TOP_NOTIFICATION_SERVICE_ID, notification);
+
+					Builder wearNotificationBuilder = buildNotification(true);
+					if (wearNotificationBuilder != null) {
+						Notification wearNotification = wearNotificationBuilder.build();
+						notificationManager.notify(getOsmandWearableNotificationId(), wearNotification);
+					}
+
 				} else {
-					notificationManager.notify(getUniqueId(), notification);
+					notificationManager.notify(getOsmandNotificationId(), notification);
 				}
 				return true;
 			} else {
-				notificationManager.cancel(getUniqueId());
+				notificationManager.cancel(getOsmandNotificationId());
 			}
 		} else {
-			notificationManager.cancel(getUniqueId());
+			notificationManager.cancel(getOsmandNotificationId());
 		}
 		return false;
 	}
 
 	public void removeNotification() {
-		NotificationManager notificationManager = (NotificationManager) app.getSystemService(Context.NOTIFICATION_SERVICE);
-		notificationManager.cancel(getUniqueId());
+		NotificationManagerCompat notificationManager = NotificationManagerCompat.from(app);
+		notificationManager.cancel(getOsmandNotificationId());
+		notificationManager.cancel(getOsmandWearableNotificationId());
 	}
 
 	public void closeSystemDialogs(Context context) {

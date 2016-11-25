@@ -44,13 +44,14 @@ public class NavigationNotification extends OsmandNotification {
 	public final static String OSMAND_PAUSE_NAVIGATION_SERVICE_ACTION = "OSMAND_PAUSE_NAVIGATION_SERVICE_ACTION";
 	public final static String OSMAND_RESUME_NAVIGATION_SERVICE_ACTION = "OSMAND_RESUME_NAVIGATION_SERVICE_ACTION";
 	public final static String OSMAND_STOP_NAVIGATION_SERVICE_ACTION = "OSMAND_STOP_NAVIGATION_SERVICE_ACTION";
+	public final static String GROUP_NAME = "NAVIGATION";
 
 	private Map<TurnPathHelper.TurnResource, Bitmap> bitmapCache = new HashMap<>();
 	private Bitmap turnBitmap;
 	private boolean leftSide;
 
 	public NavigationNotification(OsmandApplication app) {
-		super(app);
+		super(app, GROUP_NAME);
 	}
 
 	@Override
@@ -108,7 +109,7 @@ public class NavigationNotification extends OsmandNotification {
 	}
 
 	@Override
-	public Builder buildNotification() {
+	public Builder buildNotification(boolean wearable) {
 		NavigationService service = app.getNavigationService();
 		String notificationTitle;
 		StringBuilder notificationText = new StringBuilder();
@@ -200,7 +201,7 @@ public class NavigationNotification extends OsmandNotification {
 			return null;
 		}
 
-		final Builder notificationBuilder = createBuilder()
+		final Builder notificationBuilder = createBuilder(wearable)
 				.setContentTitle(notificationTitle)
 				.setStyle(new BigTextStyle().bigText(notificationText))
 				.setLargeIcon(turnBitmap);
@@ -260,7 +261,12 @@ public class NavigationNotification extends OsmandNotification {
 	}
 
 	@Override
-	public int getUniqueId() {
+	public int getOsmandNotificationId() {
 		return NAVIGATION_NOTIFICATION_SERVICE_ID;
+	}
+
+	@Override
+	public int getOsmandWearableNotificationId() {
+		return WEAR_NAVIGATION_NOTIFICATION_SERVICE_ID;
 	}
 }

@@ -44,7 +44,7 @@ public class NotificationHelper {
 		if (notification != null) {
 			removeNotification(notification.getType());
 			setTopNotification(notification);
-			Builder notificationBuilder = notification.buildNotification();
+			Builder notificationBuilder = notification.buildNotification(false);
 			return notificationBuilder.build();
 		}
 		return null;
