@@ -2507,4 +2507,5 @@ Ak potrebuje pomoc s aplikáciou OsmAnd, kontaktuje podporu: support@osmand.net.
     <string name="show_legacy_search_desc">Zapnúť staršie vyhľadávanie v úvodnom paneli</string>
     <string name="routing_attr_allow_motorway_name">Povoliť diaľnice</string>
     <string name="routing_attr_allow_motorway_description">Povoliť použiť diaľnice</string>
+    <string name="lang_sr_latn">Srbsky (Latinka)</string>
     </resources>
