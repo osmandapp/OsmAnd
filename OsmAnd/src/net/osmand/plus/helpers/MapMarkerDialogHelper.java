@@ -371,7 +371,7 @@ public class MapMarkerDialogHelper {
 							}
 						});
 
-						if (!sorted) {
+						if (!sorted && markersHelper.getActiveMapMarkers().size() > 1) {
 							item = optionsMenu.getMenu().add(R.string.shared_string_reverse_order).setIcon(
 									iconsCache.getThemedIcon(R.drawable.ic_action_undo_dark));
 							item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
