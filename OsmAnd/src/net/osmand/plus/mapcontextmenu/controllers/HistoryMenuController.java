@@ -2,6 +2,7 @@ package net.osmand.plus.mapcontextmenu.controllers;
 
 import android.graphics.drawable.Drawable;
 
+import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -19,6 +20,7 @@ public class HistoryMenuController extends MenuController {
 	public HistoryMenuController(MapActivity mapActivity, PointDescription pointDescription, final HistoryEntry entry) {
 		super(new MenuBuilder(mapActivity), pointDescription, mapActivity);
 		this.entry = entry;
+		builder.setShowNearestWiki(true);
 		initData();
 	}
 
@@ -37,11 +39,6 @@ public class HistoryMenuController extends MenuController {
 	@Override
 	protected Object getObject() {
 		return entry;
-	}
-
-	@Override
-	protected int getSupportedMenuStatesPortrait() {
-		return MenuState.HEADER_ONLY | MenuState.HALF_SCREEN;
 	}
 
 	@Override

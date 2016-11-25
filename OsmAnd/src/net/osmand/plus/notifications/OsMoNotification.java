@@ -22,9 +22,10 @@ public class OsMoNotification extends OsmandNotification {
 	public final static String OSMAND_STOP_OSMO_SERVICE_ACTION = "OSMAND_STOP_OSMO_SERVICE_ACTION";
 	public final static String OSMAND_START_SHARE_LOCATION_ACTION = "OSMAND_START_SHARE_LOCATION_ACTION";
 	public final static String OSMAND_STOP_SHARE_LOCATION_ACTION = "OSMAND_STOP_SHARE_LOCATION_ACTION";
+	public final static String GROUP_NAME = "OSMO";
 
 	public OsMoNotification(OsmandApplication app) {
-		super(app);
+		super(app, GROUP_NAME);
 	}
 
 	@Override
@@ -115,7 +116,7 @@ public class OsMoNotification extends OsmandNotification {
 	}
 
 	@Override
-	public Builder buildNotification() {
+	public Builder buildNotification(boolean wearable) {
 		OsMoPlugin osMoPlugin = OsmandPlugin.getEnabledPlugin(OsMoPlugin.class);
 		if (osMoPlugin == null) {
 			return null;
@@ -130,7 +131,7 @@ public class OsMoNotification extends OsmandNotification {
 		notificationTitle = app.getString(R.string.osmo_service_running);
 		notificationText = app.getString(R.string.osmo_share_my_location) + ": " + (shareLocation ? app.getString(R.string.shared_string_yes) : app.getString(R.string.shared_string_no)).toLowerCase();
 
-		final Builder notificationBuilder = createBuilder()
+		final Builder notificationBuilder = createBuilder(wearable)
 				.setContentTitle(notificationTitle)
 				.setContentText(notificationText);
 
@@ -169,7 +170,12 @@ public class OsMoNotification extends OsmandNotification {
 
 
 	@Override
-	public int getUniqueId() {
+	public int getOsmandNotificationId() {
 		return OSMO_NOTIFICATION_SERVICE_ID;
+	}
+
+	@Override
+	public int getOsmandWearableNotificationId() {
+		return WEAR_OSMO_NOTIFICATION_SERVICE_ID;
 	}
 }

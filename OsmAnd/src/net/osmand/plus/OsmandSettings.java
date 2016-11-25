@@ -1119,7 +1119,9 @@ public class OsmandSettings {
 	public final OsmandPreference<String> OSMO_GROUPS = new StringPreference("osmo_groups", "{}").makeGlobal();
 
 	public final OsmandPreference<Boolean> NO_DISCOUNT_INFO = new BooleanPreference("no_discount_info", false).makeGlobal();
-	
+
+	public final OsmandPreference<Boolean> SHOW_LEGACY_SEARCH = new BooleanPreference("show_legacy_search", false).makeGlobal();
+
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Boolean> DEBUG_RENDERING_INFO = new BooleanPreference("debug_rendering", false).makeGlobal();
 

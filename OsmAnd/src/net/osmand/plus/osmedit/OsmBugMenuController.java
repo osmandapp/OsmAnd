@@ -73,11 +73,6 @@ public class OsmBugMenuController extends MenuController {
 	}
 
 	@Override
-	protected int getSupportedMenuStatesPortrait() {
-		return MenuState.HEADER_ONLY | MenuState.HALF_SCREEN | MenuState.FULL_SCREEN;
-	}
-
-	@Override
 	public Drawable getLeftIcon() {
 		if (bug.isOpened()) {
 			return getIcon(R.drawable.ic_action_gabout_dark, R.color.osm_bug_unresolved_icon_color);

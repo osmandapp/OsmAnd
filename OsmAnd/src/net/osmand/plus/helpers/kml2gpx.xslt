@@ -27,9 +27,7 @@
 			 		</name>
 			 	</author>
 			 </metadata>
-			 <xsl:for-each select="//kml:Folder">
-			 	<xsl:variable name="foldername" select="kml:name"/>
-			 	<xsl:for-each select="kml:Placemark">
+			 	<xsl:for-each select="//kml:Placemark">
 			 		<xsl:variable name="lonlat" select="kml:Point/kml:coordinates"/>
 					<xsl:variable name="lon" select="substring-before($lonlat,',')"/>
 					<xsl:variable name="latele" select="substring-after($lonlat,',')"/>
@@ -43,6 +41,8 @@
 							</xsl:otherwise>
 						</xsl:choose>
 					</xsl:variable>
+					<xsl:variable name="foldername" select="../kml:name"/>
+			 	
 			 		<xsl:if test="$lon">
 			 			<wpt lon="{$lon}" lat="{$lat}">
 			 				<xsl:choose>
@@ -64,7 +64,6 @@
 			 			</wpt>
 			 		</xsl:if>
 			 	</xsl:for-each>
-			 </xsl:for-each>
 			 <xsl:for-each select="//gx:Track">
 				 <trk>
 					 <trkseg>

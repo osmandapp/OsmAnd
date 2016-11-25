@@ -10,7 +10,12 @@
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
 
-    <string name="upload_osm_note_description">You can upload your OSM Note anonymously if you use your OpenStreetMap.org profile.</string>
+    <string name="legacy_search">Legacy search</string>
+    <string name="show_legacy_search">Show legacy search</string>
+    <string name="show_legacy_search_desc">Enable legacy search in the drawer list</string>
+    <string name="routing_attr_allow_motorway_name">Allow motorways</string>
+    <string name="routing_attr_allow_motorway_description">Allow motorways</string>
+    <string name="upload_osm_note_description">You can upload your OSM Note anonymously or using your OpenStreetMap.org profile.</string>
     <string name="wiki_around">Nearby Wikipedia articles</string>
     <string name="search_map_hint">Search city or region</string>
     <string name="route_roundabout_short">Take %1$d exit and go</string>
@@ -512,8 +517,8 @@
     <string name="shared_string_show_details">Show details</string>
     <string name="osm_edit_context_menu_delete">Delete OSM edit</string>
     <string name="rendering_value_disabled_name">Disabled</string>
-    <string name="rendering_value_walkingRoutesScopeOSMC_name">Coloring according to route scope</string>
-    <string name="rendering_value_walkingRoutesOSMC_name">Coloring according to OSMC</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">Color by network affiliation</string>
+    <string name="rendering_value_walkingRoutesOSMC_name">Color by OSMC hiking symbol</string>
     <string name="shared_string_logoff">Log Off</string>
     <string name="rendering_attr_hideHouseNumbers_name">House numbers</string>
     <string name="application_dir_change_warning3">Do you want OsmAnd to also copy its data files to the new destination?</string>

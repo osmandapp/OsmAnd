@@ -312,6 +312,9 @@ public abstract class MenuController extends BaseMenuController {
 
 	public void setLatLon(@NonNull LatLon latLon) {
 		this.latLon = latLon;
+		if (builder != null) {
+			builder.setLatLon(latLon);
+		}
 	}
 
 	/*
@@ -348,6 +351,8 @@ public abstract class MenuController extends BaseMenuController {
 		if (o instanceof Amenity) {
 			return new PointDescription(PointDescription.POINT_TYPE_POI, ((Amenity) o).getName(
 					SampleApplication.LANGUAGE, SampleApplication.TRANSLITERATE));
+		} else if (o instanceof PointDescription) {
+			return (PointDescription) o;
 		}
 		return null;
 	}

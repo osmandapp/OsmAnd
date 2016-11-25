@@ -19,9 +19,10 @@ import static net.osmand.plus.NavigationService.USED_BY_WAKE_UP;
 public class GpsWakeUpNotification extends OsmandNotification {
 
 	public final static String OSMAND_STOP_GPS_WAKE_UP_SERVICE_ACTION = "OSMAND_STOP_GPS_WAKE_UP_SERVICE_ACTION";
+	public final static String GROUP_NAME = "GPS_WAKE_UP";
 
 	public GpsWakeUpNotification(OsmandApplication app) {
-		super(app);
+		super(app, GROUP_NAME);
 	}
 
 	@Override
@@ -58,7 +59,7 @@ public class GpsWakeUpNotification extends OsmandNotification {
 	}
 
 	@Override
-	public Builder buildNotification() {
+	public Builder buildNotification(boolean wearable) {
 		NavigationService service = app.getNavigationService();
 		String notificationTitle;
 		String notificationText;
@@ -80,7 +81,7 @@ public class GpsWakeUpNotification extends OsmandNotification {
 			return null;
 		}
 
-		final Builder notificationBuilder = createBuilder()
+		final Builder notificationBuilder = createBuilder(wearable)
 				.setContentTitle(notificationTitle)
 				.setStyle(new BigTextStyle().bigText(notificationText));
 
@@ -94,7 +95,12 @@ public class GpsWakeUpNotification extends OsmandNotification {
 	}
 
 	@Override
-	public int getUniqueId() {
+	public int getOsmandNotificationId() {
 		return GPS_WAKE_UP_NOTIFICATION_SERVICE_ID;
+	}
+
+	@Override
+	public int getOsmandWearableNotificationId() {
+		return WEAR_GPS_WAKE_UP_NOTIFICATION_SERVICE_ID;
 	}
 }

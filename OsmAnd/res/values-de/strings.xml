@@ -2057,8 +2057,8 @@ Lon %2$s</string>
     <string name="lang_ceb">Cebuano</string>
     <string name="local_recordings_delete_all_confirm">%1$d Notizen werden gelöscht. Fortfahren?</string>
 	<string name="lang_te">Telugu</string>
-    <string name="rendering_value_walkingRoutesScopeOSMC_name">Einfärbung gemäß Routenbereich</string>
-    <string name="rendering_value_walkingRoutesOSMC_name">Routenfarbe gemäß OSMC</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">Einfärbung gemäß Routennetzwerk</string>
+    <string name="rendering_value_walkingRoutesOSMC_name">Einfärbung gemäß OSMC Wandersymbol</string>
     <string name="do_you_like_osmand">Gefällt Ihnen OsmAnd?</string>
 	<string name="rate_this_app">Bewerte diese App</string>
 	<string name="rate_this_app_long">Bitte gib OsmAnd eine Bewertung auf Google Play</string>
@@ -2536,10 +2536,10 @@ Wenn Sie OsmAnd und OSM lieben und unterstützen wollen, so ist dies die perfekt
     <string name="edit_filter">Kategorien bearbeiten</string>
     <string name="subcategories">Unterkategorien</string>
     <string name="translit_names">Namen umschreiben</string>
-    <string name="translit_name_if_miss">Umschreiben, wenn Namen in %1$s fehlen</string>
+    <string name="translit_name_if_miss">Transliteration, wenn Namen in %1$s fehlen</string>
     <string name="rendering_value_light_brown_name">Hellbraun</string>
     <string name="rendering_value_dark_brown_name">Dunkelbraun</string>
-    <string name="rendering_attr_contourColorScheme_name">Farbschema der Konturen</string>
+    <string name="rendering_attr_contourColorScheme_name">Farbschema für Höhenlinien</string>
     <string name="rendering_attr_surfaceIntegrity_name">Straßenoberflächenbeschaffenheit</string>
     <string name="search_hint">Stadt, Adresse, POI Name eingeben</string>
     <string name="christmas_poi">Weihnachts POI</string>

@@ -13,6 +13,7 @@ public class MyLocationMenuController  extends MenuController {
 
 	public MyLocationMenuController(MapActivity mapActivity, PointDescription pointDescription) {
 		super(new MenuBuilder(mapActivity), pointDescription, mapActivity);
+		builder.setShowNearestWiki(true);
 	}
 
 	@Override
@@ -22,11 +23,6 @@ public class MyLocationMenuController  extends MenuController {
 	@Override
 	protected Object getObject() {
 		return getLatLon();
-	}
-
-	@Override
-	protected int getSupportedMenuStatesPortrait() {
-		return MenuState.HEADER_ONLY | MenuState.HALF_SCREEN;
 	}
 
 	@Override

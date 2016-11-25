@@ -60,6 +60,10 @@ public class MultiTouchSupport {
 		return inTiltMode;
 	}
 
+	public boolean isInMultiTouch() {
+		return multiTouch;
+	}
+
 	private void initMethods() {
 		try {
 			getPointerCount = MotionEvent.class.getMethod("getPointerCount"); //$NON-NLS-1$

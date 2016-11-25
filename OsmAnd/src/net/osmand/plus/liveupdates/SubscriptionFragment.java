@@ -359,6 +359,7 @@ public class SubscriptionFragment extends BaseOsmAndDialogFragment implements In
 
 	@Override
 	public void onItemPurchased(String sku) {
+		getMyApplication().logEvent(getActivity(), "live_osm_subscription_purchased");
 		dismiss();
 	}
 

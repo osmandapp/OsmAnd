@@ -10,6 +10,7 @@ import android.os.Build;
 import android.os.Environment;
 import android.os.Handler;
 import android.support.v4.content.ContextCompat;
+import android.widget.Toast;
 
 import net.osmand.core.android.CoreResourcesFromAndroidAssets;
 import net.osmand.core.android.NativeCore;
@@ -17,6 +18,7 @@ import net.osmand.core.jni.LogSeverityLevel;
 import net.osmand.core.jni.Logger;
 import net.osmand.core.samples.android.sample1.SampleFormatter.MetricsConstants;
 import net.osmand.core.samples.android.sample1.SampleFormatter.SpeedConstants;
+import net.osmand.core.samples.android.sample1.resources.ResourceManager;
 import net.osmand.core.samples.android.sample1.search.QuickSearchHelper;
 import net.osmand.map.OsmandRegions;
 import net.osmand.map.WorldRegion;
@@ -32,7 +34,9 @@ import java.util.Locale;
 import static net.osmand.core.samples.android.sample1.data.PointDescription.FORMAT_DEGREES;
 
 public class SampleApplication extends Application {
-	public static final int PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 5 ;
+	public static final int PERMISSION_REQUEST_WRITE_EXTERNAL_STORAGE = 5 ;
+	public static final int PERMISSION_REQUEST_LOCATION_ON_RESUME = 6 ;
+	public static final int PERMISSION_REQUEST_LOCATION_ON_BUTTON = 7 ;
 	private CoreResourcesFromAndroidAssets assetsCustom;
 	private MapPoiTypes poiTypes;
 	private IconsCache iconsCache;
@@ -48,6 +52,7 @@ public class SampleApplication extends Application {
 	private QuickSearchHelper searchUICore;
 	private GeocodingLookupService geocodingLookupService;
 	private OsmandRegions regions;
+	private ResourceManager resourceManager;
 
 	public static String LANGUAGE;
 	public static boolean TRANSLITERATE = false;
@@ -67,6 +72,7 @@ public class SampleApplication extends Application {
 		locationProvider = new SampleLocationProvider(this);
 		searchUICore = new QuickSearchHelper(this);
 		geocodingLookupService = new GeocodingLookupService(this);
+		resourceManager = new ResourceManager(this);
 		regions = new OsmandRegions();
 		updateRegionVars();
 		indexRegionsBoundaries();
@@ -134,6 +140,10 @@ public class SampleApplication extends Application {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	public ResourceManager getResourceManager() {
+		return resourceManager;
 	}
 
 	public OsmandRegions getRegions() {
@@ -289,5 +299,41 @@ public class SampleApplication extends Application {
 			}
 		}
 		return getFilesDir();
+	}
+
+	public void showShortToastMessage(final int msgId, final Object... args) {
+		uiHandler.post(new Runnable() {
+			@Override
+			public void run() {
+				Toast.makeText(SampleApplication.this, getString(msgId, args), Toast.LENGTH_SHORT).show();
+			}
+		});
+	}
+
+	public void showShortToastMessage(final String msg) {
+		uiHandler.post(new Runnable() {
+			@Override
+			public void run() {
+				Toast.makeText(SampleApplication.this, msg, Toast.LENGTH_SHORT).show();
+			}
+		});
+	}
+
+	public void showToastMessage(final int msgId, final Object... args) {
+		uiHandler.post(new Runnable() {
+			@Override
+			public void run() {
+				Toast.makeText(SampleApplication.this, getString(msgId, args), Toast.LENGTH_LONG).show();
+			}
+		});
+	}
+
+	public void showToastMessage(final String msg) {
+		uiHandler.post(new Runnable() {
+			@Override
+			public void run() {
+				Toast.makeText(SampleApplication.this, msg, Toast.LENGTH_LONG).show();
+			}
+		});
 	}
 }

@@ -501,6 +501,9 @@ public abstract class MenuController extends BaseMenuController {
 
 	public void setLatLon(@NonNull LatLon latLon) {
 		this.latLon = latLon;
+		if (builder != null) {
+			builder.setLatLon(latLon);
+		}
 	}
 
 	public void buildMapDownloadButton(LatLon latLon) {
@@ -537,6 +540,7 @@ public abstract class MenuController extends BaseMenuController {
 			}
 			String selectedFullName = "";
 			double smallestArea = -1;
+			downloadMapDataObject = null;
 			for (BinaryMapDataObject o : mapDataObjects) {
 				String downloadName = osmandRegions.getDownloadName(o);
 				if (!Algorithms.isEmpty(downloadName)) {
@@ -546,15 +550,18 @@ public abstract class MenuController extends BaseMenuController {
 						break;
 					} else {
 						String fullName = osmandRegions.getFullName(o);
-						double area = OsmandRegions.getArea(o);
-						if (smallestArea == -1) {
-							smallestArea = area;
-							selectedFullName = fullName;
-							downloadMapDataObject = o;
-						} else if (area < smallestArea) {
-							smallestArea = area;
-							selectedFullName = fullName;
-							downloadMapDataObject = o;
+						WorldRegion region = osmandRegions.getRegionData(fullName);
+						if (region != null && region.isRegionMapDownload()) {
+							double area = OsmandRegions.getArea(o);
+							if (smallestArea == -1) {
+								smallestArea = area;
+								selectedFullName = fullName;
+								downloadMapDataObject = o;
+							} else if (area < smallestArea) {
+								smallestArea = area;
+								selectedFullName = fullName;
+								downloadMapDataObject = o;
+							}
 						}
 					}
 				}

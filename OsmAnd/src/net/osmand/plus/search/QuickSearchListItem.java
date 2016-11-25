@@ -89,7 +89,7 @@ public class QuickSearchListItem {
 				PointDescription pd = historyEntry.getName();
 				return pd.getSimpleName(app, false);
 			case LOCATION:
-				LatLon latLon = (LatLon) searchResult.object;
+				LatLon latLon = searchResult.location;
 				return PointDescription.getLocationNamePlain(app, latLon.getLatitude(), latLon.getLongitude());
 		}
 		return searchResult.localeName;
@@ -321,7 +321,7 @@ public class QuickSearchListItem {
 						iconId = R.drawable.mx_user_defined;
 					}
 				}
-				if (iconId != -1) {
+				if (iconId > 0) {
 					return app.getIconsCache().getIcon(iconId,
 							app.getSettings().isLightContent() ? R.color.osmand_orange : R.color.osmand_orange_dark);
 				} else {
@@ -332,8 +332,12 @@ public class QuickSearchListItem {
 				String id = getAmenityIconName(amenity);
 				if (id != null) {
 					iconId = RenderingIcons.getBigIconResourceId(id);
-					return app.getIconsCache().getIcon(iconId,
-							app.getSettings().isLightContent() ? R.color.osmand_orange : R.color.osmand_orange_dark);
+					if (iconId > 0) {
+						return app.getIconsCache().getIcon(iconId,
+								app.getSettings().isLightContent() ? R.color.osmand_orange : R.color.osmand_orange_dark);
+					} else {
+						return null;
+					}
 				} else {
 					return null;
 				}
@@ -356,7 +360,7 @@ public class QuickSearchListItem {
 						iconId = app.getResources().getIdentifier(iconName, "drawable", app.getPackageName());
 					}
 				}
-				if (iconId == -1) {
+				if (iconId <= 0) {
 					return app.getIconsCache().getIcon(SearchHistoryFragment.getItemIcon(entry.getName()),
 							app.getSettings().isLightContent() ? R.color.osmand_orange : R.color.osmand_orange_dark);
 				} else {
