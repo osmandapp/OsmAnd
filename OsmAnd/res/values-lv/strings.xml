@@ -152,7 +152,7 @@
   <string name="download_files_not_enough_space">Nepietiek brīvās vietas, lai lejupielādētu %1$s MB (brīvi: %2$s).</string>
   <string name="download_files_question_space">Vai lejupielādēt {0} failu(s)?
  Tam vajag {1} MB patstāvīgās vietas
- Patreiz ir pieejami {2} MB brīvās vietas.</string>
+ (Patreiz ir pieejami {2} MB brīvās vietas)</string>
   
   
   
@@ -1031,7 +1031,7 @@ OsmAnd ir atvērtā koda navigācijas aplikācija ar piekļuvi vispusīgiem Open
 	<string name="driving_region_us">ASV</string>
 	<string name="driving_region_canada">Kanāda</string>
 	<string name="driving_region_europe_asia">Eiropa un Āzija</string>
-	<string name="driving_region_uk">Apvienotā Karaliste, Indija, Austrālija un citas</string>
+	<string name="driving_region_uk">Apvienotā Karaliste, Indija un citas</string>
 	    
     
     
@@ -1778,7 +1778,10 @@ Vai gribat veikt jaunu reģistrāciju?</string>
 - izveidot grupas
 - sinhronizēt grupas un ierīces ar serveri
 - pārvaldīt grupas un ierīces no sava lietotāja paneļa interneta lapā.</string>
-    <string name="osmo_no_connection_msg">Nevar pievienoties OsMo:\n- pārbaudiet interneta savienojumu\n- pārbaudiet uzstādījumus\n- atveriet mūsu tvīteri: https://twitter.com/OsMomobi</string>
+    <string name="osmo_no_connection_msg">Nevar pievienoties OsMo serverim:
+- pārbaudiet interneta savienojumu
+- pārbaudiet uzstādījumus
+- atveriet mūsu tvīteri: https://twitter.com/OsMomobi</string>
     <string name="logged_as">Pievienojies kā %1$s</string>
 	<string name="speed_limit_exceed">Braukšanas ātruma pieļaujamās robežas</string>
 	<string name="speed_limit_exceed_message">Pārsniedzot noteikto robežu, saņemsiet balss brīdinājumu.</string>
@@ -2267,9 +2270,10 @@ Vai gribat veikt jaunu reģistrāciju?</string>
     <string name="number_of_recipients">Adresātu skaits</string>
     <string name="osm_live_subscription">OSM Live abonoments</string>
     <string name="osm_live_user_public_name">Publiskais vārds</string>
-    <string name="download_files_question_space_with_temp">Vai lejupielādēt {0} failu(s)?
+    <string name="download_files_question_space_with_temp">Lejupielādēt {0} 
+failu(s)?
  Tam nepieciešams {3} MB pagaidus brīvās vietas un {1} MB patstāvīgās vietas krātuvē.
- Patreiz ir pieejami {2} MB brīvās vietas.</string>
+ (Patreiz ir pieejami {2} MB brīvās vietas)</string>
     <string name="lang_fy">Frisku</string>
     <string name="nm">nm</string>
     <string name="nm_h">nm/h</string>
@@ -2479,7 +2483,7 @@ Aktivizējot spraudni, kartes stils tiek nomainīts uz \"Ziema un slēpes,\" att
     <string name="osm_live_payment_desc">Abonoments tiks apmaksāts automātiski katru mēnesi. Jūs varat atteikties no abonomenta Google Play jebkurā laikā.</string>
     <string name="donation_to_osm">Ziedojums OpenStreetMap kopienai</string>
     <string name="donation_to_osm_desc">Daļa no jūsu ziedojuma tiks OSM lietotājiem, kuri piedalās OpenStreetMaps kartes veidošanā. Abonomenta izmaksas paliek nemainīgas.</string>
-    <string name="osm_live_subscription_desc">Abonoments iespējo ik stundu, dienu vai nedēļu jauninājumus un neierobežotas lejupielādes visām kartēm pasaulē.</string>
+    <string name="osm_live_subscription_desc">Abonoments iespējo ik stundas, dienas vai nedēļas jauninājumus un neierobežotas lejupielādes visām kartēm pasaulē.</string>
     <string name="get_it">Saņemt</string>
     <string name="get_for">Saņemt par %1$s</string>
     <string name="get_for_month">Saņemt par %1$s mēnesī</string>
@@ -2547,4 +2551,55 @@ Un vēl...
     <string name="coords_format">Koordināšu formāts</string>
     <string name="coords_format_descr">Ģeogrāfisko koordināšu formāts</string>
   	<string name="lang_hsb">Sorbu (Augšu)</string>
+    <string name="search_map_hint">Meklēt pilsētu vai reğionu</string>
+    <string name="route_roundabout_short">Brauciet pa %$d izeju</string>
+    <string name="upload_poi">Augšupielādēt POI</string>
+    <string name="route_calculation">Maršruta aprēķināšana</string>
+    <string name="gpx_no_tracks_title">Nav vēl izveidoti treki</string>
+    <string name="gpx_no_tracks_title_folder">Trekus varat pievienot arī mapei</string>
+    <string name="gpx_add_track">Pievienot treku</string>
+    <string name="gpx_appearance">Izskats</string>
+    <string name="osmo_share_location">Dalīties</string>
+    <string name="osmo_pause_location">Pauze</string>
+    <string name="osmo_service_running">Darbojas OsMo serviss</string>
+    <string name="trip_rec_notification_settings">Ceļojuma ieraksts (nav datu)</string>
+    <string name="trip_rec_notification_settings_desc">Rādīt ziņojumu, kas ļauj sākt ierakstu, nospiežot ieraksta pogu</string>
+    <string name="shared_string_notifications">Ziņojumi</string>
+    <string name="shared_string_continue">Turpināt</string>
+    <string name="shared_string_pause">Pauze</string>
+    <string name="shared_string_trip">Brauciens</string>
+    <string name="shared_string_recorded">Ierakstīts</string>
+    <string name="shared_string_record">Ieraksts</string>
+    <string name="gpx_logging_no_data">Nav datu</string>
+    <string name="rendering_attr_contourColorScheme_description">Kontūrlīniju krāsu shēma</string>
+    <string name="save_track_min_speed">Minimālais kustības ātrums ierakstam</string>
+    <string name="save_track_min_speed_descr">Iestatiet minimālo ātrumu punkta ierakstam žurnālā</string>
+    <string name="save_track_min_distance">Kustības noteicēja ieraksts</string>
+    <string name="save_track_min_distance_descr">Iestatiet minmālo attālumu punkta ierakstam žurnālā no pēdējās pozīcijas</string>
+    <string name="save_track_precision">Minimālās precizitātes ieraksts</string>
+    <string name="save_track_precision_descr">Iestatiet minimālo precizitāti, lai punkts tiktu ierakstīts žurnālā</string>
+    <string name="christmas_poi">Ziemassvētku POI</string>
+    <string name="christmas_desc">Ziemassvētku un Jaunā Gada noskaņās varat izvēlēties saistītos POI kā Ziemassvētku eglītes un tirdziņus u.c.</string>
+    <string name="christmas_desc_q">Rādīt Ziemassvētku POI?</string>
+    <string name="rendering_value_light_brown_name">Gaiši brūns</string>
+    <string name="rendering_value_dark_brown_name">Tumši brūns</string>
+    <string name="rendering_attr_contourColorScheme_name">Kontūrlīniju krāsu shēma</string>
+    <string name="rendering_attr_surfaceIntegrity_name">Ceļa seguma kvalitāte</string>
+    <string name="search_hint">Ierakstiet pilsētu, adresi vai POI</string>
+    <string name="translit_name_if_miss">Transliterēt ja %1$s vārds iztrūkst</string>
+    <string name="translit_names">Transliterēt vārdus</string>
+    <string name="edit_filter">Rediğēt kategorijas</string>
+    <string name="subcategories">Apakškategorijas</string>
+    <string name="create_custom_poi">Izveidot personalizētu filtru</string>
+    <string name="custom_search">Personalizētā meklēšana</string>
+    <string name="shared_string_filters">Filtri</string>
+    <string name="apply_filters">Apstiprināt filtrus</string>
+    <string name="save_filter">Saglabāt filtru</string>
+    <string name="delete_filter">Dzēst filtru</string>
+    <string name="new_filter">Jauns filtrs</string>
+    <string name="new_filter_desc">Ievadiet jaunā filtra vārdu,
+kas tiks pievienots jūsu Kategorijas sadaļai.</string>
+    <string name="rendering_value_fine_name">Smalki</string>
+    <string name="lang_kab">Kabuļu</string>
+    <string name="driving_region_australia">Austrālija</string>
     </resources>
