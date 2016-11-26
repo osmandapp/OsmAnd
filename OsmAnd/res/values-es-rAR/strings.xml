@@ -2496,9 +2496,9 @@ Si necesitas ayuda con la aplicación OsmAnd, contacte con nuestro equipo de sop
     <string name="search_map_hint">Buscar ciudad o región</string>
     <string name="wiki_around">Artículos de Wikipedia cercanos</string>
     <string name="legacy_search">Búsqueda vieja</string>
-    <string name="show_legacy_search">Mostrar el modo antigüo de búsqueda</string>
-    <string name="show_legacy_search_desc">Activa el modo antigüo de búsqueda en la lista del panel lateral</string>
+    <string name="show_legacy_search">Mostrar el modo antiguo de búsqueda</string>
+    <string name="show_legacy_search_desc">Activa el modo antiguo de búsqueda en la lista del panel lateral</string>
     <string name="routing_attr_allow_motorway_name">Permitir autopistas</string>
-    <string name="routing_attr_allow_motorway_description">Permitir autopistas</string>
+    <string name="routing_attr_allow_motorway_description">Permite pasar por autopistas</string>
     <string name="lang_sr_latn">Serbio (latín)</string>
     </resources>
