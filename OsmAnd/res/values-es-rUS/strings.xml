@@ -1830,8 +1830,8 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="osmo_share_my_location">Compartir ubicación</string>
     <string name="shared_string_logoff">Cerrar sesión</string>
     <string name="rendering_value_disabled_name">Desactivado</string>
-    <string name="rendering_value_walkingRoutesScopeOSMC_name">Colorear según alcance de ruta</string>
-    <string name="rendering_value_walkingRoutesOSMC_name">Colorear según OSMC</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">Color por red de afiliación</string>
+    <string name="rendering_value_walkingRoutesOSMC_name">Color por símbolo de senderismo OSMC</string>
     <string name="osm_edit_context_menu_delete">Quitar edición OSM</string>
     <string name="read_full_article">Leer artículo completo (en línea)</string>
     <string name="shared_string_wikipedia">Wikipedia</string>
@@ -2275,7 +2275,7 @@ Si amas a OsmAnd, OSM y quieres apoyarlos, esta es una perfecta manera de hacerl
     <string name="map_markers_other">Otros marcadores</string>
     <string name="upload_anonymously">Subir anónimamente</string>
     <string name="show_transparency_seekbar">Mostrar transparencia en barra de búsqueda</string>
-    <string name="upload_osm_note_description">Puedes subir informes de problemas anónimos aunque uses tu perfil de OpenStreetMap.org.</string>
+    <string name="upload_osm_note_description">Puedes subir informes de problemas anónimos o usar tu perfil de OpenStreetMap.org.</string>
     <string name="upload_osm_note">Subir problema(s) del mapa</string>
     <string name="recalculate_route">Recalcular ruta</string>
     <string name="shared_string_topbar">Barra superior</string>
@@ -2494,4 +2494,10 @@ Si amas a OsmAnd, OSM y quieres apoyarlos, esta es una perfecta manera de hacerl
     <string name="route_roundabout_short">Toma la %1$dª salida y continúa</string>
     <string name="search_map_hint">Buscar ciudad o región</string>
     <string name="wiki_around">Artículos de Wikipedia cercanos</string>
+    <string name="legacy_search">Búsqueda vieja</string>
+    <string name="show_legacy_search">Mostrar el modo antiguo de búsqueda</string>
+    <string name="show_legacy_search_desc">Activa el modo antiguo de búsqueda en la lista del panel lateral</string>
+    <string name="routing_attr_allow_motorway_name">Permitir autopistas</string>
+    <string name="routing_attr_allow_motorway_description">Permite pasar por autopistas</string>
+    <string name="lang_sr_latn">Serbio (latín)</string>
     </resources>
