@@ -1831,8 +1831,8 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="osmo_share_my_location">Compartir ubicación</string>
     <string name="shared_string_logoff">Cerrar sesión</string>
     <string name="rendering_value_disabled_name">Desactivado</string>
-    <string name="rendering_value_walkingRoutesScopeOSMC_name">Colorear según alcance de ruta</string>
-    <string name="rendering_value_walkingRoutesOSMC_name">Colorear según OSMC</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">Color por red de afiliación</string>
+    <string name="rendering_value_walkingRoutesOSMC_name">Color por símbolo de senderismo OSMC</string>
     <string name="osm_edit_context_menu_delete">Quitar edición OSM</string>
     <string name="read_full_article">Leer artículo completo (en línea)</string>
     <string name="shared_string_wikipedia">Wikipedia</string>
@@ -2500,4 +2500,5 @@ Si necesitas ayuda con la aplicación OsmAnd, contacte con nuestro equipo de sop
     <string name="show_legacy_search_desc">Activa el modo antigüo de búsqueda en la lista del panel lateral</string>
     <string name="routing_attr_allow_motorway_name">Permitir autopistas</string>
     <string name="routing_attr_allow_motorway_description">Permitir autopistas</string>
+    <string name="lang_sr_latn">Serbio (latín)</string>
     </resources>
