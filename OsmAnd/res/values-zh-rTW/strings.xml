@@ -1970,8 +1970,8 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="osmo_share_my_location">傳送位置</string>
     <string name="shared_string_logoff">登出</string>
     <string name="rendering_value_disabled_name">已停用</string>
-    <string name="rendering_value_walkingRoutesScopeOSMC_name">依據路線的有效範圍著色</string>
-    <string name="rendering_value_walkingRoutesOSMC_name">依據 OSMC 來著色</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">依網絡從屬著色</string>
+    <string name="rendering_value_walkingRoutesOSMC_name">依據 OSMC 徒步標誌著色</string>
     <string name="osm_edit_context_menu_delete">刪除 OSM 的編輯</string>
     <string name="read_full_article">閱讀全部文章 (線上)</string>
     <string name="shared_string_wikipedia">維基百科</string>
@@ -2409,7 +2409,7 @@ Facebook：https://www.facebook.com/osmandapp
     <string name="upload_anonymously">匿名上傳</string>
 <string name="select_map_marker">選擇地圖標記</string>
     <string name="map_markers_other">其它標記</string>
-    <string name="upload_osm_note_description">如果您使用您的 OpenStreetMap.org 個人資料，您可以匿名上傳 OSM 註解。</string>
+    <string name="upload_osm_note_description">您可以匿名上傳 OSM 註解或使用您的 OpenStreetMap.org 個人資料。</string>
     <string name="show_transparency_seekbar">顯示透明度拖動軸</string>
     <string name="donations">捐贈</string>
     <string name="number_of_recipients">接受者數目</string>
@@ -2669,4 +2669,9 @@ Facebook：https://www.facebook.com/osmandapp
     <string name="route_roundabout_short">利用 %1$d 退出並離開</string>
     <string name="search_map_hint">查詢城市或地區</string>
     <string name="wiki_around">近期維基百科文章</string>
+    <string name="legacy_search">舊版搜尋</string>
+    <string name="show_legacy_search">顯示舊版搜尋</string>
+    <string name="show_legacy_search_desc">在拖曳清單中啟用舊版搜尋</string>
+    <string name="routing_attr_allow_motorway_name">允許進高速公路</string>
+    <string name="routing_attr_allow_motorway_description">允許進高速公路</string>
     </resources>
