@@ -2735,4 +2735,5 @@ Hvis du  ønsker at støtte OsmAnd og OSM, er dette en god måde at gøre det p�
     <string name="show_legacy_search">Vis legacy søgning</string>
     <string name="show_legacy_search_desc">Aktiver legacy søgning i rullemenuen</string>
     <string name="lang_sr_latn">Serbisk (Latin)</string>
+    <string name="lang_zh_HK">Kinesisk (Hong Kong)</string>
     </resources>
