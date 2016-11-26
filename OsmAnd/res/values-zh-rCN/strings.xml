@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources><string name="email">電子郵件</string>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="email">電子郵件</string>
 <string name="poi_dialog_name">名稱</string>
 	<string name="poi_dialog_opening_hours">打開</string>
 	<string name="poi_dialog_comment">評論</string>
@@ -545,7 +546,7 @@
 	<string name="day_night_info_description">日出：%1$s \n日落：%2$s</string>
 	<string name="day_night_info">白天/黑夜信息</string>
 	
-	<string name="map_widget_vector_attributes">渲染属性：</string>
+	<string name="map_widget_vector_attributes">渲染属性</string>
 	<string name="layer_map_appearance">配置屏幕</string>
 	<string name="map_widget_transparent">透明皮肤</string>
 	<string name="bg_service_sleep_mode_off">打开\n 睡眠模式</string>
@@ -572,7 +573,7 @@
 	<string name="rendering_attr_contourLines_name">显示等高线</string>
 	<string name="rendering_attr_hmRendered_name">显示更多地图细节</string>
 	<string name="local_index_routing_data">路线规划数据</string>
-	<string name="navigate_point_format">格式：</string>
+	<string name="navigate_point_format">格式</string>
 	<string name="poi_search_desc">POI(兴趣点)搜索</string>
 	<string name="address_search_desc">地址搜索</string>
 	<string name="transport_search_desc">交通设施搜索</string>
@@ -805,7 +806,7 @@
 	<string name="route_general_information">总距离 %1$s \n 旅行时间 %2$d 小时 %3$d 分钟。</string>
 	<string name="router_service_descr">选择一个在线或离线导航服务</string>
 	<string name="router_service">导航服务</string>
-	<string name="sd_dir_not_accessible">SD卡上的保存目录无法访问</string>
+	<string name="sd_dir_not_accessible">SD卡上的数据存储目录无法访问！</string>
 	<string name="download_question">是否下载 {0} - {1}？</string>
 	<string name="download_question_exist">{0} 的离线数据已经存在({1})。是否要更新它({2})？</string>
 	<string name="address">地址</string>
@@ -1214,4 +1215,17 @@
     <string name="shared_string_share">分享</string>
     <string name="shared_string_export">导出</string>
     <string name="shared_string_more">更多…</string>
+    <string name="upload_osm_note_description">您可以匿名上传您的 OSM 笔记，或者使用您的 OpenStreetMap.org 账号。</string>
+    <string name="wiki_around">附近的维基百科文章</string>
+    <string name="search_map_hint">搜索城市或地区</string>
+    <string name="upload_poi">上传兴趣点</string>
+    <string name="route_calculation">路线计算</string>
+    <string name="gpx_no_tracks_title">您暂时没有轨迹</string>
+    <string name="gpx_no_tracks_title_folder">您也可以将轨迹添加到文件夹下</string>
+    <string name="osmo_service_running">OsMo 服务正在运行</string>
+    <string name="shared_string_continue">继续</string>
+    <string name="shared_string_pause">暂停</string>
+    <string name="gpx_logging_no_data">无数据</string>
+    <string name="save_track_min_speed">最低记录速度</string>
+    <string name="save_track_min_speed_descr">设置记录点的最低速度</string>
     </resources>
