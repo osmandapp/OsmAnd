@@ -2649,4 +2649,5 @@ Si istimas OsmAnd e OSM e los boles suportare, custa est una manera perfeta pro 
     <string name="wiki_around">Artìculos de Wikipedia a curtzu</string>
     <string name="routing_attr_allow_motorway_name">Inclue sas autostradas</string>
     <string name="routing_attr_allow_motorway_description">Permiti sas àndalas in sas autostradas</string>
+    <string name="lang_sr_latn">Serbu (caràteres latinos)</string>
     </resources>
