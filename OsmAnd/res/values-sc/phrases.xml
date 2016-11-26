@@ -24,7 +24,7 @@
 	<string name="poi_antiques">Anticuariadu</string>
 	<string name="poi_art">Butega d\'arte</string>
 	<string name="poi_baby_goods">Butega pro pitzinnos</string>
-	<string name="poi_bag">Valigeria</string>
+	<string name="poi_bag">Butega de borsas e valìgias</string>
 	<string name="poi_bathroom_furnishing">Arredu bagnu</string>
 	<string name="poi_bed">Butega arredu aposentu de letu</string>
 	<string name="poi_boutique">Butega de moda</string>
@@ -40,7 +40,7 @@
 	<string name="poi_bedding">Butega de banitas</string>
 	<string name="poi_dive">Butega de artìculos pro imberghidura</string>
 	<string name="poi_doityourself">Butega de artìculos pro su bricolage</string>
-	<string name="poi_erotic">Sexy shop</string>
+	<string name="poi_erotic">Butega de artìculos eròticos</string>
 	<string name="poi_fishing">Butega pro sa pisca</string>
 	<string name="poi_florist">Froraju</string>
 	<string name="poi_frame">Curnisas</string>
@@ -164,7 +164,7 @@
 	<string name="poi_communication_tower">Turre telecomunicatziones</string>
 	<string name="poi_telephone_exchange">Tzentralinu telefònicu</string>
 
-	<string name="poi_astronomical_observatory">Osservatòriu astronòmicu</string>
+	<string name="poi_astronomical_observatory">Astronòmicu</string>
 	<string name="poi_construction">Fraigada</string>
 	<string name="poi_works">Fàbrica</string>
 	<string name="poi_adit">Intrada de una galleria minerària</string>
@@ -310,7 +310,7 @@
 	<string name="poi_historic_monastery">Monastèriu/Muristene istòricu</string>
 	<string name="poi_wayside_cross">Rughe istòrica</string>
 	<string name="poi_wayside_shrine">Tabernàculu istòricu</string>
-	<string name="poi_information">Informatziones turìsticas</string>
+	<string name="poi_information">Informatziones</string>
 	<string name="poi_clock">Relògiu</string>
 	<string name="poi_travel_agent">Agentzia de biàgios</string>
 	<string name="poi_viewpoint">Puntu panoràmicu</string>
@@ -638,7 +638,7 @@
 		<string name="poi_internet_access">Atzessu ìnternet</string>
 	<string name="poi_club">Tzìrculu</string>
 	<string name="poi_cafe_and_restaurant">Cafeterias e ristorantes</string>
-	<string name="poi_shop_food">Butega alimentare</string>
+	<string name="poi_shop_food">Butega alimentare e supermercadu</string>
 	<string name="poi_road_obstacle">Impèigu/ostàculu istradale</string>
 		<string name="poi_accomodation">Allògiu</string>
 		<string name="poi_smoking_area">Àrea fumatores</string>
@@ -851,8 +851,8 @@
 
 	<string name="poi_cooling_tower">Turre de isfritamentu</string>
 	<string name="poi_lighting_tower">Turre de illuminadura</string>
-	<string name="poi_recycling_centre">Casta: tzentru de ritziclu</string>
-	<string name="poi_recycling_container">Casta: cuntenidore</string>
+	<string name="poi_recycling_centre">Tzentru de ritziclu</string>
+	<string name="poi_recycling_container">Cuntenidore</string>
 	<string name="poi_recycling_glass">Bidru</string>
 	<string name="poi_recycling_paper">Paperi</string>
 	<string name="poi_recycling_clothes">Bestires</string>
@@ -1064,27 +1064,27 @@
 
 	<string name="poi_sand">Arena</string>
 
-	<string name="poi_smoking_isolated">Si podet pipare in un’aposentu isoladu</string>
+	<string name="poi_smoking_isolated">In un’aposentu isoladu</string>
 	<string name="poi_smoking_dedicated">Pipadores ebbia</string>
 
 	<string name="poi_toll_yes">Pedàgiu</string>
 	<string name="poi_toll_no">Perunu pedàgiu</string>
 	<string name="poi_toll_hgv_yes">Pedàgiu pro veìculos pesantes</string>
 	<string name="poi_information_bicyclemap">Mapa tziclìstica</string>
-	<string name="poi_water_characteristic_mineral">Caraterìstica de s’abba: minerale</string>
+	<string name="poi_water_characteristic_mineral">Minerale</string>
 	<string name="poi_water_characteristic_mud">Caraterìsica de s’abba: ludu</string>
-	<string name="poi_water_characteristic_sulfuric">Caraterìstica de s’abba: solfòrica</string>
+	<string name="poi_water_characteristic_sulfuric">Solfòrica</string>
 
 	<string name="poi_water_point">Puntu de abba</string>
 
 	<string name="poi_cuisine">Coghina</string>
 
-	<string name="poi_information_board">Vetrinedda de informatziones</string>
+	<string name="poi_information_board">Vetrinedda</string>
 	<string name="poi_information_map">Mapa</string>
-	<string name="poi_information_office">Ufìtziu de informatziones</string>
-	<string name="poi_information_terminal">Tèrminal de informatziones</string>
+	<string name="poi_information_office">Ufìtziu</string>
+	<string name="poi_information_terminal">Tèrminale</string>
 	<string name="poi_information_hikingmap">Mapa pro escursionismu</string>
-	<string name="poi_information_history">Sinnale de informatziones: istòria</string>
+	<string name="poi_information_history">Istòria</string>
 	<string name="poi_information_sign">Sinnu</string>
 	<string name="poi_information_audioguide">Audioghia</string>
 	<string name="poi_internet_access_yes">Atzessu a ìnternet: eja</string>
@@ -1110,12 +1110,12 @@
 	<string name="poi_route_hiking_ref_poi">Legenda pro sas àndalas pro s’escursionismu</string>
 
 	<string name="poi_fax">Fax</string>
-	<string name="poi_drinking_water_yes">Abba potàbile: eja</string>
-	<string name="poi_drinking_water_no">Abba potàbile:nono</string>
+	<string name="poi_drinking_water_yes">Eja</string>
+	<string name="poi_drinking_water_no">Nono</string>
 	<string name="poi_supervised_yes">Tentadu</string>
 	<string name="poi_supervised_no">Non tentadu</string>
-	<string name="poi_seasonal_yes">Istajonale</string>
-	<string name="poi_seasonal_no">Non istajonale</string>
+	<string name="poi_seasonal_yes">Eja</string>
+	<string name="poi_seasonal_no">Nono</string>
 	<string name="poi_seasonal_dry_season">Istajone sica</string>
 	<string name="poi_seasonal_wet_season">Istajone ùmida</string>
 	<string name="poi_crossing_traffic_signals">Cun semàforos</string>
@@ -1123,8 +1123,8 @@
 	<string name="poi_crossing_unmarked">Non sinnaladu</string>
 	<string name="poi_start_date">Data de cumintzu</string>
 	<string name="poi_wheelchair_yes">Cadira a rodas</string>
-	<string name="poi_wheelchair_no">Cadira a rodas: non permitidas</string>
-	<string name="poi_wheelchair_limited">Cadira a rodas: limitadas</string>
+	<string name="poi_wheelchair_no">Nono</string>
+	<string name="poi_wheelchair_limited">Limitada</string>
 	<string name="poi_access_private">Atzessu privadu</string>
 	<string name="poi_access_no">Chene atzessu</string>
 	<string name="poi_access_customers">Atzessu pro clientes</string>
@@ -1148,11 +1148,11 @@
 	<string name="poi_content_salt">Cuntenutu: sale</string>
 	<string name="poi_content_grain">Cuntenutu: trigu</string>
 
-	<string name="poi_nudism_yes">Nudismu: permìtidu</string>
-	<string name="poi_nudism_no">Nudismu: proibidu</string>
-	<string name="poi_nudism_obligatory">Nudismu: obligatòriu</string>
-	<string name="poi_nudism_customary">Nudismu: abituale</string>
-	<string name="poi_nudism_permissive">Nudismu: permissivu</string>
+	<string name="poi_nudism_yes">Permìtidu</string>
+	<string name="poi_nudism_no">Proibidu</string>
+	<string name="poi_nudism_obligatory">Obligatòriu</string>
+	<string name="poi_nudism_customary">Abituale</string>
+	<string name="poi_nudism_permissive">Permissivu</string>
 
 	<string name="poi_population">Populatzione</string>
 	<string name="poi_parking_underground">Suta-terra</string>
@@ -1246,20 +1246,20 @@
 	<string name="poi_palm">Prama</string>
 	<string name="poi_cypress">Tzipressu</string>
 	<string name="poi_chimney">Fumajolu</string>
-	<string name="poi_beach_sand">Casta de plàia: arena</string>
-	<string name="poi_beach_shingle">Casta de plàia: giarra/ghiàia</string>
-	<string name="poi_beach_rocky">Casta de plàia: pedrosa</string>
+	<string name="poi_beach_sand">Arena</string>
+	<string name="poi_beach_shingle">Giarra/ghiàia</string>
+	<string name="poi_beach_rocky">Pedrosa</string>
 
-	<string name="poi_shoes_children">Iscarpas pro pitzinnos</string>
-	<string name="poi_shoes_women">Iscarpas pro fèminas</string>
-	<string name="poi_shoes_sport">Iscarpas pro isport</string>
-	<string name="poi_shoes_men">Iscarpas pro òmines</string>
-	<string name="poi_shoes_orthopedic">Iscarpas ortopèdicas</string>
+	<string name="poi_shoes_children">Pitzinnos</string>
+	<string name="poi_shoes_women">Fèminas</string>
+	<string name="poi_shoes_sport">Isport</string>
+	<string name="poi_shoes_men">Òmines</string>
+	<string name="poi_shoes_orthopedic">Ortopèdicas</string>
 
 	<string name="poi_collection_times">Oràriu de regorta</string>
 	<string name="poi_email">P.eletrònica</string>
-	<string name="poi_fee_yes">A pagamentu</string>
-	<string name="poi_fee_no">De badas</string>
+	<string name="poi_fee_yes">Eja</string>
+	<string name="poi_fee_no">Nono</string>
 	<string name="poi_wholesale">Grussista</string>
 
 	<string name="poi_access_destination">Atzessu pro sa destinatzione</string>
@@ -1293,38 +1293,38 @@
 	<string name="poi_old_name">Nùmene antigu</string>
 	<string name="poi_alt_name">Nùmene alternativu</string>
 
-	<string name="poi_pump_manual">Pompa manuale</string>
-	<string name="poi_pump_powered">Pompa automàtica</string>
+	<string name="poi_pump_manual">Manuale</string>
+	<string name="poi_pump_powered">Automàtica</string>
 	<string name="poi_pump_no">Chene pompa</string>
-	<string name="poi_pump_yes">Pompa</string>
+	<string name="poi_pump_yes">Eja</string>
 
 	<string name="poi_building">Edifìtziu</string>
 	<string name="poi_information_guidepost">Indicadore istradale</string>
-	<string name="poi_information_nature">Sinnale de informatziones: natura</string>
+	<string name="poi_information_nature">Natura</string>
 	<string name="poi_information_wildlife">Sinnale de informatziones: fàuna agreste</string>
 	<string name="poi_information_tactile_model">Modellu tàtile</string>
 	<string name="poi_information_tactile_map">Mapa tàtile</string>
-	<string name="poi_board_type_plants">Sinnale de informatziones: fundos/prantas</string>
-	<string name="poi_board_type_geology">Sinnale de informatziones: geologia</string>
-	<string name="poi_board_type_public_transport">Sinnale de informatziones: trasportu pùblicu</string>
-	<string name="poi_board_type_technology">Sinnale de informatziones: tecnologia</string>
-	<string name="poi_board_type_astronomy">Sinnale de informatziones: astronomia</string>
+	<string name="poi_board_type_plants">Fundos/prantas</string>
+	<string name="poi_board_type_geology">Geologia</string>
+	<string name="poi_board_type_public_transport">Trasportu pùblicu</string>
+	<string name="poi_board_type_technology">Tecnologia</string>
+	<string name="poi_board_type_astronomy">Astronomia</string>
 
-	<string name="poi_fireplace_yes">Tziminera</string>
+	<string name="poi_fireplace_yes">Eja</string>
 	<string name="poi_fireplace_no">Chene tziminera</string>
 
-	<string name="poi_covered_yes">Cobertu</string>
+	<string name="poi_covered_yes">Eja</string>
 	<string name="poi_covered_no">Chene cobertura</string>
 
-	<string name="poi_smoking_no">Non si podet pipare</string>
-	<string name="poi_smoking_outside">Si podet pipare in foras ebbia</string>
-	<string name="poi_smoking_yes">Si podet pipare</string>
-	<string name="poi_smoking_separated">Si podet pipare in un’aposentu a un’ala</string>
-	<string name="poi_tactile_paving_yes">Cun pamentu tàtile</string>
+	<string name="poi_smoking_no">Non si podet</string>
+	<string name="poi_smoking_outside">In foras ebbia</string>
+	<string name="poi_smoking_yes">Si podet</string>
+	<string name="poi_smoking_separated">In un’aposentu a un’ala</string>
+	<string name="poi_tactile_paving_yes">Eja</string>
 	<string name="poi_tactile_paving_no">Chene pamentu tàtile</string>
-	<string name="poi_traffic_signals_sound_yes">Cun sonu</string>
-	<string name="poi_traffic_signals_sound_no">Chene sonu</string>
-	<string name="poi_traffic_signals_sound_walk">Cun sonu petzi cando est possìbile colare</string>
+	<string name="poi_traffic_signals_sound_yes">Eja</string>
+	<string name="poi_traffic_signals_sound_no">Nono</string>
+	<string name="poi_traffic_signals_sound_walk">Petzi cando est possìbile colare</string>
 
 	<string name="poi_services">Àrea de servìtziu</string>
 	<string name="poi_historic_period_nuragic">Època istòrica: nuràgica</string>
@@ -1388,8 +1388,8 @@
 	<string name="poi_historic_civilization_tiahuanacota">Tziviltade: tiahuanacota</string>
 
 	<string name="poi_animal_training">Annestru de animales</string>
-	<string name="poi_animal_training_dog">Annestru de canes</string>
-	<string name="poi_animal_training_horse">Annestru de caddos</string>
+	<string name="poi_animal_training_dog">Canes</string>
+	<string name="poi_animal_training_horse">Caddos</string>
 
 	<string name="poi_memorial_stele">Losa</string>
 	<string name="poi_memorial_bust">Bustu</string>
@@ -1413,15 +1413,15 @@
 	<string name="poi_tomb_pyramid">Casta: piràmide</string>
 
 	<string name="poi_highway_steps">Iscalas</string>
-	<string name="poi_site_type_megalith">Casta: megalitu</string>
-	<string name="poi_site_type_tumulus">Casta: tùmulu</string>
-	<string name="poi_site_type_fortification">Casta: fortificatzione</string>
-	<string name="poi_site_type_settlement">Casta: aposentamentu</string>
-	<string name="poi_site_type_city">Casta: tzitade</string>
-	<string name="poi_site_type_hut_circle">Casta: tzìrculu de pinneta (hut circle)</string>
-	<string name="poi_site_type_necropolis">Casta: necròpoli</string>
-	<string name="poi_site_type_petroglyph">Casta: petroglifu</string>
-	<string name="poi_site_type_earthwork">Casta: òpera de terra (earthwork)</string>
+	<string name="poi_site_type_megalith">Megalitu</string>
+	<string name="poi_site_type_tumulus">Tùmulu</string>
+	<string name="poi_site_type_fortification">Fortificatzione</string>
+	<string name="poi_site_type_settlement">Aposentamentu</string>
+	<string name="poi_site_type_city">Tzitade</string>
+	<string name="poi_site_type_hut_circle">Tzìrculu de pinneta (hut circle)</string>
+	<string name="poi_site_type_necropolis">Necròpoli</string>
+	<string name="poi_site_type_petroglyph">Petroglifu</string>
+	<string name="poi_site_type_earthwork">Òpera de terra (earthwork)</string>
 	<string name="poi_megalith_type_menhir">Casta de megalitu: pedra longa/fitta (menhir)</string>
 	<string name="poi_megalith_type_dolmen">Casta de megalitu: covecada</string>
 	<string name="poi_megalith_type_nuraghe">Casta de megalitu: nuraghe</string>
@@ -1448,7 +1448,7 @@
 <string name="poi_cross">Rughe</string>
 	<string name="poi_summit_cross">Rughe de cùcuru: eja</string>
 
-	<string name="poi_prison_camp">Campu de presonia</string>
+	<string name="poi_prison_camp">Antigu campu de presonia</string>
 	<string name="poi_concentration_camp">Casta: campu de cuntzentramentu</string>
 	<string name="poi_pow_camp">Casta: campu pro presoneris de gherra</string>
 	<string name="poi_labor_camp">Casta: campu de traballu</string>
@@ -1500,12 +1500,12 @@
 	<string name="poi_level">Livellu</string>
 	<string name="poi_rtsa_scale">Iscala RTSA</string>
 
-	<string name="poi_piste_difficulty_easy">Dificultade pista: fàtzile</string>
-	<string name="poi_piste_difficulty_intermediate">Dificultade pista: intermèdia</string>
-	<string name="poi_piste_difficulty_advanced">Dificultade pista: avantzada</string>
-	<string name="poi_piste_difficulty_novice">Dificultade pista: printzipiante</string>
-	<string name="poi_piste_difficulty_expert">Dificultade pista: espertu</string>
-	<string name="poi_piste_difficulty_freeride">Dificultade pista: movimentu lìberu (freeride)</string>
+	<string name="poi_piste_difficulty_easy">Fàtzile</string>
+	<string name="poi_piste_difficulty_intermediate">Intermèdia</string>
+	<string name="poi_piste_difficulty_advanced">Avantzada</string>
+	<string name="poi_piste_difficulty_novice">Printzipiante</string>
+	<string name="poi_piste_difficulty_expert">Espertu</string>
+	<string name="poi_piste_difficulty_freeride">Movimentu lìberu (freeride)</string>
 	<string name="poi_garden_type_residential">Casta de giardinu: residentziale</string>
 	<string name="poi_garden_type_community">Casta de giardinu: comunitàriu</string>
 	<string name="poi_garden_type_private">Casta de giardinu: privadu</string>
@@ -1518,7 +1518,7 @@
 	<string name="poi_garden_style_japanese">Casta de giardinu: giaponesu</string>
 
 	<string name="poi_capacity">Capatzidade</string>
-	<string name="poi_capacity_disabled_yes">Logu riservadu pro sos disàbiles</string>
+	<string name="poi_capacity_disabled_yes">Eja</string>
 	<string name="poi_capacity_disabled_no">Perunu logu riservadu pro sos disàbiles</string>
 	<string name="poi_capacity_disabled">Logu riservadu pro sos disàbiles</string>
 	<string name="poi_capacity_women_yes">Logu riservadu pro sas fèminas</string>
@@ -1535,11 +1535,11 @@
 	<string name="poi_aerialway_duration">Tempus de biàgiu mèdiu (minutos)</string>
 	<string name="poi_aerialway_bubble_yes">Tancadu</string>
 	<string name="poi_aerialway_bubble_no">Non tancadu</string>
-	<string name="poi_aerialway_heating_yes">Caentamentu</string>
+	<string name="poi_aerialway_heating_yes">Eja</string>
 	<string name="poi_aerialway_heating_no">Chene caentamentu</string>
-	<string name="poi_aerialway_bicycle_yes">Bitzicletas: permitias</string>
+	<string name="poi_aerialway_bicycle_yes">Permitias</string>
 	<string name="poi_aerialway_bicycle_no">Bitzicletas: non permitias</string>
-	<string name="poi_aerialway_bicycle_summer">Bitzicletas: permitias in s\'istiu ebbia</string>
+	<string name="poi_aerialway_bicycle_summer">Permitias in s\'istiu ebbia</string>
 	<string name="poi_aerialway_access_entry">Intrada ebbia</string>
 	<string name="poi_aerialway_access_exit">Essida ebbia</string>
 	<string name="poi_aerialway_access_both">Intrada e essida</string>
@@ -1552,21 +1552,21 @@
 	<string name="poi_surveillance_yes">Bardiamentu: eja</string>
 	<string name="poi_shop_additional_yes">Cun butega</string>
 
-	<string name="poi_service_bicycle_retail_yes">Bèndida de bitzicletas: eja</string>
+	<string name="poi_service_bicycle_retail_yes">Bèndida</string>
 	<string name="poi_service_bicycle_retail_no">Bèndida de bitzicletas: nono</string>
-	<string name="poi_service_bicycle_repair_yes">Acontzu de bitzicletas: eja</string>
+	<string name="poi_service_bicycle_repair_yes">Acontzu</string>
 	<string name="poi_service_bicycle_repair_no">Acontzu de bitzicletas: nono</string>
-	<string name="poi_service_bicycle_rental_yes">Nolu de bitzicletas: eja</string>
+	<string name="poi_service_bicycle_rental_yes">Nolu</string>
 	<string name="poi_service_bicycle_rental_no">Nolu de bitzicletas: nono</string>
-	<string name="poi_service_bicycle_pump_yes">Pompa pro bitzicletas: eja</string>
+	<string name="poi_service_bicycle_pump_yes">Pompa</string>
 	<string name="poi_service_bicycle_pump_no">Pompa pro bitzicletas: nono</string>
-	<string name="poi_service_bicycle_diy_yes">Ainas pro s’acontzu a sa sola de bitzicletas: eja</string>
+	<string name="poi_service_bicycle_diy_yes">Ainas pro s’acontzu a sa sola</string>
 	<string name="poi_service_bicycle_diy_no">Ainas pro s’acontzu a sa sola de bitzicletas: nono</string>
-	<string name="poi_service_bicycle_cleaning_yes">Innetadura de bitzicletas: eja</string>
+	<string name="poi_service_bicycle_cleaning_yes">Innetadura</string>
 	<string name="poi_service_bicycle_cleaning_no">Innetadura de bitzicletas: nono</string>
-	<string name="poi_service_bicycle_chaintool_yes">Trunca-cadenas pro bitzicletas: eja</string>
+	<string name="poi_service_bicycle_chaintool_yes">Trunca-cadenas</string>
 	<string name="poi_service_bicycle_chaintool_no">Trunca-cadenas pro bitzicletas: nono</string>
-	<string name="poi_service_bicycle_second_hand_yes">Bèndida de bitzicletas de segunda manu: eja</string>
+	<string name="poi_service_bicycle_second_hand_yes">Bèndida de bitzicletas de segunda manu</string>
 	<string name="poi_service_bicycle_second_hand_no">Bèndida de bitzicletas de segunda manu: nono</string>
 
 	<string name="poi_wildlife_hide">Logu pro abbaidare sa natura</string>
@@ -1695,7 +1695,7 @@
 	<string name="poi_model_aerodrome">Aeròdromu pro modellinos</string>
 	<string name="poi_street_lamp">Lampione</string>
 
-	<string name="poi_toilets_yes">Cun bagnos</string>
+	<string name="poi_toilets_yes">Eja</string>
 	<string name="poi_toilets_no">Chene bagnos</string>
 	<string name="poi_toilets_wheelchair_yes">Atzessu a sos bagnos pro cadiras a rodas: eja</string>
 	<string name="poi_toilets_wheelchair_no">Atzessu a sos bagnos pro cadiras a rodas: nono</string>
@@ -1752,36 +1752,36 @@
 	<string name="poi_passing_place">Logu de coladòrgiu</string>
 	<string name="poi_dead_wood">Linna morta</string>
 
-	<string name="poi_stars_1s">Isteddas: 1S (turista superiore)</string>
-	<string name="poi_stars_2">Isteddas: 2 (istandard)</string>
-	<string name="poi_stars_2s">Isteddas: 2S (istandard superiore)</string>
-	<string name="poi_stars_3">Isteddas: 3 (discansosu)</string>
-	<string name="poi_stars_3s">Isteddas: 3S (discansu superiore)</string>
-	<string name="poi_stars_4">Isteddas: 4 (prima classe)</string>
-	<string name="poi_stars_4s">Isteddas: 4S (prima classe superiore)</string>
-	<string name="poi_stars_5">Isteddas: 5 (lussu)</string>
-	<string name="poi_stars_5s">Isteddas: 5S (lussu superiore)</string>
+	<string name="poi_stars_1s">1S (turista superiore)</string>
+	<string name="poi_stars_2">2 (istandard)</string>
+	<string name="poi_stars_2s">2S (istandard superiore)</string>
+	<string name="poi_stars_3">3 (discansosu)</string>
+	<string name="poi_stars_3s">3S (discansu superiore)</string>
+	<string name="poi_stars_4">4 (prima classe)</string>
+	<string name="poi_stars_4s">4S (prima classe superiore)</string>
+	<string name="poi_stars_5">5 (lussu)</string>
+	<string name="poi_stars_5s">5S (lussu superiore)</string>
 	<string name="poi_stars_6">Isteddas: 6</string>
 	<string name="poi_stars_7">Isteddas: 7</string>
 	<string name="poi_rooms">Aposentos</string>
 
 	<string name="poi_love_hotel">Albergu de s’amore</string>
 
-	<string name="poi_payment_coins_yes">Atzetat monedas</string>
+	<string name="poi_payment_coins_yes">Monedas</string>
 	<string name="poi_payment_coins_no">No atzetat monedas</string>
-	<string name="poi_payment_coins_0.5">Atzetat monedas de $0.5</string>
-	<string name="poi_payment_coins_50c12">Atzetat monedas de 50 cent, 1€ e 2€</string>
-	<string name="poi_payment_telephone_cards_yes">Atzetat cartas telefònicas</string>
+	<string name="poi_payment_coins_0.5">Monedas de $0.5</string>
+	<string name="poi_payment_coins_50c12">Monedas de 50 cent, 1€ e 2€</string>
+	<string name="poi_payment_telephone_cards_yes">Ischedas telefònicas</string>
 	<string name="poi_payment_telephone_cards_no">No atzetat cartas telefònicas</string>
-	<string name="poi_payment_credit_cards_yes">Atzetat cartas de crèditu</string>
+	<string name="poi_payment_credit_cards_yes">Cartas de crèditu</string>
 	<string name="poi_payment_credit_cards_no">No atzetat cartas de crèditu</string>
-	<string name="poi_payment_notes_yes">Atzetat banconotas</string>
+	<string name="poi_payment_notes_yes">Banconotas</string>
 	<string name="poi_payment_notes_no">No atzetat banconotas</string>
-	<string name="poi_payment_bitcoin_yes">Atzetat Bitcoin</string>
+	<string name="poi_payment_bitcoin_yes">Bitcoin</string>
 	<string name="poi_payment_bitcoin_no">No atzetat Bitcoin</string>
-	<string name="poi_payment_visa_yes">Atzetat cartas Visa</string>
+	<string name="poi_payment_visa_yes">Visa</string>
 	<string name="poi_payment_visa_no">No atzetat cartas Visa</string>
-	<string name="poi_payment_mastercard_yes">Atzetat cartas MasterCard</string>
+	<string name="poi_payment_mastercard_yes">MasterCard</string>
 	<string name="poi_payment_mastercard_no">No atzetat cartas MasterCard</string>
 	<string name="poi_payment_none">De badas</string>
 	<string name="poi_seats">Banchinas</string>
@@ -1793,99 +1793,99 @@
 	<string name="poi_deadlock">Puntu mortu (deadlock)</string>
 
 	<string name="poi_information_trail_blaze">Marcadura de sas camineras</string>
-	<string name="poi_piste_grooming_classic">Ammaniamentu pista: clàssicu</string>
-	<string name="poi_piste_grooming_classic_skating">Ammaniamentu pista: clàssicu + patinàgiu</string>
-	<string name="poi_piste_grooming_backcountry">Ammaniamentu pista: fora de pista</string>
-	<string name="poi_piste_grooming_scooter">Ammaniamentu pista: motoreta (scooter)</string>
-	<string name="poi_piste_grooming_skating">Ammaniamentu pista: patinàgiu</string>
-	<string name="poi_piste_grooming_no">Ammaniamentu pista: perunu</string>
-	<string name="poi_piste_grooming_mogul">Ammaniamentu pista: tzumbas/gobbas</string>
+	<string name="poi_piste_grooming_classic">Clàssicu</string>
+	<string name="poi_piste_grooming_classic_skating">Clàssicu + patinàgiu</string>
+	<string name="poi_piste_grooming_backcountry">Fora de pista</string>
+	<string name="poi_piste_grooming_scooter">Motoreta (scooter)</string>
+	<string name="poi_piste_grooming_skating">Patinàgiu</string>
+	<string name="poi_piste_grooming_no">Nono</string>
+	<string name="poi_piste_grooming_mogul">Tzumbas/gobbas</string>
 
-	<string name="poi_stars_1">Isteddas: 1 (turista)</string>
-	<string name="poi_payment_cash_yes">Atzetat dinare contante</string>
+	<string name="poi_stars_1">1 (turista)</string>
+	<string name="poi_payment_cash_yes">Dinare contante</string>
 	<string name="poi_payment_cash_no">No atzetat dinare contante</string>
-	<string name="poi_payment_debit_cards_yes">Atzetat cartas de dèpidu</string>
+	<string name="poi_payment_debit_cards_yes">Cartas de dèpidu</string>
 	<string name="poi_payment_debit_cards_no">No atzetat cartas de dèpidu</string>
-	<string name="poi_payment_account_cards_yes">Atzetat cartas de contu</string>
+	<string name="poi_payment_account_cards_yes">Cartas de contu</string>
 	<string name="poi_payment_account_cards_no">No atzetat cartas de contu</string>
-	<string name="poi_payment_maestro_yes">Atzetat cartas Maestro</string>
+	<string name="poi_payment_maestro_yes">Cartas Maestro</string>
 	<string name="poi_payment_maestro_no">No atzetat cartas Maestro</string>
-	<string name="poi_payment_american_express_yes">Atzetat cartas American Express (AMEX)</string>
+	<string name="poi_payment_american_express_yes">American Express (AMEX)</string>
 	<string name="poi_payment_american_express_no">No atzetat cartas American Express (AMEX)</string>
-	<string name="poi_payment_diners_club_yes">Atzetat cartas Diners Club</string>
+	<string name="poi_payment_diners_club_yes">Diners Club</string>
 	<string name="poi_payment_diners_club_no">No atzetat cartas Diners Club</string>
-	<string name="poi_payment_dkv_yes">Atzetat cartas DKV</string>
+	<string name="poi_payment_dkv_yes">DKV</string>
 	<string name="poi_payment_dkv_no">No atzetat cartas DKV</string>
-	<string name="poi_payment_uta_yes">Atzetat cartas UTA</string>
+	<string name="poi_payment_uta_yes">UTA</string>
 	<string name="poi_payment_uta_no">No atzetat cartas UTA</string>
-	<string name="poi_payment_efectivo_yes">Atzetat \"efectivo\"</string>
+	<string name="poi_payment_efectivo_yes">Efectivo</string>
 	<string name="poi_payment_efectivo_no">No atzetat \"efectivo\"</string>
-	<string name="poi_payment_girocard_yes">Atzetat cartas Girocard</string>
+	<string name="poi_payment_girocard_yes">Girocard</string>
 	<string name="poi_payment_girocard_no">No atzetat cartas Girocard</string>
-	<string name="poi_payment_discover_card_yes">Atzetat cartas Discover Card</string>
+	<string name="poi_payment_discover_card_yes">Discover Card</string>
 	<string name="poi_payment_discover_card_no">No atzetat cartas Discover Card</string>
-	<string name="poi_payment_visa_electron_yes">Atzetat cartas Visa Electron</string>
+	<string name="poi_payment_visa_electron_yes">Visa Electron</string>
 	<string name="poi_payment_visa_electron_no">No atzetat cartas Visa Electron</string>
-	<string name="poi_payment_litecoin_yes">Atzetat Litecoin</string>
+	<string name="poi_payment_litecoin_yes">Litecoin</string>
 	<string name="poi_payment_litecoin_no">No atzetat Litecoin</string>
-	<string name="poi_payment_cheque_yes">Atzetat assegnos</string>
+	<string name="poi_payment_cheque_yes">Assegnos</string>
 	<string name="poi_payment_cheque_no">No atzetat assegnos</string>
-	<string name="poi_payment_pikepass_yes">Atzetat PIKEPASS</string>
+	<string name="poi_payment_pikepass_yes">PIKEPASS</string>
 	<string name="poi_payment_pikepass_no">No atzetat PIKEPASS</string>
-	<string name="poi_payment_pikepass_designated">Atzetat PIKEPASS (desinnadu)</string>
-	<string name="poi_payment_visa_debit_yes">Atzetat cartas Visa Debit</string>
+	<string name="poi_payment_pikepass_designated">PIKEPASS (desinnadu)</string>
+	<string name="poi_payment_visa_debit_yes">Cartas de dèpidu Visa</string>
 	<string name="poi_payment_visa_debit_no">No atzetat cartas Visa Debit</string>
 	<string name="poi_payment_cryptocurrencies_no">No atzetat criptomonedas</string>
-	<string name="poi_payment_others_yes">Atzetat àteras maneras de pagamentu</string>
+	<string name="poi_payment_others_yes">Àteras maneras</string>
 	<string name="poi_payment_others_no">No atzetat àteras maneras de pagamentu</string>
-	<string name="poi_payment_routex_yes">Atzetat cartas Routex pro su combustìbile</string>
+	<string name="poi_payment_routex_yes">Routex</string>
 	<string name="poi_payment_routex_no">No atzetat cartas Routex pro su combustìbile</string>
-	<string name="poi_payment_bancomat_yes">Atzetat cartas Bàncomat</string>
+	<string name="poi_payment_bancomat_yes">Bàncomat</string>
 	<string name="poi_payment_bancomat_no">No atzetat cartas Bàncomat</string>
-	<string name="poi_payment_dogecoin_yes">Atzetat Dogecoins</string>
+	<string name="poi_payment_dogecoin_yes">Dogecoins</string>
 	<string name="poi_payment_dogecoin_no">No atzetat Dogecoins</string>
-	<string name="poi_payment_paypal_yes">Atzetat PayPal</string>
+	<string name="poi_payment_paypal_yes">PayPal</string>
 	<string name="poi_payment_paypal_no">No atzetat PayPal</string>
-	<string name="poi_payment_yandexmoney_yes">Atzetat Yandex.Money</string>
+	<string name="poi_payment_yandexmoney_yes">Yandex.Money</string>
 	<string name="poi_payment_yandexmoney_no">No atzetat Yandex.Money</string>
 	<string name="poi_description_payment">Informatziones de pagamentu</string>
 
 	<string name="poi_internet_access_fee_yes">Atzessu a ìnternet - a pagamentu</string>
 	<string name="poi_internet_access_fee_no">Atzessu a ìnternet - de badas</string>
 
-	<string name="poi_payment_laser_yes">Atzetat cartas Laser</string>
+	<string name="poi_payment_laser_yes">Laser</string>
 	<string name="poi_payment_laser_no">No atzetat cartas Laser</string>
 	<string name="poi_building_type_pyramid">Casta de edifìtziu: piràmide</string>
 
-<string name="poi_health_specialty_general_yes">Ispetzializatzione mèiga: dutore generale</string>
-	<string name="poi_health_specialty_ophthalmology_yes">Ispetzializatzione mèiga: oftalmologia</string>
-	<string name="poi_health_specialty_gynaecology_yes">Ispetzializatzione mèiga: ginecologia</string>
-	<string name="poi_health_specialty_internal_medicine_yes">Ispetzializatzione mèiga: meighina interna</string>
-	<string name="poi_health_specialty_orthopaedics_yes">Ispetzializatzione mèiga: ortopedia</string>
-	<string name="poi_health_specialty_otolaryngology_yes">Ispetzializatzione mèiga: otorinolaringoiatria</string>
-	<string name="poi_health_specialty_paediatrics_yes">Ispetzializatzione mèiga: pediatria</string>
+<string name="poi_health_specialty_general_yes">Dutore generale</string>
+	<string name="poi_health_specialty_ophthalmology_yes">Oftalmologia</string>
+	<string name="poi_health_specialty_gynaecology_yes">Ginecologia</string>
+	<string name="poi_health_specialty_internal_medicine_yes">Meighina interna</string>
+	<string name="poi_health_specialty_orthopaedics_yes">Ortopedia</string>
+	<string name="poi_health_specialty_otolaryngology_yes">Otorinolaringoiatria</string>
+	<string name="poi_health_specialty_paediatrics_yes">Pediatria</string>
 	<string name="poi_health_specialty_paediatrics_no">Ispetzializatzione mèiga: pediatria: nono</string>
-	<string name="poi_health_specialty_dermatology_yes">Ispetzializatzione mèiga: dermatologia</string>
-	<string name="poi_health_specialty_urology_yes">Ispetzializatzione mèiga: urologia</string>
-	<string name="poi_health_specialty_surgery_yes">Ispetzializatzione mèiga: chirurgia generale</string>
-	<string name="poi_health_specialty_radiology_yes">Ispetzializatzione mèiga: radiologia</string>
-	<string name="poi_health_specialty_psychiatry_yes">Ispetzializatzione mèiga: psichiatria</string>
-	<string name="poi_health_specialty_neurology_yes">Ispetzializatzione mèiga: neurologia</string>
-	<string name="poi_health_specialty_dermatovenereology_yes">Ispetzializatzione mèiga: dermatologia genitale</string>
-	<string name="poi_health_specialty_cardiology_yes">Ispetzializatzione mèiga: cardiologia</string>
-	<string name="poi_health_specialty_trauma_yes">Ispetzializatzione mèiga: traumatologia</string>
-	<string name="poi_health_specialty_biology_yes">Ispetzializatzione mèiga: biologia clinico-mèiga (patologia clìnica)</string>
-	<string name="poi_health_specialty_osteopathy_yes">Ispetzializatzione mèiga: osteopatia</string>
-	<string name="poi_health_specialty_anaesthetics_yes">Ispetzializatzione mèiga: anestèticos</string>
-	<string name="poi_health_specialty_pulmonology_yes">Ispetzializatzione mèiga: pneumologia</string>
-	<string name="poi_health_specialty_dental_oral_maxillo_facial_surgery_yes">Ispetzializatzione mèiga: chirurgia dentale, orale e maxillo-fatziale</string>
-	<string name="poi_health_specialty_maternity_yes">Ispetzializatzione mèiga: maternidade</string>
-	<string name="poi_health_specialty_emergency_medicine_yes">Ispetzializatzione mèiga: meighina de emergèntzia-urgèntzia</string>
+	<string name="poi_health_specialty_dermatology_yes">Dermatologia</string>
+	<string name="poi_health_specialty_urology_yes">Urologia</string>
+	<string name="poi_health_specialty_surgery_yes">Chirurgia generale</string>
+	<string name="poi_health_specialty_radiology_yes">Radiologia</string>
+	<string name="poi_health_specialty_psychiatry_yes">Psichiatria</string>
+	<string name="poi_health_specialty_neurology_yes">Neurologia</string>
+	<string name="poi_health_specialty_dermatovenereology_yes">Dermatologia genitale</string>
+	<string name="poi_health_specialty_cardiology_yes">Cardiologia</string>
+	<string name="poi_health_specialty_trauma_yes">Traumatologia</string>
+	<string name="poi_health_specialty_biology_yes">Biologia clinico-mèiga (patologia clìnica)</string>
+	<string name="poi_health_specialty_osteopathy_yes">Osteopatia</string>
+	<string name="poi_health_specialty_anaesthetics_yes">Anestèticos</string>
+	<string name="poi_health_specialty_pulmonology_yes">Pneumologia</string>
+	<string name="poi_health_specialty_dental_oral_maxillo_facial_surgery_yes">Chirurgia dentale, orale e maxillo-fatziale</string>
+	<string name="poi_health_specialty_maternity_yes">Maternidade</string>
+	<string name="poi_health_specialty_emergency_medicine_yes">Meighina de emergèntzia-urgèntzia</string>
 	<string name="poi_health_specialty_emergency_medicine_no">Ispetzializatzione mèiga: meighina de emergèntzia-urgèntzia: nono</string>
-	<string name="poi_health_specialty_plastic_surgery_yes">Ispetzializatzione mèiga: chirurgia plàstica</string>
-	<string name="poi_health_specialty_orthodontics_yes">Ispetzializatzione mèiga: ortodontzia</string>
-	<string name="poi_health_specialty_physiotherapy_yes">Ispetzializatzione mèiga: fisioterapia</string>
-	<string name="poi_health_specialty_biochemistry_yes">Ispetzializatzione mèiga: biochìmica clìnica</string>
+	<string name="poi_health_specialty_plastic_surgery_yes">Chirurgia plàstica</string>
+	<string name="poi_health_specialty_orthodontics_yes">Ortodontzia</string>
+	<string name="poi_health_specialty_physiotherapy_yes">Fisioterapia</string>
+	<string name="poi_health_specialty_biochemistry_yes">Biochìmica clìnica</string>
 	<string name="poi_official_name">Nùmene ufitziale</string>
 
 <string name="poi_gaelic_games">Giogos gaèlicos</string>
@@ -1900,7 +1900,7 @@
 
 	<string name="poi_tanning_salon">Solàrium</string>
 
-<string name="poi_payment_icsf_yes">Atzetat cartas IC Stored Fare</string>
+<string name="poi_payment_icsf_yes">IC Stored Fare</string>
 	<string name="poi_payment_icsf_no">No atzetat cartas IC Stored Fare</string>
 	<string name="poi_spices">Butega de ispètzias</string>
 
@@ -1940,4 +1940,5 @@
 	<string name="poi_healthcare_alternative_types">Ispetzialidade</string>
 	<string name="poi_free_flying_characteristics">Caraterìstica</string>
 	<string name="poi_archaeological_site_type">Casta</string>
+	<string name="poi_wheelchair_accessibility">Atzessibilidade pro cadiras a rodas</string>
 	</resources>
