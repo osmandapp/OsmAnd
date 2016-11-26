@@ -223,7 +223,7 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 				"sk",
 				"sl",
 				"sr",
-				"sr_LATN",
+				"sr_LA",
 				"sv",
 				"tr",
 				"uk",
