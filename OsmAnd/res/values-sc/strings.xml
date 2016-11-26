@@ -1967,7 +1967,7 @@ Lon %2$s</string>
     <string name="osmo_share_my_location">Cumpartzi sa positzione</string>
     <string name="shared_string_logoff">Essi</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Coloratzione a segunda de sa casta de àndala</string>
-    <string name="rendering_value_walkingRoutesOSMC_name">Coloratzione a segunda de OSMC</string>
+    <string name="rendering_value_walkingRoutesOSMC_name">Coloratzione sighinde su sìmbulu pro s\'escursionismu de OSMC</string>
     <string name="osm_edit_context_menu_delete">Iscantzella modìfica OSM</string>
     <string name="shared_string_import2osmand">Importa in OsmAnd</string>
     <string name="read_full_article">Leghe s\'artìculu intreu (in lìnia)</string>
@@ -2425,7 +2425,7 @@ Si istimas OsmAnd e OSM e los boles suportare, custa est una manera perfeta pro 
     <string name="download_files_question_space_with_temp">Iscarrigare {0} documentu(os)?
  Bi sunt {3} MB impreados temporaneamente e {1} MB permanentemente.
  ({2} MB ebbia disponìbiles.)</string>
-    <string name="upload_osm_note_description">Podes carrigare sas notas OSM tuas anonimamentes si impreas su profilu OpenStreetMap.org tuo.</string>
+    <string name="upload_osm_note_description">Podes carrigare sas notas OSM tuas anonimamentes o impreende su profilu OpenStreetMap.org tuo.</string>
     <string name="upload_osm_note">Càrriga nota OSM</string>
     <string name="map_marker_1st">Primu marcadore mapa</string>
     <string name="map_marker_2nd">Segundu marcadore mapa</string>
@@ -2647,4 +2647,6 @@ Si istimas OsmAnd e OSM e los boles suportare, custa est una manera perfeta pro 
     <string name="route_roundabout_short">Piga sa %1$d essida e sighi</string>
     <string name="search_map_hint">Chirca una tzitade o una regione</string>
     <string name="wiki_around">Artìculos de Wikipedia a curtzu</string>
+    <string name="routing_attr_allow_motorway_name">Inclue sas autostradas</string>
+    <string name="routing_attr_allow_motorway_description">Permiti sas àndalas in sas autostradas</string>
     </resources>
