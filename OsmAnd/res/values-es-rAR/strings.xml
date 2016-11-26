@@ -2501,4 +2501,5 @@ Si necesitas ayuda con la aplicación OsmAnd, contacte con nuestro equipo de sop
     <string name="routing_attr_allow_motorway_name">Permitir autopistas</string>
     <string name="routing_attr_allow_motorway_description">Permite pasar por autopistas</string>
     <string name="lang_sr_latn">Serbio (latín)</string>
+    <string name="lang_zh_HK">Chino (Hong Kong)</string>
     </resources>
