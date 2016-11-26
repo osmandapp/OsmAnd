@@ -91,6 +91,10 @@ public class GPXUtilities {
 
 	}
 
+	public static class Elevation {
+		public double distance, elevation;
+	}
+
 	public static class WptPt extends GPXExtensions implements LocationPoint {
 		public double lat;
 		public double lon;
@@ -286,6 +290,8 @@ public class GPXUtilities {
 			return maxElevation != -100;
 		}
 
+		public List<Elevation> elevationData;
+
 		public boolean isSpeedSpecified() {
 			return avgSpeed > 0;
 		}
@@ -310,6 +316,8 @@ public class GPXUtilities {
 			double channelTop;
 			double channelBottom;
 			boolean climb = false;
+
+			elevationData = new ArrayList<>();
 
 			for (SplitSegment s : splitSegments) {
 				final int numberOfPoints = s.getNumberOfPoints();
@@ -337,11 +345,16 @@ public class GPXUtilities {
 					}
 
 					double elevation = point.ele;
+					Elevation elevation1 = new Elevation();
 					if (!Double.isNaN(elevation)) {
 						totalElevation += elevation;
 						elevationPoints++;
 						minElevation = Math.min(elevation, minElevation);
 						maxElevation = Math.max(elevation, maxElevation);
+
+						elevation1.elevation = elevation;
+					} else {
+						elevation1.elevation = 0;
 					}
 
 					float speed = (float) point.speed;
@@ -433,7 +446,12 @@ public class GPXUtilities {
 						//		timeMoving0 = timeMoving0 + (point.time - prev.time);
 						//		totalDistanceMoving0 += calculations[0];
 						//	}
+
 					}
+
+					elevation1.distance = (j > 0) ? calculations[0] : 0;
+					elevationData.add(elevation1);
+
 				}
 			}
 			if (!isTimeSpecified()) {

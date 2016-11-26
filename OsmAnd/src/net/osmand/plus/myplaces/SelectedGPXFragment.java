@@ -2,8 +2,11 @@ package net.osmand.plus.myplaces;
 
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -31,6 +34,7 @@ import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.FavouritesDbHelper;
+import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.GpxSelectionHelper;
@@ -489,6 +493,16 @@ public class SelectedGPXFragment extends OsmAndListFragment {
 				description.setVisibility(View.VISIBLE);
 			} else {
 				description.setVisibility(View.GONE);
+			}
+
+			ElevationView elevationImg = (ElevationView) row.findViewById(R.id.elevation);
+			if (child.analysis != null && child.analysis.elevationData != null && child.analysis.isElevationSpecified() && (child.analysis.points > 1)) {
+				elevationImg.setElevationData(child.analysis.elevationData);
+				elevationImg.setMaxElevation(child.analysis.maxElevation);
+				elevationImg.setMinElevation(child.analysis.minElevation);
+				elevationImg.setTotalDistance(child.analysis.totalDistance); //Use raw data for graph, not channel detection noise filter (facilitates visual double check)
+			} else {
+				elevationImg.setVisibility(View.GONE);
 			}
 
 			return row;
