@@ -2160,7 +2160,7 @@ För tillfället finns det bara {2} MB tillgängligt.</string>
     <string name="upload_anonymously">Ladda upp anonymt</string>
 <string name="select_map_marker">Välj kartmarkör</string>
     <string name="map_markers_other">Andra markörer</string>
-    <string name="upload_osm_note_description">Du kan ladda upp din OSM-anteckning anonymt om du använder din profil på OpenStreetMap.org.</string>
+    <string name="upload_osm_note_description">Du kan ladda upp din OSM-anteckning anonymt eller använda din profil på OpenStreetMap.org.</string>
     <string name="donations">Donationer</string>
     <string name="number_of_recipients">Antal mottagare</string>
     <string name="osm_user_stat">Redigeringar %1$s, rang %2$s, redigeringar totalt %3$s</string>
@@ -2338,4 +2338,19 @@ Om du tycker om OsmAnd och OSM och vill stödja dem så är detta ett utmärkt s
     <string name="shared_string_record">Spela in</string>
     <string name="gpx_logging_no_data">Inga data</string>
     <string name="trip_rec_notification_settings_desc">Visa avisering som gör att du kan starta trippinspelning genom att trycka på knappen Spela in</string>
+    <string name="routing_attr_allow_motorway_name">Tillåt motorvägar</string>
+    <string name="routing_attr_allow_motorway_description">Tillåt motorvägar</string>
+    <string name="wiki_around">Närliggande Wikipedia-artiklar</string>
+    <string name="search_map_hint">Sök stad eller region</string>
+    <string name="route_roundabout_short">Tag den %1$d avfarten och kör</string>
+    <string name="upload_poi">Ladda upp POI</string>
+    <string name="route_calculation">Ruttberäkning</string>
+    <string name="gpx_no_tracks_title">Du har inga spår än</string>
+    <string name="gpx_no_tracks_title_folder">Du kan också lägga till spår i mappen</string>
+    <string name="gpx_add_track">Lägg till spår</string>
+    <string name="gpx_appearance">Utseende</string>
+    <string name="osmo_share_location">Dela</string>
+    <string name="osmo_pause_location">Pausa</string>
+    <string name="osmo_service_running">OsMo-tjänsten är igång</string>
+    <string name="trip_rec_notification_settings">Trippinspelning (inga data)</string>
     </resources>
