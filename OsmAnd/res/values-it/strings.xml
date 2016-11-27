@@ -1591,7 +1591,7 @@ Il gruppo che non è stato rimosso da mesi viene allineato con le tue regole per
     <string name="map_widget_plain_time">Orario attuale</string>
     <string name="save_as_favorites_points">Salva come gruppo di preferiti</string>
     <string name="select_destination_and_intermediate_points">Scegli le destinazioni</string>
-    <string name="layer_amenity_label">Etichette dei punti</string>
+    <string name="layer_amenity_label">Etichette dei PDI</string>
     <string name="show_zoom_buttons_navigation">Mostra i pulsanti dello zoom</string>
     <string name="show_zoom_buttons_navigation_descr">Mostra i pulsanti dello zoom durante la navigazione</string>
 
