@@ -2594,4 +2594,5 @@ und vieles mehr ...
     <string name="routing_attr_allow_motorway_name">Autobahnen erlauben</string>
     <string name="routing_attr_allow_motorway_description">Autobahnen erlauben</string>
     <string name="lang_sr_latn">Serbisch (lateinisch)</string>
+    <string name="lang_zh_HK">Chinesisch (Hong Kong)</string>
     </resources>
