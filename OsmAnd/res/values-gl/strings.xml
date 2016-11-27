@@ -286,12 +286,12 @@
 	<string name="lang_ru">Ruso</string>
 	<string name="lang_sc">Sardo</string>
 	<string name="lang_sr">Serbio</string>
-	<string name="lang_zh_CN">Chinés simplificado</string>
+	<string name="lang_zh_cn">Chinés simplificado</string>
 	<string name="lang_sk">Eslovaco</string>
 	<string name="lang_sl">Esloveno</string>
 	<string name="lang_es">Español</string>
 	<string name="lang_sv">Sueco</string>
-	<string name="lang_zh_TW">Chinés tradicional</string>
+	<string name="lang_zh_tw">Chinés tradicional</string>
 	<string name="lang_tr">Turco</string>
 	<string name="lang_uk">Ucraíno</string>
 	<string name="lang_vi">Vietnamita</string>

@@ -1687,8 +1687,8 @@ Ali želite nadaljevati z obnovitvijo registracije?</string>
     <string name="lang_al">Albanščina</string>
     <string name="lang_ar">Arabščina</string>
     <string name="lang_sr">Srbščina</string>
-    <string name="lang_zh_CN">Kitajščina (poenostavljena)</string>
-    <string name="lang_zh_TW">Kitajščina (tradicionalna)</string>
+    <string name="lang_zh_cn">Kitajščina (poenostavljena)</string>
+    <string name="lang_zh_tw">Kitajščina (tradicionalna)</string>
     <string name="lang_sc">Sardinščina</string>
     <string name="rendering_attr_subwayMode_name">Proge podzemne železnice</string>
     <string name="continue_navigation">Nadaljuj z navigacijo</string>
@@ -2504,7 +2504,7 @@ V kolikor naletite na težave s programom OsmAnd, prosimo, stopite v stik s skup
     <string name="change_markers_position">Spremeni položaj oznake</string>
     <string name="lang_es_us">Španščina (ameriška)</string>
     <string name="lang_en_gb">Angleščina (Združeno kraljestvo)</string>
-    <string name="lang_be_BY">Beloruščina (latinica)</string>
+    <string name="lang_be_by">Beloruščina (latinica)</string>
     <string name="lang_kn">Kanada</string>
     <string name="lang_ast">Asturijski</string>
     <string name="app_mode_bus">Avtobus</string>

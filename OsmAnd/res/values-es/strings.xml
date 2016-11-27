@@ -1555,8 +1555,8 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="lang_ar">Árabe</string>
     <string name="lang_sc">Sardo</string>
     <string name="lang_sr">Serbio</string>
-    <string name="lang_zh_CN">Chino (simplificado)</string>
-    <string name="lang_zh_TW">Chino (tradicional)</string>
+    <string name="lang_zh_cn">Chino (simplificado)</string>
+    <string name="lang_zh_tw">Chino (tradicional)</string>
     <string name="rendering_attr_subwayMode_name">Rutas de metro</string>
     <string name="continue_navigation">Continuar Navegación</string>
     <string name="pause_navigation">Pausar navegación</string>
@@ -2349,7 +2349,7 @@ OsmAnd Mapas y Navegación - encuentra ubicaciones en el mapa y calcula rutas si
     <string name="lang_ast">Asturiano</string>
     <string name="lang_hsb">Alto sorabo</string>
     <string name="lang_en_gb">Inglés (Reino Unido)</string>
-    <string name="lang_be_BY">Bielorruso (latino)</string>
+    <string name="lang_be_by">Bielorruso (latino)</string>
     <string name="lang_kn">Canarés</string>
     <string name="share_history_subject">" compartido vía OsmAnd"</string>
     <string name="show_on_map">Mostrar en el mapa</string>

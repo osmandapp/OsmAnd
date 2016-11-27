@@ -1667,8 +1667,8 @@ Vuoi procedere con una nuova registrazione?</string>
     <string name="lang_ar">Arabo</string>
     <string name="lang_sc">Sardo</string>
     <string name="lang_sr">Serbo</string>
-    <string name="lang_zh_CN">Cinese (Semplificato)</string>
-    <string name="lang_zh_TW">Cinese tradizionale</string>
+    <string name="lang_zh_cn">Cinese (Semplificato)</string>
+    <string name="lang_zh_tw">Cinese tradizionale</string>
     <string name="rendering_attr_subwayMode_name">Percorsi metró</string>
     <string name="osmo_invite">Invita…</string>
     <string name="osmo_leave_confirmation_msg">Vuoi abbandonare il gruppo %1$s?</string>
@@ -2557,7 +2557,7 @@ Se ami OsmAnd e OSM e vuoi sostenerli, questo è un modo perfetto per farlo.</st
     <string name="lang_kn">Kannada</string>
     <string name="app_mode_bus">Autobus</string>
  	<string name="app_mode_train">Treno</string>
-    <string name="lang_be_BY">Bielorusso (Latino)</string>
+    <string name="lang_be_by">Bielorusso (Latino)</string>
     <string name="shared_string_is_open_24_7">Aperto 24/7</string>
     <string name="storage_directory_card">Scheda di memoria</string>
     <string name="coords_format">Formato coordinate</string>

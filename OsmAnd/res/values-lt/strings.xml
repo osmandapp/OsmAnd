@@ -1713,9 +1713,9 @@ Ar norite registruotis iš naujo?</string>
     <string name="lang_al">Albanų</string>
     <string name="lang_ar">Arabų</string>
     <string name="lang_sr">Serbų</string>
-    <string name="lang_zh_TW">Kinų (Tradicinė)</string>
+    <string name="lang_zh_tw">Kinų (Tradicinė)</string>
     <string name="lang_sc">Sardinų</string>
-    <string name="lang_zh_CN">Kinų (supaprastinta)</string>
+    <string name="lang_zh_cn">Kinų (supaprastinta)</string>
     <string name="rendering_attr_subwayMode_name">Metro maršrutai</string>
     <string name="continue_navigation">Tęsti navigaciją</string>
     <string name="pause_navigation">Pristabdyti navigaciją</string>
@@ -2449,7 +2449,7 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
  (Šiuo metu prieinama tik {2} MB vietos.)</string>
     <string name="lang_es_us">Ispanų (Amerikos)</string>
     <string name="lang_en_gb">Anglų (Junginė Karalystė)</string>
-    <string name="lang_be_BY">Belarusų (Lotynų)</string>
+    <string name="lang_be_by">Belarusų (Lotynų)</string>
     <string name="lang_hu_formal">Vengrų (oficiali)</string>
     <string name="search_categories">Kategorijos</string>
     <string name="map_widget_battery">Baterijos būklė</string>

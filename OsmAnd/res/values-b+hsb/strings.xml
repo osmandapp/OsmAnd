@@ -329,12 +329,12 @@
     <string name="lang_ru">Rušćina</string>
     <string name="lang_sc">Sardinšćina</string>
     <string name="lang_sr">Serbišćina</string>
-    <string name="lang_zh_CN">Chinšćina (zjednorjena)</string>
+    <string name="lang_zh_cn">Chinšćina (zjednorjena)</string>
     <string name="lang_sk">Słowakšćina</string>
     <string name="lang_sl">Słowjenšćina</string>
     <string name="lang_es">Španišćina</string>
     <string name="lang_sv">Šwedšćina</string>
-    <string name="lang_zh_TW">Chinšćina (tradicionelna)</string>
+    <string name="lang_zh_tw">Chinšćina (tradicionelna)</string>
     <string name="lang_tr">Turkowšćina</string>
     <string name="lang_uk">Ukrainšćina</string>
     <string name="lang_vi">Vietnamšćina</string>
@@ -899,7 +899,7 @@
     <string name="lang_es_us">Španišćina (Amerika)</string>
     <string name="lang_ast">Asturišćina</string>
     <string name="lang_en_gb">Jendźelšćina (Zjednoćene kralestwo)</string>
-    <string name="lang_be_BY">Běłorušćina (łaćonsce)</string>
+    <string name="lang_be_by">Běłorušćina (łaćonsce)</string>
     <string name="lang_kn">Kannadašćina</string>
     <string name="shared_string_is_open_24_7">Bjez přestawki wočinjene</string>
     <string name="storage_directory_card">Składowanska karta</string>

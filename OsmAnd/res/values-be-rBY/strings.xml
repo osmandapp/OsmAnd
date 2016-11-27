@@ -390,12 +390,12 @@ Hrupa nie była vydalenaja paśla niekalkіch miesiacaŭ, pavіnny pryvieścі j
 	<string name="lang_ru">rasiejskaja</string>
 	<string name="lang_sc">sardynskaja</string>
 	<string name="lang_sr">serbskaja</string>
-	<string name="lang_zh_CN">kіtajskaja (sproščanaja)</string>
+	<string name="lang_zh_cn">kіtajskaja (sproščanaja)</string>
 	<string name="lang_sk">słavackaja</string>
 	<string name="lang_sl">słavienskaja</string>
 	<string name="lang_es">hіšpanskaja</string>
 	<string name="lang_sv">švedzkaja</string>
-	<string name="lang_zh_TW">kіtajskaja (tradycyjnaja)</string>
+	<string name="lang_zh_tw">kіtajskaja (tradycyjnaja)</string>
 	<string name="lang_tr">tureckaja</string>
 	<string name="lang_uk">ukraіnskaja</string>
 	<string name="lang_vi">vjetnamskaja</string>
@@ -2351,7 +2351,7 @@ U vypadku aktyvacyі hetaha vіdu, styl mapy mianiajecca na \"Winter and ski\", 
     <string name="proxy_host_descr">Zadajcie chostnejm vašaha proksі (naprykład 127.0.0.1)</string>
     <string name="proxy_port_title">Port proksі</string>
     <string name="proxy_port_descr">Zadajcie numar parta vašaha proksі (naprykład 8118)</string>
-    <string name="lang_be_BY">biełaruskaja łacіnka</string>
+    <string name="lang_be_by">biełaruskaja łacіnka</string>
     <string name="lang_hu_formal">Vuhorskaja (afіcyjnaja)</string>
     <string name="routing_attr_avoid_stairs_name">Paźbiahać leśvіc</string>
     <string name="routing_attr_avoid_stairs_description">Paźbiahać leśvіc</string>

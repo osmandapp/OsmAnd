@@ -1595,12 +1595,12 @@ Lorratza %2$s</string>
 	<string name="lang_ru">Errusiera</string>
 	<string name="lang_sc">Sardiniera</string>
 	<string name="lang_sr">Serbiera</string>
-	<string name="lang_zh_CN">Txinera (sinplifikatuta)</string>
+	<string name="lang_zh_cn">Txinera (sinplifikatuta)</string>
 	<string name="lang_sk">Eslovakiera</string>
 	<string name="lang_sl">Esloveniera</string>
 	<string name="lang_es">Espainiera</string>
 	<string name="lang_sv">Suediera</string>
-	<string name="lang_zh_TW">Txinera (tradizionala)</string>
+	<string name="lang_zh_tw">Txinera (tradizionala)</string>
 	<string name="lang_tr">Turkiera</string>
 	<string name="lang_uk">Ukrainera</string>
 	<string name="lang_vi">Vietnamera</string>
@@ -2395,7 +2395,7 @@ Erregistro berria burutu nahi duzu?</string>
     <string name="osmo_settings_descr">Konfiguratu monitorizatze ezarpenak eta ezarri monitorizatze kanal pertsonala</string>
     <string name="osmo_settings">OsMo</string>
     <string name="lang_en_gb">Ingelesa (Erresuma Batua)</string>
-    <string name="lang_be_BY">Bielorrusiera (Latinoa)</string>
+    <string name="lang_be_by">Bielorrusiera (Latinoa)</string>
     <string name="lang_hu_formal">Hungariera (formala)</string>
     <string name="lang_kn">Kannada</string>
     <string name="routing_attr_height_name">Altuera muga</string>

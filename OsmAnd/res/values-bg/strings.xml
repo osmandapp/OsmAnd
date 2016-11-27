@@ -1739,12 +1739,12 @@
     <string name="lang_pl">Полски</string>
     <string name="lang_pt">Португалски</string>
     <string name="lang_sc">Сардински</string>
-    <string name="lang_zh_CN">Китайски (опростен)</string>
+    <string name="lang_zh_cn">Китайски (опростен)</string>
     <string name="lang_sk">Словашки</string>
     <string name="lang_sl">Словенски</string>
     <string name="lang_sv">Шведски</string>
     <string name="lang_uk">Украински</string>
-    <string name="lang_zh_TW">Китайски (традиционен)</string>
+    <string name="lang_zh_tw">Китайски (традиционен)</string>
     <string name="error_message_pattern">Грешка: {0}</string>
     <string name="app_name_osmand">OsmAnd</string>
 

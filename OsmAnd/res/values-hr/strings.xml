@@ -1492,8 +1492,8 @@
 	<string name="lang_ar">Arabski</string>
 	<string name="lang_fa">Perzijski</string>
 	<string name="lang_sr">Srpski</string>
-	<string name="lang_zh_CN">Pojednostavljeni Kineski</string>
-	<string name="lang_zh_TW">Tradicionalni kineski</string>
+	<string name="lang_zh_cn">Pojednostavljeni Kineski</string>
+	<string name="lang_zh_tw">Tradicionalni kineski</string>
 	<string name="use_displayed_track_for_navigation">Želite li koristiti prikazan zapis za vašu navigaciju?</string>
     <string name="route_preferences">Postavke rute</string>
     <string name="route_info">Informacije o ruti</string>

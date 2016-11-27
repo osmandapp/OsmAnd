@@ -236,7 +236,7 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 				getString(R.string.lang_ar),
 				getString(R.string.lang_ast) + incompleteSuffix,
 				getString(R.string.lang_be),
-				getString(R.string.lang_be_BY),
+				getString(R.string.lang_be_by),
 				getString(R.string.lang_bg),
 				getString(R.string.lang_ca),
 				getString(R.string.lang_cs),
@@ -285,8 +285,8 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 				getString(R.string.lang_tr),
 				getString(R.string.lang_uk),
 				getString(R.string.lang_vi) + incompleteSuffix,
-				getString(R.string.lang_zh_CN) + incompleteSuffix,
-				getString(R.string.lang_zh_TW)};
+				getString(R.string.lang_zh_cn) + incompleteSuffix,
+				getString(R.string.lang_zh_tw)};
 		String[] valuesPl = ConfigureMapMenu.getSortedMapNamesIds(this, entries, entries);
 		String[] idsPl = ConfigureMapMenu.getSortedMapNamesIds(this, entrieValues, entries);
 		registerListPreference(settings.PREFERRED_LOCALE, screen, valuesPl, idsPl);

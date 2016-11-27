@@ -1702,8 +1702,8 @@
 	<string name="lang_ar">아랍어</string>
 	<string name="lang_sc">사르디니아어</string>
 	<string name="lang_sr">세르비아어</string>
-	<string name="lang_zh_CN">중국어 간체</string>
-	<string name="lang_zh_TW">중국어 번체</string>
+	<string name="lang_zh_cn">중국어 간체</string>
+	<string name="lang_zh_tw">중국어 번체</string>
 	<string name="rendering_attr_subwayMode_name">지하철 노선</string>
  	<string name="continue_navigation">운행 계속</string>
     <string name="pause_navigation">운행 일시중지</string>

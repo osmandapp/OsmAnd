@@ -1389,8 +1389,8 @@
 	<string name="lang_ar">Αραβικά</string>
 	<string name="lang_fa">Περσικά</string>
 	<string name="lang_sr">Σερβικά</string>
-	<string name="lang_zh_CN">Κινέζικα (Απλοποιημένα)</string>
-	<string name="lang_zh_TW">Κινέζικα (Παραδοσιακά)</string>
+	<string name="lang_zh_cn">Κινέζικα (Απλοποιημένα)</string>
+	<string name="lang_zh_tw">Κινέζικα (Παραδοσιακά)</string>
 	<string name="arrival_distance_factor_early">Νωρίς</string>
     <string name="arrival_distance_factor_normally">Κανονικά</string>
     <string name="arrival_distance_factor_late">Αργά</string>

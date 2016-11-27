@@ -1703,8 +1703,8 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="lang_fa">Perski</string>
     <string name="lang_sc">Sardyński</string>
     <string name="lang_sr">Serbski</string>
-    <string name="lang_zh_CN">Chiński (uproszczony)</string>
-    <string name="lang_zh_TW">Chiński (tradycyjny)</string>
+    <string name="lang_zh_cn">Chiński (uproszczony)</string>
+    <string name="lang_zh_tw">Chiński (tradycyjny)</string>
     <string name="rendering_attr_subwayMode_name">Linie metra</string>
     <string name="download_additional_maps">Pobrać brakujące mapy %1$s (%2$d MB)?</string>
     <string name="shared_string_more">Więcej…</string>
@@ -2546,7 +2546,7 @@ Jeśli potrzebujesz pomocy podczas używania OsmAnd, prosimy o kontakt z naszym 
     <string name="lang_es_us">Hiszpański (Ameryka)</string>
     <string name="lang_ast">Asturyjski</string>
     <string name="lang_en_gb">Angielski (Wielka Brytania)</string>
-    <string name="lang_be_BY">Białoruski (łaciński)</string>
+    <string name="lang_be_by">Białoruski (łaciński)</string>
     <string name="lang_hu_formal">Węgierski (formalny)</string>
     <string name="lang_kn">Kannada</string>
     <string name="coords_format">Format współrzędnych</string>

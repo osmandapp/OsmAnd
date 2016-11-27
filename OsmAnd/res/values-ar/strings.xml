@@ -1576,8 +1576,8 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
 	<string name="lang_fa">فارسي</string>
 	<string name="lang_sc">سردينيا</string>
 	<string name="lang_sr">صربي</string>
-	<string name="lang_zh_CN">الصيني ( المبسط )</string>
-	<string name="lang_zh_TW">الصيني ( التقليدي )</string>
+	<string name="lang_zh_cn">الصيني ( المبسط )</string>
+	<string name="lang_zh_tw">الصيني ( التقليدي )</string>
 	<string name="calculate_osmand_route_without_internet">احسب قسم طريق OsmAnd بدون إنترنت</string>
     <string name="gpx_option_calculate_first_last_segment">احسب طريق OsmAnd لأول وآخر قسمين في الطريق</string>
     <string name="use_displayed_track_for_navigation">هل ترغب باستخدام المسار المعروض للملاحة؟</string>
@@ -1801,7 +1801,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="shared_string_reverse_order">ترتيب عكسي</string>
     <string name="show_map_markers_description">تفعيل ميزة العلامات على الخريطة</string>
     <string name="lang_ast">الأسترية</string>
-    <string name="lang_be_BY">البيلاروسية (لاتينية)</string>
+    <string name="lang_be_by">البيلاروسية (لاتينية)</string>
     <string name="lang_en_gb">الإنجليزية ( المملكة المتحدة )</string>
     <string name="lang_eo">الاسبرانتو</string>
     <string name="lang_gl">الجاليكية</string>

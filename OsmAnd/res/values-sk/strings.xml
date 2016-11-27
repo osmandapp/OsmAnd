@@ -1504,8 +1504,8 @@ Chcete pokračovať v novej registrácii?</string>
     <string name="lang_ar">Arabsky</string>
     <string name="lang_sc">Sardínsky</string>
     <string name="lang_sr">Srbsky</string>
-    <string name="lang_zh_CN">Čínština (Zjednodušená)</string>
-    <string name="lang_zh_TW">Čínština (Tradičná)</string>
+    <string name="lang_zh_cn">Čínština (Zjednodušená)</string>
+    <string name="lang_zh_tw">Čínština (Tradičná)</string>
     <string name="continue_navigation">Pokračovať v navigácii</string>
     <string name="pause_navigation">Pozastaviť navigáciu</string>
     <string name="rendering_attr_alpineHiking_name">Alpinistická stupnica (SAC)</string>
@@ -2349,7 +2349,7 @@ Ak potrebuje pomoc s aplikáciou OsmAnd, kontaktuje podporu: support@osmand.net.
     <string name="current_track">Súčasná stopa</string>
     <string name="change_markers_position">Zmeniť polohu značky</string>
     <string name="lang_es_us">Španielsky (Americká)</string>
-    <string name="lang_be_BY">Bielorusky (Latinka)</string>
+    <string name="lang_be_by">Bielorusky (Latinka)</string>
     <string name="lang_kn">Kannada</string>
     <string name="lang_en_gb">Anglicky (Veľká Británia)</string>
     <string name="lang_ast">Astúrsky</string>

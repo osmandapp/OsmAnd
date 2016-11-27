@@ -1536,8 +1536,8 @@ Voulez-vous effectuer à une nouvelle inscription ?</string>
     <string name="lang_ar">Arabe</string>
     <string name="lang_sc">sarde</string>
     <string name="lang_sr">serbe</string>
-    <string name="lang_zh_CN">Chinois (simplifié)</string>
-    <string name="lang_zh_TW">Chinois (traditionnel)</string>
+    <string name="lang_zh_cn">Chinois (simplifié)</string>
+    <string name="lang_zh_tw">Chinois (traditionnel)</string>
     <string name="osmo_invite">Inviter…</string>
     <string name="osmo_leave_confirmation_msg">Voulez-vous quitter le groupe %1$s ?</string>
     <string name="osmo_specify_tracker_id">Veuillez renseigner l\'identifiant</string>
@@ -2318,7 +2318,7 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="access_direction_haptic_feedback_descr">Indiquer la direction de la cible par des vibrations</string>
     <string name="access_direction_audio_feedback">Indication de la direction par sons</string>
     <string name="access_direction_haptic_feedback">Indication de la direction par vibrations</string>
-    <string name="lang_be_BY">Biélorusse (Latin)</string>
+    <string name="lang_be_by">Biélorusse (Latin)</string>
     <string name="lang_ast">Asturien</string>
     <string name="app_mode_bus">Bus</string>
  	<string name="app_mode_train">Train</string>
@@ -2478,5 +2478,5 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="routing_attr_allow_motorway_name">Autoriser les autoroutes</string>
     <string name="wiki_around">Articles Wikipedia à proximité</string>
     <string name="lang_sr_latn">Serbe (Latin)</string>
-    <string name="lang_zh_HK">Chinois (Hong Kong)</string>
+    <string name="lang_zh_hk">Chinois (Hong Kong)</string>
     </resources>

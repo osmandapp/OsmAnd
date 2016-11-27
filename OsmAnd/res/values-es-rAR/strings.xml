@@ -397,12 +397,12 @@ Lon %2$s</string>
     <string name="lang_ru">Ruso</string>
     <string name="lang_sc">Sardo</string>
     <string name="lang_sr">Serbio</string>
-    <string name="lang_zh_CN">Chino (simplificado)</string>
+    <string name="lang_zh_cn">Chino (simplificado)</string>
     <string name="lang_sk">Eslovaco</string>
     <string name="lang_sl">Esloveno</string>
     <string name="lang_es">Español</string>
     <string name="lang_sv">Sueco</string>
-    <string name="lang_zh_TW">Chino (tradicional)</string>
+    <string name="lang_zh_tw">Chino (tradicional)</string>
     <string name="lang_tr">Turco</string>
     <string name="lang_uk">Ucraniano</string>
     <string name="lang_vi">Vietnamita</string>
@@ -2350,7 +2350,7 @@ Si necesitas ayuda con la aplicación OsmAnd, contacte con nuestro equipo de sop
     <string name="current_track">Traza actual</string>
     <string name="change_markers_position">Mover el marcador</string>
     <string name="lang_es_us">Español (Estados Unidos)</string>
-    <string name="lang_be_BY">Bielorruso (Latín)</string>
+    <string name="lang_be_by">Bielorruso (Latín)</string>
     <string name="lang_kn">Canarés</string>
     <string name="lang_en_gb">Inglés (Reino Unido)</string>
     <string name="app_mode_bus">Colectivo</string>
@@ -2501,5 +2501,5 @@ Si necesitas ayuda con la aplicación OsmAnd, contacte con nuestro equipo de sop
     <string name="routing_attr_allow_motorway_name">Permitir autopistas</string>
     <string name="routing_attr_allow_motorway_description">Permite pasar por autopistas</string>
     <string name="lang_sr_latn">Serbio (latín)</string>
-    <string name="lang_zh_HK">Chino (Hong Kong)</string>
+    <string name="lang_zh_hk">Chino (Hong Kong)</string>
     </resources>

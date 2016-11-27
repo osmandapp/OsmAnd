@@ -1841,7 +1841,7 @@ Jälki %2$s</string>
     <string name="lang_hy">Armenia</string>
     <string name="lang_eu">Baski</string>
     <string name="lang_be">Valkovenäjä</string>
-    <string name="lang_be_BY">Valkovenäjä (latinalaisittain)</string>
+    <string name="lang_be_by">Valkovenäjä (latinalaisittain)</string>
     <string name="lang_bs">Bosnia</string>
     <string name="lang_bg">Bulgaria</string>
     <string name="lang_ca">Katalaani</string>
@@ -1874,12 +1874,12 @@ Jälki %2$s</string>
     <string name="lang_ru">Venäjä</string>
     <string name="lang_sc">Sardinia</string>
     <string name="lang_sr">Serbi</string>
-    <string name="lang_zh_CN">Kiina (yksinkertaistettu)</string>
+    <string name="lang_zh_cn">Kiina (yksinkertaistettu)</string>
     <string name="lang_sk">Slovakki</string>
     <string name="lang_sl">Sloveeni</string>
     <string name="lang_es">Espanja</string>
     <string name="lang_sv">Ruotsi</string>
-    <string name="lang_zh_TW">Kiina (traditionaalinen)</string>
+    <string name="lang_zh_tw">Kiina (traditionaalinen)</string>
     <string name="lang_tr">Turkki</string>
     <string name="lang_uk">Ukraina</string>
     <string name="lang_vi">Vietnami</string>

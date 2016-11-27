@@ -663,8 +663,8 @@ OsmAnd est totora in fase de isvilupu e su progetu nostru e su  progressu suo an
     <string name="lang_ar">Àrabu</string>
     <string name="lang_sc">Sardu</string>
     <string name="lang_sr">Serbu</string>
-    <string name="lang_zh_CN">Tzinesu (semplificadu)</string>
-    <string name="lang_zh_TW">Tzinesu (traditzionale)</string>
+    <string name="lang_zh_cn">Tzinesu (semplificadu)</string>
+    <string name="lang_zh_tw">Tzinesu (traditzionale)</string>
     <string name="osmand_extended_description_4000_chars">"
 OsmAnd (OSM Automated Navigation Directions - Indicatziones de Nàvigu Automàticas) est un aplicatzione pro su nàvigu chi impreat sa cantidade manna de datos a mitza aberta de OpenStreetMap (OSM). Totu sas mapas (vetoriales o a tasseddos) podent èssere sarbadas in s’ischeda de su telèfono pro èssere impreadas chene lìnia. Impreende su GPS de su dispositivu OsmAnd oferit su nàvigu cun, s’in casu, sa ghia vocale, pro sa màchina, sa bitzicleta e a pedes. Totu sas funtzionalidades sunt disponìbiles siat in lìnia siat chene lìnia (non serbit una connessione ad ìnternet).
 
@@ -2493,7 +2493,7 @@ Si istimas OsmAnd e OSM e los boles suportare, custa est una manera perfeta pro 
     <string name="change_markers_position">Muda sa positzione de su marcadore</string>
     <string name="lang_es_us">Ispagnolu (americanu)</string>
     <string name="lang_en_gb">Inglesu (Regnu Unidu)</string>
-    <string name="lang_be_BY">Bielorussu (caràteres latinos)</string>
+    <string name="lang_be_by">Bielorussu (caràteres latinos)</string>
     <string name="lang_kn">Kannada</string>
     <string name="lang_ast">Asturianu</string>
     <string name="app_mode_bus">Postale</string>
@@ -2650,5 +2650,5 @@ Si istimas OsmAnd e OSM e los boles suportare, custa est una manera perfeta pro 
     <string name="routing_attr_allow_motorway_name">Inclue sas autostradas</string>
     <string name="routing_attr_allow_motorway_description">Permiti sas àndalas in sas autostradas</string>
     <string name="lang_sr_latn">Serbu (caràteres latinos)</string>
-    <string name="lang_zh_HK">Tzinesu (Hong Kong)</string>
+    <string name="lang_zh_hk">Tzinesu (Hong Kong)</string>
     </resources>

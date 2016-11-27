@@ -1433,8 +1433,8 @@
     <string name="lang_fa">Персидский</string>
     <string name="lang_sc">Сардинский</string>
     <string name="lang_sr">Сербский</string>
-    <string name="lang_zh_CN">Китайский (упрощенный)</string>
-    <string name="lang_zh_TW">Китайский (традиционный)</string>
+    <string name="lang_zh_cn">Китайский (упрощенный)</string>
+    <string name="lang_zh_tw">Китайский (традиционный)</string>
     <string name="rendering_attr_subwayMode_name">Маршруты метро</string>
     <string name="osmo_invite">Пригласить…</string>
     <string name="osmo_leave_confirmation_msg">Вы хотите выйти из группы %1$s?</string>
@@ -2166,7 +2166,7 @@
     <string name="av_locations_descr">Файл GPX с координатами заметок</string>
     <string name="lang_ast">Астурийский</string>
     <string name="lang_hsb">Верхнелужицкий</string>
-    <string name="lang_be_BY">Белорусский (латиница)</string>
+    <string name="lang_be_by">Белорусский (латиница)</string>
     <string name="driving_region_australia">Австралия</string>
     <string name="lang_kab">Кабильский</string>
     </resources>
