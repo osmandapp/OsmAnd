@@ -1353,4 +1353,17 @@
 	<string name="poi_food_court">Corte di cibo</string>
 	<string name="poi_cutline">Linea di taglio</string>
 	<string name="poi_toilets">Toilette</string>
+	<string name="poi_payment_terminal">Terminale di pagamento</string>
+	<string name="poi_stone">Notevole pietra</string>
+	<string name="poi_fog_signal">Segnale da nebbia</string>
+	<string name="poi_wiki_lang_ga">Wiki Irlandese</string>
+	<string name="poi_wiki_lang_hy">Wiki Arminiana</string>
+	<string name="poi_wiki_lang_is">Wiki Islanda</string>
+	<string name="poi_wiki_lang_ka">Wiki Georgiana</string>
+	<string name="poi_wiki_lang_la">Wiki Latina</string>
+	<string name="poi_wiki_lang_lb">Wiki Lussemburghese</string>
+	<string name="poi_wiki_lang_mk">Wiki Macedone</string>
+	<string name="poi_wiki_lang_sc">Wiki Sarda</string>
+	<string name="poi_wiki_lang_sq">Wiki Albanese</string>
+	<string name="poi_wiki_lang_tl">Wiki Filippina</string>
 	</resources>
