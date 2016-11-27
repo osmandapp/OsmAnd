@@ -1744,4 +1744,62 @@
 	<string name="poi_sauna_yes">Servizi di sauna</string>
 	<string name="poi_solarium_yes">Servizi solarium</string>
 
+	<string name="poi_tents_yes">Ammessi</string>
+	<string name="poi_tents_no">Tende non ammessi</string>
+	<string name="poi_openfire_yes">Caminetto ammessi</string>
+	<string name="poi_openfire_no">Caminetto non ammessi</string>
+	<string name="poi_backcountry_yes">Sì</string>
+	<string name="poi_backcountry_no">No</string>
+	<string name="poi_washing_machine_yes">Sì</string>
+	<string name="poi_washing_machine_no">Lavatrice: no</string>
+	<string name="poi_shower_filter_yes">Sì</string>
+	<string name="poi_shower_yes">Doccia: Sì</string>
+	<string name="poi_shower_no">Doccia: no</string>
+	<string name="poi_shower_hot">Doccia: caldo</string>
+	<string name="poi_shower_outdoor">Doccia: all\'aperto</string>
+	<string name="poi_shower_cold">Doccia: freddo</string>
+	<string name="poi_caravans_yes">Sì</string>
+	<string name="poi_caravans_no">Caravan: no</string>
+	<string name="poi_sanitary_dump_station_yes">Stazione di discarica sanitaria: Sì</string>
+	<string name="poi_sanitary_dump_station_no">Stazione di sanitari discarica: no</string>
+	<string name="poi_power_supply_yes">Sì</string>
+	<string name="poi_power_supply_no">Alimentazione elettrica: no</string>
+	<string name="poi_power_supply_cee_17_blue">Tensione di alimentazione (presa): CEE 17 blu</string>
+	<string name="poi_power_supply_cee_7_4">Tensione di alimentazione (presa): CEE 7/4</string>
+	<string name="poi_power_supply_cee_7_5">Tensione di alimentazione (presa): CEE 7/5</string>
+	<string name="poi_power_supply_nema_5_15">Tensione di alimentazione (presa): NEMA 5-15</string>
+
+	<string name="poi_dog_yes">Cani ammessi</string>
+	<string name="poi_dog_no">Cani non ammessi</string>
+
+	<string name="poi_social_facility_assisted_living">Residenza assistita</string>
+	<string name="poi_social_facility_for_senior">Anziani</string>
+	<string name="poi_social_facility_for_child">Bambini</string>
+	<string name="poi_social_facility_for_orphan">Orfani</string>
+	<string name="poi_social_facility_for_disabled">Disabili</string>
+	<string name="poi_social_facility_for_mental_health">Pazienti con disturbi mentali</string>
+	<string name="poi_social_facility_for_homeless">Senzatetto</string>
+	<string name="poi_social_facility_for_migrant">Migranti</string>
+	<string name="poi_social_facility_for_unemployed">Disoccupati</string>
+	<string name="poi_social_facility_for_child_juvenile">Bambini; giovanile</string>
+
+	<string name="poi_theatre_genre_philharmonic">Filarmonica</string>
+	<string name="poi_theatre_genre_drama">Dramma</string>
+	<string name="poi_theatre_genre_opera">Opera</string>
+	<string name="poi_theatre_genre_cabaret">Cabaret</string>
+	<string name="poi_theatre_genre_comedy">Commedia</string>
+	<string name="poi_theatre_genre_marionette">Marionetta</string>
+	<string name="poi_theatre_genre_ballet">Balletto</string>
+	<string name="poi_theatre_genre_shadow_play">Gioco di ombre</string>
+
+	<string name="poi_product_brick">Prodotto: mattone</string>
+	<string name="poi_product_beer">Prodotto: birra</string>
+	<string name="poi_product_meat">Prodotto: carne</string>
+
+	<string name="poi_blind_description">Descrizione per non vedenti</string>
+	<string name="poi_highway_steps">Scale</string>
+	<string name="poi_handrail_yes">Corrimano: Sì</string>
+	<string name="poi_handrail_no">Corrimano: no</string>
+	<string name="poi_ramp_yes">Rampa: Sì</string>
+	<string name="poi_ramp_no">Rampa: no</string>
 	</resources>
