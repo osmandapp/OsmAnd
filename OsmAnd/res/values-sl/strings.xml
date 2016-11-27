@@ -1959,12 +1959,23 @@ ZŠ (β) %2$s</string>
     <string name="rendering_attr_hideHouseNumbers_name">Pokaži hišne številke</string>
     <string name="index_name_netherlands">Evropa – Nizozemska</string>
     <string name="delay_to_start_navigation_descr">Določite čas, preden se zapre zaslon načrtovanja poti.</string>
-    <string name="plugin_touringview_descr">"S spreminjanjem tega pogleda, se spremeni slog prikazovanja zemljevidov \'potovalni način\' (Touring view). To je posebni, zelo podrobni pogled za popotnike in profesionalne voznike.
-\n\nPogled omogoča največji možni nabor podrobnosti pri katerikoli povečavi. To vključuje podrobnosti zemljevida s poudarkom na cestah, , poteh, sledeh in oznak za hitro orientacijo v okolju.
-\n\nEnostavno je razločevanje tudi med različnimi vrstami cest. Te so označene z različnimi barvami glede na vrsto vozišča, ker je še posebej uporabno za voznike velikih oziroma težkih vozil.
-\n\nOmogoča tudi posebne možnosti potovanja, kot je kolesarjenje ali pohodništvo v odročnih, gorskih ali težko prehodnih krajih.
-\n\nZa uporabo te možnosti je uporabljen podroben izris obstoječih zemljevidov, zato posebni zemljevidi niso potrebni.
-\n\nPodrobni izris je mogoče prekiniti z onemogočanjem možnosti ali pa s spreminjanjem vrste prikaza zemljevida. "</string>
+    <string name="plugin_touringview_descr">"S spreminjanjem tega pogleda, se spremeni slog prikazovanja zemljevidov »potovalni način« (Touring view). To je posebni, zelo podrobni pogled za popotnike in profesionalne voznike.
+
+
+Pogled omogoča največji možni nabor podrobnosti pri katerikoli povečavi. To vključuje podrobnosti zemljevida s poudarkom na cestah, , poteh, sledeh in oznak za hitro orientacijo v okolju.
+
+
+Enostavno je razločevanje tudi med različnimi vrstami cest. Te so označene z različnimi barvami glede na vrsto vozišča, ker je še posebej uporabno za voznike velikih oziroma težkih vozil.
+
+
+Omogoča tudi posebne možnosti potovanja, kot je kolesarjenje ali pohodništvo v odročnih, gorskih ali težko prehodnih krajih.
+
+
+Za uporabo te možnosti je uporabljen podroben izris obstoječih zemljevidov, zato posebni zemljevidi niso potrebni.
+
+
+Podrobni izris je mogoče prekiniti z onemogočanjem možnosti ali pa s spreminjanjem vrste prikaza zemljevida.
+ "</string>
     <string name="plugin_ski_descr">"Vstavek omogoča prikaz prog za nordijsko in alpsko smučanje, splošnih smučišč, žičnic in vlečnic in druge smučarske podrobnosti. Težavnost smučišč je označena barvnimi kodami, podrobni izris zemljevida pa je primeren za zimski pogled pokrajine.
 
 
