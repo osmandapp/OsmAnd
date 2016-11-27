@@ -1834,4 +1834,186 @@
 	<string name="poi_animal_yes">Animali ammessi</string>
 	<string name="poi_animal_no">Animali non ammessi</string>
 
+	<string name="poi_historic_stone">Pietra storico</string>
+	<string name="poi_material_wood">Materiale: legno</string>
+	<string name="poi_material_metal">Materiale: metallo</string>
+	<string name="poi_material_reinforced_concrete">Materiale: cemento armato</string>
+	<string name="poi_material_steel">Materiale: acciaio</string>
+	<string name="poi_material_stone">Materiale: pietra</string>
+	<string name="poi_material_brick">Materiale: mattoni</string>
+	<string name="poi_material_plastic">Materiale: plastica</string>
+	<string name="poi_material_granite_stone">Materiale: granito</string>
+	<string name="poi_material_metal_wood">Materiale: metallo; legno</string>
+	<string name="poi_material_glass">Materiale: vetro</string>
+	<string name="poi_material_bronze">Materiale: bronzo</string>
+	<string name="poi_material_earth">Materiale: terra</string>
+	<string name="poi_material_marble">Materiale: marmo</string>
+	<string name="poi_material_aluminium">Materiale: alluminio</string>
+
+	<string name="poi_site_type_fortification">Fortificazione</string>
+	<string name="poi_site_type_settlement">Insediamento</string>
+	<string name="poi_site_type_city">Città</string>
+	<string name="poi_historic_railway_station">Stazione ferroviaria storica</string>
+
+	<string name="poi_historic_gallows">Patibolo storico</string>
+	<string name="poi_historic_railway">Ferrovia storica</string>
+
+	<string name="poi_square">Piazza</string>
+	<string name="poi_artist_name">Artista</string>
+	<string name="poi_sculptor">Scultore</string>
+
+	<string name="poi_building_type_church">Tipo di edificio: Chiesa</string>
+	<string name="poi_building_type_chapel">Tipo di edificio: Cappella</string>
+	<string name="poi_building_type_mosque">Tipo di edificio: Moschea</string>
+	<string name="poi_building_type_temple">Tipo di edificio: Tempio</string>
+	<string name="poi_building_type_cathedral">Tipo di edificio: Cattedrale</string>
+	<string name="poi_building_type_monastery">Tipo di edificio: Monastero</string>
+	<string name="poi_building_type_basilica">Tipo di edificio: Basilica</string>
+	<string name="poi_building_type_synagogue">Tipo di edificio: Sinagoga</string>
+	<string name="poi_building_type_shrine">Tipo di edificio: Santuario</string>
+
+	<string name="poi_cross">Croce</string>
+	<string name="poi_summit_cross">Croce di vetta: Sì</string>
+
+	<string name="poi_prison_camp">Ex campo di prigionia</string>
+	<string name="poi_concentration_camp_nazism">Tipo: nazista</string>
+	<string name="poi_concentration_camp_gulag">Tipo: gulag</string>
+
+	<string name="poi_temperature">Temperatura</string>
+	<string name="poi_bridge_ref">Nr ponte</string>
+	<string name="poi_tunnel_ref">Nr tunnel</string>
+
+	<string name="poi_ref">Nr</string>
+
+	<string name="poi_cargo_vehicle">Veicoli</string>
+	<string name="poi_cargo_bicycle">Biciclette</string>
+	<string name="poi_cargo_container">Contenitori</string>
+	<string name="poi_aerialway_length">Lunghezza</string>
+
+	<string name="poi_fitness_centre">Centro fitness</string>
+	<string name="poi_fitness">Fitness</string>
+
+	<string name="poi_billiards">Biliardo</string>
+
+	<string name="poi_microwave_oven_yes">Forno a microonde: Sì</string>
+	<string name="poi_microwave_oven_no">Forno a microonde: no</string>
+	<string name="poi_water_heater_yes">Riscaldatore di acqua: Sì</string>
+	<string name="poi_water_heater_no">Riscaldatore di acqua: no</string>
+
+	<string name="poi_parking_surface">Tipo: superficie</string>
+	<string name="poi_dojo">Dojo</string>
+
+	<string name="poi_gaelic_games">Giochi Gaelic</string>
+	<string name="poi_netball">Netball</string>
+	<string name="poi_judo">Judo</string>
+	<string name="poi_disc_golf">Disc golf</string>
+	<string name="poi_boxing">Boxe</string>
+
+	<string name="poi_official_name">Nome ufficiale</string>
+
+	<string name="poi_dolphin">Delfino</string>
+
+	<string name="poi_construction_yes">In costruzione</string>
+	<string name="poi_additional_atm_yes">Bancomat: sì</string>
+	<string name="poi_atm_no">Bancomat: no</string>
+
+	<string name="poi_protected_area">Area protetta</string>
+	<string name="poi_protection_title">Titolo di protezione</string>
+	<string name="poi_protection_object_historic">Oggetto di protezione: storico</string>
+	<string name="poi_protection_object_nature">Oggetto di protezione: natura</string>
+	<string name="poi_protection_object_water">Oggetto di protezione: acqua</string>
+
+	<string name="poi_addr_housename">Nome casa</string>
+
+
+	<string name="poi_compressed_air_yes">Sì</string>
+	<string name="poi_compressed_air_no">Aria compressa: no</string>
+
+	<string name="poi_car_wash_yes">Sì</string>
+
+	<string name="poi_vacuum_cleaner_yes">Sì</string>
+	<string name="poi_vacuum_cleaner_no">Aspirapolvere: no</string>
+	<string name="poi_amenity_vacuum_cleaner">Aspirapolvere</string>
+
+	<string name="poi_button_operated_yes">Sgancio a pulsante: Sì</string>
+	<string name="poi_button_operated_no">Sgancio a pulsante: no</string>
+
+	<string name="poi_tanning_salon">Solarium</string>
+
+	<string name="poi_fire_hydrant_type_pillar">Pilastro</string>
+	<string name="poi_fire_hydrant_type_pond">Stagno</string>
+	<string name="poi_fire_hydrant_type_wall">Parete</string>
+
+	<string name="poi_capacity_beds">Capacità (posti letto)</string>
+
+	<string name="poi_emergency_yes">Emergenza: Sì</string>
+	<string name="poi_emergency_no">Emergenza: no</string>
+	<string name="poi_home_visit_yes">Sì</string>
+	<string name="poi_home_visit_no">Visita a domicilio: no</string>
+
+	<string name="poi_fire_hydrant_diameter">Diametro idrante</string>
+	<string name="poi_fire_hydrant_position_sidewalk">Posizione idrante: marciapiede</string>
+	<string name="poi_fire_hydrant_position_street">Posizione idrante: strada</string>
+	<string name="poi_fire_hydrant_style_water_source_cistern">Cisterna</string>
+	<string name="poi_in_service_yes">In servizio: Sì</string>
+
+	<string name="poi_depth">Profondità</string>
+
+	<string name="poi_salt_yes">Sale</string>
+	<string name="poi_salt_no">Sale: no</string>
+	<string name="poi_wheelchair_designated">Indicato</string>
+	<string name="poi_summer_camp">Campo estivo</string>
+	<string name="poi_crossing_bell_yes">Campana di attraversamento</string>
+	<string name="poi_crossing_bell_no">Campana di attraversamento: no</string>
+	<string name="poi_crossing_light_yes">Luce di passaggio</string>
+	<string name="poi_crossing_on_demand_yes">Attraversamento su richiesta</string>
+	<string name="poi_crossing_on_demand_no">Attraversamento su richiesta: no</string>
+	<string name="poi_dispensing_yes">Erogazione: Sì</string>
+	<string name="poi_dispensing_no">Erogazione: no</string>
+
+	<string name="poi_aerodrome_type_international">Internazionale</string>
+	<string name="poi_aerodrome_type_regional">Regionale</string>
+	<string name="poi_aerodrome_type_public">Pubblico</string>
+	<string name="poi_aerodrome_type_military">Militare</string>
+	<string name="poi_aerodrome_type_military_public">Militare/pubblico</string>
+	<string name="poi_aerodrome_type_private">Privato</string>
+
+	<string name="poi_ventilation_shaft">Pozzo di ventilazione</string>
+
+	<string name="poi_payment_troika_yes">Troika</string>
+	<string name="poi_payment_troika_no">Carta Troika non accettata</string>
+
+	<string name="poi_telescope">Telescopio</string>
+	<string name="poi_telescope_type_optical">Telescopio: ottico</string>
+	<string name="poi_telescope_type_radio">Telescopio: radio</string>
+	<string name="poi_telescope_type_gamma">Telescopio: gamma</string>
+	<string name="poi_telescope_diameter">Diametro</string>
+	<string name="poi_telescope_usage_espionage">Utilizzo: spionaggio</string>
+	<string name="poi_observatory_type_espionage">Utilizzo: spionaggio</string>
+	<string name="poi_observatory_type_meteorological">Meteorologica</string>
+	<string name="poi_observatory_type_gravitational">Gravitazionale</string>
+
+	<string name="poi_voltage">Tensione</string>
+	<string name="poi_generator_output_electricity">Potenza di uscita</string>
+	<string name="poi_generator_output_electricity_yes">Uscita: elettricità</string>
+	<string name="poi_generator_output_hot_water">Potenza di uscita di acqua calda</string>
+	<string name="poi_generator_output_hot_water_yes">Uscita: acqua calda</string>
+	<string name="poi_generator_output_hot_air_yes">Uscita: aria calda</string>
+	<string name="poi_generator_output_cold_water_yes">Uscita: acqua fredda</string>
+	<string name="poi_generator_output_compressed_air_yes">Uscita: aria compressa</string>
+	<string name="poi_generator_output_biogas">Potenza di uscita di biogas</string>
+	<string name="poi_generator_output_biogas_yes">Uscita: biogas</string>
+
+	<string name="poi_pumping_station">Stazione pompaggio</string>
+
+	<string name="poi_barometer_yes">Barometro</string>
+	<string name="poi_barometer_no">Barometro: no</string>
+	<string name="poi_thermometer_yes">Termometro</string>
+	<string name="poi_thermometer_no">Termometro: no</string>
+	<string name="poi_hygrometer_yes">Igrometro</string>
+	<string name="poi_hygrometer_no">Igrometro: no</string>
+	<string name="poi_date_yes">Visualizzazione della data</string>
+	<string name="poi_date_no">Visualizzazione della data: no</string>
+
+	<string name="poi_aquaculture_shrimp">Acquacoltura: gamberetti</string>
 	</resources>
