@@ -486,7 +486,7 @@
 	<string name="poi_weir">Nassàrgiu</string>
 	<string name="poi_power_substation">Sutaistatzione</string>
 	<string name="poi_post_box">Casseta postale</string>
-	<string name="poi_pitch">Pitch</string>
+	<string name="poi_pitch">Pratzola pro isport</string>
 	<string name="poi_occupational_therapist">Terapèuta ocupatzionale</string>
 	<string name="poi_leisure_track">Pista pro isports</string>
 	<string name="poi_raceway">Tzircùitu automobilìsticu</string>
@@ -1219,7 +1219,7 @@
 	<string name="poi_architecture_renaissance">Architetura: rinascimentu</string>
 	<string name="poi_architecture_romanesque">Architetura: romànicu</string>
 
-<string name="poi_architecture_timber_frame"/>
+<string name="poi_architecture_timber_frame">Architetura: telàrgiu de linna</string>
 	<string name="poi_width">Largària</string>
 
 	<string name="poi_artwork_type_sculpture">Casta de òpera: iscultura</string>
@@ -2102,9 +2102,9 @@
 	<string name="poi_diet_pescetarian_yes">Pescetariana</string>
 
 	<string name="poi_drive_in_yes">Eja</string>
-	<string name="poi_drive_in_no">Servìtziu in automobile: nono</string>
+	<string name="poi_drive_in_no">Logu pro automòbiles (drive-in): nono</string>
 	<string name="poi_drive_through_yes">Eja</string>
-	<string name="poi_drive_through_no">Intregadura a clientes in automobile: nono</string>
+	<string name="poi_drive_through_no">Servìtziu pro automobilistas (drive-through): nono</string>
 
 	<string name="poi_brewery_additional">Nùmene birrifìtziu</string>
 	<string name="poi_microbrewery_yes">Micro-birrifìtziu</string>
@@ -2112,7 +2112,7 @@
 
 	<string name="poi_takeaway_filter_yes">Eja</string>
 	<string name="poi_delivery_filter_yes">Eja</string>
-	<string name="poi_takeaway_yes">Pro pigare a domo</string>
+	<string name="poi_takeaway_yes">De pigare a domo</string>
 	<string name="poi_takeaway_no">Pro pigare a domo: nono</string>
 	<string name="poi_takeaway_only">Pro pigare a domo ebbia</string>
 
@@ -2173,4 +2173,136 @@
 	<string name="poi_vending_public_transport_tickets">Billetes pro su trasportu pùblicu</string>
 	<string name="poi_vending_drinks">Bèvidas</string>
 	<string name="poi_vending_sweets">Durches</string>
+	<string name="poi_vending_parcel_pickup_mail_in">Ritiru e imbiu posta e pachetes</string>
+	<string name="poi_vending_condoms">Preservativos</string>
+	<string name="poi_vending_stamps">Francubullos</string>
+	<string name="poi_vending_bicycle_tube">Càmeras d\'àera pro bitzicletas</string>
+	<string name="poi_vending_food">Màndigu</string>
+	<string name="poi_vending_drinks_food">Màndigu e bèvidas</string>
+	<string name="poi_vending_fuel">Distribudore de carburante</string>
+	<string name="poi_vending_parcel_pickup">Ritiru pachetes</string>
+	<string name="poi_vending_parcel_mail_in">Imbiu pachetes</string>
+	<string name="poi_vending_milk">Late</string>
+	<string name="poi_vending_elongated_coin">Moneda illonghiada</string>
+	<string name="poi_vending_chewing_gums">Cingommas</string>
+	<string name="poi_vending_parking_tickets_public_transport_tickets">Billetes pro su parchègiu; billetes pro su trasportu pùblicu</string>
+	<string name="poi_vending_coffee">Cafè</string>
+	<string name="poi_vending_toll">Billetes pro colare</string>
+	<string name="poi_vending_tickets">Distribudore de billetes</string>
+	<string name="poi_vending_water">Distribudore de abba</string>
+	<string name="poi_vending_telephone_vouchers">Buonos pro su telèfono</string>
+	<string name="poi_vending_animal_food">Màndigu pro animales</string>
+	<string name="poi_vending_public_transport_plans">Piantas de sos trasportos pùblicos</string>
+	<string name="poi_vending_drinks_sweets">Bèvidas e durches</string>
+	<string name="poi_vending_vouchers">Buonos</string>
+	<string name="poi_vending_dvd">DVD</string>
+	<string name="poi_vending_candles">Candelas</string>
+	<string name="poi_vending_toys">Gioghitos</string>
+	<string name="poi_vending_ice_cream">Geladu</string>
+	<string name="poi_vending_sim_cards">Cartas SIM</string>
+
+	<string name="poi_branch">Ramu</string>
+
+	<string name="poi_memorial_war">Memoriale de gherra</string>
+	<string name="poi_memorial_plaque">Placa</string>
+	<string name="poi_memorial_stolperstein">Perda de imbruncu (Stolperstein)</string>
+	<string name="poi_memorial_prasat">Prasat</string>
+	<string name="poi_memorial_fassade_decoration">Decoratzione de sa fatzada</string>
+
+	<string name="poi_inscription">Iscritzione</string>
+	<string name="poi_historic_quarry">Cava istòrica</string>
+
+	<string name="poi_resource_aggregate">Agregadu</string>
+	<string name="poi_resource_antimony">Antimòniu</string>
+	<string name="poi_resource_asbestos">Asbesto</string>
+	<string name="poi_resource_barite">Barite</string>
+	<string name="poi_resource_basalt">Perda mòlina (basaltu)</string>
+	<string name="poi_resource_bauxite">Bauxite</string>
+	<string name="poi_resource_beryl">Berìlliu</string>
+	<string name="poi_resource_bismuth">Bismuto</string>
+	<string name="poi_resource_chromite">Cromite</string>
+	<string name="poi_resource_clay">Arghidda</string>
+	<string name="poi_resource_coal">Carbone</string>
+	<string name="poi_resource_copper">Ràmene</string>
+	<string name="poi_resource_diamond">Diamante</string>
+	<string name="poi_resource_dimension_stone">Perdas mannas</string>
+	<string name="poi_resource_dolomite">Dolomite</string>
+	<string name="poi_resource_gas">Gas</string>
+	<string name="poi_resource_gold">Oro</string>
+	<string name="poi_resource_graphite">Grafite</string>
+	<string name="poi_resource_gravel">Ghiaia</string>
+	<string name="poi_resource_gypsum">Ghisu</string>
+	<string name="poi_resource_iron_ore">Minerales ferrosos</string>
+	<string name="poi_resource_lead">Prumu</string>
+	<string name="poi_resource_lignite">Lignite</string>
+	<string name="poi_resource_limestone">Carchina</string>
+	<string name="poi_resource_marble">Màrmaru</string>
+	<string name="poi_resource_mercury">Mercùriu</string>
+	<string name="poi_resource_mica">Mica</string>
+	<string name="poi_resource_mineral_oil">­Ògiu minerale</string>
+	<string name="poi_resource_nickel">Nichel</string>
+	<string name="poi_resource_oil">Petròliu</string>
+	<string name="poi_drive_in">Logu pro automòbiles (drive in)</string>
+	<string name="poi_drive_through">Servìtziu pro automobilistas (drive-through)</string>
+	<string name="poi_takeaway">Màndigu de pigare a domo</string>
+	<string name="poi_health_specialty">Ispetzializatzione mèiga</string>
+	<string name="poi_observatory_designation">Designatzione</string>
+	<string name="poi_photo_studio">Istùdiu fotogràficu</string>
+
+
+<string name="poi_resource_opal">Opale</string>
+	<string name="poi_resource_peat">Torba</string>
+	<string name="poi_resource_platinum">Plàtinu</string>
+	<string name="poi_resource_radium">Ràdiu</string>
+	<string name="poi_resource_ruby">Rubinos</string>
+	<string name="poi_resource_rutile">Rutilu</string>
+	<string name="poi_resource_salt">Sale</string>
+	<string name="poi_resource_sand">Arena</string>
+	<string name="poi_resource_sandstone">Arenària</string>
+	<string name="poi_resource_silica">Sìlitze</string>
+	<string name="poi_resource_silver">Prata</string>
+	<string name="poi_resource_slate">Ardèsia</string>
+	<string name="poi_resource_slate_iron_ore_copper">Ardèsia;minerale ferrosu;ràmene</string>
+	<string name="poi_resource_stone">Perda</string>
+	<string name="poi_resource_tin">Istàniu</string>
+	<string name="poi_resource_tuff">Tufu</string>
+	<string name="poi_resource_uranium">Uràniu</string>
+	<string name="poi_resource_vanadium">Vanàdiu</string>
+	<string name="poi_resource_water">Abba</string>
+	<string name="poi_resource_zinc">Zincu</string>
+	<string name="poi_resource_zircon">Zircone</string>
+
+	<string name="poi_wetland_wet_meadow">Pradu ùmidu</string>
+	<string name="poi_wetland_bog">Ludacru</string>
+	<string name="poi_wetland_marsh">Benale</string>
+	<string name="poi_wetland_reedbed">Abbadrinu (reedbed)</string>
+	<string name="poi_wetland_swamp">Paule</string>
+	<string name="poi_wetland_saltern">Salina</string>
+	<string name="poi_bench_yes">Eja</string>
+	<string name="poi_internet_access_type_wlan">Wi-Fi</string>
+	<string name="poi_internet_access_type_terminal">Terminale</string>
+	<string name="poi_internet_access_type_wired">Cun cavos</string>
+	<string name="poi_internet_access_type_public">Casta de atzessu a ìnternet: pùblicu</string>
+	<string name="poi_internet_access_type_service">Casta de atzessu a ìnternet: servìtziu</string>
+	<string name="poi_internet_access_type_no">Chene atzessu a ìnternet</string>
+	<string name="poi_internet_access_type_yes">Cun atzessu a ìnternet</string>
+
+	<string name="poi_wetland_tidalflat">Pranu de marea (tidale)</string>
+	<string name="poi_wetland_saltmarsh">Benale salinu (barena)</string>
+	<string name="poi_wetland_mangrove">Mangròvia</string>
+	<string name="poi_wetland_string_bog">Ludacru a istringas</string>
+	<string name="poi_wetland_fen">Caritzetu (Fen)</string>
+	<string name="poi_wetland_palsa_bog">Paule palsa</string>
+	<string name="poi_wetland_mud">Ludu</string>
+
+	<string name="poi_bench_no">Chene panchita</string>
+	<string name="poi_bin_yes">Chene còrbula</string>
+	<string name="poi_bin_no">Cun còrbula</string>
+
+	<string name="poi_shelter_type_public_transport">Trasportos pùblicos</string>
+	<string name="poi_shelter_type_picnic_shelter">Pic-nic</string>
+	<string name="poi_shelter_type_weather_shelter">Mèteu</string>
+	<string name="poi_shelter_type_tent">Casta de imbaru: tenda</string>
+	<string name="poi_shelter_type_abandoned">Casta de imbaru: abandonadu</string>
+
 	</resources>
