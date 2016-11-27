@@ -501,6 +501,7 @@ public class SelectedGPXFragment extends OsmAndListFragment {
 				elevationImg.setMaxElevation(child.analysis.maxElevation);
 				elevationImg.setMinElevation(child.analysis.minElevation);
 				elevationImg.setTotalDistance(child.analysis.totalDistance); //Use raw data for graph, not channel detection noise filter (facilitates visual double check)
+				elevationImg.setVisibility(View.VISIBLE);
 			} else {
 				elevationImg.setVisibility(View.GONE);
 			}
