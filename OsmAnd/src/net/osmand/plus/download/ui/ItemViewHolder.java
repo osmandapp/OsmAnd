@@ -1,6 +1,7 @@
 package net.osmand.plus.download.ui;
 
 import android.annotation.SuppressLint;
+import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -323,9 +324,14 @@ public class ItemViewHolder {
 				public void onClick(View v) {
 					switch (clickAction) {
 					case ASK_FOR_FULL_VERSION_PURCHASE:
+						context.getMyApplication().logEvent(context, "click_buy_plus");
 						Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(Version.marketPrefix(context
 								.getMyApplication()) + "net.osmand.plus"));
-						context.startActivity(intent);
+						try {
+							context.startActivity(intent);
+						} catch (ActivityNotFoundException e) {
+							//ignore
+						}
 						break;
 					case ASK_FOR_SEAMARKS_PLUGIN:
 						context.startActivity(new Intent(context, context.getMyApplication().getAppCustomization()
