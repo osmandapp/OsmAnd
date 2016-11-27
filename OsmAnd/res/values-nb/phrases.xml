@@ -459,4 +459,15 @@
 	<string name="poi_cuisine_tibetan">Tibetansk</string>
 
 	<string name="poi_cuisine_mexican">Meksikansk</string>
+	<string name="poi_fee">Gebyr</string>
+	<string name="poi_smoking">Røyking</string>
+	<string name="poi_delivery">Levering</string>
+	<string name="poi_dish">Rett</string>
+	<string name="poi_payment_transport_type">Betalingstype (transport)</string>
+	<string name="poi_social_facility_for">Målgruppe</string>
+	<string name="poi_fee_yes">Ja</string>
+	<string name="poi_drinking_water_yes">Ja</string>
+	<string name="poi_drinking_water_no">Nei</string>
+	<string name="poi_seasonal_yes">Ja</string>
+	<string name="poi_seasonal_no">Nei</string>
 	</resources>
