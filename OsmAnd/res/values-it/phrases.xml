@@ -2016,4 +2016,8 @@
 	<string name="poi_date_no">Visualizzazione della data: no</string>
 
 	<string name="poi_aquaculture_shrimp">Acquacoltura: gamberetti</string>
+	<string name="poi_aquaculture">Acquacoltura</string>
+	<string name="poi_aquaculture_fish">Acquacoltura: pesce</string>
+	<string name="poi_aquaculture_mussels">Acquacoltura: cozze</string>
+
 	</resources>
