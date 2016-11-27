@@ -1627,4 +1627,121 @@
 	<string name="poi_surface_stone">Superficie: pietra</string>
 	<string name="poi_surface_metal">Superficie: metallo</string>
 	<string name="poi_surface_wood">Superficie: legno</string>
+	<string name="poi_surface_gravel">Superficie: ghiaia</string>
+	<string name="poi_surface_fine_gravel">Superficie: ghiaia fine</string>
+	<string name="poi_surface_compacted">Superficie: compattato</string>
+	<string name="poi_surface_sand">Superficie: sabbia</string>
+	<string name="poi_surface_grass">Superficie: erba</string>
+	<string name="poi_surface_ground">Superficie: terra</string>
+	<string name="poi_surface_dirt">Superficie: sporco</string>
+	<string name="poi_surface_mud">Superficie: fango</string>
+	<string name="poi_surface_ice">Superficie: ghiaccio</string>
+	<string name="poi_surface_salt">Superficie: sale</string>
+	<string name="poi_surface_snow">Superficie: neve</string>
+
+	<string name="poi_route_bus_ref">Autobus</string>
+	<string name="poi_route_trolleybus_ref">Filobus</string>
+	<string name="poi_route_tram_ref">Tram</string>
+	<string name="poi_route_train_ref">Treno</string>
+	<string name="poi_route_funicular_ref">Funicolare</string>
+	<string name="poi_route_ferry_ref">Traghetto</string>
+
+	<string name="poi_route_railway_ref">Percorso della ferrovia</string>
+
+	<string name="poi_historic_yes">Oggetto storico</string>
+	<string name="poi_surveillance_yes">Sorveglianza: Sì</string>
+	<string name="poi_shop_additional_yes">Con negozio</string>
+
+	<string name="poi_service_bicycle_retail_yes">Vendita al dettaglio</string>
+	<string name="poi_service_bicycle_repair_yes">Riparazione</string>
+	<string name="poi_service_bicycle_repair_no">Riparazione biciclette: no</string>
+	<string name="poi_service_bicycle_rental_yes">Noleggio</string>
+	<string name="poi_service_bicycle_rental_no">Noleggio biciclette: no</string>
+	<string name="poi_service_bicycle_pump_yes">Pompa</string>
+	<string name="poi_service_bicycle_pump_no">Pompa biciclette: no</string>
+	<string name="poi_service_bicycle_cleaning_yes">Pulizia</string>
+	<string name="poi_service_bicycle_cleaning_no">Pulizia biciclette: no</string>
+	<string name="poi_service_bicycle_charging_yes">Ricarica bmiciclette: Sì</string>
+	<string name="poi_service_bicycle_charging_no">Ricarica biciclette: no</string>
+	<string name="poi_wildlife_hide">Posto per osservare la fauna selvatica</string>
+
+	<string name="poi_monument_yes">Oggetto monumentale</string>
+
+	<string name="poi_industrial_factory">Tipo: fabbrica</string>
+	<string name="poi_industrial_gas">Tipo: industria gas</string>
+	<string name="poi_industrial_timber">Tipo: legname</string>
+	<string name="poi_industrial_refinery">Tipo: raffineria</string>
+	<string name="poi_industrial_warehouse">Tipo: magazzino</string>
+	<string name="poi_industrial_auto_wrecker">Tipo: carroattrezzi auto</string>
+	<string name="poi_industrial_agriculture">Tipo: agricoltura</string>
+	<string name="poi_industrial_brewery">Tipo: birreria</string>
+	<string name="poi_industrial_intermodal_freight_terminal">Tipo: terminal intermodale</string>
+	<string name="poi_industrial_sawmill">Tipo: segheria</string>
+	<string name="poi_industrial_depot">Tipo: depot</string>
+
+	<string name="poi_note">Nota</string>
+	<string name="poi_watering_place">Posto d\'innaffiamento</string>
+	<string name="poi_historic_aircraft">Aereo storico</string>
+
+	<string name="poi_elevator_yes">Con ascensore</string>
+	<string name="poi_elevator_no">Senza ascensore</string>
+
+	<string name="poi_model_aerodrome">Aerodromo di modello</string>
+	<string name="poi_office_forestry">Ufficio forestale</string>
+	<string name="poi_fuel_91ul">Carburante 91UL</string>
+	<string name="poi_fuel_100ll">Carburante 100LL</string>
+	<string name="poi_fuel_autogas">Autogas</string>
+	<string name="poi_fuel_jeta1">Carburante Jet A-1</string>
+	<string name="poi_fuel_adblue">Carburante AdBlue</string>
+
+	<string name="poi_escape_lane">Lane di fuga</string>
+
+	<string name="poi_crop_rice">Raccolto: riso</string>
+	<string name="poi_crop_grass">Raccolto: erba</string>
+	<string name="poi_crop_sugarcane">Raccolto: canna da zucchero</string>
+	<string name="poi_crop_soy">Raccolto: soia</string>
+	<string name="poi_crop_tea">Raccolto: tè</string>
+	<string name="poi_crop_coffee">Raccolto: caffè</string>
+	<string name="poi_crop_sunflower">Raccolto: girasole</string>
+	<string name="poi_crop_raspberry">Raccolto: lampone</string>
+	<string name="poi_crop_asparagus">Raccolto: asparagi</string>
+	<string name="poi_crop_flowers">Raccolto: fiori</string>
+
+	<string name="poi_clothes_women">Donne</string>
+	<string name="poi_clothes_underwear">Biancheria intima</string>
+	<string name="poi_clothes_men">Uomini</string>
+	<string name="poi_clothes_wedding">Abiti da sposa</string>
+	<string name="poi_clothes_sports">Sport</string>
+	<string name="poi_clothes_workwear">Abbigliamento da lavoro</string>
+	<string name="poi_clothes_hats">Cappelli</string>
+	<string name="poi_clothes_leather">In pelle</string>
+	<string name="poi_clothes_costumes">Costumi</string>
+	<string name="poi_clothes_traditional">Tradizionale</string>
+	<string name="poi_clothes_maternity">Maternità</string>
+	<string name="poi_clothes_schoolwear">Scuola</string>
+	<string name="poi_clothes_socks">Calzini</string>
+	<string name="poi_clothes_shirts">Camicie</string>
+	<string name="poi_clothes_dance">Danza</string>
+	<string name="poi_clothes_military">Militare</string>
+
+	<string name="poi_historic_milestone">Traguardo storico</string>
+
+	<string name="poi_shoes_children">Bambini</string>
+	<string name="poi_shoes_women">Donne</string>
+	<string name="poi_shoes_sport">Sport</string>
+	<string name="poi_shoes_men">Uomini</string>
+	<string name="poi_shoes_orthopedic">Ortopedici</string>
+
+	<string name="poi_castle_type_defensive">Tipo castello: difensivo</string>
+	<string name="poi_castle_type_fortress">Tipo castello: fortezza</string>
+	<string name="poi_castle_type_palace">Tipo castello: palazzo</string>
+	<string name="poi_massage_thai">Tailandese</string>
+	<string name="poi_massage_sexual">Sessuale</string>
+	<string name="poi_massage_chinese">Cinese</string>
+	<string name="poi_massage_therapeutic">Terapeutica</string>
+
+	<string name="poi_massage_yes">Servizio massaggi</string>
+	<string name="poi_sauna_yes">Servizi di sauna</string>
+	<string name="poi_solarium_yes">Servizi solarium</string>
+
 	</resources>
