@@ -1548,8 +1548,8 @@ A csoport nem lesz törölve néhány hónap múlva, az OsMo.mobi weboldalon lé
     <string name="lang_ar">arab</string>
     <string name="lang_sc">szárd</string>
     <string name="lang_sr">szerb</string>
-    <string name="lang_zh_CN">kínai (egyszerűsített)</string>
-    <string name="lang_zh_TW">kínai (hagyományos)</string>
+    <string name="lang_zh_cn">kínai (egyszerűsített)</string>
+    <string name="lang_zh_tw">kínai (hagyományos)</string>
     <string name="rendering_attr_alpineHiking_name">Alpesi túra besorolás (SAC)</string>
     <string name="rendering_attr_alpineHiking_description">Ösvények SAC nehézségi skála szerint</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Turistajelzések rátét</string>
@@ -2526,7 +2526,7 @@ Jelenleg csak {2} MB érhető el.</string>
     <string name="current_track">Aktuális nyomvonal</string>
     <string name="change_markers_position">Jelölő helyének módosítása</string>
     <string name="lang_es_us">spanyol (amerikai)</string>
-    <string name="lang_be_BY">belorusz (latin)</string>
+    <string name="lang_be_by">belorusz (latin)</string>
     <string name="lang_kn">kannada</string>
     <string name="shared_string_is_open_24_7">Éjjel-nappal nyitva</string>
     <string name="storage_directory_card">Memóriakártya</string>

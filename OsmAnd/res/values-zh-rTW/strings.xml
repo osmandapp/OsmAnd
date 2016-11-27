@@ -1632,8 +1632,8 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="lang_ar">阿拉伯</string>
     <string name="lang_sc">薩丁尼亞島</string>
     <string name="lang_sr">塞爾維亞</string>
-    <string name="lang_zh_CN">中文（简体）</string>
-    <string name="lang_zh_TW">中文（正體）</string>
+    <string name="lang_zh_cn">中文（简体）</string>
+    <string name="lang_zh_tw">中文（正體）</string>
     <string name="rendering_attr_subwayMode_name">捷運路線</string>
     <string name="continue_navigation">繼續導航</string>
     <string name="pause_navigation">暫停導航</string>
@@ -2513,7 +2513,7 @@ Facebook：https://www.facebook.com/osmandapp
     <string name="change_markers_position">變更標記的位置</string>
     <string name="current_track">目前的軌跡</string>
     <string name="lang_es_us">西班牙語（美洲）</string>
-    <string name="lang_be_BY">白俄羅斯語（拉丁）</string>
+    <string name="lang_be_by">白俄羅斯語（拉丁）</string>
     <string name="lang_kn">康納達語</string>
     <string name="lang_en_gb">英語（英國）</string>
     <string name="lang_ast">阿斯圖里亞斯語</string>

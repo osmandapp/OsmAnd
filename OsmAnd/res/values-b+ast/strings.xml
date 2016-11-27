@@ -345,7 +345,7 @@
     <string name="lang_hy">Armeniu</string>
     <string name="lang_eu">Vascu</string>
     <string name="lang_be">Bielorrusu</string>
-    <string name="lang_be_BY">Bielorrusu (Llatín)</string>
+    <string name="lang_be_by">Bielorrusu (Llatín)</string>
     <string name="lang_bs">Bosniu</string>
     <string name="lang_bg">Búlgaru</string>
     <string name="lang_ca">Catalán</string>
@@ -378,12 +378,12 @@
     <string name="lang_ru">Rusu</string>
     <string name="lang_sc">Sardu</string>
     <string name="lang_sr">Serbiu</string>
-    <string name="lang_zh_CN">Chinu (Simplificáu)</string>
+    <string name="lang_zh_cn">Chinu (Simplificáu)</string>
     <string name="lang_sk">Eslovacu</string>
     <string name="lang_sl">Eslovenu</string>
     <string name="lang_es">Español</string>
     <string name="lang_sv">Suecu</string>
-    <string name="lang_zh_TW">Chinu (Tradicional)</string>
+    <string name="lang_zh_tw">Chinu (Tradicional)</string>
     <string name="lang_tr">Turcu</string>
     <string name="lang_uk">Ucraín</string>
     <string name="lang_vi">Vietnamita</string>

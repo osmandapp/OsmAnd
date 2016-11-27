@@ -1438,8 +1438,8 @@ The group has not been removed after months, bring it in line with the rules you
     <string name="lang_fa">Perština</string>
     <string name="lang_sc">Sardinština</string>
     <string name="lang_sr">Srbština</string>
-    <string name="lang_zh_CN">Čínština (zjednodušená)</string>
-    <string name="lang_zh_TW">Čínština (tradiční)</string>
+    <string name="lang_zh_cn">Čínština (zjednodušená)</string>
+    <string name="lang_zh_tw">Čínština (tradiční)</string>
     <string name="rendering_attr_alpineHiking_name">Vysokohorská turistika</string>
     <string name="rendering_attr_alpineHiking_description">Vykreslovat cesty podle stupnice SAC</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Turistické trasy a značky</string>
@@ -2186,7 +2186,7 @@ Pokud máte rádi OsmAnd a OSM a chcete je podpořit, toto je výborný způsob 
     <string name="current_track">Současná trasa</string>
     <string name="lang_es_us">Španělština (americká)</string>
     <string name="lang_en_gb">Angličtina (UK)</string>
-    <string name="lang_be_BY">Běloruština (latinka)</string>
+    <string name="lang_be_by">Běloruština (latinka)</string>
     <string name="lang_kn">Kannadština</string>
     <string name="app_mode_bus">Autobus</string>
  	<string name="app_mode_train">Vlak</string>

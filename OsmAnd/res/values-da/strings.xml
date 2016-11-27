@@ -1670,8 +1670,8 @@ Fortsæt med en ny registrering?"</string>
     <string name="lang_al">Albansk</string>
     <string name="lang_ar">Arabisk</string>
     <string name="lang_sr">Serbisk</string>
-    <string name="lang_zh_CN">Kinesisk (forenklet)</string>
-    <string name="lang_zh_TW">Kinesisk (traditionelt)</string>
+    <string name="lang_zh_cn">Kinesisk (forenklet)</string>
+    <string name="lang_zh_tw">Kinesisk (traditionelt)</string>
     <string name="lang_sc">Sardisk</string>
     <string name="rendering_attr_subwayMode_name">Metroruter</string>
     <string name="continue_navigation">Fortsæt navigation</string>
@@ -2571,7 +2571,7 @@ Hvis du  ønsker at støtte OsmAnd og OSM, er dette en god måde at gøre det p�
     <string name="current_track">Aktuelt spor</string>
     <string name="change_markers_position">Ændre markørens position</string>
     <string name="lang_es_us">Spansk (Amerikansk)</string>
-    <string name="lang_be_BY">Hviderussisk (Latin)</string>
+    <string name="lang_be_by">Hviderussisk (Latin)</string>
     <string name="lang_kn">Kannada</string>
     <string name="lang_en_gb">Engelsk (Storbritannien)</string>
     <string name="lang_ast">Asturisk</string>
@@ -2735,5 +2735,5 @@ Hvis du  ønsker at støtte OsmAnd og OSM, er dette en god måde at gøre det p�
     <string name="show_legacy_search">Vis legacy søgning</string>
     <string name="show_legacy_search_desc">Aktiver legacy søgning i rullemenuen</string>
     <string name="lang_sr_latn">Serbisk (Latin)</string>
-    <string name="lang_zh_HK">Kinesisk (Hong Kong)</string>
+    <string name="lang_zh_hk">Kinesisk (Hong Kong)</string>
     </resources>

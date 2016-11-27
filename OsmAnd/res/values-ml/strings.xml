@@ -302,7 +302,7 @@
     <string name="lang_lv">ലാത്വിയ</string>
     <string name="lang_lt">ലിത്വാനിയ</string>
     <string name="lang_ro">"റോമാനിയന്‍ ഭാക്ഷ "</string>
-    <string name="lang_zh_CN">"ചൈനീസ്(സിംപ്ളിഫൈഡ്) ഭാക്ഷ "</string>
+    <string name="lang_zh_cn">"ചൈനീസ്(സിംപ്ളിഫൈഡ്) ഭാക്ഷ "</string>
     <string name="index_name_canada">വടക്കേ അമേരിക്ക - ക്യാനഡ</string>
     <string name="index_name_italy">യൂറോപ്പ് - ഇറ്റലി</string>
     <string name="index_name_gb">യൂറോപ്പ് - ഗ്രേറ്റ് ബ്രിട്ടണ്‍</string>
@@ -1475,7 +1475,7 @@
     <string name="lang_al">അല്‍ബേനിയന്‍</string>
     <string name="lang_hy">"അര്‍മേനിയന്‍ "</string>
     <string name="lang_be">"ബെലാറസിയന്‍ "</string>
-    <string name="lang_be_BY">ബെലാറസിയന്‍ (ലാറ്റിന്‍)</string>
+    <string name="lang_be_by">ബെലാറസിയന്‍ (ലാറ്റിന്‍)</string>
     <string name="lang_ca">"കടാലന്‍  "</string>
     <string name="lang_hr">"ക്രൊയേഷ്യന്‍ "</string>
     <string name="lang_cs">"ചെക്ക് "</string>
@@ -1499,7 +1499,7 @@
     <string name="lang_sl">"സ്ലോവേനിയന്‍ "</string>
     <string name="lang_es">സ്പാനിഷ്</string>
     <string name="lang_sv">"സ്വീഡിഷ് "</string>
-    <string name="lang_zh_TW">"പരമ്പാഗത ചൈനീസ് "</string>
+    <string name="lang_zh_tw">"പരമ്പാഗത ചൈനീസ് "</string>
     <string name="lang_tr">"തുര്‍ക്കി ഭാക്ഷ "</string>
     <string name="lang_uk">"ഉക്രേനിയന്‍ "</string>
     <string name="lang_vi">"വിയറ്റ്നാമീസ് "</string>

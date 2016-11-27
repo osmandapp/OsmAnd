@@ -1573,12 +1573,12 @@ POIの更新は利用できません</string>
 	<string name="lang_ru">ロシア語</string>
 	<string name="lang_sc">サルデーニャ語</string>
 	<string name="lang_sr">セルビア語</string>
-	<string name="lang_zh_CN">中国語 (簡体字)</string>
+	<string name="lang_zh_cn">中国語 (簡体字)</string>
 	<string name="lang_sk">スロバキア語</string>
 	<string name="lang_sl">スロベニア語</string>
 	<string name="lang_es">スペイン語</string>
 	<string name="lang_sv">スウェーデン語</string>
-	<string name="lang_zh_TW">中国語 (繁体字)</string>
+	<string name="lang_zh_tw">中国語 (繁体字)</string>
 	<string name="lang_tr">トルコ語</string>
 	<string name="lang_uk">ウクライナ語</string>
 	<string name="lang_vi">ベトナム人</string>
@@ -2301,7 +2301,7 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="lang_es_us">スペイン語 (アメリカ)</string>
     <string name="lang_ast">アストゥリア語</string>
     <string name="lang_en_gb">英語 (イギリス)</string>
-    <string name="lang_be_BY">ベラルーシ語 (ラテン)</string>
+    <string name="lang_be_by">ベラルーシ語 (ラテン)</string>
     <string name="lang_kn">カンナダ語</string>
     <string name="follow_us">フォローはこちらから</string>
     <string name="access_direction_audio_feedback">音シグナルで案内</string>

@@ -1702,8 +1702,8 @@ Wilt u verder gaan met een nieuwe registratie?</string>
 	<string name="lang_ar">Arabisch</string>
 	<string name="lang_sc">Sardijns</string>
 	<string name="lang_sr">Servisch</string>
-	<string name="lang_zh_CN">Chinees (vereenvoudigd)</string>
-	<string name="lang_zh_TW">Chinees (traditioneel)</string>
+	<string name="lang_zh_cn">Chinees (vereenvoudigd)</string>
+	<string name="lang_zh_tw">Chinees (traditioneel)</string>
 	<string name="rendering_attr_subwayMode_name">Metrolijnen</string>
  	<string name="continue_navigation">Navigatie voortzetten</string>
     <string name="pause_navigation">navigatie pauzeren</string>
@@ -2578,7 +2578,7 @@ Als je hulp nodig hebt met OsmAnd: neem contact op met ons support team: support
     <string name="current_track">Huidig pad</string>
     <string name="change_markers_position">Verschuif markering</string>
     <string name="lang_es_us">Spaans (Amerikaans)</string>
-    <string name="lang_be_BY">Wit-Russisch (latijns)</string>
+    <string name="lang_be_by">Wit-Russisch (latijns)</string>
     <string name="lang_kn">Kannada</string>
     <string name="lang_en_gb">Engels (Verenigd Koninkrijk)</string>
     <string name="lang_ast">Asturisch</string>

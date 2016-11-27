@@ -1457,8 +1457,8 @@ Die globalen Daten (zwischen N 70° und S 70°) basieren auf Messungen von SRTM 
 	<string name="lang_uk">Ukrainisch</string>
 	<string name="lang_vi">Vietnamesisch</string>
 	<string name="lang_zh">Chinesisch</string>
-	<string name="lang_zh_CN">Chinesisch (vereinfacht)</string>
-	<string name="lang_zh_TW">Chinesisch (traditionell)</string>
+	<string name="lang_zh_cn">Chinesisch (vereinfacht)</string>
+	<string name="lang_zh_tw">Chinesisch (traditionell)</string>
 
 	<string name="osmand_extended_description_4000_chars">"
 OsmAnd (OSM Automated Navigation Directions) ist eine Karten- und Navigationsanwendung mit Zugang zu den freien, weltweit verfügbaren und hoch qualitativen Daten von OpenStreetMap (OSM). Alle Kartendaten können für die Offline-Nutzung auf der Speicherkarte oder den internen Speicher des Endgerätes gespeichert werden. Über das GPS des Endgerätes bietet OsmAnd eine Routing-Funktion mit visueller Anzeige und Sprachausgabe für KFZ, Fahrräder und Fußgänger. Alle Hauptfunktionen funktionieren sowohl online als auch offline (ohne Verbindung zum Internet). 
@@ -2445,7 +2445,7 @@ Wenn Sie OsmAnd und OSM lieben und unterstützen wollen, so ist dies die perfekt
 <string name="change_markers_position">Position des Markers ändern</string>
     <string name="current_track">Aktueller Track</string>
     <string name="lang_es_us">Spanisch (Amerikanisch)</string>
-    <string name="lang_be_BY">Weißrussisch (Lateinische Schrift)</string>
+    <string name="lang_be_by">Weißrussisch (Lateinische Schrift)</string>
     <string name="lang_kn">Kannada</string>
     <string name="lang_en_gb">Englisch (Vereinigtes Königreich)</string>
     <string name="lang_ast">asturisch</string>
@@ -2594,5 +2594,5 @@ und vieles mehr ...
     <string name="routing_attr_allow_motorway_name">Autobahnen erlauben</string>
     <string name="routing_attr_allow_motorway_description">Autobahnen erlauben</string>
     <string name="lang_sr_latn">Serbisch (lateinisch)</string>
-    <string name="lang_zh_HK">Chinesisch (Hong Kong)</string>
+    <string name="lang_zh_hk">Chinesisch (Hong Kong)</string>
     </resources>

@@ -930,8 +930,8 @@
     <string name="use_kalman_filter_compass_descr">使用卡尔曼滤波避免罗盘误差</string>
     <string name="use_kalman_filter_compass">使用卡尔曼滤波</string>
     <string name="monitoring_settings_descr">配置如何记录旅程以及启用睡眠模式</string>
-    <string name="lang_zh_CN">简体中文</string>
-	<string name="lang_zh_TW">繁体中文</string>
+    <string name="lang_zh_cn">简体中文</string>
+	<string name="lang_zh_tw">繁体中文</string>
 	<string name="find_parking">找到一个停车位</string>
     <string name="shared_string_status">状态</string>
     <string name="shared_string_save_changes">保存更改</string>

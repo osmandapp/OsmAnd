@@ -1576,8 +1576,8 @@ OsmAnd має відкриті сирці і активно розвиваєть
 	<string name="lang_ar">Арабська</string>
 	<string name="lang_sc">Сардинська</string>
 	<string name="lang_sr">Сербська</string>
-	<string name="lang_zh_CN">Китайська (спрощена)</string>
-	<string name="lang_zh_TW">Китайська (традиційна)</string>
+	<string name="lang_zh_cn">Китайська (спрощена)</string>
+	<string name="lang_zh_tw">Китайська (традиційна)</string>
 	<string name="lang_vi">В’єтнамська</string>
 	<string name="lang_cy">Валлійська</string>
 	<string name="index_name_canada">Північна Америка - Канада</string>
@@ -2388,6 +2388,6 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="lang_es_us">Іспанська (американська)</string>
     <string name="lang_ast">Астурійська</string>
     <string name="lang_en_gb">Англійська (Сполучене Королівство)</string>
-    <string name="lang_be_BY">Білоруська (Латинка)</string>
+    <string name="lang_be_by">Білоруська (Латинка)</string>
     <string name="lang_kn">Каннада</string>
     </resources>

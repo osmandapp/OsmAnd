@@ -1671,8 +1671,8 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="lang_al">альбанская</string>
 	<string name="lang_ar">арабская</string>
 	<string name="lang_sr">сэрбская</string>
-	<string name="lang_zh_CN">кітайская (спрошчаная)</string>
-	<string name="lang_zh_TW">кітайская (традыцыйная)</string>
+	<string name="lang_zh_cn">кітайская (спрошчаная)</string>
+	<string name="lang_zh_tw">кітайская (традыцыйная)</string>
 	<string name="lang_sc">сардынская</string>
 	<string name="rendering_attr_subwayMode_name">Лініі мэтро</string>
  	<string name="rendering_attr_coloredBuildings_name">Пазначаць тып будынка колерам</string>
@@ -2566,7 +2566,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="lang_hu_formal">Вугорская (афіцыйная)</string>
     <string name="move_marker_bottom_sheet_title">Перасуньце мапу, каб зьмяніць становішча курсору</string>
     <string name="change_markers_position">Перамясьціць курсор</string>
-    <string name="lang_be_BY">беларуская лацінка</string>
+    <string name="lang_be_by">беларуская лацінка</string>
     <string name="lang_es_us">гішпанская (ЗША)</string>
     <string name="lang_en_gb">ангельская (Вялікабрытанія)</string>
     <string name="current_track">Бягучы шлях</string>

@@ -1455,8 +1455,8 @@ Vill du fortsätta med en ny registrering?</string>
     <string name="lang_ar">Arabiska</string>
     <string name="lang_sc">Sardinska</string>
     <string name="lang_sr">Serbiska</string>
-    <string name="lang_zh_CN">Kinesiska (förenklad)</string>
-    <string name="lang_zh_TW">Kinesiska (traditionell)</string>
+    <string name="lang_zh_cn">Kinesiska (förenklad)</string>
+    <string name="lang_zh_tw">Kinesiska (traditionell)</string>
     <string name="rendering_attr_subwayMode_name">Tunnelbanelinjer</string>
     <string name="continue_navigation">Fortsätt navigeringen</string>
     <string name="pause_navigation">Pausa navigeringen</string>
@@ -2248,7 +2248,7 @@ Om du tycker om OsmAnd och OSM och vill stödja dem så är detta ett utmärkt s
 	<string name="use_osm_live_routing">OSM Live-navigering</string>
     <string name="lang_kn">Kannada</string>
     <string name="lang_en_gb">Engelska (UK)</string>
-    <string name="lang_be_BY">Vitryska (latinsk)</string>
+    <string name="lang_be_by">Vitryska (latinsk)</string>
     <string name="lang_hu_formal">Ungerska (formell)</string>
     <string name="lang_es_us">Spanska (amerikansk)</string>
     <string name="lang_ast">Asturiska</string>
