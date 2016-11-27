@@ -1802,4 +1802,36 @@
 	<string name="poi_handrail_no">Corrimano: no</string>
 	<string name="poi_ramp_yes">Rampa: Sì</string>
 	<string name="poi_ramp_no">Rampa: no</string>
+	<string name="poi_ramp_stroller_yes">Rampa (passeggino): Sì</string>
+	<string name="poi_ramp_stroller_no">Rampa (passeggino): no</string>
+	<string name="poi_ramp_bicycle_yes">Rampa per biciclette: Sì</string>
+	<string name="poi_ramp_bicycle_no">Rampa per biciclette: no</string>
+	<string name="poi_step_count">Conteggio dei passi</string>
+	<string name="poi_step_condition_uneven">Passo condizione: irregolare</string>
+	<string name="poi_defibrillator">Defibrillatore</string>
+	<string name="poi_defibrillator_yes">Defibrillatore: Sì</string>
+
+	<string name="poi_tomb_war_grave">Tipo: tomba di guerra</string>
+	<string name="poi_tomb_tumulus">Tipo: tumulus</string>
+	<string name="poi_tomb_hypogeum">Tipo: ipogeo</string>
+	<string name="poi_tomb_mausoleum">Tipo: mausoleo</string>
+	<string name="poi_tomb_sarcophagus">Tipo: sarcofago</string>
+	<string name="poi_tomb_crypt">Tipo: cripta</string>
+	<string name="poi_tomb_pyramid">Tipo: piramide</string>
+
+	<string name="poi_historic_civilization_prehistoric">Civiltà: preistorico</string>
+	<string name="poi_historic_civilization_ancient_greek">Civiltà: greco antico</string>
+	<string name="poi_historic_civilization_roman">Civiltà: romana</string>
+	<string name="poi_historic_civilization_celtic">Civiltà: celtico</string>
+	<string name="poi_historic_civilization_mycenaean">Civiltà: micenea</string>
+	<string name="poi_historic_civilization_roman_and_byzantine_egyptian">Civiltà: romana e bizantina egiziano</string>
+	<string name="poi_animal_training">Addestramento animali</string>
+	<string name="poi_animal_training_dog">Cane</string>
+	<string name="poi_animal_training_horse">Cavallo</string>
+
+	<string name="poi_horse_yes">Cavalli ammessi</string>
+	<string name="poi_horse_no">Cavalli non ammessi</string>
+	<string name="poi_animal_yes">Animali ammessi</string>
+	<string name="poi_animal_no">Animali non ammessi</string>
+
 	</resources>
