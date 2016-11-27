@@ -496,7 +496,7 @@ public class SelectedGPXFragment extends OsmAndListFragment {
 			}
 
 			ElevationView elevationImg = (ElevationView) row.findViewById(R.id.elevation);
-			if (child.analysis != null && child.analysis.elevationData != null && child.analysis.isElevationSpecified() && (child.analysis.points > 1)) {
+			if (child.analysis != null && child.analysis.elevationData != null && child.analysis.isElevationSpecified() && (child.analysis.totalDistance > 0)) {
 				elevationImg.setElevationData(child.analysis.elevationData);
 				elevationImg.setMaxElevation(child.analysis.maxElevation);
 				elevationImg.setMinElevation(child.analysis.minElevation);
