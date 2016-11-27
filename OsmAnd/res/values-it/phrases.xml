@@ -1340,4 +1340,6 @@
 	<string name="poi_craft_winery">Azienda vinicola</string>
 
 	<string name="poi_club_history">Club di storia</string>
+	<string name="poi_club_shooting">Club di tiro</string>
+	<string name="poi_club_tourism">Club turistico</string>
 	</resources>
