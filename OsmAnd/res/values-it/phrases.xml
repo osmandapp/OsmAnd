@@ -2020,4 +2020,8 @@
 	<string name="poi_aquaculture_fish">Acquacoltura: pesce</string>
 	<string name="poi_aquaculture_mussels">Acquacoltura: cozze</string>
 
+	<string name="poi_min_age">Età minima</string>
+
+	<string name="poi_traffic_mirror">Specchio</string>
+
 	</resources>
