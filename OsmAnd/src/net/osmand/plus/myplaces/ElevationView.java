@@ -11,6 +11,8 @@ import android.widget.ImageView;
 
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.R;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings.MetricsConstants;
 
 import java.util.List;
 
@@ -24,16 +26,26 @@ public class ElevationView extends ImageView {
 	float xDistance;
 	List<GPXUtilities.Elevation> elevationList;
 
+	private OsmandApplication app;
+	private MetricsConstants mc;
+
 	public ElevationView(Context ctx, AttributeSet as) {
 		super(ctx, as);
+		app = (OsmandApplication) ctx.getApplicationContext();
+		mc = app.getSettings().METRIC_SYSTEM.get();
 	}
 
 	public void onDraw(Canvas canvas) {
 		final float screenScale = getResources().getDisplayMetrics().density;
-		//TODO: Hardy: Perhaps also support feet in graph
 
-		final int maxBase = ((int)(maxElevation / 100) + 1) * 100, minBase = (int)(minElevation / 100) * 100;
-		final float yDistance = maxBase - minBase;
+		//TODO: Hardy: Perhaps also support feet in graph
+		boolean useFeet = ((mc == MetricsConstants.MILES_AND_FEET) || (mc == MetricsConstants.MILES_AND_YARDS));
+		String unit = useFeet ? app.getString(R.string.foot) : app.getString(R.string.m);
+		int stepBase = useFeet  ? 200 : 100;
+		float convEle = useFeet  ? 3.28084f : 1.0f;
+
+		final int maxBase = ((int)(maxElevation * convEle / stepBase) + 1) * stepBase, minBase = (int)(minElevation * convEle / stepBase) * stepBase;
+		final float yDistance = (maxBase - minBase);
 		final float xPer = (float)canvas.getWidth() / xDistance;
 		final float yPer = (float)canvas.getHeight() / yDistance;
 		final float canvasRight = (float)canvas.getWidth() - 1f;
@@ -48,11 +60,11 @@ public class ElevationView extends ImageView {
 		barPaint.setTextSize((int)(16f * screenScale + 0.5f));
 		barPaint.setTypeface(Typeface.create(Typeface.DEFAULT_BOLD, Typeface.BOLD));
 		float yTextLast = 9999f;
-		for (int i = minBase; i <= maxBase ; i += 100) {
+		for (int i = minBase; i <= maxBase ; i += stepBase) {
 			float y = yOffset + ySlope * (canvasBottom - yPer * (float)(i - minBase));
 			canvas.drawLine(0, y, canvasRight, y, barPaint);
 			if ((yTextLast - y) >= (int)(32f * screenScale + 0.5f)) { // Overlap prevention
-				canvas.drawText(String.valueOf(i) + " m", (int)(8f * screenScale + 0.5f), y - (int)(2f * screenScale + 0.5f), barPaint);
+				canvas.drawText(String.valueOf(i) + " " + unit, (int)(8f * screenScale + 0.5f), y - (int)(2f * screenScale + 0.5f), barPaint);
 				yTextLast = y;
 			}
 		}
@@ -68,7 +80,7 @@ public class ElevationView extends ImageView {
 			for (GPXUtilities.Elevation elevation : elevationList) {
 				xDistSum += elevation.distance;
 				float nextX = xPer * xDistSum;
-				float nextY = yOffset + ySlope * (canvasBottom - yPer * (float)(elevation.elevation - minBase));
+				float nextY = yOffset + ySlope * (canvasBottom - yPer * (float)(elevation.elevation * convEle - minBase));
 				if (first) {
 					first = false;
 				} else {
