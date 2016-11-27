@@ -2477,4 +2477,6 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="routing_attr_allow_motorway_description">Autoriser les trajets sur autoroutes</string>
     <string name="routing_attr_allow_motorway_name">Autoriser les autoroutes</string>
     <string name="wiki_around">Articles Wikipedia à proximité</string>
+    <string name="lang_sr_latn">Serbe (Latin)</string>
+    <string name="lang_zh_HK">Chinois (Hong Kong)</string>
     </resources>
