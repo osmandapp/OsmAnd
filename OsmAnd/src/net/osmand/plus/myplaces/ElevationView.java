@@ -38,11 +38,10 @@ public class ElevationView extends ImageView {
 	public void onDraw(Canvas canvas) {
 		final float screenScale = getResources().getDisplayMetrics().density;
 
-		//TODO: Hardy: Perhaps also support feet in graph
-		boolean useFeet = ((mc == MetricsConstants.MILES_AND_FEET) || (mc == MetricsConstants.MILES_AND_YARDS));
-		String unit = useFeet ? app.getString(R.string.foot) : app.getString(R.string.m);
-		int stepBase = useFeet  ? 200 : 100;
-		float convEle = useFeet  ? 3.28084f : 1.0f;
+		final boolean useFeet = (mc == MetricsConstants.MILES_AND_FEET) || (mc == MetricsConstants.MILES_AND_YARDS);
+		final String unit = useFeet ? app.getString(R.string.foot) : app.getString(R.string.m);
+		final int stepBase = useFeet  ? 200 : 100;
+		final float convEle = useFeet  ? 3.28084f : 1.0f;
 
 		final int maxBase = ((int)(maxElevation * convEle / stepBase) + 1) * stepBase, minBase = (int)(minElevation * convEle / stepBase) * stepBase;
 		final float yDistance = (maxBase - minBase);
