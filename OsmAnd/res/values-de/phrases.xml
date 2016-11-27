@@ -1943,7 +1943,7 @@
 	<string name="poi_vending_parking_tickets">Parkschein</string>
 	<string name="poi_vending_cigarettes">Zigaretten</string>
 	<string name="poi_vending_excrement_bags">Fäkalienbeutel</string>
-	<string name="poi_vending_public_transport_tickets">Fahrschein</string>
+	<string name="poi_vending_public_transport_tickets">Fahrscheine</string>
 	<string name="poi_vending_drinks">Getränke</string>
 	<string name="poi_vending_sweets">Süßigkeiten</string>
 	<string name="poi_vending_parcel_pickup_mail_in">Paketannahmestelle und Briefkasten</string>
@@ -1956,15 +1956,15 @@
 	<string name="poi_vending_parcel_pickup">Paketaufnahmestelle</string>
 	<string name="poi_vending_parcel_mail_in">Paketannahmestelle</string>
 	<string name="poi_vending_milk">Milch</string>
-	<string name="poi_vending_elongated_coin">Souvenir-Medaille</string>
+	<string name="poi_vending_elongated_coin">Souvenir-Münze</string>
 	<string name="poi_vending_bread">Brot</string>
-	<string name="poi_vending_chewing_gums">Kaugummi</string>
+	<string name="poi_vending_chewing_gums">Kaugummis</string>
 	<string name="poi_vending_parking_tickets_public_transport_tickets">Parkschein; Fahrschein</string>
 	<string name="poi_vending_coffee">Kaffee</string>
 	<string name="poi_vending_toll">Mautverkauf</string>
 	<string name="poi_vending_tickets">Fahrscheinverkauf</string>
 	<string name="poi_vending_water">Wasserverkauf</string>
-	<string name="poi_vending_telephone_vouchers">Telefongutschein</string>
+	<string name="poi_vending_telephone_vouchers">Telefongutscheine</string>
 	<string name="poi_vending_animal_food">Tiernahrung</string>
 	<string name="poi_vending_public_transport_plans">Fahrpläne</string>
 	<string name="poi_vending_drinks_sweets">Getränke und Süßigkeiten</string>
@@ -3093,7 +3093,7 @@
 	<string name="poi_bicycle_service">Fahrrad Dienstleitung</string>
 	<string name="poi_service_car">Dienstleistung</string>
 	<string name="poi_self_service">Selbstbedienung</string>
-	<string name="poi_pharmacy_dispensing">Rezepte einlösbar</string>
+	<string name="poi_pharmacy_dispensing">Rezepte</string>
 	<string name="poi_archaeological_site_type">Typ</string>
 	<string name="poi_star_rating">Bewertung in Sternen</string>
 	<string name="poi_denomination">Konfession</string>
