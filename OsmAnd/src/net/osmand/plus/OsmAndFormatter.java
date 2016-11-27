@@ -166,7 +166,8 @@ public class OsmAndFormatter {
 	public static String getFormattedAlt(double alt, OsmandApplication ctx) {
 		OsmandSettings settings = ctx.getSettings();
 		MetricsConstants mc = settings.METRIC_SYSTEM.get();
-		if (mc == MetricsConstants.KILOMETERS_AND_METERS) {
+		boolean useFeet = ((mc == MetricsConstants.MILES_AND_FEET) || (mc == MetricsConstants.MILES_AND_YARDS));
+		if (!useFeet) {
 			return ((int) (alt + 0.5)) + " " + ctx.getString(R.string.m);
 		} else {
 			return ((int) (alt * FEET_IN_ONE_METER + 0.5)) + " " + ctx.getString(R.string.foot);
