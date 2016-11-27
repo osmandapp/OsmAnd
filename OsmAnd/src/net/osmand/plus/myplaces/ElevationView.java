@@ -31,27 +31,31 @@ public class ElevationView extends ImageView {
 	public void onDraw(Canvas canvas) {
 		final float screenScale = getResources().getDisplayMetrics().density;
 		//TODO: Hardy: Perhaps support the other units of length in graph
-		int maxBase = (int)maxElevation / 100, minBase = (int)minElevation / 100;
-		maxBase += 1;
-		float yDistance = (maxBase-minBase) * 100;
 
-		float xPer = (float)canvas.getWidth() / xDistance;
-		float yPer = (float)canvas.getHeight() / yDistance;
+		final int maxBase = (int)(maxElevation / 100) * 100 + 100, minBase = (int)(minElevation / 100) * 100;
+		final float yDistance = maxBase - minBase;
+		final float xPer = (float)canvas.getWidth() / xDistance;
+		final float yPer = (float)canvas.getHeight() / yDistance;
+		final float canvasRight = (float)canvas.getWidth() - 1f;
+		final float canvasBottom = (float)canvas.getHeight() - 1f;
+
+		// This y transform apparently needed to assure top and bottom lines show up on all devices
+		final float yOffset = 2f;
+		final float ySlope = ((float)canvas.getHeight() - 2f * yOffset) / (float)canvas.getHeight();
 
 		Paint barPaint = new Paint();
 		barPaint.setColor(getResources().getColor(R.color.dialog_inactive_text_color_dark));
 		barPaint.setTextSize((int)(16f * screenScale + 0.5f));
 		barPaint.setTypeface(Typeface.create(Typeface.DEFAULT_BOLD, Typeface.BOLD));
 		float yTextLast = 9999f;
-		for (int i = minBase; i <= maxBase ; i++) {
-			float y = (float)canvas.getHeight() - yPer * (float)(i*100-(minBase*100));
-			canvas.drawLine(0, y, canvas.getWidth(), y, barPaint);
-			if (yTextLast - y >= (int)(32f * screenScale + 0.5f)) { // Overlap prevention
-				canvas.drawText(String.valueOf(i*100) + " m", (int)(8f * screenScale + 0.5f), y-(int)(2f * screenScale + 0.5f), barPaint);
-				yTextLast = (float)(y);
+		for (int i = minBase; i <= maxBase ; i+=100) {
+			float y = yOffset + ySlope * (canvasBottom - yPer * (float)(i - minBase));
+			canvas.drawLine(0, y, canvasRight, y, barPaint);
+			if ((yTextLast - y) >= (int)(32f * screenScale + 0.5f)) { // Overlap prevention
+				canvas.drawText(String.valueOf(i) + " m", (int)(8f * screenScale + 0.5f), y - (int)(2f * screenScale + 0.5f), barPaint);
+				yTextLast = y;
 			}
 		}
-		canvas.drawLine(0, getResources().getDisplayMetrics().density, canvas.getWidth(), getResources().getDisplayMetrics().density, barPaint);
 
 		float lastX = 0, lastY = 0;
 		float xDistSum = 0;
@@ -64,7 +68,7 @@ public class ElevationView extends ImageView {
 			for (GPXUtilities.Elevation elevation : elevationList) {
 				xDistSum += elevation.distance;
 				float nextX = xPer * xDistSum;
-				float nextY = (float)canvas.getHeight() - yPer * (float)(elevation.elevation - (minBase*100f));
+				float nextY = yOffset + ySlope * (canvasBottom - yPer * (float)(elevation.elevation - minBase));
 				if (first) {
 					first = false;
 				} else {
