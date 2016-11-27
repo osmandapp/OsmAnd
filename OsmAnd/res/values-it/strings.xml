@@ -2016,8 +2016,8 @@ Attivando questa vista lo stile della mappa diventerà \'Inverno e sci\', mostra
     <string name="osmo_share_my_location">Invia la posizione</string>
     <string name="shared_string_logoff">Esci</string>
     <string name="rendering_value_disabled_name">Disabilitato</string>
-    <string name="rendering_value_walkingRoutesScopeOSMC_name">Colorazione in base al tipo di percorso</string>
-    <string name="rendering_value_walkingRoutesOSMC_name">Colorazione in base a OSMC</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">Colorazione in base al tipo di affiliazione del percorso</string>
+    <string name="rendering_value_walkingRoutesOSMC_name">Colorazione in base ai simboli di escursionismo OSMC</string>
     <string name="osm_edit_context_menu_delete">Cancella la modifica di OSM</string>
     <string name="archive_wikipedia_data">Ci sono dati Wikipedia scaricati vecchi e incompatibili. Vuoi archiviarli?</string>
     <string name="download_wikipedia_files">Vuoi scaricare i dati aggiuntivi di Wikipedia (%1$s MB)?</string>
@@ -2444,7 +2444,7 @@ Attualmente sono disponibili solo {2} MB.</string>
     <string name="download_files_question_space_with_temp">Scaricare {0} file?
  Servirebbero {3} MB temporaneamente e {1} MB permanentemente.
  (Attualmente sono disponibili {2} MB.)</string>
-    <string name="upload_osm_note_description">Puoi inviare le tue note OSM anonimamente se utilizzi il tuo profilo di OpenStreetMap.org.</string>
+    <string name="upload_osm_note_description">Puoi inviare le tue note OSM anonimamente utilizzando il tuo profilo OpenStreetMap.org.</string>
     <string name="upload_osm_note">Carica nota OSM</string>
     <string name="donations">Donazioni</string>
     <string name="number_of_recipients">Numero di destinatari</string>
@@ -2708,4 +2708,10 @@ Se ami OsmAnd e OSM e vuoi sostenerli, questo è un modo perfetto per farlo.</st
     <string name="route_roundabout_short">"Prendere la  %1$d uscita e proseguire"</string>
     <string name="wiki_around">Articoli Wikipedia vicini</string>
     <string name="search_map_hint">Cerca città o regione</string>
+    <string name="show_legacy_search">Mostra la ricerca vecchia</string>
+    <string name="show_legacy_search_desc">Abilita la vecchia ricerca dalla lista</string>
+    <string name="routing_attr_allow_motorway_name">Permetti autostrade</string>
+    <string name="routing_attr_allow_motorway_description">Permetti autostrade</string>
+    <string name="lang_sr_latn">Serbo (Latino)</string>
+    <string name="lang_zh_hk">Cinese (Hong Kong)</string>
     </resources>
