@@ -2675,4 +2675,6 @@ V kolikor naletite na težave s programom OsmAnd, prosimo, stopite v stik s skup
     <string name="show_legacy_search_desc">Omogoči opuščeno iskanje v seznamu predala</string>
     <string name="lang_sr_latn">Srbščina (v latinici)</string>
     <string name="lang_zh_hk">Kitajščina (Hong Kong)</string>
+    <string name="routing_attr_allow_motorway_name">Vodenje po avtocestah</string>
+    <string name="routing_attr_allow_motorway_description">Dovoli vodenje po cestah rezerviranih za motorna vozila in avtocestah</string>
     </resources>
