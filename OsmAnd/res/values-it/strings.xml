@@ -2031,7 +2031,7 @@ Attivando questa vista lo stile della mappa diventerà \'Inverno e sci\', mostra
     <string name="shared_string_show_details">Mostra i dettagli</string>
     <string name="local_recordings_delete_all_confirm">Stai per cancellare %1$d nota/e. Sei sicuro?</string>
     <string name="download_wikipedia_maps">Wikipedia</string>
-    <string name="lang_es_ar">Spagnolo argentino</string>
+    <string name="lang_es_ar">Spagnolo (Argentina)</string>
     <string name="lang_nb">Norvegese (Bokmål)</string>
     <string name="lang_vo">Volapuk</string>
     <string name="lang_th">Thailandese</string>
@@ -2714,4 +2714,5 @@ Se ami OsmAnd e OSM e vuoi sostenerli, questo è un modo perfetto per farlo.</st
     <string name="routing_attr_allow_motorway_description">Permetti autostrade</string>
     <string name="lang_sr_latn">Serbo (Latino)</string>
     <string name="lang_zh_hk">Cinese (Hong Kong)</string>
+    <string name="legacy_search">Ricerca vecchia</string>
     </resources>
