@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='UTF-8'?>
 <resources><string name="poi_bakery">Pekarna</string>
 	<string name="poi_mall">Nakupovalno središče</string>
 	<string name="poi_healthcare">Zdravstvene storitve</string>
@@ -414,4 +414,16 @@
 	<string name="poi_entrance_main">Glavni vhod</string>
 	<string name="poi_entrance">Vhod</string>
 	<string name="poi_hiking_routes">Pohodniške poti</string>
-		</resources>
+		<string name="poi_fuel_type">Vrsta</string>
+	<string name="poi_fuel_avia_type">Vrsta</string>
+	<string name="poi_payment_type">Način plačila</string>
+	<string name="poi_internet_access_type">Vrsta dostopa do interneta</string>
+	<string name="poi_bicycle_service">Servis koles</string>
+	<string name="poi_clothes_type">Vrsta</string>
+	<string name="poi_shoes_type">Vrsta</string>
+	<string name="poi_fire_hydrant_type">Vrsta</string>
+	<string name="poi_fire_hydrant_water_source">Vodni vir</string>
+	<string name="poi_payment_toll_type">Vrsta plačila</string>
+	<string name="poi_traffic_signals_sound">Zvok</string>
+	<string name="poi_highway_crossing_type">Vrsta</string>
+	</resources>
