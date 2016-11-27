@@ -1912,7 +1912,7 @@ Lorratza %2$s</string>
     <string name="index_item_nation_addresses">nazio mailako helbideak</string>
     <string name="rendering_attr_horseRoutes_name">Zaldi ibilbideak</string>
     <string name="simulate_your_location_descr">Simulatu kalkulatutako ibilbidea edo grabatutako GPX lorratza erabiliz</string>
-    <string name="rendering_value_walkingRoutesScopeOSMC_name">Koloreztatu ibilbidearen irismenaren arabera</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">Koloreztatu sare afiliazioaren arabera</string>
     <string name="delay_to_start_navigation_descr">Zehaztu itxarote denbora ibilbidea planifikatzeko pantailan mantentzeko</string>
     <string name="avoid_roads_msg">Beste ibilbide bat lor dezakezu saihestu beharreko errepideak hautatuz</string>
     <string name="rendering_attr_publicTransportMode_name">Autobus, trolebus, eta hurbileko garraioaren ibilbideak</string>
@@ -2001,7 +2001,7 @@ Eskuragarri {2} MB besterik ez daude.</string>
     <string name="download_files_question_space_with_temp">{0} fitxategi deskargatu? 
 Biltegiratzean {3} MB behar dira une batez, {1} MB behin betiko. 
 (Eskuragarri {2} MB daude.)</string>
-    <string name="upload_osm_note_description">Zure OSM oharra anonimoki igo dezakezu zure OpenStreetMap.org profila erabiltzen baduzu.</string>
+    <string name="upload_osm_note_description">Zure OSM oharra anonimoki igo dezakezu edo zure OpenStreetMap.org profila erabiliz.</string>
     <string name="rendering_attr_showMtbRoutes_name">Bistaratu MTB ibilbideak</string>
     <string name="rendering_attr_hideIcons_name">POI ikonoak</string>
     <string name="rec_split">Grabaketaren banatzea</string>
@@ -2133,7 +2133,7 @@ eta gehiago…
     <string name="lang_ast">Asturiera</string>
     <string name="disable_recording_once_app_killed">Eragotzi bigarren planoko egunkaria</string>
     <string name="disable_recording_once_app_killed_descrp">GPX erregistroa geldiaraziko du aplikazioa hiltzean (azken aplikazioak pantailaren bidez). (OsmAnd bigarren planoan dabilela adierazten duen ikonoa Android jakinarazpen barratik desagertuko da)</string>
-    <string name="rendering_value_walkingRoutesOSMC_name">OSMC araberako koloreztatzea</string>
+    <string name="rendering_value_walkingRoutesOSMC_name">OSMC mendi-ibilbide sinboloen araberako koloreztatzea</string>
     <string name="application_dir_change_warning3">OsmAnd aplikazioak bere datu fitxategiak xede berrira kopiatzea nahi duzu ere?</string>
     <string name="storage_directory_multiuser">Erabiltzaile anitzeko biltegiratzea</string>
     <string name="rendering_attr_OSMMapperAssistant_name">OSM kartografia laguntzailea</string>
@@ -2664,4 +2664,11 @@ OsmAnd aplikazioarekin laguntza behar baduzu, jarri kontaktuan gure laguntza tal
     <string name="rendering_value_fine_name">Ongi</string>
     <string name="search_map_hint">Bilatu hiria edo eskualdea</string>
     <string name="wiki_around">Inguruko Wikipediako artikuluak</string>
+    <string name="legacy_search">Bilaketa zaharra</string>
+    <string name="show_legacy_search">Erakutsi bilaketa zaharra</string>
+    <string name="show_legacy_search_desc">Gaitu bilaketa zaharra tiraderako zerrendan</string>
+    <string name="routing_attr_allow_motorway_name">Baimendu autobideak</string>
+    <string name="routing_attr_allow_motorway_description">Baimendu autobideak</string>
+    <string name="lang_sr_latn">Serbiera (Latinoa)</string>
+    <string name="lang_zh_hk">Txinera (Hong Kong)</string>
     </resources>
