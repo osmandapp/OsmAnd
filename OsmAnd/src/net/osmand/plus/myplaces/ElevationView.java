@@ -30,9 +30,9 @@ public class ElevationView extends ImageView {
 
 	public void onDraw(Canvas canvas) {
 		final float screenScale = getResources().getDisplayMetrics().density;
-		//TODO: Hardy: Perhaps support the other units of length in graph
+		//TODO: Hardy: Perhaps also support feet in graph
 
-		final int maxBase = (int)(maxElevation / 100) * 100 + 100, minBase = (int)(minElevation / 100) * 100;
+		final int maxBase = ((int)(maxElevation / 100) + 1) * 100, minBase = (int)(minElevation / 100) * 100;
 		final float yDistance = maxBase - minBase;
 		final float xPer = (float)canvas.getWidth() / xDistance;
 		final float yPer = (float)canvas.getHeight() / yDistance;
@@ -48,7 +48,7 @@ public class ElevationView extends ImageView {
 		barPaint.setTextSize((int)(16f * screenScale + 0.5f));
 		barPaint.setTypeface(Typeface.create(Typeface.DEFAULT_BOLD, Typeface.BOLD));
 		float yTextLast = 9999f;
-		for (int i = minBase; i <= maxBase ; i+=100) {
+		for (int i = minBase; i <= maxBase ; i += 100) {
 			float y = yOffset + ySlope * (canvasBottom - yPer * (float)(i - minBase));
 			canvas.drawLine(0, y, canvasRight, y, barPaint);
 			if ((yTextLast - y) >= (int)(32f * screenScale + 0.5f)) { // Overlap prevention
@@ -72,13 +72,11 @@ public class ElevationView extends ImageView {
 				if (first) {
 					first = false;
 				} else {
-					//Log.d("ElevationView", "curElevation: "+elevation.elevation+", drawLine: ("+lastX+", "+lastY+") -> ("+nextX+", "+nextY+")");
 					canvas.drawLine(lastX, lastY, nextX, nextY, paint);
 				}
 				lastX = nextX;
 				lastY = nextY;
 			}
-			//Log.d("ElevationView", "yMin: "+yMin+", yMax = "+yMax+", smallestY = "+smallestYFound+", biggestY = "+biggestYFound);
 		}
 	}
 
