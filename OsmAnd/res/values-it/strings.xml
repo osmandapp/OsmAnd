@@ -2155,7 +2155,7 @@ Attivando questa vista lo stile della mappa diventerà \'Inverno e sci\', mostra
     <string name="si_min_km">Minuti al chilometro</string>
     <string name="si_min_m">Minuti per miglia</string>
     <string name="si_nm_h">Miglia nautiche per ora (nodi)</string>
-    <string name="nm_h">kn</string>
+    <string name="nm_h">kn/h</string>
     <string name="min_mile">min/m</string>
     <string name="min_km">min/km</string>
     <string name="m_s">m/s</string>
@@ -2199,7 +2199,7 @@ Attivando questa vista lo stile della mappa diventerà \'Inverno e sci\', mostra
 
     <string name="shared_string_qr_code">codice QR</string>
     <string name="map_downloaded">Mappa scaricata</string>
-    <string name="map_downloaded_descr">Mappa di %1$s scaricata. Torna alla mappa per iniziare a utilizzarla.</string>
+    <string name="map_downloaded_descr">Mappa %1$s scaricata. Torna alla mappa per iniziare a utilizzarla.</string>
     <string name="go_to_map">Vai alla mappa</string>
     <string name="show_on_start_description">\'Spegni\' lancia direttamente la schermata della mappa</string>
     <string name="enter_country_name">Inserisci il nome della nazione</string>
