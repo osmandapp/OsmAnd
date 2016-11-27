@@ -1342,4 +1342,14 @@
 	<string name="poi_club_history">Club di storia</string>
 	<string name="poi_club_shooting">Club di tiro</string>
 	<string name="poi_club_tourism">Club turistico</string>
+	<string name="poi_club_charity">Club di carità</string>
+	<string name="poi_club_freemasonry">Loggia massonica</string>
+	<string name="poi_piste">Pista</string>
+	<string name="poi_piste_downhill">Pista di discesa</string>
+	<string name="poi_piste_nordic">Pista nordico</string>
+	<string name="poi_piste_sleigh">Pista di slitta</string>
+	<string name="poi_piste_sled">Pista da slitta</string>
+	<string name="poi_bench">Panca</string>
+	<string name="poi_food_court">Corte di cibo</string>
+	<string name="poi_cutline">Linea di taglio</string>
 	</resources>
