@@ -2115,4 +2115,6 @@
 	<string name="poi_cuisine_moroccan">Marokoarra</string>
 	<string name="poi_cuisine_austrian">Austriarra</string>
 	<string name="poi_cuisine_belgian">Belgikarra</string>
-	</resources>
+	<string name="poi_free_flying_characteristic">Berezkoa</string>
+
+</resources>
