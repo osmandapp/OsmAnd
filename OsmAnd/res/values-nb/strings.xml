@@ -1563,7 +1563,7 @@ Le %2$s</string>
     <string name="osm_live_enter_user_name">Skriv inn offentlig navn</string>
     <string name="osm_live_subscription_settings">Abonnementsinnstillinger</string>
     <string name="shared_string_logoff">Logg av</string>
-    <string name="rendering_value_walkingRoutesOSMC_name">Fargelegging i henhold til OSMC</string>
+    <string name="rendering_value_walkingRoutesOSMC_name">Fargelegging i henhold til OSMC-vandresymbol</string>
     <string name="proxy_pref_title">Mellomtjener</string>
     <string name="gpx_selection_number_of_points">" %1$s punkter"</string>
     <string name="osmo_group_policy">Praksis</string>
