@@ -399,8 +399,8 @@ Karten-Kacheln können direkt online bezogen werden, und werden im OsmAnd-Untero
 
 	<string name="download_files_not_enough_space">Nicht genügend freier Speicher vorhanden zum Laden von %1$s MB (frei: %2$s).</string>
 	<string name="download_files_question_space">{0} Datei(en) herunterladen?
-Dies benötigt dauerhaft {1} MB. 
-Aktuell sind {2} MB verfügbar.</string>
+ Dies benötigt dauerhaft {1} MB.
+ (Aktuell sind {2} MB verfügbar.)</string>
 	<string name="use_transparent_map_theme">Transparentes Layout</string>
 	<string name="native_library_not_supported">Native Bibliothek wird auf diesem Gerät nicht unterstützt.</string>
 	<string name="init_native_library">Native Bibliothek wird initialisiert…</string>
@@ -2351,11 +2351,11 @@ Lon %2$s</string>
 Es werden vorübergehend {3} MB  und {1} MB dauerhaft benötigt.
 Aktuell sind nur {2} MB verfügbar."</string>
     <string name="download_files_question_space_with_temp">{0} Datei(en) herunterladen?
-Dies benötigt vorübergehend {3} MB und dauerhaft {1} MB.
-Aktuell sind {2} MB verfügbar.</string>
+ Dies benötigt vorübergehend {3} MB und dauerhaft {1} MB.
+ (Aktuell sind {2} MB verfügbar.)</string>
     <string name="select_map_marker">Kartenmarkierung auswählen</string>
     <string name="map_markers_other">Andere Markierungen</string>
-    <string name="upload_osm_note_description">Sie können Ihre OSM-Hinweise anonym hochladen, wenn Sie Ihr OpenStreetMap.org-Profil nutzen.</string>
+    <string name="upload_osm_note_description">Sie können Ihre OSM-Hinweise anonym hochladen, oder Ihr OpenStreetMap.org-Profil nutzen.</string>
     <string name="upload_osm_note">OSM Notiz hochladen</string>
     <string name="upload_anonymously">Anonym hochladen</string>
 <string name="show_transparency_seekbar">Transparenz-Suchleiste anzeigen</string>
@@ -2588,4 +2588,10 @@ und vieles mehr ...
     <string name="upload_poi">POI hochladen</string>
     <string name="route_roundabout_short">Nehmen Sie die %1$d Ausfahrt</string>
     <string name="search_map_hint">Suche Stadt oder Region</string>
+    <string name="legacy_search">Veraltete Suche</string>
+    <string name="show_legacy_search">Alte Suche einblenden</string>
+    <string name="show_legacy_search_desc">Alte Suche im Seitenmenü aktivieren</string>
+    <string name="routing_attr_allow_motorway_name">Autobahnen erlauben</string>
+    <string name="routing_attr_allow_motorway_description">Autobahnen erlauben</string>
+    <string name="lang_sr_latn">Serbisch (lateinisch)</string>
     </resources>
