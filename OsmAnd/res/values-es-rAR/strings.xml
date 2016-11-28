@@ -565,8 +565,8 @@ Los mapas de teselas se pueden obtener directamente a través de fuentes en lín
     <string name="gpx_split_interval">Intervalo de división</string>
     <string name="save_as_favorites_points">Guardar como grupo de favoritos</string>
     <string name="delay_navigation_start">Iniciar automáticamente la navegación giro a giro</string>
-    <string name="gpx_info_start_time">"Tiempo de inicio: %1$tF, %1$tT "</string>
-    <string name="gpx_info_end_time">"Tiempo de finalización: %1$tF, %1$tT "</string>
+    <string name="gpx_info_start_time">"Hora de inicio: %1$tF, %1$tT "</string>
+    <string name="gpx_info_end_time">"Hora de fin: %1$tF, %1$tT "</string>
     <string name="gpx_selection_point">Punto %1$s</string>
     <string name="gpx_selection_route_points">%1$s
 \nPuntos de ruta %2$s</string>
