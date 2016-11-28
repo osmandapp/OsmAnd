@@ -193,7 +193,7 @@ Dlaždicové mapy môžete získať priamo zo zdrojov na Internete, alebo ich m�
     <string name="index_name_voice">Hlasové povely (nahrávky, obmedzená funkcionalita)</string>
     <string name="index_name_tts_voice">Hlasové povely (TTS-generované, odporúčané)</string>
     <string name="amenity_type_osmwiki">Wikipedia (offline)</string>
-    <string name="amenity_type_user_defined">Užívateľský</string>
+    <string name="amenity_type_user_defined">Definovaný používateľom</string>
     <string name="fav_export_confirmation">Súbor s predošle exportovanými obľúbenými bodmi už existuje. Chcete ho nahradiť?</string>
     <string name="profile_settings">Profilovo špecifické nastavenia</string>
     <string name="global_settings">Globálne nastavenia</string>
