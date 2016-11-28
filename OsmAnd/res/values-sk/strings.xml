@@ -1849,7 +1849,7 @@ Dĺžka %2$s</string>
     <string name="disable_recording_once_app_killed_descrp">Zastaví záznam GPX keď je aplikácia ukončená (cez nedávne aplikácie). (Ikona režimu na pozadí zmizne z notifikačnej oblasti Androidu.)</string>
     <string name="archive_wikipedia_data">Máte stiahnuté staré nekompatibilné dáta z Wikipedie. Chcete ich archivovať?</string>
     <string name="download_wikipedia_files">Chcete stiahnuť ďalšie dáta z Wikipedie (%1$s MB) ?</string>
-    <string name="lang_es_ar">Španielsky (Argentínska)</string>
+    <string name="lang_es_ar">Španielsky (Argentína)</string>
     <string name="lang_nb">Nórsky (Bokmål)</string>
     <string name="lang_vo">Volapuk</string>
     <string name="lang_th">Thajsky</string>
@@ -2508,4 +2508,5 @@ Ak potrebuje pomoc s aplikáciou OsmAnd, kontaktuje podporu: support@osmand.net.
     <string name="routing_attr_allow_motorway_name">Povoliť diaľnice</string>
     <string name="routing_attr_allow_motorway_description">Povoliť použiť diaľnice</string>
     <string name="lang_sr_latn">Srbsky (Latinka)</string>
+    <string name="lang_zh_hk">Čínsky (Hong Kong)</string>
     </resources>
