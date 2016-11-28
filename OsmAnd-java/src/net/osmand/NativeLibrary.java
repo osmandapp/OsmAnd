@@ -176,10 +176,14 @@ public class NativeLibrary {
 
 	protected static native boolean initFontType(byte[] byteData, String name, boolean bold, boolean italic);
 	
-	protected static native RenderedObject[] searchRenderedObjects(RenderingContext context, int x, int y);
+	protected static native RenderedObject[] searchRenderedObjects(RenderingContext context, int x, int y, boolean notvisible);
 	
 	public RenderedObject[] searchRenderedObjectsFromContext(RenderingContext context, int x, int y) {
-		return searchRenderedObjects(context, x, y);
+		return searchRenderedObjects(context, x, y, false);
+	}
+	
+	public RenderedObject[] searchRenderedObjectsFromContext(RenderingContext context, int x, int y, boolean notvisible) {
+		return searchRenderedObjects(context, x, y, notvisible);
 	}
 
 	/**/
@@ -354,6 +358,8 @@ public class NativeLibrary {
 		private TIntArrayList x = new TIntArrayList();
 		private TIntArrayList y = new TIntArrayList();
 		private String iconRes;
+		private int order;
+		private boolean visible;
 		
 		public Map<String, String> getTags() {
 			return tags;
@@ -361,6 +367,14 @@ public class NativeLibrary {
 		
 		public boolean isText() {
 			return !getName().isEmpty();
+		}
+		
+		public int getOrder() {
+			return order;
+		}
+		
+		public void setOrder(int order) {
+			this.order = order;
 		}
 		
 		public void addLocation(int x, int y) {
@@ -378,6 +392,14 @@ public class NativeLibrary {
 		
 		public void setIconRes(String iconRes) {
 			this.iconRes = iconRes;
+		}
+		
+		public void setVisible(boolean visible) {
+			this.visible = visible;
+		}
+		
+		public boolean isVisible() {
+			return visible;
 		}
 		
 		public TIntArrayList getY() {
