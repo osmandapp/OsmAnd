@@ -2561,7 +2561,7 @@ Wenn Sie OsmAnd und OSM lieben und unterstützen wollen, so ist dies die perfekt
     <string name="release_2_5">"
  • Anklickbare Symbole auf der Karte 
 
-• leistungsstarke POI Filtersuche z.B. Restaurants nach Küchenart, Campingplätz nach spezifischen Bedürfnissen, ...
+• leistungsstarke POI Filtersuche z.B. Restaurants nach Küchenart, Campingplätze nach spezifischen Bedürfnissen, ...
 
 • neue OsmAnd Topo Stil, für Radfahrer und Wanderer 
 
@@ -2588,9 +2588,9 @@ und vieles mehr ...
     <string name="upload_poi">POI hochladen</string>
     <string name="route_roundabout_short">Nehmen Sie die %1$d Ausfahrt</string>
     <string name="search_map_hint">Suche Stadt oder Region</string>
-    <string name="legacy_search">Veraltete Suche</string>
+    <string name="legacy_search">Alte Suche</string>
     <string name="show_legacy_search">Alte Suche einblenden</string>
-    <string name="show_legacy_search_desc">Alte Suche im Seitenmenü aktivieren</string>
+    <string name="show_legacy_search_desc">Veraltete Suche im Seitenmenü aktivieren</string>
     <string name="routing_attr_allow_motorway_name">Autobahnen erlauben</string>
     <string name="routing_attr_allow_motorway_description">Autobahnen erlauben</string>
     <string name="lang_sr_latn">Serbisch (lateinisch)</string>
