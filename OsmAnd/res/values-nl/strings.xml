@@ -2058,8 +2058,8 @@ Lengtegraad:\t\t%2$s</string>
 	<string name="use_fast_recalculation_desc">Herbereken alleen het begin van de route voor lange trajecten</string>
 <string name="osm_edit_context_menu_delete">Verwijder OSM-wijziging</string>
     <string name="rendering_value_disabled_name">Uitgeschakeld</string>
-    <string name="rendering_value_walkingRoutesScopeOSMC_name">Kleuren naar afstandscategorie</string>
-    <string name="rendering_value_walkingRoutesOSMC_name">Kleuring volgens OSMC</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">Kleuren naar Wandelroute-netwerk</string>
+    <string name="rendering_value_walkingRoutesOSMC_name">Kleuren volgens OSMC-wandelsymbolen</string>
     <string name="osmo_share_my_location">Deel huidige positie</string>
     <string name="shared_string_logoff">Uitloggen</string>
     <string name="gps_network_not_enabled">Locatiedienst is niet ingeschakeld. Wil je ze aanzetten?</string>
@@ -2727,4 +2727,11 @@ Als je hulp nodig hebt met OsmAnd: neem contact op met ons support team: support
     <string name="route_roundabout_short">Neem %1$de afslag</string>
     <string name="upload_poi">POI Uploaden</string>
     <string name="wiki_around">Wikipedia artikelen in de buurt</string>
+    <string name="legacy_search">Zoeken (oude manier)</string>
+    <string name="show_legacy_search">Zoeken (oude manier) weergeven</string>
+    <string name="show_legacy_search_desc">Zoeken (oude manier) in het zijmenu weergeven</string>
+    <string name="routing_attr_allow_motorway_name">Autosnelwegen toestaan</string>
+    <string name="routing_attr_allow_motorway_description">Autosnelwegen gebruiken bij navigatie</string>
+    <string name="lang_sr_latn">Servisch (Latijns schrift)</string>
+    <string name="lang_zh_hk">Chinees (Hong Kong)</string>
     </resources>
