@@ -2705,4 +2705,6 @@ i więcej...
     <string name="show_legacy_search_desc">Aktywuje starą wyszukiwarkę w menu rozwijanym</string>
     <string name="routing_attr_allow_motorway_name">Zezwól na autostrady</string>
     <string name="routing_attr_allow_motorway_description">Zezwala na autostrady</string>
+    <string name="lang_sr_latn">Serbski (łaciński)</string>
+    <string name="lang_zh_hk">Chiński (Hongkong)</string>
     </resources>
