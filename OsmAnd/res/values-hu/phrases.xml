@@ -2253,4 +2253,7 @@
 
 	<string name="poi_tomb_columbarium">Típus: kolumbárium</string>
 	<string name="poi_tomb_vault">Típus: boltíves kamra</string>
+	<string name="poi_monument_yes">Emlékmű</string>
+
+	<string name="poi_fuel_autogas">Autógáz</string>
 	</resources>
