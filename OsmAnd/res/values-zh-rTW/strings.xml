@@ -2674,4 +2674,6 @@ Facebook：https://www.facebook.com/osmandapp
     <string name="show_legacy_search_desc">在拖曳清單中啟用舊版搜尋</string>
     <string name="routing_attr_allow_motorway_name">允許進高速公路</string>
     <string name="routing_attr_allow_motorway_description">允許進高速公路</string>
+    <string name="lang_sr_latn">塞爾維亞語（拉丁語）</string>
+    <string name="lang_zh_hk">中文（香港）</string>
     </resources>
