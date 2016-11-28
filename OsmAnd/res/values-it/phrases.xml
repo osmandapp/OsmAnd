@@ -437,7 +437,7 @@
 	<string name="poi_theatre_genre_circus">Circo</string>
 	<string name="poi_dance_floor">Discoteca</string>
 	<string name="poi_nightclub">Night</string>
-	<string name="poi_stripclub">Stripclub</string>
+	<string name="poi_stripclub">Strip club</string>
 	<string name="poi_hunting_stand">Postazione di caccia</string>
 	<string name="poi_miniature_golf">Mini golf</string>
 	<string name="poi_playground">Parco giochi</string>
@@ -688,7 +688,7 @@
 	<string name="poi_cheese">Negozio di latticini</string>
 	<string name="poi_wine">Vinoteca</string>
 
-	<string name="poi_camera">Foto-ottica</string>
+	<string name="poi_camera">Fotocamere e lenti</string>
 	<string name="poi_candles">Negozio di candele</string>
 	<string name="poi_leather">Negozio di pelletteria</string>
 	<string name="poi_music">Negozio di musica</string>
@@ -769,7 +769,7 @@
 	<string name="poi_animal_training_type">Tipo</string>
 	<string name="poi_embassy_type">Tipo</string>
 	<string name="poi_city_capital">Capitale</string>
-	<string name="poi_pharmacy_dispensing">Erogazione</string>
+	<string name="poi_pharmacy_dispensing">Ricette</string>
 	<string name="poi_healthcare_alternative_types">Specialità</string>
 	<string name="poi_free_flying_characteristics">Caratteristica</string>
 	<string name="poi_archaeological_site_type">Tipo</string>
@@ -947,7 +947,7 @@
 	<string name="poi_internet_access_yes">Accesso Internet: Sì</string>
 	<string name="poi_internet_access_no">Accesso Internet: No</string>
 
-	<string name="poi_club_music">Club di musica</string>
+	<string name="poi_club_music">Club musicale</string>
 	<string name="poi_club_nature">Club natura</string>
 	<string name="poi_piste_snow_park">Snowpark</string>
 	<string name="poi_community_centre">Centro comunitario</string>
@@ -1968,8 +1968,8 @@
 	<string name="poi_crossing_light_yes">Luce di passaggio</string>
 	<string name="poi_crossing_on_demand_yes">Attraversamento su richiesta</string>
 	<string name="poi_crossing_on_demand_no">Attraversamento su richiesta: no</string>
-	<string name="poi_dispensing_yes">Erogazione: Sì</string>
-	<string name="poi_dispensing_no">Erogazione: no</string>
+	<string name="poi_dispensing_yes">accettate: Sì</string>
+	<string name="poi_dispensing_no">accettate: no</string>
 
 	<string name="poi_aerodrome_type_international">Internazionale</string>
 	<string name="poi_aerodrome_type_regional">Regionale</string>
@@ -2171,4 +2171,5 @@
 	<string name="poi_photo_studio">Studio fotografico</string>
 
 
-</resources>
+<string name="poi_reef">Reef</string>
+	</resources>
