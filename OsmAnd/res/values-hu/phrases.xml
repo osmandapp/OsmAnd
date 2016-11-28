@@ -2293,4 +2293,77 @@
 	<string name="poi_shoes_men">Férfi</string>
 	<string name="poi_shoes_orthopedic">Ortopéd</string>
 
+	<string name="poi_denomination_scientist">Szcientológus</string>
+	<string name="poi_wiki_lang_ml">Malajálam wiki</string>
+	<string name="poi_wiki_lang_mr">Maráthi wiki</string>
+	<string name="poi_wiki_lang_war">Varaó wiki</string>
+	<string name="poi_escape_lane">Menekülő-útvonal</string>
+
+	<string name="poi_massage_thai">Thai</string>
+	<string name="poi_massage_sexual">Szexuális</string>
+	<string name="poi_massage_therapeutic">Terápiás</string>
+
+	<string name="poi_massage_yes">Masszázsszolgáltatások</string>
+	<string name="poi_sauna_yes">Szaunaszolgáltatások</string>
+	<string name="poi_solarium_yes">Szolárium</string>
+
+	<string name="poi_tents_yes">Engedélyezett</string>
+	<string name="poi_tents_no">Sátor nem engedélyezett</string>
+	<string name="poi_openfire_yes">Nyílt láng engedélyezett</string>
+	<string name="poi_openfire_no">Nyílt láng nem engedélyezett</string>
+	<string name="poi_backcountry_yes">Igen</string>
+	<string name="poi_backcountry_no">Nem</string>
+	<string name="poi_group_only_yes">Csak csoportok: igen</string>
+	<string name="poi_group_only_no">Csak csoportok: nem</string>
+	<string name="poi_washing_machine_yes">Igen</string>
+	<string name="poi_washing_machine_no">Mosógép: nem</string>
+	<string name="poi_shower_filter_yes">Igen</string>
+	<string name="poi_shower_yes">Zuhany: igen</string>
+	<string name="poi_shower_no">Zuhany: nem</string>
+	<string name="poi_shower_hot">Zuhany: meleg</string>
+	<string name="poi_shower_outdoor">Zuhany: kültéri</string>
+	<string name="poi_shower_cold">Zuhany: hideg</string>
+	<string name="poi_shower_indoor">Zuhany: beltéri</string>
+	<string name="poi_capacity_tents">Sátrak: legfeljebb</string>
+	<string name="poi_dog_yes">Kutyák engedélyezve</string>
+	<string name="poi_dog_no">Kutyák nem engedélyezve</string>
+
+	<string name="poi_refugee_yes">Szolgáltatások menekülteknek</string>
+	<string name="poi_refugee_no">Menekültek: nem</string>
+
+	<string name="poi_social_facility_food_bank">Élelmiszerbank</string>
+	<string name="poi_social_facility_shelter">Menedék</string>
+	<string name="poi_social_facility_ambulatory_care">Járóbeteg-ellátás</string>
+	<string name="poi_social_facility_workshop">Műhely</string>
+	<string name="poi_social_facility_for_senior">Idősek</string>
+	<string name="poi_social_facility_for_child">Gyermekek</string>
+	<string name="poi_social_facility_for_orphan">Árvák</string>
+	<string name="poi_social_facility_for_disabled">Fogyatékkal élők</string>
+	<string name="poi_social_facility_for_juvenile">Fiatalok</string>
+	<string name="poi_social_facility_for_homeless">Hajléktalanok</string>
+	<string name="poi_social_facility_for_underprivileged">Hátrányos helyzetűek</string>
+	<string name="poi_social_facility_for_drug_addicted">Kábítószerfüggők</string>
+	<string name="poi_social_facility_for_unemployed">Munkanélküliek</string>
+	<string name="poi_social_facility_for_diseased">Betegek</string>
+	<string name="poi_social_facility_for_child_juvenile">Gyermekek; fiatalok</string>
+
+	<string name="poi_kiln">Kemence</string>
+	<string name="poi_product_brick">Termék: tégla</string>
+	<string name="poi_product_leather">Termék: bőr</string>
+	<string name="poi_product_beer">Termék: sör</string>
+	<string name="poi_product_charcoal">Termék: faszén</string>
+	<string name="poi_product_meat">Termék: hús</string>
+
+	<string name="poi_wheelchair_description">Leírás kerekesszékes felhasználóknak</string>
+	<string name="poi_blind_description">Leírás vakoknak</string>
+	<string name="poi_highway_steps">Lépcső</string>
+	<string name="poi_handrail_yes">Korlát: igen</string>
+	<string name="poi_handrail_no">Korlát: nem</string>
+	<string name="poi_ramp_yes">Rámpa: igen</string>
+	<string name="poi_ramp_no">Rámpa: nem</string>
+	<string name="poi_ramp_stroller_yes">Rámpa (babakocsis): igen</string>
+	<string name="poi_ramp_stroller_no">Rámpa (babakocsis): nem</string>
+	<string name="poi_ramp_luggage_yes">Poggyászrámpa: igen</string>
+	<string name="poi_ramp_luggage_no">Poggyászrámpa: nem</string>
+	<string name="poi_step_count">Lépcsőfokok száma</string>
 	</resources>
