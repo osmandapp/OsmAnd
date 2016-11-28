@@ -384,7 +384,7 @@
 	<string name="poi_hot_spring">Horúci prameň</string>
 	<string name="poi_geyser">Gejzír</string>
 	<string name="poi_cemetery">Cintorín</string>
-	<string name="poi_grave_yard">Cintorín</string>
+	<string name="poi_grave_yard">Malý cintorín</string>
 	<string name="poi_shelter">Prístrešok</string>
 	<string name="poi_funicular">Lanová dráha</string>
 	<string name="poi_resort">Turistický areál/rezort</string>
@@ -2476,4 +2476,47 @@
 	<string name="poi_tomb_crypt">Typ: krypta</string>
 	<string name="poi_tomb_pyramid">Typ: pyramída</string>
 
+	<string name="poi_office_camping">Kempingová kancelária</string>
+	<string name="poi_guide">Sprievodcovská kancelária</string>
+	<string name="poi_consulting">Konzultačná kancelácia</string>
+	<string name="poi_office_forestry">Lesnícka správa</string>
+	<string name="poi_logistics">Logistická firma</string>
+	<string name="poi_historic_manor">Historický kaštieľ</string>
+	<string name="poi_historic_stone">Historický kameň</string>
+	<string name="poi_historic_farm">Historická farma</string>
+	<string name="poi_historic_railway_station">Historická železničná stanica</string>
+
+	<string name="poi_historic_gallows">Historické popravisko</string>
+	<string name="poi_historic_railway">Historická železnica</string>
+
+	<string name="poi_historic_threshing_floor">Historické humno</string>
+	<string name="poi_pa">Pa (maorská opevnená osada)</string>
+
+	<string name="poi_technical_monument">Technický monument</string>
+
+	<string name="poi_service_bicycle_charging_yes">Nabíjanie bicyklov: áno</string>
+	<string name="poi_service_bicycle_charging_no">Nabíjanie bicyklov: nie</string>
+	<string name="poi_bicycle_repair_station">Stanica na vlastnú opravu bicyklov</string>
+
+	<string name="poi_military_checkpoint">Vojenský kontrolný bod</string>
+
+	<string name="poi_electrical">Elektrické súčiastky</string>
+	<string name="poi_e_cigarette">Elektronické cigarety</string>
+
+	<string name="poi_locksmith">Zámočníctvo</string>
+	<string name="poi_lighting">Svietidlá</string>
+	<string name="poi_lottery">Lotéria</string>
+	<string name="poi_gambling">Hazardná herňa</string>
+
+	<string name="poi_gambling_type">Typ</string>
+	<string name="poi_gambling_lottery">Lotéria</string>
+	<string name="poi_gambling_slot_machines">Hracie automaty</string>
+	<string name="poi_gambling_betting">Stávkovanie</string>
+	<string name="poi_gambling_bingo">Bingo</string>
+
+	<string name="poi_nutrition_supplements">Výživové doplnky</string>
+	<string name="poi_photo_studio">Fotografické štúdio</string>
+
+
+<string name="poi_protected_area">Chránená oblasť</string>
 	</resources>
