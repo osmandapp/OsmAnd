@@ -1856,8 +1856,8 @@ En activar aquests canvis de visualització l\'estil del mapa canvia a «Hivern 
     <string name="osmo_share_my_location">Transmet la posició</string>
     <string name="shared_string_logoff">Surt</string>
     <string name="rendering_value_disabled_name">Desactivat</string>
-    <string name="rendering_value_walkingRoutesScopeOSMC_name">Acoloreix les rutes segons la seva importància</string>
-    <string name="rendering_value_walkingRoutesOSMC_name">Acoloreix segons l\'OSMC</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">Acoloreix segons el tipus de xarxa</string>
+    <string name="rendering_value_walkingRoutesOSMC_name">Acoloreix segons la simbologia de senderisme OSMC</string>
     <string name="osm_edit_context_menu_delete">Suprimeix edició d\'OSM</string>
     <string name="read_full_article">Llegiu l\'article complet (en línia)</string>
     <string name="shared_string_wikipedia">Viquipèdia</string>
@@ -1881,7 +1881,7 @@ En activar aquests canvis de visualització l\'estil del mapa canvia a «Hivern 
     <string name="lang_gl">Gallec</string>
     <string name="lang_et">Estonià</string>
     <string name="lang_ceb">Cebuà</string>
-    <string name="lang_es_ar">Espanyol (argentí)</string>
+    <string name="lang_es_ar">Espanyol (Argentina)</string>
     <string name="lang_nb">Noruec (bokmål)</string>
     <string name="light_theme">Lluminós</string>
     <string name="dark_theme">Fosc</string>
@@ -2320,7 +2320,7 @@ L\'ús de memòria serà de {3} MB temporalment i {1} MB permanentment.
 Part dels ingressos es retornen a la comunitat OSM en retribuir cada contribució OSM. 
 Si aprecieu OsmAnd  i OSM i voleu ajudar-los, és la via perfecta per fer-ho."</string>
     
-    <string name="upload_osm_note_description">Podeu pujar la vostra nota OSM anònimament si utilitzeu el vostre perfil OpenStreetMap.org.</string>
+    <string name="upload_osm_note_description">Podeu pujar la vostra nota OSM anònimament o utilitzant el vostre perfil a OpenStreetMap.org.</string>
     <string name="add_time_span">Afegeix un lapse de temps</string>
     <string name="rec_split">Divisió d\'enregistrament</string>
     <string name="rec_split_title">Utilitza divisió d\'enregistrament</string>
@@ -2522,4 +2522,11 @@ Si aprecieu OsmAnd  i OSM i voleu ajudar-los, és la via perfecta per fer-ho."</
     <string name="route_roundabout_short">Agafeu la %1$d sortida i continueu</string>
     <string name="search_map_hint">Cerca de ciutat o regió</string>
     <string name="wiki_around">Articles de la zona a la Viquipèdia</string>
+    <string name="legacy_search">Cerca de llegat</string>
+    <string name="show_legacy_search">Mostra la cerca de llegat</string>
+    <string name="show_legacy_search_desc">Activa la cerca de llegat en la llista de compartiments</string>
+    <string name="routing_attr_allow_motorway_name">Permet les autopistes</string>
+    <string name="routing_attr_allow_motorway_description">Permet les autopistes</string>
+    <string name="lang_sr_latn">Serbi (alfabet llatí)</string>
+    <string name="lang_zh_hk">Xinès (Hong Kong)</string>
     </resources>
