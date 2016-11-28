@@ -43,8 +43,8 @@ public class ElevationView extends ImageView {
 		final int stepBase = useFeet  ? 200 : 100;
 		final float convEle = useFeet  ? 3.28084f : 1.0f;
 
-		final int maxBase = ((int)(maxElevation * convEle / stepBase) + 1) * stepBase;
-		final int minBase = (int)(minElevation * convEle / stepBase) * stepBase;
+		final int maxBase = ((int)Math.floor((maxElevation * convEle / stepBase) + 1)) * stepBase;
+		final int minBase = (int)Math.floor((minElevation * convEle / stepBase)) * stepBase;
 		final float yDistance = maxBase - minBase;
 		final float xPer = (float)canvas.getWidth() / xDistance;
 		final float yPer = (float)canvas.getHeight() / yDistance;
