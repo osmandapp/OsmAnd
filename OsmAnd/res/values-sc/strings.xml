@@ -2651,4 +2651,7 @@ Si istimas OsmAnd e OSM e los boles suportare, custa est una manera perfeta pro 
     <string name="routing_attr_allow_motorway_description">Permiti sas àndalas in sas autostradas</string>
     <string name="lang_sr_latn">Serbu (caràteres latinos)</string>
     <string name="lang_zh_hk">Tzinesu (Hong Kong)</string>
+    <string name="legacy_search">Chirca betza</string>
+    <string name="show_legacy_search">Ammustra sa chirca betza</string>
+    <string name="show_legacy_search_desc">Abìlita sa chirca betza dae sa lista</string>
     </resources>
