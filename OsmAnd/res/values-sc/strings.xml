@@ -1966,7 +1966,7 @@ Lon %2$s</string>
     <string name="rendering_value_disabled_name">Disabilitadu</string>
     <string name="osmo_share_my_location">Cumpartzi sa positzione</string>
     <string name="shared_string_logoff">Essi</string>
-    <string name="rendering_value_walkingRoutesScopeOSMC_name">Coloratzione a segunda de sa casta de àndala</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">Coloratzione a segunda de sa casta (afiliatzione) de àndala</string>
     <string name="rendering_value_walkingRoutesOSMC_name">Coloratzione sighinde su sìmbulu pro s\'escursionismu de OSMC</string>
     <string name="osm_edit_context_menu_delete">Iscantzella modìfica OSM</string>
     <string name="shared_string_import2osmand">Importa in OsmAnd</string>
