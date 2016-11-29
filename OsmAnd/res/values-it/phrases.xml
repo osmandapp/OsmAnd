@@ -783,7 +783,7 @@
 	<string name="poi_piste_difficulty">Difficoltà delle piste</string>
 	<string name="poi_theatre_genre">Genere</string>
 	<string name="poi_outdoor_seating">Posti a sedere all\'aperto</string>
-	<string name="poi_fee">Costo</string>
+	<string name="poi_fee">Costi</string>
 	<string name="poi_smoking">Fumare</string>
 	<string name="poi_delivery">Consegna</string>
 	<string name="poi_drive_in">Drive in</string>
@@ -2172,4 +2172,12 @@
 
 
 <string name="poi_reef">Reef</string>
+	<string name="poi_wheelchair_accessibility">Accessibilità in carrozzina</string>
+	<string name="poi_toilets_wheelchair_yes">Accesso alla toletta in carrozzina: Sì</string>
+	<string name="poi_toilets_wheelchair_no">Accesso alla toletta in carrozzina: No</string>
+	<string name="poi_wheelchair_description">Descrizione per utenti in carrozzina</string>
+	<string name="poi_ramp_wheelchair_yes">Rampa per carrozzina: Sì</string>
+	<string name="poi_ramp_wheelchair_no">Rampa per carrozzina: No</string>
+	<string name="poi_feeding_place">Luogo alimentazione animali</string>
+
 	</resources>
