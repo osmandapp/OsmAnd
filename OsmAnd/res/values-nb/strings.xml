@@ -1318,7 +1318,7 @@ Le %2$s</string>
     <string name="lang_lb">Luxembourgsk</string>
     <string name="lang_os">Ossetisk</string>
     <string name="lang_eo">Esperanto</string>
-    <string name="lang_es_ar">Spansk (Argentinsk)</string>
+    <string name="lang_es_ar">Spansk (Argentina)</string>
     <string name="lang_nb">Norsk (bokmål)</string>
     <string name="lang_vo">Volapük</string>
     <string name="lang_th">Thai</string>
@@ -1752,4 +1752,11 @@ Le %2$s</string>
     <string name="rendering_attr_contourColorScheme_name">Fargeskjema for koter</string>
     <string name="search_hint">Tast by, adresse, interessepunktnavn</string>
     <string name="search_map_hint">Søk etter by eller region</string>
+    <string name="legacy_search">Søk (gamlemåten)</string>
+    <string name="show_legacy_search">Vis søk (gamlemåten)</string>
+    <string name="show_legacy_search_desc">Aktiver søk (gamlemåten) i sidemenyen</string>
+    <string name="routing_attr_allow_motorway_name">Tillat motorveier</string>
+    <string name="routing_attr_allow_motorway_description">Tillat motorveier</string>
+    <string name="upload_poi">Last opp interessepunkt</string>
+    <string name="osmo_share_location">Del</string>
     </resources>
