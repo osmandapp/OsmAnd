@@ -380,7 +380,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 					}
 					if (!pType.isText()) {
 						if (!Algorithms.isEmpty(pType.getPoiAdditionalCategory())) {
-							vl = pType.getPoiAdditionalCategoryTranslation() + ": " + pType.getTranslation().toLowerCase();
+							vl = pType.getPoiAdditionalCategoryTranslation() + ": " + pType.getTranslation();
 						} else {
 							vl = pType.getTranslation();
 						}
