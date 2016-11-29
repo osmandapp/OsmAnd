@@ -72,9 +72,9 @@
     <string name="osmand_service_descr">OsmAnd se ejecuta en segundo plano mientras la pantalla está apagada</string>
     <string name="switch_to_raster_map_to_see">No hay ningún mapa vectorial descargado para esta ubicación. Puede descargar uno en Ajustes (Gestionar mapas), o cambiar al mapa con conexión (para esto active el complemento mapas con conexión).</string>
     <string name="download_files_not_enough_space">No hay suficiente espacio para descargar %1$s MB (disponible: %2$s).</string>
-    <string name="download_files_question_space">¿Realmente quieres descargar {0} archivo(s)?
- Esto necesita {1} MB permanentemente.
- Actualmente, hay {2} MB disponibles.</string>
+    <string name="download_files_question_space">¿Descargar {0} archivo(s)?
+El espacio de almacenamiento usado es {1} MB.
+ (El espacio disponible es {2} MB.)</string>
     <string name="use_transparent_map_theme">Tema transparente</string>
     <string name="native_library_not_supported">La biblioteca nativa no está soportada en este dispositivo.</string>
     <string name="init_native_library">Inicializando biblioteca nativa…</string>
@@ -1617,7 +1617,10 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="speed_limit_exceed">Tolerancia de límite de velocidad</string>
     <string name="speed_limit_exceed_message">Seleccione el margen de tolerancia sobre el límite de velocidad con el cual recibirá un aviso de voz.</string>
     <string name="osmo_device_not_found">Dispositivo no encontrado</string>
-    <string name="osmo_no_connection_msg">No puedo contactar con el servidor OsMo:\n- comprueba la conexión a Internet;\n- comprueba la configuración;\n- comprueba nuestro Twitter: https://twitter.com/OsMomobi</string>
+    <string name="osmo_no_connection_msg">No puedo contactar con el servidor OsMo:
+- comprueba tu conexión a Internet;
+- comprueba la configuración;
+- comprueba nuestro Twitter: https://twitter.com/OsMomobi</string>
     <string name="anonymous_user_hint">Un usuario anónimo no puede:\n- crear grupos;\n- sincronizar grupos y dispositivos con el servidor;\n- gestionar grupos y dispositivos desde un cuadro de mando personal en el sitio web.</string>
     <string name="anonymous_user">Usuario anónimo</string>
     <string name="logged_as">Iniciado la sesión como %1$s</string>
@@ -1756,7 +1759,8 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="waypoint_visit_before">Visitar antes</string>
     <string name="simulate_your_location">Simular su ubicación</string>
     <string name="drawer">Lista plana</string>
-    <string name="short_location_on_map">Lat %1$s\nLon %2$s</string>
+    <string name="short_location_on_map">Lat %1$s.
+Lon %2$s</string>
     <string name="tips_and_tricks_descr">Preguntas frecuentes, cambios recientes y otros</string>
     <string name="routing_settings_2">Ajustes de navegación</string>
     <string name="general_settings_2">Ajustes generales</string>
@@ -1819,8 +1823,8 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="use_fast_recalculation">Recálculo inteligente de ruta</string>
     <string name="use_fast_recalculation_desc">Recalcula sólo la parte inicial de la ruta para viajes largos</string>
     <string name="rendering_value_disabled_name">Desactivado</string>
-    <string name="rendering_value_walkingRoutesScopeOSMC_name">Colorear según el ámbito de la ruta</string>
-    <string name="rendering_value_walkingRoutesOSMC_name">Colorear según OSMC</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">Color según afiliación de red</string>
+    <string name="rendering_value_walkingRoutesOSMC_name">Color según símbolo de senderismo OSMC</string>
     <string name="osmo_share_my_location">Transmitir la ubicación</string>
     <string name="shared_string_logoff">Cerrar sesión</string>
     <string name="osm_edit_context_menu_delete">Borrar edición de OSM</string>
@@ -2235,15 +2239,15 @@ OsmAnd Mapas y Navegación - encuentra ubicaciones en el mapa y calcula rutas si
     <string name="map_marker_2nd">Segundo marcador de mapa</string>
     <string name="shared_string_toolbar">Barra de herramientas</string>
     <string name="shared_string_widgets">Controles</string>
-    <string name="download_files_error_not_enough_space">¡No hay suficiente espacio!
- Necesitaría {3} MB temporalmente y {1} MB permanentemente.
- Actualmente, hay solo {2} MB disponibles.</string>
-    <string name="download_files_question_space_with_temp">¿Realmente quieres descargar {0} archivo(s)?
- Esto necesita temporalmente {3} MB y {1} MB permanentemente.
- Actualmente, hay {2} MB disponibles.</string>
+    <string name="download_files_error_not_enough_space">"¡No hay suficiente espacio!
+ Necesitas {3} MB temporalmente y {1} MB permanentemente.
+  El espacio disponible es solo {2} MB."</string>
+    <string name="download_files_question_space_with_temp">¿Descargar {0} archivo(s)?
+El espacio de almacenamiento usado es {3} MB temporalmente y {1} MB permanentemente.
+ (El espacio disponible es {2} MB.)</string>
     <string name="select_map_marker">Seleccionar marcador de mapa</string>
     <string name="map_markers_other">Otros marcadores</string>
-    <string name="upload_osm_note_description">Puedes subir tu nota de OSM anónimamente si utilizas tu perfil de OpenStreetMap.org.</string>
+    <string name="upload_osm_note_description">Puedes subir tu nota de OSM de forma anónima o usando tu perfil de OpenStreetMap.org.</string>
     <string name="upload_osm_note">Subir nota OSM</string>
     <string name="upload_anonymously">Subir anónimamente</string>
 <string name="shared_string_topbar">Barra superior</string>
@@ -2389,7 +2393,7 @@ OsmAnd Mapas y Navegación - encuentra ubicaciones en el mapa y calcula rutas si
     <string name="search_map">Buscando mapa…</string>
     <string name="first_usage_wizard_desc">Deja que OsmAnd determine tu ubicación y sugiera mapas que descargar para esa región.</string>
     <string name="location_not_found">Ubicación no encontrada</string>
-    <string name="no_inet_connection">No hay conexión a Internet</string>
+    <string name="no_inet_connection">Sin conexión a Internet</string>
     <string name="no_inet_connection_desc_map">Necesaria para descargar mapas.</string>
     <string name="search_location">Buscando ubicación…</string>
     <string name="storage_free_space">Espacio libre</string>
@@ -2403,11 +2407,11 @@ OsmAnd Mapas y Navegación - encuentra ubicaciones en el mapa y calcula rutas si
     <string name="osm_live_payment_desc">Se aplicará un cargo mensual por suscripción. Puedes cancelar tu suscripción en Google Play en cualquier momento.</string>
     <string name="donation_to_osm">Donación a la comunidad de OpenStreetMap</string>
     <string name="donation_to_osm_desc">Parte de tu donación se enviará a los usuarios de OSM que realizaron cambios a OpenStreetMaps. El coste de la suscripción se mantiene.</string>
-    <string name="osm_live_subscription_desc">La suscripción habilita actualizaciones cada hora, cada día o cada semana, y descargas ilimitadas de todos los mapas del mundo.</string>
+    <string name="osm_live_subscription_desc">La suscripción permite actualizaciones cada hora, cada día o cada semana, y descargas ilimitadas de todos los mapas del mundo.</string>
     <string name="get_it">Obtener</string>
     <string name="get_for">Obtener por %1$s</string>
     <string name="get_for_month">Obtener por %1$s al mes</string>
-    <string name="osm_live_banner_desc">Conseguir descargas ilimitadas de mapas y actualizaciones más frecuentes que las mensuales: cada hora, día o semana.</string>
+    <string name="osm_live_banner_desc">Conseguir descargas ilimitadas de mapas y actualizaciones más frecuentes que una vez al mes: cada semana, día u hora.</string>
     <string name="osmand_plus_banner_desc">Versión completa de OsmAnd con descargas ilimitadas de mapas y actualizaciones mensuales de los mapas.</string>
     <string name="si_mi_meters">Millas/metros</string>
     <string name="driving_region_australia">Australia</string>
@@ -2443,4 +2447,45 @@ OsmAnd Mapas y Navegación - encuentra ubicaciones en el mapa y calcula rutas si
     <string name="shared_string_continue">Continuar</string>
     <string name="shared_string_pause">Pausar</string>
     <string name="gpx_logging_no_data">Sin datos</string>
+    <string name="legacy_search">Búsqueda clásica</string>
+    <string name="show_legacy_search">Mostrar búsqueda clásica</string>
+    <string name="show_legacy_search_desc">Permitir la búsqueda clásica en la lista de cajón</string>
+    <string name="routing_attr_allow_motorway_name">Permitir autopistas</string>
+    <string name="routing_attr_allow_motorway_description">Permite autopistas</string>
+    <string name="trip_rec_notification_settings">Grabación de viaje (sin datos)</string>
+    <string name="trip_rec_notification_settings_desc">Muestra una notificación que permite iniciar la grabación del viaje pulsando el botón Grabar</string>
+    <string name="shared_string_trip">Viaje</string>
+    <string name="shared_string_recorded">Grabado</string>
+    <string name="shared_string_record">Grabar</string>
+    <string name="rendering_attr_contourColorScheme_description">Esquema de color de las curvas de nivel</string>
+    <string name="save_track_min_speed">Velocidad mínima pata registro</string>
+    <string name="save_track_min_speed_descr">Establece la velocidad mínima para que un punto se registre</string>
+    <string name="save_track_min_distance">Detección de movimiento para registro</string>
+    <string name="save_track_min_distance_descr">Establece la distancia mínima desde la última posición para que un punto se registre</string>
+    <string name="save_track_precision">Precisión mínima para registro</string>
+    <string name="save_track_precision_descr">Establece la precisión mínima de un punto para que se registre</string>
+    <string name="christmas_poi">PDI de Navidades</string>
+    <string name="christmas_desc">Anticipando las vacaciones de Navidad y Año nuevo, puedes optar por mostrar el PDI asociado a las Navidades: árboles de Navidad, mercados, etc..</string>
+    <string name="christmas_desc_q">¿Mostrar PDI de Navidades?</string>
+    <string name="rendering_value_light_brown_name">Marrón claro</string>
+    <string name="rendering_value_dark_brown_name">Marrón oscuro</string>
+    <string name="rendering_attr_contourColorScheme_name">Esquema de color de las curvas de nivel</string>
+    <string name="rendering_attr_surfaceIntegrity_name">Integridad de la superficie de la carretera</string>
+    <string name="search_hint">Escribe ciudad, dirección, nombre del PDI</string>
+    <string name="translit_name_if_miss">Transliterar si falta nombre de %1$s</string>
+    <string name="translit_names">Transliterar nombres</string>
+    <string name="edit_filter">Editar categorías</string>
+    <string name="subcategories">Subcategorías</string>
+    <string name="selected_categories">Categorías seleccionadas</string>
+    <string name="create_custom_poi">Crear filtro personalizado</string>
+    <string name="custom_search">Búsqueda personalizada</string>
+    <string name="shared_string_filters">Filtros</string>
+    <string name="apply_filters">Aplicar filtros</string>
+    <string name="save_filter">Guardar filtro</string>
+    <string name="delete_filter">Eliminar filtro</string>
+    <string name="new_filter">Nuevo filtro</string>
+    <string name="new_filter_desc">Introduce un nombre para el nuevo filtro, éste se añadirá a la pestaña categorías.</string>
+    <string name="rendering_value_fine_name">Bueno</string>
+    <string name="lang_sr_latn">Serbio (Latino)</string>
+    <string name="lang_zh_hk">Chino (Hong Kong)</string>
     </resources>
