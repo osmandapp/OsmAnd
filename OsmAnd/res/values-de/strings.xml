@@ -2079,7 +2079,7 @@ Lon %2$s</string>
 	<string name="traffic_warning_hazard">Gefährdung</string>
     <string name="rendering_value_boldOutline_name">Hervorhebender Umriss</string>
     <string name="delete_change">Änderung löschen</string>
-	<string name="shared_string_card_was_hidden">Karte war verdeckt</string>
+	<string name="shared_string_card_was_hidden">Karte wurde versteckt</string>
 	<string name="offline_maps_and_navigation">Offline-Karten\n&amp; Navigation</string>
 	<string name="commit_poi">POI übermitteln</string>
 <string name="routing_attr_avoid_shuttle_train_name">Pendelzug vermeiden</string>
