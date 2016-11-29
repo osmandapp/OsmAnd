@@ -1425,7 +1425,7 @@ Vous pouvez suivre tous les appareils d\'un groupe en temps réel. Ce greffon pe
     <string name="osmo_show_group_notifications_descr">Afficher des messages quand un utilisateur rejoint ou quitte le groupe</string>
     <string name="gpx_file_is_empty">La trace GPX est vide</string>
 
-    <string name="shared_string_my_tracks">Toutes les\ntraces</string>
+    <string name="shared_string_my_tracks">Mes traces</string>
     <string name="shared_string_my_favorites">Mes favoris</string>
     <string name="shared_string_my_places">Favoris</string>
 
@@ -1659,7 +1659,7 @@ Les traces ainsi enregistrées peuvent être partagées avec vos amis ou utilis�
     <string name="navigate_point_zone">Zone</string>
     <string name="navigate_point_easting">Abscisse</string>
     <string name="navigate_point_northing">Ordonnée</string>
-    <string name="download_tab_local">Local</string>
+    <string name="download_tab_local">Installé</string>
     <string name="map_locale">Langue de la carte</string>
     <string name="rendering_attr_transportStops_name">Arrêts de transports en commun</string>
     <string name="voices">Guidage vocal</string>
@@ -2034,7 +2034,7 @@ Pour revenir à l’un des styles de carte classique de OsmAnd, désactivez simp
     <string name="first_usage_item_description">Comment télécharger des cartes et définir les paramètres de base</string>
     <string name="navigation_item_description">Configurer la navigation</string>
     <string name="faq_item">FAQ</string>
-    <string name="faq_item_description">Foire aux questions</string>
+    <string name="faq_item_description">Foire Aux Questions</string>
     <string name="map_viewing_item">Affichage de la carte</string>
     <string name="search_on_the_map_item">Rechercher sur la carte</string>
     <string name="planning_trip_item">Préparer un trajet</string>
