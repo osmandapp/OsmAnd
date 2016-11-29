@@ -1,21 +1,21 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
     <string name="wiki_around">Wikipedia Artikel in der Nähe</string>
-    <string name="osmand_plus_extended_description_4000_chars_v2">
-OsmAnd Maps &amp; Navigation - Orte finden und Routen berechnen ohne Interbetverbindung. Dazu einfach Landkarten für beliebuge Länder herunterladen, bevor man sich auf Reisen begibt.
+    <string name="osmand_plus_extended_description_4000_chars_v2">"
+OsmAnd Maps &amp; Navigation - Orte finden und Routen berechnen ohne Internetverbindung. Dazu einfach Landkarten für beliebige Länder herunterladen, bevor man sich auf Reisen begibt.
 
 Basisfunktionen:
-• Detailierte Karten von 200 Ländern
+• Detaillierte Karten von 200 Ländern
 • Offline-Navigation mit Sprachansagen
-• Addresssuche im Offline-Modus
-• Offline-Informationen über Sehenswürdigketen, Cafes, Parkplätze, Läden, usw.
+• Adresssuche im Offline-Modus
+• Offline-Informationen über Sehenswürdigkeiten, Cafés, Parkplätze, Läden, usw.
 • Orte als Lesezeichen vormerken
-• Auto-, Fahrrad- und Fussgängernavigation
+• Auto-, Fahrrad- und Fußgängernavigation
 
 Zusatzoptionen:
 • Anzeige und Aufnahme von GPX-Dateien
 • Wikipedia Beschreibungen von Orten und Points of Interest (offline)
-• Aufzeichung von Foto-, Audio- oder Video-Notizen zu beliebigen Orten
+• Aufzeichnung von Foto-, Audio- oder Video-Notizen zu beliebigen Orten
 • Tag- und Nacht-Anzeigemodus für Landkarten, für sicheres Autofahren
 • Informationen über öffentlichen Personennahverkehr, wie Linien und Haltestellen
 • Rad- und Fußwege
@@ -25,20 +25,20 @@ Zusatzoptionen:
 • Hinzufügen, Bearbeiten und Löschen von Points of Interest (POI) (für OpenStreetMap.org User)
 • OsMo - Live-Verfolgung von Partnergeräten
 
-Eine verläßliche Navigationsanwendung für Ihr Land, ob Deutschland, Frankreich, Mexiko, das Vereinigte Königreich, Spanien, die Niederlande, USA, Russland, Brasilien, oder jedes andere Land weltweit.
+Eine verlässliche Navigationsanwendung für Ihr Land, ob Deutschland, Frankreich, Mexiko, das Vereinigte Königreich, Spanien, die Niederlande, USA, Russland, Brasilien, oder jedes andere Land weltweit.
 
 Zusatzmodule:
 • Höhenlinien und Reliefanzeige https://goo.gl/7mojP8
-  Höhenlinien und das Relief des Terrains werden zu den Standard-OsmAndkarten hinzugeblendet.
+ Höhenlinien und das Relief des Terrains werden zu den Standard-OsmAnd Karten hinzugeblendet.
 
 • Skikarten https://goo.gl/pX6DxJ
-  Informationen über Skiabfahrten, Langlaufloipen, Bergbahnen und Skilifte.
+ Informationen über Skiabfahrten, Langlaufloipen, Bergbahnen und Skilifte.
 
 • Seekarten https://goo.gl/0hEdxm
-  Ein spezieller Kartenstil zur Anzeige von nautischen Navigationszeichen für die Binnen- und Küstenschiffahrt.
+ Ein spezieller Kartenstil zur Anzeige von nautischen Navigationszeichen für die Binnen- und Küstenschifffahrt.
 
 • Parkplatzposition https://goo.gl/6JxQXF
-  Markiert den Standort des geparkten Fahrzeuges und zeigt die verbleibende Restparkzeit der Parkuhr (für zeitlich begrenztes Parken) an.
+ Markiert den Standort des geparkten Fahrzeuges und zeigt die verbleibende Restparkzeit der Parkuhr (für zeitlich begrenztes Parken) an.
 
 Weitere Funktionen in Vorbereitung!
 
@@ -46,8 +46,8 @@ Twitter: https://twitter.com/osmandapp
 Facebook: https://www.facebook.com/osmandapp
 Webseite: http://osmand.net
 
-Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter support@osmand.net.        
-    </string>
+Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter support@osmand.net. 
+ "</string>
 	<string name="shared_string_remove">Entfernen</string>
 	<string name="item_removed">Eintrag entfernt</string>
 	<string name="n_items_removed">Einträge entfernt</string>
@@ -115,7 +115,7 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
 	<string name="arrival_distance_factor_normally">Normal</string>
 	<string name="arrival_distance_factor_late">Spät</string>
 	<string name="arrival_distance_factor_at_last">Auf den letzten Metern</string>
-	<string name="route_is_too_long">OsmAnd-Offline-Routing kann bei Punkten mit mehr als 200 km Abstand wahrscheinlich sehr lange dauern (oder manchmal gar nicht funktionieren). Für eine bessere Leistung könnten Sie mehrere Zwischenziele festlegen.</string>
+	<string name="route_is_too_long">Die OsmAnd offline Routenberechnung kann bei Punkten mit mehr als 200 km Abstand sehr lange dauern (oder manchmal nicht funktionieren). Für ein schnelleres Ergebnis könnten Sie Zwischenziele hinzufügen.</string>
 	<string name="auto_zoom_none">Kein Auto-Zoom</string>
 	<string name="auto_zoom_close">Auf Nahbereich</string>
 	<string name="auto_zoom_far">Auf Mittelbereich</string>
@@ -150,7 +150,7 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
 	<string name="rendering_attr_roadColors_description">Auswahl eines Straßenfarbschemas:</string>
 	<string name="rendering_attr_roadColors_name">Straßenfarbschema</string>
 	<string name="show_warnings_title">Warnungen anzeigen …</string>
-	<string name="show_warnings_descr">Verkehrswarnungen (Tempolimits, Stopzeichen, Rüttelschwellen), stationäre Radarkontrollen und Fahrspuranzeige</string>
+	<string name="show_warnings_descr">Verkehrswarnungen (Tempolimits, Stoppzeichen, Rüttelschwellen), stationäre Radarkontrollen und Fahrspuranzeige</string>
 	<string name="use_compass_navigation_descr">Kompass verwenden, wenn keine andere Richtungsbestimmung möglich</string>
 	<string name="use_compass_navigation">Kompass verwenden</string>
 	<string name="avoid_motorway">Vermeide Autobahnen</string>
@@ -318,7 +318,7 @@ Karten-Kacheln können direkt online bezogen werden, und werden im OsmAnd-Untero
 	<string name="zoom_by_trackball">Benutze den Trackball zum Zoomen</string>
 	<string name="accessibility_preferences_descr">Einstellungen zur Barrierefreiheit</string>
 	<string name="shared_string_accessibility">Bedienungshilfen</string>
-	<string name="rendering_out_of_memory">Zu wenig Prozess-Speicher zum Anzeigen des gewählten Gebietes</string>
+	<string name="rendering_out_of_memory">Nicht genug Arbeitsspeicher zum Anzeigen des gewählten Gebietes</string>
 	<string name="use_fluorescent_overlays">Fluoreszierende Overlays</string>
 	<string name="use_fluorescent_overlays_descr">Fluoreszierende Anzeige von Tracks und Routen</string>
 	<string name="offline_edition">Offline-Bearbeitung</string>
@@ -334,14 +334,14 @@ Karten-Kacheln können direkt online bezogen werden, und werden im OsmAnd-Untero
 	<string name="local_openstreetmap_settings">Lokal gespeicherte OSM-POIs/Hinweise</string>
 	<string name="local_openstreetmap_settings_descr">In der lokalen Datenbank vermerkte OSM-POIs/Hinweise anzeigen und verwalten</string>
 
-	<string name="live_monitoring_m">Online-Verfolgung (benötigt GPX)</string>
+	<string name="live_monitoring_m">Online Aufzeichnung (benötigt GPX)</string>
 	<string name="live_monitoring_m_descr">Sende Verfolgungsdaten zu einem festgelegten Internet-Dienst, wenn GPX-Aufzeichnung aktiviert ist.</string>
-	<string name="live_monitoring_url">Online-Tracking-Web-Adresse</string>
-	<string name="live_monitoring_url_descr">Spezifikation der Online-Tracking-Web-Adresse mit Datenübergabe: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}</string>
-	<string name="live_monitoring_interval">Online-Tracking-Intervall</string>
-	<string name="live_monitoring_interval_descr">Angabe des Online-Tracking-Invervalls</string>
-	<string name="live_monitoring_start">Starte Online-Verfolgung</string>
-	<string name="live_monitoring_stop">Stoppe Online-Verfolgung</string>
+	<string name="live_monitoring_url">Internetadresse zur Aufzeichnung</string>
+	<string name="live_monitoring_url_descr">Spezifikation der Internetadresse zur Aufzeichnung mit Parametern: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}</string>
+	<string name="live_monitoring_interval">Online Aufzeichnungsintervall</string>
+	<string name="live_monitoring_interval_descr">Angabe des Intervalls für die Online Aufzeichnung</string>
+	<string name="live_monitoring_start">Starte Online Aufzeichnung</string>
+	<string name="live_monitoring_stop">Stoppe Online Aufzeichnung</string>
 	<string name="show_current_gpx_title">Aktuellen Track anzeigen</string>
 	<string name="free_version_message">Diese kostenlose Version von OsmAnd ist limitiert auf %1$s Downloads und unterstützt keine offline Wikipedia-Artikel.</string>
 	<string name="free_version_title">Kostenlose Version</string>
@@ -1100,7 +1100,7 @@ Proportionaler Speicher %4$s MB (Android Limit %5$s MB, Dalvik %6$s MB).</string
 	<string name="map_widget_show_destination_arrow">Richtung zum Ziel anzeigen</string>
 	<string name="non_optimal_route_calculation">Berechne eventuell nicht optimale Routen über lange Distanzen</string>
 	<string name="gps_not_available">Bitte GPS-Ortung in den Einstellungen aktivieren</string>
-	<string name="enable_plugin_monitoring_services">"Standort-Aufzeichnungs-Modul aktivieren, um Aufzeichnungsdienste (GPX-Aufnahme, Online-Tracking) zu verwenden"</string>
+	<string name="enable_plugin_monitoring_services">Standort-Aufzeichnungs-Modul aktivieren, um Aufzeichnungsdienste (GPX-Aufzeichnung, Online Aufzeichnung) zu verwenden</string>
 	<string name="zxing_barcode_scanner_not_found">Barcode-Scanner-Anwendung nicht installiert. Soll im Google Play-Store danach gesucht werden?</string>
 	<string name="close_changeset">Änderungssatz schließen</string>
 	<string name="incomplete_locale">unvollständig</string>
@@ -1345,7 +1345,7 @@ Die globalen Daten (zwischen N 70° und S 70°) basieren auf Messungen von SRTM 
 	<string name="route_info">Routen-Informationen</string>
 	<string name="calculate_osmand_route_without_internet">OsmAnd-Route ohne Internetverbindung berechnen</string>
 	<string name="use_displayed_track_for_navigation">Soll der angezeigte Track zum Navigieren genutzt werden?</string>
-	<string name="keep_and_add_destination_point">Als letzes Ziel hinzufügen</string>
+	<string name="keep_and_add_destination_point">Als letztes Ziel hinzufügen</string>
 	<string name="select_gpx">GPX-Datei auswählen…</string>
 	<string name="route_descr_select_destination">Ziel wählen</string>
 	<string name="interrupt_music_descr">Jegliche Musikwiedergabe bei Sprachhinweisen vollständig pausieren (nicht nur leiser spielen)</string>
@@ -2372,7 +2372,7 @@ Aktuell sind nur {2} MB verfügbar."</string>
     <string name="osm_live_month_cost_desc">Monatliche Zahlung</string>
     <string name="osm_live_active">Aktive</string>
     <string name="osm_live_not_active">Inaktiv</string>
-    <string name="osm_live_enter_email">Bitte gültige e-Mail-Adresse eingeben</string>
+    <string name="osm_live_enter_email">Bitte gültige E-Mail-Adresse eingeben</string>
     <string name="osm_live_enter_user_name">Bitte einen öffentlichen Namen eingeben</string>
     <string name="osm_live_thanks">Vielen Dank für Ihr Abonnement von Live Aktualisierungen!</string>
     <string name="osm_live_subscription_settings">Abonnementeinstellungen</string>
@@ -2398,7 +2398,7 @@ Wenn Sie OsmAnd und OSM lieben und unterstützen wollen, so ist dies die perfekt
     <string name="storage_permission_restart_is_required">Die Anwendung darf nun auf den externen Speicher schreiben. Ein manueller Neustart der Anwendung ist nötig.</string>
     <string name="shared_string_move_up">Nach oben verschieben</string>
     <string name="shared_string_move_down">Nach unten verschieben</string>
-    <string name="file_name_containes_illegal_char">Datenname beinhaltet nicht erlaubte Zeichen</string>
+    <string name="file_name_containes_illegal_char">Dateiname beinhaltet nicht erlaubte Zeichen</string>
 <string name="no_waypoints_found">Keine Wegpunkte gefunden</string>
     <string name="no_map_markers_found">Bitte Kartenmarkierungen über die Karte hinzufügen</string>
     <string name="rendering_value_fine_name">Fein</string>
@@ -2464,7 +2464,7 @@ Wenn Sie OsmAnd und OSM lieben und unterstützen wollen, so ist dies die perfekt
     <string name="search_categories">Kategorien</string>
     <string name="lang_hsb">Obersorbisch</string>
     <string name="back_to_search">Zurück zur Suche</string>
-    <string name="confirmation_to_delete_history_items">Möchten Sie die ausgewählten Elemente aus dem Verlauf löschen?</string>
+    <string name="confirmation_to_delete_history_items">Ausgewählte Elemente aus dem Verlauf löschen?</string>
     <string name="show_something_on_map">%1$s auf der Karte anzeigen</string>
     <string name="release_2_4">"
  • Neue sehr leistungsfähige Freitextsuche
