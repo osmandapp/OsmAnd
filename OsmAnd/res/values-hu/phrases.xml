@@ -133,11 +133,11 @@
 	<string name="poi_attraction">Turistalátványosság</string>
 	<string name="poi_memorial">Emlékmű</string>
 	<string name="poi_artwork">Műalkotás</string>
-	<string name="poi_castle">Kastély</string>
+	<string name="poi_castle">Vár</string>
 	<string name="poi_city_gate">Városkapu</string>
 	<string name="poi_fort">Erőd</string>
 	<string name="poi_fountain">Szökőkút</string>
-	<string name="poi_historic_ruins">Romok</string>
+	<string name="poi_historic_ruins">Rom</string>
 	<string name="poi_monument">Nagy emlékmű</string>
 	<string name="poi_zoo">Állatkert</string>
 	<string name="poi_theme_park">Vidámpark</string>
@@ -458,11 +458,11 @@
 	<string name="poi_archaeological_site">Régészeti lelőhely</string>
 	<string name="poi_battlefield">Csatamező</string>
 	<string name="poi_boundary_stone">Határkő</string>
-	<string name="poi_historic_cannon">Régi ágyú</string>
+	<string name="poi_historic_cannon">Történelmi ágyú</string>
 	<string name="poi_rune_stone">Rúnakő</string>
 	<string name="poi_wreck">Hajóroncs</string>
-	<string name="poi_historic_ship">Régi hajó</string>
-	<string name="poi_historic_mine">Régi bánya</string>
+	<string name="poi_historic_ship">Történelmi hajó</string>
+	<string name="poi_historic_mine">Történelmi bánya</string>
 	<string name="poi_aquarium">Akvárium</string>
 	<string name="poi_general_tourist_attraction_yes">Turistalátványosság</string>
 	<string name="poi_attraction_amusement_ride">Vidámparki játék</string>
@@ -1364,7 +1364,7 @@
 	<string name="poi_memorial_obelisk">Obeliszk</string>
 	<string name="poi_memorial_column">Oszlop</string>
 	<string name="poi_memorial_stupa">Sztúpa</string>
-	<string name="poi_historic_quarry">Felhagyott kőfejtő</string>
+	<string name="poi_historic_quarry">Történelmi kőfejtő</string>
 
 	<string name="poi_wetland_wet_meadow">Láprét</string>
 	<string name="poi_wetland_swamp">Ingovány</string>
@@ -2242,7 +2242,7 @@
 
 	<string name="poi_feeding_place">Állatetetőhely</string>
 
-	<string name="poi_castle_type_stately"/>
+	<string name="poi_castle_type_stately">Vártípus: kastély</string>
 	<string name="poi_tomb_tumulus">Típus: halomsír</string>
 	<string name="poi_tomb_rock_cut">Típus: sziklába vágott sír</string>
 	<string name="poi_tomb_hypogeum">Típus: hypogeum</string>
@@ -2366,4 +2366,32 @@
 	<string name="poi_ramp_luggage_yes">Poggyászrámpa: igen</string>
 	<string name="poi_ramp_luggage_no">Poggyászrámpa: nem</string>
 	<string name="poi_step_count">Lépcsőfokok száma</string>
+	<string name="poi_castle_type_defensive">Vártípus: (középkori) vár</string>
+	<string name="poi_castle_type_fortress">Vártípus: (újkori) erőd</string>
+	<string name="poi_castle_type_palace">Vártípus: palota</string>
+	<string name="poi_castle_type_kremlin">Vártípus: kreml</string>
+	<string name="poi_castle_type_defensive_stately">Vártípus: (középkori) várkastély</string>
+	<string name="poi_castle_type_castrum">Vártípus: római castrum</string>
+	<string name="poi_castle_type_shiro">Vártípus: japán siro</string>
+
+	<string name="poi_historic_manor">Történelmi kúria</string>
+	<string name="poi_historic_civilization_ancient_roman">Civilizáció: ókori római (Kr. e. 753 – Kr. u. 284)</string>
+	<string name="poi_historic_civilization_nuragic">Civilizáció: nuraghe-kultúra (Kr. e. 18. század – Kr. u. 2. század)</string>
+	<string name="poi_historic_civilization_etruscan">Civilizáció: etruszk (Kr. e. 12–6. század)</string>
+	<string name="poi_historic_civilization_prehistoric">Civilizáció: történelem előtti</string>
+	<string name="poi_historic_civilization_ancient_greek">Civilizáció: ógörög</string>
+	<string name="poi_historic_civilization_roman">Civilizáció: római</string>
+	<string name="poi_historic_civilization_byzantine">Civilizáció: bizánci birodalom (Kr. u. 285–1453)</string>
+	<string name="poi_historic_civilization_imperial_chinese">Civilizáció: birodalmi Kína (Kr. u. 221–1911)</string>
+	<string name="poi_historic_civilization_ancient_egyptian">Civilizáció: óegyiptomi (Kr. e. 332-ig)</string>
+	<string name="poi_historic_civilization_celtic">Civilizáció: kelta</string>
+	<string name="poi_historic_civilization_western_roman">Civilizáció: Nyugat-Római Birodalom (Kr. u. 285–476)</string>
+	<string name="poi_historic_civilization_mycenaean">Civilizáció: mükénéi</string>
+	<string name="poi_historic_civilization_dacian">Civilizáció: dák</string>
+	<string name="poi_historic_civilization_hernici">Civilizáció: hernicus</string>
+	<string name="poi_historic_civilization_greek_egyptian">Civilizáció: hellenisztikus (Kr. e. 332–30)</string>
+	<string name="poi_historic_civilization_roman_and_byzantine_egyptian">Civilizáció: római és bizánci egyiptomi</string>
+	<string name="poi_historic_civilization_helladic">Civilizáció: kora helladikus</string>
+	<string name="poi_historic_civilization_cycladic">Civilizáció: küklád</string>
+	<string name="poi_historic_civilization_minoan">Civilizáció: minószi</string>
 	</resources>
