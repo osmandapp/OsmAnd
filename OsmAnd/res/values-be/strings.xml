@@ -2701,4 +2701,5 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="routing_attr_allow_motorway_name">Дазволіць аўтамагістралі</string>
     <string name="routing_attr_allow_motorway_description">Дазволіць аўтамагістралі</string>
     <string name="lang_sr_latn">сэрбская (лацінка)</string>
+    <string name="lang_zh_hk">кітайская (Ганконг)</string>
     </resources>
