@@ -2338,4 +2338,39 @@
 	<string name="poi_bridge_movable_swing">Casta de ponte mòbile: giradore</string>
 	<string name="poi_bridge_movable_lift">Casta de ponte mòbile: pesàbile</string>
 	<string name="poi_bridge_movable_drawbridge">Casta de ponte mòbile: levaditzu</string>
+	<string name="poi_bridge_movable_submersible">Casta de ponte mòbile: imberghìbile</string>
+	<string name="poi_bridge_movable_transporter">Casta de ponte mòbile: carradore</string>
+	<string name="poi_bridge_movable_retractable">Casta de ponte mòbile: ritiràbile</string>
+
+	<string name="poi_lit_yes">Illuminatzione: Eja</string>
+	<string name="poi_lit_no">Illuminatzione: Nono</string>
+
+	<string name="poi_surface_unpaved">Superfìtzie: chene pamentu</string>
+	<string name="poi_surface_paved">Superfìtzie: pamentada</string>
+	<string name="poi_surface_asphalt">Superfìtzie: asfaltu</string>
+	<string name="poi_surface_concrete">Superfìtzie: tzimentu</string>
+	<string name="poi_surface_sett">Superfìtzie: impedradu regularizadu</string>
+	<string name="poi_surface_cobblestone">Superfìtzie: impedradu</string>
+	<string name="poi_surface_paving_stones">Superfìtzie: impedradu regulare</string>
+	<string name="poi_surface_pebblestone">Superfìtzie: perdas de riu</string>
+	<string name="poi_surface_stone">Superfìtzie: perda</string>
+	<string name="poi_surface_metal">Superfìtzie: metallu</string>
+	<string name="poi_surface_wood">Superfìtzie: linna</string>
+	<string name="poi_surface_gravel">Superfìtzie: ghiaia</string>
+	<string name="poi_surface_fine_gravel">Superfìtzie: ghiaia fina</string>
+	<string name="poi_surface_compacted">Superfìtzie: cumpatadu</string>
+	<string name="poi_surface_sand">Superfìtzie: arena</string>
+	<string name="poi_surface_grass">Superfìtzie: erba</string>
+	<string name="poi_surface_grass_paver">Superfìtzie: pamentu cun erba</string>
+	<string name="poi_surface_ground">Superfìtzie: terra</string>
+	<string name="poi_surface_dirt">Superfìtzie: mistu</string>
+	<string name="poi_surface_mud">Superfìtzie: ludu</string>
+	<string name="poi_surface_ice">Superfìtzie: astra</string>
+	<string name="poi_surface_salt">Superfìtzie: sale</string>
+	<string name="poi_surface_snow">Superfìtzie: nie</string>
+
+	<string name="poi_service_bicycle_charging_yes">Càrriga pro bitzicletas: eja</string>
+	<string name="poi_service_bicycle_charging_no">Càrriga pro bitzicletas: nono</string>
+	<string name="poi_bicycle_repair_station">Istatzione pro s\'acontzu a sa sola de bitzicletas</string>
+
 	</resources>
