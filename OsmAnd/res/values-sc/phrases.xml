@@ -551,7 +551,7 @@
 	<string name="poi_fuel">Rifornidore de carburante</string>
 	<string name="poi_skiing">Iscì</string>
 	<string name="poi_wreck">Relitu navale</string>
-	<string name="poi_alpine_hut">Refùgiu alpinu</string>
+	<string name="poi_alpine_hut">Pinnetu alpinu</string>
 	<string name="poi_shelter">Imbaru</string>
 	<string name="poi_craft_metal_construction">Costrutziones metàllicas</string>
 	<string name="poi_craft_parquet_layer">Assentadore de parquet</string>
@@ -944,7 +944,7 @@
 
 	<string name="poi_lodging">Allògiu</string>
 	<string name="poi_guest_house">Posada</string>
-	<string name="poi_wilderness_hut">Pinneta</string>
+	<string name="poi_wilderness_hut">Pinnetu</string>
 	<string name="poi_lean_to">Imbaru/Cuberru</string>
 	<string name="poi_hunting_lodge">Padiglione de cassa</string>
 
@@ -1418,7 +1418,7 @@
 	<string name="poi_site_type_fortification">Fortificatzione</string>
 	<string name="poi_site_type_settlement">Aposentamentu</string>
 	<string name="poi_site_type_city">Tzitade</string>
-	<string name="poi_site_type_hut_circle">Tzìrculu de pinneta (hut circle)</string>
+	<string name="poi_site_type_hut_circle">Tzìrculu de pinnetu (hut circle)</string>
 	<string name="poi_site_type_necropolis">Necròpoli</string>
 	<string name="poi_site_type_petroglyph">Petroglifu</string>
 	<string name="poi_site_type_earthwork">Òpera de terra (earthwork)</string>
@@ -1475,7 +1475,7 @@
 
 	<string name="poi_historic_threshing_floor">Argiola istòrica</string>
 	<string name="poi_historic_gallows">Furca istòrica</string>
-	<string name="poi_tunnel_railway">Tunnel ferroviàriu</string>
+	<string name="poi_tunnel_railway">Galleria ferroviària</string>
 	<string name="poi_bridge_railway">Ponte ferroviàriu</string>
 	<string name="poi_historic_railway">Ferrovia istòrica</string>
 
@@ -2306,4 +2306,36 @@
 	<string name="poi_shelter_type_abandoned">Casta de imbaru: abandonadu</string>
 
 	<string name="poi_architecture_oldrussian">Architecture: russa antiga</string>
+	<string name="poi_shelter_type_lean_to">Pinnetu a falda sola</string>
+	<string name="poi_shelter_type_basic_hut">Pinnetu</string>
+	<string name="poi_shelter_type_building">Edifìtziu</string>
+	<string name="poi_shelter_type_wildlife_hide">Puntu cuadu pro abbistare sos animales</string>
+	<string name="poi_shelter_type_rock_shelter">Gruta minore</string>
+	<string name="poi_shelter_type_field_shelter">Refùgiu de campu (pro animales)</string>
+	<string name="poi_shelter_type_sun_shelter">Parasole (meriadòrgiu)</string>
+	<string name="poi_tunnel_waterway">Galleria de abba</string>
+	<string name="poi_tunnel_car">Galleria istradale</string>
+	<string name="poi_tunnel_pedestrian">Galleria pedonale</string>
+	<string name="poi_bridge_car">Ponte istradale</string>
+	<string name="poi_bridge_pedestrian">Ponte pedonale</string>
+	<string name="poi_bridge_bicycle">Ponte pro bitzicletas</string>
+	<string name="poi_bridge_waterway">Ponte de unu riu</string>
+	<string name="poi_bridge_structure_beam">Istrutura ponte: trae</string>
+	<string name="poi_bridge_structure_simple_suspension">Istrutura ponte: suspensione simple</string>
+	<string name="poi_bridge_structure_suspension">Istrutura ponte: suspensione</string>
+	<string name="poi_bridge_structure_arch">Istrutura ponte: arcu</string>
+	<string name="poi_bridge_structure_truss">Istrutura ponte: prade (traeadura reticulada)</string>
+	<string name="poi_bridge_structure_floating">Istrutura ponte: gallegiante</string>
+	<string name="poi_bridge_structure_humpback">Istrutura ponte: a ischina de poleddu</string>
+	<string name="poi_bridge_structure_cable_stayed">Istrutura ponte: istralladu</string>
+	<string name="poi_bridge_structure_boardwalk">Istrutura ponte: pontigra</string>
+	<string name="poi_bridge_structure_simple_wooden">Istrutura ponte: simple de linna</string>
+	<string name="poi_bridge_structure_viaduct">Istrutura ponte: viadutu</string>
+	<string name="poi_bridge_structure_aqueduct">Istrutura ponte: acuedotu</string>
+	<string name="poi_bridge_structure_log">Istrutura ponte: truncu</string>
+	<string name="poi_bridge_type_movable">Casta de ponte: mòbile</string>
+	<string name="poi_bridge_movable_bascule">Casta de ponte mòbile: bàscula (bortulàbile)</string>
+	<string name="poi_bridge_movable_swing">Casta de ponte mòbile: giradore</string>
+	<string name="poi_bridge_movable_lift">Casta de ponte mòbile: pesàbile</string>
+	<string name="poi_bridge_movable_drawbridge">Casta de ponte mòbile: levaditzu</string>
 	</resources>
