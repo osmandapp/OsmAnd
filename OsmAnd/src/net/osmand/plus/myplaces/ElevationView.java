@@ -40,12 +40,15 @@ public class ElevationView extends ImageView {
 
 		final boolean useFeet = (mc == MetricsConstants.MILES_AND_FEET) || (mc == MetricsConstants.MILES_AND_YARDS);
 		final String unit = useFeet ? app.getString(R.string.foot) : app.getString(R.string.m);
-		final int stepBase = useFeet  ? 200 : 100;
+		int stepBase = useFeet  ? 200 : 100;
 		final float convEle = useFeet  ? 3.28084f : 1.0f;
 
 		final int maxBase = ((int)Math.floor((maxElevation * convEle / stepBase) + 1)) * stepBase;
 		final int minBase = (int)Math.floor((minElevation * convEle / stepBase)) * stepBase;
 		final float yDistance = maxBase - minBase;
+		if ((!useFeet && (yDistance <= 100)) || (useFeet && (yDistance <= 200))) { //Draw 50m/100ft markers for smallest scale
+			stepBase = stepBase/2;
+		}
 		final float xPer = (float)canvas.getWidth() / xDistance;
 		final float yPer = (float)canvas.getHeight() / yDistance;
 		final float canvasRight = (float)canvas.getWidth() - 1f;
