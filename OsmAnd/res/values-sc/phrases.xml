@@ -492,7 +492,7 @@
 	<string name="poi_raceway">Tzircùitu automobilìsticu</string>
 	<string name="poi_9pin">Bowling cun noe birìllos</string>
 	<string name="poi_10pin">Bowling cun deghe birìllos</string>
-	<string name="poi_base">Base jumping</string>
+	<string name="poi_base">Brincu B.A.S.E.</string>
 	<string name="poi_bowls">Bowls</string>
 	<string name="poi_climbing">Aperrinzada</string>
 	<string name="poi_diving">Imbèrghidas</string>
@@ -2372,5 +2372,71 @@
 	<string name="poi_service_bicycle_charging_yes">Càrriga pro bitzicletas: eja</string>
 	<string name="poi_service_bicycle_charging_no">Càrriga pro bitzicletas: nono</string>
 	<string name="poi_bicycle_repair_station">Istatzione pro s\'acontzu a sa sola de bitzicletas</string>
+
+	<string name="poi_emergency_infrastructure">Infrastrutura de emergèntzia</string>
+	<string name="poi_archery">Tiru cun s\'arcu</string>
+	<string name="poi_ice_hockey">Hockey in s\'astra</string>
+	<string name="poi_shooting">Tiru</string>
+	<string name="poi_club_shooting">Tzìrculu de tiru</string>
+	<string name="poi_pawnbroker">Monte de piedade</string>
+	<string name="poi_clothes_women">Fèminas</string>
+	<string name="poi_clothes_underwear">Biancheria ìntima</string>
+	<string name="poi_clothes_men">­Òmines</string>
+	<string name="poi_clothes_wedding">Bestires de isposa</string>
+	<string name="poi_clothes_sports">Isport</string>
+	<string name="poi_clothes_babies">Pitzinneddos</string>
+	<string name="poi_historic_milestone">Perda miliare istòrica</string>
+
+	<string name="poi_seamark_dyke">Sinnale pro una diga</string>
+	<string name="poi_guide">Ufìtziu pro sas ghias</string>
+	<string name="poi_quango">Autoridade amministrativa indipendente</string>
+	<string name="poi_consulting">Ufìtziu de consulèntzia</string>
+	<string name="poi_cooperative">Ufìtziu de cooperativa</string>
+	<string name="poi_office_forestry">Ufìtziu forestale</string>
+	<string name="poi_logistics">Ufìtziu logìstica</string>
+	<string name="poi_parish">Ufìtziu parrochiale</string>
+	<string name="poi_publisher">Ufìtziu editoriale/de publicatzione</string>
+
+	<string name="poi_fuel_91ul">Carburante 91UL</string>
+	<string name="poi_fuel_100ll">Carburante 100LL</string>
+	<string name="poi_fuel_autogas">Autogas</string>
+	<string name="poi_fuel_jeta1">Carburante Jet A-1</string>
+	<string name="poi_fuel_adblue">Carburante AdBlue</string>
+
+	<string name="poi_fuel_wood">Combustìbile: linna</string>
+	<string name="poi_fuel_charcoal">Combustìbile: carbone vegetale</string>
+	<string name="poi_fuel_coal">Combustìbile: carbone</string>
+
+	<string name="poi_escape_lane">Corsia de firmada de emergèntzia</string>
+
+	<string name="poi_crop_rice">Cortura: risu</string>
+	<string name="poi_crop_grass">Cortura: erba</string>
+	<string name="poi_crop_corn">Cortura: mais</string>
+	<string name="poi_crop_cereal">Cortura: laores</string>
+	<string name="poi_crop_sugarcane">Cortura: canna pro tzùcaru</string>
+	<string name="poi_crop_wheat">Cortura: trigu</string>
+	<string name="poi_crop_soy">Cortura: sòia</string>
+	<string name="poi_crop_barley">Cortura: òrgiu</string>
+	<string name="poi_crop_vegetables">Cortura: birdura</string>
+	<string name="poi_crop_hop">Cortura: lùppulu</string>
+	<string name="poi_crop_rape">Cortura: napu</string>
+	<string name="poi_crop_beet">Cortura: beda</string>
+	<string name="poi_crop_lavender">Cortura: ispìgula/ispigu</string>
+	<string name="poi_crop_tea">Cortura: tè</string>
+	<string name="poi_crop_coffee">Cortura: cafè</string>
+	<string name="poi_crop_poultry">Cortura: màndigu pro puddas</string>
+	<string name="poi_crop_sunflower">Cortura: girasole</string>
+	<string name="poi_crop_raspberry">Cortura: lampone</string>
+	<string name="poi_crop_tobacco">Cortura: tabacu</string>
+	<string name="poi_crop_strawberry">Cortura: fràgula</string>
+	<string name="poi_crop_vegetables_flowers">Cortura: birduras, frores</string>
+	<string name="poi_crop_cassava">Cortura: manioca</string>
+	<string name="poi_crop_cranberry">Cortura: murtitzu</string>
+	<string name="poi_crop_asparagus">Cortura: ispàragos</string>
+	<string name="poi_crop_flowers">Cortura: frores</string>
+
+	<string name="poi_surveillance_indoor">Guardiania: in intro</string>
+	<string name="poi_surveillance_outdoor">Guardiania: in foras</string>
+	<string name="poi_surveillance_public">Guardiania: pùblica</string>
 
 	</resources>
