@@ -1038,10 +1038,10 @@
 	<string name="poi_content_grain">Tartalom: gabona</string>
 
 	<string name="poi_nudism_yes">Engedélyezett</string>
-	<string name="poi_nudism_no">Tiltott</string>
+	<string name="poi_nudism_no">Tilos</string>
 	<string name="poi_nudism_obligatory">Kötelező</string>
 	<string name="poi_nudism_customary">Megszokott</string>
-	<string name="poi_nudism_permissive">Engedélyköteles</string>
+	<string name="poi_nudism_permissive">Megtűrt</string>
 
 	<string name="poi_trade_building_supplies">Építőanyag</string>
 	<string name="poi_trade_plumbing">Vízvezeték-szerelési anyagok</string>
@@ -1140,8 +1140,8 @@
 	<string name="poi_generator_source_diesel">Energiaforrás: dízel</string>
 
 	<string name="poi_pump_manual">Kézi</string>
-	<string name="poi_pump_powered">Meghajtott szivattyúval</string>
-	<string name="poi_pump_no">Pumpa nélkül</string>
+	<string name="poi_pump_powered">Meghajtott</string>
+	<string name="poi_pump_no">Nincs szivattyú</string>
 	<string name="poi_pump_yes">Igen</string>
 
 	<string name="poi_water_characteristic_mineral">Ásványvíz</string>
@@ -1975,7 +1975,7 @@
 	<string name="poi_fuel_avia_type">Típus</string>
 	<string name="poi_vending_type">Árusítás módja</string>
 	<string name="poi_bicycle_service">Kerékpáros szolgáltatás</string>
-	<string name="poi_service_bicycle_pump_yes">Pumpa</string>
+	<string name="poi_service_bicycle_pump_yes">Kerékpárpumpa</string>
 	<string name="poi_service_bicycle_pump_no">Nincs kerékpárpumpa</string>
 	<string name="poi_water_characteristic">Víz jellemzője</string>
 	<string name="poi_shoes_type">Cipőfajta</string>
@@ -2332,9 +2332,9 @@
 	<string name="poi_refugee_no">Menekültek: nem</string>
 
 	<string name="poi_social_facility_food_bank">Élelmiszerbank</string>
-	<string name="poi_social_facility_shelter">Menedék</string>
-	<string name="poi_social_facility_ambulatory_care">Járóbeteg-ellátás</string>
-	<string name="poi_social_facility_workshop">Műhely</string>
+	<string name="poi_social_facility_shelter">Hajléktalanszálló</string>
+	<string name="poi_social_facility_ambulatory_care"/>
+	<string name="poi_social_facility_workshop">Szociális foglalkoztató</string>
 	<string name="poi_social_facility_for_senior">Idősek</string>
 	<string name="poi_social_facility_for_child">Gyermekek</string>
 	<string name="poi_social_facility_for_orphan">Árvák</string>
@@ -2375,13 +2375,13 @@
 	<string name="poi_castle_type_shiro">Vártípus: japán siro</string>
 
 	<string name="poi_historic_manor">Történelmi kúria</string>
-	<string name="poi_historic_civilization_ancient_roman">Civilizáció: ókori római (Kr. e. 753 – Kr. u. 284)</string>
-	<string name="poi_historic_civilization_nuragic">Civilizáció: nuraghe-kultúra (Kr. e. 18. század – Kr. u. 2. század)</string>
+	<string name="poi_historic_civilization_ancient_roman">Civilizáció: Római Birodalom (Kr. e. 753 – Kr. u. 284)</string>
+	<string name="poi_historic_civilization_nuragic">Civilizáció: nuraghe (Kr. e. 18. század – Kr. u. 2. század)</string>
 	<string name="poi_historic_civilization_etruscan">Civilizáció: etruszk (Kr. e. 12–6. század)</string>
 	<string name="poi_historic_civilization_prehistoric">Civilizáció: történelem előtti</string>
 	<string name="poi_historic_civilization_ancient_greek">Civilizáció: ógörög</string>
 	<string name="poi_historic_civilization_roman">Civilizáció: római</string>
-	<string name="poi_historic_civilization_byzantine">Civilizáció: bizánci birodalom (Kr. u. 285–1453)</string>
+	<string name="poi_historic_civilization_byzantine">Civilizáció: bizánci (Kr. u. 285–1453)</string>
 	<string name="poi_historic_civilization_imperial_chinese">Civilizáció: birodalmi Kína (Kr. u. 221–1911)</string>
 	<string name="poi_historic_civilization_ancient_egyptian">Civilizáció: óegyiptomi (Kr. e. 332-ig)</string>
 	<string name="poi_historic_civilization_celtic">Civilizáció: kelta</string>
@@ -2391,7 +2391,88 @@
 	<string name="poi_historic_civilization_hernici">Civilizáció: hernicus</string>
 	<string name="poi_historic_civilization_greek_egyptian">Civilizáció: hellenisztikus (Kr. e. 332–30)</string>
 	<string name="poi_historic_civilization_roman_and_byzantine_egyptian">Civilizáció: római és bizánci egyiptomi</string>
-	<string name="poi_historic_civilization_helladic">Civilizáció: kora helladikus</string>
-	<string name="poi_historic_civilization_cycladic">Civilizáció: küklád</string>
+	<string name="poi_historic_civilization_helladic">Civilizáció: korai helladikus</string>
+	<string name="poi_historic_civilization_cycladic">Civilizáció: kükladikus</string>
 	<string name="poi_historic_civilization_minoan">Civilizáció: minószi</string>
+	<string name="poi_historic_civilization_tiahuanacota">Civilizáció: tiahuanacói</string>
+
+	<string name="poi_historic_period_nuragic">Történelmi kor: nuraghe</string>
+	<string name="poi_historic_period_stone_bronze_undetermined">Történelmi kor: kőkor / bronzkor (meghatározatlan)</string>
+	<string name="poi_historic_period_bronze_age">Történelmi kor: bronzkor</string>
+	<string name="poi_historic_period_principate">Történelmi kor: principátus (Kr. e. 27 – Kr. u. 284)</string>
+	<string name="poi_historic_period_classical_greece">Történelmi kor: klasszikus görög (Kr. e. 5–4. század)</string>
+	<string name="poi_historic_period_archaic_greece">Történelmi kor: archaikus görög</string>
+	<string name="poi_historic_period_iron_age">Történelmi kor: vaskor</string>
+	<string name="poi_historic_period_roman_republic">Történelmi kor: római köztársaság (Kr. e. 508–27)</string>
+	<string name="poi_historic_period_hellenistic_greece">Történelmi kor: hellenisztikus görög</string>
+	<string name="poi_historic_period_new_kingdom">Történelmi kor: újbirodalom (Kr. e. 1550–1069)</string>
+	<string name="poi_historic_period_old_kingdom">Történelmi kor: óbirodalom (Kr. e. 2686–2181)</string>
+	<string name="poi_historic_period_first_intermediate_period">Történelmi kor: első átmeneti kor (Kr. e. 2181–2055)</string>
+	<string name="poi_historic_period_early_dynastic_period">Történelmi kor: korai dinasztikus kor (Kr. e. 3100–2686)</string>
+	<string name="poi_historic_period_predynastic_egypt">Történelmi kor: predinasztikus Egyiptom</string>
+	<string name="poi_historic_period_middle_kingdom">Történelmi kor: középbirodalom (Kr. e. 2055–1650)</string>
+	<string name="poi_historic_period_second_intermediate_period">Történelmi kor: második átmeneti kor (Kr. e. 1650–1550)</string>
+	<string name="poi_historic_period_third_intermediate_period">"Történelmi kor: harmadik átmeneti kor (Kr. e. 1069–664) "</string>
+	<string name="poi_historic_period_first_persian_period">Történelmi kor: első perzsa kor</string>
+	<string name="poi_historic_period_late_period">Történelmi kor: késői kor (Kr. e. 664–332)</string>
+	<string name="poi_historic_period_second_persian_period">Történelmi kor: második perzsa kor</string>
+	<string name="poi_historic_period_alexander_the_great">Történelmi kor: Nagy Sándor</string>
+	<string name="poi_historic_period_ptolemaic_egypt">Történelmi kor: ptolemaida Egyiptom (Kr. e. 305–30)</string>
+	<string name="poi_historic_period_christian_egypt">Történelmi kor: keresztény Egyiptom</string>
+	<string name="poi_historic_period_byzantine_egypt">Történelmi kor: bizánci Egyiptom (Kr. e. 30 – Kr. u. 641)</string>
+	<string name="poi_historic_period_persian_occupation">Történelmi kor: perzsa megszállás</string>
+	<string name="poi_historic_period_greek_dark_ages">Történelmi kor: görög sötét kor (Kr. e. 1100–800)</string>
+	<string name="poi_historic_period_roman_greece">Történelmi kor: római Görögország (Kr. e. 146 – Kr. u. 330)</string>
+	<string name="poi_historic_period_roman_kingdom">Történelmi kor: római királyság (Kr. e. 753–509)</string>
+	<string name="poi_historic_period_dominate">Történelmi kor: dominatus (Kr. u. 285–476)</string>
+	<string name="poi_historic_period_villager">Történelmi kor: falusi (I. és II. korszak, Kr. e. 1580–133)</string>
+	<string name="poi_historic_period_urban">Történelmi kor: városi (III. korszak, Kr. e. 133 – Kr. u. 374)</string>
+	<string name="poi_historic_period_classical">Történelmi kor: klasszikus (Kr. u. 374–900)</string>
+	<string name="poi_historic_period_imperial">Történelmi kor: birodalmi (V. korszak, Kr. u. 900–1200)</string>
+
+	<string name="poi_historic_era_paleolithic">Történelmi kor: őskőkorszak (2,6 millió – 10000 évvel ezelőtt)</string>
+	<string name="poi_historic_era_mesolithic">Történelmi kor: középső kőkorszak</string>
+	<string name="poi_historic_era_neolithic">Történelmi kor: újkőkorszak</string>
+	<string name="poi_historic_era_chalcolithic">Történelmi kor: kőrézkor (Kr. e. 4–3. évezred)</string>
+
+	<string name="poi_historic_stone">Történelmi kő</string>
+	<string name="poi_historic_farm">Történelmi vidéki ház, tanya</string>
+	<string name="poi_historic_railway_station">Történelmi vasútállomás</string>
+
+	<string name="poi_historic_threshing_floor">Történelmi szérű</string>
+	<string name="poi_historic_gallows">Történelmi akasztófa</string>
+	<string name="poi_historic_railway">Történelmi vasútvonal</string>
+
+	<string name="poi_protection_object_historic">Védett történelmi objektum</string>
+	<string name="poi_protected_area">Védett terület</string>
+	<string name="poi_protection_title">Védettség típusa</string>
+	<string name="poi_protection_object_nature">Védett természeti objektum</string>
+	<string name="poi_protection_object_habitat">Védett élőhely</string>
+	<string name="poi_protection_object_water">Védett víz</string>
+
+	<string name="poi_pump_type_beam_pump">Szivattyútípus: mélyszivattyú (bólogató olajkút)</string>
+	<string name="poi_pump_type_india_mk_2_3">Szivattyútípus: India Mark II vagy III&gt;</string>
+	<string name="poi_pump_type_gravity">Szivattyútípus: gravitációs</string>
+	<string name="poi_pump_style_modern">Szivattyústílus: modern</string>
+	<string name="poi_pump_style_historic">Szivattyústílus: történelmi</string>
+	<string name="poi_pump_status_ok">Szivattyú állapota: működőképes</string>
+	<string name="poi_pump_status_broken">Szivattyú állapota: hibás</string>
+	<string name="poi_pump_status_locked">Szivattyú állapota: lezárt</string>
+
+	<string name="poi_pumping_station">Szivattyúház</string>
+
+	<string name="poi_inscription_n">Felirat: É</string>
+	<string name="poi_inscription_nw">Felirat: ÉNY</string>
+	<string name="poi_inscription_w">Felirat: NY</string>
+	<string name="poi_inscription_sw">Felirat: DNY</string>
+	<string name="poi_inscription_s">Felirat: D</string>
+	<string name="poi_inscription_se">Felirat: DK</string>
+	<string name="poi_inscription_e">Felirat: K</string>
+	<string name="poi_inscription_ne">Felirat: ÉK</string>
+
+	<string name="poi_social_facility_group_home">Csoportos otthon</string>
+	<string name="poi_social_facility_day_care">Nappali ellátás</string>
+
+	<string name="poi_social_facility_for_mental_health">Értelmi fogyatékos betegek</string>
+	<string name="poi_social_facility_for_migrant">Bevándorlók</string>
 	</resources>
