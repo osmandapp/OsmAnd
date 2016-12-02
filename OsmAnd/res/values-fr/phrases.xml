@@ -2136,4 +2136,20 @@
 	<string name="poi_water_characteristic_mineral">Caractéristique de l’eau : minéral</string>
 	<string name="poi_information_guidepost">Point de repère</string>
 	<string name="poi_fire_hydrant_count">Bouche incendie</string>
+	<string name="poi_payment_fuel_type">Cartes carburant</string>
+	<string name="poi_additional_type">Supplémentaire</string>
+	<string name="poi_internet_access_type">Type d\'accès Internet</string>
+	<string name="poi_vending_type">Type de vente</string>
+	<string name="poi_bicycle_service">Location de vélos</string>
+	<string name="poi_clothes_type">Type</string>
+	<string name="poi_shoes_type">Type</string>
+	<string name="poi_fire_hydrant_type">Type</string>
+	<string name="poi_fire_hydrant_position">Position</string>
+	<string name="poi_fire_hydrant_water_source">Source d\'eau</string>
+	<string name="poi_payment_toll_type">Type de paiement</string>
+	<string name="poi_highway_crossing_type">Type</string>
+	<string name="poi_service_car">Service</string>
+	<string name="poi_self_service">Libre service</string>
+	<string name="poi_automated">Automatisé</string>
+	<string name="poi_parking_type">Type</string>
 	</resources>
