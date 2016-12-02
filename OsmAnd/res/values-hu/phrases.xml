@@ -1909,7 +1909,7 @@
 <string name="poi_diet">Diéta</string>
 	<string name="poi_delivery">Házhoz szállítás</string>
 	<string name="poi_cuisine_chicken">Csirke</string>
-	<string name="poi_cuisine_fried_chicken">Rántott csirke</string>
+	<string name="poi_cuisine_fried_chicken">Sült csirke</string>
 	<string name="poi_cuisine_coffee">Kávé</string>
 	<string name="poi_cuisine_burger">Hamburger</string>
 	<string name="poi_cuisine_ice_cream">Fagylalt</string>
@@ -1942,7 +1942,7 @@
 	<string name="poi_cuisine_balkan">Balkán</string>
 	<string name="poi_wiki_lang_bar">Bajor wiki</string>
 	<string name="poi_cuisine_bavarian">Bajor</string>
-	<string name="poi_cuisine_barbecue"/>
+	<string name="poi_cuisine_barbecue">Barbecue</string>
 	<string name="poi_wiki_lang_eu">Baszk wiki</string>
 	<string name="poi_cuisine_basque">Baszk</string>
 	<string name="poi_cuisine_belgian">Belga</string>
@@ -1951,7 +1951,7 @@
 	<string name="poi_cuisine_pizza">Pizza</string>
 	<string name="poi_cuisine_fish_and_chips">Fish &amp; Chips</string>
 	<string name="poi_cuisine_seafood">Tenger gyümölcsei</string>
-	<string name="poi_cuisine_noodle">Nudli</string>
+	<string name="poi_cuisine_noodle">Tészta</string>
 	<string name="poi_cuisine_donut">Fánk</string>
 	<string name="poi_cuisine_crepe">Palacsinta (crepe)</string>
 	<string name="poi_cuisine_breakfast">Reggeli</string>
@@ -1961,8 +1961,8 @@
 	<string name="poi_cuisine_tea_shop">Teázó</string>
 	<string name="poi_cuisine_soup">Leves</string>
 	<string name="poi_cuisine_pie">Pite</string>
-	<string name="poi_cuisine_hotdog">Hotdog</string>
-	<string name="poi_cuisine_deli">Delikátesz</string>
+	<string name="poi_cuisine_hotdog">Hot dog</string>
+	<string name="poi_cuisine_deli">Csemege</string>
 	<string name="poi_cuisine_salad">Saláta</string>
 	<string name="poi_cuisine_frozen_yogurt">Fagyasztott joghurt</string>
 	<string name="poi_cuisine_savory_pancakes">Sós palacsinta</string>
@@ -2475,4 +2475,39 @@
 
 	<string name="poi_social_facility_for_mental_health">Értelmi fogyatékos betegek</string>
 	<string name="poi_social_facility_for_migrant">Bevándorlók</string>
+	<string name="poi_health_specialty_social_paediatrics_yes">Szociális gyermekgyógyászat</string>
+	<string name="poi_scout_yes">Cserkésztábor: igen</string>
+	<string name="poi_scout_no">Cserkésztábor: nem</string>
+	<string name="poi_cuisine_steak">Steak</string>
+	<string name="poi_cuisine_tapas">Tapas</string>
+	<string name="poi_cuisine_gastropub">Gasztrokocsma</string>
+	<string name="poi_cuisine_heuriger">Újbor</string>
+	<string name="poi_cuisine_curry">Curry</string>
+	<string name="poi_cuisine_sausage">Kolbász</string>
+	<string name="poi_cuisine_cake">Sütemény</string>
+	<string name="poi_cuisine_pasta">Olasz tészta</string>
+	<string name="poi_cuisine_juice">Gyümölcslé</string>
+	<string name="poi_cuisine_fried_food">Olajban sült étel</string>
+	<string name="poi_cuisine_couscous">Kuszkusz</string>
+	<string name="poi_cuisine_canteen">Menza</string>
+	<string name="poi_cuisine_tacos">Taco</string>
+	<string name="poi_cuisine_falafel">Falafel</string>
+	<string name="poi_cuisine_smoothie">Smoothie</string>
+	<string name="poi_cuisine_souvlaki">Szuvlaki</string>
+	<string name="poi_cuisine_snack">Falatozó</string>
+	<string name="poi_cuisine_yogurt">Joghurt</string>
+	<string name="poi_cuisine_gyros">Gyros</string>
+	<string name="poi_cuisine_crepes">Francia palacsinta (crêpe)</string>
+	<string name="poi_cuisine_suki">Szuki</string>
+	<string name="poi_cuisine_brasserie">Söröző (brasserie)</string>
+	<string name="poi_cuisine_meat">Hús</string>
+	<string name="poi_cuisine_wings">Szárny</string>
+	<string name="poi_cuisine_chocolate">Csokoládé</string>
+	<string name="poi_cuisine_wine">Bor</string>
+	<string name="poi_cuisine_potato">Burgonya</string>
+	<string name="poi_cuisine_brunch">Brunch</string>
+	<string name="poi_cuisine_sub">Sub (szendvics)</string>
+	<string name="poi_cuisine_pita">Pita</string>
+	<string name="poi_cuisine_fondue">Fondü</string>
+	<string name="poi_cuisine_baguette">BAguette</string>
 	</resources>
