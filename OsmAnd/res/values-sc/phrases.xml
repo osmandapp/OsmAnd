@@ -2439,4 +2439,24 @@
 	<string name="poi_surveillance_outdoor">Guardiania: in foras</string>
 	<string name="poi_surveillance_public">Guardiania: pùblica</string>
 
+	<string name="poi_diet_vegetarian_few">Vegetariana: carchi una</string>
+	<string name="poi_clothes_denim">Denim/jeans</string>
+	<string name="poi_clothes_workwear">Bestires pro traballu</string>
+	<string name="poi_clothes_hats">Bonetes</string>
+	<string name="poi_clothes_fur">Pellitza</string>
+	<string name="poi_clothes_leather">De pedde</string>
+	<string name="poi_clothes_costumes">Costùmenes pro carrasecare</string>
+	<string name="poi_clothes_traditional">Bestires traditzionales</string>
+	<string name="poi_clothes_suits">Àbitos elegantes pro òmines</string>
+	<string name="poi_clothes_maternity">Maternidade</string>
+	<string name="poi_clothes_vintage">De annata (vintage)</string>
+	<string name="poi_clothes_oversize">Tàllias mannas</string>
+	<string name="poi_clothes_schoolwear">Pro iscola</string>
+	<string name="poi_clothes_swimwear">Costùmenes pro nadare</string>
+	<string name="poi_clothes_socks">Mìgias</string>
+	<string name="poi_clothes_shirts">Camisas</string>
+	<string name="poi_clothes_dance">Dantza</string>
+	<string name="poi_clothes_military">Militare</string>
+
+	<string name="poi_historic_manor">Villa istòrica</string>
 	</resources>
