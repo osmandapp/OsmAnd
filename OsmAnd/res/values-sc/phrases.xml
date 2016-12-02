@@ -1041,7 +1041,7 @@
 	<string name="poi_car_rental">Nolu de veturas</string>
 	<string name="poi_boat_sharing">Cumpartzidura de barcas</string>
 	<string name="poi_cutline">Lìnia de trincu</string>
-	<string name="poi_shower">Dòcia</string>
+	<string name="poi_shower">Dòtzia</string>
 	<string name="poi_military_office">Ufìtziu militare</string>
 	<string name="poi_bollard">Bita</string>
 	<string name="poi_cattle_grid">Inferriada/cràdica pro su bestiàmene</string>
@@ -2459,4 +2459,49 @@
 	<string name="poi_clothes_military">Militare</string>
 
 	<string name="poi_historic_manor">Villa istòrica</string>
+	<string name="poi_castle_type_stately">Casta de casteddu: rapresentativu</string>
+	<string name="poi_castle_type_defensive">Casta de casteddu: difensivu</string>
+	<string name="poi_castle_type_fortress">Casta de casteddu: fortilesa</string>
+	<string name="poi_castle_type_palace">Casta de casteddu: palatzu</string>
+	<string name="poi_castle_type_kremlin">Casta de casteddu: cremlinu</string>
+	<string name="poi_castle_type_defensive_stately">Casta de casteddu: divensivu, rapresentativu</string>
+	<string name="poi_castle_type_castrum">Casta de casteddu: castrum</string>
+	<string name="poi_castle_type_shiro">Casta de casteddu: shiro</string>
+
+	<string name="poi_massage_thai">Tailandesu</string>
+	<string name="poi_massage_sexual">Sessuale</string>
+	<string name="poi_massage_chinese">Tzinesu</string>
+	<string name="poi_massage_therapeutic">Terapèuticu</string>
+
+	<string name="poi_massage_yes">Servìtziu de massàgios</string>
+	<string name="poi_sauna_yes">Servìtzios de sauna</string>
+	<string name="poi_solarium_yes">Servìtzios de solàrium</string>
+
+	<string name="poi_tents_yes">Permitidas</string>
+	<string name="poi_tents_no">Tendas non permitidas</string>
+	<string name="poi_openfire_yes">Fogos permitidos</string>
+	<string name="poi_openfire_no">Fogos non permitidos</string>
+	<string name="poi_backcountry_yes">Eja</string>
+	<string name="poi_backcountry_no">Nono</string>
+	<string name="poi_scout_yes">Campu scout: eja</string>
+	<string name="poi_scout_no">Campu scout: nono</string>
+	<string name="poi_group_only_yes">Grupos ebbia: eja</string>
+	<string name="poi_group_only_no">Grupos ebbia: nono</string>
+	<string name="poi_washing_machine_yes">Eja</string>
+	<string name="poi_washing_machine_no">Lavatritze: nono</string>
+	<string name="poi_shower_filter_yes">Eja</string>
+	<string name="poi_shower_yes">Dòtzia: eja</string>
+	<string name="poi_shower_no">Dòtzia: nono</string>
+	<string name="poi_shower_hot">Dòtzia: caente</string>
+	<string name="poi_shower_outdoor">Dòtzia: in foras</string>
+	<string name="poi_shower_cold">Dòtzia: frita</string>
+	<string name="poi_shower_indoor">Dòtzia: in intro</string>
+	<string name="poi_caravans_yes">Eja</string>
+	<string name="poi_power_supply_yes">Eja</string>
+	<string name="poi_compressed_air_yes">Eja</string>
+	<string name="poi_car_wash_yes">Eja</string>
+
+	<string name="poi_vacuum_cleaner_yes">Eja</string>
+	<string name="poi_home_visit_yes">Eja</string>
+	<string name="poi_caravans_no">Campers/roulotes: nono</string>
 	</resources>
