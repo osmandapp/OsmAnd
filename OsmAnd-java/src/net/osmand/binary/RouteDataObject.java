@@ -108,9 +108,9 @@ public class RouteDataObject {
 	}
 	
 	public String getRef(boolean direction) {
-		if (getDestinationRef(direction) != null) {
-			return getDestinationRef(direction);
-		}
+		//if (getDestinationRef(direction) != null) {
+		//	return getDestinationRef(boolean direction);
+		//}
 		if (names != null) {
 			return names.get(region.refTypeRule);
 		}
@@ -144,6 +144,8 @@ public class RouteDataObject {
 	}
 
 	public String getDestinationName(String lang, boolean transliterate, boolean direction){
+		//Issue #3289: Treat destination:ref like a destination, not like a ref
+		String destRef = (getDestinationRef(direction) == null) ? "" : getDestinationRef(direction);
 		if(names != null) {
 			int[] kt = names.keys();
 
@@ -169,13 +171,13 @@ public class RouteDataObject {
 				int k = kt[i];
 				if(region.routeEncodingRules.size() > k) {
 					if(!Algorithms.isEmpty(lang) && destinationTagLangFB.equals(region.routeEncodingRules.get(k).getTag())) {
-						return (transliterate) ? Junidecode.unidecode(names.get(k)) : names.get(k);
+						return destRef + ", " + ((transliterate) ? Junidecode.unidecode(names.get(k)) : names.get(k));
 					}
 					if(destinationTagFB.equals(region.routeEncodingRules.get(k).getTag())) {
-						return (transliterate) ? Junidecode.unidecode(names.get(k)) : names.get(k);
+						return destRef + ", " + ((transliterate) ? Junidecode.unidecode(names.get(k)) : names.get(k));
 					}
 					if(!Algorithms.isEmpty(lang) && destinationTagLang.equals(region.routeEncodingRules.get(k).getTag())) {
-						return (transliterate) ? Junidecode.unidecode(names.get(k)) : names.get(k);
+						return destRef + ", " + ((transliterate) ? Junidecode.unidecode(names.get(k)) : names.get(k));
 					}
 					if(destinationTagDefault.equals(region.routeEncodingRules.get(k).getTag())) {
 						destinationDefault = names.get(k);
@@ -183,13 +185,13 @@ public class RouteDataObject {
 				}
 			}
 			if(transliterate && destinationDefault != null) {
-				return Junidecode.unidecode(destinationDefault);
+				return destRef + ", " + Junidecode.unidecode(destinationDefault);
 			}
-			return destinationDefault;
+			return destRef + ", " + destinationDefault;
 		}
-		return null;
+		return "".equals(destRef) ? null : destRef;
 	}
-	
+
 	public int getPoint31XTile(int i) {
 		return pointsX[i];
 	}
