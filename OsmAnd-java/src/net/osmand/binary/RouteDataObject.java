@@ -145,7 +145,7 @@ public class RouteDataObject {
 
 	public String getDestinationName(String lang, boolean transliterate, boolean direction){
 		//Issue #3289: Treat destination:ref like a destination, not like a ref
-		String destRef = (getDestinationRef(direction) == null) ? "" : getDestinationRef(direction);
+		String destRef = ((getDestinationRef(direction) == null) || getDestinationRef(direction).equals(getRef(direction)) ? "" : getDestinationRef(direction);
 		String destRef1 = ("".equals(destRef)) ? "" : destRef + ", ";
 
 		if(names != null) {
@@ -188,8 +188,9 @@ public class RouteDataObject {
 			}
 			if(transliterate && destinationDefault != null) {
 				return destRef1 + Junidecode.unidecode(destinationDefault);
+			} else if (destinationDefault != null) {
+				return destRef1 + destinationDefault;
 			}
-			return destRef1 + destinationDefault;
 		}
 		return "".equals(destRef) ? null : destRef;
 	}
