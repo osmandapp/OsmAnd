@@ -1951,7 +1951,7 @@
 	<string name="poi_cuisine_pizza">Pizza</string>
 	<string name="poi_cuisine_fish_and_chips">Fish &amp; Chips</string>
 	<string name="poi_cuisine_seafood">Tenger gyümölcsei</string>
-	<string name="poi_cuisine_noodle"/>
+	<string name="poi_cuisine_noodle">Tészta</string>
 	<string name="poi_cuisine_donut">Fánk</string>
 	<string name="poi_cuisine_crepe">Palacsinta (crepe)</string>
 	<string name="poi_cuisine_breakfast">Reggeli</string>
@@ -2696,4 +2696,207 @@
 	<string name="poi_futsal">Futsal</string>
 	<string name="poi_rc_car">Távirányítós autóverseny</string>
 	<string name="poi_squash">Fallabda</string>
-	</resources>
+	<string name="poi_boxing">Boksz</string>
+
+	<string name="poi_official_name">Hivatalos név</string>
+
+	<string name="poi_dolphin">Delfin</string>
+
+	<string name="poi_construction_yes">Építés alatt</string>
+	<string name="poi_additional_atm_yes">Bankautomata: igen</string>
+	<string name="poi_atm_no">Bankautomata: nem</string>
+
+	<string name="poi_firepit">Tűzrakóhely</string>
+	<string name="poi_fair_trade_yes">Méltányos kereskedelem: igen</string>
+	<string name="poi_fair_trade_no">Méltányos kereskedelem: nem</string>
+	<string name="poi_fair_trade_only">Csak méltányos kereskedelemből származó termékek</string>
+
+
+	<string name="poi_addr_housename">Háznév</string>
+
+
+	<string name="poi_plant_nursery">Faiskola</string>
+
+	<string name="poi_compressed_air_yes">Igen</string>
+	<string name="poi_compressed_air_no">Sűrített levegő: nem</string>
+
+	<string name="poi_car_wash_yes">Igen</string>
+
+	<string name="poi_vacuum_cleaner_yes">Igen</string>
+	<string name="poi_vacuum_cleaner_no">Porszívó: nincs</string>
+	<string name="poi_amenity_vacuum_cleaner">Porszívó</string>
+
+	<string name="poi_water_tap">Vízcsap</string>
+	<string name="poi_button_operated_yes">Gombbal működtetett: igen</string>
+	<string name="poi_button_operated_no">Gombbal működtetett: nem</string>
+
+	<string name="poi_free_flying_site_training">Képzés</string>
+	<string name="poi_free_flying_official_yes">Hivatalos: igen</string>
+	<string name="poi_free_flying_official_no">Hivatalos: nem</string>
+	<string name="poi_tanning_salon">Szolárium</string>
+
+	<string name="poi_medical_system_western_yes">Nyugati</string>
+	<string name="poi_medical_system_mongolian_yes">Hagyományos mongol</string>
+	<string name="poi_medical_system_tibetan_yes">Hagyományos tibeti</string>
+	<string name="poi_fire_hydrant_type_underground">Föld alatti</string>
+	<string name="poi_fire_hydrant_type_pillar">Oszlop</string>
+	<string name="poi_fire_hydrant_type_dry_barrel">Száraz hordó</string>
+	<string name="poi_fire_hydrant_type_wall">Fali</string>
+
+	<string name="poi_health_amenity_type_first_aid_kit">Elsősegély-készlet</string>
+	<string name="poi_health_amenity_type_scales">Nyilvános mérlegek</string>
+
+	<string name="poi_counselling_type_addiction_yes">Tanácsadás (függőség): igen</string>
+	<string name="poi_counselling_type_addiction_no">Tanácsadás (függőség): nincs</string>
+	<string name="poi_counselling_type_antenatal_yes">Tanácsadás (terhességi): igen</string>
+	<string name="poi_counselling_type_antenatal_no">Tanácsadás (terhességi): nincs</string>
+	<string name="poi_counselling_type_drugs_yes">Tanácsadás (drogok): igen</string>
+	<string name="poi_counselling_type_drugs_no">Tanácsadás (drogok): nincs</string>
+	<string name="poi_counselling_type_education_yes">Tanácsadás (oktatás): igen</string>
+	<string name="poi_counselling_type_education_no">Tanácsadás (oktatás): nincs</string>
+	<string name="poi_counselling_type_family_yes">Tanácsadás (család): igen</string>
+	<string name="poi_counselling_type_family_no">Tanácsadás (család): nincs</string>
+	<string name="poi_counselling_type_homeless_yes">Tanácsadás (hajléktalanok): igen</string>
+	<string name="poi_counselling_type_homeless_no">Tanácsadás (hajléktalanok): nincs</string>
+	<string name="poi_counselling_type_immigrant_yes">Tanácsadás (bevándorló): igen</string>
+	<string name="poi_counselling_type_immigrant_no">Tanácsadás (bevándorló): nincs</string>
+	<string name="poi_counselling_type_marriage_yes">Tanácsadás (házasság): igen</string>
+	<string name="poi_counselling_type_marriage_no">Tanácsadás (házasság): nincs</string>
+	<string name="poi_counselling_type_nutrition_yes">Tanácsadás (táplálkozás): igen</string>
+	<string name="poi_counselling_type_nutrition_nfire_hydo">Tanácsadás (táplálkozás): nincs</string>
+	<string name="poi_counselling_type_rehabilitation_yes">Tanácsadás (rehabilitáció): igen</string>
+	<string name="poi_counselling_type_rehabilitation_no">Tanácsadás (rehabilitáció): nincs</string>
+	<string name="poi_counselling_type_victim_yes">Tanácsadás (áldozat): igen</string>
+	<string name="poi_counselling_type_victim_no">Tanácsadás (áldozat): nincs</string>
+	<string name="poi_counselling_type_violence_yes">Tanácsadás (erőszak): igen</string>
+	<string name="poi_counselling_type_violence_no">Tanácsadás (erőszak): nincs</string>
+
+	<string name="poi_counselling_yes">Tanácsadás: igen</string>
+	<string name="poi_counselling_no">Tanácsadás: nincs</string>
+	<string name="poi_home_visit_yes">Igen</string>
+	<string name="poi_disease_malaria_yes">Malária: igen</string>
+	<string name="poi_disease_malaria_no">Malária: nem</string>
+	<string name="poi_disease_ebola_yes">Ebola: igen</string>
+	<string name="poi_disease_ebola_no">Ebola: nem</string>
+	<string name="poi_disease_autism_yes">Autizmus: igen</string>
+	<string name="poi_disease_autism_no">Autizmus: nem</string>
+	<string name="poi_disease_aids_yes">AIDS: igen</string>
+	<string name="poi_disease_aids_no">AIDS: nem</string>
+
+	<string name="poi_fire_hydrant_diameter">Tűzcsapátmérő</string>
+	<string name="poi_fire_hydrant_pressure">Tűzcsapnyomás</string>
+	<string name="poi_fire_hydrant_count">Tűzcsapok száma</string>
+	<string name="poi_fire_hydrant_position_sidewalk">Tűzcsap helye: járda</string>
+	<string name="poi_fire_hydrant_position_green">Tűzcsap helye: zöldterület</string>
+	<string name="poi_fire_hydrant_position_parking_lot">Tűzcsap helye: parkoló</string>
+	<string name="poi_fire_hydrant_position_street">Tűzcsap helye: utca</string>
+	<string name="poi_fire_hydrant_position_underground">Tűzcsap helye: föld alatt</string>
+	<string name="poi_fire_hydrant_style_water_source_main">Fő</string>
+	<string name="poi_fire_hydrant_style_water_source_pond">Tó</string>
+	<string name="poi_fire_hydrant_style_water_source_stream">Patak</string>
+	<string name="poi_fire_hydrant_style_water_source_cistern">Ciszterna</string>
+	<string name="poi_street_cabinet_power">Doboz típusa: áram</string>
+	<string name="poi_street_cabinet_telecom">Doboz típusa: távközlés</string>
+	<string name="poi_street_cabinet_cable_tv">Doboz típusa: kábeltelevízió</string>
+	<string name="poi_street_cabinet_gas">Doboz típusa: gáz</string>
+	<string name="poi_street_cabinet_postal_service">Doboz típusa: postai szolgáltatás</string>
+	<string name="poi_street_cabinet_waste">Doboz típusa: szemét</string>
+	<string name="poi_street_cabinet_water_management">Doboz típusa: vízgazdálkodás</string>
+	<string name="poi_street_cabinet_street_lighting">Doboz típusa: közvilágítás</string>
+
+	<string name="poi_military_checkpoint">Katonai ellenőrzőpont</string>
+
+	<string name="poi_depth">Mélység</string>
+
+	<string name="poi_salt_yes">Só</string>
+	<string name="poi_salt_no">Só: nincs</string>
+	<string name="poi_summer_camp">Nyári tábor</string>
+	<string name="poi_recreation_center">Szabadidőközpont</string>
+
+	<string name="poi_aerodrome_type_international">Nemzetközi</string>
+	<string name="poi_aerodrome_type_regional">Regionális</string>
+	<string name="poi_aerodrome_type_public">Nyilvános</string>
+	<string name="poi_aerodrome_type_military">Katonai</string>
+	<string name="poi_aerodrome_type_military_public">Katonai/nyilvános</string>
+	<string name="poi_aerodrome_type_private">Privát</string>
+
+	<string name="poi_observatory_type_meteorological">Meteorológiai</string>
+	<string name="poi_observatory_type_gravitational">Gravitációs</string>
+
+	<string name="poi_greenhouse_horticulture">Üvegházi kertészet</string>
+
+	<string name="poi_voltage">Feszültség</string>
+	<string name="poi_generator_output_electricity_yes">Kimenet: áram</string>
+	<string name="poi_generator_output_hot_water_yes">Kimenet: meleg víz</string>
+	<string name="poi_generator_output_steam_yes">Kimenet: gőz</string>
+	<string name="poi_generator_output_hot_air_yes">Kimenet: meleg levegő</string>
+	<string name="poi_generator_output_cold_water_yes">Kimenet: hideg víz</string>
+	<string name="poi_generator_output_compressed_air_yes">Kimenet: sűrített levegő</string>
+	<string name="poi_generator_output_vacuum_yes">Kimenet: vákuum</string>
+	<string name="poi_generator_output_biogas_yes">Kimenet: biogáz</string>
+
+	<string name="poi_display_yes">Kijelző: igen</string>
+	<string name="poi_display_no">Kijelző: nincs</string>
+	<string name="poi_display_analog_yes">Analóg kijelző</string>
+	<string name="poi_display_digital_yes">Digitális kijelző</string>
+	<string name="poi_display_sundial_yes">Napóra</string>
+
+	<string name="poi_barometer_yes">Barométer</string>
+	<string name="poi_barometer_no">Barométer: nincs</string>
+	<string name="poi_thermometer_yes">Hőmérő</string>
+	<string name="poi_thermometer_no">Hőmérő: nincs</string>
+	<string name="poi_date_yes">Dátumkijelzés</string>
+	<string name="poi_date_no">Dátumkijelzés: nincs</string>
+
+	<string name="poi_passenger_information_display_yes">Utasinformáció-kijelző: igen</string>
+	<string name="poi_passenger_information_display_no">Utasinformáció-kijelző: nincs</string>
+
+	<string name="poi_min_age">Minimális életkor</string>
+
+	<string name="poi_organic_yes">Bioélelmiszerek: igen</string>
+	<string name="poi_organic_no">Bioélelmiszerek: nincs</string>
+	<string name="poi_organic_only">Csak bioélelmiszerek</string>
+
+	<string name="poi_diplomatic_consulate">Konzulátus</string>
+	<string name="poi_diplomatic_consulate_general">Főkonzulátus</string>
+	<string name="poi_diplomatic_honorary_consulate">Tiszteletbeli konzulátus</string>
+	<string name="poi_diplomatic_permanent_mission">Állandó képviselet</string>
+	<string name="poi_diplomatic_delegation">Küldöttség</string>
+	<string name="poi_water_tank">Víztartály</string>
+
+	<string name="poi_xmas">Karácsony</string>
+	<string name="poi_xmas_event">Karácsonyi rendezvény</string>
+	<string name="poi_xmas_market">Karácsonyi vásár</string>
+	<string name="poi_xmas_pyramid">Karácsonyi piramis</string>
+	<string name="poi_xmas_shop">Karácsonyi bolt</string>
+	<string name="poi_xmas_tree">Karácsonyfa</string>
+	<string name="poi_xmas_day_date">Karácsony: az esemény időszaka</string>
+	<string name="poi_xmas_note">Karácsony: megjegyzés</string>
+	<string name="poi_xmas_opening_hours">Karácsony: nyitvatartás</string>
+	<string name="poi_xmas_location">Karácsony: helyszín</string>
+	<string name="poi_xmas_url">Karácsony: weboldal</string>
+
+	<string name="poi_public_bookcase">Nyilvános könyvespolc</string>
+	<string name="poi_public_bookcase_type_phone_box">Típus: telefonfülke</string>
+	<string name="poi_public_bookcase_type_shelf">Típus: polc</string>
+
+	<string name="poi_cuisine_grill">Grill</string>
+	<string name="poi_cuisine_bagel">Bagel</string>
+	<string name="poi_party">Partikellékek</string>
+	<string name="poi_electrical">Elektromos szaküzlet</string>
+	<string name="poi_lighting">Lámpatestek</string>
+	<string name="poi_lottery">Lottószelvények</string>
+	<string name="poi_gambling">Szerencsejáték-helyszín</string>
+
+	<string name="poi_gambling_type">Típus</string>
+	<string name="poi_gambling_lottery">Lottó</string>
+	<string name="poi_gambling_slot_machines">Játékgépek</string>
+	<string name="poi_gambling_betting">Fogadás</string>
+	<string name="poi_e_cigarette">E-cigaretta-bolt</string>
+
+	<string name="poi_locomotive">Mozdony</string>
+
+	<string name="poi_nutrition_supplements">Táplálékkiegészítők</string>
+	<string name="poi_photo_studio">Fotóstúdió</string>
+
+</resources>
