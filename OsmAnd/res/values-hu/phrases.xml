@@ -2673,4 +2673,27 @@
 	<string name="poi_health_specialty_dentistry_yes">Fogászat</string>
 	<string name="poi_health_specialty_neurosurgery_yes">Idegsebészet</string>
 	<string name="poi_health_specialty_pathology_yes">Patológia</string>
+	<string name="poi_health_specialty_oncology_yes">Onkológia</string>
+	<string name="poi_health_specialty_obstetrics_caesarean_section_yes">Szülészet-nőgyógyászat (császármetszés)</string>
+	<string name="poi_health_specialty_clinical_pathology_yes">Klinikai patológia</string>
+	<string name="poi_health_specialty_speech_therapy_yes">Logopédia</string>
+	<string name="poi_health_specialty_sports_medicine_yes">Sportorvos</string>
+	<string name="poi_health_specialty_adult_psychiatry_yes">Felnőtt-pszichiátria</string>
+	<string name="poi_health_specialty_acupuncture_yes">Akupunktúra</string>
+	<string name="poi_health_specialty_homeopathy_yes">Homeopátia</string>
+	<string name="poi_building_type_pyramid">Épülettípus: piramis</string>
+
+	<string name="poi_fitness">Fitnesz</string>
+
+	<string name="poi_billiards">Biliárd</string>
+
+	<string name="poi_microwave_oven_yes">Mikrohullámú sütő: igen</string>
+	<string name="poi_microwave_oven_no">Mikrohullámú sütő: nem</string>
+	<string name="poi_parking_surface">Típus: felszíni</string>
+	<string name="poi_gaelic_games">Kelta játékok</string>
+	<string name="poi_running">Futás</string>
+	<string name="poi_karting">Gokart</string>
+	<string name="poi_futsal">Futsal</string>
+	<string name="poi_rc_car">Távirányítós autóverseny</string>
+	<string name="poi_squash">Fallabda</string>
 	</resources>
