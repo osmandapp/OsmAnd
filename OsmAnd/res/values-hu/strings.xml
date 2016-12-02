@@ -2044,8 +2044,8 @@ A nézet aktiválása megváltoztatja a térképstílust „Tél és síelésre�
     <string name="osmo_share_my_location">Pozíció továbbítása</string>
     <string name="shared_string_logoff">Naplózás ki</string>
     <string name="rendering_value_disabled_name">Letiltva</string>
-    <string name="rendering_value_walkingRoutesScopeOSMC_name">Színezés az útvonal hálózati szerepe szerint</string>
-    <string name="rendering_value_walkingRoutesOSMC_name">Színezés a jelzés színe szerint</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">Színezés hálózati kapcsolat szerint</string>
+    <string name="rendering_value_walkingRoutesOSMC_name">Színezés az OSMC túraszimbólum szerint</string>
     <string name="osm_edit_context_menu_delete">OSM szerkesztés törlése</string>
     <string name="shared_string_show_details">Részletek megjelenítése</string>
     <string name="read_full_article">Teljes cikk elolvasása (interneten)</string>
@@ -2069,7 +2069,7 @@ A nézet aktiválása megváltoztatja a térképstílust „Tél és síelésre�
     <string name="lang_ceb">szebuano</string>
     <string name="archive_wikipedia_data">Régi, összeférhetetlen Wikipédia adatok lettek letöltve. Szeretnéd archiválni?</string>
     <string name="download_wikipedia_files">Szeretnél további Wikipédia adatokat letölteni (%1$s MB)?</string>
-    <string name="lang_es_ar">spanyol (argentin)</string>
+    <string name="lang_es_ar">spanyol (Argentína)</string>
     <string name="lang_nb">norvég (bokmål)</string>
     <string name="light_theme">Világos</string>
     <string name="dark_theme">Sötét</string>
@@ -2408,7 +2408,7 @@ Jelenleg csak {2} MB érhető el.</string>
     <string name="download_files_question_space_with_temp">Letöltesz {0} fájlt?
  Ehhez átmenetileg {3} MB, véglegesen {1} MB szükséges.
  (Jelenleg {2} MB érhető el.)</string>
-    <string name="upload_osm_note_description">Az OSM Jegyzeteket névtelenül is feltöltheted, ha az openstreetmap.org profilodat használod.</string>
+    <string name="upload_osm_note_description">Az OSM-jegyzeteket névtelenül is feltöltheted, vagy használhatod az OpenStreetMap.org-profilodat.</string>
     <string name="upload_osm_note">OSM Jegyzet feltöltése</string>
     <string name="map_marker_1st">Első térképjelölő</string>
     <string name="map_marker_2nd">Második térképjelölő</string>
@@ -2716,4 +2716,11 @@ Ha segítségre van szükséged az OsmAnd alkalmazással kapcsolatban, keresd a 
  "</string>
     <string name="wiki_around">Közeli Wikipédia-cikkek</string>
     <string name="search_map_hint">Város, régió keresése</string>
+    <string name="legacy_search">Régi kereső</string>
+    <string name="show_legacy_search">Régi kereső megjelenítése</string>
+    <string name="show_legacy_search_desc">Régi kereső engedélyezése az oldalsó menüben</string>
+    <string name="routing_attr_allow_motorway_name">Autópályák engedélyezése</string>
+    <string name="routing_attr_allow_motorway_description">Autópályák engedélyezése</string>
+    <string name="lang_sr_latn">szerb (latin betűs)</string>
+    <string name="lang_zh_hk">kínai (Hongkong)</string>
     </resources>
