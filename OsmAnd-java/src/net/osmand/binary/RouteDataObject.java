@@ -146,6 +146,8 @@ public class RouteDataObject {
 	public String getDestinationName(String lang, boolean transliterate, boolean direction){
 		//Issue #3289: Treat destination:ref like a destination, not like a ref
 		String destRef = (getDestinationRef(direction) == null) ? "" : getDestinationRef(direction);
+		String destRef1 = ("".equals(destRef)) ? "" : destRef + ", ";
+
 		if(names != null) {
 			int[] kt = names.keys();
 
@@ -171,13 +173,13 @@ public class RouteDataObject {
 				int k = kt[i];
 				if(region.routeEncodingRules.size() > k) {
 					if(!Algorithms.isEmpty(lang) && destinationTagLangFB.equals(region.routeEncodingRules.get(k).getTag())) {
-						return destRef + ", " + ((transliterate) ? Junidecode.unidecode(names.get(k)) : names.get(k));
+						return destRef1 + ((transliterate) ? Junidecode.unidecode(names.get(k)) : names.get(k));
 					}
 					if(destinationTagFB.equals(region.routeEncodingRules.get(k).getTag())) {
-						return destRef + ", " + ((transliterate) ? Junidecode.unidecode(names.get(k)) : names.get(k));
+						return destRef1 + ((transliterate) ? Junidecode.unidecode(names.get(k)) : names.get(k));
 					}
 					if(!Algorithms.isEmpty(lang) && destinationTagLang.equals(region.routeEncodingRules.get(k).getTag())) {
-						return destRef + ", " + ((transliterate) ? Junidecode.unidecode(names.get(k)) : names.get(k));
+						return destRef1 + ((transliterate) ? Junidecode.unidecode(names.get(k)) : names.get(k));
 					}
 					if(destinationTagDefault.equals(region.routeEncodingRules.get(k).getTag())) {
 						destinationDefault = names.get(k);
@@ -185,9 +187,9 @@ public class RouteDataObject {
 				}
 			}
 			if(transliterate && destinationDefault != null) {
-				return destRef + ", " + Junidecode.unidecode(destinationDefault);
+				return destRef1 + Junidecode.unidecode(destinationDefault);
 			}
-			return destRef + ", " + destinationDefault;
+			return destRef1 + destinationDefault;
 		}
 		return "".equals(destRef) ? null : destRef;
 	}
