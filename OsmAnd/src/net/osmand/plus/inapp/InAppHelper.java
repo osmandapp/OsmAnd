@@ -231,7 +231,7 @@ public class InAppHelper {
 			boolean needSendToken = false;
 			if (!isDeveloperVersion && liveUpdatesPurchase != null) {
 				OsmandSettings settings = ctx.getSettings();
-				if (Algorithms.isEmpty(settings.BILLING_USER_ID.get())
+				if ((Algorithms.isEmpty(settings.BILLING_USER_ID.get()) || Algorithms.isEmpty(settings.BILLING_USER_TOKEN.get()))
 						&& !Algorithms.isEmpty(liveUpdatesPurchase.getDeveloperPayload())) {
 					String payload = liveUpdatesPurchase.getDeveloperPayload();
 					if (!Algorithms.isEmpty(payload)) {
@@ -241,6 +241,7 @@ public class InAppHelper {
 						}
 						if (arr.length > 1) {
 							token = arr[1];
+							settings.BILLING_USER_TOKEN.set(token);
 						}
 					}
 				}
@@ -324,8 +325,9 @@ public class InAppHelper {
 					try {
 						JSONObject obj = new JSONObject(response);
 						userId = obj.getString("userid");
-						token = obj.getString("token");
 						ctx.getSettings().BILLING_USER_ID.set(userId);
+						token = obj.getString("token");
+						ctx.getSettings().BILLING_USER_TOKEN.set(token);
 						logDebug("UserId=" + userId);
 					} catch (JSONException e) {
 						String message = "JSON parsing error: "
@@ -432,6 +434,7 @@ public class InAppHelper {
 
 	private void sendToken(String purchaseToken, final OnRequestResultListener listener) {
 		final String userId = ctx.getSettings().BILLING_USER_ID.get();
+		final String token = ctx.getSettings().BILLING_USER_TOKEN.get();
 		final String email = ctx.getSettings().BILLING_USER_EMAIL.get();
 		try {
 			Map<String, String> parameters = new HashMap<>();
