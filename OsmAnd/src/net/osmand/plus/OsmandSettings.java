@@ -904,6 +904,7 @@ public class OsmandSettings {
 	public static final String BILLING_USER_DONATION_NONE_PARAMETER = "none";
 
 	public final OsmandPreference<String> BILLING_USER_ID = new StringPreference("billing_user_id", "").makeGlobal();
+	public final OsmandPreference<String> BILLING_USER_TOKEN = new StringPreference("billing_user_token", "").makeGlobal();
 	public final OsmandPreference<String> BILLING_USER_NAME = new StringPreference("billing_user_name", "").makeGlobal();
 	public final OsmandPreference<String> BILLING_USER_EMAIL = new StringPreference("billing_user_email", "").makeGlobal();
 	public final OsmandPreference<String> BILLING_USER_COUNTRY = new StringPreference("billing_user_country", "").makeGlobal();
