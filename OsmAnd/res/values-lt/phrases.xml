@@ -187,4 +187,10 @@
 	<string name="poi_kitchen">Virtuvės baldai</string>
 	<string name="poi_leather">Odos parduotuvė</string>
 	<string name="poi_medical_supply">Medicinos priemonės</string>
+	<string name="poi_massage_type">Masažo tipas</string>
+	<string name="poi_washing_machine">Skalbyklė</string>
+	<string name="poi_dish">Valgis</string>
+	<string name="poi_social_facility_type">Tipas</string>
+	<string name="poi_social_facility_for">Tikslinė grupė</string>
+	<string name="poi_vacuum_cleaner_filter">Dulkių siurblys</string>
 	</resources>
