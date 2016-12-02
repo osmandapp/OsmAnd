@@ -108,6 +108,16 @@ public class RouteDataObject {
 	}
 	
 	public String getRef(boolean direction) {
+		if (getDestinationRef(direction) != null) {
+			return getDestinationRef(boolean direction);
+		}
+		if (names != null) {
+			return names.get(region.refTypeRule);
+		}
+		return null;
+	}
+
+	public String getDestinationRef(boolean direction) {
 		if (names != null) {
 			int[] kt = names.keys();
 			String refTag = (direction == true) ? "destination:ref:forward" : "destination:ref:backward";
@@ -128,7 +138,7 @@ public class RouteDataObject {
 			if (refDefault != null) {
 				return refDefault;
 			}
-			return names.get(region.refTypeRule);
+			//return names.get(region.refTypeRule);
 		}
 		return null;
 	}
