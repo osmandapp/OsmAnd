@@ -2439,7 +2439,7 @@
 	<string name="poi_surveillance_outdoor">Guardiania: in foras</string>
 	<string name="poi_surveillance_public">Guardiania: pùblica</string>
 
-	<string name="poi_diet_vegetarian_few">Vegetariana: carchi una</string>
+	<string name="poi_diet_vegetarian_few">Vegetariana (carchi una)</string>
 	<string name="poi_clothes_denim">Denim/jeans</string>
 	<string name="poi_clothes_workwear">Bestires pro traballu</string>
 	<string name="poi_clothes_hats">Bonetes</string>
@@ -2544,5 +2544,31 @@
 	<string name="poi_social_facility_for_unemployed">Disocupados</string>
 	<string name="poi_social_facility_for_diseased">Malàidos</string>
 	<string name="poi_social_facility_for_child_juvenile">Pitzinnos; giòvanos</string>
+
+	<string name="poi_theatre_genre_philharmonic">Filarmònica</string>
+	<string name="poi_theatre_genre_musical">Musical</string>
+	<string name="poi_theatre_genre_drama">Dramma</string>
+	<string name="poi_theatre_genre_opera">Òpera</string>
+	<string name="poi_theatre_genre_cabaret">Cabaret</string>
+	<string name="poi_theatre_genre_puppet">Buratinos</string>
+	<string name="poi_theatre_genre_comedy">Cummèdia</string>
+	<string name="poi_theatre_genre_chamber_music">Mùsica de aposentu</string>
+	<string name="poi_theatre_genre_marionette">Marionetas</string>
+	<string name="poi_theatre_genre_ballet">Balletu</string>
+	<string name="poi_theatre_genre_shadow_play">Teatru de umbras</string>
+
+	<string name="poi_bandstand">Chioscu de sa mùsica</string>
+	<string name="poi_kiln">Furru (kiln)</string>
+	<string name="poi_product_brick">Produtu: matone</string>
+	<string name="poi_product_quicklime">Produtu: carchina bia</string>
+	<string name="poi_product_leather">Produtu: pedde</string>
+	<string name="poi_product_lime">Produtu: carchina</string>
+	<string name="poi_product_beer">Produtu: birra</string>
+	<string name="poi_product_charcoal">Produtu: carbone vegetale</string>
+	<string name="poi_product_meat">Produtu: petza</string>
+
+	<string name="poi_wheelchair_description">Descritzione pro impreadore de cadiras a roteddas</string>
+	<string name="poi_blind_description">Descritzione pro tzegos</string>
+	<string name="poi_deaf_description">Descritzione pro surdos</string>
 
 	</resources>
