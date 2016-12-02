@@ -109,7 +109,7 @@ public class RouteDataObject {
 	
 	public String getRef(boolean direction) {
 		//if (getDestinationRef(direction) != null) {
-		//	return getDestinationRef(boolean direction);
+		//	return getDestinationRef(direction);
 		//}
 		if (names != null) {
 			return names.get(region.refTypeRule);
