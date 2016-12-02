@@ -2333,7 +2333,7 @@
 
 	<string name="poi_social_facility_food_bank">Élelmiszerbank</string>
 	<string name="poi_social_facility_shelter">Hajléktalanszálló</string>
-	<string name="poi_social_facility_ambulatory_care"/>
+	<string name="poi_social_facility_ambulatory_care">Ambuláns ellátás</string>
 	<string name="poi_social_facility_workshop">Szociális foglalkoztató</string>
 	<string name="poi_social_facility_for_senior">Idősek</string>
 	<string name="poi_social_facility_for_child">Gyermekek</string>
@@ -2567,4 +2567,33 @@
 	<string name="poi_cuisine_bulgarian">Bolgár</string>
 	<string name="poi_cuisine_tibetan">Tibeti</string>
 
+	<string name="poi_deaf_description">Leírás siketeknek</string>
+
+	<string name="poi_defibrillator">Defibrillátor</string>
+	<string name="poi_defibrillator_yes">Defibrillátor: igen</string>
+
+	<string name="poi_horse_yes">Lovak engedélyezve</string>
+	<string name="poi_horse_no">Lovak nem engedélyezve</string>
+	<string name="poi_stone_type_coat_of_arms">Típus: címer</string>
+
+	<string name="poi_material_wood">Anyag: fa</string>
+	<string name="poi_material_metal">Anyag: fém</string>
+	<string name="poi_material_reinforced_concrete">Anyag: vasbeton</string>
+	<string name="poi_material_concrete">Anyag: beton</string>
+	<string name="poi_material_steel">Anyag: acél</string>
+	<string name="poi_material_stone">Anyag: kő</string>
+	<string name="poi_material_brick">Anyag: tégla</string>
+	<string name="poi_material_plastic">Anyag: műanyag</string>
+	<string name="poi_material_sandstone">Anyag: homokkő</string>
+	<string name="poi_material_granite_stone">Anyag: gránit</string>
+	<string name="poi_material_metal_wood">Anyag: fém, fa</string>
+	<string name="poi_material_glass">Anyag: üveg</string>
+	<string name="poi_material_bronze">Anyag: bronz</string>
+	<string name="poi_material_earth">Anyag: föld</string>
+	<string name="poi_material_composite">Anyag: kompozit</string>
+	<string name="poi_material_limestone">Anyag: mészkő</string>
+	<string name="poi_material_marble">Anyag: márvány</string>
+	<string name="poi_material_aluminium">Anyag: alumínium</string>
+
+	<string name="poi_site_type_settlement">Település</string>
 	</resources>
