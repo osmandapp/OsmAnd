@@ -193,4 +193,57 @@
 	<string name="poi_social_facility_type">Tipas</string>
 	<string name="poi_social_facility_for">Tikslinė grupė</string>
 	<string name="poi_vacuum_cleaner_filter">Dulkių siurblys</string>
+	<string name="poi_sports">Sporto prekės</string>
+	<string name="poi_stationery">Biuro prekės</string>
+	<string name="poi_marketplace">Turgus</string>
+	<string name="poi_pyrotechnics">Pirotechnika</string>
+	<string name="poi_weapons">Ginklai</string>
+	<string name="poi_fire_station">Gaisrinė</string>
+	<string name="poi_fire_extinguisher">Gesintuvas</string>
+	<string name="poi_grit_bin">Smėlio dėžė</string>
+	<string name="poi_ford">Brasta</string>
+	<string name="poi_gate">Vartai</string>
+	<string name="poi_city_wall">Miesto siena</string>
+	<string name="poi_border_control">Pasienio kontrolė</string>
+	<string name="poi_service_tyres">Padangos</string>
+	<string name="poi_car_wash">Automobilių plovykla</string>
+	<string name="poi_fuel">Degalinė</string>
+	<string name="poi_fuel_diesel">Dyzelinas</string>
+	<string name="poi_fuel_biodiesel">Biodyzelinas</string>
+	<string name="poi_fuel_lpg">Suskystintos dujos</string>
+	<string name="poi_fuel_cng">Gamtinės dujos</string>
+	<string name="poi_fuel_ethanol">Etanolis</string>
+	<string name="poi_fuel_methanol">Metanolis</string>
+	<string name="poi_fuel_e10">E10</string>
+	<string name="poi_fuel_e20">E20</string>
+	<string name="poi_fuel_e85">E85</string>
+	<string name="poi_fuel_biogas">Biodujos</string>
+	<string name="poi_fuel_lh2">Suskystintas vandenilis</string>
+	<string name="poi_fuel_electricity">Elektra</string>
+	<string name="poi_charging_station">Įkrovimo stotelė</string>
+	<string name="poi_compressed_air">Oro pompa</string>
+	<string name="poi_garages">Garažai</string>
+
+	<string name="poi_public_transport_platform">Visuomeninio transporto stotelė</string>
+	<string name="poi_public_transport_platform_bus">Autobusų stotelė</string>
+	<string name="poi_public_transport_platform_trolleybus">Troleibusų stotelė</string>
+	<string name="poi_bus_stop">Autobuso stotelė</string>
+	<string name="poi_public_transport_platform_tram">Tramvajaus stotelė</string>
+	<string name="poi_public_transport_station">Viešojo transporto stotis</string>
+	<string name="poi_bus_station">Autobusų stotis</string>
+	<string name="poi_railway_station">Geležinkelio stotis</string>
+	<string name="poi_railway_platform">Geležinkelio platforma</string>
+	<string name="poi_subway_entrance">Įėjimas į metro</string>
+	<string name="poi_subway_station">Metro stotis</string>
+	<string name="poi_aerodrome">Oro uostas</string>
+	<string name="poi_runway">Pakilimo juosta</string>
+	<string name="poi_aeroway_terminal">Oro uosto terminalas</string>
+	<string name="poi_ferry_terminal">Kelto prieplauka</string>
+	<string name="poi_lighthouse">Švyturys</string>
+
+	<string name="poi_bicycle_rental">Dviračių nuoma</string>
+	<string name="poi_tunnel">Tunelis</string>
+	<string name="poi_bridge">Tiltas</string>
+
+	<string name="poi_speed_camera">Greičio kamera</string>
 	</resources>
