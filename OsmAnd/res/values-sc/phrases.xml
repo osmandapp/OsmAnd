@@ -2504,4 +2504,45 @@
 	<string name="poi_vacuum_cleaner_yes">Eja</string>
 	<string name="poi_home_visit_yes">Eja</string>
 	<string name="poi_caravans_no">Campers/roulotes: nono</string>
+	<string name="poi_impromptu_yes">Improvisadu: eja</string>
+	<string name="poi_impromptu_no">Improvisadu: nono</string>
+	<string name="poi_sanitary_dump_station_yes">Istatzione de discàrriga sanitària: eja</string>
+	<string name="poi_sanitary_dump_station_no">Istatzione de discàrriga sanitària: nono</string>
+	<string name="poi_power_supply_no">Alimentatzione elètrica: nono</string>
+	<string name="poi_power_supply_cee_17_blue">Alimentatzione elètrica (presa): CEE 17 biaita</string>
+	<string name="poi_power_supply_cee_7_4">Alimentatzione elètrica (presa): CEE 7/4</string>
+	<string name="poi_power_supply_cee_7_5">Alimentatzione elètrica (presa): CEE 7/5</string>
+	<string name="poi_power_supply_nema_5_15">Alimentatzione elètrica (presa): NEMA 5-15</string>
+
+	<string name="poi_capacity_tents">Nùmeru màssimu de tendas</string>
+	<string name="poi_capacity_caravans">Nùmeru màssimu de campers/roulotes</string>
+	<string name="poi_dog_yes">Canes permitidos</string>
+	<string name="poi_dog_no">Canes non permitidos</string>
+
+	<string name="poi_refugee_yes">Servìtzios pro rifugiados</string>
+	<string name="poi_refugee_no">Rifugiados: nono</string>
+
+	<string name="poi_social_facility_group_home">Domo comune</string>
+	<string name="poi_social_facility_assisted_living">Residèntzia asistida</string>
+	<string name="poi_social_facility_outreach">Assistèntzia</string>
+	<string name="poi_social_facility_food_bank">Bancu alimentare</string>
+	<string name="poi_social_facility_shelter">Rifùgiu</string>
+	<string name="poi_social_facility_ambulatory_care">Ambulatòriu</string>
+	<string name="poi_social_facility_workshop">Ambiente de traballu amparadu</string>
+	<string name="poi_social_facility_day_care">Assistèntzia diurna</string>
+
+	<string name="poi_social_facility_for_senior">Antzianos</string>
+	<string name="poi_social_facility_for_child">Pitzinnos</string>
+	<string name="poi_social_facility_for_orphan">Òrfanos</string>
+	<string name="poi_social_facility_for_disabled">Disàbiles</string>
+	<string name="poi_social_facility_for_mental_health">Patzientes cun problemas mentales</string>
+	<string name="poi_social_facility_for_juvenile">Giòvanos</string>
+	<string name="poi_social_facility_for_homeless">Mèndigos</string>
+	<string name="poi_social_facility_for_migrant">Migrantes</string>
+	<string name="poi_social_facility_for_underprivileged">Isvantagiados</string>
+	<string name="poi_social_facility_for_drug_addicted">Tosicodipendentes</string>
+	<string name="poi_social_facility_for_unemployed">Disocupados</string>
+	<string name="poi_social_facility_for_diseased">Malàidos</string>
+	<string name="poi_social_facility_for_child_juvenile">Pitzinnos; giòvanos</string>
+
 	</resources>
