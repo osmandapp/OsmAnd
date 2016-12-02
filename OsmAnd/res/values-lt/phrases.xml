@@ -246,4 +246,27 @@
 	<string name="poi_bridge">Tiltas</string>
 
 	<string name="poi_speed_camera">Greičio kamera</string>
+	<string name="poi_rest_area">Poilsio zona</string>
+
+	<string name="poi_water_well">Šulinys</string>
+	<string name="poi_wastewater_plant">Valymo įrenginiai</string>
+	<string name="poi_water_tower">Vandens bokštas</string>
+	<string name="poi_dam">Damba</string>
+	<string name="poi_watermill">Vandens malūnas</string>
+	<string name="poi_breakwater">Bangolaužis</string>
+	<string name="poi_power_substation">Pastotė</string>
+	<string name="poi_power_transformer">Transformatorius</string>
+	<string name="poi_power_plant">Elektrinė</string>
+	<string name="poi_power_generator">Generatorius</string>
+	<string name="poi_power_tower"/>
+	<string name="poi_power_pole">Stulpas</string>
+
+	<string name="poi_post_office">Paštas</string>
+	<string name="poi_post_box">Pašto dėžutė</string>
+	<string name="poi_telephone">Telefonas</string>
+	<string name="poi_photo_studio">Foto studija</string>
+
+<string name="poi_newsagent">Spaudos kioskas</string>
+	<string name="poi_ticket">Bilietai</string>
+	<string name="poi_tobacco">Rūkalai</string>
 	</resources>
