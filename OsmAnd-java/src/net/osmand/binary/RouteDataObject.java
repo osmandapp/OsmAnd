@@ -186,10 +186,8 @@ public class RouteDataObject {
 					}
 				}
 			}
-			if(transliterate && destinationDefault != null) {
-				return destRef1 + Junidecode.unidecode(destinationDefault);
-			} else if (destinationDefault != null) {
-				return destRef1 + destinationDefault;
+			if(destinationDefault != null) {
+				return destRef1 + ((transliterate) ? Junidecode.unidecode(destinationDefault) : destinationDefault);
 			}
 		}
 		return "".equals(destRef) ? null : destRef;
