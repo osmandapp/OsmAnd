@@ -2276,7 +2276,7 @@ Om du tycker om OsmAnd och OSM och vill stödja dem så är detta ett utmärkt s
     <string name="show_something_on_map">Visa %1$s på kartan</string>
     <string name="dist_away_from_my_location">Sök %1$s bort</string>
     <string name="translit_names">Transkribera namn</string>
-    <string name="edit_filter">Redigera filter</string>
+    <string name="edit_filter">Redigera kategorier</string>
     <string name="subcategories">Underkategorier</string>
     <string name="selected_categories">Markerade kategorier</string>
     <string name="create_custom_poi">Skapa eget filter</string>
@@ -2286,7 +2286,7 @@ Om du tycker om OsmAnd och OSM och vill stödja dem så är detta ett utmärkt s
     <string name="save_filter">Spara filter</string>
     <string name="delete_filter">Radera filter</string>
     <string name="new_filter">Nytt filter</string>
-    <string name="new_filter_desc">Ange ett namn på det nya filtret. Det kommer att finnas i kategorilistan.</string>
+    <string name="new_filter_desc">Ange ett namn på det nya filtret. Det kommer att finnas på kategorifliken.</string>
     <string name="translit_name_if_miss">"Transkribera om  %1$s namn saknas"</string>
     <string name="skip_map_downloading">Hoppa över nerladdning av kartor</string>
     <string name="search_another_country">Välj en annan region</string>
@@ -2319,12 +2319,12 @@ Om du tycker om OsmAnd och OSM och vill stödja dem så är detta ett utmärkt s
     <string name="first_usage_greeting">Få anvisningar och upptäck nya platser utan internetuppkoppling</string>
     <string name="search_my_location">Sök efter min plats</string>
     <string name="rendering_attr_contourColorScheme_description">Färgschema för konturer</string>
-    <string name="save_track_min_speed">Minimal loggningshastighet</string>
-    <string name="save_track_min_speed_descr">Välj minimal hastighet som startar loggning</string>
-    <string name="save_track_min_distance">Minimal loggningsdistans</string>
+    <string name="save_track_min_speed">Minsta loggningshastighet</string>
+    <string name="save_track_min_speed_descr">Välj minsta hastighet som startar loggning av en punkt</string>
+    <string name="save_track_min_distance"/>
     <string name="save_track_min_distance_descr">Välj minimal distans som startar loggning</string>
-    <string name="save_track_precision">Minimal loggningsprecision</string>
-    <string name="save_track_precision_descr">Välj minimal precision som startar loggning</string>
+    <string name="save_track_precision">Minsta loggningsprecision</string>
+    <string name="save_track_precision_descr">Välj minsta precision som startar loggning av en punkt</string>
     <string name="christmas_poi">Jul-POI</string>
     <string name="christmas_desc_q">Visa Jul-POI?</string>
     <string name="rendering_value_light_brown_name">Ljusbrun</string>
