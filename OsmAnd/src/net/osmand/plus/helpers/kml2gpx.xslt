@@ -9,6 +9,8 @@
 <xsl:stylesheet version="1.0"
 				xmlns:kml="http://www.opengis.net/kml/2.2"
 				xmlns:gx="http://www.google.com/kml/ext/2.2"
+				xmlns:ge="http://earth.google.com/kml/2.2"
+				
 				xmlns:atom="http://www.w3.org/2005/Atom"
 				xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
@@ -27,7 +29,44 @@
 			 		</name>
 			 	</author>
 			 </metadata>
-			 	<xsl:for-each select="//kml:Placemark">
+			 	<xsl:for-each select="//ge:Placemark">
+			 		<xsl:variable name="lonlat" select="ge:Point/ge:coordinates"/>
+					<xsl:variable name="lon" select="substring-before($lonlat,' ')"/>
+					<xsl:variable name="latele" select="substring-after($lonlat,' ')"/>
+					<xsl:variable name="lat">
+						<xsl:choose>
+							<xsl:when test="contains($latele,' ')">
+								<xsl:value-of select="substring-before($latele,' ')"/>
+							</xsl:when>
+								<xsl:otherwise>
+									<xsl:value-of select="$latele"/>
+							</xsl:otherwise>
+						</xsl:choose>
+					</xsl:variable>
+					<xsl:variable name="foldername" select="../ge:name"/>
+			 	
+			 		<xsl:if test="$lon">
+			 			<wpt lon="{$lon}" lat="{$lat}">
+			 				<xsl:choose>
+								<xsl:when test="contains($latele,',')">
+									<ele> <xsl:value-of select="substring-after($latele,',')"/></ele>
+								</xsl:when>
+							</xsl:choose>
+							<type>
+			 					<xsl:value-of select="$foldername"/>
+			 				</type>
+			 				<name>
+			 					<xsl:value-of select="ge:name"/>
+			 				</name>
+			 				<xsl:if test="ge:description">
+			 					<desc>
+			 						<xsl:value-of select="ge:description"/>
+			 					</desc>
+			 				</xsl:if>
+			 			</wpt>
+			 		</xsl:if>
+			 	</xsl:for-each>
+			 <xsl:for-each select="//kml:Placemark">
 			 		<xsl:variable name="lonlat" select="kml:Point/kml:coordinates"/>
 					<xsl:variable name="lon" select="substring-before($lonlat,',')"/>
 					<xsl:variable name="latele" select="substring-after($lonlat,',')"/>
