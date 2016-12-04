@@ -259,7 +259,8 @@ public class RouteCalculationResult {
 						info.routeEndPointOffset = roundAboutEnd;
 					}
 					RouteSegmentResult next = list.get(lind);
-					info.setRef(next.getObject().getRef(next.isForwardDirection()));
+					info.setRef(next.getObject().getRef(ctx.getSettings().MAP_PREFERRED_LOCALE.get(), 
+							ctx.getSettings().MAP_TRANSLITERATE_NAMES.get(), next.isForwardDirection()));
 					info.setStreetName(next.getObject().getName(ctx.getSettings().MAP_PREFERRED_LOCALE.get(), 
 							ctx.getSettings().MAP_TRANSLITERATE_NAMES.get()));
 					info.setDestinationName(next.getObject().getDestinationName(ctx.getSettings().MAP_PREFERRED_LOCALE.get(),

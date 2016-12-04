@@ -334,7 +334,7 @@ public class RouteResultPreparation {
 		if (PRINT_TO_CONSOLE_ROUTE_INFORMATION_TO_TEST) {
 			for (RouteSegmentResult res : result) {
 				String name = res.getObject().getName();
-				String ref = res.getObject().getRef(res.isForwardDirection());
+				String ref = res.getObject().getRef("", false, res.isForwardDirection());
 				if (name == null) {
 					name = "";
 				}

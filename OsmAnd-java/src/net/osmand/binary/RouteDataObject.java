@@ -70,8 +70,7 @@ public class RouteDataObject {
 		}
 		return null;
 	}
-	
-	
+
 	public String getName(String lang){
 		return getName(lang, false);
 	}
@@ -106,13 +105,29 @@ public class RouteDataObject {
 	public TIntObjectHashMap<String> getNames() {
 		return names;
 	}
-	
-	public String getRef(boolean direction) {
+
+	public String getRef(String lang, boolean transliterate, boolean direction) {
 		//if (getDestinationRef(direction) != null) {
 		//	return getDestinationRef(direction);
 		//}
 		if (names != null) {
-			return names.get(region.refTypeRule);
+			if(Algorithms.isEmpty(lang)) {
+				return names.get(region.refTypeRule);
+			}
+			int[] kt = names.keys();
+			for(int i = 0 ; i < kt.length; i++) {
+				int k = kt[i];
+				if(region.routeEncodingRules.size() > k) {
+					if(("ref:"+lang).equals(region.routeEncodingRules.get(k).getTag())) {
+						return names.get(k);
+					}
+				}
+			}
+			String refDefault = names.get(region.refTypeRule);
+			if(transliterate && refDefault != null && refDefault.length() > 0) {
+				return Junidecode.unidecode(refDefault);
+			}
+			return refDefault;
 		}
 		return null;
 	}
@@ -145,7 +160,7 @@ public class RouteDataObject {
 
 	public String getDestinationName(String lang, boolean transliterate, boolean direction){
 		//Issue #3289: Treat destination:ref like a destination, not like a ref
-		String destRef = ((getDestinationRef(direction) == null) || getDestinationRef(direction).equals(getRef(direction))) ? "" : getDestinationRef(direction);
+		String destRef = ((getDestinationRef(direction) == null) || getDestinationRef(direction).equals(getRef(lang, transliterate, direction))) ? "" : getDestinationRef(direction);
 		String destRef1 = ("".equals(destRef)) ? "" : destRef + ", ";
 
 		if(names != null) {
@@ -186,8 +201,10 @@ public class RouteDataObject {
 					}
 				}
 			}
-			if(destinationDefault != null) {
-				return destRef1 + ((transliterate) ? Junidecode.unidecode(destinationDefault) : destinationDefault);
+			if(transliterate && destinationDefault != null) {
+				return destRef1 + Junidecode.unidecode(destinationDefault);
+			} else if (destinationDefault != null) {
+				return destRef1 + destinationDefault;
 			}
 		}
 		return "".equals(destRef) ? null : destRef;
@@ -601,7 +618,7 @@ public class RouteDataObject {
 	@Override
 	public String toString() {
 		String name = getName();
-		String rf = getRef(true);
+		String rf = getRef("", false, true);
 		return MessageFormat.format("Road id {0} name {1} ref {2}", (getId() / 64) + "", name == null ? "" : name,
 				rf == null ? "" : rf);
 	}

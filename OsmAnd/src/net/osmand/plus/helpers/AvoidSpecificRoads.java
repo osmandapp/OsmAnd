@@ -112,8 +112,9 @@ public class AvoidSpecificRoads {
 	protected String getText(RouteDataObject obj) {
 		return RoutingHelper.formatStreetName(obj.getName(app.getSettings().MAP_PREFERRED_LOCALE.get(),
 				app.getSettings().MAP_TRANSLITERATE_NAMES.get()), 
-				obj.getRef(true), obj.getDestinationName(app.getSettings().MAP_PREFERRED_LOCALE.get(), 
-						app.getSettings().MAP_TRANSLITERATE_NAMES.get(), true), app.getString(R.string.towards));
+				obj.getRef(app.getSettings().MAP_PREFERRED_LOCALE.get(), app.getSettings().MAP_TRANSLITERATE_NAMES.get(), true), 
+				obj.getDestinationName(app.getSettings().MAP_PREFERRED_LOCALE.get(), app.getSettings().MAP_TRANSLITERATE_NAMES.get(), true), 
+				app.getString(R.string.towards));
 	}
 
 	public void showDialog(@NonNull final MapActivity mapActivity) {

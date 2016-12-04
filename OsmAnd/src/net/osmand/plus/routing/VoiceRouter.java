@@ -586,13 +586,15 @@ public class VoiceRouter {
 				// Issue 2377: Play Dest here only if not already previously announced, to avoid repetition
 				if (includeDest == true) {
 					RouteDataObject obj = currentSegment.getObject();
-					current = new Struct(new Term[] { getTermString(getSpeakablePointName(obj.getRef(currentSegment.isForwardDirection()))),
+					current = new Struct(new Term[] { getTermString(getSpeakablePointName(obj.getRef(settings.MAP_PREFERRED_LOCALE.get(), 
+									settings.MAP_TRANSLITERATE_NAMES.get(), currentSegment.isForwardDirection()))),
 							getTermString(getSpeakablePointName(obj.getName(settings.MAP_PREFERRED_LOCALE.get(), settings.MAP_TRANSLITERATE_NAMES.get()))),
 							getTermString(getSpeakablePointName(obj.getDestinationName(settings.MAP_PREFERRED_LOCALE.get(), 
 									settings.MAP_TRANSLITERATE_NAMES.get(), currentSegment.isForwardDirection()))) });
 				} else {
 					RouteDataObject obj = currentSegment.getObject();
-					current = new Struct(new Term[] { getTermString(getSpeakablePointName(obj.getRef(currentSegment.isForwardDirection()))),
+					current = new Struct(new Term[] { getTermString(getSpeakablePointName(obj.getRef(settings.MAP_PREFERRED_LOCALE.get(),
+									settings.MAP_TRANSLITERATE_NAMES.get(), currentSegment.isForwardDirection()))),
 							getTermString(getSpeakablePointName(obj.getName(settings.MAP_PREFERRED_LOCALE.get(),
 									settings.MAP_TRANSLITERATE_NAMES.get()))),
 							empty });
