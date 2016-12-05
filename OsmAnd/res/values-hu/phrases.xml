@@ -496,27 +496,27 @@
 
 	<string name="poi_club_art">Művészklub</string>
 	<string name="poi_club_sport">Sportklub</string>
-	<string name="poi_club_astronomy">Csillagász klub</string>
-	<string name="poi_club_computer">Számítógép klub</string>
-	<string name="poi_club_board_games">Társasjáték klub</string>
+	<string name="poi_club_astronomy">Csillagászklub</string>
+	<string name="poi_club_computer">Számítógépes klub</string>
+	<string name="poi_club_board_games">Társasjátékklub</string>
 	<string name="poi_club_motorcycle">Motorosklub</string>
-	<string name="poi_club_game">Játék klub</string>
+	<string name="poi_club_game">Játékklub</string>
 	<string name="poi_club_automobile">Autóklub</string>
-	<string name="poi_club_chess">Sakk klub</string>
+	<string name="poi_club_chess">Sakk-klub</string>
 	<string name="poi_club_cinema">Filmklub</string>
 	<string name="poi_club_fan">Rajongói klub</string>
 	<string name="poi_club_fishing">Horgászklub</string>
 	<string name="poi_club_veterans">Veteránklub</string>
-	<string name="poi_club_linux">Linux klub</string>
-	<string name="poi_club_theatre">Színház klub</string>
+	<string name="poi_club_linux">Linuxklub</string>
+	<string name="poi_club_theatre">Színházklub</string>
 	<string name="poi_club_history">Történelemklub</string>
 	<string name="poi_club_music">Zeneklub</string>
-	<string name="poi_club_ethnic">Folklórklub</string>
-	<string name="poi_club_nature">Természetbarát klub</string>
-	<string name="poi_club_photography">Fényképész klub</string>
-	<string name="poi_club_hunting">Vadász klub</string>
-	<string name="poi_club_shooting">Lövész klub</string>
-	<string name="poi_club_tourism">Turista klub</string>
+	<string name="poi_club_ethnic">Nemzetségi klub</string>
+	<string name="poi_club_nature">Természetbarátklub</string>
+	<string name="poi_club_photography">Fényképészklub</string>
+	<string name="poi_club_hunting">Vadászklub</string>
+	<string name="poi_club_shooting">Lövészklub</string>
+	<string name="poi_club_tourism">Turistaklub</string>
 	<string name="poi_club_charity">Jótékonysági klub</string>
 
 	<string name="poi_piste">Sípálya</string>
@@ -587,7 +587,7 @@
 	<string name="poi_military_danger_area">Veszélyzóna</string>
 	<string name="poi_military_range">Katonai gyakorlóterep</string>
 	<string name="poi_military_naval_base">Haditengerészeti bázis</string>
-	<string name="poi_military_nuclear_explosion_site">Nukleáris robbantási hely</string>
+	<string name="poi_military_nuclear_explosion_site">Nukleáris robbantási terület</string>
 
 	<string name="poi_wiki_place">Wikipédia</string>
 	<string name="poi_wiki_lang_en">Angol wiki</string>
@@ -889,7 +889,7 @@
 
 	<string name="poi_dance_floor">Tánctér</string>
 	<string name="poi_nightclub">Diszkó</string>
-	<string name="poi_stripclub">Sztriptíz bár</string>
+	<string name="poi_stripclub">Sztriptízbár</string>
 	<string name="poi_craft_agricultural_engines">Mezőgazdasági gépek</string>
 	<string name="poi_craft_carpet_layer">Szőnyegpadló-lerakó</string>
 	<string name="poi_craft_caterer">Partyszerviz</string>
@@ -1012,7 +1012,7 @@
 	<string name="poi_wheelchair_limited">Korlátozottan</string>
 	<string name="poi_wholesale">Nagykereskedés</string>
 
-	<string name="poi_access_private">Magáncélra használható</string>
+	<string name="poi_access_private">Magáncélú</string>
 	<string name="poi_access_no">Nem használható</string>
 	<string name="poi_access_destination">Csak célforgalom</string>
 	<string name="poi_access_permissive">Engedéllyel használható</string>
@@ -1200,7 +1200,7 @@
 	<string name="poi_services">Pihenőhely</string>
 	<string name="poi_mini_roundabout">Mini körforgalom</string>
 	<string name="poi_railway_crossing">Vasúti kereszteződés</string>
-	<string name="poi_railway_level_crossing">Vasúti gyalogátjáró</string>
+	<string name="poi_railway_level_crossing">Vasúti átjáró</string>
 	<string name="poi_bird_hide">Madármegfigyelő hely</string>
 	<string name="poi_horse_riding">Lovaglás</string>
 	<string name="poi_houseware">Háztartási bolt</string>
@@ -1212,12 +1212,12 @@
 	<string name="poi_building_type_church">Épülettípus: templom</string>
 	<string name="poi_building_type_chapel">Épülettípus: kápolna</string>
 	<string name="poi_building_type_mosque">Épülettípus: mecset</string>
-	<string name="poi_building_type_temple">Épülettípus: templom</string>
-	<string name="poi_building_type_cathedral">Épülettípus: katedrális</string>
+	<string name="poi_building_type_temple">Épülettípus: nem keresztény templom</string>
+	<string name="poi_building_type_cathedral">Épülettípus: székesegyház (katedrális)</string>
 	<string name="poi_building_type_monastery">Épülettípus: kolostor</string>
 	<string name="poi_building_type_basilica">Épülettípus: bazilika</string>
 	<string name="poi_building_type_synagogue">Épülettípus: zsinagóga</string>
-	<string name="poi_building_type_shrine">Épülettípus: kegyhely</string>
+	<string name="poi_building_type_shrine">Épülettípus: szentély</string>
 
 	<string name="poi_cross">Kereszt</string>
 	<string name="poi_summit_cross">Csúcskereszt: van</string>
@@ -1256,7 +1256,7 @@
 	<string name="poi_diet_lactose_free_only">Csak laktózmentes</string>
 	<string name="poi_diet_lactose_free_yes">Laktózmentes</string>
 	<string name="poi_diet_lactose_free_no">Nincs laktózmentes étel</string>
-	<string name="poi_diet_pescetarian_yes">Peszko-vegetáriánus</string>
+	<string name="poi_diet_pescetarian_yes">Peszketáriánus</string>
 
 	<string name="poi_brewery_additional">Sörfőzde név</string>
 	<string name="poi_microbrewery_yes">Házi sörfőzde</string>
@@ -1529,7 +1529,7 @@
 
 	<string name="poi_garden_type_residential">Kerttípus: udvari</string>
 	<string name="poi_garden_type_community">Kerttípus: közösségi</string>
-	<string name="poi_garden_type_private">Kerttípus: magán</string>
+	<string name="poi_garden_type_private">Kerttípus: magánkézben van</string>
 	<string name="poi_garden_type_botanical">Kerttípus: botanikuskert</string>
 
 	<string name="poi_garden_style_kitchen">Kertstílus: konyhakert</string>
@@ -1541,16 +1541,16 @@
 	<string name="poi_capacity_disabled_yes">Igen</string>
 	<string name="poi_capacity_disabled_no">Nincs mozgáskorlátozottaknak fenntartott hely</string>
 	<string name="poi_capacity_disabled">Mozgáskorlátozottaknak fenntartott hely</string>
-	<string name="poi_capacity_women_yes">Nők számára fenntartott hely</string>
-	<string name="poi_capacity_women_no">Nincs nők számára fenntartott hely</string>
-	<string name="poi_capacity_women">Nők számára fenntartott hely</string>
-	<string name="poi_capacity_pupils">Tanulók számára fenntartott hely</string>
-	<string name="poi_capacity_teachers">Tanárok számára fenntartott hely</string>
-	<string name="poi_capacity_parent_yes">Szülők számára fenntartott hely</string>
-	<string name="poi_capacity_parent_no">Nincs szülők számára fenntartott hely</string>
-	<string name="poi_capacity_parent">Szülők számára fenntartott hely</string>
+	<string name="poi_capacity_women_yes">Nőknek fenntartott hely</string>
+	<string name="poi_capacity_women_no">Nincs nőknek fenntartott hely</string>
+	<string name="poi_capacity_women">Nőknek fenntartott hely</string>
+	<string name="poi_capacity_pupils">Tanulóknak fenntartott hely</string>
+	<string name="poi_capacity_teachers">Tanároknak fenntartott hely</string>
+	<string name="poi_capacity_parent_yes">Szülőknek fenntartott hely</string>
+	<string name="poi_capacity_parent_no">Nincs szülőknek fenntartott hely</string>
+	<string name="poi_capacity_parent">Szülőknek fenntartott hely</string>
 
-	<string name="poi_aerialway_occupancy">Kabin/ülés kapacitás</string>
+	<string name="poi_aerialway_occupancy">Kabin-/gondola-/üléskapacitás</string>
 	<string name="poi_aerialway_capacity">Óránkénti kapacitás</string>
 	<string name="poi_aerialway_duration">Átlagos menetidő, perc</string>
 	<string name="poi_aerialway_bubble_yes">Buborék (zárt)</string>
@@ -1906,7 +1906,7 @@
 	<string name="poi_beach_surface_type">Felület</string>
 	<string name="poi_nudism">Nudista</string>
 
-<string name="poi_diet">Diéta</string>
+<string name="poi_diet">Étrend</string>
 	<string name="poi_delivery">Házhoz szállítás</string>
 	<string name="poi_cuisine_chicken">Csirke</string>
 	<string name="poi_cuisine_fried_chicken">Sült csirke</string>
@@ -2324,7 +2324,7 @@
 	<string name="poi_shower_outdoor">Kültéri zuhany</string>
 	<string name="poi_shower_cold">Hideg zuhany</string>
 	<string name="poi_shower_indoor">Beltéri zuhany</string>
-	<string name="poi_capacity_tents">Sátrak: legfeljebb</string>
+	<string name="poi_capacity_tents">Sátrak legnagyobb száma</string>
 	<string name="poi_dog_yes">Kutyák engedélyezve</string>
 	<string name="poi_dog_no">Kutyák nem engedélyezve</string>
 
@@ -2651,7 +2651,7 @@
 	<string name="poi_health_specialty_internal_medicine_yes">Belgyógyászat</string>
 	<string name="poi_health_specialty_orthopaedics_yes">Ortopédia</string>
 	<string name="poi_health_specialty_otolaryngology_yes">Fül-orr-gégészet</string>
-	<string name="poi_health_specialty_paediatrics_yes">Gyerekorvos</string>
+	<string name="poi_health_specialty_paediatrics_yes">Gyermekgyógyászat</string>
 	<string name="poi_health_specialty_dermatology_yes">Bőrgyógyászat</string>
 	<string name="poi_health_specialty_urology_yes">Urológia</string>
 	<string name="poi_health_specialty_surgery_yes">Általános sebészet</string>
@@ -2659,7 +2659,7 @@
 	<string name="poi_health_specialty_psychiatry_yes">Pszichiátria</string>
 	<string name="poi_health_specialty_neurology_yes">Neurológia</string>
 	<string name="poi_health_specialty_cardiology_yes">Kardiológia</string>
-	<string name="poi_health_specialty_trauma_yes">Traumatológia</string>
+	<string name="poi_health_specialty_trauma_yes">Baleseti sebészet</string>
 	<string name="poi_health_specialty_biology_yes">Klinikai biológia</string>
 	<string name="poi_health_specialty_osteopathy_yes">Csontkovácsolás</string>
 	<string name="poi_health_specialty_maternity_yes">Szülészet</string>
@@ -2674,11 +2674,11 @@
 	<string name="poi_health_specialty_neurosurgery_yes">Idegsebészet</string>
 	<string name="poi_health_specialty_pathology_yes">Patológia</string>
 	<string name="poi_health_specialty_oncology_yes">Onkológia</string>
-	<string name="poi_health_specialty_obstetrics_caesarean_section_yes">Szülészet-nőgyógyászat (császármetszés)</string>
+	<string name="poi_health_specialty_obstetrics_caesarean_section_yes">Szülészet (császármetszés)</string>
 	<string name="poi_health_specialty_clinical_pathology_yes">Klinikai patológia</string>
 	<string name="poi_health_specialty_speech_therapy_yes">Logopédia</string>
-	<string name="poi_health_specialty_sports_medicine_yes">Sportorvos</string>
-	<string name="poi_health_specialty_adult_psychiatry_yes">Felnőtt-pszichiátria</string>
+	<string name="poi_health_specialty_sports_medicine_yes">Sportorvoslás</string>
+	<string name="poi_health_specialty_adult_psychiatry_yes">Felnőttpszichiátria</string>
 	<string name="poi_health_specialty_acupuncture_yes">Akupunktúra</string>
 	<string name="poi_health_specialty_homeopathy_yes">Homeopátia</string>
 	<string name="poi_building_type_pyramid">Épülettípus: piramis</string>
@@ -2703,8 +2703,8 @@
 	<string name="poi_dolphin">Delfin</string>
 
 	<string name="poi_construction_yes">Építés alatt</string>
-	<string name="poi_additional_atm_yes">Bankautomata: igen</string>
-	<string name="poi_atm_no">Bankautomata: nem</string>
+	<string name="poi_additional_atm_yes">Bankautomata</string>
+	<string name="poi_atm_no">Nincs bankautomata</string>
 
 	<string name="poi_firepit">Tűzrakóhely</string>
 	<string name="poi_fair_trade_yes">Méltányos kereskedelem: igen</string>
@@ -2750,14 +2750,14 @@
 	<string name="poi_counselling_type_addiction_no">Tanácsadás (függőség): nincs</string>
 	<string name="poi_counselling_type_antenatal_yes">Tanácsadás (terhességi): igen</string>
 	<string name="poi_counselling_type_antenatal_no">Tanácsadás (terhességi): nincs</string>
-	<string name="poi_counselling_type_drugs_yes">Tanácsadás (drogok): igen</string>
-	<string name="poi_counselling_type_drugs_no">Tanácsadás (drogok): nincs</string>
+	<string name="poi_counselling_type_drugs_yes">Tanácsadás (kábítószer): igen</string>
+	<string name="poi_counselling_type_drugs_no">Tanácsadás (kábítószer): nincs</string>
 	<string name="poi_counselling_type_education_yes">Tanácsadás (oktatás): igen</string>
 	<string name="poi_counselling_type_education_no">Tanácsadás (oktatás): nincs</string>
 	<string name="poi_counselling_type_family_yes">Tanácsadás (család): igen</string>
 	<string name="poi_counselling_type_family_no">Tanácsadás (család): nincs</string>
-	<string name="poi_counselling_type_homeless_yes">Tanácsadás (hajléktalanok): igen</string>
-	<string name="poi_counselling_type_homeless_no">Tanácsadás (hajléktalanok): nincs</string>
+	<string name="poi_counselling_type_homeless_yes">Tanácsadás (hajléktalan): igen</string>
+	<string name="poi_counselling_type_homeless_no">Tanácsadás (hajléktalan): nincs</string>
 	<string name="poi_counselling_type_immigrant_yes">Tanácsadás (bevándorló): igen</string>
 	<string name="poi_counselling_type_immigrant_no">Tanácsadás (bevándorló): nincs</string>
 	<string name="poi_counselling_type_marriage_yes">Tanácsadás (házasság): igen</string>
@@ -2815,10 +2815,10 @@
 
 	<string name="poi_aerodrome_type_international">Nemzetközi</string>
 	<string name="poi_aerodrome_type_regional">Regionális</string>
-	<string name="poi_aerodrome_type_public">Nyilvános</string>
+	<string name="poi_aerodrome_type_public">Polgári</string>
 	<string name="poi_aerodrome_type_military">Katonai</string>
-	<string name="poi_aerodrome_type_military_public">Katonai/nyilvános</string>
-	<string name="poi_aerodrome_type_private">Privát</string>
+	<string name="poi_aerodrome_type_military_public">Katonai / polgári</string>
+	<string name="poi_aerodrome_type_private">Magánrepülőtér</string>
 
 	<string name="poi_observatory_type_meteorological">Meteorológiai</string>
 	<string name="poi_observatory_type_gravitational">Gravitációs</string>
@@ -2842,7 +2842,7 @@
 	<string name="poi_display_sundial_yes">Napóra</string>
 
 	<string name="poi_barometer_yes">Barométer</string>
-	<string name="poi_barometer_no">Barométer: nincs</string>
+	<string name="poi_barometer_no">Nincs barométer</string>
 	<string name="poi_thermometer_yes">Hőmérő</string>
 	<string name="poi_thermometer_no">Hőmérő: nincs</string>
 	<string name="poi_date_yes">Dátumkijelzés</string>
@@ -2899,4 +2899,169 @@
 	<string name="poi_nutrition_supplements">Táplálékkiegészítők</string>
 	<string name="poi_photo_studio">Fotóstúdió</string>
 
-</resources>
+<string name="poi_health_specialty">Szakorvosi ellátás</string>
+	<string name="poi_health_specialty_paediatrics_no">Nincs gyermekgyógyászat</string>
+	<string name="poi_health_specialty_dermatovenereology_yes">Bőr- és nemibeteg-ellátás</string>
+	<string name="poi_health_specialty_anaesthetics_yes">Aneszteziológia</string>
+	<string name="poi_health_specialty_pulmonology_yes">Tüdőgyógyászat</string>
+	<string name="poi_health_specialty_dental_oral_maxillo_facial_surgery_yes">Fog-, száj, állcsont- és arcsebészet</string>
+	<string name="poi_health_specialty_emergency_medicine_no">Szakorvosi ellátás: nincs baleseti és sürgősségi ellátás</string>
+	<string name="poi_health_specialty_biochemistry_yes">Biológiai kémia</string>
+	<string name="poi_health_specialty_occupational_yes">Foglalkozás-egészségügyi ellátás</string>
+	<string name="poi_health_specialty_physiatry_yes">Fizikális medicina és rehabilitáció</string>
+	<string name="poi_health_specialty_maxillofacial_surgery_yes">Állcsont- és arcsebészet</string>
+	<string name="poi_health_specialty_nephrology_yes">Nefrológia (vesegyógyászat)</string>
+	<string name="poi_health_specialty_neuropsychiatry_yes">Neuropszichiátria</string>
+	<string name="poi_health_specialty_endocrinology_yes">Endokrinológia</string>
+	<string name="poi_health_specialty_nuclear_medicine_yes">Nukleáris medicina</string>
+	<string name="poi_health_specialty_tropical_medicine_yes">Trópusi betegségek ellátása</string>
+	<string name="poi_health_specialty_tropical_medicine_no">Szakorvosi ellátás: nincs trópusibetegség-ellátás</string>
+	<string name="poi_health_specialty_obstetrics_postnatal_yes">Szülészet (születés utáni)</string>
+	<string name="poi_health_specialty_obstetrics_postnatal_no">Szakorvosi ellátás: nincs (születés utáni) szülészeti ellátás</string>
+	<string name="poi_health_specialty_obstetrics_antenatal_yes">Várandósgondozás</string>
+	<string name="poi_health_specialty_obstetrics_antenatal_no">Szakorvosi ellátás: nincs várandósgondozás</string>
+	<string name="poi_health_specialty_social_paediatrics_no">Szakorvosi ellátás: nincs szociális gyermekgyógyászat</string>
+	<string name="poi_health_specialty_obstetrics_caesarean_section_no">Szakorvosi ellátás: nincs szülészet (császármetszés)</string>
+	<string name="poi_health_specialty_addiction_medicine_yes">Addiktológia</string>
+	<string name="poi_health_specialty_optometry_yes">Optometria</string>
+	<string name="poi_health_specialty_manual_therapy_yes">Manuálterápia</string>
+	<string name="poi_health_specialty_podology_yes">Lábgyógyászat</string>
+	<string name="poi_health_specialty_reiki_yes">Reiki</string>
+	<string name="poi_health_specialty_herbalism_yes">Gyógynövénytan</string>
+	<string name="poi_health_specialty_chiropractic_yes">Chiropraktika</string>
+	<string name="poi_health_specialty_naturopathy_yes">Naturopátia</string>
+	<string name="poi_health_specialty_depth_psychology_yes">Mélylélektan</string>
+	<string name="poi_health_specialty_behavior_yes">Viselkedés-lélektan</string>
+	<string name="poi_health_specialty_palliative_medicine_yes">Szakorvosi ellátás: palliatív gyógyászat</string>
+
+	<string name="poi_health_service_nursing_yes">Egészségügyi szolgáltatás: ápolás</string>
+	<string name="poi_health_service_nursing_no">Egészségügyi szolgáltatás: nincs ápolás</string>
+	<string name="poi_health_service_counselling_yes">Egészségügyi szolgáltatás: tanácsadás</string>
+	<string name="poi_health_service_counselling_no">Egészségügyi szolgáltatás: nincs tanácsadás</string>
+	<string name="poi_health_service_examination_yes">Egészségügyi szolgáltatás: vizsgálat</string>
+	<string name="poi_health_service_examination_no">Egészségügyi szolgáltatás: nincs vizsgálat</string>
+	<string name="poi_health_service_child_care_yes">Egészségügyi szolgáltatás: gyermekgondozás</string>
+	<string name="poi_health_service_child_care_no">Egészségügyi szolgáltatás: nincs gyermekgondozás</string>
+	<string name="poi_health_service_prevention_yes">Egészségügyi szolgáltatás: prevenció</string>
+	<string name="poi_health_service_prevention_no">Egészségügyi szolgáltatás: nincs prevenció</string>
+	<string name="poi_health_service_prevention_vaccination_yes">Egészségügyi szolgáltatás: oltás</string>
+	<string name="poi_health_service_prevention_vaccination_no">Egészségügyi szolgáltatás: nincs oltás</string>
+	<string name="poi_health_service_support_yes">Egészségügyi szolgáltatás: támogatás</string>
+	<string name="poi_health_service_support_no">Egészségügyi szolgáltatás: nincs támogatás</string>
+	<string name="poi_health_service_test_yes">Egészségügyi szolgáltatás: teszt</string>
+	<string name="poi_health_service_test_no">Egészségügyi szolgáltatás: nincs teszt</string>
+
+	<string name="poi_health_facility_type_field_hospital">Egészségügyi létesítmény típusa: tábori kórház</string>
+	<string name="poi_health_facility_type_counselling_centre">Egészségügyi létesítmény típusa: tanácsadó központ</string>
+	<string name="poi_health_facility_type_laboratory">Egészségügyi létesítmény típusa: labor</string>
+	<string name="poi_health_facility_type_therapy">Egészségügyi létesítmény típusa: terápiás létesítmény</string>
+	<string name="poi_health_facility_type_department">Egészségügyi létesítmény típusa: részleg</string>
+	<string name="poi_health_facility_type_dispensary">Egészségügyi létesítmény típusa: gyógyszerkiadó hely</string>
+	<string name="poi_health_facility_type_first_aid">Egészségügyi létesítmény típusa: elsősegélynyújtó hely</string>
+	<string name="poi_health_facility_type_nursing_home">Egészségügyi létesítmény típusa: ápoló otthon</string>
+	<string name="poi_health_facility_type_support_group_home">Egészségügyi létesítmény típusa: önsegítő csoport találkozóhelye</string>
+
+	<string name="poi_health_person_type_assistant">Egészségügyi dolgozó szerepe: asszisztens</string>
+	<string name="poi_health_person_type_healer">Egészségügyi dolgozó szerepe: gyógyító</string>
+	<string name="poi_health_person_type_midwife">Egészségügyi dolgozó szerepe: szülésznő</string>
+	<string name="poi_health_person_type_nurse">Egészségügyi dolgozó szerepe: ápoló</string>
+	<string name="poi_health_person_type_paramedic">Egészségügyi dolgozó szerepe: paramedikus (mentőtiszt)</string>
+	<string name="poi_health_person_type_physician">Egészségügyi dolgozó szerepe: orvos</string>
+	<string name="poi_health_person_type_podologist">Egészségügyi dolgozó szerepe: lábgyógyász</string>
+	<string name="poi_health_person_type_psychologist">Egészségügyi dolgozó szerepe: pszichológus</string>
+	<string name="poi_health_person_type_therapist">Egészségügyi dolgozó szerepe: terapeuta</string>
+	<string name="poi_health_person_type_physician_assitant">Egészségügyi dolgozó szerepe: orvosasszisztens</string>
+	<string name="poi_health_person_type_technician">Egészségügyi dolgozó szerepe: technikus</string>
+	<string name="poi_health_person_type_witchdoctor">Egészségügyi dolgozó szerepe: sámán</string>
+
+	<string name="poi_nuclear_explosion_type_atmospheric">Robbantástípus: légköri</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_airdrop">Robbantástípus: légköri, ledobott</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_surface_tower">Robbantástípus: légköri, felszíni, torony</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_balloon">Robbantástípus: légköri, ballon</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_atmospheric_surface">Robbantástípus: légköri, felszíni</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_water_surface_barge">Robbantástípus: légköri, vízfelszíni, uszály</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_rocket_or_missile">Robbantástípus: légköri, rakéta</string>
+	<string name="poi_bandstand">Zenepavilon</string>
+	<string name="poi_support_billboard">Alátámasztás: óriásplakát</string>
+	<string name="poi_support_pole">Alátámasztás: rúd</string>
+	<string name="poi_support_wall_mounted">Alátámasztás: fal</string>
+	<string name="poi_support_tree">Alátámasztás: fa</string>
+	<string name="poi_support_pedestal">Alátámasztás: talapzat</string>
+	<string name="poi_support_ground">Alátámasztás: talaj</string>
+	<string name="poi_support_ceiling">Alátámasztás: födém</string>
+	<string name="poi_support_suspended">Alátámasztás: felfüggesztés</string>
+	<string name="poi_support_roof">Alátámasztás: tető</string>
+	<string name="poi_support_tower">Alátámasztás: torony</string>
+
+	<string name="poi_nuclear_explosion_country">Robbantás: ország</string>
+	<string name="poi_nuclear_explosion_site">Robbantás: helyszín</string>
+	<string name="poi_nuclear_explosion_type_underground_shaft">Robbantástípus: föld alatti, akna</string>
+	<string name="poi_nuclear_explosion_type_underground_tunnel">Robbantástípus: föld alatti, alagút</string>
+	<string name="poi_nuclear_explosion_type_underground">Robbantástípus: föld alatti</string>
+	<string name="poi_nuclear_explosion_type_cratering_burst">Robbantástípus: kráterkitörés (sekély föld alatti)</string>
+	<string name="poi_nuclear_explosion_type_space">Robbantástípus: világűrbeli (80 km-nél magasabban)</string>
+	<string name="poi_nuclear_explosion_type_underwater">Robbantástípus: víz alatti</string>
+	<string name="poi_nuclear_explosion_date_utc">Robbantás dátuma (UTC)</string>
+	<string name="poi_nuclear_explosion_shot_name_en">Lövés neve (en)</string>
+	<string name="poi_nuclear_explosion_series">Robbantássorozat</string>
+	<string name="poi_nuclear_explosion_purpose_nuclear_weapons_related">Robbantás célja: atomfegyverhez kötődő</string>
+	<string name="poi_nuclear_explosion_purpose_weapons_effects">Robbantás célja: fegyver hatásai</string>
+	<string name="poi_nuclear_explosion_purpose_safety_experiment">Robbantás célja: biztonsági kísérlet</string>
+	<string name="poi_nuclear_explosion_purpose_research_for_peaceful_applications">Robbantás célja: békés célú kutatás</string>
+	<string name="poi_nuclear_explosion_purpose_fundamental_science">Robbantás célja: alapkutatás</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application_cavity_excavation">Robbantás célja: ipari felhasználás, gödörásás</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application_seismic_sounding">Robbantás célja: ipari felhasználás, szeizmikus hangzás</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application_oil_stimulation">Robbantás célja: ipari felhasználás, kőolaj-stimulálás</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application">Robbantás célja: ipari felhasználás</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application_earth_moving">Robbantás célja: ipari felhasználás, földmozgatás</string>
+	<string name="poi_nuclear_explosion_time_utc">Robbantás ideje (UTC)</string>
+	<string name="poi_nuclear_explosion_yield">Robbantás hozadéka</string>
+	<string name="poi_nuclear_explosion_hole">Robbantási lyuk</string>
+	<string name="poi_nuclear_explosion_height_of_burst">Kitörés magassága</string>
+	<string name="poi_nuclear_explosion_ground_zero_altitude">A robbantás alatti földfelszínpont (Ground Zero) magassága</string>
+	<string name="poi_nuclear_explosion_body_wave_magnitude">Lökéshullám nagysága</string>
+	<string name="poi_nuclear_explosion_salvo_first_detonation">Robbantássorozat: a tesztsorozat első detonációja</string>
+	<string name="poi_nuclear_explosion_salvo_second_or_later_detonation">Robbantássorozat: a tesztsorozat második detonációja</string>
+	<string name="poi_nuclear_explosion_crater_diameter">Robbantás: kráterátmérő</string>
+	<string name="poi_nuclear_explosion_warhead">Robbantás: robbanófej</string>
+	<string name="poi_nuclear_explosion_device">Robbantás: készülék</string>
+
+	<string name="poi_site_type_tumulus">Halomsír</string>
+	<string name="poi_counselling_type_child_guidance_yes">Tanácsadás (nevelési): igen</string>
+	<string name="poi_counselling_type_child_guidance_no">Tanácsadás (nevelési): nincs</string>
+	<string name="poi_counselling_type_couple_yes">Tanácsadás (párkapcsolati): igen</string>
+	<string name="poi_counselling_type_couple_no">Tanácsadás (párkapcsolati): nincs</string>
+	<string name="poi_counselling_type_crisis_yes">Tanácsadás (krízis): igen</string>
+	<string name="poi_counselling_type_crisis_no">Tanácsadás (krízis): nincs</string>
+	<string name="poi_counselling_type_sexual_yes">Tanácsadás (szexualitás): igen</string>
+	<string name="poi_counselling_type_sexual_no">Tanácsadás (szexualitás): nincs</string>
+	<string name="poi_counselling_type_sexual_abuse_yes">Tanácsadás (szexuális bántalmazás): igen</string>
+	<string name="poi_counselling_type_sexual_abuse_no">Tanácsadás (szexuális bántalmazás): nincs</string>
+	<string name="poi_crossing_activation_automatic">Vasúti sorompó aktiválása: automatikus</string>
+	<string name="poi_crossing_activation_local">Vasúti sorompó aktiválása: helyi</string>
+	<string name="poi_crossing_activation_remote">Vasúti sorompó aktiválása: távműködtetésű</string>
+	<string name="poi_crossing_barrier_no">Nincs vasúti sorompó</string>
+	<string name="poi_crossing_barrier_yes">Vasúti sorompó</string>
+	<string name="poi_crossing_barrier_full">Teljes sorompó</string>
+	<string name="poi_crossing_barrier_half">Félsorompó</string>
+	<string name="poi_crossing_barrier_double_half">Két félsorompó</string>
+	<string name="poi_crossing_bell_yes">Hangjelzés a vasúti kereszteződésben</string>
+	<string name="poi_crossing_bell_no">Nincs hangjelzés a vasúti kereszteződésben</string>
+	<string name="poi_crossing_light_yes">Fénysorompó</string>
+	<string name="poi_crossing_light_no">Nincs fénysorompó</string>
+	<string name="poi_crossing_on_demand_yes">Vasúti átkelés csak kérésre</string>
+	<string name="poi_crossing_on_demand_no">Vasúti átkelés nem csak kérésre</string>
+	<string name="poi_crossing_saltire_yes">Andráskereszt</string>
+	<string name="poi_crossing_saltire_no">Nincs andráskereszt</string>
+	<string name="poi_crossing_supervision_yes">Felügyelt vasúti kereszteződés</string>
+	<string name="poi_crossing_supervision_no">Nem felügyelt vasúti kereszteződés</string>
+	<string name="poi_crossing_supervision_attendant">Vasútikereszteződés-felügyelet: jelzőőr</string>
+	<string name="poi_crossing_supervision_camera">Vasútikereszteződés-felügyelet: kamera</string>
+
+	<string name="poi_impromptu_yes">Vadkempinghely</string>
+	<string name="poi_impromptu_no">Nem vadkempinghely</string>
+	<string name="poi_sanitary_dump_station_yes">Szaniterürítő hely</string>
+	<string name="poi_sanitary_dump_station_no">Nem szaniterürítő hely</string>
+	<string name="poi_sanitary_dump_station">Szaniterürítő hely</string>
+
+	</resources>
