@@ -2013,7 +2013,7 @@
 	<string name="poi_drive_through_yes">Průjezd autem: ano</string>
 	<string name="poi_drive_through_no">Průjezd autem: ne</string>
 
-	<string name="poi_takeaway_yes">Jídlo sebou</string>
+	<string name="poi_takeaway_yes">Jídlo s sebou</string>
 	<string name="poi_takeaway_no">Jídlo nelze odnést</string>
 	<string name="poi_takeaway_only">Jídlo jen sebou</string>
 
@@ -2359,20 +2359,20 @@
 	<string name="poi_tomb_crypt">Typ: krypta</string>
 	<string name="poi_tomb_pyramid">Typ: pyramida</string>
 
-	<string name="poi_historic_civilization_ancient_roman">Civilizace: starověké římské (753 př. n. l. - 284 n. l.)</string>
+	<string name="poi_historic_civilization_ancient_roman">Civilizace: starověká římská (753 př. n. l. - 284 n. l.)</string>
 	<string name="poi_historic_civilization_etruscan">Civilizace: etruské (12. - 6. stol. př. n. l.)</string>
-	<string name="poi_historic_civilization_prehistoric">Civilizace: prehistorické</string>
-	<string name="poi_historic_civilization_ancient_greek">Civilizace: starověké řecké</string>
+	<string name="poi_historic_civilization_prehistoric">Civilizace: prehistorická</string>
+	<string name="poi_historic_civilization_ancient_greek">Civilizace: starověká řecká</string>
 	<string name="poi_historic_civilization_roman">Civilizace: římská</string>
 	<string name="poi_historic_civilization_byzantine">Civilizace: byzantská (285 n.l. - 1453 n. l.)</string>
 	<string name="poi_historic_civilization_imperial_chinese">Civilizace: imperiální čínská (221 př. n. l. - 1911 n.l.)</string>
-	<string name="poi_historic_civilization_ancient_egyptian">Civilizace: starověké egyptské (do 332 př. n. l.)</string>
-	<string name="poi_historic_civilization_celtic">Civilizace: keltské</string>
-	<string name="poi_historic_civilization_western_roman">Civilizace: západní románské (285 n. l. - 476 n. l.)</string>
+	<string name="poi_historic_civilization_ancient_egyptian">Civilizace: starověká egyptská (do 332 př. n. l.)</string>
+	<string name="poi_historic_civilization_celtic">Civilizace: keltská</string>
+	<string name="poi_historic_civilization_western_roman">Civilizace: západní románská (285 n. l. - 476 n. l.)</string>
 	<string name="poi_historic_civilization_mycenaean">Civilizace: mykénská</string>
 	<string name="poi_historic_civilization_roman_and_byzantine_egyptian">Civilizace: římské a byzantské egyptské</string>
-	<string name="poi_historic_civilization_cycladic">Civilizace: kykladské</string>
-	<string name="poi_historic_civilization_minoan">Civilizace: mínójské</string>
+	<string name="poi_historic_civilization_cycladic">Civilizace: kykladská</string>
+	<string name="poi_historic_civilization_minoan">Civilizace: mínójská</string>
 	<string name="poi_animal_training">Drezura</string>
 	<string name="poi_animal_training_dog">Výcvik psů</string>
 	<string name="poi_animal_training_horse">Výcvik koní</string>
@@ -2704,7 +2704,7 @@
 	<string name="poi_medical_system_chinese_yes">Zdravotní systém: tradiční čínština</string>
 	<string name="poi_medical_system_unknown_yes">Zdravotní systém: neznámý tradiční</string>
 	<string name="poi_medical_system_ayurveeda_yes">Zdravotní systém: ájurvéda</string>
-	<string name="poi_medical_system_mongolian_yes">Zdravotní systém: tradiční mongolština</string>
+	<string name="poi_medical_system_mongolian_yes">Zdravotní systém: tradiční mongolský</string>
 	<string name="poi_medical_system_tibetan_yes">Zdravotní systém: tradiční tibetský</string>
 	<string name="poi_health_service_nursing_yes">Zdravotní služba: ošetřovatelství: ano</string>
 	<string name="poi_health_service_nursing_no">Zdravotní služba: ošetřovatelství: ne</string>
@@ -2931,7 +2931,7 @@
 	<string name="poi_architecture_brutalism">Architektura: brutalismus</string>
 	<string name="poi_industrial_wellsite">Typ: těžařská oblast</string>
 	<string name="poi_historic_civilization_nuragic">Civilizace: nuragská (18. st. př. n. l. - 2. st. n. l.)</string>
-	<string name="poi_historic_civilization_dacian">Civilizace: dákové</string>
+	<string name="poi_historic_civilization_dacian">Civilizace: Dákové</string>
 	<string name="poi_historic_civilization_greek_egyptian">Civilizace: řecko-egyptská (332 př. n. l. - 30 př. n. l.)</string>
 	<string name="poi_historic_civilization_helladic">Civilizace: helladská</string>
 	<string name="poi_historic_period_nuragic">Historické období: nuragské</string>
@@ -2956,7 +2956,7 @@
 	<string name="poi_payment_toll_type">Způsob platby</string>
 	<string name="poi_payment_transport_type">Způsob platby (doprava)</string>
 	<string name="poi_smoking">Kouření</string>
-	<string name="poi_takeaway">Jídlo sebou</string>
+	<string name="poi_takeaway">Jídlo s sebou</string>
 	<string name="poi_wheelchair_accessibility">Přístup invalidním vozíkem</string>
 	<string name="poi_cuisine_ice_cream">Zmrzlina</string>
 	<string name="poi_fuel_type">Typ</string>
@@ -3005,7 +3005,7 @@
 	<string name="poi_information_contents">Obsah</string>
 	<string name="poi_clock_option">Dodatečné</string>
 	<string name="poi_scout_camp">Skautský tábor</string>
-	<string name="poi_backcountry">Přes krajinu</string>
+	<string name="poi_backcountry">Odlehlé místo</string>
 	<string name="poi_piste_difficulty">Obtížnost sjezdovky</string>
 	<string name="poi_piste_grooming">Úprava sjezdovky</string>
 	<string name="poi_theatre_genre">Žánr</string>
@@ -3247,10 +3247,10 @@
 	<string name="poi_cuisine_czech">Česká</string>
 	<string name="poi_cuisine_cuban">Kubánská</string>
 	<string name="poi_cuisine_british">Britská</string>
-	<string name="poi_cuisine_latin_american">Latinsko americká</string>
+	<string name="poi_cuisine_latin_american">Latinskoamerická</string>
 	<string name="poi_cuisine_nepalese">Nepálská</string>
 	<string name="poi_cuisine_mongolian">Mongolská</string>
-	<string name="poi_cuisine_middle_eastern">Střední východ</string>
+	<string name="poi_cuisine_middle_eastern">Středněvýchodní</string>
 	<string name="poi_cuisine_ukrainian">Ukrajinská</string>
 	<string name="poi_cuisine_afghan">Afghánská</string>
 	<string name="poi_cuisine_belgian">Belgická</string>
