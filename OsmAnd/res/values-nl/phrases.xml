@@ -1495,4 +1495,7 @@
 	<string name="poi_tanning_salon">Zonnestudio</string>
 
 	<string name="poi_payment_fuel_type">Tankkaarten</string>
+	<string name="poi_dish">Keuken/soort gerechten</string>
+	<string name="poi_vending_ice_cream">IJs</string>
+	<string name="poi_cuisine_ice_cream">IJs</string>
 	</resources>
