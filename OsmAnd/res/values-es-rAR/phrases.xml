@@ -1577,7 +1577,7 @@
 	<string name="poi_diet_vegetarian_only">Sólo vegetariana</string>
 	<string name="poi_diet_vegetarian_yes">Vegetariana</string>
 	<string name="poi_diet_vegetarian_no">Sin dieta vegetariana</string>
-	<string name="poi_diet_vegetarian_few">Poca dieta vegetariana</string>
+	<string name="poi_diet_vegetarian_few">Vegetariana (poco)</string>
 	<string name="poi_diet_vegan_only">Sólo vegana</string>
 	<string name="poi_diet_vegan_yes">Vegana</string>
 	<string name="poi_diet_vegan_no">Sin dieta vegana</string>
@@ -3073,7 +3073,7 @@
 <string name="poi_fuel_avia_type">Tipo de combustible (aviones)</string>
 	<string name="poi_payment_fuel_type">Tarjetas de combustible</string>
 	<string name="poi_internet_access_type">Tipo de acceso a Internet</string>
-	<string name="poi_vending_type">Tipo de expendedora</string>
+	<string name="poi_vending_type">Tipo de expendio</string>
 	<string name="poi_bicycle_service">Servicio para bicicleta</string>
 	<string name="poi_clothes_type">Tipo de ropa</string>
 	<string name="poi_shoes_type">Tipo de calzado</string>
