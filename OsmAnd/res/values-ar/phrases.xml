@@ -745,4 +745,44 @@
 	<string name="poi_aerialway_gondola">زورق سياحي</string>
 	<string name="poi_aerialway_goods">رافعة بضائع</string>
 	<string name="poi_aerialway_magic_carpet">رافعة سجاد</string>
+	<string name="poi_craft_upholsterer">منجد</string>
+	<string name="poi_craft_watchmaker">صانع ساعات</string>
+	<string name="poi_craft_window_construction">بناء إطار النوافذ</string>
+
+	<string name="poi_funeral_directors">ادارة الجنائز</string>
+	<string name="poi_craft_computer">تركيب الحواسيب</string>
+	<string name="poi_beauty">صالون تجميل</string>
+	<string name="poi_beauty_salon_nails">تجميل الاظافر</string>
+	<string name="poi_massage">صالون تدليك</string>
+	<string name="poi_tattoo">صالون وشم</string>
+	<string name="poi_dry_cleaning">التنظيف الجاف</string>
+	<string name="poi_laundry">غسيل الملابس</string>
+	<string name="poi_car_rental">تأجير السيارات</string>
+	<string name="poi_car_sharing">مشاركة السيارات</string>
+	<string name="poi_boat_sharing">مشاركة القوارب</string>
+	<string name="poi_shower">دش</string>
+	<string name="poi_brothel">بيت دعارة</string>
+	<string name="poi_smoking_area">منطقة للتدخين</string>
+	<string name="poi_mortuary">مشرحة</string>
+	<string name="poi_crematorium">محرقة</string>
+	<string name="poi_amenity_atm">صراف آلي</string>
+	<string name="poi_money_lender">قرض المال</string>
+	<string name="poi_bureau_de_change">مكتب الصرافة</string>
+	<string name="poi_accountant">محاسب</string>
+	<string name="poi_bitcoin_yes">دفع بالبيتكوين</string>
+
+	<string name="poi_cave_entrance">مدخل كهف</string>
+	<string name="poi_saddle">سرج</string>
+	<string name="poi_volcano">بركان</string>
+	<string name="poi_crater">فوهة بركان</string>
+	<string name="poi_ridge">قمة</string>
+	<string name="poi_glacier">نهر جليدي</string>
+	<string name="poi_waterfall">شلال</string>
+	<string name="poi_stream">تيار</string>
+	<string name="poi_rapids">منحدر نهر</string>
+	<string name="poi_stone">حجر رائع</string>
+	<string name="poi_beach">شاطئ</string>
+	<string name="poi_bay">خليج</string>
+	<string name="poi_fjord">مضيق</string>
+	<string name="poi_reef">شعاب مرجانية</string>
 	</resources>
