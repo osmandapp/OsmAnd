@@ -2660,7 +2660,7 @@ Se ami OsmAnd e OSM e vuoi sostenerli, questo è un modo perfetto per farlo.</st
     <string name="save_track_min_distance_descr">Scegliere la distanza minima dal precedente punto a avverrà la registrazione di un nuovo punto</string>
     <string name="save_track_precision">Precisione minima a cui attivare la registrazione</string>
     <string name="save_track_precision_descr">Impostare la minima precisione per la registrazione di un punto</string>
-    <string name="rendering_attr_contourColorScheme_name">Combinazione di colori delle linee isocline</string>
+    <string name="rendering_attr_contourColorScheme_name">Colorazione delle linee isocline</string>
     <string name="search_hint">Digitare il nome del pdi, città, indirizzo</string>
     <string name="shared_string_continue">Continua</string>
     <string name="shared_string_pause">Pausa</string>
