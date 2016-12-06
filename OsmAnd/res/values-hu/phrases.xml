@@ -298,7 +298,7 @@
 	<string name="poi_fire_extinguisher">Tűzoltókészülék</string>
 	<string name="poi_fire_flapper">Tűzseprű</string>
 	<string name="poi_fire_hose">Tűzoltó tömlő</string>
-	<string name="poi_fire_water_pond">Tüzivíz medence</string>
+	<string name="poi_fire_water_pond">Tűzivízmedence</string>
 	<string name="poi_traffic_calming_bump">Fekvőrendőr</string>
 	<string name="poi_traffic_calming_hump">Fekvőrendőr - hosszú</string>
 	<string name="poi_traffic_calming_cushion">Fekvőrendőr - párna</string>
@@ -348,7 +348,7 @@
 	<string name="poi_rest_area">Pihenőhely</string>
 
 	<string name="poi_water_well">Kút</string>
-	<string name="poi_water_works">Vízműtelep</string>
+	<string name="poi_water_works">Vízmű</string>
 	<string name="poi_boatyard">Csónaktelep</string>
 	<string name="poi_wastewater_plant">Szennyvíztelep</string>
 	<string name="poi_transportation">Közlekedés</string>
@@ -363,7 +363,7 @@
 	<string name="poi_fuel_biogas">E85 bioetanol</string>
 	<string name="poi_vehicle_ramp">Szerelőrámpa</string>
 	<string name="poi_lock_gate">Zsilip</string>
-	<string name="poi_waterway_turning_point">Vízi fordítópont</string>
+	<string name="poi_waterway_turning_point">Fordulópont hajóknak</string>
 	<string name="poi_weir">Bukógát</string>
 	<string name="poi_dam">Gát</string>
 	<string name="poi_watermill">Vízimalom</string>
@@ -538,7 +538,7 @@
 	<string name="poi_leisure_fishing">Horgászhely</string>
 	<string name="poi_harbour">Kikötő</string>
 	<string name="poi_bench">Pad</string>
-	<string name="poi_water_park">Akvapark</string>
+	<string name="poi_water_park">Aquapark</string>
 	<string name="poi_recreation_ground">Szabadidőpark</string>
 	<string name="poi_village_green">Központi zöldterület</string>
 	<string name="poi_trail_riding_station">Lovastúra állomás</string>
@@ -1145,7 +1145,7 @@
 	<string name="poi_pump_yes">Igen</string>
 
 	<string name="poi_water_characteristic_mineral">Ásványvíz</string>
-	<string name="poi_water_characteristic_mud">Víz jelleg: iszapos</string>
+	<string name="poi_water_characteristic_mud">Víz jellege: iszapos</string>
 	<string name="poi_water_characteristic_sulfuric">Kénes</string>
 
 	<string name="poi_water_point">Vízvevőhely</string>
@@ -1343,7 +1343,7 @@
 	<string name="poi_vending_coffee">Kávé</string>
 	<string name="poi_vending_toll">Fizetőautomata</string>
 	<string name="poi_vending_tickets">Jegyautomata</string>
-	<string name="poi_vending_water">Ivóvíz</string>
+	<string name="poi_vending_water">Vízárusítás</string>
 	<string name="poi_vending_telephone_vouchers">Telefonkártya</string>
 	<string name="poi_vending_animal_food">Állateledel</string>
 	<string name="poi_vending_public_transport_plans">Tömegközlekedési térkép</string>
@@ -1876,7 +1876,7 @@
 
 	<string name="poi_diaper_table_count">Pelenkázóasztalok száma</string>
 
-	<string name="poi_diplomatic_ambassadors_residence">Nagykövet rezidenciája</string>
+	<string name="poi_diplomatic_ambassadors_residence">Nagyköveti rezidencia</string>
 	<string name="poi_site_type_city">Nagyváros</string>
 	<string name="poi_capacity_beds">Ágyak száma</string>
 
@@ -2627,7 +2627,7 @@
 	<string name="poi_telescope_diameter">Átmérő</string>
 	<string name="poi_telescope_spectrum">Spektrum</string>
 	<string name="poi_telescope_usage_education">Oktatási felhasználású</string>
-	<string name="poi_telescope_usage_espionage">Kémkedési felhasználású</string>
+	<string name="poi_telescope_usage_espionage">Felhasználás: hírszerzés</string>
 	<string name="poi_telescope_usage_research">Kutatási felhasználású</string>
 
 	<string name="poi_prison_camp">Egykori fogolytábor</string>
@@ -2727,8 +2727,8 @@
 	<string name="poi_amenity_vacuum_cleaner">Porszívó</string>
 
 	<string name="poi_water_tap">Vízcsap</string>
-	<string name="poi_button_operated_yes">Gombbal működtetett: igen</string>
-	<string name="poi_button_operated_no">Gombbal működtetett: nem</string>
+	<string name="poi_button_operated_yes">Gombbal működik</string>
+	<string name="poi_button_operated_no">Nem gombbal működik</string>
 
 	<string name="poi_free_flying_site_training">Képzés</string>
 	<string name="poi_free_flying_official_yes">Hivatalos: igen</string>
@@ -2774,14 +2774,14 @@
 	<string name="poi_counselling_yes">Tanácsadás: igen</string>
 	<string name="poi_counselling_no">Tanácsadás: nincs</string>
 	<string name="poi_home_visit_yes">Igen</string>
-	<string name="poi_disease_malaria_yes">Malária: igen</string>
-	<string name="poi_disease_malaria_no">Malária: nem</string>
-	<string name="poi_disease_ebola_yes">Ebola: igen</string>
-	<string name="poi_disease_ebola_no">Ebola: nem</string>
-	<string name="poi_disease_autism_yes">Autizmus: igen</string>
-	<string name="poi_disease_autism_no">Autizmus: nem</string>
-	<string name="poi_disease_aids_yes">AIDS: igen</string>
-	<string name="poi_disease_aids_no">AIDS: nem</string>
+	<string name="poi_disease_malaria_yes">Malária</string>
+	<string name="poi_disease_malaria_no">Malária nincs</string>
+	<string name="poi_disease_ebola_yes">Ebola</string>
+	<string name="poi_disease_ebola_no">Ebola nincs</string>
+	<string name="poi_disease_autism_yes">Autizmus</string>
+	<string name="poi_disease_autism_no">Autizmus nincs</string>
+	<string name="poi_disease_aids_yes">AIDS</string>
+	<string name="poi_disease_aids_no">AIDS nincs</string>
 
 	<string name="poi_fire_hydrant_diameter">Tűzcsapátmérő</string>
 	<string name="poi_fire_hydrant_pressure">Tűzcsapnyomás</string>
@@ -2795,11 +2795,11 @@
 	<string name="poi_fire_hydrant_style_water_source_pond">Tó</string>
 	<string name="poi_fire_hydrant_style_water_source_stream">Patak</string>
 	<string name="poi_fire_hydrant_style_water_source_cistern">Ciszterna</string>
-	<string name="poi_street_cabinet_power">Doboz típusa: áram</string>
-	<string name="poi_street_cabinet_telecom">Doboz típusa: távközlés</string>
-	<string name="poi_street_cabinet_cable_tv">Doboz típusa: kábeltelevízió</string>
-	<string name="poi_street_cabinet_gas">Doboz típusa: gáz</string>
-	<string name="poi_street_cabinet_postal_service">Doboz típusa: postai szolgáltatás</string>
+	<string name="poi_street_cabinet_power">Közműszekrény típusa: áram</string>
+	<string name="poi_street_cabinet_telecom">Közműszekrény típusa: távközlés</string>
+	<string name="poi_street_cabinet_cable_tv">Közműszekrény típusa: kábeltelevízió</string>
+	<string name="poi_street_cabinet_gas">Közműszekrény típusa: gáz</string>
+	<string name="poi_street_cabinet_postal_service">Közműszekrény típusa: postai szolgáltatás</string>
 	<string name="poi_street_cabinet_waste">Doboz típusa: szemét</string>
 	<string name="poi_street_cabinet_water_management">Doboz típusa: vízgazdálkodás</string>
 	<string name="poi_street_cabinet_street_lighting">Doboz típusa: közvilágítás</string>
@@ -3063,5 +3063,11 @@
 	<string name="poi_sanitary_dump_station_yes">Szaniterürítő hely</string>
 	<string name="poi_sanitary_dump_station_no">Nem szaniterürítő hely</string>
 	<string name="poi_sanitary_dump_station">Szaniterürítő hely</string>
+
+	<string name="poi_observatory_type_espionage">Felhasználás: hírszerzés</string>
+	<string name="poi_observatory_designation">Rendeltetés</string>
+	<string name="poi_diplomatic_high_commission">Nagykövetség (a Brit Nemzetközösség tagországáé)</string>
+
+	<string name="poi_street_cabinet">Utcai közműszekrény</string>
 
 	</resources>
