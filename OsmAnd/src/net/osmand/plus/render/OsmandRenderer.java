@@ -66,6 +66,7 @@ public class OsmandRenderer {
 
 	public static final int TILE_SIZE = 256; 
 	private static final int MAX_V = 75;
+	private static final int MAX_V_AREA = 185;
 
 	private Map<float[], PathEffect> dashEffect = new LinkedHashMap<float[], PathEffect>();
 	private Map<String, float[]> parsedDashEffects = new LinkedHashMap<String, float[]>();
@@ -81,6 +82,7 @@ public class OsmandRenderer {
 		BinaryMapDataObject obj;
 		int typeInd;
 		double order;
+		double area;
 		int objectType;
 	};
 
@@ -231,7 +233,8 @@ public class OsmandRenderer {
 						continue;
 					}
 					// polygon
-					drawPolygon(mObj, req, cv, rc, pair);
+					
+					drawPolygon(mObj, req, cv, rc, pair, array.get(i).area);
 				} else if (objOrder == 1 || objOrder == 2) {
 					drawPolyline(mObj, req, cv, rc, pair, mObj.getSimpleLayer(), objOrder == 1);
 				} else if (objOrder == 3) {
@@ -469,6 +472,7 @@ public class OsmandRenderer {
 						render.setBooleanFilter(render.ALL.R_CYCLE, o.isCycle());
 						if (render.search(RenderingRulesStorage.ORDER_RULES)) {
 							int objectType = render.getIntPropertyValue(render.ALL.R_OBJECT_TYPE);
+							boolean ignorePointArea = render.getIntPropertyValue(render.ALL.R_IGNORE_POLYGON_AS_POINT_AREA) != 0;
 							int order = render.getIntPropertyValue(render.ALL.R_ORDER);
 							MapDataObjectPrimitive mapObj = new MapDataObjectPrimitive();
 							mapObj.objectType = objectType;
@@ -479,10 +483,13 @@ public class OsmandRenderer {
 								MapDataObjectPrimitive pointObj = mapObj;
 								pointObj.objectType = 1;
 								double area = polygonArea(mapObj, mult);
+								mapObj.area = area;
 								if(area > MAX_V) { 
 									mapObj.order = mapObj.order + (1. / area);
 									polygonsArray.add(mapObj);
-									pointsArray.add(pointObj); // TODO fix duplicate text? verify if it is needed for icon
+									if(area > MAX_V_AREA || ignorePointArea) {
+										pointsArray.add(pointObj);
+									}
 								}
 							} else if(objectType == 1) {
 								pointsArray.add(mapObj);
@@ -599,7 +606,8 @@ public class OsmandRenderer {
 		shaders.clear();
 	}
 	
-	private void drawPolygon(BinaryMapDataObject obj, RenderingRuleSearchRequest render, Canvas canvas, RenderingContext rc, TagValuePair pair) {
+	private void drawPolygon(BinaryMapDataObject obj, RenderingRuleSearchRequest render, Canvas canvas, RenderingContext rc, TagValuePair pair, 
+			double area) {
 		if(render == null || pair == null){
 			return;
 		}
@@ -656,7 +664,10 @@ public class OsmandRenderer {
 			if (updatePaint(render, paint, 1, false, rc)) {
 				canvas.drawPath(path, paint);
 			}
-			textRenderer.renderText(obj, render, rc, pair, xText / len, yText / len, null, null);
+			boolean ignorePointArea = render.getIntPropertyValue(render.ALL.R_IGNORE_POLYGON_AS_POINT_AREA) != 0;
+			if(area > MAX_V_AREA || ignorePointArea) {
+				textRenderer.renderText(obj, render, rc, pair, xText / len, yText / len, null, null);
+			}
 		}
 	}
 	
