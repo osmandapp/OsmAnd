@@ -80,7 +80,7 @@
 	<string name="poi_ferry_terminal">Kompkikötő</string>
 	<string name="poi_lighthouse">Világítótorony</string>
 
-	<string name="poi_bicycle_rental">Kerékpárkölcsönző</string>
+	<string name="poi_bicycle_rental">Kerékpárkölcsönzés</string>
 	<string name="poi_bicycle_parking">Kerékpárparkoló</string>
 
 	<string name="poi_tunnel">Alagút</string>
@@ -644,9 +644,9 @@
 	<string name="poi_stationery">Írószerbolt</string>
 	<string name="poi_tyres">Autógumis</string>
 	<string name="poi_ses_station">SES-állomás</string>
-	<string name="poi_emergency_access_point"/>
+	<string name="poi_emergency_access_point">Vészhelyzeti bejutási pont</string>
 
-	<string name="poi_ford_stepping_stones">Lépőkő híd</string>
+	<string name="poi_ford_stepping_stones">Lépőkövek</string>
 	<string name="poi_vehicle_inspection">Műszaki vizsgahely</string>
 	<string name="poi_aerialway_pylon">Felvonó pilon</string>
 
@@ -1060,7 +1060,7 @@
 	<string name="poi_bicycle_parking_building">Speciális épület</string>
 	<string name="poi_bicycle_parking_shed">Fészer</string>
 	<string name="poi_bicycle_parking_bollard">Oszlop</string>
-	<string name="poi_bicycle_parking_informal">Informális</string>
+	<string name="poi_bicycle_parking_informal">Nem hivatalos</string>
 
 	<string name="poi_leaf_type_broadleaved">Lombos</string>
 	<string name="poi_leaf_type_needleleaved">Tűlevelű</string>
@@ -1557,9 +1557,9 @@
 	<string name="poi_aerialway_bubble_no">Nincs buborék (nem zárt)</string>
 	<string name="poi_aerialway_heating_yes">Igen</string>
 	<string name="poi_aerialway_heating_no">Fűtetlen</string>
-	<string name="poi_aerialway_bicycle_yes">Engedélyezett</string>
-	<string name="poi_aerialway_bicycle_no">Kerékpárral behajtani tilos</string>
-	<string name="poi_aerialway_bicycle_summer">Csak nyáron</string>
+	<string name="poi_aerialway_bicycle_yes">Szállítható</string>
+	<string name="poi_aerialway_bicycle_no">Kerékpár nem szállítható</string>
+	<string name="poi_aerialway_bicycle_summer">Csak nyáron szállítható</string>
 	<string name="poi_aerialway_access_entry">Csak bejárat</string>
 	<string name="poi_aerialway_access_exit">Csak kijárat</string>
 	<string name="poi_aerialway_access_both">Be- és kijárat</string>
@@ -1722,22 +1722,22 @@
 	<string name="poi_tunnel_pedestrian">Gyalogos aluljáró</string>
 	<string name="poi_tunnel_railway">Vasúti alagút</string>
 	<string name="poi_bridge_car">Közúti híd</string>
-	<string name="poi_bridge_pedestrian">Gyalogos híd</string>
-	<string name="poi_bridge_bicycle">Kerékpáros híd</string>
+	<string name="poi_bridge_pedestrian">Gyalogoshíd</string>
+	<string name="poi_bridge_bicycle">Kerékpároshíd</string>
 	<string name="poi_bridge_railway">Vasúti híd</string>
 	<string name="poi_bridge_waterway">Vízi híd</string>
-	<string name="poi_bridge_structure_beam">Hídszerkezet: gerenda</string>
+	<string name="poi_bridge_structure_beam">Hídszerkezet: gerendahíd</string>
 	<string name="poi_bridge_structure_simple_suspension">Hídszerkezet: egyszerű függőhíd</string>
-	<string name="poi_bridge_structure_suspension">Hídszerkezet: függesztett</string>
+	<string name="poi_bridge_structure_suspension">Hídszerkezet: függőhíd</string>
 	<string name="poi_bridge_structure_arch">Hídszerkezet: ívtartós</string>
 	<string name="poi_bridge_structure_truss">Hídszerkezet: rácsos</string>
-	<string name="poi_bridge_structure_floating">Hídszerkezet: úszó</string>
-	<string name="poi_bridge_structure_humpback">Hídszerkezet: szamárhátas</string>
+	<string name="poi_bridge_structure_floating">Hídszerkezet: pontonhíd</string>
+	<string name="poi_bridge_structure_humpback">Hídszerkezet: púpos</string>
 	<string name="poi_bridge_structure_cable_stayed">Hídszerkezet: ferdekábeles</string>
-	<string name="poi_bridge_structure_boardwalk">deszkajárda</string>
+	<string name="poi_bridge_structure_boardwalk">Hídszerkezet: deszkajárda</string>
 	<string name="poi_bridge_structure_simple_wooden">Hídszerkezet: egyszerű fahíd</string>
 	<string name="poi_bridge_structure_viaduct">Hídszerkezet: viadukt</string>
-	<string name="poi_bridge_structure_aqueduct">Hídszerkezet: akvadukt</string>
+	<string name="poi_bridge_structure_aqueduct">Hídszerkezet: akvadukt (vízvezeték)</string>
 	<string name="poi_bridge_structure_log">Hídszerkezet: farönk</string>
 	<string name="poi_bridge_type_movable">Híd típusa: mozgatható</string>
 	<string name="poi_bridge_movable_bascule">Mozgatható híd típusa: billenthető</string>
@@ -1824,8 +1824,8 @@
 	<string name="poi_harbour_basin">Kikötőmedence</string>
 	<string name="poi_pile">Cölöp</string>
 	<string name="poi_radio_station">Rádióállomás</string>
-	<string name="poi_power_supply_yes">Igen</string>
-	<string name="poi_power_supply_no">Villamos energiával nincs ellátva</string>
+	<string name="poi_power_supply_yes">Van</string>
+	<string name="poi_power_supply_no">Nincs elektromos csatlakozó</string>
 	<string name="poi_generator_output_electricity">Kimeneti teljesítmény</string>
 	<string name="poi_generator_output_hot_water">Kimeneti teljesítmény: forró víz</string>
 	<string name="poi_generator_output_compressed_air">Kimeneti teljesítmény: sűrített levegő</string>
@@ -1862,7 +1862,7 @@
 	<string name="poi_self_service">Önkiszolgáló</string>
 	<string name="poi_ramp_wheelchair_yes">Kerekesszékrámpa</string>
 	<string name="poi_ramp_wheelchair_no">Nincs kerekesszékrámpa</string>
-	<string name="poi_wheelchair_designated">Kizárólag kerekesszékhez</string>
+	<string name="poi_wheelchair_designated">Jelölt</string>
 	<string name="poi_covered">Fedett</string>
 	<string name="poi_subway_station_filter">Metróállomás</string>
 	<string name="poi_fire_hydrant_type">Típus</string>
@@ -2020,7 +2020,7 @@
 	<string name="poi_tents">Sátrak</string>
 	<string name="poi_washing_machine">Mosógép</string>
 	<string name="poi_caravans">Lakókocsi</string>
-	<string name="poi_power_supply">Energiaellátás</string>
+	<string name="poi_power_supply">Elektromos csatlakozó</string>
 	<string name="poi_payment_transport_type">Fizetéstípus (közlekedés)</string>
 	<string name="poi_social_facility_type">Típus</string>
 	<string name="poi_social_facility_for">Célcsoport</string>
@@ -2146,7 +2146,7 @@
 	<string name="poi_service_bicycle_second_hand_no">Nincs használtkerékpár-kereskedés</string>
 	<string name="poi_service_bicycle_charging_yes">Kerékpártöltés</string>
 	<string name="poi_service_bicycle_charging_no">Nincs kerékpártöltés</string>
-	<string name="poi_bicycle_repair_station">Egyéni kerékpárszerelő állomás</string>
+	<string name="poi_bicycle_repair_station">Önálló kerékpárszerelő állomás</string>
 
 	<string name="poi_wildlife_hide">Vadállat-megfigyelő hely</string>
 
@@ -2800,9 +2800,9 @@
 	<string name="poi_street_cabinet_cable_tv">Közműszekrény típusa: kábeltelevízió</string>
 	<string name="poi_street_cabinet_gas">Közműszekrény típusa: gáz</string>
 	<string name="poi_street_cabinet_postal_service">Közműszekrény típusa: postai szolgáltatás</string>
-	<string name="poi_street_cabinet_waste">Doboz típusa: szemét</string>
-	<string name="poi_street_cabinet_water_management">Doboz típusa: vízgazdálkodás</string>
-	<string name="poi_street_cabinet_street_lighting">Doboz típusa: közvilágítás</string>
+	<string name="poi_street_cabinet_waste">Közműszekrény típusa: hulladék</string>
+	<string name="poi_street_cabinet_water_management">Közműszekrény típusa: vízgazdálkodás</string>
+	<string name="poi_street_cabinet_street_lighting">Közműszekrény típusa: közvilágítás</string>
 
 	<string name="poi_military_checkpoint">Katonai ellenőrzőpont</string>
 
@@ -2870,11 +2870,11 @@
 	<string name="poi_xmas_pyramid">Karácsonyi piramis</string>
 	<string name="poi_xmas_shop">Karácsonyi bolt</string>
 	<string name="poi_xmas_tree">Karácsonyfa</string>
-	<string name="poi_xmas_day_date">Karácsony: az esemény időszaka</string>
+	<string name="poi_xmas_day_date">Karácsonyi rendezvény időszaka</string>
 	<string name="poi_xmas_note">Karácsony: megjegyzés</string>
-	<string name="poi_xmas_opening_hours">Karácsony: nyitvatartás</string>
-	<string name="poi_xmas_location">Karácsony: helyszín</string>
-	<string name="poi_xmas_url">Karácsony: weboldal</string>
+	<string name="poi_xmas_opening_hours">Karácsonyi nyitva tartás</string>
+	<string name="poi_xmas_location">Karácsonyi helyszín</string>
+	<string name="poi_xmas_url">Karácsonyi weboldal</string>
 
 	<string name="poi_public_bookcase">Nyilvános könyvespolc</string>
 	<string name="poi_public_bookcase_type_phone_box">Típus: telefonfülke</string>
@@ -3069,5 +3069,17 @@
 	<string name="poi_diplomatic_high_commission">Nagykövetség (a Brit Nemzetközösség tagországáé)</string>
 
 	<string name="poi_street_cabinet">Utcai közműszekrény</string>
+
+	<string name="poi_public_bookcase_type_wooden_cabinet">Típus: faszekrény</string>
+	<string name="poi_public_bookcase_type_metal_cabinet">Típus: fémszekrény</string>
+	<string name="poi_public_bookcase_type_reading_box">Típus: olvasódoboz</string>
+	<string name="poi_xmas_shop_christmas_tree">Karácsonyfabolt</string>
+	<string name="poi_bicycle_parking_lockers">Zárható szekrény</string>
+	<string name="poi_emergency_infrastructure">Vészhelyzeti infrastruktúra</string>
+	<string name="poi_wiki_lang_bpy"/>
+	<string name="poi_power_supply_cee_17_blue">Elektromos csatlakozó (konnektor): CEE 17 kék</string>
+	<string name="poi_power_supply_cee_7_4">Elektromos csatlakozó (konnektor): CEE 7/4</string>
+	<string name="poi_power_supply_cee_7_5">Elektromos csatlakozó (konnektor): CEE 7/5</string>
+	<string name="poi_power_supply_nema_5_15">Elektromos csatlakozó (konnektor): NEMA 5-15</string>
 
 	</resources>
