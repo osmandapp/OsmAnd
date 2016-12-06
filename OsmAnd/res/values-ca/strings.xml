@@ -1932,7 +1932,7 @@ En activar aquests canvis de visualització l\'estil del mapa canvia a «Hivern 
     <string name="failed_to_upload">S\'ha produït un error en la pujada</string>
     <string name="delete_change">Suprimeix les modificacions</string>
     <string name="successfully_uploaded_pattern">S\'ha pujat amb èxit {0}/{1}</string>
-    <string name="try_again">Torna a provar-ho</string>
+    <string name="try_again">Torneu-ho a provar</string>
     <string name="error_message_pattern">Error: {0}</string>
     <string name="no_updates_available">No hi ha actualitzacions disponibles</string>
     <string name="we_really_care_about_your_opinion">Valorem molt la vostra opinió i ens és important disposar dels vostres comentaris.</string>
@@ -2369,7 +2369,7 @@ Si aprecieu OsmAnd  i OSM i voleu ajudar-los, és la via perfecta per fer-ho."</
     <string name="lang_en_gb">Anglès (Regne Unit)</string>
     <string name="lang_kn">Kanarès</string>
     <string name="lang_ast">Asturià</string>
-    <string name="app_mode_bus">Bus</string>
+    <string name="app_mode_bus">Autobús</string>
  	<string name="app_mode_train">Tren</string>
     <string name="coords_format">Format de coordenades</string>
     <string name="coords_format_descr">Format de les coordenades geogràfiques</string>
@@ -2426,7 +2426,7 @@ Si aprecieu OsmAnd  i OSM i voleu ajudar-los, és la via perfecta per fer-ho."</
     <string name="first_usage_wizard_desc">"Permeteu a OsmAnd determinar la vostra localització i suggerir-vos els  mapes a baixar d\'aquesta zona."</string>
     <string name="location_not_found">No s\'ha determinat la localització</string>
     <string name="no_inet_connection">Sense connexió a Internet</string>
-    <string name="no_inet_connection_desc_map">"És  necessari per baixar mapes."</string>
+    <string name="no_inet_connection_desc_map">És necessari per baixar mapes.</string>
     <string name="search_location">Cercant localització…</string>
     <string name="storage_free_space">Espai lliure</string>
     <string name="storage_place_description">"Magatzem de dades d\'OsmAnd (per mapes, traces,  etc.): %1$s."</string>
@@ -2438,7 +2438,7 @@ Si aprecieu OsmAnd  i OSM i voleu ajudar-los, és la via perfecta per fer-ho."</
     <string name="skip_map_downloading">Omet els mapes en procés de baixada</string>
     <string name="skip_map_downloading_desc">"No disposeu de cap mapa instal·lat localment. Podeu triar un mapa de la llista o baixar-ne més tard,  via Menú -  %1$s."</string>
     <string name="search_another_country">Selecciona un altre país</string>
-    <string name="first_usage_greeting">Obteniu indicacions i descobriu nous llocs sense connexió a Internet</string>
+    <string name="first_usage_greeting">Obteniu indicacions i descobriu llocs nous sense connexió a Internet</string>
     <string name="si_mi_meters">Milles/metres</string>
     <string name="get_for">Obteniu-lo per %1$s</string>
     <string name="get_for_month">Obteniu-lo per %1$s mesos</string>
