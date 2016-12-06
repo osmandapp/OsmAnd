@@ -65,8 +65,8 @@ public class OsmandRenderer {
 
 
 	public static final int TILE_SIZE = 256; 
-	private static final int MAX_V = 75;
-	private static final int MAX_V_AREA = 185;
+	private static final int MAX_V = 10;
+	private static final int MAX_V_AREA = 2000;
 
 	private Map<float[], PathEffect> dashEffect = new LinkedHashMap<float[], PathEffect>();
 	private Map<String, float[]> parsedDashEffects = new LinkedHashMap<String, float[]>();
@@ -228,16 +228,16 @@ public class OsmandRenderer {
 				rc.allObjects++;
 				BinaryMapDataObject mObj = array.get(i).obj;
 				TagValuePair pair = mObj.getMapIndex().decodeType(mObj.getTypes()[array.get(i).typeInd]);
-				if (objOrder == 0) {
+				if (array.get(i).objectType == 3) {
 					if (array.get(i).order > minPolygonSize + ((int) array.get(i).order)) {
 						continue;
 					}
 					// polygon
 					
 					drawPolygon(mObj, req, cv, rc, pair, array.get(i).area);
-				} else if (objOrder == 1 || objOrder == 2) {
+				} else if (array.get(i).objectType == 2) {
 					drawPolyline(mObj, req, cv, rc, pair, mObj.getSimpleLayer(), objOrder == 1);
-				} else if (objOrder == 3) {
+				} else if (array.get(i).objectType == 1) {
 					drawPoint(mObj, req, cv, rc, pair, array.get(i).typeInd == 0);
 				}
 				if (i % 25 == 0 && rc.interrupted) {
@@ -486,7 +486,12 @@ public class OsmandRenderer {
 								mapObj.area = area;
 								if(area > MAX_V) { 
 									mapObj.order = mapObj.order + (1. / area);
-									polygonsArray.add(mapObj);
+									if(order < DEFAULT_POLYGON_MAX) {
+										polygonsArray.add(mapObj);	
+									} else {
+										linesArray.add(mapObj);
+									}
+									
 									if(area > MAX_V_AREA || ignorePointArea) {
 										pointsArray.add(pointObj);
 									}
