@@ -199,6 +199,8 @@ public class RenderingRuleSearchRequest {
 						} else if(isSpecified(storage.PROPS.R_ATTR_INT_VALUE)){
 							values[rp.getId()] = getIntPropertyValue(storage.PROPS.R_ATTR_INT_VALUE);
 							fvalues[rp.getId()] = getFloatPropertyValue(storage.PROPS.R_ATTR_INT_VALUE);
+						} else if(isSpecified(storage.PROPS.R_ATTR_BOOL_VALUE)){
+							values[rp.getId()] = getIntPropertyValue(storage.PROPS.R_ATTR_BOOL_VALUE);
 						}
 					} else if (rp.isFloat()) {
 						fvalues[rp.getId()] = rule.getFloatProp(i);
@@ -276,6 +278,11 @@ public class RenderingRuleSearchRequest {
 	
 	public int getIntPropertyValue(RenderingRuleProperty property) {
 		return values[property.getId()];
+	}
+	
+	public boolean getBoolPropertyValue(RenderingRuleProperty property) {
+		int val = values[property.getId()];
+		return val != -1 && val != 0;
 	}
 	
 	public int getIntPropertyValue(RenderingRuleProperty property, int defValue) {
