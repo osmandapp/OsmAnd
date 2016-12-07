@@ -305,8 +305,8 @@ public class RenderingRuleStorageProperties {
 		R_SHADOW_RADIUS = registerRuleInternal(RenderingRuleProperty.createOutputFloatProperty(SHADOW_RADIUS));
 
 		R_ONEWAY_ARROWS_COLOR = registerRuleInternal(RenderingRuleProperty.createOutputColorProperty(ONEWAY_ARROWS_COLOR));
-		R_ADD_POINT = registerRuleInternal(RenderingRuleProperty.createOutputIntProperty(ADD_POINT));
-		R_IGNORE_POLYGON_AS_POINT_AREA = registerRuleInternal(RenderingRuleProperty.createOutputIntProperty(IGNORE_POLYGON_AS_POINT_AREA));
+		R_ADD_POINT = registerRuleInternal(RenderingRuleProperty.createOutputBooleanProperty(ADD_POINT));
+		R_IGNORE_POLYGON_AS_POINT_AREA = registerRuleInternal(RenderingRuleProperty.createOutputBooleanProperty(IGNORE_POLYGON_AS_POINT_AREA));
 	}
 
 	public RenderingRuleProperty get(String name) {
