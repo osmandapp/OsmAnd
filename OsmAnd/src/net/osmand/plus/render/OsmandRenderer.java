@@ -809,6 +809,7 @@ public class OsmandRenderer {
 			return;
 		}
 		render.setInitialTagValueZoom(pair.tag, pair.value, rc.zoom, obj);
+		render.setIntFilter(render.ALL.R_TEXT_LENGTH, obj.getName().length());
 		render.search(RenderingRulesStorage.POINT_RULES);
 		
 		String resId = render.getStringPropertyValue(render.ALL.R_ICON);

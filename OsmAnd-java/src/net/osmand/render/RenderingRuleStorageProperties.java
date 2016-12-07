@@ -21,6 +21,7 @@ public class RenderingRuleStorageProperties {
 	public static final String DISABLE = "disable";
 	
 	
+	
 	public static final String INTERSECTION_MARGIN = "intersectionMargin";
 	public static final String INTERSECTION_SIZE_FACTOR = "intersectionSizeFactor";
 	public static final String TEXT_ITALIC = "textItalic";
@@ -92,6 +93,7 @@ public class RenderingRuleStorageProperties {
 	public static final String TEXT_HALO_COLOR = "textHaloColor";
 	public static final String TEXT_WRAP_WIDTH = "textWrapWidth";
 	public static final String SHADOW_LEVEL = "shadowLevel";
+	public static final String ADD_POINT = "addPoint";
 
 	
 	public RenderingRuleProperty R_TEST;
@@ -178,6 +180,7 @@ public class RenderingRuleStorageProperties {
 	public RenderingRuleProperty R_TEXT_HALO_RADIUS;
 	public RenderingRuleProperty R_TEXT_HALO_COLOR;
 	public RenderingRuleProperty R_TEXT_WRAP_WIDTH;
+	public RenderingRuleProperty R_ADD_POINT;
 
 	final Map<String, RenderingRuleProperty> properties;
 	// C++
@@ -302,7 +305,8 @@ public class RenderingRuleStorageProperties {
 		R_SHADOW_RADIUS = registerRuleInternal(RenderingRuleProperty.createOutputFloatProperty(SHADOW_RADIUS));
 
 		R_ONEWAY_ARROWS_COLOR = registerRuleInternal(RenderingRuleProperty.createOutputColorProperty(ONEWAY_ARROWS_COLOR));
-		R_IGNORE_POLYGON_AS_POINT_AREA = registerRuleInternal(RenderingRuleProperty.createOutputBooleanProperty(IGNORE_POLYGON_AS_POINT_AREA));
+		R_ADD_POINT = registerRuleInternal(RenderingRuleProperty.createOutputIntProperty(ADD_POINT));
+		R_IGNORE_POLYGON_AS_POINT_AREA = registerRuleInternal(RenderingRuleProperty.createOutputIntProperty(IGNORE_POLYGON_AS_POINT_AREA));
 	}
 
 	public RenderingRuleProperty get(String name) {
