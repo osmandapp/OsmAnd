@@ -810,4 +810,19 @@
 	<string name="poi_casino">كازينو</string>
 	<string name="poi_social_centre">مركز اجتماعي</string>
 	<string name="poi_theatre_genre_circus">السيرك</string>
+	<string name="poi_gallery">معرض الفنون</string>
+	<string name="poi_dance_floor">قاعة الرقص</string>
+	<string name="poi_nightclub">نادي ليلي</string>
+	<string name="poi_stripclub">نادي تعري</string>
+	<string name="poi_ski_resort">منتجع تزلج</string>
+	<string name="poi_beach_resort">منتجع شاطئ</string>
+	<string name="poi_dog_park">حديقة للكلاب</string>
+	<string name="poi_leisure_fishing">مكان للصيد</string>
+	<string name="poi_harbour">ميناء</string>
+	<string name="poi_miniature_golf">ملعب غولف مصغر</string>
+	<string name="poi_bench">مقعد</string>
+	<string name="poi_water_park">حديقة مائية</string>
+	<string name="poi_park">منتزه</string>
+	<string name="poi_recreation_ground">أرض للترفيه</string>
+	<string name="poi_fast_food">أكل خفيف</string>
 	</resources>
