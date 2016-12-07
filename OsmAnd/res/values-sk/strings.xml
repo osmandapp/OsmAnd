@@ -1912,7 +1912,7 @@ Dĺžka %2$s</string>
     <string name="failed_to_upload">Nepodarilo sa odoslať</string>
     <string name="delete_change">Odstrániť zmenu</string>
     <string name="successfully_uploaded_pattern">Úspešne odoslané {0}/{1}</string>
-    <string name="try_again">Skúste znova</string>
+    <string name="try_again">Skúsiť znovu</string>
     <string name="error_message_pattern">Chyba: {0}</string>
     <string name="traffic_warning_hazard">Nebezpečenstvo</string>
     <string name="rendering_value_boldOutline_name">Hrubý obrys</string>
@@ -2173,7 +2173,7 @@ Dĺžka %2$s</string>
     <string name="clear_updates_proposition_message">Môžete odstrániť stiahnuté aktualizácie a vrátiť sa späť k pôvodnej verzii mapy</string>
     <string name="add_time_span">Pridať časový rozsah</string>
     <string name="road_blocked">Cesta zablokovaná</string>
-    <string name="shared_string_select">Vybrať</string>
+    <string name="shared_string_select">Zvoliť</string>
     <string name="switch_start_finish">Vymeniť východzí a cieľový bod</string>
     <string name="rendering_attr_hideIcons_name">Ikony bodov záujmu (POI)</string>
     <string name="number_of_contributors">Počet prispievateľov</string>
@@ -2405,12 +2405,12 @@ Ak potrebuje pomoc s aplikáciou OsmAnd, kontaktuje podporu: support@osmand.net.
     <string name="replace_favorite_confirmation">Naozaj chcete nahradiť obľúbený bod %1$s?</string>
     <string name="skip_map_downloading">Preskočiť sťahovanie máp</string>
     <string name="skip_map_downloading_desc">Nemáte nainštalovanú žiadnu offline mapu. Môžete vybrať mapu zo zoznamu alebo stiahnuť mapy neskôr cez Menu - %1$s.</string>
-    <string name="search_another_country">Vybrať iný región</string>
+    <string name="search_another_country">Zvoľte inú oblasť</string>
     <string name="search_map">Hľadá sa mapa…</string>
-    <string name="first_usage_wizard_desc">Povoliť aby OsmAnd mohol určiť Vašu polohu a navrhnúť mapy, ktoré sa dajú stiahnuť pre daný región.</string>
+    <string name="first_usage_wizard_desc">Nechajte OsmAnd určiť Vašu polohu a navrhnúť mapy, ktoré sa dajú stiahnuť pre daný región.</string>
     <string name="location_not_found">Poloha sa nenašla</string>
     <string name="no_inet_connection">Nie je pripojenie na Internet</string>
-    <string name="no_inet_connection_desc_map">Potrebné pre stiahnutie máp.</string>
+    <string name="no_inet_connection_desc_map">Potrebné na stiahnutie máp.</string>
     <string name="search_location">Hľadá sa poloha…</string>
     <string name="storage_free_space">Voľné miesto</string>
     <string name="storage_place_description">Úložisko údajov pre OsmAnd (mapy, stopy, atď.): %1$s.</string>
