@@ -785,4 +785,29 @@
 	<string name="poi_bay">خليج</string>
 	<string name="poi_fjord">مضيق</string>
 	<string name="poi_reef">شعاب مرجانية</string>
+	<string name="poi_club_cinema">نادي السينما</string>
+	<string name="poi_club_fan">نادي المعجبين</string>
+	<string name="poi_club_fishing">نادي الصيد</string>
+	<string name="poi_club_linux">نادي لينكس</string>
+	<string name="poi_club_history">نادي التاريخ</string>
+	<string name="poi_club_music">نادي الموسيقى</string>
+	<string name="poi_club_ethnic">نادي العرقية</string>
+	<string name="poi_club_nature">نادي الطبيعة</string>
+	<string name="poi_club_photography">نادي التصوير الفوتوغرافي</string>
+	<string name="poi_club_shooting">نادي الرماية</string>
+	<string name="poi_club_tourism">نادي السياحة</string>
+	<string name="poi_club_charity">نادي جمعية خيرية</string>
+	<string name="poi_club_freemasonry">محفل ماسوني</string>
+	<string name="poi_club_sailing">نادي الإبحار</string>
+	<string name="poi_club_scout">نادي الكشافة</string>
+
+	<string name="poi_piste_snow_park">حديقة ثلجية</string>
+	<string name="poi_piste_ice_skate">تزلج على الجليد</string>
+	<string name="poi_ski_rental">استئجار لوازم التزلج</string>
+
+	<string name="poi_arts_centre">مركز الفنون</string>
+	<string name="poi_cinema">سينما</string>
+	<string name="poi_casino">كازينو</string>
+	<string name="poi_social_centre">مركز اجتماعي</string>
+	<string name="poi_theatre_genre_circus">السيرك</string>
 	</resources>
