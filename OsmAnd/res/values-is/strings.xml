@@ -1281,4 +1281,32 @@ Sólsetur: %2$s</string>
     <string name="offline_maps_and_navigation">Ónettengd kort
 og leiðsögn</string>
     <string name="search_on_the_map_item">Leit á korti</string>
+    <string name="skip_map_downloading_desc">Þú ert ekki með uppsett nein ónettengd kort. Þú gætir valið kort úr listanum eða hlaðið inn kortum síðar með valmyndinni - %1$s.</string>
+    <string name="search_another_country">Velja annað svæði</string>
+    <string name="search_map">Leita að korti…</string>
+    <string name="first_usage_wizard_desc">Leyfðu OsmAnd að finna út staðsetninguna þína og stinga upp á kortum fyrir það svæði til að sækja.</string>
+    <string name="allow_access_location">Leyfa aðgang að staðsetningunni þinni</string>
+    <string name="search_my_location">Leita á staðsetningunni minni</string>
+    <string name="update_all_maps_now">Viltu uppfæra öll kort núna?</string>
+    <string name="clear_tile_data">Hreinsa alla tígla</string>
+    <string name="coords_search">Leit eftir hnitum</string>
+    <string name="advanced_coords_search">Ítarleg leit eftir hnitum</string>
+    <string name="dist_away_from_my_location">Leita %1$s frá</string>
+    <string name="route_is_too_long">Leiðarútreikningur OsmAnd án nettengingar getur tekið langan tíma (eða jafnvel ekki gengið upp) fyrir punkta sem eru meira en 200 km frá hver öðrum. Þú gætir viljað bæta inn á milli nokkrum áföngum svo vinnslan verði auðveldari.</string>
+    <string name="clear_intermediate_points">Hreinsa út áfanga</string>
+    <string name="keep_intermediate_points">Halda áföngum</string>
+    <string name="new_directions_point_dialog">Þú ert nú þegar með áfanga stillta.</string>
+    <string name="intermediate_items_sort_return">Það varð að endurraða áföngum til að besta röð þeirra á leiðinni frá núverandi staðsetningu að áfangastaðnum.</string>
+    <string name="clear_dest_confirm">Ertu viss um að þú viljir eyða áfangastaðnum (og áföngum)?</string>
+    <string name="intermediate_point">Áfangi %1$s</string>
+    <string name="context_menu_item_last_intermediate_point">Bæta við sem síðasta áfanga</string>
+    <string name="context_menu_item_first_intermediate_point">Bæta við sem fyrsta áfanga</string>
+    <string name="add_as_last_destination_point">Bæta við sem síðasta áfanga</string>
+    <string name="add_as_first_destination_point">Bæta við sem fyrsta áfanga</string>
+
+    <string name="intermediate_point_too_far">Áfanginn %1$s er of langt frá næsta akvegi.</string>
+    <string name="arrived_at_intermediate_point">Þú hefur náð á áfanga</string>
+    <string name="context_menu_item_intermediate_point">Bæta við sem áfanga</string>
+    <string name="map_widget_intermediate_distance">Áfangi</string>
+    <string name="ending_point_too_far">Endapunktur of langt frá næsta akvegi.</string>
     </resources>
