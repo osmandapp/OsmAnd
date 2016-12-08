@@ -152,7 +152,9 @@
 	<string name="osmand_parking_pm">بعدازظهر</string>
 	<string name="osmand_parking_am">قبل ازظهر</string>
 	<string name="osmand_parking_position_name">نقطه پارک</string>
-	<string name="osmand_parking_plugin_description">"افزونه موقعیت پارک به شما اجازه میدهد در زمان پارک کردن اتومبیل‌تان محل و زمان سپری شده (اگر پارکینگ محدودیت زمانی دارد) را  به خاطر بسپارید.\nهم مکان و هم زمان بر روی داشبورد OsmAnd و ویجت افزونه روی صفحه نقشه قابل رویت هستند. به تقویم آندروئید نیز میتوان یادآور اضافه کرد."</string>
+	<string name="osmand_parking_plugin_description">با افزونه «جای پارک» محل پارک کردن خورویتان و زمان باقی‌مانده (اگر پارکینگ محدودیت زمانی دارد) را به خاطر بسپارید.
+
+هم مکان و هم زمان بر روی داشبورد OsmAnd و ویجت افزونه روی صفحه نقشه قابل رؤیت هستند. همچنین میتوان هشداری را به عنوان یادآور به تقویم اندروید اضافه کرد.</string>
 	<string name="osmand_parking_plugin_name">افزونه موقعیت پارکینگ</string>
 	<string name="context_menu_item_add_parking_point">علامتگذاری به عنوان محل پارک</string>
 	<string name="context_menu_item_delete_parking_point">حذف نشانگر محل پارک</string>
@@ -763,7 +765,9 @@
 	<string name="osmand_service_descr">OsmAnd حتی در زمانی که صفحه خاموش است در حال اجرا می‌ماند</string>
 	
 	<string name="download_files_not_enough_space">فضای کافی برای دانلود %1$s مگابایت وجود ندارد (فضای خالی: %2$s).</string>
-	<string name="download_files_question_space">اکنون فضای خالی {2} مگابایت است. {0} فایل دانلود شود ({1} MB) ؟</string>
+	<string name="download_files_question_space">آیا {0} فایل را دانلود میکنید؟
+حافظه استفاده شده {1} مگابایت است.
+(حافظه قابل استفاده {2} مگابایت است.)</string>
 	
 	<string name="use_transparent_map_theme">تم شفاف</string>
 	<string name="native_library_not_supported">کتابخانه بومی بر روی این دستگاه پشتیبانی نمیشود.</string>
@@ -1872,7 +1876,7 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
 	<string name="local_index_description">بر روی هر مورد کلیک کنید تا توضیحات بیشتری ببینید، بزنید و نگه دارید تا غیرفعال یا پاک کنید. داده فعلی بر روی دستگاه (%1$s آزاد):</string>
 	<string name="speed_limit_exceed_message">محدوده حداکثر سرعت را انتخاب کنید، در سرعت بالاتر از این مقدار هشدار صوتی خواهید شنید.</string>
 	<string name="fav_point_emoticons_message">نام نقطه مورد علاقه به %1$s تغییر یافت تا ذخیره‌سازی آن به همراه شکلکها در فایل تسهیل شود.</string>
-    <string name="rendering_attr_hideHouseNumbers_name">عدم نمایش پلاک خانه</string>
+    <string name="rendering_attr_hideHouseNumbers_name">پلاک خانه</string>
     <string name="application_dir_change_warning3">آیا مایلید OsmAnd فایلهای داده‌اش را نیز به مکان جدید کپی کند؟</string>
     <string name="specified_directiory_not_writeable">نمیتوان نقشه‌ها را در پوشه مورد نظر ایجاد کرد</string>
 	<string name="copying_osmand_file_failed">کپی کردن فایلها انجام نشد</string>    
@@ -1903,7 +1907,7 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
     <string name="osm_changes_added_to_local_edits">تغییرات OSM به جعبه تغییر محلی اضافه شد</string>
    	<string name="mark_to_delete">برای حذف انتخاب کنید</string>
 	<string name="osmo_grop_name_length_alert">نام گروه حداقل باید ۳ حرف باشد!</string>
-	<string name="local_osm_changes_upload_all_confirm">شما میخواهید تعداد %1$d تغییر را آ\\لود کنید. مطمئنید؟</string>
+	<string name="local_osm_changes_upload_all_confirm">شما میخواهید تعداد %1$d تغییر را به OSM ارسال کنید. مطمئنید؟</string>
     <string name="confirmation_to_clear_history">آیا سوابق را پاک می‌کنید؟</string>
     <string name="delay_to_start_navigation_descr">زمانی که در صفحه برنامه ریزی مسیر باقی بماند را معین کنید</string>
     <string name="delay_to_start_navigation">مسیریابی مرحله به مرحله را بعد از … شروع کن</string>
@@ -1920,7 +1924,8 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
     <string name="waypoint_visit_after"/>
     <string name="waypoint_visit_before"/>
     <string name="simulate_your_location">شبیه‌سازی موقعیت شما</string>
-    <string name="short_location_on_map">طول جغرافیایی %1$s\n…عرض جغرافیایی %2$s</string>
+    <string name="short_location_on_map">"طول %1$s
+عرض  %2$s"</string>
     <string name="tips_and_tricks_descr">سوالهای بیشتر پرسیده شده، تغییرات اخیر و سایر موارد</string>
     <string name="shared_string_ellipsis">…</string>
 	<string name="shared_string_selected">انتخاب شده</string>
@@ -1936,8 +1941,8 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
 	<string name="free">"آزاد %1$s… "</string>
 	<string name="rendering_value__name">پیشفرض</string>
     <string name="rendering_value_highContrastRoads_name">جاده‌های کنتراست بالا</string>
-	<string name="osmo_no_connection_msg">سرویس OsMo موجود نیست:
-- ارتباط را بررسی کنید؛
+	<string name="osmo_no_connection_msg">نمیتوان به سرور OsMo متصل شد:
+- اتصال اینترنتی خود را بررسی کنید؛
 - تنظیمات را بررسی کنید؛
 - توییتر ما را بررسی کنید: https://twitter.com/OsMomobi</string>
     <string name="anonymous_user_hint">کاربر ناشناس قادر به:\n- ایجاد گروه نیست؛\n- همزمان سازی گروهها و دستگاهها با سرور نمیباشد؛\n- مدیریت گروهها و دستگاهها در دفتر خصوصی نمیباشد.</string>
@@ -1978,7 +1983,7 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
     <string name="lang_ta">تامیلی</string>
     <string name="lang_lb">لوکزامبورگی</string>
     <string name="lang_eo">اسپرانتو</string>
-    <string name="lang_es_ar">اسپانیایی آرژانتینی</string>
+    <string name="lang_es_ar">اسپانیایی (آرژانتین)</string>
     <string name="lang_th">تایلندی</string>
     <string name="lang_nn">نروژی</string>
     <string name="lang_ms">مالزیایی</string>
@@ -2003,7 +2008,7 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
     <string name="av_video_quality_descr">انتخاب کیفیت ویدئوی خروجی</string>
     <string name="av_audio_format">قالب صدای خروجی</string>
     <string name="av_audio_format_descr">انتخاب فرمت صدای خروجی</string>
-    <string name="please_specify_poi_type_only_from_list">"لطفاً نوغ POI را انتخاب کنید یا اینکه از این مرحله عبور کنید. "</string>
+    <string name="please_specify_poi_type_only_from_list">لطفاً نوع درست POI را انتخاب کنید یا از این مرحله رد شوید</string>
     <string name="access_from_map_description">کلید منو به عوض نشان دادن منو داشبورد را نشان میدهد</string>
     <string name="access_from_map">دسترسی از نقشه</string>
     <string name="versions_item">نسخه‌ها</string>
@@ -2035,7 +2040,8 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
     <string name="access_sort">مرتب سازی</string>
     <string name="number_of_gpx_files_selected_pattern">انتخاب فایل GPX %s</string>
     <string name="osm_live_email_desc">ما به اطلاعات شما برای ارائه خدمات نیازمندیم</string>
-    <string name="download_files_question_space_with_temp">اکنون فضای خالی {2} MB است. شما نیازمند {3} MB فضای خالی و {1} MB فضای اضافی هستید.</string>
+    <string name="download_files_question_space_with_temp">آیا {0} فایل را دانلود میکنید؟
+اکنون فضای خالی {2} MB است. شما نیازمند {3} MB فضای خالی و {1} MB فضای اضافی هستید.</string>
     <string name="shared_string_type">نوع</string>
     <string name="rec_split">ضبط چند تایی</string>
     <string name="shared_string_commit">انجام شده</string>
@@ -2048,14 +2054,14 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
     <string name="rendering_attr_alpineHiking_name">مقیاس پیاده روی آلپاین (SAC)</string>
     <string name="opening_at">بازکردن در</string>
     <string name="closing_at">بستن در</string>
-    <string name="osm_live_payment_desc">هزینه اشتراک ماهانه میباشد. شما هر زمان که بخواهید میتوانید اشتراک گوگل پلی را لغو کنید.</string>
+    <string name="osm_live_payment_desc">هزینه اشتراک ماهانه میباشد. هر زمان که بخواهید میتوانید اشتراک خود را در گوگل پلی لغو کنید.</string>
     <string name="donation_to_osm">کمک مالی به OpenStreetMap</string>
-    <string name="donation_to_osm_desc">بخشی از کمکهای مالی به مشترکین OpenStreetMapp که به تغییرات کمک میکنند ارسال میشود.هزینه اشتراک یکسان باقی میماند.</string>
-    <string name="osm_live_subscription_desc">این اشتراک ساعتی، روزانه یا هفتگی میباشد و به شما اجازه دانلود نامحدود همه نقشه ها در سراسر دنیا را میدهد.</string>
+    <string name="donation_to_osm_desc">بخشی از کمکهای مالی شما به مشترکین OpenStreetMapp که به تغییرات کمک میکنند ارسال میشود. هزینه اشتراک ثابت میماند.</string>
+    <string name="osm_live_subscription_desc">با خرید این اشتراک، بروزرسانیهای ساعتی، روزانه و هفتگی و همچنین دانلود نامحدود همه نقشه ها در سراسر دنیا فعال میشود.</string>
     <string name="get_it">انجام بده</string>
     <string name="get_for">پرداخت برای %1$s</string>
     <string name="get_for_month">پرداخت ماهانه %1$s</string>
-    <string name="osm_live_banner_desc">دانلود نامحدود نقشه ها و آپدیت بیش از یک بار در ماه : ساعتی ، روزانه یا هفتگی.</string>
+    <string name="osm_live_banner_desc">دانلود نامحدود نقشه ها و بروزرسانی آنها بیش از یک بار در ماه: هفتگی، روزانه یا ساعتی.</string>
     <string name="osmand_plus_banner_desc">"ورژن نهایی OSMAnd  به همراه دانلود نامحدود نقشه ها و آپدیت ماهانه نقشه ها."</string>
     <string name="si_mi_meters">مایل/متر</string>
     <string name="skip_map_downloading">صرفه نظر از دانلود نقشه ها</string>
@@ -2064,16 +2070,16 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
     <string name="search_map">جستجوی نقشه…</string>
     <string name="first_usage_wizard_desc">اجازه دهید برنامه موقعیت شما را پیدا کند و نقشه آنجا را دانلود کند.</string>
     <string name="location_not_found">موقعیت پیدا نشد</string>
-    <string name="no_inet_connection">عدم دسترسی به اینترنت</string>
+    <string name="no_inet_connection">اتصال اینترنت برقرار نیست</string>
     <string name="no_inet_connection_desc_map">نیاز به دانلود نقشه ها.</string>
     <string name="search_location">جستجوی موقعیت…</string>
     <string name="storage_free_space">فضای خالی</string>
     <string name="storage_place_description">محل ذخیره دیتا ( برای نقشه ها ، ترکها و... ): %1$s.</string>
     <string name="give_permission">اجازه دسترسی</string>
     <string name="allow_access_location">اجازه دسترسی به موقعیت</string>
-    <string name="first_usage_greeting">دریافت مسیر و کشف مکان های جدید بدون اتصال به اینترنت</string>
+    <string name="first_usage_greeting">مسیریابی و کشف مکان های جدید بدون اتصال به اینترنت</string>
     <string name="search_my_location">جستجوی موقعیت من</string>
-    <string name="no_update_info_desc">نیازی به پیدا کردن آپدیت جدید نیست، تخفیف ویژه OSMAnd</string>
+    <string name="no_update_info_desc">نیازی به پیدا کردن آپدیت جدید نیست، تخفیف ویژه OsmAnd</string>
     <string name="no_update_info">آپدیت نشان داده نشود</string>
     <string name="update_all_maps_now">آیا میخواهید همه نقشه ها را آپدیت کنید ؟</string>
     <string name="clear_tile_data">پاک کردن همه قسمتها</string>
@@ -2087,7 +2093,7 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
     <string name="coords_search">جستجوی مختصات</string>
     <string name="advanced_coords_search">جستجوی پیشرفته مختصات</string>
     <string name="back_to_search">برگشت به جستجو</string>
-    <string name="confirmation_to_delete_history_items">آیا میخواهید آیتم انتخاب شده را حذف کنید ؟</string>
+    <string name="confirmation_to_delete_history_items">آیا میخواهید موارد انتخاب شده را از تاریخچه حذف کنید؟</string>
     <string name="show_something_on_map">نشان دادن %1$s در نقشه</string>
     <string name="dist_away_from_my_location">جستجوی %1$s دور</string>
     <string name="share_history_subject">" اشتراک با OSMAnd"</string>
@@ -2141,7 +2147,7 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
     <string name="no_map_markers_found">لطفا در نقشه علامت بزنید</string>
     <string name="no_waypoints_found">هیچ نقطه ای پیدا نشد</string>
     <string name="report">گزارش</string>
-    <string name="storage_permission_restart_is_required">برنامه اجازه ذخیره سازی در کارت حافظه را دارد. برنامه را به صورت دستی ریستارت کنید.</string>
+    <string name="storage_permission_restart_is_required">اکنون برنامه اجازه ذخیره سازی در کارت حافظه را دارد. برنامه را ببندید و دوباره اجرا کنید.</string>
     <string name="shared_string_move_up">برو بالا</string>
     <string name="shared_string_move_down">برو پایین</string>
     <string name="finish_navigation">پایان مسیریابی</string>
@@ -2168,6 +2174,6 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
     <string name="osm_live_enter_email">لطفا آدرس ایمیل درست وارد کنید</string>
     <string name="osm_live_enter_user_name">اسم جهانی را وارد کنید</string>
     <string name="osm_live_thanks">تشکر از شما برای به اشتراک به روز رسانی آنلاین!</string>
-    <string name="osm_live_region_desc">بخشی از کمکهای مالی به کاربرانی که در مناطق اصلاحات انجام میدهند پرداخت میشود</string>
+    <string name="osm_live_region_desc">بخشی از کمکهای مالی شما پرداخت میشود به کاربرانی که در آن منطقه اصلاحات نقشه را انجام میدهند.</string>
     <string name="osm_live_subscription_settings">تنظیمات اشتراک</string>
     </resources>
