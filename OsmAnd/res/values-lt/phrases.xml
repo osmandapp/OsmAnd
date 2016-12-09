@@ -306,4 +306,62 @@
 	<string name="poi_recycling_cds">Kompaktinės plokštelės</string>
 	<string name="poi_recycling_bottles">Buteliai</string>
 	<string name="poi_recycling_paint">Dažai</string>
+	<string name="poi_recycling_drugs">Vaistai</string>
+	<string name="poi_recycling_compost">Kompostas</string>
+	<string name="poi_recycling_polyester">Poliesteris</string>
+	<string name="poi_recycling_fridge_and_freezer">Šaldytuvai ir šaldikliai</string>
+	<string name="poi_recycling_furniture">Baldai</string>
+	<string name="poi_recycling_diapers">Sauskelnės</string>
+	<string name="poi_recycling_car_batteries">Akumuliatoriai</string>
+	<string name="poi_recycling_cars">Automobiliai</string>
+	<string name="poi_recycling_bicycles">Dviračiai</string>
+
+	<string name="poi_landfill_waste_nuclear">Branduolinės atliekos</string>
+	<string name="poi_waste_basket">Šiukšlių dėžė</string>
+
+	<string name="poi_residential">Gyvenamasis rajonas</string>
+	<string name="poi_quarry">Karjeras</string>
+	<string name="poi_orchard">Sodas</string>
+	<string name="poi_allotments">Sodai</string>
+	<string name="poi_meadow">Pieva</string>
+	<string name="poi_canal">Kanalas</string>
+	<string name="poi_observatory">Observatorija</string>
+	<string name="poi_tower">Bokštas</string>
+	<string name="poi_radar">Radaras</string>
+	<string name="poi_crane">Kranas</string>
+	<string name="poi_construction">Statybvietė</string>
+	<string name="poi_windmill">Vėjo malūnas</string>
+	<string name="poi_college">Koledžas</string>
+	<string name="poi_driving_school">Vairavimo mokykla</string>
+	<string name="poi_kindergarten">Vaikų darželis</string>
+	<string name="poi_school">Mokykla</string>
+	<string name="poi_university">Universitetas</string>
+
+	<string name="poi_courthouse">Teismo rūmai</string>
+	<string name="poi_prison">Kalėjimas</string>
+	<string name="poi_government">Valstybinė įmonė</string>
+	<string name="poi_prosecutor">Prokuratūra</string>
+	<string name="poi_migration">Migracijos tarnyba</string>
+	<string name="poi_tax_inspection">Mokesčių inspekcija</string>
+	<string name="poi_customs">Muitinė</string>
+	<string name="poi_country">Šalis</string>
+	<string name="poi_city">Miestas</string>
+	<string name="poi_capital">Sostinė</string>
+	<string name="poi_town">Miestelis</string>
+	<string name="poi_village">Kaimas</string>
+	<string name="poi_isolated_dwelling">Vienkiemis</string>
+	<string name="poi_place_farm">Ūkis</string>
+
+
+	<string name="poi_pharmacy">Vaistinė</string>
+	<string name="poi_hospital">Ligoninė</string>
+	<string name="poi_doctors">Gydytojai</string>
+	<string name="poi_sanatorium">Sanatorija</string>
+	<string name="poi_blood_bank">Kraujo bankas</string>
+	<string name="poi_psychotherapist">Prichoterapeutas</string>
+	<string name="poi_speech_therapist">Logopedas</string>
+	<string name="poi_paediatrics">Pediatras</string>
+
+	<string name="poi_estate_agent">Nekilnojamo turto agentūra</string>
+	<string name="poi_ngo">Visuomeninė organizacija</string>
 	</resources>
