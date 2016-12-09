@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="plugin_title">Ski Maps — OsmAnd</string>
-    <string name="plugin_description">Thank you for installing OsmAnd Ski Maps!&lt;br/&gt;&lt;br/&gt;It\'s a plugin for OsmAnd Maps &amp; Navigation. To start using ski maps, please install &lt;b&gt;OsmAnd Maps &amp; Navigation&lt;/b&gt;.</string>
+    <string name="plugin_description">Thank you for installing OsmAnd Ski Maps!&lt;br/&gt;&lt;br/&gt;It\'s a plugin for OsmAnd Maps &amp; Navigation. To start using ski maps, please install &lt;b&gt;OsmAnd Maps &amp; Navigation&lt;/b&gt; and choose map style - Ski maps.</string>
     <string name="install_osmand">Install OsmAnd</string>
     <string name="shared_string_no">No</string>
     <string name="shared_string_yes">Yes</string>
