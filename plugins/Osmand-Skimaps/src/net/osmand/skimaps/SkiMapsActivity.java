@@ -2,7 +2,7 @@ package net.osmand.skimaps;
 
 import net.osmand.skimapsPlugin.R;
 import android.app.Activity;
-import android.support.v7.app.AlertDialog;
+import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
 import android.content.DialogInterface;
@@ -44,7 +44,7 @@ public class SkiMapsActivity extends Activity {
 				builder.setPositiveButton(getString(R.string.shared_string_yes), new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://search?q=pname:" + OSMAND_COMPONENT_PLUS));
+						Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://search?q=pname:" + OSMAND_COMPONENT));
 						try {
 							stopService(intent);
 							startActivity(intent);
