@@ -36,6 +36,7 @@ public class NauticalActivity extends Activity {
 		intentPlus.setFlags(Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
 		ResolveInfo resolved = getPackageManager().resolveActivity(intentPlus, PackageManager.MATCH_DEFAULT_ONLY);
 		if(resolved != null) {
+			logEvent(this, "open_osmand_plus");
 			stopService(intentPlus);
 			startActivity(intentPlus);
 			finish();
@@ -45,6 +46,7 @@ public class NauticalActivity extends Activity {
 			intentNormal.setComponent(new ComponentName(OSMAND_COMPONENT, OSMAND_ACTIVITY));
 			resolved = getPackageManager().resolveActivity(intentNormal, PackageManager.MATCH_DEFAULT_ONLY);
 			if (resolved != null) {
+				logEvent(this, "open_osmand");
 				stopService(intentNormal);
 				startActivity(intentNormal);
 				finish();
