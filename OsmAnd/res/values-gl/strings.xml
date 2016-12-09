@@ -2203,4 +2203,16 @@
     <string name="access_disable_offroute_recalc_descr">Evitar calcular automaticamente a ruta de novo estando moi lonxe do camiño que debera ser</string>
     <string name="access_disable_wrong_direction_recalc">Non cambiar a ruta cando se estea na dirección errada</string>
     <string name="access_disable_wrong_direction_recalc_descr">Evitar calcular automaticamente a ruta de novo cando se estea movendo na dirección errada</string>
+    <string name="map_widget_magnetic_bearing">Rumbo magnético</string>
+    <string name="map_widget_bearing">Rumbo relativo</string>
+    <string name="rendering_attr_surfaceIntegrity_name">Estado do pavimento</string>
+    <string name="translit_name_if_miss">Transliterar cando falte o nome en %1$s</string>
+    <string name="osm_live_banner_desc">Obteña descargas de mapas sen límites e actualizacións de mapas máis de unha vez ao mes: cada semana, día ou hora.</string>
+    <string name="no_inet_connection_desc_map">Obrigatorio para descargar mapas.</string>
+    <string name="search_location">A buscar o sitio…</string>
+    <string name="rendering_attr_hideOverground_name">Obxectos por riba do chan</string>
+    <string name="access_shared_string_not_installed">Non instalado</string>
+    <string name="access_widget_expand">Expandir</string>
+    <string name="map_mode">Modo do mapa</string>
+    <string name="storage_permission_restart_is_required">Agora o aplicativo ten permiso para escribir en almacenamento externo. Requírese reiniciar manualmente o aplicativo.</string>
     </resources>
