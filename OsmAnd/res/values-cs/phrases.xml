@@ -2644,14 +2644,14 @@
 	<string name="poi_nuclear_explosion_purpose_weapons_effects">Účel exploze: efekty zbraní</string>
 	<string name="poi_nuclear_explosion_purpose_safety_experiment">Účel exploze: bezpečnostní experiment</string>
 	<string name="poi_nuclear_explosion_purpose_research_for_peaceful_applications">Účel exploze: výzkum k mírovému použití</string>
-	<string name="poi_nuclear_explosion_purpose_fundamental_science">Účel exploze: základní vědy</string>
+	<string name="poi_nuclear_explosion_purpose_fundamental_science">Účel exploze: základní výzkum</string>
 	<string name="poi_nuclear_explosion_purpose_industrial_application_cavity_excavation">Účel exploze: průmyslové aplikace, vyhloubení dutiny</string>
-	<string name="poi_nuclear_explosion_purpose_industrial_application_seismic_sounding">Účel exploze: průmyslové aplikace, seismicky znějící</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application_seismic_sounding">Účel exploze: průmyslové aplikace, seismický průzkum</string>
 	<string name="poi_nuclear_explosion_purpose_industrial_application_oil_stimulation">Účel exploze: průmyslové aplikace, stimulace nafty</string>
 	<string name="poi_nuclear_explosion_purpose_industrial_application">Účel exploze: průmyslové aplikace</string>
 	<string name="poi_nuclear_explosion_purpose_industrial_application_earth_moving">Účel exploze: průmyslové aplikace, zemní</string>
 	<string name="poi_nuclear_explosion_time_utc">Čas exploze (UTC)</string>
-	<string name="poi_nuclear_explosion_yield">Výnos exploze</string>
+	<string name="poi_nuclear_explosion_yield">Síla exploze</string>
 	<string name="poi_nuclear_explosion_hole">Díra exploze</string>
 	<string name="poi_nuclear_explosion_height_of_burst">Výška výbuchu</string>
 	<string name="poi_nuclear_explosion_ground_zero_altitude">Nadmořská výška nulového bodu</string>
