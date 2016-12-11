@@ -249,7 +249,29 @@ Du hittar din parkeringsplats och -tid på instrumentbrädan och i widgeten på 
     <string name="test_voice_prompts">Test av röstmeddelanden</string>
     <string name="switch_to_raster_map_to_see">Det finns ingen offline vektorkarta för den här platsen. Du kan ladda ner en i Inställningar (Hantera kartfiler) eller byta till online-kartor (aktivera modulen för online-kartor för detta).</string>
 
-    <string name="osmand_long_description_1000_chars">" OsmAnd (Open Street Maps Automated Navigation Directions) är ett öpen källkodsprogram med tillgång till ett brett utbud av global OpenStreetMap-data. All kartdata (vektor- eller rasterkartor) kan lagras i telefonens minneskort för offlineanvändning. OsmAnd erbjuder även navigering offline och online, inklusive röstguidning. Några av de viktigaste funktionerna: - Komplett offline-funktionalitet (lagra nedladdade vektorkartor eller kartbitar på enheten) - Kompakta offline-vektorkartor för hela världen finns - Nedladdning av land- eller regionkartor direkt från appen - Överlägg av flera kartlager möjligt, som GPX- eller navigationsspår, sevärdheter, favoriter, höjddata, offentliga hållplatser, extra kartor med anpassningsbara transparens - Sökning offline efter adresser och platser (POIs) - Offline-dirigering för korta sträckor (experimentell) - Bil-, cykel- och fotgängarlägen med: - Tillval automatisk dag/nattvisning växling - Tillval hastighetsberoende zoomning - Valfri inställningen enligt kompass eller färdriktningen - Frivillig körfältsvägledning, hastighetsgräns display, registreras och TTS röster Begränsningar i denna gratisversion av OsmAnd: - Antalet nedladdningar av kartor är begränsad - Ingen tillgång till Wikipedia offline POIs OsmAnd utvecklas aktivt och vårt projekt och dess fortsatta framsteg bygger på ekonomiska bidrag för att finansiera utveckling och testning av ny funktionalitet. Vänligen överväg att köpa OsmAnd+, finansiera specifika nya funktioner eller göra en allmän donation på osmand.net. "</string>
+    <string name="osmand_long_description_1000_chars">"
+ OsmAnd (Open Street Maps Automated Navigation Directions)
+
+OsmAnd är ett öpen källkodsprogram med tillgång till ett brett utbud av global OpenStreetMap-data. All kartdata (vektor- eller rasterkartor) kan lagras i telefonens minneskort för offlineanvändning. OsmAnd erbjuder även navigering offline och online, inklusive röstguidning.
+Några av de viktigaste funktionerna:
+- Komplett offline-funktionalitet (lagra nedladdade vektorkartor eller kartbitar på enheten)
+- Kompakta offline-vektorkartor för hela världen finns tillgängliga
+- Nedladdning av land- eller regionkartor direkt från appen
+- Överlägg av flera kartlager möjligt, som GPX- eller navigationsspår, sevärdheter, favoriter, höjddata, offentliga hållplatser, extra kartor med anpassningsbara transparens
+- Sökning offline efter adresser och platser (POIs)
+- Offline-dirigering för medellånga sträckor (experimentell)
+- Bil-, cykel- och fotgängarlägen med:
+- Tillval automatisk växling mellan dag- och nattvisning
+- Tillval hastighetsberoende zoomning
+- Valfri inställningen enligt kompass eller färdriktningen
+- Frivillig körfältsvägledning, visning av hastighetsgräns, inspelade röster samt TTS-röster
+
+Begränsningar i denna gratisversion av OsmAnd:
+- Antalet nedladdningar av kartor är begränsad
+- Ingen tillgång till Wikipedia offline POIs
+
+OsmAnd utvecklas aktivt och vårt projekt och dess fortsatta framsteg bygger på ekonomiska bidrag för att finansiera utveckling och testning av ny funktionalitet. Vänligen överväg att köpa OsmAnd+, finansiera specifika nya funktioner eller göra en allmän donation på osmand.net.
+ "</string>
     <string name="native_rendering">Inbyggd rendering</string>
     <string name="default_buttons_support">Support</string>
     <string name="support_new_features">Ge stöd till nya funktioner</string>
@@ -2359,4 +2381,26 @@ Om du tycker om OsmAnd och OSM och vill stödja dem så är detta ett utmärkt s
     <string name="osmo_pause_location">Pausa</string>
     <string name="osmo_service_running">OsMo-tjänsten är igång</string>
     <string name="trip_rec_notification_settings">Trippinspelning (inga data)</string>
+    <string name="release_2_5">"
+ • Klickbara ikoner på kartan
+
+
+ • Kraftfull sökning med POI-filter: Sök t.ex. restauranger kvalitet, eller campingplatser med speciellta faciliteter
+
+
+ • Ny Topo Map-stil för cyklister och vandrare
+
+
+ • Förbättrad trippinspelning
+
+
+ • Förbättrade navigationsaviseringar (Android Wear)
+
+
+ • Många andra förbättringar och felkorrigeringar
+
+
+ och mer …
+ "</string>
+    <string name="christmas_desc">Med tanke på den kommande julen och nyåret så kan du välja att visa POI som har med julen att göra: julgranar, julmarknader med mera.</string>
     </resources>
