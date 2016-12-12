@@ -3287,4 +3287,6 @@
 	<string name="poi_office_podologist">Kancelář podologa</string>
 	<string name="poi_cuisine_burger">Burgr</string>
 	<string name="poi_cuisine_kebab">Kebab</string>
+	<string name="poi_observatory_designation">Označení</string>
+	<string name="poi_emergency_infrastructure">Nouzová infrastruktura</string>
 	</resources>
