@@ -2753,7 +2753,7 @@
 
 	<string name="poi_suction_point">Пункт пампаваньня вады</string>
 
-	<string name="poi_fire_hydrant_type_underground">Тып: падземны</string>
+	<string name="poi_fire_hydrant_type_underground">Падземны</string>
 	<string name="poi_fire_hydrant_type_pillar">Надземны</string>
 	<string name="poi_fire_hydrant_type_pond">Сажалка</string>
 	<string name="poi_fire_hydrant_type_wall">Пажарны кран</string>
