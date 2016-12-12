@@ -1,8 +1,2 @@
-include ':OsmAnd-java', ':OsmAndCore-sample', ':Osmand-Skimaps', ':Osmand-Nautical'
+include ':OsmAnd-java', ':OsmAndCore-sample'
 include ':OsmAnd'
-include ':plugins:OsmAnd-AddressPlugin'
-include ':plugins:Osmand-ParkingPlugin'
-include ':plugins:Osmand-Sherpafy'
-include ':plugins:Osmand-SRTMPlugin'
-project(':Osmand-Skimaps').projectDir = new File('plugins/Osmand-Skimaps')
-project(':Osmand-Nautical').projectDir = new File('plugins/Osmand-Nautical')
