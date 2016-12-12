@@ -2009,7 +2009,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="rendering_attr_OSMMapperAssistant_name">Памагаты картографа OSM</string>
 	<string name="shared_string_manage">Кіраваць</string>
 	<string name="shared_string_edit">Правіць</string>
-	<string name="shared_string_is_open">Адчыніць</string>
+	<string name="shared_string_is_open">Адчынена зараз</string>
     <string name="filter_poi_hint">Фільтраваць паводле назвы</string>
     <string name="search_poi_category_hint">Друкуйце, каб знайсьці ўсё</string>
     <string name="index_name_netherlands">Эўропа - Нідэрлянды</string>
@@ -2036,7 +2036,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="shared_string_logoff">Выйсьці</string>
     <string name="rendering_value_disabled_name">Адключана</string>
     <string name="rendering_value_walkingRoutesOSMC_name">Афарбоўка згодна OSMC</string>
-    <string name="rendering_value_walkingRoutesScopeOSMC_name">Афарбоўка згодна з праглядам маршруту</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">Афарбоўка згодна прыналежнасьці сеткі</string>
     <string name="osm_edit_context_menu_delete">Выдаліць праўку OSM</string>    
     <string name="read_full_article">Чытаць артыкул цалкам (анлайн)</string>
     
