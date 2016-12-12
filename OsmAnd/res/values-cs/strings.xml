@@ -700,9 +700,9 @@ Dlaždicové mapy můžete získat přímo z online zdrojů nebo si je můžete 
     <string name="favourites_edit_dialog_name">Jméno</string>
     <string name="favourites_edit_dialog_category">Kategorie</string>
     <string name="local_index_descr_title">Správce mapových souborů</string>
-    <string name="navigate_point_format_D">SSS.SSSSS</string>
-    <string name="navigate_point_format_DM">SSS MM.MMMMM</string>
-    <string name="navigate_point_format_DMS">SSS MM ss.sssss</string>
+    <string name="navigate_point_format_D">DDD.DDDDD</string>
+    <string name="navigate_point_format_DM">DDD MM.MMMMM</string>
+    <string name="navigate_point_format_DMS">DDD MM SS.SSSSS</string>
     <string name="local_index_routing_data">Navigační data</string>
     <string name="navigate_point_format">Formát</string>
     <string name="poi_search_desc">Hledat body zájmu (POI)</string>
@@ -1731,8 +1731,8 @@ Aktivováním tohoto pohledu se změní styl mapy na \"Winter and ski\", který 
     <string name="shared_string_show_details">Zobrazit detaily</string>
     <string name="osm_edit_context_menu_delete">Smazat OSM změnu</string>
     <string name="rendering_value_disabled_name">Vypnuto</string>
-    <string name="rendering_value_walkingRoutesScopeOSMC_name">Zbarvení podle rozsahu trasy</string>
-    <string name="rendering_value_walkingRoutesOSMC_name">Zbarvení podle OSMC</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">Zbarvení podle příslušnosti k síti</string>
+    <string name="rendering_value_walkingRoutesOSMC_name">Zbarvení podle turistické značky OSMC</string>
     <string name="local_recordings_delete_all_confirm">Chystáte se smazat %1$d poznámek. Jste si jisti?</string>
     <string name="download_wikipedia_maps">Wikipedie</string>
     <string name="rendering_value_red_name">Červená</string>
@@ -1824,7 +1824,7 @@ Aktivováním tohoto pohledu se změní styl mapy na \"Winter and ski\", který 
     <string name="lang_lb">Lucemburština</string>
     <string name="lang_os">Osetština</string>
     <string name="lang_eo">Esperanto</string>
-    <string name="lang_es_ar">Španělština (argentinská)</string>
+    <string name="lang_es_ar">Španělština (Argentína)</string>
     <string name="lang_nb">Norština (bokmål)</string>
     <string name="lang_vo">Volapük</string>
     <string name="lang_th">Thajština</string>
@@ -2081,7 +2081,7 @@ Aktivováním tohoto pohledu se změní styl mapy na \"Winter and ski\", který 
  V úložišti je zapotřebí dočasně {3} MB a trvale {1} MB.
  Aktuálně je k dispozici pouze {2} MB.</string>
     <string name="upload_osm_note">Nahrát OSM poznámku</string>
-    <string name="upload_osm_note_description">Můžete nahrát OSM poznámku anonymně, pokud použijete svůj OpenStreetMap.org profil.</string>
+    <string name="upload_osm_note_description">Můžete nahrát OSM poznámku anonymně, nebo použít svůj OpenStreetMap.org profil.</string>
     <string name="shared_string_move_up">Posunout nahoru</string>
     <string name="shared_string_move_down">Posunout dolů</string>
     <string name="finish_navigation">Dokončit navigaci</string>
@@ -2317,4 +2317,52 @@ Pokud máte rádi OsmAnd a OSM a chcete je podpořit, toto je výborný způsob 
     <string name="route_calculation">Kalkulace trasy</string>
     <string name="route_roundabout_short">Použijte výjezd %1$d a pokračujte</string>
     <string name="upload_poi">Nahrát POI</string>
+    <string name="legacy_search">Starší vyhledávání</string>
+    <string name="show_legacy_search">Zobrazit starší způsob vyhledávání</string>
+    <string name="routing_attr_allow_motorway_name">Povolit dálnice</string>
+    <string name="routing_attr_allow_motorway_description">Povolit použití dálnic</string>
+    <string name="wiki_around">Blízké články Wikipedie</string>
+    <string name="search_map_hint">Hledat město nebo oblast</string>
+    <string name="show_legacy_search_desc">Zapnout starší hledání v úvodním panelu</string>
+    <string name="release_2_5">"
+ • Klikatelné ikony na mapě
+
+
+ • Podrobné filtrování hledání POI: Například hledání restaurace dle kuchyně, kempy se speciálními službami, apod.
+
+
+ • Nový styl topo mapy pro cyklisty a turisty
+
+
+ • Vylepšení nahrávání cesty
+
+
+ • Vylepšené notifikace navigace (Android Wear)
+
+
+ • Mnohé další vylepšení a opravy chyb
+
+
+ a další…
+ "</string>
+    <string name="release_2_3">"
+ • OSM Live. Podpořte tvůrce map a vývojáře a získejte aktualizace map každou hodinu.
+
+
+ • Mapové značky. Nový způsob rychlého výběru míst na mapě.
+
+
+ • Detailnější mapy z OSM s ikonami cest pro příslušné krajiny a nové objekty na mapě.
+
+
+ • Vylepšený vzhled a použití tvorby trasy.
+
+
+ • Vylepšení v menu mapy, jako například hledání adresy podle kontextu.
+
+
+ a další…
+ "</string>
+    <string name="lang_sr_latn">Srbsky (Latinka)</string>
+    <string name="lang_zh_hk">Čínsky (Hong Kong)</string>
     </resources>
