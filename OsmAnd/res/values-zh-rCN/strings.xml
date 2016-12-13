@@ -1228,4 +1228,39 @@
     <string name="gpx_logging_no_data">无数据</string>
     <string name="save_track_min_speed">最低记录速度</string>
     <string name="save_track_min_speed_descr">设置记录点的最低速度</string>
+    <string name="osmo_share_location">分享</string>
+    <string name="osmo_pause_location">暂停</string>
+    <string name="shared_string_notifications">通知</string>
+    <string name="release_2_5">"
+ • 地图上可点击的图标
+
+
+ • 强大的兴趣点过滤搜索：例如，根据菜肴搜索餐馆，或者具有特定设施的场所
+
+
+ • 新的 Topo 地图风格，为骑行爱好者和登山者设计
+
+
+ • 增强的旅途记录功能
+
+
+ • 改进了导航提醒功能（Android Wear）
+
+
+ • 许多其它改进和缺陷修复
+
+
+ 还有更多待你发现……
+ "</string>
+    <string name="christmas_poi">圣诞兴趣点</string>
+    <string name="christmas_desc_q">显示圣诞兴趣点？</string>
+    <string name="search_hint">输入城市、地址、兴趣点名称</string>
+    <string name="create_custom_poi">创建自定义过滤器</string>
+    <string name="custom_search">自定义搜索</string>
+    <string name="shared_string_filters">过滤器</string>
+    <string name="apply_filters">应用过滤器</string>
+    <string name="save_filter">保存过滤器</string>
+    <string name="delete_filter">删除过滤器</string>
+    <string name="new_filter">新建过滤器</string>
+    <string name="donation_to_osm">向 OpenStreetMap 社区捐赠</string>
     </resources>
