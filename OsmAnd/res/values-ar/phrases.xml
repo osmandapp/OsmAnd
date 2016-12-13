@@ -283,7 +283,7 @@
 	<string name="poi_city_gate">باب مدينة</string>
 	<string name="poi_courthouse">محكمة</string>
 	<string name="poi_restaurant">مطعم</string>
-	<string name="poi_place_of_worship">مكان العبادة</string>
+	<string name="poi_place_of_worship">مكان للعبادة</string>
 	<string name="poi_government">حكومة</string>
 	<string name="poi_building">مبنى</string>
 	<string name="poi_hairdresser">حلاق</string>
@@ -825,4 +825,40 @@
 	<string name="poi_park">منتزه</string>
 	<string name="poi_recreation_ground">أرض للترفيه</string>
 	<string name="poi_fast_food">أكل خفيف</string>
+	<string name="poi_attraction_water_slide">منزلق مائي</string>
+
+	<string name="poi_lodging">سكن</string>
+	<string name="poi_guest_house">بيت ضيافة</string>
+	<string name="poi_hostel">نزل</string>
+	<string name="poi_motel">نزل صغير</string>
+	<string name="poi_alpine_hut">كوخ بجبال الألب</string>
+	<string name="poi_chalet">شاليه</string>
+	<string name="poi_apartment">شقة</string>
+	<string name="poi_wilderness_hut">كوخ بري</string>
+	<string name="poi_cabin">مقصورة</string>
+	<string name="poi_hunting_lodge">سكن للصيد</string>
+
+	<string name="poi_religion_christian">المسيحية</string>
+	<string name="poi_religion_jewish">اليهودية</string>
+	<string name="poi_religion_muslim">الإسلام</string>
+	<string name="poi_religion_sikh">السيخية</string>
+	<string name="poi_religion_buddhist">البوذية</string>
+	<string name="poi_religion_hindu">الهندوسية</string>
+	<string name="poi_religion_shinto">ديانة شنتو اليابانية</string>
+	<string name="poi_religion_taoist">الفلسفة التاوية الصينية</string>
+	<string name="poi_religion_voodoo">فودو</string>
+	<string name="poi_religion_multifaith">تعدد الديانات</string>
+	<string name="poi_religion_spiritualist">الروحانية</string>
+	<string name="poi_religion_pagan">الوثنية</string>
+	<string name="poi_denomination_catholic">الكاثوليكية</string>
+	<string name="poi_denomination_baptist">المعمدانية</string>
+	<string name="poi_denomination_roman_catholic">كنيسة الروم الكاثوليك</string>
+	<string name="poi_denomination_orthodox">الأرثودكسية</string>
+	<string name="poi_denomination_lutheran">اللوثرية</string>
+	<string name="poi_denomination_sunni">السنية</string>
+	<string name="poi_denomination_protestant">البروتستانتية</string>
+	<string name="poi_denomination_methodist">الميثودية</string>
+	<string name="poi_denomination_evangelical">الإنجيلية</string>
+	<string name="poi_denomination_russian_orthodox">الأرثودكسية الروسية</string>
+	<string name="poi_buoy_safe_water">عوامة مياه آمنة</string>
 	</resources>
