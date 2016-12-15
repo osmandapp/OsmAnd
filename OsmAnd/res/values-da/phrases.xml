@@ -3415,9 +3415,9 @@
 <string name="poi_emergency_infrastructure">Nødhjælpsinfrastruktur</string>
 	<string name="poi_cliff">Klint</string>
 
-	<string name="poi_animal_keeping">Dyrehold</string>
-	<string name="poi_animal_keeping_horse">Dyrehold: hest</string>
-	<string name="poi_animal_keeping_sheep">Dyrehold: får</string>
+	<string name="poi_animal_keeping">Husdyrhold</string>
+	<string name="poi_animal_keeping_horse">Husdyrhold: hest</string>
+	<string name="poi_animal_keeping_sheep">Husdyrhold: får</string>
 	<string name="poi_animal_keeping_type_paddock">Type: fold</string>
 	<string name="poi_animal_keeping_type_open_stable">Type: åben stald</string>
 
