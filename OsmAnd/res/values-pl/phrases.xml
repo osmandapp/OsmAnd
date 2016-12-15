@@ -3350,4 +3350,12 @@
 <string name="poi_free_flying_characteristic">Charakterystyka</string>
 
 <string name="poi_emergency_infrastructure">Infrastruktura ratunkowa</string>
-	</resources>
+	<string name="poi_cliff">Klif</string>
+
+	<string name="poi_animal_keeping">Obora</string>
+	<string name="poi_animal_keeping_horse">Obora: konie</string>
+	<string name="poi_animal_keeping_sheep">Obora: owce</string>
+	<string name="poi_animal_keeping_type_paddock">Rodzaj: wybieg</string>
+	<string name="poi_animal_keeping_type_open_stable">Rodzaj: otwarta stajnia</string>
+
+</resources>
