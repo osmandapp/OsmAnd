@@ -28,7 +28,7 @@ public class XMasDialogFragment extends DialogFragment {
 		int numberOfStarts = app.getAppInitializer().getNumberOfStarts();
 		if (numberOfStarts > 2) {
 			Date now = new Date();
-			Date start = new Date(now.getYear(), 11, 18, 0, 0);
+			Date start = new Date(now.getYear(), 11, 5, 0, 0);
 			Date end = new Date(now.getYear(), 11, 25, 23, 59);
 			int firstShownX = app.getSettings().NUMBER_OF_STARTS_FIRST_XMAS_SHOWN.get();
 			if (now.after(start) && now.before(end)) {
