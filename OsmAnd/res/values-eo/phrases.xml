@@ -3328,4 +3328,12 @@
 <string name="poi_free_flying_characteristic">Karakterizo</string>
 
 <string name="poi_emergency_infrastructure">Homhelpa ekipaĵo</string>
+	<string name="poi_cliff">Klifo</string>
+
+	<string name="poi_animal_keeping">Stalo</string>
+	<string name="poi_animal_keeping_horse">Stalo: ĉevaloj</string>
+	<string name="poi_animal_keeping_sheep">Stalo: ŝafoj</string>
+	<string name="poi_animal_keeping_type_open_stable">Speco: malfermita domo</string>
+
+<string name="poi_animal_keeping_type_paddock">Speco: elkurejo</string>
 	</resources>
