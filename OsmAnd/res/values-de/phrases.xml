@@ -3329,4 +3329,11 @@
 <string name="poi_free_flying_characteristic">Charakteristisch</string>
 
 <string name="poi_emergency_infrastructure">Notfallinfrastruktur</string>
-	</resources>
+	<string name="poi_cliff">Cliff</string>
+
+	<string name="poi_animal_keeping">Tierhaltung</string>
+	<string name="poi_animal_keeping_horse">Tierhaltung: Pferd</string>
+	<string name="poi_animal_keeping_sheep">Tierhaltung: Schaf</string>
+	<string name="poi_animal_keeping_type_open_stable">Typ: offener Stall</string>
+
+</resources>
