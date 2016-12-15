@@ -3355,4 +3355,12 @@
 
 	<string name="poi_emergency_infrastructure">Аварийная инфраструктура</string>
 
+	<string name="poi_cliff">Отвесная скала</string>
+
+	<string name="poi_animal_keeping">Место содержания животных</string>
+	<string name="poi_animal_keeping_horse">Для лошадей</string>
+	<string name="poi_animal_keeping_sheep">Для овец</string>
+	<string name="poi_animal_keeping_type_paddock">Тип: загон</string>
+	<string name="poi_animal_keeping_type_open_stable">Конюшня открытого типа</string>
+
 </resources>

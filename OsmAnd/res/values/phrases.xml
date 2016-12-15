@@ -3321,4 +3321,12 @@
 	<string name="poi_nutrition_supplements">Nutrition supplements</string>
 	<string name="poi_photo_studio">Photo studio</string>
 
+	<string name="poi_cliff">Cliff</string>
+
+	<string name="poi_animal_keeping">Animal keeping</string>
+	<string name="poi_animal_keeping_horse">Animal keeping: horse</string>
+	<string name="poi_animal_keeping_sheep">Animal keeping: sheep</string>
+	<string name="poi_animal_keeping_type_paddock">Type: paddock</string>
+	<string name="poi_animal_keeping_type_open_stable">Type: open stable</string>
+
 </resources>
