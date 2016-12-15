@@ -1220,7 +1220,7 @@
 	<string name="poi_building_type_shrine">Épülettípus: szentély</string>
 
 	<string name="poi_cross">Kereszt</string>
-	<string name="poi_summit_cross">Csúcskereszt: van</string>
+	<string name="poi_summit_cross">Csúcskereszt</string>
 
 	<string name="poi_temperature">Hőfok</string>
 	<string name="poi_bathing_yes">Fürdő: van</string>
@@ -1581,15 +1581,15 @@
 	<string name="poi_stars_7">7 csillagos</string>
 	<string name="poi_rooms">Szobák</string>
 
-	<string name="poi_payment_coins_yes">Érmék</string>
+	<string name="poi_payment_coins_yes">Érme</string>
 	<string name="poi_payment_coins_no">Érmét nem fogad el</string>
-	<string name="poi_payment_coins_0.5">$0.5 érmék</string>
-	<string name="poi_payment_coins_50c12">50c, 1€ és 2€ érmék</string>
-	<string name="poi_payment_telephone_cards_yes">Telefonkártyák</string>
+	<string name="poi_payment_coins_0.5">0,50 $ érme</string>
+	<string name="poi_payment_coins_50c12">50c, 1€ és 2€ érme</string>
+	<string name="poi_payment_telephone_cards_yes">Telefonkártya</string>
 	<string name="poi_payment_telephone_cards_no">Telefonkártyát nem fogad el</string>
 	<string name="poi_payment_credit_cards_yes">Hitelkártyák</string>
 	<string name="poi_payment_credit_cards_no">Hitelkártyát nem fogad el</string>
-	<string name="poi_payment_notes_yes">Bankjegyek</string>
+	<string name="poi_payment_notes_yes">Bankjegy</string>
 	<string name="poi_payment_notes_no">Bankjegyet nem fogad el</string>
 	<string name="poi_payment_cash_yes">Készpénz</string>
 	<string name="poi_payment_cash_no">Készpénzt nem fogad el</string>
@@ -2021,7 +2021,7 @@
 	<string name="poi_washing_machine">Mosógép</string>
 	<string name="poi_caravans">Lakókocsi</string>
 	<string name="poi_power_supply">Elektromos csatlakozó</string>
-	<string name="poi_payment_transport_type">Fizetéstípus (közlekedés)</string>
+	<string name="poi_payment_transport_type">Fizetési mód (közlekedés)</string>
 	<string name="poi_social_facility_type">Típus</string>
 	<string name="poi_social_facility_for">Célcsoport</string>
 	<string name="poi_compressed_air_filter">Sűrített levegő</string>
@@ -3082,4 +3082,6 @@
 	<string name="poi_power_supply_cee_7_5">Elektromos csatlakozó (konnektor): CEE 7/5</string>
 	<string name="poi_power_supply_nema_5_15">Elektromos csatlakozó (konnektor): NEMA 5-15</string>
 
+	<string name="poi_stone_type_conciliation_cross">Típus: megbékélési kőkereszt</string>
+	<string name="poi_lacrosse">Lacrosse</string>
 	</resources>
