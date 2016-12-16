@@ -1345,11 +1345,11 @@ og leiðsögn</string>
     <string name="modify_transparency">Breyta gegnsæi (0 - gegnsætt, 255 - ógegnsætt)</string>
     <string name="confirm_interrupt_download">Viltu hætta við að hlaða inn skránni?</string>
     <string name="basemap_was_selected_to_download">Grunnkort er nauðsynlegt til að forritið virki almennilega og var því valið til að vera sótt.</string>
-    <string name="local_indexes_cat_tile">Nettengd kort og kortatíglar í biðminni</string>
+    <string name="local_indexes_cat_tile">Nettengd kort og kortatíglar í biðminni.</string>
     <string name="index_settings_descr">Hlaða niður og sýsla með ónettengdar kortaskrár sem geymdar eru á tækinu</string>
     <string name="map_online_data">Nettengd kort og kortatíglar</string>
     <string name="map_online_data_descr">Nota nettengd kort (sækja og setja kortatígla í biðminni á SD-kort)</string>
-    <string name="online_map_settings_descr">Stilla uppruna nettengdra korta og kortatígla í biðminni</string>
+    <string name="online_map_settings_descr">Stilla uppruna nettengdra korta og kortatígla í biðminni.</string>
     <string name="prefs_plugins_descr">Viðbætur virkja ýmsar ítarlegar stillingar og fleiri eiginleika</string>
     <string name="vector_maps_may_display_faster_on_some_devices">Vektorkort birtast að öllum líkindum hraðar. Virkar hugsanlega ekki vel á sumum tækjum.</string>
     <string name="play_commands_of_currently_selected_voice">Spila skipanir valinnar raddar</string>
@@ -1602,7 +1602,7 @@ Len %2$s</string>
     <string name="rendering_attr_trolleybusRoutes_name">Leiðir rafknúinna strætisvagna</string>
     <string name="map_widget_vector_attributes">Eigindi myndgerðar</string>
     <string name="speed_limit_exceed">Þolvik hraðtakmarka</string>
-    <string name="text_size_descr">Stilla stærð texta á korti.</string>
+    <string name="text_size_descr">Stilla stærð texta á korti</string>
     <string name="traffic_warning_calming">Hæging á umferð</string>
     <string name="traffic_warning">Aðvörun vegna umbefðar</string>
     <string name="speak_favorites">Eftirlæti í næsta nágrenni</string>
@@ -1706,7 +1706,7 @@ Punktar</string>
     <string name="access_from_map_description">Valmyndarhnappur opnar stjórnborð, ekki valmynd</string>
     <string name="rendering_attr_transportStops_name">Biðstöðvar</string>
 
-    <string name="indexing_transport">Skrái samgöngur…</string>
+    <string name="indexing_transport">Lykla samgöngur…</string>
     <string name="daynight_descr">Veldu reglu til að skipta um dags/næturham</string>
     <string name="fast_route_mode_descr">"Virkja til að reikna hröðustu leið eða gera óvirkt til að reikna hagkvæmustu leið "</string>
     <string name="tiles_to_download_estimated_size">Við aðdráttinn {0} skal sækja {1} tígla ({2} MB)</string>
@@ -1739,7 +1739,7 @@ Punktar</string>
     <string name="search_osm_nominatim">Leit á netinu með OSM Nominatim</string>
     <string name="max_level_download_tile_descr">Veldu hámarks aðdráttarstig til að sækja kortatígla á netið</string>
     <string name="download_question_exist">Ónettengd gögn fyrir {0} eru þegar til staðar ({1}). Viltu uppfæra þau ({2}) ?</string>
-    <string name="list_index_files_was_not_loaded">Listinn yfir svæði fékkst ekki frá osmand.net.</string>
+    <string name="list_index_files_was_not_loaded">Listinn yfir svæði fékkst ekki frá osmand.net</string>
     <string name="opening_changeset">Opna breytingasett…</string>
     <string name="closing_changeset">Loka breytingasetti…</string>
     <string name="converting_names">Umbreyti staðarheitum/enskum heitum…</string>
@@ -1785,4 +1785,8 @@ Punktar</string>
     <string name="planning_trip_item">Skipulagning ferðar</string>
     <string name="instalation_troubleshooting_item">Uppsetning og lausn vandamála</string>
     <string name="poi_context_menu_modify_osm_change">Breyta OSM-breytingu</string>
+    <string name="indexing_address">Lykla heimilisfang…</string>
+    <string name="indexing_map">Lykla kort…</string>
+    <string name="old_map_index_is_not_supported">Úrelta kortagagnasniðið \'\'{0}\'\' er ekki stutt</string>
+    <string name="voice_is_not_available_title">Engin raddleiðsögn valin</string>
     </resources>
