@@ -1610,11 +1610,11 @@
 	<string name="poi_payment_cheque_no">Чэкі не прымаюцца</string>
 	<string name="poi_payment_pikepass_yes">PIKEPASS</string>
 	<string name="poi_payment_pikepass_no">PIKEPASS не прымаецца</string>
-	<string name="poi_payment_pikepass_designated">Толькі для аплаты праз PIKEPASS</string>
+	<string name="poi_payment_pikepass_designated">PIKEPASS (прызначаныя)</string>
 	<string name="poi_payment_visa_debit_yes">Дэбетавыя карткі Visa</string>
 	<string name="poi_payment_visa_debit_no">Дэбетавыя карткі Visa не прымаюцца</string>
 	<string name="poi_payment_cryptocurrencies_no">Крыптавалюты не прымаюцца</string>
-	<string name="poi_payment_others_yes">Прымаюцца іншыя мэтады аплаты</string>
+	<string name="poi_payment_others_yes">Іншыя</string>
 	<string name="poi_payment_others_no">Іншыя мэтады аплаты не прымаюцца</string>
 	<string name="poi_payment_routex_yes">Routex</string>
 	<string name="poi_payment_routex_no">Паліўныя карткі Routex не прымаюцца</string>
@@ -1622,7 +1622,7 @@
 	<string name="poi_payment_bancomat_no">Bancomat не прымаецца</string>
 	<string name="poi_payment_icsf_yes">Карткі IC Stored Fare</string>
 	<string name="poi_payment_icsf_no">Карткі IC Stored Fare не прымаюцца</string>
-	<string name="poi_payment_prepaid_ticket_yes">Прымаюцца prepaid tickets</string>
+	<string name="poi_payment_prepaid_ticket_yes">Prepaid tickets</string>
 	<string name="poi_payment_jcb_yes">JCB</string>
 	<string name="poi_payment_jcb_no">Карткі JCB не прымаюцца</string>
 	<string name="poi_payment_laser_yes">Laser</string>
@@ -1720,11 +1720,11 @@
 	<string name="poi_diet_kosher_only">Толькі кашэрнае</string>
 	<string name="poi_diet_kosher_yes">Кашэрнае</string>
 	<string name="poi_diet_kosher_no">Кашэрнае харчаваньне не прапануецца</string>
-	<string name="poi_diet_halal_only">Толькі халяльная ежа</string>
-	<string name="poi_diet_halal_yes">Халяльная ежа</string>
+	<string name="poi_diet_halal_only">Толькі халяль</string>
+	<string name="poi_diet_halal_yes">Халяль</string>
 	<string name="poi_diet_halal_no">Халяльная ежа не прапануецца</string>
-	<string name="poi_diet_lactose_free_only">Толькі безлактозныя прадукты</string>
-	<string name="poi_diet_lactose_free_yes">Безлактозныя прадукты</string>
+	<string name="poi_diet_lactose_free_only">Толькі безлактозныя</string>
+	<string name="poi_diet_lactose_free_yes">Безлактозныя</string>
 	<string name="poi_diet_lactose_free_no">Безлактозныя прадукты не прапануюцца</string>
 	<string name="poi_diet_pescetarian_yes">Пэскетарыянская</string>
 
@@ -2179,7 +2179,7 @@
 	<string name="poi_social_facility_for_senior">Пажылыя</string>
 	<string name="poi_social_facility_for_child">Дзеці</string>
 	<string name="poi_social_facility_for_orphan">Сіроты</string>
-	<string name="poi_social_facility_for_disabled">Мэтавая сацыяльная група: інваліды</string>
+	<string name="poi_social_facility_for_disabled">Інваліды</string>
 	<string name="poi_social_facility_for_mental_health">Пацыенты з засмучэньнямі псыхікі</string>
 	<string name="poi_social_facility_for_juvenile">Падлеткі</string>
 	<string name="poi_social_facility_for_homeless">Бяздомныя</string>
@@ -3050,7 +3050,7 @@
 	<string name="poi_fuel_type">Тып паліва</string>
 	<string name="poi_payment_type">Спосаб аплаты</string>
 	<string name="poi_additional_type">Дадатковы</string>
-<string name="poi_payment_account_cards_yes">Прымаюцца карткі</string>
+<string name="poi_payment_account_cards_yes">Рахункавыя карткі</string>
 	<string name="poi_payment_account_cards_no">Карткі не прымаюцца</string>
 	<string name="poi_spices">Крама з прыправамі</string>
 
@@ -3362,4 +3362,14 @@
 	<string name="poi_animal_keeping">Месца ўтрыманьня жывёл</string>
 	<string name="poi_cliff">Стромая скала</string>
 
-	</resources>
+	<string name="poi_cuisine_bagel">Байгель</string>
+	<string name="poi_cuisine_diner">Дайнэр</string>
+	<string name="poi_cuisine_shawarma">Шавэрма</string>
+
+	<string name="poi_tower_construction_lattice">Канструкцыя: рашэцістая</string>
+	<string name="poi_tower_construction_freestanding">Канструкцыя: масіўная без адцяжак</string>
+	<string name="poi_tower_construction_dish">Канструкцыя: парабалічная талерка</string>
+	<string name="poi_tower_construction_dome">Канструкцыя: радом</string>
+	<string name="poi_tower_construction_concealed">Канструкцыя: замаскаваная</string>
+
+</resources>
