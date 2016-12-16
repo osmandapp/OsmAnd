@@ -3337,4 +3337,7 @@
 	<string name="poi_animal_keeping_type_open_stable">Typ: offener Stall</string>
 
 <string name="poi_animal_keeping_type_paddock">Typ: Paddock</string>
+	<string name="poi_tower_construction_lattice">Konstruktion: Gitter</string>
+	<string name="poi_tower_construction_freestanding">Konstruktion: freistehend</string>
+	<string name="poi_tower_construction_dome">Konstruktion: Kuppel</string>
 	</resources>
