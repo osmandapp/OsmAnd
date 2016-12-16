@@ -3363,4 +3363,10 @@
 	<string name="poi_animal_keeping_type_paddock">Тип: загон</string>
 	<string name="poi_animal_keeping_type_open_stable">Конюшня открытого типа</string>
 
+	<string name="poi_tower_construction_lattice">Конструкция: решетчатая</string>
+	<string name="poi_tower_construction_freestanding">Конструкция: массивная без оттяжек</string>
+	<string name="poi_tower_construction_dish">Конструкция: параболическая тарелка</string>
+	<string name="poi_tower_construction_dome">Конструкция: радом</string>
+	<string name="poi_tower_construction_concealed">Конструкция: замаскированная</string>
+
 </resources>
