@@ -3379,4 +3379,12 @@
 <string name="poi_free_flying_characteristic">Características</string>
 
 <string name="poi_emergency_infrastructure">Infraestructura de emergencias</string>
-	</resources>
+	<string name="poi_cliff">Acantilado</string>
+
+	<string name="poi_animal_keeping">Refugio de animales</string>
+	<string name="poi_animal_keeping_horse">Refugio para: caballos</string>
+	<string name="poi_animal_keeping_sheep">Refugio para: ovejas</string>
+	<string name="poi_animal_keeping_type_paddock">Tipo de refugio: potrero</string>
+	<string name="poi_animal_keeping_type_open_stable">Tipo de refugio: establo abierto</string>
+
+</resources>
