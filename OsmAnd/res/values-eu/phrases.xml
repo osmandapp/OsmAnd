@@ -2117,4 +2117,10 @@
 	<string name="poi_cuisine_belgian">Belgikarra</string>
 	<string name="poi_free_flying_characteristic">Berezkoa</string>
 
-</resources>
+<string name="poi_artist_name">Artista</string>
+	<string name="poi_sculptor">Eskultorea</string>
+
+	<string name="poi_cross">Gurutzea</string>
+	<string name="poi_summit_cross">Tontorreko gurutzea: bai</string>
+
+	</resources>
