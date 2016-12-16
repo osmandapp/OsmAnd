@@ -3329,4 +3329,10 @@
 	<string name="poi_animal_keeping_type_paddock">Type: paddock</string>
 	<string name="poi_animal_keeping_type_open_stable">Type: open stable</string>
 
+	<string name="poi_tower_construction_lattice">Construction: lattice</string>
+	<string name="poi_tower_construction_freestanding">Construction: freestanding</string>
+	<string name="poi_tower_construction_dish">Construction: dish</string>
+	<string name="poi_tower_construction_dome">Construction: dome</string>
+	<string name="poi_tower_construction_concealed">Construction: concealed</string>
+
 </resources>
