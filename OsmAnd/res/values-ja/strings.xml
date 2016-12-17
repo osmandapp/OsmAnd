@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources><string name="installing_new_resources">新しいデータを展開中…</string>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="installing_new_resources">新しいデータを展開中…</string>
      <string name="internet_connection_required_for_online_route">オンライン経路案内を使用しようとしていますが
 インターネット接続されていません。</string>
      <string name="tts_language_not_supported_title">未サポート言語</string>
@@ -2339,4 +2340,9 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="lang_hu_formal">ハンガリー語(フォーマル)</string>
     <string name="map_widget_bearing">相対方位</string>
     <string name="map_widget_magnetic_bearing">磁方位</string>
+    <string name="legacy_search">レガシー検索</string>
+    <string name="show_legacy_search">レガシー検索を表示</string>
+    <string name="show_legacy_search_desc">ドロワーリストでレガシー検索を有効にします</string>
+    <string name="routing_attr_allow_motorway_name">高速道路を使用可能</string>
+    <string name="routing_attr_allow_motorway_description">高速道路を使用可能</string>
     </resources>
