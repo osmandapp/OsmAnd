@@ -109,7 +109,7 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 		bld.setSingleChoiceItems(entrieValues, selected, new DialogInterface.OnClickListener() {
 			
 			@Override
-			public void onClick(DialogInterface dialog, int which) {
+			public void onClick(DialogInterface dialog, final int which) {
 				final OsmandApplication app = (OsmandApplication) getApplication();
 				getSupportActionBar().setTitle(app.getString(R.string.test_voice_prompts) + " (" + entrieValues[which] + ")");
 				app.getSettings().VOICE_PROVIDER.set(entrieValues[which]);
@@ -121,8 +121,10 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 						if (p == null) {
 							Toast.makeText(TestVoiceActivity.this, "Voice player not initialized", Toast.LENGTH_SHORT).show();
 						} else {
+							//Check which voice was set
+							getSupportActionBar().setTitle(app.getString(R.string.test_voice_prompts) + " (" + entrieValues[which] + ", " + p.getLanguage() + ")");
 							addButtons(ll, p);
-						}						
+						}
 					}
 				}, true, true);
 				dialog.dismiss();
