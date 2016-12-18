@@ -12,7 +12,7 @@
 	<string name="poi_tourism">Ferðamennska</string>
 	<string name="poi_sightseeing">Skoðunarferðir</string>
 	<string name="poi_accomodation">Gisting</string>
-	<string name="poi_entertainment">Tómstundir</string>
+	<string name="poi_entertainment">Afþreying</string>
 	<string name="poi_finance">Fjármál</string>
 	<string name="poi_natural">Náttúra</string>
 	<string name="poi_user_defined_other">Skilgreint af notanda</string>
@@ -38,7 +38,7 @@
 	<string name="poi_university">Háskóli</string>
 
 	<string name="poi_courthouse">Dómshús</string>
-	<string name="poi_prison">Fangels</string>
+	<string name="poi_prison">Fangelsi</string>
 	<string name="poi_embassy">Sendiráð</string>
 	<string name="poi_customs">Tollafgreiðsla</string>
 	<string name="poi_country">Land</string>
@@ -46,7 +46,7 @@
 	<string name="poi_capital">Höfuðborg</string>
 	<string name="poi_town">Bær</string>
 	<string name="poi_village">Þorp</string>
-	<string name="poi_hamlet">Byggðarkjarni</string>
+	<string name="poi_hamlet">Byggðakjarni</string>
 	<string name="poi_suburb">Úthverfi</string>
 	<string name="poi_quarter">Hverfi</string>
 	<string name="poi_neighbourhood">Nágrenni</string>
@@ -54,7 +54,7 @@
 	<string name="poi_place_farm">Býli</string>
 
 
-	<string name="poi_pharmacy">Apótek</string>
+	<string name="poi_pharmacy">Lyfjabúð</string>
 	<string name="poi_hospital">Sjúkrahús</string>
 	<string name="poi_doctors">Læknar</string>
 	<string name="poi_clinic">Heilsugæsla</string>
@@ -68,7 +68,7 @@
 	<string name="poi_museum">Safn</string>
 	<string name="poi_memorial">Minnismerki</string>
 	<string name="poi_artwork">Listaverk</string>
-	<string name="poi_castle">Kastalinn</string>
+	<string name="poi_castle">Kastali</string>
 	<string name="poi_fountain">Gosbrunnur</string>
 	<string name="poi_zoo">Dýragarður</string>
 	<string name="poi_hotel">Hótel</string>
@@ -82,9 +82,9 @@
 	<string name="poi_playground">Leikvöllur</string>
 	<string name="poi_bench">Bekkur</string>
 	<string name="poi_cafe">Kaffihús</string>
-	<string name="poi_restaurant">Veitingastað</string>
+	<string name="poi_restaurant">Veitingastaður</string>
 	<string name="poi_bar">Bar</string>
-	<string name="poi_pub">Pöbb</string>
+	<string name="poi_pub">Krá</string>
 	<string name="poi_brothel">Hóruhús</string>
 	<string name="poi_crematorium">Bálstofa</string>
 	<string name="poi_bank">Banki</string>
@@ -97,7 +97,7 @@
 	<string name="poi_beach">Strönd</string>
 	<string name="poi_bay">Flói</string>
 	<string name="poi_fjord">Fjörður</string>
-	<string name="poi_reef">Rif</string>
+	<string name="poi_reef">Sker</string>
 	<string name="poi_valley">Dalur</string>
 	<string name="poi_wetland">Votlendi</string>
 	<string name="poi_tree">Tré</string>
@@ -112,15 +112,15 @@
 	<string name="poi_phone">Sími</string>
 	<string name="poi_email">Netfang</string>
 	<string name="poi_drinking_water_no">Nei</string>
-	<string name="poi_access_private">Í einkaeigu</string>
+	<string name="poi_access_private">Einkaaðgangur</string>
 	<string name="poi_access_destination">Umferð leyfileg á ákveðinn áfangastað</string>
-	<string name="poi_trees_orange">Appelsínugult</string>
-	<string name="poi_trees_date">Dagsetning</string>
+	<string name="poi_trees_orange">Appelsínur</string>
+	<string name="poi_trees_date">Döðlur</string>
 	<string name="poi_information_map">Kort</string>
 	<string name="poi_information_office">Skrifstofa</string>
-	<string name="poi_information_history">Breytingaskrá</string>
+	<string name="poi_information_history">Sagnfræði</string>
 	<string name="poi_railway_crossing">Þverun járnbrautar</string>
-	<string name="poi_piste_difficulty_advanced">Nánar</string>
+	<string name="poi_piste_difficulty_advanced">Lengra komnir</string>
 	<string name="poi_capacity_disabled_yes">Já</string>
 	<string name="poi_payment_others_yes">Annað</string>
 	<string name="poi_resource_water">Vatn</string>
@@ -665,7 +665,7 @@
 	<string name="poi_entrance">Inngangur</string>
 	<string name="poi_height">Hæð</string>
 	<string name="poi_operator">Virki</string>
-	<string name="poi_seasonal_spring">Lind</string>
+	<string name="poi_seasonal_spring">Vor</string>
 	<string name="poi_loc_name">Staðvært heiti</string>
 	<string name="poi_pump_manual">Handvirkt</string>
 	<string name="poi_services">Þjónustusvæði</string>
@@ -676,8 +676,8 @@
 	<string name="poi_grassland">Gresja</string>
 	<string name="poi_farmland">Akurlendi</string>
 	<string name="poi_payment_svg_yes">SVG</string>
-	<string name="poi_service_parts">Hlutar</string>
-	<string name="poi_memorial_column">Dálkur</string>
+	<string name="poi_service_parts">Bílapartar</string>
+	<string name="poi_memorial_column">Súla</string>
 	<string name="poi_resource_stone">Steinn</string>
 	<string name="poi_wetland_marsh">Votlendi</string>
 	<string name="poi_beach_sand">Sandur</string>
@@ -718,7 +718,7 @@
 
 	<string name="poi_stone_type_coat_of_arms">Tegund: skjaldarmerki</string>
 
-	<string name="poi_square">Ferningur</string>
+	<string name="poi_square">Torg</string>
 	<string name="poi_building_type_church">Tegund byggingar: kirkja</string>
 	<string name="poi_building_type_chapel">Tegund byggingar: kapella</string>
 	<string name="poi_building_type_mosque">Tegund byggingar: moska</string>
@@ -735,4 +735,417 @@
 	<string name="poi_gambling_type">Tegund</string>
 	<string name="poi_cliff">Klettar</string>
 
+	<string name="poi_military_nuclear_explosion_site">Kjarnorkusprengisvæði</string>
+
+	<string name="poi_wiki_lang_vi">Wiki á víetnömsko</string>
+	<string name="poi_wiki_lang_vo">Wiki á volapük</string>
+	<string name="poi_wiki_lang_zh">Wiki á kínversku</string>
+	<string name="poi_wiki_lang_af">Wiki á afríkönsku</string>
+	<string name="poi_wiki_lang_als">Wiki á alsatísku</string>
+	<string name="poi_wiki_lang_az">Wiki á azersku</string>
+	<string name="poi_wiki_lang_bn">Wiki á bengölsku</string>
+	<string name="poi_wiki_lang_bpy">Wiki á bishnupriya</string>
+	<string name="poi_wiki_lang_br">Wiki á bretónsku</string>
+	<string name="poi_wiki_lang_cy">Wiki á velsku</string>
+	<string name="poi_wiki_lang_eo">Wiki á esperantó</string>
+	<string name="poi_wiki_lang_eu">Wiki á basknesku</string>
+	<string name="poi_wiki_lang_fa">Wiki á farsí</string>
+	<string name="poi_wiki_lang_fy">Wiki á vestur-frísnesku</string>
+	<string name="poi_wiki_lang_hy">Wiki á armensku</string>
+	<string name="poi_wiki_lang_ka">Wiki á georgísku</string>
+	<string name="poi_wiki_lang_ku">Wiki á kúrdísku</string>
+	<string name="poi_wiki_lang_la">Wiki á latínu</string>
+	<string name="poi_wiki_lang_lb">Wiki á lúxemborgísku</string>
+	<string name="poi_wiki_lang_mk">Wiki á makedónsku</string>
+	<string name="poi_wiki_lang_ml">Wiki á malaíalam</string>
+	<string name="poi_wiki_lang_mr">Wiki á marathtí</string>
+	<string name="poi_wiki_lang_nds">Wiki á lág-saxnesku</string>
+	<string name="poi_wiki_lang_nv">Wiki á navajó</string>
+	<string name="poi_wiki_lang_os">Wiki á ossetísku</string>
+	<string name="poi_wiki_lang_pms">Wiki á piedmontesku</string>
+	<string name="poi_wiki_lang_sc">Wiki á sardinísku</string>
+	<string name="poi_wiki_lang_sh">Wiki á serbó-króatísku</string>
+	<string name="poi_wiki_lang_sq">Wiki á albönsku</string>
+	<string name="poi_wiki_lang_ta">Wiki á tamílsku</string>
+	<string name="poi_wiki_lang_tl">Wiki á filipísku</string>
+	<string name="poi_wiki_lang_war">Wiki á waray</string>
+	<string name="poi_wiki_lang_min">Wiki á mínangkabau</string>
+	<string name="poi_wiki_lang_kk">Wiki á kasakísku</string>
+	<string name="poi_wiki_lang_uz">Wiki á úsbekísku</string>
+	<string name="poi_wiki_lang_ce">Wiki á tétjensku</string>
+	<string name="poi_wiki_lang_ur">Wiki á úrdú</string>
+	<string name="poi_wiki_lang_oc">Wiki á Occitan</string>
+	<string name="poi_wiki_lang_zhminnan">Wiki á suður-mín</string>
+	<string name="poi_wiki_lang_mg">Wiki á malagasísku</string>
+	<string name="poi_wiki_lang_tt">Wiki á tatörsku</string>
+	<string name="poi_wiki_lang_jv">Wiki á javanesku</string>
+	<string name="poi_wiki_lang_ky">Wiki á kyrgsísku</string>
+	<string name="poi_wiki_lang_zhyue">Wiki á kantónsku</string>
+	<string name="poi_wiki_lang_ast">Wiki á astúr-leonísku</string>
+	<string name="poi_wiki_lang_tg">Wiki á tadzjikisku</string>
+	<string name="poi_wiki_lang_ba">Wiki á bashkir</string>
+	<string name="poi_wiki_lang_sco">Wiki á skosku</string>
+	<string name="poi_wiki_lang_pnb">Wiki á punjabi</string>
+	<string name="poi_wiki_lang_cv">Wiki á chuvash</string>
+	<string name="poi_wiki_lang_lmo">Wiki á lombardísku</string>
+	<string name="poi_wiki_lang_my">Wiki á búrmísku</string>
+	<string name="poi_wiki_lang_yo">Wiki á yórúba</string>
+	<string name="poi_wiki_lang_an">Wiki á aragónsku</string>
+	<string name="poi_wiki_lang_ne">Wiki á nepölsku</string>
+	<string name="poi_wiki_lang_gu">Wiki á gújaratí</string>
+	<string name="poi_wiki_lang_scn">Wiki á sikileysku</string>
+	<string name="poi_wiki_lang_bar">Wiki á bavarísku</string>
+	<string name="poi_wiki_lang_nap">Wiki á neapólísku</string>
+
+	<string name="poi_bollard">Polli</string>
+	<string name="poi_cycle_barrier">Hjólahindrun</string>
+	<string name="poi_motorcycle_barrier">Mótorhjólahindrun</string>
+	<string name="poi_general_barrier">Almenn hindrun</string>
+	<string name="poi_collection_times">Söfnunartímar</string>
+	<string name="poi_website">Vefsvæði</string>
+	<string name="poi_fax">Fax</string>
+	<string name="facebook">Facebook</string>
+	<string name="twitter">Twitter</string>
+	<string name="poi_skype">Skype</string>
+	<string name="poi_youtube">YouTube</string>
+	<string name="poi_instagram">Instagram</string>
+	<string name="vk">VKontakte</string>
+	<string name="poi_google_plus">Google+</string>
+	<string name="poi_mobile">Farsími</string>
+	<string name="poi_service_times">Þjónustutímar</string>
+	<string name="poi_maxheight">Hámarkshæð</string>
+	<string name="poi_maxweight">Hámarksþyngd</string>
+	<string name="poi_ele">Hæð yfir sjávarmáli</string>
+	<string name="poi_abandoned">Yfirgefið</string>
+	<string name="poi_fee_yes">Já</string>
+	<string name="poi_fee_no">Nei</string>
+	<string name="poi_drinking_water_yes">Já</string>
+	<string name="poi_supervised_yes">Undir eftirliti</string>
+	<string name="poi_supervised_no">Án eftirlits</string>
+	<string name="poi_seasonal_yes">Já</string>
+	<string name="poi_seasonal_no">Nei</string>
+	<string name="poi_seasonal_dry_season">Þurrkatímabil</string>
+	<string name="poi_seasonal_wet_season">Regntímabil</string>
+	<string name="poi_seasonal_summer">Sumar</string>
+	<string name="poi_seasonal_autumn">Haust</string>
+	<string name="poi_seasonal_winter">Vetur</string>
+	<string name="poi_start_date">Upphafsdagsetning</string>
+	<string name="poi_wheelchair_accessibility">Aðgengi fyrir hjólastóla</string>
+	<string name="poi_wheelchair_yes">Já</string>
+	<string name="poi_wheelchair_no">Nei</string>
+	<string name="poi_wheelchair_limited">Takmarkað</string>
+	<string name="poi_access_no">Enginn aðgangur</string>
+	<string name="poi_content_silage">Innihald: vothey</string>
+	<string name="poi_content_water">Innihald: vatn</string>
+	<string name="poi_content_slurry">Innihald: grugg</string>
+	<string name="poi_content_oil">Innihald: olía</string>
+	<string name="poi_content_fuel">Innihald: eldsneyti</string>
+	<string name="poi_content_manure">Innihald: húsdýraáburður</string>
+	<string name="poi_content_wine">Innihald: vín</string>
+	<string name="poi_content_sewage">Innihald: frárennsli</string>
+	<string name="poi_content_gas">Innihald: gas</string>
+	<string name="poi_content_biomass">Innihald: lífmassi</string>
+	<string name="poi_content_wastewater">Innihald: óhreinsað vatn</string>
+	<string name="poi_content_crop">Innihald: plöntuafurðir</string>
+	<string name="poi_content_fodder">Innihald: húsdýrafóður</string>
+	<string name="poi_content_beer">Innihald: bjór</string>
+	<string name="poi_content_salt">Innihald: salt</string>
+	<string name="poi_content_grain">Innihald: korn</string>
+
+	<string name="poi_nudism_yes">Leyft</string>
+	<string name="poi_nudism_no">Bannað</string>
+	<string name="poi_nudism_obligatory">Skylda</string>
+	<string name="poi_nudism_customary">Venja</string>
+	<string name="poi_population">Fólksfjöldi</string>
+	<string name="poi_parking_underground">Neðanjarðar</string>
+	<string name="poi_bicycle_parking_rack">Rekki</string>
+	<string name="poi_bicycle_parking_shed">Skúr</string>
+	<string name="poi_bicycle_parking_bollard">Polli</string>
+	<string name="poi_bicycle_parking_informal">Óformlegt</string>
+
+	<string name="poi_leaf_type_broadleaved">Breiðlaufað</string>
+	<string name="poi_leaf_type_needleleaved">Nállaufað</string>
+	<string name="poi_leaf_type_mixed">Blandað</string>
+	<string name="poi_leaf_type_leafless">Lauflaust</string>
+	<string name="poi_species">Tegund</string>
+	<string name="poi_genus">Ættkvísl</string>
+	<string name="poi_taxon">Flokkunarfræði</string>
+
+	<string name="poi_trees_olive">Ólífur</string>
+	<string name="poi_trees_apple">Epli</string>
+	<string name="poi_trees_oil">Pálmaolía</string>
+	<string name="poi_trees_almond">Möndlur</string>
+	<string name="poi_trees_banana">Bananar</string>
+	<string name="poi_trees_hazel">Heslihnetur</string>
+	<string name="poi_trees_coconut">Kókoshnetur</string>
+	<string name="poi_trees_persimmon">Persimónur</string>
+	<string name="poi_trees_cherry">Kirsuber</string>
+	<string name="poi_trees_walnut">Valhnetur</string>
+	<string name="poi_trees_plum">Plómur</string>
+	<string name="poi_trees_peach">Ferskjur</string>
+	<string name="poi_trees_tea">Te</string>
+	<string name="poi_trees_coca">Kóka</string>
+	<string name="poi_trees_kiwi">Kíví</string>
+	<string name="poi_trees_meadow_orchard">Aldingarður</string>
+	<string name="poi_trees_nectorine">Nektarínur</string>
+	<string name="poi_trees_mango">Mangó</string>
+	<string name="poi_trees_rubber">Gúmmí</string>
+	<string name="poi_trees_coffea">Kaffi</string>
+	<string name="poi_trees_pomegranate">Granatepli</string>
+
+	<string name="poi_animal_shelter">Dýraskýli</string>
+	<string name="poi_seats">Sæti</string>
+	<string name="poi_backrest_yes">Með baki: já</string>
+	<string name="poi_backrest_no">Með baki: nei</string>
+
+	<string name="poi_building">Bygging</string>
+	<string name="poi_deadlock">Sjálfhelda</string>
+
+	<string name="poi_generator_source_coal">Uppruni orku: kol</string>
+	<string name="poi_generator_source_gas">Uppruni orku: gas</string>
+	<string name="poi_generator_source_nuclear">Uppruni orku: kjarnorka</string>
+	<string name="poi_generator_source_solar">Uppruni orku: sólarorka</string>
+	<string name="poi_generator_source_hydro">Uppruni orku: vatnsorka</string>
+	<string name="poi_generator_source_wind">Uppruni orku: vindorka</string>
+	<string name="poi_generator_source_geothermal">Uppruni orku: jarðvarmi</string>
+	<string name="poi_generator_source_oil">Uppruni orku: olía</string>
+	<string name="poi_generator_source_diesel">Uppruni orku: dísel</string>
+
+	<string name="poi_int_name">Alþjóðlegt heiti</string>
+	<string name="poi_nat_name">Upprunaheiti</string>
+	<string name="poi_reg_name">Svæðisbundið heiti</string>
+	<string name="poi_old_name">Eldra heiti</string>
+	<string name="poi_alt_name">Annað heiti</string>
+
+	<string name="poi_pump_no">Engin dæla</string>
+	<string name="poi_pump_yes">Já</string>
+
+	<string name="poi_water_characteristic_mineral">Steinefnaríkt</string>
+	<string name="poi_water_characteristic_mud">Eiginleikar vatns: leðja</string>
+	<string name="poi_water_characteristic_sulfuric">Brennisteinsmengað</string>
+
+	<string name="poi_information_board">Tafla</string>
+	<string name="poi_information_route_marker">Leitarmerki</string>
+	<string name="poi_information_hikingmap">Göngukort</string>
+	<string name="poi_information_nature">Náttúrufar</string>
+	<string name="poi_information_sign">Skilti</string>
+	<string name="poi_information_bicyclemap">Hjólreiðakort</string>
+	<string name="poi_board_type_plants">Plöntur</string>
+	<string name="poi_board_type_geology">Jarðfræði</string>
+	<string name="poi_board_type_public_transport">Almenningssamgöngur</string>
+	<string name="poi_board_type_technology">Tækni</string>
+	<string name="poi_board_type_astronomy">Stjörnufræði</string>
+
+	<string name="poi_fireplace_yes">Já</string>
+	<string name="poi_fireplace_no">Ekki eldstæði</string>
+
+	<string name="poi_covered_yes">Já</string>
+	<string name="poi_smoking_no">Ekki leyft</string>
+	<string name="poi_smoking_outside">Aðeins utandyra</string>
+	<string name="poi_smoking_yes">Leyft</string>
+	<string name="poi_smoking_separated">Í sérherbergi</string>
+	<string name="poi_tactile_paving_yes">Já</string>
+	<string name="poi_traffic_signals_sound_yes">Já</string>
+	<string name="poi_traffic_signals_sound_no">Nei</string>
+	<string name="poi_bird_hide">Staður til fuglaskoðunar</string>
+	<string name="poi_horse_riding">Hestaferðir</string>
+	<string name="poi_scrub">Runnar</string>
+	<string name="poi_logging">Skógarhögg</string>
+	<string name="poi_sand">Sandur</string>
+
+	<string name="poi_piste_difficulty_intermediate">Miðlungs</string>
+	<string name="poi_piste_difficulty_novice">Byrjendur</string>
+	<string name="poi_piste_difficulty_expert">Sérfræðingar</string>
+	<string name="poi_piste_grooming_no">Nei</string>
+	<string name="poi_aerialway_heating_yes">Já</string>
+	<string name="poi_aerialway_heating_no">Ekki upphitun</string>
+	<string name="poi_aerialway_bicycle_yes">Leyft</string>
+	<string name="poi_aerialway_access_entry">Einungis inngangur</string>
+	<string name="poi_aerialway_access_exit">Einungis útgangur</string>
+	<string name="poi_aerialway_access_both">Inn- og útgangur</string>
+	<string name="poi_payment_telephone_cards_yes">Símakort</string>
+	<string name="poi_payment_telephone_cards_no">Ekki tekið við símakortum</string>
+	<string name="poi_payment_credit_cards_yes">Greiðslukort</string>
+	<string name="poi_payment_credit_cards_no">Ekki tekið við greiðslukortum</string>
+	<string name="poi_payment_notes_yes">Peningaseðlar</string>
+	<string name="poi_payment_notes_no">Ekki tekið við peningaseðlum</string>
+	<string name="poi_payment_visa_yes">VISA</string>
+	<string name="poi_payment_visa_no">Ekki tekið við VISA-kortum</string>
+	<string name="poi_payment_mastercard_yes">MasterCard</string>
+	<string name="poi_payment_mastercard_no">Ekki tekið við MasterCard-kortum</string>
+	<string name="poi_payment_american_express_yes">American Express (AMEX)</string>
+	<string name="poi_payment_american_express_no">Ekki tekið við American Express (AMEX) kortum</string>
+	<string name="poi_payment_diners_club_yes">Diners Club</string>
+	<string name="poi_payment_diners_club_no">Ekki tekið við Diners Club kortum</string>
+	<string name="poi_payment_cheque_yes">Ávísanir</string>
+	<string name="poi_payment_cheque_no">Ekki tekið við ávísunum</string>
+	<string name="poi_payment_others_no">Ekki tekið við öðrum greiðslumátum</string>
+	<string name="poi_payment_wire_transfer_yes">Símgreiðslur</string>
+	<string name="poi_payment_wire_transfer_no">Ekki tekið við símgreiðslum</string>
+	<string name="poi_drive_in_yes">Já</string>
+	<string name="poi_drive_through_yes">Já</string>
+	<string name="poi_takeaway_filter_yes">Já</string>
+	<string name="poi_delivery_filter_yes">Já</string>
+	<string name="poi_delivery_yes">Heimsending</string>
+	<string name="poi_delivery_no">Ekki sent heim</string>
+	<string name="poi_delivery_only">Einungis heimsendingar</string>
+
+	<string name="poi_outdoor_seating_filter_yes">Já</string>
+	<string name="poi_outdoor_seating_yes">Sæti utandyra: já</string>
+	<string name="poi_outdoor_seating_no">Engin sæti utandyra</string>
+	<string name="poi_outdoor_seating_terrace">Sæti utandyra: pallur</string>
+	<string name="poi_outdoor_seating_sidewalk">Sæti utandyra: gangstétt</string>
+	<string name="poi_outdoor_seating_pedestrian_zone">Sæti utandyra: göngusvæði</string>
+	<string name="poi_outdoor_seating_garden">Sæti utandyra: garður</string>
+	<string name="poi_cocktails_yes">Já</string>
+
+	<string name="poi_service_dealer">Bílasala</string>
+	<string name="poi_service_repair">Bílaviðgerðir</string>
+	<string name="poi_service_repair_no">Engar viðgerðir</string>
+	<string name="poi_self_service_yes">Já</string>
+	<string name="poi_self_service_no">Ekki sjálfsafgreiðsla</string>
+	<string name="poi_automated_yes">Já</string>
+	<string name="poi_full_service_yes">Full þjónusta</string>
+	<string name="poi_brushless_yes">Já</string>
+	<string name="poi_indoor_yes">Innandyra</string>
+	<string name="poi_indoor_no">Utandyra</string>
+	<string name="poi_toilets_yes">Já</string>
+	<string name="poi_vending_cigarettes">Sígarettur</string>
+	<string name="poi_vending_public_transport_tickets">Miðar í almenningssamgöngur</string>
+	<string name="poi_vending_drinks">Drykkir</string>
+	<string name="poi_vending_sweets">Sætindi</string>
+	<string name="poi_vending_condoms">Smokkar</string>
+	<string name="poi_vending_stamps">Frímerki</string>
+	<string name="poi_vending_bicycle_tube">Reiðhjólaslöngur</string>
+	<string name="poi_vending_food">Matur</string>
+	<string name="poi_vending_drinks_food">Matur og drykkur</string>
+	<string name="poi_vending_milk">Mjólk</string>
+	<string name="poi_vending_bread">Brauð</string>
+	<string name="poi_vending_chewing_gums">Tyggjó</string>
+	<string name="poi_vending_coffee">Kaffi</string>
+	<string name="poi_vending_dvd">DVD</string>
+	<string name="poi_vending_candles">Kerti</string>
+	<string name="poi_vending_toys">Leikföng</string>
+	<string name="poi_vending_ice_cream">Rjómaís</string>
+	<string name="poi_vending_sim_cards">SIM-kort</string>
+
+	<string name="poi_memorial_war">Stríðsminnismerki</string>
+	<string name="poi_memorial_plaque">Skjöldur</string>
+	<string name="poi_memorial_statue">Stytta</string>
+	<string name="poi_memorial_stone">Steinn</string>
+	<string name="poi_memorial_bust">Brjóstmynd</string>
+	<string name="poi_memorial_vehicle">Farartæki</string>
+	<string name="poi_memorial_obelisk">Bautasteinn</string>
+	<string name="poi_inscription">Áletrun</string>
+	<string name="poi_resource_asbestos">Asbest</string>
+	<string name="poi_resource_barite">Barít</string>
+	<string name="poi_resource_basalt">Basalt</string>
+	<string name="poi_resource_bauxite">Báxít</string>
+	<string name="poi_resource_bismuth">Bismút</string>
+	<string name="poi_resource_clay">Leir</string>
+	<string name="poi_resource_coal">Kol</string>
+	<string name="poi_resource_copper">Kopar</string>
+	<string name="poi_resource_diamond">Demantar</string>
+	<string name="poi_resource_dolomite">Dólómít</string>
+	<string name="poi_resource_gas">Gas</string>
+	<string name="poi_resource_gold">Gull</string>
+	<string name="poi_resource_graphite">Grafít</string>
+	<string name="poi_resource_gravel">Möl</string>
+	<string name="poi_resource_gypsum">Gyps</string>
+	<string name="poi_resource_iron_ore">Járngrýti</string>
+	<string name="poi_resource_lead">Blý</string>
+	<string name="poi_resource_limestone">Kalksteinn</string>
+	<string name="poi_resource_marble">Marmari</string>
+	<string name="poi_resource_mercury">Kvikasilfur</string>
+	<string name="poi_resource_nickel">Nikkel</string>
+	<string name="poi_resource_oil">Olía</string>
+	<string name="poi_resource_opal">Ópal</string>
+	<string name="poi_resource_platinum">Platína</string>
+	<string name="poi_resource_radium">Radín</string>
+	<string name="poi_resource_ruby">Rúbín</string>
+	<string name="poi_resource_salt">Salt</string>
+	<string name="poi_resource_sand">Sandur</string>
+	<string name="poi_resource_sandstone">Sandsteinn</string>
+	<string name="poi_resource_silica">Kísill</string>
+	<string name="poi_resource_silver">Silfur</string>
+	<string name="poi_resource_tin">Tin</string>
+	<string name="poi_resource_tuff">Mór</string>
+	<string name="poi_resource_uranium">Úran</string>
+	<string name="poi_resource_vanadium">Vanadín</string>
+	<string name="poi_resource_zinc">Sink</string>
+	<string name="poi_wetland_mud">Leðja</string>
+
+	<string name="poi_palm">Pálmar</string>
+	<string name="poi_cypress">Sedrus</string>
+	<string name="poi_flagpole">Flaggstöng</string>
+
+	<string name="poi_bench_yes">Já</string>
+	<string name="poi_backcountry_yes">Já</string>
+	<string name="poi_backcountry_no">Nei</string>
+	<string name="poi_washing_machine_yes">Já</string>
+	<string name="poi_shower_filter_yes">Já</string>
+	<string name="poi_shower_yes">Steypibað: já</string>
+	<string name="poi_caravans_yes">Já</string>
+	<string name="poi_power_supply_yes">Já</string>
+	<string name="poi_theatre_genre_ballet">Ballet</string>
+	<string name="poi_highway_steps">Stigar</string>
+	<string name="poi_handrail_no">Handrið: nei</string>
+	<string name="poi_cairn">Varða</string>
+
+	<string name="poi_defibrillator_yes">Hjartastuðtæki: já</string>
+
+	<string name="poi_animal_training_dog">Hundar</string>
+	<string name="poi_animal_training_horse">Hestar</string>
+
+	<string name="poi_site_type_fortification">Virki</string>
+	<string name="poi_artist_name">Listamaður</string>
+	<string name="poi_sculptor">Myndhöggvari</string>
+
+	<string name="poi_aerialway_length">Lengd</string>
+
+	<string name="poi_health_specialty_behavior_yes">Hegðun</string>
+	<string name="poi_badminton">Badminton</string>
+	<string name="poi_judo">Júdó</string>
+	<string name="poi_additional_atm_yes">Hraðbanki: já</string>
+	<string name="poi_atm_no">Hraðbanki: nei</string>
+
+	<string name="poi_bandy">Bandí</string>
+
+	<string name="poi_addr_housename">Nafn á húsi</string>
+
+
+	<string name="poi_compressed_air_yes">Já</string>
+	<string name="poi_compressed_air_no">Loftdæla: nei</string>
+
+	<string name="poi_car_wash_yes">Já</string>
+
+	<string name="poi_vacuum_cleaner_yes">Já</string>
+	<string name="poi_vacuum_cleaner_no">Ryksuga: nei</string>
+	<string name="poi_amenity_vacuum_cleaner">Ryksuga</string>
+
+	<string name="poi_medical_system_western_yes">Vestræn</string>
+	<string name="poi_medical_system_chinese_yes">Hefðbundin kínverska</string>
+	<string name="poi_medical_system_ayurveeda_yes">Ayurveeda</string>
+	<string name="poi_medical_system_kampo_yes">Kampo</string>
+	<string name="poi_medical_system_mongolian_yes">Hefðbundin mongólska</string>
+	<string name="poi_medical_system_tibetan_yes">Hefðbundin tíbetska</string>
+	<string name="poi_medical_system_sidda_yes">Sidda</string>
+	<string name="poi_medical_system_unani_yes">Unani</string>
+
+	<string name="poi_fire_hydrant_type_underground">Neðanjarðar</string>
+	<string name="poi_fire_hydrant_type_pillar">Stólpi</string>
+	<string name="poi_fire_hydrant_type_pond">Tjörn</string>
+	<string name="poi_fire_hydrant_type_wall">Veggur</string>
+
+	<string name="poi_health_amenity_type_first_aid_kit">Skyndihjálparböggull</string>
+	<string name="poi_capacity_beds">Rými (rúm)</string>
+
+	<string name="poi_home_visit_yes">Já</string>
+	<string name="poi_disease_malaria_yes">Malaría: já</string>
+	<string name="poi_disease_malaria_no">Malaría: nei</string>
+	<string name="poi_disease_ebola_yes">Ebóla: já</string>
+	<string name="poi_disease_ebola_no">Ebóla: nei</string>
+	<string name="poi_salt_no">Salt: nei</string>
+	<string name="poi_aerodrome_type_international">Alþjóðlegt</string>
+	<string name="poi_aerodrome_type_regional">Svæðisbundið</string>
 	</resources>
