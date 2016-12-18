@@ -200,7 +200,7 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 										ttsVoiceName = ttsVoiceName + "\n\n" + mTts.getVoice().toString();
 									}
 								} else {
-										ttsVoiceName = ttsVoiceName + "\n\n" + mTts.getLanguage() + " (Voice name not reported in API<21)";
+										ttsVoiceName = ttsVoiceName + "\n\n" + mTts.getLanguage() + " (Voice details not reported in API<21)";
 								}
 								if(speechRate != 1) {
 									mTts.setSpeechRate(speechRate);
