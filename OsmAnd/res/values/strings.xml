@@ -9,7 +9,7 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
-
+    <string name="rendering_attr_hideWaterPolygons_description">Water</string>
     <string name="legacy_search">Legacy search</string>
     <string name="show_legacy_search">Show legacy search</string>
     <string name="show_legacy_search_desc">Enable legacy search in the drawer list</string>
@@ -1296,7 +1296,7 @@
     <string name="rendering_attr_hikingRoutesOSMC_name">Hiking symbol overlay</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Render paths according to OSMC traces</string>
 
-    <string name="rendering_attr_noAdminboundaries_name">Hide boundaries</string>
+    <string name="rendering_attr_noAdminboundaries_name">Boundaries</string>
     <string name="rendering_attr_noAdminboundaries_description">Suppress display of regional boundaries (admin levels 5–9)</string>
     <string name="map_widget_max_speed">Speed limit</string>
     <string name="monitoring_control_start">GPX</string>
@@ -1685,7 +1685,7 @@ If you need help with OsmAnd application, please contact our support team: suppo
     <string name="route_kl">Keep left and go</string>
     <string name="route_kr">Keep right and go</string>
     <string name="rendering_attr_noPolygons_description">Make all areal land features on map transparent</string>
-    <string name="rendering_attr_noPolygons_name">Hide polygons</string>
+    <string name="rendering_attr_noPolygons_name">Polygons</string>
     <string name="rendering_attr_appMode_name">Rendering mode</string>
     <string name="rendering_attr_appMode_description">Optimize map for</string>
     <!-- string name="rendering_attr_contourLines_description">Select minimum zoom level to display in map if available. Separate contour data needed.</string -->

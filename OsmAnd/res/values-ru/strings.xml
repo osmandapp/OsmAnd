@@ -1,5 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
+    <string name="rendering_attr_hideWaterPolygons_description">Воду</string>
+    <string name="legacy_search">Старый поиск</string>
+    <string name="show_legacy_search">Показывать старый поиск</string>
+    <string name="show_legacy_search_desc">Разрешить старый поиск в меню</string>
     <string name="routing_attr_allow_motorway_name">Разрешить автомагистрали</string>
     <string name="routing_attr_allow_motorway_description">Разрешить автомагистрали</string>
     <string name="wiki_around">Статьи Википедии рядом</string>
@@ -167,9 +171,9 @@
     <string name="index_srtm_parts">частей</string>
     <string name="index_srtm_ele">Линии высот</string>
     <string name="srtm_plugin_name">Линии высот</string>
-    <string name="rendering_attr_noAdminboundaries_name">Скрыть границы</string>
+    <string name="rendering_attr_noAdminboundaries_name">Границы</string>
     <string name="rendering_attr_noAdminboundaries_description">Скрыть региональные границы (admin levels 5-9)</string>
-    <string name="no_buildings_found">Здания не найдены.</string>
+    <string name="no_buildings_found">Здания не найдены</string>
     <string name="incremental_search_city">Выберите город</string>
     <string name="search_villages_and_postcodes">Поиск по деревням и почт. индексу</string>
     <string name="rendering_attr_showRoadMaps_description">Выберите как отображать только дорожные карты:</string>
@@ -865,7 +869,7 @@
     <string name="transport_search_desc">Поиск общественного транспорта</string>
     <string name="favourites_search_desc">Поиск в избранном</string>
     <string name="rendering_attr_noPolygons_description">Отображать только границы многоугольников, без заливки</string>
-    <string name="rendering_attr_noPolygons_name">Скрыть полигоны</string>
+    <string name="rendering_attr_noPolygons_name">Полигоны</string>
     <string name="rendering_attr_appMode_name">Режим рендеринга</string>
     <string name="rendering_attr_appMode_description">Оптимизация карты для соответствующего профиля</string>
     <string name="rendering_attr_contourLines_description">Выберите минимальный уровень масштаба для отображения горизонталей (необходимо предварительно загрузить соответствующий SRTM-файл):</string>
