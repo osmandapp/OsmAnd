@@ -789,7 +789,7 @@ Les cartes tuiles peuvent être obtenues directement en ligne ou peuvent être p
     <string name="route_kl">Serrez à gauche et continuez</string>
     <string name="route_kr">Serrez à droite et continuez</string>
     <string name="rendering_attr_noPolygons_description">Rendre invisibles les surfaces représentant des éléments de terrain</string>
-    <string name="rendering_attr_noPolygons_name">Masquer les polygones</string>
+    <string name="rendering_attr_noPolygons_name">Polygones</string>
     <string name="rendering_attr_appMode_name">Profil pour l\'affichage</string>
     <string name="rendering_attr_appMode_description">Optimisation de la carte selon le profil d\'utilisation</string>
     <string name="rendering_attr_contourLines_description">Afficher à partir du niveau de zoom (données courbes de niveau requises)</string>
@@ -970,7 +970,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="map_widget_max_speed">Limite de vitesse</string>
 
     <string name="monitoring_control_start">GPX</string>
-    <string name="rendering_attr_noAdminboundaries_name">Masquer les limites administratives</string>
+    <string name="rendering_attr_noAdminboundaries_name">Frontières</string>
     <string name="rendering_attr_noAdminboundaries_description">Masquer les limites administratives régionales (niveaux 5 à 9)</string>
 
 
@@ -2479,4 +2479,5 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="wiki_around">Articles Wikipedia à proximité</string>
     <string name="lang_sr_latn">Serbe (Latin)</string>
     <string name="lang_zh_hk">Chinois (Hong Kong)</string>
+    <string name="rendering_attr_hideWaterPolygons_description">Eau</string>
     </resources>
