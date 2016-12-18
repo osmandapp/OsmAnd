@@ -240,9 +240,9 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 		addButton(ll, "(10.4) You are back on the route", builder(p).backOnRoute());
 
 		addButton(ll, "       System checks:", builder(p));
-		addButton(ll, "(11.1) Display BT SCO availability (Phone call audio only)", builder(p).attention(""));
-		addButton(ll, "(11.2) Tap to change Phone call audio delay (if car stereo cuts off prompts). Default is 1500 ms.", builder(p).attention(""));
-		addButton(ll, "(11.3) OsmAnd voice: " + osmandVoice + "\nOsmAnd voice language: " + osmandVoiceLang + "\n\nTap to view system's language availability status and voice actually used", builder(p));
+		addButton(ll, "(11.1)\nDisplay BT SCO availability (Phone call audio only)", builder(p).attention(""));
+		addButton(ll, "(11.2)\nTap to change Phone call audio delay (if car stereo cuts off prompts). Default is 1500 ms.", builder(p).attention(""));
+		addButton(ll, "(11.3)\nOsmAnd voice: " + osmandVoice + "\nOsmAnd voice language: " + osmandVoiceLang + "\n\nTap to view system's language availability status and voice actually used", builder(p));
 		ll.forceLayout();
 	}
 
