@@ -3340,4 +3340,7 @@
 	<string name="poi_tower_construction_lattice">Konstruktion: Gitter</string>
 	<string name="poi_tower_construction_freestanding">Konstruktion: freistehend</string>
 	<string name="poi_tower_construction_dome">Konstruktion: Kuppel</string>
-	</resources>
+	<string name="poi_tower_construction_dish">Konstruktion: Schüssel</string>
+	<string name="poi_tower_construction_concealed">Konstruktion: verdeckt</string>
+
+</resources>
