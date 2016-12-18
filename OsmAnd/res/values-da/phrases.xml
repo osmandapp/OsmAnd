@@ -3424,7 +3424,7 @@
 <string name="poi_tower_construction_lattice">Konstruktion: gitter</string>
 	<string name="poi_tower_construction_freestanding">Konstruktion: fritstående</string>
 	<string name="poi_tower_construction_dish">Konstruktion: parabol</string>
-	<string name="poi_tower_construction_dome">Konstruktion: dome</string>
+	<string name="poi_tower_construction_dome">Konstruktion: kuppel</string>
 	<string name="poi_tower_construction_concealed">Konstruktion: skjult</string>
 
 </resources>
