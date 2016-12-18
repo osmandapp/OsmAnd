@@ -60,10 +60,11 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 
 	private static final String CONFIG_FILE = "_ttsconfig.p";
 	private static final int[] TTS_VOICE_VERSION = new int[] { 102, 103 }; // !! MUST BE SORTED  
-	// TTS any more 101 because of to much changes
+	// No more TTS v101 support because of too many changes
 	// TODO: We could actually remove v102 support, I am done updating all existing 35 TTS voices to v103. Hardy, July 2016
 	private static final Log log = PlatformUtil.getLog(TTSCommandPlayerImpl.class);
-	private TextToSpeech mTts;
+	private static TextToSpeech mTts;
+	private static String ttsVoiceName = "";
 	private Context mTtsContext;
 	private HashMap<String, String> params = new HashMap<String, String>();
 	private VoiceRouter vrt;
@@ -161,17 +162,20 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 		}
 		if (mTts == null) {
 			mTtsContext = ctx;
+			ttsVoiceName = "";
 			ttsRequests = 0;
 			final float speechRate = cSpeechRate; 
 			mTts = new TextToSpeech(ctx, new OnInitListener() {
 				@Override
 				public void onInit(int status) {
 					if (status != TextToSpeech.SUCCESS) {
+						ttsVoiceName = "NO INIT SUCCESS";
 						internalClear();
 					} else if (mTts != null) {
 						speechAllowed = true;
 						switch (mTts.isLanguageAvailable(new Locale(language))) {
 							case TextToSpeech.LANG_MISSING_DATA:
+								ttsVoiceName = "setLanguage: LANG_MISSING_DATA";
 								if (isSettingsActivity(act)) {
 									AlertDialog.Builder builder = createAlertDialog(
 										R.string.tts_missing_language_data_title,
@@ -182,18 +186,25 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 										act);
 									builder.show();
 								}
-								break;
+								// Proceed anyway in this case
+								//break;
 							case TextToSpeech.LANG_AVAILABLE:
+								ttsVoiceName = "".equals(ttsVoiceName) ? "setLanguage: LANG_AVAILABLE" : ttsVoiceName;
 							case TextToSpeech.LANG_COUNTRY_AVAILABLE:
+								ttsVoiceName = "".equals(ttsVoiceName) ? "setLanguage: LANG_COUNTRY_AVAILABLE" : ttsVoiceName;
 							case TextToSpeech.LANG_COUNTRY_VAR_AVAILABLE:
+								ttsVoiceName = "".equals(ttsVoiceName) ? "setLanguage: LANG_COUNTRY_VAR_AVAILABLE" : ttsVoiceName;
 								mTts.setLanguage(new Locale(language));
-								if(speechRate != 1) {
-									mTts.setSpeechRate(speechRate); 
+								if (mTts.getVoice() != null) {
+									ttsVoiceName = android.os.Build.VERSION.SDK_INT >= 21 ? ttsVoiceName + "\n\n" + mTts.getVoice().toString() : ttsVoiceName + "\n\n" + mTts.getLanguage() + " (Voice name not reported in API<21)";
+									if(speechRate != 1) {
+										mTts.setSpeechRate(speechRate);
+									}
 								}
 								break;
 							case TextToSpeech.LANG_NOT_SUPPORTED:
-								//maybe weird, but I didn't want to introduce parameter in around 5 methods just to do
-								//this if condition
+								//maybe weird, but I didn't want to introduce parameter in around 5 methods just to do this if condition
+								ttsVoiceName = "setLanguage: LANG_NOT_SUPPORTED";
 								if (isSettingsActivity(act)) {
 									AlertDialog.Builder builder = createAlertDialog(
 											R.string.tts_language_not_supported_title,
@@ -228,7 +239,11 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 			});
 		}
 	}
-	
+
+	public static String getTtsVoiceName() {
+		return ttsVoiceName;
+	}
+
 	private AlertDialog.Builder createAlertDialog(int titleResID, int messageResID,
 			IntentStarter intentStarter, final Activity ctx) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
@@ -249,6 +264,7 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 		}
 		abandonAudioFocus();
 		mTtsContext = null;
+		ttsVoiceName = "";
 	}
 	
 	@Override
