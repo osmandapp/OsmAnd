@@ -195,11 +195,15 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 							case TextToSpeech.LANG_COUNTRY_VAR_AVAILABLE:
 								ttsVoiceName = "".equals(ttsVoiceName) ? "setLanguage: LANG_COUNTRY_VAR_AVAILABLE" : ttsVoiceName;
 								mTts.setLanguage(new Locale(language));
-								if (mTts.getVoice() != null) {
-									ttsVoiceName = android.os.Build.VERSION.SDK_INT >= 21 ? ttsVoiceName + "\n\n" + mTts.getVoice().toString() : ttsVoiceName + "\n\n" + mTts.getLanguage() + " (Voice name not reported in API<21)";
-									if(speechRate != 1) {
-										mTts.setSpeechRate(speechRate);
+								if (android.os.Build.VERSION.SDK_INT >= 21) {
+									if (mTts.getVoice() != null) {
+										ttsVoiceName = ttsVoiceName + "\n\n" + mTts.getVoice().toString();
 									}
+								} else {
+										ttsVoiceName = ttsVoiceName + "\n\n" + mTts.getLanguage() + " (Voice name not reported in API<21)";
+								}
+								if(speechRate != 1) {
+									mTts.setSpeechRate(speechRate);
 								}
 								break;
 							case TextToSpeech.LANG_NOT_SUPPORTED:
