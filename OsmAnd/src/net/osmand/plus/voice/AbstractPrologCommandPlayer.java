@@ -64,7 +64,7 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer, Stat
 	private static AudioFocusHelper mAudioFocusHelper;
 	protected String language = "";
 	protected int streamType;
-	private int currentVersion;
+	private static int currentVersion;
 
 
 	protected AbstractPrologCommandPlayer(OsmandApplication ctx, String voiceProvider, String configFile, int[] sortedVoiceVersions)
@@ -239,7 +239,7 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer, Stat
 		return files;
 	}
 	
-	public int getCurrentVersion() {
+	public static int getCurrentVersion() {
 		return currentVersion;
 	}
 	

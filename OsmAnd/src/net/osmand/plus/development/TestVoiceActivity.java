@@ -22,6 +22,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.OsmandActionBarActivity;
 import net.osmand.plus.voice.AbstractPrologCommandPlayer;
+import net.osmand.plus.voice.TTSCommandPlayerImpl;
 import net.osmand.plus.voice.CommandBuilder;
 import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.util.Algorithms;
@@ -121,9 +122,9 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 						if (p == null) {
 							Toast.makeText(TestVoiceActivity.this, "Voice player not initialized", Toast.LENGTH_SHORT).show();
 						} else {
-							//Check which voice was set
-							getSupportActionBar().setTitle(app.getString(R.string.test_voice_prompts) + " (" + entrieValues[which] + ", " + p.getLanguage() + ")");
-							addButtons(ll, p);
+							final String osmandVoice = entrieValues[which];
+							final String osmandVoiceLang = p.getLanguage();
+							addButtons(ll, p, osmandVoice, osmandVoiceLang);
 						}
 					}
 				}, true, true);
@@ -168,7 +169,7 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 		return new Struct(name);
 	}
 
-	private void addButtons(final LinearLayout ll, CommandPlayer p) {
+	private void addButtons(final LinearLayout ll, CommandPlayer p, final String osmandVoice, final String osmandVoiceLang) {
 		addButton(ll, "       Route calculated and number tests:", builder(p));
 		addButton(ll, "(1.1)  New route calculated, 150m, 230sec (00:03:50)", builder(p).newRouteCalculated(150, 230));
 		addButton(ll, "(1.2)  New route calculated, 1350m, 3680sec (01:01:20)", builder(p).newRouteCalculated(1350, 3680));
@@ -241,6 +242,7 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 		addButton(ll, "       System checks:", builder(p));
 		addButton(ll, "(11.1) Display BT SCO availability (Phone call audio only)", builder(p).attention(""));
 		addButton(ll, "(11.2) Tap to change Phone call audio delay (if car stereo cuts off prompts). Default is 1500 ms.", builder(p).attention(""));
+		addButton(ll, "(11.3) OsmAnd voice: " + osmandVoice + "\nOsmAnd voice language: " + osmandVoiceLang + "\n\nTap to view system's language availability status and voice actually used", builder(p));
 		ll.forceLayout();
 	}
 
@@ -251,6 +253,7 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 	public void addButton(ViewGroup layout, final String description, final CommandBuilder builder){
 		Button button = new Button(this);
 		button.setGravity(Gravity.LEFT);
+		button.setTransformationMethod(null); //or else button text is all upper case
 		button.setText(description);
 		button.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));
 		button.setPadding(10, 5, 10, 2);
@@ -261,20 +264,32 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 			@Override
 			public void onClick(View v) {
 				builder.play();
-				if (description.startsWith("(11.1)") && (((OsmandApplication) getApplication()).getSettings().AUDIO_STREAM_GUIDANCE.get() == 0)) {
-					Toast.makeText(TestVoiceActivity.this, AbstractPrologCommandPlayer.btScoInit + "\nBT SCO init delay:  " + ((OsmandApplication) getApplication()).getSettings().BT_SCO_DELAY.get() + " ms", Toast.LENGTH_LONG).show();
-				}
-				if (description.startsWith("(11.2)") && (((OsmandApplication) getApplication()).getSettings().AUDIO_STREAM_GUIDANCE.get() == 0)) {
-					if (((OsmandApplication) getApplication()).getSettings().BT_SCO_DELAY.get() == 1000) {
-						((OsmandApplication) getApplication()).getSettings().BT_SCO_DELAY.set(1500);
-					} else if (((OsmandApplication) getApplication()).getSettings().BT_SCO_DELAY.get() == 1500) {
-						((OsmandApplication) getApplication()).getSettings().BT_SCO_DELAY.set(2000);
-					} else if (((OsmandApplication) getApplication()).getSettings().BT_SCO_DELAY.get() == 2000) {
-						((OsmandApplication) getApplication()).getSettings().BT_SCO_DELAY.set(2500);
-					} else if (((OsmandApplication) getApplication()).getSettings().BT_SCO_DELAY.get() == 2500) {
-						((OsmandApplication) getApplication()).getSettings().BT_SCO_DELAY.set(1000);
+				if (description.startsWith("(11.1)")) {
+					if (((OsmandApplication) getApplication()).getSettings().AUDIO_STREAM_GUIDANCE.get() == 0) {
+						Toast.makeText(TestVoiceActivity.this, AbstractPrologCommandPlayer.btScoInit + "\nBT SCO init delay:  " + ((OsmandApplication) getApplication()).getSettings().BT_SCO_DELAY.get() + " ms", Toast.LENGTH_LONG).show();
+					} else {
+						Toast.makeText(TestVoiceActivity.this, "Action only available for Phone Call Audio", Toast.LENGTH_LONG).show();
 					}
-					Toast.makeText(TestVoiceActivity.this, "BT SCO init delay changed to " + ((OsmandApplication) getApplication()).getSettings().BT_SCO_DELAY.get() + " ms", Toast.LENGTH_LONG).show();
+				}
+				if (description.startsWith("(11.2)")) {
+					if (((OsmandApplication) getApplication()).getSettings().AUDIO_STREAM_GUIDANCE.get() == 0) {
+						if (((OsmandApplication) getApplication()).getSettings().BT_SCO_DELAY.get() == 1000) {
+							((OsmandApplication) getApplication()).getSettings().BT_SCO_DELAY.set(1500);
+						} else if (((OsmandApplication) getApplication()).getSettings().BT_SCO_DELAY.get() == 1500) {
+							((OsmandApplication) getApplication()).getSettings().BT_SCO_DELAY.set(2000);
+						} else if (((OsmandApplication) getApplication()).getSettings().BT_SCO_DELAY.get() == 2000) {
+							((OsmandApplication) getApplication()).getSettings().BT_SCO_DELAY.set(2500);
+						} else if (((OsmandApplication) getApplication()).getSettings().BT_SCO_DELAY.get() == 2500) {
+							((OsmandApplication) getApplication()).getSettings().BT_SCO_DELAY.set(1000);
+						}
+						Toast.makeText(TestVoiceActivity.this, "BT SCO init delay changed to " + ((OsmandApplication) getApplication()).getSettings().BT_SCO_DELAY.get() + " ms", Toast.LENGTH_LONG).show();
+					} else {
+						Toast.makeText(TestVoiceActivity.this, "Action only available for Phone Call Audio", Toast.LENGTH_LONG).show();
+					}
+				}
+				if (description.startsWith("(11.3)")) {
+					final String systemVoiceUsed = AbstractPrologCommandPlayer.getCurrentVersion() > 99 ? TTSCommandPlayerImpl.getTtsVoiceName() : "Recorded voice";
+					Toast.makeText(TestVoiceActivity.this, "System's language availability status and voice actually used:\n\n" + systemVoiceUsed, Toast.LENGTH_LONG).show();
 				}
 			}
 		});
