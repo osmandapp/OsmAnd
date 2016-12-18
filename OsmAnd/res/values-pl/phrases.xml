@@ -3358,4 +3358,10 @@
 	<string name="poi_animal_keeping_type_paddock">Rodzaj: wybieg</string>
 	<string name="poi_animal_keeping_type_open_stable">Rodzaj: otwarta stajnia</string>
 
+<string name="poi_tower_construction_lattice">Konstrukcja: siatka stalowa</string>
+	<string name="poi_tower_construction_freestanding">Konstrukcja: wolnostojąca</string>
+	<string name="poi_tower_construction_dish">Konstrukcja: paraboliczna dysza</string>
+	<string name="poi_tower_construction_dome">Konstrukcja: kopuła</string>
+	<string name="poi_tower_construction_concealed">Konstrukcja: maskowana</string>
+
 </resources>
