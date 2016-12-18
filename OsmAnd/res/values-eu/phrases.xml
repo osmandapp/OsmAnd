@@ -653,16 +653,16 @@
 
 	<string name="poi_attraction">Erakargarritasun turistikoa</string>
 <string name="poi_tourism_yes">Elementu turistikoa</string>
-	<string name="poi_stars_1">Izarrak: 1 (Turista)</string>
-	<string name="poi_stars_1s">Izarrak: 1S (Turista gorena)</string>
-	<string name="poi_stars_2">Izarrak: 2 (Estandarra)</string>
+	<string name="poi_stars_1">1 (Turista)</string>
+	<string name="poi_stars_1s">1S (Turista gorena)</string>
+	<string name="poi_stars_2">2 (Estandarra)</string>
 	<string name="poi_stars_2s">Itzarrak: 2S (Estandar gorena)</string>
-	<string name="poi_stars_3">Izarrak: 3 (Erosotasuna)</string>
-	<string name="poi_stars_3s">Izarrak: 3S (Erosotasun gorena)</string>
-	<string name="poi_stars_4">Izarrak: 4 (Lehen klasea)</string>
+	<string name="poi_stars_3">3 (Erosotasuna)</string>
+	<string name="poi_stars_3s">3S (Erosotasun gorena)</string>
+	<string name="poi_stars_4">4 (Lehen klasea)</string>
 	<string name="poi_stars_4s">Izarrak: 4S (Lehen klase gorena)</string>
-	<string name="poi_stars_5">Izarrak: 5 (Luxuskoa)</string>
-	<string name="poi_stars_5s">Izarrak: 5S (Luxuskoa gorena)</string>
+	<string name="poi_stars_5">5 (Luxuzkoa)</string>
+	<string name="poi_stars_5s">5S (Luxuzkoa gorena)</string>
 	<string name="poi_stars_6">Izarrak: 6</string>
 	<string name="poi_stars_7">Izarrak: 7</string>
 	<string name="poi_vending_milk">Esnea</string>
@@ -2123,4 +2123,7 @@
 	<string name="poi_cross">Gurutzea</string>
 	<string name="poi_summit_cross">Tontorreko gurutzea: bai</string>
 
+	<string name="poi_emergency_infrastructure">Larrialdietarako azpiegitura</string>
+	<string name="poi_phone">Telefonoa</string>
+	<string name="poi_website">Webgunea</string>
 	</resources>
