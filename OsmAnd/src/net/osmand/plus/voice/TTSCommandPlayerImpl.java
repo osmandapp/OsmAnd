@@ -186,7 +186,7 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 										act);
 									builder.show();
 								}
-								// Proceed anyway in this case
+								// Proceed anyway in this case, look like breaking here caused Issue #3344
 								//break;
 							case TextToSpeech.LANG_AVAILABLE:
 								ttsVoiceName = "".equals(ttsVoiceName) ? "setLanguage: LANG_AVAILABLE" : ttsVoiceName;
