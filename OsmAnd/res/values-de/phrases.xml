@@ -3090,7 +3090,7 @@
 	<string name="poi_xmas_url">Weihnachten: Internetseite</string>
 
 <string name="poi_vending_type">Verkaufsart</string>
-	<string name="poi_bicycle_service">Fahrrad Dienstleitung</string>
+	<string name="poi_bicycle_service">Fahrrad-Kundendienst</string>
 	<string name="poi_service_car">Dienstleistung</string>
 	<string name="poi_self_service">Selbstbedienung</string>
 	<string name="poi_pharmacy_dispensing">Rezepte</string>
