@@ -3388,7 +3388,7 @@
 	<string name="poi_animal_keeping_type_open_stable">Tipo de refugio: establo abierto</string>
 
 <string name="poi_tower_construction_lattice">Construcción: Celosía</string>
-	<string name="poi_tower_construction_freestanding">Construcción: Sin apoyos</string>
+	<string name="poi_tower_construction_freestanding">Construcción: Sin soportes externos</string>
 	<string name="poi_tower_construction_dish">Construcción: Parabólica</string>
 	<string name="poi_tower_construction_dome">Construcción: Domo</string>
 	<string name="poi_tower_construction_concealed">Construcción: Oculta</string>
