@@ -189,7 +189,7 @@
     <string name="route_kl">靠左行走</string>
     <string name="route_kr">靠右行走</string>
     <string name="rendering_attr_noPolygons_description">讓地圖上所有的陸地區域特徵具透明性</string>
-    <string name="rendering_attr_noPolygons_name">隱藏多邊形</string>
+    <string name="rendering_attr_noPolygons_name">多邊形</string>
     <string name="rendering_attr_appMode_name">著色演算模式</string>
     <string name="rendering_attr_appMode_description">為地圖最佳化</string>
     <string name="rendering_attr_contourLines_description">顯示縮放比級別(需要等高線資料)：</string>
@@ -1047,7 +1047,7 @@
     <string name="download_regular_maps">標準地圖</string>
     <string name="download_roads_only_maps">僅道路地圖</string>
 
-    <string name="rendering_attr_noAdminboundaries_name">隱藏界線</string>
+    <string name="rendering_attr_noAdminboundaries_name">界線</string>
     <string name="rendering_attr_noAdminboundaries_description">抑制顯示行政區界(管理級別5-9)</string>
 
 
@@ -2676,4 +2676,5 @@ Facebook：https://www.facebook.com/osmandapp
     <string name="routing_attr_allow_motorway_description">允許進高速公路</string>
     <string name="lang_sr_latn">塞爾維亞語（拉丁語）</string>
     <string name="lang_zh_hk">中文（香港）</string>
+    <string name="rendering_attr_hideWaterPolygons_description">水</string>
     </resources>
