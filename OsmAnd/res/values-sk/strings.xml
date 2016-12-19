@@ -747,7 +747,7 @@ Dlaždicové mapy môžete získať priamo zo zdrojov na Internete, alebo ich m�
     <string name="transport_search_desc">Hľadanie hromadnej dopravy</string>
     <string name="favourites_search_desc">Hľadanie obľúbeného bodu</string>
     <string name="rendering_attr_noPolygons_description">Zobraziť plošné krajinné objekty na mape priehľadne</string>
-    <string name="rendering_attr_noPolygons_name">Skryť polygóny</string>
+    <string name="rendering_attr_noPolygons_name">Polygóny</string>
     <string name="rendering_attr_appMode_name">Vykresľovací režim</string>
     <string name="rendering_attr_appMode_description">Prispôsobenie mapy pre príslušný užívateľský profil</string>
     <string name="rendering_attr_contourLines_name">Zobraziť vrstevnice</string>
@@ -885,7 +885,7 @@ Niektoré z hlavných funkcií:
     
     <string name="map_widget_max_speed">Obmedzenie rýchlosti</string>
     <string name="monitoring_control_start">GPX</string>
-    <string name="rendering_attr_noAdminboundaries_name">Skryť hranice</string>
+    <string name="rendering_attr_noAdminboundaries_name">Hranice oblastí</string>
     <string name="rendering_attr_noAdminboundaries_description">Potlačiť zobrazenie hraníc regiónov (administratívne úrovne 5 až 9)</string>
     <string name="index_srtm_parts">časti</string>
     <string name="index_srtm_ele">Vrstevnice</string>
@@ -2509,4 +2509,7 @@ Ak potrebuje pomoc s aplikáciou OsmAnd, kontaktuje podporu: support@osmand.net.
     <string name="routing_attr_allow_motorway_description">Povoliť použiť diaľnice</string>
     <string name="lang_sr_latn">Srbsky (Latinka)</string>
     <string name="lang_zh_hk">Čínsky (Hong Kong)</string>
+    <string name="rendering_attr_contourWidth_description">Hrúbka vrstevníc</string>
+    <string name="rendering_attr_contourWidth_name">Hrúbka vrstevníc</string>
+    <string name="rendering_attr_hideWaterPolygons_description">Voda</string>
     </resources>
