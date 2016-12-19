@@ -128,7 +128,7 @@ Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter su
 	
 	<string name="download_hillshade_maps">Relief</string>
 	
-	<string name="rendering_attr_noAdminboundaries_name">Grenzen ausblenden</string>
+	<string name="rendering_attr_noAdminboundaries_name">Grenzen</string>
 	<string name="rendering_attr_noAdminboundaries_description">Unterdrückt die Anzeige regionaler Grenzverläufe (Administrationsebenen 5 - 9)</string>
 	
 	<string name="map_widget_max_speed">Tempolimit</string>
@@ -221,7 +221,7 @@ Einige der Kernfunktionen:
 	<string name="route_kl">Links halten, dann</string>
 	<string name="route_kr">Rechts halten, dann</string>
 	<string name="rendering_attr_noPolygons_description">Unterdrückt die Anzeige aller Flächenelemente in der Karte</string>
-	<string name="rendering_attr_noPolygons_name">Flächen ausblenden</string>
+	<string name="rendering_attr_noPolygons_name">Flächen</string>
 	<string name="rendering_attr_appMode_description">Optimierung der Kartendarstellung für</string>
 	<string name="rendering_attr_appMode_name">Darstellungsmodus</string>
 	<string name="rendering_attr_contourLines_description">Zeige ab Vergrößerung (benötigt Höhenlinien-Datei):</string>
@@ -2595,4 +2595,5 @@ und vieles mehr ...
     <string name="routing_attr_allow_motorway_description">Autobahnen erlauben</string>
     <string name="lang_sr_latn">Serbisch (lateinisch)</string>
     <string name="lang_zh_hk">Chinesisch (Hong Kong)</string>
+    <string name="rendering_attr_hideWaterPolygons_description">Wasser</string>
     </resources>
