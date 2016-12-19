@@ -201,7 +201,7 @@ Datu globalak (iparraldean 70 gradutan eta hegoaldean 70 gradutan) STRM (Shuttle
   <string name="download_srtm_maps">Sestra-kurbak</string>
   <string name="download_regular_maps">Mapa estandarra</string>
   <string name="download_roads_only_maps">Errepideak-bakarrik mapa</string>
-  <string name="rendering_attr_noAdminboundaries_name">Mugak ezkutatu</string>
+  <string name="rendering_attr_noAdminboundaries_name">Mugak</string>
   <string name="rendering_attr_noAdminboundaries_description">"Ez erakutsi  eskualde mailako mugak (5-9 administrazio mailak)"</string>
   
   
@@ -574,7 +574,7 @@ Kokalekua eta denbora OsmAnd kontrol panelean ikusgai daude eta maparen pantaila
   <string name="route_kl">Ezkerrean gelditu</string>
   <string name="route_kr">Eskubian gelditu</string>
   <string name="rendering_attr_noPolygons_description">Egin mapako lur ezaugarri guztiak gardenak</string>
-  <string name="rendering_attr_noPolygons_name">Poligonoak ezkutatu</string>
+  <string name="rendering_attr_noPolygons_name">Poligonoak</string>
   <string name="rendering_attr_appMode_name">Marrazte modua</string>
   <string name="rendering_attr_appMode_description">Mapa optimizatu</string>
   <string name="rendering_attr_contourLines_description">Zoom mailetatik erakutsi (erliebe datuak beharrezkoak ditu):</string>
@@ -2671,4 +2671,5 @@ OsmAnd aplikazioarekin laguntza behar baduzu, jarri kontaktuan gure laguntza tal
     <string name="routing_attr_allow_motorway_description">Baimendu autobideak</string>
     <string name="lang_sr_latn">Serbiera (Latinoa)</string>
     <string name="lang_zh_hk">Txinera (Hong Kong)</string>
+    <string name="rendering_attr_hideWaterPolygons_description">Ura</string>
     </resources>
