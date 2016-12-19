@@ -861,4 +861,8 @@
 	<string name="poi_denomination_evangelical">الإنجيلية</string>
 	<string name="poi_denomination_russian_orthodox">الأرثودكسية الروسية</string>
 	<string name="poi_buoy_safe_water">عوامة مياه آمنة</string>
+	<string name="poi_xmas">عيد الميلاد</string>
+	<string name="poi_xmas_market">سوق عيد الميلاد</string>
+	<string name="poi_xmas_shop">متجر عيد الميلاد</string>
+	<string name="poi_xmas_tree">شجرة عيد الميلاد</string>
 	</resources>
