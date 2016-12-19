@@ -201,7 +201,7 @@
     <string name="download_regular_maps">Стандартныя мапы</string>
     <string name="download_roads_only_maps">Мапа толькі дарог</string>
     
-	<string name="rendering_attr_noAdminboundaries_name">Схаваць межы</string>
+	<string name="rendering_attr_noAdminboundaries_name">Межы</string>
 	<string name="rendering_attr_noAdminboundaries_description">Не адлюстроўваць рэгіянальныя межы (адміністатыўныя ўзроўні 5–9)</string>
     
     
@@ -558,7 +558,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="route_kl">Трымайцеся левага боку</string>
 	<string name="route_kr">Трымайцеся правага боку</string>
 	<string name="rendering_attr_noPolygons_description">Адлюстроўваць толькі контуры, без заліваньня</string>
-	<string name="rendering_attr_noPolygons_name">Схаваць палігоны</string>
+	<string name="rendering_attr_noPolygons_name">Палігоны</string>
 	<string name="rendering_attr_appMode_name">Рэжым візуалізацыі</string>
 	<string name="rendering_attr_appMode_description">Аптымізаваць мапу для</string>
 	<string name="rendering_attr_contourLines_description">Мінімальны ўзровень маштабу з адлюстраваньнем ізаліній вышынь:</string>
@@ -2704,4 +2704,6 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="lang_zh_hk">кітайская (Ганконг)</string>
     <string name="legacy_search">Састарэлы пошук</string>
     <string name="show_legacy_search">Паказваць састарэлы пошук</string>
+    <string name="rendering_attr_hideWaterPolygons_description">Ваду</string>
+    <string name="show_legacy_search_desc">Дазволіць састарэлы пошук у мэню</string>
     </resources>
