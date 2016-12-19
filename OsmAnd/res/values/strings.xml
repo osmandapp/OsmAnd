@@ -9,6 +9,8 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="rendering_attr_contourWidth_description">Contour lines width</string>
+    <string name="rendering_attr_contourWidth_name">Contour lines width</string>
     <string name="rendering_attr_hideWaterPolygons_description">Water</string>
     <string name="legacy_search">Legacy search</string>
     <string name="show_legacy_search">Show legacy search</string>
