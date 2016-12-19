@@ -170,7 +170,7 @@
     <string name="global_app_allocated_memory">Uporabljen pomnilnik</string>
     <string name="starting_point_too_far">- izhodišče je predaleč od najbližje ceste.</string>
     <string name="rendering_attr_noPolygons_description">Nastavi vse ploskve zemljevida kot prosojne</string>
-    <string name="rendering_attr_noPolygons_name">Ne izriši ploskev območij</string>
+    <string name="rendering_attr_noPolygons_name">Ploskve</string>
     <string name="rendering_attr_appMode_name">Način izrisa</string>
     <string name="rendering_attr_appMode_description">Prilagodi zemljevid za</string>
     <string name="rendering_attr_contourLines_name">Izriši izohipse</string>
@@ -996,7 +996,7 @@ Pomembnejše lastnosti:
 
 
     <string name="monitoring_control_start">Beleženje GPX</string>
-    <string name="rendering_attr_noAdminboundaries_name">Ne izriši upravnih mej</string>
+    <string name="rendering_attr_noAdminboundaries_name">Meje</string>
     <string name="rendering_attr_noAdminboundaries_description">Izbira onemogoči izris upravnih mej (na ravneh približanja od 5 do 9)</string>
 
 
@@ -2677,4 +2677,5 @@ V kolikor naletite na težave s programom OsmAnd, prosimo, stopite v stik s skup
     <string name="lang_zh_hk">Kitajščina (Hong Kong)</string>
     <string name="routing_attr_allow_motorway_name">Vodenje po avtocestah</string>
     <string name="routing_attr_allow_motorway_description">Dovoli vodenje po cestah rezerviranih za motorna vozila in avtocestah</string>
+    <string name="rendering_attr_hideWaterPolygons_description">Voda</string>
     </resources>
