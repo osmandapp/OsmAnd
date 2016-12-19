@@ -1931,7 +1931,7 @@
 	<string name="poi_toilets_wheelchair_no">Rollstuhlgerechte Toilette: Nein</string>
 	<string name="poi_toilets_access_customers">Toilettenzugang: Kunden</string>
 	<string name="poi_toilets_access_permissive">Toilettenzugang: geduldet</string>
-	<string name="poi_toilets_access_community">Toilettenzugang: allgemein</string>
+	<string name="poi_toilets_access_community">Toilettenzugang: öffentlich</string>
 	<string name="poi_toilets_access_public">Toilettenzugang: öffentlich</string>
 
 	<string name="poi_diaper_yes">Wickeltisch</string>
@@ -2062,7 +2062,7 @@
 
 	<string name="poi_architecture_stalinist_neoclassicism">Kunstart: stalinistischer Neoklassizismus</string>
 	<string name="poi_architecture_eclectic">Architektur: vielseitig</string>
-	<string name="poi_architecture_new_objectivity">Architektur: neue Sachlichkeit</string>
+	<string name="poi_architecture_new_objectivity">Architektur: Neue Sachlichkeit</string>
 	<string name="poi_architecture_contemporary">Architektur: Zeitgenössisch</string>
 	<string name="poi_architecture_constructivism">Architektur: Konstruktivismus</string>
 	<string name="poi_architecture_umgebinde">Architektur: Umgebinde</string>
@@ -3019,7 +3019,7 @@
 <string name="poi_service_bicycle_charging_yes">Fahrrad laden: Ja</string>
 	<string name="poi_service_bicycle_charging_no">Fahrrad laden: Nein</string>
 
-<string name="poi_shop_craft">Kunst und Handwerk Zubehörgeschäft</string>
+<string name="poi_shop_craft">Geschäft für Kunsthandwerksbedarf</string>
 
 	<string name="poi_fuel_avia_type">Typ</string>
 	<string name="poi_payment_fuel_type">Tankkarten</string>
@@ -3091,7 +3091,7 @@
 
 <string name="poi_vending_type">Verkaufsart</string>
 	<string name="poi_bicycle_service">Fahrrad-Kundendienst</string>
-	<string name="poi_service_car">Dienstleistung</string>
+	<string name="poi_service_car">Kundendienst</string>
 	<string name="poi_self_service">Selbstbedienung</string>
 	<string name="poi_pharmacy_dispensing">Rezepte</string>
 	<string name="poi_archaeological_site_type">Typ</string>
