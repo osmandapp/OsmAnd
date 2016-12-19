@@ -2596,4 +2596,6 @@ und vieles mehr ...
     <string name="lang_sr_latn">Serbisch (lateinisch)</string>
     <string name="lang_zh_hk">Chinesisch (Hong Kong)</string>
     <string name="rendering_attr_hideWaterPolygons_description">Wasser</string>
+    <string name="rendering_attr_contourWidth_description">Breite der Höhenlinien</string>
+    <string name="rendering_attr_contourWidth_name">Breite der Höhenlinien</string>
     </resources>
