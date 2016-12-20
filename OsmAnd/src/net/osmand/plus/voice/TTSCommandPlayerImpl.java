@@ -26,6 +26,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Locale.Builder
 
 
 public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
@@ -164,7 +165,14 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 			mTtsContext = ctx;
 			ttsVoiceName = "";
 			ttsRequests = 0;
-			final float speechRate = cSpeechRate; 
+			final float speechRate = cSpeechRate;
+
+			//#3344: Try Locale builder instead of constructor
+			final String[] languageFields = language.split("\\_");
+			final languageFields[0];
+			final languageFields[1];
+			final Locale newLocale = new Builder().setLanguage("languageFields[0]").setScript("").setRegion("languageFields[1]").build();
+
 			mTts = new TextToSpeech(ctx, new OnInitListener() {
 				@Override
 				public void onInit(int status) {
@@ -173,9 +181,11 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 						internalClear();
 					} else if (mTts != null) {
 						speechAllowed = true;
-						switch (mTts.isLanguageAvailable(new Locale(language))) {
+						//#3344: Try Locale builder instead of constructor
+						//switch (mTts.isLanguageAvailable(new Locale(language))) {
+						switch (mTts.isLanguageAvailable(newLocale)) {
 							case TextToSpeech.LANG_MISSING_DATA:
-								ttsVoiceName = (new Locale(language)).getDisplayName() + ": LANG_MISSING_DATA";
+								ttsVoiceName = newLocale.getDisplayName() + ": LANG_MISSING_DATA";
 								if (isSettingsActivity(act)) {
 									AlertDialog.Builder builder = createAlertDialog(
 										R.string.tts_missing_language_data_title,
@@ -186,15 +196,17 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 										act);
 									builder.show();
 								}
-								// Proceed anyway in this case, look like breaking here caused Issue #3344
+								// Proceed anyway in this case
 								//break;
 							case TextToSpeech.LANG_AVAILABLE:
-								ttsVoiceName = "".equals(ttsVoiceName) ? (new Locale(language)).getDisplayName() + ": LANG_AVAILABLE" : ttsVoiceName;
+								ttsVoiceName = "".equals(ttsVoiceName) ? newLocale.getDisplayName() + ": LANG_AVAILABLE" : ttsVoiceName;
 							case TextToSpeech.LANG_COUNTRY_AVAILABLE:
-								ttsVoiceName = "".equals(ttsVoiceName) ? (new Locale(language)).getDisplayName() + ": LANG_COUNTRY_AVAILABLE" : ttsVoiceName;
+								ttsVoiceName = "".equals(ttsVoiceName) ? newLocale.getDisplayName() + ": LANG_COUNTRY_AVAILABLE" : ttsVoiceName;
 							case TextToSpeech.LANG_COUNTRY_VAR_AVAILABLE:
-								ttsVoiceName = "".equals(ttsVoiceName) ? (new Locale(language)).getDisplayName() + ": LANG_COUNTRY_VAR_AVAILABLE" : ttsVoiceName;
-								mTts.setLanguage(new Locale(language));
+								ttsVoiceName = "".equals(ttsVoiceName) ? newLocale.getDisplayName() + ": LANG_COUNTRY_VAR_AVAILABLE" : ttsVoiceName;
+								//#3344: Try Locale builder instead of constructor
+								//mTts.setLanguage(new Locale(language));
+								mTts.setLanguage(newLocale);
 								if (android.os.Build.VERSION.SDK_INT >= 21) {
 									if (mTts.getVoice() != null) {
 										ttsVoiceName = ttsVoiceName + "\n\n" + mTts.getVoice().toString();
@@ -208,7 +220,7 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 								break;
 							case TextToSpeech.LANG_NOT_SUPPORTED:
 								//maybe weird, but I didn't want to introduce parameter in around 5 methods just to do this if condition
-								ttsVoiceName = (new Locale(language)).getDisplayName() + ": LANG_NOT_SUPPORTED";
+								ttsVoiceName = newLocale.getDisplayName() + ": LANG_NOT_SUPPORTED";
 								if (isSettingsActivity(act)) {
 									AlertDialog.Builder builder = createAlertDialog(
 											R.string.tts_language_not_supported_title,
