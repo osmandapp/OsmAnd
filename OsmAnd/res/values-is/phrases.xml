@@ -136,7 +136,7 @@
 	<string name="poi_site_type_city">Borg</string>
 	<string name="poi_fire_hydrant_style_water_source_stream">Lækur</string>
 	<string name="poi_aerodrome_type_public">Opinbert</string>
-	<string name="poi_aerodrome_type_military">Herþjónusta</string>
+	<string name="poi_aerodrome_type_military">Hernaðar</string>
 	<string name="poi_aerodrome_type_private">Einka</string>
 
 	<string name="poi_wiki_link">Wikipedia</string>
@@ -1336,4 +1336,180 @@
 	<string name="poi_animal_no">Dýr ekki leyfð</string>
 
 	<string name="poi_historic_gallows">Sögulegir gálgar</string>
+	<string name="poi_openfire_yes">Leyft að vera með opinn eld</string>
+	<string name="poi_openfire_no">Ekki leyft að vera með opinn eld</string>
+	<string name="poi_scout_yes">Skátatjaldsvæði: já</string>
+	<string name="poi_scout_no">Skátatjaldsvæði: nei</string>
+	<string name="poi_group_only_yes">Einungis hópar: já</string>
+	<string name="poi_group_only_no">Einungis hópar: nei</string>
+	<string name="poi_washing_machine_no">Þvottavél: nei</string>
+	<string name="poi_shower_no">Steypibað: nei</string>
+	<string name="poi_shower_hot">Steypibað: hitað</string>
+	<string name="poi_shower_outdoor">Steypibað: utandyra</string>
+	<string name="poi_shower_cold">Steypibað: kalt</string>
+	<string name="poi_shower_indoor">Steypibað: innandyra</string>
+	<string name="poi_caravans_no">Hjólhýsi: nei</string>
+	<string name="poi_impromptu_yes">Án pöntunar: já</string>
+	<string name="poi_impromptu_no">Án pöntunar: nei</string>
+	<string name="poi_sanitary_dump_station_yes">Stöð fyrir hreinlætisúrgang: já</string>
+	<string name="poi_sanitary_dump_station_no">Stöð fyrir hreinlætisúrgang: nei</string>
+	<string name="poi_power_supply_no">Rafmagnsinnstungur: nei</string>
+	<string name="poi_power_supply_cee_17_blue">Rafmagnsinnstungur: CEE 17 blátt</string>
+	<string name="poi_power_supply_cee_7_4">Rafmagnsinnstungur: CEE 7/4</string>
+	<string name="poi_power_supply_cee_7_5">Rafmagnsinnstungur: CEE 7/5</string>
+	<string name="poi_power_supply_nema_5_15">Rafmagnsinnstungur: NEMA 5-15</string>
+
+	<string name="poi_capacity_tents">Hámarksfjöldi tjalda</string>
+	<string name="poi_capacity_caravans">Hámarksfjöldi hjólhýsa</string>
+	<string name="poi_social_facility_day_care">Dagvistun</string>
+
+	<string name="poi_kiln">Brennsluofn</string>
+	<string name="poi_product_brick">Afurð: múrsteinar</string>
+	<string name="poi_product_quicklime">Afurð: brennt kalk</string>
+	<string name="poi_product_leather">Afurð: leður</string>
+	<string name="poi_product_lime">Afurð: kalk</string>
+	<string name="poi_product_beer">Afurð: bjór</string>
+	<string name="poi_product_charcoal">Afurð: viðarkol</string>
+	<string name="poi_product_meat">Afurð: kjöt</string>
+
+	<string name="poi_wheelchair_description">Lýsing fyrir notendur hjólastóla</string>
+	<string name="poi_blind_description">Lýsing fyrir sjónskerta</string>
+	<string name="poi_deaf_description">Lýsing fyrir heyrnarskerta</string>
+
+	<string name="poi_handrail_yes">Handrið: já</string>
+	<string name="poi_ramp_yes">Rampur: já</string>
+	<string name="poi_ramp_no">Rampur: nei</string>
+	<string name="poi_ramp_wheelchair_yes">Hjólastólarampur: já</string>
+	<string name="poi_ramp_wheelchair_no">Hjólastólarampur: nei</string>
+	<string name="poi_ramp_stroller_yes">Rampur (barnakerrur): já</string>
+	<string name="poi_ramp_stroller_no">Rampur (barnakerrur): nei</string>
+	<string name="poi_ramp_bicycle_yes">Reiðhjólarampur: já</string>
+	<string name="poi_ramp_bicycle_no">Reiðhjólarampur: nei</string>
+	<string name="poi_ramp_luggage_yes">Farangursrampur: já</string>
+	<string name="poi_ramp_luggage_no">Farangursrampur: nei</string>
+	<string name="poi_step_count">Fjöldi þrepa</string>
+	<string name="poi_step_condition_even">Ástand þrepa: jöfn</string>
+	<string name="poi_step_condition_uneven">Ástand þrepa: ójöfn</string>
+	<string name="poi_step_condition_rough">Ástand þrepa: hrjúf</string>
+
+	<string name="poi_historic_civilization_ancient_roman">Menning: forn-rómversk (753 f.kr – 284 e.kr.)</string>
+	<string name="poi_historic_civilization_etruscan">Menning: etrúsk (12.– 6. öld e.kr.)</string>
+	<string name="poi_historic_civilization_prehistoric">Menning: forsöguleg</string>
+	<string name="poi_historic_civilization_ancient_greek">Menning: forn-grísk</string>
+	<string name="poi_historic_civilization_roman">Menning: rómversk</string>
+	<string name="poi_historic_civilization_ancient_egyptian">Menning: forn-egypsk (til 332 f.kr)</string>
+	<string name="poi_historic_civilization_celtic">Menning: keltnesk</string>
+	<string name="poi_historic_civilization_western_roman">Menning: vestur-rómversk (285 e.kr. – 476 e.kr.)</string>
+	<string name="poi_material_wood">Efni: viður</string>
+	<string name="poi_material_metal">Efni: málmur</string>
+	<string name="poi_material_reinforced_concrete">Efni: járnbent steinsteypa</string>
+	<string name="poi_material_concrete">Efni: steinsteypa</string>
+	<string name="poi_material_steel">Efni: stál</string>
+	<string name="poi_material_stone">Efni: steinn</string>
+	<string name="poi_material_masonry">Efni: steinhleðsla</string>
+	<string name="poi_material_brick">Efni: múrsteinn</string>
+	<string name="poi_material_plastic">Efni: plast</string>
+	<string name="poi_material_sandstone">Efni: sandsteinn</string>
+	<string name="poi_material_granite_stone">Efni: granítsteinn</string>
+	<string name="poi_material_metal_wood">Efni: málmur: viður</string>
+	<string name="poi_material_glass">Efni: gler</string>
+	<string name="poi_material_bronze">Efni: brons</string>
+	<string name="poi_material_earth">Efni: mold</string>
+	<string name="poi_material_composite">Efni: samsett</string>
+	<string name="poi_material_limestone">Efni: kalksteinn</string>
+	<string name="poi_material_marble">Efni: marmari</string>
+	<string name="poi_material_aluminium">Efni: ál</string>
+
+	<string name="poi_site_type_settlement">Landnám</string>
+	<string name="poi_historic_farm">Sögulegt býli</string>
+	<string name="poi_historic_railway_station">Söguleg járnbrautarstöð</string>
+
+	<string name="poi_historic_railway">Söguleg járnbraut</string>
+
+	<string name="poi_building_type_temple">Tegund byggingar: bænhús</string>
+	<string name="poi_building_type_synagogue">Tegund byggingar: sýnagóga</string>
+	<string name="poi_prison_camp">Fyrrverandi fangabúðir</string>
+	<string name="poi_temperature">Hitastig</string>
+	<string name="poi_cargo_passengers">Farþegar</string>
+	<string name="poi_cargo_vehicle">Farartæki</string>
+	<string name="poi_cargo_bicycle">Reiðhjól</string>
+	<string name="poi_cargo_container">Gámar</string>
+	<string name="poi_fitness_station">Líkamsræktarstöð</string>
+
+	<string name="poi_fireworks">Flugeldaverslun</string>
+
+	<string name="poi_health_specialty_maternity_yes">Fæðingardeild</string>
+	<string name="poi_fitness_centre">Líkamsræktarmiðstöð</string>
+	<string name="poi_fitness">Líkamsrækt</string>
+
+	<string name="poi_billiards">Billjarð</string>
+
+	<string name="poi_microwave_oven_yes">Örbylgjuofn: já</string>
+	<string name="poi_microwave_oven_no">Örbylgjuofn: nei</string>
+	<string name="poi_water_heater_yes">Vatnshitari: já</string>
+	<string name="poi_water_heater_no">Vatnshitari: nei</string>
+
+	<string name="poi_parking_surface">Tegund: yfirborð</string>
+	<string name="poi_running">Hlaup</string>
+	<string name="poi_disc_golf">Frisbígolf</string>
+	<string name="poi_futsal">Innanhúsfótbolti</string>
+	<string name="poi_squash">Skvass</string>
+	<string name="poi_boxing">Hnefaleikar</string>
+
+	<string name="poi_inscription_n">Áletrun:N</string>
+	<string name="poi_inscription_nw">Áletrun:NV</string>
+	<string name="poi_inscription_w">Áletrun:V</string>
+	<string name="poi_inscription_sw">Áletrun:SV</string>
+	<string name="poi_inscription_s">Áletrun:S</string>
+	<string name="poi_inscription_se">Áletrun:SA</string>
+	<string name="poi_inscription_e">Áletrun:A</string>
+	<string name="poi_inscription_ne">Áletrun:NA</string>
+
+	<string name="poi_construction_yes">Í byggingu</string>
+	<string name="poi_protected_area">Verndarsvæði</string>
+	<string name="poi_plant_nursery">Græðlingaræktun</string>
+
+	<string name="poi_water_tap">Vatnshani</string>
+	<string name="poi_free_flying_site_takeoff">Fligtak</string>
+	<string name="poi_free_flying_site_landing">Lending</string>
+	<string name="poi_free_flying_site_training">Þjálfun</string>
+	<string name="poi_free_flying_official_yes">Opinbert: já</string>
+	<string name="poi_free_flying_official_no">Opinbert: nei</string>
+	<string name="poi_emergency_yes">Neyðartilfelli: já</string>
+	<string name="poi_emergency_no">Neyðartilfelli: nei</string>
+	<string name="poi_fire_hydrant_style_water_source_main">Aðal</string>
+	<string name="poi_fire_hydrant_style_water_source_pond">Tjörn</string>
+	<string name="poi_fire_hydrant_style_water_source_cistern">Tankur</string>
+	<string name="poi_street_cabinet_power">Tegund skáps: rafmagn</string>
+	<string name="poi_street_cabinet_telecom">Tegund skáps: samskipti</string>
+	<string name="poi_street_cabinet_cable_tv">Tegund skáps: kapalsjónvarp</string>
+	<string name="poi_street_cabinet_gas">Tegund skáps: gas</string>
+	<string name="poi_street_cabinet_postal_service">Tegund skáps: póstþjónusta</string>
+	<string name="poi_street_cabinet_waste">Tegund skáps: úrgangur</string>
+	<string name="poi_street_cabinet_water_management">Tegund skáps: vatnsmiðlun</string>
+	<string name="poi_street_cabinet_street_lighting">Tegund skáps: götulýsing</string>
+
+	<string name="poi_bicycle_parking_lockers">Geymsluskápar</string>
+	<string name="poi_depth">Dýpt</string>
+
+	<string name="poi_salt_yes">Salt</string>
+	<string name="poi_summer_camp">Sumarbúðir</string>
+	<string name="poi_aerodrome_type_military_public">Hernaðar/almennings</string>
+	<string name="poi_ventilation_shaft">Loftræstigöng</string>
+
+	<string name="poi_telescope">Sjónauki</string>
+	<string name="poi_barometer_yes">Loftvog</string>
+	<string name="poi_barometer_no">Loftvog: nei</string>
+	<string name="poi_thermometer_yes">Hitamælir</string>
+	<string name="poi_thermometer_no">Hitamælir: nei</string>
+	<string name="poi_hygrometer_yes">Rakamælir</string>
+	<string name="poi_hygrometer_no">Rakamælir: nei</string>
+	<string name="poi_min_age">Lágmarksaldur</string>
+
+	<string name="poi_traffic_mirror">Umferðarspegill</string>
+
+	<string name="poi_water_tank">Vatnstankur</string>
+
+	<string name="poi_xmas">Jól</string>
+	<string name="poi_xmas_tree">Jólatré</string>
 	</resources>
