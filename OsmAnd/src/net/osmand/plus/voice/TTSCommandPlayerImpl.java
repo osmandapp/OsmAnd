@@ -26,7 +26,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Locale.Builder
+import java.util.Locale.Builder;
 
 
 public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
@@ -168,9 +168,8 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 			final float speechRate = cSpeechRate;
 
 			//#3344: Try Locale builder instead of constructor
+			//final Locale newLocale = new Locale(language);
 			final String[] languageFields = language.split("\\_");
-			final languageFields[0];
-			final languageFields[1];
 			final Locale newLocale = new Builder().setLanguage("languageFields[0]").setScript("").setRegion("languageFields[1]").build();
 
 			mTts = new TextToSpeech(ctx, new OnInitListener() {
@@ -181,8 +180,6 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 						internalClear();
 					} else if (mTts != null) {
 						speechAllowed = true;
-						//#3344: Try Locale builder instead of constructor
-						//switch (mTts.isLanguageAvailable(new Locale(language))) {
 						switch (mTts.isLanguageAvailable(newLocale)) {
 							case TextToSpeech.LANG_MISSING_DATA:
 								ttsVoiceName = newLocale.getDisplayName() + ": LANG_MISSING_DATA";
@@ -204,8 +201,6 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 								ttsVoiceName = "".equals(ttsVoiceName) ? newLocale.getDisplayName() + ": LANG_COUNTRY_AVAILABLE" : ttsVoiceName;
 							case TextToSpeech.LANG_COUNTRY_VAR_AVAILABLE:
 								ttsVoiceName = "".equals(ttsVoiceName) ? newLocale.getDisplayName() + ": LANG_COUNTRY_VAR_AVAILABLE" : ttsVoiceName;
-								//#3344: Try Locale builder instead of constructor
-								//mTts.setLanguage(new Locale(language));
 								mTts.setLanguage(newLocale);
 								if (android.os.Build.VERSION.SDK_INT >= 21) {
 									if (mTts.getVoice() != null) {
