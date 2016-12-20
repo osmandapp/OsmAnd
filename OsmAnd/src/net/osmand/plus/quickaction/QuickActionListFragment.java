@@ -3,6 +3,7 @@ package net.osmand.plus.quickaction;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -25,8 +26,10 @@ import static android.util.TypedValue.COMPLEX_UNIT_DIP;
  */
 
 public class QuickActionListFragment extends BaseOsmAndFragment {
+    public static final String TAG = QuickActionListFragment.class.getSimpleName();
 
     RecyclerView quickActionRV;
+    QuickActionAdapter adapter;
 
     @Nullable
     @Override
@@ -34,9 +37,28 @@ public class QuickActionListFragment extends BaseOsmAndFragment {
         View view = inflater.inflate(R.layout.quick_action_list, container, false);
 
         quickActionRV = (RecyclerView) view.findViewById(R.id.recycler_view);
+//        quickActionRV.setBackgroundColor(
+//                getResources().getColor(
+//                        getMyApplication().getSettings().isLightContent() ? R.color.bg_color_light
+//                                : R.color.bg_color_dark));
 
+
+        adapter = new QuickActionAdapter();
+        quickActionRV.setAdapter(adapter);
+        quickActionRV.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        adapter.addItems(createMockDada());
 
         return view;
+    }
+
+    private List<QuickActionItem> createMockDada() {
+        List<QuickActionItem> result = new ArrayList<>();
+        for (int i = 0; i < 15; i ++){
+            result.add(new QuickActionItem(R.string.favorite, R.drawable.ic_action_flag_dark));
+        }
+
+        return result;
     }
 
 
@@ -66,13 +88,13 @@ public class QuickActionListFragment extends BaseOsmAndFragment {
                 QuickActionItemVH itemVH = (QuickActionItemVH) holder;
                 itemVH.icon.setImageResource(item.getDrawableRes());
                 itemVH.title.setText(item.getNameRes());
-                itemVH.subTitle.setText("Action" + getActionPosition(position));      //TODO: get proper string
+                itemVH.subTitle.setText("Action " + getActionPosition(position));      //TODO: get proper string
 
                 LinearLayout.LayoutParams dividerParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                 dividerParams.setMargins(isShortDivider(position) ? dpToPx(56f) : 0, 0, 0, 0);
             } else {
                 QuickActionHeaderVH headerVH = (QuickActionHeaderVH) holder;
-                headerVH.headerName.setText("Screen" + (position/(ITEMS_IN_GROUP + 1) + 1));   //TODO: get proper string
+                headerVH.headerName.setText("Screen " + (position/(ITEMS_IN_GROUP + 1) + 1));   //TODO: get proper string
             }
         }
 
@@ -90,6 +112,19 @@ public class QuickActionListFragment extends BaseOsmAndFragment {
             itemsList.remove(position);
 
             notifyItemRemoved(position);
+        }
+
+        public void addItems(List<QuickActionItem> data) {
+            List<QuickActionItem> resultList = new ArrayList<>();
+            for (int i = 0; i < data.size(); i++) {
+                if (i % ITEMS_IN_GROUP == 0)
+                    resultList.add(QuickActionItem.createHeaderItem());
+
+                resultList.add(data.get(i));
+            }
+
+            itemsList = resultList;
+            notifyDataSetChanged();
         }
 
 
