@@ -2347,9 +2347,9 @@ Lon %2$s</string>
     <string name="consider_turning_polygons_off">Es wird empfohlen, das Rendern von Polygonen zu deaktivieren.</string>
     
     <string name="shared_string_widgets">Widgets</string>
-    <string name="download_files_error_not_enough_space">"Nicht genug Speicher!
-Es werden vorübergehend {3} MB  und {1} MB dauerhaft benötigt.
-Aktuell sind nur {2} MB verfügbar."</string>
+    <string name="download_files_error_not_enough_space">Nicht genug Speicher!
+Es werden vorübergehend {3} MB und dauerhaft {1} MB Speicherplatz benötigt.
+Aktuell sind nur {2} MB verfügbar.</string>
     <string name="download_files_question_space_with_temp">{0} Datei(en) herunterladen?
  Dies benötigt vorübergehend {3} MB und dauerhaft {1} MB.
  (Aktuell sind {2} MB verfügbar.)</string>
