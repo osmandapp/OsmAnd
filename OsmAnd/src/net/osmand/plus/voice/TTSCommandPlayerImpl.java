@@ -26,7 +26,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Locale.Builder;
 
 
 public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
@@ -170,7 +169,7 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 			//#3344: Try Locale builder instead of constructor
 			//final Locale newLocale = new Locale(language);
 			final String[] languageFields = language.split("\\_");
-			final Locale newLocale = new Builder().setLanguage("languageFields[0]").setScript("").setRegion("languageFields[1]").build();
+			final Locale newLocale = new Locale.Builder().setLanguage("languageFields[0]").setScript("").setRegion("languageFields[1]").build();
 
 			mTts = new TextToSpeech(ctx, new OnInitListener() {
 				@Override
