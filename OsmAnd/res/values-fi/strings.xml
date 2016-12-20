@@ -834,7 +834,12 @@ Pit %2$s</string>
 	<string name="osmand_rastermaps_plugin_description">"Tällä lisäosalla voit päästä monenlaisiin online (ns. laatta tai rasteri) karttoihin, esimääritellyistä Openstreetmap laatoista (kuten Mapnik) satelliitti kuviin ja erityistarkoitus tasoihin kuten sääkarttoihin, ilmasto karttoihin, geologisiin karttoihin, mäkisävy tasoihin, jne.\n\nMitä tahansa näistä kartoista voidaan käyttää pää (pohja) karttana näytettäessä OsmAnd karttaruudulla, tai päällys- tai aluskerroksena toiselle pohjakartalle (kuten OsmAndin perus offline kartat). Saadaksesi mikä tahansa aluskerros näkyvämmäksi, tiettyjä osia OsmAnd vektorikartoista voi helposti piilottaa \'Kartta asetukset\' valikosta tarvittaessa.\n\nLaattakarttoja voi saada suoraan online lähteistä, tai voidaan valmistaa offline käyttöön (tai manuaalisesti kopioida OsmAndin kansioon) sqlite tietokantana jonka voi teihdä eri kolmannen osapuolen karttavalmistelu työkaluilla. "</string>
 	<string name="record_plugin_description">"Tämä lisäosa ottaa käyttöön toiminnallisuudet nauhoittaa ja tallentaa jälkiä manuaalisesti koskettamalla GPX nauhoitus toimintoja karttaruudulla, tai myös automaattisesti tallentaa kaikki navigointireitit GPX tiedostoon.\n\nNauhoitetut jäljet voidaan jakaa ystävillesi tai käyttää OSM osallistumisissa. Urheilijat voivat nauhoittaa jälkiä harjoittelun seuraamiseen. Jotain perus jälkianalyysejä voidaan tehdä suoraan OsmAndissa, kuten kierrosaikoja, keskimääräistä nopeutta jne., ja jälkiä voi tietysty myös myöhemmin analysoida erityisissä kolmannen osapuolen analysointi työkaluissa. "</string>
 	<string name="osmo_plugin_name">OsMo seuranta</string>
-	<string name="osmo_plugin_description">"Tämä lisäosa tarjoaa toiminnot OsMo kehittyneeseen live seurantaan, katso http://osmo.mobi.\n\nVoit seurata muita laitteita ja olla seurattuna. Voit spontaanisti luoda anonyymejä ryhmiä, jakaa toistenne sijainnin, ja viestitellä. Mukana tulee eri vaihtoehtoja harjoituksen seuraamiseen tai jatkuvaan seuraamiseen.\n\nAnonyymejä ryhmiä luodaan määritellyiksi päivämääriksi ja rajoitettuna määrättyihin toimintohin, esimerkiksi ei ole etäohjausta eikä ryhmän pääkäyttäjää. Täysin toimivia ryhmiä, toisaalta, voi luoda verkkosivuilla ja vain rekisteröityneillä käyttäjillä on pääsy niihin. "</string>
+	<string name="osmo_plugin_description">"Tämä lisäosa tarjoaa toiminnot OsMo kehittyneeseen live seurantaan, katso http://osmo.mobi.
+
+Voit seurata muita laitteita ja olla seurattuna. Voit spontaanisti luoda anonyymejä ryhmiä, jakaa toistenne sijainnin, ja viestitellä. Mukana tulee eri vaihtoehtoja harjoituksen seuraamiseen tai jatkuvaan seuraamiseen.
+
+Anonyymejä ryhmiä luodaan määritellyiksi päivämääriksi ja rajoitettuna määrättyihin toimintohin, toisin sanoeni ei etäohjausta eikä ryhmän pääkäyttäjää. Täysin toimivia ryhmiä, toisaalta, voi luoda verkkosivuilla ja vain rekisteröityneillä käyttäjillä on pääsy niihin.
+ "</string>
 	<string name="srtm_paid_version_title">Korkeuskäyrät lisäosa</string>
 	<string name="osmand_srtm_short_description_80_chars">OsmAnd lisäosa offline korkeuskäyrille</string>
 	<string name="osmand_srtm_long_description_1000_chars">"Tämä lisäosa tarjoaa sekä korkeuskäyrä päällyskerros ja (helpotus) mäkisävy tason näytettäväksi OsmAnd offline karttojen päällä. Tätä toiminnallisuutta arvostavat paljon urheilijat, retkeilijät, vuoristo seikkailijat, ja ketkä tahansa maisemien ihailusta kiinnostuneet.\n\nMaailmanlaajuiset tiedot (välillä 70 astetta pohjoista ja 70 astetta eteläistä) perustuu mittauksiin jotka on tehnyt SRTM (Shuttle Radar Topography Mission) ja ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), ja kuvausvälineet mukana kulkeva Terra, NASAn maapallontarkkailujärjestelmän lippulaiva satelliitti. ASTER on yhteistyö NASAn, Japanin talous-, kauppa ja teollisuusministeriön (METI), ja Japanin avaruusjärjestelmien (J-spacesystems) välillä. "</string>
@@ -2031,4 +2036,27 @@ Jos pidät OsmAndista ja OSMsta ja haluat tukea niitä, on tämä täydellinen t
     <string name="rendering_attr_hideWaterPolygons_description">Vesi</string>
     <string name="legacy_search">Periytyvä haku</string>
     <string name="show_legacy_search">Näytä periytyvä haku</string>
+    <string name="release_2_4">"
+ • Uusi tehokas vapaan tekstin haku
+
+
+ • Autoradiojärjestelmä / kovaääninen puhelin yhdistäminen Bluetooth avulla
+
+
+ • Parannettu reittiopasatus, ääniviestitys ja käännöskaistojen osoitus
+
+
+ • Parannettu liikennetaso reitin hahmottamisella
+
+
+ • Lisätty kohteita sekä tuki paikallisille kohteille
+
+
+ • Paljo muita parannuksia ja virheiden korjauksia
+
+
+ ja lisää…
+ "</string>
+    <string name="av_audio_bitrate">Audion bittinopeus</string>
+    <string name="av_audio_bitrate_descr">Valitse audion bittinopeus</string>
     </resources>
