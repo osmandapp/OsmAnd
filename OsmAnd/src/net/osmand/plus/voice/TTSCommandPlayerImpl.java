@@ -188,7 +188,6 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 						speechAllowed = true;
 						switch (mTts.isLanguageAvailable(newLocale)) {
 							case TextToSpeech.LANG_MISSING_DATA:
-								ttsVoiceName = newLocale.getDisplayName() + ": LANG_MISSING_DATA";
 								if (isSettingsActivity(act)) {
 									AlertDialog.Builder builder = createAlertDialog(
 										R.string.tts_missing_language_data_title,
@@ -199,29 +198,23 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 										act);
 									builder.show();
 								}
-								// Proceed anyway in this case
-								//break;
+								ttsVoiceName = newLocale.getDisplayName() + ": LANG_MISSING_DATA";
+								ttsVoiceName = ttsVoiceName + "\n\n" + getVoiceUsed();
+								break;
 							case TextToSpeech.LANG_AVAILABLE:
-								ttsVoiceName = "".equals(ttsVoiceName) ? newLocale.getDisplayName() + ": LANG_AVAILABLE" : ttsVoiceName;
+								ttsVoiceName = newLocale.getDisplayName() + ": LANG_AVAILABLE";
 							case TextToSpeech.LANG_COUNTRY_AVAILABLE:
 								ttsVoiceName = "".equals(ttsVoiceName) ? newLocale.getDisplayName() + ": LANG_COUNTRY_AVAILABLE" : ttsVoiceName;
 							case TextToSpeech.LANG_COUNTRY_VAR_AVAILABLE:
-								ttsVoiceName = "".equals(ttsVoiceName) ? newLocale.getDisplayName() + ": LANG_COUNTRY_VAR_AVAILABLE" : ttsVoiceName;
 								mTts.setLanguage(newLocale);
-								if (android.os.Build.VERSION.SDK_INT >= 21) {
-									if (mTts.getVoice() != null) {
-										ttsVoiceName = ttsVoiceName + "\n\n" + mTts.getVoice().toString();
-									}
-								} else {
-										ttsVoiceName = ttsVoiceName + "\n\n" + mTts.getLanguage() + " (Voice details not reported in API<21)";
-								}
 								if(speechRate != 1) {
 									mTts.setSpeechRate(speechRate);
 								}
+								ttsVoiceName = "".equals(ttsVoiceName) ? newLocale.getDisplayName() + ": LANG_COUNTRY_VAR_AVAILABLE" : ttsVoiceName;
+								ttsVoiceName = ttsVoiceName + "\n\n" + getVoiceUsed();
 								break;
 							case TextToSpeech.LANG_NOT_SUPPORTED:
 								//maybe weird, but I didn't want to introduce parameter in around 5 methods just to do this if condition
-								ttsVoiceName = newLocale.getDisplayName() + ": LANG_NOT_SUPPORTED";
 								if (isSettingsActivity(act)) {
 									AlertDialog.Builder builder = createAlertDialog(
 											R.string.tts_language_not_supported_title,
@@ -233,6 +226,8 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 											act);
 									builder.show();
 								}
+								ttsVoiceName = newLocale.getDisplayName() + ": LANG_NOT_SUPPORTED";
+								ttsVoiceName = ttsVoiceName + "\n\n" + getVoiceUsed();
 								break;
 						}
 					}
@@ -240,6 +235,17 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 
 				private boolean isSettingsActivity(final Context ctx) {
 					return ctx instanceof SettingsActivity;
+				}
+				
+				private String getVoiceUsed() {
+					if (android.os.Build.VERSION.SDK_INT >= 21) {
+						if (mTts.getVoice() != null) {
+							return mTts.getVoice().toString();
+						}
+					} else {
+							return mTts.getLanguage() + " (Voice details not reported in API<21)";
+					}
+
 				}
 			});
 			mTts.setOnUtteranceCompletedListener(new OnUtteranceCompletedListener() {
