@@ -192,7 +192,7 @@
     <string name="shared_string_ellipsis">…</string>
     <string name="shared_string_ok">Í lagi</string>
     <string name="shared_string_cancel">Hætta við</string>
-    <string name="shared_string_dismiss">Hafna</string>
+    <string name="shared_string_dismiss">Hunsa</string>
     <string name="shared_string_yes">Já</string>
     <string name="shared_string_do_not_use">Ekki nota</string>
     <string name="shared_string_no">Nei</string>
@@ -903,7 +903,7 @@ Ferill %2$s</string>
     <string name="edit_tilesource_url_to_load">Slóð (URL)</string>
     <string name="distance_measurement_finish_subtrack">Byrja nýjan undirferil</string>
     <string name="shared_location">Deild staðsetning</string>
-    <string name="rendering_attr_noPolygons_name">Fela fláka</string>
+    <string name="rendering_attr_noPolygons_name">Flákar</string>
     <string name="rendering_attr_appMode_description">Besta kort fyrir</string>
     <string name="rendering_attr_contourLines_name">Birta hæðarlínur</string>
     <string name="address_search_desc">Leit að heimilisfangi</string>
@@ -1596,7 +1596,7 @@ Len %2$s</string>
     <string name="use_opengl_render">Nota OpenGL myndgerð</string>
     <string name="use_opengl_render_descr">Nota vélbúnaðarhröðun OpenGL myndgerðar (gæti virkað ekki á sumum tækjum)</string>
     <string name="map_update">Uppfærslur tiltækar fyrir %1$s kort</string>
-    <string name="rendering_attr_publicTransportMode_name">strætisvagn,strætó,áætlanabifreið,sporvagn,rafknúinn strætisvagn,skutla</string>
+    <string name="rendering_attr_publicTransportMode_name">Strætisvagnaleiðir, sporvagnar og skutluleiðir</string>
     <string name="lock_screen_request_explanation">%1$s þarf heimild fyrir þessu til að slökkva á skjánum til að spara orku.</string>
     <string name="wake_on_voice_descr">Kveikja á skjá (ef slökkt er á honum) þegar beygja nálgast</string>
     <string name="rendering_attr_trolleybusRoutes_name">Leiðir rafknúinna strætisvagna</string>
@@ -1792,4 +1792,7 @@ Punktar</string>
     <string name="local_openstreetmap_uploadall">Senda allt inn</string>
     <string name="local_openstreetmap_delete">Eyða breytingu</string>
     <string name="show_current_gpx_title">Eyða núverandi ferli</string>
+    <string name="rendering_attr_contourWidth_description">Breidd hæðarlína</string>
+    <string name="rendering_attr_contourWidth_name">Breidd hæðarlína</string>
+    <string name="rendering_attr_hideWaterPolygons_description">Vatn</string>
     </resources>
