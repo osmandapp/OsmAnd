@@ -175,7 +175,7 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 						speechAllowed = true;
 						switch (mTts.isLanguageAvailable(new Locale(language))) {
 							case TextToSpeech.LANG_MISSING_DATA:
-								ttsVoiceName = getDisplayName(new Locale(language)) + ": LANG_MISSING_DATA";
+								ttsVoiceName = (new Locale(language)).getDisplayName() + ": LANG_MISSING_DATA";
 								if (isSettingsActivity(act)) {
 									AlertDialog.Builder builder = createAlertDialog(
 										R.string.tts_missing_language_data_title,
@@ -189,11 +189,11 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 								// Proceed anyway in this case, look like breaking here caused Issue #3344
 								//break;
 							case TextToSpeech.LANG_AVAILABLE:
-								ttsVoiceName = "".equals(ttsVoiceName) ? getDisplayName(new Locale(language)) + ": LANG_AVAILABLE" : ttsVoiceName;
+								ttsVoiceName = "".equals(ttsVoiceName) ? (new Locale(language)).getDisplayName() + ": LANG_AVAILABLE" : ttsVoiceName;
 							case TextToSpeech.LANG_COUNTRY_AVAILABLE:
-								ttsVoiceName = "".equals(ttsVoiceName) ? getDisplayName(new Locale(language)) + ": LANG_COUNTRY_AVAILABLE" : ttsVoiceName;
+								ttsVoiceName = "".equals(ttsVoiceName) ? (new Locale(language)).getDisplayName() + ": LANG_COUNTRY_AVAILABLE" : ttsVoiceName;
 							case TextToSpeech.LANG_COUNTRY_VAR_AVAILABLE:
-								ttsVoiceName = "".equals(ttsVoiceName) ? getDisplayName(new Locale(language)) + ": LANG_COUNTRY_VAR_AVAILABLE" : ttsVoiceName;
+								ttsVoiceName = "".equals(ttsVoiceName) ? (new Locale(language)).getDisplayName() + ": LANG_COUNTRY_VAR_AVAILABLE" : ttsVoiceName;
 								mTts.setLanguage(new Locale(language));
 								if (android.os.Build.VERSION.SDK_INT >= 21) {
 									if (mTts.getVoice() != null) {
@@ -208,7 +208,7 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 								break;
 							case TextToSpeech.LANG_NOT_SUPPORTED:
 								//maybe weird, but I didn't want to introduce parameter in around 5 methods just to do this if condition
-								ttsVoiceName = getDisplayName(new Locale(language)) + ": LANG_NOT_SUPPORTED";
+								ttsVoiceName = (new Locale(language)).getDisplayName() + ": LANG_NOT_SUPPORTED";
 								if (isSettingsActivity(act)) {
 									AlertDialog.Builder builder = createAlertDialog(
 											R.string.tts_language_not_supported_title,
