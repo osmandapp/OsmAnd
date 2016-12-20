@@ -166,7 +166,7 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 			ttsRequests = 0;
 			final float speechRate = cSpeechRate;
 
-			private Locale newLocale = new Locale(language);
+			Locale newLocale = new Locale(language);
 			// #3344: Try Locale builder instead of constructor (only available from API 21)
 			if (android.os.Build.VERSION.SDK_INT >= 21) {
 				try {
