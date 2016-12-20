@@ -1512,4 +1512,8 @@
 
 	<string name="poi_xmas">Jól</string>
 	<string name="poi_xmas_tree">Jólatré</string>
+	<string name="poi_additional_type">Aukalegt</string>
+	<string name="poi_bicycle_service">Reiðhjólaþjónusta</string>
+	<string name="poi_fire_hydrant_water_source">Vatnsuppspretta</string>
+	<string name="poi_automated">Sjálfvirk</string>
 	</resources>
