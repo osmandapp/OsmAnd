@@ -168,8 +168,12 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 
 			//#3344: Try Locale builder instead of constructor (only available from API 21)
 			if (android.os.Build.VERSION.SDK_INT >= 21) {
-				final String[] languageFields = language.split("\\_");
-				final Locale newLocale = new Locale.Builder().setLanguage(languageFields[0]).setScript("").setRegion(languageFields[1]).build();
+				try {
+					final String[] languageFields = language.split("\\_");
+					final Locale newLocale = new Locale.Builder().setLanguage(languageFields[0]).setScript("").setRegion(languageFields[1]).build();
+				} catch (IllformedLocaleException e) {
+					final Locale newLocale = new Locale(language);
+				}
 			} else {
 				final Locale newLocale = new Locale(language);
 			}
