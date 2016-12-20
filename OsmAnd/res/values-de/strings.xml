@@ -2529,7 +2529,7 @@ Wenn Sie OsmAnd und OSM lieben und unterstützen wollen, so ist dies die perfekt
     <string name="save_filter">Filter speichern</string>
     <string name="delete_filter">Filter löschen</string>
     <string name="new_filter">Neuer Filter</string>
-    <string name="new_filter_desc">Bitte geben sie einen Namen für den neuen Filter ein. Dieser wird zur Liste der Kategorien hinzugefügt.</string>
+    <string name="new_filter_desc">Bitte geben Sie einen Namen für den neuen Filter ein. Dieser wird zur Liste der Kategorien hinzugefügt.</string>
     <string name="selected_categories">Ausgewählte Kategorien</string>
     <string name="create_custom_poi">Benutzerdefinierten Filter erstellen</string>
     <string name="custom_search">Benutzerdefinierte Suche</string>
