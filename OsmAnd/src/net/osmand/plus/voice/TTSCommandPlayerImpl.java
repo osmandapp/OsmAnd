@@ -245,6 +245,7 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 					} else {
 							return mTts.getLanguage() + " (Voice details not reported in API<21)";
 					}
+					return "";
 				}
 			});
 			mTts.setOnUtteranceCompletedListener(new OnUtteranceCompletedListener() {
