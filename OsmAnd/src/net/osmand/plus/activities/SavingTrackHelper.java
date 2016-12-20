@@ -375,7 +375,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 					record = false;
 				}
 				float precision = settings.SAVE_TRACK_PRECISION.get();
-				if(precision > 0 && (!location.hasAccuracy() || location.getAccuracy() < precision)) {
+				if(precision > 0 && (!location.hasAccuracy() || location.getAccuracy() > precision)) {
 					record = false;
 				}
 				float minSpeed = settings.SAVE_TRACK_MIN_SPEED.get();
