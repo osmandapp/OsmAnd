@@ -2706,4 +2706,5 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="show_legacy_search">Паказваць састарэлы пошук</string>
     <string name="rendering_attr_hideWaterPolygons_description">Ваду</string>
     <string name="show_legacy_search_desc">Дазволіць састарэлы пошук у мэню</string>
+    <string name="rendering_attr_contourWidth_name">Таўшчыня гарызанталяў</string>
     </resources>
