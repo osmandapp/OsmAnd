@@ -1396,14 +1396,14 @@
 	<string name="poi_shower_outdoor">Dutxa: kanpoan</string>
 	<string name="poi_shower_cold">Dutxa: hotza</string>
 	<string name="poi_shower_indoor">Dutxa: barruan</string>
-	<string name="poi_caravans_yes">Karabanak: bai</string>
+	<string name="poi_caravans_yes">Bai</string>
 	<string name="poi_caravans_no">Karabanak: ez</string>
 	<string name="poi_impromptu_yes">Bat-batekoa: bai</string>
 	<string name="poi_impromptu_no">Bat-batekoa: ez</string>
 	<string name="poi_sanitary_dump_station_yes">Komuneko hondakinen estazioa: bai</string>
 	<string name="poi_sanitary_dump_station_no">Komuneko hondakinen estazioa: ez</string>
 	<string name="poi_sanitary_dump_station_customers">Komuneko hondakinen estazioa: bezeroak besterik ez</string>
-	<string name="poi_power_supply_yes">Elektrizitate iturria: bai</string>
+	<string name="poi_power_supply_yes">Bai</string>
 	<string name="poi_power_supply_no">Elektrizitate iturria: ez</string>
 	<string name="poi_power_supply_cee_17_blue">Elektrizitate iturria (hargunea): CEE 17 urdina</string>
 	<string name="poi_power_supply_cee_7_4">Elektrizitate iturria (hargunea): CEE 7/4</string>
@@ -2161,4 +2161,5 @@
 	<string name="poi_animal_boarding_dog_cat">Ostatu mota: txakurrak, katuak</string>
 	<string name="poi_animal_boarding_horse">Ostatu mota: zaldiak</string>
 
+	<string name="poi_social_facility_shelter">Aterpea</string>
 	</resources>
