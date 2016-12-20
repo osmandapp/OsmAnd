@@ -1713,7 +1713,7 @@
 	<string name="poi_diet_vegetarian_only">Només vegetarià</string>
 	<string name="poi_diet_vegetarian_yes">Vegetarià</string>
 	<string name="poi_diet_vegetarian_no">Dieta vegetariana: no</string>
-	<string name="poi_diet_vegetarian_few">Dieta vegetariana: algun plat</string>
+	<string name="poi_diet_vegetarian_few">Vegetarià (algun plat)</string>
 	<string name="poi_diet_vegan_only">Només vegà</string>
 	<string name="poi_diet_vegan_yes">Vegà</string>
 	<string name="poi_diet_vegan_no">Dieta vegana: no</string>
@@ -2358,4 +2358,13 @@
 	<string name="poi_beach_surface_type">Superfície</string>
 	<string name="poi_nudism">Nudisme</string>
 	<string name="poi_diet">Dieta</string>
+	<string name="poi_health_specialty">Especialitat mèdica</string>
+	<string name="poi_massage_type">Tipus de massatge</string>
+	<string name="poi_tents">Tendes de campanya</string>
+	<string name="poi_washing_machine">Rentadora</string>
+	<string name="poi_caravans">Caravanes</string>
+	<string name="poi_power_supply">Subministrament elèctric</string>
+	<string name="poi_social_facility_type">Tipus</string>
+	<string name="poi_compressed_air_filter">Aire comprimit</string>
+	<string name="poi_vacuum_cleaner_filter">Aspiradora</string>
 	</resources>
