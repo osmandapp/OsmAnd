@@ -1443,18 +1443,18 @@
 
 	<string name="poi_capacity">Kapazität</string>
 	<string name="poi_capacity_disabled_yes">Ja</string>
-	<string name="poi_capacity_disabled_no">Keine reservierten Plätze für Behinderte</string>
-	<string name="poi_capacity_disabled">Reservierte Plätze für Behinderte</string>
-	<string name="poi_capacity_women_yes">Reservierte Plätze für Frauen</string>
-	<string name="poi_capacity_women_no">Keine reservierten Plätze für Frauen</string>
-	<string name="poi_capacity_women">Reservierte Plätze für Frauen</string>
-	<string name="poi_capacity_pupils">reservierte Plätze für Schüler</string>
-	<string name="poi_capacity_teachers">reservierte Plätze für Lehrer</string>
-	<string name="poi_capacity_parent_yes">reservierte Plätze für Eltern</string>
-	<string name="poi_capacity_parent_no">keine reservierten Plätze für Eltern</string>
-	<string name="poi_capacity_parent">reservierte Plätze für Eltern</string>
+	<string name="poi_capacity_disabled_no">keine Behindertenplätze</string>
+	<string name="poi_capacity_disabled">Behindertenplätze</string>
+	<string name="poi_capacity_women_yes">Frauenplätze</string>
+	<string name="poi_capacity_women_no">keine Frauenplätze</string>
+	<string name="poi_capacity_women">Frauenplätze</string>
+	<string name="poi_capacity_pupils">Schülerplätze</string>
+	<string name="poi_capacity_teachers">Lehrerplätze</string>
+	<string name="poi_capacity_parent_yes">Elternplätze</string>
+	<string name="poi_capacity_parent_no">keine Elternplätze</string>
+	<string name="poi_capacity_parent">Elternplätze</string>
 
-	<string name="poi_aerialway_occupancy">Kabin-, Gondel-, Sesselkapazität</string>
+	<string name="poi_aerialway_occupancy">Kabinen-, Gondel-, Sesselkapazität</string>
 	<string name="poi_aerialway_capacity">Kapazität pro Stunde</string>
 	<string name="poi_aerialway_duration">durchschnittliche Fahrzeit, Minuten</string>
 	<string name="poi_aerialway_bubble_yes">Blase</string>
