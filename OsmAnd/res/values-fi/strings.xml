@@ -2026,4 +2026,9 @@ Jos pidät OsmAndista ja OSMsta ja haluat tukea niitä, on tämä täydellinen t
     <string name="drawer">Jäsentämätön luettelo</string>
     <string name="plugin_touringview_name">Tiekarttanäyttö</string>
 	<string name="avoid_roads_msg">Voit muuttaa toiselle reitille valitsemalla vältettäviä teitä</string>
+    <string name="rendering_attr_contourWidth_description">Korkeuskäyräviivojen leveys</string>
+    <string name="rendering_attr_contourWidth_name">Korkeuskäyriäviivojen leveys</string>
+    <string name="rendering_attr_hideWaterPolygons_description">Vesi</string>
+    <string name="legacy_search">Periytyvä haku</string>
+    <string name="show_legacy_search">Näytä periytyvä haku</string>
     </resources>
