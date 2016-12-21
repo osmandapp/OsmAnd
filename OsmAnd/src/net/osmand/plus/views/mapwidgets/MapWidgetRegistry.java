@@ -387,16 +387,21 @@ public class MapWidgetRegistry {
 
 	private void addQuickActionControl(final MapActivity mapActivity, final ContextMenuAdapter contextMenuAdapter,
 									   final ApplicationMode mode) {
+
+		contextMenuAdapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.map_widget_right, mapActivity)
+				.setCategory(true).setLayout(R.layout.list_group_empty_title_with_switch).createItem());
+
 		boolean selected = true;
-		contextMenuAdapter.addItem(new ContextMenuItem.ItemBuilder()   // TODO: add top margin and proper data
-				.setTitleId(R.string.av_video_quality_high, mapActivity)
-				.setIcon(R.drawable.ic_action_quit_dark)
+		contextMenuAdapter.addItem(new ContextMenuItem.ItemBuilder()
+				.setTitleId(R.string.configure_screen_quick_action, mapActivity)
+				.setIcon(R.drawable.map_quick_action)
 				.setSelected(selected)
 				.setColor(selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
-				.setSecondaryIcon(/*r.widget != null*/ true ? R.drawable.ic_action_additional_option : ContextMenuItem.INVALID_ID)
+				.setSecondaryIcon( R.drawable.ic_action_additional_option)
 				.setListener(new ContextMenuAdapter.OnRowItemClick() {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int position, boolean isChecked) {
+						setVisibility(adapter, position, isChecked, false);
 						return false;
 					}
 
@@ -411,6 +416,21 @@ public class MapWidgetRegistry {
 								.addToBackStack(QuickActionListFragment.TAG).commitAllowingStateLoss();
 
 						return true;
+					}
+
+					private void setVisibility(ArrayAdapter<ContextMenuItem> adapter,
+											   int position,
+											   boolean visible,
+											   boolean collapsed) {
+//						MapWidgetRegistry.this.setVisibility(r, visible, collapsed);
+						MapInfoLayer mil = mapActivity.getMapLayers().getMapInfoLayer();
+						if (mil != null) {
+							mil.recreateControls();
+						}
+						ContextMenuItem item = adapter.getItem(position);
+						item.setSelected(visible);
+						item.setColorRes(visible ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
+						adapter.notifyDataSetChanged();
 					}
 				})
 				.createItem());
