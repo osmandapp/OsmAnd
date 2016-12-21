@@ -2532,4 +2532,9 @@ Si aprecieu OsmAnd  i OSM i voleu ajudar-los, és la via perfecta per fer-ho."</
     <string name="rendering_attr_contourWidth_description">Gruix de les corbes de nivell</string>
     <string name="rendering_attr_contourWidth_name">Gruix de les corbes de nivell</string>
     <string name="rendering_attr_hideWaterPolygons_description">Hidràulic</string>
+    <string name="rendering_attr_contourDensity_description">Densitat de les corbes de nivell</string>
+    <string name="rendering_attr_contourDensity_name">Densitat de les corbes de nivell</string>
+    <string name="rendering_value_high_name">Gros</string>
+    <string name="rendering_value_medium_w_name">Mitjà</string>
+    <string name="rendering_value_low_name">Baix</string>
     </resources>
