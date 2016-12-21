@@ -5,6 +5,7 @@ import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.MotionEventCompat;
 import android.support.v7.widget.LinearLayoutManager;
@@ -22,7 +23,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndFragment;
 
@@ -30,6 +30,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import static android.R.attr.scrollY;
 import static android.util.TypedValue.COMPLEX_UNIT_DIP;
 import static net.osmand.plus.R.id.toolbar;
 
@@ -40,9 +41,10 @@ import static net.osmand.plus.R.id.toolbar;
 public class QuickActionListFragment extends BaseOsmAndFragment {
     public static final String TAG = QuickActionListFragment.class.getSimpleName();
 
-    RecyclerView quickActionRV;
     QuickActionAdapter adapter;
     ItemTouchHelper touchHelper;
+    RecyclerView quickActionRV;
+    FloatingActionButton fab;
 
     @Nullable
     @Override
@@ -68,9 +70,23 @@ public class QuickActionListFragment extends BaseOsmAndFragment {
         ItemTouchHelper.Callback touchHelperCallback = new QuickActionItemTouchHelperCallback(adapter);
         touchHelper = new ItemTouchHelper(touchHelperCallback);
         touchHelper.attachToRecyclerView(quickActionRV);
-
-
         adapter.addItems(createMockDada());
+
+        fab = (FloatingActionButton) view.findViewById(R.id.fabButton);
+        quickActionRV.setOnScrollListener(new RecyclerView.OnScrollListener() {
+        });
+        quickActionRV.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                if (dy > 0 && fab.getVisibility() == View.VISIBLE)
+                    fab.hide();
+                else if (dy < 0 && fab.getVisibility() != View.VISIBLE)
+                    fab.show();
+            }
+        });
+
+
+
         Toolbar          toolbar = (Toolbar) view.findViewById(R.id.custom_toolbar);
         Drawable back    = getMyApplication().getIconsCache().getIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
         back.setColorFilter(ContextCompat.getColor(getContext(), R.color.color_white), PorterDuff.Mode.MULTIPLY);
