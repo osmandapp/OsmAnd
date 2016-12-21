@@ -2602,4 +2602,5 @@ und vieles mehr ...
     <string name="rendering_attr_contourDensity_name">Dichte der Höhenlinien</string>
     <string name="rendering_value_high_name">Höhe</string>
     <string name="rendering_value_medium_w_name">Mittel</string>
+    <string name="rendering_value_low_name">Niedrig</string>
     </resources>
