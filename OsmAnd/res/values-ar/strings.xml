@@ -1223,7 +1223,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
 	<string name="shared_string_search">بحث</string>
 	<string name="shared_string_show_description">عرض الوصف</string>
 	<string name="shared_string_message">رسالة</string>
-	<string name="welmode_download_maps">حمل الخرائط</string>
+	<string name="welmode_download_maps">تنزيل الخرائط</string>
 	<string name="welcome_select_region">لعرض إشارات وقواعد المرور بشكل صحيح، من فضلك اختر منطقة القيادة:</string>
 	<string name="shared_string_add_to_favorites">إضافة إلى المواقع المفضلة</string>
 	<string name="shared_string_my_places">مواقعي</string>
@@ -2662,4 +2662,9 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
           3. كل المعدلة / السلاسل التي تم إنشاؤها هي في الجزء العلوي من ملف (لجعل أسهل تجد ترجمتها \\ \'ق).
      من فضلك: إلقاء نظرة على http://code.google.com/p/osmand/wiki/UIConsistency، قد حقا تحسين بك وعملنا :-) تشك - هاردي"</string>
     <string name="rendering_attr_contourWidth_name">عرض الخطوط الكنتورية</string>
+    <string name="rendering_attr_contourDensity_description">كثافة الخطوط الكنتورية</string>
+    <string name="rendering_attr_contourDensity_name">كثافة الخطوط الكنتورية</string>
+    <string name="rendering_value_high_name">عالية</string>
+    <string name="rendering_value_medium_w_name">متوسطة</string>
+    <string name="rendering_value_low_name">منخفض</string>
     </resources>
