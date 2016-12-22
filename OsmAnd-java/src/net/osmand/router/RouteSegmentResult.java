@@ -1,12 +1,16 @@
 package net.osmand.router;
 
 
+import gnu.trove.list.array.TIntArrayList;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
+import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 
@@ -23,6 +27,7 @@ public class RouteSegmentResult {
 	private String description = "";
 	// this make not possible to make turns in between segment result for now
 	private TurnType turnType;
+	public static int HEIGHT_UNDEFINED = -80000;
 	
 	
 	public RouteSegmentResult(RouteDataObject object, int startPointIndex, int endPointIndex) {
@@ -30,6 +35,83 @@ public class RouteSegmentResult {
 		this.startPointIndex = startPointIndex;
 		this.endPointIndex = endPointIndex;
 		updateCapacity();
+	}
+	
+	public float[] getHeightValues() {
+		int startHeight = Algorithms.parseIntSilently(object.getValue("osmand_ele_start"), HEIGHT_UNDEFINED);
+		int endHeight = Algorithms.parseIntSilently(object.getValue("osmand_ele_end"), startHeight);
+		if(startHeight == HEIGHT_UNDEFINED) {
+			return new float[0];
+		}
+		TIntArrayList list = new TIntArrayList();
+		float[] pf = new float[2*object.getPointsLength()]; 
+		double dist = 0;
+		double plon = 0;
+		double plat = 0;
+		int prevHeight = startHeight;
+		for(int k = 0; k < object.getPointsLength(); k++) {
+			double lon = MapUtils.get31LongitudeX(object.getPoint31XTile(k));
+			double lat = MapUtils.get31LatitudeY(object.getPoint31YTile(k));
+			if(k > 0) {
+				double dd = MapUtils.getDistance(plat, plon, lat, lon);
+				int height = HEIGHT_UNDEFINED;
+				if(k == object.getPointsLength() - 1) {
+					height = endHeight;
+				} else {
+					int[] tps = object.getPointTypes(k);
+					if (tps != null) {
+						for (int id : tps) {
+							RouteTypeRule rt = object.region.quickGetEncodingRule(id);
+							if (rt.getTag().equals("osmand_ele_asc")) {
+								height = (int) (prevHeight + Float.parseFloat(rt.getValue()));
+								break;
+							} else if (rt.getTag().equals("osmand_ele_desc")) {
+								height = (int) (prevHeight - Float.parseFloat(rt.getValue()));
+								break;
+							}
+						}
+					}
+				}
+				pf[2*k] = (float) dd;
+				pf[2*k+1] = height;
+				if(height != HEIGHT_UNDEFINED) {
+					// interpolate undefined
+					double totalDistance = dd;
+					int startUndefined = k;
+					while(startUndefined - 1 >= 0 && pf[2*(startUndefined - 1)+1] == HEIGHT_UNDEFINED) {
+						startUndefined --;
+						totalDistance += pf[2*(startUndefined)];
+					}
+					if(totalDistance > 0) {
+						double angle = (height - prevHeight) / totalDistance;
+						for(int j = startUndefined; j < k; j++) {
+							pf[2*j+1] = (float) ((pf[2*j] * angle) + pf[2*j-1]);
+						}
+					}
+					prevHeight = height;
+				}
+				
+			} else {
+				pf[0] = 0;
+				pf[1] = startHeight;
+			}
+			plat = lat;
+			plon = lon;
+		}
+		boolean reverse = startPointIndex > endPointIndex;
+		int st = Math.min(startPointIndex, endPointIndex);
+		int end = Math.max(startPointIndex, endPointIndex);
+		
+		float[] res = new float[(end - st + 1) * 2];
+		for (int k = 0; k < res.length / 2; k++) {
+			if (k == 0) {
+				res[2 * k] = 0;
+			} else {
+				res[2 * k] = pf[reverse ? (2 * (end - k)) : (2 * (k + st))];
+			}
+			res[2 * k + 1] = pf[reverse ?  (2 * (end - k) + 1) : (2 * (k + st) + 1)];
+		}
+		return res;
 	}
 	
 

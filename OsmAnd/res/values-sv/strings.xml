@@ -203,7 +203,7 @@ Du hittar din parkeringsplats och -tid på instrumentbrädan och i widgeten på 
     <string name="asap">Snarast</string>
     <string name="route_roundabout">Rondell: ta %1$d avfarten och kör</string>
     <string name="rendering_attr_noPolygons_description">Gör alla ytor på kartan transparenta</string>
-    <string name="rendering_attr_noPolygons_name">Dölj polygoner</string>
+    <string name="rendering_attr_noPolygons_name">Polygoner</string>
     <string name="rendering_attr_appMode_name">Renderingsläge</string>
     <string name="rendering_attr_contourLines_description">Visning från zoomnivå (kräver höjdkurvsdata):</string>
     <string name="rendering_attr_contourLines_name">Visa höjdkurvor</string>
@@ -798,7 +798,7 @@ Nyttjat utrymme är {1} MB.
     <string name="rendering_attr_roadColors_name">Färgschema för vägar</string>
     <string name="no_route">Ingen rutt</string>
 
-    <string name="rendering_attr_noAdminboundaries_name">Dölj gränser</string>
+    <string name="rendering_attr_noAdminboundaries_name">Gränser</string>
     <string name="rendering_attr_noAdminboundaries_description">Undertryck visning av regionala gränser (adminnivåer 5-9)</string>
 
 
@@ -2403,4 +2403,10 @@ Om du tycker om OsmAnd och OSM och vill stödja dem så är detta ett utmärkt s
  och mer …
  "</string>
     <string name="christmas_desc">Med tanke på den kommande julen och nyåret så kan du välja att visa POI som har med julen att göra: julgranar, julmarknader med mera.</string>
+    <string name="rendering_attr_contourWidth_name">Bredd på konturlinjer</string>
+    <string name="rendering_attr_hideWaterPolygons_description">Vatten</string>
+    <string name="osm_live_payment_desc">Avgift för prenumerationen dras varje månad. Du kan avbryta din prenumeration på Google Play när som helst.</string>
+    <string name="donation_to_osm_desc">Delar av din gåva skickas till OSM-användare som skickat in ändringar till OpenStreeMap. Prenumerationskostnaden förblir densamma.</string>
+    <string name="osm_live_subscription_desc">En prenumeration aktiverar uppdateringar varje timme, dag eller vecka och obegränsade nedladdningar av alla kartor globalt.</string>
+    <string name="osm_live_banner_desc">Erhåll obegränsade nedladdningar av kartor samt kartuppdateringar oftare än en gång i månaden: varje vecka, varje dag eller varje timme.</string>
     </resources>

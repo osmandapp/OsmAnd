@@ -1223,7 +1223,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
 	<string name="shared_string_search">بحث</string>
 	<string name="shared_string_show_description">عرض الوصف</string>
 	<string name="shared_string_message">رسالة</string>
-	<string name="welmode_download_maps">حمل الخرائط</string>
+	<string name="welmode_download_maps">تنزيل الخرائط</string>
 	<string name="welcome_select_region">لعرض إشارات وقواعد المرور بشكل صحيح، من فضلك اختر منطقة القيادة:</string>
 	<string name="shared_string_add_to_favorites">إضافة إلى المواقع المفضلة</string>
 	<string name="shared_string_my_places">مواقعي</string>
@@ -1448,7 +1448,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="lang_sw">السواحلية</string>
     <string name="lang_he">العبرية</string>
     <string name="forward">إلى الأمام</string>
-    <string name="home">لوحةالتحكم</string>
+    <string name="home">لوحة التحكم</string>
     <string name="live_monitoring_m_descr">إرسال التتبع لخدمة ويب محددة إذا تم تمكين تسجيل GPX.</string>
 	<string name="live_monitoring_m">تعقب على الإنترنت (GPX مطلوب)</string>
     <string name="live_monitoring_start">بدء التتبع على الإنترنت</string>
@@ -1933,7 +1933,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="feedback">الاصداء</string>
     <string name="contact_us">اتصل بنا</string>
     <string name="poi_context_menu_modify_osm_change">تعديل تغيير OSM</string>
-    <string name="dashboard_or_drawer_title">لوحة التحكم</string>
+    <string name="dashboard_or_drawer_title">لوحة التحكم أو شريط المراقبة</string>
     <string name="update">التحديث</string>
     <string name="only_download_over_wifi">التنزيل عبر الواي فاي فقط</string>
     <string name="live_update">تحديث آني</string>
@@ -2644,22 +2644,15 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="show_legacy_search_desc">تفعيل البحث القديم في قائمة الدرج</string>
     <string name="routing_attr_allow_motorway_name">الطريق السريع مسموح</string>
     <string name="routing_attr_allow_motorway_description">الطريق السريع مسموح</string>
-    <string name="legacy_search">تنصل:
-          إذا كنت تسير على ترجمة الجمل، يرجى التأكد من:
-          1. لا توجد سلاسل مكررة بالاسم
-          ويسبق 2. كل الفاصلة (الاقتباس) من قبل مائل (انظر غيرها).
-          إذا كنت ترغب بجعل / تصحيح ترجمة الإنجليزية تأكد من:
-          3. كل المعدلة / السلاسل التي تم إنشاؤها هي في الجزء العلوي من ملف (لجعل أسهل تجد ترجمتها \\ \'ق).
-     من فضلك: إلقاء نظرة على http://code.google.com/p/osmand/wiki/UIConsistency، قد حقا تحسين بك وعملنا :-) تشك - هاردي</string>
+    <string name="legacy_search">بحث موروث</string>
     <string name="lang_sr_latn">الصربية (اللاتينية)</string>
     <string name="lang_zh_hk">الصينية (هونج كونج)</string>
     <string name="rendering_attr_hideWaterPolygons_description">ماء</string>
-    <string name="rendering_attr_contourWidth_description">"تنصل:
-          إذا كنت تسير على ترجمة الجمل، يرجى التأكد من:
-          1. لا توجد سلاسل مكررة بالاسم
-          ويسبق 2. كل الفاصلة (الاقتباس) من قبل مائل (انظر غيرها).
-          إذا كنت ترغب بجعل / تصحيح ترجمة الإنجليزية تأكد من:
-          3. كل المعدلة / السلاسل التي تم إنشاؤها هي في الجزء العلوي من ملف (لجعل أسهل تجد ترجمتها \\ \'ق).
-     من فضلك: إلقاء نظرة على http://code.google.com/p/osmand/wiki/UIConsistency، قد حقا تحسين بك وعملنا :-) تشك - هاردي"</string>
+    <string name="rendering_attr_contourWidth_description">عرض الخطوط الكنتورية</string>
     <string name="rendering_attr_contourWidth_name">عرض الخطوط الكنتورية</string>
+    <string name="rendering_attr_contourDensity_description">كثافة الخطوط الكنتورية</string>
+    <string name="rendering_attr_contourDensity_name">كثافة الخطوط الكنتورية</string>
+    <string name="rendering_value_high_name">عالية</string>
+    <string name="rendering_value_medium_w_name">متوسطة</string>
+    <string name="rendering_value_low_name">منخفض</string>
     </resources>

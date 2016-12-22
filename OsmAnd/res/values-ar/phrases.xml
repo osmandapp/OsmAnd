@@ -412,7 +412,7 @@
 
 	<string name="poi_toilets_wheelchair_yes">الوصول إلى المراحيض بالكراسي المتحركة: نعم</string>
 	<string name="poi_toilets_wheelchair_no">الوصول إلى المراحيض بالكراسي المتحركة: لا</string>
-	<string name="poi_toilets_access_customers">الوصول إلى المراحيض: العملاء</string>
+	<string name="poi_toilets_access_customers">الوصول إلى المراحيض : العملاء</string>
 	<string name="poi_diaper_yes">طاولة تغيير الحفاض</string>
 	<string name="poi_diaper_no">لا توجد طاولة تغيير الحفاض</string>
 	<string name="poi_diaper_room">غرفة تغيير الحفاضات</string>
@@ -706,7 +706,7 @@
 	<string name="poi_monument">نصب تذكاري</string>
 	<string name="poi_zoo">حديقة الحيوانات</string>
 	<string name="poi_home_visit">زيارة منزلية</string>
-	<string name="poi_hearing_aids">أدوات مساعذة للسمع</string>
+	<string name="poi_hearing_aids">أدوات مساعدة للسمع</string>
 	<string name="poi_ship_chandler">لوازم السفن والقوارب</string>
 	<string name="poi_window_blind">متجر ستائر</string>
 	<string name="poi_atv">متجر الدرجات الرباعية</string>
@@ -749,7 +749,7 @@
 	<string name="poi_craft_watchmaker">صانع ساعات</string>
 	<string name="poi_craft_window_construction">بناء إطار النوافذ</string>
 
-	<string name="poi_funeral_directors">ادارة الجنائز</string>
+	<string name="poi_funeral_directors">إدارة الجنائز</string>
 	<string name="poi_craft_computer">تركيب الحواسيب</string>
 	<string name="poi_beauty">صالون تجميل</string>
 	<string name="poi_beauty_salon_nails">تجميل الاظافر</string>
@@ -796,7 +796,7 @@
 	<string name="poi_club_photography">نادي التصوير الفوتوغرافي</string>
 	<string name="poi_club_shooting">نادي الرماية</string>
 	<string name="poi_club_tourism">نادي السياحة</string>
-	<string name="poi_club_charity">نادي جمعية خيرية</string>
+	<string name="poi_club_charity">جمعية خيرية</string>
 	<string name="poi_club_freemasonry">محفل ماسوني</string>
 	<string name="poi_club_sailing">نادي الإبحار</string>
 	<string name="poi_club_scout">نادي الكشافة</string>
@@ -865,4 +865,21 @@
 	<string name="poi_xmas_market">سوق عيد الميلاد</string>
 	<string name="poi_xmas_shop">متجر عيد الميلاد</string>
 	<string name="poi_xmas_tree">شجرة عيد الميلاد</string>
+	<string name="poi_emergency_infrastructure">هياكل الإستعجالات</string>
+	<string name="poi_houseware">متجر الأدوات المنزلية</string>
+	<string name="poi_fire_water_pond">احتياطي مياه الحرائق</string>
+	<string name="poi_traffic_calming_chicane">ممهل</string>
+	<string name="poi_aeroway_terminal">محطة المطار</string>
+	<string name="poi_aeroway_gate">بوابة الصعود</string>
+
+	<string name="poi_club_art">نادي الفنون</string>
+	<string name="poi_club_astronomy">نادي علم الفلك</string>
+	<string name="poi_club_computer">نادي الإعلام الآلي</string>
+	<string name="poi_club_motorcycle">نادي الدراجات النارية</string>
+	<string name="poi_club_sport">نادي للرياضة</string>
+	<string name="poi_club_game">نادي للألعاب</string>
+	<string name="poi_club_automobile">نادي السيارات</string>
+	<string name="poi_club_chess">نادي الشطرنج</string>
+	<string name="poi_club_veterans">نادي قدامى المحاربين</string>
+	<string name="poi_club_hunting">نادي الصيد</string>
 	</resources>
