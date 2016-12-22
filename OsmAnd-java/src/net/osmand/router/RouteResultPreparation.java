@@ -360,6 +360,7 @@ public class RouteResultPreparation {
 				}
 				additional.append("start_bearing = \"").append(res.getBearingBegin()).append("\" ");
 				additional.append("end_bearing = \"").append(res.getBearingEnd()).append("\" ");
+				additional.append("height = \"").append(Arrays.toString(res.getHeightValues())).append("\" ");
 				additional.append("description = \"").append(res.getDescription()).append("\" ");
 				println(MessageFormat.format("\t<segment id=\"{0}\" oid=\"{1}\" start=\"{2}\" end=\"{3}\" {4}/>",
 						(res.getObject().getId() >> (BinaryInspector.SHIFT_ID )) + "", res.getObject().getId() + "", 
@@ -378,7 +379,7 @@ public class RouteResultPreparation {
 			int[] pointNameTypes = res.getObject().getPointNameTypes(k);
 			if (tp != null || pointNameTypes != null) {
 				StringBuilder bld = new StringBuilder();
-				bld.append("<point ");
+				bld.append("<point " + (k));
 				if (tp != null) {
 					for (int t = 0; t < tp.length; t++) {
 						RouteTypeRule rr = res.getObject().region.quickGetEncodingRule(tp[t]);
