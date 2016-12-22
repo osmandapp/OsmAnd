@@ -2657,4 +2657,9 @@ Si istimas OsmAnd e OSM e los boles suportare, custa est una manera perfeta pro 
     <string name="rendering_attr_contourWidth_description">Ispessore curvas de livellu</string>
     <string name="rendering_attr_contourWidth_name">Ispessore curvas de livellu</string>
     <string name="rendering_attr_hideWaterPolygons_description">Abba</string>
+    <string name="rendering_attr_contourDensity_description">Densidade de curvas de livellu</string>
+    <string name="rendering_attr_contourDensity_name">Densidade de curvas de livellu</string>
+    <string name="rendering_value_high_name">Arta</string>
+    <string name="rendering_value_medium_w_name">Mesana</string>
+    <string name="rendering_value_low_name">Bassa</string>
     </resources>
