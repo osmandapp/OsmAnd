@@ -109,6 +109,19 @@ public class QuickActionListFragment extends BaseOsmAndFragment {
         toolbar.setTitleTextColor(ContextCompat.getColor(getContext(), R.color.color_white));
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+
+
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+
+    }
+
     private List<QuickActionItem> createMockDada() {
         List<QuickActionItem> result = new ArrayList<>();
         for (int i = 0; i < 3; i++) {

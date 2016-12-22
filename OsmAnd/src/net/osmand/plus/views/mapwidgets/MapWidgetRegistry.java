@@ -358,7 +358,7 @@ public class MapWidgetRegistry {
 
 
 	public void addControls(MapActivity map, ContextMenuAdapter cm, ApplicationMode mode) {
-		addQuickActionControl(map, cm, mode);
+		addQuickActionControl(map, cm);
 		// Right panel
 		cm.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.map_widget_right, map)
 				.setCategory(true).setLayout(R.layout.list_group_title_with_switch).createItem());
@@ -385,8 +385,7 @@ public class MapWidgetRegistry {
 		return leftWidgetSet;
 	}
 
-	private void addQuickActionControl(final MapActivity mapActivity, final ContextMenuAdapter contextMenuAdapter,
-									   final ApplicationMode mode) {
+	private void addQuickActionControl(final MapActivity mapActivity, final ContextMenuAdapter contextMenuAdapter) {
 
 		contextMenuAdapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.map_widget_right, mapActivity)
 				.setCategory(true).setLayout(R.layout.list_group_empty_title_with_switch).createItem());
@@ -401,7 +400,7 @@ public class MapWidgetRegistry {
 				.setListener(new ContextMenuAdapter.OnRowItemClick() {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int position, boolean isChecked) {
-						setVisibility(adapter, position, isChecked, false);
+						setVisibility(adapter, position, isChecked);
 						return false;
 					}
 
@@ -420,9 +419,8 @@ public class MapWidgetRegistry {
 
 					private void setVisibility(ArrayAdapter<ContextMenuItem> adapter,
 											   int position,
-											   boolean visible,
-											   boolean collapsed) {
-//						MapWidgetRegistry.this.setVisibility(r, visible, collapsed);
+											   boolean visible) {
+
 						MapInfoLayer mil = mapActivity.getMapLayers().getMapInfoLayer();
 						if (mil != null) {
 							mil.recreateControls();
@@ -431,6 +429,8 @@ public class MapWidgetRegistry {
 						item.setSelected(visible);
 						item.setColorRes(visible ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
 						adapter.notifyDataSetChanged();
+
+						settings.QUICK_ACTION.set(visible);
 					}
 				})
 				.createItem());

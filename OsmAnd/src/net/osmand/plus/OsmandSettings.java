@@ -1101,6 +1101,10 @@ public class OsmandSettings {
 		}
 	}
 
+	public final CommonPreference<Boolean> QUICK_ACTION = new BooleanPreference("quick_action", false).makeProfile();
+
+	public final CommonPreference<String> QUICK_ACTION_LIST = new StringPreference("quick_action_list", "").makeProfile();
+
 	public final OsmandPreference<String> OSMO_DEVICE_KEY = new StringPreference("osmo_device_token", "").makeGlobal();
 
 	public final OsmandPreference<String> OSMO_USER_NAME = new StringPreference("osmo_user_name", "").makeGlobal();

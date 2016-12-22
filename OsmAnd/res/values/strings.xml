@@ -2466,4 +2466,6 @@ If you need help with OsmAnd application, please contact our support team: suppo
     <string name="configure_screen_quick_action">Quick action</string>
     <string name="quick_action_item_action">Action %d</string>
     <string name="quick_action_item_screen">Screen %d</string>
+    <string name="quick_action_add_marker">Add marker</string>
+    <string name="quick_action_add_favorite">Add favorite</string>
 </resources>
