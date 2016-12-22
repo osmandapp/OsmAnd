@@ -1165,8 +1165,8 @@
 	<string name="poi_cypress">Zypresse</string>
 	<string name="poi_bench_yes">Ja</string>
 	<string name="poi_bench_no">Ohne Sitzbank</string>
-	<string name="poi_bin_yes">mit Abfalleimer</string>
-	<string name="poi_bin_no">ohne Abfalleimer</string>
+	<string name="poi_bin_yes">Mit Abfalleimer</string>
+	<string name="poi_bin_no">Ohne Abfalleimer</string>
 
 	<string name="poi_internet_access_type_wlan">WLAN</string>
 	<string name="poi_internet_access_type_terminal">Arbeitsplatz</string>
@@ -1185,7 +1185,7 @@
 
 	<string name="poi_architect_name">Architekt</string>
 
-	<string name="poi_architecture_modern">Architektur: modern</string>
+	<string name="poi_architecture_modern">Architektur: Modern</string>
 	<string name="poi_tunnel_car">Straßentunnel</string>
 	<string name="poi_tunnel_pedestrian">Fußgängertunnel</string>
 	<string name="poi_tunnel_railway">Eisenbahntunnel</string>
@@ -1701,7 +1701,7 @@
 
 	<string name="poi_wetland_wet_meadow">Feuchtwiese</string>
 	<string name="poi_wetland_bog">Moor</string>
-	<string name="poi_wetland_marsh">Sumpf</string>
+	<string name="poi_wetland_marsh">Marsch</string>
 	<string name="poi_wetland_reedbed">Schilf</string>
 	<string name="poi_recycling_hardcore">(Bau)Schutt</string>
 	<string name="poi_brownfield">Bauland</string>
@@ -1935,8 +1935,8 @@
 	<string name="poi_toilets_access_public">Toilettenzugang: öffentlich</string>
 
 	<string name="poi_diaper_yes">Wickeltisch</string>
-	<string name="poi_diaper_no">kein Wickeltisch</string>
-	<string name="poi_diaper_room">Wickleraum</string>
+	<string name="poi_diaper_no">Kein Wickeltisch</string>
+	<string name="poi_diaper_room">Wickelraum</string>
 
 	<string name="poi_maxstay">Höchstparkdauer</string>
 
@@ -1946,14 +1946,14 @@
 	<string name="poi_vending_public_transport_tickets">Fahrscheine</string>
 	<string name="poi_vending_drinks">Getränke</string>
 	<string name="poi_vending_sweets">Süßigkeiten</string>
-	<string name="poi_vending_parcel_pickup_mail_in">Paketannahmestelle und Briefkasten</string>
+	<string name="poi_vending_parcel_pickup_mail_in">Paketausgabe und -annahmestelle</string>
 	<string name="poi_vending_condoms">Kondome</string>
 	<string name="poi_vending_stamps">Briefmarken</string>
 	<string name="poi_vending_food">Essen</string>
 	<string name="poi_vending_bicycle_tube">Fahrradschläuche</string>
 	<string name="poi_vending_drinks_food">Getränke und Essen</string>
 	<string name="poi_vending_fuel">Kraftstoffverkauf</string>
-	<string name="poi_vending_parcel_pickup">Paketaufnahmestelle</string>
+	<string name="poi_vending_parcel_pickup">Paketausgabestelle</string>
 	<string name="poi_vending_parcel_mail_in">Paketannahmestelle</string>
 	<string name="poi_vending_milk">Milch</string>
 	<string name="poi_vending_elongated_coin">Souvenir-Münze</string>
@@ -1986,7 +1986,7 @@
 	<string name="poi_memorial_cross">Kreuzförmig</string>
 	<string name="poi_memorial_vehicle">Fahrzeug</string>
 	<string name="poi_memorial_stolperstein">Stolperstein</string>
-	<string name="poi_memorial_obelisk">Oberlisk</string>
+	<string name="poi_memorial_obelisk">Obelisk</string>
 	<string name="poi_memorial_column">Spalte</string>
 	<string name="poi_memorial_stupa">Stupa</string>
 	<string name="poi_inscription">Inschrift</string>
@@ -2006,7 +2006,7 @@
 	<string name="poi_resource_gravel">Kies</string>
 	<string name="poi_resource_gypsum">Gips</string>
 	<string name="poi_resource_iron_ore">Eisenerz</string>
-	<string name="poi_resource_lead">Leder</string>
+	<string name="poi_resource_lead">Blei</string>
 	<string name="poi_resource_lignite">Lignit</string>
 	<string name="poi_resource_limestone">Kalkstein</string>
 	<string name="poi_resource_marble">Marmor</string>
@@ -2019,7 +2019,7 @@
 	<string name="poi_resource_radium">Radium</string>
 	<string name="poi_wetland_saltern">Saline</string>
 	<string name="poi_wetland_tidalflat">Watt</string>
-	<string name="poi_wetland_saltmarsh">Salzsumpf</string>
+	<string name="poi_wetland_saltmarsh">Salzmarsch</string>
 	<string name="poi_wetland_mangrove">Mangroven</string>
 	<string name="poi_wetland_fen">Moorland</string>
 	<string name="poi_wetland_mud">Schlamm</string>
@@ -2060,8 +2060,8 @@
 	<string name="poi_artwork_type_stele">Kunstart: Stele</string>
 	<string name="poi_artwork_type_fountain">Kunstart: Brunnen</string>
 
-	<string name="poi_architecture_stalinist_neoclassicism">Kunstart: stalinistischer Neoklassizismus</string>
-	<string name="poi_architecture_eclectic">Architektur: vielseitig</string>
+	<string name="poi_architecture_stalinist_neoclassicism">Kunstart: Stalinistischer Neoklassizismus</string>
+	<string name="poi_architecture_eclectic">Architektur: Eklektisch</string>
 	<string name="poi_architecture_new_objectivity">Architektur: Neue Sachlichkeit</string>
 	<string name="poi_architecture_contemporary">Architektur: Zeitgenössisch</string>
 	<string name="poi_architecture_constructivism">Architektur: Konstruktivismus</string>
@@ -2069,15 +2069,15 @@
 	<string name="poi_architecture_timber_frame">Architektur: Holzrahmen</string>
 	<string name="poi_architecture_art_nouveau">Architektur: Jugendstil</string>
 	<string name="poi_architecture_neoclassicism">Architektur: Neoklassizismus</string>
-	<string name="poi_architecture_victorian">Architektur: viktorianisch</string>
+	<string name="poi_architecture_victorian">Architektur: Viktorianisch</string>
 	<string name="poi_architecture_brutalism">Architektur: Brutalismus</string>
-	<string name="poi_architecture_classicism">Architektur: Klassik</string>
-	<string name="poi_architecture_gothic">Architektur: Gotisch</string>
+	<string name="poi_architecture_classicism">Architektur: Klassizismus</string>
+	<string name="poi_architecture_gothic">Architektur: Gotik</string>
 	<string name="poi_architecture_oldrussian">Architektur: Altrussisch</string>
 	<string name="poi_architecture_baroque">Architektur: Barock</string>
 	<string name="poi_architecture_wilhelminian_style">Architektur: Gründerzeit</string>
 	<string name="poi_architecture_renaissance">Architektur: Renaissance</string>
-	<string name="poi_architecture_romanesque">Architektur: Romanisch</string>
+	<string name="poi_architecture_romanesque">Architektur: Romanik</string>
 
 	<string name="poi_tunnel_waterway">Wassertunnel</string>
 	<string name="poi_bridge_waterway">Wasserbrücke</string>
@@ -2086,18 +2086,18 @@
 	<string name="poi_bridge_structure_suspension">Brückenkonstruktion: Aufhängung</string>
 	<string name="poi_bridge_structure_arch">Brückenkonstruktion: Bogen</string>
 	<string name="poi_bridge_structure_truss">Brückenkonstruktion: Fachwerk</string>
-	<string name="poi_bridge_structure_floating">Brückenkonstruktion: Schimmend</string>
+	<string name="poi_bridge_structure_floating">Brückenkonstruktion: Schwimmend</string>
 	<string name="poi_bridge_structure_humpback">Brückenkonstruktion: Buckel</string>
 	<string name="poi_bridge_structure_cable_stayed">Brückenkonstruktion: Schrägseil</string>
 	<string name="poi_bridge_structure_boardwalk">Brückenkonstruktion: Promenade</string>
 	<string name="poi_bridge_structure_simple_wooden">Brückenkonstruktion: Holz</string>
 	<string name="poi_bridge_structure_viaduct">Brückenkonstruktion: Viadukt</string>
-	<string name="poi_bridge_structure_aqueduct">Brückenaufbau: Aquadukt</string>
+	<string name="poi_bridge_structure_aqueduct">Brückenaufbau: Aquädukt</string>
 	<string name="poi_bridge_structure_log">Brückenaufbau: Baumstamm</string>
 	<string name="poi_bridge_type_movable">Brückentyp: bewegliche</string>
-	<string name="poi_bridge_movable_bascule">Beweglicher Brückentyp: Klapbrücke</string>
-	<string name="poi_bridge_movable_swing">Beweglicher Brückentyp: schwenkbar</string>
-	<string name="poi_bridge_movable_lift">Beweglicher Brückentyp: Hochklappbar</string>
+	<string name="poi_bridge_movable_bascule">Beweglicher Brückentyp: Klappbrücke</string>
+	<string name="poi_bridge_movable_swing">Beweglicher Brückentyp: Schwenkbrücke</string>
+	<string name="poi_bridge_movable_lift">Beweglicher Brückentyp: Hebebrücke</string>
 	<string name="poi_bridge_movable_drawbridge">Beweglicher Brückentyp: Zugbrücke</string>
 	<string name="poi_bridge_movable_submersible">Beweglicher Brückentyp: Tauchbrücke</string>
 	<string name="poi_bridge_movable_transporter">Beweglicher Brückentyp: Transporter</string>
