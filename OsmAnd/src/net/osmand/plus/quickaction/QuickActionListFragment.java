@@ -1,5 +1,7 @@
 package net.osmand.plus.quickaction;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
@@ -14,8 +16,6 @@ import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,16 +24,14 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static android.R.attr.scrollY;
 import static android.util.TypedValue.COMPLEX_UNIT_DIP;
-import static net.osmand.plus.R.id.index_item;
-import static net.osmand.plus.R.id.toolbar;
 
 /**
  * Created by okorsun on 20.12.16.
@@ -42,10 +40,11 @@ import static net.osmand.plus.R.id.toolbar;
 public class QuickActionListFragment extends BaseOsmAndFragment {
     public static final String TAG = QuickActionListFragment.class.getSimpleName();
 
-    QuickActionAdapter adapter;
-    ItemTouchHelper touchHelper;
-    RecyclerView quickActionRV;
+    RecyclerView         quickActionRV;
     FloatingActionButton fab;
+
+    QuickActionAdapter   adapter;
+    ItemTouchHelper      touchHelper;
 
     @Nullable
     @Override
@@ -53,12 +52,23 @@ public class QuickActionListFragment extends BaseOsmAndFragment {
         View view = inflater.inflate(R.layout.quick_action_list, container, false);
 
         quickActionRV = (RecyclerView) view.findViewById(R.id.recycler_view);
-//        quickActionRV.setBackgroundColor(
-//                getResources().getColor(
-//                        getMyApplication().getSettings().isLightContent() ? R.color.bg_color_light
-//                                : R.color.bg_color_dark));
+        fab = (FloatingActionButton) view.findViewById(R.id.fabButton);
 
+        setUpQuickActionRV();
 
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                adapter.addItem(new QuickActionItem(R.string.map_marker, R.drawable.ic_action_flag_dark));
+            }
+        });
+
+        setUpToolbar(view);
+
+        return view;
+    }
+
+    private void setUpQuickActionRV() {
         adapter = new QuickActionAdapter(new OnStartDragListener() {
             @Override
             public void onStartDrag(RecyclerView.ViewHolder viewHolder) {
@@ -73,9 +83,6 @@ public class QuickActionListFragment extends BaseOsmAndFragment {
         touchHelper.attachToRecyclerView(quickActionRV);
         adapter.addItems(createMockDada());
 
-        fab = (FloatingActionButton) view.findViewById(R.id.fabButton);
-        quickActionRV.setOnScrollListener(new RecyclerView.OnScrollListener() {
-        });
         quickActionRV.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
@@ -85,10 +92,10 @@ public class QuickActionListFragment extends BaseOsmAndFragment {
                     fab.show();
             }
         });
+    }
 
-
-
-        Toolbar          toolbar = (Toolbar) view.findViewById(R.id.custom_toolbar);
+    private void setUpToolbar(View view) {
+        Toolbar  toolbar = (Toolbar) view.findViewById(R.id.custom_toolbar);
         Drawable back    = getMyApplication().getIconsCache().getIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
         back.setColorFilter(ContextCompat.getColor(getContext(), R.color.color_white), PorterDuff.Mode.MULTIPLY);
         toolbar.setNavigationIcon(back);
@@ -100,13 +107,11 @@ public class QuickActionListFragment extends BaseOsmAndFragment {
         });
         toolbar.setTitle(R.string.configure_screen_quick_action);
         toolbar.setTitleTextColor(ContextCompat.getColor(getContext(), R.color.color_white));
-
-        return view;
     }
 
     private List<QuickActionItem> createMockDada() {
         List<QuickActionItem> result = new ArrayList<>();
-        for (int i = 0; i < 5; i ++){
+        for (int i = 0; i < 3; i++) {
             result.add(new QuickActionItem(R.string.favorite, R.drawable.ic_action_flag_dark));
             result.add(new QuickActionItem(R.string.poi, R.drawable.ic_action_flag_dark));
             result.add(new QuickActionItem(R.string.map_marker, R.drawable.ic_action_flag_dark));
@@ -116,9 +121,21 @@ public class QuickActionListFragment extends BaseOsmAndFragment {
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        getMapActivity().disableDrawer();
     }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        getMapActivity().enableDrawer();
+    }
+
+    private MapActivity getMapActivity() {
+        return (MapActivity) getActivity();
+    }
+
 
     public class QuickActionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements QuickActionItemTouchHelperCallback.OnItemMoveCallback {
         public static final int SCREEN_ITEM_TYPE   = 1;
@@ -129,7 +146,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment {
         private List<QuickActionItem> itemsList = new ArrayList<>();
         private final OnStartDragListener onStartDragListener;
 
-        public QuickActionAdapter(OnStartDragListener onStartDragListener){
+        public QuickActionAdapter(OnStartDragListener onStartDragListener) {
             this.onStartDragListener = onStartDragListener;
         }
 
@@ -175,7 +192,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment {
                 dividerParams.setMargins(isShortDivider(position) ? dpToPx(56f) : 0, 0, 0, 0);
             } else {
                 QuickActionHeaderVH headerVH = (QuickActionHeaderVH) holder;
-                headerVH.headerName.setText(getResources().getString(R.string.quick_action_item_screen, position/(ITEMS_IN_GROUP + 1) + 1));
+                headerVH.headerName.setText(getResources().getString(R.string.quick_action_item_screen, position / (ITEMS_IN_GROUP + 1) + 1));
             }
         }
 
@@ -196,10 +213,10 @@ public class QuickActionListFragment extends BaseOsmAndFragment {
             itemsList.remove(position);
             notifyItemRemoved(position);
 
-            for (int i = position; i < itemsList.size(); i++ ){
+            for (int i = position; i < itemsList.size(); i++) {
                 if (getItemViewType(i) == SCREEN_HEADER_TYPE) {
-                    if (i != itemsList.size() - 2){
-                        Collections.swap(itemsList, i, i +1);
+                    if (i != itemsList.size() - 2) {
+                        Collections.swap(itemsList, i, i + 1);
                         notifyItemMoved(i, i + 1);
                         i++;
                     } else {
@@ -236,6 +253,14 @@ public class QuickActionListFragment extends BaseOsmAndFragment {
             notifyDataSetChanged();
         }
 
+        public void addItem(QuickActionItem item) {
+            int oldSize = itemsList.size();
+            if (oldSize % (ITEMS_IN_GROUP + 1) == 0)
+                itemsList.add(QuickActionItem.createHeaderItem());
+            itemsList.add(item);
+            notifyItemRangeInserted(oldSize, itemsList.size() - oldSize);
+        }
+
 
         private int getActionPosition(int globalPosition) {
             return globalPosition % (ITEMS_IN_GROUP + 1);
@@ -264,10 +289,10 @@ public class QuickActionListFragment extends BaseOsmAndFragment {
                 return false;
             else {
                 int selectedPosition = viewHolder.getAdapterPosition();
-                int targetPosition  = target.getAdapterPosition();
+                int targetPosition   = target.getAdapterPosition();
 
                 Collections.swap(itemsList, selectedPosition, targetPosition);
-                if (selectedPosition - targetPosition < -1){
+                if (selectedPosition - targetPosition < -1) {
                     notifyItemMoved(selectedPosition, targetPosition);
                     notifyItemMoved(targetPosition - 1, selectedPosition);
                 } else if (selectedPosition - targetPosition > 1) {
@@ -286,7 +311,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment {
             public TextView  title;
             public TextView  subTitle;
             public ImageView icon;
-            public View divider;
+            public View      divider;
             public ImageView handleView;
             public ImageView closeBtn;
 
