@@ -2347,9 +2347,9 @@ Lon %2$s</string>
     <string name="consider_turning_polygons_off">Es wird empfohlen, das Rendern von Polygonen zu deaktivieren.</string>
     
     <string name="shared_string_widgets">Widgets</string>
-    <string name="download_files_error_not_enough_space">"Nicht genug Speicher!
-Es werden vorübergehend {3} MB  und {1} MB dauerhaft benötigt.
-Aktuell sind nur {2} MB verfügbar."</string>
+    <string name="download_files_error_not_enough_space">Nicht genug Speicher!
+Es werden vorübergehend {3} MB und dauerhaft {1} MB Speicherplatz benötigt.
+Aktuell sind nur {2} MB verfügbar.</string>
     <string name="download_files_question_space_with_temp">{0} Datei(en) herunterladen?
  Dies benötigt vorübergehend {3} MB und dauerhaft {1} MB.
  (Aktuell sind {2} MB verfügbar.)</string>
@@ -2489,14 +2489,14 @@ Wenn Sie OsmAnd und OSM lieben und unterstützen wollen, so ist dies die perfekt
     <string name="route_stops_before">%1$s Haltestellen vor</string>
     <string name="rendering_attr_hideOverground_name">Oberirdische Objekte</string>
 
-    <string name="routing_attr_short_way_name">Kraftstoff sparende Route</string>
+    <string name="routing_attr_short_way_name">Kraftstoffsparende Route</string>
     <string name="routing_attr_short_way_description">Kraftstoffsparende Route verwenden (in der Regel kürzer)</string>
-    <string name="replace_favorite_confirmation">Wollen sie Favorit \'%1$s\' wirklich ersetzen?</string>
+    <string name="replace_favorite_confirmation">Wollen Sie den Favorit \'%1$s\' wirklich ersetzen?</string>
     <string name="shared_string_change">Ändern</string>
     <string name="get_started">Erste Schritte</string>
     <string name="update_all_maps_now">Wollen sie jetzt alle Karten aktualisieren?</string>
     <string name="clear_tile_data">Alle Kartenkacheln löschen</string>
-    <string name="skip_map_downloading_desc">Sie haben keine Offline Karten installiert. Sie können jetzt eine Karte auswählen oder später Karten über “Menü - %1$s“ herunterladen.</string>
+    <string name="skip_map_downloading_desc">Es sind keine Offline-Karten installiert. Sie können jetzt eine Karte auswählen oder später Karten über “Menü - %1$s“ herunterladen.</string>
     <string name="search_another_country">Eine andere Region auswählen</string>
     <string name="search_map">Karte wird gesucht…</string>
     <string name="first_usage_wizard_desc">Lassen Sie OsmAnd Ihren Standort bestimmen und Karten für diese Region zum Herunterladen vorschlagen.</string>
@@ -2529,7 +2529,7 @@ Wenn Sie OsmAnd und OSM lieben und unterstützen wollen, so ist dies die perfekt
     <string name="save_filter">Filter speichern</string>
     <string name="delete_filter">Filter löschen</string>
     <string name="new_filter">Neuer Filter</string>
-    <string name="new_filter_desc">Bitte geben sie einen Namen für den neuen Filter ein. Dieser wird zur Liste der Kategorien hinzugefügt.</string>
+    <string name="new_filter_desc">Bitte geben Sie einen Namen für den neuen Filter ein. Dieser wird zur Liste der Kategorien hinzugefügt.</string>
     <string name="selected_categories">Ausgewählte Kategorien</string>
     <string name="create_custom_poi">Benutzerdefinierten Filter erstellen</string>
     <string name="custom_search">Benutzerdefinierte Suche</string>
@@ -2596,4 +2596,11 @@ und vieles mehr ...
     <string name="lang_sr_latn">Serbisch (lateinisch)</string>
     <string name="lang_zh_hk">Chinesisch (Hong Kong)</string>
     <string name="rendering_attr_hideWaterPolygons_description">Wasser</string>
+    <string name="rendering_attr_contourWidth_description">Breite der Höhenlinien</string>
+    <string name="rendering_attr_contourWidth_name">Breite der Höhenlinien</string>
+    <string name="rendering_attr_contourDensity_description">Dichte der Höhenlinien</string>
+    <string name="rendering_attr_contourDensity_name">Dichte der Höhenlinien</string>
+    <string name="rendering_value_high_name">Höhe</string>
+    <string name="rendering_value_medium_w_name">Mittel</string>
+    <string name="rendering_value_low_name">Niedrig</string>
     </resources>

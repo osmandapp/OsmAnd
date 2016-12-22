@@ -2677,4 +2677,11 @@ Facebook：https://www.facebook.com/osmandapp
     <string name="lang_sr_latn">塞爾維亞語（拉丁語）</string>
     <string name="lang_zh_hk">中文（香港）</string>
     <string name="rendering_attr_hideWaterPolygons_description">水</string>
+    <string name="rendering_attr_contourWidth_description">等高線的線寬</string>
+    <string name="rendering_attr_contourWidth_name">等高線的線寬</string>
+    <string name="rendering_attr_contourDensity_description">等高線的密度</string>
+    <string name="rendering_attr_contourDensity_name">等高線的密度</string>
+    <string name="rendering_value_high_name">高</string>
+    <string name="rendering_value_medium_w_name">中</string>
+    <string name="rendering_value_low_name">低</string>
     </resources>

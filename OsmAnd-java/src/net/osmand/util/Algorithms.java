@@ -70,6 +70,17 @@ public class Algorithms {
 		}
 		return def;
 	}
+	
+	public static int parseIntSilently(String input, int def) {
+		if (input != null && input.length() > 0) {
+			try {
+				return Integer.parseInt(input);
+			} catch (NumberFormatException e) {
+				return def;
+			}
+		}
+		return def;
+	}
 
 
 	public static String getFileNameWithoutExtension(File f) {

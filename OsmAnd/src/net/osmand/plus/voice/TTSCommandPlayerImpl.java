@@ -164,7 +164,20 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 			mTtsContext = ctx;
 			ttsVoiceName = "";
 			ttsRequests = 0;
-			final float speechRate = cSpeechRate; 
+			final float speechRate = cSpeechRate;
+
+			final String[] languageFields = (language + "____.").split("[\\_\\-]");
+			Locale newLocale0 = new Locale(languageFields[0], languageFields[1], languageFields[2]);
+			// #3344: Try Locale builder instead of constructor (only available from API 21), also supports script
+			if (android.os.Build.VERSION.SDK_INT >= 21) {
+				try {
+					newLocale0 = new Locale.Builder().setLanguage(languageFields[0]).setRegion(languageFields[1]).setVariant(languageFields[2]).setScript(languageFields[3]).build();
+				} catch (RuntimeException e) {
+					// Falls back to constructor
+				}
+			}
+			final Locale newLocale = newLocale0;
+
 			mTts = new TextToSpeech(ctx, new OnInitListener() {
 				@Override
 				public void onInit(int status) {
@@ -173,9 +186,8 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 						internalClear();
 					} else if (mTts != null) {
 						speechAllowed = true;
-						switch (mTts.isLanguageAvailable(new Locale(language))) {
+						switch (mTts.isLanguageAvailable(newLocale)) {
 							case TextToSpeech.LANG_MISSING_DATA:
-								ttsVoiceName = "setLanguage: LANG_MISSING_DATA";
 								if (isSettingsActivity(act)) {
 									AlertDialog.Builder builder = createAlertDialog(
 										R.string.tts_missing_language_data_title,
@@ -186,29 +198,23 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 										act);
 									builder.show();
 								}
-								// Proceed anyway in this case, look like breaking here caused Issue #3344
-								//break;
+								ttsVoiceName = newLocale.getDisplayName() + ": LANG_MISSING_DATA";
+								ttsVoiceName = ttsVoiceName + "\n\n" + getVoiceUsed();
+								break;
 							case TextToSpeech.LANG_AVAILABLE:
-								ttsVoiceName = "".equals(ttsVoiceName) ? "setLanguage: LANG_AVAILABLE" : ttsVoiceName;
+								ttsVoiceName = newLocale.getDisplayName() + ": LANG_AVAILABLE";
 							case TextToSpeech.LANG_COUNTRY_AVAILABLE:
-								ttsVoiceName = "".equals(ttsVoiceName) ? "setLanguage: LANG_COUNTRY_AVAILABLE" : ttsVoiceName;
+								ttsVoiceName = "".equals(ttsVoiceName) ? newLocale.getDisplayName() + ": LANG_COUNTRY_AVAILABLE" : ttsVoiceName;
 							case TextToSpeech.LANG_COUNTRY_VAR_AVAILABLE:
-								ttsVoiceName = "".equals(ttsVoiceName) ? "setLanguage: LANG_COUNTRY_VAR_AVAILABLE" : ttsVoiceName;
-								mTts.setLanguage(new Locale(language));
-								if (android.os.Build.VERSION.SDK_INT >= 21) {
-									if (mTts.getVoice() != null) {
-										ttsVoiceName = ttsVoiceName + "\n\n" + mTts.getVoice().toString();
-									}
-								} else {
-										ttsVoiceName = ttsVoiceName + "\n\n" + mTts.getLanguage() + " (Voice details not reported in API<21)";
-								}
+								mTts.setLanguage(newLocale);
 								if(speechRate != 1) {
 									mTts.setSpeechRate(speechRate);
 								}
+								ttsVoiceName = "".equals(ttsVoiceName) ? newLocale.getDisplayName() + ": LANG_COUNTRY_VAR_AVAILABLE" : ttsVoiceName;
+								ttsVoiceName = ttsVoiceName + "\n\n" + getVoiceUsed();
 								break;
 							case TextToSpeech.LANG_NOT_SUPPORTED:
 								//maybe weird, but I didn't want to introduce parameter in around 5 methods just to do this if condition
-								ttsVoiceName = "setLanguage: LANG_NOT_SUPPORTED";
 								if (isSettingsActivity(act)) {
 									AlertDialog.Builder builder = createAlertDialog(
 											R.string.tts_language_not_supported_title,
@@ -220,6 +226,8 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 											act);
 									builder.show();
 								}
+								ttsVoiceName = newLocale.getDisplayName() + ": LANG_NOT_SUPPORTED";
+								ttsVoiceName = ttsVoiceName + "\n\n" + getVoiceUsed();
 								break;
 						}
 					}
@@ -227,6 +235,17 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 
 				private boolean isSettingsActivity(final Context ctx) {
 					return ctx instanceof SettingsActivity;
+				}
+				
+				private String getVoiceUsed() {
+					if (android.os.Build.VERSION.SDK_INT >= 21) {
+						if (mTts.getVoice() != null) {
+							return mTts.getVoice().toString();
+						}
+					} else {
+							return mTts.getLanguage() + " (Voice details not reported in API<21)";
+					}
+					return "";
 				}
 			});
 			mTts.setOnUtteranceCompletedListener(new OnUtteranceCompletedListener() {

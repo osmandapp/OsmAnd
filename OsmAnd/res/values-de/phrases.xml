@@ -1443,18 +1443,18 @@
 
 	<string name="poi_capacity">Kapazität</string>
 	<string name="poi_capacity_disabled_yes">Ja</string>
-	<string name="poi_capacity_disabled_no">Keine reservierten Plätze für Behinderte</string>
-	<string name="poi_capacity_disabled">Reservierte Plätze für Behinderte</string>
-	<string name="poi_capacity_women_yes">Reservierte Plätze für Frauen</string>
-	<string name="poi_capacity_women_no">Keine reservierten Plätze für Frauen</string>
-	<string name="poi_capacity_women">Reservierte Plätze für Frauen</string>
-	<string name="poi_capacity_pupils">reservierte Plätze für Schüler</string>
-	<string name="poi_capacity_teachers">reservierte Plätze für Lehrer</string>
-	<string name="poi_capacity_parent_yes">reservierte Plätze für Eltern</string>
-	<string name="poi_capacity_parent_no">keine reservierten Plätze für Eltern</string>
-	<string name="poi_capacity_parent">reservierte Plätze für Eltern</string>
+	<string name="poi_capacity_disabled_no">keine Behindertenplätze</string>
+	<string name="poi_capacity_disabled">Behindertenplätze</string>
+	<string name="poi_capacity_women_yes">Frauenplätze</string>
+	<string name="poi_capacity_women_no">keine Frauenplätze</string>
+	<string name="poi_capacity_women">Frauenplätze</string>
+	<string name="poi_capacity_pupils">Schülerplätze</string>
+	<string name="poi_capacity_teachers">Lehrerplätze</string>
+	<string name="poi_capacity_parent_yes">Elternplätze</string>
+	<string name="poi_capacity_parent_no">keine Elternplätze</string>
+	<string name="poi_capacity_parent">Elternplätze</string>
 
-	<string name="poi_aerialway_occupancy">Kabin-, Gondel-, Sesselkapazität</string>
+	<string name="poi_aerialway_occupancy">Kabinen-, Gondel-, Sesselkapazität</string>
 	<string name="poi_aerialway_capacity">Kapazität pro Stunde</string>
 	<string name="poi_aerialway_duration">durchschnittliche Fahrzeit, Minuten</string>
 	<string name="poi_aerialway_bubble_yes">Blase</string>
@@ -1931,7 +1931,7 @@
 	<string name="poi_toilets_wheelchair_no">Rollstuhlgerechte Toilette: Nein</string>
 	<string name="poi_toilets_access_customers">Toilettenzugang: Kunden</string>
 	<string name="poi_toilets_access_permissive">Toilettenzugang: geduldet</string>
-	<string name="poi_toilets_access_community">Toilettenzugang: allgemein</string>
+	<string name="poi_toilets_access_community">Toilettenzugang: öffentlich</string>
 	<string name="poi_toilets_access_public">Toilettenzugang: öffentlich</string>
 
 	<string name="poi_diaper_yes">Wickeltisch</string>
@@ -2062,7 +2062,7 @@
 
 	<string name="poi_architecture_stalinist_neoclassicism">Kunstart: stalinistischer Neoklassizismus</string>
 	<string name="poi_architecture_eclectic">Architektur: vielseitig</string>
-	<string name="poi_architecture_new_objectivity">Architektur: neue Sachlichkeit</string>
+	<string name="poi_architecture_new_objectivity">Architektur: Neue Sachlichkeit</string>
 	<string name="poi_architecture_contemporary">Architektur: Zeitgenössisch</string>
 	<string name="poi_architecture_constructivism">Architektur: Konstruktivismus</string>
 	<string name="poi_architecture_umgebinde">Architektur: Umgebinde</string>
@@ -3019,7 +3019,7 @@
 <string name="poi_service_bicycle_charging_yes">Fahrrad laden: Ja</string>
 	<string name="poi_service_bicycle_charging_no">Fahrrad laden: Nein</string>
 
-<string name="poi_shop_craft">Kunst und Handwerk Zubehörgeschäft</string>
+<string name="poi_shop_craft">Geschäft für Kunsthandwerksbedarf</string>
 
 	<string name="poi_fuel_avia_type">Typ</string>
 	<string name="poi_payment_fuel_type">Tankkarten</string>
@@ -3090,8 +3090,8 @@
 	<string name="poi_xmas_url">Weihnachten: Internetseite</string>
 
 <string name="poi_vending_type">Verkaufsart</string>
-	<string name="poi_bicycle_service">Fahrrad Dienstleitung</string>
-	<string name="poi_service_car">Dienstleistung</string>
+	<string name="poi_bicycle_service">Fahrrad-Kundendienst</string>
+	<string name="poi_service_car">Kundendienst</string>
 	<string name="poi_self_service">Selbstbedienung</string>
 	<string name="poi_pharmacy_dispensing">Rezepte</string>
 	<string name="poi_archaeological_site_type">Typ</string>
@@ -3342,5 +3342,7 @@
 	<string name="poi_tower_construction_dome">Konstruktion: Kuppel</string>
 	<string name="poi_tower_construction_dish">Konstruktion: Schüssel</string>
 	<string name="poi_tower_construction_concealed">Konstruktion: verdeckt</string>
+
+<string name="poi_railway_yard">Güterbahnhof</string>
 
 </resources>

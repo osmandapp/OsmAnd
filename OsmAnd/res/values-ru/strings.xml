@@ -1,5 +1,12 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
+    <string name="rendering_attr_contourDensity_description">Частота горизонталей</string>
+    <string name="rendering_attr_contourDensity_name">Частота горизонталей</string>
+    <string name="rendering_value_high_name">Высокая</string>
+    <string name="rendering_value_medium_w_name">Средняя</string>
+    <string name="rendering_value_low_name">Низкая</string>
+    <string name="rendering_attr_contourWidth_description">Толщина горизонталей</string>
+    <string name="rendering_attr_contourWidth_name">Толщина горизонталей</string>
     <string name="rendering_attr_hideWaterPolygons_description">Воду</string>
     <string name="legacy_search">Старый поиск</string>
     <string name="show_legacy_search">Показывать старый поиск</string>

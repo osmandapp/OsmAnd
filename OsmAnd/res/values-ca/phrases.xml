@@ -1713,7 +1713,7 @@
 	<string name="poi_diet_vegetarian_only">Només vegetarià</string>
 	<string name="poi_diet_vegetarian_yes">Vegetarià</string>
 	<string name="poi_diet_vegetarian_no">Dieta vegetariana: no</string>
-	<string name="poi_diet_vegetarian_few">Dieta vegetariana: algun plat</string>
+	<string name="poi_diet_vegetarian_few">Vegetarià (algun plat)</string>
 	<string name="poi_diet_vegan_only">Només vegà</string>
 	<string name="poi_diet_vegan_yes">Vegà</string>
 	<string name="poi_diet_vegan_no">Dieta vegana: no</string>
@@ -2358,4 +2358,40 @@
 	<string name="poi_beach_surface_type">Superfície</string>
 	<string name="poi_nudism">Nudisme</string>
 	<string name="poi_diet">Dieta</string>
+	<string name="poi_health_specialty">Especialitat mèdica</string>
+	<string name="poi_massage_type">Tipus de massatge</string>
+	<string name="poi_tents">Tendes de campanya</string>
+	<string name="poi_washing_machine">Rentadora</string>
+	<string name="poi_caravans">Caravanes</string>
+	<string name="poi_power_supply">Subministrament elèctric</string>
+	<string name="poi_social_facility_type">Tipus</string>
+	<string name="poi_compressed_air_filter">Aire comprimit</string>
+	<string name="poi_vacuum_cleaner_filter">Aspiradora</string>
+	<string name="poi_home_visit">Visites a domicili</string>
+	<string name="poi_medical_system">Tipus de medicina</string>
+	<string name="poi_dish">Plat</string>
+	<string name="poi_free_flying_characteristic">Característica</string>
+
+<string name="poi_emergency_infrastructure">Infraestructura d\'emergència</string>
+	<string name="poi_spices">Botiga d\'espècies</string>
+	<string name="poi_honey">Venda de mel</string>
+	<string name="poi_religion">Material religiós</string>
+
+	<string name="poi_aeroway_fuel">Benzinera per avions</string>
+	<string name="poi_waterway_fuel">Benzinera per embarcacions</string>
+	<string name="poi_ice_hockey">Hoquei sobre gel</string>
+	<string name="poi_internet_access_fee_yes">Accés a Internet - de pagament</string>
+	<string name="poi_internet_access_fee_no">Accés a Internet - de franc</string>
+
+	<string name="poi_club_freemasonry">Lògia maçònica</string>
+	<string name="poi_club_sailing">Club nàutic</string>
+	<string name="poi_club_scout">Club d\'escoltes</string>
+
+	<string name="poi_wiki_lang_af">Wiki en afrikaans</string>
+	<string name="poi_wiki_lang_bn">Wiki en bengalí</string>
+	<string name="poi_wiki_lang_bpy">Wiki en bishnupriya</string>
+	<string name="poi_wiki_lang_br">Wiki en gal·lès</string>
+	<string name="poi_wiki_lang_fa">Wiki en persa</string>
+	<string name="poi_wiki_lang_ml">Wiki en malaiàlam</string>
+	<string name="poi_wiki_lang_mr">Wiki en marathi</string>
 	</resources>

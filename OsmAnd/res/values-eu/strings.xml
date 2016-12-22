@@ -2672,4 +2672,6 @@ OsmAnd aplikazioarekin laguntza behar baduzu, jarri kontaktuan gure laguntza tal
     <string name="lang_sr_latn">Serbiera (Latinoa)</string>
     <string name="lang_zh_hk">Txinera (Hong Kong)</string>
     <string name="rendering_attr_hideWaterPolygons_description">Ura</string>
+    <string name="rendering_attr_contourWidth_description">Sestra-kurben zabalera</string>
+    <string name="rendering_attr_contourWidth_name">Sestra-kurben zabalera</string>
     </resources>
