@@ -43,8 +43,8 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements AddQu
     FloatingActionButton fab;
 
     QuickActionFactory quickActionFactory = new QuickActionFactory();
-    QuickActionAdapter   adapter;
-    ItemTouchHelper      touchHelper;
+    QuickActionAdapter adapter;
+    ItemTouchHelper    touchHelper;
 
     @Nullable
     @Override
@@ -59,7 +59,6 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements AddQu
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                adapter.addItem(new QuickActionItem(R.string.map_marker, R.drawable.ic_action_flag_dark));
 
                 AddQuickActionDialog dialog = new AddQuickActionDialog();
                 dialog.show(getFragmentManager(), AddQuickActionDialog.TAG);
@@ -90,7 +89,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements AddQu
         ItemTouchHelper.Callback touchHelperCallback = new QuickActionItemTouchHelperCallback(adapter);
         touchHelper = new ItemTouchHelper(touchHelperCallback);
         touchHelper.attachToRecyclerView(quickActionRV);
-        adapter.addItems(createMockDada());
+        adapter.addItems(getSavedActions());
 
         quickActionRV.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -130,24 +129,31 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements AddQu
         getMapActivity().enableDrawer();
     }
 
-    private List<QuickAction> createMockDada() {
-        List<QuickAction> result = new ArrayList<>();
-        for (int i = 0; i < 4; i++) {
-            result.addAll(quickActionFactory.produceTypeActionsList());
-        }
+    private List<QuickAction> getSavedActions() {
+        String actionsJson = getMyApplication().getSettings().QUICK_ACTION_LIST.get();
 
-        return result;
+        return quickActionFactory.parseActiveActionsList(actionsJson);
+//        List<QuickAction> result = new ArrayList<>();
+//        for (int i = 0; i < 4; i++) {
+//            result.addAll(quickActionFactory.produceTypeActionsList());
+//        }
+//
+//        return result;
     }
 
     private MapActivity getMapActivity() {
         return (MapActivity) getActivity();
     }
 
+    private void saveQuickActions(){
+        String json = quickActionFactory.quickActionListToString((ArrayList<QuickAction>) adapter.getQuickActions());
+        getMyApplication().getSettings().QUICK_ACTION_LIST.set(json);
+    }
+
     @Override
     public void onActionSelected(QuickAction action) {
         adapter.addItem(action);
-
-        //TODO save
+        saveQuickActions();
     }
 
     public class QuickActionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements QuickActionItemTouchHelperCallback.OnItemMoveCallback {
@@ -174,7 +180,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements AddQu
 
         @Override
         public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
-            int             viewType = getItemViewType(position);
+            int         viewType = getItemViewType(position);
             QuickAction item     = itemsList.get(position);
 
             if (viewType == SCREEN_ITEM_TYPE) {
@@ -202,7 +208,8 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements AddQu
                 });
 
 //                LinearLayout.LayoutParams dividerParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                LinearLayout.LayoutParams dividerParams =  (LinearLayout.LayoutParams) itemVH.divider.getLayoutParams();
+                LinearLayout.LayoutParams dividerParams = (LinearLayout.LayoutParams) itemVH.divider.getLayoutParams();
+                //noinspection ResourceType
                 dividerParams.setMargins(!isLongDivider(position) ? dpToPx(56f) : 0, 0, 0, 0);
                 itemVH.divider.setLayoutParams(dividerParams);
             } else {
@@ -228,6 +235,12 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements AddQu
             itemsList.remove(position);
             notifyItemRemoved(position);
 
+            moveHeaders(position);
+            showFABIfNotScrollable();
+            saveQuickActions();
+        }
+
+        private void moveHeaders(int position) {
             for (int i = position; i < itemsList.size(); i++) {
                 if (getItemViewType(i) == SCREEN_HEADER_TYPE) {
                     if (i != itemsList.size() - 2) {
@@ -241,8 +254,6 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements AddQu
                 }
             }
             notifyItemRangeChanged(position, itemsList.size() - position);
-
-            showFABIfNotScrollable();
         }
 
         private void showFABIfNotScrollable() {
@@ -255,11 +266,21 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements AddQu
                 fab.show();
         }
 
+        public List<QuickAction> getQuickActions() {
+            List<QuickAction> result = new ArrayList<>();
+            for (int i = 0; i < itemsList.size(); i++) {
+                if (getItemViewType(i) == SCREEN_ITEM_TYPE)
+                    result.add(itemsList.get(i));
+            }
+
+            return result;
+        }
+
         public void addItems(List<QuickAction> data) {
             List<QuickAction> resultList = new ArrayList<>();
             for (int i = 0; i < data.size(); i++) {
                 if (i % ITEMS_IN_GROUP == 0)
-                    resultList.add(createHeader());                      //creates header item
+                    resultList.add(createHeader());
 
                 resultList.add(data.get(i));
             }
@@ -285,7 +306,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements AddQu
         }
 
         private boolean isLongDivider(int globalPosition) {
-            return getActionPosition(globalPosition) == ITEMS_IN_GROUP || globalPosition  == getItemCount() - 1;
+            return getActionPosition(globalPosition) == ITEMS_IN_GROUP || globalPosition == getItemCount() - 1;
         }
 
         public boolean isRecyclerScrollable(RecyclerView recyclerView) {
@@ -323,6 +344,11 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements AddQu
                 notifyItemChanged(targetPosition);
                 return true;
             }
+        }
+
+        @Override
+        public void onViewDropped(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
+            saveQuickActions();
         }
 
         public class QuickActionItemVH extends RecyclerView.ViewHolder {

@@ -34,6 +34,12 @@ public class QuickActionItemTouchHelperCallback extends ItemTouchHelper.Callback
     }
 
     @Override
+    public void clearView(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
+        super.clearView(recyclerView, viewHolder);
+        itemMoveCallback.onViewDropped(recyclerView, viewHolder);
+    }
+
+    @Override
     public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
         return itemMoveCallback.onMove(recyclerView, viewHolder, target);
     }
@@ -49,5 +55,6 @@ public class QuickActionItemTouchHelperCallback extends ItemTouchHelper.Callback
 
     interface OnItemMoveCallback {
         boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target);
+        void onViewDropped(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder);
     }
 }

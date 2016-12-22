@@ -25,7 +25,7 @@ public class QuickActionFactory {
         Type type = new TypeToken<List<QuickAction>>(){}.getType();
         ArrayList<QuickAction> quickActions = new Gson().fromJson(json, type);
 
-        return quickActions;
+        return quickActions != null ? quickActions : new ArrayList<QuickAction>();
     }
 
     public static List<QuickAction> produceTypeActionsList() {
