@@ -439,4 +439,10 @@
         <item name="android:background">@color/xmas_blue</item>
     </style>
 
+    <style name="Dialog90" parent="Base.Theme.AppCompat.Light.Dialog">
+
+        <item name="android:windowMinWidthMajor">90%</item>
+        <item name="android:windowMinWidthMinor">90%</item>
+    </style>
+
 </resources>

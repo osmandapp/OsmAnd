@@ -2468,4 +2468,7 @@ If you need help with OsmAnd application, please contact our support team: suppo
     <string name="quick_action_item_screen">Screen %d</string>
     <string name="quick_action_add_marker">Add marker</string>
     <string name="quick_action_add_favorite">Add favorite</string>
+    <string name="dialog_add_action_title">Add Action</string>
+    <string name="dialog_add_action_subhead">Create item</string>
+    <string name="btn_dismiss">Dismiss</string>
 </resources>

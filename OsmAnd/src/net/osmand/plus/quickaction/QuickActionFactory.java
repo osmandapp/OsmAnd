@@ -28,7 +28,7 @@ public class QuickActionFactory {
         return quickActions;
     }
 
-    public List<QuickAction> produceTypeActionsList() {
+    public static List<QuickAction> produceTypeActionsList() {
 
         ArrayList<QuickAction> quickActions = new ArrayList<>();
 
@@ -51,7 +51,7 @@ public class QuickActionFactory {
         } else return quickAction;
     }
 
-    public class MarkerAction extends QuickAction {
+    public static class MarkerAction extends QuickAction {
 
         public static final int ID = 1;
 
@@ -78,7 +78,7 @@ public class QuickActionFactory {
         }
     }
 
-    public class FavoriteAction extends QuickAction {
+    public static class FavoriteAction extends QuickAction {
 
         public static final int ID = 2;
 

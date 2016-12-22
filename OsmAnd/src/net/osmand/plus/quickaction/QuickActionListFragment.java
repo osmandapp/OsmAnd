@@ -6,6 +6,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.MotionEventCompat;
 import android.support.v7.widget.LinearLayoutManager;
@@ -35,7 +36,7 @@ import static android.util.TypedValue.COMPLEX_UNIT_DIP;
  * Created by okorsun on 20.12.16.
  */
 
-public class QuickActionListFragment extends BaseOsmAndFragment {
+public class QuickActionListFragment extends BaseOsmAndFragment implements AddQuickActionDialog.QuickActionSelectionListener {
     public static final String TAG = QuickActionListFragment.class.getSimpleName();
 
     RecyclerView         quickActionRV;
@@ -59,10 +60,19 @@ public class QuickActionListFragment extends BaseOsmAndFragment {
             @Override
             public void onClick(View v) {
 //                adapter.addItem(new QuickActionItem(R.string.map_marker, R.drawable.ic_action_flag_dark));
+
+                AddQuickActionDialog dialog = new AddQuickActionDialog();
+                dialog.show(getFragmentManager(), AddQuickActionDialog.TAG);
+                dialog.selectionListener = QuickActionListFragment.this;
             }
         });
 
         setUpToolbar(view);
+
+        Fragment dialog = getFragmentManager().findFragmentByTag(AddQuickActionDialog.TAG);
+
+        if (dialog != null && dialog instanceof AddQuickActionDialog)
+            ((AddQuickActionDialog) dialog).selectionListener  = this;
 
         return view;
     }
@@ -133,6 +143,12 @@ public class QuickActionListFragment extends BaseOsmAndFragment {
         return (MapActivity) getActivity();
     }
 
+    @Override
+    public void onActionSelected(QuickAction action) {
+        adapter.addItem(action);
+
+        //TODO save
+    }
 
     public class QuickActionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements QuickActionItemTouchHelperCallback.OnItemMoveCallback {
         public static final int SCREEN_ITEM_TYPE   = 1;
