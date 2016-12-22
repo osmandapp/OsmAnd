@@ -2662,4 +2662,5 @@ Si istimas OsmAnd e OSM e los boles suportare, custa est una manera perfeta pro 
     <string name="rendering_value_high_name">Arta</string>
     <string name="rendering_value_medium_w_name">Mesana</string>
     <string name="rendering_value_low_name">Bassa</string>
+    <string name="rendering_attr_hideWaterPolygons_name">Cua s\'abba</string>
     </resources>
