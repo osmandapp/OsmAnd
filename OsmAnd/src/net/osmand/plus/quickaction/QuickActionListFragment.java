@@ -32,6 +32,7 @@ import java.util.List;
 
 import static android.R.attr.scrollY;
 import static android.util.TypedValue.COMPLEX_UNIT_DIP;
+import static net.osmand.plus.R.id.index_item;
 import static net.osmand.plus.R.id.toolbar;
 
 /**
@@ -142,7 +143,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment {
         }
 
         @Override
-        public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
             int             viewType = getItemViewType(position);
             QuickActionItem item     = itemsList.get(position);
 
@@ -153,7 +154,6 @@ public class QuickActionListFragment extends BaseOsmAndFragment {
                 itemVH.subTitle.setText(getResources().getString(R.string.quick_action_item_action, getActionPosition(position)));
 
                 itemVH.icon.setImageDrawable(getMyApplication().getIconsCache().getThemedIcon(item.getDrawableRes()));
-                itemVH.handleView.setImageDrawable(getMyApplication().getIconsCache().getThemedIcon(R.drawable.ic_action_reorder));
                 itemVH.handleView.setOnTouchListener(new View.OnTouchListener() {
                     @Override
                     public boolean onTouch(View v, MotionEvent event) {
@@ -164,12 +164,18 @@ public class QuickActionListFragment extends BaseOsmAndFragment {
                         return false;
                     }
                 });
+                itemVH.closeBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        QuickActionAdapter.this.deleteItem(holder.getAdapterPosition());
+                    }
+                });
 
                 LinearLayout.LayoutParams dividerParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                 dividerParams.setMargins(isShortDivider(position) ? dpToPx(56f) : 0, 0, 0, 0);
             } else {
                 QuickActionHeaderVH headerVH = (QuickActionHeaderVH) holder;
-                headerVH.headerName.setText(getResources().getString(R.string.quick_action_item_action, position/(ITEMS_IN_GROUP + 1) + 1));
+                headerVH.headerName.setText(getResources().getString(R.string.quick_action_item_screen, position/(ITEMS_IN_GROUP + 1) + 1));
             }
         }
 
@@ -185,8 +191,30 @@ public class QuickActionListFragment extends BaseOsmAndFragment {
 
         public void deleteItem(int position) {
             itemsList.remove(position);
-
             notifyItemRemoved(position);
+
+            for (int i = position; i < itemsList.size(); i++ ){
+                if (getItemViewType(i) == SCREEN_HEADER_TYPE) {
+                    if (i != itemsList.size() - 2){
+                        Collections.swap(itemsList, i, i +1);
+                        notifyItemMoved(i, i + 1);
+                        i++;
+                    } else {
+                        itemsList.remove(i);
+                        notifyItemRemoved(i);
+                    }
+                }
+            }
+            notifyItemRangeChanged(position, itemsList.size() - position);
+
+            LinearLayoutManager layoutManager                     = (LinearLayoutManager) quickActionRV.getLayoutManager();
+            int lastVisibleItemPosition = layoutManager.findLastVisibleItemPosition();
+
+            if ((lastVisibleItemPosition == itemsList.size() - 1 || lastVisibleItemPosition == itemsList.size()) &&
+                    layoutManager.findFirstVisibleItemPosition() == 0 &&
+                    fab.getVisibility() != View.VISIBLE ||
+                    itemsList.size() == 0)
+                fab.show();
         }
 
         public void addItems(List<QuickActionItem> data) {
@@ -209,6 +237,10 @@ public class QuickActionListFragment extends BaseOsmAndFragment {
 
         private boolean isShortDivider(int globalPosition) {
             return getActionPosition(globalPosition) == ITEMS_IN_GROUP || (globalPosition + 1) == getItemCount();
+        }
+
+        public boolean isRecyclerScrollable(RecyclerView recyclerView) {
+            return recyclerView.computeHorizontalScrollRange() > recyclerView.getWidth() || recyclerView.computeVerticalScrollRange() > recyclerView.getHeight();
         }
 
         private int dpToPx(float dp) {
@@ -250,6 +282,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment {
             public ImageView icon;
             public View divider;
             public ImageView handleView;
+            public ImageView closeBtn;
 
             public QuickActionItemVH(View itemView) {
                 super(itemView);
@@ -258,14 +291,10 @@ public class QuickActionListFragment extends BaseOsmAndFragment {
                 icon = (ImageView) itemView.findViewById(R.id.imageView);
                 divider = itemView.findViewById(R.id.divider);
                 handleView = (ImageView) itemView.findViewById(R.id.handle_view);
+                closeBtn = (ImageView) itemView.findViewById(R.id.closeImageButton);
 
-                itemView.findViewById(R.id.closeImageButton).setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        QuickActionAdapter.this.deleteItem(getAdapterPosition());
-                    }
-                });
-
+                handleView.setImageDrawable(getMyApplication().getIconsCache().getThemedIcon(R.drawable.ic_action_reorder));
+                closeBtn.setImageDrawable(getMyApplication().getIconsCache().getThemedIcon(R.drawable.ic_action_remove_dark));
             }
         }
 
