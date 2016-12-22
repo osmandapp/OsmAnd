@@ -2684,4 +2684,5 @@ Facebook：https://www.facebook.com/osmandapp
     <string name="rendering_value_high_name">高</string>
     <string name="rendering_value_medium_w_name">中</string>
     <string name="rendering_value_low_name">低</string>
+    <string name="rendering_attr_hideWaterPolygons_name">隱藏水</string>
     </resources>
