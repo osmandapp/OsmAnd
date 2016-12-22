@@ -190,6 +190,9 @@ public class QuickActionListFragment extends BaseOsmAndFragment {
         }
 
         public void deleteItem(int position) {
+            if (position == -1)
+                return;
+
             itemsList.remove(position);
             notifyItemRemoved(position);
 
@@ -207,9 +210,12 @@ public class QuickActionListFragment extends BaseOsmAndFragment {
             }
             notifyItemRangeChanged(position, itemsList.size() - position);
 
-            LinearLayoutManager layoutManager                     = (LinearLayoutManager) quickActionRV.getLayoutManager();
-            int lastVisibleItemPosition = layoutManager.findLastVisibleItemPosition();
+            showFABIfNotScrollable();
+        }
 
+        private void showFABIfNotScrollable() {
+            LinearLayoutManager layoutManager           = (LinearLayoutManager) quickActionRV.getLayoutManager();
+            int                 lastVisibleItemPosition = layoutManager.findLastVisibleItemPosition();
             if ((lastVisibleItemPosition == itemsList.size() - 1 || lastVisibleItemPosition == itemsList.size()) &&
                     layoutManager.findFirstVisibleItemPosition() == 0 &&
                     fab.getVisibility() != View.VISIBLE ||
