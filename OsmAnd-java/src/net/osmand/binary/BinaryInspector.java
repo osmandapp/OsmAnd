@@ -74,14 +74,15 @@ public class BinaryInspector {
 			in.inspector(new String[] {
 //					"-vpoi",
 //					"-vmap", "-vmapobjects", // "-vmapcoordinates",
-//					"-vrouting",
-					"-vtransport",
+					"-vrouting",
+//					"-vtransport",
 //					"-vaddress", "-vcities","-vstreetgroups",
 //					"-vstreets", "-vbuildings", "-vintersections",
 //					"-lang=ru",
-//					"-bbox=4.8486,52.3084,4.8747,52.2970",
-//					"-osm="+System.getProperty("maps.dir")+"/map.obf.osm", 
+//					"-bbox=30.4981,50.4424,30.5195,50.4351",
+//					"-osm="+System.getProperty("maps.dir")+"/map.obf.osm",
 					System.getProperty("maps.dir")+"/Map.obf"
+//					System.getProperty("maps.dir")+"/Ukraine_kiev-city_europe.obf"
 			});
 		} else {
 			in.inspector(args);

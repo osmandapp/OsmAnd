@@ -62,7 +62,8 @@ public class GeneralRouter implements VehicleRouter {
 		OBSTACLES("obstacle_time"),
 		ROUTING_OBSTACLES("obstacle"),
 		ONEWAY("oneway"),
-		PENALTY_TRANSITION("penalty_transition");
+		PENALTY_TRANSITION("penalty_transition"),
+		OBSTACLE_SRTM_ALT_SPEED("obstacle_srtm_alt_speed");
 		public final String nm; 
 		RouteDataObjectAttribute(String name) {
 			nm = name;
