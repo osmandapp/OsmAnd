@@ -390,7 +390,7 @@ public class MapWidgetRegistry {
 		contextMenuAdapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.map_widget_right, mapActivity)
 				.setCategory(true).setLayout(R.layout.list_group_empty_title_with_switch).createItem());
 
-		boolean selected = true;
+		boolean selected = settings.QUICK_ACTION.get();
 		contextMenuAdapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setTitleId(R.string.configure_screen_quick_action, mapActivity)
 				.setIcon(R.drawable.map_quick_action)

@@ -33,6 +33,10 @@ public class QuickAction {
         return iconRes;
     }
 
+    public int getId() {
+        return id;
+    }
+
     public HashMap<String, String> getParams() {
         return params;
     }
