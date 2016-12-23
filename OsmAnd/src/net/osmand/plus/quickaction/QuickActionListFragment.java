@@ -11,6 +11,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.MotionEventCompat;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.view.ContextThemeWrapper;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -148,7 +149,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
     }
 
     void createAndShowDeleteDialog(final int itemPosition, final String itemName) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(getContext(), R.style.OsmandLightTheme));
         builder.setTitle(R.string.quick_actions_delete);
         builder.setMessage(getResources().getString(R.string.quick_actions_delete_text, itemName));
         builder.setIcon(getMyApplication().getIconsCache().getThemedIcon(R.drawable.ic_action_delete_dark));
@@ -163,8 +164,9 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
                 dialog.dismiss();
             }
         });
-        AlertDialog dialog = builder.create();
-        dialog.show();
+        AlertDialog dialog = builder.show();
+        dialog.getButton(DialogInterface.BUTTON_NEGATIVE).setTextColor(ContextCompat.getColor(getContext(), R.color.dashboard_blue));
+        dialog.getButton(DialogInterface.BUTTON_POSITIVE).setTextColor(ContextCompat.getColor(getContext(), R.color.dashboard_blue));
     }
 
     @Override
