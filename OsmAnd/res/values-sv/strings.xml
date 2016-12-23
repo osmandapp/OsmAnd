@@ -2409,4 +2409,25 @@ Om du tycker om OsmAnd och OSM och vill stödja dem så är detta ett utmärkt s
     <string name="donation_to_osm_desc">Delar av din gåva skickas till OSM-användare som skickat in ändringar till OpenStreeMap. Prenumerationskostnaden förblir densamma.</string>
     <string name="osm_live_subscription_desc">En prenumeration aktiverar uppdateringar varje timme, dag eller vecka och obegränsade nedladdningar av alla kartor globalt.</string>
     <string name="osm_live_banner_desc">Erhåll obegränsade nedladdningar av kartor samt kartuppdateringar oftare än en gång i månaden: varje vecka, varje dag eller varje timme.</string>
+    <string name="release_2_4">"
+ • Ny mycket kraftfull fritextsökning
+
+
+ • Ljudsystem i bil/mobilhögtalarintegrering via Bluetooth
+
+
+ • Förbättrad ruttguidning, voice prompting, och filvalsintegering
+
+
+ • Förbättrat transportlager med ruttåtergivning
+
+
+ • Fler lokala språk och nu stöd för regionala språk
+
+
+ • Många andra förbättringar och felkorrigeringar
+
+
+ och mer …
+ "</string>
     </resources>
