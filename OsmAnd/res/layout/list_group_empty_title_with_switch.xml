@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="16dp"
+    android:layout_height="wrap_content"
     android:clickable="false"
     android:orientation="vertical">
 
@@ -11,8 +11,7 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"/>
+        android:layout_height="12dp"/>
 
     <include layout="@layout/card_top_divider"/>
 
@@ -46,7 +45,8 @@
     <View
         android:id="@+id/divider"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="0dp"
+        android:visibility="gone"
         android:background="?attr/dashboard_divider"/>
 
 </LinearLayout>

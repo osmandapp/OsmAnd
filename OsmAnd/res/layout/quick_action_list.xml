@@ -28,7 +28,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_margin="16dp"
-        android:src="@drawable/map_quick_action"
+        android:src="@drawable/ic_action_plus"
         app:backgroundTint="@color/dashboard_blue"/>
 
 </RelativeLayout>
