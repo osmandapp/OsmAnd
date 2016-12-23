@@ -13,6 +13,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -59,7 +60,6 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 AddQuickActionDialog dialog = new AddQuickActionDialog();
                 dialog.show(getFragmentManager(), AddQuickActionDialog.TAG);
                 dialog.selectionListener = QuickActionListFragment.this;
@@ -85,6 +85,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
         });
         quickActionRV.setAdapter(adapter);
         quickActionRV.setLayoutManager(new LinearLayoutManager(getContext()));
+
 
         ItemTouchHelper.Callback touchHelperCallback = new QuickActionItemTouchHelperCallback(adapter);
         touchHelper = new ItemTouchHelper(touchHelperCallback);
@@ -207,7 +208,6 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
                     }
                 });
 
-//                LinearLayout.LayoutParams dividerParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                 LinearLayout.LayoutParams dividerParams = (LinearLayout.LayoutParams) itemVH.divider.getLayoutParams();
                 //noinspection ResourceType
                 dividerParams.setMargins(!isLongDivider(position) ? dpToPx(56f) : 0, 0, 0, 0);
@@ -254,6 +254,11 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
                 }
             }
             notifyItemRangeChanged(position, itemsList.size() - position);
+
+            if (itemsList.size() == 1){
+                itemsList.remove(0);
+                notifyItemRemoved(0);
+            }
         }
 
         private void showFABIfNotScrollable() {
@@ -309,10 +314,6 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
             return getActionPosition(globalPosition) == ITEMS_IN_GROUP || globalPosition == getItemCount() - 1;
         }
 
-        public boolean isRecyclerScrollable(RecyclerView recyclerView) {
-            return recyclerView.computeHorizontalScrollRange() > recyclerView.getWidth() || recyclerView.computeVerticalScrollRange() > recyclerView.getHeight();
-        }
-
         private int dpToPx(float dp) {
             Resources r = getActivity().getResources();
             return (int) TypedValue.applyDimension(
@@ -329,6 +330,10 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
             else {
                 int selectedPosition = viewHolder.getAdapterPosition();
                 int targetPosition   = target.getAdapterPosition();
+                Log.v(TAG, "selected: " + selectedPosition + ", target: " + targetPosition);
+
+                if (selectedPosition < 0 || targetPosition < 0)
+                    return false;
 
                 Collections.swap(itemsList, selectedPosition, targetPosition);
                 if (selectedPosition - targetPosition < -1) {
@@ -361,6 +366,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
 
             public QuickActionItemVH(View itemView) {
                 super(itemView);
+//                AndroidUtils.setListItemBackground(itemView.getContext(), itemView, getMyApplication().getDaynightHelper().isNightMode());
                 title = (TextView) itemView.findViewById(R.id.title);
                 subTitle = (TextView) itemView.findViewById(R.id.subtitle);
                 icon = (ImageView) itemView.findViewById(R.id.imageView);

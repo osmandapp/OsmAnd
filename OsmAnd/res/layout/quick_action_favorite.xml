@@ -26,7 +26,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:textAppearance="@style/TextAppearance.ListItemTitle"
-                    tools:text="Some title text"/>
+                    android:text="@string/quick_favorites_show_favorites_dialog"/>
 
             <android.support.v7.widget.SwitchCompat
                 android:id="@+id/toggle_item"
@@ -70,7 +70,7 @@
                             android:layout_marginStart="12dp"
                             android:layout_marginTop="2dp"
                             android:scaleType="centerInside"
-                            android:src="@drawable/ic_action_building_number"/>
+                            android:src="@drawable/ic_action_fav_dark"/>
 
                     </LinearLayout>
 
@@ -89,11 +89,11 @@
                             android:layout_marginRight="12dp"
                             android:text="@string/favourites_edit_dialog_name"
                             android:textColor="?android:textColorSecondary"
-                            android:textSize="@dimen/default_list_text_size"/>
+                            android:textSize="@dimen/default_sub_text_size"/>
 
                         <EditText
                             android:id="@+id/name_edit"
-                            tools:text="Name"
+                            android:hint="@string/quick_favorites_name_preset"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="8dp"
@@ -103,6 +103,16 @@
                             android:inputType="text"
                             android:textColor="?android:textColorPrimary"
                             android:textColorHint="?android:textColorSecondary"/>
+
+                        <TextView
+                            android:id="@+id/description"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="12dp"
+                            android:layout_marginRight="12dp"
+                            android:text="@string/quick_favorites_name_description"
+                            android:textColor="?android:textColorSecondary"
+                            android:textSize="@dimen/default_sub_text_size"/>
 
 
                     </LinearLayout>
