@@ -2429,4 +2429,10 @@ Om du tycker om OsmAnd och OSM och vill stödja dem så är detta ett utmärkt s
 
 med mera…
  "</string>
+    <string name="rendering_value_low_name">Låg</string>
+    <string name="rendering_attr_contourWidth_description">Bredd på konturlinjer</string>
+    <string name="rendering_value_high_name">Hög</string>
+    <string name="rendering_value_medium_w_name">Mellan</string>
+    <string name="rendering_attr_contourDensity_description">Täthet på konturlinjer</string>
+    <string name="rendering_attr_contourDensity_name">Täthet på konturlinjer</string>
     </resources>
