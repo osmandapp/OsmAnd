@@ -20,7 +20,7 @@ public class QuickActionFactory {
         return json;
     }
 
-    public List<QuickAction> parseActiveActionsList(String json) {
+    public static List<QuickAction> parseActiveActionsList(String json) {
 
         Type type = new TypeToken<List<QuickAction>>(){}.getType();
         ArrayList<QuickAction> quickActions = new Gson().fromJson(json, type);

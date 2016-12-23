@@ -109,29 +109,33 @@ public class QuickActionsWidget extends LinearLayout {
             }
         });
 
-        dots = (RadioGroup) findViewById(R.id.radioGroup);
+        dots = (LinearLayout) findViewById(R.id.dots);
+        dots.removeAllViews();
 
-           if (pageCount > 1) {
+        if (pageCount > 1) {
 
             for (int i = 0; i < pageCount; i++) {
 
                 ImageView dot = (ImageView) getLayoutInflater()
                         .inflate(R.layout.quick_action_widget_dot, dots, false);
 
-                dot.setImageDrawable(getIconsCache().getIcon(
-                        R.drawable.ic_dot_position, R.color.icon_color_light));
+                dot.setImageDrawable(i == 0
+                        ? getIconsCache().getIcon(R.drawable.ic_dot_position, R.color.dashboard_blue)
+                        : getIconsCache().getIcon(R.drawable.ic_dot_position, R.color.icon_color_light));
 
-                dots.addView(new RadioButton(context));
+                dots.addView(dot);
             }
         }
 
         controls = (LinearLayout) findViewById(R.id.controls);
         controls.setVisibility(pageCount > 1 ? VISIBLE : GONE);
+
+        updateControls(viewPager.getCurrentItem());
     }
 
     private void updateControls(int position) {
 
-        next.setEnabled(viewPager.getAdapter().getCount() > position);
+        next.setEnabled(viewPager.getAdapter().getCount() > position + 1);
         next.setImageDrawable(next.isEnabled()
                 ? getIconsCache().getIcon(R.drawable.ic_arrow_forward, R.color.icon_color)
                 : getIconsCache().getIcon(R.drawable.ic_arrow_forward, R.color.icon_color_light));
@@ -141,12 +145,10 @@ public class QuickActionsWidget extends LinearLayout {
                 ? getIconsCache().getIcon(R.drawable.ic_arrow_back, R.color.icon_color)
                 : getIconsCache().getIcon(R.drawable.ic_arrow_back, R.color.icon_color_light));
 
-        dots.removeAllViews();
-
         for (int i = 0; i < dots.getChildCount(); i++){
 
             ((ImageView) dots.getChildAt(i)).setImageDrawable(i == position
-                    ? getIconsCache().getIcon(R.drawable.ic_dot_position, R.color.icon_color_light)
+                    ? getIconsCache().getIcon(R.drawable.ic_dot_position, R.color.dashboard_blue)
                     : getIconsCache().getIcon(R.drawable.ic_dot_position, R.color.icon_color_light));
         }
     }
@@ -154,26 +156,28 @@ public class QuickActionsWidget extends LinearLayout {
     private View createPageView(ViewGroup container, int position){
 
         LayoutInflater li = getLayoutInflater();
-        GridLayout gridLayout = (GridLayout) li
-                .inflate(R.layout.quick_action_widget_page, container, false);
+        View page = li.inflate(R.layout.quick_action_widget_page, container, false);
+        GridLayout gridLayout = (GridLayout) page.findViewById(R.id.grid);
 
-        final int maxItems = position > 0
-                ? ELEMENT_PER_PAGE
-                : (actions.size() > (ELEMENT_PER_PAGE / 2)
-                ? ELEMENT_PER_PAGE
-                : (ELEMENT_PER_PAGE / 2));
+//        final int maxItems = position > 0
+//                ? ELEMENT_PER_PAGE
+//                : (actions.size() > (ELEMENT_PER_PAGE / 2)
+//                ? ELEMENT_PER_PAGE
+//                : (ELEMENT_PER_PAGE / 2));
 
-        for (int i = position == 0 ? 0 : 1; i > ELEMENT_PER_PAGE; i++){
+        final int maxItems = actions.size() == 1 ? 1 : ELEMENT_PER_PAGE;
+
+        for (int i = 0; i < maxItems; i++){
 
             View view = li.inflate(R.layout.quick_action_widget_item, gridLayout, false);
 
-            if (i * (position + 1) < actions.size()) {
+            if (i + (position * ELEMENT_PER_PAGE) < actions.size()) {
 
-                final QuickAction action = actions.get(i * (position + 1));
+                final QuickAction action = actions.get(i + (position * ELEMENT_PER_PAGE));
 
                 ((ImageView) view.findViewById(R.id.imageView))
                         .setImageDrawable(getIconsCache()
-                                .getIcon(action.getIconRes(), R.color.icon_color));
+                                .getIcon(action.getIconRes(), R.color.icon_color_dark));
 
                 ((TextView) view.findViewById(R.id.title))
                         .setText(action.getNameRes());
@@ -186,6 +190,9 @@ public class QuickActionsWidget extends LinearLayout {
                     }
                 });
             }
+
+            view.findViewById(R.id.dividerBot).setVisibility(i < ELEMENT_PER_PAGE / 2 ? VISIBLE : GONE);
+            view.findViewById(R.id.dividerRight).setVisibility(((i + 1) % 3) == 0 ? GONE : VISIBLE);
 
             gridLayout.addView(view);
         }
@@ -221,7 +228,7 @@ public class QuickActionsWidget extends LinearLayout {
     }
 
     private int countPage(){
-        return (int) Math.ceil((actions.size()) / 6);
+        return (int) Math.ceil((actions.size()) / (double) 6);
     }
 
     private LayoutInflater getLayoutInflater(){
