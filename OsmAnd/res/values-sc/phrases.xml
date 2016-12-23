@@ -2571,4 +2571,56 @@
 	<string name="poi_blind_description">Descritzione pro tzegos</string>
 	<string name="poi_deaf_description">Descritzione pro surdos</string>
 
+	<string name="poi_handrail_yes">Passamanu: eja</string>
+	<string name="poi_handrail_no">Passamanu: nono</string>
+	<string name="poi_ramp_yes">Rampa: eja</string>
+	<string name="poi_ramp_no">Rampa: nono</string>
+	<string name="poi_ramp_wheelchair_yes">Rampa pro carrotzinas/ cadiras a rodas: eja</string>
+	<string name="poi_ramp_wheelchair_no">Rampa pro carrotzinas/ cadiras a rodas: nono</string>
+	<string name="poi_ramp_stroller_yes">Rampa (pro passeginos): eja</string>
+	<string name="poi_ramp_stroller_no">Rampa (pro passeginos): nono</string>
+	<string name="poi_ramp_bicycle_yes">Rampa pro bitzicletas: eja</string>
+	<string name="poi_ramp_bicycle_no">Rampa pro bitzicletas: nono</string>
+	<string name="poi_ramp_luggage_yes">Rampa pro bagàllios: eja</string>
+	<string name="poi_ramp_luggage_no">Rampa pro bagàllios: nono</string>
+	<string name="poi_step_count">Nùmeru de iscalinos</string>
+	<string name="poi_step_condition_even">Istadu de sos iscalinos: bonu</string>
+	<string name="poi_step_condition_uneven">Istadu de sos iscalinos: irregolare</string>
+	<string name="poi_step_condition_rough">Istadu de sos iscalinos: malu</string>
+
+	<string name="poi_cairn">Cairn</string>
+
+	<string name="poi_defibrillator">Defibrillatore</string>
+	<string name="poi_defibrillator_yes">Defibrillatore: eja</string>
+
+	<string name="poi_stone_type_conciliation_cross">Casta: rughe de sa contziliatzione</string>
+	<string name="poi_stone_type_coat_of_arms">Casta: istemma</string>
+
+	<string name="poi_material_wood">Materiale: linna</string>
+	<string name="poi_material_metal">Materiale: metallu</string>
+	<string name="poi_material_reinforced_concrete">Materiale: tzimentu armadu</string>
+	<string name="poi_material_concrete">Materiale: tzimentu</string>
+	<string name="poi_material_steel">Materiale: atzàrgiu</string>
+	<string name="poi_material_stone">Materiale: perda</string>
+	<string name="poi_material_masonry">Materiale: muradura</string>
+	<string name="poi_material_brick">Materiale: matones</string>
+	<string name="poi_material_plastic">Materiale: plàstica</string>
+	<string name="poi_material_sandstone">Materiale: arenària</string>
+	<string name="poi_material_granite_stone">Materiale: granitu</string>
+	<string name="poi_material_metal_wood">Materiale: metallu, linna</string>
+	<string name="poi_material_glass">Materiale: bidru</string>
+	<string name="poi_material_bronze">Materiale: brunzu</string>
+	<string name="poi_material_earth">Materiale: terra</string>
+	<string name="poi_material_composite">Materiale: compòsitu</string>
+	<string name="poi_material_limestone">Materiale: calcare</string>
+	<string name="poi_material_marble">Materiale: màrmaru</string>
+	<string name="poi_material_aluminium">Materiale: allumìniu</string>
+
+	<string name="poi_bathing_yes">Balneatzione: eja</string>
+	<string name="poi_bathing_no">Balneatzione: nono</string>
+
+	<string name="poi_boat_storage">Depòsitu pro barcas</string>
+
+	<string name="poi_conveying_yes">Nastru trasportadore: eja</string>
+
 	</resources>

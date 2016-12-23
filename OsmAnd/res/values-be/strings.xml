@@ -2729,4 +2729,9 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 і многае іншае ...
  "</string>
     <string name="rendering_attr_contourWidth_description">Таўшчыня гарызанталяў (ізагіпсы)</string>
+    <string name="rendering_attr_contourDensity_description">Частасьць гарызанталяў</string>
+    <string name="rendering_attr_contourDensity_name">Частасьць гарызанталяў</string>
+    <string name="rendering_value_high_name">Высокая</string>
+    <string name="rendering_value_medium_w_name">Сярэдняя</string>
+    <string name="rendering_value_low_name">Нізкая</string>
     </resources>

@@ -483,7 +483,7 @@
 	<string name="poi_aerialway_magic_carpet">Tapis-roulant</string>
 
 	<string name="poi_observatory">Observatoire</string>
-	<string name="poi_astronomical_observatory">Observatoire astronomique</string>
+	<string name="poi_astronomical_observatory">Astronomique</string>
 	<string name="poi_orchard">Verger</string>
 	<string name="poi_prosecutor">Procureur</string>
 	<string name="poi_office_administrative">Administration publique locale</string>
@@ -1102,7 +1102,7 @@
 	<string name="poi_nudism_no">Nudisme interdit</string>
 	<string name="poi_nudism_obligatory">Nudisme obligatoire</string>
 	<string name="poi_population">Population</string>
-	<string name="poi_parking_underground">Parking sous-terrain</string>
+	<string name="poi_parking_underground">Parking : sous-terrain</string>
 	<string name="poi_trees_olive">Olivier</string>
 	<string name="poi_trees_apple">Pommier</string>
 	<string name="poi_trees_oil">Palmier</string>
@@ -1147,7 +1147,7 @@
 
 	<string name="poi_pump_manual">Pompe manuelle</string>
 	<string name="poi_pump_no">Sans pompe</string>
-	<string name="poi_pump_yes">Pompe</string>
+	<string name="poi_pump_yes">Pompe : Oui</string>
 
 	<string name="poi_pump_powered">Pompe automatique</string>
 	<string name="poi_water_point">Point d\'eau</string>
@@ -1869,7 +1869,7 @@
 	<string name="vk">VKontakte</string>
 	<string name="poi_content_silage">Contenu : ensilage</string>
 	<string name="poi_content_manure">Contenu : fumier</string>
-	<string name="poi_nudism_permissive">Nudisme autorisé</string>
+	<string name="poi_nudism_permissive">Nudisme : autorisé</string>
 
 	<string name="poi_construction_yes">En construction</string>
 	<string name="poi_dolphin">Duc-d’Albe</string>
