@@ -28,12 +28,7 @@ public class AddQuickActionDialog extends DialogFragment {
 
     public static final String TAG = AddQuickActionDialog.class.getSimpleName();
 
-    public interface QuickActionSelectionListener {
-
-        void onActionSelected(QuickAction action);
-    }
-
-    protected QuickActionSelectionListener selectionListener;
+    protected QuickAction.QuickActionSelectionListener selectionListener;
 
     @NonNull
     @Override

@@ -36,7 +36,7 @@ import static android.util.TypedValue.COMPLEX_UNIT_DIP;
  * Created by okorsun on 20.12.16.
  */
 
-public class QuickActionListFragment extends BaseOsmAndFragment implements AddQuickActionDialog.QuickActionSelectionListener {
+public class QuickActionListFragment extends BaseOsmAndFragment implements QuickAction.QuickActionSelectionListener {
     public static final String TAG = QuickActionListFragment.class.getSimpleName();
 
     RecyclerView         quickActionRV;

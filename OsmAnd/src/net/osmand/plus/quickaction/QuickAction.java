@@ -9,6 +9,11 @@ import java.util.HashMap;
 
 public class QuickAction {
 
+    public interface QuickActionSelectionListener {
+
+        void onActionSelected(QuickAction action);
+    }
+
     protected int id;
     protected @StringRes int nameRes;
     protected @DrawableRes int iconRes;

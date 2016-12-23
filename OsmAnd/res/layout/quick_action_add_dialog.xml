@@ -4,13 +4,13 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="24dp"
     android:paddingTop="24dp">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/dialog_add_action_title"
+        android:layout_marginLeft="24dp"
         android:layout_marginRight="24dp"
         android:textSize="@dimen/dialog_header_text_size"
         android:textColor="?android:textColorPrimary"
@@ -20,6 +20,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/dialog_add_action_subhead"
+        android:layout_marginLeft="24dp"
         android:layout_marginRight="24dp"
         android:textSize="@dimen/default_desc_text_size"
         android:textColor="?android:textColorSecondary"
@@ -27,7 +28,6 @@
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view"
-        android:layout_marginRight="24dp"
         android:layout_weight="1"
         app:layoutManager="LinearLayoutManager"
         android:layout_width="match_parent"
@@ -35,13 +35,14 @@
 
     <Button
         android:id="@+id/btnDismiss"
+        android:layout_marginTop="8dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
         android:text="@string/btn_dismiss"
         android:layout_gravity="right"
+        android:background="?android:selectableItemBackground"
         android:textColor="@color/dashboard_blue"
-        android:background="@color/color_transparent"
         android:textAllCaps="true"/>
 </LinearLayout>

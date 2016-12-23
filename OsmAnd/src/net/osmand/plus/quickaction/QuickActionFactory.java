@@ -40,7 +40,11 @@ public class QuickActionFactory {
 
     public QuickAction produceAction(QuickAction quickAction){
 
-        if (quickAction.id == MarkerAction.ID) {
+        if (quickAction.id == NewAction.ID) {
+
+            return new NewAction(quickAction);
+
+        } else if (quickAction.id == MarkerAction.ID) {
 
             return new MarkerAction(quickAction);
 
@@ -51,9 +55,36 @@ public class QuickActionFactory {
         } else return quickAction;
     }
 
-    public static class MarkerAction extends QuickAction {
+    public static class NewAction extends QuickAction {
 
         public static final int ID = 1;
+
+        protected NewAction(){
+            id = ID;
+            nameRes = R.string.quick_action_new_action;
+            iconRes = R.drawable.ic_action_plus;
+        }
+
+        public NewAction(QuickAction quickAction) {
+            super(quickAction);
+        }
+
+        @Override
+        public void execute() {
+
+            //TODO do some action
+        }
+
+        @Override
+        public void drawUI(ViewGroup parent) {
+
+            //TODO inflate view & fill with params
+        }
+    }
+
+    public static class MarkerAction extends QuickAction {
+
+        public static final int ID = 2;
 
         private MarkerAction(){
             id = ID;
@@ -80,7 +111,7 @@ public class QuickActionFactory {
 
     public static class FavoriteAction extends QuickAction {
 
-        public static final int ID = 2;
+        public static final int ID = 3;
 
         public FavoriteAction() {
             id = ID;
