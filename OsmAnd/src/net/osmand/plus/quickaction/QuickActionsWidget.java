@@ -12,7 +12,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import net.osmand.plus.IconsCache;
@@ -109,7 +108,7 @@ public class QuickActionsWidget extends LinearLayout {
             }
         });
 
-        dots = (RadioGroup) findViewById(R.id.radioGroup);
+        dots = (LinearLayout) findViewById(R.id.dots);
 
            if (pageCount > 1) {
 

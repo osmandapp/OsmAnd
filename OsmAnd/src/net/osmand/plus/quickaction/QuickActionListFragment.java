@@ -1,5 +1,6 @@
 package net.osmand.plus.quickaction;
 
+import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
@@ -9,6 +10,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.MotionEventCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -134,12 +136,6 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
         String actionsJson = getMyApplication().getSettings().QUICK_ACTION_LIST.get();
 
         return quickActionFactory.parseActiveActionsList(actionsJson);
-//        List<QuickAction> result = new ArrayList<>();
-//        for (int i = 0; i < 4; i++) {
-//            result.addAll(quickActionFactory.produceTypeActionsList());
-//        }
-//
-//        return result;
     }
 
     private MapActivity getMapActivity() {
@@ -149,6 +145,26 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
     private void saveQuickActions(){
         String json = quickActionFactory.quickActionListToString((ArrayList<QuickAction>) adapter.getQuickActions());
         getMyApplication().getSettings().QUICK_ACTION_LIST.set(json);
+    }
+
+    void createAndShowDeleteDialog(final int itemPosition, final String itemName) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle(R.string.quick_actions_delete);
+        builder.setMessage(getResources().getString(R.string.quick_actions_delete_text, itemName));
+        builder.setIcon(getMyApplication().getIconsCache().getThemedIcon(R.drawable.ic_action_delete_dark));
+        builder.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                adapter.deleteItem(itemPosition);
+                dialog.dismiss();
+            }
+        });
+        builder.setNegativeButton(R.string.shared_string_no, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                dialog.dismiss();
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
     @Override
@@ -181,8 +197,8 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
 
         @Override
         public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
-            int         viewType = getItemViewType(position);
-            QuickAction item     = itemsList.get(position);
+            int               viewType = getItemViewType(position);
+            final QuickAction item     = itemsList.get(position);
 
             if (viewType == SCREEN_ITEM_TYPE) {
                 final QuickActionItemVH itemVH = (QuickActionItemVH) holder;
@@ -204,7 +220,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
                 itemVH.closeBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        QuickActionAdapter.this.deleteItem(holder.getAdapterPosition());
+                        createAndShowDeleteDialog(holder.getAdapterPosition(), getResources().getString(item.getNameRes()));
                     }
                 });
 
