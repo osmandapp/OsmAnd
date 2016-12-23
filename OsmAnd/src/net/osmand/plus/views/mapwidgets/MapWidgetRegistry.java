@@ -26,6 +26,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dialogs.ConfigureMapMenu;
 import net.osmand.plus.quickaction.QuickActionListFragment;
 import net.osmand.plus.views.MapInfoLayer;
+import net.osmand.plus.views.MapQuickActionLayer;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.widgets.IconPopupMenu;
@@ -421,16 +422,17 @@ public class MapWidgetRegistry {
 											   int position,
 											   boolean visible) {
 
-						MapInfoLayer mil = mapActivity.getMapLayers().getMapInfoLayer();
+						settings.QUICK_ACTION.set(visible);
+
+						MapQuickActionLayer mil = mapActivity.getMapLayers().getMapQuickActionLayer();
 						if (mil != null) {
-							mil.recreateControls();
+							mil.refreshLayer();
 						}
 						ContextMenuItem item = adapter.getItem(position);
 						item.setSelected(visible);
 						item.setColorRes(visible ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
 						adapter.notifyDataSetChanged();
 
-						settings.QUICK_ACTION.set(visible);
 					}
 				})
 				.createItem());

@@ -39,7 +39,7 @@
 
         </FrameLayout>
 
-        <FrameLayout
+        <RelativeLayout
             android:id="@+id/MapHudButtonsOverlay"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -47,7 +47,7 @@
             <include layout="@layout/map_hud_top"/>
 
             <include layout="@layout/map_hud_bottom"/>
-        </FrameLayout>
+        </RelativeLayout>
 
         <FrameLayout
             android:id="@+id/progress_layout_external"
