@@ -2603,4 +2603,5 @@ und vieles mehr ...
     <string name="rendering_value_high_name">Hoch</string>
     <string name="rendering_value_medium_w_name">Mittel</string>
     <string name="rendering_value_low_name">Niedrig</string>
+    <string name="rendering_attr_hideWaterPolygons_name">Wasserflächen ausblenden</string>
     </resources>
