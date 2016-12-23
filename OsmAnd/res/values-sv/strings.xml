@@ -2409,23 +2409,24 @@ Om du tycker om OsmAnd och OSM och vill stödja dem så är detta ett utmärkt s
     <string name="donation_to_osm_desc">En del av din donation kommer att skickas till OSM-användare som skickar in ändringar till OpenStreetMap. Prenumerationens kostnad fortsätter att vara densamma.</string>
     <string name="osm_live_subscription_desc">En prenumeration aktiverar uppdateringar varje timme, dag eller vecka och obegränsade nedladdningar av alla kartor globalt.</string>
     <string name="osm_live_banner_desc">Erhåll obegränsade nedladdningar av kartor samt kartuppdateringar oftare än en gång i månaden: varje vecka, varje dag eller varje timme.</string>
-    <string name="release_2_4">
-• Ny väldigt kraftfull fri-textsökning
+    <string name="release_2_4">"
+ • Ny mycket kraftfull fritextsökning
 
 
-• Ljudsystem för bil / högtalarintegrering via Blåtand
+• Ljudsystem för bil/högtalarintegrering via Blåtand
 
 
 • Förbättrad vägvisning, meddelanderöst och körfält för omdirigering
 
 
-• Förbättrat transport-lager med vägrendering.
+• Förbättrat transportlager med vägrendering.
 
 
-• La till fler språkversioner och stödjer nu regionella språkversioner
+• Fler språkversioner och nu stöd för regionala språk
 
 
-• Många fler förbättringar och bugg-fixar
+• Många fler förbättringar och felkorrigeringar
 
-med mera…</string>
+med mera…
+ "</string>
     </resources>
