@@ -2338,7 +2338,7 @@ Om du tycker om OsmAnd och OSM och vill stödja dem så är detta ett utmärkt s
     <string name="replace_favorite_confirmation">Är du säker på att du vill ersätta favoriten %1$s?</string>
     <string name="clear_tile_data">Rensa alla brickor</string>
     <string name="search_hint">Skriv in stad, adress och POI-namn</string>
-    <string name="donation_to_osm">Gåva till gemenskapen OpenStreetMap</string>
+    <string name="donation_to_osm">Donation till OpenStreetMap-gemenskapen</string>
     <string name="get_it">Skaffa det</string>
     <string name="get_for">Skaffa för %1$s</string>
     <string name="get_for_month">Skaffa för %1$s månad</string>
@@ -2405,29 +2405,27 @@ Om du tycker om OsmAnd och OSM och vill stödja dem så är detta ett utmärkt s
     <string name="christmas_desc">Med tanke på den kommande julen och nyåret så kan du välja att visa POI som har med julen att göra: julgranar, julmarknader med mera.</string>
     <string name="rendering_attr_contourWidth_name">Bredd på konturlinjer</string>
     <string name="rendering_attr_hideWaterPolygons_description">Vatten</string>
-    <string name="osm_live_payment_desc">Avgift för prenumerationen dras varje månad. Du kan avbryta din prenumeration på Google Play när som helst.</string>
-    <string name="donation_to_osm_desc">Delar av din gåva skickas till OSM-användare som skickat in ändringar till OpenStreeMap. Prenumerationskostnaden förblir densamma.</string>
+    <string name="osm_live_payment_desc">Prenumerationsavgiften kommer att faktureras varje månad. Du kan när som helst avbryta din prenumeration i Google Play.</string>
+    <string name="donation_to_osm_desc">En del av din donation kommer att skickas till OSM-användare som skickar in ändringar till OpenStreetMap. Prenumerationens kostnad fortsätter att vara densamma.</string>
     <string name="osm_live_subscription_desc">En prenumeration aktiverar uppdateringar varje timme, dag eller vecka och obegränsade nedladdningar av alla kartor globalt.</string>
     <string name="osm_live_banner_desc">Erhåll obegränsade nedladdningar av kartor samt kartuppdateringar oftare än en gång i månaden: varje vecka, varje dag eller varje timme.</string>
-    <string name="release_2_4">"
- • Ny mycket kraftfull fritextsökning
+    <string name="release_2_4">
+• Ny väldigt kraftfull fri-textsökning
 
 
- • Ljudsystem i bil/mobilhögtalarintegrering via Bluetooth
+• Ljudsystem för bil / högtalarintegrering via Blåtand
 
 
- • Förbättrad ruttguidning, voice prompting, och filvalsintegering
+• Förbättrad vägvisning, meddelanderöst och körfält för omdirigering
 
 
- • Förbättrat transportlager med ruttåtergivning
+• Förbättrat transport-lager med vägrendering.
 
 
- • Fler lokala språk och nu stöd för regionala språk
+• La till fler språkversioner och stödjer nu regionella språkversioner
 
 
- • Många andra förbättringar och felkorrigeringar
+• Många fler förbättringar och bugg-fixar
 
-
- och mer …
- "</string>
+med mera…</string>
     </resources>
