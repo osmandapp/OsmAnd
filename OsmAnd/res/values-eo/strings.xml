@@ -2535,4 +2535,12 @@ kaj pli...
     <string name="routing_attr_allow_motorway_description">Permesas aŭtovojojn</string>
     <string name="lang_sr_latn">Serba (latina)</string>
     <string name="lang_zh_hk">Ĉina (Honkonga)</string>
+    <string name="rendering_attr_contourDensity_description">Denso de nivelkurboj</string>
+    <string name="rendering_attr_contourDensity_name">Nivelkurba denso</string>
+    <string name="rendering_value_high_name">Alta</string>
+    <string name="rendering_value_medium_w_name">Meza</string>
+    <string name="rendering_value_low_name">Malalta</string>
+    <string name="rendering_attr_contourWidth_description">Larĝo de nivelkurboj</string>
+    <string name="rendering_attr_contourWidth_name">Nivelkurba larĝo</string>
+    <string name="rendering_attr_hideWaterPolygons_description">Akvo</string>
     </resources>
