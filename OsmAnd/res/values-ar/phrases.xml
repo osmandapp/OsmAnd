@@ -1386,4 +1386,9 @@
 	<string name="poi_artwork_type_statue">نوع العمل الفني : تمثال</string>
 	<string name="poi_artwork_type_mural">نوع العمل الفني : لوحة جدارية</string>
 	<string name="poi_artwork_type_bust">نوع العمل الفني : تمثال نصفي</string>
+	<string name="poi_artwork_type_mosaic">نوع العمل الفني : فسيفساء</string>
+	<string name="poi_artwork_type_graffiti">نوع العمل الفني : الكتابة على الجدران</string>
+	<string name="poi_artwork_type_stele">نوع العمل الفني : عمود تذكاري</string>
+	<string name="poi_width">العرض</string>
+
 	</resources>
