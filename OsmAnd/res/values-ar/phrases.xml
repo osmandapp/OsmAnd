@@ -1391,4 +1391,15 @@
 	<string name="poi_artwork_type_stele">نوع العمل الفني : عمود تذكاري</string>
 	<string name="poi_width">العرض</string>
 
+	<string name="poi_architecture_art_nouveau">الهندسة المعمارية : الفن الحديث</string>
+	<string name="poi_architecture_classicism">الهندسة المعمارية : الكلاسيكية</string>
+	<string name="poi_architecture_renaissance">الهندسة المعمارية : عصر النهضة</string>
+	<string name="poi_architecture_romanesque">الهندسة المعمارية : رومانسي</string>
+
+	<string name="poi_tunnel_car">نفق الطريق</string>
+	<string name="poi_bridge_car">جسر الطريق</string>
+	<string name="poi_bridge_pedestrian">جسر للمشاة</string>
+	<string name="poi_bridge_bicycle">جسر الدراجات</string>
+	<string name="poi_bridge_railway">جسر للسكك الحديدية</string>
+	<string name="poi_bridge_waterway">جسر ممر مائي</string>
 	</resources>
