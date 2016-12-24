@@ -74,16 +74,16 @@ public class SkiMapsActivity extends Activity {
 	}
 
 	public void logEvent(Activity ctx, String event) {
-		/*
 		try {
 			Class<?> cl = Class.forName("com.google.firebase.analytics.FirebaseAnalytics");
 			Method mm = cl.getMethod("getInstance", Context.class);
 			Object inst = mm.invoke(null, ctx == null ? this : ctx);
 			Method log = cl.getMethod("logEvent", String.class, Bundle.class);
 			log.invoke(inst, event, new Bundle());
+		} catch (ClassNotFoundException e) {
+			//ignore
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		*/
 	}
 }
