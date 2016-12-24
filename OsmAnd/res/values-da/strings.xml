@@ -2744,4 +2744,5 @@ Hvis du  ønsker at støtte OsmAnd og OSM, er dette en god måde at gøre det p�
     <string name="rendering_value_high_name">Høj</string>
     <string name="rendering_value_medium_w_name">Mellem</string>
     <string name="rendering_value_low_name">Lav</string>
+    <string name="rendering_attr_hideWaterPolygons_name">Skjul vand</string>
     </resources>
