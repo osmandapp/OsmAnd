@@ -2543,4 +2543,5 @@ kaj pli...
     <string name="rendering_attr_contourWidth_description">Larĝo de nivelkurboj</string>
     <string name="rendering_attr_contourWidth_name">Nivelkurba larĝo</string>
     <string name="rendering_attr_hideWaterPolygons_description">Akvo</string>
+    <string name="rendering_attr_hideWaterPolygons_name">Kaŝi akvon</string>
     </resources>
