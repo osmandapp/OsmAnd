@@ -2707,4 +2707,12 @@ i więcej...
     <string name="routing_attr_allow_motorway_description">Zezwala na autostrady</string>
     <string name="lang_sr_latn">Serbski (łaciński)</string>
     <string name="lang_zh_hk">Chiński (Hongkong)</string>
+    <string name="rendering_attr_contourDensity_description">Gęstość poziomic</string>
+    <string name="rendering_attr_contourDensity_name">Gęstość poziomic</string>
+    <string name="rendering_value_high_name">Wysoka</string>
+    <string name="rendering_value_medium_w_name">Średnia</string>
+    <string name="rendering_value_low_name">Niska</string>
+    <string name="rendering_attr_contourWidth_description">Szerokość poziomic</string>
+    <string name="rendering_attr_contourWidth_name">Szerokość poziomic</string>
+    <string name="rendering_attr_hideWaterPolygons_description">Woda</string>
     </resources>
