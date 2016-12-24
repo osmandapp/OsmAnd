@@ -71,6 +71,7 @@ public class ParkingPluginActivity extends Activity {
 	}
 
 	public void logEvent(Activity ctx, String event) {
+		/*
 		try {
 			Class<?> cl = Class.forName("com.google.firebase.analytics.FirebaseAnalytics");
 			Method mm = cl.getMethod("getInstance", Context.class);
@@ -80,5 +81,6 @@ public class ParkingPluginActivity extends Activity {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		*/
 	}
 }
