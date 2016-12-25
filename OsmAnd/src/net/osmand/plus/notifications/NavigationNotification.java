@@ -235,7 +235,7 @@ public class NavigationNotification extends OsmandNotification {
 			int smallIconViewId = app.getResources().getIdentifier("right_icon", "id", android.R.class.getPackage().getName());
 
 			if (smallIconViewId != 0) {
-				if (notification.contentIntent != null)
+				if (notification.contentView != null)
 					notification.contentView.setViewVisibility(smallIconViewId, View.INVISIBLE);
 
 				if (notification.headsUpContentView != null)
