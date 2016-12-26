@@ -2685,4 +2685,5 @@ V kolikor naletite na težave s programom OsmAnd, prosimo, stopite v stik s skup
     <string name="rendering_value_low_name">Nizka</string>
     <string name="rendering_attr_contourWidth_description">Širina izohips</string>
     <string name="rendering_attr_contourWidth_name">Širina izohips</string>
+    <string name="rendering_attr_hideWaterPolygons_name">Skrij vodne površine</string>
     </resources>
