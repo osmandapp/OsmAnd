@@ -2435,4 +2435,6 @@ med mera…
     <string name="rendering_value_medium_w_name">Mellan</string>
     <string name="rendering_attr_contourDensity_description">Täthet på konturlinjer</string>
     <string name="rendering_attr_contourDensity_name">Täthet på konturlinjer</string>
+    <string name="lang_zh_hk">Kinesiska (Hong Kong)</string>
+    <string name="driving_region_australia">Australien</string>
     </resources>
