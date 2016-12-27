@@ -88,8 +88,9 @@ public class MultiTouchSupport {
 			if(pointCount < 2){
 				if(inZoomMode){
 					listener.onZoomOrRotationEnded(zoomRelative, angleRelative);
+					inZoomMode = false;
 				}
-				return false;
+				return true;
 			}
 			Float x1 = (Float) getX.invoke(event, 0);
 			Float x2 = (Float) getX.invoke(event, 1);
