@@ -428,7 +428,7 @@ Karten-Kacheln können direkt online bezogen werden, und werden im OsmAnd-Untero
 	<string name="file_with_name_already_exists">Datei mit diesem Namen existiert bereits.</string>
 	<string name="poi_query_by_name_matches_categories">Mehrere passende POI-Kategorien gefunden:</string>
 	<string name="data_to_search_poi_not_available">Lokale Daten für POI-Suche nicht vorhanden.</string>
-	<string name="poi_filter_by_name">Nach Namen suchen</string>
+	<string name="poi_filter_by_name">Nach Name suchen</string>
 	<string name="old_poi_file_should_be_deleted">Die POI-Datei \'%1$s\' wird nicht mehr benötigt und kann gelöscht werden.</string>
 	<string name="update_poi_file_not_found">Lokale Datei für POI-Änderungen nicht gefunden und konnte nicht erstellt werden.</string>
 	<string name="button_upgrade_osmandplus">OsmAnd+ aktualisieren</string>
@@ -594,8 +594,8 @@ Karten-Kacheln können direkt online bezogen werden, und werden im OsmAnd-Untero
 	<string name="m">m</string>
 	<string name="old_map_index_is_not_supported">Überholtes Karten-Format \'\'{0}\'\' wird nicht mehr unterstützt</string>
 	<string name="poi_filter_car_aid">Autowerkstatt</string>
-	<string name="poi_filter_closest_poi">Nächstgelegene POI</string>
-	<string name="poi_filter_custom_filter">Eigener Filter</string>
+	<string name="poi_filter_closest_poi">Nächstgelegene POIs</string>
+	<string name="poi_filter_custom_filter">Benutzerdefinierter Filter</string>
 	<string name="poi_filter_food_shop">Lebensmittel</string>
 	<string name="poi_filter_for_tourists">Für Touristen</string>
 	<string name="poi_filter_fuel">Tankstelle</string>
@@ -2453,7 +2453,7 @@ Wenn Sie OsmAnd und OSM lieben und unterstützen wollen, so ist dies die perfekt
  	<string name="app_mode_train">Zug</string>
     <string name="coords_format">Koordinatenformat</string>
     <string name="coords_format_descr">Format der geographischen Koordinaten</string>
-		<string name="shared_string_is_open_24_7">Offen 7x24h</string>
+		<string name="shared_string_is_open_24_7">24/7 geöffnet</string>
   	<string name="storage_directory_card">Speicherkarte</string>
     
 <string name="map_widget_search">Suche</string>
