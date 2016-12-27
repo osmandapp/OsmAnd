@@ -2420,4 +2420,17 @@
 	<string name="poi_wiki_lang_tg">Wiki en tadjik</string>
 	<string name="poi_wiki_lang_ba">Wiki en baixkir</string>
 	<string name="poi_wiki_lang_sco">Wiki en escocès</string>
+	<string name="poi_wiki_lang_pnb">Wiki en panjabi</string>
+	<string name="poi_wiki_lang_cv">Wiki en txuvaix</string>
+	<string name="poi_wiki_lang_lmo">Wiki en llombard</string>
+	<string name="poi_wiki_lang_my">Wiki en birmà</string>
+	<string name="poi_wiki_lang_yo">Wiki en ioruba</string>
+	<string name="poi_wiki_lang_an">Wiki en aragonès</string>
+	<string name="poi_wiki_lang_ne">Wiki en nepalès</string>
+	<string name="poi_wiki_lang_gu">Wiki en gujarati</string>
+	<string name="poi_wiki_lang_scn">Wiki en sicilià</string>
+	<string name="poi_wiki_lang_bar">Wiki en bavarès</string>
+	<string name="poi_wiki_lang_mn">Wiki en mongol</string>
+	<string name="poi_wiki_lang_nap">Wiki en napolità</string>
+
 	</resources>
