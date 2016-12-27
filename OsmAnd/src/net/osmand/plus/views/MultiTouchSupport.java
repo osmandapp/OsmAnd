@@ -88,6 +88,7 @@ public class MultiTouchSupport {
 			if(pointCount < 2){
 				if(inZoomMode){
 					listener.onZoomOrRotationEnded(zoomRelative, angleRelative);
+					inZoomMode = false;
 				}
 				return false;
 			}
