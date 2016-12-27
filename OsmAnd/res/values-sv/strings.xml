@@ -2437,4 +2437,5 @@ med mera…
     <string name="rendering_attr_contourDensity_name">Täthet på konturlinjer</string>
     <string name="lang_zh_hk">Kinesiska (Hong Kong)</string>
     <string name="driving_region_australia">Australien</string>
+    <string name="rendering_attr_hideWaterPolygons_name">Dölj vatten</string>
     </resources>
