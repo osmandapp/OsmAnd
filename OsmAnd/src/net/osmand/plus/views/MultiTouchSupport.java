@@ -88,7 +88,9 @@ public class MultiTouchSupport {
 			if(pointCount < 2){
 				if(inZoomMode){
 					listener.onZoomOrRotationEnded(zoomRelative, angleRelative);
-					inZoomMode = false;
+					if(pointCount == 0){
+						inZoomMode = false;
+					}
 				}
 				return false;
 			}
@@ -111,12 +113,12 @@ public class MultiTouchSupport {
 				angleStarted = angle;
 				inZoomMode = true;
 				return true;
-			} else if(actionCode == ACTION_POINTER_UP){
-				if(inZoomMode){
-					listener.onZoomOrRotationEnded(zoomRelative, angleRelative);
-					inZoomMode = false;
-				}
-				return true;
+			//} else if(actionCode == ACTION_POINTER_UP){
+			//	if(inZoomMode){
+			//		listener.onZoomOrRotationEnded(zoomRelative, angleRelative);
+			//		inZoomMode = false;
+			//	}
+			//	return true;
 			} else if(inZoomMode && actionCode == MotionEvent.ACTION_MOVE){
 				if(angleDefined) {
 					angleRelative = MapUtils.unifyRotationTo360(angle - angleStarted);
