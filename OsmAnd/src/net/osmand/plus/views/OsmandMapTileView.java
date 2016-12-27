@@ -824,7 +824,8 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	public boolean onGenericMotionEvent(MotionEvent event) {
 		if ((event.getSource() & InputDevice.SOURCE_CLASS_POINTER) != 0 &&
 				event.getAction() == MotionEvent.ACTION_SCROLL &&
-				event.getAxisValue(MotionEvent.AXIS_VSCROLL) != 0) {
+				event.getAxisValue(MotionEvent.AXIS_VSCROLL) != 0 &&
+				!multiTouchSupport.isInZoomMode()) {
 			final RotatedTileBox tb = getCurrentRotatedTileBox();
 			final double lat = tb.getLatFromPixel(event.getX(), event.getY());
 			final double lon = tb.getLonFromPixel(event.getX(), event.getY());
