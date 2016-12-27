@@ -35,8 +35,8 @@ public class QuickActionRegistry {
         this.updatesListener = updatesListener;
     }
 
-    public QuickActionUpdatesListener getUpdatesListener() {
-        return updatesListener;
+    public void notifyUpdates() {
+        if (updatesListener != null) updatesListener.onActionsUpdated();
     }
 
     public List<QuickAction> getQuickActions() {

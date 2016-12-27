@@ -223,6 +223,14 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
                     }
                 });
 
+                itemVH.container.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        CreateEditActionDialog dialog = CreateEditActionDialog.newInstance(item.id);
+                        dialog.show(getFragmentManager(), AddQuickActionDialog.TAG);
+                    }
+                });
+
                 LinearLayout.LayoutParams dividerParams = (LinearLayout.LayoutParams) itemVH.divider.getLayoutParams();
                 //noinspection ResourceType
                 dividerParams.setMargins(!isLongDivider(position) ? dpToPx(56f) : 0, 0, 0, 0);
@@ -378,6 +386,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
             public View      divider;
             public ImageView handleView;
             public ImageView closeBtn;
+            public View container;
 
             public QuickActionItemVH(View itemView) {
                 super(itemView);
@@ -388,6 +397,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
                 divider = itemView.findViewById(R.id.divider);
                 handleView = (ImageView) itemView.findViewById(R.id.handle_view);
                 closeBtn = (ImageView) itemView.findViewById(R.id.closeImageButton);
+                container = itemView.findViewById(R.id.searchListItemLayout);
 
                 handleView.setImageDrawable(getMyApplication().getIconsCache().getThemedIcon(R.drawable.ic_action_reorder));
                 closeBtn.setImageDrawable(getMyApplication().getIconsCache().getThemedIcon(R.drawable.ic_action_remove_dark));
