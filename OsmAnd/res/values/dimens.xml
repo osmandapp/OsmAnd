@@ -7,4 +7,7 @@
     <dimen name="first_usage_title_margin_bottom">56dp</dimen>
     <dimen name="first_usage_title_text_size">52sp</dimen>
     <dimen name="first_usage_subtitle_text_size">18sp</dimen>
+
+    <dimen name="quick_action_widget_height_big">200dp</dimen>
+    <dimen name="quick_action_widget_height_small">100dp</dimen>
 </resources>

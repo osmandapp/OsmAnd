@@ -69,6 +69,12 @@ public class QuickActionsWidget extends LinearLayout {
         viewPager = (ViewPager) findViewById(R.id.viewPager);
         viewPager.setAdapter(new ViewsPagerAdapter());
 
+        viewPager.getLayoutParams().height = actions.size() > ELEMENT_PER_PAGE / 2
+                ? (int) getResources().getDimension(R.dimen.quick_action_widget_height_big)
+                : (int) getResources().getDimension(R.dimen.quick_action_widget_height_small);
+
+        viewPager.requestLayout();
+
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
