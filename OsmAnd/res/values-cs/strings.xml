@@ -711,7 +711,7 @@ Dlaždicové mapy můžete získat přímo z online zdrojů nebo si je můžete 
     <string name="transport_search_desc">Hledat veřejnou dopravu</string>
     <string name="favourites_search_desc">Hledat oblíbené místo</string>
     <string name="rendering_attr_noPolygons_description">Zobrazit všechny typy půdy průhledně</string>
-    <string name="rendering_attr_noPolygons_name">Bez polygonů</string>
+    <string name="rendering_attr_noPolygons_name">Polygony</string>
     <string name="rendering_attr_appMode_name">Režim vykreslování</string>
     <string name="rendering_attr_appMode_description">Optimalizace mapy pro příslušný uživatelský profil</string>
     <string name="rendering_attr_contourLines_description">Minimální zvětšení, od kterého se budou zobrazovat vrstevnice (vyžaduje soubor \'SRTM\'):</string>
@@ -919,7 +919,7 @@ Výčet některých hlavních funkcí:
     <string name="route_descr_lat_lon">Šířka %1$.3f délka %2$.3f</string>
     
     <string name="map_widget_max_speed">Rychlostní omezení</string>
-    <string name="rendering_attr_noAdminboundaries_name">Skrýt hranice</string>
+    <string name="rendering_attr_noAdminboundaries_name">Hranice oblastí</string>
     <string name="rendering_attr_noAdminboundaries_description">Potlačit zobrazení správních hranic ( administrativní úrovně 5-9)</string>
     <string name="monitoring_control_start">GPX</string>
     <string name="index_srtm_ele">Vrstevnice</string>
@@ -2366,4 +2366,13 @@ Pokud máte rádi OsmAnd a OSM a chcete je podpořit, toto je výborný způsob 
  "</string>
     <string name="lang_sr_latn">Srbsky (Latinka)</string>
     <string name="lang_zh_hk">Čínsky (Hong Kong)</string>
+    <string name="rendering_attr_contourDensity_description">Hustota vrstevnic</string>
+    <string name="rendering_attr_contourDensity_name">Hustota vrstevnic</string>
+    <string name="rendering_value_high_name">Vysoká</string>
+    <string name="rendering_value_medium_w_name">Střední</string>
+    <string name="rendering_value_low_name">Nízká</string>
+    <string name="rendering_attr_contourWidth_description">Šířka linií vrstevnic</string>
+    <string name="rendering_attr_contourWidth_name">Šířka linií vrstevnic</string>
+    <string name="rendering_attr_hideWaterPolygons_description">Voda</string>
+    <string name="rendering_attr_hideWaterPolygons_name">Skrýt vodu</string>
     </resources>
