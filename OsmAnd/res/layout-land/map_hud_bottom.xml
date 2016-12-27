@@ -4,7 +4,6 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:layout_gravity="bottom"
-              android:animateLayoutChanges="true"
               android:orientation="vertical">
 
     <net.osmand.plus.quickaction.QuickActionsWidget
@@ -13,12 +12,29 @@
         android:layout_height="wrap_content"
         android:visibility="gone"/>
 
-    <Space
+    <FrameLayout
+        android:id="@+id/map_quick_actions_button_container"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"/>
+        android:layout_weight="1"
+        android:padding="8dp"
+        android:animateLayoutChanges="true">
+
+        <ImageButton
+            android:id="@+id/map_quick_actions_button"
+            android:layout_width="@dimen/map_button_size"
+            android:layout_height="@dimen/map_button_size"
+            android:background="@drawable/btn_circle_blue"
+            android:contentDescription="@string/zoomIn"
+            android:layout_gravity="bottom|right"
+            android:visibility="gone"
+            tools:visibility="visible"
+            tools:src="@drawable/ic_action_test_light"/>
+
+    </FrameLayout>
 
     <LinearLayout
+        android:id="@+id/bottom_controls_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -243,16 +259,6 @@
                 android:layout_gravity="bottom"
                 android:layout_marginLeft="@dimen/map_button_spacing_land"
                 android:orientation="vertical">
-
-                <ImageButton
-                    android:id="@+id/map_quick_actions_button"
-                    android:layout_width="@dimen/map_button_size"
-                    android:layout_height="@dimen/map_button_size"
-                    android:background="@drawable/btn_circle_blue"
-                    android:contentDescription="@string/zoomIn"
-                    android:visibility="gone"
-                    android:layout_marginBottom="@dimen/map_button_spacing"
-                    tools:src="@drawable/ic_action_test_light"/>
 
                 <ImageButton
                     android:id="@+id/map_zoom_in_button"

@@ -101,6 +101,7 @@ import net.osmand.plus.search.QuickSearchDialogFragment;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.MapControlsLayer;
 import net.osmand.plus.views.MapInfoLayer;
+import net.osmand.plus.views.MapQuickActionLayer;
 import net.osmand.plus.views.OsmAndMapLayersView;
 import net.osmand.plus.views.OsmAndMapSurfaceView;
 import net.osmand.plus.views.OsmandMapLayer;
@@ -455,9 +456,13 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			}
 			this.startActivity(prevActivityIntent);
 			prevActivityIntent = null;
-		} else {
-			super.onBackPressed();
+			return;
 		}
+		if (getMapView().getLayerByClass(MapQuickActionLayer.class).onBackPressed())
+			return;
+
+		super.onBackPressed();
+
 	}
 
 	@Override

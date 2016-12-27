@@ -2,7 +2,6 @@ package net.osmand.plus.views;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -27,6 +26,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
+
 import net.osmand.AndroidUtils;
 import net.osmand.core.android.MapRendererContext;
 import net.osmand.data.LatLon;
@@ -395,6 +395,9 @@ public class MapControlsLayer extends OsmandMapLayer {
 		backToMenuButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				if (mapActivity.getMapView().getLayerByClass(MapQuickActionLayer.class).setLayerState(true))
+					return;
+
 				MapActivity.clearPrevActivityIntent();
 				if (dash) {
 					mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.DASHBOARD);
@@ -412,6 +415,9 @@ public class MapControlsLayer extends OsmandMapLayer {
 		routePlanButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				if (mapActivity.getMapView().getLayerByClass(MapQuickActionLayer.class).setLayerState(true))
+					return;
+
 				doRoute(false);
 			}
 		});
