@@ -88,9 +88,7 @@ public class MultiTouchSupport {
 			if(pointCount < 2){
 				if(inZoomMode){
 					listener.onZoomOrRotationEnded(zoomRelative, angleRelative);
-					if(pointCount == 0){
-						inZoomMode = false;
-					}
+					inZoomMode = false;
 				}
 				return false;
 			}
@@ -113,6 +111,7 @@ public class MultiTouchSupport {
 				angleStarted = angle;
 				inZoomMode = true;
 				return true;
+			// Let only the second last finger trigger onZoomOrRotationEnded (above)
 			//} else if(actionCode == ACTION_POINTER_UP){
 			//	if(inZoomMode){
 			//		listener.onZoomOrRotationEnded(zoomRelative, angleRelative);
