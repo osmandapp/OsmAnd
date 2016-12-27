@@ -1,13 +1,15 @@
 package net.osmand.plus.quickaction;
 
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.StringRes;
 import android.view.ViewGroup;
 
 import java.util.HashMap;
 
-public class QuickAction {
+public class QuickAction implements Parcelable {
 
     public interface QuickActionSelectionListener {
 
@@ -48,5 +50,38 @@ public class QuickAction {
 
     public void execute(){};
     public void drawUI(ViewGroup parent){};
+
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(this.id);
+        dest.writeInt(this.nameRes);
+        dest.writeInt(this.iconRes);
+        dest.writeSerializable(this.params);
+    }
+
+    protected QuickAction(Parcel in) {
+        this.id = in.readInt();
+        this.nameRes = in.readInt();
+        this.iconRes = in.readInt();
+        this.params = (HashMap<String, String>) in.readSerializable();
+    }
+
+    public static final Parcelable.Creator<QuickAction> CREATOR = new Parcelable.Creator<QuickAction>() {
+        @Override
+        public QuickAction createFromParcel(Parcel source) {
+            return new QuickAction(source);
+        }
+
+        @Override
+        public QuickAction[] newArray(int size) {
+            return new QuickAction[size];
+        }
+    };
 }
 
