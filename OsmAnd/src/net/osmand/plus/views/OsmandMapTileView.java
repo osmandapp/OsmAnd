@@ -860,7 +860,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		}
 		final boolean isMultiTouch = multiTouchSupport.onTouchEvent(event);
 		doubleTapScaleDetector.onTouchEvent(event);
-		if (!(multiTouchSupport.isInZoomMode() || isMultiTouch || doubleTapScaleDetector.isInZoomMode())) {
+		if (!isMultiTouch && !multiTouchSupport.isInZoomMode() && !doubleTapScaleDetector.isInZoomMode()) {
 			gestureDetector.onTouchEvent(event);
 		}
 		return true;
