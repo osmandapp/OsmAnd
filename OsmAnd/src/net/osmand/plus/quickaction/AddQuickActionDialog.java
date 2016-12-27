@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 
 import java.util.List;
 
@@ -27,8 +28,6 @@ import java.util.List;
 public class AddQuickActionDialog extends DialogFragment {
 
     public static final String TAG = AddQuickActionDialog.class.getSimpleName();
-
-    protected QuickAction.QuickActionSelectionListener selectionListener;
 
     @NonNull
     @Override
@@ -58,6 +57,11 @@ public class AddQuickActionDialog extends DialogFragment {
         recyclerView.setAdapter(adapter);
 
         return root;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
     }
 
     public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
@@ -104,8 +108,8 @@ public class AddQuickActionDialog extends DialogFragment {
                 @Override
                 public void onClick(View view) {
 
-                    if (selectionListener != null)
-                        selectionListener.onActionSelected(action);
+                    CreateEditActionDialog dialog = CreateEditActionDialog.newInstance(action.type);
+                    dialog.show(getFragmentManager(), AddQuickActionDialog.TAG);
 
                     dismiss();
                 }

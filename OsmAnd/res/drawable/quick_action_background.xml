@@ -3,7 +3,7 @@
     android:shape="rectangle">
 
     <gradient
-        android:startColor="@color/popup_bg_color"
+        android:startColor="#c8202020"
         android:endColor="@color/color_transparent" android:angle="-90"/>
 
 </shape>

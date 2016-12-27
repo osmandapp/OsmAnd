@@ -40,43 +40,45 @@ import static android.util.TypedValue.COMPLEX_UNIT_DIP;
  * Created by okorsun on 20.12.16.
  */
 
-public class QuickActionListFragment extends BaseOsmAndFragment implements QuickAction.QuickActionSelectionListener {
+public class QuickActionListFragment extends BaseOsmAndFragment implements QuickActionRegistry.QuickActionUpdatesListener{
+
     public static final String TAG = QuickActionListFragment.class.getSimpleName();
 
     RecyclerView         quickActionRV;
     FloatingActionButton fab;
 
-    QuickActionFactory quickActionFactory = new QuickActionFactory();
-    QuickActionAdapter adapter;
-    ItemTouchHelper    touchHelper;
+    QuickActionAdapter  adapter;
+    ItemTouchHelper     touchHelper;
+    QuickActionRegistry quickActionRegistry;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
         View view = inflater.inflate(R.layout.quick_action_list, container, false);
 
         quickActionRV = (RecyclerView) view.findViewById(R.id.recycler_view);
         fab = (FloatingActionButton) view.findViewById(R.id.fabButton);
-
-        setUpQuickActionRV();
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 AddQuickActionDialog dialog = new AddQuickActionDialog();
                 dialog.show(getFragmentManager(), AddQuickActionDialog.TAG);
-                dialog.selectionListener = QuickActionListFragment.this;
             }
         });
 
-        setUpToolbar(view);
-
-        Fragment dialog = getFragmentManager().findFragmentByTag(AddQuickActionDialog.TAG);
-
-        if (dialog != null && dialog instanceof AddQuickActionDialog)
-            ((AddQuickActionDialog) dialog).selectionListener  = this;
-
         return view;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        quickActionRegistry = getMapActivity().getMapLayers().getQuickActionRegistry();
+
+        setUpToolbar(view);
+        setUpQuickActionRV();
     }
 
     private void setUpQuickActionRV() {
@@ -89,11 +91,10 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
         quickActionRV.setAdapter(adapter);
         quickActionRV.setLayoutManager(new LinearLayoutManager(getContext()));
 
-
         ItemTouchHelper.Callback touchHelperCallback = new QuickActionItemTouchHelperCallback(adapter);
         touchHelper = new ItemTouchHelper(touchHelperCallback);
         touchHelper.attachToRecyclerView(quickActionRV);
-        adapter.addItems(getSavedActions());
+        adapter.addItems(quickActionRegistry.getQuickActions());
 
         quickActionRV.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -124,19 +125,17 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
     @Override
     public void onResume() {
         super.onResume();
+
         getMapActivity().disableDrawer();
+        quickActionRegistry.setUpdatesListener(this);
     }
 
     @Override
     public void onPause() {
         super.onPause();
+
         getMapActivity().enableDrawer();
-    }
-
-    private List<QuickAction> getSavedActions() {
-        String actionsJson = getMyApplication().getSettings().QUICK_ACTION_LIST.get();
-
-        return quickActionFactory.parseActiveActionsList(actionsJson);
+        quickActionRegistry.setUpdatesListener(null);
     }
 
     private MapActivity getMapActivity() {
@@ -144,8 +143,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
     }
 
     private void saveQuickActions(){
-        String json = quickActionFactory.quickActionListToString((ArrayList<QuickAction>) adapter.getQuickActions());
-        getMyApplication().getSettings().QUICK_ACTION_LIST.set(json);
+        quickActionRegistry.updateQuickActions(adapter.getQuickActions());
     }
 
     void createAndShowDeleteDialog(final int itemPosition, final String itemName) {
@@ -170,9 +168,8 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
     }
 
     @Override
-    public void onActionSelected(QuickAction action) {
-        adapter.addItem(action);
-        saveQuickActions();
+    public void onActionsUpdated() {
+        adapter.addItems(quickActionRegistry.getQuickActions());
     }
 
     public class QuickActionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements QuickActionItemTouchHelperCallback.OnItemMoveCallback {
@@ -205,7 +202,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
             if (viewType == SCREEN_ITEM_TYPE) {
                 final QuickActionItemVH itemVH = (QuickActionItemVH) holder;
 
-                itemVH.title.setText(item.getNameRes());
+                itemVH.title.setText(item.getName(getContext()));
                 itemVH.subTitle.setText(getResources().getString(R.string.quick_action_item_action, getActionPosition(position)));
 
                 itemVH.icon.setImageDrawable(getMyApplication().getIconsCache().getThemedIcon(item.getIconRes()));
@@ -243,7 +240,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
 
         @Override
         public int getItemViewType(int position) {
-            return itemsList.get(position).getId() == 0 ? SCREEN_HEADER_TYPE : SCREEN_ITEM_TYPE;
+            return itemsList.get(position).type == 0 ? SCREEN_HEADER_TYPE : SCREEN_ITEM_TYPE;
         }
 
         public void deleteItem(int position) {

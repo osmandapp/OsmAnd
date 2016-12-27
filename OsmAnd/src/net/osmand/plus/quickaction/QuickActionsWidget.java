@@ -186,7 +186,7 @@ public class QuickActionsWidget extends LinearLayout {
                                 .getIcon(action.getIconRes(), R.color.icon_color_dark));
 
                 ((TextView) view.findViewById(R.id.title))
-                        .setText(action.getNameRes());
+                        .setText(action.getName(getContext()));
 
                 view.setOnClickListener(new OnClickListener() {
                     @Override

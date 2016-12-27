@@ -7,6 +7,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -14,13 +15,13 @@ import java.util.List;
 
 public class QuickActionFactory {
 
-    public String quickActionListToString(ArrayList<QuickAction> quickActions){
+    public String quickActionListToString(List<QuickAction> quickActions){
 
         String json = new Gson().toJson(quickActions);
         return json;
     }
 
-    public static List<QuickAction> parseActiveActionsList(String json) {
+    public List<QuickAction> parseActiveActionsList(String json) {
 
         Type type = new TypeToken<List<QuickAction>>(){}.getType();
         ArrayList<QuickAction> quickActions = new Gson().fromJson(json, type);
@@ -38,29 +39,41 @@ public class QuickActionFactory {
         return quickActions;
     }
 
-    public QuickAction produceAction(QuickAction quickAction){
+    public static QuickAction newActionByType(int type){
 
-        if (quickAction.id == NewAction.ID) {
+        switch (type){
 
-            return new NewAction(quickAction);
+            case NewAction.TYPE: return new NewAction();
 
-        } else if (quickAction.id == MarkerAction.ID) {
+            case MarkerAction.TYPE: return new MarkerAction();
 
-            return new MarkerAction(quickAction);
+            case FavoriteAction.TYPE: return new FavoriteAction();
 
-        } else if (quickAction.id == FavoriteAction.ID){
+            default: return new QuickAction();
+        }
+    }
 
-            return new FavoriteAction(quickAction);
+    public static QuickAction produceAction(QuickAction quickAction){
 
-        } else return quickAction;
+        switch (quickAction.type){
+
+            case NewAction.TYPE: return new NewAction(quickAction);
+
+            case MarkerAction.TYPE: return new MarkerAction(quickAction);
+
+            case FavoriteAction.TYPE: return new FavoriteAction(quickAction);
+
+            default: return quickAction;
+        }
     }
 
     public static class NewAction extends QuickAction {
 
-        public static final int ID = 1;
+        public static final int TYPE = 1;
 
         protected NewAction(){
-            id = ID;
+            id = System.currentTimeMillis();
+            type = TYPE;
             nameRes = R.string.quick_action_new_action;
             iconRes = R.drawable.ic_action_plus;
         }
@@ -70,9 +83,10 @@ public class QuickActionFactory {
         }
 
         @Override
-        public void execute() {
+        public void execute(MapActivity activity) {
 
-            //TODO do some action
+            AddQuickActionDialog dialog = new AddQuickActionDialog();
+            dialog.show(activity.getSupportFragmentManager(), AddQuickActionDialog.TAG);
         }
 
         @Override
@@ -84,10 +98,11 @@ public class QuickActionFactory {
 
     public static class MarkerAction extends QuickAction {
 
-        public static final int ID = 2;
+        public static final int TYPE = 2;
 
         private MarkerAction(){
-            id = ID;
+            id = System.currentTimeMillis();
+            type = TYPE;
             nameRes = R.string.quick_action_add_marker;
             iconRes = R.drawable.ic_action_flag_dark;
         }
@@ -97,7 +112,7 @@ public class QuickActionFactory {
         }
 
         @Override
-        public void execute() {
+        public void execute(MapActivity activity) {
 
             //TODO do some action
         }
@@ -111,10 +126,11 @@ public class QuickActionFactory {
 
     public static class FavoriteAction extends QuickAction {
 
-        public static final int ID = 3;
+        public static final int TYPE = 3;
 
         public FavoriteAction() {
-            id = ID;
+            id = System.currentTimeMillis();
+            type = TYPE;
             nameRes = R.string.quick_action_add_favorite;
             iconRes = R.drawable.ic_action_fav_dark;
         }
@@ -124,7 +140,7 @@ public class QuickActionFactory {
         }
 
         @Override
-        public void execute() {
+        public void execute(MapActivity activity) {
 
             //TODO do some action
         }

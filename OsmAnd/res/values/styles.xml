@@ -445,4 +445,10 @@
         <item name="android:windowMinWidthMinor">90%</item>
     </style>
 
+    <style name="WhiteControls" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorControlNormal">@color/color_white</item>
+        <item name="colorControlActivated">@color/color_white</item>
+        <item name="colorControlHighlight">@color/color_white</item>
+
+    </style>
 </resources>

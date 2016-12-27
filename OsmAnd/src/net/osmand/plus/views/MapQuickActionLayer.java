@@ -9,18 +9,21 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionFactory;
+import net.osmand.plus.quickaction.QuickActionRegistry;
 import net.osmand.plus.quickaction.QuickActionsWidget;
 
 /**
  * Created by okorsun on 23.12.16.
  */
 
-public class MapQuickActionLayer extends OsmandMapLayer {
+public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionRegistry.QuickActionUpdatesListener, QuickAction.QuickActionSelectionListener{
 
     private final MapActivity       mapActivity;
     private final OsmandApplication app;
     private final OsmandSettings    settings;
+    private final QuickActionRegistry quickActionRegistry;
 
     private ImageButton quickActionButton;
     private QuickActionsWidget quickActionsWidget;
@@ -29,6 +32,7 @@ public class MapQuickActionLayer extends OsmandMapLayer {
         this.mapActivity = activity;
         app = activity.getMyApplication();
         settings = activity.getMyApplication().getSettings();
+        quickActionRegistry = activity.getMapLayers().getQuickActionRegistry();
     }
 
 
@@ -41,8 +45,20 @@ public class MapQuickActionLayer extends OsmandMapLayer {
         quickActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                quickActionsWidget.setVisibility(quickActionsWidget.getVisibility() == View.VISIBLE ? View.GONE : View.VISIBLE);
-                quickActionsWidget.setActions(QuickActionFactory.parseActiveActionsList(settings.QUICK_ACTION_LIST.get()));
+
+                if (quickActionsWidget.getVisibility() == View.VISIBLE){
+
+                    quickActionsWidget.setVisibility(View.GONE);
+                    quickActionRegistry.setUpdatesListener(null);
+                    quickActionsWidget.setSelectionListener(null);
+
+                }else {
+
+                    quickActionsWidget.setActions(quickActionRegistry.getQuickActions());
+                    quickActionsWidget.setVisibility(View.VISIBLE);
+                    quickActionRegistry.setUpdatesListener(MapQuickActionLayer.this);
+                    quickActionsWidget.setSelectionListener(MapQuickActionLayer.this);
+                }
             }
         });
     }
@@ -64,5 +80,16 @@ public class MapQuickActionLayer extends OsmandMapLayer {
     @Override
     public boolean drawInScreenPixels() {
         return true;
+    }
+
+
+    @Override
+    public void onActionsUpdated() {
+        quickActionsWidget.setActions(quickActionRegistry.getQuickActions());
+    }
+
+    @Override
+    public void onActionSelected(QuickAction action) {
+        action.execute(mapActivity);
     }
 }
