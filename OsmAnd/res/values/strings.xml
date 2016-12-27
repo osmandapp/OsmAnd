@@ -17,6 +17,7 @@
     <string name="rendering_attr_contourWidth_description">Contour lines width</string>
     <string name="rendering_attr_contourWidth_name">Contour lines width</string>
     <string name="rendering_attr_hideWaterPolygons_description">Water</string>
+    <string name="rendering_attr_hideWaterPolygons_name">Hide water</string>
     <string name="legacy_search">Legacy search</string>
     <string name="show_legacy_search">Show legacy search</string>
     <string name="show_legacy_search_desc">Enable legacy search in the drawer list</string>
