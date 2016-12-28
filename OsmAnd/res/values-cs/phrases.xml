@@ -1708,13 +1708,13 @@
 	<string name="poi_passenger_information_display_yes">Zobrazování informací pro cestující: ano</string>
 	<string name="poi_passenger_information_display_no">Zobrazování informací pro cestující: ne</string>
 
-	<string name="poi_barometer_yes">Barometr: ano</string>
+	<string name="poi_barometer_yes">Barometr</string>
 	<string name="poi_barometer_no">Barometr: ne</string>
-	<string name="poi_thermometer_yes">Teploměr: ano</string>
+	<string name="poi_thermometer_yes">Teploměr</string>
 	<string name="poi_thermometer_no">Teploměr: ne</string>
-	<string name="poi_hygrometer_yes">Vlhkoměr: ano</string>
+	<string name="poi_hygrometer_yes">Vlhkoměr</string>
 	<string name="poi_hygrometer_no">Vlhkoměr: ne</string>
-	<string name="poi_date_yes">Zobrazení data: ano</string>
+	<string name="poi_date_yes">Zobrazení data</string>
 	<string name="poi_date_no">Zobrazení data: ne</string>
 
 	<string name="poi_cocktails_yes">Ano</string>
@@ -1896,8 +1896,8 @@
 	<string name="poi_telescope_usage_research">Použití: výzkum</string>
 
 	<string name="poi_observatory_type_espionage">Použití: špionáž</string>
-	<string name="poi_observatory_type_meteorological">Použití: meteorologický</string>
-	<string name="poi_observatory_type_gravitational">Použití: gravitační</string>
+	<string name="poi_observatory_type_meteorological">Meteorologický</string>
+	<string name="poi_observatory_type_gravitational">Gravitační</string>
 
 	<string name="poi_greenhouse_horticulture">Skleníkové zahradnictví</string>
 
@@ -2668,9 +2668,9 @@
 	<string name="poi_compressed_air_yes">Ano</string>
 	<string name="poi_compressed_air_no">Stlačený vzduch: ne</string>
 
-	<string name="poi_car_wash_yes">Mytí aut: ano</string>
+	<string name="poi_car_wash_yes">Ano</string>
 
-	<string name="poi_vacuum_cleaner_yes">Vysavač: ano</string>
+	<string name="poi_vacuum_cleaner_yes">Ano</string>
 	<string name="poi_vacuum_cleaner_no">Vysavač: ne</string>
 	<string name="poi_amenity_vacuum_cleaner">Vysavač</string>
 
@@ -2680,32 +2680,32 @@
 	<string name="poi_button_operated_yes">Ovládané tlačítkem: ano</string>
 	<string name="poi_button_operated_no">Ovládané tlačítkem: ne</string>
 
-	<string name="poi_free_flying_site_takeoff">Oblast závěsného létání: vzlet</string>
-	<string name="poi_free_flying_site_landing">Oblast závěsného létání: přistání</string>
-	<string name="poi_free_flying_site_towing">Oblast závěsného létání: tažení</string>
-	<string name="poi_free_flying_site_training">Oblast závěsného létání: trénink</string>
-	<string name="poi_free_flying_official_yes">Oficiální závěsné létání: ano</string>
-	<string name="poi_free_flying_official_no">Oficiální závěsné létání: ne</string>
-	<string name="poi_free_flying_paragliding_yes">Paragliding: ano</string>
+	<string name="poi_free_flying_site_takeoff">Vzlet</string>
+	<string name="poi_free_flying_site_landing">Přistání</string>
+	<string name="poi_free_flying_site_towing">Tažení</string>
+	<string name="poi_free_flying_site_training">Trénink</string>
+	<string name="poi_free_flying_official_yes">Oficiální: ano</string>
+	<string name="poi_free_flying_official_no">Oficiální: ne</string>
+	<string name="poi_free_flying_paragliding_yes">Paragliding</string>
 	<string name="poi_free_flying_paragliding_no">Paragliding: ne</string>
-	<string name="poi_free_flying_hanggliding_yes">Rogalo: ano</string>
+	<string name="poi_free_flying_hanggliding_yes">Rogalo</string>
 	<string name="poi_free_flying_hanggliding_no">Rogalo: ne</string>
-	<string name="poi_free_flying_rigid_yes">Závěsný kluzák s tuhým potahem: ano</string>
+	<string name="poi_free_flying_rigid_yes">Závěsný kluzák s tuhým potahem</string>
 	<string name="poi_free_flying_rigid_no">Závěsný kluzák s tuhým potahem: ne</string>
 	<string name="poi_free_flying_no_flight_time">Žádná doba letu (závěsné létání)</string>
-	<string name="poi_free_flying_guest_guidelines_yes">Pokyny hostům pro závěsné létání: ano</string>
-	<string name="poi_free_flying_guest_guidelines_no">Pokyny hostům pro závěsné létání: ne</string>
+	<string name="poi_free_flying_guest_guidelines_yes">Pokyny hostům: ano</string>
+	<string name="poi_free_flying_guest_guidelines_no">Pokyny hostům: ne</string>
 
 	<string name="poi_tanning_salon">Solárium</string>
 
 	<string name="poi_sanitary_dump_station">Zařízení pro vypuštění sanitárního odpadu</string>
 
-	<string name="poi_medical_system_western_yes">Zdravotní systém: západní</string>
-	<string name="poi_medical_system_chinese_yes">Zdravotní systém: tradiční čínština</string>
+	<string name="poi_medical_system_western_yes">Západní</string>
+	<string name="poi_medical_system_chinese_yes">Tradiční čínština</string>
 	<string name="poi_medical_system_unknown_yes">Zdravotní systém: neznámý tradiční</string>
-	<string name="poi_medical_system_ayurveeda_yes">Zdravotní systém: ájurvéda</string>
+	<string name="poi_medical_system_ayurveeda_yes">Ájurvéda</string>
 	<string name="poi_medical_system_mongolian_yes">Zdravotní systém: tradiční mongolský</string>
-	<string name="poi_medical_system_tibetan_yes">Zdravotní systém: tradiční tibetský</string>
+	<string name="poi_medical_system_tibetan_yes">Tradiční tibetský</string>
 	<string name="poi_health_service_nursing_yes">Zdravotní služba: ošetřovatelství: ano</string>
 	<string name="poi_health_service_nursing_no">Zdravotní služba: ošetřovatelství: ne</string>
 	<string name="poi_health_service_counselling_yes">Zdravotní služby: poradenství: ano</string>
@@ -2736,10 +2736,10 @@
 
 	<string name="poi_suction_point">Sací bod</string>
 
-	<string name="poi_fire_hydrant_type_underground">Typ: podzemní</string>
-	<string name="poi_fire_hydrant_type_pillar">Typ: sloupek</string>
-	<string name="poi_fire_hydrant_type_pond">Typ: nádrž</string>
-	<string name="poi_fire_hydrant_type_wall">Typ: zeď</string>
+	<string name="poi_fire_hydrant_type_underground">Podzemní</string>
+	<string name="poi_fire_hydrant_type_pillar">Sloupek</string>
+	<string name="poi_fire_hydrant_type_pond">Nádrž</string>
+	<string name="poi_fire_hydrant_type_wall">Zeď</string>
 
 	<string name="poi_health_amenity_type_first_aid_kit">Sada první pomoci</string>
 	<string name="poi_health_amenity_type_scales">Veřejné váhy</string>
@@ -2819,7 +2819,7 @@
 	<string name="poi_counselling_no">Poradna: ne</string>
 	<string name="poi_emergency_yes">Pomoc v nouzi: ano</string>
 	<string name="poi_emergency_no">Pomoc v nouzi: ne</string>
-	<string name="poi_home_visit_yes">Domácí návštěva: Ano</string>
+	<string name="poi_home_visit_yes">Ano</string>
 	<string name="poi_home_visit_no">Domácí návštěva: ne</string>
 
 	<string name="poi_disease_malaria_yes">Malárie: ano</string>
@@ -2849,10 +2849,10 @@
 	<string name="poi_fire_hydrant_position_street">Pozice hydrantu: ulice</string>
 	<string name="poi_fire_hydrant_position_underground">Pozice hydrantu: podzemní</string>
 	<string name="poi_fire_hydrant_style_wsh">Styl hydrantu: wsh</string>
-	<string name="poi_fire_hydrant_style_water_source_main">Zdroj vody hydrantu: hlavní</string>
-	<string name="poi_fire_hydrant_style_water_source_pond">Zdroj vody hydrantu: rybník</string>
-	<string name="poi_fire_hydrant_style_water_source_stream">Zdroj vody hydrantu: říčka</string>
-	<string name="poi_fire_hydrant_style_water_source_cistern">Zdroj vody hydrantu: cisterna</string>
+	<string name="poi_fire_hydrant_style_water_source_main">Hlavní</string>
+	<string name="poi_fire_hydrant_style_water_source_pond">Rybník</string>
+	<string name="poi_fire_hydrant_style_water_source_stream">Potok</string>
+	<string name="poi_fire_hydrant_style_water_source_cistern">Cisterna</string>
 	<string name="poi_in_service_yes">V provozu: ano</string>
 
 	<string name="poi_street_cabinet_power">Typ skříně: energie</string>
@@ -2874,7 +2874,7 @@
 
 	<string name="poi_salt_yes">Sůl</string>
 	<string name="poi_salt_no">Sůl: ne</string>
-	<string name="poi_wheelchair_designated">Určené pro vozíčkáře</string>
+	<string name="poi_wheelchair_designated">Určený</string>
 	<string name="poi_spoil_heap">Výsypka</string>
 	
 	<string name="poi_summer_camp">Letní tábor</string>
@@ -2898,7 +2898,7 @@
 	<string name="poi_crossing_saltire_no">Varovný kříž: ne</string>
 	<string name="poi_pump_type_india_mk_2_3">Typ čerpadla: Indie Mk II nebo III</string>
 	<string name="poi_pump_type_gravity">Typ čerpadla: gravitace</string>
-	<string name="poi_payment_troika_yes">Troika karty akceptovány</string>
+	<string name="poi_payment_troika_yes">Troika</string>
 	<string name="poi_payment_troika_no">Troika karty neakceptovány</string>
 
 	<string name="poi_fire_operator">Požární operátor</string>
