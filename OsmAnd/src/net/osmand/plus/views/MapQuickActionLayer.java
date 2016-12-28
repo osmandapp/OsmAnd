@@ -135,7 +135,7 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionRe
         menu.close();
 
         RotatedTileBox rb = new RotatedTileBox(tileBox);
-        rb.setCenterLocation(0.5f, 0.5f);
+//        rb.setCenterLocation(0.5f, 0.5f);
         rb.setLatLonCenter(ll.getLatitude(), ll.getLongitude());
         double lat = rb.getLatFromPixel(tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
         double lon = rb.getLonFromPixel(tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
@@ -197,7 +197,8 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionRe
     @Override
     public void onDraw(Canvas canvas, RotatedTileBox box, DrawSettings settings) {
         if (inChangeMarkerPositionMode) {
-            canvas.translate(box.getPixWidth() / 2 - contextMarker.getWidth() / 2, box.getPixHeight() / 2 - contextMarker.getHeight());
+//            canvas.translate(box.getPixWidth() / 2 - contextMarker.getWidth() / 2, box.getPixHeight() / 2 - contextMarker.getHeight());
+            canvas.translate(box.getCenterPixelX() - contextMarker.getWidth() / 2, box.getCenterPixelY() - contextMarker.getHeight());
             contextMarker.draw(canvas);
         }
         boolean hideQuickButton = contextMenuLayer.isInChangeMarkerPositionMode() ||
