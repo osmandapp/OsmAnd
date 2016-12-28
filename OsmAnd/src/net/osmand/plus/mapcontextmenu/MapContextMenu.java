@@ -671,6 +671,8 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		close();
 	}
 
+
+
 	public void buttonFavoritePressed() {
 		if (object != null && object instanceof FavouritePoint) {
 			getFavoritePointEditor().edit((FavouritePoint) object);

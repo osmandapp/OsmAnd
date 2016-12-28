@@ -153,7 +153,7 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 
 		MapContextMenu menu = getMapActivity().getContextMenu();
 		LatLon latLon = new LatLon(favorite.getLatitude(), favorite.getLongitude());
-		if (menu.getLatLon().equals(latLon)) {
+		if (menu.getLatLon() != null && menu.getLatLon().equals(latLon)) {
 			menu.update(latLon, favorite.getPointDescription(), favorite);
 		}
 	}

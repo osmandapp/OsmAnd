@@ -6,11 +6,18 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.StringRes;
+import android.view.View;
 import android.view.ViewGroup;
+
+import com.google.gson.Gson;
+import com.google.gson.annotations.Expose;
+import com.google.gson.reflect.TypeToken;
 
 import net.osmand.plus.activities.MapActivity;
 
+import java.lang.reflect.Type;
 import java.util.HashMap;
+import java.util.Map;
 
 public class QuickAction {
 
@@ -62,6 +69,9 @@ public class QuickAction {
     }
 
     public HashMap<String, String> getParams() {
+
+        if (params == null) params = new HashMap<>();
+
         return params;
     }
 
@@ -74,8 +84,8 @@ public class QuickAction {
     }
 
     public void execute(MapActivity activity){};
-    public void drawUI(ViewGroup parent){};
-    public void fillParams(){};
+    public void drawUI(ViewGroup parent, MapActivity activity){};
+    public void fillParams(View root){};
 
 
     @Override

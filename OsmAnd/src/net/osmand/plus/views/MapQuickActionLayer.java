@@ -18,6 +18,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.quickaction.QuickAction;
+import net.osmand.plus.quickaction.QuickActionFactory;
 import net.osmand.plus.quickaction.QuickActionRegistry;
 import net.osmand.plus.quickaction.QuickActionsWidget;
 
@@ -278,7 +279,7 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionRe
 
     @Override
     public void onActionSelected(QuickAction action) {
-        action.execute(mapActivity);
+        QuickActionFactory.produceAction(action).execute(mapActivity);
     }
 
     public PointF getMovableCenterPoint(RotatedTileBox tb) {

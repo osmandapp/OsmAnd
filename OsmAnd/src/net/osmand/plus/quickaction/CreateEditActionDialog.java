@@ -107,15 +107,15 @@ public class CreateEditActionDialog extends DialogFragment {
                 ? isNew = actionId == 0
                 : savedInstanceState.getBoolean(KEY_ACTION_IS_NEW);
 
-        action = isNew
+        action = QuickActionFactory.produceAction(isNew
                 ? QuickActionFactory.newActionByType(type)
-                : quickActionRegistry.getQuickAction(actionId);
+                : quickActionRegistry.getQuickAction(actionId));
 
         setupToolbar(view);
         setupHeader(view, savedInstanceState);
         setupFooter(view);
 
-        action.drawUI((ViewGroup) view.findViewById(R.id.container));
+        action.drawUI((ViewGroup) view.findViewById(R.id.container), (MapActivity) getActivity());
     }
 
     @Override
@@ -175,13 +175,13 @@ public class CreateEditActionDialog extends DialogFragment {
         image.setImageResource(action.iconRes);
     }
 
-    private void setupFooter(View root){
+    private void setupFooter(final View root){
 
         root.findViewById(R.id.btnApply).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                action.fillParams();
+                action.fillParams(((ViewGroup) root.findViewById(R.id.container)).getChildAt(0));
 
                 if (isNew) quickActionRegistry.addQuickAction(action);
                 else quickActionRegistry.updateQuickAction(action);
