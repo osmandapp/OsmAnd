@@ -3,6 +3,7 @@ package net.osmand.plus.views;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.PointF;
+import android.os.Vibrator;
 import android.support.v4.content.ContextCompat;
 import android.view.MotionEvent;
 import android.view.View;
@@ -21,6 +22,8 @@ import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionFactory;
 import net.osmand.plus.quickaction.QuickActionRegistry;
 import net.osmand.plus.quickaction.QuickActionsWidget;
+
+import static net.osmand.plus.views.ContextMenuLayer.VIBRATE_SHORT;
 
 /**
  * Created by okorsun on 23.12.16.
@@ -79,66 +82,16 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionRe
         int minh = contextMarker.getDrawable().getMinimumHeight();
         contextMarker.layout(0, 0, minw, minh);
 
-        setCloseWidgetOnTouch(mapActivity.findViewById(R.id.map_quick_actions_button_container));
-        setCloseWidgetOnTouch(mapActivity.findViewById(R.id.bottom_controls_container));
 
-//        quickActionButton.setOnTouchListener(new View.OnTouchListener() {
-//            private int lastAction;
-//            private int initialMarginX;
-//            private int initialMarginY;
-//            private float initialTouchX;
-//            private float initialTouchY;
-//
-//            @Override
-//            public boolean onTouch(View v, MotionEvent event) {
-//                switch (event.getAction()) {
-//                    case MotionEvent.ACTION_DOWN:
-//                        FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) v.getLayoutParams();
-//
-//
-//                        initialMarginX = params.rightMargin;
-//                        initialMarginY = params.bottomMargin;
-//
-//                        //get the touch location
-//                        initialTouchX = event.getRawX();
-//                        initialTouchY = event.getRawY();
-//
-//                        lastAction = event.getAction();
-//                        return true;
-//
-//                    case MotionEvent.ACTION_UP:
-//                        if (lastAction == MotionEvent.ACTION_DOWN) {
-//                            setLayerState();
-//                        }
-//                        lastAction = event.getAction();
-//                        return true;
-//                    case MotionEvent.ACTION_MOVE:
-//                        int deltaX = (int) (initialTouchX - event.getRawX());
-//                        int deltaY = (int) (initialTouchY - event.getRawY());
-//                        if (deltaX < 10 && deltaY < 10)
-//                            return false;
-//
-//                        int newMarginX = initialMarginX + deltaX;
-//                        int newMarginY = initialMarginY + deltaY;
-//
-//                        FrameLayout parent = (FrameLayout) v.getParent();
-//                        FrameLayout.LayoutParams param = (FrameLayout.LayoutParams) v.getLayoutParams();
-//                        if (v.getHeight() + newMarginY <= parent.getHeight() && newMarginY > 0)
-//                            param.bottomMargin = newMarginY;
-//
-//                        if (v.getWidth() + newMarginX <= parent.getWidth() && newMarginX > 0) {
-//                            param.rightMargin = newMarginX;
-//                        }
-//
-//                        v.setLayoutParams(param);
-//
-//
-//                        lastAction = event.getAction();
-//                        return true;
-//                }
-//                return false;
-//            }
-//        });
+        quickActionButton.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                Vibrator vibrator = (Vibrator) mapActivity.getSystemService(Context.VIBRATOR_SERVICE);
+                vibrator.vibrate(VIBRATE_SHORT);
+                quickActionButton.setOnTouchListener(onQuickActionTouchListener);
+                return true;
+            }
+        });
     }
 
     /**
@@ -174,38 +127,13 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionRe
         return true;
     }
 
-    private void setCloseWidgetOnTouch(View view) {
-        view.setOnTouchListener(new View.OnTouchListener() {
-            private float initialTouchX;
-            private float initialTouchY;
-
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                switch (event.getAction()) {
-                    case MotionEvent.ACTION_DOWN:
-                        initialTouchX = event.getRawX();
-                        initialTouchY = event.getRawY();
-                        break;
-                    case MotionEvent.ACTION_UP:
-                        int deltaX = (int) (initialTouchX - event.getRawX());
-                        int deltaY = (int) (initialTouchY - event.getRawY());
-                        if (deltaX < 10 && deltaY < 10) {
-                            setLayerState(true);
-                        }
-
-                }
-                return false;
-            }
-        });
-    }
-
     private void enterMovingMode(RotatedTileBox tileBox) {
         MapContextMenu menu = mapActivity.getContextMenu();
+        LatLon         ll = menu.isActive() && tileBox.containsLatLon(menu.getLatLon()) ? menu.getLatLon() : tileBox.getCenterLatLon();
 
         menu.updateMapCenter(null);
-        menu.hide();
+        menu.close();
 
-        LatLon         ll = tileBox.getCenterLatLon();
         RotatedTileBox rb = new RotatedTileBox(tileBox);
         rb.setCenterLocation(0.5f, 0.5f);
         rb.setLatLonCenter(ll.getLatitude(), ll.getLongitude());
@@ -249,6 +177,19 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionRe
         }
     }
 
+    @Override
+    public boolean onSingleTap(PointF point, RotatedTileBox tileBox) {
+        if (isInChangeMarkerPositionMode() && !pressedQuickActionWidget(point.x, point.y)){
+            setLayerState(true);
+            return true;
+        } else
+            return false;
+    }
+
+    private boolean pressedQuickActionWidget(float px , float py) {
+        return py <=  quickActionsWidget.getHeight();
+    }
+
     public void refreshLayer() {
         quickActionButton.setVisibility(settings.QUICK_ACTION.get() ? View.VISIBLE : View.GONE);
     }
@@ -259,6 +200,11 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionRe
             canvas.translate(box.getPixWidth() / 2 - contextMarker.getWidth() / 2, box.getPixHeight() / 2 - contextMarker.getHeight());
             contextMarker.draw(canvas);
         }
+        boolean hideQuickButton = contextMenuLayer.isInChangeMarkerPositionMode() ||
+                mapActivity.getContextMenu().isVisible() ||
+                mapActivity.getContextMenu().getMultiSelectionMenu().isVisible() ||
+                mapActivity.getRoutingHelper().isRoutePlanningMode();
+        quickActionButton.setVisibility(hideQuickButton ? View.GONE : View.VISIBLE);
     }
 
     @Override
@@ -293,4 +239,56 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionRe
     public boolean onBackPressed() {
         return setLayerState(true);
     }
+
+    View.OnTouchListener onQuickActionTouchListener = new View.OnTouchListener() {
+        private int initialMarginX;
+        private int initialMarginY;
+        private float initialTouchX;
+        private float initialTouchY;
+
+        @Override
+        public boolean onTouch(View v, MotionEvent event) {
+            switch (event.getAction()) {
+                case MotionEvent.ACTION_DOWN:
+                    setUpInitialValues(v, event);
+                    return true;
+                case MotionEvent.ACTION_UP:
+                    quickActionButton.setOnTouchListener(null);
+                    return true;
+                case MotionEvent.ACTION_MOVE:
+                    if (initialMarginX == 0 && initialMarginY == 0 && initialTouchX == 0 && initialTouchY == 0)
+                        setUpInitialValues(v, event);
+
+                    int deltaX = (int) (initialTouchX - event.getRawX());
+                    int deltaY = (int) (initialTouchY - event.getRawY());
+
+                    int newMarginX = initialMarginX + deltaX;
+                    int newMarginY = initialMarginY + deltaY;
+
+                    FrameLayout parent = (FrameLayout) v.getParent();
+                    FrameLayout.LayoutParams param = (FrameLayout.LayoutParams) v.getLayoutParams();
+                    if (v.getHeight() + newMarginY <= parent.getHeight() && newMarginY > 0)
+                        param.bottomMargin = newMarginY;
+
+                    if (v.getWidth() + newMarginX <= parent.getWidth() && newMarginX > 0) {
+                        param.rightMargin = newMarginX;
+                    }
+
+                    v.setLayoutParams(param);
+
+                    return true;
+            }
+            return false;
+        }
+
+        private void setUpInitialValues(View v, MotionEvent event) {
+            FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) v.getLayoutParams();
+
+            initialMarginX = params.rightMargin;
+            initialMarginY = params.bottomMargin;
+
+            initialTouchX = event.getRawX();
+            initialTouchY = event.getRawY();
+        }
+    };
 }
