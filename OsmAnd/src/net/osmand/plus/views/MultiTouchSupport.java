@@ -83,13 +83,16 @@ public class MultiTouchSupport {
 		}
 		int actionCode = event.getAction() & ACTION_MASK;
 		try {
+			if (actionCode == MotionEvent.ACTION_DOWN || MotionEvent.ACTION_UP || actionCode == MotionEvent.ACTION_CANCEL) {
+				return false;
+			}
 			Integer pointCount = (Integer) getPointerCount.invoke(event);
 			if(pointCount < 2){
 				if(inZoomMode){
 					listener.onZoomOrRotationEnded(zoomRelative, angleRelative);
 					inZoomMode = false;
 				}
-				return false;
+				return true;
 			}
 			Float x1 = (Float) getX.invoke(event, 0);
 			Float x2 = (Float) getX.invoke(event, 1);
