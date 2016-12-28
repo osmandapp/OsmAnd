@@ -2300,30 +2300,30 @@
 	<string name="poi_social_facility_workshop">Dílna</string>
 	<string name="poi_social_facility_day_care">Denní péče</string>
 
-	<string name="poi_social_facility_for_senior">Zaměření na sociální skupinu: senioři</string>
-	<string name="poi_social_facility_for_child">Zaměření na sociální skupinu: děti</string>
-	<string name="poi_social_facility_for_orphan">Zaměření na sociální skupinu: sirotci</string>
-	<string name="poi_social_facility_for_disabled">Zaměření na sociální skupinu: invalidi</string>
-	<string name="poi_social_facility_for_mental_health">Zaměření na sociální skupinu: pacienti s duševními poruchami</string>
-	<string name="poi_social_facility_for_juvenile">Zaměření na sociální skupinu: mladiství</string>
-	<string name="poi_social_facility_for_homeless">Zaměření na sociální skupinu: bezdomovci</string>
-	<string name="poi_social_facility_for_migrant">Zaměření na sociální skupinu: přistěhovalci</string>
-	<string name="poi_social_facility_for_drug_addicted">Zaměření na sociální skupinu: drogově závislí</string>
-	<string name="poi_social_facility_for_unemployed">Zaměření na sociální skupinu: nezaměstnaní</string>
-	<string name="poi_social_facility_for_diseased">Zaměření na sociální skupinu: nemocní</string>
-	<string name="poi_social_facility_for_child_juvenile">Zaměření na sociální skupinu: děti;mladiství</string>
+	<string name="poi_social_facility_for_senior">Senioři</string>
+	<string name="poi_social_facility_for_child">Děti</string>
+	<string name="poi_social_facility_for_orphan">Sirotci</string>
+	<string name="poi_social_facility_for_disabled">Invalidi</string>
+	<string name="poi_social_facility_for_mental_health">Pacienti s duševními poruchami</string>
+	<string name="poi_social_facility_for_juvenile">Mladiství</string>
+	<string name="poi_social_facility_for_homeless">Bezdomovci</string>
+	<string name="poi_social_facility_for_migrant">Přistěhovalci</string>
+	<string name="poi_social_facility_for_drug_addicted">Drogově závislí</string>
+	<string name="poi_social_facility_for_unemployed">Nezaměstnaní</string>
+	<string name="poi_social_facility_for_diseased">Nemocní</string>
+	<string name="poi_social_facility_for_child_juvenile">Děti;mladiství</string>
 
-	<string name="poi_theatre_genre_philharmonic">Žánr: filharmonie</string>
-	<string name="poi_theatre_genre_musical">Žánr: hudební</string>
-	<string name="poi_theatre_genre_drama">Žánr: činohra</string>
-	<string name="poi_theatre_genre_opera">Žánr: opera</string>
-	<string name="poi_theatre_genre_cabaret">Žánr: kabaret</string>
-	<string name="poi_theatre_genre_puppet">Žánr: loutky</string>
-	<string name="poi_theatre_genre_comedy">Žánr: komedie</string>
-	<string name="poi_theatre_genre_chamber_music">Žánr: komorní hudba</string>
-	<string name="poi_theatre_genre_marionette">Žánr: loutka (marioneta)</string>
-	<string name="poi_theatre_genre_ballet">Žánr: balet</string>
-	<string name="poi_theatre_genre_shadow_play">Žánr: stínohra</string>
+	<string name="poi_theatre_genre_philharmonic">Filharmonie</string>
+	<string name="poi_theatre_genre_musical">Hudební</string>
+	<string name="poi_theatre_genre_drama">Činohra</string>
+	<string name="poi_theatre_genre_opera">Opera</string>
+	<string name="poi_theatre_genre_cabaret">Kabaret</string>
+	<string name="poi_theatre_genre_puppet">Loutky</string>
+	<string name="poi_theatre_genre_comedy">Komedie</string>
+	<string name="poi_theatre_genre_chamber_music">Komorní hudba</string>
+	<string name="poi_theatre_genre_marionette">Loutka (marioneta)</string>
+	<string name="poi_theatre_genre_ballet">Balet</string>
+	<string name="poi_theatre_genre_shadow_play">Stínohra</string>
 
 	<string name="poi_bandstand">Hudební pavilón</string>
 	<string name="poi_product_brick">Produkt: cihla</string>
@@ -2374,8 +2374,8 @@
 	<string name="poi_historic_civilization_cycladic">Civilizace: kykladská</string>
 	<string name="poi_historic_civilization_minoan">Civilizace: mínójská</string>
 	<string name="poi_animal_training">Drezura</string>
-	<string name="poi_animal_training_dog">Výcvik psů</string>
-	<string name="poi_animal_training_horse">Výcvik koní</string>
+	<string name="poi_animal_training_dog">Pes</string>
+	<string name="poi_animal_training_horse">Kůň</string>
 
 	<string name="poi_horse_yes">Koně povoleny</string>
 	<string name="poi_horse_no">Koně nejsou povoleny</string>
@@ -2420,14 +2420,14 @@
 	<string name="poi_stone_type_conciliation_cross">Typ: smírčí kříž</string>
 	<string name="poi_stone_type_coat_of_arms">Typ: erb</string>
 
-	<string name="poi_site_type_megalith">Typ: megalit</string>
-	<string name="poi_site_type_tumulus">Typ: mohyla</string>
-	<string name="poi_site_type_fortification">Typ: opevnění</string>
-	<string name="poi_site_type_settlement">Typ: osada</string>
-	<string name="poi_site_type_city">Typ: město</string>
-	<string name="poi_site_type_hut_circle">Typ: kruhová chatrč</string>
-	<string name="poi_site_type_necropolis">Typ: pohřebiště</string>
-	<string name="poi_site_type_earthwork">Typ: zemní práce</string>
+	<string name="poi_site_type_megalith">Megalit</string>
+	<string name="poi_site_type_tumulus">Mohyla</string>
+	<string name="poi_site_type_fortification">Opevnění</string>
+	<string name="poi_site_type_settlement">Osada</string>
+	<string name="poi_site_type_city">Město</string>
+	<string name="poi_site_type_hut_circle">Kruhová chatrč</string>
+	<string name="poi_site_type_necropolis">Pohřebiště</string>
+	<string name="poi_site_type_earthwork">Zemní práce</string>
 	<string name="poi_fortification_type_hill_fort">Typ opevnění: hradiště</string>
 	<string name="poi_fortification_type_limes">Typ opevnění: římské hradby</string>
 	<string name="poi_fortification_type_sconce">Typ opevnění: sconce</string>
@@ -2473,11 +2473,11 @@
 
 	<string name="poi_ref">Referenční číslo</string>
 
-	<string name="poi_cargo_passengers">Náklad: cestující</string>
-	<string name="poi_cargo_vehicle">Náklad: vozidla</string>
-	<string name="poi_cargo_bicycle">Náklad: kolo</string>
-	<string name="poi_cargo_container">Náklad: kontejner</string>
-	<string name="poi_cargo_hgv">Náklad: nákladní auta</string>
+	<string name="poi_cargo_passengers">Cestující</string>
+	<string name="poi_cargo_vehicle">Vozidla</string>
+	<string name="poi_cargo_bicycle">Kola</string>
+	<string name="poi_cargo_container">Kontejnery</string>
+	<string name="poi_cargo_hgv">Nákladní auta</string>
 
 	<string name="poi_fitness_station">Místo na cvičení</string>
 
@@ -2489,17 +2489,17 @@
 
 	<string name="poi_aerialway_length">Délka</string>
 
-	<string name="poi_health_specialty_general_yes">Zdravotní specializace: praktický lékař</string>
-	<string name="poi_health_specialty_ophthalmology_yes">Zdravotní specializace: oftalmologie</string>
-	<string name="poi_health_specialty_gynaecology_yes">Zdravotní specializace: gynekologie</string>
-	<string name="poi_health_specialty_internal_medicine_yes">Zdravotní specializace: interní lékařství</string>
-	<string name="poi_health_specialty_orthopaedics_yes">Zdravotní specializace: ortopedie</string>
-	<string name="poi_health_specialty_otolaryngology_yes">Zdravotní specializace: otolaryngologie</string>
-	<string name="poi_health_specialty_paediatrics_yes">Zdravotní specializace: dětské lékařství</string>
+	<string name="poi_health_specialty_general_yes">Praktický lékař</string>
+	<string name="poi_health_specialty_ophthalmology_yes">Oftalmologie</string>
+	<string name="poi_health_specialty_gynaecology_yes">Gynekologie</string>
+	<string name="poi_health_specialty_internal_medicine_yes">Interní lékařství</string>
+	<string name="poi_health_specialty_orthopaedics_yes">Ortopedie</string>
+	<string name="poi_health_specialty_otolaryngology_yes">Otolaryngologie</string>
+	<string name="poi_health_specialty_paediatrics_yes">Dětské lékařství</string>
 	<string name="poi_health_specialty_paediatrics_no">Zdravotní specializace: dětské lékařství: ne</string>
-	<string name="poi_health_specialty_dermatology_yes">Zdravotní specializace: dermatologie</string>
-	<string name="poi_health_specialty_urology_yes">Zdravotní specializace: urologie</string>
-	<string name="poi_health_specialty_surgery_yes">Zdravotní specializace: obecná chirurgie</string>
+	<string name="poi_health_specialty_dermatology_yes">Dermatologie</string>
+	<string name="poi_health_specialty_urology_yes">Urologie</string>
+	<string name="poi_health_specialty_surgery_yes">Obecná chirurgie</string>
 	<string name="poi_health_specialty_radiology_yes">Zdravotní specializace: radiologie</string>
 	<string name="poi_health_specialty_psychiatry_yes">Zdravotní specializace: psychiatrie</string>
 	<string name="poi_health_specialty_neurology_yes">Zdravotní specializace: neurologie</string>
@@ -2905,7 +2905,7 @@
 
 	<string name="poi_publisher">Tisková kancelář</string>
 
-	<string name="poi_social_facility_for_underprivileged">Zaměření na sociální skupinu: sociálně slabí</string>
+	<string name="poi_social_facility_for_underprivileged">Sociálně slabí</string>
 	<string name="poi_architecture_umgebinde">Architektura: podstávková</string>
 	<string name="poi_denomination_united">Sjednocená církev Kanady</string>
 	<string name="poi_denomination_united_reformed">Sjednocená reformovaná</string>
@@ -2939,7 +2939,7 @@
 	<string name="poi_historic_era_neolithic">Historické období: mladší doba kamenná</string>
 	<string name="poi_historic_era_chalcolithic">Historické období: doba měděná (IV-III tisíciletí př.n.l.)</string>
 
-	<string name="poi_site_type_petroglyph">Typ: petroglyf</string>
+	<string name="poi_site_type_petroglyph">Petroglyf</string>
 	<string name="poi_megalith_type_menhir">Typ megalitu: menhir</string>
 	<string name="poi_megalith_type_dolmen">Typ megalitu: dolmen</string>
 	<string name="poi_megalith_type_nuraghe">Typ megalitu: nuragy (ochranné opevnění)</string>
