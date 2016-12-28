@@ -2293,12 +2293,12 @@
 	<string name="poi_refugee_no">Uprchlíci: ne</string>
 
 	<string name="poi_social_facility_group_home">Skupinový domov</string>
-	<string name="poi_social_facility_assisted_living">Sociální zařízení: asistované bydlení</string>
-	<string name="poi_social_facility_food_bank">Sociální zařízení: potravinová banka</string>
-	<string name="poi_social_facility_shelter">Sociální zařízení: útulek</string>
-	<string name="poi_social_facility_ambulatory_care">Sociální zařízení: ambulantní péče</string>
-	<string name="poi_social_facility_workshop">Sociální zařízení: dílna</string>
-	<string name="poi_social_facility_day_care">Sociální zařízení: denní péče</string>
+	<string name="poi_social_facility_assisted_living">Asistované bydlení</string>
+	<string name="poi_social_facility_food_bank">Potravinová banka</string>
+	<string name="poi_social_facility_shelter">Útulek</string>
+	<string name="poi_social_facility_ambulatory_care">Ambulantní péče</string>
+	<string name="poi_social_facility_workshop">Dílna</string>
+	<string name="poi_social_facility_day_care">Denní péče</string>
 
 	<string name="poi_social_facility_for_senior">Zaměření na sociální skupinu: senioři</string>
 	<string name="poi_social_facility_for_child">Zaměření na sociální skupinu: děti</string>
