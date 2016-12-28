@@ -7,7 +7,6 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.MotionEventCompat;
 import android.support.v7.app.AlertDialog;
@@ -278,9 +277,10 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
             }
             notifyItemRangeChanged(position, itemsList.size() - position);
 
-            if (itemsList.size() == 1){
-                itemsList.remove(0);
-                notifyItemRemoved(0);
+            int lastPosition = itemsList.size() - 1;
+            if (getItemViewType(lastPosition) == SCREEN_HEADER_TYPE){
+                itemsList.remove(lastPosition);
+                notifyItemRemoved(lastPosition);
             }
         }
 

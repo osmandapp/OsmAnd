@@ -99,6 +99,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 	private long lastZoom;
 	private boolean hasTargets;
 	private ContextMenuLayer contextMenuLayer;
+	private MapQuickActionLayer mapQuickActionLayer;
 	private boolean forceShowCompass;
 
 	public MapControlsLayer(MapActivity activity) {
@@ -395,9 +396,6 @@ public class MapControlsLayer extends OsmandMapLayer {
 		backToMenuButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				if (mapActivity.getMapView().getLayerByClass(MapQuickActionLayer.class).setLayerState(true))
-					return;
-
 				MapActivity.clearPrevActivityIntent();
 				if (dash) {
 					mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.DASHBOARD);
@@ -415,9 +413,6 @@ public class MapControlsLayer extends OsmandMapLayer {
 		routePlanButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				if (mapActivity.getMapView().getLayerByClass(MapQuickActionLayer.class).setLayerState(true))
-					return;
-
 				doRoute(false);
 			}
 		});
@@ -634,7 +629,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		boolean showRouteCalculationControls = routePlanningMode ||
 				((app.accessibilityEnabled() || (System.currentTimeMillis() - touchEvent < TIMEOUT_TO_SHOW_BUTTONS)) && routeFollowingMode);
 		updateMyLocation(rh, dialogOpened);
-		boolean showButtons = (showRouteCalculationControls || !routeFollowingMode) && !contextMenuLayer.isInChangeMarkerPositionMode();
+		boolean showButtons = (showRouteCalculationControls || !routeFollowingMode) && !isInChangeMarkerPositionMode();
 		//routePlanningBtn.setIconResId(routeFollowingMode ? R.drawable.ic_action_gabout_dark : R.drawable.map_directions);
 		if (rh.isFollowingMode()) {
 			routePlanningBtn.setIconResId(R.drawable.map_start_navigation);
@@ -1033,6 +1028,15 @@ public class MapControlsLayer extends OsmandMapLayer {
 			}
 		}
 		return zoomText;
+	}
+
+	public void setMapQuickActionLayer(MapQuickActionLayer mapQuickActionLayer) {
+		this.mapQuickActionLayer = mapQuickActionLayer;
+	}
+
+	private boolean isInChangeMarkerPositionMode(){
+		return mapQuickActionLayer == null ? contextMenuLayer.isInChangeMarkerPositionMode() :
+				mapQuickActionLayer.isInChangeMarkerPositionMode() || contextMenuLayer.isInChangeMarkerPositionMode();
 	}
 
 	public static View.OnLongClickListener getOnClickMagnifierListener(final OsmandMapTileView view) {
