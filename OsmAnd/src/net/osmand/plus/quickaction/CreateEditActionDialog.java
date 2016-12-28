@@ -183,7 +183,9 @@ public class CreateEditActionDialog extends DialogFragment {
 
                 action.fillParams();
 
-                quickActionRegistry.addQuickAction(action);
+                if (isNew) quickActionRegistry.addQuickAction(action);
+                else quickActionRegistry.updateQuickAction(action);
+
                 quickActionRegistry.notifyUpdates();
 
                 dismiss();

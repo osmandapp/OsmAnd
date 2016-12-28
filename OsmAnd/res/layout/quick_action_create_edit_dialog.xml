@@ -86,13 +86,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <FrameLayout
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/container"
             android:background="@color/dashboard_background"
-            android:layout_weight="1"
-            android:layout_marginBottom="56dp"/>
+            android:layout_marginBottom="56dp">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/container"/>
+        </ScrollView>
 
         <ImageView
             android:layout_width="match_parent"

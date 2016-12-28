@@ -1,5 +1,6 @@
 package net.osmand.plus.quickaction;
 
+import android.app.Activity;
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -18,6 +19,7 @@ import android.widget.TextView;
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.helpers.AndroidUiHelper;
 
 import java.util.List;
 
@@ -165,12 +167,7 @@ public class QuickActionsWidget extends LinearLayout {
         View page = li.inflate(R.layout.quick_action_widget_page, container, false);
         GridLayout gridLayout = (GridLayout) page.findViewById(R.id.grid);
 
-//        final int maxItems = position > 0
-//                ? ELEMENT_PER_PAGE
-//                : (actions.size() > (ELEMENT_PER_PAGE / 2)
-//                ? ELEMENT_PER_PAGE
-//                : (ELEMENT_PER_PAGE / 2));
-
+        final boolean land = !AndroidUiHelper.isOrientationPortrait((Activity) getContext());
         final int maxItems = actions.size() == 1 ? 1 : ELEMENT_PER_PAGE;
 
         for (int i = 0; i < maxItems; i++){
@@ -197,8 +194,13 @@ public class QuickActionsWidget extends LinearLayout {
                 });
             }
 
-            view.findViewById(R.id.dividerBot).setVisibility(i < ELEMENT_PER_PAGE / 2 ? VISIBLE : GONE);
-            view.findViewById(R.id.dividerRight).setVisibility(((i + 1) % 3) == 0 ? GONE : VISIBLE);
+            if (land) {
+                view.findViewById(R.id.dividerBot).setVisibility(GONE);
+                view.findViewById(R.id.dividerRight).setVisibility(VISIBLE);
+            } else {
+                view.findViewById(R.id.dividerBot).setVisibility(i < ELEMENT_PER_PAGE / 2 ? VISIBLE : GONE);
+                view.findViewById(R.id.dividerRight).setVisibility(((i + 1) % 3) == 0 ? GONE : VISIBLE);
+            }
 
             gridLayout.addView(view);
         }
