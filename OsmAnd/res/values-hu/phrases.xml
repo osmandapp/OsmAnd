@@ -1612,7 +1612,7 @@
 	<string name="poi_payment_dkv_no">DKV-t nem fogad el</string>
 	<string name="poi_payment_uta_yes">UTA</string>
 	<string name="poi_payment_uta_no">UTA kártyát nem fogad el</string>
-	<string name="poi_payment_girocard_yes">Girocard</string>
+	<string name="poi_payment_girocard_yes">Girokártya</string>
 	<string name="poi_payment_girocard_no">Girokártyát nem fogad el</string>
 	<string name="poi_payment_discover_card_yes">Discover Card</string>
 	<string name="poi_payment_discover_card_no">Discover Cardot nem fogad el</string>
