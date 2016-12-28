@@ -60,11 +60,11 @@
             android:textColorHint="@color/white_80_transparent"
             android:textSize="@dimen/default_list_text_size_large"
             android:hint="@string/quick_action_name_hint"
-            android:layout_marginStart="-4dp"
             android:maxLines="1"
+            android:layout_marginLeft="-4dp"
             android:layout_marginRight="16dp"
             android:layout_alignLeft="@+id/title"
-            android:layout_below="@+id/title" />
+            android:layout_below="@+id/title"/>
 
         <TextView
             android:id="@+id/title"
@@ -84,21 +84,44 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/container"
-        android:background="@color/dashboard_background"
-        android:layout_weight="1"/>
+        android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/btnApply"
-        android:layout_width="match_parent"
-        android:layout_height="52dp"
-        android:text="Apply"
-        android:textAllCaps="true"
-        android:textColor="@color/color_white"
-        android:textSize="@dimen/default_list_text_size"
-        android:gravity="center"
-        android:foreground="?android:selectableItemBackground"
-        android:background="@color/dashboard_blue"/>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/container"
+            android:background="@color/dashboard_background"
+            android:layout_weight="1"
+            android:layout_marginBottom="56dp"/>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            android:layout_gravity="top"
+            android:src="@drawable/bg_shadow_list_bottom"/>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="56dp"
+            android:src="@drawable/bg_shadow_list_top"/>
+
+        <Button
+            android:id="@+id/btnApply"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:text="Apply"
+            android:textAllCaps="true"
+            android:textColor="@color/color_white"
+            android:textSize="@dimen/default_list_text_size"
+            android:gravity="center"
+            android:layout_gravity="bottom"
+            android:foreground="?android:selectableItemBackground"
+            android:background="@color/dashboard_blue"/>
+
+    </FrameLayout>
 
 </LinearLayout>
