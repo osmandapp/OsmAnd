@@ -83,7 +83,7 @@ public class MultiTouchSupport {
 		}
 		int actionCode = event.getAction() & ACTION_MASK;
 		try {
-			if (actionCode == MotionEvent.ACTION_DOWN || MotionEvent.ACTION_UP || actionCode == MotionEvent.ACTION_CANCEL) {
+			if (actionCode == MotionEvent.ACTION_DOWN || actionCode == MotionEvent.ACTION_UP || actionCode == MotionEvent.ACTION_CANCEL) {
 				return false;
 			}
 			Integer pointCount = (Integer) getPointerCount.invoke(event);
