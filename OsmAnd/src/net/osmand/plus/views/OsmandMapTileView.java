@@ -861,8 +861,8 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			for (int i = layers.size() - 1; i >= 0; i--) {
 				layers.get(i).onTouchEvent(event, getCurrentRotatedTileBox());
 			}
-			gestureDetector.onTouchEvent(event);
 		}
+		gestureDetector.onTouchEvent(event);
 		return true;
 	}
 
