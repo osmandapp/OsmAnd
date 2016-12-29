@@ -2438,4 +2438,20 @@
 	<string name="poi_content_slurry">Contingut: purins</string>
 	<string name="poi_parking_multi_storey">Multiplanta</string>
 
+	<string name="poi_animal_training_horse">Cavalls</string>
+
+	<string name="poi_horse_yes">Es permet cavalls</string>
+	<string name="poi_horse_no">No es permet cavalls</string>
+	<string name="poi_animal_yes">Es permeten animals</string>
+	<string name="poi_animal_no">No es permeten animals</string>
+
+	<string name="poi_historic_period_nuragic">Període històric: nuràgic</string>
+	<string name="poi_historic_period_stone_bronze_undetermined">Període històric: edat de pedra/bronze (indeterminat)</string>
+	<string name="poi_historic_period_bronze_age">Període històric: edat de bronze</string>
+	<string name="poi_historic_period_classical_greece">Període històric: Grècia clàssica (segles 5 - 4 aC)</string>
+	<string name="poi_historic_period_archaic_greece">Període històric:Grècia arcaica</string>
+	<string name="poi_historic_period_iron_age">Període històric: edat de ferro</string>
+	<string name="poi_historic_period_roman_republic">Període històric: república romana (508 aC - 27 aC)</string>
+	<string name="poi_historic_period_hellenistic_greece">Període històric: Grècia helenística</string>
+	<string name="poi_historic_period_new_kingdom">Període històric: imperi nou d\'Egipte (1550 -1069 aC)</string>
 	</resources>
