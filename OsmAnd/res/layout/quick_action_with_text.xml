@@ -6,11 +6,12 @@
     android:orientation="vertical">
 
     <TextView
+        android:id="@+id/text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/bg_color"
         android:padding="16dp"
-        android:text="@string/quick_action_add_marker_discr"
+        android:text="@string/quick_action_showhides_favorites_discr"
         android:textColor="?android:textColorPrimary"
         android:textSize="@dimen/default_list_text_size" />
 

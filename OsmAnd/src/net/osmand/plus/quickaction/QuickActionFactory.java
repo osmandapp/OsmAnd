@@ -1,19 +1,12 @@
 package net.osmand.plus.quickaction;
 
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
-import android.content.Context;
-import android.graphics.drawable.Drawable;
-import android.support.annotation.StringRes;
-import android.support.v4.app.DialogFragment;
 import android.support.v7.widget.SwitchCompat;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -21,31 +14,19 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import net.osmand.AndroidUtils;
-import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.GeocodingLookupService;
-import net.osmand.plus.IconsCache;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.FavoriteImageDrawable;
-import net.osmand.plus.dialogs.ProgressDialogFragment;
 import net.osmand.plus.mapcontextmenu.editors.EditCategoryDialogFragment;
-import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditor;
-import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditorFragment;
 import net.osmand.plus.mapcontextmenu.editors.SelectCategoryDialogFragment;
-import net.osmand.plus.osmedit.OsmEditsUploadListener;
-import net.osmand.plus.osmedit.OsmEditsUploadListenerHelper;
-import net.osmand.plus.osmedit.OsmPoint;
 import net.osmand.plus.widgets.AutoCompleteTextViewEx;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class QuickActionFactory {
 
@@ -71,6 +52,7 @@ public class QuickActionFactory {
         quickActions.add(new MarkerAction());
         quickActions.add(new FavoriteAction());
         quickActions.add(new ShowHideFavoritesAction());
+        quickActions.add(new ShowHidePoiAction());
 
         return quickActions;
     }
@@ -90,6 +72,9 @@ public class QuickActionFactory {
 
             case ShowHideFavoritesAction.TYPE:
                 return new ShowHideFavoritesAction();
+
+            case ShowHidePoiAction.TYPE:
+                return new ShowHidePoiAction();
 
             default:
                 return new QuickAction();
@@ -111,6 +96,9 @@ public class QuickActionFactory {
 
             case ShowHideFavoritesAction.TYPE:
                 return new ShowHideFavoritesAction(quickAction);
+
+            case ShowHidePoiAction.TYPE:
+                return new ShowHidePoiAction(quickAction);
 
             default:
                 return quickAction;
@@ -185,7 +173,10 @@ public class QuickActionFactory {
         public void drawUI(ViewGroup parent, MapActivity activity) {
 
             View view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.quick_action_add_marker, parent, false);
+                    .inflate(R.layout.quick_action_with_text, parent, false);
+
+            ((TextView) view.findViewById(R.id.text)).setText(
+                    R.string.quick_action_add_marker_discr);
 
             parent.addView(view);
         }
@@ -405,7 +396,45 @@ public class QuickActionFactory {
         public void drawUI(ViewGroup parent, MapActivity activity) {
 
             View view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.quick_action_show_hide_favorites, parent, false);
+                    .inflate(R.layout.quick_action_with_text, parent, false);
+
+            ((TextView) view.findViewById(R.id.text)).setText(
+                    R.string.quick_action_showhides_favorites_discr);
+
+            parent.addView(view);
+        }
+    }
+
+    public static class ShowHidePoiAction extends QuickAction {
+
+        public static final int TYPE = 5;
+
+        protected ShowHidePoiAction() {
+            id = System.currentTimeMillis();
+            type = TYPE;
+            nameRes = R.string.quic_action_showhide_poi_title;
+            iconRes = R.drawable.ic_action_gabout_dark;
+        }
+
+        public ShowHidePoiAction(QuickAction quickAction) {
+            super(quickAction);
+        }
+
+        @Override
+        public void execute(MapActivity activity) {
+
+            activity.getMyApplication().getSettings().SHOW_NEARBY_POI.set(
+                    !activity.getMyApplication().getSettings().SHOW_NEARBY_POI.get());
+        }
+
+        @Override
+        public void drawUI(ViewGroup parent, MapActivity activity) {
+
+            View view = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.quick_action_with_text, parent, false);
+
+            ((TextView) view.findViewById(R.id.text)).setText(
+                    R.string.quick_action_showhides_poi_discr);
 
             parent.addView(view);
         }
