@@ -123,7 +123,7 @@ public class MultiTouchSupport {
 					}
 					zoomRelative = distance / zoomStartedDistance;
 					listener.onZoomingOrRotating(zoomRelative, angleRelative);
-					return true;
+					return false;
 				}
 			}
 		} catch (Exception e) {
