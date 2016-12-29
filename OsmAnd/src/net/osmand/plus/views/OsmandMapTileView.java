@@ -1075,8 +1075,8 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 		@Override
 		public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-			animatedDraggingThread.startDragging(velocityX / 3, velocityY / 3,
-					e1.getX(), e1.getY(), e2.getX(), e2.getY(), true);
+//			animatedDraggingThread.startDragging(velocityX / 3, velocityY / 3,
+//					e1.getX(), e1.getY(), e2.getX(), e2.getY(), true);
 			return true;
 		}
 
