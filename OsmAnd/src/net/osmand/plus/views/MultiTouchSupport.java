@@ -124,7 +124,7 @@ public class MultiTouchSupport {
 				}
 				zoomRelative = distance / zoomStartedDistance;
 				listener.onZoomingOrRotating(zoomRelative, angleRelative);
-				return false;
+				return true;
 			}
 		} catch (Exception e) {
 			log.debug("Multi touch exception" , e); //$NON-NLS-1$
