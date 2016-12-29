@@ -861,8 +861,9 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			for (int i = layers.size() - 1; i >= 0; i--) {
 				layers.get(i).onTouchEvent(event, getCurrentRotatedTileBox());
 			}
-			gestureDetector.onTouchEvent(event);
+//			gestureDetector.onTouchEvent(event);
 		}
+		gestureDetector.onTouchEvent(event);
 		return true;
 	}
 
@@ -1075,8 +1076,8 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 		@Override
 		public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-//			animatedDraggingThread.startDragging(velocityX / 3, velocityY / 3,
-//					e1.getX(), e1.getY(), e2.getX(), e2.getY(), true);
+			animatedDraggingThread.startDragging(velocityX / 3, velocityY / 3,
+					e1.getX(), e1.getY(), e2.getX(), e2.getY(), true);
 			return true;
 		}
 
@@ -1108,9 +1109,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 		@Override
 		public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
-			if ((e2.getAction() & 255) == MotionEvent.ACTION_MOVE) {
-				dragToAnimate(e2.getX() + distanceX, e2.getY() + distanceY, e2.getX(), e2.getY(), true);
-			}
+			dragToAnimate(e2.getX() + distanceX, e2.getY() + distanceY, e2.getX(), e2.getY(), true);
 			return true;
 		}
 
