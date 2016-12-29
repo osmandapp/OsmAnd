@@ -1108,7 +1108,9 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 		@Override
 		public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
-			dragToAnimate(e2.getX() + distanceX, e2.getY() + distanceY, e2.getX(), e2.getY(), true);
+			if ((e2.getAction() & 255) == MotionEvent.ACTION_MOVE) {
+				dragToAnimate(e2.getX() + distanceX, e2.getY() + distanceY, e2.getX(), e2.getY(), true);
+			}
 			return true;
 		}
 
