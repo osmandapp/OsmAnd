@@ -1402,4 +1402,111 @@
 	<string name="poi_bridge_bicycle">جسر الدراجات</string>
 	<string name="poi_bridge_railway">جسر للسكك الحديدية</string>
 	<string name="poi_bridge_waterway">جسر ممر مائي</string>
+	<string name="poi_blind_description">وصف للمكفوفين</string>
+	<string name="poi_deaf_description">وصف للصم</string>
+
+	<string name="poi_highway_steps">الدرج</string>
+	<string name="poi_defibrillator">مُزيلُ الرَّجَفان</string>
+	<string name="poi_defibrillator_yes">مُزيلُ الرَّجَفان : نعم</string>
+
+	<string name="poi_tomb_columbarium">النوع : كولومباريوم</string>
+	<string name="poi_tomb_mausoleum">النوع : ضريح</string>
+	<string name="poi_tomb_sarcophagus">النوع : تابوت</string>
+	<string name="poi_tomb_pyramid">النوع : هرمي</string>
+
+	<string name="poi_historic_civilization_prehistoric">الحضارة : عصور ما قبل التاريخ</string>
+	<string name="poi_historic_civilization_ancient_greek">الحضارة : اليونانية القديمة</string>
+	<string name="poi_historic_civilization_roman">الحضارة : رومانية</string>
+	<string name="poi_historic_civilization_mycenaean">الحضارة : الميسينية</string>
+	<string name="poi_historic_era_neolithic">الحقبة التاريخية : العصر الحجري الحديث</string>
+	<string name="poi_historic_era_chalcolithic">الحقبة التاريخية : النحاسي (الألفية الرابعة إلى الثالث قبل الميلاد.)</string>
+
+	<string name="poi_material_wood">المواد : خشب</string>
+	<string name="poi_material_metal">المواد : معدن</string>
+	<string name="poi_material_plastic">المواد : بلاستيك</string>
+	<string name="poi_material_glass">المواد : زجاج</string>
+	<string name="poi_material_aluminium">المواد : الألومنيوم</string>
+
+	<string name="poi_site_type_city">مدينة</string>
+	<string name="poi_historic_farm">مزرعة تاريخية</string>
+	<string name="poi_historic_railway_station">محطة سكك حديدية تاريخية</string>
+
+	<string name="poi_artist_name">فنان</string>
+	<string name="poi_sculptor">نحات</string>
+
+	<string name="poi_temperature">درجة الحرارة</string>
+	<string name="poi_bathing_yes">الاستحمام : نعم</string>
+	<string name="poi_bathing_no">الاستحمام : لا يوجد</string>
+
+	<string name="poi_cargo_passengers">الركاب</string>
+	<string name="poi_cargo_vehicle">المركبات</string>
+	<string name="poi_cargo_bicycle">دراجات هوائية</string>
+	<string name="poi_cargo_container">حاويات</string>
+	<string name="poi_fitness_station">مركز اللياقة البدنية</string>
+
+	<string name="poi_hackerspace">منتدى القراصنة</string>
+
+
+	<string name="poi_health_specialty_ophthalmology_yes">طب العيون</string>
+	<string name="poi_health_specialty_gynaecology_yes">طب النساء والتوليد</string>
+	<string name="poi_health_specialty_paediatrics_yes">طب الأطفال</string>
+	<string name="poi_health_specialty_paediatrics_no">التخصصات الصحية : طب الأطفال : لا يوجد</string>
+	<string name="poi_health_specialty_dermatology_yes">الأمراض الجلدية</string>
+	<string name="poi_health_specialty_urology_yes">المسالك البولية</string>
+	<string name="poi_health_specialty_surgery_yes">الجراحة العامة</string>
+	<string name="poi_health_specialty_psychiatry_yes">الطب النفسي</string>
+	<string name="poi_health_specialty_neurology_yes">طب الجهاز العصبي</string>
+	<string name="poi_health_specialty_cardiology_yes">أمراض القلب</string>
+	<string name="poi_health_specialty_pulmonology_yes">طب الجهاز التنفسي</string>
+	<string name="poi_health_specialty_dental_oral_maxillo_facial_surgery_yes">جراحة الأسنان والفم والفك و الوجه</string>
+	<string name="poi_health_specialty_maternity_yes">الأمومة</string>
+	<string name="poi_health_specialty_plastic_surgery_yes">جراحة التجميل</string>
+	<string name="poi_health_specialty_orthodontics_yes">تقويم الأسنان</string>
+	<string name="poi_health_specialty_physiotherapy_yes">العلاج الطبيعي</string>
+	<string name="poi_health_specialty_biochemistry_yes">الكيمياء البيولوجية</string>
+	<string name="poi_health_specialty_child_psychiatry_yes">الطب النفسي للأطفال</string>
+	<string name="poi_health_specialty_diagnostic_radiology_yes">الأشعة التشخيصية</string>
+	<string name="poi_health_specialty_gastroenterology_yes">أمراض الجهاز الهضمي</string>
+	<string name="poi_health_specialty_nephrology_yes">أمراض الكلي (أمراض الكلي)</string>
+	<string name="poi_health_specialty_neurosurgery_yes">جراحة عصبية</string>
+	<string name="poi_health_specialty_neuropsychiatry_yes">الطب النفسي العصبي</string>
+	<string name="poi_health_specialty_endocrinology_yes">علم الغدد الصماء</string>
+	<string name="poi_health_specialty_nuclear_medicine_yes">الطب النووي</string>
+	<string name="poi_health_specialty_oncology_yes">علم الأورام</string>
+	<string name="poi_health_specialty_obstetrics_postnatal_yes">طب التوليد (بعد الولادة)</string>
+	<string name="poi_health_specialty_obstetrics_antenatal_yes">طب التوليد (ما قبل الولادة)</string>
+	<string name="poi_health_specialty_social_paediatrics_yes">طب الأطفال الاجتماعي</string>
+	<string name="poi_health_specialty_obstetrics_caesarean_section_yes">طب التوليد (القيصرية)</string>
+	<string name="poi_health_specialty_addiction_medicine_yes">طب الإدمان</string>
+	<string name="poi_health_specialty_optometry_yes">بصريات</string>
+	<string name="poi_health_specialty_speech_therapy_yes">علاج النطق</string>
+	<string name="poi_health_specialty_sports_medicine_yes">الطب الرياضي</string>
+	<string name="poi_health_specialty_acupuncture_yes">الوخز بالإبر</string>
+	<string name="poi_health_specialty_traditional_chinese_medicine_yes">الطب الصيني التقليدي</string>
+	<string name="poi_health_specialty_behavior_yes">السلوك</string>
+	<string name="poi_fitness_centre">مركز اللياقة البدنية</string>
+	<string name="poi_fitness">اللياقة البدنية</string>
+
+	<string name="poi_billiards">بلياردو</string>
+
+	<string name="poi_microwave_oven_yes">فرن ميكروويف : نعم</string>
+	<string name="poi_microwave_oven_no">فرن ميكروويف : لا يوجد</string>
+	<string name="poi_water_heater_yes">سخان المياه : نعم</string>
+	<string name="poi_water_heater_no">سخان المياه : لا يوجد</string>
+
+	<string name="poi_karting">الكارتينغ</string>
+	<string name="poi_badminton">تنس الريشة</string>
+	<string name="poi_futsal">كرة القدم داخل الصالات</string>
+	<string name="poi_boxing">الملاكمة</string>
+
+	<string name="poi_construction_yes">في صدد الإنشاء</string>
+	<string name="poi_additional_atm_yes">صراف آلي : نعم</string>
+	<string name="poi_atm_no">صراف آلي : لا يوجد</string>
+
+	<string name="poi_fair_trade_yes">التجارة العادلة : نعم</string>
+	<string name="poi_fair_trade_no">التجارة العادلة : لا يوجد</string>
+	<string name="poi_fair_trade_only">منتجات التجارة العادلة فقط</string>
+
+
+	<string name="poi_protected_area">منطقة محمية</string>
 	</resources>
