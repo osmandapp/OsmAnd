@@ -2008,7 +2008,7 @@
 	<string name="poi_historic_period_byzantine_egypt">Període històric: Egipte bizantí (30 aC - 641 dC)</string>
 	<string name="poi_historic_period_persian_occupation">Període històric: ocupació persa</string>
 	<string name="poi_historic_period_greek_dark_ages">Període històric: l\'edat fosca grega (1100-800 aC)</string>
-	<string name="poi_historic_period_roman_greece">Període històric: greco-romà (146 aC-330 DC)</string>
+	<string name="poi_historic_period_roman_greece">Període històric: greco-romà (146 aC-330 dC)</string>
 	<string name="poi_historic_period_roman_kingdom">Període històric: Regne romà (753 - 509 aC)</string>
 	<string name="poi_historic_period_urban">Període històric: urbà (època III, 133 dC - 374 dC)</string>
 	<string name="poi_historic_period_classical">Període històric: clàssic (època IV, 374 dC - 900 dC)</string>
@@ -2454,4 +2454,23 @@
 	<string name="poi_historic_period_roman_republic">Període històric: república romana (508 aC - 27 aC)</string>
 	<string name="poi_historic_period_hellenistic_greece">Període històric: Grècia helenística</string>
 	<string name="poi_historic_period_new_kingdom">Període històric: imperi nou d\'Egipte (1550 -1069 aC)</string>
+	<string name="poi_historic_period_middle_kingdom">Període històric: imperi mitjà d\'Egipte (2055 - 1650 aC)</string>
+	<string name="poi_historic_period_predynastic_egypt">Període històric: Egipte predinàstic</string>
+	<string name="poi_historic_period_early_dynastic_period">Període històric: període arcaic (3100 - 2866 aC)</string>
+	<string name="poi_historic_period_third_intermediate_period">"Període històric: tercer període intermedi (1069 - 664 aC) "</string>
+	<string name="poi_historic_period_dominate">Període històric: dominat (285 - 476 dC)</string>
+	<string name="poi_site_type_earthwork">Treball de terra</string>
+	<string name="poi_site_type_settlement">Assentament</string>
+	<string name="poi_site_type_city">Ciutat</string>
+	<string name="poi_site_type_megalith">Megàlit</string>
+	<string name="poi_site_type_tumulus">Túmul</string>
+	<string name="poi_site_type_fortification">Fortificació</string>
+	<string name="poi_site_type_hut_circle">Cercle de barret</string>
+	<string name="poi_site_type_necropolis">Necròpolis</string>
+	<string name="poi_site_type_petroglyph">Petròglif</string>
+	<string name="poi_megalith_type_menhir">Tipus de megàlit: menhir</string>
+	<string name="poi_megalith_type_dolmen">Tipus de megàlit: dolmen</string>
+	<string name="poi_megalith_type_nuraghe">Tipus de megàlit: nurag</string>
+	<string name="poi_megalith_type_stone_circle">Tipus de megàlit: cromlec</string>
+	<string name="poi_megalith_type_passage_grave">Tipus de megàlit: tomba de passatge</string>
 	</resources>
