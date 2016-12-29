@@ -2407,16 +2407,16 @@
 	<string name="poi_historic_period_byzantine_egypt">Historické období: Byzantská říše (30 př. n. l. – 641 n. l.)</string>
 	<string name="poi_historic_period_persian_occupation">Historické období: perská okupace</string>
 	<string name="poi_historic_period_greek_dark_ages">Historické období: Temné období (1100 – 800 př. n. l.)</string>
-	<string name="poi_historic_period_roman_greece">Historické období: románské řecko (146 př. n. l. - 330 n. l.)</string>
-	<string name="poi_historic_period_roman_kingdom">Historické období: římské království (753 - 509 př. n. l.)</string>
-	<string name="poi_historic_period_villager">Historické období: vesničan (epocha I, II, 1580 př. n. l. - 133 n. l.)</string>
-	<string name="poi_historic_period_urban">Historické období: městské (epocha III, 133 n.l. - 374 n.l.)</string>
-	<string name="poi_historic_period_classical">Historické období: klasické (epocha IV, 374 n.l. - 900 n.l.)</string>
-	<string name="poi_historic_period_imperial">Historické období: imperiální (epocha V, 900 n.l. - 1200 n.l.)</string>
+	<string name="poi_historic_period_roman_greece">Historické období: Římské Řecko (146 př. n. l. – 330 n. l.)</string>
+	<string name="poi_historic_period_roman_kingdom">Historické období: římské království (753–509 př. n. l.)</string>
+	<string name="poi_historic_period_villager">Historické období: vesničan (epocha I, II, 1580 př. n. l. – 133 n. l.)</string>
+	<string name="poi_historic_period_urban">Historické období: městské (epocha III, 133 n.l. – 374 n.l.)</string>
+	<string name="poi_historic_period_classical">Historické období: klasické (epocha IV, 374 n.l. – 900 n.l.)</string>
+	<string name="poi_historic_period_imperial">Historické období: imperiální (epocha V, 900 n.l. – 1200 n.l.)</string>
 
-	<string name="poi_historic_era_paleolithic">Historické období: starší doba kamenná (2,6 milionu let - před 10000 lety)</string>
+	<string name="poi_historic_era_paleolithic">Historické období: starší doba kamenná (2,6 milionu let – před 10000 lety)</string>
 	<string name="poi_historic_era_mesolithic">Historické období: Mezolitické</string>
-	<string name="poi_historic_stone">Historický kamen</string>
+	<string name="poi_historic_stone">Historický kámen</string>
 	<string name="poi_stone_type_conciliation_cross">Typ: smírčí kříž</string>
 	<string name="poi_stone_type_coat_of_arms">Typ: erb</string>
 
@@ -2935,9 +2935,9 @@
 	<string name="poi_historic_civilization_greek_egyptian">Civilizace: řecko-egyptská (332 př. n. l. - 30 př. n. l.)</string>
 	<string name="poi_historic_civilization_helladic">Civilizace: helladská</string>
 	<string name="poi_historic_period_nuragic">Historické období: nuragské</string>
-	<string name="poi_historic_period_dominate">Historické období: dominát (285 n. l. - 476 n. l.)</string>
+	<string name="poi_historic_period_dominate">Historické období: dominát (285 n. l. – 476 n. l.)</string>
 	<string name="poi_historic_era_neolithic">Historické období: mladší doba kamenná</string>
-	<string name="poi_historic_era_chalcolithic">Historické období: doba měděná (IV-III tisíciletí př.n.l.)</string>
+	<string name="poi_historic_era_chalcolithic">Historické období: doba měděná (IV.–III. tisíciletí př.n.l.)</string>
 
 	<string name="poi_site_type_petroglyph">Petroglyf</string>
 	<string name="poi_megalith_type_menhir">Typ megalitu: menhir</string>
