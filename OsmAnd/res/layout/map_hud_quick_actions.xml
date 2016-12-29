@@ -4,18 +4,23 @@
              android:layout_height="match_parent"
              xmlns:tools="http://schemas.android.com/tools">
 
-    <ImageButton
-        android:id="@+id/map_quick_actions_button"
-        android:layout_width="@dimen/map_button_size"
-        android:layout_height="@dimen/map_button_size"
-        android:background="@drawable/btn_circle_blue"
-        android:contentDescription="@string/zoomIn"
-        android:layout_gravity="bottom|right"
-        android:layout_marginBottom="196dp"
-        android:layout_marginRight="8dp"
-        android:visibility="gone"
-        tools:visibility="visible"
-        tools:src="@drawable/ic_action_test_light"/>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/map_button_margin">
+
+        <ImageButton
+            android:id="@+id/map_quick_actions_button"
+            android:layout_width="@dimen/map_button_size"
+            android:layout_height="@dimen/map_button_size"
+            android:background="@drawable/btn_circle_blue"
+            android:contentDescription="@string/zoomIn"
+            android:layout_gravity="bottom|right"
+            android:visibility="gone"
+            tools:visibility="visible"
+            tools:src="@drawable/ic_action_test_light"/>
+    </FrameLayout>
 
     <net.osmand.plus.quickaction.QuickActionsWidget
         android:id="@+id/quick_action_widget"
