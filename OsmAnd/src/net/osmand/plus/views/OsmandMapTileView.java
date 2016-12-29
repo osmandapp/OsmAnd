@@ -1032,7 +1032,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			calc.setZoomAndAnimation(initialViewport.getZoom(),
 					dz, initialViewport.getZoomFloatPart());
 			final LatLon r = calc.getLatLonFromPixel(cp.x + dx, cp.y + dy);
-			//setLatLon(r.getLatitude(), r.getLongitude());
+			setLatLon(r.getLatitude(), r.getLongitude());
 			int baseZoom = initialViewport.getZoom();
 			while (initialViewport.getZoomFloatPart() + dz > 1 && isZoomingAllowed(baseZoom, dz)) {
 				dz--;
