@@ -843,12 +843,11 @@ Proporcionální paměť %4$s MB (limit Androidu %5$s MB, Dalvik %6$s MB).</stri
     <string name="osmand_long_description_1000_chars">"
  OsmAnd
 
-OsmAnd je open-source navigační program s přístupem k široké paletě celosvětových mapových dat OpenStreetMap (OSM).
-Veškerá mapová data (vektorová nebo rastrová) mohou být uložena na paměťové kartě telefonu pro offline použití. OsmAnd také nabízí offline a online navigaci včetně hlasové navigace krok za krokem.
+OsmAnd je open-source navigační program s přístupem k široké paletě celosvětových mapových dat OpenStreetMap (OSM). Veškerá mapová data (vektorová nebo rastrová) mohou být uložena na paměťové kartě telefonu pro offline použití. OsmAnd také nabízí offline a online navigaci včetně hlasových pokynů.
 
 
 Výčet některých hlavních funkcí:
-- dokáže pracovat kompletně offline (vektorové nebo rastrové mapy lze uložit do volitelného úložiště zařízení)
+- dokáže pracovat kompletně offline (vektorové nebo rastrové mapy lze uložit do úložiště zařízení)
 - kompaktní offline vektorové mapy celého světa dostupné zdarma
 - stahování národních nebo regionálních map přímo z aplikace
 - možnost zobrazení několika vrstev mapy: GPX trasa, body zájmu, oblíbená místa, vrstevnice, zastávky hromadné dopravy, dodatečné mapy s nastavitelnou průhledností
@@ -863,7 +862,7 @@ Výčet některých hlavních funkcí:
 
 
 Omezení této verze zdarma:
-- omezený počet stažitelných map
+- omezený počet map ke stažení
 - chybějící přístup na offline Wikipedia POI
 
 OsmAnd je aktivně vyvíjen a náš projekt i jeho budoucí vývoj závisí na finančních příspěvcích. Prosím zvažte zakoupení verze OsmAnd+, sponzorování konkrétní nové funkce nebo obecný dar na osmand.net.
@@ -871,14 +870,13 @@ OsmAnd je aktivně vyvíjen a náš projekt i jeho budoucí vývoj závisí na f
     <string name="osmand_plus_long_description_1000_chars">"
  OsmAnd+
 
-OsmAnd+ je open-source navigační program s přístupem k široké paletě celosvětových mapových dat OpenStreetMap (OSM).
-Veškerá mapová data (vektorová nebo rastrová) mohou být uložena na paměťové kartě telefonu pro offline použití. OsmAnd+ také nabízí offline a online navigaci včetně hlasové navigace krok za krokem.
+OsmAnd+ je open-source navigační program s přístupem k široké paletě celosvětových mapových dat OpenStreetMap (OSM). Veškerá mapová data (vektorová nebo rastrová) mohou být uložena na paměťové kartě telefonu pro offline použití. OsmAnd+ také nabízí offline a online navigaci včetně hlasových pokynů.
 
 
 OsmAnd+ je placená verze aplikace, jejím zakoupením sponzorujete projekt, vývoj nových funkcí a obdržíte nejnovější aktualizace.
 
 Výčet některých hlavních funkcí:
-- dokáže pracovat kompletně offline (vektorové nebo rastrové mapy lze uložit do volitelného úložiště zařízení)
+- dokáže pracovat kompletně offline (vektorové nebo rastrové mapy lze uložit do úložiště zařízení)
 - kompaktní offline vektorové mapy celého světa dostupné zdarma
 - neomezené stahování národních nebo regionálních map přímo z aplikace
 - funkce offline Wikipedie (stažení informací o bodech zájmu z Wikipedie), vynikající pro turisty
