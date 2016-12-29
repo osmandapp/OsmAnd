@@ -2390,11 +2390,11 @@
 	<string name="poi_historic_period_iron_age">Historické období: doba železná</string>
 	<string name="poi_historic_period_roman_republic">Historické období: římská republika (508–27 př. n. l.)</string>
 	<string name="poi_historic_period_hellenistic_greece">Historické období: helénistické Řecko</string>
-	<string name="poi_historic_period_new_kingdom">Historické období: nové říše (1550–1069 př. n. l.)</string>
-	<string name="poi_historic_period_middle_kingdom">Historické období: střední říše (2055–1650 př. n. l.)</string>
-	<string name="poi_historic_period_predynastic_egypt">Historické období: předdynastické egyptské</string>
+	<string name="poi_historic_period_new_kingdom">Historické období: Nová říše (1550–1069 př. n. l.)</string>
+	<string name="poi_historic_period_middle_kingdom">Historické období: Střední říše (2055–1650 př. n. l.)</string>
+	<string name="poi_historic_period_predynastic_egypt">Historické období: předdynastický Egypt</string>
 	<string name="poi_historic_period_early_dynastic_period">Historické období: raně dynastické období (3100–2686 př. n. l.)</string>
-	<string name="poi_historic_period_old_kingdom">Historické období: staré říše (2686–2181 př.n.l.)</string>
+	<string name="poi_historic_period_old_kingdom">Historické období: Stará říše (2686–2181 př.n.l.)</string>
 	<string name="poi_historic_period_first_intermediate_period">Historické období: první přechodná doba (2181–2055 př. n. l.)</string>
 	<string name="poi_historic_period_second_intermediate_period">Historické období: druhá přechodná doba (1650–1550 př.n.l.)</string>
 	<string name="poi_historic_period_third_intermediate_period">"Historické období: třetí přechodná doba (1069–664 př.n.l) "</string>
@@ -2407,7 +2407,7 @@
 	<string name="poi_historic_period_byzantine_egypt">Historické období: Byzantská říše (30 př. n. l. – 641 n. l.)</string>
 	<string name="poi_historic_period_persian_occupation">Historické období: perská okupace</string>
 	<string name="poi_historic_period_greek_dark_ages">Historické období: Temné období (1100 – 800 př. n. l.)</string>
-	<string name="poi_historic_period_roman_greece">Historické období: Římské Řecko (146 př. n. l. – 330 n. l.)</string>
+	<string name="poi_historic_period_roman_greece">Historické období: římské Řecko (146 př. n. l. – 330 n. l.)</string>
 	<string name="poi_historic_period_roman_kingdom">Historické období: římské království (753–509 př. n. l.)</string>
 	<string name="poi_historic_period_villager">Historické období: vesničan (epocha I, II, 1580 př. n. l. – 133 n. l.)</string>
 	<string name="poi_historic_period_urban">Historické období: městské (epocha III, 133 n.l. – 374 n.l.)</string>
@@ -2639,8 +2639,8 @@
 	<string name="poi_nuclear_explosion_type_underwater">Typ exploze: pod vodou</string>
 	<string name="poi_nuclear_explosion_date_utc">Datum exploze (UTC)</string>
 	<string name="poi_nuclear_explosion_shot_name_en">Název střely (en)</string>
-	<string name="poi_nuclear_explosion_series">Série exploze</string>
-	<string name="poi_nuclear_explosion_purpose_nuclear_weapons_related">Účel exploze: související jaderné zbraně</string>
+	<string name="poi_nuclear_explosion_series">Série explozí</string>
+	<string name="poi_nuclear_explosion_purpose_nuclear_weapons_related">Účel exploze: související s jadernými zbraněmi</string>
 	<string name="poi_nuclear_explosion_purpose_weapons_effects">Účel exploze: efekty zbraní</string>
 	<string name="poi_nuclear_explosion_purpose_safety_experiment">Účel exploze: bezpečnostní experiment</string>
 	<string name="poi_nuclear_explosion_purpose_research_for_peaceful_applications">Účel exploze: výzkum k mírovému použití</string>
