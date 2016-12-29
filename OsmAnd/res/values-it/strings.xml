@@ -752,7 +752,7 @@ La memoria utilizzata è  {1} MB.
     <string name="favourites_search_desc">Ricerca dei preferiti</string>
 
     <string name="rendering_attr_noPolygons_description">Rendi trasparenti tutte le aree del terreno</string>
-    <string name="rendering_attr_noPolygons_name">Nascondi i poligoni</string>
+    <string name="rendering_attr_noPolygons_name">Poligoni</string>
     <string name="rendering_attr_appMode_name">Modalità di disegno</string>
     <string name="rendering_attr_appMode_description">Ottimizza la mappa per</string>
     <string name="rendering_attr_contourLines_description">Visualizza dal livello di zoom (necessita di dati delle curve di livello):</string>
@@ -978,7 +978,7 @@ Memoria in proporzione %4$s MB (limite di Android %5$s MB, Dalvik %6$s MB).</str
 
 
     <string name="monitoring_control_start">GPX</string>
-    <string name="rendering_attr_noAdminboundaries_name">Nascondi i confini</string>
+    <string name="rendering_attr_noAdminboundaries_name">Confini</string>
     <string name="rendering_attr_noAdminboundaries_description">Non visualizzare i confini regionali (livelli amministrativi 5-9)</string>
 
 
@@ -2715,4 +2715,12 @@ Se ami OsmAnd e OSM e vuoi sostenerli, questo è un modo perfetto per farlo.</st
     <string name="lang_sr_latn">Serbo (Latino)</string>
     <string name="lang_zh_hk">Cinese (Hong Kong)</string>
     <string name="legacy_search">Ricerca vecchia</string>
+    <string name="rendering_attr_contourDensity_name">Densità linee isocline</string>
+    <string name="rendering_value_high_name">Alto</string>
+    <string name="rendering_value_medium_w_name">Medio</string>
+    <string name="rendering_value_low_name">Basso</string>
+    <string name="rendering_attr_contourWidth_description">Spessore linee isocline</string>
+    <string name="rendering_attr_contourWidth_name">Spessore linee isocline</string>
+    <string name="rendering_attr_hideWaterPolygons_description">Acqua</string>
+    <string name="rendering_attr_hideWaterPolygons_name">Non visualizzare l\'acqua</string>
     </resources>
