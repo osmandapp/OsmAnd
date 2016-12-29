@@ -70,6 +70,7 @@ public class QuickActionFactory {
 
         quickActions.add(new MarkerAction());
         quickActions.add(new FavoriteAction());
+        quickActions.add(new ShowHideFavoritesAction());
 
         return quickActions;
     }
@@ -86,6 +87,9 @@ public class QuickActionFactory {
 
             case FavoriteAction.TYPE:
                 return new FavoriteAction();
+
+            case ShowHideFavoritesAction.TYPE:
+                return new ShowHideFavoritesAction();
 
             default:
                 return new QuickAction();
@@ -104,6 +108,9 @@ public class QuickActionFactory {
 
             case FavoriteAction.TYPE:
                 return new FavoriteAction(quickAction);
+
+            case ShowHideFavoritesAction.TYPE:
+                return new ShowHideFavoritesAction(quickAction);
 
             default:
                 return quickAction;
@@ -177,13 +184,10 @@ public class QuickActionFactory {
         @Override
         public void drawUI(ViewGroup parent, MapActivity activity) {
 
-            if (parent.getChildCount() == 0) {
+            View view = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.quick_action_add_marker, parent, false);
 
-                View view = LayoutInflater.from(parent.getContext())
-                        .inflate(R.layout.quick_action_add_marker, parent, false);
-
-                parent.addView(view);
-            }
+            parent.addView(view);
         }
     }
 
@@ -372,6 +376,38 @@ public class QuickActionFactory {
                 ((ImageView) root.findViewById(R.id.category_image)).setColorFilter(color);
                 getParams().put(KEY_CATEGORY_COLOR, String.valueOf(color));
             }
+        }
+    }
+
+    public static class ShowHideFavoritesAction extends QuickAction {
+
+        public static final int TYPE = 4;
+
+        protected ShowHideFavoritesAction() {
+            id = System.currentTimeMillis();
+            type = TYPE;
+            nameRes = R.string.quic_action_showhide_favorites_title;
+            iconRes = R.drawable.ic_action_fav_dark;
+        }
+
+        public ShowHideFavoritesAction(QuickAction quickAction) {
+            super(quickAction);
+        }
+
+        @Override
+        public void execute(MapActivity activity) {
+
+            activity.getMyApplication().getSettings().SHOW_FAVORITES.set(
+                    !activity.getMyApplication().getSettings().SHOW_FAVORITES.get());
+        }
+
+        @Override
+        public void drawUI(ViewGroup parent, MapActivity activity) {
+
+            View view = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.quick_action_show_hide_favorites, parent, false);
+
+            parent.addView(view);
         }
     }
 }
