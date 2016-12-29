@@ -130,6 +130,7 @@
 
         <item name="colorPrimary">@color/osmand_orange</item>
         <item name="colorPrimaryDark">@color/osmand_orange_dark</item>
+        <item name="colorAccent">@color/dashboard_blue</item>
 
         <item name="android:actionModeBackground">@color/actionbar_light_color</item>
         <item name="android:actionBarStyle">@style/Widget.Styled.ActionBarLight</item>

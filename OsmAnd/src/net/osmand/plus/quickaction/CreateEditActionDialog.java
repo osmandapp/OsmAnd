@@ -114,8 +114,13 @@ public class CreateEditActionDialog extends DialogFragment {
         setupToolbar(view);
         setupHeader(view, savedInstanceState);
         setupFooter(view);
+    }
 
-        action.drawUI((ViewGroup) view.findViewById(R.id.container), (MapActivity) getActivity());
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        action.drawUI((ViewGroup) getView().findViewById(R.id.container), (MapActivity) getActivity());
     }
 
     @Override
@@ -181,7 +186,7 @@ public class CreateEditActionDialog extends DialogFragment {
             @Override
             public void onClick(View view) {
 
-                action.fillParams(((ViewGroup) root.findViewById(R.id.container)).getChildAt(0));
+                action.fillParams(((ViewGroup) root.findViewById(R.id.container)).getChildAt(0), (MapActivity) getActivity());
 
                 if (isNew) quickActionRegistry.addQuickAction(action);
                 else quickActionRegistry.updateQuickAction(action);

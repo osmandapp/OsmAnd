@@ -6,6 +6,7 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.StringRes;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.widget.SwitchCompat;
 import android.view.LayoutInflater;
@@ -14,6 +15,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -30,7 +33,9 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.FavoriteImageDrawable;
 import net.osmand.plus.dialogs.ProgressDialogFragment;
+import net.osmand.plus.mapcontextmenu.editors.EditCategoryDialogFragment;
 import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditor;
+import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditorFragment;
 import net.osmand.plus.mapcontextmenu.editors.SelectCategoryDialogFragment;
 import net.osmand.plus.osmedit.OsmEditsUploadListener;
 import net.osmand.plus.osmedit.OsmEditsUploadListenerHelper;
@@ -188,6 +193,8 @@ public class QuickActionFactory {
 
         public static final String KEY_NAME = "name";
         public static final String KEY_DIALOG = "dialog";
+        public static final String KEY_CATEGORY_NAME = "category_name";
+        public static final String KEY_CATEGORY_COLOR = "category_color";
 
         private FavoriteAction() {
             id = System.currentTimeMillis();
@@ -224,54 +231,147 @@ public class QuickActionFactory {
                             public void geocodingDone(String address) {
 
                                 progressDialog.dismiss();
-                                activity.getContextMenu().getFavoritePointEditor().add(latLon, address, "");
+                                activity.getContextMenu().getFavoritePointEditor().add(latLon, address, "",
+                                        getParams().get(KEY_CATEGORY_NAME),
+                                        Integer.valueOf(getParams().get(KEY_CATEGORY_COLOR)),
+                                        !Boolean.valueOf(getParams().get(KEY_DIALOG)));
                             }
 
                         }, null);
 
                 activity.getMyApplication().getGeocodingLookupService().lookupAddress(lookupRequest);
 
-            } else activity.getContextMenu().getFavoritePointEditor().add(latLon, title, "");
+            } else activity.getContextMenu().getFavoritePointEditor().add(latLon, title, "",
+                    getParams().get(KEY_CATEGORY_NAME),
+                    Integer.valueOf(getParams().get(KEY_CATEGORY_COLOR)),
+                    !Boolean.valueOf(getParams().get(KEY_DIALOG)));
         }
 
         @Override
-        public void drawUI(final ViewGroup parent, MapActivity activity) {
+        public void drawUI(final ViewGroup parent, final MapActivity activity) {
 
             FavouritesDbHelper helper = activity.getMyApplication().getFavorites();
 
-            String category = helper.getFavoriteGroups().size() > 0
-                    ? helper.getFavoriteGroups().get(0).name
-                    : activity.getString(R.string.shared_string_favorites);
+            final View root = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.quick_action_add_favorite, parent, false);
 
-            View root;
+            parent.addView(root);
 
-            if (parent.getChildCount() == 0) {
+            AutoCompleteTextViewEx categoryEdit = (AutoCompleteTextViewEx) root.findViewById(R.id.category_edit);
+            SwitchCompat showDialog = (SwitchCompat) root.findViewById(R.id.saveButton);
+            ImageView categoryImage = (ImageView) root.findViewById(R.id.category_image);
+            EditText name = (EditText) root.findViewById(R.id.name_edit);
 
-                root = LayoutInflater.from(parent.getContext())
-                        .inflate(R.layout.quick_action_add_favorite, parent, false);
+            if (!getParams().isEmpty()) {
 
-                parent.addView(root);
+                showDialog.setChecked(Boolean.valueOf(getParams().get(KEY_DIALOG)));
+                categoryImage.setColorFilter(Integer.valueOf(getParams().get(KEY_CATEGORY_COLOR)));
+                name.setText(getParams().get(KEY_NAME));
+                categoryEdit.setText(getParams().get(KEY_CATEGORY_NAME));
 
-            } else root = parent.getChildAt(0);
+                if (getParams().get(KEY_NAME).isEmpty() && Integer.valueOf(getParams().get(KEY_CATEGORY_NAME)) == 0) {
 
-            AutoCompleteTextViewEx categoryEdit = (AutoCompleteTextViewEx)
-                    root.findViewById(R.id.category_edit);
+                    categoryEdit.setText(activity.getString(R.string.shared_string_favorites));
+                    categoryImage.setColorFilter(activity.getResources().getColor(R.color.color_favorite));
+                }
 
-            categoryEdit.setText(category);
-            categoryEdit.setFocusable(false);
+            } else if (helper.getFavoriteGroups().size() > 0) {
 
-            if (!getParams().isEmpty()){
+                FavouritesDbHelper.FavoriteGroup group = helper.getFavoriteGroups().get(0);
 
-                ((EditText) root.findViewById(R.id.name_edit)).setText(getParams().get(KEY_NAME));
-                ((SwitchCompat) root.findViewById(R.id.saveButton)).setChecked(Boolean.getBoolean(getParams().get(KEY_DIALOG)));
+                if (group.name.isEmpty() && group.color == 0) {
+
+                    group.name = activity.getString(R.string.shared_string_favorites);
+
+                    categoryEdit.setText(activity.getString(R.string.shared_string_favorites));
+                    categoryImage.setColorFilter(activity.getResources().getColor(R.color.color_favorite));
+
+                } else {
+
+                    categoryEdit.setText(group.name);
+                    categoryImage.setColorFilter(group.color);
+                }
+
+                getParams().put(KEY_CATEGORY_NAME, group.name);
+                getParams().put(KEY_CATEGORY_COLOR, String.valueOf(group.color));
+
+            } else {
+
+                categoryEdit.setText(activity.getString(R.string.shared_string_favorites));
+                categoryImage.setColorFilter(activity.getResources().getColor(R.color.color_favorite));
+
+                getParams().put(KEY_CATEGORY_NAME, "");
+                getParams().put(KEY_CATEGORY_COLOR, "0");
+            }
+
+            categoryEdit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(final View view) {
+
+                    SelectCategoryDialogFragment dialogFragment = SelectCategoryDialogFragment.createInstance("");
+
+                    dialogFragment.show(
+                            activity.getSupportFragmentManager(),
+                            SelectCategoryDialogFragment.TAG);
+
+                    dialogFragment.setSelectionListener(new SelectCategoryDialogFragment.CategorySelectionListener() {
+                        @Override
+                        public void onCategorySelected(String category, int color) {
+
+                            fillGroupParams(root, category, color);
+                        }
+                    });
+                }
+            });
+
+            SelectCategoryDialogFragment dialogFragment = (SelectCategoryDialogFragment)
+                    activity.getSupportFragmentManager().findFragmentByTag(SelectCategoryDialogFragment.TAG);
+
+            if (dialogFragment != null) {
+
+                dialogFragment.setSelectionListener(new SelectCategoryDialogFragment.CategorySelectionListener() {
+                    @Override
+                    public void onCategorySelected(String category, int color) {
+
+                        fillGroupParams(root, category, color);
+                    }
+                });
+
+            } else {
+
+                EditCategoryDialogFragment dialog = (EditCategoryDialogFragment)
+                        activity.getSupportFragmentManager().findFragmentByTag(EditCategoryDialogFragment.TAG);
+
+                if (dialog != null) {
+
+                    dialogFragment.setSelectionListener(new SelectCategoryDialogFragment.CategorySelectionListener() {
+                        @Override
+                        public void onCategorySelected(String category, int color) {
+
+                            fillGroupParams(root, category, color);
+                        }
+                    });
+                }
             }
         }
 
         @Override
-        public void fillParams(View root) {
+        public void fillParams(View root, MapActivity activity) {
 
             getParams().put(KEY_NAME, ((EditText) root.findViewById(R.id.name_edit)).getText().toString());
             getParams().put(KEY_DIALOG, Boolean.toString(((SwitchCompat) root.findViewById(R.id.saveButton)).isChecked()));
+        }
+
+        private void fillGroupParams(View root, String name, int color) {
+
+            ((AutoCompleteTextViewEx) root.findViewById(R.id.category_edit)).setText(name);
+            getParams().put(KEY_CATEGORY_NAME, name);
+
+            if (color > 0) {
+
+                ((ImageView) root.findViewById(R.id.category_image)).setColorFilter(color);
+                getParams().put(KEY_CATEGORY_COLOR, String.valueOf(color));
+            }
         }
     }
 }

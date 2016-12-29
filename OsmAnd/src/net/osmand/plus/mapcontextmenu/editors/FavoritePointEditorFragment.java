@@ -4,11 +4,13 @@ import android.app.Activity;
 import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
@@ -28,6 +30,7 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 	private FavoriteGroup group;
 	FavouritesDbHelper helper;
 
+	private boolean autoFill;
 	private boolean saved;
 	private int defaultColor;
 
@@ -68,6 +71,23 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 	}
 
 	@Override
+	public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+		super.onViewCreated(view, savedInstanceState);
+
+		if (autoFill){
+
+//			String name = favorite.getName() != null && !favorite.getName().isEmpty() ?
+//					favorite.getName() : getString(R.string.favorite_empty_place_name);
+//
+//			String tostText = name + getString(R.string.favorite_autofill_toast_text) + group.name;
+//
+//			Toast.makeText(getContext(), tostText, Toast.LENGTH_SHORT).show();
+
+			save(true);
+		}
+	}
+
+	@Override
 	public PointEditor getEditor() {
 		return editor;
 	}
@@ -92,6 +112,8 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 		return getString(R.string.shared_string_favorites);
 	}
 
+
+
 	public static void showInstance(final MapActivity mapActivity) {
 		FavoritePointEditor editor = mapActivity.getContextMenu().getFavoritePointEditor();
 		//int slideInAnim = editor.getSlideInAnimation();
@@ -103,6 +125,21 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 				.add(R.id.fragmentContainer, fragment, editor.getFragmentTag())
 				.addToBackStack(null).commit();
 	}
+
+	public static void showAutoFillInstance(final MapActivity mapActivity) {
+		FavoritePointEditor editor = mapActivity.getContextMenu().getFavoritePointEditor();
+		//int slideInAnim = editor.getSlideInAnimation();
+		//int slideOutAnim = editor.getSlideOutAnimation();
+
+		FavoritePointEditorFragment fragment = new FavoritePointEditorFragment();
+		fragment.autoFill = true;
+
+		mapActivity.getSupportFragmentManager().beginTransaction()
+				//.setCustomAnimations(slideInAnim, slideOutAnim, slideInAnim, slideOutAnim)
+				.add(R.id.fragmentContainer, fragment, editor.getFragmentTag())
+				.addToBackStack(null).commit();
+	}
+
 
 	@Override
 	protected boolean wasSaved() {

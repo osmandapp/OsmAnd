@@ -85,7 +85,7 @@ public class QuickAction {
 
     public void execute(MapActivity activity){};
     public void drawUI(ViewGroup parent, MapActivity activity){};
-    public void fillParams(View root){};
+    public void fillParams(View root, MapActivity activity){};
 
 
     @Override

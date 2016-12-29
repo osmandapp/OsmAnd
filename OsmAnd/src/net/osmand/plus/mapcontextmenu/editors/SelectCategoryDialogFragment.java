@@ -19,6 +19,9 @@ import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.quickaction.QuickAction;
+import net.osmand.plus.quickaction.QuickActionFactory;
+import net.osmand.plus.quickaction.QuickActionRegistry;
 
 import java.util.List;
 
@@ -28,9 +31,15 @@ public class SelectCategoryDialogFragment extends DialogFragment {
 
 	public static final String TAG = "SelectCategoryDialogFragment";
 
+	public interface CategorySelectionListener{
+
+		void onCategorySelected(String category, int color);
+	}
+
 	private static final String KEY_CTX_SEL_CAT_EDITOR_TAG = "key_ctx_sel_cat_editor_tag";
 
 	private String editorTag;
+	private CategorySelectionListener selectionListener;
 
 	@NonNull
 	@Override
@@ -64,10 +73,17 @@ public class SelectCategoryDialogFragment extends DialogFragment {
 			button.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
+
 					PointEditor editor = ((MapActivity) getActivity()).getContextMenu().getPointEditor(editorTag);
+
 					if (editor != null) {
 						editor.setCategory(category.name);
 					}
+
+					if (selectionListener != null) {
+						selectionListener.onCategorySelected(category.name, category.color);
+					}
+
 					dismiss();
 				}
 			});
@@ -82,8 +98,9 @@ public class SelectCategoryDialogFragment extends DialogFragment {
 			@Override
 			public void onClick(View v) {
 				dismiss();
-				DialogFragment dialogFragment = EditCategoryDialogFragment.createInstance(editorTag);
+				EditCategoryDialogFragment dialogFragment = EditCategoryDialogFragment.createInstance(editorTag);
 				dialogFragment.show(getActivity().getSupportFragmentManager(), EditCategoryDialogFragment.TAG);
+				dialogFragment.setSelectionListener(selectionListener);
 			}
 		});
 		ll.addView(itemView);
@@ -100,6 +117,10 @@ public class SelectCategoryDialogFragment extends DialogFragment {
 		bundle.putString(KEY_CTX_SEL_CAT_EDITOR_TAG, editorTag);
 		fragment.setArguments(bundle);
 		return fragment;
+	}
+
+	public void setSelectionListener(CategorySelectionListener selectionListener) {
+		this.selectionListener = selectionListener;
 	}
 
 	public void saveState(Bundle bundle) {

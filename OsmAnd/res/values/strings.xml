@@ -2483,4 +2483,6 @@ If you need help with OsmAnd application, please contact our support team: suppo
     <string name="text_name">Name</string>
     <string name="quick_action_add_marker_discr">Tap on action will add marker to the specified location.</string>
     <string name="quick_action_favorite_dialog">Show favorite dialog</string>
+    <string name="favorite_autofill_toast_text">" is saved to "</string>
+    <string name="favorite_empty_place_name">Place</string>
 </resources>
