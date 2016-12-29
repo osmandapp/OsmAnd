@@ -1774,7 +1774,7 @@
 	<string name="poi_resource_basalt">Čedič</string>
 	<string name="poi_resource_bauxite">Bauxit</string>
 	<string name="poi_resource_beryl">Beryl</string>
-	<string name="poi_resource_bismuth">Vizmut</string>
+	<string name="poi_resource_bismuth">Bismut</string>
 	<string name="poi_resource_chromite">Chromit</string>
 	<string name="poi_resource_copper">Měď</string>
 	<string name="poi_resource_diamond">Diamant</string>
@@ -1798,7 +1798,7 @@
 	<string name="poi_resource_opal">Opál</string>
 	<string name="poi_resource_peat">Rašelina</string>
 	<string name="poi_resource_platinum">Platina</string>
-	<string name="poi_resource_radium">Rádium</string>
+	<string name="poi_resource_radium">Radium</string>
 	<string name="poi_resource_ruby">Rubín</string>
 	<string name="poi_resource_salt">Sůl</string>
 	<string name="poi_resource_sand">Písek</string>
@@ -1809,7 +1809,7 @@
 	<string name="poi_resource_slate">Břidlice</string>
 	<string name="poi_resource_stone">Kámen</string>
 	<string name="poi_resource_uranium">Uran</string>
-	<string name="poi_resource_vanadium">Vanadium</string>
+	<string name="poi_resource_vanadium">Vanad</string>
 	<string name="poi_resource_water">Voda</string>
 	<string name="poi_resource_zinc">Zinek</string>
 	<string name="poi_resource_zircon">Zirkon</string>
@@ -1854,7 +1854,7 @@
 	<string name="poi_artwork_type_installation">Typ díla: zařízení</string>
 	<string name="poi_artwork_type_mosaic">Typ díla: mozaika</string>
 	<string name="poi_artwork_type_relief">Typ díla: reliéf</string>
-	<string name="poi_artwork_type_graffiti">Typ díla: grafiti</string>
+	<string name="poi_artwork_type_graffiti">Typ díla: graffiti</string>
 	<string name="poi_artwork_type_fountain">Typ díla: fontána</string>
 
 	<string name="poi_width">Šířka</string>
@@ -1909,10 +1909,10 @@
 	<string name="poi_generator_output_steam_yes">Výstup: pára</string>
 	<string name="poi_generator_output_hot_air_yes">Výstup: horký vzduch</string>
 	<string name="poi_generator_output_cold_water_yes">Výstup: studená voda</string>
-	<string name="poi_generator_output_compressed_air">Výstupní výkon stlačeným vzduchem</string>
+	<string name="poi_generator_output_compressed_air">Výstupní výkon stlačeného vzduchu</string>
 	<string name="poi_generator_output_compressed_air_yes">Výstup: stlačený vzduch</string>
-	<string name="poi_generator_output_vacuum_yes">Výstup: vákuum</string>
-	<string name="poi_generator_output_biogas">Výstupní výkon bioplynem</string>
+	<string name="poi_generator_output_vacuum_yes">Výstup: vakuum</string>
+	<string name="poi_generator_output_biogas">Výstupní výkon bioplynu</string>
 	<string name="poi_generator_output_biogas_yes">Výstup: bioplyn</string>
 
 	<string name="poi_pumping_station">Čerpací stanice</string>
@@ -2064,7 +2064,7 @@
 	<string name="poi_surface_cobblestone">Povrch: dlažební kostky</string>
 	<string name="poi_surface_paving_stones">Povrch: zámková dlažba</string>
 	<string name="poi_surface_pebblestone">Povrch: oblázky</string>
-	<string name="poi_surface_stone">Povrch: kamen</string>
+	<string name="poi_surface_stone">Povrch: kámen</string>
 	<string name="poi_surface_metal">Povrch: kov</string>
 	<string name="poi_surface_wood">Povrch: dřevo</string>
 	<string name="poi_surface_gravel">Povrch: štěrk</string>
@@ -2144,12 +2144,12 @@
 	<string name="poi_resource_tuff">Tuf</string>
 	<string name="poi_artwork_type_stele">Typ díla: stéla</string>
 	<string name="poi_architecture_neoclassicism">Architektura: neoklasicismus</string>
-	<string name="poi_architecture_victorian">Architektura: viktoriánský</string>
+	<string name="poi_architecture_victorian">Architektura: viktoriánská</string>
 	<string name="poi_architecture_classicism">Architektura: klasicismus</string>
-	<string name="poi_architecture_gothic">Architektura: gotický</string>
+	<string name="poi_architecture_gothic">Architektura: gotická</string>
 	<string name="poi_architecture_baroque">Architektura: barokní</string>
 	<string name="poi_architecture_renaissance">Architektura: renesance</string>
-	<string name="poi_architecture_romanesque">Architektura: románský</string>
+	<string name="poi_architecture_romanesque">Architektura: románská</string>
 
 	<string name="poi_monument_yes">Velký památník</string>
 
@@ -2368,7 +2368,7 @@
 	<string name="poi_historic_civilization_imperial_chinese">Civilizace: imperiální čínská (221 př. n. l. - 1911 n.l.)</string>
 	<string name="poi_historic_civilization_ancient_egyptian">Civilizace: starověká egyptská (do 332 př. n. l.)</string>
 	<string name="poi_historic_civilization_celtic">Civilizace: keltská</string>
-	<string name="poi_historic_civilization_western_roman">Civilizace: západní románská (285 n. l. - 476 n. l.)</string>
+	<string name="poi_historic_civilization_western_roman">Civilizace: západořímská (285 n. l. - 476 n. l.)</string>
 	<string name="poi_historic_civilization_mycenaean">Civilizace: mykénská</string>
 	<string name="poi_historic_civilization_roman_and_byzantine_egyptian">Civilizace: římské a byzantské egyptské</string>
 	<string name="poi_historic_civilization_cycladic">Civilizace: kykladská</string>
@@ -2377,26 +2377,26 @@
 	<string name="poi_animal_training_dog">Pes</string>
 	<string name="poi_animal_training_horse">Kůň</string>
 
-	<string name="poi_horse_yes">Koně povoleny</string>
-	<string name="poi_horse_no">Koně nejsou povoleny</string>
+	<string name="poi_horse_yes">Koně povoleni</string>
+	<string name="poi_horse_no">Koně nejsou povoleni</string>
 	<string name="poi_animal_yes">Zvířata povolena</string>
 	<string name="poi_animal_no">Zvířata nejsou povolena</string>
 
 	<string name="poi_historic_period_stone_bronze_undetermined">Historické období: Doba kamenná / bronzová (neurčený)</string>
-	<string name="poi_historic_period_bronze_age">Historické období: bronzové</string>
-	<string name="poi_historic_period_principate">Historické období: principátu (27 př. n. l. - 284 n. l.)</string>
-	<string name="poi_historic_period_classical_greece">Historické období: klasické Řecko (5. - 4. st. př. n. l.)</string>
+	<string name="poi_historic_period_bronze_age">Historické období: doba bronzová</string>
+	<string name="poi_historic_period_principate">Historické období: principát (27 př. n. l. – 284 n. l.)</string>
+	<string name="poi_historic_period_classical_greece">Historické období: klasické Řecko (5. – 4. st. př. n. l.)</string>
 	<string name="poi_historic_period_archaic_greece">Historické období: archaické Řecko</string>
-	<string name="poi_historic_period_iron_age">Historické období: doba Železná</string>
-	<string name="poi_historic_period_roman_republic">Historické období: římské republiky (508 - 27 př. n. l.)</string>
+	<string name="poi_historic_period_iron_age">Historické období: doba železná</string>
+	<string name="poi_historic_period_roman_republic">Historické období: římská republika (508–27 př. n. l.)</string>
 	<string name="poi_historic_period_hellenistic_greece">Historické období: helénistické Řecko</string>
-	<string name="poi_historic_period_new_kingdom">Historické období: nové říše (1550-1069 př. n. l.)</string>
-	<string name="poi_historic_period_middle_kingdom">Historické období: střední říše (2055 - 1650 př. n. l.)</string>
+	<string name="poi_historic_period_new_kingdom">Historické období: nové říše (1550–1069 př. n. l.)</string>
+	<string name="poi_historic_period_middle_kingdom">Historické období: střední říše (2055–1650 př. n. l.)</string>
 	<string name="poi_historic_period_predynastic_egypt">Historické období: předdynastické egyptské</string>
-	<string name="poi_historic_period_early_dynastic_period">Historické období: raně dynastické období (3100 - 2686 př. n. l.)</string>
-	<string name="poi_historic_period_old_kingdom">Historické období: staré říše (2686 - 2181 př.n.l.)</string>
-	<string name="poi_historic_period_first_intermediate_period">Historické období: první přechodná doba (2181 - 2055 př. n. l.)</string>
-	<string name="poi_historic_period_second_intermediate_period">Historické období: druhá přechodná doba (1650 - 1550 př.n.l.)</string>
+	<string name="poi_historic_period_early_dynastic_period">Historické období: raně dynastické období (3100–2686 př. n. l.)</string>
+	<string name="poi_historic_period_old_kingdom">Historické období: staré říše (2686–2181 př.n.l.)</string>
+	<string name="poi_historic_period_first_intermediate_period">Historické období: první přechodná doba (2181–2055 př. n. l.)</string>
+	<string name="poi_historic_period_second_intermediate_period">Historické období: druhá přechodná doba (1650–1550 př.n.l.)</string>
 	<string name="poi_historic_period_third_intermediate_period">"Historické období: třetí přechodná doba (1069 - 664 př.n.l) "</string>
 	<string name="poi_historic_period_first_persian_period">Historické období: první perské období</string>
 	<string name="poi_historic_period_late_period">Historické období: pozdní období (664 - 332 př. n. l.)</string>
