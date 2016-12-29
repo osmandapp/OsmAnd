@@ -1823,7 +1823,7 @@ Aktivováním tohoto pohledu se změní styl mapy na \"Winter and ski\", který 
     <string name="lang_lb">Lucemburština</string>
     <string name="lang_os">Osetština</string>
     <string name="lang_eo">Esperanto</string>
-    <string name="lang_es_ar">Španělština (Argentína)</string>
+    <string name="lang_es_ar">Španělština (Argentina)</string>
     <string name="lang_nb">Norština (bokmål)</string>
     <string name="lang_vo">Volapük</string>
     <string name="lang_th">Thajština</string>
@@ -2327,7 +2327,7 @@ Pokud máte rádi OsmAnd a OSM a chcete je podpořit, toto je výborný způsob 
  • Klikatelné ikony na mapě
 
 
- • Podrobné filtrování hledání POI: Například hledání restaurace dle kuchyně, kempy se speciálními službami, apod.
+ • Podrobné filtrování POI: Například hledání restaurace dle kuchyně, kempy se speciálními službami, apod.
 
 
  • Nový styl topo mapy pro cyklisty a turisty
@@ -2339,7 +2339,7 @@ Pokud máte rádi OsmAnd a OSM a chcete je podpořit, toto je výborný způsob 
  • Vylepšené notifikace navigace (Android Wear)
 
 
- • Mnohé další vylepšení a opravy chyb
+ • Mnohá další vylepšení a opravy chyb
 
 
  a další…
