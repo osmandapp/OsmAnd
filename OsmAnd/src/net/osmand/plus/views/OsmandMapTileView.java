@@ -857,11 +857,11 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		}
 		final boolean isMultiTouch = multiTouchSupport.onTouchEvent(event);
 		doubleTapScaleDetector.onTouchEvent(event);
-		if (!isMultiTouch && !doubleTapScaleDetector.isInZoomMode()) {
+		//if (!isMultiTouch && !doubleTapScaleDetector.isInZoomMode()) {
 			for (int i = layers.size() - 1; i >= 0; i--) {
 				layers.get(i).onTouchEvent(event, getCurrentRotatedTileBox());
 			}
-		}
+		//}
 		gestureDetector.onTouchEvent(event);
 		return true;
 	}
