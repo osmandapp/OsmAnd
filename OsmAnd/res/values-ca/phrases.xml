@@ -2473,4 +2473,31 @@
 	<string name="poi_megalith_type_nuraghe">Tipus de megàlit: nurag</string>
 	<string name="poi_megalith_type_stone_circle">Tipus de megàlit: cromlec</string>
 	<string name="poi_megalith_type_passage_grave">Tipus de megàlit: tomba de passatge</string>
+	<string name="poi_amenity_vacuum_cleaner">Aspirador</string>
+
+	<string name="poi_compressed_air_yes">Sí</string>
+	<string name="poi_compressed_air_no">Aire comprimit: no</string>
+
+	<string name="poi_car_wash_yes">Sí</string>
+
+	<string name="poi_vacuum_cleaner_yes">Sí</string>
+	<string name="poi_vacuum_cleaner_no">Aspirador: no</string>
+	<string name="poi_free_flying_site_takeoff">Enlairament</string>
+	<string name="poi_free_flying_site_landing">Aterratge</string>
+	<string name="poi_free_flying_site_towing">Remolc</string>
+	<string name="poi_free_flying_site_training">Entrenament</string>
+	<string name="poi_free_flying_official_yes">Oficial: sí</string>
+	<string name="poi_free_flying_official_no">Oficial: no</string>
+	<string name="poi_free_flying_site_orientation_n">Orientació del lloc de vol lliure: N</string>
+	<string name="poi_free_flying_site_orientation_ne">Orientació del lloc de vol lliure: NE</string>
+	<string name="poi_free_flying_site_orientation_e">Orientació del lloc de vol lliure: E</string>
+	<string name="poi_free_flying_site_orientation_se">Orientació del lloc de vol lliure: SE</string>
+	<string name="poi_free_flying_site_orientation_s">Orientació del lloc de vol lliure: S</string>
+	<string name="poi_free_flying_site_orientation_sw">Orientació del lloc de vol lliure: SO</string>
+	<string name="poi_free_flying_site_orientation_w">Orientació del lloc de vol lliure: O</string>
+	<string name="poi_free_flying_site_orientation_nw">Orientació del lloc de vol lliure: NO</string>
+	<string name="poi_medical_system_western_yes">Occidental</string>
+	<string name="poi_medical_system_chinese_yes">Xinesa tradicional</string>
+	<string name="poi_medical_system_mongolian_yes">Mongol tradicional</string>
+	<string name="poi_medical_system_tibetan_yes">Tibetana tradicional</string>
 	</resources>
