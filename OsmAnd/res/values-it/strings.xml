@@ -2723,4 +2723,5 @@ Se ami OsmAnd e OSM e vuoi sostenerli, questo è un modo perfetto per farlo.</st
     <string name="rendering_attr_contourWidth_name">Spessore linee isocline</string>
     <string name="rendering_attr_hideWaterPolygons_description">Acqua</string>
     <string name="rendering_attr_hideWaterPolygons_name">Non visualizzare l\'acqua</string>
+    <string name="rendering_attr_contourDensity_description">Densità delle linee isocline</string>
     </resources>
