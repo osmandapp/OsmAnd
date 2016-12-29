@@ -420,7 +420,7 @@
 	<string name="poi_pier">Molo</string>
 	<string name="poi_surveillance">Bezpečnostní kamera</string>
 	<string name="poi_observatory">Observatoř</string>
-	<string name="poi_astronomical_observatory">Astronomické</string>
+	<string name="poi_astronomical_observatory">Astronomická</string>
 	<string name="poi_tower">Věž</string>
 	<string name="poi_mast">Stožár</string>
 	<string name="poi_radar">Radar</string>
@@ -1508,7 +1508,7 @@
 
 	<string name="poi_piste_difficulty_easy">Lehká</string>
 	<string name="poi_piste_difficulty_intermediate">Střední</string>
-	<string name="poi_piste_difficulty_advanced">Pokročilí</string>
+	<string name="poi_piste_difficulty_advanced">Těžká</string>
 	<string name="poi_piste_difficulty_novice">Začátečníci</string>
 	<string name="poi_piste_difficulty_expert">Zkušení</string>
 	<string name="poi_piste_difficulty_freeride">Volný sjezd</string>
@@ -1543,7 +1543,7 @@
 	<string name="poi_stars_1">1 (Turistický)</string>
 	<string name="poi_stars_1s">1S (Vyšší turistický)</string>
 	<string name="poi_stars_2">2 (Standard)</string>
-	<string name="poi_stars_2s">2 (Vyšší standard)</string>
+	<string name="poi_stars_2s">2S (Vyšší standard)</string>
 	<string name="poi_stars_3">3 (Komfort)</string>
 	<string name="poi_stars_3s">3S (Vyšší komfort)</string>
 	<string name="poi_stars_4">4 (První třída)</string>
@@ -1896,7 +1896,7 @@
 	<string name="poi_telescope_usage_research">Použití: výzkum</string>
 
 	<string name="poi_observatory_type_espionage">Použití: špionáž</string>
-	<string name="poi_observatory_type_meteorological">Meteorologický</string>
+	<string name="poi_observatory_type_meteorological">Meteorologická</string>
 	<string name="poi_observatory_type_gravitational">Gravitační</string>
 
 	<string name="poi_greenhouse_horticulture">Skleníkové zahradnictví</string>
@@ -2525,7 +2525,7 @@
 	<string name="poi_health_specialty_gastroenterology_yes">Gastroenterologie</string>
 	<string name="poi_health_specialty_dentistry_yes">Stomatologie</string>
 	<string name="poi_health_specialty_nephrology_yes">Nefrologie (onemocnění ledvin)</string>
-	<string name="poi_health_specialty_neurosurgery_yes">Neurologické chirurgie</string>
+	<string name="poi_health_specialty_neurosurgery_yes">Neurologická chirurgie</string>
 	<string name="poi_health_specialty_neuropsychiatry_yes">Neuropsychiatrie</string>
 	<string name="poi_health_specialty_endocrinology_yes">Endokrinologie</string>
 	<string name="poi_health_specialty_nuclear_medicine_yes">Nukleární medicína</string>
@@ -2541,7 +2541,7 @@
 	<string name="poi_health_specialty_social_paediatrics_no">Zdravotní specializace: sociální lékařství: ne</string>
 	<string name="poi_health_specialty_obstetrics_caesarean_section_yes">Porodnictví (císařský řez)</string>
 	<string name="poi_health_specialty_obstetrics_caesarean_section_no">Zdravotní specializace: porodnictví (císařský řez): ne</string>
-	<string name="poi_health_specialty_addiction_medicine_yes">Léčení závislosti</string>
+	<string name="poi_health_specialty_addiction_medicine_yes">Léčení závislostí</string>
 	<string name="poi_health_specialty_optometry_yes">Optometrie</string>
 	<string name="poi_health_specialty_clinical_pathology_yes">Klinická patologie</string>
 	<string name="poi_health_specialty_speech_therapy_yes">Logopedie</string>
@@ -2554,7 +2554,7 @@
 	<string name="poi_health_specialty_traditional_chinese_medicine_yes">Tradiční čínská medicína</string>
 	<string name="poi_health_specialty_herbalism_yes">Bylinkářství</string>
 	<string name="poi_health_specialty_chiropractic_yes">Chiropraxe</string>
-	<string name="poi_health_specialty_naturopathy_yes">Přírodní medicíny</string>
+	<string name="poi_health_specialty_naturopathy_yes">Přírodní medicína</string>
 	<string name="poi_health_specialty_depth_psychology_yes">Hlubinná psychologie</string>
 	<string name="poi_health_specialty_behavior_yes">Chování</string>
 
@@ -3289,4 +3289,5 @@
 	<string name="poi_cuisine_kebab">Kebab</string>
 	<string name="poi_observatory_designation">Označení</string>
 	<string name="poi_emergency_infrastructure">Nouzová infrastruktura</string>
+	<string name="poi_health_specialty_reiki_yes">Reiki</string>
 	</resources>
