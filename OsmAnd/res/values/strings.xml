@@ -2485,4 +2485,6 @@ If you need help with OsmAnd application, please contact our support team: suppo
     <string name="quick_action_favorite_dialog">Show favorite dialog</string>
     <string name="favorite_autofill_toast_text">" is saved to "</string>
     <string name="favorite_empty_place_name">Place</string>
+    <string name="quick_action_duplicates">Specified quick action name already in use, was changed to %1$s to avoid duplication.</string>
+    <string name="quick_action_duplicate">Quick action name duplicate</string>
 </resources>

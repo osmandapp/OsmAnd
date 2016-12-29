@@ -1,5 +1,7 @@
 package net.osmand.plus.quickaction;
 
+import android.content.Context;
+
 import net.osmand.plus.OsmandSettings;
 
 import java.util.ArrayList;
@@ -103,5 +105,35 @@ public class QuickActionRegistry {
         }
 
         return null;
+    }
+
+    public boolean isNameUnique(QuickAction action, Context context){
+
+
+        for (QuickAction a: quickActions){
+
+            if (action.id != a.id) {
+
+                if (action.getName(context).equals(a.getName(context)))
+                    return false;
+            }
+        }
+
+        return true;
+    }
+
+    public QuickAction generateUniqueName(QuickAction action, Context context) {
+
+        int number = 0;
+        String name = action.getName(context);
+
+        while (true) {
+
+            number++;
+
+            action.setName(name + "(" + number + ")");
+
+            if (isNameUnique(action, context)) return action;
+        }
     }
 }
