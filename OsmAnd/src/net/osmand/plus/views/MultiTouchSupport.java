@@ -88,44 +88,43 @@ public class MultiTouchSupport {
 				if(inZoomMode){
 					listener.onZoomOrRotationEnded(zoomRelative, angleRelative);
 					inZoomMode = false;
-					//return true;
+					return true;
 				}
 				return false;
-			}
-			Float x1 = (Float) getX.invoke(event, 0);
-			Float x2 = (Float) getX.invoke(event, 1);
-			Float y1 = (Float) getY.invoke(event, 0);
-			Float y2 = (Float) getY.invoke(event, 1);
-			float distance = (float) Math.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
-			float angle = 0;
-			boolean angleDefined = false;
-			if(x1 != x2 || y1 != y2) {
-				angleDefined = true;
-				angle = (float) (Math.atan2(y2 - y1, x2 -x1) * 180 / Math.PI);
-			}
-			if (actionCode == ACTION_POINTER_DOWN) {
-				centerPoint = new PointF((x1 + x2) / 2, (y1 + y2) / 2);
-				listener.onGestureInit(x1, y1, x2, y2);
-				listener.onZoomStarted(centerPoint);
-				zoomStartedDistance = distance;
-				angleStarted = angle;
-				inZoomMode = true;
-				return true;
-			} else if(actionCode == ACTION_POINTER_UP){
-				if(inZoomMode){
-					listener.onZoomOrRotationEnded(zoomRelative, angleRelative);
-					inZoomMode = false;
+			} else if (pointCount == 2) {
+				Float x1 = (Float) getX.invoke(event, 0);
+				Float x2 = (Float) getX.invoke(event, 1);
+				Float y1 = (Float) getY.invoke(event, 0);
+				Float y2 = (Float) getY.invoke(event, 1);
+				float distance = (float) Math.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
+				float angle = 0;
+				boolean angleDefined = false;
+				if(x1 != x2 || y1 != y2) {
+					angleDefined = true;
+					angle = (float) (Math.atan2(y2 - y1, x2 -x1) * 180 / Math.PI);
 				}
-				return true;
-			} else if(inZoomMode && actionCode == MotionEvent.ACTION_MOVE){
-				if(angleDefined) {
-					angleRelative = MapUtils.unifyRotationTo360(angle - angleStarted);
+				if (actionCode == ACTION_POINTER_DOWN) {
+					centerPoint = new PointF((x1 + x2) / 2, (y1 + y2) / 2);
+					listener.onGestureInit(x1, y1, x2, y2);
+					listener.onZoomStarted(centerPoint);
+					zoomStartedDistance = distance;
+					angleStarted = angle;
+					inZoomMode = true;
+					return true;
+				//} else if(actionCode == ACTION_POINTER_UP){
+				//	if(inZoomMode){
+				//		listener.onZoomOrRotationEnded(zoomRelative, angleRelative);
+				//		inZoomMode = false;
+				//	}
+				//	return true;
+				} else if(inZoomMode && actionCode == MotionEvent.ACTION_MOVE){
+					if(angleDefined) {
+						angleRelative = MapUtils.unifyRotationTo360(angle - angleStarted);
+					}
+					zoomRelative = distance / zoomStartedDistance;
+					listener.onZoomingOrRotating(zoomRelative, angleRelative);
+					return true;
 				}
-				zoomRelative = distance / zoomStartedDistance;
-				listener.onZoomingOrRotating(zoomRelative, angleRelative);
-				return true;
-			} else if (pointCount >= 2) {
-				return true;
 			}
 		} catch (Exception e) {
 			log.debug("Multi touch exception" , e); //$NON-NLS-1$
