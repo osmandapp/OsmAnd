@@ -804,7 +804,7 @@ Tegelkaarten zijn direct via online bronnen verkrijgbaar of kunnen voor offline 
   <string name="route_kl">Links aanhouden en volg</string>
   <string name="route_kr">Rechts aanhouden en volg</string>
   <string name="rendering_attr_noPolygons_description">Maak alle oppervlaktes op de kaart transparant</string>
-  <string name="rendering_attr_noPolygons_name">Verberg vlakken</string>
+  <string name="rendering_attr_noPolygons_name">Vlakken</string>
   <string name="rendering_attr_appMode_name">Weergave-modus</string>
   <string name="rendering_attr_appMode_description">Kaartoptimalisatie voor profiel</string>
   <string name="rendering_attr_contourLines_description">Hoogtelijnen tonen vanaf schaal (Kaart met Hoogtelijnen moet aanwezig zijn):</string>
@@ -1005,7 +1005,7 @@ OsmAnd is een open-source navigatie- en kaartsysteem dat gebruikmaakt van de gro
     
 	
     <string name="monitoring_control_start">GPX</string>
-    <string name="rendering_attr_noAdminboundaries_name">Verberg grenzen</string>
+    <string name="rendering_attr_noAdminboundaries_name">Grenzen</string>
 	<string name="rendering_attr_noAdminboundaries_description">Geen weergave van regio- en provinciegrenzen (grensniveaus 5-9)</string>
 	
     
@@ -2734,4 +2734,13 @@ Als je hulp nodig hebt met OsmAnd: neem contact op met ons support team: support
     <string name="routing_attr_allow_motorway_description">Autosnelwegen gebruiken bij navigatie</string>
     <string name="lang_sr_latn">Servisch (Latijns schrift)</string>
     <string name="lang_zh_hk">Chinees (Hong Kong)</string>
+    <string name="rendering_attr_contourDensity_description">Hoogtelijnen: dichtheid</string>
+    <string name="rendering_attr_contourDensity_name">Hoogtelijnen dichtheid</string>
+    <string name="rendering_value_high_name">Hoog</string>
+    <string name="rendering_value_medium_w_name">Gemiddeld</string>
+    <string name="rendering_value_low_name">Laag</string>
+    <string name="rendering_attr_contourWidth_description">Hoogtelijnen dikte</string>
+    <string name="rendering_attr_contourWidth_name">Hoogtelijnen dikte</string>
+    <string name="rendering_attr_hideWaterPolygons_description">Watervlakten</string>
+    <string name="rendering_attr_hideWaterPolygons_name">Verberg watervlakten</string>
     </resources>
