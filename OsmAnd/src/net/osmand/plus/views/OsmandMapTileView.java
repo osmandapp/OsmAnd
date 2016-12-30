@@ -1037,7 +1037,8 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			final QuadPoint cp = initialViewport.getCenterPixelPoint();
 			float dx = cp.x - initialMultiTouchCenterPoint.x;
 			float dy = cp.y - initialMultiTouchCenterPoint.y;
-			final LatLon r = calc.getLatLonFromPixel(cp.x + dx, cp.y + dy);
+			//final LatLon r = calc.getLatLonFromPixel(cp.x + dx, cp.y + dy);
+			final LatLon r = calc.getLatLonFromPixel(cp.x - dx, cp.y - dy);
 			setLatLon(r.getLatitude(), r.getLongitude());
 
 			int baseZoom = initialViewport.getZoom();
