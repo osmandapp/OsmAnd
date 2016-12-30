@@ -1034,11 +1034,9 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			calc.setZoomAndAnimation(initialViewport.getZoom(), dz, initialViewport.getZoomFloatPart());
 
 			// Pins map to initial zoom center, but inhibits 2 finger drag
-			final QuadPoint cp = initialViewport.getCenterPixelPoint();
-			float dx = cp.x - initialMultiTouchCenterPoint.x;
-			float dy = cp.y - initialMultiTouchCenterPoint.y;
-			//final LatLon r = calc.getLatLonFromPixel(cp.x + dx, cp.y + dy);
-			final LatLon r = calc.getLatLonFromPixel(cp.x - dx, cp.y - dy);
+			//final QuadPoint cp = initialViewport.getCenterPixelPoint();
+			//final LatLon r = calc.getLatLonFromPixel(cp.x + cp.x - initialMultiTouchCenterPoint.x, cp.y + cp.y - initialMultiTouchCenterPoint.y);
+			final LatLon r = calc.getLatLonFromPixel(updatedCenterPoint.x, updatedCenterPoint.y);
 			setLatLon(r.getLatitude(), r.getLongitude());
 
 			int baseZoom = initialViewport.getZoom();
