@@ -320,6 +320,7 @@ public class MapActivityLayers {
 				Button neutralButton = alertDialog.getButton(DialogInterface.BUTTON_NEUTRAL);
 				Drawable drawable = app.getIconsCache().getThemedIcon(R.drawable.ic_action_singleselect);
 				neutralButton.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null);
+				neutralButton.setContentDescription(app.getString(R.string.shared_string_filters));
 			}
 		});
 		alertDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
@@ -383,6 +384,7 @@ public class MapActivityLayers {
 				Button neutralButton = alertDialog.getButton(DialogInterface.BUTTON_NEUTRAL);
 				Drawable drawable = app.getIconsCache().getThemedIcon(R.drawable.ic_action_multiselect);
 				neutralButton.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null);
+				neutralButton.setContentDescription(app.getString(R.string.apply_filters));
 			}
 		});
 		alertDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
