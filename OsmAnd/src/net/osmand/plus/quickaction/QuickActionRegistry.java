@@ -2,10 +2,16 @@ package net.osmand.plus.quickaction;
 
 import android.content.Context;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import net.osmand.plus.OsmandSettings;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by rosty on 12/27/16.
@@ -22,6 +28,7 @@ public class QuickActionRegistry {
     private final OsmandSettings settings;
 
     private final List<QuickAction> quickActions;
+    private final Map<String, Boolean> fabStateMap;
 
     private QuickActionUpdatesListener updatesListener;
 
@@ -31,6 +38,7 @@ public class QuickActionRegistry {
         this.settings = settings;
 
         quickActions = factory.parseActiveActionsList(settings.QUICK_ACTION_LIST.get());
+        fabStateMap = getQuickActionFabStateMapFromJson(settings.QUICK_ACTION.get());
     }
 
     public void setUpdatesListener(QuickActionUpdatesListener updatesListener) {
@@ -135,5 +143,23 @@ public class QuickActionRegistry {
 
             if (isNameUnique(action, context)) return action;
         }
+    }
+
+    public boolean isQuickActionOn() {
+        Boolean result = fabStateMap.get(settings.APPLICATION_MODE.get().getStringKey());
+        return result != null && result;
+    }
+
+    public void setQuickActionFabState(boolean isOn) {
+        fabStateMap.put(settings.APPLICATION_MODE.get().getStringKey(), isOn);
+        settings.QUICK_ACTION.set(new Gson().toJson(fabStateMap));
+    }
+
+    private Map<String, Boolean> getQuickActionFabStateMapFromJson(String json) {
+        Type type = new TypeToken<HashMap<String, Boolean>>() {
+        }.getType();
+        HashMap<String, Boolean> quickActions = new Gson().fromJson(json, type);
+
+        return quickActions != null ? quickActions : new HashMap<String, Boolean>();
     }
 }

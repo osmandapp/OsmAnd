@@ -67,8 +67,7 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionRe
         quickActionsWidget = (QuickActionsWidget) mapActivity.findViewById(R.id.quick_action_widget);
         quickActionButton = (ImageButton) mapActivity.findViewById(R.id.map_quick_actions_button);
         setQuickActionButtonMargin();
-        isLayerOn = settings.QUICK_ACTION.get();
-//        quickActionButton.setVisibility(isLayerOn ? View.VISIBLE : View.GONE);
+        isLayerOn = quickActionRegistry.isQuickActionOn();
         quickActionButton.setImageResource(R.drawable.map_quick_action);
         quickActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,8 +101,7 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionRe
 
     public void refreshLayer() {
         setLayerState(true);
-        isLayerOn = settings.QUICK_ACTION.get();
-//        quickActionButton.setVisibility(settings.QUICK_ACTION.get() ? View.VISIBLE : View.GONE);
+        isLayerOn = quickActionRegistry.isQuickActionOn();
     }
 
     private void setQuickActionButtonMargin() {
@@ -227,15 +225,13 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionRe
     @Override
     public void onDraw(Canvas canvas, RotatedTileBox box, DrawSettings settings) {
         if (isInChangeMarkerPositionMode()) {
-//            canvas.translate(box.getPixWidth() / 2 - contextMarker.getWidth() / 2, box.getPixHeight() / 2 - contextMarker.getHeight());
             canvas.translate(box.getCenterPixelX() - contextMarker.getWidth() / 2, box.getCenterPixelY() - contextMarker.getHeight());
             contextMarker.draw(canvas);
         }
         boolean hideQuickButton = !isLayerOn ||
                 contextMenuLayer.isInChangeMarkerPositionMode() ||
                 mapActivity.getContextMenu().isVisible() ||
-                mapActivity.getContextMenu().getMultiSelectionMenu().isVisible() ||
-                mapActivity.getRoutingHelper().isRoutePlanningMode();
+                mapActivity.getContextMenu().getMultiSelectionMenu().isVisible();
         quickActionButton.setVisibility(hideQuickButton ? View.GONE : View.VISIBLE);
     }
 

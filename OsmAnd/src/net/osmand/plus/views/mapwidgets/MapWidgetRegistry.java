@@ -359,7 +359,7 @@ public class MapWidgetRegistry {
 
 
 	public void addControls(MapActivity map, ContextMenuAdapter cm, ApplicationMode mode) {
-		addQuickActionControl(map, cm);
+		addQuickActionControl(map, cm, mode);
 		// Right panel
 		cm.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.map_widget_right, map)
 				.setCategory(true).setLayout(R.layout.list_group_title_with_switch).createItem());
@@ -386,12 +386,12 @@ public class MapWidgetRegistry {
 		return leftWidgetSet;
 	}
 
-	private void addQuickActionControl(final MapActivity mapActivity, final ContextMenuAdapter contextMenuAdapter) {
+	private void addQuickActionControl(final MapActivity mapActivity, final ContextMenuAdapter contextMenuAdapter, ApplicationMode mode) {
 
 		contextMenuAdapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.map_widget_right, mapActivity)
 				.setCategory(true).setLayout(R.layout.list_group_empty_title_with_switch).createItem());
 
-		boolean selected = settings.QUICK_ACTION.get();
+		boolean selected = mapActivity.getMapLayers().getQuickActionRegistry().isQuickActionOn();
 		contextMenuAdapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setTitleId(R.string.configure_screen_quick_action, mapActivity)
 				.setIcon(R.drawable.map_quick_action)
@@ -422,7 +422,7 @@ public class MapWidgetRegistry {
 											   int position,
 											   boolean visible) {
 
-						settings.QUICK_ACTION.set(visible);
+						mapActivity.getMapLayers().getQuickActionRegistry().setQuickActionFabState(visible);
 
 						MapQuickActionLayer mil = mapActivity.getMapLayers().getMapQuickActionLayer();
 						if (mil != null) {
