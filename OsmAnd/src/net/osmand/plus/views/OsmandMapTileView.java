@@ -1025,7 +1025,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 			// Keep zoom center fixed or flexible
 			calc.setLatLonCenter(initialCenterLatLon.getLatitude(), initialCenterLatLon.getLongitude());
-			PointF updatedCenterPoint = multiTouchSupport.getCenterPoint();
+			//PointF updatedCenterPoint = multiTouchSupport.getCenterPoint();
 			//calc.setLatLonCenter(initialViewport.getLatLonFromPixel(updatedCenterPoint.x, updatedCenterPoint.y).getLatitude(), 
 			//	initialViewport.getLatLonFromPixel(updatedCenterPoint.x, updatedCenterPoint.y).getLongitude());
 
@@ -1035,8 +1035,8 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 			// Keep zoom center fixed or flexible
 			final QuadPoint cp = initialViewport.getCenterPixelPoint();
-			//final LatLon r = calc.getLatLonFromPixel(cp.x + cp.x - initialMultiTouchCenterPoint.x, cp.y + cp.y - initialMultiTouchCenterPoint.y);
-			final LatLon r = calc.getLatLonFromPixel(cp.x + cp.x - updatedCenterPoint.x, cp.y + cp.y - updatedCenterPoint.y);
+			final LatLon r = calc.getLatLonFromPixel(cp.x + cp.x - initialMultiTouchCenterPoint.x, cp.y + cp.y - initialMultiTouchCenterPoint.y);
+			//final LatLon r = calc.getLatLonFromPixel(cp.x + cp.x - updatedCenterPoint.x, cp.y + cp.y - updatedCenterPoint.y);
 			setLatLon(r.getLatitude(), r.getLongitude());
 
 			int baseZoom = initialViewport.getZoom();
