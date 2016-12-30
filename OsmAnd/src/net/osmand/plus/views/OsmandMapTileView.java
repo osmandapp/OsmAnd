@@ -1021,14 +1021,15 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		}
 
 		private void changeZoomPosition(float dz, float angle) {
-			final QuadPoint cp = initialViewport.getCenterPixelPoint();
-			float dx = cp.x - initialMultiTouchCenterPoint.x;
-			float dy = cp.y - initialMultiTouchCenterPoint.y;
-			final RotatedTileBox calc = initialViewport.copy();
+			//final QuadPoint cp = initialViewport.getCenterPixelPoint();
+			//float dx = cp.x - initialMultiTouchCenterPoint.x;
+			//float dy = cp.y - initialMultiTouchCenterPoint.y;
+			//final RotatedTileBox calc = initialViewport.copy();
+			final RotatedTileBox calc = getCurrentRotatedTileBox().copy();
 			//calc.setLatLonCenter(initialCenterLatLon.getLatitude(), initialCenterLatLon.getLongitude());
 			PointF updatedCenterPoint = multiTouchSupport.getCenterPoint();
-			calc.setLatLonCenter(initialViewport.getLatLonFromPixel(updatedCenterPoint.x, updatedCenterPoint.y).getLatitude(), 
-				initialViewport.getLatLonFromPixel(updatedCenterPoint.x, updatedCenterPoint.y).getLongitude());
+			calc.setLatLonCenter(calc.getLatLonFromPixel(updatedCenterPoint.x, updatedCenterPoint.y).getLatitude(), 
+				calc.getLatLonFromPixel(updatedCenterPoint.x, updatedCenterPoint.y).getLongitude());
 
 			float calcRotate = calc.getRotate() + angle;
 			calc.setRotate(calcRotate);
