@@ -308,6 +308,10 @@ public class PoiFiltersHelper {
 		saveSelectedPoiFilters();
 	}
 
+	public void hidePoiFilters() {
+		selectedPoiFilters.clear();
+	}
+
 	public String getFiltersName(Set<PoiUIFilter> filters) {
 		if (filters.isEmpty()) {
 			return application.getResources().getString(R.string.shared_string_none);

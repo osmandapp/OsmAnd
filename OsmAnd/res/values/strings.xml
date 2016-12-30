@@ -139,12 +139,12 @@
     <string name="city_type_district">District</string>
     <string name="city_type_neighbourhood">Neighbourhood</string>
     <string name="map_widget_search">Search</string>
-	<string name="shared_string_is_open_24_7">Open 24/7</string>
+    <string name="shared_string_is_open_24_7">Open 24/7</string>
     <string name="storage_directory_card">Memory card</string>
     <string name="coords_format">Coordinate format</string>
     <string name="coords_format_descr">Format for the geographical coordinates</string>
-  	<string name="app_mode_bus">Bus</string>
- 	<string name="app_mode_train">Train</string>
+    <string name="app_mode_bus">Bus</string>
+    <string name="app_mode_train">Train</string>
     <string name="current_track">Current track</string>
     <string name="map_widget_battery">Battery level</string>
     <string name="change_markers_position">Change marker\'s position</string>
@@ -156,7 +156,7 @@
     <string name="access_direction_haptic_feedback">Direction haptic feedback</string>
     <string name="access_direction_haptic_feedback_descr">Indicate target point direction by vibration</string>
     <string name="use_osm_live_routing_description">Enable navigation for OSM Live changes (Beta)</string>
-	<string name="use_osm_live_routing">OSM Live navigation</string>
+    <string name="use_osm_live_routing">OSM Live navigation</string>
     <string name="access_no_destination">Destination is not set</string>
     <string name="map_widget_magnetic_bearing">Magnetic bearing</string>
     <string name="map_widget_bearing">Relative bearing</string>
@@ -261,7 +261,7 @@
     <string name="osm_live_header">This subscription enables hourly updates for all maps around the world.
         Part of the income goes back to the OSM community and is paid for each OSM contribution. 
         If you love OsmAnd and OSM and want to support them, this is the perfect way to do it.</string>
-    
+
     <string name="select_map_marker">Select map marker</string>
     <string name="map_markers_other">Other markers</string>
     <string name="upload_anonymously">Upload anonymously</string>
@@ -1080,8 +1080,8 @@
     <string name="route_info">Route information</string>
     <string name="routing_attr_prefer_motorway_name">Prefer motorways</string>
     <string name="routing_attr_prefer_motorway_description">Prefer motorways</string>
-    
-    
+
+
     <string name="routing_attr_avoid_toll_name">Avoid toll roads</string>
     <string name="routing_attr_avoid_toll_description">Avoid toll roads</string>
     <string name="routing_attr_avoid_unpaved_name">Avoid unpaved roads</string>

@@ -22,6 +22,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.editors.EditCategoryDialogFragment;
 import net.osmand.plus.mapcontextmenu.editors.SelectCategoryDialogFragment;
+import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.widgets.AutoCompleteTextViewEx;
 
 import java.lang.reflect.Type;
@@ -423,8 +424,13 @@ public class QuickActionFactory {
         @Override
         public void execute(MapActivity activity) {
 
-            activity.getMyApplication().getSettings().SHOW_NEARBY_POI.set(
-                    !activity.getMyApplication().getSettings().SHOW_NEARBY_POI.get());
+            PoiFiltersHelper pf = activity.getMyApplication().getPoiFilters();
+
+            if (pf.getSelectedPoiFilters().isEmpty()){
+
+                pf.loadSelectedPoiFilters();
+
+            } else pf.hidePoiFilters();
         }
 
         @Override
