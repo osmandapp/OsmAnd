@@ -120,7 +120,7 @@ public class MultiTouchSupport {
 			//	return true;
 			} else if(inZoomMode && actionCode == MotionEvent.ACTION_MOVE){
 				// Keep zoom center fixed or flexible
-				//centerPoint = new PointF((x1 + x2) / 2, (y1 + y2) / 2);
+				centerPoint = new PointF((x1 + x2) / 2, (y1 + y2) / 2);
 
 				if(angleDefined) {
 					angleRelative = MapUtils.unifyRotationTo360(angle - angleStarted);

@@ -133,7 +133,7 @@ public class MultiTouchSupport {
 
 					if (inZoomMode) {
 						// Keep zoom center fixed or flexible
-						//centerPoint = new PointF((x1 + x2) / 2, (y1 + y2) / 2);
+						centerPoint = new PointF((x1 + x2) / 2, (y1 + y2) / 2);
 						if (angleDefined) {
 							float a = MapUtils.unifyRotationTo360(angle - initialAngle);
 							if (!isRotating && Math.abs(a) > ROTATION_THRESHOLD_DEG) {

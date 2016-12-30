@@ -1022,21 +1022,15 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 		private void changeZoomPosition(float dz, float angle) {
 			final RotatedTileBox calc = initialViewport.copy();
-
-			// Keep zoom center fixed or flexible
 			calc.setLatLonCenter(initialCenterLatLon.getLatitude(), initialCenterLatLon.getLongitude());
-			//PointF updatedCenterPoint = multiTouchSupport.getCenterPoint();
-			//calc.setLatLonCenter(initialViewport.getLatLonFromPixel(updatedCenterPoint.x, updatedCenterPoint.y).getLatitude(), 
-			//	initialViewport.getLatLonFromPixel(updatedCenterPoint.x, updatedCenterPoint.y).getLongitude());
-
 			float calcRotate = calc.getRotate() + angle;
 			calc.setRotate(calcRotate);
 			calc.setZoomAndAnimation(initialViewport.getZoom(), dz, initialViewport.getZoomFloatPart());
 
-			// Keep zoom center fixed or flexible
 			final QuadPoint cp = initialViewport.getCenterPixelPoint();
-			final LatLon r = calc.getLatLonFromPixel(cp.x + cp.x - initialMultiTouchCenterPoint.x, cp.y + cp.y - initialMultiTouchCenterPoint.y);
-			//final LatLon r = calc.getLatLonFromPixel(cp.x + cp.x - updatedCenterPoint.x, cp.y + cp.y - updatedCenterPoint.y);
+			// Keep zoom center fixed or flexible
+			//final LatLon r = calc.getLatLonFromPixel(cp.x + cp.x - initialMultiTouchCenterPoint.x, cp.y + cp.y - initialMultiTouchCenterPoint.y);
+			final LatLon r = calc.getLatLonFromPixel(cp.x + cp.x - multiTouchSupport.getCenterPoint().x, cp.y + cp.y - multiTouchSupport.getCenterPoint().y);
 			setLatLon(r.getLatitude(), r.getLongitude());
 
 			int baseZoom = initialViewport.getZoom();
