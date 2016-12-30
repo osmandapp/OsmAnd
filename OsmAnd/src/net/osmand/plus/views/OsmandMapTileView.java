@@ -922,7 +922,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		private float y2;
 		private LatLon initialCenterLatLon;
 		private boolean startRotating = false;
-		private static final float ANGLE_THRESHOLD = 15;
+		private static final float ANGLE_THRESHOLD = 30;
 
 		@Override
 		public void onZoomOrRotationEnded(double relativeToStart, float angleRelative) {
