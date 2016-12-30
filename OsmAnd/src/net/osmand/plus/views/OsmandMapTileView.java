@@ -1028,19 +1028,17 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			PointF updatedCenterPoint = multiTouchSupport.getCenterPoint();
 			calc.setLatLonCenter(initialViewport.getLatLonFromPixel(updatedCenterPoint.x, updatedCenterPoint.y).getLatitude(), 
 				initialViewport.getLatLonFromPixel(updatedCenterPoint.x, updatedCenterPoint.y).getLongitude());
-			currentViewport.setLatLonCenter(initialViewport.getLatLonFromPixel(updatedCenterPoint.x, updatedCenterPoint.y).getLatitude(), 
-				initialViewport.getLatLonFromPixel(updatedCenterPoint.x, updatedCenterPoint.y).getLongitude());
 
 			float calcRotate = calc.getRotate() + angle;
 			calc.setRotate(calcRotate);
 			calc.setZoomAndAnimation(initialViewport.getZoom(), dz, initialViewport.getZoomFloatPart());
 
 			// Pins map to initial zoom center, but inhibits 2 finger drag
-			//final QuadPoint cp = initialViewport.getCenterPixelPoint();
-			//float dx = cp.x - initialMultiTouchCenterPoint.x;
-			//float dy = cp.y - initialMultiTouchCenterPoint.y;
-			//final LatLon r = calc.getLatLonFromPixel(cp.x + dx, cp.y + dy);
-			//setLatLon(r.getLatitude(), r.getLongitude());
+			final QuadPoint cp = initialViewport.getCenterPixelPoint();
+			float dx = cp.x - initialMultiTouchCenterPoint.x;
+			float dy = cp.y - initialMultiTouchCenterPoint.y;
+			final LatLon r = calc.getLatLonFromPixel(cp.x + dx, cp.y + dy);
+			setLatLon(r.getLatitude(), r.getLongitude());
 
 			int baseZoom = initialViewport.getZoom();
 			while (initialViewport.getZoomFloatPart() + dz > 1 && isZoomingAllowed(baseZoom, dz)) {
