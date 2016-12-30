@@ -128,7 +128,7 @@ public class MultiTouchSupport {
 				//		inTiltMode = false;
 				//	}
 				//	return true;
-				}
+				//}
 				case MotionEvent.ACTION_MOVE: {
 
 					if (inZoomMode) {
