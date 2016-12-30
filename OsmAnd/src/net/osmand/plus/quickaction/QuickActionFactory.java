@@ -360,14 +360,13 @@ public class QuickActionFactory {
 
         private void fillGroupParams(View root, String name, int color) {
 
+            if (color == 0) color = R.color.color_favorite;
+
             ((AutoCompleteTextViewEx) root.findViewById(R.id.category_edit)).setText(name);
+            ((ImageView) root.findViewById(R.id.category_image)).setColorFilter(color);
+
             getParams().put(KEY_CATEGORY_NAME, name);
-
-            if (color > 0) {
-
-                ((ImageView) root.findViewById(R.id.category_image)).setColorFilter(color);
-                getParams().put(KEY_CATEGORY_COLOR, String.valueOf(color));
-            }
+            getParams().put(KEY_CATEGORY_COLOR, String.valueOf(color));
         }
     }
 
@@ -426,7 +425,7 @@ public class QuickActionFactory {
 
             PoiFiltersHelper pf = activity.getMyApplication().getPoiFilters();
 
-            if (pf.getSelectedPoiFilters().isEmpty()){
+            if (pf.getSelectedPoiFilters().isEmpty()) {
 
                 pf.loadSelectedPoiFilters();
 

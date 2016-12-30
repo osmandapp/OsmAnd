@@ -131,7 +131,7 @@ public class QuickActionRegistry {
 
             number++;
 
-            action.setName(name + "(" + number + ")");
+            action.setName(name + " (" + number + ")");
 
             if (isNameUnique(action, context)) return action;
         }

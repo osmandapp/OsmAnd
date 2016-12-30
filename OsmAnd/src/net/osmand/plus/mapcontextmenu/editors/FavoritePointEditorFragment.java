@@ -163,7 +163,7 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 			return;
 		}
 
-		if (builder != null) {
+		if (builder != null && !autoFill) {
 			builder.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
