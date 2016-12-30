@@ -119,6 +119,7 @@ public class MultiTouchSupport {
 			//	}
 			//	return true;
 			} else if(inZoomMode && actionCode == MotionEvent.ACTION_MOVE){
+				centerPoint = new PointF((x1 + x2) / 2, (y1 + y2) / 2);
 				if(angleDefined) {
 					angleRelative = MapUtils.unifyRotationTo360(angle - angleStarted);
 				}
