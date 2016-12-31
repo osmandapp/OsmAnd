@@ -903,4 +903,16 @@
 	<string name="poi_landfill">Izgāztuve</string>
 	<string name="poi_waste_disposal">Atkritumu aizvākšana</string>
 	<string name="poi_commercial">Komerczeme</string>
+	<string name="poi_retail">Mazumtirdzniecības zeme</string>
+
+	<string name="poi_orchard">Augļu dārzs</string>
+	<string name="poi_allotments">Dārzi</string>
+	<string name="poi_basin">Mākslīgā ūdenstilpne</string>
+
+	<string name="poi_brownfield">Pamestās/piesārņotās teritorijas</string>
+	<string name="poi_greenfield">Lauksaimniecības zeme</string>
+	<string name="poi_works">Rūpnīca</string>
+	<string name="poi_adit">Raktuvju ieeja</string>
+	<string name="poi_salt_pond">Sāls iegulas</string>
+	<string name="poi_cricket_nets">Kriketa laukums</string>
 	</resources>
