@@ -862,7 +862,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 				layers.get(i).onTouchEvent(event, getCurrentRotatedTileBox());
 			}
 		}
-		if (!doubleTapScaleDetector.isInZoomMode()) {
+		if (!doubleTapScaleDetector.isInZoomMode() && !doubleTapScaleDetector.isDoubleTapping()) {
 			gestureDetector.onTouchEvent(event);
 		}
 		return true;
@@ -1124,6 +1124,10 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 		@Override
 		public boolean onSingleTapConfirmed(MotionEvent e) {
+			if (doubleTapScaleDetector.isDoubleTapping()) {
+				// Needed to suppress false single tap detection if we mask gestures on isDoubleTapping()
+				return true;
+			}
 			PointF point = new PointF(e.getX(), e.getY());
 			if (LOG.isDebugEnabled()) {
 				LOG.debug("On click event " + point.x + " " + point.y); //$NON-NLS-1$ //$NON-NLS-2$
