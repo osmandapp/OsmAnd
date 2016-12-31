@@ -858,4 +858,20 @@
 	<string name="poi_aerialway_rope_tow">Troses pacēlājs</string>
 	<string name="poi_aerialway_goods">Kravas pacēlājs</string>
 	<string name="poi_aerialway_magic_carpet">Slīdošās lentes pacēlājs</string>
+	<string name="poi_aerialway_pylon">Torņbalsti</string>
+
+	<string name="poi_takeaway">Līdzņemšanai</string>
+	<string name="poi_free_flying_characteristic">Raksturojums</string>
+
+<string name="poi_convenience">Pārtikas veikals</string>
+	<string name="poi_boutique">Modes preču veikals</string>
+	<string name="poi_ship_chandler">Kuğu čāndlers</string>
+	<string name="poi_stationery">Rakstāmlietu veikals</string>
+	<string name="poi_shop_craft">Amatnieku piederumu veikals</string>
+	<string name="poi_aerialway_station">Trošu ceļa stacija</string>
+	<string name="poi_turning_circle">Apgriešanās aplis</string>
+	<string name="poi_standpipe">Spiediencaurule</string>
+	<string name="poi_water_works">Ūdens ieguve</string>
+	<string name="poi_boatyard">Kuğu būvētava</string>
+	<string name="poi_lock_gate">Slūžu vārti</string>
 	</resources>
