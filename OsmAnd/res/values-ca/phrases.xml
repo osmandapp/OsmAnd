@@ -2558,4 +2558,12 @@
 	<string name="poi_cuisine_fish_and_chips">Peix fregit amb patates fregides</string>
 	<string name="poi_cuisine_seafood">Marisc</string>
 	<string name="poi_cuisine_noodle">Tallarines</string>
+	<string name="poi_cuisine_donut">Dònuts</string>
+	<string name="poi_cuisine_ramen">Ramen</string>
+	<string name="poi_cuisine_breakfast">Esmorzars</string>
+	<string name="poi_cuisine_steak">Bistecs</string>
+	<string name="poi_cuisine_tapas">Tapes</string>
+	<string name="poi_cuisine_gastropub">Bar gastronòmic</string>
+	<string name="poi_cuisine_diner">Sopars</string>
+	<string name="poi_cuisine_sausage">Llonganisses</string>
 	</resources>
