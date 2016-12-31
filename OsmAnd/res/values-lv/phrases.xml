@@ -893,4 +893,6 @@
 	<string name="poi_recycling_cans">Skārda bundžas</string>
 	<string name="poi_recycling_green_waste">Dārza atkritumi</string>
 	<string name="poi_recycling_cardboard">Kartons</string>
+	<string name="poi_recycling_small_appliances">Mazizmēra atkritumi</string>
+	<string name="poi_recycling_beverage_cartons">Tetrapakas</string>
 	</resources>
