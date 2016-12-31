@@ -895,4 +895,12 @@
 	<string name="poi_recycling_cardboard">Kartons</string>
 	<string name="poi_recycling_small_appliances">Mazizmēra atkritumi</string>
 	<string name="poi_recycling_beverage_cartons">Tetrapakas</string>
+	<string name="poi_recycling_white_goods">Lielā sadzīves tehnika</string>
+	<string name="poi_recycling_cooking_oil">Cepameļļa</string>
+	<string name="poi_recycling_rubble">Gruveši</string>
+	<string name="poi_recycling_christmas_trees">Ziemassvētku eglītes</string>
+	<string name="poi_recycling_chipboard">Skaidu plates</string>
+	<string name="poi_landfill">Izgāztuve</string>
+	<string name="poi_waste_disposal">Atkritumu aizvākšana</string>
+	<string name="poi_commercial">Komerczeme</string>
 	</resources>
