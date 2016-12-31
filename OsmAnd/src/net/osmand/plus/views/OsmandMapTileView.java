@@ -1125,7 +1125,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		@Override
 		public boolean onSingleTapConfirmed(MotionEvent e) {
 			if (doubleTapScaleDetector.isDoubleTapping()) {
-				// Needed to suppress false single tap detection if we mask gestures on isDoubleTapping()
+				// Needed to suppress false single tap detection if we mask MotionEvents for gestures on isDoubleTapping()
 				return true;
 			}
 			PointF point = new PointF(e.getX(), e.getY());
