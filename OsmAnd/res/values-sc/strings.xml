@@ -411,8 +411,8 @@ Su grupu chi no est istadu iscantzelladu a pustis de carchi mese benit impostadu
     <string name="use_compass_navigation_descr">Imprea sa bùssola cando sa filada/diretzione non est istada individuada</string>
     <string name="use_compass_navigation">Imprea sa bùssola</string>
     <string name="avoid_motorway">Istense sas autostradas</string>
-    <string name="auto_zoom_map_descr">Zoom mapa automàticu relativu a sa lestresa (si sa mapa est sincronizzata cun sa positzione currente)</string>
-    <string name="auto_zoom_map">Zoom automàticu mapa</string>
+    <string name="auto_zoom_map_descr">Ismanniamentu mapa automàticu relativu a sa lestresa (si sa mapa est sincronizzata cun sa positzione currente)</string>
+    <string name="auto_zoom_map">Ismanniamentu automàticu mapa</string>
     <string name="snap_to_road_descr">Arrea sa positzione in subra de sas istradas durante su nàvigu</string>
     <string name="snap_to_road">Arrea in subra de sas istradas</string>
     <string name="interrupt_music_descr">Firma sa mùsica pro fàghere sos annùntzios vocales (no abbasses petzi su volume)</string>
@@ -459,7 +459,7 @@ Su grupu chi no est istadu iscantzelladu a pustis de carchi mese benit impostadu
     <string name="rendering_attr_hideNonVehicleHighways_name">Istradas non carràbiles</string>
     <string name="rendering_attr_hideText_name">Testu</string>
     <string name="rendering_attr_hideWoodScrubs_name">Padentes e buschedos</string>
-    <string name="rendering_attr_buildings15zoom_name">Edifìtzios dae su zoom 15</string>
+    <string name="rendering_attr_buildings15zoom_name">Edifìtzios dae s\'ismanniamentu 15</string>
     <string name="rendering_attr_moreDetailed_name">Prus minujas (a sa minuda)</string>
     <string name="rendering_attr_lessDetailed_name">Minujas de mancu</string>
     <string name="rendering_attr_hideAccess_name">Restritziones de atzessu</string>
@@ -502,8 +502,8 @@ Boles protzèdere cun una registratzione noa?</string>
     <string name="sort_by_distance">Òrdina pro distàntzia</string>
     <string name="sort_by_name">Òrdina pro nùmene</string>
 
-    <string name="show_zoom_buttons_navigation_descr">Ammustra sos pursantes de su zoom durante su nàvigu</string>
-    <string name="show_zoom_buttons_navigation">Ammustra sos pursantes de su zoom</string>
+    <string name="show_zoom_buttons_navigation_descr">Ammustra sos pursantes de s\'ismanniamentu durante su nàvigu</string>
+    <string name="show_zoom_buttons_navigation">Ammustra sos pursantes de s\'ismanniamentu</string>
     <string name="save_as_favorites_points">Sarba comente grupu de preferidos</string>
     <string name="select_destination_and_intermediate_points">Ischerta sas tapas</string>
     <string name="layer_amenity_label">Etichetas de sos puntos</string>
@@ -835,7 +835,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="poi">PDI</string>
     <string name="local_openstreetmap_settings">PDI/Notas sarbados in locale</string>
     <string name="index_name_wiki">PDI Wikipedia mondiale</string>
-    <string name="update_poi_is_not_available_for_zoom">S’agiornamentu de sos PDI non est disponìbile pro livellos de zoom bassos</string>
+    <string name="update_poi_is_not_available_for_zoom">S’agiornamentu de sos PDI non est disponìbile pro livellos bassos de ismanniamentu</string>
 
     <string name="map_widget_vector_attributes">Caraterìsticas de su disinnu</string>
     <string name="screen_is_locked">Pro disarreare s’ischermu carca s’icona de su luchete</string>
@@ -932,7 +932,7 @@ Memòria in proportzione %4$s MB (lìmite de Android %5$s MB, Dalvik %6$s MB).</
     <string name="online_map_settings_descr">Cunfigura sas mitzas de sas mapas in lìnia o de sos tasseddos in cache</string>
 
 
-    <string name="osmand_accessibility_description">Custa estensione permitit de impreare sas funtzionalidades pro s\'atzessibilidade de su dispositivu detetamente in OsmAnd, e fatzilitat, pro nàrrere, sa modìfica de sa lestresa de sas boghes TTS, sa cunfiguratzione de su movimentu de s\'ischermu, s’impreu de una trackball pro su zoom o de un’interfàtzia vocale pro cosas comente s\'annùntziu de sa positzione tua.</string>
+    <string name="osmand_accessibility_description">Custa estensione permitit de impreare sas funtzionalidades pro s\'atzessibilidade de su dispositivu detetamente in OsmAnd, e fatzilitat, pro nàrrere, sa modìfica de sa lestresa de sas boghes TTS, sa cunfiguratzione de su movimentu de s\'ischermu, s’impreu de una trackball pro s\'ismanniamentu o de un’interfàtzia vocale pro cosas comente s\'annùntziu de sa positzione tua.</string>
 
     <string name="plugins_screen">Estensiones</string>
 
@@ -956,7 +956,7 @@ Memòria in proportzione %4$s MB (lìmite de Android %5$s MB, Dalvik %6$s MB).</
     <string name="shared_string_on">Ativau</string>
     <string name="shared_string_off">Istudadu</string>
     <string name="backToMenu">Torra a su Menù</string>
-    <string name="zoomIs">Su livellu de zoom est</string>
+    <string name="zoomIs">Su livellu de ismanniamentu est</string>
     <string name="north">nord</string>
     <string name="north_north_east">nord-nord-est</string>
     <string name="north_east">nord-est</string>
@@ -1062,7 +1062,7 @@ Memòria in proportzione %4$s MB (lìmite de Android %5$s MB, Dalvik %6$s MB).</
     <string name="context_menu_item_delete_parking_point">Iscantzella unu marcadore de parchègiu</string>
     <string name="route_roundabout">Rutunda: piga sa %1$d essida e sighi</string>
     <string name="rendering_attr_appMode_description">Otimizza sas mapas pro</string>
-    <string name="rendering_attr_contourLines_description">Ammustra dae su livellu de zoom (serbint sos datos de sas lìnias de livellu):</string>
+    <string name="rendering_attr_contourLines_description">Ammustra dae su livellu de ismanniamentu (serbint sos datos de sas lìnias de livellu):</string>
     <string name="rendering_attr_hmRendered_name">Ammustra prus minujas in sa mapa</string>
 
 
@@ -1110,8 +1110,8 @@ Memòria in proportzione %4$s MB (lìmite de Android %5$s MB, Dalvik %6$s MB).</
     <string name="settings_direction_style_descr">Issèbera s’istile in su cale benint espressadas in movimentu sas diretziones relativas</string>
     <string name="auto_announce_on">Incumentza s’autosinnalatzione</string>
     <string name="auto_announce_off">Firma s’autosinnalatzione</string>
-    <string name="zoom_by_trackball_descr">Muda su zoom de sa mapa cun movimentos orizontales de sa trackball</string>
-    <string name="zoom_by_trackball">Imprea sa trackball pro controllare su zoom</string>
+    <string name="zoom_by_trackball_descr">Muda s\'ismanniamentu de sa mapa cun movimentos orizontales de sa trackball</string>
+    <string name="zoom_by_trackball">Imprea sa trackball pro controllare s\'ismanniamentu</string>
     <string name="arrival_distance_factor_early">Chitzo</string>
     <string name="arrival_distance_factor_normally">Normale</string>
     <string name="arrival_distance_factor_late">Tardu</string>
@@ -1256,8 +1256,8 @@ Memòria in proportzione %4$s MB (lìmite de Android %5$s MB, Dalvik %6$s MB).</
     <string name="select_tile_source_to_install">Issèbera sas mapas (tasseddos) da installare o agiornare</string>
     <string name="internet_not_available">Una connessione ìnternet est netzessària pro custa operatzione, ma no nde bi sunt disponìbiles</string>
     <string name="install_more">Installa àteru…</string>
-    <string name="level_to_switch_vector_raster_descr">Livellu mìnimu de zoom pro impreare sas mapas vetoriales</string>
-    <string name="level_to_switch_vector_raster">Liv. min. zoom vetoriale</string>
+    <string name="level_to_switch_vector_raster_descr">Livellu mìnimu de ismanniamentu pro impreare sas mapas vetoriales</string>
+    <string name="level_to_switch_vector_raster">Liv. min. ismanniamentu vetoriale</string>
 
 
     <string name="create_poi_link_to_osm_doc"><u>OSM in lìnia</u> classificatzione mapas cun immàgines</string>
@@ -1348,7 +1348,7 @@ Memòria in proportzione %4$s MB (lìmite de Android %5$s MB, Dalvik %6$s MB).</
 
     <string name="shared_string_select_all">Ischerta totu</string>
     <string name="fast_route_mode">Àndala prus lestra</string>
-    <string name="tiles_to_download_estimated_size">Pro su zoom {0} iscàrriga {1} tasseddos ({2} MB)</string>
+    <string name="tiles_to_download_estimated_size">Pro s\'ismanniamentu {0} iscàrriga {1} tasseddos ({2} MB)</string>
     <string name="shared_string_download_map">Iscàrriga mapa</string>
     <string name="maps_could_not_be_downloaded">No est istadu possìbile iscarrigare custa mapa</string>
     <string name="show_point_options">Imprea sa positzione …</string>
@@ -1429,7 +1429,7 @@ Memòria in proportzione %4$s MB (lìmite de Android %5$s MB, Dalvik %6$s MB).</
     <string name="download_files_question">Iscarrigare {0} documentu/os ({1} MB)?</string>
     <string name="shared_string_refresh">Torra a carrigare</string>
     <string name="fast_route_mode_descr">"Abìlita pro calculare s’àndala prus lestra o disabìlita pro s’àndala cun consumos prus bassos "</string>
-    <string name="select_max_zoom_preload_area">Ischerta su zoom màssimu da precarrigare</string>
+    <string name="select_max_zoom_preload_area">Ischerta s\'ismanniamentu màssimu da precarrigare</string>
     <string name="continuous_rendering">Disinnu sighidu</string>
     <string name="continuous_rendering_descr">Ammustra unu disinnu (rendering) sighidu imbetzes de una immàgine istantànea</string>
     <string name="rendering_exception">Errore in su disinnu de s’àrea ischertada</string>
@@ -1510,7 +1510,7 @@ Memòria in proportzione %4$s MB (lìmite de Android %5$s MB, Dalvik %6$s MB).</
     <string name="hint_search_online">Chirca in lìnia: nùmeru tzìvicu, istrada, tzitade</string>
     <string name="search_offline_address">Chene lìnia</string>
     <string name="search_online_address">Ìnternet</string>
-    <string name="max_level_download_tile">Max zoom in lìnia</string>
+    <string name="max_level_download_tile">Max ismanniamentu in lìnia</string>
     <string name="max_level_download_tile_descr">Issèbera su livellu màssimu da iscarrigare pro sa mapas in lìnia a tasseddos</string>
     <string name="route_general_information">Distàntzia totale %1$s, longària de su biàgiu %2$d h %3$d min.</string>
     <string name="router_service_descr">Issèbera unu servìtziu in lìnia o chene lìnia de nàvigu</string>
@@ -1695,7 +1695,7 @@ Memòria in proportzione %4$s MB (lìmite de Android %5$s MB, Dalvik %6$s MB).</
 
 
     <string name="show_more_map_detail">Ammustra prus minujas in sa mapa</string>
-    <string name="show_more_map_detail_descr">Ammustra carchi minuja de sas mapas vetoriales (istradas etc.) fintzas a sos zoom prus bassos</string>
+    <string name="show_more_map_detail_descr">Ammustra carchi minuja de sas mapas vetoriales (istradas etc.) fintzas a sos ismanniamentos prus bassos</string>
     <string name="show_route">Minujas àndala</string>
 
     <string name="use_high_res_maps_descr">Non allonghiare (ne inghelare) sos tasseddos de sa mapa in sos dispositivos a carchesa arta</string>
@@ -1868,11 +1868,22 @@ Memòria in proportzione %4$s MB (lìmite de Android %5$s MB, Dalvik %6$s MB).</
 	<string name="plugin_ski_descr">"Custa estensione pro OsmAnd ti frunit sas minujas de sas pistas de iscì, de fundu, alpinas e de àtera casta, de sas funivias e de sas isciovias. Sas camineras e sas pistas sunt coloradas pro dificultade, e ammustradas in unu istile de mapa particulare, \'Ierru\', chi s\'assimigiat a unu paesaggiu coloradu dae sa neve de s\'ierru.
 \n\nAlluende custa vista s’istile mapa at a divènnere \'Ierru e iscì\', ammustrende totu sas caraterìsticas de s’iscenàriu in sas cunditziones de s’ierru. Custa vista podet èssere furriada istudende·la inoghe torra o cambiende s’\'Istile mapa\' in \'Cunfigura mapa\'. "</string>
 	<string name="plugin_touringview_descr">"Alluende custa vista s’istile de sa mapa at a colare a \'Vista turìstica\', una vista fata a sa minuda pro turistas, biagiatores e autistas professionistas.
-\n\nCusta vista frunit, pro cada livellu de zoom, su màssimu de sas minujas de biàgiu disponìbiles in sos datos de sa mapa (in particulare minujas de de sas istradas e de sas àndalas e sinnos de orientamentu).
-\n\nRapresentat fintzas totu sas castas de istrada in manera crara tramite colores diferentes, agiudende meda, pro nàrrere, sos chi ghiant veìculos mannos meda.
-\n\nE frunit optziones ispetziales de nàvigu, comente sa visualizatzione de sas àndalas pro sas bitzicletas e s\'alpinismu.
-\n\nNo est netzessàriu iscarrigare una mapa ispetziale, sa vista est creada dae sas mapas istandard.
-\n\nCusta vista podet èssere furriada istudende·la inoghe torra o cambiende s’\'Istile mapa\' in \'Cunfigura mapa\' comente boles. "</string>
+
+
+Custa vista frunit, pro cada livellu de ismanniamentu (zoom), su màssimu de sas minujas de biàgiu disponìbiles in sos datos de sa mapa (in particulare minujas de de sas istradas e de sas àndalas e sinnos de orientamentu).
+
+
+Rapresentat fintzas totu sas castas de istrada in manera crara tramite colores diferentes, agiudende meda, pro nàrrere, sos chi ghiant veìculos mannos meda.
+
+
+E frunit optziones ispetziales de nàvigu, comente sa visualizatzione de sas àndalas pro sas bitzicletas e s\'alpinismu.
+
+
+No est netzessàriu iscarrigare una mapa ispetziale, sa vista est creada dae sas mapas istandard.
+
+
+Custa vista podet èssere furriada istudende·la inoghe torra o cambiende s’\'Istile mapa\' in \'Cunfigura mapa\' comente boles.
+ "</string>
 
 
     <string name="days_behind">dies faghet</string>
