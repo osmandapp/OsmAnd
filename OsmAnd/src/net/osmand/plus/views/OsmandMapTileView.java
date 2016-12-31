@@ -862,7 +862,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 				layers.get(i).onTouchEvent(event, getCurrentRotatedTileBox());
 			}
 		}
-		if (!doubleTapScaleDetector.isInZoomMode() && !doubleTapScaleDetector.isDoubleTapping()) {
+		if (!doubleTapScaleDetector.isInZoomMode()) {
 			gestureDetector.onTouchEvent(event);
 		}
 		return true;
