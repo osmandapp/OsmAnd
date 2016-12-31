@@ -874,4 +874,10 @@
 	<string name="poi_water_works">Ūdens ieguve</string>
 	<string name="poi_boatyard">Kuğu būvētava</string>
 	<string name="poi_lock_gate">Slūžu vārti</string>
+	<string name="poi_waterway_turning_point">Ūdensteces maiņas punkts</string>
+	<string name="poi_weir">Aizsprosts</string>
+	<string name="poi_watermill">Ūdensdzirnavas</string>
+	<string name="poi_breakwater">Viļņlauzis</string>
+	<string name="poi_groyne">Mols</string>
+
 	</resources>
