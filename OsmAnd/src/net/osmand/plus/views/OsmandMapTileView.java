@@ -1029,8 +1029,11 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 			final QuadPoint cp = initialViewport.getCenterPixelPoint();
 			// Keep zoom center fixed or flexible
-			//final LatLon r = calc.getLatLonFromPixel(cp.x + cp.x - initialMultiTouchCenterPoint.x, cp.y + cp.y - initialMultiTouchCenterPoint.y);
-			final LatLon r = calc.getLatLonFromPixel(cp.x + cp.x - multiTouchSupport.getCenterPoint().x, cp.y + cp.y - multiTouchSupport.getCenterPoint().y);
+			if (multiTouchSupport.isInZoomMode()) {
+				LatLon r = calc.getLatLonFromPixel(cp.x + cp.x - multiTouchSupport.getCenterPoint().x, cp.y + cp.y - multiTouchSupport.getCenterPoint().y);
+			} else {
+				LatLon r = calc.getLatLonFromPixel(cp.x + cp.x - initialMultiTouchCenterPoint.x, cp.y + cp.y - initialMultiTouchCenterPoint.y);
+			}
 			setLatLon(r.getLatitude(), r.getLongitude());
 
 			int baseZoom = initialViewport.getZoom();
@@ -1055,13 +1058,13 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		if (baseZoom > getMaxZoom()) {
 			return false;
 		}
-		if (baseZoom > getMaxZoom() - 1 && dz > 0) {
+		if (baseZoom > getMaxZoom() - 1 && dz >= 1) {
 			return false;
 		}
 		if (baseZoom < getMinZoom()) {
 			return false;
 		}
-		if (baseZoom < getMinZoom() + 1 && dz < 0) {
+		if (baseZoom < getMinZoom() + 1 && dz <= -1) {
 			return false;
 		}
 		return true;
