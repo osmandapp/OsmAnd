@@ -1061,13 +1061,13 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		if (baseZoom > getMaxZoom()) {
 			return false;
 		}
-		if (baseZoom > getMaxZoom() - 1 && dz >= 1) {
+		if (baseZoom > getMaxZoom() - 1 && dz > 1) {
 			return false;
 		}
 		if (baseZoom < getMinZoom()) {
 			return false;
 		}
-		if (baseZoom < getMinZoom() + 1 && dz <= -1) {
+		if (baseZoom < getMinZoom() + 1 && dz < -1) {
 			return false;
 		}
 		return true;
@@ -1114,7 +1114,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 		@Override
 		public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
-			if (!(multiTouchSupport.isInZoomMode()) {
+			if (!multiTouchSupport.isInZoomMode()) {
 				dragToAnimate(e2.getX() + distanceX, e2.getY() + distanceY, e2.getX(), e2.getY(), true);
 			}
 			return true;
