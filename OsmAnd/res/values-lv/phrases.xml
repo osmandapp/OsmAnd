@@ -915,4 +915,10 @@
 	<string name="poi_adit">Raktuvju ieeja</string>
 	<string name="poi_salt_pond">Sāls iegulas</string>
 	<string name="poi_cricket_nets">Kriketa laukums</string>
+	<string name="poi_gasometer">Gāzes krātuve</string>
+	<string name="poi_silo">Skābbarības tornis</string>
+	<string name="poi_storage_tank">Uzglabāšanas konteineris</string>
+
+	<string name="poi_locality">Apkārtne</string>
+	<string name="poi_place_allotments">Piemājas dārziņš</string>
 	</resources>
