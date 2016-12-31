@@ -1029,10 +1029,11 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 			final QuadPoint cp = initialViewport.getCenterPixelPoint();
 			// Keep zoom center fixed or flexible
+			LatLon r;
 			if (multiTouchSupport.isInZoomMode()) {
-				LatLon r = calc.getLatLonFromPixel(cp.x + cp.x - multiTouchSupport.getCenterPoint().x, cp.y + cp.y - multiTouchSupport.getCenterPoint().y);
+				r = calc.getLatLonFromPixel(cp.x + cp.x - multiTouchSupport.getCenterPoint().x, cp.y + cp.y - multiTouchSupport.getCenterPoint().y);
 			} else {
-				LatLon r = calc.getLatLonFromPixel(cp.x + cp.x - initialMultiTouchCenterPoint.x, cp.y + cp.y - initialMultiTouchCenterPoint.y);
+				r = calc.getLatLonFromPixel(cp.x + cp.x - initialMultiTouchCenterPoint.x, cp.y + cp.y - initialMultiTouchCenterPoint.y);
 			}
 			setLatLon(r.getLatitude(), r.getLongitude());
 
