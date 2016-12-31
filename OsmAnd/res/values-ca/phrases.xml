@@ -2535,4 +2535,24 @@
 	<string name="poi_counselling_type_violence_yes">Assessorament (violència): sí</string>
 	<string name="poi_counselling_type_violence_no">Assessorament (violència): no</string>
 
+	<string name="poi_cuisine_fondue">Fondues</string>
+	<string name="poi_cuisine_potato">Patates</string>
+	<string name="poi_cuisine_brasserie">Braseria</string>
+	<string name="poi_cuisine_yogurt">Iogurts</string>
+	<string name="poi_cuisine_falafel">Falàfel</string>
+	<string name="poi_cuisine_bakery">Forn</string>
+	<string name="poi_cuisine_juice">Sucs</string>
+	<string name="poi_cuisine_cake">Pastisos</string>
+	<string name="poi_cuisine_grill">A la brasa</string>
+	<string name="poi_cuisine_crepe">Creps</string>
+	<string name="poi_cuisine_barbecue">Barbacoa</string>
+	<string name="poi_cuisine_ice_cream">Gelats</string>
+	<string name="poi_cuisine_sandwich">Entrepans</string>
+	<string name="poi_cuisine_pizza">Pizzes</string>
+	<string name="poi_cuisine_burger">Hamburgueses</string>
+	<string name="poi_cuisine_coffee">Cafès</string>
+	<string name="poi_cuisine_kebab">Kebabs</string>
+	<string name="poi_cuisine_doner">Dóner kebab (xauarma)</string>
+	<string name="poi_cuisine_chicken">Pollastre</string>
+	<string name="poi_cuisine_sushi">Sushi</string>
 	</resources>
