@@ -488,7 +488,7 @@ La memoria utilizzata è  {1} MB.
     <string name="poi">PDI</string>
     <string name="error_occurred_saving_gpx">Errore durante il salvataggio del GPX</string>
     <string name="error_calculating_route">Errore di calcolo percorso</string>
-    <string name="error_calculating_route_occured">Si è verificato un errore durante il calcolo percorso</string>
+    <string name="error_calculating_route_occured">Si è verificato un errore durante il calcolo del percorso</string>
     <string name="empty_route_calculated">Errore: il percorso calcolato è vuoto</string>
     <string name="new_route_calculated_dist">Calcolo nuovo percorso, distanza</string>
     <string name="arrived_at_destination">Siete arrivati alla vostra destinazione</string>
