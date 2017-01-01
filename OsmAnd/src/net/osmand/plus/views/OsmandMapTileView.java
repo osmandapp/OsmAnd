@@ -158,6 +158,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	private DoubleTapScaleDetector doubleTapScaleDetector;
 	private TwoFingerTapDetector twoFingersTapDetector;
 	private boolean afterTwoFingersTap = false;
+	private boolean afterDoubleTap = false;
 
 	public OsmandMapTileView(MapActivity activity, int w, int h) {
 		this.activity = activity;
@@ -1016,6 +1017,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 					final double lon = tb.getLonFromPixel(e.getX(), e.getY());
 					getAnimatedDraggingThread().startMoving(lat, lon, getZoom() + 1, true);
 				}
+				afterDoubleTap = true;
 				return true;
 			} else {
 				return false;
@@ -1124,8 +1126,9 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 		@Override
 		public boolean onSingleTapConfirmed(MotionEvent e) {
-			if (doubleTapScaleDetector.isDoubleTapping()) {
+			if (doubleTapScaleDetector.isDoubleTapping() || afterDoubleTap) {
 				// Needed to suppress false single tap detection if we mask MotionEvents for gestures on isDoubleTapping()
+				afterDoubleTap = false;
 				return true;
 			}
 			PointF point = new PointF(e.getX(), e.getY());
