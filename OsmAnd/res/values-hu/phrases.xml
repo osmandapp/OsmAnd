@@ -242,7 +242,7 @@
 		<string name="poi_air_transport">Légi közlekedés</string>
 		<string name="poi_water_transport">Vízi közlekedés</string>
 		<string name="poi_bicycle_transport">Kerékpáros közlekedés</string>
-		<string name="poi_aerialway_transport">Felvonók</string>
+		<string name="poi_aerialway_transport">Kötélpályás felvonós szállítás</string>
 	<string name="poi_man_made">Építmény</string>
 		<string name="poi_water_supply">Vízellátás</string>
 		<string name="poi_power">Villamos energia</string>
@@ -330,7 +330,7 @@
 	<string name="poi_halt">Vasúti megállóhely</string>
 	<string name="poi_railway_buffer_stop">Ütközőbak</string>
 	<string name="poi_helipad">Helikopter leszállóhely</string>
-	<string name="poi_aerialway_station">Felvonó állomás</string>
+	<string name="poi_aerialway_station">Kötélpályásfelvonó-állomás</string>
 	<string name="poi_aerialway_cable_car">Nagykabinos felvonó</string>
 	<string name="poi_aerialway_gondola">Gondolakabinos felvonó</string>
 	<string name="poi_aerialway_chair_lift">Üléses felvonó</string>
@@ -340,7 +340,7 @@
 	<string name="poi_aerialway_mixed_lift">Vegyes sílift</string>
 	<string name="poi_aerialway_drag_lift">Sífelvonó</string>
 	<string name="poi_aerialway_rope_tow">Kapaszkodó sílift</string>
-	<string name="poi_aerialway_goods">Áruszállító felvonó</string>
+	<string name="poi_aerialway_goods">Áruszállító kötélpályás felvonó</string>
 	<string name="poi_aerialway_magic_carpet">Szállítószalagos sílift</string>
 
 	<string name="poi_turning_circle">Fordulóhely</string>
@@ -1553,8 +1553,8 @@
 	<string name="poi_aerialway_occupancy">Kabin-/gondola-/üléskapacitás</string>
 	<string name="poi_aerialway_capacity">Óránkénti kapacitás</string>
 	<string name="poi_aerialway_duration">Átlagos menetidő, perc</string>
-	<string name="poi_aerialway_bubble_yes">Buborék (zárt)</string>
-	<string name="poi_aerialway_bubble_no">Nincs buborék (nem zárt)</string>
+	<string name="poi_aerialway_bubble_yes">Buborékos (zárt)</string>
+	<string name="poi_aerialway_bubble_no">Nem buborékos (nem zárt)</string>
 	<string name="poi_aerialway_heating_yes">Igen</string>
 	<string name="poi_aerialway_heating_no">Fűtetlen</string>
 	<string name="poi_aerialway_bicycle_yes">Szállítható</string>
