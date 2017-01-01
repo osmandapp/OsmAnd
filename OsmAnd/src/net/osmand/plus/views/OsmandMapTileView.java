@@ -157,7 +157,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	private MultiTouchSupport multiTouchSupport;
 	private DoubleTapScaleDetector doubleTapScaleDetector;
 	private TwoFingerTapDetector twoFingersTapDetector;
-	private boolean afterTwoFingersTap = false;
+	//private boolean afterTwoFingersTap = false;
 	private boolean afterDoubleTap = false;
 
 	public OsmandMapTileView(MapActivity activity, int w, int h) {
@@ -218,7 +218,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		twoFingersTapDetector = new TwoFingerTapDetector() {
 			@Override
 			public void onTwoFingerTap() {
-				afterTwoFingersTap = true;
+				//afterTwoFingersTap = true;
 				if (isZoomingAllowed(getZoom(), -1)) {
 					getAnimatedDraggingThread().startZooming(getZoom() - 1, currentViewport.getZoomFloatPart(), true);
 				}
@@ -1092,9 +1092,9 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		public void onLongPress(MotionEvent e) {
 			if (multiTouchSupport.isInZoomMode()
 					|| doubleTapScaleDetector.isInZoomMode()
-					|| doubleTapScaleDetector.isDoubleTapping()
-					|| afterTwoFingersTap) {
-				afterTwoFingersTap = false;
+					|| doubleTapScaleDetector.isDoubleTapping()) {
+				//	|| afterTwoFingersTap) {
+				//afterTwoFingersTap = false;
 				return;
 			}
 			if (LOG.isDebugEnabled()) {
