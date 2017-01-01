@@ -219,7 +219,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			@Override
 			public void onTwoFingerTap() {
 				//afterTwoFingersTap = true;
-				if (isZoomingAllowed(getZoom(), -1)) {
+				if (isZoomingAllowed(getZoom(), -1.1f)) {
 					getAnimatedDraggingThread().startZooming(getZoom() - 1, currentViewport.getZoomFloatPart(), true);
 				}
 			}
