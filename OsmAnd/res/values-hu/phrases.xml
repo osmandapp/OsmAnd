@@ -604,7 +604,7 @@
 	<string name="poi_stile">Létra</string>
 	<string name="poi_height_restrictor">Magasságkorlátozó</string>
 	<string name="poi_sally_port">Városkapu</string>
-	<string name="poi_swing_gate">Elfordítós sorompó</string>
+	<string name="poi_swing_gate">Elforduló sorompó</string>
 	<string name="poi_turnstile">Forgókapu</string>
 	<string name="poi_barrier_entrance">Átjáró falon vagy kerítésen</string>
 	<string name="poi_entrance_main">Főbejárat</string>
@@ -1653,10 +1653,10 @@
 	<string name="poi_inscription">Felirat</string>
 	<string name="poi_resource_aggregate">Zúzott kő</string>
 	<string name="poi_shelter_type_public_transport">Tömegközlekedés</string>
-	<string name="poi_shelter_type_picnic_shelter">Piknikező kunyhó</string>
+	<string name="poi_shelter_type_picnic_shelter">Fedett piknikezőhely</string>
 	<string name="poi_shelter_type_weather_shelter">Esőház</string>
-	<string name="poi_shelter_type_lean_to">Féltető</string>
-	<string name="poi_shelter_type_basic_hut">Egyszerű kunyhó</string>
+	<string name="poi_shelter_type_lean_to">Háromfalú fészer</string>
+	<string name="poi_shelter_type_basic_hut">Bivakkunyhó</string>
 	<string name="poi_shelter_type_building">Épület</string>
 	<string name="poi_shelter_type_wildlife_hide">Vadfigyelő rejtek</string>
 	<string name="poi_shelter_type_rock_shelter">Sziklaüreg</string>
@@ -2332,7 +2332,7 @@
 	<string name="poi_refugee_no">Menekültek: nem</string>
 
 	<string name="poi_social_facility_food_bank">Élelmiszerbank</string>
-	<string name="poi_social_facility_shelter">Hajléktalanszálló</string>
+	<string name="poi_social_facility_shelter">Átmeneti szálló</string>
 	<string name="poi_social_facility_ambulatory_care">Ambuláns ellátás</string>
 	<string name="poi_social_facility_workshop">Szociális foglalkoztató</string>
 	<string name="poi_social_facility_for_senior">Idősek</string>
