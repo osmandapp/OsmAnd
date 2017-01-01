@@ -220,6 +220,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			public void onTwoFingerTap() {
 				//afterTwoFingersTap = true;
 				if (isZoomingAllowed(getZoom(), -1.1f)) {
+					refreshMap();
 					getAnimatedDraggingThread().startZooming(getZoom() - 1, currentViewport.getZoomFloatPart(), true);
 				}
 			}
