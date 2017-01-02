@@ -111,13 +111,13 @@ public class MultiTouchSupport {
 				angleStarted = angle;
 				inZoomMode = true;
 				return true;
-			// End only on second-last pointer up, see above?
-			} else if(actionCode == ACTION_POINTER_UP){
-				if(inZoomMode){
-					listener.onZoomOrRotationEnded(zoomRelative, angleRelative);
-					inZoomMode = false;
-				}
-				return true;
+			// End only on second-last pointer up, see above
+			//} else if(actionCode == ACTION_POINTER_UP){
+			//	if(inZoomMode){
+			//		listener.onZoomOrRotationEnded(zoomRelative, angleRelative);
+			//		inZoomMode = false;
+			//	}
+			//	return true;
 			} else if(inZoomMode && actionCode == MotionEvent.ACTION_MOVE){
 				// Keep zoom center fixed or flexible
 				centerPoint = new PointF((x1 + x2) / 2, (y1 + y2) / 2);
