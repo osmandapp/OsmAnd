@@ -119,16 +119,15 @@ public class MultiTouchSupport {
 					listener.onGestureInit(x1, y1, x2, y2);
 					return true;
 				}
-				// End only on second-last pointer up, see above
-				//case MotionEvent.ACTION_POINTER_UP: {
+				case MotionEvent.ACTION_POINTER_UP: {
 
-				//	if (inZoomMode || inTiltMode) {
-				//		listener.onGestureFinished(scale, rotation);
-				//		inZoomMode = false;
-				//		inTiltMode = false;
-				//	}
-				//	return true;
-				//}
+					if (inZoomMode || inTiltMode) {
+						listener.onGestureFinished(scale, rotation);
+						inZoomMode = false;
+						inTiltMode = false;
+					}
+					return true;
+				}
 				case MotionEvent.ACTION_MOVE: {
 
 					if (inZoomMode) {
