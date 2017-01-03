@@ -78,7 +78,7 @@ public class MultiTouchSupport {
 	private double zoomRelative = 1;
 	private PointF centerPoint = new PointF();
 
-	private final int mMoveZoomCenterSlop2 = ViewConfiguration.getScaledTouchSlop() * ViewConfiguration.getScaledTouchSlop() / 4;
+	private static final int mMoveZoomCenterSlop2 = ViewConfiguration.getScaledTouchSlop() * ViewConfiguration.getScaledTouchSlop() / 4;
 	private boolean mScrolling = false;
 
 	public boolean onTouchEvent(MotionEvent event){
