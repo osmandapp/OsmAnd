@@ -220,10 +220,10 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			public void onTwoFingerTap() {
 				//afterTwoFingersTap = true;
 				if (isZoomingAllowed(getZoom(), -1.1f)) {
-					boolean mapLinked = MapActivity.getMapViewTrackingUtilities().isMapLinkedToLocation();
+					boolean mapLinked = ctx.getMapViewTrackingUtilities().isMapLinkedToLocation();
 					getAnimatedDraggingThread().startZooming(getZoom() - 1, currentViewport.getZoomFloatPart(), false);
 					if (mapLinked) {
-						MapActivity.getMapViewTrackingUtilities().setMapLinkedToLocation(true);
+						ctx.getMapViewTrackingUtilities().setMapLinkedToLocation(true);
 					}
 				}
 			}
