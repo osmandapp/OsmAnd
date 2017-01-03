@@ -2498,6 +2498,7 @@ If you need help with OsmAnd application, please contact our support team: suppo
     <string name="quick_action_navigation_voice_discr">Tap on action will disable or enable voice during navigation.</string>
     <string name="quick_action_add_parking_discr">Tap on action will add Parking place to the specified location.</string>
     <string name="quick_action_favorite_dialog">Show favorite dialog</string>
+    <string name="quick_action_gpx_dialog">Show GPX waypoint dialog</string>
     <string name="favorite_autofill_toast_text">" is saved to "</string>
     <string name="favorite_empty_place_name">Place</string>
     <string name="quick_action_duplicates">Specified quick action name already in use, was changed to %1$s to avoid duplication.</string>
@@ -2510,4 +2511,7 @@ If you need help with OsmAnd application, please contact our support team: suppo
     <string name="quick_action_add_create_items">Create items</string>
     <string name="quick_action_add_configure_map">Configure map</string>
     <string name="quick_action_add_navigation">Navigation</string>
+    <string name="quick_action_fav_name_discr">Leave field blank and OsmAnd will use the address or name of a place for the favorite point</string>
+    <string name="quick_action_category_discr">You can select a category to save favorite point.</string>
+    <string name="quick_action_gpx_category_discr">You can select a category to save GPX waypoint point.</string>
 </resources>

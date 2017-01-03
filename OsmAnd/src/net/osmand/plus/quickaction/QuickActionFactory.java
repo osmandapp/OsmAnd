@@ -553,6 +553,11 @@ public class QuickActionFactory {
 
         public static final int TYPE = 6;
 
+        public static final String KEY_NAME = "name";
+        public static final String KEY_DIALOG = "dialog";
+        public static final String KEY_CATEGORY_NAME = "category_name";
+        public static final String KEY_CATEGORY_COLOR = "category_color";
+
         private GPXAction() {
             id = System.currentTimeMillis();
             type = TYPE;
@@ -565,30 +570,149 @@ public class QuickActionFactory {
         }
 
         @Override
-        public void execute(MapActivity activity) {
+        public void execute(final MapActivity activity) {
 
-            LatLon latLon = activity.getMapView()
+            final LatLon latLon = activity.getMapView()
                     .getCurrentRotatedTileBox()
                     .getCenterLatLon();
 
-            PointDescription pointDescription = new PointDescription(
-                    latLon.getLatitude(),
-                    latLon.getLongitude());
+            final String title = getParams().get(KEY_NAME);
 
-            activity.getContextMenu().init(latLon, pointDescription, null);
-            activity.getContextMenu().addWptPt();
+            if (title == null || title.isEmpty()) {
+
+                final Dialog progressDialog = new ProgressDialog(activity);
+                progressDialog.setCancelable(false);
+                progressDialog.setTitle(R.string.search_address);
+                progressDialog.show();
+
+                GeocodingLookupService.AddressLookupRequest lookupRequest = new GeocodingLookupService.AddressLookupRequest(latLon,
+
+                        new GeocodingLookupService.OnAddressLookupResult() {
+
+                            @Override
+                            public void geocodingDone(String address) {
+
+                                progressDialog.dismiss();
+                                activity.getContextMenu().addWptPt(latLon, address,
+                                        getParams().get(KEY_CATEGORY_NAME),
+                                        Integer.valueOf(getParams().get(KEY_CATEGORY_COLOR)),
+                                        !Boolean.valueOf(getParams().get(KEY_DIALOG)));
+                            }
+
+                        }, null);
+
+                activity.getMyApplication().getGeocodingLookupService().lookupAddress(lookupRequest);
+
+            } else activity.getContextMenu().addWptPt(latLon, title,
+                    getParams().get(KEY_CATEGORY_NAME),
+                    Integer.valueOf(getParams().get(KEY_CATEGORY_COLOR)),
+                    !Boolean.valueOf(getParams().get(KEY_DIALOG)));
         }
 
         @Override
-        public void drawUI(ViewGroup parent, MapActivity activity) {
+        public void drawUI(final ViewGroup parent, final MapActivity activity) {
 
-            View view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.quick_action_with_text, parent, false);
+            FavouritesDbHelper helper = activity.getMyApplication().getFavorites();
 
-            ((TextView) view.findViewById(R.id.text)).setText(
-                    R.string.quick_action_add_gpx_discr);
+            final View root = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.quick_action_add_gpx, parent, false);
 
-            parent.addView(view);
+            parent.addView(root);
+
+            AutoCompleteTextViewEx categoryEdit = (AutoCompleteTextViewEx) root.findViewById(R.id.category_edit);
+            SwitchCompat showDialog = (SwitchCompat) root.findViewById(R.id.saveButton);
+            ImageView categoryImage = (ImageView) root.findViewById(R.id.category_image);
+            EditText name = (EditText) root.findViewById(R.id.name_edit);
+
+            if (!getParams().isEmpty()) {
+
+                showDialog.setChecked(Boolean.valueOf(getParams().get(KEY_DIALOG)));
+                categoryImage.setColorFilter(Integer.valueOf(getParams().get(KEY_CATEGORY_COLOR)));
+                name.setText(getParams().get(KEY_NAME));
+                categoryEdit.setText(getParams().get(KEY_CATEGORY_NAME));
+
+                if (getParams().get(KEY_NAME).isEmpty() && Integer.valueOf(getParams().get(KEY_CATEGORY_NAME)) == 0) {
+
+                    categoryEdit.setText("");
+                    categoryImage.setColorFilter(activity.getResources().getColor(R.color.icon_color));
+                }
+
+            } else {
+
+                categoryEdit.setText("");
+                categoryImage.setColorFilter(activity.getResources().getColor(R.color.icon_color));
+
+                getParams().put(KEY_CATEGORY_NAME, "");
+                getParams().put(KEY_CATEGORY_COLOR, "0");
+            }
+
+            categoryEdit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(final View view) {
+
+                    SelectCategoryDialogFragment dialogFragment = SelectCategoryDialogFragment.createInstance("");
+
+                    dialogFragment.show(
+                            activity.getSupportFragmentManager(),
+                            SelectCategoryDialogFragment.TAG);
+
+                    dialogFragment.setSelectionListener(new SelectCategoryDialogFragment.CategorySelectionListener() {
+                        @Override
+                        public void onCategorySelected(String category, int color) {
+
+                            fillGroupParams(root, category, color);
+                        }
+                    });
+                }
+            });
+
+            SelectCategoryDialogFragment dialogFragment = (SelectCategoryDialogFragment)
+                    activity.getSupportFragmentManager().findFragmentByTag(SelectCategoryDialogFragment.TAG);
+
+            if (dialogFragment != null) {
+
+                dialogFragment.setSelectionListener(new SelectCategoryDialogFragment.CategorySelectionListener() {
+                    @Override
+                    public void onCategorySelected(String category, int color) {
+
+                        fillGroupParams(root, category, color);
+                    }
+                });
+
+            } else {
+
+                EditCategoryDialogFragment dialog = (EditCategoryDialogFragment)
+                        activity.getSupportFragmentManager().findFragmentByTag(EditCategoryDialogFragment.TAG);
+
+                if (dialog != null) {
+
+                    dialogFragment.setSelectionListener(new SelectCategoryDialogFragment.CategorySelectionListener() {
+                        @Override
+                        public void onCategorySelected(String category, int color) {
+
+                            fillGroupParams(root, category, color);
+                        }
+                    });
+                }
+            }
+        }
+
+        @Override
+        public void fillParams(View root, MapActivity activity) {
+
+            getParams().put(KEY_NAME, ((EditText) root.findViewById(R.id.name_edit)).getText().toString());
+            getParams().put(KEY_DIALOG, Boolean.toString(((SwitchCompat) root.findViewById(R.id.saveButton)).isChecked()));
+        }
+
+        private void fillGroupParams(View root, String name, int color) {
+
+            if (color == 0) color = R.color.icon_color;
+
+            ((AutoCompleteTextViewEx) root.findViewById(R.id.category_edit)).setText(name);
+            ((ImageView) root.findViewById(R.id.category_image)).setColorFilter(color);
+
+            getParams().put(KEY_CATEGORY_NAME, name);
+            getParams().put(KEY_CATEGORY_COLOR, String.valueOf(color));
         }
     }
 

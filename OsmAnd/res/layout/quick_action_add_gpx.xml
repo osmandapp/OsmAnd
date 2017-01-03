@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:padding="16dp"
             android:layout_gravity="center"
-            android:text="@string/quick_action_favorite_dialog"
+            android:text="@string/quick_action_gpx_dialog"
             android:textColor="?android:textColorPrimary"
             android:textSize="@dimen/default_list_text_size"
             android:layout_weight="1"
@@ -118,7 +118,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="68dp"
             android:layout_marginRight="16dp"
-            android:text="@string/quick_action_fav_name_discr"
+            android:text="Leave field blank and OsmAnd will use the address or name of a place for the favorite point"
             android:textColor="?android:textColorSecondary"
             android:textSize="@dimen/default_sub_text_size"
             android:layout_marginBottom="16dp"/>
@@ -192,7 +192,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="68dp"
             android:layout_marginRight="16dp"
-            android:text="@string/quick_action_category_discr"
+            android:text="@string/quick_action_gpx_category_discr"
             android:textColor="?android:textColorSecondary"
             android:textSize="@dimen/default_sub_text_size"
             android:layout_marginBottom="16dp"/>
