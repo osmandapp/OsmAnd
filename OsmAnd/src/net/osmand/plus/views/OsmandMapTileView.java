@@ -1053,7 +1053,15 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			if (!isZoomingAllowed(baseZoom, dz)) {
 				dz = Math.signum(dz);
 			}
-			zoomToAnimate(baseZoom, dz, !doubleTapScaleDetector.isInZoomMode());
+
+			//Try some slop logic here to better facilitate two finger tap zoom without losing map-linked-to-location
+			boolean loseLocationLinkSlop = (multiTouchSupport.getCenterPoint().x - initialMultiTouchCenterPoint.x)
+				* (multiTouchSupport.getCenterPoint().x - initialMultiTouchCenterPoint.x)
+				+ (multiTouchSupport.getCenterPoint().y - initialMultiTouchCenterPoint.y)
+				* (multiTouchSupport.getCenterPoint().y - initialMultiTouchCenterPoint.y))
+				< 64;
+
+			zoomToAnimate(baseZoom, dz, !(doubleTapScaleDetector.isInZoomMode() || loseLocationLinkSlop);
 			rotateToAnimate(calcRotate);
 		}
 
