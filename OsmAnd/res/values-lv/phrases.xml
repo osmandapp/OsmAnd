@@ -1021,4 +1021,14 @@
 	<string name="poi_denomination_congregational">Kongregacionālistu</string>
 	<string name="poi_denomination_scientist">Saintisms</string>
 	<string name="poi_denomination_wesleyan">Veslejāņu</string>
+	<string name="poi_denomination_shingon_shu">Šingon šu</string>
+	<string name="poi_piste_sleigh">Kamanu trase</string>
+	<string name="poi_beach_resort">Pludmales kūrorts</string>
+	<string name="poi_hunting_stand">Medību slēpnis</string>
+	<string name="poi_recreation_ground">Spēļu laukums</string>
+	<string name="poi_trail_riding_station">Zirgu izjādes</string>
+
+	<string name="poi_food_court">Publiskā ēstuve</string>
+	<string name="poi_barbecue">Barbekjū</string>
+
 	</resources>
