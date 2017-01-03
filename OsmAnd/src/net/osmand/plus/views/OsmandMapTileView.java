@@ -1053,7 +1053,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			if (!isZoomingAllowed(baseZoom, dz)) {
 				dz = Math.signum(dz);
 			}
-			zoomToAnimate(baseZoom, dz, !(doubleTapScaleDetector.isInZoomMode() || afterDoubleTap));
+			zoomToAnimate(baseZoom, dz, !doubleTapScaleDetector.isInZoomMode());
 			rotateToAnimate(calcRotate);
 		}
 
