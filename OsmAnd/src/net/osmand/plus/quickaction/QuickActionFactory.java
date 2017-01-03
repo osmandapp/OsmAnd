@@ -49,6 +49,15 @@ public class QuickActionFactory {
         return quickActions != null ? quickActions : new ArrayList<QuickAction>();
     }
 
+    public List<QuickAction> parseAndFilterActiveActionsList(String json) {
+
+        Type type = new TypeToken<List<QuickAction>>() {
+        }.getType();
+        ArrayList<QuickAction> quickActions = new Gson().fromJson(json, type);
+
+        return quickActions != null ? quickActions : new ArrayList<QuickAction>();
+    }
+
     public static List<QuickAction> produceTypeActionsList() {
 
         ArrayList<QuickAction> quickActions = new ArrayList<>();
@@ -67,13 +76,21 @@ public class QuickActionFactory {
         ArrayList<QuickAction> quickActions = new ArrayList<>();
 
         quickActions.add(new QuickAction(0, R.string.quick_action_add_create_items));
-        quickActions.add(new MarkerAction());
         quickActions.add(new FavoriteAction());
         quickActions.add(new GPXAction());
-        quickActions.add(new ParkingAction());
-        quickActions.add(new TakeAudioNoteAction());
-        quickActions.add(new TakePhotoNoteAction());
-        quickActions.add(new TakeVideoNoteAction());
+        quickActions.add(new MarkerAction());
+
+        if (OsmandPlugin.getEnabledPlugin(AudioVideoNotesPlugin.class) != null) {
+
+            quickActions.add(new TakeAudioNoteAction());
+            quickActions.add(new TakePhotoNoteAction());
+            quickActions.add(new TakeVideoNoteAction());
+        }
+
+        if (OsmandPlugin.getEnabledPlugin(ParkingPositionPlugin.class) != null) {
+
+            quickActions.add(new ParkingAction());
+        }
 
         quickActions.add(new QuickAction(0, R.string.quick_action_add_configure_map));
         quickActions.add(new ShowHideFavoritesAction());

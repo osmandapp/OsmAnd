@@ -153,7 +153,7 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionRe
             quickActionsWidget.setSelectionListener(null);
         } else {
             enterMovingMode(mapActivity.getMapView().getCurrentRotatedTileBox());
-            quickActionsWidget.setActions(quickActionRegistry.getQuickActions());
+            quickActionsWidget.setActions(quickActionRegistry.getFilteredQuickActions());
             quickActionRegistry.setUpdatesListener(MapQuickActionLayer.this);
             quickActionsWidget.setSelectionListener(MapQuickActionLayer.this);
         }
@@ -259,7 +259,7 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionRe
 
     @Override
     public void onActionsUpdated() {
-        quickActionsWidget.setActions(quickActionRegistry.getQuickActions());
+        quickActionsWidget.setActions(quickActionRegistry.getFilteredQuickActions());
     }
 
     @Override

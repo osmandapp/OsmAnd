@@ -5,7 +5,10 @@ import android.content.Context;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
+import net.osmand.plus.parkingpoint.ParkingPositionPlugin;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -51,10 +54,42 @@ public class QuickActionRegistry {
 
     public List<QuickAction> getQuickActions() {
 
-        ArrayList<QuickAction> actions = new ArrayList<>();
+        List<QuickAction> actions = new ArrayList<>();
         actions.addAll(quickActions);
 
         return actions;
+    }
+
+    public List<QuickAction> getFilteredQuickActions() {
+
+        List<QuickAction> actions = getQuickActions();
+        List<QuickAction> filteredActions = new ArrayList<>();
+
+        for (QuickAction action: actions){
+
+            boolean skip = false;
+
+            if (OsmandPlugin.getEnabledPlugin(AudioVideoNotesPlugin.class) == null) {
+
+                if (action.type == QuickActionFactory.TakeAudioNoteAction.TYPE ||
+                        action.type == QuickActionFactory.TakePhotoNoteAction.TYPE ||
+                        action.type == QuickActionFactory.TakeVideoNoteAction.TYPE) {
+
+                    skip = true;
+                }
+            }
+
+            if (OsmandPlugin.getEnabledPlugin(ParkingPositionPlugin.class) == null) {
+
+                if (action.type == QuickActionFactory.ParkingAction.TYPE) {
+                    skip = true;
+                }
+            }
+
+            if (!skip) filteredActions.add(action);
+        }
+
+        return filteredActions;
     }
 
     public void addQuickAction(QuickAction action){

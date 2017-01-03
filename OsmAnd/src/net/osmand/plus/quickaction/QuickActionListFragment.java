@@ -93,7 +93,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
         ItemTouchHelper.Callback touchHelperCallback = new QuickActionItemTouchHelperCallback(adapter);
         touchHelper = new ItemTouchHelper(touchHelperCallback);
         touchHelper.attachToRecyclerView(quickActionRV);
-        adapter.addItems(quickActionRegistry.getQuickActions());
+        adapter.addItems(quickActionRegistry.getFilteredQuickActions());
 
         quickActionRV.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -168,7 +168,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
 
     @Override
     public void onActionsUpdated() {
-        adapter.addItems(quickActionRegistry.getQuickActions());
+        adapter.addItems(quickActionRegistry.getFilteredQuickActions());
     }
 
     public class QuickActionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements QuickActionItemTouchHelperCallback.OnItemMoveCallback {
