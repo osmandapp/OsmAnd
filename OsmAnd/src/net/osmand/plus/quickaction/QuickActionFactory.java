@@ -21,6 +21,7 @@ import net.osmand.plus.GeocodingLookupService;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.mapcontextmenu.editors.EditCategoryDialogFragment;
 import net.osmand.plus.mapcontextmenu.editors.SelectCategoryDialogFragment;
 import net.osmand.plus.parkingpoint.ParkingPositionPlugin;
@@ -70,6 +71,9 @@ public class QuickActionFactory {
         quickActions.add(new FavoriteAction());
         quickActions.add(new GPXAction());
         quickActions.add(new ParkingAction());
+        quickActions.add(new TakeAudioNoteAction());
+        quickActions.add(new TakePhotoNoteAction());
+        quickActions.add(new TakeVideoNoteAction());
 
         quickActions.add(new QuickAction(0, R.string.quick_action_add_configure_map));
         quickActions.add(new ShowHideFavoritesAction());
@@ -103,6 +107,15 @@ public class QuickActionFactory {
             case ParkingAction.TYPE:
                 return new ParkingAction();
 
+            case TakeAudioNoteAction.TYPE:
+                return new TakeAudioNoteAction();
+
+            case TakePhotoNoteAction.TYPE:
+                return new TakePhotoNoteAction();
+
+            case TakeVideoNoteAction.TYPE:
+                return new TakeVideoNoteAction();
+
             default:
                 return new QuickAction();
         }
@@ -132,6 +145,15 @@ public class QuickActionFactory {
 
             case ParkingAction.TYPE:
                 return new ParkingAction(quickAction);
+
+            case TakeAudioNoteAction.TYPE:
+                return new TakeAudioNoteAction(quickAction);
+
+            case TakePhotoNoteAction.TYPE:
+                return new TakePhotoNoteAction(quickAction);
+
+            case TakeVideoNoteAction.TYPE:
+                return new TakeVideoNoteAction(quickAction);
 
             default:
                 return quickAction;
@@ -562,6 +584,123 @@ public class QuickActionFactory {
 
             ((TextView) view.findViewById(R.id.text)).setText(
                     R.string.quick_action_add_parking_discr);
+
+            parent.addView(view);
+        }
+    }
+
+    public static class TakeAudioNoteAction extends QuickAction {
+        public static final int TYPE = 8;
+
+        protected TakeAudioNoteAction() {
+            id = System.currentTimeMillis();
+            type = TYPE;
+            nameRes = R.string.quick_action_take_audio_note;
+            iconRes = R.drawable.ic_action_micro_dark;
+        }
+
+        public TakeAudioNoteAction(QuickAction quickAction) {
+            super(quickAction);
+        }
+
+        @Override
+        public void execute(MapActivity activity) {
+
+            LatLon latLon = activity.getMapView()
+                    .getCurrentRotatedTileBox()
+                    .getCenterLatLon();
+
+            AudioVideoNotesPlugin plugin = OsmandPlugin.getPlugin(AudioVideoNotesPlugin.class);
+            if (plugin != null)
+                plugin.recordAudio(latLon.getLatitude(), latLon.getLongitude(), activity);
+        }
+
+        @Override
+        public void drawUI(ViewGroup parent, MapActivity activity) {
+
+            View view = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.quick_action_with_text, parent, false);
+
+            ((TextView) view.findViewById(R.id.text)).setText(
+                    R.string.quick_action_take_audio_note_discr);
+
+            parent.addView(view);
+        }
+    }
+
+    public static class TakeVideoNoteAction extends QuickAction {
+        public static final int TYPE = 9;
+
+        protected TakeVideoNoteAction() {
+            id = System.currentTimeMillis();
+            type = TYPE;
+            nameRes = R.string.quick_action_take_video_note ;
+            iconRes = R.drawable.ic_action_video_dark;
+        }
+
+        public TakeVideoNoteAction(QuickAction quickAction) {
+            super(quickAction);
+        }
+
+        @Override
+        public void execute(MapActivity activity) {
+
+            LatLon latLon = activity.getMapView()
+                    .getCurrentRotatedTileBox()
+                    .getCenterLatLon();
+
+            AudioVideoNotesPlugin plugin = OsmandPlugin.getPlugin(AudioVideoNotesPlugin.class);
+            if (plugin != null)
+                plugin.recordVideo(latLon.getLatitude(), latLon.getLongitude(), activity);
+        }
+
+        @Override
+        public void drawUI(ViewGroup parent, MapActivity activity) {
+
+            View view = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.quick_action_with_text, parent, false);
+
+            ((TextView) view.findViewById(R.id.text)).setText(
+                    R.string.quick_action_take_video_note_discr);
+
+            parent.addView(view);
+        }
+    }
+
+    public static class TakePhotoNoteAction extends QuickAction {
+        public static final int TYPE = 10;
+
+        protected TakePhotoNoteAction() {
+            id = System.currentTimeMillis();
+            type = TYPE;
+            nameRes = R.string.quick_action_take_photo_note;
+            iconRes = R.drawable.ic_action_photo_dark;
+        }
+
+        public TakePhotoNoteAction(QuickAction quickAction) {
+            super(quickAction);
+        }
+
+        @Override
+        public void execute(MapActivity activity) {
+
+            LatLon latLon = activity.getMapView()
+                    .getCurrentRotatedTileBox()
+                    .getCenterLatLon();
+
+            AudioVideoNotesPlugin plugin = OsmandPlugin.getPlugin(AudioVideoNotesPlugin.class);
+            if (plugin != null)
+                plugin.takePhoto(latLon.getLatitude(), latLon.getLongitude(), activity, false);
+        }
+
+        @Override
+        public void drawUI(ViewGroup parent, MapActivity activity) {
+
+            View view = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.quick_action_with_text, parent, false);
+
+            ((TextView) view.findViewById(R.id.text)).setText(
+                    R.string.quick_action_take_photo_note_discr);
 
             parent.addView(view);
         }
