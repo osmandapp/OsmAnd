@@ -818,7 +818,7 @@
 	<string name="poi_military_range">Militārais lauks</string>
 	<string name="poi_military_office">Militārais dienests</string>
 	<string name="poi_military_naval_base">Jūras karaspēku bāze</string>
-	<string name="poi_military_nuclear_explosion_site">Atombumbu izmēğinājumu lauks</string>
+	<string name="poi_military_nuclear_explosion_site">Atombumbu eksploziju lauks</string>
 
 	<string name="poi_wiki_place">Vikipēdija</string>
 	<string name="poi_wiki_lang_en">Angļu vikipēdija</string>
@@ -1048,4 +1048,35 @@
 	<string name="poi_craft_insulation">Būvkonstrukciju izolācija</string>
 	<string name="poi_craft_metal_construction">Metāla konstrukcijas</string>
 	<string name="poi_craft_optician">Optika</string>
+	<string name="poi_craft_stand_builder">Stendu izgatavošana</string>
+	<string name="poi_craft_upholsterer">Mēbeļu apšūšanas darbi</string>
+	<string name="poi_craft_window_construction">Logu konstrukcijas</string>
+
+	<string name="poi_craft_computer">Datori</string>
+	<string name="poi_cutline">Stiga</string>
+	<string name="poi_money_lender">Augļotāji</string>
+	<string name="poi_bureau_de_change">Valūtas maiņa</string>
+	<string name="poi_accountant">Grāmatvedis</string>
+	<string name="poi_dry_dock">Sausais doks</string>
+	<string name="poi_wiki_lang_id">Indonēziešu vikipēdija</string>
+	<string name="poi_wiki_lang_it">Itāliešu vikipēdija</string>
+	<string name="poi_wiki_lang_ja">Japāņu vikipēdija</string>
+	<string name="poi_wiki_lang_ko">Korejiešu vikipēdija</string>
+	<string name="poi_wiki_lang_lt">Lietuviešu vikipēdija</string>
+	<string name="poi_wiki_lang_lv">Latviešu vikipēdija</string>
+	<string name="poi_wiki_lang_ms">Malajiešu vikipēdija</string>
+	<string name="poi_wiki_lang_new">Nevaru vikipēdija</string>
+	<string name="poi_wiki_lang_nl">Holandiešu vikipēdija</string>
+	<string name="poi_wiki_lang_nn">Norvēğu (nynorsk) vikipēdija</string>
+	<string name="poi_wiki_lang_no">Norvēğu vikipēdija</string>
+	<string name="poi_wiki_lang_pl">Poļu vikipēdija</string>
+	<string name="poi_wiki_lang_pt">Portugāļu vikipēdija</string>
+	<string name="poi_wiki_lang_ro">Rumāņu vikipēdija</string>
+	<string name="poi_wiki_lang_ru">Krievu vikipēdija</string>
+	<string name="poi_wiki_lang_sk">Slovāku vikipēdija</string>
+	<string name="poi_wiki_lang_sl">Slovēņu vikipēdija</string>
+	<string name="poi_wiki_lang_sr">Serbu vikipēdija</string>
+	<string name="poi_wiki_lang_sv">Zviedru vikipēdija</string>
+	<string name="poi_wiki_lang_sw">Svahili vikipēdija</string>
+	<string name="poi_wiki_lang_te">Telugu vikipēdija</string>
 	</resources>
