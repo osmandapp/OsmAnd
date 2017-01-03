@@ -1157,4 +1157,8 @@
 	<string name="poi_general_barrier">Barjera</string>
 	<string name="poi_stile">Pakāpiens</string>
 	<string name="poi_debris">Gruveši</string>
+	<string name="poi_jersey_barrier">Aizsargbarjera</string>
+	<string name="poi_height_restrictor">Augstuma ierobežotājs</string>
+	<string name="poi_horse_stile">Zirgu stile</string>
+	<string name="poi_kissing_gate">Buču vārti</string>
 	</resources>
