@@ -1243,5 +1243,8 @@
 	<string name="poi_harbour_basin">Ostas baseins</string>
 	<string name="poi_landmark">Ceļazīme</string>
 	<string name="poi_seamark_light">Bāka</string>
-	<string name="poi_seamark_light_major">Galvenā bāka</string>
+	<string name="poi_seamark_light_major">Dižbāka</string>
+	<string name="poi_seamark_light_minor">Mazbāka</string>
+	<string name="poi_seamark_light_float">Gaismas boja</string>
+	<string name="poi_seamark_light_vessel">Peldlīdzekļa gaisma</string>
 	</resources>
