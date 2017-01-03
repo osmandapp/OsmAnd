@@ -3140,7 +3140,7 @@
 	<string name="poi_cuisine_sausage">Wurst</string>
 	<string name="poi_cuisine_cake">Kuchen</string>
 	<string name="poi_cuisine_pasta">Teigwaren</string>
-	<string name="poi_cuisine_fast_food">Fastfood</string>
+	<string name="poi_cuisine_fast_food">Schnellimbiss</string>
 	<string name="poi_cuisine_juice">Saft</string>
 	<string name="poi_cuisine_soba">Soba</string>
 	<string name="poi_cuisine_tea_shop">Teeladen</string>
@@ -3151,7 +3151,7 @@
 	<string name="poi_cuisine_frozen_yogurt">Gefrorener Joghurt</string>
 	<string name="poi_cuisine_fried_food">Frittiertes Essen</string>
 	<string name="poi_cuisine_bistro">Bistro</string>
-	<string name="poi_cuisine_bakery">Backwaren</string>
+	<string name="poi_cuisine_bakery">Bäckerei</string>
 	<string name="poi_cuisine_couscous">Kuskus</string>
 	<string name="poi_cuisine_fried_chicken">Gebratenes Huhn</string>
 	<string name="poi_cuisine_dessert">Nachtisch</string>
@@ -3160,14 +3160,14 @@
 	<string name="poi_cuisine_piadina">Piadina</string>
 	<string name="poi_cuisine_falafel">Falafel</string>
 	<string name="poi_cuisine_smoothie">Smoothie</string>
-	<string name="poi_cuisine_snack">Imbiss(Snack)</string>
+	<string name="poi_cuisine_snack">Imbiss</string>
 	<string name="poi_cuisine_souvlaki">Souvlaki</string>
 	<string name="poi_cuisine_yogurt">Joghurt</string>
 	<string name="poi_cuisine_gyros">Gyros</string>
 	<string name="poi_cuisine_empanada">Empanada</string>
 	<string name="poi_cuisine_crepes">Crepes</string>
 	<string name="poi_cuisine_suki">Suki</string>
-	<string name="poi_cuisine_bubble_tea">Luftblasentee</string>
+	<string name="poi_cuisine_bubble_tea">Bubble Tea</string>
 	<string name="poi_cuisine_meat">Fleisch</string>
 	<string name="poi_cuisine_wings">Flügel</string>
 	<string name="poi_cuisine_waffle">Waffel</string>
@@ -3309,12 +3309,12 @@
 	<string name="poi_locksmith">Schlüsseldienst</string>
 	<string name="poi_lighting">Leuchten</string>
 	<string name="poi_lottery">Lotteriescheine</string>
-	<string name="poi_gambling">Spielhalle</string>
+	<string name="poi_gambling">Spielbank</string>
 
 	<string name="poi_gambling_type">Typ</string>
 	<string name="poi_gambling_lottery">Lotterie</string>
 	<string name="poi_gambling_pachinko">Pachinko</string>
-	<string name="poi_gambling_slot_machines">Münzautomaten</string>
+	<string name="poi_gambling_slot_machines">Spielautomaten</string>
 	<string name="poi_gambling_betting">Wetten</string>
 	<string name="poi_gambling_bingo">Bingo</string>
 
