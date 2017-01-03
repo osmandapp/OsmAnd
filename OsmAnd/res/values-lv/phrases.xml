@@ -1164,4 +1164,20 @@
 	<string name="poi_sally_port">Cietokšņu vārti</string>
 	<string name="poi_swing_gate">Veramie vārti</string>
 	<string name="poi_turnstile">Turnikets</string>
+	<string name="poi_barrier_entrance">Durvju ieeja</string>
+	<string name="poi_entrance_main">Galvenā ieeja</string>
+	<string name="poi_entrance">Ieeja</string>
+	<string name="poi_entrance_exit">Izeja</string>
+
+	<string name="poi_highway_crossing">Gājēju pāreja</string>
+
+	<string name="poi_icn_ref">Starptautiskais velobraucēju tīkla mezgls</string>
+	<string name="poi_ncn_ref">Nacionālais velobraucēju tīkla mezgls</string>
+	<string name="poi_rcn_ref">Reğionālais velobraucēju tīkla mezgls</string>
+	<string name="poi_lcn_ref">Vietējais velobraucēju tīkla mezgls</string>
+	<string name="poi_iwn_ref">Starptautiskais kājām ceļotāju tīkla mezgls</string>
+	<string name="poi_nwn_ref">Nacionālais kājām ceļotāju tīkla mezgls</string>
+	<string name="poi_rwn_ref">Reğionālais kājām ceļotāju tīkla mezgls</string>
+	<string name="poi_lwn_ref">Vietējais kājām ceļotāju tīkla mezgls</string>
+
 	</resources>
