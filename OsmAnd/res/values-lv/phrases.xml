@@ -1151,4 +1151,10 @@
 	<string name="poi_motorcycle_barrier">Motociklu barjera</string>
 	<string name="poi_block">Bloks</string>
 	<string name="poi_bus_trap">Autobusu slazds</string>
+	<string name="poi_cattle_grid">Lopu režğis</string>
+	<string name="poi_full_height_turnstile">Rotējošās durvis</string>
+	<string name="poi_bump_gate">Bampervārti</string>
+	<string name="poi_general_barrier">Barjera</string>
+	<string name="poi_stile">Pakāpiens</string>
+	<string name="poi_debris">Gruveši</string>
 	</resources>
