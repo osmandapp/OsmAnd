@@ -24,6 +24,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.mapcontextmenu.editors.EditCategoryDialogFragment;
 import net.osmand.plus.mapcontextmenu.editors.SelectCategoryDialogFragment;
+import net.osmand.plus.osmedit.EditPoiDialogFragment;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
 import net.osmand.plus.parkingpoint.ParkingPositionPlugin;
 import net.osmand.plus.poi.PoiFiltersHelper;
@@ -88,14 +89,15 @@ public class QuickActionFactory {
             quickActions.add(new TakeVideoNoteAction());
         }
 
+        if (OsmandPlugin.getEnabledPlugin(OsmEditingPlugin.class) != null) {
+
+            quickActions.add(new AddPOIAction());
+            quickActions.add(new AddOSMBugAction());
+        }
+
         if (OsmandPlugin.getEnabledPlugin(ParkingPositionPlugin.class) != null) {
 
             quickActions.add(new ParkingAction());
-        }
-
-        if (OsmandPlugin.getEnabledPlugin(OsmEditingPlugin.class) != null) {
-
-            quickActions.add(new AddOSMBugAction());
         }
 
         quickActions.add(new QuickAction(0, R.string.quick_action_add_configure_map));
@@ -148,6 +150,9 @@ public class QuickActionFactory {
             case AddOSMBugAction.TYPE:
                 return new AddOSMBugAction();
 
+            case AddPOIAction.TYPE:
+                return new AddPOIAction();
+
             default:
                 return new QuickAction();
         }
@@ -192,6 +197,9 @@ public class QuickActionFactory {
 
             case AddOSMBugAction.TYPE:
                 return new AddOSMBugAction(quickAction);
+
+            case AddPOIAction.TYPE:
+                return new AddPOIAction(quickAction);
 
             default:
                 return quickAction;
@@ -814,6 +822,51 @@ public class QuickActionFactory {
 
             ((TextView) view.findViewById(R.id.text)).setText(
                     R.string.quick_action_add_osm_bug_discr);
+
+            parent.addView(view);
+        }
+    }
+
+
+    public static class AddPOIAction extends QuickAction {
+        public static final int TYPE = 13;
+
+        protected AddPOIAction() {
+            id = System.currentTimeMillis();
+            type = TYPE;
+            nameRes = R.string.quick_action_add_poi;
+            iconRes = R.drawable.ic_action_gabout_dark;
+        }
+
+        public AddPOIAction(QuickAction quickAction) {
+            super(quickAction);
+        }
+
+        @Override
+        public void execute(MapActivity activity) {
+
+            LatLon latLon = activity.getMapView()
+                    .getCurrentRotatedTileBox()
+                    .getCenterLatLon();
+
+            OsmEditingPlugin plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
+            if (plugin != null) {
+                EditPoiDialogFragment editPoiDialogFragment =
+                        EditPoiDialogFragment.createAddPoiInstance(latLon.getLatitude(), latLon.getLongitude(),
+                                activity.getMyApplication());
+                editPoiDialogFragment.show(activity.getSupportFragmentManager(),
+                        EditPoiDialogFragment.TAG);
+            }
+        }
+
+        @Override
+        public void drawUI(ViewGroup parent, MapActivity activity) {
+
+            View view = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.quick_action_with_text, parent, false);
+
+            ((TextView) view.findViewById(R.id.text)).setText(
+                    R.string.quick_action_add_poi_discr);
 
             parent.addView(view);
         }
