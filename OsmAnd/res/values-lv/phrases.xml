@@ -921,4 +921,50 @@
 
 	<string name="poi_locality">Apkārtne</string>
 	<string name="poi_place_allotments">Piemājas dārziņš</string>
+	<string name="poi_financial">Finanšu iestāde</string>
+	<string name="poi_political_party">Politisko partiju birojs</string>
+	<string name="poi_foundation">Fondu ofiss</string>
+	<string name="poi_tax_advisor">Nodokļu konsultantu birojs</string>
+
+	<string name="poi_astronomical_observatory">Astronomiskā</string>
+	<string name="poi_pitch">Sporta laukums</string>
+	<string name="poi_bowls">Bowlings</string>
+	<string name="poi_climbing">Kalnkāpšana</string>
+	<string name="poi_field_hockey">Lauka hokejs</string>
+	<string name="poi_paragliding">Paraplanierisms</string>
+	<string name="poi_rugby_union">Regbija apvienība</string>
+	<string name="poi_rugby_league">Regbija līga</string>
+	<string name="poi_boundary_stone">Stūrakmens</string>
+	<string name="poi_historic_cannon">Senatnīgs lielgabals</string>
+	<string name="poi_historic_ruins">Vēsturiskās drupas</string>
+	<string name="poi_rune_stone">Rūnakmens</string>
+	<string name="poi_historic_ship">Senatnīgs kuğis</string>
+	<string name="poi_historic_mine">Vēsturiska šahta</string>
+	<string name="poi_attraction">Tūristus interesējoša vieta</string>
+<string name="poi_tourism_yes">Tūristu objekts</string>
+	<string name="poi_attraction_water_slide">Ūdenskalniņš</string>
+
+	<string name="poi_religion_christian">Kristietība</string>
+	<string name="poi_religion_sikh">Sikhisms</string>
+	<string name="poi_religion_shinto">Šintoisms</string>
+	<string name="poi_religion_taoist">Taoisms</string>
+	<string name="poi_religion_voodoo">Vudu</string>
+	<string name="poi_religion_unitarian_universalist">Unitāriešu universālisti</string>
+	<string name="poi_religion_multifaith">Daudzkonfesionālisms</string>
+	<string name="poi_religion_jain">Džainisms</string>
+	<string name="poi_religion_spiritualist">Spirituālisms</string>
+	<string name="poi_religion_bahai">Bahaisms</string>
+	<string name="poi_religion_scientologist">Saintoloğija</string>
+	<string name="poi_religion_tenrikyo">Tenrikjo</string>
+	<string name="poi_religion_zoroastrian">Zoroastrisms</string>
+
+	<string name="poi_denomination_roman_catholic">Romu katoļu</string>
+	<string name="poi_denomination_orthodox">Pareizticīgie</string>
+	<string name="poi_denomination_sunni">Sunnisms</string>
+	<string name="poi_denomination_evangelical">Evanğēlisti</string>
+	<string name="poi_denomination_russian_orthodox">Krievu pareizticīgie</string>
+	<string name="poi_denomination_greek_orthodox">Grieķu pareizticīgie</string>
+	<string name="poi_denomination_reformed">Kalvinisms</string>
+	<string name="poi_denomination_new_apostolic">Jaunā apustulistiskā draudze</string>
+	<string name="poi_denomination_church_of_england">Anglijas baznīca</string>
 	</resources>
