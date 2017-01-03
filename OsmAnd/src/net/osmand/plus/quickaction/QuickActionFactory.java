@@ -24,6 +24,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.mapcontextmenu.editors.EditCategoryDialogFragment;
 import net.osmand.plus.mapcontextmenu.editors.SelectCategoryDialogFragment;
+import net.osmand.plus.osmedit.OsmEditingPlugin;
 import net.osmand.plus.parkingpoint.ParkingPositionPlugin;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.widgets.AutoCompleteTextViewEx;
@@ -92,6 +93,11 @@ public class QuickActionFactory {
             quickActions.add(new ParkingAction());
         }
 
+        if (OsmandPlugin.getEnabledPlugin(OsmEditingPlugin.class) != null) {
+
+            quickActions.add(new AddOSMBugAction());
+        }
+
         quickActions.add(new QuickAction(0, R.string.quick_action_add_configure_map));
         quickActions.add(new ShowHideFavoritesAction());
         quickActions.add(new ShowHidePoiAction());
@@ -139,6 +145,9 @@ public class QuickActionFactory {
             case NavigationVoiceAction.TYPE:
                 return new NavigationVoiceAction();
 
+            case AddOSMBugAction.TYPE:
+                return new AddOSMBugAction();
+
             default:
                 return new QuickAction();
         }
@@ -180,6 +189,9 @@ public class QuickActionFactory {
 
             case NavigationVoiceAction.TYPE:
                 return new NavigationVoiceAction(quickAction);
+
+            case AddOSMBugAction.TYPE:
+                return new AddOSMBugAction(quickAction);
 
             default:
                 return quickAction;
@@ -763,6 +775,45 @@ public class QuickActionFactory {
 
             ((TextView) view.findViewById(R.id.text)).setText(
                     R.string.quick_action_navigation_voice_discr);
+
+            parent.addView(view);
+        }
+    }
+
+    public static class AddOSMBugAction extends QuickAction {
+        public static final int TYPE = 12;
+
+        protected AddOSMBugAction() {
+            id = System.currentTimeMillis();
+            type = TYPE;
+            nameRes = R.string.quick_action_add_osm_bug;
+            iconRes = R.drawable.ic_action_bug_dark;
+        }
+
+        public AddOSMBugAction(QuickAction quickAction) {
+            super(quickAction);
+        }
+
+        @Override
+        public void execute(MapActivity activity) {
+
+            LatLon latLon = activity.getMapView()
+                    .getCurrentRotatedTileBox()
+                    .getCenterLatLon();
+
+            OsmEditingPlugin plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
+            if (plugin != null)
+                plugin.openOsmNote(activity, latLon.getLatitude(), latLon.getLongitude());
+        }
+
+        @Override
+        public void drawUI(ViewGroup parent, MapActivity activity) {
+
+            View view = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.quick_action_with_text, parent, false);
+
+            ((TextView) view.findViewById(R.id.text)).setText(
+                    R.string.quick_action_add_osm_bug_discr);
 
             parent.addView(view);
         }

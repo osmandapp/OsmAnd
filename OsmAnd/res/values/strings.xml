@@ -2471,6 +2471,7 @@ If you need help with OsmAnd application, please contact our support team: suppo
     <string name="quick_action_take_audio_note">Take audio note</string>
     <string name="quick_action_take_video_note">Take video note</string>
     <string name="quick_action_take_photo_note">Take photo note</string>
+    <string name="quick_action_add_osm_bug">Add OSM bug</string>
     <string name="quick_action_navigation_voice">Voice On/Off</string>
     <string name="quick_action_add_gpx">Add GPX waypoint</string>
     <string name="quick_action_add_parking">Add Parking place</string>
@@ -2491,6 +2492,7 @@ If you need help with OsmAnd application, please contact our support team: suppo
     <string name="quick_action_take_audio_note_discr">Tap on action will add audio note to the specified location.</string>
     <string name="quick_action_take_video_note_discr">Tap on action will add video note to the specified location.</string>
     <string name="quick_action_take_photo_note_discr">Tap on action will add photo note to the specified location.</string>
+    <string name="quick_action_add_osm_bug_discr">Tap on action will add OSM bug note to the specified location.</string>
     <string name="quick_action_navigation_voice_discr">Tap on action will disable or enable voice during navigation.</string>
     <string name="quick_action_add_parking_discr">Tap on action will add Parking place to the specified location.</string>
     <string name="quick_action_favorite_dialog">Show favorite dialog</string>
