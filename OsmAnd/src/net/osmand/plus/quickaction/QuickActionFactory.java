@@ -79,6 +79,9 @@ public class QuickActionFactory {
         quickActions.add(new ShowHideFavoritesAction());
         quickActions.add(new ShowHidePoiAction());
 
+        quickActions.add(new QuickAction(0, R.string.quick_action_add_navigation));
+        quickActions.add(new NavigationVoiceAction());
+
         return quickActions;
     }
 
@@ -115,6 +118,9 @@ public class QuickActionFactory {
 
             case TakeVideoNoteAction.TYPE:
                 return new TakeVideoNoteAction();
+
+            case NavigationVoiceAction.TYPE:
+                return new NavigationVoiceAction();
 
             default:
                 return new QuickAction();
@@ -154,6 +160,9 @@ public class QuickActionFactory {
 
             case TakeVideoNoteAction.TYPE:
                 return new TakeVideoNoteAction(quickAction);
+
+            case NavigationVoiceAction.TYPE:
+                return new NavigationVoiceAction(quickAction);
 
             default:
                 return quickAction;
@@ -701,6 +710,42 @@ public class QuickActionFactory {
 
             ((TextView) view.findViewById(R.id.text)).setText(
                     R.string.quick_action_take_photo_note_discr);
+
+            parent.addView(view);
+        }
+    }
+
+    public static class NavigationVoiceAction extends QuickAction {
+        public static final int TYPE = 11;
+
+        protected NavigationVoiceAction() {
+            id = System.currentTimeMillis();
+            type = TYPE;
+            nameRes = R.string.quick_action_navigation_voice;
+            iconRes = R.drawable.ic_action_volume_up;
+        }
+
+        public NavigationVoiceAction(QuickAction quickAction) {
+            super(quickAction);
+        }
+
+        @Override
+        public void execute(MapActivity activity) {
+
+            boolean voice = activity.getMyApplication().getSettings().VOICE_MUTE.get();
+
+            activity.getMyApplication().getSettings().VOICE_MUTE.set(!voice);
+            activity.getRoutingHelper().getVoiceRouter().setMute(!voice);
+        }
+
+        @Override
+        public void drawUI(ViewGroup parent, MapActivity activity) {
+
+            View view = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.quick_action_with_text, parent, false);
+
+            ((TextView) view.findViewById(R.id.text)).setText(
+                    R.string.quick_action_navigation_voice_discr);
 
             parent.addView(view);
         }
