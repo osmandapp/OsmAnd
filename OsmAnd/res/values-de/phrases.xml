@@ -1172,13 +1172,13 @@
 	<string name="poi_internet_access_type_terminal">Arbeitsplatz</string>
 	<string name="poi_internet_access_type_wired">kabelgebunden</string>
 	<string name="poi_internet_access_type_public">Internetzugang: öffentlich</string>
-	<string name="poi_internet_access_type_service">Internetzugang: Service</string>
+	<string name="poi_internet_access_type_service">Internetzugang: Dienstleistung</string>
 	<string name="poi_internet_access_type_no">Kein Internetzugang</string>
 	<string name="poi_internet_access_type_yes">Mit Internetzugang</string>
 
 	<string name="poi_maxwidth">Maximalbreite</string>
-	<string name="poi_iata">IATA Code</string>
-	<string name="poi_icao">ICAO Code</string>
+	<string name="poi_iata">IATA-Code</string>
+	<string name="poi_icao">ICAO-Code</string>
 	<string name="poi_faa">FAA Code</string>
 	
 	<string name="poi_width">Breite</string>
@@ -2282,7 +2282,7 @@
 	<string name="poi_sanitary_dump_station_yes">Sanitäre Entsorgungsstation: Ja</string>
 	<string name="poi_sanitary_dump_station_no">Sanitäre Entsorgungsstation: Nein</string>
 	<string name="poi_sanitary_dump_station_customers">Sanitäre Entsorgungsstation: Kunden</string>
-	<string name="poi_refugee_yes">Ausstattung für Flüchtlinge</string>
+	<string name="poi_refugee_yes">Einrichtungen für Flüchtlinge</string>
 	<string name="poi_social_facility_group_home">Wohngruppe</string>
 	<string name="poi_social_facility_assisted_living">Betreutes Wohnen</string>
 	<string name="poi_social_facility_outreach">Freier Treff</string>
@@ -2443,7 +2443,7 @@
 	<string name="poi_wetland_palsa_bog">Palsamoor</string>
 	<string name="poi_payment_icsf_yes">IC gespeicherte Fährfahrkarten</string>
 	<string name="poi_payment_icsf_no">IC gespeicherte Fährfahrkarten nicht akzeptiert</string>
-	<string name="poi_health_specialty_general_yes">Hausarzt</string>
+	<string name="poi_health_specialty_general_yes">Allgemeinmediziner</string>
 	<string name="poi_health_specialty_ophthalmology_yes">Augenheilkunde</string>
 	<string name="poi_health_specialty_gynaecology_yes">Gynäkologie</string>
 	<string name="poi_health_specialty_internal_medicine_yes">Innere Medizin</string>
@@ -2455,9 +2455,9 @@
 	<string name="poi_health_specialty_urology_yes">Urologie</string>
 	<string name="poi_health_specialty_surgery_yes">Allgemeine Chirurgie</string>
 	<string name="poi_health_specialty_radiology_yes">Radiologie</string>
-	<string name="poi_health_specialty_psychiatry_yes">Psychiatrie und Psychotherapie</string>
+	<string name="poi_health_specialty_psychiatry_yes">Psychiatrie</string>
 	<string name="poi_health_specialty_neurology_yes">Neurologie</string>
-	<string name="poi_health_specialty_dermatovenereology_yes">Haut- und Geschlechtskrankheiten</string>
+	<string name="poi_health_specialty_dermatovenereology_yes">Dermato- und Venerologie</string>
 	<string name="poi_health_specialty_cardiology_yes">Kardiologie</string>
 	<string name="poi_health_specialty_trauma_yes">Traumatologie</string>
 	<string name="poi_health_specialty_biology_yes">Klinische Biologie</string>
@@ -3090,8 +3090,8 @@
 	<string name="poi_xmas_url">Weihnachten: Internetseite</string>
 
 <string name="poi_vending_type">Verkaufsart</string>
-	<string name="poi_bicycle_service">Fahrrad-Kundendienst</string>
-	<string name="poi_service_car">Kundendienst</string>
+	<string name="poi_bicycle_service">Fahrradwerkstatt</string>
+	<string name="poi_service_car">Dienstleistung</string>
 	<string name="poi_self_service">Selbstbedienung</string>
 	<string name="poi_pharmacy_dispensing">Rezepte</string>
 	<string name="poi_archaeological_site_type">Typ</string>
@@ -3099,7 +3099,7 @@
 	<string name="poi_denomination">Konfession</string>
 	<string name="poi_information_type">Typ</string>
 	<string name="poi_drive_in">Drive in</string>
-	<string name="poi_drive_through">Durchfahrt</string>
+	<string name="poi_drive_through">Durchfahrschalter</string>
 	<string name="poi_beauty_salon_service">Dienstleistung</string>
 	<string name="poi_public_bookcase">Öffentlicher Bücherschrank</string>
 	<string name="poi_public_bookcase_type_phone_box">Typ: Telefonzelle</string>
