@@ -1031,10 +1031,17 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			calc.setRotate(calcRotate);
 			calc.setZoomAndAnimation(initialViewport.getZoom(), dz, initialViewport.getZoomFloatPart());
 
+			//Try some slop logic here to better facilitate two finger tap zoom without losing map-linked-to-location
+			boolean suppressLoseLinkToLocation = ((multiTouchSupport.getCenterPoint().x - initialMultiTouchCenterPoint.x)
+				* (multiTouchSupport.getCenterPoint().x - initialMultiTouchCenterPoint.x)
+				+ (multiTouchSupport.getCenterPoint().y - initialMultiTouchCenterPoint.y)
+				* (multiTouchSupport.getCenterPoint().y - initialMultiTouchCenterPoint.y))
+				< 900;
+
 			final QuadPoint cp = initialViewport.getCenterPixelPoint();
 			// Keep zoom center fixed or flexible
 			LatLon r;
-			if (multiTouchSupport.isInZoomMode()) {
+			if (multiTouchSupport.isInZoomMode() && !suppressLoseLinkToLocation) {
 				r = calc.getLatLonFromPixel(cp.x + cp.x - multiTouchSupport.getCenterPoint().x, cp.y + cp.y - multiTouchSupport.getCenterPoint().y);
 			} else {
 				r = calc.getLatLonFromPixel(cp.x + cp.x - initialMultiTouchCenterPoint.x, cp.y + cp.y - initialMultiTouchCenterPoint.y);
@@ -1054,14 +1061,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 				dz = Math.signum(dz);
 			}
 
-			//Try some slop logic here to better facilitate two finger tap zoom without losing map-linked-to-location
-			boolean loseLocationLinkSlop = ((multiTouchSupport.getCenterPoint().x - initialMultiTouchCenterPoint.x)
-				* (multiTouchSupport.getCenterPoint().x - initialMultiTouchCenterPoint.x)
-				+ (multiTouchSupport.getCenterPoint().y - initialMultiTouchCenterPoint.y)
-				* (multiTouchSupport.getCenterPoint().y - initialMultiTouchCenterPoint.y))
-				< 900;
-
-			zoomToAnimate(baseZoom, dz, !(doubleTapScaleDetector.isInZoomMode() || loseLocationLinkSlop));
+			zoomToAnimate(baseZoom, dz, !(doubleTapScaleDetector.isInZoomMode() || suppressLoseLinkToLocation));
 			rotateToAnimate(calcRotate);
 		}
 
