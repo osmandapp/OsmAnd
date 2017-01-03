@@ -3,7 +3,6 @@ package net.osmand.plus.views;
 import android.content.Context;
 import android.graphics.PointF;
 import android.view.MotionEvent;
-import android.view.ViewConfiguration;
 
 import net.osmand.PlatformUtil;
 import net.osmand.util.MapUtils;
@@ -78,7 +77,7 @@ public class MultiTouchSupport {
 	private double zoomRelative = 1;
 	private PointF centerPoint = new PointF();
 
-	private static final int mMoveZoomCenterSlop2 = ViewConfiguration.getScaledTouchSlop() * ViewConfiguration.getScaledTouchSlop() / 4;
+	private final int mMoveZoomCenterSlop2 = 64;
 	private boolean mScrolling = false;
 
 	public boolean onTouchEvent(MotionEvent event){
