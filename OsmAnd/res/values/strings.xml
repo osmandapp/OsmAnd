@@ -2473,7 +2473,6 @@ If you need help with OsmAnd application, please contact our support team: suppo
     <string name="quick_action_edit_action">Edit action</string>
     <string name="quick_action_add_favorite">Add favorite</string>
     <string name="dialog_add_action_title">Add Action</string>
-    <string name="dialog_add_action_subhead">Create item</string>
     <string name="quick_actions_delete">Delete Action</string>
     <string name="quick_actions_delete_text">Are you sure you want to delete \"%s\" Action?</string>
     <string name="btn_dismiss">Dismiss</string>
@@ -2494,4 +2493,7 @@ If you need help with OsmAnd application, please contact our support team: suppo
     <string name="quic_action_showhide_favorites_title">Show/Hide Favorites</string>
     <string name="quic_action_showhide_poi_title">Show/Hide POI</string>
     <string name="quick_action_add_category">Add category</string>
+    <string name="quick_action_add_create_items">Create items</string>
+    <string name="quick_action_add_configure_map">Configure map</string>
+    <string name="quick_action_add_navigation">Navigation</string>
 </resources>

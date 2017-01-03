@@ -42,7 +42,7 @@ public class AddQuickActionDialog extends DialogFragment {
         getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
 
         View root = inflater.inflate(R.layout.quick_action_add_dialog, container, false);
-        Adapter adapter = new Adapter(QuickActionFactory.produceTypeActionsList());
+        Adapter adapter = new Adapter(QuickActionFactory.produceTypeActionsListWithHeaders());
 
         RecyclerView recyclerView = (RecyclerView) root.findViewById(R.id.recycler_view);
         Button btnDismiss = (Button) root.findViewById(R.id.btnDismiss);
@@ -64,20 +64,36 @@ public class AddQuickActionDialog extends DialogFragment {
         super.onViewCreated(view, savedInstanceState);
     }
 
-    public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
+    public class Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+
+        private static final int HEADER = 1;
+        private static final int ITEM = 2;
 
         private List<QuickAction> data;
 
-        public class ViewHolder extends RecyclerView.ViewHolder {
+        public class ItemViewHolder extends RecyclerView.ViewHolder {
 
             private TextView title;
             private ImageView icon;
 
-            public ViewHolder(View v) {
+            public ItemViewHolder(View v) {
                 super(v);
 
                 title = (TextView) v.findViewById(R.id.title);
                 icon = (ImageView) v.findViewById(R.id.image);
+            }
+        }
+
+        public class HeaderViewHolder extends RecyclerView.ViewHolder {
+
+            private TextView header;
+            private View divider;
+
+            public HeaderViewHolder(View v) {
+                super(v);
+
+                header = (TextView) v.findViewById(R.id.header);
+                divider = v.findViewById(R.id.divider);
             }
         }
 
@@ -87,39 +103,67 @@ public class AddQuickActionDialog extends DialogFragment {
 
 
         @Override
-        public Adapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-            View v = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.quick_action_add_dialog_item, parent, false);
+            if (viewType == HEADER) {
 
-            return new ViewHolder(v);
+                return new HeaderViewHolder(LayoutInflater.from(parent.getContext())
+                        .inflate(R.layout.quick_action_add_dialog_header, parent, false));
+
+            } else {
+
+                return new ItemViewHolder(LayoutInflater.from(parent.getContext())
+                        .inflate(R.layout.quick_action_add_dialog_item, parent, false));
+            }
         }
 
 
         @Override
-        public void onBindViewHolder(ViewHolder holder, int position) {
+        public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 
             final QuickAction action = data.get(position);
 
-            holder.title.setText(action.nameRes);
-            holder.icon.setImageResource(action.iconRes);
+            if (getItemViewType(position) == HEADER) {
 
-            holder.itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
+                HeaderViewHolder headerHolder = (HeaderViewHolder) holder;
 
-                    CreateEditActionDialog dialog = CreateEditActionDialog.newInstance(action.type);
-                    dialog.show(getFragmentManager(), AddQuickActionDialog.TAG);
+                headerHolder.header.setText(action.nameRes);
+                if (position == 0) headerHolder.divider.setVisibility(View.GONE);
 
-                    dismiss();
-                }
-            });
+            } else {
+
+                ItemViewHolder itemHolder = (ItemViewHolder) holder;
+
+                itemHolder.title.setText(action.nameRes);
+                itemHolder.icon.setImageResource(action.iconRes);
+
+                itemHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        CreateEditActionDialog dialog = CreateEditActionDialog.newInstance(action.type);
+                        dialog.show(getFragmentManager(), AddQuickActionDialog.TAG);
+
+                        dismiss();
+                    }
+                });
+
+            }
         }
 
         @Override
         public int getItemCount() {
             return data.size();
 
+        }
+
+        @Override
+        public int getItemViewType(int position) {
+
+            if (data.get(position).type == 0)
+                return HEADER;
+
+            return ITEM;
         }
     }
 }

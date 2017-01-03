@@ -38,6 +38,11 @@ public class QuickAction {
         this.id = System.currentTimeMillis();
     }
 
+    protected QuickAction(int type, int nameRes) {
+        this.id = System.currentTimeMillis();
+        this.nameRes = nameRes;
+    }
+
     protected QuickAction(int type) {
         this.id = System.currentTimeMillis();
         this.type = type;

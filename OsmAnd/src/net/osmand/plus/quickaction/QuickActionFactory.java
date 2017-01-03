@@ -59,6 +59,22 @@ public class QuickActionFactory {
         return quickActions;
     }
 
+    public static List<QuickAction> produceTypeActionsListWithHeaders() {
+
+        ArrayList<QuickAction> quickActions = new ArrayList<>();
+
+        quickActions.add(new QuickAction(0, R.string.quick_action_add_create_items));
+        quickActions.add(new MarkerAction());
+        quickActions.add(new FavoriteAction());
+        quickActions.add(new GPXAction());
+
+        quickActions.add(new QuickAction(0, R.string.quick_action_add_configure_map));
+        quickActions.add(new ShowHideFavoritesAction());
+        quickActions.add(new ShowHidePoiAction());
+
+        return quickActions;
+    }
+
     public static QuickAction newActionByType(int type) {
 
         switch (type) {

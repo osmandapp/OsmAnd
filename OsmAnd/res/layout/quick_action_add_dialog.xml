@@ -14,17 +14,8 @@
         android:layout_marginRight="24dp"
         android:textSize="@dimen/dialog_header_text_size"
         android:textColor="?android:textColorPrimary"
-        android:layout_marginBottom="16dp"/>
+        android:layout_marginBottom="8dp"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/dialog_add_action_subhead"
-        android:layout_marginLeft="24dp"
-        android:layout_marginRight="24dp"
-        android:textSize="@dimen/default_desc_text_size"
-        android:textColor="?android:textColorSecondary"
-        android:layout_marginBottom="16dp"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view"
