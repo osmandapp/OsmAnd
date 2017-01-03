@@ -1031,4 +1031,21 @@
 	<string name="poi_food_court">Publiskā ēstuve</string>
 	<string name="poi_barbecue">Barbekjū</string>
 
+	<string name="poi_craft_agricultural_engines">Lauksaimniecības tehnikas remonts</string>
+	<string name="poi_craft_basket_maker">Grozu pinumi</string>
+	<string name="poi_craft_beekeeper">Biškopis</string>
+	<string name="poi_craft_blacksmith">Kalējs</string>
+	<string name="poi_craft_brewery">Alus darītava</string>
+	<string name="poi_craft_boatbuilder">Laivu būvētava</string>
+	<string name="poi_craft_bookbinder">Grāmatsējējs</string>
+	<string name="poi_craft_carpenter">Galdnieks</string>
+	<string name="poi_craft_carpet_layer">Tepiķu licējs</string>
+	<string name="poi_craft_caterer">Sagādnieks</string>
+	<string name="poi_craft_dressmaker">Drēbnieks</string>
+	<string name="poi_craft_glaziery">Stiklinieku darbnīca</string>
+	<string name="poi_craft_handicraft">Rokudarbi</string>
+	<string name="poi_craft_hvac">Apsilde, ventilācija, gaisa kondicionieri</string>
+	<string name="poi_craft_insulation">Būvkonstrukciju izolācija</string>
+	<string name="poi_craft_metal_construction">Metāla konstrukcijas</string>
+	<string name="poi_craft_optician">Optika</string>
 	</resources>
