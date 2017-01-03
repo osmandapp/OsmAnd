@@ -2468,6 +2468,7 @@ If you need help with OsmAnd application, please contact our support team: suppo
     <string name="quick_action_item_action">Action %d</string>
     <string name="quick_action_item_screen">Screen %d</string>
     <string name="quick_action_add_marker">Add marker</string>
+    <string name="quick_action_add_gpx">Add GPX waypoint</string>
     <string name="quick_action_new_action">Add action</string>
     <string name="quick_action_edit_action">Edit action</string>
     <string name="quick_action_add_favorite">Add favorite</string>
@@ -2482,6 +2483,7 @@ If you need help with OsmAnd application, please contact our support team: suppo
     <string name="quick_action_name_hint">Action name</string>
     <string name="text_name">Name</string>
     <string name="quick_action_add_marker_discr">Tap on action will add marker to the specified location.</string>
+    <string name="quick_action_add_gpx_discr">Tap on action will add GPX waypiont to the specified location.</string>
     <string name="quick_action_favorite_dialog">Show favorite dialog</string>
     <string name="favorite_autofill_toast_text">" is saved to "</string>
     <string name="favorite_empty_place_name">Place</string>

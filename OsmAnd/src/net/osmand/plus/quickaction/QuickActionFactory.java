@@ -54,6 +54,7 @@ public class QuickActionFactory {
         quickActions.add(new FavoriteAction());
         quickActions.add(new ShowHideFavoritesAction());
         quickActions.add(new ShowHidePoiAction());
+        quickActions.add(new GPXAction());
 
         return quickActions;
     }
@@ -76,6 +77,9 @@ public class QuickActionFactory {
 
             case ShowHidePoiAction.TYPE:
                 return new ShowHidePoiAction();
+
+            case GPXAction.TYPE:
+                return new GPXAction();
 
             default:
                 return new QuickAction();
@@ -100,6 +104,9 @@ public class QuickActionFactory {
 
             case ShowHidePoiAction.TYPE:
                 return new ShowHidePoiAction(quickAction);
+
+            case GPXAction.TYPE:
+                return new GPXAction(quickAction);
 
             default:
                 return quickAction;
@@ -390,6 +397,8 @@ public class QuickActionFactory {
 
             activity.getMyApplication().getSettings().SHOW_FAVORITES.set(
                     !activity.getMyApplication().getSettings().SHOW_FAVORITES.get());
+
+            activity.getMapLayers().updateLayers(activity.getMapView());
         }
 
         @Override
@@ -430,6 +439,8 @@ public class QuickActionFactory {
                 pf.loadSelectedPoiFilters();
 
             } else pf.hidePoiFilters();
+
+            activity.getMapLayers().updateLayers(activity.getMapView());
         }
 
         @Override
@@ -440,6 +451,49 @@ public class QuickActionFactory {
 
             ((TextView) view.findViewById(R.id.text)).setText(
                     R.string.quick_action_showhides_poi_discr);
+
+            parent.addView(view);
+        }
+    }
+
+    public static class GPXAction extends QuickAction {
+
+        public static final int TYPE = 6;
+
+        private GPXAction() {
+            id = System.currentTimeMillis();
+            type = TYPE;
+            nameRes = R.string.quick_action_add_gpx;
+            iconRes = R.drawable.ic_action_flag_dark;
+        }
+
+        public GPXAction(QuickAction quickAction) {
+            super(quickAction);
+        }
+
+        @Override
+        public void execute(MapActivity activity) {
+
+            LatLon latLon = activity.getMapView()
+                    .getCurrentRotatedTileBox()
+                    .getCenterLatLon();
+
+            PointDescription pointDescription = new PointDescription(
+                    latLon.getLatitude(),
+                    latLon.getLongitude());
+
+            activity.getContextMenu().init(latLon, pointDescription, null);
+            activity.getContextMenu().addWptPt();
+        }
+
+        @Override
+        public void drawUI(ViewGroup parent, MapActivity activity) {
+
+            View view = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.quick_action_with_text, parent, false);
+
+            ((TextView) view.findViewById(R.id.text)).setText(
+                    R.string.quick_action_add_gpx_discr);
 
             parent.addView(view);
         }
