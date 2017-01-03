@@ -1134,4 +1134,21 @@
 	<string name="poi_wiki_lang_ba">Baškīru vikipēdija</string>
 	<string name="poi_wiki_lang_sco">Skotu vikipēdija</string>
 	<string name="poi_wiki_lang_pnb">Pendžabu vikipēdija</string>
+	<string name="poi_wiki_lang_cv">Čuvašu vikipēdija</string>
+	<string name="poi_wiki_lang_lmo">Lombardiešu vikipēdija</string>
+	<string name="poi_wiki_lang_my">Birmiešu vikipēdija</string>
+	<string name="poi_wiki_lang_yo">Jorubu vikipēdija</string>
+	<string name="poi_wiki_lang_an">Aragoniešu vikipēdija</string>
+	<string name="poi_wiki_lang_ne">Nepāliešu vikipēdija</string>
+	<string name="poi_wiki_lang_gu">Gudžaratu vikipēdija</string>
+	<string name="poi_wiki_lang_scn">Sicīliešu vikipēdija</string>
+	<string name="poi_wiki_lang_bar">Bavāriešu vikipēdija</string>
+	<string name="poi_wiki_lang_mn">Mongoļu vikipēdija</string>
+	<string name="poi_wiki_lang_nap">Neapoliešu vikipēdija</string>
+
+	<string name="poi_bollard">Pālis</string>
+	<string name="poi_cycle_barrier">Velo barjera</string>
+	<string name="poi_motorcycle_barrier">Motociklu barjera</string>
+	<string name="poi_block">Bloks</string>
+	<string name="poi_bus_trap">Autobusu slazds</string>
 	</resources>
