@@ -1239,4 +1239,9 @@
 	<string name="poi_buoy_lateral">Laterālā boja</string>
 	<string name="poi_buoy_safe_water">Drošu ūdeņu boja</string>
 	<string name="poi_buoy_special_purpose">Īpašas nozīmes boja</string>
+	<string name="poi_distance_mark">Distances zīme</string>
+	<string name="poi_harbour_basin">Ostas baseins</string>
+	<string name="poi_landmark">Ceļazīme</string>
+	<string name="poi_seamark_light">Bāka</string>
+	<string name="poi_seamark_light_major">Galvenā bāka</string>
 	</resources>
