@@ -77,9 +77,6 @@ public class MultiTouchSupport {
 	private double zoomRelative = 1;
 	private PointF centerPoint = new PointF();
 
-	private final int mMoveZoomCenterSlop2 = 900;
-	private boolean mScrolling = false;
-
 	public boolean onTouchEvent(MotionEvent event){
 		if(!isMultiTouchSupported()){
 			return false;
@@ -91,7 +88,6 @@ public class MultiTouchSupport {
 				if(inZoomMode){
 					listener.onZoomOrRotationEnded(zoomRelative, angleRelative);
 					inZoomMode = false;
-					mScrolling = false;
 					return true;
 				}
 				return false;
@@ -119,17 +115,11 @@ public class MultiTouchSupport {
 				if(inZoomMode){
 					listener.onZoomOrRotationEnded(zoomRelative, angleRelative);
 					inZoomMode = false;
-					mScrolling = false;
 				}
 				return true;
 			} else if(inZoomMode && actionCode == MotionEvent.ACTION_MOVE){
 				// Keep zoom center fixed or flexible
-				if (!mScrolling) {
-					mScrolling = ((centerPoint.x - (x1 + x2) / 2) * (centerPoint.x - (x1 + x2) / 2) + (centerPoint.y - (y1 + y2) / 2) * (centerPoint.y - (y1 + y2) / 2)) > mMoveZoomCenterSlop2;
-				}
-				if (mScrolling) {
-					centerPoint = new PointF((x1 + x2) / 2, (y1 + y2) / 2);
-				}
+				centerPoint = new PointF((x1 + x2) / 2, (y1 + y2) / 2);
 
 				if(angleDefined) {
 					angleRelative = MapUtils.unifyRotationTo360(angle - angleStarted);
