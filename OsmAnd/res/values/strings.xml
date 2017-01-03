@@ -2491,4 +2491,5 @@ If you need help with OsmAnd application, please contact our support team: suppo
     <string name="quick_action_showhides_poi_discr">Tap on action will Show or Hide POI points on map.</string>
     <string name="quic_action_showhide_favorites_title">Show/Hide Favorites</string>
     <string name="quic_action_showhide_poi_title">Show/Hide POI</string>
+    <string name="quick_action_add_category">Add category</string>
 </resources>
