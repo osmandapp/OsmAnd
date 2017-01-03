@@ -18,10 +18,12 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.GeocodingLookupService;
+import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.editors.EditCategoryDialogFragment;
 import net.osmand.plus.mapcontextmenu.editors.SelectCategoryDialogFragment;
+import net.osmand.plus.parkingpoint.ParkingPositionPlugin;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.widgets.AutoCompleteTextViewEx;
 
@@ -67,6 +69,7 @@ public class QuickActionFactory {
         quickActions.add(new MarkerAction());
         quickActions.add(new FavoriteAction());
         quickActions.add(new GPXAction());
+        quickActions.add(new ParkingAction());
 
         quickActions.add(new QuickAction(0, R.string.quick_action_add_configure_map));
         quickActions.add(new ShowHideFavoritesAction());
@@ -97,6 +100,9 @@ public class QuickActionFactory {
             case GPXAction.TYPE:
                 return new GPXAction();
 
+            case ParkingAction.TYPE:
+                return new ParkingAction();
+
             default:
                 return new QuickAction();
         }
@@ -123,6 +129,9 @@ public class QuickActionFactory {
 
             case GPXAction.TYPE:
                 return new GPXAction(quickAction);
+
+            case ParkingAction.TYPE:
+                return new ParkingAction(quickAction);
 
             default:
                 return quickAction;
@@ -510,6 +519,49 @@ public class QuickActionFactory {
 
             ((TextView) view.findViewById(R.id.text)).setText(
                     R.string.quick_action_add_gpx_discr);
+
+            parent.addView(view);
+        }
+    }
+
+    public static class ParkingAction extends QuickAction {
+
+        public static final int TYPE = 7;
+
+        private ParkingAction() {
+            id = System.currentTimeMillis();
+            type = TYPE;
+            nameRes = R.string.quick_action_add_parking;
+            iconRes = R.drawable.ic_action_parking_dark;
+        }
+
+        public ParkingAction(QuickAction quickAction) {
+            super(quickAction);
+        }
+
+        @Override
+        public void execute(MapActivity activity) {
+
+            ParkingPositionPlugin plugin = OsmandPlugin.getEnabledPlugin(ParkingPositionPlugin.class);
+
+            if (plugin != null){
+
+                LatLon latLon = activity.getMapView()
+                        .getCurrentRotatedTileBox()
+                        .getCenterLatLon();
+
+                plugin.showAddParkingDialog(activity, latLon.getLatitude(), latLon.getLongitude());
+            }
+        }
+
+        @Override
+        public void drawUI(ViewGroup parent, MapActivity activity) {
+
+            View view = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.quick_action_with_text, parent, false);
+
+            ((TextView) view.findViewById(R.id.text)).setText(
+                    R.string.quick_action_add_parking_discr);
 
             parent.addView(view);
         }
