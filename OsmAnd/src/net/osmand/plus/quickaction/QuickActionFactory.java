@@ -3,10 +3,17 @@ package net.osmand.plus.quickaction;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.graphics.drawable.Drawable;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SwitchCompat;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -16,11 +23,16 @@ import com.google.gson.reflect.TypeToken;
 
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.osm.PoiFilter;
+import net.osmand.plus.ContextMenuAdapter;
+import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.GeocodingLookupService;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.MapActivityLayers;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.mapcontextmenu.editors.EditCategoryDialogFragment;
 import net.osmand.plus.mapcontextmenu.editors.SelectCategoryDialogFragment;
@@ -28,11 +40,19 @@ import net.osmand.plus.osmedit.EditPoiDialogFragment;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
 import net.osmand.plus.parkingpoint.ParkingPositionPlugin;
 import net.osmand.plus.poi.PoiFiltersHelper;
+import net.osmand.plus.poi.PoiUIFilter;
+import net.osmand.plus.render.RenderingIcons;
+import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.widgets.AutoCompleteTextViewEx;
+import net.osmand.search.core.CustomSearchPoiFilter;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 public class QuickActionFactory {
 
@@ -511,6 +531,8 @@ public class QuickActionFactory {
 
         public static final int TYPE = 5;
 
+        public static final String KEY_FILTERS = "filters";
+
         protected ShowHidePoiAction() {
             id = System.currentTimeMillis();
             type = TYPE;
@@ -529,23 +551,210 @@ public class QuickActionFactory {
 
             if (pf.getSelectedPoiFilters().isEmpty()) {
 
-                pf.loadSelectedPoiFilters();
+                List<PoiUIFilter> poiFilters = loadPoiFilters(activity.getMyApplication().getPoiFilters());
 
-            } else pf.hidePoiFilters();
+                for (PoiUIFilter filter: poiFilters){
+                    pf.addSelectedPoiFilter(filter);
+                }
+
+            } else pf.clearSelectedPoiFilters();
 
             activity.getMapLayers().updateLayers(activity.getMapView());
         }
 
         @Override
-        public void drawUI(ViewGroup parent, MapActivity activity) {
+        public void drawUI(ViewGroup parent, final MapActivity activity) {
 
             View view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.quick_action_with_text, parent, false);
+                    .inflate(R.layout.quick_action_show_hide_poi, parent, false);
 
-            ((TextView) view.findViewById(R.id.text)).setText(
-                    R.string.quick_action_showhides_poi_discr);
+            RecyclerView list = (RecyclerView) view.findViewById(R.id.list);
+            Button addFilter = (Button) view.findViewById(R.id.btnAddCategory);
+
+            final Adapter adapter = new Adapter(!getParams().isEmpty()
+                    ? loadPoiFilters(activity.getMyApplication().getPoiFilters())
+                    : new ArrayList<PoiUIFilter>());
+
+            list.setAdapter(adapter);
+
+            addFilter.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    showSingleChoicePoiFilterDialog(activity.getMyApplication(), activity, adapter);
+                }
+            });
 
             parent.addView(view);
+        }
+
+        public class Adapter extends RecyclerView.Adapter<Adapter.Holder>{
+
+            private List<PoiUIFilter> filters;
+
+            public Adapter(List<PoiUIFilter> filters) {
+                this.filters = filters;
+            }
+
+            private void addItem(PoiUIFilter filter){
+
+                filters.add(filter);
+                savePoiFilters(filters);
+
+                notifyDataSetChanged();
+            }
+
+            @Override
+            public Holder onCreateViewHolder(ViewGroup parent, int viewType) {
+
+                return new Holder(LayoutInflater.from(parent.getContext())
+                        .inflate(R.layout.quick_action_deletable_list_item, parent, false));
+            }
+
+            @Override
+            public void onBindViewHolder(Holder holder, final int position) {
+
+                final PoiUIFilter filter = filters.get(position);
+
+                Object res = filter.getIconResource();
+
+                if (res instanceof String && RenderingIcons.containsBigIcon(res.toString())) {
+                    holder.icon.setImageResource(RenderingIcons.getBigIconResourceId(res.toString()));
+                } else {
+                    holder.icon.setImageResource(R.drawable.mx_user_defined);
+                }
+
+                holder.title.setText(filter.getName());
+                holder.delete.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        filters.remove(position);
+                        savePoiFilters(filters);
+
+                        notifyDataSetChanged();
+                    }
+                });
+            }
+
+            @Override
+            public int getItemCount() {
+                return filters.size();
+            }
+
+            class Holder extends RecyclerView.ViewHolder{
+
+                private TextView title;
+                private ImageView icon;
+                private ImageView delete;
+
+                public Holder(View itemView) {
+                    super(itemView);
+
+                    title = (TextView) itemView.findViewById(R.id.title);
+                    icon = (ImageView) itemView.findViewById(R.id.icon);
+                    delete = (ImageView) itemView.findViewById(R.id.delete);
+                }
+            }
+        }
+
+        public void savePoiFilters(List<PoiUIFilter> poiFilters) {
+
+            List<String> filters = new ArrayList<>();
+
+            for (PoiUIFilter f : poiFilters) {
+                filters.add(f.getFilterId());
+            }
+
+            getParams().put(KEY_FILTERS, TextUtils.join(",", filters));
+        }
+
+        private List<PoiUIFilter> loadPoiFilters(PoiFiltersHelper helper){
+
+            List<String> filters = new ArrayList<>();
+
+            String filtersId = getParams().get(KEY_FILTERS);
+
+            if (filtersId != null && !filtersId.trim().isEmpty()) {
+                Collections.addAll(filters, filtersId.split(","));
+            }
+
+            List<PoiUIFilter> poiFilters = new ArrayList<>();
+
+            for (String f : filters) {
+
+                PoiUIFilter filter = helper.getFilterById(f);
+
+                if (filter != null) {
+                    poiFilters.add(filter);
+                }
+            }
+
+            return poiFilters;
+        }
+
+        private void showSingleChoicePoiFilterDialog(final OsmandApplication app, MapActivity activity, final Adapter filtersAdapter)  {
+
+            final PoiFiltersHelper poiFilters = app.getPoiFilters();
+            final ContextMenuAdapter adapter = new ContextMenuAdapter();
+
+            adapter.addItem(new ContextMenuItem.ItemBuilder()
+                    .setTitleId(R.string.shared_string_search, app)
+                    .setIcon(R.drawable.ic_action_search_dark).createItem());
+
+            final List<PoiUIFilter> list = new ArrayList<>();
+            list.add(poiFilters.getCustomPOIFilter());
+
+            for (PoiUIFilter f : poiFilters.getTopDefinedPoiFilters()) {
+                addFilterToList(adapter, list, f);
+            }
+            for (PoiUIFilter f : poiFilters.getSearchPoiFilters()) {
+                addFilterToList(adapter, list, f);
+            }
+
+            final ArrayAdapter<ContextMenuItem> listAdapter =
+                    adapter.createListAdapter(activity, app.getSettings().isLightContent());
+            AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+            builder.setAdapter(listAdapter, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    filtersAdapter.addItem(list.get(which));
+                }
+
+            });
+            builder.setTitle(R.string.show_poi_over_map);
+            builder.setNegativeButton(R.string.shared_string_dismiss, null);
+
+            final AlertDialog alertDialog = builder.create();
+
+            alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+                @Override
+                public void onShow(DialogInterface dialog) {
+                    Button neutralButton = alertDialog.getButton(DialogInterface.BUTTON_NEUTRAL);
+                    Drawable drawable = app.getIconsCache().getThemedIcon(R.drawable.ic_action_multiselect);
+                    neutralButton.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null);
+                }
+            });
+
+            alertDialog.show();
+        }
+
+        private void addFilterToList(final ContextMenuAdapter adapter,
+                                     final List<PoiUIFilter> list,
+                                     final PoiUIFilter f) {
+            list.add(f);
+            ContextMenuItem.ItemBuilder builder = new ContextMenuItem.ItemBuilder();
+
+            builder.setTitle(f.getName());
+
+            if (RenderingIcons.containsBigIcon(f.getIconId())) {
+                builder.setIcon(RenderingIcons.getBigIconResourceId(f.getIconId()));
+            } else {
+                builder.setIcon(R.drawable.mx_user_defined);
+            }
+
+            builder.setColor(ContextMenuItem.INVALID_ID);
+            builder.setSkipPaintingWithoutColor(true);
+            adapter.addItem(builder.createItem());
         }
     }
 
