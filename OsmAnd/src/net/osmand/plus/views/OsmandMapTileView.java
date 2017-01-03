@@ -830,7 +830,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			final double lat = tb.getLatFromPixel(event.getX(), event.getY());
 			final double lon = tb.getLonFromPixel(event.getX(), event.getY());
 			int zoomDir = event.getAxisValue(MotionEvent.AXIS_VSCROLL) < 0 ? -1 : 1;
-			getAnimatedDraggingThread().startMoving(lat, lon, getZoom() + zoomDir, !(doubleTapScaleDetector.isInZoomMode() || afterDoubleTap));
+			getAnimatedDraggingThread().startMoving(lat, lon, getZoom() + zoomDir, true);
 			return true;
 		}
 		return false;
@@ -1053,7 +1053,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			if (!isZoomingAllowed(baseZoom, dz)) {
 				dz = Math.signum(dz);
 			}
-			zoomToAnimate(baseZoom, dz, true);
+			zoomToAnimate(baseZoom, dz, !(doubleTapScaleDetector.isInZoomMode() || afterDoubleTap));
 			rotateToAnimate(calcRotate);
 		}
 
