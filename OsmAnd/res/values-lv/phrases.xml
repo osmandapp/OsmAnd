@@ -1224,4 +1224,19 @@
 	<string name="poi_seasonal_summer">Vasara</string>
 	<string name="poi_seasonal_autumn">Rudens</string>
 	<string name="poi_seasonal_winter">Ziema</string>
+	<string name="poi_base">Bāzes lēkšana</string>
+	<string name="poi_craft_clockmaker">Pulksteņmeistars</string>
+	<string name="poi_craft_sweep">Skursteņslauķis</string>
+	<string name="poi_beacon_cardinal">Kardinālā bāka</string>
+	<string name="poi_beacon_lateral">Laterālā bāka</string>
+	<string name="poi_beacon_safe_water">Drošu ūdeņu bāka</string>
+	<string name="poi_beacon_special_purpose">Īpašas nozīmes bāka</string>
+	<string name="poi_berth">Enkurvieta</string>
+	<string name="poi_seamark_bridge">Jūraszīme tilts</string>
+	<string name="poi_buoy_cardinal">Kardinālā boja</string>
+	<string name="poi_buoy_installation">Instalācijas boja</string>
+	<string name="poi_buoy_isolated_danger">Boja, norobežota bīstamība</string>
+	<string name="poi_buoy_lateral">Laterālā boja</string>
+	<string name="poi_buoy_safe_water">Drošu ūdeņu boja</string>
+	<string name="poi_buoy_special_purpose">Īpašas nozīmes boja</string>
 	</resources>
