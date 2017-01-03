@@ -12,7 +12,7 @@
 	<string name="poi_coffee">متجر قهوة</string>
 	<string name="poi_mall">مجمّع</string>
 	<string name="poi_butcher">متجر لحوم</string>
-	<string name="poi_bicycle">متجر درّاجات هوائيّة</string>
+	<string name="poi_bicycle">متجر دراجات</string>
 	<string name="poi_kiosk">كشك</string>
 	<string name="poi_mobile_phone">متجر هواتف نقّالة</string>
 	<string name="poi_motorcycle">متجر درّاجات ناريّة</string>
@@ -47,9 +47,9 @@
 	<string name="poi_convenience">متجر</string>
 	<string name="poi_supermarket">سوبر ماركت</string>
 	<string name="poi_pasta">متجر المعكرونة</string>
-	<string name="poi_antiques">متجر التحف</string>
+	<string name="poi_antiques">متجر تحف</string>
 	<string name="poi_bathroom_furnishing">أثاث الحمام</string>
-	<string name="poi_camera">الكاميرات والعدسات</string>
+	<string name="poi_camera">كاميرات وعدسات</string>
 	<string name="poi_diplomatic_high_commission">اللجنة العليا</string>
 
 	<string name="poi_diplomatic_ambassadors_residence">مقر إقامة السفير</string>
@@ -78,7 +78,7 @@
 	<string name="poi_vending_machine">آلة بيع</string>
 	<string name="poi_bag">متجر حقائب</string>
 	<string name="poi_bed">متجر أفرشة</string>
-	<string name="poi_carpet">متجر السجاد</string>
+	<string name="poi_carpet">متجر سجاد</string>
 	<string name="poi_chemist">صيدلية</string>
 	<string name="poi_clothes_children">ملابس أطفال</string>
 	<string name="poi_shoes">متجر الأحذية</string>
@@ -173,11 +173,11 @@
 	<string name="poi_ice_cream">ردهة مثلجات</string>
 	<string name="poi_dairy">متجر ألبان</string>
 	<string name="poi_wine">متجر نبيذ</string>
-	<string name="poi_books">محل كتب</string>
-	<string name="poi_anime">متجر أنيمي</string>
-	<string name="poi_art">متجر فنون</string>
+	<string name="poi_books">متجر كتب</string>
+	<string name="poi_anime">متجر الأنمي</string>
+	<string name="poi_art">متجرفنون</string>
 	<string name="poi_baby_goods">سلع أطفال</string>
-	<string name="poi_boutique">بوتيك الأزياء</string>
+	<string name="poi_boutique">متجر أزياء</string>
 	<string name="poi_charity">متجر جمعيات خيرية</string>
 	<string name="poi_clothes">متجر ملابس</string>
 	<string name="poi_copyshop">محل نسخ</string>
@@ -306,7 +306,7 @@
 	<string name="poi_military_airfield">حقل جوي عسكري</string>
 	<string name="poi_military_office">مكتب عسكري</string>
 	<string name="poi_military_naval_base">قاعدة بحرية عسكرية</string>
-	<string name="poi_clothes_military">ملابس عسكرية</string>
+	<string name="poi_clothes_military">عسكر</string>
 
 	<string name="poi_military_checkpoint">نقطة مراقبة عسكرية</string>
 
@@ -406,8 +406,8 @@
 	<string name="poi_consulting">مكتب استشارة</string>
 	<string name="poi_cooperative">مكتب تعاونية</string>
 	<string name="poi_office_forestry">مكتب الغابات</string>
-	<string name="poi_logistics">مكتب النقل والإمداد</string>
-	<string name="poi_parish">مكتب الرعية</string>
+	<string name="poi_logistics">مكتب السوقيات</string>
+	<string name="poi_parish">مكتب رعية الكنيسة</string>
 	<string name="poi_publisher">مكتب النشر</string>
 
 	<string name="poi_toilets_wheelchair_yes">الوصول إلى المراحيض بالكراسي المتحركة: نعم</string>
@@ -449,9 +449,9 @@
 
 	<string name="poi_memorial_plaque">لوحة</string>
 	<string name="poi_memorial_statue">تمثال</string>
-	<string name="poi_shelter_type_public_transport">نوع المأوى: النقل العام</string>
-	<string name="poi_shelter_type_picnic_shelter">نوع المأوى: مأوى تنزه</string>
-	<string name="poi_shelter_type_basic_hut">نوع المأوى: كوخ عادي</string>
+	<string name="poi_shelter_type_public_transport">نقل عام</string>
+	<string name="poi_shelter_type_picnic_shelter">متنزه</string>
+	<string name="poi_shelter_type_basic_hut">كوخ عادي</string>
 	<string name="poi_wiki_link">ويكيبديا</string>
 
 <string name="poi_payment_type">طريقة الدفع</string>
@@ -517,7 +517,7 @@
 	<string name="poi_information_contents">المحتويات</string>
 	<string name="poi_clock_option">إضافي</string>
 	<string name="poi_backcountry">الريف</string>
-	<string name="poi_theatre_genre">نمط</string>
+	<string name="poi_theatre_genre">نوع</string>
 	<string name="poi_outdoor_seating">جلوس في الهواء الطلق</string>
 	<string name="poi_delivery">التسليم</string>
 	<string name="poi_microbrewery">مصنع الجعة مصغر</string>
@@ -740,7 +740,7 @@
 	<string name="poi_fuel_svo">زيت نباتي</string>
 	<string name="poi_vehicle_ramp">منحدر مركبة</string>
 	<string name="poi_public_transport_platform_trolleybus">موقف حافلات</string>
-	<string name="poi_railway_buffer_stop">موقف للسكك الحديدية</string>
+	<string name="poi_railway_buffer_stop">حاجز سكة حديدية</string>
 	<string name="poi_aerialway_cable_car">مركبة كهربائية</string>
 	<string name="poi_aerialway_gondola">زورق سياحي</string>
 	<string name="poi_aerialway_goods">رافعة بضائع</string>
