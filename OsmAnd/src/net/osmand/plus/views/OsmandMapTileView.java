@@ -1055,7 +1055,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			}
 
 			//Try some slop logic here to better facilitate two finger tap zoom without losing map-linked-to-location
-			boolean loseLocationLinkSlop = (multiTouchSupport.getCenterPoint().x - initialMultiTouchCenterPoint.x)
+			boolean loseLocationLinkSlop = ((multiTouchSupport.getCenterPoint().x - initialMultiTouchCenterPoint.x)
 				* (multiTouchSupport.getCenterPoint().x - initialMultiTouchCenterPoint.x)
 				+ (multiTouchSupport.getCenterPoint().y - initialMultiTouchCenterPoint.y)
 				* (multiTouchSupport.getCenterPoint().y - initialMultiTouchCenterPoint.y))
