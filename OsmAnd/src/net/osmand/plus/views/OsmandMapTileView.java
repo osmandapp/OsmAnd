@@ -166,7 +166,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 	// ///////////////////////////// INITIALIZING UI PART ///////////////////////////////////
-	public void init(final MapActivity ctx, int w, int h) {
+	public void init(MapActivity ctx, int w, int h) {
 		application = (OsmandApplication) ctx.getApplicationContext();
 		settings = application.getSettings();
 
@@ -220,11 +220,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			public void onTwoFingerTap() {
 				//afterTwoFingersTap = true;
 				if (isZoomingAllowed(getZoom(), -1.1f)) {
-					boolean mapLinked = ctx.getMapViewTrackingUtilities().isMapLinkedToLocation();
 					getAnimatedDraggingThread().startZooming(getZoom() - 1, currentViewport.getZoomFloatPart(), false);
-					if (mapLinked) {
-						ctx.getMapViewTrackingUtilities().setMapLinkedToLocation(true);
-					}
 				}
 			}
 		};
