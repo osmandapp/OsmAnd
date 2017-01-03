@@ -1059,7 +1059,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 				* (multiTouchSupport.getCenterPoint().x - initialMultiTouchCenterPoint.x)
 				+ (multiTouchSupport.getCenterPoint().y - initialMultiTouchCenterPoint.y)
 				* (multiTouchSupport.getCenterPoint().y - initialMultiTouchCenterPoint.y))
-				< 64;
+				< 144;
 
 			zoomToAnimate(baseZoom, dz, !(doubleTapScaleDetector.isInZoomMode() || loseLocationLinkSlop));
 			rotateToAnimate(calcRotate);
