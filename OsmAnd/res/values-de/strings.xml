@@ -2545,12 +2545,12 @@ Wenn Sie OsmAnd und OSM lieben und unterstützen wollen, so ist dies die perfekt
     <string name="christmas_poi">Weihnachts POI</string>
     <string name="christmas_desc">Im Vorgriff auf Weihnachten und Neujahr, können Sie Weihnachts POI anzeigen: Weihnachtsbäume, Märkte, etc.</string>
     <string name="christmas_desc_q">Weihnachts POI anzeigen?</string>
-    <string name="save_track_min_speed">Mindestgeschwindigkeit für die Protokollierung</string>
+    <string name="save_track_min_speed">Mindestgeschwindigkeit für Aufzeichnung</string>
     <string name="save_track_min_speed_descr">Setzen Sie die Minimalgeschwindigkeit, bei der ein Punkt gespeichert wird</string>
-    <string name="save_track_min_distance">Bewegungserkennung für Protokollierung</string>
+    <string name="save_track_min_distance">Bewegungserkennung für Aufzeichnung</string>
     <string name="save_track_min_distance_descr">Wählen Sie die Mindestentfernung von der letzten Position, ab der ein Punkt aufgezeichnet wird</string>
     <string name="save_track_precision">Minimale Genauigkeit der Aufzeichnung</string>
-    <string name="save_track_precision_descr">Minimale Genauigkeit der Protokollierung auswählen</string>
+    <string name="save_track_precision_descr">Wählen Sie die minimale Genauigkeit für die Aufzeichnung eines Punktes aus</string>
     <string name="rendering_attr_contourColorScheme_description">Höhenlinien Farbschema</string>
     <string name="shared_string_continue">Fortsetzen</string>
     <string name="shared_string_pause">Pause</string>
