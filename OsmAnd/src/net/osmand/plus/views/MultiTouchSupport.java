@@ -77,7 +77,7 @@ public class MultiTouchSupport {
 	private double zoomRelative = 1;
 	private PointF centerPoint = new PointF();
 
-	private final int mMoveZoomCenterSlop2 = 64;
+	private final int mMoveZoomCenterSlop2 = 900;
 	private boolean mScrolling = false;
 
 	public boolean onTouchEvent(MotionEvent event){
