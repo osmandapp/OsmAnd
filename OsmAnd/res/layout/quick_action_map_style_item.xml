@@ -45,7 +45,7 @@
             android:layout_weight="1"
             android:paddingRight="16dp"
             android:textColor="?android:textColorPrimary"
-            android:textSize="@dimen/default_list_text_size_large"
+            android:textSize="@dimen/default_list_text_size"
             tools:text="Add marker" />
 
         <ImageView

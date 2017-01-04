@@ -8,6 +8,7 @@ import com.google.gson.reflect.TypeToken;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
+import net.osmand.plus.openseamapsplugin.NauticalMapsPlugin;
 import net.osmand.plus.parkingpoint.ParkingPositionPlugin;
 
 import java.lang.reflect.Type;
@@ -83,6 +84,18 @@ public class QuickActionRegistry {
 
                 if (action.type == QuickActionFactory.ParkingAction.TYPE) {
                     skip = true;
+                }
+            }
+
+            if (OsmandPlugin.getEnabledPlugin(NauticalMapsPlugin.class) == null) {
+
+                if (action.type == QuickActionFactory.MapStyleAction.TYPE) {
+
+                    if (((QuickActionFactory.MapStyleAction) QuickActionFactory.produceAction(action))
+                            .getFilteredStyles(settings.getContext()).isEmpty()){
+
+                        skip = true;
+                    }
                 }
             }
 

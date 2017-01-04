@@ -1291,7 +1291,7 @@ public class QuickActionFactory {
             }
         }
 
-        private List<String> getFilteredStyles(OsmandApplication application){
+        protected List<String> getFilteredStyles(OsmandApplication application){
 
             List<String> filtered = new ArrayList<>();
             boolean enabled = OsmandPlugin.getEnabledPlugin(NauticalMapsPlugin.class) != null;
