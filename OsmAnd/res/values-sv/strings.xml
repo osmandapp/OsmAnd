@@ -1983,8 +1983,8 @@ Long %2$s</string>
     <string name="hillshade_layer_disabled">Skuggad relief-lager inaktiverat</string>
     <string name="show_on_start_description">\'Av\' startar kartskärmen direkt</string>
     <string name="map_downloaded">Karta hämtad</string>
-    <string name="map_downloaded_descr">Karta över %1$s har hämtats. Gå tillbaka till kartan för att börja använda den.</string>
-    <string name="go_to_map">Gå till kartan</string>
+    <string name="map_downloaded_descr">Kartan över %1$s har hämtats, och du kan nu börja använda den.</string>
+    <string name="go_to_map">Visa kartan</string>
     <string name="shared_string_qr_code">QR-kod</string>
     <string name="enter_country_name">Ange land</string>
     <string name="new_version">Ny version</string>
@@ -2343,7 +2343,7 @@ Om du tycker om OsmAnd och OSM och vill stödja dem så är detta ett utmärkt s
     <string name="get_for">Skaffa för %1$s</string>
     <string name="get_for_month">Skaffa för %1$s månad</string>
     <string name="skip_map_downloading_desc">"Du har inte några offline-kartor installerade. Du kan välja en karta från listan eller hämta kartor senare via menyn  - %1$s."</string>
-    <string name="search_map">Söker efter karta …</string>
+    <string name="search_map">Söker efter kartor …</string>
     <string name="first_usage_greeting">Få anvisningar och upptäck nya platser utan Internetuppkoppling</string>
     <string name="search_my_location">Sök efter min plats</string>
     <string name="rendering_attr_contourColorScheme_description">Färgschema för konturer</string>
