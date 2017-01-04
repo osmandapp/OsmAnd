@@ -962,7 +962,7 @@ Karten-Kacheln können direkt online bezogen werden, und werden im OsmAnd-Untero
 	<string name="filter_current_poiButton">Filtern</string>
 	
 	<string name="edit_filter_save_as_menu_item">Speichern als</string>
-	<string name="edit_filter_delete_dialog_title">Ausgewählten Filter wirklich löschen?</string>
+	<string name="edit_filter_delete_dialog_title">Ausgewählten Filter löschen?</string>
 	<string name="edit_filter_delete_message">Der Filter {0} wurde gelöscht</string>
 	<string name="edit_filter_create_message">Der Filter {0} wurde erstellt</string>
 	
