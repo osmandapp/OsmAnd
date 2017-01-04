@@ -2714,4 +2714,6 @@ i więcej...
     <string name="rendering_attr_contourWidth_name">Szerokość poziomic</string>
     <string name="rendering_attr_hideWaterPolygons_description">Woda</string>
     <string name="rendering_attr_hideWaterPolygons_name">Ukryj wodę</string>
+    <string name="configure_screen_quick_action">Szybka czynność</string>
+
     </resources>
