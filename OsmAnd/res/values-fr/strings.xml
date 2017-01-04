@@ -2020,7 +2020,7 @@ Pour revenir à l’un des styles de carte classique de OsmAnd, désactivez simp
     <string name="show_on_start_description">Si Inactif démarre l\'application en affichant la carte</string>
     <string name="map_downloaded">Carte téléchargée</string>
     <string name="go_to_map">Afficher la carte</string>
-    <string name="map_downloaded_descr">La carte %1$s a été téléchargée. Allez à la carte pour l’utiliser.</string>
+    <string name="map_downloaded_descr">La carte %1$s a été téléchargée, vous pouvez l\'utiliser immédiatement.</string>
     <string name="shared_string_qr_code">QR-code</string>
     <string name="enter_country_name">Saisissez le pays</string>
     <string name="world_map_download_descr">La carte mondiale de base est manquante ou périmée. Merci de télécharger cette carte mondiale de base pour permettre un affichage sommaire.</string>
