@@ -748,9 +748,9 @@ Las teselas de mapas, se pueden obtener directamente a través de fuentes con co
     <string name="osmand_parking_pm">PM</string>
     <string name="osmand_parking_am">AM</string>
     <string name="osmand_parking_position_name">Posición de aparcamiento</string>
-    <string name="osmand_parking_plugin_description">Este complemento, le deja memorizar fácilmente dónde se aparcó el automóvil y cuánto tiempo queda (si el estacionamiento está limitado por tiempo).
+    <string name="osmand_parking_plugin_description">El complemento de posición de aparcamiento te deja memorizar dónde aparcaste el automóvil y cuánto tiempo de estacionamiento queda (si hay un límite de tiempo).
 
-Puede encontrar la localización y el tiempo de estacionamiento en la tarjeta del panel de control y en el control de la pantalla de mapas. Añada una notificación al calendario, en el caso de que desee tener un recordatorio al respecto.</string>
+Tanto la ubicación como el tiempo de estacionamiento se muestran en el panel de control y en el control en la pantalla de mapas. Añade una notificación al calendario, en el caso de que desee tener un recordatorio al respecto.</string>
     <string name="osmand_parking_plugin_name">Aparcamiento</string>
     <string name="context_menu_item_add_parking_point">Marcar como ubicación de aparcamiento</string>
     <string name="context_menu_item_delete_parking_point">Eliminar un marcador de aparcamiento</string>
@@ -1399,7 +1399,7 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="osmo_group_share">Para conectarse al grupo %2$s, especifique el identificador del grupo (%1$s) o haga clic en %3$s.</string>
     <string name="osmo_share_connect_device">Seguir permanentemente este dispositivo</string>
     <string name="osmo_share_current_session">Compartir sesión actual en navegador</string>
-    <string name="osmo_session_not_available">Sesión no disponible, compruebe que \'Enviar ubicaciones\' está activado.</string>
+    <string name="osmo_session_not_available">Sesión no disponible, por favor comprueba que \'Enviar ubicaciones\' está activado.</string>
     <string name="osmo_share_session">Compartir sesión</string>
     <string name="osmo_session_id_share">Url de la sesión para seguir dispositivo (%1$s)</string>
     <string name="osmo_tracker_id_share">Para conectarse al dispositivo %2$s, haga clic en el enlace %3$s o especifique el identificador de seguimiento (%1$s)</string>
@@ -1923,7 +1923,7 @@ Lon %2$s</string>
     <string name="next_proceed">Siguiente</string>
     <string name="opening_at">Abren a las</string>
     <string name="closing_at">Cierran a las</string>
-    <string name="av_locations_descr">Archivo GPX con ubicaciones de nota</string>
+    <string name="av_locations_descr">Archivo GPX con ubicaciones de notas</string>
     <string name="av_locations">Ubicaciones</string>
     <string name="contact_info">Información de contacto</string>
     <string name="description">Descripción</string>
@@ -2064,7 +2064,7 @@ Lon %2$s</string>
     <string name="rendering_attr_roadStyle_description">Estilo de carretera</string>
     <string name="osm_save_offline">Guardar sin conexión</string>
     <string name="release_2_2">"
- • Nueva interfaz de usuario sensible al contexto para aprovechar lugares en el mapa y en otra pantallas.
+ • Nueva interfaz de usuario sensible al contexto para aprovechar ubicaciones en el mapa y en otras pantallas.
 
 
 • La pantalla del mapa ahora se inicia directamente, a menos que \'Mostrar panel de control al iniciar la aplicación\', este seleccionado.
@@ -2162,7 +2162,7 @@ Lon %2$s</string>
     <string name="clear_updates_proposition_message">Puede quitar las actualizaciones descargadas y volver a la edición original del mapa</string>
     <string name="add_time_span">Añadir intervalo de tiempo</string>
     <string name="road_blocked">Carretera bloqueada</string>
-    <string name="shared_string_select">Seleccionar</string>
+    <string name="shared_string_select">Selecciona</string>
     <string name="switch_start_finish">Invertir punto de partida y destino</string>
     <string name="rendering_attr_hideIcons_name">Iconos de PDI</string>
     <string name="number_of_contributors">Número de colaboradores</string>
@@ -2386,21 +2386,21 @@ El espacio de almacenamiento usado es {3} MB temporalmente y {1} MB permanenteme
     <string name="replace_favorite_confirmation">¿Estás seguro que quieres reemplazar el favorito %1$s?</string>
     <string name="rendering_attr_hideOverground_name">Objetos en superficie</string>
     <string name="shared_string_change">Cambiar</string>
-    <string name="get_started">Empezar</string>
+    <string name="get_started">Empieza</string>
     <string name="skip_map_downloading">Saltar descarga de mapas</string>
     <string name="skip_map_downloading_desc">No tienes un mapa descargado instalado. Puedes elegir uno de la lista o descargarlo más tarde vía Menú - %1$s.</string>
-    <string name="search_another_country">Seleccionar otra región</string>
+    <string name="search_another_country">Selecciona otra región</string>
     <string name="search_map">Buscando mapa…</string>
     <string name="first_usage_wizard_desc">Deja que OsmAnd determine tu ubicación y sugiera mapas que descargar para esa región.</string>
     <string name="location_not_found">Ubicación no encontrada</string>
-    <string name="no_inet_connection">Sin conexión a Internet</string>
-    <string name="no_inet_connection_desc_map">Necesaria para descargar mapas.</string>
-    <string name="search_location">Buscando ubicación…</string>
+    <string name="no_inet_connection">No hay conexión a Internet</string>
+    <string name="no_inet_connection_desc_map">Necesario para descargar mapas.</string>
+    <string name="search_location">Búscando ubicación…</string>
     <string name="storage_free_space">Espacio libre</string>
     <string name="storage_place_description">Almacenamiento de datos de OsmAnd (para mapas, trazas, etc.): %1$s.</string>
     <string name="give_permission">Dar permiso</string>
     <string name="allow_access_location">Permitir acceso a la ubicación</string>
-    <string name="first_usage_greeting">Conseguir indicaciones y descubrir sitios nuevos sin conexión a Internet</string>
+    <string name="first_usage_greeting">Obtén indicaciones y descubre nuevos lugares sin conexión a Internet</string>
     <string name="search_my_location">Buscar mi ubicación</string>
     <string name="no_update_info_desc">No comprueba las actualizaciones sobre nuevas versiones o descuentos relacionados con OsmAnd</string>
     <string name="no_update_info">No mostrar actualizaciones</string>
