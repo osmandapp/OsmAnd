@@ -787,6 +787,11 @@ public class QuickActionFactory {
             builder.setSkipPaintingWithoutColor(true);
             adapter.addItem(builder.createItem());
         }
+
+        @Override
+        public boolean fillParams(View root, MapActivity activity) {
+            return !getParams().isEmpty() && (getParams().get(KEY_FILTERS) != null || !getParams().get(KEY_FILTERS).isEmpty());
+        }
     }
 
     public static class GPXAction extends QuickAction {
@@ -1517,6 +1522,11 @@ public class QuickActionFactory {
             }
 
             return styles;
+        }
+
+        @Override
+        public boolean fillParams(View root, MapActivity activity) {
+            return !getParams().isEmpty() && (getParams().get(KEY_STYLES) != null || !getParams().get(KEY_STYLES).isEmpty());
         }
     }
 }

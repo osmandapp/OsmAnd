@@ -19,6 +19,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import net.osmand.data.FavouritePoint;
 import net.osmand.plus.FavouritesDbHelper;
@@ -191,40 +192,44 @@ public class CreateEditActionDialog extends DialogFragment {
             @Override
             public void onClick(View view) {
 
-                action.fillParams(((ViewGroup) root.findViewById(R.id.container)).getChildAt(0), (MapActivity) getActivity());
+                if (action.fillParams(((ViewGroup) root.findViewById(R.id.container)).getChildAt(0), (MapActivity) getActivity())) {
 
-                if (quickActionRegistry.isNameUnique(action, getContext())) {
+                    if (quickActionRegistry.isNameUnique(action, getContext())) {
 
-                    if (isNew) quickActionRegistry.addQuickAction(action);
-                    else quickActionRegistry.updateQuickAction(action);
+                        if (isNew) quickActionRegistry.addQuickAction(action);
+                        else quickActionRegistry.updateQuickAction(action);
 
-                    quickActionRegistry.notifyUpdates();
+                        quickActionRegistry.notifyUpdates();
 
-                    dismiss();
+                        dismiss();
 
+                    } else {
+
+                        action = quickActionRegistry.generateUniqueName(action, getContext());
+
+                        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                        builder.setTitle(R.string.quick_action_duplicate);
+                        builder.setMessage(getString(R.string.quick_action_duplicates, action.getName(getContext())));
+                        builder.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                                if (isNew) quickActionRegistry.addQuickAction(action);
+                                else quickActionRegistry.updateQuickAction(action);
+
+                                quickActionRegistry.notifyUpdates();
+
+                                CreateEditActionDialog.this.dismiss();
+                                dismiss();
+                            }
+                        });
+                        builder.create().show();
+
+                        ((EditText) root.findViewById(R.id.name)).setText(action.getName(getContext()));
+                    }
                 } else {
 
-                    action = quickActionRegistry.generateUniqueName(action, getContext());
-
-                    AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                    builder.setTitle(R.string.quick_action_duplicate);
-                    builder.setMessage(getString(R.string.quick_action_duplicates, action.getName(getContext())));
-                    builder.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-
-                            if (isNew) quickActionRegistry.addQuickAction(action);
-                            else quickActionRegistry.updateQuickAction(action);
-
-                            quickActionRegistry.notifyUpdates();
-
-                            CreateEditActionDialog.this.dismiss();
-                            dismiss();
-                        }
-                    });
-                    builder.create().show();
-
-                    ((EditText) root.findViewById(R.id.name)).setText(action.getName(getContext()));
+                    Toast.makeText(getContext(), R.string.quick_action_empty_param_error, Toast.LENGTH_SHORT).show();
                 }
             }
         });
