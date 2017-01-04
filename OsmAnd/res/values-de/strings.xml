@@ -2117,7 +2117,7 @@ Lon %2$s</string>
     <string name="shared_string_upload">Hochladen</string>
     <string name="shared_string_qr_code">QR-Code</string>
     <string name="map_downloaded">Karte heruntergeladen</string>
-    <string name="map_downloaded_descr">Karte von %1$s wurde heruntergeladen. Gehen Sie zur Karte, um sie zu benutzen.</string>
+    <string name="map_downloaded_descr">Die Karte von %1$s wurde heruntergeladen und kann nun benutzt werden.</string>
     <string name="go_to_map">Karte anzeigen</string>
     <string name="lang_nds">Plattdeutsch</string>
     <string name="lang_mk">Mazedonisch</string>
