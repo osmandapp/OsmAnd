@@ -222,9 +222,9 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 				//afterTwoFingersTap = true;
 				if (isZoomingAllowed(getZoom(), -1.1f)) {
 					getAnimatedDraggingThread().startZooming(getZoom() - 1, currentViewport.getZoomFloatPart(), false);
-					//if (wasMapLinkedBeforeGesture) {
+					if (wasMapLinkedBeforeGesture) {
 						ctx.getMapViewTrackingUtilities().setMapLinkedToLocation(true);
-					//}
+					}
 				}
 			}
 		};
@@ -1083,6 +1083,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	private class MapTileViewOnGestureListener extends SimpleOnGestureListener {
 		@Override
 		public boolean onDown(MotionEvent e) {
+			wasMapLinkedBeforeGesture = (MapActivity activity).getMapViewTrackingUtilities().isMapLinkedToLocation();
 			return false;
 		}
 
