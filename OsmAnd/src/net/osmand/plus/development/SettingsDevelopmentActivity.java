@@ -59,6 +59,10 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 		final CheckBoxPreference openGlRender = createCheckBoxPreference(settings.USE_OPENGL_RENDER, R.string.use_opengl_render,R.string.use_opengl_render_descr);
 		cat.addPreference(openGlRender);
 
+		cat.addPreference(createCheckBoxPreference(settings.USE_OSM_LIVE_FOR_ROUTING,
+				R.string.use_osm_live_routing,
+				R.string.use_osm_live_routing_description));
+
 		final Preference firstRunPreference = new Preference(this);
 		firstRunPreference.setTitle(R.string.simulate_initial_startup);
 		firstRunPreference.setSummary(R.string.simulate_initial_startup_descr);
@@ -73,11 +77,6 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 			}
 		});
 		cat.addPreference(firstRunPreference);
-		
-
-		cat.addPreference(createCheckBoxPreference(settings.USE_OSM_LIVE_FOR_ROUTING,
-				R.string.use_osm_live_routing,
-				R.string.use_osm_live_routing_description));
 		
 		cat.addPreference(createCheckBoxPreference(settings.SHOULD_SHOW_FREE_VERSION_BANNER,
 				R.string.show_free_version_banner,
