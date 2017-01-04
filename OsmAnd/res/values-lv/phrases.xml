@@ -1271,4 +1271,70 @@
 	<string name="poi_wheelchair_limited">Ierobežota pieejamība</string>
 	<string name="poi_wholesale">Vairumtirdzniecība</string>
 
+	<string name="poi_access_private">Privātā pieeja</string>
+	<string name="poi_access_no">Nav pieejas</string>
+	<string name="poi_content_silage">Saturs: skābbarība</string>
+	<string name="poi_content_water">Saturs: ūdens</string>
+	<string name="poi_content_slurry">Saturs: pusšķidra viela</string>
+	<string name="poi_content_oil">Saturs: nafta</string>
+	<string name="poi_content_fuel">Saturs: degviela</string>
+	<string name="poi_content_manure">Saturs: mēsli</string>
+	<string name="poi_content_wine">Saturs: vīns</string>
+	<string name="poi_content_sewage">Saturs: kanalizācija</string>
+	<string name="poi_content_gas">Saturs: gāze</string>
+	<string name="poi_content_biomass">Saturs: biomasa</string>
+	<string name="poi_content_wastewater">Saturs: notekūdeņi</string>
+	<string name="poi_content_crop">Saturs: labība</string>
+	<string name="poi_content_fodder">Saturs: siens</string>
+	<string name="poi_content_beer">Saturs: alus</string>
+	<string name="poi_content_salt">Saturs: sāls</string>
+	<string name="poi_content_grain">Saturs: graudi</string>
+
+	<string name="poi_nudism_yes">Atļauts</string>
+	<string name="poi_nudism_no">Aizliegts</string>
+	<string name="poi_nudism_obligatory">Obligāts</string>
+	<string name="poi_trade_building_supplies">Celtniecības materiāli</string>
+	<string name="poi_trade_wood">Kokmateriāli</string>
+	<string name="poi_trade_agricultural_supplies">Lauksaimniecības materiāli</string>
+	<string name="poi_trade_tile">Flīzes</string>
+
+	<string name="poi_parking_underground">Apakšzemes</string>
+	<string name="poi_parking_multi_storey">Daudzstāvu</string>
+
+	<string name="poi_bicycle_parking_anchors">Velostāvvietas enkurs</string>
+	<string name="poi_bicycle_parking_stands">Velostāvvietas stends</string>
+	<string name="poi_bicycle_parking_wall_loops">Velostāvvietas riņķi</string>
+	<string name="poi_bicycle_parking_rack">Velostāvvietas rāmis</string>
+	<string name="poi_bicycle_parking_building">Īpaša izbūve</string>
+	<string name="poi_bicycle_parking_shed">Velostāvvietas namiņš</string>
+	<string name="poi_bicycle_parking_bollard">Velostāvvietas stabiņi</string>
+	<string name="poi_bicycle_parking_informal">Neoficiāla</string>
+
+	<string name="poi_genus">Šķira</string>
+	<string name="poi_taxon">Taksons</string>
+
+	<string name="poi_trees_olive">Olīve</string>
+	<string name="poi_trees_apple">Ābols</string>
+	<string name="poi_trees_oil">Palmu eļļa</string>
+	<string name="poi_trees_orange">Apelsīni</string>
+	<string name="poi_trees_almond">Mandeles</string>
+	<string name="poi_trees_banana">Banāni</string>
+	<string name="poi_trees_hazel">Lazda</string>
+	<string name="poi_trees_coconut">Kokosrieksti</string>
+	<string name="poi_trees_persimmon">Hurma</string>
+	<string name="poi_trees_cherry">Ķirsis</string>
+	<string name="poi_trees_walnut">Valrieksti</string>
+	<string name="poi_trees_plum">Plūmes</string>
+	<string name="poi_trees_peach">Persiki</string>
+	<string name="poi_trees_tea">Tēja</string>
+	<string name="poi_trees_coca">Koka</string>
+	<string name="poi_trees_kiwi">Kivi</string>
+	<string name="poi_trees_meadow_orchard">Dārza pļavas</string>
+	<string name="poi_trees_nectorine">Nektarīni</string>
+	<string name="poi_trees_mango">Mango</string>
+	<string name="poi_trees_rubber">Kaučuks</string>
+	<string name="poi_trees_date">Dateles</string>
+	<string name="poi_trees_coffea">Kafija</string>
+	<string name="poi_trees_pomegranate">Granātābols</string>
+
 	</resources>
