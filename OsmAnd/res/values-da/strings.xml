@@ -2209,7 +2209,7 @@ Lon %2$s</string>
     <string name="show_on_start_description">\'Fra\' starter direkte på kortet</string>
     <string name="map_downloaded">Kort hentet</string>
     <string name="map_downloaded_descr">Kort over %1$s er hentet. Gå tilbage til kortet for at begynde at bruge det.</string>
-    <string name="go_to_map">Gå til kortet</string>
+    <string name="go_to_map">Vis kortet</string>
     <string name="shared_string_qr_code">QR kode</string>
     <string name="enter_country_name">Angiv landenavn</string>
     <string name="world_map_download_descr">Verdensgrundkortet (dækker hele verden ved lave zoomniveauer) mangler eller er forældet. Hent det for en komplet oversigt.</string>
