@@ -404,7 +404,7 @@
     <string name="world_map_download_descr">World basemap (covering the whole world at small zooms) is missing or outdated. Please consider downloading it for a global overview.</string>
     <string name="shared_string_qr_code">QR-code</string>
     <string name="map_downloaded">Map downloaded</string>
-    <string name="map_downloaded_descr">Map of %1$s has been downloaded. Go back to the map to start using it.</string>
+    <string name="map_downloaded_descr">The map of %1$s has been downloaded, you can now start to use it.</string>
     <string name="go_to_map">Display the map</string>
     <string name="simulate_initial_startup_descr">"Sets the flag indicating first app startup, keeps all other settings unchanged"</string>
     <string name="simulate_initial_startup">Simulate first app start</string>
