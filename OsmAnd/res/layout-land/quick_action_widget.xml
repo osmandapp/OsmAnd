@@ -6,6 +6,7 @@
     android:background="@drawable/quick_action_background">
 
     <LinearLayout
+        android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
