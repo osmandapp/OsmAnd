@@ -4,24 +4,24 @@ package net.osmand.plus.quickaction;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
-import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.support.v4.view.MotionEventCompat;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SwitchCompat;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.text.Editable;
 import android.text.TextUtils;
-import android.util.Log;
-import android.util.TypedValue;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -32,7 +32,11 @@ import com.google.gson.reflect.TypeToken;
 
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.osm.PoiFilter;
+import net.osmand.osm.AbstractPoiType;
+import net.osmand.osm.MapPoiTypes;
+import net.osmand.osm.PoiType;
+import net.osmand.osm.edit.Node;
+import net.osmand.osm.edit.OSMSettings;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.FavouritesDbHelper;
@@ -41,12 +45,12 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.MapActivityLayers;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.dialogs.ConfigureMapMenu;
 import net.osmand.plus.mapcontextmenu.editors.EditCategoryDialogFragment;
 import net.osmand.plus.mapcontextmenu.editors.SelectCategoryDialogFragment;
 import net.osmand.plus.openseamapsplugin.NauticalMapsPlugin;
+import net.osmand.plus.osmedit.EditPoiData;
 import net.osmand.plus.osmedit.EditPoiDialogFragment;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
 import net.osmand.plus.parkingpoint.ParkingPositionPlugin;
@@ -57,18 +61,18 @@ import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.widgets.AutoCompleteTextViewEx;
 import net.osmand.render.RenderingRulesStorage;
-import net.osmand.search.core.CustomSearchPoiFilter;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.LinkedHashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Set;
+import java.util.Map;
+import java.util.Map.Entry;
 
-import static android.util.TypedValue.COMPLEX_UNIT_DIP;
+import static net.osmand.plus.osmedit.AdvancedEditPoiFragment.addPoiToStringSet;
 
 public class QuickActionFactory {
 
@@ -1201,6 +1205,7 @@ public class QuickActionFactory {
 
     public static class AddPOIAction extends QuickAction {
         public static final int TYPE = 13;
+        public static final String KEY_TAG = "key_tag";
 
         protected AddPOIAction() {
             id = System.currentTimeMillis();
@@ -1223,8 +1228,9 @@ public class QuickActionFactory {
             OsmEditingPlugin plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
             if (plugin != null) {
                 EditPoiDialogFragment editPoiDialogFragment =
-                        EditPoiDialogFragment.createAddPoiInstance(latLon.getLatitude(), latLon.getLongitude(),
-                                activity.getMyApplication());
+//                        EditPoiDialogFragment.createAddPoiInstance(latLon.getLatitude(), latLon.getLongitude(),
+//                                activity.getMyApplication());
+                    EditPoiDialogFragment.createInstance(new Node(latLon.getLatitude(), latLon.getLongitude(), -1), true, getTagsFromParams());
                 editPoiDialogFragment.show(activity.getSupportFragmentManager(),
                         EditPoiDialogFragment.TAG);
             }
@@ -1232,14 +1238,181 @@ public class QuickActionFactory {
 
         @Override
         public void drawUI(ViewGroup parent, MapActivity activity) {
+            final View view = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.quick_action_add_poi_layout, parent, false);
 
-            View view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.quick_action_with_text, parent, false);
+            OsmandApplication application = activity.getMyApplication();
+            Drawable deleteDrawable = application.getIconsCache().getPaintedIcon(R.drawable.ic_action_remove_dark,
+                    activity.getResources().getColor(R.color.dash_search_icon_dark));
 
-            ((TextView) view.findViewById(R.id.text)).setText(
-                    R.string.quick_action_add_poi_discr);
+            LinearLayout editTagsLineaLayout =
+                    (LinearLayout) view.findViewById(R.id.editTagsList);
+
+            final MapPoiTypes mapPoiTypes = application.getPoiTypes();
+            final TagAdapterLinearLayoutHack mAdapter = new TagAdapterLinearLayoutHack(editTagsLineaLayout, getTagsFromParams(), deleteDrawable);
+            // It is possible to not restart initialization every time, and probably move initialization to appInit
+            Map<String, PoiType> translatedTypes = mapPoiTypes.getAllTranslatedNames(true);
+            HashSet<String>      tagKeys         = new HashSet<>();
+            HashSet<String>      valueKeys       = new HashSet<>();
+            for (AbstractPoiType abstractPoiType : translatedTypes.values()) {
+                addPoiToStringSet(abstractPoiType, tagKeys, valueKeys);
+            }
+            addPoiToStringSet(mapPoiTypes.getOtherMapCategory(), tagKeys, valueKeys);
+//            tagKeys.addAll(EditPoiDialogFragment.BASIC_TAGS);                            //TODO: ask for basic
+            mAdapter.setTagData(tagKeys.toArray(new String[tagKeys.size()]));
+            mAdapter.setValueData(valueKeys.toArray(new String[valueKeys.size()]));
+            Button addTagButton = (Button) view.findViewById(R.id.addTagButton);
+            addTagButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mAdapter.addTagView("", "");
+                }
+            });
+
+            mAdapter.updateViews();
 
             parent.addView(view);
+        }
+
+        private class TagAdapterLinearLayoutHack {
+            private final LinearLayout         linearLayout;
+            private final Map<String, String>  tagsData;
+            private final ArrayAdapter<String> tagAdapter;
+            private final ArrayAdapter<String> valueAdapter;
+            private final Drawable             deleteDrawable;
+
+            public TagAdapterLinearLayoutHack(LinearLayout linearLayout,
+                                              Map<String, String> tagsData,
+                                              Drawable deleteDrawable) {
+                this.linearLayout = linearLayout;
+                this.tagsData = tagsData;
+                this.deleteDrawable = deleteDrawable;
+
+                tagAdapter = new ArrayAdapter<>(linearLayout.getContext(), R.layout.list_textview);
+                valueAdapter = new ArrayAdapter<>(linearLayout.getContext(), R.layout.list_textview);
+            }
+
+            public void updateViews() {
+                linearLayout.removeAllViews();
+                List<Entry<String, String>> entries = new ArrayList<>(tagsData.entrySet());
+                for (Entry<String, String> tag : entries) {
+                    if (tag.getKey().equals(EditPoiData.POI_TYPE_TAG)
+                            || tag.getKey().equals(OSMSettings.OSMTagKey.NAME.getValue()))
+                        continue;
+                    addTagView(tag.getKey(), tag.getValue());
+                }
+            }
+
+            public void addTagView(String tg, String vl) {
+                View convertView = LayoutInflater.from(linearLayout.getContext())
+                        .inflate(R.layout.poi_tag_list_item, null, false);
+                final AutoCompleteTextView tagEditText =
+                        (AutoCompleteTextView) convertView.findViewById(R.id.tagEditText);
+                ImageButton deleteItemImageButton =
+                        (ImageButton) convertView.findViewById(R.id.deleteItemImageButton);
+                deleteItemImageButton.setImageDrawable(deleteDrawable);
+                final String[] previousTag = new String[]{tg};
+                deleteItemImageButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        linearLayout.removeView((View) v.getParent());
+                        tagsData.remove(tagEditText.getText().toString());
+                        setTagsIntoParams(tagsData);
+                    }
+                });
+                final AutoCompleteTextView valueEditText =
+                        (AutoCompleteTextView) convertView.findViewById(R.id.valueEditText);
+                tagEditText.setText(tg);
+                tagEditText.setAdapter(tagAdapter);
+                tagEditText.setThreshold(1);
+                tagEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                    @Override
+                    public void onFocusChange(View v, boolean hasFocus) {
+                        if (!hasFocus) {
+                            String s = tagEditText.getText().toString();
+                            tagsData.remove(previousTag[0]);
+                            tagsData.put(s.toString(), valueEditText.getText().toString());
+                            previousTag[0] = s.toString();
+                            setTagsIntoParams(tagsData);
+                        } else {
+                            tagAdapter.getFilter().filter(tagEditText.getText());
+                        }
+                    }
+                });
+
+                valueEditText.setText(vl);
+                valueEditText.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+                        tagsData.put(tagEditText.getText().toString(), s.toString());
+                        setTagsIntoParams(tagsData);
+                    }
+                });
+
+                initAutocompleteTextView(valueEditText, valueAdapter);
+
+                linearLayout.addView(convertView);
+                tagEditText.requestFocus();
+            }
+
+            public void setTagData(String[] tags) {
+                tagAdapter.clear();
+                for (String s : tags) {
+                    tagAdapter.add(s);
+                }
+                tagAdapter.sort(String.CASE_INSENSITIVE_ORDER);
+                tagAdapter.notifyDataSetChanged();
+            }
+
+            public void setValueData(String[] values) {
+                valueAdapter.clear();
+                for (String s : values) {
+                    valueAdapter.add(s);
+                }
+                valueAdapter.sort(String.CASE_INSENSITIVE_ORDER);
+                valueAdapter.notifyDataSetChanged();
+            }
+        }
+
+        private static void initAutocompleteTextView(final AutoCompleteTextView textView,
+                                                     final ArrayAdapter<String> adapter) {
+
+            textView.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                @Override
+                public void onFocusChange(View v, boolean hasFocus) {
+                    if (hasFocus) {
+                        adapter.getFilter().filter(textView.getText());
+                    }
+                }
+            });
+        }
+
+        @Override
+        public boolean fillParams(View root, MapActivity activity) {
+            return !getParams().isEmpty() && (getParams().get(KEY_TAG) != null || !getTagsFromParams().isEmpty());
+        }
+
+        private Map<String, String> getTagsFromParams() {
+            Map<String, String> quickActions = null;
+            if (getParams().get(KEY_TAG) != null) {
+                String json = getParams().get(KEY_TAG);
+                Type type = new TypeToken<LinkedHashMap<String, String>>() {
+                }.getType();
+                quickActions = new Gson().fromJson(json, type);
+            }
+            return quickActions != null ? quickActions : new LinkedHashMap<String, String>();
+        }
+
+        private void setTagsIntoParams(Map<String, String> tags) {
+            getParams().put(KEY_TAG, new Gson().toJson(tags));
         }
     }
 

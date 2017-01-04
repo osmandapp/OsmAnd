@@ -267,7 +267,7 @@ public class AdvancedEditPoiFragment extends BaseOsmAndFragment
 		});
 	}
 
-	private static void addPoiToStringSet(AbstractPoiType abstractPoiType, Set<String> stringSet,
+	public static void addPoiToStringSet(AbstractPoiType abstractPoiType, Set<String> stringSet,
 										  Set<String> values) {
 		if (abstractPoiType instanceof PoiType) {
 			PoiType poiType = (PoiType) abstractPoiType;
