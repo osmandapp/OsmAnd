@@ -1337,4 +1337,64 @@
 	<string name="poi_trees_coffea">Kafija</string>
 	<string name="poi_trees_pomegranate">Granātābols</string>
 
+	<string name="poi_animal_shelter">Dzīvnieku patversme</string>
+	<string name="poi_animal_shelter_dog">Suņu patversme</string>
+	<string name="poi_animal_shelter_cat">Kaķu patversme</string>
+	<string name="poi_animal_shelter_dog_cat">Suņu un kaķu patversme</string>
+	<string name="poi_animal_shelter_bird">Putnu patversme</string>
+
+	<string name="poi_seats">Sēdvietas</string>
+	<string name="poi_backrest_yes">Ar atzveltni</string>
+	<string name="poi_backrest_no">Bez atzveltnes</string>
+
+	<string name="poi_building">Celtne</string>
+	<string name="poi_deadlock">Tupiks</string>
+
+	<string name="poi_generator_source_coal">Enerğijas avots: ogles</string>
+	<string name="poi_generator_source_gas">Enerğijas avots: gāze</string>
+	<string name="poi_generator_source_nuclear">Enerğijas avots: atomdegviela</string>
+	<string name="poi_generator_source_solar">Enerğijas avots: saule</string>
+	<string name="poi_generator_source_hydro">Enerğijas avots: ūdens</string>
+	<string name="poi_generator_source_wind">Enerğijas avots: vējš</string>
+	<string name="poi_generator_source_geothermal">Enerğijas avots: ğeotermisks</string>
+	<string name="poi_generator_source_oil">Enerğijas avots: mazuts</string>
+	<string name="poi_generator_source_diesel">Enerğijas avots: dīzeļdegviela</string>
+
+	<string name="poi_int_name">Internacionālais nosaukums</string>
+	<string name="poi_nat_name">Nacionālais nosaukums</string>
+	<string name="poi_reg_name">Reğionālais nosaukums</string>
+	<string name="poi_loc_name">Vietējais nosaukums</string>
+	<string name="poi_old_name">Vēsturiskais nosaukums</string>
+	<string name="poi_alt_name">Alternatīvais nosaukums</string>
+
+	<string name="poi_pump_manual">Manuāls</string>
+	<string name="poi_pump_powered">Automātisks</string>
+	<string name="poi_pump_no">Bez pumpja</string>
+	<string name="poi_pump_yes">Jā</string>
+
+	<string name="poi_water_characteristic_mineral">Minerāļi</string>
+	<string name="poi_water_characteristic_mud">Dubļi</string>
+	<string name="poi_water_characteristic_sulfuric">Sulfāti</string>
+
+	<string name="poi_water_point">Ūdens vieta</string>
+
+	<string name="poi_information_guidepost">Norādes</string>
+	<string name="poi_information_board">Dēlis</string>
+	<string name="poi_information_map">Karte</string>
+	<string name="poi_information_office">Birojs</string>
+	<string name="poi_information_terminal">Terminālis</string>
+	<string name="poi_information_nature">Daba</string>
+	<string name="poi_information_history">Vēsture</string>
+	<string name="poi_information_sign">Zīme</string>
+	<string name="poi_information_audioguide">Audiogids</string>
+	<string name="poi_information_bicyclemap">Velotūristu karte</string>
+	<string name="poi_board_type_notice">Paziņojumu dēlis</string>
+	<string name="poi_board_type_geology">Ğeoloğija</string>
+	<string name="poi_board_type_public_transport">Publiskais transports</string>
+	<string name="poi_board_type_technology">Tehnoloğijas</string>
+	<string name="poi_board_type_astronomy">Astronomija</string>
+
+	<string name="poi_fireplace_yes">Jā</string>
+	<string name="poi_fireplace_no">Bez ugunskura vietas</string>
+
 	</resources>
