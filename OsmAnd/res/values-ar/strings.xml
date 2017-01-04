@@ -2084,7 +2084,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="shared_string_update">تحديث</string>
     <string name="shared_string_upload">تحميل</string>
     <string name="shared_string_qr_code">رمز QR</string>
-    <string name="go_to_map">انتقل إلى الخريطة</string>
+    <string name="go_to_map">عرض الخريطة</string>
     <string name="map_downloaded">تم تنزيل الخريطة</string>
     <string name="simulate_initial_startup">محاكاة طريقة تشغيل التطبيق للمرة الأولى</string>
     <string name="share_geo">جيو :</string>
@@ -2211,7 +2211,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="av_audio_bitrate_descr">حدد معدل تدفق الصوت</string>
     <string name="osm_save_offline">إحفظ محليا (دون حاجة لربط بالأنترنت)</string>
     <string name="world_map_download_descr">خريطة العالم الأساسية (التي تغطي العالم بأسره) مفقودة أو قديمة. يرجى تحميلها لأخذ نظرة شاملة.</string>
-    <string name="map_downloaded_descr">لقد تم تحميل خريطة %1$s. الرجاء العودة إلى الخريطة للشروع في استعمالها.</string>
+    <string name="map_downloaded_descr">تحميل خريطة %1$s. يمكنك الآن البدأ بإستخدامها.</string>
     <string name="favorite_category_dublicate_message">اسم الفئة المحددة موجود من قبل. الرجاء استخدام إسم آخر.</string>
     <string name="shared_string_trip_recording">تسجيل الرحلة</string>
     <string name="simulate_your_location_stop_descr">وقف المحاكات الإفتراضية لمكان تواجدي</string>
@@ -2539,7 +2539,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="skip_map_downloading">تخطي تحميل الخرائط</string>
     <string name="skip_map_downloading_desc">ليس لديك أي خريطة محلية مثبتة. يمكنك اختيار خريطة من اللائحة أو تحميل خرائط لاحقاً عبر القائمة - %1$s.</string>
     <string name="search_another_country">حدد منطقة أخرى</string>
-    <string name="search_map">بحث في الخريطة…</string>
+    <string name="search_map">بحث خرائط…</string>
     <string name="first_usage_wizard_desc">دع التطبيق يحدد موقعك ويقترح خرائط للتحميل لتلك المنطقة.</string>
     <string name="location_not_found">لم يتم العثور على الموقع</string>
     <string name="no_inet_connection">لا يوجد اتصال بالشبكة</string>
