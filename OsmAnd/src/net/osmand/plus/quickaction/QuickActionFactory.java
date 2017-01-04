@@ -1258,7 +1258,7 @@ public class QuickActionFactory {
                 addPoiToStringSet(abstractPoiType, tagKeys, valueKeys);
             }
             addPoiToStringSet(mapPoiTypes.getOtherMapCategory(), tagKeys, valueKeys);
-//            tagKeys.addAll(EditPoiDialogFragment.BASIC_TAGS);                            //TODO: ask for basic
+            tagKeys.addAll(EditPoiDialogFragment.BASIC_TAGS);
             mAdapter.setTagData(tagKeys.toArray(new String[tagKeys.size()]));
             mAdapter.setValueData(valueKeys.toArray(new String[valueKeys.size()]));
             Button addTagButton = (Button) view.findViewById(R.id.addTagButton);

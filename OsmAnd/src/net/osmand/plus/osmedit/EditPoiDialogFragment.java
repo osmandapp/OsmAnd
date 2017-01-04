@@ -115,15 +115,6 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 
 		Node node = (Node) getArguments().getSerializable(KEY_AMENITY_NODE);
 		editPoiData = new EditPoiData(node, getMyApplication());
-
-		if (getArguments().getSerializable(TAGS_LIST) != null && view == null) {
-			for (Map.Entry<String, String> tag : ((Map<String, String>) getArguments().getSerializable(TAGS_LIST)).entrySet())
-				editPoiData.putTag(tag.getKey(), tag.getValue());
-		}
-//		if (getArguments().getSerializable(TAGS_LIST) != null && editPoiData.getTagValues().isEmpty()) {
-//			//noinspection unchecked
-//			editPoiData.updateTags((Map<String, String>) getArguments().getSerializable(TAGS_LIST));
-//		}
 	}
 
 	@Override
@@ -136,6 +127,8 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 			@SuppressWarnings("unchecked")
 			Map<String, String> mp = (Map<String, String>) savedInstanceState.getSerializable(TAGS_LIST);
 			editPoiData.updateTags(mp);
+		} else  if (getArguments().getSerializable(TAGS_LIST) != null){
+			editPoiData.updateTags((Map<String, String>) getArguments().getSerializable(TAGS_LIST));
 		}
 
 		boolean isAddingPoi = getArguments().getBoolean(IS_ADDING_POI);
