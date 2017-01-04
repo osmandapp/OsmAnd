@@ -1083,6 +1083,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	private class MapTileViewOnGestureListener extends SimpleOnGestureListener {
 		@Override
 		public boolean onDown(MotionEvent e) {
+			// Facilitates better map re-linking for two finger tap zoom out
 			wasMapLinkedBeforeGesture = ((MapActivity) activity).getMapViewTrackingUtilities().isMapLinkedToLocation();
 			return false;
 		}
