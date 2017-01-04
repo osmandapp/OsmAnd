@@ -2572,4 +2572,19 @@
 	<string name="poi_cuisine_tea_shop">Botiga de te</string>
 	<string name="poi_cuisine_soup">Sopes</string>
 	<string name="poi_cuisine_pie">Pastís farcit</string>
+	<string name="poi_wiki_link">Viquipèdia</string>
+
+	<string name="poi_xmas">Nadal</string>
+	<string name="poi_xmas_event">Esdeveniment nadalenc</string>
+	<string name="poi_xmas_market">Mercat nadalenc</string>
+	<string name="poi_xmas_pyramid">Piràmide nadalenca</string>
+	<string name="poi_xmas_shop">Subministraments nadalencs</string>
+	<string name="poi_xmas_shop_christmas_tree">Venda d\'abres</string>
+	<string name="poi_xmas_tree">Arbre nadalenc</string>
+	<string name="poi_xmas_day_date">Nadal: període per l\'esdeveniment</string>
+	<string name="poi_xmas_note">Nadal: nota</string>
+	<string name="poi_xmas_opening_hours">Nadal: horari</string>
+	<string name="poi_xmas_location">Nadal: ubicació</string>
+	<string name="poi_xmas_url">Nadal: pàgina web</string>
+
 	</resources>
