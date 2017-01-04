@@ -190,8 +190,8 @@
     <string name="shared_string_send">Sendi</string>
     <string name="world_map_download_descr">Monda bazmapo (kiu kovras tutan mondon ĉe etaj skaloj) mankas aŭ estas neĝisdata. Bonvolu konsideri elŝuti ĝin por havi vidon al tuta mondo.</string>
     <string name="map_downloaded">Mapo elŝutita</string>
-    <string name="map_downloaded_descr">Mapo de %1$s estas elŝutita. Reveni al la mapo por komenci uzi ĝin.</string>
-    <string name="go_to_map">Aliri al la mapo</string>
+    <string name="map_downloaded_descr">Mapo de %1$s estas elŝutita, vi nun povas uzi ĝin.</string>
+    <string name="go_to_map">Montri mapon</string>
     <string name="simulate_initial_startup_descr">Agordas flagon kiu indikas unuan starton de aplikaĵo, sed ne ŝanĝas aliajn agordojn</string>
     <string name="simulate_initial_startup">Simuli unuan starton de aplikaĵo</string>
     <string name="favorite_category_name">Kategoria nomo</string>
