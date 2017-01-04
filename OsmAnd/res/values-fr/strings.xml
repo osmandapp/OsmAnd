@@ -2019,7 +2019,7 @@ Pour revenir à l’un des styles de carte classique de OsmAnd, désactivez simp
 
     <string name="show_on_start_description">Si Inactif démarre l\'application en affichant la carte</string>
     <string name="map_downloaded">Carte téléchargée</string>
-    <string name="go_to_map">Aller à la carte</string>
+    <string name="go_to_map">Afficher la carte</string>
     <string name="map_downloaded_descr">La carte %1$s a été téléchargée. Allez à la carte pour l’utiliser.</string>
     <string name="shared_string_qr_code">QR-code</string>
     <string name="enter_country_name">Saisissez le pays</string>
@@ -2378,7 +2378,7 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="skip_map_downloading">Ignorer le téléchargement des cartes</string>
     <string name="skip_map_downloading_desc">"Aucune carte hors-ligne n\'est installée. Vous pouvez  sélectionner un carte dans la liste ou télécharger ultérieurement une carte depuis le menu - %1$s."</string>
     <string name="search_another_country">Sélectionnez une autre région</string>
-    <string name="search_map">Recherche de la carte…</string>
+    <string name="search_map">Recherche des cartes …</string>
     <string name="first_usage_wizard_desc">Laissez OsmAnd déterminer votre position et vous suggérer les cartes de la région.</string>
     <string name="location_not_found">Position non trouvée</string>
     <string name="no_inet_connection">Aucune connexion Internet</string>
