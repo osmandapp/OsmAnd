@@ -21,6 +21,7 @@
             android:layout_height="24dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="24dp"
+            android:tint="?attr/primary_icon_color"
             android:scaleType="centerInside"/>
 
         <TextView
@@ -45,7 +46,7 @@
         android:layout_width="1dp"
         android:layout_height="match_parent"
         android:layout_gravity="right"
-        android:background="@color/dashboard_background"
+        android:background="?attr/dashboard_divider"
         android:visibility="gone"/>
 
     <View
@@ -53,7 +54,7 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_gravity="bottom"
-        android:background="@color/dashboard_background"
+        android:background="?attr/dashboard_divider"
         android:visibility="gone"/>
 
 </FrameLayout>
