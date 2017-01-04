@@ -23,6 +23,7 @@
         android:layout_weight="1"
         app:layoutManager="LinearLayoutManager"
         android:layout_width="match_parent"
+        android:scrollbars="vertical"
         android:layout_height="wrap_content"/>
 
     <Button

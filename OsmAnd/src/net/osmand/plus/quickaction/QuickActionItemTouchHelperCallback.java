@@ -9,9 +9,16 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 
 public class QuickActionItemTouchHelperCallback extends ItemTouchHelper.Callback {
 
-    OnItemMoveCallback itemMoveCallback;
+    private OnItemMoveCallback itemMoveCallback;
+
+    public QuickActionItemTouchHelperCallback() {
+    }
 
     public QuickActionItemTouchHelperCallback(OnItemMoveCallback itemMoveCallback) {
+        this.itemMoveCallback = itemMoveCallback;
+    }
+
+    public void setItemMoveCallback(OnItemMoveCallback itemMoveCallback) {
         this.itemMoveCallback = itemMoveCallback;
     }
 

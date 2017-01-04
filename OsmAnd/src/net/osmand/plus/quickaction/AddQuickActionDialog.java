@@ -129,6 +129,7 @@ public class AddQuickActionDialog extends DialogFragment {
 
                 headerHolder.header.setText(action.nameRes);
                 if (position == 0) headerHolder.divider.setVisibility(View.GONE);
+                else headerHolder.divider.setVisibility(View.VISIBLE);
 
             } else {
 
@@ -147,7 +148,6 @@ public class AddQuickActionDialog extends DialogFragment {
                         dismiss();
                     }
                 });
-
             }
         }
 

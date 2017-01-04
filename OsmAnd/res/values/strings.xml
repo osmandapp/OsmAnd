@@ -2469,6 +2469,7 @@ If you need help with OsmAnd application, please contact our support team: suppo
     <string name="quick_action_item_screen">Screen %d</string>
     <string name="quick_action_add_marker">Add marker</string>
     <string name="quick_action_add_poi">Add POI</string>
+    <string name="quick_action_map_style">Change map style</string>
     <string name="quick_action_take_audio_note">Take audio note</string>
     <string name="quick_action_take_video_note">Take video note</string>
     <string name="quick_action_take_photo_note">Take photo note</string>
@@ -2515,4 +2516,7 @@ If you need help with OsmAnd application, please contact our support team: suppo
     <string name="quick_action_category_discr">You can select a category to save favorite point.</string>
     <string name="quick_action_gpx_category_discr">You can select a category to save GPX waypoint point.</string>
     <string name="quick_action_poi_list">POI list</string>
+    <string name="quick_action_sh_poi_discrp">You can add few POI categories to display on the map.</string>
+    <string name="quic_action_map_style_doscrp">Tap on the action button will toggle the map style, from the list order.</string>
+    <string name="quick_action_map_style_action">Add map style</string>
 </resources>

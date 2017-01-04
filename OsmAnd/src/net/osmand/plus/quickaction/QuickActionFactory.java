@@ -4,19 +4,28 @@ package net.osmand.plus.quickaction;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
+import android.support.v4.view.MotionEventCompat;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SwitchCompat;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.text.TextUtils;
+import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -34,25 +43,32 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityLayers;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
+import net.osmand.plus.dialogs.ConfigureMapMenu;
 import net.osmand.plus.mapcontextmenu.editors.EditCategoryDialogFragment;
 import net.osmand.plus.mapcontextmenu.editors.SelectCategoryDialogFragment;
+import net.osmand.plus.openseamapsplugin.NauticalMapsPlugin;
 import net.osmand.plus.osmedit.EditPoiDialogFragment;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
 import net.osmand.plus.parkingpoint.ParkingPositionPlugin;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.poi.PoiUIFilter;
+import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.widgets.AutoCompleteTextViewEx;
+import net.osmand.render.RenderingRulesStorage;
 import net.osmand.search.core.CustomSearchPoiFilter;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
+
+import static android.util.TypedValue.COMPLEX_UNIT_DIP;
 
 public class QuickActionFactory {
 
@@ -80,18 +96,18 @@ public class QuickActionFactory {
         return quickActions != null ? quickActions : new ArrayList<QuickAction>();
     }
 
-    public static List<QuickAction> produceTypeActionsList() {
-
-        ArrayList<QuickAction> quickActions = new ArrayList<>();
-
-        quickActions.add(new MarkerAction());
-        quickActions.add(new FavoriteAction());
-        quickActions.add(new ShowHideFavoritesAction());
-        quickActions.add(new ShowHidePoiAction());
-        quickActions.add(new GPXAction());
-
-        return quickActions;
-    }
+//    public static List<QuickAction> produceTypeActionsList() {
+//
+//        ArrayList<QuickAction> quickActions = new ArrayList<>();
+//
+//        quickActions.add(new MarkerAction());
+//        quickActions.add(new FavoriteAction());
+//        quickActions.add(new ShowHideFavoritesAction());
+//        quickActions.add(new ShowHidePoiAction());
+//        quickActions.add(new GPXAction());
+//
+//        return quickActions;
+//    }
 
     public static List<QuickAction> produceTypeActionsListWithHeaders() {
 
@@ -121,6 +137,7 @@ public class QuickActionFactory {
         }
 
         quickActions.add(new QuickAction(0, R.string.quick_action_add_configure_map));
+        quickActions.add(new MapStyleAction());
         quickActions.add(new ShowHideFavoritesAction());
         quickActions.add(new ShowHidePoiAction());
 
@@ -173,6 +190,9 @@ public class QuickActionFactory {
             case AddPOIAction.TYPE:
                 return new AddPOIAction();
 
+            case MapStyleAction.TYPE:
+                return new MapStyleAction();
+
             default:
                 return new QuickAction();
         }
@@ -220,6 +240,9 @@ public class QuickActionFactory {
 
             case AddPOIAction.TYPE:
                 return new AddPOIAction(quickAction);
+
+            case MapStyleAction.TYPE:
+                return new MapStyleAction(quickAction);
 
             default:
                 return quickAction;
@@ -472,10 +495,12 @@ public class QuickActionFactory {
         }
 
         @Override
-        public void fillParams(View root, MapActivity activity) {
+        public boolean fillParams(View root, MapActivity activity) {
 
             getParams().put(KEY_NAME, ((EditText) root.findViewById(R.id.name_edit)).getText().toString());
             getParams().put(KEY_DIALOG, Boolean.toString(((SwitchCompat) root.findViewById(R.id.saveButton)).isChecked()));
+
+            return true;
         }
 
         private void fillGroupParams(View root, String name, int color) {
@@ -499,6 +524,8 @@ public class QuickActionFactory {
             type = TYPE;
             nameRes = R.string.quic_action_showhide_favorites_title;
             iconRes = R.drawable.ic_action_fav_dark;
+            single = true;
+            toggle = true;
         }
 
         public ShowHideFavoritesAction(QuickAction quickAction) {
@@ -538,6 +565,7 @@ public class QuickActionFactory {
             type = TYPE;
             nameRes = R.string.quic_action_showhide_poi_title;
             iconRes = R.drawable.ic_action_gabout_dark;
+            toggle = true;
         }
 
         public ShowHidePoiAction(QuickAction quickAction) {
@@ -553,7 +581,7 @@ public class QuickActionFactory {
 
                 List<PoiUIFilter> poiFilters = loadPoiFilters(activity.getMyApplication().getPoiFilters());
 
-                for (PoiUIFilter filter: poiFilters){
+                for (PoiUIFilter filter : poiFilters) {
                     pf.addSelectedPoiFilter(filter);
                 }
 
@@ -587,7 +615,7 @@ public class QuickActionFactory {
             parent.addView(view);
         }
 
-        public class Adapter extends RecyclerView.Adapter<Adapter.Holder>{
+        public class Adapter extends RecyclerView.Adapter<Adapter.Holder> {
 
             private List<PoiUIFilter> filters;
 
@@ -595,12 +623,15 @@ public class QuickActionFactory {
                 this.filters = filters;
             }
 
-            private void addItem(PoiUIFilter filter){
+            private void addItem(PoiUIFilter filter) {
 
-                filters.add(filter);
-                savePoiFilters(filters);
+                if (!filters.contains(filter)) {
 
-                notifyDataSetChanged();
+                    filters.add(filter);
+                    savePoiFilters(filters);
+
+                    notifyDataSetChanged();
+                }
             }
 
             @Override
@@ -641,7 +672,7 @@ public class QuickActionFactory {
                 return filters.size();
             }
 
-            class Holder extends RecyclerView.ViewHolder{
+            class Holder extends RecyclerView.ViewHolder {
 
                 private TextView title;
                 private ImageView icon;
@@ -668,7 +699,7 @@ public class QuickActionFactory {
             getParams().put(KEY_FILTERS, TextUtils.join(",", filters));
         }
 
-        private List<PoiUIFilter> loadPoiFilters(PoiFiltersHelper helper){
+        private List<PoiUIFilter> loadPoiFilters(PoiFiltersHelper helper) {
 
             List<String> filters = new ArrayList<>();
 
@@ -692,7 +723,7 @@ public class QuickActionFactory {
             return poiFilters;
         }
 
-        private void showSingleChoicePoiFilterDialog(final OsmandApplication app, MapActivity activity, final Adapter filtersAdapter)  {
+        private void showSingleChoicePoiFilterDialog(final OsmandApplication app, MapActivity activity, final Adapter filtersAdapter) {
 
             final PoiFiltersHelper poiFilters = app.getPoiFilters();
             final ContextMenuAdapter adapter = new ContextMenuAdapter();
@@ -821,8 +852,6 @@ public class QuickActionFactory {
         @Override
         public void drawUI(final ViewGroup parent, final MapActivity activity) {
 
-            FavouritesDbHelper helper = activity.getMyApplication().getFavorites();
-
             final View root = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.quick_action_add_gpx, parent, false);
 
@@ -907,10 +936,12 @@ public class QuickActionFactory {
         }
 
         @Override
-        public void fillParams(View root, MapActivity activity) {
+        public boolean fillParams(View root, MapActivity activity) {
 
             getParams().put(KEY_NAME, ((EditText) root.findViewById(R.id.name_edit)).getText().toString());
             getParams().put(KEY_DIALOG, Boolean.toString(((SwitchCompat) root.findViewById(R.id.saveButton)).isChecked()));
+
+            return true;
         }
 
         private void fillGroupParams(View root, String name, int color) {
@@ -945,7 +976,7 @@ public class QuickActionFactory {
 
             ParkingPositionPlugin plugin = OsmandPlugin.getEnabledPlugin(ParkingPositionPlugin.class);
 
-            if (plugin != null){
+            if (plugin != null) {
 
                 LatLon latLon = activity.getMapView()
                         .getCurrentRotatedTileBox()
@@ -1013,7 +1044,7 @@ public class QuickActionFactory {
         protected TakeVideoNoteAction() {
             id = System.currentTimeMillis();
             type = TYPE;
-            nameRes = R.string.quick_action_take_video_note ;
+            nameRes = R.string.quick_action_take_video_note;
             iconRes = R.drawable.ic_action_video_dark;
         }
 
@@ -1093,6 +1124,8 @@ public class QuickActionFactory {
             type = TYPE;
             nameRes = R.string.quick_action_navigation_voice;
             iconRes = R.drawable.ic_action_volume_up;
+            toggle = true;
+            single = true;
         }
 
         public NavigationVoiceAction(QuickAction quickAction) {
@@ -1202,6 +1235,288 @@ public class QuickActionFactory {
                     R.string.quick_action_add_poi_discr);
 
             parent.addView(view);
+        }
+    }
+
+    public static class MapStyleAction extends QuickAction {
+
+        public static final int TYPE = 14;
+
+        private static String KEY_STYLES = "styles";
+
+        protected MapStyleAction() {
+            id = System.currentTimeMillis();
+            type = TYPE;
+            nameRes = R.string.quick_action_map_style;
+            iconRes = R.drawable.ic_map;
+            toggle = true;
+        }
+
+        public MapStyleAction(QuickAction quickAction) {
+            super(quickAction);
+        }
+
+        @Override
+        public void execute(MapActivity activity) {
+
+            List<String> mapStyles = getFilteredStyles(activity.getMyApplication());
+
+            String curStyle = activity.getMyApplication().getSettings().RENDERER.get();
+            int index = mapStyles.indexOf(curStyle);
+            String nextStyle = mapStyles.get(0);
+
+            if (index >= 0 && index + 1 < mapStyles.size()){
+                nextStyle = mapStyles.get(index + 1);
+            }
+
+            RenderingRulesStorage loaded = activity.getMyApplication()
+                    .getRendererRegistry().getRenderer(nextStyle);
+
+            if (loaded != null) {
+
+                OsmandMapTileView view = activity.getMapView();
+                view.getSettings().RENDERER.set(nextStyle);
+
+                activity.getMyApplication().getRendererRegistry().setCurrentSelectedRender(loaded);
+                ConfigureMapMenu.refreshMapComplete(activity);
+
+            } else {
+
+                Toast.makeText(activity, R.string.renderer_load_exception, Toast.LENGTH_SHORT).show();
+            }
+        }
+
+        private List<String> getFilteredStyles(OsmandApplication application){
+
+            List<String> filtered = new ArrayList<>();
+            boolean enabled = OsmandPlugin.getEnabledPlugin(NauticalMapsPlugin.class) != null;
+
+            if (enabled) return loadMapStyles();
+            else {
+
+                for (String style : loadMapStyles()) {
+
+                    if (!style.equals(RendererRegistry.NAUTICAL_RENDER)){
+                        filtered.add(style);
+                    }
+                }
+            }
+
+            return filtered;
+        }
+
+        @Override
+        public void drawUI(ViewGroup parent, final MapActivity activity) {
+
+            View view = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.quick_action_map_style, parent, false);
+
+            final RecyclerView list = (RecyclerView) view.findViewById(R.id.list);
+
+            final QuickActionItemTouchHelperCallback touchHelperCallback = new QuickActionItemTouchHelperCallback();
+            final ItemTouchHelper touchHelper =  new ItemTouchHelper(touchHelperCallback);
+
+            final Adapter adapter = new Adapter(new QuickActionListFragment.OnStartDragListener() {
+                @Override
+                public void onStartDrag(RecyclerView.ViewHolder viewHolder) {
+                    touchHelper.startDrag(viewHolder);
+                }
+            });
+
+            touchHelperCallback.setItemMoveCallback(adapter);
+            touchHelper.attachToRecyclerView(list);
+
+            if (!getParams().isEmpty()){
+                adapter.addItems(loadMapStyles());
+            }
+
+            list.setAdapter(adapter);
+
+            view.findViewById(R.id.btnAddStyle).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    AlertDialog.Builder bld = new AlertDialog.Builder(activity);
+                    bld.setTitle(R.string.renderers);
+
+                    final OsmandApplication app = activity.getMyApplication();
+                    final List<String> visibleNamesList = new ArrayList<>();
+                    final Collection<String> rendererNames = app.getRendererRegistry().getRendererNames();
+                    final String[] items = rendererNames.toArray(new String[rendererNames.size()]);
+                    final boolean nauticalPluginDisabled = OsmandPlugin.getEnabledPlugin(NauticalMapsPlugin.class) == null;
+
+                    for (String item : items) {
+
+                        if (nauticalPluginDisabled && item.equals(RendererRegistry.NAUTICAL_RENDER)) {
+                            continue;
+                        }
+
+                        visibleNamesList.add(item.replace('_', ' ').replace('-', ' '));
+                    }
+
+                    final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(activity, R.layout.dialog_text_item);
+
+                    arrayAdapter.addAll(visibleNamesList);
+                    bld.setAdapter(arrayAdapter, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+
+                            String renderer = visibleNamesList.get(i);
+                            RenderingRulesStorage loaded = app.getRendererRegistry().getRenderer(renderer);
+
+                            if (loaded != null) adapter.addItem(renderer);
+
+                            dialogInterface.dismiss();
+                        }
+                    });
+
+                    bld.setNegativeButton(R.string.shared_string_dismiss, null);
+                    bld.show();
+                }
+            });
+
+            parent.addView(view);
+        }
+
+        public class Adapter extends RecyclerView.Adapter<Adapter.ItemHolder> implements QuickActionItemTouchHelperCallback.OnItemMoveCallback {
+
+            private List<String> itemsList = new ArrayList<>();
+            private final QuickActionListFragment.OnStartDragListener onStartDragListener;
+
+            public Adapter(QuickActionListFragment.OnStartDragListener onStartDragListener) {
+                this.onStartDragListener = onStartDragListener;
+                this.itemsList = new ArrayList<>();
+            }
+
+            @Override
+            public Adapter.ItemHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+                LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+                return new ItemHolder(inflater.inflate(R.layout.quick_action_map_style_item, parent, false));
+            }
+
+            @Override
+            public void onBindViewHolder(final Adapter.ItemHolder holder, final int position) {
+                final String item = itemsList.get(position);
+
+                    holder.title.setText(item);
+
+                    holder.handleView.setOnTouchListener(new View.OnTouchListener() {
+                        @Override
+                        public boolean onTouch(View v, MotionEvent event) {
+                            if (MotionEventCompat.getActionMasked(event) ==
+                                    MotionEvent.ACTION_DOWN) {
+                                onStartDragListener.onStartDrag(holder);
+                            }
+                            return false;
+                        }
+                    });
+                    holder.closeBtn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            deleteItem(position);
+                        }
+                    });
+            }
+
+            @Override
+            public int getItemCount() {
+                return itemsList.size();
+            }
+
+            public void deleteItem(int position) {
+
+                if (position == -1)
+                    return;
+
+                itemsList.remove(position);
+
+                saveMapStyles(itemsList);
+                notifyItemRemoved(position);
+            }
+
+            public void addItems(List<String> data) {
+
+                if (!itemsList.containsAll(data)) {
+
+                    itemsList.addAll(data);
+
+                    saveMapStyles(itemsList);
+                    notifyDataSetChanged();
+                }
+            }
+
+            public void addItem(String item) {
+
+                if (!itemsList.contains(item)) {
+
+                    int oldSize = itemsList.size();
+                    itemsList.add(item);
+
+                    saveMapStyles(itemsList);
+                    notifyItemRangeInserted(oldSize, itemsList.size() - oldSize);
+                }
+            }
+
+            @Override
+            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+
+                int selectedPosition = viewHolder.getAdapterPosition();
+                int targetPosition = target.getAdapterPosition();
+
+                if (selectedPosition < 0 || targetPosition < 0)
+                    return false;
+
+                Collections.swap(itemsList, selectedPosition, targetPosition);
+                if (selectedPosition - targetPosition < -1) {
+                    notifyItemMoved(selectedPosition, targetPosition);
+                    notifyItemMoved(targetPosition - 1, selectedPosition);
+                } else if (selectedPosition - targetPosition > 1) {
+                    notifyItemMoved(selectedPosition, targetPosition);
+                    notifyItemMoved(targetPosition + 1, selectedPosition);
+                } else {
+                    notifyItemMoved(selectedPosition, targetPosition);
+                }
+                notifyItemChanged(selectedPosition);
+                notifyItemChanged(targetPosition);
+
+                return true;
+            }
+
+            @Override
+            public void onViewDropped(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
+                saveMapStyles(itemsList);
+            }
+
+            public class ItemHolder extends RecyclerView.ViewHolder {
+                public TextView title;
+                public ImageView handleView;
+                public ImageView closeBtn;
+
+                public ItemHolder(View itemView) {
+                    super(itemView);
+
+                    title = (TextView) itemView.findViewById(R.id.title);
+                    handleView = (ImageView) itemView.findViewById(R.id.handle_view);
+                    closeBtn = (ImageView) itemView.findViewById(R.id.closeImageButton);
+                }
+            }
+        }
+
+        public void saveMapStyles(List<String> styles) {
+            getParams().put(KEY_STYLES, TextUtils.join(",", styles));
+        }
+
+        private List<String> loadMapStyles() {
+
+            List<String> styles = new ArrayList<>();
+
+            String filtersId = getParams().get(KEY_STYLES);
+
+            if (filtersId != null && !filtersId.trim().isEmpty()) {
+                Collections.addAll(styles, filtersId.split(","));
+            }
+
+            return styles;
         }
     }
 }

@@ -140,6 +140,7 @@
 
         <item name="dialog_inactive_text_color">@color/icon_color_light</item>
         <item name="secondary_icon_color">@color/icon_color_light</item>
+        <item name="primary_icon_color">@color/icon_color</item>
         <item name="appbar_layout_theme">@style/OsmandLightTheme.DarkActionbar</item>
         <item name="search_tabbar_layout_theme">@style/OsmandLightTheme.SearchTabbar</item>
         <item name="toolbar_theme">@style/OsmandLightTheme.Toolbar</item>
@@ -289,6 +290,7 @@
 
         <item name="dialog_inactive_text_color">@color/dialog_inactive_text_color_dark</item>
         <item name="secondary_icon_color">@color/dialog_inactive_text_color_dark</item>
+        <item name="primary_icon_color">@color/color_white</item>
         <item name="appbar_layout_theme">@style/OsmandDarkTheme.DarkActionbar</item>
         <item name="search_tabbar_layout_theme">@style/OsmandDarkTheme.SearchTabbar</item>
         <item name="toolbar_theme">@style/OsmandDarkTheme</item>

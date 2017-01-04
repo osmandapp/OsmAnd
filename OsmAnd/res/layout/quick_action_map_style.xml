@@ -21,14 +21,14 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/quick_action_poi_list"
+                android:text="Map styles"
                 android:textColor="?android:textColorPrimary"
                 android:textSize="@dimen/default_sub_text_size"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/quick_action_sh_poi_discrp"
+                android:text="@string/quic_action_map_style_doscrp"
                 android:textColor="?android:textColorSecondary"
                 android:textSize="@dimen/default_sub_text_size" />
 
@@ -46,14 +46,14 @@
             android:layout_height="wrap_content" />
 
         <Button
-            android:id="@+id/btnAddCategory"
+            android:id="@+id/btnAddStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/color_transparent"
             android:padding="16dp"
             android:layout_marginLeft="56dp"
             android:gravity="left"
-            android:text="@string/quick_action_add_category"
+            android:text="@string/quick_action_map_style_action"
             android:textAllCaps="true"
             android:textColor="@color/dashboard_blue"
             android:textSize="@dimen/default_list_text_size" />

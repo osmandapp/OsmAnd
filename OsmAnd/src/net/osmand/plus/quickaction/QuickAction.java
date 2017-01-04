@@ -31,6 +31,9 @@ public class QuickAction {
     protected @StringRes int nameRes;
     protected @DrawableRes int iconRes;
 
+    protected boolean toggle;
+    protected boolean single;
+
     private String name;
     private HashMap<String, String> params;
 
@@ -90,8 +93,7 @@ public class QuickAction {
 
     public void execute(MapActivity activity){};
     public void drawUI(ViewGroup parent, MapActivity activity){};
-    public void fillParams(View root, MapActivity activity){};
-
+    public boolean fillParams(View root, MapActivity activity){ return true; };
 
     @Override
     public boolean equals(Object o) {
