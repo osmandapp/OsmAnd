@@ -2647,4 +2647,45 @@
 	<string name="poi_crop_lavender">Plodina: levanduľa</string>
 	<string name="poi_crop_tea">Plodina: čaj</string>
 	<string name="poi_crop_coffee">Plodina: káva</string>
+	<string name="poi_crop_poultry">Plodina: hydina</string>
+	<string name="poi_crop_sunflower">Plodina: slnečnica</string>
+	<string name="poi_crop_raspberry">Plodina: maliny</string>
+	<string name="poi_crop_tobacco">Plodina: tabak</string>
+	<string name="poi_crop_strawberry">Plodina: jahody</string>
+	<string name="poi_crop_vegetables_flowers">Plodina: zelenina, kvety</string>
+	<string name="poi_crop_cassava">Plodina: maniok</string>
+	<string name="poi_crop_cranberry">Plodina: brusnice</string>
+	<string name="poi_crop_asparagus">Plodina: špargľa</string>
+	<string name="poi_crop_flowers">Plodina: kvety</string>
+
+	<string name="poi_clothes_women">Dámske</string>
+	<string name="poi_clothes_underwear">Spodné prádlo</string>
+	<string name="poi_clothes_men">Pánske</string>
+	<string name="poi_clothes_wedding">Svadobné šaty</string>
+	<string name="poi_clothes_sports">Športové</string>
+	<string name="poi_clothes_babies">Novorodenecké</string>
+	<string name="poi_clothes_denim">Džínsové</string>
+	<string name="poi_clothes_workwear">Pracovné odevy</string>
+	<string name="poi_clothes_hats">Klobúky</string>
+	<string name="poi_clothes_fur">Kožušiny</string>
+	<string name="poi_clothes_leather">Kožené</string>
+	<string name="poi_clothes_costumes">Kostýmy/masky</string>
+	<string name="poi_clothes_traditional">Ľudové/tradičné</string>
+	<string name="poi_clothes_suits">Obleky</string>
+	<string name="poi_clothes_maternity">Tehotenské</string>
+	<string name="poi_clothes_vintage">Staromódne</string>
+	<string name="poi_clothes_oversize">Nadrozmerné</string>
+	<string name="poi_clothes_schoolwear">Školské</string>
+	<string name="poi_clothes_swimwear">Plavky</string>
+	<string name="poi_clothes_socks">Ponožky</string>
+	<string name="poi_clothes_shirts">Košele</string>
+	<string name="poi_clothes_dance">Tanečné</string>
+	<string name="poi_clothes_military">Vojenské</string>
+
+	<string name="poi_shoes_children">Detská</string>
+	<string name="poi_shoes_women">Dámska</string>
+	<string name="poi_shoes_sport">Športová</string>
+	<string name="poi_shoes_men">Pánska</string>
+	<string name="poi_shoes_orthopedic">Ortopedická</string>
+
 	</resources>
