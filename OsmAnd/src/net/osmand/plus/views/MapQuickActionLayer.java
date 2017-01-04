@@ -94,6 +94,9 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionRe
             public boolean onLongClick(View v) {
                 Vibrator vibrator = (Vibrator) mapActivity.getSystemService(Context.VIBRATOR_SERVICE);
                 vibrator.vibrate(VIBRATE_SHORT);
+                quickActionButton.setScaleX(1.5f);
+                quickActionButton.setScaleY(1.5f);
+                quickActionButton.setAlpha(0.95f);
                 quickActionButton.setOnTouchListener(onQuickActionTouchListener);
                 return true;
             }
@@ -298,6 +301,10 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionRe
                     return true;
                 case MotionEvent.ACTION_UP:
                     quickActionButton.setOnTouchListener(null);
+                    quickActionButton.setPressed(false);
+                    quickActionButton.setScaleX(1);
+                    quickActionButton.setScaleY(1);
+                    quickActionButton.setAlpha(1f);
                     FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) v.getLayoutParams();
                     if (AndroidUiHelper.isOrientationPortrait(mapActivity))
                         settings.setPortraitFabMargin(params.rightMargin, params.bottomMargin);
@@ -308,18 +315,20 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionRe
                     if (initialMarginX == 0 && initialMarginY == 0 && initialTouchX == 0 && initialTouchY == 0)
                         setUpInitialValues(v, event);
 
+                    int padding = calculateTotalSizePx(R.dimen.map_button_margin);
+                    FrameLayout parent = (FrameLayout) v.getParent();
+                    FrameLayout.LayoutParams param = (FrameLayout.LayoutParams) v.getLayoutParams();
+
                     int deltaX = (int) (initialTouchX - event.getRawX());
                     int deltaY = (int) (initialTouchY - event.getRawY());
 
-                    int newMarginX = initialMarginX + deltaX;
-                    int newMarginY = initialMarginY + deltaY;
+                    int newMarginX = interpolate(initialMarginX + deltaX, v.getWidth(), parent.getWidth() - padding * 2);
+                    int newMarginY = interpolate(initialMarginY + deltaY, v.getHeight(), parent.getHeight() - padding * 2);
 
-                    FrameLayout parent = (FrameLayout) v.getParent();
-                    FrameLayout.LayoutParams param = (FrameLayout.LayoutParams) v.getLayoutParams();
-                    if (v.getHeight() + newMarginY <= parent.getHeight() && newMarginY > 0)
+                    if (v.getHeight() + newMarginY <= parent.getHeight() - padding * 2 && newMarginY > 0)
                         param.bottomMargin = newMarginY;
 
-                    if (v.getWidth() + newMarginX <= parent.getWidth() && newMarginX > 0) {
+                    if (v.getWidth() + newMarginX <= parent.getWidth() - padding * 2 && newMarginX > 0) {
                         param.rightMargin = newMarginX;
                     }
 
@@ -328,6 +337,19 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionRe
                     return true;
             }
             return false;
+        }
+
+        private int interpolate(int value, int divider, int boundsSize) {
+            int viewSize = divider;
+            if (value <= divider && value > 0)
+                return value * value / divider;
+            else {
+                int leftMargin = boundsSize - value - viewSize;
+                if (leftMargin <= divider && value < boundsSize - viewSize)
+                    return leftMargin - (leftMargin * leftMargin / divider) + value;
+                else
+                    return value;
+            }
         }
 
         private void setUpInitialValues(View v, MotionEvent event) {
