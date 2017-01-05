@@ -40,7 +40,7 @@ public class MultiTouchSupport {
 	private float scale = 1;
 	private PointF centerPoint = new PointF();
 
-	private boolean multiTouch;
+	private boolean multiTouch = false;
 
 	public MultiTouchSupport(Context ctx, MultiTouchZoomListener listener) {
 		this.ctx = ctx;
@@ -131,6 +131,8 @@ public class MultiTouchSupport {
 				case MotionEvent.ACTION_MOVE: {
 
 					if (inZoomMode) {
+						// Keep zoom center fixed or flexible
+						centerPoint = new PointF((x1 + x2) / 2, (y1 + y2) / 2);
 						if (angleDefined) {
 							float a = MapUtils.unifyRotationTo360(angle - initialAngle);
 							if (!isRotating && Math.abs(a) > ROTATION_THRESHOLD_DEG) {

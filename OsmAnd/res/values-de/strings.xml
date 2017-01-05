@@ -428,7 +428,7 @@ Karten-Kacheln können direkt online bezogen werden, und werden im OsmAnd-Untero
 	<string name="file_with_name_already_exists">Datei mit diesem Namen existiert bereits.</string>
 	<string name="poi_query_by_name_matches_categories">Mehrere passende POI-Kategorien gefunden:</string>
 	<string name="data_to_search_poi_not_available">Lokale Daten für POI-Suche nicht vorhanden.</string>
-	<string name="poi_filter_by_name">Nach Namen suchen</string>
+	<string name="poi_filter_by_name">Nach Name suchen</string>
 	<string name="old_poi_file_should_be_deleted">Die POI-Datei \'%1$s\' wird nicht mehr benötigt und kann gelöscht werden.</string>
 	<string name="update_poi_file_not_found">Lokale Datei für POI-Änderungen nicht gefunden und konnte nicht erstellt werden.</string>
 	<string name="button_upgrade_osmandplus">OsmAnd+ aktualisieren</string>
@@ -594,8 +594,8 @@ Karten-Kacheln können direkt online bezogen werden, und werden im OsmAnd-Untero
 	<string name="m">m</string>
 	<string name="old_map_index_is_not_supported">Überholtes Karten-Format \'\'{0}\'\' wird nicht mehr unterstützt</string>
 	<string name="poi_filter_car_aid">Autowerkstatt</string>
-	<string name="poi_filter_closest_poi">Nächstgelegene POI</string>
-	<string name="poi_filter_custom_filter">Eigener Filter</string>
+	<string name="poi_filter_closest_poi">Nächstgelegene POIs</string>
+	<string name="poi_filter_custom_filter">Benutzerdefinierter Filter</string>
 	<string name="poi_filter_food_shop">Lebensmittel</string>
 	<string name="poi_filter_for_tourists">Für Touristen</string>
 	<string name="poi_filter_fuel">Tankstelle</string>
@@ -962,7 +962,7 @@ Karten-Kacheln können direkt online bezogen werden, und werden im OsmAnd-Untero
 	<string name="filter_current_poiButton">Filtern</string>
 	
 	<string name="edit_filter_save_as_menu_item">Speichern als</string>
-	<string name="edit_filter_delete_dialog_title">Ausgewählten Filter wirklich löschen?</string>
+	<string name="edit_filter_delete_dialog_title">Ausgewählten Filter löschen?</string>
 	<string name="edit_filter_delete_message">Der Filter {0} wurde gelöscht</string>
 	<string name="edit_filter_create_message">Der Filter {0} wurde erstellt</string>
 	
@@ -2117,8 +2117,8 @@ Lon %2$s</string>
     <string name="shared_string_upload">Hochladen</string>
     <string name="shared_string_qr_code">QR-Code</string>
     <string name="map_downloaded">Karte heruntergeladen</string>
-    <string name="map_downloaded_descr">Karte von %1$s wurde heruntergeladen. Gehen Sie zur Karte, um sie zu benutzen.</string>
-    <string name="go_to_map">Zur Karte gehen</string>
+    <string name="map_downloaded_descr">Die Karte von %1$s wurde heruntergeladen und kann nun benutzt werden.</string>
+    <string name="go_to_map">Karte anzeigen</string>
     <string name="lang_nds">Plattdeutsch</string>
     <string name="lang_mk">Mazedonisch</string>
     <string name="read_more">Weiter lesen</string>
@@ -2453,7 +2453,7 @@ Wenn Sie OsmAnd und OSM lieben und unterstützen wollen, so ist dies die perfekt
  	<string name="app_mode_train">Zug</string>
     <string name="coords_format">Koordinatenformat</string>
     <string name="coords_format_descr">Format der geographischen Koordinaten</string>
-		<string name="shared_string_is_open_24_7">Offen 7x24h</string>
+		<string name="shared_string_is_open_24_7">24/7 geöffnet</string>
   	<string name="storage_directory_card">Speicherkarte</string>
     
 <string name="map_widget_search">Suche</string>
@@ -2496,9 +2496,9 @@ Wenn Sie OsmAnd und OSM lieben und unterstützen wollen, so ist dies die perfekt
     <string name="get_started">Erste Schritte</string>
     <string name="update_all_maps_now">Wollen sie jetzt alle Karten aktualisieren?</string>
     <string name="clear_tile_data">Alle Kartenkacheln löschen</string>
-    <string name="skip_map_downloading_desc">Es sind keine Offline-Karten installiert. Sie können jetzt eine Karte auswählen oder später Karten über “Menü - %1$s“ herunterladen.</string>
+    <string name="skip_map_downloading_desc">Es sind keine Offlinekarten installiert. Sie können jetzt eine Karte auswählen oder später Karten über “Menü - %1$s“ herunterladen.</string>
     <string name="search_another_country">Eine andere Region auswählen</string>
-    <string name="search_map">Karte wird gesucht…</string>
+    <string name="search_map">Karten werden gesucht…</string>
     <string name="first_usage_wizard_desc">Lassen Sie OsmAnd Ihren Standort bestimmen und Karten für diese Region zum Herunterladen vorschlagen.</string>
     <string name="location_not_found">Position nicht gefunden</string>
     <string name="no_inet_connection">Keine Internetverbindung</string>
@@ -2545,12 +2545,12 @@ Wenn Sie OsmAnd und OSM lieben und unterstützen wollen, so ist dies die perfekt
     <string name="christmas_poi">Weihnachts POI</string>
     <string name="christmas_desc">Im Vorgriff auf Weihnachten und Neujahr, können Sie Weihnachts POI anzeigen: Weihnachtsbäume, Märkte, etc.</string>
     <string name="christmas_desc_q">Weihnachts POI anzeigen?</string>
-    <string name="save_track_min_speed">Mindestgeschwindigkeit für die Protokollierung</string>
+    <string name="save_track_min_speed">Mindestgeschwindigkeit für Aufzeichnung</string>
     <string name="save_track_min_speed_descr">Setzen Sie die Minimalgeschwindigkeit, bei der ein Punkt gespeichert wird</string>
-    <string name="save_track_min_distance">Bewegungserkennung für Protokollierung</string>
-    <string name="save_track_min_distance_descr">Wählen Sie die Mindestentfernung von der letzten Position, damit die Protokollierung ausgelöst wird</string>
-    <string name="save_track_precision">Minimale Genauigkeit der Protokollierung</string>
-    <string name="save_track_precision_descr">Minimale Genauigkeit der Protokollierung auswählen</string>
+    <string name="save_track_min_distance">Bewegungserkennung für Aufzeichnung</string>
+    <string name="save_track_min_distance_descr">Wählen Sie die Mindestentfernung von der letzten Position, ab der ein Punkt aufgezeichnet wird</string>
+    <string name="save_track_precision">Minimale Genauigkeit der Aufzeichnung</string>
+    <string name="save_track_precision_descr">Wählen Sie die minimale Genauigkeit für die Aufzeichnung eines Punktes aus</string>
     <string name="rendering_attr_contourColorScheme_description">Höhenlinien Farbschema</string>
     <string name="shared_string_continue">Fortsetzen</string>
     <string name="shared_string_pause">Pause</string>
@@ -2600,7 +2600,8 @@ und vieles mehr ...
     <string name="rendering_attr_contourWidth_name">Breite der Höhenlinien</string>
     <string name="rendering_attr_contourDensity_description">Dichte der Höhenlinien</string>
     <string name="rendering_attr_contourDensity_name">Dichte der Höhenlinien</string>
-    <string name="rendering_value_high_name">Höhe</string>
+    <string name="rendering_value_high_name">Hoch</string>
     <string name="rendering_value_medium_w_name">Mittel</string>
     <string name="rendering_value_low_name">Niedrig</string>
+    <string name="rendering_attr_hideWaterPolygons_name">Wasserflächen ausblenden</string>
     </resources>

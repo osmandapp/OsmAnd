@@ -808,7 +808,7 @@
   <string name="favourites_search_desc">Meklēšana izlasē</string>
   
   <string name="rendering_attr_noPolygons_description">Padarīt visus zemes lietojuma apgabalus caurspīdīgus</string>
-  <string name="rendering_attr_noPolygons_name">Bez poligoniem</string>
+  <string name="rendering_attr_noPolygons_name">Poligoni</string>
   <string name="rendering_attr_appMode_name">Renderēšanas režīms</string>
   <string name="rendering_attr_appMode_description">Kartes optimizēšana atbilstošam lietotāja profilam</string>
   <string name="rendering_attr_contourLines_description">Iestatīt minimālo mērogu kontūrlīniju attēlošanai (nepieciešams SRTM-fails):</string>
@@ -1181,7 +1181,7 @@ OsmAnd ir atvērtā koda navigācijas aplikācija ar piekļuvi vispusīgiem Open
     <string name="download_regular_maps">Standarta kartes</string>
     <string name="download_roads_only_maps">Ceļu kartes</string>
     
-	<string name="rendering_attr_noAdminboundaries_name">Nerādīt robežas</string>
+	<string name="rendering_attr_noAdminboundaries_name">Robežas</string>
 	<string name="rendering_attr_noAdminboundaries_description">Noņemt reģionālo robežu attēlošanu (admin līmeņi 5-9)</string>
     
     
@@ -2021,7 +2021,7 @@ Vai gribat veikt jaunu reģistrāciju?</string>
     <string name="download_files_error_not_enough_space">Nav brīvas vietas!
  Vajag {3} MB pagaidu un {1} MB patstāvīgas vietas.
  Patreiz brīvi pieejami ir tikai {2} MB.</string>
-    <string name="upload_osm_note_description">Jūs varat augšupielādēt OSM Note anonīmi caur savu OpenStreetMap.org profilu.</string>
+    <string name="upload_osm_note_description">Jūs varat augšupielādēt OSM Notes anonīmi vai caur savu OpenStreetMap.org profilu.</string>
     <string name="upload_osm_note">Augšupielādēt OSM Note</string>
     <string name="map_marker_1st">Pirmais marķieris</string>
     <string name="map_marker_2nd">Otrais marķieris</string>
@@ -2206,8 +2206,8 @@ Vai gribat veikt jaunu reģistrāciju?</string>
     <string name="lang_ceb">Cebuanu</string>
     <string name="disable_recording_once_app_killed">Nerakstīt automātiski</string>
     <string name="rendering_value_disabled_name">Atslēgts</string>
-    <string name="rendering_value_walkingRoutesScopeOSMC_name">Iekrāsojums pēc maršruta gaitas</string>
-    <string name="rendering_value_walkingRoutesOSMC_name">Iekrāsojums pēc OSMC</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">Krāsa pēc tīkla piederības</string>
+    <string name="rendering_value_walkingRoutesOSMC_name">Krāsa pēc OSMC pārgājienu simbola</string>
     <string name="osmo_share_my_location">Sūtīt atrašanās vietu</string>
     <string name="local_recordings_delete_all_confirm">"Vai vēlaties izdzēst  %1$d piezīmes?"</string>
     <string name="rendering_attr_pisteRoutes_name">Slēpošanas trases</string>
@@ -2519,7 +2519,7 @@ Aktivizējot spraudni, kartes stils tiek nomainīts uz \"Ziema un slēpes,\" att
     <string name="coords_search">Meklēšana pēc koordinātēm</string>
     <string name="advanced_coords_search">Padziļinātā meklēšana pēc koordinātēm</string>
     <string name="back_to_search">Atpakaļ uz meklēt</string>
-    <string name="confirmation_to_delete_history_items">Vai vēlaties izdzēst atzīmētās vēstures vienības?</string>
+    <string name="confirmation_to_delete_history_items">Vai vēlaties izdzēst atzīmētās vienības no vēstures?</string>
     <string name="show_something_on_map">Rādīt %1$s uz kartes</string>
     <string name="release_2_4">"
  Jauna pilnā teksta meklēšana
@@ -2579,7 +2579,7 @@ Un vēl...
     <string name="save_track_precision">Minimālās precizitātes ieraksts</string>
     <string name="save_track_precision_descr">Iestatiet minimālo precizitāti, lai punkts tiktu ierakstīts žurnālā</string>
     <string name="christmas_poi">Ziemassvētku POI</string>
-    <string name="christmas_desc">Ziemassvētku un Jaunā Gada noskaņās varat izvēlēties saistītos POI kā Ziemassvētku eglītes un tirdziņus u.c.</string>
+    <string name="christmas_desc">Ziemassvētku un Jaunā Gada noskaņās varat izvēlēties ar tiem saistītos POI kā Ziemassvētku eglītes un tirdziņus u.c.</string>
     <string name="christmas_desc_q">Rādīt Ziemassvētku POI?</string>
     <string name="rendering_value_light_brown_name">Gaiši brūns</string>
     <string name="rendering_value_dark_brown_name">Tumši brūns</string>
@@ -2602,4 +2602,21 @@ kas tiks pievienots jūsu Kategorijas sadaļai.</string>
     <string name="rendering_value_fine_name">Smalki</string>
     <string name="lang_kab">Kabuļu</string>
     <string name="driving_region_australia">Austrālija</string>
+    <string name="rendering_attr_contourDensity_description">Kontūrlīniju biezums</string>
+    <string name="rendering_attr_contourDensity_name">Kontūrlīniju biezums</string>
+    <string name="rendering_value_high_name">Augsts</string>
+    <string name="rendering_value_medium_w_name">Vidējs</string>
+    <string name="rendering_value_low_name">Zems</string>
+    <string name="rendering_attr_contourWidth_description">Kontūrlīniju platums</string>
+    <string name="rendering_attr_contourWidth_name">Kontūrlīniju platums</string>
+    <string name="rendering_attr_hideWaterPolygons_description">Ūdens</string>
+    <string name="legacy_search">Meklēšanas vēsture</string>
+    <string name="show_legacy_search">Rādīt vēsturi</string>
+    <string name="show_legacy_search_desc">Iespējot meklēšanas vēsturi izvēlnē</string>
+    <string name="routing_attr_allow_motorway_name">Atļaut automağistrāles</string>
+    <string name="routing_attr_allow_motorway_description">Atļaut automağistrāles</string>
+    <string name="wiki_around">Tuvākie Wikipēdijas raksti</string>
+    <string name="selected_categories">Atzīmētās kategorijas</string>
+    <string name="lang_sr_latn">Serbu (latīņu)</string>
+    <string name="lang_zh_hk">Ķīniešu (Honkongas)</string>
     </resources>

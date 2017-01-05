@@ -78,6 +78,8 @@ public class NauticalActivity extends Activity {
 			Object inst = mm.invoke(null, ctx == null ? this : ctx);
 			Method log = cl.getMethod("logEvent", String.class, Bundle.class);
 			log.invoke(inst, event, new Bundle());
+		} catch (ClassNotFoundException e) {
+			//ignore
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

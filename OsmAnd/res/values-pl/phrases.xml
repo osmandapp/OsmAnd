@@ -3364,4 +3364,8 @@
 	<string name="poi_tower_construction_dome">Konstrukcja: kopuła</string>
 	<string name="poi_tower_construction_concealed">Konstrukcja: maskowana</string>
 
+<string name="poi_railway_yard">Stacja towarowa</string>
+
+<string name="poi_coworking_space">Centrum coworkingowe</string>
+
 </resources>

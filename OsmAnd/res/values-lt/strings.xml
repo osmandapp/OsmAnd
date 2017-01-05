@@ -35,7 +35,7 @@ Tiek vieta, tiek laikas yra matomi OsmAnd valdymo skydelyje bei skydelyje žemė
     <string name="route_kl">Laikykitės kairės ir važiuokite</string>
     <string name="route_kr">Laikykitės dešinės ir važiuokite</string>
     <string name="rendering_attr_noPolygons_description">Visus aplinkos objektus pažymėtus žemėlapyje daryti skaidriais</string>
-    <string name="rendering_attr_noPolygons_name">Jokių daugiakampių</string>
+    <string name="rendering_attr_noPolygons_name">Daugiakampiai</string>
     <string name="rendering_attr_appMode_name">Vaizdavimo režimas</string>
     <string name="rendering_attr_appMode_description">Žemėlapį optimizuoti</string>
     <string name="rendering_attr_contourLines_description">Rodyti pradedant masteliu (reikia SRTM failo):</string>
@@ -230,7 +230,7 @@ Tailinius žemėlapius galimi atsisiųsti iš interneto arba paruošti naudojimu
 
 
     <string name="download_files_not_enough_space">Neužtenka vietos parsiųsti %1$s MB (laisva: %2$s).</string>
-    <string name="download_files_question_space">Parsiųsti {0} failą(-us)? 
+    <string name="download_files_question_space">Atsiųsti {0} failą(-us)? 
 Tam prireiks {1} MB pastoviam saugojimui. 
 (Dabar laisvos vietos yra {2} MB.)</string>
 
@@ -1010,7 +1010,7 @@ Savybės:
     <string name="incomplete_locale">nebaigta</string>
     <string name="map_widget_max_speed">Leidžiamas greitis</string>
 
-    <string name="rendering_attr_noAdminboundaries_name">Paslėpti ribas</string>
+    <string name="rendering_attr_noAdminboundaries_name">Ribos</string>
     <string name="rendering_attr_noAdminboundaries_description">Neberodyti regionų ribų (administratoriaus 5-9 lygiai)</string>
 
 
@@ -1938,7 +1938,8 @@ Norėdami grįžti į įprastinių OsmAnd žemėlapių atvaizdavimą paprasčiau
     <string name="osmand_parking_time_left">liko</string>
     <string name="waypoint_visit_after">Aplankyti po</string>
     <string name="waypoint_visit_before">Aplankyti iki</string>
-    <string name="short_location_on_map">Platuma %1$s\n Ilguma %2$s</string>
+    <string name="short_location_on_map">Platuma %1$s
+Ilguma %2$s</string>
     <string name="tips_and_tricks_descr">Dažni klausimai, paskutiniai keitimai ir kita</string>
     <string name="routing_settings_2">Navigacijos nustatymai</string>
     <string name="general_settings_2">Pagrindiniai nutatymai</string>
@@ -2556,7 +2557,7 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="edit_filter">Redaguoti kategorijas</string>
     <string name="subcategories">Subkategorijos</string>
     <string name="selected_categories">Pasirinktos kategorijos</string>
-    <string name="create_custom_poi">Sukurti naudotojo LV</string>
+    <string name="create_custom_poi">Sukurti pasirinktiną filtravimą</string>
     <string name="custom_search">Naudotojo nustatyta paieška</string>
     <string name="shared_string_filters">Filtrai</string>
     <string name="apply_filters">Pritaikyti filtrus</string>
@@ -2623,4 +2624,17 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="christmas_desc_q">Parodyti Kalėdines LV?</string>
     <string name="rendering_attr_contourColorScheme_name">Kontūro linijų spalvų schema</string>
     <string name="search_hint">Įrašykite miesto pavadinimą, adresą ar LV</string>
+    <string name="rendering_value_high_name">Aukštas</string>
+    <string name="rendering_value_medium_w_name">Vidutinis</string>
+    <string name="rendering_value_low_name">Žemas</string>
+    <string name="rendering_attr_hideWaterPolygons_description">Vanduo</string>
+    <string name="rendering_attr_hideWaterPolygons_name">Slėpti vandenį</string>
+    <string name="search_map_hint">Ieškoti miesto arba regiono</string>
+    <string name="upload_poi">Įkelti POI</string>
+    <string name="gpx_appearance">Išvaizda</string>
+    <string name="osmo_pause_location">Pauzė</string>
+    <string name="osmo_service_running">Veikia OsMo paslauga</string>
+    <string name="shared_string_pause">Pauzė</string>
+    <string name="lang_sr_latn">Serbų (lotynų)</string>
+    <string name="lang_zh_hk">Kiniečių (Honkongas)</string>
     </resources>

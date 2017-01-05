@@ -2410,7 +2410,7 @@ Si aprecieu OsmAnd  i OSM i voleu ajudar-los, és la via perfecta per fer-ho."</
     <string name="back_to_search">Torna a la cerca</string>
     <string name="confirmation_to_delete_history_items">Voleu esborrar els elements seleccionats de l\'historial?</string>
     <string name="show_something_on_map">Situa %1$s en el mapa</string>
-    <string name="dist_away_from_my_location">Cwrca %1$s més enllà</string>
+    <string name="dist_away_from_my_location">Cerca %1$s més enllà</string>
     <string name="coords_search">Cerca per coordenades</string>
     <string name="advanced_coords_search">Cerca avançada per coordenades</string>
     <string name="route_stops_before">Queden %1$s parades</string>
@@ -2537,4 +2537,5 @@ Si aprecieu OsmAnd  i OSM i voleu ajudar-los, és la via perfecta per fer-ho."</
     <string name="rendering_value_high_name">Gros</string>
     <string name="rendering_value_medium_w_name">Mitjà</string>
     <string name="rendering_value_low_name">Baix</string>
+    <string name="rendering_attr_hideWaterPolygons_name">Treu hidràulic</string>
     </resources>

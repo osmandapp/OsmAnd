@@ -822,7 +822,7 @@
 	<string name="poi_garden_furniture">Gartenmöbelladen</string>
 	<string name="poi_leather">Ledergeschäft</string>
 	<string name="poi_music">Musikgeschäft</string>
-	<string name="poi_scuba_diving_shop">Tauchgeschäft</string>
+	<string name="poi_scuba_diving_shop">Gerätetauchbedarf</string>
 	<string name="poi_tyres">Reifengeschäft</string>
 	<string name="poi_watches">Uhrengeschäft</string>
 	<string name="poi_swimming_pool_shop">Poolzubehörgeschäft</string>
@@ -1172,13 +1172,13 @@
 	<string name="poi_internet_access_type_terminal">Arbeitsplatz</string>
 	<string name="poi_internet_access_type_wired">kabelgebunden</string>
 	<string name="poi_internet_access_type_public">Internetzugang: öffentlich</string>
-	<string name="poi_internet_access_type_service">Internetzugang: Service</string>
+	<string name="poi_internet_access_type_service">Internetzugang: Dienstleistung</string>
 	<string name="poi_internet_access_type_no">Kein Internetzugang</string>
 	<string name="poi_internet_access_type_yes">Mit Internetzugang</string>
 
 	<string name="poi_maxwidth">Maximalbreite</string>
-	<string name="poi_iata">IATA Code</string>
-	<string name="poi_icao">ICAO Code</string>
+	<string name="poi_iata">IATA-Code</string>
+	<string name="poi_icao">ICAO-Code</string>
 	<string name="poi_faa">FAA Code</string>
 	
 	<string name="poi_width">Breite</string>
@@ -1998,7 +1998,7 @@
 	<string name="poi_resource_beryl">Beryll</string>
 	<string name="poi_resource_bismuth">Wismut</string>
 	<string name="poi_resource_chromite">Chromit</string>
-	<string name="poi_resource_clay">Lehm</string>
+	<string name="poi_resource_clay">Ton</string>
 	<string name="poi_resource_coal">Kohle</string>
 	<string name="poi_resource_copper">Kupfer</string>
 	<string name="poi_resource_diamond">Diamant</string>
@@ -2282,7 +2282,7 @@
 	<string name="poi_sanitary_dump_station_yes">Sanitäre Entsorgungsstation: Ja</string>
 	<string name="poi_sanitary_dump_station_no">Sanitäre Entsorgungsstation: Nein</string>
 	<string name="poi_sanitary_dump_station_customers">Sanitäre Entsorgungsstation: Kunden</string>
-	<string name="poi_refugee_yes">Ausstattung für Flüchtlinge</string>
+	<string name="poi_refugee_yes">Einrichtungen für Flüchtlinge</string>
 	<string name="poi_social_facility_group_home">Wohngruppe</string>
 	<string name="poi_social_facility_assisted_living">Betreutes Wohnen</string>
 	<string name="poi_social_facility_outreach">Freier Treff</string>
@@ -2443,7 +2443,7 @@
 	<string name="poi_wetland_palsa_bog">Palsamoor</string>
 	<string name="poi_payment_icsf_yes">IC gespeicherte Fährfahrkarten</string>
 	<string name="poi_payment_icsf_no">IC gespeicherte Fährfahrkarten nicht akzeptiert</string>
-	<string name="poi_health_specialty_general_yes">Hausarzt</string>
+	<string name="poi_health_specialty_general_yes">Allgemeinmediziner</string>
 	<string name="poi_health_specialty_ophthalmology_yes">Augenheilkunde</string>
 	<string name="poi_health_specialty_gynaecology_yes">Gynäkologie</string>
 	<string name="poi_health_specialty_internal_medicine_yes">Innere Medizin</string>
@@ -2455,9 +2455,9 @@
 	<string name="poi_health_specialty_urology_yes">Urologie</string>
 	<string name="poi_health_specialty_surgery_yes">Allgemeine Chirurgie</string>
 	<string name="poi_health_specialty_radiology_yes">Radiologie</string>
-	<string name="poi_health_specialty_psychiatry_yes">Psychiatrie und Psychotherapie</string>
+	<string name="poi_health_specialty_psychiatry_yes">Psychiatrie</string>
 	<string name="poi_health_specialty_neurology_yes">Neurologie</string>
-	<string name="poi_health_specialty_dermatovenereology_yes">Haut- und Geschlechtskrankheiten</string>
+	<string name="poi_health_specialty_dermatovenereology_yes">Dermato- und Venerologie</string>
 	<string name="poi_health_specialty_cardiology_yes">Kardiologie</string>
 	<string name="poi_health_specialty_trauma_yes">Traumatologie</string>
 	<string name="poi_health_specialty_biology_yes">Klinische Biologie</string>
@@ -3090,8 +3090,8 @@
 	<string name="poi_xmas_url">Weihnachten: Internetseite</string>
 
 <string name="poi_vending_type">Verkaufsart</string>
-	<string name="poi_bicycle_service">Fahrrad-Kundendienst</string>
-	<string name="poi_service_car">Kundendienst</string>
+	<string name="poi_bicycle_service">Fahrradwerkstatt</string>
+	<string name="poi_service_car">Dienstleistung</string>
 	<string name="poi_self_service">Selbstbedienung</string>
 	<string name="poi_pharmacy_dispensing">Rezepte</string>
 	<string name="poi_archaeological_site_type">Typ</string>
@@ -3099,7 +3099,7 @@
 	<string name="poi_denomination">Konfession</string>
 	<string name="poi_information_type">Typ</string>
 	<string name="poi_drive_in">Drive in</string>
-	<string name="poi_drive_through">Durchfahrt</string>
+	<string name="poi_drive_through">Durchfahrschalter</string>
 	<string name="poi_beauty_salon_service">Dienstleistung</string>
 	<string name="poi_public_bookcase">Öffentlicher Bücherschrank</string>
 	<string name="poi_public_bookcase_type_phone_box">Typ: Telefonzelle</string>
@@ -3140,7 +3140,7 @@
 	<string name="poi_cuisine_sausage">Wurst</string>
 	<string name="poi_cuisine_cake">Kuchen</string>
 	<string name="poi_cuisine_pasta">Teigwaren</string>
-	<string name="poi_cuisine_fast_food">Fastfood</string>
+	<string name="poi_cuisine_fast_food">Schnellimbiss</string>
 	<string name="poi_cuisine_juice">Saft</string>
 	<string name="poi_cuisine_soba">Soba</string>
 	<string name="poi_cuisine_tea_shop">Teeladen</string>
@@ -3151,7 +3151,7 @@
 	<string name="poi_cuisine_frozen_yogurt">Gefrorener Joghurt</string>
 	<string name="poi_cuisine_fried_food">Frittiertes Essen</string>
 	<string name="poi_cuisine_bistro">Bistro</string>
-	<string name="poi_cuisine_bakery">Backwaren</string>
+	<string name="poi_cuisine_bakery">Bäckerei</string>
 	<string name="poi_cuisine_couscous">Kuskus</string>
 	<string name="poi_cuisine_fried_chicken">Gebratenes Huhn</string>
 	<string name="poi_cuisine_dessert">Nachtisch</string>
@@ -3160,14 +3160,14 @@
 	<string name="poi_cuisine_piadina">Piadina</string>
 	<string name="poi_cuisine_falafel">Falafel</string>
 	<string name="poi_cuisine_smoothie">Smoothie</string>
-	<string name="poi_cuisine_snack">Imbiss(Snack)</string>
+	<string name="poi_cuisine_snack">Imbiss</string>
 	<string name="poi_cuisine_souvlaki">Souvlaki</string>
 	<string name="poi_cuisine_yogurt">Joghurt</string>
 	<string name="poi_cuisine_gyros">Gyros</string>
 	<string name="poi_cuisine_empanada">Empanada</string>
 	<string name="poi_cuisine_crepes">Crepes</string>
 	<string name="poi_cuisine_suki">Suki</string>
-	<string name="poi_cuisine_bubble_tea">Luftblasentee</string>
+	<string name="poi_cuisine_bubble_tea">Bubble Tea</string>
 	<string name="poi_cuisine_meat">Fleisch</string>
 	<string name="poi_cuisine_wings">Flügel</string>
 	<string name="poi_cuisine_waffle">Waffel</string>
@@ -3309,12 +3309,12 @@
 	<string name="poi_locksmith">Schlüsseldienst</string>
 	<string name="poi_lighting">Leuchten</string>
 	<string name="poi_lottery">Lotteriescheine</string>
-	<string name="poi_gambling">Spielhalle</string>
+	<string name="poi_gambling">Spielbank</string>
 
 	<string name="poi_gambling_type">Typ</string>
 	<string name="poi_gambling_lottery">Lotterie</string>
 	<string name="poi_gambling_pachinko">Pachinko</string>
-	<string name="poi_gambling_slot_machines">Münzautomaten</string>
+	<string name="poi_gambling_slot_machines">Spielautomaten</string>
 	<string name="poi_gambling_betting">Wetten</string>
 	<string name="poi_gambling_bingo">Bingo</string>
 
@@ -3344,5 +3344,7 @@
 	<string name="poi_tower_construction_concealed">Konstruktion: verdeckt</string>
 
 <string name="poi_railway_yard">Güterbahnhof</string>
+
+<string name="poi_coworking_space">Coworking Space</string>
 
 </resources>

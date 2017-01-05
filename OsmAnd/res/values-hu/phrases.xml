@@ -52,7 +52,7 @@
 	<string name="poi_border_control">Határellenőrzés</string>
 	<string name="poi_traffic_signals">Jelzőlámpa</string>
 
-	<string name="poi_car_repair">Autószerviz</string>
+	<string name="poi_car_repair">Autószerelő</string>
 	<string name="poi_service_tyres">Autógumis</string>
 	<string name="poi_car_wash">Autómosó</string>
 	<string name="poi_fuel">Benzinkút</string>
@@ -177,7 +177,7 @@
 	<string name="poi_theatre">Színház</string>
 	<string name="poi_theatre_genre_circus">Cirkusz</string>
 	<string name="poi_beach_resort">Strand</string>
-	<string name="poi_hunting_stand">Vadászles</string>
+	<string name="poi_hunting_stand">Magasles</string>
 	<string name="poi_marina">Kishajókikötő</string>
 	<string name="poi_miniature_golf">Minigolf</string>
 	<string name="poi_playground">Játszótér</string>
@@ -242,7 +242,7 @@
 		<string name="poi_air_transport">Légi közlekedés</string>
 		<string name="poi_water_transport">Vízi közlekedés</string>
 		<string name="poi_bicycle_transport">Kerékpáros közlekedés</string>
-		<string name="poi_aerialway_transport">Felvonók</string>
+		<string name="poi_aerialway_transport">Kötélpályás felvonós szállítás</string>
 	<string name="poi_man_made">Építmény</string>
 		<string name="poi_water_supply">Vízellátás</string>
 		<string name="poi_power">Villamos energia</string>
@@ -272,7 +272,7 @@
 	<string name="poi_wine">Borszaküzlet</string>
 
 	<string name="poi_bag">Táskabolt</string>
-	<string name="poi_bathroom_furnishing">Fürdőszoba bútor</string>
+	<string name="poi_bathroom_furnishing">Fürdőszobabútor</string>
 	<string name="poi_bed">Ágymatrac és -felszerelés bolt</string>
 	<string name="poi_boutique">Divatszaküzlet</string>
 	<string name="poi_camera">Fényképező, objektív</string>
@@ -330,7 +330,7 @@
 	<string name="poi_halt">Vasúti megállóhely</string>
 	<string name="poi_railway_buffer_stop">Ütközőbak</string>
 	<string name="poi_helipad">Helikopter leszállóhely</string>
-	<string name="poi_aerialway_station">Felvonó állomás</string>
+	<string name="poi_aerialway_station">Kötélpályásfelvonó-állomás</string>
 	<string name="poi_aerialway_cable_car">Nagykabinos felvonó</string>
 	<string name="poi_aerialway_gondola">Gondolakabinos felvonó</string>
 	<string name="poi_aerialway_chair_lift">Üléses felvonó</string>
@@ -340,7 +340,7 @@
 	<string name="poi_aerialway_mixed_lift">Vegyes sílift</string>
 	<string name="poi_aerialway_drag_lift">Sífelvonó</string>
 	<string name="poi_aerialway_rope_tow">Kapaszkodó sílift</string>
-	<string name="poi_aerialway_goods">Áruszállító felvonó</string>
+	<string name="poi_aerialway_goods">Áruszállító kötélpályás felvonó</string>
 	<string name="poi_aerialway_magic_carpet">Szállítószalagos sílift</string>
 
 	<string name="poi_turning_circle">Fordulóhely</string>
@@ -479,11 +479,11 @@
 
 	<string name="poi_hunting_lodge">Vadászház</string>
 
-	<string name="poi_internet_access_wlan">Internet-csatlakozás: WLAN</string>
-	<string name="poi_internet_access_terminal">Internet-csatlakozás: munkaállomás</string>
-	<string name="poi_internet_access_wired">Internet-csatlakozás: kábel</string>
-	<string name="poi_internet_access_public">Internet-csatlakozás: nyilvános</string>
-	<string name="poi_internet_access_service">Internet-csatlakozás: szolgáltatás</string>
+	<string name="poi_internet_access_wlan">Internetcsatlakozás: WLAN</string>
+	<string name="poi_internet_access_terminal">Internetcsatlakozás: munkaállomás</string>
+	<string name="poi_internet_access_wired">Internetcsatlakozás: kábel</string>
+	<string name="poi_internet_access_public">Internetcsatlakozás: nyilvános</string>
+	<string name="poi_internet_access_service">Internetcsatlakozás: szolgáltatás</string>
 
 	<string name="poi_historic_monastery">Régi kolostor</string>
 	<string name="poi_religious">Vallási terület</string>
@@ -604,7 +604,7 @@
 	<string name="poi_stile">Létra</string>
 	<string name="poi_height_restrictor">Magasságkorlátozó</string>
 	<string name="poi_sally_port">Városkapu</string>
-	<string name="poi_swing_gate">Elfordítós sorompó</string>
+	<string name="poi_swing_gate">Elforduló sorompó</string>
 	<string name="poi_turnstile">Forgókapu</string>
 	<string name="poi_barrier_entrance">Átjáró falon vagy kerítésen</string>
 	<string name="poi_entrance_main">Főbejárat</string>
@@ -884,8 +884,8 @@
 	<string name="poi_denomination_georgian_orthodox">Grúz ortodox</string>
 	<string name="poi_denomination_romanian_orthodox">Román ortodox</string>
 	<string name="poi_denomination_coptic_orthodox">Kopt ortodox</string>
-	<string name="poi_internet_access_yes">Internet-csatlakozás</string>
-	<string name="poi_internet_access_no">Nincs internet-csatlakozás</string>
+	<string name="poi_internet_access_yes">Internetcsatlakozás</string>
+	<string name="poi_internet_access_no">Internetcsatlakozás nincs</string>
 
 	<string name="poi_dance_floor">Tánctér</string>
 	<string name="poi_nightclub">Diszkó</string>
@@ -989,10 +989,10 @@
 
 	<string name="poi_operator">Üzemeltető</string>
 	<string name="poi_brand">Márka</string>
-	<string name="poi_fee_yes">Igen</string>
-	<string name="poi_fee_no">Nem</string>
-	<string name="poi_drinking_water_yes">Igen</string>
-	<string name="poi_drinking_water_no">Nem</string>
+	<string name="poi_fee_yes">Van</string>
+	<string name="poi_fee_no">Nincs</string>
+	<string name="poi_drinking_water_yes">Van</string>
+	<string name="poi_drinking_water_no">Nincs</string>
 	<string name="poi_supervised_yes">Felügyelt</string>
 	<string name="poi_supervised_no">Felügyelet nélküli</string>
 	<string name="poi_seasonal_yes">Igen</string>
@@ -1007,7 +1007,7 @@
 	<string name="poi_crossing_uncontrolled">Szabályozatlan</string>
 	<string name="poi_crossing_unmarked">Jelzetlen</string>
 	<string name="poi_start_date">Kezdő dátum</string>
-	<string name="poi_wheelchair_yes">Kerekesszékkel elérhető</string>
+	<string name="poi_wheelchair_yes">Igen</string>
 	<string name="poi_wheelchair_no">Nem</string>
 	<string name="poi_wheelchair_limited">Korlátozottan</string>
 	<string name="poi_wholesale">Nagykereskedés</string>
@@ -1123,8 +1123,8 @@
 	<string name="poi_animal_shelter_bird">Madármenhely</string>
 
 	<string name="poi_seats">Helyek</string>
-	<string name="poi_backrest_yes">Háttámla: van</string>
-	<string name="poi_backrest_no">Háttámla: nincs</string>
+	<string name="poi_backrest_yes">Háttámla van</string>
+	<string name="poi_backrest_no">Háttámla nincs</string>
 
 	<string name="poi_intermittent">Időszakos</string>
 
@@ -1141,8 +1141,8 @@
 
 	<string name="poi_pump_manual">Kézi</string>
 	<string name="poi_pump_powered">Meghajtott</string>
-	<string name="poi_pump_no">Nincs szivattyú</string>
-	<string name="poi_pump_yes">Igen</string>
+	<string name="poi_pump_no">Szivattyú nincs</string>
+	<string name="poi_pump_yes">Van</string>
 
 	<string name="poi_water_characteristic_mineral">Ásványvíz</string>
 	<string name="poi_water_characteristic_mud">Víz jellege: iszapos</string>
@@ -1176,8 +1176,8 @@
 	<string name="poi_commercial">Üzleti terület</string>
 	<string name="poi_retail">Kiskereskedelmi terület</string>
 
-	<string name="poi_fireplace_yes">Igen</string>
-	<string name="poi_fireplace_no">Nincs tűzrakóhely</string>
+	<string name="poi_fireplace_yes">Van</string>
+	<string name="poi_fireplace_no">Beltéri tűzrakóhely nincs</string>
 
 	<string name="poi_covered_yes">Igen</string>
 	<string name="poi_covered_no">Fedetlen</string>
@@ -1191,10 +1191,10 @@
 	<string name="poi_toll_yes">Fizetős</string>
 	<string name="poi_toll_no">Nem fizetős</string>
 	<string name="poi_toll_hgv_yes">Tehergépjárműnek fizetős</string>
-	<string name="poi_tactile_paving_yes">Igen</string>
-	<string name="poi_tactile_paving_no">Nincs vakvezető sáv</string>
-	<string name="poi_traffic_signals_sound_yes">Igen</string>
-	<string name="poi_traffic_signals_sound_no">Nem</string>
+	<string name="poi_tactile_paving_yes">Van</string>
+	<string name="poi_tactile_paving_no">Vakvezető sáv nincs</string>
+	<string name="poi_traffic_signals_sound_yes">Van</string>
+	<string name="poi_traffic_signals_sound_no">Nincs</string>
 	<string name="poi_traffic_signals_sound_walk">Amikor át lehet menni</string>
 
 	<string name="poi_services">Pihenőhely</string>
@@ -1223,8 +1223,8 @@
 	<string name="poi_summit_cross">Csúcskereszt</string>
 
 	<string name="poi_temperature">Hőfok</string>
-	<string name="poi_bathing_yes">Fürdő: van</string>
-	<string name="poi_bathing_no">Fürdő: nincs</string>
+	<string name="poi_bathing_yes">Fürdési lehetőség</string>
+	<string name="poi_bathing_no">Fürdési lehetőség nincs</string>
 
 	<string name="poi_cargo_passengers">Utas</string>
 	<string name="poi_cargo_vehicle">Jármű</string>
@@ -1232,64 +1232,64 @@
 	<string name="poi_cargo_container">Konténer</string>
 	<string name="poi_cargo_hgv">Tehergépjármű</string>
 
-	<string name="poi_internet_access_fee_yes">Fizetős internet-csatlakozás</string>
-	<string name="poi_internet_access_fee_no">Ingyenes internet-csatlakozás</string>
+	<string name="poi_internet_access_fee_yes">Fizetős internetcsatlakozás</string>
+	<string name="poi_internet_access_fee_no">Ingyenes internetcsatlakozás</string>
 
 	<string name="poi_events_venue">Rendezvényközpont</string>
 
 	<string name="poi_diet_vegetarian_only">Csak vegetáriánus</string>
 	<string name="poi_diet_vegetarian_yes">Vegetáriánus</string>
-	<string name="poi_diet_vegetarian_no">Nincs vegetáriánus étel</string>
+	<string name="poi_diet_vegetarian_no">Vegetáriánus étel nincs</string>
 	<string name="poi_diet_vegetarian_few">Néhány vegetáriánus étel</string>
 	<string name="poi_diet_vegan_only">Csak vegán</string>
 	<string name="poi_diet_vegan_yes">Vegán</string>
-	<string name="poi_diet_vegan_no">Nincs vegán étel</string>
+	<string name="poi_diet_vegan_no">Vegán étel nincs</string>
 	<string name="poi_diet_gluten_free_only">Csak gluténmentes</string>
 	<string name="poi_diet_gluten_free_yes">Gluténmentes</string>
-	<string name="poi_diet_gluten_free_no">Nincs gluténmentes étel</string>
+	<string name="poi_diet_gluten_free_no">Gluténmentes étel nincs</string>
 	<string name="poi_diet_kosher_only">Csak kóser</string>
 	<string name="poi_diet_kosher_yes">Kóser</string>
-	<string name="poi_diet_kosher_no">Nincs kóser étel</string>
+	<string name="poi_diet_kosher_no">Kóser étel nincs</string>
 	<string name="poi_diet_halal_only">Csak halal</string>
 	<string name="poi_diet_halal_yes">Halal</string>
-	<string name="poi_diet_halal_no">Nincs halal étel</string>
+	<string name="poi_diet_halal_no">Halal étel nincs</string>
 	<string name="poi_diet_lactose_free_only">Csak laktózmentes</string>
 	<string name="poi_diet_lactose_free_yes">Laktózmentes</string>
-	<string name="poi_diet_lactose_free_no">Nincs laktózmentes étel</string>
+	<string name="poi_diet_lactose_free_no">Laktózmentes étel nincs</string>
 	<string name="poi_diet_pescetarian_yes">Peszketáriánus</string>
 
 	<string name="poi_brewery_additional">Sörfőzde név</string>
 	<string name="poi_microbrewery_yes">Házi sörfőzde</string>
-	<string name="poi_microbrewery_no">Nincs házi sörfőzde</string>
+	<string name="poi_microbrewery_no">Házi sörfőzde nincs</string>
 
 	<string name="poi_takeaway_yes">Elvitelre</string>
-	<string name="poi_takeaway_no">Nincs elvitel</string>
+	<string name="poi_takeaway_no">Elvitelre nincs</string>
 	<string name="poi_takeaway_only">Csak elvitelre</string>
 
 	<string name="poi_delivery_yes">Házhoz szállítás</string>
-	<string name="poi_delivery_no">Nincs házhoz szállítás</string>
+	<string name="poi_delivery_no">Házhoz szállítás nincs</string>
 	<string name="poi_delivery_only">Csak házhoz szállítás</string>
 
 	<string name="poi_outdoor_seating_yes">Kiülős helyek</string>
-	<string name="poi_outdoor_seating_no">Nem kiülős</string>
+	<string name="poi_outdoor_seating_no">Kiülős hely nincs</string>
 	<string name="poi_outdoor_seating_terrace">Kiülős hely: terasz</string>
 	<string name="poi_outdoor_seating_sidewalk">Kiülős hely: járda</string>
 	<string name="poi_outdoor_seating_pedestrian_zone">Kiülős hely: sétálóutca</string>
 	<string name="poi_outdoor_seating_garden">Kiülős hely: kert</string>
 	<string name="poi_outdoor_seating_patio">Kiülős hely: belső udvar</string>
 
-	<string name="poi_cocktails_yes">Igen</string>
+	<string name="poi_cocktails_yes">Van</string>
 
-	<string name="poi_second_hand_yes">Használt áruk</string>
-	<string name="poi_second_hand_no">Nincs használt áru</string>
+	<string name="poi_second_hand_yes">Használt áru</string>
+	<string name="poi_second_hand_no">Használt áru nincs</string>
 	<string name="poi_second_hand_only">Csak használt áruk</string>
 
 	<string name="poi_service_parts">Alkatrész</string>
 	<string name="poi_service_dealer">Kereskedés</string>
-	<string name="poi_service_repair">Szerviz</string>
-	<string name="poi_service_repair_no">Nincs szerviz</string>
-	<string name="poi_service_electrical">Elektromos autó szerviz</string>
-	<string name="poi_motorcycle_repair">Motorkerékpár-szerviz</string>
+	<string name="poi_service_repair">Szerelés</string>
+	<string name="poi_service_repair_no">Szerelés nincs</string>
+	<string name="poi_service_electrical">Elektromosautó-szerelés</string>
+	<string name="poi_motorcycle_repair">Motorkerékpár-szerelés</string>
 	<string name="poi_self_service_yes">Igen</string>
 	<string name="poi_self_service_no">Nem önkiszolgáló</string>
 	<string name="poi_automated_yes">Igen</string>
@@ -1297,7 +1297,7 @@
 	<string name="poi_full_service_yes">Teljes kiszolgálás</string>
 	<string name="poi_brushless_yes">Igen</string>
 	<string name="poi_brushless_no">Kefés</string>
-	<string name="poi_car_wash_no">Nincs autómosó</string>
+	<string name="poi_car_wash_no">Autómosó nincs</string>
 
 	<string name="poi_aeroway_fuel">Repülőgép üzemanyagtöltő állomás</string>
 	<string name="poi_public_bath">Közfürdő</string>
@@ -1308,17 +1308,17 @@
 	<string name="poi_female_no">Nőknek tilos</string>
 	<string name="poi_indoor_yes">Beltéri</string>
 	<string name="poi_indoor_no">Kültéri</string>
-	<string name="poi_toilets_yes">Igen</string>
+	<string name="poi_toilets_yes">Van</string>
 	<string name="poi_toilets_no">WC nincs</string>
 	<string name="poi_toilets_wheelchair_yes">Akadálymentes WC</string>
-	<string name="poi_toilets_wheelchair_no">Nincs akadálymentes WC</string>
+	<string name="poi_toilets_wheelchair_no">Akadálymentes WC nincs</string>
 	<string name="poi_toilets_access_customers">WC-használat: ügyfeleknek</string>
-	<string name="poi_toilets_access_permissive">WC használat: megtűrt</string>
-	<string name="poi_toilets_access_community">WC használat: közösség</string>
-	<string name="poi_toilets_access_public">WC használat: nyilvános</string>
+	<string name="poi_toilets_access_permissive">WC-használat: megtűrt</string>
+	<string name="poi_toilets_access_community">WC-használat: közösségi</string>
+	<string name="poi_toilets_access_public">WC-használat: nyilvános</string>
 
 	<string name="poi_diaper_yes">Pelenkázó asztal</string>
-	<string name="poi_diaper_no">Nincs pelenkázó asztal</string>
+	<string name="poi_diaper_no">Pelenkázó asztal nincs</string>
 	<string name="poi_diaper_room">Pelenkázó szoba</string>
 
 	<string name="poi_maxstay">Parkolási időkorlát</string>
@@ -1383,7 +1383,7 @@
 	<string name="poi_cypress">Ciprus</string>
 	<string name="poi_flagpole">Zászlórúd</string>
 
-	<string name="poi_bench_yes">Igen</string>
+	<string name="poi_bench_yes">Van</string>
 	<string name="poi_bench_no">Pad nélkül</string>
 	<string name="poi_bin_yes">Szemetessel</string>
 	<string name="poi_bin_no">Szemetes nélkül</string>
@@ -1538,24 +1538,24 @@
 	<string name="poi_garden_style_english">Kertstílus: angol</string>
 	<string name="poi_garden_style_japanese">Kertstílus: japán</string>
 
-	<string name="poi_capacity_disabled_yes">Igen</string>
-	<string name="poi_capacity_disabled_no">Nincs mozgáskorlátozottaknak fenntartott hely</string>
+	<string name="poi_capacity_disabled_yes">Van</string>
+	<string name="poi_capacity_disabled_no">Mozgáskorlátozottaknak fenntartott hely nincs</string>
 	<string name="poi_capacity_disabled">Mozgáskorlátozottaknak fenntartott hely</string>
-	<string name="poi_capacity_women_yes">Nőknek fenntartott hely</string>
-	<string name="poi_capacity_women_no">Nincs nőknek fenntartott hely</string>
+	<string name="poi_capacity_women_yes">Nőknek fenntartott helyek</string>
+	<string name="poi_capacity_women_no">Nőknek fenntartott hely nincs</string>
 	<string name="poi_capacity_women">Nőknek fenntartott hely</string>
-	<string name="poi_capacity_pupils">Tanulóknak fenntartott hely</string>
-	<string name="poi_capacity_teachers">Tanároknak fenntartott hely</string>
+	<string name="poi_capacity_pupils">Tanulóknak fenntartott helyek</string>
+	<string name="poi_capacity_teachers">Tanároknak fenntartott helyek</string>
 	<string name="poi_capacity_parent_yes">Szülőknek fenntartott hely</string>
-	<string name="poi_capacity_parent_no">Nincs szülőknek fenntartott hely</string>
-	<string name="poi_capacity_parent">Szülőknek fenntartott hely</string>
+	<string name="poi_capacity_parent_no">Szülőknek fenntartott hely nincs</string>
+	<string name="poi_capacity_parent">Szülőknek fenntartott helyek</string>
 
 	<string name="poi_aerialway_occupancy">Kabin-/gondola-/üléskapacitás</string>
 	<string name="poi_aerialway_capacity">Óránkénti kapacitás</string>
 	<string name="poi_aerialway_duration">Átlagos menetidő, perc</string>
-	<string name="poi_aerialway_bubble_yes">Buborék (zárt)</string>
-	<string name="poi_aerialway_bubble_no">Nincs buborék (nem zárt)</string>
-	<string name="poi_aerialway_heating_yes">Igen</string>
+	<string name="poi_aerialway_bubble_yes">Buborékos (zárt)</string>
+	<string name="poi_aerialway_bubble_no">Nem buborékos (nem zárt)</string>
+	<string name="poi_aerialway_heating_yes">Van</string>
 	<string name="poi_aerialway_heating_no">Fűtetlen</string>
 	<string name="poi_aerialway_bicycle_yes">Szállítható</string>
 	<string name="poi_aerialway_bicycle_no">Kerékpár nem szállítható</string>
@@ -1593,8 +1593,8 @@
 	<string name="poi_payment_notes_no">Bankjegyet nem fogad el</string>
 	<string name="poi_payment_cash_yes">Készpénz</string>
 	<string name="poi_payment_cash_no">Készpénzt nem fogad el</string>
-	<string name="poi_payment_debit_cards_yes">Bankkártyák</string>
-	<string name="poi_payment_debit_cards_no">Bankkártyát nem fogad el</string>
+	<string name="poi_payment_debit_cards_yes">Betéti kártyák</string>
+	<string name="poi_payment_debit_cards_no">Betéti kártyát nem fogad el</string>
 	<string name="poi_payment_bitcoin_yes">Bitcoin</string>
 	<string name="poi_payment_bitcoin_no">Bitcoint nem fogad el</string>
 	<string name="poi_payment_visa_yes">Visa</string>
@@ -1612,7 +1612,7 @@
 	<string name="poi_payment_dkv_no">DKV-t nem fogad el</string>
 	<string name="poi_payment_uta_yes">UTA</string>
 	<string name="poi_payment_uta_no">UTA kártyát nem fogad el</string>
-	<string name="poi_payment_girocard_yes">Girocard</string>
+	<string name="poi_payment_girocard_yes">Girokártya</string>
 	<string name="poi_payment_girocard_no">Girokártyát nem fogad el</string>
 	<string name="poi_payment_discover_card_yes">Discover Card</string>
 	<string name="poi_payment_discover_card_no">Discover Cardot nem fogad el</string>
@@ -1625,19 +1625,19 @@
 	<string name="poi_payment_pikepass_yes">PIKEPASS</string>
 	<string name="poi_payment_pikepass_no">PIKEPASS-t nem fogad el</string>
 	<string name="poi_payment_pikepass_designated">PIKEPASS (megjelölt)</string>
-	<string name="poi_payment_visa_debit_yes">Visa bankkártyák</string>
+	<string name="poi_payment_visa_debit_yes">Visa betéti kártyák</string>
 	<string name="poi_payment_visa_debit_no">Visa betéti kártyát nem fogad el</string>
 	<string name="poi_payment_cryptocurrencies_no">Kriptovalutát nem fogad el</string>
-	<string name="poi_payment_others_yes">Egyebek</string>
+	<string name="poi_payment_others_yes">Egyéb</string>
 	<string name="poi_payment_others_no">Egyéb fizetési módot nem fogad el</string>
 	<string name="poi_payment_paypal_yes">PayPal</string>
 	<string name="poi_payment_paypal_no">PayPal fizetést nem fogad el</string>
 	<string name="poi_description_payment">Fizetési mód</string>
 
 	<string name="poi_drive_in_yes">Van</string>
-	<string name="poi_drive_in_no">Drive-in: nincs</string>
+	<string name="poi_drive_in_no">Drive-in nincs</string>
 	<string name="poi_drive_through_yes">Van</string>
-	<string name="poi_drive_through_no">Drive-through: nincs</string>
+	<string name="poi_drive_through_no">Drive-through nincs</string>
 
 	<string name="poi_cairn">Kőrakás</string>
 
@@ -1653,10 +1653,10 @@
 	<string name="poi_inscription">Felirat</string>
 	<string name="poi_resource_aggregate">Zúzott kő</string>
 	<string name="poi_shelter_type_public_transport">Tömegközlekedés</string>
-	<string name="poi_shelter_type_picnic_shelter">Piknikező kunyhó</string>
+	<string name="poi_shelter_type_picnic_shelter">Fedett piknikezőhely</string>
 	<string name="poi_shelter_type_weather_shelter">Esőház</string>
-	<string name="poi_shelter_type_lean_to">Féltető</string>
-	<string name="poi_shelter_type_basic_hut">Egyszerű kunyhó</string>
+	<string name="poi_shelter_type_lean_to">Háromfalú fészer</string>
+	<string name="poi_shelter_type_basic_hut">Bivakkunyhó</string>
 	<string name="poi_shelter_type_building">Épület</string>
 	<string name="poi_shelter_type_wildlife_hide">Vadfigyelő rejtek</string>
 	<string name="poi_shelter_type_rock_shelter">Sziklaüreg</string>
@@ -1668,10 +1668,10 @@
 	<string name="poi_internet_access_type_wlan">Wi-Fi</string>
 	<string name="poi_internet_access_type_terminal">Munkaállomás</string>
 	<string name="poi_internet_access_type_wired">Vezetékes</string>
-	<string name="poi_internet_access_type_public">Internet-csatlakozás típusa: nyilvános</string>
-	<string name="poi_internet_access_type_service">Internet-csatlakozás típusa: szolgáltatás</string>
-	<string name="poi_internet_access_type_no">Nincs Internet-csatlakozás</string>
-	<string name="poi_internet_access_type_yes">Internet-csatlakozással</string>
+	<string name="poi_internet_access_type_public">Internetcsatlakozás típusa: nyilvános</string>
+	<string name="poi_internet_access_type_service">Internetcsatlakozás típusa: szolgáltatás</string>
+	<string name="poi_internet_access_type_no">Internetcsatlakozás nincs</string>
+	<string name="poi_internet_access_type_yes">Internetcsatlakozással</string>
 
 	<string name="poi_maxwidth">Maximális szélesség</string>
 	<string name="poi_iata">IATA-kód</string>
@@ -1736,12 +1736,12 @@
 	<string name="poi_bridge_structure_cable_stayed">Hídszerkezet: ferdekábeles</string>
 	<string name="poi_bridge_structure_boardwalk">Hídszerkezet: deszkajárda</string>
 	<string name="poi_bridge_structure_simple_wooden">Hídszerkezet: egyszerű fahíd</string>
-	<string name="poi_bridge_structure_viaduct">Hídszerkezet: viadukt</string>
+	<string name="poi_bridge_structure_viaduct">Hídszerkezet: viadukt (völgyhíd)</string>
 	<string name="poi_bridge_structure_aqueduct">Hídszerkezet: akvadukt (vízvezeték)</string>
 	<string name="poi_bridge_structure_log">Hídszerkezet: farönk</string>
 	<string name="poi_bridge_type_movable">Híd típusa: mozgatható</string>
 	<string name="poi_bridge_movable_bascule">Mozgatható híd típusa: billenthető</string>
-	<string name="poi_bridge_movable_swing">Mozgatható híd típusa: forgatható</string>
+	<string name="poi_bridge_movable_swing">Mozgatható híd típusa: elfordítható</string>
 	<string name="poi_bridge_movable_lift">Mozgatható híd típusa: emelős</string>
 	<string name="poi_bridge_movable_drawbridge">Mozgatható híd típusa: felvonóhíd</string>
 	<string name="poi_bridge_movable_submersible">Mozgatható híd típusa: merülő</string>
@@ -1749,7 +1749,7 @@
 	<string name="poi_bridge_movable_retractable">Mozgatható híd típusa: behúzható</string>
 
 	<string name="poi_lit_yes">Kivilágított</string>
-	<string name="poi_lit_no">Kiviláígatlan</string>
+	<string name="poi_lit_no">Kivilágítatlan</string>
 
 	<string name="poi_surface_unpaved">Felület: burkolatlan</string>
 	<string name="poi_surface_paved">Felület: burkolt</string>
@@ -1791,7 +1791,7 @@
 	<string name="poi_payment_type">Fizetési mód</string>
 	<string name="poi_trash_disposal">Hulladékkonténer</string>
 		<string name="poi_beacon">Jeladó</string>
-	<string name="poi_free_flying">Siklóernyőbolt</string>
+	<string name="poi_free_flying">Siklóernyő- és sárkányrepülőbolt</string>
 	<string name="poi_standpipe">Föld feletti tűzcsap</string>
 	<string name="poi_groyne">Sarkantyú</string>
 
@@ -1825,7 +1825,7 @@
 	<string name="poi_pile">Cölöp</string>
 	<string name="poi_radio_station">Rádióállomás</string>
 	<string name="poi_power_supply_yes">Van</string>
-	<string name="poi_power_supply_no">Nincs elektromos csatlakozó</string>
+	<string name="poi_power_supply_no">Elektromos csatlakozó nincs</string>
 	<string name="poi_generator_output_electricity">Kimeneti teljesítmény</string>
 	<string name="poi_generator_output_hot_water">Kimeneti teljesítmény: forró víz</string>
 	<string name="poi_generator_output_compressed_air">Kimeneti teljesítmény: sűrített levegő</string>
@@ -1849,19 +1849,19 @@
 
 	<string name="poi_badminton">Tollaslabda</string>
 	<string name="poi_brushless">Kefétlen</string>
-	<string name="poi_internet_access_type">Internet-csatlakozás típusa</string>
+	<string name="poi_internet_access_type">Internetcsatlakozás típusa</string>
 	<string name="poi_fire_hydrant_position">Pozíció</string>
 	<string name="poi_fire_hydrant_water_source">Vízforrás</string>
 	<string name="poi_payment_toll_type">Fizetési mód</string>
 	<string name="poi_traffic_signals_sound">Hangjelzés</string>
 	<string name="poi_highway_crossing_type">Típus</string>
-	<string name="poi_tactile_paving">Vakvezető burkolat</string>
+	<string name="poi_tactile_paving">Vakvezető sáv</string>
 	<string name="poi_payment_fuel_type">Üzemanyagkártyák</string>
 	<string name="poi_automated">Automatizált</string>
 	<string name="poi_fee">Díj</string>
 	<string name="poi_self_service">Önkiszolgáló</string>
 	<string name="poi_ramp_wheelchair_yes">Kerekesszékrámpa</string>
-	<string name="poi_ramp_wheelchair_no">Nincs kerekesszékrámpa</string>
+	<string name="poi_ramp_wheelchair_no">Kerekesszékrámpa nincs</string>
 	<string name="poi_wheelchair_designated">Jelölt</string>
 	<string name="poi_covered">Fedett</string>
 	<string name="poi_subway_station_filter">Metróállomás</string>
@@ -1976,7 +1976,7 @@
 	<string name="poi_vending_type">Árusítás módja</string>
 	<string name="poi_bicycle_service">Kerékpáros szolgáltatás</string>
 	<string name="poi_service_bicycle_pump_yes">Kerékpárpumpa</string>
-	<string name="poi_service_bicycle_pump_no">Nincs kerékpárpumpa</string>
+	<string name="poi_service_bicycle_pump_no">Kerékpárpumpa nincs</string>
 	<string name="poi_water_characteristic">Víz jellemzője</string>
 	<string name="poi_shoes_type">Cipőfajta</string>
 	<string name="poi_parking_type">Típus</string>
@@ -2007,14 +2007,14 @@
 	<string name="poi_information_contents">Tartalom</string>
 	<string name="poi_clock_option">További</string>
 	<string name="poi_scout_camp">Cserkésztábor</string>
-	<string name="poi_backcountry">Hátország</string>
+	<string name="poi_backcountry">Nomád</string>
 	<string name="poi_resort_type">Típus</string>
 	<string name="poi_drive_in">Drive-in</string>
 	<string name="poi_beauty_salon_service">Szolgáltatás</string>
 	<string name="poi_recycling_type">Típus</string>
 	<string name="poi_recycling_accepted_waste">Elfogadott hulladék</string>
 	<string name="poi_shelter_type">Típus</string>
-	<string name="poi_fireplace">Tűzrakó hely</string>
+	<string name="poi_fireplace">Beltéri tűzrakó hely</string>
 	<string name="poi_seasonal">Szezonális</string>
 	<string name="poi_massage_type">Masszázstípus</string>
 	<string name="poi_tents">Sátrak</string>
@@ -2033,7 +2033,7 @@
 	<string name="poi_honey">Mézbolt</string>
 	<string name="poi_religion">Kegytárgy</string>
 
-	<string name="poi_pharmacy_dispensing">Recept beváltható</string>
+	<string name="poi_pharmacy_dispensing">Vény</string>
 	<string name="poi_medical_system">Orvosi rendszer</string>
 	<string name="poi_home_visit">Otthoni látogatás</string>
 	<string name="poi_waterway_fuel">Hajóüzemanyag-töltő állomás</string>
@@ -2120,7 +2120,7 @@
 	<string name="poi_diet_halal_filter_yes">Halal</string>
 	<string name="poi_takeaway_filter_yes">Igen</string>
 	<string name="poi_delivery_filter_yes">Igen</string>
-	<string name="poi_outdoor_seating_filter_yes">Igen</string>
+	<string name="poi_outdoor_seating_filter_yes">Van</string>
 	<string name="poi_branch">Telephely</string>
 
 	<string name="poi_memorial_prasat">Praszat</string>
@@ -2131,21 +2131,21 @@
 	<string name="poi_shop_additional_yes">Üzlettel</string>
 
 	<string name="poi_service_bicycle_retail_yes">Kiskereskedés</string>
-	<string name="poi_service_bicycle_retail_no">Nincs kerékpárkereskedés</string>
-	<string name="poi_service_bicycle_repair_yes">Javítás</string>
-	<string name="poi_service_bicycle_repair_no">Nincs kerékpárjavítás</string>
+	<string name="poi_service_bicycle_retail_no">Kerékpár-kereskedés nincs</string>
+	<string name="poi_service_bicycle_repair_yes">Szerelés</string>
+	<string name="poi_service_bicycle_repair_no">Kerékpárszerelés nincs</string>
 	<string name="poi_service_bicycle_rental_yes">Kölcsönzés</string>
-	<string name="poi_service_bicycle_rental_no">Nincs kerékpárkölcsönzés</string>
-	<string name="poi_service_bicycle_diy_yes">Szerszámok önálló kerékpárjavításhoz</string>
-	<string name="poi_service_bicycle_diy_no">Nincs szerszám önálló kerékpárjavításhoz</string>
+	<string name="poi_service_bicycle_rental_no">Kerékpárkölcsönzés nincs</string>
+	<string name="poi_service_bicycle_diy_yes">Önálló kerékpárszereléshez szerszám</string>
+	<string name="poi_service_bicycle_diy_no">Önálló kerékpárszereléshez szerszám nincs</string>
 	<string name="poi_service_bicycle_cleaning_yes">Tisztítás</string>
-	<string name="poi_service_bicycle_cleaning_no">Nincs kerékpártisztítás</string>
+	<string name="poi_service_bicycle_cleaning_no">Kerékpártisztítás nincs</string>
 	<string name="poi_service_bicycle_chaintool_yes">Láncszerszám</string>
-	<string name="poi_service_bicycle_chaintool_no">Nincs kerékpárlánc-szerszám</string>
+	<string name="poi_service_bicycle_chaintool_no">Kerékpárlánc-szerszám nincs</string>
 	<string name="poi_service_bicycle_second_hand_yes">Használtkerékpár-kereskedés</string>
-	<string name="poi_service_bicycle_second_hand_no">Nincs használtkerékpár-kereskedés</string>
+	<string name="poi_service_bicycle_second_hand_no">Használtkerékpár-kereskedés nincs</string>
 	<string name="poi_service_bicycle_charging_yes">Kerékpártöltés</string>
-	<string name="poi_service_bicycle_charging_no">Nincs kerékpártöltés</string>
+	<string name="poi_service_bicycle_charging_no">Kerékpártöltés nincs</string>
 	<string name="poi_bicycle_repair_station">Önálló kerékpárszerelő állomás</string>
 
 	<string name="poi_wildlife_hide">Vadállat-megfigyelő hely</string>
@@ -2190,7 +2190,7 @@
 	<string name="poi_historic_aircraft">Történelmi repülőgép</string>
 
 	<string name="poi_elevator_yes">Lifttel</string>
-	<string name="poi_elevator_no">Lift nélkül</string>
+	<string name="poi_elevator_no">Lift nincs</string>
 
 	<string name="poi_model_aerodrome">Modellrepülőtér</string>
 	<string name="poi_quango">Kvázi-autonóm civil szervezet (Quasi-Autonomous NGO)</string>
@@ -2229,7 +2229,7 @@
 	<string name="poi_site_type_necropolis">Nekropolisz</string>
 	<string name="poi_craft_electronics">Háztartásigép-szerelő</string>
 	<string name="poi_ramp_bicycle_yes">Kerékpárosrámpa</string>
-	<string name="poi_ramp_bicycle_no">Nincs kerékpárosrámpa</string>
+	<string name="poi_ramp_bicycle_no">Kerékpárosrámpa nincs</string>
 	<string name="poi_bicycle_parking_tree">Kerékpárfa</string>
 	<string name="poi_wiki_link">Wikipédia</string>
 
@@ -2253,7 +2253,7 @@
 
 	<string name="poi_tomb_columbarium">Típus: kolumbárium</string>
 	<string name="poi_tomb_vault">Típus: boltíves kamra</string>
-	<string name="poi_monument_yes">Emlékmű</string>
+	<string name="poi_monument_yes">Monumentális objektum</string>
 
 	<string name="poi_fuel_autogas">Autógáz</string>
 	<string name="poi_fuel_wood">Üzemanyag: fa</string>
@@ -2303,23 +2303,23 @@
 	<string name="poi_massage_sexual">Szexuális</string>
 	<string name="poi_massage_therapeutic">Terápiás</string>
 
-	<string name="poi_massage_yes">Masszázsszolgáltatások</string>
-	<string name="poi_sauna_yes">Szaunaszolgáltatások</string>
+	<string name="poi_massage_yes">Masszázs</string>
+	<string name="poi_sauna_yes">Szauna</string>
 	<string name="poi_solarium_yes">Szolárium</string>
 
 	<string name="poi_tents_yes">Engedélyezett</string>
 	<string name="poi_tents_no">Sátor nem engedélyezett</string>
-	<string name="poi_openfire_yes">Nyílt láng engedélyezett</string>
-	<string name="poi_openfire_no">Nyílt láng nem engedélyezett</string>
+	<string name="poi_openfire_yes">Tűzgyújtás engedélyezett</string>
+	<string name="poi_openfire_no">Tűzgyújtás tilos</string>
 	<string name="poi_backcountry_yes">Igen</string>
 	<string name="poi_backcountry_no">Nem</string>
-	<string name="poi_group_only_yes">Csak csoportok: igen</string>
-	<string name="poi_group_only_no">Csak csoportok: nem</string>
-	<string name="poi_washing_machine_yes">Igen</string>
-	<string name="poi_washing_machine_no">Mosógép: nem</string>
-	<string name="poi_shower_filter_yes">Igen</string>
+	<string name="poi_group_only_yes">Csak csoportoknak</string>
+	<string name="poi_group_only_no">Nem csak csoportoknak</string>
+	<string name="poi_washing_machine_yes">Van</string>
+	<string name="poi_washing_machine_no">Mosógép nincs</string>
+	<string name="poi_shower_filter_yes">Van</string>
 	<string name="poi_shower_yes">Zuhany</string>
-	<string name="poi_shower_no">Nincs zuhany</string>
+	<string name="poi_shower_no">Zuhany nincs</string>
 	<string name="poi_shower_hot">Meleg zuhany</string>
 	<string name="poi_shower_outdoor">Kültéri zuhany</string>
 	<string name="poi_shower_cold">Hideg zuhany</string>
@@ -2329,10 +2329,10 @@
 	<string name="poi_dog_no">Kutyák nem engedélyezve</string>
 
 	<string name="poi_refugee_yes">Szolgáltatások menekülteknek</string>
-	<string name="poi_refugee_no">Menekültek: nem</string>
+	<string name="poi_refugee_no">Nem menekülteknek</string>
 
 	<string name="poi_social_facility_food_bank">Élelmiszerbank</string>
-	<string name="poi_social_facility_shelter">Hajléktalanszálló</string>
+	<string name="poi_social_facility_shelter">Átmeneti szálló</string>
 	<string name="poi_social_facility_ambulatory_care">Ambuláns ellátás</string>
 	<string name="poi_social_facility_workshop">Szociális foglalkoztató</string>
 	<string name="poi_social_facility_for_senior">Idősek</string>
@@ -2357,14 +2357,14 @@
 	<string name="poi_wheelchair_description">Leírás kerekesszékes felhasználóknak</string>
 	<string name="poi_blind_description">Leírás vakoknak</string>
 	<string name="poi_highway_steps">Lépcső</string>
-	<string name="poi_handrail_yes">Korlát: igen</string>
-	<string name="poi_handrail_no">Korlát: nem</string>
+	<string name="poi_handrail_yes">Korlát</string>
+	<string name="poi_handrail_no">Korlát nincs</string>
 	<string name="poi_ramp_yes">Rámpa</string>
-	<string name="poi_ramp_no">Nincs rámpa</string>
-	<string name="poi_ramp_stroller_yes">Rámpa (babakocsis)</string>
-	<string name="poi_ramp_stroller_no">Nincs rámpa (babakocsis)</string>
+	<string name="poi_ramp_no">Rámpa nincs</string>
+	<string name="poi_ramp_stroller_yes">Rámpa (babakocsinak)</string>
+	<string name="poi_ramp_stroller_no">Rámpa (babakocsis) nincs</string>
 	<string name="poi_ramp_luggage_yes">Poggyászrámpa</string>
-	<string name="poi_ramp_luggage_no">Nincs poggyászrámpa</string>
+	<string name="poi_ramp_luggage_no">Poggyászrámpa nincs</string>
 	<string name="poi_step_count">Lépcsőfokok száma</string>
 	<string name="poi_castle_type_defensive">Vártípus: (középkori) vár</string>
 	<string name="poi_castle_type_fortress">Vártípus: (újkori) erőd</string>
@@ -2476,8 +2476,8 @@
 	<string name="poi_social_facility_for_mental_health">Értelmi fogyatékos betegek</string>
 	<string name="poi_social_facility_for_migrant">Bevándorlók</string>
 	<string name="poi_health_specialty_social_paediatrics_yes">Szociális gyermekgyógyászat</string>
-	<string name="poi_scout_yes">Cserkésztábor: igen</string>
-	<string name="poi_scout_no">Cserkésztábor: nem</string>
+	<string name="poi_scout_yes">Cserkésztáborhely</string>
+	<string name="poi_scout_no">Nem cserkésztáborhely</string>
 	<string name="poi_cuisine_steak">Steak</string>
 	<string name="poi_cuisine_tapas">Tapas</string>
 	<string name="poi_cuisine_gastropub">Gasztrokocsma</string>
@@ -2570,7 +2570,7 @@
 	<string name="poi_deaf_description">Leírás siketeknek</string>
 
 	<string name="poi_defibrillator">Defibrillátor</string>
-	<string name="poi_defibrillator_yes">Defibrillátor: igen</string>
+	<string name="poi_defibrillator_yes">Defibrillátor</string>
 
 	<string name="poi_horse_yes">Lovak engedélyezve</string>
 	<string name="poi_horse_no">Lovak nem engedélyezve</string>
@@ -2602,23 +2602,23 @@
 	<string name="poi_aquaculture_mussels">Akvakultúra: kagyló</string>
 
 	<string name="poi_provided_for_infant_yes">Csecsemők számára</string>
-	<string name="poi_provided_for_infant_no">Nem csecsemők számára</string>
+	<string name="poi_provided_for_infant_no">Csecsemők számára nincs</string>
 	<string name="poi_provided_for_toddler_yes">Kisgyermekek számára</string>
-	<string name="poi_provided_for_toddler_no">Nem kisgyermekek számára</string>
+	<string name="poi_provided_for_toddler_no">Kisgyermekek számára nincs</string>
 	<string name="poi_provided_for_child_yes">Gyermekek számára</string>
-	<string name="poi_provided_for_child_no">Nem gyermekek számára</string>
+	<string name="poi_provided_for_child_no">Gyermekek számára nincs</string>
 	<string name="poi_provided_for_adult_yes">Felnőttek számára</string>
-	<string name="poi_provided_for_adult_no">Nem felnőttek számára</string>
+	<string name="poi_provided_for_adult_no">Felnőttek számára nincs</string>
 	<string name="poi_provided_for_woman_yes">Nők számára</string>
-	<string name="poi_provided_for_woman_no">Nem nők számára</string>
+	<string name="poi_provided_for_woman_no">Nők számára nincs</string>
 	<string name="poi_provided_for_senior_yes">Idősek számára</string>
-	<string name="poi_provided_for_senior_no">Nem idősek számára</string>
+	<string name="poi_provided_for_senior_no">Idősek számára nincs</string>
 	<string name="poi_provided_for_girl_yes">Lányok számára</string>
-	<string name="poi_provided_for_girl_no">Nem lányok számára</string>
+	<string name="poi_provided_for_girl_no">Lányok számára nincs</string>
 	<string name="poi_provided_for_man_yes">Férfiak számára</string>
-	<string name="poi_provided_for_man_no">Nem férfiak számára</string>
+	<string name="poi_provided_for_man_no">Férfiak számára nincs</string>
 	<string name="poi_provided_for_boy_yes">Fiúk számára</string>
-	<string name="poi_provided_for_boy_no">Nem fiúk számára</string>
+	<string name="poi_provided_for_boy_no">Fiúk számára nincs</string>
 
 	<string name="poi_telescope">Teleszkóp</string>
 	<string name="poi_telescope_type_optical">Optikai teleszkóp</string>
@@ -2687,8 +2687,8 @@
 
 	<string name="poi_billiards">Biliárd</string>
 
-	<string name="poi_microwave_oven_yes">Mikrohullámú sütő: igen</string>
-	<string name="poi_microwave_oven_no">Mikrohullámú sütő: nem</string>
+	<string name="poi_microwave_oven_yes">Mikrohullámú sütő</string>
+	<string name="poi_microwave_oven_no">Mikrohullámú sütő nincs</string>
 	<string name="poi_parking_surface">Típus: felszíni</string>
 	<string name="poi_gaelic_games">Kelta játékok</string>
 	<string name="poi_running">Futás</string>
@@ -2704,11 +2704,11 @@
 
 	<string name="poi_construction_yes">Építés alatt</string>
 	<string name="poi_additional_atm_yes">Bankautomata</string>
-	<string name="poi_atm_no">Nincs bankautomata</string>
+	<string name="poi_atm_no">Bankautomata nincs</string>
 
 	<string name="poi_firepit">Tűzrakóhely</string>
-	<string name="poi_fair_trade_yes">Méltányos kereskedelem: igen</string>
-	<string name="poi_fair_trade_no">Méltányos kereskedelem: nem</string>
+	<string name="poi_fair_trade_yes">Méltányos kereskedelem</string>
+	<string name="poi_fair_trade_no">Méltányos kereskedelem nincs</string>
 	<string name="poi_fair_trade_only">Csak méltányos kereskedelemből származó termékek</string>
 
 
@@ -2717,22 +2717,22 @@
 
 	<string name="poi_plant_nursery">Faiskola</string>
 
-	<string name="poi_compressed_air_yes">Igen</string>
-	<string name="poi_compressed_air_no">Sűrített levegő: nem</string>
+	<string name="poi_compressed_air_yes">Van</string>
+	<string name="poi_compressed_air_no">Sűrített levegő nincs</string>
 
-	<string name="poi_car_wash_yes">Igen</string>
+	<string name="poi_car_wash_yes">Van</string>
 
-	<string name="poi_vacuum_cleaner_yes">Igen</string>
-	<string name="poi_vacuum_cleaner_no">Porszívó: nincs</string>
+	<string name="poi_vacuum_cleaner_yes">Van</string>
+	<string name="poi_vacuum_cleaner_no">Porszívó nincs</string>
 	<string name="poi_amenity_vacuum_cleaner">Porszívó</string>
 
 	<string name="poi_water_tap">Vízcsap</string>
 	<string name="poi_button_operated_yes">Gombbal működik</string>
 	<string name="poi_button_operated_no">Nem gombbal működik</string>
 
-	<string name="poi_free_flying_site_training">Képzés</string>
-	<string name="poi_free_flying_official_yes">Hivatalos: igen</string>
-	<string name="poi_free_flying_official_no">Hivatalos: nem</string>
+	<string name="poi_free_flying_site_training">Oktatás</string>
+	<string name="poi_free_flying_official_yes">Hivatalos</string>
+	<string name="poi_free_flying_official_no">Nem hivatalos</string>
 	<string name="poi_tanning_salon">Szolárium</string>
 
 	<string name="poi_medical_system_western_yes">Nyugati</string>
@@ -2746,34 +2746,34 @@
 	<string name="poi_health_amenity_type_first_aid_kit">Elsősegély-készlet</string>
 	<string name="poi_health_amenity_type_scales">Nyilvános mérlegek</string>
 
-	<string name="poi_counselling_type_addiction_yes">Tanácsadás (függőség): igen</string>
-	<string name="poi_counselling_type_addiction_no">Tanácsadás (függőség): nincs</string>
-	<string name="poi_counselling_type_antenatal_yes">Tanácsadás (terhességi): igen</string>
-	<string name="poi_counselling_type_antenatal_no">Tanácsadás (terhességi): nincs</string>
-	<string name="poi_counselling_type_drugs_yes">Tanácsadás (kábítószer): igen</string>
-	<string name="poi_counselling_type_drugs_no">Tanácsadás (kábítószer): nincs</string>
-	<string name="poi_counselling_type_education_yes">Tanácsadás (oktatás): igen</string>
-	<string name="poi_counselling_type_education_no">Tanácsadás (oktatás): nincs</string>
-	<string name="poi_counselling_type_family_yes">Tanácsadás (család): igen</string>
-	<string name="poi_counselling_type_family_no">Tanácsadás (család): nincs</string>
-	<string name="poi_counselling_type_homeless_yes">Tanácsadás (hajléktalan): igen</string>
-	<string name="poi_counselling_type_homeless_no">Tanácsadás (hajléktalan): nincs</string>
-	<string name="poi_counselling_type_immigrant_yes">Tanácsadás (bevándorló): igen</string>
-	<string name="poi_counselling_type_immigrant_no">Tanácsadás (bevándorló): nincs</string>
-	<string name="poi_counselling_type_marriage_yes">Tanácsadás (házasság): igen</string>
-	<string name="poi_counselling_type_marriage_no">Tanácsadás (házasság): nincs</string>
-	<string name="poi_counselling_type_nutrition_yes">Tanácsadás (táplálkozás): igen</string>
+	<string name="poi_counselling_type_addiction_yes">Tanácsadás (függőség)</string>
+	<string name="poi_counselling_type_addiction_no">Tanácsadás (függőség) nincs</string>
+	<string name="poi_counselling_type_antenatal_yes">Tanácsadás (terhességi)</string>
+	<string name="poi_counselling_type_antenatal_no">Tanácsadás (terhességi) nincs</string>
+	<string name="poi_counselling_type_drugs_yes">Tanácsadás (kábítószer)</string>
+	<string name="poi_counselling_type_drugs_no">Tanácsadás (kábítószer) nincs</string>
+	<string name="poi_counselling_type_education_yes">Tanácsadás (oktatás)</string>
+	<string name="poi_counselling_type_education_no">Tanácsadás (oktatás) nincs</string>
+	<string name="poi_counselling_type_family_yes">Tanácsadás (család)</string>
+	<string name="poi_counselling_type_family_no">Tanácsadás (család) nincs</string>
+	<string name="poi_counselling_type_homeless_yes">Tanácsadás (hajléktalan)</string>
+	<string name="poi_counselling_type_homeless_no">Tanácsadás (hajléktalan) nincs</string>
+	<string name="poi_counselling_type_immigrant_yes">Tanácsadás (bevándorló)</string>
+	<string name="poi_counselling_type_immigrant_no">Tanácsadás (bevándorló) nincs</string>
+	<string name="poi_counselling_type_marriage_yes">Tanácsadás (házasság)</string>
+	<string name="poi_counselling_type_marriage_no">Tanácsadás (házasság) nincs</string>
+	<string name="poi_counselling_type_nutrition_yes">Tanácsadás (táplálkozás)</string>
 	<string name="poi_counselling_type_nutrition_nfire_hydo">Tanácsadás (táplálkozás): nincs</string>
-	<string name="poi_counselling_type_rehabilitation_yes">Tanácsadás (rehabilitáció): igen</string>
-	<string name="poi_counselling_type_rehabilitation_no">Tanácsadás (rehabilitáció): nincs</string>
-	<string name="poi_counselling_type_victim_yes">Tanácsadás (áldozat): igen</string>
-	<string name="poi_counselling_type_victim_no">Tanácsadás (áldozat): nincs</string>
-	<string name="poi_counselling_type_violence_yes">Tanácsadás (erőszak): igen</string>
-	<string name="poi_counselling_type_violence_no">Tanácsadás (erőszak): nincs</string>
+	<string name="poi_counselling_type_rehabilitation_yes">Tanácsadás (rehabilitáció)</string>
+	<string name="poi_counselling_type_rehabilitation_no">Tanácsadás (rehabilitáció) nincs</string>
+	<string name="poi_counselling_type_victim_yes">Tanácsadás (áldozat)</string>
+	<string name="poi_counselling_type_victim_no">Tanácsadás (áldozat) nincs</string>
+	<string name="poi_counselling_type_violence_yes">Tanácsadás (erőszak)</string>
+	<string name="poi_counselling_type_violence_no">Tanácsadás (erőszak) nincs</string>
 
-	<string name="poi_counselling_yes">Tanácsadás: igen</string>
-	<string name="poi_counselling_no">Tanácsadás: nincs</string>
-	<string name="poi_home_visit_yes">Igen</string>
+	<string name="poi_counselling_yes">Tanácsadás</string>
+	<string name="poi_counselling_no">Tanácsadás nincs</string>
+	<string name="poi_home_visit_yes">Van</string>
 	<string name="poi_disease_malaria_yes">Malária</string>
 	<string name="poi_disease_malaria_no">Malária nincs</string>
 	<string name="poi_disease_ebola_yes">Ebola</string>
@@ -2809,7 +2809,7 @@
 	<string name="poi_depth">Mélység</string>
 
 	<string name="poi_salt_yes">Só</string>
-	<string name="poi_salt_no">Só: nincs</string>
+	<string name="poi_salt_no">Só nincs</string>
 	<string name="poi_summer_camp">Nyári tábor</string>
 	<string name="poi_recreation_center">Szabadidőközpont</string>
 
@@ -2835,26 +2835,26 @@
 	<string name="poi_generator_output_vacuum_yes">Kimenet: vákuum</string>
 	<string name="poi_generator_output_biogas_yes">Kimenet: biogáz</string>
 
-	<string name="poi_display_yes">Kijelző: igen</string>
-	<string name="poi_display_no">Kijelző: nincs</string>
+	<string name="poi_display_yes">Kijelző</string>
+	<string name="poi_display_no">Kijelző nincs</string>
 	<string name="poi_display_analog_yes">Analóg kijelző</string>
 	<string name="poi_display_digital_yes">Digitális kijelző</string>
 	<string name="poi_display_sundial_yes">Napóra</string>
 
 	<string name="poi_barometer_yes">Barométer</string>
-	<string name="poi_barometer_no">Nincs barométer</string>
+	<string name="poi_barometer_no">Barométer nincs</string>
 	<string name="poi_thermometer_yes">Hőmérő</string>
-	<string name="poi_thermometer_no">Hőmérő: nincs</string>
-	<string name="poi_date_yes">Dátumkijelzés</string>
-	<string name="poi_date_no">Dátumkijelzés: nincs</string>
+	<string name="poi_thermometer_no">Hőmérő nincs</string>
+	<string name="poi_date_yes">Dátumkijelző</string>
+	<string name="poi_date_no">Dátumkijelző nincs</string>
 
-	<string name="poi_passenger_information_display_yes">Utasinformáció-kijelző: igen</string>
-	<string name="poi_passenger_information_display_no">Utasinformáció-kijelző: nincs</string>
+	<string name="poi_passenger_information_display_yes">Utasinformáció-kijelző</string>
+	<string name="poi_passenger_information_display_no">Utasinformáció-kijelző nincs</string>
 
 	<string name="poi_min_age">Minimális életkor</string>
 
-	<string name="poi_organic_yes">Bioélelmiszerek: igen</string>
-	<string name="poi_organic_no">Bioélelmiszerek: nincs</string>
+	<string name="poi_organic_yes">Bioélelmiszer</string>
+	<string name="poi_organic_no">Bioélelmiszer nincs</string>
 	<string name="poi_organic_only">Csak bioélelmiszerek</string>
 
 	<string name="poi_diplomatic_consulate">Konzulátus</string>
@@ -2900,12 +2900,12 @@
 	<string name="poi_photo_studio">Fotóstúdió</string>
 
 <string name="poi_health_specialty">Szakorvosi ellátás</string>
-	<string name="poi_health_specialty_paediatrics_no">Nincs gyermekgyógyászat</string>
+	<string name="poi_health_specialty_paediatrics_no">Gyermekgyógyászat nincs</string>
 	<string name="poi_health_specialty_dermatovenereology_yes">Bőr- és nemibeteg-ellátás</string>
 	<string name="poi_health_specialty_anaesthetics_yes">Aneszteziológia</string>
 	<string name="poi_health_specialty_pulmonology_yes">Tüdőgyógyászat</string>
 	<string name="poi_health_specialty_dental_oral_maxillo_facial_surgery_yes">Fog-, száj, állcsont- és arcsebészet</string>
-	<string name="poi_health_specialty_emergency_medicine_no">Szakorvosi ellátás: nincs baleseti és sürgősségi ellátás</string>
+	<string name="poi_health_specialty_emergency_medicine_no">Szakorvosi ellátás: baleseti és sürgősségi ellátás nincs</string>
 	<string name="poi_health_specialty_biochemistry_yes">Biológiai kémia</string>
 	<string name="poi_health_specialty_occupational_yes">Foglalkozás-egészségügyi ellátás</string>
 	<string name="poi_health_specialty_physiatry_yes">Fizikális medicina és rehabilitáció</string>
@@ -2915,13 +2915,13 @@
 	<string name="poi_health_specialty_endocrinology_yes">Endokrinológia</string>
 	<string name="poi_health_specialty_nuclear_medicine_yes">Nukleáris medicina</string>
 	<string name="poi_health_specialty_tropical_medicine_yes">Trópusi betegségek ellátása</string>
-	<string name="poi_health_specialty_tropical_medicine_no">Szakorvosi ellátás: nincs trópusibetegség-ellátás</string>
+	<string name="poi_health_specialty_tropical_medicine_no">Szakorvosi ellátás: trópusibetegség-ellátás nincs</string>
 	<string name="poi_health_specialty_obstetrics_postnatal_yes">Szülészet (születés utáni)</string>
-	<string name="poi_health_specialty_obstetrics_postnatal_no">Szakorvosi ellátás: nincs (születés utáni) szülészeti ellátás</string>
+	<string name="poi_health_specialty_obstetrics_postnatal_no">Szakorvosi ellátás: (születés utáni) szülészeti ellátás nincs</string>
 	<string name="poi_health_specialty_obstetrics_antenatal_yes">Várandósgondozás</string>
-	<string name="poi_health_specialty_obstetrics_antenatal_no">Szakorvosi ellátás: nincs várandósgondozás</string>
-	<string name="poi_health_specialty_social_paediatrics_no">Szakorvosi ellátás: nincs szociális gyermekgyógyászat</string>
-	<string name="poi_health_specialty_obstetrics_caesarean_section_no">Szakorvosi ellátás: nincs szülészet (császármetszés)</string>
+	<string name="poi_health_specialty_obstetrics_antenatal_no">Szakorvosi ellátás: várandósgondozás nincs</string>
+	<string name="poi_health_specialty_social_paediatrics_no">Szakorvosi ellátás: szociális gyermekgyógyászat nincs</string>
+	<string name="poi_health_specialty_obstetrics_caesarean_section_no">Szakorvosi ellátás: szülészet (császármetszés) nincs</string>
 	<string name="poi_health_specialty_addiction_medicine_yes">Addiktológia</string>
 	<string name="poi_health_specialty_optometry_yes">Optometria</string>
 	<string name="poi_health_specialty_manual_therapy_yes">Manuálterápia</string>
@@ -2935,21 +2935,21 @@
 	<string name="poi_health_specialty_palliative_medicine_yes">Szakorvosi ellátás: palliatív gyógyászat</string>
 
 	<string name="poi_health_service_nursing_yes">Egészségügyi szolgáltatás: ápolás</string>
-	<string name="poi_health_service_nursing_no">Egészségügyi szolgáltatás: nincs ápolás</string>
+	<string name="poi_health_service_nursing_no">Egészségügyi szolgáltatás: ápolás nincs</string>
 	<string name="poi_health_service_counselling_yes">Egészségügyi szolgáltatás: tanácsadás</string>
-	<string name="poi_health_service_counselling_no">Egészségügyi szolgáltatás: nincs tanácsadás</string>
+	<string name="poi_health_service_counselling_no">Egészségügyi szolgáltatás: tanácsadás nincs</string>
 	<string name="poi_health_service_examination_yes">Egészségügyi szolgáltatás: vizsgálat</string>
-	<string name="poi_health_service_examination_no">Egészségügyi szolgáltatás: nincs vizsgálat</string>
+	<string name="poi_health_service_examination_no">Egészségügyi szolgáltatás: vizsgálat nincs</string>
 	<string name="poi_health_service_child_care_yes">Egészségügyi szolgáltatás: gyermekgondozás</string>
-	<string name="poi_health_service_child_care_no">Egészségügyi szolgáltatás: nincs gyermekgondozás</string>
+	<string name="poi_health_service_child_care_no">Egészségügyi szolgáltatás: gyermekgondozás nincs</string>
 	<string name="poi_health_service_prevention_yes">Egészségügyi szolgáltatás: prevenció</string>
-	<string name="poi_health_service_prevention_no">Egészségügyi szolgáltatás: nincs prevenció</string>
+	<string name="poi_health_service_prevention_no">Egészségügyi szolgáltatás: prevenció nincs</string>
 	<string name="poi_health_service_prevention_vaccination_yes">Egészségügyi szolgáltatás: oltás</string>
-	<string name="poi_health_service_prevention_vaccination_no">Egészségügyi szolgáltatás: nincs oltás</string>
+	<string name="poi_health_service_prevention_vaccination_no">Egészségügyi szolgáltatás: oltás nincs</string>
 	<string name="poi_health_service_support_yes">Egészségügyi szolgáltatás: támogatás</string>
-	<string name="poi_health_service_support_no">Egészségügyi szolgáltatás: nincs támogatás</string>
+	<string name="poi_health_service_support_no">Egészségügyi szolgáltatás: támogatás nincs</string>
 	<string name="poi_health_service_test_yes">Egészségügyi szolgáltatás: teszt</string>
-	<string name="poi_health_service_test_no">Egészségügyi szolgáltatás: nincs teszt</string>
+	<string name="poi_health_service_test_no">Egészségügyi szolgáltatás: teszt nincs</string>
 
 	<string name="poi_health_facility_type_field_hospital">Egészségügyi létesítmény típusa: tábori kórház</string>
 	<string name="poi_health_facility_type_counselling_centre">Egészségügyi létesítmény típusa: tanácsadó központ</string>
@@ -3027,32 +3027,32 @@
 	<string name="poi_nuclear_explosion_device">Robbantás: készülék</string>
 
 	<string name="poi_site_type_tumulus">Halomsír</string>
-	<string name="poi_counselling_type_child_guidance_yes">Tanácsadás (nevelési): igen</string>
-	<string name="poi_counselling_type_child_guidance_no">Tanácsadás (nevelési): nincs</string>
-	<string name="poi_counselling_type_couple_yes">Tanácsadás (párkapcsolati): igen</string>
-	<string name="poi_counselling_type_couple_no">Tanácsadás (párkapcsolati): nincs</string>
-	<string name="poi_counselling_type_crisis_yes">Tanácsadás (krízis): igen</string>
-	<string name="poi_counselling_type_crisis_no">Tanácsadás (krízis): nincs</string>
-	<string name="poi_counselling_type_sexual_yes">Tanácsadás (szexualitás): igen</string>
-	<string name="poi_counselling_type_sexual_no">Tanácsadás (szexualitás): nincs</string>
-	<string name="poi_counselling_type_sexual_abuse_yes">Tanácsadás (szexuális bántalmazás): igen</string>
-	<string name="poi_counselling_type_sexual_abuse_no">Tanácsadás (szexuális bántalmazás): nincs</string>
+	<string name="poi_counselling_type_child_guidance_yes">Tanácsadás (nevelési)</string>
+	<string name="poi_counselling_type_child_guidance_no">Tanácsadás (nevelési) nincs</string>
+	<string name="poi_counselling_type_couple_yes">Tanácsadás (párkapcsolati)</string>
+	<string name="poi_counselling_type_couple_no">Tanácsadás (párkapcsolati) nincs</string>
+	<string name="poi_counselling_type_crisis_yes">Tanácsadás (krízis)</string>
+	<string name="poi_counselling_type_crisis_no">Tanácsadás (krízis) nincs</string>
+	<string name="poi_counselling_type_sexual_yes">Tanácsadás (szexualitás)</string>
+	<string name="poi_counselling_type_sexual_no">Tanácsadás (szexualitás) nincs</string>
+	<string name="poi_counselling_type_sexual_abuse_yes">Tanácsadás (szexuális bántalmazás)</string>
+	<string name="poi_counselling_type_sexual_abuse_no">Tanácsadás (szexuális bántalmazás) nincs</string>
 	<string name="poi_crossing_activation_automatic">Vasúti sorompó aktiválása: automatikus</string>
 	<string name="poi_crossing_activation_local">Vasúti sorompó aktiválása: helyi</string>
 	<string name="poi_crossing_activation_remote">Vasúti sorompó aktiválása: távműködtetésű</string>
-	<string name="poi_crossing_barrier_no">Nincs vasúti sorompó</string>
+	<string name="poi_crossing_barrier_no">Vasúti sorompó nincs</string>
 	<string name="poi_crossing_barrier_yes">Vasúti sorompó</string>
 	<string name="poi_crossing_barrier_full">Teljes sorompó</string>
 	<string name="poi_crossing_barrier_half">Félsorompó</string>
 	<string name="poi_crossing_barrier_double_half">Két félsorompó</string>
 	<string name="poi_crossing_bell_yes">Hangjelzés a vasúti kereszteződésben</string>
-	<string name="poi_crossing_bell_no">Nincs hangjelzés a vasúti kereszteződésben</string>
+	<string name="poi_crossing_bell_no">Hangjelzés a vasúti kereszteződésben nincs</string>
 	<string name="poi_crossing_light_yes">Fénysorompó</string>
-	<string name="poi_crossing_light_no">Nincs fénysorompó</string>
+	<string name="poi_crossing_light_no">Fénysorompó nincs</string>
 	<string name="poi_crossing_on_demand_yes">Vasúti átkelés csak kérésre</string>
 	<string name="poi_crossing_on_demand_no">Vasúti átkelés nem csak kérésre</string>
 	<string name="poi_crossing_saltire_yes">Andráskereszt</string>
-	<string name="poi_crossing_saltire_no">Nincs andráskereszt</string>
+	<string name="poi_crossing_saltire_no">Andráskereszt nincs</string>
 	<string name="poi_crossing_supervision_yes">Felügyelt vasúti kereszteződés</string>
 	<string name="poi_crossing_supervision_no">Nem felügyelt vasúti kereszteződés</string>
 	<string name="poi_crossing_supervision_attendant">Vasútikereszteződés-felügyelet: jelzőőr</string>
@@ -3084,4 +3084,51 @@
 
 	<string name="poi_stone_type_conciliation_cross">Típus: megbékélési kőkereszt</string>
 	<string name="poi_lacrosse">Lacrosse</string>
+	<string name="poi_water_heater_yes">Vízforraló</string>
+	<string name="poi_free_flying_paragliding_yes">Siklóernyőzés</string>
+	<string name="poi_free_flying_hanggliding_yes">Sárkányrepülés</string>
+	<string name="poi_medical_system_ayurveeda_yes">Ajurvéda</string>
+	<string name="poi_treat_inpatient_yes">Fekvőbeteg-szolgáltatások</string>
+	<string name="poi_emergency_yes">Vészhelyzet</string>
+	<string name="poi_dispensing_yes">Vény beváltható</string>
+	<string name="poi_hygrometer_yes">Páratartalom-mérő</string>
+	<string name="poi_water_heater_no">Vízforraló nincs</string>
+
+	<string name="poi_free_flying_paragliding_no">Siklóernyőzés nincs</string>
+	<string name="poi_free_flying_hanggliding_no">Sárkányrepülés nincs</string>
+	<string name="poi_treat_inpatient_no">Fekvőbeteg-szolgáltatások nincsenek</string>
+	<string name="poi_home_visit_no">Otthoni látogatás nincs</string>
+
+	<string name="poi_dispensing_no">Vény nem váltható be</string>
+
+	<string name="poi_hygrometer_no">Páratartalom-mérő nincs</string>
+	<string name="poi_toilets_disposal_flush">WC: vízöblítéses</string>
+	<string name="poi_toilets_disposal_pitlatrine">WC: árnyékszék</string>
+	<string name="poi_toilets_disposal_chemical">WC: vegyi öblítéses</string>
+	<string name="poi_toilets_disposal_bucket">WC: vödör</string>
+
+	<string name="poi_conveying_yes">Mozgólépcső vagy -járda</string>
+
+	<string name="poi_sport_free_flying">Siklóernyőzés és sárkányrepülés (sport)</string>
+
+	<string name="poi_free_flying_site_takeoff">Felszállóhely</string>
+	<string name="poi_free_flying_site_landing">Leszállóhely</string>
+	<string name="poi_free_flying_site_toplanding">Leszállóhely hegytetőn</string>
+	<string name="poi_free_flying_site_towing">Vontatás</string>
+	<string name="poi_free_flying_rigid_yes">Merevszárnyúaknak alkalmas</string>
+	<string name="poi_free_flying_rigid_no">Merevszárnyúaknak nem alkalmas</string>
+	<string name="poi_free_flying_site_orientation_n">Siklórepülő hely irányultsága: É</string>
+	<string name="poi_free_flying_site_orientation_ne">Siklórepülő hely irányultsága: ÉK</string>
+	<string name="poi_free_flying_site_orientation_e">Siklórepülő hely irányultsága: K</string>
+	<string name="poi_free_flying_site_orientation_se">Siklórepülő hely irányultsága: DK</string>
+	<string name="poi_free_flying_site_orientation_s">Siklórepülő hely irányultsága: D</string>
+	<string name="poi_free_flying_site_orientation_sw">Siklórepülő hely irányultsága: DNY</string>
+	<string name="poi_free_flying_site_orientation_w">Siklórepülő hely irányultsága: NY</string>
+	<string name="poi_free_flying_site_orientation_nw">Siklórepülő hely irányultsága: ÉNY</string>
+	<string name="poi_free_flying_no_flight_time">Repüléstilalmi idő (siklórepüléshez)</string>
+	<string name="poi_free_flying_guest_guidelines_yes">Vendégeknek szóló iránymutatás</string>
+	<string name="poi_free_flying_guest_guidelines_no">Vendégeknek szóló iránymutatás nincs</string>
+
+	<string name="poi_emergency_no">Vészhelyzet nincs</string>
+	<string name="poi_bridge_ref">Híd hivatkozási száma</string>
 	</resources>

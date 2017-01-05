@@ -373,7 +373,7 @@ Dlaždicové mapy môžete získať priamo zo zdrojov na Internete, alebo ich m�
     <string name="km_h">km/h</string>
     <string name="m">m</string>
     <string name="old_map_index_is_not_supported">Zastaralý formát mapových údajov "{0}" nie je podporovaný</string>
-    <string name="poi_filter_closest_poi">Najbližší bod záujmu</string>
+    <string name="poi_filter_closest_poi">Najbližšie body záujmu</string>
     <string name="poi_filter_custom_filter">Vlastný filter</string>
     <string name="poi_filter_namefinder">Online hľadač mien</string>
     <string name="reading_cached_tiles">Načítavajú sa dlaždice zo zásobníka…</string>
@@ -1805,7 +1805,7 @@ Dĺžka %2$s</string>
     <string name="shared_string_show_description">Zobraziť popis</string>
     <string name="shared_string_places">Miesta</string>
     <string name="shared_string_search">Hľadať</string>
-    <string name="shared_string_is_open">Otvoriť</string>
+    <string name="shared_string_is_open">Otvorené</string>
     <string name="rendering_attr_OSMMapperAssistant_name">Asistent mapera OSM</string>
     <string name="shared_string_manage">Spravovať</string>
     <string name="shared_string_edit">Upraviť</string>
@@ -2517,4 +2517,5 @@ Ak potrebuje pomoc s aplikáciou OsmAnd, kontaktuje podporu: support@osmand.net.
     <string name="rendering_value_high_name">Vysoká</string>
     <string name="rendering_value_medium_w_name">Stredná</string>
     <string name="rendering_value_low_name">Nízka</string>
+    <string name="rendering_attr_hideWaterPolygons_name">Skryť vodu</string>
     </resources>

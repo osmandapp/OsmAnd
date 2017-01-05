@@ -488,7 +488,7 @@ La memoria utilizzata è  {1} MB.
     <string name="poi">PDI</string>
     <string name="error_occurred_saving_gpx">Errore durante il salvataggio del GPX</string>
     <string name="error_calculating_route">Errore di calcolo percorso</string>
-    <string name="error_calculating_route_occured">Si è verificato un errore durante il calcolo percorso</string>
+    <string name="error_calculating_route_occured">Si è verificato un errore durante il calcolo del percorso</string>
     <string name="empty_route_calculated">Errore: il percorso calcolato è vuoto</string>
     <string name="new_route_calculated_dist">Calcolo nuovo percorso, distanza</string>
     <string name="arrived_at_destination">Siete arrivati alla vostra destinazione</string>
@@ -752,11 +752,11 @@ La memoria utilizzata è  {1} MB.
     <string name="favourites_search_desc">Ricerca dei preferiti</string>
 
     <string name="rendering_attr_noPolygons_description">Rendi trasparenti tutte le aree del terreno</string>
-    <string name="rendering_attr_noPolygons_name">Nascondi i poligoni</string>
+    <string name="rendering_attr_noPolygons_name">Poligoni</string>
     <string name="rendering_attr_appMode_name">Modalità di disegno</string>
     <string name="rendering_attr_appMode_description">Ottimizza la mappa per</string>
-    <string name="rendering_attr_contourLines_description">Visualizza dal livello di zoom (necessita di dati delle curve di livello):</string>
-    <string name="rendering_attr_contourLines_name">Visualizza curve di livello</string>
+    <string name="rendering_attr_contourLines_description">Visualizza dal livello di zoom (necessita dei dati delle isoipse):</string>
+    <string name="rendering_attr_contourLines_name">Visualizza le isoipse</string>
     <string name="rendering_attr_hmRendered_description">Aumenta la quantità di dettagli della mappa visualizzati</string>
     <string name="rendering_attr_hmRendered_name">Visualizza più dettagli della mappa</string>
     <string name="route_roundabout">Alla rotonda prendere la %1$d uscita e proseguire</string>
@@ -978,17 +978,17 @@ Memoria in proporzione %4$s MB (limite di Android %5$s MB, Dalvik %6$s MB).</str
 
 
     <string name="monitoring_control_start">GPX</string>
-    <string name="rendering_attr_noAdminboundaries_name">Nascondi i confini</string>
+    <string name="rendering_attr_noAdminboundaries_name">Confini</string>
     <string name="rendering_attr_noAdminboundaries_description">Non visualizzare i confini regionali (livelli amministrativi 5-9)</string>
 
 
     <string name="index_srtm_parts">parti</string>
     <string name="download_select_map_types">Altre mappe</string>
-    <string name="download_srtm_maps">Linee isocline</string>
-    <string name="srtm_plugin_name">Linee isocline</string>
+    <string name="download_srtm_maps">Linee isoipse</string>
+    <string name="srtm_plugin_name">Linee isoipse</string>
     <string name="srtm_plugin_description">"Questo plugin fornisce sia le curve di livello che lo strato ombreggiamento dei rilievi che possono essere visualizzati sopra alle mappe standard di OsmAnd. Questa funzionalità sarà molto apprezzata dagli atleti, dagli escursionisti, e tutti coloro che sono interessati all\'orografia e al paesaggio.\n\nI dati globali (fra i 70 gradi nord e 70 gradi sud) sono basati su misurazioni del SRTM (Shuttle Radar Topography Mission) e ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), lo strumento misuratore a bordo Terra, il satellite della NASA del sistema di osservazione della terra. ASTER è uno sforzo di cooperazione tra NASA, il Ministero dell\'Economia del Giappone, Commercio e Industria (METI) e sistema spaziale giapponese (J-spacesystems).
 \n\n\nFacilita il download delle linee di elevazione e l\'ombreggiamento dei rilievi (Impostazioni → Gestione file mappe → Download → Seleziona il tipo di mappa desiderato). "</string>
-    <string name="index_srtm_ele">Curve di livello</string>
+    <string name="index_srtm_ele">Linee isoipse</string>
     <string name="audionotes_plugin_description">Il componente aggiuntivo note Audio/video fornisce la funzionalità per prendere note audio/video/foto durante il viaggio, usando pulsante sulla schermata della mappa, oppure direttamente nel menù contestuale per ogni posizione sulla mappa.</string>
     <string name="audionotes_plugin_name">Note audio/video</string>
 
@@ -1032,8 +1032,8 @@ I dati globali (fra i 70 gradi nord e 70 gradi sud) sono basati su misurazioni d
     <string name="recording_description">Registrazione %1$s %3$s %2$s</string>
     <string name="recording_default_name">Registrazione in corso</string>
     <string name="map_widget_av_notes">Note audio/video</string>
-    <string name="srtm_paid_version_msg">Per favore valuta l\'acquisto sul Market del plugin per le linee isocline per sostenere lo sviluppo futuro.</string>
-    <string name="srtm_paid_version_title">Plugin linee isocline</string>
+    <string name="srtm_paid_version_msg">Per favore valuta l\'acquisto sul Market del plugin per le linee isoipse per sostenere lo sviluppo futuro.</string>
+    <string name="srtm_paid_version_title">Plugin linee isoipse</string>
 
     <string name="intermediate_points_change_order">Modifica l\'ordine</string>
     <string name="dropbox_plugin_description">Il plugin Dropbox ti permette di sincronizzare le tracce e le note video/audio con il tuo account Dropbox.</string>
@@ -1232,7 +1232,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="install_paid">Versione completa</string>
     <string name="use_magnetic_sensor_descr">Utilizza il sensore magnetico per determinare il valore della bussola invece del sensore di orientamento</string>
     <string name="use_magnetic_sensor">Utilizza il sensore magnetico (bussola)</string>
-    <string name="local_indexes_cat_srtm">Linee isocline</string>
+    <string name="local_indexes_cat_srtm">Linee isoipse</string>
     <string name="use_kalman_filter_compass_descr">Riduce il rumore delle letture della bussola ma introduce dell\'inerzia</string>
     <string name="use_kalman_filter_compass">Uso del filtro di Kalman</string>
     <string name="wait_current_task_finished">Prego attendere il termine dell\'operazione</string>
@@ -2163,7 +2163,7 @@ Attivando questa vista lo stile della mappa diventerà \'Inverno e sci\', mostra
     <string name="favorite_category_add_new">Aggiungi nuova</string>
     <string name="favorite_category_select">Scegli la categoria</string>
 
-    <string name="srtm_plugin_disabled">Linee isocline disattivate</string>
+    <string name="srtm_plugin_disabled">Linee isoipse disattivate</string>
     <string name="show_free_version_banner">Mostra il banner della versione gratuita</string>
     <string name="show_free_version_banner_description">Anche se hai la versione a pagamento puoi comunque vedere il banner della versione gratuita</string>
     <string name="downloading_number_of_files">In download - %1$d file</string>
@@ -2660,7 +2660,7 @@ Se ami OsmAnd e OSM e vuoi sostenerli, questo è un modo perfetto per farlo.</st
     <string name="save_track_min_distance_descr">Scegliere la distanza minima dal precedente punto a avverrà la registrazione di un nuovo punto</string>
     <string name="save_track_precision">Precisione minima a cui attivare la registrazione</string>
     <string name="save_track_precision_descr">Impostare la minima precisione per la registrazione di un punto</string>
-    <string name="rendering_attr_contourColorScheme_name">Colorazione delle linee isocline</string>
+    <string name="rendering_attr_contourColorScheme_name">Colorazione delle linee isoipse</string>
     <string name="search_hint">Digitare il nome del pdi, città, indirizzo</string>
     <string name="shared_string_continue">Continua</string>
     <string name="shared_string_pause">Pausa</string>
@@ -2715,4 +2715,13 @@ Se ami OsmAnd e OSM e vuoi sostenerli, questo è un modo perfetto per farlo.</st
     <string name="lang_sr_latn">Serbo (Latino)</string>
     <string name="lang_zh_hk">Cinese (Hong Kong)</string>
     <string name="legacy_search">Ricerca vecchia</string>
+    <string name="rendering_attr_contourDensity_name">Densità linee isoipse</string>
+    <string name="rendering_value_high_name">Alto</string>
+    <string name="rendering_value_medium_w_name">Medio</string>
+    <string name="rendering_value_low_name">Basso</string>
+    <string name="rendering_attr_contourWidth_description">Spessore linee isoipse</string>
+    <string name="rendering_attr_contourWidth_name">Spessore linee isoipse</string>
+    <string name="rendering_attr_hideWaterPolygons_description">Acqua</string>
+    <string name="rendering_attr_hideWaterPolygons_name">Non visualizzare l\'acqua</string>
+    <string name="rendering_attr_contourDensity_description">Densità delle linee isoipse</string>
     </resources>

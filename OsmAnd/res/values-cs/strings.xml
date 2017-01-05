@@ -676,7 +676,7 @@
     <string name="map_online_data_descr">Používat online mapy (stáhnout je a uložit na SD kartě)</string>
     <string name="shared_string_online_maps">Online mapy</string>
     <string name="online_map_settings_descr">Nastavení rastrových překryvných nebo podkresových map</string>
-    <string name="osmand_rastermaps_plugin_description">"S tímto modulem můžete použít mnoho druhů online (také zvané dlaždicové nebo rastrové) map, od předdefinovaných OpenStreetMap dlaždic (jako Mapnik) až po satelitní snímky a speciální vrstvy jako mapy počasí, klimatické mapy, geologické mapy, stínované vrstvy … atd.
+    <string name="osmand_rastermaps_plugin_description">"S tímto modulem můžete použít mnoho druhů online map (tzv. dlaždicové nebo rastrové mapy), od předdefinovaných OpenStreetMap dlaždic (jako Mapnik) až po satelitní snímky a speciální vrstvy jako mapy počasí, klimatické mapy, geologické mapy, stínované vrstvy, atd.
 
 
 Všechny tyto mapy mohou být použity jako hlavní (základní) mapa na obrazovce OsmAnd nebo jako překryvná popř. podkladová mapa k jiné základní mapě (např. standardní OsmAnd offline mapě). Pro zlepšení viditelnosti podkladových map je možné vypnout některé objekty z vektorových map OsmAnd, přes menu \'Nastavení mapy\'.
@@ -711,7 +711,7 @@ Dlaždicové mapy můžete získat přímo z online zdrojů nebo si je můžete 
     <string name="transport_search_desc">Hledat veřejnou dopravu</string>
     <string name="favourites_search_desc">Hledat oblíbené místo</string>
     <string name="rendering_attr_noPolygons_description">Zobrazit všechny typy půdy průhledně</string>
-    <string name="rendering_attr_noPolygons_name">Bez polygonů</string>
+    <string name="rendering_attr_noPolygons_name">Polygony</string>
     <string name="rendering_attr_appMode_name">Režim vykreslování</string>
     <string name="rendering_attr_appMode_description">Optimalizace mapy pro příslušný uživatelský profil</string>
     <string name="rendering_attr_contourLines_description">Minimální zvětšení, od kterého se budou zobrazovat vrstevnice (vyžaduje soubor \'SRTM\'):</string>
@@ -743,7 +743,7 @@ Dlaždicové mapy můžete získat přímo z online zdrojů nebo si je můžete 
     <string name="osmand_parking_pm">odpoledne</string>
     <string name="osmand_parking_am">dopoledne</string>
     <string name="osmand_parking_position_name">Místo parkování</string>
-    <string name="osmand_parking_plugin_description">Modul Parkovací místo umožňuje zapamatování si, kde jste auto zaparkovali a v případě časově omezeného parkování také kolik času zbývá.
+    <string name="osmand_parking_plugin_description">Modul Parkovací místo umožňuje zapamatování si, kde jste zaparkovali své auto, a v případě časově omezeného parkování také kolik času zbývá.
 
 Parkovací místo a čas parkování můžete najít na panelu aktuální mapy. Je také možné přidat upomínku do kalendáře, pokud chcete být upozorněni.</string>
     <string name="osmand_parking_plugin_name">Parkovací místo</string>
@@ -754,7 +754,7 @@ Parkovací místo a čas parkování můžete najít na panelu aktuální mapy. 
     <string name="global_app_allocated_memory_descr">Alokovaná paměť %1$s MB (Limit Androidu %2$s MB, Dalvik %3$s MB).</string>
     <string name="global_app_allocated_memory">Alokovaná paměť</string>
     <string name="native_app_allocated_memory_descr">Celková nativní paměť alokovaná aplikací %1$s MB (Dalvik %2$s MB, ostatní %3$s MB).
-Proporcionální paměť %4$s MB (Limit Androidu %5$s MB, Dalvik %6$s MB).</string>
+Proporcionální paměť %4$s MB (limit Androidu %5$s MB, Dalvik %6$s MB).</string>
     <string name="native_app_allocated_memory">Celková nativní paměť</string>
     <string name="select_animate_speedup">Vyberte zrychlení simulované navigace</string>
     <string name="osmand_parking_hours">hodin</string>
@@ -843,12 +843,11 @@ Proporcionální paměť %4$s MB (Limit Androidu %5$s MB, Dalvik %6$s MB).</stri
     <string name="osmand_long_description_1000_chars">"
  OsmAnd
 
-OsmAnd je open-source navigační program s přístupem k široké paletě celosvětových mapových dat OpenStreetMap (OSM).
-Veškerá mapová data (vektorová nebo rastrová) mohou být uložena na paměťové kartě telefonu pro offline použití. OsmAnd také nabízí offline a online navigaci včetně hlasové navigace krok za krokem.
+OsmAnd je open-source navigační program s přístupem k široké paletě celosvětových mapových dat OpenStreetMap (OSM). Veškerá mapová data (vektorová nebo rastrová) mohou být uložena na paměťové kartě telefonu pro offline použití. OsmAnd také nabízí offline a online navigaci včetně hlasových pokynů.
 
 
 Výčet některých hlavních funkcí:
-- dokáže pracovat kompletně offline (vektorové nebo rastrové mapy lze uložit do volitelného úložiště zařízení)
+- dokáže pracovat kompletně offline (vektorové nebo rastrové mapy lze uložit do úložiště zařízení)
 - kompaktní offline vektorové mapy celého světa dostupné zdarma
 - stahování národních nebo regionálních map přímo z aplikace
 - možnost zobrazení několika vrstev mapy: GPX trasa, body zájmu, oblíbená místa, vrstevnice, zastávky hromadné dopravy, dodatečné mapy s nastavitelnou průhledností
@@ -863,7 +862,7 @@ Výčet některých hlavních funkcí:
 
 
 Omezení této verze zdarma:
-- omezený počet stažitelných map
+- omezený počet map ke stažení
 - chybějící přístup na offline Wikipedia POI
 
 OsmAnd je aktivně vyvíjen a náš projekt i jeho budoucí vývoj závisí na finančních příspěvcích. Prosím zvažte zakoupení verze OsmAnd+, sponzorování konkrétní nové funkce nebo obecný dar na osmand.net.
@@ -871,14 +870,13 @@ OsmAnd je aktivně vyvíjen a náš projekt i jeho budoucí vývoj závisí na f
     <string name="osmand_plus_long_description_1000_chars">"
  OsmAnd+
 
-OsmAnd+ je open-source navigační program s přístupem k široké paletě celosvětových mapových dat OpenStreetMap (OSM).
-Veškerá mapová data (vektorová nebo rastrová) mohou být uložena na paměťové kartě telefonu pro offline použití. OsmAnd+ také nabízí offline a online navigaci včetně hlasové navigace krok za krokem.
+OsmAnd+ je open-source navigační program s přístupem k široké paletě celosvětových mapových dat OpenStreetMap (OSM). Veškerá mapová data (vektorová nebo rastrová) mohou být uložena na paměťové kartě telefonu pro offline použití. OsmAnd+ také nabízí offline a online navigaci včetně hlasových pokynů.
 
 
 OsmAnd+ je placená verze aplikace, jejím zakoupením sponzorujete projekt, vývoj nových funkcí a obdržíte nejnovější aktualizace.
 
 Výčet některých hlavních funkcí:
-- dokáže pracovat kompletně offline (vektorové nebo rastrové mapy lze uložit do volitelného úložiště zařízení)
+- dokáže pracovat kompletně offline (vektorové nebo rastrové mapy lze uložit do úložiště zařízení)
 - kompaktní offline vektorové mapy celého světa dostupné zdarma
 - neomezené stahování národních nebo regionálních map přímo z aplikace
 - funkce offline Wikipedie (stažení informací o bodech zájmu z Wikipedie), vynikající pro turisty
@@ -919,13 +917,13 @@ Výčet některých hlavních funkcí:
     <string name="route_descr_lat_lon">Šířka %1$.3f délka %2$.3f</string>
     
     <string name="map_widget_max_speed">Rychlostní omezení</string>
-    <string name="rendering_attr_noAdminboundaries_name">Skrýt hranice</string>
+    <string name="rendering_attr_noAdminboundaries_name">Hranice oblastí</string>
     <string name="rendering_attr_noAdminboundaries_description">Potlačit zobrazení správních hranic ( administrativní úrovně 5-9)</string>
     <string name="monitoring_control_start">GPX</string>
     <string name="index_srtm_ele">Vrstevnice</string>
     <string name="download_select_map_types">Ostatní mapy</string>
     <string name="audionotes_plugin_name">Modul zvukové/video poznámky</string>
-    <string name="srtm_plugin_description">"Tento modul poskytuje zobrazení vrstevnic a vrstvy stínování kopců, které mohou být zobrazené na standardních OsmAnd mapách. Tato funkce je vhodná především pro atlety, turisty, chodce a vůbec všechny které zajímá profil terénu.
+    <string name="srtm_plugin_description">"Tento modul poskytuje zobrazení vrstevnic a vrstvy stínování kopců, které mohou být zobrazené na standardních OsmAnd mapách. Tato funkce je vhodná především pro sportovce, turisty, chodce a vůbec všechny, které zajímá profil terénu.
 
 
 Celosvětová výšková data (mezi 70 stupni severní šířky a 70 stupni jižní šířky) se zakládají na měřeních SRTM (Shuttle Radar Topography Mission) a ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), snímkovací přístroj na palubě satelitu Terra, vlajkového satelitu Systému pozorování Země NASA. ASTER je společným projektem NASA, japonského ministerstva hospodářství, obchodu a průmyslu (METI) a Japan Space Systems (J-spacesystems).
@@ -971,13 +969,13 @@ Celosvětová výšková data (mezi 70 stupni severní šířky a 70 stupni již
     <string name="srtm_paid_version_title">Modul Vrstevnice</string>
     <string name="shared_string_control_stop">Zastavit</string>
     <string name="dropbox_plugin_description">Modul Dropbox vám umožňuje nahrávat trasy, audio a video poznámky do vašeho účtu Dropbox.</string>
-    <string name="osmand_srtm_long_description_1000_chars">"Tento modul poskytuje zobrazení vrstevnic a vrstvy stínování kopců, které mohou být zobrazené na standardních OsmAnd mapách. Tato funkce je vhodná především pro atlety, turisty, chodce a vůbec všechny které zajímá profil terénu.
+    <string name="osmand_srtm_long_description_1000_chars">"Tento modul poskytuje zobrazení vrstevnic a vrstvy stínování kopců, které mohou být zobrazené na standardních OsmAnd mapách. Tato funkce je vhodná především pro sportovce, turisty, chodce a vůbec všechny, které zajímá profil terénu.
 
 
 Celosvětová výšková data (mezi 70 stupni severní šířky a 70 stupni jižní šířky) se zakládají na měřeních SRTM (Shuttle Radar Topography Mission) a ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), snímkovací přístroj na palubě satelitu Terra, vlajkového satelitu Systému pozorování Země NASA. ASTER je společným projektem NASA, japonského ministerstva hospodářství, obchodu a průmyslu (METI) a Japan Space Systems (J-spacesystems).
  "</string>
     <string name="stop_routing_confirm">Opravdu chcete zastavit navigaci?</string>
-    <string name="clear_dest_confirm">Opravdu chcete smazat váš cíl (a mezicíle)?</string>
+    <string name="clear_dest_confirm">Opravdu chcete smazat svůj cíl (a mezicíle)?</string>
     <string name="recording_context_menu_show">Zobrazit</string>
     <string name="recording_photo_description">Foto %1$s %2$s</string>
     <string name="av_def_action_picture">Vyfotit</string>
@@ -1045,7 +1043,7 @@ Celosvětová výšková data (mezi 70 stupni severní šířky a 70 stupni již
 
  * Stiskněte dlouze na mapě pro smazání předchozího bodu.
 
- * Stiskněte dlouze bod pro zobrazení a přidání popisky.
+ * Stiskněte dlouze bod pro zobrazení a přidání popisku.
 
  * Klikněte na modul měření pro další možnosti.</string>
     <string name="shared_string_do_not_show_again">Již nezobrazovat</string>
@@ -1242,7 +1240,7 @@ Celosvětová výšková data (mezi 70 stupni severní šířky a 70 stupni již
     <string name="osmo_plugin_description">"Tento modul částečně poskytuje funkcionalitu pro OpenStreetMap monitorování, podívejte se na https://osmo.mobi.
 
 
-Můžete sledovat všechna zařízení spolupracující skupiny v reálném čase. Můžete také vidět body a trasy nahrané do skupiny které jste součástí.
+Můžete sledovat všechna zařízení spolupracující skupiny v reálném čase. Můžete také vidět body a trasy nahrané do skupiny, které jste součástí.
 
 
 The group has not been removed after months, bring it in line with the rules you create groups on the website OsMo.mobi
@@ -1458,10 +1456,10 @@ The group has not been removed after months, bring it in line with the rules you
     <string name="download_additional_maps">Stáhnout chybějící mapy %1$s (%2$d MB)?</string>
     <string name="save_track_interval_globally">Interval ukládání trasy</string>
     <string name="rendering_attr_publicTransportMode_name">Autobusy, trolejbusy a kyvadlová doprava</string>
-    <string name="record_plugin_description">"Tento modul zapne funkci záznamu a uložení vašich tras stisknutím tlačítka GPX na panelu mapové obrazovky, nebo také automaticky ukládat všechny vaše navigační trasy do GPX souboru.
+    <string name="record_plugin_description">"Tento modul zapne funkci záznamu a uložení vašich tras stisknutím tlačítka GPX na panelu mapové obrazovky nebo také automatického ukládání všech vašich navigačních tras do GPX souboru.
 
 
-Zaznamenávané trasy můžete sdílet s vašimi přáteli nebo mohou být použity jako příspěvek pro OSM. Atleti mohou použít nahrané trasy k sledování svých tréninků. Některé základní analýzy mohou být provedeny již přímo v OsmAnd, například čas okruhu, průměrná rychlost, apod. Trasy mohou být samozřejmě analyzovány později speciálními programy třetích stran.
+Zaznamenávané trasy můžete sdílet se svými přáteli nebo mohou být použity jako příspěvek do OSM. Sportovci mohou použít zaznamenané trasy k sledování svých tréninků. Základní analýza může být provedena již přímo v OsmAnd, například čas okruhu, průměrná rychlost, apod. Trasy mohou být samozřejmě analyzovány později speciálními programy třetích stran.
  "</string>
     <string name="record_plugin_name">Záznam cesty</string>
     <string name="int_hour">h</string>
@@ -1676,16 +1674,16 @@ Délka %2$s</string>
     <string name="plugin_touringview_descr">"Aktivováním tohoto pohledu se změní styl mapy na \"Touring view\", který obsahuje víc detailů pro cestovatele a profesionální řidiče.
 
 
-Tento pohled poskytuje ve všech přiblíženích mapy maximum cestovních detailů (např. cesty, chodníky a orientační značky).
+Tento pohled poskytuje ve všech přiblíženích mapy maximum cestovních detailů (např. silnice, cesty, pěšiny a orientační značky).
 
 
 Také zobrazuje typy cest v jednoznačně odlišných barvách, což je užitečné například pro velká vozidla.
 
 
-Poskytuje také speciální možnosti pro cestování jako cyklotrasy a turistické trasy.
+Poskytuje také speciální možnosti pro cestování jako cyklotrasy a skialpinistické trasy.
 
 
-Není potřebné stáhnout samostatný soubor, tento pohled používá standardní mapové soubory.
+Není potřeba stahovat samostatný soubor, tento pohled používá standardní mapové soubory.
 
 
 Tento pohled může být vypnut jeho deaktivováním zde, nebo změnou hodnoty ve \"Vykreslování mapy\" v \"Nastavení mapy\".
@@ -1825,7 +1823,7 @@ Aktivováním tohoto pohledu se změní styl mapy na \"Winter and ski\", který 
     <string name="lang_lb">Lucemburština</string>
     <string name="lang_os">Osetština</string>
     <string name="lang_eo">Esperanto</string>
-    <string name="lang_es_ar">Španělština (Argentína)</string>
+    <string name="lang_es_ar">Španělština (Argentina)</string>
     <string name="lang_nb">Norština (bokmål)</string>
     <string name="lang_vo">Volapük</string>
     <string name="lang_th">Thajština</string>
@@ -2240,7 +2238,7 @@ Pokud máte rádi OsmAnd a OSM a chcete je podpořit, toto je výborný způsob 
  • Nové mocné vyhledávání libovolného textu
 
 
- • Připojení s audiosystémem v autě přes Bluetooth
+ • Propojení s audiosystémem v autě přes Bluetooth
 
 
  • Vylepšená navigace, hlasové pokyny a indikace jízdních pruhů
@@ -2329,7 +2327,7 @@ Pokud máte rádi OsmAnd a OSM a chcete je podpořit, toto je výborný způsob 
  • Klikatelné ikony na mapě
 
 
- • Podrobné filtrování hledání POI: Například hledání restaurace dle kuchyně, kempy se speciálními službami, apod.
+ • Podrobné filtrování POI: Například hledání restaurace dle kuchyně, kempy se speciálními službami, apod.
 
 
  • Nový styl topo mapy pro cyklisty a turisty
@@ -2341,7 +2339,7 @@ Pokud máte rádi OsmAnd a OSM a chcete je podpořit, toto je výborný způsob 
  • Vylepšené notifikace navigace (Android Wear)
 
 
- • Mnohé další vylepšení a opravy chyb
+ • Mnohá další vylepšení a opravy chyb
 
 
  a další…
@@ -2366,4 +2364,13 @@ Pokud máte rádi OsmAnd a OSM a chcete je podpořit, toto je výborný způsob 
  "</string>
     <string name="lang_sr_latn">Srbsky (Latinka)</string>
     <string name="lang_zh_hk">Čínsky (Hong Kong)</string>
+    <string name="rendering_attr_contourDensity_description">Hustota vrstevnic</string>
+    <string name="rendering_attr_contourDensity_name">Hustota vrstevnic</string>
+    <string name="rendering_value_high_name">Vysoká</string>
+    <string name="rendering_value_medium_w_name">Střední</string>
+    <string name="rendering_value_low_name">Nízká</string>
+    <string name="rendering_attr_contourWidth_description">Šířka linií vrstevnic</string>
+    <string name="rendering_attr_contourWidth_name">Šířka linií vrstevnic</string>
+    <string name="rendering_attr_hideWaterPolygons_description">Voda</string>
+    <string name="rendering_attr_hideWaterPolygons_name">Skrýt vodu</string>
     </resources>

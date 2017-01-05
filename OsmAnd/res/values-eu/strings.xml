@@ -2674,4 +2674,10 @@ OsmAnd aplikazioarekin laguntza behar baduzu, jarri kontaktuan gure laguntza tal
     <string name="rendering_attr_hideWaterPolygons_description">Ura</string>
     <string name="rendering_attr_contourWidth_description">Sestra-kurben zabalera</string>
     <string name="rendering_attr_contourWidth_name">Sestra-kurben zabalera</string>
+    <string name="rendering_attr_contourDensity_description">Sestra-kurben dentsitatea</string>
+    <string name="rendering_attr_contourDensity_name">Sestra-kurben dentsitatea</string>
+    <string name="rendering_value_high_name">Altua</string>
+    <string name="rendering_value_medium_w_name">Ertaina</string>
+    <string name="rendering_value_low_name">Baxua</string>
+    <string name="rendering_attr_hideWaterPolygons_name">Ezkutatu ura</string>
     </resources>

@@ -247,7 +247,7 @@
 	<string name="poi_stone">Významný kámen</string>
 	<string name="poi_stream">Potok</string>
 	<string name="poi_river">Řeka</string>
-	<string name="poi_shop_food">Obchod s jídlem</string>
+	<string name="poi_shop_food">Supermarkety a večerky</string>
 	<string name="poi_emergency">Stav nouze</string>
 	<string name="poi_transportation">Doprava</string>
 		<string name="poi_road_obstacle">Překážka v cestě</string>
@@ -420,7 +420,7 @@
 	<string name="poi_pier">Molo</string>
 	<string name="poi_surveillance">Bezpečnostní kamera</string>
 	<string name="poi_observatory">Observatoř</string>
-	<string name="poi_astronomical_observatory">Hvězdárna</string>
+	<string name="poi_astronomical_observatory">Astronomická</string>
 	<string name="poi_tower">Věž</string>
 	<string name="poi_mast">Stožár</string>
 	<string name="poi_radar">Radar</string>
@@ -693,7 +693,7 @@
 
 	<string name="poi_funeral_directors">Pohřební ústav</string>
 	<string name="poi_craft_computer">Počítače</string>
-	<string name="poi_beauty_salon_nails">Nehtové studio</string>
+	<string name="poi_beauty_salon_nails">Manikúra</string>
 	<string name="poi_massage">Masážní salón</string>
 	<string name="poi_dry_cleaning">Chemická čistírna</string>
 	<string name="poi_laundry">Prádelna</string>
@@ -921,12 +921,12 @@
 	<string name="poi_enforcement_access">Vynucení: přístup</string>
 	<string name="poi_enforcement_toll">Vynucení: mýto</string>
 
-<string name="poi_fee_yes">Poplatek</string>
+<string name="poi_fee_yes">Ano</string>
 
 	<string name="poi_country">Krajina</string>
 	<string name="poi_abandoned_poi">Opuštěný objekt</string>
-	<string name="poi_recycling_centre">Typ: recyklační centrum</string>
-	<string name="poi_recycling_container">Typ: kontejner</string>
+	<string name="poi_recycling_centre">Recyklační centrum</string>
+	<string name="poi_recycling_container">Kontejner</string>
 	<string name="poi_recycling_glass">Sklo</string>
 	<string name="poi_recycling_paper">Papír</string>
 	<string name="poi_recycling_clothes">Oblečení</string>
@@ -1026,36 +1026,36 @@
 	<string name="poi_denomination_roman_catholic">Římskokatolicismus</string>
 	<string name="poi_denomination_orthodox">Pravoslaví</string>
 	<string name="poi_denomination_lutheran">Luteránství</string>
-	<string name="poi_board_type_astronomy">Informační značení: astronomie</string>
+	<string name="poi_board_type_astronomy">Astronomie</string>
 
-<string name="poi_board_type_technology">Informační značení: technologie</string>
-	<string name="poi_board_type_public_transport">Informační značení: veřejná doprava</string>
-	<string name="poi_board_type_geology">Informační značení: geologie</string>
-	<string name="poi_board_type_plants">Informační značení: rostliny</string>
+<string name="poi_board_type_technology">Technologie</string>
+	<string name="poi_board_type_public_transport">Veřejná doprava</string>
+	<string name="poi_board_type_geology">Geologie</string>
+	<string name="poi_board_type_plants">Rostliny</string>
 	<string name="poi_board_type_notice">Vývěska</string>
 	<string name="poi_information_tactile_map">Haptická mapa</string>
 	<string name="poi_information_tactile_model">Dotykový model</string>
 	<string name="poi_information_bicyclemap">Cyklistická mapa</string>
 	<string name="poi_information_audioguide">Audioprůvodce</string>
-	<string name="poi_information_history">Informační značení: historie</string>
+	<string name="poi_information_history">Historie</string>
 	<string name="poi_information_wildlife">Informační značení: živočich</string>
-	<string name="poi_information_nature">Informační značení: příroda</string>
+	<string name="poi_information_nature">Příroda</string>
 	<string name="poi_information_hikingmap">Turistická mapa</string>
-	<string name="poi_information_terminal">Informační terminál</string>
-	<string name="poi_information_office">Informační kancelář</string>
+	<string name="poi_information_terminal">Terminál</string>
+	<string name="poi_information_office">Kancelář</string>
 	<string name="poi_information_map">Mapa</string>
-	<string name="poi_information_board">Informační tabule</string>
+	<string name="poi_information_board">Tabule</string>
 	<string name="poi_information_guidepost">Rozcestník</string>
 	<string name="poi_cuisine">Kuchyně</string>
 
-	<string name="poi_water_characteristic_sulfuric">Charakteristika vody: síranová</string>
+	<string name="poi_water_characteristic_sulfuric">Síranová</string>
 
 	<string name="poi_water_characteristic_mud">Charakteristika vody: bahnitá</string>
-	<string name="poi_water_characteristic_mineral">Charakteristika vody: minerální</string>
+	<string name="poi_water_characteristic_mineral">Minerální</string>
 	<string name="poi_pump_no">Bez čerpadla</string>
 
-	<string name="poi_pump_powered">Poháněné čerpadlo</string>
-	<string name="poi_pump_manual">Ruční pumpa</string>
+	<string name="poi_pump_powered">Poháněné</string>
+	<string name="poi_pump_manual">Ruční</string>
 	<string name="poi_alt_name">Alternativní název</string>
 
 	<string name="poi_old_name">Starý název</string>
@@ -1088,11 +1088,11 @@
 	<string name="poi_mobile">Mobilní telefon</string>
 	<string name="poi_height">Výška</string>
 	<string name="poi_ele">Nadmořská výška</string>
-	<string name="poi_fee_no">Žádný poplatek</string>
-	<string name="poi_drinking_water_yes">Pitná voda: ano</string>
-	<string name="poi_drinking_water_no">Pitná voda: ne</string>
-	<string name="poi_seasonal_yes">Sezónní</string>
-	<string name="poi_seasonal_no">Nesezónní</string>
+	<string name="poi_fee_no">Ne</string>
+	<string name="poi_drinking_water_yes">Ano</string>
+	<string name="poi_drinking_water_no">Ne</string>
+	<string name="poi_seasonal_yes">Ano</string>
+	<string name="poi_seasonal_no">Ne</string>
 	<string name="poi_seasonal_dry_season">Období sucha</string>
 	<string name="poi_seasonal_wet_season">Období dešťů</string>
 	<string name="poi_seasonal_spring">Jaro</string>
@@ -1105,18 +1105,18 @@
 
 	<string name="poi_access_private">Soukromý přístup</string>
 	<string name="poi_access_no">Žádný přístup</string>
-	<string name="poi_nudism_yes">Nudismus: povoleno</string>
-	<string name="poi_nudism_no">Nudismus: zakázáno</string>
-	<string name="poi_nudism_obligatory">Nudismus: povinné</string>
-	<string name="poi_nudism_customary">Nudismus: obvyklé</string>
-	<string name="poi_nudism_permissive">Nudismus: volitelné</string>
+	<string name="poi_nudism_yes">Povoleno</string>
+	<string name="poi_nudism_no">Zakázáno</string>
+	<string name="poi_nudism_obligatory">Povinné</string>
+	<string name="poi_nudism_customary">Obvyklé</string>
+	<string name="poi_nudism_permissive">Volitelné</string>
 
 	<string name="poi_trade_plumbing">Instalatérské potřeby</string>
 	<string name="poi_trade_building_supplies">Stavebniny</string>
 	<string name="poi_trade_agricultural_supplies">Zemědělské potřeby</string>
 	<string name="poi_population">Obyvatelstvo</string>
-	<string name="poi_parking_underground">Typ: podzemí</string>
-	<string name="poi_parking_multi_storey">Typ: vícepodlažní</string>
+	<string name="poi_parking_underground">Podzemní</string>
+	<string name="poi_parking_multi_storey">Vícepodlažní</string>
 
 	<string name="poi_bicycle_parking_building">Speciální budova</string>
 	<string name="poi_bicycle_parking_shed">Přístřešek</string>
@@ -1230,24 +1230,24 @@
 	<string name="poi_commercial">Komerční pozemek</string>
 	<string name="poi_retail">Maloobchodní pozemek</string>
 
-	<string name="poi_covered_yes">S přístřeškem</string>
+	<string name="poi_covered_yes">Ano</string>
 	<string name="poi_covered_no">Bez přístřešku</string>
 
-	<string name="poi_smoking_no">Zákaz kouření</string>
-	<string name="poi_smoking_outside">Kouření povoleno pouze venku</string>
-	<string name="poi_smoking_yes">Kouření povoleno</string>
-	<string name="poi_smoking_separated">Kouření povoleno v samostatné místnosti</string>
-	<string name="poi_smoking_isolated">Kouření povoleno v oddělené místnosti</string>
+	<string name="poi_smoking_no">Zakázané</string>
+	<string name="poi_smoking_outside">Pouze venku</string>
+	<string name="poi_smoking_yes">Povoleno</string>
+	<string name="poi_smoking_separated">V samostatné místnosti</string>
+	<string name="poi_smoking_isolated">V oddělené místnosti</string>
 	<string name="poi_smoking_dedicated">Výhradně pro kuřáky</string>
 
 	<string name="poi_toll_yes">Mýto</string>
 	<string name="poi_toll_no">Žádné mýto</string>
 	<string name="poi_toll_hgv_yes">Mýto jen pro nákladní vozidla</string>
-	<string name="poi_tactile_paving_yes">Se značením pro nevidomé</string>
+	<string name="poi_tactile_paving_yes">Ano</string>
 	<string name="poi_tactile_paving_no">Bez značení pro nevidomé</string>
-	<string name="poi_traffic_signals_sound_yes">Se zvukovou signalizací</string>
-	<string name="poi_traffic_signals_sound_no">Bez zvukové signalizace</string>
-	<string name="poi_traffic_signals_sound_walk">Se zvukovou signalizací pokud je chůze povolena</string>
+	<string name="poi_traffic_signals_sound_yes">Ano</string>
+	<string name="poi_traffic_signals_sound_no">Ne</string>
+	<string name="poi_traffic_signals_sound_walk">Pouze pokud je chůze povolena</string>
 
 	<string name="poi_rescue_station">Záchranná stanice</string>
 
@@ -1329,20 +1329,20 @@
 	<string name="poi_kent_carriage_gap">Kent carriage gap (překážka bránící vjezdu automobilů)</string>
 	<string name="poi_route_hiking_ref_poi">Rozcestník turistických tras</string>
 
-	<string name="poi_wheelchair_no">Invalidní vozík: není dovoleno</string>
-	<string name="poi_wheelchair_limited">Kolečkové křeslo: s omezením</string>
+	<string name="poi_wheelchair_no">Ne</string>
+	<string name="poi_wheelchair_limited">Omezeně</string>
 	<string name="poi_content_slurry">Obsah: blátovitý</string>
 	<string name="poi_bicycle_parking_anchors">Kotvy pro bicykly</string>
 	<string name="poi_bird_hide">Místo pro sledování ptactva</string>
 	<string name="poi_outdoor_seating_no">Bez venkovního sezení</string>
-	<string name="poi_outdoor_seating_yes">Venkovní sezení</string>
+	<string name="poi_outdoor_seating_yes">Venkovní sezení: ano</string>
 	<string name="poi_outdoor_seating_terrace">Venkovní sezení: terasa</string>
 	<string name="poi_outdoor_seating_sidewalk">Venkovní sezení: chodník</string>
 	<string name="poi_outdoor_seating_pedestrian_zone">Venkovní sezení: pěší zóna</string>
 	<string name="poi_outdoor_seating_garden">Venkovní sezení: zahrada</string>
 	<string name="poi_outdoor_seating_patio">Venkovní sezení: nádvoří</string>
 
-	<string name="poi_toilets_yes">S toaletami</string>
+	<string name="poi_toilets_yes">Ano</string>
 	<string name="poi_toilets_no">Bez toalet</string>
 	<string name="poi_toilets_wheelchair_yes">Toalety dostupné na vozíku: ano</string>
 	<string name="poi_toilets_wheelchair_no">Toalety dostupné na vozíku: ne</string>
@@ -1373,22 +1373,22 @@
 
 	<string name="poi_resource_clay">Antuka</string>
 	<string name="poi_resource_coal">Uhlí</string>
-	<string name="poi_beach_sand">Typ pláže: písčitá</string>
-	<string name="poi_beach_shingle">Typ pláže: oblázky</string>
-	<string name="poi_beach_rocky">Typ pláže: kamenitá</string>
+	<string name="poi_beach_sand">Písek</string>
+	<string name="poi_beach_shingle">Oblázky</string>
+	<string name="poi_beach_rocky">Kamenitá</string>
 
 	<string name="poi_chimney">Komín</string>
 	<string name="poi_palm">Palma</string>
 	<string name="poi_cypress">Cypřiš</string>
-	<string name="poi_bench_yes">S lavičkou</string>
+	<string name="poi_bench_yes">Ano</string>
 	<string name="poi_bench_no">Bez lavičky</string>
 	<string name="poi_bin_yes">S odpadkovým košem</string>
 	<string name="poi_bin_no">Bez odpadkového koše</string>
 
-	<string name="poi_shelter_type_public_transport">Přístřešek: hromadná doprava</string>
-	<string name="poi_shelter_type_picnic_shelter">Přístřešek: piknik</string>
-	<string name="poi_shelter_type_weather_shelter">Přístřešek: špatné počasí</string>
-	<string name="poi_internet_access_type_wlan">Přístup k internetu: kabel</string>
+	<string name="poi_shelter_type_public_transport">Hromadná doprava</string>
+	<string name="poi_shelter_type_picnic_shelter">Piknik</string>
+	<string name="poi_shelter_type_weather_shelter">Špatné počasí</string>
+	<string name="poi_internet_access_type_wlan">Wi-Fi</string>
 	<string name="poi_internet_access_type_no">Bez přístupu k internetu</string>
 	<string name="poi_internet_access_type_yes">S přístupem k internetu</string>
 
@@ -1407,25 +1407,25 @@
 	<string name="poi_surface_paved">Zpevněný povrch</string>
 	<string name="poi_street_lamp">Pouliční lampa</string>
 
-	<string name="poi_shoes_children">Dětská obuv</string>
-	<string name="poi_shoes_women">Dámská obuv</string>
-	<string name="poi_shoes_sport">Sportovní obuv</string>
-	<string name="poi_shoes_men">Pánská obuv</string>
-	<string name="poi_shoes_orthopedic">Ortopedická obuv</string>
+	<string name="poi_shoes_children">Dětské</string>
+	<string name="poi_shoes_women">Dámské</string>
+	<string name="poi_shoes_sport">Sportovní</string>
+	<string name="poi_shoes_men">Pánské</string>
+	<string name="poi_shoes_orthopedic">Ortopedická</string>
 
-	<string name="poi_massage_thai">Thajské masáže</string>
-	<string name="poi_massage_sexual">Erotické masáže</string>
-	<string name="poi_massage_chinese">Čínské masáže</string>
-	<string name="poi_massage_therapeutic">Rehabilitační masáže</string>
+	<string name="poi_massage_thai">Thajská</string>
+	<string name="poi_massage_sexual">Erotická</string>
+	<string name="poi_massage_chinese">Čínská</string>
+	<string name="poi_massage_therapeutic">Rehabilitační</string>
 
 	<string name="poi_openfire_yes">Otevřený oheň dovolen</string>
 	<string name="poi_openfire_no">Otevřený oheň zakázán</string>
 	<string name="poi_shower_yes">Sprcha: ano</string>
 	<string name="poi_shower_no">Sprcha: ne</string>
-	<string name="poi_shower_hot">Horká sprcha</string>
-	<string name="poi_shower_outdoor">Venkovní sprcha</string>
-	<string name="poi_shower_cold">Studená sprcha</string>
-	<string name="poi_power_supply_yes">Elektropřípojka</string>
+	<string name="poi_shower_hot">Sprcha: horká</string>
+	<string name="poi_shower_outdoor">Sprcha: venkovní</string>
+	<string name="poi_shower_cold">Sprcha: studená</string>
+	<string name="poi_power_supply_yes">Ano</string>
 	<string name="poi_power_supply_no">Bez elektropřípojky</string>
 	<string name="poi_power_supply_cee_17_blue">Zásuvka:CEE 17 modrá</string>
 	<string name="poi_power_supply_cee_7_4">Zásuvka: CEE 7/4</string>
@@ -1474,9 +1474,9 @@
 	<string name="poi_building_type_basilica">Budova: bazilika</string>
 	<string name="poi_building_type_synagogue">Budova: synagoga</string>
 	<string name="poi_cross">Kříž</string>
-	<string name="poi_piste_grooming_scooter">Úprava trati: skútr</string>
-	<string name="poi_piste_grooming_no">Trať bez úpravy</string>
-	<string name="poi_piste_grooming_mogul">Úprava trati: boule</string>
+	<string name="poi_piste_grooming_scooter">Skútr</string>
+	<string name="poi_piste_grooming_no">Ne</string>
+	<string name="poi_piste_grooming_mogul">Boule</string>
 
 	<string name="poi_garden_type_residential">Obytná zahrada</string>
 	<string name="poi_garden_type_community">Komunitní zahrada</string>
@@ -1488,7 +1488,7 @@
 	<string name="poi_garden_style_japanese">Japonská zahrada</string>
 
 	<string name="poi_capacity">Kapacita</string>
-	<string name="poi_capacity_disabled_yes">Určeno pro postižené</string>
+	<string name="poi_capacity_disabled_yes">Ano</string>
 	<string name="poi_capacity_disabled_no">Nevhodné pro postižené</string>
 	<string name="poi_aerialway_occupancy">Kapacita kabinky/křesla/vozidla</string>
 	<string name="poi_aerialway_capacity">Kapacita za hodinu</string>
@@ -1499,23 +1499,23 @@
 	<string name="poi_microbrewery_yes">Minipivovar</string>
 	<string name="poi_microbrewery_no">Bez minipivovaru</string>
 
-	<string name="poi_fireplace_yes">Ohniště</string>
+	<string name="poi_fireplace_yes">Ano</string>
 	<string name="poi_fireplace_no">Bez ohniště</string>
 
 	<string name="poi_leisure_common">Běžná rekreační oblast</string>
 	<string name="poi_windfall">Polom</string>
 	<string name="poi_rtsa_scale">Stupnice RTSA</string>
 
-	<string name="poi_piste_difficulty_easy">Obtížnost sjezdovky: lehká</string>
-	<string name="poi_piste_difficulty_intermediate">Obtížnost sjezdovky: střední</string>
-	<string name="poi_piste_difficulty_advanced">Obtížnost sjezdovky: pokročilí</string>
-	<string name="poi_piste_difficulty_novice">Obtížnost sjezdovky: začátečníci</string>
-	<string name="poi_piste_difficulty_expert">Obtížnost sjezdovky: zkušení</string>
-	<string name="poi_piste_difficulty_freeride">Obtížnost sjezdovky: volný sjezd</string>
-	<string name="poi_piste_grooming_classic">Úprava tratě: klasická</string>
-	<string name="poi_piste_grooming_classic_skating">Úprava tratě: klasická+bruslení na lyžích</string>
-	<string name="poi_piste_grooming_backcountry">Úprava tratě: přes krajinu</string>
-	<string name="poi_piste_grooming_skating">Úprava tratě: bruslení na lyžích</string>
+	<string name="poi_piste_difficulty_easy">Lehká</string>
+	<string name="poi_piste_difficulty_intermediate">Střední</string>
+	<string name="poi_piste_difficulty_advanced">Těžká</string>
+	<string name="poi_piste_difficulty_novice">Začátečníci</string>
+	<string name="poi_piste_difficulty_expert">Zkušení</string>
+	<string name="poi_piste_difficulty_freeride">Volný sjezd</string>
+	<string name="poi_piste_grooming_classic">Klasická</string>
+	<string name="poi_piste_grooming_classic_skating">Klasická+bruslení na lyžích</string>
+	<string name="poi_piste_grooming_backcountry">Přes krajinu</string>
+	<string name="poi_piste_grooming_skating">Bruslení na lyžích</string>
 	<string name="poi_garden_style_kitchen">Zahradní styl: kuchyň</string>
 	<string name="poi_garden_style_rosarium">Zahradní styl: rozárium</string>
 	<string name="poi_capacity_disabled">Vyhrazená místa pro invalidy</string>
@@ -1531,131 +1531,131 @@
 	<string name="poi_aerialway_duration">Průměrný čas cesty v minutách</string>
 	<string name="poi_aerialway_bubble_yes">Kryt</string>
 	<string name="poi_aerialway_bubble_no">Bez krytu</string>
-	<string name="poi_aerialway_heating_yes">Topení</string>
+	<string name="poi_aerialway_heating_yes">Ano</string>
 	<string name="poi_aerialway_heating_no">Bez topení</string>
-	<string name="poi_aerialway_bicycle_yes">Kola: povolená</string>
+	<string name="poi_aerialway_bicycle_yes">Povolená</string>
 	<string name="poi_aerialway_bicycle_no">Kola: nepovolená</string>
-	<string name="poi_aerialway_bicycle_summer">Kola: povolená jen v létě</string>
+	<string name="poi_aerialway_bicycle_summer">Povolená jen v létě</string>
 	<string name="poi_aerialway_summer_access_entry">Letní přístup: jen vstup</string>
 	<string name="poi_aerialway_summer_access_exit">Letní přístup: jen východ</string>
 	<string name="poi_aerialway_summer_access_both">Letní přístup: vstup a východ</string>
 
-	<string name="poi_stars_1">Hvězdy: 1 (Turistický)</string>
-	<string name="poi_stars_1s">Hvězdy: 1S (Vyšší turistický)</string>
-	<string name="poi_stars_2">Hvězdy: 2 (Standard)</string>
-	<string name="poi_stars_2s">Hvězdy: 2 (Vyšší standard)</string>
-	<string name="poi_stars_3">Hvězdy: 3 (Komfort)</string>
-	<string name="poi_stars_3s">Hvězdy: 3S (Vyšší komfort)</string>
-	<string name="poi_stars_4">Hvězdy: 4 (První třída)</string>
-	<string name="poi_stars_4s">Hvězdy: 4S (Vyšší první třída)</string>
-	<string name="poi_stars_5">Hvězdy: 5 (Luxus)</string>
-	<string name="poi_stars_5s">Hvězdy: 5S (Vyšší luxus)</string>
+	<string name="poi_stars_1">1 (Turistický)</string>
+	<string name="poi_stars_1s">1S (Vyšší turistický)</string>
+	<string name="poi_stars_2">2 (Standard)</string>
+	<string name="poi_stars_2s">2S (Vyšší standard)</string>
+	<string name="poi_stars_3">3 (Komfort)</string>
+	<string name="poi_stars_3s">3S (Vyšší komfort)</string>
+	<string name="poi_stars_4">4 (První třída)</string>
+	<string name="poi_stars_4s">4S (Vyšší první třída)</string>
+	<string name="poi_stars_5">5 (Luxus)</string>
+	<string name="poi_stars_5s">5S (Vyšší luxus)</string>
 	<string name="poi_stars_6">Hvězdy: 6</string>
 	<string name="poi_stars_7">Hvězdy: 7</string>
 	<string name="poi_rooms">Místnosti</string>
 
 	<string name="poi_love_hotel">Hodinový hotel</string>
 
-	<string name="poi_payment_coins_yes">Přijímá mince</string>
+	<string name="poi_payment_coins_yes">Mince</string>
 	<string name="poi_payment_coins_no">Nepřijímá mince</string>
-	<string name="poi_payment_coins_0.5">Přijímá mince $0.5</string>
-	<string name="poi_payment_coins_50c12">Přijímá mince 50c, 1€, a 2€</string>
-	<string name="poi_payment_telephone_cards_yes">Přijímá telefonní karty</string>
+	<string name="poi_payment_coins_0.5">Mince $0.5</string>
+	<string name="poi_payment_coins_50c12">Mince 50c, 1€, a 2€</string>
+	<string name="poi_payment_telephone_cards_yes">Telefonní karty</string>
 	<string name="poi_payment_telephone_cards_no">Nepřijímá telefonní karty</string>
-	<string name="poi_payment_credit_cards_yes">Přijímá kreditní karty</string>
+	<string name="poi_payment_credit_cards_yes">Kreditní karty</string>
 	<string name="poi_payment_credit_cards_no">Nepřijímá kreditní karty</string>
-	<string name="poi_payment_notes_yes">Přijímá bankovky</string>
+	<string name="poi_payment_notes_yes">Bankovky</string>
 	<string name="poi_payment_notes_no">Nepřijímá bankovky</string>
-	<string name="poi_payment_electronic_purses_yes">Přijímá elektronické peněženky</string>
+	<string name="poi_payment_electronic_purses_yes">Elektronické peněženky</string>
 	<string name="poi_payment_electronic_purses_no">Nepřijímá elektronické peněženky</string>
-	<string name="poi_payment_cash_yes">Přijímá hotovost</string>
+	<string name="poi_payment_cash_yes">Hotovost</string>
 	<string name="poi_payment_cash_no">Nepřijímá hotovost</string>
-	<string name="poi_payment_debit_cards_yes">Přijímá platební karty</string>
+	<string name="poi_payment_debit_cards_yes">Platební karty</string>
 	<string name="poi_payment_debit_cards_no">Nepřijímá platební karty</string>
-	<string name="poi_payment_bitcoin_yes">Přijímá Bitcoiny</string>
+	<string name="poi_payment_bitcoin_yes">Bitcoiny</string>
 	<string name="poi_payment_bitcoin_no">Nepřijímá Bitcoiny</string>
-	<string name="poi_payment_visa_yes">Přijímá Visa karty</string>
+	<string name="poi_payment_visa_yes">Visa</string>
 	<string name="poi_payment_visa_no">Nepřijímá Visa karty</string>
-	<string name="poi_payment_mastercard_yes">Přijímá MasterCard karty</string>
+	<string name="poi_payment_mastercard_yes">MasterCard</string>
 	<string name="poi_payment_mastercard_no">Nepřijímá MasterCard karty</string>
 	<string name="poi_payment_none">Bez poplatku</string>
-	<string name="poi_payment_account_cards_yes">Přijímá účtové karty</string>
+	<string name="poi_payment_account_cards_yes">Účtové karty</string>
 	<string name="poi_payment_account_cards_no">Nepřijímá účtové karty</string>
-	<string name="poi_payment_maestro_yes">Přijímá Maestro karty</string>
+	<string name="poi_payment_maestro_yes">Maestro karty</string>
 	<string name="poi_payment_maestro_no">Nepřijímá Maestro karty</string>
-	<string name="poi_payment_american_express_yes">Přijímá American Express (AMEX) karty</string>
+	<string name="poi_payment_american_express_yes">American Express (AMEX)</string>
 	<string name="poi_payment_american_express_no">Nepřijímá American Express (AMEX) karty</string>
-	<string name="poi_payment_diners_club_yes">Přijímá Diners Club karty</string>
+	<string name="poi_payment_diners_club_yes">Diners Club</string>
 	<string name="poi_payment_diners_club_no">Nepřijímá Diners Club karty</string>
-	<string name="poi_payment_dkv_yes">Přijímá DKV</string>
+	<string name="poi_payment_dkv_yes">DKV</string>
 	<string name="poi_payment_dkv_no">Nepřijímá DKV</string>
-	<string name="poi_payment_uta_yes">Přijímá UTA karty</string>
+	<string name="poi_payment_uta_yes">UTA</string>
 	<string name="poi_payment_uta_no">Nepřijímá UTA karty</string>
-	<string name="poi_payment_efectivo_yes">Přijímá Efectivo</string>
+	<string name="poi_payment_efectivo_yes">Efectivo</string>
 	<string name="poi_payment_efectivo_no">Nepřijímá Efectivo</string>
-	<string name="poi_payment_girocard_yes">Přijímá Girocard</string>
+	<string name="poi_payment_girocard_yes">Girocard</string>
 	<string name="poi_payment_girocard_no">Nepřijímá Girocard</string>
-	<string name="poi_payment_discover_card_yes">Přijímá Discover karty</string>
+	<string name="poi_payment_discover_card_yes">Discover karty</string>
 	<string name="poi_payment_discover_card_no">Nepřijímá Discover karty</string>
-	<string name="poi_payment_visa_electron_yes">Přijímá Visa Electron karty</string>
+	<string name="poi_payment_visa_electron_yes">Visa Electron</string>
 	<string name="poi_payment_visa_electron_no">Nepřijímá Visa Electron karty</string>
-	<string name="poi_payment_litecoin_yes">Přijímá Litecoin</string>
+	<string name="poi_payment_litecoin_yes">Litecoin</string>
 	<string name="poi_payment_litecoin_no">Nepřijímá Litecoin</string>
-	<string name="poi_payment_cheque_yes">Přijímá šeky</string>
+	<string name="poi_payment_cheque_yes">Šeky</string>
 	<string name="poi_payment_cheque_no">Nepřijímá šeky</string>
-	<string name="poi_payment_pikepass_yes">Přijímá PIKEPASS</string>
+	<string name="poi_payment_pikepass_yes">PIKEPASS</string>
 	<string name="poi_payment_pikepass_no">Nepřijímá PIKEPASS</string>
-	<string name="poi_payment_pikepass_designated">Přijímá PIKEPASS (designated)</string>
-	<string name="poi_payment_visa_debit_yes">Přijímá Visa platební karty</string>
+	<string name="poi_payment_pikepass_designated">PIKEPASS (designated)</string>
+	<string name="poi_payment_visa_debit_yes">Visa platební karty</string>
 	<string name="poi_payment_visa_debit_no">Nepřijímá Visa platební karty</string>
 	<string name="poi_payment_cryptocurrencies_no">Nepřijímá kryptoměny</string>
-	<string name="poi_payment_others_yes">Přijímá jiné platební metody</string>
+	<string name="poi_payment_others_yes">Ostatní</string>
 	<string name="poi_payment_others_no">Nepřijímá jiné platební metody</string>
-	<string name="poi_payment_routex_yes">Přijímá Routex palivové karty</string>
+	<string name="poi_payment_routex_yes">Routex</string>
 	<string name="poi_payment_routex_no">Nepřijímá Routex palivové karty</string>
-	<string name="poi_payment_bancomat_yes">Přijímá Bancomat</string>
+	<string name="poi_payment_bancomat_yes">Bancomat</string>
 	<string name="poi_payment_bancomat_no">Nepřijímá Bancomat</string>
-	<string name="poi_payment_icsf_yes">Přijímá karty IC s předplaceným jízdným</string>
+	<string name="poi_payment_icsf_yes">IC s předplaceným jízdným</string>
 	<string name="poi_payment_icsf_no">Nepřijímá karty IC s předplaceným jízdným</string>
-	<string name="poi_payment_prepaid_ticket_yes">Přijímá předplacené lístky</string>
-	<string name="poi_payment_jcb_yes">Přijímá JCB karty</string>
+	<string name="poi_payment_prepaid_ticket_yes">Předplacené lístky</string>
+	<string name="poi_payment_jcb_yes">JCB</string>
 	<string name="poi_payment_jcb_no">Nepřijímá JCB karty</string>
-	<string name="poi_payment_laser_yes">Přijímá Laser karty</string>
+	<string name="poi_payment_laser_yes">Laser</string>
 	<string name="poi_payment_laser_no">Nepřijímá Laser karty</string>
-	<string name="poi_payment_ep_quick_yes">Přijímá Quick karty</string>
+	<string name="poi_payment_ep_quick_yes">Quick</string>
 	<string name="poi_payment_ep_quick_no">Nepřijímá Quick karty</string>
-	<string name="poi_payment_eurowag_yes">Přijímá Eurowag karty</string>
+	<string name="poi_payment_eurowag_yes">Eurowag</string>
 	<string name="poi_payment_eurowag_no">Nepřijímá Eurowag karty</string>
-	<string name="poi_payment_e_zpass_yes">Přijímá E‑ZPass</string>
+	<string name="poi_payment_e_zpass_yes">E‑ZPass</string>
 	<string name="poi_payment_e_zpass_no">Nepřijímá E‑ZPass</string>
-	<string name="poi_payment_euroshell_yes">Přijímá Euroshell palivové karty</string>
+	<string name="poi_payment_euroshell_yes">Euroshell</string>
 	<string name="poi_payment_euroshell_no">Nepřijímá Euroshell palivové karty</string>
-	<string name="poi_payment_kitcard_yes">Přijímá KITCard</string>
+	<string name="poi_payment_kitcard_yes">KITCard</string>
 	<string name="poi_payment_kitcard_no">Nepřijímá KITCard</string>
-	<string name="poi_payment_westfalen_card_yes">Přijímá Westfalen karty</string>
+	<string name="poi_payment_westfalen_card_yes">Westfalen</string>
 	<string name="poi_payment_westfalen_card_no">Nepřijímá Westfalen karty</string>
-	<string name="poi_payment_v_pay_yes">Přijímá V PAY karty</string>
+	<string name="poi_payment_v_pay_yes">V PAY</string>
 	<string name="poi_payment_v_pay_no">Nepřijímá V PAY karty</string>
-	<string name="poi_payment_dogecoin_yes">Přijímá Dogecoin</string>
+	<string name="poi_payment_dogecoin_yes">Dogecoin</string>
 	<string name="poi_payment_dogecoin_no">Nepřijímá Dogecoin</string>
-	<string name="poi_payment_cibus_yes">Přijímá Cibus karty</string>
+	<string name="poi_payment_cibus_yes">Cibus</string>
 	<string name="poi_payment_cibus_no">Nepřijímá Cibus karty</string>
-	<string name="poi_payment_wire_transfer_yes">Přijímá bankovní převody</string>
+	<string name="poi_payment_wire_transfer_yes">Bankovní převody</string>
 	<string name="poi_payment_wire_transfer_no">Nepřijímá bankovní převody</string>
-	<string name="poi_payment_ep_cash_yes">Přijímá Geldkarte hotovostní karty</string>
+	<string name="poi_payment_ep_cash_yes">Geldkarte hotovostní karty</string>
 	<string name="poi_payment_ep_cash_no">Nepřijímá Geldkarte hotovostní karty</string>
-	<string name="poi_payment_ep_proton_yes">Přijímá Proton karty</string>
+	<string name="poi_payment_ep_proton_yes">Proton</string>
 	<string name="poi_payment_ep_proton_no">Nepřijímá Proton karty</string>
-	<string name="poi_payment_ep_avant_yes">Přijímá AvantCard</string>
+	<string name="poi_payment_ep_avant_yes">AvantCard</string>
 	<string name="poi_payment_ep_avant_no">Nepřijímá AvantCard</string>
-	<string name="poi_payment_ep_mep_yes">Přijímá MEP</string>
+	<string name="poi_payment_ep_mep_yes">MEP</string>
 	<string name="poi_payment_ep_mep_no">Nepřijímá MEP</string>
-	<string name="poi_payment_ep_minipay_yes">Přijímá Minipay</string>
+	<string name="poi_payment_ep_minipay_yes">Minipay</string>
 	<string name="poi_payment_ep_minipay_no">Nepřijímá Minipay</string>
-	<string name="poi_payment_ep_minicash_yes">Přijímá MiniCash</string>
+	<string name="poi_payment_ep_minicash_yes">MiniCash</string>
 	<string name="poi_payment_ep_minicash_no">Nepřijímá MiniCash</string>
-	<string name="poi_internet_access_type_wired">Přístup k internetu: drátový</string>
-	<string name="poi_internet_access_type_terminal">Přístup k internetu: terminál</string>
+	<string name="poi_internet_access_type_wired">Kabel</string>
+	<string name="poi_internet_access_type_terminal">Terminál</string>
 	<string name="poi_internet_access_type_public">Přístup k internetu: veřejný</string>
 	<string name="poi_internet_access_type_service">Přístup k internetu: služební</string>
 	<string name="poi_denomination_anglican">Anglikánské</string>
@@ -1708,16 +1708,16 @@
 	<string name="poi_passenger_information_display_yes">Zobrazování informací pro cestující: ano</string>
 	<string name="poi_passenger_information_display_no">Zobrazování informací pro cestující: ne</string>
 
-	<string name="poi_barometer_yes">Barometr: ano</string>
+	<string name="poi_barometer_yes">Barometr</string>
 	<string name="poi_barometer_no">Barometr: ne</string>
-	<string name="poi_thermometer_yes">Teploměr: ano</string>
+	<string name="poi_thermometer_yes">Teploměr</string>
 	<string name="poi_thermometer_no">Teploměr: ne</string>
-	<string name="poi_hygrometer_yes">Vlhkoměr: ano</string>
+	<string name="poi_hygrometer_yes">Vlhkoměr</string>
 	<string name="poi_hygrometer_no">Vlhkoměr: ne</string>
-	<string name="poi_date_yes">Zobrazení data: ano</string>
+	<string name="poi_date_yes">Zobrazení data</string>
 	<string name="poi_date_no">Zobrazení data: ne</string>
 
-	<string name="poi_cocktails_yes">Koktejly</string>
+	<string name="poi_cocktails_yes">Ano</string>
 
 	<string name="poi_second_hand_yes">Zboží z druhé ruky</string>
 	<string name="poi_second_hand_no">Žádné zboží z druhé ruky</string>
@@ -1728,12 +1728,12 @@
 	<string name="poi_service_repair">Opravy</string>
 	<string name="poi_service_repair_no">Žádné opravy</string>
 	<string name="poi_service_electrical">Opravy elektrických vozidel</string>
-	<string name="poi_self_service_yes">Samoobsluha</string>
+	<string name="poi_self_service_yes">Ano</string>
 	<string name="poi_self_service_no">Bez samoobsluhy</string>
-	<string name="poi_automated_yes">Automatizované</string>
+	<string name="poi_automated_yes">Ano</string>
 	<string name="poi_automated_no">Neautomatizované</string>
 	<string name="poi_full_service_yes">Všechny služby</string>
-	<string name="poi_brushless_yes">Bez kartáčů</string>
+	<string name="poi_brushless_yes">Ano</string>
 	<string name="poi_brushless_no">Bez kartáčů: ne</string>
 	<string name="poi_car_wash_no">Automyčka: ne</string>
 
@@ -1774,7 +1774,7 @@
 	<string name="poi_resource_basalt">Čedič</string>
 	<string name="poi_resource_bauxite">Bauxit</string>
 	<string name="poi_resource_beryl">Beryl</string>
-	<string name="poi_resource_bismuth">Vizmut</string>
+	<string name="poi_resource_bismuth">Bismut</string>
 	<string name="poi_resource_chromite">Chromit</string>
 	<string name="poi_resource_copper">Měď</string>
 	<string name="poi_resource_diamond">Diamant</string>
@@ -1798,7 +1798,7 @@
 	<string name="poi_resource_opal">Opál</string>
 	<string name="poi_resource_peat">Rašelina</string>
 	<string name="poi_resource_platinum">Platina</string>
-	<string name="poi_resource_radium">Rádium</string>
+	<string name="poi_resource_radium">Radium</string>
 	<string name="poi_resource_ruby">Rubín</string>
 	<string name="poi_resource_salt">Sůl</string>
 	<string name="poi_resource_sand">Písek</string>
@@ -1809,7 +1809,7 @@
 	<string name="poi_resource_slate">Břidlice</string>
 	<string name="poi_resource_stone">Kámen</string>
 	<string name="poi_resource_uranium">Uran</string>
-	<string name="poi_resource_vanadium">Vanadium</string>
+	<string name="poi_resource_vanadium">Vanad</string>
 	<string name="poi_resource_water">Voda</string>
 	<string name="poi_resource_zinc">Zinek</string>
 	<string name="poi_resource_zircon">Zirkon</string>
@@ -1829,13 +1829,13 @@
 
 	<string name="poi_flagpole">Stožár</string>
 
-	<string name="poi_shelter_type_lean_to">Přístřešek: úkryt z jedné strany otevřený</string>
-	<string name="poi_shelter_type_basic_hut">Přístřešek: prostá bouda</string>
-	<string name="poi_shelter_type_building">Přístřešek: budova</string>
-	<string name="poi_shelter_type_wildlife_hide">Přístřešek: pro živočichy</string>
-	<string name="poi_shelter_type_rock_shelter">Přístřešek: skalní úkryt</string>
-	<string name="poi_shelter_type_sun_shelter">Přístřešek: sluneční úkryt</string>
-	<string name="poi_shelter_type_field_shelter">Přístřešek: Polní</string>
+	<string name="poi_shelter_type_lean_to">Úkryt z jedné strany otevřený</string>
+	<string name="poi_shelter_type_basic_hut">Prostá bouda</string>
+	<string name="poi_shelter_type_building">Budova</string>
+	<string name="poi_shelter_type_wildlife_hide">Na pozorování zvířat</string>
+	<string name="poi_shelter_type_rock_shelter">Skalní úkryt</string>
+	<string name="poi_shelter_type_sun_shelter">Sluneční úkryt</string>
+	<string name="poi_shelter_type_field_shelter">Polní přístřešek</string>
 	<string name="poi_shelter_type_tent">Přístřešek: stan</string>
 	<string name="poi_shelter_type_abandoned">Přístřešek: opuštěný</string>
 
@@ -1854,7 +1854,7 @@
 	<string name="poi_artwork_type_installation">Typ díla: zařízení</string>
 	<string name="poi_artwork_type_mosaic">Typ díla: mozaika</string>
 	<string name="poi_artwork_type_relief">Typ díla: reliéf</string>
-	<string name="poi_artwork_type_graffiti">Typ díla: grafiti</string>
+	<string name="poi_artwork_type_graffiti">Typ díla: graffiti</string>
 	<string name="poi_artwork_type_fountain">Typ díla: fontána</string>
 
 	<string name="poi_width">Šířka</string>
@@ -1896,8 +1896,8 @@
 	<string name="poi_telescope_usage_research">Použití: výzkum</string>
 
 	<string name="poi_observatory_type_espionage">Použití: špionáž</string>
-	<string name="poi_observatory_type_meteorological">Použití: meteorologický</string>
-	<string name="poi_observatory_type_gravitational">Použití: gravitační</string>
+	<string name="poi_observatory_type_meteorological">Meteorologická</string>
+	<string name="poi_observatory_type_gravitational">Gravitační</string>
 
 	<string name="poi_greenhouse_horticulture">Skleníkové zahradnictví</string>
 
@@ -1909,10 +1909,10 @@
 	<string name="poi_generator_output_steam_yes">Výstup: pára</string>
 	<string name="poi_generator_output_hot_air_yes">Výstup: horký vzduch</string>
 	<string name="poi_generator_output_cold_water_yes">Výstup: studená voda</string>
-	<string name="poi_generator_output_compressed_air">Výstupní výkon stlačeným vzduchem</string>
+	<string name="poi_generator_output_compressed_air">Výstupní výkon stlačeného vzduchu</string>
 	<string name="poi_generator_output_compressed_air_yes">Výstup: stlačený vzduch</string>
-	<string name="poi_generator_output_vacuum_yes">Výstup: vákuum</string>
-	<string name="poi_generator_output_biogas">Výstupní výkon bioplynem</string>
+	<string name="poi_generator_output_vacuum_yes">Výstup: vakuum</string>
+	<string name="poi_generator_output_biogas">Výstupní výkon bioplynu</string>
 	<string name="poi_generator_output_biogas_yes">Výstup: bioplyn</string>
 
 	<string name="poi_pumping_station">Čerpací stanice</string>
@@ -1936,52 +1936,52 @@
 	<string name="poi_debris">Trosky</string>
 	<string name="poi_jersey_barrier">Modulární bariéra</string>
 	<string name="poi_trees_meadow_orchard">Luční sad</string>
-	<string name="poi_pump_yes">Pumpa</string>
+	<string name="poi_pump_yes">Ano</string>
 
 	<string name="poi_information_route_marker">Značení cesty</string>
-	<string name="poi_payment_ep_moneo_yes">Přijímá Moneo</string>
+	<string name="poi_payment_ep_moneo_yes">Moneo</string>
 	<string name="poi_payment_ep_moneo_no">Nepřijímá Moneo</string>
-	<string name="poi_payment_ep_monedero4b_yes">Přijímá Monedero 4B</string>
+	<string name="poi_payment_ep_monedero4b_yes">Monedero 4B</string>
 	<string name="poi_payment_ep_monedero4b_no">Nepřijímá Monedero 4B</string>
-	<string name="poi_payment_ep_monedero_yes">Přijímá Monedero</string>
+	<string name="poi_payment_ep_monedero_yes">Monedero</string>
 	<string name="poi_payment_ep_monedero_no">Nepřijímá Monedero</string>
-	<string name="poi_payment_bankaxess_yes">Přijímá BankAxess</string>
+	<string name="poi_payment_bankaxess_yes">BankAxess</string>
 	<string name="poi_payment_bankaxess_no">Nepřijímá BankAxess</string>
-	<string name="poi_payment_coinkite_yes">Přijímá Coinkite</string>
+	<string name="poi_payment_coinkite_yes">Coinkite</string>
 	<string name="poi_payment_coinkite_no">Nepřijímá Coinkite</string>
-	<string name="poi_payment_roadrunner_yes">Přijímá Roadrunner karty</string>
+	<string name="poi_payment_roadrunner_yes">Roadrunner</string>
 	<string name="poi_payment_roadrunner_no">Nepřijímá Roadrunner karty</string>
-	<string name="poi_payment_svg_yes">Přijímá SVG</string>
+	<string name="poi_payment_svg_yes">SVG</string>
 	<string name="poi_payment_svg_no">Nepřijímá SVG</string>
-	<string name="poi_payment_sms_yes">Přijímá SMS platby</string>
+	<string name="poi_payment_sms_yes">SMS platby</string>
 	<string name="poi_payment_sms_no">Nepřijímá SMS platby</string>
-	<string name="poi_payment_ov_chipkaart_yes">Přijímá OV-Chipkaart</string>
+	<string name="poi_payment_ov_chipkaart_yes">OV-Chipkaart</string>
 	<string name="poi_payment_ov_chipkaart_no">Nepřijímá OV-Chipkaart</string>
-	<string name="poi_payment_oyster_yes">Přijímá Oyster karty</string>
+	<string name="poi_payment_oyster_yes">Oyster</string>
 	<string name="poi_payment_oyster_no">Nepřijímá Oyster karty</string>
-	<string name="poi_payment_sube_yes">Přijímá SUBE karty</string>
+	<string name="poi_payment_sube_yes">SUBE</string>
 	<string name="poi_payment_sube_no">Nepřijímá SUBE karty</string>
-	<string name="poi_payment_via_verde_yes">Přijímá Via Verde</string>
+	<string name="poi_payment_via_verde_yes">Via Verde</string>
 	<string name="poi_payment_via_verde_no">Nepřijímá Via Verde</string>
-	<string name="poi_payment_meal_voucher_yes">Přijímá stravovací poukázky</string>
+	<string name="poi_payment_meal_voucher_yes">Stravovací poukázky</string>
 	<string name="poi_payment_meal_voucher_no">Nepřijímá stravovací poukázky</string>
-	<string name="poi_payment_paypal_yes">Přijímá PayPal</string>
+	<string name="poi_payment_paypal_yes">PayPal</string>
 	<string name="poi_payment_paypal_no">Nepřijímá PayPal</string>
-	<string name="poi_payment_u_key_yes">Přijímá U-Key</string>
+	<string name="poi_payment_u_key_yes">U-Key</string>
 	<string name="poi_payment_u_key_no">Nepřijímá U-Key</string>
-	<string name="poi_payment_token_yes">Přijímá žetony</string>
+	<string name="poi_payment_token_yes">Žetony</string>
 	<string name="poi_payment_token_no">Nepřijímá žetony</string>
-	<string name="poi_payment_gift_card_yes">Přijímá dárkové poukázky</string>
+	<string name="poi_payment_gift_card_yes">Dárkové poukázky</string>
 	<string name="poi_payment_gift_card_no">Nepřijímá dárkové poukázky</string>
-	<string name="poi_payment_golden_crown_yes">Přijímá Golden Crown karty</string>
+	<string name="poi_payment_golden_crown_yes">Golden Crown</string>
 	<string name="poi_payment_golden_crown_no">Nepřijímá Golden Crown karty</string>
-	<string name="poi_payment_pro100_yes">Přijímá PRO100 karty</string>
+	<string name="poi_payment_pro100_yes">"PRO100 "</string>
 	<string name="poi_payment_pro100_no">Nepřijímá PRO100 karty</string>
-	<string name="poi_payment_union_card_yes">Přijímá Union Card</string>
+	<string name="poi_payment_union_card_yes">Union karty</string>
 	<string name="poi_payment_union_card_no">Nepřijímá Union Card</string>
-	<string name="poi_payment_mtsmoney_yes">Přijímá MTS-Money</string>
+	<string name="poi_payment_mtsmoney_yes">MTS-Money</string>
 	<string name="poi_payment_mtsmoney_no">Nepřijímá MTS-Money</string>
-	<string name="poi_payment_yandexmoney_yes">Přijímá Yandex.Money</string>
+	<string name="poi_payment_yandexmoney_yes">Yandex.Money</string>
 	<string name="poi_payment_yandexmoney_no">Nepřijímá Yandex.Money</string>
 	<string name="poi_description_payment">Popis platby</string>
 
@@ -1990,27 +1990,27 @@
 
 	<string name="poi_events_venue">Místo pořádání akce</string>
 
-	<string name="poi_diet_vegetarian_only">Pouze vegetariánská jídla</string>
-	<string name="poi_diet_vegetarian_yes">Vegetariánská jídla</string>
+	<string name="poi_diet_vegetarian_only">Pouze vegetariánská</string>
+	<string name="poi_diet_vegetarian_yes">Vegetariánská</string>
 	<string name="poi_diet_vegetarian_no">Vegetariánská jídla: ne</string>
-	<string name="poi_diet_vegetarian_few">Vegetariánská jídla: některá</string>
-	<string name="poi_diet_vegan_only">Pouze veganská jídla</string>
-	<string name="poi_diet_vegan_yes">Veganská jídla</string>
+	<string name="poi_diet_vegetarian_few">Vegetariánská (některá)</string>
+	<string name="poi_diet_vegan_only">Pouze veganská</string>
+	<string name="poi_diet_vegan_yes">Veganská</string>
 	<string name="poi_diet_vegan_no">Veganská jídla: ne</string>
-	<string name="poi_diet_gluten_free_only">Pouze bezlepková jídla</string>
-	<string name="poi_diet_gluten_free_yes">Bezlepková jídla</string>
+	<string name="poi_diet_gluten_free_only">Pouze bezlepková</string>
+	<string name="poi_diet_gluten_free_yes">Bezlepková</string>
 	<string name="poi_diet_gluten_free_no">Bezlepková jídla: ne</string>
-	<string name="poi_diet_halal_only">Pouze halal jídla</string>
-	<string name="poi_diet_halal_yes">Halal jídla</string>
+	<string name="poi_diet_halal_only">Pouze halal</string>
+	<string name="poi_diet_halal_yes">Halal</string>
 	<string name="poi_diet_halal_no">Halal jídla: ne</string>
-	<string name="poi_diet_lactose_free_only">Pouze bezlaktózová jídla</string>
-	<string name="poi_diet_lactose_free_yes">Bezlaktózová jídla</string>
+	<string name="poi_diet_lactose_free_only">Pouze bezlaktózová</string>
+	<string name="poi_diet_lactose_free_yes">Bezlaktózová</string>
 	<string name="poi_diet_lactose_free_no">Bezlaktózová jídla: ne</string>
-	<string name="poi_diet_pescetarian_yes">Pescetariánská jídla</string>
+	<string name="poi_diet_pescetarian_yes">Pescetariánská</string>
 
-	<string name="poi_drive_in_yes">Vjezd autem: ano</string>
+	<string name="poi_drive_in_yes">Ano</string>
 	<string name="poi_drive_in_no">Vjezd autem: ne</string>
-	<string name="poi_drive_through_yes">Průjezd autem: ano</string>
+	<string name="poi_drive_through_yes">Ano</string>
 	<string name="poi_drive_through_no">Průjezd autem: ne</string>
 
 	<string name="poi_takeaway_yes">Jídlo s sebou</string>
@@ -2064,7 +2064,7 @@
 	<string name="poi_surface_cobblestone">Povrch: dlažební kostky</string>
 	<string name="poi_surface_paving_stones">Povrch: zámková dlažba</string>
 	<string name="poi_surface_pebblestone">Povrch: oblázky</string>
-	<string name="poi_surface_stone">Povrch: kamen</string>
+	<string name="poi_surface_stone">Povrch: kámen</string>
 	<string name="poi_surface_metal">Povrch: kov</string>
 	<string name="poi_surface_wood">Povrch: dřevo</string>
 	<string name="poi_surface_gravel">Povrch: štěrk</string>
@@ -2096,21 +2096,21 @@
 	<string name="poi_surveillance_yes">Dohled: ano</string>
 	<string name="poi_shop_additional_yes">S obchodem</string>
 
-	<string name="poi_service_bicycle_retail_yes">Prodej kol: ano</string>
+	<string name="poi_service_bicycle_retail_yes">Prodej</string>
 	<string name="poi_service_bicycle_retail_no">Prodej kol: ne</string>
-	<string name="poi_service_bicycle_repair_yes">Oprava kol: ano</string>
+	<string name="poi_service_bicycle_repair_yes">Oprava</string>
 	<string name="poi_service_bicycle_repair_no">Oprava kol: ne</string>
-	<string name="poi_service_bicycle_rental_yes">Půjčovna kol: ano</string>
+	<string name="poi_service_bicycle_rental_yes">Půjčovna</string>
 	<string name="poi_service_bicycle_rental_no">Půjčovna kol: ne</string>
-	<string name="poi_service_bicycle_pump_yes">Hustilka na kola: ano</string>
+	<string name="poi_service_bicycle_pump_yes">Hustilka</string>
 	<string name="poi_service_bicycle_pump_no">Hustilka na kola: ne</string>
-	<string name="poi_service_bicycle_diy_yes">Nástroje na opravu kol: ano</string>
+	<string name="poi_service_bicycle_diy_yes">Nástroje na opravu kol</string>
 	<string name="poi_service_bicycle_diy_no">Nástroje na opravu kol: ne</string>
-	<string name="poi_service_bicycle_cleaning_yes">Čištění kol: ano</string>
+	<string name="poi_service_bicycle_cleaning_yes">Čištění</string>
 	<string name="poi_service_bicycle_cleaning_no">Čištění kol: ne</string>
-	<string name="poi_service_bicycle_chaintool_yes">Nástroje na opravu řetězu kol: ano</string>
+	<string name="poi_service_bicycle_chaintool_yes">Nástroje na opravu řetězu</string>
 	<string name="poi_service_bicycle_chaintool_no">Nástroje na opravu řetězu kol: ne</string>
-	<string name="poi_service_bicycle_second_hand_yes">Prodej použitých kol: ano</string>
+	<string name="poi_service_bicycle_second_hand_yes">Prodej použitých kol</string>
 	<string name="poi_service_bicycle_second_hand_no">Prodej použitých kol: ne</string>
 
 	<string name="poi_wildlife_hide">Pozorovatelna zvěře</string>
@@ -2127,8 +2127,8 @@
 	<string name="poi_training_aviation">Výcvik: letectví</string>
 	<string name="poi_training_hairdressing">Výcvik: kadeřnictví</string>
 
-	<string name="poi_diet_kosher_only">Jen košer jídla</string>
-	<string name="poi_diet_kosher_yes">Košer jídla</string>
+	<string name="poi_diet_kosher_only">Jen košer</string>
+	<string name="poi_diet_kosher_yes">Košer</string>
 	<string name="poi_diet_kosher_no">Košer jídla: ne</string>
 	<string name="poi_vending_elongated_coin">Podlouhlé mince</string>
 	<string name="poi_vending_tickets">Automat na lístky</string>
@@ -2144,12 +2144,12 @@
 	<string name="poi_resource_tuff">Tuf</string>
 	<string name="poi_artwork_type_stele">Typ díla: stéla</string>
 	<string name="poi_architecture_neoclassicism">Architektura: neoklasicismus</string>
-	<string name="poi_architecture_victorian">Architektura: viktoriánský</string>
+	<string name="poi_architecture_victorian">Architektura: viktoriánská</string>
 	<string name="poi_architecture_classicism">Architektura: klasicismus</string>
-	<string name="poi_architecture_gothic">Architektura: gotický</string>
+	<string name="poi_architecture_gothic">Architektura: gotická</string>
 	<string name="poi_architecture_baroque">Architektura: barokní</string>
 	<string name="poi_architecture_renaissance">Architektura: renesance</string>
-	<string name="poi_architecture_romanesque">Architektura: románský</string>
+	<string name="poi_architecture_romanesque">Architektura: románská</string>
 
 	<string name="poi_monument_yes">Velký památník</string>
 
@@ -2231,29 +2231,29 @@
 	<string name="poi_surveillance_outdoor">Dohled: venkovní</string>
 	<string name="poi_surveillance_public">Dohled: veřejný</string>
 
-	<string name="poi_clothes_women">Dámské oblečení</string>
+	<string name="poi_clothes_women">Dámské</string>
 	<string name="poi_clothes_underwear">Spodní prádlo</string>
-	<string name="poi_clothes_men">Pánské oblečení</string>
+	<string name="poi_clothes_men">Pánské</string>
 	<string name="poi_clothes_wedding">Svatební šaty</string>
-	<string name="poi_clothes_sports">Sportovní oblečení</string>
-	<string name="poi_clothes_babies">Novorozenecké oblečení</string>
-	<string name="poi_clothes_denim">Džínové oblečení</string>
+	<string name="poi_clothes_sports">Sportovní</string>
+	<string name="poi_clothes_babies">Novorozenecké</string>
+	<string name="poi_clothes_denim">Džínové</string>
 	<string name="poi_clothes_workwear">Pracovní oděvy</string>
 	<string name="poi_clothes_hats">Klobouky</string>
 	<string name="poi_clothes_fur">Kožichy</string>
 	<string name="poi_clothes_leather">Kůže</string>
 	<string name="poi_clothes_costumes">Kostýmy</string>
-	<string name="poi_clothes_traditional">Tradiční oblečení</string>
+	<string name="poi_clothes_traditional">Tradiční</string>
 	<string name="poi_clothes_suits">Obleky</string>
-	<string name="poi_clothes_maternity">Těhotenské oblečení</string>
-	<string name="poi_clothes_vintage">Vintage/retro oblečení</string>
-	<string name="poi_clothes_oversize">Nadrozměrné oblečení</string>
-	<string name="poi_clothes_schoolwear">Školní oděvy</string>
+	<string name="poi_clothes_maternity">Těhotenské</string>
+	<string name="poi_clothes_vintage">Vintage/retro</string>
+	<string name="poi_clothes_oversize">Nadrozměrné</string>
+	<string name="poi_clothes_schoolwear">Školní</string>
 	<string name="poi_clothes_swimwear">Plavky</string>
 	<string name="poi_clothes_socks">Ponožky</string>
 	<string name="poi_clothes_shirts">Košile</string>
-	<string name="poi_clothes_dance">Taneční oděvy</string>
-	<string name="poi_clothes_military">Vojenské oblečení</string>
+	<string name="poi_clothes_dance">Taneční</string>
+	<string name="poi_clothes_military">Vojenské</string>
 
 	<string name="poi_historic_milestone">Historický mezník</string>
 
@@ -2271,18 +2271,18 @@
 	<string name="poi_sauna_yes">Sauna</string>
 	<string name="poi_solarium_yes">Solárium</string>
 
-	<string name="poi_tents_yes">Stany povoleny</string>
+	<string name="poi_tents_yes">Povoleny</string>
 	<string name="poi_tents_no">Stany nepovoleny</string>
-	<string name="poi_backcountry_yes">Tábořiště</string>
-	<string name="poi_backcountry_no">Tábořiště: ne</string>
+	<string name="poi_backcountry_yes">Ano</string>
+	<string name="poi_backcountry_no">Ne</string>
 	<string name="poi_scout_yes">Skautský tábor: ano</string>
 	<string name="poi_scout_no">Skautský tábor: ne</string>
 	<string name="poi_group_only_yes">Pouze skupina: ano</string>
 	<string name="poi_group_only_no">Pouze skupina: ne</string>
-	<string name="poi_washing_machine_yes">Pračka: ano</string>
+	<string name="poi_washing_machine_yes">Ano</string>
 	<string name="poi_washing_machine_no">Pračka: ne</string>
 	<string name="poi_shower_indoor">Sprcha: vnitřní</string>
-	<string name="poi_caravans_yes">Karavany: ano</string>
+	<string name="poi_caravans_yes">Ano</string>
 	<string name="poi_caravans_no">Karavany: ne</string>
 	<string name="poi_impromptu_yes">Improvizované tábořiště: ano</string>
 	<string name="poi_impromptu_no">Improvizované tábořiště: ne</string>
@@ -2292,38 +2292,38 @@
 	<string name="poi_refugee_yes">Vybavení pro uprchlíky</string>
 	<string name="poi_refugee_no">Uprchlíci: ne</string>
 
-	<string name="poi_social_facility_group_home">Sociální zařízení: skupinový domov</string>
-	<string name="poi_social_facility_assisted_living">Sociální zařízení: asistované bydlení</string>
-	<string name="poi_social_facility_food_bank">Sociální zařízení: potravinová banka</string>
-	<string name="poi_social_facility_shelter">Sociální zařízení: útulek</string>
-	<string name="poi_social_facility_ambulatory_care">Sociální zařízení: ambulantní péče</string>
-	<string name="poi_social_facility_workshop">Sociální zařízení: dílna</string>
-	<string name="poi_social_facility_day_care">Sociální zařízení: denní péče</string>
+	<string name="poi_social_facility_group_home">Skupinový domov</string>
+	<string name="poi_social_facility_assisted_living">Asistované bydlení</string>
+	<string name="poi_social_facility_food_bank">Potravinová banka</string>
+	<string name="poi_social_facility_shelter">Útulek</string>
+	<string name="poi_social_facility_ambulatory_care">Ambulantní péče</string>
+	<string name="poi_social_facility_workshop">Dílna</string>
+	<string name="poi_social_facility_day_care">Denní péče</string>
 
-	<string name="poi_social_facility_for_senior">Zaměření na sociální skupinu: senioři</string>
-	<string name="poi_social_facility_for_child">Zaměření na sociální skupinu: děti</string>
-	<string name="poi_social_facility_for_orphan">Zaměření na sociální skupinu: sirotci</string>
-	<string name="poi_social_facility_for_disabled">Zaměření na sociální skupinu: invalidi</string>
-	<string name="poi_social_facility_for_mental_health">Zaměření na sociální skupinu: pacienti s duševními poruchami</string>
-	<string name="poi_social_facility_for_juvenile">Zaměření na sociální skupinu: mladiství</string>
-	<string name="poi_social_facility_for_homeless">Zaměření na sociální skupinu: bezdomovci</string>
-	<string name="poi_social_facility_for_migrant">Zaměření na sociální skupinu: přistěhovalci</string>
-	<string name="poi_social_facility_for_drug_addicted">Zaměření na sociální skupinu: drogově závislí</string>
-	<string name="poi_social_facility_for_unemployed">Zaměření na sociální skupinu: nezaměstnaní</string>
-	<string name="poi_social_facility_for_diseased">Zaměření na sociální skupinu: nemocní</string>
-	<string name="poi_social_facility_for_child_juvenile">Zaměření na sociální skupinu: děti;mladiství</string>
+	<string name="poi_social_facility_for_senior">Senioři</string>
+	<string name="poi_social_facility_for_child">Děti</string>
+	<string name="poi_social_facility_for_orphan">Sirotci</string>
+	<string name="poi_social_facility_for_disabled">Invalidi</string>
+	<string name="poi_social_facility_for_mental_health">Pacienti s duševními poruchami</string>
+	<string name="poi_social_facility_for_juvenile">Mladiství</string>
+	<string name="poi_social_facility_for_homeless">Bezdomovci</string>
+	<string name="poi_social_facility_for_migrant">Přistěhovalci</string>
+	<string name="poi_social_facility_for_drug_addicted">Drogově závislí</string>
+	<string name="poi_social_facility_for_unemployed">Nezaměstnaní</string>
+	<string name="poi_social_facility_for_diseased">Nemocní</string>
+	<string name="poi_social_facility_for_child_juvenile">Děti;mladiství</string>
 
-	<string name="poi_theatre_genre_philharmonic">Žánr: filharmonie</string>
-	<string name="poi_theatre_genre_musical">Žánr: hudební</string>
-	<string name="poi_theatre_genre_drama">Žánr: činohra</string>
-	<string name="poi_theatre_genre_opera">Žánr: opera</string>
-	<string name="poi_theatre_genre_cabaret">Žánr: kabaret</string>
-	<string name="poi_theatre_genre_puppet">Žánr: loutky</string>
-	<string name="poi_theatre_genre_comedy">Žánr: komedie</string>
-	<string name="poi_theatre_genre_chamber_music">Žánr: komorní hudba</string>
-	<string name="poi_theatre_genre_marionette">Žánr: loutka (marioneta)</string>
-	<string name="poi_theatre_genre_ballet">Žánr: balet</string>
-	<string name="poi_theatre_genre_shadow_play">Žánr: stínohra</string>
+	<string name="poi_theatre_genre_philharmonic">Filharmonie</string>
+	<string name="poi_theatre_genre_musical">Hudební</string>
+	<string name="poi_theatre_genre_drama">Činohra</string>
+	<string name="poi_theatre_genre_opera">Opera</string>
+	<string name="poi_theatre_genre_cabaret">Kabaret</string>
+	<string name="poi_theatre_genre_puppet">Loutky</string>
+	<string name="poi_theatre_genre_comedy">Komedie</string>
+	<string name="poi_theatre_genre_chamber_music">Komorní hudba</string>
+	<string name="poi_theatre_genre_marionette">Loutka (marioneta)</string>
+	<string name="poi_theatre_genre_ballet">Balet</string>
+	<string name="poi_theatre_genre_shadow_play">Stínohra</string>
 
 	<string name="poi_bandstand">Hudební pavilón</string>
 	<string name="poi_product_brick">Produkt: cihla</string>
@@ -2368,66 +2368,66 @@
 	<string name="poi_historic_civilization_imperial_chinese">Civilizace: imperiální čínská (221 př. n. l. - 1911 n.l.)</string>
 	<string name="poi_historic_civilization_ancient_egyptian">Civilizace: starověká egyptská (do 332 př. n. l.)</string>
 	<string name="poi_historic_civilization_celtic">Civilizace: keltská</string>
-	<string name="poi_historic_civilization_western_roman">Civilizace: západní románská (285 n. l. - 476 n. l.)</string>
+	<string name="poi_historic_civilization_western_roman">Civilizace: západořímská (285 n. l. - 476 n. l.)</string>
 	<string name="poi_historic_civilization_mycenaean">Civilizace: mykénská</string>
 	<string name="poi_historic_civilization_roman_and_byzantine_egyptian">Civilizace: římské a byzantské egyptské</string>
 	<string name="poi_historic_civilization_cycladic">Civilizace: kykladská</string>
 	<string name="poi_historic_civilization_minoan">Civilizace: mínójská</string>
 	<string name="poi_animal_training">Drezura</string>
-	<string name="poi_animal_training_dog">Výcvik psů</string>
-	<string name="poi_animal_training_horse">Výcvik koní</string>
+	<string name="poi_animal_training_dog">Pes</string>
+	<string name="poi_animal_training_horse">Kůň</string>
 
-	<string name="poi_horse_yes">Koně povoleny</string>
-	<string name="poi_horse_no">Koně nejsou povoleny</string>
+	<string name="poi_horse_yes">Koně povoleni</string>
+	<string name="poi_horse_no">Koně nejsou povoleni</string>
 	<string name="poi_animal_yes">Zvířata povolena</string>
 	<string name="poi_animal_no">Zvířata nejsou povolena</string>
 
 	<string name="poi_historic_period_stone_bronze_undetermined">Historické období: Doba kamenná / bronzová (neurčený)</string>
-	<string name="poi_historic_period_bronze_age">Historické období: bronzové</string>
-	<string name="poi_historic_period_principate">Historické období: principátu (27 př. n. l. - 284 n. l.)</string>
-	<string name="poi_historic_period_classical_greece">Historické období: klasické Řecko (5. - 4. st. př. n. l.)</string>
+	<string name="poi_historic_period_bronze_age">Historické období: doba bronzová</string>
+	<string name="poi_historic_period_principate">Historické období: principát (27 př. n. l. – 284 n. l.)</string>
+	<string name="poi_historic_period_classical_greece">Historické období: klasické Řecko (5. – 4. st. př. n. l.)</string>
 	<string name="poi_historic_period_archaic_greece">Historické období: archaické Řecko</string>
-	<string name="poi_historic_period_iron_age">Historické období: doba Železná</string>
-	<string name="poi_historic_period_roman_republic">Historické období: římské republiky (508 - 27 př. n. l.)</string>
+	<string name="poi_historic_period_iron_age">Historické období: doba železná</string>
+	<string name="poi_historic_period_roman_republic">Historické období: římská republika (508–27 př. n. l.)</string>
 	<string name="poi_historic_period_hellenistic_greece">Historické období: helénistické Řecko</string>
-	<string name="poi_historic_period_new_kingdom">Historické období: nové říše (1550-1069 př. n. l.)</string>
-	<string name="poi_historic_period_middle_kingdom">Historické období: střední říše (2055 - 1650 př. n. l.)</string>
-	<string name="poi_historic_period_predynastic_egypt">Historické období: předdynastické egyptské</string>
-	<string name="poi_historic_period_early_dynastic_period">Historické období: raně dynastické období (3100 - 2686 př. n. l.)</string>
-	<string name="poi_historic_period_old_kingdom">Historické období: staré říše (2686 - 2181 př.n.l.)</string>
-	<string name="poi_historic_period_first_intermediate_period">Historické období: první přechodná doba (2181 - 2055 př. n. l.)</string>
-	<string name="poi_historic_period_second_intermediate_period">Historické období: druhá přechodná doba (1650 - 1550 př.n.l.)</string>
-	<string name="poi_historic_period_third_intermediate_period">"Historické období: třetí přechodná doba (1069 - 664 př.n.l) "</string>
+	<string name="poi_historic_period_new_kingdom">Historické období: Nová říše (1550–1069 př. n. l.)</string>
+	<string name="poi_historic_period_middle_kingdom">Historické období: Střední říše (2055–1650 př. n. l.)</string>
+	<string name="poi_historic_period_predynastic_egypt">Historické období: předdynastický Egypt</string>
+	<string name="poi_historic_period_early_dynastic_period">Historické období: raně dynastické období (3100–2686 př. n. l.)</string>
+	<string name="poi_historic_period_old_kingdom">Historické období: Stará říše (2686–2181 př.n.l.)</string>
+	<string name="poi_historic_period_first_intermediate_period">Historické období: první přechodná doba (2181–2055 př. n. l.)</string>
+	<string name="poi_historic_period_second_intermediate_period">Historické období: druhá přechodná doba (1650–1550 př.n.l.)</string>
+	<string name="poi_historic_period_third_intermediate_period">"Historické období: třetí přechodná doba (1069–664 př.n.l) "</string>
 	<string name="poi_historic_period_first_persian_period">Historické období: první perské období</string>
-	<string name="poi_historic_period_late_period">Historické období: pozdní období (664 - 332 př. n. l.)</string>
+	<string name="poi_historic_period_late_period">Historické období: pozdní období (664–332 př. n. l.)</string>
 	<string name="poi_historic_period_second_persian_period">Historické období: druhé perské období</string>
 	<string name="poi_historic_period_alexander_the_great">Historické období: Alexandr Veliký</string>
-	<string name="poi_historic_period_ptolemaic_egypt">Historické období: ptolemaiovský egypt (305 - 30 př.n.l.)</string>
-	<string name="poi_historic_period_christian_egypt">Historické období: křesťanský egypt</string>
-	<string name="poi_historic_period_byzantine_egypt">Historické období: Byzantská říše (30 př. n. l. - 641 n. l.)</string>
+	<string name="poi_historic_period_ptolemaic_egypt">Historické období: ptolemaiovský Egypt (305–30 př.n.l.)</string>
+	<string name="poi_historic_period_christian_egypt">Historické období: křesťanský Egypt</string>
+	<string name="poi_historic_period_byzantine_egypt">Historické období: Byzantská říše (30 př. n. l. – 641 n. l.)</string>
 	<string name="poi_historic_period_persian_occupation">Historické období: perská okupace</string>
-	<string name="poi_historic_period_greek_dark_ages">Historické období: Temné období (1100 - 800 př. n. l.)</string>
-	<string name="poi_historic_period_roman_greece">Historické období: románské řecko (146 př. n. l. - 330 n. l.)</string>
-	<string name="poi_historic_period_roman_kingdom">Historické období: římské království (753 - 509 př. n. l.)</string>
-	<string name="poi_historic_period_villager">Historické období: vesničan (epocha I, II, 1580 př. n. l. - 133 n. l.)</string>
-	<string name="poi_historic_period_urban">Historické období: městské (epocha III, 133 n.l. - 374 n.l.)</string>
-	<string name="poi_historic_period_classical">Historické období: klasické (epocha IV, 374 n.l. - 900 n.l.)</string>
-	<string name="poi_historic_period_imperial">Historické období: imperiální (epocha V, 900 n.l. - 1200 n.l.)</string>
+	<string name="poi_historic_period_greek_dark_ages">Historické období: Temné období (1100 – 800 př. n. l.)</string>
+	<string name="poi_historic_period_roman_greece">Historické období: římské Řecko (146 př. n. l. – 330 n. l.)</string>
+	<string name="poi_historic_period_roman_kingdom">Historické období: římské království (753–509 př. n. l.)</string>
+	<string name="poi_historic_period_villager">Historické období: vesničan (epocha I, II, 1580 př. n. l. – 133 n. l.)</string>
+	<string name="poi_historic_period_urban">Historické období: městské (epocha III, 133 n.l. – 374 n.l.)</string>
+	<string name="poi_historic_period_classical">Historické období: klasické (epocha IV, 374 n.l. – 900 n.l.)</string>
+	<string name="poi_historic_period_imperial">Historické období: imperiální (epocha V, 900 n.l. – 1200 n.l.)</string>
 
-	<string name="poi_historic_era_paleolithic">Historické období: starší doba kamenná (2,6 milionu let - před 10000 lety)</string>
+	<string name="poi_historic_era_paleolithic">Historické období: starší doba kamenná (2,6 milionu let – před 10000 lety)</string>
 	<string name="poi_historic_era_mesolithic">Historické období: Mezolitické</string>
-	<string name="poi_historic_stone">Historický kamen</string>
+	<string name="poi_historic_stone">Historický kámen</string>
 	<string name="poi_stone_type_conciliation_cross">Typ: smírčí kříž</string>
 	<string name="poi_stone_type_coat_of_arms">Typ: erb</string>
 
-	<string name="poi_site_type_megalith">Typ: megalit</string>
-	<string name="poi_site_type_tumulus">Typ: mohyla</string>
-	<string name="poi_site_type_fortification">Typ: opevnění</string>
-	<string name="poi_site_type_settlement">Typ: osada</string>
-	<string name="poi_site_type_city">Typ: město</string>
-	<string name="poi_site_type_hut_circle">Typ: kruhová chatrč</string>
-	<string name="poi_site_type_necropolis">Typ: pohřebiště</string>
-	<string name="poi_site_type_earthwork">Typ: zemní práce</string>
+	<string name="poi_site_type_megalith">Megalit</string>
+	<string name="poi_site_type_tumulus">Mohyla</string>
+	<string name="poi_site_type_fortification">Opevnění</string>
+	<string name="poi_site_type_settlement">Osada</string>
+	<string name="poi_site_type_city">Město</string>
+	<string name="poi_site_type_hut_circle">Kruhová chatrč</string>
+	<string name="poi_site_type_necropolis">Pohřebiště</string>
+	<string name="poi_site_type_earthwork">Zemní práce</string>
 	<string name="poi_fortification_type_hill_fort">Typ opevnění: hradiště</string>
 	<string name="poi_fortification_type_limes">Typ opevnění: římské hradby</string>
 	<string name="poi_fortification_type_sconce">Typ opevnění: sconce</string>
@@ -2473,11 +2473,11 @@
 
 	<string name="poi_ref">Referenční číslo</string>
 
-	<string name="poi_cargo_passengers">Náklad: cestující</string>
-	<string name="poi_cargo_vehicle">Náklad: vozidla</string>
-	<string name="poi_cargo_bicycle">Náklad: kolo</string>
-	<string name="poi_cargo_container">Náklad: kontejner</string>
-	<string name="poi_cargo_hgv">Náklad: nákladní auta</string>
+	<string name="poi_cargo_passengers">Cestující</string>
+	<string name="poi_cargo_vehicle">Vozidla</string>
+	<string name="poi_cargo_bicycle">Kola</string>
+	<string name="poi_cargo_container">Kontejnery</string>
+	<string name="poi_cargo_hgv">Nákladní auta</string>
 
 	<string name="poi_fitness_station">Místo na cvičení</string>
 
@@ -2489,74 +2489,74 @@
 
 	<string name="poi_aerialway_length">Délka</string>
 
-	<string name="poi_health_specialty_general_yes">Zdravotní specializace: praktický lékař</string>
-	<string name="poi_health_specialty_ophthalmology_yes">Zdravotní specializace: oftalmologie</string>
-	<string name="poi_health_specialty_gynaecology_yes">Zdravotní specializace: gynekologie</string>
-	<string name="poi_health_specialty_internal_medicine_yes">Zdravotní specializace: interní lékařství</string>
-	<string name="poi_health_specialty_orthopaedics_yes">Zdravotní specializace: ortopedie</string>
-	<string name="poi_health_specialty_otolaryngology_yes">Zdravotní specializace: otolaryngologie</string>
-	<string name="poi_health_specialty_paediatrics_yes">Zdravotní specializace: dětské lékařství</string>
+	<string name="poi_health_specialty_general_yes">Praktický lékař</string>
+	<string name="poi_health_specialty_ophthalmology_yes">Oftalmologie</string>
+	<string name="poi_health_specialty_gynaecology_yes">Gynekologie</string>
+	<string name="poi_health_specialty_internal_medicine_yes">Interní lékařství</string>
+	<string name="poi_health_specialty_orthopaedics_yes">Ortopedie</string>
+	<string name="poi_health_specialty_otolaryngology_yes">Otolaryngologie</string>
+	<string name="poi_health_specialty_paediatrics_yes">Dětské lékařství</string>
 	<string name="poi_health_specialty_paediatrics_no">Zdravotní specializace: dětské lékařství: ne</string>
-	<string name="poi_health_specialty_dermatology_yes">Zdravotní specializace: dermatologie</string>
-	<string name="poi_health_specialty_urology_yes">Zdravotní specializace: urologie</string>
-	<string name="poi_health_specialty_surgery_yes">Zdravotní specializace: obecná chirurgie</string>
-	<string name="poi_health_specialty_radiology_yes">Zdravotní specializace: radiologie</string>
-	<string name="poi_health_specialty_psychiatry_yes">Zdravotní specializace: psychiatrie</string>
-	<string name="poi_health_specialty_neurology_yes">Zdravotní specializace: neurologie</string>
-	<string name="poi_health_specialty_dermatovenereology_yes">Zdravotní specializace: dermatovenerologie</string>
-	<string name="poi_health_specialty_cardiology_yes">Zdravotní specializace: kardiologie</string>
-	<string name="poi_health_specialty_trauma_yes">Zdravotní specializace: traumatologie</string>
-	<string name="poi_health_specialty_biology_yes">Zdravotní specializace: klinická biologie</string>
-	<string name="poi_health_specialty_osteopathy_yes">Zdravotní specializace: osteopatie</string>
-	<string name="poi_health_specialty_anaesthetics_yes">Zdravotní specializace: anesteziologie</string>
-	<string name="poi_health_specialty_pulmonology_yes">Zdravotní specializace: respirační medicína</string>
-	<string name="poi_health_specialty_dental_oral_maxillo_facial_surgery_yes">Zdravotní specializace: dentální, orální a maxilofaciální chirurgie</string>
-	<string name="poi_health_specialty_maternity_yes">Zdravotní specializace: mateřství</string>
-	<string name="poi_health_specialty_emergency_medicine_yes">Zdravotní specializace: traumatologie a urgentní medicína</string>
+	<string name="poi_health_specialty_dermatology_yes">Dermatologie</string>
+	<string name="poi_health_specialty_urology_yes">Urologie</string>
+	<string name="poi_health_specialty_surgery_yes">Obecná chirurgie</string>
+	<string name="poi_health_specialty_radiology_yes">Radiologie</string>
+	<string name="poi_health_specialty_psychiatry_yes">Psychiatrie</string>
+	<string name="poi_health_specialty_neurology_yes">Neurologie</string>
+	<string name="poi_health_specialty_dermatovenereology_yes">Dermatovenerologie</string>
+	<string name="poi_health_specialty_cardiology_yes">Kardiologie</string>
+	<string name="poi_health_specialty_trauma_yes">Traumatologie</string>
+	<string name="poi_health_specialty_biology_yes">Klinická biologie</string>
+	<string name="poi_health_specialty_osteopathy_yes">Osteopatie</string>
+	<string name="poi_health_specialty_anaesthetics_yes">Anesteziologie</string>
+	<string name="poi_health_specialty_pulmonology_yes">Respirační medicína</string>
+	<string name="poi_health_specialty_dental_oral_maxillo_facial_surgery_yes">Dentální, orální a maxilofaciální chirurgie</string>
+	<string name="poi_health_specialty_maternity_yes">Mateřství</string>
+	<string name="poi_health_specialty_emergency_medicine_yes">Traumatologie a urgentní medicína</string>
 	<string name="poi_health_specialty_emergency_medicine_no">Zdravotní specializace: traumatologie a urgentní medicína: ne</string>
-	<string name="poi_health_specialty_plastic_surgery_yes">Zdravotní specializace: plastická chirurgie</string>
-	<string name="poi_health_specialty_physiotherapy_yes">Zdravotní specializace: fyzioterapie</string>
-	<string name="poi_health_specialty_biochemistry_yes">Zdravotní specializace: biochemie</string>
-	<string name="poi_health_specialty_occupational_yes">Zdravotní specializace: ergoterapie</string>
-	<string name="poi_health_specialty_child_psychiatry_yes">Zdravotní specializace: dětská psychiatrie</string>
-	<string name="poi_health_specialty_physiatry_yes">Zdravotní specializace: rehabilitace a fyzikální medicíny</string>
-	<string name="poi_health_specialty_maxillofacial_surgery_yes">Zdravotní specializace: maxilofaciální chirurgie</string>
-	<string name="poi_health_specialty_diagnostic_radiology_yes">Zdravotní specializace: radiologie</string>
-	<string name="poi_health_specialty_gastroenterology_yes">Zdravotní specializace: gastroenterologie</string>
-	<string name="poi_health_specialty_dentistry_yes">Zdravotní specializace: stomatologie</string>
-	<string name="poi_health_specialty_nephrology_yes">Zdravotní specializace: nefrologie (onemocnění ledvin)</string>
-	<string name="poi_health_specialty_neurosurgery_yes">Zdravotní specializace: neurologické chirurgie</string>
-	<string name="poi_health_specialty_neuropsychiatry_yes">Zdravotní specializace: neuropsychiatrie</string>
-	<string name="poi_health_specialty_endocrinology_yes">Zdravotní specializace: endokrinologie</string>
-	<string name="poi_health_specialty_nuclear_medicine_yes">Zdravotní specializace: nukleární medicína</string>
-	<string name="poi_health_specialty_pathology_yes">Zdravotní specializace: patologická anatomie</string>
-	<string name="poi_health_specialty_oncology_yes">Zdravotní specializace: onkologie</string>
-	<string name="poi_health_specialty_tropical_medicine_yes">Zdravotní specializace: tropická medicína</string>
+	<string name="poi_health_specialty_plastic_surgery_yes">Plastická chirurgie</string>
+	<string name="poi_health_specialty_physiotherapy_yes">Fyzioterapie</string>
+	<string name="poi_health_specialty_biochemistry_yes">Biochemie</string>
+	<string name="poi_health_specialty_occupational_yes">Ergoterapie</string>
+	<string name="poi_health_specialty_child_psychiatry_yes">Dětská psychiatrie</string>
+	<string name="poi_health_specialty_physiatry_yes">Rehabilitace a fyzikální medicína</string>
+	<string name="poi_health_specialty_maxillofacial_surgery_yes">Maxilofaciální chirurgie</string>
+	<string name="poi_health_specialty_diagnostic_radiology_yes">Radiologie</string>
+	<string name="poi_health_specialty_gastroenterology_yes">Gastroenterologie</string>
+	<string name="poi_health_specialty_dentistry_yes">Stomatologie</string>
+	<string name="poi_health_specialty_nephrology_yes">Nefrologie (onemocnění ledvin)</string>
+	<string name="poi_health_specialty_neurosurgery_yes">Neurologická chirurgie</string>
+	<string name="poi_health_specialty_neuropsychiatry_yes">Neuropsychiatrie</string>
+	<string name="poi_health_specialty_endocrinology_yes">Endokrinologie</string>
+	<string name="poi_health_specialty_nuclear_medicine_yes">Nukleární medicína</string>
+	<string name="poi_health_specialty_pathology_yes">Patologická anatomie</string>
+	<string name="poi_health_specialty_oncology_yes">Onkologie</string>
+	<string name="poi_health_specialty_tropical_medicine_yes">Tropická medicína</string>
 	<string name="poi_health_specialty_tropical_medicine_no">Zdravotní specializace: tropická medicína: ne</string>
-	<string name="poi_health_specialty_obstetrics_postnatal_yes">Zdravotní specializace: porodnictví (postnatální)</string>
+	<string name="poi_health_specialty_obstetrics_postnatal_yes">Porodnictví (postnatální)</string>
 	<string name="poi_health_specialty_obstetrics_postnatal_no">Zdravotní specializace: porodnictví (postnatální): ne</string>
-	<string name="poi_health_specialty_obstetrics_antenatal_yes">Zdravotní specializace: porodnictví (prenatální)</string>
+	<string name="poi_health_specialty_obstetrics_antenatal_yes">Porodnictví (prenatální)</string>
 	<string name="poi_health_specialty_obstetrics_antenatal_no">Zdravotní specializace: porodnictví (prenatální): ne</string>
-	<string name="poi_health_specialty_social_paediatrics_yes">Zdravotní specializace: sociální lékařství</string>
+	<string name="poi_health_specialty_social_paediatrics_yes">Sociální lékařství</string>
 	<string name="poi_health_specialty_social_paediatrics_no">Zdravotní specializace: sociální lékařství: ne</string>
-	<string name="poi_health_specialty_obstetrics_caesarean_section_yes">Zdravotní specializace: porodnictví (císařský řez)</string>
+	<string name="poi_health_specialty_obstetrics_caesarean_section_yes">Porodnictví (císařský řez)</string>
 	<string name="poi_health_specialty_obstetrics_caesarean_section_no">Zdravotní specializace: porodnictví (císařský řez): ne</string>
-	<string name="poi_health_specialty_addiction_medicine_yes">Zdravotní specializace: léčení závislosti</string>
-	<string name="poi_health_specialty_optometry_yes">Zdravotní specializace: optometrie</string>
-	<string name="poi_health_specialty_clinical_pathology_yes">Zdravotní specializace: klinická patologie</string>
-	<string name="poi_health_specialty_speech_therapy_yes">Zdravotní specializace: logopedie</string>
-	<string name="poi_health_specialty_manual_therapy_yes">Zdravotní specializace: manuální terapie</string>
-	<string name="poi_health_specialty_sports_medicine_yes">Zdravotní specializace: sportovní medicína</string>
-	<string name="poi_health_specialty_podology_yes">Zdravotní specializace: podologie</string>
-	<string name="poi_health_specialty_adult_psychiatry_yes">Zdravotní specializace: psychiatrie pro dospělé</string>
-	<string name="poi_health_specialty_acupuncture_yes">Zdravotní specializace: akupunktura</string>
-	<string name="poi_health_specialty_homeopathy_yes">Zdravotní specializace: homeopatie</string>
-	<string name="poi_health_specialty_traditional_chinese_medicine_yes">Zdravotní specializace: tradiční čínská medicína</string>
-	<string name="poi_health_specialty_herbalism_yes">Zdravotní specializace: bylinkářství</string>
-	<string name="poi_health_specialty_chiropractic_yes">Zdravotní specializace: chiropraxe</string>
-	<string name="poi_health_specialty_naturopathy_yes">Zdravotní specializace: přírodní medicíny</string>
-	<string name="poi_health_specialty_depth_psychology_yes">Zdravotní specializace: hlubinná psychologie</string>
-	<string name="poi_health_specialty_behavior_yes">Zdravotní specializace: chování</string>
+	<string name="poi_health_specialty_addiction_medicine_yes">Léčení závislostí</string>
+	<string name="poi_health_specialty_optometry_yes">Optometrie</string>
+	<string name="poi_health_specialty_clinical_pathology_yes">Klinická patologie</string>
+	<string name="poi_health_specialty_speech_therapy_yes">Logopedie</string>
+	<string name="poi_health_specialty_manual_therapy_yes">Manuální terapie</string>
+	<string name="poi_health_specialty_sports_medicine_yes">Sportovní medicína</string>
+	<string name="poi_health_specialty_podology_yes">Podologie</string>
+	<string name="poi_health_specialty_adult_psychiatry_yes">Psychiatrie pro dospělé</string>
+	<string name="poi_health_specialty_acupuncture_yes">Akupunktura</string>
+	<string name="poi_health_specialty_homeopathy_yes">Homeopatie</string>
+	<string name="poi_health_specialty_traditional_chinese_medicine_yes">Tradiční čínská medicína</string>
+	<string name="poi_health_specialty_herbalism_yes">Bylinkářství</string>
+	<string name="poi_health_specialty_chiropractic_yes">Chiropraxe</string>
+	<string name="poi_health_specialty_naturopathy_yes">Přírodní medicína</string>
+	<string name="poi_health_specialty_depth_psychology_yes">Hlubinná psychologie</string>
+	<string name="poi_health_specialty_behavior_yes">Chování</string>
 
 	<string name="poi_building_type_pyramid">Typ budovy: pyramida</string>
 
@@ -2571,8 +2571,8 @@
 	<string name="poi_water_heater_no">Ohřívač vody: ne</string>
 
 	<string name="poi_parking_surface">Typ: povrchové</string>
-	<string name="poi_parking_garage_boxes">Typ: garáže</string>
-	<string name="poi_parking_carports">Typ: přístřešky</string>
+	<string name="poi_parking_garage_boxes">Garáže</string>
+	<string name="poi_parking_carports">Přístřešky</string>
 
 	<string name="poi_dojo">Dojo</string>
 
@@ -2583,7 +2583,7 @@
 	<string name="poi_badminton">Badminton</string>
 	<string name="poi_judo">Judo</string>
 	<string name="poi_futsal">Futsal</string>
-	<string name="poi_health_specialty_orthodontics_yes">Zdravotní specializace: ortodoncie</string>
+	<string name="poi_health_specialty_orthodontics_yes">Ortodoncie</string>
 	<string name="poi_disc_golf">Disc golf</string>
 	<string name="poi_rc_car">Závody dálkově ovládaných aut</string>
 	<string name="poi_squash">Squash</string>
@@ -2639,8 +2639,8 @@
 	<string name="poi_nuclear_explosion_type_underwater">Typ exploze: pod vodou</string>
 	<string name="poi_nuclear_explosion_date_utc">Datum exploze (UTC)</string>
 	<string name="poi_nuclear_explosion_shot_name_en">Název střely (en)</string>
-	<string name="poi_nuclear_explosion_series">Série exploze</string>
-	<string name="poi_nuclear_explosion_purpose_nuclear_weapons_related">Účel exploze: související jaderné zbraně</string>
+	<string name="poi_nuclear_explosion_series">Série explozí</string>
+	<string name="poi_nuclear_explosion_purpose_nuclear_weapons_related">Účel exploze: související s jadernými zbraněmi</string>
 	<string name="poi_nuclear_explosion_purpose_weapons_effects">Účel exploze: efekty zbraní</string>
 	<string name="poi_nuclear_explosion_purpose_safety_experiment">Účel exploze: bezpečnostní experiment</string>
 	<string name="poi_nuclear_explosion_purpose_research_for_peaceful_applications">Účel exploze: výzkum k mírovému použití</string>
@@ -2665,12 +2665,12 @@
 
 	<string name="poi_plant_nursery">Lesní školka</string>
 
-	<string name="poi_compressed_air_yes">Stlačený vzduch: ano</string>
+	<string name="poi_compressed_air_yes">Ano</string>
 	<string name="poi_compressed_air_no">Stlačený vzduch: ne</string>
 
-	<string name="poi_car_wash_yes">Mytí aut: ano</string>
+	<string name="poi_car_wash_yes">Ano</string>
 
-	<string name="poi_vacuum_cleaner_yes">Vysavač: ano</string>
+	<string name="poi_vacuum_cleaner_yes">Ano</string>
 	<string name="poi_vacuum_cleaner_no">Vysavač: ne</string>
 	<string name="poi_amenity_vacuum_cleaner">Vysavač</string>
 
@@ -2680,32 +2680,32 @@
 	<string name="poi_button_operated_yes">Ovládané tlačítkem: ano</string>
 	<string name="poi_button_operated_no">Ovládané tlačítkem: ne</string>
 
-	<string name="poi_free_flying_site_takeoff">Oblast závěsného létání: vzlet</string>
-	<string name="poi_free_flying_site_landing">Oblast závěsného létání: přistání</string>
-	<string name="poi_free_flying_site_towing">Oblast závěsného létání: tažení</string>
-	<string name="poi_free_flying_site_training">Oblast závěsného létání: trénink</string>
-	<string name="poi_free_flying_official_yes">Oficiální závěsné létání: ano</string>
-	<string name="poi_free_flying_official_no">Oficiální závěsné létání: ne</string>
-	<string name="poi_free_flying_paragliding_yes">Paragliding: ano</string>
+	<string name="poi_free_flying_site_takeoff">Vzlet</string>
+	<string name="poi_free_flying_site_landing">Přistání</string>
+	<string name="poi_free_flying_site_towing">Tažení</string>
+	<string name="poi_free_flying_site_training">Trénink</string>
+	<string name="poi_free_flying_official_yes">Oficiální: ano</string>
+	<string name="poi_free_flying_official_no">Oficiální: ne</string>
+	<string name="poi_free_flying_paragliding_yes">Paragliding</string>
 	<string name="poi_free_flying_paragliding_no">Paragliding: ne</string>
-	<string name="poi_free_flying_hanggliding_yes">Rogalo: ano</string>
+	<string name="poi_free_flying_hanggliding_yes">Rogalo</string>
 	<string name="poi_free_flying_hanggliding_no">Rogalo: ne</string>
-	<string name="poi_free_flying_rigid_yes">Závěsný kluzák s tuhým potahem: ano</string>
+	<string name="poi_free_flying_rigid_yes">Závěsný kluzák s tuhým potahem</string>
 	<string name="poi_free_flying_rigid_no">Závěsný kluzák s tuhým potahem: ne</string>
 	<string name="poi_free_flying_no_flight_time">Žádná doba letu (závěsné létání)</string>
-	<string name="poi_free_flying_guest_guidelines_yes">Pokyny hostům pro závěsné létání: ano</string>
-	<string name="poi_free_flying_guest_guidelines_no">Pokyny hostům pro závěsné létání: ne</string>
+	<string name="poi_free_flying_guest_guidelines_yes">Pokyny hostům: ano</string>
+	<string name="poi_free_flying_guest_guidelines_no">Pokyny hostům: ne</string>
 
 	<string name="poi_tanning_salon">Solárium</string>
 
 	<string name="poi_sanitary_dump_station">Zařízení pro vypuštění sanitárního odpadu</string>
 
-	<string name="poi_medical_system_western_yes">Zdravotní systém: západní</string>
-	<string name="poi_medical_system_chinese_yes">Zdravotní systém: tradiční čínština</string>
+	<string name="poi_medical_system_western_yes">Západní</string>
+	<string name="poi_medical_system_chinese_yes">Tradiční čínský</string>
 	<string name="poi_medical_system_unknown_yes">Zdravotní systém: neznámý tradiční</string>
-	<string name="poi_medical_system_ayurveeda_yes">Zdravotní systém: ájurvéda</string>
-	<string name="poi_medical_system_mongolian_yes">Zdravotní systém: tradiční mongolský</string>
-	<string name="poi_medical_system_tibetan_yes">Zdravotní systém: tradiční tibetský</string>
+	<string name="poi_medical_system_ayurveeda_yes">Ájurvéda</string>
+	<string name="poi_medical_system_mongolian_yes">Tradiční mongolský</string>
+	<string name="poi_medical_system_tibetan_yes">Tradiční tibetský</string>
 	<string name="poi_health_service_nursing_yes">Zdravotní služba: ošetřovatelství: ano</string>
 	<string name="poi_health_service_nursing_no">Zdravotní služba: ošetřovatelství: ne</string>
 	<string name="poi_health_service_counselling_yes">Zdravotní služby: poradenství: ano</string>
@@ -2736,10 +2736,10 @@
 
 	<string name="poi_suction_point">Sací bod</string>
 
-	<string name="poi_fire_hydrant_type_underground">Typ: podzemní</string>
-	<string name="poi_fire_hydrant_type_pillar">Typ: sloupek</string>
-	<string name="poi_fire_hydrant_type_pond">Typ: nádrž</string>
-	<string name="poi_fire_hydrant_type_wall">Typ: zeď</string>
+	<string name="poi_fire_hydrant_type_underground">Podzemní</string>
+	<string name="poi_fire_hydrant_type_pillar">Sloupek</string>
+	<string name="poi_fire_hydrant_type_pond">Nádrž</string>
+	<string name="poi_fire_hydrant_type_wall">Zeď</string>
 
 	<string name="poi_health_amenity_type_first_aid_kit">Sada první pomoci</string>
 	<string name="poi_health_amenity_type_scales">Veřejné váhy</string>
@@ -2819,7 +2819,7 @@
 	<string name="poi_counselling_no">Poradna: ne</string>
 	<string name="poi_emergency_yes">Pomoc v nouzi: ano</string>
 	<string name="poi_emergency_no">Pomoc v nouzi: ne</string>
-	<string name="poi_home_visit_yes">Domácí návštěva: Ano</string>
+	<string name="poi_home_visit_yes">Ano</string>
 	<string name="poi_home_visit_no">Domácí návštěva: ne</string>
 
 	<string name="poi_disease_malaria_yes">Malárie: ano</string>
@@ -2849,10 +2849,10 @@
 	<string name="poi_fire_hydrant_position_street">Pozice hydrantu: ulice</string>
 	<string name="poi_fire_hydrant_position_underground">Pozice hydrantu: podzemní</string>
 	<string name="poi_fire_hydrant_style_wsh">Styl hydrantu: wsh</string>
-	<string name="poi_fire_hydrant_style_water_source_main">Zdroj vody hydrantu: hlavní</string>
-	<string name="poi_fire_hydrant_style_water_source_pond">Zdroj vody hydrantu: rybník</string>
-	<string name="poi_fire_hydrant_style_water_source_stream">Zdroj vody hydrantu: říčka</string>
-	<string name="poi_fire_hydrant_style_water_source_cistern">Zdroj vody hydrantu: cisterna</string>
+	<string name="poi_fire_hydrant_style_water_source_main">Hlavní</string>
+	<string name="poi_fire_hydrant_style_water_source_pond">Rybník</string>
+	<string name="poi_fire_hydrant_style_water_source_stream">Potok</string>
+	<string name="poi_fire_hydrant_style_water_source_cistern">Cisterna</string>
 	<string name="poi_in_service_yes">V provozu: ano</string>
 
 	<string name="poi_street_cabinet_power">Typ skříně: energie</string>
@@ -2874,7 +2874,7 @@
 
 	<string name="poi_salt_yes">Sůl</string>
 	<string name="poi_salt_no">Sůl: ne</string>
-	<string name="poi_wheelchair_designated">Určené pro vozíčkáře</string>
+	<string name="poi_wheelchair_designated">Určený</string>
 	<string name="poi_spoil_heap">Výsypka</string>
 	
 	<string name="poi_summer_camp">Letní tábor</string>
@@ -2898,14 +2898,14 @@
 	<string name="poi_crossing_saltire_no">Varovný kříž: ne</string>
 	<string name="poi_pump_type_india_mk_2_3">Typ čerpadla: Indie Mk II nebo III</string>
 	<string name="poi_pump_type_gravity">Typ čerpadla: gravitace</string>
-	<string name="poi_payment_troika_yes">Troika karty akceptovány</string>
+	<string name="poi_payment_troika_yes">Troika</string>
 	<string name="poi_payment_troika_no">Troika karty neakceptovány</string>
 
 	<string name="poi_fire_operator">Požární operátor</string>
 
 	<string name="poi_publisher">Tisková kancelář</string>
 
-	<string name="poi_social_facility_for_underprivileged">Zaměření na sociální skupinu: sociálně slabí</string>
+	<string name="poi_social_facility_for_underprivileged">Sociálně slabí</string>
 	<string name="poi_architecture_umgebinde">Architektura: podstávková</string>
 	<string name="poi_denomination_united">Sjednocená církev Kanady</string>
 	<string name="poi_denomination_united_reformed">Sjednocená reformovaná</string>
@@ -2935,11 +2935,11 @@
 	<string name="poi_historic_civilization_greek_egyptian">Civilizace: řecko-egyptská (332 př. n. l. - 30 př. n. l.)</string>
 	<string name="poi_historic_civilization_helladic">Civilizace: helladská</string>
 	<string name="poi_historic_period_nuragic">Historické období: nuragské</string>
-	<string name="poi_historic_period_dominate">Historické období: dominát (285 n. l. - 476 n. l.)</string>
+	<string name="poi_historic_period_dominate">Historické období: dominát (285 n. l. – 476 n. l.)</string>
 	<string name="poi_historic_era_neolithic">Historické období: mladší doba kamenná</string>
-	<string name="poi_historic_era_chalcolithic">Historické období: doba měděná (IV-III tisíciletí př.n.l.)</string>
+	<string name="poi_historic_era_chalcolithic">Historické období: doba měděná (IV.–III. tisíciletí př.n.l.)</string>
 
-	<string name="poi_site_type_petroglyph">Typ: petroglyf</string>
+	<string name="poi_site_type_petroglyph">Petroglyf</string>
 	<string name="poi_megalith_type_menhir">Typ megalitu: menhir</string>
 	<string name="poi_megalith_type_dolmen">Typ megalitu: dolmen</string>
 	<string name="poi_megalith_type_nuraghe">Typ megalitu: nuragy (ochranné opevnění)</string>
@@ -3289,4 +3289,5 @@
 	<string name="poi_cuisine_kebab">Kebab</string>
 	<string name="poi_observatory_designation">Označení</string>
 	<string name="poi_emergency_infrastructure">Nouzová infrastruktura</string>
+	<string name="poi_health_specialty_reiki_yes">Reiki</string>
 	</resources>

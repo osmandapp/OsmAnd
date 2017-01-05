@@ -2186,10 +2186,10 @@ Włączenie tego widoku zmienia styl mapy na „Zima i narty”, ukazujący tere
     <string name="value_downloaded_of_max">%1$.1f z %2$.1f MB</string>
     <string name="shared_string_qr_code">Kod QR</string>
     <string name="enter_country_name">Proszę wybrać kraj</string>
-    <string name="map_downloaded_descr">Pobrano mapę %1$s. Proszę powrócić do mapy, aby rozpocząć jej używanie.</string>
+    <string name="map_downloaded_descr">Pobrano mapę %1$s, możesz zacząć z niej korzystać.</string>
     <string name="world_map_download_descr">Brak podstawowej mapy świata (pokrywającej cały glob w małych przybliżeniach) lub jest ona przestarzała. Proszę rozważyć pobranie mapy podstawowej, aby mieć widok na cały świat.</string>
     <string name="map_downloaded">Pobrano mapę</string>
-    <string name="go_to_map">Powróć do mapy</string>
+    <string name="go_to_map">Wyświetl mapę</string>
     <string name="simulate_initial_startup">Zasymuluj pierwsze uruchomienie programu</string>
     <string name="read_more">Czytaj dalej</string>
     <string name="whats_new">Co nowego w</string>
@@ -2707,4 +2707,13 @@ i więcej...
     <string name="routing_attr_allow_motorway_description">Zezwala na autostrady</string>
     <string name="lang_sr_latn">Serbski (łaciński)</string>
     <string name="lang_zh_hk">Chiński (Hongkong)</string>
+    <string name="rendering_attr_contourDensity_description">Gęstość poziomic</string>
+    <string name="rendering_attr_contourDensity_name">Gęstość poziomic</string>
+    <string name="rendering_value_high_name">Wysoka</string>
+    <string name="rendering_value_medium_w_name">Średnia</string>
+    <string name="rendering_value_low_name">Niska</string>
+    <string name="rendering_attr_contourWidth_description">Szerokość poziomic</string>
+    <string name="rendering_attr_contourWidth_name">Szerokość poziomic</string>
+    <string name="rendering_attr_hideWaterPolygons_description">Woda</string>
+    <string name="rendering_attr_hideWaterPolygons_name">Ukryj wodę</string>
     </resources>

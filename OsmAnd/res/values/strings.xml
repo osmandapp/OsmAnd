@@ -17,6 +17,7 @@
     <string name="rendering_attr_contourWidth_description">Contour lines width</string>
     <string name="rendering_attr_contourWidth_name">Contour lines width</string>
     <string name="rendering_attr_hideWaterPolygons_description">Water</string>
+    <string name="rendering_attr_hideWaterPolygons_name">Hide water</string>
     <string name="legacy_search">Legacy search</string>
     <string name="show_legacy_search">Show legacy search</string>
     <string name="show_legacy_search_desc">Enable legacy search in the drawer list</string>
@@ -94,7 +95,7 @@
     <string name="skip_map_downloading">Skip downloading maps</string>
     <string name="skip_map_downloading_desc">You have no offline map installed. You may choose a map from the list or download maps later via Menu - %1$s.</string>
     <string name="search_another_country">Select another region</string>
-    <string name="search_map">Searching map…</string>
+    <string name="search_map">Searching maps…</string>
     <string name="first_usage_wizard_desc">Let OsmAnd determine your location and suggest maps to download for that region.</string>
     <string name="location_not_found">Location not found</string>
     <string name="no_inet_connection">No Internet connection</string>
@@ -403,8 +404,8 @@
     <string name="world_map_download_descr">World basemap (covering the whole world at small zooms) is missing or outdated. Please consider downloading it for a global overview.</string>
     <string name="shared_string_qr_code">QR-code</string>
     <string name="map_downloaded">Map downloaded</string>
-    <string name="map_downloaded_descr">Map of %1$s has been downloaded. Go back to the map to start using it.</string>
-    <string name="go_to_map">Go to the map</string>
+    <string name="map_downloaded_descr">The map of %1$s has been downloaded, you can now start to use it.</string>
+    <string name="go_to_map">Display the map</string>
     <string name="simulate_initial_startup_descr">"Sets the flag indicating first app startup, keeps all other settings unchanged"</string>
     <string name="simulate_initial_startup">Simulate first app start</string>
     <string name="share_geo">geo:</string>

@@ -2208,8 +2208,8 @@ Lon %2$s</string>
     <string name="application_dir_description">Vælg hvor kort- og andre datafiler skal gemmes.</string>
     <string name="show_on_start_description">\'Fra\' starter direkte på kortet</string>
     <string name="map_downloaded">Kort hentet</string>
-    <string name="map_downloaded_descr">Kort over %1$s er hentet. Gå tilbage til kortet for at begynde at bruge det.</string>
-    <string name="go_to_map">Gå til kortet</string>
+    <string name="map_downloaded_descr">Kort over %1$s er nu hentet og kan anvendes.</string>
+    <string name="go_to_map">Vis kortet</string>
     <string name="shared_string_qr_code">QR kode</string>
     <string name="enter_country_name">Angiv landenavn</string>
     <string name="world_map_download_descr">Verdensgrundkortet (dækker hele verden ved lave zoomniveauer) mangler eller er forældet. Hent det for en komplet oversigt.</string>
@@ -2737,11 +2737,12 @@ Hvis du  ønsker at støtte OsmAnd og OSM, er dette en god måde at gøre det p�
     <string name="lang_sr_latn">Serbisk (Latin)</string>
     <string name="lang_zh_hk">Kinesisk (Hong Kong)</string>
     <string name="rendering_attr_hideWaterPolygons_description">Vand</string>
-    <string name="rendering_attr_contourWidth_description">Højdekurver bredde</string>
-    <string name="rendering_attr_contourWidth_name">Højdekurver bredde</string>
-    <string name="rendering_attr_contourDensity_description">Højdekurver tæthed</string>
-    <string name="rendering_attr_contourDensity_name">Højdekurver tæthed</string>
+    <string name="rendering_attr_contourWidth_description">Bredde på højdekurver</string>
+    <string name="rendering_attr_contourWidth_name">Bredde på højdekurver</string>
+    <string name="rendering_attr_contourDensity_description">Tæthed på højdekurver</string>
+    <string name="rendering_attr_contourDensity_name">Tæthed på højdekurver</string>
     <string name="rendering_value_high_name">Høj</string>
     <string name="rendering_value_medium_w_name">Mellem</string>
     <string name="rendering_value_low_name">Lav</string>
+    <string name="rendering_attr_hideWaterPolygons_name">Skjul vand</string>
     </resources>

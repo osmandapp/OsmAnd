@@ -223,7 +223,7 @@ task cleanNoTranslate(type: Delete) {
 
 
 task collectFonts(type: Copy) {
-	from "../../resources/fonts"
+	from "../../resources/rendering_styles/fonts"
 //	from "../../resources/rendering_styles/fonts/OpenSans"
 	into "assets/fonts"
 	include "*.ttf"
