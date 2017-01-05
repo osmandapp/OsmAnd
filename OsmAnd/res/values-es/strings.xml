@@ -716,7 +716,7 @@ Las teselas de mapas, se pueden obtener directamente a través de fuentes con co
     <string name="transport_search_desc">Búsqueda de transporte público</string>
     <string name="favourites_search_desc">Buscar favorito</string>
     <string name="rendering_attr_noPolygons_description">Hacer todas las características del terreno transparentes en el mapa</string>
-    <string name="rendering_attr_noPolygons_name">Ocultar polígonos</string>
+    <string name="rendering_attr_noPolygons_name">Polígonos</string>
     <string name="rendering_attr_appMode_name">Modo de dibujo</string>
     <string name="rendering_attr_appMode_description">Optimización de mapa para cada Perfil de Usuario</string>
     <string name="rendering_attr_contourLines_description">Mostrar desde el nivel de acercamiento (requiere datos del contorno):</string>
@@ -904,7 +904,7 @@ OsmAnd está siendo desarrollado activamente y nuestro proyecto y su desarrollo 
     <string name="search_villages_and_postcodes">Buscar más pueblos/códigos postales</string>
     <string name="map_widget_max_speed">Límite de velocidad</string>
     <string name="monitoring_control_start">GPX</string>
-    <string name="rendering_attr_noAdminboundaries_name">Ocultar fronteras</string>
+    <string name="rendering_attr_noAdminboundaries_name">Límites</string>
     <string name="rendering_attr_noAdminboundaries_description">Ocultar fronteras regionales (niveles administrativos 5-9)</string>
     <string name="index_srtm_parts">piezas</string>
     <string name="index_srtm_ele">Curvas de nivel</string>
@@ -1998,8 +1998,8 @@ Lon %2$s</string>
     <string name="application_dir_description">Elige dónde guardar los mapas y otros archivos de datos.</string>
     <string name="show_on_start_description">"Desactivado,  lanza directamente la pantalla del mapa"</string>
     <string name="map_downloaded">Mapa descargado</string>
-    <string name="map_downloaded_descr">Se descargó el mapa de %1$s. Vuelve al mapa para empezar a usarlo.</string>
-    <string name="go_to_map">Ir al mapa</string>
+    <string name="map_downloaded_descr">"Se ha descargado el mapa de %1$s.  Ya puedes empezar a usarlo."</string>
+    <string name="go_to_map">Mostrar el mapa</string>
     <string name="shared_string_qr_code">Código QR</string>
     <string name="enter_country_name">Ingrese nombre del país</string>
     <string name="world_map_download_descr">El mapa base mundial ( que cubre todo el mundo con niveles de zoom pequeños) falta o está desactualizado, Considere descargarlo para una visión global.</string>
@@ -2390,7 +2390,7 @@ El espacio de almacenamiento usado es {3} MB temporalmente y {1} MB permanenteme
     <string name="skip_map_downloading">Saltar descarga de mapas</string>
     <string name="skip_map_downloading_desc">No tienes un mapa descargado instalado. Puedes elegir uno de la lista o descargarlo más tarde vía Menú - %1$s.</string>
     <string name="search_another_country">Selecciona otra región</string>
-    <string name="search_map">Buscando mapa…</string>
+    <string name="search_map">Buscando mapas…</string>
     <string name="first_usage_wizard_desc">Deja que OsmAnd determine tu ubicación y sugiera mapas que descargar para esa región.</string>
     <string name="location_not_found">Ubicación no encontrada</string>
     <string name="no_inet_connection">No hay conexión a Internet</string>
@@ -2488,4 +2488,13 @@ El espacio de almacenamiento usado es {3} MB temporalmente y {1} MB permanenteme
     <string name="rendering_value_fine_name">Bueno</string>
     <string name="lang_sr_latn">Serbio (Latino)</string>
     <string name="lang_zh_hk">Chino (Hong Kong)</string>
+    <string name="rendering_attr_contourDensity_description">Densidad de curvas de nivel</string>
+    <string name="rendering_attr_contourDensity_name">Densidad de curvas de nivel</string>
+    <string name="rendering_value_high_name">Alto</string>
+    <string name="rendering_value_medium_w_name">Medio</string>
+    <string name="rendering_value_low_name">Bajo</string>
+    <string name="rendering_attr_contourWidth_description">Anchura de las curvas de nivel</string>
+    <string name="rendering_attr_contourWidth_name">Anchura de las curvas de nivel</string>
+    <string name="rendering_attr_hideWaterPolygons_description">Agua</string>
+    <string name="rendering_attr_hideWaterPolygons_name">Ocultar el agua</string>
     </resources>
