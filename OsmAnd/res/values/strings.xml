@@ -2525,7 +2525,20 @@ If you need help with OsmAnd application, please contact our support team: suppo
     <string name="quick_action_gpx_category_discr">You can select a category to save GPX waypoint point.</string>
     <string name="quick_action_poi_list">POI list</string>
     <string name="quick_action_sh_poi_discrp">You can add few POI categories to display on the map.</string>
-    <string name="quic_action_map_style_doscrp">Tap on the action button will toggle the map style, from the list order.</string>
+    <string name="quick_action_map_style_discrp">Tap on the action button will toggle the map style, from the list order.</string>
     <string name="quick_action_map_style_action">Add map style</string>
     <string name="quick_action_empty_param_error">Parameters should not be empty</string>
+    <string name="quick_action_map_styles">Map styles</string>
+    <string name="quick_action_map_overlay">Change map overlay</string>
+    <string name="quick_action_map_overlay_title">Map overlays</string>
+    <string name="quick_action_map_overlay_dscr">Tap on the action button will toggle the map overlay, from the list order.</string>
+    <string name="quick_action_map_overlay_action">Add Overlay</string>
+    <string name="quick_action_map_underlay">Change map underlay</string>
+    <string name="quick_action_map_underlay_title">Map underlays</string>
+    <string name="quick_action_map_underlay_dscr">Tap on the action button will toggle the map underlay, from the list order.</string>
+    <string name="quick_action_map_underlay_action">Add Underlay</string>
+    <string name="quick_action_map_source">Change map source</string>
+    <string name="quick_action_map_source_title">Map sources</string>
+    <string name="quick_action_map_source_dscr">Tap on the action button will toggle the map source, from the list order.</string>
+    <string name="quick_action_map_source_action">Add Source</string>
 </resources>
