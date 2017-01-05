@@ -106,7 +106,11 @@ public class ContextMenuHelper {
 		settings.setBuiltInZoomControls(true);
 		settings.setDisplayZoomControls(false);
 		settings.setSupportZoom(true);
-		settings.setLayoutAlgorithm(LayoutAlgorithm.SINGLE_COLUMN);
+		if (android.os.Build.VERSION.SDK_INT < 19) {
+			webview.getSettings().setLayoutAlgorithm(LayoutAlgorithm.NARROW_COLUMNS);
+		} else {
+			webview.getSettings().setLayoutAlgorithm(LayoutAlgorithm.TEXT_AUTOSIZING);
+		}
 
 		wv.loadDataWithBaseURL(null, content, "text/html", "UTF-8", null);
 //		wv.loadUrl(OsMoService.SIGN_IN_URL + app.getSettings().OSMO_DEVICE_KEY.get());
