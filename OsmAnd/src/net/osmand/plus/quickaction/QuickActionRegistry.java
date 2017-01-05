@@ -92,7 +92,7 @@ public class QuickActionRegistry {
                 if (action.type == QuickActionFactory.MapStyleAction.TYPE) {
 
                     if (((QuickActionFactory.MapStyleAction) QuickActionFactory.produceAction(action))
-                            .getFilteredStyles(settings.getContext()).isEmpty()){
+                            .getFilteredStyles().isEmpty()){
 
                         skip = true;
                     }

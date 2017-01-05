@@ -71,7 +71,8 @@ public class QuickActionsWidget extends LinearLayout {
 
     private void setupLayout(Context context, int pageCount){
 
-        boolean light = ((OsmandApplication) context.getApplicationContext()).getSettings().isLightContent();
+        OsmandApplication application = ((OsmandApplication) getContext().getApplicationContext());
+        boolean light = application.getSettings().isLightContent() && !application.getDaynightHelper().isNightMode();
 
         inflate(new ContextThemeWrapper(context, light
                 ? R.style.OsmandLightTheme
@@ -159,7 +160,8 @@ public class QuickActionsWidget extends LinearLayout {
 
     private void updateControls(int position) {
 
-        boolean light = ((OsmandApplication) getContext().getApplicationContext()).getSettings().isLightContent();
+        OsmandApplication application = ((OsmandApplication) getContext().getApplicationContext());
+        boolean light = application.getSettings().isLightContent() && !application.getDaynightHelper().isNightMode();
 
         int colorEnabled = light ?  R.color.icon_color : R.color.color_white;
         int colorDisabled = light ?  R.color.icon_color_light : R.color.white_50_transparent;
@@ -184,7 +186,8 @@ public class QuickActionsWidget extends LinearLayout {
 
     private View createPageView(ViewGroup container, int position){
 
-        boolean light = ((OsmandApplication) getContext().getApplicationContext()).getSettings().isLightContent();
+        OsmandApplication application = ((OsmandApplication) getContext().getApplicationContext());
+        boolean light = application.getSettings().isLightContent() && !application.getDaynightHelper().isNightMode();
 
         LayoutInflater li = getLayoutInflater(light
                 ? R.style.OsmandLightTheme
@@ -202,13 +205,22 @@ public class QuickActionsWidget extends LinearLayout {
 
             if (i + (position * ELEMENT_PER_PAGE) < actions.size()) {
 
-                final QuickAction action = actions.get(i + (position * ELEMENT_PER_PAGE));
+                final QuickAction action = QuickActionFactory.produceAction(
+                        actions.get(i + (position * ELEMENT_PER_PAGE)));
 
                 ((ImageView) view.findViewById(R.id.imageView))
                         .setImageResource(action.getIconRes());
 
                 ((TextView) view.findViewById(R.id.title))
-                        .setText(action.getName(getContext()));
+                        .setText(action.getActionText(application));
+
+                if (action.isActionWithSlash(application)) {
+
+                    ((ImageView) view.findViewById(R.id.imageSlash))
+                            .setImageResource(light
+                                    ? R.drawable.ic_action_icon_hide_white
+                                    : R.drawable.ic_action_icon_hide_dark);
+                }
 
                 view.setOnClickListener(new OnClickListener() {
                     @Override

@@ -34,6 +34,7 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
+import net.osmand.osm.PoiFilter;
 import net.osmand.osm.PoiType;
 import net.osmand.osm.edit.Node;
 import net.osmand.osm.edit.OSMSettings;
@@ -71,6 +72,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import static net.osmand.plus.osmedit.AdvancedEditPoiFragment.addPoiToStringSet;
 
@@ -99,19 +101,6 @@ public class QuickActionFactory {
 
         return quickActions != null ? quickActions : new ArrayList<QuickAction>();
     }
-
-//    public static List<QuickAction> produceTypeActionsList() {
-//
-//        ArrayList<QuickAction> quickActions = new ArrayList<>();
-//
-//        quickActions.add(new MarkerAction());
-//        quickActions.add(new FavoriteAction());
-//        quickActions.add(new ShowHideFavoritesAction());
-//        quickActions.add(new ShowHidePoiAction());
-//        quickActions.add(new GPXAction());
-//
-//        return quickActions;
-//    }
 
     public static List<QuickAction> produceTypeActionsListWithHeaders() {
 
@@ -147,6 +136,76 @@ public class QuickActionFactory {
 
         quickActions.add(new QuickAction(0, R.string.quick_action_add_navigation));
         quickActions.add(new NavigationVoiceAction());
+
+        return quickActions;
+    }
+
+    public static List<QuickAction> produceTypeActionsListWithHeaders(List<QuickAction> active) {
+
+        ArrayList<QuickAction> quickActions = new ArrayList<>();
+
+        quickActions.add(new QuickAction(0, R.string.quick_action_add_create_items));
+        quickActions.add(new FavoriteAction());
+        quickActions.add(new GPXAction());
+
+        QuickAction marker = new MarkerAction();
+
+        if (!marker.hasInstanceInList(active)) {
+            quickActions.add(marker);
+        }
+
+        if (OsmandPlugin.getEnabledPlugin(AudioVideoNotesPlugin.class) != null) {
+
+            QuickAction audio = new TakeAudioNoteAction();
+            QuickAction photo = new TakePhotoNoteAction();
+            QuickAction vedio = new TakeVideoNoteAction();
+
+            if (!audio.hasInstanceInList(active)) {
+                quickActions.add(audio);
+            }
+
+            if (!photo.hasInstanceInList(active)) {
+                quickActions.add(photo);
+            }
+
+            if (!vedio.hasInstanceInList(active)) {
+                quickActions.add(vedio);
+            }
+        }
+
+        if (OsmandPlugin.getEnabledPlugin(OsmEditingPlugin.class) != null) {
+
+            quickActions.add(new AddPOIAction());
+            quickActions.add(new AddOSMBugAction());
+        }
+
+        if (OsmandPlugin.getEnabledPlugin(ParkingPositionPlugin.class) != null) {
+
+            QuickAction parking = new ParkingAction();
+
+            if (!parking.hasInstanceInList(active)) {
+                quickActions.add(parking);
+            }
+        }
+
+        quickActions.add(new QuickAction(0, R.string.quick_action_add_configure_map));
+        quickActions.add(new MapStyleAction());
+
+        QuickAction favorites = new ShowHideFavoritesAction();
+
+        if (!favorites.hasInstanceInList(active)) {
+            quickActions.add(favorites);
+        }
+
+        quickActions.add(new ShowHidePoiAction());
+
+        QuickAction voice = new NavigationVoiceAction();
+
+        if (!voice.hasInstanceInList(active)) {
+
+            quickActions.add(new QuickAction(0, R.string.quick_action_add_navigation));
+            quickActions.add(voice);
+        }
 
         return quickActions;
     }
@@ -412,7 +471,7 @@ public class QuickActionFactory {
                 name.setText(getParams().get(KEY_NAME));
                 categoryEdit.setText(getParams().get(KEY_CATEGORY_NAME));
 
-                if (getParams().get(KEY_NAME).isEmpty() && Integer.valueOf(getParams().get(KEY_CATEGORY_NAME)) == 0) {
+                if (getParams().get(KEY_NAME).isEmpty() && Integer.valueOf(getParams().get(KEY_CATEGORY_COLOR)) == 0) {
 
                     categoryEdit.setText(activity.getString(R.string.shared_string_favorites));
                     categoryImage.setColorFilter(activity.getResources().getColor(R.color.color_favorite));
@@ -526,7 +585,7 @@ public class QuickActionFactory {
         protected ShowHideFavoritesAction() {
             id = System.currentTimeMillis();
             type = TYPE;
-            nameRes = R.string.quic_action_showhide_favorites_title;
+            nameRes = R.string.quick_action_showhide_favorites_title;
             iconRes = R.drawable.ic_action_fav_dark;
             single = true;
             toggle = true;
@@ -556,6 +615,20 @@ public class QuickActionFactory {
 
             parent.addView(view);
         }
+
+        @Override
+        public String getActionText(OsmandApplication application) {
+
+            return application.getSettings().SHOW_FAVORITES.get()
+                    ? application.getString(R.string.quick_action_favorites_hide)
+                    : application.getString(R.string.quick_action_favorites_show);
+        }
+
+        @Override
+        public boolean isActionWithSlash(OsmandApplication application) {
+
+            return application.getSettings().SHOW_FAVORITES.get();
+        }
     }
 
     public static class ShowHidePoiAction extends QuickAction {
@@ -564,10 +637,12 @@ public class QuickActionFactory {
 
         public static final String KEY_FILTERS = "filters";
 
+        private transient EditText title;
+
         protected ShowHidePoiAction() {
             id = System.currentTimeMillis();
             type = TYPE;
-            nameRes = R.string.quic_action_showhide_poi_title;
+            nameRes = R.string.quick_action_showhide_poi_title;
             iconRes = R.drawable.ic_action_gabout_dark;
             toggle = true;
         }
@@ -577,13 +652,33 @@ public class QuickActionFactory {
         }
 
         @Override
+        public String getActionText(OsmandApplication application) {
+
+            return !isCurrentFilters(application)
+                    ? application.getString(R.string.quick_action_poi_show, getName(application))
+                    : application.getString(R.string.quick_action_poi_hide, getName(application));
+        }
+
+        @Override
+        public boolean isActionWithSlash(OsmandApplication application) {
+
+            return isCurrentFilters(application);
+        }
+
+        @Override
+        public void setAutoGeneratedTitle(EditText title) {
+            this.title = title;
+        }
+
+        @Override
         public void execute(MapActivity activity) {
 
             PoiFiltersHelper pf = activity.getMyApplication().getPoiFilters();
+            List<PoiUIFilter> poiFilters = loadPoiFilters(activity.getMyApplication().getPoiFilters());
 
-            if (pf.getSelectedPoiFilters().isEmpty()) {
+            if (!isCurrentFilters(pf.getSelectedPoiFilters(), poiFilters)){
 
-                List<PoiUIFilter> poiFilters = loadPoiFilters(activity.getMyApplication().getPoiFilters());
+                pf.clearSelectedPoiFilters();
 
                 for (PoiUIFilter filter : poiFilters) {
                     pf.addSelectedPoiFilter(filter);
@@ -591,7 +686,24 @@ public class QuickActionFactory {
 
             } else pf.clearSelectedPoiFilters();
 
+
+
             activity.getMapLayers().updateLayers(activity.getMapView());
+        }
+
+        private boolean isCurrentFilters(OsmandApplication application) {
+
+            PoiFiltersHelper pf = application.getPoiFilters();
+            List<PoiUIFilter> poiFilters = loadPoiFilters(application.getPoiFilters());
+
+            return isCurrentFilters(pf.getSelectedPoiFilters(), poiFilters);
+        }
+
+        private boolean isCurrentFilters(Set<PoiUIFilter> currentPoiFilters, List<PoiUIFilter> poiFilters){
+
+            if (currentPoiFilters.size() != poiFilters.size()) return false;
+
+            return currentPoiFilters.containsAll(poiFilters);
         }
 
         @Override
@@ -646,7 +758,7 @@ public class QuickActionFactory {
             }
 
             @Override
-            public void onBindViewHolder(Holder holder, final int position) {
+            public void onBindViewHolder(final Holder holder, final int position) {
 
                 final PoiUIFilter filter = filters.get(position);
 
@@ -663,10 +775,18 @@ public class QuickActionFactory {
                     @Override
                     public void onClick(View view) {
 
+                        String oldTitle = getTitle(filters);
+
                         filters.remove(position);
                         savePoiFilters(filters);
 
                         notifyDataSetChanged();
+
+                        if (oldTitle.equals(title.getText().toString()) || title.getText().toString().equals(getName(holder.title.getContext()))) {
+
+                            String newTitle = getTitle(filters);
+                            title.setText(newTitle);
+                        }
                     }
                 });
             }
@@ -727,7 +847,7 @@ public class QuickActionFactory {
             return poiFilters;
         }
 
-        private void showSingleChoicePoiFilterDialog(final OsmandApplication app, MapActivity activity, final Adapter filtersAdapter) {
+        private void showSingleChoicePoiFilterDialog(final OsmandApplication app, final MapActivity activity, final Adapter filtersAdapter) {
 
             final PoiFiltersHelper poiFilters = app.getPoiFilters();
             final ContextMenuAdapter adapter = new ContextMenuAdapter();
@@ -752,7 +872,16 @@ public class QuickActionFactory {
             builder.setAdapter(listAdapter, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
+
+                    String oldTitle = getTitle(filtersAdapter.filters);
+
                     filtersAdapter.addItem(list.get(which));
+
+                    if (oldTitle.equals(title.getText().toString()) || title.getText().toString().equals(getName(activity))) {
+
+                        String newTitle = getTitle(filtersAdapter.filters);
+                        title.setText(newTitle);
+                    }
                 }
 
             });
@@ -771,6 +900,15 @@ public class QuickActionFactory {
             });
 
             alertDialog.show();
+        }
+
+        private String getTitle(List<PoiUIFilter> filters) {
+
+            if (filters.isEmpty()) return "";
+
+            return filters.size() > 1
+                    ? filters.get(0).getName() + " +" + (filters.size() - 1)
+                    : filters.get(0).getName();
         }
 
         private void addFilterToList(final ContextMenuAdapter adapter,
@@ -878,7 +1016,7 @@ public class QuickActionFactory {
                 name.setText(getParams().get(KEY_NAME));
                 categoryEdit.setText(getParams().get(KEY_CATEGORY_NAME));
 
-                if (getParams().get(KEY_NAME).isEmpty() && Integer.valueOf(getParams().get(KEY_CATEGORY_NAME)) == 0) {
+                if (getParams().get(KEY_NAME).isEmpty() && Integer.valueOf(getParams().get(KEY_CATEGORY_COLOR)) == 0) {
 
                     categoryEdit.setText("");
                     categoryImage.setColorFilter(activity.getResources().getColor(R.color.icon_color));
@@ -1161,6 +1299,20 @@ public class QuickActionFactory {
 
             parent.addView(view);
         }
+
+        @Override
+        public String getActionText(OsmandApplication application) {
+
+            return application.getSettings().VOICE_MUTE.get()
+                    ? application.getString(R.string.quick_action_navigation_voice_off)
+                    : application.getString(R.string.quick_action_navigation_voice_on);
+        }
+
+        @Override
+        public boolean isActionWithSlash(OsmandApplication application) {
+
+            return application.getSettings().VOICE_MUTE.get();
+        }
     }
 
     public static class AddOSMBugAction extends QuickAction {
@@ -1422,6 +1574,8 @@ public class QuickActionFactory {
 
         private static String KEY_STYLES = "styles";
 
+        private transient EditText title;
+
         protected MapStyleAction() {
             id = System.currentTimeMillis();
             type = TYPE;
@@ -1437,7 +1591,7 @@ public class QuickActionFactory {
         @Override
         public void execute(MapActivity activity) {
 
-            List<String> mapStyles = getFilteredStyles(activity.getMyApplication());
+            List<String> mapStyles = getFilteredStyles();
 
             String curStyle = activity.getMyApplication().getSettings().RENDERER.get();
             int index = mapStyles.indexOf(curStyle);
@@ -1458,13 +1612,15 @@ public class QuickActionFactory {
                 activity.getMyApplication().getRendererRegistry().setCurrentSelectedRender(loaded);
                 ConfigureMapMenu.refreshMapComplete(activity);
 
+                Toast.makeText(activity, activity.getString(R.string.quick_action_map_style_switch, nextStyle), Toast.LENGTH_SHORT).show();
+
             } else {
 
                 Toast.makeText(activity, R.string.renderer_load_exception, Toast.LENGTH_SHORT).show();
             }
         }
 
-        protected List<String> getFilteredStyles(OsmandApplication application){
+        protected List<String> getFilteredStyles(){
 
             List<String> filtered = new ArrayList<>();
             boolean enabled = OsmandPlugin.getEnabledPlugin(NauticalMapsPlugin.class) != null;
@@ -1482,6 +1638,21 @@ public class QuickActionFactory {
 
             return filtered;
         }
+
+        @Override
+        public void setAutoGeneratedTitle(EditText title) {
+            this.title = title;
+        }
+
+        private String getTitle(List<String> filters) {
+
+            if (filters.isEmpty()) return "";
+
+            return filters.size() > 1
+                    ? filters.get(0) + " +" + (filters.size() - 1)
+                    : filters.get(0);
+        }
+
 
         @Override
         public void drawUI(ViewGroup parent, final MapActivity activity) {
@@ -1542,7 +1713,18 @@ public class QuickActionFactory {
                             String renderer = visibleNamesList.get(i);
                             RenderingRulesStorage loaded = app.getRendererRegistry().getRenderer(renderer);
 
-                            if (loaded != null) adapter.addItem(renderer);
+                            if (loaded != null) {
+
+                                String oldTitle = getTitle(adapter.itemsList);
+
+                                adapter.addItem(renderer);
+
+                                if (oldTitle.equals(title.getText().toString()) || title.getText().toString().equals(getName(activity))) {
+
+                                    String newTitle = getTitle(adapter.itemsList);
+                                    title.setText(newTitle);
+                                }
+                            }
 
                             dialogInterface.dismiss();
                         }
@@ -1591,7 +1773,16 @@ public class QuickActionFactory {
                     holder.closeBtn.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
+
+                            String oldTitle = getTitle(itemsList);
+
                             deleteItem(position);
+
+                            if (oldTitle.equals(title.getText().toString()) || title.getText().toString().equals(getName(holder.handleView.getContext()))) {
+
+                                String newTitle = getTitle(itemsList);
+                                title.setText(newTitle);
+                            }
                         }
                     });
             }
@@ -1644,6 +1835,8 @@ public class QuickActionFactory {
                 if (selectedPosition < 0 || targetPosition < 0)
                     return false;
 
+                String oldTitle = getTitle(itemsList);
+
                 Collections.swap(itemsList, selectedPosition, targetPosition);
                 if (selectedPosition - targetPosition < -1) {
                     notifyItemMoved(selectedPosition, targetPosition);
@@ -1656,6 +1849,12 @@ public class QuickActionFactory {
                 }
                 notifyItemChanged(selectedPosition);
                 notifyItemChanged(targetPosition);
+
+                if (oldTitle.equals(title.getText().toString()) || title.getText().toString().equals(getName(recyclerView.getContext()))) {
+
+                    String newTitle = getTitle(itemsList);
+                    title.setText(newTitle);
+                }
 
                 return true;
             }

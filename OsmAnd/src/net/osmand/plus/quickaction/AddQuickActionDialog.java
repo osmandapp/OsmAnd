@@ -41,8 +41,13 @@ public class AddQuickActionDialog extends DialogFragment {
 
         getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
 
+        List<QuickAction> active = ((MapActivity) getActivity())
+                .getMapLayers()
+                .getQuickActionRegistry()
+                .getQuickActions();
+
         View root = inflater.inflate(R.layout.quick_action_add_dialog, container, false);
-        Adapter adapter = new Adapter(QuickActionFactory.produceTypeActionsListWithHeaders());
+        Adapter adapter = new Adapter(QuickActionFactory.produceTypeActionsListWithHeaders(active));
 
         RecyclerView recyclerView = (RecyclerView) root.findViewById(R.id.recycler_view);
         Button btnDismiss = (Button) root.findViewById(R.id.btnDismiss);
