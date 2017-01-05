@@ -16,7 +16,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebSettings;
-import android.webkit.WebSettings.LayoutAlgorithm;
 import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -106,11 +105,6 @@ public class ContextMenuHelper {
 		settings.setBuiltInZoomControls(true);
 		settings.setDisplayZoomControls(false);
 		settings.setSupportZoom(true);
-		if (android.os.Build.VERSION.SDK_INT < 19) {
-			settings.setLayoutAlgorithm(LayoutAlgorithm.NARROW_COLUMNS);
-		} else {
-			settings.setLayoutAlgorithm(LayoutAlgorithm.TEXT_AUTOSIZING);
-		}
 
 		wv.loadDataWithBaseURL(null, content, "text/html", "UTF-8", null);
 //		wv.loadUrl(OsMoService.SIGN_IN_URL + app.getSettings().OSMO_DEVICE_KEY.get());
