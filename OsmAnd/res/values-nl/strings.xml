@@ -2184,7 +2184,7 @@ Lengtegraad:\t\t%2$s</string>
     <string name="shared_string_qr_code">QR-code</string>
     <string name="map_downloaded">Kaart gedownload</string>
     <string name="map_downloaded_descr">De kaart van %1$s is gedownload en kan nu worden gebruikt.</string>
-    <string name="go_to_map">Ga naar de kaart</string>
+    <string name="go_to_map">Kaart weergeven</string>
     <string name="world_map_download_descr">De basis-wereldkaart ontbreekt of is verouderd. Download hem voor wereldwijd overzicht om lage zoomlevels.</string>
     <string name="shared_string_update">Updaten</string>
     
@@ -2629,7 +2629,7 @@ Als je hulp nodig hebt met OsmAnd: neem contact op met ons support team: support
     <string name="si_mi_meters">Mijlen/meters</string>
     <string name="skip_map_downloading">Kaarten later downloaden</string>
     <string name="search_another_country">Kies een andere regio</string>
-    <string name="search_map">Kaart zoeken…</string>
+    <string name="search_map">Kaart wordt gezocht…</string>
     <string name="location_not_found">Positie niet gevonden</string>
     <string name="no_inet_connection">Geen Internetverbinding</string>
     <string name="no_inet_connection_desc_map">Noodzakelijk om kaarten te downloaden.</string>
