@@ -2151,8 +2151,8 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="application_dir_description">選擇您想要在何處儲存地圖和其它資料。</string>
     <string name="show_on_start_description">\'關閉\' 直接啟動地圖螢幕</string>
     <string name="map_downloaded">地圖已下載</string>
-    <string name="map_downloaded_descr">已下載了 %1$s 地圖。回到地圖以開始使用。</string>
-    <string name="go_to_map">返回地圖</string>
+    <string name="map_downloaded_descr">已下載了 %1$s 地圖，您現在可以開始使用了。</string>
+    <string name="go_to_map">顯示地圖</string>
     <string name="shared_string_qr_code">QR 碼</string>
     <string name="enter_country_name">輸入國家/地區名稱</string>
     <string name="world_map_download_descr">全球底圖 (小比例尺涵蓋全世界) 丟失或過時。請考量後下載全球概貌。</string>
