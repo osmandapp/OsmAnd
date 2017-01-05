@@ -22,7 +22,7 @@
             android:layout_gravity="center_vertical"
             android:layout_marginRight="4dp"
             android:focusable="false"
-            android:tint="@color/icon_color"
+            android:tint="?attr/secondary_icon_color"
             android:scaleType="centerInside"
             android:src="@drawable/ic_action_reorder"/>
 
@@ -45,7 +45,7 @@
             android:layout_gravity="center_vertical"
             android:background="?android:selectableItemBackground"
             android:scaleType="centerInside"
-            android:tint="@color/icon_color_light"
+            android:tint="?attr/secondary_icon_color"
             android:src="@drawable/ic_action_remove_dark"/>
 
     </LinearLayout>

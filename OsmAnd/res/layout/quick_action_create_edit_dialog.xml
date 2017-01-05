@@ -32,12 +32,14 @@
         android:contentInsetLeft="72dp"
         app:contentInsetLeft="72dp"
         app:contentInsetStart="72dp"
-        android:background="@color/actionbar_light_color"/>
+        android:background="?attr/actionModeBackground"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="72dp"
-        android:background="@color/actionbar_light_color">
+        android:descendantFocusability="beforeDescendants"
+        android:focusableInTouchMode="true"
+        android:background="?attr/actionModeBackground">
 
         <ImageView
             android:id="@+id/image"
@@ -89,7 +91,7 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/dashboard_background"
+            android:background="?attr/spinnerListBackground"
             android:layout_marginBottom="56dp">
 
             <FrameLayout

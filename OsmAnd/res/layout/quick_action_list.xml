@@ -10,7 +10,7 @@
         android:id="@+id/custom_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?android:attr/actionBarSize"
-        android:background="@color/actionbar_light_color"/>
+        android:background="?attr/actionModeBackground"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view"

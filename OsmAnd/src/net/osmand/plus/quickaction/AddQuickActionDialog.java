@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 
@@ -32,7 +33,13 @@ public class AddQuickActionDialog extends DialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        return new Dialog(new ContextThemeWrapper(getActivity(), R.style.Dialog90), getTheme());
+
+        OsmandApplication application = (OsmandApplication) getActivity().getApplication();
+        boolean light = application.getSettings().isLightContent() && !application.getDaynightHelper().isNightMode();
+
+        return new Dialog(new ContextThemeWrapper(getActivity(), light
+                ? R.style.Dialog90Light
+                : R.style.Dialog90Dark), getTheme());
     }
 
     @Nullable

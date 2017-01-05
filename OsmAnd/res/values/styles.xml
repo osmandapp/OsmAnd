@@ -442,10 +442,22 @@
         <item name="android:background">@color/xmas_blue</item>
     </style>
 
-    <style name="Dialog90" parent="Base.Theme.AppCompat.Light.Dialog">
+    <style name="Dialog90Light" parent="Base.Theme.AppCompat.Light.Dialog">
 
         <item name="android:windowMinWidthMajor">90%</item>
         <item name="android:windowMinWidthMinor">90%</item>
+
+        <item name="secondary_icon_color">@color/icon_color_light</item>
+        <item name="primary_icon_color">@color/icon_color</item>
+    </style>
+
+    <style name="Dialog90Dark" parent="Base.Theme.AppCompat.Dialog">
+
+        <item name="android:windowMinWidthMajor">90%</item>
+        <item name="android:windowMinWidthMinor">90%</item>
+
+        <item name="secondary_icon_color">@color/dialog_inactive_text_color_dark</item>
+        <item name="primary_icon_color">@color/color_white</item>
     </style>
 
     <style name="WhiteControls" parent="Theme.AppCompat.Light.DarkActionBar">
