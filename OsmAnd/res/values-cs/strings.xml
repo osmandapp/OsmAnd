@@ -1897,8 +1897,8 @@ Aktivováním tohoto pohledu se změní styl mapy na \"Winter and ski\", který 
     <string name="world_map_download_descr">Základní mapa světa (pokrývající celý svět při malých detailech) chybí nebo je zastaralá. Prosím zvažte její stažení pro celkový přehled.</string>
     <string name="shared_string_qr_code">QR kód</string>
     <string name="map_downloaded">Mapa stažena</string>
-    <string name="map_downloaded_descr">Mapa %1$s byla stažena. Pro její použití se vraťte zpět na mapu.</string>
-    <string name="go_to_map">Přejít na mapu</string>
+    <string name="map_downloaded_descr">Mapa %1$s byla stažena, můžete jí nyní začít využívat.</string>
+    <string name="go_to_map">Zobrazit mapu</string>
     <string name="show_free_version_banner">Zobrazit banner volné verze</string>
     <string name="show_free_version_banner_description">I když používáte placenou verzi, můžete vidět banner volné verze</string>
     <string name="enter_country_name">Vložte název země</string>
@@ -2212,7 +2212,7 @@ Pokud máte rádi OsmAnd a OSM a chcete je podpořit, toto je výborný způsob 
     <string name="skip_map_downloading">Přeskočit stahování map</string>
     <string name="skip_map_downloading_desc">Nemáte instalovanou žádnou mapu. Můžete si vybrat mapu ze seznamu, nebo stáhnout mapy později přes Menu - %1$s.</string>
     <string name="search_another_country">Vybrat jiný region</string>
-    <string name="search_map">Hledání mapy…</string>
+    <string name="search_map">Hledání map…</string>
     <string name="first_usage_wizard_desc">Povolit OsmAndu určení vaší polohy a návrh mapy pro daný region.</string>
     <string name="location_not_found">Poloha nenalezena</string>
     <string name="no_inet_connection">Není internetové připojení</string>
