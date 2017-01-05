@@ -371,9 +371,9 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 		settings.setDisplayZoomControls(false);
 		settings.setSupportZoom(true);
 		if (android.os.Build.VERSION.SDK_INT < 19) {
-			webview.getSettings().setLayoutAlgorithm(LayoutAlgorithm.NARROW_COLUMNS);
+			settings.setLayoutAlgorithm(LayoutAlgorithm.NARROW_COLUMNS);
 		} else {
-			webview.getSettings().setLayoutAlgorithm(LayoutAlgorithm.TEXT_AUTOSIZING);
+			settings.setLayoutAlgorithm(LayoutAlgorithm.TEXT_AUTOSIZING);
 		}
 
 		wv.loadDataWithBaseURL(null, content, "text/html", "UTF-8", null);
