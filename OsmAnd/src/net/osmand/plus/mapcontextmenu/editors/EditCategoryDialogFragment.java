@@ -41,6 +41,8 @@ public class EditCategoryDialogFragment extends DialogFragment {
 
 	FavouritesDbHelper helper;
 
+	private SelectCategoryDialogFragment.CategorySelectionListener selectionListener;
+
 	@NonNull
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -87,6 +89,10 @@ public class EditCategoryDialogFragment extends DialogFragment {
 		return builder.create();
 	}
 
+	public void setSelectionListener(SelectCategoryDialogFragment.CategorySelectionListener selectionListener) {
+		this.selectionListener = selectionListener;
+	}
+
 	@Override
 	public void onStart()
 	{
@@ -103,10 +109,17 @@ public class EditCategoryDialogFragment extends DialogFragment {
 					name = nameEdit.getText().toString().trim();
 					if (!helper.groupExists(name)) {
 						helper.addEmptyCategory(name, color);
+
 						PointEditor editor = ((MapActivity) getActivity()).getContextMenu().getPointEditor(editorTag);
+
 						if (editor != null) {
 							editor.setCategory(name);
 						}
+
+						if (selectionListener != null){
+							selectionListener.onCategorySelected(name, color);
+						}
+
 						d.dismiss();
 					} else {
 						AlertDialog.Builder b = new AlertDialog.Builder(getActivity());

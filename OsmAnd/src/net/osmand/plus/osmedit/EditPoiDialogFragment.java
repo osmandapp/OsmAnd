@@ -1,33 +1,5 @@
 package net.osmand.plus.osmedit;
 
-import java.io.Serializable;
-import java.util.Comparator;
-import java.util.HashSet;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-
-import net.osmand.CallbackWithObject;
-import net.osmand.PlatformUtil;
-import net.osmand.data.Amenity;
-import net.osmand.data.LatLon;
-import net.osmand.osm.PoiCategory;
-import net.osmand.osm.PoiType;
-import net.osmand.osm.edit.EntityInfo;
-import net.osmand.osm.edit.Node;
-import net.osmand.osm.edit.OSMSettings;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndDialogFragment;
-import net.osmand.plus.osmedit.dialogs.PoiSubTypeDialogFragment;
-import net.osmand.plus.osmedit.dialogs.PoiTypeDialogFragment;
-import net.osmand.util.Algorithms;
-
-import org.apache.commons.logging.Log;
-
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
@@ -74,6 +46,35 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import net.osmand.CallbackWithObject;
+import net.osmand.PlatformUtil;
+import net.osmand.data.Amenity;
+import net.osmand.data.LatLon;
+import net.osmand.osm.PoiCategory;
+import net.osmand.osm.PoiType;
+import net.osmand.osm.edit.EntityInfo;
+import net.osmand.osm.edit.Node;
+import net.osmand.osm.edit.OSMSettings;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.base.BaseOsmAndDialogFragment;
+import net.osmand.plus.osmedit.dialogs.PoiSubTypeDialogFragment;
+import net.osmand.plus.osmedit.dialogs.PoiTypeDialogFragment;
+import net.osmand.util.Algorithms;
+
+import org.apache.commons.logging.Log;
+
+import java.io.Serializable;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
 public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 	public static final String TAG = "EditPoiDialogFragment";
 	private static final Log LOG = PlatformUtil.getLog(EditPoiDialogFragment.class);
@@ -82,7 +83,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 	private static final String TAGS_LIST = "tags_list";
 	private static final String IS_ADDING_POI = "is_adding_poi";
 
-	private static final HashSet<String> BASIC_TAGS = new HashSet<String>() {
+	public static final HashSet<String> BASIC_TAGS = new HashSet<String>() {
 		{
 			add(OSMSettings.OSMTagKey.NAME.getValue());
 			add(OSMSettings.OSMTagKey.ADDR_STREET.getValue());
@@ -219,7 +220,13 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 		poiTypeButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				DialogFragment fragment = PoiTypeDialogFragment.createInstance();
+				PoiTypeDialogFragment fragment = PoiTypeDialogFragment.createInstance();
+				fragment.setOnItemSelectListener(new PoiTypeDialogFragment.OnItemSelectListener() {
+					@Override
+					public void select(PoiCategory poiCategory) {
+						setPoiCategory(poiCategory);
+					}
+				});
 				fragment.show(getChildFragmentManager(), "PoiTypeDialogFragment");
 			}
 		});
@@ -279,8 +286,14 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 							- editText.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width()
 							- editText.getPaddingRight())) {
 						if (editPoiData.getPoiCategory() != null) {
-							DialogFragment dialogFragment =
+							PoiSubTypeDialogFragment dialogFragment =
 									PoiSubTypeDialogFragment.createInstance(editPoiData.getPoiCategory());
+							dialogFragment.setOnItemSelectListener(new PoiSubTypeDialogFragment.OnItemSelectListener() {
+								@Override
+								public void select(String category) {
+									setSubCategory(category);
+								}
+							});
 							dialogFragment.show(getChildFragmentManager(), "PoiSubTypeDialogFragment");
 						}
 
@@ -570,6 +583,16 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 		Bundle args = new Bundle();
 		args.putSerializable(KEY_AMENITY_NODE, node);
 		args.putBoolean(IS_ADDING_POI, isAddingPoi);
+		editPoiDialogFragment.setArguments(args);
+		return editPoiDialogFragment;
+	}
+
+	public static EditPoiDialogFragment createInstance(Node node, boolean isAddingPoi, Map<String, String> tagList) {
+		EditPoiDialogFragment editPoiDialogFragment = new EditPoiDialogFragment();
+		Bundle args = new Bundle();
+		args.putSerializable(KEY_AMENITY_NODE, node);
+		args.putBoolean(IS_ADDING_POI, isAddingPoi);
+		args.putSerializable(TAGS_LIST, (Serializable) Collections.unmodifiableMap(tagList));
 		editPoiDialogFragment.setArguments(args);
 		return editPoiDialogFragment;
 	}

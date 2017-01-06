@@ -30,6 +30,7 @@ import net.osmand.plus.activities.MapActivity.ShowQuickSearchMode;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.poi.PoiUIFilter;
+import net.osmand.plus.quickaction.QuickActionRegistry;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.render.MapVectorLayer;
 import net.osmand.plus.render.RenderingIcons;
@@ -42,6 +43,7 @@ import net.osmand.plus.views.ImpassableRoadsLayer;
 import net.osmand.plus.views.MapControlsLayer;
 import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.MapMarkersLayer;
+import net.osmand.plus.views.MapQuickActionLayer;
 import net.osmand.plus.views.MapTextLayer;
 import net.osmand.plus.views.MapTileLayer;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -80,14 +82,21 @@ public class MapActivityLayers {
 	private MapTextLayer mapTextLayer;
 	private ContextMenuLayer contextMenuLayer;
 	private MapControlsLayer mapControlsLayer;
+	private MapQuickActionLayer mapQuickActionLayer;
 	private DownloadedRegionsLayer downloadedRegionsLayer;
 	private MapWidgetRegistry mapWidgetRegistry;
+	private QuickActionRegistry quickActionRegistry;
 
 	private StateChangedListener<Integer> transparencyListener;
 
 	public MapActivityLayers(MapActivity activity) {
 		this.activity = activity;
 		this.mapWidgetRegistry = new MapWidgetRegistry(activity.getMyApplication().getSettings());
+		this.quickActionRegistry = new QuickActionRegistry(activity.getMyApplication().getSettings());
+	}
+
+	public QuickActionRegistry getQuickActionRegistry() {
+		return quickActionRegistry;
 	}
 
 	public MapWidgetRegistry getMapWidgetRegistry() {
@@ -160,6 +169,11 @@ public class MapActivityLayers {
 		// 11. route info layer
 		mapControlsLayer = new MapControlsLayer(activity);
 		mapView.addLayer(mapControlsLayer, 11);
+		// 12. quick actions layer
+		mapQuickActionLayer = new MapQuickActionLayer(activity, contextMenuLayer);
+		mapView.addLayer(mapQuickActionLayer, 12);
+		contextMenuLayer.setMapQuickActionLayer(mapQuickActionLayer);
+		mapControlsLayer.setMapQuickActionLayer(mapQuickActionLayer);
 
 		transparencyListener = new StateChangedListener<Integer>() {
 			@Override
@@ -577,6 +591,10 @@ public class MapActivityLayers {
 
 	public MapControlsLayer getMapControlsLayer() {
 		return mapControlsLayer;
+	}
+
+	public MapQuickActionLayer getMapQuickActionLayer() {
+		return mapQuickActionLayer;
 	}
 
 	public MapMarkersLayer getMapMarkersLayer() {

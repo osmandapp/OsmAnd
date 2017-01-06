@@ -47,6 +47,8 @@
             <include layout="@layout/map_hud_top"/>
 
             <include layout="@layout/map_hud_bottom"/>
+
+            <include layout="@layout/map_hud_quick_actions"/>
         </FrameLayout>
 
         <FrameLayout

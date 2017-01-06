@@ -89,6 +89,9 @@ import net.osmand.plus.mapcontextmenu.MapContextMenuFragment;
 import net.osmand.plus.mapcontextmenu.other.DestinationReachedMenu;
 import net.osmand.plus.mapcontextmenu.other.MapRouteInfoMenu;
 import net.osmand.plus.mapcontextmenu.other.MapRouteInfoMenuFragment;
+import net.osmand.plus.quickaction.QuickAction;
+import net.osmand.plus.quickaction.QuickActionFactory;
+import net.osmand.plus.quickaction.QuickActionsWidget;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.routing.RoutingHelper;
@@ -98,6 +101,7 @@ import net.osmand.plus.search.QuickSearchDialogFragment;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.MapControlsLayer;
 import net.osmand.plus.views.MapInfoLayer;
+import net.osmand.plus.views.MapQuickActionLayer;
 import net.osmand.plus.views.OsmAndMapLayersView;
 import net.osmand.plus.views.OsmAndMapSurfaceView;
 import net.osmand.plus.views.OsmandMapLayer;
@@ -452,9 +456,13 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			}
 			this.startActivity(prevActivityIntent);
 			prevActivityIntent = null;
-		} else {
-			super.onBackPressed();
+			return;
 		}
+		if (getMapView().getLayerByClass(MapQuickActionLayer.class).onBackPressed())
+			return;
+
+		super.onBackPressed();
+
 	}
 
 	@Override
@@ -972,6 +980,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		//app.getRoutingHelper().setAppMode(settings.getApplicationMode());
 		if (mapLayers.getMapInfoLayer() != null) {
 			mapLayers.getMapInfoLayer().recreateControls();
+		}
+		if (mapLayers.getMapQuickActionLayer() != null) {
+			mapLayers.getMapQuickActionLayer().refreshLayer();
 		}
 		mapLayers.updateLayers(mapView);
 		mapActions.updateDrawerMenu();

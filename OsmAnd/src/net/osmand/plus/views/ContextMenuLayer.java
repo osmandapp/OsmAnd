@@ -61,6 +61,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	private MapContextMenu menu;
 	private MapMultiSelectionMenu multiSelectionMenu;
 	private CallbackWithObject<LatLon> selectOnMap = null;
+	private MapQuickActionLayer mapQuickActionLayer;
 
 	private ImageView contextMarker;
 	private Paint paint;
@@ -144,6 +145,9 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			int y = (int) box.getPixYFromLatLon(latLon.getLatitude(), latLon.getLongitude());
 			canvas.drawBitmap(pressedBitmap, x - pressedBitmap.getWidth() / 2, y - pressedBitmap.getHeight() / 2, paint);
 		}
+
+		if (mapQuickActionLayer!= null && mapQuickActionLayer.isInChangeMarkerPositionMode())
+			return;
 
 		if (mInChangeMarkerPositionMode) {
 			if (menu.getObject() == null) {
@@ -649,6 +653,10 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 	private void showContextMenuForSelectedObjects(final LatLon latLon, final Map<Object, IContextMenuProvider> selectedObjects) {
 		multiSelectionMenu.show(latLon, selectedObjects);
+	}
+
+	public void setMapQuickActionLayer(MapQuickActionLayer mapQuickActionLayer) {
+		this.mapQuickActionLayer = mapQuickActionLayer;
 	}
 
 	@Override

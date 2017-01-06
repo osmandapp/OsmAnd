@@ -170,13 +170,17 @@ public class MapMultiSelectionMenu extends BaseMenuController {
 	}
 
 	public boolean isVisible() {
-		Fragment fragment = getMapActivity().getSupportFragmentManager().findFragmentByTag(MapMultiSelectionMenuFragment.TAG);
+		Fragment fragment = getFragmentByTag();
 		return fragment != null;
+	}
+
+	public Fragment getFragmentByTag() {
+		return getMapActivity().getSupportFragmentManager().findFragmentByTag(MapMultiSelectionMenuFragment.TAG);
 	}
 
 	public void hide() {
 		clearMenu();
-		Fragment fragment = getMapActivity().getSupportFragmentManager().findFragmentByTag(MapMultiSelectionMenuFragment.TAG);
+		Fragment fragment = getFragmentByTag();
 		if (fragment != null) {
 			MapMultiSelectionMenuFragment menuFragment = (MapMultiSelectionMenuFragment) fragment;
 			menuFragment.dismissMenu();

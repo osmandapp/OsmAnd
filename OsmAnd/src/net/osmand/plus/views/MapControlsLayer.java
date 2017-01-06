@@ -2,7 +2,6 @@ package net.osmand.plus.views;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -27,6 +26,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
+
 import net.osmand.AndroidUtils;
 import net.osmand.core.android.MapRendererContext;
 import net.osmand.data.LatLon;
@@ -99,6 +99,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 	private long lastZoom;
 	private boolean hasTargets;
 	private ContextMenuLayer contextMenuLayer;
+	private MapQuickActionLayer mapQuickActionLayer;
 	private boolean forceShowCompass;
 
 	public MapControlsLayer(MapActivity activity) {
@@ -628,7 +629,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		boolean showRouteCalculationControls = routePlanningMode ||
 				((app.accessibilityEnabled() || (System.currentTimeMillis() - touchEvent < TIMEOUT_TO_SHOW_BUTTONS)) && routeFollowingMode);
 		updateMyLocation(rh, dialogOpened);
-		boolean showButtons = (showRouteCalculationControls || !routeFollowingMode) && !contextMenuLayer.isInChangeMarkerPositionMode();
+		boolean showButtons = (showRouteCalculationControls || !routeFollowingMode) && !isInChangeMarkerPositionMode();
 		//routePlanningBtn.setIconResId(routeFollowingMode ? R.drawable.ic_action_gabout_dark : R.drawable.map_directions);
 		if (rh.isFollowingMode()) {
 			routePlanningBtn.setIconResId(R.drawable.map_start_navigation);
@@ -1027,6 +1028,15 @@ public class MapControlsLayer extends OsmandMapLayer {
 			}
 		}
 		return zoomText;
+	}
+
+	public void setMapQuickActionLayer(MapQuickActionLayer mapQuickActionLayer) {
+		this.mapQuickActionLayer = mapQuickActionLayer;
+	}
+
+	private boolean isInChangeMarkerPositionMode(){
+		return mapQuickActionLayer == null ? contextMenuLayer.isInChangeMarkerPositionMode() :
+				mapQuickActionLayer.isInChangeMarkerPositionMode() || contextMenuLayer.isInChangeMarkerPositionMode();
 	}
 
 	public static View.OnLongClickListener getOnClickMagnifierListener(final OsmandMapTileView view) {

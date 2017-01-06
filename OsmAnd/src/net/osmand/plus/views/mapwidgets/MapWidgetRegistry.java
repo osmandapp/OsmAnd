@@ -24,7 +24,9 @@ import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dialogs.ConfigureMapMenu;
+import net.osmand.plus.quickaction.QuickActionListFragment;
 import net.osmand.plus.views.MapInfoLayer;
+import net.osmand.plus.views.MapQuickActionLayer;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.widgets.IconPopupMenu;
@@ -36,7 +38,6 @@ import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
-import java.util.zip.GZIPOutputStream;
 
 public class MapWidgetRegistry {
 
@@ -358,6 +359,7 @@ public class MapWidgetRegistry {
 
 
 	public void addControls(MapActivity map, ContextMenuAdapter cm, ApplicationMode mode) {
+		addQuickActionControl(map, cm, mode);
 		// Right panel
 		cm.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.map_widget_right, map)
 				.setCategory(true).setLayout(R.layout.list_group_title_with_switch).createItem());
@@ -382,6 +384,58 @@ public class MapWidgetRegistry {
 
 	public Set<MapWidgetRegInfo> getLeftWidgetSet() {
 		return leftWidgetSet;
+	}
+
+	private void addQuickActionControl(final MapActivity mapActivity, final ContextMenuAdapter contextMenuAdapter, ApplicationMode mode) {
+
+		contextMenuAdapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.map_widget_right, mapActivity)
+				.setCategory(true).setLayout(R.layout.list_group_empty_title_with_switch).createItem());
+
+		boolean selected = mapActivity.getMapLayers().getQuickActionRegistry().isQuickActionOn();
+		contextMenuAdapter.addItem(new ContextMenuItem.ItemBuilder()
+				.setTitleId(R.string.configure_screen_quick_action, mapActivity)
+				.setIcon(R.drawable.map_quick_action)
+				.setSelected(selected)
+				.setColor(selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
+				.setSecondaryIcon( R.drawable.ic_action_additional_option)
+				.setListener(new ContextMenuAdapter.OnRowItemClick() {
+					@Override
+					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int position, boolean isChecked) {
+						setVisibility(adapter, position, isChecked);
+						return false;
+					}
+
+					@Override
+					public boolean onRowItemClick(ArrayAdapter<ContextMenuItem> adapter, View view, int itemId, int position) {
+						int slideInAnim = R.anim.slide_in_bottom;
+						int slideOutAnim = R.anim.slide_out_bottom;
+
+						mapActivity.getSupportFragmentManager().beginTransaction()
+								.setCustomAnimations(slideInAnim, slideOutAnim, slideInAnim, slideOutAnim)
+								.add(R.id.fragmentContainer, new QuickActionListFragment(), QuickActionListFragment.TAG)
+								.addToBackStack(QuickActionListFragment.TAG).commitAllowingStateLoss();
+
+						return true;
+					}
+
+					private void setVisibility(ArrayAdapter<ContextMenuItem> adapter,
+											   int position,
+											   boolean visible) {
+
+						mapActivity.getMapLayers().getQuickActionRegistry().setQuickActionFabState(visible);
+
+						MapQuickActionLayer mil = mapActivity.getMapLayers().getMapQuickActionLayer();
+						if (mil != null) {
+							mil.refreshLayer();
+						}
+						ContextMenuItem item = adapter.getItem(position);
+						item.setSelected(visible);
+						item.setColorRes(visible ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
+						adapter.notifyDataSetChanged();
+
+					}
+				})
+				.createItem());
 	}
 
 	private void addControls(final MapActivity mapActivity, final ContextMenuAdapter contextMenuAdapter,
