@@ -2688,4 +2688,126 @@
 	<string name="poi_shoes_men">Pánska</string>
 	<string name="poi_shoes_orthopedic">Ortopedická</string>
 
+	<string name="poi_castle_type_stately">Typ hradu: zámok</string>
+	<string name="poi_castle_type_defensive">Typ hradu: hrad</string>
+	<string name="poi_castle_type_fortress">Typ hradu: pevnosť</string>
+	<string name="poi_castle_type_palace">Typ hradu: palác</string>
+	<string name="poi_castle_type_kremlin">Typ hradu: kremeľ</string>
+	<string name="poi_castle_type_defensive_stately">Typ hradu: hrad, zámok</string>
+	<string name="poi_castle_type_castrum">Typ hradu: castrum</string>
+	<string name="poi_castle_type_shiro">Typ hradu: shiro</string>
+
+	<string name="poi_power_supply_cee_17_blue">Typ el.zásuvky: CEE 17 modrá</string>
+	<string name="poi_power_supply_cee_7_4">Typ el.zásuvky: CEE 7/14</string>
+	<string name="poi_power_supply_cee_7_5">Typ el.zásuvky: CEE 7/5</string>
+	<string name="poi_power_supply_nema_5_15">Typ el.zásuvky: NEMA 5-15</string>
+
+	<string name="poi_capacity_tents">Kapacita na stany</string>
+	<string name="poi_capacity_caravans">Kapacita na karavany</string>
+	<string name="poi_dog_yes">Psy povolené</string>
+	<string name="poi_dog_no">Psy zakázané</string>
+
+	<string name="poi_refugee_yes">Zariadenia pre utečencov</string>
+	<string name="poi_refugee_no">Utečenci: nie</string>
+
+	<string name="poi_social_facility_workshop">Dielňa</string>
+	<string name="poi_social_facility_for_senior">Seniori</string>
+	<string name="poi_social_facility_for_child">Deti</string>
+	<string name="poi_social_facility_for_orphan">Siroty</string>
+	<string name="poi_social_facility_for_disabled">Invalidi</string>
+	<string name="poi_social_facility_for_mental_health">Pacienti s duševnými poruchami</string>
+	<string name="poi_social_facility_for_juvenile">Mladiství</string>
+	<string name="poi_social_facility_for_homeless">Bezdomovci</string>
+	<string name="poi_social_facility_for_migrant">Prisťahovalci</string>
+	<string name="poi_social_facility_for_underprivileged">Znevýhodnení</string>
+	<string name="poi_social_facility_for_drug_addicted">Drogovo závislí</string>
+	<string name="poi_social_facility_for_unemployed">Nezamestnaní</string>
+	<string name="poi_social_facility_for_diseased">Chorí</string>
+	<string name="poi_social_facility_for_child_juvenile">Deti a mladiství</string>
+
+	<string name="poi_theatre_genre_philharmonic">Filharmónia</string>
+	<string name="poi_theatre_genre_musical">Muzikál</string>
+	<string name="poi_theatre_genre_drama">Činohra</string>
+	<string name="poi_theatre_genre_opera">Opera</string>
+	<string name="poi_theatre_genre_cabaret">Kabaret</string>
+	<string name="poi_theatre_genre_puppet">Bábkové</string>
+	<string name="poi_theatre_genre_comedy">Komédie</string>
+	<string name="poi_theatre_genre_chamber_music">Komorná hudba</string>
+	<string name="poi_theatre_genre_marionette">Bábkové (marionety)</string>
+	<string name="poi_theatre_genre_ballet">Balet</string>
+	<string name="poi_theatre_genre_shadow_play">Tieňohra</string>
+
+	<string name="poi_bandstand">Hudobný altánok</string>
+	<string name="poi_product_brick">Produkt: tehly</string>
+	<string name="poi_product_quicklime">Produkt: pálené vápno</string>
+	<string name="poi_product_leather">Produkt: koža</string>
+	<string name="poi_product_lime">Produkt: vápno</string>
+	<string name="poi_product_beer">Produkt: pivo</string>
+	<string name="poi_product_charcoal">Produkt: drevné uhlie</string>
+	<string name="poi_product_meat">Produkt: mäso</string>
+
+	<string name="poi_wheelchair_description">Popis pre používateľov vozíkov</string>
+	<string name="poi_blind_description">Popis pre slepých</string>
+	<string name="poi_deaf_description">Popis pre hluchých</string>
+
+	<string name="poi_historic_civilization_ancient_roman">Civilizácia: staroveká rímska (753 p. n. l. - 284 n. l.)</string>
+	<string name="poi_historic_civilization_nuragic">Civilizácia: nuragická (18.st. p. n. l. - 2.st. n. l.)</string>
+	<string name="poi_historic_civilization_etruscan">Civilizácia: etruská (12. - 6.st. p. n. l.)</string>
+	<string name="poi_historic_civilization_prehistoric">Civilizácia: praveká</string>
+	<string name="poi_historic_civilization_ancient_greek">Civilizácia: staroveká grécka</string>
+	<string name="poi_historic_civilization_roman">Civilizácia: rímska</string>
+	<string name="poi_historic_civilization_byzantine">Civilizácia: byzantská (285 n. l. - 1453 n. l.)</string>
+	<string name="poi_historic_civilization_imperial_chinese">Civilizácia: čínska ríša (221 p. n. l. - 1911 n. l.)</string>
+	<string name="poi_historic_civilization_ancient_egyptian">Civilizácia: staroveká egyptská (do 332 p. n. l.)</string>
+	<string name="poi_historic_civilization_celtic">Civilizácia: keltská</string>
+	<string name="poi_historic_civilization_western_roman">Civilizácia: západorímska (285 n. l. - 476 n. l.)</string>
+	<string name="poi_historic_civilization_mycenaean">Civilizácia: mykénska</string>
+	<string name="poi_historic_civilization_dacian">Civilizácia: dácka</string>
+	<string name="poi_historic_civilization_hernici">Civilizácia: hernická</string>
+	<string name="poi_historic_civilization_greek_egyptian">Civilizácia: grécko-egyptská (332 p. n. l. - 30 p. n. l.)</string>
+	<string name="poi_historic_civilization_roman_and_byzantine_egyptian">Civilizácia: rímsko a byzantsko egyptská</string>
+	<string name="poi_historic_civilization_helladic">Civilizácia: heladská</string>
+	<string name="poi_historic_civilization_cycladic">Civilizácia: kykladská</string>
+	<string name="poi_historic_civilization_minoan">Civilizácia: minojská</string>
+	<string name="poi_historic_civilization_tiahuanacota">Civilizácia: tiahuanacká</string>
+
+	<string name="poi_historic_period_nuragic">Historické obdobie: nuragické</string>
+	<string name="poi_historic_period_stone_bronze_undetermined">Historické obdobie: doba kamenná / bronzová (neurčená)</string>
+	<string name="poi_historic_period_bronze_age">Historické obdobie: doba bronzová</string>
+	<string name="poi_historic_period_principate">Historické obdobie: principát (27 p. n. l. – 284 n. l.)</string>
+	<string name="poi_historic_period_classical_greece">Historické obdobie: klasické Grécko (5. – 4.st. p. n. l.)</string>
+	<string name="poi_historic_period_archaic_greece">Historické obdobie: archaické Grécko</string>
+	<string name="poi_historic_period_iron_age">Historické obdobie: doba železná</string>
+	<string name="poi_historic_period_roman_republic">Historické obdobie: Rímska republika (508 p. n. l. – 27 p. n. l.)</string>
+	<string name="poi_historic_period_hellenistic_greece">Historické obdobie: helenistické Grécko</string>
+	<string name="poi_historic_period_new_kingdom">Historické obdobie: nové kráľovstvo (1550 – 1069 p. n. l.)</string>
+	<string name="poi_historic_period_middle_kingdom">Historické obdobie: stredné kráľovstvo (2055 – 1650 p. n. l.)</string>
+	<string name="poi_historic_period_predynastic_egypt">Historické obdobie: preddynastický Egypt</string>
+	<string name="poi_historic_period_early_dynastic_period">Historické obdobie: obdobie rannej dynastie (3100 – 2686 p. n. l.)</string>
+	<string name="poi_historic_period_old_kingdom">Historické obdobie: staré kráľovstvo (2686 – 2181 p. n. l.)</string>
+	<string name="poi_historic_period_first_intermediate_period">Historické obdobie: prvé prechodné obdobie (2181 – 2055 p. n. l.)</string>
+	<string name="poi_historic_period_second_intermediate_period">Historické obdobie: druhé prechodné obdobie (1650 – 1550 p. n. l.)</string>
+	<string name="poi_historic_period_third_intermediate_period">"Historické obdobie: tretie prechodné obdobie (1069 – 664 p. n. l.) "</string>
+	<string name="poi_historic_period_first_persian_period">Historické obdobie: prvé perzské obdobie</string>
+	<string name="poi_historic_period_late_period">Historické obdobie: neskoré obdobie (664 – 332 p. n. l.)</string>
+	<string name="poi_historic_period_second_persian_period">Historické obdobie: druhé perzské obdobie</string>
+	<string name="poi_historic_period_alexander_the_great">Historické obdobie: Alexander Veľký</string>
+	<string name="poi_historic_period_ptolemaic_egypt">Historické obdobie: ptolemaiovský Egypt (305 – 30 p. n. l.)</string>
+	<string name="poi_historic_period_christian_egypt">Historické obdobie: kresťanský Egypt</string>
+	<string name="poi_historic_period_byzantine_egypt">Historické obdobie: byzantský Egypt (30 p. n. l. – 641 n. l.)</string>
+	<string name="poi_historic_period_persian_occupation">Historické obdobie: perzská okupácia</string>
+	<string name="poi_historic_period_greek_dark_ages">Historické obdobie: temné obdobie Grécka (1100 – 800 p. n. l.)</string>
+	<string name="poi_historic_period_roman_greece">Historické obdobie: rímske Grécko (146 p. n. l. – 330 n. l.)</string>
+	<string name="poi_historic_period_roman_kingdom">Historické obdobie: rímske kráľovstvo (753 – 509 p. n. l.)</string>
+	<string name="poi_historic_period_dominate">Historické obdobie: dominát (285 – 476 n. l.)</string>
+	<string name="poi_historic_period_villager">Historické obdobie: dedinské (epocha I, II, 1580 p. n. l. – 133 n. l.)</string>
+	<string name="poi_historic_period_urban">Historické obdobie: mestské (epocha III, 133 n. l. – 374 n. l.)</string>
+	<string name="poi_historic_period_classical">Historické obdobie: klasické (epocha IV, 374 n. l. – 900 n. l.)</string>
+	<string name="poi_historic_period_imperial">Historické obdobie: imperiálne (epocha V, 900 n. l. – 1200 n. l.)</string>
+
+	<string name="poi_historic_era_paleolithic">Historické obdobie: paleolit (2,6 milióna rokov – 10000 p. n. l.)</string>
+	<string name="poi_historic_era_mesolithic">Historické obdobie: mezolit</string>
+	<string name="poi_historic_era_neolithic">Historické obdobie: neolit</string>
+	<string name="poi_historic_era_chalcolithic">Historické obdobie: doba medená (IV.–III. tisícročie p. n. l.)</string>
+
 	</resources>
