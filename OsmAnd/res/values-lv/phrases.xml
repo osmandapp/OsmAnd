@@ -1478,4 +1478,33 @@
 	<string name="poi_aerialway_occupancy">Kabīņu, sēžvietu, mašīnas kapacitāte</string>
 	<string name="poi_aerialway_capacity">Apkalpošanas kapacitāte, stundā</string>
 	<string name="poi_aerialway_duration">Vidējais laiks ceļā, minūtēs</string>
+	<string name="poi_aerialway_bicycle_no">Aizliegts pārvadāt velosipēdus</string>
+	<string name="poi_aerialway_bicycle_summer">Atļauts tikai vasarā</string>
+	<string name="poi_aerialway_bicycle_yes">Atļauts pārvadāt velosipēdus</string>
+	<string name="poi_aerialway_access_entry">Tikai ieeja</string>
+	<string name="poi_aerialway_access_exit">Tikai izeja</string>
+	<string name="poi_aerialway_access_both">Ieeja un izeja</string>
+	<string name="poi_aerialway_summer_access_entry">Vasarā: tikai ieeja</string>
+	<string name="poi_aerialway_summer_access_exit">Vasarā: tikai izeja</string>
+	<string name="poi_aerialway_summer_access_both">Vasarā: ieeja un izeja</string>
+
+	<string name="poi_stars_1">1 (tūristu klase)</string>
+	<string name="poi_stars_1s">1S (tūristu klase ar priekšrocībām)</string>
+	<string name="poi_stars_2">2 (standarta klase)</string>
+	<string name="poi_stars_2s">2S (standarta klase ar priekšrocībām)</string>
+	<string name="poi_stars_3">3 (komforta klase)</string>
+	<string name="poi_stars_3s">3S (komforta klase ar priekšrocībām)</string>
+	<string name="poi_stars_4">4 (pirmā klase)</string>
+	<string name="poi_stars_4s">4S (pirmā klase ar priekšrocībām)</string>
+	<string name="poi_stars_5">5 (luksusa klase)</string>
+	<string name="poi_stars_5s">5S (luksusa klase+)</string>
+	<string name="poi_rooms">Numuru skaits</string>
+
+	<string name="poi_love_hotel">Love hotelis</string>
+
+	<string name="poi_payment_coins_yes">Monētas</string>
+	<string name="poi_payment_coins_no">Monētas nepieņem</string>
+	<string name="poi_payment_coins_0.5">$0.5 monētas</string>
+	<string name="poi_payment_coins_50c12">50c, 1€ un 2€ monētas</string>
+	<string name="poi_payment_telephone_cards_yes">Telefona kartes</string>
 	</resources>
