@@ -369,6 +369,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 		settings.setBuiltInZoomControls(true);
 		settings.setDisplayZoomControls(false);
 		settings.setSupportZoom(true);
+	        settings.setTextZoom(ctx.getResources().getDisplayMetrics().density);
 
 		wv.loadDataWithBaseURL(null, content, "text/html", "UTF-8", null);
 //		wv.loadUrl(OsMoService.SIGN_IN_URL + app.getSettings().OSMO_DEVICE_KEY.get());
@@ -392,9 +393,6 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 						if (!v.hasFocus()) {
 							v.requestFocus();
 						}
-						break;
-					case MotionEvent.ACTION_POINTER_DOWN:
-					        settings.setTextZoom( (int)(settings.getTextZoom() * 1.1) );
 						break;
 				}
 				return false;
