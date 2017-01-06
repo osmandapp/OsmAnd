@@ -1781,17 +1781,17 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="recalculate_route">إعادة حساب المسار</string>
     <string name="number_of_recipients">عدد المستلمين</string>
     <string name="osm_editors_ranking">ترتيب المحررين OSM</string>
-    <string name="osm_live_subscription">اشتراك OSM Live</string>
+    <string name="osm_live_subscription">إشتراك OSM مُباشر</string>
     <string name="osm_live_subscribe_btn">الاشتراك</string>
     <string name="osm_live_support_region">دعم المنطقة</string>
     <string name="osm_live_month_cost">تكلفة الشهر</string>
     <string name="osm_live_month_cost_desc">الدفع الشهري</string>
     <string name="osm_live_region_desc">سيتم إرسال جزء من التبرع إلى مستخدمي OSM الذين يقومون بإرسال التغييرات إلى الخريطة في تلك المنطقة</string>
-    <string name="osm_live_ask_for_purchase">يرجى شراء اشتراك OSM Live أولاً</string>
+    <string name="osm_live_ask_for_purchase">يرجى شراء اشتراك OSM مُباشر أولاً</string>
 
-    <string name="osm_live_header">يتيح هذا الاشتراك التحديثات كل ساعة لجميع خرائط حول العالم. 
-جزء من الدخل سيعود إلى مجتمع OSM ويدفع لكل مساهمة.
-إن كنت تحب OsmAnd و OSM وترغب في الدعم، هذه هي الطريقة المثلى للقيام بذلك.</string>
+    <string name="osm_live_header">يُتيحُ لك هذا الاشتراك الحصول على التحديثات كُلَّ ساعةٍ لجميع الخرائط حَوْلَ العالم. 
+جزءٌ من الدخل سيعود إلى مجتمع OSM ويُدفَع لكل مساهمة.
+إن كنت تحب OsmAnd و OSM وترغب في الدّعم، هذه هي الطريقة المُثلى للقيام بذلك.</string>
     
     <string name="map_markers_other">علامات أخرى</string>
     <string name="upload_anonymously">حمل بصفة مجهولة</string>
