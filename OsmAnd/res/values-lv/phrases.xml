@@ -1594,4 +1594,7 @@
 	<string name="poi_payment_ep_avant_yes">AvantCard kartes</string>
 	<string name="poi_payment_ep_avant_no">AvantCard kartes nepieņem</string>
 	<string name="poi_payment_ep_mep_yes">MEP maksājumi</string>
+	<string name="poi_payment_ep_mep_no">MEP maksājumus nepieņem</string>
+	<string name="poi_payment_ep_minipay_yes">Minipay maksājumi</string>
+	<string name="poi_payment_ep_minipay_no">Minipay maksājumus nepieņem</string>
 	</resources>
