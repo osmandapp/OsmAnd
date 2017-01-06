@@ -2234,4 +2234,28 @@
 	<string name="poi_wiki_lang_sc">Wiki sarde</string>
 	<string name="poi_wiki_lang_sh">Wiki serbo-croate</string>
 	<string name="poi_wiki_lang_sq">Wiki albanais</string>
+	<string name="poi_water_characteristic">Caractéristique de l’eau</string>
+	<string name="poi_tents">Tentes</string>
+	<string name="poi_aeroway_fuel">Station de carburant d’aéronefs</string>
+	<string name="poi_waterway_fuel">Station d’essence pour bateaux</string>
+	<string name="poi_ice_hockey">Hockey sur glace</string>
+	<string name="poi_wiki_lang_als">Wiki alsacien</string>
+	<string name="poi_wiki_lang_az">Wiki azéri</string>
+	<string name="poi_wiki_lang_bn">Wiki bengali</string>
+	<string name="poi_wiki_lang_cy">Wiki gallois</string>
+	<string name="poi_wiki_lang_ta">Wiki tamoul</string>
+	<string name="poi_wiki_lang_tl">Wiki philippin</string>
+	<string name="poi_wiki_lang_uz">Wiki ouzbek</string>
+	<string name="poi_wiki_lang_ur">Wiki ourdou</string>
+	<string name="poi_wiki_lang_oc">Wiki occitan</string>
+	<string name="poi_wiki_lang_mg">Wiki malgache</string>
+	<string name="poi_wiki_lang_jv">Wiki javanais</string>
+	<string name="poi_wiki_lang_zhyue">Wiki cantonais</string>
+	<string name="poi_wiki_lang_my">Wiki birman</string>
+	<string name="poi_wiki_lang_ne">Wiki népalais</string>
+	<string name="poi_wiki_lang_bar">Wiki bavarois</string>
+	<string name="poi_wiki_lang_mn">Wiki mongole</string>
+	<string name="poi_wheelchair_accessibility">Accessibilité aux fauteuils roulants</string>
+	<string name="poi_bicycle_parking_informal">Informel</string>
+
 	</resources>
