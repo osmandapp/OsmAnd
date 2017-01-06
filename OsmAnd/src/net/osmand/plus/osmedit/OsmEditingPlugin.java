@@ -180,10 +180,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 					editPoiDialogFragment.show(mapActivity.getSupportFragmentManager(),
 							EditPoiDialogFragment.TAG);
 				} else if (resId == R.string.context_menu_item_open_note) {
-					if (osmBugsLayer == null) {
-						registerLayers(mapActivity);
-					}
-					osmBugsLayer.openBug(latitude, longitude, "");
+					openOsmNote(mapActivity, latitude, longitude);
 				} else if (resId == R.string.poi_context_menu_delete) {
 					new EditPoiDialogFragment.ShowDeleteDialogAsyncTask(mapActivity)
 							.execute((Amenity) selectedObj);
@@ -226,6 +223,20 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.context_menu_item_open_note, mapActivity)
 				.setIcon(R.drawable.ic_action_bug_dark)
 				.setListener(listener).createItem());
+	}
+
+	public void openOsmNote(MapActivity mapActivity, double latitude, double longitude) {
+		if (osmBugsLayer == null) {
+            registerLayers(mapActivity);
+        }
+		osmBugsLayer.openBug(latitude, longitude, "");
+	}
+
+	public void openOsmNote(MapActivity mapActivity, double latitude, double longitude, String message, boolean autofill) {
+		if (osmBugsLayer == null) {
+			registerLayers(mapActivity);
+		}
+		osmBugsLayer.openBug(latitude, longitude, message, autofill);
 	}
 
 	@Override

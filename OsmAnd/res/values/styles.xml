@@ -130,6 +130,7 @@
 
         <item name="colorPrimary">@color/osmand_orange</item>
         <item name="colorPrimaryDark">@color/osmand_orange_dark</item>
+        <item name="colorAccent">@color/dashboard_blue</item>
 
         <item name="android:actionModeBackground">@color/actionbar_light_color</item>
         <item name="android:actionBarStyle">@style/Widget.Styled.ActionBarLight</item>
@@ -139,6 +140,7 @@
 
         <item name="dialog_inactive_text_color">@color/icon_color_light</item>
         <item name="secondary_icon_color">@color/icon_color_light</item>
+        <item name="primary_icon_color">@color/icon_color</item>
         <item name="appbar_layout_theme">@style/OsmandLightTheme.DarkActionbar</item>
         <item name="search_tabbar_layout_theme">@style/OsmandLightTheme.SearchTabbar</item>
         <item name="toolbar_theme">@style/OsmandLightTheme.Toolbar</item>
@@ -288,6 +290,7 @@
 
         <item name="dialog_inactive_text_color">@color/dialog_inactive_text_color_dark</item>
         <item name="secondary_icon_color">@color/dialog_inactive_text_color_dark</item>
+        <item name="primary_icon_color">@color/color_white</item>
         <item name="appbar_layout_theme">@style/OsmandDarkTheme.DarkActionbar</item>
         <item name="search_tabbar_layout_theme">@style/OsmandDarkTheme.SearchTabbar</item>
         <item name="toolbar_theme">@style/OsmandDarkTheme</item>
@@ -439,4 +442,28 @@
         <item name="android:background">@color/xmas_blue</item>
     </style>
 
+    <style name="Dialog90Light" parent="Base.Theme.AppCompat.Light.Dialog">
+
+        <item name="android:windowMinWidthMajor">90%</item>
+        <item name="android:windowMinWidthMinor">90%</item>
+
+        <item name="secondary_icon_color">@color/icon_color_light</item>
+        <item name="primary_icon_color">@color/icon_color</item>
+    </style>
+
+    <style name="Dialog90Dark" parent="Base.Theme.AppCompat.Dialog">
+
+        <item name="android:windowMinWidthMajor">90%</item>
+        <item name="android:windowMinWidthMinor">90%</item>
+
+        <item name="secondary_icon_color">@color/dialog_inactive_text_color_dark</item>
+        <item name="primary_icon_color">@color/color_white</item>
+    </style>
+
+    <style name="WhiteControls" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorControlNormal">@color/color_white</item>
+        <item name="colorControlActivated">@color/color_white</item>
+        <item name="colorControlHighlight">@color/color_white</item>
+
+    </style>
 </resources>

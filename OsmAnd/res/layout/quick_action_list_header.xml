@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="40dp"
+             android:paddingLeft="16dp"
+             android:paddingRight="16dp"
+             android:background="?attr/bg_color">
+
+    <TextView
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:textColor="?android:textColorSecondary"
+        android:textSize="@dimen/default_sub_text_size"
+        tools:text="Screen 1"/>
+
+</FrameLayout>

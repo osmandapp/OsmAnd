@@ -14,6 +14,8 @@ import android.os.Environment;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
+import android.support.v4.util.Pair;
+
 import net.osmand.IndexConstants;
 import net.osmand.StateChangedListener;
 import net.osmand.ValueHolder;
@@ -2441,6 +2443,47 @@ public class OsmandSettings {
 
 	public boolean moveImpassableRoad(LatLon latLonEx, LatLon latLonNew) {
 		return mImpassableRoadsStorage.movePoint(latLonEx, latLonNew);
+	}
+
+	/**
+	 * quick actions prefs
+	 */
+
+	public static final String QUICK_FAB_MARGIN_X_PORTRAIT_MARGIN = "quick_fab_margin_x_portrait_margin";
+	public static final String QUICK_FAB_MARGIN_Y_PORTRAIT_MARGIN = "quick_fab_margin_y_portrait_margin";
+	public static final String QUICK_FAB_MARGIN_X_LANDSCAPE_MARGIN = "quick_fab_margin_x_landscape_margin";
+	public static final String QUICK_FAB_MARGIN_Y_LANDSCAPE_MARGIN = "quick_fab_margin_y_landscape_margin";
+
+	public final CommonPreference<String> QUICK_ACTION = new StringPreference("quick_action_new", "").makeGlobal();
+
+	public final CommonPreference<String> QUICK_ACTION_LIST = new StringPreference("quick_action_list", "").makeGlobal();
+
+	public final CommonPreference<Boolean> IS_QUICK_ACTION_TUTORIAL_SHOWN = new BooleanPreference("quick_action_tutorial", false).makeGlobal();
+
+	public boolean setPortraitFabMargin(int x, int y) {
+		return settingsAPI.edit(globalPreferences).putInt(QUICK_FAB_MARGIN_X_PORTRAIT_MARGIN, x)
+				.putInt(QUICK_FAB_MARGIN_Y_PORTRAIT_MARGIN, y).commit();
+	}
+
+	public boolean setLandscapeFabMargin(int x, int y) {
+		return settingsAPI.edit(globalPreferences).putInt(QUICK_FAB_MARGIN_X_LANDSCAPE_MARGIN, x)
+				.putInt(QUICK_FAB_MARGIN_Y_LANDSCAPE_MARGIN, y).commit();
+	}
+
+	public Pair<Integer, Integer> getPortraitFabMargin() {
+		if (settingsAPI.contains(globalPreferences, QUICK_FAB_MARGIN_X_PORTRAIT_MARGIN) && settingsAPI.contains(globalPreferences, QUICK_FAB_MARGIN_Y_PORTRAIT_MARGIN)) {
+			return new Pair<>(settingsAPI.getInt(globalPreferences, QUICK_FAB_MARGIN_X_PORTRAIT_MARGIN, 0),
+					settingsAPI.getInt(globalPreferences, QUICK_FAB_MARGIN_Y_PORTRAIT_MARGIN, 0));
+		}
+		return null;
+	}
+
+	public Pair<Integer, Integer> getLandscapeFabMargin() {
+		if (settingsAPI.contains(globalPreferences, QUICK_FAB_MARGIN_X_LANDSCAPE_MARGIN) && settingsAPI.contains(globalPreferences, QUICK_FAB_MARGIN_Y_LANDSCAPE_MARGIN)) {
+			return new Pair<>(settingsAPI.getInt(globalPreferences, QUICK_FAB_MARGIN_X_LANDSCAPE_MARGIN, 0),
+					settingsAPI.getInt(globalPreferences, QUICK_FAB_MARGIN_Y_LANDSCAPE_MARGIN, 0));
+		}
+		return null;
 	}
 
 	/**

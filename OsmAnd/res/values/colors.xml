@@ -99,6 +99,7 @@
 
 	<color name="icon_color">#727272</color>
 	<color name="icon_color_light">#ccc</color>
+	<color name="icon_color_dark">#ff4f4f4f</color>
 
 	<color name="on_map_icon_color">#505050</color>
 

@@ -238,7 +238,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 	 * Method dialog for adding of a parking location.
 	 * It allows user to choose a type of parking (time-limited or time-unlimited).
 	 */
-	private void showAddParkingDialog(final MapActivity mapActivity, final double latitude, final double longitude) {
+	public void showAddParkingDialog(final MapActivity mapActivity, final double latitude, final double longitude) {
 		final boolean wasEventPreviouslyAdded = isParkingEventAdded();
 		final View addParking = mapActivity.getLayoutInflater().inflate(R.layout.parking_set_type, null);
 		final Dialog choose = new Dialog(mapActivity);

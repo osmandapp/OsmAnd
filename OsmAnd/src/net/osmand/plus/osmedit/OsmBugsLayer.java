@@ -369,6 +369,16 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 		showBugDialog(bug, Action.CREATE, message);
 	}
 
+	public void openBug(final double latitude, final double longitude, String message, boolean autofill) {
+		OpenStreetNote bug = new OpenStreetNote();
+		bug.setLatitude(latitude);
+		bug.setLongitude(longitude);
+
+		if (autofill) asyncActionTask(bug, message, Action.CREATE);
+		else showBugDialog(bug, Action.CREATE, message);
+	}
+
+
 	public void closeBug(final OpenStreetNote bug, String txt) {
 		showBugDialog(bug, Action.DELETE, txt);
 	}

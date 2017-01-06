@@ -6,6 +6,8 @@ import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.view.View;
 
 import net.osmand.data.LatLon;
 import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
@@ -31,6 +33,7 @@ public class WptPtEditorFragment extends PointEditorFragment {
 
 	private boolean saved;
 	private int color;
+	private boolean skipDialog;
 
 	@Override
 	public void onAttach(Activity activity) {
@@ -45,8 +48,22 @@ public class WptPtEditorFragment extends PointEditorFragment {
 		super.onCreate(savedInstanceState);
 
 		wpt = editor.getWptPt();
-		int defaultColor = getResources().getColor(R.color.gpx_color_point);
-		color = wpt.getColor(defaultColor);
+
+		FavoriteGroup group = getMyApplication().getFavorites().getGroup(wpt.category);
+
+		if (group == null) {
+
+			int defaultColor = getResources().getColor(R.color.gpx_color_point);
+			color = wpt.getColor(defaultColor);
+
+		} else color = group.color;
+	}
+
+	@Override
+	public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+		super.onViewCreated(view, savedInstanceState);
+
+		if (skipDialog) save(true);
 	}
 
 	@Override
@@ -75,6 +92,20 @@ public class WptPtEditorFragment extends PointEditorFragment {
 				.addToBackStack(null).commit();
 	}
 
+	public static void showInstance(final MapActivity mapActivity, boolean skipDialog) {
+		WptPtEditor editor = mapActivity.getContextMenu().getWptPtPointEditor();
+		//int slideInAnim = editor.getSlideInAnimation();
+		//int slideOutAnim = editor.getSlideOutAnimation();
+
+		WptPtEditorFragment fragment = new WptPtEditorFragment();
+		fragment.skipDialog = skipDialog;
+
+		mapActivity.getSupportFragmentManager().beginTransaction()
+				//.setCustomAnimations(slideInAnim, slideOutAnim, slideInAnim, slideOutAnim)
+				.add(R.id.fragmentContainer, fragment, editor.getFragmentTag())
+				.addToBackStack(null).commit();
+	}
+
 	@Override
 	protected boolean wasSaved() {
 		return saved;
@@ -96,9 +127,14 @@ public class WptPtEditorFragment extends PointEditorFragment {
 		}
 
 		MapContextMenu menu = getMapActivity().getContextMenu();
-		LatLon latLon = new LatLon(wpt.getLatitude(), wpt.getLongitude());
-		if (menu.getLatLon().equals(latLon)) {
-			menu.update(latLon, wpt.getPointDescription(getMapActivity()), wpt);
+
+		if (menu.getLatLon() != null) {
+
+			LatLon latLon = new LatLon(wpt.getLatitude(), wpt.getLongitude());
+
+			if (menu.getLatLon().equals(latLon)) {
+				menu.update(latLon, wpt.getPointDescription(getMapActivity()), wpt);
+			}
 		}
 
 		saved = true;

@@ -478,7 +478,7 @@ public class FavouritesDbHelper {
 
 	
 	
-	private void recalculateCachedFavPoints(){
+	public void recalculateCachedFavPoints(){
 		ArrayList<FavouritePoint> temp = new ArrayList<FavouritePoint>();
 		for(FavoriteGroup f : favoriteGroups){
 			temp.addAll(f.points);

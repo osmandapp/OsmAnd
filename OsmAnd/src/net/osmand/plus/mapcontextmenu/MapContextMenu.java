@@ -587,6 +587,8 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 	public void onSingleTapOnMap() {
 		if (menuController == null || !menuController.handleSingleTapOnMap()) {
 			hide();
+			if (mapActivity.getMapLayers().getMapQuickActionLayer().isLayerOn())
+				mapActivity.getMapLayers().getMapQuickActionLayer().refreshLayer();
 		}
 	}
 
@@ -670,6 +672,8 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		}
 		close();
 	}
+
+
 
 	public void buttonFavoritePressed() {
 		if (object != null && object instanceof FavouritePoint) {
@@ -758,10 +762,42 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		}
 	}
 
+	public void addWptPt(LatLon latLon, String  title, String categoryName, int categoryColor, boolean skipDialog){
+
+		final List<SelectedGpxFile> list
+				= mapActivity.getMyApplication().getSelectedGpxHelper().getSelectedGPXFiles();
+		if (list.isEmpty() || (list.size() == 1 && list.get(0).getGpxFile().showCurrentTrack)) {
+			GPXFile gpxFile = mapActivity.getMyApplication().getSavingTrackHelper().getCurrentGpx();
+			getWptPtPointEditor().add(gpxFile, latLon, title, categoryName, categoryColor, skipDialog);
+		} else {
+			addNewWptToGPXFile(latLon, title, categoryName, categoryColor, skipDialog);
+		}
+	}
+
 	public void editWptPt() {
 		if (object != null && object instanceof WptPt) {
 			getWptPtPointEditor().edit((WptPt) object);
 		}
+	}
+
+	public AlertDialog addNewWptToGPXFile(final LatLon latLon, final String  title,
+										  final String categoryName,
+										  final int categoryColor, final boolean skipDialog) {
+		CallbackWithObject<GPXFile[]> callbackWithObject = new CallbackWithObject<GPXFile[]>() {
+			@Override
+			public boolean processResult(GPXFile[] result) {
+				GPXFile gpxFile;
+				if (result != null && result.length > 0) {
+					gpxFile = result[0];
+				} else {
+					gpxFile = mapActivity.getMyApplication().getSavingTrackHelper().getCurrentGpx();
+				}
+				getWptPtPointEditor().add(gpxFile, latLon, title, categoryName, categoryColor, skipDialog);
+				return true;
+			}
+		};
+
+		return GpxUiHelper.selectSingleGPXFile(mapActivity, true, callbackWithObject);
 	}
 
 	public AlertDialog addNewWptToGPXFile(final String title) {

@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:osmand="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:theme="?attr/new_app_theme">
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:background="?attr/bg_color"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:padding="16dp"
+                android:text="@string/quick_action_add_poi_dialog"
+                android:textColor="?android:textColorPrimary"
+                android:textSize="@dimen/default_list_text_size"/>
+
+            <android.support.v7.widget.SwitchCompat
+                android:id="@+id/saveButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"/>
+
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:scaleType="fitXY"
+            android:src="@drawable/bg_shadow_list_bottom"/>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:layout_marginTop="16dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/bg_shadow_list_top"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/bg_color"
+            android:paddingTop="16dp"
+            android:paddingBottom="8dp"
+            osmand:layout_scrollFlags="scroll">
+            <!--android:layout_marginLeft="72dp"-->
+
+            <!--<ImageButton-->
+                <!--android:id="@+id/poiTypeButton"-->
+                <!--android:contentDescription="@string/poi_dialog_poi_type"-->
+                <!--android:layout_width="48dp"-->
+                <!--android:layout_height="48dp"-->
+                <!--android:layout_gravity="bottom"-->
+                <!--android:background="@null"-->
+                <!--android:src="@drawable/ic_action_label"/>-->
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/poiTypeTextInputLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_weight="1">
+
+                <AutoCompleteTextView
+                    android:id="@+id/poiTypeEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:completionThreshold="1"
+                    android:drawableTint="@color/osmand_orange"
+                    android:drawableRight="@drawable/ic_action_arrow_drop_down"
+                    android:hint="@string/poi_dialog_poi_type"
+                    android:imeOptions="actionSend"
+                    android:inputType="text"
+                    android:layout_marginLeft="-4dp"
+                    tools:text="@string/lorem_ipsum"/>
+
+            </android.support.design.widget.TextInputLayout>
+
+            <ImageButton
+                android:id="@+id/onlineDocumentationButton"
+                android:contentDescription="@string/shared_string_help"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_gravity="bottom"
+                android:background="@null"
+                android:src="@drawable/ic_action_help"/>
+        </LinearLayout>
+
+        <!--<ImageView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="top"-->
+            <!--android:scaleType="fitXY"-->
+            <!--android:src="@drawable/bg_shadow_list_bottom"/>-->
+
+        <!--<ImageView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="top"-->
+            <!--android:layout_marginTop="16dp"-->
+            <!--android:scaleType="fitXY"-->
+            <!--android:src="@drawable/bg_shadow_list_top"/>-->
+
+        <LinearLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/bg_color"
+            android:paddingBottom="16dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/editTagsList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:saveEnabled="false"/>
+
+            <net.osmand.plus.widgets.ButtonEx
+                android:id="@+id/addTagButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/bg_orange_rounded_coners"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:text="@string/add_tag"
+                android:textColor="@color/color_white"
+                android:textSize="@dimen/default_sub_text_size"
+                osmand:typeface="@string/font_roboto_medium"/>
+
+            <!--<net.osmand.plus.widgets.ButtonEx-->
+                <!--android:id="@+id/addTypeButton"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginLeft="16dp"-->
+                <!--android:layout_marginTop="16dp"-->
+                <!--android:background="@drawable/bg_orange_rounded_coners"-->
+                <!--android:paddingLeft="16dp"-->
+                <!--android:paddingRight="16dp"-->
+                <!--android:text="Add type test"-->
+                <!--android:textColor="@color/color_white"-->
+                <!--android:textSize="@dimen/default_sub_text_size"-->
+                <!--osmand:typeface="@string/font_roboto_medium"/>-->
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:scaleType="fitXY"
+            android:src="@drawable/bg_shadow_list_bottom" />
+
+    </LinearLayout>
+</android.support.v4.widget.NestedScrollView>

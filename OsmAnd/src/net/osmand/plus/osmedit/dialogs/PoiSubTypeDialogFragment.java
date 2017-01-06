@@ -1,13 +1,5 @@
 package net.osmand.plus.osmedit.dialogs;
 
-import java.util.Set;
-import java.util.TreeSet;
-
-import net.osmand.osm.MapPoiTypes;
-import net.osmand.osm.PoiCategory;
-import net.osmand.osm.PoiType;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.osmedit.EditPoiDialogFragment;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -15,8 +7,17 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 
+import net.osmand.osm.MapPoiTypes;
+import net.osmand.osm.PoiCategory;
+import net.osmand.osm.PoiType;
+import net.osmand.plus.OsmandApplication;
+
+import java.util.Set;
+import java.util.TreeSet;
+
 public class PoiSubTypeDialogFragment extends DialogFragment {
 	private static final String KEY_POI_CATEGORY = "amenity";
+	private OnItemSelectListener onItemSelectListener;
 
 	@NonNull
 	@Override
@@ -38,7 +39,7 @@ public class PoiSubTypeDialogFragment extends DialogFragment {
 		builder.setItems(subCats, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				((EditPoiDialogFragment) getParentFragment()).setSubCategory(subCats[which]);
+				onItemSelectListener.select(subCats[which]);
 				dismiss();
 			}
 		});
@@ -59,5 +60,13 @@ public class PoiSubTypeDialogFragment extends DialogFragment {
 		args.putSerializable(KEY_POI_CATEGORY, cat.getKeyName());
 		fragment.setArguments(args);
 		return fragment;
+	}
+
+	public void setOnItemSelectListener(OnItemSelectListener onItemSelectListener) {
+		this.onItemSelectListener = onItemSelectListener;
+	}
+
+	public interface OnItemSelectListener {
+		void select(String category);
 	}
 }
