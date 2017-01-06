@@ -2029,7 +2029,7 @@ En activar aquests canvis de visualització l\'estil del mapa canvia a «Hivern 
     <string name="application_dir_description">Trieu on voleu desar els fitxers de mapes i d\'altres dades.</string>
     <string name="shared_string_qr_code">Codi QR</string>
     <string name="map_downloaded">Mapa baixat</string>
-    <string name="map_downloaded_descr">S\'ha baixat el mapa de %1$s. Torneu al mapa per començar a utilitzar-lo.</string>
+    <string name="map_downloaded_descr">S\'ha baixat el mapa de %1$s, ja el podeu començar a utilitzar.</string>
     <string name="go_to_map">Vés al mapa</string>
     <string name="world_map_download_descr">El mapa base mundial (d\'abast mundial però amb poc detall) no es troba o està caducat. Considereu baixar-lo per una tenir una perspectiva global.</string>
     <string name="show_on_start_description">Si es desactiva s\'engega amb la pantalla del mapa</string>
@@ -2422,7 +2422,7 @@ Si aprecieu OsmAnd  i OSM i voleu ajudar-los, és la via perfecta per fer-ho."</
     <string name="replace_favorite_confirmation">Confirmeu que voleu substituir la preferència %1$s?</string>
     <string name="update_all_maps_now">Voleu actualitzar tots els mapes ara mateix?</string>
     <string name="clear_tile_data">Esborra totes les tessel·les</string>
-    <string name="search_map">Cercant mapa…</string>
+    <string name="search_map">Cercant mapes…</string>
     <string name="first_usage_wizard_desc">"Permeteu a OsmAnd determinar la vostra localització i suggerir-vos els  mapes a baixar d\'aquesta zona."</string>
     <string name="location_not_found">No s\'ha determinat la localització</string>
     <string name="no_inet_connection">Sense connexió a Internet</string>
