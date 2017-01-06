@@ -2821,4 +2821,42 @@
 	<string name="poi_site_type_necropolis">Pohrebisko</string>
 	<string name="poi_site_type_petroglyph">Petroglyf</string>
 	<string name="poi_site_type_earthwork">Zemné práce</string>
+	<string name="poi_megalith_type_menhir">Typ megalitu: menhir</string>
+	<string name="poi_megalith_type_dolmen">Typ megalitu: dolmen</string>
+	<string name="poi_megalith_type_nuraghe">Typ megalitu: nurag</string>
+	<string name="poi_megalith_type_stone_circle">Typ megalitu: kamenný kruh</string>
+	<string name="poi_megalith_type_passage_grave">Typ megalitu: chodbový hrob</string>
+	<string name="poi_fortification_type_hill_fort">Typ opevnenia: hradisko</string>
+	<string name="poi_fortification_type_limes">Typ opevnenia: rímske hradby limes</string>
+	<string name="poi_fortification_type_sconce">Typ opevnenia: obranný násyp</string>
+	<string name="poi_fortification_type_ring_ditch">Typ opevnenia: obvodová priekopa</string>
+
+	<string name="poi_hackerspace">Hackerspace</string>
+
+
+	<string name="poi_billiards">Biliard</string>
+
+	<string name="poi_microwave_oven_no">Mikrovlnka: nie</string>
+	<string name="poi_water_heater_no">Ohrievač vody: nie</string>
+
+	<string name="poi_parking_garage_boxes">Garážové boxy</string>
+	<string name="poi_parking_carports"/>
+
+	<string name="poi_netball">Netball</string>
+	<string name="poi_disc_golf">Diskový golf</string>
+	<string name="poi_shuffleboard">Shuffleboard</string>
+	<string name="poi_forestry_compartment">Rázcestník: lesnícky pozemok</string>
+	<string name="poi_forestry_allotment">Rázcestník: lesnícka parcela</string>
+	<string name="poi_inscription_n">Nápis: S</string>
+	<string name="poi_inscription_nw">Nápis: SZ</string>
+	<string name="poi_inscription_w">Nápis: Z</string>
+	<string name="poi_inscription_sw">Nápis: JZ</string>
+	<string name="poi_inscription_s">Nápis: J</string>
+	<string name="poi_inscription_se">Nápis: JV</string>
+	<string name="poi_inscription_e">Nápis: V</string>
+	<string name="poi_inscription_ne">Nápis: SV</string>
+
+	<string name="poi_construction_yes">Vo výstavbe</string>
+	<string name="poi_street_cabinet">Rozvodná skriňa</string>
+
 	</resources>
