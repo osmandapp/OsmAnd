@@ -15,6 +15,9 @@ public class ExpandableLinearLayout extends LinearLayout {
 		if(attrs != null) {
 			TypedArray ar = context.obtainStyledAttributes(attrs, R.styleable.ExpandableView);
 			maxWidth = ar.getDimension(R.styleable.ExpandableView_maxVisibleWidth, 0);
+			if (ar != null) {
+				ar.recycle();
+			}
 		}
 	}
 	
