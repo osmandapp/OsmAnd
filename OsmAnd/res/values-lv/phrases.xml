@@ -1426,4 +1426,56 @@
 
 	<string name="poi_mini_roundabout">Mini aplis</string>
 	<string name="poi_railway_crossing">Dzelzceļa pārbrauktuve</string>
+	<string name="poi_railway_level_crossing">Sliežu pārbrauktuve</string>
+	<string name="poi_bird_hide">Putnu novērošanas vieta</string>
+	<string name="poi_horse_riding">Zirgu izjāde</string>
+	<string name="poi_leisure_common">Kopīgs atpūtas laukums</string>
+	<string name="poi_garden">Dārzs</string>
+
+	<string name="poi_heath">Neapkopta zeme</string>
+	<string name="poi_grass">Mauriņš</string>
+	<string name="poi_grassland">Pļava</string>
+	<string name="poi_scrub">Krūmājs</string>
+	<string name="poi_farmland">Lauksaimniecības zeme</string>
+	<string name="poi_logging">Mežizstrāde</string>
+	<string name="poi_sand">Smiltis</string>
+
+	<string name="poi_windfall">Vējkritis</string>
+	<string name="poi_passing_place">Kabatiņa</string>
+	<string name="poi_level">Stāvs</string>
+	<string name="poi_rtsa_scale">RTSA skala</string>
+
+	<string name="poi_piste_difficulty_easy">Viegli</string>
+	<string name="poi_piste_difficulty_intermediate">Vidēji</string>
+	<string name="poi_piste_difficulty_advanced">Grūti</string>
+	<string name="poi_piste_difficulty_novice">Iesācējs</string>
+	<string name="poi_piste_difficulty_expert">Eksperts</string>
+	<string name="poi_piste_grooming_scooter">Skūteris</string>
+	<string name="poi_garden_type_residential">Dārza tips: piemājas</string>
+	<string name="poi_garden_type_community">Dārza tips: kopējais</string>
+	<string name="poi_garden_type_private">Dārza tips: privātais</string>
+	<string name="poi_garden_type_botanical">Dārza tips: botāniskais</string>
+
+	<string name="poi_garden_style_kitchen">Dārza stils: virtuves</string>
+	<string name="poi_garden_style_rosarium">Dārza stils: rožu</string>
+	<string name="poi_garden_style_french">Dārza stils: franču</string>
+	<string name="poi_garden_style_english">Dārza stils: angļu</string>
+	<string name="poi_garden_style_japanese">Dārza stils: japāņu</string>
+
+	<string name="poi_capacity">Ietilpība</string>
+	<string name="poi_capacity_disabled_yes">Jā</string>
+	<string name="poi_capacity_disabled_no">Nav atsevišķu vietu invalīdiem</string>
+	<string name="poi_capacity_disabled">Vieta invalīdiem</string>
+	<string name="poi_capacity_women_yes">Ir atsevišķa vieta sievietēm</string>
+	<string name="poi_capacity_women_no">Nav atsevišķu vietu sievietēm</string>
+	<string name="poi_capacity_women">Atsevišķa vieta sievietēm</string>
+	<string name="poi_capacity_pupils">Atsevišķa vieta studentiem</string>
+	<string name="poi_capacity_teachers">Atsevišķa vieta skolotājiem</string>
+	<string name="poi_capacity_parent_yes">Ir atsevišķa vieta vecākiem</string>
+	<string name="poi_capacity_parent_no">Nav atsevišķu vietu vecākiem</string>
+	<string name="poi_capacity_parent">Atsevišķa vieta vecākiem</string>
+
+	<string name="poi_aerialway_occupancy">Kabīņu, sēžvietu, mašīnas kapacitāte</string>
+	<string name="poi_aerialway_capacity">Apkalpošanas kapacitāte, stundā</string>
+	<string name="poi_aerialway_duration">Vidējais laiks ceļā, minūtēs</string>
 	</resources>
