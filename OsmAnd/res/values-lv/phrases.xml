@@ -1597,4 +1597,9 @@
 	<string name="poi_payment_ep_mep_no">MEP maksājumus nepieņem</string>
 	<string name="poi_payment_ep_minipay_yes">Minipay maksājumi</string>
 	<string name="poi_payment_ep_minipay_no">Minipay maksājumus nepieņem</string>
+	<string name="poi_payment_ep_minicash_yes">MiniCash maksājumi</string>
+	<string name="poi_payment_ep_minicash_no">MiniCash maksājumus nepieņem</string>
+	<string name="poi_payment_ep_moneo_yes">Moneo maksājumi</string>
+	<string name="poi_payment_ep_moneo_no">Moneo maksājumus nepieņem</string>
+	<string name="poi_payment_ep_monedero4b_yes">Monedero 4B maksājumi</string>
 	</resources>
