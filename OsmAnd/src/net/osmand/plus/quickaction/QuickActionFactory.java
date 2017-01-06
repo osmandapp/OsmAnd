@@ -6,6 +6,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.DrawableRes;
 import android.support.annotation.StringRes;
 import android.support.v4.view.MotionEventCompat;
 import android.support.v7.app.AlertDialog;
@@ -92,53 +93,6 @@ public class QuickActionFactory {
         ArrayList<QuickAction> quickActions = new Gson().fromJson(json, type);
 
         return quickActions != null ? quickActions : new ArrayList<QuickAction>();
-    }
-
-    public List<QuickAction> parseAndFilterActiveActionsList(String json) {
-
-        Type type = new TypeToken<List<QuickAction>>() {
-        }.getType();
-        ArrayList<QuickAction> quickActions = new Gson().fromJson(json, type);
-
-        return quickActions != null ? quickActions : new ArrayList<QuickAction>();
-    }
-
-    public static List<QuickAction> produceTypeActionsListWithHeaders() {
-
-        ArrayList<QuickAction> quickActions = new ArrayList<>();
-
-        quickActions.add(new QuickAction(0, R.string.quick_action_add_create_items));
-        quickActions.add(new FavoriteAction());
-        quickActions.add(new GPXAction());
-        quickActions.add(new MarkerAction());
-
-        if (OsmandPlugin.getEnabledPlugin(AudioVideoNotesPlugin.class) != null) {
-
-            quickActions.add(new TakeAudioNoteAction());
-            quickActions.add(new TakePhotoNoteAction());
-            quickActions.add(new TakeVideoNoteAction());
-        }
-
-        if (OsmandPlugin.getEnabledPlugin(OsmEditingPlugin.class) != null) {
-
-            quickActions.add(new AddPOIAction());
-            quickActions.add(new AddOSMBugAction());
-        }
-
-        if (OsmandPlugin.getEnabledPlugin(ParkingPositionPlugin.class) != null) {
-
-            quickActions.add(new ParkingAction());
-        }
-
-        quickActions.add(new QuickAction(0, R.string.quick_action_add_configure_map));
-        quickActions.add(new MapStyleAction());
-        quickActions.add(new ShowHideFavoritesAction());
-        quickActions.add(new ShowHidePoiAction());
-
-        quickActions.add(new QuickAction(0, R.string.quick_action_add_navigation));
-        quickActions.add(new NavigationVoiceAction());
-
-        return quickActions;
     }
 
     public static List<QuickAction> produceTypeActionsListWithHeaders(List<QuickAction> active) {
@@ -313,15 +267,130 @@ public class QuickActionFactory {
         }
     }
 
+    public static @DrawableRes int getActionIcon(int type) {
+
+        switch (type) {
+
+            case NewAction.TYPE:
+                return R.drawable.ic_action_plus;
+
+            case MarkerAction.TYPE:
+                return R.drawable.ic_action_flag_dark;
+
+            case FavoriteAction.TYPE:
+                return R.drawable.ic_action_fav_dark;
+
+            case ShowHideFavoritesAction.TYPE:
+                return R.drawable.ic_action_fav_dark;
+
+            case ShowHidePoiAction.TYPE:
+                return R.drawable.ic_action_gabout_dark;
+
+            case GPXAction.TYPE:
+                return R.drawable.ic_action_flag_dark;
+
+            case ParkingAction.TYPE:
+                return R.drawable.ic_action_parking_dark;
+
+            case TakeAudioNoteAction.TYPE:
+                return R.drawable.ic_action_micro_dark;
+
+            case TakePhotoNoteAction.TYPE:
+                return R.drawable.ic_action_photo_dark;
+
+            case TakeVideoNoteAction.TYPE:
+                return R.drawable.ic_action_video_dark;
+
+            case NavigationVoiceAction.TYPE:
+                return R.drawable.ic_action_volume_up;
+
+            case AddOSMBugAction.TYPE:
+                return R.drawable.ic_action_bug_dark;
+
+            case AddPOIAction.TYPE:
+                return R.drawable.ic_action_gabout_dark;
+
+            case MapStyleAction.TYPE:
+                return R.drawable.ic_map;
+
+            case MapSourceAction.TYPE:
+                return R.drawable.ic_map;
+
+            case MapOverlayAction.TYPE:
+                return R.drawable.ic_layer_top_dark;
+
+            case MapUnderlayAction.TYPE:
+                return R.drawable.ic_layer_bottom_dark;
+
+            default: return R.drawable.ic_action_plus;
+        }
+    }
+
+    public static @StringRes int getActionName(int type) {
+
+        switch (type) {
+
+            case NewAction.TYPE:
+                return R.string.quick_action_new_action;
+
+            case MarkerAction.TYPE:
+                return R.string.quick_action_add_marker;
+
+            case FavoriteAction.TYPE:
+                return R.string.quick_action_add_favorite;
+
+            case ShowHideFavoritesAction.TYPE:
+                return R.string.quick_action_showhide_favorites_title;
+
+            case ShowHidePoiAction.TYPE:
+                return R.string.quick_action_showhide_poi_title;
+
+            case GPXAction.TYPE:
+                return R.string.quick_action_add_gpx;
+
+            case ParkingAction.TYPE:
+                return R.string.quick_action_add_parking;
+
+            case TakeAudioNoteAction.TYPE:
+                return R.string.quick_action_take_audio_note;
+
+            case TakePhotoNoteAction.TYPE:
+                return R.string.quick_action_take_photo_note;
+
+            case TakeVideoNoteAction.TYPE:
+                return R.string.quick_action_take_video_note;
+
+            case NavigationVoiceAction.TYPE:
+                return R.string.quick_action_navigation_voice;
+
+            case AddOSMBugAction.TYPE:
+                return R.string.quick_action_add_osm_bug;
+
+            case AddPOIAction.TYPE:
+                return R.string.quick_action_add_poi;
+
+            case MapStyleAction.TYPE:
+                return R.string.quick_action_map_style;
+
+            case MapSourceAction.TYPE:
+                return R.string.quick_action_map_source;
+
+            case MapOverlayAction.TYPE:
+                return R.string.quick_action_map_overlay;
+
+            case MapUnderlayAction.TYPE:
+                return R.string.quick_action_map_underlay;
+
+            default: return R.string.quick_action_new_action;
+        }
+    }
+
     public static class NewAction extends QuickAction {
 
         public static final int TYPE = 1;
 
         protected NewAction() {
-            id = System.currentTimeMillis();
-            type = TYPE;
-            nameRes = R.string.quick_action_new_action;
-            iconRes = R.drawable.ic_action_plus;
+            super(TYPE);
         }
 
         public NewAction(QuickAction quickAction) {
@@ -338,7 +407,6 @@ public class QuickActionFactory {
         @Override
         public void drawUI(ViewGroup parent, MapActivity activity) {
 
-            //TODO inflate view & fill with params
         }
     }
 
@@ -347,10 +415,7 @@ public class QuickActionFactory {
         public static final int TYPE = 2;
 
         private MarkerAction() {
-            id = System.currentTimeMillis();
-            type = TYPE;
-            nameRes = R.string.quick_action_add_marker;
-            iconRes = R.drawable.ic_action_flag_dark;
+            super(TYPE);
         }
 
         public MarkerAction(QuickAction quickAction) {
@@ -400,10 +465,7 @@ public class QuickActionFactory {
         public static final String KEY_CATEGORY_COLOR = "category_color";
 
         private FavoriteAction() {
-            id = System.currentTimeMillis();
-            type = TYPE;
-            nameRes = R.string.quick_action_add_favorite;
-            iconRes = R.drawable.ic_action_fav_dark;
+            super(TYPE);
         }
 
         public FavoriteAction(QuickAction quickAction) {
@@ -584,10 +646,7 @@ public class QuickActionFactory {
         public static final int TYPE = 4;
 
         protected ShowHideFavoritesAction() {
-            id = System.currentTimeMillis();
-            type = TYPE;
-            nameRes = R.string.quick_action_showhide_favorites_title;
-            iconRes = R.drawable.ic_action_fav_dark;
+            super(TYPE);
             autogeneratedTitle = true;
         }
 
@@ -640,10 +699,7 @@ public class QuickActionFactory {
         private transient EditText title;
 
         protected ShowHidePoiAction() {
-            id = System.currentTimeMillis();
-            type = TYPE;
-            nameRes = R.string.quick_action_showhide_poi_title;
-            iconRes = R.drawable.ic_action_gabout_dark;
+            super(TYPE);
             autogeneratedTitle = true;
         }
 
@@ -946,10 +1002,7 @@ public class QuickActionFactory {
         public static final String KEY_CATEGORY_COLOR = "category_color";
 
         private GPXAction() {
-            id = System.currentTimeMillis();
-            type = TYPE;
-            nameRes = R.string.quick_action_add_gpx;
-            iconRes = R.drawable.ic_action_flag_dark;
+            super(TYPE);
         }
 
         public GPXAction(QuickAction quickAction) {
@@ -1108,10 +1161,7 @@ public class QuickActionFactory {
         public static final int TYPE = 7;
 
         private ParkingAction() {
-            id = System.currentTimeMillis();
-            type = TYPE;
-            nameRes = R.string.quick_action_add_parking;
-            iconRes = R.drawable.ic_action_parking_dark;
+            super(TYPE);
         }
 
         public ParkingAction(QuickAction quickAction) {
@@ -1150,10 +1200,7 @@ public class QuickActionFactory {
         public static final int TYPE = 8;
 
         protected TakeAudioNoteAction() {
-            id = System.currentTimeMillis();
-            type = TYPE;
-            nameRes = R.string.quick_action_take_audio_note;
-            iconRes = R.drawable.ic_action_micro_dark;
+            super(TYPE);
         }
 
         public TakeAudioNoteAction(QuickAction quickAction) {
@@ -1189,10 +1236,7 @@ public class QuickActionFactory {
         public static final int TYPE = 9;
 
         protected TakeVideoNoteAction() {
-            id = System.currentTimeMillis();
-            type = TYPE;
-            nameRes = R.string.quick_action_take_video_note;
-            iconRes = R.drawable.ic_action_video_dark;
+            super(TYPE);
         }
 
         public TakeVideoNoteAction(QuickAction quickAction) {
@@ -1228,10 +1272,7 @@ public class QuickActionFactory {
         public static final int TYPE = 10;
 
         protected TakePhotoNoteAction() {
-            id = System.currentTimeMillis();
-            type = TYPE;
-            nameRes = R.string.quick_action_take_photo_note;
-            iconRes = R.drawable.ic_action_photo_dark;
+            super(TYPE);
         }
 
         public TakePhotoNoteAction(QuickAction quickAction) {
@@ -1267,11 +1308,7 @@ public class QuickActionFactory {
         public static final int TYPE = 11;
 
         protected NavigationVoiceAction() {
-            id = System.currentTimeMillis();
-            type = TYPE;
-            nameRes = R.string.quick_action_navigation_voice;
-            iconRes = R.drawable.ic_action_volume_up;
-            autogeneratedTitle = true;
+            super(TYPE);
         }
 
         public NavigationVoiceAction(QuickAction quickAction) {
@@ -1318,10 +1355,7 @@ public class QuickActionFactory {
         public static final int TYPE = 12;
 
         protected AddOSMBugAction() {
-            id = System.currentTimeMillis();
-            type = TYPE;
-            nameRes = R.string.quick_action_add_osm_bug;
-            iconRes = R.drawable.ic_action_bug_dark;
+            super(TYPE);
         }
 
         public AddOSMBugAction(QuickAction quickAction) {
@@ -1359,10 +1393,7 @@ public class QuickActionFactory {
         public static final String KEY_TAG = "key_tag";
 
         protected AddPOIAction() {
-            id = System.currentTimeMillis();
-            type = TYPE;
-            nameRes = R.string.quick_action_add_poi;
-            iconRes = R.drawable.ic_action_gabout_dark;
+            super(TYPE);
         }
 
         public AddPOIAction(QuickAction quickAction) {
@@ -1574,10 +1605,7 @@ public class QuickActionFactory {
         private static String KEY_STYLES = "styles";
 
         protected MapStyleAction() {
-            id = System.currentTimeMillis();
-            type = TYPE;
-            nameRes = R.string.quick_action_map_style;
-            iconRes = R.drawable.ic_map;
+            super(TYPE);
         }
 
         public MapStyleAction(QuickAction quickAction) {
@@ -1713,10 +1741,7 @@ public class QuickActionFactory {
         private static String KEY_OVERLAYS = "overlays";
 
         protected MapOverlayAction() {
-            id = System.currentTimeMillis();
-            type = TYPE;
-            nameRes = R.string.quick_action_map_overlay;
-            iconRes = R.drawable.ic_layer_top_dark;
+            super(TYPE);
         }
 
         public MapOverlayAction(QuickAction quickAction) {
@@ -1767,10 +1792,7 @@ public class QuickActionFactory {
         private static String KEY_UNDERLAYS = "underlays";
 
         protected MapUnderlayAction() {
-            id = System.currentTimeMillis();
-            type = TYPE;
-            nameRes = R.string.quick_action_map_underlay;
-            iconRes = R.drawable.ic_layer_bottom_dark;
+            super(TYPE);
         }
 
         public MapUnderlayAction(QuickAction quickAction) {
@@ -1820,10 +1842,7 @@ public class QuickActionFactory {
         private static String KEY_SOURCE = "source";
 
         protected MapSourceAction() {
-            id = System.currentTimeMillis();
-            type = TYPE;
-            nameRes = R.string.quick_action_map_source;
-            iconRes = R.drawable.ic_map;
+            super(TYPE);
         }
 
         public MapSourceAction(QuickAction quickAction) {
@@ -1870,7 +1889,8 @@ public class QuickActionFactory {
 
         private transient EditText title;
 
-        public SwitchableAction() {
+        protected SwitchableAction(int type) {
+            super(type);
         }
 
         public SwitchableAction(QuickAction quickAction) {

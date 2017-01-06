@@ -4,6 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/spinnerListBackground"
     android:orientation="vertical">
 
     <android.support.v7.widget.Toolbar
@@ -15,9 +16,8 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@id/custom_toolbar"
-        android:background="?attr/ctx_menu_info_view_bg"
         android:clipToPadding="false"
         android:paddingTop="16dp"/>
 

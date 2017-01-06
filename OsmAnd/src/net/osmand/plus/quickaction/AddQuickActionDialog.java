@@ -139,7 +139,7 @@ public class AddQuickActionDialog extends DialogFragment {
 
                 HeaderViewHolder headerHolder = (HeaderViewHolder) holder;
 
-                headerHolder.header.setText(action.nameRes);
+                headerHolder.header.setText(action.getNameRes());
                 if (position == 0) headerHolder.divider.setVisibility(View.GONE);
                 else headerHolder.divider.setVisibility(View.VISIBLE);
 
@@ -147,8 +147,8 @@ public class AddQuickActionDialog extends DialogFragment {
 
                 ItemViewHolder itemHolder = (ItemViewHolder) holder;
 
-                itemHolder.title.setText(action.nameRes);
-                itemHolder.icon.setImageResource(action.iconRes);
+                itemHolder.title.setText(action.getNameRes());
+                itemHolder.icon.setImageResource(action.getIconRes());
 
                 itemHolder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
