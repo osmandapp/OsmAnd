@@ -10,6 +10,7 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.openseamapsplugin.NauticalMapsPlugin;
 import net.osmand.plus.parkingpoint.ParkingPositionPlugin;
+import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -96,6 +97,13 @@ public class QuickActionRegistry {
 
                         skip = true;
                     }
+                }
+            }
+
+            if (OsmandPlugin.getEnabledPlugin(OsmandRasterMapsPlugin.class) == null) {
+
+                if (action.type == QuickActionFactory.MapSourceAction.TYPE) {
+                    skip = true;
                 }
             }
 
