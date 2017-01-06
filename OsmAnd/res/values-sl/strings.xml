@@ -2176,7 +2176,7 @@ Vrnitev na običajni pogled je mogoče na dva načina. Ali odklopite prekrivni s
     <string name="shared_string_qr_code">Koda QR</string>
     <string name="map_downloaded">Zemljevid je prejet</string>
     <string name="map_downloaded_descr">Zemljevid %1$s je prejet in je pripravljen za uporabo.</string>
-    <string name="go_to_map">Na zemljevid</string>
+    <string name="go_to_map">Pokaži zemljevid</string>
     <string name="simulate_initial_startup">Simuliraj prvi zagon programa</string>
     <string name="share_geo">geo:</string>
     <string name="share_menu_location">Objavi trenutni položaj</string>
