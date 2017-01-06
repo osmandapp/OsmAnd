@@ -2859,4 +2859,14 @@
 	<string name="poi_construction_yes">Vo výstavbe</string>
 	<string name="poi_street_cabinet">Rozvodná skriňa</string>
 
+	<string name="poi_fair_trade_yes">Produkty Fair trade: áno</string>
+	<string name="poi_fair_trade_no">Produkty Fair trade: nie</string>
+	<string name="poi_fair_trade_only">Iba produkty Fair trade</string>
+
+
+	<string name="poi_bandy">Bandyhokej</string>
+
+	<string name="poi_protection_title">Typ ochrany chránenej oblasti</string>
+	<string name="poi_protection_object_historic">Chránený objekt: historický</string>
+	<string name="poi_protection_object_nature">Chránený objekt: príroda</string>
 	</resources>
