@@ -1920,7 +1920,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="new_version">الإصدار الجديد</string>
     <string name="begin_with_osmand_menu_group">الخطوات الأولى مع أوسماند OSMAnd</string>
     <string name="features_menu_group">ميزات</string>
-    <string name="help_us_to_improve_menu_group">تساعدنا على تحسين أوسماند OSMAnd</string>
+    <string name="help_us_to_improve_menu_group">ساعدنا على تحسين أوسماند OSMAnd</string>
     <string name="first_usage_item">الاستخدام الأول</string>
     <string name="first_usage_item_description">كيفية تحميل الخرائط وتعيين الإعدادات الأساسية</string>
     <string name="planning_trip_item">التخطيط لرحلة</string>
