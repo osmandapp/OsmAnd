@@ -10,9 +10,9 @@ import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
-import android.support.design.widget.TextInputLayout;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.StringRes;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.util.Pair;
 import android.support.v4.view.MotionEventCompat;
 import android.support.v7.app.AlertDialog;
@@ -31,7 +31,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -42,6 +41,7 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import net.osmand.CallbackWithObject;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.osm.AbstractPoiType;
@@ -63,8 +63,13 @@ import net.osmand.plus.dialogs.ConfigureMapMenu;
 import net.osmand.plus.mapcontextmenu.editors.EditCategoryDialogFragment;
 import net.osmand.plus.mapcontextmenu.editors.SelectCategoryDialogFragment;
 import net.osmand.plus.openseamapsplugin.NauticalMapsPlugin;
+import net.osmand.plus.osmedit.EditPoiData;
 import net.osmand.plus.osmedit.EditPoiDialogFragment;
+import net.osmand.plus.osmedit.OpenstreetmapLocalUtil;
+import net.osmand.plus.osmedit.OpenstreetmapPoint;
+import net.osmand.plus.osmedit.OpenstreetmapUtil;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
+import net.osmand.plus.osmedit.OsmPoint;
 import net.osmand.plus.osmedit.dialogs.PoiSubTypeDialogFragment;
 import net.osmand.plus.parkingpoint.ParkingPositionPlugin;
 import net.osmand.plus.poi.PoiFiltersHelper;
@@ -1507,20 +1512,85 @@ public class QuickActionFactory {
         }
 
         @Override
-        public void execute(MapActivity activity) {
+        public void execute(final MapActivity activity) {
 
             LatLon latLon = activity.getMapView()
                     .getCurrentRotatedTileBox()
                     .getCenterLatLon();
 
             OsmEditingPlugin plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
-            if (plugin != null) {
-                Node node = new Node(latLon.getLatitude(), latLon.getLongitude(), -1);
-                node.replaceTags(getTagsFromParams());
+            if (plugin == null) return;
+            Node node = new Node(latLon.getLatitude(), latLon.getLongitude(), -1);
+            node.replaceTags(getTagsFromParams());
+            if (Boolean.valueOf(getParams().get(KEY_DIALOG))) {
                 EditPoiDialogFragment editPoiDialogFragment =
-                    EditPoiDialogFragment.createInstance(node, true, getTagsFromParams());
+                        EditPoiDialogFragment.createInstance(node, true, getTagsFromParams());
                 editPoiDialogFragment.show(activity.getSupportFragmentManager(),
                         EditPoiDialogFragment.TAG);
+            } else {
+                OpenstreetmapUtil mOpenstreetmapUtil;
+                if (activity.getMyApplication().getSettings().OFFLINE_EDITION.get()
+                        || !activity.getMyApplication().getSettings().isInternetConnectionAvailable(true)) {
+                    mOpenstreetmapUtil = plugin.getPoiModificationLocalUtil();
+                } else {
+                    mOpenstreetmapUtil = plugin.getPoiModificationRemoteUtil();
+                }
+                EditPoiData editPoiData = new EditPoiData(node, activity.getMyApplication());
+
+                final boolean offlineEdit = mOpenstreetmapUtil instanceof OpenstreetmapLocalUtil;
+                Node                  newNode        = new Node(node.getLatitude(), node.getLongitude(), node.getId());
+                OsmPoint.Action       action      = newNode.getId() < 0 ? OsmPoint.Action.CREATE : OsmPoint.Action.MODIFY;
+                for (Map.Entry<String, String> tag : editPoiData.getTagValues().entrySet()) {
+                    if (tag.getKey().equals(EditPoiData.POI_TYPE_TAG)) {
+                        final PoiType poiType = editPoiData.getAllTranslatedSubTypes().get(tag.getValue().trim().toLowerCase());
+                        if (poiType != null) {
+                            newNode.putTag(poiType.getOsmTag(), poiType.getOsmValue());
+                            if (poiType.getOsmTag2() != null) {
+                                newNode.putTag(poiType.getOsmTag2(), poiType.getOsmValue2());
+                            }
+                        } else if (!Algorithms.isEmpty(tag.getValue())) {
+                            newNode.putTag(editPoiData.getPoiCategory().getDefaultTag(), tag.getValue());
+
+                        }
+                        if (offlineEdit && !Algorithms.isEmpty(tag.getValue())) {
+                            newNode.putTag(tag.getKey(), tag.getValue());
+                        }
+                    } else if (!Algorithms.isEmpty(tag.getKey()) && !Algorithms.isEmpty(tag.getValue())) {
+                        newNode.putTag(tag.getKey(), tag.getValue());
+                    }
+                }
+                EditPoiDialogFragment.commitNode(action, newNode, mOpenstreetmapUtil.getEntityInfo(newNode.getId()), "", false,
+                        new CallbackWithObject<Node>() {
+
+                            @Override
+                            public boolean processResult(Node result) {
+                                if (result != null) {
+                                    OsmEditingPlugin plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
+                                    if (plugin != null && offlineEdit) {
+                                        List<OpenstreetmapPoint> points = plugin.getDBPOI().getOpenstreetmapPoints();
+                                        if (activity instanceof MapActivity && points.size() > 0) {
+                                            OsmPoint point = points.get(points.size() - 1);
+                                            activity.getContextMenu().showOrUpdate(
+                                                    new LatLon(point.getLatitude(), point.getLongitude()),
+                                                    plugin.getOsmEditsLayer(activity).getObjectName(point), point);
+                                        }
+                                    }
+
+                                    if (activity instanceof MapActivity) {
+                                        activity.getMapView().refreshMap(true);
+                                    }
+                                } else {
+//                                    OsmEditingPlugin plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
+//                                    mOpenstreetmapUtil = plugin.getPoiModificationLocalUtil();
+//                                    Button saveButton = (Button) view.findViewById(R.id.saveButton);
+//                                    saveButton.setText(mOpenstreetmapUtil instanceof OpenstreetmapRemoteUtil
+//                                            ? R.string.shared_string_upload : R.string.shared_string_save);
+                                }
+
+                                return false;
+                            }
+                        }, activity, mOpenstreetmapUtil);
+
             }
         }
 
@@ -1533,7 +1603,7 @@ public class QuickActionFactory {
             Drawable deleteDrawable = application.getIconsCache().getPaintedIcon(R.drawable.ic_action_remove_dark,
                     activity.getResources().getColor(R.color.dash_search_icon_dark));
 
-            LinearLayout editTagsLineaLayout =
+            final LinearLayout editTagsLineaLayout =
                     (LinearLayout) view.findViewById(R.id.editTagsList);
 
             final MapPoiTypes poiTypes = application.getPoiTypes();
@@ -1554,6 +1624,12 @@ public class QuickActionFactory {
             addTagButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    for (int i = 0; i < editTagsLineaLayout.getChildCount(); i++) {
+                        View item = editTagsLineaLayout.getChildAt(i);
+                        if (((EditText)item.findViewById(R.id.tagEditText)).getText().toString().isEmpty() &&
+                                ((EditText)item.findViewById(R.id.valueEditText)).getText().toString().isEmpty())
+                            return;
+                    }
                     mAdapter.addTagView("", "");
                 }
             });
@@ -1563,12 +1639,12 @@ public class QuickActionFactory {
             final TextInputLayout poiTypeTextInputLayout = (TextInputLayout) view.findViewById(R.id.poiTypeTextInputLayout);
             final AutoCompleteTextView poiTypeEditText = (AutoCompleteTextView) view.findViewById(R.id.poiTypeEditText);
             final SwitchCompat showDialog = (SwitchCompat) view.findViewById(R.id.saveButton);
-            showDialog.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    getParams().put(KEY_DIALOG, Boolean.toString(isChecked));
-                }
-            });
+//            showDialog.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//                @Override
+//                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//                    getParams().put(KEY_DIALOG, Boolean.toString(isChecked));
+//                }
+//            });
             showDialog.setChecked(Boolean.valueOf(getParams().get(KEY_DIALOG)));
 
             String text = getTagsFromParams().get(POI_TYPE_TAG);
@@ -1856,6 +1932,7 @@ public class QuickActionFactory {
 
         @Override
         public boolean fillParams(View root, MapActivity activity) {
+            getParams().put(KEY_DIALOG, Boolean.toString(((SwitchCompat) root.findViewById(R.id.saveButton)).isChecked()));
             return !getParams().isEmpty() && (getParams().get(KEY_TAG) != null || !getTagsFromParams().isEmpty());
         }
 
