@@ -758,6 +758,35 @@ public class QuickActionFactory {
         }
 
         @Override
+        public int getIconRes(Context context) {
+
+            if (getParams().get(KEY_FILTERS) == null || getParams().get(KEY_FILTERS).isEmpty()) {
+
+                return super.getIconRes();
+
+            } else {
+
+                OsmandApplication app = (OsmandApplication) context.getApplicationContext();
+                List<String> filters = new ArrayList<>();
+
+                String filtersId = getParams().get(KEY_FILTERS);
+                Collections.addAll(filters, filtersId.split(","));
+
+                PoiUIFilter filter =  app.getPoiFilters().getFilterById(filters.get(0));
+
+                Object res = filter.getIconResource();
+
+                if (filter == null) return super.getIconRes();
+
+                if (res instanceof String && RenderingIcons.containsBigIcon(res.toString())) {
+
+                    return RenderingIcons.getBigIconResourceId(res.toString());
+
+                } else return super.getIconRes();
+            }
+        }
+
+        @Override
         public void execute(MapActivity activity) {
 
             PoiFiltersHelper pf = activity.getMyApplication().getPoiFilters();
@@ -1693,7 +1722,6 @@ public class QuickActionFactory {
 
             return filtered;
         }
-
 
         @Override
         protected int getAddBtnText() {

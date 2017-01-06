@@ -194,7 +194,7 @@ public class CreateEditActionDialog extends DialogFragment {
         if (savedInstanceState == null) name.setText(action.getName(getContext()));
         else action.setName(name.getText().toString());
 
-        image.setImageResource(action.getIconRes());
+        image.setImageResource(action.getIconRes(getApplication()));
     }
 
     private void setupFooter(final View root){

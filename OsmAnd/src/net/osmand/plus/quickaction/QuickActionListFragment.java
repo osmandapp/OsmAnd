@@ -196,7 +196,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
         @Override
         public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
             int               viewType = getItemViewType(position);
-            final QuickAction item     = itemsList.get(position);
+            final QuickAction item     = QuickActionFactory.produceAction(itemsList.get(position));
 
             if (viewType == SCREEN_ITEM_TYPE) {
                 final QuickActionItemVH itemVH = (QuickActionItemVH) holder;
@@ -204,7 +204,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
                 itemVH.title.setText(item.getName(getContext()));
                 itemVH.subTitle.setText(getResources().getString(R.string.quick_action_item_action, getActionPosition(position)));
 
-                itemVH.icon.setImageDrawable(getMyApplication().getIconsCache().getThemedIcon(item.getIconRes()));
+                itemVH.icon.setImageDrawable(getMyApplication().getIconsCache().getThemedIcon(item.getIconRes(getContext())));
                 itemVH.handleView.setOnTouchListener(new View.OnTouchListener() {
                     @Override
                     public boolean onTouch(View v, MotionEvent event) {

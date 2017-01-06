@@ -209,7 +209,7 @@ public class QuickActionsWidget extends LinearLayout {
                         actions.get(i + (position * ELEMENT_PER_PAGE)));
 
                 ((ImageView) view.findViewById(R.id.imageView))
-                        .setImageResource(action.getIconRes());
+                        .setImageResource(action.getIconRes(getContext()));
 
                 ((TextView) view.findViewById(R.id.title))
                         .setText(action.getActionText(application));

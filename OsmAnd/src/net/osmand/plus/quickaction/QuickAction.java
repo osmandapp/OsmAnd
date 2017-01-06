@@ -68,6 +68,10 @@ public class QuickAction {
         return iconRes;
     }
 
+    public int getIconRes(Context context) {
+        return iconRes;
+    }
+
     public long getId() {
         return id;
     }
