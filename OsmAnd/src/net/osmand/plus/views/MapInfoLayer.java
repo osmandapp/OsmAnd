@@ -338,7 +338,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		}
 		return defValue;
 	}
-
+	
 	public static String getStringPropertyDescription(Context ctx, String propertyName, String defValue) {
 		try {
 			Field f = R.string.class.getField("rendering_attr_" + propertyName + "_description");

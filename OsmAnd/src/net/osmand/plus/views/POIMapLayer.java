@@ -1,6 +1,7 @@
 package net.osmand.plus.views;
 
 import android.app.Dialog;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -15,6 +16,7 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.provider.Settings;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.PopupMenu;
@@ -34,7 +36,6 @@ import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.ScrollView;
 import android.widget.TextView;
-
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
@@ -309,7 +310,9 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 		ctx.getTheme().resolveAttribute(attr, typedvalueattr, true);
 		return typedvalueattr.resourceId;
 	}
+	
 
+	@SuppressWarnings("deprecation")
 	private static void showWiki(final Context ctx, final OsmandApplication app, final Amenity a, final String lang) {
 		String preferredLang = lang;
 		if (Algorithms.isEmpty(preferredLang)) {
@@ -373,17 +376,17 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 		settings.setDisplayZoomControls(false);
 
 		//Scale web view font size with system font size
-		POIMapLayer pml = new POIMapLayer();
+		float scale = ctx.getResources().getConfiguration().fontScale;
 		if (android.os.Build.VERSION.SDK_INT >= 14) {
-			settings.setTextZoom((int) (pml.getSystemFontScaling() * 100f));
+			settings.setTextZoom((int) (scale * 100f));
 		} else {
-			if (pml.getSystemFontScaling() <= 0.5f) {
+			if (scale <= 0.5f) {
 				settings.setTextSize(WebSettings.TextSize.SMALLEST);
-			} else if (pml.getSystemFontScaling() <= 0.75f) {
+			} else if (scale <= 0.75f) {
 				settings.setTextSize(WebSettings.TextSize.SMALLER);
-			} else if (pml.getSystemFontScaling() <= 1.0f) {
+			} else if (scale <= 1.0f) {
 				settings.setTextSize(WebSettings.TextSize.NORMAL);
-			} else if (pml.getSystemFontScaling() <= 1.5f) {
+			} else if (scale <= 1.5f) {
 				settings.setTextSize(WebSettings.TextSize.LARGER);
 			} else {
 				settings.setTextSize(WebSettings.TextSize.LARGEST);
@@ -420,10 +423,6 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 
 		dialog.setCancelable(true);
 		dialog.show();
-	}
-
-	private float getSystemFontScaling () {
-		return android.content.res.Configuration.fontScale;
 	}
 
 	private static void showText(final Context ctx, final OsmandApplication app, final String text, String title) {
