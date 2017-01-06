@@ -1,11 +1,12 @@
 package net.osmand.core.samples.android.sample1.mapcontextmenu;
 
 import android.app.Dialog;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
-//import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.provider.Settings;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.PopupMenu;
@@ -109,19 +110,17 @@ public class ContextMenuHelper {
 		settings.setDisplayZoomControls(false);
 
 		//Scale web view font size with system font size
-		float systemFontScaling = ctx.getResources().getDisplayMetrics().density;
-		//float systemFontScaling = ctx.getResources().getDisplayMetrics().density * android.content.res.Configuration.fontScale;
-		//float systemFontScaling = android.content.res.Configuration.fontScale;
+		float scale = ctx.getResources().getConfiguration().fontScale;
 		if (android.os.Build.VERSION.SDK_INT >= 14) {
-			settings.setTextZoom((int) (systemFontScaling * 100f));
+			settings.setTextZoom((int) (scale * 100f));
 		} else {
-			if (systemFontScaling <= 0.5f) {
+			if (scale <= 0.5f) {
 				settings.setTextSize(WebSettings.TextSize.SMALLEST);
-			} else if (systemFontScaling <= 0.75f) {
+			} else if (scale <= 0.75f) {
 				settings.setTextSize(WebSettings.TextSize.SMALLER);
-			} else if (systemFontScaling <= 1.0f) {
+			} else if (scale <= 1.0f) {
 				settings.setTextSize(WebSettings.TextSize.NORMAL);
-			} else if (systemFontScaling <= 1.5f) {
+			} else if (scale <= 1.5f) {
 				settings.setTextSize(WebSettings.TextSize.LARGER);
 			} else {
 				settings.setTextSize(WebSettings.TextSize.LARGEST);
