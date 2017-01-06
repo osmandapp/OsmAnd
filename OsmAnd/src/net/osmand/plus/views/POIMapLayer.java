@@ -374,15 +374,15 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 			settings.setTextZoom((int) (ctx.getResources().getDisplayMetrics().density * 100f));
 		} else {
 			if (ctx.getResources().getDisplayMetrics().density <= 0.5f) {
-				WebSettings.setTextSize(WebSettings.TextSize.SMALLEST);
+				settings.setTextSize(WebSettings.TextSize.SMALLEST);
 			} else if (ctx.getResources().getDisplayMetrics().density <= 0.75f) {
-				WebSettings.setTextSize(WebSettings.TextSize.SMALLER);
+				settings.setTextSize(WebSettings.TextSize.SMALLER);
 			} else if (ctx.getResources().getDisplayMetrics().density <= 1.0f) {
-				WebSettings.setTextSize(WebSettings.TextSize.NORMAL);
+				settings.setTextSize(WebSettings.TextSize.NORMAL);
 			} else if (ctx.getResources().getDisplayMetrics().density <= 1.5f) {
-				WebSettings.setTextSize(WebSettings.TextSize.LARGER);
+				settings.setTextSize(WebSettings.TextSize.LARGER);
 			} else {
-				WebSettings.setTextSize(WebSettings.TextSize.LARGEST);
+				settings.setTextSize(WebSettings.TextSize.LARGEST);
 			}
 		}
 
