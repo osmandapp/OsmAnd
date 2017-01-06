@@ -2546,4 +2546,6 @@ If you need help with OsmAnd application, please contact our support team: suppo
     <string name="quick_action_map_source_action">Add Source</string>
     <string name="quick_action_map_source_switch">Map source has been changed to the \"%s\".</string>
     <string name="quick_action_poi_add">Add</string>
+    <string name="quck_action_btn_tutorial_title">Change button position</string>
+    <string name="quick_action_btn_tutorial_description">Long tap and drag button on the screen to change position</string>
 </resources>

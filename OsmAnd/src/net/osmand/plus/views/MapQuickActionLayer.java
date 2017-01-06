@@ -13,6 +13,9 @@ import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
+import com.getkeepsafe.taptargetview.TapTarget;
+import com.getkeepsafe.taptargetview.TapTargetView;
+
 import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
@@ -73,8 +76,8 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionRe
         quickActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setLayerState(quickActionsWidget.getVisibility() == View.VISIBLE);
-
+                if (!showTutorialIfNeeded())
+                    setLayerState(quickActionsWidget.getVisibility() == View.VISIBLE);
             }
         });
 
@@ -101,13 +104,44 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionRe
             }
         });
 
-
     }
 
     public void refreshLayer() {
         setLayerState(true);
         isLayerOn = quickActionRegistry.isQuickActionOn();
         setUpQuickActionBtnVisibility();
+    }
+
+    private boolean showTutorialIfNeeded() {
+        if (isLayerOn && !settings.IS_QUICK_ACTION_TUTORIAL_SHOWN.get()) {
+            TapTargetView.showFor(mapActivity,                 // `this` is an Activity
+                    TapTarget.forView(quickActionButton, mapActivity.getString(R.string.quck_action_btn_tutorial_title), mapActivity.getString(R.string.quick_action_btn_tutorial_description))
+                            // All options below are optional
+                            .outerCircleColor(R.color.osmand_orange)      // Specify a color for the outer circle
+                            .targetCircleColor(R.color.color_white)   // Specify a color for the target circle
+                            .titleTextSize(20)                  // Specify the size (in sp) of the title text
+                            .descriptionTextSize(16)            // Specify the size (in sp) of the description text
+//                            .textColor(R.color.color_white)            // Specify a color for both the title and description text
+                            .descriptionTextColor(R.color.color_white)            // Specify a color for both the title and description text
+                            .titleTextColor(R.color.color_white)            // Specify a color for both the title and description text
+//                        .textTypeface(Typeface.SANS_SERIF)  // Specify a typeface for the text
+//                            .dimColor(R.color.black)            // If set, will dim behind the view with 30% opacity of the given color
+                            .drawShadow(true)                   // Whether to draw a drop shadow or not
+                            .cancelable(false)                  // Whether tapping outside the outer circle dismisses the view
+                            .tintTarget(false)                   // Whether to tint the target view's color
+                            .transparentTarget(false)           // Specify whether the target is transparent (displays the content underneath)
+//                        .icon(Drawable)                     // Specify a custom drawable to draw as the target
+                            .targetRadius(50),                  // Specify the target radius (in dp)
+                    new TapTargetView.Listener() {          // The listener can listen for regular clicks, long clicks or cancels
+                        @Override
+                        public void onTargetClick(TapTargetView view) {
+                            super.onTargetClick(view);      // This call is optional
+                            settings.IS_QUICK_ACTION_TUTORIAL_SHOWN.set(true);
+                        }
+                    });
+            return true;
+        } else
+            return false;
     }
 
     private void setQuickActionButtonMargin() {
@@ -167,9 +201,9 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionRe
 
     private void enterMovingMode(RotatedTileBox tileBox) {
         previousMapPosition = view.getMapPosition();
-        view.setMapPosition( OsmandSettings.BOTTOM_CONSTANT);
+        view.setMapPosition(OsmandSettings.BOTTOM_CONSTANT);
         MapContextMenu menu = mapActivity.getContextMenu();
-        LatLon         ll = menu.isActive() && tileBox.containsLatLon(menu.getLatLon()) ? menu.getLatLon() : tileBox.getCenterLatLon();
+        LatLon         ll   = menu.isActive() && tileBox.containsLatLon(menu.getLatLon()) ? menu.getLatLon() : tileBox.getCenterLatLon();
 
         menu.updateMapCenter(null);
         menu.close();
@@ -220,15 +254,15 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionRe
 
     @Override
     public boolean onSingleTap(PointF point, RotatedTileBox tileBox) {
-        if (isInChangeMarkerPositionMode() && !pressedQuickActionWidget(point.x, point.y)){
+        if (isInChangeMarkerPositionMode() && !pressedQuickActionWidget(point.x, point.y)) {
             setLayerState(true);
             return true;
         } else
             return false;
     }
 
-    private boolean pressedQuickActionWidget(float px , float py) {
-        return py <=  quickActionsWidget.getHeight();
+    private boolean pressedQuickActionWidget(float px, float py) {
+        return py <= quickActionsWidget.getHeight();
     }
 
     @Override

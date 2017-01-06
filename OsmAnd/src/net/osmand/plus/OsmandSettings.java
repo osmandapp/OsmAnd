@@ -2458,6 +2458,8 @@ public class OsmandSettings {
 
 	public final CommonPreference<String> QUICK_ACTION_LIST = new StringPreference("quick_action_list", "").makeGlobal();
 
+	public final CommonPreference<Boolean> IS_QUICK_ACTION_TUTORIAL_SHOWN = new BooleanPreference("quick_action_tutorial", false).makeGlobal();
+
 	public boolean setPortraitFabMargin(int x, int y) {
 		return settingsAPI.edit(globalPreferences).putInt(QUICK_FAB_MARGIN_X_PORTRAIT_MARGIN, x)
 				.putInt(QUICK_FAB_MARGIN_Y_PORTRAIT_MARGIN, y).commit();
