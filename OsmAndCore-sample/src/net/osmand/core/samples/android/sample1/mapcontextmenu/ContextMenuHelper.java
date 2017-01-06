@@ -110,15 +110,15 @@ public class ContextMenuHelper {
 			settings.setTextZoom((int) (ctx.getResources().getDisplayMetrics().density * 100f));
 		} else {
 			if (ctx.getResources().getDisplayMetrics().density <= 0.5f) {
-				settings.setTextSize(settings.TextSize.SMALLEST);
+				WebSettings.setTextSize(WebSettings.TextSize.SMALLEST);
 			} else if (ctx.getResources().getDisplayMetrics().density <= 0.75f) {
-				settings.setTextSize(settings.TextSize.SMALLER);
+				WebSettings.setTextSize(WebSettings.TextSize.SMALLER);
 			} else if (ctx.getResources().getDisplayMetrics().density <= 1.0f) {
-				settings.setTextSize(settings.TextSize.NORMAL);
+				WebSettings.setTextSize(WebSettings.TextSize.NORMAL);
 			} else if (ctx.getResources().getDisplayMetrics().density <= 1.5f) {
-				settings.setTextSize(settings.TextSize.LARGER);
+				WebSettings.setTextSize(WebSettings.TextSize.LARGER);
 			} else {
-				settings.setTextSize(settings.TextSize.LARGEST);
+				WebSettings.setTextSize(WebSettings.TextSize.LARGEST);
 			}
 		}
 
