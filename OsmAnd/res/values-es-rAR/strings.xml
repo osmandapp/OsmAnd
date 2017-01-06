@@ -474,7 +474,8 @@ Los mapas de teselas se pueden obtener directamente a través de fuentes en lín
 \n\nActivando esta vista, cambia el estilo del mapa a \'Invierno y esquí\', mostrando las características del terreno en condiciones invernales. Esta vista se puede revertir desactivando de nuevo aquí o cambiando el \'Estilo del mapa\' en \'Configurar mapa\' cuando lo desees. "</string>
     <string name="audionotes_plugin_description">El complemento de notas multimedia, proporciona la funcionalidad para tomar notas de audio/fotografía/video durante un viaje, usando un botón en la pantalla del mapa, o directamente en el menú contextual para cualquier ubicación en el mapa.</string>
     <string name="osmand_parking_plugin_description">Este complemento, te recuerda fácilmente dónde se estacionó el automóvil y cuánto tiempo queda si el estacionamiento está limitado por tiempo.
-\n\nPuedes encontrar tu lugar y el tiempo de estacionamiento en la tarjeta del menú principal y en el control del mapa. Se puede añadir una notificación al calendario, en el caso de que desees tener un recordatorio al respecto.</string>
+
+Tanto la ubicación como el tiempo de estacionamiento se muestran en el menú principal y en el control del mapa. Puedes añadir una notificación al calendario, en el caso de que desees tener un recordatorio al respecto.</string>
     <string name="osmand_distance_planning_plugin_description">Este complemento proporciona un control en la pantalla del mapa, permitiendo crear caminos pulsando en el mapa, o usar o modificar archivos GPX existentes, para planificar un viaje y medir la distancia entre puntos. Los resultados pueden guardarse como un archivo GPX y usarse luego para la orientación.</string>
     <string name="osmand_accessibility_description">Este complemento activa las funciones de accesibilidad del dispositivo, directamente en OsmAnd. Facilita por ejemplo, el ajuste de la velocidad de la voz para voces TTS, la configuración de navegación de pantalla con el panel direccional, usando la rueda de desplazamiento para el control de ampliación, o el uso de comentarios de conversión de texto a voz, o para el anuncio automático de tu ubicación.</string>
     <string name="osm_editing_plugin_description">Este complemento se puede usar para hacer contribuciones en OSM, como el crear o modificar objetos PDI, abrir o comentar informes de problemas y contribuir con archivos de trazas GPX.
@@ -2005,8 +2006,8 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="application_dir_description">Elige dónde guardar los mapas y otros archivos de datos.</string>
     <string name="show_on_start_description">Al desactivarlo, inicia directo en la pantalla del mapa</string>
     <string name="map_downloaded">Mapa descargado</string>
-    <string name="map_downloaded_descr">Se descargó el mapa de %1$s. Vuelve al mapa para empezar a usarlo.</string>
-    <string name="go_to_map">Ir al mapa</string>
+    <string name="map_downloaded_descr">Ya puedes empezar a usar el mapa descargado de %1$s.</string>
+    <string name="go_to_map">Mostrar el mapa</string>
     <string name="shared_string_qr_code">Código QR</string>
     <string name="enter_country_name">Escribe el nombre del país</string>
     <string name="world_map_download_descr">El mapa base mundial (abarca todo el mundo en ampliaciones pequeñas), falta o está desactualizado. Considera descargarlo para una vista global.</string>
@@ -2407,7 +2408,7 @@ Si necesitas ayuda con la aplicación OsmAnd, contacte con nuestro equipo de sop
     <string name="skip_map_downloading">Omitir descargas de mapas</string>
     <string name="skip_map_downloading_desc">Sin mapas descargados. Puedes elegir uno de la lista o descargarlos luego mediante el Menú - %1$s.</string>
     <string name="search_another_country">Elegir otra región</string>
-    <string name="search_map">Buscando mapa…</string>
+    <string name="search_map">Buscando mapas…</string>
     <string name="first_usage_wizard_desc">Deja que OsmAnd determine tu ubicación y sugiera mapas a descargar para esa región.</string>
     <string name="location_not_found">Ubicación no encontrada</string>
     <string name="no_inet_connection">Sin conexión a Internet</string>
