@@ -1583,4 +1583,14 @@
 	<string name="poi_payment_v_pay_no">V PAY kartes nepieņem</string>
 	<string name="poi_payment_dogecoin_yes">Dogecoin</string>
 	<string name="poi_payment_dogecoin_no">Dogecoin nepieņem</string>
+	<string name="poi_payment_cibus_yes">Cibus kartes</string>
+	<string name="poi_payment_cibus_no">Cibus kartes nepieņem</string>
+	<string name="poi_payment_wire_transfer_yes">Naudas pārskaitījums</string>
+	<string name="poi_payment_wire_transfer_no">Naudas pārskaitījumus nepieņem</string>
+	<string name="poi_payment_ep_cash_yes">Cash card (Geldkarte) kartes</string>
+	<string name="poi_payment_ep_cash_no">Cash card (Geldkarte) kartes nepieņem</string>
+	<string name="poi_payment_ep_proton_yes">Proton kartes</string>
+	<string name="poi_payment_ep_proton_no">Proton kartes nepieņem</string>
+	<string name="poi_payment_ep_avant_yes">AvantCard kartes</string>
+	<string name="poi_payment_ep_avant_no">AvantCard kartes nepieņem</string>
 	</resources>
