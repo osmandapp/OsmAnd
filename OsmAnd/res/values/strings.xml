@@ -2542,4 +2542,5 @@ If you need help with OsmAnd application, please contact our support team: suppo
     <string name="quick_action_map_source_title">Map sources</string>
     <string name="quick_action_map_source_dscr">Tap on the action button will toggle the map source, from the list order.</string>
     <string name="quick_action_map_source_action">Add Source</string>
+    <string name="quick_action_map_source_switch">Map source has been changed to the \"%s\".</string>
 </resources>

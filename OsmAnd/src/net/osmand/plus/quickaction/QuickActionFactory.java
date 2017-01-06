@@ -42,8 +42,10 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import net.osmand.ResultMatcher;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.map.TileSourceManager;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
@@ -1851,7 +1853,7 @@ public class QuickActionFactory {
 
         public static final int TYPE = 14;
 
-        private static String KEY_STYLES = "styles";
+        private final static String KEY_STYLES = "styles";
 
         protected MapStyleAction() {
             super(TYPE);
@@ -2017,7 +2019,7 @@ public class QuickActionFactory {
 
         public static final int TYPE = 15;
 
-        private static String KEY_OVERLAYS = "overlays";
+        private final static String KEY_OVERLAYS = "overlays";
 
         protected MapOverlayAction() {
             super(TYPE);
@@ -2088,7 +2090,7 @@ public class QuickActionFactory {
 
         public static final int TYPE = 16;
 
-        private static String KEY_UNDERLAYS = "underlays";
+        private final static String KEY_UNDERLAYS = "underlays";
 
         protected MapUnderlayAction() {
             super(TYPE);
@@ -2158,7 +2160,8 @@ public class QuickActionFactory {
 
         public static final int TYPE = 17;
 
-        private static String KEY_SOURCE = "source";
+        private final static String KEY_SOURCE = "source";
+        private final String LAYER_OSM_VECTOR = "LAYER_OSM_VECTOR";
 
         protected MapSourceAction() {
             super(TYPE);
@@ -2199,6 +2202,36 @@ public class QuickActionFactory {
         @Override
         public void execute(MapActivity activity) {
 
+            if (OsmandPlugin.getEnabledPlugin(OsmandRasterMapsPlugin.class) != null) {
+
+                OsmandSettings settings = activity.getMyApplication().getSettings();
+                List<Pair<String, String>> sources = loadListFromParams();
+
+                Pair<String, String> currentSource = settings.MAP_ONLINE_DATA.get()
+                        ? new Pair<>(settings.MAP_TILE_SOURCES.get(), settings.MAP_TILE_SOURCES.get())
+                        : new Pair<>(LAYER_OSM_VECTOR, activity.getString(R.string.vector_data));
+
+                Pair<String, String> nextSource = sources.get(0);
+                int index = sources.indexOf(currentSource);
+
+                if (index >= 0 && index + 1 < sources.size()) {
+                    nextSource = sources.get(index + 1);
+                }
+
+                if (nextSource.first.equals(LAYER_OSM_VECTOR)) {
+
+                    settings.MAP_ONLINE_DATA.set(false);
+                    activity.getMapLayers().updateMapSource(activity.getMapView(), null);
+
+                } else {
+
+                    settings.MAP_TILE_SOURCES.set(nextSource.first);
+                    settings.MAP_ONLINE_DATA.set(true);
+                    activity.getMapLayers().updateMapSource(activity.getMapView(), settings.MAP_TILE_SOURCES);
+                }
+
+                Toast.makeText(activity, activity.getString(R.string.quick_action_map_source_switch, nextSource.second), Toast.LENGTH_SHORT).show();
+            }
         }
 
         @Override
@@ -2230,38 +2263,12 @@ public class QuickActionFactory {
                     final OsmandSettings settings = activity.getMyApplication().getSettings();
                     final LinkedHashMap<String, String> entriesMap = new LinkedHashMap<>();
 
-                    final String layerOsmVector = "LAYER_OSM_VECTOR";
-
-                    entriesMap.put(layerOsmVector, activity.getString(R.string.vector_data));
+                    entriesMap.put(LAYER_OSM_VECTOR, activity.getString(R.string.vector_data));
                     entriesMap.putAll(settings.getTileSourceEntries());
 
                     final List<Entry<String, String>> entriesMapList = new ArrayList<>(entriesMap.entrySet());
 
                     AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-
-                    String selectedTileSourceKey = settings.MAP_TILE_SOURCES.get();
-
-                    int selectedItem = -1;
-
-                    if (!settings.MAP_ONLINE_DATA.get()) {
-
-                        selectedItem = 0;
-
-                    } else {
-
-                        Entry<String, String> selectedEntry = null;
-                        for (Entry<String, String> entry : entriesMap.entrySet()) {
-                            if (entry.getKey().equals(selectedTileSourceKey)) {
-                                selectedEntry = entry;
-                                break;
-                            }
-                        }
-                        if (selectedEntry != null) {
-                            selectedItem = 0;
-                            entriesMapList.remove(selectedEntry);
-                            entriesMapList.add(0, selectedEntry);
-                        }
-                    }
 
                     final String[] items = new String[entriesMapList.size()];
                     int i = 0;
@@ -2270,20 +2277,23 @@ public class QuickActionFactory {
                         items[i++] = entry.getValue();
                     }
 
-                    builder.setSingleChoiceItems(items, selectedItem, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
+                    final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(activity, R.layout.dialog_text_item);
 
-                            Pair<String, String> layer = new Pair<String, String>(
-                                    entriesMapList.get(which).getKey(),
-                                    entriesMapList.get(which).getValue());
+                    arrayAdapter.addAll(items);
+                    builder.setAdapter(arrayAdapter, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int i) {
+
+                            Pair<String, String> layer = new Pair<>(
+                                    entriesMapList.get(i).getKey(),
+                                    entriesMapList.get(i).getValue());
 
                             adapter.addItem(layer, activity);
 
                             dialog.dismiss();
                         }
-
                     });
+
                     builder.setNegativeButton(R.string.shared_string_dismiss, null);
                     builder.show();
                 }
