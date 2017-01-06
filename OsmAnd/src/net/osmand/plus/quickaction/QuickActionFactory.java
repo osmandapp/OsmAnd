@@ -5,7 +5,12 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
+import android.os.Build;
+import android.support.design.widget.TextInputLayout;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.StringRes;
 import android.support.v4.util.Pair;
@@ -17,13 +22,16 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -38,9 +46,9 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
+import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
 import net.osmand.osm.edit.Node;
-import net.osmand.osm.edit.OSMSettings;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.FavouritesDbHelper;
@@ -55,9 +63,9 @@ import net.osmand.plus.dialogs.ConfigureMapMenu;
 import net.osmand.plus.mapcontextmenu.editors.EditCategoryDialogFragment;
 import net.osmand.plus.mapcontextmenu.editors.SelectCategoryDialogFragment;
 import net.osmand.plus.openseamapsplugin.NauticalMapsPlugin;
-import net.osmand.plus.osmedit.EditPoiData;
 import net.osmand.plus.osmedit.EditPoiDialogFragment;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
+import net.osmand.plus.osmedit.dialogs.PoiSubTypeDialogFragment;
 import net.osmand.plus.parkingpoint.ParkingPositionPlugin;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.poi.PoiUIFilter;
@@ -67,11 +75,13 @@ import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.widgets.AutoCompleteTextViewEx;
 import net.osmand.render.RenderingRulesStorage;
+import net.osmand.util.Algorithms;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -80,6 +90,7 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import static net.osmand.plus.osmedit.AdvancedEditPoiFragment.addPoiToStringSet;
+import static net.osmand.plus.osmedit.EditPoiData.POI_TYPE_TAG;
 
 public class QuickActionFactory {
 
@@ -1451,6 +1462,7 @@ public class QuickActionFactory {
     public static class AddPOIAction extends QuickAction {
         public static final int TYPE = 13;
         public static final String KEY_TAG = "key_tag";
+        public static final String KEY_DIALOG = "dialog";
 
         protected AddPOIAction() {
             super(TYPE);
@@ -1469,17 +1481,17 @@ public class QuickActionFactory {
 
             OsmEditingPlugin plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
             if (plugin != null) {
+                Node node = new Node(latLon.getLatitude(), latLon.getLongitude(), -1);
+                node.replaceTags(getTagsFromParams());
                 EditPoiDialogFragment editPoiDialogFragment =
-//                        EditPoiDialogFragment.createAddPoiInstance(latLon.getLatitude(), latLon.getLongitude(),
-//                                activity.getMyApplication());
-                    EditPoiDialogFragment.createInstance(new Node(latLon.getLatitude(), latLon.getLongitude(), -1), true, getTagsFromParams());
+                    EditPoiDialogFragment.createInstance(node, true, getTagsFromParams());
                 editPoiDialogFragment.show(activity.getSupportFragmentManager(),
                         EditPoiDialogFragment.TAG);
             }
         }
 
         @Override
-        public void drawUI(ViewGroup parent, MapActivity activity) {
+        public void drawUI(final ViewGroup parent, final MapActivity activity) {
             final View view = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.quick_action_add_poi_layout, parent, false);
 
@@ -1490,16 +1502,17 @@ public class QuickActionFactory {
             LinearLayout editTagsLineaLayout =
                     (LinearLayout) view.findViewById(R.id.editTagsList);
 
-            final MapPoiTypes mapPoiTypes = application.getPoiTypes();
+            final MapPoiTypes poiTypes = application.getPoiTypes();
+            final Map<String, PoiType> allTranslatedNames = poiTypes.getAllTranslatedNames(true);
             final TagAdapterLinearLayoutHack mAdapter = new TagAdapterLinearLayoutHack(editTagsLineaLayout, getTagsFromParams(), deleteDrawable);
             // It is possible to not restart initialization every time, and probably move initialization to appInit
-            Map<String, PoiType> translatedTypes = mapPoiTypes.getAllTranslatedNames(true);
+            Map<String, PoiType> translatedTypes = poiTypes.getAllTranslatedNames(true);
             HashSet<String>      tagKeys         = new HashSet<>();
             HashSet<String>      valueKeys       = new HashSet<>();
             for (AbstractPoiType abstractPoiType : translatedTypes.values()) {
                 addPoiToStringSet(abstractPoiType, tagKeys, valueKeys);
             }
-            addPoiToStringSet(mapPoiTypes.getOtherMapCategory(), tagKeys, valueKeys);
+            addPoiToStringSet(poiTypes.getOtherMapCategory(), tagKeys, valueKeys);
             tagKeys.addAll(EditPoiDialogFragment.BASIC_TAGS);
             mAdapter.setTagData(tagKeys.toArray(new String[tagKeys.size()]));
             mAdapter.setValueData(valueKeys.toArray(new String[valueKeys.size()]));
@@ -1513,7 +1526,177 @@ public class QuickActionFactory {
 
             mAdapter.updateViews();
 
+            final TextInputLayout poiTypeTextInputLayout = (TextInputLayout) view.findViewById(R.id.poiTypeTextInputLayout);
+            final AutoCompleteTextView poiTypeEditText = (AutoCompleteTextView) view.findViewById(R.id.poiTypeEditText);
+            final SwitchCompat showDialog = (SwitchCompat) view.findViewById(R.id.saveButton);
+            showDialog.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    getParams().put(KEY_DIALOG, Boolean.toString(isChecked));
+                }
+            });
+            showDialog.setChecked(Boolean.valueOf(getParams().get(KEY_DIALOG)));
+
+            String text = getTagsFromParams().get(POI_TYPE_TAG);
+            poiTypeEditText.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+                    String tp = s.toString();
+                    putTagIntoParams(POI_TYPE_TAG, tp);
+                    PoiCategory category = getCategory(allTranslatedNames);
+                    if (category != null) {
+                        poiTypeTextInputLayout.setHint(category.getTranslation());
+                    }
+                }
+            });
+            poiTypeEditText.setText(text != null ? text : "");
+            poiTypeEditText.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(final View v, MotionEvent event) {
+                    final EditText editText = (EditText) v;
+                    final int DRAWABLE_RIGHT = 2;
+                    if (event.getAction() == MotionEvent.ACTION_UP) {
+                        if (event.getX() >= (editText.getRight()
+                                - editText.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width()
+                                - editText.getPaddingRight())) {
+                            PoiCategory category = getCategory(allTranslatedNames);
+                                PoiCategory tempPoiCategory= (category != null) ? category : poiTypes.getOtherPoiCategory();
+                                PoiSubTypeDialogFragment f =
+                                        PoiSubTypeDialogFragment.createInstance(tempPoiCategory);
+                                f.setOnItemSelectListener(new PoiSubTypeDialogFragment.OnItemSelectListener() {
+                                    @Override
+                                    public void select(String category) {
+                                        poiTypeEditText.setText(category);
+                                    }
+                                });
+
+                                CreateEditActionDialog parentFragment = (CreateEditActionDialog) activity.getSupportFragmentManager().findFragmentByTag(CreateEditActionDialog.TAG);
+                                f.show(parentFragment.getChildFragmentManager(), "PoiSubTypeDialogFragment");
+
+                            return true;
+                        }
+                    }
+                    return false;
+                }
+            });
+
+            setUpAdapterForPoiTypeEditText(activity, allTranslatedNames, poiTypeEditText);
+
+            ImageButton onlineDocumentationButton =
+                    (ImageButton) view.findViewById(R.id.onlineDocumentationButton);
+            onlineDocumentationButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    activity.startActivity(new Intent(Intent.ACTION_VIEW,
+                            Uri.parse("https://wiki.openstreetmap.org/wiki/Map_Features")));
+                }
+            });
+
+            boolean   isLightTheme = activity.getMyApplication().getSettings().OSMAND_THEME.get() == OsmandSettings.OSMAND_LIGHT_THEME;
+            final int colorId = isLightTheme ? R.color.inactive_item_orange : R.color.dash_search_icon_dark;
+            final int color   = activity.getResources().getColor(colorId);
+            onlineDocumentationButton.setImageDrawable(activity.getMyApplication().getIconsCache().getPaintedIcon(R.drawable.ic_action_help, color));
+//            poiTypeEditText.setCompoundDrawables(null, null, activity.getMyApplication().getIconsCache().getPaintedIcon(R.drawable.ic_action_arrow_drop_down, color), null);
+
+//            Button addTypeButton = (Button) view.findViewById(R.id.addTypeButton);
+//            addTypeButton.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    PoiSubTypeDialogFragment f = PoiSubTypeDialogFragment.createInstance(poiTypes.getOtherPoiCategory());
+//                    f.setOnItemSelectListener(new PoiSubTypeDialogFragment.OnItemSelectListener() {
+//                        @Override
+//                        public void select(String category) {
+//                            putTagIntoParams(POI_TYPE_TAG, category);
+//                        }
+//                    });
+//
+//                    CreateEditActionDialog parentFragment = (CreateEditActionDialog) activity.getSupportFragmentManager().findFragmentByTag(CreateEditActionDialog.TAG);
+//                    f.show(parentFragment.getChildFragmentManager(), "PoiSubTypeDialogFragment");
+//                }
+//            });
+
             parent.addView(view);
+        }
+
+        private void setUpAdapterForPoiTypeEditText(final MapActivity activity, final Map<String, PoiType> allTranslatedNames, final AutoCompleteTextView poiTypeEditText) {
+            final Map<String, PoiType> subCategories = new LinkedHashMap<>();
+//            PoiCategory ct = editPoiData.getPoiCategory();
+//            if (ct != null) {
+//                for (PoiType s : ct.getPoiTypes()) {
+//                    if (!s.isReference() && !s.isNotEditableOsm() && s.getBaseLangType() == null) {
+//                        addMapEntryAdapter(subCategories, s.getTranslation(), s);
+//                        if(!s.getKeyName().contains("osmand")) {
+//                            addMapEntryAdapter(subCategories, s.getKeyName().replace('_', ' '), s);
+//                        }
+//                    }
+//                }
+//            }
+            for (Entry<String, PoiType> s : allTranslatedNames.entrySet()) {
+                addMapEntryAdapter(subCategories, s.getKey(), s.getValue());
+            }
+            final ArrayAdapter<Object> adapter;
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                adapter = new ArrayAdapter<>(activity,
+                        R.layout.list_textview, subCategories.keySet().toArray());
+            } else {
+                TypedValue      typedValue = new TypedValue();
+                Resources.Theme theme      = activity.getTheme();
+                theme.resolveAttribute(android.R.attr.textColorSecondary, typedValue, true);
+                final int textColor = typedValue.data;
+
+                adapter = new ArrayAdapter<Object>(activity,
+                        R.layout.list_textview, subCategories.keySet().toArray()) {
+                    @Override
+                    public View getView(int position, View convertView, ViewGroup parent) {
+                        final View view = super.getView(position, convertView, parent);
+                        ((TextView) view.findViewById(R.id.textView)).setTextColor(textColor);
+                        return view;
+                    }
+                };
+            }
+            adapter.sort(new Comparator<Object>() {
+                @Override
+                public int compare(Object lhs, Object rhs) {
+                    return lhs.toString().compareTo(rhs.toString());
+                }
+            });
+            poiTypeEditText.setAdapter(adapter);
+            poiTypeEditText.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    Object item = parent.getAdapter().getItem(position);
+                    poiTypeEditText.setText(item.toString());
+                    setUpAdapterForPoiTypeEditText(activity, allTranslatedNames, poiTypeEditText);
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+                }
+            });
+        }
+
+        private PoiCategory getCategory(Map<String, PoiType> allTranslatedNames) {
+            String tp = getTagsFromParams().get(POI_TYPE_TAG);
+            PoiType pt = allTranslatedNames.get(tp.toLowerCase());
+            if (pt != null) {
+                return pt.getCategory();
+            } else
+                return null;
+        }
+
+        private void addMapEntryAdapter(final Map<String, PoiType> subCategories, String key, PoiType v) {
+            if (!subCategories.containsKey(key.toLowerCase())) {
+                subCategories.put(Algorithms.capitalizeFirstLetterAndLowercase(key), v);
+            }
         }
 
         private class TagAdapterLinearLayoutHack {
@@ -1538,8 +1721,8 @@ public class QuickActionFactory {
                 linearLayout.removeAllViews();
                 List<Entry<String, String>> entries = new ArrayList<>(tagsData.entrySet());
                 for (Entry<String, String> tag : entries) {
-                    if (tag.getKey().equals(EditPoiData.POI_TYPE_TAG)
-                            || tag.getKey().equals(OSMSettings.OSMTagKey.NAME.getValue()))
+                    if (tag.getKey().equals(POI_TYPE_TAG)
+                            /*|| tag.getKey().equals(OSMSettings.OSMTagKey.NAME.getValue())*/)
                         continue;
                     addTagView(tag.getKey(), tag.getValue());
                 }
@@ -1655,6 +1838,12 @@ public class QuickActionFactory {
 
         private void setTagsIntoParams(Map<String, String> tags) {
             getParams().put(KEY_TAG, new Gson().toJson(tags));
+        }
+
+        private void putTagIntoParams(String tag, String value) {
+            Map<String, String> tagsFromParams = getTagsFromParams();
+            tagsFromParams.put(tag, value);
+            setTagsIntoParams(tagsFromParams);
         }
     }
 

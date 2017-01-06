@@ -232,6 +232,13 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		osmBugsLayer.openBug(latitude, longitude, "");
 	}
 
+	public void openOsmNote(MapActivity mapActivity, double latitude, double longitude, String message) {
+		if (osmBugsLayer == null) {
+			registerLayers(mapActivity);
+		}
+		osmBugsLayer.openBug(latitude, longitude, message);
+	}
+
 	@Override
 	public void addMyPlacesTab(FavoritesActivity favoritesActivity, List<TabActivity.TabItem> mTabs, Intent intent) {
 		if (getDBPOI().getOpenstreetmapPoints().size() > 0 || getDBBug().getOsmbugsPoints().size() > 0) {

@@ -1,12 +1,5 @@
 package net.osmand.plus.osmedit.dialogs;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import net.osmand.osm.MapPoiTypes;
-import net.osmand.osm.PoiCategory;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.osmedit.EditPoiDialogFragment;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -14,7 +7,15 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 
+import net.osmand.osm.MapPoiTypes;
+import net.osmand.osm.PoiCategory;
+import net.osmand.plus.OsmandApplication;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class PoiTypeDialogFragment extends DialogFragment {
+	private OnItemSelectListener onItemSelectListener;
 
 	@NonNull
 	@Override
@@ -33,7 +34,7 @@ public class PoiTypeDialogFragment extends DialogFragment {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				PoiCategory aType = categories.get(which);
-				((EditPoiDialogFragment) getParentFragment()).setPoiCategory(aType);
+				onItemSelectListener.select(aType);
 				dismiss();
 			}
 		});
@@ -45,5 +46,13 @@ public class PoiTypeDialogFragment extends DialogFragment {
 		Bundle args = new Bundle();
 		poiTypeDialogFragment.setArguments(args);
 		return poiTypeDialogFragment;
+	}
+
+	public void setOnItemSelectListener(OnItemSelectListener onItemSelectListener) {
+		this.onItemSelectListener = onItemSelectListener;
+	}
+
+	public interface OnItemSelectListener {
+		void select(PoiCategory poiCategory);
 	}
 }

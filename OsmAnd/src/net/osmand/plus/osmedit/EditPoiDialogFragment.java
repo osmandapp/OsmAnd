@@ -127,8 +127,6 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 			@SuppressWarnings("unchecked")
 			Map<String, String> mp = (Map<String, String>) savedInstanceState.getSerializable(TAGS_LIST);
 			editPoiData.updateTags(mp);
-		} else  if (getArguments().getSerializable(TAGS_LIST) != null){
-			editPoiData.updateTags((Map<String, String>) getArguments().getSerializable(TAGS_LIST));
 		}
 
 		boolean isAddingPoi = getArguments().getBoolean(IS_ADDING_POI);
@@ -222,7 +220,13 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 		poiTypeButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				DialogFragment fragment = PoiTypeDialogFragment.createInstance();
+				PoiTypeDialogFragment fragment = PoiTypeDialogFragment.createInstance();
+				fragment.setOnItemSelectListener(new PoiTypeDialogFragment.OnItemSelectListener() {
+					@Override
+					public void select(PoiCategory poiCategory) {
+						setPoiCategory(poiCategory);
+					}
+				});
 				fragment.show(getChildFragmentManager(), "PoiTypeDialogFragment");
 			}
 		});
@@ -282,8 +286,14 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 							- editText.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width()
 							- editText.getPaddingRight())) {
 						if (editPoiData.getPoiCategory() != null) {
-							DialogFragment dialogFragment =
+							PoiSubTypeDialogFragment dialogFragment =
 									PoiSubTypeDialogFragment.createInstance(editPoiData.getPoiCategory());
+							dialogFragment.setOnItemSelectListener(new PoiSubTypeDialogFragment.OnItemSelectListener() {
+								@Override
+								public void select(String category) {
+									setSubCategory(category);
+								}
+							});
 							dialogFragment.show(getChildFragmentManager(), "PoiSubTypeDialogFragment");
 						}
 

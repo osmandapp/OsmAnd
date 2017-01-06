@@ -2454,9 +2454,9 @@ public class OsmandSettings {
 	public static final String QUICK_FAB_MARGIN_X_LANDSCAPE_MARGIN = "quick_fab_margin_x_landscape_margin";
 	public static final String QUICK_FAB_MARGIN_Y_LANDSCAPE_MARGIN = "quick_fab_margin_y_landscape_margin";
 
-	public final CommonPreference<String> QUICK_ACTION = new StringPreference("quick_action_new", "").makeProfile();
+	public final CommonPreference<String> QUICK_ACTION = new StringPreference("quick_action_new", "").makeGlobal();
 
-	public final CommonPreference<String> QUICK_ACTION_LIST = new StringPreference("quick_action_list", "").makeProfile();
+	public final CommonPreference<String> QUICK_ACTION_LIST = new StringPreference("quick_action_list", "").makeGlobal();
 
 	public boolean setPortraitFabMargin(int x, int y) {
 		return settingsAPI.edit(globalPreferences).putInt(QUICK_FAB_MARGIN_X_PORTRAIT_MARGIN, x)
