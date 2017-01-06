@@ -350,8 +350,8 @@ repositories {
 			artifact "ivy/[organisation]/[module]/[revision]/[artifact]-[revision].[ext]"
 		}
 	}
+	mavenCentral()
 	jcenter()
-	// mavenCentral()
 }
 
 def analytics = (System.getenv("APP_FEATURES") && System.getenv("APP_FEATURES").contains("+play_market") && 
