@@ -9,6 +9,7 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.openseamapsplugin.NauticalMapsPlugin;
+import net.osmand.plus.osmedit.OsmEditingPlugin;
 import net.osmand.plus.parkingpoint.ParkingPositionPlugin;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 
@@ -103,6 +104,17 @@ public class QuickActionRegistry {
             if (OsmandPlugin.getEnabledPlugin(OsmandRasterMapsPlugin.class) == null) {
 
                 if (action.type == QuickActionFactory.MapSourceAction.TYPE) {
+                    skip = true;
+                }
+            }
+
+            if (OsmandPlugin.getEnabledPlugin(OsmEditingPlugin.class) == null) {
+
+                if (action.type == QuickActionFactory.AddPOIAction.TYPE) {
+                    skip = true;
+                }
+
+                if (action.type == QuickActionFactory.AddOSMBugAction.TYPE) {
                     skip = true;
                 }
             }

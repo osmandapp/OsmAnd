@@ -232,11 +232,11 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		osmBugsLayer.openBug(latitude, longitude, "");
 	}
 
-	public void openOsmNote(MapActivity mapActivity, double latitude, double longitude, String message) {
+	public void openOsmNote(MapActivity mapActivity, double latitude, double longitude, String message, boolean autofill) {
 		if (osmBugsLayer == null) {
 			registerLayers(mapActivity);
 		}
-		osmBugsLayer.openBug(latitude, longitude, message);
+		osmBugsLayer.openBug(latitude, longitude, message, autofill);
 	}
 
 	@Override

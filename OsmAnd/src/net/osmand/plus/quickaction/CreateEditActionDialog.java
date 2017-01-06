@@ -128,11 +128,6 @@ public class CreateEditActionDialog extends DialogFragment {
         setupToolbar(view);
         setupHeader(view, savedInstanceState);
         setupFooter(view);
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
 
         action.drawUI((ViewGroup) getView().findViewById(R.id.container), (MapActivity) getActivity());
     }
