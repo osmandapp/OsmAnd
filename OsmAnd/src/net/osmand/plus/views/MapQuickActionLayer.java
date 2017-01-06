@@ -101,6 +101,8 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionRe
                 return true;
             }
         });
+
+
     }
 
     public void refreshLayer() {

@@ -1523,9 +1523,11 @@ public class QuickActionFactory {
             if (plugin == null) return;
             Node node = new Node(latLon.getLatitude(), latLon.getLongitude(), -1);
             node.replaceTags(getTagsFromParams());
+            EditPoiData editPoiData = new EditPoiData(node, activity.getMyApplication());
             if (Boolean.valueOf(getParams().get(KEY_DIALOG))) {
+                Node newNode = editPoiData.getEntity();
                 EditPoiDialogFragment editPoiDialogFragment =
-                        EditPoiDialogFragment.createInstance(node, true, getTagsFromParams());
+                        EditPoiDialogFragment.createInstance(newNode, true, getTagsFromParams());
                 editPoiDialogFragment.show(activity.getSupportFragmentManager(),
                         EditPoiDialogFragment.TAG);
             } else {
@@ -1536,7 +1538,6 @@ public class QuickActionFactory {
                 } else {
                     mOpenstreetmapUtil = plugin.getPoiModificationRemoteUtil();
                 }
-                EditPoiData editPoiData = new EditPoiData(node, activity.getMyApplication());
 
                 final boolean offlineEdit = mOpenstreetmapUtil instanceof OpenstreetmapLocalUtil;
                 Node                  newNode        = new Node(node.getLatitude(), node.getLongitude(), node.getId());
@@ -1797,6 +1798,7 @@ public class QuickActionFactory {
 
         private PoiCategory getCategory(Map<String, PoiType> allTranslatedNames) {
             String tp = getTagsFromParams().get(POI_TYPE_TAG);
+            if (tp == null) return null;
             PoiType pt = allTranslatedNames.get(tp.toLowerCase());
             if (pt != null) {
                 return pt.getCategory();
