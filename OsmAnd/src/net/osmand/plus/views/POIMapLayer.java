@@ -393,6 +393,9 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 							v.requestFocus();
 						}
 						break;
+					case MotionEvent.ACTION_POINTER_DOWN:
+					        settings.setTextZoom( (int)(settings.getTextZoom() * 1.1) );
+						break;
 				}
 				return false;
 			}
