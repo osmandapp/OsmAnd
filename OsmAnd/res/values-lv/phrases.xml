@@ -1424,4 +1424,6 @@
 
 	<string name="poi_rescue_station">Glābšanas stacija</string>
 
+	<string name="poi_mini_roundabout">Mini aplis</string>
+	<string name="poi_railway_crossing">Dzelzceļa pārbrauktuve</string>
 	</resources>
