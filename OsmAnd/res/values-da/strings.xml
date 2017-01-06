@@ -2788,7 +2788,7 @@ Hvis du  ønsker at støtte OsmAnd og OSM, er dette en god måde at gøre det p�
     <string name="quick_action_gpx_dialog">Vis GPX rutepunkt dialogboks</string>
     <string name="favorite_autofill_toast_text">" er gemt på "</string>
     <string name="favorite_empty_place_name">Sted</string>
-    <string name="quick_action_duplicates">Angivne hurtig handling er allerede i brug, navnet blev ændret til %1$ s at undgå overlapning.</string>
+    <string name="quick_action_duplicates">Angivne hurtig handling er allerede i brug, navnet blev ændret til %1$s at undgå overlapning.</string>
     <string name="quick_action_duplicate">Hurtig handling navn dublet</string>
     <string name="quick_action_showhides_favorites_discr">Tryk på handling vil vise eller skjule favoritpunkter på kort.</string>
     <string name="quick_action_showhides_poi_discr">Klik på handling vil vise eller skjule IP punkter på kortet.</string>
