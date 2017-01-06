@@ -102,11 +102,13 @@ public class ContextMenuHelper {
 		final WebView wv = new WebView(ctx);
 		WebSettings settings = wv.getSettings();
 		settings.setDefaultTextEncodingName("utf-8");
-		settings.setBuiltInZoomControls(true);
+
+		//Zooming does not work ok here
+		settings.setBuiltInZoomControls(false);
 		settings.setDisplayZoomControls(false);
-		settings.setSupportZoom(true);
+
+		//Scale web view font size with system font size
 		if (android.os.Build.VERSION.SDK_INT >= 14) {
-			//Scale web view font size with system font size
 			settings.setTextZoom((int) (ctx.getResources().getDisplayMetrics().density * 100f));
 		} else {
 			if (ctx.getResources().getDisplayMetrics().density <= 0.5f) {
