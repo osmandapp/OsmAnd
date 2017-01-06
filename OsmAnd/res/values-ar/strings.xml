@@ -1782,7 +1782,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="number_of_recipients">عدد المستلمين</string>
     <string name="osm_editors_ranking">ترتيب المحررين OSM</string>
     <string name="osm_live_subscription">إشتراك OSM مُباشر</string>
-    <string name="osm_live_subscribe_btn">الاشتراك</string>
+    <string name="osm_live_subscribe_btn">إشترك الآن</string>
     <string name="osm_live_support_region">دعم المنطقة</string>
     <string name="osm_live_month_cost">تكلفة الشهر</string>
     <string name="osm_live_month_cost_desc">الدفع الشهري</string>
@@ -2557,10 +2557,10 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="osmand_plus_banner_desc">نسخة كاملة من التطبيق مع تحميل غير محدود وتحديثات شهرية للخرائط .</string>
     <string name="si_mi_meters">أميال/أمتار</string>
     <string name="get_it">تحميل</string>
-    <string name="osm_live_payment_desc">رسوم الاشتراك ستفرض كل شهر. يمكنك إلغاء اشتراكك متى أردت عبر جوجل بلاي.</string>
+    <string name="osm_live_payment_desc">رُسوم الاشتراك سَتُقتَرضُ كُل شهرٍ. يمكنك إلغاء اشتراكك متى أردت عبر جوجل بلاي.</string>
     <string name="donation_to_osm">التبرع لمجتمع OpenStreetMap</string>
-    <string name="donation_to_osm_desc">سيتم إرسال جزء من تبرعك إلى مستخدمي OSM الذين يقومون باحداث التغييرات على الموقع، تكلفة الاشتراك تبقى نفسها.</string>
-    <string name="osm_live_subscription_desc">الاشتراك يتيح تحديثات كل ساعة، يوميا، أسبوعيا والتحميل الغير محدود لجميع خرائط العالم.</string>
+    <string name="donation_to_osm_desc">سيتمّ إرسالُ جزءٍ من تبرعك إلى مُساهمي OSM الذين يقومون بإحداث التغييرات على موقع خريطة الطريق المفتوح. تكلفة الاشتراك تبقى نفسها.</string>
+    <string name="osm_live_subscription_desc">يُتيحُ لك الاشتراك على الحصول على تحديثات كل ساعة، يوميا أو أسبوعيا بالإضافة إلى تنزيلات غير محدودة لكافة الخرائط.</string>
     <string name="driving_region_australia">أستراليا</string>
     <string name="lang_kab">قبائلي</string>
     <string name="shared_string_filters">فلترات</string>
