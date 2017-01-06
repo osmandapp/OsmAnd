@@ -4,7 +4,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
-//import android.content.res.Configuration;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -373,19 +373,16 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 		settings.setDisplayZoomControls(false);
 
 		//Scale web view font size with system font size
-		float systemFontScaling = ctx.getResources().getDisplayMetrics().density;
-		//float systemFontScaling = ctx.getResources().getDisplayMetrics().density * android.content.res.Configuration.fontScale;
-		//float systemFontScaling = android.content.res.Configuration.fontScale;
 		if (android.os.Build.VERSION.SDK_INT >= 14) {
-			settings.setTextZoom((int) (systemFontScaling * 100f));
+			settings.setTextZoom((int) (getSystemFontScaling() * 100f));
 		} else {
-			if (systemFontScaling <= 0.5f) {
+			if (getSystemFontScaling() <= 0.5f) {
 				settings.setTextSize(WebSettings.TextSize.SMALLEST);
-			} else if (systemFontScaling <= 0.75f) {
+			} else if (getSystemFontScaling() <= 0.75f) {
 				settings.setTextSize(WebSettings.TextSize.SMALLER);
-			} else if (systemFontScaling <= 1.0f) {
+			} else if (getSystemFontScaling() <= 1.0f) {
 				settings.setTextSize(WebSettings.TextSize.NORMAL);
-			} else if (systemFontScaling <= 1.5f) {
+			} else if (getSystemFontScaling() <= 1.5f) {
 				settings.setTextSize(WebSettings.TextSize.LARGER);
 			} else {
 				settings.setTextSize(WebSettings.TextSize.LARGEST);
@@ -422,6 +419,10 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 
 		dialog.setCancelable(true);
 		dialog.show();
+	}
+
+	private float getSystemFontScaling () {
+		return android.content.res.Configuration.fontScale;
 	}
 
 	private static void showText(final Context ctx, final OsmandApplication app, final String text, String title) {
