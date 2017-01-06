@@ -4,7 +4,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.content.res.Configuration;
+//import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -373,7 +373,9 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 		settings.setDisplayZoomControls(false);
 
 		//Scale web view font size with system font size
-		float systemFontScaling = ctx.getResources().getDisplayMetrics().density * android.content.res.Configuration.fontScale;
+		float systemFontScaling = ctx.getResources().getDisplayMetrics().density;
+		//float systemFontScaling = ctx.getResources().getDisplayMetrics().density * android.content.res.Configuration.fontScale;
+		//float systemFontScaling = android.content.res.Configuration.fontScale;
 		if (android.os.Build.VERSION.SDK_INT >= 14) {
 			settings.setTextZoom((int) (systemFontScaling * 100f));
 		} else {
