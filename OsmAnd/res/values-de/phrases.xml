@@ -2393,15 +2393,15 @@
 	<string name="poi_historic_period_roman_kingdom">Historisches Zeitalter: Römische Königszeit (756 - 509 v. Chr.)</string>
 	<string name="poi_historic_period_dominate">Historisches Zeitalter: Dominat (285 - 476 n. Chr.)</string>
 	<string name="poi_historic_period_ptolemaic_egypt">Historisches Zeitalter: Ptolemäisches Königreich (305 - 30 v. Chr.)</string>
-	<string name="poi_historic_period_villager">Historisches Zeitalter: Spiedler (Epoche I, II, 1580 v. Chr. - 133 n. Chr.)</string>
-	<string name="poi_historic_period_urban">Historisches Zeitalter: städtisch (Epoche III, 133 - 374 n. Chr.)</string>
-	<string name="poi_historic_period_classical">Historisches Zeitalter: Klassik (Epoche IV, 374 - 900 n. Chr.)</string>
-	<string name="poi_historic_period_imperial">"Historisches Zeitalter: Imperialismus  (Epoch V, 900 - 1200 n. Chr.)"</string>
+	<string name="poi_historic_period_villager">Historisches Zeitalter: Spiedler (I, II Epoche, 1580 v. Chr. - 133 n. Chr.)</string>
+	<string name="poi_historic_period_urban">Historisches Zeitalter: städtisch (III Epoche, 133 - 374 n. Chr.)</string>
+	<string name="poi_historic_period_classical">Historisches Zeitalter: Klassik (IV Epoche, 374 - 900 n. Chr.)</string>
+	<string name="poi_historic_period_imperial">"Historisches Zeitalter: Imperialismus  (V Epoche, 900 - 1200 n. Chr.)"</string>
 
 	<string name="poi_historic_era_paleolithic">Historische Epoche: Altsteinzeit (2,6 millionen Jahre - 10000 BP (vor heute))</string>
 	<string name="poi_historic_era_mesolithic">Historische Epoche: Mittelsteinzeit</string>
 	<string name="poi_historic_era_neolithic">Historische Epoche: Jungsteinzeit</string>
-	<string name="poi_historic_era_chalcolithic">Historische Epoche: Kupfersteinzeit (IV-III Jahrtausend v.Chr.)</string>
+	<string name="poi_historic_era_chalcolithic">Historische Epoche: Kupfersteinzeit (4. - 3. Jahrtausend v.Chr.)</string>
 
 	<string name="poi_stone_type_conciliation_cross">Typ: Steinkreuz</string>
 	<string name="poi_site_type_hut_circle">Hüttenkreis</string>
