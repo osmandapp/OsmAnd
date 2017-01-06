@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
 	android:installLocation="auto" 
 	android:versionName="@string/app_version" 
 	android:versionCode="240"
@@ -7,7 +8,8 @@
 
 	<uses-sdk android:minSdkVersion="14" android:targetSdkVersion="21" />
 
-
+	<uses-sdk tools:overrideLibrary="com.getkeepsafe.taptargetview" />
+	
 	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 	<uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
