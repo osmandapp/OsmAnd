@@ -53,6 +53,7 @@ import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.GeocodingLookupService;
+import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
@@ -680,7 +681,7 @@ public class QuickActionFactory {
 
         private void fillGroupParams(View root, String name, int color) {
 
-            if (color == 0) color = R.color.color_favorite;
+            if (color == 0) color = root.getContext().getResources().getColor(R.color.color_favorite);
 
             ((AutoCompleteTextViewEx) root.findViewById(R.id.category_edit)).setText(name);
             ((ImageView) root.findViewById(R.id.category_image)).setColorFilter(color);
@@ -1222,7 +1223,7 @@ public class QuickActionFactory {
 
         private void fillGroupParams(View root, String name, int color) {
 
-            if (color == 0) color = R.color.icon_color;
+            if (color == 0) color = root.getContext().getResources().getColor(R.color.icon_color);
 
             ((AutoCompleteTextViewEx) root.findViewById(R.id.category_edit)).setText(name);
             ((ImageView) root.findViewById(R.id.category_image)).setColorFilter(color);
