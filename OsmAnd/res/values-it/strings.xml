@@ -2199,8 +2199,8 @@ Attivando questa vista lo stile della mappa diventerà \'Inverno e sci\', mostra
 
     <string name="shared_string_qr_code">codice QR</string>
     <string name="map_downloaded">Mappa scaricata</string>
-    <string name="map_downloaded_descr">Mappa %1$s scaricata. Torna alla mappa per iniziare a utilizzarla.</string>
-    <string name="go_to_map">Vai alla mappa</string>
+    <string name="map_downloaded_descr">La mappa %1$s è stata scaricata. ora puoi iniziare a utilizzarla.</string>
+    <string name="go_to_map">Mostra la mappa</string>
     <string name="show_on_start_description">\'Spegni\' lancia direttamente la schermata della mappa</string>
     <string name="enter_country_name">Inserisci il nome della nazione</string>
     <string name="new_version">Nuova versione</string>
@@ -2346,7 +2346,7 @@ Attivando questa vista lo stile della mappa diventerà \'Inverno e sci\', mostra
     <string name="rec_split_storage_size_desc">Quantità di spazio che può essere occupata dal totale delle note</string>
     <string name="update_time">Ora di aggiornamento</string>
     <string name="updates_size">Dimensione aggiornamenti</string>
-    <string name="last_map_change">Ultimo cambiamento della mappa: %s</string>
+    <string name="last_map_change">Ultima modifica alla mappa: %s</string>
     <string name="hourly">Orario</string>
     <string name="daily">Giornaliero</string>
     <string name="weekly">Settimanale</string>
@@ -2620,7 +2620,7 @@ Se ami OsmAnd e OSM e vuoi sostenerli, questo è un modo perfetto per farlo.</st
     <string name="osm_live_banner_desc">Ottieni download delle mappe illimitati e aggiornamenti più frequenti di una volta al mese: a ogni ora, giorno o settimana.</string>
     <string name="osmand_plus_banner_desc">Versione completa di OsmAnd con download illimitati e aggiornamenti mensili delle mappe.</string>
     <string name="si_mi_meters">Miglia/metri</string>
-    <string name="search_map">Ricerca della mappa…</string>
+    <string name="search_map">Ricerca delle mappe…</string>
     <string name="first_usage_wizard_desc">Permetti a OsmAnd di determinate la tua posizione e suggerire le mappe da scaricare per quella regione.</string>
     <string name="location_not_found">Posizione non trovata</string>
     <string name="no_inet_connection">Connessione internet assente</string>
