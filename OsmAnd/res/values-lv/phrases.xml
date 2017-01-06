@@ -1415,4 +1415,13 @@
 	<string name="poi_smoking_dedicated">Tikai smēķētājiem</string>
 
 	<string name="poi_toll_no">Bezmaksas</string>
+	<string name="poi_toll_yes">Maksas</string>
+	<string name="poi_toll_hgv_yes">Maksas kravas automašīnām</string>
+	<string name="poi_tactile_paving_yes">Jā</string>
+	<string name="poi_traffic_signals_sound_yes">Jā</string>
+	<string name="poi_traffic_signals_sound_no">Nē</string>
+	<string name="poi_traffic_signals_sound_walk">Tikai tad, kad atļauts iet</string>
+
+	<string name="poi_rescue_station">Glābšanas stacija</string>
+
 	</resources>
