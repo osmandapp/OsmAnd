@@ -1308,7 +1308,7 @@
 	<string name="poi_bicycle_parking_building">Īpaša izbūve</string>
 	<string name="poi_bicycle_parking_shed">Velostāvvietas namiņš</string>
 	<string name="poi_bicycle_parking_bollard">Velostāvvietas stabiņi</string>
-	<string name="poi_bicycle_parking_informal">Neoficiāla</string>
+	<string name="poi_bicycle_parking_informal">Neoficiāls</string>
 
 	<string name="poi_genus">Šķira</string>
 	<string name="poi_taxon">Taksons</string>
@@ -1388,7 +1388,7 @@
 	<string name="poi_information_sign">Zīme</string>
 	<string name="poi_information_audioguide">Audiogids</string>
 	<string name="poi_information_bicyclemap">Velotūristu karte</string>
-	<string name="poi_board_type_notice">Paziņojumu dēlis</string>
+	<string name="poi_board_type_notice">Ziņojumu dēlis</string>
 	<string name="poi_board_type_geology">Ğeoloğija</string>
 	<string name="poi_board_type_public_transport">Publiskais transports</string>
 	<string name="poi_board_type_technology">Tehnoloğijas</string>
@@ -1398,4 +1398,21 @@
 	<string name="poi_fireplace_no">Bez ugunskura vietas</string>
 
 	<string name="poi_covered_yes">Jā</string>
+	<string name="poi_craft_saddler">Sēdekļu meistars</string>
+	<string name="poi_craft_sun_protection">Sauljumi, žalūzijas</string>
+	<string name="poi_small_craft_facility">Laivu ražotne</string>
+	<string name="poi_start_date">Atvēršanas datums</string>
+	<string name="poi_urban">Pilsētniecisks</string>
+	<string name="poi_rural">Lauciniecisks</string>
+
+	<string name="poi_intermittent">Intermitējošs</string>
+
+	<string name="poi_information_hikingmap">Kājāmgājēju karte</string>
+	<string name="poi_information_tactile_model">Taktils modelis</string>
+	<string name="poi_information_tactile_map">Taktila karte</string>
+	<string name="poi_smoking_separated">Atsevišķā telpā</string>
+	<string name="poi_smoking_isolated">Īpašā telpā</string>
+	<string name="poi_smoking_dedicated">Tikai smēķētājiem</string>
+
+	<string name="poi_toll_no">Bezmaksas</string>
 	</resources>
