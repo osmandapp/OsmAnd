@@ -16,11 +16,11 @@
 	<string name="poi_highway_crossing_type">Veids</string>
 	<string name="poi_tactile_paving">Bruğa segums</string>
 	<string name="poi_service_car">Serviss</string>
-	<string name="poi_brushless">Bezkontakta</string>
+	<string name="poi_brushless">Bezkontaktu</string>
 	<string name="poi_self_service">Pašapkalpošanās</string>
 	<string name="poi_automated">Automatizētie</string>
 	<string name="poi_parking_type">Veids</string>
-	<string name="poi_covered">Nosegts</string>
+	<string name="poi_covered">Apsegts</string>
 	<string name="poi_subway_station_filter">Metro stacija</string>
 	<string name="poi_ferry_terminal_cargo">Kravas terminālis</string>
 	<string name="poi_bicycle_parking_type">Veids</string>
@@ -32,7 +32,7 @@
 	<string name="poi_animal_training_type">Veids</string>
 	<string name="poi_embassy_type">Veids</string>
 	<string name="poi_city_capital">Galvaspilsēta</string>
-	<string name="poi_pharmacy_dispensing">Receptes</string>
+	<string name="poi_pharmacy_dispensing">Zāles pret receptēm</string>
 	<string name="poi_healthcare_alternative_types">Specializācija</string>
 	<string name="poi_free_flying_characteristics">Pazīmes</string>
 	<string name="poi_archaeological_site_type">Veids</string>
@@ -64,22 +64,22 @@
 	<string name="poi_beach_surface_type">Virsma</string>
 	<string name="poi_nudism">Nūdisms</string>
 	<string name="poi_diet">Diēta</string>
-	<string name="poi_health_specialty">Veselības nozare</string>
+	<string name="poi_health_specialty">Veselības specialitāte</string>
 	<string name="poi_massage_type">Masāžas veids</string>
 	<string name="poi_tents">Teltis</string>
-	<string name="poi_washing_machine">Mazgājamā mašīna</string>
+	<string name="poi_washing_machine">Veļas mašīna</string>
 	<string name="poi_caravans">Karavānas</string>
 	<string name="poi_power_supply">Strāvas avots</string>
 	<string name="poi_medical_system">Medicīnas sistēma</string>
 	<string name="poi_home_visit">Mājas vizīte</string>
-	<string name="poi_dish">Trauki</string>
+	<string name="poi_dish">Ēdiens</string>
 	<string name="poi_payment_transport_type">Apmaksas veids (transports)</string>
 	<string name="poi_social_facility_type">Tips</string>
 	<string name="poi_social_facility_for">Sociālā grupa</string>
 	<string name="poi_compressed_air_filter">Saspiests gaiss</string>
 	<string name="poi_vacuum_cleaner_filter">Putekļsūcējs</string>
 	<string name="poi_shop">Veikals</string>
-	<string name="poi_shop_food">Iepirkšanās vietas un lielveikali</string>
+	<string name="poi_shop_food">Pārtikas veikali un lielveikali</string>
 	<string name="poi_emergency">Avārijas dienesti</string>
 	<string name="poi_emergency_infrastructure">Avārijas dienestu infrastruktūra</string>
 	<string name="poi_transportation">Transports</string>
@@ -123,7 +123,7 @@
 	<string name="poi_osmwiki">Vikipēdija</string>
 	<string name="poi_user_defined_other">Lietotāja definēts</string>
 
-	<string name="poi_palaeontological_site">Palaeontoloğiskais objekts</string>
+	<string name="poi_palaeontological_site">Palaeontoloğiskie objekti</string>
 
 	<string name="poi_bakery">Maiznīca</string>
 	<string name="poi_alcohol">Alkoholiskie dzērieni</string>
@@ -1641,4 +1641,21 @@
 	<string name="poi_payment_union_card_no">Union Card kartes nepieņem</string>
 	<string name="poi_payment_mtsmoney_yes">MTS-Money maksājumi</string>
 	<string name="poi_payment_mtsmoney_no">MTS-Money maksājumus nepieņem</string>
+	<string name="poi_payment_yandexmoney_yes">Yandex.Money maksājumi</string>
+	<string name="poi_payment_yandexmoney_no">Yandex.Money maksājumus nepieņem</string>
+	<string name="poi_description_payment">Maksājumu veidi</string>
+
+	<string name="poi_diet_vegetarian_filter_yes">Veğetāriešiem</string>
+	<string name="poi_diet_vegetarian_few">Veğetāriešiem (nedaudz)</string>
+	<string name="poi_diet_vegetarian_only">Tikai veğetāriešiem</string>
+	<string name="poi_diet_vegetarian_yes">Veğetāriešiem</string>
+	<string name="poi_diet_vegetarian_no">Veğetāriešu uztura nav</string>
+	<string name="poi_information_trail_blaze">Ceļa atzīmes</string>
+	<string name="poi_nudism_permissive">Ar atļaujām</string>
+
+	<string name="poi_population">Iedzīvotāji</string>
+	<string name="poi_leaf_type_needleleaved">Skujkoki</string>
+	<string name="poi_leaf_type_broadleaved">Lapu koki</string>
+	<string name="poi_leaf_type_mixed">Jaukti</string>
+	<string name="poi_leaf_type_leafless">Bezlapu</string>
 	</resources>
