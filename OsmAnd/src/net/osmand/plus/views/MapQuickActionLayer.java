@@ -78,7 +78,6 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionRe
             }
         });
 
-
         Context context = view.getContext();
         contextMarker = new ImageView(context);
         contextMarker.setLayoutParams(new FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT));
