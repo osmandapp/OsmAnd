@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
     <string name="about_version">Верзија:</string>
     <string name="shared_string_about">Oko</string>
     <string name="about_settings_descr">Верзија инфо, лиценце, чланови пројекта</string>
@@ -247,7 +248,7 @@
 	<string name="map_update">Доступне су надоградње %1$s карата</string>
 	<string name="search_for">Потражи</string>
 	
-	<string name="shared_string_show_all">ПРИКАЖИ СВЕ</string>
+	<string name="shared_string_show_all">Прикажи све</string>
 	<string name="coordinates">Координате</string>
 	<string name="shared_string_never">Никад</string>
     
@@ -401,7 +402,7 @@
     <string name="please_specify_poi_type_only_from_list">Молим, изаберите тачну врсту тачке занимања или је прескочите</string>
     <string name="access_from_map_description">Дугме изборника не покреће изборник, већ плочу полетника</string>
     <string name="access_from_map">Приступ са карте</string>
-    <string name="show_on_start_description">„Искључи“ покреће екран мапе</string>
+    <string name="show_on_start_description">„Искључи“ покреће приказ карте</string>
     <string name="show_on_start">Прикажи при покретању</string>
     <string name="copied_to_clipboard">Умножено је у оставу исечака</string>
     <string name="osm_save_offline">Сачувај за преглед ван мреже</string>
@@ -449,21 +450,21 @@
     <string name="regions">Области</string>
     <string name="region_maps">Карте великих области</string>
     <string name="world_maps">Светске карте</string>
-    <string name="srtm_plugin_disabled">Линије оцрта су онемогућене</string>
+    <string name="srtm_plugin_disabled">Линије обриса су онемогућене</string>
     <string name="favorite_category_add_new">Додај ново</string>
     <string name="favorite_category_select">Изаберите врсту</string>
     <string name="default_speed_system_descr">Одредите мерне јединице за брзину</string>
     <string name="default_speed_system">Мерне јединице</string>
-    <string name="si_nm">Наутичке миље</string>
+    <string name="si_nm">Пловне миље</string>
     <string name="si_kmh">Километри по сату</string>
     <string name="si_mph">Миље по сату</string>
     <string name="si_m_s">Метри по секунди</string>
     <string name="si_min_km">Минути по километру</string>
     <string name="si_min_m">Минути по миљи</string>
-    <string name="si_nm_h">Наутичке миље по сату (чворови)</string>
+    <string name="si_nm_h">Пловне миље по сату (чворови)</string>
     <string name="shared_string_trip_recording">Снимање путовања</string>
     <string name="shared_string_navigation">Навођење</string>
-    <string name="osmand_running_in_background">Радња у позадини</string>
+    <string name="osmand_running_in_background">Рад у позадини</string>
     <string name="gps_wake_up_timer">Међувреме буђења ГПС-а</string>
     <string name="favourites_edit_dialog_title">Омиљена обавештења</string>
     <string name="simulate_your_location_stop_descr">Заустави опонашање свог положаја</string>
@@ -542,7 +543,7 @@
     <string name="shared_string_copy">Умножи</string>
     <string name="filter_poi_hint">Распореди по имену</string>
     <string name="search_poi_category_hint">Куцајте за претрагу свега</string>
-    <string name="shared_string_is_open">Отвори</string>
+    <string name="shared_string_is_open">Отвори сада</string>
     <string name="rendering_attr_OSMMapperAssistant_name">Помоћник карата ОСМ-а</string>
     <string name="agps_info">Обавештења А-ГПС-а</string>
     <string name="shared_string_manage">Управљај</string>
@@ -555,7 +556,7 @@
     <string name="confirm_usage_speed_cameras">У многим државама (Германији, Француској, Италији и др.) је употреба покретне камере забрањена законом. ОсмАнд није одговоран за корисниково кршење закона. Молим, кликните на да само ако је ова могућност снимања законита.</string>
     <string name="welmode_download_maps">Преузми карте</string>
     <string name="welcome_select_region">Молим, изаберите своју област ради правилног читања саобраћајних знакова и прописа.</string>
-    <string name="welcome_text">ОсмАнд има могућност прегледа земаљских мапа ван мреже и навођења ван мреже светом!</string>
+    <string name="welcome_text">ОсмАнд има могућност прегледа земаљских карата ван мреже и навођења ван мреже светом!</string>
     <string name="welcome_header">Добродошли</string>
     <string name="current_route">Тренутна путања</string>
     <string name="osm_changes_added_to_local_edits">Измене ОСМ-а додате скупу месних измена</string>
@@ -571,7 +572,7 @@
     <string name="action_create">Дејство стварања</string>
     <string name="osm_edits">Уредбе ОСМ-а</string>
     <string name="parking_place_limited">Време паркирања је ограничено на</string>
-    <string name="osmand_parking_time_left">лево</string>
+    <string name="osmand_parking_time_left">преостало</string>
     <string name="your_edits">Ваше уредбе</string>
     <string name="waypoint_visit_after">Посети након</string>
     <string name="waypoint_visit_before">Посети пре</string>
@@ -600,7 +601,7 @@
     <string name="shared_string_none">Ништа</string>
     <string name="shared_string_help">Помоћ</string>
     <string name="shared_string_settings">Поставке</string>
-    <string name="shared_string_history">Прошли догађаји</string>
+    <string name="shared_string_history">Минули догађаји</string>
     <string name="shared_string_select_on_map">Изабери на карти</string>
     <string name="shared_string_select_all">Означи све</string>
     <string name="shared_string_deselect">Одзначи</string>
@@ -1079,4 +1080,15 @@
     <string name="clear_updates_proposition_message">Можете уклонити преузете надоградње и вратити се на изворну карту</string>
     <string name="shared_string_select">Означи</string>
     <string name="osmand_rastermaps_plugin_description"/>
+    <string name="rendering_attr_contourDensity_description">Густина линија обриса</string>
+    <string name="rendering_attr_contourDensity_name">Густина линија обриса</string>
+    <string name="rendering_value_high_name">Густа</string>
+    <string name="rendering_value_medium_w_name">Средња</string>
+    <string name="rendering_value_low_name">Ретка</string>
+    <string name="rendering_attr_contourWidth_description">Дебљина линија обриса</string>
+    <string name="rendering_attr_contourWidth_name">Дебљина линија обриса</string>
+    <string name="rendering_attr_hideWaterPolygons_description">Вода</string>
+    <string name="rendering_attr_hideWaterPolygons_name">Сакриј воду</string>
+    <string name="legacy_search">Стара претрага</string>
+    <string name="show_legacy_search">Приказуј стару претрагу</string>
     </resources>
