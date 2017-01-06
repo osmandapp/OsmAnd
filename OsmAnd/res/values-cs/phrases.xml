@@ -3290,4 +3290,41 @@
 	<string name="poi_observatory_designation">Označení</string>
 	<string name="poi_emergency_infrastructure">Nouzová infrastruktura</string>
 	<string name="poi_health_specialty_reiki_yes">Reiki</string>
-	</resources>
+	<string name="poi_wiki_lang_bpy">Bišnuprijská wiki</string>
+	<string name="poi_wiki_lang_fa">Perská wiki</string>
+	<string name="poi_wiki_lang_fy">Fríská wiki</string>
+	<string name="poi_wiki_lang_mr">Maráthská wiki</string>
+	<string name="poi_wiki_lang_nds">Dolnoněmecká wiki</string>
+	<string name="poi_wiki_lang_os">Osetská wiki</string>
+	<string name="poi_wiki_lang_pms">Piedmontská wiki</string>
+	<string name="poi_wiki_lang_sh">Srbochorvatská wiki</string>
+	<string name="poi_wiki_lang_war">Warajská wiki</string>
+	<string name="poi_wiki_lang_min">Minangkabauská wiki</string>
+	<string name="poi_wiki_lang_zhminnan">Wiki Jižní Min</string>
+	<string name="poi_wiki_lang_pnb">Paňdžábská wiki</string>
+	<string name="poi_wiki_lang_cv">Čuvašská wiki</string>
+	<string name="poi_shuffleboard">Holandský billiard</string>
+	<string name="poi_medical_system_kampo_yes">Kampo</string>
+	<string name="poi_cuisine_crepe">Krep</string>
+	<string name="poi_cuisine_tacos">Tacos</string>
+	<string name="poi_cuisine_piadina">Piadina</string>
+	<string name="poi_cuisine_falafel">Falafel</string>
+	<string name="poi_cuisine_smoothie">Smoothie (ovocný nebo zeleninový nápoj)</string>
+	<string name="poi_cuisine_souvlaki">Špízy Souvlaki</string>
+	<string name="poi_cuisine_empanada">Empanada</string>
+	<string name="poi_cuisine_yakiniku">Yakiniku</string>
+	<string name="poi_cliff">Útes</string>
+
+	<string name="poi_animal_keeping">Chov zvířat</string>
+	<string name="poi_animal_keeping_horse">Chov zvířat: kůň</string>
+	<string name="poi_animal_keeping_sheep">Chov zvířat: ovce</string>
+	<string name="poi_animal_keeping_type_paddock">Typ: padok</string>
+	<string name="poi_animal_keeping_type_open_stable">Typ: otevřený pevný</string>
+
+	<string name="poi_tower_construction_freestanding">Konstrukce: volně stojící</string>
+	<string name="poi_tower_construction_dome">Konstrukce: kupole</string>
+	<string name="poi_railway_yard">Nákladové nádraží</string>
+
+	<string name="poi_coworking_space">Sdílený pracovní prostor</string>
+
+</resources>
