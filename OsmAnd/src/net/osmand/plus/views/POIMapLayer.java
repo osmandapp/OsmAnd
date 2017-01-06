@@ -370,6 +370,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 		settings.setDisplayZoomControls(false);
 		settings.setSupportZoom(true);
 		if (android.os.Build.VERSION.SDK_INT >= 14) {
+			//Scale web view font size with system font size
 			settings.setTextZoom((int) (ctx.getResources().getDisplayMetrics().density * 100f));
 		}
 
