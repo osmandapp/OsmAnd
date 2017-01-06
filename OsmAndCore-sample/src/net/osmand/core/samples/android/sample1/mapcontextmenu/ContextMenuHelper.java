@@ -130,8 +130,7 @@ public class ContextMenuHelper {
 						}
 						break;
 				}
-				//return false;
-				return super.onTouchEvent(event);
+				return false;
 			}
 		});
 

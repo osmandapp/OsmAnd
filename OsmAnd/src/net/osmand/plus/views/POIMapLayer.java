@@ -394,8 +394,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 						}
 						break;
 				}
-				//return false;
-				return super.onTouchEvent(event);
+				return false;
 			}
 		});
 
