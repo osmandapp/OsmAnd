@@ -60,7 +60,7 @@
             android:layout_height="wrap_content"
             android:background="?attr/bg_color"
             android:paddingTop="16dp"
-            android:paddingBottom="16dp"
+            android:paddingBottom="8dp"
             osmand:layout_scrollFlags="scroll">
             <!--android:layout_marginLeft="72dp"-->
 
@@ -90,6 +90,7 @@
                     android:hint="@string/poi_dialog_poi_type"
                     android:imeOptions="actionSend"
                     android:inputType="text"
+                    android:layout_marginLeft="-4dp"
                     tools:text="@string/lorem_ipsum"/>
 
             </android.support.design.widget.TextInputLayout>
@@ -124,7 +125,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?attr/bg_color"
-            android:paddingTop="16dp"
             android:paddingBottom="16dp"
             android:orientation="vertical">
 
@@ -163,5 +163,13 @@
                 <!--android:textSize="@dimen/default_sub_text_size"-->
                 <!--osmand:typeface="@string/font_roboto_medium"/>-->
         </LinearLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:scaleType="fitXY"
+            android:src="@drawable/bg_shadow_list_bottom" />
+
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>
