@@ -1,5 +1,0 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="bidforfix_loading">جاري التحميل</string>
-    <string name="bidforfix_supporters">%1$d بدعم من</string>
-	<string name="bidforfix_funded">ممول من: %d%%</string>    
-</resources>

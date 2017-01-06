@@ -1,5 +1,0 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="bidforfix_loading">Carrigamentu</string>
-    <string name="bidforfix_supporters">%1$d Sustenitores</string>
-	<string name="bidforfix_funded">finantziau: %d%%</string>    
-</resources>
