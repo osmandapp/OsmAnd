@@ -108,6 +108,18 @@ public class ContextMenuHelper {
 		if (android.os.Build.VERSION.SDK_INT >= 14) {
 			//Scale web view font size with system font size
 			settings.setTextZoom((int) (ctx.getResources().getDisplayMetrics().density * 100f));
+		} else {
+			if (ctx.getResources().getDisplayMetrics().density <= 0.5f) {
+				settings.setTextSize(settings.TextSize.SMALLEST);
+			} else if (ctx.getResources().getDisplayMetrics().density <= 0.75f) {
+				settings.setTextSize(settings.TextSize.SMALLER);
+			} else if (ctx.getResources().getDisplayMetrics().density <= 1.0f) {
+				settings.setTextSize(settings.TextSize.NORMAL);
+			} else if (ctx.getResources().getDisplayMetrics().density <= 1.5f) {
+				settings.setTextSize(settings.TextSize.LARGER);
+			} else {
+				settings.setTextSize(settings.TextSize.LARGEST);
+			}
 		}
 
 		wv.loadDataWithBaseURL(null, content, "text/html", "UTF-8", null);
