@@ -2956,4 +2956,6 @@
 	<string name="poi_medical_system_mongolian_yes">Tradičný mongolský</string>
 	<string name="poi_medical_system_tibetan_yes">Tradičný tibetský</string>
 	<string name="poi_medical_system_sidda_yes">Tradičný indický</string>
+	<string name="poi_medical_system_unani_yes">Tradičný islamský</string>
+
 	</resources>
