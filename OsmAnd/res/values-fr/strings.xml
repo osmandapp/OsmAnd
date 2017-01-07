@@ -2030,7 +2030,7 @@ Pour revenir à l’un des styles de carte classique de OsmAnd, désactivez simp
     <string name="help_us_to_improve_menu_group">Aidez-nous à améliorer OsmAnd</string>
     <string name="other_menu_group">Divers</string>
     <string name="plugins_menu_group">Greffons</string>
-    <string name="first_usage_item">Première utilisation</string>
+    <string name="first_usage_item">Premiers pas</string>
     <string name="first_usage_item_description">Comment télécharger des cartes et définir les paramètres de base</string>
     <string name="navigation_item_description">Configurer la navigation</string>
     <string name="faq_item">FAQ</string>
@@ -2517,7 +2517,7 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="btn_dismiss">Ignorer</string>
     <string name="quick_favorites_show_favorites_dialog">Afficher la liste des favoris</string>
     <string name="quick_favorites_name_preset">Nom du réglage</string>
-    <string name="quick_favorites_name_description">Si vous laissez cette zone vide, OsmAnd utilisera l\'adresse ou le nom du lieu pour ce favori.</string>
+    <string name="quick_favorites_name_description">Si vous ne renseignez pas cette zone, OsmAnd utilisera l\'adresse ou le nom du lieu.</string>
     <string name="quick_action_name_hint">Nom de l\'action</string>
     <string name="text_name">Nom</string>
     <string name="quick_action_favorite_dialog">Afficher la liste des favoris</string>
@@ -2536,7 +2536,7 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="quick_action_add_category">Ajouter une catégorie</string>
     <string name="quick_action_add_configure_map">Paramétrer la carte</string>
     <string name="quick_action_add_navigation">Navigation</string>
-    <string name="quick_action_fav_name_discr">Si vous laissez cette zone vide, OsmAnd utilisera l\'adresse ou le nom du lieu pour ce favori.</string>
+    <string name="quick_action_fav_name_discr">Si vous ne renseignez pas cette zone, OsmAnd utilisera l\'adresse ou le nom du lieu.</string>
     <string name="quick_action_bug_message">Message</string>
     <string name="quick_action_category_discr">Vous pouvez choisir une Catégorie pour ce favori.</string>
     <string name="quick_action_gpx_category_discr">Vous pouvez choisir une Catégorie pour ce point GPX.</string>
@@ -2553,8 +2553,8 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="quick_action_map_underlay_action">Ajouter une sous-couche</string>
     <string name="quick_action_map_source">Modifier la source de la carte</string>
     <string name="quick_action_map_source_title">Sources de cartes</string>
-    <string name="quick_action_map_source_action">Ajouter une source</string>
-    <string name="quick_action_map_source_switch">La source de carte a été modifié pour \"%s\".</string>
+    <string name="quick_action_map_source_action">Ajouter une source de carte</string>
+    <string name="quick_action_map_source_switch">La source de la carte a été modifiée pour \"%s\".</string>
     <string name="quick_action_poi_add">Ajouter</string>
     <string name="quck_action_btn_tutorial_title">Modifier la position du bouton</string>
     </resources>
