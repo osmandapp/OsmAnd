@@ -2740,4 +2740,5 @@ Facebook：https://www.facebook.com/osmandapp
     <string name="quick_action_poi_add">增加</string>
     <string name="quck_action_btn_tutorial_title">更改按鈕位置</string>
     <string name="quick_action_btn_tutorial_description">長按並拖動在螢幕上的按鈕改變位置</string>
-</resources>
+<string name="quick_favorites_name_description">將欄位留空白，OsmAnd 將使用地址或地點名稱為我的收藏標記</string>
+    </resources>
