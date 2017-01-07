@@ -370,9 +370,9 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 		WebSettings settings = wv.getSettings();
 		settings.setDefaultTextEncodingName("utf-8");
 
-		//Zooming does not work ok here
-		settings.setBuiltInZoomControls(false);
+		settings.setBuiltInZoomControls(true);
 		settings.setDisplayZoomControls(false);
+		settings.setSupportZoom(true);
 
 		//Scale web view font size with system font size
 		float scale = ctx.getResources().getConfiguration().fontScale;
@@ -400,7 +400,10 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 		lp.weight = 1;
 		ll.addView(scrollView, lp);
 		ll.addView(bottomBar, new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
+
+		//TODO: ScrollView gets in the way of the pinch gesture here, take wv outside
 		scrollView.addView(wv);
+
 		dialog.setContentView(ll);
 		wv.setFocusable(true);
 		wv.setFocusableInTouchMode(true);
