@@ -394,16 +394,15 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 
 		wv.loadDataWithBaseURL(null, content, "text/html", "UTF-8", null);
 //		wv.loadUrl(OsMoService.SIGN_IN_URL + app.getSettings().OSMO_DEVICE_KEY.get());
-		ScrollView scrollView = new ScrollView(ctx);
+		//For pinch zooming to work WebView must not be in side Scrollview
+		//ScrollView scrollView = new ScrollView(ctx);
 		ll.addView(topBar);
 		LayoutParams lp = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, 0);
 		lp.weight = 1;
-		ll.addView(scrollView, lp);
+		//ll.addView(scrollView, lp);
+		//scrollView.addView(wv);
+		ll.addView(wv, lp);
 		ll.addView(bottomBar, new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
-
-		//TODO: ScrollView gets in the way of the pinch gesture here, take wv outside
-		scrollView.addView(wv);
-
 		dialog.setContentView(ll);
 		wv.setFocusable(true);
 		wv.setFocusableInTouchMode(true);
