@@ -2010,8 +2010,8 @@ Dĺžka %2$s</string>
     <string name="world_map_download_descr">Svetová základná mapa (pokrývajúca celý svet pri malom priblížení) chýba alebo je zastaralá. Prosím zvážte jej stiahnutie pre celkový prehľad.</string>
     <string name="shared_string_qr_code">QR kód</string>
     <string name="map_downloaded">Mapa stiahnutá</string>
-    <string name="map_downloaded_descr">Mapa %1$s bola stiahnutá. Choďte späť na mapu a môžete ju začať používať.</string>
-    <string name="go_to_map">Ísť na mapu</string>
+    <string name="map_downloaded_descr">Mapa %1$s bola stiahnutá, môžete ju začať používať.</string>
+    <string name="go_to_map">Zobraziť mapu</string>
     <string name="show_on_start_description">\'Vypnuté\' spustí priamo obrazovku mapy</string>
     <string name="enter_country_name">Zadajte názov krajiny</string>
     <string name="new_version">Nová verzia</string>
@@ -2406,7 +2406,7 @@ Ak potrebuje pomoc s aplikáciou OsmAnd, kontaktuje podporu: support@osmand.net.
     <string name="skip_map_downloading">Preskočiť sťahovanie máp</string>
     <string name="skip_map_downloading_desc">Nemáte nainštalovanú žiadnu offline mapu. Môžete vybrať mapu zo zoznamu alebo stiahnuť mapy neskôr cez Menu - %1$s.</string>
     <string name="search_another_country">Zvoľte inú oblasť</string>
-    <string name="search_map">Hľadá sa mapa…</string>
+    <string name="search_map">Hľadajú sa mapy…</string>
     <string name="first_usage_wizard_desc">Nechajte OsmAnd určiť Vašu polohu a navrhnúť mapy, ktoré sa dajú stiahnuť pre daný región.</string>
     <string name="location_not_found">Poloha sa nenašla</string>
     <string name="no_inet_connection">Nie je pripojenie na Internet</string>
