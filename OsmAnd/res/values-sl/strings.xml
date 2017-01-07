@@ -2721,4 +2721,20 @@ V kolikor naletite na težave s programom OsmAnd, prosimo, stopite v stik s skup
     <string name="quick_action_add_configure_map">Nastavi zemljevid</string>
     <string name="quick_action_add_navigation">Krmarjenje</string>
     <string name="quick_action_bug_message">Sporočilo</string>
+    <string name="quick_action_poi_list">Seznam točk POI</string>
+    <string name="quick_action_map_style_action">Dodaj slog zemljevida</string>
+    <string name="quick_action_empty_param_error">Parametri ne smejo biti prazni</string>
+    <string name="quick_action_map_styles">Slogi zemljevida</string>
+    <string name="quick_action_map_overlay_title">Prekrivne plasti zemljevida</string>
+    <string name="quick_action_map_overlay_action">Dodaj prekrivno plast</string>
+    <string name="quick_action_map_underlay">Spremeni prekrivno plast zemljevida</string>
+    <string name="quick_action_map_underlay_title">Prekrivne plasti zemljevida</string>
+    <string name="quick_action_map_underlay_action">Dodaj prekrivno plast</string>
+    <string name="quick_action_map_source">Spremeni vir zemljevida</string>
+    <string name="quick_action_map_source_title">Viri zemljevida</string>
+    <string name="quick_action_map_source_dscr"/>
+    <string name="quick_action_map_source_action">Dodaj vir zemljevida</string>
+    <string name="quick_action_map_source_switch">Vir zemljevida je spremenjen na »%s«.</string>
+    <string name="quick_action_poi_add">Dodaj</string>
+    <string name="quck_action_btn_tutorial_title">Spremeni položaj gumba</string>
     </resources>
