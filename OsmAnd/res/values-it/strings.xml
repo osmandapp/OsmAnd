@@ -2724,4 +2724,33 @@ Se ami OsmAnd e OSM e vuoi sostenerli, questo è un modo perfetto per farlo.</st
     <string name="rendering_attr_hideWaterPolygons_description">Acqua</string>
     <string name="rendering_attr_hideWaterPolygons_name">Non visualizzare l\'acqua</string>
     <string name="rendering_attr_contourDensity_description">Densità delle linee isoipse</string>
+    <string name="configure_screen_quick_action">Azione veloce</string>
+
+    <string name="quick_action_item_action">Azione %d</string>
+    <string name="quick_action_item_screen">Schermo %d</string>
+    <string name="quick_action_add_marker">Aggiungi marcatore</string>
+    <string name="quick_action_add_poi">Aggiungi PDI</string>
+    <string name="quick_action_map_style">Cambia lo stile della mappa</string>
+    <string name="quick_action_map_style_switch">Lo stile della mappa è stato cambiato in \"%s\".</string>
+    <string name="quick_action_take_audio_note">Prendi una nota audio</string>
+    <string name="quick_action_take_video_note">Prendi una nota video</string>
+    <string name="quick_action_take_photo_note">Prendi una nota fotografica</string>
+    <string name="quick_action_add_osm_bug">Aggiungi una segnalazione di errore OSM</string>
+    <string name="quick_action_navigation_voice">Voce Accesa/Spenta</string>
+    <string name="quick_action_navigation_voice_off">Voce spenta</string>
+    <string name="quick_action_navigation_voice_on">Voce accesa</string>
+    <string name="quick_action_add_gpx">Aggiungi un punto intermedio GPX</string>
+    <string name="quick_action_add_parking">Aggiungi un parcheggio</string>
+    <string name="quick_action_new_action">Aggiungi un\'azione</string>
+    <string name="quick_action_edit_action">Modifica azione</string>
+    <string name="quick_action_add_favorite">Aggiungi preferito</string>
+    <string name="dialog_add_action_title">Aggiungi azione</string>
+    <string name="quick_actions_delete">Cancella azione</string>
+    <string name="quick_actions_delete_text">Sicuro di volere eliminare \"%s\" azione?</string>
+    <string name="btn_dismiss">Scarta</string>
+    <string name="quick_favorites_show_favorites_dialog">Mostra la finestra di dialogo dei favoriti</string>
+    <string name="quick_favorites_name_preset">Nome preimpostato</string>
+    <string name="quick_favorites_name_description">Lascia il campo bianco e OsmAnd userà l\'indirizzo p il nome del luogo per il punto preferito</string>
+    <string name="quick_action_name_hint">Nome dell\'azione</string>
+    <string name="text_name">Nome</string>
     </resources>
