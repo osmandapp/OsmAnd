@@ -423,8 +423,8 @@
     <string name="local_index_mi_upload_gpx">傳送到 OSM</string>
     <string name="show_more_map_detail">顯示更多的地圖細節</string>
     <string name="show_more_map_detail_descr">在放大地圖時已顯示部份向量地圖細節(道路等)</string>
-    <string name="favourites_delete_multiple_succesful">我的最愛標點已刪除成功。</string>
-    <string name="favorite_delete_multiple">您將刪除 %1$d 個我的最愛與 %2$d 我的最愛群組，您確定？</string>
+    <string name="favourites_delete_multiple_succesful">我的收藏標點已刪除成功。</string>
+    <string name="favorite_delete_multiple">您將刪除 %1$d 個我的收藏與 %2$d 我的收藏群組，您確定？</string>
     <string name="favorite_home_category">住家</string>
     <string name="favorite_friends_category">朋友</string>
     <string name="favorite_places_category">地點</string>
@@ -567,7 +567,7 @@
     <string name="specified_dir_doesnt_exist">找不到指定的資料夾。</string>
     <string name="application_dir">資料存儲器資料夾</string>
 
-    <string name="osmand_net_previously_installed">有前一版的 OsmAnd 存在，所有的離線資料將被新版引用。但我的最愛內的標點須以舊版程式匯出後再用新版程式匯入。</string>
+    <string name="osmand_net_previously_installed">有前一版的 OsmAnd 存在，所有的離線資料將被新版引用。但我的收藏內的標點須以舊版程式匯出後再用新版程式匯入。</string>
     <string name="build_installed">編譯 {0} 成功安裝({1})。</string>
     <string name="downloading_build">正在下載編譯…</string>
     <string name="install_selected_build">您要安裝 OsmAnd - {0} 之中的 {1} {2} MB？</string>
@@ -638,7 +638,7 @@
     <string name="fav_imported_sucessfully">我的收藏匯入成功</string>
     <string name="fav_file_to_load_not_found">在 {0} 裡未找到含有我的收藏的 GPX 檔案</string>
     <string name="fav_saved_sucessfully">我的收藏成功的存到 {0}</string>
-    <string name="no_fav_to_save">沒有我的最愛標點要儲存</string>
+    <string name="no_fav_to_save">沒有我的收藏標點要儲存</string>
     <string name="error_occurred_loading_gpx">在載入 GPX 時發生錯誤</string>
     <string name="send_report">傳送報告</string>
     <string name="none_region_found">在 SD 卡上沒有該地區離線資料。由網路下載資料。</string>
@@ -735,7 +735,7 @@
     <string name="search_history_street">道路：{0}, {1}</string>
     <string name="search_history_int_streets">交叉路口：{0} x {1} 在{2}</string>
     <string name="search_history_building">建築物：{0}, {1}, {2}</string>
-    <string name="favorite">我的最愛</string>
+    <string name="favorite">我的收藏</string>
     <string name="uploading_data">上傳資料中…</string>
     <string name="uploading">上傳中…</string>
     <string name="search_nothing_found">找不到</string>
@@ -757,8 +757,8 @@
     <string name="downloading_list_indexes">正在下載可用的地區清單…</string>
     <string name="list_index_files_was_not_loaded">無法由 osmand.net 取得地區列表。</string>
 
-    <string name="fav_points_edited">我的最愛標點已被更改</string>
-    <string name="fav_points_not_exist">沒有我的最愛標點存在</string>
+    <string name="fav_points_edited">我的收藏標點已被更改</string>
+    <string name="fav_points_not_exist">沒有我的收藏標點存在</string>
     <string name="update_existing">取代</string>
     <string name="only_show">顯示路線</string>
     <string name="follow">開始導航</string>
@@ -875,13 +875,13 @@
     <string name="shared_string_yes">是</string>
     <string name="shared_string_cancel">取消</string>
     <string name="shared_string_no">否</string>
-    <string name="add_favorite_dialog_top_text">輸入我的最愛名稱</string>
-    <string name="add_favorite_dialog_default_favourite_name">我的最愛</string>
-    <string name="add_favorite_dialog_favourite_added_template">我的最愛標點 \'\'{0}\'\' 新增成功。</string>
-    <string name="favourites_context_menu_edit">編輯我的最愛</string>
-    <string name="favourites_context_menu_delete">刪除我的最愛</string>
-    <string name="favourites_remove_dialog_msg">刪除我的最愛標點 \'%s\'？</string>
-    <string name="favourites_remove_dialog_success">我的最愛標點 {0} 刪除成功。</string>
+    <string name="add_favorite_dialog_top_text">輸入我的收藏名稱</string>
+    <string name="add_favorite_dialog_default_favourite_name">我的收藏</string>
+    <string name="add_favorite_dialog_favourite_added_template">我的收藏標點 \'\'{0}\'\' 新增成功。</string>
+    <string name="favourites_context_menu_edit">編輯我的收藏</string>
+    <string name="favourites_context_menu_delete">刪除我的收藏</string>
+    <string name="favourites_remove_dialog_msg">刪除我的收藏標點 \'%s\'？</string>
+    <string name="favourites_remove_dialog_success">我的收藏標點 {0} 刪除成功。</string>
     
     
     
@@ -968,7 +968,7 @@
     <string name="choose_osmand_theme">應用程式主題</string>
     <string name="accessibility_options">無障礙選項</string>
     <string name="select_address_activity">選取地址</string>
-    <string name="favourites_list_activity">選取我的最愛</string>
+    <string name="favourites_list_activity">選取我的收藏</string>
     <string name="local_openstreetmap_act_title">OSM 修改</string>
 
     <string name="layer_hillshade">地形陰影圖層</string>
@@ -1357,7 +1357,7 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="select_gpx">選擇 GPX …</string>
     <string name="route_descr_select_destination">選擇目的地</string>
 
-    <string name="shared_string_favorite">我的最愛</string>
+    <string name="shared_string_favorite">我的收藏</string>
     <string name="route_preferences">優先路線</string>
     <string name="route_info">路線資訊</string>
     <string name="keep_and_add_destination_point">增加為隨後的目的地</string>
@@ -1693,12 +1693,12 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="local_index_description">點觸任何現有的項目，查看更詳細的資訊，長按則停用或刪除。目前在裝置上的資料有 (%1$s 可用)：</string>
     <string name="text_size_descr">設定地圖上的文字大小。</string>
     <string name="text_size">文字大小</string>
-    <string name="fav_point_dublicate">我的最愛標點，名稱重複</string>
-    <string name="fav_point_dublicate_message">所指定我的最愛名稱業已使用，改為 %1$s 以避免重複。</string>
+    <string name="fav_point_dublicate">我的收藏標點，名稱重複</string>
+    <string name="fav_point_dublicate_message">所指定我的收藏名稱業已使用，改為 %1$s 以避免重複。</string>
 
 
     <string name="print_route">列印路線</string>
-    <string name="fav_point_emoticons_message">我的最愛標點名稱，已被修改為 %1$s，便於正確的儲存字串表情符號到檔案中。</string>
+    <string name="fav_point_emoticons_message">我的收藏標點名稱，已被修改為 %1$s，便於正確的儲存字串表情符號到檔案中。</string>
     <string name="speed_limit_exceed">速限容許餘裕</string>
     <string name="speed_limit_exceed_message">選擇速限容許餘裕界限，超過時您將會收到語音警告。</string>
     <string name="osmo_device_not_found">未找到裝置</string>
@@ -2093,8 +2093,8 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="simulate_your_location_stop_descr">停止模擬您的位置</string>
     <string name="simulate_your_location_descr">使用模擬計算一條路線或記錄成一個 GPX 檔</string>
     <string name="downloads_left_template">%1$s 次下載剩餘</string>
-    <string name="favourites_edit_dialog_title">我的最愛資訊</string>
-    <string name="favourites_context_menu_add">增加到我的最愛</string>
+    <string name="favourites_edit_dialog_title">我的收藏資訊</string>
+    <string name="favourites_context_menu_add">增加到我的收藏</string>
     <string name="roads">道路</string>
     <string name="shared_string_trip_recording">旅程錄製</string>
     <string name="shared_string_navigation">導航</string>
@@ -2564,7 +2564,7 @@ Facebook：https://www.facebook.com/osmandapp
 
     <string name="routing_attr_short_way_name">省油的方式</string>
     <string name="routing_attr_short_way_description">使用省油的方式 (通常路途較短)</string>
-    <string name="replace_favorite_confirmation">您確定您想要替換喜愛的 %1$s 嗎？</string>
+    <string name="replace_favorite_confirmation">您確定您想要替換收藏的 %1$s 嗎？</string>
     <string name="shared_string_change">更換</string>
     <string name="get_started">開始</string>
     <string name="update_all_maps_now">您現在想要更新所有地圖？</string>
@@ -2685,4 +2685,59 @@ Facebook：https://www.facebook.com/osmandapp
     <string name="rendering_value_medium_w_name">中</string>
     <string name="rendering_value_low_name">低</string>
     <string name="rendering_attr_hideWaterPolygons_name">隱藏水</string>
-    </resources>
+    <string name="quick_action_item_screen">螢幕 %d</string>
+    <string name="quick_action_add_marker">增加標記</string>
+    <string name="quick_action_add_poi">增加 POI</string>
+    <string name="quick_action_map_style">更改地圖樣式</string>
+    <string name="quick_action_map_style_switch">地圖樣式已經更改為 \"%s\"。</string>
+    <string name="quick_action_take_audio_note">錄取音訊註解</string>
+    <string name="quick_action_take_video_note">錄取視訊註解</string>
+    <string name="quick_action_take_photo_note">拍攝註解</string>
+    <string name="quick_action_add_osm_bug">增加 OSM 的錯誤</string>
+    <string name="quick_action_navigation_voice">聲音開/關</string>
+    <string name="quick_action_navigation_voice_off">聲音關閉</string>
+    <string name="quick_action_navigation_voice_on">聲音開啟</string>
+    <string name="quick_action_add_gpx">增加 GPX 航點</string>
+    <string name="quick_action_add_parking">增加停車場所</string>
+    <string name="quick_action_add_favorite">增加我的收藏</string>
+    <string name="btn_dismiss">解除</string>
+    <string name="quick_favorites_show_favorites_dialog">顯示我的收藏對話框</string>
+    <string name="quick_favorites_name_preset">預設的名稱</string>
+    <string name="text_name">名稱</string>
+    <string name="quick_action_favorite_dialog">顯示我的收藏對話框</string>
+    <string name="quick_action_add_poi_dialog">顯示增加的 POI 對話框</string>
+    <string name="quick_action_gpx_dialog">顯示 GPX 航點的對話框</string>
+    <string name="favorite_autofill_toast_text">" 儲存到 "</string>
+    <string name="favorite_empty_place_name">場所</string>
+    <string name="quick_action_showhide_favorites_title">顯示/隱藏我的收藏</string>
+    <string name="quick_action_favorites_show">顯示我的收藏</string>
+    <string name="quick_action_favorites_hide">隱藏我的收藏</string>
+    <string name="quick_action_showhide_poi_title">顯示/隱藏 POI</string>
+    <string name="quick_action_poi_show">顯示 %1$s</string>
+    <string name="quick_action_poi_hide">隱藏 %1$s</string>
+    <string name="quick_action_add_category">增加類別</string>
+    <string name="quick_action_add_create_items">建立事項</string>
+    <string name="quick_action_add_configure_map">組態地圖</string>
+    <string name="quick_action_add_navigation">導航</string>
+    <string name="quick_action_bug_message">訊息</string>
+    <string name="quick_action_category_discr">您可以選擇一個類別以儲存收藏的標點。</string>
+    <string name="quick_action_gpx_category_discr">您可以選擇一個類別以儲存 GPX 的航點標記。</string>
+    <string name="quick_action_poi_list">POI 清單</string>
+    <string name="quick_action_sh_poi_discrp">您可以在地圖上增加數個 POI 類別顯示。</string>
+    <string name="quick_action_map_style_action">增加地圖樣式</string>
+    <string name="quick_action_empty_param_error">參數不能為空白</string>
+    <string name="quick_action_map_styles">地圖樣式</string>
+    <string name="quick_action_map_overlay">更改地圖疊加層</string>
+    <string name="quick_action_map_overlay_title">地圖疊加層</string>
+    <string name="quick_action_map_overlay_action">增加疊加層</string>
+    <string name="quick_action_map_underlay">更改地圖襯底層</string>
+    <string name="quick_action_map_underlay_title">地圖襯底層</string>
+    <string name="quick_action_map_underlay_action">增加襯底層</string>
+    <string name="quick_action_map_source">更改地圖來源</string>
+    <string name="quick_action_map_source_title">地圖來源</string>
+    <string name="quick_action_map_source_action">增加來源</string>
+    <string name="quick_action_map_source_switch">地圖來源已經被更改為 \"%s\"。</string>
+    <string name="quick_action_poi_add">增加</string>
+    <string name="quck_action_btn_tutorial_title">更改按鈕位置</string>
+    <string name="quick_action_btn_tutorial_description">長按並拖動在螢幕上的按鈕改變位置</string>
+</resources>
