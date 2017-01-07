@@ -1468,7 +1468,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="osmand_plus_long_description_1000_chars">
 		OsmAnd+ (OSM Automated Navigation Directions)
 
-		OsmAnd+ is an open source navigation application with access to a wide variety of global OpenStreetMap (OSM) data. All map data (vector or tile maps) can be stored on the phone memory card for offline usage. OsmAnd also offers offline and online routing functionality including turn-by-turn voice guidance.
+		OsmAnd+ is an open source navigation application with access to a wide variety of global OpenStreetMap (OSM) data. All map data (vector or tile maps) can be stored on the phone memory card for offline use. OsmAnd also offers offline and online routing functionality including turn-by-turn voice guidance.
 
 		OsmAnd+ is the paid application version, by buying it you support the project, fund the development of new features, and receive the latest updates.
 
@@ -2425,14 +2425,14 @@ If you need help with OsmAnd application, please contact our support team: suppo
     <string name="help_us_to_improve_menu_group">Help us to improve OsmAnd</string>
     <string name="other_menu_group">Other</string>
     <string name="plugins_menu_group">Plugins</string>
-    <string name="first_usage_item">First usage</string>
+    <string name="first_usage_item">First use</string>
     <string name="first_usage_item_description">How to download maps, set basic settings</string>
     <string name="navigation_item_description">Setup navigation</string>
     <string name="planning_trip_item">Planning a trip</string>
     <string name="faq_item">FAQ</string>
     <string name="faq_item_description">Frequently asked questions</string>
     <string name="map_viewing_item">Map viewing</string>
-    <string name="search_on_the_map_item">Map searching</string>
+    <string name="search_on_the_map_item">Searching the map</string>
     <string name="instalation_troubleshooting_item">Installation and troubleshooting</string>
     <string name="techical_articles_item">Technical articles</string>
     <string name="versions_item">Versions</string>
