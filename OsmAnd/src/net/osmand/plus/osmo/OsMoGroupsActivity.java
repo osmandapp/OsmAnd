@@ -6,6 +6,7 @@ package net.osmand.plus.osmo;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
@@ -27,6 +28,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.Settings;
 import android.support.annotation.ColorInt;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AlertDialog;
@@ -47,6 +49,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.CheckBox;
@@ -724,6 +727,25 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		});
 		setSupportProgressBarIndeterminateVisibility(true);
 		final WebView wv = new WebView(this);
+
+		//Scale web view font size with system font size
+		float scale = getResources().getConfiguration().fontScale;
+		if (android.os.Build.VERSION.SDK_INT >= 14) {
+			wv.getSettings().setTextZoom((int) (scale * 100f));
+		} else {
+			if (scale <= 0.7f) {
+				wv.getSettings().setTextSize(WebSettings.TextSize.SMALLEST);
+			} else if (scale <= 0.85f) {
+				wv.getSettings().setTextSize(WebSettings.TextSize.SMALLER);
+			} else if (scale <= 1.0f) {
+				wv.getSettings().setTextSize(WebSettings.TextSize.NORMAL);
+			} else if (scale <= 1.15f) {
+				wv.getSettings().setTextSize(WebSettings.TextSize.LARGER);
+			} else {
+				wv.getSettings().setTextSize(WebSettings.TextSize.LARGEST);
+			}
+		}
+
 		wv.loadUrl(OsMoService.SIGN_IN_URL + app.getSettings().OSMO_DEVICE_KEY.get());
 		ScrollView scrollView = new ScrollView(this);
 		int pad = (int) getResources().getDimension(R.dimen.list_content_padding);
