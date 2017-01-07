@@ -379,13 +379,13 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 		if (android.os.Build.VERSION.SDK_INT >= 14) {
 			settings.setTextZoom((int) (scale * 100f));
 		} else {
-			if (scale <= 0.5f) {
+			if (scale <= 0.7f) {
 				settings.setTextSize(WebSettings.TextSize.SMALLEST);
-			} else if (scale <= 0.75f) {
+			} else if (scale <= 0.85f) {
 				settings.setTextSize(WebSettings.TextSize.SMALLER);
 			} else if (scale <= 1.0f) {
 				settings.setTextSize(WebSettings.TextSize.NORMAL);
-			} else if (scale <= 1.5f) {
+			} else if (scale <= 1.15f) {
 				settings.setTextSize(WebSettings.TextSize.LARGER);
 			} else {
 				settings.setTextSize(WebSettings.TextSize.LARGEST);
