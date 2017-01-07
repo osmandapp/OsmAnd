@@ -2656,4 +2656,29 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="rendering_value_medium_w_name">متوسطة</string>
     <string name="rendering_value_low_name">منخفض</string>
     <string name="rendering_attr_hideWaterPolygons_name">إخفاء المياه</string>
+    <string name="configure_screen_quick_action">إجراء سريع</string>
+
+    <string name="quick_action_item_action">إجراء %d</string>
+    <string name="quick_action_item_screen">شاشة %d</string>
+    <string name="quick_action_add_marker">إضافة علامة</string>
+    <string name="quick_action_add_poi">إضافة POI</string>
+    <string name="quick_action_map_style">تغيير نمط الخريطة</string>
+    <string name="quick_action_map_style_switch">تم تغيير نمط الخريطة إلى \"%s\".</string>
+    <string name="quick_action_take_audio_note">أخذ ملاحظة صوتية</string>
+    <string name="quick_action_take_video_note">أخذ ملاحظة بالفيديو</string>
+    <string name="quick_action_take_photo_note">أخذ ملاحظة بالصورة</string>
+    <string name="quick_action_navigation_voice">تشغيل/إيقاف الصوت</string>
+    <string name="quick_action_navigation_voice_off">الصوت معطل</string>
+    <string name="quick_action_navigation_voice_on">صوت مشغل</string>
+    <string name="quick_action_add_gpx">إضافة إحداثية GPX</string>
+    <string name="quick_action_add_parking">إضافة مكان ركن</string>
+    <string name="quick_action_new_action">إضافة إجراء</string>
+    <string name="quick_action_edit_action">تغديل إجراء</string>
+    <string name="quick_action_add_favorite">إضافة المفضلة</string>
+    <string name="dialog_add_action_title">إضافة إجراء</string>
+    <string name="quick_actions_delete">حذف إجراء</string>
+    <string name="quick_actions_delete_text">هل أنت متأكد من أنك تريد حذف إجراء \"%s\" ؟</string>
+    <string name="btn_dismiss">إنصراف</string>
+    <string name="quick_action_name_hint">اسم الإجراء</string>
+    <string name="text_name">الاسم</string>
     </resources>
