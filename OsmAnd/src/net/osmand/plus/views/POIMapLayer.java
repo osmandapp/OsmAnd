@@ -394,7 +394,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 
 		wv.loadDataWithBaseURL(null, content, "text/html", "UTF-8", null);
 //		wv.loadUrl(OsMoService.SIGN_IN_URL + app.getSettings().OSMO_DEVICE_KEY.get());
-		//For pinch zooming to work WebView must not be in side Scrollview
+		//For pinch zooming to work WebView must not be inside ScrollView
 		//ScrollView scrollView = new ScrollView(ctx);
 		ll.addView(topBar);
 		LayoutParams lp = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, 0);
