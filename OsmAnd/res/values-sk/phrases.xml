@@ -2872,4 +2872,88 @@
 	<string name="poi_protection_object_habitat">Chránený objekt: biotop</string>
 	<string name="poi_protection_object_water">Chránený objekt: voda</string>
 
+	<string name="poi_nuclear_explosion_country">Výbuch: krajina</string>
+	<string name="poi_nuclear_explosion_site">Výbuch: oblasť</string>
+	<string name="poi_nuclear_explosion_type_underground_shaft">Typ výbuchu: podzemná šachta</string>
+	<string name="poi_nuclear_explosion_type_underground_tunnel">Typ výbuchu: podzemný tunel</string>
+	<string name="poi_nuclear_explosion_type_atmospheric">Typ výbuchu: atmosferický</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_airdrop">Typ výbuchu: atmosferický, z lietadla</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_surface_tower">Typ výbuchu: atmosferický, z veže na povrchu</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_balloon">Typ výbuchu: atmosferický, z balóna</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_atmospheric_surface">Typ výbuchu: atmosferický, na povrchu</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_water_surface_barge">Typ výbuchu: atmosferický, na vode z člna</string>
+	<string name="poi_nuclear_explosion_type_underground">Typ výbuchu: podzemný</string>
+	<string name="poi_nuclear_explosion_type_cratering_burst">Typ výbuchu: kráterový (plytký podpovrchový)</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_rocket_or_missile">Typ výbuchu: atmosferický, raketa alebo strela</string>
+	<string name="poi_nuclear_explosion_type_space">Typ výbuchu: vesmírny (výška nad 80 km)</string>
+	<string name="poi_nuclear_explosion_type_underwater">Typ výbuchu: pod vodou</string>
+	<string name="poi_nuclear_explosion_date_utc">Dátum výbuchu (UTC)</string>
+	<string name="poi_nuclear_explosion_shot_name_en">Názov strely (ang.)</string>
+	<string name="poi_nuclear_explosion_series">Séria výbuchov</string>
+	<string name="poi_nuclear_explosion_purpose_nuclear_weapons_related">Účel výbuchu: súvisí s jadrovými zbraňami</string>
+	<string name="poi_nuclear_explosion_purpose_weapons_effects">Účel výbuchu: účinok zbraní</string>
+	<string name="poi_nuclear_explosion_purpose_safety_experiment">Účel výbuchu: bezpečnostný pokus</string>
+	<string name="poi_nuclear_explosion_purpose_research_for_peaceful_applications">Účel výbuchu: výskum mierového použitia</string>
+	<string name="poi_nuclear_explosion_purpose_fundamental_science">Účel výbuchu: základný výskum vo vede</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application_cavity_excavation">Účel výbuchu: priemyselné použitie, vyhĺbenie dutiny</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application_seismic_sounding">Účel výbuchu: priemyselné použitie, seizmický prieskum</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application_oil_stimulation">Účel výbuchu: priemyselné použitie, vypudenie ropy</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application">Účel výbuchu: priemyselné použitie</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application_earth_moving">Účel výbuchu: priemyselné použitie, zemné práce</string>
+	<string name="poi_nuclear_explosion_time_utc">Čas výbuchu (UTC)</string>
+	<string name="poi_nuclear_explosion_yield">Sila výbuchu</string>
+	<string name="poi_nuclear_explosion_hole">Diera výbuchu</string>
+	<string name="poi_nuclear_explosion_height_of_burst">Výška výbuchu</string>
+	<string name="poi_nuclear_explosion_ground_zero_altitude">Nadmorská výška epicentra na povrchu (ground zero)</string>
+	<string name="poi_nuclear_explosion_body_wave_magnitude">Veľkosť objemovej seizmickej vlny</string>
+	<string name="poi_nuclear_explosion_salvo_first_detonation">Salva výbuchov: prvý výbuch zo salvy</string>
+	<string name="poi_nuclear_explosion_salvo_second_or_later_detonation">Salva výbuchov: druhý alebo ďalší výbuch zo salvy</string>
+	<string name="poi_nuclear_explosion_warhead">Výbuch: hlavica</string>
+	<string name="poi_nuclear_explosion_device">Výbuch: zariadenie</string>
+
+	<string name="poi_addr_housename">Názov budovy</string>
+
+
+	<string name="poi_compressed_air_no">Stlačený vzduch: nie</string>
+
+	<string name="poi_sport_free_flying">Závesné lietanie (šport)</string>
+
+	<string name="poi_water_tap">Vodovodný kohútik</string>
+	<string name="poi_button_operated_no">Dopytové tlačidlo: nie</string>
+
+	<string name="poi_free_flying_site_takeoff">Miesto na vzlietnutie</string>
+	<string name="poi_free_flying_site_landing">Miesto na pristátie</string>
+	<string name="poi_free_flying_site_toplanding">Miesto na pristátie na vrchole</string>
+	<string name="poi_free_flying_site_towing">Miesto na ťahanie</string>
+	<string name="poi_free_flying_site_training">Miesto na tréning</string>
+	<string name="poi_free_flying_official_yes">Oficiálne: áno</string>
+	<string name="poi_free_flying_official_no">Oficiálne: nie</string>
+	<string name="poi_free_flying_paragliding_no">Paragliding: nie</string>
+	<string name="poi_free_flying_hanggliding_yes">Závesný klzák</string>
+	<string name="poi_free_flying_hanggliding_no">Závesný klzák: nie</string>
+	<string name="poi_free_flying_rigid_yes">Závesný klzák s pevným poťahom krídla</string>
+	<string name="poi_free_flying_rigid_no">Závesný klzák s pevným poťahom krídla: nie</string>
+	<string name="poi_free_flying_site_orientation_n">Smer vzletu závesného lietania: S</string>
+	<string name="poi_free_flying_site_orientation_ne">Smer vzletu závesného lietania: SV</string>
+	<string name="poi_free_flying_site_orientation_e">Smer vzletu závesného lietania: V</string>
+	<string name="poi_free_flying_site_orientation_se">Smer vzletu závesného lietania: JV</string>
+	<string name="poi_free_flying_site_orientation_s">Smer vzletu závesného lietania: J</string>
+	<string name="poi_free_flying_site_orientation_sw">Smer vzletu závesného lietania: JZ</string>
+	<string name="poi_free_flying_site_orientation_w">Smer vzletu závesného lietania: Z</string>
+	<string name="poi_free_flying_site_orientation_nw">Smer vzletu závesného lietania: SZ</string>
+	<string name="poi_free_flying_no_flight_time">Doba kedy je zakázané lietať</string>
+	<string name="poi_free_flying_guest_guidelines_yes">Pokyny pre hostí: áno</string>
+	<string name="poi_free_flying_guest_guidelines_no">Pokyny pre hostí: nie</string>
+
+	<string name="poi_tanning_salon">Solárium</string>
+
+	<string name="poi_sanitary_dump_station">Zariadenie na vypustenie odpadu</string>
+
+	<string name="poi_medical_system_western_yes">Západný</string>
+	<string name="poi_medical_system_chinese_yes">Tradičný čínsky</string>
+	<string name="poi_medical_system_ayurveeda_yes">Ajurvéda</string>
+	<string name="poi_medical_system_kampo_yes">Tradičný japonský</string>
+	<string name="poi_medical_system_mongolian_yes">Tradičný mongolský</string>
+	<string name="poi_medical_system_tibetan_yes">Tradičný tibetský</string>
+	<string name="poi_medical_system_sidda_yes">Tradičný indický</string>
 	</resources>
