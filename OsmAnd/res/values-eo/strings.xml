@@ -2569,7 +2569,6 @@ kaj pli...
     <string name="quick_favorites_name_preset">Nomo</string>
     <string name="quick_favorites_name_descr">Lasu kampon malplenan kaj OsmAnd uzos adreson aŭ nomon de loko</string>
     <string name="quick_action_name_hint">Nomo de ago</string>
-    <string name="text_name">Nomo</string>
     <string name="quick_action_add_marker_discr">Premado sur ag-butono aldonos markon al difinita loko.</string>
     <string name="quick_action_add_gpx_discr">Premado sur ag-butono aldonos GPX-navigadpunkton al difinita loko.</string>
     <string name="quick_action_take_audio_note_discr">Premado sur ag-butono aldonos sonan noton al difinita loko.</string>

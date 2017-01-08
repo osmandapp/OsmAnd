@@ -2544,7 +2544,6 @@ Si necesitas ayuda con la aplicación OsmAnd, contacte con nuestro equipo de sop
     <string name="quick_action_take_photo_note_discr">Pulsando el botón de acción, añadirá una nota fotográfica en la ubicación especificada.</string>
     <string name="quick_action_add_osm_bug_discr">Pulsando el botón de acción, añadirá un informe de error OSM en la ubicación especificada.</string>
     <string name="quick_action_add_poi_discr">Pulsando el botón de acción, añadirá un PDI en la ubicación especificada.</string>
-    <string name="text_name">Nombre</string>
     <string name="quick_action_navigation_voice_discr">Pulsando el botón de acción, desactivará o activará las indicaciones por voz durante la navegación.</string>
     <string name="quick_action_add_parking_discr">Pulsando el botón de acción, añadirá un lugar de estacionamiento en la ubicación indicada.</string>
     <string name="quick_action_favorite_dialog">Mostrar el diálogo del favorito</string>
