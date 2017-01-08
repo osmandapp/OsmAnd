@@ -2450,7 +2450,6 @@ med mera…
     <string name="quick_action_add_gpx">Lägg till GPX-waypoint</string>
     <string name="quick_action_add_parking">Lägg till P-plats</string>
     <string name="quick_action_add_favorite">Lägg till favorit</string>
-    <string name="text_name">Namn</string>
     <string name="favorite_autofill_toast_text">" har sparats i "</string>
     <string name="favorite_empty_place_name">Plats</string>
     <string name="quick_action_showhide_favorites_title">Visa/Dölj favoriter</string>

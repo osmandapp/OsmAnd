@@ -2539,7 +2539,6 @@ Si necesitas ayuda con la aplicación OsmAnd, contacte con nuestro equipo de sop
     <string name="quick_favorites_name_preset">Nombre predefinido</string>
     <string name="quick_favorites_name_description">Si deja el campo en blanco, OsmAnd usará la dirección o el nombre del lugar</string>
     <string name="quick_action_name_hint">Nombre de la acción</string>
-    <string name="text_name">Nombre</string>
     <string name="quick_action_add_marker_discr">Pulsando el botón de acción, añadirá un marcador en la ubicación especificada.</string>
     <string name="quick_action_add_gpx_discr">Pulsando el botón de acción, añadirá un punto de ruta GPX en la ubicación especificada.</string>
     <string name="quick_action_take_audio_note_discr">Pulsando el botón de acción, añadirá una nota de audio en la ubicación especificada.</string>

@@ -2518,7 +2518,6 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="quick_favorites_name_preset">Nom du réglage</string>
     <string name="quick_favorites_name_description">Si vous laissez cette zone vide, OsmAnd utilisera l\'adresse ou le nom du lieu pour ce favori.</string>
     <string name="quick_action_name_hint">Nom de l\'action</string>
-    <string name="text_name">Nom</string>
     <string name="quick_action_favorite_dialog">Afficher la liste des favoris</string>
     <string name="quick_action_add_poi_dialog">Afficher la fenêtre d\'ajout de PI</string>
     <string name="quick_action_gpx_dialog">Afficher la fenêtre d\'ajout de point GPX</string>

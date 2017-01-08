@@ -75,7 +75,7 @@
             android:layout_gravity="center_vertical"
             android:textColor="@color/white_50_transparent"
             android:textSize="@dimen/default_sub_text_size"
-            android:text="@string/text_name"
+            android:text="@string/shared_string_name"
             android:layout_marginRight="16dp"
             android:maxLines="1"
             android:layout_marginLeft="32dp"

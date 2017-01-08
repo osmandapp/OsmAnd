@@ -2491,7 +2491,6 @@ If you need help with OsmAnd application, please contact our support team: suppo
     <string name="quick_favorites_name_preset">Name preset</string>
     <string name="quick_favorites_name_description">Leave the field blank and OsmAnd will use the address or place name</string>
     <string name="quick_action_name_hint">Action name</string>
-    <string name="text_name">Name</string>
     <string name="quick_action_add_marker_discr">Tapping the action button will add a marker to the specified location.</string>
     <string name="quick_action_add_gpx_discr">Tapping the action button will add a GPX waypiont to the specified location.</string>
     <string name="quick_action_take_audio_note_discr">Tapping the action button will add an audio note to the specified location.</string>

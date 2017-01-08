@@ -2707,7 +2707,6 @@ V kolikor naletite na težave s programom OsmAnd, prosimo, stopite v stik s skup
     <string name="quick_actions_delete">Izbriši dejanje</string>
     <string name="quick_actions_delete_text">Ali ste prepričani, da želite izbrisati dejanje »%s«?</string>
     <string name="quick_action_name_hint">Ime dejanja</string>
-    <string name="text_name">Ime</string>
     <string name="favorite_empty_place_name">Mesto</string>
     <string name="quick_action_showhide_favorites_title">Pokaži/Skrij priljubljene</string>
     <string name="quick_action_favorites_show">Pokaži priljubljene</string>
