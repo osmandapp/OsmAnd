@@ -107,7 +107,7 @@
                     android:inputType="text"
                     android:textColor="?android:textColorPrimary"
                     android:textColorHint="?android:textColorSecondary"
-                    tools:text="@string/shared_string_action_name"/>
+                    tools:text="@string/shared_string_name"/>
 
             </LinearLayout>
 
