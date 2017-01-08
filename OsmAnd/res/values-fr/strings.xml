@@ -984,7 +984,7 @@ Les données globales (entre 70 degrés Nord et 70 degrés Sud) sont basées sur
     <string name="index_srtm_parts">parties</string>
 
 
-    <string name="audionotes_location_not_defined">La position à associer à la note n\'est pas encore défini. Utilisez le menu \'Utiliser ce point\' pour spécifier la position à associer à la note.</string>
+    <string name="audionotes_location_not_defined">La position associée à la note n\'est pas encore définie. Utilisez le menu \'Utiliser ce point\' pour indiquer la position de cette note.</string>
 
     <string name="map_widget_audionotes">Notes audio</string>
     <string name="audionotes_plugin_description">Ce greffon permet de prendre des notes (photos, audios ou vidéos) sur un itinéraire soit en utilisant un bouton affiché sur la carte, soit directement depuis le menu contextuel de n\'importe quel point sur la carte.</string>
@@ -2552,15 +2552,15 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="quick_action_map_source_switch">La source de la carte a été modifiée pour \"%s\".</string>
     <string name="quick_action_btn_tutorial_title">Déplacer le bouton</string>
     <string name="quick_action_btn_tutorial_descr">Appui long pour déplacer le bouton sur l\'écran</string>
-<string name="quick_action_add_marker_descr">Appuyez sur le bouton d\'action pour ajouter un marqueur à l\'emplacement.</string>
-    <string name="quick_action_add_gpx_descr">Appuyez sur le bouton d\'action pour ajouter une étape GPX à l\'emplacement.</string>
-    <string name="quick_action_take_audio_note_descr">Appuyez sur le bouton d\'action pour ajouter une note Audio à l\'emplacement.</string>
-    <string name="quick_action_take_video_note_descr">Appuyez sur le bouton d\'action pour ajouter une note Vidéo à l\'emplacement.</string>
-    <string name="quick_action_take_photo_note_descr">Appuyez sur le bouton d\'action pour ajouter une note Photo à l\'emplacement.</string>
-    <string name="quick_action_add_osm_bug_descr">Appuyez sur le bouton d\'action pour signaler une anomalie OSM à l\'emplacement.</string>
-    <string name="quick_action_add_poi_descr">Appuyez sur le bouton d\'action pour ajouter un PI à l\'emplacement.</string>
+<string name="quick_action_add_marker_descr">Appuyez sur le bouton d\'action pour ajouter un marqueur au centre de la carte.</string>
+    <string name="quick_action_add_gpx_descr">Appuyez sur le bouton d\'action pour ajouter une étape GPX au centre de la carte.</string>
+    <string name="quick_action_take_audio_note_descr">Appuyez sur le bouton d\'action pour ajouter une note Audio au centre de la carte.</string>
+    <string name="quick_action_take_video_note_descr">Appuyez sur le bouton d\'action pour ajouter une note Vidéo au centre de la carte.</string>
+    <string name="quick_action_take_photo_note_descr">Appuyez sur le bouton d\'action pour ajouter une note Photo au centre de la carte.</string>
+    <string name="quick_action_add_osm_bug_descr">Appuyez sur le bouton d\'action pour signaler une anomalie OSM au centre de la carte.</string>
+    <string name="quick_action_add_poi_descr">Appuyez sur le bouton d\'action pour ajouter un PI au centre de la carte.</string>
     <string name="quick_action_navigation_voice_descr">Appuyez sur le bouton pour activer ou désactiver le Guidage vocal pendant la navigation.</string>
-    <string name="quick_action_add_parking_descr">Appuyez sur le bouton pour ajouter un emplacement de stationnement.</string>
+    <string name="quick_action_add_parking_descr">Appuyez sur le bouton pour ajouter un emplacement de stationnement au centre de la carte.</string>
     <string name="quick_action_showhide_favorites_descr">Appuyez sur le bouton pour afficher ou masquer les favoris sur la carte.</string>
     <string name="quick_action_showhide_poi_descr">Appuyez sur le bouton pour afficher ou masquer les PI sur la carte.</string>
     <string name="quick_action_interim_dialog">Afficher une fenêtre intermédiaire</string>
