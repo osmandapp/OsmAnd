@@ -2502,8 +2502,8 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="quick_action_take_photo_note">Créer une note photo</string>
     <string name="quick_action_add_osm_bug">Signaler une anomalie OSM</string>
     <string name="quick_action_navigation_voice">Voix Active / Inactive</string>
-    <string name="quick_action_navigation_voice_off">Désactiver la voix</string>
-    <string name="quick_action_navigation_voice_on">Activer la voix</string>
+    <string name="quick_action_navigation_voice_off">La voix est désactivée</string>
+    <string name="quick_action_navigation_voice_on">La voix est activée</string>
     <string name="quick_action_add_gpx">Ajouter un point GPX</string>
     <string name="quick_action_add_parking">Ajouter une emplacement de stationnement</string>
     <string name="quick_action_new_action">Ajouter une action</string>
@@ -2533,8 +2533,8 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="quick_action_add_navigation">Navigation</string>
     <string name="quick_action_fav_name_descr">Si cette zone est vide, OsmAnd utilisera l\'adresse ou le nom du lieu.</string>
     <string name="quick_action_bug_message">Message</string>
-    <string name="quick_action_category_descr">Vous pouvez choisir une Catégorie pour ce favori.</string>
-    <string name="quick_action_gpx_category_descr">Vous pouvez choisir une Catégorie pour ce point GPX.</string>
+    <string name="quick_action_category_descr">Vous pouvez indiquer une Catégorie pour ce favori.</string>
+    <string name="quick_action_gpx_category_descr">Vous pouvez indiquer une Catégorie pour ce point GPX.</string>
     <string name="quick_action_poi_list">Liste des PI</string>
     <string name="quick_action_sh_poi_descr">Vous pouvez indiquer les Catégories de PI à afficher sur la carte.</string>
     <string name="quick_action_map_style_action">Ajouter un Style de carte</string>
