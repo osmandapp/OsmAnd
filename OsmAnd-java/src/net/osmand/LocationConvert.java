@@ -1,7 +1,12 @@
 package net.osmand;
 
+import com.google.openlocationcode.OpenLocationCode;
+
+import net.osmand.data.LatLon;
+
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
+import java.util.IllegalFormatException;
 import java.util.Locale;
 import java.util.StringTokenizer;
 
@@ -14,6 +19,7 @@ public class LocationConvert {
 	public static final int FORMAT_MINUTES = 1;
 	public static final int FORMAT_SECONDS = 2;
 	public static final int UTM_FORMAT = 3;
+	public static final int OLC_FORMAT = 4;
 	private static final char DELIM = ':';
 
 	
@@ -149,5 +155,4 @@ public class LocationConvert {
 		sb.append(df.format(coordinate));
 		return sb.toString();
 	}
-
 }
