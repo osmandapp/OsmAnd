@@ -1997,7 +1997,7 @@ Long %2$s</string>
     <string name="faq_item">Frågor och svar</string>
     <string name="faq_item_description">Frågor och svar</string>
     <string name="map_viewing_item">Kartvisning</string>
-    <string name="search_on_the_map_item">Söka på kartan</string>
+    <string name="search_on_the_map_item">Söker på kartan</string>
     <string name="planning_trip_item">Att planera en resa</string>
 
 
@@ -2442,9 +2442,9 @@ med mera…
     <string name="quick_action_map_style">Byt kartstil</string>
     <string name="quick_action_map_style_switch">Kartstilen har ändrats till \"%s\".</string>
     <string name="quick_action_add_osm_bug">Lägg till OSM-bugg</string>
-    <string name="quick_action_navigation_voice">Röst På/Av</string>
-    <string name="quick_action_navigation_voice_off">Röst av</string>
-    <string name="quick_action_navigation_voice_on">Röst på</string>
+    <string name="quick_action_navigation_voice">Röst på/av</string>
+    <string name="quick_action_navigation_voice_off">Röst är av</string>
+    <string name="quick_action_navigation_voice_on">Röst är på</string>
     <string name="quick_action_add_gpx">Lägg till GPX-waypoint</string>
     <string name="quick_action_add_parking">Lägg till P-plats</string>
     <string name="quick_action_add_favorite">Lägg till favorit</string>
@@ -2456,7 +2456,7 @@ med mera…
     <string name="quick_action_showhide_poi_title">Visa/Dölj POI</string>
     <string name="quick_action_poi_show">Visa %1$s</string>
     <string name="quick_action_poi_hide">Dölj %1$s</string>
-    <string name="quick_action_add_category">Lägg till kategori</string>
+    <string name="quick_action_add_category">Lägg till en kategori</string>
     <string name="quick_action_add_create_items">Skapa poster</string>
     <string name="quick_action_add_configure_map">Konfigurera kartan</string>
     <string name="quick_action_add_navigation">Navigering</string>
