@@ -2769,7 +2769,7 @@ Hvis du  ønsker at støtte OsmAnd og OSM, er dette en god måde at gøre det p�
     <string name="btn_dismiss">Afvis</string>
     <string name="quick_favorites_show_favorites_dialog">Vis favoritter dialogboksen</string>
     <string name="quick_favorites_name_preset">Navne forudindstilling</string>
-    <string name="quick_favorites_name_description">Lad feltet være tomt og OsmAnd vil bruge navnet på adresse eller sted</string>
+    <string name="quick_favorites_name_descr">Lad feltet være tomt og OsmAnd vil bruge navnet på adresse eller sted</string>
     <string name="quick_action_name_hint">Handlingsnavn</string>
     <string name="quick_action_add_marker_discr">Klik på handling vil tilføje markør til den angivne placering.</string>
     <string name="quick_action_add_gpx_discr">Klik på handling vil tilføje GPX rutepunkt til den angivne placering.</string>
