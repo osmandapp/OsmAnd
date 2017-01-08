@@ -2374,4 +2374,9 @@ Pokud máte rádi OsmAnd a OSM a chcete je podpořit, toto je výborný způsob 
     <string name="configure_screen_quick_action">Rychlá akce</string>
 
     <string name="quick_action_item_action">Akce %d</string>
+    <string name="quick_action_item_screen">Obrazovka %d</string>
+    <string name="quick_action_add_marker">Přidat značku</string>
+    <string name="quick_action_add_poi">Přidat POI</string>
+    <string name="quick_action_map_style">Změnit styl mapy</string>
+    <string name="quick_action_map_style_switch">Styl mapy byl změněn na \"%s\".</string>
     </resources>
