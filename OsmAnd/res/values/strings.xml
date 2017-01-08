@@ -2487,7 +2487,7 @@ If you need help with OsmAnd application, please contact our support team: suppo
     <string name="quick_actions_delete_text">Are you sure you want to delete the action \"%s\"?</string>
     <string name="quick_favorites_show_favorites_dialog">Show favorites dialog</string>
     <string name="quick_favorites_name_preset">Name preset</string>
-    <string name="quick_action_add_marker_descr">Tapping the action button will add a marker to the specified location.</string>
+    <string name="quick_action_add_marker_descr">Tapping the action button will add a map marker to the specified location.</string>
     <string name="quick_action_add_gpx_descr">Tapping the action button will add a GPX waypiont to the specified location.</string>
     <string name="quick_action_take_audio_note_descr">Tapping the action button will add an audio note to the specified location.</string>
     <string name="quick_action_take_video_note_descr">Tapping the action button will add a video note to the specified location.</string>
