@@ -552,7 +552,7 @@
     <string name="agps_data_last_downloaded">Последњи преузети подаци А-ГПС-а: %1$s</string>
     <string name="confirm_usage_speed_cameras">У многим државама (Германији, Француској, Италији и др.) је употреба покретне камере забрањена законом. ОсмАнд није одговоран за корисниково кршење закона. Молим, кликните на да само ако је ова могућност снимања законита.</string>
     <string name="welmode_download_maps">Преузми карте</string>
-    <string name="welcome_select_region">Молим, изаберите своју област ради правилног читања саобраћајних знакова и прописа.</string>
+    <string name="welcome_select_region">Молим, изаберите своју област ради правилног читања саобраћајних знакова и прописа:</string>
     <string name="welcome_text">ОсмАнд има могућност прегледа земаљских карата ван мреже и навођења ван мреже светом!</string>
     <string name="welcome_header">Добродошли</string>
     <string name="current_route">Тренутна путања</string>
@@ -703,7 +703,7 @@
     <string name="rendering_attr_showCycleRoutes_name">Приказуј бициклистичке стазе</string>
     <string name="osmo_auth_error_short">Пријава није успела</string>
     <string name="osmo_group_by_invite">Уђи по позиву</string>
-    <string name="osmo_group_information">Молим, прочитајте пре стварања скупа</string>
+    <string name="osmo_group_information">Молим, прочитајте пре стварања скупа!</string>
     <string name="gpx_wpt">Пролазна тачка</string>
     <string name="available_maps">Доступне карте</string>
     <string name="select_voice_provider">Изаберите гласовно навођење</string>
@@ -769,7 +769,7 @@
     <string name="osmo_auto_connect_descr">Самостално се повежи на услуге по покретању програма</string>
     <string name="osmo_auto_connect">Самоповезивање</string>
     <string name="osmo_start_service">Услуга ОсМа</string>
-    <string name="osmo_gpx_track_downloaded">Преузета је путања ОсМа %1$s</string>
+    <string name="osmo_gpx_track_downloaded">Преузета је путања ОсМа %1$s.</string>
     <string name="no_index_file_to_download">Нема пронађених преузимања, проверите везу са Интернетом.</string>
     <string name="select_index_file_to_download">Нема ничег пронађеног. Ако програм не може наћи ову област, можете то учинити сами (погледајте http://osmand.net).</string>
     <string name="local_index_select_gpx_file">Означите за приказ</string>
@@ -811,7 +811,7 @@
     <string name="osmo_show_group_notifications_descr">Приказуј поруке када се корисник придружи или напусти скуп</string>
     <string name="osmo_follow">Прати</string>
     <string name="osmo_sign_in">Упиши се</string>
-    <string name="osmo_create_groups_confirm">Да би правили скупове треба да будете пријављени корисник ОсМа</string>
+    <string name="osmo_create_groups_confirm">Да би правили скупове треба да будете пријављени корисник ОсМа.</string>
     <string name="osmo_credentials_not_valid">Ваши подаци за ОсМо нису исправни.</string>
     <string name="osmo_regenerate_login_ids_confirm">Да ли сте сигурни да желите поново образовати лични број? Сви уређаји који су повезани са Вама неће моћи више да вас прате.</string>
     <string name="osmo_regenerate_login_ids">Поново образуј лб</string>
@@ -1036,7 +1036,7 @@
     <string name="av_use_external_recorder">Користи склопног снимача видеа</string>
     <string name="av_use_external_camera_descr">Користи склопни програм за слике</string>
     <string name="av_use_external_camera">Користи програм камере</string>
-    <string name="recording_is_recorded">Звук/видео је снимљен. Зауставите снимање притиском на справицу ЗВ-а</string>
+    <string name="recording_is_recorded">Звук/видео је снимљен. Зауставите снимање притиском на справицу ЗВ-а.</string>
     <string name="recording_playing">Изводи се одређени звучни запис\n%1$s</string>
     <string name="recording_open_external_player">Отвори програм спољног извођача</string>
     <string name="recording_can_not_be_played">Снимак се не може извести</string>
@@ -1119,7 +1119,7 @@
     <string name="save_track_precision_descr">Постави најмању прецизност за бележење тачке</string>
     <string name="christmas_poi">Божићне тачке</string>
     <string name="christmas_desc">Учешће у празницима Божића и Нове Године, можете изабрати приказ тачака занимања придружених Божићу: Бадњаке, јелке, трговине, итд.</string>
-    <string name="christmas_desc_q">Приказуј божићне тачке занимања</string>
+    <string name="christmas_desc_q">Приказуј божићне тачке занимања?</string>
     <string name="rendering_value_light_brown_name">Светла смеђа</string>
     <string name="rendering_value_dark_brown_name">Тамна смеђа</string>
     <string name="rendering_attr_contourColorScheme_name">Образац боја линија обриса</string>
@@ -1234,7 +1234,7 @@
     <string name="no_map_markers_found">Молим, додајте ознаке карата на карти</string>
     <string name="map_markers_other">Остале ознаке</string>
     <string name="add_points_to_map_markers_q">Да ли желите додати све тачке у ознаке на карти?</string>
-    <string name="shared_string_add_to_map_markers">Додај у ознаке на карти.</string>
+    <string name="shared_string_add_to_map_markers">Додај у ознаке на карти</string>
     <string name="select_map_markers">"Одабери ознаке  на карти"</string>
     <string name="show_map_markers_description">Покрени могућност означавања на карти</string>
     <string name="active_markers">Дејствујуће ознаке</string>
@@ -1271,4 +1271,8 @@
     <string name="access_smart_autoannounce_descr">Обавести ме само ако је правац ка циљној тачци измењен</string>
     <string name="no_waypoints_found">Нема пронађених пролазних тачака</string>
     <string name="get_directions">Упутства</string>
+    <string name="map_marker_1st">Прва ознака карте</string>
+    <string name="map_marker_2nd">Друга ознака карте</string>
+    <string name="shared_string_toolbar">Трака прибора</string>
+    <string name="shared_string_widgets">Справице</string>
     </resources>
