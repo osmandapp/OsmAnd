@@ -552,7 +552,6 @@
     <string name="poi_remove_success">Interessepunkt ble vellykket slettet</string>
     <string name="poi_action_add">legg til</string>
     <string name="poi_action_change">endre</string>
-    <string name="poi_dialog_name">Navn</string>
     <string name="poi_dialog_opening_hours">Åpningstider</string>
     <string name="poi_dialog_comment">Kommentar</string>
     <string name="poi_dialog_comment_default">Interessepunkt-endring</string>

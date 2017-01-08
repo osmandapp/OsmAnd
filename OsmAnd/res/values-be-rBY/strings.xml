@@ -1808,7 +1808,6 @@ Zaraz jo {2} MB volnaha miesca.</string>
 	<string name="poi_error_unexpected_template">Niečakanaja pamyłka pry vykanańnі dziejańnia {0}.</string>
 	<string name="poi_error_io_error_template">Adbyłasia pamyłka ŭvodu/vyvadu pry vykanańnі dziejańnia {0}.</string>
 	<string name="poi_error_info_not_loaded">Adbyłasia pamyłka pry čytańnі іnfarmacyі pra POI</string>
-	<string name="poi_dialog_name">Nazva</string>
 	<string name="poi_dialog_opening_hours">Hadzіny pracy</string>
 	<string name="poi_dialog_comment">Kamientar</string>
 	<string name="poi_dialog_comment_default">Źmiena POI</string>

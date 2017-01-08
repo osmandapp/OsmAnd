@@ -1573,7 +1573,6 @@ Os mapas en teselas pódense obter directamente a través de recursos na rede ou
 	<string name="poi_error_unexpected_template">Produciuse un erro inesperado ao realizar a acción {0}.</string>
 	<string name="poi_error_io_error_template">Produciuse un erro de E/S ao realizar a acción {0}.</string>
 	<string name="poi_error_info_not_loaded">A información sobre o nó non foi cargada</string>
-	<string name="poi_dialog_name">Nome</string>
 	<string name="poi_dialog_opening_hours">Abrir</string>
 	<string name="poi_dialog_comment">Comentario</string>
 	<string name="poi_dialog_comment_default">Cambio de PDI</string>

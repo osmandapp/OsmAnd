@@ -737,7 +737,6 @@ Er is nu {2} MB beschikbaar</string>
   <string name="poi_error_unexpected_template">Fout opgetreden bij het uitvoeren van actie {0}.</string>
   <string name="poi_error_io_error_template">Lees/schrijffout opgetreden bij het uitvoeren van actie {0}.</string>
   <string name="poi_error_info_not_loaded">Info over punt niet geladen</string>
-  <string name="poi_dialog_name">Naam</string>
   <string name="poi_dialog_opening_hours">Openingstijden</string>
   <string name="poi_dialog_comment">Commentaar</string>
   <string name="poi_dialog_comment_default">Interessepunt aangepast</string>

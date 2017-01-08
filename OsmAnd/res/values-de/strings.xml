@@ -952,7 +952,6 @@ Karten-Kacheln können direkt online bezogen werden, und werden im OsmAnd-Untero
 	<string name="poi_error_unexpected_template">Unerwarteter Fehler beim Ausführen von {0} aufgetreten.</string>
 	<string name="poi_error_io_error_template">I/O Fehler während {0} aufgetreten.</string>
 	<string name="poi_error_info_not_loaded">Informationen über den Knoten wurden nicht geladen</string>
-	<string name="poi_dialog_name">Name</string>
 	<string name="poi_dialog_opening_hours">Öffnungszeiten</string>
 	<string name="poi_dialog_comment">Kommentar</string>
 	<string name="poi_dialog_comment_default">POI-Änderung</string>

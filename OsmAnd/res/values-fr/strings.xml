@@ -654,7 +654,6 @@ Actuellement {2} Mo sont disponibles.</string>
     <string name="poi_error_unexpected_template">Erreur lors de l\'action {0}.</string>
     <string name="poi_error_io_error_template">Erreur d\'entrée/sortie lors de l\'action {0}.</string>
     <string name="poi_error_info_not_loaded">Les informations sur l\'objet n\'ont pas étés chargés</string>
-    <string name="poi_dialog_name">Nom</string>
     <string name="poi_dialog_opening_hours">Ouvert</string>
     <string name="poi_dialog_comment">Commentaire</string>
     <string name="poi_dialog_comment_default">Modification PI</string>
@@ -2553,5 +2552,4 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="quick_action_map_source_action">Ajouter une source de carte</string>
     <string name="quick_action_map_source_switch">La source de la carte a été modifiée pour \"%s\".</string>
     <string name="quick_action_poi_add">Ajouter</string>
-    <string name="quck_action_btn_tutorial_title">Modifier la position du bouton</string>
     </resources>

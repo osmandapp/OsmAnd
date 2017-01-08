@@ -46,7 +46,7 @@
                         android:id="@+id/poiNameEditText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="@string/poi_dialog_name"
+                        android:hint="@string/shared_string_name"
                         android:imeOptions="actionNext"
                         android:inputType="textCapSentences"
                         tools:text="@string/lorem_ipsum"/>

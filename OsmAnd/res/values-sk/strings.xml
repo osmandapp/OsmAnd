@@ -717,7 +717,6 @@ Dlaždicové mapy môžete získať priamo zo zdrojov na Internete, alebo ich m�
     <string name="poi_error_unexpected_template">Vyskytla sa neočakávaná chyba počas vykonávania akcie: {0}.</string>
     <string name="poi_error_io_error_template">Vyskytla sa vstupno/výstupná chyba počas vykonávania akcie: {0}.</string>
     <string name="poi_error_info_not_loaded">Info o uzle nebolo načítané</string>
-    <string name="poi_dialog_name">Názov</string>
     <string name="poi_dialog_opening_hours">Otvorené</string>
     <string name="poi_dialog_comment">Komentár</string>
     <string name="poi_dialog_comment_default">Zmena POI</string>

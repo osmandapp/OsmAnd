@@ -424,7 +424,6 @@
   <string name="poi_error_unexpected_template">Ocorreu um erro inesperado durante a execução de ação {0}.</string>
   <string name="poi_error_io_error_template">Erro de entrada/saída na execução da acção {0}.</string>
   <string name="poi_error_info_not_loaded">As informações sobre o objeto não foram carregadas</string>
-  <string name="poi_dialog_name">Nome</string>
   <string name="poi_dialog_opening_hours">Aberto</string>
   <string name="poi_dialog_comment">Comentário</string>
   <string name="poi_dialog_comment_default">Alterar POI</string>

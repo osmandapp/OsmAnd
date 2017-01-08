@@ -600,7 +600,6 @@ POIの更新は利用できません</string>
 
 <string name="poi_error_info_not_loaded">ノードに関する情報はロードされませんでした</string>
 
-<string name="poi_dialog_name">名前</string>
 <string name="poi_dialog_opening_hours">オープン日時</string>
 <string name="poi_dialog_comment">コメント</string>
 <string name="poi_dialog_comment_default">POI 変更</string>

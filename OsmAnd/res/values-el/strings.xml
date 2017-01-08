@@ -882,7 +882,6 @@
 	<string name="poi_error_unexpected_template">Μη αναμενόμενο σφάλμα κατά την εκτέλεση της δράσης {0}.</string>
 	<string name="poi_error_io_error_template">Σφάλμα I/O κατά την εκτέλεση της δράσης {0}.</string>
 	<string name="poi_error_info_not_loaded">Δεν φορτώθηκαν πληροφορίες σχετικά με τον κόμβο</string>
-	<string name="poi_dialog_name">Όνομα</string>
 	<string name="poi_dialog_opening_hours">Άνοιγμα</string>
 	<string name="poi_dialog_comment">Σχόλιο</string>
 	<string name="poi_dialog_comment_default">Αλλαγή ΣΕ</string>

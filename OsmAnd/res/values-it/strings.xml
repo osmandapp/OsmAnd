@@ -618,7 +618,6 @@ La memoria utilizzata è  {1} MB.
     <string name="poi_error_unexpected_template">Errore inatteso durante l\'esecuzione dell\'azione {0}.</string>
     <string name="poi_error_io_error_template">Errore di I/O durante l\'esecuzione dell\'azione {0}.</string>
     <string name="poi_error_info_not_loaded">Informazioni relative al nodo non caricate</string>
-    <string name="poi_dialog_name">Nome</string>
     <string name="poi_dialog_opening_hours">Apri</string>
     <string name="poi_dialog_comment">Commento</string>
     <string name="poi_dialog_comment_default">Cambio PDI</string>

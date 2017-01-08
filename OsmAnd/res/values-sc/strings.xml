@@ -1071,7 +1071,6 @@ Memòria in proportzione %4$s MB (lìmite de Android %5$s MB, Dalvik %6$s MB).</
     <string name="poi_dialog_comment_default">Modìfica PDI</string>
     <string name="poi_dialog_other_tags_message">Totu sas etichetas sunt sarbadas</string>
     <string name="poi_dialog_comment">Cummentu</string>
-    <string name="poi_dialog_name">Nùmene</string>
     <string name="poi_error_info_not_loaded">Informatziones relatas a su nodu non carrigadas</string>
     <string name="poi_error_io_error_template">Errore de I/O durante s’esecutzione de s’atzione {0}.</string>
     <string name="poi_action_succeded_template">Atzione {0} reseddida cumpridamente.</string>
