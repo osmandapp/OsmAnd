@@ -2750,7 +2750,7 @@ Hvis du  ønsker at støtte OsmAnd og OSM, er dette en god måde at gøre det p�
     <string name="quick_action_add_marker">Tilføj markør</string>
     <string name="quick_action_add_poi">Tilføj IP</string>
     <string name="quick_action_map_style">Skift kortformat</string>
-    <string name="quick_action_map_style_switch">Kortformat er blevet ændret til \"%s\".</string>
+    <string name="quick_action_map_style_switch">Kortformat er ændret til \"%s\".</string>
     <string name="quick_action_take_audio_note">Optag lydnote</string>
     <string name="quick_action_take_video_note">Optag videonote</string>
     <string name="quick_action_take_photo_note">Tag en fotonote</string>
@@ -2820,7 +2820,7 @@ Hvis du  ønsker at støtte OsmAnd og OSM, er dette en god måde at gøre det p�
     <string name="quick_action_map_source_title">Kortkilder</string>
     <string name="quick_action_map_source_descr">Klik på handlings-knappen skifter kortkilde fra listerækkefølgen.</string>
     <string name="quick_action_map_source_action">Tilføj en kortkilde</string>
-    <string name="quick_action_map_source_switch">Kortkilde er blevet ændret til \"%s\".</string>
+    <string name="quick_action_map_source_switch">Kortkilde er ændret til \"%s\".</string>
     <string name="quick_action_btn_tutorial_title">Ændre knap placering</string>
     <string name="quick_action_btn_tutorial_descr">Langt klik og træk knappen på skærmen for at ændre placering</string>
 </resources>
