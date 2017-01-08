@@ -2590,11 +2590,11 @@ Si aprecieu OsmAnd  i OSM i voleu ajudar-los, és la via perfecta per fer-ho."</
     <string name="quick_action_add_create_items">Crea elements</string>
     <string name="quick_action_add_configure_map">Configura el mapa</string>
     <string name="quick_action_add_navigation">Navegació</string>
-    <string name="quick_action_fav_name_descr">Si deixeu buit el camp, OsmAnd utilitzarà l\'adreça o el nom d\'un lloc proper</string>
+    <string name="quick_action_fav_name_descr">Deixeu-lo buit per omplir automàticament amb l\'adreça o el nom d\'un lloc proper</string>
     <string name="quick_action_bug_descr">Aquest missatge serà auto-completat en el camp de comentaris.</string>
     <string name="quick_action_bug_message">Missatge</string>
-    <string name="quick_action_category_descr">Podeu seleccionar una categoria pel punt preferit.</string>
-    <string name="quick_action_gpx_category_descr">Podeu seleccionar una categoria per la fita GPX.</string>
+    <string name="quick_action_category_descr">Seleccioneu una categoria on desar el preferit.</string>
+    <string name="quick_action_gpx_category_descr">Seleccioneu una categoria opcional per la fita GPX.</string>
     <string name="quick_action_poi_list">Llista de PDI</string>
     <string name="quick_action_sh_poi_desc">Podeu afegir una categoria de PDI o més d\'una per mostrar al mapa.</string>
     <string name="quick_action_map_style_descr">Si premeu el botó de l\'acció es canviarà l\'estil del mapa seguint la llista.</string>
@@ -2617,4 +2617,5 @@ Si aprecieu OsmAnd  i OSM i voleu ajudar-los, és la via perfecta per fer-ho."</
     <string name="quick_action_btn_tutorial_title">Modifica la posició del botó</string>
     <string name="quick_action_btn_tutorial_descr">Premeu el botó sense deixar-lo i arrossegueu per la pantalla per canviar-li la posició</string>
 <string name="quick_action_interim_dialog">Mostra un diàleg provisional</string>
+    <string name="quick_action_sh_poi_descr">Podeu afegir una o més categories de PDI per mostrar-les al mapa.</string>
     </resources>
