@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:padding="16dp"
             android:layout_gravity="center"
-            android:text="@string/quick_action_gpx_dialog"
+            android:text="@string/quick_action_interim_dialog"
             android:textColor="?android:textColorPrimary"
             android:textSize="@dimen/default_list_text_size"
             android:layout_weight="1"
