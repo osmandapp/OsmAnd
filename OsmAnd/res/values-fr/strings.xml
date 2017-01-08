@@ -20,8 +20,8 @@
     <string name="live_monitoring_interval">Intervalle pour le suivi en ligne</string>
     <string name="live_monitoring_url_descr">Préciser l\'adresse web pour le suivi en ligne avec la syntaxe : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}</string>
     <string name="live_monitoring_url">Adresse web pour le suivi en ligne</string>
-    <string name="gpx_monitoring_disabled_warn">Enregistrer la trace avec le composant GPX ou avec l\'option \"Enregistrement de Voyage\".</string>
-    <string name="show_current_gpx_title">Afficher la trace en cours</string>
+    <string name="gpx_monitoring_disabled_warn">Enregistrer la trace avec le composant GPX ou avec l\'option \"Enregistrer l\'itinéraire\".</string>
+    <string name="show_current_gpx_title">Afficher la trace courante</string>
 
     <string name="free_version_message">La version gratuite d\'OsmAnd est limitée à %1$s téléchargements et ne gère pas les articles Wikipedia hors-ligne.</string>
     <string name="free_version_title">Version gratuite</string>
@@ -101,7 +101,7 @@ Actuellement {2} Mo sont disponibles.</string>
     <string name="gpx_navigation">Itinéraire GPX</string>
     <string name="poi_query_by_name_matches_categories">Des catégories de PI correspondantes à la recherche ont été trouvées :</string>
     <string name="data_to_search_poi_not_available">Pas de données de PI en local pour effectuer une recherche.</string>
-    <string name="poi_filter_by_name">Recherche par nom</string>
+    <string name="poi_filter_by_name">Rechercher par nom</string>
     <string name="old_poi_file_should_be_deleted">Le fichier de PI \'%1$s\' est obsolète et peut être supprimé.</string>
     <string name="update_poi_file_not_found">Fichier local de gestion des modifications de PI introuvable, et ne peut être créé.</string>
     <string name="button_upgrade_osmandplus">Mettre à jour OsmAnd+</string>
@@ -273,7 +273,7 @@ Actuellement {2} Mo sont disponibles.</string>
     <string name="m">m</string>
     <string name="old_map_index_is_not_supported">Le format obsolète de la carte \'\'{0}\'\' n\'\'est pas supporté</string>
     <string name="poi_filter_car_aid">Pour conducteurs</string>
-    <string name="poi_filter_closest_poi">Plus proches points d\'intérêt (PI)</string>
+    <string name="poi_filter_closest_poi">Points d\'intérêt (PI) à proximité</string>
     <string name="poi_filter_custom_filter">Filtre personnalisé</string>
     <string name="poi_filter_food_shop">Alimentation</string>
     <string name="poi_filter_for_tourists">Pour voyageurs</string>
@@ -320,7 +320,7 @@ Actuellement {2} Mo sont disponibles.</string>
     <string name="continuous_rendering">Affichage continu</string>
     <string name="continuous_rendering_descr">Affichage continu plutôt qu\'image par image</string>
     <string name="rendering_exception">Erreur lors de l\'affichage de la zone sélectionnée</string>
-    <string name="rendering_out_of_memory">Pas suffisamment de mémoire pour afficher la zone sélectionnée</string>
+    <string name="rendering_out_of_memory">Mémoire insuffisante pour afficher la zone sélectionnée</string>
     <string name="show_point_options">Utiliser ce point</string>
     <string name="renderer_load_sucess">Moteur de rendu chargé avec succès</string>
     <string name="renderer_load_exception">Erreur : le moteur de rendu n\'est pas chargé</string>
@@ -543,7 +543,7 @@ Actuellement {2} Mo sont disponibles.</string>
     <string name="auto_zoom_map">Zoom automatique de la carte</string>
     <string name="additional_settings">Paramètres supplémentaires</string>
     <string name="shared_string_settings">Paramètres</string>
-    <string name="save_current_track_descr">Enregistrer la trace actuelle sur la carte SD</string>
+    <string name="save_current_track_descr">Enregistrer la trace courante sur la carte SD</string>
     <string name="save_current_track">Enregistrer la trace GPX</string>
     <string name="save_track_interval_descr">Sélectionnez l\'intervalle d\'enregistrement de la trace pendant la navigation</string>
     <string name="save_track_interval">Intervalle d\'enregistrement pendant la navigation</string>
@@ -663,7 +663,7 @@ Actuellement {2} Mo sont disponibles.</string>
     <string name="filter_current_poiButton">Filtre</string>
 
     <string name="edit_filter_save_as_menu_item">Enregistrer sous</string>
-    <string name="edit_filter_delete_dialog_title">Voulez-vous vraiment supprimer le filtre sélectionné ?</string>
+    <string name="edit_filter_delete_dialog_title">Supprimer le filtre sélectionné ?</string>
     <string name="edit_filter_delete_message">Le filtre {0} a été effacé</string>
     <string name="edit_filter_create_message">Le filtre {0} a été créé</string>
 
@@ -770,7 +770,7 @@ Les cartes tuiles peuvent être obtenues directement en ligne ou peuvent être p
     <string name="accessibility_preferences_descr">Configurer les paramètres liés à l\'accessibilité</string>
     <string name="shared_string_accessibility">Accessibilité</string>
     <string name="use_fluorescent_overlays">Sur-couche fluorescente</string>
-    <string name="use_fluorescent_overlays_descr">Utiliser les couleurs fluorescente pour les pistes et routes</string>
+    <string name="use_fluorescent_overlays_descr">Utiliser des couleurs fluorescentes pour les traces et routes</string>
     <string name="shared_string_name">Nom</string>
     <string name="favourites_edit_dialog_category">Catégorie</string>
     <string name="navigate_point_format_D">DDD.DDDDD</string>
@@ -1260,7 +1260,7 @@ Les données globales (entre 70 degrés Nord et 70 degrés Sud) sont basées sur
     <string name="route_preferences">Préférences d\'itinéraire</string>
     <string name="route_info">Informations sur l\'itinéraire</string>
     <string name="keep_and_add_destination_point">Ajouter comme destination finale</string>
-    <string name="use_displayed_track_for_navigation">Voulez-vous suivre la trace affichée à l\'écran ?</string>
+    <string name="use_displayed_track_for_navigation">Souhaitez-vous suivre la trace affichée à l\'écran ?</string>
 
     <string name="gpx_option_calculate_first_last_segment">Calculer un itinéraire OsmAnd pour le début et la fin de l\'itinéraire</string>
     <string name="calculate_osmand_route_without_internet">Calculer un itinéraire OsmAnd hors-ligne</string>
@@ -1745,14 +1745,14 @@ Pour revenir à l’un des styles de carte classique de OsmAnd, désactivez simp
     <string name="location_on_map">Position :\n Lat. %1$s\n Lon. %2$s</string>
     <string name="days_behind">jours passés</string>
     <string name="rename_failed">Échec du renommage.</string>
-    <string name="shared_string_currently_recording_track">Enregistrement de l\'itinéraire en cours</string>
+    <string name="shared_string_currently_recording_track">Enregistrement de l\'itinéraire courant</string>
     <string name="back_to_map">Retour à la carte</string>
 
 
     <string name="shared_string_selected">Sélectionné</string>
-    <string name="track_points">Points de piste</string>
+    <string name="track_points">Points de la trace</string>
     <string name="route_points">Itinéraire</string>
-    <string name="track_segments">Segments de la voie</string>
+    <string name="track_segments">Segments de la trace</string>
     <string name="simulate_your_location">Simulez votre position</string>
     <string name="short_location_on_map">Lat. %1$s\nLon. %2$s</string>
     <string name="tips_and_tricks_descr">Questions fréquentes, notes de version et autres informations</string>
@@ -1909,7 +1909,7 @@ Pour revenir à l’un des styles de carte classique de OsmAnd, désactivez simp
     <string name="failed_to_upload">Erreur lors de l\'envoi</string>
     <string name="delete_change">Supprimer les modifications</string>
     <string name="successfully_uploaded_pattern">Envoi avec succès {0}/{1}</string>
-    <string name="try_again">Merci de re-essayer</string>
+    <string name="try_again">Essayer à nouveau</string>
     <string name="error_message_pattern">Erreur : {0}</string>
     <string name="no_updates_available">Aucune mise à jour disponible</string>
     <string name="we_really_care_about_your_opinion">Nous prêtons beaucoup d\'attention à vos avis, merci pour vos retours.</string>
@@ -2035,7 +2035,7 @@ Pour revenir à l’un des styles de carte classique de OsmAnd, désactivez simp
     <string name="faq_item_description">Foire Aux Questions</string>
     <string name="map_viewing_item">Affichage de la carte</string>
     <string name="search_on_the_map_item">Rechercher sur la carte</string>
-    <string name="planning_trip_item">Préparer un trajet</string>
+    <string name="planning_trip_item">Préparer un itinéraire</string>
 
     
 
@@ -2062,9 +2062,9 @@ Pour revenir à l’un des styles de carte classique de OsmAnd, désactivez simp
     <string name="lang_nds">Bas allemand</string>
     <string name="share_osm_edits_subject">Éditions OSM partagées grâce à OsmAnd</string>
     <string name="save_poi_without_poi_type_message">Souhaitez-vous enregistrer ce point d\'intérêt sans définir son type ?</string>
-    <string name="shared_string_location">Localisation</string>
-    <string name="context_menu_item_delete_waypoint">Supprimer le point de passage GPX ?</string>
-    <string name="context_menu_item_edit_waypoint">Modifier le point de passage GPX</string>
+    <string name="shared_string_location">Position</string>
+    <string name="context_menu_item_delete_waypoint">Supprimer l\'étape GPX ?</string>
+    <string name="context_menu_item_edit_waypoint">Modifier l\'étape GPX</string>
     <string name="context_menu_item_open_note">Ouvrir la note OSM</string>
     <string name="osm_edit_reopened_note">Ré-ouvrir la note OSM</string>
     <string name="osm_edit_removed_note">Note OSM supprimée</string>
@@ -2253,7 +2253,7 @@ et bien plus encore...
     <string name="osm_user_stat">Modifications %1$s, classement %2$s, nombre total de modifications %3$s</string>
     <string name="osm_live_subscription">Abonnement à OSM Live</string>
     <string name="no_map_markers_found">Ajoutez des marqueurs depuis la carte</string>
-    <string name="no_waypoints_found">Aucun point de passage trouvé</string>
+    <string name="no_waypoints_found">Aucune étape trouvée</string>
     <string name="report">Rapport</string>
     <string name="select_map_marker">Sélectionner un marqueur</string>
     <string name="map_markers_other">Autres marqueurs</string>
@@ -2308,7 +2308,7 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="map_widget_battery">Niveau de batterie</string>
     <string name="lang_hu_formal">Hongrois (formel)</string>
     <string name="move_marker_bottom_sheet_title">Déplacez la carte pour modifier la position du marqueur</string>
-    <string name="current_track">Trace en cours</string>
+    <string name="current_track">Trace courante</string>
     <string name="change_markers_position">Modifier la position du marqueur</string>
     <string name="lang_es_us">Espagnol (américain)</string>
     <string name="lang_en_gb">Anglais (Royaume-Uni)</string>
@@ -2377,10 +2377,10 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="skip_map_downloading_desc">"Aucune carte hors-ligne n\'est installée. Vous pouvez  sélectionner un carte dans la liste ou télécharger ultérieurement une carte depuis le menu - %1$s."</string>
     <string name="search_another_country">Sélectionnez une autre région</string>
     <string name="search_map">Recherche des cartes …</string>
-    <string name="first_usage_wizard_desc">Laissez OsmAnd déterminer votre position et vous suggérer les cartes de la région.</string>
+    <string name="first_usage_wizard_desc">Laisser OsmAnd déterminer votre position et vous suggérer les cartes de la région.</string>
     <string name="location_not_found">Position non trouvée</string>
     <string name="no_inet_connection">Aucune connexion Internet</string>
-    <string name="no_inet_connection_desc_map">Nécessaire pour télécharger des cartes.</string>
+    <string name="no_inet_connection_desc_map">Indispensable pour télécharger des cartes.</string>
     <string name="search_location">Recherche de la position…</string>
     <string name="storage_free_space">Espace disponible</string>
     <string name="give_permission">Autoriser</string>
@@ -2404,8 +2404,8 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="lang_hsb">Sorabe (haut)</string>
     <string name="shared_string_filters">Filtres</string>
     <string name="apply_filters">Appliquer les filtres</string>
-    <string name="save_filter">Mémoriser les filtres</string>
-    <string name="delete_filter">Retirer les filtres</string>
+    <string name="save_filter">Mémoriser le filtre</string>
+    <string name="delete_filter">Supprimer le filtre</string>
     <string name="new_filter">Nouveau filtre</string>
     <string name="new_filter_desc">Merci de saisir un nom pour ce filtre, il sera ajouté à l\'onglet Catégories.</string>
     <string name="selected_categories">Catégories sélectionnées</string>
@@ -2531,7 +2531,7 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="quick_action_add_category">Ajouter une catégorie</string>
     <string name="quick_action_add_configure_map">Paramétrer la carte</string>
     <string name="quick_action_add_navigation">Navigation</string>
-    <string name="quick_action_fav_name_descr">Si vous ne renseignez pas cette zone, OsmAnd utilisera l\'adresse ou le nom du lieu.</string>
+    <string name="quick_action_fav_name_descr">Si cette zone est vide, OsmAnd utilisera l\'adresse ou le nom du lieu.</string>
     <string name="quick_action_bug_message">Message</string>
     <string name="quick_action_category_descr">Vous pouvez choisir une Catégorie pour ce favori.</string>
     <string name="quick_action_gpx_category_descr">Vous pouvez choisir une Catégorie pour ce point GPX.</string>
@@ -2550,4 +2550,17 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="quick_action_map_source_title">Sources de cartes</string>
     <string name="quick_action_map_source_action">Ajouter une source de carte</string>
     <string name="quick_action_map_source_switch">La source de la carte a été modifiée pour \"%s\".</string>
+    <string name="quick_action_btn_tutorial_title">Déplacer le bouton</string>
+    <string name="quick_action_btn_tutorial_descr">Appui long pour déplacer le bouton sur l\'écran</string>
+<string name="quick_action_add_marker_descr">Appuyez sur le bouton d\'action pour ajouter un marqueur à l\'emplacement.</string>
+    <string name="quick_action_add_gpx_descr">Appuyez sur le bouton d\'action pour ajouter une étape GPX à l\'emplacement.</string>
+    <string name="quick_action_take_audio_note_descr">Appuyez sur le bouton d\'action pour ajouter une note Audio à l\'emplacement.</string>
+    <string name="quick_action_take_video_note_descr">Appuyez sur le bouton d\'action pour ajouter une note Vidéo à l\'emplacement.</string>
+    <string name="quick_action_take_photo_note_descr">Appuyez sur le bouton d\'action pour ajouter une note Photo à l\'emplacement.</string>
+    <string name="quick_action_add_osm_bug_descr">Appuyez sur le bouton d\'action pour signaler une anomalie OSM à l\'emplacement.</string>
+    <string name="quick_action_add_poi_descr">Appuyez sur le bouton d\'action pour ajouter un PI à l\'emplacement.</string>
+    <string name="quick_action_navigation_voice_descr">Appuyez sur le bouton pour activer ou désactiver le Guidage vocal pendant la navigation.</string>
+    <string name="quick_action_add_parking_descr">Appuyez sur le bouton pour ajouter un emplacement de stationnement.</string>
+    <string name="quick_action_showhide_favorites_descr">Appuyez sur le bouton pour afficher ou masquer les favoris sur la carte.</string>
+    <string name="quick_action_showhide_poi_descr">Appuyez sur le bouton pour afficher ou masquer les PI sur la carte.</string>
     </resources>
