@@ -1289,7 +1289,7 @@
     <string name="recording_default_name">Recording</string>
     <string name="map_widget_av_notes">Audio/video notes</string>
     <string name="map_widget_distancemeasurement">Distance measurement</string>
-    <string name="audionotes_location_not_defined">Location to associate with the note is not defined yet. \"Use location …\" to assign a note to the specified location</string>
+    <string name="audionotes_location_not_defined">Location to associate with the note is not defined yet. \"Use location …\" to assign a note to the location specified.</string>
     <string name="map_widget_audionotes">Audio notes</string>
     <string name="index_srtm_parts">parts</string>
     <string name="index_srtm_ele">Contour lines</string>
@@ -2466,7 +2466,7 @@ If you need help with OsmAnd application, please contact our support team: suppo
 
     <string name="quick_action_item_action">Action %d</string>
     <string name="quick_action_item_screen">Screen %d</string>
-    <string name="quick_action_add_marker">Add marker</string>
+    <string name="quick_action_add_marker">Add map marker</string>
     <string name="quick_action_add_poi">Add POI</string>
     <string name="quick_action_map_style">Change map style</string>
     <string name="quick_action_map_style_switch">The map style has been changed to \"%s\".</string>
@@ -2487,15 +2487,15 @@ If you need help with OsmAnd application, please contact our support team: suppo
     <string name="quick_actions_delete_text">Are you sure you want to delete the action \"%s\"?</string>
     <string name="quick_favorites_show_favorites_dialog">Show favorites dialog</string>
     <string name="quick_favorites_name_preset">Name preset</string>
-    <string name="quick_action_add_marker_descr">Tapping the action button will add a map marker to the specified location.</string>
-    <string name="quick_action_add_gpx_descr">Tapping the action button will add a GPX waypiont to the specified location.</string>
-    <string name="quick_action_take_audio_note_descr">Tapping the action button will add an audio note to the specified location.</string>
-    <string name="quick_action_take_video_note_descr">Tapping the action button will add a video note to the specified location.</string>
-    <string name="quick_action_take_photo_note_descr">Tapping the action button will add a photo note to the specified location.</string>
-    <string name="quick_action_add_osm_bug_descr">Tapping the action button will add an OSM bug note to the specified location.</string>
-    <string name="quick_action_add_poi_descr">Tapping the action button will add a POI to the specified location.</string>
+    <string name="quick_action_add_marker_descr">Tapping the action button will add a map marker at the screen center location.</string>
+    <string name="quick_action_add_gpx_descr">Tapping the action button will add a GPX waypiont at the screen center location.</string>
+    <string name="quick_action_take_audio_note_descr">Tapping the action button will add an audio note at the screen center location.</string>
+    <string name="quick_action_take_video_note_descr">Tapping the action button will add a video note at the screen center location.</string>
+    <string name="quick_action_take_photo_note_descr">Tapping the action button will add a photo note at the screen center location.</string>
+    <string name="quick_action_add_osm_bug_descr">Tapping the action button will add an OSM bug note at the screen center location.</string>
+    <string name="quick_action_add_poi_descr">Tapping the action button will add a POI at the screen center location.</string>
     <string name="quick_action_navigation_voice_descr">Tapping the action button will disable or enable voice guidance during navigation.</string>
-    <string name="quick_action_add_parking_descr">Tapping the action button will add a parking place to the specified location.</string>
+    <string name="quick_action_add_parking_descr">Tapping the action button will add a parking place at the screen center location.</string>
     <!-- string name="quick_action_favorite_dialog">Show the favorite dialog</string -->
     <string name="quick_action_interim_dialog">Show an interim dialog</string>
     <!-- string name="quick_action_add_poi_dialog">Show the add POI dialog</string -->
