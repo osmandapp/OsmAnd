@@ -1919,7 +1919,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="begin_with_osmand_menu_group">الخطوات الأولى مع أوسماند OSMAnd</string>
     <string name="features_menu_group">ميزات</string>
     <string name="help_us_to_improve_menu_group">ساعدنا على تحسين أوسماند OSMAnd</string>
-    <string name="first_usage_item">الاستخدام الأول</string>
+    <string name="first_usage_item">أول استخدام</string>
     <string name="first_usage_item_description">كيفية تحميل الخرائط وتعيين الإعدادات الأساسية</string>
     <string name="planning_trip_item">التخطيط لرحلة</string>
     <string name="faq_item">الأسئلة المتداولة</string>
@@ -2667,7 +2667,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="quick_action_take_photo_note">أخذ ملاحظة بالصورة</string>
     <string name="quick_action_navigation_voice">تشغيل/إيقاف الصوت</string>
     <string name="quick_action_navigation_voice_off">الصوت معطل</string>
-    <string name="quick_action_navigation_voice_on">صوت مشغل</string>
+    <string name="quick_action_navigation_voice_on">الصوت مشغل</string>
     <string name="quick_action_add_gpx">إضافة إحداثية GPX</string>
     <string name="quick_action_add_parking">إضافة مكان ركن</string>
     <string name="quick_action_new_action">إضافة إجراء</string>
@@ -2677,4 +2677,5 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="quick_actions_delete">حذف إجراء</string>
     <string name="quick_actions_delete_text">هل أنت متأكد من أنك تريد حذف إجراء \"%s\" ؟</string>
     <string name="quick_action_name_hint">اسم الإجراء</string>
+    <string name="quick_action_add_osm_bug">أضف خطاءا إلى OSM</string>
     </resources>
