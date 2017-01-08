@@ -1676,7 +1676,7 @@ public class QuickActionFactory {
                         poiTypeTextInputLayout.setHint(category.getTranslation());
                     }
 
-                    String add = application.getString(R.string.quick_action_poi_add);
+                    String add = application.getString(R.string.shared_string_add);
 
                     if (title != null) {
 

@@ -2591,7 +2591,6 @@ Si amas a OsmAnd, OSM y quieres apoyarlos, esta es una perfecta manera de hacerl
     <string name="quick_action_map_source_dscr">Pulsando el botón de acción, aparecerá la lista de fuentes del mapa.</string>
     <string name="quick_action_map_source_action">Añadir fuente del mapa</string>
     <string name="quick_action_map_source_switch">La fuente del mapa se cambió a \"%s\".</string>
-    <string name="quick_action_poi_add">Añadir</string>
     <string name="quck_action_btn_tutorial_title">Cambiar ubicación del botón</string>
     <string name="quick_action_btn_tutorial_description">Mantener pulsado y arrastrar el botón para mover la ubicación en la pantalla</string>
 </resources>
