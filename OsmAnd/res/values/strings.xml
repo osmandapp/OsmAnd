@@ -2520,7 +2520,7 @@ If you need help with OsmAnd application, please contact our support team: suppo
     <string name="quick_action_bug_descr">This message will be auto-completed in the comment field.</string>
     <string name="quick_action_bug_message">Message</string>
     <string name="quick_action_category_descr">Select the category to save the favorite under.</string>
-    <string name="quick_action_gpx_category_descr">Select an optional category for the GPX waypoint point.</string>
+    <string name="quick_action_gpx_category_descr">Select an optional category.</string>
     <string name="quick_action_poi_list">POI list</string>
     <string name="quick_action_sh_poi_descr">You can add one or more POI categories to display on the map.</string>
     <string name="quick_action_map_style_descr">Tapping the action button will page the map style through the list.</string>
