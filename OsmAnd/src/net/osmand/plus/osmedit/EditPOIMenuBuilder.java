@@ -5,6 +5,8 @@ import android.view.View;
 import net.osmand.data.PointDescription;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiType;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
@@ -71,8 +73,13 @@ public class EditPOIMenuBuilder extends MenuBuilder {
 			}
 		}
 
+		OsmandSettings st = ((OsmandApplication) mapActivity.getApplicationContext()).getSettings();
 		buildRow(view, R.drawable.ic_action_get_my_location, PointDescription.getLocationName(app,
 				osmPoint.getLatitude(), osmPoint.getLongitude(), true)
 				.replaceAll("\n", " "), 0, false, null, false, 0, false, null);
+		if (st.COORDINATES_FORMAT.get() != PointDescription.OLC_FORMAT)
+			buildRow(view, R.drawable.ic_action_get_my_location, PointDescription.getLocationOlcName(
+					osmPoint.getLatitude(), osmPoint.getLongitude())
+					.replaceAll("\n", " "), 0, false, null, false, 0, false, null);
 	}
 }

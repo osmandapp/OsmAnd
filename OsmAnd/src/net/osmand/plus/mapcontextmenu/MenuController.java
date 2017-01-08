@@ -22,6 +22,7 @@ import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.MapActivity;
@@ -203,8 +204,12 @@ public abstract class MenuController extends BaseMenuController {
 	}
 
 	protected void addMyLocationToPlainItems(LatLon latLon) {
+		OsmandSettings st = ((OsmandApplication) getMapActivity().getApplicationContext()).getSettings();
 		addPlainMenuItem(R.drawable.ic_action_get_my_location, PointDescription.getLocationName(getMapActivity(),
 				latLon.getLatitude(), latLon.getLongitude(), true).replaceAll("\n", " "), false, false, null);
+		if (st.COORDINATES_FORMAT.get() != PointDescription.OLC_FORMAT)
+			addPlainMenuItem(R.drawable.ic_action_get_my_location, PointDescription.getLocationOlcName(
+					latLon.getLatitude(), latLon.getLongitude()).replaceAll("\n", " "), false, false, null);
 	}
 
 	public PointDescription getPointDescription() {
