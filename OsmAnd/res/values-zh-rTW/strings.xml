@@ -2713,8 +2713,8 @@ Facebook：https://www.facebook.com/osmandapp
     <string name="quick_action_add_configure_map">組態地圖</string>
     <string name="quick_action_add_navigation">導航</string>
     <string name="quick_action_bug_message">訊息</string>
-    <string name="quick_action_category_discr">您可以選擇一項類別給收藏的標記。</string>
-    <string name="quick_action_gpx_category_discr">您可以選擇一項類別給 GPX 的航點標記。</string>
+    <string name="quick_action_category_descr">您可以選擇一項類別給收藏的標記。</string>
+    <string name="quick_action_gpx_category_descr">您可以選擇一項類別給 GPX 的航點標記。</string>
     <string name="quick_action_poi_list">POI 清單</string>
     <string name="quick_action_sh_poi_descr">您可以增加一個或是更多的 POI 類別顯示在地圖上。</string>
     <string name="quick_action_map_style_action">增加一個地圖樣式</string>

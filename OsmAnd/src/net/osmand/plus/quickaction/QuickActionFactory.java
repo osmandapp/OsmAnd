@@ -498,7 +498,7 @@ public class QuickActionFactory {
                     .inflate(R.layout.quick_action_with_text, parent, false);
 
             ((TextView) view.findViewById(R.id.text)).setText(
-                    R.string.quick_action_add_marker_discr);
+                    R.string.quick_action_add_marker_descr);
 
             parent.addView(view);
         }
@@ -718,7 +718,7 @@ public class QuickActionFactory {
                     .inflate(R.layout.quick_action_with_text, parent, false);
 
             ((TextView) view.findViewById(R.id.text)).setText(
-                    R.string.quick_action_showhides_favorites_discr);
+                    R.string.quick_action_showhides_favorites_descr);
 
             parent.addView(view);
         }
@@ -1266,7 +1266,7 @@ public class QuickActionFactory {
                     .inflate(R.layout.quick_action_with_text, parent, false);
 
             ((TextView) view.findViewById(R.id.text)).setText(
-                    R.string.quick_action_add_parking_discr);
+                    R.string.quick_action_add_parking_descr);
 
             parent.addView(view);
         }
@@ -1302,7 +1302,7 @@ public class QuickActionFactory {
                     .inflate(R.layout.quick_action_with_text, parent, false);
 
             ((TextView) view.findViewById(R.id.text)).setText(
-                    R.string.quick_action_take_audio_note_discr);
+                    R.string.quick_action_take_audio_note_descr);
 
             parent.addView(view);
         }
@@ -1338,7 +1338,7 @@ public class QuickActionFactory {
                     .inflate(R.layout.quick_action_with_text, parent, false);
 
             ((TextView) view.findViewById(R.id.text)).setText(
-                    R.string.quick_action_take_video_note_discr);
+                    R.string.quick_action_take_video_note_descr);
 
             parent.addView(view);
         }
@@ -1374,7 +1374,7 @@ public class QuickActionFactory {
                     .inflate(R.layout.quick_action_with_text, parent, false);
 
             ((TextView) view.findViewById(R.id.text)).setText(
-                    R.string.quick_action_take_photo_note_discr);
+                    R.string.quick_action_take_photo_note_descr);
 
             parent.addView(view);
         }
@@ -1407,7 +1407,7 @@ public class QuickActionFactory {
                     .inflate(R.layout.quick_action_with_text, parent, false);
 
             ((TextView) view.findViewById(R.id.text)).setText(
-                    R.string.quick_action_navigation_voice_discr);
+                    R.string.quick_action_navigation_voice_descr);
 
             parent.addView(view);
         }

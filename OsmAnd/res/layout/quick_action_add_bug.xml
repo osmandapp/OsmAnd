@@ -98,7 +98,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
-            android:text="@string/quick_action_bug_discr"
+            android:text="@string/quick_action_bug_descr"
             android:textColor="?android:textColorSecondary"
             android:textSize="@dimen/default_sub_text_size"
             android:layout_marginBottom="16dp"/>

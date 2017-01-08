@@ -2532,10 +2532,10 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="quick_action_add_category">Ajouter une catégorie</string>
     <string name="quick_action_add_configure_map">Paramétrer la carte</string>
     <string name="quick_action_add_navigation">Navigation</string>
-    <string name="quick_action_fav_name_discr">Si vous ne renseignez pas cette zone, OsmAnd utilisera l\'adresse ou le nom du lieu.</string>
+    <string name="quick_action_fav_name_descr">Si vous ne renseignez pas cette zone, OsmAnd utilisera l\'adresse ou le nom du lieu.</string>
     <string name="quick_action_bug_message">Message</string>
-    <string name="quick_action_category_discr">Vous pouvez choisir une Catégorie pour ce favori.</string>
-    <string name="quick_action_gpx_category_discr">Vous pouvez choisir une Catégorie pour ce point GPX.</string>
+    <string name="quick_action_category_descr">Vous pouvez choisir une Catégorie pour ce favori.</string>
+    <string name="quick_action_gpx_category_descr">Vous pouvez choisir une Catégorie pour ce point GPX.</string>
     <string name="quick_action_poi_list">Liste des PI</string>
     <string name="quick_action_sh_poi_descr">Vous pouvez indiquer les Catégories de PI à afficher sur la carte.</string>
     <string name="quick_action_map_style_action">Ajouter un Style de carte</string>
