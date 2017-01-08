@@ -2218,7 +2218,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="shared_string_upload">Адаслаць</string>
     <string name="osm_edit_created_poi">Створана OSM POI</string>
     
-    <string name="go_to_map">Перайсьці да мапы</string>
+    <string name="go_to_map">Адлюстраваць мапу</string>
     
     
     <string name="new_version">Новая вэрсія</string>
@@ -2231,7 +2231,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="map_legend">Легенда мапы</string>
 <string name="shared_string_update">Абнавіць</string>
     <string name="world_map_download_descr">Базавая мапа сьвету (якая пакрывае ўвесь сьвет пры малым павелічэньні) адсутнічае або састарэла. Калі ласка, загрузіце яе каб мець агляд усяго сьвету.</string>
-    <string name="map_downloaded_descr">Мапа %1$s загружаная. Вярніцеся да мапы, каб пачаць яе выкарыстоўваць.</string>
+    <string name="map_downloaded_descr">Мапа %1$s загружаная, зараз Вы можаце пачаць выкарыстоўваць яе.</string>
     <string name="simulate_initial_startup_descr">Усталёўвае прыкмету першага запуску праграмы, не зьмяняе іншых наладаў</string>
     <string name="enter_country_name">Увядзіце назву краіны</string>
     <string name="begin_with_osmand_menu_group">Першыя крокі з OsmAnd</string>
@@ -2627,7 +2627,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="skip_map_downloading">Прапусьціць сьцягваньне мапаў</string>
     <string name="skip_map_downloading_desc">У вас няма загружаных мапаў. Вы можаце выбраць мапу са сьпісу або сьцягнуць яе пазьней праз мэню - %1$s.</string>
     <string name="search_another_country">Выберыце іншы рэгіён</string>
-    <string name="search_map">Пошук мапы…</string>
+    <string name="search_map">Пошук мапаў…</string>
     <string name="first_usage_wizard_desc">Дазвольце OsmAnd вызначыць ваша месцазнаходжаньне і прапанаваць сьцягнуць мапы для гэтага рэгіёну.</string>
     <string name="location_not_found">Не атрымалася вызначыць месцазнаходжаньне</string>
     <string name="no_inet_connection">Злучэньне з Інтэрнэтам адсутнічае</string>
@@ -2732,4 +2732,11 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="rendering_value_high_name">Высокая</string>
     <string name="rendering_value_medium_w_name">Сярэдняя</string>
     <string name="rendering_value_low_name">Нізкая</string>
+    <string name="rendering_attr_hideWaterPolygons_name">Схаваць ваду</string>
+    <string name="quick_action_item_screen">Экран %d</string>
+    <string name="quick_action_add_marker">Дадаць маркер</string>
+    <string name="quick_action_add_poi">Дадаць POI</string>
+    <string name="quick_action_map_style">Зьмяніць стыль мапы</string>
+    <string name="quick_action_map_style_switch">Стыль мапы быў зьменены на \"%s\".</string>
+    <string name="quick_action_add_parking">Дадаць месца паркоўкі</string>
     </resources>
