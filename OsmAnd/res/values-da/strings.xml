@@ -2806,7 +2806,7 @@ Hvis du  ønsker at støtte OsmAnd og OSM, er dette en god måde at gøre det p�
     <string name="quick_action_sh_poi_descr">Tilføj et par IP kategorier der skal vises på kortet.</string>
     <string name="quick_action_map_style_descr">Klik på handlings-knappen skifter kortformat, fra listerækkefølgen.</string>
     <string name="quick_action_map_style_action">Tilføj kortformat</string>
-    <string name="quick_action_empty_param_error">Parametrene bør ikke være tom</string>
+    <string name="quick_action_empty_param_error">Parametre bør ikke være tom</string>
     <string name="quick_action_map_styles">Kortformater</string>
     <string name="quick_action_map_overlay">Skift kortoverlejring</string>
     <string name="quick_action_map_overlay_title">Kortoverlejringer</string>
@@ -2823,4 +2823,6 @@ Hvis du  ønsker at støtte OsmAnd og OSM, er dette en god måde at gøre det p�
     <string name="quick_action_map_source_switch">Kortkilde er ændret til \"%s\".</string>
     <string name="quick_action_btn_tutorial_title">Ændre knap placering</string>
     <string name="quick_action_btn_tutorial_descr">Langt klik og træk knappen på skærmen for at ændre placering</string>
+<string name="quick_action_interim_dialog">Vis en foreløbig dialog</string>
+    <string name="shared_string_action_name">Genvejsnavn</string>
 </resources>
