@@ -2567,7 +2567,6 @@ kaj pli...
     <string name="quick_actions_delete_text">Ĉu vi certe volas forigi agon \"%s\"?</string>
     <string name="quick_favorites_show_favorites_dialog">Montri fenestron de ŝatataj ejoj</string>
     <string name="quick_favorites_name_preset">Nomo</string>
-    <string name="quick_action_name_hint">Nomo de ago</string>
     <string name="quick_action_add_marker_descr">Premado sur ag-butono aldonos markon al difinita loko.</string>
     <string name="quick_action_add_gpx_descr">Premado sur ag-butono aldonos GPX-navigadpunkton al difinita loko.</string>
     <string name="quick_action_take_audio_note_descr">Premado sur ag-butono aldonos sonan noton al difinita loko.</string>

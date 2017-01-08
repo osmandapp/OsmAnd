@@ -2748,5 +2748,5 @@ Se ami OsmAnd e OSM e vuoi sostenerli, questo è un modo perfetto per farlo.</st
     <string name="quick_favorites_show_favorites_dialog">Mostra la finestra di dialogo dei favoriti</string>
     <string name="quick_favorites_name_preset">Nome preimpostato</string>
     <string name="quick_action_fav_name_descr">Lascia il campo bianco e OsmAnd userà l\'indirizzo p il nome del luogo per il punto preferito</string>
-    <string name="quick_action_name_hint">Nome dell\'azione</string>
+    <string name="shared_string_action_name">Nome dell\'azione</string>
     </resources>
