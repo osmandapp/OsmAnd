@@ -2551,5 +2551,5 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="quick_action_map_source_title">Sources de cartes</string>
     <string name="quick_action_map_source_action">Ajouter une source</string>
     <string name="quick_action_map_source_switch">La source de carte a été modifié pour \"%s\".</string>
-    <string name="quck_action_btn_tutorial_title">Modifier la position du bouton</string>
+    <string name="quick_action_btn_tutorial_title">Modifier la position du bouton</string>
     </resources>
