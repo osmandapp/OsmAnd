@@ -2706,4 +2706,6 @@ Si istimas OsmAnd e OSM e los boles suportare, custa est una manera perfeta pro 
     <string name="quick_action_add_parking_descr">Incarchende su butone de s\'atzione as a annànghere unu parchègiu in sa positzione ischertada.</string>
     <string name="favorite_autofill_toast_text">" est sarbadu in "</string>
     <string name="favorite_empty_place_name">Logu</string>
+    <string name="quick_action_duplicates">Custu nùmene est giai impreadu, s\'atzione est istada rinumenada %1$s pro non tènnere dopiones.</string>
+    <string name="quick_action_duplicate">Nùmene pro s\'atzione lestra duplicadu</string>
     </resources>
