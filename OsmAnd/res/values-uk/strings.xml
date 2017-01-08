@@ -263,7 +263,7 @@
   <string name="favorite_friends_category">Друзі</string>
   <string name="favorite_places_category">Місця</string>
   
-  <string name="favourites_edit_dialog_name">Назва</string>
+  <string name="shared_string_name">Назва</string>
   <string name="favourites_edit_dialog_category">Категорія</string>
   <string name="shared_string_no_thanks">Ні, дякую</string>
   <string name="basemap_missing">Базова мапа (яка покриває цілий світ) відсутня. Будь ласка, завантажте World_basemap_x.obf для повноцінної роботи програми.</string>

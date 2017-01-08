@@ -384,7 +384,7 @@
 	<string name="favorite_friends_category">Φίλοι</string>
 	<string name="favorite_places_category">Μέρη</string>
 	
-	<string name="favourites_edit_dialog_name">Όνομα</string>
+	<string name="shared_string_name">Όνομα</string>
 	<string name="favourites_edit_dialog_category">Κατηγορία</string>
 	<string name="shared_string_no_thanks">Όχι, ευχαριστώ</string>
 	<string name="basemap_missing">Λείπει ο βασικός παγκόσμιος χάρτης (καλύπτει όλο τον κόσμο στις μικρές κλίμακες). Παρακαλώ κατεβάστε το World_basemap_x.obf για ένα πλήρες περιβάλλον.</string>

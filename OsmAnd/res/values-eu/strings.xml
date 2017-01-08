@@ -835,7 +835,7 @@ Biltegiratzean {1} MB erabiliko dira.
   <string name="favorite_friends_category">Lagunak</string>
   <string name="favorite_places_category">Lekuak</string>
   
-  <string name="favourites_edit_dialog_name">Izena</string>
+  <string name="shared_string_name">Izena</string>
   <string name="favourites_edit_dialog_category">Kategoria</string>
   <string name="shared_string_no_thanks">Ez, milesker</string>
   <string name="basemap_missing">Oinarrizko munduko mapa (mundu guztia estaliz zoom maila txikietan) falta da. Mesedez kontsideratu World_basemap_x.obf deskargatzea ikuspegi globala eduki ahal izateko.</string>

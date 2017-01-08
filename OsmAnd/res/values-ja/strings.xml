@@ -1207,7 +1207,7 @@ POIの更新は利用できません</string>
 	<string name="favorite_friends_category">友人宅</string>
 	<string name="favorite_places_category">場所</string>
 	<string name="shared_string_others">その他</string>
-	<string name="favourites_edit_dialog_name">名前</string>
+	<string name="shared_string_name">名前</string>
 	<string name="favourites_edit_dialog_category">カテゴリー</string>
 	<string name="shared_string_no_thanks">遠慮します</string>
 	<string name="basemap_missing">ベースワールドマップ(小さなズームでのみ全世界をカバーします)が欠落しています。World_basemap_x.obfをダウンロードしてみてください。</string>

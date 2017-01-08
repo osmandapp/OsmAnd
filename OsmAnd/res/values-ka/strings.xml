@@ -246,7 +246,7 @@
   <string name="favorite_friends_category">მეგობრები</string>
   <string name="favorite_places_category">ადგილები</string>
   
-  <string name="favourites_edit_dialog_name">სახელი</string>
+  <string name="shared_string_name">სახელი</string>
   <string name="favourites_edit_dialog_category">კატეგორია</string>
   <string name="shared_string_no_thanks">არა, მადლობა</string>
   <string name="basemap_missing">მსოფლიოს ბაზური რუკა, რომელიც შეიცავს მთელ მსოფლიოს პატარა გადიდებისას, არ არსებობს. გთხოვთ გადმოწეროთ World_basemap_x.obf.</string>

@@ -203,7 +203,7 @@ Ehhez {1} MB helyre van szükség.
     <string name="favorite_friends_category">Barátok</string>
     <string name="favorite_places_category">Helyek</string>
     <string name="shared_string_others">Egyéb</string>
-    <string name="favourites_edit_dialog_name">Név</string>
+    <string name="shared_string_name">Név</string>
     <string name="favourites_edit_dialog_category">Kategória</string>
     <string name="shared_string_no_thanks">Nem szükséges</string>
     <string name="basemap_missing">Hiányzik az alap világtérkép (alacsony nagyításon az egész Földet lefedi). A globális áttekinthetőséghez javasoljuk a World_basemap_x.obf letöltését.</string>

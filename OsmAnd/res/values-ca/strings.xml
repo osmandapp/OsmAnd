@@ -265,7 +265,7 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="favorite_friends_category">Amics</string>
     <string name="favorite_places_category">Llocs</string>
     <string name="shared_string_others">Altres</string>
-    <string name="favourites_edit_dialog_name">Nom</string>
+    <string name="shared_string_name">Nom</string>
     <string name="favourites_edit_dialog_category">Categoria</string>
     <string name="local_index_installed">Versió local</string>
     <string name="local_index_items_backuped">S\'ha desactivat amb èxit %1$d de %2$d ítem(s).</string>

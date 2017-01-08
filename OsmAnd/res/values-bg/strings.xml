@@ -598,7 +598,7 @@
     <string name="favorite_friends_category">Приятели</string>
     <string name="favorite_places_category">Места</string>
     <string name="shared_string_others">Други</string>
-    <string name="favourites_edit_dialog_name">Име</string>
+    <string name="shared_string_name">Име</string>
     <string name="favourites_edit_dialog_category">Категория</string>
     <string name="shared_string_no_thanks">Не, благодаря</string>
     <string name="basemap_missing">Липсва базовата карта (тази, която покрива целия свят в малък мащаб). Свалете World_basemap_x.obf за добра работа на системата.</string>

@@ -299,7 +299,7 @@ Tam prireiks {1} MB pastoviam saugojimui.
     <string name="favorite_friends_category">Draugai</string>
     <string name="favorite_places_category">Vietos</string>
     <string name="shared_string_others">Kitos</string>
-    <string name="favourites_edit_dialog_name">Pavadinimas</string>
+    <string name="shared_string_name">Pavadinimas</string>
     <string name="favourites_edit_dialog_category">Kategorija</string>
     <string name="shared_string_no_thanks">Ačiū, ne</string>
     <string name="basemap_missing">Trūksta bazinio viso pasaulio (stmbaus mastelio, dengiančio visą pasaulį) žemėlapio. Kad programa galėtų sklandžiai veikti, parsisiųskite World_basemap_x.obf.</string>

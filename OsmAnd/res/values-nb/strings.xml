@@ -260,7 +260,7 @@
     <string name="favorite_friends_category">Venner</string>
     <string name="favorite_places_category">Steder</string>
 
-    <string name="favourites_edit_dialog_name">Navn</string>
+    <string name="shared_string_name">Navn</string>
     <string name="favourites_edit_dialog_category">Kategori</string>
     <string name="shared_string_no_thanks">Nei takk</string>
     <string name="basemap_missing">Basiskart verden (som dekker hele verden ved lav zoom) mangler. Vurder å laste ned World_basemap_x.obf for en global oversikt.</string>

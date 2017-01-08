@@ -417,7 +417,7 @@ Nyttjat utrymme är {1} MB.
     <string name="favorite_friends_category">Vänner</string>
     <string name="favorite_places_category">Platser</string>
     <string name="shared_string_others">Annat</string>
-    <string name="favourites_edit_dialog_name">Namn</string>
+    <string name="shared_string_name">Namn</string>
     <string name="favourites_edit_dialog_category">Kategori</string>
     <string name="shared_string_no_thanks">Nej, tack</string>
     <string name="basemap_missing">Basvärldskarta (som omfattar hela världen i låg inzoomning) saknas. Hämta gärna World_basemap_x.obf för en global översikt.</string>

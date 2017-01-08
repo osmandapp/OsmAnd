@@ -772,7 +772,7 @@ Les cartes tuiles peuvent être obtenues directement en ligne ou peuvent être p
     <string name="shared_string_accessibility">Accessibilité</string>
     <string name="use_fluorescent_overlays">Sur-couche fluorescente</string>
     <string name="use_fluorescent_overlays_descr">Utiliser les couleurs fluorescente pour les pistes et routes</string>
-    <string name="favourites_edit_dialog_name">Nom</string>
+    <string name="shared_string_name">Nom</string>
     <string name="favourites_edit_dialog_category">Catégorie</string>
     <string name="navigate_point_format_D">DDD.DDDDD</string>
     <string name="navigate_point_format_DM">DDD:MM.MMMMM</string>

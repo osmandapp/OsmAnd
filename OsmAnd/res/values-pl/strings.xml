@@ -772,7 +772,7 @@ Mapy kafelkowe można uzyskać bezpośrednio z zasobów sieciowych, jak i przygo
  Wymagane miejsce {1} MB na stałe.
  (Dostępne miejsce {2} MB.)</string>
     <string name="poi_query_by_name_matches_categories">Znaleziono kilka kategorii UM odpowiadających zapytaniu:</string>
-    <string name="favourites_edit_dialog_name">Nazwa</string>
+    <string name="shared_string_name">Nazwa</string>
     <string name="favourites_edit_dialog_category">Kategoria</string>
     <string name="gpx_option_from_start_point">Przejdź wzdłuż całej ścieżki</string>
   <string name="create_poi_link_to_osm_doc">

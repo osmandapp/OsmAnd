@@ -274,7 +274,7 @@
 	<string name="favorite_friends_category">Prijatelji</string>
 	<string name="favorite_places_category">Mesta</string>
 	<string name="favorite_default_category">Ostalo</string>
-	<string name="favourites_edit_dialog_name">Ime</string>
+	<string name="shared_string_name">Ime</string>
 	<string name="favourites_edit_dialog_category">Vrsta</string>
 	<string name="vector_map_not_needed">Ne, hvala</string>
 	<string name="basemap_missing">Osnovna mapa sveta (koja pokriva ceo svet na malom uveličanju) nedostaje. Molim, preuzmite World_basemap_x.obf radi celokupnosti sredine.</string>

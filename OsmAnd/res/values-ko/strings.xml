@@ -202,7 +202,7 @@
 	<string name="favorite_places_category">장소</string>
 	<string name="shared_string_others">기타</string>
 	
-	<string name="favourites_edit_dialog_name">이름</string>
+	<string name="shared_string_name">이름</string>
 	<string name="favourites_edit_dialog_category">카테고리</string>
 
 	<string name="shared_string_no_thanks">필요없음</string>

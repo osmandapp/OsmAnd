@@ -416,7 +416,7 @@
 	<string name="favorite_friends_category">חברים</string>
 	<string name="favorite_places_category">מקומות</string>
 	
-	<string name="favourites_edit_dialog_name">שם</string>
+	<string name="shared_string_name">שם</string>
 	<string name="favourites_edit_dialog_category">קטגוריה</string>
 	<string name="shared_string_no_thanks">לא, תודה</string>
 	<string name="basemap_missing">מפת העולם הבסיסית (המכסה את כל העולם ברמות תקריב נמוכות) חסרה. כדאי לשקול להוריד את World_basemap_x.obf לקבלת סביבה שלמה.</string>

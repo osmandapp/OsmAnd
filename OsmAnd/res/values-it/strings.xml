@@ -741,7 +741,7 @@ La memoria utilizzata è  {1} MB.
     <string name="index_name_wiki">Wikipedia mondiale</string>
     <string name="index_name_voice">Annunci vocali (registrati, funzionalità limitate)</string>
     <string name="index_name_tts_voice">Annunci vocali (TTS-sintetizzati, preferibile)</string>
-    <string name="favourites_edit_dialog_name">Nome</string>
+    <string name="shared_string_name">Nome</string>
     <string name="favourites_edit_dialog_category">Categoria</string>
     <string name="local_index_routing_data">Dati percorso</string>
     <string name="navigate_point_format">Formato</string>

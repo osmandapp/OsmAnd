@@ -462,7 +462,7 @@ Karten-Kacheln können direkt online bezogen werden, und werden im OsmAnd-Untero
 	<string name="favorite_friends_category">Freunde</string>
 	<string name="favorite_places_category">Sehenswertes</string>
 	<string name="shared_string_others">Andere</string>
-	<string name="favourites_edit_dialog_name">Name</string>
+	<string name="shared_string_name">Name</string>
 	<string name="favourites_edit_dialog_category">Kategorie</string>
 	<string name="shared_string_no_thanks">Nicht verwendet</string>
 	<string name="basemap_missing">Die Offline-Weltkarte für kleine Vergrößerungen fehlt. Bitte das herunterladen der \'Übersichtskarte der Welt\' in Erwägung ziehen.</string>

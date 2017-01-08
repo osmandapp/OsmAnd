@@ -1077,7 +1077,7 @@ Os mapas en teselas pódense obter directamente a través de recursos na rede ou
 	<string name="favorite_friends_category">Amizades</string>
 	<string name="favorite_places_category">Lugares</string>
 	
-	<string name="favourites_edit_dialog_name">Nome</string>
+	<string name="shared_string_name">Nome</string>
 	<string name="favourites_edit_dialog_category">Categoría</string>
 	<string name="shared_string_no_thanks">Non, grazas</string>
 	<string name="basemap_missing">Falta o mapa base mundial (que recobre todo o mundo en ampliacións pequenas). Considere a posibilidade de descargar World_basemap_x.obf para contar cun ambiente completo.</string>

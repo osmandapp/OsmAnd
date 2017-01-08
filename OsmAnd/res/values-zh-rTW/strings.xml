@@ -429,7 +429,7 @@
     <string name="favorite_friends_category">朋友</string>
     <string name="favorite_places_category">地點</string>
     <string name="shared_string_others">其它</string>
-    <string name="favourites_edit_dialog_name">名稱</string>
+    <string name="shared_string_name">名稱</string>
     <string name="favourites_edit_dialog_category">類別</string>
     <string name="shared_string_no_thanks">不需要，謝謝</string>
     <string name="basemap_missing">缺少全球底圖(在縮小時顯示，含蓋全球範圍)。請為全球概貌下載 World_basemap_x.obf。</string>

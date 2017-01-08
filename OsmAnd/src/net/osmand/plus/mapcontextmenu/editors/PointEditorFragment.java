@@ -290,7 +290,7 @@ public abstract class PointEditorFragment extends Fragment {
 	public abstract String getHeaderCaption();
 
 	public String getNameCaption() {
-		return getMapActivity().getResources().getString(R.string.favourites_edit_dialog_name);
+		return getMapActivity().getResources().getString(R.string.shared_string_name);
 	}
 	public String getCategoryCaption() {
 		return getMapActivity().getResources().getString(R.string.favourites_edit_dialog_category);

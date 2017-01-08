@@ -1912,7 +1912,7 @@ If you need help with OsmAnd application, please contact our support team: suppo
     <string name="favorite_friends_category">Friends</string>
     <string name="favorite_places_category">Places</string>
     <string name="shared_string_others">Others</string>
-    <string name="favourites_edit_dialog_name">Name</string>
+    <string name="shared_string_name">Name</string>
     <string name="favourites_edit_dialog_category">Category</string>
     <string name="shared_string_no_thanks">No, thanks</string>
     <string name="basemap_missing">Base world map (covering the whole world at small zooms) is missing. Please consider downloading World_basemap_x.obf for a global overview.</string>

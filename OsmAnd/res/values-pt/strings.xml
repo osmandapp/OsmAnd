@@ -673,7 +673,7 @@
   <string name="favorite_friends_category">Amigos</string>
   <string name="favorite_places_category">Locais</string>
   
-  <string name="favourites_edit_dialog_name">Name</string>
+  <string name="shared_string_name">Name</string>
   <string name="favourites_edit_dialog_category">Categoria</string>
   <string name="shared_string_no_thanks">Não, obrigado</string>
   <string name="basemap_missing">Falta o mapa global base (abrange o mundo inteiro com pouco detalhe). Pode fazer download do World_basemap_x.obf para ter um ambiente completo.</string>

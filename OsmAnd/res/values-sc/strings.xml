@@ -1194,7 +1194,7 @@ Memòria in proportzione %4$s MB (lìmite de Android %5$s MB, Dalvik %6$s MB).</
     <string name="favorite_friends_category">Amigos</string>
     <string name="favorite_places_category">Logos</string>
     <string name="shared_string_others">Àteru</string>
-    <string name="favourites_edit_dialog_name">Nùmene</string>
+    <string name="shared_string_name">Nùmene</string>
     <string name="favourites_edit_dialog_category">Categoria</string>
     <string name="shared_string_no_thanks">No, gràtzias</string>
     <string name="basemap_missing">Fartat sa mapa de base de su mundu (totu su mundu pro ismanniamentos bassos). Podes iscarrigare World_basemap_x.obf pro un\'immàgine diferente.</string>

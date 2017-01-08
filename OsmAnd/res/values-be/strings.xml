@@ -814,7 +814,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="favorite_friends_category">Сябры</string>
 	<string name="favorite_places_category">Месцы</string>
 	<string name="shared_string_others">Іншае</string>
-	<string name="favourites_edit_dialog_name">Назва</string>
+	<string name="shared_string_name">Назва</string>
 	<string name="favourites_edit_dialog_category">Катэгорыя</string>
 	<string name="shared_string_no_thanks">Не, дзякуй</string>
 	<string name="basemap_missing">Няма асноўнай мапы сьвету (якая пакрывае ўвесь сьвет на малых маштабах). Каб мець агляд усяго сьвету трэба сьцягнуць World_basemap_x.obf.</string>

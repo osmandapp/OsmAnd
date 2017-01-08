@@ -1576,7 +1576,7 @@ Proporcia memoro %4$s MB (Limito de Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="favorite_friends_category">Amikoj</string>
     <string name="favorite_places_category">Ejoj</string>
     <string name="shared_string_others">Aliaj</string>
-    <string name="favourites_edit_dialog_name">Nomo</string>
+    <string name="shared_string_name">Nomo</string>
     <string name="favourites_edit_dialog_category">Kategorio</string>
     <string name="shared_string_no_thanks">Ne, dankon</string>
     <string name="basemap_missing">Monda bazmapo (kiu kovras tutan mondon ĉe etaj skaloj) mankas. Bonvolu elŝuti World_basemap_x.obf dosieron por havi vidon al la tuta mondo.</string>

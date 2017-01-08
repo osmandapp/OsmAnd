@@ -133,7 +133,7 @@ El espacio de almacenamiento usado es {1} MB.
     <string name="favorite_friends_category">Amigos</string>
     <string name="favorite_places_category">Lugares</string>
     <string name="shared_string_others">Otros</string>
-    <string name="favourites_edit_dialog_name">Nombre</string>
+    <string name="shared_string_name">Nombre</string>
     <string name="favourites_edit_dialog_category">Categoría</string>
     <string name="shared_string_no_thanks">No, gracias</string>
     <string name="basemap_missing">El mapa base mundial (que cubre todo el mundo con niveles de zoom pequeños) falta o está desactualizado, Considera descargar World_basemap_x.obf para una visión global.</string>

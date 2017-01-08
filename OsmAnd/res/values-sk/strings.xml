@@ -731,7 +731,7 @@ Dlaždicové mapy môžete získať priamo zo zdrojov na Internete, alebo ich m�
     <string name="unknown_from_location">Štartovací bod nebol zatiaľ zistený</string>
     <string name="confirm_interrupt_download">Chcete prerušiť sťahovanie súboru?</string>
     <string name="basemap_was_selected_to_download">Základná mapa je potrebná pre správne fungovanie aplikácie a bola vybratá na stiahnutie.</string>
-    <string name="favourites_edit_dialog_name">Názov</string>
+    <string name="shared_string_name">Názov</string>
     <string name="favourites_edit_dialog_category">Kategória</string>
     <string name="navigate_point_format_D">DDD.DD</string>
     <string name="navigate_point_format_DM">DDD MM.MM</string>

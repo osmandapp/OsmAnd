@@ -220,7 +220,7 @@
 	<string name="favorite_friends_category">Ystävät</string>
 	<string name="favorite_places_category">Paikat</string>
 	<string name="shared_string_others">Muut</string>
-	<string name="favourites_edit_dialog_name">Nimi</string>
+	<string name="shared_string_name">Nimi</string>
 	<string name="favourites_edit_dialog_category">Kategoria</string>
 	<string name="shared_string_no_thanks">Ei kiitos</string>
 	

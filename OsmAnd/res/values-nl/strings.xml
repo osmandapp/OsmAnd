@@ -219,7 +219,7 @@ Er is nu {2} MB beschikbaar</string>
   <string name="favorite_friends_category">Vrienden</string>
   <string name="favorite_places_category">Plaatsen</string>
   
-  <string name="favourites_edit_dialog_name">Naam</string>
+  <string name="shared_string_name">Naam</string>
   <string name="favourites_edit_dialog_category">Categorie</string>
   <string name="shared_string_no_thanks">Niet nodig</string>
   <string name="basemap_missing">De basis-wereldkaart (ruwe kaart van de gehele wereld) ontbreekt. Overweeg om deze te downloaden (World_basemap_x.obf) voor een compleet kaartbeeld.</string>

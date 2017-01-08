@@ -579,7 +579,7 @@
     <string name="favorite_friends_category">Vinir</string>
     <string name="favorite_places_category">Staðir</string>
     <string name="shared_string_others">Annað</string>
-    <string name="favourites_edit_dialog_name">Nafn</string>
+    <string name="shared_string_name">Nafn</string>
     <string name="favourites_edit_dialog_category">Flokkur</string>
     <string name="shared_string_no_thanks">Nei, takk</string>
     <string name="shared_string_release">Útgefið</string>

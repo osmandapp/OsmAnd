@@ -862,7 +862,7 @@
     <string name="animate_route">Начать моделирование</string>
     <string name="file_can_not_be_renamed">Файл не может быть переименован.</string>
     <string name="file_with_name_already_exists">Файл с таким именем уже существует.</string>
-    <string name="favourites_edit_dialog_name">Имя</string>
+    <string name="shared_string_name">Имя</string>
     <string name="favourites_edit_dialog_category">Категория</string>
     <string name="contribution_activity">Установка версии</string>
     <string name="process_navigation_service">Навигационный сервис OsmAnd</string>

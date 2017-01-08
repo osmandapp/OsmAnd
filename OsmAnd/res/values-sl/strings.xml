@@ -485,7 +485,7 @@ Omogoča tudi dodajanje opomb v koledar za prikaz opomnikov ob daljših časih p
     <string name="city_type_village">Vas</string>
     <string name="city_type_town">Kraj</string>
     <string name="favorite_friends_category">Naslovi prijateljev</string>
-    <string name="favourites_edit_dialog_name">Naziv</string>
+    <string name="shared_string_name">Naziv</string>
     <string name="favourites_edit_dialog_category">Skupina</string>
     <string name="shared_string_others">Druge točke</string>
     <string name="favorite_home_category">Domači naslovi</string>

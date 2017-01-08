@@ -609,7 +609,7 @@
     <string name="favorite_friends_category">Přećeljo</string>
     <string name="favorite_places_category">Městna</string>
     <string name="shared_string_others">Druhe</string>
-    <string name="favourites_edit_dialog_name">Mjeno</string>
+    <string name="shared_string_name">Mjeno</string>
     <string name="favourites_edit_dialog_category">Kategorija</string>
     <string name="shared_string_no_thanks">Ně, dźakuju</string>
     <string name="local_index_installed">Lokalna wersija</string>

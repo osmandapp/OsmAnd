@@ -697,7 +697,7 @@ Dlaždicové mapy můžete získat přímo z online zdrojů nebo si je můžete 
     <string name="native_rendering">Akcelerace vykreslování</string>
     <string name="test_voice_prompts">Test hlasových pokynů</string>
     <string name="global_app_settings">Všeobecná nastavení</string>
-    <string name="favourites_edit_dialog_name">Jméno</string>
+    <string name="shared_string_name">Jméno</string>
     <string name="favourites_edit_dialog_category">Kategorie</string>
     <string name="local_index_descr_title">Správce mapových souborů</string>
     <string name="navigate_point_format_D">DDD.DDDDD</string>

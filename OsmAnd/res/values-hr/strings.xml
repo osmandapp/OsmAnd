@@ -574,7 +574,7 @@
 	<string name="favorite_friends_category">Prijatelji</string>
 	<string name="favorite_places_category">Mjesta</string>
 	
-	<string name="favourites_edit_dialog_name">Ime</string>
+	<string name="shared_string_name">Ime</string>
 	<string name="favourites_edit_dialog_category">Kategorija</string>
 	<string name="local_index_gpx_info_show">\n\nPritisnite i držite za opcije</string>
 	

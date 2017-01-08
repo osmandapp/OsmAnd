@@ -17,7 +17,7 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_marginTop="@dimen/dialog_elements_vertical_margin"
-			android:text="@string/favourites_edit_dialog_name"/>
+			android:text="@string/shared_string_name"/>
 
 		<EditText
 			android:id="@+id/name"

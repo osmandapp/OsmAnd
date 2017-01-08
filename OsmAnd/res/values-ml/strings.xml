@@ -158,7 +158,7 @@
 
     <string name="favorite_home_category">പൂമുഖം</string>
     <string name="shared_string_others">"മറ്റുള്ളവ "</string>
-    <string name="favourites_edit_dialog_name">പേര‍്</string>
+    <string name="shared_string_name">പേര‍്</string>
     <string name="favourites_edit_dialog_category">വിഭാഗങ്ങള്‍</string>
     <string name="system_locale">സിസ്റ്റം</string>
     <string name="amenity_type_administrative">"ആഡ്മിനിസ്ട്രേറ്റിവ് "</string>

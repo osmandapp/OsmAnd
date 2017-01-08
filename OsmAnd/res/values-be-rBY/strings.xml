@@ -1306,7 +1306,7 @@ Zaraz jo {2} MB volnaha miesca.</string>
 	<string name="favorite_friends_category">Siabry</string>
 	<string name="favorite_places_category">Miescy</string>
 	
-	<string name="favourites_edit_dialog_name">Nazva</string>
+	<string name="shared_string_name">Nazva</string>
 	<string name="favourites_edit_dialog_category">Katehoryja</string>
 	<string name="shared_string_no_thanks">Nie, dziakuj</string>
 	<string name="basemap_missing">Niama asnoŭnaj mapy śvietu (jakaja pakryvaje ŭvieś śviet na małych maštabach). Kab mieć ahlad usiaho śvietu treba ściahnuć World_basemap_x.obf.</string>

@@ -224,7 +224,7 @@
 	<string name="favorite_friends_category">朋友</string>
 	<string name="favorite_places_category">地方</string>
 	
-	<string name="favourites_edit_dialog_name">名称</string>
+	<string name="shared_string_name">名称</string>
 	<string name="favourites_edit_dialog_category">类别</string>
 	<string name="shared_string_no_thanks">谢谢，不用了</string>
 	

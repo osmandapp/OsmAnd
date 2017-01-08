@@ -1361,7 +1361,7 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="favorite_friends_category">Amigos</string>
     <string name="favorite_places_category">Lugares</string>
     <string name="shared_string_others">Otros</string>
-    <string name="favourites_edit_dialog_name">Nombre</string>
+    <string name="shared_string_name">Nombre</string>
     <string name="favourites_edit_dialog_category">Categoría</string>
     <string name="shared_string_no_thanks">No, gracias</string>
     <string name="basemap_missing">El mapa base mundial (abarca todo el mundo en ampliaciones pequeñas), no está disponible. Considera descargar World_basemap_x.obf para una vista global.</string>
