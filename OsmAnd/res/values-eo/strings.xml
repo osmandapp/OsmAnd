@@ -2611,7 +2611,7 @@ kaj pli...
     <string name="quick_action_map_styles">Mapaj montrmanieroj</string>
     <string name="quick_action_map_overlay">Ŝanĝi mapan surtavolon</string>
     <string name="quick_action_map_overlay_title">Mapaj surtavoloj</string>
-    <string name="quick_action_map_overlay_dscr">Premado sur ag-butono baskulos surtavolon de mapo, laŭ lista ordo.</string>
+    <string name="quick_action_map_overlay_descr">Premado sur ag-butono baskulos surtavolon de mapo, laŭ lista ordo.</string>
     <string name="quick_action_map_overlay_action">Aldoni surtavolon</string>
     <string name="quick_action_map_underlay">Ŝanĝi mapan surtavolon</string>
     <string name="quick_action_map_underlay_title">Mapaj subtavoloj</string>
