@@ -2731,5 +2731,5 @@ V kolikor naletite na težave s programom OsmAnd, prosimo, stopite v stik s skup
     <string name="quick_action_map_source_descr"/>
     <string name="quick_action_map_source_action">Dodaj vir zemljevida</string>
     <string name="quick_action_map_source_switch">Vir zemljevida je spremenjen na »%s«.</string>
-    <string name="quck_action_btn_tutorial_title">Spremeni položaj gumba</string>
+    <string name="quick_action_btn_tutorial_title">Spremeni položaj gumba</string>
     </resources>
