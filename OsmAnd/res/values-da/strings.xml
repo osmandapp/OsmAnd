@@ -2784,7 +2784,7 @@ Hvis du  ønsker at støtte OsmAnd og OSM, er dette en god måde at gøre det p�
     <string name="favorite_empty_place_name">Sted</string>
     <string name="quick_action_duplicates">Angivne hurtig handling er allerede i brug, navnet blev ændret til %1$s at undgå overlapning.</string>
     <string name="quick_action_duplicate">Dublet genvejsnavn</string>
-    <string name="quick_action_showhide_favorites_descr">Tryk på handling vil vise eller skjule favoritpunkter på kort.</string>
+    <string name="quick_action_showhide_favorites_descr">Tryk på genvejen vil vise eller skjule favoritpunkter på kortet.</string>
     <string name="quick_action_showhide_poi_descr">Klik på handling vil vise eller skjule IP punkter på kortet.</string>
     <string name="quick_action_showhide_favorites_title">Vis/skjul favoritter</string>
     <string name="quick_action_favorites_show">Vis favoritter</string>
