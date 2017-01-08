@@ -2167,7 +2167,7 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="faq_item">常見問題</string>
     <string name="faq_item_description">常見的問題</string>
     <string name="map_viewing_item">地圖檢視</string>
-    <string name="search_on_the_map_item">地圖查詢中</string>
+    <string name="search_on_the_map_item">正在查詢地圖</string>
     <string name="planning_trip_item">規劃一次旅程</string>
 
     
@@ -2697,13 +2697,11 @@ Facebook：https://www.facebook.com/osmandapp
     <string name="quick_action_navigation_voice_off">聲音關閉</string>
     <string name="quick_action_navigation_voice_on">聲音開啟</string>
     <string name="quick_action_add_gpx">增加 GPX 航點</string>
-    <string name="quick_action_add_parking">增加停車場所</string>
+    <string name="quick_action_add_parking">增加停車地點</string>
     <string name="quick_action_add_favorite">增加我的收藏</string>
     <string name="quick_favorites_show_favorites_dialog">顯示我的收藏對話框</string>
     <string name="quick_favorites_name_preset">預設的名稱</string>
-    <string name="quick_action_favorite_dialog">顯示我的收藏對話框</string>
-    <string name="quick_action_add_poi_dialog">顯示增加的 POI 對話框</string>
-    <string name="quick_action_gpx_dialog">顯示 GPX 航點的對話框</string>
+    <string name="text_name">名稱</string>
     <string name="favorite_autofill_toast_text">" 儲存到 "</string>
     <string name="favorite_empty_place_name">場所</string>
     <string name="quick_action_showhide_favorites_title">顯示/隱藏我的收藏</string>
@@ -2712,16 +2710,16 @@ Facebook：https://www.facebook.com/osmandapp
     <string name="quick_action_showhide_poi_title">顯示/隱藏 POI</string>
     <string name="quick_action_poi_show">顯示 %1$s</string>
     <string name="quick_action_poi_hide">隱藏 %1$s</string>
-    <string name="quick_action_add_category">增加類別</string>
+    <string name="quick_action_add_category">增加一項類別</string>
     <string name="quick_action_add_create_items">建立事項</string>
     <string name="quick_action_add_configure_map">組態地圖</string>
     <string name="quick_action_add_navigation">導航</string>
     <string name="quick_action_bug_message">訊息</string>
-    <string name="quick_action_category_discr">您可以選擇一個類別以儲存收藏的標點。</string>
-    <string name="quick_action_gpx_category_discr">您可以選擇一個類別以儲存 GPX 的航點標記。</string>
+    <string name="quick_action_category_discr">您可以選擇一項類別給收藏的標記。</string>
+    <string name="quick_action_gpx_category_discr">您可以選擇一項類別給 GPX 的航點標記。</string>
     <string name="quick_action_poi_list">POI 清單</string>
-    <string name="quick_action_sh_poi_discrp">您可以在地圖上增加數個 POI 類別顯示。</string>
-    <string name="quick_action_map_style_action">增加地圖樣式</string>
+    <string name="quick_action_sh_poi_discrp">您可以增加一個或是更多的 POI 類別顯示在地圖上。</string>
+    <string name="quick_action_map_style_action">增加一個地圖樣式</string>
     <string name="quick_action_empty_param_error">參數不能為空白</string>
     <string name="quick_action_map_styles">地圖樣式</string>
     <string name="quick_action_map_overlay">更改地圖疊加層</string>
@@ -2732,9 +2730,9 @@ Facebook：https://www.facebook.com/osmandapp
     <string name="quick_action_map_underlay_action">增加襯底層</string>
     <string name="quick_action_map_source">更改地圖來源</string>
     <string name="quick_action_map_source_title">地圖來源</string>
-    <string name="quick_action_map_source_action">增加來源</string>
+    <string name="quick_action_map_source_action">增加地圖來源</string>
     <string name="quick_action_map_source_switch">地圖來源已經被更改為 \"%s\"。</string>
     <string name="quck_action_btn_tutorial_title">更改按鈕位置</string>
     <string name="quick_action_btn_tutorial_description">長按並拖動在螢幕上的按鈕改變位置</string>
-	<string name="quick_favorites_name_description">將欄位留空白，OsmAnd 將使用地址或地點名稱為我的收藏標記</string>
+    <string name="quick_favorites_name_description">將欄位留空白，OsmAnd 將使用地址或地點名稱為我的收藏標記</string>
 </resources>
