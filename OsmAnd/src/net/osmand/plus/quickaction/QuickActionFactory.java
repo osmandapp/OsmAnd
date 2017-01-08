@@ -2057,7 +2057,7 @@ public class QuickActionFactory {
 
         @Override
         protected int getDiscrHint() {
-            return R.string.quick_action_map_style_discrp;
+            return R.string.quick_action_map_style_descr;
         }
 
         @Override

@@ -2570,8 +2570,8 @@ Si amas a OsmAnd, OSM y quieres apoyarlos, esta es una perfecta manera de hacerl
     <string name="quick_action_category_discr">Puedes marcar una categoría para el favorito.</string>
     <string name="quick_action_gpx_category_discr">Puedes elegir una categoría para el punto de ruta GPX.</string>
     <string name="quick_action_poi_list">Lista de PDIs</string>
-    <string name="quick_action_sh_poi_discrp">Puedes añadir una o mas categorías PDI para mostrar en el mapa.</string>
-    <string name="quick_action_map_style_discrp">Pulsando el botón de acción, aparecerá la lista de estilos del mapa.</string>
+    <string name="quick_action_sh_poi_descr">Puedes añadir una o mas categorías PDI para mostrar en el mapa.</string>
+    <string name="quick_action_map_style_descr">Pulsando el botón de acción, aparecerá la lista de estilos del mapa.</string>
     <string name="quick_action_map_style_action">Añadir un estilo de mapa</string>
     <string name="quick_action_empty_param_error">Los parámetros no deben estar vacíos</string>
     <string name="quick_action_map_styles">Estilos de mapa</string>

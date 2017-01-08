@@ -2805,9 +2805,9 @@ Hvis du  ønsker at støtte OsmAnd og OSM, er dette en god måde at gøre det p�
     <string name="quick_action_category_discr">Vælg en kategori til det foretrukne punkt.</string>
     <string name="quick_action_gpx_category_discr">Vælg en kategori for GPX-rutepunkt.</string>
     <string name="quick_action_poi_list">IP-liste</string>
-    <string name="quick_action_sh_poi_discrp">Tilføj enellefr flere IP kategorier der skal vises på kortet.</string>
-    <string name="quick_action_map_style_discrp">Klik på handlings-knappen skifter kortformat, fra listerækkefølgen.</string>
-    <string name="quick_action_map_style_action">Tilføj et kortformat</string>
+    <string name="quick_action_sh_poi_descr">Tilføj et par IP kategorier der skal vises på kortet.</string>
+    <string name="quick_action_map_style_descr">Klik på handlings-knappen skifter kortformat, fra listerækkefølgen.</string>
+    <string name="quick_action_map_style_action">Tilføj kortformat</string>
     <string name="quick_action_empty_param_error">Parametrene bør ikke være tom</string>
     <string name="quick_action_map_styles">Kortformater</string>
     <string name="quick_action_map_overlay">Skift kortoverlejring</string>

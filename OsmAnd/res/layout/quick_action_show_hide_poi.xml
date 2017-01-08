@@ -28,7 +28,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/quick_action_sh_poi_discrp"
+                android:text="@string/quick_action_sh_poi_descr"
                 android:textColor="?android:textColorSecondary"
                 android:textSize="@dimen/default_sub_text_size" />
 
