@@ -2672,4 +2672,28 @@ Si istimas OsmAnd e OSM e los boles suportare, custa est una manera perfeta pro 
     <string name="rendering_attr_hideWaterPolygons_name">Cua s\'abba</string>
     <string name="configure_screen_quick_action">Atzione lestra</string>
 
+    <string name="quick_action_item_action">Atzione %d</string>
+    <string name="quick_action_item_screen">Ischermu %d</string>
+    <string name="quick_action_add_marker">Annanghe unu marcadore</string>
+    <string name="quick_action_add_poi">Annanghe PDI</string>
+    <string name="quick_action_map_style">Acontza s\'istile de sa mapa</string>
+    <string name="quick_action_map_style_switch">S\'istile de sa mapa est istadu cambiadu in \"%s\".</string>
+    <string name="quick_action_take_audio_note">Registra una nota àudio</string>
+    <string name="quick_action_take_video_note">Registra una nota vìdeu</string>
+    <string name="quick_action_take_photo_note">Registra una nota fotogràfica</string>
+    <string name="quick_action_add_osm_bug">Annanghe una sinnalatzione de errore OSM</string>
+    <string name="quick_action_navigation_voice">Boghe alluta/istudada</string>
+    <string name="quick_action_navigation_voice_off">Sa boghe est istudada</string>
+    <string name="quick_action_navigation_voice_on">Sa boghe est alluta</string>
+    <string name="quick_action_add_gpx">Annanghe unu puntu de coladòrgiu GPX</string>
+    <string name="quick_action_add_parking">Annanghe unu parchègiu</string>
+    <string name="quick_action_new_action">Annanghe un\'atzione</string>
+    <string name="quick_action_edit_action">Modìfica s\'atzione</string>
+    <string name="quick_action_add_favorite">Annanghe unu preferidu</string>
+    <string name="dialog_add_action_title">Annanghe un\'atzione</string>
+    <string name="quick_actions_delete">Iscantzella un\'atzione</string>
+    <string name="quick_actions_delete_text">Seguru ses de bòlere iscantzellare s\'atzione \"%s\"?</string>
+    <string name="quick_favorites_show_favorites_dialog">Ammustra sa bentana de sos preferidos</string>
+    <string name="quick_favorites_name_preset">Nùmene predefinidu</string>
+    <string name="quick_action_add_marker_descr">Incarchende su butone de s\'atzione as a annànghere unu marcadore in sa positzione ischertada.</string>
     </resources>
