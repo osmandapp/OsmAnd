@@ -2303,7 +2303,7 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="access_disable_wrong_direction_recalc">Ignorer les écarts de direction</string>
     <string name="use_osm_live_routing_description">Activer la navigation OSM Live prenant en comptes les modifications en temps réel (Bêta)</string>
 	<string name="use_osm_live_routing">Navigation OSM Live</string>
-    <string name="follow_us">Suivez nous</string>
+    <string name="follow_us">Suivez-nous</string>
     <!-- string name="lat_lon_pattern">Lat. : %1$.5f Lon. : %2$.5f</string -->
     <string name="map_widget_battery">Niveau de batterie</string>
     <string name="lang_hu_formal">Hongrois (formel)</string>
@@ -2387,7 +2387,7 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="allow_access_location">Autoriser l\'accès à la position</string>
     <string name="search_my_location">Rechercher ma position</string>
     <string name="storage_place_description">Espace utilisé par OsmAnd (pour les cartes, les traces, etc.) : %1$s.</string>
-    <string name="first_usage_greeting">Suivez des itinéraires et découvrez de nouveaux lieux sans connexion Internet</string>
+    <string name="first_usage_greeting">Visualisez les cartes hors ligne, laissez-vous guider sur vos itinéraires sans connexion Internet et découvrez de nouveaux lieux.</string>
     <string name="get_for">Obtenir pour %1$s</string>
     <string name="get_for_month">Obtenir pour %1$s mois</string>
     <string name="si_mi_meters">Miles / Mètres</string>
