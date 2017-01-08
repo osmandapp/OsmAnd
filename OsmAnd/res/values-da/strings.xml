@@ -2821,7 +2821,7 @@ Hvis du  ønsker at støtte OsmAnd og OSM, er dette en god måde at gøre det p�
     <string name="quick_action_map_source_action">Tilføj en kortkilde</string>
     <string name="quick_action_map_source_switch">Kortkilde er ændret til \"%s\".</string>
     <string name="quick_action_btn_tutorial_title">Ændre knap placering</string>
-    <string name="quick_action_btn_tutorial_descr">Langt klik og træk knappen på skærmen for at ændre placering</string>
+    <string name="quick_action_btn_tutorial_descr">Langt tryk og træk knappen på skærmen for at ændre placering</string>
 <string name="quick_action_interim_dialog">Vis en foreløbig dialog</string>
     <string name="shared_string_action_name">Genvejsnavn</string>
 </resources>
