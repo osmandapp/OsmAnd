@@ -2743,7 +2743,7 @@ Hvis du  ønsker at støtte OsmAnd og OSM, er dette en god måde at gøre det p�
     <string name="rendering_value_medium_w_name">Mellem</string>
     <string name="rendering_value_low_name">Lav</string>
     <string name="rendering_attr_hideWaterPolygons_name">Skjul vand</string>
-    <string name="configure_screen_quick_action">Hurtig handling</string>
+    <string name="configure_screen_quick_action">Genveje</string>
 
     <string name="quick_action_item_action">Genvej %d</string>
     <string name="quick_action_item_screen">Skærm %d</string>
@@ -2784,7 +2784,7 @@ Hvis du  ønsker at støtte OsmAnd og OSM, er dette en god måde at gøre det p�
     <string name="favorite_autofill_toast_text">" er gemt i "</string>
     <string name="favorite_empty_place_name">Sted</string>
     <string name="quick_action_duplicates">Angivne hurtig handling er allerede i brug, navnet blev ændret til %1$s at undgå overlapning.</string>
-    <string name="quick_action_duplicate">Hurtig handling navn dublet</string>
+    <string name="quick_action_duplicate">Dublet genvejsnavn</string>
     <string name="quick_action_showhide_favorites_descr">Tryk på handling vil vise eller skjule favoritpunkter på kort.</string>
     <string name="quick_action_showhide_poi_descr">Klik på handling vil vise eller skjule IP punkter på kortet.</string>
     <string name="quick_action_showhide_favorites_title">Vis/skjul favoritter</string>
