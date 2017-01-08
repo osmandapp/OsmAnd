@@ -2585,8 +2585,8 @@ kaj pli...
     <string name="favorite_empty_place_name">Loko</string>
     <string name="quick_action_duplicates">Difinita nomo de rapida ago estas jam uzata, ŝanĝante ĝin al %1$s por eviti duplikaton.</string>
     <string name="quick_action_duplicate">Duplikata nomo de rapida ago</string>
-    <string name="quick_action_showhides_favorites_descr">Premado sur ago montros aŭ kaŝos ŝatatajn ejojn sur mapo.</string>
-    <string name="quick_action_showhides_poi_descr">Premado sur ago montros aŭ kaŝos interesejojn sur mapo.</string>
+    <string name="quick_action_showhide_favorites_descr">Premado sur ago montros aŭ kaŝos ŝatatajn ejojn sur mapo.</string>
+    <string name="quick_action_showhide_poi_descr">Premado sur ago montros aŭ kaŝos interesejojn sur mapo.</string>
     <string name="quick_action_showhide_favorites_title">Montri/kaŝi ŝatatajn</string>
     <string name="quick_action_favorites_show">Montri ŝatatajn</string>
     <string name="quick_action_favorites_hide">Kaŝi ŝatatajn</string>

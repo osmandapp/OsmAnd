@@ -718,7 +718,7 @@ public class QuickActionFactory {
                     .inflate(R.layout.quick_action_with_text, parent, false);
 
             ((TextView) view.findViewById(R.id.text)).setText(
-                    R.string.quick_action_showhides_favorites_descr);
+                    R.string.quick_action_showhide_favorites_descr);
 
             parent.addView(view);
         }

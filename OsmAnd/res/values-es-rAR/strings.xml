@@ -2553,8 +2553,8 @@ Si necesitas ayuda con la aplicación OsmAnd, contacte con nuestro equipo de sop
     <string name="favorite_empty_place_name">Lugar</string>
     <string name="quick_action_duplicates">El nombre de la acción rápida ya existe y se cambió a %1$s para evitar duplicados.</string>
     <string name="quick_action_duplicate">Nombre de la acción rápida duplicado</string>
-    <string name="quick_action_showhides_favorites_descr">Pulsando el botón de acción, mostrará u ocultará los favoritos en el mapa.</string>
-    <string name="quick_action_showhides_poi_descr">Pulsando el botón de acción, mostrará u ocultará los PDIs en el mapa.</string>
+    <string name="quick_action_showhide_favorites_descr">Pulsando el botón de acción, mostrará u ocultará los favoritos en el mapa.</string>
+    <string name="quick_action_showhide_poi_descr">Pulsando el botón de acción, mostrará u ocultará los PDIs en el mapa.</string>
     <string name="quick_action_showhide_favorites_title">Mostrar/ocultar favoritos</string>
     <string name="quick_action_favorites_show">Mostrar Favoritos</string>
     <string name="quick_action_favorites_hide">Ocultar Favoritos</string>

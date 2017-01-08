@@ -2579,8 +2579,8 @@ Si aprecieu OsmAnd  i OSM i voleu ajudar-los, és la via perfecta per fer-ho."</
     <string name="favorite_empty_place_name">Lloc</string>
     <string name="quick_action_duplicates">El nom d\'acció directa indicat ja s\'està utilitzant, s\'ha canviat pel de %1$s per evitar duplicats.</string>
     <string name="quick_action_duplicate">El nom de l\'acció directa està duplicat</string>
-    <string name="quick_action_showhides_favorites_descr">Si premeu el botó de l\'acció mostrarà o amagarà els punts preferits al mapa.</string>
-    <string name="quick_action_showhides_poi_descr">Si premeu el botó de l\'acció mostrarà o amagarà els PDI al mapa.</string>
+    <string name="quick_action_showhide_favorites_descr">Si premeu el botó de l\'acció mostrarà o amagarà els punts preferits al mapa.</string>
+    <string name="quick_action_showhide_poi_descr">Si premeu el botó de l\'acció mostrarà o amagarà els PDI al mapa.</string>
     <string name="quick_action_showhide_favorites_title">Mostra/amaga preferits</string>
     <string name="quick_action_favorites_show">Mostra preferits</string>
     <string name="quick_action_favorites_hide">Amaga preferits</string>
