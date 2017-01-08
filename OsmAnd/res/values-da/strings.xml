@@ -2768,7 +2768,7 @@ Hvis du  ønsker at støtte OsmAnd og OSM, er dette en god måde at gøre det p�
     <string name="quick_actions_delete_text">Bekræft sletning af genvej \"%s\"?</string>
     <string name="quick_favorites_show_favorites_dialog">Vis dialogen favoritter</string>
     <string name="quick_favorites_name_preset">Forudindstillet navn</string>
-    <string name="quick_action_add_marker_descr">Klik på handling vil tilføje markør til den angivne placering.</string>
+    <string name="quick_action_add_marker_descr">Klik på genvej vil tilføje markør til den angivne placering.</string>
     <string name="quick_action_add_gpx_descr">Klik på handling vil tilføje GPX rutepunkt til den angivne placering.</string>
     <string name="quick_action_take_audio_note_descr">Klik på handling vil tilføje lydnote til den angivne placering.</string>
     <string name="quick_action_take_video_note_descr">Klik på handling vil føje videonote til den angivne placering.</string>
