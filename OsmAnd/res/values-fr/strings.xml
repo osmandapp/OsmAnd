@@ -2563,4 +2563,6 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="quick_action_add_parking_descr">Appuyez sur le bouton pour ajouter un emplacement de stationnement.</string>
     <string name="quick_action_showhide_favorites_descr">Appuyez sur le bouton pour afficher ou masquer les favoris sur la carte.</string>
     <string name="quick_action_showhide_poi_descr">Appuyez sur le bouton pour afficher ou masquer les PI sur la carte.</string>
+    <string name="quick_action_interim_dialog">Afficher une fenêtre intermédiaire</string>
+    <string name="quick_action_add_create_items">Créer les éléments</string>
     </resources>
