@@ -2422,4 +2422,25 @@ Pokud máte rádi OsmAnd a OSM a chcete je podpořit, toto je výborný způsob 
     <string name="quick_action_add_navigation">Navigace</string>
     <string name="quick_action_fav_name_descr">Ponecháte-li prázdné, bude automaticky použita adresa nebo název místa</string>
     <string name="quick_action_bug_descr">Tato zpráva bude automaticky dokončena v poli komentáře.</string>
-    </resources>
+    <string name="quick_action_bug_message">Zpráva</string>
+    <string name="quick_action_category_descr">Vyberte kategorii, kterou chcete uložit pod oblíbené.</string>
+    <string name="quick_action_gpx_category_descr">Vyberte volitelnou kategorii bodu mezicíle GPX.</string>
+    <string name="quick_action_poi_list">Seznam POI</string>
+    <string name="quick_action_sh_poi_descr">Můžete přidat jednu nebo více kategorií POI pro zobrazení na mapě.</string>
+    <string name="quick_action_map_style_action">Přidat styl mapy</string>
+    <string name="quick_action_empty_param_error">Parametry by neměly být prázdné</string>
+    <string name="quick_action_map_styles">Styly mapy</string>
+    <string name="quick_action_map_overlay">Změnit překryvnou mapu</string>
+    <string name="quick_action_map_overlay_title">Překryvy mapy</string>
+    <string name="quick_action_map_overlay_action">Přidat překrytí</string>
+    <string name="quick_action_map_underlay">Změna mapy podkladu</string>
+    <string name="quick_action_map_underlay_title">Mapa podkladu</string>
+    <string name="quick_action_map_underlay_action">Přidat podklad</string>
+    <string name="quick_action_map_source">Změnit zdroj mapy</string>
+    <string name="quick_action_map_source_title">Mapové zdroje</string>
+    <string name="quick_action_map_source_action">Přidat zdroj mapy</string>
+    <string name="quick_action_map_source_switch">Zdroj mapy se změnil na \"%s\".</string>
+    <string name="quick_action_btn_tutorial_title">Změnit polohu tlačítka</string>
+    <string name="quick_action_btn_tutorial_descr">Dlouze klepněte a přetáhněte tlačítko pro změnu jeho umístění na obrazovce</string>
+	<string name="shared_string_action_name">Název akce</string>
+</resources>
