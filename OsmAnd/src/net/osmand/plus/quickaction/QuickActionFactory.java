@@ -2197,7 +2197,7 @@ public class QuickActionFactory {
 
         @Override
         protected int getDiscrHint() {
-            return R.string.quick_action_map_overlay_dscr;
+            return R.string.quick_action_map_overlay_descr;
         }
 
         @Override
@@ -2268,7 +2268,7 @@ public class QuickActionFactory {
 
         @Override
         protected int getDiscrHint() {
-            return R.string.quick_action_map_underlay_dscr;
+            return R.string.quick_action_map_underlay_descr;
         }
 
         @Override
@@ -2377,7 +2377,7 @@ public class QuickActionFactory {
 
         @Override
         protected int getDiscrHint() {
-            return R.string.quick_action_map_source_dscr;
+            return R.string.quick_action_map_source_descr;
         }
 
         @Override
