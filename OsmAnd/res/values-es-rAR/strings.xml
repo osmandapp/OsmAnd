@@ -787,7 +787,7 @@ Tanto la ubicación como el tiempo del estacionamiento se muestran en el menú p
     <string name="recording_default_name">Grabación</string>
     <string name="map_widget_av_notes">Notas multimedia</string>
     <string name="map_widget_distancemeasurement">Medición de distancia</string>
-    <string name="audionotes_location_not_defined">No se definió la ubicación para asociar la nota. Utiliza \"Usar ubicación…\" para asignar una nota a la ubicación indicada</string>
+    <string name="audionotes_location_not_defined">No se definió la ubicación para asociar la nota. Utiliza \"Usar ubicación…\" para asignar una nota a la ubicación indicada.</string>
     <string name="map_widget_audionotes">Notas de audio</string>
     <string name="index_srtm_parts">partes</string>
     <string name="index_srtm_ele">Curvas de nivel</string>
@@ -2514,7 +2514,7 @@ Si necesitas ayuda con la aplicación OsmAnd, contacte con nuestro equipo de sop
 
     <string name="quick_action_item_action">Acción %d</string>
     <string name="quick_action_item_screen">Pantalla %d</string>
-    <string name="quick_action_add_marker">Añadir marcador</string>
+    <string name="quick_action_add_marker">Añadir marcador de mapa</string>
     <string name="quick_action_add_poi">Añadir PDI</string>
     <string name="quick_action_map_style">Cambiar estilo del mapa</string>
     <string name="quick_action_map_style_switch">El estilo del mapa se cambió para \"%s\".</string>
@@ -2536,15 +2536,15 @@ Si necesitas ayuda con la aplicación OsmAnd, contacte con nuestro equipo de sop
     <string name="quick_favorites_show_favorites_dialog">Mostrar diálogo de favoritos</string>
     <string name="quick_favorites_name_preset">Nombre predefinido</string>
     <string name="shared_string_action_name">Nombre de la acción</string>
-    <string name="quick_action_add_marker_descr">Pulsando el botón de acción, añadirá un marcador en la ubicación especificada.</string>
-    <string name="quick_action_add_gpx_descr">Pulsando el botón de acción, añadirá un punto de ruta GPX en la ubicación especificada.</string>
-    <string name="quick_action_take_audio_note_descr">Pulsando el botón de acción, añadirá una nota de audio en la ubicación especificada.</string>
-    <string name="quick_action_take_video_note_descr">Pulsando el botón de acción, añadirá una nota de video en la ubicación especificada.</string>
-    <string name="quick_action_take_photo_note_descr">Pulsando el botón de acción, añadirá una nota fotográfica en la ubicación especificada.</string>
-    <string name="quick_action_add_osm_bug_descr">Pulsando el botón de acción, añadirá un informe de error OSM en la ubicación especificada.</string>
-    <string name="quick_action_add_poi_descr">Pulsando el botón de acción, añadirá un PDI en la ubicación especificada.</string>
+    <string name="quick_action_add_marker_descr">Pulsando el botón de acción, añadirá un marcador de mapa en la ubicación central de la pantalla.</string>
+    <string name="quick_action_add_gpx_descr">Pulsando el botón de acción, añadirá un punto de ruta GPX en la ubicación central de la pantalla.</string>
+    <string name="quick_action_take_audio_note_descr">Pulsando el botón de acción, añadirá una nota de audio en la ubicación central de la pantalla.</string>
+    <string name="quick_action_take_video_note_descr">Pulsando el botón de acción, añadirá una nota de video en la ubicación central de la pantalla.</string>
+    <string name="quick_action_take_photo_note_descr">Pulsando el botón de acción, añadirá una nota fotográfica en la ubicación central de la pantalla.</string>
+    <string name="quick_action_add_osm_bug_descr">Pulsando el botón de acción, añadirá un informe de error OSM en la ubicación central de la pantalla.</string>
+    <string name="quick_action_add_poi_descr">Pulsando el botón de acción, añadirá un PDI en la ubicación central de la pantalla.</string>
     <string name="quick_action_navigation_voice_descr">Pulsando el botón de acción, desactivará o activará las indicaciones por voz durante la navegación.</string>
-    <string name="quick_action_add_parking_descr">Pulsando el botón de acción, añadirá un lugar de estacionamiento en la ubicación indicada.</string>
+    <string name="quick_action_add_parking_descr">Pulsando el botón de acción, añadirá un lugar de estacionamiento en la ubicación central de la pantalla.</string>
     <string name="quick_action_favorite_dialog">Mostrar el diálogo del favorito</string>
     <string name="quick_action_add_poi_dialog">Mostrar el diálogo de adición de PDI</string>
     <string name="quick_action_gpx_dialog">Mostrar el diálogo del punto de ruta GPX</string>
@@ -2564,11 +2564,11 @@ Si necesitas ayuda con la aplicación OsmAnd, contacte con nuestro equipo de sop
     <string name="quick_action_add_create_items">Crear elementos</string>
     <string name="quick_action_add_configure_map">Configurar mapa</string>
     <string name="quick_action_add_navigation">Navegación</string>
-    <string name="quick_action_fav_name_descr">Si dejas el campo vacío, OsmAnd usará la dirección o el nombre del lugar</string>
+    <string name="quick_action_fav_name_descr">Deja el campo vacío, para usar automáticamente la dirección o el nombre del lugar</string>
     <string name="quick_action_bug_descr">Este mensaje será rellenado automáticamente en el campo del comentario.</string>
     <string name="quick_action_bug_message">Mensaje</string>
-    <string name="quick_action_category_descr">Puedes marcar una categoría para el favorito.</string>
-    <string name="quick_action_gpx_category_descr">Puedes elegir una categoría para el punto de ruta GPX.</string>
+    <string name="quick_action_category_descr">Marca la categoría para guardar el favorito en</string>
+    <string name="quick_action_gpx_category_descr">Elige una categoría opcional</string>
     <string name="quick_action_poi_list">Lista de PDIs</string>
     <string name="quick_action_sh_poi_descr">Puedes añadir una o mas categorías PDI para mostrar en el mapa.</string>
     <string name="quick_action_map_style_descr">Pulsando el botón de acción, aparecerá la lista de estilos del mapa.</string>
@@ -2590,4 +2590,5 @@ Si necesitas ayuda con la aplicación OsmAnd, contacte con nuestro equipo de sop
     <string name="quick_action_map_source_switch">La fuente del mapa se cambió a \"%s\".</string>
     <string name="quick_action_btn_tutorial_title">Cambiar ubicación del botón</string>
     <string name="quick_action_btn_tutorial_descr">Mantener pulsado y arrastrar el botón para mover la ubicación en la pantalla</string>
-</resources>
+<string name="quick_action_interim_dialog">Mostrar un diálogo temporal</string>
+    </resources>
