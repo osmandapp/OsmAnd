@@ -2626,7 +2626,7 @@ und vieles mehr ...
     <string name="quick_favorites_show_favorites_dialog">Favoriten Dialog anzeigen</string>
     <string name="quick_favorites_name_preset">Name Voreinstellen</string>
     <string name="shared_string_action_name">Aktionsname</string>
-    <string name="quick_action_add_marker_descr">Tippen auf die Aktion wird einen Marker an der angegebenen Position setzten.</string>
+    <string name="quick_action_add_marker_descr">Tippen auf die Aktion wird eine Kartenmarkierung an der angegebenen Position setzten.</string>
     <string name="quick_action_favorite_dialog">Favoriten Dialog anzeigen</string>
     <string name="favorite_empty_place_name">Ort</string>
     <string name="quick_action_showhide_favorites_title">Favoriten zeigen/verbergen</string>
@@ -2640,10 +2640,10 @@ und vieles mehr ...
     <string name="quick_action_add_category">Kategorie hinzufügen</string>
     <string name="quick_action_add_configure_map">Karte konfigurieren</string>
     <string name="quick_action_add_navigation">Navigation</string>
-    <string name="quick_action_fav_name_descr">Lassen Sie das Feld leer und OsmAnd verwenden die Adresse oder den Namen des Ortes</string>
+    <string name="quick_action_fav_name_descr">Lassen Sie das Feld leer um automatisch die Adresse oder den Namen des Ortes zu verwenden</string>
     <string name="quick_action_bug_message">Nachricht</string>
     <string name="quick_action_poi_list">POI-Liste</string>
-    <string name="quick_action_sh_poi_descr">Sie können eine oder mehrere POI-Kategorien hinzufügen um diese auf der Karte anzuzeigen.</string>
+    <string name="quick_action_sh_poi_descr">Sie können eine oder mehrere POI-Kategorien hinzufügen um diese auf der Karte anzuzeigen</string>
     <string name="quick_action_map_style_action">Kartenstil hinzufügen</string>
     <string name="quick_action_empty_param_error">Parameter darf nicht leer sein</string>
     <string name="quick_action_map_styles">Kartenstile</string>
@@ -2658,4 +2658,8 @@ und vieles mehr ...
     <string name="quick_action_map_source_action">Kartenquelle hinzufügen</string>
     <string name="quick_action_map_source_switch">Die Kartenquelle wurde in \"%s\" geändert.</string>
     <string name="quick_action_btn_tutorial_title">Position der Schaltfläche ändern</string>
+    <string name="quick_action_favorites_show">Favoriten anzeigen</string>
+    <string name="quick_action_favorites_hide">Favoriten ausblenden</string>
+    <string name="quick_action_category_descr">Wählen Sie eine Kategorie um den Favorit unter dieser zu speichern</string>
+    <string name="quick_action_gpx_category_descr">Wählen Sie eine optionale Kategorie</string>
     </resources>
