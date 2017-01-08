@@ -2154,8 +2154,8 @@ Lon %2$s</string>
 
     <string name="application_dir_description">Issèbera in ue boles pònnere sos documentos de sas mapas e sos àteros datos.</string>
     <string name="map_downloaded">Mapa iscarrigada</string>
-    <string name="map_downloaded_descr">Sa mapa de %1$s est istada iscarrigada. Torra a sa mapa pro incumintzare a l’impreare.</string>
-    <string name="go_to_map">Bae a sa mapa</string>
+    <string name="map_downloaded_descr">Sa mapa de %1$s est istada iscarrigada. como podes incumintzare a l’impreare.</string>
+    <string name="go_to_map">Ammustra sa mapa</string>
     <string name="shared_string_qr_code">Còdighe QR</string>
     <string name="enter_country_name">Inserta su nùmene de s\'istadu</string>
     <string name="world_map_download_descr">Sa mapa mundiale de base (chi coberrit su mundu intreu a ismanniamentos bassos) fartat o est betza. Pro praghere cunsìdera sa possibilidade de l’iscarrigare pro tènnere una immàgine generale.</string>
@@ -2557,7 +2557,7 @@ Si istimas OsmAnd e OSM e los boles suportare, custa est una manera perfeta pro 
     <string name="skip_map_downloading">Brinca s\'iscarrigamentu de sas mapas</string>
     <string name="skip_map_downloading_desc">Non tenes mapas non in lìnia installadas. Podes isseberare una mapa dae sa lista o iscarrigare mapas prus a tardu pro mèdiu de Menù - %1$s.</string>
     <string name="search_another_country">Issèbera un\'àtera regione</string>
-    <string name="search_map">Chirchende sa mapa…</string>
+    <string name="search_map">Chirchende sas mapas…</string>
     <string name="first_usage_wizard_desc">Lassa agatare sa positzione tua a OsmAnd e faghe·ti impositare sas mapas de iscarrigare pro cussa regione.</string>
     <string name="location_not_found">Positzione non agatada</string>
     <string name="no_inet_connection">Peruna connessione a ìnternet</string>
@@ -2670,4 +2670,6 @@ Si istimas OsmAnd e OSM e los boles suportare, custa est una manera perfeta pro 
     <string name="rendering_value_medium_w_name">Mesana</string>
     <string name="rendering_value_low_name">Bassa</string>
     <string name="rendering_attr_hideWaterPolygons_name">Cua s\'abba</string>
+    <string name="configure_screen_quick_action">Atzione lestra</string>
+
     </resources>
