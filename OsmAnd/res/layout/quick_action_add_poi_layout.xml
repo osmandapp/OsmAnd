@@ -26,7 +26,7 @@
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:padding="16dp"
-                android:text="@string/quick_action_add_poi_dialog"
+                android:text="@string/quick_action_interim_dialog"
                 android:textColor="?android:textColorPrimary"
                 android:textSize="@dimen/default_list_text_size"/>
 
