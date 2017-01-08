@@ -2504,7 +2504,7 @@ If you need help with OsmAnd application, please contact our support team: suppo
     <string name="favorite_empty_place_name">Place</string>
     <string name="quick_action_duplicates">Specified quick action name already in use, was changed to %1$s to avoid duplication.</string>
     <string name="quick_action_duplicate">Quick action name duplicate</string>
-    <string name="quick_action_showhide_favorites_descr">Tapping the action button will show or hide favorites points on the map.</string>
+    <string name="quick_action_showhide_favorites_descr">Tapping the action button will show or hide the favorite points on the map.</string>
     <string name="quick_action_showhide_poi_descr">Tapping the action button will show or hide POIs on the map.</string>
     <string name="quick_action_showhide_favorites_title">Show/hide favorites</string>
     <string name="quick_action_favorites_show">Show Favorites</string>
