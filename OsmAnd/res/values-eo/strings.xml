@@ -2596,10 +2596,10 @@ kaj pli...
     <string name="quick_action_add_create_items">Krei elementojn</string>
     <string name="quick_action_add_configure_map">Agordi mapon</string>
     <string name="quick_action_add_navigation">Navigado</string>
-    <string name="quick_action_fav_name_descr">Lasu kampon malplenan kaj OsmAnd uzos adreson aŭ nomon de loko por ŝatata ejo</string>
+    <string name="quick_action_fav_name_descr">Lasu kampon malplenan por aŭtomate uzi adreson aŭ nomon de ejo</string>
     <string name="quick_action_bug_descr">Tiu ĉi mesaĝo mem-kompletiĝos en komenta kampo.</string>
     <string name="quick_action_bug_message">Mesaĝo</string>
-    <string name="quick_action_category_descr">Vi povas elekti kategorion por konservi ŝatatan ejon.</string>
+    <string name="quick_action_category_descr">Elektu kategorion por konservi ŝatatan ejon.</string>
     <string name="quick_action_gpx_category_descr">Vi povas elekti kategorion por konservi GPX-navigadpunkton.</string>
     <string name="quick_action_poi_list">Listo de interesejoj</string>
     <string name="quick_action_sh_poi_descr">Vi povas aldoni kelkajn kategoriojn por interesejoj por montri sur mapo.</string>
