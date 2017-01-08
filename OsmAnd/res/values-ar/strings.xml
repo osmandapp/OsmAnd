@@ -546,7 +546,7 @@
 	<string name="index_name_oceania">أستراليا و أوقيانوسيا</string>
 	
 	<string name="routing_settings">الملاحة</string>
-	<string name="routing_settings_descr">تحديد الخيارات للإبحار</string>
+	<string name="routing_settings_descr">حدد خيارات الملاحة</string>
 	<string name="index_settings">إدارة بيانات الخرائط</string>
 	<string name="general_settings">عام</string>
 	<string name="general_settings_descr">ضبط العرض والإعدادات العامة للتطبيق</string>
@@ -2638,7 +2638,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
           إذا كنت ترغب بالقيام بـ / تصحيح ترجمة الإنجليزية تأكد من أن:
           3. كل السلاسل أو السترينجز المنشأة/المعدلة  التي تم إنشاؤها متواجدة في الجزء العلوي من الملف (لتسهيل ايجاد ما هو مترجم).
      من فضلك: إلقاء نظرة على http://code.google.com/p/osmand/wiki/UIConsistency، قد تحسن من عملك وعملنا :-) شكرا - هاردي"</string>
-    <string name="show_legacy_search">إظهار بحث قديم</string>
+    <string name="show_legacy_search">إظهار طريقة البحث القديمة</string>
     <string name="show_legacy_search_desc">تفعيل البحث القديم في قائمة الدرج</string>
     <string name="routing_attr_allow_motorway_name">الطريق السريع مسموح</string>
     <string name="routing_attr_allow_motorway_description">الطريق السريع مسموح</string>
