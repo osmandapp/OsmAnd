@@ -115,7 +115,7 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionRe
     private boolean showTutorialIfNeeded() {
         if (isLayerOn && !settings.IS_QUICK_ACTION_TUTORIAL_SHOWN.get()) {
             TapTargetView.showFor(mapActivity,                 // `this` is an Activity
-                    TapTarget.forView(quickActionButton, mapActivity.getString(R.string.quick_action_btn_tutorial_title), mapActivity.getString(R.string.quick_action_btn_tutorial_description))
+                    TapTarget.forView(quickActionButton, mapActivity.getString(R.string.quick_action_btn_tutorial_title), mapActivity.getString(R.string.quick_action_btn_tutorial_descr))
                             // All options below are optional
                             .outerCircleColor(R.color.osmand_orange)      // Specify a color for the outer circle
                             .targetCircleColor(R.color.color_white)   // Specify a color for the target circle

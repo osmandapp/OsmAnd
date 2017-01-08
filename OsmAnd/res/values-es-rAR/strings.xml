@@ -2591,5 +2591,5 @@ Si necesitas ayuda con la aplicación OsmAnd, contacte con nuestro equipo de sop
     <string name="quick_action_map_source_action">Añadir fuente del mapa</string>
     <string name="quick_action_map_source_switch">La fuente del mapa se cambió a \"%s\".</string>
     <string name="quick_action_btn_tutorial_title">Cambiar ubicación del botón</string>
-    <string name="quick_action_btn_tutorial_description">Mantener pulsado y arrastrar el botón para mover la ubicación en la pantalla</string>
+    <string name="quick_action_btn_tutorial_descr">Mantener pulsado y arrastrar el botón para mover la ubicación en la pantalla</string>
 </resources>
