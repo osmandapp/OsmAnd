@@ -2475,8 +2475,8 @@ If you need help with OsmAnd application, please contact our support team: suppo
     <string name="quick_action_take_photo_note">Take photo note</string>
     <string name="quick_action_add_osm_bug">Add OSM bug</string>
     <string name="quick_action_navigation_voice">Voice on/off</string>
-    <string name="quick_action_navigation_voice_off">Voice off</string>
-    <string name="quick_action_navigation_voice_on">Voice on</string>
+    <string name="quick_action_navigation_voice_off">Voice is off</string>
+    <string name="quick_action_navigation_voice_on">Voice is on</string>
     <string name="quick_action_add_gpx">Add GPX waypoint</string>
     <string name="quick_action_add_parking">Add parking place</string>
     <string name="quick_action_new_action">Add action</string>

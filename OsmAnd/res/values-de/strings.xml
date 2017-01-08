@@ -2613,8 +2613,8 @@ und vieles mehr ...
     <string name="quick_action_take_photo_note">Photo aufnehmen</string>
     <string name="quick_action_add_osm_bug">OSM-Notiz hinzufügen</string>
     <string name="quick_action_navigation_voice">Sprachausgabe Ein/Aus</string>
-    <string name="quick_action_navigation_voice_off">Sprachausgabe Aus</string>
-    <string name="quick_action_navigation_voice_on">Sprachausgabe Ein</string>
+    <string name="quick_action_navigation_voice_off">Sprachausgabe ist aus</string>
+    <string name="quick_action_navigation_voice_on">Sprachausgabe ist an</string>
     <string name="quick_action_add_gpx">GPX-Wegpunkt einfügen</string>
     <string name="quick_action_add_parking">Parkplatzstandort hinzufügt</string>
     <string name="quick_action_new_action">Aktion hinzufügen</string>
