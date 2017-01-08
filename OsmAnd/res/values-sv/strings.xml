@@ -2100,7 +2100,7 @@ Long %2$s</string>
     <string name="av_audio_format">Ljudformat</string>
     <string name="av_audio_format_descr">Välj ljudformat</string>
     <string name="av_audio_bitrate">Ljudsamplingshastighet</string>
-    <string name="av_audio_bitrate_descr">Välj ljudsamplingshastighet</string>
+    <string name="av_audio_bitrate_descr">Välj ljudupplösning</string>
     <string name="no_address_found">Ingen adress angiven</string>
 	<string name="looking_up_address">Slår upp adressen</string>
     <string name="rendering_attr_horseRoutes_name">Hästleder</string>
