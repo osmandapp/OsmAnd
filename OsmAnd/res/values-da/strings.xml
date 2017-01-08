@@ -2756,8 +2756,8 @@ Hvis du  ønsker at støtte OsmAnd og OSM, er dette en god måde at gøre det p�
     <string name="quick_action_take_photo_note">Tag en fotonote</string>
     <string name="quick_action_add_osm_bug">Tilføj OSM fejl</string>
     <string name="quick_action_navigation_voice">Talevejledning til/fra</string>
-    <string name="quick_action_navigation_voice_off">Talevejledning fra</string>
-    <string name="quick_action_navigation_voice_on">Talevejledning til</string>
+    <string name="quick_action_navigation_voice_off">Talevejledning er inaktiv</string>
+    <string name="quick_action_navigation_voice_on">Talevejledning er aktiv</string>
     <string name="quick_action_add_gpx">Tilføj GPX-rutepunkt</string>
     <string name="quick_action_add_parking">Tilføj en parkeringsplads</string>
     <string name="quick_action_new_action">Tilføj handling</string>
