@@ -2618,4 +2618,5 @@ Si aprecieu OsmAnd  i OSM i voleu ajudar-los, és la via perfecta per fer-ho."</
     <string name="quick_action_btn_tutorial_descr">Premeu el botó sense deixar-lo i arrossegueu per la pantalla per canviar-li la posició</string>
 <string name="quick_action_interim_dialog">Mostra un diàleg provisional</string>
     <string name="quick_action_sh_poi_descr">Podeu afegir una o més categories de PDI per mostrar-les al mapa.</string>
-    </resources>
+    <string name="shared_string_action_name">Nom de l\'acció</string>
+</resources>
