@@ -950,7 +950,24 @@ OsmAnd jest otwarto-źródłowym programem do nawigacji z dostępem do szerokiej
     <string name="poi_filter_restaurants">Restauracje</string>
     <string name="poi_filter_sightseeing">Zwiedzanie</string>
     <string name="osmand_plus_long_description_1000_chars">"
- OsmAnd+ (OSM Automatyczne Nawigowanie Do celu) OsmAnd jest programem open source do nawigacji z dostępem do szerokiej gamy globalnych map OpenStreetMap (OSM). Wszystkie dane map (wektorowe lub kafelkowe) mogą być przechowywane na karcie pamięci telefonu w użycia offline. OsmAnd oferuje również funkcjonalność routingu w trybie offline i online zawierającą zapowiedzi głosowe. Niektóre z podstawowych funkcji: - Funkcjonalnowanie w trybie offline (przechowuje pobrane mapy wektorowych lub kafelkowe w pamięci urządzenia) - Dostępne kompaktowe mapy w trybie offlinie dla całego świata - Pobieranie map kraju lub regionu bezpośrednio z aplikacji - Możliwość nakładania kilku warstw map, takich jak GPX lub tras nawigacji, ciekawe miejsc, ulubionych, linii konturu, przystanków komunikacji miejskiej, dodatkowe mapy z konfigurowalną przejrzystością - Wyszukiwanie Offline adresów i miejsc (POI) - Wyznaczanie w trybie Offline tras na średnich dystansach - Tryby samochodowy, rowerowy i pieszy z: - opcjonalnym automatycznym przełączaniem widoku dzień/noc - opcjonalnie skalowanie map w zależności od prędkości - opcjonalne wyrównanie map według kompasu lub kierunku ruchu - opcjonalne wyświetlanie wskazywanie pasów, ograniczeń prędkości, nagrane i syntezowane komunikaty głosowe.
+ OsmAnd+ (OSM Automatyczne Nawigowanie Do celu)
+
+ OsmAnd jest otwarto-źródłowym programem do nawigacji z dostępem do szerokiej gamy globalnych map OpenStreetMap (OSM). Wszystkie dane map (wektorowe lub kafelkowe) mogą być przechowywane na karcie pamięci telefonu w użycia offline. OsmAnd oferuje również funkcjonalność wyznaczania tras w trybie offline i online z zapowiedziami głosowymi.
+
+OsmAnd+ jest płatną wersją programu, kupując program wspierasz projekt, nowe funkcje i otrzymujesz najnowsze uaktualnienia.
+
+Niektóre z podstawowych funkcji:
+ - Działa trybie offline (przechowuje pobrane mapy wektorowych lub kafelkowe w pamięci urządzenia)
+ - Dostępne kompaktowe mapy w trybie offlinie dla całego świata
+ - Pobieranie map kraju lub regionu bezpośrednio z aplikacji
+ - Możliwość nakładania kilku warstw map, takich jak GPX lub tras nawigacji, ciekawe miejsc, ulubionych, linii konturu, przystanków komunikacji miejskiej, dodatkowe mapy z konfigurowalną przejrzystością
+ - Wyszukiwanie Offline adresów i miejsc (POI)
+ - Wyznaczanie w trybie Offline tras na średnich dystansach
+ - Tryby samochodowy, rowerowy i pieszy z:
+ - opcjonalnym automatycznym przełączaniem widoku dzień/noc
+ - opcjonalnie skalowanie map w zależności od prędkości
+ - opcjonalne wyrównanie map według kompasu lub kierunku ruchu
+ - opcjonalne wyświetlanie wskazywanie pasów, ograniczeń prędkości, nagrane i syntezowane komunikaty głosowe.
  "</string>
     <string name="select_navigation_mode">Wybierz tryb poruszania się</string>
 
@@ -2727,8 +2744,8 @@ i więcej...
     <string name="quick_action_take_photo_note">Utwórz notatkę fotograficzną</string>
     <string name="quick_action_add_osm_bug">Dodaj uwagę OSM</string>
     <string name="quick_action_navigation_voice">Przełącz wyciszenie dźwięku</string>
-    <string name="quick_action_navigation_voice_off">Wycisz dźwięk</string>
-    <string name="quick_action_navigation_voice_on">Wyłącz wyciszenie dźwięku</string>
+    <string name="quick_action_navigation_voice_off">Dźwięk wyciszony</string>
+    <string name="quick_action_navigation_voice_on">Dźwięk aktywny</string>
     <string name="quick_action_add_parking">Dodaj położenie parkowania</string>
     <string name="quick_action_new_action">Dodaj czynność</string>
     <string name="quick_action_edit_action">Zmodyfikuj czynność</string>
@@ -2753,4 +2770,45 @@ i więcej...
     <string name="quick_action_map_underlay_action">Dodaj podkład</string>
     <string name="quick_action_map_underlay_title">Podkłady map</string>
     <string name="quick_action_map_source_title">Zasoby map</string>
-    </resources>
+    <string name="quick_action_add_gpx">Dodaj punkt pośredni GPX</string>
+    <string name="quick_favorites_name_preset">Nazwa</string>
+    <string name="quick_action_add_marker_descr">Naciśnięcie przycisku akcji doda znacznik do określonej lokalizacji.</string>
+    <string name="quick_action_add_gpx_descr">Naciśnięcie przycisku akcji doda punkt pośredni GPX do określonej lokalizacji.</string>
+    <string name="quick_action_take_audio_note_descr">Naciśnięcie przycisku akcji doda notatkę dźwiękową do określonej lokalizacji.</string>
+    <string name="quick_action_take_video_note_descr">Naciśnięcie przycisku akcji doda notatkę wideo do określonej lokalizacji.</string>
+    <string name="quick_action_take_photo_note_descr">Naciśnięcie przycisku akcji doda foto-notatkę do określonej lokalizacji.</string>
+    <string name="quick_action_add_osm_bug_descr">Naciśnięcie przycisku akcji doda uwagę OSM do określonej lokalizacji.</string>
+    <string name="quick_action_add_poi_descr">Naciśnięcie przycisku akcji doda użyteczne miejsce do określonej lokalizacji.</string>
+    <string name="quick_action_navigation_voice_descr">Naciśnięcie przycisku akcji włączy lub wyłączy podpowiedzi głosowe podczas nawigacji.</string>
+    <string name="quick_action_add_parking_descr">Naciśnięcie przycisku akcji doda pozycję parkowania do określonej lokalizacji.</string>
+    <string name="quick_action_favorite_dialog">Pokaż okno ulubionych</string>
+    <string name="quick_action_gpx_dialog">Pokaż okno punktu pośredniego GPX</string>
+    <string name="favorite_autofill_toast_text">" został zapisany do "</string>
+    <string name="quick_action_duplicates">Określona nazwa szybkiej akcji jest już w użyciu, zmieniam ją na %1$s aby uniknąć duplikacji.</string>
+    <string name="quick_action_duplicate">Zduplikowana nazwa szybkiej akcji</string>
+    <string name="quick_action_showhide_favorites_descr">Naciśnięcie przycisku akcji wyświetli lub ukryje ulubione miejsca na mapie.</string>
+    <string name="quick_action_showhide_poi_descr">Naciśnięcie przycisku akcji wyświetli lub ukryje użyteczne miejsca na mapie.</string>
+    <string name="quick_action_showhide_favorites_title">Pokaż/ukryj ulubione</string>
+    <string name="quick_action_favorites_show">Pokaż ulubione</string>
+    <string name="quick_action_favorites_hide">Ukryj ulubione</string>
+    <string name="quick_action_showhide_poi_title">Pokaż/ukryj użyteczne miejsca</string>
+    <string name="quick_action_add_create_items">Utwórz elementy</string>
+    <string name="quick_action_bug_descr">Ta wiadomość uzupełni się w polu komentarza.</string>
+    <string name="quick_action_bug_message">Wiadomość</string>
+    <string name="quick_action_category_descr">Możesz wybrać kategorię dla ulubionego punktu.</string>
+    <string name="quick_action_gpx_category_descr">Możesz wybrać kategorię dla punktu pośredniego GPX.</string>
+    <string name="quick_action_sh_poi_descr">Możesz dodać kilka kategorii użytecznych miejsc do wyświetlenia na mapie.</string>
+    <string name="quick_action_map_style_descr">Naciśnięcie przycisku akcji zmieni styl mapy, wg kolejności z listy.</string>
+    <string name="quick_action_map_overlay">Zmień nakładkę mapy</string>
+    <string name="quick_action_map_overlay_title">Nakładki mapy</string>
+    <string name="quick_action_map_overlay_descr">Naciśnięcie przycisku akcji przełączy pomiędzy podkładami mapy.</string>
+    <string name="quick_action_map_overlay_action">Dodaj nakładkę</string>
+    <string name="quick_action_map_underlay">Zmień podkład mapy</string>
+    <string name="quick_action_map_underlay_descr">Naciśnięcie przycisku akcji przełączy pomiędzy podkładami mapy.</string>
+    <string name="quick_action_map_source">Zmień źródło mapy</string>
+    <string name="quick_action_map_source_descr">Naciśnięcie przycisku akcji przełączy źródła mapy, wg kolejności z listy.</string>
+    <string name="quick_action_map_source_action">Dodaj źródło mapy</string>
+    <string name="quick_action_map_source_switch">Źródło mapy zmienione na \"%s\".</string>
+    <string name="quick_action_btn_tutorial_title">Zmień pozycję przycisku</string>
+    <string name="quick_action_btn_tutorial_descr">Naciśnij i przytrzymaj aby przesunąć przycisk na ekranie</string>
+</resources>
