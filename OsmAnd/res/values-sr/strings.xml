@@ -1161,7 +1161,7 @@
     <string name="storage_place_description">ОсмАндово складиште података (за карте, стазе итд.): %1$s.</string>
     <string name="give_permission">Дајте одобрења</string>
     <string name="allow_access_location">Омогућите приступ одређивању положаја</string>
-    <string name="first_usage_greeting">Добави правце и откриј нова места без мрежне везе</string>
+    <string name="first_usage_greeting">Добави упутства и откриј нова места без мрежне везе</string>
     <string name="search_my_location">Пронађи мој положај</string>
     <string name="no_update_info_desc">Не проверавај надоградње нових издања, попуст се односи на ОсмАнд</string>
     <string name="no_update_info">Не приказуј надоградње</string>
