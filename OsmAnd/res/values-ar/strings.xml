@@ -887,7 +887,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
 	<string name="use_transparent_map_theme">السمة الشفافة</string>
 	<string name="native_library_not_supported">المكتبات الأصيلة غير مدعومة على هذا الجهاز.</string>
 	<string name="init_native_library">تهيئة المكتبة الأصيلة…</string>
-	<string name="choose_auto_follow_route">عرض خريطة في المنتصف تلقائيًا</string>
+	<string name="choose_auto_follow_route">إعرض وجه الخريطة في المنتصف تلقائيًا</string>
 	<string name="choose_auto_follow_route_descr">المدة اللازمة ليتزامن عرض الخريطة مع الموقع الحالي</string>
 	
 	<string name="auto_follow_route_navigation">مركز صناعة السيارات الوحيد</string>
@@ -1486,10 +1486,10 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
 	<string name="parking_place">مكان للركن</string>
     <string name="version_settings_descr">تحميل الإصدارات اليومية</string>
     <string name="version_settings">إصدرات</string>
-    <string name="speak_pedestrian">معابر المشاة</string>
-    <string name="traffic_warning_pedestrian">معابر المشاة</string>
+    <string name="speak_pedestrian">ممرات الراجلين</string>
+    <string name="traffic_warning_pedestrian">ممرات الراجلين</string>
 	<string name="show_railway_warnings">تقاطعات القطارات</string>
-	<string name="show_pedestrian_warnings">معابر المشاة</string>
+	<string name="show_pedestrian_warnings">ممرات الراجلين</string>
     <string name="navigate_point_easting">تشريق</string>
     <string name="error_avoid_specific_road">لا يوجد منفذ للتجاوز</string>
     <string name="rendering_attr_tramTrainRoutes_name">سكك القطارات والترام</string>
@@ -1618,7 +1618,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
 	<string name="follow">بدء الملاحة</string>
 	<string name="only_show">عرض الطريق</string>
 	<string name="address">عنوان</string>
-	<string name="router_service">خدمة ملاحة</string>
+	<string name="router_service">خدمة الملاحة</string>
 	<string name="uploading">جاري الرفع…</string>
 	<string name="search_history_city">مدينة: {0}</string>
 	<string name="transport">نقل</string>
@@ -1688,7 +1688,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
 	<string name="searching">جاري البحث…</string>
 	<string name="search_online_address">بحث على الإنترنت</string>
 	<string name="search_offline_address">بحث بدون اتصال</string>
-	<string name="router_service_descr">اختر خدمة ملاحة عبر أو بدون ربط بالانترنت</string>
+	<string name="router_service_descr">اختر خدمة ملاحة عبر أو بدون ربط بالإنترنت</string>
 	<string name="sd_dir_not_accessible">لا يمكن الوصول لمجلد تخزين البيانات على الذاكرة!</string>
 	<string name="mark_final_location_first">فضلا قم بتحديد الوجهة أولا</string>
 	<string name="downloading_list_indexes">جاري تحميل قائمة المناطق المتاحة…</string>
