@@ -408,7 +408,7 @@
     <string name="local_index_tile_data_name">معلومات التّجانب: %1$s</string>
     <string name="edit_tilesource_successfully">حُفِظ المصدر التّجانبي %1$s بنجاح</string>
     <string name="use_compass_navigation_descr">استخدم البوصلة عندما لا تكون هناك أي وجهة محددة</string>
-	<string name="auto_zoom_map_descr">لائم تقريب الخريطة وفقا لسرعتك (بينما تتزامن الخريطة مع الموقع الحالي)</string>
+	<string name="auto_zoom_map_descr">ملائمة تقريب الخريطة وفقا لسرعتك (هذا بينما تتزامن الخريطة مع الموقع الحالي)</string>
 	<string name="auto_zoom_map">تقريب الخريطة تلقائيًا</string>
 	<string name="snap_to_road_descr">ألصق الموقع إلى الشوارع أثناء الملاحة</string>
 	<string name="snap_to_road">الالتصاق بالطريق</string>
@@ -888,7 +888,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
 	<string name="native_library_not_supported">المكتبات الأصيلة غير مدعومة على هذا الجهاز.</string>
 	<string name="init_native_library">تهيئة المكتبة الأصيلة…</string>
 	<string name="choose_auto_follow_route">عرض خريطة في المنتصف تلقائيًا</string>
-	<string name="choose_auto_follow_route_descr">الوقت حتى يتزامن عرض الخريطة مع الموقع الحالي</string>
+	<string name="choose_auto_follow_route_descr">المدة اللازمة ليتزامن عرض الخريطة مع الموقع الحالي</string>
 	
 	<string name="auto_follow_route_navigation">مركز صناعة السيارات الوحيد</string>
 	<string name="auto_follow_route_navigation_descr">التوسيط التلقائي لعرض الخريطة فقط أثناء الملاحة.</string>
@@ -1602,7 +1602,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
 	<string name="arrival_distance_factor_early">مبكر</string>
     <string name="arrival_distance_factor_normally">طبيعي</string>
     <string name="arrival_distance_factor_late">متأخر</string>
-    <string name="arrival_distance_factor_at_last">في آخر أمتار</string>
+    <string name="arrival_distance_factor_at_last">في الأمتار الأخيرة</string>
     <string name="index_name_netherlands">أوربا - هولندا</string>
 	<string name="keep_informing">إعادة تعليمات الملاحة</string>
 	<string name="shared_string_release">تم</string>
@@ -2678,4 +2678,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="quick_actions_delete_text">هل أنت متأكد من أنك تريد حذف إجراء \"%s\" ؟</string>
     <string name="quick_action_name_hint">اسم الإجراء</string>
     <string name="quick_action_add_osm_bug">أضف خطاءا إلى OSM</string>
+    <string name="quick_favorites_show_favorites_dialog">إظهار مربع حوار الأماكن المفضلة</string>
+    <string name="quick_action_add_marker_descr">النقر على زر الإجراء سيقوم بإضافة علامة على الموقع المحدد.</string>
+    <string name="quick_action_take_video_note_descr">النقر على زر الإجراء سيقوم بإضافة ملاحظة فيديو على الموقع المحدد.</string>
     </resources>
