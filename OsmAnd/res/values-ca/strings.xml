@@ -2561,7 +2561,6 @@ Si aprecieu OsmAnd  i OSM i voleu ajudar-los, és la via perfecta per fer-ho."</
     <string name="quick_actions_delete_text">Segur que voleu esborrar l\'acció \"%s\"?</string>
     <string name="quick_favorites_show_favorites_dialog">Mostra el diàleg de preferides</string>
     <string name="quick_favorites_name_preset">Configuració de nom</string>
-    <string name="quick_action_name_hint">Nom de l\'acció</string>
     <string name="quick_action_add_marker_descr">Si premeu el botó de l\'acció s\'afegirà un marcador a la posició indicada.</string>
     <string name="quick_action_add_gpx_descr">Si premeu el botó de l\'acció s\'afegirà una fita de GPX a la posició indicada.</string>
     <string name="quick_action_take_audio_note_descr">Si premeu el botó de l\'acció s\'afegirà una nota d\'àudio a la posició indicada.</string>
