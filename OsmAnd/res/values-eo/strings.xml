@@ -2567,7 +2567,6 @@ kaj pli...
     <string name="dialog_add_action_title">Aldoni agon</string>
     <string name="quick_actions_delete">Forigi agon</string>
     <string name="quick_actions_delete_text">Ĉu vi certe volas forigi agon \"%s\"?</string>
-    <string name="btn_dismiss">Rezigni</string>
     <string name="quick_favorites_show_favorites_dialog">Montri fenestron de ŝatataj ejoj</string>
     <string name="quick_favorites_name_preset">Nomo</string>
     <string name="quick_favorites_name_description">Lasu kampon malplenan kaj OsmAnd uzos adreson aŭ nomon de loko por ŝatata ejo</string>

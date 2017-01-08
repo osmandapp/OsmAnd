@@ -2768,7 +2768,6 @@ Hvis du  ønsker at støtte OsmAnd og OSM, er dette en god måde at gøre det p�
     <string name="dialog_add_action_title">Tilføj handling</string>
     <string name="quick_actions_delete">Slet handling</string>
     <string name="quick_actions_delete_text">Er du sikker på du vil slette \"%s\" handling?</string>
-    <string name="btn_dismiss">Afvis</string>
     <string name="quick_favorites_show_favorites_dialog">Vis favoritter dialogboksen</string>
     <string name="quick_favorites_name_preset">Navne forudindstilling</string>
     <string name="quick_favorites_name_description">Lad feltet stå tomt og OsmAnd vil bruge adressen eller navnet på et sted for det foretrukne punkt</string>

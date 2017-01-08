@@ -2700,7 +2700,6 @@ Facebook：https://www.facebook.com/osmandapp
     <string name="quick_action_add_gpx">增加 GPX 航點</string>
     <string name="quick_action_add_parking">增加停車場所</string>
     <string name="quick_action_add_favorite">增加我的收藏</string>
-    <string name="btn_dismiss">解除</string>
     <string name="quick_favorites_show_favorites_dialog">顯示我的收藏對話框</string>
     <string name="quick_favorites_name_preset">預設的名稱</string>
     <string name="text_name">名稱</string>

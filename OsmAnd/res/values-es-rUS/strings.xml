@@ -2534,7 +2534,6 @@ Si amas a OsmAnd, OSM y quieres apoyarlos, esta es una perfecta manera de hacerl
     <string name="dialog_add_action_title">Añadir acción</string>
     <string name="quick_actions_delete">Borrar acción</string>
     <string name="quick_actions_delete_text">¿Quieres borrar la acción \"%s\"?</string>
-    <string name="btn_dismiss">Cancelar</string>
     <string name="quick_favorites_show_favorites_dialog">Mostrar diálogo de favoritos</string>
     <string name="quick_favorites_name_preset">Nombre predefinido</string>
     <string name="quick_favorites_name_description">Si dejas el campo vacío, OsmAnd usará la dirección o el nombre del lugar</string>

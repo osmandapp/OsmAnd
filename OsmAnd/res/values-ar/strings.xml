@@ -2678,7 +2678,6 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="dialog_add_action_title">إضافة إجراء</string>
     <string name="quick_actions_delete">حذف إجراء</string>
     <string name="quick_actions_delete_text">هل أنت متأكد من أنك تريد حذف إجراء \"%s\" ؟</string>
-    <string name="btn_dismiss">إنصراف</string>
     <string name="quick_action_name_hint">اسم الإجراء</string>
     <string name="text_name">الاسم</string>
     </resources>

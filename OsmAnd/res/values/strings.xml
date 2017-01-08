@@ -2487,7 +2487,6 @@ If you need help with OsmAnd application, please contact our support team: suppo
     <string name="dialog_add_action_title">Add action</string>
     <string name="quick_actions_delete">Delete action</string>
     <string name="quick_actions_delete_text">Are you sure you want to delete the action \"%s\"?</string>
-    <string name="btn_dismiss">Dismiss</string>
     <string name="quick_favorites_show_favorites_dialog">Show favorites dialog</string>
     <string name="quick_favorites_name_preset">Name preset</string>
     <string name="quick_favorites_name_description">Leave the field blank and OsmAnd will use the address or place name</string>

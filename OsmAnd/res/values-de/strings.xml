@@ -2625,7 +2625,6 @@ und vieles mehr ...
     <string name="dialog_add_action_title">Aktion hinzufügen</string>
     <string name="quick_actions_delete">Aktion löschen</string>
     <string name="quick_actions_delete_text">Sind Sie sicher, dass Sie Aktion \"%s\" löschen möchten?</string>
-    <string name="btn_dismiss">Verwerfen</string>
     <string name="quick_favorites_show_favorites_dialog">Favoriten Dialog anzeigen</string>
     <string name="quick_favorites_name_preset">Name Voreinstellen</string>
     <string name="quick_action_name_hint">Aktionsname</string>
