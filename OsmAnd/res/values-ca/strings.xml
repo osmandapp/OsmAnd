@@ -2597,8 +2597,8 @@ Si aprecieu OsmAnd  i OSM i voleu ajudar-los, és la via perfecta per fer-ho."</
     <string name="quick_action_category_discr">Podeu seleccionar una categoria pel punt preferit.</string>
     <string name="quick_action_gpx_category_discr">Podeu seleccionar una categoria per la fita GPX.</string>
     <string name="quick_action_poi_list">Llista de PDI</string>
-    <string name="quick_action_sh_poi_discrp">Podeu afegir una categoria de PDI o més d\'una per mostrar al mapa.</string>
-    <string name="quick_action_map_style_discrp">Si premeu el botó de l\'acció es canviarà l\'estil del mapa seguint la llista.</string>
+    <string name="quick_action_sh_poi_desc">Podeu afegir una categoria de PDI o més d\'una per mostrar al mapa.</string>
+    <string name="quick_action_map_style_descr">Si premeu el botó de l\'acció es canviarà l\'estil del mapa seguint la llista.</string>
     <string name="quick_action_map_style_action">Afegiu un estil de mapa</string>
     <string name="quick_action_empty_param_error">Els paràmetres no haurien d\'estar buits</string>
     <string name="quick_action_map_styles">Estils de mapa</string>

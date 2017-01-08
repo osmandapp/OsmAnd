@@ -2537,7 +2537,7 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="quick_action_category_discr">Vous pouvez choisir une Catégorie pour ce favori.</string>
     <string name="quick_action_gpx_category_discr">Vous pouvez choisir une Catégorie pour ce point GPX.</string>
     <string name="quick_action_poi_list">Liste des PI</string>
-    <string name="quick_action_sh_poi_discrp">Vous pouvez indiquer les Catégories de PI à afficher sur la carte.</string>
+    <string name="quick_action_sh_poi_descr">Vous pouvez indiquer les Catégories de PI à afficher sur la carte.</string>
     <string name="quick_action_map_style_action">Ajouter un Style de carte</string>
     <string name="quick_action_empty_param_error">Les paramètres ne peuvent être vides</string>
     <string name="quick_action_map_styles">Styles de carte</string>
