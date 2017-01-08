@@ -2549,8 +2549,8 @@ Si aprecieu OsmAnd  i OSM i voleu ajudar-los, és la via perfecta per fer-ho."</
     <string name="quick_action_take_photo_note">Enregistra una nota fotogràfica</string>
     <string name="quick_action_add_osm_bug">Afegeix un error OSM</string>
     <string name="quick_action_navigation_voice">Veu activada/desactivada</string>
-    <string name="quick_action_navigation_voice_off">Veu idesactivada</string>
-    <string name="quick_action_navigation_voice_on">Veu activada</string>
+    <string name="quick_action_navigation_voice_off">La veu està desactivada</string>
+    <string name="quick_action_navigation_voice_on">La veu està activada</string>
     <string name="quick_action_add_gpx">Afegeix fita GPX</string>
     <string name="quick_action_add_parking">Afegeix lloc d\'aparcament</string>
     <string name="quick_action_new_action">Afegeix acció</string>
@@ -2616,4 +2616,5 @@ Si aprecieu OsmAnd  i OSM i voleu ajudar-los, és la via perfecta per fer-ho."</
     <string name="quick_action_map_source_switch">L\'origen del mapa s\'ha canviat al de \"%s\".</string>
     <string name="quick_action_btn_tutorial_title">Modifica la posició del botó</string>
     <string name="quick_action_btn_tutorial_descr">Premeu el botó sense deixar-lo i arrossegueu per la pantalla per canviar-li la posició</string>
-</resources>
+<string name="quick_action_interim_dialog">Mostra un diàleg provisional</string>
+    </resources>
