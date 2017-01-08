@@ -2310,7 +2310,7 @@
 	<string name="poi_historic_era_paleolithic">Era histórica: Paleolítico (2.6 millones de años – 10000 AP)</string>
 	<string name="poi_historic_era_mesolithic">Era histórica: Mesolítica</string>
 	<string name="poi_historic_era_neolithic">Era histórica: Neolítico</string>
-	<string name="poi_historic_era_chalcolithic">Era histórica: Calcolítico (milenios IV-III aC)</string>
+	<string name="poi_historic_era_chalcolithic">Era histórica: Calcolítico (4to–3er milenio aC)</string>
 
 	<string name="poi_historic_stone">Piedra histórica</string>
 	<string name="poi_stone_type_conciliation_cross">Tipo: Cruz de conciliación</string>
@@ -3177,7 +3177,7 @@
 	<string name="poi_cuisine_sushi">Sushi</string>
 	<string name="poi_cuisine_fish_and_chips">Pescado frito y papas fritas</string>
 	<string name="poi_cuisine_seafood">Comida de mar</string>
-	<string name="poi_cuisine_barbecue">Comida asada (barbacoa, cocción lenta)</string>
+	<string name="poi_cuisine_barbecue">Barbacoa (comida asada, cocción lenta)</string>
 	<string name="poi_cuisine_noodle">Fideos</string>
 	<string name="poi_cuisine_donut">Rosquillas (donas)</string>
 	<string name="poi_cuisine_ramen">Ramen (sopa de fideos)</string>
@@ -3343,7 +3343,7 @@
 	<string name="poi_payment_transport_type">Forma de pago (transporte)</string>
 
 <string name="poi_social_facility_type">Tipo de centro social</string>
-	<string name="poi_social_facility_for">Especializado en</string>
+	<string name="poi_social_facility_for">Grupo objetivo</string>
 	<string name="poi_compressed_air_filter">Aire comprimido</string>
 	<string name="poi_vacuum_cleaner_filter">Aspiradora</string>
 
