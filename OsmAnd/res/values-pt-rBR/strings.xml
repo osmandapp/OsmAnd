@@ -638,7 +638,6 @@
     <string name="edit_tilesource_minzoom">Zoom mínimo</string>
     <string name="edit_tilesource_url_to_load">URL</string>
     <string name="edit_tilesource_choose_existing">Escolher existente…</string>
-    <string name="edit_tilesource_name">Nome</string>
     <string name="maps_define_edit">Definir/Editar…</string>
 	<string name="map_widget_fps_info">Informações de depuração FPS</string>
 	<string name="driving_region_descr">Selecionar região de direção</string>

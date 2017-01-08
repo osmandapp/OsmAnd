@@ -1096,7 +1096,6 @@ Les dades globals (entre 70 graus nord i 70 graus sud) estan basades en mesures 
     <string name="edit_tilesource_expiration_time">Expira (minuts)</string>
     <string name="edit_tilesource_minzoom">Escalat mínim</string>
     <string name="edit_tilesource_url_to_load">URL</string>
-    <string name="edit_tilesource_name">Nom</string>
     <string name="maps_define_edit">Defineix/edita…</string>
     <string name="driving_region_descr">Seleccioneu la regió de conducció: EUA, Europa, Regne Unit, Àsia i altres</string>
     <string name="driving_region">Regió de conducció</string>

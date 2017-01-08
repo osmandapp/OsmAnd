@@ -804,7 +804,6 @@
     <string name="edit_tilesource_expiration_time">Sona erecek (dakika)</string>
     <string name="edit_tilesource_url_to_load">Adres</string>
     <string name="edit_tilesource_choose_existing">Varolanı seçin…</string>
-    <string name="edit_tilesource_name">İsim</string>
     <string name="maps_define_edit">Tanımla/Düzenle…</string>
 	<string name="clear_intermediate_points">Açık ara hedefler</string>
     <string name="keep_intermediate_points">Ara hedefler tutun</string>

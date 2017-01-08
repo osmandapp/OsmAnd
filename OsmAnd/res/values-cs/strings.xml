@@ -1101,7 +1101,6 @@ Celosvětová výšková data (mezi 70 stupni severní šířky a 70 stupni již
     <string name="edit_tilesource_minzoom">Minimální zvětšení</string>
     <string name="edit_tilesource_url_to_load">URL</string>
     <string name="edit_tilesource_choose_existing">Vybrat existující…</string>
-    <string name="edit_tilesource_name">Název</string>
     <string name="local_index_tile_data_downloadable">Ke stažení: %1$s</string>
     <string name="maps_define_edit">Vytvořit/Upravit…</string>
     <string name="edit_tilesource_expiration_time">Doba platnosti (min)</string>

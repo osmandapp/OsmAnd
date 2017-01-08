@@ -23,7 +23,6 @@
     <string name="edit_tilesource_minzoom">Мінімальнае павелічэньне</string>
     <string name="edit_tilesource_url_to_load">URL</string>
     <string name="edit_tilesource_choose_existing">Абярыце існуючую…</string>
-    <string name="edit_tilesource_name">Назва</string>
     <string name="maps_define_edit">Вызначыць/зьмянiць…</string>
 	<string name="map_widget_fps_info">Адладачная інфармацыя FPS</string>
 	<string name="driving_region_descr">Абярыце рэгіён кіраваньня: ЗША, Эўропа, Вялікабрытанія, Азія і іншыя</string>

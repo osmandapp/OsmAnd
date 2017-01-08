@@ -1146,7 +1146,6 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="local_index_tile_data_maxzoom">Acercamiento máximo: %1$s</string>
     <string name="local_index_tile_data_minzoom">Acercamiento mínimo: %1$s</string>
     <string name="edit_tilesource_maxzoom">Acercamiento máximo</string>
-    <string name="edit_tilesource_name">Nombre</string>
     <string name="edit_tilesource_url_to_load">URL</string>
     <string name="maps_define_edit">Definir/Editar…</string>
     <string name="driving_region_japan">Japón</string>

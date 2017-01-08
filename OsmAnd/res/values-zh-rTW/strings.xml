@@ -1288,7 +1288,6 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="edit_tilesource_expiration_time">有效時間(分鐘)</string>
     <string name="edit_tilesource_url_to_load">URL</string>
     <string name="edit_tilesource_choose_existing">選擇現有的…</string>
-    <string name="edit_tilesource_name">名稱</string>
     <string name="maps_define_edit">定義/編輯…</string>
     <string name="about_version">版本：</string>
     <string name="shared_string_about">關於</string>

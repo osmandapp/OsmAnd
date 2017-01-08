@@ -1199,7 +1199,6 @@ OsmAnd (OSM Automated Navigation Directions) is \\\'n kaart en navigasie toepass
     <string name="edit_tilesource_minzoom">Min vergroting</string>
     <string name="edit_tilesource_url_to_load">Bronadres (URL)</string>
     <string name="edit_tilesource_choose_existing">Kies bestaande…</string>
-    <string name="edit_tilesource_name">Naam</string>
     <string name="maps_define_edit">Definieer/Wysig…</string>
 	
 	

@@ -25,7 +25,6 @@
     <string name="edit_tilesource_minzoom">Минимално увеличање</string>
     <string name="edit_tilesource_url_to_load">URL</string>
     <string name="edit_tilesource_choose_existing">Изаберите постојећи…</string>
-    <string name="edit_tilesource_name">Име</string>
     <string name="map_widget_fps_info">Подаци о грешкама брзине приказа сличица</string>
 	<string name="driving_region_japan">Јапан</string>
 	<string name="driving_region_us">Сједињене Америчке Државе</string>
@@ -33,8 +32,6 @@
 	<string name="driving_region_europe_asia">Европа и Азија</string>
 	<string name="driving_region_uk">Велика Британија, Индија, Аустралија &amp; Остало</string>
 	<string name="local_index_tile_data_minzoom">Минимални зум: %1$s</string>
-    
-    
     <string name="announce_gpx_waypoints">GPX путне тачке</string>
     <string name="speak_title">Најави…</string>
 	<string name="speak_descr">Подешавање најаве назива улица, саобраћајних упозорења, ограничења брзине</string>

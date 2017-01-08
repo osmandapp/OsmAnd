@@ -1213,7 +1213,6 @@ OsmAnd jest otwarto-źródłowym programem do nawigacji z dostępem do szerokiej
     <string name="edit_tilesource_expiration_time">Czas wygaśnięcia (minuty)</string>
     <string name="edit_tilesource_minzoom">Minimalne przybliżenie</string>
     <string name="edit_tilesource_choose_existing">Zdefiniowane…</string>
-    <string name="edit_tilesource_name">Nazwa</string>
     <string name="maps_define_edit">Zdefiniuj/Edytuj…</string>
     <string name="osmand_extended_description_4000_chars">"
 OsmAnd (OSM Automated Navigation Directions) to darmowa aplikacja z dostępem do wysokiej jakości darmowych map OpenStreetMap (OSM) o zasięgu światowym. Wszystkie mapy mogą być przechowywane na karcie pamięci urządzenia (urządzeń). Poprzez urządzenie GPS, OsmAnd oferuje wyznaczanie trasy, prezentując trasę graficznie oraz oferując zapowiedzi słowne, dla samochodu, roweru oraz ruchu pieszego. Wszystkie główne funkcje działają zarówno w trybie online, jak i offline (nie wymagają połączenia z Internetem).

@@ -1022,7 +1022,6 @@ OsmAnd ir atvērtā koda navigācijas aplikācija ar piekļuvi vispusīgiem Open
     <string name="edit_tilesource_minzoom">Minimālais mērogs</string>
     <string name="edit_tilesource_url_to_load">URL</string>
     <string name="edit_tilesource_choose_existing">Izvēlēties esošo…</string>
-    <string name="edit_tilesource_name">Vārds</string>
     <string name="maps_define_edit">Definēt/labot…</string>
 	<string name="map_widget_fps_info">FPS atkļūdošana</string>
 	<string name="driving_region_descr">Izvēlieties braukšanas apgabalu: ASV, Eiropa, Apvienotā Karaliste, Āzija un citi</string>
@@ -1032,9 +1031,6 @@ OsmAnd ir atvērtā koda navigācijas aplikācija ar piekļuvi vispusīgiem Open
 	<string name="driving_region_canada">Kanāda</string>
 	<string name="driving_region_europe_asia">Eiropa un Āzija</string>
 	<string name="driving_region_uk">Apvienotā Karaliste, Indija un citas</string>
-	    
-    
-    
     <string name="announce_gpx_waypoints">GPX ceļapunkti</string>
     <string name="speak_title">Izrunāt…</string>
 	<string name="speak_descr">ielu nosaukumus, satiksmes brīdinājumus (piespiedu apstāšanos, guļošos policistus), fotoradarus, atļauto ātrumu</string>

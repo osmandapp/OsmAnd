@@ -147,7 +147,6 @@
     <string name="edit_tilesource_minzoom">Ismanniamentu mìnimu</string>
     <string name="edit_tilesource_url_to_load">URL</string>
     <string name="edit_tilesource_choose_existing">Issèbera intre sos esistentes…</string>
-    <string name="edit_tilesource_name">Nùmene</string>
     <string name="maps_define_edit">Imposta/Muda…</string>
     <string name="map_widget_fps_info">Informatziones FPS</string>
     <string name="driving_region">Regione de ghia</string>
@@ -155,8 +154,6 @@
     <string name="driving_region_canada">Cànada</string>
     <string name="driving_region_europe_asia">Europa e Àsia</string>
     <string name="driving_region_uk">UK, Ìndia, e sìmiles</string>
-
-
     <string name="driving_region_descr">Issèbera sa regione de ghia: USA, Europa, UK, Àsia e Àteras</string>
     <string name="driving_region_japan">Giappone</string>
     <string name="announce_gpx_waypoints">Puntos de coladòrgiu GPX</string>

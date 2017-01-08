@@ -1131,7 +1131,6 @@
     <string name="edit_tilesource_maxzoom">Μεγ Εστίαση</string>
     <string name="edit_tilesource_expiration_time">Λήξη (λεπτά)</string>
     <string name="edit_tilesource_minzoom">Ελαχ εστίαση</string>
-    <string name="edit_tilesource_name">Όνομα</string>
     <string name="maps_define_edit">Καθορισμός/Επεξεργασία…</string>
 	
 	<string name="local_index_tile_data_downloadable">Διαθέσιμο για λήψη: %1$s</string>

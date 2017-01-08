@@ -1323,7 +1323,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="edit_tilesource_minzoom">Zoom minimo</string>
     <string name="edit_tilesource_url_to_load">URL</string>
     <string name="edit_tilesource_choose_existing">Scegli fra gli esistenti…</string>
-    <string name="edit_tilesource_name">Nome</string>
     <string name="maps_define_edit">Imposta/Modifica…</string>
 
     <string name="about_version">Versione:</string>

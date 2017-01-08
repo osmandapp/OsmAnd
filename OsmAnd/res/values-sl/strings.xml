@@ -1356,7 +1356,6 @@ Afganistan, Albanija, Alžirija, Andora, Angola, Angvila, Antigva in Barbuda, Ar
     <string name="edit_tilesource_minzoom">Najmanjše približanje</string>
     <string name="edit_tilesource_url_to_load">Spletni naslov</string>
     <string name="edit_tilesource_choose_existing">Izbor obstoječe …</string>
-    <string name="edit_tilesource_name">Ime</string>
     <string name="maps_define_edit">Določi/Uredi …</string>
 
     <string name="base_world_map">Osnovni zemljevid sveta</string>

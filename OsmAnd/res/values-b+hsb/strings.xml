@@ -370,7 +370,6 @@
     <string name="about_version">Wersija :</string>
     <string name="local_index_tile_data_maxzoom">Maksimalny zoom: %1$s</string>
     <string name="local_index_tile_data_minzoom">Minimalny zoom: %1$s</string>
-    <string name="edit_tilesource_name">Mjeno</string>
     <string name="driving_region_descr">Wubjerće region jězdźenja: Europa, Azija, Zjednoćene staty abo druhe</string>
     <string name="driving_region">Region jězdźenja</string>
     <string name="driving_region_japan">Japanska</string>

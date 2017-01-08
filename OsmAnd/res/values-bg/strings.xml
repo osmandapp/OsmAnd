@@ -1180,8 +1180,6 @@
     <string name="edit_tilesource_minzoom">Минимално увеличение</string>
     <string name="edit_tilesource_url_to_load">URL</string>
     <string name="edit_tilesource_choose_existing">Изберете съществуващ…</string>
-    <string name="edit_tilesource_name">Име</string>
-
 
     <string name="maps_define_edit">Въвеждане/редактиране…</string>
     <string name="guidance_preferences_descr">Предпочитания за навигацията</string>

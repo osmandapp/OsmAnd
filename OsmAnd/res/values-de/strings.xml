@@ -1290,7 +1290,6 @@ Die globalen Daten (zwischen N 70° und S 70°) basieren auf Messungen von SRTM 
 	<string name="edit_tilesource_minzoom">Min Zoom</string>
 	<string name="edit_tilesource_url_to_load">URL</string>
 	<string name="edit_tilesource_choose_existing">Wähle vorhandene…</string>
-	<string name="edit_tilesource_name">Name</string>
 	<string name="maps_define_edit">Definieren/Bearbeiten…</string>
 	<string name="shared_string_and">und</string>
 	<string name="shared_string_or">oder</string>

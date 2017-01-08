@@ -873,7 +873,6 @@
     <string name="edit_tilesource_successfully">타일 소스 %1$s 는 성공적으로 저장됨</string>
     <string name="edit_tilesource_maxzoom">최대 줌</string>
     <string name="edit_tilesource_minzoom">최소 줌</string>
-    <string name="edit_tilesource_name">이름</string>
     <string name="map_widget_fps_info">FPS 디버그 정보</string>
 	<string name="driving_region_descr">운전 지역 선택 : 미국, 유럽, 영국, 아시아 및 기타</string>
 	<string name="driving_region">운전 지역</string>
@@ -882,11 +881,6 @@
 	<string name="driving_region_canada">캐나다</string>
 	<string name="driving_region_europe_asia">한국 &amp; 유럽</string>
 	<string name="driving_region_uk">영국, 인도, 호주 및 기타</string>
-	    
-    
-    
-    
-    
     <string name="announce_gpx_waypoints">GPX 경유지</string>
     <string name="speak_title">알리기…</string>
 	<string name="speak_descr">거리 이름, 교통 경고(강제 정지, 속도 범프), 속도 카메라 경고, 제한 속도를 알리기 위해  구성합니다</string>

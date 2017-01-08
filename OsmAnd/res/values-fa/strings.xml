@@ -1361,18 +1361,11 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
     <string name="edit_tilesource_expiration_time">انقضاء (دقیقه)</string>
     <string name="edit_tilesource_minzoom">حداقل زوم</string>
     <string name="edit_tilesource_choose_existing">انتخاب موجود…</string>
-    <string name="edit_tilesource_name">نام</string>
     <string name="maps_define_edit">تعریف/ویرایش…</string>
 	<string name="driving_region">منطقه رانندگی</string>
 	<string name="edit_tilesource_elliptic_tile">نقشه بیضوی استوانه ای (مرکاتور)</string>
     <string name="edit_tilesource_url_to_load">URL</string>
-    
-	
-    
-    
-    
-    
-    
+
     <string name="map_magnifier">ذره‌بین نقشه</string>
     <string name="base_world_map">نقشه کل جهان</string>
 	<string name="shared_string_and">و</string>

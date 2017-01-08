@@ -398,7 +398,6 @@ As pistas gravadas pódense compartir ou empregar colaborando con OSM. Os atleta
     <string name="edit_tilesource_minzoom">Ampliación mínima</string>
     <string name="edit_tilesource_url_to_load">URL</string>
     <string name="edit_tilesource_choose_existing">Escoller unha existente…</string>
-    <string name="edit_tilesource_name">Nome</string>
     <string name="maps_define_edit">Definir/Editar…</string>
 	<string name="map_widget_fps_info">Información de depuración de FPS</string>
 	<string name="driving_region_descr">Seleccione a rexión na que conducir: Estados Unidos, Europa, Reino Unido, Asia e outras</string>
@@ -408,11 +407,6 @@ As pistas gravadas pódense compartir ou empregar colaborando con OSM. Os atleta
 	<string name="driving_region_canada">Canadá</string>
 	<string name="driving_region_europe_asia">Europa e Asia</string>
 	<string name="driving_region_uk">Reino Unido, India e semellantes</string>
-	    
-    
-    
-    
-    
     <string name="speak_title">Anunciar…</string>
 	<string name="speak_descr">Configurar para anunciar os nomes das rúas, os avisos de tráfico (detencións forzosas, bandas sonoras), os avisos de radar e os límites de velocidade</string>
 	<string name="speak_street_names">Nomes das rúas (TTS)</string>

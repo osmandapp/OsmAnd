@@ -1237,12 +1237,9 @@ A globális adatok (az északi 70° és déli 70° szélesség között) az SRTM
     <string name="edit_tilesource_minzoom">Min zoom</string>
     <string name="edit_tilesource_url_to_load">URL</string>
     <string name="edit_tilesource_choose_existing">Meglévő kiválasztása…</string>
-    <string name="edit_tilesource_name">Név</string>
     <string name="maps_define_edit">Megad/Szerkeszt…</string>
 
     <string name="base_world_map">Föld alaptérkép</string>
-
-
     <string name="map_magnifier">Térképnagyító</string>
 
     <string name="animate_routing_route_not_calculated">Előbb tervezz útvonalat</string>

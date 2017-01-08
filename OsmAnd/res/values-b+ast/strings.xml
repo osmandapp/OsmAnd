@@ -404,7 +404,6 @@
     <string name="local_index_tile_data_maxzoom">Zoom máximu: %1$s</string>
     <string name="local_index_tile_data_minzoom">Zoom mínimu: %1$s</string>
     <string name="edit_tilesource_url_to_load">URL</string>
-    <string name="edit_tilesource_name">Nome</string>
     <string name="maps_define_edit">Definir/Editar…</string>
     <string name="driving_region_japan">Xapón</string>
     <string name="driving_region_us">Estaos Xuníos</string>

@@ -1040,7 +1040,6 @@ Premtenu por vidi sur la mapo</string>
     <string name="edit_tilesource_minzoom">Minimuma skalo</string>
     <string name="edit_tilesource_url_to_load">URL</string>
     <string name="edit_tilesource_choose_existing">Elekti ekzistantan…</string>
-    <string name="edit_tilesource_name">Nomo</string>
     <string name="maps_define_edit">Difini/Redakti…</string>
     <string name="map_widget_fps_info">Montri kadrojn sekunde (senerarigo)</string>
     <string name="driving_region">Trafika regiono</string>

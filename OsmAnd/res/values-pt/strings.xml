@@ -1284,15 +1284,8 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="edit_tilesource_minzoom">Zoom min</string>
     <string name="edit_tilesource_url_to_load">URL</string>
     <string name="edit_tilesource_choose_existing">Escolher existente…</string>
-    <string name="edit_tilesource_name">Nome</string>
     <string name="maps_define_edit">Definir/Editar…</string>
 	<string name="map_widget_fps_info">Depuração FPS</string>
-	
-    
-    
-    
-    
-    
     <string name="map_magnifier">Lupa do mapa</string>
     <string name="base_world_map">Mapa mundial</string>
 	<string name="osmand_plus_long_description_1000_chars">" → → Osmand+ (OSM automatizados direções de navegação) ↵ ↵ → → OsmAnd+ é uma aplicação de navegação de código aberto, com acesso a uma ampla variedade de dados globais OpenStreetMap (OSM). Todos os dados cartográficos (mapas vectoriais ou de imagem) podem ser armazenados no cartão de memória do telefone para uso off-line. OsmAnd também oferece funcionalidade de roteamento off-line e on-line , incluindo orientação por voz curva-a-curva. ↵ ↵ → → OsmAnd + é a versão do aplicativo pago, ao comprá-lo você apoia o projecto, financia o desenvolvimento de novas funcionalidades, e recebe as últimas actualizações. ↵ ↵ → → Algumas das características principais: ↵ → → - funcionalidade off-line completa ( armazenar mapas vectoriais obtidos ou imagens numa pasta seleccionável) ↵ → → - mapas vectoriais compactos off-line disponíveis para todo o mundo ↵ → → - Download ilimitado de mapas de países ou regiões diretamente no aplicativo ↵ → → - Funcionalidade Wikipedia off-line (obter POIs Wikipedia) , ótimo para passeios ↵ → → - Sobreposição de várias camadas de mapas possíveis , como GPX ou trilhas de navegação, pontos de interesse, favoritos, curvas de nível, paragens de transportes públicos, mapas adicionais com transparência personalizável ↵ → → - Busca off-line de endereços e locais ( POIs) ↵ → → - Encaminhamento Off-line para distâncias curtas (experimental) ↵ → → - Modos de Carro, Bicicleta, e Pedestre↵ → → - Vista de mapa em modo dia / noite, com comutação automatizada (opcional)↵ → → - Zoom de mapa em função da velocidade (opcional)↵ → → - Alinhamento de mapa de acordo com a bússola ou direcção do movimento (opcional)↵ → → - Indicação de vias, aviso de limite de velocidade, vozes gravadas e TTS (opcional) "</string>

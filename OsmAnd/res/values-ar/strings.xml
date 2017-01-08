@@ -201,7 +201,6 @@
     <string name="edit_tilesource_maxzoom">التّقريب الأقصى</string>
     <string name="edit_tilesource_minzoom">التصغير اﻷقصى</string>
     <string name="edit_tilesource_url_to_load">URL</string>
-    <string name="edit_tilesource_name">اسم</string>
     <string name="driving_region_descr">حدد منطقة القيادة: الولايات المتحدة، أوروبا، المملكة المتحدة، آسيا، وأخرى</string>
 	<string name="driving_region">منطقة القيادة</string>
 	<string name="driving_region_japan">اليابان</string>

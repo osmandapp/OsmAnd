@@ -427,7 +427,6 @@
     <string name="edit_tilesource_minzoom">最小显示级别</string>
     <string name="edit_tilesource_url_to_load">URL</string>
     <string name="edit_tilesource_choose_existing">选择已有来源…</string>
-    <string name="edit_tilesource_name">名称</string>
     <string name="maps_define_edit">定义/编辑…</string>
 	<string name="map_widget_fps_info">FPS 调试信息</string>
 	<string name="driving_region_descr">选择驾驶区域：美国、欧洲、英国、亚洲及其他</string>

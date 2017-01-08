@@ -1092,7 +1092,6 @@
     <string name="edit_tilesource_expiration_time">Expiră (minute)</string>
     <string name="edit_tilesource_url_to_load">URL</string>
     <string name="edit_tilesource_choose_existing">Alege una existentă…</string>
-    <string name="edit_tilesource_name">Nume</string>
     <string name="maps_define_edit">Definește/Editează…</string>
 	<string name="map_widget_fps_info">Informații depanare FPS</string>
 	<string name="driving_region_descr">Selectați regiunea de conducere: US, Europa, UK, Asia și altele</string>
@@ -1102,10 +1101,6 @@
 	<string name="driving_region_canada">Canada</string>
 	<string name="driving_region_europe_asia">Europa și Asia</string>
 	<string name="driving_region_uk">Marea Britanie, India, Australia și altele</string>
-	    
-    
-    
-    
     <string name="announce_gpx_waypoints">Anunță punctele de referință GPX</string>
     <string name="speak_title">Anunță…</string>
 	<string name="speak_street_names">Anunță numele străzilor (TTS)</string>

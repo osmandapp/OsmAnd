@@ -620,7 +620,6 @@
     <string name="edit_tilesource_minzoom">Min-zoom</string>
     <string name="edit_tilesource_url_to_load">URL</string>
     <string name="edit_tilesource_choose_existing">Velg eksisterende…</string>
-    <string name="edit_tilesource_name">Navn</string>
     <string name="maps_define_edit">Definer/rediger…</string>
     <string name="route_is_too_long">OsmAnd offline ruteplanlegging kan ta veldig lang tid (eller ikke virke noen ganger) for punkter mere enn 200km fra hverandre. Man kan da legge til mellomliggende reisemål for bedre ytelse.</string>
     <string name="auto_zoom_none">Ingen auto-zoom</string>

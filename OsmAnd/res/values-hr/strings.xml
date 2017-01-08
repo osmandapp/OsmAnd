@@ -935,7 +935,6 @@
     <string name="about_settings_descr">Podaci o inačici, licence, članovi projekta</string>
     
     <string name="edit_tilesource_choose_existing">Odaberite postojeće…</string>
-    <string name="edit_tilesource_name">Ime</string>
     <string name="maps_define_edit">Definiraj/Uredi…</string>
 	<string name="driving_region_descr">Odaberite područje u kojem vozite: SAD, Europa, Velika Britanija, Azija i ostalo</string>
 	<string name="driving_region">Područje vožnje</string>
@@ -944,9 +943,6 @@
 	<string name="driving_region_canada">Kanada</string>
 	<string name="driving_region_europe_asia">Europa i Azija</string>
 	<string name="driving_region_uk">Velika Britanija, Indija, Australija i ostalo</string>
-	    
-    
-    
     <string name="announce_gpx_waypoints">Najavi GPX međutočke</string>
     <string name="speak_title">Najaviti…</string>
 	<string name="route_descr_map_location">Karta: </string>

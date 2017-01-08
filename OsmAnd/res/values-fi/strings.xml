@@ -686,7 +686,6 @@
     <string name="edit_tilesource_minzoom">Minimi zoomi</string>
     <string name="edit_tilesource_url_to_load">URL</string>
     <string name="edit_tilesource_choose_existing">Valitse olemassaoleva…</string>
-    <string name="edit_tilesource_name">Nimi</string>
     <string name="driving_region_descr">Valitse liikkumisalue: USA, Eurooppa, UK, Aasia tai muut</string>
 	<string name="driving_region">Liikkumisalue</string>
 	<string name="driving_region_japan">Japani</string>

@@ -169,15 +169,11 @@
     <string name="edit_tilesource_maxzoom">Maksforstørring</string>
     <string name="edit_tilesource_minzoom">Minste forstørring</string>
     <string name="edit_tilesource_url_to_load">Adresse</string>
-    <string name="edit_tilesource_name">Namn</string>
     <string name="maps_define_edit">Definer/rediger …</string>
 	<string name="driving_region_japan">Japan</string>
 	<string name="driving_region_us">USA</string>
 	<string name="driving_region_canada">Canada</string>
 	<string name="driving_region_europe_asia">Europa og Asia</string>
-	    
-    
-    
     <string name="route_descr_map_location">Kart:</string>
     
     <string name="route_to">Til:</string>
