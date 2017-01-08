@@ -2036,7 +2036,6 @@ Kaj la loko kaj tempo estas montrataj ĉe la OsmAnd stirpanelo, kaj ĉe la fenes
     <string name="poi_error_unexpected_template">Senatenda eraro okazis dum la agado {0}.</string>
     <string name="poi_error_io_error_template">Eraro de en/eligo okazis dum la agado {0}.</string>
     <string name="poi_error_info_not_loaded">Ne povis legi informojn pri nodo</string>
-    <string name="poi_dialog_name">Nomo</string>
     <string name="poi_dialog_opening_hours">Malferma je</string>
     <string name="poi_dialog_comment">Komento</string>
     <string name="poi_dialog_reopen">Remalfermi</string>

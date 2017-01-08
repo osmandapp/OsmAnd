@@ -724,7 +724,6 @@ Ehhez {1} MB helyre van szükség.
     <string name="poi_error_unexpected_template">{0} művelet közben nem várt hiba történt.</string>
     <string name="poi_error_io_error_template">{0} művelet közben input/output hiba történt.</string>
     <string name="poi_error_info_not_loaded">Nincs letöltve információ a pontról</string>
-    <string name="poi_dialog_name">Név</string>
     <string name="poi_dialog_opening_hours">Nyitva</string>
     <string name="poi_dialog_comment">Megjegyzés</string>
     <string name="poi_dialog_comment_default">POI módosítás</string>

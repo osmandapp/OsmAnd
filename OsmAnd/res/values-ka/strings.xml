@@ -782,7 +782,6 @@
   <string name="poi_error_unexpected_template">გაუთვალისწინებელი შეცდომა {0}-ის შესრულების დროს.</string>
   <string name="poi_error_io_error_template">{0}-ს შესრულების დროს მოხდა შეცდომა I/O.</string>
   <string name="poi_error_info_not_loaded">უჯრედის მონაცემები ჩატვირთული არაა</string>
-  <string name="poi_dialog_name">სახელი</string>
   <string name="poi_dialog_opening_hours">გახსნა</string>
   <string name="poi_dialog_comment">კომენტარი</string>
   <string name="poi_dialog_comment_default">POI-ს შეცვლა</string>

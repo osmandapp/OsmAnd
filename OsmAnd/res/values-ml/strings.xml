@@ -194,7 +194,6 @@
     <string name="search_address_street">തെരുവ്</string>
     <string name="search_address_building">കെട്ടിടം</string>
     <string name="search_address_building_option">കെട്ടിടം</string>
-    <string name="poi_dialog_name">പേര‍്</string>
     <string name="poi_dialog_opening_hours">പ്രവേശനം</string>
     <string name="filter_current_poiButton">ഫില്‍റ്റര്‍</string>
     <string name="plugin_description_title">വിവരണം</string>

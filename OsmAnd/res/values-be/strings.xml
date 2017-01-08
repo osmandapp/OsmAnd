@@ -1298,7 +1298,6 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="poi_error_unexpected_template">Нечаканая памылка пры выкананьні дзеяньня {0}.</string>
 	<string name="poi_error_io_error_template">Адбылася памылка ўводу/вываду пры выкананьні дзеяньня {0}.</string>
 	<string name="poi_error_info_not_loaded">Адбылася памылка пры чытаньні інфармацыі пра POI</string>
-	<string name="poi_dialog_name">Назва</string>
 	<string name="poi_dialog_opening_hours">Гадзіны працы</string>
 	<string name="poi_dialog_comment">Каментар</string>
 	<string name="poi_dialog_comment_default">Зьмена POI</string>

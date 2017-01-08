@@ -603,7 +603,6 @@ El servicio de navegación se ha cambiado temporalmente al servicio con conexió
     <string name="poi_error_unexpected_template">Se produjo un error inesperado al realizar la acción {0}.</string>
     <string name="poi_error_io_error_template">Se produjo un error de entrada/salida al realizar la acción {0}.</string>
     <string name="poi_error_info_not_loaded">No se cargó la información del nodo</string>
-    <string name="poi_dialog_name">Nombre</string>
     <string name="poi_dialog_opening_hours">Abierto</string>
     <string name="poi_dialog_comment">Comentario</string>
     <string name="poi_dialog_comment_default">Cambiando PDI</string>

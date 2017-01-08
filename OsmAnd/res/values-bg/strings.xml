@@ -1092,7 +1092,6 @@
     <string name="poi_error_unexpected_template">Възникна грешка при изпълнението на действие {0}.</string>
     <string name="poi_error_io_error_template">Възникна входно/изходна грешка при изпълнението на {0}.</string>
     <string name="poi_error_info_not_loaded">Информация за точката не беше заредена</string>
-    <string name="poi_dialog_name">Име</string>
     <string name="poi_dialog_opening_hours">Отворено</string>
     <string name="poi_dialog_comment">Коментар</string>
     <string name="poi_dialog_comment_default">Промяна на POI</string>

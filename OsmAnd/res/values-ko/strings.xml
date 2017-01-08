@@ -754,7 +754,6 @@
 
 <string name="poi_error_info_not_loaded">노드에 대한 정보가 적재되지 않았습니다</string>
 
-<string name="poi_dialog_name">이름</string>
 <string name="poi_dialog_opening_hours">열기</string>
 <string name="poi_dialog_comment">설명</string>
 <string name="poi_dialog_comment_default">POI 변경</string>

@@ -771,7 +771,6 @@ Nyttjat utrymme är {1} MB.
 
     <string name="fav_points_edited">Favoritpunkten redigerades</string>
     <string name="edit_filter_delete_message">Filtret {0} har tagits bort</string>
-    <string name="poi_dialog_name">Namn</string>
     
     <string name="foot">ft</string>
     <string name="mile_per_hour">mph</string>

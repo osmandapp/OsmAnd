@@ -1793,7 +1793,6 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="poi_error_unexpected_template">Error inesperado durante la acción {0}.</string>
     <string name="poi_error_io_error_template">Error de entrada/salida durante la acción {0}.</string>
     <string name="poi_error_info_not_loaded">No se cargó la información del nodo</string>
-    <string name="poi_dialog_name">Nombre</string>
     <string name="poi_dialog_opening_hours">Abierto</string>
     <string name="poi_dialog_comment">Comentar</string>
     <string name="poi_dialog_comment_default">Cambiando PDI</string>

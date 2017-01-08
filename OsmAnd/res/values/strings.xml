@@ -2326,7 +2326,6 @@ If you need help with OsmAnd application, please contact our support team: suppo
     <string name="poi_error_unexpected_template">Unexpected error occurred while performing action {0}.</string>
     <string name="poi_error_io_error_template">I/O error occurred while performing action {0}.</string>
     <string name="poi_error_info_not_loaded">Info about node was not loaded</string>
-    <string name="poi_dialog_name">Name</string>
     <string name="poi_dialog_opening_hours">Open</string>
     <string name="poi_dialog_comment">Comment</string>
     <string name="poi_dialog_reopen">Reopen</string>

@@ -433,7 +433,6 @@
 	<string name="poi_action_change">muuta</string>
 	<string name="poi_action_succeded_template">Toiminto {0} suoritettiin onnistuneesti.</string>
 	<string name="poi_error_unexpected_template">Tapahtui odottamaton virhe suoritettaessa toimintoa {0}.</string>
-	<string name="poi_dialog_name">Nimi</string>
 	<string name="poi_dialog_opening_hours">Avoinna</string>
 	
 	<string name="edit_filter_save_as_menu_item">Tallenna nimellä</string>

@@ -788,7 +788,6 @@
     <string name="poi_error_unexpected_template">Произошла неожиданная ошибка при выполнении действия {0}.</string>
     <string name="poi_error_io_error_template">Произошла ошибка ввода/вывода при выполнении действия {0}.</string>
     <string name="poi_error_info_not_loaded">Произошла ошибка при загрузке информации о POI</string>
-    <string name="poi_dialog_name">Название</string>
     <string name="poi_dialog_opening_hours">Время работы</string>
     <string name="poi_dialog_comment">Комментарий</string>
     <string name="poi_dialog_comment_default">Изменение POI</string>

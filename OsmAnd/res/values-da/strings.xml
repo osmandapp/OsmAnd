@@ -958,7 +958,6 @@ Liste over understøttede lande (dybest set hele verden!): Afghanistan, Albanien
     <string name="poi_dialog_other_tags_message">Alle de øvrige mærker bevares</string>
     <string name="poi_dialog_comment">Kommentar</string>
     <string name="poi_dialog_opening_hours">Åben</string>
-    <string name="poi_dialog_name">Navn</string>
     <string name="poi_error_io_error_template">I/O-fejl opstod under udførelsen af handling {0}.</string>
     <string name="poi_error_unexpected_template">Uventet fejl opstod under udførelsen af handling {0}.</string>
     <string name="poi_action_succeded_template">Handling {0} fuldført.</string>
