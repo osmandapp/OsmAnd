@@ -118,7 +118,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="68dp"
             android:layout_marginRight="16dp"
-            android:text="Leave field blank and OsmAnd will use the address or name of a place for the favorite point"
+            android:text="@string/quick_action_fav_name_descr"
             android:textColor="?android:textColorSecondary"
             android:textSize="@dimen/default_sub_text_size"
             android:layout_marginBottom="16dp"/>
