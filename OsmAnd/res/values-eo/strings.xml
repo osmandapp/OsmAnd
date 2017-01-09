@@ -1179,7 +1179,7 @@ Premtenu por vidi sur la mapo</string>
     <string name="map_widget_audionotes">Sonaj notoj</string>
     <string name="index_srtm_parts">partoj</string>
     <string name="index_srtm_ele">Nivelkurboj</string>
-    <string name="audionotes_location_not_defined">Loko por la noto ne estas ankoraŭ precizigita. \"Uzi lokon...\" por asigni noton al la difina loko</string>
+    <string name="audionotes_location_not_defined">Loko por la noto ne estas ankoraŭ precizigita. \"Uzi lokon...\" por asigni noton al la difina loko.</string>
     <string name="download_select_map_types">Aliaj mapoj</string>
     <string name="download_roads_only_item">Nur vojoj</string>
     <string name="download_srtm_maps">Nivelkurboj</string>
@@ -2546,7 +2546,7 @@ kaj pli...
 
     <string name="quick_action_item_action">Ago %d</string>
     <string name="quick_action_item_screen">Ekrano %d</string>
-    <string name="quick_action_add_marker">Aldoni markon</string>
+    <string name="quick_action_add_marker">Aldoni map-markon</string>
     <string name="quick_action_add_poi">Aldoni interesejon</string>
     <string name="quick_action_map_style">Ŝanĝi mapan montrmanieron</string>
     <string name="quick_action_map_style_switch">Mapa montrmaniero ŝanĝita al \"%s\".</string>
@@ -2567,15 +2567,15 @@ kaj pli...
     <string name="quick_actions_delete_text">Ĉu vi certe volas forigi agon \"%s\"?</string>
     <string name="quick_favorites_show_favorites_dialog">Montri fenestron de ŝatataj ejoj</string>
     <string name="quick_favorites_name_preset">Nomo</string>
-    <string name="quick_action_add_marker_descr">Premado sur ag-butono aldonos markon al difinita loko.</string>
-    <string name="quick_action_add_gpx_descr">Premado sur ag-butono aldonos GPX-navigadpunkton al difinita loko.</string>
-    <string name="quick_action_take_audio_note_descr">Premado sur ag-butono aldonos sonan noton al difinita loko.</string>
-    <string name="quick_action_take_video_note_descr">Premado sur ag-butono aldonos videan noton al difinita lokon.</string>
-    <string name="quick_action_take_photo_note_descr">Premado sur ag-butono aldonos fotan noton al difinita loko.</string>
-    <string name="quick_action_add_osm_bug_descr">Premado sur ago aldonos OSM-rimarkon al difinita loko.</string>
-    <string name="quick_action_add_poi_descr">Premado sur ago aldonos interesejon al difinita loko.</string>
+    <string name="quick_action_add_marker_descr">Premado sur ag-butono aldonos map-markon al ekrana centro.</string>
+    <string name="quick_action_add_gpx_descr">Premado sur ag-butono aldonos GPX-navigadpunkton al ekrana centro.</string>
+    <string name="quick_action_take_audio_note_descr">Premado sur ag-butono aldonos sonan noton al ekrana centro.</string>
+    <string name="quick_action_take_video_note_descr">Premado sur ag-butono aldonos videan noton al ekrana centro.</string>
+    <string name="quick_action_take_photo_note_descr">Premado sur ag-butono aldonos fotan noton al al ekrana centro.</string>
+    <string name="quick_action_add_osm_bug_descr">Premado sur ag-butono aldonos OSM-rimarkon al ekrana centro.</string>
+    <string name="quick_action_add_poi_descr">Premado sur ag-butono aldonos interesejon al ekrana centro.</string>
     <string name="quick_action_navigation_voice_descr">Premado sur ago aktivigos aŭ malaktivigos voĉon dum navigado.</string>
-    <string name="quick_action_add_parking_descr">Premado sur ago aldonos pozicion de parkumado al difinita loko.</string>
+    <string name="quick_action_add_parking_descr">Premado sur ag-butono aldonos pozicion de parkumado al ekrana centro.</string>
     <string name="quick_action_favorite_dialog">Montri fenestron de ŝatataj ejoj</string>
     <string name="quick_action_add_poi_dialog">Montri fenestron de aldoni interesejon</string>
     <string name="quick_action_gpx_dialog">Montri fenestron de GPX-navigadpunkto</string>
@@ -2583,7 +2583,7 @@ kaj pli...
     <string name="favorite_empty_place_name">Loko</string>
     <string name="quick_action_duplicates">Difinita nomo de rapida ago estas jam uzata, ŝanĝante ĝin al %1$s por eviti duplikaton.</string>
     <string name="quick_action_duplicate">Duplikata nomo de rapida ago</string>
-    <string name="quick_action_showhide_favorites_descr">Premado sur ago montros aŭ kaŝos ŝatatajn ejojn sur mapo.</string>
+    <string name="quick_action_showhide_favorites_descr">Premado sur ag-butono montros aŭ kaŝos ŝatatajn ejojn sur mapo.</string>
     <string name="quick_action_showhide_poi_descr">Premado sur ago montros aŭ kaŝos interesejojn sur mapo.</string>
     <string name="quick_action_showhide_favorites_title">Montri/kaŝi ŝatatajn</string>
     <string name="quick_action_favorites_show">Montri ŝatatajn</string>
@@ -2598,10 +2598,10 @@ kaj pli...
     <string name="quick_action_fav_name_descr">Lasu kampon malplenan por aŭtomate uzi adreson aŭ nomon de ejo</string>
     <string name="quick_action_bug_descr">Tiu ĉi mesaĝo mem-kompletiĝos en komenta kampo.</string>
     <string name="quick_action_bug_message">Mesaĝo</string>
-    <string name="quick_action_category_descr">Elektu kategorion por konservi ŝatatan ejon.</string>
-    <string name="quick_action_gpx_category_descr">Elektu malnepran kategorion por GPX-navigadpunkton.</string>
+    <string name="quick_action_category_descr">Elektu kategorion por konservi ŝatatan ejon</string>
+    <string name="quick_action_gpx_category_descr">Elektu malnepran kategorion por GPX-navigadpunkton</string>
     <string name="quick_action_poi_list">Listo de interesejoj</string>
-    <string name="quick_action_sh_poi_descr">Vi povas aldoni kelkajn kategoriojn por interesejoj por montri sur mapo.</string>
+    <string name="quick_action_sh_poi_descr">Vi povas aldoni kelkajn kategoriojn por interesejoj por montri sur mapo</string>
     <string name="quick_action_map_style_descr">Premado sur ag-butono ŝanĝos mapan montrmanieronm, laŭ lista ordo.</string>
     <string name="quick_action_map_style_action">Aldoni mapan montrmanieron</string>
     <string name="quick_action_empty_param_error">Parametroj ne povas esti malplenaj</string>
@@ -2622,4 +2622,5 @@ kaj pli...
     <string name="quick_action_btn_tutorial_title">Ŝanĝi pozicion de butono</string>
     <string name="quick_action_btn_tutorial_descr">Premtenu kaj ŝovu la butonon por ŝanĝi ĝian pozicion sur ekrano</string>
 <string name="shared_string_action_name">Nomo de ago</string>
-</resources>
+<string name="quick_action_interim_dialog">Montri transiran fenestron</string>
+    </resources>
