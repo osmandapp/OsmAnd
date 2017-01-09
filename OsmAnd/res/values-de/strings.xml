@@ -2662,4 +2662,6 @@ und vieles mehr ...
     <string name="quick_action_favorites_hide">Favoriten ausblenden</string>
     <string name="quick_action_category_descr">Wählen Sie eine Kategorie um den Favorit unter dieser zu speichern</string>
     <string name="quick_action_gpx_category_descr">Wählen Sie eine optionale Kategorie</string>
+    <string name="configure_screen_quick_action">Schnellaktion</string>
+
     </resources>
