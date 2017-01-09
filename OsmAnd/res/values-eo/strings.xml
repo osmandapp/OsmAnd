@@ -2576,7 +2576,6 @@ kaj pli...
     <string name="quick_action_add_poi_descr">Premado sur ag-butono aldonos interesejon al ekrana centro.</string>
     <string name="quick_action_navigation_voice_descr">Premado sur ago aktivigos aŭ malaktivigos voĉon dum navigado.</string>
     <string name="quick_action_add_parking_descr">Premado sur ag-butono aldonos pozicion de parkumado al ekrana centro.</string>
-    <string name="quick_action_add_poi_dialog">Montri fenestron de aldoni interesejon</string>
     <string name="favorite_autofill_toast_text">" estas konservita al "</string>
     <string name="favorite_empty_place_name">Loko</string>
     <string name="quick_action_duplicates">Difinita nomo de rapida ago estas jam uzata, ŝanĝante ĝin al %1$s por eviti duplikaton.</string>

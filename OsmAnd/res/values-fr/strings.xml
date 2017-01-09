@@ -2515,7 +2515,6 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="quick_favorites_show_favorites_dialog">Afficher la liste des favoris</string>
     <string name="quick_favorites_name_preset">Nom du réglage</string>
     <string name="shared_string_action_name">Nom de l\'action</string>
-    <string name="quick_action_add_poi_dialog">Afficher la fenêtre d\'ajout de PI</string>
     <string name="favorite_autofill_toast_text">" a été enregistré vers "</string>
     <string name="favorite_empty_place_name">Emplacement</string>
     <string name="quick_action_duplicates">Ce nom existe déjà, l\'action rapide a été renommée en %1$s pour éviter les doublons.</string>

@@ -2497,7 +2497,6 @@ If you need help with OsmAnd application, please contact our support team: suppo
     <string name="quick_action_navigation_voice_descr">Tapping the action button will disable or enable voice guidance during navigation.</string>
     <string name="quick_action_add_parking_descr">Tapping the action button will add a parking place at the screen center location.</string>
     <string name="quick_action_interim_dialog">Show an interim dialog</string>
-    <!-- string name="quick_action_add_poi_dialog">Show the add POI dialog</string -->
     <string name="favorite_autofill_toast_text">" is saved to "</string>
     <string name="favorite_empty_place_name">Place</string>
     <string name="quick_action_duplicates">Specified quick action name already in use, was changed to %1$s to avoid duplication.</string>
