@@ -2544,7 +2544,6 @@ Si amas a OsmAnd, OSM y quieres apoyarlos, esta es una perfecta manera de hacerl
     <string name="quick_action_add_poi_descr">Pulsando el botón de acción, añadirá un PDI en la ubicación central de la pantalla.</string>
     <string name="quick_action_navigation_voice_descr">Pulsando el botón de acción, desactivará o activará las indicaciones por voz durante la navegación.</string>
     <string name="quick_action_add_parking_descr">Pulsando el botón de acción, añadirá un lugar de estacionamiento en la ubicación central de la pantalla.</string>
-    <string name="quick_action_favorite_dialog">Mostrar el diálogo del favorito</string>
     <string name="quick_action_add_poi_dialog">Mostrar el diálogo de adición de PDI</string>
     <string name="quick_action_gpx_dialog">Mostrar el diálogo del punto de ruta GPX</string>
     <string name="favorite_autofill_toast_text">" se guardó como "</string>

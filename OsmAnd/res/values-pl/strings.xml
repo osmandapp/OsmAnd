@@ -2781,7 +2781,6 @@ i więcej...
     <string name="quick_action_add_poi_descr">Naciśnięcie przycisku akcji doda użyteczne miejsce w centrum ekranu.</string>
     <string name="quick_action_navigation_voice_descr">Naciśnięcie przycisku akcji włączy lub wyłączy podpowiedzi głosowe podczas nawigacji.</string>
     <string name="quick_action_add_parking_descr">Naciśnięcie przycisku akcji doda pozycję parkowania w centrum ekranu.</string>
-    <string name="quick_action_favorite_dialog">Pokaż okno ulubionych</string>
     <string name="quick_action_gpx_dialog">Pokaż okno punktu pośredniego GPX</string>
     <string name="favorite_autofill_toast_text">" został zapisany do "</string>
     <string name="quick_action_duplicates">Określona nazwa szybkiej akcji jest już w użyciu, zmieniam ją na %1$s aby uniknąć duplikacji.</string>
