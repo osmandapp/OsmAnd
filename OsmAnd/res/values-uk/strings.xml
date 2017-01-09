@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
   <string name="asap">Швидко</string>
   
   <string name="route_roundabout">Круговий рух : %1$d з’їзд</string>
@@ -2388,4 +2389,153 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="lang_en_gb">Англійська (Сполучене Королівство)</string>
     <string name="lang_be_by">Білоруська (Латинка)</string>
     <string name="lang_kn">Каннада</string>
+    <string name="rendering_attr_contourDensity_description">Частота горизонталей</string>
+    <string name="rendering_attr_contourDensity_name">Частота горизонталей</string>
+    <string name="rendering_value_high_name">Висока</string>
+    <string name="rendering_value_medium_w_name">Середня</string>
+    <string name="rendering_value_low_name">Низька</string>
+    <string name="rendering_attr_contourWidth_description">Товщина горизонталей</string>
+    <string name="rendering_attr_contourWidth_name">Товщина горизонталей</string>
+    <string name="rendering_attr_hideWaterPolygons_description">Воду</string>
+    <string name="rendering_attr_hideWaterPolygons_name">Приховати воду</string>
+    <string name="legacy_search">Старий пошук</string>
+    <string name="show_legacy_search">Показувати старий пошук</string>
+    <string name="show_legacy_search_desc">Дозволити старий пошук в меню</string>
+    <string name="routing_attr_allow_motorway_name">Дозволити автомагістралі</string>
+    <string name="routing_attr_allow_motorway_description">Дозволити автомагістралі</string>
+    <string name="wiki_around">Статті Вікіпедії поруч</string>
+    <string name="search_map_hint">Пошук міста або країни</string>
+    <string name="route_roundabout_short">Поверніть на %1$d з’їзд</string>
+    <string name="upload_poi">Вивантажити POI</string>
+    <string name="route_calculation">Побудова маршруту</string>
+    <string name="gpx_no_tracks_title">У вас ще немає треків</string>
+    <string name="gpx_no_tracks_title_folder">Ви також можете додати треки у теку</string>
+    <string name="gpx_add_track">Додати трек</string>
+    <string name="gpx_appearance">Вигляд</string>
+    <string name="osmo_share_location">Поділитися</string>
+    <string name="osmo_pause_location">Пауза</string>
+    <string name="osmo_service_running">Сервіс OsMo запущений</string>
+    <string name="trip_rec_notification_settings">Запис поїздки (немає даних)</string>
+    <string name="trip_rec_notification_settings_desc">Показувати сповіщення, яке дозволить почати запис за допомогою кнопки „Запис поїздки“</string>
+    <string name="shared_string_notifications">Повідомлення</string>
+    <string name="shared_string_continue">Продовжити</string>
+    <string name="shared_string_pause">Пауза</string>
+    <string name="shared_string_trip">Поїздка</string>
+    <string name="shared_string_recorded">Записано</string>
+    <string name="shared_string_record">Запис</string>
+    <string name="gpx_logging_no_data">Немає даних</string>
+    <string name="release_2_5">"
+ • Клікабельні іконки на мапі
+
+• Гнучка фільтрація POI в пошуку: шукайте ресторани за типом кухні, кемпінги за наявністю зручностей 
+
+• Новий стиль мапи Topo для пішого туризму і велосипедистів 
+
+• Покращений запис поїздки (нові налаштування) 
+
+• Покращені навігаційні повідомлення (Android Wear) 
+
+• Безліч інших поліпшень і виправлень помилок 
+
+і багато іншого …
+ "</string>
+    <string name="rendering_attr_contourColorScheme_description">Колірна схема горизонталей</string>
+    <string name="save_track_min_speed">Мінімальна швидкість для запису</string>
+    <string name="save_track_min_speed_descr">Виберіть мінімальну швидкість, при перевищенні якої точка буде записана в трек</string>
+    <string name="save_track_min_distance">Мінімальна дистанція для запису</string>
+    <string name="save_track_min_distance_descr">Виберіть відстань, при перевищенні якого точка буде записана в трек</string>
+    <string name="save_track_precision">Мінімально допустима точність</string>
+    <string name="save_track_precision_descr">Виберіть мінімально допустиму точність визначення координат</string>
+    <string name="christmas_poi">Різдвяні POI</string>
+    <string name="christmas_desc">Напередодні різдвяних і новорічних свят, ви можете вибрати для відображення POI, пов\'язані з Різдвом: ялинки, ярмарки і т.п.</string>
+    <string name="christmas_desc_q">Показати різдвяні POI?</string>
+    <string name="rendering_value_light_brown_name">Світло-коричневий</string>
+    <string name="rendering_value_dark_brown_name">Темно-коричневий</string>
+    <string name="rendering_attr_contourColorScheme_name">Колірна схема горизонталей</string>
+    <string name="rendering_attr_surfaceIntegrity_name">Якість дорожнього покриття</string>
+    <string name="search_hint">Введіть назву міста, адресу, POI</string>
+    <string name="translit_name_if_miss">Транслітерація якщо назва на %1$s відсутня</string>
+    <string name="translit_names">Транслітерація назв</string>
+    <string name="edit_filter">Редагувати категорії</string>
+    <string name="subcategories">Підкатегорії</string>
+    <string name="selected_categories">Вибрані підкатегорії</string>
+    <string name="create_custom_poi">Налаштування пошуку</string>
+    <string name="custom_search">Налаштувати пошук</string>
+    <string name="shared_string_filters">Фільтри</string>
+    <string name="apply_filters">Застосувати фільтри</string>
+    <string name="save_filter">Зберегти фільтр</string>
+    <string name="delete_filter">Вилучити фільтр</string>
+    <string name="new_filter">Новий фільтр</string>
+    <string name="new_filter_desc">Введіть назву для нового фільтра. Ви зможете його знайти у списку Категорії.</string>
+    <string name="osm_live_payment_desc">Абонентська плата буде стягуватися щомісяця. Скасувати підписку можна на Google Play в будь-який момент.</string>
+    <string name="donation_to_osm">Пожертвування для спільноти OpenStreetMap</string>
+    <string name="donation_to_osm_desc">Частина вашого пожертвування буде відправлена користувачам OSM, що вносять зміни в OpenStreetMaps. Вартість передплати при цьому залишається незмінною.</string>
+    <string name="osm_live_subscription_desc">Підписка включає в себе щогодинні, щоденні і щотижневі оновлення, а також необмежену кількість доступних завантажень для усіх мап з усього світу.</string>
+    <string name="get_it">Отримати</string>
+    <string name="get_for">Отримати на %1$s</string>
+    <string name="get_for_month">Отримати за %1$s на місяць</string>
+    <string name="osm_live_banner_desc">Отримайте необмежені завантаження для мап, а також оновлення мап частіше ніж один раз на місяць: щотижня, щодня або щогодини.</string>
+    <string name="osmand_plus_banner_desc">Повна версія OsmAnd з необмеженою кількістю завантажень і щомісячних оновлень для мап.</string>
+    <string name="si_mi_meters">Милі / метри</string>
+    <string name="skip_map_downloading">Пропустити завантаження мап</string>
+    <string name="skip_map_downloading_desc">У вас немає завантажених мап. Ви можете вибрати мапу зі списку або завантажити її пізніше за допомогою меню — %1$s.</string>
+    <string name="search_another_country">Виберіть інший регіон</string>
+    <string name="search_map">Пошук мапи…</string>
+    <string name="first_usage_wizard_desc">OsmAnd визначить ваше місце розташування і запропонує завантажити мапи для цієї області.</string>
+    <string name="location_not_found">Неможливо визначити місце розташування</string>
+    <string name="no_inet_connection">З’єднання з Інтернетом відсутнє</string>
+    <string name="no_inet_connection_desc_map">Потрібно завантажити мапи.</string>
+    <string name="search_location">Позиціонування…</string>
+    <string name="storage_free_space">Вільне місце</string>
+    <string name="storage_place_description">OsmAnd буде зберігати дані (мапи, маршрути та ін.) у %1$s.</string>
+    <string name="give_permission">Дати дозвіл</string>
+    <string name="allow_access_location">Дозволити доступ до місця розташування</string>
+    <string name="first_usage_greeting">Прокладайте маршрути і відкривайте нові для себе місця без підключення до Інтернету</string>
+    <string name="search_my_location">Визначити моє розташування</string>
+    <string name="no_update_info_desc">Не перевіряти інформацію про нові версії і знижки від OsmAnd</string>
+    <string name="no_update_info">Не показувати оновлення</string>
+    <string name="update_all_maps_now">Ви хочете оновити усі мапи зараз?</string>
+    <string name="clear_tile_data">Очистити усі кахлі</string>
+    <string name="routing_attr_short_way_name">Економічний шлях</string>
+    <string name="routing_attr_short_way_description">Використання економічного шляху (зазвичай коротше)</string>
+    <string name="replace_favorite_confirmation">Ви впевнені, що хочете замінити улюблені %1$s?</string>
+    <string name="rendering_attr_hideOverground_name">Надземні об’єкти</string>
+    <string name="shared_string_change">Змінити</string>
+    <string name="get_started">Почати</string>
+    <string name="route_stops_before">%1$s зупинок до обраної</string>
+    <string name="coords_search">Пошук за координатами</string>
+    <string name="advanced_coords_search">Розширений пошук за координатами</string>
+    <string name="back_to_search">Повернення до пошуку</string>
+    <string name="confirmation_to_delete_history_items">Вилучити вибране з історії пошуку?</string>
+    <string name="show_something_on_map">Показати %1$s на мапі</string>
+    <string name="release_2_4">"
+ • Новий повнотекстовий пошук 
+
+
+• Інтеграція через Bluetooth автомобільних аудіосистем / колонок 
+
+
+• Покращена навігація по маршруту, голосові підказки, відображення смуг руху 
+
+
+• Покращений шар транспорту з відображенням маршрутів 
+
+
+• Більше підтримуваних мов інтерфейсу 
+
+
+• Безліч поліпшень і виправлень помилок 
+
+
+та багато іншого…
+ "</string>
+    <string name="dist_away_from_my_location">Шукати за %1$s від місця розташування</string>
+    <string name="share_history_subject">" поділилися через OsmAnd"</string>
+    <string name="search_categories">Категорії</string>
+    <string name="postcode">Поштовий індекс</string>
+    <string name="shared_string_from">від</string>
+    <string name="city_type_district">Район</string>
+    <string name="city_type_neighbourhood">Передмістя</string>
+    <string name="map_widget_search">Пошук</string>
+    <string name="shared_string_is_open_24_7">Відкрито 24/7</string>
     </resources>
