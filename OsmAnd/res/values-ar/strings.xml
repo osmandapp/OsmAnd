@@ -624,7 +624,7 @@
 	<string name="auto_announce_off">إيقاف الإخطار التلقائي</string>
 	<string name="auto_announce_on">تفعيل الإخطار التلقائي</string>
 	<string name="route_is_too_long">من المحتمل أن الطريق طويلة جدا قد لا يتمكن جهاز توجيه OsmAnd من حساب المسافة إلا بعد وضع نقطة وصل واحدة أو أكثر ↵ → متوسط طول المسافة المحتسب هو 200 كيلو متر تقريبًا. لذلك يرجى إضافة نقطة وصل أو أكثر على طول الطريق حتى يتمكن الجهاز من حساب طول مسافة الطريق.</string>
-	<string name="audionotes_location_not_defined">لم يتم ربط الملاحظة بأي موقع. إضغط على \"استخدم المكان …\" لترفق مكانا ما بملاحظة</string>
+	<string name="audionotes_location_not_defined">لم يتم ربط الملاحظة بأي موقع. إضغط على \"استخدام المكان …\" لترفق ملاحظة بالمكان المحدد</string>
 	<string name="animate_routing_route_not_calculated">الرجاء، احتسب المسار أولا</string>
     <string name="animate_routing_route">حاكي باستخدام المسار المحتسب </string>
     <string name="animate_routing_gpx">حاكي باستخدام مسار GPX</string>
@@ -2658,7 +2658,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
 
     <string name="quick_action_item_action">إجراء %d</string>
     <string name="quick_action_item_screen">شاشة %d</string>
-    <string name="quick_action_add_marker">إضافة علامة</string>
+    <string name="quick_action_add_marker">إضافة علامة خريطة</string>
     <string name="quick_action_add_poi">إضافة POI</string>
     <string name="quick_action_map_style">تغيير نمط الخريطة</string>
     <string name="quick_action_map_style_switch">تم تغيير نمط الخريطة إلى \"%s\".</string>
@@ -2679,6 +2679,8 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="shared_string_action_name">اسم الإجراء</string>
     <string name="quick_action_add_osm_bug">أضف خطاءا إلى OSM</string>
     <string name="quick_favorites_show_favorites_dialog">إظهار مربع حوار الأماكن المفضلة</string>
-    <string name="quick_action_add_marker_descr">النقر على زر الإجراء سيقوم بإضافة علامة على الموقع المحدد.</string>
+    <string name="quick_action_add_marker_descr">النقر على زر الإجراء سيقوم بإضافة علامة على الموقع المحدد وسط الشاشة.</string>
     <string name="quick_action_take_video_note_descr">النقر على زر الإجراء سيقوم بإضافة ملاحظة فيديو على الموقع المحدد.</string>
+    <string name="quick_favorites_name_preset">اسم الإعداد المسبق</string>
+    <string name="quick_action_add_gpx_descr">النقر على زر الإجراء سيضيف وجهة GPX على الموقع وسط الشاشة.</string>
     </resources>
