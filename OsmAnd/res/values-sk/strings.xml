@@ -921,7 +921,7 @@ Niektoré z hlavných funkcií:
 Globálne údaje (medzi 70 stupňami severne a 70 stupňami južne) sú založené na meraní SRTM (Shuttle Radar Topography Mission) a ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), zobrazovacieho nástroja na palube Terra, vlajkového satelitu NASA Earth Observing System. ASTER je kooperatívne úsilie medzi NASA, Japonským ministerstvom hospodárstva, obchodu a priemyslu (METI) a Japonských vesmírnych systémov (J-spacesystems).
  "</string>
     <string name="map_widget_distancemeasurement">Meranie vzdialenosti</string>
-    <string name="audionotes_location_not_defined">Umiestnenie na spojenie s poznámkou ešte nie je definované. Ak chcete priradiť poznámku k vybranému umiestneniu, použite "Použiť umiestnenie…"</string>
+    <string name="audionotes_location_not_defined">Umiestnenie na spojenie s poznámkou ešte nie je definované. Ak chcete priradiť poznámku k vybranému umiestneniu, použite \"Použiť umiestnenie…\".</string>
     <string name="map_widget_audionotes">Zvukové poznámky</string>
     <string name="audionotes_plugin_description">Modul Audio/video poznámok poskytuje funkcie na vytváranie obrazových/zvukových/video poznámok počas výletu, buď tlačidlom na obrazovke mapy alebo priamo v kontextovom menu bodu na mape.</string>
     <string name="audionotes_plugin_name">Audio/video poznámky</string>
