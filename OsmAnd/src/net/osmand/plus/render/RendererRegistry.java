@@ -34,7 +34,7 @@ public class RendererRegistry {
 	public final static String WINTER_SKI_RENDER = "Winter and ski";  //$NON-NLS-1$
 	public final static String NAUTICAL_RENDER = "Nautical";  //$NON-NLS-1$
 	public final static String TOPO_RENDER = "Topo";  //$NON-NLS-1$
-	public final static String CITYVIEW_RENDER = "City view";  //$NON-NLS-1$
+	public final static String MAPNIK_RENDER = "Mapnik";  //$NON-NLS-1$
 
 	private RenderingRulesStorage defaultRender = null;
 	private RenderingRulesStorage currentSelectedRender = null;
@@ -58,11 +58,10 @@ public class RendererRegistry {
 		internalRenderers.put(TOURING_VIEW, "Touring-view_(more-contrast-and-details)" +".render.xml");
 		internalRenderers.put("UniRS", "UniRS" + ".render.xml");
 		internalRenderers.put("LightRS", "LightRS" + ".render.xml");
-// 		internalRenderers.put("experimental-test", "test" + ".render.xml");
 		internalRenderers.put(NAUTICAL_RENDER, "nautical" + ".render.xml");
 		internalRenderers.put(WINTER_SKI_RENDER, "skimap" + ".render.xml");
 		internalRenderers.put(TOPO_RENDER, "topo" + ".render.xml");
-		internalRenderers.put(CITYVIEW_RENDER, "cityview" + ".render.xml");
+		internalRenderers.put(MAPNIK_RENDER, "mapnik" + ".render.xml");
 	}
 	
 	public RenderingRulesStorage defaultRender() {
