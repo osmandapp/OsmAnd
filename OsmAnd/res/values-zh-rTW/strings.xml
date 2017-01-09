@@ -1218,7 +1218,7 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
 
 全球圖資（在北緯 70 度至南緯 70 度之間）的量測基礎在於 SRTM (Shuttle Radar Topography Mission)和 ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer)，安裝在美國太空總署地球觀測系統的旗艦衛星 Terra 上的遙測儀器，ASTER 是美國太空總署、日本經濟產業省(METI)、日本太空系統 (J-spacesystems)之間的通力合作產物。
  "</string>
-    <string name="audionotes_location_not_defined">以位置去關聯的附註尚未下定義。\"使用位置 …\"，把註解分配給指定的位置</string>
+    <string name="audionotes_location_not_defined">以位置去關聯的附註尚未下定義。\"使用位置 …\"，把註解分配給指定的位置。</string>
     <string name="srtm_plugin_description">"這個外掛元件同時提供了等高線層和（地貌）山體陰影層，顯示在 OsmAnd 標準地圖的頂部。此功能會讓運動選手、健行旅遊者、背包客，和任何感興趣的人對起伏的地貌結構大加讚賞。
 
 
@@ -2684,7 +2684,7 @@ Facebook：https://www.facebook.com/osmandapp
     <string name="rendering_value_low_name">低</string>
     <string name="rendering_attr_hideWaterPolygons_name">隱藏水</string>
     <string name="quick_action_item_screen">螢幕 %d</string>
-    <string name="quick_action_add_marker">增加標記</string>
+    <string name="quick_action_add_marker">增加地圖標記</string>
     <string name="quick_action_add_poi">增加 POI</string>
     <string name="quick_action_map_style">更改地圖樣式</string>
     <string name="quick_action_map_style_switch">地圖樣式已經更改為 \"%s\"。</string>
@@ -2693,8 +2693,8 @@ Facebook：https://www.facebook.com/osmandapp
     <string name="quick_action_take_photo_note">拍攝註解</string>
     <string name="quick_action_add_osm_bug">增加 OSM 的錯誤</string>
     <string name="quick_action_navigation_voice">聲音開/關</string>
-    <string name="quick_action_navigation_voice_off">聲音關閉</string>
-    <string name="quick_action_navigation_voice_on">聲音開啟</string>
+    <string name="quick_action_navigation_voice_off">聲音為關閉</string>
+    <string name="quick_action_navigation_voice_on">聲音為開啟</string>
     <string name="quick_action_add_gpx">增加 GPX 航點</string>
     <string name="quick_action_add_parking">增加停車地點</string>
     <string name="quick_action_add_favorite">增加我的收藏</string>
@@ -2713,8 +2713,8 @@ Facebook：https://www.facebook.com/osmandapp
     <string name="quick_action_add_configure_map">組態地圖</string>
     <string name="quick_action_add_navigation">導航</string>
     <string name="quick_action_bug_message">訊息</string>
-    <string name="quick_action_category_descr">您可以選擇一項類別給收藏的標記。</string>
-    <string name="quick_action_gpx_category_descr">您可以選擇一項類別給 GPX 的航點標記。</string>
+    <string name="quick_action_category_descr">選擇類別以儲存我的收藏</string>
+    <string name="quick_action_gpx_category_descr">選擇可選的類別</string>
     <string name="quick_action_poi_list">POI 清單</string>
     <string name="quick_action_sh_poi_descr">您可以增加一個或是更多的 POI 類別顯示在地圖上。</string>
     <string name="quick_action_map_style_action">增加一個地圖樣式</string>
@@ -2732,5 +2732,7 @@ Facebook：https://www.facebook.com/osmandapp
     <string name="quick_action_map_source_switch">地圖來源已經被更改為 \"%s\"。</string>
     <string name="quick_action_btn_tutorial_title">更改按鈕位置</string>
     <string name="quick_action_btn_tutorial_descr">長按並拖動在螢幕上的按鈕改變位置</string>
-    <string name="quick_action_fav_name_descr">將欄位留空白，OsmAnd 將使用地址或地點名稱為我的收藏標記</string>
-</resources>
+    <string name="quick_action_fav_name_descr">保留為空白則自動使用地址或地點名稱</string>
+<string name="quick_action_bug_descr">此訊息會在注解欄中自動填寫。</string>
+    <string name="quick_action_interim_dialog">顯示臨時的對話方塊</string>
+    </resources>
