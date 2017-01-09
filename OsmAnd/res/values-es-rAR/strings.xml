@@ -2545,7 +2545,6 @@ Si necesitas ayuda con la aplicación OsmAnd, contacte con nuestro equipo de sop
     <string name="quick_action_add_poi_descr">Pulsando el botón de acción, añadirá un PDI en la ubicación central de la pantalla.</string>
     <string name="quick_action_navigation_voice_descr">Pulsando el botón de acción, desactivará o activará las indicaciones por voz durante la navegación.</string>
     <string name="quick_action_add_parking_descr">Pulsando el botón de acción, añadirá un lugar de estacionamiento en la ubicación central de la pantalla.</string>
-    <string name="quick_action_add_poi_dialog">Mostrar el diálogo de adición de PDI</string>
     <string name="favorite_autofill_toast_text">" se guardó como "</string>
     <string name="favorite_empty_place_name">Lugar</string>
     <string name="quick_action_duplicates">El nombre de la acción rápida ya existe y se cambió a %1$s para evitar duplicados.</string>

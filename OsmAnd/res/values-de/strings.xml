@@ -2632,7 +2632,6 @@ und vieles mehr ...
     <string name="quick_action_take_audio_note_descr">Drücken der Schaltfläche für Schnellaktion fügt eine Audionachricht am Bildschirmmittelpunkt ein.</string>
     <string name="quick_action_take_video_note_descr">Drücken der Schaltfläche für Schnellaktion fügt eine Videonachricht am Bildschirmmittelpunkt ein.</string>
     <string name="quick_action_take_photo_note_descr">Drücken der Schaltfläche für Schnellaktion fügt ein Foto am Bildschirmmittelpunkt ein.</string>
-    <string name="quick_action_add_poi_dialog">POI hinzufügen Dialog anzeigen</string>
     <string name="quick_action_showhide_poi_title">POI anzeigen/verbergen</string>
     <string name="quick_action_poi_show">%1$s anzeigen</string>
     <string name="quick_action_poi_hide">%1$s ausblenden</string>

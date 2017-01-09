@@ -2755,7 +2755,6 @@ i więcej...
     <string name="quick_actions_delete_text">Usunąć czynność „%s”?</string>
     <string name="quick_favorites_show_favorites_dialog">Wyświetl ekran ulubionych</string>
     <string name="shared_string_action_name">Nazwa czynności</string>
-    <string name="quick_action_add_poi_dialog">Wyświetl ekran dodawania użytecznego miejsca</string>
     <string name="favorite_empty_place_name">Miejsce</string>
     <string name="quick_action_add_category">Dodaj kategorię</string>
     <string name="quick_action_add_configure_map">Skonfiguruj mapę</string>
