@@ -122,7 +122,7 @@ public class PoiFiltersHelper {
 
 	private PoiUIFilter getFilterById(String filterId, PoiUIFilter... filters) {
 		for (PoiUIFilter pf : filters) {
-			if (pf.getFilterId().equals(filterId)) {
+			if (pf.getFilterId() != null && filterId != null && pf.getFilterId().equals(filterId)) {
 				return pf;
 			}
 		}
