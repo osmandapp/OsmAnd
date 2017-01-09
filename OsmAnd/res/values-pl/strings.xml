@@ -1029,7 +1029,7 @@ Niektóre z podstawowych funkcji:
 
     <string name="audionotes_plugin_description">Dostarcza funkcje tworzenia notatek zdjęciowych/audio/video podczas podróżowania aktywowaną poprzez przycisk na ekranie mapy lub menu kontekstowe dla wybranego położenia.</string>
     <string name="audionotes_plugin_name">Notatki głosowe</string>
-    <string name="audionotes_location_not_defined">Nie ustalono jeszcze położenia dla notatki głosowej. Proszę wybrać polecenie „Użyj położenia…”, aby przypisać notatkę do wybranego położenia</string>
+    <string name="audionotes_location_not_defined">Nie ustalono jeszcze położenia dla notatki głosowej. Proszę wybrać polecenie „Użyj położenia…”, aby przypisać notatkę do wybranego położenia.</string>
 
     <string name="map_widget_audionotes">Notatki głosowe</string>
 
