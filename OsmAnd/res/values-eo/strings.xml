@@ -2601,7 +2601,7 @@ kaj pli...
     <string name="quick_action_category_descr">Elektu kategorion por konservi ŝatatan ejon</string>
     <string name="quick_action_gpx_category_descr">Elektu malnepran kategorion por GPX-navigadpunkton</string>
     <string name="quick_action_poi_list">Listo de interesejoj</string>
-    <string name="quick_action_sh_poi_descr">Vi povas aldoni kelkajn kategoriojn por interesejoj por montri sur mapo</string>
+    <string name="quick_action_sh_poi_descr">Vi povas aldoni kelkajn kategoriojn por interesejoj por montri sur mapo.</string>
     <string name="quick_action_map_style_descr">Premado sur ag-butono ŝanĝos mapan montrmanieronm, laŭ lista ordo.</string>
     <string name="quick_action_map_style_action">Aldoni mapan montrmanieron</string>
     <string name="quick_action_empty_param_error">Parametroj ne povas esti malplenaj</string>
