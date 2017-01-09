@@ -1275,4 +1275,95 @@
     <string name="map_marker_2nd">Друга ознака карте</string>
     <string name="shared_string_toolbar">Трака прибора</string>
     <string name="shared_string_widgets">Справице</string>
+    <string name="upload_osm_note_description">Можете отпремити своју белешку ОСМ-а тајно коришћењем свог налога OpenStreetMap.org-а.</string>
+    <string name="show_legacy_search_desc">Дозволи стару претрагу у списку полице</string>
+    <string name="routing_attr_allow_motorway_name">Дозволи употребу путева за моторна возила</string>
+    <string name="routing_attr_allow_motorway_description">Дозволи употребу путева за моторна возила</string>
+    <string name="map_widget_magnetic_bearing">Магнетно вретено</string>
+    <string name="map_widget_bearing">Усмерено вретено</string>
+    <string name="access_disable_offroute_recalc">Не мењај путању ако сте ван пута</string>
+    <string name="access_disable_offroute_recalc_descr">Спречи самостални прерачун путање ако сте далеко од правилне путање</string>
+    <string name="access_disable_wrong_direction_recalc">Не мењај путању због погрешног правца</string>
+    <string name="access_disable_wrong_direction_recalc_descr">Спречи самостални прерачун путање ако се крећете у погрешном правцу</string>
+    <string name="access_smart_autoannounce">Паметна најава</string>
+    <string name="access_autoannounce_period">Међувреме паметних најава</string>
+    <string name="access_autoannounce_period_descr">Најкраће време између најава</string>
+    <string name="access_default_color">Подразумевана боја</string>
+    <string name="access_hint_enter_name">Унесите име</string>
+    <string name="access_hint_enter_category">Унесите врсту</string>
+    <string name="access_hint_enter_description">Унесите опис</string>
+    <string name="access_map_linked_to_location">Карта је везана за положај</string>
+    <string name="access_collapsed_list">Скупљени списак</string>
+    <string name="access_expanded_list">Прострт списак</string>
+    <string name="access_empty_list">Празан списак</string>
+    <string name="access_tree_list">Разгранат списак</string>
+    <string name="access_shared_string_not_installed">Није уграђено</string>
+    <string name="access_widget_expand">Простри</string>
+    <string name="access_shared_string_navigate_up">Наведи горе</string>
+    <string name="access_sort">Разврстај</string>
+    <string name="map_mode">Приказ карте</string>
+    <string name="number_of_gpx_files_selected_pattern">%s датотека ГПИкса је одабрано</string>
+    <string name="rendering_value_fine_name">Нежно</string>
+    <string name="rendering_value_thin_name">Танко</string>
+    <string name="rendering_value_medium_name">Средње</string>
+    <string name="rendering_value_bold_name">Дебело</string>
+    <string name="report">Извештај</string>
+    <string name="osmo_tracker_id_descr">Кликните за преглед ЛБ-а пратиоца</string>
+    <string name="storage_permission_restart_is_required">Са</string>
+    <string name="dist_away_from_my_location">Тражи на растојању %1$s</string>
+    <string name="shared_string_move_up">Помери навише</string>
+    <string name="shared_string_move_down">Помери наниже</string>
+    <string name="finish_navigation">Заврши навођење</string>
+    <string name="avoid_road">Избегавај пут</string>
+    <string name="storage_directory_shared">Дељено складиште</string>
+    <string name="shared_string_topbar">Вршна трака</string>
+    <string name="full_report">Потпуни извештај</string>
+    <string name="recalculate_route">Прерачунај путању</string>
+    <string name="open_street_map_login_and_pass">Корисничко име и лозинка Отворене карте улица</string>
+    <string name="donations">Прилози</string>
+    <string name="number_of_recipients">Број примаоца</string>
+    <string name="osm_user_stat">Уредбе %1$s, углед %2$s, укупних уредби %3$s</string>
+    <string name="osm_editors_ranking">Углед уредника ОСМ-а</string>
+    <string name="osm_live_subscription">Претплата на ОСМ уживо</string>
+    <string name="osm_live_subscribe_btn">Претплати се</string>
+    <string name="osm_live_email_desc">Потребна нам је да обезбедимо податке о доприносима</string>
+    <string name="osm_live_user_public_name">Јавно име</string>
+    <string name="osm_live_hide_user_name">Не приказуј моје име у извештајима</string>
+    <string name="osm_live_support_region">Подржана област</string>
+    <string name="osm_live_month_cost">Месечна цена</string>
+    <string name="osm_live_month_cost_desc">Месечно плаћање</string>
+    <string name="osm_live_active">Дејствено</string>
+    <string name="osm_live_not_active">Недејствено</string>
+    <string name="osm_live_enter_email">Молим, унесите ваљану адресу Е-поште</string>
+    <string name="osm_live_enter_user_name">Молим, унесите јавно име</string>
+    <string name="osm_live_thanks">Хвала што се претплаћујете на надградње уживо!</string>
+    <string name="osm_live_region_desc">Део Ваших прилога ће бити послан корисницима ОСМ-а који отпремају измене карата те области</string>
+    <string name="osm_live_subscription_settings">Поставке претплате</string>
+    <string name="osm_live_ask_for_purchase">Молим, прво се преплатите на ОСМ уживо</string>
+
+    <string name="osm_live_header">Ова претплата омогућава часовне надградње свих светских карата.
+Део вредности се враћа заједници ОСМ-а и ислаћује сваком доприносиоцу ОСМ-а.
+Ако волите ОсмАнд и ОСМ и желите да их подржите, ово је савршен начин за то.</string>
+
+    <string name="select_map_marker">Изаберите ознаку карте</string>
+    <string name="upload_anonymously">Отпреми безимено</string>
+    <string name="show_transparency_seekbar">Приказуј прозирну траку претраге</string>
+    <string name="download_files_error_not_enough_space">Нема довољно простора!
+Потребно привремено складиште је {3} MB, трајно {1} MB.
+Доступан простор је само {2} MB.</string>
+    <string name="download_files_question_space_with_temp">Да ли преузети {0} датотека?
+Искоришћен простор привременог складишта је {3} MB, трајног {1} MB.
+(Доступан простор је {2} MB.)</string>
+    <string name="download_files_question_space">Да ли преузети {0} датотека?
+Искориштени простор складишта је {1} MB.
+(Доступан простор је {2} MB.)</string>
+    <string name="upload_osm_note">Отпреми белешку ОСМ-а</string>
+    <string name="shared_string_reverse_order">Обрнут редослед</string>
+    <string name="clear_markers_history_q">Да ли желите да очистите историју ознака карата?</string>
+    <string name="map_marker">Ознака карте</string>
+    <string name="consider_turning_polygons_off">Препоручиво је да искључите приказ многоуглова</string>
+    <string name="show_polygons">Приказуј многоуглове</string>
+    <string name="road_blocked">Пут је препречен</string>
+    <string name="rendering_attr_horseRoutes_name">Коњски путеви</string>
+    <string name="share_geo">положај:</string>
     </resources>
