@@ -2570,7 +2570,6 @@ Si aprecieu OsmAnd  i OSM i voleu ajudar-los, és la via perfecta per fer-ho."</
     <string name="quick_action_add_poi_descr">Si premeu el botó de l\'acció s\'afegirà un PDI a la posició del centre de la pantalla.</string>
     <string name="quick_action_navigation_voice_descr">Si premeu el botó de l\'acció s\'activarà o es desactivarà la veu d\'orientació durant la navegació.</string>
     <string name="quick_action_add_parking_descr">Si premeu el botó de l\'acció s\'afegirà un lloc d\'aparcament a la posició del centre de la pantalla.</string>
-    <string name="quick_action_favorite_dialog">Mostra el diàleg de preferides</string>
     <string name="quick_action_add_poi_dialog">Mostra el diàleg per afegir PDI</string>
     <string name="quick_action_gpx_dialog">Mostra el diàleg de fites GPX</string>
     <string name="favorite_autofill_toast_text">" s\'ha desat a "</string>

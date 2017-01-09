@@ -2777,7 +2777,6 @@ Hvis du  ønsker at støtte OsmAnd og OSM, er dette en god måde at gøre det p�
     <string name="quick_action_add_poi_descr">Tryk på genvej vil tilføje et interessepunkt til den angivne placering.</string>
     <string name="quick_action_navigation_voice_descr">Tryk på genvej vil deaktivere eller aktivere stemmevejledning under navigation.</string>
     <string name="quick_action_add_parking_descr">Tryk på genvejen vil tilføje en parkeringsplads til den angivne placering.</string>
-    <string name="quick_action_favorite_dialog">Vis dialogen foretrukne</string>
     <string name="quick_action_add_poi_dialog">Vis dialogen tilføj interessepunkt (IP)</string>
     <string name="quick_action_gpx_dialog">Vis dialogen GPX-rutepunkt</string>
     <string name="favorite_autofill_toast_text">" er gemt i "</string>
