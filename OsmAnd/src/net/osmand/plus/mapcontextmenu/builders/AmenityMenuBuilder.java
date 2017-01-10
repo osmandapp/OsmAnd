@@ -24,6 +24,8 @@ import net.osmand.data.PointDescription;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiType;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
@@ -464,9 +466,15 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			buildAmenityRow(view, wikiInfo);
 		}
 
+		OsmandSettings st = ((OsmandApplication) mapActivity.getApplicationContext()).getSettings();
 		buildRow(view, R.drawable.ic_action_get_my_location, PointDescription.getLocationName(app,
 				amenity.getLocation().getLatitude(), amenity.getLocation().getLongitude(), true)
 				.replaceAll("\n", " "), 0, false, null, false, 0, false, null);
+		if (st.COORDINATES_FORMAT.get() != PointDescription.OLC_FORMAT)
+			buildRow(view, R.drawable.ic_action_get_my_location, PointDescription.getLocationOlcName(
+					amenity.getLocation().getLatitude(), amenity.getLocation().getLongitude())
+					.replaceAll("\n", " "), 0, false, null, false, 0, false, null);
+
 	}
 
 	public void buildAmenityRow(View view, AmenityInfoRow info) {

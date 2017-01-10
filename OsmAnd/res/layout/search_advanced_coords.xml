@@ -298,6 +298,74 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/olcLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingTop="16dp"
+                    android:visibility="gone">
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="54dp"
+                            android:layout_marginRight="16dp">
+
+                            <EditText
+                                android:id="@+id/olcEditText"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="@string/navigate_point_olc"
+                                android:imeOptions="actionDone"
+                                android:inputType="textCapCharacters|textNoSuggestions"
+                                tools:text="6PH57VP3+PQ"/>
+
+                        </android.support.design.widget.TextInputLayout>
+
+                        <ImageButton
+                            android:id="@+id/olcClearButton"
+                            style="@style/Widget.AppCompat.ActionButton"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:layout_gravity="right"
+                            android:layout_marginRight="4dp"
+                            android:contentDescription="@string/shared_string_clear"
+                            android:src="@drawable/ic_action_remove_dark"/>
+
+                    </FrameLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/olcInfoLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingTop="16dp"
+                    android:visibility="gone">
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="54dp"
+                        android:layout_marginRight="16dp">
+
+                        <TextView
+                            android:id="@+id/olcInfoTextView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            tools:text="OLC area information"
+                            android:inputType="textMultiLine"/>
+
+                    </FrameLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
                     android:id="@+id/formatLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
