@@ -554,11 +554,15 @@ public class QuickActionFactory {
                             @Override
                             public void geocodingDone(String address) {
 
-                                progressDialog.dismiss();
-                                activity.getContextMenu().getFavoritePointEditor().add(latLon, address, "",
-                                        getParams().get(KEY_CATEGORY_NAME),
-                                        Integer.valueOf(getParams().get(KEY_CATEGORY_COLOR)),
-                                        !Boolean.valueOf(getParams().get(KEY_DIALOG)));
+                                if (progressDialog != null)  progressDialog.dismiss();
+
+                                if (activity != null) {
+
+                                    activity.getContextMenu().getFavoritePointEditor().add(latLon, address, "",
+                                            getParams().get(KEY_CATEGORY_NAME),
+                                            Integer.valueOf(getParams().get(KEY_CATEGORY_COLOR)),
+                                            !Boolean.valueOf(getParams().get(KEY_DIALOG)));
+                                }
                             }
 
                         }, null);
@@ -2574,9 +2578,15 @@ public class QuickActionFactory {
 
         @Override
         public boolean fillParams(View root, MapActivity activity) {
-            return !getParams().isEmpty() && (getParams().get(getListKey()) != null
-                    || !getParams().get(getListKey()).isEmpty()
-                    || !getParams().get(getListKey()).equals("[]"));
+
+            final RecyclerView list = (RecyclerView) root.findViewById(R.id.list);
+            final Adapter adapter = (Adapter) list.getAdapter();
+
+            boolean hasParams = adapter.itemsList != null && !adapter.itemsList.isEmpty();
+
+            if (hasParams) saveListToParams(adapter.itemsList);
+
+            return hasParams;
         }
 
         protected class Adapter extends RecyclerView.Adapter<Adapter.ItemHolder> implements QuickActionItemTouchHelperCallback.OnItemMoveCallback {
@@ -2642,8 +2652,6 @@ public class QuickActionFactory {
                 }
 
                 itemsList.remove(position);
-
-                saveListToParams(itemsList);
                 notifyItemRemoved(position);
             }
 
@@ -2652,8 +2660,6 @@ public class QuickActionFactory {
                 if (!itemsList.containsAll(data)) {
 
                     itemsList.addAll(data);
-
-                    saveListToParams(itemsList);
                     notifyDataSetChanged();
                 }
             }
@@ -2668,7 +2674,6 @@ public class QuickActionFactory {
                     int oldSize = itemsList.size();
                     itemsList.add(item);
 
-                    saveListToParams(itemsList);
                     notifyItemRangeInserted(oldSize, itemsList.size() - oldSize);
 
                     if (oldTitle.equals(title.getText().toString()) || title.getText().toString().equals(defaultName)) {
@@ -2722,7 +2727,6 @@ public class QuickActionFactory {
 
             @Override
             public void onViewDropped(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
-                saveListToParams(itemsList);
             }
 
             public class ItemHolder extends RecyclerView.ViewHolder {
