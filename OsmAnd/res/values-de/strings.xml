@@ -1004,7 +1004,7 @@ Karten-Kacheln können direkt online bezogen werden, und werden im OsmAnd-Untero
 
 Parkplatz und Restzeit werden sowohl auf dem OsmAnd Dashboard wie auch auf dem Kartenbildschirm dargestellt. Es kann ein Eintrag im Android Kalender als Erinnerung hinzugefügt werden.</string>
 	<string name="osmand_parking_plugin_name">Parkplatz-Standort</string>
-	<string name="context_menu_item_add_parking_point">Parkplatzstandort festlegen</string>
+	<string name="context_menu_item_add_parking_point">Parkposition festlegen</string>
 	<string name="context_menu_item_delete_parking_point">Parkplatz-Standort löschen</string>
 	<string name="gpxup_public">Öffentlich</string>
 	<string name="gpxup_identifiable">Erkennbar</string>
@@ -1755,7 +1755,7 @@ Aufgenommene Tracks kann man z.B. mit Bekannten teilen, oder auch zum Upload fü
     <string name="local_index_description">Ein Element antippen, um mehr Details zu erfahren oder antippen und halten zum Deaktivieren oder Löschen. Aktuell auf dem Gerät vorhandene Daten (%1$s frei):</string>
 	<string name="text_size_descr">Karten-Schriftgröße festlegen</string>
     <string name="text_size">Schriftgröße</string>
-    <string name="fav_point_dublicate">Doppelung beim Favoriten-Namen</string>
+    <string name="fav_point_dublicate">Doppelung beim Favoritennamen</string>
     <string name="fav_point_dublicate_message">Der angegebene Favoritenname wird bereits verwendet, und wird auf %1$s geändert.</string>
     <string name="fav_point_emoticons_message">Der Name des Favoriten wurde auf %1$s geändert, denn Zeichenketten mit Emoticons können nicht gespeichert werden.</string>
     <string name="print_route">Route drucken</string>
@@ -2616,10 +2616,10 @@ und vieles mehr ...
     <string name="quick_action_navigation_voice_off">Sprachausgabe ist aus</string>
     <string name="quick_action_navigation_voice_on">Sprachausgabe ist an</string>
     <string name="quick_action_add_gpx">GPX-Wegpunkt einfügen</string>
-    <string name="quick_action_add_parking">Parkplatzstandort festlegen</string>
+    <string name="quick_action_add_parking">Parkposition festlegen</string>
     <string name="quick_action_new_action">Aktion hinzufügen</string>
     <string name="quick_action_edit_action">Aktion bearbeiten</string>
-    <string name="quick_action_add_favorite">Favorite hinzufügen</string>
+    <string name="quick_action_add_favorite">Favorit hinzufügen</string>
     <string name="dialog_add_action_title">Aktion hinzufügen</string>
     <string name="quick_actions_delete">Aktion löschen</string>
     <string name="quick_actions_delete_text">Sind Sie sicher, dass Sie die Aktion \"%s\" löschen möchten?</string>
@@ -2667,7 +2667,7 @@ und vieles mehr ...
     <string name="quick_action_add_poi_descr">Drücken der Schaltfläche für Schnellaktion fügt einen POI am Bildschirmmittelpunkt ein.</string>
     <string name="quick_action_navigation_voice_descr">Drücken der Schaltfläche für Schnellaktion deaktiviert oder aktiviert die Sprachhinweise bei der Navigation.</string>
     <string name="quick_action_add_parking_descr">Drücken der Schaltfläche für Schnellaktion fügt eine Parkposition am Bildschirmmittelpunkt ein.</string>
-    <string name="quick_action_interim_dialog">Vorläufigen Dialog zeigen</string>
+    <string name="quick_action_interim_dialog">Dialog zum Bearbeiten zeigen</string>
     <string name="favorite_autofill_toast_text">" wird gespeichert unter "</string>
     <string name="quick_action_duplicates">Angegebener Schnellaktionsname schon in Verwendung, er wurde geändert in %1$s um ein Duplikat zu vermeiden.</string>
     <string name="quick_action_duplicate">Schnellaktion Namensduplikat</string>
