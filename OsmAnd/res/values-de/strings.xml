@@ -2680,4 +2680,6 @@ und vieles mehr ...
     <string name="quick_action_map_underlay_descr">Drücken der Schaltfläche für Schnellaktion wechselt die Underlay-Karte.</string>
     <string name="quick_action_map_source_descr">Drücken der Schaltfläche für Schnellaktion wechselt die Kartenquelle.</string>
     <string name="quick_action_btn_tutorial_descr">Schaltfläche lange drücken und ziehen um die Position auf dem Bildschirm zu ändern</string>
-	</resources>
+	<string name="quick_action_map_overlay_switch">Die Overlay-Karte wurde in “%s“ geändert.</string>
+    <string name="quick_action_map_underlay_switch">Die Underlay-Karte wurde in “%s“ geändert.</string>
+    </resources>
