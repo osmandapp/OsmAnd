@@ -2735,4 +2735,12 @@ Facebook：https://www.facebook.com/osmandapp
     <string name="quick_action_fav_name_descr">保留為空白則自動使用地址或地點名稱</string>
 <string name="quick_action_bug_descr">此訊息會在注解欄中自動填寫。</string>
     <string name="quick_action_interim_dialog">顯示臨時的對話方塊</string>
+    <string name="configure_screen_quick_action">快速動作</string>
+
+    <string name="quick_action_item_action">動作 %d</string>
+    <string name="quick_action_new_action">增加動作</string>
+    <string name="quick_action_edit_action">編輯動作</string>
+    <string name="dialog_add_action_title">增加動作</string>
+    <string name="quick_actions_delete">刪除動作</string>
+    <string name="quick_actions_delete_text">您確定要刪除動作 \"%s\" 嗎？</string>
     </resources>
