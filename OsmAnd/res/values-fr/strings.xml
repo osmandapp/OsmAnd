@@ -83,7 +83,7 @@ Actuellement {2} Mo sont disponibles.</string>
     <string name="auto_follow_route_navigation_descr">Recentrage automatique uniquement pendant la navigation.</string>
     <string name="auto_follow_location_enabled">Recentrage automatique activé.</string>
     <string name="pref_vector_rendering">Options pour l\'affichage vectoriel</string>
-    <string name="pref_overlay">Surcouche / sous-couche</string>
+    <string name="pref_overlay">Sur-couche / Sous-couche</string>
     <string name="pref_raster_map">Options pour la source des cartes</string>
     <string name="pref_vector_map">Options cartographie vectorielle</string>
     <string name="delete_confirmation_msg">Supprimer %1$s ?</string>
@@ -203,7 +203,7 @@ Actuellement {2} Mo sont disponibles.</string>
     <string name="layer_overlay">Sur-couche de carte…</string>
     <string name="shared_string_none">Aucun</string>
     <string name="map_overlay">Sur-couche de la carte</string>
-    <string name="map_overlay_descr">Choisir la carte en sur-couche</string>
+    <string name="map_overlay_descr">Sélectionnez la sur-couche de carte</string>
     <string name="tile_source_already_installed">Carte déjà installée, paramètres seront mis à jour</string>
     <string name="select_tile_source_to_install">Sélectionnez les cartes à installer ou mettre à jour</string>
     <string name="internet_not_available">Une connexion Internet est nécessaire pour cette opération</string>
@@ -769,7 +769,7 @@ Les cartes tuiles peuvent être obtenues directement en ligne ou peuvent être p
     <string name="zoom_by_trackball">Utiliser le trackball pour le contrôle du zoom</string>
     <string name="accessibility_preferences_descr">Configurer les paramètres liés à l\'accessibilité</string>
     <string name="shared_string_accessibility">Accessibilité</string>
-    <string name="use_fluorescent_overlays">Sur-couche fluorescente</string>
+    <string name="use_fluorescent_overlays">Sur-couches fluorescentes</string>
     <string name="use_fluorescent_overlays_descr">Utiliser des couleurs fluorescentes pour les traces et routes</string>
     <string name="shared_string_name">Nom</string>
     <string name="favourites_edit_dialog_category">Catégorie</string>
@@ -2562,4 +2562,7 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="quick_action_showhide_poi_descr">Appuyez sur le bouton pour afficher ou masquer les PI sur la carte.</string>
     <string name="quick_action_interim_dialog">Afficher une fenêtre intermédiaire</string>
     <string name="quick_action_add_create_items">Créer les éléments</string>
+    <string name="quick_action_bug_descr">Ce texte sera renseigné automatiquement dans la zone de commentaire.</string>
+    <string name="quick_action_map_overlay_switch">La sur-couche de la carte est désormais \"%s\".</string>
+    <string name="quick_action_map_underlay_switch">La sous-couche de la carte est désormais \"%s\".</string>
     </resources>
