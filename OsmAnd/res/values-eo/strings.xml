@@ -2620,4 +2620,6 @@ kaj pli...
     <string name="quick_action_btn_tutorial_descr">Premtenu kaj ŝovu la butonon por ŝanĝi ĝian pozicion sur ekrano</string>
 <string name="shared_string_action_name">Nomo de ago</string>
 <string name="quick_action_interim_dialog">Montri transiran fenestron</string>
+    <string name="quick_action_map_overlay_switch">Surtavolo de mapo ŝanĝita al \"%s\".</string>
+    <string name="quick_action_map_underlay_switch">Subtavolo de mapo ŝanĝita al \"%s\".</string>
     </resources>
