@@ -2809,4 +2809,6 @@ i więcej...
     <string name="quick_action_btn_tutorial_title">Zmień pozycję przycisku</string>
     <string name="quick_action_btn_tutorial_descr">Naciśnij i przytrzymaj aby przesunąć przycisk na ekranie</string>
 <string name="quick_action_interim_dialog">Pokaż okno przejściowe</string>
+    <string name="quick_action_map_overlay_switch">Nakładkę mapy zmieniono na \"%s\".</string>
+    <string name="quick_action_map_underlay_switch">Podkład mapy zmieniono na \"%s\".</string>
     </resources>
