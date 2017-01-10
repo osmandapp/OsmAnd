@@ -788,11 +788,13 @@ public class QuickActionFactory {
                 String filtersId = getParams().get(KEY_FILTERS);
                 Collections.addAll(filters, filtersId.split(","));
 
+                if (app.getPoiFilters() == null) return super.getIconRes();
+
                 PoiUIFilter filter =  app.getPoiFilters().getFilterById(filters.get(0));
 
-                Object res = filter.getIconResource();
-
                 if (filter == null) return super.getIconRes();
+
+                Object res = filter.getIconResource();
 
                 if (res instanceof String && RenderingIcons.containsBigIcon(res.toString())) {
 
@@ -817,8 +819,6 @@ public class QuickActionFactory {
                 }
 
             } else pf.clearSelectedPoiFilters();
-
-
 
             activity.getMapLayers().updateLayers(activity.getMapView());
         }
@@ -2543,7 +2543,7 @@ public class QuickActionFactory {
                         String oldTitle = getTitle(itemsList);
                         String defaultName = holder.handleView.getContext().getString(getNameRes());
 
-                        deleteItem(position);
+                        deleteItem(holder.getAdapterPosition());
 
                         if (oldTitle.equals(title.getText().toString()) || title.getText().toString().equals(defaultName)) {
 
@@ -2561,8 +2561,9 @@ public class QuickActionFactory {
 
             public void deleteItem(int position) {
 
-                if (position == -1)
+                if (position == -1) {
                     return;
+                }
 
                 itemsList.remove(position);
 
