@@ -877,7 +877,7 @@ Nyttjat utrymme är {1} MB.
     <string name="download_srtm_maps">Höjdkurvsdata</string>
 
 
-    <string name="audionotes_location_not_defined">Platsen att associera med anteckningen är inte angiven än. \"Använd platsen …\" för att knyta en anteckning till den angivna platsen</string>
+    <string name="audionotes_location_not_defined">Någon plats att associera med anteckningen är inte angiven än. \"Använd platsen …\" för att knyta en anteckning till den angivna platsen.</string>
     
 
 
@@ -2437,7 +2437,7 @@ med mera…
     <string name="driving_region_australia">Australien</string>
     <string name="rendering_attr_hideWaterPolygons_name">Dölj vatten</string>
     <string name="quick_action_item_screen">Skärm %d</string>
-    <string name="quick_action_add_marker">Lägg till markör</string>
+    <string name="quick_action_add_marker">Lägg till kartmarkör</string>
     <string name="quick_action_add_poi">Lägg till POI</string>
     <string name="quick_action_map_style">Byt kartstil</string>
     <string name="quick_action_map_style_switch">Kartstilen har ändrats till \"%s\".</string>
