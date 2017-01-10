@@ -113,7 +113,7 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionRe
     }
 
     private boolean showTutorialIfNeeded() {
-        if (isLayerOn && !settings.IS_QUICK_ACTION_TUTORIAL_SHOWN.get()) {
+        if (isLayerOn && !settings.IS_QUICK_ACTION_TUTORIAL_SHOWN.get() && android.os.Build.VERSION.SDK_INT >= 14) {
             TapTargetView.showFor(mapActivity,                 // `this` is an Activity
                     TapTarget.forView(quickActionButton, mapActivity.getString(R.string.quick_action_btn_tutorial_title), mapActivity.getString(R.string.quick_action_btn_tutorial_descr))
                             // All options below are optional
@@ -121,16 +121,12 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionRe
                             .targetCircleColor(R.color.color_white)   // Specify a color for the target circle
                             .titleTextSize(20)                  // Specify the size (in sp) of the title text
                             .descriptionTextSize(16)            // Specify the size (in sp) of the description text
-//                            .textColor(R.color.color_white)            // Specify a color for both the title and description text
                             .descriptionTextColor(R.color.color_white)            // Specify a color for both the title and description text
                             .titleTextColor(R.color.color_white)            // Specify a color for both the title and description text
-//                        .textTypeface(Typeface.SANS_SERIF)  // Specify a typeface for the text
-//                            .dimColor(R.color.black)            // If set, will dim behind the view with 30% opacity of the given color
                             .drawShadow(true)                   // Whether to draw a drop shadow or not
                             .cancelable(false)                  // Whether tapping outside the outer circle dismisses the view
                             .tintTarget(false)                   // Whether to tint the target view's color
                             .transparentTarget(false)           // Specify whether the target is transparent (displays the content underneath)
-//                        .icon(Drawable)                     // Specify a custom drawable to draw as the target
                             .targetRadius(50),                  // Specify the target radius (in dp)
                     new TapTargetView.Listener() {          // The listener can listen for regular clicks, long clicks or cancels
                         @Override
@@ -203,6 +199,22 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionRe
         previousMapPosition = view.getMapPosition();
         view.setMapPosition(OsmandSettings.BOTTOM_CONSTANT);
         MapContextMenu menu = mapActivity.getContextMenu();
+
+//        LatLon         ll;
+//        if (menu.isActive() && tileBox.containsLatLon(menu.getLatLon())) {
+//            ll = menu.getLatLon();
+//            view.setMapPosition(OsmandSettings.BOTTOM_CONSTANT);
+//        } else {
+//            if (false){
+//                //TODO check if we are tracking
+//                view.setMapPosition(OsmandSettings.BOTTOM_CONSTANT);
+//                ll = tileBox.getCenterLatLon();
+//            } else {
+//                ll = tileBox.getCenterLatLon();
+//                view.setMapPosition(OsmandSettings.BOTTOM_CONSTANT);
+//            }
+//        }
+
         LatLon         ll   = menu.isActive() && tileBox.containsLatLon(menu.getLatLon()) ? menu.getLatLon() : tileBox.getCenterLatLon();
 
         menu.updateMapCenter(null);

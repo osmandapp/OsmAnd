@@ -42,10 +42,8 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import net.osmand.CallbackWithObject;
-import net.osmand.ResultMatcher;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.map.TileSourceManager;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
@@ -60,7 +58,6 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.MapActivityLayers;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.dialogs.ConfigureMapMenu;
 import net.osmand.plus.mapcontextmenu.editors.EditCategoryDialogFragment;
@@ -172,6 +169,7 @@ public class QuickActionFactory {
 
             quickActions.add(new MapSourceAction());
             quickActions.add(new MapOverlayAction());
+            quickActions.add(new MapUnderlayAction());
         }
 
         QuickAction favorites = new ShowHideFavoritesAction();
@@ -245,6 +243,9 @@ public class QuickActionFactory {
             case MapOverlayAction.TYPE:
                 return new MapOverlayAction();
 
+            case MapUnderlayAction.TYPE:
+                return new MapUnderlayAction();
+
             default:
                 return new QuickAction();
         }
@@ -301,6 +302,9 @@ public class QuickActionFactory {
 
             case MapOverlayAction.TYPE:
                 return new MapOverlayAction(quickAction);
+
+            case MapUnderlayAction.TYPE:
+                return new MapUnderlayAction(quickAction);
 
             default:
                 return quickAction;
@@ -2316,27 +2320,63 @@ public class QuickActionFactory {
 
         @Override
         protected String getTitle(List<Pair<String, String>> filters) {
-            return null;
+
+            if (filters.isEmpty()) return "";
+
+            return filters.size() > 1
+                    ? filters.get(0).second + " +" + (filters.size() - 1)
+                    : filters.get(0).second;
         }
 
         @Override
         protected void saveListToParams(List<Pair<String, String>> list) {
 
+            getParams().put(getListKey(), new Gson().toJson(list));
         }
 
         @Override
         protected List<Pair<String, String>> loadListFromParams() {
-            return null;
+
+            String json = getParams().get(getListKey());
+
+            if (json == null || json.isEmpty()) return new ArrayList<>();
+
+            Type listType = new TypeToken<ArrayList<Pair<String, String>>>(){}.getType();
+
+            return new Gson().fromJson(json, listType);
         }
 
         @Override
         protected String getItemName(Pair<String, String> item) {
-            return null;
+            return item.second;
         }
 
         @Override
         public void execute(MapActivity activity) {
+            OsmandRasterMapsPlugin plugin = OsmandPlugin.getEnabledPlugin(OsmandRasterMapsPlugin.class);
 
+            if (plugin != null) {
+
+                OsmandSettings settings = activity.getMyApplication().getSettings();
+                List<Pair<String, String>> sources = loadListFromParams();
+
+                Pair<String, String> currentSource = new Pair<>(
+                        settings.MAP_UNDERLAY.get(),
+                        settings.MAP_UNDERLAY.get());
+
+                Pair<String, String> nextSource = sources.get(0);
+                int index = sources.indexOf(currentSource);
+
+                if (index >= 0 && index + 1 < sources.size()) {
+                    nextSource = sources.get(index + 1);
+                }
+
+                settings.MAP_UNDERLAY.set(nextSource.first);
+                settings.MAP_UNDERLAY_PREVIOUS.set(nextSource.first);
+
+                plugin.updateMapLayers(activity.getMapView(), settings.MAP_UNDERLAY, activity.getMapLayers());
+                Toast.makeText(activity, activity.getString(R.string.quick_action_map_underlay_switch, nextSource.second), Toast.LENGTH_SHORT).show();
+            }
         }
 
         @Override
@@ -2365,6 +2405,34 @@ public class QuickActionFactory {
                 @Override
                 public void onClick(View view) {
 
+                    final OsmandSettings settings = activity.getMyApplication().getSettings();
+                    Map<String, String> entriesMap = settings.getTileSourceEntries();
+                    AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+                    final ArrayList<String> keys = new ArrayList<>(entriesMap.keySet());
+                    final String[] items = new String[entriesMap.size()];
+                    int i = 0;
+
+                    for (String it : entriesMap.values()) {
+                        items[i++] = it;
+                    }
+
+                    final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(activity, R.layout.dialog_text_item);
+                    arrayAdapter.addAll(items);
+                    builder.setAdapter(arrayAdapter, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int i) {
+
+                            Pair<String, String> layer = new Pair<>(
+                                    keys.get(i), items[i]);
+
+                            adapter.addItem(layer, activity);
+
+                            dialog.dismiss();
+
+                        }
+                    }).setNegativeButton(R.string.shared_string_cancel, null);
+
+                    builder.show();
                 }
             };
         }
