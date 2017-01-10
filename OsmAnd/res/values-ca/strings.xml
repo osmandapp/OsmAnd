@@ -2615,4 +2615,6 @@ Si aprecieu OsmAnd  i OSM i voleu ajudar-los, és la via perfecta per fer-ho."</
 <string name="quick_action_interim_dialog">Mostra un diàleg provisional</string>
     <string name="quick_action_sh_poi_descr">Podeu afegir una o més categories de PDI per mostrar-les al mapa.</string>
     <string name="shared_string_action_name">Nom de l\'acció</string>
-</resources>
+<string name="quick_action_map_overlay_switch">La superposició del mapa s\'ha canviat a \"%s\".</string>
+    <string name="quick_action_map_underlay_switch">El fons del mapa s\'ha canviat a \"%s\".</string>
+    </resources>
