@@ -42,8 +42,10 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import net.osmand.CallbackWithObject;
+import net.osmand.ResultMatcher;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.map.TileSourceManager;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
@@ -58,6 +60,7 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.MapActivityLayers;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.dialogs.ConfigureMapMenu;
 import net.osmand.plus.mapcontextmenu.editors.EditCategoryDialogFragment;
@@ -168,6 +171,7 @@ public class QuickActionFactory {
         if (OsmandPlugin.getEnabledPlugin(OsmandRasterMapsPlugin.class) != null) {
 
             quickActions.add(new MapSourceAction());
+            quickActions.add(new MapOverlayAction());
         }
 
         QuickAction favorites = new ShowHideFavoritesAction();
@@ -238,6 +242,9 @@ public class QuickActionFactory {
             case MapSourceAction.TYPE:
                 return new MapSourceAction();
 
+            case MapOverlayAction.TYPE:
+                return new MapOverlayAction();
+
             default:
                 return new QuickAction();
         }
@@ -291,6 +298,9 @@ public class QuickActionFactory {
 
             case MapSourceAction.TYPE:
                 return new MapSourceAction(quickAction);
+
+            case MapOverlayAction.TYPE:
+                return new MapOverlayAction(quickAction);
 
             default:
                 return quickAction;
@@ -2167,22 +2177,35 @@ public class QuickActionFactory {
 
         @Override
         protected String getTitle(List<Pair<String, String>> filters) {
-            return null;
+
+            if (filters.isEmpty()) return "";
+
+            return filters.size() > 1
+                    ? filters.get(0).second + " +" + (filters.size() - 1)
+                    : filters.get(0).second;
         }
 
         @Override
         protected void saveListToParams(List<Pair<String, String>> list) {
 
+            getParams().put(getListKey(), new Gson().toJson(list));
         }
 
         @Override
         protected List<Pair<String, String>> loadListFromParams() {
-            return null;
+
+            String json = getParams().get(getListKey());
+
+            if (json == null || json.isEmpty()) return new ArrayList<>();
+
+            Type listType = new TypeToken<ArrayList<Pair<String, String>>>(){}.getType();
+
+            return new Gson().fromJson(json, listType);
         }
 
         @Override
         protected String getItemName(Pair<String, String> item) {
-            return null;
+            return item.second;
         }
 
         @Override
@@ -2216,11 +2239,38 @@ public class QuickActionFactory {
                 @Override
                 public void onClick(View view) {
 
+                    final OsmandSettings settings = activity.getMyApplication().getSettings();
+                    Map<String, String> entriesMap = settings.getTileSourceEntries();
+                    AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+                    final ArrayList<String> keys = new ArrayList<>(entriesMap.keySet());
+                    final String[] items = new String[entriesMap.size()];
+                    int i = 0;
+
+                    for (String it : entriesMap.values()) {
+                        items[i++] = it;
+                    }
+
+                    final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(activity, R.layout.dialog_text_item);
+                    arrayAdapter.addAll(items);
+                    builder.setAdapter(arrayAdapter, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int i) {
+
+                            Pair<String, String> layer = new Pair<>(
+                                    keys.get(i), items[i]);
+
+                            adapter.addItem(layer, activity);
+
+                            dialog.dismiss();
+
+                        }
+                    }).setNegativeButton(R.string.shared_string_cancel, null);
+
+                    builder.show();
                 }
             };
         }
     }
-
 
     public static class MapUnderlayAction extends SwitchableAction<Pair<String, String>>  {
 
