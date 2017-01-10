@@ -18,6 +18,7 @@ import com.getkeepsafe.taptargetview.TapTargetView;
 
 import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
@@ -200,28 +201,16 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionRe
         view.setMapPosition(OsmandSettings.BOTTOM_CONSTANT);
         MapContextMenu menu = mapActivity.getContextMenu();
 
-//        LatLon         ll;
-//        if (menu.isActive() && tileBox.containsLatLon(menu.getLatLon())) {
-//            ll = menu.getLatLon();
-//            view.setMapPosition(OsmandSettings.BOTTOM_CONSTANT);
-//        } else {
-//            if (false){
-//                //TODO check if we are tracking
-//                view.setMapPosition(OsmandSettings.BOTTOM_CONSTANT);
-//                ll = tileBox.getCenterLatLon();
-//            } else {
-//                ll = tileBox.getCenterLatLon();
-//                view.setMapPosition(OsmandSettings.BOTTOM_CONSTANT);
-//            }
-//        }
-
         LatLon         ll   = menu.isActive() && tileBox.containsLatLon(menu.getLatLon()) ? menu.getLatLon() : tileBox.getCenterLatLon();
+        Boolean isFollowPoint = isFolowPoint(tileBox, menu);
 
         menu.updateMapCenter(null);
         menu.close();
 
         RotatedTileBox rb = new RotatedTileBox(tileBox);
-//        tileBox.setCenterLocation(0.5f, 0.75f);
+        if (!isFollowPoint && previousMapPosition != OsmandSettings.BOTTOM_CONSTANT)
+            rb.setCenterLocation(0.5f, 0.15f);
+
         rb.setLatLonCenter(ll.getLatitude(), ll.getLongitude());
         double lat = rb.getLatFromPixel(tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
         double lon = rb.getLonFromPixel(tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
@@ -242,8 +231,26 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionRe
         view.refreshMap();
     }
 
+    private boolean isFolowPoint(RotatedTileBox tileBox, MapContextMenu menu) {
+        return OsmAndLocationProvider.isLocationPermissionAvailable(mapActivity) &&
+                mapActivity.getMapViewTrackingUtilities().isMapLinkedToLocation() ||
+                menu.isActive() && tileBox.containsLatLon(menu.getLatLon());  // remove if not to folow if there is selected point on map
+    }
+
     private void quitMovingMarker() {
+
+        RotatedTileBox tileBox = mapActivity.getMapView().getCurrentRotatedTileBox();
+        if (!isFolowPoint(tileBox, mapActivity.getContextMenu()) && previousMapPosition != OsmandSettings.BOTTOM_CONSTANT){
+            RotatedTileBox rb = tileBox.copy();
+            rb.setCenterLocation(0.5f, 0.5f);
+            LatLon ll = tileBox.getCenterLatLon();
+            rb.setLatLonCenter(ll.getLatitude(), ll.getLongitude());
+            double lat = tileBox.getLatFromPixel(rb.getCenterPixelX(), rb.getCenterPixelY());
+            double lon = tileBox.getLonFromPixel(rb.getCenterPixelX(), rb.getCenterPixelY());
+            view.setLatLon(lat, lon);
+        }
         view.setMapPosition(previousMapPosition);
+
         inChangeMarkerPositionMode = false;
         mark(View.VISIBLE, R.id.map_ruler_layout,
                 R.id.map_left_widgets_panel, R.id.map_right_widgets_panel, R.id.map_center_info);
