@@ -2211,6 +2211,30 @@ public class QuickActionFactory {
         @Override
         public void execute(MapActivity activity) {
 
+            OsmandRasterMapsPlugin plugin = OsmandPlugin.getEnabledPlugin(OsmandRasterMapsPlugin.class);
+
+            if (plugin != null) {
+
+                OsmandSettings settings = activity.getMyApplication().getSettings();
+                List<Pair<String, String>> sources = loadListFromParams();
+
+                Pair<String, String> currentSource = new Pair<>(
+                        settings.MAP_OVERLAY.get(),
+                        settings.MAP_OVERLAY.get());
+
+                Pair<String, String> nextSource = sources.get(0);
+                int index = sources.indexOf(currentSource);
+
+                if (index >= 0 && index + 1 < sources.size()) {
+                    nextSource = sources.get(index + 1);
+                }
+
+                settings.MAP_OVERLAY.set(nextSource.first);
+                settings.MAP_OVERLAY_PREVIOUS.set(nextSource.first);
+
+                plugin.updateMapLayers(activity.getMapView(), settings.MAP_OVERLAY, activity.getMapLayers());
+                Toast.makeText(activity, activity.getString(R.string.quick_action_map_overlay_switch, nextSource.second), Toast.LENGTH_SHORT).show();
+            }
         }
 
         @Override
@@ -2550,7 +2574,9 @@ public class QuickActionFactory {
 
         @Override
         public boolean fillParams(View root, MapActivity activity) {
-            return !getParams().isEmpty() && (getParams().get(getListKey()) != null || !getParams().get(getListKey()).isEmpty());
+            return !getParams().isEmpty() && (getParams().get(getListKey()) != null
+                    || !getParams().get(getListKey()).isEmpty()
+                    || !getParams().get(getListKey()).equals("[]"));
         }
 
         protected class Adapter extends RecyclerView.Adapter<Adapter.ItemHolder> implements QuickActionItemTouchHelperCallback.OnItemMoveCallback {
