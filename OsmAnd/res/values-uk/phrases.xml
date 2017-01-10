@@ -423,7 +423,7 @@
 	<string name="poi_landfill_waste_nuclear">Радіоактивні відходи</string>
 	<string name="poi_waste_basket">Кошик для сміття</string>
 
-	<string name="poi_allotments">Сади/городи</string>
+	<string name="poi_allotments">Горо́ди/дачі</string>
 	<string name="poi_meadow">Левада</string>
 	<string name="poi_landuse_railway">Територія залізниці</string>
 	<string name="poi_conservation">Природоохоронна територія</string>
@@ -639,4 +639,28 @@
 	<string name="poi_waterway_fuel">Заправна станція для човнів</string>
 	<string name="poi_aerialway_platter">Тарілочний підйомник</string>
 	<string name="poi_aerialway_drag_lift">Бугельна канатна дорога</string>
+	<string name="poi_emergency_infrastructure">Аварійна інфраструктура</string>
+	<string name="poi_aerialway_rope_tow">Бугельний підйомник</string>
+	<string name="poi_aerialway_magic_carpet">Стрічковий підйомник</string>
+	<string name="poi_boatyard">Шлюпочна майстерня</string>
+	<string name="poi_waterway_turning_point">Поворотна точка на воді</string>
+	<string name="poi_weir">Невелика гребля</string>
+	<string name="poi_recycling_hardcore">Будівельне сміття</string>
+	<string name="poi_waste_disposal">Утилізація сміття</string>
+	<string name="poi_commercial">Землі комерційного використання</string>
+	<string name="poi_retail">Роздрібна торгівля (землекористування)</string>
+
+	<string name="poi_forest">Ліс (обслуговується)</string>
+	<string name="poi_farmyard">Фермерське господарство</string>
+	<string name="poi_basin">Штучна водойма</string>
+
+	<string name="poi_salt_pond">Ставок для осадження солі</string>
+	<string name="poi_cricket_nets">Сітка для крикету</string>
+	<string name="poi_bunker_silo">Споруда для зберігання силосу</string>
+	<string name="poi_government">Державна установа</string>
+	<string name="poi_office_administrative">Адміністративна установа</string>
+	<string name="poi_town">Місто (невелике)</string>
+	<string name="poi_isolated_dwelling">Хутір</string>
+	<string name="poi_place_allotments">Горо́ди/дачі</string>
+	<string name="poi_baby_hatch">Бокс для покинутого немовляти</string>
 	</resources>
