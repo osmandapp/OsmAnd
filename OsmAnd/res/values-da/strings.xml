@@ -2830,4 +2830,5 @@ Angiv en fuldstændige kode</string>
 Repræsenterer område: %1$s x %2$s</string>
     <string name="quick_action_map_overlay_switch">Kortoverlejring ændret til \"%s\".</string>
     <string name="quick_action_map_underlay_switch">Kortunderlejring ændret til \"%s\".</string>
+    <string name="quick_action_page_list_descr">Tryk på genvejen vil gennemløbe nedenstående liste.</string>
     </resources>
