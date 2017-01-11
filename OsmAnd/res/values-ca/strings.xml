@@ -2617,4 +2617,11 @@ Si aprecieu OsmAnd  i OSM i voleu ajudar-los, és la via perfecta per fer-ho."</
     <string name="shared_string_action_name">Nom de l\'acció</string>
 <string name="quick_action_map_overlay_switch">La superposició del mapa s\'ha canviat a \"%s\".</string>
     <string name="quick_action_map_underlay_switch">El fons del mapa s\'ha canviat a \"%s\".</string>
+    <string name="navigate_point_olc">Codi de localització obert</string>
+    <string name="navigate_point_olc_info_invalid">OLC no vàlid
+</string>
+    <string name="navigate_point_olc_info_short">OLC curt
+Proporcioneu el codi complet</string>
+    <string name="navigate_point_olc_info_area">OLC complet vàlid 
+Abasta l\'àrea: %1$s x %2$s</string>
     </resources>
