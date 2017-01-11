@@ -2565,4 +2565,11 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="quick_action_bug_descr">Ce texte sera renseigné automatiquement dans la zone de commentaire.</string>
     <string name="quick_action_map_overlay_switch">La sur-couche de la carte est désormais \"%s\".</string>
     <string name="quick_action_map_underlay_switch">La sous-couche de la carte est désormais \"%s\".</string>
+    <string name="navigate_point_olc">Ouvrir un code d\'emplacement</string>
+    <string name="navigate_point_olc_info_invalid">Code d\'emplacement incorrect
+</string>
+    <string name="navigate_point_olc_info_short">Code d\'emplacement court
+Merci d\'indiquer un code long</string>
+    <string name="navigate_point_olc_info_area">Code d\'emplacement valide
+représentant la zone : %1$s x %2$s</string>
     </resources>
