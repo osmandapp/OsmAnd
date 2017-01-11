@@ -151,16 +151,18 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 		}
 		registerListPreference(settings.METRIC_SYSTEM, screen, entries, mvls);
 
-		Integer[] cvls  = new Integer[4];
+		Integer[] cvls  = new Integer[5];
 		cvls[0] = PointDescription.FORMAT_DEGREES;
 		cvls[1] = PointDescription.FORMAT_MINUTES;
 		cvls[2] = PointDescription.FORMAT_SECONDS;
 		cvls[3] = PointDescription.UTM_FORMAT;
-		entries = new String[4];
+		cvls[4] = PointDescription.OLC_FORMAT;
+		entries = new String[5];
 		entries[0] = PointDescription.formatToHumanString(this, PointDescription.FORMAT_DEGREES);
 		entries[1] = PointDescription.formatToHumanString(this, PointDescription.FORMAT_MINUTES);
 		entries[2] = PointDescription.formatToHumanString(this, PointDescription.FORMAT_SECONDS);
 		entries[3] = PointDescription.formatToHumanString(this, PointDescription.UTM_FORMAT);
+		entries[4] = PointDescription.formatToHumanString(this, PointDescription.OLC_FORMAT);
 		registerListPreference(settings.COORDINATES_FORMAT, screen, entries, cvls);
 
 		// See language list and statistics at: https://hosted.weblate.org/projects/osmand/main/

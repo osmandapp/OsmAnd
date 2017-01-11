@@ -23,6 +23,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 
+import com.google.openlocationcode.OpenLocationCode;
 import com.jwetherell.openmap.common.LatLonPoint;
 import com.jwetherell.openmap.common.UTMPoint;
 
@@ -31,6 +32,7 @@ import net.osmand.LocationConvert;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.IconsCache;
+import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmandApplication;
@@ -49,6 +51,8 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 	private static final String QUICK_SEARCH_COORDS_NORTH_KEY = "quick_search_coords_north_key";
 	private static final String QUICK_SEARCH_COORDS_EAST_KEY = "quick_search_coords_east_key";
 	private static final String QUICK_SEARCH_COORDS_ZONE_KEY = "quick_search_coords_zone_key";
+	private static final String QUICK_SEARCH_COORDS_OLC_KEY = "quick_search_coords_olc_key";
+	private static final String QUICK_SEARCH_COORDS_OLC_INFO_KEY = "quick_search_coords_olc_info_key";
 	private static final String QUICK_SEARCH_COORDS_FORMAT_KEY = "quick_search_coords_format_key";
 	private static final String QUICK_SEARCH_COORDS_USE_MAP_CENTER_KEY = "quick_search_coords_use_map_center_key";
 	private static final String QUICK_SEARCH_COORDS_TEXT_KEY = "quick_search_coords_text_key";
@@ -61,6 +65,8 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 	private EditText northingEdit;
 	private EditText eastingEdit;
 	private EditText zoneEdit;
+	private EditText olcEdit;
+	private TextView olcInfo;
 	private EditText formatEdit;
 	private int currentFormat = PointDescription.FORMAT_DEGREES;
 
@@ -113,11 +119,14 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 
 		String defaultLat = "";
 		String defaultZone = "";
+		String defaultOlc = "";
 		if (getArguments() != null) {
 			String text = getArguments().getString(QUICK_SEARCH_COORDS_TEXT_KEY);
 			if (!Algorithms.isEmpty(text)) {
 				if (currentFormat == PointDescription.UTM_FORMAT) {
 					defaultZone = text.trim();
+				} else if (currentFormat == PointDescription.OLC_FORMAT) {
+					defaultOlc = text.trim();
 				} else {
 					defaultLat = text.trim();
 				}
@@ -129,6 +138,8 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 		String northingStr = getStringValue(savedInstanceState, QUICK_SEARCH_COORDS_NORTH_KEY, "");
 		String eastingStr = getStringValue(savedInstanceState, QUICK_SEARCH_COORDS_EAST_KEY, "");
 		String zoneStr = getStringValue(savedInstanceState, QUICK_SEARCH_COORDS_ZONE_KEY, defaultZone);
+		String olcStr = getStringValue(savedInstanceState, QUICK_SEARCH_COORDS_OLC_KEY, defaultOlc);
+		String olcInfoStr = getStringValue(savedInstanceState, QUICK_SEARCH_COORDS_OLC_INFO_KEY, defaultOlc);
 
 		if (savedInstanceState != null)
 			currentFormat = savedInstanceState.getInt(QUICK_SEARCH_COORDS_FORMAT_KEY, -1);
@@ -147,6 +158,8 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 		northingEdit = ((EditText) view.findViewById(R.id.northingEditText));
 		eastingEdit = ((EditText) view.findViewById(R.id.eastingEditText));
 		zoneEdit = ((EditText) view.findViewById(R.id.zoneEditText));
+		olcEdit = ((EditText) view.findViewById(R.id.olcEditText));
+		olcInfo = ((TextView) view.findViewById(R.id.olcInfoTextView));
 		formatEdit = ((EditText) view.findViewById(R.id.formatEditText));
 
 		latEdit.setText(latStr);
@@ -159,6 +172,9 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 		eastingEdit.setSelection(eastingStr.length());
 		zoneEdit.setText(zoneStr);
 		zoneEdit.setSelection(zoneStr.length());
+		olcEdit.setText(olcStr);
+		olcEdit.setSelection(olcStr.length());
+		olcInfo.setText(olcInfoStr);
 
 		formatEdit.setText(PointDescription.formatToHumanString(app, currentFormat));
 		formatEdit.setOnClickListener(new View.OnClickListener() {
@@ -188,6 +204,7 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 		northingEdit.addTextChangedListener(textWatcher);
 		eastingEdit.addTextChangedListener(textWatcher);
 		zoneEdit.addTextChangedListener(textWatcher);
+		olcEdit.addTextChangedListener(textWatcher);
 
 		OnEditorActionListener doneListener = new OnEditorActionListener() {
 			@Override
@@ -203,6 +220,7 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 
 		lonEdit.setOnEditorActionListener(doneListener);
 		zoneEdit.setOnEditorActionListener(doneListener);
+		olcEdit.setOnEditorActionListener(doneListener);
 
 		IconsCache ic = app.getIconsCache();
 		((ImageView) view.findViewById(R.id.latitudeImage))
@@ -251,7 +269,15 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 		zoneClearButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				zoneEdit.setText("");
+				olcEdit.setText("");
+			}
+		});
+		ImageButton olcClearButton = (ImageButton) view.findViewById(R.id.olcClearButton);
+		olcClearButton.setImageDrawable(ic.getThemedIcon(R.drawable.ic_action_remove_dark));
+		olcClearButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				olcEdit.setText("");
 			}
 		});
 		ImageButton formatSelectButton = (ImageButton) view.findViewById(R.id.formatSelectButton);
@@ -300,11 +326,15 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 			final TextView northEdit = ((TextView) view.findViewById(R.id.northingEditText));
 			final TextView eastEdit = ((TextView) view.findViewById(R.id.eastingEditText));
 			final TextView zoneEdit = ((TextView) view.findViewById(R.id.zoneEditText));
+			final TextView olcEdit = ((TextView) view.findViewById(R.id.olcEditText));
+			final TextView olcInfo = ((TextView) view.findViewById(R.id.olcInfoTextView));
 			outState.putString(QUICK_SEARCH_COORDS_LAT_KEY, latEdit.getText().toString());
 			outState.putString(QUICK_SEARCH_COORDS_LON_KEY, lonEdit.getText().toString());
 			outState.putString(QUICK_SEARCH_COORDS_NORTH_KEY, northEdit.getText().toString());
 			outState.putString(QUICK_SEARCH_COORDS_EAST_KEY, eastEdit.getText().toString());
 			outState.putString(QUICK_SEARCH_COORDS_ZONE_KEY, zoneEdit.getText().toString());
+			outState.putString(QUICK_SEARCH_COORDS_OLC_KEY, olcEdit.getText().toString());
+			outState.putString(QUICK_SEARCH_COORDS_OLC_INFO_KEY, olcInfo.getText().toString());
 		}
 	}
 
@@ -405,12 +435,44 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 	}
 
 	private void updateControlsVisibility() {
-		boolean utm = currentFormat == PointDescription.UTM_FORMAT;
-		view.findViewById(R.id.eastingLayout).setVisibility(utm ? View.VISIBLE : View.GONE);
-		view.findViewById(R.id.northingLayout).setVisibility(utm ? View.VISIBLE : View.GONE);
-		view.findViewById(R.id.zoneLayout).setVisibility(utm ? View.VISIBLE : View.GONE);
-		view.findViewById(R.id.latitudeLayout).setVisibility(!utm ? View.VISIBLE : View.GONE);
-		view.findViewById(R.id.longitudeLayout).setVisibility(!utm ? View.VISIBLE : View.GONE);
+		if (currentFormat == PointDescription.OLC_FORMAT) {
+			view.findViewById(R.id.eastingLayout).setVisibility(View.GONE);
+			view.findViewById(R.id.northingLayout).setVisibility(View.GONE);
+			view.findViewById(R.id.zoneLayout).setVisibility(View.GONE);
+			view.findViewById(R.id.olcLayout).setVisibility(View.VISIBLE);
+			view.findViewById(R.id.olcInfoLayout).setVisibility(View.VISIBLE);
+			view.findViewById(R.id.latitudeLayout).setVisibility(View.GONE);
+			view.findViewById(R.id.longitudeLayout).setVisibility(View.GONE);
+		} else {
+			boolean utm = currentFormat == PointDescription.UTM_FORMAT;
+			view.findViewById(R.id.eastingLayout).setVisibility(utm ? View.VISIBLE : View.GONE);
+			view.findViewById(R.id.northingLayout).setVisibility(utm ? View.VISIBLE : View.GONE);
+			view.findViewById(R.id.zoneLayout).setVisibility(utm ? View.VISIBLE : View.GONE);
+			view.findViewById(R.id.olcLayout).setVisibility(View.GONE);
+			view.findViewById(R.id.olcInfoLayout).setVisibility(View.GONE);
+			view.findViewById(R.id.latitudeLayout).setVisibility(!utm ? View.VISIBLE : View.GONE);
+			view.findViewById(R.id.longitudeLayout).setVisibility(!utm ? View.VISIBLE : View.GONE);
+		}
+	}
+
+	private String provideOlcInfo(String olcString) {
+		try {
+			if (!OpenLocationCode.isValidCode(olcString))
+				return getContext().getString(R.string.navigate_point_olc_info_invalid);
+			OpenLocationCode olc = new OpenLocationCode(olcString);
+			if (olc.isShort())
+				return getContext().getString(R.string.navigate_point_olc_info_short);
+			OpenLocationCode.CodeArea area = olc.decode();
+			int areaWidth = (int)Math.ceil(MapUtils.getDistance(area.getNorthLatitude(), area.getWestLongitude(),
+					area.getNorthLatitude(), area.getEastLongitude()));
+			int areaHeight = (int)Math.ceil(MapUtils.getDistance(area.getNorthLatitude(), area.getWestLongitude(),
+					area.getSouthLatitude(), area.getWestLongitude()));
+			return getContext().getString(R.string.navigate_point_olc_info_area,
+					OsmAndFormatter.getFormattedDistance(areaWidth, getMyApplication()),
+					OsmAndFormatter.getFormattedDistance(areaHeight, getMyApplication()));
+		} catch (IllegalArgumentException iae) {
+			return getContext().getString(R.string.navigate_point_olc_info_invalid);
+		}
 	}
 
 	private boolean applyFormat(int format) {
@@ -430,10 +492,26 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 					zoneEdit.setText(pnt.zone_number + "" + pnt.zone_letter);
 					northingEdit.setText(((long) pnt.northing) + "");
 					eastingEdit.setText(((long) pnt.easting) + "");
+				} else if (prevFormat == PointDescription.OLC_FORMAT) {
+					zoneEdit.setText(olcEdit.getText());
+					northingEdit.setText("");
+					eastingEdit.setText("");
 				} else {
 					zoneEdit.setText(latEdit.getText());
 					northingEdit.setText("");
 					eastingEdit.setText("");
+				}
+			} else if (currentFormat == PointDescription.OLC_FORMAT) {
+				if (currentLatLon != null) {
+					String olc = OpenLocationCode.encode(currentLatLon.getLatitude(), currentLatLon.getLongitude());
+					olcEdit.setText(olc);
+					olcInfo.setText(provideOlcInfo(olc));
+				} else if (prevFormat == PointDescription.UTM_FORMAT) {
+					olcEdit.setText(zoneEdit.getText());
+					olcInfo.setText(provideOlcInfo(olcEdit.getText().toString()));
+				} else {
+					olcEdit.setText(latEdit.getText());
+					olcInfo.setText(provideOlcInfo(olcEdit.getText().toString()));
 				}
 			} else {
 				if (currentLatLon != null) {
@@ -441,6 +519,9 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 					lonEdit.setText(LocationConvert.convert(MapUtils.checkLongitude(currentLatLon.getLongitude()), currentFormat));
 				} else if (prevFormat == PointDescription.UTM_FORMAT) {
 					latEdit.setText(zoneEdit.getText());
+					lonEdit.setText("");
+				} else if (prevFormat == PointDescription.OLC_FORMAT) {
+					latEdit.setText(olcEdit.getText());
 					lonEdit.setText("");
 				}
 			}
@@ -462,6 +543,12 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 				UTMPoint upoint = new UTMPoint(northing, easting, z, c);
 				LatLonPoint ll = upoint.toLatLonPoint();
 				loc = new LatLon(ll.getLatitude(), ll.getLongitude());
+			} else if (currentFormat == LocationConvert.OLC_FORMAT) {
+				String olcText = olcEdit.getText().toString();
+				olcInfo.setText(provideOlcInfo(olcText));
+				// can throw exception for invalid OLC string
+				OpenLocationCode.CodeArea codeArea = OpenLocationCode.decode(olcText);
+				loc = new LatLon(codeArea.getCenterLatitude(), codeArea.getCenterLongitude());
 			} else {
 				double lat = LocationConvert.convert(latEdit.getText().toString(), true);
 				double lon = LocationConvert.convert(lonEdit.getText().toString(), true);
@@ -543,11 +630,12 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 		@Override
 		public Dialog onCreateDialog(Bundle savedInstanceState) {
 			final QuickSearchCoordinatesFragment parent = (QuickSearchCoordinatesFragment) getParentFragment();
-			String[] entries = new String[4];
+			String[] entries = new String[5];
 			entries[0] = PointDescription.formatToHumanString(getContext(), PointDescription.FORMAT_DEGREES);
 			entries[1] = PointDescription.formatToHumanString(getContext(), PointDescription.FORMAT_MINUTES);
 			entries[2] = PointDescription.formatToHumanString(getContext(), PointDescription.FORMAT_SECONDS);
 			entries[3] = PointDescription.formatToHumanString(getContext(), PointDescription.UTM_FORMAT);
+			entries[4] = PointDescription.formatToHumanString(getContext(), PointDescription.OLC_FORMAT);
 
 			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 			builder.setTitle(R.string.coords_format)

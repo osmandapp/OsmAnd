@@ -1,5 +1,6 @@
 package net.osmand.search.core;
 
+import com.google.openlocationcode.OpenLocationCode;
 import com.jwetherell.openmap.common.LatLonPoint;
 import com.jwetherell.openmap.common.UTMPoint;
 
@@ -1031,6 +1032,15 @@ public class SearchCoreFactory {
 		
 		LatLon parseLocation(String s) {
 			s = s.trim();
+			// detect OLC first
+			// avoid throwing exceptions by carefully checking exceptions
+			if (s.length() > 0 && OpenLocationCode.isValidCode(s)) {
+				OpenLocationCode olc = new OpenLocationCode(s);
+				if (olc.isFull()) {
+					OpenLocationCode.CodeArea codeArea = olc.decode();
+					return new LatLon(codeArea.getCenterLatitude(), codeArea.getCenterLongitude());
+				}
+			}
 			if(s.length() == 0 || !(s.charAt(0) == '-' || Character.isDigit(s.charAt(0))
 					 || s.charAt(0) == 'S' || s.charAt(0) == 's' 
 					 || s.charAt(0) == 'N' || s.charAt(0) == 'n' 

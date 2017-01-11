@@ -9,6 +9,7 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
+import com.google.openlocationcode.OpenLocationCode;
 import com.jwetherell.openmap.common.LatLonPoint;
 import com.jwetherell.openmap.common.UTMPoint;
 
@@ -156,6 +157,8 @@ public class PointDescription {
 			UTMPoint pnt = new UTMPoint(new LatLonPoint(lat, lon));
 			return pnt.zone_number + "" + pnt.zone_letter + " " + ((long) pnt.easting) + " "
 					+ ((long) pnt.northing);
+		} else if (f == PointDescription.OLC_FORMAT) {
+			return getLocationOlcName(lat, lon);
 		} else {
 			try {
 				return ctx.getString(sh ? R.string.short_location_on_map : R.string.location_on_map, LocationConvert.convert(lat, f),
@@ -174,6 +177,8 @@ public class PointDescription {
 			UTMPoint pnt = new UTMPoint(new LatLonPoint(lat, lon));
 			return pnt.zone_number + "" + pnt.zone_letter + " " + ((long) pnt.easting) + " "
 					+ ((long) pnt.northing);
+		} else if (f == PointDescription.OLC_FORMAT) {
+			return getLocationOlcName(lat, lon);
 		} else {
 			try {
 				return LocationConvert.convert(lat, f) + ", " + LocationConvert.convert(lon, f);
@@ -182,6 +187,10 @@ public class PointDescription {
 				return "0, 0";
 			}
 		}
+	}
+
+	public static String getLocationOlcName(double lat, double lon) {
+		return OpenLocationCode.encode(lat, lon);
 	}
 
 	public boolean contextMenuDisabled() {
@@ -338,6 +347,7 @@ public class PointDescription {
 	public static final int FORMAT_MINUTES = LocationConvert.FORMAT_MINUTES;
 	public static final int FORMAT_SECONDS = LocationConvert.FORMAT_SECONDS;
 	public static final int UTM_FORMAT = LocationConvert.UTM_FORMAT;
+	public static final int OLC_FORMAT = LocationConvert.OLC_FORMAT;
 	
 	public static String formatToHumanString(Context ctx, int format) {
 		switch (format) {
@@ -349,6 +359,8 @@ public class PointDescription {
 				return ctx.getString(R.string.navigate_point_format_DMS);
 			case LocationConvert.UTM_FORMAT:
 				return "UTM";
+			case LocationConvert.OLC_FORMAT:
+				return "OLC";
 			default:
 				return "Unknown format";
 		}

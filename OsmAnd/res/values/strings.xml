@@ -761,6 +761,10 @@
     <string name="rendering_attr_transportStops_name">Transport stops</string>
 
     <string name="navigate_point_zone">Zone</string>
+    <string name="navigate_point_olc">Open Location Code</string>
+    <string name="navigate_point_olc_info_invalid">Invalid OLC\n</string>
+    <string name="navigate_point_olc_info_short">Short OLC\nPlease provide a full code</string>
+    <string name="navigate_point_olc_info_area">Valid full OLC\nRepresents area: %1$s x %2$s</string>
     <string name="navigate_point_northing">Northing</string>
     <string name="navigate_point_easting">Easting</string>
     <string name="download_tab_downloads">All Downloads</string>
