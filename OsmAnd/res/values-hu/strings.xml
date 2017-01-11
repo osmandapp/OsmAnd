@@ -1022,7 +1022,7 @@ Néhány fontosabb funkció:
     <string name="download_select_map_types">Egyéb térképek</string>
 
 
-    <string name="audionotes_location_not_defined">Még nem található pozíció hangjegyzet készítéséhez. A \"Hely használata…\" gombbal helyezhetsz el jegyzetet az adott helyen</string>
+    <string name="audionotes_location_not_defined">Még nem található pozíció hangjegyzet készítéséhez. A „Hely használata…” gombbal helyezhetsz el jegyzetet az adott helyen.</string>
     <string name="map_widget_audionotes">Hangjegyzetek</string>
     <string name="audionotes_plugin_name">Hang- és videojegyzetek</string>
 
@@ -2217,8 +2217,8 @@ A nézet aktiválása megváltoztatja a térképstílust „Tél és síelésre�
     <string name="world_map_download_descr">A Föld alaptérképed (az egész Földet lefedi alacsony felbontással) hiányzik vagy elavult. A globális áttekinthetőséghez javasoljuk a letöltését.</string>
     <string name="shared_string_qr_code">QR-kód</string>
     <string name="map_downloaded">Térkép letöltve</string>
-    <string name="map_downloaded_descr">%1$s térképe letöltődött. A használatához menj vissza a térképre.</string>
-    <string name="go_to_map">Tovább a térképre</string>
+    <string name="map_downloaded_descr">%1$s térképe letöltődött, elkezdheted használni.</string>
+    <string name="go_to_map">Térkép megjelenítése</string>
     <string name="application_dir_description">Válaszd ki, hol szeretnéd tárolni a térképeket és egyéb adatokat.</string>
     <string name="show_on_start_description">Kikapcsolva közvetlenül a térkép képernyőt indítja</string>
     <string name="enter_country_name">Add meg az ország nevét</string>
@@ -2623,7 +2623,7 @@ Ha segítségre van szükséged az OsmAnd alkalmazással kapcsolatban, keresd a 
     <string name="get_for_month">Beszerzés %1$s hónapra</string>
     <string name="osmand_plus_banner_desc">Az OsmAnd teljes verziója körlátlan térképletöltéssel és havi térképfrissítéssel.</string>
     <string name="si_mi_meters">Mérföld/méter</string>
-    <string name="search_map">Keresés a térképen…</string>
+    <string name="search_map">Térképek keresése…</string>
     <string name="first_usage_wizard_desc">Engedd az OsmAnd-nek a pozíciód meghatározását, hogy letölthető térképet javasolhasson a régióhoz.</string>
     <string name="location_not_found">Hely nem található</string>
     <string name="no_inet_connection">Nincs internetkapcsolat</string>
@@ -2785,4 +2785,27 @@ Ha segítségre van szükséged az OsmAnd alkalmazással kapcsolatban, keresd a 
     <string name="quick_action_category_descr">Válaszd ki, melyik kategóriába kerüljön a kedvenc hely</string>
     <string name="quick_action_gpx_category_descr">Válassz opcionális kategóriát</string>
     <string name="quick_action_poi_list">POI lista</string>
-    </resources>
+    <string name="quick_action_sh_poi_descr">Hozzáadhatsz egy, vagy több, a térképen megjelenítendő POI kategóriát.</string>
+    <string name="quick_action_map_style_descr">A gomb megnyomásakor váltani fogja a térképstílust az alábbi lista alapján.</string>
+    <string name="quick_action_map_style_action">Térképstílus hozzáadása</string>
+    <string name="quick_action_empty_param_error">A paraméterek nem lehetnek üresek</string>
+    <string name="quick_action_map_styles">Térképstílusok</string>
+    <string name="quick_action_map_overlay">Térkép rátét módosítása</string>
+    <string name="quick_action_map_overlay_title">Térkép rátétek</string>
+    <string name="quick_action_map_overlay_descr">A gomb megnyomásakor váltani fogja a rátét térképet az alábbi lista alapján.</string>
+    <string name="quick_action_map_overlay_action">Rátét hozzáadása</string>
+    <string name="quick_action_map_overlay_switch">A térkép rátét erre módosult: „%s”.</string>
+    <string name="quick_action_map_underlay_switch">A térkép alátét erre módosult: „%s”.</string>
+    <string name="quick_action_map_underlay">Térkép alátét módosítása</string>
+    <string name="quick_action_map_underlay_title">Térkép alátétek</string>
+    <string name="quick_action_map_underlay_descr">A gomb megnyomásakor váltani fogja az alátét térképet az alábbi lista alapján.</string>
+    <string name="quick_action_map_underlay_action">Alátét hozzáadása</string>
+    <string name="quick_action_map_source">Térképforrás módosítása</string>
+    <string name="quick_action_map_source_title">Térképforrások</string>
+    <string name="quick_action_map_source_descr">A gomb megnyomásakor váltani fogja a térképforrást az alábbi lista alapján.</string>
+    <string name="quick_action_map_source_action">Térképforrás hozzáadása</string>
+    <string name="quick_action_map_source_switch">A térképforrás erre módosult: „%s”.</string>
+    <string name="quick_action_btn_tutorial_title">Gombpozíció módosítása</string>
+    <string name="quick_action_btn_tutorial_descr">Nyomd meg hosszan és húzd a gombot, hogy módosítsd a pozícióját a képernyőn</string>
+	<string name="shared_string_action_name">Műveletnév</string>
+</resources>
