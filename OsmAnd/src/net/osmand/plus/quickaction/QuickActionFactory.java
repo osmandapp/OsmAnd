@@ -163,14 +163,6 @@ public class QuickActionFactory {
         }
 
         quickActions.add(new QuickAction(0, R.string.quick_action_add_configure_map));
-        quickActions.add(new MapStyleAction());
-
-        if (OsmandPlugin.getEnabledPlugin(OsmandRasterMapsPlugin.class) != null) {
-
-            quickActions.add(new MapSourceAction());
-            quickActions.add(new MapOverlayAction());
-            quickActions.add(new MapUnderlayAction());
-        }
 
         QuickAction favorites = new ShowHideFavoritesAction();
 
@@ -179,6 +171,15 @@ public class QuickActionFactory {
         }
 
         quickActions.add(new ShowHidePoiAction());
+
+        quickActions.add(new MapStyleAction());
+
+        if (OsmandPlugin.getEnabledPlugin(OsmandRasterMapsPlugin.class) != null) {
+
+            quickActions.add(new MapSourceAction());
+            quickActions.add(new MapOverlayAction());
+            quickActions.add(new MapUnderlayAction());
+        }
 
         QuickAction voice = new NavigationVoiceAction();
 
