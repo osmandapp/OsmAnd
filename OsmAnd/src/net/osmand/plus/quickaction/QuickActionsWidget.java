@@ -2,6 +2,10 @@ package net.osmand.plus.quickaction;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.ShapeDrawable;
 import android.support.annotation.StyleRes;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.PagerAdapter;
@@ -15,17 +19,16 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 
 import java.util.List;
+
+import static net.osmand.plus.R.id.imageView;
 
 
 public class QuickActionsWidget extends LinearLayout {
@@ -155,6 +158,16 @@ public class QuickActionsWidget extends LinearLayout {
         controls = (LinearLayout) findViewById(R.id.controls);
         controls.setVisibility(pageCount > 1 ? VISIBLE : GONE);
 
+        Drawable background = controls.getBackground();
+        int backgroundColor = ContextCompat.getColor(context, light ? R.color.dashboard_divider_light : R.color.dashboard_divider_dark);
+        if (background instanceof ShapeDrawable) {
+            ((ShapeDrawable)background).getPaint().setColor(backgroundColor);
+        } else if (background instanceof GradientDrawable) {
+            ((GradientDrawable)background).setColor(backgroundColor);
+        } else if (background instanceof ColorDrawable) {
+            ((ColorDrawable)background).setColor(backgroundColor);
+        }
+
         updateControls(viewPager.getCurrentItem());
     }
 
@@ -208,7 +221,7 @@ public class QuickActionsWidget extends LinearLayout {
                 final QuickAction action = QuickActionFactory.produceAction(
                         actions.get(i + (position * ELEMENT_PER_PAGE)));
 
-                ((ImageView) view.findViewById(R.id.imageView))
+                ((ImageView) view.findViewById(imageView))
                         .setImageResource(action.getIconRes(getContext()));
 
                 ((TextView) view.findViewById(R.id.title))
