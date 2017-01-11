@@ -33,7 +33,7 @@
     <string name="osmand_srtm_long_description_1000_chars">"Udvidelsen giver både en højdekurver overlejring og et relieflag, der vises ovenpå OsmAnds standard kort. Funktionaliteten er meget værdsat af sportsfolk, vandrere, og enhver interesseret i en relief struktur af landskabet.
 \n\nDe globale data (mellem 70 grader nord og 70 grader syd) er baseret på målinger af SRTM (Shuttle Radar Topografi Mission) og ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), et billeddannende instrument ombord på Terra satellitten, flagskibet i NASAs Earth Observering system. ASTER er et samarbejde mellem NASA, Japans Ministry of Economy, Trade and Industry  (METI), og Japan Space Systems (J-spacesystems). "</string>
     <string name="map_widget_distancemeasurement">Afstandsmåling</string>
-    <string name="audionotes_location_not_defined">Placering der skal tilknyttes til noten er ikke defineret endnu. \'Brug placering …\' for at tildele en note til den angivne placering</string>
+    <string name="audionotes_location_not_defined">Placering der skal tilknyttes til noten er ikke defineret endnu. \'Brug placering …\' til at knytte en note til den angivne placering.</string>
 
     <string name="map_widget_audionotes">Audionoter</string>
     <string name="audionotes_plugin_description">Audio-/videonoter udvidelse giver funktionalitet til at tage audio-/foto-/videonoter under en tur, enten ved hjælp en knap på skærmen, eller direkte fra kontekstmenuen for en position på kortet.</string>
@@ -2747,7 +2747,7 @@ Hvis du  ønsker at støtte OsmAnd og OSM, er dette en god måde at gøre det p�
 
     <string name="quick_action_item_action">Genvej %d</string>
     <string name="quick_action_item_screen">Skærm %d</string>
-    <string name="quick_action_add_marker">Tilføj markør</string>
+    <string name="quick_action_add_marker">Tilføj kortmarkør</string>
     <string name="quick_action_add_poi">Tilføj IP</string>
     <string name="quick_action_map_style">Skift kortformat</string>
     <string name="quick_action_map_style_switch">Kortformat er ændret til \"%s\".</string>
@@ -2768,15 +2768,15 @@ Hvis du  ønsker at støtte OsmAnd og OSM, er dette en god måde at gøre det p�
     <string name="quick_actions_delete_text">Bekræft sletning af genvej \"%s\"?</string>
     <string name="quick_favorites_show_favorites_dialog">Vis dialogen favoritter</string>
     <string name="quick_favorites_name_preset">Forudindstillet navn</string>
-    <string name="quick_action_add_marker_descr">Tryk på genvej vil tilføje en markør til den angivne placering.</string>
-    <string name="quick_action_add_gpx_descr">Tryk på genvejen vil tilføje GPX rutepunkt til den angivne placering.</string>
-    <string name="quick_action_take_audio_note_descr">Tryk på gennvejen vil tilføje lydnote til den angivne placering.</string>
-    <string name="quick_action_take_video_note_descr">Tryk på genvejen vil føje videonote til den angivne placering.</string>
-    <string name="quick_action_take_photo_note_descr">Tryk på genvej vil tilføje en billednote til den angivne placering.</string>
-    <string name="quick_action_add_osm_bug_descr">Tryk på genvejen tilføjer en OSM fejlnote til den angivne placering.</string>
-    <string name="quick_action_add_poi_descr">Tryk på genvej vil tilføje et interessepunkt til den angivne placering.</string>
+    <string name="quick_action_add_marker_descr">Tryk på genvej vil tilføje en kortmarkør på skærmens centrum.</string>
+    <string name="quick_action_add_gpx_descr">Tryk på genvejen vil tilføje et GPX-rutepunkt på skærmens centrum.</string>
+    <string name="quick_action_take_audio_note_descr">Tryk på gennvejen vil tilføje en lydnote på skærmens centrum.</string>
+    <string name="quick_action_take_video_note_descr">Tryk på genvejen vil føje en videonote på skærmens centrum.</string>
+    <string name="quick_action_take_photo_note_descr">Tryk på genvej vil tilføje en billednote på skærmens centrum.</string>
+    <string name="quick_action_add_osm_bug_descr">Tryk på genvejen tilføjer en OSM fejlnote på skærmens centrum.</string>
+    <string name="quick_action_add_poi_descr">Tryk på genvej vil tilføje et interessepunkt på skærmens centrum.</string>
     <string name="quick_action_navigation_voice_descr">Tryk på genvej vil deaktivere eller aktivere stemmevejledning under navigation.</string>
-    <string name="quick_action_add_parking_descr">Tryk på genvejen vil tilføje en parkeringsplads til den angivne placering.</string>
+    <string name="quick_action_add_parking_descr">Tryk på genvejen vil tilføje en parkeringsplads på skærmens centrum.</string>
     <string name="favorite_autofill_toast_text">" er gemt i "</string>
     <string name="favorite_empty_place_name">Sted</string>
     <string name="quick_action_duplicates">Angivne genvej er allerede i brug, navnet blev ændret til %1$s at undgå overlapning.</string>
@@ -2799,14 +2799,14 @@ Hvis du  ønsker at støtte OsmAnd og OSM, er dette en god måde at gøre det p�
     <string name="quick_action_category_descr">Vælg den kategori, som favoritten skal gemmes i</string>
     <string name="quick_action_gpx_category_descr">Vælg en valgfri kategori</string>
     <string name="quick_action_poi_list">IP-liste</string>
-    <string name="quick_action_sh_poi_descr">Tilføj en eller flere IP kategorier der skal vises på kortet</string>
-    <string name="quick_action_map_style_descr">Tryk på genvejen skifter kortformat, fra nedenstående liste</string>
+    <string name="quick_action_sh_poi_descr">Tilføj en eller flere IP kategorier der skal vises på kortet.</string>
+    <string name="quick_action_map_style_descr">Tryk på genvejen skifter kortformat fra nedenstående liste.</string>
     <string name="quick_action_map_style_action">Tilføj kortformat</string>
     <string name="quick_action_empty_param_error">Parametre bør ikke være tom</string>
     <string name="quick_action_map_styles">Kortformater</string>
     <string name="quick_action_map_overlay">Skift kortoverlejring</string>
     <string name="quick_action_map_overlay_title">Kortoverlejringer</string>
-    <string name="quick_action_map_overlay_descr">Tryk på genvejen skifter kort-overlejring fra nedenstående liste</string>
+    <string name="quick_action_map_overlay_descr">Tryk på genvejen skifter kort-overlejring fra nedenstående liste.</string>
     <string name="quick_action_map_overlay_action">Tilføj overlejring</string>
     <string name="quick_action_map_underlay">Skift kortunderlejring</string>
     <string name="quick_action_map_underlay_title">Kortunderlejring</string>
@@ -2814,11 +2814,20 @@ Hvis du  ønsker at støtte OsmAnd og OSM, er dette en god måde at gøre det p�
     <string name="quick_action_map_underlay_action">Tilføj underlejring</string>
     <string name="quick_action_map_source">Skift kortkilde</string>
     <string name="quick_action_map_source_title">Kortkilder</string>
-    <string name="quick_action_map_source_descr">Tryk på genvejen skifter kortkilde fra nedenstående liste</string>
+    <string name="quick_action_map_source_descr">Tryk på genvejen skifter kortkilde fra nedenstående liste.</string>
     <string name="quick_action_map_source_action">Tilføj en kortkilde</string>
     <string name="quick_action_map_source_switch">Kortkilde er ændret til \"%s\".</string>
     <string name="quick_action_btn_tutorial_title">Ændre knap placering</string>
     <string name="quick_action_btn_tutorial_descr">Langt tryk og træk knappen på skærmen for at ændre placering</string>
 <string name="quick_action_interim_dialog">Vis en foreløbig dialog</string>
     <string name="shared_string_action_name">Genvejsnavn</string>
-</resources>
+<string name="navigate_point_olc">Open Location Code (OLC)</string>
+    <string name="navigate_point_olc_info_invalid">Ugyldig OLC
+</string>
+    <string name="navigate_point_olc_info_short">Kort OLC
+Angiv en fuldstændige kode</string>
+    <string name="navigate_point_olc_info_area">Gyldig fuldstændig OLC
+Repræsenterer område: %1$s x %2$s</string>
+    <string name="quick_action_map_overlay_switch">Kortoverlejring ændret til \"%s\".</string>
+    <string name="quick_action_map_underlay_switch">Kortunderlejring ændret til \"%s\".</string>
+    </resources>
