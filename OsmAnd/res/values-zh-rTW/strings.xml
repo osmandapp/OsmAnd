@@ -2743,4 +2743,11 @@ Facebook：https://www.facebook.com/osmandapp
     <string name="dialog_add_action_title">增加動作</string>
     <string name="quick_actions_delete">刪除動作</string>
     <string name="quick_actions_delete_text">您確定要刪除動作 \"%s\" 嗎？</string>
+    <string name="quick_action_add_marker_descr">輕點動作按鈕將會在螢幕中心的位置增加一個地圖記號。</string>
+    <string name="quick_action_add_gpx_descr">輕點動作按鈕將會在螢幕中心的位置增加一個 GPX 航點。</string>
+    <string name="quick_action_take_audio_note_descr">輕點動作按鈕將會在螢幕中心的位置增加一個音訊注解。</string>
+    <string name="quick_action_take_video_note_descr">輕點動作按鈕將會在螢幕中心的位置增加一個視訊注解。</string>
+    <string name="quick_action_take_photo_note_descr">輕點動作按鈕將會在螢幕中心的位置增加一個照片注解。</string>
+    <string name="quick_action_add_osm_bug_descr">輕點動作按鈕將會在螢幕中心的位置增加一個 OSM 錯誤注解。</string>
+    <string name="quick_action_add_poi_descr">輕點動作按鈕將會在螢幕中心的位置增加一個 POI。</string>
     </resources>
