@@ -2814,4 +2814,5 @@ i więcej...
 Podaj pełny kod</string>
     <string name="navigate_point_olc_info_area">Poprawny pełny OLC
 Reprezentuje obszar: %1$s x %2$s</string>
+    <string name="quick_action_page_list_descr">Stuknięcie przycisku akcji przerzuci przez poniższą listę.</string>
     </resources>
