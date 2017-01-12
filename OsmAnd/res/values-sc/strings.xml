@@ -2748,4 +2748,13 @@ Si istimas OsmAnd e OSM e los boles suportare, custa est una manera perfeta pro 
     <string name="quick_action_btn_tutorial_title">Càmbia sa positzione de su butone</string>
     <string name="quick_action_btn_tutorial_descr">Mantène incarcadu e trìsina su butone pro cambiare sa positzione sua in s\'ischermu</string>
 	<string name="shared_string_action_name">Nùmene de s\'atzione</string>
-</resources>
+<string name="navigate_point_olc">Aberi unu còdighe de logu</string>
+    <string name="navigate_point_olc_info_invalid">OLC non vàlidu
+</string>
+    <string name="navigate_point_olc_info_short">OLC curtzu
+Pro praghere iscrie su còdighe intreu</string>
+    <string name="navigate_point_olc_info_area">OLC intreu vàlidu
+Àrea rapresentada: %1$s x %2$s</string>
+    <string name="quick_action_map_overlay_switch">S\'istradu superiore de sa mapa est istadu cambiadu in \"%s\".</string>
+    <string name="quick_action_map_underlay_switch">S\'istratu inferiore de sa mapa est istadu cambiadu in \"%s\".</string>
+    </resources>
