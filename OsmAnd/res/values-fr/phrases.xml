@@ -1061,7 +1061,7 @@
 	<string name="poi_denomination_reformed">Réformé</string>
 	<string name="poi_denomination_seventh_day_adventist">Adventiste du septième jour</string>
 	<string name="poi_denomination_new_apostolic">Nouveau apostolique</string>
-	<string name="poi_denomination_church_of_england">Église d’Angleterre</string>
+	<string name="poi_denomination_church_of_england">Église Anglicane</string>
 	<string name="poi_denomination_episcopal">Épiscopal</string>
 	<string name="poi_denomination_united">Uni</string>
 	<string name="poi_denomination_greek_catholic">Catholique grecque</string>
@@ -1160,7 +1160,7 @@
 	<string name="poi_information_hikingmap">Carte des randonnées</string>
 	<string name="poi_information_audioguide">Audioguide</string>
 	<string name="poi_information_bicyclemap">Carte cycliste</string>
-	<string name="poi_smoking_no">Non fumeur</string>
+	<string name="poi_smoking_no">Interdit</string>
 	<string name="poi_smoking_dedicated">Réservé aux fumeurs</string>
 
 	<string name="poi_toll_yes">Péage</string>
@@ -1175,12 +1175,12 @@
 
 	<string name="poi_dead_wood">Bois mort</string>
 
-	<string name="poi_piste_difficulty_easy">Piste : facile</string>
-	<string name="poi_piste_difficulty_intermediate">Piste : intermédiaire</string>
-	<string name="poi_piste_difficulty_advanced">Piste : difficile</string>
-	<string name="poi_piste_difficulty_novice">Piste : débutant</string>
-	<string name="poi_piste_difficulty_expert">Piste : expert</string>
-	<string name="poi_piste_difficulty_freeride">Piste : freeride</string>
+	<string name="poi_piste_difficulty_easy">Facile</string>
+	<string name="poi_piste_difficulty_intermediate">Intermédiaire</string>
+	<string name="poi_piste_difficulty_advanced">Difficile</string>
+	<string name="poi_piste_difficulty_novice">Débutant</string>
+	<string name="poi_piste_difficulty_expert">Expert</string>
+	<string name="poi_piste_difficulty_freeride">Freeride</string>
 	<string name="poi_capacity">Capacité</string>
 	<string name="poi_aerialway_capacity">Capacité horaire</string>
 	<string name="poi_aerialway_duration">Durée moyenne du trajet (minutes)</string>
@@ -1232,10 +1232,10 @@
 	<string name="poi_bicycle_parking_wall_loops">Boucles murales</string>
 	<string name="poi_species">Espèces</string>
 	<string name="poi_information_sign">Panneau</string>
-	<string name="poi_covered_yes">Couvert</string>
+	<string name="poi_covered_yes">Oui</string>
 	<string name="poi_covered_no">Non couvert</string>
 
-	<string name="poi_smoking_outside">Autorisation de fumer à l\'extérieur uniquement</string>
+	<string name="poi_smoking_outside">A l\'extérieur uniquement</string>
 	<string name="poi_services">Zone de service</string>
 	<string name="poi_mini_roundabout">Mini rond-point</string>
 	<string name="poi_level">Niveau</string>
@@ -1911,17 +1911,17 @@
 	<string name="poi_trade_wood">Fournitures de bois</string>
 	<string name="poi_bicycle_parking_anchors">Ancres pour vélo</string>
 	<string name="poi_bicycle_parking_stands">Râtelier pour vélo</string>
-	<string name="poi_information_terminal">Terminal d\'information</string>
+	<string name="poi_information_terminal">Terminal d\'informations</string>
 	<string name="poi_information_tactile_map">Carte tactile</string>
 	<string name="poi_board_type_notice">Tableau d\'affichage</string>
-	<string name="poi_fireplace_yes">Cheminée</string>
+	<string name="poi_fireplace_yes">Oui</string>
 	<string name="poi_fireplace_no">Aucune cheminée</string>
 
-	<string name="poi_smoking_yes">Permission de fumer</string>
-	<string name="poi_smoking_separated">Permission de fumer dans une chambre séparée</string>
-	<string name="poi_smoking_isolated">Permission de fumer dans une pièce isolée</string>
-	<string name="poi_traffic_signals_sound_yes">Avec son</string>
-	<string name="poi_traffic_signals_sound_no">Sans son</string>
+	<string name="poi_smoking_yes">Autorisé</string>
+	<string name="poi_smoking_separated">Dans une chambre séparée</string>
+	<string name="poi_smoking_isolated">Dans une pièce isolée</string>
+	<string name="poi_traffic_signals_sound_yes">Oui</string>
+	<string name="poi_traffic_signals_sound_no">Non</string>
 	<string name="poi_grassland">Prairie</string>
 	<string name="poi_farmland">Terres agricoles</string>
 	<string name="poi_payment_cryptocurrencies_no">Cryptomonnaies non acceptées</string>
@@ -1957,7 +1957,7 @@
 	<string name="poi_leaf_type_mixed">Mélangé</string>
 	<string name="poi_trees_kiwi">Kiwi</string>
 	<string name="poi_information_wildlife">Indicateur d’information : vie sauvage</string>
-	<string name="poi_information_history">Indicateur d’information : historique</string>
+	<string name="poi_information_history">Historique</string>
 	<string name="poi_information_route_marker">Indicateur d’itinéraire</string>
 	<string name="poi_capacity_parent_no">Pas de places réservées aux parents</string>
 	<string name="poi_service_bicycle_second_hand_yes">Vente de vélos d\'occasion : oui</string>
@@ -2133,7 +2133,7 @@
 	<string name="poi_leaf_type_leafless">Sans feuilles</string>
 	<string name="poi_deadlock">Impasse</string>
 
-	<string name="poi_water_characteristic_mineral">Caractéristique de l’eau : minéral</string>
+	<string name="poi_water_characteristic_mineral">Minéral</string>
 	<string name="poi_information_guidepost">Point de repère</string>
 	<string name="poi_fire_hydrant_count">Bouche incendie</string>
 	<string name="poi_payment_fuel_type">Cartes carburant</string>
@@ -2215,7 +2215,7 @@
 <string name="poi_emergency_infrastructure">Infrastructure de situation d\'urgence</string>
 	<string name="poi_spices">Magasin d\'épices</string>
 	<string name="poi_shop_craft">Magasin d\'art et d\'artisanat</string>
-	<string name="poi_commercial">Zone commerciale</string>
+	<string name="poi_commercial">Zone d\'activités d\'affaires</string>
 	<string name="poi_wiki_lang_lb">Wiki luxembourgeois</string>
 	<string name="poi_wiki_lang_mk">Wiki macédonien</string>
 	<string name="poi_wiki_lang_ku">Wiki kurde</string>
@@ -2270,4 +2270,103 @@
 	<string name="poi_brewery_additional">Nom de la brasserie</string>
 	<string name="poi_vending_excrement_bags">Sacs pour récupérer les déjections canines</string>
 	<string name="poi_brushless">Sans balais</string>
+	<string name="poi_vending_fuel">Station essence</string>
+	<string name="poi_resource_aggregate">Agrégat</string>
+	<string name="poi_resource_antimony">Antimoine</string>
+	<string name="poi_resource_asbestos">Amiante</string>
+	<string name="poi_resource_barite">Barytine</string>
+	<string name="poi_resource_beryl">Béryl</string>
+	<string name="poi_resource_bismuth">Bismuth</string>
+	<string name="poi_resource_chromite">Chromite</string>
+	<string name="poi_resource_clay">Argile</string>
+	<string name="poi_resource_gypsum">Gypse</string>
+	<string name="poi_resource_iron_ore">Minerai de fer</string>
+	<string name="poi_resource_limestone">Calcaire</string>
+	<string name="poi_resource_mineral_oil">Huile minérale</string>
+	<string name="poi_resource_peat">Tourbe</string>
+	<string name="poi_resource_radium">Radium</string>
+	<string name="poi_resource_rutile">Rutile</string>
+	<string name="poi_resource_sandstone">Grès</string>
+	<string name="poi_resource_silica">Silice</string>
+	<string name="poi_resource_slate_iron_ore_copper">Ardoise;minerai de fer;cuivre</string>
+	<string name="poi_resource_tin">Étain</string>
+	<string name="poi_resource_vanadium">Vanadium</string>
+	<string name="poi_resource_zircon">Zircon</string>
+
+	<string name="poi_wetland_wet_meadow">Prairie humide</string>
+	<string name="poi_wetland_bog">Tourbière</string>
+	<string name="poi_wetland_swamp">Marécage</string>
+	<string name="poi_wetland_saltern">Marais salant</string>
+	<string name="poi_wetland_tidalflat">Marée basse</string>
+	<string name="poi_wetland_fen">Marais</string>
+	<string name="poi_flagpole">Mât pour drapeau</string>
+
+	<string name="poi_artwork_type_stone">Type d’œuvre : rocher</string>
+	<string name="poi_artwork_type_bust">Type d’œuvre : buste</string>
+	<string name="poi_bridge_structure_beam">Structure du pont : poutre</string>
+	<string name="poi_bridge_structure_simple_suspension">Structure du pont : suspendu (une pile)</string>
+	<string name="poi_bridge_structure_suspension">Structure du pont : suspendu</string>
+	<string name="poi_surface_sett">Surface : pavés</string>
+	<string name="poi_surface_cobblestone">Surface : pavés ronds</string>
+	<string name="poi_route_trolleybus_ref">Trolleybus</string>
+	<string name="poi_route_tram_ref">Tram</string>
+	<string name="poi_industrial_oil">Type : industrie pétrolière</string>
+	<string name="poi_industrial_gas">Type : industrie gazière</string>
+	<string name="poi_industrial_timber">Type : bois de construction</string>
+	<string name="poi_industrial_brickyard">Type : briqueterie</string>
+	<string name="poi_industrial_sawmill">Type : scierie</string>
+	<string name="poi_crop_grass">Culture : herbe</string>
+	<string name="poi_crop_poultry">Culture : volaille</string>
+	<string name="poi_clothes_fur">Fourrure</string>
+	<string name="poi_historic_milestone">Borne routière historique</string>
+
+	<string name="poi_castle_type_stately">Type de château : majestueux</string>
+	<string name="poi_castle_type_defensive_stately">Type de château : défensif, majestueux</string>
+	<string name="poi_impromptu_yes">Impromptu : oui</string>
+	<string name="poi_impromptu_no">Impromptu : non</string>
+	<string name="poi_product_quicklime">Produit : chaux vive</string>
+	<string name="poi_historic_period_stone_bronze_undetermined">Période historique : Âge de Pierre / Âge de Bronze (indéterminé)</string>
+	<string name="poi_material_earth">Matière : terre</string>
+	<string name="poi_covered">Couvert</string>
+	<string name="poi_aerialway_bicycle">Transport de vélos</string>
+	<string name="poi_aerialway_heating">Chauffage</string>
+	<string name="poi_pharmacy_dispensing">Distribution</string>
+	<string name="poi_star_rating">Évaluation</string>
+	<string name="poi_power_supply">Prise de courant</string>
+	<string name="poi_retail">Zone commerciale</string>
+
+	<string name="poi_wiki_lang_bpy">Wiki bishnupriya</string>
+	<string name="poi_wiki_lang_fa">Wiki farsi</string>
+	<string name="poi_wiki_lang_fy">Wiki frison</string>
+	<string name="poi_wiki_lang_ml">Wiki malayalam</string>
+	<string name="poi_wiki_lang_mr">Wiki marathi</string>
+	<string name="poi_wiki_lang_os">Wiki ossète</string>
+	<string name="poi_wiki_lang_war">Wiki waray-waray</string>
+	<string name="poi_wiki_lang_min">Wiki minangkabau</string>
+	<string name="poi_wiki_lang_kk">Wiki kazakh</string>
+	<string name="poi_wiki_lang_ce">Wiki tchétchène</string>
+	<string name="poi_wiki_lang_tt">Wiki tatar</string>
+	<string name="poi_wiki_lang_ky">Wiki kirghize</string>
+	<string name="poi_wiki_lang_ast">Wiki astur-léonais</string>
+	<string name="poi_content_slurry">Contenu : excréments d\'animaux</string>
+	<string name="poi_bicycle_parking_rack">Porte-vélos</string>
+	<string name="poi_bicycle_parking_building">Bâtiment spécial</string>
+	<string name="poi_water_characteristic_sulfuric">Sulfurique</string>
+
+	<string name="poi_information_nature">Nature</string>
+	<string name="poi_board_type_geology">Géologie</string>
+	<string name="poi_board_type_public_transport">Transports publics</string>
+	<string name="poi_board_type_technology">Technologie</string>
+	<string name="poi_board_type_astronomy">Astronomie</string>
+
+	<string name="poi_toll_hgv_yes">Péage HGV</string>
+	<string name="poi_tactile_paving_yes">Oui</string>
+	<string name="poi_tactile_paving_no">Non</string>
+	<string name="poi_railway_level_crossing">Passage à niveau</string>
+	<string name="poi_xmas">Noël</string>
+	<string name="poi_xmas_event">Evénement de Noël</string>
+	<string name="poi_xmas_market">Marché de Noël</string>
+	<string name="poi_xmas_pyramid">Pyramide de Noël</string>
+	<string name="poi_xmas_shop">Boutique de Noël</string>
+	<string name="poi_xmas_tree">Sapin de Noël</string>
 	</resources>
