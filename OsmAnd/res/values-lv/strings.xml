@@ -2614,4 +2614,43 @@ kas tiks pievienots jūsu Kategorijas sadaļai.</string>
     <string name="selected_categories">Atzīmētās kategorijas</string>
     <string name="lang_sr_latn">Serbu (latīņu)</string>
     <string name="lang_zh_hk">Ķīniešu (Honkongas)</string>
+    <string name="rendering_attr_hideWaterPolygons_name">Nerādīt ūdenstilpnes</string>
+    <string name="navigate_point_olc">Atvērt Lokācijas Kodu (OLC)</string>
+    <string name="navigate_point_olc_info_invalid">Nepareizs OLC
+</string>
+    <string name="navigate_point_olc_info_short">Nepilnīgs OLC
+Lūdzu ievadiet pilnu kodu</string>
+    <string name="navigate_point_olc_info_area">Korekts pilns OLC
+Apraksta laukumu: %1$s x %2$s</string>
+    <string name="quick_action_add_marker">Pievienot kartes marķieri</string>
+    <string name="quick_action_add_poi">Pievienot POI</string>
+    <string name="quick_action_map_style">Mainīt kartes stilu</string>
+    <string name="quick_action_map_style_switch">Kartes stils ir izmainīts uz \"%s\".</string>
+    <string name="quick_action_take_audio_note">Sākt audio piezīmi</string>
+    <string name="quick_action_take_video_note">Sākt video piezīmi</string>
+    <string name="quick_action_take_photo_note">Sākt foto piezīmi</string>
+    <string name="quick_action_add_osm_bug">Pievienot OSM kļūdu</string>
+    <string name="quick_action_navigation_voice">Balss ieslēgt/izslēgt</string>
+    <string name="quick_action_navigation_voice_off">Balss ir izslēgta</string>
+    <string name="quick_action_navigation_voice_on">Balss ir ieslēgta</string>
+    <string name="quick_action_add_gpx">Pievienot GPX ceļapunktu</string>
+    <string name="quick_action_add_parking">Pievienot parkošanās vietu</string>
+    <string name="quick_action_new_action">Pievienot darbību</string>
+    <string name="quick_action_edit_action">Labot darbību</string>
+    <string name="quick_action_add_favorite">Pievienot favorītu</string>
+    <string name="dialog_add_action_title">Pievienot darbību</string>
+    <string name="quick_actions_delete">Dzēst darbību</string>
+    <string name="quick_actions_delete_text">Vai vēlaties dzēst darbību \"%s\"?</string>
+    <string name="quick_favorites_show_favorites_dialog">Rādīt favorītu dialogu</string>
+    <string name="quick_action_add_marker_descr">Spiežot darbības pogu, ekrāna centrā tiks ielikts kartes marķieris.</string>
+    <string name="quick_action_add_gpx_descr">Spiežot darbības pogu, ekrāna centrā tiks ielikts GPX ceļapunkts.</string>
+    <string name="quick_action_take_audio_note_descr">Spiežot darbības pogu, ekrāna centrā tiks ielikta audio piezīme.</string>
+    <string name="quick_action_take_video_note_descr">Spiežot darbības pogu, ekrāna centrā tiks ielikta video piezīme.</string>
+    <string name="quick_action_take_photo_note_descr">Spiežot darbības pogu, ekrāna centrā tiks ielikta foto piezīme.</string>
+    <string name="quick_action_add_osm_bug_descr">Spiežot darbības pogu, ekrāna centrā tiks ielikta OSM kļūdas piezīme.</string>
+    <string name="quick_action_add_poi_descr">Spiežot darbības pogu, ekrāna centrā tiks ielikts POI.</string>
+    <string name="quick_action_navigation_voice_descr">Spiežot darbības pogu, tiks izslēgta vai ieslēgta balss vadība.</string>
+    <string name="quick_action_add_parking_descr">Spiežot darbības pogu, ekrāna centrā tiks ielikta parkošanās vieta.</string>
+    <string name="favorite_autofill_toast_text">" ir saglabāts "</string>
+    <string name="favorite_empty_place_name">Vieta</string>
     </resources>
