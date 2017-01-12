@@ -2076,7 +2076,7 @@ public class QuickActionFactory {
 
         @Override
         protected int getDiscrHint() {
-            return R.string.quick_action_map_style_descr;
+            return R.string.quick_action_page_list_descr;
         }
 
         @Override
@@ -2253,7 +2253,7 @@ public class QuickActionFactory {
 
         @Override
         protected int getDiscrHint() {
-            return R.string.quick_action_map_overlay_descr;
+            return R.string.quick_action_page_list_descr;
         }
 
         @Override
@@ -2387,7 +2387,7 @@ public class QuickActionFactory {
 
         @Override
         protected int getDiscrHint() {
-            return R.string.quick_action_map_underlay_descr;
+            return R.string.quick_action_page_list_descr;
         }
 
         @Override
@@ -2524,7 +2524,7 @@ public class QuickActionFactory {
 
         @Override
         protected int getDiscrHint() {
-            return R.string.quick_action_map_source_descr;
+            return R.string.quick_action_page_list_descr;
         }
 
         @Override
@@ -2637,7 +2637,7 @@ public class QuickActionFactory {
             TextView dscrHint = (TextView) view.findViewById(R.id.textDscrHint);
             Button addBtn = (Button) view.findViewById(R.id.btnAdd);
 
-            dscrTitle.setText(getDiscrTitle());
+            dscrTitle.setText(getDiscrTitle() + ":");
             dscrHint.setText(getDiscrHint());
             addBtn.setText(getAddBtnText());
             addBtn.setOnClickListener(getOnAddBtnClickListener(activity, adapter));
