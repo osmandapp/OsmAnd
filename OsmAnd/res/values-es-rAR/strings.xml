@@ -1728,8 +1728,8 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="show_gps_coordinates_text">Mostrar coordenadas GPS en el mapa</string>
     <string name="use_internet_to_download_tile">Usa Internet para descargar las teselas faltantes</string>
     <string name="app_description">Aplicación de navegación</string>
-    <string name="search_button">Buscar</string>
-    <string name="search_activity">Buscarr</string>
+    <string name="search_button">Búsqueda rápida</string>
+    <string name="search_activity">Buscar</string>
     <string name="searchpoi_activity">Elegir PDI</string>
     <string name="search_POI_level_btn">Encontrar más</string>
     <string name="incremental_search_street">Buscar calles incrementalmente</string>
