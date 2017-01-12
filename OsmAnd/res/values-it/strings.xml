@@ -2770,4 +2770,14 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="quick_action_duplicates">L\'azione veloce specificata é stata cambiata in %1$s per evitare duplicati.</string>
     <string name="quick_action_duplicate">Nome dell\'azione veloce duplicato</string>
     <string name="quick_action_showhide_favorites_descr">Toccando il pulsante dell\'azione veloce saranno mostrati o nascosti i preferiti sulla mappa.</string>
+    <string name="quick_action_showhide_poi_descr">Toccando il pulsante azione mostrerà o nasconderà i PDI sulla mappa.</string>
+    <string name="quick_action_showhide_favorites_title">Mostra/nascondi preferiti</string>
+    <string name="quick_action_favorites_show">Mostra preferiti</string>
+    <string name="quick_action_favorites_hide">Nascondi preferiti</string>
+    <string name="quick_action_showhide_poi_title">Mostra/nascondi PDI</string>
+    <string name="quick_action_poi_show">Mostra %1$s</string>
+    <string name="quick_action_poi_hide">Nascondi %1$s</string>
+    <string name="quick_action_add_category">Aggiungi una categoria</string>
+    <string name="quick_action_add_create_items">Crea oggetti</string>
+    <string name="quick_action_add_configure_map">Configura la mappa</string>
     </resources>
