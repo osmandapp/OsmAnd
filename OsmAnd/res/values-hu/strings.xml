@@ -2808,4 +2808,12 @@ Ha segítségre van szükséged az OsmAnd alkalmazással kapcsolatban, keresd a 
     <string name="quick_action_btn_tutorial_title">Gombpozíció módosítása</string>
     <string name="quick_action_btn_tutorial_descr">Nyomd meg hosszan és húzd a gombot, hogy módosítsd a pozícióját a képernyőn</string>
 	<string name="shared_string_action_name">Műveletnév</string>
-</resources>
+<string name="navigate_point_olc">Open Location Code</string>
+    <string name="navigate_point_olc_info_invalid">Érvénytelen OLC
+</string>
+    <string name="navigate_point_olc_info_short">Rövid OLC
+Kérlek adj meg egy teljes kódot</string>
+    <string name="navigate_point_olc_info_area">Érvényes teljes OLC
+Ábrázolt terület: %1$s x %2$s</string>
+    <string name="quick_action_page_list_descr">A művelet gombot megnyomva léptetni fogja az alábbi listát.</string>
+    </resources>
