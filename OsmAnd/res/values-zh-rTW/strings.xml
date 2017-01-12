@@ -2750,4 +2750,13 @@ Facebook：https://www.facebook.com/osmandapp
     <string name="quick_action_take_photo_note_descr">輕點動作按鈕將會在螢幕中心的位置增加一個照片注解。</string>
     <string name="quick_action_add_osm_bug_descr">輕點動作按鈕將會在螢幕中心的位置增加一個 OSM 錯誤注解。</string>
     <string name="quick_action_add_poi_descr">輕點動作按鈕將會在螢幕中心的位置增加一個 POI。</string>
+    <string name="navigate_point_olc">打開位置碼</string>
+    <string name="navigate_point_olc_info_invalid">無效的 OLC
+</string>
+    <string name="quick_action_navigation_voice_descr">輕點動作按鈕將會停用或啟用導航期間的語音導引。</string>
+    <string name="quick_action_add_parking_descr">輕點動作按鈕將會在螢幕中心的位置增加一個停車場所。</string>
+    <string name="quick_action_duplicates">指定的快速動作名稱已在使用中，已更改為 %1$s 以避免重複。</string>
+    <string name="quick_action_duplicate">快速動作的名稱重複</string>
+    <string name="quick_action_showhide_favorites_descr">輕點動作按鈕將會在地圖上顯示或隱藏我的收藏標記。</string>
+    <string name="quick_action_showhide_poi_descr">輕點動作按鈕將會在地圖上顯示或隱藏POI。</string>
     </resources>
