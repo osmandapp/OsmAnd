@@ -2682,4 +2682,10 @@ und vieles mehr ...
     <string name="quick_action_btn_tutorial_descr">Schaltfläche lange drücken und ziehen um die Position auf dem Bildschirm zu ändern</string>
 	<string name="quick_action_map_overlay_switch">Die Overlay-Karte wurde in “%s“ geändert.</string>
     <string name="quick_action_map_underlay_switch">Die Underlay-Karte wurde in “%s“ geändert.</string>
+    <string name="navigate_point_olc_info_invalid">Ungültiger OLC
+</string>
+    <string name="navigate_point_olc_info_short">Kurzer OLC
+Bitte geben Sie einen vollständigen Code ein</string>
+    <string name="navigate_point_olc_info_area">Gültiger vollständiger OLC
+Abgedeckte Fläche: %1$s x %2$s</string>
     </resources>
