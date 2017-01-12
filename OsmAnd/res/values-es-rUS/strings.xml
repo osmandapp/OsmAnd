@@ -185,7 +185,7 @@ Lon %2$s</string>
     <string name="home_button">Inicio</string>
     
     
-    <string name="search_for">Buscar</string>
+    <string name="search_for">Buscador</string>
     <string name="coordinates">Coordenadas</string>
     <string name="rendering_attr_subwayMode_name">Rutas de metro</string>
     <string name="impassable_road">Evitar carreteras…</string>
@@ -1727,7 +1727,7 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="show_gps_coordinates_text">Mostrar coordenadas GPS en el mapa</string>
     <string name="use_internet_to_download_tile">Usa Internet para descargar las teselas faltantes</string>
     <string name="app_description">Aplicación de navegación</string>
-    <string name="search_button">Buscar</string>
+    <string name="search_button">Búsqueda rápida</string>
     <string name="search_activity">Buscar</string>
     <string name="searchpoi_activity">Elegir PDI</string>
     <string name="search_POI_level_btn">Encontrar más</string>
@@ -2596,4 +2596,5 @@ Proporciona un código completo</string>
 Representa el área: %1$s x %2$s</string>
     <string name="quick_action_map_overlay_switch">Se cambió el mapa superpuesto a \"%s\".</string>
     <string name="quick_action_map_underlay_switch">Se cambió el mapa subyacente a \"%s\".</string>
+    <string name="quick_action_page_list_descr">Pulsar el botón de acción mostrará la siguiente lista.</string>
     </resources>
