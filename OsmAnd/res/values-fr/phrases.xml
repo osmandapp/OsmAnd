@@ -254,7 +254,7 @@
 	<string name="poi_pharmacy">Pharmacie</string>
 	<string name="poi_photo">Magasin de photographie</string>
 	<string name="poi_craft_photographer">Photographe</string>
-	<string name="poi_picnic_site">Site de pique-nique</string>
+	<string name="poi_picnic_site">Aire de pique-nique</string>
 	<string name="poi_pitch">Terrain de sport</string>
 	<string name="poi_place_of_worship">Lieu de culte</string>
 	<string name="poi_religion_christian">Christianisme</string>
@@ -855,7 +855,7 @@
 	<string name="poi_free_flying">Magasin d\'articles de vol libre</string>
 	<string name="poi_furnace">Boutique d\'articles de chauffage</string>
 	<string name="poi_leather">Boutique de cuir</string>
-	<string name="poi_energy">Commerce de fourniture d\\\'énergie</string>
+	<string name="poi_energy">Commerce de fourniture d\'énergie</string>
 	<string name="poi_pyrotechnics">Pyrotechnie</string>
 	<string name="poi_weapons">Armurerie</string>
 
@@ -917,7 +917,7 @@
 	<string name="poi_country">Pays</string>
 	<string name="poi_fee_yes">Oui</string>
 
-	<string name="poi_abandoned_poi">Structure à l\\\'abandon</string>
+	<string name="poi_abandoned_poi">Structure à l\'abandon</string>
 	<string name="poi_access_private">Propriété privée</string>
 	<string name="poi_access_no">Accès interdit</string>
 	<string name="poi_access_permissive">Accès autorisé</string>
@@ -2156,7 +2156,7 @@
 	<string name="poi_fuel_avia_type">Type</string>
 	<string name="poi_payment_type">Type de paiement</string>
 	<string name="poi_traffic_signals_sound">Son</string>
-	<string name="poi_tactile_paving">Pavé tactile</string>
+	<string name="poi_tactile_paving">Bande podotactile</string>
 	<string name="poi_subway_station_filter">Station de métro</string>
 	<string name="poi_bicycle_parking_type">Type</string>
 	<string name="poi_ferry_terminal_cargo">Cargo</string>
@@ -2258,4 +2258,15 @@
 	<string name="poi_wheelchair_accessibility">Accessibilité aux fauteuils roulants</string>
 	<string name="poi_bicycle_parking_informal">Informel</string>
 
+	<string name="poi_water_characteristic_mud">Caractéristique de l\'eau : boueux</string>
+	<string name="poi_scrub">Broussailles</string>
+	<string name="poi_logging">Terres d\'exploitation forestière</string>
+	<string name="poi_passing_place">Zone de croisement</string>
+	<string name="poi_rtsa_scale">Echelle RTSA</string>
+
+	<string name="poi_payment_electronic_purses_no">Porte-monnaie électroniques non acceptés</string>
+	<string name="poi_payment_visa_debit_no">Cartes de débit Visa non acceptées</string>
+	<string name="poi_payment_dogecoin_no">Dogecoin non acceptés</string>
+	<string name="poi_brewery_additional">Nom de la brasserie</string>
+	<string name="poi_vending_excrement_bags">Sacs pour récupérer les déjections canines</string>
 	</resources>
