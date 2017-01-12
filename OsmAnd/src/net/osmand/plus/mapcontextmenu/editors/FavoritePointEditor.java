@@ -59,7 +59,7 @@ public class FavoritePointEditor extends PointEditor {
 		favorite.setDescription("");
 		favorite.setOriginObjectName(originObjectName);
 
-		FavoritePointEditorFragment.showAutoFillInstance(mapActivity);
+		FavoritePointEditorFragment.showAutoFillInstance(mapActivity, autoFill);
 	}
 
 	public void edit(FavouritePoint favorite) {
