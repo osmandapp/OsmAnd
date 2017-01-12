@@ -2524,7 +2524,7 @@ If you need help with OsmAnd application, please contact our support team: suppo
     <string name="quick_action_gpx_category_descr">Select an optional category</string>
     <string name="quick_action_poi_list">POI list</string>
     <string name="quick_action_sh_poi_descr">You can add one or more POI categories to display on the map.</string>
-    <string name="quick_action_map_style_descr">Tapping the action button will page the map style through the list below.</string>
+    <string name="quick_action_page_list_descr">Tapping the action button will page through the list below.</string>
     <string name="quick_action_map_style_action">Add a map style</string>
     <string name="quick_action_empty_param_error">Parameters should not be empty</string>
     <string name="quick_action_map_styles">Map styles</string>

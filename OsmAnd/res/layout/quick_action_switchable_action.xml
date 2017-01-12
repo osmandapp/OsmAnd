@@ -30,7 +30,7 @@
                 android:id="@+id/textDscrHint"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/quick_action_map_style_descr"
+                android:text="@string/quick_action_page_list_descr"
                 android:textColor="?android:textColorSecondary"
                 android:textSize="@dimen/default_sub_text_size" />
 
