@@ -2653,10 +2653,10 @@ Se ami OsmAnd e OSM e vuoi sostenerli, questo è un modo perfetto per farlo.</st
     <string name="rendering_value_light_brown_name">Marrone chiaro</string>
     <string name="rendering_value_dark_brown_name">Marrone scuro</string>
     <string name="rendering_attr_surfaceIntegrity_name">Integrità della superficie stradale</string>
-    <string name="save_track_min_speed_descr">Scegli la velocità minima per la registrazione di un punto</string>
+    <string name="save_track_min_speed_descr">Imposta la velocità minima per la registrazione di un punto</string>
     <string name="save_track_min_distance">Soglia del movimento di registrazione</string>
     <string name="save_track_min_distance_descr">Scegliere la distanza minima dal precedente punto a avverrà la registrazione di un nuovo punto</string>
-    <string name="save_track_precision">Precisione minima a cui attivare la registrazione</string>
+    <string name="save_track_precision">Precisione minima per la registrazione</string>
     <string name="save_track_precision_descr">Impostare la minima precisione per la registrazione di un punto</string>
     <string name="rendering_attr_contourColorScheme_name">Colorazione delle linee isoipse</string>
     <string name="search_hint">Digitare il nome del pdi, città, indirizzo</string>
