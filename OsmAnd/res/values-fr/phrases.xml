@@ -2369,4 +2369,24 @@
 	<string name="poi_xmas_pyramid">Pyramide de Noël</string>
 	<string name="poi_xmas_shop">Boutique de Noël</string>
 	<string name="poi_xmas_tree">Sapin de Noël</string>
+	<string name="poi_piste_grooming_scooter">Scooter</string>
+	<string name="poi_payment_electronic_purses_yes">Porte-monnaie électroniques acceptés</string>
+	<string name="poi_payment_dogecoin_yes">Dogecoin acceptés</string>
+	<string name="poi_wetland_reedbed">Roselière</string>
+	<string name="poi_wetland_string_bog">Tourbière cordée</string>
+	<string name="poi_wetland_palsa_bog">Tourbière de palse</string>
+	<string name="poi_beach_shingle">Galets</string>
+	<string name="poi_shelter_type_public_transport">Transport public</string>
+	<string name="poi_shelter_type_picnic_shelter">Pique-nique</string>
+	<string name="poi_shelter_type_weather_shelter">Météo</string>
+	<string name="poi_shelter_type_lean_to">Appentis</string>
+	<string name="poi_shelter_type_basic_hut">Abri de campagne</string>
+	<string name="poi_shelter_type_building">Bâtiment</string>
+	<string name="poi_shelter_type_wildlife_hide">Observation d\'animaux sauvages</string>
+	<string name="poi_shelter_type_rock_shelter">Balme</string>
+	<string name="poi_shelter_type_sun_shelter">Soleil</string>
+	<string name="poi_shelter_type_field_shelter">Campagne</string>
+	<string name="poi_shelter_type_tent">Tente</string>
+	<string name="poi_shelter_type_abandoned">Abandonné</string>
+
 	</resources>
