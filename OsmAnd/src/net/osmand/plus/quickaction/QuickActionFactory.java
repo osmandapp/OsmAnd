@@ -2637,7 +2637,7 @@ public class QuickActionFactory {
             TextView dscrHint = (TextView) view.findViewById(R.id.textDscrHint);
             Button addBtn = (Button) view.findViewById(R.id.btnAdd);
 
-            dscrTitle.setText(getDiscrTitle() + ":");
+            dscrTitle.setText(getDiscrTitle());
             dscrHint.setText(getDiscrHint());
             addBtn.setText(getAddBtnText());
             addBtn.setOnClickListener(getOnAddBtnClickListener(activity, adapter));
