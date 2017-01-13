@@ -1760,7 +1760,7 @@ Lorratza %2$s</string>
     <string name="world_map_download_descr">Munduko oinarrizko mapa (mundu osoko xehetasun gutxiko mapa) falta da edo eguneratu gabe dago. Ingurunea osatzeko munduko oinarrizko mapa deskargatzea komeni da.</string>
     <string name="shared_string_qr_code">QR kodea</string>
     <string name="map_downloaded">Mapa deskargatu da</string>
-    <string name="go_to_map">Joan mapara</string>
+    <string name="go_to_map">Erakutsi mapa</string>
     <string name="simulate_initial_startup">Simulatu aplikazioaren lehen abioa</string>
     <string name="share_geo">geo:</string>
     <string name="share_menu_location">Partekatu kokapena</string>
@@ -2057,7 +2057,7 @@ Biltegiratzean {3} MB behar dira une batez, {1} MB behin betiko.
     <string name="lang_als">Albaniera (Tosk)</string>
     <string name="osm_edit_created_poi">Sortutako OSM POIa</string>
 
-    <string name="map_downloaded_descr">%1$s mapa deskargatu da. Joan atzera mapara erabiltzen hasteko.</string>
+    <string name="map_downloaded_descr">%1$sko mapa deskargatu da. Erabiltzen hasi zaitezke.</string>
     <string name="file_name_containes_illegal_char">Fitxategiaren izenak karaktere baliogaberen bat du</string>
 <string name="show_something_on_map">Erakutsi %1$s mapan</string>
     <string name="release_2_4">"
@@ -2351,7 +2351,7 @@ eta gehiago…
     <string name="instalation_troubleshooting_item">Instalazioa eta arazoen konponketa</string>
     <string name="feedback">Iruzkinak</string>
     <string name="contact_us">Jarri gurekin kontaktuan</string>
-    <string name="search_on_the_map_item">Bilatu mapan</string>
+    <string name="search_on_the_map_item">Mapan bilatzen</string>
     <string name="map_viewing_item">Ikusi mapa</string>
     <string name="first_usage_item">Lehen erabilera</string>
     <string name="navigation_item_description">Ezarri nabigazioa</string>
@@ -2567,7 +2567,7 @@ OsmAnd aplikazioarekin laguntza behar baduzu, jarri kontaktuan gure laguntza tal
     <string name="skip_map_downloading">Saltatu mapen deskarga</string>
     <string name="skip_map_downloading_desc">"Ez duzu lineaz kanpoko maparik instalatuta. Zerrendako mapa bat deskargatzea erabaki dezakezu edo geroago egin menuko  %1$s aukeran."</string>
     <string name="search_another_country">Bilatu beste eskualde bat</string>
-    <string name="search_map">Mapa bilatzen…</string>
+    <string name="search_map">Mapak bilatzen…</string>
     <string name="first_usage_wizard_desc">Baimendu OsmAnd aplikazioari zure kokalekua zehaztea eta eskualderako mapa egokia deskargatzea iradokitzea.</string>
     <string name="location_not_found">Ez da kokapena aurkitu</string>
     <string name="no_inet_connection">Ez dago Internet konexiorik</string>
@@ -2678,4 +2678,24 @@ OsmAnd aplikazioarekin laguntza behar baduzu, jarri kontaktuan gure laguntza tal
     <string name="rendering_value_medium_w_name">Ertaina</string>
     <string name="rendering_value_low_name">Baxua</string>
     <string name="rendering_attr_hideWaterPolygons_name">Ezkutatu ura</string>
+    <string name="navigate_point_olc">Kokaleku kode irekia (OLC)</string>
+    <string name="navigate_point_olc_info_invalid">OLC baliogabea
+</string>
+    <string name="navigate_point_olc_info_short">OLC laburra
+Eman kode osoa mesedez</string>
+    <string name="navigate_point_olc_info_area">Baliozko OLC osoa
+Area honi dagokio: %1$s x %2$s</string>
+    <string name="configure_screen_quick_action">Ekintza azkarra</string>
+
+    <string name="quick_action_item_action">%d ekintza</string>
+    <string name="quick_action_item_screen">%d pantaila</string>
+    <string name="quick_action_add_marker">Gehitu mapa-markatzailea</string>
+    <string name="quick_action_add_poi">Gehitu POI</string>
+    <string name="quick_action_map_style">Aldatu maparen estiloa</string>
+    <string name="quick_action_map_style_switch">Mapa \"%s\" estilora aldatu da.</string>
+    <string name="quick_action_take_audio_note">Hartu audio-oharra</string>
+    <string name="quick_action_take_video_note">Hartu bideo-oharra</string>
+    <string name="quick_action_take_photo_note">Hartu argazki-oharra</string>
+    <string name="quick_action_add_osm_bug">Gehitu OSM akatsa</string>
+    <string name="quick_action_navigation_voice">Ahotsa bai/ez</string>
     </resources>
