@@ -845,7 +845,7 @@ Pomembnejše lastnosti:
 \t* Popolnoma delujoč tudi brez povezave (shrani podatke vektorskih zemljevidov v mapo po izbiri)
 \t* Na voljo so stisnjeni vektorski podatki zemljevida za cel svet
 \t* Prenos podatkov zemljevida posameznih držav ali področij znotraj programa
-\t* Prekrivanje zemljevidov s podatkovnimi plasmi; na primer sledmi GPX, načrti poti, zanimive in priljubljene točke, izohipsami, postajališči javnega prometa, dodatni zemljevidi z nastavljivo prosojnostjo
+\t* Prekrivanje zemljevidov s podatkovnimi plastmi; na primer sledmi GPX, načrti poti, zanimive in priljubljene točke, izohipsami, postajališči javnega prometa, dodatni zemljevidi z nastavljivo prosojnostjo
 \t* Iskanje naslovov, krajev in zanimivih točk (POI) brez povezave
 \t* Vodenje poti v načinu brez povezave za srednje dolge poti
 \t* Način za avtomobiliste, kolesarje in pešce:
@@ -1053,7 +1053,7 @@ Splošni podatki med 70 stopinjami severno in 70 južno so opredeljeni z meritva
 
 Globalni podatki (med 70 stopinj severno in 70 stopinj južno) temeljijo na meritvah SRTM (Shuttle Radar Topography Mission) in ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), ki je instrument za slikanje na krovu Terre, vodilnega satelita Nasinega sistema za opazovanje. ASTER je prizadevanje za sodelovanje med ameriško NASO, japonskim ministrstvom za gospodarstvo, trgovino in industrijo (METI) in japonskim vesoljskim sistemom (J-spacesystems).
  "</string>
-    <string name="audionotes_location_not_defined">Mesto, ki naj bi ga povezali z zaznamkom, še ni določeno. Z možnostjo \"Uporabi mesto …\" je mogoče dodeliti zaznamek za določeno mesto</string>
+    <string name="audionotes_location_not_defined">Mesto, ki naj bi ga povezali z zaznamkom, še ni določeno. Z možnostjo \"Uporabi mesto …\" je mogoče dodeliti zaznamek za določeno točko na zemljevidu.</string>
     <string name="srtm_paid_version_msg">Razmislite o nakupu vstavka za prikaz izohips v trgovini Market in s tem podprite nadaljnji razvoj.</string>
     <string name="srtm_paid_version_title">Vstavek Izohipse</string>
 
@@ -2688,7 +2688,7 @@ V kolikor naletite na težave s programom OsmAnd, prosimo, stopite v stik s skup
 
     <string name="quick_action_item_action">Dejanje %d</string>
     <string name="quick_action_item_screen">Zaslon %d</string>
-    <string name="quick_action_add_marker">Dodaj oznako</string>
+    <string name="quick_action_add_marker">Dodaj oznako zemljevida</string>
     <string name="quick_action_add_poi">Dodaj točko POI</string>
     <string name="quick_action_map_style">Spremeni slog zemljevida</string>
     <string name="quick_action_map_style_switch">Slog zemljevida je spremenjen na »%s«.</string>
@@ -2731,4 +2731,14 @@ V kolikor naletite na težave s programom OsmAnd, prosimo, stopite v stik s skup
     <string name="quick_action_map_source_action">Dodaj vir zemljevida</string>
     <string name="quick_action_map_source_switch">Vir zemljevida je spremenjen na »%s«.</string>
     <string name="quick_action_btn_tutorial_title">Spremeni položaj gumba</string>
+    <string name="navigate_point_olc">Odpri kodo območja</string>
+    <string name="navigate_point_olc_info_invalid">Neveljavna koda območja
+</string>
+    <string name="navigate_point_olc_info_short">Kratka koda območja
+Vpisati je treba polno kodo</string>
+    <string name="navigate_point_olc_info_area">Veljavna koda območja
+Koda predstavlja območje: %1$s x %2$s</string>
+    <string name="quick_action_navigation_voice">Glasovno vodenje</string>
+    <string name="quick_action_navigation_voice_off">Glasovno vodenje je onemogočeno.</string>
+    <string name="quick_action_navigation_voice_on">Glasovno vodenje je omogočeno.</string>
     </resources>
