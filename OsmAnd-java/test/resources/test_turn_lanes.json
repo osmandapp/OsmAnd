@@ -581,6 +581,22 @@
     "expectedResults": {
       "138581966": "C|C|C|+C|+C|C"
     }
+  },
+  {
+    "testName": "34.Motorway TR South Kent Des Moines Road",
+    "startPoint": {
+      "latitude": 45.64518099200965,
+      "longitude": 35.668448954820605
+    },
+    "endPoint": {
+      "latitude": 45.64374087245139,
+      "longitude": 35.66181853413579
+    },
+    "expectedResults": {
+      "222244": "TL|TL|+C",
+      "222243": "TL|TL|+C|C|TSLR",
+      "222164": "TL|TL|+C|C",
+    }
   }
 
 ]
