@@ -22,6 +22,26 @@
     }
   },
   {
+    "testName": "4.Penalty for traffic signals changes the route from tertiary road to service road https://github.com/osmandapp/Osmand/issues/3368",
+    "description": "shortRoute=false",
+    "params": {
+      "vehicle": "car",
+      "planRoadDirection": "-1"
+    },
+    
+    "startPoint": {
+      "latitude": 45.90810929390909,
+      "longitude": 35.25023227930072
+    },
+    "endPoint": {
+      "latitude": 45.90951460825728,
+      "longitude": 35.24373865127566
+    },
+    "expectedResults": {
+      "178721843": "false"
+    }
+  },
+  {
     "testName": "5.Route depends on the distance to a junction, if routing engine takes the longer way https://github.com/osmandapp/Osmand/issues/1200",
     "description": "Подтверждается только неверный маршрут. От дистанции не зависит, но зависит от planRoadDirection. При -1 маршрут верный, при 0 - нет",
     "ignore" : "false",
