@@ -2747,7 +2747,7 @@ Se ami OsmAnd e OSM e vuoi sostenerli, questo è un modo perfetto per farlo.</st
     <string name="quick_actions_delete_text">Sicuro di volere eliminare l\'azione \"%s\"?</string>
     <string name="quick_favorites_show_favorites_dialog">Mostra la finestra di dialogo dei favoriti</string>
     <string name="quick_favorites_name_preset">Nome preimpostato</string>
-    <string name="quick_action_fav_name_descr">Lascia il campo bianco e OsmAnd userà l\'indirizzo p il nome del luogo per il punto preferito</string>
+    <string name="quick_action_fav_name_descr">"Lascia il campo vuoto per utilizzare  automaticamente l\'indirizzo o il nome del luogo"</string>
     <string name="shared_string_action_name">Nome dell\'azione</string>
     <string name="quick_action_add_marker_descr">Toccando il pulsante azione si aggiungerà un marcatore nella posizione al centro della mappa.</string>
     <string name="quick_action_add_gpx_descr">Toccando il pulsante azione si aggiungerà un punto intermedio GPX nella posizione al centro della mappa.</string>
@@ -2780,4 +2780,29 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="quick_action_add_category">Aggiungi una categoria</string>
     <string name="quick_action_add_create_items">Crea oggetti</string>
     <string name="quick_action_add_configure_map">Configura la mappa</string>
-    </resources>
+    <string name="quick_action_add_navigation">Navigazione</string>
+    <string name="quick_action_bug_descr">Il campo commento di questo messaggio verrà autocompletato.</string>
+    <string name="quick_action_bug_message">Messaggio</string>
+    <string name="quick_action_category_descr">Scegli la categoria in cui salvare il preferito</string>
+    <string name="quick_action_gpx_category_descr">Scegli una categoria opzionale</string>
+    <string name="quick_action_poi_list">Lista PDI</string>
+    <string name="quick_action_sh_poi_descr">Puoi aggiungere uno o più categorie PDI da mostrare sulla mappa.</string>
+    <string name="quick_action_page_list_descr">Toccando il pulsante azione scorrerai attraverso la lista seguente.</string>
+    <string name="quick_action_map_style_action">Aggiungi uno stile della mappa</string>
+    <string name="quick_action_empty_param_error">I parametri non dovrebbero essere nulli</string>
+    <string name="quick_action_map_styles">Stili mappa</string>
+    <string name="quick_action_map_overlay">Cambia la mappa di sovrapposizione</string>
+    <string name="quick_action_map_overlay_title">Mappa di sovrapposizione</string>
+    <string name="quick_action_map_overlay_action">Aggiungi sovrapposizione</string>
+    <string name="quick_action_map_overlay_switch">La mappa di sovrapposizione è stata cambiata in \"%s\".</string>
+    <string name="quick_action_map_underlay_switch">La mappa di sottofondo è stata cambiata in \"%s\".</string>
+    <string name="quick_action_map_underlay">Cambia la mappa di sottofondo</string>
+    <string name="quick_action_map_underlay_title">Mappa di sottofondo</string>
+    <string name="quick_action_map_underlay_action">Aggiungi sottofondo</string>
+    <string name="quick_action_map_source">Cambia la sorgente della mappa</string>
+    <string name="quick_action_map_source_title">Sorgenti della mappa</string>
+    <string name="quick_action_map_source_action">Aggiungi una sorgente della mappa</string>
+    <string name="quick_action_map_source_switch">"La sorgente della mappa è stata cambiata in  \"%s\"."</string>
+    <string name="quick_action_btn_tutorial_title">Cambia la posizione del pulsante</string>
+    <string name="quick_action_btn_tutorial_descr">Tocco lungo e trascina per cambiare la posizione dello stesso nello schermo</string>
+	</resources>
