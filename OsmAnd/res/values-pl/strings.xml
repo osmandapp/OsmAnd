@@ -2795,15 +2795,11 @@ i więcej...
     <string name="quick_action_category_descr">Możesz wybrać kategorię dla ulubionego punktu</string>
     <string name="quick_action_gpx_category_descr">Możesz wybrać kategorię dla punktu pośredniego GPX</string>
     <string name="quick_action_sh_poi_descr">Możesz dodać kilka kategorii użytecznych miejsc do wyświetlenia na mapie.</string>
-    <string name="quick_action_map_style_descr">Naciśnięcie przycisku akcji zmieni styl mapy według poniższej listy.</string>
     <string name="quick_action_map_overlay">Zmień nakładkę mapy</string>
     <string name="quick_action_map_overlay_title">Nakładki mapy</string>
-    <string name="quick_action_map_overlay_descr">Naciśnięcie przycisku akcji przełączy pomiędzy podkładami mapy z poniższej listy.</string>
     <string name="quick_action_map_overlay_action">Dodaj nakładkę</string>
     <string name="quick_action_map_underlay">Zmień podkład mapy</string>
-    <string name="quick_action_map_underlay_descr">Naciśnięcie przycisku akcji przełączy pomiędzy podkładami mapy z poniższej listy.</string>
     <string name="quick_action_map_source">Zmień źródło mapy</string>
-    <string name="quick_action_map_source_descr">Naciśnięcie przycisku akcji przełączy źródła mapy, wg kolejności z listy.</string>
     <string name="quick_action_map_source_action">Dodaj źródło mapy</string>
     <string name="quick_action_map_source_switch">Źródło mapy zmienione na \"%s\".</string>
     <string name="quick_action_btn_tutorial_title">Zmień pozycję przycisku</string>

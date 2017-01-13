@@ -2536,10 +2536,6 @@ El espacio de almacenamiento usado es {3} MB temporalmente y {1} MB permanenteme
     <string name="quick_action_duplicate">Nombre de acción rápida duplicado</string>
     <string name="quick_action_showhide_favorites_descr">Pulsar el botón de acción mostrará u ocultará los puntos favoritos en el mapa.</string>
     <string name="quick_action_showhide_poi_descr">Pulsar el botón de acción mostrará o esconderá los PDIs en el mapa.</string>
-    <string name="quick_action_map_style_descr">Pulsar el botón de acción cambiará el estilo de mapa a lo largo de la lista de abajo.</string>
-    <string name="quick_action_map_overlay_descr">Pulsar el botón de acción cambiará la superposición del mapa a lo largo de la lista de abajo.</string>
-    <string name="quick_action_map_underlay_descr">"Pulsar el botón de acción  cambiará El subyacente de mapa a lo largo de la lista de abajo."</string>
-    <string name="quick_action_map_source_descr">"Pulsar el botón de acción  cambiará la fuente del mapa a lo largo de la lista de abajo."</string>
     <string name="quick_action_showhide_favorites_title">Mostrar/ocultar favoritos</string>
     <string name="quick_action_favorites_show">Mostrar favoritos</string>
     <string name="quick_action_favorites_hide">Ocultar favoritos</string>
