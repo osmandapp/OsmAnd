@@ -929,7 +929,7 @@ Celosvětová výšková data (mezi 70 stupni severní šířky a 70 stupni již
  "</string>
     <string name="srtm_plugin_name">Vrstevnice</string>
     <string name="download_srtm_maps">Vrstevnice</string>
-    <string name="audionotes_location_not_defined">GPS pozice pro záznam zvukové poznámky ještě není známa. Pokud chcete použít specifickou lokaci použijte \"Možnosti bodu\"</string>
+    <string name="audionotes_location_not_defined">GPS pozice pro záznam zvukové poznámky ještě není známa. Pokud chcete použít specifickou lokaci použijte \"Možnosti bodu\".</string>
     <string name="map_widget_audionotes">Audio poznámky</string>
     <string name="recording_is_recorded">Nahrávám audio/video. Stiskněte tlačítko \"stop\" pro zastavení.</string>
     <string name="recording_open_external_player">Otevřít externí přehrávač</string>
@@ -1518,8 +1518,146 @@ Zaznamenávané trasy můžete sdílet se svými přáteli nebo mohou být použ
     <string name="rendering_category_hide">Skrýt</string>
     <string name="wake_on_voice">Zapnout obrazovku</string>
     <string name="wake_on_voice_descr">Zapnout obrazovku zařízení (pokud je vypnuta) když se blíží odbočka</string>
-    <string name="osmand_extended_description_4000_chars">" OsmAnd (OSM Automated Navigation Directions - Automatizované navigační pokyny) je mapová a navigační aplikace s přístupem ke kvalitním celosvětovým údajům z OpenStreetMap (OSM). Všechny údaje map mohou být uloženy na paměťové kartě ve vašem zařízení pro použití bez přístupu k Internetu (offline). Pomocí GPS ve vašem zařízení může OsmAnd nabídnout navigování vizuálními a hlasovými pokyny pro automobil, kolo a chodce. Všechny hlavní funkce pracují online i offline (bez nutnosti přístupu k Internetu). Některé hlavní funkce: Navigace: - Funguje online (rychlá) nebo offline (bez poplatků za roaming v zahraničí) - Hlasové navádění po jednotlivých zatáčkách (nahrané i syntetizované hlasy) - Volitelné navádění v jízdních pruzích, zobrazení názvů ulic a odhadovaný čas do cíle - umožňuje zadat přechodné body trasy - Automatické přepočítání trasy pokud se odchýlíte z trasy - Hledání míst podle adresy, typu (např .: restaurace, hotely, čerpací stanice, muzea) nebo zeměpisných souřadnic Zobrazení mapy: - Zobrazování vaší pozice a orientace na mapě - Možnost zobrazení mapy ve směru pohybu nebo podle kompasu - Uložení oblíbených míst - zobrazení POI (bodů zájmu) v okolí - Možnost zobrazit specializované podkladové mapy z Internetu - Možnost zobrazit satelitní snímky (z Bing) - Možnost zobrazit různé překryvné vrstvy jako turistické / navigační GPX stopy a další mapy s nastavitelnou průhledností - Volitelně může zobrazit názvy v angličtině, lokálním jazyku nebo foneticky Využívá data z OpenStreetMap a Wikipedie: - Informace vysoké kvality z nejlepších projektů světa - Globální mapy z OpenStreetMap dostupné podle země nebo regionu - Body zájmu z Wikipedie, vhodné pro návštěvu zajímavostí (nedostupné ve verzi zdarma) - Neomezené stahování, přímo z aplikace (ve verzi zdarma je limit 10 mapových souborů) - Vždy aktuální mapy (aktualizováno nejméně jednou za měsíc) - Kompaktní vektorové offline mapy - Možnost volby mezi kompletními mapami nebo silniční sítí (např. celé Japonsko má 700 MB, silniční síť pouze 200 MB) - Podporuje i podkladové dlaždice z Internetu Bezpečnostní funkce: - Volitelné automatické přepínání mezi denním a nočním režimem - Volitelné zobrazení povolené rychlosti s upozorněním na její překročení - Volitelné přibližování mapy podle rychlosti - Sdílejte vaši polohu s přáteli, aby vás mohli najít Funkce pro cyklisty a chodce: - Mapy obsahují i cesty pro pěší, turisty a cyklisty - vhodné pro aktivity v přírodě - Speciální režimy zobrazení a navigace pro chodce a cyklisty - Volitelné zobrazení zastávek hromadné dopravy (autobus, tramvaj, vlak) včetně názvů linek - Volitelné nahrávání výletu do GPX souboru (lokálního nebo online služby) - Volitelné zobrazení rychlosti a nadmořské výšky - zobrazení vrstevnic a stínování svahů (s doplňkovými moduly) Přímo přispívejte do OpenStreetMap: - Nahlášení poznámek v mapě - Odeslání GPX stop do OSM přímo z aplikace - Přidání POI a přímé odeslání do OSM (nebo později, pokud jste offline) - Volitelné nahrávání výletu na pozadí (když je zařízení v režimu spánku) OsmAnd je svobodný a aktivně vyvíjený software. Každý může přispět do aplikace hlášením poznámek, vylepšením překladu nebo programováním nových funkcí. Projekt je ve stavu soustavného vylepšování díky spolupráci vývojářů a uživatelů. Pokrok projektu také závisí na finančních příspěvků na vývoj, programování a testování nových funkcí. Koupením OsmAnd + (placená verze) pomůžete aplikaci být ještě lepší! Na osmand.net můžete přispět obecně nebo na vývoj konkrétní funkce. Přibližná kvalita pokrytí: - Západní Evropa: **** - Východní Evropa: *** - Rusko: *** - Severní Amerika: *** - Jižní Amerika: ** - Asie: ** - Japonsko a Korea: *** - Blízký Východ: ** - Afrika: ** - Antarktida: * Seznam obsažených zemí (prakticky celý svět!): Afghánistán, Albánie, Alžírsko, Andorra, Angola, Anguilla, Antigua a Barbuda, Argentina, Arménie, Aruba, Austrálie, Ázerbájdžán, Bahamy, Bahrajn, Bangladéš, Barbados, Belgie, Belize, Bělorusko, Benin, Bermudy, Bhútán, Bolívie, Bonaire, Bosna a Hercegovina, Botswana, Brazílie, Britské Panenské ostrovy, Brunej, Bulharsko, Burkina Faso, Burundi, Curaçao, Čad, Černá hora, Česká Republika, Čína, Dánsko, Dominika, Dominikánská Republika, Džibuti, Egypt, Ekvádor, Eritrea, Estonsko, Etiopie, Fidži, Filipíny, Finsko, Francie, Francouzská Guyana, Francouzská Polynésie, Gabon, Gambie, Ghana, Gibraltar, Grenada, Grónsko, Gruzie, Guadeloupe, Guam, Guatemala, Guernsey, Guinea, Guinea-Bissau, Guyana, Haiti, Honduras, Hongkong, Chile, Chorvatsko, Indie, Indonésie, Irák, Írán, Irsko, Island, Itálie, Izrael, Jamajka, Japonsko, Jemen, Jersey, Jižní Afrika, Jižní Georgie, Jižní Súdán, Jordánsko, Kambodža, Kamerun, Kanada, Kapverdy, Katar, Kazachstán, Keňa, Kiribati, Kolumbie, Komory, Kongo, Kostarika, Kuba, Kuvajt, Kypr, Kyrgyzstán, Laos, Lesotho, Libanon, Libérie, Libye, Lichtenštejnsko, Litva, Lotyšsko, Lucembursko, Macao, Madagaskar, Maďarsko, Makedonie, Malajsie, Malawi, Maledivy, Mali, Malta, Maroko, Martinik, Mauretánie, Mauricius, Mayotte, Mexiko, Mikronésie, Moldavsko, Monako, Mongolsko, Montserrat, Mosambik, Myanmar, Namibie, Nauru, Německo, Nepál, Niger, Nigérie, Nikaragua, Nizozemské Antily, Nizozemsko, Norsko, Nová Kaledonie, Nový Zéland, Omán, Ostrov Man, Pákistán, Palau, Palestinská území, Panama, Papua Nová Guinea, Paraguay, Peru, Pobřeží slonoviny, Polsko, Portoriko, Portugalsko, Rakousko, Rovníková Guinea, Rumunsko, Rusko, Rwanda, Řecko, Sadská Arábie, Saint Barthelemy, Saint-Pierre a Miquelon, Salvador, Samoa, San Marino, Senegal, Severní a Jižní Korea, Seychely, Sierra Leone, Singapur, Slovensko, Slovinsko, Somálsko, Spojené Arabské Emiráty, Spojené království (UK), Spojené státy americké (USA), Srbsko, Srí Lanka, Středoafrická republika, Súdán, Surinam, Svatá Helena, Svatá Lucie, Svatý Kryštof a Nevis, Svatý Martin, Svatý Vincenc a Grenadiny, Svazijsko, Sýrie, Španělsko, Švédsko, Švýcarsko, Tádžikistán, Taiwan, Tanzanie, Thajsko, Togo, Tokelau, Tonga, Trinidad a Tobago, Tunisko, Turecko, Turkmenistán, Tuvalu, Uganda, Ukrajina, Uruguay, Uzbekistán, Vanuatu, Vatikán, Venezuela, Vietnam, Východní Timor, Wallis a Futuna, Zambie, Západní Sahara "</string>
-    <string name="osmand_plus_extended_description_4000_chars">" OsmAnd (OSM Automated Navigation Directions - Automatizované navigační pokyny) je mapová a navigační aplikace s přístupem ke kvalitním celosvětovým údajům z OpenStreetMap (OSM). Všechny údaje map mohou být uloženy na paměťové kartě ve vašem zařízení pro použití bez přístupu k Internetu (offline). Pomocí GPS ve vašem zařízení může OsmAnd nabídnout navigování vizuálními a hlasovými pokyny pro automobil, kolo a chodce. Všechny hlavní funkce pracují online i offline (bez nutnosti přístupu k Internetu). OsmAnd+ je placená verze aplikace. Její zakoupením podpoříte projekt, nové funkce a získáte nejnovější aktualizace map. Aplikaci si můžete před zakoupením vyzkoušet nainstalováním verze zdarma nazvané OsmAnd. Některé hlavní funkce: Navigace: - Funguje online (rychlá) nebo offline (bez poplatků za roaming v zahraničí) - Hlasové navádění po jednotlivých zatáčkách (nahrané i syntetizované hlasy) - Volitelné navádění v jízdních pruzích, zobrazení názvů ulic a odhadovaný čas do cíle - umožňuje zadat přechodné body trasy - Automatické přepočítání trasy pokud se odchýlíte z trasy - Hledání míst podle adresy, typu (např .: restaurace, hotely, čerpací stanice, muzea) nebo zeměpisných souřadnic Zobrazení mapy: - Zobrazování vaší pozice a orientace na mapě - Možnost zobrazení mapy ve směru pohybu nebo podle kompasu - Uložení oblíbených míst - zobrazení POI (bodů zájmu) v okolí - Možnost zobrazit specializované podkladové mapy z Internetu - Možnost zobrazit satelitní snímky (z Bing) - Možnost zobrazit různé překryvné vrstvy jako turistické / navigační GPX stopy a další mapy s nastavitelnou průhledností - Volitelně může zobrazit názvy v angličtině, lokálním jazyku nebo foneticky Využívá data z OpenStreetMap a Wikipedie: - Informace vysoké kvality z nejlepších projektů světa - Globální mapy z OpenStreetMap dostupné podle země nebo regionu - Body zájmu z Wikipedie, vhodné pro návštěvu zajímavostí - Neomezené stahování, přímo z aplikace - Vždy aktuální mapy (aktualizováno nejméně jednou za měsíc) - Kompaktní vektorové offline mapy - Možnost volby mezi kompletními mapami nebo silniční sítí (např. celé Japonsko má 700 MB, silniční síť pouze 200 MB) - Podporuje i podkladové dlaždice z Internetu Bezpečnostní funkce: - Volitelné automatické přepínání mezi denním a nočním režimem - Volitelné zobrazení povolené rychlosti s upozorněním na její překročení - Volitelné přibližování mapy podle rychlosti - Sdílejte vaši polohu s přáteli, aby vás mohli najít Funkce pro cyklisty a chodce: - Mapy obsahují i cesty pro pěší, turisty a cyklisty - vhodné pro aktivity v přírodě - Speciální režimy zobrazení a navigace pro chodce a cyklisty - Volitelné zobrazení zastávek hromadné dopravy (autobus, tramvaj, vlak) včetně názvů linek - Volitelné nahrávání výletu do GPX souboru (lokálního nebo online služby) - Volitelné zobrazení rychlosti a nadmořské výšky - zobrazení vrstevnic a stínování svahů (s doplňkovými moduly) Přímo přispívejte do OpenStreetMap: - Nahlášení chyb v mapě - Odeslání GPX stop do OSM přímo z aplikace - Přidání POI a přímé odeslání do OSM (nebo později, pokud jste offline) - Volitelné nahrávání výletu na pozadí (když je zařízení v režimu spánku) OsmAnd je svobodný a aktivně vyvíjený software. Každý může přispět do aplikace hlášením chyb, vylepšením překladu nebo programováním nových funkcí. Projekt je ve stavu soustavného vylepšování díky spolupráci vývojářů a uživatelů. Pokrok projektu také závisí na finančních příspěvků na vývoj, programování a testování nových funkcí. Koupením OsmAnd + (placená verze) pomůžete aplikaci být ještě lepší! Na osmand.net můžete přispět obecně nebo na vývoj konkrétní funkce. Přibližná kvalita pokrytí: - Západní Evropa: **** - Východní Evropa: *** - Rusko: *** - Severní Amerika: *** - Jižní Amerika: ** - Asie: ** - Japonsko a Korea: *** - Blízký Východ: ** - Afrika: ** - Antarktida: * Seznam obsažených zemí (prakticky celý svět!): Afghánistán, Albánie, Alžírsko, Andorra, Angola, Anguilla, Antigua a Barbuda, Argentina, Arménie, Aruba, Austrálie, Ázerbájdžán, Bahamy, Bahrajn, Bangladéš, Barbados, Belgie, Belize, Bělorusko, Benin, Bermudy, Bhútán, Bolívie, Bonaire, Bosna a Hercegovina, Botswana, Brazílie, Britské Panenské ostrovy, Brunej, Bulharsko, Burkina Faso, Burundi, Curaçao, Čad, Černá hora, Česká Republika, Čína, Dánsko, Dominika, Dominikánská Republika, Džibuti, Egypt, Ekvádor, Eritrea, Estonsko, Etiopie, Fidži, Filipíny, Finsko, Francie, Francouzská Guyana, Francouzská Polynésie, Gabon, Gambie, Ghana, Gibraltar, Grenada, Grónsko, Gruzie, Guadeloupe, Guam, Guatemala, Guernsey, Guinea, Guinea-Bissau, Guyana, Haiti, Honduras, Hongkong, Chile, Chorvatsko, Indie, Indonésie, Irák, Írán, Irsko, Island, Itálie, Izrael, Jamajka, Japonsko, Jemen, Jersey, Jižní Afrika, Jižní Georgie, Jižní Súdán, Jordánsko, Kambodža, Kamerun, Kanada, Kapverdy, Katar, Kazachstán, Keňa, Kiribati, Kolumbie, Komory, Kongo, Kostarika, Kuba, Kuvajt, Kypr, Kyrgyzstán, Laos, Lesotho, Libanon, Libérie, Libye, Lichtenštejnsko, Litva, Lotyšsko, Lucembursko, Macao, Madagaskar, Maďarsko, Makedonie, Malajsie, Malawi, Maledivy, Mali, Malta, Maroko, Martinik, Mauretánie, Mauricius, Mayotte, Mexiko, Mikronésie, Moldavsko, Monako, Mongolsko, Montserrat, Mosambik, Myanmar, Namibie, Nauru, Německo, Nepál, Niger, Nigérie, Nikaragua, Nizozemské Antily, Nizozemsko, Norsko, Nová Kaledonie, Nový Zéland, Omán, Ostrov Man, Pákistán, Palau, Palestinská území, Panama, Papua Nová Guinea, Paraguay, Peru, Pobřeží slonoviny, Polsko, Portoriko, Portugalsko, Rakousko, Rovníková Guinea, Rumunsko, Rusko, Rwanda, Řecko, Sadská Arábie, Saint Barthelemy, Saint-Pierre a Miquelon, Salvador, Samoa, San Marino, Senegal, Severní a Jižní Korea, Seychely, Sierra Leone, Singapur, Slovensko, Slovinsko, Somálsko, Spojené Arabské Emiráty, Spojené království (UK), Spojené státy americké (USA), Srbsko, Srí Lanka, Středoafrická republika, Súdán, Surinam, Svatá Helena, Svatá Lucie, Svatý Kryštof a Nevis, Svatý Martin, Svatý Vincenc a Grenadiny, Svazijsko, Sýrie, Španělsko, Švédsko, Švýcarsko, Tádžikistán, Taiwan, Tanzanie, Thajsko, Togo, Tokelau, Tonga, Trinidad a Tobago, Tunisko, Turecko, Turkmenistán, Tuvalu, Uganda, Ukrajina, Uruguay, Uzbekistán, Vanuatu, Vatikán, Venezuela, Vietnam, Východní Timor, Wallis a Futuna, Zambie, Západní Sahara "</string>
+    <string name="osmand_extended_description_4000_chars">"
+OsmAnd (OSM Automated Navigation Directions - Automatizované navigační pokyny) je mapová a navigační aplikace s přístupem ke kvalitním celosvětovým údajům z OpenStreetMap (OSM). Všechny údaje map mohou být uloženy na paměťové kartě ve vašem zařízení pro použití bez přístupu k Internetu (offline). Pomocí GPS ve vašem zařízení může OsmAnd nabídnout navigování vizuálními a hlasovými pokyny pro automobil, kolo a chodce. Všechny hlavní funkce pracují online i offline (bez nutnosti přístupu k Internetu).
+
+OsmAnd+ je placená verze aplikace. Její zakoupením podpoříte projekt, nové funkce a získáte nejnovější aktualizace map. Aplikaci si můžete před zakoupením vyzkoušet nainstalováním verze zdarma nazvané OsmAnd. 
+
+Některé hlavní funkce:
+
+Navigace:
+- Funguje online (rychlá) nebo offline (bez poplatků za roaming v zahraničí)
+- Hlasové navádění po jednotlivých zatáčkách (nahrané i syntetizované hlasy)
+- Volitelné navádění v jízdních pruzích, zobrazení názvů ulic a odhadovaný čas do cíle 
+- Umožňuje zadat přechodné body trasy
+- Automatické přepočítání trasy pokud se odchýlíte z trasy 
+- Hledání míst podle adresy, typu (např .: restaurace, hotely, čerpací stanice, muzea) nebo zeměpisných souřadnic 
+
+Zobrazení mapy: 
+- Zobrazování vaší pozice a orientace na mapě 
+- Možnost zobrazení mapy ve směru pohybu nebo podle kompasu 
+- Uložení oblíbených míst - zobrazení POI (bodů zájmu) v okolí 
+- Možnost zobrazit specializované podkladové mapy z Internetu
+- Možnost zobrazit satelitní snímky (z Bing) 
+- Možnost zobrazit různé překryvné vrstvy jako turistické / navigační GPX stopy a další mapy s nastavitelnou průhledností 
+- Volitelně může zobrazit názvy v angličtině, lokálním jazyku nebo foneticky 
+
+Využívá data z OpenStreetMap a Wikipedie: 
+- Informace vysoké kvality z nejlepších projektů světa 
+- Globální mapy z OpenStreetMap dostupné podle země nebo regionu 
+- Body zájmu z Wikipedie, vhodné pro návštěvu zajímavostí 
+- Neomezené stahování, přímo z aplikace 
+- Vždy aktuální mapy (aktualizováno nejméně jednou za měsíc) 
+- Kompaktní vektorové offline mapy 
+- Možnost volby mezi kompletními mapami nebo silniční sítí (např. celé Japonsko má 700 MB, silniční síť pouze 200 MB) 
+- Podporuje i podkladové dlaždice z Internetu 
+
+Bezpečnostní funkce: 
+- Volitelné automatické přepínání mezi denním a nočním režimem 
+- Volitelné zobrazení povolené rychlosti s upozorněním na její překročení 
+- Volitelné přibližování mapy podle rychlosti 
+- Sdílejte vaši polohu s přáteli, aby vás mohli najít 
+
+Funkce pro cyklisty a chodce: 
+- Mapy obsahují i cesty pro pěší, turisty a cyklisty vhodné pro aktivity v přírodě 
+- Speciální režimy zobrazení a navigace pro chodce a cyklisty 
+- Volitelné zobrazení zastávek hromadné dopravy (autobus, tramvaj, vlak) včetně názvů linek 
+- Volitelné nahrávání výletu do GPX souboru (lokálního nebo online služby) 
+- Volitelné zobrazení rychlosti a nadmořské výšky 
+- zobrazení vrstevnic a stínování svahů (s doplňkovými moduly) 
+
+Přímo přispívejte do OpenStreetMap: 
+- Nahlášení chyb v mapě 
+- Odeslání GPX stop do OSM přímo z aplikace 
+- Přidání POI a přímé odeslání do OSM (nebo později, pokud jste offline) 
+- Volitelné nahrávání výletu na pozadí (když je zařízení v režimu spánku) 
+
+OsmAnd je svobodný a aktivně vyvíjený software. Každý může přispět do aplikace hlášením chyb, vylepšením překladu nebo programováním nových funkcí. Projekt je ve stavu soustavného vylepšování díky spolupráci vývojářů a uživatelů. Pokrok projektu také závisí na finančních příspěvků na vývoj, programování a testování nových funkcí. Koupením OsmAnd + (placená verze) pomůžete aplikaci být ještě lepší! Na osmand.net můžete přispět obecně nebo na vývoj konkrétní funkce. 
+
+Přibližná kvalita pokrytí: 
+- Západní Evropa: **** 
+- Východní Evropa: *** 
+- Rusko: *** 
+- Severní Amerika: *** 
+- Jižní Amerika: ** 
+- Asie: ** 
+- Japonsko a Korea: *** 
+- Blízký Východ: ** 
+- Afrika: ** 
+- Antarktida: * 
+
+Seznam obsažených zemí (prakticky celý svět!): Afghánistán, Albánie, Alžírsko, Andorra, Angola, Anguilla, Antigua a Barbuda, Argentina, Arménie, Aruba, Austrálie, Ázerbájdžán, Bahamy, Bahrajn, Bangladéš, Barbados, Belgie, Belize, Bělorusko, Benin, Bermudy, Bhútán, Bolívie, Bonaire, Bosna a Hercegovina, Botswana, Brazílie, Britské Panenské ostrovy, Brunej, Bulharsko, Burkina Faso, Burundi, Curaçao, Čad, Černá hora, Česká Republika, Čína, Dánsko, Dominika, Dominikánská Republika, Džibuti, Egypt, Ekvádor, Eritrea, Estonsko, Etiopie, Fidži, Filipíny, Finsko, Francie, Francouzská Guyana, Francouzská Polynésie, Gabon, Gambie, Ghana, Gibraltar, Grenada, Grónsko, Gruzie, Guadeloupe, Guam, Guatemala, Guernsey, Guinea, Guinea-Bissau, Guyana, Haiti, Honduras, Hongkong, Chile, Chorvatsko, Indie, Indonésie, Irák, Írán, Irsko, Island, Itálie, Izrael, Jamajka, Japonsko, Jemen, Jersey, Jižní Afrika, Jižní Georgie, Jižní Súdán, Jordánsko, Kambodža, Kamerun, Kanada, Kapverdy, Katar, Kazachstán, Keňa, Kiribati, Kolumbie, Komory, Kongo, Kostarika, Kuba, Kuvajt, Kypr, Kyrgyzstán, Laos, Lesotho, Libanon, Libérie, Libye, Lichtenštejnsko, Litva, Lotyšsko, Lucembursko, Macao, Madagaskar, Maďarsko, Makedonie, Malajsie, Malawi, Maledivy, Mali, Malta, Maroko, Martinik, Mauretánie, Mauricius, Mayotte, Mexiko, Mikronésie, Moldavsko, Monako, Mongolsko, Montserrat, Mosambik, Myanmar, Namibie, Nauru, Německo, Nepál, Niger, Nigérie, Nikaragua, Nizozemské Antily, Nizozemsko, Norsko, Nová Kaledonie, Nový Zéland, Omán, Ostrov Man, Pákistán, Palau, Palestinská území, Panama, Papua Nová Guinea, Paraguay, Peru, Pobřeží slonoviny, Polsko, Portoriko, Portugalsko, Rakousko, Rovníková Guinea, Rumunsko, Rusko, Rwanda, Řecko, Sadská Arábie, Saint Barthelemy, Saint-Pierre a Miquelon, Salvador, Samoa, San Marino, Senegal, Severní a Jižní Korea, Seychely, Sierra Leone, Singapur, Slovensko, Slovinsko, Somálsko, Spojené Arabské Emiráty, Spojené království (UK), Spojené státy americké (USA), Srbsko, Srí Lanka, Středoafrická republika, Súdán, Surinam, Svatá Helena, Svatá Lucie, Svatý Kryštof a Nevis, Svatý Martin, Svatý Vincenc a Grenadiny, Svazijsko, Sýrie, Španělsko, Švédsko, Švýcarsko, Tádžikistán, Taiwan, Tanzanie, Thajsko, Togo, Tokelau, Tonga, Trinidad a Tobago, Tunisko, Turecko, Turkmenistán, Tuvalu, Uganda, Ukrajina, Uruguay, Uzbekistán, Vanuatu, Vatikán, Venezuela, Vietnam, Východní Timor, Wallis a Futuna, Zambie, Západní Sahara
+ "</string>
+    <string name="osmand_plus_extended_description_4000_chars">"
+OsmAnd (OSM Automated Navigation Directions - Automatizované navigační pokyny) je mapová a navigační aplikace s přístupem ke kvalitním celosvětovým údajům z OpenStreetMap (OSM). Všechny údaje map mohou být uloženy na paměťové kartě ve vašem zařízení pro použití bez přístupu k Internetu (offline). Pomocí GPS ve vašem zařízení může OsmAnd nabídnout navigování vizuálními a hlasovými pokyny pro automobil, kolo a chodce. Všechny hlavní funkce pracují online i offline (bez nutnosti přístupu k Internetu).
+
+OsmAnd+ je placená verze aplikace. Její zakoupením podpoříte projekt, nové funkce a získáte nejnovější aktualizace map. Aplikaci si můžete před zakoupením vyzkoušet nainstalováním verze zdarma nazvané OsmAnd. 
+
+Některé hlavní funkce:
+
+Navigace:
+- Funguje online (rychlá) nebo offline (bez poplatků za roaming v zahraničí)
+- Hlasové navádění po jednotlivých zatáčkách (nahrané i syntetizované hlasy)
+- Volitelné navádění v jízdních pruzích, zobrazení názvů ulic a odhadovaný čas do cíle 
+- Umožňuje zadat přechodné body trasy
+- Automatické přepočítání trasy pokud se odchýlíte z trasy 
+- Hledání míst podle adresy, typu (např .: restaurace, hotely, čerpací stanice, muzea) nebo zeměpisných souřadnic 
+
+Zobrazení mapy: 
+- Zobrazování vaší pozice a orientace na mapě 
+- Možnost zobrazení mapy ve směru pohybu nebo podle kompasu 
+- Uložení oblíbených míst - zobrazení POI (bodů zájmu) v okolí 
+- Možnost zobrazit specializované podkladové mapy z Internetu
+- Možnost zobrazit satelitní snímky (z Bing) 
+- Možnost zobrazit různé překryvné vrstvy jako turistické / navigační GPX stopy a další mapy s nastavitelnou průhledností 
+- Volitelně může zobrazit názvy v angličtině, lokálním jazyku nebo foneticky 
+
+Využívá data z OpenStreetMap a Wikipedie: 
+- Informace vysoké kvality z nejlepších projektů světa 
+- Globální mapy z OpenStreetMap dostupné podle země nebo regionu 
+- Body zájmu z Wikipedie, vhodné pro návštěvu zajímavostí 
+- Neomezené stahování, přímo z aplikace 
+- Vždy aktuální mapy (aktualizováno nejméně jednou za měsíc) 
+- Kompaktní vektorové offline mapy 
+- Možnost volby mezi kompletními mapami nebo silniční sítí (např. celé Japonsko má 700 MB, silniční síť pouze 200 MB) 
+- Podporuje i podkladové dlaždice z Internetu 
+
+Bezpečnostní funkce: 
+- Volitelné automatické přepínání mezi denním a nočním režimem 
+- Volitelné zobrazení povolené rychlosti s upozorněním na její překročení 
+- Volitelné přibližování mapy podle rychlosti 
+- Sdílejte vaši polohu s přáteli, aby vás mohli najít 
+
+Funkce pro cyklisty a chodce: 
+- Mapy obsahují i cesty pro pěší, turisty a cyklisty vhodné pro aktivity v přírodě 
+- Speciální režimy zobrazení a navigace pro chodce a cyklisty 
+- Volitelné zobrazení zastávek hromadné dopravy (autobus, tramvaj, vlak) včetně názvů linek 
+- Volitelné nahrávání výletu do GPX souboru (lokálního nebo online služby) 
+- Volitelné zobrazení rychlosti a nadmořské výšky 
+- zobrazení vrstevnic a stínování svahů (s doplňkovými moduly) 
+
+Přímo přispívejte do OpenStreetMap: 
+- Nahlášení chyb v mapě 
+- Odeslání GPX stop do OSM přímo z aplikace 
+- Přidání POI a přímé odeslání do OSM (nebo později, pokud jste offline) 
+- Volitelné nahrávání výletu na pozadí (když je zařízení v režimu spánku) 
+
+OsmAnd je svobodný a aktivně vyvíjený software. Každý může přispět do aplikace hlášením chyb, vylepšením překladu nebo programováním nových funkcí. Projekt je ve stavu soustavného vylepšování díky spolupráci vývojářů a uživatelů. Pokrok projektu také závisí na finančních příspěvků na vývoj, programování a testování nových funkcí. Koupením OsmAnd + (placená verze) pomůžete aplikaci být ještě lepší! Na osmand.net můžete přispět obecně nebo na vývoj konkrétní funkce. 
+
+Přibližná kvalita pokrytí: 
+- Západní Evropa: **** 
+- Východní Evropa: *** 
+- Rusko: *** 
+- Severní Amerika: *** 
+- Jižní Amerika: ** 
+- Asie: ** 
+- Japonsko a Korea: *** 
+- Blízký Východ: ** 
+- Afrika: ** 
+- Antarktida: * 
+
+Seznam obsažených zemí (prakticky celý svět!): Afghánistán, Albánie, Alžírsko, Andorra, Angola, Anguilla, Antigua a Barbuda, Argentina, Arménie, Aruba, Austrálie, Ázerbájdžán, Bahamy, Bahrajn, Bangladéš, Barbados, Belgie, Belize, Bělorusko, Benin, Bermudy, Bhútán, Bolívie, Bonaire, Bosna a Hercegovina, Botswana, Brazílie, Britské Panenské ostrovy, Brunej, Bulharsko, Burkina Faso, Burundi, Curaçao, Čad, Černá hora, Česká Republika, Čína, Dánsko, Dominika, Dominikánská Republika, Džibuti, Egypt, Ekvádor, Eritrea, Estonsko, Etiopie, Fidži, Filipíny, Finsko, Francie, Francouzská Guyana, Francouzská Polynésie, Gabon, Gambie, Ghana, Gibraltar, Grenada, Grónsko, Gruzie, Guadeloupe, Guam, Guatemala, Guernsey, Guinea, Guinea-Bissau, Guyana, Haiti, Honduras, Hongkong, Chile, Chorvatsko, Indie, Indonésie, Irák, Írán, Irsko, Island, Itálie, Izrael, Jamajka, Japonsko, Jemen, Jersey, Jižní Afrika, Jižní Georgie, Jižní Súdán, Jordánsko, Kambodža, Kamerun, Kanada, Kapverdy, Katar, Kazachstán, Keňa, Kiribati, Kolumbie, Komory, Kongo, Kostarika, Kuba, Kuvajt, Kypr, Kyrgyzstán, Laos, Lesotho, Libanon, Libérie, Libye, Lichtenštejnsko, Litva, Lotyšsko, Lucembursko, Macao, Madagaskar, Maďarsko, Makedonie, Malajsie, Malawi, Maledivy, Mali, Malta, Maroko, Martinik, Mauretánie, Mauricius, Mayotte, Mexiko, Mikronésie, Moldavsko, Monako, Mongolsko, Montserrat, Mosambik, Myanmar, Namibie, Nauru, Německo, Nepál, Niger, Nigérie, Nikaragua, Nizozemské Antily, Nizozemsko, Norsko, Nová Kaledonie, Nový Zéland, Omán, Ostrov Man, Pákistán, Palau, Palestinská území, Panama, Papua Nová Guinea, Paraguay, Peru, Pobřeží slonoviny, Polsko, Portoriko, Portugalsko, Rakousko, Rovníková Guinea, Rumunsko, Rusko, Rwanda, Řecko, Sadská Arábie, Saint Barthelemy, Saint-Pierre a Miquelon, Salvador, Samoa, San Marino, Senegal, Severní a Jižní Korea, Seychely, Sierra Leone, Singapur, Slovensko, Slovinsko, Somálsko, Spojené Arabské Emiráty, Spojené království (UK), Spojené státy americké (USA), Srbsko, Srí Lanka, Středoafrická republika, Súdán, Surinam, Svatá Helena, Svatá Lucie, Svatý Kryštof a Nevis, Svatý Martin, Svatý Vincenc a Grenadiny, Svazijsko, Sýrie, Španělsko, Švédsko, Švýcarsko, Tádžikistán, Taiwan, Tanzanie, Thajsko, Togo, Tokelau, Tonga, Trinidad a Tobago, Tunisko, Turecko, Turkmenistán, Tuvalu, Uganda, Ukrajina, Uruguay, Uzbekistán, Vanuatu, Vatikán, Venezuela, Vietnam, Východní Timor, Wallis a Futuna, Zambie, Západní Sahara
+ "</string>
     <string name="lock_screen_request_explanation">%1$s potřebuje tato oprávnění pro vypnutí obrazovky při režimu šetření energie.</string>
     <string name="shared_string_never">Nikdy</string>
     <string name="home_button">Domovská obrazovka</string>
@@ -2176,7 +2314,7 @@ Pokud máte rádi OsmAnd a OSM a chcete je podpořit, toto je výborný způsob 
     <string name="map_widget_battery">Stav baterie</string>
     <!-- string name="lat_lon_pattern">Šíř: %1$.5f Dél: %2$.5f</string -->
     <string name="access_direction_audio_feedback">Zvuková zpětná vazba směru</string>
-    <string name="use_osm_live_routing_description">Povolit navigaci pro OSM Live změny (beta)</string>
+    <string name="use_osm_live_routing_description">Aktivovat navigaci pomocí změn z OSM Live (beta)</string>
 	<string name="change_markers_position">Změnit umístění značky</string>
     <string name="move_marker_bottom_sheet_title">Posuňte mapu pro změnu umístění značky</string>
     <string name="lang_hu_formal">Maďarština (formální)</string>
@@ -2375,7 +2513,7 @@ Pokud máte rádi OsmAnd a OSM a chcete je podpořit, toto je výborný způsob 
 
     <string name="quick_action_item_action">Akce %d</string>
     <string name="quick_action_item_screen">Obrazovka %d</string>
-    <string name="quick_action_add_marker">Přidat značku</string>
+    <string name="quick_action_add_marker">Přidat mapovou značku</string>
     <string name="quick_action_add_poi">Přidat POI</string>
     <string name="quick_action_map_style">Změnit styl mapy</string>
     <string name="quick_action_map_style_switch">Styl mapy byl změněn na \"%s\".</string>
@@ -2396,15 +2534,15 @@ Pokud máte rádi OsmAnd a OSM a chcete je podpořit, toto je výborný způsob 
     <string name="quick_actions_delete_text">Opravdu chcete odstranit akci \"%s\"?</string>
     <string name="quick_favorites_show_favorites_dialog">Zobrazit dialog oblíbených</string>
     <string name="quick_favorites_name_preset">Přednastavení názvu</string>
-    <string name="quick_action_add_marker_descr">Klepnutím na tlačítko akce se přidá značka do zadaného umístění.</string>
-    <string name="quick_action_add_gpx_descr">Klepnutím na tlačítko akce se přidá GPX mezicíl do zadaného umístění.</string>
-    <string name="quick_action_take_audio_note_descr">Klepnutím na tlačítko akce se přidá audio záznam do zadaného umístění.</string>
-    <string name="quick_action_take_video_note_descr">Klepnutím na tlačítko akce se přidá video záznam do zadaného umístění.</string>
-    <string name="quick_action_take_photo_note_descr">Klepnutím na tlačítko akce se přidá foto záznam do zadaného umístění.</string>
-    <string name="quick_action_add_osm_bug_descr">Klepnutím na tlačítko akce se přidá chyba OSM do zadaného umístění.</string>
-    <string name="quick_action_add_poi_descr">Klepnutím na tlačítko akce se přidá POI na určené místo.</string>
+    <string name="quick_action_add_marker_descr">Klepnutím na tlačítko akce se přidá mapová značka do středu obrazovky.</string>
+    <string name="quick_action_add_gpx_descr">Klepnutím na tlačítko akce se přidá GPX mezicíl do středu obrazovky.</string>
+    <string name="quick_action_take_audio_note_descr">Klepnutím na tlačítko akce se přidá audio záznam do středu obrazovky.</string>
+    <string name="quick_action_take_video_note_descr">Klepnutím na tlačítko akce se přidá video záznam do středu obrazovky.</string>
+    <string name="quick_action_take_photo_note_descr">Klepnutím na tlačítko akce se přidá foto záznam do středu obrazovky.</string>
+    <string name="quick_action_add_osm_bug_descr">Klepnutím na tlačítko akce se přidá chyba OSM do středu obrazovky.</string>
+    <string name="quick_action_add_poi_descr">Klepnutím na tlačítko akce se přidá POI do středu obrazovky.</string>
     <string name="quick_action_navigation_voice_descr">Klepnutím na tlačítko akce se vypnou nebo zapnou hlasové pokyny během navigace.</string>
-    <string name="quick_action_add_parking_descr">Klepnutím na tlačítko akce se přidá parkovací místo na určené umístění.</string>
+    <string name="quick_action_add_parking_descr">Klepnutím na tlačítko akce se přidá parkovací místo do středu obrazovky.</string>
     <string name="favorite_empty_place_name">Místo</string>
     <string name="quick_action_duplicates">Zadaný název rychlé akce je již použit, byl změněn na %1$s z důvodu duplicity.</string>
     <string name="quick_action_duplicate">Duplicitní název rychlé akce</string>
@@ -2423,8 +2561,8 @@ Pokud máte rádi OsmAnd a OSM a chcete je podpořit, toto je výborný způsob 
     <string name="quick_action_fav_name_descr">Ponecháte-li prázdné, bude automaticky použita adresa nebo název místa</string>
     <string name="quick_action_bug_descr">Tato zpráva bude automaticky dokončena v poli komentáře.</string>
     <string name="quick_action_bug_message">Zpráva</string>
-    <string name="quick_action_category_descr">Vyberte kategorii, kterou chcete uložit pod oblíbené.</string>
-    <string name="quick_action_gpx_category_descr">Vyberte volitelnou kategorii bodu mezicíle GPX.</string>
+    <string name="quick_action_category_descr">Vyberte kategorii, kterou chcete uložit do oblíbených</string>
+    <string name="quick_action_gpx_category_descr">Vyberte volitelnou kategorii</string>
     <string name="quick_action_poi_list">Seznam POI</string>
     <string name="quick_action_sh_poi_descr">Můžete přidat jednu nebo více kategorií POI pro zobrazení na mapě.</string>
     <string name="quick_action_map_style_action">Přidat styl mapy</string>
@@ -2443,4 +2581,13 @@ Pokud máte rádi OsmAnd a OSM a chcete je podpořit, toto je výborný způsob 
     <string name="quick_action_btn_tutorial_title">Změnit polohu tlačítka</string>
     <string name="quick_action_btn_tutorial_descr">Dlouze klepněte a přetáhněte tlačítko pro změnu jeho umístění na obrazovce</string>
 	<string name="shared_string_action_name">Název akce</string>
-</resources>
+<string name="navigate_point_olc_info_invalid">Neplatný OLC
+</string>
+    <string name="navigate_point_olc_info_short">Krátké OLC
+Prosím uveďte úplný kód</string>
+    <string name="navigate_point_olc_info_area">Platné plné OLC
+Zobrazená oblast: %1$s x %2$s</string>
+    <string name="favorite_autofill_toast_text">" je uložen do "</string>
+    <string name="quick_action_map_overlay_switch">Překryvná mapa se změnila na \"%s\".</string>
+    <string name="quick_action_map_underlay_switch">Mapa podkladu se změnila na \"%s\".</string>
+    </resources>
