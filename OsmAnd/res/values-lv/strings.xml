@@ -1162,7 +1162,7 @@ OsmAnd ir atvērtā koda navigācijas aplikācija ar piekļuvi vispusīgiem Open
     <string name="map_widget_av_notes">Audio/video piezīmes</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd spraudnis bezsaistes kontūrlīnijām</string>
     <string name="map_widget_distancemeasurement">Distances mērīšana</string>
-    <string name="audionotes_location_not_defined">Nav definēta atrašanās vieta, ko piesaistīt piezīmei. Lai to izdarītu, izvēlieties \"Lietot atrašanās vietu…\"</string>
+    <string name="audionotes_location_not_defined">Šai piezīmei nav definēta atrašanās vieta. Lai to izdarītu, izvēlieties \"Lietot atrašanās vietu…\".</string>
     
     <string name="map_widget_audionotes">Audio piezīmes</string>
     <string name="audionotes_plugin_description">Ceļojuma laikā uzņemt audio/video piezīmes.</string>
@@ -1643,7 +1643,10 @@ Reģistrētu lietotāju grupām ir pieejamas tādas papildiespējas kā grupas a
 	<string name="lang_fa">Persiešu</string>
 	<string name="map_preferred_locale_descr">Rakstība uz kartes (ja izvēlētā valoda nebūs pieejama, tiks lietoti vietvārdi vai angļu valoda)</string>
     <string name="map_preferred_locale">Kartes valoda</string>
-    <string name="record_plugin_description">"Ar šo spraudni jūs varat manuāli saglabāt ceļa trekus, nospiežot GPX ieraksta pogu kartes ekrānā vai automātiski veikt treka ierakstus GPX failā.\n\nIerakstītie treki vēlāk var tikt izmantoti maršruta analīzei, koplietošanai ar draugiem vai OSM izstrādei. "</string>
+    <string name="record_plugin_description">"Ar šo spraudni jūs varat manuāli saglabāt ceļa trekus, nospiežot GPX ieraksta pogu kartes ekrānā vai automātiski veikt treka ierakstus GPX failā.
+
+Ierakstītie treki vēlāk var tikt izmantoti treka analīzei, koplietošanai ar draugiem vai OSM izstrādei.  Atlēti var izmantot trekus, lai monitorētu treniņus. Pamata treku analīze var tikt veikta tieši caur OsmAnd kā piemēram, apļu laiki, vidējais ātrums utt., bet paplašinātai analīzei trekus var atvērt citās programmās.
+ "</string>
     <string name="record_plugin_name">Ceļojuma ieraksts</string>
     <string name="int_hour">h</string>
     <string name="duration">Laiks</string>
@@ -2112,8 +2115,8 @@ Vai gribat veikt jaunu reģistrāciju?</string>
     <string name="world_map_download_descr">Pasaules pamatkarte nav atrasta vai ir novecojusi. Lūdzu lejupielādējiet to globālai pārlūkošanai.</string>
     <string name="shared_string_qr_code">QR-kods</string>
     <string name="map_downloaded">Karte ir lejupielādēta</string>
-    <string name="map_downloaded_descr">%1$s karte ir lejupielādēta. Varat atgriezties galvenajā ekrānā un sākt lietot karti.</string>
-    <string name="go_to_map">Atvērt karti</string>
+    <string name="map_downloaded_descr">%1$s karte ir lejupielādēta un gatava lietošanai.</string>
+    <string name="go_to_map">Rādīt karti</string>
     <string name="simulate_initial_startup_descr">Imitē aplikācijas pirmo atvēršanu pēc instalācijas, saglabājot visus uzstādījumus</string>
     <string name="simulate_initial_startup">Imitēt pirmo atvēršanu</string>
     <string name="share_geo">ģeo:</string>
@@ -2288,14 +2291,14 @@ failu(s)?
     <string name="help_us_to_improve_menu_group">Palīdziet mums uzlabot OsmAnd</string>
     <string name="other_menu_group">Pārējais</string>
     <string name="plugins_menu_group">Spraudņi</string>
-    <string name="first_usage_item">Darba sākšana</string>
-    <string name="first_usage_item_description">Kā lejupielādēt kartes un pamatuzstādījumi</string>
+    <string name="first_usage_item">Sākt lietot</string>
+    <string name="first_usage_item_description">Kā lejupielādēt kartes un pamata uzstādījumi</string>
     <string name="navigation_item_description">Navigācija</string>
     <string name="planning_trip_item">Ceļojuma plānošana</string>
     <string name="faq_item">BUJ</string>
     <string name="faq_item_description">Biežāk uzdotie jautājumi</string>
     <string name="map_viewing_item">Kartes skatīšana</string>
-    <string name="search_on_the_map_item">Meklēšana kartē</string>
+    <string name="search_on_the_map_item">Meklē kartē</string>
     <string name="instalation_troubleshooting_item">Uzstādīšana un iespējamās problēmas</string>
     <string name="techical_articles_item">Tehniskās daļas raksti</string>
     <string name="versions_item">Versijas</string>
@@ -2688,4 +2691,15 @@ Apraksta laukumu: %1$s x %2$s</string>
     <string name="quick_action_map_source_title">Kartes avoti</string>
     <string name="quick_action_map_source_action">Pievienot kartes avotu</string>
     <string name="quick_action_map_source_switch">Kartes avots tika nomainīts uz \"%s\".</string>
-    </resources>
+    <string name="configure_screen_quick_action">Ātrā darbība</string>
+
+    <string name="quick_action_item_action">Darbība %d</string>
+    <string name="quick_action_item_screen">Ekrāns %d</string>
+    <string name="quick_favorites_name_preset">Vieta no izlases</string>
+    <string name="quick_action_interim_dialog">Rādīt interim dialogu</string>
+    <string name="quick_action_duplicates">Šāds ātrās darbības vārds jau tiek lietots, tāpēc tika nomainīts uz %1$s, lai nedublētu vārdu.</string>
+    <string name="quick_action_duplicate">Ātrās darbības vārda dublikāts</string>
+    <string name="quick_action_btn_tutorial_title">Mainīt pogas pozīciju</string>
+    <string name="quick_action_btn_tutorial_descr">Pieskarieties un velciet pogu, lai mainītu tās atrašanās vietu uz ekrāna</string>
+	<string name="shared_string_action_name">Darbības vārds</string>
+</resources>
