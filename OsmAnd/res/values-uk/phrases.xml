@@ -492,7 +492,7 @@
 	<string name="poi_golf_course">Поле для гольфу</string>
 	<string name="poi_ice_rink">Льодовий каток</string>
 	<string name="poi_pitch">Спортмайданчик</string>
-	<string name="poi_leisure_track"/>
+	<string name="poi_leisure_track">Спортивна доріжка</string>
 	<string name="poi_running_track">Бігова доріжка</string>
 	<string name="poi_bicycle_track">Велосипедна доріжка</string>
 	<string name="poi_horse_track">Іподром</string>
@@ -670,4 +670,20 @@
 	<string name="poi_studio">Студія звукозапису, телестудія</string>
 	<string name="poi_office_religion">Офіс релігійної організації</string>
 	<string name="poi_association">Офіс асоціації</string>
+	<string name="poi_financial">Фінансова контора</string>
+	<string name="poi_foundation">Офіс фонду (громадської організації)</string>
+	<string name="poi_tax_advisor">Спеціаліст з підготовки податкових декларацій</string>
+
+	<string name="poi_raceway">Гоночна/ралійна траса</string>
+	<string name="poi_9pin">9-кегельний боулінг</string>
+	<string name="poi_10pin">10-кегельний боулінг (звичайний)</string>
+	<string name="poi_boules">Буль</string>
+	<string name="poi_bowls">Кеглі</string>
+	<string name="poi_diving">Стрибки у воду</string>
+	<string name="poi_ice_hockey">Хокей з шайбою</string>
+	<string name="poi_ice_stock">Айсшток</string>
+	<string name="poi_korfbal">Корфбол</string>
+	<string name="poi_sport_multi">Універсальний спортмайданчик</string>
+	<string name="poi_orienteering">Спортивне орієнтування</string>
+	<string name="poi_paragliding">Парапланеризм</string>
 	</resources>
