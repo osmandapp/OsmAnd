@@ -2739,4 +2739,54 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="quick_action_map_style">Зьмяніць стыль мапы</string>
     <string name="quick_action_map_style_switch">Стыль мапы быў зьменены на \"%s\".</string>
     <string name="quick_action_add_parking">Дадаць месца паркоўкі</string>
+    <string name="save_track_min_speed_descr">Выберыце мінімальную хуткасьць, пры перавышэньні якой пункт будзе запісаны ў сьлед</string>
+    <string name="save_track_min_distance">Мінімальная дыстанцыя для запісу</string>
+    <string name="save_track_min_distance_descr">Выберыце адлегласьць, пры перавышэньні якой пункт будзе запісаны ў сьлед</string>
+    <string name="save_track_precision">Мінімальна дапушчальная дакладнасьць</string>
+    <string name="save_track_precision_descr">Абярыце мінімальна дапушчальную дакладнасьць вызначэньня каардынатаў</string>
+    <string name="navigate_point_olc_info_invalid">Некарэктны OLC
+</string>
+    <string name="navigate_point_olc_info_short">Кароткі OLC
+Калі ласка, увядзіце поўны код</string>
+    <string name="navigate_point_olc_info_area">Карэктны поўны OLC
+Апісвае вобласьць: %1$s x %2$s</string>
+    <string name="configure_screen_quick_action">Хуткае дзеяньне</string>
+
+    <string name="quick_action_item_action">Дзеяньне %d</string>
+    <string name="quick_action_add_gpx">Дадаць пункт да сьледу</string>
+    <string name="quick_action_new_action">Дадаць дзеяньне</string>
+    <string name="quick_action_edit_action">Рэдагаваць дзеяньне</string>
+    <string name="quick_action_add_favorite">Дадаць любімае</string>
+    <string name="dialog_add_action_title">Дадаць дзеяньне</string>
+    <string name="quick_actions_delete">Выдаліць дзеяньне</string>
+    <string name="quick_actions_delete_text">Вы ўпэўненыя, што хочаце выдаліць дзеяньне \"%s\"?</string>
+    <string name="favorite_empty_place_name">Месца</string>
+    <string name="quick_action_showhide_favorites_title">Паказаць/схаваць любімыя</string>
+    <string name="quick_action_favorites_show">Паказаць любімыя</string>
+    <string name="quick_action_favorites_hide">Схаваць любімыя</string>
+    <string name="quick_action_showhide_poi_title">Паказаць/схаваць POI</string>
+    <string name="quick_action_poi_show">Паказаць %1$s</string>
+    <string name="quick_action_poi_hide">Схаваць %1$s</string>
+    <string name="quick_action_add_category">Дадаць катэгорыю</string>
+    <string name="quick_action_add_configure_map">Налада мапы</string>
+    <string name="quick_action_add_navigation">Навігацыя</string>
+    <string name="quick_action_fav_name_descr">Пакіньце пустым, каб аўтаматычна прымяніць адрас або назву гораду</string>
+    <string name="quick_action_bug_descr">Гэта паведамленьне будзе аўтаматычна запоўнена ў поле камэнтара.</string>
+    <string name="quick_action_bug_message">Паведамленьне</string>
+    <string name="quick_action_category_descr">Выберыце катэгорыю, каб захаваць любімае там</string>
+    <string name="quick_action_poi_list">Пералік POI</string>
+    <string name="quick_action_sh_poi_descr">Вы можаце дадаць адну або некалькі катэгорый POI для адлюстраваньня на мапе.</string>
+    <string name="quick_action_map_style_action">Дадаць стыль мапы</string>
+    <string name="quick_action_empty_param_error">Парамэтры не павінны быць пустымі</string>
+    <string name="quick_action_map_styles">Стылі мапы</string>
+    <string name="quick_action_map_source_title">Крыніцы мапаў</string>
+    <string name="quick_action_map_source_action">Дадаць крыніцу мапы</string>
+    <string name="quick_action_map_source_switch">Крыніца мапы была зьменена на \"%s\".</string>
+    <string name="quick_action_btn_tutorial_title">Зьмяніць становішча кнопкі</string>
+    <string name="shared_string_action_name">Назва дзеяньня</string>
+<string name="quick_action_take_audio_note">Стварыць гукавую нататку</string>
+    <string name="quick_action_take_video_note">Стварыць відэа-нататку</string>
+    <string name="quick_action_take_photo_note">Стварыць фота-нататку</string>
+    <string name="quick_action_navigation_voice_off">Голас прыглушаны</string>
+    <string name="quick_action_navigation_voice_on">Голас актыўны</string>
     </resources>
