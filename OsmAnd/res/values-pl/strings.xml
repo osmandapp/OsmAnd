@@ -2613,7 +2613,7 @@ Jeśli potrzebujesz pomocy podczas używania OsmAnd, prosimy o kontakt z naszym 
     <string name="routing_attr_short_way_name">Ekonomiczna trasa</string>
     <string name="routing_attr_short_way_description">Wyznacza ekonomiczną trasę (zwykle najkrótszą)</string>
     <string name="replace_favorite_confirmation">Zastąpić ulubiony punkt %1$s?</string>
-    <string name="skip_map_downloading">Pomijanie pobierania map</string>
+    <string name="skip_map_downloading">Pomiń pobieranie map</string>
     <string name="first_usage_greeting">Otrzymuj wskazówki dojazdu i odkrywaj nowe miejsca bez połączenia z Internetem</string>
     <string name="search_another_country">Proszę wybrać inny region</string>
     <string name="skip_map_downloading_desc">Nie zainstalowano map w trybie offline. Można wybrać mapę z listy lub pobrać mapy później za pośrednictwem polecenia menu - %1$s.</string>
@@ -2714,7 +2714,7 @@ i więcej...
     <string name="upload_poi">Prześlij użyteczne miejsca</string>
     <string name="route_roundabout_short">Zjedź %1$d zjazdem</string>
     <string name="search_map_hint">Szukaj miasta lub regionu</string>
-    <string name="wiki_around">O pobliskich miejscach w Wikipedii</string>
+    <string name="wiki_around">Artykuły Wikipedii w pobliżu</string>
     <string name="legacy_search">Przestarzała wyszukiwarka</string>
     <string name="show_legacy_search">Wyświetl przestarzałą wyszukiwarkę</string>
     <string name="show_legacy_search_desc">Aktywuje przestarzałą wyszukiwarkę w menu rozwijanym</string>
