@@ -1832,4 +1832,237 @@ Le %2$s</string>
     <string name="osmo_follow">Følg</string>
     <string name="osmo_sign_in">Logg inn</string>
     <string name="osmo_credentials_not_valid">Dine OsMo-detaljer er ikke gyldige.</string>
+    <string name="rendering_attr_contourDensity_description">Kotetetthet</string>
+    <string name="rendering_attr_contourDensity_name">Kotetetthet</string>
+    <string name="rendering_attr_contourWidth_description">Kotebredde</string>
+    <string name="rendering_attr_contourWidth_name">Kotebredde</string>
+    <string name="srtm_paid_version_msg">Overvei å kjøpe kote-programtillegget i markedet for å støtte videre utvikling.</string>
+    <string name="osmand_long_description_1000_chars">"
+ OsmAnd (OSM automatiserte navigasjonsanvisninger)
+
+ OsmAnd er et friprog prosjekt for navigasjon med tilgang til et rikt utvalg av globale OpenStreetMap (OSM)-data. All kartdata (vektorielt eller flisbasert) kan lagres på telefonens minnekort for frakoblet bruk. OsmAnd tilbyr også frakoblet og nettbasert rutefunksjonalitet, inkludert stemmebaserte anvisninger sving-for-sving.
+
+ Noen av kjernefunksjonene:
+ - Fullstendig frakoblet funksjonalitet (lagre nedlastede vektorielle eller flisbaserte kart i enhetens lagringsmedium)
+ - Kompakte frakoblede vektorielle kart fra hele verden tilgjengelig
+ - Last ned lands- eller steds-baserte kart direkte fra programmet
+ - Mulighet for flerfoldige forgrunnslag, som GPX og navigasjonsspor, interessepunkter, favoritter, koter, stoppesteder for offentlig transport, ytterligere kart med egendefinert gjennomsiktighet
+ - Frakoblet søk for adresser og steder (interessepunkter)
+ - Frakoblet ruting for middels avstander 
+ - Bil, sykkel eller til fots, med:
+ - Valgfri automatisk veksling mellom natt og dag
+ - Valgfri fartsavhengig kartforstørrelse
+ - Valgfri karttilpasning i henhold til kompass- eller farts-retning
+ - Valgfri fil-henvisning, visning av fartsgrense, innspilte og TTS-stemmer
+
+ Begrensninger i gratisversjonen av OsmAnd:
+ - Antall kartnedlastinger er begreset
+ - Ingen tilgang til frakoblede interessepunkter fra Wikipedia
+
+ OsmAnd utvikles aktivt, og prosjektet vårt avhenger av finansielle bidrag for å drive utviklingen og å teste ny funksjonalitet. Overvei å kjøpe OsmAnd+ eller å støtte spesifikke nye funksjoner eller å donere uten hensyn til årsak på osmand.net.
+ "</string>
+	<string name="upload_osm_note_description">Du kan laste opp din OSM-notis anonymt eller bruke din OpenStreetmap.org -profil.</string>
+    <string name="gpx_no_tracks_title">Du har ingen spor enda</string>
+    <string name="gpx_no_tracks_title_folder">Legg til spor i mappen</string>
+    <string name="gpx_add_track">Legg til spor</string>
+    <string name="trip_rec_notification_settings">Turopptak (ingen data)</string>
+    <string name="trip_rec_notification_settings_desc">Vis merknader som lar deg starte en tur ved å trykke opptaksknappen</string>
+    <string name="save_track_min_speed">Minste loggingshastighet</string>
+    <string name="save_track_min_speed_descr">Velg minste hastighet som starter loggføringen av punkter</string>
+    <string name="save_track_min_distance">Logging ved bevegelsesoppdagelse</string>
+    <string name="save_track_min_distance_descr">Angi minste avstand fra siste posisjon for at et punkt skal logges</string>
+    <string name="save_track_precision">Minste loggingspresisjon</string>
+    <string name="save_track_precision_descr">Velg minste presisjon som starter loggføring av et punkt</string>
+    <string name="christmas_desc">Med tanke på den kommende Jula og nyåret, kan du velge å vise interessepunkter tilknyttet Jul: Juletrær, markeder, osv.</string>
+    <string name="translit_name_if_miss">Transkriber hvis %1$s navn mangler</string>
+    <string name="translit_names">Transkriber navn</string>
+    <string name="get_for_month">Innhent for %1$s måned</string>
+    <string name="osm_live_banner_desc">Få ubegrensede kartnedlastinger, og kartopplastinger mer enn en gang om måneden: Ukentlig, daglig, eller timebasert.</string>
+    <string name="access_direction_audio_feedback">Lydbasert retningsanvisning</string>
+    <string name="access_direction_audio_feedback_descr">Indikerer målets retning med lyd</string>
+    <string name="access_direction_haptic_feedback">Retningstilbakemelding med vibrasjon</string>
+    <string name="access_direction_haptic_feedback_descr">Angi retningen til målet med vibrasjon</string>
+    <string name="use_osm_live_routing_description">Skru på navigasjon for OSM- endringer i sanntid (beta)</string>
+    <string name="map_widget_magnetic_bearing">Magnetisk peiling</string>
+    <string name="map_widget_bearing">Relativ peiling</string>
+    <string name="access_disable_offroute_recalc_descr">Forhindre automatisk ruteutregning når du er ganske langt unna rett vei</string>
+    <string name="access_smart_autoannounce_descr">Varsle bare når retningen til målpunktet endres</string>
+    <string name="access_autoannounce_period">Periode for automatisk annonsering</string>
+    <string name="access_autoannounce_period_descr">Minimumstid mellom meddelelser</string>
+    <string name="osmo_connect_to_device_tracker_id">Sporings-ID</string>
+    <string name="osmo_tracker_id">Sporings-ID</string>
+    <string name="osmo_tracker_id_descr">Klikk for å vise sporings-ID</string>
+    <string name="osm_user_stat">Redigeringer %1$s, rang %2$s, %3$s redigeringer totalt</string>
+    <string name="osm_editors_ranking">Rankering av OSM-bidragsytere</string>
+    <string name="osm_live_email_desc">Vi trenger det for å gi deg informasjon om bidragsytere</string>
+    <string name="osm_live_support_region">Støttet område</string>
+    <string name="osm_live_thanks">Takk for at du abonnerer på sanntidsoppdateringer!</string>
+    <string name="osm_live_region_desc">Deler av din donasjon vil bli sendt til OSM-brukere som sender inn endringer til kartet i det området</string>
+    <string name="upload_osm_note">Last opp OSM-notis</string>
+    <string name="add_time_span">Tilføy tidsintervall</string>
+    <string name="rec_split">Oppdeling av opptak</string>
+    <string name="rec_split_title">Bruk oppdeling av opptak</string>
+    <string name="rec_split_desc">Overskriv klipp når lagringsplassen er brukt opp</string>
+    <string name="rec_split_clip_length">Klipplengde</string>
+    <string name="rec_split_clip_length_desc">Lengden på hvert innspilte klipp blir ikke lenger enn det angitte tidsintervallet</string>
+    <string name="rec_split_storage_size_desc">Mengden plass som kan tas opp av det totale antall klipp</string>
+    <string name="av_audio_bitrate_descr">Velg lydbitrate</string>
+    <string name="osm_save_offline">Lagre for frakoblet bruk</string>
+    <string name="osm_edit_modified_poi">Modifisert OSM-interessepunkt</string>
+    <string name="context_menu_item_open_note">Åpne OSM-notis</string>
+    <string name="osm_edit_reopened_note">Gjenåpnet OSM-notis</string>
+    <string name="osm_edit_commented_note">Kommenterte OSM-notis</string>
+    <string name="osm_edit_removed_note">Slettet OSM-notis</string>
+    <string name="osm_edit_created_note">Opprettet OSM-notis</string>
+    <string name="osn_bug_name">OSM-notis</string>
+    <string name="osn_add_dialog_title">Opprett notis</string>
+    <string name="osn_reopen_dialog_title">Gjenåpne notis</string>
+    <string name="osn_close_dialog_title">Lukk notis</string>
+    <string name="osn_add_dialog_success">Notisen ble opprettet</string>
+    <string name="osn_add_dialog_error">Unntak oppsto: Notisen ble ikke opprettet</string>
+    <string name="osn_close_dialog_success">Notisen ble lukket</string>
+    <string name="osn_close_dialog_error">Unntak oppstod: Notisen ble ikke lukket</string>
+    <string name="osb_comment_dialog_error">Unntak oppsto: Kommentaren ble ikke lagt til</string>
+    <string name="shared_string_commit">Send inn</string>
+
+    <string name="share_osm_edits_subject">OSM-redigeringer delt via OsmAnd</string>
+    <string name="whats_new">Hva er nytt i</string>
+    <string name="si_nm_h">Sjømil i timen (knop)</string>
+    <string name="simulate_your_location_stop_descr">Slutt å simulere din posisjon</string>
+    <string name="simulate_your_location_descr">Simuler ved bruk av en kalkulert rute eller innspilt GPX</string>
+    <string name="av_locations_descr">GPX-fil med notiser om plasser</string>
+    <string name="rendering_attr_currentTrackColor_description">GPX-farge</string>
+    <string name="archive_wikipedia_data">Du har gammel, inkompatibel Wikipediadata nedlastet. Ønsker du å arkivere den?</string>
+    <string name="download_wikipedia_files">Ønsker du å laste ned ytterligere data fra Wikipedia (%1$s MB)?</string>
+    <string name="gps_network_not_enabled">Plasseringstjenesten er ikke påskrudd? Ønsker du å slå den på?</string>
+    <string name="disable_recording_once_app_killed">Forhindre uavhengig loggføring</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">Farge etter nettverkstilknytning</string>
+    <string name="rendering_attr_OSMMapperAssistant_name">OSM kartassistent</string>
+    <string name="osm_changes_added_to_local_edits">OSM-endringer lagt til lokalt endringssett</string>
+    <string name="local_recordings_delete_all_confirm">Slett %1$d notiser. Er du sikker?</string>
+    <string name="shared_string_currently_recording_track">Spiller inn et spor nå</string>
+    <string name="track_segments">Sporsegmenter</string>
+    <string name="track_points">Sporpunkter</string>
+    <string name="share_note">Del notis</string>
+    <string name="notes">Notiser</string>
+    <string name="nautical_maps_missing">For å vise sjøkart, må spesielle frakoblede kart lastes ned</string>
+    <string name="navigation_over_track">Start navigasjon langs spor?</string>
+    <string name="avoid_roads_msg">Du kan endre til alternativ rute ved å velge hvilke veier du vil unngå</string>
+    <string name="routing_attr_no_new_routing_name">Ingen v1.9-regler for ruting</string>
+    <string name="routing_attr_no_new_routing_description">Ikke bruk rutingsregler innført i v1.9</string>
+    <string name="navigate_point_olc">Åpne lokasjonskode (OLC)</string>
+    <string name="navigate_point_olc_info_invalid">Ugyldig OLC
+</string>
+    <string name="navigate_point_olc_info_short">Kort OLC
+Angi hele koden</string>
+    <string name="navigate_point_olc_info_area">Gyldig full OLC
+Representerer området: %1$s x %2$s</string>
+    <string name="navigate_point_northing">Nordlig</string>
+    <string name="navigate_point_easting">Østlig</string>
+    <string name="fav_point_emoticons_message">Navn på favorittpunkt endret til %1$s for å støtte lagring av streng med smilefjes til fil.</string>
+    <string name="save_global_track_interval_descr">Velg logginsintervall for det generelle sporingsopptaket (aktivert via GPX-skjermelementet for logging på kartet)</string>
+    <string name="save_track_to_gpx_globally_headline">Sporingslogging på forespørsel</string>
+    <string name="proxy_port_descr">Sett opp din mellomtjeners portnummer (f.eks. 8118)</string>
+    <string name="live_monitoring_m_descr">Send sporingsdata til en angitt vevtjener hvis GPX-logging er påskrudd.</string>
+    <string name="live_monitoring_m">Nettbasert sporing (GPX kreves)</string>
+    <string name="live_monitoring_start">Start nettbasert sporing</string>
+    <string name="live_monitoring_stop">Stopp nettbasert sporing</string>
+    <string name="gpx_monitoring_start">Start GPX-logging</string>
+    <string name="osmo_group_by_invite">Tiltre ved invitasjon</string>
+    <string name="osmo_auto_connect_descr">Koble til tjenesten automatisk etter at programmet starter</string>
+    <string name="osmo_auto_connect">Automatisk tilkobling</string>
+    <string name="osmo_start_service">OsMo-tjeneste</string>
+    <string name="osmo_gpx_track_downloaded">OsMo-spor %1$s lastet ned.</string>
+    <string name="select_index_file_to_download">Fant ikke noe. Hvis du ikke finner din region, kan du lage den selv (se http://osmand.net).</string>
+    <string name="none_selected_gpx">Ingen GPX-filer valgt. Trykk lenge for å velge et tilgjengelig spor.</string>
+    <string name="gpx_split_interval">Oppdelingsintervall</string>
+    <string name="gpx_info_asc_altitude">Nedstiging/klatring: %1$s</string>
+    <string name="gpx_timespan">Tidsrom: %1$s</string>
+    <string name="gpx_timemoving">Tid i bevegelse: %1$s</string>
+    <string name="osmo_user_left">Brukeren %1$s forlot gruppa %2$s</string>
+    <string name="osmo_show_group_notifications_descr">Vis oppsprettsmeldinger når en bruker tar del i eller forlater gruppa</string>
+    <string name="osmo_create_groups_confirm">For å kunne opprette grupper må du registrere en brukerkonto i OsMo.</string>
+    <string name="osmo_regenerate_login_ids_confirm">Er du sikker på at du vil regenerere personlige ID-er? Alle enheter, tilkoblet deg, vil ikke kunne spore deg lengre.</string>
+    <string name="osmo_regenerate_login_ids">Regenerer bruker-ID</string>
+    <string name="osmo_cancel_moving_target">Avbryt bevegelig mål</string>
+    <string name="osmo_set_moving_target">Sett som bevegelig mål</string>
+    <string name="osmo_use_server_name">Registrert navn</string>
+    <string name="osmo_user_name">Bruker</string>
+    <string name="osmo_edit_device">Endre brukeregenskaper</string>
+    <string name="osmo_group">OsMo-gruppe</string>
+    <string name="osmo_group_share">For å kunne koble til gruppa %2$s, oppgi gruppe-ID (%1$s) eller klikk %3$s.</string>
+    <string name="osmo_share_connect_device">Tillat permanent forfølgelse av denne enheten</string>
+    <string name="osmo_share_current_session">Del gjeldende økt i nettleser</string>
+    <string name="osmo_session_not_available">Økta er ikke tilgjengelig, sjekk at \'Send posisjon\' er påskrudd.</string>
+    <string name="osmo_share_session">Del økt</string>
+    <string name="osmo_session_id_share">Øktas nettadresse til å spore enhet (%1$s)</string>
+    <string name="osmo_tracker_id_share">For å kunne koble til målenheten %2$s, klikk på lenken %3$s eller oppgi sporer-ID (%1$s)</string>
+    <string name="osmo_track_interval_descr">Velg tidsintervall for posisjonsforsendelse</string>
+    <string name="int_days">dager</string>
+    <string name="osmo_connect_menu">Koble til</string>
+    <string name="osmo_expire_group">Utløper om</string>
+    <string name="osmo_server_operation_failed">OsMo tjeneroperasjon mislyktes</string>
+    <string name="osmo_enable_tracker">Send min posisjon</string>
+    <string name="osmo_control">OsMo hurtigtilgang</string>
+    <string name="osmo_auth_pending">Venter på godkjenning…</string>
+    <string name="osmo_locations_sent">"Posisjoner sendt %1$d (i hurtiglager %2$d) "</string>
+    <string name="osmo_conn_successfull">"Tilkobling opprettet: %1$s "</string>
+    <string name="osmo_io_error">"Tilkoblingsproblem med OsMo: "</string>
+    <string name="osmo_mode_restart">Start OsMo-økt om igjen</string>
+    <string name="osmo_mode_on">Stopp OsMo-økt</string>
+    <string name="osmo_mode_off">Start OsMo-økt</string>
+    <string name="routing_attr_avoid_stairs_name">Unngå trapper</string>
+    <string name="routing_attr_avoid_stairs_description">Unngå trapper</string>
+    <string name="speech_rate_descr">Angi talehastighet for TTS</string>
+    <string name="speech_rate">Talehastighet</string>
+    <string name="complex_route_calculation_failed">Rask ruteutregning mislyktes (%s), faller tilbake på treg utregning.</string>
+    <string name="disable_complex_routing_descr">Skru av todelt ruting for bilnavigasjon</string>
+    <string name="disable_complex_routing">Skru av kompleks ruting</string>
+    <string name="app_modes_choose_descr">Velg brukerprofiler som skal vises i programmet</string>
+    <string name="local_index_tile_data_zooms">Forstørrelsesnivå nedlastet: %1$s</string>
+    <string name="edit_tilesource_successfully">Fliskilde %1$s lagret</string>
+    <string name="intermediate_items_sort_by_distance">Sorter dør-til-dør</string>
+    <string name="local_osm_changes_backup">Sikkerhetskopier som OSM-endring</string>
+    <string name="gpx_saved_sucessfully">GPX-fil lagret til {0}</string>
+    <string name="distance_measurement_start_editing">Start redigering</string>
+    <string name="distance_measurement_finish_editing">Fullfør redigering</string>
+    <string name="distance_measurement_finish_subtrack">Begynn nytt underspor</string>
+    <string name="distance_measurement_load_gpx">Åpne eksisterende GPX</string>
+    <string name="use_magnetic_sensor_descr">Bruk magnetsensor for å bestemme kompassverdi istedenfor orienteringssensor</string>
+    <string name="download_using_mobile_internet">Wi-Fi er i øyeblikket ikke tilkoblet. Ønsker du å bruke gjeldende internettilknytning for nedlasting?</string>
+    <string name="contribution_activity">Installer versjon</string>
+    <string name="item_checked">valgt</string>
+    <string name="item_unchecked">fravalgt</string>
+    <string name="index_name_openmaps">OpenMaps EU</string>
+    <string name="precise_routing_mode_descr">Skru på for å kalkulere presise ruter uten programfeil. Fremdeles distansebegrenset og tregt.</string>
+    <string name="precise_routing_mode">Presis ruting (alfa)</string>
+    <string name="av_widget_action_descr">Velg forvalgt skjermelement-handling</string>
+    <string name="av_widget_action">Forvalgt skjermelement-handling</string>
+    <string name="av_video_format_descr">Velg utgangsformat for video</string>
+    <string name="av_video_format">Velg utgangsformat</string>
+    <string name="av_use_external_recorder_descr">Bruk systemopptaker for video</string>
+    <string name="av_use_external_recorder">Bruk systemopptaker</string>
+    <string name="av_use_external_camera_descr">Bruk systemopptaker for bilder</string>
+    <string name="av_use_external_camera">Bruk kameraprogram</string>
+    <string name="recording_error">"Feil oppsto under opptak "</string>
+    <string name="recording_camera_not_available">Kamera ikke tilgjengelig</string>
+    <string name="recording_is_recorded">Lyd/video spilles inn. For å stoppe det, trykk A/V-skjermelementet.</string>
+    <string name="recording_playing">Lyd fra angitt opptak spilles av.
+%1$s</string>
+    <string name="recording_open_external_player">Åpne ekstern avspiller</string>
+    <string name="recording_context_menu_arecord">Spill in lydbasert notis</string>
+    <string name="recording_context_menu_vrecord">Ta opp videonotis</string>
+    <string name="layer_recordings">Opptakslag</string>
+    <string name="recording_can_not_be_played">Opptaket kan ikke spilles av</string>
+    <string name="recording_description">Innspilling %1$s %3$s %2$s</string>
+    <string name="recording_default_name">Spiller inn</string>
+    <string name="map_widget_av_notes">Lyd-/video -notiser</string>
+    <string name="map_widget_audionotes">Lydnotiser</string>
+    <string name="index_srtm_parts">deler</string>
+    <string name="rendering_attr_alpineHiking_description">Tegn stier i henhold til SAC-skala</string>
+    <string name="rendering_attr_hikingRoutesOSMC_description">Tegn stier i henhold til OSMC-spor</string>
+
+    <string name="rendering_attr_noAdminboundaries_description">Undertrykk visning av regionsbestemte avgrensninger (administrasjonsnivå 5-9)</string>
+    <string name="close_changeset">Lukk endringssett</string>
+    <string name="zxing_barcode_scanner_not_found">Programmet ZXing strekkodeskanner er ikke installert. Vil du søke på Google Play?</string>
     </resources>
