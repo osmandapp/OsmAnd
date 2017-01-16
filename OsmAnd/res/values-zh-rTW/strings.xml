@@ -2755,7 +2755,7 @@ Facebook：https://www.facebook.com/osmandapp
     <string name="quick_action_take_photo_note_descr">輕點動作按鈕將會在螢幕中心的位置增加一個照片注解。</string>
     <string name="quick_action_add_osm_bug_descr">輕點動作按鈕將會在螢幕中心的位置增加一個 OSM 錯誤注解。</string>
     <string name="quick_action_add_poi_descr">輕點動作按鈕將會在螢幕中心的位置增加一個 POI。</string>
-    <string name="navigate_point_olc">打開位置碼</string>
+    <string name="navigate_point_olc">打開位置編碼(OLC)</string>
     <string name="navigate_point_olc_info_invalid">無效的 OLC
 </string>
     <string name="quick_action_navigation_voice_descr">輕點動作按鈕將會停用或啟用導航期間的語音導引。</string>
@@ -2767,4 +2767,9 @@ Facebook：https://www.facebook.com/osmandapp
     <string name="quick_action_map_overlay_switch">地圖上圖層已更改為 \"%s\"。</string>
     <string name="quick_action_map_underlay_switch">地圖底層已更改為 \"%s\"。</string>
     <string name="shared_string_action_name">動作名稱</string>
-</resources>
+<string name="navigate_point_olc_info_short">簡短 OLC
+請提供完整的編碼</string>
+    <string name="navigate_point_olc_info_area">有效完整的 OLC
+代表區域：%1$s x %2$s</string>
+    <string name="quick_action_page_list_descr">輕點動作按鈕會直達下面的清單。</string>
+    </resources>
