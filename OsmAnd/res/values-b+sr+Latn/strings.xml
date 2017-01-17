@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='UTF-8'?>
 <resources>
     <string name="about_version">Verzija:</string>
     <string name="about_settings">Oko</string>
@@ -393,5 +393,14 @@
     <string name="home_button">Kuća</string>
     <string name="rendering_attr_subwayMode_name">Linije metroa</string>
     <string name="search_radius_proximity">U blizini</string>
-</resources>
-
+<string name="rendering_attr_contourDensity_description">Gustina linija</string>
+    <string name="rendering_attr_contourDensity_name">Gustoća linija</string>
+    <string name="rendering_value_high_name">Velika</string>
+    <string name="rendering_value_medium_w_name">Srednje</string>
+    <string name="rendering_value_low_name">Mala</string>
+    <string name="rendering_attr_contourWidth_description">Širina konturnih linija</string>
+    <string name="rendering_attr_contourWidth_name">Širina konturnih linija</string>
+    <string name="rendering_attr_hideWaterPolygons_description">Voda</string>
+    <string name="rendering_attr_hideWaterPolygons_name">Sakriti vodu</string>
+    <string name="routing_attr_allow_motorway_name">Omogućiti autoputeve</string>
+    </resources>
