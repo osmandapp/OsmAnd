@@ -2458,7 +2458,7 @@
 	<string name="poi_historic_period_predynastic_egypt">Període històric: Egipte predinàstic</string>
 	<string name="poi_historic_period_early_dynastic_period">Període històric: període arcaic (3100 - 2866 aC)</string>
 	<string name="poi_historic_period_third_intermediate_period">"Període històric: tercer període intermedi (1069 - 664 aC) "</string>
-	<string name="poi_historic_period_dominate">Període històric: dominat (285 - 476 dC)</string>
+	<string name="poi_historic_period_dominate">Període històric: dominat (285 dC - 476 dC)</string>
 	<string name="poi_site_type_earthwork">Treball de terra</string>
 	<string name="poi_site_type_settlement">Assentament</string>
 	<string name="poi_site_type_city">Ciutat</string>
@@ -2600,4 +2600,28 @@
 	<string name="poi_animal_keeping_type_open_stable">Tipus: estable obert</string>
 
 	<string name="poi_tower_construction_dome">Construcció: cúpula</string>
+	<string name="poi_free_flying_rigid_yes">Ala rígida</string>
+	<string name="poi_free_flying_rigid_no">Vol lliure ala rígida: no</string>
+	<string name="poi_free_flying_no_flight_time">Sense planificació de vol (vol lliure)</string>
+	<string name="poi_sanitary_dump_station">Centre de descàrrega sanitària</string>
+
+	<string name="poi_observatory_type_meteorological">Meteorològic</string>
+	<string name="poi_observatory_type_gravitational">Gravitacional</string>
+
+	<string name="poi_greenhouse_horticulture">Horticultura d\'hivernacle</string>
+
+	<string name="poi_voltage">Voltatge</string>
+	<string name="poi_generator_output_electricity">Potència de sortida</string>
+	<string name="poi_generator_output_electricity_yes">Sortida: elèctrica</string>
+	<string name="poi_generator_output_hot_water">Potència de sortida escalfant aigua</string>
+	<string name="poi_generator_output_hot_water_yes">Sortida: aigua calenta</string>
+	<string name="poi_generator_output_steam_yes">Sortida: vapor</string>
+	<string name="poi_generator_output_hot_air_yes">Sortida: aire calent</string>
+	<string name="poi_generator_output_cold_water_yes">Sortida: aigua freda</string>
+	<string name="poi_generator_output_compressed_air">Potència de sortida comprimint aire</string>
+	<string name="poi_generator_output_compressed_air_yes">Sortida: aire comprimit</string>
+	<string name="poi_generator_output_vacuum_yes">Sortida: buit</string>
+	<string name="poi_generator_output_biogas">Potència de sortida en biogàs</string>
+	<string name="poi_generator_output_biogas_yes">Sortida: biogàs</string>
+
 	</resources>
