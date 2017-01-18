@@ -76,6 +76,9 @@ public class RouteLayer extends OsmandMapLayer {
 		attrs.defaultColor = view.getResources().getColor(R.color.nav_track);
 		attrs.paint3.setStrokeCap(Cap.BUTT);
 		attrs.paint3.setColor(Color.WHITE);
+		
+		attrs.paint2.setStrokeCap(Cap.BUTT);
+		attrs.paint2.setColor(Color.BLACK);
 	}
 	
 	@Override
@@ -96,6 +99,7 @@ public class RouteLayer extends OsmandMapLayer {
 			attrs.isPaint3 = false;
 			if(updatePaints) {
 				paintIconAction.setColorFilter(new PorterDuffColorFilter(attrs.paint3.getColor(), Mode.MULTIPLY));
+				paintIcon.setColorFilter(new PorterDuffColorFilter(attrs.paint2.getColor(), Mode.MULTIPLY));
 			}
 			
 			if(coloredArrowUp == null) {
