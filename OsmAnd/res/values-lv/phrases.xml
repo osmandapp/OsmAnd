@@ -2158,4 +2158,26 @@
 	<string name="poi_bridge_movable_transporter">Paceļamā tilta tips: transportieris</string>
 	<string name="poi_bridge_movable_retractable">Paceļamā tilta tips: ievelkams</string>
 
+	<string name="poi_service_bicycle_retail_yes">Pārdod</string>
+	<string name="poi_service_bicycle_retail_no">Nepārdod velosipēdus</string>
+	<string name="poi_service_bicycle_repair_yes">Remonts</string>
+	<string name="poi_service_bicycle_repair_no">Velosipēdu remonts: nav</string>
+	<string name="poi_service_bicycle_rental_yes">Velonoma</string>
+	<string name="poi_service_bicycle_rental_no">Velonoma: nav</string>
+	<string name="poi_service_bicycle_pump_yes">Velopumpis</string>
+	<string name="poi_service_bicycle_pump_no">Velopumpis: nav</string>
+	<string name="poi_service_bicycle_diy_yes">Instrumenti pašrocīgam remontam</string>
+	<string name="poi_service_bicycle_diy_no">Veloinstrumenti pašrocīgam remontam: nav</string>
+	<string name="poi_service_bicycle_cleaning_yes">Mazgātuve</string>
+	<string name="poi_service_bicycle_cleaning_no">Velosipēdu mazgātuve: nav</string>
+	<string name="poi_industrial_oil">Tips: naftas industrija</string>
+	<string name="poi_industrial_wellsite">Tips: industriālie urbumi</string>
+	<string name="poi_industrial_factory">Tips: fabrika</string>
+	<string name="poi_industrial_gas">Tips: gāzes industrija</string>
+	<string name="poi_industrial_timber">Tips: kokmateriāli</string>
+	<string name="poi_industrial_refinery">Tips: rafinācijas industrija</string>
+	<string name="poi_industrial_warehouse">Tips: noliktavas</string>
+	<string name="poi_industrial_auto_wrecker">Tips: autoizgāztuve</string>
+	<string name="poi_industrial_agriculture">Tips: agrikultūra</string>
+	<string name="poi_industrial_brewery">Tips: alusdarītavas</string>
 	</resources>
