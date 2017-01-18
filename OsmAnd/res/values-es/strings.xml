@@ -751,7 +751,7 @@ Las teselas de mapas, se pueden obtener directamente a través de fuentes con co
 
 Tanto la ubicación como el tiempo de estacionamiento se muestran en el panel de control y en el control en la pantalla de mapas. Añade una notificación al calendario, en el caso de que desee tener un recordatorio al respecto.</string>
     <string name="osmand_parking_plugin_name">Aparcamiento</string>
-    <string name="context_menu_item_add_parking_point">Marcar como ubicación de aparcamiento</string>
+    <string name="context_menu_item_add_parking_point">Marcar como lugar de aparcamiento</string>
     <string name="context_menu_item_delete_parking_point">Eliminar un marcador de aparcamiento</string>
     <string name="starting_point_too_far">Punto de inicio demasiado lejos de la carretera más cercana.</string>
     <string name="shared_location">Compartir ubicación</string>
@@ -907,8 +907,11 @@ OsmAnd está siendo desarrollado activamente y nuestro proyecto y su desarrollo 
     <string name="rendering_attr_noAdminboundaries_description">Ocultar fronteras regionales (niveles administrativos 5-9)</string>
     <string name="index_srtm_parts">piezas</string>
     <string name="index_srtm_ele">Curvas de nivel</string>
-    <string name="srtm_plugin_description">"Este complemento proporciona tanto una capa superpuesta de curvas de nivel y una capa (de relieve) sombreada que se pueden visualizar sobre los mapas descargados de OsmAnd. Esta funcionalidad será muy apreciada por atletas, caminantes, excursionistas, y cualquiera interesado en la estructura de relieve de un paisaje.
-\n\nLos datos globales (entre 70 grados norte y 70 grados sur) se basan en mediciones de SRTM (Shuttle Radar Topography Mission, o en español Misión de Topografía por Radar Shuffle) y ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer, o en español Radiómetro Espacial Avanzado de Emisión Térmica y Reflexión), un instrumento de captura de imágenes a bordo de Terra, el satélite insignia del Sistema de Observación de la Tierra de la NASA. ASTER es un esfuerzo cooperativo entre la NASA, el Ministerio de Economía, Comercio e Industria de Japón (METI) y Sistemas Espaciales de Japón (J-spacesystems). "</string>
+    <string name="srtm_plugin_description">"Este complemento proporciona una capa superpuesta de curvas de nivel y una capa (de relieve) sombreada que se pueden visualizar sobre los mapas descargados de OsmAnd. Esta funcionalidad será muy apreciada por atletas, caminantes, excursionistas, y cualquiera interesado en la estructura de relieve de un paisaje.
+
+
+Los datos globales (entre 70 grados norte y 70 grados sur) se basan en mediciones de SRTM (Shuttle Radar Topography Mission, o en español Misión de Topografía por Radar Shuffle) y ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer, o en español Radiómetro Espacial Avanzado de Emisión Térmica y Reflexión), un instrumento de captura de imágenes a bordo de Terra, el satélite insignia del Sistema de Observación de la Tierra de la NASA. ASTER es un esfuerzo cooperativo entre la NASA, el Ministerio de Economía, Comercio e Industria de Japón (METI) y Sistemas Espaciales de Japón (J-spacesystems).
+ "</string>
     <string name="srtm_plugin_name">Curvas de nivel</string>
     <string name="download_select_map_types">Otros mapas</string>
     <string name="download_srtm_maps">Curvas de nivel</string>
@@ -2511,7 +2514,7 @@ El espacio de almacenamiento usado es {3} MB temporalmente y {1} MB permanenteme
     <string name="quick_action_navigation_voice_off">La voz está apagada</string>
     <string name="quick_action_navigation_voice_on">La voz está encendida</string>
     <string name="quick_action_add_gpx">Añadir punto intermedio GPX</string>
-    <string name="quick_action_add_parking">Añadir lugar de aparcamiento</string>
+    <string name="quick_action_add_parking">Situar aparcamiento</string>
     <string name="quick_action_new_action">Añadir acción</string>
     <string name="quick_action_edit_action">Editar acción</string>
     <string name="quick_action_add_favorite">Añadir favorito</string>
