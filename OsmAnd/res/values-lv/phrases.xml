@@ -14,7 +14,7 @@
 	<string name="poi_payment_toll_type">Apmaksas veids</string>
 	<string name="poi_traffic_signals_sound">Skaņa</string>
 	<string name="poi_highway_crossing_type">Veids</string>
-	<string name="poi_tactile_paving">Bruğa segums</string>
+	<string name="poi_tactile_paving">Taktīlais segums (īpaša reljefaina josla)</string>
 	<string name="poi_service_car">Serviss</string>
 	<string name="poi_brushless">Bezkontaktu</string>
 	<string name="poi_self_service">Pašapkalpošanās</string>
@@ -25,7 +25,7 @@
 	<string name="poi_ferry_terminal_cargo">Kravas terminālis</string>
 	<string name="poi_bicycle_parking_type">Veids</string>
 	<string name="poi_aerialway_bicycle">Velo transportēšana</string>
-	<string name="poi_aerialway_heating">Apsilde</string>
+	<string name="poi_aerialway_heating">Apkure</string>
 	<string name="poi_pump">Sūkņi</string>
 	<string name="poi_observatory_designation">Nozīmēšana</string>
 	<string name="poi_telescope_type">Veids</string>
@@ -60,7 +60,7 @@
 	<string name="poi_shelter_type">Tips</string>
 	<string name="poi_fireplace">Ugunsdzēsības vieta</string>
 	<string name="poi_seasonal">Sezonas</string>
-	<string name="poi_water_characteristic">Ūdens atrakcijas</string>
+	<string name="poi_water_characteristic">Ūdens veidojumi</string>
 	<string name="poi_beach_surface_type">Virsma</string>
 	<string name="poi_nudism">Nūdisms</string>
 	<string name="poi_diet">Diēta</string>
@@ -189,7 +189,7 @@
 	<string name="poi_weapons">Ieroču veikals</string>
 	<string name="poi_perfumery">Parfimērija</string>
 	<string name="poi_marketplace">Tirgus</string>
-	<string name="poi_backcountry">Lauki</string>
+	<string name="poi_backcountry">Lauku apvidus</string>
 	<string name="poi_resort_type">Veids</string>
 	<string name="poi_furniture">Mēbeļu veikals</string>
 	<string name="poi_spices">Garšvielas</string>
@@ -203,8 +203,8 @@
 	<string name="poi_fire_water_pond">Ugunsdzēsības dīķis</string>
 	<string name="poi_grit_bin">Smilšu kaste</string>
 	<string name="poi_ambulance_station">Ambulance</string>
-	<string name="poi_ses_station">Avārijas dienests</string>
-	<string name="poi_ford">Strauts</string>
+	<string name="poi_ses_station">Avārijas dienesta stacija</string>
+	<string name="poi_ford">Brasls</string>
 	<string name="poi_ford_stepping_stones">Akmens tilts</string>
 	<string name="poi_mountain_pass">Kalnu pāreja</string>
 	<string name="poi_gate">Vārti</string>
@@ -310,7 +310,7 @@
 	<string name="poi_herbalist">Augu un zāļu veikals</string>
 	<string name="poi_tableware">Virtuves trauki</string>
 	<string name="poi_model">Modelēšana</string>
-	<string name="poi_emergency_access_point">Avārijas situācijas punkts</string>
+	<string name="poi_emergency_access_point">Avārijas rīcības infodēlis</string>
 
 	<string name="poi_traffic_calming_chicane">Guļošie policisti (cits)</string>
 	<string name="poi_traffic_calming_rumble_strip">Guļošie policisti (cits)</string>
@@ -322,7 +322,7 @@
 	<string name="poi_bus_station">Autobusu stacija</string>
 	<string name="poi_railway_station">Dzelzceļa stacija</string>
 	<string name="poi_railway_platform">Dzelzceļa platforma</string>
-	<string name="poi_halt">Vilciena apstāšanās vieta</string>
+	<string name="poi_halt">Dzelzceļa beigas</string>
 	<string name="poi_subway_entrance">Ieeja metro</string>
 	<string name="poi_subway_station">Metro stacija</string>
 	<string name="poi_taxi">Taksistu stāvvieta</string>
@@ -874,7 +874,7 @@
 	<string name="poi_water_works">Ūdens ieguve</string>
 	<string name="poi_boatyard">Kuğu būvētava</string>
 	<string name="poi_lock_gate">Slūžu vārti</string>
-	<string name="poi_waterway_turning_point">Ūdensteces maiņas punkts</string>
+	<string name="poi_waterway_turning_point">Ūdensteces pagrieziena punkts</string>
 	<string name="poi_weir">Aizsprosts</string>
 	<string name="poi_watermill">Ūdensdzirnavas</string>
 	<string name="poi_breakwater">Viļņlauzis</string>
@@ -1310,11 +1310,11 @@
 	<string name="poi_bicycle_parking_bollard">Velostāvvietas stabiņi</string>
 	<string name="poi_bicycle_parking_informal">Neoficiāls</string>
 
-	<string name="poi_genus">Šķira</string>
+	<string name="poi_genus">Ğints</string>
 	<string name="poi_taxon">Taksons</string>
 
-	<string name="poi_trees_olive">Olīve</string>
-	<string name="poi_trees_apple">Ābols</string>
+	<string name="poi_trees_olive">Olīvas</string>
+	<string name="poi_trees_apple">Āboli</string>
 	<string name="poi_trees_oil">Palmu eļļa</string>
 	<string name="poi_trees_orange">Apelsīni</string>
 	<string name="poi_trees_almond">Mandeles</string>
@@ -1658,4 +1658,504 @@
 	<string name="poi_leaf_type_broadleaved">Lapu koki</string>
 	<string name="poi_leaf_type_mixed">Jaukti</string>
 	<string name="poi_leaf_type_leafless">Bezlapu</string>
+	<string name="poi_access_customers">Pieejams klientiem</string>
+	<string name="poi_access_delivery">Pieejams piegādātājiem</string>
+	<string name="poi_access_agricultural">Pieejams agrikultūrai</string>
+
+	<string name="poi_trade_plumbing">Santehnika</string>
+	<string name="poi_species">Suga</string>
+	<string name="poi_enforcement_traffic_signals">Kontrole: stop gaismas</string>
+	<string name="poi_enforcement_maxspeed">Kontrole: maksimālais ātrums</string>
+	<string name="poi_enforcement_maxheight">Kontrole: maksimālais augstums</string>
+	<string name="poi_enforcement_mindistance">Kontrole: minimālā distance</string>
+	<string name="poi_enforcement_check">Kontrolpunkts</string>
+	<string name="poi_enforcement_access">Kontrole: pieeja</string>
+	<string name="poi_enforcement_toll">Kontrole: maksa</string>
+
+	<string name="poi_board_type_plants">Augi</string>
+	<string name="poi_covered_no">Bez apsega</string>
+
+	<string name="poi_smoking_no">Aizliegts</string>
+	<string name="poi_smoking_outside">Tikai ārā</string>
+	<string name="poi_smoking_yes">Atļauts</string>
+	<string name="poi_piste_grooming_classic">Klasisks</string>
+	<string name="poi_piste_grooming_classic_skating">Klasiska un slidošana</string>
+	<string name="poi_piste_grooming_skating">Slidošana</string>
+	<string name="poi_piste_grooming_no">Nē</string>
+	<string name="poi_piste_grooming_mogul">Moguls</string>
+
+	<string name="poi_aerialway_bubble_yes">Burbuļveida</string>
+	<string name="poi_aerialway_bubble_no">Nav burbuļveida</string>
+	<string name="poi_aerialway_heating_yes">Jā</string>
+	<string name="poi_aerialway_heating_no">Bez apsildes</string>
+	<string name="poi_diet_vegan_filter_yes">Vegāniem</string>
+	<string name="poi_diet_vegan_only">Tikai vegāniem</string>
+	<string name="poi_diet_vegan_yes">Vegāniem</string>
+	<string name="poi_diet_vegan_no">Nav vegānu pārtika</string>
+	<string name="poi_diet_gluten_free_filter_yes">Bezglutēna pārtika</string>
+	<string name="poi_diet_gluten_free_only">Tikai bezglutēna pārtika</string>
+	<string name="poi_diet_gluten_free_yes">Bezglutēna</string>
+	<string name="poi_diet_gluten_free_no">Nav bezglutēna pārtika</string>
+	<string name="poi_diet_kosher_filter_yes">Košeris</string>
+	<string name="poi_diet_kosher_only">Tikai košeris</string>
+	<string name="poi_diet_kosher_yes">Košeris</string>
+	<string name="poi_diet_kosher_no">Nav košera pārtika</string>
+	<string name="poi_diet_halal_filter_yes">Halala</string>
+	<string name="poi_diet_halal_only">Tikai halala</string>
+	<string name="poi_diet_halal_yes">Halala</string>
+	<string name="poi_diet_halal_no">Nav halala pārtika</string>
+	<string name="poi_diet_lactose_free_filter_yes">Bez laktozes</string>
+	<string name="poi_diet_lactose_free_only">Tikai bez laktozes</string>
+	<string name="poi_diet_lactose_free_yes">Bez laktozes</string>
+	<string name="poi_diet_lactose_free_no">Nav bez laktozes pārtika</string>
+	<string name="poi_drive_in_yes">Jā</string>
+	<string name="poi_drive_in_no">Apkalpošana automašīnā netiek piedāvāta</string>
+	<string name="poi_drive_through_yes">Jā</string>
+	<string name="poi_takeaway_filter_yes">Jā</string>
+	<string name="poi_delivery_filter_yes">Jā</string>
+	<string name="poi_delivery_yes">Piegāde</string>
+	<string name="poi_delivery_no">Bez piegādes</string>
+	<string name="poi_delivery_only">Tikai ar piegādi</string>
+
+	<string name="poi_outdoor_seating_filter_yes">Jā</string>
+	<string name="poi_outdoor_seating_yes">Ir sēdvietas ārā</string>
+	<string name="poi_outdoor_seating_no">Nav sēdvietas ārā</string>
+	<string name="poi_outdoor_seating_terrace">Sēdvietas ārā: uz terases</string>
+	<string name="poi_outdoor_seating_sidewalk">Sēdvietas ārā: uz trotuāra</string>
+	<string name="poi_outdoor_seating_pedestrian_zone">Sēdvietas ārā: gājēju zonā</string>
+	<string name="poi_outdoor_seating_garden">Sēdvietas ārā: dārzā</string>
+	<string name="poi_outdoor_seating_patio">Sēdvietas ārā: bruğētā laukumā</string>
+
+	<string name="poi_cocktails_yes">Jā</string>
+
+	<string name="poi_second_hand_yes">Otreizējās lietošanas preces</string>
+	<string name="poi_second_hand_no">Nav otreizējās lietošanas preces</string>
+	<string name="poi_second_hand_only">Tikai otreizējās lietošanas preces</string>
+
+	<string name="poi_service_parts">Rezerves daļas</string>
+	<string name="poi_service_dealer">Dīleri</string>
+	<string name="poi_service_repair">Remonts</string>
+	<string name="poi_service_repair_no">Remontēt nepiedāvā</string>
+	<string name="poi_service_electrical">Elektriskā transporta remonts</string>
+	<string name="poi_motorcycle_repair">Motociklu remonts</string>
+	<string name="poi_self_service_yes">Jā</string>
+	<string name="poi_self_service_no">Nav pašapkalpošanās</string>
+	<string name="poi_automated_yes">Jā</string>
+	<string name="poi_automated_no">Bez automatizācijas</string>
+	<string name="poi_full_service_yes">Pilns serviss</string>
+	<string name="poi_brushless_yes">Jā</string>
+	<string name="poi_brushless_no">Ar birstēm</string>
+	<string name="poi_car_wash_no">Bez mazgāšanas</string>
+
+
+	<string name="poi_public_bath">Publiskā duša</string>
+
+	<string name="poi_male_yes">Vīriešiem</string>
+	<string name="poi_male_no">Vīriešiem aizliegts</string>
+	<string name="poi_female_yes">Sievietēm</string>
+	<string name="poi_female_no">Sievietēm aizliegts</string>
+	<string name="poi_indoor_yes">Iekštelpās</string>
+	<string name="poi_indoor_no">Ārpusē</string>
+	<string name="poi_toilets_yes">Ir</string>
+	<string name="poi_toilets_no">Bez tualetēm</string>
+	<string name="poi_toilets_wheelchair_yes">Pieeja tualetei ratiņkrēslā: ir</string>
+	<string name="poi_toilets_wheelchair_no">Pieeja tualetei ratiņkrēslā: nav</string>
+	<string name="poi_toilets_access_customers">Pieeja tualetei: tikai klientiem</string>
+	<string name="poi_toilets_access_permissive">Pieeja tualetei: pēc atļaujas</string>
+	<string name="poi_toilets_access_community">Pieeja tualetei: komūnai</string>
+	<string name="poi_toilets_access_public">Pieeja tualetei: publiska</string>
+
+	<string name="poi_diaper_table_count">Galdu skaits</string>
+	<string name="poi_diaper_yes">Autiņu pārtināmais galds</string>
+	<string name="poi_diaper_no">Nav autiņu pārtināmais galds</string>
+	<string name="poi_diaper_room">Autiņu pārtināmā telpa</string>
+
+	<string name="poi_maxstay">Autostāvvietas laika limits</string>
+
+	<string name="poi_vending_parking_tickets">Autostāvvietas biļetes</string>
+	<string name="poi_vending_cigarettes">Cigaretes</string>
+	<string name="poi_vending_excrement_bags">Izkārnījumu maisiņi</string>
+	<string name="poi_vending_public_transport_tickets">Sabiedriskā transporta biļetes</string>
+	<string name="poi_vending_drinks">Dzērieni</string>
+	<string name="poi_vending_sweets">Saldumi</string>
+	<string name="poi_vending_parcel_pickup_mail_in">Pakomāti</string>
+	<string name="poi_vending_condoms">Prezervatīvi</string>
+	<string name="poi_vending_stamps">Pastmarkas</string>
+	<string name="poi_vending_bicycle_tube">Velokameras</string>
+	<string name="poi_vending_food">Uzkodas</string>
+	<string name="poi_vending_drinks_food">Dzērieni un uzkodas</string>
+	<string name="poi_vending_fuel">Degviela</string>
+	<string name="poi_vending_parcel_pickup">Sūtījumu izņemšana</string>
+	<string name="poi_vending_parcel_mail_in">Sūtījumu nosūtīšana</string>
+	<string name="poi_vending_milk">Piens</string>
+	<string name="poi_vending_elongated_coin">Suvenīrmonētas</string>
+	<string name="poi_vending_bread">Maize</string>
+	<string name="poi_vending_chewing_gums">Košļājamās gumijas</string>
+	<string name="poi_vending_parking_tickets_public_transport_tickets">Autostāvvietu un sabtransporta biļetes</string>
+	<string name="poi_vending_coffee">Kafija</string>
+	<string name="poi_vending_toll">Iebraukšanas maksas automāts</string>
+	<string name="poi_vending_tickets">Biļetes</string>
+	<string name="poi_vending_water">Dzeramais ūdens</string>
+	<string name="poi_vending_telephone_vouchers">Telefonu kartes</string>
+	<string name="poi_vending_animal_food">Dzīvnieku barība</string>
+	<string name="poi_vending_public_transport_plans">Sabiedriskā transporta kustības kartes</string>
+	<string name="poi_vending_drinks_sweets">Dzērieni un saldumi</string>
+	<string name="poi_vending_vouchers">Vaučeri</string>
+	<string name="poi_vending_dvd">DVD</string>
+	<string name="poi_vending_candles">Sveces</string>
+	<string name="poi_vending_toys">Rotaļlietas</string>
+	<string name="poi_vending_ice_cream">Saldējums</string>
+	<string name="poi_vending_sim_cards">SIM kartes</string>
+
+	<string name="poi_branch">Filiāle</string>
+
+	<string name="poi_memorial_war">Kara memoriāls</string>
+	<string name="poi_memorial_plaque">Piemiņas plāksne</string>
+	<string name="poi_memorial_statue">Statuja</string>
+	<string name="poi_memorial_stone">Akmens</string>
+	<string name="poi_memorial_stele">Stele</string>
+	<string name="poi_memorial_bust">Krūšutēls</string>
+	<string name="poi_memorial_koshinto">Koshinto</string>
+	<string name="poi_memorial_blue_plaque">Zilā plāksne</string>
+	<string name="poi_memorial_jizo">Džizo</string>
+	<string name="poi_memorial_cross">Krustveida</string>
+	<string name="poi_memorial_vehicle">Mašīna</string>
+	<string name="poi_memorial_stolperstein">Nacisma kara upuru piemiņas plāksne</string>
+	<string name="poi_memorial_obelisk">Obelisks</string>
+	<string name="poi_memorial_column">Kolona</string>
+	<string name="poi_memorial_stupa">Stupa</string>
+	<string name="poi_memorial_prasat">Prasāts</string>
+	<string name="poi_memorial_fassade_decoration">Fasādes dekorācija</string>
+
+	<string name="poi_inscription">Uzraksts</string>
+	<string name="poi_historic_quarry">Vēsturiskais karjers</string>
+
+	<string name="poi_resource_aggregate">Betona pildvielas (šķembas, oļi utt)</string>
+	<string name="poi_resource_antimony">Antimons</string>
+	<string name="poi_resource_asbestos">Azbests</string>
+	<string name="poi_resource_barite">Barīts</string>
+	<string name="poi_resource_basalt">Bazalts</string>
+	<string name="poi_resource_bauxite">Boksīts</string>
+	<string name="poi_diet_pescetarian_yes">Pescetarian</string>
+
+	<string name="poi_drive_through_no">Drive-through apkalpošana: nav</string>
+
+	<string name="poi_brewery_additional">Alusdarītavas nosaukums</string>
+	<string name="poi_microbrewery_yes">Mazās alusdarītavas</string>
+	<string name="poi_microbrewery_no">Mazo alusdarītavu nav</string>
+
+	<string name="poi_resource_beryl">Berils</string>
+	<string name="poi_resource_bismuth">Bismuts</string>
+	<string name="poi_resource_chromite">Hromīts</string>
+	<string name="poi_resource_clay">Māli</string>
+	<string name="poi_resource_coal">Ogles</string>
+	<string name="poi_resource_copper">Varš</string>
+	<string name="poi_resource_diamond">Dimanti</string>
+	<string name="poi_resource_dimension_stone">Apstrādāti akmeņi</string>
+	<string name="poi_resource_dolomite">Dolomīts</string>
+	<string name="poi_resource_gas">Gāze</string>
+	<string name="poi_resource_gold">Zelts</string>
+	<string name="poi_resource_graphite">Grafīts</string>
+	<string name="poi_resource_gravel">Grants</string>
+	<string name="poi_resource_gypsum">Ģipsis</string>
+	<string name="poi_resource_iron_ore">Dzelzsrūda</string>
+	<string name="poi_resource_lead">Svins</string>
+	<string name="poi_resource_lignite">Brūnogle</string>
+	<string name="poi_resource_limestone">Kaļķakmens</string>
+	<string name="poi_resource_marble">Marmors</string>
+	<string name="poi_resource_mercury">Dzīvsudrabs</string>
+	<string name="poi_resource_mica">Vizla</string>
+	<string name="poi_resource_mineral_oil">Minerāleļļa</string>
+	<string name="poi_resource_nickel">Niķelis</string>
+	<string name="poi_resource_oil">Nafta/eļļa</string>
+	<string name="poi_resource_opal">Opāls</string>
+	<string name="poi_resource_peat">Kūdra</string>
+	<string name="poi_resource_platinum">Platīns</string>
+	<string name="poi_resource_radium">Rādijs</string>
+	<string name="poi_resource_ruby">Rubīns</string>
+	<string name="poi_resource_rutile">Rutils</string>
+	<string name="poi_resource_salt">Sāls</string>
+	<string name="poi_resource_sand">Smiltis</string>
+	<string name="poi_resource_sandstone">Smilšakmens</string>
+	<string name="poi_resource_silica">Kvarcs</string>
+	<string name="poi_resource_silver">Sudrabs</string>
+	<string name="poi_resource_slate_iron_ore_copper">Slāneklis;dzelzsrūda;varš</string>
+	<string name="poi_resource_slate">Slāneklis</string>
+	<string name="poi_resource_stone">Akmens</string>
+	<string name="poi_resource_tin">Alva</string>
+	<string name="poi_resource_tuff">Tufs</string>
+	<string name="poi_resource_uranium">Urāns</string>
+	<string name="poi_resource_vanadium">Vanādijs</string>
+	<string name="poi_resource_water">Ūdens</string>
+	<string name="poi_resource_zinc">Cinks</string>
+	<string name="poi_resource_zircon">Cirkons</string>
+
+	<string name="poi_wetland_wet_meadow">Muklājs</string>
+	<string name="poi_wetland_bog">Purvs</string>
+	<string name="poi_wetland_marsh">Dūksnājs</string>
+	<string name="poi_wetland_reedbed">Niedrājs</string>
+	<string name="poi_wetland_swamp">Dumbrājs</string>
+	<string name="poi_wetland_saltern">Sālszeme</string>
+	<string name="poi_wetland_tidalflat">Krasta erozijas</string>
+	<string name="poi_wetland_saltmarsh">Sāls liedags</string>
+	<string name="poi_wetland_fen">Dumbrājs</string>
+	<string name="poi_wetland_palsa_bog">Palsa purvs</string>
+	<string name="poi_wetland_mud">Dubļi</string>
+
+	<string name="poi_beach_sand">Pludmales smiltis</string>
+	<string name="poi_beach_shingle">Oļi</string>
+	<string name="poi_beach_rocky">Akmeņains</string>
+
+	<string name="poi_palm">Palma</string>
+	<string name="poi_cypress">Ciprese</string>
+	<string name="poi_flagpole">karogmasts</string>
+
+	<string name="poi_bench_yes">Jā</string>
+	<string name="poi_bench_no">Bez soliem</string>
+	<string name="poi_bin_yes">Ar atkritumgrozu</string>
+	<string name="poi_bin_no">Bez atkritumgroza</string>
+
+	<string name="poi_shelter_type_public_transport">Sabiedriskais transports</string>
+	<string name="poi_shelter_type_picnic_shelter">Pikniks</string>
+	<string name="poi_shelter_type_weather_shelter">No negaisa</string>
+	<string name="poi_shelter_type_lean_to">Nojume</string>
+	<string name="poi_shelter_type_building">Ēka</string>
+	<string name="poi_shelter_type_wildlife_hide">Savvaļas slēpnis</string>
+	<string name="poi_shelter_type_rock_shelter">Klints patvērums</string>
+	<string name="poi_shelter_type_sun_shelter">Patvērums no saules</string>
+	<string name="poi_shelter_type_field_shelter">Uz lauka</string>
+	<string name="poi_shelter_type_tent">Patvēruma tips: telts</string>
+	<string name="poi_shelter_type_abandoned">Patvēruma tips: pamests</string>
+
+	<string name="poi_internet_access_type_wlan">WiFi</string>
+	<string name="poi_internet_access_type_terminal">Terminālis</string>
+	<string name="poi_internet_access_type_wired">Savienots ar vadu</string>
+	<string name="poi_internet_access_type_public">Interneta piekļuves tips: publisks</string>
+	<string name="poi_internet_access_type_service">Interneta piekļuves tips: pakalpojumi</string>
+	<string name="poi_internet_access_type_no">Nav interneta piekļuves</string>
+	<string name="poi_internet_access_type_yes">Ar piekļuvi internetam</string>
+
+	<string name="poi_maxwidth">Maksimālais platums</string>
+	<string name="poi_iata">IATA kods</string>
+	<string name="poi_icao">ICAO kods</string>
+	<string name="poi_faa">FAA kods</string>
+	
+	<string name="poi_artwork_type_sculpture">Mākslas nozare: skulptūras</string>
+	<string name="poi_artwork_type_statue">Mākslas nozare: statujas</string>
+	<string name="poi_artwork_type_mural">Mākslas nozare: murālijas</string>
+	<string name="poi_artwork_type_architecture">Mākslas nozare: arhitektūra</string>
+	<string name="poi_artwork_type_painting">Mākslas nozare: gleznošana</string>
+	<string name="poi_artwork_type_stone">Mākslas nozare: akmeņi</string>
+	<string name="poi_artwork_type_bust">Mākslas nozare: krūšutēli</string>
+	<string name="poi_artwork_type_installation">Mākslas nozare: instalācijas</string>
+	<string name="poi_artwork_type_mosaic">Mākslas nozare: mozaīkas</string>
+	<string name="poi_artwork_type_relief">Mākslas nozare: reljefs</string>
+	<string name="poi_artwork_type_graffiti">Mākslas nozare: grafitti</string>
+	<string name="poi_artwork_type_stele">Mākslas nozare: stele</string>
+	<string name="poi_artwork_type_fountain">Mākslas nozare: strūklakas</string>
+
+	<string name="poi_width">Platums</string>
+
+	<string name="poi_architect_name">Arhitekts</string>
+
+	<string name="poi_architecture_modern">Arhitektūras stils: modernisms</string>
+	<string name="poi_architecture_stalinist_neoclassicism">Arhitektūras stils: staļina neoklasicisms</string>
+	<string name="poi_architecture_eclectic">Arhitektūras stils: eklektisks</string>
+	<string name="poi_architecture_new_objectivity">Arhitektūras stils: jaunā objektivitāte</string>
+	<string name="poi_architecture_contemporary">Arhitektūras stils: mūsdienisks</string>
+	<string name="poi_architecture_constructivism">Arhitektūras stils: konstruktīvisms</string>
+	<string name="poi_architecture_umgebinde">Arhitektūras stils: umgebinde</string>
+	<string name="poi_architecture_timber_frame">Arhitektūras stils: koktēlniecība</string>
+	<string name="poi_architecture_art_nouveau">Arhitektūras stils: modernisms</string>
+	<string name="poi_architecture_neoclassicism">Arhitektūras stils: neoklasicisms</string>
+	<string name="poi_architecture_victorian">Arhitektūras stils: viktorijas laikmeta</string>
+	<string name="poi_architecture_brutalism">Arhitektūras stils: brutālisms</string>
+	<string name="poi_architecture_classicism">Arhitektūras stils: klasicisms</string>
+	<string name="poi_architecture_gothic">Arhitektūras stils: gotika</string>
+	<string name="poi_architecture_oldrussian">Arhitektūras stils: veckrievu</string>
+	<string name="poi_architecture_baroque">Arhitektūras stils: baroka</string>
+	<string name="poi_architecture_postconstructivism">Arhitektūras stils: postkonstruktīvisms</string>
+	<string name="poi_architecture_wilhelminian_style">Arhitektūras stils: vilhelminiāna</string>
+	<string name="poi_architecture_renaissance">Arhitektūras stils: renesances laikmeta</string>
+	<string name="poi_architecture_romanesque">Arhitektūras stils: romāņu</string>
+
+	<string name="poi_tunnel_waterway">Ūdens tunelis</string>
+	<string name="poi_tunnel_car">Autobraucēju tunelis</string>
+	<string name="poi_tunnel_pedestrian">Gājēju tunelis</string>
+	<string name="poi_tunnel_railway">Dzelzsceļa tunelis</string>
+	<string name="poi_bridge_car">Autobraucēju tilts</string>
+	<string name="poi_bridge_pedestrian">Gājēju tilts</string>
+	<string name="poi_bridge_bicycle">Velobraucēju tilts</string>
+	<string name="poi_bridge_railway">Dzelzsceļa tilts</string>
+	<string name="poi_bridge_waterway">Ūdenstilts</string>
+	<string name="poi_bridge_structure_beam">Tilts uzbūve: siju</string>
+	<string name="poi_bridge_structure_simple_suspension">Tilts uzbūve: vienkārši iekārtais</string>
+	<string name="poi_bridge_structure_suspension">Tilts uzbūve: iekārtais</string>
+	<string name="poi_bridge_structure_arch">Tilts uzbūve: loku</string>
+	<string name="poi_bridge_structure_truss">Tilts uzbūve: kopņu</string>
+	<string name="poi_bridge_structure_floating">Tilts uzbūve: pontonu</string>
+	<string name="poi_bridge_structure_humpback">Tilts uzbūve: humpack</string>
+	<string name="poi_bridge_structure_cable_stayed">Tilts uzbūve: vanšu</string>
+	<string name="poi_bridge_structure_boardwalk">Tilts uzbūve: dēļu klājs</string>
+	<string name="poi_bridge_structure_simple_wooden">Tilts uzbūve: vienkāršs koka</string>
+	<string name="poi_bridge_structure_viaduct">Tilts uzbūve: viadukts</string>
+	<string name="poi_bridge_structure_aqueduct">Tilts uzbūve: aqueduct</string>
+	<string name="poi_bridge_structure_log">Tilts uzbūve: baļķu</string>
+	<string name="poi_bridge_type_movable">Tilts uzbūve: paceļamais</string>
+	<string name="poi_lit_yes">Apgaismots: jā</string>
+	<string name="poi_lit_no">Apgaismots: nē</string>
+
+	<string name="poi_surface_unpaved">Virsma: bez seguma</string>
+	<string name="poi_surface_paved">Virsma: ar segumu</string>
+	<string name="poi_surface_asphalt">Virsma: asfalts</string>
+	<string name="poi_surface_concrete">Virsma: betons</string>
+	<string name="poi_surface_sett">Virsma: bruğis</string>
+	<string name="poi_surface_cobblestone">Virsma: bruğakmens</string>
+	<string name="poi_surface_paving_stones">Virsma: bruğakmens</string>
+	<string name="poi_surface_pebblestone">Virsma: oļi</string>
+	<string name="poi_surface_stone">Virsma: akmens</string>
+	<string name="poi_surface_metal">Virsma: metāls</string>
+	<string name="poi_surface_wood">Virsma: koks</string>
+	<string name="poi_surface_gravel">Virsma: grants</string>
+	<string name="poi_surface_fine_gravel">Virsma: sijāta grants</string>
+	<string name="poi_surface_compacted">Virsma: noblietēta</string>
+	<string name="poi_surface_sand">Virsma: smiltis</string>
+	<string name="poi_surface_grass">Virsma: zāle</string>
+	<string name="poi_surface_grass_paver">Virsma: zāle ar ieklātu bruğa mozaīku</string>
+	<string name="poi_surface_ground">Virsma: kailzeme</string>
+	<string name="poi_surface_dirt">Virsma: melnzeme</string>
+	<string name="poi_surface_mud">Virsma: dubļi</string>
+	<string name="poi_surface_ice">Virsma: ledus</string>
+	<string name="poi_surface_salt">Virsma: sāls</string>
+	<string name="poi_surface_snow">Virsma: sniegs</string>
+
+	<string name="poi_route_bus_ref">Autobusi</string>
+	<string name="poi_route_share_taxi_ref">Maršruta taksometri</string>
+	<string name="poi_route_trolleybus_ref">Trolejbusi</string>
+	<string name="poi_route_tram_ref">Tramvaji</string>
+	<string name="poi_route_train_ref">Vilcieni</string>
+	<string name="poi_route_light_rail_ref">Mazbānītis</string>
+	<string name="poi_route_monorail_ref">Viensliežu</string>
+	<string name="poi_route_funicular_ref">Funikulieris</string>
+	<string name="poi_route_ferry_ref">Prāmis</string>
+
+	<string name="poi_route_railway_ref">Sliežu ceļš</string>
+
+	<string name="poi_historic_yes">Vēsturisks objekts</string>
+	<string name="poi_surveillance_yes">Videonovērošana</string>
+	<string name="poi_shop_additional_yes">Ar veikaliem</string>
+
+	<string name="poi_service_bicycle_chaintool_yes">Ķēdes noņēmējs</string>
+	<string name="poi_service_bicycle_chaintool_no">Ķēdes noņēmējs: nav</string>
+	<string name="poi_service_bicycle_second_hand_yes">Lietotu velosipēdu veikals</string>
+	<string name="poi_service_bicycle_second_hand_no">Lietotu velosipēdu veikals: nav</string>
+	<string name="poi_service_bicycle_charging_yes">Elektrovelosipēdu uzlāde: ir</string>
+	<string name="poi_service_bicycle_charging_no">Elektrovelosipēdu uzlāde: nav</string>
+	<string name="poi_bicycle_repair_station">Velosipēdu remontstends</string>
+
+	<string name="poi_wildlife_hide">Savvaļas iemītnieku novērošanas vieta</string>
+
+	<string name="poi_training_language">Valodu kursi</string>
+	<string name="poi_training_music">Mūzikas kursi</string>
+	<string name="poi_training_dance">Deju kursi</string>
+	<string name="poi_training_sport">Sporta kursi</string>
+	<string name="poi_training_art">Mākslas kursi</string>
+	<string name="poi_training_cooking">Ēdienu pagatavošanas kursi</string>
+	<string name="poi_training_computer">Datorzinību kursi</string>
+	<string name="poi_training_yoga">Jogas kursi</string>
+	<string name="poi_training_martial_art">Kara mākslas kursi</string>
+	<string name="poi_training_aviation">Aviācijas kursi</string>
+	<string name="poi_training_hairdressing">Friziera kursi</string>
+
+	<string name="poi_monument_yes">Monumentāls objekts</string>
+
+	<string name="poi_elevator_yes">Ar liftu</string>
+	<string name="poi_elevator_no">Bez lifta</string>
+
+	<string name="poi_fuel_wood">Degviela: koks</string>
+	<string name="poi_fuel_charcoal">Degviela: kokogles</string>
+	<string name="poi_fuel_coal">Degviela: akmeņogles</string>
+
+	<string name="poi_street_lamp">Ielas gaismeklis</string>
+
+	<string name="poi_surveillance_indoor">Videonovērošana: iekštelpās</string>
+	<string name="poi_surveillance_outdoor">Videonovērošana: ārtelpās</string>
+	<string name="poi_surveillance_public">Videonovērošana: sabiedriskā vietā</string>
+
+	<string name="poi_clothes_women">Sieviešu</string>
+	<string name="poi_clothes_underwear">Apakšveļa</string>
+	<string name="poi_clothes_men">Vīriešu</string>
+	<string name="poi_clothes_wedding">Kāzu drēbes</string>
+	<string name="poi_clothes_sports">Sporta</string>
+	<string name="poi_clothes_babies">Zīdaiņu</string>
+	<string name="poi_clothes_denim">Džinsauduma</string>
+	<string name="poi_clothes_workwear">Darba</string>
+	<string name="poi_clothes_hats">Cepures</string>
+	<string name="poi_clothes_fur">Kažoki</string>
+	<string name="poi_clothes_leather">Ādas</string>
+	<string name="poi_clothes_costumes">Karnevālkostīmi</string>
+	<string name="poi_clothes_traditional">Tradiconālie</string>
+	<string name="poi_clothes_suits">Uzvalki</string>
+	<string name="poi_clothes_maternity">Topošajām māmiņām</string>
+	<string name="poi_clothes_vintage">Senatnīgas</string>
+	<string name="poi_clothes_oversize">Lielizmēra</string>
+	<string name="poi_clothes_schoolwear">Skolnieku</string>
+	<string name="poi_clothes_swimwear">Peldkostīmi</string>
+	<string name="poi_clothes_socks">Zeķes</string>
+	<string name="poi_clothes_shirts">Krekli</string>
+	<string name="poi_clothes_dance">Dejotāju</string>
+	<string name="poi_clothes_military">Militārais</string>
+
+	<string name="poi_shoes_children">Bērnu</string>
+	<string name="poi_shoes_women">Sieviešu</string>
+	<string name="poi_shoes_sport">Sporta</string>
+	<string name="poi_shoes_men">Vīriešu</string>
+	<string name="poi_shoes_orthopedic">Ortopēdiskās</string>
+
+	<string name="poi_massage_sexual">Erotiskā</string>
+	<string name="poi_massage_chinese">Ķīniešu</string>
+	<string name="poi_massage_therapeutic">Terapeitiskā</string>
+
+	<string name="poi_massage_yes">Masāžas salons</string>
+	<string name="poi_sauna_yes">Sauna</string>
+	<string name="poi_solarium_yes">Solārijs</string>
+
+	<string name="poi_tents_yes">Atļauts</string>
+	<string name="poi_tents_no">Celt teltis nedrīkst</string>
+	<string name="poi_openfire_yes">Kurināt ugunskuru atļauts</string>
+	<string name="poi_openfire_no">Kurināt ugunskuru aizliegts</string>
+	<string name="poi_backcountry_yes">Jā</string>
+	<string name="poi_backcountry_no">Nē</string>
+	<string name="poi_survey_point">Ğeodēziskā zīme</string>
+	<string name="poi_village_green">Piemājas mauriņš</string>
+	<string name="poi_craft_rigger">Ceļamkrāni un celtņi</string>
+	<string name="poi_craft_scaffolder">Celtniecības stalažu būve un noma</string>
+	<string name="poi_saddle">Ieplaka (seglu vieta)</string>
+	<string name="poi_access_destination">Vietas pieejamība</string>
+	<string name="poi_access_permissive">Pieejams ar atļaujām</string>
+	<string name="poi_nudism_customary">Kopīgs</string>
+	<string name="poi_information_route_marker">Maršruta punkts</string>
+	<string name="poi_tactile_paving_no">Bez taktīlā seguma</string>
+	<string name="poi_services">Servisu zona</string>
+	<string name="poi_dead_wood">Sausā koksne</string>
+
+	<string name="poi_piste_difficulty_freeride">Brīvais</string>
+	<string name="poi_events_venue">Pasākumu vieta</string>
+
+	<string name="poi_takeaway_yes">Līdzi ņemšanai</string>
+	<string name="poi_takeaway_no">Bez līdzi ņemšanas</string>
+	<string name="poi_takeaway_only">Tikai līdzi ņemšanai</string>
+
+	<string name="poi_wetland_mangrove">Mangroves</string>
+	<string name="poi_wetland_string_bog">Lāmu purvi</string>
+	<string name="poi_chimney">Dūmenis</string>
+	<string name="poi_shelter_type_basic_hut">Būda</string>
+	<string name="poi_bridge_movable_bascule">Paceļamā tilta tips: sāniski paceļams</string>
+	<string name="poi_bridge_movable_swing">Paceļamā tilta tips: izgriežams</string>
+	<string name="poi_bridge_movable_lift">Paceļamā tilta tips: vertikāli paceļams</string>
+	<string name="poi_bridge_movable_drawbridge">Paceļamā tilta tips: uzvelkams</string>
+	<string name="poi_bridge_movable_submersible">Paceļamā tilta tips: iegremdējams</string>
+	<string name="poi_bridge_movable_transporter">Paceļamā tilta tips: transportieris</string>
+	<string name="poi_bridge_movable_retractable">Paceļamā tilta tips: ievelkams</string>
+
 	</resources>
