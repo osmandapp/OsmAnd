@@ -791,7 +791,14 @@
   <string name="online_map_settings_descr">Konfigurēt tiešaistes vai kešotās kartes bildes</string>
   
   
-  <string name="osmand_rastermaps_plugin_description">"Šis spraudnis paredzēts tiešsaistes un saglabāto karšu pamata klājuma un paklāja/pārklāja konfigurēšanai. Kartes ir iespējams izveidot arī patstāvīgi un iekopēt Osmand mapē. "</string>
+  <string name="osmand_rastermaps_plugin_description">"Ar šo spraudni jūs varēsiet piekļūt dažādām tiešsaistes (t.s. bilžu vai rastru) kartēm, sākot no iepriekš definētām OpenStreetMap bildēm ( kā Mapnik) līdz satelītu fotoattēliem un īpašiem klājumiem kā laikapstākļu kartes, klimata kartes, ğeoloğiskās kartes,  kalnu reljefi u.t.t.
+
+
+Jebkuras no šīm kartēm var tik lietotas kā pamata (bāzes) kartes vai kā virsklājs un apakšklājs citai pamata kartei (kā OsmAnd standarta bezsaistes kartes). Lai apakšklāja kartes būtu labāk redzamas, noteiktus elementus no OsmAnd vektoru kartēm ir iespējams paslēpt ar kartes konfigurācijas izvēlnes palīdzību.
+
+
+Bilžu kartes var lietot no tiešsaistes avotiem vai sagatavot bezsaistes lietošanai (iekopējot OsmAnd datu mapē) kā SQLite databāzi, to izveidojot ar kādu no atsevišķi pieejamajām kartēšanas datorprogrammām.
+ "</string>
   <string name="osmand_background_plugin_description">Rāda uzstādījumus navigācijas darbībai fonā (izslēgts ekrāns), periodiski ieslēdzot GPS.</string>
   <string name="osmand_accessibility_description">Rādīt uzstādījumus atsevišķām pieejamības iespējām kā TTS runas ātrums, atrašanās vietas izruna, ekrāna mērogošana u.t.t.</string>
   
@@ -2702,4 +2709,19 @@ Apraksta laukumu: %1$s x %2$s</string>
     <string name="quick_action_btn_tutorial_title">Mainīt pogas pozīciju</string>
     <string name="quick_action_btn_tutorial_descr">Pieskarieties un velciet pogu, lai mainītu tās atrašanās vietu uz ekrāna</string>
 	<string name="shared_string_action_name">Darbības vārds</string>
-</resources>
+<string name="release_2_5">"
+ Klikojamas pogas kartē
+
+Spēcīgs POI filtrs: piemēram restorānu atrašana pēc virtuves tipa vai apmešanās vietu meklēšana pēc piedāvātā servisa
+
+Jauns Topo kartes stils velobraucējiem un ceļotājiem
+
+Paplašinātas ceļa ieraksta iespējas
+
+Uzlabota navigācijas ziņojumjosla (Android Wear)
+
+Daudz citi uzlabojumi un kļūdu labojumi
+
+Un vēl…
+ "</string>
+    </resources>
