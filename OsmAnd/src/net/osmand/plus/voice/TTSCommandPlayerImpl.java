@@ -126,7 +126,7 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 			mTts.speak(bld.toString(), TextToSpeech.QUEUE_ADD, params);
 			// Audio focus will be released when onUtteranceCompleted() completed is called by the TTS engine.
 		} else if (ctx != null && vrt.isMute()) {
-			sendAlertToAndroidWear(ctx, bld.toString());
+			// sendAlertToAndroidWear(ctx, bld.toString());
 		}
 	}
 

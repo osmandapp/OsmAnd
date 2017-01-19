@@ -73,7 +73,7 @@ public class MediaCommandPlayerImpl extends AbstractPrologCommandPlayer implemen
 				bld.append(s).append(' ');
 			}
 			if (ctx != null) {
-				sendAlertToAndroidWear(ctx, bld.toString());
+				// sendAlertToAndroidWear(ctx, bld.toString());
 			}
 			return;
 		}
