@@ -2621,4 +2621,6 @@ Proporcioneu el codi complet</string>
     <string name="navigate_point_olc_info_area">OLC complet vàlid 
 Abasta l\'àrea: %1$s x %2$s</string>
     <string name="quick_action_page_list_descr">Prement el botó d\'acció es mostra la pàgina següent seguint la llista.</string>
+    <string name="auto_split_recording_title">Divisió automàtica de les gravacions un cop aturades</string>
+	<string name="auto_split_recording_descr">Comença un nou segment desprès de 6 min d\'interrupció, una traça nova si es superen les 2 hores o un nou fitxer si encara dura més i s\'ha canviat de data.</string>
     </resources>
