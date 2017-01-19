@@ -103,7 +103,7 @@ public class RouteLayer extends OsmandMapLayer {
 			}
 			
 			if(coloredArrowUp == null) {
-				Bitmap originalArrowUp = BitmapFactory.decodeResource(view.getResources(), R.drawable.h_arrow, null);
+				Bitmap originalArrowUp = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_route_direction_arrow, null);
 				coloredArrowUp = originalArrowUp;
 //				coloredArrowUp = Bitmap.createScaledBitmap(originalArrowUp, originalArrowUp.getWidth() * 3 / 4,	
 //						originalArrowUp.getHeight() * 3 / 4, true);
