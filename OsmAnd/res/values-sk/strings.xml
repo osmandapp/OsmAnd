@@ -2600,4 +2600,6 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="quick_action_btn_tutorial_title">Zmeniť polohu tlačidla</string>
     <string name="quick_action_btn_tutorial_descr">Podržte a potiahnite tlačidlo pre zmenu jeho pozície na obrazovke</string>
 	<string name="shared_string_action_name">Názov akcie</string>
-</resources>
+<string name="auto_split_recording_title">Automaticky prerušiť nahrávku po medzere</string>
+	<string name="auto_split_recording_descr">Začať nový úsek po prestávke 6 minút, novú stopu po prestávke 2 hodín alebo nový súbor po dlhšej prestávke ak sa zmenil dátum.</string>
+    </resources>
