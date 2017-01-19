@@ -113,6 +113,8 @@ public class SettingsMonitoringActivity extends SettingsBaseActivity {
 		}
 		cat.addPreference(createListPreference(settings.SAVE_TRACK_MIN_SPEED, names, floatValues,  
 				R.string.save_track_min_speed, R.string.save_track_min_speed_descr));
+		cat.addPreference(createCheckBoxPreference(settings.AUTO_SPLIT_RECORDING, R.string.auto_split_recording_title,
+				R.string.auto_split_recording_descr));
 		cat.addPreference(createCheckBoxPreference(settings.DISABLE_RECORDING_ONCE_APP_KILLED, R.string.disable_recording_once_app_killed,
 				R.string.disable_recording_once_app_killed_descrp));
 	}

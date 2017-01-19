@@ -9,6 +9,8 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+	<string name="auto_split_recording_title">Auto-split recordings after gap</string>
+	<string name="auto_split_recording_descr">Start new segment after gap of 6 min, new track after gap of 2 h, or new file after longer gap if date has changed.</string>
     <string name="rendering_attr_contourDensity_description">Contour lines density</string>
     <string name="rendering_attr_contourDensity_name">Contour lines density</string>
     <string name="rendering_value_high_name">High</string>
