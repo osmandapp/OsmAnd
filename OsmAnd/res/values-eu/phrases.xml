@@ -2162,4 +2162,11 @@
 	<string name="poi_animal_boarding_horse">Ostatu mota: zaldiak</string>
 
 	<string name="poi_social_facility_shelter">Aterpea</string>
+	<string name="poi_iata">IATA kodea</string>
+	<string name="poi_icao">ICAO kodea</string>
+	<string name="poi_faa">FAA kodea</string>
+	
+	<string name="poi_elevator_yes">Igogailuarekin</string>
+	<string name="poi_elevator_no">Igogailu gabe</string>
+
 	</resources>
