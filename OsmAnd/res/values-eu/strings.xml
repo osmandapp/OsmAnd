@@ -2761,4 +2761,6 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="quick_action_showhide_favorites_descr">Ekintza botoia sakatzean mapan gogoko puntuak erakutsi edo ezkutatu egingo dira.</string>
     <string name="quick_action_showhide_poi_descr">Ekintza botoia sakatzean mapan POI puntuak erakutsi edo ezkutatu egingo dira.</string>
     <string name="quick_action_fav_name_descr">Laga hutsik helbidea edo lekuaren izena erabiltzeko automatikoki</string>
+    <string name="auto_split_recording_title">Automatikoki zatitu grabaketa hutsunea eta gero</string>
+	<string name="auto_split_recording_descr">Hasi segmentu berria 6 minututako hutsune bat eta gero, lorratz berria bi ordu eta gero, edo fitxategi berria data aldatzean.</string>
     </resources>
