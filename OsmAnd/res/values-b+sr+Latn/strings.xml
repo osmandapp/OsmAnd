@@ -403,4 +403,8 @@
     <string name="rendering_attr_hideWaterPolygons_description">Voda</string>
     <string name="rendering_attr_hideWaterPolygons_name">Sakriti vodu</string>
     <string name="routing_attr_allow_motorway_name">Omogućiti autoputeve</string>
+    <string name="quick_action_add_navigation">Navigacija</string>
+    <string name="quick_action_add_configure_map">Konfiguracija mape</string>
+    <string name="quick_action_poi_show">Prikazati %1$s</string>
+    <string name="quick_action_poi_hide">Sakriti %1$s</string>
     </resources>
