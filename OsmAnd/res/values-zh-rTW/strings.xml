@@ -1841,7 +1841,7 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="back_to_map">返回地圖</string>
 
 
-    <string name="track_segments">航跡區段</string>
+    <string name="track_segments">軌跡區段</string>
     <string name="track_points">航跡標點</string>
     <string name="route_points">路線標點</string>
     <string name="shared_string_release">已發行</string>
@@ -2772,4 +2772,6 @@ Facebook：https://www.facebook.com/osmandapp
     <string name="navigate_point_olc_info_area">有效完整的 OLC
 代表區域：%1$s x %2$s</string>
     <string name="quick_action_page_list_descr">輕點動作按鈕會直達下面的清單。</string>
+    <string name="auto_split_recording_title">自動分割錄製之後的間隙</string>
+	<string name="auto_split_recording_descr">如果日期已更改，開始新區段在6分鐘後的間隙，新區段在2小時後的間隙，或新檔案在更長的間隙之後。</string>
     </resources>
