@@ -2722,7 +2722,7 @@ Si istimas OsmAnd e OSM e los boles suportare, custa est una manera perfeta pro 
     <string name="quick_action_add_configure_map">Configura sa mapa</string>
     <string name="quick_action_add_navigation">Nàvigu</string>
     <string name="quick_action_fav_name_descr">Lassa bòidu pro impreare automaticamente s\'indiritzu o su nùmene de su logu</string>
-    <string name="quick_action_bug_descr">Custu messàgiu at a èssere cumpridu automaticamente in su logu pro sos cummentos.</string>
+    <string name="quick_action_bug_descr">Custu testu at a èssere cumpridu automaticamente in su logu pro sos cummentos.</string>
     <string name="quick_action_bug_message">Messàgiu</string>
     <string name="quick_action_category_descr">Issèbera sa categoria in ue sarbare su preferidu</string>
     <string name="quick_action_gpx_category_descr">Issèbera una categoria optzionale</string>
@@ -2734,7 +2734,7 @@ Si istimas OsmAnd e OSM e los boles suportare, custa est una manera perfeta pro 
     <string name="quick_action_map_overlay">Acontza sos istratos superiores de sa mapa</string>
     <string name="quick_action_map_overlay_title">Istratos superiores de sa mapa</string>
     <string name="quick_action_map_overlay_action">Annaghe un\'istratu superiore</string>
-    <string name="quick_action_map_underlay">Annaghe un\'istratu inferiore</string>
+    <string name="quick_action_map_underlay">Muda s\'istratu inferiore</string>
     <string name="quick_action_map_underlay_action">Annanghe un\'istratu inferiore</string>
     <string name="quick_action_map_underlay_title">Istratos inferiores de sa mapa</string>
     <string name="quick_action_map_source">Muda sa mitza de sa mapa</string>
