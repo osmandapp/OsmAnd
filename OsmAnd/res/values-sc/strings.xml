@@ -2753,4 +2753,7 @@ Pro praghere iscrie su còdighe intreu</string>
 Àrea rapresentada: %1$s x %2$s</string>
     <string name="quick_action_map_overlay_switch">S\'istradu superiore de sa mapa est istadu cambiadu in \"%s\".</string>
     <string name="quick_action_map_underlay_switch">S\'istratu inferiore de sa mapa est istadu cambiadu in \"%s\".</string>
+    <string name="auto_split_recording_title">Iscroba automaticamente sas registratziones</string>
+	<string name="auto_split_recording_descr">Incumintza unu segmentu nou a pustis de una pàusa de 6 minutos, una rasta noa a pustis de 2 oras o unu documentu nou si sa pàusa est istada prus longa e sa data est cambiada.</string>
+    <string name="quick_action_page_list_descr">Incarchende su butone pro s\'atzione as a cùrrere pro sa lista in suta.</string>
     </resources>
