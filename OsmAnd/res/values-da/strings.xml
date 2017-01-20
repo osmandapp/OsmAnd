@@ -2827,6 +2827,6 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="quick_action_map_overlay_switch">Kortoverlejring ændret til \"%s\".</string>
     <string name="quick_action_map_underlay_switch">Kortunderlejring ændret til \"%s\".</string>
     <string name="quick_action_page_list_descr">Tryk på genvejen vil gennemløbe nedenstående liste.</string>
-    <string name="auto_split_recording_title">Auto-split optagelser efter hul</string>
-	<string name="auto_split_recording_descr">Start et nyt segment efter hul på 6 min., nyt spor efter hul på 2 h, eller en ny fil efter længere hul, hvis datoen er ændret.</string>
+    <string name="auto_split_recording_title">Opdel automatisk optagelser efter et ophold</string>
+	<string name="auto_split_recording_descr">Start et nyt segment efter ophold på 6 min., et nyt spor efter 2 t, eller en ny fil efter længere ophold, hvis datoen er ændret.</string>
     </resources>
