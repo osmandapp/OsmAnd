@@ -722,7 +722,7 @@ Las teselas de mapas, se pueden obtener directamente a través de fuentes con co
     <string name="rendering_attr_contourLines_name">Mostrar curvas de nivel</string>
     <string name="rendering_attr_hmRendered_description">Aumentar el detalle que se muestra del mapa</string>
     <string name="rendering_attr_hmRendered_name">Mostrar más detalle del mapa</string>
-    <string name="route_roundabout">Rotonda: Tome la %1$dª salida hacia</string>
+    <string name="route_roundabout">Rotonda: Tome la %1$dª salida en dirección a</string>
     <string name="route_kl">Manténgase a la izquierda y continúe</string>
     <string name="route_kr">Manténgase a la derecha y continúe</string>
     <string name="asap">Lo antes posible</string>
@@ -2292,10 +2292,10 @@ El espacio de almacenamiento usado es {3} MB temporalmente y {1} MB permanenteme
     <string name="full_report">Informe completo</string>
     <string name="open_street_map_login_and_pass">Usuario y contraseña de OpenStreetMap</string>
     <string name="report">Informe</string>
-    <string name="no_map_markers_found">Por favor, añade marcadores de mapa via mapa</string>
+    <string name="no_map_markers_found">Por favor, añade marcadores a través del mapa</string>
     <string name="no_waypoints_found">No se han encontrado puntos intermedios</string>
     <string name="file_name_containes_illegal_char">El nombre de archivo contiene caracteres ilegales</string>
-<string name="map_mode">Modo mapa</string>
+<string name="map_mode">Modo del mapa</string>
     <string name="number_of_gpx_files_selected_pattern">%s archivos GPX seleccionados</string>
     <string name="rendering_value_thin_name">Fino</string>
     <string name="rendering_value_medium_name">Mediano</string>
