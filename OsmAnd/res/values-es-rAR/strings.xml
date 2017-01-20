@@ -2594,4 +2594,6 @@ Proporciona un código completo</string>
     <string name="navigate_point_olc_info_area">OLC completo válido
 Representa el área: %1$s x %2$s</string>
     <string name="quick_action_page_list_descr">Pulsar el botón de acción mostrará la siguiente lista.</string>
+    <string name="auto_split_recording_title">División automática de grabaciones en intervalos</string>
+	<string name="auto_split_recording_descr">Iniciar nuevo segmento en intervalos de 6 min, nueva traza en intervalos de 2 h, o nuevo archivo en intervalos largos si la fecha se cambió.</string>
     </resources>
