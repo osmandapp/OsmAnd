@@ -1161,7 +1161,7 @@ Die globalen Daten (zwischen N 70° und S 70°) basieren auf Messungen von SRTM 
 	<string name="monitoring_control_start">GPX</string>
 	
 	<string name="map_widget_audionotes">Audio-Notiz</string>
-	<string name="audionotes_plugin_description">Das Audio/Video-Notiz-Plugin ermöglicht unterwegs die Aufnahme von ortsbezogenen Audio-/Fotografie-/Video-Notizen, entweder über eine Schaltfläche auf dem Kartenbildschirm, oder direkt im Kontext-Menü einer beliebigen Position auf der Karte.</string>
+	<string name="audionotes_plugin_description">Das Audio/Video-Notiz-Plugin ermöglicht unterwegs die Aufnahme von ortsbezogenen Audio-/Fotografie-/Video-Notizen, entweder über eine Taste auf dem Kartenbildschirm, oder direkt im Kontext-Menü einer beliebigen Position auf der Karte.</string>
 	<string name="audionotes_plugin_name">Audio/Video-Notizen</string>
 	<string name="audionotes_location_not_defined">Ein Ort, der mit der Notiz verbunden wird, wurde nicht angegeben. Benutzen Sie \'Verwende Position…\', um der Notiz einen Ort zuzuweisen.</string>
 	<string name="osmand_srtm_long_description_1000_chars">"Dieses Plugin beinhaltet Höhenlinien und Relief-Schattierungen, die als Ergänzung zu den Standard Offline-Karten von OsmAnd angezeigt werden können. Diese Funktionalität ist vor allem für Sportler, sowie Wanderer, Radfahrer, Trekker und jeden interessant, der sich für die Relief-Struktur von Landschaften interessiert.
@@ -1377,8 +1377,8 @@ Die globalen Daten (zwischen N 70° und S 70°) basieren auf Messungen von SRTM 
 	<string name="sort_by_distance">Sortieren nach Entfernung</string>
 	<string name="sort_by_name">Sortieren nach Namen</string>
 	
-	<string name="show_zoom_buttons_navigation_descr">Zoom-Tasten bei Navigation anzeigen</string>
-	<string name="show_zoom_buttons_navigation">Zoom-Tasten anzeigen</string>
+	<string name="show_zoom_buttons_navigation_descr">Zoomtasten bei Navigation anzeigen</string>
+	<string name="show_zoom_buttons_navigation">Zoomtasten anzeigen</string>
 	<string name="no_index_file_to_download">Keine Downloads gefunden, bitte die Internet-Verbindung überprüfen!</string>
 	<string name="none_selected_gpx">Keine GPX-Spur ausgewählt. Zum Auswählen auf eine Spur lange drücken.</string>
 	
@@ -2173,7 +2173,7 @@ Lon %2$s</string>
     <string name="feedback">Bewertung</string>
     <string name="contact_us">Kontakt</string>
     <string name="map_legend">Kartenlegende</string>
-    <string name="access_from_map_description">Menü-Knopf zeigt Dashboard, nicht das Menü</string>
+    <string name="access_from_map_description">Menütaste zeigt Dashboard, nicht das Menü</string>
     <string name="show_on_start_description">\"Aus\" startet direkt die Kartenansicht</string>
     <string name="copied_to_clipboard">In die Zwischenablage kopiert</string>
     <string name="release_2_2">"
@@ -2573,7 +2573,7 @@ Wenn Sie OsmAnd und OSM lieben und unterstützen wollen, so ist dies die perfekt
 und vieles mehr ...
  "</string>
     <string name="trip_rec_notification_settings">Streckenaufzeichnung (keine Daten)</string>
-    <string name="trip_rec_notification_settings_desc">Benachrichtigung anzeigen, die es erlaubt die Streckenaufzeichnung durch Betätigen der Schaltfläche “Aufzeichnen“ zu starten</string>
+    <string name="trip_rec_notification_settings_desc">Benachrichtigung anzeigen, die es erlaubt die Streckenaufzeichnung durch Betätigen der Taste “Aufzeichnen“ zu starten</string>
     <string name="shared_string_notifications">Benachrichtigungen</string>
     <string name="osmo_service_running">OsMo Dienst wird ausgeführt</string>
     <string name="osmo_pause_location">Pause</string>
@@ -2626,12 +2626,12 @@ und vieles mehr ...
     <string name="quick_favorites_show_favorites_dialog">Favoriten Dialog anzeigen</string>
     <string name="quick_favorites_name_preset">Name Voreinstellen</string>
     <string name="shared_string_action_name">Aktionsname</string>
-    <string name="quick_action_add_marker_descr">Drücken der Schaltfläche für Schnellaktion fügt einen Kartenmarker am Bildschirmmittelpunkt ein.</string>
+    <string name="quick_action_add_marker_descr">Drücken der Taste für Schnellaktion fügt einen Kartenmarker am Bildschirmmittelpunkt ein.</string>
     <string name="favorite_empty_place_name">Ort</string>
     <string name="quick_action_showhide_favorites_title">Favoriten zeigen/verbergen</string>
-    <string name="quick_action_take_audio_note_descr">Drücken der Schaltfläche für Schnellaktion fügt eine Audionachricht am Bildschirmmittelpunkt ein.</string>
-    <string name="quick_action_take_video_note_descr">Drücken der Schaltfläche für Schnellaktion fügt eine Videonachricht am Bildschirmmittelpunkt ein.</string>
-    <string name="quick_action_take_photo_note_descr">Drücken der Schaltfläche für Schnellaktion fügt ein Foto am Bildschirmmittelpunkt ein.</string>
+    <string name="quick_action_take_audio_note_descr">Drücken der Taste für Schnellaktion fügt eine Audionachricht am Bildschirmmittelpunkt ein.</string>
+    <string name="quick_action_take_video_note_descr">Drücken der Taste für Schnellaktion fügt eine Videonachricht am Bildschirmmittelpunkt ein.</string>
+    <string name="quick_action_take_photo_note_descr">Drücken der Taste für Schnellaktion fügt ein Foto am Bildschirmmittelpunkt ein.</string>
     <string name="quick_action_showhide_poi_title">POI anzeigen/verbergen</string>
     <string name="quick_action_poi_show">%1$s anzeigen</string>
     <string name="quick_action_poi_hide">%1$s ausblenden</string>
@@ -2655,27 +2655,27 @@ und vieles mehr ...
     <string name="quick_action_map_source_title">Kartenquellen</string>
     <string name="quick_action_map_source_action">Kartenquelle hinzufügen</string>
     <string name="quick_action_map_source_switch">Die Kartenquelle wurde in \"%s\" geändert.</string>
-    <string name="quick_action_btn_tutorial_title">Position der Schaltfläche ändern</string>
+    <string name="quick_action_btn_tutorial_title">Position der Taste ändern</string>
     <string name="quick_action_favorites_show">Favoriten anzeigen</string>
     <string name="quick_action_favorites_hide">Favoriten ausblenden</string>
     <string name="quick_action_category_descr">Wählen Sie eine Kategorie um den Favorit unter dieser zu speichern</string>
     <string name="quick_action_gpx_category_descr">Wählen Sie eine optionale Kategorie</string>
     <string name="configure_screen_quick_action">Schnellaktion</string>
 
-    <string name="quick_action_add_gpx_descr">Drücken der Schaltfläche für Schnellaktion fügt einen GPX Wegpunkt am Bildschirmmittelpunkt ein.</string>
-    <string name="quick_action_add_osm_bug_descr">Drücken der Schaltfläche für Schnellaktion fügt eine OSM Fehlermeldung am Bildschirmmittelpunkt ein.</string>
-    <string name="quick_action_add_poi_descr">Drücken der Schaltfläche für Schnellaktion fügt einen POI am Bildschirmmittelpunkt ein.</string>
-    <string name="quick_action_navigation_voice_descr">Drücken der Schaltfläche für Schnellaktion deaktiviert oder aktiviert die Sprachhinweise bei der Navigation.</string>
-    <string name="quick_action_add_parking_descr">Drücken der Schaltfläche für Schnellaktion fügt eine Parkposition am Bildschirmmittelpunkt ein.</string>
+    <string name="quick_action_add_gpx_descr">Drücken der Taste für Schnellaktion fügt einen GPX Wegpunkt am Bildschirmmittelpunkt ein.</string>
+    <string name="quick_action_add_osm_bug_descr">Drücken der Taste für Schnellaktion fügt eine OSM Fehlermeldung am Bildschirmmittelpunkt ein.</string>
+    <string name="quick_action_add_poi_descr">Drücken der Taste für Schnellaktion fügt einen POI am Bildschirmmittelpunkt ein.</string>
+    <string name="quick_action_navigation_voice_descr">Drücken der Taste für Schnellaktion deaktiviert oder aktiviert die Sprachhinweise bei der Navigation.</string>
+    <string name="quick_action_add_parking_descr">Drücken der Taste für Schnellaktion fügt eine Parkposition am Bildschirmmittelpunkt ein.</string>
     <string name="quick_action_interim_dialog">Dialog zum Bearbeiten zeigen</string>
     <string name="favorite_autofill_toast_text">" wird gespeichert unter "</string>
     <string name="quick_action_duplicates">Angegebener Schnellaktionsname schon in Verwendung, er wurde geändert in %1$s um ein Duplikat zu vermeiden.</string>
     <string name="quick_action_duplicate">Schnellaktion Namensduplikat</string>
-    <string name="quick_action_showhide_favorites_descr">Drücken der Schaltfläche für Schnellaktion zeigt oder versteckt Favoriten auf der Karte.</string>
-    <string name="quick_action_showhide_poi_descr">Drücken der Schaltfläche für Schnellaktion zeigt oder versteckt POIs.</string>
+    <string name="quick_action_showhide_favorites_descr">Drücken der Taste für Schnellaktion zeigt oder versteckt Favoriten auf der Karte.</string>
+    <string name="quick_action_showhide_poi_descr">Drücken der Taste für Schnellaktion zeigt oder versteckt POIs.</string>
     <string name="quick_action_add_create_items">Objekte erstellen</string>
     <string name="quick_action_bug_descr">Diese Nachricht wird im Kommentarfeld autovervollständigt.</string>
-    <string name="quick_action_btn_tutorial_descr">Schaltfläche lange drücken und ziehen um die Position auf dem Bildschirm zu ändern</string>
+    <string name="quick_action_btn_tutorial_descr">Taste lange drücken und ziehen um die Position auf dem Bildschirm zu ändern</string>
 	<string name="quick_action_map_overlay_switch">Die Overlay-Karte wurde in “%s“ geändert.</string>
     <string name="quick_action_map_underlay_switch">Die Underlay-Karte wurde in “%s“ geändert.</string>
     <string name="navigate_point_olc_info_invalid">Ungültiger OLC
