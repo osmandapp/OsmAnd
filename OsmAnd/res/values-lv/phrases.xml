@@ -2182,4 +2182,147 @@
 	<string name="poi_industrial_brewery">Tips: alusdarītavas</string>
 	<string name="poi_industrial_sawmill">Tips: Kokzāğētava</string>
 	<string name="poi_industrial_water_purification">Tips: ūdens attīrīšanas stacijas</string>
+	<string name="poi_piste_grooming_backcountry">Backcountry slēpošana</string>
+	<string name="poi_industrial_port">Tips: ports</string>
+	<string name="poi_industrial_depot">Tips: depo</string>
+
+	<string name="poi_note">Piezīme</string>
+	<string name="poi_watering_place">Dzirdinātava</string>
+	<string name="poi_animal_boarding">Dzīvnieku patversme</string>
+	<string name="poi_animal_boarding_dog">Patversmes tips: suņu</string>
+	<string name="poi_animal_boarding_cat">Patversmes tips: kaķu</string>
+	<string name="poi_animal_boarding_dog_cat">Patversmes tips: suņu un kaķu</string>
+	<string name="poi_animal_boarding_horse">Patversmes tips: zirgu</string>
+
+	<string name="poi_historic_aircraft">Vēsturiskās lidmašīnas</string>
+
+	<string name="poi_technical_monument">Tehniskais piemineklis</string>
+
+	<string name="poi_office_camping">Nometnes vadība</string>
+	<string name="poi_model_aerodrome">Aviomodelisms</string>
+	<string name="poi_guide">Gidu birojs</string>
+	<string name="poi_quango">Semiautonomā nevalstiskā organizācija</string>
+	<string name="poi_consulting">Konsultantu birojs</string>
+	<string name="poi_cooperative">Kooperatīvu birojs</string>
+	<string name="poi_office_forestry">Mežsaimniecības birojs</string>
+	<string name="poi_logistics">Loğistikas birojs</string>
+	<string name="poi_parish">Pagasta pārvalde</string>
+	<string name="poi_publisher">Izdevniecība</string>
+
+	<string name="poi_fuel_91ul">91UL degviela</string>
+	<string name="poi_fuel_100ll">100LL degviela</string>
+	<string name="poi_fuel_autogas">Autogāze</string>
+	<string name="poi_fuel_jeta1">Jet A-1 degviela</string>
+	<string name="poi_fuel_adblue">AdBlue degviela</string>
+
+	<string name="poi_escape_lane">Avārijas bremzēšanas josla</string>
+
+	<string name="poi_crop_rice">Lauks: rīsu</string>
+	<string name="poi_crop_grass">Lauks: zāle</string>
+	<string name="poi_crop_corn">Lauks: kukurūzas</string>
+	<string name="poi_crop_cereal">Lauks: labības</string>
+	<string name="poi_crop_sugarcane">Lauks: cukurniedru</string>
+	<string name="poi_crop_wheat">Lauks: kviešu</string>
+	<string name="poi_crop_soy">Lauks: sojas</string>
+	<string name="poi_crop_barley">Lauks: miežu</string>
+	<string name="poi_crop_vegetables">Lauks: augļu</string>
+	<string name="poi_crop_hop">Lauks: apiņu</string>
+	<string name="poi_crop_rape">Lauks: rapšu</string>
+	<string name="poi_crop_beet">Lauks: biešu</string>
+	<string name="poi_crop_lavender">Lauks: lavandas</string>
+	<string name="poi_crop_tea">Lauks: tējas</string>
+	<string name="poi_crop_coffee">Lauks: kafijas</string>
+	<string name="poi_crop_poultry">Lauks: mājputnu</string>
+	<string name="poi_crop_sunflower">Lauks: saulespuķu</string>
+	<string name="poi_crop_raspberry">Lauks: aveņu</string>
+	<string name="poi_crop_tobacco">Lauks: tabakas</string>
+	<string name="poi_crop_strawberry">Lauks: zemeņu</string>
+	<string name="poi_crop_vegetables_flowers">Lauks: dārzeņu, ziedu</string>
+	<string name="poi_crop_cassava">Lauks: manioku</string>
+	<string name="poi_crop_cranberry">Lauks: dzērveņu</string>
+	<string name="poi_crop_asparagus">Lauks: sparğeļu</string>
+	<string name="poi_crop_flowers">Lauks: ziedu</string>
+
+	<string name="poi_massage_thai">Taizemes</string>
+	<string name="poi_scout_yes">Skautu nometne: ir</string>
+	<string name="poi_scout_no">Skautu nometne: nav</string>
+	<string name="poi_group_only_yes">Tikai ar grupām: jā</string>
+	<string name="poi_group_only_no">Tikai ar grupām: nē</string>
+	<string name="poi_washing_machine_yes">Jā</string>
+	<string name="poi_washing_machine_no">Veļasmašīnas: nav</string>
+	<string name="poi_shower_filter_yes">Ir</string>
+	<string name="poi_shower_yes">Duša: ir</string>
+	<string name="poi_shower_no">Duša: nav</string>
+	<string name="poi_shower_hot">Duša: karstā</string>
+	<string name="poi_shower_outdoor">Duša: ārtelpās</string>
+	<string name="poi_shower_cold">Duša: aukstā</string>
+	<string name="poi_shower_indoor">Duša: iekštelpās</string>
+	<string name="poi_caravans_yes">Jā</string>
+	<string name="poi_caravans_no">Treileri: nē</string>
+	<string name="poi_impromptu_yes">Improvizēts: jā</string>
+	<string name="poi_impromptu_no">Improvizēts: nē</string>
+	<string name="poi_sanitary_dump_station_yes">Sanitārā notekūdeņu stacija: ir</string>
+	<string name="poi_sanitary_dump_station_no">Sanitārā notekūdeņu stacija: nav</string>
+	<string name="poi_power_supply_yes">Ir</string>
+	<string name="poi_power_supply_no">Strāvas avots: nav</string>
+	<string name="poi_power_supply_cee_17_blue">Strāvas avots (ligzda): CEE 17 blue</string>
+	<string name="poi_power_supply_cee_7_4">Strāvas avots (ligzda): CEE 7/4</string>
+	<string name="poi_power_supply_cee_7_5">Strāvas avots (ligzda): CEE 7/5</string>
+	<string name="poi_power_supply_nema_5_15">Strāvas avots (ligzda): NEMA 5-15</string>
+
+	<string name="poi_capacity_tents">Maksimālais telšu skaits</string>
+	<string name="poi_capacity_caravans">Maksimālais treileļu skaits</string>
+	<string name="poi_dog_yes">Atļauts ienākt ar suņiem</string>
+	<string name="poi_dog_no">Aizliegts ienākt ar suņiem</string>
+
+	<string name="poi_social_facility_day_care">Dienas sociālais centrs</string>
+
+	<string name="poi_social_facility_for_senior">Senioriem</string>
+	<string name="poi_social_facility_for_child">Bērniem</string>
+	<string name="poi_social_facility_for_orphan">Bāreņiem</string>
+	<string name="poi_social_facility_for_disabled">Invalīdiem</string>
+	<string name="poi_social_facility_for_mental_health">Pacientiem ar psihiskām novirzēm</string>
+	<string name="poi_social_facility_for_juvenile">Pusaudžiem</string>
+	<string name="poi_social_facility_for_homeless">Bezpajumtniekiem</string>
+	<string name="poi_social_facility_for_migrant">Emigrantiem</string>
+	<string name="poi_social_facility_for_underprivileged">Nabagiem</string>
+	<string name="poi_social_facility_for_drug_addicted">Narkomāniem</string>
+	<string name="poi_social_facility_for_unemployed">Bezdarbniekiem</string>
+	<string name="poi_social_facility_for_diseased">Slimajiem</string>
+	<string name="poi_social_facility_for_child_juvenile">Bērniem un pusaudžiem</string>
+
+	<string name="poi_theatre_genre_philharmonic">Filharmoniskais</string>
+	<string name="poi_theatre_genre_musical">Muzikālais</string>
+	<string name="poi_theatre_genre_drama">Dramatiskais</string>
+	<string name="poi_theatre_genre_opera">Operas</string>
+	<string name="poi_theatre_genre_cabaret">Kabarē</string>
+	<string name="poi_theatre_genre_puppet">Leļļu teātra</string>
+	<string name="poi_theatre_genre_comedy">Komēdiskais</string>
+	<string name="poi_theatre_genre_chamber_music">Kamermūzikas</string>
+	<string name="poi_theatre_genre_marionette">Marionetes</string>
+	<string name="poi_theatre_genre_ballet">Balets</string>
+	<string name="poi_theatre_genre_shadow_play">Ēnu teātra</string>
+
+	<string name="poi_bandstand">Estrādes</string>
+	<string name="poi_kiln">Ceplis</string>
+	<string name="poi_product_brick">Produkts: ķieğelis</string>
+	<string name="poi_product_quicklime">Produkts: nedzēstais kaļķis</string>
+	<string name="poi_product_leather">Produkts: āda</string>
+	<string name="poi_product_lime">Produkts: kaļķi</string>
+	<string name="poi_product_beer">Produkts: alus</string>
+	<string name="poi_product_charcoal">Produkts: kokogle</string>
+	<string name="poi_product_meat">Produkts: gaļa</string>
+
+	<string name="poi_wheelchair_description">Apraksts cilvēkiem ratiņkrēslos</string>
+	<string name="poi_blind_description">Apraksts aklajiem</string>
+	<string name="poi_deaf_description">Apraksts kurlajiem</string>
+
+	<string name="poi_highway_steps">Kāpnes</string>
+	<string name="poi_handrail_yes">Margas: ir</string>
+	<string name="poi_handrail_no">Margas: nav</string>
+	<string name="poi_ramp_yes">Rampa: ir</string>
+	<string name="poi_ramp_no">Rampa: nav</string>
+	<string name="poi_ramp_wheelchair_yes">Rampa ratiņkrēslā sēdošiem: ir</string>
+	<string name="poi_ramp_wheelchair_no">Rampa ratiņkrēslā sēdošiem: nav</string>
+	<string name="poi_step_count">Pakāpienu skaits</string>
 	</resources>
