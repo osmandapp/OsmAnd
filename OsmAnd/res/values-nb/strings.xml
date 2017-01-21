@@ -2065,4 +2065,77 @@ Representerer området: %1$s x %2$s</string>
     <string name="rendering_attr_noAdminboundaries_description">Undertrykk visning av regionsbestemte avgrensninger (administrasjonsnivå 5-9)</string>
     <string name="close_changeset">Lukk endringssett</string>
     <string name="zxing_barcode_scanner_not_found">Programmet ZXing strekkodeskanner er ikke installert. Vil du søke på Google Play?</string>
+    <string name="release_2_5">"
+ • Klikkbare ikoner på kartet
+
+
+ • Kraftig POI-filtersøk: Søk f.eks etter restauranter etter type kjøkken, eller campingsteder med gitte tjenestetilbud
+
+ • Nytt topologisk kart for syklister og turgåere
+
+ • Forbedret opptak av turer
+
+ • Forbedrede navigasjonsmerknader (Android Wear)
+
+
+ • Mange andre forbedringer og feilrettinger
+
+
+ med mer…
+ "</string>
+    <string name="release_2_4">"
+ • Nytt og veldig kraftig fritekstsøk
+
+ • Lydsystem i bil / høytalertelefonintegrasjon via Blåtann
+
+ • Forbedret veivisning, stemmehjelp og filanvisning
+
+ • Improved transport layer with route rendering
+
+
+ • Added more locales and now support regional locales
+
+
+ • Many other improvements and bug fixes
+
+
+ and more…
+ "</string>
+    <string name="osmo_group_information_desc"/>
+    <string name="lang_bpy">Bishnupriya manipuri</string>
+    <string name="lang_new">Nepal bhasa</string>
+    <string name="lang_ceb">Cebuano</string>
+    <string name="lang_ast">Asturiansk</string>
+    <string name="lang_hsb">Øvervendisk</string>
+    <string name="lang_kab">Kabylsk</string>
+    <string name="lang_zh_hk">Kinesisk (Hongkong)</string>
+    <string name="use_displayed_track_for_navigation">Ønsker du å bruke vist spor for navigering?</string>
+    <string name="local_osm_changes_backup_failed">Sikkerhetskopiering av OSM-endringer mislyktes</string>
+    <string name="use_distance_measurement_help">* Trykk for å markere et punkt
+
+ * Trykk og hold på kartet for å fjerne et tidligere punkt.
+
+ * Trykk og hold på et punkt for å vise og legge til beskrivelse.
+
+ * Klikk på målingselementet for å vise flere valg.</string>
+    <string name="screen_is_locked">Trykk på låseikonet for å låse opp skjermen</string>
+    <string name="select_animate_speedup">Velg hastighet på rutesimulering</string>
+    <string name="global_app_allocated_memory_descr">Tildelt minne %1$s MB (Android-grense %2$s MB, Dalvik %3$s MB).</string>
+    <string name="global_app_allocated_memory">Tildelt minne</string>
+	<string name="osmand_parking_event">Finn bilen der den er parkert</string>
+    <string name="osmand_parking_warning_text">En merknad om å hente bilen har blitt lagt til i kalenderen din. Den vil finnes der til du sletter den manuelt.</string>
+    <string name="osmand_parking_time_limit_title">Angi tidsgrense for parkering</string>
+    <string name="osmand_parking_delete_confirm">Ønsker du å slette markeringen for parkering?</string>
+    <string name="osmand_parking_choose_type">Velg typen parkering</string>
+    <string name="osmand_parking_lim_text">Tidsbegrenset</string>
+    <string name="osmand_parking_no_lim_text">Fri parkering</string>
+    <string name="osmand_parking_add_event">Legg til en påminnelse i kalenderen</string>
+    <string name="osmand_parking_time_limit">Tidsbegrenset parkering</string>
+    <string name="osmand_parking_time_no_limit">Fri parkering</string>
+    <string name="osmand_parking_position_description">Hvor du har parkert. %1$s</string>
+    <string name="osmand_parking_position_description_add">Hvor bilen skal hentes fra:</string>
+    <string name="osmand_parking_position_name">Parkeringsplass</string>
+    <string name="context_menu_item_add_parking_point">Marker som parkeringsplass</string>
+    <string name="route_roundabout">Rundkjøring: Ta avkjøring %1$d og kjør</string>
+    <string name="support_new_features">Støtt nye funksjoner</string>
     </resources>
