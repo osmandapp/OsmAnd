@@ -413,7 +413,7 @@
     <string name="shared_string_delete_all">Forigi ĉiujn</string>
     <string name="shared_string_share">Kunhavigi</string>
     <string name="shared_string_apply">Apliki</string>
-    <string name="shared_string_control_start">Eki</string>
+    <string name="shared_string_control_start">Ekigi</string>
     <string name="shared_string_control_stop">Haltigi</string>
     <string name="shared_string_import">Enporti</string>
     <string name="shared_string_export">Elporti</string>
@@ -485,7 +485,7 @@
     <string name="osmo_connect">Konekti</string>
     <string name="osmo_groups">Grupoj OsMo</string>
     <string name="osmo_auto_send_locations_descr">Aŭtomate komencas registrigi ekskurson kaj sendas lokojn dum starto de aplikaĵo</string>
-    <string name="osmo_auto_send_locations">Aŭtomate eki ekskurs-registrilon</string>
+    <string name="osmo_auto_send_locations">Aŭtomate ekigi ekskurs-registrilon</string>
     <string name="osmo_tracker_id">Kursospurila ID</string>
     <string name="osmo_tracker_id_descr">Alklaku por vidi identigilon de kursospurilo</string>
     <string name="osmo_connect_to_my_nickname">Kaŝnomo</string>
@@ -515,8 +515,8 @@ Vi povas spuri ĉiujn aparatojn de partoprenanta grupo realtempe. Ankaŭ vi pova
     <string name="local_recordings_delete_all_confirm">Ĉu vi certe volas forigi %1$d notojn?</string>
     <string name="local_osm_changes_upload_all_confirm">Ĉu vi certe volas alŝuti %1$d ŝanĝo(j)n al OSM?</string>
     <string name="confirmation_to_clear_history">Ĉu vi volas vakigi la historion?</string>
-    <string name="delay_to_start_navigation">Eki navigadon turnon-post-turno post…</string>
-    <string name="shared_string_go">Eki</string>
+    <string name="delay_to_start_navigation">Ekigi navigadon turnon-post-turno post…</string>
+    <string name="shared_string_go">Ekigi</string>
     <string name="delay_to_start_navigation_descr">Difinu tempon de montrado de la kurs-plana ekrano</string>
     <string name="osmand_parking_overdue">posttempa</string>
     <string name="action_create">Krei</string>
@@ -727,7 +727,7 @@ Registritaj kursoj povas esti kunhavigitaj kun viaj amikoj aŭ esti uzita por ko
     <string name="home">Stirpanelo</string>
     <string name="live_monitoring_m">Enreta kurs-registrado (GPX bezonata)</string>
     <string name="live_monitoring_m_descr">Sendas datumojn de kursoj al difinita retservo se GPX-registrado estas aktiva.</string>
-    <string name="live_monitoring_start">Eki enretan kurs-registradon</string>
+    <string name="live_monitoring_start">Ekigi enretan kurs-registradon</string>
     <string name="gpx_monitoring_start">Ekigi GPX-registradon</string>
     <string name="live_monitoring_stop">Ĉesigi enretan kurs-registradon</string>
     <string name="gpx_monitoring_stop">Ĉesigi GPX-registradon</string>
@@ -1093,10 +1093,10 @@ Premtenu por vidi sur la mapo</string>
  * Premtenu punkton por vidi kaj aldoni priskribon.
 
  * Tuŝu mezur-fenestraĵon por vidi pli funkciojn.</string>
-    <string name="distance_measurement_start_editing">Eki redaktadon</string>
+    <string name="distance_measurement_start_editing">Ekigi redaktadon</string>
     <string name="distance_measurement_finish_editing">Finigi redaktadon</string>
     <string name="distance_measurement_clear_route">Vakigi ĉiujn punktojn</string>
-    <string name="distance_measurement_finish_subtrack">Eki novan subkurson</string>
+    <string name="distance_measurement_finish_subtrack">Ekigi novan subkurson</string>
     <string name="distance_measurement_load_gpx">Malfermi GPX-dosieron</string>
     <string name="wait_current_task_finished">Bonvolu atendi ĝis nuna tasko finos</string>
     <string name="use_kalman_filter_compass">Uzi filtrilon de Kalman</string>
@@ -1116,7 +1116,7 @@ Premtenu por vidi sur la mapo</string>
     <string name="website">Retejo</string>
     <string name="phone">Telefono</string>
     <string name="osmand_background_plugin_description">Montras agordojn pri aktivigi spuradon kaj navigadon fone (malaktiva ekrano) per periode aktivanta GPS-on.</string>
-    <string name="contribution_activity">Instalaj versioj</string>
+    <string name="contribution_activity">Instaleblaj versioj</string>
     <string name="accessibility_options">Alireblecaj agordoj</string>
     <string name="osmand_accessibility_description">Tiu ĉi kromprogramo ebligas uzi alireblecajn ilojn senpere en OsmAnd. Ĝi plifaciligas ekz. agordi rapidon de parolsintezitaj dialogaj helpoj, uzi montrilo-butonojn por navigado sur ekrano, uzi stirglobon por skalado, aŭ uzi teksto-al-parolajn sciigojn ekz. por aŭtomate anonci vian pozicion.</string>
     <string name="select_address_activity">Elekti adreson</string>
@@ -1545,7 +1545,7 @@ Proporcia memoro %4$s MB (Limito de Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="city_type_city">Urbego</string>
 
     <string name="animate_route_off">Ĉesigi simuladon</string>
-    <string name="animate_route">Eki simuladon</string>
+    <string name="animate_route">Ekigi simuladon</string>
     <string name="file_can_not_be_renamed">Ne povas renomi dosieron.</string>
     <string name="file_with_name_already_exists">Dosiero kun saman nomon jam ekzistas.</string>
     <string name="gpx_navigation">GPX-kurso</string>
@@ -1948,7 +1948,7 @@ Kaj la loko kaj tempo estas montrataj ĉe la OsmAnd stirpanelo, kaj ĉe la fenes
     <string name="fav_points_not_exist">Neniaj ekzistaj ŝatataj ejoj</string>
     <string name="update_existing">Anstataŭigi</string>
     <string name="only_show">Montri kurson</string>
-    <string name="follow">Eki navigadon</string>
+    <string name="follow">Ekigi navigadon</string>
     <string name="mark_final_location_first">Bonvolu unue elekti celon</string>
     <string name="opening_hours">Malfermaj horoj</string>
     <string name="opening_changeset">Malfermado de ŝanĝaro…</string>
@@ -2514,7 +2514,7 @@ Se vi bezonas helpon pri OsmAnd aplikaĵo, bonvolu kontakti nian helpantaron: su
 kaj pli...
  "</string>
     <string name="trip_rec_notification_settings">Registrado de kurso (sen datumoj)</string>
-    <string name="trip_rec_notification_settings_desc">Montras sciigon kiu ebligos eki registradon de kurso per premo de Registri-butono</string>
+    <string name="trip_rec_notification_settings_desc">Montras sciigon kiu ebligos ekigi registradon de kurso per premo de Registri-butono</string>
     <string name="shared_string_notifications">Sciigoj</string>
     <string name="osmo_share_location">Kunhavigi</string>
     <string name="osmo_service_running">OsMo-servo estas aktiva</string>
