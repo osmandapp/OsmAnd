@@ -2632,4 +2632,15 @@
 	<string name="poi_crossing_on_demand_no">Encreuament franc per sol·licitud: no</string>
 	<string name="poi_bandy">Bandy</string>
 
+	<string name="poi_animal_boarding_dog">Tipus de residència: gossos</string>
+	<string name="poi_animal_boarding_cat">Tipus de residència: gats</string>
+	<string name="poi_animal_boarding_dog_cat">Tipus de residència: gats i gossos</string>
+	<string name="poi_animal_boarding_horse">Tipus de residència: cavalls</string>
+
+	<string name="poi_office_forestry">Oficina forestal</string>
+	<string name="poi_logistics">Oficina logística</string>
+	<string name="poi_publisher">Oficina editorial</string>
+
+	<string name="poi_fuel_91ul">combustible 91UL</string>
+	<string name="poi_fuel_100ll">Combustible 100LL</string>
 	</resources>
