@@ -551,7 +551,7 @@
     <string name="navigate_point_format_D">DDD.DD</string>
     <string name="navigate_point_format_DM">DDD MM.MM</string>
     <string name="navigate_point_format_DMS">DDD MM SS.SS</string>
-    <string name="shared_string_show_on_map">Wyświetl na mapie</string>
+    <string name="shared_string_show_on_map">Wyświetlanie na mapie</string>
 
     <string name="search_address_top_text">Wybór adresu</string>
     <string name="search_address_region">Region</string>
@@ -575,7 +575,7 @@
     <string name="add_favorite_dialog_favourite_added_template">Dodano ulubiony punkt „{0}”.</string>
     <string name="favourites_context_menu_edit">Edytuj</string>
     <string name="favourites_context_menu_delete">Usuń</string>
-    <string name="favourites_remove_dialog_msg">Usunąć ulubiony punkt „%s”?</string>
+    <string name="favourites_remove_dialog_msg">Usunąć ulubione miejsce „%s”?</string>
     <string name="favourites_remove_dialog_success">Usunięto ulubiony punkt {0}.</string>
 
 
@@ -1560,7 +1560,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 
 
     <string name="osmo_edit_device">Zmień właściwości użytkownika</string>
-    <string name="osmo_edit_color">Kolor wyświetlania</string>
+    <string name="osmo_edit_color">Kolor</string>
     <string name="osmo_group_info">Informacje</string>
     <string name="osmo_group">Grupa OsMo</string>
     <string name="osmo_group_share">W celu dołączenia do grupy %2$s, proszę określić identyfikator grupy (%1$s) lub kliknąć %3$s.</string>
@@ -1884,7 +1884,7 @@ Nagrane ślady można udostępnić znajomym lub wykorzystać na rzecz rowoju map
     <string name="roads_only">Tylko drogi</string>
     <string name="free">"Wolne %1$s "</string>
     <string name="device_memory">Pamięć urządzenia</string>
-    <string name="edit_group">Edytuj grupę</string>
+    <string name="edit_group">Modyfikowanie grupy</string>
     <string name="parking_place">Miejsce parkowania</string>
     <string name="avoid_roads_msg">Można wyznaczyć alternatywną trasę wybierając drogi, które mają być omijane</string>
     <string name="enable_proxy_title">Włączenie proxy HTTP</string>
@@ -2152,7 +2152,7 @@ Włączenie tego widoku zmienia styl mapy na „Zima i narty”, ukazujący tere
     <string name="favourites_context_menu_add">Dodaj do ulubionych</string>
     <string name="roads">Drogi</string>
     <string name="favorite_category_add_new">Dodaj nową</string>
-    <string name="favorite_category_select">Proszę wybrać kategorię</string>
+    <string name="favorite_category_select">Wybór kategorii</string>
     <string name="default_speed_system_descr">Definiuje jednostki prędkości</string>
     <string name="default_speed_system">Jednostki prędkości</string>
     <string name="si_nm">Mile morskie</string>
@@ -2750,7 +2750,7 @@ i więcej...
     <string name="quick_action_new_action">Dodawanie czynności</string>
     <string name="quick_action_edit_action">Modyfikowanie czynności</string>
     <string name="quick_action_add_favorite">Dodaj do ulubionych</string>
-    <string name="dialog_add_action_title">Dodaj czynność</string>
+    <string name="dialog_add_action_title">Dodawanie czynności</string>
     <string name="quick_actions_delete">Usuwanie czynności</string>
     <string name="quick_actions_delete_text">Usunąć czynność „%s”?</string>
     <string name="quick_favorites_show_favorites_dialog">Wyświetl ekran ulubionych</string>
