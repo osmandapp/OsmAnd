@@ -2507,7 +2507,7 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="quick_action_navigation_voice_off">La voix est désactivée</string>
     <string name="quick_action_navigation_voice_on">La voix est activée</string>
     <string name="quick_action_add_gpx">Ajouter un point GPX</string>
-    <string name="quick_action_add_parking">Ajouter une emplacement de stationnement</string>
+    <string name="quick_action_add_parking">Ajouter un emplacement de stationnement</string>
     <string name="quick_action_new_action">Ajouter une action</string>
     <string name="quick_action_edit_action">Modifier l\'action</string>
     <string name="quick_action_add_favorite">Ajouter un favori</string>
