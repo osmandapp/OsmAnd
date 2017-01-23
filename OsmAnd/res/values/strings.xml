@@ -61,8 +61,8 @@
     <string name="save_track_min_speed_descr">Set minimum speed for a point to be logged</string>
     <string name="save_track_min_distance">Logging motion detection</string>
     <string name="save_track_min_distance_descr">Set minimum distance from last position for point to be logged</string>
-    <string name="save_track_precision">Logging minimum precision</string>
-    <string name="save_track_precision_descr">Set minimum precision for a point to be logged</string>
+    <string name="save_track_precision">Logging minimum accuracy</string>
+    <string name="save_track_precision_descr">Set minimum accuracy for a point to be logged</string>
     <string name="christmas_poi">Christmas POI</string>
     <string name="christmas_desc">Anticipating Christmas and New Year holidays, you can choose to display the POI associated with Christmas: Christmas trees, markets, etc.</string>
     <string name="christmas_desc_q">Show Christmas POI?</string>
@@ -1199,7 +1199,7 @@
     <string name="local_osm_changes_backup">Backup as OSM change</string>
     <string name="delete_point">Delete Point</string>
     <string name="plugin_distance_point_time">time</string>
-    <string name="plugin_distance_point_hdop">precision</string>
+    <string name="plugin_distance_point_hdop">accuracy</string>
     <string name="plugin_distance_point_speed">speed</string>
     <string name="plugin_distance_point_ele">elevation</string>
     <string name="plugin_distance_point">Point</string>

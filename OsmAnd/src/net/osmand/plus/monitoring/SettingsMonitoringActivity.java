@@ -100,7 +100,7 @@ public class SettingsMonitoringActivity extends SettingsBaseActivity {
 		names = new String[floatValues.length];
 		names[0] = getString(R.string.shared_string_not_selected);
 		for(int i = 1; i < floatValues.length; i++) {
-			names[i] = floatValues[i].intValue() + ""; 
+			names[i] = floatValues[i].intValue() + " " + getString(R.string.m) + " (" + Math.round(floatValues[i]/0.3048f) + getString(R.string.foot) + ")";
 		}
 		cat.addPreference(createListPreference(settings.SAVE_TRACK_PRECISION, names, floatValues,  
 				R.string.save_track_precision, R.string.save_track_precision_descr));
