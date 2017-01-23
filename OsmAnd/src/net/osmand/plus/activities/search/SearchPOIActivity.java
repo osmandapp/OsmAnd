@@ -519,9 +519,11 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 			final int index = lv.getFirstVisiblePosition();
 			View v = lv.getChildAt(0);
 			final int top = (v == null) ? 0 : v.getTop();
+			accessibilityAssistant.lockEvents();
 			amenityAdapter.notifyDataSetChanged();
 			lv.setSelectionFromTop(index, top);
 			updateButtonState(false);
+			accessibilityAssistant.unlockEvents();
 			navigationInfo.updateLocation(location);
 		}
 	}
@@ -554,8 +556,8 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 		if (selected != null) {
 			try {
 				int position = getListView().getPositionForView(selected);
-				if (position != AdapterView.INVALID_POSITION) {
-					navigationInfo.updateTargetDirection(amenityAdapter.getItem(position).getLocation(), heading.floatValue());
+				if ((position != AdapterView.INVALID_POSITION) && (position >= getListView().getHeaderViewsCount())) {
+					navigationInfo.updateTargetDirection(amenityAdapter.getItem(position - getListView().getHeaderViewsCount()).getLocation(), heading.floatValue());
 				}
 			} catch (Exception e) {
 				return;
