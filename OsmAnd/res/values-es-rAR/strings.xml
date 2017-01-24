@@ -2595,5 +2595,5 @@ Proporciona un código completo</string>
 Representa el área: %1$s x %2$s</string>
     <string name="quick_action_page_list_descr">Pulsar el botón de acción mostrará la siguiente lista.</string>
     <string name="auto_split_recording_title">División automática de grabaciones en intervalos</string>
-	<string name="auto_split_recording_descr">Iniciar nuevo segmento en intervalos de 6 min, nueva traza en intervalos de 2 h, o nuevo archivo en intervalos largos si la fecha se cambió.</string>
+	<string name="auto_split_recording_descr">Iniciar nuevo segmento en el lapso de 6 min, nueva traza en el lapso de 2 h, o nuevo archivo en el lapso más largo si la fecha se cambió.</string>
     </resources>
