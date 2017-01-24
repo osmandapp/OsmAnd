@@ -569,7 +569,7 @@
     }
   },
   {
-    "testName": "33.E19 to A9",
+    "testName": "31.E19 to A9",
     "startPoint": {
       "latitude": 45.64749648785519,
       "longitude": 35.640286803245544
@@ -583,7 +583,7 @@
     }
   },
   {
-    "testName": "34.Motorway TR South Kent Des Moines Road",
+    "testName": "32.Motorway TR South Kent Des Moines Road",
     "startPoint": {
       "latitude": 45.64518099200965,
       "longitude": 35.668448954820605
@@ -596,6 +596,20 @@
       "222244": "TL|TL|+C",
       "222243": "TL|TL|+C|C|TSLR",
       "222164": "TL|TL|+C|C"
+    }
+  },
+  {
+    "testName": "33.TR B51",
+    "startPoint": {
+      "latitude": 45.643927452535614,
+      "longitude": 35.686421766877146
+    },
+    "endPoint": {
+      "latitude": 45.64018823173377,
+      "longitude": 35.68512357771394
+    },
+    "expectedResults": {
+      "320168795": "C,TL|+TR"
     }
   }
 
