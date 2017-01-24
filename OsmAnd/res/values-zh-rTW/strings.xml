@@ -2774,4 +2774,31 @@ Facebook：https://www.facebook.com/osmandapp
     <string name="quick_action_page_list_descr">輕點動作按鈕會直達下面的清單。</string>
     <string name="auto_split_recording_title">自動分割錄製之後的間隙</string>
 	<string name="auto_split_recording_descr">如果日期已更改，開始新區段在6分鐘後的間隙，新區段在2小時後的間隙，或新檔案在更長的間隙之後。</string>
-    </resources>
+    <string name="release_2_6">"
+ • 新功能：快速動作按鈕
+
+
+ •  改進了觸控式螢幕手勢回應
+
+
+ • 新的地圖字體覆蓋了更多的語言環境
+
+
+ • 區域語言支援 TTS 的變異 
+
+
+ • 在一些地圖樣式和維基百科的清晰度增強
+
+
+ • 支援開放位置代碼 (OLC)
+
+
+ • 顯示基本海拔地質給 GPX 記錄
+
+
+ • 一些其他的改進和錯誤修復
+
+
+ 和更多…
+ "</string>
+	</resources>
