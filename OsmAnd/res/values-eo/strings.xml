@@ -2631,4 +2631,31 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="quick_action_page_list_descr">Frapeto de ag-butono foliumos tra la jena listo.</string>
     <string name="auto_split_recording_title">Aŭtomate dividi registraĵojn post paŭzo</string>
 	<string name="auto_split_recording_descr">Komencas novan segmenton post 6 min paŭzo, novan registraĵon post 2 h, kaj novan dosieron post pli longaj paŭzoj, se dato ŝanĝiĝos.</string>
-    </resources>
+    <string name="release_2_6">"
+ • Nova eblo: butono de rapida ago
+
+
+ • Plibonigita respondeblo de ekrano al gestoj
+
+
+ • Novaj mapaj tiparoj subtenataj pli da lingvoj
+
+
+ •Subteno por dialektoj en parolsintezitaj dialogaj helpoj
+
+
+ • Videblaj plibonigoj en kelkaj mapaj montrmanieroj kaj en Vikipedio
+
+
+ • Subteno por \'Malferma pozicia kodo\' (OLC)
+
+
+ • Montrado de terenaj profiloj por registritaj GPX-suproj
+
+
+ • Kelkaj aliaj plibonigoj kaj erar-riparoj
+
+
+ kaj pli...
+ "</string>
+	</resources>
