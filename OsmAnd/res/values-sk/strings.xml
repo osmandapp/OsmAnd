@@ -2602,4 +2602,31 @@ Zodpovedá oblasti: %1$s x %2$s</string>
 	<string name="shared_string_action_name">Názov akcie</string>
 <string name="auto_split_recording_title">Automaticky prerušiť nahrávku po medzere</string>
 	<string name="auto_split_recording_descr">Začať nový úsek po prestávke 6 minút, novú stopu po prestávke 2 hodín alebo nový súbor po dlhšej prestávke ak sa zmenil dátum.</string>
-    </resources>
+    <string name="release_2_6">"
+ • Nová funkcia: Tlačidlo rýchlej akcie
+
+
+ • Vylepšené reakcie na dotykové gestá
+
+
+ • Nové písma pre mapu, ktoré pokryjú viaceré národné prostredia
+
+
+ • Podpora TTS pre regionálne nárečia
+
+
+ • Zlepšenie viditeľnosti vo viacerých mapových štýloch a Wikipedii
+
+
+ • Podpora pre Otvorený kód polohy (Support Open Location Code - OLC)
+
+
+ • Zobrazenie jednoduchého výškového profilu pre zaznamenané GPX
+
+
+ • Ďalšie vylepšenia a opravy chýb
+
+
+ a dalšie…
+ "</string>
+	</resources>
