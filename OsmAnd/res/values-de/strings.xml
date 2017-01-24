@@ -2688,4 +2688,31 @@ Abgedeckte Fläche: %1$s x %2$s</string>
 	<string name="auto_split_recording_descr">Neues Segment starten nach einer Lücke von 6 Minuten, neuen Track starten nach 2h oder neue Datei bei geändertem Datum.</string>
     <string name="navigate_point_olc">Offener Standortcode (OLC)</string>
     <string name="quick_action_page_list_descr">Durch die untere Liste blättern, wenn die Aktionstaste gedrückt wird.</string>
-    </resources>
+    <string name="release_2_6">"
+ • Neue Funktion: Schnellaktionstaste
+
+
+ • Verbessertes Ansprechen auf Bildschirmgesten
+
+
+ • Neue Kartenschriftarten die mehr Lokalisierungen unterstützen
+
+
+ • Unterstützung von TTS für regionals Sprachdialekte
+
+
+ • Verbesserungen der Sichtbarkeiten bei einigen Kartenstilen und Wikipedia
+
+
+ • Unterstützung des Offenen Standortcodes (OLC)
+
+
+ • Anzeige eines Höhenprofils für aufgezeichnete GPX Tracks
+
+
+ • Verschiedene Verbesserungen und Fehlerbehebungen
+
+
+ und mehr…
+ "</string>
+	</resources>
