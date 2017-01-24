@@ -1080,7 +1080,7 @@ Premtenu por vidi sur la mapo</string>
     <string name="local_osm_changes_backup">Krei sekurkopion kiel OSM-an ŝanĝon</string>
     <string name="delete_point">Forigi punkton</string>
     <string name="plugin_distance_point_time">tempo</string>
-    <string name="plugin_distance_point_hdop">precizeco</string>
+    <string name="plugin_distance_point_hdop">akurateco</string>
     <string name="plugin_distance_point_speed">rapido</string>
     <string name="plugin_distance_point_ele">alto</string>
     <string name="plugin_distance_point">Punkto</string>
@@ -2481,8 +2481,8 @@ Se vi bezonas helpon pri OsmAnd aplikaĵo, bonvolu kontakti nian helpantaron: su
     <string name="save_track_min_speed_descr">Elektu minimuman rapidon por punkto esti registrita</string>
     <string name="save_track_min_distance">Detekto de movado por registrado</string>
     <string name="save_track_min_distance_descr">Elektu minimuman distancon por punkto esti registrita</string>
-    <string name="save_track_precision">Minimuma precizo por registrado</string>
-    <string name="save_track_precision_descr">Elektu minimuman precizon por punkto esti registrita</string>
+    <string name="save_track_precision">Minimuma akurateco de registrado</string>
+    <string name="save_track_precision_descr">Elektu minimuman akuratecon por punkto esti registrita</string>
     <string name="christmas_poi">Kristnaskaj interesejoj</string>
     <string name="christmas_desc">Atendante Kristnaskon kaj la novan jaron, vi povas aktivigi vidigadon de interesejoj rilataj al Kristnasko: kristnaskaj arbetoj, foiroj, ktp.</string>
     <string name="christmas_desc_q">Ĉu montri kristnaskaj interesejoj?</string>
