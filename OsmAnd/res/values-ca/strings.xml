@@ -2468,7 +2468,7 @@ Si aprecieu OsmAnd  i OSM i voleu ajudar-los, és la via perfecta per fer-ho."</
     <string name="save_track_min_distance">Detecció de moviment per l\'enregistrament</string>
     <string name="save_track_min_distance_descr">Establiu el desplaçament mínim que provocarà l\'enregistrament</string>
     <string name="save_track_precision">Precisió mínima de l\'enregistrament</string>
-    <string name="save_track_precision_descr">Trieu la precisió mínima acceptable d\'una posició per enregistrar-la</string>
+    <string name="save_track_precision_descr">Trieu la precisió mínima per enregistrar una fita</string>
     <string name="christmas_poi">PDI Nadal</string>
     <string name="christmas_desc">Per planificar les vacances de Nadal i Any nou, podeu fer visibles els PDI associats amb el Nadal: arbres de Nadal, mercats, etc.</string>
     <string name="christmas_desc_q">Voleu mostrar els PDI de Nadal?</string>
