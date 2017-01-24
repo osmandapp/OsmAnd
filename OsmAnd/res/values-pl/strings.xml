@@ -1140,7 +1140,7 @@ Niektóre z podstawowych funkcji:
     <string name="wait_current_task_finished">Proszę zaczekać, aż bieżące zadanie zostanie zakończone</string>
     <string name="shared_string_downloading">Pobieranie</string>
     <string name="plugin_distance_point_time">czas</string>
-    <string name="plugin_distance_point_hdop">precyzja</string>
+    <string name="plugin_distance_point_hdop">dokładność</string>
     <string name="plugin_distance_point_speed">prędkość</string>
     <string name="plugin_distance_point_ele">wysokość</string>
     <string name="plugin_distance_point">Punkt</string>
@@ -2668,8 +2668,8 @@ Jeśli potrzebujesz pomocy podczas używania OsmAnd, prosimy o kontakt z naszym 
     <string name="save_track_min_speed">Minimalna prędkość rejestrowania</string>
     <string name="save_track_min_distance">Wykrywanie ruchu podczas rejestracji</string>
     <string name="save_track_min_distance_descr">Rejestruje położenie po oddaleniu na określoną odległość od ostatniego położenia</string>
-    <string name="save_track_precision">Minimalna precyzja rejestrowania</string>
-    <string name="save_track_precision_descr">Rejestruje położenie po osiągnięciu zadanej precyzji</string>
+    <string name="save_track_precision">Minimalna dokładność rejestrowania</string>
+    <string name="save_track_precision_descr">Rejestruje położenie po osiągnięciu zadanej dokładności</string>
     <string name="christmas_desc">Oczekując Świąt Bożego Narodzenia i Nowego Roku, możesz włączyć wyświetlanie użytecznych miejsc związanych ze Świętami: choinki, jarmarki, itp.</string>
     <string name="christmas_desc_q">Wyświetlać świąteczne miejsca?</string>
     <string name="shared_string_continue">Kontynuuj</string>
