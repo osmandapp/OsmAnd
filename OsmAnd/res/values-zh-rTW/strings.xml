@@ -2619,8 +2619,8 @@ Facebook：https://www.facebook.com/osmandapp
     <string name="save_track_min_speed_descr">設定最低速度的一個點用以記錄</string>
     <string name="save_track_min_distance">記錄移動檢測</string>
     <string name="save_track_min_distance_descr">從最後位置的一個點設定最短距離用以記錄</string>
-    <string name="save_track_precision">記錄最低的精確度</string>
-    <string name="save_track_precision_descr">設定最低精確度的一個點用以記錄</string>
+    <string name="save_track_precision">記錄最小的精確度</string>
+    <string name="save_track_precision_descr">設定最小精確度的一個點用以記錄</string>
     <string name="christmas_poi">聖誕節 POI</string>
     <string name="christmas_desc_q">顯示聖誕節 POI？</string>
     <string name="rendering_value_light_brown_name">淺棕色</string>
