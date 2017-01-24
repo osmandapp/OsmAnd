@@ -2682,7 +2682,7 @@ Hvis du  ønsker at støtte OsmAnd og OSM, er dette en god måde at gøre det p�
     <string name="save_track_min_distance">Logning ved detektering af bevægelse</string>
     <string name="save_track_min_distance_descr">Indstil minimumsafstand fra sidste position før et punkt logges</string>
     <string name="save_track_precision">Mindste nøjagtighed for logning</string>
-    <string name="save_track_precision_descr">Indstil minimum præcision før et punkt logges</string>
+    <string name="save_track_precision_descr">Indstil minimum nøjagtighed før et punkt logges</string>
     <string name="rendering_attr_contourColorScheme_description">Farveskema for højdekurver</string>
     <string name="shared_string_continue">Fortsæt</string>
     <string name="shared_string_pause">Pause</string>
