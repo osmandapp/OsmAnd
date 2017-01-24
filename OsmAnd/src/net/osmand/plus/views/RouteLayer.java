@@ -97,6 +97,7 @@ public class RouteLayer extends OsmandMapLayer {
 		if (helper.getFinalLocation() != null && helper.getRoute().isCalculated()) {
 			boolean updatePaints = attrs.updatePaints(view, settings, tileBox);
 			attrs.isPaint3 = false;
+			attrs.isPaint2 = false;
 			if(updatePaints) {
 				paintIconAction.setColorFilter(new PorterDuffColorFilter(attrs.paint3.getColor(), Mode.MULTIPLY));
 				paintIcon.setColorFilter(new PorterDuffColorFilter(attrs.paint2.getColor(), Mode.MULTIPLY));
