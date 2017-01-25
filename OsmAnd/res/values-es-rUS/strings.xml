@@ -2570,8 +2570,8 @@ Si amas a OsmAnd, OSM y quieres apoyarlos, esta es una perfecta manera de hacerl
     <string name="quick_action_map_style_action">Añadir un estilo de mapa</string>
     <string name="quick_action_empty_param_error">Los parámetros no deben estar vacíos</string>
     <string name="quick_action_map_styles">Estilos de mapa</string>
-    <string name="quick_action_map_overlay">Cambiar superposición de mapa</string>
-    <string name="quick_action_map_overlay_title">Superposiciones de mapa</string>
+    <string name="quick_action_map_overlay">Cambiar mapa superpuesto</string>
+    <string name="quick_action_map_overlay_title">Mapas superpuestos</string>
     <string name="quick_action_map_overlay_action">Añadir superposición</string>
     <string name="quick_action_map_underlay">Cambiar mapa subyacente</string>
     <string name="quick_action_map_underlay_title">Mapas subyacentes</string>
