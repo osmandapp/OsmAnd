@@ -3368,4 +3368,7 @@
 
 <string name="poi_coworking_space">Centrum coworkingowe</string>
 
-</resources>
+<string name="poi_memorial_jizo">Jizo</string>
+	<string name="poi_memorial_prasat">Prasat</string>
+	<string name="poi_cuisine_deli">Delikatesy</string>
+	</resources>
