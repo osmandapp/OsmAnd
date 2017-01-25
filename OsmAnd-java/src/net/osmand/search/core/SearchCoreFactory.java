@@ -557,7 +557,7 @@ public class SearchCoreFactory {
 						List<PoiType> additionals = pt.getPoiAdditionals();
 						if (additionals != null) {
 							for (PoiType a : additionals) {
-								if (!a.isReference() && !results.contains(a) && (nm.matches(a.getKeyName()) || nm.matches(a.getTranslation()))) {
+								if (!a.isReference() && !results.contains(a) && (nm.matches(a.getKeyName().replace('_', ' ')) || nm.matches(a.getTranslation()))) {
 									results.add(a);
 								}
 							}
