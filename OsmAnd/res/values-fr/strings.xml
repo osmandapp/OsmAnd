@@ -2576,5 +2576,5 @@ Merci d\'indiquer un code long</string>
 représentant la zone : %1$s x %2$s</string>
     <string name="auto_split_recording_title">Découper automatiquement les enregistrements</string>
 	<string name="auto_split_recording_descr">Débuter un nouveau segment après une interruption de 6 min, une nouvelle trace après 2 h ou un nouveau fichier si l\'interruption est plus longue.</string>
-    <string name="quick_action_page_list_descr">Appuyer sur le bouton d\'action pour parcourir la liste ci-dessous.</string>
+    <string name="quick_action_page_list_descr">Appuyez sur le bouton d\'action pour faire défiler la liste ci-dessous.</string>
     </resources>
