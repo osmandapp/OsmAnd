@@ -621,7 +621,7 @@ Vektorske zemljevide je mogoče pridobiti preko spletnih virov, ali pa jih shran
     <string name="accessibility_preferences_descr">Z dostopnostjo povezane možnosti</string>
     <string name="shared_string_accessibility">Dostopnost</string>
     <string name="rendering_out_of_memory">Ni dovolj pomnilnika za prikaz izbranega področja</string>
-    <string name="use_fluorescent_overlays">Fluorescentno prekrivanje</string>
+    <string name="use_fluorescent_overlays">Fluorescentne prekrivne plasti</string>
     <string name="use_fluorescent_overlays_descr">Uporabi fluorescentne barve za prikaz poti</string>
     <string name="offline_edition">Krajevno urejanje</string>
     <string name="offline_edition_descr">Vedno uporabi krajevno urejanje</string>
@@ -669,7 +669,7 @@ Vektorske zemljevide je mogoče pridobiti preko spletnih virov, ali pa jih shran
     <string name="auto_follow_route_navigation_descr">Zemljevid se samodejno središči le med navigacijo.</string>
     <string name="auto_follow_location_enabled">Trenutna točka je med navigacijo samodejno postavljena v središče.</string>
     <string name="pref_vector_rendering">Možnosti vektorskega izrisovanja</string>
-    <string name="pref_overlay">Prekrivni zemljevid/Zemljevid za podlogo</string>
+    <string name="pref_overlay">Prekrivni plast/Podloga zemljevida</string>
     <string name="pref_raster_map">Nastavitve vira zemljevidov</string>
     <string name="pref_vector_map">Nastavitve vektorskega zemljevida</string>
     <string name="delete_confirmation_msg">Ali želite izbrisati %1$s?</string>
@@ -719,13 +719,13 @@ Vektorske zemljevide je mogoče pridobiti preko spletnih virov, ali pa jih shran
     <string name="voice_stream_notification">Zvok obvestila</string>
     <string name="voice_stream_music">Zvok glasbe</string>
     <string name="warning_tile_layer_not_downloadable">Program ne more prejeti podatkovnega sloja zemljevida %1$s. Poskusite ga ponovno namestiti.</string>
-    <string name="overlay_transparency_descr">Spremeni prozornost prekrivnih slojev</string>
-    <string name="overlay_transparency">Prozornost prekrivnih slojev</string>
+    <string name="overlay_transparency_descr">Spremeni prozornost prekrivnih plasti</string>
+    <string name="overlay_transparency">Prozornost prekrivnih plasti</string>
     <string name="map_transparency_descr">Spremeni prozornost osnovnega zemljevida</string>
     <string name="map_transparency">Prozornost osnovnega zemljevida</string>
-    <string name="layer_underlay">Zemljevid za podlogo …</string>
-    <string name="map_underlay">Zemljevid za podlogo</string>
-    <string name="map_underlay_descr">Izbor zemljevida za podlago</string>
+    <string name="layer_underlay">Podloga zemljevida …</string>
+    <string name="map_underlay">Podloga zemljevida</string>
+    <string name="map_underlay_descr">Izbor podloge zemljevida</string>
     <string name="layer_overlay">Prekrivni zemljevid …</string>
     <string name="shared_string_none">Brez</string>
     <string name="map_overlay">Prekrivni zemljevid</string>
@@ -2723,9 +2723,9 @@ V kolikor naletite na težave s programom OsmAnd, prosimo, stopite v stik s skup
     <string name="quick_action_map_styles">Slogi zemljevida</string>
     <string name="quick_action_map_overlay_title">Prekrivne plasti zemljevida</string>
     <string name="quick_action_map_overlay_action">Dodaj prekrivno plast</string>
-    <string name="quick_action_map_underlay">Spremeni prekrivno plast zemljevida</string>
-    <string name="quick_action_map_underlay_title">Prekrivne plasti zemljevida</string>
-    <string name="quick_action_map_underlay_action">Dodaj prekrivno plast</string>
+    <string name="quick_action_map_underlay">Spremeni podlogo zemljevida</string>
+    <string name="quick_action_map_underlay_title">Podloge zemljevida</string>
+    <string name="quick_action_map_underlay_action">Dodaj podlogo zemljevida</string>
     <string name="quick_action_map_source">Spremeni vir zemljevida</string>
     <string name="quick_action_map_source_title">Viri zemljevida</string>
     <string name="quick_action_map_source_action">Dodaj vir zemljevida</string>
@@ -2741,4 +2741,10 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="quick_action_navigation_voice">Glasovno vodenje</string>
     <string name="quick_action_navigation_voice_off">Glasovno vodenje je onemogočeno.</string>
     <string name="quick_action_navigation_voice_on">Glasovno vodenje je omogočeno.</string>
+    <string name="quick_favorites_show_favorites_dialog">Pokaži pogovorno okno priljubljenih točk</string>
+    <string name="quick_favorites_name_preset">Shranjena imena</string>
+    <string name="quick_action_duplicate">Podvojeno ime hitrega dejanja</string>
+    <string name="quick_action_map_overlay">Spremeni prekrivno plast zemljevida</string>
+    <string name="quick_action_map_overlay_switch">Prekrivna plast je spremenjena na »%s«.</string>
+    <string name="quick_action_map_underlay_switch">Podloga zemljevida je spremenjena na »%s«.</string>
     </resources>
