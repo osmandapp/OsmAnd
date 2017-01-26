@@ -2461,4 +2461,13 @@ med mera…
     <string name="quick_action_add_configure_map">Konfigurera kartan</string>
     <string name="quick_action_add_navigation">Navigering</string>
     <string name="quick_action_bug_message">Meddelande</string>
+    <string name="quick_action_btn_tutorial_title">Ändra knapplacering</string>
+    <string name="quick_action_map_source_switch">Kartkällan har ändrats till \"%s\".</string>
+    <string name="quick_action_map_source_action">Lägg till kartkälla</string>
+    <string name="quick_action_map_source_title">Kartkällor</string>
+    <string name="quick_action_map_source">Ändra kartkälla</string>
+    <string name="quick_action_map_underlay_action">Lägg till underlägg</string>
+    <string name="quick_action_map_underlay_title">Kartunderlägg</string>
+    <string name="quick_action_map_underlay">Ändra kartunderlägg</string>
+    <string name="quick_action_map_underlay_switch">Kartunderlägget har ändrats till \"%s\".</string>
     </resources>
