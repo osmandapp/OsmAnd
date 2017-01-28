@@ -2756,4 +2756,31 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="auto_split_recording_title">Iscroba automaticamente sas registratziones</string>
 	<string name="auto_split_recording_descr">Incumintza unu segmentu nou a pustis de una pàusa de 6 minutos, una rasta noa a pustis de 2 oras o unu documentu nou si sa pàusa est istada prus longa e sa data est cambiada.</string>
     <string name="quick_action_page_list_descr">Incarchende su butone pro s\'atzione as a cùrrere pro sa lista in suta.</string>
-    </resources>
+    <string name="release_2_6">"
+ • Funtzionalidae noa: Butone pro sas atziones lestras
+
+
+ • Megioramentu de sa risposta de s\'ichermu a sos incarcos
+
+
+ • Caràteres noos pro sa mapa, chi ant a permìtere de tènnere prus limbas
+
+
+ • Suportu TTS pro variantes regionales de sas limbas
+
+
+ • Megioramentos a sa visibilidade pro meda istiles de sa mapa e pro wikipedia
+
+
+ • Suportu pro su \"Còdighe Abertu pro sa Positzione\" (Open Location Code  - OLC)
+
+
+ • Visualizatzione basilare pro sos profilos de s\'artària pro sas rastas GPX regitradas
+
+
+ • Meda àteros megioramentos e curretziones de errores
+
+
+ e àteru…
+ "</string>
+	</resources>
