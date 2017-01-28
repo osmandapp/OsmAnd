@@ -2325,4 +2325,185 @@
 	<string name="poi_ramp_wheelchair_yes">Rampa ratiņkrēslā sēdošiem: ir</string>
 	<string name="poi_ramp_wheelchair_no">Rampa ratiņkrēslā sēdošiem: nav</string>
 	<string name="poi_step_count">Pakāpienu skaits</string>
+	<string name="poi_cairn">Akmens piramīda</string>
+
+	<string name="poi_defibrillator">Defibrilators</string>
+	<string name="poi_defibrillator_yes">Defibrilators: ir</string>
+
+	<string name="poi_tomb_war_grave">Brāļu kapi</string>
+	<string name="poi_tomb_tumulus">Tips: kapukalns</string>
+	<string name="poi_tomb_hypogeum">Tips: hipogeum</string>
+	<string name="poi_tomb_vault">Tips: velve</string>
+	<string name="poi_tomb_columbarium">Tips: kolumbārijs</string>
+	<string name="poi_tomb_mausoleum">Tips: mauzolejs</string>
+	<string name="poi_tomb_sarcophagus">Tips: sarkofāgs</string>
+	<string name="poi_tomb_crypt">Tips: kapenes</string>
+	<string name="poi_tomb_pyramid">Tips: piramīda</string>
+
+	<string name="poi_animal_training_dog">Suņi</string>
+	<string name="poi_animal_training_horse">Zirgi</string>
+
+	<string name="poi_horse_yes">Zirgi jā</string>
+	<string name="poi_horse_no">Zirgi nē</string>
+	<string name="poi_animal_yes">Dzīvnieki atļauti</string>
+	<string name="poi_animal_no">Dzīvnieki aizliegti</string>
+
+	<string name="poi_material_wood">Materiāls: koks</string>
+	<string name="poi_material_metal">Materiāls: metāls</string>
+	<string name="poi_material_reinforced_concrete">Materiāls: dzelzsbetons</string>
+	<string name="poi_material_concrete">Materiāls: betons</string>
+	<string name="poi_material_steel">Materiāls: metāls</string>
+	<string name="poi_material_stone">Materiāls: akmens</string>
+	<string name="poi_material_masonry">Materiāls: mūris</string>
+	<string name="poi_material_brick">Materiāls: ķieģelis</string>
+	<string name="poi_material_plastic">Materiāls: plastika</string>
+	<string name="poi_material_sandstone">Materiāls: smilšakmens</string>
+	<string name="poi_material_granite_stone">Materiāls: granīts</string>
+	<string name="poi_material_metal_wood">Materiāls: metāls; koks</string>
+	<string name="poi_material_glass">Materiāls: stikls</string>
+	<string name="poi_material_bronze">Materiāls: bronza</string>
+	<string name="poi_material_earth">Materiāls: zeme</string>
+	<string name="poi_material_composite">Materiāls: kompozīts</string>
+	<string name="poi_material_limestone">Materiāls: kaļķakmens</string>
+	<string name="poi_material_marble">Materiāls: marmors</string>
+	<string name="poi_material_aluminium">Materiāls: alumīnijs</string>
+
+	<string name="poi_site_type_megalith">Megalīts</string>
+	<string name="poi_site_type_tumulus">Kapukalns</string>
+	<string name="poi_site_type_fortification">Nocietinājumi</string>
+	<string name="poi_site_type_settlement">Apmetne</string>
+	<string name="poi_site_type_city">Pilsēta</string>
+	<string name="poi_site_type_hut_circle">Apļveida akmens krāvums (arheoloģisks)</string>
+	<string name="poi_site_type_necropolis">Nekropole</string>
+	<string name="poi_site_type_petroglyph">Petroglifs</string>
+	<string name="poi_site_type_earthwork">Zemes darbi</string>
+	<string name="poi_historic_farm">Senatnīga ferma</string>
+	<string name="poi_historic_railway_station">Senatnīga dzelzceļa stacija</string>
+
+	<string name="poi_historic_threshing_floor">Senatnīga hreshing floor</string>
+	<string name="poi_historic_gallows">Senatnīgas karātavas</string>
+	<string name="poi_historic_railway">Senatnīgs dzelzceļš</string>
+
+	<string name="poi_square">Skvērs</string>
+	<string name="poi_artist_name">Mākslinieks</string>
+	<string name="poi_sculptor">Skulptūra</string>
+
+	<string name="poi_building_type_church">Celtnes tips: baznīca</string>
+	<string name="poi_building_type_chapel">Celtnes tips: kapella</string>
+	<string name="poi_building_type_mosque">Celtnes tips: mošeja</string>
+	<string name="poi_building_type_temple">Celtnes tips: templis</string>
+	<string name="poi_building_type_cathedral">Celtnes tips: katedrāle</string>
+	<string name="poi_building_type_monastery">Celtnes tips: klosteris</string>
+	<string name="poi_building_type_basilica">Celtnes tips: bazilika</string>
+	<string name="poi_building_type_synagogue">Celtnes tips: sinagoga</string>
+	<string name="poi_building_type_shrine">Celtnes tips: svētnīca</string>
+
+	<string name="poi_cross">Krusts</string>
+	<string name="poi_summit_cross">Samita krusts: jā</string>
+
+	<string name="poi_prison_camp">Bijušā ieslodzīto nometne</string>
+	<string name="poi_concentration_camp">Tips: koncentrācijas nometne</string>
+	<string name="poi_pow_camp">Tips: karanoziedznieku nometne</string>
+	<string name="poi_labor_camp">Tips: labošanas darbu nometne</string>
+	<string name="poi_concentration_camp_nazism">Tips: nazi</string>
+	<string name="poi_concentration_camp_gulag">Tips: gulags</string>
+
+	<string name="poi_temperature">Temperatūra</string>
+	<string name="poi_cargo_passengers">Pasažieri</string>
+	<string name="poi_cargo_vehicle">Automašīnas</string>
+	<string name="poi_cargo_bicycle">Velosipēdi</string>
+	<string name="poi_cargo_container">Konteineri</string>
+	<string name="poi_cargo_hgv">Fūres</string>
+
+	<string name="poi_fitness_station">Fitnesa centrs</string>
+
+	<string name="poi_hackerspace">Hakervieta</string>
+
+
+	<string name="poi_craft_electronics">Elektronikas remonts</string>
+	<string name="poi_fireworks">Uguņošanas piederumu veikals</string>
+
+	<string name="poi_aerialway_length">Garums</string>
+
+	<string name="poi_health_specialty_general_yes">Ģimenes ārsts</string>
+	<string name="poi_health_specialty_ophthalmology_yes">Oftalmoloģija</string>
+	<string name="poi_health_specialty_gynaecology_yes">Ginekoloģija</string>
+	<string name="poi_health_specialty_internal_medicine_yes">Iekšķīgās slimības</string>
+	<string name="poi_health_specialty_orthopaedics_yes">Ortopēdija</string>
+	<string name="poi_health_specialty_otolaryngology_yes">Otolaringoloģija (LOR)</string>
+	<string name="poi_health_specialty_paediatrics_yes">Pediatrija</string>
+	<string name="poi_health_specialty_paediatrics_no">Specialitāte: pediatri: nē</string>
+	<string name="poi_health_specialty_dermatology_yes">Dermatoloģija</string>
+	<string name="poi_health_specialty_urology_yes">Uruloģija</string>
+	<string name="poi_health_specialty_surgery_yes">Vispārējā ķirurģija</string>
+	<string name="poi_health_specialty_radiology_yes">Radioloģija</string>
+	<string name="poi_health_specialty_psychiatry_yes">Psihiatrija</string>
+	<string name="poi_health_specialty_neurology_yes">Neiroloģija</string>
+	<string name="poi_health_specialty_dermatovenereology_yes">Dermatoveneroloģija</string>
+	<string name="poi_health_specialty_cardiology_yes">Kardioloģija</string>
+	<string name="poi_health_specialty_trauma_yes">Traumatoloģija</string>
+	<string name="poi_health_specialty_biology_yes">Laborotoriskie izmeklējumi</string>
+	<string name="poi_health_specialty_osteopathy_yes">Osteopātija</string>
+	<string name="poi_health_specialty_anaesthetics_yes">Anastezioloģija</string>
+	<string name="poi_health_specialty_pulmonology_yes">Elpošanas ceļu saslimšanas</string>
+	<string name="poi_health_specialty_dental_oral_maxillo_facial_surgery_yes">Zobu, sejas, orālā ķirurģija</string>
+	<string name="poi_health_specialty_maternity_yes">Dzemdību nams</string>
+	<string name="poi_health_specialty_emergency_medicine_yes">Neatliekamā medicīniskā palīdzība</string>
+	<string name="poi_health_specialty_emergency_medicine_no">Specialitāte: neatliekamā medicīniskā palīdzība: nav</string>
+	<string name="poi_health_specialty_plastic_surgery_yes">Plastiskā ķirurģija</string>
+	<string name="poi_health_specialty_orthodontics_yes">Ortodontija</string>
+	<string name="poi_health_specialty_physiotherapy_yes">Fizioterapija</string>
+	<string name="poi_health_specialty_biochemistry_yes">Bioķīmija</string>
+	<string name="poi_health_specialty_occupational_yes">Profesionālās saslimšanas</string>
+	<string name="poi_health_specialty_child_psychiatry_yes">Bērnu psihiatrija</string>
+	<string name="poi_health_specialty_physiatry_yes">Rehabilitācija</string>
+	<string name="poi_health_specialty_maxillofacial_surgery_yes">Sejas ķirurģija</string>
+	<string name="poi_health_specialty_diagnostic_radiology_yes">Diagnosticējošā radioloģija</string>
+	<string name="poi_health_specialty_gastroenterology_yes">Gastroenteroloģija</string>
+	<string name="poi_health_specialty_dentistry_yes">Zobārstniecība</string>
+	<string name="poi_health_specialty_nephrology_yes">Nefroloģija</string>
+	<string name="poi_health_specialty_neurosurgery_yes">Neiroķirurģija</string>
+	<string name="poi_health_specialty_neuropsychiatry_yes">Neiropsihiatrija</string>
+	<string name="poi_health_specialty_endocrinology_yes">Endokrinoloģija</string>
+	<string name="poi_health_specialty_nuclear_medicine_yes">Kodolmedicīna</string>
+	<string name="poi_health_specialty_pathology_yes">Patoloģiskā anatomija</string>
+	<string name="poi_health_specialty_oncology_yes">Onkoloģija</string>
+	<string name="poi_health_specialty_tropical_medicine_yes">Tropiskā medicīna</string>
+	<string name="poi_health_specialty_tropical_medicine_no">Specialitāte: tropiskā medicīna: nav</string>
+	<string name="poi_health_specialty_obstetrics_postnatal_yes">Dzemdniecība</string>
+	<string name="poi_health_specialty_obstetrics_postnatal_no">Specialitāte: dzemdniecība: nav</string>
+	<string name="poi_health_specialty_social_paediatrics_yes">Sociālā pediatrija</string>
+	<string name="poi_health_specialty_social_paediatrics_no">Specialitāte: sociālā pediatrija: nav</string>
+	<string name="poi_health_specialty_addiction_medicine_yes">Narkoloģija</string>
+	<string name="poi_health_specialty_optometry_yes">Optometrija</string>
+	<string name="poi_health_specialty_clinical_pathology_yes">Klīniskā pataloģija</string>
+	<string name="poi_health_specialty_speech_therapy_yes">Logopēdija</string>
+	<string name="poi_health_specialty_manual_therapy_yes">Manuālā terapija</string>
+	<string name="poi_health_specialty_sports_medicine_yes">Sporta medicīna</string>
+	<string name="poi_health_specialty_podology_yes">Podoloģija</string>
+	<string name="poi_health_specialty_adult_psychiatry_yes">Pieaugušo psihiatrija</string>
+	<string name="poi_health_specialty_acupuncture_yes">Akupunktūra</string>
+	<string name="poi_health_specialty_homeopathy_yes">Homeopātija</string>
+	<string name="poi_health_specialty_traditional_chinese_medicine_yes">Tradicionālā ķīnas medicīna</string>
+	<string name="poi_health_specialty_reiki_yes">Reiku</string>
+	<string name="poi_health_specialty_herbalism_yes">Herbālisms</string>
+	<string name="poi_health_specialty_chiropractic_yes">Hiropraktika</string>
+	<string name="poi_health_specialty_naturopathy_yes">Naturopātija</string>
+	<string name="poi_health_specialty_depth_psychology_yes">Dziļā psiholoģija</string>
+	<string name="poi_health_specialty_behavior_yes">Uzvedības psihoterapija</string>
+	<string name="poi_health_specialty_palliative_medicine_yes">Specialitāte: paliatīvā medicīna</string>
+
+	<string name="poi_building_type_pyramid">Celtnes tips: piramīda</string>
+
+	<string name="poi_fitness_centre">Fitnesa centrs</string>
+	<string name="poi_fitness">Fitness</string>
+
+	<string name="poi_billiards">Biljards</string>
+
+	<string name="poi_microwave_oven_yes">Mikroviļņu krāsns: ir</string>
+	<string name="poi_microwave_oven_no">Mikroviļņu krāsns: nav</string>
+	<string name="poi_water_heater_yes">Ūdenssildītājs: ir</string>
+	<string name="poi_water_heater_no">Ūdenssildītājs: nav</string>
+
+	<string name="poi_parking_garage_boxes">Garāžas</string>
 	</resources>
