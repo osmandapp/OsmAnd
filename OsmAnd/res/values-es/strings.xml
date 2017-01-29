@@ -2572,4 +2572,23 @@ El espacio de almacenamiento usado es {3} MB temporalmente y {1} MB permanenteme
     <string name="quick_action_btn_tutorial_title">Cambiar la posición del botón</string>
     <string name="quick_action_btn_tutorial_descr">Pulsación larga y arrastrar el botón para cambiar su posición en la pantalla</string>
 	<string name="shared_string_action_name">Nombre de acción</string>
-</resources>
+<string name="release_2_6">"
+ • Nueva función: Botón de acción rápida
+
+ • Mejorada la respuesta de gestos táctiles
+
+ • El tipo de letra del nuevo mapa abarca más regiones
+
+ • Soporte TTS para idiomas regionales
+
+ • Mejorada la visibilidad en varios estilos de mapas y Wikipedia
+
+ • Soporte para «Código abierto de ubicación» (Open Location Code)
+
+ • Visualización básica de la elevación para los GPX grabados
+
+ • Varias otras mejoras y corrección de errores
+
+ y más…
+ "</string>
+	</resources>
