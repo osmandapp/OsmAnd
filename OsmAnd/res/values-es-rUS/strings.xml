@@ -2583,7 +2583,7 @@ Si amas a OsmAnd, OSM y quieres apoyarlos, esta es una perfecta manera de hacerl
     <string name="quick_action_btn_tutorial_title">Cambiar ubicación del botón</string>
     <string name="quick_action_btn_tutorial_descr">Mantener pulsado y arrastrar el botón para mover la ubicación en la pantalla</string>
 <string name="quick_action_interim_dialog">Mostrar un diálogo temporal</string>
-    <string name="navigate_point_olc">Código Abierto de Ubicación (OLC)</string>
+    <string name="navigate_point_olc">Código abierto de ubicación (OLC)</string>
     <string name="navigate_point_olc_info_invalid">OLC inválido
 </string>
     <string name="navigate_point_olc_info_short">OLC corto
@@ -2606,7 +2606,7 @@ Representa el área: %1$s x %2$s</string>
 
  • Mejorada la visibilidad en varios estilos de mapas y Wikipedia
 
- • Soporte para Open Location Code (OLC)
+ • Soporte para «Código abierto de ubicación» (Open Location Code)
 
  • Visualización básica de la elevación para los GPX grabados
 
