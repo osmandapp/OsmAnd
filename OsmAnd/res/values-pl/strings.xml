@@ -2821,6 +2821,27 @@ Reprezentuje obszar: %1$s x %2$s</string>
  • Nowa funkcja: przycisk szybkiej akcji
 
 
- • Poprawiono responsywność
+ • Poprawiono odpowiedź na gesty ekranu dotykowego
+
+
+ • Nowe kroje pisma wspierające więcej języków
+
+
+ • Wsparcie dla dialektów w generowaniu mowy
+
+
+ • Ulepszenia wizualne w kilku stylach map i w Wikipedii
+
+
+ • Wsparcie dla \'Otwartych kodów lokalizacyjnych\' (OLC)
+
+
+ • Wyświetlanie profilu terenu dla nagranych śladów GPX
+
+
+ • Mnóstwo innych ulepszeń i poprawek
+
+
+ i więcej...
  "</string>
 	</resources>
