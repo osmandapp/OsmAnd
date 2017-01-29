@@ -2817,4 +2817,10 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="quick_action_page_list_descr">Naciśnięcie przycisku czynności wyświetli poniższą listę.</string>
     <string name="auto_split_recording_title">Automatyczne dzielenie nagrań po przerwie</string>
 	<string name="auto_split_recording_descr">Rozpoczyna nowy segment po 6 min przerwy, nową trasę po 2 h i nowy plik po dłuższej przerwie, jeżeli data ulegnie zmianie</string>
-    </resources>
+    <string name="release_2_6">"
+ • Nowa funkcja: przycisk szybkiej akcji
+
+
+ • Poprawiono responsywność
+ "</string>
+	</resources>
