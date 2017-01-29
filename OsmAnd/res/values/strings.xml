@@ -9,6 +9,17 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+	<string name="release_2_6">
+	\u2022 New feature: Quick action button\n\n
+	\u2022 Improved touch screen gesture response\n\n
+	\u2022 New map fonts covering more locales\n\n
+	\u2022 Support TTS for regional language variants\n\n
+	\u2022 Visibility enhancements in several map styles and wikipedia\n\n
+	\u2022 Support Open Location Code (OLC)\n\n
+	\u2022 Display basic elevation profile for recorded GPX\n\n
+	\u2022 Several other improvements and bug fixes\n\n
+	and more…
+	</string>
 	<string name="auto_split_recording_title">Auto-split recordings after gap</string>
 	<string name="auto_split_recording_descr">Start new segment after gap of 6 min, new track after gap of 2 h, or new file after longer gap if date has changed.</string>
     <string name="rendering_attr_contourDensity_description">Contour lines density</string>
