@@ -2185,4 +2185,73 @@
 Пожалуйста, введите полный код</string>
     <string name="navigate_point_olc_info_area">Корректный полный OLC
 Описывает область: %1$s x %2$s</string>
+    <string name="auto_split_recording_descr">Начать новый сегмент после 6 минутного перерыва, новый трек после 2 часового перерыва, или новый файл после длительного перерыва (если изменилась дата).</string>
+    <string name="auto_split_recording_title">Авто-разрыв записи после перерыва</string>
+	<string name="lang_zh_hk">Китайский (Гонконг)</string>
+    <string name="configure_screen_quick_action">Быстрое действие</string>
+
+    <string name="quick_action_item_action">Действие %d</string>
+    <string name="quick_action_add_marker">Добавить маркер</string>
+    <string name="quick_action_add_poi">Добавить POI</string>
+    <string name="quick_action_map_style">Изменить стиль карты</string>
+    <string name="quick_action_map_style_switch">Стиль карты был изменен на \"%s\".</string>
+    <string name="quick_action_add_gpx">Добавить точку GPX</string>
+    <string name="quick_action_add_parking">Добавить место парковки</string>
+    <string name="quick_action_new_action">Добавить действие</string>
+    <string name="quick_action_edit_action">Редактировать действие</string>
+    <string name="quick_action_add_favorite">Добавить в избранные</string>
+    <string name="dialog_add_action_title">Добавить действие</string>
+    <string name="quick_actions_delete">Удалить действие</string>
+    <string name="quick_actions_delete_text">Вы уверены, что хотите удалить действие \"%s\"?</string>
+    <string name="quick_action_showhide_favorites_title">Показать/скрыть избранные</string>
+    <string name="quick_action_favorites_show">Показать избранные</string>
+    <string name="quick_action_favorites_hide">Скрыть избранные</string>
+    <string name="quick_action_showhide_poi_title">Показать/скрыть POI</string>
+    <string name="quick_action_poi_show">Показать %1$s</string>
+    <string name="quick_action_poi_hide">Скрыть %1$s</string>
+    <string name="quick_action_add_configure_map">Настройка карты</string>
+    <string name="quick_action_add_navigation">Навигация</string>
+    <string name="quick_action_bug_message">Сообщение</string>
+    <string name="quick_action_category_descr">Выберите категорию, чтобы сохранить в избранные</string>
+    <string name="quick_action_poi_list">Список POI</string>
+    <string name="quick_action_map_style_action">Добавить стиль карты</string>
+    <string name="quick_action_map_styles">Стили карты</string>
+    <string name="quick_action_map_overlay">Изменить карту покрытия</string>
+    <string name="quick_action_map_overlay_title">Покрытия карт</string>
+    <string name="quick_action_map_overlay_action">Добавить покрытие</string>
+    <string name="quick_action_map_overlay_switch">Карта покрытия была изменена на \"%s\".</string>
+    <string name="quick_action_map_underlay_switch">Карта подложки была изменена на \"%s\".</string>
+    <string name="quick_action_map_underlay">Изменить карту подложки</string>
+    <string name="quick_action_map_underlay_title">Подложки карт</string>
+    <string name="quick_action_map_underlay_action">Добавить подложку</string>
+    <string name="quick_action_map_source">Изменить источник карты</string>
+    <string name="quick_action_map_source_title">Источники карт</string>
+    <string name="quick_action_map_source_action">Добавить источник карты</string>
+    <string name="quick_action_map_source_switch">Источник карты был изменен на \"%s\".</string>
+    <string name="quick_action_btn_tutorial_title">Изменить положение кнопки</string>
+    <string name="quick_action_btn_tutorial_descr">Долгое нажатие и переместите кнопку, чтобы изменить её положение на экране</string>
+	<string name="shared_string_action_name">Название действия</string>
+<string name="release_2_6">"
+ • Новая функция: кнопка быстрого действия
+ 
+• Улучшенный ответ на жесты сенсорного экрана
+
+• Новый шрифт карты охватывающий больше языков 
+
+• Поддержка TTS для вариантов региональных языков
+
+• Улучшение видимости в нескольких стилях карт и Википедии 
+
+• Поддержка Open Location Code (OLC) 
+
+• Отображение основного высотного профиля для записанного GPX 
+
+• Несколько других улучшений и исправлений ошибок
+
+и многое другое…
+ "</string>
+	<string name="lang_sr_latn">Сербский (латиница)</string>
+    <string name="quick_action_navigation_voice">Голос вкл/выкл</string>
+    <string name="quick_action_navigation_voice_off">Голос выключен</string>
+    <string name="quick_action_navigation_voice_on">Голос включен</string>
     </resources>
