@@ -910,9 +910,9 @@
     <string name="poi_remove_success">興趣點已刪除成功</string>
     <string name="poi_action_add">新增</string>
     <string name="poi_action_change">更改</string>
-    <string name="poi_action_succeded_template">運作 {0} 成功完成。</string>
-    <string name="poi_error_unexpected_template">在進行 {0} 運作時發生意外錯誤。</string>
-    <string name="poi_error_io_error_template">當執行 {0} 運作時發生 I/O 錯誤。</string>
+    <string name="poi_action_succeded_template">動作 {0} 成功完成。</string>
+    <string name="poi_error_unexpected_template">在進行 {0} 動作時發生意外錯誤。</string>
+    <string name="poi_error_io_error_template">當執行 {0} 動作時發生 I/O 錯誤。</string>
     <string name="poi_error_info_not_loaded">節點的資訊未載入</string>
     <string name="poi_dialog_opening_hours">營業</string>
     <string name="poi_dialog_comment">評論</string>
@@ -1881,13 +1881,13 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="shared_string_downloading">正在下載</string>
     <string name="shared_string_download_successful">下載成功</string>
     <string name="shared_string_unexpected_error">發生意外錯誤</string>
-    <string name="shared_string_action_template">行動 {0}</string>
+    <string name="shared_string_action_template">動作 {0}</string>
     <string name="shared_string_close">關閉</string>
     <string name="shared_string_exit">離開</string>
     <string name="shared_string_show">顯示</string>
     <string name="shared_string_show_all">全部顯示</string>
     <string name="shared_string_show_on_map">在地圖上顯示</string>
-    <string name="shared_string_more_actions">更多的行動</string>
+    <string name="shared_string_more_actions">更多的動作</string>
     <string name="shared_string_map">地圖</string>
     <string name="shared_string_favorites">我的收藏</string>
     <string name="shared_string_add_to_favorites">加到我的收藏</string>
@@ -1917,9 +1917,9 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="osmand_parking_time_left">左</string>
     <string name="parking_place_limited">停車場時限到</string>
     <string name="your_edits">您的編輯</string>
-    <string name="action_create">建立</string>
-    <string name="action_modify">修改</string>
-    <string name="action_delete">刪除</string>
+    <string name="action_create">建立動作</string>
+    <string name="action_modify">修改動作</string>
+    <string name="action_delete">刪除動作</string>
     <string name="osmand_parking_overdue">已過時</string>
     <string name="delay_to_start_navigation_descr">在導航規劃螢幕上，指示剩餘等待時間</string>
     <string name="delay_to_start_navigation">導航後開始轉向建議…</string>
@@ -2763,7 +2763,7 @@ Facebook：https://www.facebook.com/osmandapp
     <string name="quick_action_duplicates">指定的快速動作名稱已在使用中，已更改為 %1$s 以避免重複。</string>
     <string name="quick_action_duplicate">快速動作的名稱重複</string>
     <string name="quick_action_showhide_favorites_descr">輕點動作按鈕將會在地圖上顯示或隱藏我的收藏標記。</string>
-    <string name="quick_action_showhide_poi_descr">輕點動作按鈕將會在地圖上顯示或隱藏POI。</string>
+    <string name="quick_action_showhide_poi_descr">輕點動作按鈕將會在地圖上顯示或隱藏 POI。</string>
     <string name="quick_action_map_overlay_switch">地圖上圖層已更改為 \"%s\"。</string>
     <string name="quick_action_map_underlay_switch">地圖底層已更改為 \"%s\"。</string>
     <string name="shared_string_action_name">動作名稱</string>
@@ -2778,22 +2778,22 @@ Facebook：https://www.facebook.com/osmandapp
  • 新功能：快速動作按鈕
 
 
- •  改進了觸控式螢幕手勢回應
+ •  改進了觸控螢幕手勢的回應
 
 
  • 新的地圖字體覆蓋了更多的語言環境
 
 
- • 區域語言支援 TTS 的變異 
+ • 支援 TTS 不同版本的區域語言
 
 
  • 在一些地圖樣式和維基百科的清晰度增強
 
 
- • 支援開放位置代碼 (OLC)
+ • 支援開放位置碼 (OLC)
 
 
- • 顯示基本海拔地質給 GPX 記錄
+ • 為 GPX 記錄顯示基本海拔地質
 
 
  • 一些其他的改進和錯誤修復
