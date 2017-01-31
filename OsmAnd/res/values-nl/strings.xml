@@ -2738,4 +2738,46 @@ Als je hulp nodig hebt met OsmAnd: neem contact op met ons support team: support
     <string name="rendering_attr_contourWidth_name">Hoogtelijnen dikte</string>
     <string name="rendering_attr_hideWaterPolygons_description">Watervlakten</string>
     <string name="rendering_attr_hideWaterPolygons_name">Verberg watervlakten</string>
+    <string name="release_2_6">"
+ • Nieuw: Sneltoets op de kaart
+
+
+ • Verbeterde reactie op  het touchscreen
+
+
+ • Nieuw font ondersteunt meer talen op de kaart
+
+
+ • Ondersteunt TTS  voor regionale taalvariante
+
+
+ •  Verbeteringen in kaartstijlen en weergave van Wikipedia 
+
+
+ • Ondersteunt Open Location Code (OLC)
+
+
+ • Weergave van een hoogteprofiel van een opgenomen GPX-track
+
+
+ • Diverse andere verbeteringen en bug fixes
+
+
+ en meer …
+ "</string>
+	<string name="auto_split_recording_title">GPX-track automatisch splitsen bij een \"gat\"</string>
+	<string name="auto_split_recording_descr">Start een nieuw GPX-segment na een gat van 6 minuten; een nieuwe GPX-track na 2 uur.</string>
+    <string name="navigate_point_olc">Open Location Code</string>
+    <string name="navigate_point_olc_info_invalid"/>
+    <string name="navigate_point_olc_info_short">Ongeldige OLC</string>
+    <string name="navigate_point_olc_info_area">Geldige volledige OLC
+voor Gebied: %1$s x %2$s</string>
+    <string name="configure_screen_quick_action">Sneltoets</string>
+
+    <string name="quick_action_item_action">Actie %d</string>
+    <string name="quick_action_item_screen">Scherm %d</string>
+    <string name="quick_action_add_marker">Markeervlaggetje toevoegen</string>
+    <string name="quick_action_add_poi">POI toevoegen</string>
+    <string name="quick_action_map_style">Kaartstijl wisselen</string>
+    <string name="quick_action_map_style_switch">De kaartstijl is gewijzigd naar \"%s\".</string>
     </resources>
