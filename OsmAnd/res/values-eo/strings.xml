@@ -16,7 +16,7 @@
     <string name="osm_live_not_active">Malaktiva</string>
     <string name="osm_live_enter_email">Bonvolu entajpi ĝustan retpoŝtadreson</string>
     <string name="osm_live_enter_user_name">Bonvolu entajpi publikan nomon</string>
-    <string name="osm_live_thanks">Dankon al Ci por aboni aŭtomatajn ĝisdatigojn!</string>
+    <string name="osm_live_thanks">Dankon al ci por aboni aŭtomatajn ĝisdatigojn!</string>
     <string name="osm_live_region_desc">Parto de viaj donacoj estos sendita al OSM-uzantoj, kiuj sendas ŝanĝojn al mapoj en tiu regiono</string>
     <string name="osm_live_subscription_settings">Abonaj agordoj</string>
     <string name="osm_live_ask_for_purchase">Bonvolu aĉeti abonon al OSM Live antaŭe</string>
@@ -1460,7 +1460,7 @@ Proporcia memoro %4$s MB (Limito de Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="front_left">maldekstre-antaŭen</string>
     <string name="oclock">tie ĉi</string>
     <string name="towards">en la direkto al</string>
-    <string name="accuracy">Precizeco</string>
+    <string name="accuracy">Akurateco</string>
     <string name="altitude">Altitudo</string>
     <string name="no_info">Sen informoj</string>
     <string name="direction_style_sidewise">Malhorloĝdirekte (8 sektoroj)</string>
