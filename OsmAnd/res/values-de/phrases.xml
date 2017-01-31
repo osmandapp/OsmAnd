@@ -168,13 +168,13 @@
 	<string name="poi_curtain">Vorhanggeschäft</string>
 	<string name="poi_customs">Zollamt</string>
 	<string name="poi_cycling">Radsport</string>
-	<string name="poi_dairy">Molkerei </string>
+	<string name="poi_dairy">Molkereiprodukte</string>
 	<string name="poi_dam">Staudamm</string>
 	<string name="poi_dance_floor">Tanzfläche</string>
 	<string name="poi_deli">Feinkostgeschäft</string>
 	<string name="poi_dentist">Zahnarzt</string>
 	<string name="poi_department_store">Kaufhaus</string>
-	<string name="poi_dive">Tauchgeschäft</string>
+	<string name="poi_dive">Tauchausrüstung</string>
 	<string name="poi_diving">Tauschen</string>
 	<string name="poi_doctors">Arzt</string>
 	<string name="poi_dog_park">Hundepark</string>
@@ -205,7 +205,7 @@
 	<string name="poi_fire_water_pond">Löschteich</string>
 	<string name="poi_first_aid">Erste Hilfe</string>
 	<string name="poi_leisure_fishing">Fischen</string>
-	<string name="poi_fishing">Angelzeug</string>
+	<string name="poi_fishing">Anglerbedarf</string>
 	<string name="poi_fjord">Fjord</string>
 	<string name="poi_florist">Blumenhandlung</string>
 	<string name="poi_food_court">Markthalle</string>
@@ -257,7 +257,7 @@
 	<string name="poi_hostel">Jugendherberge</string>
 	<string name="poi_hot_spring">Heiße Quellen</string>
 	<string name="poi_hotel">Hotel</string>
-	<string name="poi_houseware">Haushaltsgeräteladen</string>
+	<string name="poi_houseware">Haushaltswaren</string>
 	<string name="poi_hunting">Jagdausrüstung</string>
 	<string name="poi_hunting_stand">Jägerstand</string>
 	<string name="poi_craft_hvac">Heizung, Lüftung und Klimatisierung</string>
