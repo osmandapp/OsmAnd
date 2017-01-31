@@ -1767,11 +1767,11 @@
 	<string name="poi_payment_electronic_purses_yes">Elektronische Geldbörsen</string>
 	<string name="poi_payment_uta_yes">UTA</string>
 	<string name="poi_payment_uta_no">UTA Karten nicht akzeptiert</string>
-	<string name="poi_payment_efectivo_yes">Nachnahme</string>
+	<string name="poi_payment_efectivo_yes">Bar</string>
 	<string name="poi_payment_efectivo_no">Nachnahme nicht akzeptiert</string>
 	<string name="poi_payment_girocard_yes">Girokarte</string>
 	<string name="poi_payment_girocard_no">Girokarte nicht akzeptiert</string>
-	<string name="poi_payment_discover_card_yes">Discover Karte</string>
+	<string name="poi_payment_discover_card_yes">Discover-Karte</string>
 	<string name="poi_payment_discover_card_no">Discover Karte nicht akzeptiert</string>
 	<string name="poi_brushless_yes">Ja</string>
 	<string name="poi_parish">Gemeindebüro</string>
@@ -2808,7 +2808,7 @@
 
 	<string name="poi_treat_inpatient_yes">Stationäre Dienste: Ja</string>
 	<string name="poi_treat_inpatient_no">Stationäre Dienste: Nein</string>
-	<string name="poi_treat_inpatient_only">Stationäre Dienste: einzig</string>
+	<string name="poi_treat_inpatient_only">Nur Stationäre Dienste</string>
 	<string name="poi_counselling_yes">Beratung: Ja</string>
 	<string name="poi_counselling_no">Beratung: Nein</string>
 	<string name="poi_emergency_yes">Notfall: Ja</string>
@@ -2868,12 +2868,12 @@
 
 	<string name="poi_crossing_activation_automatic">Überquerungsaktivierung: automatisch</string>
 	<string name="poi_crossing_activation_local">Überquerungsaktivierung: lokal</string>
-	<string name="poi_crossing_activation_remote">Überquerungsaktivierung: aus der Entfernung</string>
+	<string name="poi_crossing_activation_remote">Überquerungsaktivierung: mit Fernbedienung</string>
 	<string name="poi_crossing_barrier_no">Kreuzungsbarriere: keine</string>
 	<string name="poi_crossing_barrier_yes">Kreuzungsbarriere</string>
-	<string name="poi_crossing_barrier_full">Schranke: vollständig</string>
+	<string name="poi_crossing_barrier_full">Schranke: komplett</string>
 	<string name="poi_crossing_barrier_half">Schranke: halb</string>
-	<string name="poi_crossing_barrier_double_half">Schranke: doppelte Hälfte</string>
+	<string name="poi_crossing_barrier_double_half">Schranken: 2 halbe</string>
 	<string name="poi_aerodrome_type_international">International</string>
 	<string name="poi_aerodrome_type_regional">Regional</string>
 	<string name="poi_aerodrome_type_public">Öffentlich</string>
