@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
-    <string name="wiki_around">Wikipedia Artikel in der Nähe</string>
+    <string name="wiki_around">Wikipedia-Artikel in der Nähe</string>
     <string name="osmand_plus_extended_description_4000_chars_v2">"
 OsmAnd Maps &amp; Navigation - Orte finden und Routen berechnen ohne Internetverbindung. Dazu einfach Landkarten für beliebige Länder herunterladen, bevor man sich auf Reisen begibt.
 
@@ -2497,7 +2497,7 @@ Wenn Sie OsmAnd und OSM lieben und unterstützen wollen, so ist dies die perfekt
     <string name="skip_map_downloading_desc">Es sind keine Offlinekarten installiert. Sie können jetzt eine Karte auswählen oder später Karten über “Menü - %1$s“ herunterladen.</string>
     <string name="search_another_country">Eine andere Region auswählen</string>
     <string name="search_map">Karten werden gesucht…</string>
-    <string name="first_usage_wizard_desc">Lassen Sie OsmAnd Ihren Standort bestimmen und Karten für diese Region zum Herunterladen vorschlagen.</string>
+    <string name="first_usage_wizard_desc">Lass OsmAnd den Standort bestimmen und Karten zum Herunterladen für die aktuelle Region vorschlagen.</string>
     <string name="location_not_found">Position nicht gefunden</string>
     <string name="no_inet_connection">Keine Internetverbindung</string>
     <string name="no_inet_connection_desc_map">Erforderlich, um Karten herunterzuladen.</string>
