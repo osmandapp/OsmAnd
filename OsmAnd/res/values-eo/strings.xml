@@ -2133,7 +2133,7 @@ Kaj la loko kaj tempo estas montrataj ĉe la OsmAnd stirpanelo, kaj ĉe la fenes
     <string name="navigation_item_description">Navigadaj agordoj</string>
     <string name="planning_trip_item">Planado de vojaĝo</string>
     <string name="map_viewing_item">Map-foliumado</string>
-    <string name="search_on_the_map_item">Serĉado sur mapo</string>
+    <string name="search_on_the_map_item">Serĉado en mapo</string>
     <string name="instalation_troubleshooting_item">Instalado kaj problemoj</string>
     <string name="techical_articles_item">Teĥnikaj artikoloj</string>
     <string name="versions_item">Versioj</string>
@@ -2527,7 +2527,7 @@ kaj pli...
     <string name="route_calculation">Difinado de vojo</string>
     <string name="upload_poi">Alŝuti interesejo(j)n</string>
     <string name="route_roundabout_short">Elveturu al %1$d-a elveturejo</string>
-    <string name="search_map_hint">Serĉi por urbo aŭ regiono</string>
+    <string name="search_map_hint">Serĉi urbon aŭ regionon</string>
     <string name="wiki_around">Pri ĉirkaŭaĵo en Vikipedio</string>
     <string name="legacy_search">Malnova serĉilo</string>
     <string name="show_legacy_search">Montri malnovan serĉilon</string>
