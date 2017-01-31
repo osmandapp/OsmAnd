@@ -2533,7 +2533,7 @@ Wenn Sie OsmAnd und OSM lieben und unterstützen wollen, so ist dies die perfekt
     <string name="custom_search">Benutzerdefinierte Suche</string>
     <string name="edit_filter">Kategorien bearbeiten</string>
     <string name="subcategories">Unterkategorien</string>
-    <string name="translit_names">Namen umschreiben</string>
+    <string name="translit_names">Namen buchstabengetreu umschreiben</string>
     <string name="translit_name_if_miss">Transliteration, wenn Namen in %1$s fehlen</string>
     <string name="rendering_value_light_brown_name">Hellbraun</string>
     <string name="rendering_value_dark_brown_name">Dunkelbraun</string>
