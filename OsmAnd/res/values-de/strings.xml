@@ -2353,7 +2353,7 @@ Aktuell sind nur {2} MB verfügbar.</string>
  (Aktuell sind {2} MB verfügbar.)</string>
     <string name="select_map_marker">Kartenmarkierung auswählen</string>
     <string name="map_markers_other">Andere Markierungen</string>
-    <string name="upload_osm_note_description">Sie können Ihre OSM-Hinweise anonym hochladen, oder Ihr OpenStreetMap.org-Profil nutzen.</string>
+    <string name="upload_osm_note_description">Sie können Ihre OSM-Hinweise anonym hochladen oder Ihr OpenStreetMap.org-Profil nutzen.</string>
     <string name="upload_osm_note">OSM Notiz hochladen</string>
     <string name="upload_anonymously">Anonym hochladen</string>
 <string name="show_transparency_seekbar">Transparenz-Suchleiste anzeigen</string>
@@ -2575,7 +2575,7 @@ und vieles mehr ...
     <string name="trip_rec_notification_settings">Streckenaufzeichnung (keine Daten)</string>
     <string name="trip_rec_notification_settings_desc">Benachrichtigung anzeigen, die es erlaubt die Streckenaufzeichnung durch Betätigen der Taste “Aufzeichnen“ zu starten</string>
     <string name="shared_string_notifications">Benachrichtigungen</string>
-    <string name="osmo_service_running">OsMo Dienst wird ausgeführt</string>
+    <string name="osmo_service_running">OsMo-Dienst wird ausgeführt</string>
     <string name="osmo_pause_location">Pause</string>
     <string name="osmo_share_location">Teilen</string>
     <string name="gpx_appearance">Aussehen</string>
