@@ -1030,7 +1030,7 @@ De wereldwijde gegevens (van 70 graden noorderbreedte tot 70 graden zuiderbreedt
     
     
     <string name="map_widget_distancemeasurement">Afstandsmeting</string>
-    <string name="audionotes_location_not_defined">Nog geen locatie gedefinieerd om aan notitie te koppelen. \"Gebruik locatie…\" om een notatie aan een specifieke locatie toe te wijzen</string>
+    <string name="audionotes_location_not_defined">Nog geen locatie gedefinieerd om aan notitie te koppelen. \"Gebruik locatie…\" om een notatie aan een specifieke locatie toe te wijzen.</string>
     <string name="map_widget_audionotes">Audionotities</string>
     
     
@@ -1323,7 +1323,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="osb_author_or_password_not_specified">Specificeer OSM-gebruikersnaam en -wachtwoord in Instellingen</string>
     <string name="clear_intermediate_points">Wis Tussenpunten</string>
     <string name="keep_intermediate_points">Bewaar Tussenpunten</string>
-    <string name="new_directions_point_dialog">"Er zijn al Tussenpunten  gemaakt."</string>
+    <string name="new_directions_point_dialog">Er zijn al Tussenpunten gemaakt.</string>
     <string name="context_menu_item_directions_to">Routebeschrijving naar</string>
     <string name="context_menu_item_directions_from">Routebeschrijving vanaf</string>
     <string name="route_descr_map_location">Kaart: </string>
@@ -1983,7 +1983,7 @@ Het activeren van deze weergave verandert de kaartstijl in \'Winter en ski\', me
     <string name="delay_to_start_navigation">Start navigatie na…</string>
     <string name="shared_string_go">Start</string>
 	
-	<string name="action_create">Actie maken</string>
+	<string name="action_create">Actietoets aanmaken</string>
 	<string name="action_modify">Actie wijzigen</string>
 	<string name="action_delete">Actie verwijderen</string>
 	<string name="osm_edits">OSM wijzigingen</string>
@@ -2275,7 +2275,7 @@ Lengtegraad:\t\t%2$s</string>
     <string name="osm_edit_reopened_note">Heropende OSM-Opmerking</string>
     <string name="osm_edit_commented_note">OSM-Opmerking met commentaar</string>
     <string name="osm_edit_removed_note">OSM-Opmerking gewist</string>
-	<string name="osm_edit_created_note">OSM-Opmerking gemaakt</string>
+	<string name="osm_edit_created_note">OSM-Opmerking aangemaakt</string>
 	<string name="osn_bug_name">OSM-Opmerking</string>
 	<string name="osn_add_dialog_title">OSM-Opmerking aanmaken</string>
 	<string name="osn_comment_dialog_title">Voeg commentaar toe</string>
@@ -2722,9 +2722,9 @@ Als je hulp nodig hebt met OsmAnd: neem contact op met ons support team: support
     <string name="route_roundabout_short">Neem %1$de afslag</string>
     <string name="upload_poi">POI Uploaden</string>
     <string name="wiki_around">Wikipedia artikelen in de buurt</string>
-    <string name="legacy_search">Zoeken (oude manier)</string>
-    <string name="show_legacy_search">Zoeken (oude manier) weergeven</string>
-    <string name="show_legacy_search_desc">Zoeken (oude manier) in het zijmenu weergeven</string>
+    <string name="legacy_search">Adres Zoeken</string>
+    <string name="show_legacy_search">Adres Zoeken weergeven</string>
+    <string name="show_legacy_search_desc">"Adres Zoeken in het zijmenu weergeven,  hiërarchisch zoeken met Plaats,  Straat,  Huisnummer"</string>
     <string name="routing_attr_allow_motorway_name">Autosnelwegen toestaan</string>
     <string name="routing_attr_allow_motorway_description">Autosnelwegen gebruiken bij navigatie</string>
     <string name="lang_sr_latn">Servisch (Latijns schrift)</string>
@@ -2739,35 +2739,27 @@ Als je hulp nodig hebt met OsmAnd: neem contact op met ons support team: support
     <string name="rendering_attr_hideWaterPolygons_description">Watervlakten</string>
     <string name="rendering_attr_hideWaterPolygons_name">Verberg watervlakten</string>
     <string name="release_2_6">"
- • Nieuw: Sneltoets op de kaart
-
+ • Nieuw: Sneltoets op de kaart: je favoriete acties snel bereikbaar 
 
  • Verbeterde reactie op  het touchscreen
 
-
  • Nieuw font ondersteunt meer talen op de kaart
 
-
- • Ondersteunt TTS  voor regionale taalvariante
-
+ • TTS  voor regionale taalvarianten
 
  •  Verbeteringen in kaartstijlen en weergave van Wikipedia 
 
-
  • Ondersteunt Open Location Code (OLC)
-
 
  • Weergave van een hoogteprofiel van een opgenomen GPX-track
 
-
  • Diverse andere verbeteringen en bug fixes
-
 
  en meer …
  "</string>
-	<string name="auto_split_recording_title">GPX-track automatisch splitsen bij een \"gat\"</string>
-	<string name="auto_split_recording_descr">Start een nieuw GPX-segment na een gat van 6 minuten; een nieuwe GPX-track na 2 uur.</string>
-    <string name="navigate_point_olc">Open Location Code</string>
+	<string name="auto_split_recording_title">GPX-track automatisch splitsen na een onderbreking</string>
+	<string name="auto_split_recording_descr">Start een nieuw GPX-segment na een onderbreking van 6 minuten; een nieuwe GPX-track na 2 uur.</string>
+    <string name="navigate_point_olc">Open Location Code (OLC)</string>
     <string name="navigate_point_olc_info_invalid">Ongeldige OLC
 </string>
     <string name="navigate_point_olc_info_short">Ongeldige OLC</string>
@@ -2781,10 +2773,10 @@ voor Gebied: %1$s x %2$s</string>
     <string name="quick_action_add_poi">POI toevoegen</string>
     <string name="quick_action_map_style">Kaartstijl wisselen</string>
     <string name="quick_action_map_style_switch">De kaartstijl is gewijzigd naar \"%s\".</string>
-    <string name="quick_action_take_audio_note">Maak audio-notitie</string>
-    <string name="quick_action_take_video_note">Maak video-notitie</string>
+    <string name="quick_action_take_audio_note">Audio-notitie maken</string>
+    <string name="quick_action_take_video_note">Video-notitie maken</string>
     <string name="quick_action_take_photo_note">Maak foto</string>
-    <string name="quick_action_add_osm_bug">OSM-opmerking maken</string>
+    <string name="quick_action_add_osm_bug">OSM-opmerking aanmaken</string>
     <string name="quick_action_navigation_voice">Stembegeleiding Aan/Uit</string>
     <string name="quick_action_navigation_voice_off">Stembegeleiding staat uit</string>
     <string name="quick_action_navigation_voice_on">Stembegeleiding staat aan</string>
@@ -2792,13 +2784,13 @@ voor Gebied: %1$s x %2$s</string>
     <string name="quick_action_add_parking">Parkeerpositie instellen</string>
     <string name="quick_action_new_action">Actie toevoegen</string>
     <string name="quick_action_edit_action">Actie bewerken</string>
-    <string name="quick_action_add_favorite">Favoriet ttoevoegen</string>
+    <string name="quick_action_add_favorite">Favoriet toevoegen</string>
     <string name="dialog_add_action_title">Actie toevoegen</string>
     <string name="quick_actions_delete">Actie verwijderden</string>
     <string name="quick_actions_delete_text">"Actie \"%s\"  inderdaad verwijderen?"</string>
     <string name="quick_favorites_show_favorites_dialog">Toon favorietenscherm</string>
     <string name="quick_favorites_name_preset">Naam voorstellen</string>
-    <string name="quick_action_add_marker_descr">Een druk op de Sneltoets voegt een Markeervlaggetje toe in het midden van het scherm</string>
+    <string name="quick_action_add_marker_descr">Een druk op de Sneltoets voegt een Markeervlaggetje toe in het midden van het scherm.</string>
     <string name="quick_action_add_gpx_descr">Een druk op de Sneltoets voegt een GPX-routepunt toe, in het midden van het scherm.</string>
     <string name="quick_action_take_audio_note_descr">Een druk op de Sneltoets maakt een Audio-notitie in het midden van het scherm.</string>
     <string name="quick_action_take_video_note_descr">Een druk op de Sneltoets maakt een Video-notitie in het midden van het scherm.</string>
@@ -2821,7 +2813,7 @@ voor Gebied: %1$s x %2$s</string>
     <string name="quick_action_poi_show">Toon %1$s</string>
     <string name="quick_action_poi_hide">Verberg %1$s</string>
     <string name="quick_action_add_category">Categorie toevoegen</string>
-    <string name="quick_action_add_create_items">Items maken</string>
+    <string name="quick_action_add_create_items">Aanmaken en toevoegen....</string>
     <string name="quick_action_add_configure_map">Kaart instellen</string>
     <string name="quick_action_add_navigation">Navigatie</string>
     <string name="quick_action_fav_name_descr">Leeg laten om automatisch adres of plaatsnaam te gebruiken</string>
@@ -2837,7 +2829,7 @@ voor Gebied: %1$s x %2$s</string>
     <string name="quick_action_map_styles">Kaartstijlen</string>
     <string name="quick_action_map_overlay">Overlay-kaart wijzigen</string>
     <string name="quick_action_map_overlay_title">Overlay-kaarten</string>
-    <string name="quick_action_map_overlay_action">Overlay-kaart ttoevoegen</string>
+    <string name="quick_action_map_overlay_action">Overlay-kaart toevoegen</string>
     <string name="quick_action_map_overlay_switch">De Overlay-kaart is gewijzigd naar \"%s\".</string>
     <string name="quick_action_map_underlay_switch">De Underlay-kaart is gewijzigd naar \"%s\".</string>
     <string name="quick_action_map_underlay">Underlay-kaart wijzigen</string>
