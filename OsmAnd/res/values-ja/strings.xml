@@ -2343,4 +2343,40 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="show_legacy_search_desc">ドロワーリストでレガシー検索を有効にします</string>
     <string name="routing_attr_allow_motorway_name">高速道路を使用可能</string>
     <string name="routing_attr_allow_motorway_description">高速道路を使用可能</string>
+    <string name="release_2_6">"
+ • クイックアクションボタンの実装
+
+
+ • 画面タッチおよびジェスチャ時の応答改善
+
+
+ •  より多くの言語に応じたマップフォントを導入
+
+
+ • 言語地域に応じたTTS音声をサポート
+
+
+ • いくつかのマップスタイルとwikipediaの視認性強化
+
+
+ • オープン・ロケーション・コード(OLC)をサポート
+
+
+ • 記録されたGPXの基本高度プロファイルを表示
+
+
+ • その他いくつかの改善とバグ修正
+
+
+等々…
+ "</string>
+	<string name="auto_split_recording_title">空白検知で自動分割記録</string>
+	<string name="auto_split_recording_descr">6分、2時間、あるいは日付変更後に長い空白があった場合に新しいセグメントを開始します。</string>
+    <string name="rendering_attr_contourDensity_description">等高線の密度</string>
+    <string name="rendering_attr_contourDensity_name">等高線の密度</string>
+    <string name="rendering_value_high_name">高</string>
+    <string name="rendering_value_medium_w_name">中</string>
+    <string name="rendering_value_low_name">低</string>
+    <string name="rendering_attr_contourWidth_description">等高線の幅</string>
+    <string name="rendering_attr_contourWidth_name">等高線の幅</string>
     </resources>
