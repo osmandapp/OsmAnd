@@ -92,4 +92,17 @@
 		<string name="poi_club">क्लब</string>
 	<string name="poi_farm">शेतीमाल दुकान</string>
 	<string name="poi_dairy">दुग्धजन्य पदार्थांचे दुकान</string>
+	<string name="poi_fuel_type">इंधन प्रकार</string>
+	<string name="poi_fuel_avia_type">प्रकार</string>
+	<string name="poi_internet_access_type">इंटरनेट प्रकार</string>
+	<string name="poi_parking_type">वाहनतळ प्रकार</string>
+	<string name="poi_city_capital">राजधानी</string>
+	<string name="poi_religion_type">धर्म</string>
+	<string name="poi_smoking">धूम्रपान</string>
+	<string name="poi_tents">तंबू</string>
+	<string name="poi_power_supply">वीज पुरवठा</string>
+	<string name="poi_trash_disposal">कचरा विल्हेवाट</string>
+	<string name="poi_entertainment">करमणूक</string>
+	<string name="poi_photo_studio">फोटो स्टुडिओ</string>
+
 	</resources>
