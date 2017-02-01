@@ -2734,4 +2734,8 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="quick_action_showhide_poi_descr">النقر على زر الإجراء سيقوم بإظهار أو إخفاء النقاط المهمة على الخريطة.</string>
     <string name="quick_action_sh_poi_descr">يمكنك إضافة فئة أو أكثر لنقاط الإهتمام و القيام بعرضها على الخريطة.</string>
     <string name="quick_action_map_underlay_switch">تم تغيير الغشاء السفلي للخريطة إلى \"%s\".</string>
-    </resources>
+    <string name="navigate_point_olc">رمز التَّمَوْضُع المفتوح</string>
+    <string name="navigate_point_olc_info_invalid">خطآ فيي الرمز المفتوح للتَّمَوْضُع
+</string>
+    <string name="quick_action_btn_tutorial_descr">قم بالغط على الزر لفترة أطوَل ثم اسحبه للتمكن من تغيير مكانه على الشاشة</string>
+	</resources>
