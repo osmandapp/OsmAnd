@@ -95,7 +95,7 @@
   <string name="download_files_not_enough_space">%1$s एमबी डाउनलोड करण्यसाठी पुरेशी जागा शिल्लक नाही (शिल्लक जागा: %2$s).</string>
   <string name="download_files_question_space">{0} फाइल डाउनलोड करायच्या का?
 {1} एमबी जागा लागेल.
-सध्या शिल्लक जागा {2} एमबी.</string>
+(सध्या {2} एमबी जागा शिल्लक आहे.)</string>
   
   
   <string name="pref_vector_map">वेक्टर नकाशाचे पर्याय</string>
@@ -389,7 +389,7 @@
     <string name="download_regular_maps">साधारण नकाशा</string>
     <string name="download_roads_only_maps">फक्त रस्त्याचा नकाशा</string>
     
-	<string name="rendering_attr_noAdminboundaries_name">सीमा लपवा</string>
+	<string name="rendering_attr_noAdminboundaries_name">सीमा</string>
 	<string name="map_widget_max_speed">वेग मर्यादा</string>
     <string name="monitoring_control_start">जिपिएक्स</string>
     <string name="route_descr_lat_lon">अक्षांश %1$.3f, रेखांश %2$.3f</string>
@@ -530,4 +530,32 @@
     <string name="last_map_change">शेवटचा नकाशा बदल: %s</string>
     <string name="hourly">तासाला</string>
     <string name="daily">दिवसाला</string>
+    <string name="rendering_attr_hideWaterPolygons_description">पाणी</string>
+    <string name="search_map_hint">शहर किंवा प्रदेश शोधा</string>
+    <string name="shared_string_trip">प्रवास</string>
+    <string name="christmas_poi">ख्रिसमस पिओआय</string>
+    <string name="rendering_value_dark_brown_name">गडद तपकिरी</string>
+    <string name="rendering_value_light_brown_name">हलका तपकिरी</string>
+    <string name="search_hint">शहर, पत्ता, पिओआय टाइप करा</string>
+    <string name="si_mi_meters">मैल/मिटर</string>
+    <string name="search_another_country">इतर प्रदेश निवडा</string>
+    <string name="search_map">नकाशे शोधत आहे…</string>
+    <string name="first_usage_wizard_desc">ओएसएमएएनडि ला तुमचे स्थान निर्धारित करुन त्या प्रदेशासाठी नकाशे डाउनलोड करु द्या.</string>
+    <string name="location_not_found">स्थान सापडले नाही</string>
+    <string name="no_inet_connection">इंटरनेट कनेक्शन नाही</string>
+    <string name="no_inet_connection_desc_map">नकशे डाउनलोड करण्यासाठी पाहिजे.</string>
+    <string name="search_location">स्थान शोधत आहे…</string>
+    <string name="storage_free_space">रिकामी जागा</string>
+    <string name="give_permission">परवानगी द्या</string>
+    <string name="shared_string_change">बदला</string>
+    <string name="show_something_on_map">%1$s नकाशावर दाखवा</string>
+    <string name="dist_away_from_my_location">%1$s दूर शोधा</string>
+    <string name="postcode">पिनकोड</string>
+    <string name="city_type_district">जिल्हा</string>
+    <string name="city_type_neighbourhood">शेजार</string>
+    <string name="map_widget_search">शोधा</string>
+    <string name="shared_string_is_open_24_7">२४ तास उघडे</string>
+    <string name="storage_directory_card">मेमरी कार्ड</string>
+    <string name="app_mode_bus">बस</string>
+    <string name="app_mode_train">ट्रेन</string>
     </resources>
