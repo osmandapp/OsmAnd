@@ -2270,7 +2270,7 @@ Vrnitev na običajni pogled je mogoče na dva načina. Ali odklopite prekrivni s
  • Možnost zamenjave nadzorne plošče z menijem
 
 
- • Prejemanje zemljevidov je sedaj na voljo z enostavnim klikom na državo ali regijo na svetovnem zemljevidu
+ • Prejemanje zemljevidov je sedaj na voljo z enostavno izbiro države ali območja na svetovnem zemljevidu
 
 
  • Iskanje točk POI podpira tudi podrobnejše poizvedbe
@@ -2747,4 +2747,54 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="quick_action_map_overlay">Spremeni prekrivno plast zemljevida</string>
     <string name="quick_action_map_overlay_switch">Prekrivna plast je spremenjena na »%s«.</string>
     <string name="quick_action_map_underlay_switch">Podloga zemljevida je spremenjena na »%s«.</string>
-    </resources>
+    <string name="release_2_6">"
+ • Nova zmožnost: dodan je gumb za hitra dejanja
+
+
+ • Izboljšana odzivnost zaslona za upravljanje s potezami in dotiki
+
+
+ • Nova pisava s široko podporo različnim jezikom
+
+
+ • Podpora branja TTS za krajevne različice jezikov
+
+
+ • Izboljšana preglednost različnih slogov zemljevidov in prikaza člankov z Wikipedije
+
+
+ • Podpora OLC (Open Location Code)
+
+
+ • Prikaz profila nadmorske višine za shranjene sledi GPX
+
+
+ • Mnogo izboljšav in razrešenih hroščev
+
+
+ in še mnogo več …
+ "</string>
+	<string name="auto_split_recording_title">Samodejno razdeli beleženje po vmesnih točkah</string>
+	<string name="auto_split_recording_descr">Začne z novim odsekom po 6 minutnem premoru, novo sled po dvournem premoru oziroma s povsem novo datoteko beleženja, če je zamik čez datumsko mejo.</string>
+    <string name="quick_action_add_marker_descr">S pritiskom na gumb dejanja bo dodana oznaka zemljevida na trenutno sredinsko točko na zaslonu.</string>
+    <string name="quick_action_add_gpx_descr">S pritiskom na gumb dejanja bo dodana vmesna točka GPX na trenutno sredinsko točko na zaslonu.</string>
+    <string name="quick_action_take_audio_note_descr">S pritiskom na gumb dejanja bo dodano zvočno sporočilo na trenutno sredinsko točko na zaslonu.</string>
+    <string name="quick_action_take_video_note_descr">S pritiskom na gumb dejanja bo dodano video sporočilo na trenutno sredinsko točko na zaslonu.</string>
+    <string name="quick_action_take_photo_note_descr">S pritiskom na gumb dejanja bo dodano slikovno sporočilo na trenutno sredinsko točko na zaslonu.</string>
+    <string name="quick_action_add_osm_bug_descr">S pritiskom na gumb dejanja bo dodano obvestilo o hrošču OSM na trenutno sredinsko točko na zaslonu.</string>
+    <string name="quick_action_add_poi_descr">S pritiskom na gumb dejanja bo dodana točka POI na trenutno sredinsko točko na zaslonu.</string>
+    <string name="quick_action_navigation_voice_descr">S pritiskom na gumb dejanja se omogoči oziroma onemogoči glasovno vodenje.</string>
+    <string name="quick_action_add_parking_descr">S pritiskom na gumb dejanja bo dodano mesto parkiranja na trenutno sredinsko točko na zaslonu.</string>
+    <string name="quick_action_interim_dialog">Pokaži vmesno pogovorno okno</string>
+    <string name="favorite_autofill_toast_text">" je shranjeno na "</string>
+    <string name="quick_action_duplicates">Izbrano ime hitrega dejanja je že v uporabi, zato je novo samodejno spremenjeno v %1$s.</string>
+    <string name="quick_action_fav_name_descr">Pusti prazno za samodejno uporabo naslova ali imena mesta</string>
+    <string name="quick_action_bug_descr">Sporočilo bo samodejno izpolnjeno v polju opomb.</string>
+    <string name="quick_action_category_descr">Izbor kategorije za shranjevanje priljubljene točke</string>
+    <string name="quick_action_gpx_category_descr">Izbor kategorije po meri</string>
+    <string name="quick_action_sh_poi_descr">Dodati je mogoče eno ali več kategorij točk POI za prikaz na zemljevidu.</string>
+    <string name="quick_action_page_list_descr">Pritisk na gumb dejanja pomakne seznam za eno stran navzdol.</string>
+    <string name="quick_action_showhide_favorites_descr">S pritiskom na gumb dejanja bodo pokazana ali skrita priljubljena mesta na zemljevidu.</string>
+    <string name="quick_action_showhide_poi_descr">S pritiskom na gumb dejanja bodo pokazane ali skrite točke POI na zemljevidu.</string>
+    <string name="quick_action_btn_tutorial_descr">Z dolgim pritiskom in vlekom je mogoče postaviti gumb na poljubno mesto na zaslonu</string>
+	</resources>
