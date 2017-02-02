@@ -2844,4 +2844,6 @@ Reprezentuje obszar: %1$s x %2$s</string>
 
  i więcej...
  "</string>
+	<string name="rendering_attr_depthContours_description">Wyświetla kontury i punkty głębi</string>
+    <string name="rendering_attr_depthContours_name">Kontury głębi</string>
 	</resources>
