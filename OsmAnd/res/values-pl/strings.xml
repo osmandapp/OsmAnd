@@ -1018,7 +1018,7 @@ Niektóre z podstawowych funkcji:
     <string name="download_srtm_maps">Poziomice</string>
     <string name="download_select_map_types">Inne mapy</string>
     <string name="srtm_plugin_name">Poziomice</string>
-    <string name="srtm_plugin_description">"Dostarcza warstwy poziomic i cieniowania rzeźby terenu wyświetlanych na standardowych mapach OsmAnd. Funkcja przydatna dla sportowców, turystów i osób zainteresowanych strukturą reliefową krajobrazu.
+    <string name="srtm_plugin_description">"Dostarcza warstwy poziomic i cieniowania rzeźby terenu wyświetlanych na standardowych mapach OsmAnd. Funkcja przydatna dla sportowców, turystów i osób zainteresowanych strukturą reliefową krajobrazu. (Proszę zauważyć, że dane poziomic i cieniowania terenu należy osobno pobrać po aktywacji wtyczki.)
 
 
 Światowe dane (między 70 stopniem szerokości północnej a 70 stopniem szerokości południowej) opierają się na pomiarach SRTM (Shuttle Radar Topography Mission) i ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), przyrządu na pokładzie Terra, flagowego satelity Systemu Obserwacji Ziemi NASA. ASTER jest wspólnym przedsięwzięciem NASA, japońskiego Ministerstwa Gospodarki, Handlu i Przemysłu (METI) i Japońskich Systemów Kosmicznych (J-spacesystems).
