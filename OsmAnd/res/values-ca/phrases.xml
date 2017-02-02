@@ -2643,4 +2643,18 @@
 
 	<string name="poi_fuel_91ul">combustible 91UL</string>
 	<string name="poi_fuel_100ll">Combustible 100LL</string>
+	<string name="poi_industrial_factory">Tipus: fàbrica</string>
+	<string name="poi_industrial_gas">Tipus: indústria del gas</string>
+	<string name="poi_industrial_refinery">Tipus: refineria</string>
+	<string name="poi_industrial_warehouse">Tipus: magatzem</string>
+	<string name="poi_industrial_agriculture">Tipus: agrícola</string>
+	<string name="poi_industrial_brewery">Tipus: cerveseria</string>
+	<string name="poi_industrial_brickyard">Tipus: bòbila</string>
+	<string name="poi_industrial_intermodal_freight_terminal">Tipus: terminal intermodal de mercaderies</string>
+	<string name="poi_industrial_sawmill">Tipus: serradora</string>
+	<string name="poi_industrial_water_purification">Tipus: tractament d\'aigua</string>
+	<string name="poi_industrial_port">Tipus: portuari</string>
+	<string name="poi_note">Nota</string>
+	<string name="poi_watering_place">Abeurador</string>
+	<string name="poi_animal_boarding">Residència d\'animals</string>
 	</resources>
