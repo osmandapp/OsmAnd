@@ -135,10 +135,10 @@
  • Por elŝuti mapojn, regionoj povas esti elektitaj rekte per tuŝado en mondmapo
 
 
- • Serĉado por Interesejoj nun subtenas pli multe specifajn petojn
+ • Serĉado por interesejoj nun subtenas pli multe specifajn petojn
 
 
- • Plibonigitaj eblecoj por redakti Interesejojn kaj la OSM-on
+ • Plibonigitaj eblecoj por redakti interesejojn kaj la OSM-on
 
 
  • Mapdosiera elŝutada strukturo kaj interfaco rebonigitaj
@@ -465,7 +465,7 @@
 
  - Per retpaĝo vi povas administri grupon, loki kursojn kaj punktojn videblajn por ĉiujn
 
- - Ni ne rekomendas uzi gropon nur de unu persono, se tiu ne estas Intereseja gropo
+ - Ni ne rekomendas uzi gropon nur de unu persono, se tiu ne estas intereseja gropo
 
  - Privataj grupoj estas limigitaj ĝis 8 personoj
 
@@ -675,7 +675,7 @@ Registritaj kursoj povas esti kunhavigitaj kun viaj amikoj aŭ esti uzita por ko
     <string name="traffic_warning_calming">Trafik-trankviligejo</string>
     <string name="traffic_warning_speed_camera">Rapid-kontrolilo</string>
     <string name="traffic_warning">Trafika averto</string>
-    <string name="speak_poi">Proksimaj Interesejoj</string>
+    <string name="speak_poi">Proksimaj interesejoj</string>
     <string name="way_alarms">Trafikaj avertoj</string>
     <string name="background_service_is_enabled_question">OsmAnd-a fona servo estas daŭre aktiva. Ĉu vi ankaŭ volas malaktivigi ĝin?</string>
     <string name="sleep_mode_stop_dialog">Ĉu ĉesigi GPS-an fonan reĝimon?</string>
@@ -838,7 +838,7 @@ Tiu ĉi vido oni povas nuligi per malaktivigi ĝin tie ĉi, aŭ per ŝanĝi la \
     <string name="lang_cy">Kimra</string>
     <string name="no_waypoints_found">Ne trovis navigadpunktojn</string>
     <string name="no_map_markers_found">Bonvolu aldoni markojn per mapo</string>
-    <string name="layer_amenity_label">Etikedoj de Interesejoj</string>
+    <string name="layer_amenity_label">Etikedoj de interesejoj</string>
     <string name="loading_smth">Ŝargado de %1$s…</string>
     <string name="map_widget_plain_time">Nuna tempo</string>
     <string name="gpx_wpt">Navigadpunkto</string>
@@ -1266,8 +1266,8 @@ Premtenu por vidi sur la mapo</string>
  - Funkcias tute eksterrete (konservas elŝutitajn vektorajn aŭ kahelaj mapojn en la aparata memorejo)
  - Kompaktaj vektoraj eksterretaj mapoj de la tuta mondo
  - Elŝuti landaj aŭ regionaj mapoj senpere en la aplikaĵo
- - Diversspecaj tavoloj de mapo: GPX aŭ navigadaj kursoj, Interesejoj, ŝatataj ejoj, nivelkurboj, haltejoj de publik-transporto, ekstraj mapoj kun ŝanĝebla diafaneco
- - Serĉi eksterrete adresojn kaj interesajn ejojn (Interesejojn)
+ - Diversspecaj tavoloj de mapo: GPX aŭ navigadaj kursoj, interesejoj, ŝatataj ejoj, nivelkurboj, haltejoj de publik-transporto, ekstraj mapoj kun ŝanĝebla diafaneco
+ - Serĉi eksterrete adresojn kaj interesajn ejojn (interesejojn)
  - Difini kursojn por mezaj distancoj eksterrete
  - Aŭta, bicikla, kaj piediranta reĝimoj kun:
   - agordeblaj aŭtomata/taga/nokta aspektoj
@@ -1277,7 +1277,7 @@ Premtenu por vidi sur la mapo</string>
 
 Limoj en tiu ĉi senpaga versio de OsmAnd:
  - Limigita nombro da elŝutoj de mapoj
- - Sen aliro al eksterretaj Vikipediaj Interesejoj
+ - Sen aliro al eksterretaj vikipediaj interesejoj
 
 OsmAnd estas konstante disvolviĝanta kaj ĝia plua disvolviĝo dependas de monaj donacoj por subteni programadon kaj testadon de novaj ebloj. Bonvolu konsideri aĉeti OsmAnd+, aŭ donaci por aŭ elektitaj funkcioj aŭ ĝenerale por la projekto je osmand.net.
  "</string>
@@ -1379,7 +1379,7 @@ Proporcia memoro %4$s MB (Limito de Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="rendering_attr_hmRendered_name">Montri pli map-detalojn</string>
     <string name="local_index_routing_data">Voj-difinaj datumoj</string>
     <string name="navigate_point_format">Formo</string>
-    <string name="poi_search_desc">Serĉi Interesejon</string>
+    <string name="poi_search_desc">Serĉi interesejon</string>
     <string name="address_search_desc">Serĉi adreson</string>
     <string name="navpoint_search_desc">Koordinatoj</string>
     <string name="transport_search_desc">Serĉi transporton publikan</string>
@@ -1392,7 +1392,7 @@ Proporcia memoro %4$s MB (Limito de Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="unknown_from_location">Komencpunkto ne estas ankoraŭ precizigita</string>
     <string name="modify_transparency">Modifi diafanecon (0 - travidebla, 255 - maldiafana)</string>
     <string name="confirm_interrupt_download">Ĉu vi volas ĉesigi elŝutadon de dosiero?</string>
-    <string name="first_time_msg">Dankon por uzi OsmAnd. Por uzi plejparto da ebloj de tiu ĉi aplikaĵo, vi bezonas elŝuti eksterretajn regionajn datumojn en \'Agordoj\' → \'Administri map-dosierojn\'. Poste vi eblos esplori mapojn, serĉi adresojn, Interesejojn kaj transporton publikan.</string>
+    <string name="first_time_msg">Dankon por uzi OsmAnd. Por uzi plejparto da ebloj de tiu ĉi aplikaĵo, vi bezonas elŝuti eksterretajn regionajn datumojn en \'Agordoj\' → \'Administri map-dosierojn\'. Poste vi eblos esplori mapojn, serĉi adresojn, interesejojn kaj transporton publikan.</string>
     <string name="basemap_was_selected_to_download">Bazmapo endas por ĝusta agado de aplikaĵo kaj ĝi estas elektita por elŝuto.</string>
     <string name="plugins_screen">Kromprogramoj</string>
     <string name="local_indexes_cat_tile">Enretaj mapoj kaj kaŝmemorigitaj kaheloj</string>
@@ -1483,15 +1483,15 @@ Proporcia memoro %4$s MB (Limito de Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="use_fluorescent_overlays_descr">Uzas rebrilajn kolorojn por montri kursojn kaj vojojn</string>
     <string name="offline_edition">Eksterreta redaktado</string>
     <string name="offline_edition_descr">Ĉiam uzas eksterretan redaktadon</string>
-    <string name="update_poi_does_not_change_indexes">Redakto de Interesejo en aplikaĵo ne kaŭzas ŝanĝon en elŝutitaj map-dosieroj, ŝanĝoj estas konservitaj en loka dosiero.</string>
+    <string name="update_poi_does_not_change_indexes">Redakto de interesejo en aplikaĵo ne kaŭzas ŝanĝon en elŝutitaj map-dosieroj, ŝanĝoj estas konservitaj en loka dosiero.</string>
     <string name="local_openstreetmap_uploading">Alŝutado…</string>
-    <string name="local_openstreetmap_were_uploaded">Alŝutis {0} Interesejojn/notojn</string>
+    <string name="local_openstreetmap_were_uploaded">Alŝutis {0} interesejojn/notojn</string>
     <string name="local_openstreetmap_uploadall">Alŝuti ĉiujn</string>
     <string name="local_openstreetmap_upload">Alŝuti modifaĵojn al OSM</string>
     <string name="local_openstreetmap_delete">Forigi modifaĵojn</string>
     <string name="local_openstreetmap_descr_title">Neunutempa (nesinkrona) redakto de OSM:</string>
     <string name="local_openstreetmap_settings">Lokaj konservitaj OSM-aj Iteresejoj/notoj</string>
-    <string name="local_openstreetmap_settings_descr">Vidu kaj administru OSM-ajn Interesejojn/notojn konservitajn en loka datumbazo</string>
+    <string name="local_openstreetmap_settings_descr">Vidu kaj administru OSM-ajn interesejojn/notojn konservitajn en loka datumbazo</string>
     <string name="live_monitoring_interval">Intervalo de enreta kurs-registrado</string>
     <string name="live_monitoring_interval_descr">Difinu intervalon de enreta kurs-registrado</string>
     <string name="live_monitoring_url">Adreso de enreta kurs-registrado</string>
@@ -1500,9 +1500,9 @@ Proporcia memoro %4$s MB (Limito de Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="current_track">Nuna kurso</string>
     <string name="gpx_monitoring_disabled_warn">Konservu kurson uzante GPX-fenestraĵon aŭ per \'Registrado de kurso\' agordoj.</string>
     <string name="show_current_gpx_title">Montri nunan kurson</string>
-    <string name="free_version_message">Tiu ĉi senpaga versio estas limigita al %1$s elŝutoj kaj ne subtenas eksterretajn Vikipediajn artikolojn.</string>
-    <string name="poi_context_menu_showdescription">Montri priskribon de Interesejo</string>
-    <string name="index_name_wiki">Tutmondaj Vikipediaj Interesejoj</string>
+    <string name="free_version_message">Tiu ĉi senpaga versio estas limigita al %1$s elŝutoj kaj ne subtenas eksterretajn vikipediajn artikolojn.</string>
+    <string name="poi_context_menu_showdescription">Montri priskribon de interesejo</string>
+    <string name="index_name_wiki">Tutmondaj vikipediaj interesejoj</string>
     <string name="index_name_voice">Voĉ-avertoj (antaŭregistritaj, limigitaj ebloj)</string>
     <string name="index_name_tts_voice">Voĉ-avertoj (parolsintezitaj, konsilindaj)</string>
     <string name="amenity_type_osmwiki">Vikipedio (eksterrete)</string>
@@ -1549,12 +1549,12 @@ Proporcia memoro %4$s MB (Limito de Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="file_can_not_be_renamed">Ne povas renomi dosieron.</string>
     <string name="file_with_name_already_exists">Dosiero kun saman nomon jam ekzistas.</string>
     <string name="gpx_navigation">GPX-kurso</string>
-    <string name="poi_query_by_name_matches_categories">Trovis kelkajn kategoriojn de Interesejoj kiuj kongruas kun la serĉmendo:</string>
-    <string name="data_to_search_poi_not_available">Mankas lokaj datumoj por serĉi Interesejojn.</string>
+    <string name="poi_query_by_name_matches_categories">Trovis kelkajn kategoriojn de interesejoj kiuj kongruas kun la serĉmendo:</string>
+    <string name="data_to_search_poi_not_available">Mankas lokaj datumoj por serĉi interesejojn.</string>
     <string name="poi_filter_by_name">Serĉi laŭ nomo</string>
-    <string name="old_poi_file_should_be_deleted">La dosiero de Interesej-datumoj \'%1$s\' supersufiĉas kaj povas esti forigita.</string>
+    <string name="old_poi_file_should_be_deleted">La dosiero de interesej-datumoj \'%1$s\' supersufiĉas kaj povas esti forigita.</string>
     <string name="button_upgrade_osmandplus">Promocii al OsmAnd+</string>
-    <string name="update_poi_file_not_found">Mankas loka dosiero por Interesej-ŝanĝojn kaj ne povas ĝin krei.</string>
+    <string name="update_poi_file_not_found">Mankas loka dosiero por interesej-ŝanĝojn kaj ne povas ĝin krei.</string>
     <string name="map_version_changed_info">Servilo enhavas mapojn kiuj ne kongruas kun via versio de aplikaĵo. Por elŝuti kaj uzi ilin, bonvolu ĝisdatigi la aplikaĵon al la plej nova versio.</string>
     <string name="poi_filter_nominatim">Nominatim Enreta</string>
     <string name="search_position_current_location_search">Determinado de pozicio…</string>
@@ -1652,7 +1652,7 @@ Proporcia memoro %4$s MB (Limito de Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="amenity_type_geocache">Geokaŝado</string>
     <string name="amenity_type_healthcare">Kuracado</string>
     <string name="amenity_type_historic">Historiejo</string>
-    <string name="poi_filter_closest_poi">Proksimaj Interesejoj</string>
+    <string name="poi_filter_closest_poi">Proksimaj interesejoj</string>
     <string name="daynight_mode_day">Taga</string>
     <string name="daynight_mode_night">Nokta</string>
     <string name="daynight_mode_auto">Sunleviĝa/sunsubira</string>
@@ -1668,7 +1668,7 @@ Proporcia memoro %4$s MB (Limito de Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="layer_osm_bugs">OSM notoj (enrete)</string>
     
     <string name="layer_poi">Interesejoj…</string>
-    <string name="context_menu_item_search_poi">Serĉi Interesejon</string>
+    <string name="context_menu_item_search_poi">Serĉi interesejon</string>
     <string name="where_am_i">Kie mi estas?</string>
     <string name="transport_Routes">Kursoj</string>
     <string name="transport_Stop">Haltejo</string>
@@ -1721,7 +1721,7 @@ Kaj la loko kaj tempo estas montrataj ĉe la OsmAnd stirpanelo, kaj ĉe la fenes
     <string name="osmand_distance_planning_plugin_name">Kalkulilo de distanco kaj planilo</string>
     <string name="osmand_distance_planning_plugin_description">Tiu ĉi kromprogramo liveras mapekranan fenestraĵon por krei kursojn tuŝante sur la mapo, aŭ por uzi aŭ modifi ekzistajn GPX-dosierojn por plani ekskurson aŭ mezuri distancon inter punktoj. Rezultoj povas esti konservitaj kiel GPX-dosieroj, kiuj oni povas estonte uzi por gvidado.</string>
     <string name="osm_settings">OSM redaktado</string>
-    <string name="osm_editing_plugin_description">Per tiu ĉi kromprogramo OsmAnd povas esti uzata por kontribui al OSM per krei aŭ redakti OSM-Interesejojn, per raporti aŭ komenti OSM-erarojn, per aldoni registritajn GPX-dosierojn. OSM estas komunuma, tutmonda, publika map-projekto. Por detaloj, legu: https://openstreetmap.org. Aktiva kontribuado estas laŭdinda, kaj vi povas kontribui senpere per OsmAnd, se vi entajpos viajn OSM-ajn ensalutilojn en la aplikaĵo.</string>
+    <string name="osm_editing_plugin_description">Per tiu ĉi kromprogramo OsmAnd povas esti uzata por kontribui al OSM per krei aŭ redakti OSM-interesejojn, per raporti aŭ komenti OSM-erarojn, per aldoni registritajn GPX-dosierojn. OSM estas komunuma, tutmonda, publika map-projekto. Por detaloj, legu: https://openstreetmap.org. Aktiva kontribuado estas laŭdinda, kaj vi povas kontribui senpere per OsmAnd, se vi entajpos viajn OSM-ajn ensalutilojn en la aplikaĵo.</string>
     <string name="debugging_and_development">OsmAnd programado</string>
     <string name="osmand_development_plugin_description">Montras agordojn por programado kaj senerarigado kiel testado aŭ simulado de kurso, efikeco de ekran-bildigado, aŭ voĉaj sciigoj. Tiuj ĉi agordoj taŭgas por programistoj kaj ne estas bezonataj por norma uzanto.</string>
     <string name="lang_en_gb">Angla (Brita)</string>
@@ -1802,8 +1802,8 @@ Kaj la loko kaj tempo estas montrataj ĉe la OsmAnd stirpanelo, kaj ĉe la fenes
     <string name="renderer_load_exception">Eraro okazis: bildigilo ne ŝargita</string>
     <string name="renderers">Vektora bildigilo</string>
     <string name="renderers_descr">Elektu vido de bildigado de vektora mapo</string>
-    <string name="poi_context_menu_website">Montri retpaĝon de Interesejo</string>
-    <string name="poi_context_menu_call">Montri telefonon de Interesejo</string>
+    <string name="poi_context_menu_website">Montri retpaĝon de interesejo</string>
+    <string name="poi_context_menu_call">Montri telefonon de interesejo</string>
     <string name="download_type_to_filter">entajpu tekston por filtri</string>
     <string name="use_high_res_maps">Alta ekrandistingivo</string>
     <string name="use_high_res_maps_descr">Ne etendas (kaj malklarigas) map-kahelojn ĉe alt-distingivaj ekranoj</string>
@@ -1817,8 +1817,8 @@ Kaj la loko kaj tempo estas montrataj ĉe la OsmAnd stirpanelo, kaj ĉe la fenes
     <string name="map_route_by_gpx">Navigi per GPX</string>
     <string name="vector_data">Eksterretaj vektoraj mapoj</string>
     <string name="transport_context_menu">Serĉi transporton ĉe haltejo</string>
-    <string name="poi_context_menu_modify">Modifi Interesejon</string>
-    <string name="poi_context_menu_delete">Forigi Interesejon</string>
+    <string name="poi_context_menu_modify">Modifi interesejon</string>
+    <string name="poi_context_menu_delete">Forigi interesejon</string>
     <string name="gpx_files_not_found">Nenia GPX-dosiero trovita en dosierujo de kurs-spuroj</string>
     <string name="layer_gpx_layer">GPX-kurso…</string>
     <string name="error_reading_gpx">Eraro dum legado de GPX-datumoj</string>
@@ -1864,7 +1864,7 @@ Kaj la loko kaj tempo estas montrataj ĉe la OsmAnd stirpanelo, kaj ĉe la fenes
     <string name="error_occurred_loading_gpx">Eraro okazis dum ŝargado de GPX</string>
     <string name="send_report">Sendi raporton</string>
     <string name="none_region_found">Neniaj eksterretaj datumoj de regionoj trovitaj je memorkarto. Elŝutu regionojn el la Interreto.</string>
-    <string name="poi_namefinder_query_empty">Entajpu serĉmendon pri Interesejo</string>
+    <string name="poi_namefinder_query_empty">Entajpu serĉmendon pri interesejo</string>
     <string name="any_poi">Ia</string>
     
     <string name="thanks_yandex_traffic">Dankon al Yandex pro informoj pri trafiko.</string>
@@ -1923,12 +1923,12 @@ Kaj la loko kaj tempo estas montrataj ĉe la OsmAnd stirpanelo, kaj ĉe la fenes
     <string name="show_transport_over_map_description">Montras haltejojn de transporto publika sur mapo</string>
     <string name="show_transport_over_map">Montri haltejojn</string>
     <string name="hello">Navigada aplikaĵo OsmAnd</string>
-    <string name="update_poi_success">Datumoj de Interesejoj ĝisdatigitaj ({0} ŝargitaj)</string>
-    <string name="update_poi_error_local">Eraro dum ĝisdatigado de loka listo de Interesejoj</string>
+    <string name="update_poi_success">Datumoj de interesejoj ĝisdatigitaj ({0} ŝargitaj)</string>
+    <string name="update_poi_error_local">Eraro dum ĝisdatigado de loka listo de interesejoj</string>
     <string name="update_poi_error_loading">Eraro dum ŝargado de datumoj el servilo</string>
-    <string name="update_poi_no_offline_poi_index">Neniaj eksterretaj datumoj de Interesejoj por tiu ĉi areo</string>
-    <string name="update_poi_is_not_available_for_zoom">Ĝisdatigo de Interesejoj neebla por malgrandaj skaladoj</string>
-    <string name="context_menu_item_update_poi">Ĝisdatigi Interesejojn</string>
+    <string name="update_poi_no_offline_poi_index">Neniaj eksterretaj datumoj de interesejoj por tiu ĉi areo</string>
+    <string name="update_poi_is_not_available_for_zoom">Ĝisdatigo de interesejoj neebla por malgrandaj skaladoj</string>
+    <string name="context_menu_item_update_poi">Ĝisdatigi interesejojn</string>
     <string name="context_menu_item_update_map_confirm">Ĉu ĝisdatigi lokajn datumojn per Interreto?</string>
     <string name="uploading_data">Alŝutado de datumoj…</string>
     <string name="uploading">Alŝutado…</string>
@@ -1991,8 +1991,8 @@ Kaj la loko kaj tempo estas montrataj ĉe la OsmAnd stirpanelo, kaj ĉe la fenes
     <string name="show_view_angle">Montri vid-direkton</string>
     <string name="map_view_3d">3D map-vido</string>
     <string name="map_view_3d_descr">Aktivigas tri-dimensian vidon de mapo</string>
-    <string name="show_poi_over_map">Montri Interesejojn</string>
-    <string name="show_poi_over_map_description">Montras Interesejon sur mapo (uzas plej laste elektitan filtrilon)</string>
+    <string name="show_poi_over_map">Montri interesejojn</string>
+    <string name="show_poi_over_map_description">Montras interesejon sur mapo (uzas plej laste elektitan filtrilon)</string>
     <string name="map_tile_source">Fonto de kahelaj mapoj</string>
     <string name="map_tile_source_descr">Elektu fonton de enretaj aŭ kaŝmemorigitaj map-kaheloj</string>
     <string name="map_source">Map-fonto</string>
@@ -2001,7 +2001,7 @@ Kaj la loko kaj tempo estas montrataj ĉe la OsmAnd stirpanelo, kaj ĉe la fenes
     <string name="show_gps_coordinates_text">Montri GPS-ajn koordinatojn sur mapo</string>
     <string name="use_internet_to_download_tile">Uzas Interreton por elŝuti mankajn map-kahelojn</string>
     <string name="app_description">Navigada programo</string>
-    <string name="searchpoi_activity">Elekti Interesejon</string>
+    <string name="searchpoi_activity">Elekti interesejon</string>
     <string name="search_POI_level_btn">Serĉi pli</string>
     <string name="incremental_search_street">Serĉi straton tajpante komencajn literojn</string>
     <string name="incremental_search_building">Serĉi domon tajpante komencan ciferon</string>
@@ -2026,11 +2026,11 @@ Kaj la loko kaj tempo estas montrataj ĉe la OsmAnd stirpanelo, kaj ĉe la fenes
     <string name="favourites_context_menu_delete">Forigi</string>
     <string name="favourites_remove_dialog_msg">Ĉu forigi la ŝatatan punkton \'%s\'?</string>
     <string name="favourites_remove_dialog_success">Ŝatata punkto {0} forigita sukcese.</string>
-    <string name="poi_edit_title">Redakti Interesejon</string>
-    <string name="poi_create_title">Krei Interesejon</string>
+    <string name="poi_edit_title">Redakti interesejon</string>
+    <string name="poi_create_title">Krei interesejon</string>
     <string name="poi_error_poi_not_found">Ne povas trovi nodon aŭ servo (ang amenity) ne estas unuopa nodo</string>
     <string name="poi_remove_confirm_template">Ĉu forigi na {0} (entajpu komenton)?</string>
-    <string name="poi_remove_title">Forigi Interesejon</string>
+    <string name="poi_remove_title">Forigi interesejon</string>
     <string name="poi_remove_success">Interesejo forigita sukcese</string>
     <string name="poi_action_add">aldoni</string>
     <string name="poi_action_change">ŝanĝi</string>
@@ -2042,7 +2042,7 @@ Kaj la loko kaj tempo estas montrataj ĉe la OsmAnd stirpanelo, kaj ĉe la fenes
     <string name="poi_dialog_opening_hours">Malferma je</string>
     <string name="poi_dialog_comment">Komento</string>
     <string name="poi_dialog_reopen">Remalfermi</string>
-    <string name="poi_dialog_comment_default">Ŝanĝi Interesejon</string>
+    <string name="poi_dialog_comment_default">Ŝanĝi interesejon</string>
     <string name="poi_dialog_other_tags_message">Ĉiuj aliaj markoj ne ŝanĝiĝos</string>
     <string name="default_buttons_commit">Enmeti</string>
     <string name="filter_current_poiButton">Filtrilo</string>
@@ -2081,7 +2081,7 @@ Kaj la loko kaj tempo estas montrataj ĉe la OsmAnd stirpanelo, kaj ĉe la fenes
     <string name="shared_string_undo">MALFARI</string>
     <string name="shared_string_skip">Transsalti</string>
     <string name="offline_maps_and_navigation">Mapoj eksterretaj\nkaj navigado</string>
-    <string name="commit_poi">Enmeti Interesejon</string>
+    <string name="commit_poi">Enmeti interesejon</string>
     <string name="tab_title_basic">Bazaj</string>
     <string name="tab_title_advanced">Altnivelaj</string>
     <string name="building_number">Numero de domo</string>
@@ -2091,9 +2091,9 @@ Kaj la loko kaj tempo estas montrataj ĉe la OsmAnd stirpanelo, kaj ĉe la fenes
     <string name="contact_info">Kontaktaj informoj</string>
     <string name="description">Priskribo</string>
     <string name="add_opening_hours">Aldoni horoj de malfermo</string>
-    <string name="poi_dialog_poi_type">Speco de Interesejo</string>
+    <string name="poi_dialog_poi_type">Speco de interesejo</string>
     <string name="number_of_rows_in_dash">Nombro da linioj sur ĉefekrano %1$s</string>
-    <string name="please_specify_poi_type">Bonvolu precizigi specon de Interesejo.</string>
+    <string name="please_specify_poi_type">Bonvolu precizigi specon de interesejo.</string>
     <string name="working_days">Labortagoj</string>
     <string name="recent_places">Lastaj ejoj</string>
     <string name="favourites">Ŝatataj ejoj</string>
@@ -2140,7 +2140,7 @@ Kaj la loko kaj tempo estas montrataj ĉe la OsmAnd stirpanelo, kaj ĉe la fenes
     <string name="feedback">Sendi opinion</string>
     <string name="contact_us">Kontakti nin</string>
     <string name="map_legend">Mapklarigo</string>
-    <string name="save_poi_without_poi_type_message">Ĉu vere konservi Interesejon sen determinita speco?</string>
+    <string name="save_poi_without_poi_type_message">Ĉu vere konservi interesejon sen determinita speco?</string>
     <string name="poi_context_menu_modify_osm_change">Modifi OSM ŝanĝoj</string>
     <string name="use_dashboard_btn">Uzi stirpanelon</string>
     <string name="use_drawer_btn">Uzi menuon</string>
@@ -2225,7 +2225,7 @@ Map-vido
  - Montras viajn pozicion kaj orientiĝon sur la mapo
  - Laŭvole turniĝas la mapon laŭ kompaso aŭ laŭ direkto de via movo
  - Konservu viajn plej gravajn ejojn al Ŝatataj
- - Montras Interesejojn (probable interesajn ejojn) ĉirkaŭ vi
+ - Montras interesejojn (probable interesajn ejojn) ĉirkaŭ vi
  - Povas montri specialajn enretajn kahelajn mapojn
  - Povas montri vidon de sputniko (de Bing)
  - Povas montri diversajn surtavolojn kiel GPX-kursojn kaj aliajn mapojn kun agordebla travideblo
@@ -2258,7 +2258,7 @@ Ebloj por piedirantoj kaj biciklantoj
 Senpere kontribui al OpenStreetMap
  - Raportu map-notoj
  - Alŝutu GPX-kursoj al OSM senpere de la aplikaĵo
- - Aldonu Interesejojn kaj alŝutu ilin al OSM (aŭ post se eksterrete)
+ - Aldonu interesejojn kaj alŝutu ilin al OSM (aŭ post se eksterrete)
  - Laŭvole registru kurson dum fona reĝimo (kiam la aparato estas en dormeta reĝimo)
 
 OsmAnd estas malfermkoda kaj senĉese disvolviganta. Iu ajn povas kontribui al la aplikaĵo per raporti problemojn, traduki, aŭ kodumi novajn eblojn. La projekto vivas kaj estas senpaŭze plibonigata per agoj de programistoj kaj uzantoj. La projekto ankaŭ bezonas financan kontribuon por subteno de programado, kaj testado de novaj ebloj. Per aĉeto de OsmAnd+, vi povas helpi la aplikaĵon esti eĉ pli mojosa! Estas ankaŭ eble donaci al difinaj novaj ecoj de programo, aŭ fari ĝeneralan donacon ĉe osmand.net.
@@ -2290,9 +2290,9 @@ Afganujo, Albanujo, Alĝerio, Andoro, Angolo, Angvilo, Antigvo kaj Barbudo, Arge
  - Funkcias tute eksterrete (konservas elŝutitajn vektorajn aŭ kahelaj mapojn en la aparata memorejo)
  - Kompaktaj vektoraj eksterretaj mapoj de la tuta mondo
  - Senlime elŝuti landaj aŭ regionaj mapoj senpere en la aplikaĵo
- - Eksterreta Vikipedio (elŝuteblaj Vikipediaj Interesejoj), perfekte por vizitado
- - Diversspecaj tavoloj de mapo: GPX aŭ navigadaj kursoj, Interesejoj, ŝatataj ejoj, nivelkurboj, haltejoj de publik-transporto, ekstraj mapoj kun ŝanĝebla diafaneco
- - Serĉi eksterrete adresojn kaj interesajn ejojn (Interesejojn)
+ - Eksterreta Vikipedio (elŝuteblaj vikipediaj interesejoj), perfekte por vizitado
+ - Diversspecaj tavoloj de mapo: GPX aŭ navigadaj kursoj, interesejoj, ŝatataj ejoj, nivelkurboj, haltejoj de publik-transporto, ekstraj mapoj kun ŝanĝebla diafaneco
+ - Serĉi eksterrete adresojn kaj interesajn ejojn (interesejojn)
  - Difini kursojn por mezaj distancoj eksterrete
  - Aŭta, bicikla, kaj piediranta reĝimoj kun:
   - agordeblaj aŭtomata/taga/nokta aspektoj
@@ -2319,7 +2319,7 @@ Map-vido
  - Montras viajn pozicion kaj orientiĝon sur la mapo
  - Laŭvole turniĝas la mapon laŭ kompaso aŭ laŭ direkto de via movo
  - Konservu viajn plej gravajn ejojn al Ŝatataj
- - Montras Interesejojn (probable interesajn ejojn) ĉirkaŭ vi
+ - Montras interesejojn (probable interesajn ejojn) ĉirkaŭ vi
  - Povas montri specialajn enretajn kahelajn mapojn
  - Povas montri vidon de sputniko (de Bing)
  - Povas montri diversajn surtavolojn kiel GPX-kursojn kaj aliajn mapojn kun agordebla travideblo
@@ -2352,7 +2352,7 @@ Ebloj por piedirantoj kaj biciklantoj
 Senpere kontribui al OpenStreetMap
  - Raportu map-notoj
  - Alŝutu GPX-kursoj al OSM senpere de la aplikaĵo
- - Aldonu Interesejojn kaj alŝutu ilin al OSM (aŭ post se eksterrete)
+ - Aldonu interesejojn kaj alŝutu ilin al OSM (aŭ post se eksterrete)
  - Laŭvole registru kurson dum fona reĝimo (kiam la aparato estas en dormeta reĝimo)
 
 OsmAnd estas malfermkoda kaj senĉese disvolviganta. Iu ajn povas kontribui al la aplikaĵo per raporti problemojn, traduki, aŭ kodumi novajn eblojn. La projekto vivas kaj estas senpaŭze plibonigata per agoj de programistoj kaj uzantoj. La projekto ankaŭ bezonas financan kontribuon por subteno de programado, kaj testado de novaj ebloj. Per aĉeto de OsmAnd+, vi povas helpi la aplikaĵon esti eĉ pli mojosa! Estas ankaŭ eble donaci al difinaj novaj ecoj de programo, aŭ fari ĝeneralan donacon ĉe osmand.net.
@@ -2394,7 +2394,7 @@ Pliaj ebloj:
 • Turismaj vojoj por regionoj de la tuta mondo
 • Enretaj mapoj el diversaj fontoj
 • Informoj pri pavim-kvalito de vojoj kaj strat-prilumado
-• Aldoni, redakti kaj forigi Interesejojn (por redaktantoj de OpenStreetMap)
+• Aldoni, redakti kaj forigi interesejojn (por redaktantoj de OpenStreetMap)
 • OsMo - perinterreta observado de aliaj aparatoj
 
 Havigu senmalfunkcian navigadilon kie ajn vi estas - en Francujo, Germanujo, Meksiko, Britujo, Hispanujo, Nederlando, Usono, Rusujo, Brazilo kaj en iu ajn alia lando.
