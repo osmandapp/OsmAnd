@@ -35,7 +35,7 @@
   <string name="backToMenu">Atpakaļ uz izvēlni</string>
   <string name="zoomOut">Samazināt</string>
   <string name="zoomIn">Palielināt</string>
-  <string name="zoomIs">Mērogs ir</string>
+  <string name="zoomIs">Mērogs</string>
   <string name="north">ziemeļi</string>
   <string name="north_north_east">ziemeļu-ziemeļaustrumu</string>
   <string name="north_east">ziemeļaustrumu</string>
@@ -133,9 +133,9 @@
   <string name="global_settings">Globālie uzstādījumi</string>
   <string name="index_settings">Kartes faili</string>
   <string name="index_settings_descr">"Lejupielādēt un pārraudzīt kartes daļas,  balss pakas un vikipēdijas interešu punktus (POI)"</string>
-  <string name="general_settings">Vispārīgie uzstādījumi</string>
+  <string name="general_settings">Vispārējie uzstādījumi</string>
   <string name="general_settings_descr">Mainīt aplikācijas uzstādījumus</string>
-  <string name="global_app_settings">Vispārīgie uzstādījumi</string>
+  <string name="global_app_settings">Vispārējie uzstādījumi</string>
   <string name="user_name">OSM lietotāja vārds</string>
   <string name="open_street_map_login_descr">Nepieciešams, lai veiktu augšupielādes openstreetmap.org</string>
   <string name="user_password">Jūsu OSM parole</string>
@@ -202,7 +202,7 @@
   
   <string name="search_position_map_view">Kartes centrs</string>
   <string name="select_search_position">Reģions:</string>
-  <string name="context_menu_item_search">Meklēt apkārtnē</string>
+  <string name="context_menu_item_search">Meklēt tuvumā</string>
   
   <string name="shared_string_save_as_gpx">Saglabāt maršrutu GPX trasē</string>
   <string name="route_successfully_saved_at">Maršruts veiksmīgi saglabāts kā \'%1$s\'.</string>
@@ -295,7 +295,7 @@
   <string name="map_overlay_descr">Izvēlēties pārklāja karti</string>
   <string name="tile_source_already_installed">Karte jau ir instalēta, uzstādījumi tiks atjaunoti</string>
   <string name="select_tile_source_to_install">Izvēlieties (bilžu) kartes, kuras instalēt vai atjaunināt</string>
-  <string name="internet_not_available">Nav savienojums ar internetu</string>
+  <string name="internet_not_available">Nav interneta savienojuma</string>
   <string name="install_more">Instalēt vēl…</string>
   
   
@@ -386,7 +386,7 @@
   
   
   <string name="osmand_routing_experimental">OsmAnd bezsaistes navigācija ir eksperimentāla funkcija un tā nestrādā attālumiem, kas ir lielāki par 20 km.\n\nNavigācijas serviss pagaidām ir pārslēgts uz tiešsaistes CloudMade.</string>
-  <string name="specified_dir_doesnt_exist">Nevar atrast norādīto mapi.</string>
+  <string name="specified_dir_doesnt_exist">Norādīto mapi nevar atrast.</string>
   <string name="application_dir">Datu uzglabāšanas mape</string>
   
   <string name="osmand_net_previously_installed">Ir atrasta vecāka OsmAnd versija. Bezsaistes dati ir atbalstīti jaunajā versijā,  bet izlasi vajadzēs eksportēt no vecās versijas, pēc tam importēt jaunajā versijā.</string>
@@ -397,8 +397,8 @@
   <string name="loading_builds">Lejupielādē OsmAnd versijas…</string>
   <string name="select_build_to_install">Izvēlieties, kuru OsmAnd versiju instalēt</string>
   <string name="contribution_activity">Instalācijas versija</string>
-  <string name="gps_status_app_not_found">GPS statusa aplikācija nav instalēta. Meklēt marketā?</string>
-  <string name="voice_is_not_available_msg">Nav pieejama balss vadība. Lūdzu dodieties uz uzstādījumiem un izvēlieties balss pakotni vai lejupielādējiet to.</string>
+  <string name="gps_status_app_not_found">GPS statusa aplikācija nav instalēta. Meklēt Play veikalā?</string>
+  <string name="voice_is_not_available_msg">"Nav pieejama bass vadība,  lūdzu ejiet uz \'Uzstādījumi\' → \'Vispārējie izstādījumi\' → \'Balss vadība\' un izvēlieties vai lejupielādējiet balss pakotni."</string>
   <string name="voice_is_not_available_title">Nav izvēlēta balss vadība</string>
   <string name="daynight_mode_day">Diena</string>
   <string name="daynight_mode_night">Nakts</string>
@@ -437,18 +437,18 @@
   
   <string name="context_menu_item_search_transport">Meklēt sabiedrisko transportu</string>
   <string name="transport_searching_transport">Transporta rezultāti (bez galamērķa):</string>
-  <string name="transport_searching_route">Transporta rezultāti ({0} līdz galamērķim):</string>
+  <string name="transport_searching_route">Transporta meklēšanas rezultāti ({0} līdz mērķim):</string>
   
-  <string name="transport_search_again">Atsākt no jauna meklēšanu</string>
+  <string name="transport_search_again">Atsākt meklēšanu</string>
   
   <string name="voice">Ierakstīta balss</string>
   <string name="no_vector_map_loaded">Vektoru karte nav ielādēta</string>
   <string name="map_route_by_gpx">Navigācija pēc GPX</string>
-  <string name="gpx_files_not_found">Treku mapē nav atrasti GPX faili</string>
+  <string name="gpx_files_not_found">Treku mapē nav atrasts neviens GPX fails</string>
   <string name="layer_gpx_layer">GPX trases…</string>
   <string name="error_reading_gpx">Kļūda, nolasot GPX datus</string>
   <string name="vector_data">Bezsaistes vektoru kartes</string>
-  <string name="transport_context_menu">Meklēt transportu pieturas vietā</string>
+  <string name="transport_context_menu">Meklēt transportu apstāšanās vietā</string>
   
   
   <string name="poi_context_menu_modify">Labot POI</string>
@@ -549,7 +549,7 @@
   <string name="transport_route_distance">Maršruta garums</string>
   <string name="transport">Transports</string>
   <string name="shared_string_ok">Labi</string>
-  <string name="show_transport_over_map_description">Rādīt uz kartes sabiedriskā transporta pieturas</string>
+  <string name="show_transport_over_map_description">Rādīt kartē sabiedriskā transporta pieturas</string>
   <string name="show_transport_over_map">Rādīt pieturas</string>
   <string name="hello">OsmAnd navigācija</string>
   <string name="update_poi_success">POI dati tika veiksmīgi augšuplādēti ({0} tika ielādēti)</string>
@@ -572,7 +572,7 @@
   <string name="searching">Notiek meklēšana…</string>
   <string name="searching_address">Meklē adresi…</string>
   <string name="search_osm_nominatim">Meklēt ar OSM Nominatim</string>
-  <string name="hint_search_online">Meklēt tiešsaistē: Mājas numurs, iela, pilsēta</string>
+  <string name="hint_search_online">Meklēt tiešsaistē: Mājas numuru, ielu, pilsētu</string>
   <string name="search_offline_address">Bezsaistes</string>
   <string name="search_online_address">Internets</string>
   <string name="max_level_download_tile">Maksimālais tiešsaistes palielinājums</string>
@@ -580,7 +580,7 @@
   <string name="route_general_information">Kopējā distance %1$s, ceļojuma laiks %2$d h %3$d min.</string>
   <string name="router_service_descr">Izvēlieties tiešsaites vai netiešsaites maršrutēšanas pakalpojumu</string>
   <string name="router_service">Maršrutēšanas pakalpojums</string>
-  <string name="sd_dir_not_accessible">SD kartē nav pieejama glabātuves mape!</string>
+  <string name="sd_dir_not_accessible">Nevar piekļūt datu glabātuves mapei SD kartē!</string>
   <string name="download_question">Lejupielādēt {0} - {1} ?</string>
   <string name="download_question_exist">{0} bezsaistes dati jau eksistē ({1}). Vai vēlaties atjaunināt? ({2}) ?</string>
   <string name="address">Adrese</string>
@@ -648,8 +648,8 @@
   <string name="save_current_track">Saglabāt patreizējo GPX trasi</string>
   <string name="save_track_interval">Logošanas intervāls navigācijas laikā</string>
   <string name="save_track_interval_descr">Izvēlieties ceļa logošanas intervālu treka ierakstam</string>
-  <string name="save_track_to_gpx_descrp">Maršruta laikā treki tiks saglabāti treku mapē</string>
-  <string name="save_track_to_gpx">Navigācijas laikā rakstīt treku GPX failā</string>
+  <string name="save_track_to_gpx_descrp">Navigācijas laikā treki tiks saglabāti treku mapē</string>
+  <string name="save_track_to_gpx">Navigācijas laikā treku rakstīt GPX failā</string>
   <string name="update_tile">Atjaunot karti</string>
   <string name="reload_tile">Pārlādēt atēlu</string>
   <string name="mark_point">Mērķis</string>
@@ -785,7 +785,7 @@
   <string name="basemap_was_selected_to_download">Pamatkarte, kas ir nepieciešama aplikācijas normālai darbībai, tika pievienota lejupielādei.</string>
   
   <string name="map_online_plugin_is_not_installed">Aktivizēt tiešsaistes karšu spraudni, lai atlasītu citus karšu avotus</string>
-  <string name="map_online_data">Bezsaistes kartes (bildes)</string>
+  <string name="map_online_data">Tiešsaistes kartes</string>
   <string name="map_online_data_descr">Lietot tiešaistes kartes (lejuplādējot un kešojot bildes SD kartē)</string>
   <string name="shared_string_online_maps">Tiešsaistes kartes</string>
   <string name="online_map_settings_descr">Konfigurēt tiešaistes vai kešotās kartes bildes</string>
@@ -984,7 +984,7 @@ OsmAnd ir atvērtā koda navigācijas aplikācija ar piekļuvi vispusīgiem Open
 	<string name="int_continuosly">Nepārtraukti</string>
 	<string name="map_widget_show_destination_arrow">Rādīt mērķa virzienu</string>
     <string name="enable_plugin_monitoring_services">Izmantot ceļa ieraksta spraudni monitorēšanas servisiem (GPX ierakstiem, sekošanai tiešsaistē)</string>
-    <string name="non_optimal_route_calculation">Aprēķināt iespējami neoptimālu maršrutu tāliem attālumiem</string>
+    <string name="non_optimal_route_calculation">Aprēķināt, iespējams neoptionālu maršrutu, lielākiem attālumiem</string>
     <string name="gps_not_available">Lūdzu iespējot GPS uzstādījumos</string>
     <string name="map_widget_monitoring_services">Monitorēšanas servisi</string>
 	<string name="no_route">Nav ceļa</string>
@@ -995,7 +995,7 @@ OsmAnd ir atvērtā koda navigācijas aplikācija ar piekļuvi vispusīgiem Open
 	
 	<string name="close_changeset">Aizvērt izmaiņu kopu</string>
 	<string name="zxing_barcode_scanner_not_found">Nav instalēta ZXing Barcode Scanner aplikācija. Meklēt Google Play veikalā?</string>
-	<string name="rendering_attr_roadColors_description">Izvēlēties ceļu krāsu shēmu:</string>
+	<string name="rendering_attr_roadColors_description">Izvēlieties ceļu krāsu shēmu:</string>
 	<string name="rendering_attr_roadColors_name">Ceļu krāsu shēma</string>
     <string name="map_widget_map_rendering">Kartes renderēšana</string>
     <string name="app_mode_motorcycle">Motocikls</string>
@@ -1081,7 +1081,7 @@ OsmAnd ir atvērtā koda navigācijas aplikācija ar piekļuvi vispusīgiem Open
     
     <string name="distance_measurement_load_gpx">Atvērt GPX failu</string>
     <string name="wait_current_task_finished">Lūdzu uzgaidiet, kamēr tiks pabeigta darbība</string>
-    <string name="use_kalman_filter_compass_descr">Samazina kompasa svārstības, bet palielina inerces laiku</string>
+    <string name="use_kalman_filter_compass_descr">"Samazina kompasa svārstības,  palielinot inertumu"</string>
     <string name="use_kalman_filter_compass">Lietot Kalmana filtru</string>
     <string name="use_magnetic_sensor_descr">Lietot magnētisko sensoru orientācijas sensora vietā, lai noteiktu kompasa stāvokli</string>
     <string name="use_magnetic_sensor">Lietot magnētisko sensoru</string>
@@ -1195,7 +1195,7 @@ OsmAnd ir atvērtā koda navigācijas aplikācija ar piekļuvi vispusīgiem Open
     <string name="search_villages_and_postcodes">Meklēt apdzīvotās vietas/pasta indeksus</string>
 	<string name="rendering_attr_showRoadMaps_description">Izvēlieties, kad rādīt tikai ceļu tīkla kartes:</string>
 	<string name="rendering_attr_showRoadMaps_name">Ceļu tīkla kartes</string>
-    <string name="safe_mode_description">Palaist programmu avārijas režīmā (lietojot lēnāku Android iebūvētā koda vietā).</string>
+    <string name="safe_mode_description">Palaist aplikāciju drošajā režīmā (lietojot lēnāku Android dzimtā koda vietā).</string>
     <string name="safe_mode">Drošais režīms</string>
     <string name="native_library_not_running">Programma darbojas drošajā režīmā (atspējot uzstādījumos).</string>
     <string name="background_service_is_enabled_question">OsmAnd serviss turpinās darboties. Vai vēlaties to izslēgt?</string>
@@ -1420,7 +1420,7 @@ Aptuvenais kartes pārklājums un kvalitāte:
 	<string name="routing_attr_avoid_motorway_name">Izvairīties no automaģistrālēm</string>
 	<string name="routing_attr_avoid_motorway_description">Izvairīties no automaģistrālēm jeb ātrgaitas šosejām</string>
 	<string name="routing_attr_weight_name">Svara robežas</string>
-	<string name="routing_attr_weight_description">Norādīt maršrutos pieļaujamo transportlīdzekļa svaru</string>
+	<string name="routing_attr_weight_description">Norādiet transportlīdzekļa svaru, ko ņemt vērā maršrutu aprēķinos</string>
     <string name="select_gpx">Paņemt GPX…</string>
     <string name="route_descr_select_destination">Atlasīt galamērķi</string>
     <string name="shared_string_select_on_map">Atzīmēt uz kartes</string>
@@ -1428,7 +1428,7 @@ Aptuvenais kartes pārklājums un kvalitāte:
     <string name="route_info">Maršruta informācija</string>
     <string name="keep_and_add_destination_point">Pievienot kā nākamo galamērķi</string>
     <string name="shared_string_favorite">Izlase</string>
-    <string name="calculate_osmand_route_without_internet">Aprēķināt OsmAnd maršruta segmentu, neizmantojot internetu</string>
+    <string name="calculate_osmand_route_without_internet">Aprēķināt OsmAnd maršruta segmentu bez interneta</string>
     <string name="gpx_option_calculate_first_last_segment">Aprēķināt OsmAnd maršrutu pirmajam un pēdējam segmentam</string>
     <string name="use_displayed_track_for_navigation">Vai lietot norādīto ceļu navigācijai?</string>
     <string name="index_name_italy">Eiropa - Itālija</string>
@@ -1581,7 +1581,7 @@ Reģistrētu lietotāju grupām ir pieejamas tādas papildiespējas kā grupas a
     <string name="osmo_edit_color">Ekrāna krāsa</string>
     <string name="osmo_sign_in">Pierakstīties</string>
     <string name="osmo_create_groups_confirm">Lai izveidotu grupas, jums jābūt reģistrētam OsMo lietotājam.</string>
-    <string name="osmo_credentials_not_valid">Jūsu osmo lietotāja dati nav derīgi.</string>
+    <string name="osmo_credentials_not_valid">Jūsu OsMo lietotāja dati nav derīgi.</string>
     <string name="osmo_regenerate_login_ids_confirm">Vai tiešām gribat reģenerēt personīgo id? Savienotie lietotāji vairs nevarēs jums sekot.</string>
     <string name="osmo_regenerate_login_ids">Reģenerēt lietotāja id</string>
     <string name="osmo_cancel_moving_target">Atcelt kustīgo mērķi</string>
@@ -1666,7 +1666,7 @@ Ierakstītie treki vēlāk var tikt izmantoti treka analīzei, koplietošanai ar
     <string name="rendering_value_car_name">Auto</string>
     <string name="rendering_value_bicycle_name">Velobraucējs</string>
     <string name="rendering_value_pedestrian_name">Gājējs</string>
-    <string name="rendering_attr_coloredBuildings_name">Būves krāsas pēc tipa</string>
+    <string name="rendering_attr_coloredBuildings_name">Krāsas pēc būves tipa</string>
     <string name="osmo_invite">Ielūgt…</string>
     <string name="osmo_leave_confirmation_msg">Vai gribat atstāt grupu %1$s?</string>
     <string name="osmo_specify_tracker_id">Lūdzu norādiet ID</string>
@@ -1738,7 +1738,7 @@ Vai gribat veikt jaunu reģistrāciju?</string>
     <string name="download_tab_downloads">Lejupielādes</string>
     <string name="download_tab_updates">Atjauninājumi</string>
     <string name="download_tab_local">Krātuve</string>
-	<string name="no_internet_connection">Lejupielāde neizdevās, lūdzu pārbaudiet interneta savienojumu.</string>
+	<string name="no_internet_connection">Lejupielāde nav iespējama, lūdzu pārbaudiet interneta savienojumu.</string>
     <string name="shared_string_dismiss">Atcelt</string>
     <string name="everything_up_to_date">Visi faili ir atjaunoti</string>
     <string name="use_opengl_render">Lietot OpenGL renderēšanu</string>
@@ -1837,7 +1837,7 @@ Vai gribat veikt jaunu reģistrāciju?</string>
     <string name="short_location_on_map">Lat %1$s↵\n Lon %2$s</string>
     <string name="tips_and_tricks_descr">Biežāk uzdotie jautājumi, jaunumi un pārējais</string>
     <string name="routing_settings_2">Navigācijas uzstādījumi</string>
-    <string name="general_settings_2">Vispārīgie uzstādījumi</string>
+    <string name="general_settings_2">Vispārējie uzstādījumi</string>
 	<string name="shared_string_ellipsis">…</string>
 	
 	<string name="shared_string_enable">Iespējot</string>
@@ -1915,7 +1915,7 @@ Vai gribat veikt jaunu reģistrāciju?</string>
 	<string name="route_descr_destination">Galamērķis</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Slēpošanas simbolu pārklājs</string>
     <string name="local_index_description">Nospiediet, lai redzētu detaļas, paturiet nospiestu, lai deaktivizētu vai dzēstu. Datu apjoms (%1$s brīvs):</string>
-	<string name="voices">Balss uzvednes</string>
+	<string name="voices">Balss vadība</string>
 	<string name="av_camera_pic_size">Fotokameras bildes izmērs</string>
 	<string name="av_camera_pic_size_descr">Norādīt iebūvētās fotokameras bildes lielumu</string>
     <string name="plugin_description_title">Apraksts</string>
@@ -2114,7 +2114,7 @@ Vai gribat veikt jaunu reģistrāciju?</string>
     <string name="lang_als">Albāņu (tosku)</string>
     <string name="read_more">Lasīt vēl</string>
     <string name="whats_new">Kas jauns</string>
-    <string name="rendering_attr_hideProposed_name">Izvirzītie objekti</string>
+    <string name="rendering_attr_hideProposed_name">Ieteiktie objekti</string>
     <string name="shared_string_update">Atjauninājums</string>
     <string name="shared_string_upload">Augšupielādēt</string>
     <string name="osm_edit_created_poi">Izveidots OSM POI</string>
@@ -2385,10 +2385,10 @@ un vēl...
     <string name="finish_navigation">Beigt navigāciju</string>
     <string name="avoid_road">Izvairīties no ceļa</string>
     <string name="storage_directory_readonly_desc">Izvēlētā datu mape darbojas tikai lasīšanas režīmā, tāpēc datu uzglabāšanai tiks īslaicīgi izmantota ierīces iekšējā atmiņa. Lūdzu izvēlieties citu glabātuves vietu.</string>
-    <string name="storage_directory_shared">Dalītā atmiņa</string>
+    <string name="storage_directory_shared">Kopīgā krātuve</string>
     <string name="full_report">Pilnais pārskats</string>
     <string name="open_street_map_login_and_pass">OpenStreetMap lietotāja vārds un parole</string>
-    <string name="osm_live_email_desc">Osm_live epasta ziņojumi</string>
+    <string name="osm_live_email_desc">Mums tas ir vajadzīgs, lai informētu jūs par ieguldījumiem</string>
     <string name="plugin_nautical_descr">"Spraudnis papildina OsmaAnd kartes ar jūras kartēm kuģošanai, ūdenslēpošanai un citiem ūdens sporta veidiem.
 
 
@@ -2484,7 +2484,7 @@ Aktivizējot spraudni, kartes stils tiek nomainīts uz \"Ziema un slēpošana,\"
     <string name="lang_en_gb">Angļu (apvienotā karaliste)</string>
     <string name="lang_be_by">Baltkrievu (latīņu)</string>
     <string name="lang_hu_formal">Hungāru (formālā)</string>
-    <string name="lang_kn">Kannada</string>
+    <string name="lang_kn">Kannaru</string>
     <string name="osm_live_payment_desc">Abonoments tiks apmaksāts automātiski katru mēnesi. Jūs varat atteikties no abonomenta Google Play jebkurā laikā.</string>
     <string name="donation_to_osm">Ziedojums OpenStreetMap kopienai</string>
     <string name="donation_to_osm_desc">Daļa no jūsu ziedojuma tiks OSM lietotājiem, kuri piedalās OpenStreetMaps kartes veidošanā. Abonomenta izmaksas paliek nemainīgas.</string>
@@ -2513,7 +2513,7 @@ Aktivizējot spraudni, kartes stils tiek nomainīts uz \"Ziema un slēpošana,\"
     <string name="no_update_info_desc">Nepārbaudīt jauninājumus par jaunām versijām un akcijām no OsmAnd</string>
     <string name="no_update_info">Nerādīt jauninājumus</string>
     <string name="update_all_maps_now">Vai vēlaties atjaunot visas kartes?</string>
-    <string name="clear_tile_data">Iztīrīt flīzes</string>
+    <string name="clear_tile_data">Iztīrīt bilžu kešatmiņu</string>
     <string name="routing_attr_short_way_name">Ekonomiskais maršruts</string>
     <string name="routing_attr_short_way_description">Lietot ekonomisko maršrutu (parasti īsākais)</string>
     <string name="replace_favorite_confirmation">Vai nomainīt izlases vienību %1$s?</string>
