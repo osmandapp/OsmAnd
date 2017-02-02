@@ -311,7 +311,7 @@ public class GPXUtilities {
 			points = 0;
 
 			double channelThresMin = 5;            // Minimum oscillation amplitude considered as noise for Up/Down analysis
-			double channelThres = channelThresMin; // Actual oscillation amplitude considered as noise, try depedency on current hdop
+			double channelThres = channelThresMin; // Actual oscillation amplitude considered as noise, try depedency on current hdop/getAccuracy
 			double channelBase;
 			double channelTop;
 			double channelBottom;
@@ -378,7 +378,7 @@ public class GPXUtilities {
 						if (point.ele > channelTop) {
 							channelTop = point.ele;
 							if (!Double.isNaN(point.hdop)) {
-								channelThres = Math.max(channelThres, 2.0 * point.hdop);  //Try empirical 2*hdop, may better serve very flat tracks, or high dop tracks
+								channelThres = Math.max(channelThres, 2.0 * point.hdop);  //Use empirical 2*getAccuracy(vertical), this better serves very flat tracks or high dop tracks
 							}
 						} else if (point.ele < channelBottom) {
 							channelBottom = point.ele;
