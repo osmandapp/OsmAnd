@@ -1,5 +1,47 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
+    <string name="quick_action_duplicates">Указанное имя для быстрого действия уже используется. Действие будет сохранено как %1$s чтобы избежать дублирования.</string>
+    <string name="quick_action_duplicate">Обнаружен дубликат имени</string>
+    <string name="quick_action_showhide_favorites_descr">Нажатие на кнопку действия приведёт к отображению/скрытию избранных точек с карты</string>
+    <string name="quick_action_showhide_poi_descr">Нажатие на кнопку действия приведёт к отображению/скрытию POI с карты</string>
+    <string name="quick_action_showhide_favorites_title">Показать/скрыть избранные</string>
+    <string name="quick_action_favorites_show">Показать избранные</string>
+    <string name="quick_action_favorites_hide">Скрыть избранные</string>
+    <string name="quick_action_showhide_poi_title">Показать/скрыть POI</string>
+    <string name="quick_action_poi_show">Показать %1$s</string>
+    <string name="quick_action_poi_hide">Скрыть %1$s</string>
+    <string name="quick_action_add_category">Добавить категорию</string>
+    <string name="quick_action_add_create_items">Действия</string>
+    <string name="quick_action_add_configure_map">Настройка карты</string>
+    <string name="quick_action_add_navigation">Навигация</string>
+    <string name="quick_action_fav_name_descr">Если оставить это поле пустым, то оно будет автоматически заполнено адресом или названием места</string>
+    <string name="quick_action_bug_descr">Это сообщение будет отправлено как комментарий</string>
+    <string name="quick_action_bug_message">Сообщение</string>
+    <string name="quick_action_category_descr">Выберите категорию для сохранения точки избранного</string>
+    <string name="quick_action_gpx_category_descr">Выберите категорию (опционально)</string>
+    <string name="quick_action_poi_list">Список категорий</string>
+    <string name="quick_action_sh_poi_descr">Вы можете добавить одну или несколько категорий POI для отображения на карте</string>
+    <string name="quick_action_page_list_descr">Нажатие на кнопку быстрого действия позволит циклически переключать элементы данного списка</string>
+    <string name="quick_action_map_style_action">Добавить стиль карты</string>
+    <string name="quick_action_empty_param_error">Параметры не должны быть пустыми</string>
+    <string name="quick_action_map_styles">Стили карты</string>
+    <string name="quick_action_map_overlay">Сменить карту покрытия</string>
+    <string name="quick_action_map_overlay_title">Карты покрытия</string>
+    <string name="quick_action_map_overlay_action">Добавить карту покрытия</string>
+    <string name="quick_action_map_overlay_switch">Карта покрытия изменена на \"%s\"</string>
+    <string name="quick_action_map_underlay_switch">Подложка карты изменена на \"%s\"</string>
+    <string name="quick_action_map_underlay">Сменить подложку карты</string>
+    <string name="quick_action_map_underlay_title">Подложки карты</string>
+    <string name="quick_action_map_underlay_action">Добавить подложку</string>
+    <string name="quick_action_map_source">Сменить источник карты</string>
+    <string name="quick_action_map_source_title">Источники карты</string>
+    <string name="quick_action_map_source_action">Добавить источник карты</string>
+    <string name="quick_action_map_source_switch">Источник карты изменён на \"%s\"</string>
+    <string name="quick_action_btn_tutorial_title">Изменить расположение кнопки</string>
+    <string name="quick_action_btn_tutorial_descr">Долгое нажатие и перетаскивание позволит переместить кнопку</string>
+
+    <string name="rendering_attr_depthContours_description">Отображать данные о глубинах</string>
+    <string name="rendering_attr_depthContours_name">Контуры глубин</string>
     <string name="rendering_attr_contourDensity_description">Частота горизонталей</string>
     <string name="rendering_attr_contourDensity_name">Частота горизонталей</string>
     <string name="rendering_value_high_name">Высокая</string>
