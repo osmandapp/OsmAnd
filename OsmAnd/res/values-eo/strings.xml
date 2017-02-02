@@ -2658,4 +2658,6 @@ Indikas lokon:  %1$s x %2$s"</string>
 
  kaj pli...
  "</string>
+	<string name="rendering_attr_depthContours_description">Montras punktojn kaj konturojn de profundo</string>
+    <string name="rendering_attr_depthContours_name">Profundaj konturoj</string>
 	</resources>
