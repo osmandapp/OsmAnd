@@ -1224,7 +1224,7 @@ Die globalen Daten (zwischen N 70° und S 70°) basieren auf Messungen von SRTM 
 	<string name="shared_string_do_not_show_again">Nicht erneut anzeigen</string>
 	
 	<string name="distance_measurement_load_gpx">Vorhandene GPX-Datei öffnen</string>
-	<string name="search_street_in_neighborhood_cities">Straßenname in weiteren Orten suchen</string>
+	<string name="search_street_in_neighborhood_cities">Straßennamen in benachbarten Orten suchen</string>
 	<string name="intermediate_items_sort_by_distance">Tür-zu-Tür sortieren</string>
 	<string name="use_distance_measurement_help">* Tippen, um einen Punkt zu setzen.
 * Lange auf die Karte tippen, um einen vorigen Punkt zu löschen.
@@ -1260,16 +1260,16 @@ Die globalen Daten (zwischen N 70° und S 70°) basieren auf Messungen von SRTM 
 	<string name="av_camera_focus_hiperfocal">Hyperfokaler Fokus</string>
 	<string name="av_camera_focus_edof">Erweiterte Schärfentiefe (EDOF)</string>
 	<string name="av_camera_focus_macro">Makro-Fokusmodus (Nahaufnahme)</string>
-	<string name="speak_title">Ansagen von …</string>
-	<string name="speak_descr">Einstellungen für Ansagen zu Straßennamen, Verkehrswarnungen, Blitzern oder Höchstgeschwindigkeit</string>
-	<string name="speak_street_names">Straßennamen ansagen (TTS)</string>
+	<string name="speak_title">Ansagen …</string>
+	<string name="speak_descr">Einstellungen für Ansagen zu Straßennamen, Verkehrswarnungen, Blitzern oder Tempolimits</string>
+	<string name="speak_street_names">Straßennamen (TTS)</string>
 	<string name="map_widget_fps_info">FPS-Debug-Info</string>
 	<string name="driving_region_descr">Region zum Fahren wählen: Europa, USA, GB, etc.</string>
 	<string name="driving_region_japan">Japan</string>
 	<string name="driving_region_us">USA</string>
 	<string name="driving_region_canada">Kanada</string>
 	<string name="driving_region_europe_asia">Europa und Asien</string>
-	<string name="driving_region_uk">UK, Indien, &amp; andere</string>
+	<string name="driving_region_uk">UK, Indien &amp; andere</string>
 	<string name="driving_region_australia">Australien</string>
 	<string name="announce_gpx_waypoints">GPX-Wegpunkte</string>
 	<string name="driving_region">Fahrgebiet</string>
@@ -2695,19 +2695,19 @@ Abgedeckte Fläche: %1$s x %2$s</string>
  • Verbessertes Ansprechen auf Bildschirmgesten
 
 
- • Neue Kartenschriftarten die mehr Lokalisierungen unterstützen
+ • Neue Kartenschriftarten, die weitere Sprachen abdecken
 
 
- • Unterstützung von TTS für regionals Sprachdialekte
+ • TTS-Unterstützung regionaler Dialekte
 
 
- • Verbesserungen der Sichtbarkeiten bei einigen Kartenstilen und Wikipedia
+ • Verbesserungen der Sichtbarkeit bei einigen Kartenstilen und Wikipedia
 
 
  • Unterstützung des Offenen Standortcodes (OLC)
 
 
- • Anzeige eines Höhenprofils für aufgezeichnete GPX Tracks
+ • Anzeige eines Höhenprofils für aufgezeichnete GPX-Tracks
 
 
  • Verschiedene Verbesserungen und Fehlerbehebungen
