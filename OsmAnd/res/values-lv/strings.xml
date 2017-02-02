@@ -569,14 +569,14 @@
   <string name="uploading_data">Augšupielādē datus…</string>
   <string name="uploading">Augšupielādē…</string>
   <string name="search_nothing_found">Nekas netika atrasts</string>
-  <string name="searching">Notiek meklēšana…</string>
+  <string name="searching">Meklē…</string>
   <string name="searching_address">Meklē adresi…</string>
-  <string name="search_osm_nominatim">Meklēt ar OSM Nominatim</string>
+  <string name="search_osm_nominatim">Meklēt tiešsaistē ar OSM Nominatim</string>
   <string name="hint_search_online">Meklēt tiešsaistē: Mājas numuru, ielu, pilsētu</string>
-  <string name="search_offline_address">Bezsaistes</string>
-  <string name="search_online_address">Internets</string>
-  <string name="max_level_download_tile">Maksimālais tiešsaistes palielinājums</string>
-  <string name="max_level_download_tile_descr">Izvēlēties maksimālo palielinājuma līmeni, kuru lejupielādēt tiešsaites kartēm</string>
+  <string name="search_offline_address">Meklēšana bezsaistē</string>
+  <string name="search_online_address">Meklēšana tiešsaistē</string>
+  <string name="max_level_download_tile">Detalizācijas pakāpe</string>
+  <string name="max_level_download_tile_descr">Izvēlēties maksimālo detalizācijas pakāpi tiešsaistes (bilžu) karšu lejupielādei</string>
   <string name="route_general_information">Kopējā distance %1$s, ceļojuma laiks %2$d h %3$d min.</string>
   <string name="router_service_descr">Izvēlieties tiešsaites vai netiešsaites maršrutēšanas pakalpojumu</string>
   <string name="router_service">Maršrutēšanas pakalpojums</string>
@@ -912,8 +912,8 @@ Vietas koordinātes un laiks redzami arī atsevišķā sadaļā Manā izvēlnē.
 <string name="avoid_ferries">Izvairīties no pārceltuvēm</string>
 <string name="avoid_in_routing_title">Izvairīties…</string>
 <string name="avoid_in_routing_descr">Izvairīties no maksas ceļiem, pārceltuvēm un ceļiem bez seguma</string>
-<string name="show_warnings_title">Paziņot par…</string>
-<string name="show_warnings_descr">Satiksmes brīdinājumiem (atļauto ātrumu, stopzīmēm, ceļa rampām), gājēju pārejām, fotoradariem, ceļa joslām</string>
+<string name="show_warnings_title">Rādīt signālus…</string>
+<string name="show_warnings_descr">Satiksmes ierobežojumus (ātruma limitus, stopzīmes, rampas), gājēju pārejas, fotoradarus, ceļa joslas</string>
 <string name="map_widget_fluorescent">Fluorescējošs maršruts</string>
 <string name="map_widget_show_ruler">Lineāls</string>
 
@@ -926,18 +926,18 @@ Vietas koordinātes un laiks redzami arī atsevišķā sadaļā Manā izvēlnē.
 
     
     
-    <string name="context_menu_item_last_intermediate_point">Pievienot kā pēdējo ceļa punktu</string>
-    <string name="context_menu_item_first_intermediate_point">Pievienot kā pirmo ceļa punktu</string>
-    <string name="add_as_last_destination_point">Pievienot kā pēdējo ceļa punktu</string>
-    <string name="add_as_first_destination_point">Pievienot kā pirmo ceļa punktu</string>
-    <string name="replace_destination_point">Aizvietot galamērķi</string>
-    <string name="new_destination_point_dialog">Galamērķis jau ir uzstādīts:</string>
-    <string name="target_point">Galamērķis %1$s</string>
-    <string name="target_points">Ceļa punkti</string>
-    <string name="intermediate_point_too_far">Ceļa punkts %1$s ir pārāk tālu no tuvākā ceļa.</string>
-    <string name="arrived_at_intermediate_point">Jūs esiet nokļuvis ceļa punktā</string>
-    <string name="context_menu_item_intermediate_point">Pievienot kā ceļa punktu</string>
-    <string name="map_widget_intermediate_distance">Ceļa punkts</string>
+    <string name="context_menu_item_last_intermediate_point">Pievienot kā pēdējo starpposma punktu</string>
+    <string name="context_menu_item_first_intermediate_point">Pievienot kā pirmo starpposma punktu</string>
+    <string name="add_as_last_destination_point">Pievienot kā pēdējo starpposma punktu</string>
+    <string name="add_as_first_destination_point">Pievienot kā pirmo starpposma punktu</string>
+    <string name="replace_destination_point">Nomainīt galapunktu</string>
+    <string name="new_destination_point_dialog">Galapunkts jau ir uzstādīts:</string>
+    <string name="target_point">Punkts %1$s</string>
+    <string name="target_points">Galapunkti</string>
+    <string name="intermediate_point_too_far">Starpposma punkts %1$s ir pārāk tālu no tuvākā ceļa.</string>
+    <string name="arrived_at_intermediate_point">Jūs esat nokļuvis starpposma punktā</string>
+    <string name="context_menu_item_intermediate_point">Pievienot kā starpposma punktu</string>
+    <string name="map_widget_intermediate_distance">Starpposma punkts</string>
     <string name="ending_point_too_far">Noslēdzošais punkts ir pārāk tālu no tuvākā ceļa.</string>
     <string name="add_tag">Pievienot tagu</string>
     <string name="btn_advanced_mode">Paplašinātais režīms…</string>
@@ -985,11 +985,11 @@ OsmAnd ir atvērtā koda navigācijas aplikācija ar piekļuvi vispusīgiem Open
 	<string name="map_widget_show_destination_arrow">Rādīt mērķa virzienu</string>
     <string name="enable_plugin_monitoring_services">Izmantot ceļa ieraksta spraudni monitorēšanas servisiem (GPX ierakstiem, sekošanai tiešsaistē)</string>
     <string name="non_optimal_route_calculation">Aprēķināt, iespējams neoptionālu maršrutu, lielākiem attālumiem</string>
-    <string name="gps_not_available">Lūdzu iespējot GPS uzstādījumos</string>
+    <string name="gps_not_available">Lūdzu, ieslēdziet GPS</string>
     <string name="map_widget_monitoring_services">Monitorēšanas servisi</string>
-	<string name="no_route">Nav ceļa</string>
-	<string name="delete_target_point">Noņemt galamērķi</string>
-	<string name="intermediate_point">Ceļa punkts %1$s</string>
+	<string name="no_route">Nav maršruta</string>
+	<string name="delete_target_point">Noņemt punktu</string>
+	<string name="intermediate_point">Starpposma punkts %1$s</string>
     
 		
 	
