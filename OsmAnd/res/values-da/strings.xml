@@ -2856,4 +2856,6 @@ Repræsenterer område: %1$s x %2$s</string>
 
   og mere…
  "</string>
+	<string name="rendering_attr_depthContours_description">Vis dybdekonturer og punkter</string>
+    <string name="rendering_attr_depthContours_name">Dybdekonturer</string>
 	</resources>
