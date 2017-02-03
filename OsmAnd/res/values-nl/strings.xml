@@ -1550,7 +1550,7 @@ Anonieme groepen kunnen makkelijk gemaakt worden, bestaan maar een beperkt aanta
     <string name="osmo_group_description">Beschrijving</string>
     <string name="osmo_group_policy">Groepsbeleid</string>
     <string name="osmo_connect_to_group_id">Groeps-ID</string>
-    <string name="osmo_group_name">Groepnaam</string>
+    <string name="osmo_group_name">Groepsnaam</string>
     <string name="osmo_connect_to_group">Verbind met groep</string>
     <string name="osmo_connect">Verbinden</string>
     <string name="osmo_create_group">Maak een nieuwe groep</string>
@@ -1771,7 +1771,7 @@ Opgenomen tracks kunnen worden gedeeld met vrienden of worden gebruikt als OSM-b
     <string name="map_widget_top">Statusbalk</string>
 	<string name="map_widget_right">Widgets Rechter Kolom</string>
 	<string name="map_widget_left">Widgets Linker Kolom</string>
-	<string name="configure_map">Kaart instellen</string>
+	<string name="configure_map">Kaart-instellingen</string>
     <string name="search_radius_proximity">Binnen</string>
     <string name="osmo_device_not_found">Apparaat niet gevonden</string>
     <string name="osmo_no_connection_msg">OsMo service is niet bereikbaar:
@@ -1912,7 +1912,7 @@ Het activeren van deze weergave verandert de kaartstijl in \'Winter en ski\', me
 	<string name="shared_string_ellipsis">…</string>
 	<string name="shared_string_ok">OK</string>
 	<string name="shared_string_cancel">Annuleren</string>
-	<string name="shared_string_dismiss">Detailscherm sluiten</string>
+	<string name="shared_string_dismiss">Sluiten</string>
 	<string name="shared_string_yes">Ja</string>
 	<string name="shared_string_no">Nee</string>
 	<string name="shared_string_on">Aan</string>
@@ -2193,7 +2193,7 @@ Lengtegraad:\t\t%2$s</string>
     <string name="shared_string_others">Overige</string>
 	<string name="favourites_context_menu_add">Favoriet toevoegen</string>
 	<string name="poi_action_delete">wissen</string>
-	<string name="dahboard_options_dialog_title">Dashboard instellen</string>
+	<string name="dahboard_options_dialog_title">Dashboard-instellingen</string>
 	<string name="show_on_start">Na opstarten tonen</string>
 	<string name="shared_string_card_was_hidden">Kaart was verborgen</string>
 	<string name="shared_string_undo">Ongedaan maken</string>
@@ -2248,7 +2248,7 @@ Lengtegraad:\t\t%2$s</string>
     <string name="plugins_menu_group">Plugins</string>
     <string name="first_usage_item">Eerste gebruik</string>
     <string name="first_usage_item_description">Hoe kaarten te downloaden en basisinstellingen</string>
-    <string name="navigation_item_description">Navigatie instellen</string>
+    <string name="navigation_item_description">Navigatie-instellingen</string>
     <string name="planning_trip_item">Een reis plannen</string>
     <string name="faq_item">FAQ</string>
     <string name="faq_item_description">Veel gestelde vragen</string>
@@ -2814,7 +2814,7 @@ voor Gebied: %1$s x %2$s</string>
     <string name="quick_action_poi_hide">Verberg %1$s</string>
     <string name="quick_action_add_category">Categorie toevoegen</string>
     <string name="quick_action_add_create_items">Aanmaken en toevoegen....</string>
-    <string name="quick_action_add_configure_map">Kaart instellen</string>
+    <string name="quick_action_add_configure_map">Kaart-instellingen</string>
     <string name="quick_action_add_navigation">Navigatie</string>
     <string name="quick_action_fav_name_descr">Leeg laten om automatisch adres of plaatsnaam te gebruiken</string>
     <string name="quick_action_bug_descr">Dit bericht wordt automatisch aangevuld in het commentaarveld.</string>
@@ -2841,7 +2841,7 @@ voor Gebied: %1$s x %2$s</string>
     <string name="quick_action_map_source_switch">De kaartbron is gewijzigd naar \"%s\".</string>
     <string name="quick_action_btn_tutorial_title">Positie van de Sneltoets wijzigen</string>
     <string name="quick_action_btn_tutorial_descr">De Sneltoets lang indrukken en slepen om de positie te wijzigen</string>
-	<string name="shared_string_action_name">Actie-naam</string>
+	<string name="shared_string_action_name">Titel voor de Actie (eventueel wijzigen)</string>
 <string name="rendering_attr_depthContours_description">Toon dieptelijnen en -punten</string>
     <string name="rendering_attr_depthContours_name">Dieptelijnen</string>
 	</resources>
