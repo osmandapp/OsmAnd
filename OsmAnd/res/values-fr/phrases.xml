@@ -662,7 +662,7 @@
 	<string name="poi_internet_access_service">Accès Internet : service</string>
 	
 	<string name="poi_railway_buffer_stop">Heurtoir ferroviaire</string>
-	<string name="poi_shop_food">Épicerie et supermarché</string>
+	<string name="poi_shop_food">Epicerie et supermarché</string>
 	<string name="poi_road_obstacle">Route barrée</string>
 		<string name="poi_public_transport">Transport public</string>
 		<string name="poi_air_transport">Transport aérien</string>
@@ -1186,11 +1186,11 @@
 	<string name="poi_aerialway_duration">Durée moyenne du trajet (minutes)</string>
 	<string name="poi_aerialway_bubble_yes">Fermé</string>
 	<string name="poi_aerialway_bubble_no">Non fermé</string>
-	<string name="poi_aerialway_heating_yes">Chauffé</string>
+	<string name="poi_aerialway_heating_yes">Oui</string>
 	<string name="poi_aerialway_heating_no">Non chauffé</string>
-	<string name="poi_aerialway_bicycle_yes">Vélos autorisés</string>
+	<string name="poi_aerialway_bicycle_yes">Autorisés</string>
 	<string name="poi_aerialway_bicycle_no">Vélos interdits</string>
-	<string name="poi_aerialway_bicycle_summer">Vélos autorisés en été seulement</string>
+	<string name="poi_aerialway_bicycle_summer">Autorisés en été seulement</string>
 	<string name="poi_aerialway_access_entry">Entrée uniquement</string>
 	<string name="poi_aerialway_access_exit">Sortie uniquement</string>
 	<string name="poi_aerialway_access_both">Entrée et Sortie</string>
@@ -1250,7 +1250,7 @@
 	<string name="poi_garden_style_english">Type de jardin : anglais</string>
 	<string name="poi_garden_style_japanese">Type de jardin : japonais</string>
 
-	<string name="poi_capacity_disabled_yes">Places réservées aux handicapés</string>
+	<string name="poi_capacity_disabled_yes">Oui</string>
 	<string name="poi_capacity_disabled">Places réservées aux handicapés</string>
 	<string name="poi_capacity_women_yes">Places réservées aux femmes</string>
 	<string name="poi_capacity_women">Places réservées aux femmes</string>
@@ -1259,16 +1259,16 @@
 	<string name="poi_capacity_parent_yes">Places réservées aux parents</string>
 	<string name="poi_capacity_parent">Places réservées aux parents</string>
 
-	<string name="poi_stars_1">Etoiles : 1 (touriste)</string>
-	<string name="poi_stars_1s">Etoiles : 1S (touriste supérieur)</string>
-	<string name="poi_stars_2">Etoiles : 2 (standard)</string>
-	<string name="poi_stars_2s">Etoiles : 2S (standard supérieur)</string>
-	<string name="poi_stars_3">Etoiles : 3 (confort)</string>
-	<string name="poi_stars_3s">Etoiles : 3S (confort supérieur)</string>
-	<string name="poi_stars_4">Etoiles : 4 (première classe)</string>
-	<string name="poi_stars_4s">Etoiles : 4S (première classe supérieure)</string>
-	<string name="poi_stars_5">Etoiles : 5 (luxe)</string>
-	<string name="poi_stars_5s">Etoiles : 5S (luxe supérieur)</string>
+	<string name="poi_stars_1">1 (touriste)</string>
+	<string name="poi_stars_1s">1S (touriste supérieur)</string>
+	<string name="poi_stars_2">2 (standard)</string>
+	<string name="poi_stars_2s">2S (standard supérieur)</string>
+	<string name="poi_stars_3">3 (confort)</string>
+	<string name="poi_stars_3s">3S (confort supérieur)</string>
+	<string name="poi_stars_4">4 (première classe)</string>
+	<string name="poi_stars_4s">4S (première classe supérieure)</string>
+	<string name="poi_stars_5">5 (luxe)</string>
+	<string name="poi_stars_5s">5S (luxe supérieur)</string>
 	<string name="poi_stars_6">Etoiles : 6</string>
 	<string name="poi_stars_7">Etoiles : 7</string>
 	<string name="poi_payment_coins_yes">Liquide accepté</string>
@@ -1980,12 +1980,12 @@
 	<string name="poi_bird_hide">Poste d\'observation d\'oiseaux</string>
 	<string name="poi_horse_riding">Randonnée à cheval</string>
 	<string name="poi_heath">Santé</string>
-	<string name="poi_piste_grooming_mogul">Piste damée : bosses</string>
+	<string name="poi_piste_grooming_mogul">Bosses</string>
 
-	<string name="poi_piste_grooming_no">Piste damée : non</string>
-	<string name="poi_piste_grooming_classic">Piste damée : classique</string>
-	<string name="poi_piste_grooming_classic_skating">Piste damée : classique + skating</string>
-	<string name="poi_piste_grooming_skating">Piste damée : skating</string>
+	<string name="poi_piste_grooming_no">Non</string>
+	<string name="poi_piste_grooming_classic">Classique</string>
+	<string name="poi_piste_grooming_classic_skating">Classique + skating</string>
+	<string name="poi_piste_grooming_skating">Skating</string>
 	<string name="poi_capacity_disabled_no">Pas de place réservée pour handicapés</string>
 	<string name="poi_capacity_women_no">Pas de place réservée pour femmes</string>
 	<string name="poi_description_payment">Description de paiement</string>
@@ -2165,7 +2165,7 @@
 	<string name="poi_embassy_type">Type</string>
 	<string name="poi_city_capital">Capitale</string>
 	<string name="poi_healthcare_alternative_types">Spécialité</string>
-	<string name="poi_free_flying_characteristics">Caractéristique</string>
+	<string name="poi_free_flying_characteristics">Caractéristiques</string>
 	<string name="poi_archaeological_site_type">Type</string>
 	<string name="poi_religion_type">Religion</string>
 	<string name="poi_denomination">Dénomination</string>
@@ -2182,7 +2182,7 @@
 	<string name="poi_outdoor_seating">Places assises extérieures</string>
 	<string name="poi_smoking">Fumeur</string>
 	<string name="poi_delivery">Livraison</string>
-	<string name="poi_drive_in">Drive</string>
+	<string name="poi_drive_in">Drive-in</string>
 	<string name="poi_drive_through">Drive</string>
 	<string name="poi_takeaway">À emporter</string>
 	<string name="poi_cocktails">Cocktails</string>
@@ -2212,7 +2212,7 @@
 	<string name="poi_vacuum_cleaner_filter">Aspirateur</string>
 	<string name="poi_free_flying_characteristic">Caractéristique</string>
 
-<string name="poi_emergency_infrastructure">Infrastructure de situation d\'urgence</string>
+<string name="poi_emergency_infrastructure">Infrastructure de situations d\'urgence</string>
 	<string name="poi_spices">Magasin d\'épices</string>
 	<string name="poi_shop_craft">Magasin d\'art et d\'artisanat</string>
 	<string name="poi_commercial">Zone d\'activités d\'affaires</string>
