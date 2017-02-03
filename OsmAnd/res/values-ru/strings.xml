@@ -2245,7 +2245,6 @@
     <string name="dialog_add_action_title">Добавить действие</string>
     <string name="quick_actions_delete">Удалить действие</string>
     <string name="quick_actions_delete_text">Вы уверены, что хотите удалить действие \"%s\"?</string>
-    <string name="quick_action_showhide_favorites_title">Показать/скрыть избранные</string>
     <string name="quick_action_favorites_show">Показать избранные</string>
     <string name="quick_action_favorites_hide">Скрыть избранные</string>
     <string name="quick_action_showhide_poi_title">Показать/скрыть POI</string>
