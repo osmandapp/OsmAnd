@@ -247,6 +247,7 @@
 
                 <TextView
                     android:id="@+id/map_address_text_shadow"
+                    android:importantForAccessibility="no"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -310,6 +311,7 @@
 
                     <TextView
                         android:id="@+id/waypoint_text_shadow"
+                        android:importantForAccessibility="no"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:ellipsize="end"
@@ -496,6 +498,7 @@
 
                     <TextView
                         android:id="@+id/map_lanes_dist_text_shadow"
+                        android:importantForAccessibility="no"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"

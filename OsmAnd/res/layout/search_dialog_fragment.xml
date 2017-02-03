@@ -190,7 +190,7 @@
 
     <ImageView
         android:id="@+id/fab"
-        android:contentDescription="@string/layer_route"
+        android:contentDescription="@string/save_filter"
         android:layout_width="@dimen/fab_size_with_shadow"
         android:layout_height="@dimen/fab_size_with_shadow"
         android:layout_gravity="right|bottom"

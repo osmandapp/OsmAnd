@@ -640,11 +640,6 @@ public class MapInfoWidgetsFactory {
 					}
 				}
 				if (!text.equals(addressText.getText().toString())) {
-					if (!text.equals("")) {
-						topBar.setContentDescription(text);
-					} else {
-						topBar.setContentDescription(map.getResources().getString(R.string.map_widget_top_text));
-					}
 					addressTextShadow.setText(text);
 					addressText.setText(text);
 					return true;
