@@ -2801,4 +2801,6 @@ Facebook：https://www.facebook.com/osmandapp
 
  和更多…
  "</string>
+	<string name="rendering_attr_depthContours_description">顯示深度等高線和標記</string>
+    <string name="rendering_attr_depthContours_name">深度等高線</string>
 	</resources>
