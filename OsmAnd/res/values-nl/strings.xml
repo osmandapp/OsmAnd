@@ -2842,4 +2842,6 @@ voor Gebied: %1$s x %2$s</string>
     <string name="quick_action_btn_tutorial_title">Positie van de Sneltoets wijzigen</string>
     <string name="quick_action_btn_tutorial_descr">De Sneltoets lang indrukken en slepen om de positie te wijzigen</string>
 	<string name="shared_string_action_name">Actie-naam</string>
-</resources>
+<string name="rendering_attr_depthContours_description">Toon dieptelijnen en -punten</string>
+    <string name="rendering_attr_depthContours_name">Dieptelijnen</string>
+	</resources>
