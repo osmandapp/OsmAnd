@@ -2171,7 +2171,7 @@ POIの更新は利用できません</string>
     <string name="download_files_question_space_with_temp">{0}個のファイルを本当にダウンロードしますか?
  一時的に {3}MB 保存のために {1}MB が必要です。
  現在利用可能なのは {2}MBです。</string>
-    <string name="upload_osm_note_description">OpenStreetMap.orgプロファイルを使用する場合は、OSMメモを匿名でアップロードできます。</string>
+    <string name="upload_osm_note_description">OSMメモのアップロードには匿名、または貴方自身のOpenStreetMap.orgプロファイルを使用することも可能です。</string>
     <string name="upload_osm_note">OSMメモをアップロード</string>
     <string name="map_marker_1st">1番目のマップマーカー</string>
     <string name="map_marker_2nd">2番目のマップマーカー</string>
@@ -2379,4 +2379,10 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="rendering_value_low_name">低</string>
     <string name="rendering_attr_contourWidth_description">等高線の幅</string>
     <string name="rendering_attr_contourWidth_name">等高線の幅</string>
+    <string name="upload_poi">POIのアップロード</string>
+    <string name="osmo_share_location">共有</string>
+    <string name="osmo_pause_location">一時停止</string>
+    <string name="osmo_service_running">OsMo サービスは実行中です</string>
+    <string name="shared_string_continue">続行</string>
+    <string name="shared_string_pause">一時停止</string>
     </resources>
