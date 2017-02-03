@@ -2629,4 +2629,6 @@ Zodpovedá oblasti: %1$s x %2$s</string>
 
  a dalšie…
  "</string>
+	<string name="rendering_attr_depthContours_description">Zobraziť hĺbkové úrovne a body</string>
+    <string name="rendering_attr_depthContours_name">Úrovne hĺbky</string>
 	</resources>
