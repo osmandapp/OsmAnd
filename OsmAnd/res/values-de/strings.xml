@@ -743,7 +743,7 @@ Karten-Kacheln können direkt online bezogen werden, und werden im OsmAnd-Untero
 	<string name="route_head">Geradeaus</string>
 	<string name="first_time_continue">Weiter</string>
 	<string name="first_time_download">Offline-Daten herunterladen</string>
-	<string name="first_time_msg">Danke, dass Sie OsmAnd verwenden. Für viele Funktionen sind offline Karten erforderlich, die Sie in über \'Einstellungen\' → \'Kartenverwaltung\' herunterladen können. Danach können Sie Landkarten ansehen sowie Adressen, POI und ÖPNV finden.</string>
+	<string name="first_time_msg">Danke, dass Sie OsmAnd verwenden. Viele Funktionen benötigen offline Karten, die Sie in über \'Einstellungen\' → \'Kartenverwaltung\' herunterladen können. Danach können Sie Landkarten ansehen sowie Adressen, POI und ÖPNV finden.</string>
 	<string name="search_poi_location">Warte auf Signal…</string>
 	<string name="search_near_map">Suche in der Nähe</string>
 	<string name="search_nearby">Suche um Aufenthaltsort</string>
@@ -2514,13 +2514,13 @@ Wenn Sie OsmAnd und OSM lieben und unterstützen wollen, so ist dies die perfekt
     <string name="si_mi_meters">Meilen/Meter</string>
     <string name="osm_live_banner_desc">Holen Sie sich Karten-Downloads ohne Limit und öfter als einmal pro Monat aktualisierte Karten: wöchentlich, täglich oder stündlich.</string>
     <string name="osmand_plus_banner_desc">Vollversion von OsmAnd mit unbegrenzten Karten-Downloads und monatlichen Kartenaktualisierungen.</string>
-    <string name="get_for">Holen für %1$s</string>
+    <string name="get_for">Für %1$s abonnieren</string>
     <string name="get_for_month">Für %1$s Monat holen</string>
-    <string name="get_it">Holen</string>
+    <string name="get_it">Abonnieren</string>
     <string name="osm_live_payment_desc">Die Abonnementsgebühr wird jeden Monat abgerechnet. Sie können Ihr Abonnement auf Google Play jederzeit kündigen.</string>
     <string name="donation_to_osm">Spende an die OpenStreetMap-Gemeinschaft</string>
     <string name="donation_to_osm_desc">Einen Teil Ihrer Spende erhalten OSM-Anwender, die Änderungen an OpenStreetMap übermitteln. Die Kosten für das Abonnement bleiben unverändert.</string>
-    <string name="osm_live_subscription_desc">Das Abonnement macht stündliche, tägliche, wöchentliche Updates und unbegrenzte Downloads aller Karten weltweit möglich.</string>
+    <string name="osm_live_subscription_desc">Das Abonnement macht stündliche, tägliche, wöchentliche Updates, und unbegrenzte Downloads aller Karten weltweit möglich.</string>
     <string name="lang_kab">Kabylisch</string>
     <string name="shared_string_filters">Filter</string>
     <string name="apply_filters">Filter anwenden</string>
