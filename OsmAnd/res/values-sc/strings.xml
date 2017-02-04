@@ -334,8 +334,11 @@ Su grupu chi no est istadu iscantzelladu a pustis de carchi mese benit impostadu
     <string name="audionotes_plugin_name">Estensione notas àudio/vìdeo</string>
     <string name="index_srtm_parts">partes</string>
     <string name="index_srtm_ele">Lìnias de livellu</string>
-    <string name="srtm_plugin_description">"Custa estensione frunit sas lìnias de livellu e sas umbraduras de sos rilievos, chi podent èssere ammustradas in supra de sas mapas regulares de OsmAnd. Custa funtzionalidade at a èssere appretziada meda dae sos atletas, sos escursionistas, e totu sos chi sunt interessados in s\'orografia e su paesàggiu.
-\n\nSos datos globales (intre sos 70 grados nord e sos 70 grados sud) sunt basados in supra de sas medidas de su SRTM (Shuttle Radar Topography Mission) e de s’ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), un’aina medidora a bordu de Terra, su satellite de su sistema di osservatzione de sa terra de sa NASA. ASTER est un’isfortzu de coperassione intre NASA, su Ministeru de s’Economia Cummèrtziu e Industria (METI) de su Giappone, e su sistema ispatziale giapponesu (J-spacesystems). "</string>
+    <string name="srtm_plugin_description">"Custa estensione frunit sas lìnias/curvas de livellu e sas umbraduras de sos rilievos, chi podent èssere ammustradas in supra de sas mapas regulares de OsmAnd. Custa funtzionalidade at a èssere apretziada meda dae sos atletas, sos escursionistas, e totu sos chi sunt interessados in s\'orografia e su paesàgiu. (Pro praghere ammentade·bos chi sos datos de sas curvas de livellu e sos de sos rilievos sunt separados, e ant a èssere disponìbiles pro s\'iscarrigamentu a pustis de àere allutu s\'estensione).
+
+
+Sos datos globales (intre sos 70 grados nord e sos 70 grados sud) sunt basados in supra de sas medidas de su SRTM (Shuttle Radar Topography Mission) e de s’ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), un’aina medidora a bordu de Terra, su satellite de su sistema di osservatzione de sa terra de sa NASA. ASTER est un’isfortzu de coperassione intre NASA, su Ministeru de s’Economia Cummèrtziu e Industria (METI) de su Giappone, e su sistema ispatziale giapponesu (J-spacesystems).
+ "</string>
     <string name="srtm_plugin_name">Estensione lìnias de livellu</string>
     <string name="download_select_map_types">Àteras mapas</string>
     <string name="download_roads_only_item">Petzi istradas</string>
