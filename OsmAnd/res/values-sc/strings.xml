@@ -2783,4 +2783,6 @@ Pro praghere iscrie su còdighe intreu</string>
 
  e àteru…
  "</string>
-	</resources>
+	<string name="rendering_attr_depthContours_name">Lìnias de profondidade</string>
+	<string name="rendering_attr_depthContours_description">Ammustra sas lìnias de profondidade</string>
+    </resources>
