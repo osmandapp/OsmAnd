@@ -2657,4 +2657,15 @@
 	<string name="poi_note">Nota</string>
 	<string name="poi_watering_place">Abeurador</string>
 	<string name="poi_animal_boarding">Residència d\'animals</string>
+	<string name="poi_historic_civilization_roman">Civilització: romana</string>
+	<string name="poi_historic_civilization_byzantine">Civilització: bizantina (285 dC-1453 dC)</string>
+	<string name="poi_historic_civilization_imperial_chinese">Civilització: imperi xinès (221 aC-1911 dC)</string>
+	<string name="poi_historic_civilization_ancient_egyptian">Civilització: antic Egipte (fins 332 aC)</string>
+	<string name="poi_historic_civilization_celtic">Civilització: celta</string>
+	<string name="poi_historic_civilization_western_roman">Civilització: imperi romà d\'occident (285 dC - 476 dc)</string>
+	<string name="poi_historic_civilization_mycenaean">Civilització: micènica</string>
+	<string name="poi_historic_civilization_greek_egyptian">Civilització: Egipte hel·lenístic (332 aC – 30 aC)</string>
+	<string name="poi_animal_training">Ensinistrament d\'animals</string>
+	<string name="poi_animal_training_dog">Gossos</string>
+	<string name="poi_historic_era_neolithic">Era històrica: neolític</string>
 	</resources>
