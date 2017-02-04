@@ -2615,4 +2615,6 @@ Representa el área: %1$s x %2$s</string>
 
  y más…
  "</string>
+	<string name="rendering_attr_depthContours_description">Mostrar profundidad de contornos y puntos</string>
+    <string name="rendering_attr_depthContours_name">Profundidad de contornos</string>
 	</resources>
