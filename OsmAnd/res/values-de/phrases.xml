@@ -808,7 +808,7 @@
 	<string name="poi_wiki_lang_lv">Lettisches Wiki</string>
 	<string name="poi_wiki_lang_ms">Malaiisches Wiki</string>
 	<string name="poi_wiki_lang_new">Newarisches Wiki</string>
-	<string name="poi_node_networks">Wander-/Radroutenpunkte</string>
+	<string name="poi_node_networks">Wander-/Radwegenetzknoten</string>
 		<string name="poi_hiking_routes">Wanderrouten</string>
 		<string name="poi_traffic_enforcement">Verkehrsüberwachung</string>
 	<string name="poi_cheese">Käsegeschäft</string>
@@ -2282,7 +2282,7 @@
 	<string name="poi_sanitary_dump_station_yes">Sanitäre Entsorgungsstation: Ja</string>
 	<string name="poi_sanitary_dump_station_no">Sanitäre Entsorgungsstation: Nein</string>
 	<string name="poi_sanitary_dump_station_customers">Sanitäre Entsorgungsstation: Kunden</string>
-	<string name="poi_refugee_yes">Einrichtungen für Flüchtlinge</string>
+	<string name="poi_refugee_yes">Flüchtlingsunterkunft</string>
 	<string name="poi_social_facility_group_home">Wohngruppe</string>
 	<string name="poi_social_facility_assisted_living">Betreutes Wohnen</string>
 	<string name="poi_social_facility_outreach">Freier Treff</string>
@@ -2754,8 +2754,8 @@
 	<string name="poi_counselling_type_addiction_no">Beratung (Sucht): Nein</string>
 	<string name="poi_counselling_type_antenatal_yes">Beratung (vorgeburtliche): Ja</string>
 	<string name="poi_counselling_type_antenatal_no">Beratung (vorgeburtliche): Nein</string>
-	<string name="poi_counselling_type_child_guidance_yes">Beratung (Erziehungsberatung ): Ja</string>
-	<string name="poi_counselling_type_child_guidance_no">Beratung (Erziehungsberatung ): Nein</string>
+	<string name="poi_counselling_type_child_guidance_yes">Beratung (Erziehung): Ja</string>
+	<string name="poi_counselling_type_child_guidance_no">Beratung (Erziehung): Nein</string>
 	<string name="poi_counselling_type_couple_yes">Beratung (Paar): Ja</string>
 	<string name="poi_counselling_type_couple_no">Beratung (Paar): Nein</string>
 	<string name="poi_counselling_type_crisis_yes">Beratung (Krise): Ja</string>
@@ -3173,7 +3173,7 @@
 	<string name="poi_cuisine_waffle">Waffel</string>
 	<string name="poi_cuisine_chocolate">Schokolade</string>
 	<string name="poi_cuisine_wine">Wein</string>
-	<string name="poi_health_specialty">Gesundheit Spezialgebiet</string>
+	<string name="poi_health_specialty">Medizinisches Fachgebiet</string>
 	<string name="poi_massage_type">Massageart</string>
 	<string name="poi_cuisine_pancake">Pfannkuchen</string>
 	<string name="poi_cuisine_fine_dining">Gehobene Küche</string>
