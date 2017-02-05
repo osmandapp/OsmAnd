@@ -1236,7 +1236,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="use_kalman_filter_compass">Uso del filtro di Kalman</string>
     <string name="wait_current_task_finished">Prego attendere il termine dell\'operazione</string>
     <string name="plugin_distance_point_time">orario</string>
-    <string name="plugin_distance_point_hdop">precisione</string>
+    <string name="plugin_distance_point_hdop">Accuratezza</string>
     <string name="plugin_distance_point_speed">velocità</string>
     <string name="plugin_distance_point_ele">altitudine</string>
     <string name="plugin_distance_point">Punto</string>
@@ -2805,4 +2805,8 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="quick_action_map_source_switch">"La sorgente della mappa è stata cambiata in  \"%s\"."</string>
     <string name="quick_action_btn_tutorial_title">Cambia la posizione del pulsante</string>
     <string name="quick_action_btn_tutorial_descr">Tocco lungo e trascina per cambiare la posizione dello stesso nello schermo</string>
-	</resources>
+	<string name="rendering_attr_depthContours_name">Profondità contorni</string>
+	<string name="auto_split_recording_title">Divisione automatica delle registrazioni dopo un periodo</string>
+	<string name="auto_split_recording_descr">Inizia un nuovo segmento dopo 6 minuti, una nuova traccia dopo 2 ore, o un nuovo file dopo un intervallo maggiore.</string>
+    <string name="rendering_attr_depthContours_description">Mostra contorni e punti in profondità</string>
+    </resources>
