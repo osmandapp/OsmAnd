@@ -186,7 +186,7 @@
     <string name="map_widget_av_notes">Аўдыё/відэа нататкі</string>
     <string name="osmand_srtm_short_description_80_chars">Модуль OsmAnd для пазасеткавых ізаліній вышынь</string>
     <string name="map_widget_distancemeasurement">Вымярэньне адлегласьці</string>
-    <string name="audionotes_location_not_defined">Месцазнаходжаньне для прывязкі нататкі пакуль яшчэ не вызначылася. \"Выкарыстаць месцазнаходжаньне…\" каб прызначыць нататку ў выбраным месцы</string>
+    <string name="audionotes_location_not_defined">Месцазнаходжаньне для прывязкі нататкі пакуль яшчэ не вызначылася. «Выкарыстаць месцазнаходжаньне…» каб прызначыць нататку ў выбраным месцы.</string>
     
     <string name="map_widget_audionotes">Аўдыё-нататкі</string>
     <string name="audionotes_plugin_description">Модуль для стварэньня аўдыё/відэа нататак падчас падарожжаў, з дапамогай выкарыстаньня кнопкі на экране мапы або праз кантэкстнае мэню на любым месцы на мапе.</string>
@@ -2033,7 +2033,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 <string name="osmo_share_my_location">Перадаць месцазнаходжаньне</string>
     <string name="shared_string_logoff">Выйсьці</string>
     <string name="rendering_value_disabled_name">Адключана</string>
-    <string name="rendering_value_walkingRoutesOSMC_name">Афарбоўка згодна OSMC</string>
+    <string name="rendering_value_walkingRoutesOSMC_name">Афарбоўка па пешаходнаму сімвалу OSMC</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Афарбоўка згодна прыналежнасьці сеткі</string>
     <string name="osm_edit_context_menu_delete">Выдаліць праўку OSM</string>    
     <string name="read_full_article">Чытаць артыкул цалкам (анлайн)</string>
@@ -2242,7 +2242,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="planning_trip_item">Планаваньне паездкі</string>
     <string name="faq_item_description">Часта задаваныя пытаньні</string>
     <string name="map_viewing_item">Агляд мапы</string>
-    <string name="search_on_the_map_item">Пошук мапы</string>
+    <string name="search_on_the_map_item">Пошук на мапе</string>
     <string name="instalation_troubleshooting_item">Усталёўка і вырашэньне праблемаў</string>
     <string name="techical_articles_item">Тэхнічныя артыкулы</string>
     <string name="read_more">Падрабязьней</string>
@@ -2651,17 +2651,17 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="osm_live_subscription_desc">Падпіска дазваляе атрымліваць штогадзіныя, штодзённыя, штотыднёвыя абнаўленьні і неабмежаваныя загрузкі для ўсіх мапаў па ўсім сьвеце.</string>
     <string name="driving_region_australia">Аўстралія</string>
     <string name="lang_kab">кабільская</string>
-    <string name="shared_string_filters">Фільтры</string>
-    <string name="apply_filters">Ужыць фільтры</string>
-    <string name="save_filter">Захаваць фільтры</string>
-    <string name="delete_filter">Выдаліць фільтар</string>
+    <string name="shared_string_filters"/>
+    <string name="apply_filters"/>
+    <string name="save_filter">Захаваць фільтар</string>
+    <string name="delete_filter"></string>
     <string name="new_filter">Новы фільтар</string>
     <string name="new_filter_desc">Калі ласка, задайце імя для новага фільтра, ён будзе дададзены ў сьпіс катэгорый.</string>
     <string name="edit_filter">Рэдагаваць катэгорыі</string>
-    <string name="subcategories">Падкатэгорыі</string>
-    <string name="selected_categories">Абраныя катэгорыі</string>
-    <string name="create_custom_poi">Стварыць уласны фільтар</string>
-    <string name="custom_search">Уласны пошук</string>
+    <string name="subcategories"/>
+    <string name="selected_categories"/>
+    <string name="create_custom_poi"/>
+    <string name="custom_search"/>
     <string name="translit_names">Транслітарацыя назваў</string>
     <string name="osmo_share_location">Падзяліцца</string>
     <string name="osmo_pause_location">Прыпыніць</string>
@@ -2690,7 +2690,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="route_roundabout_short">Збочце на %1$d зьезьдзе</string>
     <string name="upload_poi">Выгрузіць POI</string>
     <string name="search_map_hint">Пошук горада ці краіны</string>
-    <string name="wiki_around">Блізкія месцы ў Вікіпэдыі</string>
+    <string name="wiki_around">Блізкія артыкулы ў Вікіпэдыі</string>
     <string name="rendering_value_fine_name">Вельмі тонкі</string>
     <string name="rendering_attr_contourColorScheme_description">Колеравая схема гарызанталяў</string>
     <string name="save_track_min_speed">Мінімальная хуткасьць для запісу</string>
@@ -2734,7 +2734,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="rendering_value_low_name">Нізкая</string>
     <string name="rendering_attr_hideWaterPolygons_name">Схаваць ваду</string>
     <string name="quick_action_item_screen">Экран %d</string>
-    <string name="quick_action_add_marker">Дадаць маркер</string>
+    <string name="quick_action_add_marker">Дадаць маркер на мапу</string>
     <string name="quick_action_add_poi">Дадаць POI</string>
     <string name="quick_action_map_style">Зьмяніць стыль мапы</string>
     <string name="quick_action_map_style_switch">Стыль мапы быў зьменены на \"%s\".</string>
@@ -2742,8 +2742,8 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="save_track_min_speed_descr">Выберыце мінімальную хуткасьць, пры перавышэньні якой пункт будзе запісаны ў сьлед</string>
     <string name="save_track_min_distance">Мінімальная дыстанцыя для запісу</string>
     <string name="save_track_min_distance_descr">Выберыце адлегласьць, пры перавышэньні якой пункт будзе запісаны ў сьлед</string>
-    <string name="save_track_precision">Мінімальна дапушчальная дакладнасьць</string>
-    <string name="save_track_precision_descr">Абярыце мінімальна дапушчальную дакладнасьць вызначэньня каардынатаў</string>
+    <string name="save_track_precision">Мінімальная дакладнасьць журналявання</string>
+    <string name="save_track_precision_descr">Абярыце мінімальную дакладнасьць для кропкі, каб быць зажурналяванай</string>
     <string name="navigate_point_olc_info_invalid">Некарэктны OLC
 </string>
     <string name="navigate_point_olc_info_short">Кароткі OLC
