@@ -835,8 +835,8 @@ Bilžu kartes var lietot no tiešsaistes avotiem vai sagatavot bezsaistes lieto�
   <string name="osmand_parking_warning">Brīdinājums</string>
   <string name="osmand_parking_warning_text">Kalendārā ir pievienots ieraksts par auto izņemšanu no stāvvietas. Tas tur saglabāsies līdz brīdim, kamēr netiks manuāli izdzēsts.</string>
   <string name="osmand_parking_time_limit_title">Uzstādīt parkošanas laika limitu</string>
-  <string name="osmand_parking_delete_confirm">Vai noņemt stāvvietas (P) atzīmi uz kartes?</string>
-  <string name="osmand_parking_delete">Stāvvieta</string>
+  <string name="osmand_parking_delete_confirm">Vai noņemt parkošanās (P) marķieri?</string>
+  <string name="osmand_parking_delete">Noņemt parkošanās marķieri</string>
   <string name="osmand_parking_choose_type">Izvēlieties parkošanās veidu</string>
   <string name="osmand_parking_lim_text">Uz ierobežotu laiku</string>
   <string name="osmand_parking_no_lim_text">Uz neierobežotu laiku</string>
@@ -853,7 +853,7 @@ Bilžu kartes var lietot no tiešsaistes avotiem vai sagatavot bezsaistes lieto�
 Vietas koordinātes un laiks redzami arī atsevišķā sadaļā Manā izvēlnē. Ir iespējams pievienot laika atgādinātāju Android kalendārā.</string>
   <string name="osmand_parking_plugin_name">Parkošanās vieta</string>
   <string name="context_menu_item_add_parking_point">Atzīmēt parkošanās vietu</string>
-  <string name="context_menu_item_delete_parking_point">Noņemt parkošanās vietu</string>
+  <string name="context_menu_item_delete_parking_point">Noņemt</string>
   <string name="starting_point_too_far">Starta punkts atrodas pārāk tālu no tuvākā ceļa.</string>
   <string name="shared_location">Koplietota vieta</string>
   
@@ -1009,7 +1009,7 @@ OsmAnd ir atvērtā koda navigācijas aplikācija ar piekļuvi vispusīgiem Open
     
     <string name="shared_string_and">un</string>
     <string name="shared_string_or">vai</string>
-	<string name="route_is_too_long">OsmAnd maršruta aprēķināšana var aizņemt ļoti ilgu laiku (vai dažreiz pat neizdoties), ja ceļapunkti atrodas vairāk nekā 200km attālumā viens no otra. Lūdzu, izveidojiet starpposmus, lai optimizētu aprēķināšanu.</string>
+	<string name="route_is_too_long">OsmAnd maršruta aprēķināšana var aizņemt ļoti ilgu laiku (vai pat neizdoties), ja starp punktiem ir vairāk nekā 200km liels attālums. Lūdzu, pievienojiet papildus starpposmus, lai atvieglotu aprēķināšanu.</string>
 	<string name="auto_zoom_close">Tuvināti</string>
 	<string name="auto_zoom_far">Vidēji tuvu</string>
 	<string name="auto_zoom_farthest">Attālināti</string>
@@ -1047,7 +1047,7 @@ OsmAnd ir atvērtā koda navigācijas aplikācija ar piekļuvi vispusīgiem Open
     <string name="osb_author_or_password_not_specified">Lūdzu norādiet uzstādījumos OSM lietotāja vārdu un paroli</string>
     <string name="clear_intermediate_points">Notīrīt ceļapunktus</string>
     <string name="keep_intermediate_points">Paturēt ceļapunktus</string>
-    <string name="new_directions_point_dialog">Jums jau ir uzstādīti ceļapunkti.</string>
+    <string name="new_directions_point_dialog">Jums jau ir uzstādīti starpposmi.</string>
     <string name="context_menu_item_directions_to">Doties uz</string>
     <string name="context_menu_item_directions_from">Doties no</string>
     <string name="route_descr_map_location">Karte: </string>
@@ -1060,7 +1060,7 @@ OsmAnd ir atvērtā koda navigācijas aplikācija ar piekļuvi vispusīgiem Open
     <string name="context_menu_item_destination_point">Atzīmēt kā galamērķi</string>
     <string name="please_select_address">Vispirms atzīmēt pilsētu vai ielu</string>
     <string name="search_street_in_neighborhood_cities">Meklēt ielu nosaukumus blakus pilsētās</string>
-    <string name="intermediate_items_sort_return">Ceļapunkti tika pārkārtoti tā, lai optimizētu maršrutu no esošās pozīcijas līdz galamērķim.</string>
+    <string name="intermediate_items_sort_return">Starpposmi tika sakārtoti optimālā secībā maršrutam no tekošās pozīcijas līdz galamērķim.</string>
     <string name="intermediate_items_sort_by_distance">Kārtot pēc attāluma</string>
     <string name="local_osm_changes_backup_successful">OSM izmaiņu fails veiksmīgi izveidots %1$s</string>
     <string name="local_osm_changes_backup_failed">OSM izmaiņu fails netika izveidots</string>
@@ -2019,8 +2019,8 @@ Vai gribat veikt jaunu reģistrāciju?</string>
 
     <string name="osm_live_header">"Šis abonoments nodrošina regulārus karšu atjauninājumus visā pasaulē. Daļa no ienākumiem nonāk OSM kopienai par ieguldījumu OSM. Ja jums patīk OsmAnd un OSM  un vēlaties tos atbalstīt, tad tas ir perfekts veids, kā to izdarīt."</string>
     
-    <string name="select_map_marker">Izvēlieties ceļapunktu</string>
-    <string name="map_markers_other">Citi karodziņi</string>
+    <string name="select_map_marker">Izvēlieties marķieri</string>
+    <string name="map_markers_other">Citi marķieri</string>
     <string name="upload_anonymously">Augšupielādēt anonīmi</string>
     <string name="show_transparency_seekbar">Rādīt caurspīdīgu meklētājoslu</string>
     <string name="download_files_error_not_enough_space">Nav brīvas vietas!
@@ -2028,18 +2028,18 @@ Vai gribat veikt jaunu reģistrāciju?</string>
  Patreiz brīvi pieejami ir tikai {2} MB.</string>
     <string name="upload_osm_note_description">Jūs varat augšupielādēt OSM Notes anonīmi vai caur savu OpenStreetMap.org profilu.</string>
     <string name="upload_osm_note">Augšupielādēt OSM Note</string>
-    <string name="map_marker_1st">Pirmais ceļapunkts</string>
-    <string name="map_marker_2nd">Otrais ceļapunkts</string>
-    <string name="add_points_to_map_markers_q">Vai pievienot karodziņus visiem punktiem?</string>
-    <string name="shared_string_add_to_map_markers">Pievienot karodziņiem</string>
-    <string name="select_map_markers">Atzīmējiet karodziņus</string>
+    <string name="map_marker_1st">Pirmais marķieris</string>
+    <string name="map_marker_2nd">Otrais marķieris</string>
+    <string name="add_points_to_map_markers_q">Vai pievienot marķierus visiem punktiem?</string>
+    <string name="shared_string_add_to_map_markers">Pievienot marķieriem</string>
+    <string name="select_map_markers">Izvēlieties marķierus</string>
     <string name="shared_string_reverse_order">Pretējā secībā</string>
-    <string name="show_map_markers_description">Izmantot karodziņus uz kartes</string>
-    <string name="clear_active_markers_q">Vai noņemt visus aktīvos karodziņus?</string>
-    <string name="clear_markers_history_q">Vai izdzēst ceļapunktu vēsturi?</string>
-    <string name="active_markers">Aktīvie karodziņi</string>
-    <string name="map_markers">Karodziņi</string>
-    <string name="map_marker">Ceļapunkts</string>
+    <string name="show_map_markers_description">Izmantot marķierus uz kartes</string>
+    <string name="clear_active_markers_q">Vai noņemt visus aktīvos marķierus?</string>
+    <string name="clear_markers_history_q">Vai izdzēst marķieru vēsturi?</string>
+    <string name="active_markers">Aktīvie marķieri</string>
+    <string name="map_markers">Marķieri</string>
+    <string name="map_marker">Marķieris</string>
     <string name="consider_turning_polygons_off">Vēlams izslēgt poligonu renderēšanu.</string>
     <string name="rendering_attr_showMtbRoutes_name">Rādīt MTB maršrutus</string>
     <string name="show_polygons">Rādīt poligonus</string>
@@ -2358,7 +2358,7 @@ Atsevišķas kartes lejupielāde nav nepieciešama.
     <string name="rendering_value_thin_name">Tievi</string>
     <string name="rendering_value_medium_name">Viduvēji</string>
     <string name="rendering_value_bold_name">Trekni</string>
-    <string name="no_map_markers_found">Lūdzu pievienojiet karodziņus no kartes</string>
+    <string name="no_map_markers_found">Lūdzu, pievienojiet marķierus caur karti</string>
     <string name="no_waypoints_found">Nav atrasts neviens ceļa punkts</string>
     <string name="report">Pārskats</string>
     <string name="storage_permission_restart_is_required">Aplikācijai ir piešķirta atļauja rakstīt ārējā glabātuvē. Ir nepieciešams aplikācijas restarts.</string>
@@ -2366,7 +2366,7 @@ Atsevišķas kartes lejupielāde nav nepieciešama.
  • OSM Live. Atbalstiet karšu izdevējus un veidotājus, saņemiet atjauninājumus ik pēc stundas
 
 
- • Karodziņi uz kartes. Jauns veids kā atzīmēt vietas kartē.
+ • Marķieri uz kartes. Jauns veids kā atzīmēt vietas kartē.
 
 
  • Vēl detalizētākas OSM kartes ar valsts specifiskiem ceļu zīmējumiem un jaunām iespējām
@@ -2454,7 +2454,7 @@ un vēl...
 
 Aktivizējot spraudni, kartes stils tiek nomainīts uz \"Ziema un slēpošana,\" attēlojot visus ainavas elementus ziemas apstākļiem atbilstošus. Deaktivizēt spraudni un atgriezties normālā kartes skatā var vai nu caur šejieni vai nomainot stilu kartes uzstādījumos.
  "</string>
-    <string name="move_marker_bottom_sheet_title">Velciet karti, lai pārvietotu atzīmi</string>
+    <string name="move_marker_bottom_sheet_title">Velciet karti, lai pārvietotu marķieri</string>
     <!-- string name="lat_lon_pattern">Plat: %1$.5f Gar: %2$.5f</string -->
     <string name="follow_us">Sekojiet mums</string>
     <string name="access_direction_audio_feedback">Skaņas indikācija kustībai</string>
@@ -2632,7 +2632,7 @@ kas tiks pievienots jūsu Kategorijas sadaļai.</string>
 Lūdzu ievadiet pilnu kodu</string>
     <string name="navigate_point_olc_info_area">Korekts pilns OLC
 Apraksta laukumu: %1$s x %2$s</string>
-    <string name="quick_action_add_marker">Pievienot ceļapunktu</string>
+    <string name="quick_action_add_marker">Pievienot marķieri</string>
     <string name="quick_action_add_poi">Pievienot POI</string>
     <string name="quick_action_map_style">Mainīt kartes stilu</string>
     <string name="quick_action_map_style_switch">Kartes stils ir izmainīts uz \"%s\".</string>
@@ -2821,4 +2821,6 @@ Site: http://osmand.net
 
 Ja jums ir vajadzīga palīdzība ar OsmAnd aplikāciju, lūdzu kontaktējieties ar mūsu atbalsta komandu: support@osmand.net. 
  "</string>
-    </resources>
+    <string name="rendering_attr_depthContours_description">Rādīt dziļuma kontūras un punktus</string>
+    <string name="rendering_attr_depthContours_name">Dziļuma kontūras</string>
+	</resources>
