@@ -2323,7 +2323,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="rendering_value_walkingRoutesOSMC_name">تلوين وفق رمز تنزه OSMC</string>
     <string name="shared_string_logoff">خروج</string>
     <string name="local_recordings_delete_all_confirm">ستقوم بحذف %1$d ملاحظات. هل أنت واثق؟</string>
-    <string name="nautical_maps_missing">لعرض الخرائط البحرية، يجب تنزيل خريطة خاصة محليا.</string>
+    <string name="nautical_maps_missing">لعرض الخرائط البحرية، يجب تنزيل خريطة خاصة محليا</string>
     <string name="save_track_to_gpx_globally_descr">تسجيل الموقع العام إلى ملف GPX يمكن تشغيله أو إيقافه باستخدام نافذة تسجيل GPX على الشاشة خريطة</string>
     <string name="proxy_host_descr">ضبط اسم مضيف البروكسي (مثال 127.0.0.1)</string>
     <string name="map_preferred_locale_descr">اللغة المفضلة للمسميات على الخريطة (إذا لم تكن متوفرة ستتحول إلى اللغة الإنجليزية أو الأسماء المحلية)</string>
@@ -2738,4 +2738,6 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="navigate_point_olc_info_invalid">خطآ فيي الرمز المفتوح للتَّمَوْضُع
 </string>
     <string name="quick_action_btn_tutorial_descr">قم بالغط على الزر لفترة أطوَل ثم اسحبه للتمكن من تغيير مكانه على الشاشة</string>
+	<string name="rendering_attr_depthContours_name">عمق الخطوط المحيطية</string>
+	<string name="auto_split_recording_title">تقسيم التسجيلات آليا إلى أجزاء بعد كل فراغ</string>
 	</resources>
