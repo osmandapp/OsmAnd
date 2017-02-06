@@ -2750,24 +2750,19 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="release_2_6">"
  • Nova zmožnost: dodan je gumb za hitra dejanja
 
-
  • Izboljšana odzivnost zaslona za upravljanje s potezami in dotiki
-
 
  • Nova pisava s široko podporo različnim jezikom
 
-
  • Podpora branja TTS za krajevne različice jezikov
 
+ • Izboljšana preglednost različnih slogov zemljevidov
 
- • Izboljšana preglednost različnih slogov zemljevidov in prikaza člankov z Wikipedije
-
+ • Izboljšan prikaz člankov z Wikipedije
 
  • Podpora OLC (Open Location Code)
 
-
  • Prikaz profila nadmorske višine za shranjene sledi GPX
-
 
  • Mnogo izboljšav in razrešenih hroščev
 
