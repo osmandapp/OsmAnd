@@ -1143,7 +1143,7 @@ POIの更新は利用できません</string>
 	<string name="global_app_settings">アプリケーション全般の設定</string>
 	<string name="download_files_not_enough_space">ダウンロードするのに十分な空き領域がありません。%1$sMB(空き容量:%2$s)</string>
 	<string name="download_files_question_space">{0}個のファイルをダウンロード
- 必要な容量{1}MB
+ 必要なストレージ容量{1}MB
  現在の空き容量{2}MB</string>
 	<string name="use_transparent_map_theme">透明なテーマ</string>
 	<string name="native_library_not_supported">ネイティブライブラリは、このデバイスでサポートされていません。</string>
@@ -1368,7 +1368,7 @@ POIの更新は利用できません</string>
     <string name="rendering_attr_moreDetailed_name">細かな施設も表示</string>
     <string name="rendering_attr_lessDetailed_name">詳細を省く</string>
     <string name="rendering_attr_hideAccess_name">通行制限</string>
-    <string name="rendering_attr_showAccess_name">通行制限と料金所を表示します</string>
+    <string name="rendering_attr_showAccess_name">通行制限と料金所を表示</string>
     <string name="rendering_attr_showSurfaceGrade_name">道路の質(等級)を表示</string>
     <string name="rendering_attr_showSurfaces_name">路面を表示</string>
     <string name="rendering_attr_showCycleRoutes_name">自転車道を表示</string>
@@ -1515,7 +1515,14 @@ POIの更新は利用できません</string>
 	<string name="keep_informing_descr">ナビゲーション指示を繰り返す間隔を設定します</string>
     <string name="arrival_distance">目的地周辺でのアナウンスタイミング</string>
     <string name="arrival_distance_descr">目的地周辺でのアナウンスをするタイミングを設定します</string>
-    <string name="osmo_plugin_description">"このプラグインはOpenStreetMapモニタリング機能の一部を提供します。 https://osmo.mobi を参照して下さい。\n\nあなたはグループに参加している全てのデバイスをリアルタイムで追跡することが可能です。あなたが属しているグループのアップロードされた地点や経路を見ることも出来ます。\n\nあなたが OsMo.mobi のウェブサイト上で規則に従い作成したグループは、数ヶ月削除されることはありません。 "</string>
+    <string name="osmo_plugin_description">"このプラグインはOpenStreetMapモニタリング機能の一部を提供します。 https://osmo.mobi を参照して下さい。
+
+
+あなたはグループに参加している全てのデバイスをリアルタイムで追跡することが可能です。あなたが属しているグループのアップロードされた地点や経路を見ることも出来ます。
+
+
+あなたが OsMo.mobi のウェブサイト上で規則に従い作成したグループは、数ヶ月削除されることはありません。
+ "</string>
     <string name="osmo_plugin_name">OpenStreetMapモニタリング</string>
    	<string name="always_center_position_on_map">移動時、現在地を画面中央よりに表示</string>
     <string name="voice_pref_title">音声関連設定</string>
@@ -1864,8 +1871,8 @@ POIの更新は利用できません</string>
 	<string name="routing_attr_height_description">ルート上で通行可能な車両の高さを指定します</string>
     <string name="use_fast_recalculation">スマートなルート再計算</string>
 	<string name="use_fast_recalculation_desc">経路が長い場合、最初の部分のみ再計算します</string>
-<string name="light_theme">白色</string>
-    <string name="dark_theme">黒色</string>
+<string name="light_theme">明色</string>
+    <string name="dark_theme">暗色</string>
     <string name="lang_pms">ピエモンテ語</string>
     <string name="lang_bn">ベンガル語</string>
     <string name="lang_tl">タガログ語</string>
@@ -2043,7 +2050,25 @@ POIの更新は利用できません</string>
     <string name="access_from_map">マップ画面から開く</string>
     <string name="show_on_start_description">ONでOsmAnd起動時ダッシュボードを自動的に表示します</string>
     <string name="copied_to_clipboard">クリップボードにコピーしました</string>
-    <string name="release_2_2">" • マップ画面や他の画面で項目をタップした場合のコンテキストメニューの刷新\n\n • ダッシュボード設定で\'起動時に表示\'をOFFにすることで今まで通りにマップ画面が直接表示出来る様に、選択式に変更\n\n • ダッシュボード設定で任意の項目だけ表示できる様に変更可能\n\n • ダッシュボード設定で今まで通りメニューボタンでメニューが開ける様に設定可能\n\n • マップ画面で世界地図表示状態から任意の地点のマップデータをダウンロード可能に\n\n • POI検索時より具体的に検索できる様に変更\n\n • POIやOSMの項目編集機能を改善\n\n • マップやその他データのダウンロード構造とUIを刷新\n\n他多数… "</string>
+    <string name="release_2_2">"
+ • マップ画面や他の画面で項目をタップした場合のコンテキストメニューの刷新
+
+ • ダッシュボード設定で\'起動時に表示\'をOFFにすることで今まで通りにマップ画面が直接表示出来る様に、選択式に変更
+
+ • ダッシュボード設定で任意の項目だけ表示できる様に変更可能
+
+ • ダッシュボード設定で今まで通りメニューボタンでメニューが開ける様に設定可能
+
+ • マップ画面で世界地図表示状態から任意の地点のマップデータをダウンロード可能に
+
+ • POI検索時より具体的に検索できる様に変更
+
+ • POIやOSMの項目編集機能を改善
+
+ • マップやその他データのダウンロード構造とUIを刷新
+
+他多数…
+ "</string>
     <string name="osm_save_offline">ｵﾌﾗｲﾝで保存</string>
     <string name="osm_edit_modified_poi">OSMのPOIが変更されました</string>
     <string name="osm_edit_deleted_poi">OSMのPOIが削除されました</string>
@@ -2137,7 +2162,19 @@ POIの更新は利用できません</string>
     <string name="shared_string_not_selected">無選択</string>
     <string name="report">レポート</string>
     <string name="storage_permission_restart_is_required">外部ストレージへの書き込みが許可されました。手動でアプリケーションを再起動してください。</string>
-    <string name="release_2_3">" ・ 『OSM Live』 地図作成者と開発者をサポートする機能と時間毎の地図更新に対応。\n\n・ 『マップマーカー』 マップにて場所を選択する新しい方法の採用。\n\n・ より詳細なOSMマップと国または地域別の道路標識とマップの新しい機能の追加。\n\n・ ルート指定方法を視覚的に分かりやすく改良。\n\n・ 住所検索などコンテキストメニューの大幅改良。\n\n・ 等々… "</string>
+    <string name="release_2_3">"
+ ・ 『OSM Live』 地図作成者と開発者をサポートする機能と時間毎の地図更新に対応。
+
+・ 『マップマーカー』 マップにて場所を選択する新しい方法の採用。
+
+・ より詳細なOSMマップと国または地域別の道路標識とマップの新しい機能の追加。
+
+・ ルート指定方法を視覚的に分かりやすく改良。
+
+・ 住所検索などコンテキストメニューの大幅改良。
+
+等々…
+ "</string>
     <string name="shared_string_move_up">上に移動</string>
     <string name="shared_string_move_down">下に移動</string>
     <string name="finish_navigation">ナビゲーションの終了</string>
@@ -2166,11 +2203,11 @@ POIの更新は利用できません</string>
     <string name="upload_anonymously">匿名でアップロード</string>
     <string name="show_transparency_seekbar">透過タイプシークバーを表示</string>
     <string name="download_files_error_not_enough_space">空き容量が足りません! 
- 一時ファイルの置き場に {3}MB、保存のため {1}MBが必要です。
+ ストレージ容量として一時ファイルの置き場に {3}MB、保存のため {1}MBが必要です。
  現在利用可能なのは {2}MBです。</string>
-    <string name="download_files_question_space_with_temp">{0}個のファイルを本当にダウンロードしますか?
+    <string name="download_files_question_space_with_temp">{0}個のファイルをダウンロードしますか？
  一時的に {3}MB 保存のために {1}MB が必要です。
- 現在利用可能なのは {2}MBです。</string>
+ (現在利用可能なのは {2}MBです)</string>
     <string name="upload_osm_note_description">OSMメモのアップロードには匿名、または貴方自身のOpenStreetMap.orgプロファイルを使用することも可能です。</string>
     <string name="upload_osm_note">OSMメモをアップロード</string>
     <string name="map_marker_1st">1番目のマップマーカー</string>
@@ -2188,7 +2225,7 @@ POIの更新は利用できません</string>
     <string name="clear_active_markers_q">アクティブマーカーをすべて削除しますか？</string>
     <string name="clear_markers_history_q">マップマーカーの履歴を消去しますか？</string>
     <string name="active_markers">アクティブマーカー</string>
-    <string name="map_markers">マップマーカー表示位置</string>
+    <string name="map_markers">マップマーカー</string>
     <string name="map_marker">マップマーカー</string>
     <string name="consider_turning_polygons_off">ポリゴンによる描画をオフにすることを推奨します。</string>
     <string name="rendering_attr_showMtbRoutes_name">MTB用ルートを表示</string>
@@ -2251,7 +2288,7 @@ POIの更新は利用できません</string>
     <string name="osm_live_ask_for_purchase">最初にOSM Live購読の手続きをしてください</string>
 
     <string name="osm_live_header">この購読により世界中のマップを時間毎更新することが可能です。
-購読収入の大半はOSMコミュニティに還元され、OSMに貢献した各ユーザーにも支払われます。
+購読収入の一部はOSMコミュニティに還元され、OSMに貢献した各ユーザーにも支払われます。
 OsmAndとOSMをサポートする方法として現状最適な方法であると思われます。</string>
     
     <string name="no_address_found">設定しない</string>
@@ -2316,6 +2353,8 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
 
  • 音声案内とターン及びレーン指示等のルート案内の改善
 
+ • ルートレンダリング時のトランスポートレイヤの改善
+ 
  • 新たな言語と対象地域の追加
 
  • 他、多くの改善とバグ修正
@@ -2385,4 +2424,76 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="osmo_service_running">OsMo サービスは実行中です</string>
     <string name="shared_string_continue">続行</string>
     <string name="shared_string_pause">一時停止</string>
+    <string name="rendering_attr_contourColorScheme_description">等高線の配色</string>
+    <string name="christmas_poi">クリスマスPOI</string>
+    <string name="christmas_desc">クリスマスと新年などに配されるであろう、クリスマスツリーや特別な市場などのPOIを表示することができます。</string>
+    <string name="christmas_desc_q">クリスマスPOIを表示しますか？</string>
+    <string name="rendering_value_light_brown_name">ライトブラウン</string>
+    <string name="rendering_value_dark_brown_name">ダークブラウン</string>
+    <string name="rendering_attr_contourColorScheme_name">等高線の配色</string>
+    <string name="edit_filter">カテゴリーを編集</string>
+    <string name="subcategories">サブカテゴリー</string>
+    <string name="selected_categories">選択されたカテゴリー</string>
+    <string name="create_custom_poi">カスタムフィルターの作成</string>
+    <string name="custom_search">カスタム検索</string>
+    <string name="shared_string_filters">フィルター</string>
+    <string name="apply_filters">フィルターを適用</string>
+    <string name="save_filter">フィルターを保存</string>
+    <string name="delete_filter">フィルターの削除</string>
+    <string name="new_filter">新しいフィルター</string>
+    <string name="new_filter_desc">新しいフィルターの名前を入力してください、作成したフィルターは[カテゴリー]タブに追加されます。</string>
+    <string name="osm_live_payment_desc">購読(サブスクリプション)には月毎に料金が必要になります。購読の停止はGoogle Playからいつでも行うことができます。</string>
+    <string name="donation_to_osm">OpenStreetMap のコミュニティに寄付</string>
+    <string name="donation_to_osm_desc">あなたの寄付金の一部は、OSMユーザー(OpenStreetMapの更新に貢献した人達)に送られます。購読(サブスクリプション)の値段は変わりません。</string>
+    <string name="osm_live_subscription_desc">サブスクリプションにより、毎時、毎日、毎週更新されたマップの利用と、世界中のマップを無制限にダウンロードすることが可能になります。</string>
+    <string name="get_it">入手する</string>
+    <string name="si_mi_meters">マイル/メートル</string>
+    <string name="skip_map_downloading">マップのダウンロードをスキップ</string>
+    <string name="skip_map_downloading_desc">オフライン用マップがインストールされていません。マップはこのリスト内から選択、あるいはメニューの%1$sから、後からでもダウンロードすることができます。</string>
+    <string name="search_another_country">別の地域を選択</string>
+    <string name="search_map">マップを検索しています…</string>
+    <string name="no_inet_connection">インターネットに接続されていません</string>
+    <string name="search_location">場所を検索しています…</string>
+    <string name="storage_free_space">空き容量</string>
+    <string name="storage_place_description">OsmAnd用 データ領域 (マップ、経路、その他): %1$s</string>
+    <string name="give_permission">アクセス許可を与える</string>
+    <string name="allow_access_location">場所へのアクセスを許可する</string>
+    <string name="first_usage_greeting">オフラインでもルート取得と行く先を見つけましょう</string>
+    <string name="search_map_hint">市町村名または地域名で検索</string>
+    <string name="route_roundabout_short">%1$d番目の出口から出て進みます</string>
+    <string name="route_calculation">ルート計算</string>
+    <string name="release_2_5">"
+ ・ 地図上のアイコンをクリック可能に
+
+
+・ より強力な検索フィルター、料理別のレストランまたは施設の充実したキャンプ場など
+
+
+・ サイクリストやハイカー向けの新しい地形表記のあるマップ
+
+
+・ 旅程記録機能の強化
+
+
+・ ナビゲーション通知の改善(Android版)
+
+
+・ 他多くの改善とバグ修正
+
+
+等々
+ "</string>
+    <string name="search_hint">市町村名、住所、POI名称を入力</string>
+    <string name="osm_live_banner_desc">毎月、毎週、毎日、毎時と設定された更新頻度に合わせた、マップの無制限ダウンロードを可能にしましょう。</string>
+    <string name="osmand_plus_banner_desc">有料バージョンのOsmAndは毎月のマップ更新が得られ、マップのダウンロード数制限はありません。</string>
+    <string name="location_not_found">場所が見つかりません</string>
+    <string name="no_inet_connection_desc_map">マップのダウンロードにはインターネット接続が必要です。</string>
+    <string name="search_my_location">現在地取得</string>
+    <string name="no_update_info_desc">OsmAndのアップデート情報や、割引に関しての情報をチェックしません</string>
+    <string name="no_update_info">更新情報を表示しません</string>
+    <string name="update_all_maps_now">すべてのマップを今すぐ更新しますか？</string>
+    <string name="replace_favorite_confirmation">お気に入り %1$sを置き換えてよろしいですか？</string>
+    <string name="rendering_attr_hideOverground_name">地上建造物</string>
+    <string name="shared_string_change">変更</string>
+    <string name="get_started">始めましょう</string>
     </resources>
