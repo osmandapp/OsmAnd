@@ -40,6 +40,8 @@ import android.widget.Toast;
 import net.osmand.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.ResultMatcher;
+import net.osmand.access.AccessibilityAssistant;
+import net.osmand.access.NavigationInfo;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.osm.AbstractPoiType;
@@ -126,6 +128,9 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	private ProgressBar progressBar;
 	private ImageButton clearButton;
 
+	private AccessibilityAssistant accessibilityAssistant;
+	private NavigationInfo navigationInfo;
+
 	private OsmandApplication app;
 	private QuickSearchHelper searchHelper;
 	private SearchUICore searchUICore;
@@ -159,6 +164,8 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		app = getMyApplication();
+		navigationInfo = new NavigationInfo(app);
+		accessibilityAssistant = new AccessibilityAssistant(getActivity());
 		boolean isLightTheme = app.getSettings().OSMAND_THEME.get() == OsmandSettings.OSMAND_LIGHT_THEME;
 		int themeId = isLightTheme ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme;
 		setStyle(STYLE_NO_FRAME, themeId);
@@ -598,6 +605,14 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		return searchEditText.getText().toString();
 	}
 
+	public AccessibilityAssistant getAccessibilityAssistant() {
+		return accessibilityAssistant;
+	}
+
+	public NavigationInfo getNavigationInfo() {
+		return navigationInfo;
+	}
+
 	public void hideKeyboard() {
 		if (searchEditText.hasFocus()) {
 			AndroidUtils.hideSoftKeyboard(getActivity(), searchEditText);
@@ -621,6 +636,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			updateUseMapCenterUI();
 			updateLocationUI(mapCenter, null);
 		}
+		app.getLocationProvider().removeCompassListener(app.getLocationProvider().getNavigationInfo());
 		getDialog().show();
 		paused = false;
 		hidden = false;
@@ -639,6 +655,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		hideProgressBar();
 		updateClearButtonVisibility(true);
 		getDialog().hide();
+		app.getLocationProvider().addCompassListener(app.getLocationProvider().getNavigationInfo());
 	}
 
 	public void closeSearch() {
@@ -802,6 +819,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	}
 
 	private void startLocationUpdate() {
+		app.getLocationProvider().removeCompassListener(app.getLocationProvider().getNavigationInfo());
 		app.getLocationProvider().addCompassListener(this);
 		app.getLocationProvider().addLocationListener(this);
 		location = app.getLocationProvider().getLastKnownLocation();
@@ -811,6 +829,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	private void stopLocationUpdate() {
 		app.getLocationProvider().removeLocationListener(this);
 		app.getLocationProvider().removeCompassListener(this);
+		app.getLocationProvider().addCompassListener(app.getLocationProvider().getNavigationInfo());
 	}
 
 	private void showProgressBar() {
@@ -1333,6 +1352,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		LatLon latLon = null;
 		if (location != null) {
 			latLon = new LatLon(location.getLatitude(), location.getLongitude());
+			navigationInfo.updateLocation(location);
 		}
 		updateLocationUI(latLon, heading);
 	}

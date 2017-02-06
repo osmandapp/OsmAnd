@@ -365,6 +365,7 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 
 	private void startLocationUpdate() {
 		OsmandApplication app = getMyApplication();
+		app.getLocationProvider().removeCompassListener(app.getLocationProvider().getNavigationInfo());
 		app.getLocationProvider().addCompassListener(this);
 		app.getLocationProvider().addLocationListener(this);
 		myLocation = app.getLocationProvider().getLastKnownLocation();
@@ -375,6 +376,7 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 		OsmandApplication app = getMyApplication();
 		app.getLocationProvider().removeLocationListener(this);
 		app.getLocationProvider().removeCompassListener(this);
+		app.getLocationProvider().addCompassListener(app.getLocationProvider().getNavigationInfo());
 	}
 
 	private void showOnMap() {
@@ -424,13 +426,18 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 		LatLon latLon = null;
 		if (location != null) {
 			latLon = new LatLon(location.getLatitude(), location.getLongitude());
+			((QuickSearchDialogFragment)getParentFragment()).getNavigationInfo().updateLocation(location);
 		}
 		updateLocationUI(latLon, heading);
 	}
 
 	private void updateLocationUI(LatLon latLon, Float heading) {
 		if (latLon != null && !paused) {
+			QuickSearchDialogFragment dialogFragment = (QuickSearchDialogFragment) getParentFragment();
+			dialogFragment.getAccessibilityAssistant().lockEvents();
 			updateCompassVisibility(coordsView, latLon, heading);
+			dialogFragment.getAccessibilityAssistant().unlockEvents();
+			dialogFragment.getNavigationInfo().updateTargetDirection(currentLatLon, heading.floatValue());
 		}
 	}
 
