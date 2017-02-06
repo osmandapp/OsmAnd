@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="route_updated_loc_found">Roete sal herbereken word wanneer die ligging bepaal is</string>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="route_updated_loc_found">Roete sal herbereken word wanneer die ligging bepaal is</string>
   <string name="osmand_parking_hours">Ure</string>
   <string name="osmand_parking_minutes">Minute</string>
   <string name="osmand_parking_position_description_add_time">Die motor was geparkeer om:</string>
@@ -1283,4 +1284,15 @@ OsmAnd (OSM Automated Navigation Directions) is \\\'n kaart en navigasie toepass
     <string name="osmo_group">OsMo groep</string>
     <string name="osmo_group_share">Om by groep %2$s in te skakel, spesifiseer groep id (%1$s)</string>
     <string name="osmo_share_connect_device">Volg hierdie toestel permanent</string>
+    <string name="rendering_attr_depthContours_description">Vertoon dieptelyne en punte</string>
+    <string name="rendering_attr_depthContours_name">Dieptelyne</string>
+	<string name="rendering_attr_contourDensity_description">Digtheid van die hoogtelyne</string>
+    <string name="rendering_attr_contourDensity_name">Digtheid van die hoogtelyne</string>
+    <string name="rendering_value_high_name">Hoog</string>
+    <string name="rendering_value_medium_w_name">Gemiddeld</string>
+    <string name="rendering_value_low_name">Laag</string>
+    <string name="rendering_attr_contourWidth_description">Dikte van die hoogtelyne</string>
+    <string name="rendering_attr_contourWidth_name">Dikte van die hoogtelyne</string>
+    <string name="rendering_attr_hideWaterPolygons_description">Water</string>
+    <string name="rendering_attr_hideWaterPolygons_name">Verberg watervlaktes</string>
     </resources>
