@@ -3,6 +3,7 @@ package net.osmand.plus.search;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.support.v4.view.ViewCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
 import net.osmand.Location;
+import net.osmand.access.AccessibilityAssistant;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
@@ -32,6 +34,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 
 	private OsmandApplication app;
 	private Activity activity;
+	private AccessibilityAssistant accessibilityAssistant;
 
 	private LatLon location;
 	private Float heading;
@@ -68,6 +71,10 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 		this.activity = activity;
 		dp56 = AndroidUtils.dpToPx(app, 56f);
 		dp1 = AndroidUtils.dpToPx(app, 1f);
+	}
+
+	public void setAccessibilityAssistant(AccessibilityAssistant accessibilityAssistant) {
+		this.accessibilityAssistant = accessibilityAssistant;
 	}
 
 	public OnSelectionListener getSelectionListener() {
@@ -352,6 +359,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 				}
 			}
 		}
+		ViewCompat.setAccessibilityDelegate(view, accessibilityAssistant);
 		return view;
 	}
 

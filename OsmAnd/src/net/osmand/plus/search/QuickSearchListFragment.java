@@ -6,6 +6,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -114,6 +115,7 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 		super.onActivityCreated(savedInstanceState);
 		dialogFragment = (QuickSearchDialogFragment) getParentFragment();
 		listAdapter = new QuickSearchListAdapter(getMyApplication(), getActivity());
+		listAdapter.setAccessibilityAssistant(dialogFragment.getAccessibilityAssistant());
 		listAdapter.setUseMapCenter(dialogFragment.isUseMapCenter());
 		setListAdapter(listAdapter);
 		ListView listView = getListView();
@@ -297,7 +299,20 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 		if (listAdapter != null && !touching && !scrolling) {
 			listAdapter.setLocation(latLon);
 			listAdapter.setHeading(heading);
+			dialogFragment.getAccessibilityAssistant().lockEvents();
 			listAdapter.notifyDataSetChanged();
+			dialogFragment.getAccessibilityAssistant().unlockEvents();
+			final View selected = dialogFragment.getAccessibilityAssistant().getFocusedView();
+			if (selected != null) {
+				try {
+					int position = getListView().getPositionForView(selected);
+					if ((position != AdapterView.INVALID_POSITION) && (position >= getListView().getHeaderViewsCount())) {
+						dialogFragment.getNavigationInfo().updateTargetDirection(listAdapter.getItem(position - getListView().getHeaderViewsCount()).getSearchResult().location, heading.floatValue());
+					}
+				} catch (Exception e) {
+					return;
+				}
+			}
 		}
 	}
 
