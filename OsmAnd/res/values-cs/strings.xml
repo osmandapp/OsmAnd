@@ -933,11 +933,11 @@ Celosvětová výšková data (mezi 70 stupni severní šířky a 70 stupni již
     <string name="map_widget_audionotes">Audio poznámky</string>
     <string name="recording_is_recorded">Nahrávám audio/video. Stiskněte tlačítko \"stop\" pro zastavení.</string>
     <string name="recording_open_external_player">Otevřít externí přehrávač</string>
-    <string name="recording_delete_confirm">Chcete smazat tuto nahrávku?</string>
+    <string name="recording_delete_confirm">Chcete smazat tento záznam?</string>
     <string name="recording_context_menu_arecord">Nahrát zvukovou poznámku</string>
     <string name="recording_context_menu_vrecord">Nahrát video poznámku</string>
     <string name="recording_can_not_be_played">Záznam nelze přehrát</string>
-    <string name="recording_context_menu_delete">Smazat nahrávku</string>
+    <string name="recording_context_menu_delete">Smazat záznam</string>
     <string name="recording_context_menu_play">Přehrát</string>
     <string name="map_widget_av_notes">Zvukové/video poznámky</string>
     <string name="map_widget_distancemeasurement">Měření vzdálenosti</string>
@@ -2594,4 +2594,34 @@ Zobrazená oblast: %1$s x %2$s</string>
 	<string name="auto_split_recording_descr">Začít nový úsek po pauze 6 minut, novou trasu po pauze 2 hod. nebo nový soubor po delší pauze, pokud se změnil datum.</string>
     <string name="quick_action_interim_dialog">Zobrazit dočasné okno</string>
     <string name="quick_action_page_list_descr">Aktivace tlačítka akce posune seznam na další stranu.</string>
+    <string name="rendering_attr_depthContours_description">Zobrazit hloubkové úrovně a body</string>
+    <string name="rendering_attr_depthContours_name">Úrovně hloubky</string>
+	<string name="release_2_6">"
+ • Nová funkce: Tlačítko rychlé akce
+
+
+ • Vylepšená odezva dotykových gest
+
+
+ • Nová mapová písma pokrývající více jazyků
+
+
+ • Podpora TTS pro varianty jazykových regionů
+
+
+ • Vylepšená viditelnost ve více mapových stylech a Wikipedii
+
+
+ • Podpora Open Location Code (OLC)
+
+
+ • Zobrazení jednoduchého výškového profilu pro zaznamenaný GPX
+
+
+ • Další vylepšení a opravy chyb
+
+
+ a další…
+ "</string>
+	<string name="navigate_point_olc">Open Location Code (OLC)</string>
     </resources>
