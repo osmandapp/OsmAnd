@@ -2797,4 +2797,6 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="quick_action_showhide_favorites_descr">S pritiskom na gumb dejanja bodo pokazana ali skrita priljubljena mesta na zemljevidu.</string>
     <string name="quick_action_showhide_poi_descr">S pritiskom na gumb dejanja bodo pokazane ali skrite točke POI na zemljevidu.</string>
     <string name="quick_action_btn_tutorial_descr">Z dolgim pritiskom in vlekom je mogoče postaviti gumb na poljubno mesto na zaslonu</string>
+	<string name="rendering_attr_depthContours_description">Pokaži točke in izohipse globine</string>
+    <string name="rendering_attr_depthContours_name">Izohipse globine</string>
 	</resources>
