@@ -1003,7 +1003,7 @@ Pomembnejše lastnosti:
     <string name="srtm_plugin_description">"Vstavek omogoča prikaz izohips in senčenje hribovitih področij kot prekrivni zemljevid. Zmožnost je uporabna predvsem za pohodnike, športnike, raziskovalce in druge zanesenjake, ki si želijo ali potrebujejo natančen prikaz na zemljevidu.
 
 
-Splošni podatki med 70 stopinjami severno in 70 južno so opredeljeni z meritvami SRTM (Shuttle Radar Topography Mission) in ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), napravo na satelitu Terra, ki je del NASINEGA sistema EOS (Earth Observing System). Satelit ASTER je razvit v sodelovanju med NASO in japonskim ministrstvom za ekonomijo, trgovino in industrijo (Trade and Industry - METI) in japonskim vesoljskim sistemom (J-spacesystems).
+Splošni podatki med 70 stopinjami severno in 70 južno so opredeljeni z meritvami SRTM (Shuttle Radar Topography Mission) in ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), napravo na satelitu Terra, ki je del NASINEGA sistema EOS (Earth Observing System). Satelit ASTER je razvit v sodelovanju med NASO, japonskim ministrstvom za ekonomijo, trgovino in industrijo (Trade and Industry - METI) in japonskim vesoljskimi sistemi (J-spacesystems).
  "</string>
     <string name="srtm_plugin_name">Izohipse</string>
     <string name="download_select_map_types">Drugi zemljevidi</string>
