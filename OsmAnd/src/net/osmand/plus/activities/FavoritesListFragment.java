@@ -5,11 +5,14 @@ package net.osmand.plus.activities;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.view.ViewCompat;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
@@ -98,7 +101,9 @@ public class FavoritesListFragment extends OsmAndListFragment implements SearchA
 		if (getActivity() instanceof SearchActivity) {
 			if (((SearchActivity) getActivity()).isSearchAroundCurrentLocation() && l != null) {
 				if (!compassRegistered) {
-					((OsmandApplication) getActivity().getApplication()).getLocationProvider().addCompassListener(this);
+					OsmandApplication app = getMyApplication();
+					app.getLocationProvider().removeCompassListener(app.getLocationProvider().getNavigationInfo());
+					app.getLocationProvider().addCompassListener(this);
 					compassRegistered = true;
 				}
 				favouritesAdapter.searchAroundLocation = true;
@@ -116,7 +121,9 @@ public class FavoritesListFragment extends OsmAndListFragment implements SearchA
 	public void onPause() {
 		super.onPause();
 		if(getActivity() instanceof SearchActivity) {
-			((OsmandApplication) getActivity().getApplication()).getLocationProvider().removeCompassListener(this);
+			OsmandApplication app = getMyApplication();
+			app.getLocationProvider().removeCompassListener(this);
+			app.getLocationProvider().addCompassListener(app.getLocationProvider().getNavigationInfo());
 			compassRegistered = false;
 		}
 	}
@@ -237,6 +244,8 @@ public class FavoritesListFragment extends OsmAndListFragment implements SearchA
 			final CheckBox ch = (CheckBox) row.findViewById(R.id.toggle_item);
 			icon.setVisibility(View.VISIBLE);
 			ch.setVisibility(View.GONE);
+			if (activity instanceof SearchActivity)
+				ViewCompat.setAccessibilityDelegate(row, ((SearchActivity)activity).getAccessibilityAssistant());
 			return row;
 		}
 
@@ -250,12 +259,34 @@ public class FavoritesListFragment extends OsmAndListFragment implements SearchA
 	public void updateCompassValue(float value) {
 		// 99 in next line used to one-time initialize arrows (with reference vs. fixed-north direction) on non-compass
 		// devices
+		FragmentActivity activity = getActivity();
 		float lastHeading = favouritesAdapter.heading != null ? favouritesAdapter.heading : 99;
 		favouritesAdapter.heading = value;
 		if (Math.abs(MapUtils.degreesDiff(lastHeading, favouritesAdapter.heading)) > 5) {
-			favouritesAdapter.notifyDataSetChanged();
+			if (activity instanceof SearchActivity) {
+				((SearchActivity)activity).getAccessibilityAssistant().lockEvents();
+				favouritesAdapter.notifyDataSetChanged();
+				((SearchActivity)activity).getAccessibilityAssistant().unlockEvents();
+			} else {
+				favouritesAdapter.notifyDataSetChanged();
+			}
 		} else {
 			favouritesAdapter.heading = lastHeading;
+		}
+		if (activity instanceof SearchActivity) {
+			final View selected = ((SearchActivity)activity).getAccessibilityAssistant().getFocusedView();
+			if (selected != null) {
+				try {
+					int position = getListView().getPositionForView(selected);
+					if ((position != AdapterView.INVALID_POSITION) && (position >= getListView().getHeaderViewsCount()))  {
+						FavouritePoint point = favouritesAdapter.getItem(position - getListView().getHeaderViewsCount());
+						LatLon location = new LatLon(point.getLatitude(), point.getLongitude());
+						((SearchActivity)activity).getNavigationInfo().updateTargetDirection(location, favouritesAdapter.heading.floatValue());
+					}
+				} catch (Exception e) {
+					return;
+				}
+			}
 		}
 	}
 

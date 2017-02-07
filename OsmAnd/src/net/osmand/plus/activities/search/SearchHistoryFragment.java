@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.PopupMenu;
 import android.view.LayoutInflater;
@@ -153,7 +154,9 @@ public class SearchHistoryFragment extends OsmAndListFragment implements SearchA
 		if (getActivity() instanceof SearchActivity) {
 			if (((SearchActivity) getActivity()).isSearchAroundCurrentLocation() && l != null) {
 				if (!compassRegistered) {
-					((OsmandApplication) getActivity().getApplication()).getLocationProvider().addCompassListener(this);
+					OsmandApplication app = getMyApplication();
+					app.getLocationProvider().removeCompassListener(app.getLocationProvider().getNavigationInfo());
+					app.getLocationProvider().addCompassListener(this);
 					compassRegistered = true;
 				}
 				searchAroundLocation = true;
@@ -170,7 +173,9 @@ public class SearchHistoryFragment extends OsmAndListFragment implements SearchA
 	public void onPause() {
 		super.onPause();
 		if(getActivity() instanceof SearchActivity) {
-			((OsmandApplication) getActivity().getApplication()).getLocationProvider().removeCompassListener(this);
+			OsmandApplication app = getMyApplication();
+			app.getLocationProvider().removeCompassListener(this);
+			app.getLocationProvider().addCompassListener(app.getLocationProvider().getNavigationInfo());
 			compassRegistered = false;
 		}
 	}
@@ -247,6 +252,8 @@ public class SearchHistoryFragment extends OsmAndListFragment implements SearchA
 					selectModelOptions(historyEntry, v);
 				}
 			});
+			if (getActivity() instanceof SearchActivity)
+				ViewCompat.setAccessibilityDelegate(row, ((SearchActivity)getActivity()).getAccessibilityAssistant());
 			return row;
 		}
 	}
@@ -321,12 +328,34 @@ public class SearchHistoryFragment extends OsmAndListFragment implements SearchA
 	public void updateCompassValue(float value) {
 		// 99 in next line used to one-time initalize arrows (with reference vs. fixed-north direction) on non-compass
 		// devices
+		FragmentActivity activity = getActivity();
 		float lastHeading = heading != null ? heading : 99;
 		heading = value;
 		if (heading != null && Math.abs(MapUtils.degreesDiff(lastHeading, heading)) > 5) {
-			 historyAdapter.notifyDataSetChanged();
+			if (activity instanceof SearchActivity) {
+				((SearchActivity)activity).getAccessibilityAssistant().lockEvents();
+				historyAdapter.notifyDataSetChanged();
+				((SearchActivity)activity).getAccessibilityAssistant().unlockEvents();
+			} else {
+				historyAdapter.notifyDataSetChanged();
+			}
 		} else {
 			heading = lastHeading;
+		}
+		if (activity instanceof SearchActivity) {
+			final View selected = ((SearchActivity)activity).getAccessibilityAssistant().getFocusedView();
+			if (selected != null) {
+				try {
+					int position = getListView().getPositionForView(selected);
+					if ((position != AdapterView.INVALID_POSITION) && (position >= getListView().getHeaderViewsCount())) {
+						HistoryEntry historyEntry = historyAdapter.getItem(position - getListView().getHeaderViewsCount());
+						LatLon location = new LatLon(historyEntry.getLat(), historyEntry.getLon());
+						((SearchActivity)activity).getNavigationInfo().updateTargetDirection(location, heading.floatValue());
+					}
+				} catch (Exception e) {
+					return;
+				}
+			}
 		}
 	}
 }

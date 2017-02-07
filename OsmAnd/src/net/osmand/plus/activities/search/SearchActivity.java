@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Locale;
 
 import net.osmand.access.AccessibilityAssistant;
+import net.osmand.access.NavigationInfo;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmAndLocationProvider;
@@ -72,6 +73,7 @@ public class SearchActivity extends TabActivity implements OsmAndLocationListene
 	private boolean showOnlyOneTab;
 	
 	private AccessibilityAssistant accessibilityAssistant;
+	private NavigationInfo navigationInfo;
 	private View spinnerView;
 	
 	public interface SearchActivityChild {
@@ -88,6 +90,7 @@ public class SearchActivity extends TabActivity implements OsmAndLocationListene
  		setContentView(R.layout.tab_content);
 		settings = ((OsmandApplication) getApplication()).getSettings();
 		accessibilityAssistant = new AccessibilityAssistant(this);
+		navigationInfo = new NavigationInfo((OsmandApplication)getApplication());
 		
 		showOnlyOneTab = getIntent() != null && getIntent().getBooleanExtra(SHOW_ONLY_ONE_TAB, false);
 		getSupportActionBar().setTitle("");
@@ -180,7 +183,15 @@ public class SearchActivity extends TabActivity implements OsmAndLocationListene
 		}
 		return SearchPoiFilterFragment.class;
 	}
-	
+
+	public AccessibilityAssistant getAccessibilityAssistant() {
+		return accessibilityAssistant;
+	}
+
+	public NavigationInfo getNavigationInfo() {
+		return navigationInfo;
+	}
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		int itemId = item.getItemId();
@@ -291,6 +302,7 @@ public class SearchActivity extends TabActivity implements OsmAndLocationListene
 
 	public void updateLocation(net.osmand.Location location){
 		if (location != null) {
+			navigationInfo.updateLocation(location);
 			updateSearchPoint(new LatLon(location.getLatitude(), location.getLongitude()),
 					getString(R.string.select_search_position) + " " + getString(R.string.search_position_current_location_found), false);
 			// don't stop in case we want to see updates 
@@ -346,10 +358,8 @@ public class SearchActivity extends TabActivity implements OsmAndLocationListene
 		if(showLoc && searchPoint != null){
 			newState += formatLatLon(searchPoint);
 		}
+		accessibilityAssistant.lockEvents();
 		if (!oldState.equals(newState)) {
-			if (getSupportActionBar().getSelectedNavigationIndex() != 0) {
-				accessibilityAssistant.lockEvents();
-			}
 			spinnerAdapter.remove(oldState);
 			spinnerAdapter.insert(newState, 0);
 		}
