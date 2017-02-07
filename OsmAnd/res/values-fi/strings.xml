@@ -585,7 +585,7 @@
 	<string name="map_widget_max_speed">Nopeusrajoitus</string>
     <string name="monitoring_control_start">aloita</string>
     <string name="osmand_parking_position_name">Pysäköintipaikka</string>
-	<string name="osmand_parking_plugin_description"></string>
+	<string name="osmand_parking_plugin_description"/>
 	<string name="context_menu_item_add_parking_point">Merkitse pysäköintipaikaksi</string>
 	<string name="context_menu_item_delete_parking_point">Poista pysäköintimerkki</string>
 	<string name="shared_string_clear">Nollaa</string>
@@ -2171,4 +2171,5 @@ Jos pidät OsmAndista ja OSMsta ja haluat tukea niitä, on tämä täydellinen t
     <string name="rendering_value_medium_w_name">Keskitaso</string>
     <string name="rendering_attr_contourDensity_description">Korkeuskäyräviivojen tiheys</string>
     <string name="rendering_attr_contourDensity_name">Korkeuskäyräviivojen tiheys</string>
-    </resources>
+    <string name="rendering_attr_depthContours_name">Korkeuskäyrät</string>
+	</resources>
