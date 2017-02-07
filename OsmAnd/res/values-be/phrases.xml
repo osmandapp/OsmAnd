@@ -1618,7 +1618,7 @@
 	<string name="poi_payment_others_no">Іншыя мэтады аплаты не прымаюцца</string>
 	<string name="poi_payment_routex_yes">Routex</string>
 	<string name="poi_payment_routex_no">Паліўныя карткі Routex не прымаюцца</string>
-	<string name="poi_payment_bancomat_yes">Bancomat</string>
+	<string name="poi_payment_bancomat_yes">Bancomat (італьянская сетка)</string>
 	<string name="poi_payment_bancomat_no">Bancomat не прымаецца</string>
 	<string name="poi_payment_icsf_yes">Карткі IC Stored Fare</string>
 	<string name="poi_payment_icsf_no">Карткі IC Stored Fare не прымаюцца</string>
@@ -3376,4 +3376,14 @@
 
 <string name="poi_coworking_space">Каворкінг</string>
 
-</resources>
+<string name="poi_fire_hydrant_type_dry_barrel">Наземны сухі</string>
+	<string name="poi_counselling_type_nutrition_nfire_hydo">Кансультацыя па пытаньнях харчаваньня: не</string>
+	<string name="poi_fire_hydrant_position_lane">Разьмяшчэньне гідранта: паласа руху</string>
+	<string name="poi_fire_hydrant_style_wsh">Дызайн гідранта: wsh</string>
+	<string name="poi_cuisine_buschenschank">Buschenschank (вытанчаныя аўстрыйскія віны)</string>
+	<string name="poi_cuisine_fine_dining">Эксклюзіўныя стравы</string>
+	<string name="poi_cuisine_suki">Suki (тайскі гарачы гаршчок)</string>
+	<string name="poi_cuisine_bubble_tea">Гарбата з бобкамі</string>
+	<string name="poi_cuisine_pastel">Піражок</string>
+	<string name="poi_gambling_pachinko">Пачынка</string>
+	</resources>
