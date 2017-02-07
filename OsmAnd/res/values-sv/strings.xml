@@ -2347,7 +2347,7 @@ Om du tycker om OsmAnd och OSM och vill stödja dem så är detta ett utmärkt s
     <string name="rendering_attr_contourColorScheme_description">Färgschema för konturer</string>
     <string name="save_track_min_speed">Minsta loggningshastighet</string>
     <string name="save_track_min_speed_descr">Välj minsta hastighet som startar loggning av en punkt</string>
-    <string name="save_track_min_distance"/>
+    <string name="save_track_min_distance">Loggar rörelsedetektor</string>
     <string name="save_track_min_distance_descr">Ange minsta avstånd från den senaste positionen för att en punkt ska loggas</string>
     <string name="save_track_precision">Minsta loggningsprecision</string>
     <string name="save_track_precision_descr">Välj minsta precision som startar loggning av en punkt</string>
@@ -2470,4 +2470,11 @@ med mera…
     <string name="quick_action_map_underlay_title">Kartunderlägg</string>
     <string name="quick_action_map_underlay">Ändra kartunderlägg</string>
     <string name="quick_action_map_underlay_switch">Kartunderlägget har ändrats till \"%s\".</string>
+    <string name="rendering_attr_depthContours_name">Djupkonturer</string>
+	<string name="rendering_value_fine_name">Bra</string>
+    <string name="navigate_point_olc">Öppna plats kod</string>
+    <string name="navigate_point_olc_info_invalid">Ogiltig OLC
+</string>
+    <string name="navigate_point_olc_info_short">Kort OLC
+Vänligen tillhandahåll hel kod</string>
     </resources>
