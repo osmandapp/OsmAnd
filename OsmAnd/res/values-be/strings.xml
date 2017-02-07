@@ -767,11 +767,11 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="pref_raster_map">Налады крыніцы мапы</string>
 	<string name="pref_vector_map">Налады вэктарнай мапы</string>
 	<string name="delete_confirmation_msg">Выдаліць %1$s?</string>
-	<string name="city_type_suburb">Прыгарад</string>
-	<string name="city_type_hamlet">Паселішча</string>
-	<string name="city_type_village">Вёска</string>
-	<string name="city_type_town">Мястэчка</string>
-	<string name="city_type_city">Горад</string>
+	<string name="city_type_suburb"/>
+	<string name="city_type_hamlet"/>
+	<string name="city_type_village"/>
+	<string name="city_type_town"/>
+	<string name="city_type_city"/>
 	
 	<string name="animate_route_off">Спыніць мадэляваньне</string>
 	<string name="animate_route">Пачаць мадэляваньне</string>
@@ -781,7 +781,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="gpx_navigation">GPX маршрут</string>
 	<string name="poi_query_by_name_matches_categories">Некалькі катэгорый POI знойдзены, што адпавядаюць запыту:</string>
 	<string name="data_to_search_poi_not_available">Лякальных зьвестак для пошуку POI няма.</string>
-	<string name="poi_filter_by_name">Пошук па назьве</string>
+	<string name="poi_filter_by_name"/>
 	<string name="old_poi_file_should_be_deleted">Файл POI \'%1$s\' залішні і можа быць выдалены.</string>
 	<string name="update_poi_file_not_found">Лякальны файл для падтрымкі зьменаў у POI ня знойдзены і ня можа быць створаны.</string>
 	<string name="button_upgrade_osmandplus">Абнавіць да OsmAnd+</string>
@@ -948,8 +948,8 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="km_h">км/г</string>
 	<string name="m">м</string>
 	<string name="old_map_index_is_not_supported">Састарэлы фармат дадзеных мапы \'\'{0}\'\' не падтрымліваецца</string>
-	<string name="poi_filter_closest_poi">Бліжэйшыя POI</string>
-	<string name="poi_filter_custom_filter">Свой фільтар</string>
+	<string name="poi_filter_closest_poi"/>
+	<string name="poi_filter_custom_filter"/>
 	<string name="poi_filter_namefinder">Сеткавы NameFinder</string>
 	<string name="reading_cached_tiles">Чытаньне захаваных фрагмэнтаў…</string>
 	<string name="version_index_is_big_for_memory">Недастаткова памяці для лякальнай мапы \'\'{0}\'\'</string>
@@ -1233,7 +1233,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="search_button">Пошук</string>
 	<string name="search_activity">Пошук</string>
 	<string name="searchpoi_activity">Абраць POI</string>
-	<string name="search_POI_level_btn">Знайсьці яшчэ</string>
+	<string name="search_POI_level_btn"/>
 	<string name="incremental_search_street">Шукаць вуліцу</string>
 	<string name="incremental_search_building">Шукаць дом</string>
 	<string name="choose_available_region">Выбраць рэгіён са сьпісу</string>
@@ -1306,7 +1306,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="filter_current_poiButton">Фільтраваць</string>
 	
 	<string name="edit_filter_save_as_menu_item">Захаваць як</string>
-	<string name="edit_filter_delete_dialog_title">Выдаліць абраны фільтр?</string>
+	<string name="edit_filter_delete_dialog_title"/>
 	<string name="edit_filter_delete_message">Фільтр {0} быў выдалены</string>
 	<string name="edit_filter_create_message">Фільтр {0} быў створаны</string>
 	
@@ -1465,10 +1465,10 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 
 Глябальныя дадзеныя (паміж 70 градусамі на поўначы і 70 градусамі на поўдні) грунтуюцца на вымярэньнях SRTM (Shuttle Radar Topography Mission) і ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), дадзеных інструмэнту візуалізацыі Terra, флагманскага спадарожніка сістэмы назіраньня Зямлі ад NASA. ASTER - гэта вынік сумеснай працы NASA, міністэрства эканомікі Японіі, міністэрства гандлю і прамысловасьці Японіі (METI), агенцтва касьмічных сістэм Японіі (J-spacesystems).
  "</string>
-    <string name="srtm_plugin_description">"Гэты модуль паказвае як ізалініі вышынь так і рэльеф на стандартных мапах OsmAnd. Гэтыя магчымасьці спатрэбяцца для спартсмэнам, турыстам, падарожнікам і ўсім, хто цікавіцца структурай рэльефу мясцовасьці.
+    <string name="srtm_plugin_description">"Гэты модуль паказвае як ізалініі вышынь так і рэльеф на стандартных мапах OsmAnd. Гэта магчыма спатрэбяцца спартсмэнам, турыстам, падарожнікам і ўсім, хто цікавіцца структурай рэльефу мясцовасьці. (Звярніце ўвагу, што дадзеныя вышынь і рэльефу асобныя, дадаткова даступныя да спампоўкі, пасля актывацыі модуля.)
 
 
-Глябальныя дадзеныя (паміж 70 градусамі на поўначы і 70 градусамі на поўдні) грунтуюцца на вымярэньнях SRTM (Shuttle Radar Topography Mission) і ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), дадзеных інструмента візуалізацыі Terra, флагманскага спадарожніка сістэмы назіраньня Зямлі ад NASA. ASTER - гэта вынік сумеснай працы NASA, міністэрства эканомікі Японіі, міністэрства гандлю і прамысловасьці Японіі (METI), агенцтва касьмічных сістэм Японіі (J-spacesystems).
+Глябальныя дадзеныя (паміж 70 градусамі на поўначы і 70 градусамі на поўдні) грунтуюцца на вымярэньнях SRTM (Shuttle Radar Topography Mission) і ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), дадзеных інструмента візуалізацыі Terra, флагманскага спадарожніка сістэмы назіраньня Зямлі ад NASA. ASTER — гэта вынік сумеснай працы NASA, міністэрства эканомікі Японіі, міністэрства гандлю і прамысловасьці Японіі (METI), агенцтва касьмічных сістэм Японіі (J-spacesystems).
  "</string>
     
     
@@ -1703,7 +1703,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="speak_favorites">Упадабаныя паблізу</string>
     <string name="speak_poi">Навакольныя POI</string>
     <string name="targets">Цэлі</string>
-    <string name="shared_string_all">Усе</string>
+    <string name="shared_string_all"/>
     <string name="index_tours">Паездкі</string>
     <string name="record_plugin_description">"Модуль актывуе функцыі для запісу і захоўваньня вашых сьлядоў уручную націскам на віджэт запісу GPX на экране мапы, або таксама аўтаматычна запісвае ўсе вашы маршруты навігацыі ў файл GPX.
 
@@ -2000,15 +2000,15 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="agps_data_last_downloaded">Апошнія сьцягнутыя зьвесткі A-GPS: %1$s</string>
     <string name="shared_string_message">Паведамленьне</string>
 	<string name="shared_string_do_not_use">Не выкарыстоўваць</string>
-	<string name="shared_string_address">Адрас</string>
+	<string name="shared_string_address"/>
 	<string name="shared_string_show_description">Паказаць апісаньне</string>
 	<string name="shared_string_search">Пошук</string>
 	<string name="shared_string_places">Месцы</string>
 	<string name="rendering_attr_OSMMapperAssistant_name">Памагаты картографа OSM</string>
 	<string name="shared_string_manage">Кіраваць</string>
 	<string name="shared_string_edit">Правіць</string>
-	<string name="shared_string_is_open">Адчынена зараз</string>
-    <string name="filter_poi_hint">Фільтраваць паводле назвы</string>
+	<string name="shared_string_is_open"/>
+    <string name="filter_poi_hint"/>
     <string name="search_poi_category_hint">Друкуйце, каб знайсьці ўсё</string>
     <string name="index_name_netherlands">Эўропа - Нідэрлянды</string>
 	<string name="rendering_value__name">Па змоўчаньні</string>
@@ -2110,7 +2110,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="failed_to_upload">Не ўдалося адаслаць</string>
 	<string name="delete_change">Выдаліць зьмены</string>
 	<string name="successfully_uploaded_pattern">{0}/{1} пасьпяхова адасланыя</string>
-	<string name="try_again">Паўтарыце спробу</string>
+	<string name="try_again"></string>
 	<string name="error_message_pattern">Памылка: {0}</string>
 <string name="no_updates_available">Няма даступных абнаўленьняў</string>
     <string name="we_really_care_about_your_opinion">Нас вельмі цікавіць ваша меркаваньне і нам важна пачуць вас.</string>
@@ -2364,7 +2364,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="shared_string_undo_all">ВЯРНУЦЬ УСЁ</string>
     <string name="rec_split_storage_size">Памер сховішча</string>
     <string name="select_month_and_country">Выберыце месяц і краіну</string>
-<string name="shared_string_select">Абраць</string>
+<string name="shared_string_select"/>
     <string name="shared_string_remove">Выдаліць</string>
     <string name="road_blocked">Дарога заблякаваная</string>
     <string name="switch_start_finish">Памяняць месцамі пункт адпраўленьня і пункт прызначэньня</string>
@@ -2576,14 +2576,14 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="storage_directory_card">Картка памяці</string>
     <string name="coords_format">Фармат каардынатаў</string>
     <string name="coords_format_descr">Фармат для геаграфічных каардынатаў</string>
-  	<string name="shared_string_is_open_24_7">Адкрыта 24/7</string>
+  	<string name="shared_string_is_open_24_7"/>
     <string name="map_widget_search">Шукаць</string>
-	<string name="shared_string_from">з</string>
-    <string name="city_type_neighbourhood">Суседства</string>
-    <string name="city_type_district">Раён</string>
+	<string name="shared_string_from"/>
+    <string name="city_type_neighbourhood"/>
+    <string name="city_type_district"/>
     <string name="lang_hsb">верхнелужыцкая</string>
     <string name="search_categories">Катэгорыі</string>
-    <string name="postcode">Паштовы індэкс</string>
+    <string name="postcode"/>
     <string name="route_stops_before">%1$s прыпынкаў да абранага</string>
     <string name="coords_search">Пошук па каардынатах</string>
     <string name="advanced_coords_search">Пашыраны пошук па каардынатах</string>
@@ -2616,7 +2616,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 і многае іншае…
  "</string>
     <string name="shared_string_change">Зьмяніць</string>
-    <string name="get_started">Пачаць</string>
+    <string name="get_started"/>
     <string name="routing_attr_short_way_name">Паліўна-ашчадны маршрут</string>
     <string name="routing_attr_short_way_description">Разьлічвае паліва-ашчадны маршрут (звычайна найкарацейшы)</string>
     <string name="replace_favorite_confirmation">Вы сапраўды хочаце замяніць улюбёны пункт %1$s?</string>
@@ -2624,21 +2624,21 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="clear_tile_data">Ачысьціць кэш сеціўных мапаў</string>
     <string name="no_update_info_desc">Не правяраць інфармацыю пра новыя вэрсіі і зьніжкі ад OsmAnd</string>
     <string name="no_update_info">Не паказваць абнаўленьні</string>
-    <string name="skip_map_downloading">Прапусьціць сьцягваньне мапаў</string>
+    <string name="skip_map_downloading"/>
     <string name="skip_map_downloading_desc">У вас няма загружаных мапаў. Вы можаце выбраць мапу са сьпісу або сьцягнуць яе пазьней праз мэню - %1$s.</string>
-    <string name="search_another_country">Выберыце іншы рэгіён</string>
+    <string name="search_another_country"/>
     <string name="search_map">Пошук мапаў…</string>
-    <string name="first_usage_wizard_desc">Дазвольце OsmAnd вызначыць ваша месцазнаходжаньне і прапанаваць сьцягнуць мапы для гэтага рэгіёну.</string>
-    <string name="location_not_found">Не атрымалася вызначыць месцазнаходжаньне</string>
-    <string name="no_inet_connection">Злучэньне з Інтэрнэтам адсутнічае</string>
-    <string name="no_inet_connection_desc_map">Трэба сьцягнуць мапы.</string>
-    <string name="search_location">Вызначэньне месцазнаходжаньня …</string>
+    <string name="first_usage_wizard_desc"/>
+    <string name="location_not_found"/>
+    <string name="no_inet_connection"/>
+    <string name="no_inet_connection_desc_map"/>
+    <string name="search_location"/>
     <string name="storage_free_space">Вольнае месца</string>
     <string name="storage_place_description">Сховішча зьвестак OsmAnd (для мапаў, сьлядоў і г.д.): %1$s.</string>
     <string name="give_permission">Дазволіць</string>
     <string name="allow_access_location">Дазволіць доступ да месцазнаходжаньня</string>
-    <string name="first_usage_greeting">Пракладайце маршруты і адкрывайце новыя для сябе месцы без падлучэньня да Інтэрнэту</string>
-    <string name="search_my_location">Вызначыць маё месцазнаходжаньне</string>
+    <string name="first_usage_greeting"/>
+    <string name="search_my_location"/>
     <string name="get_for">Атрымаць за %1$s</string>
     <string name="get_for_month">Атрымаць за %1$s у месяц</string>
     <string name="get_it">Атрымаць</string>
@@ -2654,10 +2654,10 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="shared_string_filters"/>
     <string name="apply_filters"/>
     <string name="save_filter">Захаваць фільтар</string>
-    <string name="delete_filter"></string>
+    <string name="delete_filter"/>
     <string name="new_filter">Новы фільтар</string>
-    <string name="new_filter_desc">Калі ласка, задайце імя для новага фільтра, ён будзе дададзены ў сьпіс катэгорый.</string>
-    <string name="edit_filter">Рэдагаваць катэгорыі</string>
+    <string name="new_filter_desc"/>
+    <string name="edit_filter"/>
     <string name="subcategories"/>
     <string name="selected_categories"/>
     <string name="create_custom_poi"/>
