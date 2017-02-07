@@ -2,7 +2,7 @@
 <resources>
     <string name="wiki_around">Wikipedia-Artikel zur Umgebung</string>
     <string name="osmand_plus_extended_description_4000_chars_v2">"
-OsmAnd Maps &amp; Navigation - Orte finden und Routen berechnen ohne Internetverbindung. Dazu einfach Landkarten für beliebige Länder herunterladen, bevor man sich auf Reisen begibt.
+OsmAnd Maps &amp; Navigation - Orte finden und Routen berechnen ohne Internetverbindung. Dazu einfach Landkarten für beliebige Länder herunterladen, bevor man sich auf Reisen in unbekannte Regionen begibt.
 
 Basisfunktionen:
 • Detaillierte Karten von 200 Ländern
@@ -23,7 +23,7 @@ Zusatzoptionen:
 • Online-Karten aus verschiedenen Quellen
 • Information über Straßenbelag, Straßenqualität und Straßenbeleuchtung
 • Hinzufügen, Bearbeiten und Löschen von Points of Interest (POI) (für OpenStreetMap.org User)
-• OsMo - Live-Verfolgung von Partnergeräten
+• OsMo-Live-Verfolgung von Partnergeräten
 
 Eine verlässliche Navigationsanwendung für Ihr Land, ob Deutschland, Frankreich, Mexiko, das Vereinigte Königreich, Spanien, die Niederlande, USA, Russland, Brasilien, oder jedes andere Land weltweit.
 
@@ -46,7 +46,7 @@ Twitter: https://twitter.com/osmandapp
 Facebook: https://www.facebook.com/osmandapp
 Webseite: http://osmand.net
 
-Für Hilfe mit der OsmAnd-App kontaktieren Sie bitte unser Support-Team unter support@osmand.net. 
+Hilfe zur OsmAnd-App erhalten Sie durch unser Support-Team unter support@osmand.net. 
  "</string>
 	<string name="shared_string_remove">Entfernen</string>
 	<string name="item_removed">Eintrag entfernt</string>
@@ -243,7 +243,7 @@ Alle Karten können sowohl als Hauptkarte wie auch als Überlagerung oder Unterl
 Karten-Kacheln können direkt online bezogen werden, und werden im OsmAnd-Unterordner \'tiles\' zwischengespeichert. Sie können für die Offline-Verwendung auch von anderen Tools als SQLite-Datei vorbereitet und manuell in den OsmAnd-Unterordner \'tiles\' kopiert werden.
  "</string>
 	<string name="osmand_background_plugin_description">Zeigt die Einstellungen für die Standortaufzeichnung oder die Navigation während das Gerät im Standby-Modus ist (periodisches Aufwecken des GPS-Empfängers).</string>
-	<string name="osmand_accessibility_description">Diese Plugin macht die Funktionalitäten der System-Eingabehilfen direkt in OsmAnd verfügbar. Dadurch kann z.B. die Abspielgeschwindigkeit der Synthesizer-Stimme, die Bildschirmnavigation durch Steuerkreuz, Benutzung eines Trackballs zur Zoomsteuerung, Text-to-Speech-Feedback (automatischen Ansage der Position) konfiguriert werden.</string>
+	<string name="osmand_accessibility_description">Dieses Plugin macht die Funktionalitäten der System-Eingabehilfen direkt in OsmAnd verfügbar. Dadurch kann z.B. die Abspielgeschwindigkeit der Synthesizer-Stimme, die Bildschirmnavigation durch Steuerkreuz, Benutzung eines Trackballs zur Zoomsteuerung, Text-to-Speech-Feedback (automatischen Ansage der Position) konfiguriert werden.</string>
 
 	<string name="osmand_development_plugin_description">Dieses Plugin aktiviert Einstellungen für Entwickler und Fehlersuchhilfen, wie simulierte Navigation, die Messung der Bildschirm-Anzeige- (Render-) Leistung, oder das Testen der Sprachansagen. Diese Einstellungen sind für Entwickler gedacht und werden für die Verwendung von OsmAnd sonst nicht benötigt.</string>
 	<string name="plugins_screen">Plugins</string>
@@ -1459,37 +1459,37 @@ Die globalen Daten (zwischen N 70° und S 70°) basieren auf Messungen von SRTM 
 	<string name="lang_zh_tw">Chinesisch (traditionell)</string>
 
 	<string name="osmand_extended_description_4000_chars">"
-OsmAnd (OSM Automated Navigation Directions) ist eine Karten- und Navigationsanwendung mit Zugang zu den freien, weltweit verfügbaren und hoch qualitativen Daten von OpenStreetMap (OSM). Alle Kartendaten können für die Offline-Nutzung auf der Speicherkarte oder den internen Speicher des Endgerätes gespeichert werden. Über das GPS des Endgerätes bietet OsmAnd eine Routing-Funktion mit visueller Anzeige und Sprachausgabe für KFZ, Fahrräder und Fußgänger. Alle Hauptfunktionen funktionieren sowohl online als auch offline (ohne Verbindung zum Internet). 
+OsmAnd (OSM Automated Navigation Directions) ist eine Karten- und Navigationsanwendung mit Zugang zu den freien, weltweit verfügbaren und hoch qualitativen Daten von OpenStreetMap (OSM). Alle Kartendaten können für die Offline-Nutzung auf der Speicherkarte oder dem internen Speicher des Endgerätes gespeichert werden. Über das GPS des Endgerätes bietet OsmAnd eine Routing-Funktion mit visueller Anzeige und Sprachausgabe für KFZ, Fahrräder und Fußgänger. Alle Hauptfunktionen funktionieren sowohl online als auch offline (ohne Verbindung zum Internet). 
 
 Der Funktionsumfang beinhaltet unter anderem: 
 
 Navigation:
-- funktioniert online (schnell) und offline (kein Roaming-Gebühren im Ausland) 
-- exakte Sprachausgabe (aufgenommen und synchronisierte Stimmen) 
+- funktioniert online (schnell) und offline (ohne Roaming-Gebühren im Ausland) 
+- exakte Sprachausgabe (aufgenommene und synchronisierte Stimmen) 
 - optionale Fahrspurführung, Anzeige der Straßennamen und der geschätzten Ankunftszeit 
 - Unterstützung von Zwischenzielen auf ihrer Route 
 - automatische Neuberechnung der Route, sobald von der ursprünglichen Route abgewichen wird. 
-- Suche nach Punkten anhand der Adresse, dem Typ (z. B. Restaurant, Hotel, Tankstelle, Museum) oder geografischen Koordinaten Kartenansicht
+- Ortssuche nach Adresse, Typ (z. B. Restaurant, Hotel, Tankstelle, Museum) oder geografischen Koordinaten
 
-Karten Ansicht:
-- Anzeige des Standpunktes und der Blickrichtung auf der Karte 
+Kartenansicht:
+- Anzeige der Position und der Blickrichtung auf der Karte 
 - optionale Ausrichtung der Karte anhand des Kompasses oder der Bewegungsrichtung 
 - Speichern der wichtigsten Punkte als Favorit 
 - Anzeige von POI (Point Of Interests) 
 - Darstellung spezieller Online-Karten 
 - Darstellung der Satelliten-Ansicht (auf Bing basierend) 
 - Darstellung verschiedener Überlagerungen wie GPS-Tracks und weitere Karten mit einstellbarer Transparenz 
-- Anzeige von Ortsnamen in Englisch, der lokalen Sprache oder phonetischer Aussprache Nutzen von Daten von OpenStreetMap und Wikipedia 
+- Anzeige von Ortsnamen in Englisch, der lokalen Sprache oder phonetischer Schreibweise 
 
-Nutzung von OpenStreetMap and Wikipedia Daten:
-- qualitativ hochwertige Informationen der besten frei verfügbaren Projekte der Welt 
+Verwendung der Daten von OpenStreetMap und Wikipedia:
+- qualitativ hochwertige Informationen der beiden besten Gemeinschaftsprojekte der Welt 
 - globale Karten von OpenStreetMap, verfügbar nach Land oder Region 
 - Wikipedia POIs, praktisch für Stadtbesichtigungen (nicht verfügbar in der kostenfreien Version) 
 - unlimitierter kostenloser Download direkt in der App (Download-Limit in der kostenfreien Version: 16 Karten) 
 - immer aktuelle Karten (mindestens eine Aktualisierung pro Monat) 
 - kompakte Offline-Vektor-Karten 
 - Auswahl zwischen kompletten Karten und reinen Straßenkarten (Beispiel: Die gesamte Karte für Japan ist 700 MB, die reine Straßenkarte 200 MB groß) 
-- zusätzliche Unterstützung von Online-Karten oder zwischengespeicherten Karten-Abschnitten Sicherheitsfunktionen 
+- zusätzliche Unterstützung von Online-Karten oder zwischengespeicherten Karten-Abschnitten 
 
 Sicherheitsfunktionen:
 - optionaler automatisierter Wechsel zwischen Tag- und Nachtansicht 
@@ -1499,20 +1499,19 @@ Sicherheitsfunktionen:
 
 Fahrrad- und Fußgängerfunktionen:
 - die Karten beinhalten Fuß, Wander- und Fahrradwege, gut geeignet für Outdoor-Aktivitäten 
-- spezielle Routing und Darstellungsoptionen für Radfahrer und Fußgänger 
+- spezielle Routing- und Darstellungsoptionen für Radfahrer und Fußgänger 
 - optionales Einblenden von Haltestellen des öffentlichen Nahverkehrs (Bus, Straßenbahn, Zug…) 
 - optionales Aufzeichnen des zurückgelegten Weges als lokale GPX-Datei oder bei einem Online-Service 
-- optionale Darstellung der Geschwindigkeit und aktuelle Höhe 
-- Darstellung von Höhenlinien und Bergschattierungen (über zusätzliches Plugin) direktes Beitragen zu OpenStreetMap 
+- optionale Darstellung der Geschwindigkeit und der aktuellen Höhe 
+- Darstellung von Höhenlinien und Bergschattierungen (über zusätzliches Plugin)  
 
-
-Direktes Beitragen zu OpenStreetMap:
+Direkte OpenStreetMap-Beiträge:
 - Melden von Fehlern 
-- Hochladen von GPX-Tracks zu OSM direkt aus der App 
-- Hinzufügen von POIs und hochladen dieser zu OSM (oder später, wenn gerade offline) 
-- optionales Aufzeichnen der Strecke (auch im Hintergrundmodus (während das Endgerät im Ruhemodus ist). 
+- Hochladen von GPX-Tracks direkt aus der App zu OSM
+- POIs hinzufügen und sie direkt zu OSM hochladen (bei fehlender Internetverbindung auch später) 
+- optionales Aufzeichnen der Strecke auch im Hintergrund (während das Endgerät im Ruhemodus ist). 
 
-OsmAnd ist OpenSource und wird aktiv weiterentwickelt. Jeder kann dazu beitragen, indem er Fehler mitteilt, die Übersetzungen verbessert oder neue Funktionen programmiert. Das Projekt befindet sich in einem Status der kontinuierlichen Verbesserung aufgrund der ständigen Interaktion zwischen Entwickler und Nutzer. Der Fortschritt des Projektes ist auch abhängig von finanzieller Unterstützung um die Entwicklung, das Programmieren und Testen neuer Funktionen zu ermöglichen. 
+OsmAnd ist OpenSource und wird aktiv weiterentwickelt. Jeder kann dazu beitragen, indem er Fehler mitteilt, die Übersetzungen verbessert oder neue Funktionen programmiert. Das Projekt befindet sich in einem Status der kontinuierlichen Verbesserung aufgrund der ständigen Interaktion zwischen Entwickler und Nutzer. Der Fortschritt des Projektes ist auch abhängig von finanzieller Unterstützung, um die Entwicklung, das Programmieren und Testen neuer Funktionen zu ermöglichen. 
 Durch den Kauf von OsmAnd+ können Sie helfen die App noch besser zu machen. Es ist auch möglich für spezielle neue Funktionen oder die allgemeine Entwicklung auf osmand.net zu spenden. 
 
 Durchschnittliche Kartenabdeckung und -qualität: 
@@ -1597,7 +1596,8 @@ Durchschnittliche Kartenabdeckung und -qualität:
 - Afrika: **
 - Antarktis: * 
 
-Liste der Unterstützten Länder (annähernd Weltweit!): Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua und Barbuda, Äquatorialguinea, Arabische Republik Sahara, Argentinien, Armenien, Aruba, Aserbaidschan, Äthiopien, Australien, Bahamas, Bahrain, Bangladesch, Barbados, Belgien, Belize, Benin, Bermuda, Bhutan, Bolivien, Bonaire, Bosnien und Herzegowina, Botswana, Brasilien, Brunei, Bulgarien, Burkina Faso, Burundi, Chile, China, Costa Rica, Curaçao, Dänemark, Deutschland, Dominica, Dominikanische Republik, Dschibuti, Ecuador, El Salvador, Elfenbeinküste, Eritrea, Estland, Fidschi, Finnland, Frankreich, Französisch-Guayana, Französisch-Polynesien, Gabun, Gambia, Georgien, Ghana, Gibraltar, Grenada, Griechenland, Grönland, Großbritannien, Guadeloupe, Guam, Guatemala, Guernsey, Guinea, Guinea-Bissau, Guyana, Haiti, Honduras, Hong Kong, Indien, Indonesien, Isle of Man, Irak, Iran, Irland, Island, Israel, Italien, Jamaika, Japan, Jemen, Jersey, Jordanien, Jungferninseln, Kambodscha, Kamerun, Kanada, Kap Verde, Kasachstan, Katar, Kenia, Kirgistan, Kiribati, Kolumbien, Komoren, Kongo, Kroatien, Kuba, Kuwait, Laos, Lesotho, Lettland, Libanon, Liberia, Libyen, Liechtenstein, Litauen, Luxemburg, Macau, Madagaskar, Malawi, Malaysia, Malediven, Mali, Malta, Marokko, Martinique, Mauretanien, Mauritius, Mayotte, Mazedonien, Mexiko, Mikronesien, Moldau, Monaco, Mongolei, Montenegro, Montserrat, Mosambik, Myanmar, Namibia, Nauru, Nepal, Neukaledonien, Neuseeland, Nicaragua, Niederlande, Niederländische Antillen, Niger, Nigeria, Nordkorea, Norwegen, Oman, Österreich, Osttimor, Pakistan, Palau, Palästinensische Autonomiegebiete, Panama, Papua-Neuguinea, Paraquay, Peru, Philippinen, Polen, Portugal, Puerto Rico, Ruanda, Rumänien, Russland, Saint-Barthélemy, Saint Helena, Saint Helena, Ascension und Tristan da Cunha, Saint Kitts und Nevis, Saint Lucia, Saint Martin, Saint-Pierre und Miquelon, Saint Vincent und die Grenadinen, Sambia, Samoa, San Marino, Saudi Arabien, Schweden, Schweiz, Senegal, Serbien, Seychellen, Sierra Leona Singapur, Simbabwe, Slovakei, Slowenien, Somalia, Spanien, Sri Lanka, Südafrika, Sudan, Südgeorgien, Südkorea, Südsudan, Suriname, Swasiland, Syrien, Taiwan, Tadschikistan, Tansania, Thailand, Togo, Trinidad und Tobago, Tschad, Tschechische Republik, Tunesien, Türkei, Turkmenistan, Tuvalu, Uganda, Ukraine, Ungarn, Uruguay, Usbekistan, Vanuatu, Vatikan, Venezuela, Vereinigte Arabische Emirate, Vereinigte Staaten von Amerika, Vietnam, Wallis und Futuna, Weißrussland, Zentralafrikanische Republik, Zypern.
+Liste der unterstützten Länder (im Grunde weltweit!):
+Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua und Barbuda, Äquatorialguinea, Arabische Republik Sahara, Argentinien, Armenien, Aruba, Aserbaidschan, Äthiopien, Australien, Bahamas, Bahrain, Bangladesch, Barbados, Belgien, Belize, Benin, Bermuda, Bhutan, Bolivien, Bonaire, Bosnien und Herzegowina, Botswana, Brasilien, Brunei, Bulgarien, Burkina Faso, Burundi, Chile, China, Costa Rica, Curaçao, Dänemark, Deutschland, Dominica, Dominikanische Republik, Dschibuti, Ecuador, El Salvador, Elfenbeinküste, Eritrea, Estland, Fidschi, Finnland, Frankreich, Französisch-Guayana, Französisch-Polynesien, Gabun, Gambia, Georgien, Ghana, Gibraltar, Grenada, Griechenland, Grönland, Großbritannien, Guadeloupe, Guam, Guatemala, Guernsey, Guinea, Guinea-Bissau, Guyana, Haiti, Honduras, Hong Kong, Indien, Indonesien, Isle of Man, Irak, Iran, Irland, Island, Israel, Italien, Jamaika, Japan, Jemen, Jersey, Jordanien, Jungferninseln, Kambodscha, Kamerun, Kanada, Kap Verde, Kasachstan, Katar, Kenia, Kirgistan, Kiribati, Kolumbien, Komoren, Kongo, Kroatien, Kuba, Kuwait, Laos, Lesotho, Lettland, Libanon, Liberia, Libyen, Liechtenstein, Litauen, Luxemburg, Macau, Madagaskar, Malawi, Malaysia, Malediven, Mali, Malta, Marokko, Martinique, Mauretanien, Mauritius, Mayotte, Mazedonien, Mexiko, Mikronesien, Moldau, Monaco, Mongolei, Montenegro, Montserrat, Mosambik, Myanmar, Namibia, Nauru, Nepal, Neukaledonien, Neuseeland, Nicaragua, Niederlande, Niederländische Antillen, Niger, Nigeria, Nordkorea, Norwegen, Oman, Österreich, Osttimor, Pakistan, Palau, Palästinensische Autonomiegebiete, Panama, Papua-Neuguinea, Paraquay, Peru, Philippinen, Polen, Portugal, Puerto Rico, Ruanda, Rumänien, Russland, Saint-Barthélemy, Saint Helena, Saint Helena, Ascension und Tristan da Cunha, Saint Kitts und Nevis, Saint Lucia, Saint Martin, Saint-Pierre und Miquelon, Saint Vincent und die Grenadinen, Sambia, Samoa, San Marino, Saudi Arabien, Schweden, Schweiz, Senegal, Serbien, Seychellen, Sierra Leona Singapur, Simbabwe, Slovakei, Slowenien, Somalia, Spanien, Sri Lanka, Südafrika, Sudan, Südgeorgien, Südkorea, Südsudan, Suriname, Swasiland, Syrien, Taiwan, Tadschikistan, Tansania, Thailand, Togo, Trinidad und Tobago, Tschad, Tschechische Republik, Tunesien, Türkei, Turkmenistan, Tuvalu, Uganda, Ukraine, Ungarn, Uruguay, Usbekistan, Vanuatu, Vatikan, Venezuela, Vereinigte Arabische Emirate, Vereinigte Staaten von Amerika, Vietnam, Wallis und Futuna, Weißrussland, Zentralafrikanische Republik, Zypern.
  "</string>
 
 	
