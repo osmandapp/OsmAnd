@@ -437,7 +437,9 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 			dialogFragment.getAccessibilityAssistant().lockEvents();
 			updateCompassVisibility(coordsView, latLon, heading);
 			dialogFragment.getAccessibilityAssistant().unlockEvents();
-			dialogFragment.getNavigationInfo().updateTargetDirection(currentLatLon, heading.floatValue());
+			if(heading != null) {
+				dialogFragment.getNavigationInfo().updateTargetDirection(currentLatLon, heading.floatValue());
+			}
 		}
 	}
 
