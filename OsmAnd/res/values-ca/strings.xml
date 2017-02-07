@@ -922,7 +922,7 @@ Els mapes de tessel·les es poden obtenir directament de proveïdors en línia, 
     <string name="show_transport_over_map">Mostra les parades del transport</string>
     <string name="save_track_to_gpx">Desa la traça en un fitxer GPX durant la navegació</string>
     <string name="use_english_names_descr">Escolliu entre noms nadius i noms anglesos</string>
-    <string name="srtm_plugin_description">"Aquest connector proporciona tant corbes de nivell superposades com una capa d\'ombres amb efecte relleu per superposar als mapes de OsmAnd. Corredors, ciclistes, excursionistes i qualsevol interessat en el perfil de relleu del terreny ho agrairan força. (Fixeu-vos que les corbes de nivell i/o els efectes de relleu són dues baixades que es podran afegir independentment un cop s\'hagi activat el connector).
+    <string name="srtm_plugin_description">"Aquest connector proporciona tant corbes de nivell superposades com una capa d\'ombres amb efecte relleu per superposar als mapes de OsmAnd. Corredors, ciclistes, excursionistes i qualsevol interessat en el perfil de relleu del terreny ho agrairan força. (Fixeu-vos que les corbes de nivell i/o els efectes de relleu són baixades independents i complementàries, disponibles un cop s\'hagi activat el connector).
 
 
 Les dades globals (entre 70 graus nord i 70 graus sud) estan basades en mesures del SRTM (Shuttle Radar Topography Mission) i del ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), un instrument de generació d\'imatges a bord de Terra, el satèl·lit insígnia del Sistema d\'Observació de la Terra de la NASA. ASTER és un esforç de col·laboració entre la NASA, el Ministeri d\'Economia i Comerç del Japó (METI) i la fundació Japan Space Systems (J-spacesystems).
