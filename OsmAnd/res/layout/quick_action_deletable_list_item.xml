@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:clickable="true"
         android:layout_height="wrap_content"
-        android:background="?android:selectableItemBackground"
+        android:background="?attr/selectableItemBackground"
         android:minHeight="60dp"
         android:orientation="horizontal">
 
@@ -43,7 +43,7 @@
             android:layout_width="56dp"
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
-            android:background="?android:selectableItemBackground"
+            android:background="?attr/selectableItemBackground"
             android:scaleType="centerInside"
             android:tint="?attr/secondary_icon_color"
             android:src="@drawable/ic_action_remove_dark"/>

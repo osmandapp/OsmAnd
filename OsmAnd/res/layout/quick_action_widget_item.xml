@@ -6,7 +6,7 @@
              android:layout_width="0dp"
              android:layout_height="100dp"
              android:animateLayoutChanges="true"
-             android:background="?android:selectableItemBackground"
+             android:background="?attr/selectableItemBackground"
              grid:layout_columnWeight="1">
 
     <LinearLayout
