@@ -14,7 +14,7 @@
     <string name="subcategories">Undirflokkar</string>
     <string name="selected_categories">Valdir flokkar</string>
     <string name="create_custom_poi">Búa til sérsniðna síu</string>
-    <string name="custom_search">"Sérsniðin leit "</string>
+    <string name="custom_search">Sérsniðin leit</string>
     <string name="shared_string_filters">Síur</string>
     <string name="save_filter">Vista síu</string>
     <string name="delete_filter">Eyða síu</string>
@@ -99,7 +99,7 @@
     <string name="shared_string_update">Uppfæra</string>
     <string name="shared_string_upload">Senda</string>
     <string name="shared_string_qr_code">QR-kóði</string>
-    <string name="go_to_map">Fara á kortið</string>
+    <string name="go_to_map">Birta kortið</string>
     <string name="share_menu_location">Deila staðsetningu</string>
     <string name="shared_string_send">Senda</string>
     <string name="favorite_category_name">Heiti flokks</string>
@@ -846,7 +846,7 @@
     <string name="storage_directory_default">Innra minni</string>
     <string name="application_dir">Mappa fyrir geymslu gagna</string>
     <string name="storage_directory">Geymsla korta</string>
-    <string name="shared_string_is_open">Opna núna</string>
+    <string name="shared_string_is_open">Opið núna</string>
     <string name="agps_info">Upplýsingar A-GPS</string>
     <string name="current_route">Núverandi leið</string>
     <string name="shared_string_download_successful">Tókst að sækja</string>
@@ -1256,7 +1256,7 @@ Sólsetur: %2$s</string>
     <string name="osmand_service_descr">OsmAnd keyrir í bakgrunni á meðan slökkt er á skjá</string>
     <string name="choose_auto_follow_route">Sjálfvirkt miðja sýn á kort</string>
     <string name="pref_vector_map">Stillingar vektorkorta</string>
-    <string name="poi_filter_by_name">Leita eftir heiti</string>
+    <string name="poi_filter_by_name">Leita eftir nafni</string>
     <string name="show_more_map_detail">Sýna fleiri smáatriði á korti</string>
     <string name="local_index_address_data">Gögn um heimilisfang</string>
     <string name="local_index_transport_data">Gögn um almenningssamgöngur</string>
@@ -1278,10 +1278,10 @@ Sólsetur: %2$s</string>
     <string name="app_name_osmand">OsmAnd</string>
     <string name="offline_maps_and_navigation">Ónettengd kort
 og leiðsögn</string>
-    <string name="search_on_the_map_item">Leit á korti</string>
+    <string name="search_on_the_map_item">Leit á kortinu</string>
     <string name="skip_map_downloading_desc">Þú ert ekki með uppsett nein ónettengd kort. Þú gætir valið kort úr listanum eða hlaðið inn kortum síðar með valmyndinni - %1$s.</string>
     <string name="search_another_country">Velja annað svæði</string>
-    <string name="search_map">Leita að korti…</string>
+    <string name="search_map">Leita á kortum…</string>
     <string name="first_usage_wizard_desc">Leyfðu OsmAnd að finna út staðsetninguna þína og stinga upp á kortum fyrir það svæði til að sækja.</string>
     <string name="allow_access_location">Leyfa aðgang að staðsetningunni þinni</string>
     <string name="search_my_location">Leita á staðsetningunni minni</string>
@@ -1848,4 +1848,16 @@ Punktar</string>
     <string name="use_fast_recalculation">Snjöll endurreiknun leiðar</string>
     <string name="use_fast_recalculation_desc">Einungis endurreikna upphafshluta leiðar fyrir langar ferðir</string>
     <string name="confirm_download_roadmaps">Ertu viss um að þú viljir sækja kort eingöngu með vegum, jafnvel þó þú sért þegar með staðlaða (fulla útgáfu) korts?</string>
+    <string name="rendering_attr_depthContours_description">Birta dýptarlínur og punkta</string>
+    <string name="rendering_attr_depthContours_name">Dýptarlínur</string>
+	<string name="rendering_attr_contourDensity_description">Þéttleiki hæðarlína</string>
+    <string name="rendering_attr_contourDensity_name">Þéttleiki hæðarlína</string>
+    <string name="rendering_value_high_name">Hár</string>
+    <string name="rendering_value_medium_w_name">Miðlungs</string>
+    <string name="rendering_value_low_name">Lágur</string>
+    <string name="rendering_attr_hideWaterPolygons_name">Fela vatn</string>
+    <string name="rendering_attr_alpineHiking_name"/>
+    <string name="rendering_attr_hikingRoutesOSMC_name"/>
+    <string name="rendering_attr_OSMMapperAssistant_name"/>
+    <string name="first_usage_greeting"></string>
     </resources>
