@@ -16,6 +16,7 @@ import net.sf.junidecode.Junidecode;
 public class RouteDataObject {
 	/*private */static final int RESTRICTION_SHIFT = 3;
 	/*private */static final int RESTRICTION_MASK = 7;
+	public static int HEIGHT_UNDEFINED = -80000;
 	
 	public final RouteRegion region;
 	// all these arrays supposed to be immutable!
@@ -31,6 +32,8 @@ public class RouteDataObject {
 	public TIntObjectHashMap<String> names;
 	public final static float NONE_MAX_SPEED = 40f;
 	public int[] nameIds;
+	// mixed array [0, height, cumulative_distance height, cumulative_distance, height, ...] - length is length(points)*2
+	public float[] heightDistanceArray = null;
 	
 	public RouteDataObject(RouteRegion region) {
 		this.region = region;
@@ -58,6 +61,73 @@ public class RouteDataObject {
 		this.pointNames = copy.pointNames;
 		this.pointNameTypes = copy.pointNameTypes;
 		this.id = copy.id;
+	}
+	
+	public float[] calculateHeightArray() {
+		if(heightDistanceArray != null) {
+			return heightDistanceArray;
+		}
+		int startHeight = Algorithms.parseIntSilently(getValue("osmand_ele_start"), HEIGHT_UNDEFINED);
+		int endHeight = Algorithms.parseIntSilently(getValue("osmand_ele_end"), startHeight);
+		if(startHeight == HEIGHT_UNDEFINED) {
+			heightDistanceArray = new float[0];
+			return heightDistanceArray;
+		}
+		
+		heightDistanceArray = new float[2*getPointsLength()]; 
+		double plon = 0;
+		double plat = 0;
+		int prevHeight = startHeight;
+		for(int k = 0; k < getPointsLength(); k++) {
+			double lon = MapUtils.get31LongitudeX(getPoint31XTile(k));
+			double lat = MapUtils.get31LatitudeY(getPoint31YTile(k));
+			if(k > 0) {
+				double dd = MapUtils.getDistance(plat, plon, lat, lon);
+				int height = HEIGHT_UNDEFINED;
+				if(k == getPointsLength() - 1) {
+					height = endHeight;
+				} else {
+					int[] tps = getPointTypes(k);
+					if (tps != null) {
+						for (int id : tps) {
+							RouteTypeRule rt = region.quickGetEncodingRule(id);
+							if (rt.getTag().equals("osmand_ele_asc")) {
+								height = (int) (prevHeight + Float.parseFloat(rt.getValue()));
+								break;
+							} else if (rt.getTag().equals("osmand_ele_desc")) {
+								height = (int) (prevHeight - Float.parseFloat(rt.getValue()));
+								break;
+							}
+						}
+					}
+				}
+				heightDistanceArray[2*k] = (float) dd;
+				heightDistanceArray[2*k+1] = height;
+				if(height != HEIGHT_UNDEFINED) {
+					// interpolate undefined
+					double totalDistance = dd;
+					int startUndefined = k;
+					while(startUndefined - 1 >= 0 && heightDistanceArray[2*(startUndefined - 1)+1] == HEIGHT_UNDEFINED) {
+						startUndefined --;
+						totalDistance += heightDistanceArray[2*(startUndefined)];
+					}
+					if(totalDistance > 0) {
+						double angle = (height - prevHeight) / totalDistance;
+						for(int j = startUndefined; j < k; j++) {
+							heightDistanceArray[2*j+1] = (float) ((heightDistanceArray[2*j] * angle) + heightDistanceArray[2*j-1]);
+						}
+					}
+					prevHeight = height;
+				}
+				
+			} else {
+				heightDistanceArray[0] = 0;
+				heightDistanceArray[1] = startHeight;
+			}
+			plat = lat;
+			plon = lon;
+		}
+		return heightDistanceArray;
 	}
 
 	public long getId() {
