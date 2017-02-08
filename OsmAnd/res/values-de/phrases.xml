@@ -2698,7 +2698,7 @@
 	<string name="poi_health_facility_type_health_centre">Gesundheit-Einrichtungstyp: Gesundheitszentrum</string>
 	<string name="poi_health_facility_type_counselling_centre">Gesundheitseinrichtung: Beratungsstelle</string>
 	<string name="poi_health_facility_type_laboratory">Gesundheitseinrichtung: Labor</string>
-	<string name="poi_health_facility_type_therapy">Gesundheit-Einrichtungstyp: Therapie</string>
+	<string name="poi_health_facility_type_therapy">Gesundheitseinrichtung: Therapie</string>
 	<string name="poi_health_facility_type_department">Gesundheitseinrichtung: Fachabteilung</string>
 	<string name="poi_health_facility_type_dispensary">Gesundheitseinrichtung: Ambulanz</string>
 	<string name="poi_health_facility_type_pharmacy">Gesundheit-Einrichtungstyp: Apotheke</string>
@@ -2725,7 +2725,7 @@
 	<string name="poi_health_amenity_type_first_aid_kit">Erste Hilfe Kasten</string>
 	<string name="poi_health_amenity_type_scales">Öffentliche Waagen</string>
 
-	<string name="poi_health_person_type_assistant">Rolle des Gesundheitspersonals: Assistent</string>
+	<string name="poi_health_person_type_assistant">Funktion im Gesundheitssektor: Helfer</string>
 	<string name="poi_depth">Tiefe</string>
 
 <string name="poi_health_service_examination_yes">Gesundheitswesen: Untersuchung: Ja</string>
@@ -2735,20 +2735,20 @@
 	<string name="poi_health_service_test_yes">Gesundheitswesen: Test: Ja</string>
 	<string name="poi_health_service_test_no">Gesundheitswesen: Test: Nein</string>
 
-	<string name="poi_health_specialty_palliative_medicine_yes">Spezialmedizin: Palliativmedizin</string>
+	<string name="poi_health_specialty_palliative_medicine_yes">Palliativmedizin</string>
 
 	<string name="poi_fire_hydrant_type_dry_barrel">Trockenfass</string>
-	<string name="poi_health_person_type_healer">Rolle des Gesundheitspersonal: Therapeut</string>
-	<string name="poi_health_person_type_midwife">Rolle des Gesundheitspersonal: Hebamme</string>
-	<string name="poi_health_person_type_nurse">Rolle des Gesundheitspersonal: Krankenschwester</string>
-	<string name="poi_health_person_type_paramedic">Rolle des Gesundheitspersonal: Sanitäter</string>
-	<string name="poi_health_person_type_physician">Rolle des Gesundheitspersonal: Arzt</string>
-	<string name="poi_health_person_type_podologist">Rolle des Gesundheitspersonal: Podologin</string>
-	<string name="poi_health_person_type_psychologist">Rolle des Gesundheitspersonal: Psychologe</string>
-	<string name="poi_health_person_type_therapist">Rolle des Gesundheitspersonal: Therapeut</string>
-	<string name="poi_health_person_type_physician_assitant">Rolle des Gesundheitspersonal: Assistentsarzt</string>
-	<string name="poi_health_person_type_technician">Rolle des Gesundheitspersonal: Techniker</string>
-	<string name="poi_health_person_type_witchdoctor">Rolle des Gesundheitspersonal: Medizinmann</string>
+	<string name="poi_health_person_type_healer">Funktion im Gesundheitssektor: Therapeut</string>
+	<string name="poi_health_person_type_midwife">Funktion im Gesundheitssektor: Hebamme</string>
+	<string name="poi_health_person_type_nurse">Funktion im Gesundheitssektor: Pflegefachkraft</string>
+	<string name="poi_health_person_type_paramedic">Funktion im Gesundheitssektor: Sanitäter</string>
+	<string name="poi_health_person_type_physician">Funktion im Gesundheitssektor: Arzt</string>
+	<string name="poi_health_person_type_podologist">Funktion im Gesundheitssektor: Podologin</string>
+	<string name="poi_health_person_type_psychologist">Funktion im Gesundheitssektor: Psychologe</string>
+	<string name="poi_health_person_type_therapist">Funktion im Gesundheitssektor: Therapeut</string>
+	<string name="poi_health_person_type_physician_assitant">Funktion im Gesundheitssektor: Assistenzarzt</string>
+	<string name="poi_health_person_type_technician">Funktion im Gesundheitssektor: Techniker</string>
+	<string name="poi_health_person_type_witchdoctor">Funktion im Gesundheitssektor: Medizinmann</string>
 
 	<string name="poi_counselling_type_addiction_yes">"Beratung (Sucht):  Ja"</string>
 	<string name="poi_counselling_type_addiction_no">Beratung (Sucht): Nein</string>
