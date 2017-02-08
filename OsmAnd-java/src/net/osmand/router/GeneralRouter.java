@@ -303,7 +303,7 @@ public class GeneralRouter implements VehicleRouter {
 		RouteAttributeContext objContext = getObjContext(RouteDataObjectAttribute.OBSTACLE_SRTM_ALT_SPEED);
 		for(int k = startIndex; k != endIndex; k = knext) {
 			knext = startIndex < endIndex ? k + 1 : k - 1;
-			double dist = Math.abs(heightArray[2 * k] - heightArray[2 * knext]) ;
+			double dist = startIndex < endIndex ? heightArray[2 * knext] : heightArray[2 * k]  ;
 			double diff = heightArray[2 * knext + 1] - heightArray[2 * k + 1] ;
 			if(diff > 0 && dist > 0) {
 				double incl = diff / dist;
