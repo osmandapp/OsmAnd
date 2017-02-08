@@ -35,7 +35,7 @@
         android:layout_marginBottom="8dp"
         android:text="@string/shared_string_dismiss"
         android:layout_gravity="right"
-        android:background="?android:selectableItemBackground"
+        android:background="?attr/selectableItemBackground"
         android:textColor="@color/dashboard_blue"
         android:textAllCaps="true"/>
 </LinearLayout>

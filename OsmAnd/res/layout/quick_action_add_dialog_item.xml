@@ -8,7 +8,7 @@
     android:minHeight="48dp"
     android:paddingRight="24dp"
     android:paddingLeft="24dp"
-    android:background="?android:selectableItemBackground"
+    android:background="?attr/selectableItemBackground"
     android:orientation="horizontal">
 
 
