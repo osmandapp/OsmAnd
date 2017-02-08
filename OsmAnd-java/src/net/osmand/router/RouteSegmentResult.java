@@ -44,12 +44,17 @@ public class RouteSegmentResult {
 		int end = Math.max(startPointIndex, endPointIndex);
 		float[] res = new float[(end - st + 1) * 2];
 		for (int k = 0; k < res.length / 2; k++) {
+			int ind = reverse ? (2 * (end - k)) : (2 * (k + st));
 			if (k == 0) {
 				res[2 * k] = 0;
 			} else {
-				res[2 * k] = pf[reverse ? (2 * (end - k)) : (2 * (k + st))];
+				if(ind < pf.length) {
+					res[2 * k] = pf[k];
+				}
 			}
-			res[2 * k + 1] = pf[reverse ?  (2 * (end - k) + 1) : (2 * (k + st) + 1)];
+			if(ind < pf.length) {
+				res[2 * k + 1] = pf[ind + 1];
+			}
 		}
 		return res;
 	}
