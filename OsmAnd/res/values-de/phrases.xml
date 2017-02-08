@@ -2687,24 +2687,24 @@
 	<string name="poi_health_service_nursing_no">Gesundheitswesen: Pflege: nein</string>
 	<string name="poi_health_service_counselling_yes">Gesundheitswesen: Beratung: Ja</string>
 	<string name="poi_health_service_counselling_no">Gesundheitswesen: Beratung: nein</string>
-	<string name="poi_health_service_prevention_yes">Gesundheitswesen: Prävention: Ja</string>
-	<string name="poi_health_service_prevention_no">Gesundheitswesen: Prävention: Nein</string>
+	<string name="poi_health_service_prevention_yes">Gesundheitswesen: Vorsorge: Ja</string>
+	<string name="poi_health_service_prevention_no">Gesundheitswesen: Vorsorge: Nein</string>
 	<string name="poi_health_service_prevention_vaccination_yes">Gesundheitswesen: Impfung: Ja</string>
 	<string name="poi_health_service_prevention_vaccination_no">Gesundheitswesen: Impfung: Nein</string>
 	<string name="poi_health_facility_type_office">Arztpraxis</string>
 	<string name="poi_health_facility_type_hospital">Gesundheit-Einrichtungstyp: Krankenhaus</string>
-	<string name="poi_health_facility_type_field_hospital">Gesundheit-Einrichtungstyp: Feldlazarett</string>
+	<string name="poi_health_facility_type_field_hospital">Gesundheitseinrichtung: Feldlazarett</string>
 	<string name="poi_health_facility_type_clinic">Gesundheit-Einrichtungstyp: Klinik</string>
 	<string name="poi_health_facility_type_health_centre">Gesundheit-Einrichtungstyp: Gesundheitszentrum</string>
-	<string name="poi_health_facility_type_counselling_centre">Gesundheit-Einrichtungstyp: Beratungsstelle</string>
-	<string name="poi_health_facility_type_laboratory">Gesundheit-Einrichtungstyp: Labor</string>
+	<string name="poi_health_facility_type_counselling_centre">Gesundheitseinrichtung: Beratungsstelle</string>
+	<string name="poi_health_facility_type_laboratory">Gesundheitseinrichtung: Labor</string>
 	<string name="poi_health_facility_type_therapy">Gesundheit-Einrichtungstyp: Therapie</string>
-	<string name="poi_health_facility_type_department">Gesundheit-Einrichtungstyp: Abteilung</string>
-	<string name="poi_health_facility_type_dispensary">Gesundheit-Einrichtungstyp: Ambulanz</string>
+	<string name="poi_health_facility_type_department">Gesundheitseinrichtung: Fachabteilung</string>
+	<string name="poi_health_facility_type_dispensary">Gesundheitseinrichtung: Ambulanz</string>
 	<string name="poi_health_facility_type_pharmacy">Gesundheit-Einrichtungstyp: Apotheke</string>
-	<string name="poi_health_facility_type_first_aid">Gesundheit-Einrichtungstyp: Erste Hilfe</string>
-	<string name="poi_health_facility_type_nursing_home">Gesundheit-Einrichtungstyp: Pflegeheim</string>
-	<string name="poi_health_facility_type_support_group_home">Gesundheit-Einrichtungstyp: Selbsthilfegruppe</string>
+	<string name="poi_health_facility_type_first_aid">Gesundheitseinrichtung: Erste Hilfe</string>
+	<string name="poi_health_facility_type_nursing_home">Gesundheitseinrichtung: Pflegeheim</string>
+	<string name="poi_health_facility_type_support_group_home">Gesundheitseinrichtung: Selbsthilfegruppe</string>
 
 	<string name="poi_disease_malaria_yes">Malaria: Ja</string>
 	<string name="poi_disease_malaria_no">Malaria: Nein</string>
@@ -2728,8 +2728,8 @@
 	<string name="poi_health_person_type_assistant">Rolle des Gesundheitspersonals: Assistent</string>
 	<string name="poi_depth">Tiefe</string>
 
-<string name="poi_health_service_examination_yes">Gesundheitswesen: Prüfung: Ja</string>
-	<string name="poi_health_service_examination_no">Gesundheitswesen: Prüfung: Nein</string>
+<string name="poi_health_service_examination_yes">Gesundheitswesen: Untersuchung: Ja</string>
+	<string name="poi_health_service_examination_no">Gesundheitswesen: Untersuchung: Nein</string>
 	<string name="poi_health_service_child_care_yes">Gesundheitswesen: Kinderbetreuung: Ja</string>
 	<string name="poi_health_service_child_care_no">Gesundheitswesen: Kinderbetreuung: Nein</string>
 	<string name="poi_health_service_test_yes">Gesundheitswesen: Test: Ja</string>
@@ -3055,7 +3055,7 @@
 	<string name="poi_clock_option">Zusätzlich</string>
 	<string name="poi_scout_camp">Pfadfinderlager</string>
 	<string name="poi_backcountry">Hinterland</string>
-	<string name="poi_piste_difficulty">Piste Schwierigkeitsgrad</string>
+	<string name="poi_piste_difficulty">Pisten-Schwierigkeitsgrad</string>
 	<string name="poi_theatre_genre">Genre</string>
 	<string name="poi_outdoor_seating">Sitzgelegenheiten im Freien</string>
 	<string name="poi_fee">Gebühr</string>
@@ -3073,7 +3073,7 @@
 
 <string name="poi_wheelchair_accessibility">Rollstuhlzugänglichkeit</string>
 	<string name="poi_resort_type">Typ</string>
-	<string name="poi_piste_grooming">Pisten Pflege</string>
+	<string name="poi_piste_grooming">Pistenpflege</string>
 	<string name="poi_recycling_type">Typ</string>
 	<string name="poi_shelter_type">Typ</string>
 	<string name="poi_xmas">Weihnachten</string>
