@@ -2628,11 +2628,11 @@ und vieles mehr ...
     <string name="shared_string_action_name">Aktionsname</string>
     <string name="quick_action_add_marker_descr">Drücken der Taste für Schnellaktion fügt einen Kartenmarker am Bildschirmmittelpunkt ein.</string>
     <string name="favorite_empty_place_name">Ort</string>
-    <string name="quick_action_showhide_favorites_title">Favoriten zeigen/verbergen</string>
+    <string name="quick_action_showhide_favorites_title">Favoriten ein-/ausblenden</string>
     <string name="quick_action_take_audio_note_descr">Drücken der Taste für Schnellaktion fügt eine Audionachricht am Bildschirmmittelpunkt ein.</string>
     <string name="quick_action_take_video_note_descr">Drücken der Taste für Schnellaktion fügt eine Videonachricht am Bildschirmmittelpunkt ein.</string>
     <string name="quick_action_take_photo_note_descr">Drücken der Taste für Schnellaktion fügt ein Foto am Bildschirmmittelpunkt ein.</string>
-    <string name="quick_action_showhide_poi_title">POI anzeigen/verbergen</string>
+    <string name="quick_action_showhide_poi_title">POI ein-/ausblenden</string>
     <string name="quick_action_poi_show">%1$s anzeigen</string>
     <string name="quick_action_poi_hide">%1$s ausblenden</string>
     <string name="quick_action_add_category">Kategorie hinzufügen</string>
