@@ -10,7 +10,7 @@
     <android.support.v7.widget.Toolbar
         android:id="@+id/custom_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="?android:attr/actionBarSize"
+        android:layout_height="@dimen/dashboard_map_toolbar"
         android:background="?attr/actionModeBackground"/>
 
     <android.support.v7.widget.RecyclerView
