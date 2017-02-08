@@ -25,6 +25,7 @@ public class GeneralRouter implements VehicleRouter {
 	
 	private static final float CAR_SHORTEST_DEFAULT_SPEED = 55/3.6f;
 	public static final String USE_SHORTEST_WAY = "short_way";
+	public static final String USE_HEIGHT_OBSTACLES = "height_obstacles";
 	public static final String AVOID_FERRIES = "avoid_ferries";
 	public static final String AVOID_TOLL = "avoid_toll";
 	public static final String AVOID_MOTORWAY = "avoid_motorway";
@@ -39,6 +40,7 @@ public class GeneralRouter implements VehicleRouter {
 	private final Map<String, BitSet> tagRuleMask;
 	private final ArrayList<Object> ruleToValue;
 	private boolean shortestRoute;
+	private boolean heightObstacles;
 	
 	private Map<RouteRegion, Map<Integer, Integer>> regionConvert = new LinkedHashMap<RouteRegion, Map<Integer,Integer>>();
 	
@@ -129,6 +131,7 @@ public class GeneralRouter implements VehicleRouter {
 			objectAttributes[i] = new RouteAttributeContext(parent.objectAttributes[i], params);
 		}
 		shortestRoute = params.containsKey(USE_SHORTEST_WAY) && parseSilentBoolean(params.get(USE_SHORTEST_WAY), false);
+		heightObstacles = params.containsKey(USE_HEIGHT_OBSTACLES) && parseSilentBoolean(params.get(USE_HEIGHT_OBSTACLES), false); 
 		if(shortestRoute) {
 			maxDefaultSpeed = Math.min(CAR_SHORTEST_DEFAULT_SPEED, maxDefaultSpeed);
 		}
@@ -285,6 +288,39 @@ public class GeneralRouter implements VehicleRouter {
 	}
 	
 	@Override
+	public double defineHeightObstacle(RouteDataObject road, short startIndex, short endIndex, float distance) {
+		if(!heightObstacles) {
+			return 0;
+		}
+		float[] heightArray = road.calculateHeightArray();
+		if(heightArray == null || heightArray.length == 0 ) {
+			return 0;
+		}
+		
+		double sum = 0;
+		int knext;
+		int[] types = new int[0];
+		RouteAttributeContext objContext = getObjContext(RouteDataObjectAttribute.OBSTACLE_SRTM_ALT_SPEED);
+		for(int k = startIndex; k != endIndex; k = knext) {
+			knext = startIndex < endIndex ? k + 1 : k - 1;
+			double dist = Math.abs(heightArray[2 * k] - heightArray[2 * knext]) ;
+			double diff = heightArray[2 * knext + 1] - heightArray[2 * k + 1] ;
+			if(diff > 0 && dist > 0) {
+				double incl = diff / dist;
+				int percentIncl = (int) (incl * 100);
+				percentIncl = (percentIncl + 2)/ 3 * 3 - 2; // 1, 4, 7, 10, .   
+				if(percentIncl > 0) {
+					// IMPROVEMENT: register with value and cache parsed value
+					objContext.paramContext.vars.put("incline", percentIncl + "");
+					sum += objContext.evaluateFloat(road.region, types, 0) * diff;
+				}
+			}
+		}
+		return sum;
+	}
+	
+	
+	@Override
 	public int isOneWay(RouteDataObject road) {
 		return getObjContext(RouteDataObjectAttribute.ONEWAY).evaluateInt(road, 0);
 	}
@@ -298,6 +334,7 @@ public class GeneralRouter implements VehicleRouter {
 	public float defineRoutingSpeed(RouteDataObject road) {
 		return Math.min(defineVehicleSpeed(road), maxDefaultSpeed);
 	}
+	
 	
 	@Override
 	public float defineVehicleSpeed(RouteDataObject road) {

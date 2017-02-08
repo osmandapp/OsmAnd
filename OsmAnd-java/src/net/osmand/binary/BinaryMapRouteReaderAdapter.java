@@ -217,6 +217,7 @@ public class BinaryMapRouteReaderAdapter {
 		public String getPartName() {
 			return "Routing";
 		}
+		
 
 		public int getFieldNumber() {
 			return OsmandOdb.OsmAndStructure.ROUTINGINDEX_FIELD_NUMBER;

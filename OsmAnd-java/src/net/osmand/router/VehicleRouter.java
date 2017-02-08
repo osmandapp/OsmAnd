@@ -33,6 +33,11 @@ public interface VehicleRouter {
 	public float defineObstacle(RouteDataObject road, int point);
 	
 	/**
+	 * return delay in seconds for height obstacles
+	 */
+	public double defineHeightObstacle(RouteDataObject road, short startIndex, short endIndex, float distance);
+	
+	/**
 	 * return delay in seconds (0 no obstacles)
 	 */
 	public float defineRoutingObstacle(RouteDataObject road, int point);
@@ -78,5 +83,7 @@ public interface VehicleRouter {
 	
 		
 	public VehicleRouter build(Map<String, String> params);
+
+	
 	
 }
