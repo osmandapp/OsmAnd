@@ -1055,20 +1055,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			startActivity(newIntent);
 			newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			return true;
-		} else if (!app.getRoutingHelper().isFollowingMode()
-				&& OsmandPlugin.getEnabledPlugin(AccessibilityPlugin.class) != null) {
-			// Find more appropriate plugin for it?
-			if (keyCode == KeyEvent.KEYCODE_VOLUME_UP && event.getRepeatCount() == 0) {
-				if (mapView.isZooming()) {
-					changeZoom(+2);
-				} else {
-					changeZoom(+1);
-				}
-				return true;
-			} else if (keyCode == KeyEvent.KEYCODE_VOLUME_DOWN && event.getRepeatCount() == 0) {
-				changeZoom(-1);
-				return true;
-			}
 		}
 		return super.onKeyDown(keyCode, event);
 	}
