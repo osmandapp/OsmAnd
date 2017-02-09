@@ -2506,4 +2506,52 @@
 	<string name="poi_water_heater_no">Ūdenssildītājs: nav</string>
 
 	<string name="poi_parking_garage_boxes">Garāžas</string>
+	<string name="poi_step_condition_even">Pakāpieni: līdzeni</string>
+	<string name="poi_step_condition_uneven">Pakāpieni: nelīdzeni</string>
+	<string name="poi_step_condition_rough">Pakāpieni: bīstami</string>
+
+	<string name="poi_tomb_rock_cut">Tips: akmenī izcirsts</string>
+	<string name="poi_historic_civilization_ancient_roman">Civilizācija: Senā Roma (753 p.m.ē. - 284 m.ē.)</string>
+	<string name="poi_historic_civilization_nuragic">Civilizācija: Nuragicu (18.gs.p.m.ē. - 2.gs.m.ē.)</string>
+	<string name="poi_historic_civilization_etruscan">Civilizācija: Etrusku (12.gs. - 6.gs.m.ē.)</string>
+	<string name="poi_historic_civilization_prehistoric">Civilizācija: Aizvēsturiskā</string>
+	<string name="poi_historic_civilization_ancient_greek">Civilizācija: Seno Grieķu</string>
+	<string name="poi_historic_civilization_roman">Civilizācija: Romas</string>
+	<string name="poi_historic_civilization_byzantine">Civilizācija: Bizantijas (285 - 1453 m.ē.)</string>
+	<string name="poi_historic_civilization_imperial_chinese">Civilizācija: Ķīnas impērija (221 p.m.ē. - 1911 m.ē.)</string>
+	<string name="poi_historic_civilization_ancient_egyptian">Civilizācija: Seno Ēğiptiešu (līdz 332 p.m.ē.)</string>
+	<string name="poi_historic_civilization_celtic">Civilizācija: Ķeltu</string>
+	<string name="poi_historic_civilization_western_roman">Civilizācija: Rietumu Romas (285 - 476 m.ē.)</string>
+	<string name="poi_historic_civilization_mycenaean">Civilizācija: Mikēnu</string>
+	<string name="poi_historic_civilization_dacian">Civilizācija: Daku</string>
+	<string name="poi_historic_civilization_hernici">Civilizācija: Hernicu</string>
+	<string name="poi_historic_civilization_greek_egyptian">Civilizācija: Grieķu-ēğiptiešu (332 - 30 p.m.ē.)</string>
+	<string name="poi_historic_civilization_roman_and_byzantine_egyptian">Civilizācija: Romas un Bizantiešu-ēğiptiešu</string>
+	<string name="poi_historic_civilization_helladic">Civilizācija: Helladu</string>
+	<string name="poi_historic_civilization_cycladic">Civilizācija: Kikladu</string>
+	<string name="poi_historic_civilization_minoan">Civilizācija: Mīnojas</string>
+	<string name="poi_historic_civilization_tiahuanacota">Civilizācija: Tiahuanaku</string>
+
+	<string name="poi_animal_training">Dzīvnieku dresūra</string>
+	<string name="poi_historic_period_nuragic">Vēstures periods: Nuragiku</string>
+	<string name="poi_historic_period_stone_bronze_undetermined">Vēstures periods: akmens un bronzas laikmets ( nenoteikts)</string>
+	<string name="poi_historic_period_bronze_age">Vēstures periods: bronzas laikmets</string>
+	<string name="poi_historic_period_principate">Vēstures periods: principāts (27 p.m.ē. - 284 m.ē.)</string>
+	<string name="poi_historic_period_classical_greece">Vēstures periods: klasiskais Grieķijas (5 - 4 gs. p.m.ē.)</string>
+	<string name="poi_historic_period_archaic_greece">Vēstures periods: arhaistiskais Grieķijas</string>
+	<string name="poi_historic_period_iron_age">Vēstures periods: dzelzs laikmets</string>
+	<string name="poi_historic_period_roman_republic">Vēstures periods: Romas republika (508 - 27 p.m.ē.)</string>
+	<string name="poi_historic_period_hellenistic_greece">Vēstures periods: helleniskas Grieķijas</string>
+	<string name="poi_historic_period_new_kingdom">Vēstures periods: Jaunā Karaļvalsts (1550 - 1069 p.m.ē.)</string>
+	<string name="poi_historic_period_middle_kingdom">Vēstures periods: Vidus Karaļvalsts (2055 - 1650 p.m.ē.)</string>
+	<string name="poi_historic_period_predynastic_egypt">Vēstures periods: Pirmsdinastijas Ēğiptes</string>
+	<string name="poi_historic_period_early_dynastic_period">Vēstures periods: Agrās Dinastijas Periods 3100 - 2686 p.m.ē.)</string>
+	<string name="poi_historic_period_old_kingdom">Vēstures periods: Senā Karaļvalsts (2686 - 2181 p.m.ē.)</string>
+	<string name="poi_historic_period_first_intermediate_period">Vēstures periods: Pirmais Pārejas Laikmets (2181 - 2055 p.m.ē.)</string>
+	<string name="poi_historic_period_second_intermediate_period">Vēstures periods: Otrais Pārejas laikmets (1650 - 1550 p.m.ē.)</string>
+	<string name="poi_historic_period_third_intermediate_period">"Vēstures periods: Trešais Pārejas Laikmets (1069 - 664 p.m.ē.) "</string>
+	<string name="poi_historic_period_first_persian_period">Vēstures periods: Pirmais Persiešu Periods</string>
+	<string name="poi_historic_period_late_period">Vēstures periods: Vēlākā Karaļvalsts (664 - 332 p.m.ē.)</string>
+	<string name="poi_historic_period_second_persian_period">Vēstures periods: Otrais Persiešu Periods</string>
+	<string name="poi_historic_period_alexander_the_great">Vēstures periods: Aleksandrs Lielais</string>
 	</resources>
