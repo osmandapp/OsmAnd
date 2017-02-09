@@ -2725,7 +2725,7 @@ Daudz citi uzlabojumi un kļūdu labojumi
 Un vēl…
  "</string>
     <string name="auto_split_recording_descr">Sākt jaunu segmentu pēc 6 minūšu pārtraukuma, jaunu treku pēc 2 stundu pārtraukuma vai jaunu failu pēc ilgāka pārtraukuma, ja ir izmainīts datums.</string>
-    <string name="auto_split_recording_title">Automātiski dalīt ierakstus pēc pārtraukumiem</string>
+    <string name="auto_split_recording_title">Automātiski sadalīt ierakstus pēc pārtraukuma</string>
 	<string name="release_2_6">"
  • Jauna iespēja: ātrās rīcības poga
 
