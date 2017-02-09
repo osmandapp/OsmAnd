@@ -134,7 +134,7 @@ public class FirstUsageWizardFragment extends Fragment implements OsmAndLocation
 				} else {
 					AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
 					builder.setTitle(getString(R.string.skip_map_downloading));
-					builder.setMessage(getString(R.string.skip_map_downloading_desc, getString(R.string.index_settings)));
+					builder.setMessage(getString(R.string.skip_map_downloading_desc, getString(R.string.welmode_download_maps)));
 					builder.setNegativeButton(R.string.shared_string_skip, new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
