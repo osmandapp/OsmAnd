@@ -74,7 +74,7 @@
 	<string name="poi_canoe">Canoë-kayak</string>
 	<string name="poi_cape">Cap</string>
 	<string name="poi_car">Concession automobile</string>
-	<string name="poi_car_parts">Pièces détachées automobiles</string>
+	<string name="poi_car_parts">Magasin de pièces détachées pour automobiles</string>
 	<string name="poi_car_rental">Location de voitures</string>
 	<string name="poi_car_repair">Atelier de réparation automobile</string>
 	<string name="poi_car_sharing">Autopartage</string>
@@ -93,7 +93,7 @@
 	<string name="poi_climbing">Escalade</string>
 	<string name="poi_clinic">Clinique</string>
 	<string name="poi_clothes">Magasin de vêtements</string>
-	<string name="poi_club_art">Boutique d\'art</string>
+	<string name="poi_club_art">Club d\'art</string>
 	<string name="poi_club_charity">Magasin de bienfaisance</string>
 	<string name="poi_club_chess">Échecs</string>
 	<string name="poi_club_cinema">Cinéma</string>
@@ -133,7 +133,7 @@
 	<string name="poi_dry_cleaning">Pressing</string>
 	<string name="poi_dyke">Digue</string>
 	<string name="poi_craft_electrician">Électricien</string>
-	<string name="poi_electronics">Magasin d\'électronique</string>
+	<string name="poi_electronics">Magasin d\'électroménager et d\'électronique</string>
 	<string name="poi_embassy">Ambassade</string>
 	<string name="poi_emergency_access_point">Point d\'accès d\'urgence</string>
 	<string name="poi_emergency_phone">Téléphone de secours</string>
@@ -148,7 +148,7 @@
 	<string name="poi_fire_hydrant">Bouche d\'incendie</string>
 	<string name="poi_fire_station">Caserne de pompiers</string>
 	<string name="poi_first_aid">Premiers secours</string>
-	<string name="poi_fishing">Zone de pêche</string>
+	<string name="poi_fishing">Magasin d\'articles de pêche</string>
 	<string name="poi_florist">Fleuriste</string>
 	<string name="poi_fog_signal">Signal de brume</string>
 	<string name="poi_food_court">Aire de restauration</string>
@@ -185,7 +185,7 @@
 	<string name="poi_hostel">Auberge de jeunesse</string>
 	<string name="poi_hotel">Hôtel</string>
 	<string name="poi_hunting_stand">Affût surélevé</string>
-	<string name="poi_ice_cream">Crème glacée</string>
+	<string name="poi_ice_cream">Glacier</string>
 	<string name="poi_ice_rink">Patinoire</string>
 	<string name="poi_ice_stock">Eisstock</string>
 	<string name="poi_information">Informations</string>
@@ -213,7 +213,7 @@
 	<string name="poi_lighthouse">Phare</string>
 	<string name="poi_locality">Lieu-dit</string>
 	<string name="poi_craft_locksmith">Serrurier</string>
-	<string name="poi_mall">Galerie marchande</string>
+	<string name="poi_mall">Centre commercial</string>
 	<string name="poi_marina">Port de plaisance</string>
 	<string name="poi_marketplace">Marché</string>
 	<string name="poi_massage">Massage</string>
@@ -380,11 +380,11 @@
 	<string name="poi_works">Usine</string>
 	<string name="poi_wreck">Épave</string>
 	<string name="poi_zoo">Zoo</string>
-<string name="poi_tea">Salon de thé</string>
-	<string name="poi_art">Boutique d\'Art</string>
+<string name="poi_tea">Magasin de thés</string>
+	<string name="poi_art">Galerie d\'art privée</string>
 	<string name="poi_carpet">Magasin de tapis</string>
-	<string name="poi_computer">Boutique informatique</string>
-	<string name="poi_dive">Équipement de plongée sous-marine</string>
+	<string name="poi_computer">Magasin de matériel informatique</string>
+	<string name="poi_dive">Magasin pour la plongée sous-marine</string>
 	<string name="poi_ship_chandler">Magasin d\'accastillage</string>
 	<string name="poi_gate">Pont</string>
 	<string name="poi_traffic_signals">Feux tricolores</string>
@@ -404,8 +404,8 @@
 	<string name="poi_farm">Vente à la ferme</string>
 	<string name="poi_anime">Librairie spécialisée en bandes dessinées</string>
 	<string name="poi_antiques">Antiquaire</string>
-	<string name="poi_hunting">Equipement de chasse</string>
-	<string name="poi_interior_decoration">Boutique de décoration</string>
+	<string name="poi_hunting">Magasin d\'articles de chasse</string>
+	<string name="poi_interior_decoration">Magasin de décoration intérieure</string>
 	<string name="poi_lift_gate">Pont levant</string>
 	<string name="poi_border_control">Poste frontière</string>
 	<string name="poi_traffic_calming_table">Ralentisseur (plateau)</string>
@@ -467,13 +467,13 @@
 	<string name="poi_bag">Maroquinerie</string>
 	<string name="poi_military_airfield">Aérodrome militaire</string>
 	<string name="poi_bedding">Magasin de literie</string>
-	<string name="poi_erotic">Boutique érotique</string>
+	<string name="poi_erotic">Sex shop</string>
 	<string name="poi_herbalist">Herboriste</string>
-	<string name="poi_kitchen">Boutique d\'ustensiles de cuisine</string>
+	<string name="poi_kitchen">Magasin d\'ustensiles de cuisine</string>
 	<string name="poi_stationery">Papeterie</string>
-	<string name="poi_tableware">Boutique de vaisselle</string>
-	<string name="poi_ticket">Vente de tickets</string>
-	<string name="poi_vacuum_cleaner">Boutique de gadgets</string>
+	<string name="poi_tableware">Magasin de vaisselle</string>
+	<string name="poi_ticket">Guichet de billetterie</string>
+	<string name="poi_vacuum_cleaner">Magasin d\'aspirateurs</string>
 	<string name="poi_mountain_pass">Col</string>
 	<string name="poi_garages">Garages</string>
 
@@ -534,20 +534,20 @@
 	<string name="poi_bathroom_furnishing">Magasin d\'équipement pour la salle de bain</string>
 	<string name="poi_bed">Magasin de literie</string>
 	<string name="poi_clothes_children">Vêtements pour enfants</string>
-	<string name="poi_curtain">Boutique de rideaux</string>
+	<string name="poi_curtain">Magasin de rideaux</string>
 	<string name="poi_dairy">Crèmerie</string>
-	<string name="poi_baby_goods">Articles pour bébé</string>
+	<string name="poi_baby_goods">Magasin d\'articles pour bébé</string>
 	<string name="poi_gas">Magasin de gaz liquéfié</string>
-	<string name="poi_houseware">Magasin de fournitures ménagères</string>
-	<string name="poi_paint">Magasin de peinture</string>
-	<string name="poi_radiotechnics">Magasin de matériel radio</string>
-	<string name="poi_trade">Poste de traite</string>
+	<string name="poi_houseware">Magasin d\'articles ménagers</string>
+	<string name="poi_paint">Magasin de peintures</string>
+	<string name="poi_radiotechnics">Magasin de composants électroniques</string>
+	<string name="poi_trade">Grossiste</string>
 	<string name="poi_window_blind">Magasin de persiennes</string>
 	<string name="poi_atv">Magasin de quads</string>
-	<string name="poi_sewing">Magasin de vêtements</string>
+	<string name="poi_sewing">Magasin de couture</string>
 
 	<string name="poi_fire_flapper">Pelle à feu</string>
-	<string name="poi_fire_water_pond">Réserve d\'eau incendie</string>
+	<string name="poi_fire_water_pond">Bassin d\'eau pour incendie</string>
 	<string name="poi_toll_booth">Barrière de péage</string>
 	<string name="poi_vehicle_ramp">Rampe pour véhicules</string>
 	<string name="poi_public_transport_platform_trolleybus">Arrêt de trolleybus</string>
@@ -628,7 +628,7 @@
 	<string name="poi_mast">Mât</string>
 	<string name="poi_radar">Radar</string>
 	<string name="poi_aquarium">Aquarium</string>
-	<string name="poi_shop">Boutique</string>
+	<string name="poi_shop">Commerce</string>
 	<string name="poi_emergency">Urgences</string>
 	<string name="poi_transportation">Transport</string>
 	<string name="poi_man_made">Infrastructure</string>
@@ -679,7 +679,7 @@
 		<string name="poi_water_supply">Alimentation en eau potable</string>
 		<string name="poi_trash_disposal">Traitement des ordures ménagères</string>
 	<string name="poi_accomodation">Hébergement</string>
-		<string name="poi_medical_supply">Fournitures médicales</string>
+		<string name="poi_medical_supply">Magasin de matériel médical</string>
 	<string name="poi_aerialway_transport">Transport aérien</string>
 	<string name="poi_transport_construction">Construction de moyen de transport</string>
 		<string name="poi_power">Source d\'énergie</string>
@@ -747,7 +747,7 @@
 	<string name="poi_village_green">Village green (GB)</string>
 
 	<string name="poi_sailing">Navigation à voile</string>
-	<string name="poi_charity">Boutique de charité</string>
+	<string name="poi_charity">Magasin caritatif</string>
 	<string name="poi_tomb">Sépulture</string>
 	<string name="poi_wilderness_hut">Cabane - refuge</string>
 
@@ -818,7 +818,7 @@
 	<string name="poi_wiki_lang_sw">Wiki swahili</string>
 	<string name="poi_wiki_lang_te">Wiki télougou</string>
 	<string name="poi_wiki_lang_th">Wiki thaïlandais</string>
-	<string name="poi_camera">Appareils photos et lentilles</string>
+	<string name="poi_camera">Magasin d\'appareils photo et lentilles</string>
 	<string name="poi_religious">Lieu de culte</string>
 	<string name="poi_barrier_entrance">Passage ouvert dans un mur ou une barrière</string>
 	<string name="poi_entrance_main">Entrée principale</string>
@@ -834,29 +834,29 @@
 	<string name="poi_cheese">Fromager</string>
 	<string name="poi_chocolate">Chocolatier</string>
 	<string name="poi_coffee">Café</string>
-	<string name="poi_candles">Confiserie</string>
-	<string name="poi_fashion">Magasin de mode</string>
-	<string name="poi_music">Magasin de musique</string>
+	<string name="poi_candles">Magasin de bougies</string>
+	<string name="poi_fashion">Boutique de mode</string>
+	<string name="poi_music">Disquaire</string>
 	<string name="poi_watches">Horloger</string>
-	<string name="poi_games">Jeux</string>
-	<string name="poi_model">Modèles réduits</string>
-	<string name="poi_trophy">Coupes, trophées, médailles</string>
-	<string name="poi_video_games">Jeux vidéo</string>
-	<string name="poi_garden_furniture">Jardinerie</string>
+	<string name="poi_games">Magasin de jeux</string>
+	<string name="poi_model">Magasin de modélisme</string>
+	<string name="poi_trophy">Magasin de trophées, coupes, médailles</string>
+	<string name="poi_video_games">Magasin de jeux vidéo</string>
+	<string name="poi_garden_furniture">Magasin de mobilier de jardin</string>
 	<string name="poi_tyres">Magasin de pneumatiques</string>
-	<string name="poi_scuba_diving_shop">Magasin de plongée sous-marine</string>
+	<string name="poi_scuba_diving_shop">Magasin pour la plongée sous-marine</string>
 	<string name="poi_swimming_pool_shop">Pisciniste</string>
 	<string name="poi_building_poi">Construction</string>
 	<string name="poi_tree">Arbre</string>
 	<string name="poi_block">Quartier</string>
 	<string name="poi_abandoned">Abandonné</string>
-	<string name="poi_pasta">Boutique de pâtes</string>
+	<string name="poi_pasta">Magasin de pâtes</string>
 	<string name="poi_pastry">Pâtisserie</string>
 	<string name="poi_free_flying">Magasin d\'articles de vol libre</string>
 	<string name="poi_furnace">Boutique d\'articles de chauffage</string>
-	<string name="poi_leather">Boutique de cuir</string>
-	<string name="poi_energy">Commerce de fourniture d\'énergie</string>
-	<string name="poi_pyrotechnics">Pyrotechnie</string>
+	<string name="poi_leather">Magasin de cuir</string>
+	<string name="poi_energy">Magasin de fourniture d\'énergie</string>
+	<string name="poi_pyrotechnics">Magasin de pyrotechnie</string>
 	<string name="poi_weapons">Armurerie</string>
 
 	<string name="poi_breakwater">Brise-lames</string>
@@ -1034,7 +1034,7 @@
 
 <string name="poi_political_party">Bureau de parti politique</string>
 	<string name="poi_notary">Notaire</string>
-	<string name="poi_doors">Portes</string>
+	<string name="poi_doors">Magasin de portes</string>
 	<string name="poi_landfill_waste_nuclear">Déchet nucléaire</string>
 	<string name="poi_capital">Capitale</string>
 	<string name="poi_office_religion">Lieu de culte</string>
@@ -2003,7 +2003,7 @@
 	<string name="poi_vending_public_transport_tickets">Tickets de transport public</string>
 	<string name="poi_vending_parking_tickets_public_transport_tickets">Tickets de parking; tickets de transport en commun</string>
 	<string name="poi_industrial_intermodal_freight_terminal">Type : terminal multi-modal de marchandises</string>
-	<string name="poi_honey">Magasin à miel</string>
+	<string name="poi_honey">Magasin de miel</string>
 
 	<string name="poi_guide">Bureau des guides</string>
 	<string name="poi_backcountry_yes">Camping sauvage</string>
@@ -2019,14 +2019,14 @@
 	<string name="poi_social_facility_for_underprivileged">Population : personnes défavorisées</string>
 	<string name="poi_historic_railway_station">Gare ferroviaire historique</string>
 
-	<string name="poi_square">Carré</string>
+	<string name="poi_square">Place</string>
 	<string name="poi_prison_camp">Ancienne prison</string>
 	<string name="poi_bathing_yes">Baignade : oui</string>
 	<string name="poi_bathing_no">Baignade : non</string>
 
 	<string name="poi_hackerspace">Hackerspace</string>
 
-	<string name="poi_craft_electronics">Réparations électroniques</string>
+	<string name="poi_craft_electronics">Réparations de matériel électronique</string>
 	<string name="poi_fireworks">Magasin de feux d\'artifice</string>
 
 	<string name="poi_aerialway_length">Longueur</string>
@@ -2034,7 +2034,7 @@
 	<string name="poi_running">Course à pied</string>
 	<string name="poi_squash">Squash</string>
 	<string name="poi_protected_area">Zone protégée</string>
-	<string name="poi_religion">Objets religieux</string>
+	<string name="poi_religion">Magasin d\'objets religieux</string>
 
 	<string name="poi_compressed_air_yes">Compresseur : oui</string>
 	<string name="poi_compressed_air_no">Compresseur : non</string>
@@ -2214,7 +2214,7 @@
 
 <string name="poi_emergency_infrastructure">Infrastructure de situations d\'urgence</string>
 	<string name="poi_spices">Magasin d\'épices</string>
-	<string name="poi_shop_craft">Magasin d\'art et d\'artisanat</string>
+	<string name="poi_shop_craft">Magasin de matériel d\'art</string>
 	<string name="poi_commercial">Zone d\'activités d\'affaires</string>
 	<string name="poi_wiki_lang_lb">Wiki luxembourgeois</string>
 	<string name="poi_wiki_lang_mk">Wiki macédonien</string>
@@ -2367,7 +2367,7 @@
 	<string name="poi_xmas_event">Evénement de Noël</string>
 	<string name="poi_xmas_market">Marché de Noël</string>
 	<string name="poi_xmas_pyramid">Pyramide de Noël</string>
-	<string name="poi_xmas_shop">Boutique de Noël</string>
+	<string name="poi_xmas_shop">Magasin de Noël</string>
 	<string name="poi_xmas_tree">Sapin de Noël</string>
 	<string name="poi_piste_grooming_scooter">Scooter</string>
 	<string name="poi_payment_electronic_purses_yes">Porte-monnaie électroniques acceptés</string>
@@ -2388,5 +2388,34 @@
 	<string name="poi_shelter_type_field_shelter">Campagne</string>
 	<string name="poi_shelter_type_tent">Tente</string>
 	<string name="poi_shelter_type_abandoned">Abandonné</string>
+
+	<string name="poi_cuisine_pasta">Pâtes</string>
+	<string name="poi_electrical">Magasin de matériel électrique</string>
+	<string name="poi_e_cigarette">Magasin de cigarettes élecctroniques</string>
+
+	<string name="poi_lighting">Magasin de luminaires</string>
+	<string name="poi_locksmith">Serrurier</string>
+	<string name="poi_lottery">Magasin de billets de loterie</string>
+	<string name="poi_gambling_lottery">Loterie</string>
+	<string name="poi_pump_style_modern">Style de pompe : moderne</string>
+	<string name="poi_nutrition_supplements">Magasin de compléments nutritionnels</string>
+	<string name="poi_party">Magasin d\'articles festifs</string>
+	<string name="poi_photo_studio">Studio photo</string>
+
+	<string name="poi_kiln">Four</string>
+	<string name="poi_greenhouse_horticulture">Zone de cultures sous serre</string>
+
+	<string name="poi_ventilation_shaft">Bouche de ventilation</string>
+
+	<string name="poi_boat_storage">Stockage de bâteaux</string>
+
+	<string name="poi_mdf">Central téléphonique</string>
+	<string name="poi_plant_nursery">Pépinière</string>
+
+	<string name="poi_spoil_heap">Terril</string>
+	
+	<string name="poi_street_cabinet">Armoire de rue</string>
+
+	<string name="poi_water_tank">Réserve d\'eau pour incendie</string>
 
 	</resources>
