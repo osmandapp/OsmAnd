@@ -1879,7 +1879,7 @@ Aufgenommene Tracks kann man z.B. mit Bekannten teilen, oder auch zum Upload fü
     <string name="nautical_maps_missing">Um See-Karten anzeigen zu können, muss die entsprechende Offline-Karte heruntergeladen werden</string>
     <string name="get_plugin">Erwerben</string>
     <string name="rename_failed">Umbenennen fehlgeschlagen.</string>
-	<string name="shared_string_currently_recording_track">Derzeit aufnehmender Track</string>
+	<string name="shared_string_currently_recording_track">Momentane Track-Aufzeichnung</string>
 	<string name="back_to_map">Zurück zur Karte</string>
 	<string name="plugin_nautical_descr">"Das Aktivieren dieser Ansicht ändert die Kartendarstellung auf See-Karte, es werden dann alle nautischen Navigationsmarken und Kartensymbole angezeigt.
 
