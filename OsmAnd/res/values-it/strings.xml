@@ -2809,4 +2809,31 @@ Rappresenta l\'area: %1$s x %2$s</string>
 	<string name="auto_split_recording_title">Divisione automatica delle registrazioni dopo un periodo</string>
 	<string name="auto_split_recording_descr">Inizia un nuovo segmento dopo 6 minuti, una nuova traccia dopo 2 ore, o un nuovo file dopo un intervallo maggiore.</string>
     <string name="rendering_attr_depthContours_description">Mostra contorni e punti in profondità</string>
-    </resources>
+    <string name="release_2_6">"
+ • Nuove funzionalità: Pulsante azione veloce
+
+
+ • Migliorata la risposta del touch screen ai gesti
+
+
+ • Nuovi caratteri della mappa  mappa per una migliore applicabilità alle diverse lingue 
+
+
+ • Supporto TTS per le lingue locali
+
+
+ • Miglioramento della visibilità in molti stili mappa e wikipedia
+
+
+ • Supporto all\'Open Location Code (OLC)
+
+
+ • Visualizzazione di un profilo altimetrico di basilare per i GPX registrati
+
+
+ • Molti altri miglioramenti e correzioni di errori
+
+
+ e altro ancora…
+ "</string>
+	</resources>
