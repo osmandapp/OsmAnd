@@ -750,7 +750,7 @@ Karten-Kacheln können direkt online bezogen werden, und werden im OsmAnd-Untero
 	<string name="map_orientation_default">Lagesensor</string>
 	<string name="map_orientation_portrait">Hochformat</string>
 	<string name="map_orientation_landscape">Querformat</string>
-	<string name="map_screen_orientation">Anzeigeausrichtung</string>
+	<string name="map_screen_orientation">Bildschirmausrichtung</string>
 	<string name="map_screen_orientation_descr">Ausrichtung der Landkartenanzeige</string>
 	<string name="opening_hours_not_supported">Ändern von Öffnungszeiten wird nicht unterstützt</string>
 	<string name="add_new_rule">Füge neue Regel hinzu</string>
@@ -2676,7 +2676,7 @@ und vieles mehr ...
     <string name="quick_action_showhide_poi_descr">Drücken der Taste für Schnellaktion zeigt oder versteckt POIs.</string>
     <string name="quick_action_add_create_items">Objekte erstellen</string>
     <string name="quick_action_bug_descr">Diese Nachricht wird im Kommentarfeld autovervollständigt.</string>
-    <string name="quick_action_btn_tutorial_descr">Taste lange drücken und ziehen um die Position auf dem Bildschirm zu ändern</string>
+    <string name="quick_action_btn_tutorial_descr">Taste lange drücken und ziehen, um ihre Bildschirmposition zu ändern</string>
 	<string name="quick_action_map_overlay_switch">Die Overlay-Karte wurde in “%s“ geändert.</string>
     <string name="quick_action_map_underlay_switch">Die Underlay-Karte wurde in “%s“ geändert.</string>
     <string name="navigate_point_olc_info_invalid">Ungültiger OLC
