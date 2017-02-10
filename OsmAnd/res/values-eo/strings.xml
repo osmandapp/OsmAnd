@@ -2027,7 +2027,7 @@ Kaj la loko kaj tempo estas montrataj ĉe la OsmAnd stirpanelo, kaj ĉe la fenes
     <string name="favourites_remove_dialog_success">Ŝatata punkto {0} forigita sukcese.</string>
     <string name="poi_edit_title">Redakti interesejon</string>
     <string name="poi_create_title">Krei interesejon</string>
-    <string name="poi_error_poi_not_found">Ne povas trovi nodon aŭ servo (ang amenity) ne estas unuopa nodo</string>
+    <string name="poi_error_poi_not_found">Ne povas trovi nodon aŭ servo konsistas el kelkaj nodoj, tio ĉi ne estas ankoraŭ subtenata.</string>
     <string name="poi_remove_confirm_template">Ĉu forigi na {0} (entajpu komenton)?</string>
     <string name="poi_remove_title">Forigi interesejon</string>
     <string name="poi_remove_success">Interesejo forigita sukcese</string>
