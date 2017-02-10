@@ -2554,4 +2554,201 @@
 	<string name="poi_historic_period_late_period">Vēstures periods: Vēlākā Karaļvalsts (664 - 332 p.m.ē.)</string>
 	<string name="poi_historic_period_second_persian_period">Vēstures periods: Otrais Persiešu Periods</string>
 	<string name="poi_historic_period_alexander_the_great">Vēstures periods: Aleksandrs Lielais</string>
+	<string name="poi_historic_period_ptolemaic_egypt">Vēstures periods: Ptolemaju Ēğiptes (305 - 30 p.m.ē.)</string>
+	<string name="poi_historic_period_christian_egypt">Vēstures periods: Kristiešu Ēğiptes</string>
+	<string name="poi_historic_period_byzantine_egypt">Vēstures periods: Bizantijas Ēğiptes (30 p.m.ē. - 641 m.ē.)</string>
+	<string name="poi_historic_period_persian_occupation">Vēstures periods: Persiešu okupācijas</string>
+	<string name="poi_historic_period_greek_dark_ages">Vēstures periods: Grieķu Tumšais Laikmets (1100 - 800 p.m.ē.)</string>
+	<string name="poi_historic_period_roman_greece">Vēstures periods: Romas-grieķu (146 p.m.ē. - 330 m.ē.)</string>
+	<string name="poi_historic_period_roman_kingdom">Vēstures periods: Romas Karaļvalsts (753 - 509 p.m.ē.)</string>
+	<string name="poi_historic_period_dominate">Vēstures periods: Dominantes (285 - 476 m.ē.)</string>
+	<string name="poi_historic_period_villager">Vēstures periods: Ciematu (I, II laikmets, 1580 p.m.ē. - 133 m.ē.)</string>
+	<string name="poi_historic_period_urban">Vēstures periods: Pilsētas (III laikmets, 133 - 374 m.ē.)</string>
+	<string name="poi_historic_period_classical">Vēstures periods: Klasiskais (IV laikmets, 374 - 900 m.ē.)</string>
+	<string name="poi_historic_period_imperial">Vēstures periods: Impēriskais (V laikmets, 900 - 1200 m.ē.)</string>
+
+	<string name="poi_historic_era_paleolithic">Vēstures periods: Paleolīta (2.6 miljons gadu - 10\'000 p.m.ē.)</string>
+	<string name="poi_historic_era_mesolithic">Vēstures periods: Mezolīta</string>
+	<string name="poi_historic_era_neolithic">Vēstures periods: Neolīta</string>
+	<string name="poi_historic_era_chalcolithic">Vēstures periods: Kalkolītu (4.- 3. tūkstošgade p.m.ē.)</string>
+
+	<string name="poi_historic_stone">Vēsturisks akmens</string>
+	<string name="poi_stone_type_conciliation_cross">Tips: piemiņas (akmens) krusts</string>
+	<string name="poi_megalith_type_menhir">Megalīta tips: menhīrs</string>
+	<string name="poi_megalith_type_dolmen">Megalīta tips: dolmens</string>
+	<string name="poi_megalith_type_nuraghe">Megalīta tips: nurage</string>
+	<string name="poi_megalith_type_stone_circle">Megalīta tips: akmens aplis</string>
+	<string name="poi_megalith_type_passage_grave">Megalīta tips: tuneļa kapvieta</string>
+	<string name="poi_fortification_type_hill_fort">Nocietinājuma tips: kalna forts</string>
+	<string name="poi_fortification_type_limes">Nocietinājuma tips: limes</string>
+	<string name="poi_fortification_type_sconce">Nocietinājuma tips: sconce</string>
+	<string name="poi_fortification_type_ring_ditch">Nocietinājuma tips: gredzena aplis</string>
+
+	<string name="poi_pa">Pa (maori nocietināta apmetne)</string>
+
+	<string name="poi_castle_type_kremlin">Pils tips: kremlis</string>
+	<string name="poi_castle_type_shiro">Pils tips: širo</string>
+
+	<string name="poi_refugee_no">Bēgļi: nē</string>
+
+	<string name="poi_social_facility_group_home">Grupu soc. mājas</string>
+	<string name="poi_social_facility_assisted_living">Veco ļaužu nams</string>
+	<string name="poi_social_facility_food_bank">Sociālā ēdināšana</string>
+	<string name="poi_social_facility_shelter">Bezpajumtnieku patversme</string>
+	<string name="poi_social_facility_ambulatory_care">Ambulance</string>
+	<string name="poi_ramp_bicycle_yes">Rampa velosipēdiem: ir</string>
+	<string name="poi_ramp_bicycle_no">Rampa velosipēdiem: nav</string>
+	<string name="poi_ramp_luggage_yes">Rampa bagāžai: ir</string>
+	<string name="poi_ramp_luggage_no">Rampa bagāžai: nav</string>
+	<string name="poi_bathing_yes">Mazgāšanās: jā</string>
+	<string name="poi_bathing_no">Mazgāšanās: nē</string>
+
+	<string name="poi_boat_storage">Laivu novietne</string>
+
+	<string name="poi_parking_surface">Tips: virszemē</string>
+	<string name="poi_parking_carports">Tips: auto nojumes</string>
+
+	<string name="poi_dojo">Dodžo</string>
+
+	<string name="poi_gaelic_games">Gēļu spēles</string>
+	<string name="poi_running">Skriešanās</string>
+	<string name="poi_netball">Netbols</string>
+	<string name="poi_karting">Kartings</string>
+	<string name="poi_badminton">Badmintons</string>
+	<string name="poi_judo">Džudo</string>
+	<string name="poi_disc_golf">Disku golfs</string>
+	<string name="poi_futsal">Futsals</string>
+	<string name="poi_rc_car">Radiovadāmo mašīnu trase</string>
+	<string name="poi_squash">Skvošs</string>
+	<string name="poi_shuffleboard">Šaflbords</string>
+	<string name="poi_lacrosse">Lakross</string>
+	<string name="poi_boxing">Bokss</string>
+
+	<string name="poi_official_name">Oficiālais vārds</string>
+
+	<string name="poi_dyke">Daiks</string>
+	<string name="poi_dolphin">Steķi (ūdenī)</string>
+
+	<string name="poi_forestry_compartment">Ceļa rādītājs: meža iecirknis</string>
+	<string name="poi_inscription_n">Uzraksts: Z</string>
+	<string name="poi_inscription_nw">Uzraksts: ZR</string>
+	<string name="poi_inscription_w">Uzraksts: R</string>
+	<string name="poi_inscription_sw">Uzraksts: DR</string>
+	<string name="poi_inscription_s">Uzraksts: D</string>
+	<string name="poi_inscription_se">Uzraksts: DA</string>
+	<string name="poi_inscription_e">Uzraksts: A</string>
+	<string name="poi_inscription_ne">Uzraksts: ZA</string>
+
+	<string name="poi_construction_yes">Notiek celtniecība</string>
+	<string name="poi_additional_atm_yes">Bankomāti: ir</string>
+	<string name="poi_atm_no">Bankomāti: nav</string>
+
+	<string name="poi_firepit">Ugunsdzēšanas vieta</string>
+	<string name="poi_fair_trade_yes">Fair trade: ir</string>
+	<string name="poi_fair_trade_no">Fair trade: nav</string>
+	<string name="poi_fair_trade_only">Tikai fair trade produkti</string>
+
+
+	<string name="poi_bandy">Bumbas hokejs</string>
+
+	<string name="poi_protected_area">Aizsargājama teritorija</string>
+	<string name="poi_protection_title">Aizsargājamais veids</string>
+	<string name="poi_protection_object_historic">Aizsargājamais objekts: vēsturisks</string>
+	<string name="poi_protection_object_nature">Aizsargājamais objekts: daba</string>
+	<string name="poi_protection_object_habitat">Aizsargājamais objekts: iezemieši</string>
+	<string name="poi_protection_object_water">Aizsargājamais objekts: ūdens</string>
+
+	<string name="poi_nuclear_explosion_type_underground_shaft">Sprādziena tips: pazemes, šahtas</string>
+	<string name="poi_nuclear_explosion_type_underground_tunnel">Sprādziena tips: pazemes, tuneļa</string>
+	<string name="poi_nuclear_explosion_type_atmospheric">Sprādziena tips: atmosfērisks</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_airdrop">Sprādziena tips: atmosfērisks, gaisa lādiņš</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_surface_tower">Sprādziena tips: atmosfērisks, virszemes, torņa</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_balloon">Sprādziena tips: atmosfērisks, balona</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_atmospheric_surface">Sprādziena tips: atmosfērisks, virszemes</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_water_surface_barge">Sprādziena tips: atmosfērisks, virsūdens, barža</string>
+	<string name="poi_nuclear_explosion_type_underground">Sprādziena tips: pazemes</string>
+	<string name="poi_nuclear_explosion_type_cratering_burst">Sprādziena tips: krāteri</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_rocket_or_missile">Sprādziena tips: atmosfērisks, raķete vai lādiņš</string>
+	<string name="poi_nuclear_explosion_type_space">Sprādziena tips: kosmoss (augstāk par 80km)</string>
+	<string name="poi_nuclear_explosion_type_underwater">Sprādziena tips: zemūdens</string>
+	<string name="poi_nuclear_explosion_date_utc">Sprādziena datums (UTC)</string>
+	<string name="poi_nuclear_explosion_shot_name_en">Segvārds (angl)</string>
+	<string name="poi_nuclear_explosion_series">Eksploziju sērija</string>
+	<string name="poi_nuclear_explosion_purpose_nuclear_weapons_related">Eksploziju cēlonis: atomieroči</string>
+	<string name="poi_nuclear_explosion_purpose_weapons_effects">Eksploziju cēlonis: ieroču efekti</string>
+	<string name="poi_nuclear_explosion_purpose_safety_experiment">Eksploziju cēlonis: drošības testi</string>
+	<string name="poi_nuclear_explosion_purpose_research_for_peaceful_applications">Eksploziju cēlonis: Pētījumi izmantošanai miera laikos</string>
+	<string name="poi_nuclear_explosion_purpose_fundamental_science">Eksploziju cēlonis: fundamentālā zinātne</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application_cavity_excavation">Eksploziju cēlonis: industriālās aplikācijas, tuneļu rakšana</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application_seismic_sounding">Eksploziju cēlonis: industriālās aplikācijas, seismiskā zondēšana</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application_oil_stimulation">Eksploziju cēlonis: industriālās aplikācijas, naftas stimulēšana</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application">Eksploziju cēlonis: industrālās aplikācijas</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application_earth_moving">Eksploziju cēlonis: industrālās aplikācijas, zemes pārvietošana</string>
+	<string name="poi_nuclear_explosion_time_utc">Eksplozijas laiks (UTC)</string>
+	<string name="poi_nuclear_explosion_yield">Eksplozijas jauda</string>
+	<string name="poi_nuclear_explosion_hole">Eksplozijas caurums</string>
+	<string name="poi_nuclear_explosion_height_of_burst">Sprādziena augstums</string>
+	<string name="poi_nuclear_explosion_ground_zero_altitude">Epicentra augstums virs jūras līmeņa</string>
+	<string name="poi_nuclear_explosion_body_wave_magnitude">Zemestrīces lielums</string>
+	<string name="poi_nuclear_explosion_crater_diameter">Krātera diametrs</string>
+	<string name="poi_nuclear_explosion_warhead">Kaujas galviņa</string>
+	<string name="poi_nuclear_explosion_device">Ierīce</string>
+
+	<string name="poi_addr_housename">Mājas nosaukums</string>
+
+
+	<string name="poi_compressed_air_yes">Ir</string>
+	<string name="poi_compressed_air_no">Bez saspiestā gaisa</string>
+
+	<string name="poi_car_wash_yes">Ir</string>
+
+	<string name="poi_vacuum_cleaner_yes">Ir</string>
+	<string name="poi_vacuum_cleaner_no">Bez putekļsūcēja</string>
+	<string name="poi_amenity_vacuum_cleaner">Putekļsūcējs</string>
+
+	<string name="poi_sport_free_flying">Brīvais lidojums (sports)</string>
+
+	<string name="poi_water_tap">Ūdens krāns</string>
+	<string name="poi_button_operated_yes">Pogu vadība: jā</string>
+	<string name="poi_button_operated_no">Pogu vadība: nē</string>
+
+	<string name="poi_free_flying_site_takeoff">Pacelšanās</string>
+	<string name="poi_free_flying_site_landing">Nolaišanās</string>
+	<string name="poi_free_flying_site_toplanding">Nolaišanās punkts</string>
+	<string name="poi_free_flying_site_towing">Ar virvi</string>
+	<string name="poi_free_flying_site_training">Trenēšanās</string>
+	<string name="poi_free_flying_official_yes">Oficiāli: jā</string>
+	<string name="poi_free_flying_official_no">Oficiāli: nē</string>
+	<string name="poi_free_flying_paragliding_yes">Paraplanierisms</string>
+	<string name="poi_free_flying_paragliding_no">Paraplanierisms: nē</string>
+	<string name="poi_free_flying_hanggliding_yes">Deltaplanierisms</string>
+	<string name="poi_free_flying_hanggliding_no">Deltaplanierisms: nē</string>
+	<string name="poi_tanning_salon">Solārijs</string>
+
+	<string name="poi_sanitary_dump_station">Asenizācijas stacija</string>
+
+	<string name="poi_medical_system_ayurveeda_yes">Ajūrvēdu</string>
+	<string name="poi_health_amenity_type_first_aid_kit">Pirmās palīdzības aptieciņa</string>
+	<string name="poi_health_amenity_type_scales">Publiski pieejamie svari</string>
+
+	<string name="poi_home_visit_yes">Jā</string>
+	<string name="poi_home_visit_no">Izbraukšana mājās: nē</string>
+
+	<string name="poi_disease_malaria_yes">Malārija: jā</string>
+	<string name="poi_disease_malaria_no">Malārija: nē</string>
+	<string name="poi_industrial_brickyard">Tips: ķieğeļu ražotne</string>
+	<string name="poi_industrial_intermodal_freight_terminal">Tips: intermodāls kravas terminālis</string>
+	<string name="poi_historic_manor">Vēsturiska muiža</string>
+	<string name="poi_castle_type_stately">Pils tips: dižciltīga</string>
+	<string name="poi_castle_type_defensive">Pils tips: nocietinājums</string>
+	<string name="poi_castle_type_fortress">Pils tips: cietoksnis</string>
+	<string name="poi_castle_type_palace">Pils tips: grezna</string>
+	<string name="poi_castle_type_defensive_stately">Pils tips: nocietinājums, dižciltīga</string>
+	<string name="poi_castle_type_castrum">Pils tips: romiešu forts</string>
+	<string name="poi_refugee_yes">Bēgļu nometnes</string>
+	<string name="poi_social_facility_workshop">Darbnīca</string>
+	<string name="poi_health_specialty_obstetrics_antenatal_yes">Ginekoloģija (pirmsdzemdību)</string>
+	<string name="poi_health_specialty_obstetrics_antenatal_no">Ginekoloģija (pirmsdzemdību): nav</string>
+	<string name="poi_health_specialty_obstetrics_caesarean_section_yes">Ginekoloģija (ķeizargrieziena)</string>
+	<string name="poi_health_specialty_obstetrics_caesarean_section_no">Ginekoloģija (ķeizargrieziena): nav</string>
 	</resources>
