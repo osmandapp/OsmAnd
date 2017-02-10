@@ -589,7 +589,7 @@
 
     <string name="poi_edit_title">Edytowanie użytecznego miejsca</string>
     <string name="poi_create_title">Dodawanie użytecznego miejsca</string>
-    <string name="poi_error_poi_not_found">Nie można odnaleźć węzła albo udogodnienie (amenity) nie jest pojedynczym węzłem</string>
+    <string name="poi_error_poi_not_found">Nie można odnaleźć węzła lub też udogodnienie (amenity) składa się z kilku węzłów, co nie jest jeszcze wspierane.</string>
     <string name="poi_remove_confirm_template">Usunąć {0} (wprowadź komentarz)?</string>
     <string name="poi_remove_title">Usuń użyteczne miejsce</string>
     <string name="shared_string_delete">Usuń</string>
