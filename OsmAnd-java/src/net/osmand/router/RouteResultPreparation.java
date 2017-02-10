@@ -433,6 +433,7 @@ public class RouteResultPreparation {
 			}
 		}
 		println("</test>");
+		println(msg);
 	}
 
 	private void printAdditionalPointInfo(RouteSegmentResult res) {
