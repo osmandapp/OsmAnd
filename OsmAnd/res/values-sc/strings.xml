@@ -1666,7 +1666,7 @@ Memòria in proportzione %4$s MB (lìmite de Android %5$s MB, Dalvik %6$s MB).</
     
     <string name="poi_edit_title">Muda PDI</string>
     <string name="poi_create_title">Crea PDI</string>
-    <string name="poi_error_poi_not_found">Su nodu no est istadu agatadu o s’amenidade no est unu nodu sìngulu</string>
+    <string name="poi_error_poi_not_found">Su nodu non podet èssere agatadu, o s’amenidade est fata de prus nodos, cosa chi no est galu suportada.</string>
     <string name="poi_remove_confirm_template">Iscantzellare {0} (insertare unu cummentu)?</string>
     <string name="poi_remove_title">Iscantzelladura PDI</string>
     <string name="shared_string_delete">Iscantzella</string>
