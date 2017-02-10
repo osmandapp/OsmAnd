@@ -1204,7 +1204,7 @@ Liste over understøttede lande (dybest set hele verden!): Afghanistan, Albanien
     <string name="default_buttons_commit">Udfør</string>
     <string name="amenity_type_geocache">Geocaching</string>
     <string name="commiting_node">Overfør knudepunkt…</string>
-    <string name="poi_error_poi_not_found">Knudepunkt kan ikke findes eller faciliteter er ikke et enkelt knudepunkt</string>
+    <string name="poi_error_poi_not_found">Knudepunkt kan ikke findes, eller faciliteter består af flere knudepunkter som endnu ikke er understøttet.</string>
     <string name="route_head">Lige ud</string>
     <string name="incremental_search_building">Søg efter bygning trinvist</string>
     <string name="Closest_Amenities">Nærmeste faciliteter</string>
