@@ -354,7 +354,7 @@ public class RouteResultPreparation {
 				}
 			}
 					
-					
+			double lastHeight = -1;		
 			for (RouteSegmentResult res : result) {
 				String name = res.getObject().getName();
 				String ref = res.getObject().getRef("", false, res.isForwardDirection());
@@ -391,6 +391,7 @@ public class RouteResultPreparation {
 				int inc = res.getStartPointIndex() < res.getEndPointIndex() ? 1 : -1;
 				int indexnext = res.getStartPointIndex() + inc;
 				int k = 0;
+				
 				for (int index = res.getStartPointIndex() ;
 						indexnext != res.getEndPointIndex(); index = indexnext, indexnext += inc, k++) {
 					indexnext = index < res.getEndPointIndex() ? index +  1 : index - 1; 
@@ -404,6 +405,11 @@ public class RouteResultPreparation {
 							if(k * 2 + 1 < vls.length) {
 								serializer.startTag("","ele");
 								serializer.text(vls[2*k + 1] +"");
+								serializer.endTag("","ele");
+								lastHeight = vls[2*k + 1];
+							} else if(lastHeight > 0){
+								serializer.startTag("","ele");
+								serializer.text(lastHeight +"");
 								serializer.endTag("","ele");
 							}
 							serializer.endTag("", "trkpt");
