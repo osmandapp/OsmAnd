@@ -6,6 +6,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
+import org.xmlpull.v1.XmlSerializer;
 
 /**
  * That class is replacing of standard LogFactory due to 
@@ -23,6 +24,10 @@ public class PlatformUtil {
 	
 	public static XmlPullParser newXMLPullParser() throws XmlPullParserException{
 		return new org.kxml2.io.KXmlParser();
+	}
+
+	public static XmlSerializer newSerializer() {
+		return new org.kxml2.io.KXmlSerializer();
 	}
 	
 }
