@@ -4,6 +4,7 @@ import gnu.trove.iterator.TIntIterator;
 import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.set.hash.TIntHashSet;
 
+import java.io.FileWriter;
 import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.ArrayList;
@@ -28,10 +29,12 @@ import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
+import org.kxml2.io.KXmlSerializer;
 
 public class RouteResultPreparation {
 
 	public static boolean PRINT_TO_CONSOLE_ROUTE_INFORMATION_TO_TEST = false;
+	public static String PRINT_TO_GPX_FILE = null;
 	private static final float TURN_DEGREE_MIN = 45;
 	private Log log = PlatformUtil.getLog(RouteResultPreparation.class);
 	/**
@@ -332,6 +335,26 @@ public class RouteResultPreparation {
 		log.info(msg);
         println(msg);
 		if (PRINT_TO_CONSOLE_ROUTE_INFORMATION_TO_TEST) {
+			org.xmlpull.v1.XmlSerializer serializer = null;
+			if(PRINT_TO_GPX_FILE != null) {
+				serializer = PlatformUtil.newSerializer();
+				try {
+					serializer.setOutput(new FileWriter(PRINT_TO_GPX_FILE));
+					serializer.startDocument("UTF-8", true);
+					serializer.startTag("", "gpx");
+					serializer.attribute("", "version", "1.1");
+					serializer.attribute("", "xmlns", "http://www.topografix.com/GPX/1/1");
+					serializer.attribute("", "xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance");
+					serializer.attribute("", "xmlns:schemaLocation", "http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd");
+					serializer.startTag("", "trk");
+					serializer.startTag("", "trkseg");
+				} catch (IOException e) {
+					e.printStackTrace();
+					serializer = null;
+				}
+			}
+					
+					
 			for (RouteSegmentResult res : result) {
 				String name = res.getObject().getName();
 				String ref = res.getObject().getRef("", false, res.isForwardDirection());
@@ -365,7 +388,45 @@ public class RouteResultPreparation {
 				println(MessageFormat.format("\t<segment id=\"{0}\" oid=\"{1}\" start=\"{2}\" end=\"{3}\" {4}/>",
 						(res.getObject().getId() >> (BinaryInspector.SHIFT_ID )) + "", res.getObject().getId() + "", 
 						res.getStartPointIndex() + "", res.getEndPointIndex() + "", additional.toString()));
+				int inc = res.getStartPointIndex() < res.getEndPointIndex() ? 1 : -1;
+				int indexnext = res.getStartPointIndex() + inc;
+				int k = 0;
+				for (int index = res.getStartPointIndex() ;
+						indexnext != res.getEndPointIndex(); index = indexnext, indexnext += inc, k++) {
+					indexnext = index < res.getEndPointIndex() ? index +  1 : index - 1; 
+					if (serializer != null) {
+						try {
+							LatLon l = res.getPoint(index);
+							serializer.startTag("","trkpt");
+							serializer.attribute("", "lat",  l.getLatitude() + "");
+							serializer.attribute("", "lon",  l.getLongitude() + "");
+							float[] vls = res.getHeightValues();
+							if(k * 2 + 1 < vls.length) {
+								serializer.startTag("","ele");
+								serializer.text(vls[2*k + 1] +"");
+								serializer.endTag("","ele");
+							}
+							serializer.startTag("","desc");
+							serializer.text(vls[2*k + 1] +"");
+							serializer.endTag("","desc");
+							serializer.endTag("", "trkpt");
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+					}
+				}
 				printAdditionalPointInfo(res);
+			}
+			if(serializer != null) {
+				try {
+					serializer.endTag("", "trkseg");
+					serializer.endTag("", "trk");
+					serializer.endTag("", "gpx");
+					serializer.endDocument();
+					serializer.flush();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 			}
 		}
 		println("</test>");
