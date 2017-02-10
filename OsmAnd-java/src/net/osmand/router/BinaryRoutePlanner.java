@@ -447,7 +447,7 @@ public class BinaryRoutePlanner {
 				continue;
 			}
 			double heightObstacle = ctx.getRouter().defineHeightObstacle(road, !reverseWaySearch ? prevInd : segmentPoint, 
-					!reverseWaySearch ? segmentPoint : prevInd, segmentDist);
+					!reverseWaySearch ? segmentPoint : prevInd);
 			if(heightObstacle > 0) {
 				
 			}

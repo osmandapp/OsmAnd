@@ -288,7 +288,7 @@ public class GeneralRouter implements VehicleRouter {
 	}
 	
 	@Override
-	public double defineHeightObstacle(RouteDataObject road, short startIndex, short endIndex, float distance) {
+	public double defineHeightObstacle(RouteDataObject road, short startIndex, short endIndex) {
 		if(!heightObstacles) {
 			return 0;
 		}

@@ -35,7 +35,7 @@ public interface VehicleRouter {
 	/**
 	 * return delay in seconds for height obstacles
 	 */
-	public double defineHeightObstacle(RouteDataObject road, short startIndex, short endIndex, float distance);
+	public double defineHeightObstacle(RouteDataObject road, short startIndex, short endIndex);
 	
 	/**
 	 * return delay in seconds (0 no obstacles)
