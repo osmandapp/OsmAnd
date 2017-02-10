@@ -707,7 +707,7 @@ Dlaždicové mapy môžete získať priamo zo zdrojov na Internete, alebo ich m�
     
     <string name="poi_edit_title">Upravenie bodu záujmu (POI)</string>
     <string name="poi_create_title">Vytvorenie bodu záujmu (POI)</string>
-    <string name="poi_error_poi_not_found">Uzol sa nedá nájsť alebo bod záujmu nie je samostatný uzol</string>
+    <string name="poi_error_poi_not_found">Bod sa nedá nájsť alebo je bod záujmu tvorený viacerými bodmi, s čím zatiaľ nie je možné pracovať.</string>
     <string name="poi_remove_confirm_template">Vymazať {0} (zadajte komentár) ?</string>
     <string name="poi_remove_title">Vymazať POI</string>
     <string name="poi_remove_success">POI bol úspešne vymazaný</string>
