@@ -406,9 +406,6 @@ public class RouteResultPreparation {
 								serializer.text(vls[2*k + 1] +"");
 								serializer.endTag("","ele");
 							}
-							serializer.startTag("","desc");
-							serializer.text(vls[2*k + 1] +"");
-							serializer.endTag("","desc");
 							serializer.endTag("", "trkpt");
 						} catch (IOException e) {
 							e.printStackTrace();
