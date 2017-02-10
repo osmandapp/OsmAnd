@@ -1031,7 +1031,7 @@ Les dades globals (entre 70 graus nord i 70 graus sud) estan basades en mesures 
     <string name="Closest_Amenities">Instal·lacions més properes</string>
     <string name="position_on_map_bottom">Part inferior</string>
     
-    <string name="poi_error_poi_not_found">No s\'ha trobat el node o la instal·lació no és un node únic</string>
+    <string name="poi_error_poi_not_found">No s\'ha trobat el node, o la instal·lació consta de diferents nodes, i això encara no s\'admet.</string>
     <string name="poi_error_io_error_template">S\'ha produït un error d\'E/S durant l\'acció {0}.</string>
     <string name="announce_gpx_waypoints">Fites GPX</string>
     <string name="speak_title">Anuncia…</string>
