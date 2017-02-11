@@ -3373,4 +3373,9 @@
 
 	<string name="poi_coworking_space">Коворкинг</string>
 
+	<string name="poi_cafeteria">Столовая</string>
+	<string name="poi_fast_food_cafeteria">Да</string>
+	<string name="poi_drink_wine_yes">Вино: есть</string>
+	<string name="poi_drink_wine_served">Вино: подаётся</string>
+
 </resources>
