@@ -2573,7 +2573,7 @@
 	<string name="poi_crossing_supervision_attendant">Nadzór: dróżnik</string>
 	<string name="poi_crossing_supervision_camera">Nadzór: kamera</string>
 
-	<string name="poi_dispensing_yes">Recepty: tak</string>
+	<string name="poi_dispensing_yes">Tak</string>
 	<string name="poi_dispensing_no">Recepty: nie</string>
 
 	<string name="poi_aerodrome_type_international">Międzynarodowe</string>
