@@ -904,7 +904,7 @@
     
     <string name="poi_edit_title">編輯興趣點</string>
     <string name="poi_create_title">建立興趣點</string>
-    <string name="poi_error_poi_not_found">找不到節點或者便利設施不是單一的節點</string>
+    <string name="poi_error_poi_not_found">找不到節點或便利設施組成的一些節點，哪些尚不支援。</string>
     <string name="poi_remove_confirm_template">刪除 {0} (輸入評論)？</string>
     <string name="poi_remove_title">刪除興趣點</string>
     <string name="poi_remove_success">興趣點已刪除成功</string>
