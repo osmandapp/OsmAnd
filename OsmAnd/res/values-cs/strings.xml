@@ -642,7 +642,7 @@
     
     <string name="poi_edit_title">Upravit POI</string>
     <string name="poi_create_title">Vytvořit POI</string>
-    <string name="poi_error_poi_not_found">Bod nelze najít nebo hledaný objekt není samostatným bodem</string>
+    <string name="poi_error_poi_not_found">Uzel nelze nalézt nebo vybavení sestává z několika uzlů, které ještě nejsou podporovány.</string>
     <string name="poi_remove_confirm_template">Vymazat {0} (vložte komentář) ?</string>
     <string name="poi_remove_title">Vymazat POI</string>
     <string name="shared_string_delete">Vymazat</string>
