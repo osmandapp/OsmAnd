@@ -310,8 +310,7 @@ public class GeneralRouter implements VehicleRouter {
 				int percentIncl = (int) (incl * 100);
 				percentIncl = (percentIncl + 2)/ 3 * 3 - 2; // 1, 4, 7, 10, .   
 				if(percentIncl > 0) {
-					// IMPROVEMENT: register with value and cache parsed value
-					objContext.paramContext.vars.put("incline", percentIncl + "");
+					objContext.paramContext.incline = percentIncl;
 					sum += objContext.evaluateFloat(road.region, types, 0) * diff;
 				}
 			}
@@ -468,6 +467,7 @@ public class GeneralRouter implements VehicleRouter {
 	
 	private class ParameterContext {
 		private Map<String, String> vars;
+		private double incline = 0;
 	}
 	
 	public class RouteAttributeContext {
@@ -670,6 +670,8 @@ public class GeneralRouter implements VehicleRouter {
 					int v = findBit.nextSetBit(0);
 					o = parseValueFromTag(v, valueType);
 				}
+			} else if (value instanceof String && value.equals(":incline")) {
+				return paramContext.incline;
 			} else if (value instanceof String && value.toString().startsWith(":")) {
 				String p = ((String) value).substring(1);
 				if (paramContext != null && paramContext.vars.containsKey(p)) {
