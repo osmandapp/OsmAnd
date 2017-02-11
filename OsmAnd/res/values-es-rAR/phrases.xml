@@ -3397,4 +3397,12 @@
 
 <string name="poi_coworking_space">Espacio de trabajo compartido</string>
 
+<string name="poi_cafeteria">Cafetería (comedor)</string>
+
+<string name="poi_fast_food_cafeteria">Sí</string>
+
+	<string name="poi_drink_wine_yes">Vino: sí</string>
+	<string name="poi_drink_wine_retail">Vino: venta</string>
+	<string name="poi_drink_wine_served">Vino: servido</string>
+
 </resources>
