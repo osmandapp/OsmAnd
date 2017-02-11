@@ -622,7 +622,7 @@ POIの更新は利用できません</string>
     
     
     
-    <string name="map_magnifier">マップ拡大鏡倍率</string>
+    <string name="map_magnifier">マップ表示倍率</string>
     
     <string name="about_version">バージョン：</string>
     <string name="shared_string_about">OsmAnd Maps &amp; Navigationについて</string>
@@ -1012,7 +1012,7 @@ POIの更新は利用できません</string>
 	<string name="support_new_features">新機能をサポート</string>
 	<string name="support_new_features_descr">アプリケーションに実装された新機能を見てから寄付します</string>
 	<string name="show_ruler_level">尺度を表示</string>	
-	<string name="info_button">経路の一覧表示</string>
+	<string name="info_button">アプリケーション情報</string>
 	<string name="back_to_location">現在位置に戻す</string>
 	<string name="shared_string_help">ヘルプ</string>
 	
@@ -1024,7 +1024,7 @@ POIの更新は利用できません</string>
 	<string name="backToMenu">メニューに戻る</string>
 	<string name="zoomOut">縮小</string>
 	<string name="zoomIn">拡大</string>
-	<string name="zoomIs">ズームレベルは</string>
+	<string name="zoomIs">ズームレベル</string>
 	<string name="north">北</string>
 	<string name="north_north_east">北北東</string>
 	<string name="north_east">北東</string>
@@ -1523,7 +1523,7 @@ OsmAnd+は最新の更新情報を受けとることが出来る、有料バー�
     <string name="osmo_share_current_session">ブラウザで現在のセッションを共有する</string>
     <string name="osmo_session_not_available">セッションはが利用できません「送信場所」がオンになっていることを確認してください。</string>
     <string name="osmo_share_session">セッションの共有</string>
-    <string name="rendering_attr_subwayMode_name">地下鉄ルート</string>
+    <string name="rendering_attr_subwayMode_name">地下鉄路線</string>
  	<string name="osmo_session_id_share">デバイスを追跡するためのセッションURL (%1$s)</string>
     <string name="osmo_tracker_id_share">目的のデバイス %2$sに接続するには、リンク %3$sをクリックするかトラッカーIDを指定してください(%1$s)</string>
     <string name="osmo_track_interval">記録間隔</string>
@@ -1651,7 +1651,7 @@ OsmAnd+は最新の更新情報を受けとることが出来る、有料バー�
     <string name="index_name_gb">ヨーロッパ - イギリス</string>
     <string name="gpx_option_calculate_first_last_segment">最初と最後の経路セグメントでOsmAndルートを計算する</string>
     <string name="use_displayed_track_for_navigation">ナビゲーションに表示された経路を使用しますか？</string>
-    <string name="rendering_attr_alpineHiking_name">トレッキングビュー</string>
+    <string name="rendering_attr_alpineHiking_name">ハイキング、トレッキングルート(SAC基準)を表示</string>
     <string name="rendering_attr_alpineHiking_description">SACスケールに従って道を描写</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">ハイキング用シンボルを重ねて表示</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">OSMCトレースに従って道を描写</string>
@@ -1698,7 +1698,7 @@ OsmAnd+は最新の更新情報を受けとることが出来る、有料バー�
     <string name="int_hour">時間</string>
     <string name="duration">期限</string>
     <string name="distance">距離</string>
-    <string name="rendering_attr_publicTransportMode_name">バス、トロリーバス、シャトルバスルート</string>
+    <string name="rendering_attr_publicTransportMode_name">バス、トロリーバス、シャトルバス路線</string>
 	<string name="save_track_to_gpx_globally">GPXファイルへの経路記録に関する設定</string>
 	<string name="save_track_to_gpx_globally_descr">GPXファイルへの一般の位置(General position)記録は、マップ画面上のGPXログウィジェットを使用してオンとオフを切り替えることが可能です</string>
 	<string name="save_track_interval_globally">記録間隔</string>
@@ -1726,7 +1726,7 @@ OsmAnd+は最新の更新情報を受けとることが出来る、有料バー�
     
     
 	
-	<string name="rendering_attr_tramTrainRoutes_name">路面電車や鉄道での経路</string>
+	<string name="rendering_attr_tramTrainRoutes_name">路面電車、鉄道路線</string>
 	<string name="lock_screen_request_explanation">省電力機能で画面をオフにするには%1$s の権限が必要です。</string>
     <string name="wake_on_voice">画面の電源オン設定</string>
     <string name="wake_on_voice_descr">方向転換地点に近づいたらデバイスの画面を(オフの場合指定時間)オンにします</string>
@@ -1804,7 +1804,7 @@ OsmAnd+は最新の更新情報を受けとることが出来る、有料バー�
     <string name="download_tab_updates">更新可能</string>
     <string name="download_tab_local">保存済み</string>
 	<string name="no_internet_connection">ダウンロード出来ません、インターネット接続を確認してください。</string>
-    <string name="shared_string_dismiss">何もしない</string>
+    <string name="shared_string_dismiss">変更しない</string>
     <string name="everything_up_to_date">ストレージ内ファイルはすべて最新です</string>
     <string name="use_opengl_render">OpenGLレンダリングを使用</string>
     <string name="use_opengl_render_descr">ハードウェアのOpenGLレンダリングを使用します(デバイスによっては動作しません)</string>
@@ -2443,7 +2443,7 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="map_widget_magnetic_bearing">磁方位</string>
     <string name="legacy_search">レガシー検索</string>
     <string name="show_legacy_search">レガシー検索を表示</string>
-    <string name="show_legacy_search_desc">ドロワーリストでレガシー検索を有効にします</string>
+    <string name="show_legacy_search_desc">ドロワーリスト型のレガシー(旧型)検索も使用できるようにします</string>
     <string name="routing_attr_allow_motorway_name">高速道路を使用可能</string>
     <string name="routing_attr_allow_motorway_description">高速道路を使用可能</string>
     <string name="release_2_6">"
@@ -2554,7 +2554,7 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="no_inet_connection_desc_map">マップのダウンロードにはインターネット接続が必要です。</string>
     <string name="search_my_location">現在地取得</string>
     <string name="no_update_info_desc">OsmAndのアップデート情報や、割引に関しての情報をチェックしません</string>
-    <string name="no_update_info">更新情報を表示しません</string>
+    <string name="no_update_info">更新情報を非表示</string>
     <string name="update_all_maps_now">すべてのマップを今すぐ更新しますか？</string>
     <string name="replace_favorite_confirmation">お気に入り %1$sを置き換えてよろしいですか？</string>
     <string name="rendering_attr_hideOverground_name">地上建造物</string>
