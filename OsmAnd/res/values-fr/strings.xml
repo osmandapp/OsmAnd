@@ -643,7 +643,7 @@ Actuellement {2} Mo sont disponibles.</string>
     
     <string name="poi_edit_title">Éditer PI</string>
     <string name="poi_create_title">Créer un point d\'intérêt (PI)</string>
-    <string name="poi_error_poi_not_found">L\'objet est introuvable ou n\'est pas un composé d\'un seul nœud</string>
+    <string name="poi_error_poi_not_found">L\'objet est introuvable ou est composé de plusieurs nœuds, ce qui n\'est pas possible actuellement.</string>
     <string name="poi_remove_confirm_template">Voulez-vous vraiment supprimer {0} (inscrire commentaire) ?</string>
     <string name="poi_remove_title">Supprimer le PI</string>
     <string name="shared_string_delete">Supprimer</string>
