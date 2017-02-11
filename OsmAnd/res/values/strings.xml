@@ -2334,7 +2334,7 @@ If you need help with OsmAnd application, please contact our support team: suppo
     <string name="favourites_remove_dialog_success">Favorite point {0} was successfully deleted.</string>
     <string name="poi_edit_title">Edit POI</string>
     <string name="poi_create_title">Create POI</string>
-    <string name="poi_error_poi_not_found">Node cannot be found or amenity is not a single node</string>
+    <string name="poi_error_poi_not_found">Node cannot be found, or amenity consists of several nodes, which is not yet supported.</string>
     <string name="poi_remove_confirm_template">Delete {0} (enter comment)?</string>
     <string name="poi_remove_title">Delete POI</string>
     <string name="poi_remove_success">POI was successfully deleted</string>
