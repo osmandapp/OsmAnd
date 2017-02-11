@@ -804,7 +804,7 @@ Tam prireiks {1} MB pastoviam saugojimui.
     
     <string name="poi_edit_title">Redaguoti LV</string>
     <string name="poi_create_title">Sukurti LV</string>
-    <string name="poi_error_poi_not_found">LV neina rasti arba LV sudaryta iš kelių elementų</string>
+    <string name="poi_error_poi_not_found">LV neina rasti arba LV sudaryta iš kelių elementų kurie kolkas dar nepalaikomi.</string>
     <string name="poi_remove_confirm_template">Ištrinti {0} (įveskite komentarą)?</string>
     <string name="poi_remove_title">Ištrinti LV</string>
     <string name="shared_string_delete">Ištrinti</string>
@@ -1018,7 +1018,10 @@ Savybės:
     <string name="index_srtm_parts">dalys</string>
     <string name="index_srtm_ele">Aukščio kontūrų linijos</string>
     <string name="srtm_plugin_description">"Šis įskiepis įgalina aukščio kontūrų linijas OsmAnd parsiųstuose žemėlapiuose. Ši funkcija gali būti naudinga atletams, keliautojams ir visiems, kas aktuali reljefo struktūra.
-\nPasaulio duomenys (tarp 70 laipsnių šiaurės ir 70 laipsnių pietų) yra paremti SRTM (Shuttle Radar Topography Mission) ir ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), vaizdo fiksavimo instrumento Terra, NASA Earth Observing System palydovo, matavimais. ASTER yra bendradarbiavimo tarp NASA, Japonijos ekonomikos, prekybos ir industrijos (METI) ministerijos ir Japan Space Systems (J-spacesystems) projektas. "</string>
+
+
+Pasaulio duomenys (tarp 70 laipsnių šiaurės ir 70 laipsnių pietų) yra paremti SRTM (Shuttle Radar Topography Mission) ir ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), vaizdo fiksavimo instrumento Terra, NASA Earth Observing System palydovo, matavimais. ASTER yra bendradarbiavimo tarp NASA, Japonijos ekonomikos, prekybos ir industrijos (METI) ministerijos ir Japan Space Systems (J-spacesystems) projektas.
+ "</string>
     <string name="srtm_plugin_name">SRTM įskiepis</string>
     <string name="download_select_map_types">Kiti žemėlapiai</string>
     <string name="download_srtm_maps">SRTM žemėlapiai</string>
@@ -1032,7 +1035,7 @@ Savybės:
 
 
     <string name="map_widget_distancemeasurement">Atstumo matavimas</string>
-    <string name="audionotes_location_not_defined">Vieta, kuriai skiriama ši pastaba, nenustatyta. \"Naudoti vietą …\" jei norite priskirti pastabą specifinei vietai</string>
+    <string name="audionotes_location_not_defined">Vieta, kuriai skiriama ši pastaba, nenustatyta. Pasirinkite \"Naudoti vietą …\" priskirti pastabą specifinei vietai.</string>
     <string name="map_widget_audionotes">Audio užrašai</string>
 
 
@@ -2019,8 +2022,8 @@ Specialiai atskiro žemėlapio atsisiųsti nereikia, šis rodinys bus sukurtas i
     <string name="track_points">Maršruto taškai</string>
 	<string name="plugin_ski_descr">"Šis įskiepis suteikia priėjimą prie pasaulio kalnų slidinėjimo trasų, lygumų slidinėjimo trasų, kalnų slidinėjimo maršrutų, keltuvų ir slidinėjimo keltuvų duomenų. Maršrutai ir trasos yra nuspalvintos spalvomis atsižvelgiant į jų sudėtingumą bei atvaizduojami specialiu \"Žiemos\" žemėlapio stiliumi, kuris naudoja sniego spalvos žiemos peizažą.
 \n\nAktyvavus šį žemėlapio stilių, kraštovaizdis atvaizduojamas taip, kaip jis atrodytų žiemą. Šis rodinys gali būti išjungtas arba deaktyvuojant jį arba pakeitus \"Žemėlapio stilių\" meniu \"Žemėlapio nustatymuose\", į norimą. "</string>
-    <string name="rendering_value_walkingRoutesScopeOSMC_name">Spalvinimas atsižvelgiant į maršrutų reikšmes</string>
-    <string name="rendering_value_walkingRoutesOSMC_name">Spalvinimas atsišvelgiant į OSMC</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">Spalvos pagal priklausomybę tinklui</string>
+    <string name="rendering_value_walkingRoutesOSMC_name">Spalvinimas pagal OSMC pėsčiųjų žygiu simbolius</string>
     <string name="storage_directory_multiuser">Vartotojų talpykla</string>
     <string name="gps_network_not_enabled">Neįjungta vietos nustatymo paslauga. Įjungti?</string>
     <string name="shared_string_import2osmand">Importavimas į OsmAnd</string>
@@ -2173,8 +2176,8 @@ Specialiai atskiro žemėlapio atsisiųsti nereikia, šis rodinys bus sukurtas i
     <string name="srtm_plugin_disabled">Kontūro linijos išjungtos</string>
     <string name="shared_string_send">Siųsti</string>
     <string name="map_downloaded">Žemėlapis atsiųstas</string>
-    <string name="map_downloaded_descr">%1$s žemėlapio jau atsiųsta. Norėdami pradėti juo naudotis, grįžkite į žemėlapį.</string>
-    <string name="go_to_map">Atidaryti žemėlapį</string>
+    <string name="map_downloaded_descr">%1$s žemėlapis atsiųstas. Galite pradėti jį naudoti.</string>
+    <string name="go_to_map">Rodyti žemėlapį</string>
     <string name="application_dir_description">Pasirinkite vietą, kurioje norėsite išsaugoti žemėlapius ir kitus duomenų failus.</string>
     <string name="shared_string_qr_code">QR kodas</string>
     <string name="share_menu_location">Pasidalinti esama vietove</string>
@@ -2188,7 +2191,7 @@ Specialiai atskiro žemėlapio atsisiųsti nereikia, šis rodinys bus sukurtas i
     <string name="other_menu_group">Kita</string>
     <string name="plugins_menu_group">Įskiepiai</string>
     <string name="faq_item">DUK</string>
-    <string name="search_on_the_map_item">Paieška žemėlapyje</string>
+    <string name="search_on_the_map_item">Iškoma žemėlapyje</string>
     <string name="planning_trip_item">Kelionės planavimas</string>
     
     
@@ -2234,7 +2237,7 @@ Specialiai atskiro žemėlapio atsisiųsti nereikia, šis rodinys bus sukurtas i
     <string name="navigation_item_description">Navigacijos nustatymas</string>
     <string name="feedback">Atsiliepimai</string>
     <string name="map_legend">Legenda</string>
-<string name="first_usage_item">Pirmasis paleidimas</string>
+<string name="first_usage_item">Pirmasis naudojimas</string>
     <string name="read_more">Skaityti toliau</string>
     <string name="whats_new">Kas naujo</string>
     <string name="rendering_attr_hideProposed_name">Siūlomi objektai</string>
@@ -2476,7 +2479,7 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="shared_string_topbar">Viršutinė lentelė</string>
     <string name="osm_user_stat">Pakeitimai %1$s, pozicija %2$s, viso pakeitimų %3$s</string>
     <string name="show_transparency_seekbar">Rodyti permatomumo būklės lentelę</string>
-    <string name="upload_osm_note_description">Savo OSM pastabą galite įkelti anonimiškai jei naudojate savo OpenStreetMap.org paskyrą.</string>
+    <string name="upload_osm_note_description">Savo OSM pastabą galite įkelti anonimiškai arba naudodami savo OpenStreetMap.org paskyrą.</string>
     <string name="upload_osm_note">Įkelti OSM pastabą</string>
     <string name="current_track">Dabartinis kelias</string>
     <string name="access_direction_audio_feedback_descr">Garsu nurodyti kelionės tikslo kryptį</string>
@@ -2548,7 +2551,7 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
  "</string>
     <string name="clear_updates_proposition_message">Tu gali pašalinti atsisiųstus atnaujinimus ir grįžti prie pradinio žemėlapio</string>
     <string name="search_another_country">Pasirinkite kitą regioną</string>
-    <string name="search_map">Ieškomas žemėlapis…</string>
+    <string name="search_map">Ieškomi žemėlapiai…</string>
     <string name="search_location">Nustatoma vietos padėtis…</string>
     <string name="storage_free_space">Laisva vieta</string>
     <string name="no_update_info">Nerodyti atnaujinimų</string>
@@ -2562,7 +2565,7 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="save_filter">Išsaugoti filtrą</string>
     <string name="delete_filter">Ištrinti filtrą</string>
     <string name="new_filter">Naujas filtras</string>
-    <string name="new_filter_desc">Įveskite pavadinimą naujam filtrui. Jį galėsite rasti Kategorijų sąraše.</string>
+    <string name="new_filter_desc">Įveskite pavadinimą naujam filtrui. Jis bus įtrauktas į jūsų Kategorijų sąrašą.</string>
     <string name="osm_live_payment_desc">Prenumeratos mokestis bus nuskaitomas kas mėnesį. Prenumeratą galite nutraukti bet kuriuo metu Google Play programoje.</string>
     <string name="donation_to_osm">Parama OpenStreeMap bendruomenei</string>
     <string name="donation_to_osm_desc">Dalis jūsų paramos bus nusiųsta OSM nariams, kurie teikia OpenStreetMap papildymus. Prenumeratos kaina liks nepakitusi.</string>
@@ -2621,7 +2624,7 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="christmas_poi">Kalėdinė LV</string>
     <string name="christmas_desc_q">Parodyti Kalėdines LV?</string>
     <string name="rendering_attr_contourColorScheme_name">Kontūro linijų spalvų schema</string>
-    <string name="search_hint">Įrašykite miesto pavadinimą, adresą ar LV</string>
+    <string name="search_hint">Įrašykite miesto pavadinimą, adresą, LV</string>
     <string name="rendering_value_high_name">Aukštas</string>
     <string name="rendering_value_medium_w_name">Vidutinis</string>
     <string name="rendering_value_low_name">Žemas</string>
