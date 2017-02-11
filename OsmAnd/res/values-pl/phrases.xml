@@ -3376,7 +3376,7 @@
 <string name="poi_fast_food_cafeteria">Tak</string>
 
 	<string name="poi_drink_wine_yes">Wino: tak</string>
-	<string name="poi_drink_wine_retail">Wino: sprzedaż</string>
+	<string name="poi_drink_wine_retail">Wino: sprzedaż (butelkowane)</string>
 	<string name="poi_drink_wine_served">Wino: degustacja</string>
 
 </resources>
