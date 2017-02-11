@@ -727,7 +727,7 @@ Er is nu {2} MB beschikbaar</string>
   
   <string name="poi_edit_title">Bewerk Interessepunt</string>
   <string name="poi_create_title">OSM-Interessepunt aanmaken</string>
-  <string name="poi_error_poi_not_found">Punt niet gevonden of voorziening is niet een enkel punt</string>
+  <string name="poi_error_poi_not_found">Punt niet gevonden of voorziening bestaat uit meerdere punten, wat nog niet ondersteund wordt.</string>
   <string name="poi_remove_confirm_template">Verwijderen {0} (geef commentaar)?</string>
   <string name="poi_remove_title">Verwijder Interessepunt</string>
   <string name="poi_remove_success">Interessepunt is verwijderd</string>
