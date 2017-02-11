@@ -1341,7 +1341,7 @@ Biltegiratzean {1} MB erabiliko dira.
   
   <string name="poi_edit_title">POIa editatu</string>
   <string name="poi_create_title">POIa sortu</string>
-  <string name="poi_error_poi_not_found">Ezin da nodoa aurkitu edo erosotasuna ez da puntu bakar bat</string>
+  <string name="poi_error_poi_not_found">Ezin da nodoa aurkitu, edo zerbitzua hainbat nodoz osatuta dago, eta ez dago horretarako euskarririk oraindik.</string>
   <string name="poi_remove_confirm_template">{0} ezabatu (sartu iruzkina)?</string>
   <string name="poi_remove_title">POIa ezabatu</string>
   <string name="shared_string_delete">Ezabatu</string>
@@ -2763,4 +2763,33 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="quick_action_fav_name_descr">Laga hutsik helbidea edo lekuaren izena erabiltzeko automatikoki</string>
     <string name="auto_split_recording_title">Automatikoki zatitu grabaketa hutsunea eta gero</string>
 	<string name="auto_split_recording_descr">Hasi segmentu berria 6 minututako hutsune bat eta gero, lorratz berria bi ordu eta gero, edo fitxategi berria data aldatzean.</string>
-    </resources>
+    <string name="rendering_attr_depthContours_description">Erakutsi sakonera sestra-kurbak eta puntuak</string>
+    <string name="rendering_attr_depthContours_name">Sakonera sestra-kurbak</string>
+	<string name="release_2_6">"
+ • Ezaugarri berria: Ekintza azkarren botoia
+
+
+ • Pantaila ukigarriaren keinuen erantzuna hobetua
+
+
+ • Hizkuntza gehiago barne-hartzen dituen mapetarako letra-tipoa
+
+
+ • Tokiko hizkuntzen aldaerentzako TTS euskarria
+
+
+ • Ikusgaitasun hobekuntzak hainbat mapa estiloetan eta wikipedian
+
+
+ • Open Location Code (OLC) euskarria
+
+
+ • Grabatutako GPX fitxategietan oinarrizko altuera informazioa
+
+
+ • Beste hainbat hobekuntza eta arazoen konponketa
+
+
+eta gehiago…
+ "</string>
+	</resources>
