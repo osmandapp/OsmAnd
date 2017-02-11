@@ -752,7 +752,7 @@
   
   <string name="poi_edit_title">Labot POI</string>
   <string name="poi_create_title">Izveidot POI</string>
-  <string name="poi_error_poi_not_found">Nevar atrast nodi, vai arī serviss nav atzīmēts kā viena node</string>
+  <string name="poi_error_poi_not_found">Nevar atrast nodi, vai arī serviss nav atzīmēts kā viena node.</string>
   <string name="poi_remove_confirm_template">Dzēst {0} (ievadiet komentāru)?</string>
   <string name="poi_remove_title">Dzēst POI</string>
   <string name="shared_string_delete">Dzēst</string>
@@ -1210,7 +1210,7 @@ OsmAnd ir atvērtā koda navigācijas aplikācija ar piekļuvi vispusīgiem Open
     <string name="srtm_plugin_description">"Šis spraudnis dod iespēju parādīt kontūru līnijas un kalnu reljefu griezumus uz standarta OsmAnd kartēm. Šo iespēju novērtēs dabas mīļotāji, aktīvās atpūtas cienītāji un jebkurš ar padziļinātu interesi par zemes reljefu. 
 
 
-Globālie dati (starp 70 Z un 70 D) ir bāzēti uz SRTM (Shuttle Radar Topography Mission) un ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer) mērījumiem, attēlveidošanas rīks uz Terra\'s, vadošais NASA Zemes Novērošanas Sistēmas satelīts. ASTER ir kopējs veikums ar NASA, Japānas Ekonomikas Ministriju, Trade and Industry (METI) un Japānas Izplatījuma Sistēmām (J-spacesystems).
+Globālie dati (starp 70° Z un 70° D) ir bāzēti uz SRTM (Shuttle Radar Topography Mission) un ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer) mērījumiem, attēlveidošanas rīks uz Terra\'s, vadošais NASA Zemes Novērošanas Sistēmas satelīts. ASTER ir kopējs veikums ar NASA, Japānas Ekonomikas Ministriju, Trade and Industry (METI) un Japānas Izplatījuma Sistēmām (J-spacesystems).
  "</string>
     <string name="osmand_play_title_30_chars">OsmAnd kartes &amp; navigācija</string>
 	<string name="osmand_plus_play_title_30_chars">OsmAnd+ kartes &amp; navigācija</string>
