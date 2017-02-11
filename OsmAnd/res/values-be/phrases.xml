@@ -3386,4 +3386,12 @@
 	<string name="poi_cuisine_bubble_tea">Гарбата з бобкамі</string>
 	<string name="poi_cuisine_pastel">Піражок</string>
 	<string name="poi_gambling_pachinko">Пачынка</string>
-	</resources>
+	<string name="poi_cafeteria">Сталоўка</string>
+
+<string name="poi_fast_food_cafeteria">Так</string>
+
+	<string name="poi_drink_wine_yes">Віно: так</string>
+	<string name="poi_drink_wine_retail">Віно: продаж</string>
+	<string name="poi_drink_wine_served">Віно: дэгустацыя</string>
+
+</resources>
