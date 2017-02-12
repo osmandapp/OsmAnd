@@ -471,9 +471,46 @@ public class SelectedGPXFragment extends OsmAndListFragment {
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			View row = convertView;
+			LineChart mChart = null;
+			final boolean useFeet = (mc == MetricsConstants.MILES_AND_FEET) || (mc == MetricsConstants.MILES_AND_YARDS);
 			if (row == null) {
 				LayoutInflater inflater = getMyActivity().getLayoutInflater();
 				row = inflater.inflate(R.layout.gpx_item_list_item, parent, false);
+
+				mChart = (LineChart) row.findViewById(R.id.chart);
+				//mChart.setHardwareAccelerationEnabled(true);
+				mChart.setTouchEnabled(true);
+				mChart.setDragEnabled(true);
+				mChart.setScaleEnabled(true);
+				mChart.setPinchZoom(true);
+				mChart.setScaleYEnabled(false);
+				mChart.setAutoScaleMinMaxEnabled(true);
+				mChart.setDrawBorders(false);
+				mChart.getDescription().setEnabled(false);
+				mChart.setMaxVisibleValueCount(10);
+
+				// create a custom MarkerView (extend MarkerView) and specify the layout
+				// to use for it
+				MyMarkerView mv = new MyMarkerView(getActivity(), R.layout.chart_marker_view, useFeet);
+				mv.setChartView(mChart); // For bounds control
+				mChart.setMarker(mv); // Set the marker to the chart
+				mChart.setDrawMarkers(true);
+
+				XAxis xAxis = mChart.getXAxis();
+				xAxis.setDrawAxisLine(false);
+				xAxis.setDrawGridLines(false);
+				xAxis.setDrawAxisLine(false);
+				xAxis.setPosition(BOTTOM);
+
+				YAxis yAxis = mChart.getAxisLeft();
+				yAxis.enableGridDashedLine(10f, 5f, 0f);
+				yAxis.setGridColor(ActivityCompat.getColor(getActivity(), R.color.divider_color));
+				yAxis.setDrawAxisLine(false);
+
+				Legend legend = mChart.getLegend();
+				legend.setEnabled(false);
+
+				mChart.getAxisRight().setEnabled(false);
 			}
 			GpxDisplayItem child = getItem(position);
 			TextView label = (TextView) row.findViewById(R.id.name);
@@ -514,116 +551,68 @@ public class SelectedGPXFragment extends OsmAndListFragment {
 				description.setVisibility(View.GONE);
 			}
 
-			final LineChart mChart = (LineChart) row.findViewById(R.id.chart);
-			//mChart.setHardwareAccelerationEnabled(true);
-			mChart.setTouchEnabled(true);
-			mChart.setDragEnabled(true);
-			mChart.setScaleEnabled(true);
-			mChart.setPinchZoom(true);
-			mChart.setScaleYEnabled(false);
-			mChart.setAutoScaleMinMaxEnabled(true);
-			mChart.setDrawBorders(false);
-			mChart.getDescription().setEnabled(false);
-			mChart.setMaxVisibleValueCount(10);
+			if (mChart != null) {
+				if (child.analysis != null && child.analysis.elevationData != null && child.analysis.isElevationSpecified() && (child.analysis.totalDistance > 0)) {
 
-			final boolean useFeet = (mc == MetricsConstants.MILES_AND_FEET) || (mc == MetricsConstants.MILES_AND_YARDS);
-			// create a custom MarkerView (extend MarkerView) and specify the layout
-			// to use for it
-			MyMarkerView mv = new MyMarkerView(getActivity(), R.layout.chart_marker_view, useFeet);
-			mv.setChartView(mChart); // For bounds control
-			mChart.setMarker(mv); // Set the marker to the chart
-			mChart.setDrawMarkers(true);
-
-			XAxis xAxis = mChart.getXAxis();
-			xAxis.setDrawAxisLine(false);
-			xAxis.setDrawGridLines(false);
-			xAxis.setDrawAxisLine(false);
-			xAxis.setPosition(BOTTOM);
-
-			YAxis yAxis = mChart.getAxisLeft();
-			yAxis.enableGridDashedLine(10f, 5f, 0f);
-			yAxis.setGridColor(ActivityCompat.getColor(getActivity(), R.color.divider_color));
-			yAxis.setDrawAxisLine(false);
-
-			Legend legend = mChart.getLegend();
-			legend.setEnabled(false);
-
-			mChart.getAxisRight().setEnabled(false);
-
-			if (child.analysis != null && child.analysis.elevationData != null && child.analysis.isElevationSpecified() && (child.analysis.totalDistance > 0)) {
-
-				if (child.analysis.minElevation >= 0) {
-					yAxis.setAxisMinimum(0f);
-				}
-
-				final float convEle = useFeet  ? 3.28084f : 1.0f;
-				final float divX = child.analysis.totalDistance > 1000  ? 1000f : 1f;
-
-				ArrayList<Entry> values = new ArrayList<>();
-				List<Elevation> elevationData = child.analysis.elevationData;
-				float nextX = 0;
-				float nextY;
-				for (Elevation e : elevationData) {
-					if (e.distance > 0) {
-						nextX += (float) e.distance / divX;
-						nextY = (float) (e.elevation * convEle);
-						values.add(new Entry(nextX, nextY));
+					if (child.analysis.minElevation >= 0) {
+						//mChart.getAxisLeft().setAxisMinimum(0f);
 					}
+
+					final float convEle = useFeet ? 3.28084f : 1.0f;
+					final float divX = child.analysis.totalDistance > 1000 ? 1000f : 1f;
+
+					ArrayList<Entry> values = new ArrayList<>();
+					List<Elevation> elevationData = child.analysis.elevationData;
+					float nextX = 0;
+					float nextY;
+					for (Elevation e : elevationData) {
+						if (e.distance > 0) {
+							nextX += (float) e.distance / divX;
+							nextY = (float) (e.elevation * convEle);
+							values.add(new Entry(nextX, nextY));
+						}
+					}
+
+					LineDataSet dataSet = new LineDataSet(values, "");
+
+					dataSet.setColor(Color.BLACK);
+					dataSet.setDrawValues(false);
+					dataSet.setLineWidth(0f);
+					dataSet.setValueTextSize(9f);
+					dataSet.setDrawFilled(true);
+					dataSet.setFormLineWidth(1f);
+					dataSet.setFormSize(15.f);
+
+					dataSet.setDrawCircles(false);
+					dataSet.setDrawCircleHole(false);
+
+					dataSet.setHighlightEnabled(true);
+					dataSet.setDrawVerticalHighlightIndicator(true);
+					dataSet.setDrawHorizontalHighlightIndicator(false);
+					dataSet.setHighLightColor(Color.BLACK);
+
+					if (Utils.getSDKInt() >= 18) {
+						// fill drawable only supported on api level 18 and above
+						Drawable drawable = ContextCompat.getDrawable(getActivity(), R.drawable.line_chart_fade_orange);
+						dataSet.setFillDrawable(drawable);
+					} else {
+						dataSet.setFillColor(ContextCompat.getColor(getActivity(), R.color.osmand_orange));
+					}
+					ArrayList<ILineDataSet> dataSets = new ArrayList<ILineDataSet>();
+					dataSets.add(dataSet); // add the datasets
+
+					// create a data object with the datasets
+					LineData data = new LineData(dataSets);
+
+					// set data
+					mChart.setData(data);
+
+					mChart.setVisibility(View.VISIBLE);
+				} else {
+					mChart.setVisibility(View.GONE);
 				}
-
-				LineDataSet dataSet = new LineDataSet(values, "");
-
-				dataSet.setColor(Color.BLACK);
-				dataSet.setDrawValues(false);
-				//set1.setCircleColor(Color.BLACK);
-				dataSet.setLineWidth(0f);
-				dataSet.setValueTextSize(9f);
-				dataSet.setDrawFilled(true);
-				dataSet.setFormLineWidth(1f);
-				dataSet.setFormSize(15.f);
-
-				dataSet.setDrawCircles(false);
-				dataSet.setDrawCircleHole(false);
-
-				dataSet.setHighlightEnabled(true); // allow highlighting for DataSet
-				// set this to false to disable the drawing of highlight indicator (lines)
-				dataSet.setDrawVerticalHighlightIndicator(true);
-				dataSet.setDrawHorizontalHighlightIndicator(false);
-				dataSet.setHighLightColor(Color.BLACK); // color for highlight indicator
-
-				if (Utils.getSDKInt() >= 18) {
-					// fill drawable only supported on api level 18 and above
-					Drawable drawable = ContextCompat.getDrawable(getActivity(), R.drawable.line_chart_fade_orange);
-					dataSet.setFillDrawable(drawable);
-				}
-				else {
-					dataSet.setFillColor(ContextCompat.getColor(getActivity(), R.color.osmand_orange));
-				}
-				ArrayList<ILineDataSet> dataSets = new ArrayList<ILineDataSet>();
-				dataSets.add(dataSet); // add the datasets
-
-				// create a data object with the datasets
-				LineData data = new LineData(dataSets);
-
-				// set data
-				mChart.setData(data);
-
-				mChart.setVisibility(View.VISIBLE);
-			} else {
-				mChart.setVisibility(View.GONE);
 			}
-			/*
-			ElevationView elevationImg = (ElevationView) row.findViewById(R.id.elevation);
-			if (child.analysis != null && child.analysis.elevationData != null && child.analysis.isElevationSpecified() && (child.analysis.totalDistance > 0)) {
-				elevationImg.setElevationData(child.analysis.elevationData);
-				elevationImg.setMaxElevation(child.analysis.maxElevation);
-				elevationImg.setMinElevation(child.analysis.minElevation);
-				elevationImg.setTotalDistance(child.analysis.totalDistance); //Use raw data for graph, not channel detection noise filter (facilitates visual double check)
-				elevationImg.setVisibility(View.VISIBLE);
-			} else {
-				elevationImg.setVisibility(View.GONE);
-			}
-			*/
+
 			return row;
 		}
 
