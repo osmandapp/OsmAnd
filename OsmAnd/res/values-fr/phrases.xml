@@ -571,7 +571,7 @@
 	<string name="poi_club_automobile">Club automobile</string>
 	<string name="poi_club_history">Association du patrimoine</string>
 	<string name="poi_harbour">Port</string>
-	<string name="poi_floating_dock">Quai flottant</string>
+	<string name="poi_floating_dock">Dock flottant</string>
 	<string name="poi_military_range">Terrain militaire</string>
 	<string name="poi_rune_stone">Pierre runique</string>
 	<string name="poi_city_gate">Porte de ville</string>
@@ -580,7 +580,7 @@
 	<string name="poi_craft_blacksmith">Forgeron</string>
 	<string name="poi_craft_sweep">Ramoneur</string>
 	<string name="poi_craft_tinsmith">Ferronnier</string>
-	<string name="poi_dock">Quai</string>
+	<string name="poi_dock">Cale</string>
 	<string name="poi_mortuary">Funérarium</string>
 	<string name="poi_pile">Tourelle</string>
 	<string name="poi_anchor_berth">Zone de mouillage</string>
@@ -741,7 +741,7 @@
 	<string name="poi_fuel_1_50">Carburant 1:50</string>
 	<string name="poi_fuel_svo">Huile Végétale Brute (HVB)</string>
 	<string name="poi_junction">Carrefour</string>
-	<string name="poi_forest">Sylviculture</string>
+	<string name="poi_forest">Forêt</string>
 	<string name="poi_landuse_railway">Zone ferroviaire</string>
 
 	<string name="poi_village_green">Village green (GB)</string>
@@ -861,7 +861,7 @@
 
 	<string name="poi_breakwater">Brise-lames</string>
 	<string name="poi_power_cable_distribution_cabinet">Armoire de distribution électrique</string>
-	<string name="poi_basin">Bassin</string>
+	<string name="poi_basin">Bassin de rétention d\'eau</string>
 	<string name="poi_conservation">Zone protégée</string>
 
 	<string name="poi_crane">Grue</string>
@@ -1150,7 +1150,7 @@
 	<string name="poi_pump_yes">Pompe : Oui</string>
 
 	<string name="poi_pump_powered">Pompe automatique</string>
-	<string name="poi_water_point">Point d\'eau</string>
+	<string name="poi_water_point">Point d\'eau (pour caravane, camping car)</string>
 
 	<string name="poi_cuisine">Cuisine</string>
 
@@ -1837,7 +1837,7 @@
 	<string name="poi_recycling_styrofoam">Mousse de polystyrène</string>
 	<string name="poi_recycling_plasterboard">Plaque de plâtre</string>
 	<string name="poi_brownfield">Friche industrielle</string>
-	<string name="poi_greenfield">Espace vert</string>
+	<string name="poi_greenfield">Zone d\'aménagement différé</string>
 	<string name="poi_bunker_silo">Silo couloir</string>
 	<string name="poi_paediatrics">Pédiatrie</string>
 
@@ -1923,7 +1923,7 @@
 	<string name="poi_traffic_signals_sound_yes">Oui</string>
 	<string name="poi_traffic_signals_sound_no">Non</string>
 	<string name="poi_grassland">Prairie</string>
-	<string name="poi_farmland">Terres agricoles</string>
+	<string name="poi_farmland">Zone agricole</string>
 	<string name="poi_payment_cryptocurrencies_no">Cryptomonnaies non acceptées</string>
 	<string name="poi_payment_others_yes">Autres modes de paiement acceptés</string>
 	<string name="poi_payment_others_no">Autres modes de paiement non acceptés</string>
@@ -2260,7 +2260,7 @@
 
 	<string name="poi_water_characteristic_mud">Caractéristique de l\'eau : boueux</string>
 	<string name="poi_scrub">Broussailles</string>
-	<string name="poi_logging">Terres d\'exploitation forestière</string>
+	<string name="poi_logging">Coupe de bois</string>
 	<string name="poi_passing_place">Zone de croisement</string>
 	<string name="poi_rtsa_scale">Echelle RTSA</string>
 
