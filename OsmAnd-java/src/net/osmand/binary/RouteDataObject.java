@@ -77,13 +77,13 @@ public class RouteDataObject {
 		heightDistanceArray = new float[2*getPointsLength()]; 
 		double plon = 0;
 		double plat = 0;
-		int prevHeight = startHeight;
+		float prevHeight = startHeight;
 		for(int k = 0; k < getPointsLength(); k++) {
 			double lon = MapUtils.get31LongitudeX(getPoint31XTile(k));
 			double lat = MapUtils.get31LatitudeY(getPoint31YTile(k));
 			if(k > 0) {
 				double dd = MapUtils.getDistance(plat, plon, lat, lon);
-				int height = HEIGHT_UNDEFINED;
+				float height = HEIGHT_UNDEFINED;
 				if(k == getPointsLength() - 1) {
 					height = endHeight;
 				} else {
@@ -92,10 +92,10 @@ public class RouteDataObject {
 						for (int id : tps) {
 							RouteTypeRule rt = region.quickGetEncodingRule(id);
 							if (rt.getTag().equals("osmand_ele_asc")) {
-								height = (int) (prevHeight + Float.parseFloat(rt.getValue()));
+								height = (prevHeight + Float.parseFloat(rt.getValue()));
 								break;
 							} else if (rt.getTag().equals("osmand_ele_desc")) {
-								height = (int) (prevHeight - Float.parseFloat(rt.getValue()));
+								height = (prevHeight - Float.parseFloat(rt.getValue()));
 								break;
 							}
 						}
