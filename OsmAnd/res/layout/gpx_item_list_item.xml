@@ -61,10 +61,18 @@
             android:textColor="?android:textColorSecondary"
             android:textSize="@dimen/default_desc_text_size" />
 
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/chart"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_gravity="center_vertical"/>
+
+        <!--
         <net.osmand.plus.myplaces.ElevationView
             android:id="@+id/elevation"
             android:layout_width="fill_parent"
             android:layout_height="150dp"
             android:layout_gravity="center_vertical" />
+         -->
     </LinearLayout>
 </LinearLayout>
