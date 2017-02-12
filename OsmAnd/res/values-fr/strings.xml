@@ -844,7 +844,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
 
 
     <string name="show_cameras">Radars</string>
-    <string name="show_traffic_warnings">Ralentisseurs</string>
+    <string name="show_traffic_warnings">Informations de circulation</string>
     <string name="avoid_toll_roads">Éviter les routes à péage</string>
 
     <string name="screen_is_locked">Déverrouiller l\'écran en appuyant sur le cadenas</string>
