@@ -51,7 +51,7 @@
     <string name="favourites_remove_dialog_success">Priljubljena točka {0} je uspešno izbrisana.</string>
     <string name="poi_edit_title">Uredi točko POI</string>
     <string name="poi_create_title">Ustvari točko POI</string>
-    <string name="poi_error_poi_not_found">Točke ni mogoče najti, ali pa usluga ni samostojna točka</string>
+    <string name="poi_error_poi_not_found">Točke ni mogoče najti, ali pa ta združuje več vozlišč, kar trenutno še ni podprto.</string>
     <string name="poi_remove_confirm_template">Ali želite izbrisati {0} (vpišite opombo)?</string>
     <string name="poi_remove_title">Izbriši točko POI</string>
     <string name="shared_string_delete">Izbriši</string>
