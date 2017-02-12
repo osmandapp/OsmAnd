@@ -818,7 +818,7 @@
 	<string name="poi_wiki_lang_sw">Wiki swahili</string>
 	<string name="poi_wiki_lang_te">Wiki télougou</string>
 	<string name="poi_wiki_lang_th">Wiki thaïlandais</string>
-	<string name="poi_camera">Magasin d\'appareils photo et lentilles</string>
+	<string name="poi_camera">Magasin d\'appareils photo et d\'objectifs</string>
 	<string name="poi_religious">Lieu de culte</string>
 	<string name="poi_barrier_entrance">Passage ouvert dans un mur ou une barrière</string>
 	<string name="poi_entrance_main">Entrée principale</string>
@@ -2407,7 +2407,7 @@
 
 	<string name="poi_ventilation_shaft">Bouche de ventilation</string>
 
-	<string name="poi_boat_storage">Stockage de bâteaux</string>
+	<string name="poi_boat_storage">Stockage de bateaux</string>
 
 	<string name="poi_mdf">Central téléphonique</string>
 	<string name="poi_plant_nursery">Pépinière</string>
