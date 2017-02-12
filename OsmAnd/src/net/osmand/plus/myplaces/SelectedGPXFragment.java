@@ -514,13 +514,14 @@ public class SelectedGPXFragment extends OsmAndListFragment {
 				description.setVisibility(View.GONE);
 			}
 
-			LineChart mChart = (LineChart) row.findViewById(R.id.chart);
+			final LineChart mChart = (LineChart) row.findViewById(R.id.chart);
 			//mChart.setHardwareAccelerationEnabled(true);
 			mChart.setTouchEnabled(true);
 			mChart.setDragEnabled(true);
 			mChart.setScaleEnabled(true);
 			mChart.setPinchZoom(true);
 			mChart.setScaleYEnabled(false);
+			mChart.setAutoScaleMinMaxEnabled(true);
 			mChart.setDrawBorders(false);
 			mChart.getDescription().setEnabled(false);
 			mChart.setMaxVisibleValueCount(10);
