@@ -488,6 +488,10 @@ public class SelectedGPXFragment extends OsmAndListFragment {
 				mChart.setDrawBorders(false);
 				mChart.getDescription().setEnabled(false);
 				mChart.setMaxVisibleValueCount(10);
+				mChart.setMinOffset(0f);
+
+				mChart.setExtraTopOffset(24f);
+				mChart.setExtraBottomOffset(16f);
 
 				// create a custom MarkerView (extend MarkerView) and specify the layout
 				// to use for it
@@ -506,6 +510,9 @@ public class SelectedGPXFragment extends OsmAndListFragment {
 				yAxis.enableGridDashedLine(10f, 5f, 0f);
 				yAxis.setGridColor(ActivityCompat.getColor(getActivity(), R.color.divider_color));
 				yAxis.setDrawAxisLine(false);
+				yAxis.setPosition(YAxis.YAxisLabelPosition.INSIDE_CHART);
+				yAxis.setXOffset(16f);
+				yAxis.setYOffset(-8f);
 
 				Legend legend = mChart.getLegend();
 				legend.setEnabled(false);

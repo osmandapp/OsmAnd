@@ -6,13 +6,13 @@
     android:background="?attr/expandable_list_item_background"
     android:minHeight="@dimen/list_item_height"
     android:orientation="vertical"
-    android:paddingLeft="@dimen/list_content_padding"
-    android:paddingTop="10dp"
-    android:paddingRight="@dimen/list_content_padding" >
+    android:paddingTop="10dp">
 
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/list_content_padding"
+        android:paddingRight="@dimen/list_content_padding">
 
         <FrameLayout
             android:layout_width="wrap_content"
@@ -34,7 +34,7 @@
                 android:maxLines="2"
                 android:textColor="?android:textColorPrimary"
                 android:textSize="@dimen/default_desc_text_size"
-                tools:text="@string/lorem_ipsum" />
+                tools:text="Additional" />
         </FrameLayout>
 
         <TextView
@@ -45,7 +45,7 @@
             android:layout_weight="1"
             android:textColor="?android:textColorPrimary"
             android:textSize="@dimen/default_list_text_size"
-            tools:text="@string/lorem_ipsum" />
+            tools:text="Name" />
     </LinearLayout>
 
     <LinearLayout
@@ -60,7 +60,9 @@
             android:gravity="center_vertical"
             android:layout_marginTop="5dp"
             android:textColor="?android:textColorSecondary"
-            android:textSize="@dimen/default_desc_text_size" />
+            android:textSize="@dimen/default_desc_text_size"
+            android:paddingLeft="@dimen/list_content_padding"
+            android:paddingRight="@dimen/list_content_padding"/>
 
         <com.github.mikephil.charting.charts.LineChart
             android:id="@+id/chart"
