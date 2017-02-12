@@ -512,7 +512,7 @@ public class SelectedGPXFragment extends OsmAndListFragment {
 				yAxis.setDrawAxisLine(false);
 				yAxis.setPosition(YAxis.YAxisLabelPosition.INSIDE_CHART);
 				yAxis.setXOffset(16f);
-				yAxis.setYOffset(-8f);
+				yAxis.setYOffset(-6f);
 
 				Legend legend = mChart.getLegend();
 				legend.setEnabled(false);
