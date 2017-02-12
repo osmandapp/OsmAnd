@@ -833,7 +833,7 @@
 	<string name="poi_kent_carriage_gap">Plot anti-franchissement</string>
 	<string name="poi_cheese">Fromager</string>
 	<string name="poi_chocolate">Chocolatier</string>
-	<string name="poi_coffee">Café</string>
+	<string name="poi_coffee">Magasin de cafés</string>
 	<string name="poi_candles">Magasin de bougies</string>
 	<string name="poi_fashion">Boutique de mode</string>
 	<string name="poi_music">Disquaire</string>
@@ -2391,7 +2391,7 @@
 
 	<string name="poi_cuisine_pasta">Pâtes</string>
 	<string name="poi_electrical">Magasin de matériel électrique</string>
-	<string name="poi_e_cigarette">Magasin de cigarettes élecctroniques</string>
+	<string name="poi_e_cigarette">Magasin de cigarettes électroniques</string>
 
 	<string name="poi_lighting">Magasin de luminaires</string>
 	<string name="poi_locksmith">Serrurier</string>
