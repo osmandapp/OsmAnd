@@ -5,14 +5,16 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Canvas;
-import android.graphics.Paint;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AlertDialog;
 import android.text.Html;
@@ -30,11 +32,24 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.components.MarkerView;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.highlight.Highlight;
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
+import com.github.mikephil.charting.utils.MPPointF;
+import com.github.mikephil.charting.utils.Utils;
+
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.FavouritesDbHelper;
-import net.osmand.plus.GPXUtilities;
+import net.osmand.plus.GPXUtilities.Elevation;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.GpxSelectionHelper;
@@ -46,6 +61,7 @@ import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.OsmandSettings.MetricsConstants;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TrackActivity;
@@ -62,6 +78,8 @@ import java.util.List;
 
 import gnu.trove.list.array.TIntArrayList;
 
+import static com.github.mikephil.charting.components.XAxis.XAxisPosition.BOTTOM;
+
 
 public class SelectedGPXFragment extends OsmAndListFragment {
 	public static final String ARG_TO_EXPAND_TRACK_INFO = "ARG_TO_EXPAND_TRACK_INFO";
@@ -71,7 +89,7 @@ public class SelectedGPXFragment extends OsmAndListFragment {
 	protected SelectedGPXAdapter adapter;
 	protected TrackActivity activity;
 	private boolean updateEnable;
-
+	private MetricsConstants mc;
 
 	@Override
 	public void onAttach(Activity activity) {
@@ -81,6 +99,7 @@ public class SelectedGPXFragment extends OsmAndListFragment {
 		final Collator collator = Collator.getInstance();
 		collator.setStrength(Collator.SECONDARY);
 		app = (OsmandApplication) activity.getApplication();
+		mc = app.getSettings().METRIC_SYSTEM.get();
 	}
 
 	public TrackActivity getMyActivity() {
@@ -452,9 +471,53 @@ public class SelectedGPXFragment extends OsmAndListFragment {
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			View row = convertView;
+			LineChart mChart = null;
+			final boolean useFeet = (mc == MetricsConstants.MILES_AND_FEET) || (mc == MetricsConstants.MILES_AND_YARDS);
 			if (row == null) {
 				LayoutInflater inflater = getMyActivity().getLayoutInflater();
 				row = inflater.inflate(R.layout.gpx_item_list_item, parent, false);
+
+				mChart = (LineChart) row.findViewById(R.id.chart);
+				//mChart.setHardwareAccelerationEnabled(true);
+				mChart.setTouchEnabled(true);
+				mChart.setDragEnabled(true);
+				mChart.setScaleEnabled(true);
+				mChart.setPinchZoom(true);
+				mChart.setScaleYEnabled(false);
+				mChart.setAutoScaleMinMaxEnabled(true);
+				mChart.setDrawBorders(false);
+				mChart.getDescription().setEnabled(false);
+				mChart.setMaxVisibleValueCount(10);
+				mChart.setMinOffset(0f);
+
+				mChart.setExtraTopOffset(24f);
+				mChart.setExtraBottomOffset(16f);
+
+				// create a custom MarkerView (extend MarkerView) and specify the layout
+				// to use for it
+				MyMarkerView mv = new MyMarkerView(getActivity(), R.layout.chart_marker_view, useFeet);
+				mv.setChartView(mChart); // For bounds control
+				mChart.setMarker(mv); // Set the marker to the chart
+				mChart.setDrawMarkers(true);
+
+				XAxis xAxis = mChart.getXAxis();
+				xAxis.setDrawAxisLine(false);
+				xAxis.setDrawGridLines(false);
+				xAxis.setDrawAxisLine(false);
+				xAxis.setPosition(BOTTOM);
+
+				YAxis yAxis = mChart.getAxisLeft();
+				yAxis.enableGridDashedLine(10f, 5f, 0f);
+				yAxis.setGridColor(ActivityCompat.getColor(getActivity(), R.color.divider_color));
+				yAxis.setDrawAxisLine(false);
+				yAxis.setPosition(YAxis.YAxisLabelPosition.INSIDE_CHART);
+				yAxis.setXOffset(16f);
+				yAxis.setYOffset(-6f);
+
+				Legend legend = mChart.getLegend();
+				legend.setEnabled(false);
+
+				mChart.getAxisRight().setEnabled(false);
 			}
 			GpxDisplayItem child = getItem(position);
 			TextView label = (TextView) row.findViewById(R.id.name);
@@ -495,15 +558,66 @@ public class SelectedGPXFragment extends OsmAndListFragment {
 				description.setVisibility(View.GONE);
 			}
 
-			ElevationView elevationImg = (ElevationView) row.findViewById(R.id.elevation);
-			if (child.analysis != null && child.analysis.elevationData != null && child.analysis.isElevationSpecified() && (child.analysis.totalDistance > 0)) {
-				elevationImg.setElevationData(child.analysis.elevationData);
-				elevationImg.setMaxElevation(child.analysis.maxElevation);
-				elevationImg.setMinElevation(child.analysis.minElevation);
-				elevationImg.setTotalDistance(child.analysis.totalDistance); //Use raw data for graph, not channel detection noise filter (facilitates visual double check)
-				elevationImg.setVisibility(View.VISIBLE);
-			} else {
-				elevationImg.setVisibility(View.GONE);
+			if (mChart != null) {
+				if (child.analysis != null && child.analysis.elevationData != null && child.analysis.isElevationSpecified() && (child.analysis.totalDistance > 0)) {
+
+					if (child.analysis.minElevation >= 0) {
+						//mChart.getAxisLeft().setAxisMinimum(0f);
+					}
+
+					final float convEle = useFeet ? 3.28084f : 1.0f;
+					final float divX = child.analysis.totalDistance > 1000 ? 1000f : 1f;
+
+					ArrayList<Entry> values = new ArrayList<>();
+					List<Elevation> elevationData = child.analysis.elevationData;
+					float nextX = 0;
+					float nextY;
+					for (Elevation e : elevationData) {
+						if (e.distance > 0) {
+							nextX += (float) e.distance / divX;
+							nextY = (float) (e.elevation * convEle);
+							values.add(new Entry(nextX, nextY));
+						}
+					}
+
+					LineDataSet dataSet = new LineDataSet(values, "");
+
+					dataSet.setColor(Color.BLACK);
+					dataSet.setDrawValues(false);
+					dataSet.setLineWidth(0f);
+					dataSet.setValueTextSize(9f);
+					dataSet.setDrawFilled(true);
+					dataSet.setFormLineWidth(1f);
+					dataSet.setFormSize(15.f);
+
+					dataSet.setDrawCircles(false);
+					dataSet.setDrawCircleHole(false);
+
+					dataSet.setHighlightEnabled(true);
+					dataSet.setDrawVerticalHighlightIndicator(true);
+					dataSet.setDrawHorizontalHighlightIndicator(false);
+					dataSet.setHighLightColor(Color.BLACK);
+
+					if (Utils.getSDKInt() >= 18) {
+						// fill drawable only supported on api level 18 and above
+						Drawable drawable = ContextCompat.getDrawable(getActivity(), R.drawable.line_chart_fade_orange);
+						dataSet.setFillDrawable(drawable);
+					} else {
+						dataSet.setFillColor(ContextCompat.getColor(getActivity(), R.color.osmand_orange));
+					}
+					ArrayList<ILineDataSet> dataSets = new ArrayList<ILineDataSet>();
+					dataSets.add(dataSet); // add the datasets
+
+					// create a data object with the datasets
+					LineData data = new LineData(dataSets);
+
+					// set data
+					mChart.setData(data);
+
+					mChart.setVisibility(View.VISIBLE);
+				} else {
+					mChart.setVisibility(View.GONE);
+				}
 			}
 
 			return row;
@@ -560,6 +674,43 @@ public class SelectedGPXFragment extends OsmAndListFragment {
 //			adapter.notifyDataSetInvalidated();
 //		}
 */
+	}
+
+	public static class MyMarkerView extends MarkerView {
+
+		private TextView tvContent;
+		private String altSuffix;
+
+		public MyMarkerView(Context context, int layoutResource, boolean useFeet) {
+			super(context, layoutResource);
+
+			tvContent = (TextView) findViewById(R.id.tvContent);
+			if (!useFeet) {
+				altSuffix = getContext().getString(R.string.m);
+			} else {
+				altSuffix = getContext().getString(R.string.foot);
+			}
+		}
+
+		// callbacks everytime the MarkerView is redrawn, can be used to update the
+		// content (user-interface)
+		@Override
+		public void refreshContent(Entry e, Highlight highlight) {
+			tvContent.setText(Integer.toString((int)e.getY()) + " " + altSuffix);
+			super.refreshContent(e, highlight);
+		}
+
+		@Override
+		public MPPointF getOffset() {
+			return new MPPointF(-(getWidth() / 2), 0);
+		}
+
+		@Override
+		public MPPointF getOffsetForDrawingAtPoint(float posX, float posY) {
+			MPPointF offset = getOffset();
+			offset.y = -posY;
+			return offset;
+		}
 	}
 
 	public static class SplitTrackAsyncTask extends AsyncTask<Void, Void, Void> {

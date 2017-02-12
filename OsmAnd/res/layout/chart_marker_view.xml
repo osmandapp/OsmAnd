@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:background="@drawable/chart_marker_background" >
+
+    <TextView
+        android:id="@+id/tvContent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="2dp"
+        android:layout_marginLeft="6dp"
+        android:layout_marginRight="6dp"
+        android:text="100 m"
+        android:textSize="@dimen/default_desc_text_size"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        android:ellipsize="end"
+        android:singleLine="true"/>
+
+</RelativeLayout>

@@ -352,6 +352,9 @@ repositories {
 	}
 	mavenCentral()
 	jcenter()
+	maven {
+		url "https://jitpack.io"
+	}
 }
 
 def analytics = (System.getenv("APP_FEATURES") && System.getenv("APP_FEATURES").contains("+play_market") && 
@@ -379,6 +382,7 @@ dependencies {
 	compile ("com.getkeepsafe.taptargetview:taptargetview:1.6.1"){
 		exclude group: 'com.android.support'
 	}
+	compile 'com.github.PhilJay:MPAndroidChart:v3.0.1'
 }
 if(analytics) {
 	println "Apply GMS plugin"
