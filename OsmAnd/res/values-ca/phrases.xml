@@ -2740,4 +2740,19 @@
 	<string name="poi_fire_hydrant_position_lane">Localització de l\'hidrant: carril</string>
 	<string name="poi_fire_hydrant_position_parking_lot">Localització de l\'hidrant: aparcament</string>
 	<string name="poi_fire_hydrant_position_street">Localització de l\'hidrant: carrer</string>
+	<string name="poi_cafeteria">Cafeteria</string>
+
+<string name="poi_aerialway_length">Llargària</string>
+
+	<string name="poi_health_specialty_general_yes">Metge de capçalera</string>
+	<string name="poi_health_specialty_internal_medicine_yes">Medicina interna</string>
+	<string name="poi_health_specialty_otolaryngology_yes">Otorinolaringologia</string>
+	<string name="poi_health_specialty_anaesthetics_yes">Anestesiologia</string>
+	<string name="poi_health_specialty_neuropsychiatry_yes">Neuropsiquiatria</string>
+	<string name="poi_health_specialty_endocrinology_yes">Endocrinologia</string>
+	<string name="poi_health_specialty_nuclear_medicine_yes">Medicina nuclear</string>
+	<string name="poi_health_specialty_obstetrics_postnatal_yes">Obstetrícia (postnatal)</string>
+	<string name="poi_health_specialty_obstetrics_postnatal_no">Especialitat mèdica: sense obstetrícia (postnatal)</string>
+	<string name="poi_health_specialty_obstetrics_antenatal_yes">Obstetrícia (prenatal)</string>
+	<string name="poi_health_specialty_obstetrics_antenatal_no">Especialitat mèdica: sense obstetrícia (prenatal)</string>
 	</resources>
