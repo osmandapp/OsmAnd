@@ -101,7 +101,7 @@
 	<string name="poi_quarry">Kőfejtő</string>
 	<string name="poi_vineyard">Szőlő</string>
 	<string name="poi_orchard">Gyümölcsös</string>
-	<string name="poi_salt_pond">Sólepárló</string>
+	<string name="poi_salt_pond">Sólepárló medence</string>
 	<string name="poi_school">Iskola</string>
 	<string name="poi_kindergarten">Óvoda</string>
 	<string name="poi_university">Egyetem</string>
@@ -113,7 +113,7 @@
 	<string name="poi_town">Város</string>
 	<string name="poi_village">Falu</string>
 	<string name="poi_hamlet">Falucska</string>
-	<string name="poi_locality">Település</string>
+	<string name="poi_locality">Dűlő, lakatlan hely</string>
 
 	<string name="poi_pharmacy">Gyógyszertár</string>
 	<string name="poi_hospital">Kórház</string>
@@ -384,18 +384,18 @@
 	<string name="poi_allotments">Kiskertek</string>
 	<string name="poi_forest">Kezelt erdő</string>
 	<string name="poi_farmyard">Tanyaudvar</string>
-	<string name="poi_meadow">Legelő</string>
+	<string name="poi_meadow">Rét</string>
 	<string name="poi_landuse_railway">Vasúti terület</string>
 
 	<string name="poi_canal">Csatorna</string>
-	<string name="poi_surveillance">Térfigyelő</string>
+	<string name="poi_surveillance">Térfigyelő kamera</string>
 	<string name="poi_observatory">Obszervatórium</string>
 	<string name="poi_astronomical_observatory">Csillagvizsgáló</string>
 	<string name="poi_tower">Torony</string>
 	<string name="poi_mast">Pózna</string>
 	<string name="poi_radar">Radar</string>
 	<string name="poi_works">Üzem</string>
-	<string name="poi_mineshaft">Bánya akna</string>
+	<string name="poi_mineshaft">Bányaakna</string>
 	<string name="poi_adit">Bánya tárna</string>
 	<string name="poi_petroleum_well">Olajkút</string>
 	<string name="poi_survey_point">Földmérési alappont</string>
@@ -406,13 +406,13 @@
 
 	<string name="poi_driving_school">Autósiskola</string>
 	<string name="poi_prosecutor">Ügyész</string>
-	<string name="poi_pension_fund">Nyugdíjpénztár</string>
+	<string name="poi_pension_fund">Nyugdíjalap</string>
 	<string name="poi_office_administrative">Közigazgatási hivatal</string>
-	<string name="poi_customs">Vámhatóság</string>
+	<string name="poi_customs">Vámhivatal</string>
 	<string name="poi_isolated_dwelling">Magányos lakóhely</string>
-	<string name="poi_suburb">Városrész</string>
-	<string name="poi_quarter">Negyed</string>
-	<string name="poi_neighbourhood">Lakótelep</string>
+	<string name="poi_suburb">Jelentős városrész</string>
+	<string name="poi_quarter">Városnegyed</string>
+	<string name="poi_neighbourhood">Környék</string>
 	<string name="poi_place_allotments">Kiskertes településrész</string>
 	<string name="poi_place_farm">Tanya</string>
 	<string name="poi_residential">Lakóterület</string>
@@ -760,15 +760,15 @@
 	<string name="poi_basin">Vízgyűjtő</string>
 	<string name="poi_conservation">Védett terület</string>
 
-	<string name="poi_monitoring_station">Megfigyelő állomás</string>
+	<string name="poi_monitoring_station">Megfigyelőállomás</string>
 	<string name="poi_crane">Daru</string>
 	<string name="poi_construction">Építkezés</string>
-	<string name="poi_brownfield">Bontási terület</string>
-	<string name="poi_greenfield">Zöldmezős beruházás</string>
-	<string name="poi_cricket_nets">Krikett háló</string>
+	<string name="poi_brownfield">Barnamezős terület</string>
+	<string name="poi_greenfield">Zöldmezős terület</string>
+	<string name="poi_cricket_nets">Krikettháló</string>
 	<string name="poi_college">Főiskola</string>
 	<string name="poi_social_facility">Szociális létesítmény</string>
-	<string name="poi_government">Közigazgatás</string>
+	<string name="poi_government">Kormányzat</string>
 	<string name="poi_migration">Bevándorlás</string>
 	<string name="poi_tax_inspection">Adóellenőrzés</string>
 	<string name="poi_country">Ország</string>
@@ -1373,7 +1373,7 @@
 	<string name="poi_wetland_reedbed">Nádas</string>
 	<string name="poi_wetland_tidalflat">Árapálysíkság</string>
 	<string name="poi_wetland_saltmarsh">Sós mocsár</string>
-	<string name="poi_wetland_saltern">Sótelep</string>
+	<string name="poi_wetland_saltern">Sólepárló medence</string>
 	<string name="poi_wetland_mangrove">Mangrove mocsár</string>
 	<string name="poi_wetland_fen">Síkláp</string>
 	<string name="poi_wetland_mud">Sár</string>
@@ -1443,7 +1443,7 @@
 	<string name="poi_beach_shingle">Kavicsos</string>
 	<string name="poi_beach_rocky">Sziklás</string>
 
-	<string name="poi_training">Edzőhely</string>
+	<string name="poi_training">Képző intézmény</string>
 	<string name="poi_register_office">Anyakönyvi hivatal</string>
 	<string name="poi_bailiff">Végrehajtó</string>
 	<string name="poi_cabin">Hütte</string>
@@ -2127,7 +2127,7 @@
 	<string name="poi_memorial_fassade_decoration">Homlokzatdíszítés</string>
 
 	<string name="poi_route_share_taxi_ref">Megosztott taxi</string>
-	<string name="poi_surveillance_yes">Felügyelt</string>
+	<string name="poi_surveillance_yes">Térfigyelő kamera</string>
 	<string name="poi_shop_additional_yes">Üzlettel</string>
 
 	<string name="poi_service_bicycle_retail_yes">Kiskereskedés</string>
@@ -2257,9 +2257,9 @@
 
 	<string name="poi_fuel_autogas">Autógáz</string>
 	<string name="poi_fuel_wood">Üzemanyag: fa</string>
-	<string name="poi_surveillance_indoor">Felügyelet: beltéri</string>
-	<string name="poi_surveillance_outdoor">Felügyelet: kültéri</string>
-	<string name="poi_surveillance_public">Felügyelet: nyilvános</string>
+	<string name="poi_surveillance_indoor">Térfigyelés: beltéri</string>
+	<string name="poi_surveillance_outdoor">Térfigyelés: kültéri</string>
+	<string name="poi_surveillance_public">Térfigyelés: nyilvános</string>
 
 	<string name="poi_clothes_women">Női</string>
 	<string name="poi_clothes_underwear">Fehérnemű</string>
@@ -3133,4 +3133,6 @@
 	<string name="poi_bridge_ref">Híd hivatkozási száma</string>
 	<string name="poi_cafeteria">Menza</string>
 
-</resources>
+<string name="poi_forestry_compartment">Útirányjelző tábla: erdőtag (RU)</string>
+	<string name="poi_forestry_allotment">Útirányjelző tábla: erdőrészlet (RU)</string>
+	</resources>
