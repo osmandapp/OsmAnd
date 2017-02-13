@@ -2755,4 +2755,7 @@
 	<string name="poi_health_specialty_obstetrics_postnatal_no">Especialitat mèdica: sense obstetrícia (postnatal)</string>
 	<string name="poi_health_specialty_obstetrics_antenatal_yes">Obstetrícia (prenatal)</string>
 	<string name="poi_health_specialty_obstetrics_antenatal_no">Especialitat mèdica: sense obstetrícia (prenatal)</string>
+	<string name="poi_material_wood">Material: fusta</string>
+	<string name="poi_material_metal">Material: metall</string>
+	<string name="poi_material_reinforced_concrete">Material: formigó armat</string>
 	</resources>
