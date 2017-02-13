@@ -1210,7 +1210,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 				//fixBackgroundRepeat(row);
 			}
 			boolean light = getMyApplication().getSettings().isLightContent();
-			adjustIndicator(groupPosition, isExpanded, row, light);
+			adjustIndicator(app, groupPosition, isExpanded, row, light);
 			TextView label = (TextView) row.findViewById(R.id.category_name);
 			final OsMoGroup model = getGroup(groupPosition);
 			if (selectedObject == model) {

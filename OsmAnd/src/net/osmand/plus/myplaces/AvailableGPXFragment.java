@@ -848,7 +848,9 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 				v = inflater.inflate(net.osmand.plus.R.layout.expandable_list_item_category, parent, false);
 			}
 			StringBuilder t = new StringBuilder(group);
-			adjustIndicator(groupPosition, isExpanded, v, getMyApplication().getSettings().isLightContent());
+			boolean light = app.getSettings().isLightContent();
+			setCategoryIcon(app, 0, groupPosition, isExpanded, v, light);
+			adjustIndicator(app, groupPosition, isExpanded, v, light);
 			TextView nameView = ((TextView) v.findViewById(R.id.category_name));
 			List<GpxInfo> list = isSelectedGroup(groupPosition) ? selected : data.get(group);
 			int size = 0;
@@ -866,7 +868,6 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 				t.append(" [").append(size).append(" MB]");
 			}
 			nameView.setText(t.toString());
-			nameView.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
 
 			return v;
 		}
