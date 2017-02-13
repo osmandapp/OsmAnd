@@ -340,6 +340,11 @@ public class RouteResultPreparation {
 				serializer = PlatformUtil.newSerializer();
 				try {
 					serializer.setOutput(new FileWriter(PRINT_TO_GPX_FILE));
+					serializer.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output", true);
+					// indentation as 3 spaces
+//					serializer.setProperty("http://xmlpull.org/v1/doc/properties.html#serializer-indentation", "   ");
+//					// also set the line separator
+//					serializer.setProperty("http://xmlpull.org/v1/doc/properties.html#serializer-line-separator", "\n");
 					serializer.startDocument("UTF-8", true);
 					serializer.startTag("", "gpx");
 					serializer.attribute("", "version", "1.1");
@@ -389,24 +394,25 @@ public class RouteResultPreparation {
 						(res.getObject().getId() >> (BinaryInspector.SHIFT_ID )) + "", res.getObject().getId() + "", 
 						res.getStartPointIndex() + "", res.getEndPointIndex() + "", additional.toString()));
 				int inc = res.getStartPointIndex() < res.getEndPointIndex() ? 1 : -1;
-				int indexnext = res.getStartPointIndex() + inc;
-				int k = 0;
-				
-				for (int index = res.getStartPointIndex() ;
-						indexnext != res.getEndPointIndex(); index = indexnext, indexnext += inc, k++) {
-					indexnext = index < res.getEndPointIndex() ? index +  1 : index - 1; 
+				int indexnext = res.getStartPointIndex();
+				for (int index = res.getStartPointIndex() ; index != res.getEndPointIndex(); ) {
+					index = indexnext;
+					indexnext += inc; 
 					if (serializer != null) {
 						try {
 							LatLon l = res.getPoint(index);
 							serializer.startTag("","trkpt");
 							serializer.attribute("", "lat",  l.getLatitude() + "");
 							serializer.attribute("", "lon",  l.getLongitude() + "");
-							float[] vls = res.getHeightValues();
-							if(k * 2 + 1 < vls.length) {
+							float[] vls = res.getObject().heightDistanceArray;
+							if(index * 2 + 1 < vls.length) {
 								serializer.startTag("","ele");
-								serializer.text(vls[2*k + 1] +"");
+								serializer.text(vls[2*index + 1] +"");
 								serializer.endTag("","ele");
-								lastHeight = vls[2*k + 1];
+								serializer.startTag("","desc");
+								serializer.text((res.getObject().getId() >> (BinaryInspector.SHIFT_ID )) + " " + index);
+								serializer.endTag("","desc");
+								lastHeight = vls[2*index + 1];
 							} else if(lastHeight > 0){
 								serializer.startTag("","ele");
 								serializer.text(lastHeight +"");
