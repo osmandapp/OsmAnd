@@ -1,27 +1,38 @@
 package net.osmand.plus.activities;
 
+import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ImageView;
 
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 
 public abstract class OsmandBaseExpandableListAdapter extends BaseExpandableListAdapter {
 
-	protected void adjustIndicator(int groupPosition, boolean isExpanded, View row, boolean light) {
+	protected void adjustIndicator(OsmandApplication app, int groupPosition, boolean isExpanded, View row, boolean light) {
 		ImageView indicator = (ImageView) row.findViewById(R.id.explist_indicator);
 		if (!isExpanded) {
-			if (getChildrenCount(groupPosition) == 0) {
-				indicator.setImageResource(light ? R.drawable.expandable_category_empty_light : R.drawable.expandable_category_empty_dark);
-				indicator.setContentDescription(row.getContext().getString(R.string.access_empty_list));
-			} else {
-				indicator.setImageResource(light ? R.drawable.expandable_category_unpushed_light : R.drawable.expandable_category_unpushed_dark);
-				indicator.setContentDescription(row.getContext().getString(R.string.access_collapsed_list));
-			}
+			indicator.setImageDrawable(app.getIconsCache().getIcon(R.drawable.ic_action_arrow_down, light));
+			indicator.setContentDescription(row.getContext().getString(R.string.access_collapsed_list));
 		} else {
-			indicator.setImageResource(light ? R.drawable.expandable_category_pushed_light : R.drawable.expandable_category_pushed_dark);
+			indicator.setImageDrawable(app.getIconsCache().getIcon(R.drawable.ic_action_arrow_up, light));
 			indicator.setContentDescription(row.getContext().getString(R.string.access_expanded_list));
+		}
+		indicator.setVisibility(getChildrenCount(groupPosition) > 0 ? View.VISIBLE : View.GONE);
+	}
+
+	protected void setCategoryIcon(OsmandApplication app, int resId, int groupPosition, boolean isExpanded, View row, boolean light) {
+		ImageView icon = (ImageView) row.findViewById(R.id.category_icon);
+		if (resId == 0) {
+			icon.setImageDrawable(app.getIconsCache().getIcon(R.drawable.ic_action_folder, light));
+		} else {
+			icon.setImageDrawable(app.getIconsCache().getIcon(resId, light));
 		}
 	}
 
+	protected void setCategoryIcon(OsmandApplication app, Drawable res, int groupPosition, boolean isExpanded, View row, boolean light) {
+		ImageView icon = (ImageView) row.findViewById(R.id.category_icon);
+		icon.setImageDrawable(res);
+	}
 }

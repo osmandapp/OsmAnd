@@ -16,7 +16,6 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.view.ActionMode;
 import android.support.v7.widget.SearchView;
 import android.text.Html;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -32,25 +31,24 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
-import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
-import net.osmand.plus.activities.ShowRouteInfoActivity.RouteInfoAdapter;
 import net.osmand.plus.base.FavoriteImageDrawable;
 import net.osmand.plus.base.OsmandExpandableListFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.plus.myplaces.FavoritesActivity;
-import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -712,7 +710,10 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 				row = inflater.inflate(R.layout.expandable_list_item_category, parent, false);
 				fixBackgroundRepeat(row);
 			}
-			adjustIndicator(groupPosition, isExpanded, row, getMyApplication().getSettings().isLightContent());
+			OsmandApplication app = getMyApplication();
+			boolean light = app.getSettings().isLightContent();
+			setCategoryIcon(app, 0, groupPosition, isExpanded, row, light);
+			adjustIndicator(app, groupPosition, isExpanded, row, light);
 			TextView label = (TextView) row.findViewById(R.id.category_name);
 			final FavoriteGroup model = getGroup(groupPosition);
 			label.setText(model.name.length() == 0 ? getString(R.string.shared_string_favorites) : model.name);
