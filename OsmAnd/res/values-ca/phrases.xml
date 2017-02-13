@@ -2206,7 +2206,7 @@
 	<string name="poi_disease_aids_yes">SIDA: sí</string>
 	<string name="poi_disease_aids_no">SIDA: no</string>
 
-	<string name="poi_fire_hydrant_position_underground">Situació de l\'hidrant: soterrat</string>
+	<string name="poi_fire_hydrant_position_underground">Localització de l\'hidrant: soterrat</string>
 	<string name="poi_street_cabinet_telecom">Tipus d\'armari: telecomunicacions</string>
 	<string name="poi_street_cabinet_power">Tipus d\'armari: electricitat</string>
 	<string name="poi_street_cabinet_cable_tv">Tipus d\'armari: tv per cable</string>
@@ -2720,4 +2720,24 @@
 
 	<string name="poi_historic_threshing_floor">Zona de batuda històrica</string>
 	<string name="poi_historic_gallows">Forca històrica</string>
+	<string name="poi_telescope_diameter">Diàmetre</string>
+	<string name="poi_telescope_spectrum">Espectre</string>
+	<string name="poi_telescope_usage_education">Ús: ensenyament</string>
+	<string name="poi_telescope_usage_espionage">Ús: espionatge</string>
+	<string name="poi_telescope_usage_research">Ús: recerca</string>
+
+	<string name="poi_observatory_type_espionage">Ús: espionatge</string>
+	<string name="poi_office_psychologist">Consulta de psicòleg</string>
+	<string name="poi_office_nursing_service">Servei d\'infermeria</string>
+	<string name="poi_office_midwife">Consulta de llevadora</string>
+
+	<string name="poi_fire_hydrant_diameter">Diàmetre de l\'hidrant</string>
+	<string name="poi_fire_hydrant_pressure">Pressió de l\'hidrant</string>
+	<string name="poi_fire_hydrant_count">Nombre d\'hidrants</string>
+	<string name="poi_fire_hydrant_flow_capacity">Cabal màxim de l\'hidrant</string>
+	<string name="poi_fire_hydrant_position_sidewalk">Localització de l\'hidrant: vorera</string>
+	<string name="poi_fire_hydrant_position_green">Localització de l\'hidrant: gespa</string>
+	<string name="poi_fire_hydrant_position_lane">Localització de l\'hidrant: carril</string>
+	<string name="poi_fire_hydrant_position_parking_lot">Localització de l\'hidrant: aparcament</string>
+	<string name="poi_fire_hydrant_position_street">Localització de l\'hidrant: carrer</string>
 	</resources>
