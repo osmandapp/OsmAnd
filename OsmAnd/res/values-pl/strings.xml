@@ -2849,6 +2849,6 @@ Reprezentuje obszar: %1$s x %2$s</string>
 	<string name="routing_attr_height_relief_smoothness_factor_name">Współczynnik gładkości rzeźby terenu</string>
     <string name="routing_attr_height_relief_smoothness_factor_description">Więcej równin lub więcej wzgórz</string>
     <string name="routing_attr_height_obstacles_name">Użyj danych wysokościowych</string>
-    <string name="routing_attr_height_obstacles_description">Używa danych wysokościowych dostarczanych przez</string>
+    <string name="routing_attr_height_obstacles_description">Używa danych wysokościowych dostarczanych przez SRTM, ASTER i EU-DEM</string>
 
     </resources>
