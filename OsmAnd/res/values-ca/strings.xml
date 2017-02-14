@@ -2652,4 +2652,9 @@ i encara més…
  "</string>
 	<string name="rendering_attr_depthContours_description">Mostra isòbates i fondàries puntuals</string>
     <string name="rendering_attr_depthContours_name">Isòbates</string>
-	</resources>
+	<string name="routing_attr_height_relief_smoothness_factor_name">Factor de suavitat de relleu</string>
+    <string name="routing_attr_height_relief_smoothness_factor_description">Més planes o més turons</string>
+    <string name="routing_attr_height_obstacles_name">Utilitza les cotes d\'elevació</string>
+    <string name="routing_attr_height_obstacles_description">Utilitza les cotes d\'elevació del terreny proporcionades per SRTM, ASTER i EU-DEM</string>
+
+    </resources>
