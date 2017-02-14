@@ -1,5 +1,10 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
+    <string name="routing_attr_height_relief_smoothness_factor_name">Степень пересечённости рельефа</string>
+    <string name="routing_attr_height_relief_smoothness_factor_description">Больше равнин или больше холмов</string>
+    <string name="routing_attr_height_obstacles_name">Использовать данные о высотах</string>
+    <string name="routing_attr_height_obstacles_description">Использовать данные о рельефе земной поверхности, предоставленные SRTM, ASTER и EU-DEM</string>
+
     <string name="quick_action_duplicates">Указанное имя для быстрого действия уже используется. Действие будет сохранено как %1$s чтобы избежать дублирования.</string>
     <string name="quick_action_duplicate">Обнаружен дубликат имени</string>
     <string name="quick_action_showhide_favorites_descr">Нажатие на кнопку действия приведёт к отображению/скрытию избранных точек с карты</string>
