@@ -2659,4 +2659,9 @@ Indikas lokon:  %1$s x %2$s"</string>
  "</string>
 	<string name="rendering_attr_depthContours_description">Montras punktojn kaj konturojn de profundo</string>
     <string name="rendering_attr_depthContours_name">Profundaj konturoj</string>
-	</resources>
+	<string name="routing_attr_height_relief_smoothness_factor_name">Glateca-faktoro de nivelombrumo</string>
+    <string name="routing_attr_height_relief_smoothness_factor_description">Pli da ebenejoj aŭ pli da montetoj</string>
+    <string name="routing_attr_height_obstacles_name">Uzi datumoj pri alto</string>
+    <string name="routing_attr_height_obstacles_description">Uzas datumoj pri alto liverataj de</string>
+
+    </resources>
