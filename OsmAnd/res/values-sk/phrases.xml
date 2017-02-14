@@ -1768,7 +1768,7 @@
 	<string name="poi_passenger_information_display_no">Zobrazovanie informácií pre cestujúcich: nie</string>
 
 	<string name="poi_voltage">Elektrické napätie</string>
-	<string name="poi_dispensing_yes">Lieky na predpis: áno</string>
+	<string name="poi_dispensing_yes">Áno</string>
 	<string name="poi_dispensing_no">Lieky na predpis: nie</string>
 
 	<string name="poi_aerodrome_type_international">Medzinárodné</string>
