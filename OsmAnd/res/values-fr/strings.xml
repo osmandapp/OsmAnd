@@ -2603,4 +2603,9 @@ représentant la zone : %1$s x %2$s</string>
  "</string>
 	<string name="rendering_attr_depthContours_description">Afficher les lignes de sonde</string>
     <string name="rendering_attr_depthContours_name">Lignes de sonde</string>
-	</resources>
+	<string name="routing_attr_height_obstacles_name">Utiliser les données d\'altitude</string>
+    <string name="routing_attr_height_obstacles_description">Utiliser les données d\'altitude fournies par SRTM, ASTER et EU-DEM</string>
+
+    <string name="routing_attr_height_relief_smoothness_factor_description">Plus de plaines ou plus de collines</string>
+    <string name="routing_attr_height_relief_smoothness_factor_name">Facteur de lissage du relief</string>
+    </resources>
