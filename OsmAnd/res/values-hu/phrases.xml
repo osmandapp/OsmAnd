@@ -130,15 +130,15 @@
 	<string name="poi_pitch">Sportpálya</string>
 	<string name="poi_raceway">Autóversenypálya</string>
 	<string name="poi_museum">Múzeum</string>
-	<string name="poi_attraction">Turistalátványosság</string>
+	<string name="poi_attraction">Turisztikai látványosság</string>
 	<string name="poi_memorial">Emlékmű</string>
 	<string name="poi_artwork">Műalkotás</string>
 	<string name="poi_castle">Vár</string>
 	<string name="poi_city_gate">Városkapu</string>
 	<string name="poi_fort">Erőd</string>
 	<string name="poi_fountain">Szökőkút</string>
-	<string name="poi_historic_ruins">Rom</string>
-	<string name="poi_monument">Nagy emlékmű</string>
+	<string name="poi_historic_ruins">Történelmi rom</string>
+	<string name="poi_monument">Kiemelkedő emlékmű</string>
 	<string name="poi_zoo">Állatkert</string>
 	<string name="poi_theme_park">Vidámpark</string>
 
@@ -196,8 +196,8 @@
 	<string name="poi_craft_brewery">Sörfőzde</string>
 	<string name="poi_craft_bookbinder">Könyvkötő</string>
 	<string name="poi_craft_carpenter">Asztalos</string>
-	<string name="poi_craft_clockmaker">Órás</string>
-	<string name="poi_craft_dressmaker">Ruhakészítő</string>
+	<string name="poi_craft_clockmaker">Órás (falióra)</string>
+	<string name="poi_craft_dressmaker">Nőiruha-készítő</string>
 	<string name="poi_craft_electrician">Villanyszerelő</string>
 	<string name="poi_craft_gardener">Kertész</string>
 	<string name="poi_craft_jeweller">Ékszerész</string>
@@ -219,7 +219,7 @@
 	<string name="poi_saddle">Nyereg</string>
 	<string name="poi_volcano">Vulkán</string>
 	<string name="poi_crater">Kráter</string>
-	<string name="poi_ridge">Gerinc</string>
+	<string name="poi_ridge">Hegygerinc</string>
 	<string name="poi_glacier">Gleccser</string>
 	<string name="poi_sinkhole">Víznyelő</string>
 	<string name="poi_waterfall">Vízesés</string>
@@ -273,7 +273,7 @@
 
 	<string name="poi_bag">Táskabolt</string>
 	<string name="poi_bathroom_furnishing">Fürdőszobabútor</string>
-	<string name="poi_bed">Ágymatrac és -felszerelés bolt</string>
+	<string name="poi_bed">Hálószobafelszerelés-bolt</string>
 	<string name="poi_boutique">Divatszaküzlet</string>
 	<string name="poi_camera">Fényképezőgép és objektív</string>
 	<string name="poi_carpet">Szőnyegbolt</string>
@@ -418,24 +418,24 @@
 	<string name="poi_residential">Lakóterület</string>
 
 	<string name="poi_first_aid">Elsősegély</string>
-	<string name="poi_nursing_home">Idősek otthona</string>
+	<string name="poi_nursing_home">Ápolóotthon</string>
 	<string name="poi_baby_hatch">Inkubátor</string>
 	<string name="poi_blood_bank">Vérbank</string>
 	<string name="poi_healthcare_centre">Egészségügyi központ</string>
 	<string name="poi_midwife">Szülésznő</string>
 	<string name="poi_company">Vállalat</string>
-	<string name="poi_insurance">Biztosítás</string>
-	<string name="poi_estate_agent">Ingatlanügynök</string>
+	<string name="poi_insurance">Biztosító</string>
+	<string name="poi_estate_agent">Ingatlaniroda</string>
 	<string name="poi_lawyer">Ügyvéd</string>
-	<string name="poi_ngo">Civilszervezet</string>
+	<string name="poi_ngo">Civil szervezet</string>
 	<string name="poi_employment_agency">Munkaügyi hivatal</string>
 	<string name="poi_running_track">Futópálya</string>
 	<string name="poi_9pin">Teke</string>
 	<string name="poi_10pin">Bowling</string>
 	<string name="poi_archery">Íjászat</string>
 	<string name="poi_athletics">Atlétika</string>
-	<string name="poi_american_football">Amerikai foci</string>
-	<string name="poi_australian_football">Ausztrál foci</string>
+	<string name="poi_american_football">Amerikai futball</string>
+	<string name="poi_australian_football">Ausztrál futball</string>
 	<string name="poi_base">Bázisugrás</string>
 	<string name="poi_baseball">Baseball</string>
 	<string name="poi_basketball">Kosárlabda</string>
@@ -446,7 +446,7 @@
 	<string name="poi_equestrian">Lovaglás</string>
 	<string name="poi_golf">Golf</string>
 	<string name="poi_handball">Kézilabda</string>
-	<string name="poi_hockey">Hoki</string>
+	<string name="poi_hockey">Valamilyen hoki</string>
 	<string name="poi_horse_racing">Lóverseny</string>
 	<string name="poi_ice_skating">Korcsolya</string>
 	<string name="poi_orienteering">Tájfutás</string>
@@ -483,25 +483,25 @@
 	<string name="poi_internet_access_terminal">Internetcsatlakozás: munkaállomás</string>
 	<string name="poi_internet_access_wired">Internetcsatlakozás: kábel</string>
 	<string name="poi_internet_access_public">Internetcsatlakozás: nyilvános</string>
-	<string name="poi_internet_access_service">Internetcsatlakozás: szolgáltatás</string>
+	<string name="poi_internet_access_service">Internetcsatlakozás: segítenek</string>
 
 	<string name="poi_historic_monastery">Régi kolostor</string>
 	<string name="poi_religious">Vallási terület</string>
 	<string name="poi_wayside_shrine">Útmenti kegyhely</string>
 	<string name="poi_travel_agent">Utazási iroda</string>
-	<string name="poi_picnic_table">Piknikező asztal</string>
+	<string name="poi_picnic_table">Piknikezőasztal</string>
 	<string name="poi_tomb">Sír</string>
 	<string name="poi_wine_cellar">Borospince</string>
 	<string name="poi_craft_winery">Borászat</string>
 
-	<string name="poi_club_art">Művészklub</string>
+	<string name="poi_club_art">Művészeti klub</string>
 	<string name="poi_club_sport">Sportklub</string>
-	<string name="poi_club_astronomy">Csillagászklub</string>
+	<string name="poi_club_astronomy">Csillagászati klub</string>
 	<string name="poi_club_computer">Számítógépes klub</string>
 	<string name="poi_club_board_games">Társasjátékklub</string>
 	<string name="poi_club_motorcycle">Motorosklub</string>
 	<string name="poi_club_game">Játékklub</string>
-	<string name="poi_club_automobile">Autóklub</string>
+	<string name="poi_club_automobile">Autósklub</string>
 	<string name="poi_club_chess">Sakk-klub</string>
 	<string name="poi_club_cinema">Filmklub</string>
 	<string name="poi_club_fan">Rajongói klub</string>
@@ -526,7 +526,7 @@
 	<string name="poi_piste_hike">Túrapálya</string>
 	<string name="poi_piste_sleigh">Lovas- vagy kutyaszánpálya</string>
 	<string name="poi_piste_sled">Szánkópálya</string>
-	<string name="poi_piste_snow_park">Sípark</string>
+	<string name="poi_piste_snow_park">Hópark</string>
 	<string name="poi_piste_playground">Gyermeksípálya</string>
 	<string name="poi_piste_ice_skate">Korcsolya</string>
 	<string name="poi_ski_rental">Síkölcsönző</string>
@@ -540,8 +540,8 @@
 	<string name="poi_bench">Pad</string>
 	<string name="poi_water_park">Aquapark</string>
 	<string name="poi_recreation_ground">Szabadidőpark</string>
-	<string name="poi_village_green">Központi zöldterület</string>
-	<string name="poi_trail_riding_station">Lovastúra állomás</string>
+	<string name="poi_village_green">Faluközponti zöldterület</string>
+	<string name="poi_trail_riding_station">Lovastúra-állomás</string>
 
 	<string name="poi_food_court">Étkezőtér</string>
 	<string name="poi_barbecue">Grillezőhely</string>
@@ -556,7 +556,7 @@
 	<string name="poi_dry_cleaning">Vegytisztító</string>
 	<string name="poi_laundry">Mosoda</string>
 	<string name="poi_car_sharing">Autómegosztó</string>
-	<string name="poi_boat_sharing">Hajómegosztó</string>
+	<string name="poi_boat_sharing">Hajómegosztó hely</string>
 	<string name="poi_dock">Dokk</string>
 	<string name="poi_toilets">WC</string>
 	<string name="poi_sauna">Szauna</string>
@@ -568,10 +568,10 @@
 
 	<string name="poi_money_lender">Pénzhitelező</string>
 	<string name="poi_pawnbroker">Zálogház</string>
-	<string name="poi_bitcoin_yes">Bitcoin fizetés</string>
+	<string name="poi_bitcoin_yes">Bitcoin-fizetés</string>
 
 	<string name="poi_rapids">Zúgó</string>
-	<string name="poi_stone">Jellegzetes szikla</string>
+	<string name="poi_stone">Jellegzetes kő</string>
 	<string name="poi_cape">Partfok</string>
 	<string name="poi_valley">Völgy</string>
 	<string name="poi_water">Víz</string>
@@ -590,20 +590,20 @@
 	<string name="poi_military_nuclear_explosion_site">Nukleáris robbantási terület</string>
 
 	<string name="poi_wiki_place">Wikipédia</string>
-	<string name="poi_wiki_lang_en">Angol wiki</string>
-	<string name="poi_wiki_lang_de">Német wiki</string>
-	<string name="poi_wiki_lang_hu">Magyar wiki</string>
+	<string name="poi_wiki_lang_en">Angol Wikipédia</string>
+	<string name="poi_wiki_lang_de">Német Wikipédia</string>
+	<string name="poi_wiki_lang_hu">Magyar Wikipédia</string>
 	<string name="poi_bollard">Oszlop</string>
 	<string name="poi_cycle_barrier">Kerékpáros akadály</string>
 	<string name="poi_motorcycle_barrier">Motorkerékpár-akadály</string>
 	<string name="poi_block">Tömb</string>
 	<string name="poi_cattle_grid">Marharács</string>
-	<string name="poi_full_height_turnstile">Teljes forgóajtó</string>
+	<string name="poi_full_height_turnstile">Teljes forgókapu</string>
 	<string name="poi_bump_gate">Lökőajtó</string>
 	<string name="poi_general_barrier">Általános akadály</string>
-	<string name="poi_stile">Létra</string>
+	<string name="poi_stile">Kerítésátjáró</string>
 	<string name="poi_height_restrictor">Magasságkorlátozó</string>
-	<string name="poi_sally_port">Városkapu</string>
+	<string name="poi_sally_port">Várkapu</string>
 	<string name="poi_swing_gate">Elforduló sorompó</string>
 	<string name="poi_turnstile">Forgókapu</string>
 	<string name="poi_barrier_entrance">Átjáró falon vagy kerítésen</string>
@@ -775,7 +775,7 @@
 	<string name="poi_capital">Főváros</string>
 	<string name="poi_healthcare_alternative">Alternatív gyógyászat</string>
 	<string name="poi_audiologist">Hallásspecialista</string>
-	<string name="poi_optometrist">Optikus</string>
+	<string name="poi_optometrist">Optometrikus</string>
 	<string name="poi_physiotherapist">Gyógytornász</string>
 	<string name="poi_psychotherapist">Pszichoterapeuta</string>
 	<string name="poi_healthcare_rehabilitation">Rehabilitáció</string>
@@ -791,12 +791,12 @@
 	<string name="poi_advertising_agency">Hirdetési ügynökség</string>
 	<string name="poi_educational_institution">Oktatási intézmény irodája</string>
 	<string name="poi_studio">Stúdió</string>
-	<string name="poi_bookmaker">Könyvkészítő</string>
+	<string name="poi_bookmaker">Fogadóiroda</string>
 	<string name="poi_office_religion">Vallási iroda</string>
 	<string name="poi_association">Egyesületi iroda</string>
 	<string name="poi_financial">Pénzügyi vállalat irodája</string>
 	<string name="poi_political_party">Pártiroda</string>
-	<string name="poi_notary">Jegyző</string>
+	<string name="poi_notary">Közjegyző</string>
 	<string name="poi_foundation">Alapítványi iroda</string>
 	<string name="poi_tax_advisor">Adótanácsadói iroda</string>
 
@@ -814,11 +814,11 @@
 	<string name="poi_scuba_diving">Búvárkodás</string>
 	<string name="poi_dog_racing">Kutyaverseny</string>
 	<string name="poi_field_hockey">Gyeplabda</string>
-	<string name="poi_gymnastics">Gimnasztika</string>
+	<string name="poi_gymnastics">Torna</string>
 	<string name="poi_ice_stock">Bajor curling</string>
 	<string name="poi_korfbal">Korfball</string>
 	<string name="poi_sport_motor">Motorsport</string>
-	<string name="poi_sport_multi">Multi-sport</string>
+	<string name="poi_sport_multi">Több sportra is alkalmas</string>
 	<string name="poi_paddle_tennis">Kispályás tenisz</string>
 	<string name="poi_pelota">Pelota</string>
 	<string name="poi_roller_skating">Görkorcsolya</string>
@@ -827,17 +827,17 @@
 	<string name="poi_rugby_league">Ligarögbi</string>
 	<string name="poi_sailing">Vitorlázás</string>
 	<string name="poi_shooting">Lövészet</string>
-	<string name="poi_skating">Korcsolyázás</string>
+	<string name="poi_skating">Korcsolya</string>
 	<string name="poi_skateboard">Gördeszka</string>
 	<string name="poi_surfing">Szörfözés</string>
-	<string name="poi_table_tennis">Asztali tenisz</string>
+	<string name="poi_table_tennis">Asztalitenisz</string>
 	<string name="poi_toboggan">Szánkó</string>
 	<string name="poi_volleyball">Röplabda</string>
 
-	<string name="poi_tourism_yes">Turisztikai objektum</string>
+	<string name="poi_tourism_yes">Turisztikai látványosság</string>
 	<string name="poi_lodging">Szállás</string>
 	<string name="poi_hostel">Turistaszálló</string>
-	<string name="poi_chalet">Faház</string>
+	<string name="poi_chalet">Alpesi faház</string>
 	<string name="poi_apartment">Apartman</string>
 	<string name="poi_wilderness_hut">Menedékház</string>
 	<string name="poi_lean_to">Esőbeálló</string>
@@ -896,62 +896,62 @@
 	<string name="poi_craft_glaziery">Üvegműves</string>
 	<string name="poi_craft_optician">Látszerész</string>
 	<string name="poi_craft_painter">Festő</string>
-	<string name="poi_craft_watchmaker">Órás</string>
+	<string name="poi_craft_watchmaker">Órás (karóra)</string>
 	<string name="poi_cutline">Nyiladék</string>
 	<string name="poi_shower">Zuhany</string>
 	<string name="poi_payment_terminal">Fizető terminál</string>
 	<string name="poi_tree">Fa</string>
 	<string name="poi_anchor_berth">Horgonyzóhely</string>
 	<string name="poi_military_office">Katonai iroda</string>
-	<string name="poi_wiki_lang_ar">Arab wiki</string>
-	<string name="poi_wiki_lang_be">Belorusz wiki</string>
-	<string name="poi_wiki_lang_bg">Bolgár wiki</string>
-	<string name="poi_wiki_lang_ca">Katalán wiki</string>
-	<string name="poi_wiki_lang_ceb">Szebuanó wiki</string>
-	<string name="poi_wiki_lang_cs">Cseh wiki</string>
-	<string name="poi_wiki_lang_da">Dán wiki</string>
-	<string name="poi_wiki_lang_el">Görög wiki</string>
-	<string name="poi_wiki_lang_et">Észt wiki</string>
-	<string name="poi_wiki_lang_es">Spanyol wiki</string>
-	<string name="poi_wiki_lang_fi">Finn wiki</string>
-	<string name="poi_wiki_lang_fr">Francia wiki</string>
-	<string name="poi_wiki_lang_gl">Gall wiki</string>
-	<string name="poi_wiki_lang_he">Héber wiki</string>
-	<string name="poi_wiki_lang_hi">Hindi wiki</string>
-	<string name="poi_wiki_lang_hr">Horvát wiki</string>
-	<string name="poi_wiki_lang_ht">Haiti kreol wiki</string>
-	<string name="poi_wiki_lang_id">Indonéz wiki</string>
-	<string name="poi_wiki_lang_it">Olasz wiki</string>
-	<string name="poi_wiki_lang_ja">Japán wiki</string>
-	<string name="poi_wiki_lang_ko">Koreai wiki</string>
-	<string name="poi_wiki_lang_lt">Litván wiki</string>
-	<string name="poi_wiki_lang_lv">Lett wiki</string>
-	<string name="poi_wiki_lang_ms">Maláj wiki</string>
-	<string name="poi_wiki_lang_new">Nepáli bahasa wiki</string>
-	<string name="poi_wiki_lang_nl">Holland wiki</string>
-	<string name="poi_wiki_lang_nn">Norvég nynorsk wiki</string>
-	<string name="poi_wiki_lang_no">Norvég wiki</string>
-	<string name="poi_wiki_lang_pl">Lengyel wiki</string>
-	<string name="poi_wiki_lang_pt">Portugál wiki</string>
-	<string name="poi_wiki_lang_ro">Román wiki</string>
-	<string name="poi_wiki_lang_ru">Orosz wiki</string>
-	<string name="poi_wiki_lang_sk">Szlovák wiki</string>
-	<string name="poi_wiki_lang_sl">Szlovén wiki</string>
-	<string name="poi_wiki_lang_sr">Szerb wiki</string>
-	<string name="poi_wiki_lang_sv">Svéd wiki</string>
-	<string name="poi_wiki_lang_sw">Szuahéli wiki</string>
-	<string name="poi_wiki_lang_te">Telugu wiki</string>
-	<string name="poi_wiki_lang_th">Thai wiki</string>
-	<string name="poi_wiki_lang_tr">Török wiki</string>
-	<string name="poi_wiki_lang_uk">Ukrán wiki</string>
-	<string name="poi_wiki_lang_vi">Vietnami wiki</string>
-	<string name="poi_wiki_lang_vo">Volapük wiki</string>
-	<string name="poi_wiki_lang_zh">Kínai wiki</string>
+	<string name="poi_wiki_lang_ar">Arab Wikipédia</string>
+	<string name="poi_wiki_lang_be">Belorusz Wikipédia</string>
+	<string name="poi_wiki_lang_bg">Bolgár Wikipédia</string>
+	<string name="poi_wiki_lang_ca">Katalán Wikipédia</string>
+	<string name="poi_wiki_lang_ceb">Szebuanó Wikipédia</string>
+	<string name="poi_wiki_lang_cs">Cseh Wikipédia</string>
+	<string name="poi_wiki_lang_da">Dán Wikipédia</string>
+	<string name="poi_wiki_lang_el">Görög Wikipédia</string>
+	<string name="poi_wiki_lang_et">Észt Wikipédia</string>
+	<string name="poi_wiki_lang_es">Spanyol Wikipédia</string>
+	<string name="poi_wiki_lang_fi">Finn Wikipédia</string>
+	<string name="poi_wiki_lang_fr">Francia Wikipédia</string>
+	<string name="poi_wiki_lang_gl">Gall Wikipédia</string>
+	<string name="poi_wiki_lang_he">Héber Wikipédia</string>
+	<string name="poi_wiki_lang_hi">Hindi Wikipédia</string>
+	<string name="poi_wiki_lang_hr">Horvát Wikipédia</string>
+	<string name="poi_wiki_lang_ht">Haiti kreol Wikipédia</string>
+	<string name="poi_wiki_lang_id">Indonéz Wikipédia</string>
+	<string name="poi_wiki_lang_it">Olasz Wikipédia</string>
+	<string name="poi_wiki_lang_ja">Japán Wikipédia</string>
+	<string name="poi_wiki_lang_ko">Koreai Wikipédia</string>
+	<string name="poi_wiki_lang_lt">Litván Wikipédia</string>
+	<string name="poi_wiki_lang_lv">Lett Wikipédia</string>
+	<string name="poi_wiki_lang_ms">Maláj Wikipédia</string>
+	<string name="poi_wiki_lang_new">Nepáli bahasa Wikipédia</string>
+	<string name="poi_wiki_lang_nl">Holland Wikipédia</string>
+	<string name="poi_wiki_lang_nn">Norvég (nynorsk) Wikipédia</string>
+	<string name="poi_wiki_lang_no">Norvég Wikipédia</string>
+	<string name="poi_wiki_lang_pl">Lengyel Wikipédia</string>
+	<string name="poi_wiki_lang_pt">Portugál Wikipédia</string>
+	<string name="poi_wiki_lang_ro">Román Wikipédia</string>
+	<string name="poi_wiki_lang_ru">Orosz Wikipédia</string>
+	<string name="poi_wiki_lang_sk">Szlovák Wikipédia</string>
+	<string name="poi_wiki_lang_sl">Szlovén Wikipédia</string>
+	<string name="poi_wiki_lang_sr">Szerb Wikipédia</string>
+	<string name="poi_wiki_lang_sv">Svéd Wikipédia</string>
+	<string name="poi_wiki_lang_sw">Szuahéli Wikipédia</string>
+	<string name="poi_wiki_lang_te">Telugu Wikipédia</string>
+	<string name="poi_wiki_lang_th">Thai Wikipédia</string>
+	<string name="poi_wiki_lang_tr">Török Wikipédia</string>
+	<string name="poi_wiki_lang_uk">Ukrán Wikipédia</string>
+	<string name="poi_wiki_lang_vi">Vietnami Wikipédia</string>
+	<string name="poi_wiki_lang_vo">Volapük Wikipédia</string>
+	<string name="poi_wiki_lang_zh">Kínai Wikipédia</string>
 
-	<string name="poi_icn_ref">Nemzetközi kerékpáros hálózati csomópont</string>
-	<string name="poi_ncn_ref">Országos kerékpáros hálózati csomópont</string>
-	<string name="poi_rcn_ref">Regionális kerékpáros hálózati csomópont</string>
-	<string name="poi_lcn_ref">Helyi kerékpáros hálózati csomópont</string>
+	<string name="poi_icn_ref">Nemzetközi kerékpárút-hálózati csomópont</string>
+	<string name="poi_ncn_ref">Országos kerékpárút-hálózati csomópont</string>
+	<string name="poi_rcn_ref">Regionális kerékpárút-hálózati csomópont</string>
+	<string name="poi_lcn_ref">Helyi kerékpárút-hálózati csomópont</string>
 	<string name="poi_iwn_ref">Nemzetközi turistaút-hálózati csomópont</string>
 	<string name="poi_nwn_ref">Országos turistaút-hálózati csomópont</string>
 	<string name="poi_rwn_ref">Regionális turistaút-hálózati csomópont</string>
@@ -963,12 +963,12 @@
 	<string name="poi_route_hiking_lwn_poi">Helyi turistaút</string>
 	<string name="poi_route_hiking_ref_poi">Turistaút-azonosító</string>
 
-	<string name="poi_opening_hours">Nyitvatartás</string>
+	<string name="poi_opening_hours">Nyitva tartás</string>
 	<string name="poi_collection_times">Ürítési idő</string>
 	<string name="poi_description">Leírás</string>
 	<string name="poi_phone">Telefon</string>
 	<string name="poi_website">Weboldal</string>
-	<string name="poi_email">Email</string>
+	<string name="poi_email">E-mail</string>
 	<string name="poi_fax">Fax</string>
 	<string name="facebook">Facebook</string>
 	<string name="twitter">Twitter</string>
@@ -1317,8 +1317,8 @@
 	<string name="poi_toilets_access_community">WC-használat: közösségi</string>
 	<string name="poi_toilets_access_public">WC-használat: nyilvános</string>
 
-	<string name="poi_diaper_yes">Pelenkázó asztal</string>
-	<string name="poi_diaper_no">Pelenkázó asztal nincs</string>
+	<string name="poi_diaper_yes">Pelenkázóasztal</string>
+	<string name="poi_diaper_no">Pelenkázóasztal nincs</string>
 	<string name="poi_diaper_room">Pelenkázó szoba</string>
 
 	<string name="poi_maxstay">Parkolási időkorlát</string>
@@ -1464,13 +1464,13 @@
 	<string name="poi_resort">Üdülő</string>
 	<string name="poi_hanami">Cseresznyevirágzás-nézés</string>
 	<string name="poi_gallery">Művészeti galéria</string>
-	<string name="poi_craft_handicraft">Kézművesség</string>
-	<string name="poi_craft_hvac">Hűtés, szellőztetés, légkondicionálás</string>
-	<string name="poi_craft_insulation">Szigetelés</string>
-	<string name="poi_craft_metal_construction">Fémművesség</string>
+	<string name="poi_craft_handicraft">Kézművestermék-készítő</string>
+	<string name="poi_craft_hvac">Fűtés-, szellőztetés- és légkondicionálás-szerelő</string>
+	<string name="poi_craft_insulation">Épület-hőszigetelő</string>
+	<string name="poi_craft_metal_construction">Fémiparos</string>
 	<string name="poi_craft_parquet_layer">Parkettalerakó</string>
 	<string name="poi_craft_plasterer">Gipszműves, stukkós</string>
-	<string name="poi_craft_pottery">Fazekasság</string>
+	<string name="poi_craft_pottery">Fazekas</string>
 	<string name="poi_craft_saddler">Nyeregkészítő</string>
 	<string name="poi_craft_sailmaker">Vitorlakészítő</string>
 	<string name="poi_craft_sawmill">Fűrészmalom</string>
@@ -1478,7 +1478,7 @@
 	<string name="poi_craft_sculptor">Szobrász</string>
 	<string name="poi_craft_stand_builder">Standépítő</string>
 	<string name="poi_craft_stonemason">Kőfaragó</string>
-	<string name="poi_craft_sun_protection">Árnyékolástechnika</string>
+	<string name="poi_craft_sun_protection">Árnyékolástechnikus</string>
 	<string name="poi_craft_sweep">Kéményseprő</string>
 	<string name="poi_craft_tailor">Szabó</string>
 	<string name="poi_craft_tiler">Burkoló</string>
@@ -1486,7 +1486,7 @@
 	<string name="poi_craft_upholsterer">Kárpitos</string>
 	<string name="poi_craft_window_construction">Ablakkészítő</string>
 
-	<string name="poi_craft_computer">Számítástechnikus</string>
+	<string name="poi_craft_computer">Számítógép-szerelő</string>
 	<string name="poi_floating_dock">Úszódokk</string>
 	<string name="poi_seamark_harbour">Kikötő</string>
 	<string name="poi_landmark">Tájékozódási pont</string>
@@ -1796,7 +1796,7 @@
 	<string name="poi_groyne">Sarkantyú</string>
 
 	<string name="poi_recycling_hardcore">Építési hulladék</string>
-	<string name="poi_podiatrist">Lábápoló</string>
+	<string name="poi_podiatrist">Lábgyógyász</string>
 	<string name="poi_denomination_mennonite">Mennonita</string>
 	<string name="poi_denomination_united_methodist">Egyesült metodista</string>
 	<string name="poi_denomination_congregational">Kongregacionalista</string>
@@ -1919,7 +1919,7 @@
 	<string name="poi_cuisine_swedish">Svéd</string>
 	<string name="poi_dish">Konyha jellege</string>
 
-<string name="poi_wiki_lang_ku">Kurd wiki</string>
+<string name="poi_wiki_lang_ku">Kurd Wikipédia</string>
 	<string name="poi_cuisine_latin_american">Latin-amerikai</string>
 	<string name="poi_cuisine_american">Amerikai</string>
 	<string name="poi_cuisine_asian">Ázsiai</string>
@@ -1940,10 +1940,10 @@
 	<string name="poi_cuisine_australian">Ausztrál</string>
 	<string name="poi_cuisine_bakery">Pékség</string>
 	<string name="poi_cuisine_balkan">Balkáni</string>
-	<string name="poi_wiki_lang_bar">Bajor wiki</string>
+	<string name="poi_wiki_lang_bar">Bajor Wikipédia</string>
 	<string name="poi_cuisine_bavarian">Bajor</string>
 	<string name="poi_cuisine_barbecue">Barbecue</string>
-	<string name="poi_wiki_lang_eu">Baszk wiki</string>
+	<string name="poi_wiki_lang_eu">Baszk Wikipédia</string>
 	<string name="poi_cuisine_basque">Baszk</string>
 	<string name="poi_cuisine_belgian">Belga</string>
 	<string name="poi_cuisine_bistro">Bisztró</string>
@@ -2042,64 +2042,64 @@
 	<string name="poi_denomination_united">Egyesült</string>
 	<string name="poi_denomination_united_reformed">Egyesült református</string>
 	<string name="poi_denomination_uniting">Egyesítő</string>
-	<string name="poi_denomination_reform">Református</string>
+	<string name="poi_denomination_reform">Reformzsidó</string>
 	<string name="poi_denomination_wesleyan">Wesleyánus</string>
-	<string name="poi_club_freemasonry">Szabadkőműves páholy</string>
+	<string name="poi_club_freemasonry">Szabadkőműves-páholy</string>
 	<string name="poi_club_sailing">Vitorlázóklub</string>
 	<string name="poi_club_scout">Cserkészotthon</string>
 
 	<string name="poi_small_craft_facility">Kishajós létesítmény</string>
-	<string name="poi_wiki_lang_af">Afrikaans wiki</string>
-	<string name="poi_wiki_lang_als">Elzászi wiki</string>
-	<string name="poi_wiki_lang_az">Azeri wiki</string>
-	<string name="poi_wiki_lang_bn">Bengáli wiki</string>
-	<string name="poi_wiki_lang_br">Breton wiki</string>
-	<string name="poi_wiki_lang_bs">Bosnyák wiki</string>
-	<string name="poi_wiki_lang_cy">Welsh wiki</string>
-	<string name="poi_wiki_lang_eo">Eszperantó wiki</string>
-	<string name="poi_wiki_lang_fa">Farszi wiki</string>
-	<string name="poi_wiki_lang_fy">Fríz wiki</string>
-	<string name="poi_wiki_lang_ga">Ír wiki</string>
-	<string name="poi_wiki_lang_hy">Örmény wiki</string>
-	<string name="poi_wiki_lang_is">Izlandi wiki</string>
-	<string name="poi_wiki_lang_ka">Grúz wiki</string>
-	<string name="poi_wiki_lang_la">Latin wiki</string>
-	<string name="poi_wiki_lang_lb">Luxemburgi wiki</string>
-	<string name="poi_wiki_lang_mk">Macedón wiki</string>
-	<string name="poi_wiki_lang_nds">Alsószász wiki</string>
-	<string name="poi_wiki_lang_nv">Navahó wiki</string>
-	<string name="poi_wiki_lang_os">Oszét wiki</string>
-	<string name="poi_wiki_lang_pms">Piemonti wiki</string>
-	<string name="poi_wiki_lang_sc">Szárd wiki</string>
-	<string name="poi_wiki_lang_sh">Szerb-horvát wiki</string>
-	<string name="poi_wiki_lang_sq">Albán wiki</string>
-	<string name="poi_wiki_lang_ta">Tamil wiki</string>
-	<string name="poi_wiki_lang_tl">Filippínó wiki</string>
-	<string name="poi_wiki_lang_kk">Kazah wiki</string>
-	<string name="poi_wiki_lang_uz">Üzbég wiki</string>
-	<string name="poi_wiki_lang_ce">Csecsen wiki</string>
-	<string name="poi_wiki_lang_ur">Urdu wiki</string>
-	<string name="poi_wiki_lang_oc">Okcitán wiki</string>
-	<string name="poi_wiki_lang_mg">Malgasz wiki</string>
-	<string name="poi_wiki_lang_tt">Tatár wiki</string>
-	<string name="poi_wiki_lang_jv">Jávai wiki</string>
-	<string name="poi_wiki_lang_ky">Kirgiz wiki</string>
-	<string name="poi_wiki_lang_zhyue">Kantoni wiki</string>
-	<string name="poi_wiki_lang_ast">Asztúriai-leóni wiki</string>
-	<string name="poi_wiki_lang_tg">Tádzsik wiki</string>
-	<string name="poi_wiki_lang_ba">Baskír wiki</string>
-	<string name="poi_wiki_lang_sco">Skót wiki</string>
-	<string name="poi_wiki_lang_pnb">Pandzsábi wiki</string>
-	<string name="poi_wiki_lang_cv">Csuvas wiki</string>
-	<string name="poi_wiki_lang_lmo">Lombard wiki</string>
-	<string name="poi_wiki_lang_my">Burmai wiki</string>
-	<string name="poi_wiki_lang_yo">Joruba wiki</string>
-	<string name="poi_wiki_lang_an">Aragóniai wiki</string>
-	<string name="poi_wiki_lang_ne">Nepáli wiki</string>
-	<string name="poi_wiki_lang_gu">Gudzsaráti wiki</string>
-	<string name="poi_wiki_lang_scn">Szicíliai wiki</string>
-	<string name="poi_wiki_lang_mn">Mongol wiki</string>
-	<string name="poi_wiki_lang_nap">Nápolyi wiki</string>
+	<string name="poi_wiki_lang_af">Afrikaans Wikipédia</string>
+	<string name="poi_wiki_lang_als">Elzászi Wikipédia</string>
+	<string name="poi_wiki_lang_az">Azeri Wikipédia</string>
+	<string name="poi_wiki_lang_bn">Bengáli Wikipédia</string>
+	<string name="poi_wiki_lang_br">Breton Wikipédia</string>
+	<string name="poi_wiki_lang_bs">Bosnyák Wikipédia</string>
+	<string name="poi_wiki_lang_cy">Welsh Wikipédia</string>
+	<string name="poi_wiki_lang_eo">Eszperantó Wikipédia</string>
+	<string name="poi_wiki_lang_fa">Farszi Wikipédia</string>
+	<string name="poi_wiki_lang_fy">Fríz Wikipédia</string>
+	<string name="poi_wiki_lang_ga">Ír Wikipédia</string>
+	<string name="poi_wiki_lang_hy">Örmény Wikipédia</string>
+	<string name="poi_wiki_lang_is">Izlandi Wikipédia</string>
+	<string name="poi_wiki_lang_ka">Grúz Wikipédia</string>
+	<string name="poi_wiki_lang_la">Latin Wikipédia</string>
+	<string name="poi_wiki_lang_lb">Luxemburgi Wikipédia</string>
+	<string name="poi_wiki_lang_mk">Macedón Wikipédia</string>
+	<string name="poi_wiki_lang_nds">Alsószász Wikipédia</string>
+	<string name="poi_wiki_lang_nv">Navahó Wikipédia</string>
+	<string name="poi_wiki_lang_os">Oszét Wikipédia</string>
+	<string name="poi_wiki_lang_pms">Piemonti Wikipédia</string>
+	<string name="poi_wiki_lang_sc">Szárd Wikipédia</string>
+	<string name="poi_wiki_lang_sh">Szerb-horvát Wikipédia</string>
+	<string name="poi_wiki_lang_sq">Albán Wikipédia</string>
+	<string name="poi_wiki_lang_ta">Tamil Wikipédia</string>
+	<string name="poi_wiki_lang_tl">Filippínó Wikipédia</string>
+	<string name="poi_wiki_lang_kk">Kazah Wikipédia</string>
+	<string name="poi_wiki_lang_uz">Üzbég Wikipédia</string>
+	<string name="poi_wiki_lang_ce">Csecsen Wikipédia</string>
+	<string name="poi_wiki_lang_ur">Urdu Wikipédia</string>
+	<string name="poi_wiki_lang_oc">Okcitán Wikipédia</string>
+	<string name="poi_wiki_lang_mg">Malgasz Wikipédia</string>
+	<string name="poi_wiki_lang_tt">Tatár Wikipédia</string>
+	<string name="poi_wiki_lang_jv">Jávai Wikipédia</string>
+	<string name="poi_wiki_lang_ky">Kirgiz Wikipédia</string>
+	<string name="poi_wiki_lang_zhyue">Kantoni Wikipédia</string>
+	<string name="poi_wiki_lang_ast">Asztúriai-leóni Wikipédia</string>
+	<string name="poi_wiki_lang_tg">Tádzsik Wikipédia</string>
+	<string name="poi_wiki_lang_ba">Baskír Wikipédia</string>
+	<string name="poi_wiki_lang_sco">Skót Wikipédia</string>
+	<string name="poi_wiki_lang_pnb">Pandzsábi Wikipédia</string>
+	<string name="poi_wiki_lang_cv">Csuvas Wikipédia</string>
+	<string name="poi_wiki_lang_lmo">Lombard Wikipédia</string>
+	<string name="poi_wiki_lang_my">Burmai Wikipédia</string>
+	<string name="poi_wiki_lang_yo">Joruba Wikipédia</string>
+	<string name="poi_wiki_lang_an">Aragóniai Wikipédia</string>
+	<string name="poi_wiki_lang_ne">Nepáli Wikipédia</string>
+	<string name="poi_wiki_lang_gu">Gudzsaráti Wikipédia</string>
+	<string name="poi_wiki_lang_scn">Szicíliai Wikipédia</string>
+	<string name="poi_wiki_lang_mn">Mongol Wikipédia</string>
+	<string name="poi_wiki_lang_nap">Nápolyi Wikipédia</string>
 
 	<string name="poi_deadlock">Holtpont</string>
 
@@ -2193,7 +2193,7 @@
 	<string name="poi_elevator_no">Lift nincs</string>
 
 	<string name="poi_model_aerodrome">Modellrepülőtér</string>
-	<string name="poi_quango">Kvázi-autonóm civil szervezet (Quasi-Autonomous NGO)</string>
+	<string name="poi_quango">Kvázi-autonóm civil szervezet (Quasi-Autonomous NGO, QUANGO)</string>
 	<string name="poi_fuel_91ul">UL91 repülőbenzin</string>
 	<string name="poi_fuel_charcoal">Üzemanyag: faszén</string>
 	<string name="poi_fuel_coal">Üzemanyag: szén</string>
@@ -2294,9 +2294,9 @@
 	<string name="poi_shoes_orthopedic">Ortopéd</string>
 
 	<string name="poi_denomination_scientist">Szcientológus</string>
-	<string name="poi_wiki_lang_ml">Malajálam wiki</string>
-	<string name="poi_wiki_lang_mr">Maráthi wiki</string>
-	<string name="poi_wiki_lang_war">Varaó wiki</string>
+	<string name="poi_wiki_lang_ml">Malajálam Wikipédia</string>
+	<string name="poi_wiki_lang_mr">Maráthi Wikipédia</string>
+	<string name="poi_wiki_lang_war">Varaó Wikipédia</string>
 	<string name="poi_escape_lane">Menekülő-útvonal</string>
 
 	<string name="poi_massage_thai">Thai</string>
@@ -2637,7 +2637,7 @@
 	<string name="poi_concentration_camp_nazism">Típus: náci</string>
 	<string name="poi_concentration_camp_gulag">Típus: gulág</string>
 
-	<string name="poi_boat_storage">Hajótárolás</string>
+	<string name="poi_boat_storage">Hajótároló</string>
 
 	<string name="poi_fitness_station">Fitneszállomás</string>
 
@@ -2958,7 +2958,7 @@
 	<string name="poi_health_facility_type_department">Egészségügyi létesítmény típusa: részleg</string>
 	<string name="poi_health_facility_type_dispensary">Egészségügyi létesítmény típusa: gyógyszerkiadó hely</string>
 	<string name="poi_health_facility_type_first_aid">Egészségügyi létesítmény típusa: elsősegélynyújtó hely</string>
-	<string name="poi_health_facility_type_nursing_home">Egészségügyi létesítmény típusa: ápoló otthon</string>
+	<string name="poi_health_facility_type_nursing_home">Egészségügyi létesítmény típusa: ápolóotthon</string>
 	<string name="poi_health_facility_type_support_group_home">Egészségügyi létesítmény típusa: önsegítő csoport találkozóhelye</string>
 
 	<string name="poi_health_person_type_assistant">Egészségügyi dolgozó szerepe: asszisztens</string>
@@ -3076,7 +3076,7 @@
 	<string name="poi_xmas_shop_christmas_tree">Karácsonyfabolt</string>
 	<string name="poi_bicycle_parking_lockers">Zárható szekrény</string>
 	<string name="poi_emergency_infrastructure">Vészhelyzeti infrastruktúra</string>
-	<string name="poi_wiki_lang_bpy"/>
+	<string name="poi_wiki_lang_bpy">Bisnupria Wikipédia</string>
 	<string name="poi_power_supply_cee_17_blue">Elektromos csatlakozó (konnektor): CEE 17 kék</string>
 	<string name="poi_power_supply_cee_7_4">Elektromos csatlakozó (konnektor): CEE 7/4</string>
 	<string name="poi_power_supply_cee_7_5">Elektromos csatlakozó (konnektor): CEE 7/5</string>
@@ -3135,4 +3135,10 @@
 
 <string name="poi_forestry_compartment">Útirányjelző tábla: erdőtag (RU)</string>
 	<string name="poi_forestry_allotment">Útirányjelző tábla: erdőrészlet (RU)</string>
+	<string name="poi_tower_construction_freestanding">Szerkezet: szabadon álló</string>
+	<string name="poi_gambling_bingo">Bingó</string>
+
+	<string name="poi_wiki_lang_min">Minangkabau Wikipédia</string>
+	<string name="poi_wiki_lang_zhminnan">Dél-min Wikipédia</string>
+	<string name="poi_bus_trap">Buszcsapda</string>
 	</resources>
