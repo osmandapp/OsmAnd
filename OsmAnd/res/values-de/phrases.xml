@@ -1722,7 +1722,7 @@
 
 	<string name="poi_information_guidepost">Wegweiser</string>
 	<string name="poi_information_trail_blaze">Wegmarkierung</string>
-	<string name="poi_information_terminal">Terminal</string>
+	<string name="poi_information_terminal">Auskunft</string>
 	<string name="poi_information_tactile_model">Tastbares Modell</string>
 	<string name="poi_information_tactile_map">Tastbare Karte</string>
 	<string name="poi_retail">Einzelhandel</string>
@@ -1793,7 +1793,7 @@
 	<string name="poi_payment_jcb_no">JCB Karte nicht akzeptiert</string>
 	<string name="poi_payment_eurowag_yes">Eurowag</string>
 	<string name="poi_payment_eurowag_no">Eurowag Karte nicht akzeptiert</string>
-	<string name="poi_payment_euroshell_yes">Euroshell</string>
+	<string name="poi_payment_euroshell_yes">euroShell</string>
 	<string name="poi_payment_euroshell_no">Euroshell Tankkarte nicht akzeptiert</string>
 	<string name="poi_payment_westfalen_card_yes">Westfalen</string>
 	<string name="poi_payment_westfalen_card_no">Westfalen Karte nicht akzeptiert</string>
@@ -2676,7 +2676,7 @@
 <string name="poi_medical_system_western_yes">Westliche</string>
 	<string name="poi_medical_system_chinese_yes">Chinesisch (traditionell)</string>
 	<string name="poi_medical_system_unknown_yes">Medizinisches System: Unbekannt traditionelle</string>
-	<string name="poi_medical_system_ayurveeda_yes">Ayurveeda</string>
+	<string name="poi_medical_system_ayurveeda_yes">Ayurveda</string>
 	<string name="poi_medical_system_kampo_yes">Kampo</string>
 	<string name="poi_medical_system_mongolian_yes">Traditionell mongolisch</string>
 	<string name="poi_medical_system_tibetan_yes">Traditionell tibetisch</string>
@@ -3098,7 +3098,7 @@
 	<string name="poi_star_rating">Bewertung in Sternen</string>
 	<string name="poi_denomination">Konfession</string>
 	<string name="poi_information_type">Typ</string>
-	<string name="poi_drive_in">Drive in</string>
+	<string name="poi_drive_in">Drive-in</string>
 	<string name="poi_drive_through">Durchfahrschalter</string>
 	<string name="poi_beauty_salon_service">Dienstleistung</string>
 	<string name="poi_public_bookcase">Öffentlicher Bücherschrank</string>
@@ -3161,11 +3161,11 @@
 	<string name="poi_cuisine_falafel">Falafel</string>
 	<string name="poi_cuisine_smoothie">Smoothie</string>
 	<string name="poi_cuisine_snack">Imbiss</string>
-	<string name="poi_cuisine_souvlaki">Souvlaki</string>
+	<string name="poi_cuisine_souvlaki">Souvláki</string>
 	<string name="poi_cuisine_yogurt">Joghurt</string>
 	<string name="poi_cuisine_gyros">Gyros</string>
 	<string name="poi_cuisine_empanada">Empanada</string>
-	<string name="poi_cuisine_crepes">Crepes</string>
+	<string name="poi_cuisine_crepes">Crêpes</string>
 	<string name="poi_cuisine_suki">Suki</string>
 	<string name="poi_cuisine_bubble_tea">Bubble Tea</string>
 	<string name="poi_cuisine_meat">Fleisch</string>
@@ -3290,7 +3290,7 @@
 	<string name="poi_vacuum_cleaner_filter">Staubsauger</string>
 
 <string name="poi_cuisine_doner">Döner Kebab (shawarma)</string>
-	<string name="poi_cuisine_shawarma">Shawarma</string>
+	<string name="poi_cuisine_shawarma">Schawarma</string>
 
 	<string name="poi_diet">Speisen</string>
 	<string name="poi_social_facility_type">Typ</string>
