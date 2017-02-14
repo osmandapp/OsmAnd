@@ -2860,4 +2860,9 @@ Repræsenterer område: %1$s x %2$s</string>
  "</string>
 	<string name="rendering_attr_depthContours_description">Vis dybdekonturer og -punkter</string>
     <string name="rendering_attr_depthContours_name">Dybdekonturer</string>
-	</resources>
+	<string name="routing_attr_height_relief_smoothness_factor_description">Flere sletter eller flere bakker</string>
+    <string name="routing_attr_height_obstacles_name">Brug højdedata</string>
+    <string name="routing_attr_height_obstacles_description">Brug terrænhøjde data fra SRTM, ASTER og EU-DEM</string>
+
+    <string name="routing_attr_height_relief_smoothness_factor_name">Relief glathedsfaktor</string>
+    </resources>
