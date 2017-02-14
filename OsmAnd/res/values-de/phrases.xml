@@ -1671,7 +1671,7 @@
 
 	<string name="poi_denomination_shaktism">Shaktismus</string>
 	<string name="poi_denomination_maronite">Maroniten</string>
-	<string name="poi_bicycle_parking_rack">Gestell</string>
+	<string name="poi_bicycle_parking_rack">Fahrradständer</string>
 	<string name="poi_bicycle_parking_building">Spezialgebäude</string>
 	<string name="poi_bicycle_parking_shed">Schuppen</string>
 	<string name="poi_bicycle_parking_bollard">Poller</string>
@@ -1710,10 +1710,10 @@
 	<string name="poi_religion_scientologist">Scientology</string>
 	<string name="poi_denomination_uniting">Vereinigung</string>
 	<string name="poi_denomination_congregational">Kongregationalismus</string>
-	<string name="poi_denomination_ethiopian_orthodox_tewahedo">Äthiopisch-orthodoxe Tewahedo-Kirche</string>
+	<string name="poi_denomination_ethiopian_orthodox_tewahedo">Äthiopisch-Orthodoxe Tewahedo-Kirche</string>
 	<string name="poi_denomination_unitarian">Unitarisch</string>
 	<string name="poi_denomination_wesleyan">Wesleyaner</string>
-	<string name="poi_denomination_shingon_shu">Schule des wahren Wortes</string>
+	<string name="poi_denomination_shingon_shu">Shingon-shū</string>
 	<string name="poi_denomination_mahayana">Mahayana Buddhisten</string>
 
 	<string name="poi_jersey_barrier">Jersey Barriere</string>
@@ -2253,7 +2253,7 @@
 	<string name="poi_clothes_denim">Jeans</string>
 	<string name="poi_clothes_fur">Pelz</string>
 	<string name="poi_clothes_maternity">Mutterschaft</string>
-	<string name="poi_clothes_vintage">Historisch</string>
+	<string name="poi_clothes_vintage">Vintage</string>
 	<string name="poi_clothes_shirts">Hemden</string>
 	<string name="poi_historic_manor">Historischer Gutshof</string>
 	<string name="poi_castle_type_stately">Burgtyp: Schloss</string>
@@ -2481,7 +2481,7 @@
 	<string name="poi_health_specialty_dentistry_yes">Zahnheilkunde</string>
 	<string name="poi_health_specialty_nephrology_yes">Nephrologie (Nierenerkrankungen)</string>
 	<string name="poi_health_specialty_neurosurgery_yes">Neurochirurgie</string>
-	<string name="poi_health_specialty_neuropsychiatry_yes">Nervenheilkunde (Neurologie und Psychiatrie)</string>
+	<string name="poi_health_specialty_neuropsychiatry_yes">Neuropsychiatrie</string>
 	<string name="poi_health_specialty_endocrinology_yes">Endokrinologie</string>
 	<string name="poi_health_specialty_nuclear_medicine_yes">Nuklearmedizin</string>
 	<string name="poi_health_specialty_pathology_yes">Pathologie</string>
@@ -2572,7 +2572,7 @@
 
 <string name="poi_fair_trade_yes">Fairer Handel: Ja</string>
 	<string name="poi_fair_trade_no">Fairer Handel: Nein</string>
-	<string name="poi_fair_trade_only">Nur fairer Handel Produkte</string>
+	<string name="poi_fair_trade_only">Nur Produkte aus fairem Handel</string>
 
 <string name="poi_ice_hockey">Eishockey</string>
 	<string name="poi_bandy">Bandy</string>
@@ -2585,7 +2585,7 @@
 <string name="poi_protection_object_habitat">Geschütztes Objekt: Lebensraum</string>
 	<string name="poi_nuclear_explosion_country">Explosion: Land</string>
 	<string name="poi_addr_housename">Hausname</string>
-	<string name="poi_nuclear_explosion_site">Explosion: Seite</string>
+	<string name="poi_nuclear_explosion_site">Ort einer nuklearen Explosion</string>
 	<string name="poi_nuclear_explosion_type_underground_tunnel">Explosionsart: Untergrund, Tunnel</string>
 	<string name="poi_nuclear_explosion_type_atmospheric">Explosionsart: atmosphärische</string>
 	<string name="poi_nuclear_explosion_type_atmospheric_atmospheric_surface">Explosionsart: atmosphärische, Oberfläche</string>
@@ -2595,14 +2595,14 @@
 	<string name="poi_tanning_salon">Solarium</string>
 
 <string name="poi_nuclear_explosion_type_underground_shaft">Explosionstyp: Untergrund, Welle</string>
-	<string name="poi_nuclear_explosion_type_atmospheric_airdrop">Explosionstyp: atmosphärisch, Luft</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_airdrop">Explosionstyp: Luftangriff</string>
 	<string name="poi_nuclear_explosion_type_atmospheric_surface_tower">Explosionstyp: atmosphärisch, Oberfläche, Turm</string>
 	<string name="poi_nuclear_explosion_type_atmospheric_balloon">Explosionstyp: atmosphärisch, Ballon</string>
 	<string name="poi_nuclear_explosion_type_atmospheric_water_surface_barge">Explosionstyp: atmosphärisch, Wasseroberfläche , Barge</string>
 	<string name="poi_nuclear_explosion_type_cratering_burst">Explosionstyp: Kraterbruch (flache Untergrund )</string>
 	<string name="poi_nuclear_explosion_type_atmospheric_rocket_or_missile">Explosionstyp: atmosphärisch, Rakete oder Raketen</string>
 	<string name="poi_nuclear_explosion_date_utc">Explosionsdatum (UTC)</string>
-	<string name="poi_nuclear_explosion_shot_name_en">Schussname (en)</string>
+	<string name="poi_nuclear_explosion_shot_name_en">Bezeichnung der Explosion</string>
 	<string name="poi_nuclear_explosion_series">Explosionsserie</string>
 	<string name="poi_nuclear_explosion_purpose_nuclear_weapons_related">Explosionzweck: Atomwaffen verbunden</string>
 	<string name="poi_nuclear_explosion_purpose_weapons_effects">Explosionszweck: Waffeneffekte</string>
@@ -2618,7 +2618,7 @@
 	<string name="poi_nuclear_explosion_yield">Explosionsausbeute</string>
 	<string name="poi_nuclear_explosion_hole">Explosionsloch</string>
 	<string name="poi_nuclear_explosion_height_of_burst">Höhe der Explosion</string>
-	<string name="poi_nuclear_explosion_ground_zero_altitude">Höhe des Zentrums</string>
+	<string name="poi_nuclear_explosion_ground_zero_altitude">Höhe ü.M. des Explosionszentrum</string>
 	<string name="poi_nuclear_explosion_body_wave_magnitude">Körperwelle Größe</string>
 	<string name="poi_nuclear_explosion_salvo_first_detonation">Explosionsalve: erste Detonation eines Salvetests</string>
 	<string name="poi_nuclear_explosion_salvo_second_or_later_detonation">Explosionsalve: zweite Detonation eines Salvetests</string>
@@ -2782,8 +2782,8 @@
 	<string name="poi_counselling_type_sexual_abuse_no">Beratung (sexueller Missbrauch): Nein</string>
 	<string name="poi_counselling_type_victim_yes">Beratung (Opfer): Ja</string>
 	<string name="poi_counselling_type_victim_no">Beratung (Opfer): Nein</string>
-	<string name="poi_counselling_type_violence_yes">Beratung (Gewalt): Ja</string>
-	<string name="poi_counselling_type_violence_no">Beratung (Gewalt): Nein</string>
+	<string name="poi_counselling_type_violence_yes">Gewalt-Beratung: Ja</string>
+	<string name="poi_counselling_type_violence_no">Gewalt-Beratung: Nein</string>
 
 	<string name="poi_provided_for_infant_yes">Für Säuglinge zur Verfügung gestellt: Ja</string>
 	<string name="poi_provided_for_infant_no">Für Säuglinge zur Verfügung gestellt: Nein</string>
@@ -2820,8 +2820,8 @@
 	<string name="poi_disease_autism_no">Autismus: Nein</string>
 	<string name="poi_office_physician">Arztpraxis</string>
 	<string name="poi_office_therapist">Therapeuten-Büro</string>
-	<string name="poi_office_podologist">Podologie Büro</string>
-	<string name="poi_office_healer">Arzt Büro</string>
+	<string name="poi_office_podologist">Podiater</string>
+	<string name="poi_office_healer">Heiler</string>
 	<string name="poi_office_psychologist">Psychologie-Büro</string>
 	<string name="poi_office_nursing_service">Pflegedienst</string>
 	<string name="poi_office_midwife">Hebamme-Büro</string>
@@ -2860,7 +2860,7 @@
 
 	<string name="poi_salt_yes">Salz</string>
 	<string name="poi_salt_no">Salz: Nein</string>
-	<string name="poi_wheelchair_designated">Ausgeschrieben</string>
+	<string name="poi_wheelchair_designated">Rollstuhlgerecht</string>
 	<string name="poi_spoil_heap">Abraumhalde</string>
 
 <string name="poi_summer_camp">Sommerlager</string>
