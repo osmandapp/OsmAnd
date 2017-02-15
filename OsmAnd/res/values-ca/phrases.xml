@@ -652,7 +652,7 @@
 	<string name="poi_craft_shoemaker">Sabater</string>
 	<string name="poi_craft_sawmill">Serradora</string>
 	<string name="poi_craft_scaffolder">Bastides</string>
-	<string name="poi_craft_stonemason">Marbrista</string>
+	<string name="poi_craft_stonemason">Tallador de pedres</string>
 	<string name="poi_craft_sun_protection">Tendals</string>
 	<string name="poi_craft_sweep">Escura-xemeneies</string>
 	<string name="poi_craft_tailor">Sastre</string>
@@ -1993,7 +1993,7 @@
 	<string name="poi_dog_yes">Es permeten els gossos</string>
 	<string name="poi_dog_no">No es permeten els gossos</string>
 
-	<string name="poi_clothes_military">Militar</string>
+	<string name="poi_clothes_military">Roba militar</string>
 
 	<string name="poi_historic_period_old_kingdom">Període històric: antic regnat (2686-2181 aC)</string>
 	<string name="poi_historic_period_first_intermediate_period">Període històric: primer període intermedi (2181-2055 aC)</string>
@@ -2787,4 +2787,20 @@
 	<string name="poi_fair_trade_only">Només productes de comerç just</string>
 
 
+	<string name="poi_shoes_men">Homes</string>
+	<string name="poi_clothes_schoolwear">Uniformes escolars</string>
+	<string name="poi_clothes_oversize">Talles grans</string>
+	<string name="poi_forestry_compartment">Estaca: límit forestal</string>
+	<string name="poi_forestry_allotment">Estaca: destinació forestal</string>
+	<string name="poi_inscription_n">Inscripció:N</string>
+	<string name="poi_inscription_nw">Inscripció: NO</string>
+	<string name="poi_inscription_w">Inscripció:O</string>
+	<string name="poi_inscription_sw">Inscripció: SO</string>
+	<string name="poi_inscription_s">Inscripció:S</string>
+	<string name="poi_inscription_se">Inscripció: SE</string>
+	<string name="poi_inscription_e">Inscripció: E</string>
+	<string name="poi_inscription_ne">Inscripció: NE</string>
+
+	<string name="poi_construction_yes">En construcció</string>
+	<string name="poi_historic_civilization_ancient_roman">Civilització: Roma antiga (753 aC – 284 dC)</string>
 	</resources>
