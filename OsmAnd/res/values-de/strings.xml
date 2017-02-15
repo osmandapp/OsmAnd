@@ -2716,4 +2716,11 @@ Abgedeckte Fläche: %1$s x %2$s</string>
 
  und mehr…
  "</string>
-	</resources>
+	<string name="routing_attr_height_relief_smoothness_factor_name">Reliefglättungsfaktor</string>
+    <string name="routing_attr_height_relief_smoothness_factor_description">Ebenen oder Berge betonen</string>
+    <string name="routing_attr_height_obstacles_name">Höhendaten verwenden</string>
+    <string name="routing_attr_height_obstacles_description">Von SRTM, ASTER und EU-DEM bereitgestellte Geländeprofildaten verwenden</string>
+
+    <string name="rendering_attr_depthContours_name">Tiefenlinien</string>
+	<string name="rendering_attr_depthContours_description">Tiefenlinien und -punkte einblenden</string>
+    </resources>
