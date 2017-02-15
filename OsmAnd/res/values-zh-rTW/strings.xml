@@ -2803,4 +2803,9 @@ Facebook：https://www.facebook.com/osmandapp
  "</string>
 	<string name="rendering_attr_depthContours_description">顯示深度等高線和標記</string>
     <string name="rendering_attr_depthContours_name">深度等高線</string>
-	</resources>
+	<string name="routing_attr_height_relief_smoothness_factor_name">地貌柔滑系數</string>
+    <string name="routing_attr_height_relief_smoothness_factor_description">更多的平原或丘陵</string>
+    <string name="routing_attr_height_obstacles_name">使用海拔資料</string>
+    <string name="routing_attr_height_obstacles_description">使用 SRTM、ASTER 和 EU-DEM 提供的地形海拔資料</string>
+
+    </resources>
