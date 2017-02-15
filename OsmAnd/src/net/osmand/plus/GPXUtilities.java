@@ -1281,7 +1281,7 @@ public class GPXUtilities {
 		}
 	}
 
-	public static void setupGPXChart(LineChart mChart, boolean useFeet) {
+	public static void setupGPXChart(LineChart mChart, boolean useFeet, int yLabelsCount) {
 		//mChart.setHardwareAccelerationEnabled(true);
 		mChart.setTouchEnabled(true);
 		mChart.setDragEnabled(true);
@@ -1317,6 +1317,7 @@ public class GPXUtilities {
 		yAxis.setPosition(YAxis.YAxisLabelPosition.INSIDE_CHART);
 		yAxis.setXOffset(16f);
 		yAxis.setYOffset(-6f);
+		yAxis.setLabelCount(yLabelsCount);
 
 		Legend legend = mChart.getLegend();
 		legend.setEnabled(false);

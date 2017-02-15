@@ -473,7 +473,7 @@ public class SelectedGPXFragment extends OsmAndListFragment {
 				row = inflater.inflate(R.layout.gpx_item_list_item, parent, false);
 
 				mChart = (LineChart) row.findViewById(R.id.chart);
-				GPXUtilities.setupGPXChart(mChart, useFeet);
+				GPXUtilities.setupGPXChart(mChart, useFeet, 5);
 			}
 			GpxDisplayItem child = getItem(position);
 			TextView label = (TextView) row.findViewById(R.id.name);

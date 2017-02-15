@@ -208,7 +208,7 @@ public class ShowRouteInfoDialogFragment extends DialogFragment {
 		OsmandSettings.MetricsConstants mc = app.getSettings().METRIC_SYSTEM.get();
 		final boolean useFeet = (mc == OsmandSettings.MetricsConstants.MILES_AND_FEET) || (mc == OsmandSettings.MetricsConstants.MILES_AND_YARDS);
 		LineChart mChart = (LineChart) headerView.findViewById(R.id.chart);
-		GPXUtilities.setupGPXChart(mChart, useFeet);
+		GPXUtilities.setupGPXChart(mChart, useFeet, 4);
 
 		GPXTrackAnalysis analysis = gpx.getAnalysis(0);
 		GPXUtilities.setGPXChartData(mChart, analysis, Utils.getSDKInt() >= 18
