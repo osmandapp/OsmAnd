@@ -1719,12 +1719,12 @@
 	<string name="poi_diet_vegan_no">Dieta vegana: no</string>
 	<string name="poi_diet_gluten_free_only">Tot sense gluten</string>
 	<string name="poi_diet_gluten_free_yes">Sense gluten</string>
-	<string name="poi_diet_gluten_free_no">Dieta per celíacs:no</string>
+	<string name="poi_diet_gluten_free_no">Dieta sense gluten:no</string>
 	<string name="poi_payment_icsf_yes">IC Stored Fare</string>
 	<string name="poi_payment_icsf_no">No s\'accepten targes IC Stored Fare</string>
-	<string name="poi_diet_kosher_only">Només kosher</string>
-	<string name="poi_diet_kosher_yes">Kosher</string>
-	<string name="poi_diet_kosher_no">Dieta kosher: no</string>
+	<string name="poi_diet_kosher_only">Només caixer</string>
+	<string name="poi_diet_kosher_yes">Caixer</string>
+	<string name="poi_diet_kosher_no">Dieta caixer: no</string>
 	<string name="poi_diet_halal_only">Només halal</string>
 	<string name="poi_diet_halal_yes">Halal</string>
 	<string name="poi_diet_halal_no">Dieta halal: no</string>
@@ -2758,4 +2758,33 @@
 	<string name="poi_material_wood">Material: fusta</string>
 	<string name="poi_material_metal">Material: metall</string>
 	<string name="poi_material_reinforced_concrete">Material: formigó armat</string>
+	<string name="poi_payment_transport_type">Tipus de pagament (transport)</string>
+	<string name="poi_shop_craft">Botiga d\'articles d\'art i treballs manuals</string>
+	<string name="poi_aerialway_pylon">Torre de telefèric</string>
+
+	<string name="poi_wheelchair_accessibility">Accessibilitat en cadira de rodes</string>
+	<string name="poi_taxon">Taxó</string>
+
+	<string name="poi_horse_riding">Equitació</string>
+	<string name="poi_rtsa_scale">Escala RTSA</string>
+
+	<string name="poi_aerialway_bubble_yes">Bombolla</string>
+	<string name="poi_aerialway_bubble_no">Sense bombolla</string>
+	<string name="poi_payment_efectivo_yes">Efectiu</string>
+	<string name="poi_payment_efectivo_no">No accepta efectiu</string>
+	<string name="poi_payment_cryptocurrencies_no">No accepta criptomonedes</string>
+	<string name="poi_payment_ep_minipay_yes">Minipay</string>
+	<string name="poi_payment_ep_minipay_no">No accepta Minipay</string>
+	<string name="poi_diet_kosher_filter_yes">Caixer</string>
+	<string name="poi_diet_gluten_free_filter_yes">Sense gluten</string>
+	<string name="poi_diet_halal_filter_yes">Halal</string>
+	<string name="poi_diet_lactose_free_filter_yes">Sense lactosa</string>
+	<string name="poi_brewery_additional">Nom de la cerveseria</string>
+	<string name="poi_microbrewery_yes">Microcerveseria</string>
+	<string name="poi_takeaway_filter_yes">Sí</string>
+	<string name="poi_delivery_filter_yes">Sí</string>
+	<string name="poi_outdoor_seating_filter_yes">Sí</string>
+	<string name="poi_fair_trade_only">Només productes de comerç just</string>
+
+
 	</resources>
