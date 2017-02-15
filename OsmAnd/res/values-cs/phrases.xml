@@ -1864,7 +1864,7 @@
 	<string name="poi_crossing_supervision_attendant">Dozor na přejezd: obsluha</string>
 	<string name="poi_crossing_supervision_camera">Dozor na přejezd: kamera</string>
 
-	<string name="poi_dispensing_yes">Léky na předpis: ano</string>
+	<string name="poi_dispensing_yes">Ano</string>
 	<string name="poi_dispensing_no">Léky na předpis: ne</string>
 
 	<string name="poi_aerodrome_type_international">Mezinárodní</string>
@@ -2937,7 +2937,7 @@
 	<string name="poi_historic_period_nuragic">Historické období: nuragské</string>
 	<string name="poi_historic_period_dominate">Historické období: dominát (285 n. l. – 476 n. l.)</string>
 	<string name="poi_historic_era_neolithic">Historické období: mladší doba kamenná</string>
-	<string name="poi_historic_era_chalcolithic">Historické období: doba měděná (IV.–III. tisíciletí př.n.l.)</string>
+	<string name="poi_historic_era_chalcolithic">Historické období: doba měděná (4.–3. tisíciletí př.n.l.)</string>
 
 	<string name="poi_site_type_petroglyph">Petroglyf</string>
 	<string name="poi_megalith_type_menhir">Typ megalitu: menhir</string>
