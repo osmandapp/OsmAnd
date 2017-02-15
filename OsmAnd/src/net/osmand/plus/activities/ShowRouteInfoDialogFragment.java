@@ -28,12 +28,14 @@ import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.utils.Utils;
 
 import net.osmand.Location;
+import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.GPXUtilities;
-import net.osmand.plus.GPXUtilities.Elevation;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.GPXTrackAnalysis;
+import net.osmand.plus.GPXUtilities.Track;
 import net.osmand.plus.GPXUtilities.TrkSegment;
+import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
@@ -50,7 +52,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class ShowRouteInfoDialogFragment extends DialogFragment {
@@ -61,6 +62,7 @@ public class ShowRouteInfoDialogFragment extends DialogFragment {
 	private View view;
 	private ListView listView;
 	private RouteInfoAdapter adapter;
+	private GPXFile gpx;
 
 	public ShowRouteInfoDialogFragment() {
 	}
@@ -160,46 +162,57 @@ public class ShowRouteInfoDialogFragment extends DialogFragment {
 			}
 		});
 
-		View headerView = inflater.inflate(R.layout.route_info_header, null);
-		if (buildHeader(headerView)) {
+		makeGpx();
+		if (!gpx.isEmpty()) {
+			View headerView = inflater.inflate(R.layout.route_info_header, null);
+			buildHeader(headerView);
 			listView.addHeaderView(headerView);
 		}
 
 		return view;
 	}
 
-	private boolean buildHeader(View headerView) {
+	private void makeGpx() {
+		double lastHeight = -1;
+		gpx = new GPXFile();
+		Track track = new Track();
+		List<RouteSegmentResult> route = helper.getRoute().getLeftRoute();
+		for (RouteSegmentResult res : route) {
+			TrkSegment seg = new TrkSegment();
+			int inc = res.getStartPointIndex() < res.getEndPointIndex() ? 1 : -1;
+			int indexnext = res.getStartPointIndex();
+			for (int index = res.getStartPointIndex() ; index != res.getEndPointIndex(); ) {
+				index = indexnext;
+				indexnext += inc;
+				LatLon l = res.getPoint(index);
+				WptPt point = new WptPt();
+				point.lat = l.getLatitude();
+				point.lon = l.getLongitude();
+				float[] vls = res.getObject().calculateHeightArray();
+				if (vls != null && index * 2 + 1 < vls.length) {
+					point.ele = vls[2*index + 1];
+					//point.desc = (res.getObject().getId() >> (BinaryInspector.SHIFT_ID )) + " " + index;
+					lastHeight = vls[2*index + 1];
+				} else if (lastHeight > 0) {
+					point.ele = lastHeight;
+				}
+				seg.points.add(point);
+			}
+			track.segments.add(seg);
+		}
+		gpx.tracks.add(track);
+	}
+
+	private void buildHeader(View headerView) {
 		OsmandApplication app = getMyApplication();
 		OsmandSettings.MetricsConstants mc = app.getSettings().METRIC_SYSTEM.get();
 		final boolean useFeet = (mc == OsmandSettings.MetricsConstants.MILES_AND_FEET) || (mc == OsmandSettings.MetricsConstants.MILES_AND_YARDS);
 		LineChart mChart = (LineChart) headerView.findViewById(R.id.chart);
 		GPXUtilities.setupGPXChart(mChart, useFeet);
-		List<RouteSegmentResult> route = helper.getRoute().getOriginalRoute();
-		List<float[]> heightList = new ArrayList<>();
-		int count = 0;
-		for (RouteSegmentResult s : route) {
-			float[] arr = s.getHeightValues();
-			if (arr.length > 0) {
-				heightList.add(arr);
-				count += arr.length;
-			}
-		}
-		float[] heightArray = new float[count];
-		int i = 0;
-		for (float[] arr : heightList) {
-			System.arraycopy(arr, 0, heightArray, i, arr.length);
-			i += arr.length;
-		}
-		TrkSegment seg = GPXUtilities.buildTrkSegment(heightArray);
-		GPXTrackAnalysis analysis = GPXTrackAnalysis.segment(0, seg);
-		i = 0;
-		for (Elevation e : analysis.elevationData) {
-			e.distance = heightArray[i * 2];
-			i++;
-		}
-		analysis.totalDistance = helper.getLeftDistance();
+
+		GPXTrackAnalysis analysis = gpx.getAnalysis(0);
 		GPXUtilities.setGPXChartData(mChart, analysis, Utils.getSDKInt() >= 18
-				? R.drawable.line_chart_fade_orange : R.color.osmand_orange, useFeet);
+				? R.drawable.line_chart_fade_blue : R.color.gpx_time_span_color, useFeet);
 
 		((TextView) headerView.findViewById(R.id.average_text))
 				.setText(OsmAndFormatter.getFormattedAlt(analysis.avgElevation, app));
@@ -222,8 +235,6 @@ public class ShowRouteInfoDialogFragment extends DialogFragment {
 				.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_action_altitude_descent));
 		((ImageView) headerView.findViewById(R.id.ascent_icon))
 				.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_action_altitude_ascent));
-
-		return count > 0;
 	}
 
 	private void buildMenuButtons() {

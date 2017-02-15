@@ -1374,15 +1374,4 @@ public class GPXUtilities {
 		// set data
 		mChart.setData(data);
 	}
-
-	public static TrkSegment buildTrkSegment(float[] heightArray) {
-		TrkSegment segment = new TrkSegment();
-		if (heightArray.length > 0) {
-			for (int i = 0; i < heightArray.length / 2; i++) {
-				WptPt p = new WptPt(0, 0, 0, heightArray[i * 2 + 1], 0, 0);
-				segment.points.add(p);
-			}
-		}
-		return segment;
-	}
 }
