@@ -2624,4 +2624,16 @@ Zobrazená oblast: %1$s x %2$s</string>
  a další…
  "</string>
 	<string name="navigate_point_olc">Open Location Code (OLC)</string>
+    <string name="route_altitude">Nadmořská výška trasy</string>
+    <string name="altitude_descent">Klesání</string>
+    <string name="altitude_ascent">Stoupání</string>
+    <string name="altitude_range">Výškový rozsah</string>
+    <string name="average_altitude">Průměr</string>
+    <string name="shared_string_time">Čas</string>
+    <string name="total_distance">Celková vzdálenost</string>
+    <string name="routing_attr_height_relief_smoothness_factor_name">Úroveň vyhlazení reliéfu</string>
+    <string name="routing_attr_height_relief_smoothness_factor_description">Víc rovin nebo víc kopců</string>
+    <string name="routing_attr_height_obstacles_name">Použít údaje o nadmořské výšce</string>
+    <string name="routing_attr_height_obstacles_description">Použít údaje o nadmořské výšce terénu od SRTM, ASTER a EU-DEM</string>
+
     </resources>
