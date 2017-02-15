@@ -129,6 +129,12 @@ android {
 			dimension "version"
 			applicationId "net.osmand.plus"
 		}
+        fulldev {
+            dimension "version"
+            applicationId "net.osmand.plus"
+            resConfig "en"
+            //resConfigs "xxhdpi", "nodpi"
+        }
 
 		// CoreVersion
 		legacy {

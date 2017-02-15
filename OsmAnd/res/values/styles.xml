@@ -76,6 +76,7 @@
 
     <!-- Osmand themes styles -->
     <style name="OsmandLightTheme" parent="Theme.AppCompat.Light">
+        <item name="routeParameterTitleColor">@color/color_myloc_distance</item>
         <item name="ctx_menu_info_divider">@color/ctx_menu_info_divider_light</item>
         <item name="searchbar_text">@color/searchbar_text_light</item>
         <item name="searchbar_text_hint">@color/searchbar_text_hint_light</item>
@@ -239,6 +240,7 @@
     </style>
 
     <style name="OsmandDarkTheme" parent="Theme.AppCompat">
+        <item name="routeParameterTitleColor">@color/osmand_orange</item>
         <item name="ctx_menu_info_divider">@color/ctx_menu_info_divider_dark</item>
         <item name="searchbar_text">@color/searchbar_text_dark</item>
         <item name="searchbar_text_hint">@color/searchbar_text_hint_dark</item>

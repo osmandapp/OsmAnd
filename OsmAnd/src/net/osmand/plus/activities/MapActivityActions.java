@@ -18,7 +18,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
@@ -170,13 +169,6 @@ public class MapActivityActions implements DialogProvider {
 				Toast.makeText(mapActivity, msg, Toast.LENGTH_LONG).show();
 			}
 		});
-	}
-
-
-	public void aboutRoute() {
-		Intent intent = new Intent(mapActivity, ShowRouteInfoActivity.class);
-		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-		mapActivity.startActivity(intent);
 	}
 
 	protected Location getLastKnownLocation() {

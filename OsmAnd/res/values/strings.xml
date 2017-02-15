@@ -9,6 +9,13 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="route_altitude">Route altitude</string>
+    <string name="altitude_descent">Descent</string>
+    <string name="altitude_ascent">Ascent</string>
+    <string name="altitude_range">Altitude range</string>
+    <string name="average_altitude">Average</string>
+    <string name="shared_string_time">Time</string>
+    <string name="total_distance">Total distance</string>
     <string name="routing_attr_height_relief_smoothness_factor_name">Relief smoothness factor</string>
     <string name="routing_attr_height_relief_smoothness_factor_description">More plains or more hills</string>
     <string name="routing_attr_height_obstacles_name">Use elevation data</string>
