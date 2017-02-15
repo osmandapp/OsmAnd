@@ -2851,4 +2851,11 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="routing_attr_height_obstacles_name">Użyj danych wysokościowych</string>
     <string name="routing_attr_height_obstacles_description">Używa danych wysokościowych dostarczanych przez SRTM, ASTER i EU-DEM</string>
 
+    <string name="route_altitude">Wysokość trasy</string>
+    <string name="altitude_descent">Zjazdy</string>
+    <string name="altitude_ascent">Wzniesienia</string>
+    <string name="altitude_range">Przedział wysokości</string>
+    <string name="average_altitude">Średnia</string>
+    <string name="total_distance">Całkowity dystans</string>
+    <string name="shared_string_time">Czas</string>
     </resources>
