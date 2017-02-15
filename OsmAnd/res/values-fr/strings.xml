@@ -2608,4 +2608,10 @@ représentant la zone : %1$s x %2$s</string>
 
     <string name="routing_attr_height_relief_smoothness_factor_description">Plus de plaines ou plus de collines</string>
     <string name="routing_attr_height_relief_smoothness_factor_name">Facteur de lissage du relief</string>
+    <string name="average_altitude">Moyenne</string>
+    <string name="total_distance">Distance totale</string>
+    <string name="shared_string_time">Heure</string>
+    <string name="route_altitude">Altitude de la route</string>
+    <string name="altitude_descent">Descente</string>
+    <string name="altitude_ascent">Montée</string>
     </resources>
