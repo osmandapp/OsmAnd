@@ -193,7 +193,21 @@ public class RouteCalculationResult {
 			}
 		}
 	}
-	
+
+	public List<RouteSegmentResult> getLeftRoute() {
+		int cs = currentRoute > 0 ? currentRoute - 1 : 0;
+		if(cs >= segments.size()) {
+			return null;
+		}
+		List<RouteSegmentResult> list = new ArrayList<RouteSegmentResult>();
+		for (int i = cs; i < segments.size(); i++) {
+			if (i == 0 || segments.get(i - 1) != segments.get(i)) {
+				list.add(segments.get(i));
+			}
+		}
+		return list;
+	}
+
 	public List<RouteSegmentResult> getOriginalRoute() {
 		if (segments.size() == 0) {
 			return null;
