@@ -2426,7 +2426,7 @@ Wenn Sie OsmAnd und OSM lieben und unterstützen wollen, so ist dies die perfekt
     <string name="access_disable_wrong_direction_recalc_descr">Keine automatische Routenneuberechnung bei Bewegung in entgegengesetzter Richtung</string>
     <string name="access_smart_autoannounce">Intelligente automatische Ansage</string>
     <string name="access_smart_autoannounce_descr">Nur benachrichtigen, wenn sich die Richtung zum Zielpunkt geändert hat</string>
-    <string name="access_autoannounce_period_descr">Mindestzeitabstand zwischen Benachrichtigungen</string>
+    <string name="access_autoannounce_period_descr">Kürzester Zeitabstand zwischen Ansagen</string>
     <string name="map_widget_bearing">Relative Peilung</string>
     <string name="access_autoannounce_period">Zeit zwischen automatischen Ansagen</string>
     <string name="map_widget_magnetic_bearing">Magnetische Peilung</string>
@@ -2485,24 +2485,24 @@ Wenn Sie OsmAnd und OSM lieben und unterstützen wollen, so ist dies die perfekt
     <string name="dist_away_from_my_location">Suche %1$s entfernt</string>
     <string name="advanced_coords_search">Erweiterte Koordinatensuche</string>
     <string name="coords_search">Koordinatensuche</string>
-    <string name="route_stops_before">%1$s Haltestellen vor</string>
+    <string name="route_stops_before">%1$s Haltestellen davor</string>
     <string name="rendering_attr_hideOverground_name">Oberirdische Objekte</string>
 
     <string name="routing_attr_short_way_name">Kraftstoffsparende Route</string>
     <string name="routing_attr_short_way_description">Kraftstoffsparende Route verwenden (in der Regel kürzer)</string>
-    <string name="replace_favorite_confirmation">Wollen Sie den Favorit \'%1$s\' wirklich ersetzen?</string>
+    <string name="replace_favorite_confirmation">Wollen Sie den Favoriten \'%1$s\' wirklich ersetzen?</string>
     <string name="shared_string_change">Ändern</string>
     <string name="get_started">Erste Schritte</string>
     <string name="update_all_maps_now">Wollen Sie jetzt alle Karten aktualisieren?</string>
     <string name="clear_tile_data">Alle Kartenkacheln löschen</string>
     <string name="skip_map_downloading_desc">Es sind keine Offline-Karten installiert. Sie können jetzt eine Karte auswählen oder später Karten über “Menü - %1$s“ herunterladen.</string>
     <string name="search_another_country">Eine andere Region auswählen</string>
-    <string name="search_map">Karten werden gesucht…</string>
+    <string name="search_map">Karten werden gesucht …</string>
     <string name="first_usage_wizard_desc">Lassen Sie OsmAnd Ihre Position bestimmen und für diese Region Karten zum Herunterladen vorschlagen.</string>
     <string name="location_not_found">Position nicht gefunden</string>
     <string name="no_inet_connection">Keine Internetverbindung</string>
     <string name="no_inet_connection_desc_map">Erforderlich, um Karten herunterzuladen.</string>
-    <string name="search_location">Position wird gesucht…</string>
+    <string name="search_location">Position wird gesucht …</string>
     <string name="storage_free_space">Freier Speicherplatz</string>
     <string name="storage_place_description">OsmAnd speichert Daten (Karten, Tracks, usw.) in \'%1$s\'.</string>
     <string name="give_permission">Berechtigung erteilen</string>
@@ -2513,10 +2513,10 @@ Wenn Sie OsmAnd und OSM lieben und unterstützen wollen, so ist dies die perfekt
     <string name="skip_map_downloading">Herunterladen der Karten überspringen</string>
     <string name="no_update_info_desc">Keine aktuellen Meldungen zu neuen Versionen, Rabatten von OsmAnd abfragen</string>
     <string name="si_mi_meters">Meilen/Meter</string>
-    <string name="osm_live_banner_desc">Holen Sie sich Karten-Downloads ohne Limit und öfter als einmal pro Monat aktualisierte Karten: wöchentlich, täglich oder stündlich.</string>
+    <string name="osm_live_banner_desc">Unbegrenzt Karten herunterladen und sie nicht nur einmal pro Monat, sondern wöchentlich, täglich oder stündlich aktualisieren.</string>
     <string name="osmand_plus_banner_desc">Vollversion von OsmAnd mit unbegrenzten Karten-Downloads und monatlichen Kartenaktualisierungen.</string>
     <string name="get_for">Für %1$s abonnieren</string>
-    <string name="get_for_month">Für %1$s Monat holen</string>
+    <string name="get_for_month">Für %1$s pro Monat abonnieren</string>
     <string name="get_it">Abonnieren</string>
     <string name="osm_live_payment_desc">Die Abonnementsgebühr wird jeden Monat abgerechnet. Sie können Ihr Abonnement auf Google Play jederzeit kündigen.</string>
     <string name="donation_to_osm">Spende an die OpenStreetMap-Gemeinschaft</string>
@@ -2540,16 +2540,16 @@ Wenn Sie OsmAnd und OSM lieben und unterstützen wollen, so ist dies die perfekt
     <string name="rendering_value_dark_brown_name">Dunkelbraun</string>
     <string name="rendering_attr_contourColorScheme_name">Farbschema für Höhenlinien</string>
     <string name="rendering_attr_surfaceIntegrity_name">Straßenoberflächenbeschaffenheit</string>
-    <string name="search_hint">Stadt, Adresse, POI Name eingeben</string>
+    <string name="search_hint">Stadt, Adresse, POI-Bezeichnung eingeben</string>
     <string name="christmas_poi">Weihnachts POI</string>
     <string name="christmas_desc">Im Vorgriff auf Weihnachten und Neujahr, können Sie Weihnachts-POI anzeigen: Weihnachtsbäume, Märkte, etc.</string>
     <string name="christmas_desc_q">Weihnachts POI anzeigen?</string>
     <string name="save_track_min_speed">Mindestgeschwindigkeit für Aufzeichnung</string>
-    <string name="save_track_min_speed_descr">Legen Sie die Minimalgeschwindigkeit fest, ab der ein Punkt erfasst wird</string>
+    <string name="save_track_min_speed_descr">Legen Sie die Mindestgeschwindigkeit fest, ab der ein Punkt erfasst wird</string>
     <string name="save_track_min_distance">Bewegungserkennung für Aufzeichnung</string>
     <string name="save_track_min_distance_descr">Wählen Sie die Mindestentfernung von der letzten Position, ab der ein neuer Punkt aufgezeichnet wird</string>
-    <string name="save_track_precision">Minimale Genauigkeit der Aufzeichnung</string>
-    <string name="save_track_precision_descr">Wählen Sie die minimale Genauigkeit für die Aufzeichnung eines Punktes aus</string>
+    <string name="save_track_precision">Mindestgenauigkeit für Aufzeichnung</string>
+    <string name="save_track_precision_descr">Legen Sie die Mindestgenauigkeit für die Aufzeichnung eines Punktes fest</string>
     <string name="rendering_attr_contourColorScheme_description">Farbschema für Höhenlinien</string>
     <string name="shared_string_continue">Fortsetzen</string>
     <string name="shared_string_pause">Pause</string>
@@ -2723,4 +2723,11 @@ Abgedeckte Fläche: %1$s x %2$s</string>
 
     <string name="rendering_attr_depthContours_name">Tiefenlinien</string>
 	<string name="rendering_attr_depthContours_description">Tiefenlinien und -punkte einblenden</string>
+    <string name="route_altitude">Routenhöhe</string>
+    <string name="altitude_descent">Abstieg</string>
+    <string name="altitude_ascent">Aufstieg</string>
+    <string name="altitude_range">Höhendifferenz</string>
+    <string name="average_altitude">Durchschnitt</string>
+    <string name="shared_string_time">Zeit</string>
+    <string name="total_distance">Gesamtstrecke</string>
     </resources>
