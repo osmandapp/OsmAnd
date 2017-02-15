@@ -2788,4 +2788,9 @@ Pro praghere iscrie su còdighe intreu</string>
  "</string>
 	<string name="rendering_attr_depthContours_name">Lìnias de profondidade</string>
 	<string name="rendering_attr_depthContours_description">Ammustra sas lìnias de profondidade</string>
+    <string name="routing_attr_height_relief_smoothness_factor_description">Prus terrinu paris o prus cùcuros</string>
+    <string name="routing_attr_height_obstacles_name">Imprea sos datos de s\'artària</string>
+    <string name="routing_attr_height_obstacles_description">Imprea sos datos de s\'artària frunidos dae SRTM, ASTER e EU-DEM</string>
+
+    <string name="routing_attr_height_relief_smoothness_factor_name">Fatore de levigadura de sos rilievos</string>
     </resources>
