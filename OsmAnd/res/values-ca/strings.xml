@@ -2657,4 +2657,11 @@ i encara més…
     <string name="routing_attr_height_obstacles_name">Utilitza les cotes d\'elevació</string>
     <string name="routing_attr_height_obstacles_description">Utilitza les cotes d\'elevació del terreny proporcionades per SRTM, ASTER i EU-DEM</string>
 
+    <string name="route_altitude">Altitud de la ruta</string>
+    <string name="altitude_descent">Descens</string>
+    <string name="altitude_ascent">Ascens</string>
+    <string name="altitude_range">Interval d\'altitud</string>
+    <string name="average_altitude">Mitjana</string>
+    <string name="shared_string_time">Durada</string>
+    <string name="total_distance">Distància Total</string>
     </resources>
