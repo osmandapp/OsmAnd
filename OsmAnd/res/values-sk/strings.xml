@@ -2636,4 +2636,11 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="routing_attr_height_obstacles_name">Použiť údaje nadmorskej výšky</string>
     <string name="routing_attr_height_obstacles_description">Použiť údaje nadmorskej výšky terénu od SRTM, ASTER a EU-DEM</string>
 
+    <string name="route_altitude">Nadmorská výška trasy</string>
+    <string name="altitude_descent">Klesanie</string>
+    <string name="altitude_ascent">Stúpanie</string>
+    <string name="altitude_range">Výškový rozsah</string>
+    <string name="average_altitude">Priemer</string>
+    <string name="shared_string_time">Čas</string>
+    <string name="total_distance">Celková vzdialenosť</string>
     </resources>
