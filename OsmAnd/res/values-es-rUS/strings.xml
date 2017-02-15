@@ -2618,4 +2618,16 @@ Representa el área: %1$s x %2$s</string>
  "</string>
 	<string name="rendering_attr_depthContours_description">Mostrar curvas y puntos de profundidad</string>
     <string name="rendering_attr_depthContours_name">Curvas de profundidad</string>
-	</resources>
+	<string name="route_altitude">Altitud de la ruta</string>
+    <string name="altitude_descent">Descenso</string>
+    <string name="altitude_ascent">Ascenso</string>
+    <string name="altitude_range">Rango de altitud</string>
+    <string name="average_altitude">Promedio</string>
+    <string name="shared_string_time">Tiempo</string>
+    <string name="total_distance">Distancia total</string>
+    <string name="routing_attr_height_relief_smoothness_factor_name">Factor de suavidad del relieve</string>
+    <string name="routing_attr_height_relief_smoothness_factor_description">Más llanuras o colinas</string>
+    <string name="routing_attr_height_obstacles_name">Usar datos de elevación</string>
+    <string name="routing_attr_height_obstacles_description">Usa datos de elevación del terreno provistos por SRTM, ASTER y EU-DEM</string>
+
+    </resources>
