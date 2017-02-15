@@ -42,7 +42,6 @@ import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
 import net.osmand.ValueHolder;
-import net.osmand.access.AccessibilityPlugin;
 import net.osmand.access.MapAccessibilityActions;
 import net.osmand.core.android.AtlasMapRendererView;
 import net.osmand.data.LatLon;
@@ -89,9 +88,6 @@ import net.osmand.plus.mapcontextmenu.MapContextMenuFragment;
 import net.osmand.plus.mapcontextmenu.other.DestinationReachedMenu;
 import net.osmand.plus.mapcontextmenu.other.MapRouteInfoMenu;
 import net.osmand.plus.mapcontextmenu.other.MapRouteInfoMenuFragment;
-import net.osmand.plus.quickaction.QuickAction;
-import net.osmand.plus.quickaction.QuickActionFactory;
-import net.osmand.plus.quickaction.QuickActionsWidget;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.routing.RoutingHelper;
@@ -572,9 +568,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 						}
 					}
 				}
-			}
-			if (intent.getStringExtra(ShowRouteInfoActivity.START_NAVIGATION) != null) {
-				mapLayers.getMapControlsLayer().startNavigation();
 			}
 		}
 		mapView.refreshMap(true);

@@ -4,6 +4,7 @@
         <attr name="maxVisibleWidth" format="dimension"/>
     </declare-styleable>
     <declare-styleable name="OsmAndTheme">
+        <attr name="routeParameterTitleColor" format="color"/>
         <!-- list colors -->
         <attr name="ctx_menu_info_divider" format="color"/>
         <attr name="searchbar_text" format="color"/>

@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              xmlns:osmand="http://schemas.android.com/apk/res-auto"
+              xmlns:app="http://schemas.android.com/tools"
+              android:orientation="vertical">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/bg_color"
+            android:minHeight="@dimen/dashboard_map_toolbar"
+            android:theme="?attr/toolbar_theme"
+            app:contentInsetLeft="54dp"
+            app:contentInsetStart="54dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="14dp"
+                        android:layout_marginTop="14dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <net.osmand.plus.widgets.TextViewEx
+                            android:id="@+id/title"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@null"
+                            android:ellipsize="end"
+                            android:lines="1"
+                            android:maxLines="1"
+                            android:singleLine="true"
+                            android:text="@string/show_route"
+                            android:textColor="?attr/searchbar_text"
+                            osmand:typeface="@string/font_roboto_medium"
+                            android:textSize="@dimen/default_list_text_size_large"/>
+
+                    </LinearLayout>
+
+                    <ImageButton
+                        android:id="@+id/print_route"
+                        style="@style/Widget.AppCompat.ActionButton"
+                        android:layout_width="44dp"
+                        android:layout_height="48dp"
+                        android:layout_marginTop="4dp"
+                        android:contentDescription="@string/print_route"
+                        android:src="@drawable/ic_action_gprint_dark"/>
+
+                    <ImageButton
+                        android:id="@+id/save_as_gpx"
+                        style="@style/Widget.AppCompat.ActionButton"
+                        android:layout_width="44dp"
+                        android:layout_height="48dp"
+                        android:layout_marginTop="4dp"
+                        android:contentDescription="@string/shared_string_save_as_gpx"
+                        android:src="@drawable/ic_action_gsave_dark"/>
+
+                    <ImageButton
+                        android:id="@+id/share_as_gpx"
+                        style="@style/Widget.AppCompat.ActionButton"
+                        android:layout_width="44dp"
+                        android:layout_height="48dp"
+                        android:layout_marginTop="4dp"
+                        android:contentDescription="@string/share_route_as_gpx"
+                        android:src="@drawable/ic_action_gshare_dark"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </android.support.v7.widget.Toolbar>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:background="?attr/bg_color"
+            android:paddingTop="4dp"
+            android:paddingBottom="8dp">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="16dp">
+
+                <ImageView
+                    android:id="@+id/distance_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_action_polygom_dark"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="18dp">
+
+                    <net.osmand.plus.widgets.TextViewEx
+                        android:id="@+id/distance"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:text="26 km"
+                        android:textColor="?attr/routeParameterTitleColor"
+                        osmand:typeface="@string/font_roboto_medium"
+                        android:textSize="@dimen/default_list_text_size"/>
+
+                    <TextView
+                        android:id="@+id/distance_desc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:text="@string/total_distance"
+                        android:textColor="?android:attr/textColorSecondary"
+                        android:textSize="@dimen/default_sub_text_size"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:paddingLeft="16dp">
+
+                <ImageView
+                    android:id="@+id/time_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_action_time_span"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="18dp">
+
+                    <net.osmand.plus.widgets.TextViewEx
+                        android:id="@+id/time"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:text="20 min"
+                        android:textColor="?attr/routeParameterTitleColor"
+                        osmand:typeface="@string/font_roboto_medium"
+                        android:textSize="@dimen/default_list_text_size"/>
+
+                    <TextView
+                        android:id="@+id/time_desc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:text="@string/shared_string_time"
+                        android:textColor="?android:attr/textColorSecondary"
+                        android:textSize="@dimen/default_sub_text_size"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:background="@color/map_widget_blue">
+
+            <LinearLayout
+                android:id="@+id/go_button"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clickable="true"
+                android:background="?android:attr/selectableItemBackground"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_action_start_navigation"/>
+
+                <net.osmand.plus.widgets.TextViewEx
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:text="@string/shared_string_go"
+                    osmand:typeface="@string/font_roboto_medium"
+                    osmand:textAllCapsCompat="true"
+                    android:textColor="@color/color_white"
+                    android:textSize="@dimen/default_desc_text_size"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <FrameLayout android:id="@+id/listContainer"
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent">
+
+        <ListView android:id="@android:id/list"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:drawSelectorOnTop="true"
+                  android:divider="@null"
+                  android:dividerHeight="0dp"/>
+        <TextView android:id="@+id/internalEmpty"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:gravity="center"
+                  android:textAppearance="?android:attr/textAppearanceLarge" />
+    </FrameLayout>
+
+</LinearLayout>
