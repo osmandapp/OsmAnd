@@ -2865,4 +2865,11 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="routing_attr_height_obstacles_description">Brug terrænhøjde data fra SRTM, ASTER og EU-DEM</string>
 
     <string name="routing_attr_height_relief_smoothness_factor_name">Relief glathedsfaktor</string>
+    <string name="route_altitude">Rutehøjde</string>
+    <string name="altitude_descent">Nedstigning</string>
+    <string name="altitude_ascent">Opstigning</string>
+    <string name="altitude_range">Højdeinterval</string>
+    <string name="average_altitude">Gennemsnit</string>
+    <string name="shared_string_time">Tid</string>
+    <string name="total_distance">Total afstand</string>
     </resources>
