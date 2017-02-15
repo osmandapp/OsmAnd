@@ -2664,4 +2664,11 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="routing_attr_height_obstacles_name">Uzi datumoj pri alto</string>
     <string name="routing_attr_height_obstacles_description">Uzas datumojn pri alto liverataj de SRTM, ASTER kaj EU-DEM</string>
 
+    <string name="route_altitude">Kursa altitudo</string>
+    <string name="altitude_descent">Malsupreniro</string>
+    <string name="altitude_ascent">Supreniro</string>
+    <string name="altitude_range">Altituda intervalo</string>
+    <string name="average_altitude">Mezumo</string>
+    <string name="shared_string_time">Tempo</string>
+    <string name="total_distance">Tuta distanco</string>
     </resources>
