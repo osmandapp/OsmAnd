@@ -18,6 +18,8 @@ import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 import android.content.Context;
 
+import static net.osmand.binary.RouteDataObject.HEIGHT_UNDEFINED;
+
 public class RouteCalculationResult {
 	private static double distanceClosestToIntermediate = 400;
 	// could not be null and immodifiable!
@@ -229,9 +231,11 @@ public class RouteCalculationResult {
 			List<AlarmInfo> alarms, OsmandApplication ctx) {
 		float prevDirectionTime = 0;
 		float prevDirectionDistance = 0;
+		double lastHeight = HEIGHT_UNDEFINED;
 		List<RouteSegmentResult> segmentsToPopulate = new ArrayList<RouteSegmentResult>();
 		for (int routeInd = 0; routeInd < list.size(); routeInd++) {
 			RouteSegmentResult s = list.get(routeInd);
+			float[] vls = s.getObject().calculateHeightArray();
 			boolean plus = s.getStartPointIndex() < s.getEndPointIndex();
 			int i = s.getStartPointIndex();
 			int prevLocationSize = locations.size();
@@ -242,6 +246,12 @@ public class RouteCalculationResult {
 				n.setLongitude(point.getLongitude());
 				if (i == s.getEndPointIndex() && routeInd != list.size() - 1) {
 					break;
+				}
+				if (vls != null && i * 2 + 1 < vls.length) {
+					n.setAltitude(vls[2 * i + 1]);
+					lastHeight = vls[2 * i + 1];
+				} else if (lastHeight != HEIGHT_UNDEFINED) {
+					n.setAltitude(lastHeight);
 				}
 				locations.add(n);
 				attachAlarmInfo(alarms, s, i, locations.size());

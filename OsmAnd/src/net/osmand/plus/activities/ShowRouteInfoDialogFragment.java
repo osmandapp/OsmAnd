@@ -54,6 +54,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 
+import static net.osmand.binary.RouteDataObject.HEIGHT_UNDEFINED;
+
 public class ShowRouteInfoDialogFragment extends DialogFragment {
 
 	public static final String TAG = "ShowRouteInfoDialogFragment";
@@ -63,6 +65,7 @@ public class ShowRouteInfoDialogFragment extends DialogFragment {
 	private ListView listView;
 	private RouteInfoAdapter adapter;
 	private GPXFile gpx;
+	private boolean hasHeights;
 
 	public ShowRouteInfoDialogFragment() {
 	}
@@ -163,7 +166,7 @@ public class ShowRouteInfoDialogFragment extends DialogFragment {
 		});
 
 		makeGpx();
-		if (!gpx.isEmpty()) {
+		if (hasHeights) {
 			View headerView = inflater.inflate(R.layout.route_info_header, null);
 			buildHeader(headerView);
 			listView.addHeaderView(headerView);
@@ -173,13 +176,17 @@ public class ShowRouteInfoDialogFragment extends DialogFragment {
 	}
 
 	private void makeGpx() {
-		double lastHeight = -1;
+		double lastHeight = HEIGHT_UNDEFINED;
 		gpx = new GPXFile();
 		List<RouteSegmentResult> route = helper.getRoute().getLeftRoute();
 		if (route != null) {
 			Track track = new Track();
 			for (RouteSegmentResult res : route) {
 				TrkSegment seg = new TrkSegment();
+				float[] vls = res.getObject().calculateHeightArray();
+				if (!hasHeights && vls != null && vls.length > 0) {
+					hasHeights = true;
+				}
 				int inc = res.getStartPointIndex() < res.getEndPointIndex() ? 1 : -1;
 				int indexnext = res.getStartPointIndex();
 				for (int index = res.getStartPointIndex(); index != res.getEndPointIndex(); ) {
@@ -189,12 +196,11 @@ public class ShowRouteInfoDialogFragment extends DialogFragment {
 					WptPt point = new WptPt();
 					point.lat = l.getLatitude();
 					point.lon = l.getLongitude();
-					float[] vls = res.getObject().calculateHeightArray();
 					if (vls != null && index * 2 + 1 < vls.length) {
 						point.ele = vls[2 * index + 1];
 						//point.desc = (res.getObject().getId() >> (BinaryInspector.SHIFT_ID )) + " " + index;
 						lastHeight = vls[2 * index + 1];
-					} else if (lastHeight > 0) {
+					} else if (lastHeight != HEIGHT_UNDEFINED) {
 						point.ele = lastHeight;
 					}
 					seg.points.add(point);
