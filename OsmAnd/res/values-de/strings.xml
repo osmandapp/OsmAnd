@@ -335,13 +335,13 @@ Karten-Kacheln können direkt online bezogen werden, und werden im OsmAnd-Untero
 	<string name="local_openstreetmap_settings_descr">In der lokalen Datenbank vermerkte OSM-POIs/Hinweise anzeigen und verwalten</string>
 
 	<string name="live_monitoring_m">Online Aufzeichnung (benötigt GPX)</string>
-	<string name="live_monitoring_m_descr">Sende Verfolgungsdaten zu einem festgelegten Internet-Dienst, wenn GPX-Aufzeichnung aktiviert ist.</string>
+	<string name="live_monitoring_m_descr">Track-Daten zu einem festgelegten Internet-Dienst senden, wenn GPX-Aufzeichnung aktiviert ist.</string>
 	<string name="live_monitoring_url">Internetadresse zur Aufzeichnung</string>
 	<string name="live_monitoring_url_descr">Spezifikation der Internetadresse zur Aufzeichnung mit Parametern: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}</string>
 	<string name="live_monitoring_interval">Online Aufzeichnungsintervall</string>
 	<string name="live_monitoring_interval_descr">Angabe des Intervalls für die Online Aufzeichnung</string>
-	<string name="live_monitoring_start">Starte Online Aufzeichnung</string>
-	<string name="live_monitoring_stop">Stoppe Online Aufzeichnung</string>
+	<string name="live_monitoring_start">Online-Aufzeichnung starten</string>
+	<string name="live_monitoring_stop">Online-Aufzeichnung beenden</string>
 	<string name="show_current_gpx_title">Aktuellen Track anzeigen</string>
 	<string name="free_version_message">Diese kostenlose Version von OsmAnd ist limitiert auf %1$s Downloads und unterstützt keine offline Wikipedia-Artikel.</string>
 	<string name="free_version_title">Kostenlose Version</string>
@@ -697,7 +697,7 @@ Karten-Kacheln können direkt online bezogen werden, und werden im OsmAnd-Untero
 	<string name="layer_osm_bugs">OSM-Hinweise (online)</string>
 	
 	<string name="layer_poi">POI…</string>
-	<string name="layer_amenity_label">POI Namen</string>
+	<string name="layer_amenity_label">POI-Namen</string>
 	<string name="layer_map">Kartenquelle…</string>
 	<string name="menu_layers">Kartenebenen</string>
 	<string name="context_menu_item_search_poi">Suche POI</string>
@@ -1314,7 +1314,7 @@ Die globalen Daten (zwischen N 70° und S 70°) basieren auf Messungen von SRTM 
 	<string name="routing_attr_avoid_toll_name">Mautstraßen vermeiden</string>
 	<string name="routing_attr_avoid_toll_description">Mautstraßen vermeiden</string>
 	<string name="routing_attr_avoid_unpaved_name">Unbefestigte Wege vermeiden</string>
-	<string name="routing_attr_avoid_unpaved_description">Unbefestigte Wege meiden</string>
+	<string name="routing_attr_avoid_unpaved_description">Unbefestigte Wege vermeiden</string>
 	<string name="routing_attr_avoid_ferries_name">Fähren vermeiden</string>
 	<string name="routing_attr_avoid_ferries_description">Fähren vermeiden</string>
 	<string name="routing_attr_avoid_motorway_name">Autobahnen vermeiden</string>
@@ -1368,19 +1368,21 @@ Die globalen Daten (zwischen N 70° und S 70°) basieren auf Messungen von SRTM 
 	<string name="shared_string_my_tracks">Alle Tracks</string>
 	<string name="shared_string_my_favorites">Meine Favoriten</string>
 	<string name="shared_string_my_places">Meine Orte</string>
-	<string name="loading_smth">Lade %1$s …</string>
+	<string name="loading_smth">%1$s wird geladen …</string>
 	<string name="map_widget_plain_time">Aktuelle Zeit</string>
-	<string name="selected_gpx_info_show">\n\nZur Darstellung auf der Karte Antippen und Halten</string>
+	<string name="selected_gpx_info_show">
+
+Zur Darstellung auf der Karte lange drücken</string>
 	<string name="delay_navigation_start">Navigation automatisch starten</string>
 	<string name="save_as_favorites_points">als Favoritengruppe speichern</string>
 	<string name="select_destination_and_intermediate_points">Ziele auswählen</string>
-	<string name="sort_by_distance">Sortieren nach Entfernung</string>
-	<string name="sort_by_name">Sortieren nach Namen</string>
+	<string name="sort_by_distance">Nach Entfernung sortieren</string>
+	<string name="sort_by_name">Nach Namen sortieren</string>
 	
 	<string name="show_zoom_buttons_navigation_descr">Zoomtasten bei Navigation anzeigen</string>
 	<string name="show_zoom_buttons_navigation">Zoomtasten anzeigen</string>
 	<string name="no_index_file_to_download">Keine Downloads gefunden, bitte die Internet-Verbindung überprüfen!</string>
-	<string name="none_selected_gpx">Keine GPX-Spur ausgewählt. Zum Auswählen auf eine Spur lange drücken.</string>
+	<string name="none_selected_gpx">Keine GPX-Datei ausgewählt. Zum Auswählen lange auf einen vorhandenen Track drücken.</string>
 	
 	<string name="local_index_select_gpx_file">Zum Anzeigen auswählen</string>
 	<string name="rendering_attr_hideBuildings_name">Gebäude</string>
@@ -1389,9 +1391,9 @@ Die globalen Daten (zwischen N 70° und S 70°) basieren auf Messungen von SRTM 
 	<string name="rendering_attr_hideWoodScrubs_name">Wälder und Gebüsch</string>
 	<string name="rendering_attr_buildings15zoom_name">Gebäude ab Zoomstufe 15 anzeigen</string>
 	<string name="rendering_attr_moreDetailed_name">Mehr Details</string>
-	<string name="rendering_attr_lessDetailed_name">Weniger Details in Karte</string>
-	<string name="rendering_attr_hideAccess_name">Zugangsbeschränkungen</string>
-	<string name="rendering_attr_showAccess_name">Zugangsbeschränkungen und Maut anzeigen</string>
+	<string name="rendering_attr_lessDetailed_name">Weniger Details</string>
+	<string name="rendering_attr_hideAccess_name">Zufahrtsbeschränkungen</string>
+	<string name="rendering_attr_showAccess_name">Zufahrtsbeschränkungen und Maut anzeigen</string>
 	<string name="rendering_attr_showSurfaceGrade_name">Straßenqualität anzeigen</string>
 	<string name="rendering_attr_showSurfaces_name">Straßenoberfläche anzeigen</string>
 	<string name="rendering_attr_showCycleRoutes_name">Fahrrad-Routen anzeigen</string>
@@ -1634,13 +1636,13 @@ Anonym erstellte Gruppen können spontan eingerichtet werden, hier sind die Opti
 	<string name="osmo_connect_to_device_tracker_id">Aufzeichnungskennung</string>
 	<string name="osmo_connect_to_device">Mit Gerät koppeln</string>
 	<string name="osmo_groups">OsMo-Gruppen</string>
-	<string name="osmo_edit_device">Ändern der Nutzereinstellungen</string>
+	<string name="osmo_edit_device">Nutzereigenschaften ändern</string>
 	<string name="osmo_group_info">Info</string>
 	<string name="osmo_group">OsMo-Gruppe</string>
 	<string name="osmo_group_share">Um eine Verbindung zur Gruppe %2$s herzustellen, bitte die Gruppen-ID (%1$s) angeben oder (%3$s) antippen.</string>
 	<string name="osmo_share_connect_device">Diesem Gerät permanent folgen</string>
 	<string name="osmo_share_current_session">Aktuelle Sitzung im Browser teilen</string>
-	<string name="osmo_session_not_available">Sitzung nicht verfügbar, bitte überprüfen, ob \'Standort senden\'\ aktiviert ist.</string>
+	<string name="osmo_session_not_available">Keine Sitzung vorhanden. Ist \'Standort senden\' aktiviert?</string>
 	<string name="osmo_share_session">Sitzung teilen</string>
 	<string name="osmo_session_id_share">Sitzungs-URL zur Geräteverfolgung (%1$s)</string>
 	<string name="osmo_track_interval">Aufzeichnungsintervall</string>
@@ -1662,13 +1664,13 @@ Anonym erstellte Gruppen können spontan eingerichtet werden, hier sind die Opti
 	<string name="osmo_sign_in">Anmelden</string>
 	<string name="osmo_create_groups_confirm">Um Gruppen erstellen zu können, müssen Sie ein registrierter Nutzer von OsMo sein.</string>
 	<string name="osmo_credentials_not_valid">Ihre OsMo-Anmeldedaten sind nicht gültig.</string>
-	<string name="osmo_regenerate_login_ids_confirm">Sind sie sicher, dass Sie Ihre persönliche ID regenerieren möchten? Alle Geräte, die mit Ihnen verbunden sind, werden Ihnen nicht mehr folgen können.</string>
-	<string name="osmo_regenerate_login_ids">Nutzer-ID regenerieren</string>
+	<string name="osmo_regenerate_login_ids_confirm">Sind sie sicher, dass Sie eine neue Personenkennung erstellen möchten? Alle mit Ihnen verbundenen Geräte werden Sie nicht mehr verfolgen können.</string>
+	<string name="osmo_regenerate_login_ids">Nutzerkennung neu erstellen</string>
 	<string name="osmo_use_server_name">Registrierter Name</string>
 	<string name="osmo_connect_to_my_nickname">Nickname</string>
 	<string name="osmo_user_name">Nutzer</string>
 	<string name="osmo_follow">Folgen</string>
-	<string name="osmo_user_joined">Nutzer %1$s hat die Gruppe %2$s betreten</string>
+	<string name="osmo_user_joined">Nutzer %1$s ist der Gruppe %2$s beigetreten</string>
 	<string name="osmo_user_left">Nutzer %1$s hat die Gruppe %2$s verlassen</string>
 	<string name="osmo_show_group_notifications">Gruppenbenachrichtigungen anzeigen</string>
 	<string name="osmo_show_group_notifications_descr">Pop-up-Meldung anzeigen, wenn ein Nutzer der Gruppe beitritt oder sie verlässt</string>
@@ -1676,9 +1678,9 @@ Anonym erstellte Gruppen können spontan eingerichtet werden, hier sind die Opti
 	<string name="osmo_auth_error_short">Anmeldung fehlgeschlagen</string>
 	<string name="osmo_auth_error">Fehler bei der OsMo-Anmeldung: %1$s.
 
-Möglicherweise ist der Dienst nicht verfügbar oder Ihre Anmeldung ist abgelaufen.
+Möglicherweise ist der Dienst vorübergehend nicht erreichbar oder Ihre Anmeldung ist abgelaufen.
 
-Fortsetzen mit einer neuen Registrierung?</string>
+Mit Neuanmeldung fortfahren?</string>
 	<string name="osmo_group_by_invite">Auf Einladung beitreten</string>
 	<string name="osmo_group_information_desc">" - Zum Erstellen einer Gruppe bitte Namen und Beschreibung angeben\n - Die App legt nur Gruppen vom Typ \"einfache Gruppe\" an, mehr dazu auf der Website https://osmo.mobi/g/new
 \n - Auf der Webseite kann man die Gruppe bearbeiten um Orte, Strecken und Punkte hinzuzufügen\n - Wir empfehlen es keine Gruppen mit nur einem Nutzer zu erstellen, wenn es keine POI Gruppe ist\n - Private Gruppen sind auf 8 Personen beschränkt\n - Detaillierte Vertragsbedingungen sind auf der Webseite OsMo.mobi zu finden\n - Wenn besondere Bedürfnisse bestehen, bitte den Support kontaktieren: osmo.mobi@gmail.com "</string>
@@ -1691,10 +1693,10 @@ Fortsetzen mit einer neuen Registrierung?</string>
 	<string name="osmo_gpx_track_downloaded">OsMo-Spur %1$s heruntergeladen.</string>
 	<string name="osmo_invite">Einladen…</string>
 	<string name="osmo_leave_confirmation_msg">Die Gruppe %1$s verlassen?</string>
-	<string name="osmo_cancel_moving_target">Bewegliches Ziel abbrechen</string>
+	<string name="osmo_cancel_moving_target">Bewegliches Ziel abwählen</string>
 	<string name="osmo_set_moving_target">Als bewegliches Ziel auswählen</string>
 	<string name="osmo_edit_color">Darstellungsfarbe</string>
-	<string name="osmo_center_location">Zentrieren auf dem Bildschirm</string>
+	<string name="osmo_center_location">Auf dem Bildschirm zentrieren</string>
 
 	<string name="gpx_file_is_empty">GPX-Track ist leer</string>
 	<string name="gpx_info_waypoints">Wegpunkte: %1$s </string>
@@ -1702,7 +1704,7 @@ Fortsetzen mit einer neuen Registrierung?</string>
 	<string name="gpx_info_start_time">Startzeit: %1$tF, %1$tT </string>
 	<string name="gpx_info_end_time">Endzeit: %1$tF, %1$tT </string>
 	<string name="gpx_info_average_speed">Durchschnittsgeschwindigkeit: %1$s </string>
-	<string name="gpx_info_maximum_speed">Maximale Geschwindigkeit: %1$s </string>
+	<string name="gpx_info_maximum_speed">"Höchstgeschwindigkeit: %1$s "</string>
 	<string name="gpx_info_avg_altitude">Durchschnittliche Höhe: %1$s</string>
 	<string name="gpx_info_diff_altitude">Höhenunterschied: %1$s</string>
 	<string name="gpx_info_asc_altitude">Ab-/Anstieg: %1$s</string>
@@ -1717,10 +1719,10 @@ Fortsetzen mit einer neuen Registrierung?</string>
 	<string name="gpx_selection_track">%1$s \nTrack %2$s</string>
 	
 	<string name="gpx_split_interval">Trennungsintervall</string>
-	<string name="gpx_info_subtracks">"Spurteile: %1$s "</string>
-	<string name="gpx_monitoring_start">Starte GPX-Aufzeichnung</string>
-	<string name="gpx_monitoring_stop">Stoppe GPX-Aufzeichnung</string>
-	<string name="gpx_start_new_segment">Starte neues Segment</string>
+	<string name="gpx_info_subtracks">"Track-Teile: %1$s "</string>
+	<string name="gpx_monitoring_start">GPX-Aufzeichnung starten</string>
+	<string name="gpx_monitoring_stop">GPX-Aufzeichnung beenden</string>
+	<string name="gpx_start_new_segment">Neues Segment starten</string>
 	<string name="gpx_wpt">Wegpunkt</string>
 	<string name="gpx_visibility_txt">Sichtbarkeit</string>
 	<string name="gpx_tags_txt">Tags</string>
