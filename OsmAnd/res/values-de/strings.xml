@@ -124,7 +124,7 @@ Hilfe zur OsmAnd-App erhalten Sie durch unser Support-Team unter support@osmand.
 	<string name="base_world_map">Weltweite Basiskarte (basemap)</string>
 	
 	<string name="context_menu_item_destination_point">Als Ziel wählen</string>
-	<string name="layer_hillshade">Relief Overlay</string>
+	<string name="layer_hillshade">Reliefanzeige</string>
 	
 	<string name="download_hillshade_maps">Relief</string>
 	
@@ -616,7 +616,7 @@ Karten-Kacheln können direkt online bezogen werden, und werden im OsmAnd-Untero
 	<string name="loading_builds_failed">Laden der Liste von OsmAnd-Builds ist fehlgeschlagen</string>
 	<string name="loading_builds">Lade OsmAnd-Builds…</string>
 	<string name="select_build_to_install">Auswählen eines OsmAnd-Builds für die Installation</string>
-	<string name="contribution_activity">Installations Version</string>
+	<string name="contribution_activity">Installationsversion</string>
 	<string name="gps_status_app_not_found">Anwendung \'GPS Status\' ist nicht installiert. Soll diese installiert werden?</string>
 	<string name="voice_is_not_available_msg">Keine Sprachansage verfügbar. Bitte unter \'Einstellungen\' → \'Allgemeine Einstellungen\' → \'Sprachansagen\' ein Sprachpaket auswählen oder herunterladen.</string>
 	<string name="voice_is_not_available_title">Keine Sprachansage ausgewählt</string>
@@ -1120,15 +1120,15 @@ Die globalen Daten (zwischen N 70° und S 70°) basieren auf Messungen von SRTM 
 	<string name="av_widget_action">Standard-Widget-Aktion</string>
 	<string name="av_video_format_descr">Wählen Sie ein Video-Ausgabeformat</string>
 	<string name="av_video_format">Video-Ausgabeformat</string>
-	<string name="av_use_external_recorder_descr">System Video App für Videos verwenden</string>
-	<string name="av_use_external_recorder">System Video App nutzen</string>
+	<string name="av_use_external_recorder_descr">Systemintegrierte Video-App für Videos verwenden</string>
+	<string name="av_use_external_recorder">System-Video-App nutzen</string>
 	<string name="av_settings_descr">Konfigurieren von Audio- und Video-Einstellungen</string>
 	<string name="shared_string_control_stop">Stopp</string>
 	<string name="av_settings">Audio/Video-Einstellungen</string>
 	<string name="shared_string_control_start">Start</string>
 	<string name="av_def_action_picture">Foto aufnehmen</string>
-	<string name="av_use_external_camera_descr">System Kamera App für Fotos verwenden</string>
-	<string name="av_use_external_camera">System Kamera App nutzen</string>
+	<string name="av_use_external_camera_descr">Systemanwendung für Fotos verwenden</string>
+	<string name="av_use_external_camera">System-Kamera-App nutzen</string>
 	<string name="av_def_action_choose">Bei Anfrage auswählen</string>
 	<string name="dropbox_plugin_description">Das Dropbox-Plugin ermöglicht Ihnen die Synchronisierung von Spuren und Audio/Video-Hinweisen mit Ihrem Dropbox-Konto.</string>
 	<string name="dropbox_plugin_name">Dropbox-Plugin</string>
@@ -1264,7 +1264,7 @@ Die globalen Daten (zwischen N 70° und S 70°) basieren auf Messungen von SRTM 
 	<string name="speak_descr">Einstellungen für Ansagen zu Straßennamen, Verkehrswarnungen, Blitzern oder Tempolimits</string>
 	<string name="speak_street_names">Straßennamen (TTS)</string>
 	<string name="map_widget_fps_info">FPS-Debug-Info</string>
-	<string name="driving_region_descr">Region zum Fahren wählen: Europa, USA, GB, etc.</string>
+	<string name="driving_region_descr">Verkehrsregion wählen: Europa, USA, GB, etc.</string>
 	<string name="driving_region_japan">Japan</string>
 	<string name="driving_region_us">USA</string>
 	<string name="driving_region_canada">Kanada</string>
@@ -1272,11 +1272,11 @@ Die globalen Daten (zwischen N 70° und S 70°) basieren auf Messungen von SRTM 
 	<string name="driving_region_uk">UK, Indien &amp; andere</string>
 	<string name="driving_region_australia">Australien</string>
 	<string name="announce_gpx_waypoints">GPX-Wegpunkte</string>
-	<string name="driving_region">Fahrgebiet</string>
+	<string name="driving_region">Verkehrsregion</string>
 	<string name="about_version">Version:</string>
 	<string name="shared_string_about">Über</string>
 	<string name="about_settings_descr">Versionsinfo, Lizenz, Projektmitglieder</string>
-	<string name="local_index_tile_data_zooms">Zooms heruntergeladen: %1$s</string>
+	<string name="local_index_tile_data_zooms">Heruntergeladene Zoom-Stufen: %1$s</string>
 	<string name="local_index_tile_data_expire">Gültigkeit endet in (Minuten): %1$s</string>
 	<string name="local_index_tile_data_downloadable">Herunterladbar: %1$s</string>
 	<string name="local_index_tile_data_maxzoom">Maximum Zoom: %1$s</string>
@@ -1288,7 +1288,7 @@ Die globalen Daten (zwischen N 70° und S 70°) basieren auf Messungen von SRTM 
 	<string name="edit_tilesource_expiration_time">Ablaufzeit (Minuten)</string>
 	<string name="edit_tilesource_minzoom">Min Zoom</string>
 	<string name="edit_tilesource_url_to_load">URL</string>
-	<string name="edit_tilesource_choose_existing">Wähle vorhandene…</string>
+	<string name="edit_tilesource_choose_existing">Aus vorhandenen wählen…</string>
 	<string name="maps_define_edit">Definieren/Bearbeiten…</string>
 	<string name="shared_string_and">und</string>
 	<string name="shared_string_or">oder</string>
@@ -2732,4 +2732,6 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="average_altitude">Durchschnitt</string>
     <string name="shared_string_time">Zeit</string>
     <string name="total_distance">Gesamtstrecke</string>
+    <string name="routing_attr_driving_style_name">Fahrweise</string>
+    <string name="routing_attr_driving_style_description">Sicheres, schnelles oder ausgewogenes Fahren</string>
     </resources>
