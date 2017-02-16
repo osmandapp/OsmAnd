@@ -1007,7 +1007,7 @@ Maailmanlaajuiset tiedot (välillä 70 astetta pohjoista ja 70 astetta eteläist
     <string name="access_map_linked_to_location">Kartta on linkitetty sijaintiin</string>
     <string name="access_shared_string_not_installed">Ei asennettu</string>
     <string name="access_widget_expand">Laajenna</string>
-    <string name="access_shared_string_navigate_up"/>
+    <string name="access_shared_string_navigate_up">Navigointi ylös</string>
     <string name="access_sort">Lajittele</string>
     <string name="map_mode">Karttatila</string>
     <string name="number_of_gpx_files_selected_pattern">%s GPX-tiedostoa valittu</string>
@@ -2174,4 +2174,34 @@ Jos pidät OsmAndista ja OSMsta ja haluat tukea niitä, on tämä täydellinen t
     <string name="rendering_attr_depthContours_name">Korkeuskäyrät</string>
 	<string name="rendering_attr_depthContours_description">Näytä korkeuskäyrät ja -pisteet</string>
     <string name="route_is_too_long">OsmAndin offline-reititys voi kestää hyvin pitkään (tai epäonnistua), jos pisteet ovat toisistaan kauempana kuin 200 km. Suorituskyky on parempi, jos lisäät välietappeja.</string>
+    <string name="routing_attr_driving_style_description">Turvallista, nopeaa tai tasapainoista ajoa</string>
+    <string name="route_altitude">Reitin korkeus</string>
+    <string name="altitude_descent">Lasku</string>
+    <string name="altitude_ascent">Nousu</string>
+    <string name="altitude_range">Korkeuserot</string>
+    <string name="average_altitude">Keskimäärin</string>
+    <string name="shared_string_time">Aika</string>
+    <string name="total_distance">Kokonaisetäisyys</string>
+    <string name="routing_attr_height_relief_smoothness_factor_name">Korkeuserojen tasaisuustekijä</string>
+    <string name="routing_attr_height_relief_smoothness_factor_description">Enemmän tasaista vai enemmän mäkiä</string>
+    <string name="routing_attr_height_obstacles_name">Käytä korkeustietoja</string>
+    <string name="routing_attr_height_obstacles_description">Käytä maaston korkeustietoja jotka saadaan SRTM, ASTER ja EU-DEM lähteistä</string>
+
+    <string name="auto_split_recording_title">Jaa automaattisesti nauhoitukset tauon jälkeen</string>
+	<string name="rendering_attr_hideWaterPolygons_name">Piilota vesi</string>
+    <string name="shared_string_action_name">Toiminnon nimi</string>
+<string name="quick_action_btn_tutorial_title">Muuta näppäimen sijaintia</string>
+    <string name="quick_action_map_source_action">Lisää karttalähde</string>
+    <string name="quick_action_map_source_title">Karttalähteet</string>
+    <string name="quick_action_map_source">Muuta kartan lähdettä</string>
+    <string name="quick_action_map_source_switch"/>
+    <string name="gpx_split_interval">Jakoväli</string>
+    <string name="prefs_plugins_descr">Liitännäiset aktivoivat laajennetut asetukset ja lisätoiminnallisuudet</string>
+    <string name="choose_auto_follow_route_descr">Aika kunnes karttanäyttö synkronoituu nykysijaintiin</string>
+    <string name="keep_informing_descr">Ilmoita uudestaan suunnistusohjeet säännöllisin väliajoin</string>
+    <string name="auto_follow_route_navigation">Keskitä automaattisesti ainoastaan suunnistettaessa</string>
+    <string name="old_poi_file_should_be_deleted">POI datatiedosto \'%1$s\' on tarpeeton ja se voidaan poistaa.</string>
+    <string name="local_index_action_do">Olet %1$s %2$s jäsentä. Jatkatko?</string>
+    <string name="choose_audio_stream">Ääniohjauksen tuloste</string>
+    <string name="warning_tile_layer_not_downloadable">Sovellutus ei voi ladata karttatasoa %1$s, ole hyvä ja yritä asentaa se uudelleen.</string>
     </resources>
