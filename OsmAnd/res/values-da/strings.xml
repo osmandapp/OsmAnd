@@ -2872,4 +2872,6 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="average_altitude">Gennemsnit</string>
     <string name="shared_string_time">Tid</string>
     <string name="total_distance">Total afstand</string>
+    <string name="routing_attr_driving_style_name">Kørestil</string>
+    <string name="routing_attr_driving_style_description">Sikker, hurtig eller afbalanceret kørsel</string>
     </resources>
