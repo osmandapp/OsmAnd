@@ -2643,4 +2643,6 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="average_altitude">Priemer</string>
     <string name="shared_string_time">Čas</string>
     <string name="total_distance">Celková vzdialenosť</string>
+    <string name="routing_attr_driving_style_name">Štýl jazdy</string>
+    <string name="routing_attr_driving_style_description">Bezpečná, rýchla alebo vyvážená jazda</string>
     </resources>
