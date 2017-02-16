@@ -11,12 +11,15 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.formatter.DefaultAxisValueFormatter;
+import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.utils.Utils;
 
@@ -49,6 +52,7 @@ import java.io.StringWriter;
 import java.io.Writer;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
+import java.text.MessageFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -63,6 +67,11 @@ import java.util.Stack;
 import java.util.TimeZone;
 
 import static com.github.mikephil.charting.components.XAxis.XAxisPosition.BOTTOM;
+import static net.osmand.plus.OsmAndFormatter.FEET_IN_ONE_METER;
+import static net.osmand.plus.OsmAndFormatter.METERS_IN_KILOMETER;
+import static net.osmand.plus.OsmAndFormatter.METERS_IN_ONE_MILE;
+import static net.osmand.plus.OsmAndFormatter.METERS_IN_ONE_NAUTICALMILE;
+import static net.osmand.plus.OsmAndFormatter.YARDS_IN_ONE_METER;
 
 public class GPXUtilities {
 	public final static Log log = PlatformUtil.getLog(GPXUtilities.class);
@@ -1281,7 +1290,12 @@ public class GPXUtilities {
 		}
 	}
 
-	public static void setupGPXChart(LineChart mChart, boolean useFeet, int yLabelsCount) {
+	public static void setupGPXChart(OsmandApplication ctx, LineChart mChart, int yLabelsCount) {
+		OsmandSettings settings = ctx.getSettings();
+		OsmandSettings.MetricsConstants mc = settings.METRIC_SYSTEM.get();
+		boolean useFeet = (mc == OsmandSettings.MetricsConstants.MILES_AND_FEET) || (mc == OsmandSettings.MetricsConstants.MILES_AND_YARDS);
+		boolean light = settings.isLightContent();
+
 		//mChart.setHardwareAccelerationEnabled(true);
 		mChart.setTouchEnabled(true);
 		mChart.setDragEnabled(true);
@@ -1307,8 +1321,8 @@ public class GPXUtilities {
 		XAxis xAxis = mChart.getXAxis();
 		xAxis.setDrawAxisLine(false);
 		xAxis.setDrawGridLines(false);
-		xAxis.setDrawAxisLine(false);
 		xAxis.setPosition(BOTTOM);
+		xAxis.setTextColor(light ? mChart.getResources().getColor(R.color.secondary_text_light) : mChart.getResources().getColor(R.color.secondary_text_dark));
 
 		YAxis yAxis = mChart.getAxisLeft();
 		yAxis.enableGridDashedLine(10f, 5f, 0f);
@@ -1318,6 +1332,7 @@ public class GPXUtilities {
 		yAxis.setXOffset(16f);
 		yAxis.setYOffset(-6f);
 		yAxis.setLabelCount(yLabelsCount);
+		yAxis.setTextColor(light ? mChart.getResources().getColor(R.color.secondary_text_light) : mChart.getResources().getColor(R.color.secondary_text_dark));
 
 		Legend legend = mChart.getLegend();
 		legend.setEnabled(false);
@@ -1325,9 +1340,87 @@ public class GPXUtilities {
 		mChart.getAxisRight().setEnabled(false);
 	}
 
-	public static void setGPXChartData(LineChart mChart, GPXTrackAnalysis analysis,  int fillResourceId, boolean useFeet) {
+	public static void setGPXChartData(OsmandApplication ctx, LineChart mChart, GPXTrackAnalysis analysis,  int fillResourceId) {
+		OsmandSettings settings = ctx.getSettings();
+		OsmandSettings.MetricsConstants mc = settings.METRIC_SYSTEM.get();
+		boolean useFeet = (mc == OsmandSettings.MetricsConstants.MILES_AND_FEET) || (mc == OsmandSettings.MetricsConstants.MILES_AND_YARDS);
+		boolean light = settings.isLightContent();
 		final float convEle = useFeet ? 3.28084f : 1.0f;
-		final float divX = analysis.totalDistance > 1000 ? 1000f : 1f;
+		final float meters = analysis.totalDistance;
+		float divX;
+
+		String format1 = "{0,number,0.#} ";
+		String format2 = "{0,number,0.##} ";
+		String fmt = null;
+		int mainUnitStr;
+		float mainUnitInMeters;
+		if (mc == OsmandSettings.MetricsConstants.KILOMETERS_AND_METERS) {
+			mainUnitStr = R.string.km;
+			mainUnitInMeters = METERS_IN_KILOMETER;
+		} else if (mc == OsmandSettings.MetricsConstants.NAUTICAL_MILES) {
+			mainUnitStr = R.string.nm;
+			mainUnitInMeters = METERS_IN_ONE_NAUTICALMILE;
+		} else {
+			mainUnitStr = R.string.mile;
+			mainUnitInMeters = METERS_IN_ONE_MILE;
+		}
+		if (meters > 9.99f * mainUnitInMeters) {
+			fmt = format1;
+		}
+		if (meters >= 100 * mainUnitInMeters ||
+				meters > 9.99f * mainUnitInMeters ||
+				meters > 0.999f * mainUnitInMeters ||
+				mc == OsmandSettings.MetricsConstants.MILES_AND_FEET && meters > 0.249f * mainUnitInMeters ||
+				mc == OsmandSettings.MetricsConstants.MILES_AND_METERS && meters > 0.249f * mainUnitInMeters ||
+				mc == OsmandSettings.MetricsConstants.MILES_AND_YARDS && meters > 0.249f * mainUnitInMeters ||
+				mc == OsmandSettings.MetricsConstants.NAUTICAL_MILES && meters > 0.99f * mainUnitInMeters) {
+
+			divX = mainUnitInMeters;
+			if (fmt == null) {
+				fmt = format2;
+			}
+		} else {
+			fmt = null;
+			if (mc == OsmandSettings.MetricsConstants.KILOMETERS_AND_METERS || mc == OsmandSettings.MetricsConstants.MILES_AND_METERS) {
+				divX = 1f;
+				mainUnitStr = R.string.m;
+			} else if (mc == OsmandSettings.MetricsConstants.MILES_AND_FEET) {
+				divX = 1f / FEET_IN_ONE_METER;
+				mainUnitStr = R.string.foot;
+			} else if (mc == OsmandSettings.MetricsConstants.MILES_AND_YARDS) {
+				divX = 1f / YARDS_IN_ONE_METER;
+				mainUnitStr = R.string.yard;
+			} else {
+				divX = 1f;
+				mainUnitStr = R.string.m;
+			}
+		}
+
+		final String mainUnitX = ctx.getString(mainUnitStr);
+		final String formatX = fmt;
+
+		XAxis xAxis = mChart.getXAxis();
+		xAxis.setValueFormatter(new IAxisValueFormatter() {
+
+			@Override
+			public String getFormattedValue(float value, AxisBase axis) {
+				if (formatX != null) {
+					return MessageFormat.format(formatX + mainUnitX, value);
+				} else {
+					return (int)value + " " + mainUnitX;
+				}
+			}
+		});
+
+		final String mainUnitY = useFeet ? ctx.getString(R.string.foot) : ctx.getString(R.string.m);
+		YAxis yAxis = mChart.getAxisLeft();
+		yAxis.setValueFormatter(new IAxisValueFormatter() {
+
+			@Override
+			public String getFormattedValue(float value, AxisBase axis) {
+				return (int)value + " " + mainUnitY;
+			}
+		});
 
 		ArrayList<Entry> values = new ArrayList<>();
 		List<Elevation> elevationData = analysis.elevationData;
@@ -1357,7 +1450,7 @@ public class GPXUtilities {
 		dataSet.setHighlightEnabled(true);
 		dataSet.setDrawVerticalHighlightIndicator(true);
 		dataSet.setDrawHorizontalHighlightIndicator(false);
-		dataSet.setHighLightColor(Color.BLACK);
+		dataSet.setHighLightColor(light ? mChart.getResources().getColor(R.color.secondary_text_light) : mChart.getResources().getColor(R.color.secondary_text_dark));
 
 		if (Utils.getSDKInt() >= 18) {
 			// fill drawable only supported on api level 18 and above

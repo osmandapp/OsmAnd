@@ -5,15 +5,12 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AlertDialog;
 import android.text.Html;
@@ -34,10 +31,7 @@ import android.widget.TextView;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.MarkerView;
 import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.data.LineData;
-import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.highlight.Highlight;
-import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.utils.MPPointF;
 import com.github.mikephil.charting.utils.Utils;
 
@@ -46,7 +40,6 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.GPXUtilities;
-import net.osmand.plus.GPXUtilities.Elevation;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.GpxSelectionHelper;
@@ -58,7 +51,6 @@ import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.OsmandSettings.MetricsConstants;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TrackActivity;
@@ -84,7 +76,6 @@ public class SelectedGPXFragment extends OsmAndListFragment {
 	protected SelectedGPXAdapter adapter;
 	protected TrackActivity activity;
 	private boolean updateEnable;
-	private MetricsConstants mc;
 
 	@Override
 	public void onAttach(Activity activity) {
@@ -94,7 +85,6 @@ public class SelectedGPXFragment extends OsmAndListFragment {
 		final Collator collator = Collator.getInstance();
 		collator.setStrength(Collator.SECONDARY);
 		app = (OsmandApplication) activity.getApplication();
-		mc = app.getSettings().METRIC_SYSTEM.get();
 	}
 
 	public TrackActivity getMyActivity() {
@@ -459,6 +449,7 @@ public class SelectedGPXFragment extends OsmAndListFragment {
 
 	class SelectedGPXAdapter extends ArrayAdapter<GpxDisplayItem> {
 
+
 		public SelectedGPXAdapter(List<GpxDisplayItem> items) {
 			super(getActivity(), R.layout.gpx_item_list_item, items);
 		}
@@ -467,13 +458,12 @@ public class SelectedGPXFragment extends OsmAndListFragment {
 		public View getView(int position, View convertView, ViewGroup parent) {
 			View row = convertView;
 			LineChart mChart = null;
-			final boolean useFeet = (mc == MetricsConstants.MILES_AND_FEET) || (mc == MetricsConstants.MILES_AND_YARDS);
 			if (row == null) {
 				LayoutInflater inflater = getMyActivity().getLayoutInflater();
 				row = inflater.inflate(R.layout.gpx_item_list_item, parent, false);
 
 				mChart = (LineChart) row.findViewById(R.id.chart);
-				GPXUtilities.setupGPXChart(mChart, useFeet, 5);
+				GPXUtilities.setupGPXChart(app, mChart, 5);
 			}
 			GpxDisplayItem child = getItem(position);
 			TextView label = (TextView) row.findViewById(R.id.name);
@@ -517,8 +507,8 @@ public class SelectedGPXFragment extends OsmAndListFragment {
 			if (mChart != null) {
 				if (child.analysis != null && child.analysis.elevationData != null && child.analysis.isElevationSpecified() && (child.analysis.totalDistance > 0)) {
 
-					GPXUtilities.setGPXChartData(mChart, child.analysis, Utils.getSDKInt() >= 18
-							? R.drawable.line_chart_fade_orange : R.color.osmand_orange, useFeet);
+					GPXUtilities.setGPXChartData(app, mChart, child.analysis, Utils.getSDKInt() >= 18
+							? R.drawable.line_chart_fade_orange : R.color.osmand_orange);
 
 					mChart.setVisibility(View.VISIBLE);
 				} else {
