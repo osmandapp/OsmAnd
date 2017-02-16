@@ -2809,5 +2809,10 @@ Facebook：https://www.facebook.com/osmandapp
     <string name="routing_attr_height_obstacles_description">使用 SRTM、ASTER 和 EU-DEM 提供的地形海拔資料</string>
 
     <string name="route_altitude">路線海拔高度</string>
-    <string name="altitude_descent">下降</string>
+    <string name="altitude_descent">下坡</string>
+    <string name="altitude_ascent">上坡</string>
+    <string name="altitude_range">海拔高度範圍</string>
+    <string name="average_altitude">平均</string>
+    <string name="shared_string_time">時間</string>
+    <string name="total_distance">總體距離</string>
     </resources>
