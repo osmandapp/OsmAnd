@@ -2815,4 +2815,6 @@ Facebook：https://www.facebook.com/osmandapp
     <string name="average_altitude">平均</string>
     <string name="shared_string_time">時間</string>
     <string name="total_distance">總體距離</string>
+    <string name="routing_attr_driving_style_name">駕駛方式</string>
+    <string name="routing_attr_driving_style_description">安全、快速或穩定的駕駛</string>
     </resources>
