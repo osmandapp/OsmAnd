@@ -25,7 +25,7 @@ public abstract class OsmandBaseExpandableListAdapter extends BaseExpandableList
 	protected void setCategoryIcon(OsmandApplication app, int resId, int groupPosition, boolean isExpanded, View row, boolean light) {
 		ImageView icon = (ImageView) row.findViewById(R.id.category_icon);
 		if (resId == 0) {
-			icon.setImageDrawable(app.getIconsCache().getIcon(R.drawable.ic_action_folder, light));
+			icon.setImageDrawable(app.getIconsCache().getIcon(R.drawable.ic_action_folder_stroke, light));
 		} else {
 			icon.setImageDrawable(app.getIconsCache().getIcon(resId, light));
 		}

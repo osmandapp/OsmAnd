@@ -220,7 +220,7 @@ public class ShowRouteInfoDialogFragment extends DialogFragment {
 		String min = OsmAndFormatter.getFormattedAlt(analysis.minElevation, app);
 		String max = OsmAndFormatter.getFormattedAlt(analysis.maxElevation, app);
 		((TextView) headerView.findViewById(R.id.range_text))
-				.setText(min + " " + max);
+				.setText(min + " - " + max);
 
 		String asc = OsmAndFormatter.getFormattedAlt(analysis.diffElevationUp, app);
 		String desc = OsmAndFormatter.getFormattedAlt(analysis.diffElevationDown, app);
