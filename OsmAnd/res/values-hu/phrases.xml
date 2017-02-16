@@ -579,7 +579,7 @@
 	<string name="poi_strait">Szoros</string>
 	<string name="poi_islet">Kis sziget</string>
 
-	<string name="poi_anchorage">Horgonyzóhely</string>
+	<string name="poi_anchorage">Horgonyzóterület</string>
 	<string name="poi_military_landuse">Katonai terület</string>
 	<string name="poi_military_airfield">Katonai repülőtér</string>
 	<string name="poi_military_bunker">Bunker</string>
@@ -1790,7 +1790,7 @@
 	<string name="poi_fuel_type">Típus</string>
 	<string name="poi_payment_type">Fizetési mód</string>
 	<string name="poi_trash_disposal">Hulladékkonténer</string>
-		<string name="poi_beacon">Jeladó</string>
+		<string name="poi_beacon">Jel</string>
 	<string name="poi_free_flying">Siklóernyő- és sárkányrepülőbolt</string>
 	<string name="poi_standpipe">Föld feletti tűzcsap</string>
 	<string name="poi_groyne">Sarkantyú</string>
@@ -3141,4 +3141,14 @@
 	<string name="poi_wiki_lang_min">Minangkabau Wikipédia</string>
 	<string name="poi_wiki_lang_zhminnan">Dél-min Wikipédia</string>
 	<string name="poi_bus_trap">Buszcsapda</string>
+	<string name="poi_beacon_cardinal">Kardinális jel</string>
+	<string name="poi_beacon_lateral">Laterális jel</string>
+	<string name="poi_beacon_safe_water">Biztonságos víz jel</string>
+	<string name="poi_beacon_special_purpose">Különleges jel</string>
+	<string name="poi_buoy_cardinal">Kardinális bója</string>
+	<string name="poi_buoy_isolated_danger">Különálló veszélyes helyet jelző bója</string>
+	<string name="poi_buoy_lateral">Laterális bója</string>
+	<string name="poi_buoy_safe_water">Biztonságos víz bója</string>
+	<string name="poi_buoy_special_purpose">Különleges bója</string>
+	<string name="poi_buoy_installation">Kikötőbója</string>
 	</resources>
