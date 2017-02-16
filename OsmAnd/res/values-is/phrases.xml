@@ -1763,4 +1763,117 @@
 	<string name="poi_drink_wine_retail">Vínveitingar: smásala</string>
 	<string name="poi_drink_wine_served">Vínveitingar: þjónusta</string>
 
-</resources>
+<string name="poi_covered">Undir þaki</string>
+	<string name="poi_aerialway_bicycle">Flutningur reiðhjóla</string>
+	<string name="poi_pharmacy_dispensing">Lyfjadreifing</string>
+	<string name="poi_healthcare_alternative_types">Sérsvið</string>
+	<string name="poi_free_flying_characteristics">Eiginleikar</string>
+	<string name="poi_backcountry">Úr alfaraleið</string>
+	<string name="poi_delivery">Sending</string>
+	<string name="poi_drive_in">Bílalúga</string>
+	<string name="poi_drive_through">Bílaafgreiðsla</string>
+	<string name="poi_takeaway">Taka með</string>
+	<string name="poi_cocktails">Kokteilar</string>
+	<string name="poi_microbrewery">Bruggað á staðnum</string>
+	<string name="poi_fireplace">Eldstæði</string>
+	<string name="poi_seasonal">Árstíðabundið</string>
+	<string name="poi_water_characteristic">Eiginleikar vatns</string>
+	<string name="poi_nudism">Nekt</string>
+	<string name="poi_diet">Mataræði</string>
+	<string name="poi_health_specialty">Heilsutengt sérsvið</string>
+	<string name="poi_massage_type">Tegund af nuddi</string>
+	<string name="poi_power_supply">Rafmagnsinnstungur</string>
+	<string name="poi_medical_system">Lækningasvið</string>
+	<string name="poi_home_visit">Heimsóknir</string>
+	<string name="poi_free_flying_characteristic">Eiginleikar</string>
+	<string name="poi_cafeteria">Kaffitería</string>
+
+<string name="poi_shop_food">Kjörbúð og stórmarkaður</string>
+	<string name="poi_emergency_infrastructure">Innviðir fyrir neyðartilfelli</string>
+	<string name="poi_road_obstacle">Hindrun á vegi</string>
+	<string name="poi_bicycle_transport">Reiðhjólasamgöngur</string>
+	<string name="poi_hiking_routes">Gönguleiðir</string>
+	<string name="poi_water_supply">Vatnsveita</string>
+	<string name="poi_craft">Handverk</string>
+	<string name="poi_convenience">Kjörbúð</string>
+	<string name="poi_beverages">Drykkjarvöruverslun</string>
+	<string name="poi_tea">Teverslun</string>
+	<string name="poi_dairy">Mjólkurbúð</string>
+	<string name="poi_wine">Vínbúð</string>
+	<string name="poi_antiques">Antíkverslun</string>
+	<string name="poi_bathroom_furnishing">Baðhúsinnréttingar</string>
+	<string name="poi_carpet">Teppaverslun</string>
+	<string name="poi_candles">Kertaverslun</string>
+	<string name="poi_computer">Tölvuverslun</string>
+	<string name="poi_doors">Hurðir</string>
+	<string name="poi_florist">Blómabúð</string>
+	<string name="poi_garden_furniture">Garðhúsgagnaverslun</string>
+	<string name="poi_hearing_aids">Heyrnartæki</string>
+	<string name="poi_kitchen">Eldhúsinnréttingar</string>
+	<string name="poi_paint">Málningarvöruverslun</string>
+	<string name="poi_pet">Gæludýraverslun</string>
+	<string name="poi_stationery">Ritfangaverslun</string>
+	<string name="poi_tyres">Dekkjasala</string>
+	<string name="poi_electronics">Rafeindatækjaverslun</string>
+	<string name="poi_video_games">Tölvuleikir</string>
+	<string name="poi_spices">Kryddverslun</string>
+	<string name="poi_fire_hydrant">Brunahani</string>
+	<string name="poi_fire_hose">Brunaslanga</string>
+	<string name="poi_ambulance_station">Sjúkrabílastöð</string>
+	<string name="poi_traffic_calming_bump">Ójafna</string>
+	<string name="poi_car_repair">Bílaviðgerðir</string>
+	<string name="poi_vehicle_inspection">Bifreiðaskoðun</string>
+	<string name="poi_fuel_gtl_diesel">GTL-dísel</string>
+	<string name="poi_fuel_hgv_diesel">HGV-dísel</string>
+	<string name="poi_fuel_lpg">LPG</string>
+	<string name="poi_fuel_cng">CNG</string>
+	<string name="poi_fuel_svo">SVO</string>
+	<string name="poi_public_transport_platform_bus">Strætisvagnabiðstöð</string>
+	<string name="poi_bus_stop">Strætisvagnabiðstöð</string>
+	<string name="poi_public_transport_platform_tram">Sporvagnastöð</string>
+	<string name="poi_tram_stop">Sporvagnastöð</string>
+	<string name="poi_bus_station">Strætóstöð</string>
+	<string name="poi_railway_station">Járnbrautarstöð</string>
+	<string name="poi_halt">Járnbrautarpallur</string>
+	<string name="poi_subway_entrance">Inngangur í neðanjarðarlest</string>
+	<string name="poi_subway_station">Neðanjarðarlestarstöð</string>
+	<string name="poi_taxi">Leigubílastaur</string>
+
+	<string name="poi_bicycle_rental">Reiðhjólaleiga</string>
+	<string name="poi_bicycle_parking">Reiðhjólastæði</string>
+
+	<string name="poi_wastewater_plant">Vatnshreinsistöð</string>
+	<string name="poi_power_tower">Raflínumastur</string>
+	<string name="poi_power_pole">Raflínustaur</string>
+
+	<string name="poi_observation_tower">Varðturn</string>
+	<string name="poi_bell_tower">Klukkuturn</string>
+	<string name="poi_recycling_hardcore">Hart efni</string>
+	<string name="poi_construction">Bygging</string>
+	<string name="poi_brownfield">Byggingarsvæði</string>
+	<string name="poi_greenfield">Nýbyggingarsvæði</string>
+	<string name="poi_adit">Námuinngangur</string>
+	<string name="poi_petroleum_well">Olíulind</string>
+	<string name="poi_salt_pond">Salttjörn</string>
+	<string name="poi_gasometer">Gasmælir</string>
+	<string name="poi_storage_tank">Geymslutankur</string>
+
+	<string name="poi_driving_school">Ökuskóli</string>
+	<string name="poi_trade_building_supplies">Byggingavörur</string>
+	<string name="poi_trade_plumbing">Pípulagnavörur</string>
+	<string name="poi_trade_wood">Timbur</string>
+	<string name="poi_trade_agricultural_supplies">Landbúnaðarvörur</string>
+	<string name="poi_trade_tile">Tígulsteinar</string>
+
+	<string name="poi_parking_multi_storey">Margra hæða</string>
+
+	<string name="poi_bicycle_parking_building">Sérstök bygging</string>
+	<string name="poi_smoking_dedicated">Tileinkað reykingafólki</string>
+
+	<string name="poi_toll_yes">Gjaldskylda</string>
+	<string name="poi_toll_no">Ekkert gjald</string>
+	<string name="poi_toll_hgv_yes">HGV-tollur</string>
+	<string name="poi_rescue_station">Björgunarstöð</string>
+
+	<string name="poi_piste_difficulty_easy">Auðvelt</string>
+	</resources>
