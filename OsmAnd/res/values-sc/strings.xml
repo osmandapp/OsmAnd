@@ -2795,4 +2795,11 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="routing_attr_height_relief_smoothness_factor_name">Fatore de levigadura de sos rilievos</string>
     <string name="routing_attr_driving_style_name">Istile de ghia</string>
     <string name="routing_attr_driving_style_description">Ghia segura, lestra o bilantziada</string>
+    <string name="route_altitude">Artària de s\'istrada</string>
+    <string name="altitude_descent">Falada</string>
+    <string name="altitude_ascent">Artziada</string>
+    <string name="altitude_range">Intervallu de artària</string>
+    <string name="average_altitude">Mèdia</string>
+    <string name="total_distance">Distàntzia totale</string>
+    <string name="shared_string_time">Ora</string>
     </resources>
