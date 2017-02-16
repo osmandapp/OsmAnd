@@ -79,7 +79,7 @@ Hilfe zur OsmAnd-App erhalten Sie durch unser Support-Team unter support@osmand.
 	<string name="save_global_track_interval_descr">Aufzeichnungsintervall für die generelle Positionsaufzeichnung (via Schaltfläche \'GPX-Aufnahme\' auf dem Kartenbildschirm)</string>
 	<string name="save_global_track_interval">Generelles Aufzeichnungsintervall</string>
 	<string name="enable_sleep_mode">GPS-Hintergrunddienst aktivieren</string>
-	<string name="sleep_mode_stop_dialog">GPS-Hintergrunddienst stoppen?</string>
+	<string name="sleep_mode_stop_dialog">GPS-Hintergrunddienst beenden?</string>
 	<string name="bg_service_sleep_mode_off">Hintergrunddienst\n einschalten</string>
 	<string name="bg_service_sleep_mode_on">Hintergrunddienst\n ausschalten</string>
 	<string name="background_router_service_descr">Aktiviere OsmAnd-Hintergrunddienst für Funktionalitäten bei ausgeschalteter Anzeige</string>
@@ -106,7 +106,7 @@ Hilfe zur OsmAnd-App erhalten Sie durch unser Support-Team unter support@osmand.
 	<string name="continue_navigation">Navigation fortsetzen</string>
 	<string name="pause_navigation">Navigation pausieren</string>
 	<string name="keep_navigation_service">Aktiv erhalten</string>
-	<string name="stop_navigation_service">Abbrechen</string>
+	<string name="stop_navigation_service">Beenden</string>
 	<string name="rendering_attr_alpineHiking_name">Alpine Tourenskala (SAC)</string>
 	<string name="rendering_attr_alpineHiking_description">Wege entsprechend der SAC-Wanderskala darstellen</string>
 	<string name="rendering_attr_hikingRoutesOSMC_name">Wandersymboleinblendung</string>
@@ -146,7 +146,7 @@ Hilfe zur OsmAnd-App erhalten Sie durch unser Support-Team unter support@osmand.
 	<string name="safe_mode_description">Anwendung läuft im abgesicherten Modus (Verwendung für langsamere Android-Versionen).</string>
 	<string name="safe_mode">Abgesicherter Modus</string>
 	<string name="native_library_not_running">Die Anwendung läuft im abgesicherten Modus (kann in den Einstellungen deaktiviert werden).</string>
-	<string name="background_service_is_enabled_question">Der Hintergrunddienst läuft noch, soll er auch gestoppt werden?</string>
+	<string name="background_service_is_enabled_question">Der Hintergrunddienst läuft noch, soll er auch beendet werden?</string>
 	<string name="rendering_attr_roadColors_description">Auswahl eines Straßenfarbschemas:</string>
 	<string name="rendering_attr_roadColors_name">Straßenfarbschema</string>
 	<string name="show_warnings_title">Warnungen anzeigen …</string>
@@ -1125,7 +1125,7 @@ Die globalen Daten (zwischen N 70° und S 70°) basieren auf Messungen von SRTM 
 	<string name="av_settings_descr">Konfigurieren von Audio- und Video-Einstellungen</string>
 	<string name="shared_string_control_stop">Stopp</string>
 	<string name="av_settings">Audio/Video-Einstellungen</string>
-	<string name="shared_string_control_start">Starten</string>
+	<string name="shared_string_control_start">Start</string>
 	<string name="av_def_action_picture">Foto aufnehmen</string>
 	<string name="av_use_external_camera_descr">System Kamera App für Fotos verwenden</string>
 	<string name="av_use_external_camera">System Kamera App nutzen</string>
@@ -1191,7 +1191,7 @@ Die globalen Daten (zwischen N 70° und S 70°) basieren auf Messungen von SRTM 
 	<string name="select_address_activity">Adresse auswählen</string>
 	<string name="favourites_list_activity">Favorit auswählen</string>
 	<string name="local_openstreetmap_act_title">OSM-Bearbeitungen</string>
-	<string name="shared_string_more_actions">Andere Aktionen</string>
+	<string name="shared_string_more_actions">Weitere Aktionen</string>
 	<string name="choose_osmand_theme">Design der Anwendung</string>
 	<string name="download_using_mobile_internet">Derzeit besteht keine WLAN-Verbindung. Soll das Herunterladen mit der aktuellen Datenverbindung erfolgen?</string>
 	<string name="clear_destination">Ziel löschen</string>
@@ -1777,7 +1777,7 @@ Aufgenommene Tracks kann man z.B. mit Bekannten teilen, oder auch zum Upload fü
     <string name="rendering_category_details">Details</string>
     <string name="rendering_category_transport">ÖPNV-Linien</string>
     <string name="map_widget_appearance_rem">Verbleibende Elemente</string>
-    <string name="map_widget_top">Statuszeile</string>
+    <string name="map_widget_top">Statusleiste</string>
 	<string name="map_widget_right">Rechtes Panel</string>
 	<string name="map_widget_left">Linkes Panel</string>
     <string name="shared_string_show">Anzeigen</string>
@@ -1790,7 +1790,7 @@ Aufgenommene Tracks kann man z.B. mit Bekannten teilen, oder auch zum Upload fü
     <string name="wake_on_voice_descr">Bildschirm bei Navigationsanweisung aktivieren (falls aus)</string>
     <string name="shared_string_never">Niemals</string>
     
-    <string name="impassable_road">Straße blockieren…</string>
+    <string name="impassable_road">Straßen vermeiden …</string>
     <string name="rendering_attr_tramTrainRoutes_name">Straßen- und Eisenbahnlinien</string>
     <string name="rendering_attr_trainLightrailRoutes_name">Stadtbahnlinien</string>
     <string name="rendering_attr_shareTaxiRoutes_name">Sammeltaxi-Linien</string>
@@ -1929,11 +1929,11 @@ Diese Ansicht kann zurückgestellt werden indem Sie hier wieder deaktiviert oder
 	<string name="storage_directory_default">Interner Speicher</string>
 	<string name="storage_directory">Kartenspeicher</string>
 	<string name="shared_string_copy">Kopieren</string>
-	<string name="filter_poi_hint">Nach Name filtern</string>
+	<string name="filter_poi_hint">Nach Namen filtern</string>
 	<string name="agps_info">A-GPS Info</string>
 	<string name="shared_string_manage">Verwalten</string>
 	<string name="shared_string_edit">Bearbeiten</string>
-	<string name="shared_string_search">Suchen</string>
+	<string name="shared_string_search">Suche</string>
 	<string name="shared_string_show_description">Beschreibung anzeigen</string>
 	<string name="shared_string_message">Nachricht</string>
 	<string name="agps_data_last_downloaded">A-GPS-Daten zuletzt heruntergeladen: %1$s</string>
@@ -1953,11 +1953,11 @@ Diese Ansicht kann zurückgestellt werden indem Sie hier wieder deaktiviert oder
 	<string name="osmand_parking_overdue">überfällig</string>
 	<string name="osm_edits">OSM-Änderungen</string>
 	<string name="parking_place_limited">Parkzeit begrenzt auf</string>
-	<string name="your_edits">Deine Änderungen</string>
+	<string name="your_edits">Ihre Änderungen</string>
 	<string name="waypoint_visit_after">Danach besuchen</string>
 	<string name="shared_string_deselect">Abwählen</string>
 	<string name="shared_string_do_not_use">Nicht benutzen</string>
-	<string name="shared_string_deselect_all">Alles abwählen</string>
+	<string name="shared_string_deselect_all">Alle abwählen</string>
 	<string name="shared_string_unexpected_error">Ein unerwarteter Fehler ist aufgetreten!</string>
 	<string name="shared_string_collapse">Einklappen</string>
 	<string name="shared_string_address">Adresse</string>
@@ -1973,8 +1973,8 @@ Diese Ansicht kann zurückgestellt werden indem Sie hier wieder deaktiviert oder
 	<string name="drawer">Flache Liste</string>
 	<string name="shared_string_action_template">Aktion {0}</string>
 	<string name="route_points">Routenpunkte</string>
-	<string name="track_segments">Spurensegmente</string>
-	<string name="track_points">Spurenpunkte</string>
+	<string name="track_segments">Track-Segmente</string>
+	<string name="track_points">Track-Punkte</string>
 	<string name="plugin_touringview_name">Tourenkartenansicht</string>
 	<string name="index_name_netherlands">Europa - Niederlande</string>
 	<string name="shared_string_release">Veröffentlicht</string>
@@ -2004,7 +2004,7 @@ Lon %2$s</string>
     <string name="lang_ht">Haitianisch</string>
     <string name="lang_gl">Galicisch</string>
     <string name="lang_et">Estnisch</string>
-    <string name="archive_wikipedia_data">Es sind veraltete inkompatible Wikipedia-Daten vorhanden. Sollen diese archiviert werden?</string>
+    <string name="archive_wikipedia_data">Es sind veraltete, inkompatible Wikipedia-Daten vorhanden. Sollen diese archiviert werden?</string>
     <string name="download_wikipedia_files">Sollen zusätzliche Wikipedia-Daten heruntergeladen werden (%1$s MB)?</string>
     <string name="osm_edit_context_menu_delete">OSM-Bearbeitung löschen</string>
     <string name="light_theme">Hell</string>
@@ -2124,7 +2124,7 @@ Lon %2$s</string>
     <string name="whats_new">Neuerungen in</string>
     <string name="osm_edit_created_poi">OSM-POI erstellt</string>
     
-    <string name="world_map_download_descr">Die Basis-Weltkarte (Abdeckung der ganzen Welt bei kleinen Zoomstufen) ist nicht vorhanden oder veraltet. Für eine globale Übersicht erwägen Sie einen Download.</string>
+    <string name="world_map_download_descr">Die Basis-Weltkarte (Abdeckung der ganzen Welt bei kleinen Zoomstufen) ist nicht vorhanden oder veraltet. Prüfen Sie, ob Sie sie für den groben Überblick herunterladen möchten.</string>
     <string name="simulate_initial_startup_descr">Setzt das Flag zum erstmaligen App-Start. Alle anderen Einstellungen bleiben unverändert</string>
     <string name="simulate_initial_startup">Ersten App-Start simulieren</string>
     <string name="share_geo">geo:</string>
@@ -2207,7 +2207,7 @@ Lon %2$s</string>
     <string name="osm_save_offline">Offline speichern</string>
     <string name="osm_edit_modified_poi">Geänderter OSM-POI</string>
     <string name="osm_edit_deleted_poi">Gelöschter OSM-POI</string>
-    <string name="context_menu_item_open_note">OSM-Notiz erstellen</string>
+    <string name="context_menu_item_open_note">OSM-Notiz öffnen</string>
     <string name="osm_edit_reopened_note">Wiedereröffnete OSM-Notiz</string>
     <string name="osm_edit_commented_note">Kommentierte OSM-Notiz</string>
     <string name="osm_edit_removed_note">Gelöschte OSM-Notiz</string>
@@ -2266,11 +2266,11 @@ Lon %2$s</string>
     <string name="av_video_quality_low">Niedrigste Qualität</string>
     <string name="av_video_quality_high">Höchste Qualität</string>
     <string name="av_video_quality">Videoqualität</string>
-    <string name="av_video_quality_descr">Wähle Videoqualität</string>
-    <string name="av_audio_format">Audioausgabeformat</string>
-    <string name="av_audio_format_descr">Wähle Audioausgabeformat</string>
+    <string name="av_video_quality_descr">Videoausgabequalität wählen</string>
+    <string name="av_audio_format">Audioformat</string>
+    <string name="av_audio_format_descr">Audioausgabeformat wählen</string>
     <string name="av_audio_bitrate">Audio-Bitrate</string>
-    <string name="av_audio_bitrate_descr">Wähle Audio-Bitrate</string>
+    <string name="av_audio_bitrate_descr">Audio-Bitrate wählen</string>
     <string name="rendering_attr_horseRoutes_name">Pferdewege</string>
     <string name="update">Aktualisierungsintervall</string>
     <string name="only_download_over_wifi">Nur über WLAN herunterladen</string>
@@ -2279,13 +2279,13 @@ Lon %2$s</string>
 <string name="route_distance">Entfernung:</string>
     <string name="route_duration">Dauer:</string>
     <string name="missing_write_external_storage_permission">App hat keine Berechtigung zur Verwendung der SD-Karte</string>
-<string name="no_location_permission">Die App hat keine Berechtigung um auf Positionsdaten zuzugreifen.</string>
-    <string name="no_camera_permission">Die App hat keine Berechtigung um auf die Kamera zuzugreifen.</string>
-    <string name="no_microphone_permission">Die App hat keine Berechtigung um auf das Mikrofon zuzugreifen.</string>
-    <string name="impassable_road_desc">Straßen auswählen, welche während der Navigation vermieden werden sollen</string>
+<string name="no_location_permission">Die App hat keine Berechtigung, auf Standortdaten zuzugreifen.</string>
+    <string name="no_camera_permission">Die App hat keine Berechtigung, auf die Kamera zuzugreifen.</string>
+    <string name="no_microphone_permission">Die App hat keine Berechtigung, auf das Mikrofon zuzugreifen.</string>
+    <string name="impassable_road_desc">Straßen auswählen, die bei der Navigation vermieden werden sollen</string>
     <string name="shared_string_sound">Ton</string>
     <string name="select_voice_provider">Sprachansage auswählen</string>
-    <string name="select_voice_provider_descr">Sprachansage für deine Sprache auswählen oder herunterladen</string>
+    <string name="select_voice_provider_descr">Sprachansage in Ihrer Sprache auswählen oder herunterladen</string>
     <string name="live_updates">Live-Aktualisierungen</string>
     <string name="available_maps">Verfügbare Karten</string>
     <string name="last_update">Letzte Aktualisierung: %s</string>
@@ -2296,7 +2296,7 @@ Lon %2$s</string>
 <string name="rec_split_storage_size_desc">Menge des Speicherplatzes, der von allen aufgezeichneten Clips belegt werden kann</string>
     <string name="rec_split_desc">Clips neu schreiben, wenn der benutzte Platz den Speicherplatz überschreitet</string>
     <string name="rec_split_clip_length">Cliplänge</string>
-    <string name="rec_split_clip_length_desc">Die Länge jedes ausgezeichneten Clips wird nicht länger sein, als das festgelegte Zeitintervall</string>
+    <string name="rec_split_clip_length_desc">Die Länge jedes aufgezeichneten Clips wird nicht länger sein als das festgelegte Zeitintervall</string>
     <string name="rec_split_storage_size">Speicherplatz</string>
     <string name="rec_split">Aufzeichnungsteilung</string>
     <string name="rec_split_title">Automatische Trennung nutzen</string>
@@ -2447,7 +2447,7 @@ Wenn Sie OsmAnd und OSM lieben und unterstützen wollen, so ist dies die perfekt
     <string name="lang_be_by">Weißrussisch (Lateinische Schrift)</string>
     <string name="lang_kn">Kannada</string>
     <string name="lang_en_gb">Englisch (Vereinigtes Königreich)</string>
-    <string name="lang_ast">asturisch</string>
+    <string name="lang_ast">Asturisch</string>
     <string name="app_mode_bus">Bus</string>
  	<string name="app_mode_train">Zug</string>
     <string name="coords_format">Koordinatenformat</string>
