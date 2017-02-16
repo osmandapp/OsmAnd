@@ -1857,7 +1857,7 @@ Punktar</string>
     <string name="rendering_value_low_name">Lágur</string>
     <string name="rendering_attr_hideWaterPolygons_name">Fela vatn</string>
     <string name="rendering_attr_alpineHiking_name"/>
-    <string name="rendering_attr_hikingRoutesOSMC_name"/>
+    <string name="rendering_attr_hikingRoutesOSMC_name">Yfirlag með göngutáknum</string>
     <string name="rendering_attr_OSMMapperAssistant_name"/>
     <string name="first_usage_greeting"/>
     <string name="rendering_attr_roadColors_description">Veldu litastef fyrir vegi:</string>
@@ -1938,4 +1938,11 @@ Punktar</string>
     <string name="quick_action_map_source_switch">Gagnagjafa kortsins var breytt yfir í \"%s\".</string>
     <string name="quick_action_btn_tutorial_title">Breyta staðsetningu hnapps</string>
     <string name="shared_string_action_name">Heiti aðgerðar</string>
-</resources>
+<string name="rendering_attr_noAdminboundaries_name">Afmarkanir</string>
+    <string name="rendering_attr_noAdminboundaries_description">Sleppa birtingu héraðsmarka (stjórnsýslustig 5-9)</string>
+    <string name="close_changeset">Loka breytingasetti</string>
+    <string name="use_compass_navigation_descr">Nota áttavita þegar stefna finnst ekki á annan máta</string>
+    <string name="auto_zoom_map_descr">Sjálfvirkur aðdráttur korts miðað við hraða þinn (á meðan kort er samstillt við virka staðsetningu)</string>
+    <string name="snap_to_road_descr">Staðsetning grípi í vegi á meðan leiðsögn stendur</string>
+    <string name="interrupt_music_descr">Gera hlé á tónlist á meðan raddskilaboð eru flutt (ekki bara lækka hljóðstyrk hennar)</string>
+    </resources>
