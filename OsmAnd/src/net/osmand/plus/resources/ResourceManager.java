@@ -49,6 +49,7 @@ import net.osmand.plus.resources.AsyncLoadingThread.MapLoadRequest;
 import net.osmand.plus.resources.AsyncLoadingThread.TileLoadDownloadRequest;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
+import net.osmand.router.RoutingConfiguration;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -552,6 +553,7 @@ public class ResourceManager {
 					context.getSettings().PREVIOUS_INSTALLED_VERSION.set(fv);
 					copyRegionsBoundaries();
 					copyPoiTypes();
+					copyRoutingXml();
 					for (String internalStyle : context.getRendererRegistry().getInternalRenderers().keySet()) {
 						File fl = context.getRendererRegistry().getFileForInternalStyle(internalStyle);
 						if (fl.exists()) {
@@ -589,6 +591,19 @@ public class ResourceManager {
 			if (file != null) {
 				FileOutputStream fout = new FileOutputStream(file);
 				Algorithms.streamCopy(MapPoiTypes.class.getResourceAsStream("poi_types.xml"), fout);
+				fout.close();
+			}
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
+		}
+	}
+
+	private void copyRoutingXml() {
+		try {
+			File file = context.getAppPath(IndexConstants.ROUTING_XML_FILE);
+			if (file != null) {
+				FileOutputStream fout = new FileOutputStream(file);
+				Algorithms.streamCopy(RoutingConfiguration.class.getResourceAsStream("routing.xml"), fout);
 				fout.close();
 			}
 		} catch (Exception e) {
