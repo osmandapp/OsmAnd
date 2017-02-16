@@ -9,8 +9,8 @@
 
     <string name="routing_attr_driving_style_name">Стиль вождения</string>
     <string name="routing_attr_driving_style_description">Безопасное, быстрое или сбалансированное вождение</string>
-    <string name="routing_attr_height_relief_smoothness_factor_name">Степень пересечённости рельефа</string>
-    <string name="routing_attr_height_relief_smoothness_factor_description">Больше равнин или больше холмов</string>
+    <string name="routing_attr_relief_smoothness_factor_name">Степень пересечённости рельефа</string>
+    <string name="routing_attr_relief_smoothness_factor_description">Больше равнин или больше холмов</string>
     <string name="routing_attr_height_obstacles_name">Использовать данные о высотах</string>
     <string name="routing_attr_height_obstacles_description">Использовать данные о рельефе земной поверхности, предоставленные SRTM, ASTER и EU-DEM</string>
 
