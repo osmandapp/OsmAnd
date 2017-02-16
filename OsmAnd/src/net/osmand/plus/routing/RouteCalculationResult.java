@@ -196,20 +196,6 @@ public class RouteCalculationResult {
 		}
 	}
 
-	public List<RouteSegmentResult> getLeftRoute() {
-		int cs = currentRoute > 0 ? currentRoute - 1 : 0;
-		if(cs >= segments.size()) {
-			return null;
-		}
-		List<RouteSegmentResult> list = new ArrayList<RouteSegmentResult>();
-		for (int i = cs; i < segments.size(); i++) {
-			if (i == cs || segments.get(i - 1) != segments.get(i)) {
-				list.add(segments.get(i));
-			}
-		}
-		return list;
-	}
-
 	public List<RouteSegmentResult> getOriginalRoute() {
 		if (segments.size() == 0) {
 			return null;
@@ -248,8 +234,16 @@ public class RouteCalculationResult {
 					break;
 				}
 				if (vls != null && i * 2 + 1 < vls.length) {
-					n.setAltitude(vls[2 * i + 1]);
-					lastHeight = vls[2 * i + 1];
+					float h = vls[2 * i + 1];
+					n.setAltitude(h);
+					if (lastHeight == HEIGHT_UNDEFINED && locations.size() > 0) {
+						for (Location l : locations) {
+							if (!l.hasAltitude()) {
+								l.setAltitude(h);
+							}
+						}
+					}
+					lastHeight = h;
 				} else if (lastHeight != HEIGHT_UNDEFINED) {
 					n.setAltitude(lastHeight);
 				}

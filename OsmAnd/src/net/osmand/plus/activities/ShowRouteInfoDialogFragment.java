@@ -28,7 +28,6 @@ import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.utils.Utils;
 
 import net.osmand.Location;
-import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
@@ -45,7 +44,6 @@ import net.osmand.plus.mapcontextmenu.other.MapRouteInfoMenu;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.TurnPathHelper;
-import net.osmand.router.RouteSegmentResult;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -178,35 +176,34 @@ public class ShowRouteInfoDialogFragment extends DialogFragment {
 	private void makeGpx() {
 		double lastHeight = HEIGHT_UNDEFINED;
 		gpx = new GPXFile();
-		List<RouteSegmentResult> route = helper.getRoute().getLeftRoute();
-		if (route != null) {
+		List<Location> locations = helper.getRoute().getRouteLocations();
+		if (locations != null) {
 			Track track = new Track();
-			for (RouteSegmentResult res : route) {
-				TrkSegment seg = new TrkSegment();
-				float[] vls = res.getObject().calculateHeightArray();
-				if (!hasHeights && vls != null && vls.length > 0) {
-					hasHeights = true;
-				}
-				int inc = res.getStartPointIndex() < res.getEndPointIndex() ? 1 : -1;
-				int indexnext = res.getStartPointIndex();
-				for (int index = res.getStartPointIndex(); index != res.getEndPointIndex(); ) {
-					index = indexnext;
-					indexnext += inc;
-					LatLon l = res.getPoint(index);
-					WptPt point = new WptPt();
-					point.lat = l.getLatitude();
-					point.lon = l.getLongitude();
-					if (vls != null && index * 2 + 1 < vls.length) {
-						point.ele = vls[2 * index + 1];
-						//point.desc = (res.getObject().getId() >> (BinaryInspector.SHIFT_ID )) + " " + index;
-						lastHeight = vls[2 * index + 1];
-					} else if (lastHeight != HEIGHT_UNDEFINED) {
-						point.ele = lastHeight;
+			TrkSegment seg = new TrkSegment();
+			for (Location l : locations) {
+				WptPt point = new WptPt();
+				point.lat = l.getLatitude();
+				point.lon = l.getLongitude();
+				if (l.hasAltitude()) {
+					if (!hasHeights) {
+						hasHeights = true;
 					}
-					seg.points.add(point);
+					float h = (float) l.getAltitude();
+					point.ele = h;
+					if (lastHeight == HEIGHT_UNDEFINED && seg.points.size() > 0) {
+						for (WptPt pt : seg.points) {
+							if (Double.isNaN(pt.ele)) {
+								pt.ele = h;
+							}
+						}
+					}
+					lastHeight = h;
+				} else if (lastHeight != HEIGHT_UNDEFINED) {
+					point.ele = lastHeight;
 				}
-				track.segments.add(seg);
+				seg.points.add(point);
 			}
+			track.segments.add(seg);
 			gpx.tracks.add(track);
 		}
 	}
