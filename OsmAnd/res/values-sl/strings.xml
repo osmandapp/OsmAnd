@@ -2794,4 +2794,16 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="quick_action_btn_tutorial_descr">Z dolgim pritiskom in vlekom je mogoče postaviti gumb na poljubno mesto na zaslonu</string>
 	<string name="rendering_attr_depthContours_description">Pokaži točke in izohipse globine</string>
     <string name="rendering_attr_depthContours_name">Izohipse globine</string>
-	</resources>
+	<string name="route_altitude">Nadmorska višina poti</string>
+    <string name="altitude_descent">Spust</string>
+    <string name="altitude_ascent">Vzpon</string>
+    <string name="altitude_range">Obseg nadmorske višine</string>
+    <string name="average_altitude">Povprečje</string>
+    <string name="shared_string_time">Čas</string>
+    <string name="total_distance">Skupna razdalja</string>
+    <string name="routing_attr_height_relief_smoothness_factor_name">Določilo gladkosti reliefa</string>
+    <string name="routing_attr_height_relief_smoothness_factor_description">Več ravnin ali več hribovja</string>
+    <string name="routing_attr_height_obstacles_name">Uporabi podatke višine</string>
+    <string name="routing_attr_height_obstacles_description">Uporabi podatke višine terena po SRTM, ASTER in EU-DEM</string>
+
+    </resources>
