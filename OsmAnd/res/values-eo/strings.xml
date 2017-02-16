@@ -2671,6 +2671,6 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="average_altitude">Mezumo</string>
     <string name="shared_string_time">Tempo</string>
     <string name="total_distance">Tuta distanco</string>
-    <string name="routing_attr_driving_style_name">Vetura stilo</string>
-    <string name="routing_attr_driving_style_description">Sekura, rapida aŭ ekvilibrigita</string>
+    <string name="routing_attr_driving_style_name">Veturada stilo</string>
+    <string name="routing_attr_driving_style_description">Sekura, rapida aŭ prudenta</string>
     </resources>
