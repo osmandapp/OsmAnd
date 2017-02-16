@@ -1302,10 +1302,10 @@ Die globalen Daten (zwischen N 70° und S 70°) basieren auf Messungen von SRTM 
 	<string name="app_mode_boat">Boot</string>
 	<string name="app_mode_aircraft">Flugzeug</string>
 
-	<string name="local_osm_changes_delete_all_confirm">Sie löschen %1$d OSM Änderung(en). Fortfahren?</string>
+	<string name="local_osm_changes_delete_all_confirm">Sie löschen %1$d OSM-Änderung(en). Fortfahren?</string>
 	<string name="shared_string_delete_all">Alle löschen</string>
 	<string name="amenity_type_seamark">Schifffahrtsobjekte</string>
-	<string name="app_modes_choose_descr">Wähle sichtbare Nutzerprofile der Anwendung</string>
+	<string name="app_modes_choose_descr">Auswahl der Nutzungsprofile, die in der Anwendung angezeigt werden sollen</string>
 	<string name="app_modes_choose">Anwendungsprofile</string>
 	<string name="routing_attr_prefer_motorway_name">Autobahnen bevorzugen</string>
 	<string name="routing_attr_prefer_motorway_description">Autobahnen bevorzugen</string>
