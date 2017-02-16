@@ -2666,4 +2666,5 @@ i encara més…
     <string name="total_distance">Distància total</string>
     <string name="routing_attr_driving_style_name">Estil de conducció</string>
     <string name="routing_attr_driving_style_description">Conducció segura, ràpida o equilibrada</string>
+    <string name="shared_string_tracks">Pistes</string>
     </resources>
