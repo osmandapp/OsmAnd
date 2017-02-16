@@ -53,7 +53,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:minWidth="42dp"
+            android:minWidth="46dp"
             android:layout_marginRight="@dimen/list_header_padding"
             android:orientation="vertical">
 

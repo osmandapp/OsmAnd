@@ -175,32 +175,34 @@ public class ShowRouteInfoDialogFragment extends DialogFragment {
 	private void makeGpx() {
 		double lastHeight = -1;
 		gpx = new GPXFile();
-		Track track = new Track();
 		List<RouteSegmentResult> route = helper.getRoute().getLeftRoute();
-		for (RouteSegmentResult res : route) {
-			TrkSegment seg = new TrkSegment();
-			int inc = res.getStartPointIndex() < res.getEndPointIndex() ? 1 : -1;
-			int indexnext = res.getStartPointIndex();
-			for (int index = res.getStartPointIndex() ; index != res.getEndPointIndex(); ) {
-				index = indexnext;
-				indexnext += inc;
-				LatLon l = res.getPoint(index);
-				WptPt point = new WptPt();
-				point.lat = l.getLatitude();
-				point.lon = l.getLongitude();
-				float[] vls = res.getObject().calculateHeightArray();
-				if (vls != null && index * 2 + 1 < vls.length) {
-					point.ele = vls[2*index + 1];
-					//point.desc = (res.getObject().getId() >> (BinaryInspector.SHIFT_ID )) + " " + index;
-					lastHeight = vls[2*index + 1];
-				} else if (lastHeight > 0) {
-					point.ele = lastHeight;
+		if (route != null) {
+			Track track = new Track();
+			for (RouteSegmentResult res : route) {
+				TrkSegment seg = new TrkSegment();
+				int inc = res.getStartPointIndex() < res.getEndPointIndex() ? 1 : -1;
+				int indexnext = res.getStartPointIndex();
+				for (int index = res.getStartPointIndex(); index != res.getEndPointIndex(); ) {
+					index = indexnext;
+					indexnext += inc;
+					LatLon l = res.getPoint(index);
+					WptPt point = new WptPt();
+					point.lat = l.getLatitude();
+					point.lon = l.getLongitude();
+					float[] vls = res.getObject().calculateHeightArray();
+					if (vls != null && index * 2 + 1 < vls.length) {
+						point.ele = vls[2 * index + 1];
+						//point.desc = (res.getObject().getId() >> (BinaryInspector.SHIFT_ID )) + " " + index;
+						lastHeight = vls[2 * index + 1];
+					} else if (lastHeight > 0) {
+						point.ele = lastHeight;
+					}
+					seg.points.add(point);
 				}
-				seg.points.add(point);
+				track.segments.add(seg);
 			}
-			track.segments.add(seg);
+			gpx.tracks.add(track);
 		}
-		gpx.tracks.add(track);
 	}
 
 	private void buildHeader(View headerView) {
