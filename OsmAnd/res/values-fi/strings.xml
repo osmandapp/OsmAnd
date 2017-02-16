@@ -2204,4 +2204,17 @@ Jos pidät OsmAndista ja OSMsta ja haluat tukea niitä, on tämä täydellinen t
     <string name="local_index_action_do">Olet %1$s %2$s jäsentä. Jatkatko?</string>
     <string name="choose_audio_stream">Ääniohjauksen tuloste</string>
     <string name="warning_tile_layer_not_downloadable">Sovellutus ei voi ladata karttatasoa %1$s, ole hyvä ja yritä asentaa se uudelleen.</string>
+    <string name="quick_action_map_styles">Karttatyylit</string>
+    <string name="quick_action_map_style_action">Lisää karttatyyli</string>
+    <string name="quick_action_poi_list">POI lista</string>
+    <string name="quick_action_bug_message">Viesti</string>
+    <string name="quick_action_add_configure_map">Konfiguroi kartta</string>
+    <string name="quick_action_showhide_favorites_title">Näytä/piilota suosikit</string>
+    <string name="quick_action_favorites_show">Näytä suosikit</string>
+    <string name="quick_action_favorites_hide">Piilota suosikit</string>
+    <string name="quick_action_showhide_poi_title">Näytä/piilota POIt</string>
+    <string name="quick_action_poi_show">Näytä %1$s</string>
+    <string name="quick_action_poi_hide">Piilota %1$s</string>
+    <string name="quick_action_add_category">Lisää luokka</string>
+    <string name="quick_action_add_create_items">Luo jäsen</string>
     </resources>
