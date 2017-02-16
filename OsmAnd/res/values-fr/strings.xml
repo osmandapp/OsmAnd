@@ -912,7 +912,24 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="osmand_long_description_1000_chars">"
  OsmAnd (OSM Automated Navigation Directions) OsmAnd est un logiciel libre de navigation exploitant une grande variété de données issues OpenStreetMap (OSM). Toutes les données (cartes vectorielles ou à base de tuiles) peuvent être stockées dans la mémoire du téléphone pour un usage hors-ligne. OsmAnd permet également le routage en ligne et hors-ligne avec des instructions vocales pas à pas. Fonctionnalités principales : - Fonctionne complètement hors-ligne (stockage des cartes téléchargées au format vectoriel ou tuile dans le périphérique de stockage) - Cartes hors-lignes compactes disponibles pour le monde entier - Téléchargement des cartes pour un pays ou une région directement depuis l\'application - Possibilité de superposer plusieurs couches, telles que des traces GPX ou de navigation, des points d\'intérêt (PI), des favoris, des courbes de niveau, les arrêts de transport public, et bien d\'autres cartes avec une transparence personnalisable - Recherche hors-ligne d\'adresses et de lieux (PI) - Navigation hors-ligne pour distances moyennes - Mode voiture, vélo et piéton avec : - Option de vue jour/nuit automatique - Option de zoom automatique lors des déplacements - Orientation automatique de la carte (fixe, boussole, cap) Limitations de la version gratuite de OsmAnd : - Nombre de téléchargement de cartes limité - Pas d\'accès aux PI Wikipédia hors-ligne. OsmAnd est activement développé et notre projet et ses progrès futurs dépendent des contributions financières pour financer le développement et le test de nouvelles fonctionnalités. Veuillez considérer l\'achat d\'OsmAnd+, le financement d\'une fonctionnalité spécifique, ou un donation sur osmand.net.
  "</string>
-    <string name="osmand_plus_long_description_1000_chars">" OsmAnd+ (OSM Automated Navigation Directions) OsmAnd+ est un logiciel libre de navigation exploitant une grande variété de données issues OpenStreetMap (OSM). Toutes les données (cartes vectorielles ou à base de tuiles) peuvent être stockées dans la mémoire du téléphone pour un usage hors-ligne. OsmAnd permet également le routage en ligne et hors-ligne avec des instructions vocales pas à pas. OsmAnd+ est la version payante de l\'application, en l\'achetant vous supportez le projet, financez le développement de nouvelles fonctionnalités, et recevez les dernières mises à jour. Fonctionnalités principales : - Fonctionne complètement hors-ligne (stockage des cartes téléchargées au format vectoriel ou tuile dans le périphérique de stockage) - Cartes es compactes disponibles pour le monde entier - Téléchargement illimité des cartes pour un pays ou une région directement depuis l\'application - Points d\'intérêt (PI) Wikipédia hors-ligne, parfait pour le tourisme - Possibilité de superposer plusieurs couches, telles que des traces GPX ou de navigation, des points d\'intérêt, des favoris, des courbes de niveau, les arrêts de transport public, et bien d\'autres cartes avec une transparence personnalisable - Recherche hors-ligne d\'adresses et de lieux (PI) - Navigation hors-ligne pour de courtes distances (expérimentale) - Mode voiture, vélo et piéton avec : - Option de vue jour/nuit automatique - Option de zoom automatique lors des déplacements - Orientation automatique de la carte (fixe, boussole, cap) - Affichage des limitations de vitesse, voix enregistrées et voix de synthèse "</string>
+    <string name="osmand_plus_long_description_1000_chars">"
+ OsmAnd+ (OSM Automated Navigation Directions)
+
+OsmAnd+ est un logiciel libre de navigation donnant accès à un grand nombre de données OpenStreetMap (OSM). Toutes les données (cartes vectorielles ou à base de tuiles) peuvent être stockées sur l\'appareil pour un usage hors-ligne. En plus de la consultation des cartes, OsmAnd permet également la navigation hors-ligne comme en ligne avec des instructions de guidage vocal.
+
+OsmAnd+ est la version payante de l\'application, en l\'achetant vous supportez le projet, financez le développement de nouvelles fonctionnalités, et recevez les dernières mises à jour.
+
+Fonctionnalités principales :
+- Fonctionne complètement hors-ligne (après téléchargement des cartes)
+- Cartes compactes disponibles pour le monde entier
+- Téléchargement illimité des cartes pour un pays ou une région directement depuis l\'application
+- Points d\'intérêt (PI) Wikipédia hors-ligne, idéal pour les voyages touristiques
+- Possibilité de superposer plusieurs couches, telles que des traces, des points d\'intérêt, des favoris, des courbes de niveau, les transports public et bien d\'autres cartes (pistes de ski, chemin de randonnées, circuit à vélo, balisage maritime ...) avec une transparence personnalisable
+- Recherche hors-ligne d\'adresses et de points d\'intérêts
+- Navigation hors-ligne sur des itinéraires de moyenne distance
+- Modes : voiture, cycliste et piéton
+- Options : vue jour/nuit automatique, zoom automatique en fonction de la vitesse, plusieurs modes d\'orientation automatique de la carte (fixe, boussole, direction), affichage des limitations de vitesse, guidage vocal par voix enregistrées ou par synthèse vocale.
+ "</string>
 
 
     <string name="avoid_motorway">Éviter les autoroutes</string>
@@ -2207,7 +2224,53 @@ Actuellement seuls {2} Mo sont disponibles.</string>
     <string name="download_files_question_space_with_temp">Souhaitez-vous télécharger {0} fichier(s) ?
 Cette opération requiert temporairement {3} Mo et {1} Mo seront utilisés de manière permanente.
 Actuellement {2} Mo sont disponibles.</string>
-    <string name="osmand_plus_extended_description_4000_chars_v2">" OsmAnd Maps &amp; Navigation - Visualisez des cartes, calculez des itinéraires et laissez-vous guidez sur le trajet sans connexion Internet ! Commencez par télécharger une carte.\nBasic options: • Detailed maps of 200 countries • Offline navigator with voice prompts • Address search in offline mode • Info about locations on the map: places of interest, cafes, parking lots, shops • Adding locations to favorites • Driving, cycling and pedestrian navigation Additional options: • Ability to view and record GPX tracks • Wikipedia description of POI • Adding photo, audio, and video notes to the map • Day and Night map modes for more convenient driving • Information about public transport routes and stops • Bicycle paths and footpaths • Walking trails for tourism all over the world • Online maps from numerous sources • Info about road pavement quality and street lighting • Adding, editing and deleting POI (for OpenStreetMap.org users) • OsMo - live monitoring of other devices Get a reliable navigator in your country - be it France, Germany, Mexico, United Kingdom, Spain, the Netherlands, USA, Russia, Brazil or any other state. Plugins: • Contour maps and terrain shading https://goo.gl/7mojP8 Contour lines data and terrain visualization added to the basic OsmAnd map. • Ski maps https://goo.gl/pX6DxJ The info about ski pistes, cross-country skiing tracks, cable railways and ski lifts. • Nautical map https://goo.gl/0hEdxm Special map style for viewing nautical navigation signs for arterial and nearshore marine navigation. • Parking position https://goo.gl/6JxQXF Helps you mark the location of your parked vehicle and see how much time is left if the parking is time-limited. Stay tuned! Twitter: https://twitter.com/osmandapp Facebook: https://www.facebook.com/osmandapp Site: http://osmand.net If you need help with OsmAnd application, please contact our support team: support@osmand.net. "</string>
+    <string name="osmand_plus_extended_description_4000_chars_v2">"
+OsmAnd Maps &amp; Navigation : Visualisez des cartes, calculez des itinéraires et laissez-vous guider sans connexion Internet ! Avant de partir : téléchargez une carte.
+
+Basic options:
+• Detailed maps of 200 countries
+• Offline navigator with voice prompts
+• Address search in offline mode
+• Info about locations on the map: places of interest, cafes, parking lots, shops
+• Adding locations to favorites
+• Driving, cycling and pedestrian navigation
+
+Additional options:
+• Ability to view and record GPX tracks
+• Wikipedia description of POI
+• Adding photo, audio, and video notes to the map
+• Day and Night map modes for more convenient driving
+• Information about public transport routes and stops
+• Bicycle paths and footpaths
+• Walking trails for tourism all over the world
+• Online maps from numerous sources
+• Info about road pavement quality and street lighting
+• Adding, editing and deleting POI (for OpenStreetMap.org users)
+• OsMo - live monitoring of other devices
+
+Get a reliable navigator in your country - be it France, Germany, Mexico, United Kingdom, Spain, the Netherlands, USA, Russia, Brazil or any other state.
+
+Plugins:
+• Contour maps and terrain shading https://goo.gl/7mojP8
+Contour lines data and terrain visualization added to the basic OsmAnd map.
+
+• Ski maps https://goo.gl/pX6DxJ
+The info about ski pistes, cross-country skiing tracks, cable railways and ski lifts.
+
+• Nautical map https://goo.gl/0hEdxm
+Special map style for viewing nautical navigation signs for arterial and nearshore marine navigation.
+
+• Parking position https://goo.gl/6JxQXF
+Helps you mark the location of your parked vehicle and see how much time is left if the parking is time-limited.
+
+Stay tuned!
+
+Twitter: https://twitter.com/osmandapp
+Facebook: https://www.facebook.com/osmandapp
+Site: http://osmand.net
+
+If you need help with OsmAnd application, please contact our support team: support@osmand.net. 
+ "</string>
     <string name="donations">Donations</string>
     <string name="number_of_recipients">Nombre de destinataires</string>
     <string name="osm_live_subscribe_btn">S\'abonner</string>
@@ -2614,4 +2677,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="route_altitude">Altitude de la route</string>
     <string name="altitude_descent">Descente</string>
     <string name="altitude_ascent">Montée</string>
+    <string name="routing_attr_driving_style_name">Style de conduite</string>
+    <string name="routing_attr_driving_style_description">Conduite sûre, rapide ou équilibrée</string>
+    <string name="altitude_range">Amplitude altimétrique</string>
     </resources>
