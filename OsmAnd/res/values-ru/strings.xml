@@ -1,5 +1,14 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
+    <string name="altitude_descent">Спуск</string>
+    <string name="altitude_ascent">Подъём</string>
+    <string name="altitude_range">Диапазон высот</string>
+    <string name="average_altitude">Средняя высота</string>
+    <string name="shared_string_time">Время</string>
+    <string name="total_distance">Длина маршрута</string>
+
+    <string name="routing_attr_driving_style_name">Стиль вождения</string>
+    <string name="routing_attr_driving_style_description">Безопасное, быстрое или сбалансированное вождение</string>
     <string name="routing_attr_height_relief_smoothness_factor_name">Степень пересечённости рельефа</string>
     <string name="routing_attr_height_relief_smoothness_factor_description">Больше равнин или больше холмов</string>
     <string name="routing_attr_height_obstacles_name">Использовать данные о высотах</string>
