@@ -201,7 +201,7 @@ public class RouteCalculationResult {
 		}
 		List<RouteSegmentResult> list = new ArrayList<RouteSegmentResult>();
 		for (int i = cs; i < segments.size(); i++) {
-			if (i == 0 || segments.get(i - 1) != segments.get(i)) {
+			if (i == cs || segments.get(i - 1) != segments.get(i)) {
 				list.add(segments.get(i));
 			}
 		}

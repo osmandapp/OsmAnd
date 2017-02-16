@@ -205,14 +205,12 @@ public class ShowRouteInfoDialogFragment extends DialogFragment {
 
 	private void buildHeader(View headerView) {
 		OsmandApplication app = getMyApplication();
-		OsmandSettings.MetricsConstants mc = app.getSettings().METRIC_SYSTEM.get();
-		final boolean useFeet = (mc == OsmandSettings.MetricsConstants.MILES_AND_FEET) || (mc == OsmandSettings.MetricsConstants.MILES_AND_YARDS);
 		LineChart mChart = (LineChart) headerView.findViewById(R.id.chart);
-		GPXUtilities.setupGPXChart(mChart, useFeet, 4);
+		GPXUtilities.setupGPXChart(app, mChart, 4);
 
 		GPXTrackAnalysis analysis = gpx.getAnalysis(0);
-		GPXUtilities.setGPXChartData(mChart, analysis, Utils.getSDKInt() >= 18
-				? R.drawable.line_chart_fade_blue : R.color.gpx_time_span_color, useFeet);
+		GPXUtilities.setGPXChartData(app, mChart, analysis, Utils.getSDKInt() >= 18
+				? R.drawable.line_chart_fade_blue : R.color.gpx_time_span_color);
 
 		((TextView) headerView.findViewById(R.id.average_text))
 				.setText(OsmAndFormatter.getFormattedAlt(analysis.avgElevation, app));
