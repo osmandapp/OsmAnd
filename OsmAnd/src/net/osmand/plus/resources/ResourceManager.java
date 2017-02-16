@@ -1,21 +1,15 @@
 package net.osmand.plus.resources;
 
 
-import java.io.File;
-import java.io.FileFilter;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.RandomAccessFile;
-import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
+import android.content.Context;
+import android.content.res.AssetManager;
+import android.database.sqlite.SQLiteException;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.HandlerThread;
+import android.text.format.DateFormat;
+import android.util.DisplayMetrics;
+import android.view.WindowManager;
 
 import net.osmand.AndroidUtils;
 import net.osmand.GeoidAltitudeCorrection;
@@ -49,7 +43,6 @@ import net.osmand.plus.resources.AsyncLoadingThread.MapLoadRequest;
 import net.osmand.plus.resources.AsyncLoadingThread.TileLoadDownloadRequest;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
-import net.osmand.router.RoutingConfiguration;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -58,15 +51,21 @@ import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
 
-import android.content.Context;
-import android.content.res.AssetManager;
-import android.database.sqlite.SQLiteException;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.HandlerThread;
-import android.text.format.DateFormat;
-import android.util.DisplayMetrics;
-import android.view.WindowManager;
+import java.io.File;
+import java.io.FileFilter;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.RandomAccessFile;
+import java.text.MessageFormat;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Resource manager is responsible to work with all resources 
@@ -553,7 +552,6 @@ public class ResourceManager {
 					context.getSettings().PREVIOUS_INSTALLED_VERSION.set(fv);
 					copyRegionsBoundaries();
 					copyPoiTypes();
-					copyRoutingXml();
 					for (String internalStyle : context.getRendererRegistry().getInternalRenderers().keySet()) {
 						File fl = context.getRendererRegistry().getFileForInternalStyle(internalStyle);
 						if (fl.exists()) {
@@ -591,19 +589,6 @@ public class ResourceManager {
 			if (file != null) {
 				FileOutputStream fout = new FileOutputStream(file);
 				Algorithms.streamCopy(MapPoiTypes.class.getResourceAsStream("poi_types.xml"), fout);
-				fout.close();
-			}
-		} catch (Exception e) {
-			log.error(e.getMessage(), e);
-		}
-	}
-
-	private void copyRoutingXml() {
-		try {
-			File file = context.getAppPath(IndexConstants.ROUTING_XML_FILE);
-			if (file != null) {
-				FileOutputStream fout = new FileOutputStream(file);
-				Algorithms.streamCopy(RoutingConfiguration.class.getResourceAsStream("routing.xml"), fout);
 				fout.close();
 			}
 		} catch (Exception e) {
