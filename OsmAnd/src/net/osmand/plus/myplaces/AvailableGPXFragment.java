@@ -277,7 +277,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		v.findViewById(R.id.divider).setVisibility(View.GONE);
 		v.findViewById(R.id.options).setVisibility(View.GONE);
 		v.findViewById(R.id.stop).setVisibility(View.VISIBLE);
-		v.findViewById(R.id.toggle_item).setVisibility(View.GONE);
+		v.findViewById(R.id.check_item).setVisibility(View.GONE);
 	}
 
 	@Override
@@ -807,10 +807,10 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 
 			final CompoundButton checkItem = (CompoundButton) v.findViewById(R.id.toggle_item);
 			if (isSelectedGroup(groupPosition)) {
-				checkItem.setVisibility(View.VISIBLE);
+				v.findViewById(R.id.check_item).setVisibility(View.VISIBLE);
 				v.findViewById(R.id.options).setVisibility(View.GONE);
 			} else {
-				checkItem.setVisibility(View.GONE);
+				v.findViewById(R.id.check_item).setVisibility(View.GONE);
 			}
 
 
@@ -1290,7 +1290,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		// ImageView icon = (ImageView) v.findViewById(!isDashItem? R.id.icon : R.id.show_on_map);
 		ImageView icon = (ImageView) v.findViewById(R.id.icon);
 		icon.setVisibility(View.VISIBLE);
-		icon.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_gpx_track));
+		icon.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_action_polygom_dark));
 		if (child.isCorrupted()) {
 			viewName.setTypeface(Typeface.DEFAULT, Typeface.ITALIC);
 		} else {
@@ -1300,7 +1300,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 				selectedGpxHelper.getSelectedFileByName(child.getFileName());
 		GPXTrackAnalysis analysis = null;
 		if (sgpx != null) {
-			icon.setImageDrawable(app.getIconsCache().getIcon(R.drawable.ic_gpx_track, R.color.color_distance));
+			icon.setImageDrawable(app.getIconsCache().getIcon(R.drawable.ic_action_polygom_dark, R.color.color_distance));
 			analysis = sgpx.getTrackAnalysis();
 
 		}
@@ -1361,6 +1361,6 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		TextView descr = ((TextView) v.findViewById(R.id.description));
 		descr.setVisibility(View.GONE);
 
-		v.findViewById(R.id.toggle_item).setVisibility(View.GONE);
+		v.findViewById(R.id.check_item).setVisibility(View.GONE);
 	}
 }
