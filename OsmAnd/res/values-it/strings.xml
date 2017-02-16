@@ -2836,4 +2836,18 @@ Rappresenta l\'area: %1$s x %2$s</string>
 
  e altro ancora…
  "</string>
-	</resources>
+	<string name="routing_attr_driving_style_name">Guida sicura, veloce o bilanciata</string>
+    <string name="routing_attr_driving_style_description">Guida sicura, veloce o bilanciata</string>
+    <string name="route_altitude">Profilo altimetrico del percorso</string>
+    <string name="altitude_descent">Discesa</string>
+    <string name="altitude_ascent">Salita</string>
+    <string name="altitude_range">Gamma altitudini</string>
+    <string name="average_altitude">Media</string>
+    <string name="shared_string_time">Tempo</string>
+    <string name="total_distance">Distanza totale</string>
+    <string name="routing_attr_height_relief_smoothness_factor_name">Fattore smussatura rilievi</string>
+    <string name="routing_attr_height_relief_smoothness_factor_description">Più piatto o più colline</string>
+    <string name="routing_attr_height_obstacles_name">Utilizza dati elevazione</string>
+    <string name="routing_attr_height_obstacles_description">Utilizza i dati di elevazione del terreno forniti da SRTM, ASTER e EU-DEM</string>
+
+    </resources>
