@@ -2793,4 +2793,6 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="routing_attr_height_obstacles_description">Imprea sos datos de s\'artària frunidos dae SRTM, ASTER e EU-DEM</string>
 
     <string name="routing_attr_height_relief_smoothness_factor_name">Fatore de levigadura de sos rilievos</string>
+    <string name="routing_attr_driving_style_name">Istile de ghia</string>
+    <string name="routing_attr_driving_style_description">Ghia segura, lestra o bilantziada</string>
     </resources>
