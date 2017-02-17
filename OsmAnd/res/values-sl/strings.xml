@@ -2806,4 +2806,6 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="routing_attr_height_obstacles_name">Uporabi podatke višine</string>
     <string name="routing_attr_height_obstacles_description">Uporabi podatke višine terena po SRTM, ASTER in EU-DEM</string>
 
+    <string name="routing_attr_driving_style_name">Način vožnje</string>
+    <string name="routing_attr_driving_style_description">Varna, hitra ali prilagodljiva vožnja</string>
     </resources>
