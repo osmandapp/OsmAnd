@@ -2630,4 +2630,6 @@ Representa el área: %1$s x %2$s</string>
     <string name="routing_attr_height_obstacles_name">Usar datos de elevación</string>
     <string name="routing_attr_height_obstacles_description">Usa datos de elevación del terreno provistos por SRTM, ASTER y EU-DEM</string>
 
+    <string name="routing_attr_driving_style_name">Estilo de conducción</string>
+    <string name="routing_attr_driving_style_description">Conducción segura, rápida o equilibrada</string>
     </resources>
