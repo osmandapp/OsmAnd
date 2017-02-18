@@ -34,6 +34,7 @@ public class ContextMenuItem {
 	private final ContextMenuAdapter.OnIntegerValueChangedListener integerListener;
 	private final boolean hideDivider;
 	private final int minHeight;
+	private final int tag;
 
 	private ContextMenuItem(@StringRes int titleId,
 							String title,
@@ -50,7 +51,8 @@ public class ContextMenuItem {
 							ContextMenuAdapter.ItemClickListener itemClickListener,
 							ContextMenuAdapter.OnIntegerValueChangedListener integerListener,
 							boolean hideDivider,
-							int minHeight) {
+							int minHeight,
+							int tag) {
 		this.titleId = titleId;
 		this.title = title;
 		this.mIcon = icon;
@@ -68,6 +70,7 @@ public class ContextMenuItem {
 		this.integerListener = integerListener;
 		this.hideDivider = hideDivider;
 		this.minHeight = minHeight;
+		this.tag = tag;
 	}
 
 	@StringRes
@@ -185,6 +188,10 @@ public class ContextMenuItem {
 		return minHeight;
 	}
 
+	public int getTag() {
+		return tag;
+	}
+
 	public static ItemBuilder createBuilder(String title) {
 		return new ItemBuilder().setTitle(title);
 	}
@@ -212,6 +219,7 @@ public class ContextMenuItem {
 		private boolean mSkipPaintingWithoutColor;
 		private boolean mHideDivider;
 		private int mMinHeight;
+		private int mTag;
 
 		public ItemBuilder setTitleId(@StringRes int titleId, @Nullable Context context) {
 			this.mTitleId = titleId;
@@ -302,10 +310,20 @@ public class ContextMenuItem {
 			return this;
 		}
 
+		public int getTag() {
+			return mTag;
+		}
+
+		public ItemBuilder setTag(int tag) {
+			this.mTag = tag;
+			return this;
+		}
+
 		public ContextMenuItem createItem() {
 			return new ContextMenuItem(mTitleId, mTitle, mIcon, mColorRes, mSecondaryIcon,
 					mSelected, mProgress, mLayout, mLoading, mIsCategory, mSkipPaintingWithoutColor,
-					mPosition, mDescription, mItemClickListener, mIntegerListener, mHideDivider, mMinHeight);
+					mPosition, mDescription, mItemClickListener, mIntegerListener, mHideDivider,
+					mMinHeight, mTag);
 		}
 	}
 }
