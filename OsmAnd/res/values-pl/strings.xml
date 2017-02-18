@@ -2860,5 +2860,5 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="shared_string_time">Czas</string>
     <string name="routing_attr_driving_style_name">Styl jazdy</string>
     <string name="routing_attr_driving_style_description">Bezpieczny, szybki lub zrównoważony</string>
-    <string name="shared_string_tracks">Trasy</string>
+    <string name="shared_string_tracks">Ślady</string>
     </resources>
