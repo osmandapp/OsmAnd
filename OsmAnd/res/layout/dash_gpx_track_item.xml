@@ -9,7 +9,15 @@
               android:gravity="center_vertical">
 
 	<View
-		android:id="@+id/divider"
+		android:id="@+id/divider_list"
+		android:layout_width="match_parent"
+		android:layout_height="1dp"
+		android:layout_marginLeft="54dp"
+		android:background="?attr/dashboard_divider"
+		android:visibility="gone"/>
+
+	<View
+		android:id="@+id/divider_dash"
 		android:layout_width="match_parent"
 		android:layout_height="1dp"
 		android:background="?attr/dashboard_divider"/>
@@ -24,7 +32,7 @@
 			android:id="@+id/check_local_index"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:layout_marginLeft="@dimen/local_index_check_right_margin"
+			android:layout_marginLeft="@dimen/list_content_padding"
 			android:focusable="false"
 			android:visibility="gone"/>
 
@@ -148,7 +156,7 @@
 			android:src="@drawable/ic_action_gsave_dark"
 			android:visibility="gone"
 			tools:visibility="visible"/>
-		
+
 		<ImageButton
 			android:id="@+id/stop"
 			android:layout_width="@dimen/list_item_height"

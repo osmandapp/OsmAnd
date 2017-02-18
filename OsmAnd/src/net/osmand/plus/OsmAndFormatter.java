@@ -45,6 +45,13 @@ public class OsmAndFormatter {
 		}
 	}
 
+	public static String getFormattedDurationShort(int seconds, OsmandApplication ctx) {
+		int hours = seconds / (60 * 60);
+		int minutes = (seconds / 60) % 60;
+		int sec = seconds % 60;
+		return hours + ":" + (minutes < 10 ? "0" + minutes : minutes) + ":" + (sec < 10 ? "0" + sec : sec);
+	}
+
 	public static double calculateRoundedDist(double distInMeters, OsmandApplication ctx) {
 		OsmandSettings settings = ctx.getSettings();
 		MetricsConstants mc = settings.METRIC_SYSTEM.get();

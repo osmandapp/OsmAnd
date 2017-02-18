@@ -4,19 +4,6 @@
 			  android:layout_height="match_parent"
 			  android:orientation="vertical">
 
-	<LinearLayout
-		android:id="@+id/current_track"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:background="?attr/bg_card"
-		android:orientation="vertical">
-
-		<include
-			layout="@layout/dash_gpx_track_item"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"/>
-
-	</LinearLayout>
  	<ExpandableListView
 		android:id="@android:id/list"
 		android:layout_width="fill_parent"
@@ -25,7 +12,9 @@
 		android:layout_marginRight="0dp"
 		android:layout_marginTop="0dp"
 		android:layout_weight="1"
+        android:divider="@null"
+        android:dividerHeight="0dp"
+        android:drawSelectorOnTop="false"
 		android:groupIndicator="@android:color/transparent"/>
-
 
 </LinearLayout>

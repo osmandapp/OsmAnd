@@ -13,6 +13,9 @@
         android:layout_marginRight="0dp"
         android:layout_marginTop="0dp"
         android:layout_weight="1"
+        android:divider="@null"
+        android:dividerHeight="0dp"
+        android:drawSelectorOnTop="false"
         android:groupIndicator="@android:color/transparent" />
 
 </LinearLayout>
