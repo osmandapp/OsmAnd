@@ -710,10 +710,10 @@
     <string name="always_center_position_on_map">Vis posisjon alltid i midten</string>
     <string name="guidance_preferences_descr">Navigeringsinnstillinger</string>
     <string name="routing_preferences_descr">Ruteplanleggingsinnstillinger</string>
-    <string name="rendering_attr_noAdminboundaries_name">Skjul grenser</string>
+    <string name="rendering_attr_noAdminboundaries_name">Grenser</string>
     <string name="map_widget_max_speed">Fartsgrense</string>
     <string name="map_widget_transparent">Gjennomsiktige moduler</string>
-    <string name="rendering_attr_noPolygons_name">Skjul polygoner</string>
+    <string name="rendering_attr_noPolygons_name">Polygoner</string>
     <string name="plugins_screen">Programtillegg</string>
     <string name="prefs_plugins_descr">Programtillegg aktiverer avanserte innstillinger og flere funksjoner</string>
     <string name="prefs_plugins">Programtillegg</string>
