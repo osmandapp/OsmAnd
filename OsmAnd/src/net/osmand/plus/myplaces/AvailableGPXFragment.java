@@ -166,6 +166,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 
 		ImageView icon = (ImageView) currentGpxView.findViewById(R.id.icon);
 		icon.setImageDrawable(app.getIconsCache().getIcon(R.drawable.monitoring_rec_big));
+		icon.setVisibility(selectionMode && showOnMapMode ? View.GONE : View.VISIBLE);
 
 		final boolean light = app.getSettings().isLightContent();
 		SavingTrackHelper sth = app.getSavingTrackHelper();
@@ -583,6 +584,59 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		}
 	}
 
+	private void moveGpx(final GpxInfo info) {
+
+		final ContextMenuAdapter menuAdapter = new ContextMenuAdapter();
+		ContextMenuItem.ItemBuilder itemBuilder = new ContextMenuItem.ItemBuilder();
+
+		File[] listFiles = app.getAppPath(IndexConstants.GPX_INDEX_DIR).listFiles();
+		final List<File> dirs = new ArrayList<>();
+		if (listFiles != null) {
+			Arrays.sort(listFiles);
+			for (File f : listFiles) {
+				if (f.isDirectory() && !info.file.getParentFile().equals(f)) {
+					dirs.add(f);
+				}
+			}
+			if (!info.file.getParentFile().equals(app.getAppPath(IndexConstants.GPX_INDEX_DIR))) {
+				dirs.add(0, app.getAppPath(IndexConstants.GPX_INDEX_DIR));
+			}
+			int i = 0;
+			for (File dir: dirs) {
+				menuAdapter.addItem(itemBuilder.setTitle(Algorithms.capitalizeFirstLetter(dir.getName()))
+						.setIcon(R.drawable.ic_action_folder_stroke).setTag(i).createItem());
+				i++;
+			}
+			final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+			final ArrayAdapter<ContextMenuItem> listAdapter =
+					menuAdapter.createListAdapter(getActivity(), app.getSettings().isLightContent());
+			builder.setTitle(R.string.select_gpx_folder);
+			builder.setAdapter(listAdapter, new DialogInterface.OnClickListener() {
+
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					ContextMenuItem item = menuAdapter.getItem(which);
+					int index = item.getTag();
+					File dir = dirs.get(index);
+					File dest = new File(dir, info.file.getName());
+					if (dest.exists()) {
+						Toast.makeText(app, R.string.file_with_name_already_exists, Toast.LENGTH_LONG).show();
+					} else {
+						if (info.file.renameTo(dest)) {
+							asyncLoader = new LoadGpxTask();
+							asyncLoader.execute(getActivity());
+						} else {
+							Toast.makeText(app, R.string.file_can_not_be_moved, Toast.LENGTH_LONG).show();
+						}
+					}
+
+				}
+			});
+			builder.setNegativeButton(R.string.shared_string_cancel, null);
+			builder.create().show();
+		}
+	}
+
 	public class LoadGpxTask extends AsyncTask<Activity, GpxInfo, List<GpxInfo>> {
 
 		private List<GpxInfo> result;
@@ -872,10 +926,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			if (groupName.length() == 0) {
 				groupName = getString(R.string.shared_string_tracks);
 			}
-			t.append(Character.toUpperCase(groupName.charAt(0)));
-			if (groupName.length() > 1) {
-				t.append(groupName.substring(1));
-			}
+			t.append(Algorithms.capitalizeFirstLetter(groupName));
 			boolean light = app.getSettings().isLightContent();
 
 			if (selectionMode) {
@@ -1017,6 +1068,15 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
 				showGpxOnMap(gpxInfo);
+				return true;
+			}
+		});
+
+		item = optionsMenu.getMenu().add(R.string.shared_string_move).setIcon(iconsCache.getThemedIcon(R.drawable.ic_action_folder_stroke));
+		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+			@Override
+			public boolean onMenuItemClick(MenuItem item) {
+				moveGpx(gpxInfo);
 				return true;
 			}
 		});
