@@ -138,6 +138,10 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.favorites_tree, container, false);
 		ExpandableListView listView = (ExpandableListView) view.findViewById(android.R.id.list);
+		View headerView = inflater.inflate(R.layout.list_shadow_header, null, false);
+		listView.addHeaderView(headerView);
+		View footerView = inflater.inflate(R.layout.list_shadow_footer, null, false);
+		listView.addFooterView(footerView);
 		favouritesAdapter.synchronizeGroups();
 		listView.setAdapter(favouritesAdapter);
 		setListView(listView);
@@ -157,6 +161,14 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 			}
 		});
 		return view;
+	}
+
+	@Override
+	public void onActivityCreated(Bundle savedInstanceState) {
+		super.onActivityCreated(savedInstanceState);
+		listView.setBackgroundColor(getResources().getColor(
+				getMyApplication().getSettings().isLightContent() ? R.color.ctx_menu_info_view_bg_light
+						: R.color.ctx_menu_info_view_bg_dark));
 	}
 
 	@Override
@@ -712,10 +724,11 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 			}
 			OsmandApplication app = getMyApplication();
 			boolean light = app.getSettings().isLightContent();
-			setCategoryIcon(app, 0, groupPosition, isExpanded, row, light);
+			final FavoriteGroup model = getGroup(groupPosition);
+			row.findViewById(R.id.group_divider).setVisibility(groupPosition == 0 ? View.GONE : View.VISIBLE);
+			setCategoryIcon(app, FavoriteImageDrawable.getOrCreate(getActivity(), model.color, false), groupPosition, isExpanded, row, light);
 			adjustIndicator(app, groupPosition, isExpanded, row, light);
 			TextView label = (TextView) row.findViewById(R.id.category_name);
-			final FavoriteGroup model = getGroup(groupPosition);
 			label.setText(model.name.length() == 0 ? getString(R.string.shared_string_favorites) : model.name);
 
 			if (selectionMode) {
@@ -726,22 +739,27 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 				ch.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
+						List<FavouritePoint> fvs = model.points;
 						if (ch.isChecked()) {
 							groupsToDelete.add(model);
-							List<FavouritePoint> fvs = model.points;
 							if (fvs != null) {
 								favoritesSelected.addAll(fvs);
 							}
-							favouritesAdapter.notifyDataSetInvalidated();
 						} else {
 							groupsToDelete.remove(model);
+							if (fvs != null) {
+								favoritesSelected.removeAll(fvs);
+							}
 						}
+						favouritesAdapter.notifyDataSetInvalidated();
 						updateSelectionMode(actionMode);
 					}
 				});
+				row.findViewById(R.id.category_icon).setVisibility(View.GONE);
 			} else {
 				final CheckBox ch = (CheckBox) row.findViewById(R.id.toggle_item);
 				ch.setVisibility(View.GONE);
+				row.findViewById(R.id.category_icon).setVisibility(View.VISIBLE);
 			}
 			final View ch = row.findViewById(R.id.options);
 			if (!selectionMode) {
@@ -769,6 +787,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 			if (row == null) {
 				LayoutInflater inflater = getActivity().getLayoutInflater();
 				row = inflater.inflate(R.layout.favorites_list_item, parent, false);
+				row.findViewById(R.id.list_divider).setVisibility(View.VISIBLE);
 			}
 
 			TextView name = (TextView) row.findViewById(R.id.favourite_label);

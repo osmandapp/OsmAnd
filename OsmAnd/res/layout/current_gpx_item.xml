@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              xmlns:osmand="http://schemas.android.com/apk/res-auto"
+              android:minHeight="@dimen/list_item_height"
+              android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/bg_color">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scaleType="fitXY"
+                android:src="@drawable/bg_shadow_list_bottom"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="16dp"/>
+
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:id="@+id/check_local_index"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/local_index_check_right_margin"
+                    android:layout_marginTop="12dp"
+                    android:focusable="false"
+                    android:visibility="gone"/>
+
+                <ImageView
+                    android:id="@+id/icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/list_content_padding"
+                    android:layout_marginTop="12dp"
+                    android:src="@drawable/monitoring_rec_big"
+                    android:visibility="visible"/>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="12dp"
+                    android:layout_marginLeft="@dimen/subHeaderMarginLeft"
+                    android:layout_marginRight="@dimen/showAllButtonMarginRight"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="?android:textColorSecondary"
+                            android:textSize="@dimen/default_list_text_size"
+                            android:text="@string/current_track"/>
+
+                        <TextView
+                            android:id="@+id/segment_time_div"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="?android:textColorPrimary"
+                            android:textSize="@dimen/default_list_text_size"
+                            android:text=" • "/>
+
+                        <net.osmand.plus.widgets.TextViewEx
+                            android:id="@+id/segment_time"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="?android:textColorPrimary"
+                            android:textSize="@dimen/default_list_text_size"
+                            osmand:typeface="@string/font_roboto_medium"
+                            tools:text="0:05:34"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/read_section"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:visibility="visible">
+
+                        <ImageView
+                            android:id="@+id/distance_icon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginRight="@dimen/gpx_small_icon_margin"
+                            android:src="@drawable/ic_small_distance"/>
+
+                        <TextView
+                            android:id="@+id/distance"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="@dimen/gpx_small_text_margin"
+                            android:textColor="?android:textColorSecondary"
+                            android:textSize="@dimen/default_sub_text_size"/>
+
+                        <ImageView
+                            android:id="@+id/points_icon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginRight="@dimen/gpx_small_icon_margin"
+                            android:src="@drawable/ic_small_point"/>
+
+                        <TextView
+                            android:id="@+id/points_count"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="@dimen/gpx_small_text_margin"
+                            android:textColor="?android:textColorSecondary"
+                            android:textSize="@dimen/default_sub_text_size"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/unknown_section"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:visibility="gone">
+
+                        <TextView
+                            android:id="@+id/date_and_size_details"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="?android:textColorSecondary"
+                            android:textSize="@dimen/default_sub_text_size"/>
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/description"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="?android:textColorPrimary"
+                        android:textSize="@dimen/default_sub_text_size"
+                        android:visibility="gone"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:id="@+id/action_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="40dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:textColor="?attr/color_dialog_buttons"
+                    android:background="?attr/selectableItemBackground"
+                    android:drawableLeft="@drawable/ic_action_rec_stop"
+                    android:text="@string/shared_string_control_stop"/>
+
+                <Button
+                    android:id="@+id/save_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackground"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:drawableLeft="@drawable/ic_action_gsave_dark"
+                    android:textColor="?attr/color_dialog_buttons"
+                    android:text="@string/shared_string_save"
+                    android:visibility="gone"
+                    tools:visibility="visible"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+    <include layout="@layout/list_item_divider"/>
+
+</LinearLayout>

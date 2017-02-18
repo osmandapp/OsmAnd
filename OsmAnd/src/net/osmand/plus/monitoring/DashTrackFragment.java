@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,11 +19,13 @@ import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmAndAppCustomization;
+import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.dashboard.DashBaseFragment;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
@@ -142,16 +145,16 @@ public class DashTrackFragment extends DashBaseFragment {
 		if (OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class) != null) {
 			View view = inflater.inflate(R.layout.dash_gpx_track_item, null, false);
 
-			AvailableGPXFragment.createCurrentTrackView(view, app);
+			createCurrentTrackView(view, app);
 			((TextView) view.findViewById(R.id.name)).setText(R.string.shared_string_currently_recording_track);
-			AvailableGPXFragment.updateCurrentTrack(view, getActivity(), app);
+			updateCurrentTrack(view, getActivity(), app);
 			view.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					AvailableGPXFragment.openTrack(getActivity(), null);
 				}
 			});
-			view.findViewById(R.id.divider).setVisibility(View.VISIBLE);
+			view.findViewById(R.id.divider_dash).setVisibility(View.VISIBLE);
 			tracks.addView(view);
 			startHandler(view);
 		}
@@ -176,6 +179,69 @@ public class DashTrackFragment extends DashBaseFragment {
 			updateShowOnMap(app, f, v, showOnMap);
 			tracks.addView(v);
 		}
+	}
+
+	public static void createCurrentTrackView(View v, final OsmandApplication app) {
+		((TextView) v.findViewById(R.id.name)).setText(R.string.shared_string_currently_recording_track);
+		v.findViewById(R.id.time_icon).setVisibility(View.GONE);
+		v.findViewById(R.id.divider_dash).setVisibility(View.GONE);
+		v.findViewById(R.id.divider_list).setVisibility(View.GONE);
+		v.findViewById(R.id.options).setVisibility(View.GONE);
+		v.findViewById(R.id.stop).setVisibility(View.VISIBLE);
+		v.findViewById(R.id.check_item).setVisibility(View.GONE);
+	}
+
+	public static void updateCurrentTrack(View v, final Activity ctx, final OsmandApplication app) {
+		final OsmandMonitoringPlugin plugin = OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class);
+		if (v == null || ctx == null || app == null || plugin == null) {
+			return;
+		}
+		final boolean isRecording = app.getSettings().SAVE_GLOBAL_TRACK_TO_GPX.get();
+		ImageButton stop = ((ImageButton) v.findViewById(R.id.stop));
+		if (isRecording) {
+			stop.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_action_rec_stop));
+			stop.setContentDescription(app.getString(R.string.gpx_monitoring_stop));
+		} else {
+			stop.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_action_rec_start));
+			stop.setContentDescription(app.getString(R.string.gpx_monitoring_start));
+		}
+		stop.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if (isRecording) {
+					plugin.stopRecording();
+				} else
+				if (app.getLocationProvider().checkGPSEnabled(ctx)) {
+					plugin.startGPXMonitoring(ctx);
+				}
+			}
+		});
+		SavingTrackHelper sth = app.getSavingTrackHelper();
+		ImageButton save = ((ImageButton) v.findViewById(R.id.show_on_map));
+		save.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				plugin.saveCurrentTrack();
+			}
+		});
+		if (sth.getPoints() > 0 || sth.getDistance() > 0) {
+			save.setVisibility(View.VISIBLE);
+		} else {
+			save.setVisibility(View.GONE);
+		}
+		save.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_action_gsave_dark));
+		save.setContentDescription(app.getString(R.string.save_current_track));
+
+		((TextView) v.findViewById(R.id.points_count)).setText(String.valueOf(sth.getPoints()));
+		((TextView) v.findViewById(R.id.distance))
+				.setText(OsmAndFormatter.getFormattedDistance(sth.getDistance(), app));
+		v.findViewById(R.id.points_icon).setVisibility(View.VISIBLE);
+		ImageView distance = (ImageView) v.findViewById(R.id.distance_icon);
+		distance.setVisibility(View.VISIBLE);
+		distance.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_small_distance));
+		ImageView pointsCount = (ImageView) v.findViewById(R.id.points_icon);
+		pointsCount.setVisibility(View.VISIBLE);
+		pointsCount.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_small_point));
 	}
 
 	private void updateShowOnMap(final OsmandApplication app, final File f, final View pView, final ImageButton showOnMap) {
@@ -233,7 +299,7 @@ public class DashTrackFragment extends DashBaseFragment {
 			@Override
 			public void run() {
 				if (updateEnable) {
-					AvailableGPXFragment.updateCurrentTrack(v, getActivity(), getMyApplication());
+					updateCurrentTrack(v, getActivity(), getMyApplication());
 					startHandler(v);
 				}
 			}
