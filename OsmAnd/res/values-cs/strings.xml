@@ -2696,4 +2696,8 @@ Web: http://osmand.net
 
 Pokud potřebujete pomoci s aplikací OsmAnd, prosím kontaktujte naši podporu: support@osmand.net. 
  "</string>
+    <string name="select_gpx_folder">Vybrat GPX adresář</string>
+    <string name="file_can_not_be_moved">Soubor nemůže být přesunut.</string>
+    <string name="shared_string_move">Přesunout</string>
+    <string name="shared_string_tracks">Trasy</string>
     </resources>
