@@ -2680,4 +2680,5 @@ représentant la zone : %1$s x %2$s</string>
     <string name="routing_attr_driving_style_name">Style de conduite</string>
     <string name="routing_attr_driving_style_description">Conduite sûre, rapide ou équilibrée</string>
     <string name="altitude_range">Amplitude altimétrique</string>
+    <string name="shared_string_tracks">Traces</string>
     </resources>
