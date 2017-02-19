@@ -2818,4 +2818,7 @@ Facebook：https://www.facebook.com/osmandapp
     <string name="routing_attr_driving_style_name">駕駛方式</string>
     <string name="routing_attr_driving_style_description">安全、快速或穩定的駕駛</string>
     <string name="shared_string_tracks">軌跡</string>
+    <string name="select_gpx_folder">選擇 GPX 資料夾</string>
+    <string name="file_can_not_be_moved">檔案無法移動。</string>
+    <string name="shared_string_move">移動</string>
     </resources>
