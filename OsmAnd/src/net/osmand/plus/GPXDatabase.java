@@ -2,7 +2,8 @@ package net.osmand.plus;
 
 import net.osmand.IndexConstants;
 import net.osmand.plus.GPXUtilities.GPXTrackAnalysis;
-import net.osmand.plus.api.SQLiteAPI;
+import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
+import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -59,6 +60,14 @@ public class GPXDatabase {
 			GPX_COL_POINTS + " int, " +
 			GPX_COL_WPT_POINTS + " int);";
 
+	private static final String GPX_TABLE_SELECT = "SELECT " + GPX_COL_NAME + ", " + GPX_COL_DIR + "," + GPX_COL_TOTAL_DISTANCE + ", " +
+			GPX_COL_TOTAL_TRACKS + ", " + GPX_COL_START_TIME + ", " + GPX_COL_END_TIME + ", " +
+			GPX_COL_TIME_SPAN + ", " + GPX_COL_TIME_MOVING + ", " + GPX_COL_TOTAL_DISTANCE_MOVING + ", " +
+			GPX_COL_DIFF_ELEVATION_UP + ", " + GPX_COL_DIFF_ELEVATION_DOWN + ", " + GPX_COL_AVG_ELEVATION + ", " +
+			GPX_COL_MIN_ELEVATION + ", " + GPX_COL_MAX_ELEVATION + ", " + GPX_COL_MAX_SPEED + ", " +
+			GPX_COL_AVG_SPEED + ", " + GPX_COL_POINTS + ", " + GPX_COL_WPT_POINTS +
+			" FROM " +	GPX_TABLE_NAME;
+
 	private OsmandApplication context;
 
 	public static class GpxDataItem {
@@ -83,8 +92,8 @@ public class GPXDatabase {
 		context = app;
 	}
 
-	private SQLiteAPI.SQLiteConnection openConnection(boolean readonly) {
-		SQLiteAPI.SQLiteConnection conn = context.getSQLiteAPI().getOrCreateDatabase(DB_NAME, readonly);
+	private SQLiteConnection openConnection(boolean readonly) {
+		SQLiteConnection conn = context.getSQLiteAPI().getOrCreateDatabase(DB_NAME, readonly);
 		if (conn.getVersion() == 0 || DB_VERSION != conn.getVersion()) {
 			if (readonly) {
 				conn.close();
@@ -101,11 +110,11 @@ public class GPXDatabase {
 		return conn;
 	}
 
-	public void onCreate(SQLiteAPI.SQLiteConnection db) {
+	public void onCreate(SQLiteConnection db) {
 		db.execSQL(GPX_TABLE_CREATE);
 	}
 
-	public void onUpgrade(SQLiteAPI.SQLiteConnection db, int oldVersion, int newVersion) {
+	public void onUpgrade(SQLiteConnection db, int oldVersion, int newVersion) {
 		/*
 		if (newVersion == 2) {
 			db.execSQL(GPX_TABLE_CREATE);
@@ -114,12 +123,19 @@ public class GPXDatabase {
 		*/
 	}
 
-	public boolean remove(GpxDataItem item) {
-		SQLiteAPI.SQLiteConnection db = openConnection(false);
+	public boolean rename(File currentFile, File newFile) {
+		SQLiteConnection db = openConnection(false);
 		if(db != null){
 			try {
-				db.execSQL("DELETE FROM " + GPX_TABLE_NAME + " WHERE " + GPX_COL_NAME + " = ?, " + GPX_COL_DIR + " = ?",
-						new Object[] { item.file.getName(), item.file.getParentFile().getName() });
+				String newFileName = getFileName(newFile);
+				String newFileDir = getFileDir(newFile);
+				String fileName = getFileName(currentFile);
+				String fileDir = getFileDir(currentFile);
+				db.execSQL("UPDATE " + GPX_TABLE_NAME + " SET " +
+								GPX_COL_NAME + " = ? " + ", " +
+								GPX_COL_DIR + " = ? " +
+						" WHERE " + GPX_COL_NAME + " = ? AND " + GPX_COL_DIR + " = ?",
+						new Object[] { newFileName, newFileDir, fileName, fileDir });
 			} finally {
 				db.close();
 			}
@@ -128,8 +144,28 @@ public class GPXDatabase {
 		return false;
 	}
 
+	public boolean remove(File file) {
+		SQLiteConnection db = openConnection(false);
+		if(db != null){
+			try {
+				String fileName = getFileName(file);
+				String fileDir = getFileDir(file);
+				db.execSQL("DELETE FROM " + GPX_TABLE_NAME + " WHERE " + GPX_COL_NAME + " = ? AND " + GPX_COL_DIR + " = ?",
+						new Object[] { fileName, fileDir });
+			} finally {
+				db.close();
+			}
+			return true;
+		}
+		return false;
+	}
+
+	public boolean remove(GpxDataItem item) {
+		return remove(item.file);
+	}
+
 	public boolean add(GpxDataItem item) {
-		SQLiteAPI.SQLiteConnection db = openConnection(false);
+		SQLiteConnection db = openConnection(false);
 		if(db != null){
 			try {
 				insert(item, db);
@@ -141,9 +177,18 @@ public class GPXDatabase {
 		return false;
 	}
 
-	private void insert(GpxDataItem item, SQLiteAPI.SQLiteConnection db) {
-		String fileName = item.file.getName();
-		String fileDir = item.file.getParentFile().getName();
+	private String getFileName(File itemFile) {
+		return itemFile.getName();
+	}
+
+	private String getFileDir(File itemFile) {
+		return itemFile.getParentFile().equals(context.getAppPath(IndexConstants.GPX_INDEX_DIR)) ?
+				"" : itemFile.getParentFile().getName();
+	}
+
+	private void insert(GpxDataItem item, SQLiteConnection db) {
+		String fileName = getFileName(item.file);
+		String fileDir = getFileDir(item.file);
 		GPXTrackAnalysis a = item.getAnalysis();
 		db.execSQL(
 				"INSERT INTO " + GPX_TABLE_NAME + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
@@ -152,69 +197,63 @@ public class GPXDatabase {
 						a.avgElevation, a.minElevation, a.maxElevation, a.maxSpeed, a.avgSpeed, a.points, a.wptPoints });
 	}
 
+	private GpxDataItem readItem(SQLiteCursor query) {
+		String fileName = query.getString(0);
+		String fileDir = query.getString(1);
+		float totalDistance = (float)query.getDouble(2);
+		int totalTracks = (int)query.getInt(3);
+		long startTime = query.getLong(4);
+		long endTime = query.getLong(5);
+		long timeSpan = query.getLong(6);
+		long timeMoving = query.getLong(7);
+		float totalDistanceMoving = (float)query.getDouble(8);
+		double diffElevationUp = query.getDouble(9);
+		double diffElevationDown = query.getDouble(10);
+		double avgElevation = query.getDouble(11);
+		double minElevation = query.getDouble(12);
+		double maxElevation = query.getDouble(13);
+		float maxSpeed = (float)query.getDouble(14);
+		float avgSpeed = (float)query.getDouble(15);
+		int points = (int)query.getInt(16);
+		int wptPoints = (int)query.getInt(17);
+
+		GPXTrackAnalysis a = new GPXTrackAnalysis();
+		a.totalDistance = totalDistance;
+		a.totalTracks = totalTracks;
+		a.startTime = startTime;
+		a.endTime = endTime;
+		a.timeSpan = timeSpan;
+		a.timeMoving = timeMoving;
+		a.totalDistanceMoving = totalDistanceMoving;
+		a.diffElevationUp = diffElevationUp;
+		a.diffElevationDown = diffElevationDown;
+		a.avgElevation = avgElevation;
+		a.minElevation = minElevation;
+		a.maxElevation = maxElevation;
+		a.maxSpeed = maxSpeed;
+		a.avgSpeed = avgSpeed;
+		a.points = points;
+		a.wptPoints = wptPoints;
+
+		File dir;
+		if (!Algorithms.isEmpty(fileDir)) {
+			dir = new File(context.getAppPath(IndexConstants.GPX_INDEX_DIR), fileDir);
+		} else {
+			dir = context.getAppPath(IndexConstants.GPX_INDEX_DIR);
+		}
+		return new GpxDataItem(new File(dir, fileName), a);
+	}
+
 	public List<GpxDataItem> getItems() {
 		List<GpxDataItem> items = new ArrayList<>();
-		SQLiteAPI.SQLiteConnection db = openConnection(true);
-		if(db != null){
+		SQLiteConnection db = openConnection(true);
+		if (db != null){
 			try {
-				SQLiteAPI.SQLiteCursor query = db.rawQuery(
-						"SELECT " + GPX_COL_NAME + ", " + GPX_COL_DIR + "," + GPX_COL_TOTAL_DISTANCE + ", " +
-								GPX_COL_TOTAL_TRACKS + ", " + GPX_COL_START_TIME + ", " + GPX_COL_END_TIME + ", " +
-								GPX_COL_TIME_SPAN + ", " + GPX_COL_TIME_MOVING + ", " + GPX_COL_TOTAL_DISTANCE_MOVING + ", " +
-								GPX_COL_DIFF_ELEVATION_UP + ", " + GPX_COL_DIFF_ELEVATION_DOWN + ", " + GPX_COL_AVG_ELEVATION + ", " +
-								GPX_COL_MIN_ELEVATION + ", " + GPX_COL_MAX_ELEVATION + ", " + GPX_COL_MAX_SPEED + ", " +
-								GPX_COL_AVG_SPEED + ", " + GPX_COL_POINTS + ", " + GPX_COL_WPT_POINTS +
-								" FROM " +	GPX_TABLE_NAME , null);
-
+				SQLiteCursor query = db.rawQuery(GPX_TABLE_SELECT , null);
 				if (query.moveToFirst()) {
 					do {
-						String fileName = query.getString(0);
-						String fileDir = query.getString(1);
-						float totalDistance = (float)query.getDouble(2);
-						int totalTracks = (int)query.getInt(3);
-						long startTime = query.getLong(4);
-						long endTime = query.getLong(5);
-						long timeSpan = query.getLong(6);
-						long timeMoving = query.getLong(7);
-						float totalDistanceMoving = (float)query.getDouble(8);
-						double diffElevationUp = query.getDouble(9);
-						double diffElevationDown = query.getDouble(10);
-						double avgElevation = query.getDouble(11);
-						double minElevation = query.getDouble(12);
-						double maxElevation = query.getDouble(13);
-						float maxSpeed = (float)query.getDouble(14);
-						float avgSpeed = (float)query.getDouble(15);
-						int points = (int)query.getInt(16);
-						int wptPoints = (int)query.getInt(17);
-
-						GPXTrackAnalysis a = new GPXTrackAnalysis();
-						a.totalDistance = totalDistance;
-						a.totalTracks = totalTracks;
-						a.startTime = startTime;
-						a.endTime = endTime;
-						a.timeSpan = timeSpan;
-						a.timeMoving = timeMoving;
-						a.totalDistanceMoving = totalDistanceMoving;
-						a.diffElevationUp = diffElevationUp;
-						a.diffElevationDown = diffElevationDown;
-						a.avgElevation = avgElevation;
-						a.minElevation = minElevation;
-						a.maxElevation = maxElevation;
-						a.maxSpeed = maxSpeed;
-						a.avgSpeed = avgSpeed;
-						a.points = points;
-						a.wptPoints = wptPoints;
-
-						File dir;
-						if (!Algorithms.isEmpty(fileDir)) {
-							dir = new File(context.getAppPath(IndexConstants.GPX_INDEX_DIR), fileDir);
-						} else {
-							dir = context.getAppPath(IndexConstants.GPX_INDEX_DIR);
-						}
-						GpxDataItem item = new GpxDataItem(new File(dir, fileName), a);
-						items.add(item);
+						items.add(readItem(query));
 					} while (query.moveToNext());
-
 				}
 				query.close();
 			} finally {
@@ -222,5 +261,25 @@ public class GPXDatabase {
 			}
 		}
 		return items;
+	}
+
+	public GpxDataItem getItem(File file) {
+		GpxDataItem result = null;
+		SQLiteConnection db = openConnection(true);
+		if (db != null){
+			try {
+				String fileName = getFileName(file);
+				String fileDir = getFileDir(file);
+				SQLiteCursor query = db.rawQuery(GPX_TABLE_SELECT + " WHERE " + GPX_COL_NAME + " = ? AND " +
+						GPX_COL_DIR + " = ?", new String[] { fileName, fileDir });
+				if (query.moveToFirst()) {
+					result = readItem(query);
+				}
+				query.close();
+			} finally {
+				db.close();
+			}
+		}
+		return result;
 	}
 }
