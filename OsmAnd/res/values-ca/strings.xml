@@ -2667,4 +2667,7 @@ i encara més…
     <string name="routing_attr_driving_style_name">Estil de conducció</string>
     <string name="routing_attr_driving_style_description">Conducció segura, ràpida o equilibrada</string>
     <string name="shared_string_tracks">Pistes</string>
+    <string name="select_gpx_folder">Seleccioneu la carpeta GPX</string>
+    <string name="file_can_not_be_moved">El fitxer no es pot moure.</string>
+    <string name="shared_string_move">Mou</string>
     </resources>
