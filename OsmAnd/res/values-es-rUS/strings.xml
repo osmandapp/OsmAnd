@@ -2632,4 +2632,8 @@ Representa el área: %1$s x %2$s</string>
 
     <string name="routing_attr_driving_style_name">Estilo de conducción</string>
     <string name="routing_attr_driving_style_description">Conducción segura, rápida o equilibrada</string>
+    <string name="select_gpx_folder">Marcar carpeta GPX</string>
+    <string name="file_can_not_be_moved">Archivo inamovible.</string>
+    <string name="shared_string_move">Mover</string>
+    <string name="shared_string_tracks">Trazas</string>
     </resources>
