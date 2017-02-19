@@ -2678,4 +2678,76 @@ Facebook: https://www.facebook.com/osmandapp
     <string name="shared_string_action_name">Назва дії</string>
 <string name="quick_favorites_show_favorites_dialog">Показати діалог закладок</string>
     <string name="quick_action_showhide_favorites_descr">При натисканні на кнопку дії будуть показані чи приховані точки закладок на мапі.</string>
-    </resources>
+    <string name="file_can_not_be_moved">Файл не може бути переміщений.</string>
+    <string name="shared_string_move">Перемістити</string>
+    <string name="shared_string_tracks">Треки</string>
+    <string name="routing_attr_driving_style_name">Стиль кермування</string>
+    <string name="routing_attr_driving_style_description">Безпечне, швидке чи збалансоване кермування</string>
+    <string name="route_altitude">Висота маршруту</string>
+    <string name="altitude_descent">Спуск</string>
+    <string name="altitude_ascent">Підіймання</string>
+    <string name="altitude_range">Діапазон висот</string>
+    <string name="average_altitude">Середнє</string>
+    <string name="shared_string_time">Час</string>
+    <string name="total_distance">Загальна відстань</string>
+    <string name="routing_attr_height_relief_smoothness_factor_name">Коефіцієнт плавності рельєфу</string>
+    <string name="routing_attr_height_relief_smoothness_factor_description">Більш рівнини чи більш пагорби</string>
+    <string name="routing_attr_height_obstacles_name">Використовувати дані про висоту</string>
+    <string name="routing_attr_height_obstacles_description">Використання даних рельєфу місцевості, що надаються SRTM, ASTER та EU-DEM</string>
+
+    <string name="rendering_attr_depthContours_description">Показати контури глибини і точки</string>
+    <string name="rendering_attr_depthContours_name">Контури глибини</string>
+	<string name="auto_split_recording_title">Авто-розрив запису після перерви</string>
+	<string name="auto_split_recording_descr">Почати новий сегмент після 6 хвилинної перерви, новий трек після 2 годинної перерви, або новий файл після тривалої перерви (якщо змінилася дата).</string>
+    <string name="select_gpx_folder">Виберіть папку GPX</string>
+    <string name="release_2_6">"
+ • Нова функція: кнопка швидкої дії
+   
+   
+ • Покращена відповідь на жести сенсорного екрану
+  
+   
+ • Новий шрифт мапи охоплює більше мов
+  
+   
+ • Підтримка TTS для варіантів регіональних мов
+  
+   
+ • Покращення видимості в декількох стилях мап та Вікіпедії
+  
+   
+ • Підтримка Open Location Code (OLC)
+  
+   
+ • Відображення основного висотного профілю для записаного GPX
+  
+   
+ • Кілька інших поліпшень й виправлень помилок
+  
+ та багато іншого…
+ "</string>
+	<string name="navigate_point_olc_info_invalid">Некоректний OLC
+</string>
+    <string name="navigate_point_olc_info_short">Короткий OLC 
+Будь ласка, введіть повний код</string>
+    <string name="navigate_point_olc_info_area">Коректний повний OLC
+Описує область: %1$s x %2$s</string>
+    <string name="quick_action_navigation_voice">Голос вкл/викл</string>
+    <string name="quick_action_navigation_voice_off">Голос вимкнений</string>
+    <string name="quick_action_navigation_voice_on">Голос включений</string>
+    <string name="quick_action_duplicates">Зазначене ім’я для швидкої дії вже використовується. Дія буде збережена як %1$s щоб уникнути дублювання.</string>
+    <string name="quick_action_duplicate">Виявлено дублікат імені</string>
+    <string name="quick_action_showhide_poi_descr">Натискання на кнопку дії призведе до відображення / приховування POI з мапи.</string>
+    <string name="quick_action_gpx_category_descr">Виберіть категорію (опціонально)</string>
+    <string name="quick_action_page_list_descr">Натискання на кнопку швидкої дії дозволить циклічно перемикати елементи даного списку.</string>
+    <string name="quick_action_map_overlay">Змінити мапу покриття</string>
+    <string name="quick_action_map_overlay_title">Мапи покриття</string>
+    <string name="quick_action_map_overlay_action">Додати мапу покриття</string>
+    <string name="quick_action_map_overlay_switch">Мапа покриття змінена на „%s“.</string>
+    <string name="quick_action_map_underlay_switch">Підкладка мапи змінена на „%s“.</string>
+    <string name="quick_action_map_underlay">Змінити підкладку мапи</string>
+    <string name="quick_action_map_underlay_title">Підкладки мапи</string>
+    <string name="quick_action_map_underlay_action">Додати підкладку</string>
+    <string name="quick_action_map_source">Змінити джерело мапи</string>
+    <string name="quick_action_btn_tutorial_descr">Довге натиснення й перетягування дозволить перемістити кнопку</string>
+	</resources>
