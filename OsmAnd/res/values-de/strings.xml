@@ -498,7 +498,7 @@ OSM ist ein gemeinschaftliches, frei zugängliches, globales Kartografierungspro
 	<string name="local_indexes_cat_poi">POI-Daten</string>
 	<string name="ttsvoice">TTS-Sprachansage</string>
 	<string name="search_offline_clear_search">Neue Suche</string>
-	<string name="map_text_size_descr">Wähle Textgröße für Bezeichnungen in den Landkarten</string>
+	<string name="map_text_size_descr">Textgröße für Bezeichnungen auf der Karte wählen</string>
 	<string name="map_text_size">Karten-Textgröße</string>
 	
 	<string name="trace_rendering">Rendering Debug-Info</string>
@@ -525,11 +525,11 @@ OSM ist ein gemeinschaftliches, frei zugängliches, globales Kartografierungspro
 	<string name="modify_transparency">Transparenz ändern (0 - durchsichtig, 255 - undurchsichtig)</string>
 	<string name="layer_underlay">Underlay-Karte…</string>
 	<string name="map_underlay">Underlay-Karte</string>
-	<string name="map_underlay_descr">Wähle Underlay-Karte</string>
+	<string name="map_underlay_descr">Karte als Unterlage auswählen</string>
 	<string name="layer_overlay">Overlay-Karte…</string>
 	<string name="shared_string_none">Keine(r/s)</string>
 	<string name="map_overlay">Overlay-Karte</string>
-	<string name="map_overlay_descr">Wähle Overlay-Karte</string>
+	<string name="map_overlay_descr">Karte als Überlagerung auswählen</string>
 	<string name="tile_source_already_installed">Karte schon installiert, Einstellungen werden aktualisiert</string>
 	<string name="select_tile_source_to_install">Kartenauswahl (Installation oder Aktualisierung)</string>
 	<string name="internet_not_available">Internet Verbindung erforderlich, aber nicht verfügbar!</string>
@@ -618,7 +618,7 @@ OSM ist ein gemeinschaftliches, frei zugängliches, globales Kartografierungspro
 	<string name="install_selected_build">Möchten Sie OsmAnd ({0} von {1} {2} MB) installieren?</string>
 	<string name="loading_builds_failed">Laden der Liste von OsmAnd-Builds ist fehlgeschlagen</string>
 	<string name="loading_builds">Lade OsmAnd-Builds…</string>
-	<string name="select_build_to_install">Auswählen eines OsmAnd-Builds für die Installation</string>
+	<string name="select_build_to_install">OsmAnd-Build zur Installation auswählen</string>
 	<string name="contribution_activity">Installationsversion</string>
 	<string name="gps_status_app_not_found">Anwendung \'GPS Status\' ist nicht installiert. Soll diese installiert werden?</string>
 	<string name="voice_is_not_available_msg">Keine Sprachansage verfügbar. Bitte unter \'Einstellungen\' → \'Allgemeine Einstellungen\' → \'Sprachansagen\' ein Sprachpaket auswählen oder herunterladen.</string>
@@ -627,7 +627,7 @@ OSM ist ein gemeinschaftliches, frei zugängliches, globales Kartografierungspro
 	<string name="daynight_mode_night">Nacht</string>
 	<string name="daynight_mode_auto">Sonnenaufgang/-untergang</string>
 	<string name="daynight_mode_sensor">Umgebungslicht-Sensor</string>
-	<string name="daynight_descr">Wähle das Kriterium für die Umschaltung der Tag/Nacht-Anzeige</string>
+	<string name="daynight_descr">Kriterium für den Wechsel zwischen Tag- und Nacht-Anzeige auswählen</string>
 	<string name="daynight">Tag/Nacht-Modus</string>
 	<string name="download_files_question">Lade {0} Datei(en) ({1} MB)?</string>
 	<string name="items_were_selected">{0} Punkte ausgewählt</string>
@@ -636,10 +636,10 @@ OSM ist ein gemeinschaftliches, frei zugängliches, globales Kartografierungspro
 	<string name="shared_string_select_all">Alle markieren</string>
 	<string name="shared_string_refresh">Aktualisieren</string>
 	<string name="fast_route_mode">Schnellste Route</string>
-	<string name="fast_route_mode_descr">"Auswählen für schnellste Route oder deaktivieren für Kraftstoff sparende Route "</string>
+	<string name="fast_route_mode_descr">"Zur Berechnung der schnellsten Route aktivieren , für eine kraftstoffsparende Route deaktivieren "</string>
 	<string name="tiles_to_download_estimated_size">Bei Zoomlevel {0} lade {1} Kacheln\n ({2} MB)</string>
 	<string name="shared_string_download_map">Karte herunterladen</string>
-	<string name="select_max_zoom_preload_area">Wähle maximale zu ladende Vergrößerung</string>
+	<string name="select_max_zoom_preload_area">Größte zu ladende Vergrößerung wählen</string>
 	<string name="maps_could_not_be_downloaded">Diese Karte konnte nicht geladen werden</string>
 	<string name="continuous_rendering">Kontinuierlicher Kartenaufbau</string>
 	<string name="continuous_rendering_descr">Wähle zwischen kontinuierlichem Kartenaufbau oder Bilddarstellung auf einmal</string>
@@ -894,8 +894,8 @@ OSM ist ein gemeinschaftliches, frei zugängliches, globales Kartografierungspro
 	<string name="search_POI_level_btn">Weitere Ergebnisse</string>
 	<string name="incremental_search_street">Suche Straße inkrementell</string>
 	<string name="incremental_search_building">Suche Hausnummer inkrementell</string>
-	<string name="choose_available_region">Wähle Region</string>
-	<string name="choose_intersected_street">Wähle Querstraße</string>
+	<string name="choose_available_region">Region aus Liste auswählen</string>
+	<string name="choose_intersected_street">Querstraße wählen</string>
 	<string name="Closest_Amenities">Umliegende Einrichtungen</string>
 	<string name="app_mode_default">Karte ansehen</string>
 	<string name="app_mode_car">Auto</string>
@@ -970,7 +970,7 @@ OSM ist ein gemeinschaftliches, frei zugängliches, globales Kartografierungspro
 	
 	<string name="offline_navigation_not_available">OsmAnd-Offline-Navigation steht zur Zeit nicht zur Verfügung.</string>
 	<string name="left_side_navigation">Linksverkehr</string>
-	<string name="left_side_navigation_descr">Auswählen für Länder mit Linksverkehr</string>
+	<string name="left_side_navigation_descr">Für Länder mit Linksverkehr auswählen</string>
 	
 	<string name="unknown_from_location">Startpunkt ist noch nicht ermittelt</string>
 	<string name="confirm_interrupt_download">Möchten Sie das Herunterladen der Datei abbrechen?</string>
@@ -1173,7 +1173,7 @@ Die globalen Daten (zwischen 70° Nord und 70° Süd) basieren auf Messungen von
  "</string>
 	<string name="stop_routing_confirm">Wollen Sie die Navigation wirklich beenden?</string>
 	<string name="clear_dest_confirm">Sind Sie sicher, dass Sie Ihr Ziel (und die Zwischenziele) löschen möchten?</string>
-	<string name="precise_routing_mode_descr">Auswählen um Routen fehlerfrei zu berechnen. Diese Funktion ist weiterhin auf kurze Entfernung begrenzt und langsam.</string>
+	<string name="precise_routing_mode_descr">Aktivieren, um Routen fehlerfrei zu berechnen. Diese Funktion ist weiterhin auf kurze Entfernung begrenzt und langsam.</string>
 	<string name="precise_routing_mode">Präzises Routing (experimentell)</string>
 	<string name="local_indexes_cat_av">Audio/Video-Daten</string>
 	<string name="prefer_motorways">Autobahnen bevorzugen</string>
@@ -1697,7 +1697,7 @@ Mit Neuanmeldung fortfahren?</string>
 	<string name="osmo_invite">Einladen…</string>
 	<string name="osmo_leave_confirmation_msg">Die Gruppe %1$s verlassen?</string>
 	<string name="osmo_cancel_moving_target">Bewegliches Ziel abwählen</string>
-	<string name="osmo_set_moving_target">Als bewegliches Ziel auswählen</string>
+	<string name="osmo_set_moving_target">Als bewegliches Ziel bestimmen</string>
 	<string name="osmo_edit_color">Darstellungsfarbe</string>
 	<string name="osmo_center_location">Auf dem Bildschirm zentrieren</string>
 
@@ -1860,7 +1860,7 @@ Aufgenommene Tracks können z. B. mit Bekannten geteilt oder als Beiträge zu OS
     <string name="shared_string_my_location">Mein Standort</string>
 
     <string name="navigation_over_track">Navigation der Strecke entlang starten?</string>
-    <string name="avoid_roads_msg">Sie können die Route ändern, indem Sie die Straßen auswählen, die vermieden werden sollen</string>
+    <string name="avoid_roads_msg">Sie können die Route ändern, indem Sie Straßen auswählen, die vermieden werden sollen</string>
     <string name="enable_proxy_title">HTTP-Proxy aktivieren</string>
     <string name="enable_proxy_descr">HTTP-Proxy für alle Netzwerkanfragen einrichten</string>
     <string name="proxy_host_title">Proxy-Host</string>
@@ -1971,7 +1971,7 @@ Diese Ansicht kann zurückgestellt werden indem Sie hier wieder deaktiviert oder
 	<string name="shared_string_video">Video</string>
 	<string name="shared_string_photo">Foto</string>
 	<string name="shared_string_places">Orte</string>
-	<string name="welcome_select_region">Um korrekte Straßenschilder und Beschränkungen zu erhalten, bitte eine Region auswählen:</string>
+	<string name="welcome_select_region">Zur korrekten Wiedergabe von Verkehrszeichen und -regeln, bitte Region wählen:</string>
 	<string name="welcome_text">OsmAnd bietet globale Offline-Karten und globale Offline-Navigation!</string>
 	<string name="waypoint_visit_before">Vorher besuchen</string>
 	<string name="action_create">Aktion erstellen</string>
@@ -2142,7 +2142,7 @@ Lon %2$s</string>
     <string name="favorite_category_add_new_title">Neue Kategorie hinzufügen</string>
     <string name="srtm_plugin_disabled">Höhenlinien deaktiviert</string>
     <string name="favorite_category_select">Kategorie auswählen</string>
-    <string name="default_speed_system_descr">Geschwindigkeitseinheit auswählen</string>
+    <string name="default_speed_system_descr">Geschwindigkeitseinheit festlegen</string>
     <string name="default_speed_system">Geschwindigkeitseinheit</string>
     <string name="nm">sm</string>
     <string name="nm_h">sm/h</string>
@@ -2160,7 +2160,7 @@ Lon %2$s</string>
 	<string name="buy">Erwerben</string>
     <string name="later">Später</string>
     <string name="downloads">Downloads</string>
-    <string name="application_dir_description">Bitte den Speicherort für heruntergeladene Karten und andere Daten wählen.</string>
+    <string name="application_dir_description">Speicherort für Karten und andere Daten auswählen.</string>
     <string name="new_version">Neue Version</string>
     <string name="begin_with_osmand_menu_group">Erste Schritte in OsmAnd</string>
     <string name="features_menu_group">Merkmale</string>
@@ -2259,7 +2259,7 @@ Lon %2$s</string>
     <string name="favorite_category_add_new">neu erstellen</string>
     <string name="next_proceed">Weiter</string>
 	<string name="file_size_in_mb">%.1f MB</string>
-    <string name="please_specify_poi_type_only_from_list">Bitte einen gültigen POI-Typ auswählen oder überspringen</string>
+    <string name="please_specify_poi_type_only_from_list">Bitte einen gültigen POI-Typ angeben oder überspringen</string>
     <string name="share_osm_edits_subject">OSM-Bearbeitung mit OsmAnd geteilt</string>
     <string name="av_locations_descr">GPX-Datei mit Notizen zu Orten</string>
     <string name="free_downloads_used_description">Anzeige der genutzten freien Downloads</string>
@@ -2666,8 +2666,8 @@ und vieles mehr ...
     <string name="quick_action_btn_tutorial_title">Tastenposition ändern</string>
     <string name="quick_action_favorites_show">Favoriten anzeigen</string>
     <string name="quick_action_favorites_hide">Favoriten ausblenden</string>
-    <string name="quick_action_category_descr">Wählen Sie eine Kategorie um den Favorit unter dieser zu speichern</string>
-    <string name="quick_action_gpx_category_descr">Wählen Sie eine optionale Kategorie</string>
+    <string name="quick_action_category_descr">Wählen Sie eine Kategorie, in der der Favorit gespeichert werden soll</string>
+    <string name="quick_action_gpx_category_descr">Wählen Sie eine beliebige Kategorie</string>
     <string name="configure_screen_quick_action">Schnellaktion</string>
 
     <string name="quick_action_add_gpx_descr">Drücken der Aktionstaste fügt einen GPX-Wegpunkt am Bildschirmmittelpunkt ein.</string>
@@ -2739,4 +2739,8 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="total_distance">Gesamtstrecke</string>
     <string name="routing_attr_driving_style_name">Fahrweise</string>
     <string name="routing_attr_driving_style_description">Sicheres, schnelles oder ausgewogenes Fahren</string>
+    <string name="select_gpx_folder">GPX-Ordner wählen</string>
+    <string name="file_can_not_be_moved">Datei kann nicht verschoben werden.</string>
+    <string name="shared_string_move">Verschieben</string>
+    <string name="shared_string_tracks">Tracks</string>
     </resources>
