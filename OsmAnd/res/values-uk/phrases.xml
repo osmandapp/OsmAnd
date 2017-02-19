@@ -686,4 +686,18 @@
 	<string name="poi_sport_multi">Універсальний спортмайданчик</string>
 	<string name="poi_orienteering">Спортивне орієнтування</string>
 	<string name="poi_paragliding">Парапланеризм</string>
+	<string name="poi_cafeteria">Їдальня</string>
+
+<string name="poi_racquet">Бадмінтон, сквош</string>
+	<string name="poi_roller_skating">Катання на роликах</string>
+	<string name="poi_rugby_union">Регбі-юніон</string>
+	<string name="poi_rugby_league">Регбіліг</string>
+	<string name="poi_skating">Катання на роликах (ковзанах)</string>
+	<string name="poi_skiing">Лижний спорт</string>
+	<string name="poi_toboggan">Тобогган</string>
+	<string name="poi_artwork">Твір мистецтва</string>
+	<string name="poi_archaeological_site">Археологічні розкопки</string>
+	<string name="poi_battlefield">Полі бою</string>
+	<string name="poi_boundary_stone">Межовий камінь</string>
+	<string name="poi_historic_cannon">Історичні гармати</string>
 	</resources>
