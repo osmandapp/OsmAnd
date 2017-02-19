@@ -213,10 +213,10 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 
 	private boolean performBasicOperation(int resId, final LocalIndexInfo info) {
 		if (resId == R.string.shared_string_rename) {
-			renameFile(getActivity(), new File(info.getPathToData()), new Runnable() {
+			renameFile(getActivity(), new File(info.getPathToData()), new RenameCallback() {
 
 				@Override
-				public void run() {
+				public void renamedTo(File file) {
 					getDownloadActivity().reloadLocalIndexes();
 				}
 			});
@@ -256,7 +256,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 		return true;
 	}
 
-	public static void renameFile(final Activity a, final File f, final Runnable callback) {
+	public static void renameFile(final Activity a, final File f, final RenameCallback callback) {
 		AlertDialog.Builder b = new AlertDialog.Builder(a);
 		if (f.exists()) {
 			int xt = f.getName().lastIndexOf('.');
@@ -312,7 +312,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 										}
 										if (f.renameTo(dest)) {
 											if (callback != null) {
-												callback.run();
+												callback.renamedTo(dest);
 											}
 										} else {
 											Toast.makeText(a, R.string.file_can_not_be_renamed,
@@ -1234,10 +1234,12 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 		optionsMenu.show();
 	}
 
-	
-
-
 	private DownloadActivity getDownloadActivity() {
 		return (DownloadActivity) getActivity();
+	}
+
+	public interface RenameCallback {
+
+		public void renamedTo(File file);
 	}
 }

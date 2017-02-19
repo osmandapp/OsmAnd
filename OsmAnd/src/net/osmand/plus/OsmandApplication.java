@@ -95,6 +95,7 @@ public class OsmandApplication extends MultiDexApplication {
 	FavouritesDbHelper favorites;
 	CommandPlayer player;
 	GpxSelectionHelper selectedGpxHelper;
+	GPXDatabase gpxDatabase;
 	SavingTrackHelper savingTrackHelper;
 	NotificationHelper notificationHelper;
 	LiveMonitoringHelper liveMonitoringHelper;
@@ -270,6 +271,10 @@ public class OsmandApplication extends MultiDexApplication {
 
 	public GpxSelectionHelper getSelectedGpxHelper() {
 		return selectedGpxHelper;
+	}
+
+	public GPXDatabase getGpxDatabase() {
+		return gpxDatabase;
 	}
 
 	public FavouritesDbHelper getFavorites() {

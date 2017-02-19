@@ -38,6 +38,7 @@ import net.osmand.IndexConstants;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.ItemClickListener;
 import net.osmand.plus.ContextMenuItem;
+import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.GPXTrackAnalysis;
@@ -58,6 +59,7 @@ import net.osmand.plus.activities.TrackActivity;
 import net.osmand.plus.base.OsmandExpandableListFragment;
 import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.download.ui.LocalIndexesFragment;
+import net.osmand.plus.download.ui.LocalIndexesFragment.RenameCallback;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
@@ -86,6 +88,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 	private List<GpxInfo> selectedItems = new ArrayList<>();
 	private ActionMode actionMode;
 	private LoadGpxTask asyncLoader;
+	private ProcessGpxTask asyncProcessor;
 	private GpxIndexesAdapter allGpxAdapter;
 	private static MessageFormat formatMb = new MessageFormat("{0, number,##.#} MB", Locale.US);
 	private ContextMenuAdapter optionsMenuAdapter;
@@ -141,6 +144,8 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			allGpxAdapter.refreshSelected();
 			allGpxAdapter.notifyDataSetChanged();
 		}
+		asyncProcessor = new ProcessGpxTask();
+		asyncProcessor.execute();
 		updateCurrentTrack();
 
 		updateEnable = true;
@@ -153,6 +158,10 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		updateEnable = false;
 		if (operationTask != null) {
 			operationTask.cancel(true);
+		}
+		if (asyncProcessor != null) {
+			asyncProcessor.cancel(false);
+			asyncProcessor = null;
 		}
 	}
 
@@ -354,6 +363,10 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 				if (itemId == R.string.local_index_mi_reload) {
 					asyncLoader = new LoadGpxTask();
 					asyncLoader.execute(getActivity());
+					if (asyncProcessor == null) {
+						asyncProcessor = new ProcessGpxTask();
+						asyncProcessor.execute();
+					}
 				} else if (itemId == R.string.shared_string_show_on_map) {
 					openShowOnMapMode();
 				} else if (itemId == R.string.shared_string_delete) {
@@ -623,6 +636,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 						Toast.makeText(app, R.string.file_with_name_already_exists, Toast.LENGTH_LONG).show();
 					} else {
 						if (info.file.renameTo(dest)) {
+							app.getGpxDatabase().rename(info.file, dest);
 							asyncLoader = new LoadGpxTask();
 							asyncLoader.execute(getActivity());
 						} else {
@@ -1086,10 +1100,10 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
-				LocalIndexesFragment.renameFile(getActivity(), gpxInfo.file, new Runnable() {
-
+				LocalIndexesFragment.renameFile(getActivity(), gpxInfo.file, new RenameCallback() {
 					@Override
-					public void run() {
+					public void renamedTo(File file) {
+						app.getGpxDatabase().rename(gpxInfo.file, file);
 						asyncLoader = new LoadGpxTask();
 						asyncLoader.execute(getActivity());
 					}
@@ -1157,6 +1171,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 				if (!isCancelled() && (info.gpx == null || !info.gpx.showCurrentTrack)) {
 					boolean successfull;
 					successfull = Algorithms.removeAllFiles(info.file);
+					app.getGpxDatabase().remove(info.file);
 					total++;
 					if (successfull) {
 						count++;
@@ -1239,6 +1254,67 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		}
 	}
 
+	public class ProcessGpxTask extends AsyncTask<Void, GpxDataItem, Void> {
+
+		private List<File> processedDataFiles = new ArrayList<>();
+
+		ProcessGpxTask() {
+			List<GpxDataItem> dataItems = app.getGpxDatabase().getItems();
+			for (GpxDataItem item : dataItems) {
+				processedDataFiles.add(item.getFile());
+			}
+		}
+
+		@Override
+		protected Void doInBackground(Void... params) {
+
+			File gpxPath = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
+			if (gpxPath.canRead()) {
+				processGPXFolder(gpxPath, "");
+			}
+			return null;
+		}
+
+		private File[] listFilesSorted(File dir) {
+			File[] listFiles = dir.listFiles();
+			if (listFiles == null) {
+				return new File[0];
+			}
+			Arrays.sort(listFiles);
+			return listFiles;
+		}
+
+		private void processGPXFolder(File gpxPath, String gpxSubfolder) {
+			for (File gpxFile : listFilesSorted(gpxPath)) {
+				if (gpxFile.isDirectory()) {
+					String sub = gpxSubfolder.length() == 0 ?
+							gpxFile.getName() : gpxSubfolder + "/" + gpxFile.getName();
+					processGPXFolder(gpxFile, sub);
+				} else if (gpxFile.isFile() && gpxFile.getName().toLowerCase().endsWith(".gpx") && !processedDataFiles.contains(gpxFile)) {
+					GPXFile f = GPXUtilities.loadGPXFile(app, gpxFile);
+					GPXTrackAnalysis analysis = f.getAnalysis(gpxFile.lastModified());
+					GpxDataItem newItem = new GpxDataItem(gpxFile, analysis);
+					app.getGpxDatabase().add(newItem);
+
+					if (isCancelled()) {
+						break;
+					}
+					processedDataFiles.add(gpxFile);
+					publishProgress(newItem);
+				}
+			}
+		}
+
+		@Override
+		protected void onProgressUpdate(GpxDataItem... items) {
+			allGpxAdapter.notifyDataSetChanged();
+		}
+
+		@Override
+		protected void onPostExecute(Void aVoid) {
+			asyncProcessor = null;
+		}
+	}
 
 	private class SearchFilter extends Filter {
 
@@ -1421,7 +1497,11 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		if (sgpx != null) {
 			icon.setImageDrawable(app.getIconsCache().getIcon(R.drawable.ic_action_polygom_dark, R.color.color_distance));
 			analysis = sgpx.getTrackAnalysis();
-
+		} else {
+			GpxDataItem dataItem = app.getGpxDatabase().getItem(child.file);
+			if (dataItem != null) {
+				analysis = dataItem.getAnalysis();
+			}
 		}
 		boolean sectionRead = analysis == null;
 		if (sectionRead) {
