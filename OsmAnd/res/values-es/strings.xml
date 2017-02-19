@@ -91,8 +91,8 @@ El espacio de almacenamiento usado es {1} MB.
     <string name="delete_confirmation_msg">¿Borrar %1$s?</string>
     <string name="city_type_suburb">Barrio</string>
     <string name="city_type_hamlet">Aldea</string>
-    <string name="city_type_village">Villa</string>
-    <string name="city_type_town">Pueblo</string>
+    <string name="city_type_village">Pueblo</string>
+    <string name="city_type_town">Ciudad pequeña</string>
     <string name="city_type_city">Ciudad</string>
     <string name="animate_route_off">Detener simulación</string>
     <string name="animate_route">Iniciar simulación</string>
