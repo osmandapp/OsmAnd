@@ -974,21 +974,6 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 
 			adjustIndicator(app, groupPosition, isExpanded, v, light);
 			TextView nameView = ((TextView) v.findViewById(R.id.category_name));
-			List<GpxInfo> list = isSelectedGroup(groupPosition) ? selected : data.get(group);
-			int size = 0;
-			for (int i = 0; i < list.size(); i++) {
-				int sz = list.get(i).getSize();
-				if (sz < 0) {
-					size = 0;
-					break;
-				} else {
-					size += sz;
-				}
-			}
-			size = size / (1 << 10);
-			if (size > 0) {
-				t.append(" [").append(size).append(" MB]");
-			}
 			nameView.setText(t.toString());
 
 			return v;

@@ -4,9 +4,7 @@
 			  android:layout_width="match_parent"
 			  android:layout_height="wrap_content"
 			  android:background="?attr/expandable_list_item_background"
-			  android:minHeight="@dimen/list_item_height"
-              android:orientation="vertical"
-              android:gravity="center_vertical">
+              android:orientation="vertical">
 
 	<View
 		android:id="@+id/divider_list"
@@ -26,6 +24,7 @@
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:orientation="horizontal"
+        android:minHeight="@dimen/list_item_height"
         android:gravity="center_vertical">
 
 		<CheckBox
@@ -41,19 +40,18 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_marginLeft="@dimen/list_content_padding"
-			android:src="@drawable/ic_gpx_track"
-			android:visibility="gone"/>
+			android:src="@drawable/ic_action_polygom_dark"
+			android:visibility="visible"/>
 
 
 		<LinearLayout
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/gpx_text_top_margin"
-            android:layout_marginBottom="@dimen/gpx_text_top_margin"
-			android:layout_marginLeft="@dimen/subHeaderMarginLeft"
-			android:layout_marginRight="@dimen/showAllButtonMarginRight"
+            android:paddingTop="@dimen/gpx_text_top_margin"
+            android:paddingBottom="@dimen/gpx_text_top_margin"
+			android:paddingLeft="@dimen/subHeaderMarginLeft"
+			android:paddingRight="@dimen/showAllButtonMarginRight"
 			android:layout_weight="1"
-			android:gravity="center_vertical"
 			android:orientation="vertical">
 
 			<TextView
@@ -62,20 +60,20 @@
 				android:layout_height="wrap_content"
 				android:textColor="?android:textColorPrimary"
 				android:textSize="@dimen/default_list_text_size"
-				tools:text="@string/validate_gpx_upload_name_pwd"/>
+				tools:text="@string/current_track"/>
 
 			<LinearLayout
 				android:id="@+id/read_section"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:orientation="horizontal"
-				android:visibility="visible">
+				android:visibility="visible"
+                android:gravity="center_vertical">
 
 				<ImageView
 					android:id="@+id/distance_icon"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:layout_gravity="center_vertical"
 					android:layout_marginRight="@dimen/gpx_small_icon_margin"
 					android:src="@drawable/ic_small_distance"/>
 
@@ -91,7 +89,6 @@
 					android:id="@+id/points_icon"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:layout_gravity="center_vertical"
 					android:layout_marginRight="@dimen/gpx_small_icon_margin"
 					android:src="@drawable/ic_small_point"/>
 
@@ -107,7 +104,6 @@
 					android:id="@+id/time_icon"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:layout_gravity="center_vertical"
 					android:layout_marginRight="@dimen/gpx_small_icon_margin"
 					android:src="@drawable/ic_small_time"/>
 
@@ -118,6 +114,7 @@
 					android:layout_marginRight="@dimen/gpx_small_text_margin"
 					android:textColor="?android:textColorSecondary"
 					android:textSize="@dimen/default_sub_text_size"/>
+
 			</LinearLayout>
 
 			<LinearLayout
@@ -136,7 +133,6 @@
 
 			</LinearLayout>
 
-
 			<TextView
 				android:id="@+id/description"
 				android:layout_width="wrap_content"
@@ -144,8 +140,8 @@
 				android:textColor="?android:textColorPrimary"
 				android:textSize="@dimen/default_sub_text_size"
 				android:visibility="gone"/>
-		</LinearLayout>
 
+		</LinearLayout>
 
 		<ImageButton
 			android:id="@+id/show_on_map"
@@ -154,8 +150,7 @@
 			android:layout_marginLeft="@dimen/favorites_icon_right_margin"
 			android:background="?attr/dashboard_button"
 			android:src="@drawable/ic_action_gsave_dark"
-			android:visibility="gone"
-			tools:visibility="visible"/>
+			android:visibility="gone"/>
 
 		<ImageButton
 			android:id="@+id/stop"
@@ -163,8 +158,7 @@
 			android:layout_height="@dimen/list_item_height"
 			android:background="?attr/dashboard_button"
 			android:src="@drawable/ic_action_rec_stop"
-			android:visibility="gone"
-			tools:visibility="visible"/>
+			android:visibility="gone"/>
 
 		<ImageButton
 			android:id="@+id/options"
@@ -181,7 +175,8 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
             android:gravity="center_vertical"
-			android:layout_marginRight="@dimen/list_content_padding">
+			android:layout_marginRight="@dimen/list_content_padding"
+            android:visibility="gone">
 
             <include android:layout_width="wrap_content"
                      android:layout_height="wrap_content"
