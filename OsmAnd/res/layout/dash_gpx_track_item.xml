@@ -82,6 +82,7 @@
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:layout_marginRight="@dimen/gpx_small_text_margin"
+                    android:includeFontPadding="false"
 					android:textColor="?android:textColorSecondary"
 					android:textSize="@dimen/default_sub_text_size"/>
 
@@ -97,6 +98,7 @@
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:layout_marginRight="@dimen/gpx_small_text_margin"
+                    android:includeFontPadding="false"
 					android:textColor="?android:textColorSecondary"
 					android:textSize="@dimen/default_sub_text_size"/>
 
@@ -113,6 +115,7 @@
 					android:layout_height="wrap_content"
 					android:layout_marginRight="@dimen/gpx_small_text_margin"
 					android:textColor="?android:textColorSecondary"
+                    android:includeFontPadding="false"
 					android:textSize="@dimen/default_sub_text_size"/>
 
 			</LinearLayout>
