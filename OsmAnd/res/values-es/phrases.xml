@@ -2880,7 +2880,7 @@
 
 <string name="poi_forestry_compartment">Señal: Parcela forestal</string>
 	<string name="poi_firepit">Lugar para fogata</string>
-	<string name="poi_street_cabinet">Gabinete de calle</string>
+	<string name="poi_street_cabinet">Distribuidor en la vía pública</string>
 
 	<string name="poi_street_cabinet_power">Tipo de cabina: electricidad</string>
 	<string name="poi_street_cabinet_telecom">Tipo de cabina: telecomunicaciones</string>
