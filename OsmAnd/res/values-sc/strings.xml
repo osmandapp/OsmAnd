@@ -2803,4 +2803,7 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="total_distance">Distàntzia totale</string>
     <string name="shared_string_time">Ora</string>
     <string name="shared_string_tracks">Rastas</string>
+    <string name="select_gpx_folder">Icherta sa cartella GPX</string>
+    <string name="file_can_not_be_moved">Su documentu non podet èssere mòidu.</string>
+    <string name="shared_string_move">Move</string>
     </resources>
