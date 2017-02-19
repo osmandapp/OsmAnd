@@ -2477,4 +2477,16 @@ med mera…
 </string>
     <string name="navigate_point_olc_info_short">Kort OLC
 Vänligen tillhandahåll hel kod</string>
+    <string name="file_can_not_be_moved">Filen kan inte flyttas.</string>
+    <string name="shared_string_move">Flytta</string>
+    <string name="shared_string_tracks">Spår</string>
+    <string name="routing_attr_driving_style_name">Körstil</string>
+    <string name="routing_attr_driving_style_description">Säker, snabb eller balanserad körning</string>
+    <string name="route_altitude">Rutthöjd</string>
+    <string name="altitude_descent">Sänkning</string>
+    <string name="altitude_ascent">Stigning</string>
+    <string name="average_altitude">Genomsnitt</string>
+    <string name="shared_string_time">Tid</string>
+    <string name="total_distance">Total sträcka</string>
+    <string name="routing_attr_height_relief_smoothness_factor_description">Mer slätter eller mer kullar</string>
     </resources>
