@@ -2645,4 +2645,8 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="total_distance">Celková vzdialenosť</string>
     <string name="routing_attr_driving_style_name">Štýl jazdy</string>
     <string name="routing_attr_driving_style_description">Bezpečná, rýchla alebo vyvážená jazda</string>
+    <string name="select_gpx_folder">Zvoľte priečinok pre GPX</string>
+    <string name="file_can_not_be_moved">Súbor nemôže byť presunutý.</string>
+    <string name="shared_string_move">Presunúť</string>
+    <string name="shared_string_tracks">Stopy</string>
     </resources>
