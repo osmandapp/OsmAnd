@@ -83,13 +83,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:visibility="visible">
+                    android:visibility="visible"
+                    android:gravity="center_vertical">
 
                     <ImageView
                         android:id="@+id/distance_icon"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
                         android:layout_marginRight="@dimen/gpx_small_icon_margin"
                         android:src="@drawable/ic_small_distance"/>
 
@@ -105,7 +105,6 @@
                         android:id="@+id/points_icon"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
                         android:layout_marginRight="@dimen/gpx_small_icon_margin"
                         android:src="@drawable/ic_small_point"/>
 
