@@ -1876,4 +1876,67 @@
 	<string name="poi_rescue_station">Björgunarstöð</string>
 
 	<string name="poi_piste_difficulty_easy">Auðvelt</string>
+	<string name="poi_vending_type">Gerð sjálfsala</string>
+	<string name="poi_tactile_paving">Snertimerking yfirborðs</string>
+	<string name="poi_brushless">Burstalaust</string>
+	<string name="poi_traffic_enforcement">Umferðareftirlit</string>
+	<string name="poi_seamark">Sjótengt</string>
+	<string name="poi_palaeontological_site">Fundarstaður steingervinga</string>
+
+	<string name="poi_farm">Bændamarkaður</string>
+	<string name="poi_greengrocer">Grænmeti</string>
+	<string name="poi_seafood">Sjávarfang</string>
+	<string name="poi_confectionery">Sælgætisverslun</string>
+	<string name="poi_pasta">Pastaverslun</string>
+	<string name="poi_pastry">Kökubúð</string>
+	<string name="poi_anime">Anime-verslun</string>
+	<string name="poi_art">Listmunaverslun</string>
+	<string name="poi_baby_goods">Barnavöruverslun</string>
+	<string name="poi_charity">Góðgerðaverslun</string>
+	<string name="poi_copyshop">Ljósritunarstofa</string>
+	<string name="poi_curtain">Gluggatjaldaverslun</string>
+	<string name="poi_dive">Köfunarbúnaður</string>
+	<string name="poi_frame">Myndarammabúð</string>
+	<string name="poi_garden_centre">Garðyrkjuverslun</string>
+	<string name="poi_gas">Fljótandi gas</string>
+	<string name="poi_hardware">Verkfærabúð</string>
+	<string name="poi_hifi">Hljómtækjaverslun</string>
+	<string name="poi_hunting">Veiðivörur</string>
+	<string name="poi_leather">Leðurvörubúð</string>
+	<string name="poi_motorcycle">Mótorhjólaverslun</string>
+	<string name="poi_optician">Sjóntækjafræðingur</string>
+	<string name="poi_toys">Leikfangaverslun</string>
+	<string name="poi_public_transport_platform">Stoppistöð</string>
+	<string name="poi_public_transport_stop_position">Staðsetning stoppistöðvar</string>
+	<string name="poi_public_transport_station">Umferðarmiðstöð</string>
+	<string name="poi_optometrist">Sjónskoðun</string>
+	<string name="poi_attraction">Aðdráttarafl fyrir ferðafólk</string>
+<string name="poi_denomination_coptic_orthodox">Koptísk rétttrúnaðarkirkja</string>
+	<string name="poi_club_tourism">Ferðaklúbbur</string>
+	<string name="poi_height_restrictor">Hæðartakmörkun</string>
+	<string name="poi_highway_crossing">Þverun aðalgötu</string>
+
+	<string name="poi_railway_level_crossing">Þverun brautarteina</string>
+	<string name="poi_outdoor_seating_patio">Sæti utandyra: stétt</string>
+
+	<string name="poi_public_bath">Opinbert baðhús</string>
+
+	<string name="poi_toilets_access_public">Salernisaðgangur: opinn</string>
+
+	<string name="poi_vending_parking_tickets_public_transport_tickets">Bílastæðamiðar; miðar í almenningssamgöngur</string>
+	<string name="poi_health_specialty_optometry_yes">Sjónskoðun</string>
+	<string name="poi_telescope_type_optical">Sjónauki: optískur</string>
+	<string name="poi_node_networks">Göngu/hjólastígakerfi</string>
+	<string name="poi_bag">Töskubúð</string>
+	<string name="poi_bed">Rúmfataverslun</string>
+	<string name="poi_chemist">Hreinlætisvöruverslun</string>
+	<string name="poi_clothes">Fataverslun</string>
+	<string name="poi_clothes_children">Barnafataverslun</string>
+	<string name="poi_fabric">Vefnaðarvöruverslun</string>
+<string name="poi_doityourself">Byggingavöruverslun</string>
+	<string name="poi_fishing">Fiskveiðivöruverslun</string>
+	<string name="poi_glaziery">Gler og speglar</string>
+	<string name="poi_herbalist">Jurtaverslun</string>
+	<string name="poi_houseware">Heimilistækjaverslun</string>
+	<string name="poi_medical_supply">Lækningatækjaverslun</string>
 	</resources>
