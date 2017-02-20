@@ -1423,7 +1423,7 @@ Le %2$s</string>
     <string name="first_usage_item_description">Hvordan laste ned kart, angi grunnleggende innstillinger</string>
     <string name="faq_item_description">Ofte stilte spørsmål</string>
     <string name="map_viewing_item">Kartvisning</string>
-    <string name="search_on_the_map_item">Kartsøking</string>
+    <string name="search_on_the_map_item">Søker på kartet</string>
     
     
     <string name="versions_item">Versjoner</string>
@@ -1730,7 +1730,7 @@ Le %2$s</string>
     <string name="location_not_found">Posisjon ikke funnet</string>
     <string name="search_location">Søker etter posisjon…</string>
     <string name="search_my_location">Søk etter min posisjon</string>
-    <string name="search_map">Søker etter kart…</string>
+    <string name="search_map">Kartsøking…</string>
     <string name="driving_region_australia">Australia</string>
     <string name="no_update_info">Ikke vis oppdateringer</string>
     <string name="shared_string_filters">Filtre</string>
