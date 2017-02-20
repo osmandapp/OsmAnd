@@ -27,7 +27,7 @@
     <string name="postcode">Póstnúmer</string>
     <string name="shared_string_from">frá</string>
     <string name="city_type_district">Umdæmi</string>
-    <string name="city_type_neighbourhood">Nágrenni</string>
+    <string name="city_type_neighbourhood">Hverfi</string>
     <string name="map_widget_search">Leita</string>
 	<string name="shared_string_is_open_24_7">Opið 24/7</string>
     <string name="storage_directory_card">Minniskort</string>
@@ -1859,7 +1859,7 @@ Punktar</string>
     <string name="rendering_attr_alpineHiking_name"/>
     <string name="rendering_attr_hikingRoutesOSMC_name">Yfirlag með göngutáknum</string>
     <string name="rendering_attr_OSMMapperAssistant_name"/>
-    <string name="first_usage_greeting"/>
+    <string name="first_usage_greeting">Fáðu leiðbeiningar og uppgötvaðu nýja staði, án nettengingar</string>
     <string name="rendering_attr_roadColors_description">Veldu litastef fyrir vegi:</string>
     <string name="rendering_attr_roadColors_name">Litastef fyrir vegi</string>
     <string name="map_widget_view_direction">Sjónarhorn</string>
@@ -1914,7 +1914,7 @@ Punktar</string>
     <string name="quick_action_favorites_show">Birta eftirlæti</string>
     <string name="quick_action_favorites_hide">Fela eftirlæti</string>
     <string name="quick_action_showhide_poi_title">Birta/Fela merkisstaði</string>
-    <string name="quick_action_poi_show">Show %1$s</string>
+    <string name="quick_action_poi_show">Sýna %1$s</string>
     <string name="quick_action_poi_hide">Fela %1$s</string>
     <string name="quick_action_add_category">"Bæta við  flokki"</string>
     <string name="quick_action_add_create_items">Búa til atriði</string>
