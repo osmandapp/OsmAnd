@@ -2283,4 +2283,5 @@
     <string name="quick_action_navigation_voice">Голос вкл/выкл</string>
     <string name="quick_action_navigation_voice_off">Голос выключен</string>
     <string name="quick_action_navigation_voice_on">Голос включен</string>
+    <string name="file_can_not_be_moved">Файл не может быть перемещен.</string>
     </resources>
