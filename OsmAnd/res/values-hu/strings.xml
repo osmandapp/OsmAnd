@@ -1388,7 +1388,7 @@ A csoport nem lesz törölve néhány hónap múlva, az OsMo.mobi weboldalon lé
     
     <string name="rendering_value_pink_name">rózsaszín</string>
     
-    <string name="rendering_value_brown_name">barna</string>
+    <string name="rendering_value_brown_name">Barna</string>
     
     
     
@@ -2121,7 +2121,7 @@ A nézet aktiválása megváltoztatja a térképstílust „Tél és síelésre�
     <string name="successfully_uploaded_pattern">Sikeresen feltöltve: {0}/{1}</string>
     <string name="try_again">Próbáld újra</string>
     <string name="error_message_pattern">Hiba: {0}</string>
-    <string name="rendering_value_boldOutline_name">Félkövér körvonal</string>
+    <string name="rendering_value_boldOutline_name">Vastag körvonal</string>
     <string name="plugin_settings">Bővítmények</string>
     <string name="shared_string_skip">Kihagyás</string>
     <string name="app_name_osmand">OsmAnd</string>
