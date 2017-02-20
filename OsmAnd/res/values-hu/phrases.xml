@@ -351,7 +351,7 @@
 	<string name="poi_water_works">Vízmű</string>
 	<string name="poi_boatyard">Hajótelep</string>
 	<string name="poi_wastewater_plant">Szennyvíztelep</string>
-	<string name="poi_transportation">Tömegközlekedési épület</string>
+	<string name="poi_transportation">Közlekedés</string>
 		<string name="poi_fuel_gtl_diesel">GTL dízel</string>
 	<string name="poi_fuel_hgv_diesel">Teherautódízel</string>
 	<string name="poi_fuel_1_25">1:25 keverék</string>
