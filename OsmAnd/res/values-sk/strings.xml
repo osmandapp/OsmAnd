@@ -1362,9 +1362,9 @@ Skupiny nie sú vymazané ani po dlhej dobe. Skupiny sa vytvárajú na stránke 
     <string name="osmo_settings_debug">Informácie pre ladenie</string>
     <string name="import_file_favourites">Uložiť údaje ako súbor GPX alebo importovať body cesty do Obľúbených?</string>
     
-    <string name="rendering_value_pink_name">ružová</string>
+    <string name="rendering_value_pink_name">Ružová</string>
     
-    <string name="rendering_value_brown_name">hnedá</string>
+    <string name="rendering_value_brown_name">Hnedá</string>
     
     
     
