@@ -118,7 +118,7 @@
   <string name="left">ліворуч</string>
   <string name="front_left">ліворуч вперед</string>
   <string name="oclock">г</string>
-  <string name="towards">на</string>
+  <string name="towards">до</string>
   <string name="accuracy">Точність</string>
   <string name="altitude">Висота</string>
   <string name="no_info">Немає інформації</string>
@@ -276,7 +276,7 @@
   <string name="shared_string_name">Назва</string>
   <string name="favourites_edit_dialog_category">Категорія</string>
   <string name="shared_string_no_thanks">Ні, дякую</string>
-  <string name="basemap_missing">Базова мапа (яка покриває цілий світ) відсутня. Будь ласка, завантажте World_basemap_x.obf для повноцінної роботи програми.</string>
+  <string name="basemap_missing">Відсутня базова мапа, що покриває весь світ на дрібному масштабі. Будь ласка, звантажте World_basemap_x.obf для повноцінний роботи програми.</string>
   <string name="vector_data_missing">SD-карта не містить завантажених даних. Будь ласка, завантажте їх, щоб використовувати мапу без інтернету.</string>
   <string name="local_index_gpx_info_show">\n\nТривале натискання для перегляду на мапі</string>
   
@@ -326,7 +326,7 @@
   <string name="switch_to_vector_map_to_see">Для цього регіону доступні оффлайн векторні мапи\n\t\n\tДля їх використання виберіть пункт меню \'Налаштування Мапи\' → \'Джерело мапи…\' → \'Локальні векторні мапи\'.</string>
   <string name="choose_audio_stream">Голосові інструкції</string>
   <string name="choose_audio_stream_descr">Виберіть канал для голосових інструкцій</string>
-  <string name="voice_stream_voice_call">Потік голосових дзвінків</string>
+  <string name="voice_stream_voice_call">Потік голосових дзвінків (також намагається зупинити музику з динаміків)</string>
   <string name="voice_stream_notification">Повідомлення аудіо</string>
   <string name="voice_stream_music">Медіа / аудіо музика</string>
   <string name="warning_tile_layer_not_downloadable">Програма не може завантажити шар мапи %1$s, спробуйте ще раз встановити його.</string>
@@ -794,7 +794,7 @@
   
   <string name="poi_edit_title">Редагування POI</string>
   <string name="poi_create_title">Створити POI</string>
-  <string name="poi_error_poi_not_found">POI не знайдена або не є точкою</string>
+  <string name="poi_error_poi_not_found">Не вдалося знайти вузол або об’єкт складається з декількох вузлів, які ще не підтримується.</string>
   <string name="poi_remove_confirm_template">Ви дійсно хочете вилучити {0}?</string>
   <string name="poi_remove_title">Вилучення POI</string>
   <string name="shared_string_delete">Видалити</string>
@@ -2603,7 +2603,7 @@ Facebook: https://www.facebook.com/osmandapp
     <string name="save_track_min_speed_descr">Виберіть мінімальну швидкість, при перевищенні якої точка буде записана в трек</string>
     <string name="save_track_min_distance">Мінімальна дистанція для запису</string>
     <string name="save_track_min_distance_descr">Виберіть відстань, при перевищенні якого точка буде записана в трек</string>
-    <string name="save_track_precision">Мінімально допустима точність</string>
+    <string name="save_track_precision">Мінімально точність запису</string>
     <string name="save_track_precision_descr">Виберіть мінімально допустиму точність визначення координат</string>
     <string name="christmas_poi">Різдвяні POI</string>
     <string name="christmas_desc">Напередодні різдвяних і новорічних свят, ви можете вибрати для відображення POI, пов\'язані з Різдвом: ялинки, ярмарки і т.п.</string>
@@ -2823,4 +2823,22 @@ Facebook: https://www.facebook.com/osmandapp
     <string name="quick_action_map_source">Змінити джерело мапи</string>
     <string name="quick_action_btn_tutorial_descr">Довге натиснення й перетягування дозволить перемістити кнопку</string>
 	<string name="quick_action_add_osm_bug">Додати OSM ваду</string>
+    <string name="rendering_value_fine_name">Дуже тонкий</string>
+    <string name="navigate_point_olc">Відкритий код розташування (OLC)</string>
+    <string name="quick_action_take_audio_note">Створити звукову нотатку</string>
+    <string name="quick_action_take_video_note">Створити відео-нотатку</string>
+    <string name="quick_action_take_photo_note">Створити фото-нотатку</string>
+    <string name="quick_favorites_name_preset">Найменування</string>
+    <string name="quick_action_add_marker_descr">При натисканні на кнопку дії додасть маркер мапи в центрі екрану.</string>
+    <string name="quick_action_add_gpx_descr">При натисканні на кнопку дії додасть проміжну крапку GPX в центрі екрану.</string>
+    <string name="quick_action_take_audio_note_descr">При натисканні кнопки дії додасть звукову нотатку в центрі екрану.</string>
+    <string name="quick_action_take_video_note_descr">При натисканні кнопки дії додасть відео-примітку в центрі екрану.</string>
+    <string name="quick_action_take_photo_note_descr">При натисканні кнопки дії додасть фото-примітку у центрі екрану.</string>
+    <string name="quick_action_add_osm_bug_descr">При натисканні кнопки дії додасть OSM-нотатку у центрі екрану.</string>
+    <string name="quick_action_add_poi_descr">При натисканні кнопки дії додасть POI в центрі екрану.</string>
+    <string name="quick_action_navigation_voice_descr">При натисканні кнопки дії вмикаються або вимикаються голосові підказки під час навігації.</string>
+    <string name="quick_action_add_parking_descr">При натисканні кнопки дії додасть місце для паркування в центрі екрану.</string>
+    <string name="quick_action_interim_dialog">Показати проміжний діалог</string>
+    <string name="favorite_autofill_toast_text">" було збережено до "</string>
+    <string name="quick_action_add_create_items">Створення елементів</string>
     </resources>
