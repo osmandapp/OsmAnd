@@ -447,17 +447,30 @@ public class MapUtils {
 
 
 	private static double[] coefficientsY = new double[1024];
+	private static boolean initializeYArray = false;
+
 	public static double convert31YToMeters(int y1, int y2, int x) {
-		int ind = x >> (31 - 10);
-		if(coefficientsY[ind] == 0) {
-			double md = MapUtils.measuredDist31(x, y1, x, y2);
-			if(md < 10) {
-				return md;
+		int power = 10;
+		int pw = 1 << power;
+		if (!initializeYArray) {
+			coefficientsY[0] = 0;
+			for (int i = 0; i < pw - 1; i++) {
+				coefficientsY[i + 1] = coefficientsY[i]
+						+ measuredDist31(0, i << (31 - power), 0, ((i + 1) << (31 - power)));
 			}
-			coefficientsY[ind] = md / Math.abs(y1 - y2);
+			initializeYArray = true;
 		}
-		// translate into meters 
-		return (y1 - y2) * coefficientsY[ind];
+		int div = 1 << (31 - power);
+		int div1 = y1 / div;
+		int mod1 = y1 % div;
+		int div2 = y2 / div;
+		int mod2 = y2 % div;
+		double h1 = coefficientsY[div1] + mod1 / (double)div *
+				(coefficientsY[div1 + 1] - coefficientsY[div1]);
+		double h2 = coefficientsY[div2] + mod2 / (double)div *
+				(coefficientsY[div2 + 1] - coefficientsY[div2]);
+		double res = h1 - h2;
+		return res;
 	}
 
 	private static double[] coefficientsX = new double[1024];
