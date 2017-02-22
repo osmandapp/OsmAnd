@@ -448,8 +448,9 @@ public class BinaryRoutePlanner {
 			}
 			double heightObstacle = ctx.getRouter().defineHeightObstacle(road, !reverseWaySearch ? prevInd : segmentPoint, 
 					!reverseWaySearch ? segmentPoint : prevInd);
-			if(heightObstacle > 0) {
-				
+			if(heightObstacle < 0) {
+				directionAllowed = false;
+				continue;
 			}
 			boolean alreadyVisited = checkIfOppositeSegmentWasVisited(ctx, reverseWaySearch, graphSegments, segment, oppositeSegments,
 					segmentPoint, segmentDist, obstaclesTime);

@@ -305,12 +305,12 @@ public class GeneralRouter implements VehicleRouter {
 			knext = startIndex < endIndex ? k + 1 : k - 1;
 			double dist = startIndex < endIndex ? heightArray[2 * knext] : heightArray[2 * k]  ;
 			double diff = heightArray[2 * knext + 1] - heightArray[2 * k + 1] ;
-			if(diff > 0 && dist > 0) {
-				double incl = diff / dist;
+			if(diff != 0 && dist > 0) {
+				double incl = Math.abs(diff / dist);
 				int percentIncl = (int) (incl * 100);
 				percentIncl = (percentIncl + 2)/ 3 * 3 - 2; // 1, 4, 7, 10, .   
-				if(percentIncl > 0) {
-					objContext.paramContext.incline = percentIncl;
+				if(percentIncl >= 1) {
+					objContext.paramContext.incline = diff > 0 ? percentIncl : -percentIncl;
 					sum += objContext.evaluateFloat(road.region, types, 0) * diff;
 				}
 			}
