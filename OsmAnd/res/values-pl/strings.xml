@@ -2747,7 +2747,7 @@ i więcej...
     <string name="quick_action_navigation_voice_off">Dźwięk wyciszony</string>
     <string name="quick_action_navigation_voice_on">Dźwięk aktywny</string>
     <string name="quick_action_add_parking">Dodaj położenie parkowania</string>
-    <string name="quick_action_new_action">Dodawanie czynności</string>
+    <string name="quick_action_new_action">Dodaj czynność</string>
     <string name="quick_action_edit_action">Modyfikowanie czynności</string>
     <string name="quick_action_add_favorite">Dodaj do ulubionych</string>
     <string name="dialog_add_action_title">Dodawanie czynności</string>
@@ -2818,7 +2818,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="auto_split_recording_title">Automatyczne dzielenie nagrań po przerwie</string>
 	<string name="auto_split_recording_descr">Rozpoczyna nowy segment po 6 min przerwy, nową trasę po 2 h i nowy plik po dłuższej przerwie, jeżeli data ulegnie zmianie</string>
     <string name="release_2_6">"
- • Nowa funkcja: przycisk szybkiej akcji
+ • Nowa funkcja: przycisk szybkiej czynności
 
 
  • Poprawiono odpowiedź na gesty ekranu dotykowego
@@ -2827,13 +2827,13 @@ Reprezentuje obszar: %1$s x %2$s</string>
  • Nowe kroje pisma wspierające więcej języków
 
 
- • Wsparcie dla dialektów w generowaniu mowy
+ • Obsługa dialektów w generowaniu mowy
 
 
  • Ulepszenia wizualne w kilku stylach map i w Wikipedii
 
 
- • Wsparcie dla \'Otwartych kodów lokalizacyjnych\' (OLC)
+ • Obsługa otwartych kodów lokalizacyjnych (OLC)
 
 
  • Wyświetlanie profilu terenu dla nagranych śladów GPX
