@@ -2214,7 +2214,7 @@ Lon %2$s</string>
     <string name="osm_save_offline">Offline speichern</string>
     <string name="osm_edit_modified_poi">Geänderter OSM-POI</string>
     <string name="osm_edit_deleted_poi">Gelöschter OSM-POI</string>
-    <string name="context_menu_item_open_note">OSM-Notiz öffnen</string>
+    <string name="context_menu_item_open_note">OSM-Notiz erstellen</string>
     <string name="osm_edit_reopened_note">Wiedereröffnete OSM-Notiz</string>
     <string name="osm_edit_commented_note">Kommentierte OSM-Notiz</string>
     <string name="osm_edit_removed_note">Gelöschte OSM-Notiz</string>
