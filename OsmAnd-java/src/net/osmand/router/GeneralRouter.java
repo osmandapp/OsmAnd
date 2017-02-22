@@ -299,7 +299,6 @@ public class GeneralRouter implements VehicleRouter {
 		
 		double sum = 0;
 		int knext;
-		int[] types = new int[0];
 		RouteAttributeContext objContext = getObjContext(RouteDataObjectAttribute.OBSTACLE_SRTM_ALT_SPEED);
 		for(int k = startIndex; k != endIndex; k = knext) {
 			knext = startIndex < endIndex ? k + 1 : k - 1;
@@ -311,7 +310,7 @@ public class GeneralRouter implements VehicleRouter {
 				percentIncl = (percentIncl + 2)/ 3 * 3 - 2; // 1, 4, 7, 10, .   
 				if(percentIncl >= 1) {
 					objContext.paramContext.incline = diff > 0 ? percentIncl : -percentIncl;
-					sum += objContext.evaluateFloat(road.region, types, 0) * (diff > 0? diff : -diff );
+					sum += objContext.evaluateFloat(road, 0) * (diff > 0? diff : -diff );
 				}
 			}
 		}
