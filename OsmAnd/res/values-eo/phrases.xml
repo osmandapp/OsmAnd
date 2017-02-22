@@ -799,7 +799,7 @@
 	<string name="poi_club_cinema">Kina klubejo</string>
 	<string name="poi_trees_date">Daktilpalmoj</string>
 	<string name="poi_int_name">Internacia nomo</string>
-	<string name="poi_nat_name">Nacia nomo</string>
+	<string name="poi_nat_name">Ŝtata nomo</string>
 	<string name="poi_reg_name">Regiona nomo</string>
 	<string name="poi_loc_name">Loka nomo</string>
 	<string name="poi_old_name">Malnova nomo</string>
@@ -1085,17 +1085,17 @@
 	<string name="poi_swing_gate">Bariero (turnebla)</string>
 	<string name="poi_kent_carriage_gap">Kaleŝ-trairejo (kontraŭaŭta)</string>
 	<string name="poi_barrier_entrance">Trairejo</string>
-	<string name="poi_ncn_ref">Punkto de biciklovojo nacia</string>
+	<string name="poi_ncn_ref">Punkto de biciklovojo ŝtata</string>
 	<string name="poi_rcn_ref">Punkto de biciklovojo regiona</string>
 	<string name="poi_lcn_ref">Punkto de biciklovojo loka</string>
-	<string name="poi_iwn_ref">Punkto de piedirada vojo internacia</string>
-	<string name="poi_icn_ref">Punkto de biciklovojo internacia</string>
-	<string name="poi_nwn_ref">Punkto de piedirada vojo nacia</string>
+	<string name="poi_iwn_ref">Punkto de piedirada vojo interŝtata</string>
+	<string name="poi_icn_ref">Punkto de biciklovojo interŝtata</string>
+	<string name="poi_nwn_ref">Punkto de piedirada vojo ŝtata</string>
 	<string name="poi_rwn_ref">Punkto de piedirada vojo regiona</string>
 	<string name="poi_lwn_ref">Punkto de piedirada vojo loka</string>
 
-	<string name="poi_route_hiking_iwn_poi">Piedirada vojo internacia</string>
-	<string name="poi_route_hiking_nwn_poi">Piedirada vojo nacia</string>
+	<string name="poi_route_hiking_iwn_poi">Piedirada vojo interŝtata</string>
+	<string name="poi_route_hiking_nwn_poi">Piedirada vojo ŝtata</string>
 	<string name="poi_route_hiking_rwn_poi">Piedirada vojo regiona</string>
 	<string name="poi_route_hiking_lwn_poi">Piedirada vojo loka</string>
 	<string name="poi_route_hiking_ref_poi">Referenco de piedirada vojo</string>
@@ -2687,7 +2687,7 @@
 	<string name="poi_street_cabinet_water_management">Ŝranko-tipo: akvokonduktila</string>
 	<string name="poi_street_cabinet_street_lighting">Ŝranko-tipo: strat-prilumada</string>
 
-	<string name="poi_aerodrome_type_international">Internacia</string>
+	<string name="poi_aerodrome_type_international">Interŝtata</string>
 	<string name="poi_aerodrome_type_regional">Regiona</string>
 	<string name="poi_aerodrome_type_public">Publika</string>
 	<string name="poi_aerodrome_type_military">Armea</string>
