@@ -311,7 +311,7 @@ public class GeneralRouter implements VehicleRouter {
 				percentIncl = (percentIncl + 2)/ 3 * 3 - 2; // 1, 4, 7, 10, .   
 				if(percentIncl >= 1) {
 					objContext.paramContext.incline = diff > 0 ? percentIncl : -percentIncl;
-					sum += objContext.evaluateFloat(road.region, types, 0) * diff;
+					sum += objContext.evaluateFloat(road.region, types, 0) * (diff > 0? diff : -diff );
 				}
 			}
 		}
