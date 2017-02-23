@@ -2489,4 +2489,10 @@ Vänligen tillhandahåll hel kod</string>
     <string name="shared_string_time">Tid</string>
     <string name="total_distance">Total sträcka</string>
     <string name="routing_attr_height_relief_smoothness_factor_description">Mer slätter eller mer kullar</string>
+    <string name="shared_string_time_span">Tidsspann</string>
+    <string name="shared_string_max">Max</string>
+    <string name="shared_string_start_time">Starttid</string>
+    <string name="shared_string_end_time">Sluttid</string>
+    <string name="shared_string_color">Färg</string>
+    <string name="select_gpx_folder">Välj GPX-mapp</string>
     </resources>
