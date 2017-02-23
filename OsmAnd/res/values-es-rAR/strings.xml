@@ -2340,7 +2340,7 @@ Si necesitas ayuda con la aplicación OsmAnd, contacte con nuestro equipo de sop
     <string name="use_osm_live_routing_description">Activa la navegación para cambios con OSM Live (Beta)</string>
 	<string name="use_osm_live_routing">Navegación OSM Live</string>
     <string name="follow_us">Síguenos</string>
-    <string name="access_direction_audio_feedback">Dirección de retroalimentación auditiva</string>
+    <string name="access_direction_audio_feedback">Retroalimentación auditiva de la dirección</string>
     <string name="access_direction_audio_feedback_descr">Indica la dirección del destino mediante sonido</string>
     <string name="access_direction_haptic_feedback">Retroalimentación háptica de la dirección</string>
     <string name="access_direction_haptic_feedback_descr">Indica la dirección del destino mediante vibración</string>
@@ -2637,4 +2637,10 @@ Representa el área: %1$s x %2$s</string>
     <string name="file_can_not_be_moved">Archivo inamovible.</string>
     <string name="shared_string_move">Mover</string>
     <string name="shared_string_tracks">Trazas</string>
+    <string name="shared_string_time_moving">Tiempo moviéndose</string>
+    <string name="shared_string_time_span">Lapso de tiempo</string>
+    <string name="shared_string_max">Máx</string>
+    <string name="shared_string_start_time">Hora de inicio</string>
+    <string name="shared_string_end_time">Hora de fin</string>
+    <string name="shared_string_color">Color</string>
     </resources>
