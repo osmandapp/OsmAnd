@@ -2637,7 +2637,7 @@ Representa el área: %1$s x %2$s</string>
     <string name="shared_string_move">Mover</string>
     <string name="shared_string_tracks">Trazas</string>
     <string name="shared_string_time_moving">Tiempo moviéndose</string>
-    <string name="shared_string_time_span">Lapso de tiempo</string>
+    <string name="shared_string_time_span">Duración</string>
     <string name="shared_string_max">Máx</string>
     <string name="shared_string_start_time">Hora de inicio</string>
     <string name="shared_string_end_time">Hora de fin</string>
