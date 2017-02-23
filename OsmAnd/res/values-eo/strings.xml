@@ -1711,7 +1711,7 @@ Por reveni al unu de normaj mapaj aspektoj de OsmAnd, simple aŭ malaktivigi la 
 	<string name="plugin_ski_descr">"Tiu ĉi kromprogramo aldonas al OsmAnd detalojn pri descendejoj, skivojoj, montaraj skivojoj, kablovojoj kaj skiliftoj. Kursoj kaj vojoj estas kolorigitaj laŭ facileco kaj montrataj kiel speciala \'Vintra\' map-aspekto kiu ŝajnas kiel neĝ-kovrita landvidaĵo.
 
 
-Aktivigo de tiu ĉi map-vido ŝanĝas map-aspekton al \'Vintro kaj skiado\', montranta ĉiujn terenon kovritan de neĝo. La vido oni povas malaktivigi, per malaktivigo la kromprogramon tie ĉi, aŭ per ŝanĝo de \'Map-aspekto\' en \'Agordi mapon\'.
+Aktivigo de tiu ĉi map-vido ŝanĝas map-aspekton al \'Vintro kaj skiado\', montranta ĉiun terenon kovritan de neĝo. La vido oni povas malaktivigi, per malaktivigo la kromprogramon tie ĉi, aŭ per ŝanĝo de \'Map-aspekto\' en \'Agordi mapon\'.
  "</string>
     <string name="osmand_parking_plugin_name">Parkumeja pozicio</string>
 	<string name="osmand_parking_plugin_description">La Parkumeja pozicio kromprogramo plifaciligas al vi memori kie via aŭto estas parkumata kaj kiom da parkumeja tempo restas (se ĝi estas limigita).
