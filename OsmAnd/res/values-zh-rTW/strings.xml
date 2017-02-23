@@ -2821,4 +2821,10 @@ Facebook：https://www.facebook.com/osmandapp
     <string name="select_gpx_folder">選擇 GPX 資料夾</string>
     <string name="file_can_not_be_moved">檔案無法移動。</string>
     <string name="shared_string_move">移動</string>
+    <string name="shared_string_time_moving">時間移動</string>
+    <string name="shared_string_time_span">時間間隔</string>
+    <string name="shared_string_max">最大</string>
+    <string name="shared_string_start_time">開始時間</string>
+    <string name="shared_string_end_time">結束時間</string>
+    <string name="shared_string_color">顏色</string>
     </resources>
