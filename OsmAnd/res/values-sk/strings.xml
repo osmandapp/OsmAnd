@@ -2649,4 +2649,10 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="file_can_not_be_moved">Súbor nemôže byť presunutý.</string>
     <string name="shared_string_move">Presunúť</string>
     <string name="shared_string_tracks">Stopy</string>
+    <string name="shared_string_time_moving">Čas v pohybe</string>
+    <string name="shared_string_time_span">Časový rozsah</string>
+    <string name="shared_string_max">Maximum</string>
+    <string name="shared_string_start_time">Čas začiatku</string>
+    <string name="shared_string_end_time">Čas konca</string>
+    <string name="shared_string_color">Farba</string>
     </resources>
