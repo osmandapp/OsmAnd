@@ -1674,7 +1674,7 @@
 	<string name="poi_shelter_type_tent">Carpa</string>
 	<string name="poi_internet_access_type_wlan">Inalámbrico</string>
 	<string name="poi_wetland_fen">Humedal subterráneo</string>
-	<string name="poi_shelter_type_field_shelter">Refugio para animales</string>
+	<string name="poi_shelter_type_field_shelter">Refugio rural</string>
 	<string name="poi_internet_access_type_terminal">PC con Internet</string>
 	<string name="poi_internet_access_type_wired">Cableado</string>
 	<string name="poi_internet_access_type_public">Público</string>
