@@ -1,6 +1,7 @@
 package net.osmand.plus.myplaces;
 
 import android.content.Context;
+import android.graphics.Matrix;
 import android.support.annotation.NonNull;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.PagerAdapter;
@@ -19,11 +20,11 @@ import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.LineData;
-import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
+import com.github.mikephil.charting.listener.ChartTouchListener.ChartGesture;
+import com.github.mikephil.charting.listener.OnChartGestureListener;
 
 import net.osmand.AndroidUtils;
-import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
@@ -32,6 +33,8 @@ import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.helpers.GpxUiHelper;
+import net.osmand.plus.helpers.GpxUiHelper.OrderedLineDataSet;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip.CustomTabProvider;
 import net.osmand.plus.views.controls.WrapContentHeightViewPager;
@@ -99,6 +102,7 @@ public class TrackSegmentFragment extends SelectedGPXFragment {
 		public View getView(int position, View convertView, @NonNull ViewGroup parent) {
 			View row = convertView;
 			PagerSlidingTabStrip tabLayout = null;
+			WrapContentHeightViewPager pager;
 			if (row == null) {
 				LayoutInflater inflater = getMyActivity().getLayoutInflater();
 				row = inflater.inflate(R.layout.gpx_list_item_tab_content, parent, false);
@@ -113,12 +117,15 @@ public class TrackSegmentFragment extends SelectedGPXFragment {
 				tabLayout.setTextSize(AndroidUtils.spToPx(app, 12f));
 				tabLayout.setShouldExpand(true);
 				tabLayout.setTabSelectionType(PagerSlidingTabStrip.TabSelectionType.SOLID_COLOR);
+				pager = (WrapContentHeightViewPager) row.findViewById(R.id.pager);
+				pager.setSwipeable(false);
+			} else {
+				pager = (WrapContentHeightViewPager) row.findViewById(R.id.pager);
 			}
 
 			if (tabLayout != null) {
-				final WrapContentHeightViewPager pager = (WrapContentHeightViewPager) row.findViewById(R.id.pager);
 				pager.setAdapter(getPagerAdapter(tabLayout, getItem(position)));
-				pager.setSwipeable(false);
+				pager.setOffscreenPageLimit(2);
 				tabLayout.setViewPager(pager);
 			}
 			
@@ -209,7 +216,7 @@ public class TrackSegmentFragment extends SelectedGPXFragment {
 				OsmandApplication app = (OsmandApplication) getActivity().getApplicationContext();
 				if (gpxItem != null) {
 					GPXTrackAnalysis analysis = gpxItem.analysis;
-					LineChart chart = (LineChart) view.findViewById(R.id.chart);
+					final LineChart chart = (LineChart) view.findViewById(R.id.chart);
 					chart.setOnTouchListener(new View.OnTouchListener() {
 						@Override
 						public boolean onTouch(View v, MotionEvent event) {
@@ -217,22 +224,72 @@ public class TrackSegmentFragment extends SelectedGPXFragment {
 							return false;
 						}
 					});
+					final View finalView = view;
+					chart.setOnChartGestureListener(new OnChartGestureListener() {
+						@Override
+						public void onChartGestureStart(MotionEvent me, ChartGesture lastPerformedGesture) {
+						}
+
+						@Override
+						public void onChartGestureEnd(MotionEvent me, ChartGesture lastPerformedGesture) {
+							gpxItem.chartMatrix = new Matrix(chart.getViewPortHandler().getMatrixTouch());
+							for (int i = 0; i < getCount(); i++) {
+								View v = getViewAtPosition(i);
+								if (v != finalView) {
+									updateChart(i);
+								}
+							}
+						}
+
+						@Override
+						public void onChartLongPressed(MotionEvent me) {
+						}
+
+						@Override
+						public void onChartDoubleTapped(MotionEvent me) {
+						}
+
+						@Override
+						public void onChartSingleTapped(MotionEvent me) {
+						}
+
+						@Override
+						public void onChartFling(MotionEvent me1, MotionEvent me2, float velocityX, float velocityY) {
+						}
+
+						@Override
+						public void onChartScale(MotionEvent me, float scaleX, float scaleY) {
+						}
+
+						@Override
+						public void onChartTranslate(MotionEvent me, float dX, float dY) {
+						}
+					});
 
 					IconsCache ic = app.getIconsCache();
 					switch (tabType) {
 						case GPX_TAB_ITEM_GENERAL:
 							if (analysis != null) {
-								ArrayList<ILineDataSet> dataSets = new ArrayList<>();
+								List<ILineDataSet> dataSets = new ArrayList<>();
 								if (analysis.elevationData != null || analysis.isSpeedSpecified()) {
-									GPXUtilities.setupGPXChart(app, chart, 4);
+									GpxUiHelper.setupGPXChart(app, chart, 4);
+									OrderedLineDataSet speedDataSet = null;
+									OrderedLineDataSet elevationDataSet = null;
 									if (analysis.isSpeedSpecified()) {
-										LineDataSet dataSet = GPXUtilities.createGPXSpeedDataSet(app, chart, analysis, true);
-										dataSets.add(dataSet);
+										speedDataSet = GpxUiHelper.createGPXSpeedDataSet(app, chart, analysis, true, true);
 									}
 									if (analysis.elevationData != null) {
-										LineDataSet dataSet = GPXUtilities.createGPXElevationDataSet(app, chart, analysis, false);
-										dataSets.add(dataSet);
+										elevationDataSet = GpxUiHelper.createGPXElevationDataSet(app, chart, analysis, false, true);
 									}
+									if (speedDataSet != null) {
+										dataSets.add(speedDataSet);
+										if (elevationDataSet != null) {
+											dataSets.add(elevationDataSet.priority < speedDataSet.priority ? 1 : 0, elevationDataSet);
+										}
+									} else  if (elevationDataSet != null) {
+										dataSets.add(elevationDataSet);
+									}
+
 									LineData data = new LineData(dataSets);
 									chart.setData(data);
 									chart.setVisibility(View.VISIBLE);
@@ -285,8 +342,8 @@ public class TrackSegmentFragment extends SelectedGPXFragment {
 						case GPX_TAB_ITEM_ALTITUDE:
 							if (analysis != null) {
 								if (analysis.elevationData != null) {
-									GPXUtilities.setupGPXChart(app, chart, 4);
-									GPXUtilities.setGPXElevationChartData(app, chart, analysis, false);
+									GpxUiHelper.setupGPXChart(app, chart, 4);
+									GpxUiHelper.setGPXElevationChartData(app, chart, analysis, false, true);
 									chart.setVisibility(View.VISIBLE);
 								} else {
 									chart.setVisibility(View.GONE);
@@ -327,9 +384,8 @@ public class TrackSegmentFragment extends SelectedGPXFragment {
 							break;
 						case GPX_TAB_ITEM_SPEED:
 							if (analysis != null && analysis.isSpeedSpecified()) {
-								GPXUtilities.setupGPXChart(app, chart, 4);
-								GPXUtilities.setGPXSpeedChartData(app, chart, analysis, false);
-
+								GpxUiHelper.setupGPXChart(app, chart, 4);
+								GpxUiHelper.setGPXSpeedChartData(app, chart, analysis, false, true);
 								((ImageView) view.findViewById(R.id.average_icon))
 										.setImageDrawable(ic.getThemedIcon(R.drawable.ic_action_speed));
 								((ImageView) view.findViewById(R.id.max_icon))
@@ -441,6 +497,17 @@ public class TrackSegmentFragment extends SelectedGPXFragment {
 		@Override
 		public View getViewAtPosition(int position) {
 			return views.get(position);
+		}
+
+		void updateChart(int position) {
+			View view = getViewAtPosition(position);
+			updateChart((LineChart) view.findViewById(R.id.chart));
+		}
+
+		void updateChart(LineChart chart) {
+			if (gpxItem.chartMatrix != null) {
+				chart.getViewPortHandler().refresh(new Matrix(gpxItem.chartMatrix), chart, true);
+			}
 		}
 	}
 }

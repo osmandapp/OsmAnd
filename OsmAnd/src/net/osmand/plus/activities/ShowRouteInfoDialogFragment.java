@@ -26,7 +26,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.LineChart;
-import com.github.mikephil.charting.utils.Utils;
 
 import net.osmand.Location;
 import net.osmand.data.PointDescription;
@@ -41,6 +40,7 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.mapcontextmenu.other.MapRouteInfoMenu;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
@@ -212,7 +212,7 @@ public class ShowRouteInfoDialogFragment extends DialogFragment {
 	private void buildHeader(View headerView) {
 		OsmandApplication app = getMyApplication();
 		LineChart mChart = (LineChart) headerView.findViewById(R.id.chart);
-		GPXUtilities.setupGPXChart(app, mChart, 4);
+		GpxUiHelper.setupGPXChart(app, mChart, 4);
 		mChart.setOnTouchListener(new View.OnTouchListener() {
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
@@ -222,7 +222,7 @@ public class ShowRouteInfoDialogFragment extends DialogFragment {
 		});
 
 		GPXTrackAnalysis analysis = gpx.getAnalysis(0);
-		GPXUtilities.setGPXElevationChartData(app, mChart, analysis, false);
+		GpxUiHelper.setGPXElevationChartData(app, mChart, analysis, false, true);
 
 		((TextView) headerView.findViewById(R.id.average_text))
 				.setText(OsmAndFormatter.getFormattedAlt(analysis.avgElevation, app));
