@@ -1932,7 +1932,7 @@ Pour revenir à l’un des styles de carte classique de OsmAnd, désactivez simp
     <string name="error_message_pattern">Erreur : {0}</string>
     <string name="no_updates_available">Aucune mise à jour disponible</string>
     <string name="we_really_care_about_your_opinion">Nous prêtons beaucoup d\'attention à vos avis, merci pour vos retours.</string>
-    <string name="rendering_value_boldOutline_name">Contour épaissi</string>
+    <string name="rendering_value_boldOutline_name">Contour en gras</string>
     <string name="traffic_warning_hazard">Danger</string>
     <string name="dahboard_options_dialog_title">Paramétrer le tableau de bord</string>
     <string name="shared_string_undo">Annuler</string>
@@ -2684,4 +2684,8 @@ représentant la zone : %1$s x %2$s</string>
     <string name="select_gpx_folder">"Sélectionnez le dossier des traces  GPX"</string>
     <string name="file_can_not_be_moved">Impossible de déplacer le fichier.</string>
     <string name="shared_string_move">Déplacer</string>
+    <string name="shared_string_max">Max</string>
+    <string name="shared_string_start_time">Heure de début</string>
+    <string name="shared_string_end_time">Heure de fin</string>
+    <string name="shared_string_color">Couleur</string>
     </resources>
