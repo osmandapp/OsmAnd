@@ -2677,4 +2677,10 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="select_gpx_folder">Elektu dosierujon por GPX-spuroj</string>
     <string name="file_can_not_be_moved">Dosiero ne povas esti movita.</string>
     <string name="shared_string_move">Movi</string>
+    <string name="shared_string_time_moving">Tempo de movado</string>
+    <string name="shared_string_time_span">Tempa variejo</string>
+    <string name="shared_string_max">Maks.</string>
+    <string name="shared_string_start_time">Komenca tempo</string>
+    <string name="shared_string_end_time">Fina tempo</string>
+    <string name="shared_string_color">Koloro</string>
     </resources>
