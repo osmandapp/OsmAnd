@@ -26,8 +26,6 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.Typeface;
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -45,6 +43,7 @@ import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.FontCache;
 
@@ -56,8 +55,15 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 	private static final float OPAQUE = 1.0f;
 	private static final float HALF_TRANSP = 0.6f;
 
+	public enum TabSelectionType {
+		ALPHA,
+		SOLID_COLOR
+	}
+
 	public interface CustomTabProvider {
 		public View getCustomTabView(ViewGroup parent, int position);
+		public void select(View tab);
+		public void deselect(View tab);
 	}
 
 	public interface OnTabReselectedListener {
@@ -116,6 +122,9 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 	private int tabPadding = 12;
 	private int tabTextSize = 14;
 	private int tabTextColor = 0;
+
+	private TabSelectionType tabSelectionType = TabSelectionType.ALPHA;
+	private int tabInactiveTextColor = 0;
 	private float tabTextAlpha = HALF_TRANSP;
 	private float tabTextSelectedAlpha = OPAQUE;
 
@@ -181,6 +190,7 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 		// get custom attrs
 		a = context.obtainStyledAttributes(attrs, R.styleable.PagerSlidingTabStrip);
 		tabTextColor = a.getColor(R.styleable.PagerSlidingTabStrip_pstsTextColor, underlineColor);
+		tabInactiveTextColor = a.getColor(R.styleable.PagerSlidingTabStrip_pstsInactiveTextColor, underlineColor);
 		indicatorColor = a.getColor(R.styleable.PagerSlidingTabStrip_pstsIndicatorColor, indicatorColor);
 		underlineColor = a.getColor(R.styleable.PagerSlidingTabStrip_pstsUnderlineColor, underlineColor);
 		dividerColor = a.getColor(R.styleable.PagerSlidingTabStrip_pstsDividerColor, dividerColor);
@@ -283,8 +293,6 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 		TextView textView = (TextView) tabView.findViewById(R.id.tab_title);
 		if (textView != null) {
 			if (title != null) textView.setText(title);
-			float alpha = pager.getCurrentItem() == position ? tabTextSelectedAlpha : tabTextAlpha;
-			ViewCompat.setAlpha(textView, alpha);
 		}
 
 		tabView.setFocusable(true);
@@ -315,7 +323,24 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 			if (tab_title != null) {
 				tab_title.setTextSize(TypedValue.COMPLEX_UNIT_PX, tabTextSize);
 				tab_title.setTypeface(tabTypeface, pager.getCurrentItem() == i ? tabTypefaceSelectedStyle : tabTypefaceStyle);
-				tab_title.setTextColor(tabTextColor);
+				switch (tabSelectionType) {
+					case ALPHA:
+						float alpha = pager.getCurrentItem() == i ? tabTextSelectedAlpha : tabTextAlpha;
+						ViewCompat.setAlpha(tab_title, alpha);
+						tab_title.setTextColor(tabTextColor);
+						break;
+					case SOLID_COLOR:
+						ViewCompat.setAlpha(tab_title, OPAQUE);
+						tab_title.setTextColor(pager.getCurrentItem() == i ? tabTextColor : tabInactiveTextColor);
+						break;
+				}
+				if (pager.getAdapter() instanceof CustomTabProvider) {
+					if (pager.getCurrentItem() == i) {
+						((CustomTabProvider) pager.getAdapter()).select(v);
+					} else {
+						((CustomTabProvider) pager.getAdapter()).deselect(v);
+					}
+				}
 
 				// setAllCaps() is only available from API 14, so the upper case is made manually if we are on a
 				// pre-ICS-build
@@ -518,7 +543,17 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 			TextView title = (TextView) tab.findViewById(R.id.tab_title);
 			if (title != null) {
 				title.setTypeface(tabTypeface, tabTypefaceStyle);
-				ViewCompat.setAlpha(title, tabTextAlpha);
+				switch (tabSelectionType) {
+					case ALPHA:
+						ViewCompat.setAlpha(title, tabTextAlpha);
+						break;
+					case SOLID_COLOR:
+						title.setTextColor(tabInactiveTextColor);
+						break;
+				}
+			}
+			if (pager.getAdapter() instanceof CustomTabProvider) {
+				((CustomTabProvider) pager.getAdapter()).deselect(tab);
 			}
 		}
 	}
@@ -528,7 +563,17 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 			TextView title = (TextView) tab.findViewById(R.id.tab_title);
 			if (title != null) {
 				title.setTypeface(tabTypeface, tabTypefaceSelectedStyle);
-				ViewCompat.setAlpha(title, tabTextSelectedAlpha);
+				switch (tabSelectionType) {
+					case ALPHA:
+						ViewCompat.setAlpha(title, tabTextSelectedAlpha);
+						break;
+					case SOLID_COLOR:
+						title.setTextColor(tabTextColor);
+						break;
+				}
+				if (pager.getAdapter() instanceof CustomTabProvider) {
+					((CustomTabProvider) pager.getAdapter()).select(tab);
+				}
 			}
 		}
 	}
@@ -668,8 +713,24 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 		return textAllCaps;
 	}
 
+	public TabSelectionType getTabSelectionType() {
+		return tabSelectionType;
+	}
+
 	public int getTextColor() {
 		return tabTextColor;
+	}
+
+	public int getTabInactiveTextColor() {
+		return tabInactiveTextColor;
+	}
+
+	public float getTabTextAlpha() {
+		return tabTextAlpha;
+	}
+
+	public float getTabTextSelectedAlpha() {
+		return tabTextSelectedAlpha;
 	}
 
 	public int getTabBackground() {
@@ -687,6 +748,16 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 
 	public void setIndicatorColorResource(int resId) {
 		this.indicatorColor = getResources().getColor(resId);
+		invalidate();
+	}
+
+	public void setIndicatorBgColor(int indicatorBgColor) {
+		this.indicatorBgColor = indicatorBgColor;
+		invalidate();
+	}
+
+	public void setIndicatorBgColorResource(int resId) {
+		this.indicatorBgColor = getResources().getColor(resId);
 		invalidate();
 	}
 
@@ -751,8 +822,16 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 		updateTabStyles();
 	}
 
+	public void setTabSelectionType(TabSelectionType tabSelectionType) {
+		this.tabSelectionType = tabSelectionType;
+	}
+
 	public void setTextColor(int textColor) {
 		tabTextColor = textColor;
+	}
+
+	public void setTabInactiveTextColor(int tabInactiveTextColor) {
+		this.tabInactiveTextColor = tabInactiveTextColor;
 	}
 
 	private ColorStateList getColorStateList(int textColor) {

@@ -64,11 +64,6 @@
             android:paddingLeft="@dimen/list_content_padding"
             android:paddingRight="@dimen/list_content_padding"/>
 
-        <com.github.mikephil.charting.charts.LineChart
-            android:id="@+id/chart"
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:layout_gravity="center_vertical"/>
-
     </LinearLayout>
+
 </LinearLayout>

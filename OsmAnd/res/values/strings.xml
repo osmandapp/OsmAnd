@@ -9,6 +9,12 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="shared_string_time_moving">Time moving</string>
+    <string name="shared_string_time_span">Time span</string>
+    <string name="shared_string_max">Max</string>
+    <string name="shared_string_start_time">Start time</string>
+    <string name="shared_string_end_time">End time</string>
+    <string name="shared_string_color">Color</string>
     <string name="select_gpx_folder">Select GPX folder</string>
     <string name="file_can_not_be_moved">File can not be moved.</string>
     <string name="shared_string_move">Move</string>

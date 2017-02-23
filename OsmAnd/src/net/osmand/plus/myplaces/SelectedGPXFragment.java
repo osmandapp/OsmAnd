@@ -13,7 +13,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AlertDialog;
-import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -23,23 +22,20 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.MarkerView;
+import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.utils.MPPointF;
-import com.github.mikephil.charting.utils.Utils;
 
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.FavouritesDbHelper;
-import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.GpxSelectionHelper;
@@ -54,7 +50,6 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TrackActivity;
-import net.osmand.plus.base.FavoriteImageDrawable;
 import net.osmand.plus.base.OsmAndListFragment;
 import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.util.Algorithms;
@@ -73,7 +68,7 @@ public class SelectedGPXFragment extends OsmAndListFragment {
 	public static final String ARG_TO_FILTER_SHORT_TRACKS = "ARG_TO_FILTER_SHORT_TRACKS";
 	public static final String ARG_TO_HIDE_CONFIG_BTN = "ARG_TO_HIDE_CONFIG_BTN";
 	protected OsmandApplication app;
-	protected SelectedGPXAdapter adapter;
+	protected ArrayAdapter<GpxSelectionHelper.GpxDisplayItem> adapter;
 	protected TrackActivity activity;
 	private boolean updateEnable;
 
@@ -85,6 +80,14 @@ public class SelectedGPXFragment extends OsmAndListFragment {
 		final Collator collator = Collator.getInstance();
 		collator.setStrength(Collator.SECONDARY);
 		app = (OsmandApplication) activity.getApplication();
+	}
+
+	@Override
+	public void onActivityCreated(Bundle savedInstanceState) {
+		super.onActivityCreated(savedInstanceState);
+		getListView().setBackgroundColor(getResources().getColor(
+				getMyApplication().getSettings().isLightContent() ? R.color.ctx_menu_info_view_bg_light
+						: R.color.ctx_menu_info_view_bg_dark));
 	}
 
 	public TrackActivity getMyActivity() {
@@ -121,7 +124,7 @@ public class SelectedGPXFragment extends OsmAndListFragment {
 		super.onResume();
 		updateContent();
 		updateEnable = true;
-		if(getGpx() != null && getGpx().showCurrentTrack && filterType() == GpxDisplayItemType.TRACK_POINTS) {
+		if (getGpx() != null && getGpx().showCurrentTrack && hasFilterType(GpxDisplayItemType.TRACK_POINTS)) {
 			startHandler();
 		}
 	}
@@ -133,13 +136,13 @@ public class SelectedGPXFragment extends OsmAndListFragment {
 	}
 
 
-	protected static List<GpxDisplayGroup> filterGroups(@NonNull GpxDisplayItemType type,
+	protected static List<GpxDisplayGroup> filterGroups(GpxDisplayItemType[] types,
 														@NonNull TrackActivity trackActivity,
 														@Nullable Bundle args) {
 		List<GpxDisplayGroup> result = trackActivity.getResult();
 		List<GpxDisplayGroup> groups = new ArrayList<GpxSelectionHelper.GpxDisplayGroup>();
 		for (GpxDisplayGroup group : result) {
-			boolean add = group.getType() == type || type == null;
+			boolean add = types == null || hasFilterType(types, group.getType());
 			if (isArgumentTrue(args, ARG_TO_FILTER_SHORT_TRACKS)) {
 				Iterator<GpxDisplayItem> item = group.getModifiableList().iterator();
 				while (item.hasNext()) {
@@ -161,24 +164,42 @@ public class SelectedGPXFragment extends OsmAndListFragment {
 	}
 
 	public void setContent() {
-		adapter = new SelectedGPXAdapter(new ArrayList<GpxSelectionHelper.GpxDisplayItem>());
+		adapter = createSelectedGPXAdapter();
 		updateContent();
 		setListAdapter(adapter);
 	}
 
 	protected void updateContent() {
 		adapter.clear();
-		List<GpxSelectionHelper.GpxDisplayGroup> groups = filterGroups(filterType(), getMyActivity(), getArguments());
+		List<GpxSelectionHelper.GpxDisplayGroup> groups = filterGroups(filterTypes(), getMyActivity(), getArguments());
 		adapter.setNotifyOnChange(false);
-		for(GpxDisplayItem i: flatten(groups)) {
+		for (GpxDisplayItem i : flatten(groups)) {
 			adapter.add(i);
 		}
 		adapter.setNotifyOnChange(true);
 		adapter.notifyDataSetChanged();
 	}
 
-	protected GpxDisplayItemType filterType() {
+	protected GpxDisplayItemType[] filterTypes() {
 		return null;
+	}
+
+	protected boolean hasFilterType(GpxDisplayItemType filterType) {
+		for (GpxDisplayItemType type : filterTypes()) {
+			if (type == filterType) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	protected static boolean hasFilterType(GpxDisplayItemType[] filterTypes, GpxDisplayItemType filterType) {
+		for (GpxDisplayItemType type : filterTypes) {
+			if (type == filterType) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	protected List<GpxDisplayItem> flatten(List<GpxDisplayGroup> groups) {
@@ -195,6 +216,9 @@ public class SelectedGPXFragment extends OsmAndListFragment {
 		View view = getActivity().getLayoutInflater().inflate(R.layout.update_index, container, false);
 		view.findViewById(R.id.header_layout).setVisibility(View.GONE);
 		ListView listView = (ListView) view.findViewById(android.R.id.list);
+		listView.setDivider(null);
+		listView.setDividerHeight(0);
+		listView.addFooterView(getActivity().getLayoutInflater().inflate(R.layout.list_shadow_footer, null, false));
 		TextView tv = new TextView(getActivity());
 		tv.setText(R.string.none_selected_gpx);
 		tv.setTextSize(24);
@@ -214,7 +238,7 @@ public class SelectedGPXFragment extends OsmAndListFragment {
 	protected void saveAsFavorites(final GpxDisplayItemType gpxDisplayItemType) {
 		AlertDialog.Builder b = new AlertDialog.Builder(getMyActivity());
 		final EditText editText = new EditText(getMyActivity());
-		final List<GpxDisplayGroup> gs = filterGroups(gpxDisplayItemType, getMyActivity(), getArguments());
+		final List<GpxDisplayGroup> gs = filterGroups(new GpxDisplayItemType[] { gpxDisplayItemType }, getMyActivity(), getArguments());
 		if (gs.size() == 0) {
 			return;
 		}
@@ -239,7 +263,7 @@ public class SelectedGPXFragment extends OsmAndListFragment {
 
 	protected void saveAsMapMarkers(final GpxDisplayItemType gpxDisplayItemType) {
 		AlertDialog.Builder b = new AlertDialog.Builder(getMyActivity());
-		final List<GpxDisplayGroup> gs = filterGroups(gpxDisplayItemType, getMyActivity(), getArguments());
+		final List<GpxDisplayGroup> gs = filterGroups(new GpxDisplayItemType[] { gpxDisplayItemType }, getMyActivity(), getArguments());
 		if (gs.size() == 0) {
 			return;
 		}
@@ -309,7 +333,7 @@ public class SelectedGPXFragment extends OsmAndListFragment {
 	}
 
 	protected void selectSplitDistance() {
-		final List<GpxDisplayGroup> groups = filterGroups(GpxDisplayItemType.TRACK_SEGMENT,
+		final List<GpxDisplayGroup> groups = filterGroups(new GpxDisplayItemType[] { GpxDisplayItemType.TRACK_SEGMENT },
 				getMyActivity(), getArguments());
 
 		View view = getMyActivity().getLayoutInflater().inflate(R.layout.selected_track_edit, null);
@@ -447,78 +471,8 @@ public class SelectedGPXFragment extends OsmAndListFragment {
 
 	}
 
-	class SelectedGPXAdapter extends ArrayAdapter<GpxDisplayItem> {
-
-
-		public SelectedGPXAdapter(List<GpxDisplayItem> items) {
-			super(getActivity(), R.layout.gpx_item_list_item, items);
-		}
-
-		@Override
-		public View getView(int position, View convertView, ViewGroup parent) {
-			View row = convertView;
-			LineChart mChart = null;
-			if (row == null) {
-				LayoutInflater inflater = getMyActivity().getLayoutInflater();
-				row = inflater.inflate(R.layout.gpx_item_list_item, parent, false);
-
-				mChart = (LineChart) row.findViewById(R.id.chart);
-				GPXUtilities.setupGPXChart(app, mChart, 5);
-			}
-			GpxDisplayItem child = getItem(position);
-			TextView label = (TextView) row.findViewById(R.id.name);
-			TextView description = (TextView) row.findViewById(R.id.description);
-			TextView additional = (TextView) row.findViewById(R.id.additional);
-			ImageView icon = (ImageView) row.findViewById(R.id.icon);
-			if (child.splitMetric >= 0 && child.splitName != null) {
-				additional.setVisibility(View.VISIBLE);
-				icon.setVisibility(View.INVISIBLE);
-				additional.setText(child.splitName);
-			} else {
-				icon.setVisibility(View.VISIBLE);
-				additional.setVisibility(View.INVISIBLE);
-				if (child.group.getType() == GpxDisplayItemType.TRACK_SEGMENT) {
-					icon.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_action_polygom_dark));
-				} else if (child.group.getType() == GpxDisplayItemType.TRACK_ROUTE_POINTS) {
-					icon.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_action_markers_dark));
-				} else {
-					int groupColor = child.group.getColor();
-					if (child.locationStart != null) {
-						groupColor = child.locationStart.getColor(groupColor);
-					}
-					if (groupColor == 0) {
-						groupColor = getMyActivity().getResources().getColor(R.color.gpx_track);
-					}
-					icon.setImageDrawable(FavoriteImageDrawable.getOrCreate(getMyActivity(), groupColor, false));
-				}
-			}
-			row.setTag(child);
-
-			label.setText(Html.fromHtml(child.name.replace("\n", "<br/>")));
-			boolean expand = true; //child.expanded || isArgumentTrue(ARG_TO_EXPAND_TRACK_INFO)
-			if (expand && !Algorithms.isEmpty(child.description)) {
-				String d = child.description;
-				description.setText(Html.fromHtml(d));
-				description.setVisibility(View.VISIBLE);
-			} else {
-				description.setVisibility(View.GONE);
-			}
-
-			if (mChart != null) {
-				if (child.analysis != null && child.analysis.elevationData != null && child.analysis.isElevationSpecified() && (child.analysis.totalDistance > 0)) {
-
-					GPXUtilities.setGPXChartData(app, mChart, child.analysis, Utils.getSDKInt() >= 18
-							? R.drawable.line_chart_fade_orange : R.color.osmand_orange);
-
-					mChart.setVisibility(View.VISIBLE);
-				} else {
-					mChart.setVisibility(View.GONE);
-				}
-			}
-
-			return row;
-		}
-
+	public ArrayAdapter<GpxSelectionHelper.GpxDisplayItem> createSelectedGPXAdapter() {
+		return null;
 	}
 
 	@Override
@@ -575,24 +529,36 @@ public class SelectedGPXFragment extends OsmAndListFragment {
 	public static class MyMarkerView extends MarkerView {
 
 		private TextView tvContent;
-		private String altSuffix;
+		private String unitsLeft;
+		private String unitsRight;
 
-		public MyMarkerView(Context context, int layoutResource, boolean useFeet) {
+		public MyMarkerView(Context context, int layoutResource) {
 			super(context, layoutResource);
-
 			tvContent = (TextView) findViewById(R.id.tvContent);
-			if (!useFeet) {
-				altSuffix = getContext().getString(R.string.m);
-			} else {
-				altSuffix = getContext().getString(R.string.foot);
-			}
+		}
+
+		public String getUnitsLeft() {
+			return unitsLeft;
+		}
+
+		public void setUnitsLeft(String unitsLeft) {
+			this.unitsLeft = unitsLeft;
+		}
+
+		public String getUnitsRight() {
+			return unitsRight;
+		}
+
+		public void setUnitsRight(String unitsRight) {
+			this.unitsRight = unitsRight;
 		}
 
 		// callbacks everytime the MarkerView is redrawn, can be used to update the
 		// content (user-interface)
 		@Override
 		public void refreshContent(Entry e, Highlight highlight) {
-			tvContent.setText(Integer.toString((int)e.getY()) + " " + altSuffix);
+			tvContent.setText(Integer.toString((int)e.getY()) + " "
+					+ (highlight.getAxis() == YAxis.AxisDependency.LEFT ? unitsLeft : unitsRight));
 			super.refreshContent(e, highlight);
 		}
 

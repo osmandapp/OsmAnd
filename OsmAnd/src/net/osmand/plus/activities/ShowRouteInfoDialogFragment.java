@@ -15,6 +15,7 @@ import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -212,10 +213,16 @@ public class ShowRouteInfoDialogFragment extends DialogFragment {
 		OsmandApplication app = getMyApplication();
 		LineChart mChart = (LineChart) headerView.findViewById(R.id.chart);
 		GPXUtilities.setupGPXChart(app, mChart, 4);
+		mChart.setOnTouchListener(new View.OnTouchListener() {
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				listView.requestDisallowInterceptTouchEvent(true);
+				return false;
+			}
+		});
 
 		GPXTrackAnalysis analysis = gpx.getAnalysis(0);
-		GPXUtilities.setGPXChartData(app, mChart, analysis, Utils.getSDKInt() >= 18
-				? R.drawable.line_chart_fade_blue : R.color.gpx_time_span_color);
+		GPXUtilities.setGPXElevationChartData(app, mChart, analysis, false);
 
 		((TextView) headerView.findViewById(R.id.average_text))
 				.setText(OsmAndFormatter.getFormattedAlt(analysis.avgElevation, app));

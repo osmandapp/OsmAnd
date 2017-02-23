@@ -71,6 +71,7 @@ import java.text.DateFormat;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
@@ -204,8 +205,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 				if (isRecording) {
 					plugin.stopRecording();
 					updateCurrentTrack();
-				} else
-				if (app.getLocationProvider().checkGPSEnabled(app)) {
+				} else if (app.getLocationProvider().checkGPSEnabled(getActivity())) {
 					plugin.startGPXMonitoring(getActivity());
 					updateCurrentTrack();
 				}
@@ -677,6 +677,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			for (GpxInfo v : values) {
 				allGpxAdapter.addLocalIndexInfo(v);
 			}
+			allGpxAdapter.sort();
 			allGpxAdapter.notifyDataSetChanged();
 		}
 
@@ -687,6 +688,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 				for (GpxInfo v : result) {
 					allGpxAdapter.addLocalIndexInfo(v);
 				}
+				allGpxAdapter.sort();
 				allGpxAdapter.refreshSelected();
 				allGpxAdapter.notifyDataSetChanged();
 				onPostExecute(result);
@@ -830,6 +832,10 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 				data.put(category.get(found), new ArrayList<GpxInfo>());
 			}
 			data.get(category.get(found)).add(info);
+		}
+
+		public void sort() {
+			Collections.sort(category);
 		}
 
 		@Override
@@ -1333,6 +1339,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 					for (GpxInfo i : ((List<GpxInfo>) results.values)) {
 						allGpxAdapter.addLocalIndexInfo(i);
 					}
+					allGpxAdapter.sort();
 					allGpxAdapter.refreshSelected();
 				}
 				allGpxAdapter.notifyDataSetChanged();

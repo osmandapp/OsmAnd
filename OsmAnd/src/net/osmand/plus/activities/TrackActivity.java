@@ -19,7 +19,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.plus.myplaces.SelectedGPXFragment;
 import net.osmand.plus.myplaces.TrackPointFragment;
-import net.osmand.plus.myplaces.TrackRoutePointFragment;
 import net.osmand.plus.myplaces.TrackSegmentFragment;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip;
 
@@ -34,9 +33,6 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
-/**
- *
- */
 public class TrackActivity extends TabActivity {
 
 	public static final String TRACK_FILE_NAME = "TRACK_FILE_NAME";
@@ -72,6 +68,7 @@ public class TrackActivity extends TabActivity {
 		setContentView(R.layout.tab_content);
 
 		PagerSlidingTabStrip mSlidingTabLayout = (PagerSlidingTabStrip) findViewById(R.id.sliding_tabs);
+		mSlidingTabLayout.setShouldExpand(true);
 
 		mViewPager = (ViewPager) findViewById(R.id.pager);
 
@@ -101,16 +98,11 @@ public class TrackActivity extends TabActivity {
 					}
 				}
 				((OsmandFragmentPagerAdapter) mViewPager.getAdapter()).addTab(
-						getTabIndicator(R.string.track_segments, TrackSegmentFragment.class));
-				if (isHavingWayPoints()){
+						getTabIndicator(R.string.info_button, TrackSegmentFragment.class));
+				if (isHavingWayPoints() || isHavingRoutePoints()) {
 					((OsmandFragmentPagerAdapter) mViewPager.getAdapter()).addTab(
-							getTabIndicator(R.string.announce_gpx_waypoints, TrackPointFragment.class));
+							getTabIndicator(R.string.points, TrackPointFragment.class));
 				}
-				if (isHavingRoutePoints()){
-					((OsmandFragmentPagerAdapter) mViewPager.getAdapter()).addTab(
-							getTabIndicator(R.string.route_points, TrackRoutePointFragment.class));
-				}
-
 			};
 		}.execute((Void)null);
 

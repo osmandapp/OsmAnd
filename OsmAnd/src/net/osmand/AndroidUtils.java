@@ -33,6 +33,7 @@ import java.util.List;
 import java.util.Map;
 
 import static android.util.TypedValue.COMPLEX_UNIT_DIP;
+import static android.util.TypedValue.COMPLEX_UNIT_SP;
 
 public class AndroidUtils {
 
@@ -149,6 +150,15 @@ public class AndroidUtils {
 		return (int) TypedValue.applyDimension(
 				COMPLEX_UNIT_DIP,
 				dp,
+				r.getDisplayMetrics()
+		);
+	}
+
+	public static int spToPx(Context ctx, float sp) {
+		Resources r = ctx.getResources();
+		return (int) TypedValue.applyDimension(
+				COMPLEX_UNIT_SP,
+				sp,
 				r.getDisplayMetrics()
 		);
 	}
