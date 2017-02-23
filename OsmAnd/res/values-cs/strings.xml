@@ -2700,4 +2700,10 @@ Pokud potřebujete pomoci s aplikací OsmAnd, prosím kontaktujte naši podporu
     <string name="file_can_not_be_moved">Soubor nemůže být přesunut.</string>
     <string name="shared_string_move">Přesunout</string>
     <string name="shared_string_tracks">Trasy</string>
+    <string name="shared_string_time_moving">Doba pohybu</string>
+    <string name="shared_string_time_span">Časové rozpětí</string>
+    <string name="shared_string_max">Max</string>
+    <string name="shared_string_start_time">Počáteční čas</string>
+    <string name="shared_string_end_time">Čas ukončení</string>
+    <string name="shared_string_color">Barva</string>
     </resources>
