@@ -1166,7 +1166,7 @@ public class GPXUtilities {
 								((WptPt) parse).comment = readText(parser, "cmt");
 							} else if (parser.getName().equals("speed") ) {
 									try {
-										String value = readText(parser, "cmt");
+										String value = readText(parser, "speed");
 										((WptPt) parse).speed = Float.parseFloat(value);
 										((WptPt) parse).getExtensionsToWrite().put("speed", value);
 									} catch (NumberFormatException e) {
