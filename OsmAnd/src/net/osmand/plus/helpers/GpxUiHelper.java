@@ -7,9 +7,11 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.ListPopupWindow;
@@ -30,6 +32,21 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.AxisBase;
+import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.formatter.DefaultFillFormatter;
+import com.github.mikephil.charting.formatter.IAxisValueFormatter;
+import com.github.mikephil.charting.formatter.IFillFormatter;
+import com.github.mikephil.charting.interfaces.dataprovider.LineDataProvider;
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
+import com.github.mikephil.charting.utils.Utils;
 
 import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
@@ -54,6 +71,7 @@ import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.dialogs.ConfigureMapMenu;
 import net.osmand.plus.dialogs.ConfigureMapMenu.AppearanceListItem;
 import net.osmand.plus.dialogs.ConfigureMapMenu.GpxAppearanceAdapter;
+import net.osmand.plus.myplaces.SelectedGPXFragment;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
@@ -63,6 +81,7 @@ import java.io.File;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.text.DateFormat;
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -70,6 +89,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.github.mikephil.charting.components.XAxis.XAxisPosition.BOTTOM;
+import static net.osmand.plus.OsmAndFormatter.FEET_IN_ONE_METER;
+import static net.osmand.plus.OsmAndFormatter.METERS_IN_KILOMETER;
+import static net.osmand.plus.OsmAndFormatter.METERS_IN_ONE_MILE;
+import static net.osmand.plus.OsmAndFormatter.METERS_IN_ONE_NAUTICALMILE;
+import static net.osmand.plus.OsmAndFormatter.YARDS_IN_ONE_METER;
 import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR;
 import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR;
 import static net.osmand.plus.dialogs.ConfigureMapMenu.refreshMapComplete;
@@ -817,6 +842,387 @@ public class GpxUiHelper {
 			}
 
 		}, "Loading gpx").start(); //$NON-NLS-1$
+	}
+
+	public static void setupGPXChart(OsmandApplication ctx, LineChart mChart, int yLabelsCount) {
+		OsmandSettings settings = ctx.getSettings();
+		OsmandSettings.MetricsConstants mc = settings.METRIC_SYSTEM.get();
+		boolean useFeet = (mc == OsmandSettings.MetricsConstants.MILES_AND_FEET) || (mc == OsmandSettings.MetricsConstants.MILES_AND_YARDS);
+		boolean light = settings.isLightContent();
+
+		//mChart.setHardwareAccelerationEnabled(true);
+		mChart.setTouchEnabled(true);
+		mChart.setDragEnabled(true);
+		mChart.setScaleEnabled(true);
+		mChart.setPinchZoom(true);
+		mChart.setScaleYEnabled(false);
+		mChart.setAutoScaleMinMaxEnabled(true);
+		mChart.setDrawBorders(false);
+		mChart.getDescription().setEnabled(false);
+		mChart.setMaxVisibleValueCount(10);
+		mChart.setMinOffset(0f);
+
+		mChart.setExtraTopOffset(24f);
+		mChart.setExtraBottomOffset(16f);
+
+		// create a custom MarkerView (extend MarkerView) and specify the layout
+		// to use for it
+		SelectedGPXFragment.MyMarkerView mv =
+				new SelectedGPXFragment.MyMarkerView(mChart.getContext(), R.layout.chart_marker_view);
+		mv.setChartView(mChart); // For bounds control
+		mChart.setMarker(mv); // Set the marker to the chart
+		mChart.setDrawMarkers(true);
+
+		XAxis xAxis = mChart.getXAxis();
+		xAxis.setDrawAxisLine(false);
+		xAxis.setDrawGridLines(false);
+		xAxis.setPosition(BOTTOM);
+		xAxis.setTextColor(light ? mChart.getResources().getColor(R.color.secondary_text_light) : mChart.getResources().getColor(R.color.secondary_text_dark));
+
+		YAxis yAxis = mChart.getAxisLeft();
+		yAxis.enableGridDashedLine(10f, 5f, 0f);
+		yAxis.setGridColor(ActivityCompat.getColor(mChart.getContext(), R.color.divider_color));
+		yAxis.setDrawAxisLine(false);
+		yAxis.setPosition(YAxis.YAxisLabelPosition.INSIDE_CHART);
+		yAxis.setXOffset(16f);
+		yAxis.setYOffset(-6f);
+		yAxis.setLabelCount(yLabelsCount);
+		yAxis.setTextColor(light ? mChart.getResources().getColor(R.color.secondary_text_light) : mChart.getResources().getColor(R.color.secondary_text_dark));
+
+		yAxis = mChart.getAxisRight();
+		yAxis.enableGridDashedLine(10f, 5f, 0f);
+		yAxis.setGridColor(ActivityCompat.getColor(mChart.getContext(), R.color.divider_color));
+		yAxis.setDrawAxisLine(false);
+		yAxis.setPosition(YAxis.YAxisLabelPosition.INSIDE_CHART);
+		yAxis.setXOffset(16f);
+		yAxis.setYOffset(-6f);
+		yAxis.setLabelCount(yLabelsCount);
+		yAxis.setTextColor(light ? mChart.getResources().getColor(R.color.secondary_text_light) : mChart.getResources().getColor(R.color.secondary_text_dark));
+		yAxis.setEnabled(false);
+
+		Legend legend = mChart.getLegend();
+		legend.setEnabled(false);
+	}
+
+	private static float getXAxisParams(OsmandApplication ctx, float meters, float[] koef, StringBuilder format, StringBuilder unit) {
+		OsmandSettings settings = ctx.getSettings();
+		OsmandSettings.MetricsConstants mc = settings.METRIC_SYSTEM.get();
+		float divX;
+
+		String format1 = "{0,number,0.#} ";
+		String format2 = "{0,number,0.##} ";
+		String fmt = null;
+		float granularity = 1f;
+		int mainUnitStr;
+		float mainUnitInMeters;
+		if (mc == OsmandSettings.MetricsConstants.KILOMETERS_AND_METERS) {
+			mainUnitStr = R.string.km;
+			mainUnitInMeters = METERS_IN_KILOMETER;
+		} else if (mc == OsmandSettings.MetricsConstants.NAUTICAL_MILES) {
+			mainUnitStr = R.string.nm;
+			mainUnitInMeters = METERS_IN_ONE_NAUTICALMILE;
+		} else {
+			mainUnitStr = R.string.mile;
+			mainUnitInMeters = METERS_IN_ONE_MILE;
+		}
+		if (meters > 9.99f * mainUnitInMeters) {
+			fmt = format1;
+			granularity = .1f;
+		}
+		if (meters >= 100 * mainUnitInMeters ||
+				meters > 9.99f * mainUnitInMeters ||
+				meters > 0.999f * mainUnitInMeters ||
+				mc == OsmandSettings.MetricsConstants.MILES_AND_FEET && meters > 0.249f * mainUnitInMeters ||
+				mc == OsmandSettings.MetricsConstants.MILES_AND_METERS && meters > 0.249f * mainUnitInMeters ||
+				mc == OsmandSettings.MetricsConstants.MILES_AND_YARDS && meters > 0.249f * mainUnitInMeters ||
+				mc == OsmandSettings.MetricsConstants.NAUTICAL_MILES && meters > 0.99f * mainUnitInMeters) {
+
+			divX = mainUnitInMeters;
+			if (fmt == null) {
+				fmt = format2;
+				granularity = .01f;
+			}
+		} else {
+			fmt = null;
+			granularity = 1f;
+			if (mc == OsmandSettings.MetricsConstants.KILOMETERS_AND_METERS || mc == OsmandSettings.MetricsConstants.MILES_AND_METERS) {
+				divX = 1f;
+				mainUnitStr = R.string.m;
+			} else if (mc == OsmandSettings.MetricsConstants.MILES_AND_FEET) {
+				divX = 1f / FEET_IN_ONE_METER;
+				mainUnitStr = R.string.foot;
+			} else if (mc == OsmandSettings.MetricsConstants.MILES_AND_YARDS) {
+				divX = 1f / YARDS_IN_ONE_METER;
+				mainUnitStr = R.string.yard;
+			} else {
+				divX = 1f;
+				mainUnitStr = R.string.m;
+			}
+		}
+
+		koef[0] = divX;
+		if (fmt != null) {
+			format.append(fmt);
+		}
+		unit.append(ctx.getString(mainUnitStr));
+		return granularity;
+	}
+
+	public static OrderedLineDataSet createGPXElevationDataSet(OsmandApplication ctx, LineChart mChart, GPXTrackAnalysis analysis, boolean useRightAxis, boolean drawFilled) {
+		OsmandSettings settings = ctx.getSettings();
+		OsmandSettings.MetricsConstants mc = settings.METRIC_SYSTEM.get();
+		boolean useFeet = (mc == OsmandSettings.MetricsConstants.MILES_AND_FEET) || (mc == OsmandSettings.MetricsConstants.MILES_AND_YARDS);
+		boolean light = settings.isLightContent();
+		final float convEle = useFeet ? 3.28084f : 1.0f;
+		final float meters = analysis.totalDistance;
+
+		float[] koef = new float[] { 1f };
+		StringBuilder fmt = new StringBuilder();
+		StringBuilder unitX = new StringBuilder();
+
+		float granularity = getXAxisParams(ctx, meters, koef, fmt, unitX);
+		float divX = koef[0];
+		final String formatX = fmt.toString();
+		final String mainUnitX = unitX.toString();
+
+		XAxis xAxis = mChart.getXAxis();
+		xAxis.setGranularity(granularity);
+		xAxis.setValueFormatter(new IAxisValueFormatter() {
+
+			@Override
+			public String getFormattedValue(float value, AxisBase axis) {
+				if (!Algorithms.isEmpty(formatX)) {
+					return MessageFormat.format(formatX + mainUnitX, value);
+				} else {
+					return (int)value + " " + mainUnitX;
+				}
+			}
+		});
+
+		final String mainUnitY = useFeet ? ctx.getString(R.string.foot) : ctx.getString(R.string.m);
+
+		YAxis yAxis;
+		if (useRightAxis) {
+			yAxis = mChart.getAxisRight();
+			yAxis.setEnabled(true);
+			((SelectedGPXFragment.MyMarkerView)mChart.getMarker()).setUnitsRight(mainUnitY);
+		} else {
+			yAxis = mChart.getAxisLeft();
+			((SelectedGPXFragment.MyMarkerView)mChart.getMarker()).setUnitsLeft(mainUnitY);
+		}
+		yAxis.setGranularity(1f);
+		yAxis.setValueFormatter(new IAxisValueFormatter() {
+
+			@Override
+			public String getFormattedValue(float value, AxisBase axis) {
+				return (int)value + " " + mainUnitY;
+			}
+		});
+
+		ArrayList<Entry> values = new ArrayList<>();
+		List<GPXUtilities.Elevation> elevationData = analysis.elevationData;
+		float nextX = 0;
+		float nextY;
+		for (GPXUtilities.Elevation e : elevationData) {
+			if (e.distance > 0) {
+				nextX += (float) e.distance / divX;
+				nextY = (float) (e.elevation * convEle);
+				values.add(new Entry(nextX, nextY));
+			}
+		}
+
+		OrderedLineDataSet dataSet = new OrderedLineDataSet(values, "");
+		dataSet.priority = (float) (analysis.avgElevation - analysis.minElevation) * convEle;
+		if (drawFilled) {
+			dataSet.setColor(Color.BLACK);
+			dataSet.setLineWidth(0f);
+			dataSet.setDrawFilled(true);
+		} else {
+			dataSet.setColor(ContextCompat.getColor(mChart.getContext(), R.color.map_widget_blue));
+			dataSet.setLineWidth(1f);
+			dataSet.setDrawFilled(false);
+		}
+		dataSet.setDrawValues(false);
+		dataSet.setValueTextSize(9f);
+		dataSet.setFormLineWidth(1f);
+		dataSet.setFormSize(15.f);
+
+		dataSet.setDrawCircles(false);
+		dataSet.setDrawCircleHole(false);
+
+		dataSet.setHighlightEnabled(true);
+		dataSet.setDrawVerticalHighlightIndicator(true);
+		dataSet.setDrawHorizontalHighlightIndicator(false);
+		dataSet.setHighLightColor(light ? mChart.getResources().getColor(R.color.secondary_text_light) : mChart.getResources().getColor(R.color.secondary_text_dark));
+
+		if (Utils.getSDKInt() >= 18) {
+			// fill drawable only supported on api level 18 and above
+			Drawable drawable = ContextCompat.getDrawable(mChart.getContext(), R.drawable.line_chart_fade_blue);
+			dataSet.setFillDrawable(drawable);
+		} else {
+			dataSet.setFillColor(ContextCompat.getColor(mChart.getContext(), R.color.transport_route_line));
+		}
+		dataSet.setFillFormatter(new IFillFormatter() {
+			@Override
+			public float getFillLinePosition(ILineDataSet dataSet, LineDataProvider dataProvider) {
+				return dataProvider.getYChartMin();
+			}
+		});
+		if (useRightAxis) {
+			dataSet.setAxisDependency(YAxis.AxisDependency.RIGHT);
+		}
+		return dataSet;
+	}
+
+	public static void setGPXElevationChartData(OsmandApplication ctx, LineChart mChart, GPXTrackAnalysis analysis, boolean useRightAxis, boolean drawFilled) {
+		LineDataSet dataSet = createGPXElevationDataSet(ctx, mChart, analysis, useRightAxis, drawFilled);
+		ArrayList<ILineDataSet> dataSets = new ArrayList<>();
+		dataSets.add(dataSet);
+		LineData data = new LineData(dataSets);
+		mChart.setData(data);
+	}
+
+	public static OrderedLineDataSet createGPXSpeedDataSet(OsmandApplication ctx, LineChart mChart, GPXTrackAnalysis analysis, boolean useRightAxis, boolean drawFilled) {
+		OsmandSettings settings = ctx.getSettings();
+		boolean light = settings.isLightContent();
+		final float meters = analysis.totalDistance;
+
+		float[] koef = new float[] { 1f };
+		StringBuilder fmt = new StringBuilder();
+		StringBuilder unitX = new StringBuilder();
+
+		float granularity = getXAxisParams(ctx, meters, koef, fmt, unitX);
+		float divX = koef[0];
+		final String formatX = fmt.toString();
+		final String mainUnitX = unitX.toString();
+
+		XAxis xAxis = mChart.getXAxis();
+		xAxis.setGranularity(granularity);
+		xAxis.setValueFormatter(new IAxisValueFormatter() {
+
+			@Override
+			public String getFormattedValue(float value, AxisBase axis) {
+				if (!Algorithms.isEmpty(formatX)) {
+					return MessageFormat.format(formatX + mainUnitX, value);
+				} else {
+					return (int)value + " " + mainUnitX;
+				}
+			}
+		});
+
+		OsmandSettings.SpeedConstants sps = settings.SPEED_SYSTEM.get();
+		float mulSpeed = Float.NaN;
+		float divSpeed = Float.NaN;
+		final String mainUnitY = sps.toShortString(ctx);
+		if (sps == OsmandSettings.SpeedConstants.KILOMETERS_PER_HOUR) {
+			mulSpeed = 3.6f;
+		} else if (sps == OsmandSettings.SpeedConstants.MILES_PER_HOUR) {
+			mulSpeed = 3.6f * METERS_IN_KILOMETER / METERS_IN_ONE_MILE;
+		} else if (sps == OsmandSettings.SpeedConstants.NAUTICALMILES_PER_HOUR) {
+			mulSpeed = 3.6f * METERS_IN_KILOMETER / METERS_IN_ONE_NAUTICALMILE;
+		} else if (sps == OsmandSettings.SpeedConstants.MINUTES_PER_KILOMETER) {
+			divSpeed = METERS_IN_KILOMETER / 60;
+		} else if (sps == OsmandSettings.SpeedConstants.MINUTES_PER_MILE) {
+			divSpeed = METERS_IN_ONE_MILE / 60;
+		} else {
+			mulSpeed = 1f;
+		}
+
+		YAxis yAxis;
+		if (useRightAxis) {
+			yAxis = mChart.getAxisRight();
+			yAxis.setEnabled(true);
+			((SelectedGPXFragment.MyMarkerView)mChart.getMarker()).setUnitsRight(mainUnitY);
+		} else {
+			yAxis = mChart.getAxisLeft();
+			((SelectedGPXFragment.MyMarkerView)mChart.getMarker()).setUnitsLeft(mainUnitY);
+		}
+		yAxis.setAxisMinimum(0f);
+		yAxis.setValueFormatter(new IAxisValueFormatter() {
+
+			@Override
+			public String getFormattedValue(float value, AxisBase axis) {
+				return (int)value + " " + mainUnitY;
+			}
+		});
+
+		ArrayList<Entry> values = new ArrayList<>();
+		List<GPXUtilities.Speed> speedData = analysis.speedData;
+		float nextX = 0;
+		float nextY;
+		for (GPXUtilities.Speed s : speedData) {
+			if (s.distance > 0) {
+				nextX += (float) s.distance / divX;
+				if (Float.isNaN(divSpeed)) {
+					nextY = (float) (s.speed * mulSpeed);
+				} else {
+					nextY = (float) (divSpeed / s.speed);
+				}
+				if (nextY < 0) {
+					nextY = 0;
+				}
+				values.add(new Entry(nextX, nextY));
+			}
+		}
+
+		OrderedLineDataSet dataSet = new OrderedLineDataSet(values, "");
+
+		if (Float.isNaN(divSpeed)) {
+			dataSet.priority = analysis.avgSpeed * mulSpeed;
+		} else {
+			dataSet.priority = divSpeed / analysis.avgSpeed;
+		}
+
+		if (drawFilled) {
+			dataSet.setColor(Color.BLACK);
+			dataSet.setLineWidth(0f);
+			dataSet.setDrawFilled(true);
+		} else {
+			dataSet.setColor(ContextCompat.getColor(mChart.getContext(), R.color.transport_end));
+			dataSet.setLineWidth(1f);
+			dataSet.setDrawFilled(false);
+		}
+		dataSet.setDrawValues(false);
+		dataSet.setValueTextSize(9f);
+		dataSet.setFormLineWidth(1f);
+		dataSet.setFormSize(15.f);
+
+		dataSet.setDrawCircles(false);
+		dataSet.setDrawCircleHole(false);
+
+		dataSet.setHighlightEnabled(true);
+		dataSet.setDrawVerticalHighlightIndicator(true);
+		dataSet.setDrawHorizontalHighlightIndicator(false);
+		dataSet.setHighLightColor(light ? mChart.getResources().getColor(R.color.secondary_text_light) : mChart.getResources().getColor(R.color.secondary_text_dark));
+
+		if (Utils.getSDKInt() >= 18) {
+			// fill drawable only supported on api level 18 and above
+			Drawable drawable = ContextCompat.getDrawable(mChart.getContext(), R.drawable.line_chart_fade_red);
+			dataSet.setFillDrawable(drawable);
+		} else {
+			dataSet.setFillColor(ContextCompat.getColor(mChart.getContext(), R.color.transport_end));
+		}
+		if (useRightAxis) {
+			dataSet.setAxisDependency(YAxis.AxisDependency.RIGHT);
+		}
+		return dataSet;
+	}
+
+	public static void setGPXSpeedChartData(OsmandApplication ctx, LineChart mChart, GPXTrackAnalysis analysis, boolean useRightAxis, boolean drawFilled) {
+		LineDataSet dataSet = createGPXSpeedDataSet(ctx, mChart, analysis, useRightAxis, drawFilled);
+		ArrayList<ILineDataSet> dataSets = new ArrayList<>();
+		dataSets.add(dataSet);
+		LineData data = new LineData(dataSets);
+		mChart.setData(data);
+	}
+
+	public static class OrderedLineDataSet extends LineDataSet {
+
+		public float priority;
+
+		public OrderedLineDataSet(List<Entry> yVals, String label) {
+			super(yVals, label);
+		}
 	}
 
 	public static class GPXInfo {

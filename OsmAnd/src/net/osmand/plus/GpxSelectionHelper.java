@@ -1,6 +1,7 @@
 package net.osmand.plus;
 
 import android.graphics.Bitmap;
+import android.graphics.Matrix;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 
@@ -660,5 +661,6 @@ public class GpxSelectionHelper {
 		public String url;
 		public Bitmap image;
 		public boolean expanded;
+		public Matrix chartMatrix;
 	}
 }
