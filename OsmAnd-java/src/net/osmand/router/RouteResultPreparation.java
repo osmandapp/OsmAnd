@@ -415,7 +415,7 @@ public class RouteResultPreparation {
 								if(lastHeight != -180 && dist > 0) {
 									serializer.startTag("","cmt");
 									serializer.text((float) ((h -lastHeight)/ dist*100) + "% " +
-									" degree " + (float) Math.atan(((h -lastHeight)/ dist*100) / Math.PI * 180) +  
+									" degree " + (float) Math.atan(((h -lastHeight)/ dist*100)) / Math.PI * 180 +  
 									" asc " + (float) (h -lastHeight) + " dist "
 											+ (float) dist);
 									serializer.endTag("","cmt");
