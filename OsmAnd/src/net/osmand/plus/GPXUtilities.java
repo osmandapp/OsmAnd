@@ -1164,13 +1164,12 @@ public class GPXUtilities {
 								((WptPt) parse).desc = readText(parser, "desc");
 							} else if (parser.getName().equals("cmt")) {
 								((WptPt) parse).comment = readText(parser, "cmt");
-							} else if (parser.getName().equals("speed") ) {
-									try {
-										String value = readText(parser, "speed");
-										((WptPt) parse).speed = Float.parseFloat(value);
-										((WptPt) parse).getExtensionsToWrite().put("speed", value);
-									} catch (NumberFormatException e) {
-									}
+							} else if (parser.getName().equals("speed")) {
+								try {
+									String value = readText(parser, "speed");
+									((WptPt) parse).speed = Float.parseFloat(value);
+									((WptPt) parse).getExtensionsToWrite().put("speed", value);
+								} catch (NumberFormatException e) {
 								}
 							} else if (parser.getName().equals("link")) {
 								((WptPt) parse).link = parser.getAttributeValue("", "href");
