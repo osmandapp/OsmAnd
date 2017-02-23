@@ -359,7 +359,7 @@ public class RouteResultPreparation {
 				}
 			}
 					
-			double lastHeight = -1;		
+			double lastHeight = -180;		
 			for (RouteSegmentResult res : result) {
 				String name = res.getObject().getName();
 				String ref = res.getObject().getRef("", false, res.isForwardDirection());
@@ -395,6 +395,7 @@ public class RouteResultPreparation {
 						res.getStartPointIndex() + "", res.getEndPointIndex() + "", additional.toString()));
 				int inc = res.getStartPointIndex() < res.getEndPointIndex() ? 1 : -1;
 				int indexnext = res.getStartPointIndex();
+				LatLon prev = null;
 				for (int index = res.getStartPointIndex() ; index != res.getEndPointIndex(); ) {
 					index = indexnext;
 					indexnext += inc; 
@@ -405,20 +406,29 @@ public class RouteResultPreparation {
 							serializer.attribute("", "lat",  l.getLatitude() + "");
 							serializer.attribute("", "lon",  l.getLongitude() + "");
 							float[] vls = res.getObject().heightDistanceArray;
+							double dist = prev == null ? 0 : MapUtils.getDistance(prev, l);
 							if(index * 2 + 1 < vls.length) {
+								double h = vls[2*index + 1];
 								serializer.startTag("","ele");
-								serializer.text(vls[2*index + 1] +"");
+								serializer.text(h +"");
 								serializer.endTag("","ele");
+								if(lastHeight != -180 && dist > 0) {
+									serializer.startTag("","cmt");
+									serializer.text((float) ((h -lastHeight)/ dist) + "% " + " asc " + (float) (h -lastHeight) + " dist "
+											+ (float) dist);
+									serializer.endTag("","cmt");
+								}
 								serializer.startTag("","desc");
 								serializer.text((res.getObject().getId() >> (BinaryInspector.SHIFT_ID )) + " " + index);
 								serializer.endTag("","desc");
-								lastHeight = vls[2*index + 1];
-							} else if(lastHeight > 0){
+								lastHeight = h;
+							} else if(lastHeight != -180){
 								serializer.startTag("","ele");
 								serializer.text(lastHeight +"");
 								serializer.endTag("","ele");
 							}
 							serializer.endTag("", "trkpt");
+							prev = l;
 						} catch (IOException e) {
 							e.printStackTrace();
 						}
