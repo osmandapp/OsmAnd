@@ -2670,4 +2670,10 @@ i encara més…
     <string name="select_gpx_folder">Seleccioneu la carpeta GPX</string>
     <string name="file_can_not_be_moved">El fitxer no es pot moure.</string>
     <string name="shared_string_move">Mou</string>
+    <string name="shared_string_time_moving">Temps en moviment</string>
+    <string name="shared_string_time_span">Lapse temporal</string>
+    <string name="shared_string_max">Màx.</string>
+    <string name="shared_string_start_time">Hora inicial</string>
+    <string name="shared_string_end_time">Hora final</string>
+    <string name="shared_string_color">Color</string>
     </resources>
