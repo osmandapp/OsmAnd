@@ -2869,7 +2869,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="altitude_descent">Nedstigning</string>
     <string name="altitude_ascent">Opstigning</string>
     <string name="altitude_range">Højdeinterval</string>
-    <string name="average_altitude">Gennemsnit</string>
+    <string name="average_altitude">Gennemsnitshøjde</string>
     <string name="shared_string_time">Tid</string>
     <string name="total_distance">Total afstand</string>
     <string name="routing_attr_driving_style_name">Kørestil</string>
@@ -2884,4 +2884,6 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="shared_string_end_time">Sluttid</string>
     <string name="shared_string_color">Farve</string>
     <string name="shared_string_time_moving">Tid i bevægelse</string>
+    <string name="max_speed">Max hastighed</string>
+    <string name="average_speed">Gennemsnitshastighed</string>
     </resources>
