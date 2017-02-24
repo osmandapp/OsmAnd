@@ -354,7 +354,7 @@ public class TrackSegmentFragment extends SelectedGPXFragment {
 									OrderedLineDataSet elevationDataSet = GpxUiHelper.createGPXElevationDataSet(app, chart, analysis, false, true);
 									dataSets.add(elevationDataSet);
 									if (analysis.elevationData.size() > 1) {
-										OrderedLineDataSet slopeDataSet = GpxUiHelper.createGPXSlopeDataSet(app, chart, analysis, true, false);
+										OrderedLineDataSet slopeDataSet = GpxUiHelper.createGPXSlopeDataSet(app, chart, analysis, true, true);
 										dataSets.add(slopeDataSet);
 									}
 									LineData data = new LineData(dataSets);

@@ -1268,12 +1268,12 @@ public class GpxUiHelper {
 					nextXRaw += e.distance;
 					nextYRaw = (float) e.elevation;
 					nextX += (float) e.distance / divX;
-					if (nextXRaw - prevXRaw > 10) {
-						nextY = (nextYRaw - prevYRaw) / (nextXRaw - prevXRaw) * 100f;
+					nextY = (nextYRaw - prevYRaw) / (nextXRaw - prevXRaw) * 100f;
+					if (nextXRaw - prevXRaw > 50 && Math.abs(nextY) < 120) {
 						values.add(new Entry(nextX, nextY));
-						prevXRaw = nextXRaw;
-						prevYRaw = nextYRaw;
 					}
+					prevXRaw = nextXRaw;
+					prevYRaw = nextYRaw;
 				}
 			}
 		}
@@ -1304,12 +1304,16 @@ public class GpxUiHelper {
 		dataSet.setDrawHorizontalHighlightIndicator(false);
 		dataSet.setHighLightColor(light ? mChart.getResources().getColor(R.color.secondary_text_light) : mChart.getResources().getColor(R.color.secondary_text_dark));
 
+		dataSet.setMode(LineDataSet.Mode.HORIZONTAL_BEZIER);
+
+		/*
 		dataSet.setFillFormatter(new IFillFormatter() {
 			@Override
 			public float getFillLinePosition(ILineDataSet dataSet, LineDataProvider dataProvider) {
 				return dataProvider.getYChartMin();
 			}
 		});
+		*/
 		if (useRightAxis) {
 			dataSet.setAxisDependency(YAxis.AxisDependency.RIGHT);
 		}

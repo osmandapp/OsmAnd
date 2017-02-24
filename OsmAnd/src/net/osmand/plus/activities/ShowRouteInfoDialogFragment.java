@@ -26,6 +26,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
 import net.osmand.Location;
 import net.osmand.data.PointDescription;
@@ -51,6 +53,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import static net.osmand.binary.RouteDataObject.HEIGHT_UNDEFINED;
@@ -222,7 +225,15 @@ public class ShowRouteInfoDialogFragment extends DialogFragment {
 		});
 
 		GPXTrackAnalysis analysis = gpx.getAnalysis(0);
-		GpxUiHelper.setGPXElevationChartData(app, mChart, analysis, false, true);
+		List<ILineDataSet> dataSets = new ArrayList<>();
+		GpxUiHelper.OrderedLineDataSet elevationDataSet = GpxUiHelper.createGPXElevationDataSet(app, mChart, analysis, false, true);
+		dataSets.add(elevationDataSet);
+		if (analysis.elevationData.size() > 1) {
+			GpxUiHelper.OrderedLineDataSet slopeDataSet = GpxUiHelper.createGPXSlopeDataSet(app, mChart, analysis, true, true);
+			dataSets.add(slopeDataSet);
+		}
+		LineData data = new LineData(dataSets);
+		mChart.setData(data);
 
 		((TextView) headerView.findViewById(R.id.average_text))
 				.setText(OsmAndFormatter.getFormattedAlt(analysis.avgElevation, app));
