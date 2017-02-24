@@ -2622,7 +2622,7 @@ Representa el área: %1$s x %2$s</string>
     <string name="altitude_descent">Descenso</string>
     <string name="altitude_ascent">Ascenso</string>
     <string name="altitude_range">Rango de altitud</string>
-    <string name="average_altitude">Promedio</string>
+    <string name="average_altitude">Altitud media</string>
     <string name="shared_string_time">Tiempo</string>
     <string name="total_distance">Distancia total</string>
     <string name="routing_attr_height_relief_smoothness_factor_name">Factor de suavidad del relieve</string>
@@ -2642,4 +2642,6 @@ Representa el área: %1$s x %2$s</string>
     <string name="shared_string_start_time">Hora de inicio</string>
     <string name="shared_string_end_time">Hora de fin</string>
     <string name="shared_string_color">Color</string>
+    <string name="max_speed">Velocidad máxima</string>
+    <string name="average_speed">Velocidad media</string>
     </resources>
