@@ -2842,4 +2842,40 @@
 	<string name="poi_crossing_supervision_camera">Encreuament vigilat: càmera</string>
 
 	<string name="poi_dispensing_yes">Sí</string>
+	<string name="poi_cuisine_teriyaki">Teriyaki</string>
+	<string name="poi_cuisine_shawarma">Xauarma</string>
+
+	<string name="poi_cuisine_regional">Regional</string>
+	<string name="poi_cuisine_italian">Italiana</string>
+	<string name="poi_cuisine_chinese">Xinesa</string>
+	<string name="poi_cuisine_mexican">Mexicana</string>
+	<string name="poi_cuisine_japanese">Japonesa</string>
+	<string name="poi_cuisine_german">Alemanya</string>
+	<string name="poi_cuisine_indian">Índia</string>
+	<string name="poi_cuisine_american">Americana</string>
+	<string name="poi_cuisine_asian">Asiàtica</string>
+	<string name="poi_cuisine_french">Francesa</string>
+	<string name="poi_cuisine_greek">Grega</string>
+	<string name="poi_cuisine_thai">Tailandesa</string>
+	<string name="poi_cuisine_international">Internacional</string>
+	<string name="poi_cuisine_turkish">Turca</string>
+	<string name="poi_cuisine_spanish">Espanyola</string>
+	<string name="poi_cuisine_vietnamese">Vietnamita</string>
+	<string name="poi_cuisine_korean">Coreana</string>
+	<string name="poi_cuisine_mediterranean">Mediterrània</string>
+	<string name="poi_cuisine_bavarian">Bavaresa</string>
+	<string name="poi_cuisine_lebanese">Libanesa</string>
+	<string name="poi_cuisine_russian">Russa</string>
+	<string name="poi_cuisine_filipino">Filipina</string>
+	<string name="poi_cuisine_portuguese">Portuguesa</string>
+	<string name="poi_cuisine_georgian">Georgiana</string>
+	<string name="poi_cuisine_polish">Polonesa</string>
+	<string name="poi_cuisine_brazilian">Brasilera</string>
+	<string name="poi_cuisine_arab">Àrab</string>
+	<string name="poi_cuisine_danish">Danesa</string>
+	<string name="poi_cuisine_indonesian">Indonèsia</string>
+	<string name="poi_cuisine_african">Africana</string>
+	<string name="poi_cuisine_caribbean">Caribenya</string>
+	<string name="poi_cuisine_middle_eastern">D\'orient mitjà</string>
+	<string name="poi_cuisine_tex_mex">Tex-mex</string>
 	</resources>
