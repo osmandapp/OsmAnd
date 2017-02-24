@@ -350,7 +350,15 @@ public class TrackSegmentFragment extends SelectedGPXFragment {
 							if (analysis != null) {
 								if (analysis.elevationData != null) {
 									GpxUiHelper.setupGPXChart(app, chart, 4);
-									GpxUiHelper.setGPXElevationChartData(app, chart, analysis, false, true);
+									List<ILineDataSet> dataSets = new ArrayList<>();
+									OrderedLineDataSet elevationDataSet = GpxUiHelper.createGPXElevationDataSet(app, chart, analysis, false, true);
+									dataSets.add(elevationDataSet);
+									if (analysis.elevationData.size() > 1) {
+										OrderedLineDataSet slopeDataSet = GpxUiHelper.createGPXSlopeDataSet(app, chart, analysis, true, false);
+										dataSets.add(slopeDataSet);
+									}
+									LineData data = new LineData(dataSets);
+									chart.setData(data);
 									chart.setVisibility(View.VISIBLE);
 								} else {
 									chart.setVisibility(View.GONE);

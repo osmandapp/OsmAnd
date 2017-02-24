@@ -57,6 +57,7 @@ import net.osmand.IndexConstants;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.GPXUtilities;
+import net.osmand.plus.GPXUtilities.Elevation;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.plus.GPXUtilities.TrkSegment;
@@ -1014,10 +1015,10 @@ public class GpxUiHelper {
 		});
 
 		ArrayList<Entry> values = new ArrayList<>();
-		List<GPXUtilities.Elevation> elevationData = analysis.elevationData;
+		List<Elevation> elevationData = analysis.elevationData;
 		float nextX = 0;
 		float nextY;
-		for (GPXUtilities.Elevation e : elevationData) {
+		for (Elevation e : elevationData) {
 			if (e.distance > 0) {
 				nextX += (float) e.distance / divX;
 				nextY = (float) (e.elevation * convEle);
@@ -1198,9 +1199,133 @@ public class GpxUiHelper {
 		mChart.setData(data);
 	}
 
+	public static OrderedLineDataSet createGPXSlopeDataSet(OsmandApplication ctx, LineChart mChart, GPXTrackAnalysis analysis, boolean useRightAxis, boolean drawFilled) {
+		OsmandSettings settings = ctx.getSettings();
+		boolean light = settings.isLightContent();
+		final float meters = analysis.totalDistance;
+
+		float[] koef = new float[] { 1f };
+		StringBuilder fmt = new StringBuilder();
+		StringBuilder unitX = new StringBuilder();
+
+		float granularity = getXAxisParams(ctx, meters, koef, fmt, unitX);
+		float divX = koef[0];
+		final String formatX = fmt.toString();
+		final String mainUnitX = unitX.toString();
+
+		XAxis xAxis = mChart.getXAxis();
+		xAxis.setGranularity(granularity);
+		xAxis.setValueFormatter(new IAxisValueFormatter() {
+
+			@Override
+			public String getFormattedValue(float value, AxisBase axis) {
+				if (!Algorithms.isEmpty(formatX)) {
+					return MessageFormat.format(formatX + mainUnitX, value);
+				} else {
+					return (int)value + " " + mainUnitX;
+				}
+			}
+		});
+
+		final String mainUnitY = "%";
+
+		YAxis yAxis;
+		if (useRightAxis) {
+			yAxis = mChart.getAxisRight();
+			yAxis.setEnabled(true);
+		} else {
+			yAxis = mChart.getAxisLeft();
+		}
+		yAxis.setGranularity(1f);
+		yAxis.setValueFormatter(new IAxisValueFormatter() {
+
+			@Override
+			public String getFormattedValue(float value, AxisBase axis) {
+				return (int)value + " " + mainUnitY;
+			}
+		});
+
+		ArrayList<Entry> values = new ArrayList<>();
+		List<Elevation> elevationData = analysis.elevationData;
+		float nextX = 0;
+		float nextY;
+		float nextXRaw = 0;
+		float nextYRaw;
+		float prevXRaw;
+		float prevYRaw;
+		if (elevationData.size() > 1) {
+			Elevation e0 = elevationData.get(0);
+			nextXRaw = e0.distance > 0 ? (float) e0.distance : 0f;
+			nextYRaw = 0;
+			prevXRaw = nextXRaw;
+			prevYRaw = nextYRaw;
+			nextX = nextXRaw / divX;
+			nextY = 0;
+			values.add(new Entry(nextX, nextY));
+			for (int i = 1; i < elevationData.size(); i++) {
+				Elevation e = elevationData.get(i);
+				if (e.distance > 0) {
+					nextXRaw += e.distance;
+					nextYRaw = (float) e.elevation;
+					nextX += (float) e.distance / divX;
+					nextY = (nextYRaw - prevYRaw) / (nextXRaw - prevXRaw) * 100f;
+					values.add(new Entry(nextX, nextY));
+					prevXRaw = nextXRaw;
+					prevYRaw = nextYRaw;
+				}
+			}
+		}
+
+		OrderedLineDataSet dataSet = new OrderedLineDataSet(values, "", GPXDataSetType.SLOPE);
+		dataSet.units = mainUnitY;
+
+		dataSet.setColor(ContextCompat.getColor(mChart.getContext(), R.color.gpx_chart_green));
+		dataSet.setLineWidth(1f);
+		if (drawFilled) {
+			dataSet.setFillAlpha(128);
+			dataSet.setFillColor(ContextCompat.getColor(mChart.getContext(), R.color.gpx_chart_green));
+			dataSet.setDrawFilled(true);
+		} else {
+			dataSet.setDrawFilled(false);
+		}
+
+		dataSet.setDrawValues(false);
+		dataSet.setValueTextSize(9f);
+		dataSet.setFormLineWidth(1f);
+		dataSet.setFormSize(15.f);
+
+		dataSet.setDrawCircles(false);
+		dataSet.setDrawCircleHole(false);
+
+		dataSet.setHighlightEnabled(true);
+		dataSet.setDrawVerticalHighlightIndicator(true);
+		dataSet.setDrawHorizontalHighlightIndicator(false);
+		dataSet.setHighLightColor(light ? mChart.getResources().getColor(R.color.secondary_text_light) : mChart.getResources().getColor(R.color.secondary_text_dark));
+
+		dataSet.setFillFormatter(new IFillFormatter() {
+			@Override
+			public float getFillLinePosition(ILineDataSet dataSet, LineDataProvider dataProvider) {
+				return dataProvider.getYChartMin();
+			}
+		});
+		if (useRightAxis) {
+			dataSet.setAxisDependency(YAxis.AxisDependency.RIGHT);
+		}
+		return dataSet;
+	}
+
+	public static void setGPXSlopeChartData(OsmandApplication ctx, LineChart mChart, GPXTrackAnalysis analysis, boolean useRightAxis, boolean drawFilled) {
+		LineDataSet dataSet = createGPXSlopeDataSet(ctx, mChart, analysis, useRightAxis, drawFilled);
+		ArrayList<ILineDataSet> dataSets = new ArrayList<>();
+		dataSets.add(dataSet);
+		LineData data = new LineData(dataSets);
+		mChart.setData(data);
+	}
+
 	public enum GPXDataSetType {
 		ALTITUDE,
-		SPEED
+		SPEED,
+		SLOPE
 	}
 
 	public static class OrderedLineDataSet extends LineDataSet {
@@ -1239,16 +1364,18 @@ public class GpxUiHelper {
 			ChartData chartData = getChartView().getData();
 			if (chartData.getDataSetCount() == 1) {
 				OrderedLineDataSet dataSet = (OrderedLineDataSet) chartData.getDataSetByIndex(0);
+				String value = Integer.toString((int) e.getY()) + " ";
+				String units = dataSet.units;
 				switch (dataSet.getDataSetType()) {
 					case ALTITUDE:
-						((TextView) textAltView.findViewById(R.id.text_alt_value)).setText(Integer.toString((int) e.getY()) + " ");
-						((TextView) textAltView.findViewById(R.id.text_alt_units)).setText(dataSet.units);
+						((TextView) textAltView.findViewById(R.id.text_alt_value)).setText(value);
+						((TextView) textAltView.findViewById(R.id.text_alt_units)).setText(units);
 						textAltView.setVisibility(VISIBLE);
 						textSpdView.setVisibility(GONE);
 						break;
 					case SPEED:
-						((TextView) textSpdView.findViewById(R.id.text_spd_value)).setText(Integer.toString((int) e.getY()) + " ");
-						((TextView) textSpdView.findViewById(R.id.text_spd_units)).setText(dataSet.units);
+						((TextView) textSpdView.findViewById(R.id.text_spd_value)).setText(value);
+						((TextView) textSpdView.findViewById(R.id.text_spd_units)).setText(units);
 						textAltView.setVisibility(GONE);
 						textSpdView.setVisibility(VISIBLE);
 						break;
@@ -1256,16 +1383,40 @@ public class GpxUiHelper {
 			} else if (chartData.getDataSetCount() == 2) {
 				OrderedLineDataSet dataSet1 = (OrderedLineDataSet) chartData.getDataSetByIndex(0);
 				OrderedLineDataSet dataSet2 = (OrderedLineDataSet) chartData.getDataSetByIndex(1);
-				int altSetIndex = dataSet1.getDataSetType() == GPXDataSetType.ALTITUDE ? 0 : 1;
-				int spdSetIndex = dataSet2.getDataSetType() == GPXDataSetType.SPEED ? 1 : 0;
-				Entry eAlt = chartData.getEntryForHighlight(new Highlight(e.getX(), Float.NaN, altSetIndex));
-				Entry eSpd = chartData.getEntryForHighlight(new Highlight(e.getX(), Float.NaN, spdSetIndex));
-				((TextView) textAltView.findViewById(R.id.text_alt_value)).setText(Integer.toString((int) eAlt.getY()) + " ");
-				((TextView) textAltView.findViewById(R.id.text_alt_units)).setText((altSetIndex == 0 ? dataSet1.units : dataSet2.units));
-				((TextView) textSpdView.findViewById(R.id.text_spd_value)).setText(Integer.toString((int) eSpd.getY()) + " ");
-				((TextView) textSpdView.findViewById(R.id.text_spd_units)).setText(spdSetIndex == 0 ? dataSet1.units : dataSet2.units);
-				textAltView.setVisibility(VISIBLE);
-				textSpdView.setVisibility(VISIBLE);
+				int altSetIndex = -1;
+				int spdSetIndex = -1;
+				switch (dataSet1.getDataSetType()) {
+					case ALTITUDE:
+						altSetIndex = 0;
+						break;
+					case SPEED:
+						spdSetIndex = 0;
+						break;
+				}
+				switch (dataSet2.getDataSetType()) {
+					case ALTITUDE:
+						altSetIndex = 1;
+						break;
+					case SPEED:
+						spdSetIndex = 1;
+						break;
+				}
+				if (altSetIndex != -1) {
+					Entry eAlt = chartData.getEntryForHighlight(new Highlight(e.getX(), Float.NaN, altSetIndex));
+					((TextView) textAltView.findViewById(R.id.text_alt_value)).setText(Integer.toString((int) eAlt.getY()) + " ");
+					((TextView) textAltView.findViewById(R.id.text_alt_units)).setText((altSetIndex == 0 ? dataSet1.units : dataSet2.units));
+					textAltView.setVisibility(VISIBLE);
+				} else {
+					textAltView.setVisibility(GONE);
+				}
+				if (spdSetIndex != -1) {
+					Entry eSpd = chartData.getEntryForHighlight(new Highlight(e.getX(), Float.NaN, spdSetIndex));
+					((TextView) textSpdView.findViewById(R.id.text_spd_value)).setText(Integer.toString((int) eSpd.getY()) + " ");
+					((TextView) textSpdView.findViewById(R.id.text_spd_units)).setText(spdSetIndex == 0 ? dataSet1.units : dataSet2.units);
+					textSpdView.setVisibility(VISIBLE);
+				} else {
+					textSpdView.setVisibility(GONE);
+				}
 			} else {
 				textAltView.setVisibility(GONE);
 				textSpdView.setVisibility(GONE);
