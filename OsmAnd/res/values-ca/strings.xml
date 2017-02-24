@@ -2661,7 +2661,7 @@ i encara més…
     <string name="altitude_descent">Descens</string>
     <string name="altitude_ascent">Ascens</string>
     <string name="altitude_range">Interval d\'altitud</string>
-    <string name="average_altitude">Mitjana</string>
+    <string name="average_altitude">Altitud mitjana</string>
     <string name="shared_string_time">Durada</string>
     <string name="total_distance">Distància total</string>
     <string name="routing_attr_driving_style_name">Estil de conducció</string>
@@ -2676,4 +2676,6 @@ i encara més…
     <string name="shared_string_start_time">Hora inicial</string>
     <string name="shared_string_end_time">Hora final</string>
     <string name="shared_string_color">Color</string>
+    <string name="max_speed">Velocitat màxima</string>
+    <string name="average_speed">Velocitat mitjana</string>
     </resources>
