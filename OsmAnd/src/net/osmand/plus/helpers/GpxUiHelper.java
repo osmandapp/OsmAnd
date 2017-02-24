@@ -1247,9 +1247,9 @@ public class GpxUiHelper {
 
 		ArrayList<Entry> values = new ArrayList<>();
 		List<Elevation> elevationData = analysis.elevationData;
-		float nextX = 0;
+		float nextX;
 		float nextY;
-		float nextXRaw = 0;
+		float nextXRaw;
 		float nextYRaw;
 		float prevXRaw;
 		float prevYRaw;
@@ -1268,10 +1268,12 @@ public class GpxUiHelper {
 					nextXRaw += e.distance;
 					nextYRaw = (float) e.elevation;
 					nextX += (float) e.distance / divX;
-					nextY = (nextYRaw - prevYRaw) / (nextXRaw - prevXRaw) * 100f;
-					values.add(new Entry(nextX, nextY));
-					prevXRaw = nextXRaw;
-					prevYRaw = nextYRaw;
+					if (nextXRaw - prevXRaw > 10) {
+						nextY = (nextYRaw - prevYRaw) / (nextXRaw - prevXRaw) * 100f;
+						values.add(new Entry(nextX, nextY));
+						prevXRaw = nextXRaw;
+						prevYRaw = nextYRaw;
+					}
 				}
 			}
 		}
