@@ -2886,4 +2886,5 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="shared_string_time_moving">Tid i bevægelse</string>
     <string name="max_speed">Max hastighed</string>
     <string name="average_speed">Gennemsnitshastighed</string>
+    <string name="gpx_track">Spor</string>
     </resources>
