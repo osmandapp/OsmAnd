@@ -72,6 +72,7 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
@@ -835,7 +836,12 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		}
 
 		public void sort() {
-			Collections.sort(category);
+			Collections.sort(category, new Comparator<String>() {
+				@Override
+				public int compare(String lhs, String rhs) {
+					return lhs.toLowerCase().compareTo(rhs.toLowerCase());
+				}
+			});
 		}
 
 		@Override
