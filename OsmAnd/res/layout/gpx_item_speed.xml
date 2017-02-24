@@ -62,7 +62,7 @@
                         android:layout_height="wrap_content"
                         android:background="@null"
                         android:layout_marginTop="3dp"
-                        android:text="@string/average_altitude"
+                        android:text="@string/average_speed"
                         android:textColor="?android:attr/textColorSecondary"
                         android:textSize="@dimen/default_sub_text_size"/>
 
@@ -106,7 +106,7 @@
                         android:layout_height="wrap_content"
                         android:background="@null"
                         android:layout_marginTop="3dp"
-                        android:text="@string/shared_string_max"
+                        android:text="@string/max_speed"
                         android:textColor="?android:attr/textColorSecondary"
                         android:textSize="@dimen/default_sub_text_size"/>
 

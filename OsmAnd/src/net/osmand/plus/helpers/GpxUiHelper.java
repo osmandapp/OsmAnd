@@ -1,13 +1,14 @@
 package net.osmand.plus.helpers;
 
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.Application;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
@@ -36,17 +37,19 @@ import android.widget.Toast;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.components.MarkerView;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
+import com.github.mikephil.charting.data.ChartData;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
-import com.github.mikephil.charting.formatter.DefaultFillFormatter;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.formatter.IFillFormatter;
+import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.interfaces.dataprovider.LineDataProvider;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
-import com.github.mikephil.charting.utils.Utils;
+import com.github.mikephil.charting.utils.MPPointF;
 
 import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
@@ -63,7 +66,6 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
-import net.osmand.plus.Version;
 import net.osmand.plus.activities.ActivityResultListener;
 import net.osmand.plus.activities.ActivityResultListener.OnActivityResultListener;
 import net.osmand.plus.activities.MapActivity;
@@ -71,15 +73,11 @@ import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.dialogs.ConfigureMapMenu;
 import net.osmand.plus.dialogs.ConfigureMapMenu.AppearanceListItem;
 import net.osmand.plus.dialogs.ConfigureMapMenu.GpxAppearanceAdapter;
-import net.osmand.plus.myplaces.SelectedGPXFragment;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.text.DateFormat;
 import java.text.MessageFormat;
 import java.util.ArrayList;
@@ -97,7 +95,6 @@ import static net.osmand.plus.OsmAndFormatter.METERS_IN_ONE_NAUTICALMILE;
 import static net.osmand.plus.OsmAndFormatter.YARDS_IN_ONE_METER;
 import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR;
 import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR;
-import static net.osmand.plus.dialogs.ConfigureMapMenu.refreshMapComplete;
 import static net.osmand.plus.download.DownloadActivity.formatMb;
 
 public class GpxUiHelper {
@@ -867,8 +864,7 @@ public class GpxUiHelper {
 
 		// create a custom MarkerView (extend MarkerView) and specify the layout
 		// to use for it
-		SelectedGPXFragment.MyMarkerView mv =
-				new SelectedGPXFragment.MyMarkerView(mChart.getContext(), R.layout.chart_marker_view);
+		GPXMarkerView mv = new GPXMarkerView(mChart.getContext());
 		mv.setChartView(mChart); // For bounds control
 		mChart.setMarker(mv); // Set the marker to the chart
 		mChart.setDrawMarkers(true);
@@ -1005,10 +1001,8 @@ public class GpxUiHelper {
 		if (useRightAxis) {
 			yAxis = mChart.getAxisRight();
 			yAxis.setEnabled(true);
-			((SelectedGPXFragment.MyMarkerView)mChart.getMarker()).setUnitsRight(mainUnitY);
 		} else {
 			yAxis = mChart.getAxisLeft();
-			((SelectedGPXFragment.MyMarkerView)mChart.getMarker()).setUnitsLeft(mainUnitY);
 		}
 		yAxis.setGranularity(1f);
 		yAxis.setValueFormatter(new IAxisValueFormatter() {
@@ -1031,17 +1025,20 @@ public class GpxUiHelper {
 			}
 		}
 
-		OrderedLineDataSet dataSet = new OrderedLineDataSet(values, "");
+		OrderedLineDataSet dataSet = new OrderedLineDataSet(values, "", GPXDataSetType.ALTITUDE);
 		dataSet.priority = (float) (analysis.avgElevation - analysis.minElevation) * convEle;
+		dataSet.units = mainUnitY;
+
+		dataSet.setColor(ContextCompat.getColor(mChart.getContext(), R.color.gpx_chart_blue));
+		dataSet.setLineWidth(1f);
 		if (drawFilled) {
-			dataSet.setColor(Color.BLACK);
-			dataSet.setLineWidth(0f);
+			dataSet.setFillAlpha(128);
+			dataSet.setFillColor(ContextCompat.getColor(mChart.getContext(), R.color.gpx_chart_blue));
 			dataSet.setDrawFilled(true);
 		} else {
-			dataSet.setColor(ContextCompat.getColor(mChart.getContext(), R.color.map_widget_blue));
-			dataSet.setLineWidth(1f);
 			dataSet.setDrawFilled(false);
 		}
+
 		dataSet.setDrawValues(false);
 		dataSet.setValueTextSize(9f);
 		dataSet.setFormLineWidth(1f);
@@ -1055,13 +1052,6 @@ public class GpxUiHelper {
 		dataSet.setDrawHorizontalHighlightIndicator(false);
 		dataSet.setHighLightColor(light ? mChart.getResources().getColor(R.color.secondary_text_light) : mChart.getResources().getColor(R.color.secondary_text_dark));
 
-		if (Utils.getSDKInt() >= 18) {
-			// fill drawable only supported on api level 18 and above
-			Drawable drawable = ContextCompat.getDrawable(mChart.getContext(), R.drawable.line_chart_fade_blue);
-			dataSet.setFillDrawable(drawable);
-		} else {
-			dataSet.setFillColor(ContextCompat.getColor(mChart.getContext(), R.color.transport_route_line));
-		}
 		dataSet.setFillFormatter(new IFillFormatter() {
 			@Override
 			public float getFillLinePosition(ILineDataSet dataSet, LineDataProvider dataProvider) {
@@ -1132,10 +1122,8 @@ public class GpxUiHelper {
 		if (useRightAxis) {
 			yAxis = mChart.getAxisRight();
 			yAxis.setEnabled(true);
-			((SelectedGPXFragment.MyMarkerView)mChart.getMarker()).setUnitsRight(mainUnitY);
 		} else {
 			yAxis = mChart.getAxisLeft();
-			((SelectedGPXFragment.MyMarkerView)mChart.getMarker()).setUnitsLeft(mainUnitY);
 		}
 		yAxis.setAxisMinimum(0f);
 		yAxis.setValueFormatter(new IAxisValueFormatter() {
@@ -1165,21 +1153,22 @@ public class GpxUiHelper {
 			}
 		}
 
-		OrderedLineDataSet dataSet = new OrderedLineDataSet(values, "");
+		OrderedLineDataSet dataSet = new OrderedLineDataSet(values, "", GPXDataSetType.SPEED);
 
 		if (Float.isNaN(divSpeed)) {
 			dataSet.priority = analysis.avgSpeed * mulSpeed;
 		} else {
 			dataSet.priority = divSpeed / analysis.avgSpeed;
 		}
+		dataSet.units = mainUnitY;
 
+		dataSet.setColor(ContextCompat.getColor(mChart.getContext(), R.color.gpx_chart_orange));
+		dataSet.setLineWidth(1f);
 		if (drawFilled) {
-			dataSet.setColor(Color.BLACK);
-			dataSet.setLineWidth(0f);
+			dataSet.setFillAlpha(128);
+			dataSet.setFillColor(ContextCompat.getColor(mChart.getContext(), R.color.gpx_chart_orange));
 			dataSet.setDrawFilled(true);
 		} else {
-			dataSet.setColor(ContextCompat.getColor(mChart.getContext(), R.color.transport_end));
-			dataSet.setLineWidth(1f);
 			dataSet.setDrawFilled(false);
 		}
 		dataSet.setDrawValues(false);
@@ -1195,13 +1184,6 @@ public class GpxUiHelper {
 		dataSet.setDrawHorizontalHighlightIndicator(false);
 		dataSet.setHighLightColor(light ? mChart.getResources().getColor(R.color.secondary_text_light) : mChart.getResources().getColor(R.color.secondary_text_dark));
 
-		if (Utils.getSDKInt() >= 18) {
-			// fill drawable only supported on api level 18 and above
-			Drawable drawable = ContextCompat.getDrawable(mChart.getContext(), R.drawable.line_chart_fade_red);
-			dataSet.setFillDrawable(drawable);
-		} else {
-			dataSet.setFillColor(ContextCompat.getColor(mChart.getContext(), R.color.transport_end));
-		}
 		if (useRightAxis) {
 			dataSet.setAxisDependency(YAxis.AxisDependency.RIGHT);
 		}
@@ -1216,12 +1198,95 @@ public class GpxUiHelper {
 		mChart.setData(data);
 	}
 
+	public enum GPXDataSetType {
+		ALTITUDE,
+		SPEED
+	}
+
 	public static class OrderedLineDataSet extends LineDataSet {
 
-		public float priority;
+		private GPXDataSetType dataSetType;
 
-		public OrderedLineDataSet(List<Entry> yVals, String label) {
+		public float priority;
+		public String units;
+
+		public OrderedLineDataSet(List<Entry> yVals, String label, GPXDataSetType dataSetType) {
 			super(yVals, label);
+			this.dataSetType = dataSetType;
+		}
+
+		public GPXDataSetType getDataSetType() {
+			return dataSetType;
+		}
+	}
+
+	@SuppressLint("ViewConstructor")
+	private static class GPXMarkerView extends MarkerView {
+
+		private View textAltView;
+		private View textSpdView;
+
+		public GPXMarkerView(Context context) {
+			super(context, R.layout.chart_marker_view);
+			textAltView = findViewById(R.id.text_alt_container);
+			textSpdView = findViewById(R.id.text_spd_container);
+		}
+
+		// callbacks everytime the MarkerView is redrawn, can be used to update the
+		// content (user-interface)
+		@Override
+		public void refreshContent(Entry e, Highlight highlight) {
+			ChartData chartData = getChartView().getData();
+			if (chartData.getDataSetCount() == 1) {
+				OrderedLineDataSet dataSet = (OrderedLineDataSet) chartData.getDataSetByIndex(0);
+				switch (dataSet.getDataSetType()) {
+					case ALTITUDE:
+						((TextView) textAltView.findViewById(R.id.text_alt_value)).setText(Integer.toString((int) e.getY()) + " ");
+						((TextView) textAltView.findViewById(R.id.text_alt_units)).setText(dataSet.units);
+						textAltView.setVisibility(VISIBLE);
+						textSpdView.setVisibility(GONE);
+						break;
+					case SPEED:
+						((TextView) textSpdView.findViewById(R.id.text_spd_value)).setText(Integer.toString((int) e.getY()) + " ");
+						((TextView) textSpdView.findViewById(R.id.text_spd_units)).setText(dataSet.units);
+						textAltView.setVisibility(GONE);
+						textSpdView.setVisibility(VISIBLE);
+						break;
+				}
+			} else if (chartData.getDataSetCount() == 2) {
+				OrderedLineDataSet dataSet1 = (OrderedLineDataSet) chartData.getDataSetByIndex(0);
+				OrderedLineDataSet dataSet2 = (OrderedLineDataSet) chartData.getDataSetByIndex(1);
+				int altSetIndex = dataSet1.getDataSetType() == GPXDataSetType.ALTITUDE ? 0 : 1;
+				int spdSetIndex = dataSet2.getDataSetType() == GPXDataSetType.SPEED ? 1 : 0;
+				Entry eAlt = chartData.getEntryForHighlight(new Highlight(e.getX(), Float.NaN, altSetIndex));
+				Entry eSpd = chartData.getEntryForHighlight(new Highlight(e.getX(), Float.NaN, spdSetIndex));
+				((TextView) textAltView.findViewById(R.id.text_alt_value)).setText(Integer.toString((int) eAlt.getY()) + " ");
+				((TextView) textAltView.findViewById(R.id.text_alt_units)).setText((altSetIndex == 0 ? dataSet1.units : dataSet2.units));
+				((TextView) textSpdView.findViewById(R.id.text_spd_value)).setText(Integer.toString((int) eSpd.getY()) + " ");
+				((TextView) textSpdView.findViewById(R.id.text_spd_units)).setText(spdSetIndex == 0 ? dataSet1.units : dataSet2.units);
+				textAltView.setVisibility(VISIBLE);
+				textSpdView.setVisibility(VISIBLE);
+			} else {
+				textAltView.setVisibility(GONE);
+				textSpdView.setVisibility(GONE);
+			}
+			super.refreshContent(e, highlight);
+		}
+
+		@Override
+		public MPPointF getOffset() {
+			if (getChartView().getData().getDataSetCount() > 1) {
+				return new MPPointF(-(textAltView.getWidth() / 2), 0);
+			} else {
+				return new MPPointF(-(getWidth() / 2), 0);
+			}
+		}
+
+		@Override
+		public MPPointF getOffsetForDrawingAtPoint(float posX, float posY) {
+			MPPointF offset = getOffset();
+			offset.y = -posY;
+			return offset;
 		}
 	}
 

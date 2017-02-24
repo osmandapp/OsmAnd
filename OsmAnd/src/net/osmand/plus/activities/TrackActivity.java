@@ -8,6 +8,7 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.osmand.AndroidUtils;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GpxSelectionHelper;
@@ -67,7 +68,7 @@ public class TrackActivity extends TabActivity {
 		getSupportActionBar().setElevation(0);
 		setContentView(R.layout.tab_content);
 
-		PagerSlidingTabStrip mSlidingTabLayout = (PagerSlidingTabStrip) findViewById(R.id.sliding_tabs);
+		final PagerSlidingTabStrip mSlidingTabLayout = (PagerSlidingTabStrip) findViewById(R.id.sliding_tabs);
 		mSlidingTabLayout.setShouldExpand(true);
 
 		mViewPager = (ViewPager) findViewById(R.id.pager);
@@ -102,6 +103,9 @@ public class TrackActivity extends TabActivity {
 				if (isHavingWayPoints() || isHavingRoutePoints()) {
 					((OsmandFragmentPagerAdapter) mViewPager.getAdapter()).addTab(
 							getTabIndicator(R.string.points, TrackPointFragment.class));
+				} else {
+					mSlidingTabLayout.setVisibility(View.GONE);
+					getSupportActionBar().setElevation(AndroidUtils.dpToPx(getMyApplication(), 4f));
 				}
 			};
 		}.execute((Void)null);

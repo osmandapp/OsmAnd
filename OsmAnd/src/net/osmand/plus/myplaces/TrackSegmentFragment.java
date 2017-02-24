@@ -20,6 +20,7 @@ import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.listener.ChartTouchListener.ChartGesture;
 import com.github.mikephil.charting.listener.OnChartGestureListener;
@@ -233,6 +234,12 @@ public class TrackSegmentFragment extends SelectedGPXFragment {
 						@Override
 						public void onChartGestureEnd(MotionEvent me, ChartGesture lastPerformedGesture) {
 							gpxItem.chartMatrix = new Matrix(chart.getViewPortHandler().getMatrixTouch());
+							Highlight[] highlights = chart.getHighlighted();
+							if (highlights != null && highlights.length > 0) {
+								gpxItem.chartHighlightPos = highlights[0].getX();
+							} else {
+								gpxItem.chartHighlightPos = -1;
+							}
 							for (int i = 0; i < getCount(); i++) {
 								View v = getViewAtPosition(i);
 								if (v != finalView) {
@@ -508,6 +515,7 @@ public class TrackSegmentFragment extends SelectedGPXFragment {
 			if (gpxItem.chartMatrix != null) {
 				chart.getViewPortHandler().refresh(new Matrix(gpxItem.chartMatrix), chart, true);
 			}
+			chart.highlightValue(gpxItem.chartHighlightPos, 0);
 		}
 	}
 }
