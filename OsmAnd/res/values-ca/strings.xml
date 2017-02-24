@@ -2678,4 +2678,5 @@ i encara més…
     <string name="shared_string_color">Color</string>
     <string name="max_speed">Velocitat màxima</string>
     <string name="average_speed">Velocitat mitjana</string>
+    <string name="gpx_track">Pista</string>
     </resources>
