@@ -2485,7 +2485,7 @@ Vänligen tillhandahåll hel kod</string>
     <string name="route_altitude">Rutthöjd</string>
     <string name="altitude_descent">Sänkning</string>
     <string name="altitude_ascent">Stigning</string>
-    <string name="average_altitude">Genomsnitt</string>
+    <string name="average_altitude">Genomsnittshöjd</string>
     <string name="shared_string_time">Tid</string>
     <string name="total_distance">Total sträcka</string>
     <string name="routing_attr_height_relief_smoothness_factor_description">Mer slätter eller mer kullar</string>
@@ -2495,4 +2495,6 @@ Vänligen tillhandahåll hel kod</string>
     <string name="shared_string_end_time">Sluttid</string>
     <string name="shared_string_color">Färg</string>
     <string name="select_gpx_folder">Välj GPX-mapp</string>
+    <string name="average_speed">Medelhastighet</string>
+    <string name="shared_string_time_moving">Tid i rörelse</string>
     </resources>
