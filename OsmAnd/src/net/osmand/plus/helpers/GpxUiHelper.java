@@ -1018,10 +1018,17 @@ public class GpxUiHelper {
 		List<Elevation> elevationData = analysis.elevationData;
 		float nextX = 0;
 		float nextY;
+		float prevElev = -80000;
+		float gist = 1.5f;
 		for (Elevation e : elevationData) {
 			if (e.distance > 0) {
 				nextX += (float) e.distance / divX;
 				nextY = (float) (e.elevation * convEle);
+				if (Math.abs(prevElev - e.elevation) < gist) {
+					continue;
+				} else {
+					prevElev = (float) e.elevation;
+				}
 				values.add(new Entry(nextX, nextY));
 			}
 		}
@@ -1253,6 +1260,8 @@ public class GpxUiHelper {
 		float nextYRaw;
 		float prevXRaw;
 		float prevYRaw;
+		float prevElev = -80000;
+		float gist = 1.5f;
 		if (elevationData.size() > 1) {
 			Elevation e0 = elevationData.get(0);
 			nextXRaw = e0.distance > 0 ? (float) e0.distance : 0f;
@@ -1266,6 +1275,12 @@ public class GpxUiHelper {
 				if (e.distance > 0) {
 					nextXRaw += e.distance;
 					nextYRaw = (float) e.elevation;
+					if (Math.abs(prevElev - nextYRaw) < gist) {
+						nextX += (float) e.distance / divX;
+						continue;
+					} else {
+						prevElev = nextYRaw;
+					}
 					if (nextX == 0) {
 						prevXRaw = nextXRaw;
 						prevYRaw = nextYRaw;
