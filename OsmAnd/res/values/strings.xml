@@ -9,6 +9,8 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="max_speed">Max speed</string>
+    <string name="average_speed">Average speed</string>
     <string name="shared_string_time_moving">Time moving</string>
     <string name="shared_string_time_span">Time span</string>
     <string name="shared_string_max">Max</string>
@@ -25,7 +27,7 @@
     <string name="altitude_descent">Descent</string>
     <string name="altitude_ascent">Ascent</string>
     <string name="altitude_range">Altitude range</string>
-    <string name="average_altitude">Average</string>
+    <string name="average_altitude">Average altitude</string>
     <string name="shared_string_time">Time</string>
     <string name="total_distance">Total distance</string>
     <string name="routing_attr_height_relief_smoothness_factor_name">Relief smoothness factor</string>

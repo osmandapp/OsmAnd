@@ -226,4 +226,9 @@
     <!-- Dialog Live Updates Settings -->
     <color name="white_50_transparent">#8FFF</color>
     <color name="white_80_transparent">#CFFF</color>
+
+	<color name="gpx_chart_blue">#2f7af5</color>
+	<color name="gpx_chart_orange">#ff8800</color>
+	<color name="gpx_chart_green">#23b03b</color>
+
 </resources>

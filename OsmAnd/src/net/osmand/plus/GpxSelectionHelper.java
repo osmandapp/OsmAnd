@@ -661,6 +661,8 @@ public class GpxSelectionHelper {
 		public String url;
 		public Bitmap image;
 		public boolean expanded;
+
 		public Matrix chartMatrix;
+		public float chartHighlightPos = -1f;
 	}
 }

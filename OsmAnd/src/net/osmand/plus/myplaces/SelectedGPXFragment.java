@@ -2,7 +2,6 @@ package net.osmand.plus.myplaces;
 
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -25,12 +24,6 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
-
-import com.github.mikephil.charting.components.MarkerView;
-import com.github.mikephil.charting.components.YAxis;
-import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.highlight.Highlight;
-import com.github.mikephil.charting.utils.MPPointF;
 
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
@@ -524,55 +517,6 @@ public class SelectedGPXFragment extends OsmAndListFragment {
 //			adapter.notifyDataSetInvalidated();
 //		}
 */
-	}
-
-	public static class MyMarkerView extends MarkerView {
-
-		private TextView tvContent;
-		private String unitsLeft;
-		private String unitsRight;
-
-		public MyMarkerView(Context context, int layoutResource) {
-			super(context, layoutResource);
-			tvContent = (TextView) findViewById(R.id.tvContent);
-		}
-
-		public String getUnitsLeft() {
-			return unitsLeft;
-		}
-
-		public void setUnitsLeft(String unitsLeft) {
-			this.unitsLeft = unitsLeft;
-		}
-
-		public String getUnitsRight() {
-			return unitsRight;
-		}
-
-		public void setUnitsRight(String unitsRight) {
-			this.unitsRight = unitsRight;
-		}
-
-		// callbacks everytime the MarkerView is redrawn, can be used to update the
-		// content (user-interface)
-		@Override
-		public void refreshContent(Entry e, Highlight highlight) {
-			tvContent.setText(Integer.toString((int)e.getY()) + " "
-					+ (highlight.getAxis() == YAxis.AxisDependency.LEFT ? unitsLeft : unitsRight));
-			super.refreshContent(e, highlight);
-		}
-
-		@Override
-		public MPPointF getOffset() {
-			return new MPPointF(-(getWidth() / 2), 0);
-		}
-
-		@Override
-		public MPPointF getOffsetForDrawingAtPoint(float posX, float posY) {
-			MPPointF offset = getOffset();
-			offset.y = -posY;
-			return offset;
-		}
 	}
 
 	public static class SplitTrackAsyncTask extends AsyncTask<Void, Void, Void> {
