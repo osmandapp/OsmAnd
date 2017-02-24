@@ -2869,4 +2869,5 @@ voor Gebied: %1$s x %2$s</string>
     <string name="routing_attr_height_obstacles_name">Gebruik hoogtegegevens</string>
     <string name="routing_attr_height_obstacles_description">Gebruik hoogtegegevens van SRTM, ASTER und EU-DEM</string>
 
+    <string name="routing_attr_height_relief_smoothness_factor_name">Hoogteverschillen factor</string>
     </resources>
