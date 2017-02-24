@@ -2799,11 +2799,19 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="altitude_descent">Falada</string>
     <string name="altitude_ascent">Artziada</string>
     <string name="altitude_range">Intervallu de artària</string>
-    <string name="average_altitude">Mèdia</string>
+    <string name="average_altitude">Artària mèdia</string>
     <string name="total_distance">Distàntzia totale</string>
     <string name="shared_string_time">Ora</string>
     <string name="shared_string_tracks">Rastas</string>
     <string name="select_gpx_folder">Icherta sa cartella GPX</string>
     <string name="file_can_not_be_moved">Su documentu non podet èssere mòidu.</string>
     <string name="shared_string_move">Move</string>
+    <string name="max_speed">Lestresa màssima</string>
+    <string name="average_speed">Lestresa mesana</string>
+    <string name="shared_string_time_moving">Tempus in movimentu</string>
+    <string name="shared_string_time_span">Intervallu de tempus</string>
+    <string name="shared_string_max">Màssimu</string>
+    <string name="shared_string_start_time">Ora de incumintzu</string>
+    <string name="shared_string_end_time">Ora de fine</string>
+    <string name="shared_string_color">Colore</string>
     </resources>
