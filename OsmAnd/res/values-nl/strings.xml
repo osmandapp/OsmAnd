@@ -2853,7 +2853,20 @@ voor Gebied: %1$s x %2$s</string>
     <string name="altitude_descent">Daling</string>
     <string name="altitude_ascent">Stijging</string>
     <string name="altitude_range">Hoogtebereik</string>
-    <string name="average_altitude">Gemiddeld</string>
+    <string name="average_altitude">Gemiddelde hoogte</string>
     <string name="shared_string_time">Tijd</string>
     <string name="total_distance">Totale afstand</string>
+    <string name="max_speed">Maximumsnelheid</string>
+    <string name="average_speed">Gemiddelde snelheid</string>
+    <string name="shared_string_max">Max</string>
+    <string name="shared_string_start_time">Begintijd</string>
+    <string name="shared_string_end_time">Eindtijd</string>
+    <string name="shared_string_color">Kleur</string>
+    <string name="shared_string_time_span">Tijdsspanne</string>
+    <string name="shared_string_time_moving">Tijd in beweging</string>
+    <string name="routing_attr_driving_style_name">Rijstijl</string>
+    <string name="routing_attr_height_relief_smoothness_factor_description">Meer vlakten of meer hellingen</string>
+    <string name="routing_attr_height_obstacles_name">Gebruik hoogtegegevens</string>
+    <string name="routing_attr_height_obstacles_description">Gebruik hoogtegegevens van SRTM, ASTER und EU-DEM</string>
+
     </resources>
