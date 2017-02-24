@@ -1261,19 +1261,23 @@ public class GpxUiHelper {
 			prevYRaw = nextYRaw;
 			nextX = nextXRaw / divX;
 			nextY = 0;
-			values.add(new Entry(nextX, nextY));
 			for (int i = 1; i < elevationData.size(); i++) {
 				Elevation e = elevationData.get(i);
 				if (e.distance > 0) {
 					nextXRaw += e.distance;
 					nextYRaw = (float) e.elevation;
+					if (nextX == 0) {
+						prevXRaw = nextXRaw;
+						prevYRaw = nextYRaw;
+						values.add(new Entry((float) e.distance / divX, nextY));
+					}
 					nextX += (float) e.distance / divX;
 					nextY = (nextYRaw - prevYRaw) / (nextXRaw - prevXRaw) * 100f;
 					if (nextXRaw - prevXRaw > 50 && Math.abs(nextY) < 120) {
 						values.add(new Entry(nextX, nextY));
+						prevXRaw = nextXRaw;
+						prevYRaw = nextYRaw;
 					}
-					prevXRaw = nextXRaw;
-					prevYRaw = nextYRaw;
 				}
 			}
 		}
