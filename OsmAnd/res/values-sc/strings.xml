@@ -560,9 +560,9 @@ Boles protzèdere cun una registratzione noa?</string>
     <string name="osmo_connect_to_my_nickname">Zistru</string>
     <string name="osmo_user_name">Impitadore</string>
     
-    <string name="rendering_value_pink_name">rosa</string>
+    <string name="rendering_value_pink_name">Rosa</string>
     
-    <string name="rendering_value_brown_name">castàngiu</string>
+    <string name="rendering_value_brown_name">Castàngiu</string>
     
     
     
@@ -2807,7 +2807,7 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="file_can_not_be_moved">Su documentu non podet èssere mòidu.</string>
     <string name="shared_string_move">Move</string>
     <string name="max_speed">Lestresa màssima</string>
-    <string name="average_speed">Lestresa mesana</string>
+    <string name="average_speed">Lestresa mèdia</string>
     <string name="shared_string_time_moving">Tempus in movimentu</string>
     <string name="shared_string_time_span">Intervallu de tempus</string>
     <string name="shared_string_max">Màssimu</string>
