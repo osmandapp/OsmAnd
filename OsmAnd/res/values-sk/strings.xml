@@ -2640,7 +2640,7 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="altitude_descent">Klesanie</string>
     <string name="altitude_ascent">Stúpanie</string>
     <string name="altitude_range">Výškový rozsah</string>
-    <string name="average_altitude">Priemer</string>
+    <string name="average_altitude">Priemerná výška</string>
     <string name="shared_string_time">Čas</string>
     <string name="total_distance">Celková vzdialenosť</string>
     <string name="routing_attr_driving_style_name">Štýl jazdy</string>
@@ -2655,4 +2655,6 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="shared_string_start_time">Čas začiatku</string>
     <string name="shared_string_end_time">Čas konca</string>
     <string name="shared_string_color">Farba</string>
+    <string name="max_speed">Maximálna rýchlosť</string>
+    <string name="average_speed">Priemerná rýchlosť</string>
     </resources>
