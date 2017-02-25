@@ -1384,9 +1384,9 @@
 	<string name="poi_flagpole">Zászlórúd</string>
 
 	<string name="poi_bench_yes">Van</string>
-	<string name="poi_bench_no">Pad nélkül</string>
-	<string name="poi_bin_yes">Szemetessel</string>
-	<string name="poi_bin_no">Szemetes nélkül</string>
+	<string name="poi_bench_no">Pad nincs</string>
+	<string name="poi_bin_yes">Szemetes van</string>
+	<string name="poi_bin_no">Szemetes nincs</string>
 
 	<string name="poi_resource_antimony">Antimon</string>
 	<string name="poi_resource_asbestos">Azbeszt</string>
@@ -1718,8 +1718,8 @@
 	<string name="poi_architecture_romanesque">Stílus: román</string>
 
 	<string name="poi_tunnel_waterway">Vízi alagút</string>
-	<string name="poi_tunnel_car">Alagút</string>
-	<string name="poi_tunnel_pedestrian">Gyalogos aluljáró</string>
+	<string name="poi_tunnel_car">Közúti alagút</string>
+	<string name="poi_tunnel_pedestrian">Gyalogos alagút</string>
 	<string name="poi_tunnel_railway">Vasúti alagút</string>
 	<string name="poi_bridge_car">Közúti híd</string>
 	<string name="poi_bridge_pedestrian">Gyalogoshíd</string>
@@ -1756,7 +1756,7 @@
 	<string name="poi_surface_asphalt">Felület: aszfalt</string>
 	<string name="poi_surface_concrete">Felület: beton</string>
 	<string name="poi_surface_sett">Felület: macskakő</string>
-	<string name="poi_surface_cobblestone">Felület: kőburkolat (durva kavics)</string>
+	<string name="poi_surface_cobblestone">Felület: nagy kavics (görgeteg)</string>
 	<string name="poi_surface_paving_stones">Felület: térkő</string>
 	<string name="poi_surface_pebblestone">Felület: kavics</string>
 	<string name="poi_surface_stone">Felület: kő</string>
@@ -1769,8 +1769,8 @@
 	<string name="poi_surface_grass">Felület: fű</string>
 	<string name="poi_surface_grass_paver">Felület: gyephézagos térkő</string>
 	<string name="poi_surface_ground">Felület: föld</string>
-	<string name="poi_surface_dirt">Felület: sár</string>
-	<string name="poi_surface_mud">Felület: sár (vizenyő)</string>
+	<string name="poi_surface_dirt">Felület: föld</string>
+	<string name="poi_surface_mud">Felület: sár</string>
 	<string name="poi_surface_ice">Felület: jég</string>
 	<string name="poi_surface_salt">Felület: só</string>
 	<string name="poi_surface_snow">Felület: hó</string>
@@ -2128,9 +2128,9 @@
 
 	<string name="poi_route_share_taxi_ref">Iránytaxi</string>
 	<string name="poi_surveillance_yes">Térfigyelő kamera</string>
-	<string name="poi_shop_additional_yes">Üzlettel</string>
+	<string name="poi_shop_additional_yes">Üzlet van</string>
 
-	<string name="poi_service_bicycle_retail_yes">Kiskereskedés</string>
+	<string name="poi_service_bicycle_retail_yes">Kereskedés</string>
 	<string name="poi_service_bicycle_retail_no">Kerékpár-kereskedés nincs</string>
 	<string name="poi_service_bicycle_repair_yes">Szerelés</string>
 	<string name="poi_service_bicycle_repair_no">Kerékpárszerelés nincs</string>
@@ -2189,7 +2189,7 @@
 
 	<string name="poi_historic_aircraft">Történelmi repülőgép</string>
 
-	<string name="poi_elevator_yes">Lifttel</string>
+	<string name="poi_elevator_yes">Lift van</string>
 	<string name="poi_elevator_no">Lift nincs</string>
 
 	<string name="poi_model_aerodrome">Modellrepülőtér</string>
@@ -3160,4 +3160,6 @@
 	<string name="poi_payment_ep_minicash_no">MiniCasht nem fogad el</string>
 	<string name="poi_spoil_heap">Meddőhányó</string>
 	
+	<string name="poi_tunnel_ref">Alagút száma</string>
+
 	</resources>
