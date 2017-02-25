@@ -2822,7 +2822,7 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="altitude_descent">Lejtő</string>
     <string name="altitude_ascent">Emelkedő</string>
     <string name="altitude_range">Magasságtartomány</string>
-    <string name="average_altitude">Átlag</string>
+    <string name="average_altitude">Átlagmagasság</string>
     <string name="shared_string_time">Idő</string>
     <string name="total_distance">Teljes táv</string>
     <string name="routing_attr_height_relief_smoothness_factor_name">Domborzat simításának mértéke</string>
@@ -2858,4 +2858,12 @@ Kérlek adj meg egy teljes kódot</string>
  "</string>
 	<string name="auto_split_recording_title">Felvételek auto-vágása szünet után</string>
 	<string name="auto_split_recording_descr">Új szakasz készítése 6 perc szünet után, új nyomvonal 2 óra szünet után, és új fájl hosszabb szünet után, vagy dátum változásakor.</string>
+    <string name="max_speed">Max sebesség</string>
+    <string name="average_speed">Átlagsebesség</string>
+    <string name="shared_string_time_moving">Mozgásban töltött idő</string>
+    <string name="shared_string_time_span">Időtartam</string>
+    <string name="shared_string_max">Max</string>
+    <string name="shared_string_start_time">Kezdő idő</string>
+    <string name="shared_string_end_time">Befejező idő</string>
+    <string name="shared_string_color">Szín</string>
     </resources>
