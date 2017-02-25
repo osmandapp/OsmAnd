@@ -247,10 +247,10 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 		pager.setOnPageChangeListener(pageListener);
 		pager.getAdapter().registerDataSetObserver(adapterObserver);
 		adapterObserver.setAttached(true);
-		notifyDataSetChanged();
+		notifyDataSetChanged(false);
 	}
 
-	public void notifyDataSetChanged() {
+	public void notifyDataSetChanged(boolean forced) {
 		tabsContainer.removeAllViews();
 		tabCount = pager.getAdapter().getCount();
 		View tabView;
@@ -266,27 +266,34 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 
 			addTab(i, title, tabView);
 		}
-
 		updateTabStyles();
-		getViewTreeObserver().addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
 
-			@SuppressWarnings("deprecation")
-			@SuppressLint("NewApi")
-			@Override
-			public void onGlobalLayout() {
+		if (forced) {
+			currentPosition = pager.getCurrentItem();
+			currentPositionOffset = 0f;
+			scrollToChild(currentPosition, 0);
+			updateSelection(currentPosition);
+		} else {
+			getViewTreeObserver().addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
 
-				if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
-					getViewTreeObserver().removeGlobalOnLayoutListener(this);
-				} else {
-					getViewTreeObserver().removeOnGlobalLayoutListener(this);
+				@SuppressWarnings("deprecation")
+				@SuppressLint("NewApi")
+				@Override
+				public void onGlobalLayout() {
+
+					if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
+						getViewTreeObserver().removeGlobalOnLayoutListener(this);
+					} else {
+						getViewTreeObserver().removeOnGlobalLayoutListener(this);
+					}
+
+					currentPosition = pager.getCurrentItem();
+					currentPositionOffset = 0f;
+					scrollToChild(currentPosition, 0);
+					updateSelection(currentPosition);
 				}
-
-				currentPosition = pager.getCurrentItem();
-				currentPositionOffset = 0f;
-				scrollToChild(currentPosition, 0);
-				updateSelection(currentPosition);
-			}
-		});
+			});
+		}
 	}
 
 	private void addTab(final int position, CharSequence title, View tabView) {
@@ -584,7 +591,7 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 
 		@Override
 		public void onChanged() {
-			notifyDataSetChanged();
+			notifyDataSetChanged(false);
 		}
 
 		public void setAttached(boolean attached) {
@@ -612,7 +619,11 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 		super.onDetachedFromWindow();
 		if (pager != null) {
 			if (adapterObserver.isAttached()) {
-				pager.getAdapter().unregisterDataSetObserver(adapterObserver);
+				try {
+					pager.getAdapter().unregisterDataSetObserver(adapterObserver);
+				} catch (IllegalStateException e) {
+					//ignore
+				}
 				adapterObserver.setAttached(false);
 			}
 		}

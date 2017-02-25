@@ -1267,17 +1267,42 @@ public class ConfigureMapMenu {
 
 		private OsmandApplication app;
 		private int currentColor;
+		private GpxAppearanceAdapterType adapterType = GpxAppearanceAdapterType.TRACK_WIDTH_COLOR;
 
-		public GpxAppearanceAdapter(Context context, String currentColorValue) {
+		public enum GpxAppearanceAdapterType {
+			TRACK_WIDTH,
+			TRACK_COLOR,
+			TRACK_WIDTH_COLOR
+		}
+
+		public GpxAppearanceAdapter(Context context, String currentColorValue, GpxAppearanceAdapterType adapterType) {
 			super(context, R.layout.rendering_prop_menu_item);
-			app = (OsmandApplication) getContext().getApplicationContext();
+			this.app = (OsmandApplication) getContext().getApplicationContext();
+			this.adapterType = adapterType;
+			RenderingRulesStorage renderer = app.getRendererRegistry().getCurrentSelectedRenderer();
+			this.currentColor = parseTrackColor(renderer, currentColorValue);
+			init();
+		}
 
+		public GpxAppearanceAdapter(Context context, int currentColor, GpxAppearanceAdapterType adapterType) {
+			super(context, R.layout.rendering_prop_menu_item);
+			this.app = (OsmandApplication) getContext().getApplicationContext();
+			this.adapterType = adapterType;
+			this.currentColor = currentColor;
+			init();
+		}
+
+		public void init() {
 			RenderingRuleProperty trackWidthProp = null;
 			RenderingRuleProperty trackColorProp = null;
 			RenderingRulesStorage renderer = app.getRendererRegistry().getCurrentSelectedRenderer();
 			if (renderer != null) {
-				trackWidthProp = renderer.PROPS.getCustomRule(CURRENT_TRACK_WIDTH_ATTR);
-				trackColorProp = renderer.PROPS.getCustomRule(CURRENT_TRACK_COLOR_ATTR);
+				if (adapterType == GpxAppearanceAdapterType.TRACK_WIDTH || adapterType == GpxAppearanceAdapterType.TRACK_WIDTH_COLOR) {
+					trackWidthProp = renderer.PROPS.getCustomRule(CURRENT_TRACK_WIDTH_ATTR);
+				}
+				if (adapterType == GpxAppearanceAdapterType.TRACK_COLOR || adapterType == GpxAppearanceAdapterType.TRACK_WIDTH_COLOR) {
+					trackColorProp = renderer.PROPS.getCustomRule(CURRENT_TRACK_COLOR_ATTR);
+				}
 			}
 
 			if (trackWidthProp != null) {
@@ -1293,8 +1318,6 @@ public class ConfigureMapMenu {
 				item.setLastItem(true);
 			}
 			if (trackColorProp != null) {
-				currentColor = parseTrackColor(renderer, currentColorValue);
-
 				AppearanceListItem item = new AppearanceListItem(CURRENT_TRACK_COLOR_ATTR, "",
 						SettingsActivity.getStringPropertyValue(getContext(), trackColorProp.getDefaultValueDescription()),
 						parseTrackColor(renderer, ""));
