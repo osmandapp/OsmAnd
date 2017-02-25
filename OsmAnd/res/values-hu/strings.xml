@@ -119,8 +119,8 @@
     <string name="global_settings">Globális beállítások</string>
     <string name="index_settings">Térképek kezelése</string>
     <string name="index_settings_descr">Offline térképek letöltése és kezelése</string>
-    <string name="general_settings">Általános beállítások</string>
-    <string name="general_settings_descr">Kijelző és más általános beállítások</string>
+    <string name="general_settings">Általános</string>
+    <string name="general_settings_descr">A kijelző és az alkalmazás általános beállításai</string>
     <string name="global_app_settings">Globális beállítások az alkalmazáshoz</string>
     <string name="user_name">OSM felhasználóneved</string>
     <string name="open_street_map_login_descr">openstreetmap.org felé történő adatküldéshez szükséges</string>
