@@ -13,7 +13,7 @@ import java.util.List;
 public class GPXDatabase {
 
 	private static final String DB_NAME = "gpx_database";
-	private static final int DB_VERSION = 1;
+	private static final int DB_VERSION = 2;
 	private static final String GPX_TABLE_NAME = "gpxTable";
 	private static final String GPX_COL_NAME = "fileName";
 	private static final String GPX_COL_DIR = "fileDir";
@@ -37,6 +37,8 @@ public class GPXDatabase {
 	private static final String GPX_COL_POINTS = "points";
 	private static final String GPX_COL_WPT_POINTS = "wptPoints";
 
+	private static final String GPX_COL_COLOR = "color";
+
 	private static final String GPX_TABLE_CREATE = "CREATE TABLE IF NOT EXISTS " + GPX_TABLE_NAME + " (" +
 			GPX_COL_NAME + " TEXT, " +
 			GPX_COL_DIR + " TEXT, " +
@@ -58,14 +60,15 @@ public class GPXDatabase {
 			GPX_COL_AVG_SPEED + " double, " +
 
 			GPX_COL_POINTS + " int, " +
-			GPX_COL_WPT_POINTS + " int);";
+			GPX_COL_WPT_POINTS + " int, " +
+			GPX_COL_COLOR + " TEXT);";
 
 	private static final String GPX_TABLE_SELECT = "SELECT " + GPX_COL_NAME + ", " + GPX_COL_DIR + "," + GPX_COL_TOTAL_DISTANCE + ", " +
 			GPX_COL_TOTAL_TRACKS + ", " + GPX_COL_START_TIME + ", " + GPX_COL_END_TIME + ", " +
 			GPX_COL_TIME_SPAN + ", " + GPX_COL_TIME_MOVING + ", " + GPX_COL_TOTAL_DISTANCE_MOVING + ", " +
 			GPX_COL_DIFF_ELEVATION_UP + ", " + GPX_COL_DIFF_ELEVATION_DOWN + ", " + GPX_COL_AVG_ELEVATION + ", " +
 			GPX_COL_MIN_ELEVATION + ", " + GPX_COL_MAX_ELEVATION + ", " + GPX_COL_MAX_SPEED + ", " +
-			GPX_COL_AVG_SPEED + ", " + GPX_COL_POINTS + ", " + GPX_COL_WPT_POINTS +
+			GPX_COL_AVG_SPEED + ", " + GPX_COL_POINTS + ", " + GPX_COL_WPT_POINTS + ", " + GPX_COL_COLOR +
 			" FROM " +	GPX_TABLE_NAME;
 
 	private OsmandApplication context;
@@ -73,6 +76,7 @@ public class GPXDatabase {
 	public static class GpxDataItem {
 		private File file;
 		private GPXTrackAnalysis analysis;
+		private int color;
 
 		public GpxDataItem(File file, GPXTrackAnalysis analysis) {
 			this.file = file;
@@ -85,6 +89,14 @@ public class GPXDatabase {
 
 		public GPXTrackAnalysis getAnalysis() {
 			return analysis;
+		}
+
+		public int getColor() {
+			return color;
+		}
+
+		public void setColor(int color) {
+			this.color = color;
 		}
 	}
 
@@ -110,22 +122,19 @@ public class GPXDatabase {
 		return conn;
 	}
 
-	public void onCreate(SQLiteConnection db) {
+	private void onCreate(SQLiteConnection db) {
 		db.execSQL(GPX_TABLE_CREATE);
 	}
 
-	public void onUpgrade(SQLiteConnection db, int oldVersion, int newVersion) {
-		/*
-		if (newVersion == 2) {
-			db.execSQL(GPX_TABLE_CREATE);
-			//...
+	private void onUpgrade(SQLiteConnection db, int oldVersion, int newVersion) {
+		if (oldVersion < 2) {
+			db.execSQL("ALTER TABLE " + GPX_TABLE_NAME + " ADD " + GPX_COL_COLOR + " TEXT");
 		}
-		*/
 	}
 
 	public boolean rename(File currentFile, File newFile) {
 		SQLiteConnection db = openConnection(false);
-		if(db != null){
+		if (db != null){
 			try {
 				String newFileName = getFileName(newFile);
 				String newFileDir = getFileDir(newFile);
@@ -144,9 +153,28 @@ public class GPXDatabase {
 		return false;
 	}
 
+	public boolean updateColor(GpxDataItem item, int color) {
+		SQLiteConnection db = openConnection(false);
+		if (db != null){
+			try {
+				String fileName = getFileName(item.file);
+				String fileDir = getFileDir(item.file);
+				db.execSQL("UPDATE " + GPX_TABLE_NAME + " SET " +
+								GPX_COL_COLOR + " = ? " +
+								" WHERE " + GPX_COL_NAME + " = ? AND " + GPX_COL_DIR + " = ?",
+						new Object[] { (color == 0 ? "" : Algorithms.colorToString(color)), fileName, fileDir });
+				item.setColor(color);
+			} finally {
+				db.close();
+			}
+			return true;
+		}
+		return false;
+	}
+
 	public boolean remove(File file) {
 		SQLiteConnection db = openConnection(false);
-		if(db != null){
+		if (db != null){
 			try {
 				String fileName = getFileName(file);
 				String fileDir = getFileDir(file);
@@ -166,7 +194,7 @@ public class GPXDatabase {
 
 	public boolean add(GpxDataItem item) {
 		SQLiteConnection db = openConnection(false);
-		if(db != null){
+		if (db != null){
 			try {
 				insert(item, db);
 			} finally {
@@ -190,11 +218,17 @@ public class GPXDatabase {
 		String fileName = getFileName(item.file);
 		String fileDir = getFileDir(item.file);
 		GPXTrackAnalysis a = item.getAnalysis();
+		String color;
+		if (item.color == 0) {
+			color = "";
+		} else {
+			color = Algorithms.colorToString(item.color);
+		}
 		db.execSQL(
-				"INSERT INTO " + GPX_TABLE_NAME + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+				"INSERT INTO " + GPX_TABLE_NAME + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
 				new Object[] { fileName, fileDir, a.totalDistance, a.totalTracks, a.startTime, a.endTime,
 						a.timeSpan, a.timeMoving, a.totalDistanceMoving, a.diffElevationUp, a.diffElevationDown,
-						a.avgElevation, a.minElevation, a.maxElevation, a.maxSpeed, a.avgSpeed, a.points, a.wptPoints });
+						a.avgElevation, a.minElevation, a.maxElevation, a.maxSpeed, a.avgSpeed, a.points, a.wptPoints, color });
 	}
 
 	private GpxDataItem readItem(SQLiteCursor query) {
@@ -216,6 +250,7 @@ public class GPXDatabase {
 		float avgSpeed = (float)query.getDouble(15);
 		int points = (int)query.getInt(16);
 		int wptPoints = (int)query.getInt(17);
+		String color = query.getString(18);
 
 		GPXTrackAnalysis a = new GPXTrackAnalysis();
 		a.totalDistance = totalDistance;
@@ -241,7 +276,13 @@ public class GPXDatabase {
 		} else {
 			dir = context.getAppPath(IndexConstants.GPX_INDEX_DIR);
 		}
-		return new GpxDataItem(new File(dir, fileName), a);
+		GpxDataItem item = new GpxDataItem(new File(dir, fileName), a);
+		try {
+			item.setColor(Algorithms.isEmpty(color) ? 0 : Algorithms.parseColor(color));
+		} catch (IllegalArgumentException e) {
+			item.setColor(0);
+		}
+		return item;
 	}
 
 	public List<GpxDataItem> getItems() {

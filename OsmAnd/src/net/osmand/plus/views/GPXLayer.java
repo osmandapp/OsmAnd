@@ -23,6 +23,7 @@ import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.data.QuadTree;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.TrkSegment;
@@ -367,8 +368,13 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 										   List<SelectedGpxFile> selectedGPXFiles, DrawSettings settings) {
 
 		for (SelectedGpxFile g : selectedGPXFiles) {
+			GpxDataItem gpxDataItem = view.getApplication().getGpxDatabase().getItem(new File(g.getGpxFile().path));
 			List<TrkSegment> segments = g.getPointsToDisplay();
 			for (TrkSegment ts : segments) {
+				int color = gpxDataItem.getColor();
+				if (color == 0) {
+					color = ts.getColor(cachedColor);
+				}
 				if (ts.renders.isEmpty()                // only do once (CODE HERE NEEDS TO BE UI INSTEAD)
 						&& !ts.points.isEmpty()) {        // hmmm. 0-point tracks happen, but.... how?
 					if (g.isShowCurrentTrack()) {
@@ -377,7 +383,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 						ts.renders.add(new Renderable.StandardTrack(ts.points, 17.2));
 					}
 				}
-				updatePaints(ts.getColor(cachedColor), g.isRoutePoints(), g.isShowCurrentTrack(), settings, tileBox);
+				updatePaints(color, g.isRoutePoints(), g.isShowCurrentTrack(), settings, tileBox);
 				ts.drawRenderers(view.getZoom(), paint, canvas, tileBox);
 			}
 		}

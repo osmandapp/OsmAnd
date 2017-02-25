@@ -1,17 +1,14 @@
 package net.osmand.plus.myplaces;
 
 
-import android.app.Activity;
-import android.content.DialogInterface;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.view.MenuItemCompat;
-import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -19,33 +16,24 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
-import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.Spinner;
 import android.widget.TextView;
 
-import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.FavouritesDbHelper;
+import net.osmand.plus.GPXDatabase;
+import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GPXUtilities.GPXFile;
-import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItemType;
-import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
-import net.osmand.plus.MapMarkersHelper;
-import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TrackActivity;
 import net.osmand.plus.base.OsmAndListFragment;
-import net.osmand.plus.helpers.ColorDialogs;
-import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.text.Collator;
@@ -53,26 +41,19 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import gnu.trove.list.array.TIntArrayList;
-
 
 public class SelectedGPXFragment extends OsmAndListFragment {
-	public static final String ARG_TO_EXPAND_TRACK_INFO = "ARG_TO_EXPAND_TRACK_INFO";
 	public static final String ARG_TO_FILTER_SHORT_TRACKS = "ARG_TO_FILTER_SHORT_TRACKS";
-	public static final String ARG_TO_HIDE_CONFIG_BTN = "ARG_TO_HIDE_CONFIG_BTN";
 	protected OsmandApplication app;
-	protected ArrayAdapter<GpxSelectionHelper.GpxDisplayItem> adapter;
-	protected TrackActivity activity;
+	protected ArrayAdapter<GpxDisplayItem> adapter;
 	private boolean updateEnable;
 
 	@Override
-	public void onAttach(Activity activity) {
-		this.activity = (TrackActivity) activity;
-		super.onAttach(activity);
-
+	public void onAttach(Context context) {
+		super.onAttach(context);
 		final Collator collator = Collator.getInstance();
 		collator.setStrength(Collator.SECONDARY);
-		app = (OsmandApplication) activity.getApplication();
+		app = (OsmandApplication) getActivity().getApplication();
 	}
 
 	@Override
@@ -84,7 +65,7 @@ public class SelectedGPXFragment extends OsmAndListFragment {
 	}
 
 	public TrackActivity getMyActivity() {
-		return activity;
+		return (TrackActivity) getActivity();
 	}
 
 	@Override
@@ -132,8 +113,8 @@ public class SelectedGPXFragment extends OsmAndListFragment {
 	protected static List<GpxDisplayGroup> filterGroups(GpxDisplayItemType[] types,
 														@NonNull TrackActivity trackActivity,
 														@Nullable Bundle args) {
-		List<GpxDisplayGroup> result = trackActivity.getResult();
-		List<GpxDisplayGroup> groups = new ArrayList<GpxSelectionHelper.GpxDisplayGroup>();
+		List<GpxDisplayGroup> result = trackActivity.getGpxFile();
+		List<GpxDisplayGroup> groups = new ArrayList<>();
 		for (GpxDisplayGroup group : result) {
 			boolean add = types == null || hasFilterType(types, group.getType());
 			if (isArgumentTrue(args, ARG_TO_FILTER_SHORT_TRACKS)) {
@@ -157,14 +138,25 @@ public class SelectedGPXFragment extends OsmAndListFragment {
 	}
 
 	public void setContent() {
+		setContent(getListView());
+	}
+
+	public void setContent(ListView listView) {
 		adapter = createSelectedGPXAdapter();
 		updateContent();
+		setupListView(listView);
 		setListAdapter(adapter);
+	}
+
+	protected void setupListView(ListView listView) {
+		if (adapter.getCount() > 0) {
+			listView.addFooterView(getActivity().getLayoutInflater().inflate(R.layout.list_shadow_footer, null, false));
+		}
 	}
 
 	protected void updateContent() {
 		adapter.clear();
-		List<GpxSelectionHelper.GpxDisplayGroup> groups = filterGroups(filterTypes(), getMyActivity(), getArguments());
+		List<GpxDisplayGroup> groups = filterGroups(filterTypes(), getMyActivity(), getArguments());
 		adapter.setNotifyOnChange(false);
 		for (GpxDisplayItem i : flatten(groups)) {
 			adapter.add(i);
@@ -196,7 +188,7 @@ public class SelectedGPXFragment extends OsmAndListFragment {
 	}
 
 	protected List<GpxDisplayItem> flatten(List<GpxDisplayGroup> groups) {
-		ArrayList<GpxDisplayItem> list = new ArrayList<GpxDisplayItem>();
+		ArrayList<GpxDisplayItem> list = new ArrayList<>();
 		for(GpxDisplayGroup g : groups) {
 			list.addAll(g.getModifiableList());
 		}
@@ -211,13 +203,11 @@ public class SelectedGPXFragment extends OsmAndListFragment {
 		ListView listView = (ListView) view.findViewById(android.R.id.list);
 		listView.setDivider(null);
 		listView.setDividerHeight(0);
-		listView.addFooterView(getActivity().getLayoutInflater().inflate(R.layout.list_shadow_footer, null, false));
 		TextView tv = new TextView(getActivity());
 		tv.setText(R.string.none_selected_gpx);
 		tv.setTextSize(24);
 		listView.setEmptyView(tv);
-		setContent();
-
+		setContent(listView);
 		return view;
 	}
 
@@ -228,81 +218,10 @@ public class SelectedGPXFragment extends OsmAndListFragment {
 		return super.onOptionsItemSelected(item);
 	}
 
-	protected void saveAsFavorites(final GpxDisplayItemType gpxDisplayItemType) {
-		AlertDialog.Builder b = new AlertDialog.Builder(getMyActivity());
-		final EditText editText = new EditText(getMyActivity());
-		final List<GpxDisplayGroup> gs = filterGroups(new GpxDisplayItemType[] { gpxDisplayItemType }, getMyActivity(), getArguments());
-		if (gs.size() == 0) {
-			return;
-		}
-		String name = gs.get(0).getName();
-		if(name.indexOf('\n') > 0) {
-			name = name.substring(0, name.indexOf('\n'));
-		}
-		editText.setText(name);
-		editText.setPadding(7, 3, 7, 3);
-		b.setTitle(R.string.save_as_favorites_points);
-		b.setView(editText);
-		b.setPositiveButton(R.string.shared_string_save, new DialogInterface.OnClickListener() {
-
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				saveFavoritesImpl(flatten(gs), editText.getText().toString());
-			}
-		});
-		b.setNegativeButton(R.string.shared_string_cancel, null);
-		b.show();
-	}
-
-	protected void saveAsMapMarkers(final GpxDisplayItemType gpxDisplayItemType) {
-		AlertDialog.Builder b = new AlertDialog.Builder(getMyActivity());
-		final List<GpxDisplayGroup> gs = filterGroups(new GpxDisplayItemType[] { gpxDisplayItemType }, getMyActivity(), getArguments());
-		if (gs.size() == 0) {
-			return;
-		}
-		b.setMessage(R.string.add_points_to_map_markers_q);
-		b.setPositiveButton(R.string.shared_string_add, new DialogInterface.OnClickListener() {
-
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				saveMapMarkersImpl(flatten(gs));
-			}
-		});
-		b.setNegativeButton(R.string.shared_string_cancel, null);
-		b.show();
-	}
-
-	protected void saveFavoritesImpl(List<GpxDisplayItem> modifiableList, String category) {
-		FavouritesDbHelper fdb = app.getFavorites();
-		for(GpxDisplayItem i : modifiableList) {
-			if (i.locationStart != null) {
-				FavouritePoint fp = new FavouritePoint(i.locationStart.lat, i.locationStart.lon, i.name, category);
-				if (!Algorithms.isEmpty(i.description)) {
-					fp.setDescription(i.description);
-				}
-				fdb.addFavourite(fp, false);
-			}
-		}
-		fdb.saveCurrentPointsIntoFile();
-	}
-
-	protected void saveMapMarkersImpl(List<GpxDisplayItem> modifiableList) {
-		MapMarkersHelper markersHelper = app.getMapMarkersHelper();
-		List<LatLon> points = new ArrayList<>();
-		List<PointDescription> names = new ArrayList<>();
-		for(GpxDisplayItem i : modifiableList) {
-			if (i.locationStart != null) {
-				points.add(new LatLon(i.locationStart.lat, i.locationStart.lon));
-				names.add(new PointDescription(PointDescription.POINT_TYPE_MAP_MARKER, i.name));
-			}
-		}
-		markersHelper.addMapMarkers(points, names);
-	}
-
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		menu.clear();
-		((TrackActivity) getActivity()).getClearToolbar(false);
+		getMyActivity().getClearToolbar(false);
 		if (getGpx() != null && getGpx().path != null && !getGpx().showCurrentTrack) {
 			MenuItem item = menu.add(R.string.shared_string_share).setIcon(R.drawable.ic_action_gshare_dark)
 					.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
@@ -320,151 +239,15 @@ public class SelectedGPXFragment extends OsmAndListFragment {
 		}
 	}
 
-
 	protected GPXFile getGpx() {
-		return ((TrackActivity)getActivity()).getGpx();
+		return getMyActivity().getGpx();
 	}
 
-	protected void selectSplitDistance() {
-		final List<GpxDisplayGroup> groups = filterGroups(new GpxDisplayItemType[] { GpxDisplayItemType.TRACK_SEGMENT },
-				getMyActivity(), getArguments());
-
-		View view = getMyActivity().getLayoutInflater().inflate(R.layout.selected_track_edit, null);
-
-		final TIntArrayList list = new TIntArrayList();
-		final Spinner colorSpinner = (Spinner) view.findViewById(R.id.ColorSpinner);
-		ColorDialogs.setupColorSpinner(getActivity(), getGpx().getColor(0), colorSpinner, list);
-
-		final Spinner sp = (Spinner) view.findViewById(R.id.Spinner);
-		AlertDialog.Builder bld = new AlertDialog.Builder(getMyActivity());
-		final List<Double> distanceSplit = new ArrayList<Double>();
-		final TIntArrayList timeSplit = new TIntArrayList();
-		if (groups.size() == 0) {
-			sp.setVisibility(View.GONE);
-			view.findViewById(R.id.GpxSpinnerRow).setVisibility(View.GONE);
-		} else {
-			sp.setVisibility(View.VISIBLE);
-
-			int[] checkedItem = new int[]{!groups.get(0).isSplitDistance() && !groups.get(0).isSplitTime() ? 0 : -1};
-			List<String> options = new ArrayList<String>();
-
-
-			options.add(app.getString(R.string.shared_string_none));
-			distanceSplit.add(-1d);
-			timeSplit.add(-1);
-			addOptionSplit(30, true, options, distanceSplit, timeSplit, checkedItem, groups); // 50 feet, 20 yards, 20
-			// m
-			addOptionSplit(60, true, options, distanceSplit, timeSplit, checkedItem, groups); // 100 feet, 50 yards,
-			// 50 m
-			addOptionSplit(150, true, options, distanceSplit, timeSplit, checkedItem, groups); // 200 feet, 100 yards,
-			// 100 m
-			addOptionSplit(300, true, options, distanceSplit, timeSplit, checkedItem, groups); // 500 feet, 200 yards,
-			// 200 m
-			addOptionSplit(600, true, options, distanceSplit, timeSplit, checkedItem, groups); // 1000 feet, 500 yards,
-			// 500 m
-			addOptionSplit(1500, true, options, distanceSplit, timeSplit, checkedItem, groups); // 2000 feet, 1000 yards, 1 km
-			addOptionSplit(3000, true, options, distanceSplit, timeSplit, checkedItem, groups); // 1 mi, 2 km
-			addOptionSplit(6000, true, options, distanceSplit, timeSplit, checkedItem, groups); // 2 mi, 5 km
-			addOptionSplit(15000, true, options, distanceSplit, timeSplit, checkedItem, groups); // 5 mi, 10 km
-
-			addOptionSplit(15, false, options, distanceSplit, timeSplit, checkedItem, groups);
-			addOptionSplit(30, false, options, distanceSplit, timeSplit, checkedItem, groups);
-			addOptionSplit(60, false, options, distanceSplit, timeSplit, checkedItem, groups);
-			addOptionSplit(120, false, options, distanceSplit, timeSplit, checkedItem, groups);
-			addOptionSplit(150, false, options, distanceSplit, timeSplit, checkedItem, groups);
-			addOptionSplit(300, false, options, distanceSplit, timeSplit, checkedItem, groups);
-			addOptionSplit(600, false, options, distanceSplit, timeSplit, checkedItem, groups);
-			addOptionSplit(900, false, options, distanceSplit, timeSplit, checkedItem, groups);
-
-			ArrayAdapter<String> adapter = new ArrayAdapter<String>(getMyActivity(),
-					android.R.layout.simple_spinner_item, options);
-			adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-			sp.setAdapter(adapter);
-			if (checkedItem[0] > 0) {
-				sp.setSelection(checkedItem[0]);
-			}
-		}
-
-		final CheckBox vis = (CheckBox) view.findViewById(R.id.Visibility);
-		vis.setChecked(app.getSelectedGpxHelper().getSelectedFileByPath(getGpx().path) != null);
-
-		bld.setView(view);
-		bld.setNegativeButton(R.string.shared_string_cancel, null);
-		bld.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
-
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				SelectedGpxFile sf = app.getSelectedGpxHelper().selectGpxFile(getGpx(), vis.isChecked(), false);
-				int clr = list.get(colorSpinner.getSelectedItemPosition());
-				if (vis.isChecked() && clr != 0 && sf.getModifiableGpxFile() != null) {
-					sf.getModifiableGpxFile().setColor(clr);
-					sf.processPoints();
-				}
-				if (groups.size() > 0) {
-					updateSplit(groups, distanceSplit, timeSplit, sp.getSelectedItemPosition(), vis.isChecked() ? sf
-							: null);
-				}
-				if (vis.isChecked() && sf.getGpxFile() != null) {
-					if (groups.size() > 0 && groups.get(0).getModifiableList().size() > 0) {
-						GpxDisplayItem item = groups.get(0).getModifiableList().get(0);
-						app.getSettings().setMapLocationToShow(item.locationStart.lat, item.locationStart.lon,
-								15,
-								new PointDescription(PointDescription.POINT_TYPE_GPX_ITEM, item.group.getGpxName()),
-								false,
-								item); //$NON-NLS-1$
-					} else {
-						WptPt wpt = sf.getGpxFile().findPointToShow();
-						if (wpt != null) {
-							app.getSettings().setMapLocationToShow(wpt.getLatitude(), wpt.getLongitude(),
-									15,
-									new PointDescription(PointDescription.POINT_TYPE_WPT, wpt.name),
-									false,
-									wpt); //$NON-NLS-1$
-						}
-					}
-					MapActivity.launchMapActivityMoveToTop(activity);
-				}
-			}
-		});
-
-		bld.show();
-
+	protected GpxDataItem getGpxDataItem() {
+		return getMyActivity().getGpxDataItem();
 	}
 
-	private void updateSplit(List<GpxDisplayGroup> groups, List<Double> distanceSplit,
-							 TIntArrayList timeSplit, int which, SelectedGpxFile sf) {
-		new SplitTrackAsyncTask(sf, this, getMyActivity(), groups, distanceSplit, timeSplit, which)
-				.execute((Void) null);
-	}
-
-	private void addOptionSplit(int value, boolean distance, List<String> options, List<Double> distanceSplit,
-								TIntArrayList timeSplit, int[] checkedItem, List<GpxDisplayGroup> model) {
-		if (distance) {
-			double dvalue = OsmAndFormatter.calculateRoundedDist(value, app);
-			options.add(OsmAndFormatter.getFormattedDistance((float) dvalue, app));
-			distanceSplit.add(dvalue);
-			timeSplit.add(-1);
-			if (Math.abs(model.get(0).getSplitDistance() - dvalue) < 1) {
-				checkedItem[0] = distanceSplit.size() - 1;
-			}
-		} else {
-			if (value < 60) {
-				options.add(value + " " + app.getString(R.string.int_seconds));
-			} else if (value % 60 == 0) {
-				options.add((value / 60) + " " + app.getString(R.string.int_min));
-			} else {
-				options.add((value / 60f) + " " + app.getString(R.string.int_min));
-			}
-			distanceSplit.add(-1d);
-			timeSplit.add(value);
-			if (model.get(0).getSplitTime() == value) {
-				checkedItem[0] = distanceSplit.size() - 1;
-			}
-		}
-
-	}
-
-	public ArrayAdapter<GpxSelectionHelper.GpxDisplayItem> createSelectedGPXAdapter() {
+	public ArrayAdapter<GpxDisplayItem> createSelectedGPXAdapter() {
 		return null;
 	}
 
@@ -472,34 +255,35 @@ public class SelectedGPXFragment extends OsmAndListFragment {
 	public void onListItemClick(ListView l, View v, int position, long id) {
 
 		GpxDisplayItem child = adapter.getItem(position);
+		if (child != null) {
+			if (child.group.getGpx() != null) {
+				app.getSelectedGpxHelper().setGpxFileToDisplay(child.group.getGpx());
+			}
 
-		if (child.group.getGpx() != null) {
-			app.getSelectedGpxHelper().setGpxFileToDisplay(child.group.getGpx());
+			final OsmandSettings settings = app.getSettings();
+			LatLon location = new LatLon(child.locationStart.lat, child.locationStart.lon);
+
+			if (child.group.getType() == GpxDisplayItemType.TRACK_POINTS) {
+				settings.setMapLocationToShow(location.getLatitude(), location.getLongitude(),
+						settings.getLastKnownMapZoom(),
+						new PointDescription(PointDescription.POINT_TYPE_WPT, child.locationStart.name),
+						false,
+						child.locationStart);
+			} else if (child.group.getType() == GpxDisplayItemType.TRACK_ROUTE_POINTS) {
+				settings.setMapLocationToShow(location.getLatitude(), location.getLongitude(),
+						settings.getLastKnownMapZoom(),
+						new PointDescription(PointDescription.POINT_TYPE_WPT, child.name),
+						false,
+						child.locationStart);
+			} else {
+				settings.setMapLocationToShow(location.getLatitude(), location.getLongitude(),
+						settings.getLastKnownMapZoom(),
+						new PointDescription(PointDescription.POINT_TYPE_GPX_ITEM, child.group.getGpxName()),
+						false,
+						child);
+			}
+			MapActivity.launchMapActivityMoveToTop(getActivity());
 		}
-
-		final OsmandSettings settings = app.getSettings();
-		LatLon location = new LatLon(child.locationStart.lat, child.locationStart.lon);
-
-		if (child.group.getType() == GpxDisplayItemType.TRACK_POINTS) {
-			settings.setMapLocationToShow(location.getLatitude(), location.getLongitude(),
-					settings.getLastKnownMapZoom(),
-					new PointDescription(PointDescription.POINT_TYPE_WPT, child.locationStart.name),
-					false,
-					child.locationStart);
-		} else if (child.group.getType() == GpxDisplayItemType.TRACK_ROUTE_POINTS) {
-			settings.setMapLocationToShow(location.getLatitude(), location.getLongitude(),
-					settings.getLastKnownMapZoom(),
-					new PointDescription(PointDescription.POINT_TYPE_WPT, child.name),
-					false,
-					child.locationStart);
-		} else {
-			settings.setMapLocationToShow(location.getLatitude(), location.getLongitude(),
-					settings.getLastKnownMapZoom(),
-					new PointDescription(PointDescription.POINT_TYPE_GPX_ITEM, child.group.getGpxName()),
-					false,
-					child);
-		}
-		MapActivity.launchMapActivityMoveToTop(getActivity());
 /*
 //		if(child.group.getType() == GpxDisplayItemType.TRACK_POINTS ||
 //				child.group.getType() == GpxDisplayItemType.TRACK_ROUTE_POINTS) {
@@ -517,64 +301,5 @@ public class SelectedGPXFragment extends OsmAndListFragment {
 //			adapter.notifyDataSetInvalidated();
 //		}
 */
-	}
-
-	public static class SplitTrackAsyncTask extends AsyncTask<Void, Void, Void> {
-		@Nullable private final SelectedGpxFile mSelectedGpxFile;
-		@NonNull private final SelectedGPXFragment mFragment;
-		@NonNull private final TrackActivity mActivity;
-
-		private final List<GpxDisplayGroup> groups;
-		private final List<Double> distanceSplit;
-		private final TIntArrayList timeSplit;
-		private final int which;
-
-		public SplitTrackAsyncTask(@Nullable SelectedGpxFile selectedGpxFile,
-								   SelectedGPXFragment fragment,
-								   TrackActivity activity,
-								   List<GpxDisplayGroup> groups,
-								   List<Double> distanceSplit,
-								   TIntArrayList timeSplit,
-								   int which) {
-			mSelectedGpxFile = selectedGpxFile;
-			mFragment = fragment;
-			mActivity = activity;
-			this.groups = groups;
-			this.distanceSplit = distanceSplit;
-			this.timeSplit = timeSplit;
-			this.which = which;
-		}
-
-		protected void onPostExecute(Void result) {
-			if (mSelectedGpxFile != null) {
-				mSelectedGpxFile.setDisplayGroups(filterGroups(null, mActivity, mFragment.getArguments()));
-			}
-			if (mFragment.isVisible()) {
-				mFragment.updateContent();
-			}
-			if (!mActivity.isFinishing()) {
-				mActivity.setProgressBarIndeterminateVisibility(false);
-			}
-		}
-
-		protected void onPreExecute() {
-			mActivity.setProgressBarIndeterminateVisibility(true);
-		}
-
-		@Override
-		protected Void doInBackground(Void... params) {
-			for (GpxDisplayGroup model : groups) {
-				OsmandApplication application = mActivity.getMyApplication();
-				if (which == 0) {
-					model.noSplit(application);
-				} else if (distanceSplit.get(which) > 0) {
-					model.splitByDistance(application, distanceSplit.get(which));
-				} else if (timeSplit.get(which) > 0) {
-					model.splitByTime(application, timeSplit.get(which));
-				}
-			}
-
-			return null;
-		}
 	}
 }

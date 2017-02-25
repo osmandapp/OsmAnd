@@ -556,7 +556,8 @@ public class GpxUiHelper {
 							popup.setVerticalOffset(AndroidUtils.dpToPx(activity, -48f));
 							popup.setHorizontalOffset(AndroidUtils.dpToPx(activity, -6f));
 							final GpxAppearanceAdapter gpxApprAdapter = new GpxAppearanceAdapter(activity,
-									gpxAppearanceParams.containsKey(CURRENT_TRACK_COLOR_ATTR) ? gpxAppearanceParams.get(CURRENT_TRACK_COLOR_ATTR) : prefColor.get());
+									gpxAppearanceParams.containsKey(CURRENT_TRACK_COLOR_ATTR) ? gpxAppearanceParams.get(CURRENT_TRACK_COLOR_ATTR) : prefColor.get(),
+									GpxAppearanceAdapter.GpxAppearanceAdapterType.TRACK_WIDTH_COLOR);
 							popup.setAdapter(gpxApprAdapter);
 							popup.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -1060,6 +1061,8 @@ public class GpxUiHelper {
 		dataSet.setDrawHorizontalHighlightIndicator(false);
 		dataSet.setHighLightColor(light ? mChart.getResources().getColor(R.color.secondary_text_light) : mChart.getResources().getColor(R.color.secondary_text_dark));
 
+		dataSet.setMode(LineDataSet.Mode.HORIZONTAL_BEZIER);
+
 		dataSet.setFillFormatter(new IFillFormatter() {
 			@Override
 			public float getFillLinePosition(ILineDataSet dataSet, LineDataProvider dataProvider) {
@@ -1191,6 +1194,8 @@ public class GpxUiHelper {
 		dataSet.setDrawVerticalHighlightIndicator(true);
 		dataSet.setDrawHorizontalHighlightIndicator(false);
 		dataSet.setHighLightColor(light ? mChart.getResources().getColor(R.color.secondary_text_light) : mChart.getResources().getColor(R.color.secondary_text_dark));
+
+		dataSet.setMode(LineDataSet.Mode.HORIZONTAL_BEZIER);
 
 		if (useRightAxis) {
 			dataSet.setAxisDependency(YAxis.AxisDependency.RIGHT);
