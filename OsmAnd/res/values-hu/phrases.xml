@@ -961,7 +961,7 @@
 	<string name="poi_route_hiking_nwn_poi">Országos turistaút</string>
 	<string name="poi_route_hiking_rwn_poi">Regionális turistaút</string>
 	<string name="poi_route_hiking_lwn_poi">Helyi turistaút</string>
-	<string name="poi_route_hiking_ref_poi">Turistaút-azonosító</string>
+	<string name="poi_route_hiking_ref_poi">Turistaútjelzés</string>
 
 	<string name="poi_opening_hours">Nyitva tartás</string>
 	<string name="poi_collection_times">Ürítési idő</string>
@@ -1222,7 +1222,7 @@
 	<string name="poi_cross">Kereszt</string>
 	<string name="poi_summit_cross">Csúcskereszt</string>
 
-	<string name="poi_temperature">Hőfok</string>
+	<string name="poi_temperature">Hőmérséklet</string>
 	<string name="poi_bathing_yes">Fürdési lehetőség</string>
 	<string name="poi_bathing_no">Fürdési lehetőség nincs</string>
 
@@ -1841,7 +1841,7 @@
 
 	<string name="poi_health_facility_type_office">Orvosi rendelő</string>
 	<string name="poi_office_physician">Orvosi rendelő</string>
-	<string name="poi_office_therapist">Terapeutairoda</string>
+	<string name="poi_office_therapist">Fizioterápiás rendelő</string>
 	<string name="poi_office_podologist">Lábgyógyászati rendelő</string>
 	<string name="poi_office_healer">Alternatív gyógyászati rendelő</string>
 	<string name="poi_office_psychologist">Pszichológiai rendelő</string>
@@ -1850,7 +1850,7 @@
 	<string name="poi_badminton">Tollaslabda</string>
 	<string name="poi_brushless">Kefétlen</string>
 	<string name="poi_internet_access_type">Internetcsatlakozás típusa</string>
-	<string name="poi_fire_hydrant_position">Pozíció</string>
+	<string name="poi_fire_hydrant_position">Hely</string>
 	<string name="poi_fire_hydrant_water_source">Vízforrás</string>
 	<string name="poi_payment_toll_type">Fizetési mód</string>
 	<string name="poi_traffic_signals_sound">Hangjelzés</string>
@@ -1880,7 +1880,7 @@
 	<string name="poi_site_type_city">Nagyváros</string>
 	<string name="poi_capacity_beds">Ágyak száma</string>
 
-	<string name="poi_fire_hydrant_flow_capacity">Átfolyási kapacitás</string>
+	<string name="poi_fire_hydrant_flow_capacity">Tűzcsap: átfolyási kapacitás</string>
 	<string name="poi_site_type_earthwork">Földsánc</string>
 	<string name="poi_site_type_fortification">Erődítmény</string>
 	<string name="poi_fortification_type_hill_fort">Erődítmény típusa: hegyi földvár</string>
@@ -1980,7 +1980,7 @@
 	<string name="poi_water_characteristic">Víz jellemzője</string>
 	<string name="poi_shoes_type">Cipőfajta</string>
 	<string name="poi_parking_type">Típus</string>
-	<string name="poi_parking_carports">Fedett beállók</string>
+	<string name="poi_parking_carports">Fedett parkolóhely</string>
 
 	<string name="poi_parking_garage_boxes">Garázsok</string>
 	<string name="poi_bicycle_parking_type">Típus</string>
@@ -2461,14 +2461,14 @@
 
 	<string name="poi_pumping_station">Szivattyúház</string>
 
-	<string name="poi_inscription_n">Felirat: É</string>
-	<string name="poi_inscription_nw">Felirat: ÉNY</string>
-	<string name="poi_inscription_w">Felirat: NY</string>
-	<string name="poi_inscription_sw">Felirat: DNY</string>
-	<string name="poi_inscription_s">Felirat: D</string>
-	<string name="poi_inscription_se">Felirat: DK</string>
-	<string name="poi_inscription_e">Felirat: K</string>
-	<string name="poi_inscription_ne">Felirat: ÉK</string>
+	<string name="poi_inscription_n">Felirat (észak)</string>
+	<string name="poi_inscription_nw">Felirat (északnyugat)</string>
+	<string name="poi_inscription_w">Felirat (nyugat)</string>
+	<string name="poi_inscription_sw">Felirat (délnyugat)</string>
+	<string name="poi_inscription_s">Felirat (dél)</string>
+	<string name="poi_inscription_se">Felirat (délkelet)</string>
+	<string name="poi_inscription_e">Felirat (kelet)</string>
+	<string name="poi_inscription_ne">Felirat (északkelet)</string>
 
 	<string name="poi_social_facility_group_home">Csoportos otthon</string>
 	<string name="poi_social_facility_day_care">Napközi ellátás</string>
@@ -2639,7 +2639,7 @@
 
 	<string name="poi_boat_storage">Hajótároló</string>
 
-	<string name="poi_fitness_station">Fitneszállomás</string>
+	<string name="poi_fitness_station">Fitneszpark</string>
 
 	<string name="poi_fireworks">Tűzijátékbolt</string>
 
@@ -2689,12 +2689,12 @@
 
 	<string name="poi_microwave_oven_yes">Mikrohullámú sütő</string>
 	<string name="poi_microwave_oven_no">Mikrohullámú sütő nincs</string>
-	<string name="poi_parking_surface">Típus: felszíni</string>
+	<string name="poi_parking_surface">Felszíni</string>
 	<string name="poi_gaelic_games">Kelta játékok</string>
 	<string name="poi_running">Futás</string>
 	<string name="poi_karting">Gokart</string>
 	<string name="poi_futsal">Futsal</string>
-	<string name="poi_rc_car">Távirányítós autóverseny</string>
+	<string name="poi_rc_car">Távirányítósautó-verseny</string>
 	<string name="poi_squash">Fallabda</string>
 	<string name="poi_boxing">Boksz</string>
 
@@ -2707,9 +2707,9 @@
 	<string name="poi_atm_no">Bankautomata nincs</string>
 
 	<string name="poi_firepit">Tűzrakóhely</string>
-	<string name="poi_fair_trade_yes">Méltányos kereskedelem</string>
-	<string name="poi_fair_trade_no">Méltányos kereskedelem nincs</string>
-	<string name="poi_fair_trade_only">Csak fair trade termék</string>
+	<string name="poi_fair_trade_yes">Fair Trade</string>
+	<string name="poi_fair_trade_no">Fair Trade nincs</string>
+	<string name="poi_fair_trade_only">Csak Fair Trade termékek</string>
 
 
 	<string name="poi_addr_housename">Háznév</string>
@@ -2740,7 +2740,7 @@
 	<string name="poi_medical_system_tibetan_yes">Hagyományos tibeti</string>
 	<string name="poi_fire_hydrant_type_underground">Föld alatti</string>
 	<string name="poi_fire_hydrant_type_pillar">Oszlop</string>
-	<string name="poi_fire_hydrant_type_dry_barrel">Száraz hordó</string>
+	<string name="poi_fire_hydrant_type_dry_barrel">„Száraz hordó”</string>
 	<string name="poi_fire_hydrant_type_wall">Fali</string>
 
 	<string name="poi_health_amenity_type_first_aid_kit">Elsősegély-készlet</string>
@@ -2905,7 +2905,7 @@
 	<string name="poi_health_specialty_anaesthetics_yes">Aneszteziológia</string>
 	<string name="poi_health_specialty_pulmonology_yes">Tüdőgyógyászat</string>
 	<string name="poi_health_specialty_dental_oral_maxillo_facial_surgery_yes">Fog-, száj, állcsont- és arcsebészet</string>
-	<string name="poi_health_specialty_emergency_medicine_no">Szakorvosi ellátás: baleseti és sürgősségi ellátás nincs</string>
+	<string name="poi_health_specialty_emergency_medicine_no">Baleseti és sürgősségi ellátás nincs</string>
 	<string name="poi_health_specialty_biochemistry_yes">Biológiai kémia</string>
 	<string name="poi_health_specialty_occupational_yes">Foglalkozás-egészségügyi ellátás</string>
 	<string name="poi_health_specialty_physiatry_yes">Fizikális medicina és rehabilitáció</string>
@@ -2914,14 +2914,14 @@
 	<string name="poi_health_specialty_neuropsychiatry_yes">Neuropszichiátria</string>
 	<string name="poi_health_specialty_endocrinology_yes">Endokrinológia</string>
 	<string name="poi_health_specialty_nuclear_medicine_yes">Nukleáris medicina</string>
-	<string name="poi_health_specialty_tropical_medicine_yes">Trópusi betegségek ellátása</string>
-	<string name="poi_health_specialty_tropical_medicine_no">Szakorvosi ellátás: trópusibetegség-ellátás nincs</string>
-	<string name="poi_health_specialty_obstetrics_postnatal_yes">Szülészet (születés utáni)</string>
-	<string name="poi_health_specialty_obstetrics_postnatal_no">Szakorvosi ellátás: (születés utáni) szülészeti ellátás nincs</string>
+	<string name="poi_health_specialty_tropical_medicine_yes">Trópusibetegség-ellátás</string>
+	<string name="poi_health_specialty_tropical_medicine_no">Trópusibetegség-ellátás nincs</string>
+	<string name="poi_health_specialty_obstetrics_postnatal_yes">(Szülés utáni) szülészeti ellátás</string>
+	<string name="poi_health_specialty_obstetrics_postnatal_no">(Szülés utáni) szülészeti ellátás nincs</string>
 	<string name="poi_health_specialty_obstetrics_antenatal_yes">Várandósgondozás</string>
-	<string name="poi_health_specialty_obstetrics_antenatal_no">Szakorvosi ellátás: várandósgondozás nincs</string>
-	<string name="poi_health_specialty_social_paediatrics_no">Szakorvosi ellátás: szociális gyermekgyógyászat nincs</string>
-	<string name="poi_health_specialty_obstetrics_caesarean_section_no">Szakorvosi ellátás: szülészet (császármetszés) nincs</string>
+	<string name="poi_health_specialty_obstetrics_antenatal_no">Várandósgondozás nincs</string>
+	<string name="poi_health_specialty_social_paediatrics_no">Szociális gyermekgyógyászat nincs</string>
+	<string name="poi_health_specialty_obstetrics_caesarean_section_no">Szülészet (császármetszés) nincs</string>
 	<string name="poi_health_specialty_addiction_medicine_yes">Addiktológia</string>
 	<string name="poi_health_specialty_optometry_yes">Optometria</string>
 	<string name="poi_health_specialty_manual_therapy_yes">Manuálterápia</string>
@@ -3087,8 +3087,8 @@
 	<string name="poi_water_heater_yes">Vízforraló</string>
 	<string name="poi_free_flying_paragliding_yes">Siklóernyőzés</string>
 	<string name="poi_free_flying_hanggliding_yes">Sárkányrepülés</string>
-	<string name="poi_medical_system_ayurveeda_yes">Ajurvéda</string>
-	<string name="poi_treat_inpatient_yes">Fekvőbeteg-szolgáltatások</string>
+	<string name="poi_medical_system_ayurveeda_yes">Hagyományos indiai (ájurvéda)</string>
+	<string name="poi_treat_inpatient_yes">Fekvőbeteg-ellátás</string>
 	<string name="poi_emergency_yes">Vészhelyzet</string>
 	<string name="poi_dispensing_yes">Vény beváltható</string>
 	<string name="poi_hygrometer_yes">Páratartalom-mérő</string>
@@ -3096,7 +3096,7 @@
 
 	<string name="poi_free_flying_paragliding_no">Siklóernyőzés nincs</string>
 	<string name="poi_free_flying_hanggliding_no">Sárkányrepülés nincs</string>
-	<string name="poi_treat_inpatient_no">Fekvőbeteg-szolgáltatások nincsenek</string>
+	<string name="poi_treat_inpatient_no">Fekvőbeteg-ellátás nincs</string>
 	<string name="poi_home_visit_no">Otthoni látogatás nincs</string>
 
 	<string name="poi_dispensing_no">Vény nem váltható be</string>
@@ -3109,7 +3109,7 @@
 
 	<string name="poi_conveying_yes">Mozgólépcső vagy -járda</string>
 
-	<string name="poi_sport_free_flying">Siklóernyőzés és sárkányrepülés (sport)</string>
+	<string name="poi_sport_free_flying">Siklóernyőzés és sárkányrepülés</string>
 
 	<string name="poi_free_flying_site_takeoff">Felszállóhely</string>
 	<string name="poi_free_flying_site_landing">Leszállóhely</string>
@@ -3130,7 +3130,7 @@
 	<string name="poi_free_flying_guest_guidelines_no">Vendégeknek szóló iránymutatás nincs</string>
 
 	<string name="poi_emergency_no">Vészhelyzet nincs</string>
-	<string name="poi_bridge_ref">Híd hivatkozási száma</string>
+	<string name="poi_bridge_ref">Híd száma</string>
 	<string name="poi_cafeteria">Menza</string>
 
 <string name="poi_forestry_compartment">Útirányjelző tábla: erdőtag (RU)</string>
@@ -3152,7 +3152,7 @@
 	<string name="poi_buoy_special_purpose">Különleges bója</string>
 	<string name="poi_buoy_installation">Kikötőbója</string>
 	<string name="poi_cuisine_bubble_tea">Bubble tea</string>
-	<string name="poi_suction_point">Tűzivízvételező-hely</string>
+	<string name="poi_suction_point">Tűzivíz-vételező hely</string>
 
 	<string name="poi_treat_inpatient_only">Csak fekvőbeteg-ellátás</string>
 	<string name="poi_payment_ep_cash_yes">Készpénzkártya (Geldkarte)</string>
@@ -3183,4 +3183,22 @@
 	<string name="poi_site_type_petroglyph">Sziklarajz</string>
 	<string name="poi_pa">Pā (erődített maori falu)</string>
 
+	<string name="poi_ref">Azonosító szám:</string>
+
+	<string name="poi_fitness_centre">Fitneszközpont</string>
+	<string name="poi_hackerspace">Hackerspace</string>
+
+
+	<string name="poi_netball">Netball</string>
+	<string name="poi_judo">Cselgáncs</string>
+	<string name="poi_shuffleboard">Shuffleboard</string>
+	<string name="poi_dyke">Árvízvédelmi gát</string>
+	<string name="poi_medical_system_kampo_yes">Hagyományos japán (kampo)</string>
+	<string name="poi_medical_system_sidda_yes">Hagyományos dél-indiai tamil (sidda)</string>
+	<string name="poi_medical_system_unani_yes">Hagyományos görög-iszlám (unani)</string>
+
+	<string name="poi_office_nursing_service">Ápolószolgálat</string>
+	<string name="poi_fire_hydrant_type_pond">Száraz tűzcsap</string>
+	<string name="poi_fire_hydrant_position_lane">Tűzcsap helye: úttest</string>
+	<string name="poi_fire_hydrant_style_wsh">Tűzcsapfajta: akna</string>
 	</resources>
