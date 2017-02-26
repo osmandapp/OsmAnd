@@ -2397,7 +2397,7 @@ Si necesitas ayuda con la aplicación OsmAnd, contacte con nuestro equipo de sop
 
     <string name="replace_favorite_confirmation">¿Quieres reemplazar el favorito %1$s?</string>
     <string name="routing_attr_short_way_name">Ruta de bajo consumo (corta)</string>
-    <string name="routing_attr_short_way_description">Usa la ruta más eficiente en combustible (usualmente la más corta)</string>
+    <string name="routing_attr_short_way_description">Usa la ruta con menor consumo en combustible (usualmente la más corta)</string>
     <string name="shared_string_change">Cambiar</string>
     <string name="get_started">Empezar</string>
     <string name="update_all_maps_now">¿Quieres actualizar ahora todos los mapas?</string>
