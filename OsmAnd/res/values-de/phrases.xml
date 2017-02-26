@@ -322,7 +322,7 @@
 	<string name="poi_mountain_pass">Passstraße</string>
 	<string name="poi_sport_multi">Multi-Sport</string>
 	<string name="poi_museum">Museum</string>
-	<string name="poi_musical_instrument">Musikinstrumentegeschäft</string>
+	<string name="poi_musical_instrument">Musikinstrumente</string>
 	<string name="poi_nature_reserve">Naturschutzgebiet</string>
 	<string name="poi_neighbourhood">Nachbarschaft</string>
 	<string name="poi_newsagent">Nachrichtenagentur</string>
@@ -1642,7 +1642,7 @@
 
 	<string name="poi_hackerspace">Hackerspace</string>
 
-	<string name="poi_wiki_lang_als">elsässisches Wiki</string>
+	<string name="poi_wiki_lang_als">Elsässische wiki</string>
 	<string name="poi_wiki_lang_bs">Bosnisches Wiki</string>
 	<string name="poi_wiki_lang_fy">Friesisches Wiki</string>
 	<string name="poi_wiki_lang_hy">Armenisches Wiki</string>
@@ -1671,7 +1671,7 @@
 
 	<string name="poi_denomination_shaktism">Shaktismus</string>
 	<string name="poi_denomination_maronite">Maroniten</string>
-	<string name="poi_bicycle_parking_rack">Fahrradständer</string>
+	<string name="poi_bicycle_parking_rack">Ständer</string>
 	<string name="poi_bicycle_parking_building">Spezialgebäude</string>
 	<string name="poi_bicycle_parking_shed">Schuppen</string>
 	<string name="poi_bicycle_parking_bollard">Poller</string>
