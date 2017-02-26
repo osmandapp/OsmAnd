@@ -265,7 +265,7 @@
 		<string name="poi_craft">Kézművesműhely</string>
 	<string name="poi_finance">Pénzügy</string>
 	<string name="poi_natural">Természet</string>
-	<string name="poi_seamark"/>
+	<string name="poi_seamark">Hajózási</string>
 	<string name="poi_military">Katonai</string>
 	<string name="poi_osmwiki">Wikipédia</string>
 	<string name="poi_alcohol">Alkoholüzlet</string>
@@ -651,7 +651,7 @@
 	<string name="poi_aerialway_pylon">Felvonó pilon</string>
 
 	<string name="poi_breakwater">Hullámtörő</string>
-	<string name="poi_power_cable_distribution_cabinet">Elosztó szekrény</string>
+	<string name="poi_power_cable_distribution_cabinet">Villamos elosztószekrény</string>
 	<string name="poi_power_tower">Távvezetékoszlop</string>
 	<string name="poi_power_pole">Villanyoszlop</string>
 
@@ -1696,26 +1696,26 @@
 
 	<string name="poi_architect_name">Építész</string>
 
-	<string name="poi_architecture_modern">Stílus: modern</string>
-	<string name="poi_architecture_stalinist_neoclassicism">Stílus: sztálini neoklasszcista</string>
-	<string name="poi_architecture_eclectic">Stílus: eklektikus</string>
-	<string name="poi_architecture_new_objectivity">Stílus: neoobjektivista</string>
-	<string name="poi_architecture_contemporary">Stílus: kortárs</string>
-	<string name="poi_architecture_constructivism">Stílus: konstruktivista</string>
-	<string name="poi_architecture_umgebinde">Stílus: umgebinde</string>
-	<string name="poi_architecture_timber_frame">Stílus: favázas</string>
-	<string name="poi_architecture_art_nouveau">Stílus: szecessziós</string>
-	<string name="poi_architecture_neoclassicism">Stílus: neoklasszcista</string>
-	<string name="poi_architecture_victorian">Stílus: viktoriánus</string>
-	<string name="poi_architecture_brutalism">Stílus: brutalista</string>
-	<string name="poi_architecture_classicism">Stílus: klasszicista</string>
-	<string name="poi_architecture_gothic">Stílus: gótikus</string>
-	<string name="poi_architecture_oldrussian">Stílus: orosz</string>
-	<string name="poi_architecture_baroque">Stílus: barokk</string>
-	<string name="poi_architecture_postconstructivism">Stílus: posztkonstruktivista</string>
-	<string name="poi_architecture_wilhelminian_style">Stílus: gründerzeit</string>
-	<string name="poi_architecture_renaissance">Stílus: reneszánsz</string>
-	<string name="poi_architecture_romanesque">Stílus: román</string>
+	<string name="poi_architecture_modern">Építészeti stílus: modern</string>
+	<string name="poi_architecture_stalinist_neoclassicism">Építészeti stílus: sztálini neoklasszicista</string>
+	<string name="poi_architecture_eclectic">Építészeti stílus: eklektikus</string>
+	<string name="poi_architecture_new_objectivity">Építészeti stílus: neoobjektivista</string>
+	<string name="poi_architecture_contemporary">Építészeti stílus: kortárs</string>
+	<string name="poi_architecture_constructivism">Építészeti stílus: konstruktivista</string>
+	<string name="poi_architecture_umgebinde">Építészeti stílus: Umgebindehaus</string>
+	<string name="poi_architecture_timber_frame">Építészeti stílus: favázas</string>
+	<string name="poi_architecture_art_nouveau">Építészeti stílus: szecessziós</string>
+	<string name="poi_architecture_neoclassicism">Építészeti stílus: neoklasszcista</string>
+	<string name="poi_architecture_victorian">Építészeti stílus: viktoriánus</string>
+	<string name="poi_architecture_brutalism">Építészeti stílus: brutalista</string>
+	<string name="poi_architecture_classicism">Építészeti stílus: klasszicista</string>
+	<string name="poi_architecture_gothic">Építészeti stílus: gótikus</string>
+	<string name="poi_architecture_oldrussian">Építészeti stílus: óorosz</string>
+	<string name="poi_architecture_baroque">Építészeti stílus: barokk</string>
+	<string name="poi_architecture_postconstructivism">Építészeti stílus: posztkonstruktivista</string>
+	<string name="poi_architecture_wilhelminian_style">Építészeti stílus: historizáló</string>
+	<string name="poi_architecture_renaissance">Építészeti stílus: reneszánsz</string>
+	<string name="poi_architecture_romanesque">Építészeti stílus: román</string>
 
 	<string name="poi_tunnel_waterway">Vízi alagút</string>
 	<string name="poi_tunnel_car">Közúti alagút</string>
@@ -1932,7 +1932,7 @@
 	<string name="poi_cuisine_italian">Olasz</string>
 	<string name="poi_cuisine_japanese">Japán</string>
 	<string name="poi_cuisine_mexican">Mexikói</string>
-	<string name="poi_cuisine_regional">Regionális</string>
+	<string name="poi_cuisine_regional">Helyi</string>
 	<string name="poi_cuisine_african">Afrikai</string>
 	<string name="poi_cuisine_arab">Arab</string>
 	<string name="poi_cuisine_argentinian">Argentin</string>
@@ -1953,7 +1953,7 @@
 	<string name="poi_cuisine_seafood">Tenger gyümölcsei</string>
 	<string name="poi_cuisine_noodle">Tészta</string>
 	<string name="poi_cuisine_donut">Fánk</string>
-	<string name="poi_cuisine_crepe">Palacsinta (crepe)</string>
+	<string name="poi_cuisine_crepe">Crêpe (francia palacsinta)</string>
 	<string name="poi_cuisine_breakfast">Reggeli</string>
 	<string name="poi_cuisine_pancake">Palacsinta (pancake)</string>
 	<string name="poi_cuisine_fast_food">Gyorsétterem</string>
@@ -2006,7 +2006,7 @@
 	<string name="poi_information_type">Típus</string>
 	<string name="poi_information_contents">Tartalom</string>
 	<string name="poi_clock_option">További</string>
-	<string name="poi_scout_camp">Cserkésztábor</string>
+	<string name="poi_scout_camp">Cserkésztáborhely</string>
 	<string name="poi_backcountry">Nomád</string>
 	<string name="poi_resort_type">Típus</string>
 	<string name="poi_drive_in">Drive-in</string>
@@ -2497,7 +2497,7 @@
 	<string name="poi_cuisine_snack">Falatozó</string>
 	<string name="poi_cuisine_yogurt">Joghurt</string>
 	<string name="poi_cuisine_gyros">Gyros</string>
-	<string name="poi_cuisine_crepes">Francia palacsinta (crêpe)</string>
+	<string name="poi_cuisine_crepes">Crêpes (francia palacsinta)</string>
 	<string name="poi_cuisine_suki">Szuki</string>
 	<string name="poi_cuisine_brasserie">Söröző (brasserie)</string>
 	<string name="poi_cuisine_meat">Hús</string>
@@ -2509,7 +2509,7 @@
 	<string name="poi_cuisine_sub">Sub (szendvics)</string>
 	<string name="poi_cuisine_pita">Pita</string>
 	<string name="poi_cuisine_fondue">Fondü</string>
-	<string name="poi_cuisine_baguette">BAguette</string>
+	<string name="poi_cuisine_baguette">Baguette</string>
 	<string name="poi_cuisine_burrito">Burrito</string>
 	<string name="poi_cuisine_french">Francia</string>
 	<string name="poi_cuisine_greek">Görög</string>
@@ -2597,9 +2597,9 @@
 
 	<string name="poi_site_type_settlement">Település</string>
 	<string name="poi_aquaculture">Akvakultúra</string>
-	<string name="poi_aquaculture_shrimp">Akvakultúra: garnéla</string>
-	<string name="poi_aquaculture_fish">Akvakultúra: hal</string>
-	<string name="poi_aquaculture_mussels">Akvakultúra: kagyló</string>
+	<string name="poi_aquaculture_shrimp">Akvakultúra: garnélatenyésztés</string>
+	<string name="poi_aquaculture_fish">Akvakultúra: haltenyésztés</string>
+	<string name="poi_aquaculture_mussels">Akvakultúra: kagylótenyésztés</string>
 
 	<string name="poi_provided_for_infant_yes">Csecsemők számára</string>
 	<string name="poi_provided_for_infant_no">Csecsemők számára nincs</string>
@@ -2626,16 +2626,16 @@
 	<string name="poi_telescope_type_gamma">Gammateleszkóp</string>
 	<string name="poi_telescope_diameter">Átmérő</string>
 	<string name="poi_telescope_spectrum">Spektrum</string>
-	<string name="poi_telescope_usage_education">Oktatási felhasználású</string>
+	<string name="poi_telescope_usage_education">Felhasználás: oktatás</string>
 	<string name="poi_telescope_usage_espionage">Felhasználás: hírszerzés</string>
-	<string name="poi_telescope_usage_research">Kutatási felhasználású</string>
+	<string name="poi_telescope_usage_research">Felhasználás: kutatás</string>
 
 	<string name="poi_prison_camp">Egykori fogolytábor</string>
 	<string name="poi_concentration_camp">Típus: koncentrációs tábor</string>
 	<string name="poi_pow_camp">Típus: hadifogolytábor</string>
 	<string name="poi_labor_camp">Típus: munkatábor</string>
-	<string name="poi_concentration_camp_nazism">Típus: náci</string>
-	<string name="poi_concentration_camp_gulag">Típus: gulág</string>
+	<string name="poi_concentration_camp_nazism">Típus: náci koncentrációs tábor</string>
+	<string name="poi_concentration_camp_gulag">Típus: Gulag (szovjet munkatábor)</string>
 
 	<string name="poi_boat_storage">Hajótároló</string>
 
@@ -2795,7 +2795,7 @@
 	<string name="poi_fire_hydrant_style_water_source_pond">Tó</string>
 	<string name="poi_fire_hydrant_style_water_source_stream">Patak</string>
 	<string name="poi_fire_hydrant_style_water_source_cistern">Ciszterna</string>
-	<string name="poi_street_cabinet_power">Közműszekrény típusa: áram</string>
+	<string name="poi_street_cabinet_power">Közműszekrény típusa: villamos energia</string>
 	<string name="poi_street_cabinet_telecom">Közműszekrény típusa: távközlés</string>
 	<string name="poi_street_cabinet_cable_tv">Közműszekrény típusa: kábeltelevízió</string>
 	<string name="poi_street_cabinet_gas">Közműszekrény típusa: földgáz</string>
@@ -2810,7 +2810,7 @@
 
 	<string name="poi_salt_yes">Só</string>
 	<string name="poi_salt_no">Só nincs</string>
-	<string name="poi_summer_camp">Nyári tábor</string>
+	<string name="poi_summer_camp">Nyáritábor-hely</string>
 	<string name="poi_recreation_center">Szabadidőközpont</string>
 
 	<string name="poi_aerodrome_type_international">Nemzetközi</string>
@@ -2826,10 +2826,10 @@
 	<string name="poi_greenhouse_horticulture">Üvegházi kertészet</string>
 
 	<string name="poi_voltage">Feszültség</string>
-	<string name="poi_generator_output_electricity_yes">Kimenet: áram</string>
-	<string name="poi_generator_output_hot_water_yes">Kimenet: meleg víz</string>
+	<string name="poi_generator_output_electricity_yes">Kimenet: villamos energia</string>
+	<string name="poi_generator_output_hot_water_yes">Kimenet: forró víz</string>
 	<string name="poi_generator_output_steam_yes">Kimenet: gőz</string>
-	<string name="poi_generator_output_hot_air_yes">Kimenet: meleg levegő</string>
+	<string name="poi_generator_output_hot_air_yes">Kimenet: forró levegő</string>
 	<string name="poi_generator_output_cold_water_yes">Kimenet: hideg víz</string>
 	<string name="poi_generator_output_compressed_air_yes">Kimenet: sűrített levegő</string>
 	<string name="poi_generator_output_vacuum_yes">Kimenet: vákuum</string>
@@ -2848,10 +2848,10 @@
 	<string name="poi_date_yes">Dátumkijelző</string>
 	<string name="poi_date_no">Dátumkijelző nincs</string>
 
-	<string name="poi_passenger_information_display_yes">Utasinformáció-kijelző</string>
-	<string name="poi_passenger_information_display_no">Utasinformáció-kijelző nincs</string>
+	<string name="poi_passenger_information_display_yes">Utastájékoztató kijelző</string>
+	<string name="poi_passenger_information_display_no">Utastájékoztató kijelző nincs</string>
 
-	<string name="poi_min_age">Minimális életkor</string>
+	<string name="poi_min_age">Alsó korhatár</string>
 
 	<string name="poi_organic_yes">Bioélelmiszer</string>
 	<string name="poi_organic_no">Bioélelmiszer nincs</string>
@@ -3201,4 +3201,34 @@
 	<string name="poi_fire_hydrant_type_pond">Száraz tűzcsap</string>
 	<string name="poi_fire_hydrant_position_lane">Tűzcsap helye: úttest</string>
 	<string name="poi_fire_hydrant_style_wsh">Tűzcsapfajta: akna</string>
+	<string name="poi_valley_balka">Balka (völgy, Oroszo.)</string>
+
+	<string name="poi_ventilation_shaft">Szellőztetőakna</string>
+
+	<string name="poi_fire_operator">Illetékes tűzoltóság (Oroszo.)</string>
+
+	<string name="poi_cuisine_buschenschank">Buschenschank (Ausztria)</string>
+	<string name="poi_cuisine_fine_dining">Fine dining</string>
+	<string name="poi_cuisine_cajun">Cajun (USA, Dél-Louisiana)</string>
+	<string name="poi_locksmith">Zárszaküzlet</string>
+	<string name="poi_gambling_pachinko">Pacsinkó</string>
+	<string name="poi_cliff">Sziklaszirt</string>
+
+	<string name="poi_animal_keeping">Állattartás</string>
+	<string name="poi_animal_keeping_horse">Lótartás</string>
+	<string name="poi_animal_keeping_sheep">Juhtartás</string>
+	<string name="poi_animal_keeping_type_paddock">Típus: karám</string>
+	<string name="poi_animal_keeping_type_open_stable">Típus: nyitott istálló</string>
+
+	<string name="poi_tower_construction_lattice">Szerkezet: acélrács</string>
+	<string name="poi_tower_construction_dish">Szerkezet: parabolaantenna</string>
+	<string name="poi_tower_construction_dome">Szerkezet: kupola</string>
+	<string name="poi_tower_construction_concealed">Szerkezet: álcázott</string>
+
+	<string name="poi_railway_yard">Teherpályaudvar</string>
+
+	<string name="poi_coworking_space">Közösségi iroda</string>
+
+	<string name="poi_fast_food_cafeteria">Van</string>
+
 	</resources>
