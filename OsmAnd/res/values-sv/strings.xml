@@ -846,7 +846,7 @@ Nyttjat utrymme är {1} MB.
     
     <string name="poi_edit_title">Redigera POI</string>
     <string name="poi_create_title">Skapa POI</string>
-    <string name="poi_error_poi_not_found">Noden kan inte hittas eller bekvämligheten är inte en enda nod</string>
+    <string name="poi_error_poi_not_found">Noden kan inte hittas eller bekvämligheten består av flera noder och detta stöds inte än.</string>
     <string name="poi_remove_confirm_template">Ta bort {0} (ange kommentar)?</string>
     <string name="poi_remove_title">Ta bort POI</string>
     <string name="recording_is_recorded">Ljud/video spelas in. För att stoppa detta, tryck på AV-knappen på widgeten.</string>
@@ -2471,12 +2471,12 @@ med mera…
     <string name="quick_action_map_underlay">Ändra kartunderlägg</string>
     <string name="quick_action_map_underlay_switch">Kartunderlägget har ändrats till \"%s\".</string>
     <string name="rendering_attr_depthContours_name">Djupkonturer</string>
-	<string name="rendering_value_fine_name">Bra</string>
-    <string name="navigate_point_olc">Öppna plats kod</string>
+	<string name="rendering_value_fine_name">Fin</string>
+    <string name="navigate_point_olc">Öppna platskod</string>
     <string name="navigate_point_olc_info_invalid">Ogiltig OLC
 </string>
     <string name="navigate_point_olc_info_short">Kort OLC
-Vänligen tillhandahåll hel kod</string>
+Vänligen tillhandahåll fullständig kod</string>
     <string name="file_can_not_be_moved">Filen kan inte flyttas.</string>
     <string name="shared_string_move">Flytta</string>
     <string name="shared_string_tracks">Spår</string>
