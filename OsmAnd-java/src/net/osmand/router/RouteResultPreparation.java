@@ -419,6 +419,9 @@ public class RouteResultPreparation {
 									" asc " + (float) (h -lastHeight) + " dist "
 											+ (float) dist);
 									serializer.endTag("","cmt");
+									serializer.startTag("","slope");
+									serializer.text((h -lastHeight)/ dist*100 + "");
+									serializer.endTag("","slope");
 								}
 								serializer.startTag("","desc");
 								serializer.text((res.getObject().getId() >> (BinaryInspector.SHIFT_ID )) + " " + index);
