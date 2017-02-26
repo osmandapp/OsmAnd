@@ -1061,7 +1061,7 @@ public class GpxUiHelper {
 		dataSet.setDrawHorizontalHighlightIndicator(false);
 		dataSet.setHighLightColor(light ? mChart.getResources().getColor(R.color.secondary_text_light) : mChart.getResources().getColor(R.color.secondary_text_dark));
 
-		dataSet.setMode(LineDataSet.Mode.HORIZONTAL_BEZIER);
+		//dataSet.setMode(LineDataSet.Mode.HORIZONTAL_BEZIER);
 
 		dataSet.setFillFormatter(new IFillFormatter() {
 			@Override
@@ -1195,7 +1195,7 @@ public class GpxUiHelper {
 		dataSet.setDrawHorizontalHighlightIndicator(false);
 		dataSet.setHighLightColor(light ? mChart.getResources().getColor(R.color.secondary_text_light) : mChart.getResources().getColor(R.color.secondary_text_dark));
 
-		dataSet.setMode(LineDataSet.Mode.HORIZONTAL_BEZIER);
+		//dataSet.setMode(LineDataSet.Mode.HORIZONTAL_BEZIER);
 
 		if (useRightAxis) {
 			dataSet.setAxisDependency(YAxis.AxisDependency.RIGHT);
@@ -1293,7 +1293,7 @@ public class GpxUiHelper {
 					}
 					nextX += (float) e.distance / divX;
 					nextY = (nextYRaw - prevYRaw) / (nextXRaw - prevXRaw) * 100f;
-					if (nextXRaw - prevXRaw > 50 && Math.abs(nextY) < 120) {
+					if (/*nextXRaw - prevXRaw > 50 &&*/ Math.abs(nextY) < 120) {
 						values.add(new Entry(nextX, nextY));
 						prevXRaw = nextXRaw;
 						prevYRaw = nextYRaw;
@@ -1328,7 +1328,7 @@ public class GpxUiHelper {
 		dataSet.setDrawHorizontalHighlightIndicator(false);
 		dataSet.setHighLightColor(light ? mChart.getResources().getColor(R.color.secondary_text_light) : mChart.getResources().getColor(R.color.secondary_text_dark));
 
-		dataSet.setMode(LineDataSet.Mode.HORIZONTAL_BEZIER);
+		//dataSet.setMode(LineDataSet.Mode.HORIZONTAL_BEZIER);
 
 		/*
 		dataSet.setFillFormatter(new IFillFormatter() {
