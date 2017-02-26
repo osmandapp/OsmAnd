@@ -2497,4 +2497,5 @@ Vänligen tillhandahåll hel kod</string>
     <string name="select_gpx_folder">Välj GPX-mapp</string>
     <string name="average_speed">Medelhastighet</string>
     <string name="shared_string_time_moving">Tid i rörelse</string>
+    <string name="max_speed">Maxhastighet</string>
     </resources>
