@@ -1489,7 +1489,7 @@
 	<string name="poi_craft_computer">Számítógép-szerelő</string>
 	<string name="poi_floating_dock">Úszódokk</string>
 	<string name="poi_seamark_harbour">Kikötő</string>
-	<string name="poi_landmark">Tájékozódási pont</string>
+	<string name="poi_landmark">Parti jel</string>
 	<string name="poi_mooring">Kikötőhely</string>
 	<string name="poi_garden">Kert</string>
 
@@ -1823,7 +1823,7 @@
 	<string name="poi_fog_signal">Ködjelzés</string>
 	<string name="poi_harbour_basin">Kikötőmedence</string>
 	<string name="poi_pile">Cölöp</string>
-	<string name="poi_radio_station">Rádióállomás</string>
+	<string name="poi_radio_station">Rádióállomás (parti jel)</string>
 	<string name="poi_power_supply_yes">Van</string>
 	<string name="poi_power_supply_no">Elektromos csatlakozó nincs</string>
 	<string name="poi_generator_output_electricity">Kimeneti teljesítmény</string>
@@ -3230,5 +3230,20 @@
 	<string name="poi_coworking_space">Közösségi iroda</string>
 
 	<string name="poi_fast_food_cafeteria">Van</string>
+
+	<string name="poi_seamark_building">Épület (parti jel)</string>
+	<string name="poi_seamark_bridge">Híd (parti jel)</string>
+	<string name="poi_seamark_dyke">Töltés (parti jel)</string>
+	<string name="poi_seamark_light">Fény (vízi jel)</string>
+	<string name="poi_seamark_light_major">Jelentős fény (vízi jel)</string>
+	<string name="poi_seamark_light_minor">Kis fény (vízi jel)</string>
+	<string name="poi_seamark_light_float">Úszó fény (vízi jel)</string>
+	<string name="poi_seamark_light_vessel">Hajófény (vízi jel)</string>
+	<string name="poi_topmark">Csúcsjelzés (vízi jel)</string>
+	<string name="poi_daymark">Nappali jelzés</string>
+	<string name="poi_notice">Hajózási jelzés</string>
+	<string name="poi_radar_transponder"/>
+	<string name="poi_seamark_rock">Szikla (parti jel)</string>
+	<string name="poi_seamark_wreck">Hajóroncs</string>
 
 	</resources>
