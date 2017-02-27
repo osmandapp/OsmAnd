@@ -2798,7 +2798,7 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="altitude_descent">Spust</string>
     <string name="altitude_ascent">Vzpon</string>
     <string name="altitude_range">Obseg nadmorske višine</string>
-    <string name="average_altitude">Povprečje</string>
+    <string name="average_altitude">Povprečna nadmorska višina</string>
     <string name="shared_string_time">Čas</string>
     <string name="total_distance">Skupna razdalja</string>
     <string name="routing_attr_height_relief_smoothness_factor_name">Določilo gladkosti reliefa</string>
@@ -2818,4 +2818,6 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="shared_string_start_time">Začetni čas</string>
     <string name="shared_string_end_time">Končni čas</string>
     <string name="shared_string_color">Barva</string>
+    <string name="max_speed">Največja hitrost</string>
+    <string name="average_speed">Povprečna hitrost</string>
     </resources>
