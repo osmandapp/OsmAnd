@@ -2867,7 +2867,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="shared_string_time_moving">Czas poruszania</string>
     <string name="shared_string_time_span">Przedział czasu</string>
     <string name="shared_string_max">Maks.</string>
-    <string name="shared_string_start_time">Czas początkowy</string>
+    <string name="shared_string_start_time">Czas rozpoczęcia</string>
     <string name="shared_string_end_time">Czas końcowy</string>
     <string name="shared_string_color">Kolor</string>
     <string name="max_speed">Maksymalna prędkość</string>
