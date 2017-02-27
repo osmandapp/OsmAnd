@@ -1259,42 +1259,52 @@ public class GpxUiHelper {
 		List<Elevation> elevationData = analysis.elevationData;
 		float nextX;
 		float nextY;
-		float nextXRaw;
-		float nextYRaw;
-		float prevXRaw;
-		float prevYRaw;
-		float prevElev = -80000;
+		float nextDistM;
+		float nextXM;
+		float nextYM;
+		float prevXM;
+		float prevYM;
+		float prevElevM = -80000;
+		float prevDistM = -1;
 		float gist = 1.5f;
+		float d;
 		if (elevationData.size() > 1) {
 			Elevation e0 = elevationData.get(0);
-			nextXRaw = e0.distance > 0 ? (float) e0.distance : 0f;
-			nextYRaw = 0;
-			prevXRaw = nextXRaw;
-			prevYRaw = nextYRaw;
-			nextX = nextXRaw / divX;
+			nextXM = e0.distance > 0 ? (float) e0.distance : 0f;
+			nextYM = 0;
+			prevXM = nextXM;
+			prevYM = nextYM;
+			nextX = nextXM / divX;
 			nextY = 0;
 			for (int i = 1; i < elevationData.size(); i++) {
 				Elevation e = elevationData.get(i);
 				if (e.distance > 0) {
-					nextXRaw += e.distance;
-					nextYRaw = (float) e.elevation;
-					if (Math.abs(prevElev - nextYRaw) < gist) {
-						nextX += (float) e.distance / divX;
+					d = (float) e.distance;
+					if (prevDistM < 0) {
+						nextDistM = d / 2f;
+					} else {
+						nextDistM = prevDistM / 2f + d / 2f;
+					}
+					prevDistM = d;
+					nextXM += nextDistM;
+					nextYM = (float) e.elevation;
+					if (Math.abs(prevElevM - nextYM) < gist) {
+						nextX += nextDistM / divX;
 						continue;
 					} else {
-						prevElev = nextYRaw;
+						prevElevM = nextYM;
 					}
 					if (nextX == 0) {
-						prevXRaw = nextXRaw;
-						prevYRaw = nextYRaw;
-						values.add(new Entry((float) e.distance / divX, nextY));
+						prevXM = nextXM;
+						prevYM = nextYM;
+						values.add(new Entry(nextDistM / divX, nextY));
 					}
-					nextX += (float) e.distance / divX;
-					nextY = (nextYRaw - prevYRaw) / (nextXRaw - prevXRaw) * 100f;
-					if (/*nextXRaw - prevXRaw > 50 &&*/ Math.abs(nextY) < 120) {
+					nextX += nextDistM / divX;
+					nextY = (nextYM - prevYM) / (nextXM - prevXM) * 100f;
+					if (nextXM - prevXM > 30 && Math.abs(nextY) < 120) {
 						values.add(new Entry(nextX, nextY));
-						prevXRaw = nextXRaw;
-						prevYRaw = nextYRaw;
+						prevXM = nextXM;
+						prevYM = nextYM;
 					}
 				}
 			}
