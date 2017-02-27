@@ -658,7 +658,7 @@ Registritaj kursoj povas esti kunhavigitaj kun viaj amikoj aŭ esti uzita por ko
     <string name="search_radius_proximity">En proksime de</string>
     <string name="osmo_device_not_found">Ne trovis aparaton</string>
     <string name="anonymous_user">Anonima uzanto</string>
-    <string name="logged_as">Ensalutita kiel %1$s</string>
+    <string name="logged_as">Ensalutinta kiel %1$s</string>
     <string name="speed_limit_exceed">Tolerado de rapidlimo</string>
     <string name="traffic_warning_speed_limit">Rapidlimo</string>
     <string name="speak_favorites">Proksimaj ŝatataj</string>
