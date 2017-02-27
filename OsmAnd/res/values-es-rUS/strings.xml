@@ -2394,8 +2394,8 @@ Si amas a OsmAnd, OSM y quieres apoyarlos, esta es una perfecta manera de hacerl
     <string name="route_stops_before">%1$s parada(s) anterior(es)</string>
     <string name="rendering_attr_hideOverground_name">Objetos en superficie</string>
 
-    <string name="routing_attr_short_way_name">Ruta más eficiente</string>
-    <string name="routing_attr_short_way_description">Usa la ruta más eficiente en combustible (usualmente la más corta)</string>
+    <string name="routing_attr_short_way_name">Ruta de menor consumo (corta)</string>
+    <string name="routing_attr_short_way_description">Usa la ruta de menor consumo en combustible (usualmente la más corta)</string>
     <string name="replace_favorite_confirmation">¿Quieres reemplazar el favorito %1$s?</string>
     <string name="shared_string_change">Cambiar</string>
     <string name="get_started">Empezar</string>
