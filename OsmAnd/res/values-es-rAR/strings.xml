@@ -656,7 +656,7 @@ Tanto la ubicación como el tiempo del estacionamiento se muestran en el menú p
     <string name="driving_region_japan">Japón</string>
     <string name="driving_region_us">Estados Unidos</string>
     <string name="driving_region_canada">Canadá</string>
-    <string name="driving_region_europe_asia">Europa y Asia</string>
+    <string name="driving_region_europe_asia">Europa, Asia y Sudamérica</string>
     <string name="driving_region_uk">Reino Unido, India y similares</string>
     <string name="speak_title">Anunciar…</string>
     <string name="speak_descr">Configura el anuncio de nombres de calles, avisos de tráfico (paradas, lomadas), radares y límites de velocidad</string>
