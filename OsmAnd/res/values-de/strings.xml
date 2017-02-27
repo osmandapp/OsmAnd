@@ -944,7 +944,7 @@ OSM ist ein gemeinschaftliches, frei zugängliches, globales Kartografierungspro
 	
 	<string name="poi_edit_title">POI bearbeiten</string>
 	<string name="poi_create_title">POI erstellen</string>
-	<string name="poi_error_poi_not_found">POI wurde nicht gefunden oder die Einrichtung ist kein einzelner Knoten</string>
+	<string name="poi_error_poi_not_found">Punkt wurde nicht gefunden oder das Objekt besteht aus mehreren Punkten, was noch nicht unterstützt wird.</string>
 	<string name="poi_remove_confirm_template">Sicher löschen: {0} (Kommentar eingeben)?</string>
 	<string name="poi_remove_title">POI löschen</string>
 	<string name="shared_string_delete">Löschen</string>
@@ -2734,7 +2734,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="altitude_descent">Abstieg</string>
     <string name="altitude_ascent">Aufstieg</string>
     <string name="altitude_range">Höhendifferenz</string>
-    <string name="average_altitude">Durchschnitt</string>
+    <string name="average_altitude">Durchschnittliche Höhe</string>
     <string name="shared_string_time">Zeit</string>
     <string name="total_distance">Gesamtstrecke</string>
     <string name="routing_attr_driving_style_name">Fahrweise</string>
@@ -2751,4 +2751,5 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="shared_string_color">Farbe</string>
     <string name="max_speed">Höchstgeschwindigkeit</string>
     <string name="average_speed">Durchschnittsgeschwindigkeit</string>
+    <string name="gpx_track">Track</string>
     </resources>
