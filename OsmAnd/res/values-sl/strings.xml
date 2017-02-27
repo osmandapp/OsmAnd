@@ -2820,4 +2820,5 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="shared_string_color">Barva</string>
     <string name="max_speed">Največja hitrost</string>
     <string name="average_speed">Povprečna hitrost</string>
+    <string name="gpx_track">Sled</string>
     </resources>
