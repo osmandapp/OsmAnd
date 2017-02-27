@@ -845,8 +845,6 @@ public class GpxUiHelper {
 
 	public static void setupGPXChart(OsmandApplication ctx, LineChart mChart, int yLabelsCount) {
 		OsmandSettings settings = ctx.getSettings();
-		OsmandSettings.MetricsConstants mc = settings.METRIC_SYSTEM.get();
-		boolean useFeet = (mc == OsmandSettings.MetricsConstants.MILES_AND_FEET) || (mc == OsmandSettings.MetricsConstants.MILES_AND_YARDS);
 		boolean light = settings.isLightContent();
 
 		//mChart.setHardwareAccelerationEnabled(true);
