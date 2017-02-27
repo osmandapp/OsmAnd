@@ -2685,4 +2685,5 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="shared_string_color">Koloro</string>
     <string name="average_speed">Mezuma rapido</string>
     <string name="max_speed">Maksimuma rapido</string>
+    <string name="gpx_track">Spuro</string>
     </resources>
