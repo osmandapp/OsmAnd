@@ -1004,6 +1004,8 @@ public class GpxUiHelper {
 		} else {
 			yAxis = mChart.getAxisLeft();
 		}
+		yAxis.setTextColor(ActivityCompat.getColor(mChart.getContext(), R.color.gpx_chart_blue));
+		yAxis.setGridColor(ActivityCompat.getColor(mChart.getContext(), R.color.gpx_chart_blue_grid));
 		yAxis.setGranularity(1f);
 		yAxis.setValueFormatter(new IAxisValueFormatter() {
 
@@ -1017,17 +1019,17 @@ public class GpxUiHelper {
 		List<Elevation> elevationData = analysis.elevationData;
 		float nextX = 0;
 		float nextY;
-		float prevElev = -80000;
-		float gist = 1.5f;
+		//float prevElev = -80000;
+		//float gist = 1.5f;
 		for (Elevation e : elevationData) {
 			if (e.distance > 0) {
 				nextX += (float) e.distance / divX;
 				nextY = (float) (e.elevation * convEle);
-				if (Math.abs(prevElev - e.elevation) < gist) {
-					continue;
-				} else {
-					prevElev = (float) e.elevation;
-				}
+				//if (Math.abs(prevElev - e.elevation) < gist) {
+				//	continue;
+				//} else {
+				//	prevElev = (float) e.elevation;
+				//}
 				values.add(new Entry(nextX, nextY));
 			}
 		}
@@ -1134,6 +1136,8 @@ public class GpxUiHelper {
 		} else {
 			yAxis = mChart.getAxisLeft();
 		}
+		yAxis.setTextColor(ActivityCompat.getColor(mChart.getContext(), R.color.gpx_chart_orange));
+		yAxis.setGridColor(ActivityCompat.getColor(mChart.getContext(), R.color.gpx_chart_orange_grid));
 		yAxis.setAxisMinimum(0f);
 		yAxis.setValueFormatter(new IAxisValueFormatter() {
 
@@ -1246,6 +1250,8 @@ public class GpxUiHelper {
 		} else {
 			yAxis = mChart.getAxisLeft();
 		}
+		yAxis.setTextColor(ActivityCompat.getColor(mChart.getContext(), R.color.gpx_chart_green));
+		yAxis.setGridColor(ActivityCompat.getColor(mChart.getContext(), R.color.gpx_chart_green_grid));
 		yAxis.setGranularity(1f);
 		yAxis.setValueFormatter(new IAxisValueFormatter() {
 
@@ -1264,13 +1270,20 @@ public class GpxUiHelper {
 		float nextYM;
 		float prevXM;
 		float prevYM;
-		float prevElevM = -80000;
 		float prevDistM = -1;
-		float gist = 1.5f;
+		//float prevElevM = -80000;
+		//float gist = 1.5f; // 1.5 meters
+		float delta = 30f; // 30 meters
 		float d;
 		if (elevationData.size() > 1) {
 			Elevation e0 = elevationData.get(0);
-			nextXM = e0.distance > 0 ? (float) e0.distance : 0f;
+			d = (float) e0.distance;
+			if (d > delta) {
+				nextXM = d / 2f;
+				prevDistM = d;
+			} else {
+				nextXM = 0f;
+			}
 			nextYM = 0;
 			prevXM = nextXM;
 			prevYM = nextYM;
@@ -1279,21 +1292,25 @@ public class GpxUiHelper {
 			for (int i = 1; i < elevationData.size(); i++) {
 				Elevation e = elevationData.get(i);
 				if (e.distance > 0) {
-					d = (float) e.distance;
+					d += (float) e.distance;
+					if (d < delta && i < elevationData.size() - 1) {
+						continue;
+					}
 					if (prevDistM < 0) {
 						nextDistM = d / 2f;
 					} else {
 						nextDistM = prevDistM / 2f + d / 2f;
 					}
 					prevDistM = d;
+					d = 0;
 					nextXM += nextDistM;
 					nextYM = (float) e.elevation;
-					if (Math.abs(prevElevM - nextYM) < gist) {
-						nextX += nextDistM / divX;
-						continue;
-					} else {
-						prevElevM = nextYM;
-					}
+					//if (Math.abs(prevElevM - nextYM) < gist) {
+					//	nextX += nextDistM / divX;
+					//	continue;
+					//} else {
+					//	prevElevM = nextYM;
+					//}
 					if (nextX == 0) {
 						prevXM = nextXM;
 						prevYM = nextYM;
@@ -1301,7 +1318,7 @@ public class GpxUiHelper {
 					}
 					nextX += nextDistM / divX;
 					nextY = (nextYM - prevYM) / (nextXM - prevXM) * 100f;
-					if (nextXM - prevXM > 30 && Math.abs(nextY) < 120) {
+					if (Math.abs(nextY) < 120) {
 						values.add(new Entry(nextX, nextY));
 						prevXM = nextXM;
 						prevYM = nextYM;
@@ -1388,11 +1405,13 @@ public class GpxUiHelper {
 
 		private View textAltView;
 		private View textSpdView;
+		private View textSlpView;
 
 		public GPXMarkerView(Context context) {
 			super(context, R.layout.chart_marker_view);
 			textAltView = findViewById(R.id.text_alt_container);
 			textSpdView = findViewById(R.id.text_spd_container);
+			textSlpView = findViewById(R.id.text_slp_container);
 		}
 
 		// callbacks everytime the MarkerView is redrawn, can be used to update the
@@ -1410,25 +1429,38 @@ public class GpxUiHelper {
 						((TextView) textAltView.findViewById(R.id.text_alt_units)).setText(units);
 						textAltView.setVisibility(VISIBLE);
 						textSpdView.setVisibility(GONE);
+						textSlpView.setVisibility(GONE);
 						break;
 					case SPEED:
 						((TextView) textSpdView.findViewById(R.id.text_spd_value)).setText(value);
 						((TextView) textSpdView.findViewById(R.id.text_spd_units)).setText(units);
 						textAltView.setVisibility(GONE);
 						textSpdView.setVisibility(VISIBLE);
+						textSlpView.setVisibility(GONE);
+						break;
+					case SLOPE:
+						((TextView) textSlpView.findViewById(R.id.text_slp_value)).setText(value);
+						textAltView.setVisibility(GONE);
+						textSpdView.setVisibility(GONE);
+						textSlpView.setVisibility(VISIBLE);
 						break;
 				}
+				findViewById(R.id.divider).setVisibility(GONE);
 			} else if (chartData.getDataSetCount() == 2) {
 				OrderedLineDataSet dataSet1 = (OrderedLineDataSet) chartData.getDataSetByIndex(0);
 				OrderedLineDataSet dataSet2 = (OrderedLineDataSet) chartData.getDataSetByIndex(1);
 				int altSetIndex = -1;
 				int spdSetIndex = -1;
+				int slpSetIndex = -1;
 				switch (dataSet1.getDataSetType()) {
 					case ALTITUDE:
 						altSetIndex = 0;
 						break;
 					case SPEED:
 						spdSetIndex = 0;
+						break;
+					case SLOPE:
+						slpSetIndex = 0;
 						break;
 				}
 				switch (dataSet2.getDataSetType()) {
@@ -1437,6 +1469,9 @@ public class GpxUiHelper {
 						break;
 					case SPEED:
 						spdSetIndex = 1;
+						break;
+					case SLOPE:
+						slpSetIndex = 1;
 						break;
 				}
 				if (altSetIndex != -1) {
@@ -1455,26 +1490,44 @@ public class GpxUiHelper {
 				} else {
 					textSpdView.setVisibility(GONE);
 				}
+				if (slpSetIndex != -1) {
+					Entry eSlp = chartData.getEntryForHighlight(new Highlight(e.getX(), Float.NaN, slpSetIndex));
+					((TextView) textSlpView.findViewById(R.id.text_slp_value)).setText(Integer.toString((int) eSlp.getY()) + " ");
+					textSlpView.setVisibility(VISIBLE);
+				} else {
+					textSlpView.setVisibility(GONE);
+				}
+				findViewById(R.id.divider).setVisibility(VISIBLE);
 			} else {
 				textAltView.setVisibility(GONE);
 				textSpdView.setVisibility(GONE);
+				textSlpView.setVisibility(GONE);
+				findViewById(R.id.divider).setVisibility(GONE);
 			}
 			super.refreshContent(e, highlight);
 		}
 
 		@Override
 		public MPPointF getOffset() {
-			if (getChartView().getData().getDataSetCount() > 1) {
-				return new MPPointF(-(textAltView.getWidth() / 2), 0);
+			if (getChartView().getData().getDataSetCount() == 2) {
+				int x = findViewById(R.id.divider).getLeft();
+				return new MPPointF(-x - AndroidUtils.dpToPx(getContext(), .5f), 0);
 			} else {
-				return new MPPointF(-(getWidth() / 2), 0);
+				return new MPPointF(-getWidth() / 2f, 0);
 			}
 		}
 
 		@Override
 		public MPPointF getOffsetForDrawingAtPoint(float posX, float posY) {
+			int margin = AndroidUtils.dpToPx(getContext(), 3f);
 			MPPointF offset = getOffset();
 			offset.y = -posY;
+			if (posX + offset.x - margin < 0) {
+				offset.x -= (offset.x + posX - margin);
+			}
+			if (posX + offset.x + getWidth() + margin > getChartView().getWidth()) {
+				offset.x -= (getWidth() - (getChartView().getWidth() - posX) + offset.x) + margin;
+			}
 			return offset;
 		}
 	}

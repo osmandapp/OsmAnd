@@ -147,7 +147,7 @@ public class TrackPointFragment extends OsmAndListFragment {
 	}
 
 	private List<GpxDisplayGroup> filterGroups(GpxDisplayItemType[] types) {
-		List<GpxDisplayGroup> result = getMyActivity().getGpxFile();
+		List<GpxDisplayGroup> result = getMyActivity().getGpxFile(false);
 		List<GpxDisplayGroup> groups = new ArrayList<>();
 		for (GpxDisplayGroup group : result) {
 			boolean add = types == null || hasFilterType(types, group.getType());

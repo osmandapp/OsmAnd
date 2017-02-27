@@ -230,5 +230,8 @@
 	<color name="gpx_chart_blue">#2f7af5</color>
 	<color name="gpx_chart_orange">#ff8800</color>
 	<color name="gpx_chart_green">#23b03b</color>
+	<color name="gpx_chart_blue_grid">#c32561c2</color>
+	<color name="gpx_chart_orange_grid">#c3b35f00</color>
+	<color name="gpx_chart_green_grid">#c3197d2a</color>
 
 </resources>
