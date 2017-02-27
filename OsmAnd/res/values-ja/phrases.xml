@@ -23,13 +23,13 @@
 	<string name="poi_zoo">動物園(Zoo)</string>
 <string name="poi_shop">店(Store)</string>
 		<string name="poi_shop_food">食料品店(Food store)</string>
-	<string name="poi_emergency">救急施設(Emergency)</string>
+	<string name="poi_emergency">救急施設</string>
 	<string name="poi_transportation">交通機関(Transportation)</string>
 		<string name="poi_road_obstacle">道路障害物(Road obstacle)</string>
-		<string name="poi_filling_station">給油所(Gas station)</string>
+		<string name="poi_filling_station">給油所</string>
 		<string name="poi_personal_transport">私設交通機関(Personal transport)</string>
-		<string name="poi_public_transport">公共交通機関(Public transport)</string>
-		<string name="poi_air_transport">航空路(Air transport)</string>
+		<string name="poi_public_transport">公共交通</string>
+		<string name="poi_air_transport">空路</string>
 		<string name="poi_water_transport">水上交通(Water transport)</string>
 		<string name="poi_bicycle_transport">自転車交通(Bicycle transport)</string>
 		<string name="poi_aerialway_transport">索道・ロープウェイ(Aerialway transport)</string>
