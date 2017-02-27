@@ -3239,11 +3239,19 @@
 	<string name="poi_seamark_light_minor">Kis fény (vízi jel)</string>
 	<string name="poi_seamark_light_float">Úszó fény (vízi jel)</string>
 	<string name="poi_seamark_light_vessel">Hajófény (vízi jel)</string>
-	<string name="poi_topmark">Csúcsjelzés (vízi jel)</string>
+	<string name="poi_topmark">Csúcsjel (vízi jel)</string>
 	<string name="poi_daymark">Nappali jelzés</string>
 	<string name="poi_notice">Hajózási jelzés</string>
 	<string name="poi_radar_transponder"/>
 	<string name="poi_seamark_rock">Szikla (parti jel)</string>
-	<string name="poi_seamark_wreck">Hajóroncs</string>
+	<string name="poi_seamark_wreck">Hajóroncs (vízi jel)</string>
 
+	<string name="poi_distance_mark">Folyamkilométer-tábla</string>
+	<string name="poi_denomination_assemblies_of_god">Assemblies of God (Isten gyülekezetei)</string>
+	<string name="poi_craft_rigger">Vitorlásfelszerelés-készítő</string>
+	<string name="poi_dojo">Dódzsó</string>
+
+	<string name="poi_bandy">Bandy</string>
+
+	<string name="poi_mdf">Fő elosztókeret (telefonközpont)</string>
 	</resources>
