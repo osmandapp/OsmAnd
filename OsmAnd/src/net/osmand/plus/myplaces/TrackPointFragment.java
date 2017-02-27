@@ -1,7 +1,9 @@
 package net.osmand.plus.myplaces;
 
 import android.content.DialogInterface;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AlertDialog;
 import android.text.Html;
@@ -21,30 +23,86 @@ import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.FavouritesDbHelper;
-import net.osmand.plus.GpxSelectionHelper;
+import net.osmand.plus.GPXDatabase;
+import net.osmand.plus.GPXUtilities;
+import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItemType;
 import net.osmand.plus.MapMarkersHelper;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.TrackActivity;
 import net.osmand.plus.base.FavoriteImageDrawable;
+import net.osmand.plus.base.OsmAndListFragment;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
-public class TrackPointFragment extends SelectedGPXFragment {
+public class TrackPointFragment extends OsmAndListFragment {
+
+	public static final String ARG_TO_FILTER_SHORT_TRACKS = "ARG_TO_FILTER_SHORT_TRACKS";
+
+	private OsmandApplication app;
+	private ArrayAdapter<GpxDisplayItem> adapter;
+	private GpxDisplayItemType[] filterTypes = { GpxDisplayItemType.TRACK_POINTS, GpxDisplayItemType.TRACK_ROUTE_POINTS };
 
 	@Override
-	protected void setupListView(ListView listView) {
-		super.setupListView(listView);
-		if (adapter.getCount() > 0) {
-			listView.addHeaderView(getActivity().getLayoutInflater().inflate(R.layout.list_shadow_header, null, false));
-		}
+	public void onCreate(@Nullable Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		this.app = getMyApplication();
 	}
 
 	@Override
-	protected GpxDisplayItemType[] filterTypes() {
-		return new GpxDisplayItemType[] { GpxSelectionHelper.GpxDisplayItemType.TRACK_POINTS, GpxSelectionHelper.GpxDisplayItemType.TRACK_ROUTE_POINTS };
+	public void onActivityCreated(Bundle savedInstanceState) {
+		super.onActivityCreated(savedInstanceState);
+		getListView().setBackgroundColor(getResources().getColor(
+				getMyApplication().getSettings().isLightContent() ? R.color.ctx_menu_info_view_bg_light
+						: R.color.ctx_menu_info_view_bg_dark));
+	}
+
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		setHasOptionsMenu(true);
+		View view = getActivity().getLayoutInflater().inflate(R.layout.update_index, container, false);
+		view.findViewById(R.id.header_layout).setVisibility(View.GONE);
+		ListView listView = (ListView) view.findViewById(android.R.id.list);
+		listView.setDivider(null);
+		listView.setDividerHeight(0);
+		TextView tv = new TextView(getActivity());
+		tv.setText(R.string.none_selected_gpx);
+		tv.setTextSize(24);
+		listView.setEmptyView(tv);
+		setContent(listView);
+		return view;
+	}
+
+	public TrackActivity getMyActivity() {
+		return (TrackActivity) getActivity();
+	}
+
+	public ArrayAdapter<?> getAdapter() {
+		return adapter;
+	}
+
+	private GPXUtilities.GPXFile getGpx() {
+		return getMyActivity().getGpx();
+	}
+
+	private GPXDatabase.GpxDataItem getGpxDataItem() {
+		return getMyActivity().getGpxDataItem();
+	}
+
+	private void setupListView(ListView listView) {
+		if (adapter.getCount() > 0) {
+			listView.addHeaderView(getActivity().getLayoutInflater().inflate(R.layout.list_shadow_header, null, false));
+			listView.addFooterView(getActivity().getLayoutInflater().inflate(R.layout.list_shadow_footer, null, false));
+		}
 	}
 
 	@Override
@@ -75,10 +133,78 @@ public class TrackPointFragment extends SelectedGPXFragment {
 		}
 	}
 
+	private boolean isArgumentTrue(@NonNull String arg) {
+		return getArguments() != null && getArguments().getBoolean(arg);
+	}
+
+	private boolean hasFilterType(GpxDisplayItemType[] filterTypes, GpxDisplayItemType filterType) {
+		for (GpxDisplayItemType type : filterTypes) {
+			if (type == filterType) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	private List<GpxDisplayGroup> filterGroups(GpxDisplayItemType[] types) {
+		List<GpxDisplayGroup> result = getMyActivity().getGpxFile();
+		List<GpxDisplayGroup> groups = new ArrayList<>();
+		for (GpxDisplayGroup group : result) {
+			boolean add = types == null || hasFilterType(types, group.getType());
+			if (isArgumentTrue(ARG_TO_FILTER_SHORT_TRACKS)) {
+				Iterator<GpxDisplayItem> item = group.getModifiableList().iterator();
+				while (item.hasNext()) {
+					GpxDisplayItem it2 = item.next();
+					if (it2.analysis != null && it2.analysis.totalDistance < 100) {
+						item.remove();
+					}
+				}
+				if (group.getModifiableList().isEmpty()) {
+					add = false;
+				}
+			}
+			if (add) {
+				groups.add(group);
+			}
+
+		}
+		return groups;
+	}
+
+	public void setContent() {
+		setContent(getListView());
+	}
+
+	public void setContent(ListView listView) {
+		adapter = new PointGPXAdapter(new ArrayList<GpxDisplayItem>());
+		updateContent();
+		setupListView(listView);
+		setListAdapter(adapter);
+	}
+
+	protected void updateContent() {
+		adapter.clear();
+		List<GpxDisplayGroup> groups = filterGroups(filterTypes);
+		adapter.setNotifyOnChange(false);
+		for (GpxDisplayItem i : flatten(groups)) {
+			adapter.add(i);
+		}
+		adapter.setNotifyOnChange(true);
+		adapter.notifyDataSetChanged();
+	}
+
+	protected List<GpxDisplayItem> flatten(List<GpxDisplayGroup> groups) {
+		ArrayList<GpxDisplayItem> list = new ArrayList<>();
+		for(GpxDisplayGroup g : groups) {
+			list.addAll(g.getModifiableList());
+		}
+		return list;
+	}
+
 	protected void saveAsFavorites(final GpxDisplayItemType gpxDisplayItemType) {
 		AlertDialog.Builder b = new AlertDialog.Builder(getMyActivity());
 		final EditText editText = new EditText(getMyActivity());
-		final List<GpxSelectionHelper.GpxDisplayGroup> gs = filterGroups(new GpxDisplayItemType[] { gpxDisplayItemType }, getMyActivity(), getArguments());
+		final List<GpxDisplayGroup> gs = filterGroups(new GpxDisplayItemType[] { gpxDisplayItemType });
 		if (gs.size() == 0) {
 			return;
 		}
@@ -103,7 +229,7 @@ public class TrackPointFragment extends SelectedGPXFragment {
 
 	protected void saveAsMapMarkers(final GpxDisplayItemType gpxDisplayItemType) {
 		AlertDialog.Builder b = new AlertDialog.Builder(getMyActivity());
-		final List<GpxSelectionHelper.GpxDisplayGroup> gs = filterGroups(new GpxDisplayItemType[] { gpxDisplayItemType }, getMyActivity(), getArguments());
+		final List<GpxDisplayGroup> gs = filterGroups(new GpxDisplayItemType[] { gpxDisplayItemType });
 		if (gs.size() == 0) {
 			return;
 		}
@@ -147,15 +273,63 @@ public class TrackPointFragment extends SelectedGPXFragment {
 	}
 
 	@Override
-	public ArrayAdapter<GpxDisplayItem> createSelectedGPXAdapter() {
-		return new PointGPXAdapter(new ArrayList<GpxDisplayItem>());
-	}
+	public void onListItemClick(ListView l, View v, int position, long id) {
 
+		GpxDisplayItem child = adapter.getItem(position);
+		if (child != null) {
+			if (child.group.getGpx() != null) {
+				app.getSelectedGpxHelper().setGpxFileToDisplay(child.group.getGpx());
+			}
+
+			final OsmandSettings settings = app.getSettings();
+			LatLon location = new LatLon(child.locationStart.lat, child.locationStart.lon);
+
+			if (child.group.getType() == GpxDisplayItemType.TRACK_ROUTE_POINTS) {
+				settings.setMapLocationToShow(location.getLatitude(), location.getLongitude(),
+						settings.getLastKnownMapZoom(),
+						new PointDescription(PointDescription.POINT_TYPE_WPT, child.name),
+						false,
+						child.locationStart);
+			} else {
+				settings.setMapLocationToShow(location.getLatitude(), location.getLongitude(),
+						settings.getLastKnownMapZoom(),
+						new PointDescription(PointDescription.POINT_TYPE_GPX_ITEM, child.group.getGpxName()),
+						false,
+						child);
+			}
+			MapActivity.launchMapActivityMoveToTop(getActivity());
+		}
+	}
 
 	class PointGPXAdapter extends ArrayAdapter<GpxDisplayItem> {
 
+		Map<GpxDisplayItemType, List<GpxDisplayItem>> itemTypes = new LinkedHashMap<>();
+		List<GpxDisplayItemType> types = new ArrayList<>();
+
 		PointGPXAdapter(List<GpxDisplayItem> items) {
 			super(getActivity(), R.layout.gpx_list_item_tab_content, items);
+		}
+
+		@Override
+		public void add(GpxDisplayItem item) {
+			super.add(item);
+			GpxDisplayItemType type = item.group.getType();
+			List<GpxDisplayItem> items = itemTypes.get(type);
+			if (items == null) {
+				items = new ArrayList<>();
+				itemTypes.put(type, items);
+			}
+			items.add(item);
+			if (!types.contains(type)) {
+				types.add(type);
+			}
+		}
+
+		@Override
+		public void clear() {
+			super.clear();
+			types.clear();
+			itemTypes.clear();
 		}
 
 		@NonNull

@@ -25,7 +25,6 @@ import net.osmand.plus.OsmAndAppCustomization;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.myplaces.FavoritesActivity;
-import net.osmand.plus.myplaces.SelectedGPXFragment;
 import net.osmand.plus.myplaces.TrackPointFragment;
 import net.osmand.plus.myplaces.TrackSegmentFragment;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip;
@@ -102,8 +101,10 @@ public class TrackActivity extends TabActivity {
 
 					for (WeakReference<Fragment> f : fragList) {
 						Fragment frag = f.get();
-						if (frag instanceof SelectedGPXFragment) {
-							((SelectedGPXFragment) frag).setContent();
+						if (frag instanceof TrackSegmentFragment) {
+							((TrackSegmentFragment) frag).setContent();
+						} else if (frag instanceof TrackPointFragment) {
+							((TrackPointFragment) frag).setContent();
 						}
 					}
 					((OsmandFragmentPagerAdapter) mViewPager.getAdapter()).addTab(

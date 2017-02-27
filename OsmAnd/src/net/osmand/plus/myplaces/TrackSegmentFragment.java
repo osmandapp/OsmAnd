@@ -1,10 +1,15 @@
 package net.osmand.plus.myplaces;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Matrix;
+import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.ListPopupWindow;
@@ -12,6 +17,9 @@ import android.support.v7.widget.SwitchCompat;
 import android.util.SparseArray;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +39,7 @@ import com.github.mikephil.charting.listener.OnChartGestureListener;
 
 import net.osmand.AndroidUtils;
 import net.osmand.data.PointDescription;
+import net.osmand.plus.GPXDatabase;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.plus.GpxSelectionHelper;
@@ -45,6 +54,7 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TrackActivity;
+import net.osmand.plus.base.OsmAndListFragment;
 import net.osmand.plus.dialogs.ConfigureMapMenu.AppearanceListItem;
 import net.osmand.plus.dialogs.ConfigureMapMenu.GpxAppearanceAdapter;
 import net.osmand.plus.dialogs.ConfigureMapMenu.GpxAppearanceAdapter.GpxAppearanceAdapterType;
@@ -57,11 +67,13 @@ import net.osmand.plus.views.controls.WrapContentHeightViewPager.ViewAtPositionI
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
 
+import java.io.File;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -70,19 +82,127 @@ import gnu.trove.list.array.TIntArrayList;
 
 import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR;
 
-public class TrackSegmentFragment extends SelectedGPXFragment {
+public class TrackSegmentFragment extends OsmAndListFragment {
 
+	public static final String ARG_TO_FILTER_SHORT_TRACKS = "ARG_TO_FILTER_SHORT_TRACKS";
+
+	private OsmandApplication app;
+	private ArrayAdapter<GpxDisplayItem> adapter;
+
+	private GpxDisplayItemType[] filterTypes = { GpxSelectionHelper.GpxDisplayItemType.TRACK_SEGMENT };
 	private List<String> options = new ArrayList<>();
 	private List<Double> distanceSplit = new ArrayList<>();
 	private TIntArrayList timeSplit = new TIntArrayList();
 	private int selectedSplitInterval;
+	private boolean updateEnable;
 
 	@Override
-	protected void setupListView(ListView listView) {
-		super.setupListView(listView);
+	public void onCreate(@Nullable Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		this.app = getMyApplication();
+	}
+
+	@Override
+	public void onActivityCreated(Bundle savedInstanceState) {
+		super.onActivityCreated(savedInstanceState);
+		getListView().setBackgroundColor(getResources().getColor(
+				getMyApplication().getSettings().isLightContent() ? R.color.ctx_menu_info_view_bg_light
+						: R.color.ctx_menu_info_view_bg_dark));
+	}
+
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		setHasOptionsMenu(true);
+		View view = getActivity().getLayoutInflater().inflate(R.layout.update_index, container, false);
+		view.findViewById(R.id.header_layout).setVisibility(View.GONE);
+		ListView listView = (ListView) view.findViewById(android.R.id.list);
+		listView.setDivider(null);
+		listView.setDividerHeight(0);
+		TextView tv = new TextView(getActivity());
+		tv.setText(R.string.none_selected_gpx);
+		tv.setTextSize(24);
+		listView.setEmptyView(tv);
+		setContent(listView);
+		return view;
+	}
+
+	public TrackActivity getMyActivity() {
+		return (TrackActivity) getActivity();
+	}
+
+	public ArrayAdapter<?> getAdapter() {
+		return adapter;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		return super.onOptionsItemSelected(item);
+	}
+
+	@Override
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		menu.clear();
+		getMyActivity().getClearToolbar(false);
+		if (getGpx() != null && getGpx().path != null && !getGpx().showCurrentTrack) {
+			MenuItem item = menu.add(R.string.shared_string_share).setIcon(R.drawable.ic_action_gshare_dark)
+					.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+						@Override
+						public boolean onMenuItemClick(MenuItem item) {
+							final Uri fileUri = Uri.fromFile(new File(getGpx().path));
+							final Intent sendIntent = new Intent(Intent.ACTION_SEND);
+							sendIntent.putExtra(Intent.EXTRA_STREAM, fileUri);
+							sendIntent.setType("application/gpx+xml");
+							startActivity(sendIntent);
+							return true;
+						}
+					});
+			MenuItemCompat.setShowAsAction(item, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
+		}
+	}
+
+	private GPXUtilities.GPXFile getGpx() {
+		return getMyActivity().getGpx();
+	}
+
+	private GPXDatabase.GpxDataItem getGpxDataItem() {
+		return getMyActivity().getGpxDataItem();
+	}
+
+	private void startHandler() {
+		Handler updateCurrentRecordingTrack = new Handler();
+		updateCurrentRecordingTrack.postDelayed(new Runnable() {
+			@Override
+			public void run() {
+				if (updateEnable) {
+					updateContent();
+					adapter.notifyDataSetChanged();
+					startHandler();
+				}
+			}
+		}, 2000);
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		updateContent();
+		updateEnable = true;
+		if (getGpx() != null && getGpx().showCurrentTrack) {
+			startHandler();
+		}
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		updateEnable = false;
+	}
+
+	private void setupListView(ListView listView) {
 		if (adapter.getCount() > 0) {
 			View view = getActivity().getLayoutInflater().inflate(R.layout.gpx_item_list_header, null, false);
 			listView.addHeaderView(view);
+			listView.addFooterView(getActivity().getLayoutInflater().inflate(R.layout.list_shadow_footer, null, false));
 			final ImageView imageView = (ImageView) view.findViewById(R.id.imageView);
 			final View splitIntervalView = view.findViewById(R.id.split_interval_view);
 			final View colorView = view.findViewById(R.id.color_view);
@@ -204,8 +324,7 @@ public class TrackSegmentFragment extends SelectedGPXFragment {
 	}
 
 	private List<GpxDisplayGroup> getGroups() {
-		return filterGroups(new GpxDisplayItemType[] { GpxDisplayItemType.TRACK_SEGMENT },
-				getMyActivity(), getArguments());
+		return filterGroups();
 	}
 
 	private void setupSplitIntervalView(View view) {
@@ -255,9 +374,72 @@ public class TrackSegmentFragment extends SelectedGPXFragment {
 		}
 	}
 
-	@Override
-	protected GpxDisplayItemType[] filterTypes() {
-		return new GpxDisplayItemType[] { GpxSelectionHelper.GpxDisplayItemType.TRACK_SEGMENT };
+	private boolean isArgumentTrue(@NonNull String arg) {
+		return getArguments() != null && getArguments().getBoolean(arg);
+	}
+
+	protected boolean hasFilterType(GpxDisplayItemType filterType) {
+		for (GpxDisplayItemType type : filterTypes) {
+			if (type == filterType) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	private List<GpxDisplayGroup> filterGroups() {
+		List<GpxDisplayGroup> result = getMyActivity().getGpxFile();
+		List<GpxDisplayGroup> groups = new ArrayList<>();
+		for (GpxDisplayGroup group : result) {
+			boolean add = hasFilterType(group.getType());
+			if (isArgumentTrue(ARG_TO_FILTER_SHORT_TRACKS)) {
+				Iterator<GpxDisplayItem> item = group.getModifiableList().iterator();
+				while (item.hasNext()) {
+					GpxDisplayItem it2 = item.next();
+					if (it2.analysis != null && it2.analysis.totalDistance < 100) {
+						item.remove();
+					}
+				}
+				if (group.getModifiableList().isEmpty()) {
+					add = false;
+				}
+			}
+			if (add) {
+				groups.add(group);
+			}
+
+		}
+		return groups;
+	}
+
+	public void setContent() {
+		setContent(getListView());
+	}
+
+	public void setContent(ListView listView) {
+		adapter = new SegmentGPXAdapter(new ArrayList<GpxDisplayItem>());
+		updateContent();
+		setupListView(listView);
+		setListAdapter(adapter);
+	}
+
+	protected void updateContent() {
+		adapter.clear();
+		List<GpxDisplayGroup> groups = filterGroups();
+		adapter.setNotifyOnChange(false);
+		for (GpxDisplayItem i : flatten(groups)) {
+			adapter.add(i);
+		}
+		adapter.setNotifyOnChange(true);
+		adapter.notifyDataSetChanged();
+	}
+
+	protected List<GpxDisplayItem> flatten(List<GpxDisplayGroup> groups) {
+		ArrayList<GpxDisplayItem> list = new ArrayList<>();
+		for(GpxDisplayGroup g : groups) {
+			list.addAll(g.getModifiableList());
+		}
+		return list;
 	}
 
 	private void prepareSplitIntervalAdapterData() {
@@ -292,7 +474,7 @@ public class TrackSegmentFragment extends SelectedGPXFragment {
 	}
 
 	private void updateSplit(List<GpxDisplayGroup> groups, SelectedGpxFile sf) {
-		new SplitTrackAsyncTask(sf, this, getMyActivity(), groups).execute((Void) null);
+		new SplitTrackAsyncTask(sf, groups).execute((Void) null);
 	}
 
 	private void addOptionSplit(int value, boolean distance, List<GpxDisplayGroup> model) {
@@ -320,10 +502,30 @@ public class TrackSegmentFragment extends SelectedGPXFragment {
 		}
 	}
 
+	/*
 	@Override
-	public ArrayAdapter<GpxDisplayItem> createSelectedGPXAdapter() {
-		return new SegmentGPXAdapter(new ArrayList<GpxDisplayItem>());
+	public void onListItemClick(ListView l, View v, int position, long id) {
+
+		GpxDisplayItem child = adapter.getItem(position);
+		if (child != null) {
+			if (child.group.getGpx() != null) {
+				app.getSelectedGpxHelper().setGpxFileToDisplay(child.group.getGpx());
+			}
+
+			final OsmandSettings settings = app.getSettings();
+			LatLon location = new LatLon(child.locationStart.lat, child.locationStart.lon);
+
+			if (child.group.getType() == GpxDisplayItemType.TRACK_POINTS) {
+				settings.setMapLocationToShow(location.getLatitude(), location.getLongitude(),
+						settings.getLastKnownMapZoom(),
+						new PointDescription(PointDescription.POINT_TYPE_WPT, child.locationStart.name),
+						false,
+						child.locationStart);
+			}
+			MapActivity.launchMapActivityMoveToTop(getActivity());
+		}
 	}
+	*/
 
 	class SegmentGPXAdapter extends ArrayAdapter<GpxDisplayItem> {
 
@@ -783,24 +985,21 @@ public class TrackSegmentFragment extends SelectedGPXFragment {
 	class SplitTrackAsyncTask extends AsyncTask<Void, Void, Void> {
 		@Nullable
 		private final SelectedGpxFile mSelectedGpxFile;
-		@NonNull private final SelectedGPXFragment mFragment;
+		@NonNull private final TrackSegmentFragment mFragment;
 		@NonNull private final TrackActivity mActivity;
 
 		private final List<GpxDisplayGroup> groups;
 
-		SplitTrackAsyncTask(@Nullable SelectedGpxFile selectedGpxFile,
-								   @NonNull SelectedGPXFragment fragment,
-								   @NonNull TrackActivity activity,
-								   List<GpxDisplayGroup> groups) {
+		SplitTrackAsyncTask(@Nullable SelectedGpxFile selectedGpxFile, List<GpxDisplayGroup> groups) {
 			mSelectedGpxFile = selectedGpxFile;
-			mFragment = fragment;
-			mActivity = activity;
+			mFragment = TrackSegmentFragment.this;
+			mActivity = getMyActivity();
 			this.groups = groups;
 		}
 
 		protected void onPostExecute(Void result) {
 			if (mSelectedGpxFile != null) {
-				mSelectedGpxFile.setDisplayGroups(filterGroups(null, mActivity, mFragment.getArguments()));
+				mSelectedGpxFile.setDisplayGroups(filterGroups());
 			}
 			if (mFragment.isVisible()) {
 				mFragment.updateContent();
