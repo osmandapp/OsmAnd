@@ -18,117 +18,130 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="?attr/bg_color"
-        android:gravity="center_vertical">
+        android:orientation="vertical"
+        android:background="?attr/bg_color">
 
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1.8"
-            android:minHeight="48dp"
-            android:paddingLeft="16dp"
-            android:paddingTop="8dp"
-            android:paddingBottom="8dp"
             android:orientation="horizontal"
             android:gravity="center_vertical">
 
-            <TextView
+            <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textColor="?android:textColorPrimary"
-                android:textSize="@dimen/default_list_text_size"
-                android:text="@string/shared_string_show_on_map"/>
-
-            <android.support.v7.widget.SwitchCompat
-                android:id="@+id/showOnMapToggle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_weight="1.8"
+                android:minHeight="48dp"
                 android:paddingLeft="16dp"
-                android:paddingRight="8dp"/>
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColor="?android:textColorPrimary"
+                    android:textSize="@dimen/default_list_text_size"
+                    android:text="@string/shared_string_show_on_map"/>
+
+                <android.support.v7.widget.SwitchCompat
+                    android:id="@+id/showOnMapToggle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="8dp"/>
+
+            </LinearLayout>
 
         </LinearLayout>
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="?attr/bg_color"
-        android:gravity="center_vertical">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:background="?attr/dashboard_divider"/>
 
         <LinearLayout
-            android:id="@+id/split_interval_view"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1.6"
-            android:minHeight="48dp"
-            android:paddingLeft="16dp"
-            android:paddingTop="8dp"
-            android:paddingBottom="8dp"
-            android:background="?attr/selectableItemBackground"
             android:orientation="horizontal"
             android:gravity="center_vertical">
 
-            <TextView
-                android:id="@+id/split_interval_title"
+            <LinearLayout
+                android:id="@+id/split_interval_view"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textColor="?android:textColorPrimary"
-                android:textSize="@dimen/default_list_text_size"
-                android:text="@string/gpx_split_interval"/>
-
-            <net.osmand.plus.widgets.TextViewEx
-                android:id="@+id/split_interval_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingLeft="8dp"
-                android:paddingRight="8dp"
-                android:textColor="?android:textColorPrimary"
-                android:textSize="@dimen/default_list_text_size"
-                osmand:typeface="@string/font_roboto_medium"
-                tools:text="10 km"/>
-
-            <ImageView
-                android:id="@+id/split_interval_arrow"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_action_arrow_drop_down"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/color_view"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:minHeight="48dp"
-            android:paddingRight="16dp"
-            android:paddingTop="8dp"
-            android:paddingBottom="8dp"
-            android:background="?attr/selectableItemBackground"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
-
-            <TextView
-                android:id="@+id/colorText"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="right"
-                android:textColor="?android:textColorPrimary"
-                android:textSize="@dimen/default_list_text_size"
-                android:text="@string/shared_string_color"/>
-
-            <ImageView
-                android:id="@+id/colorImage"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_weight="1.6"
+                android:minHeight="48dp"
                 android:paddingLeft="16dp"
-                android:src="@drawable/ic_action_circle"/>
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:background="?attr/selectableItemBackground"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/split_interval_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColor="?android:textColorPrimary"
+                    android:textSize="@dimen/default_list_text_size"
+                    android:text="@string/gpx_split_interval"/>
+
+                <net.osmand.plus.widgets.TextViewEx
+                    android:id="@+id/split_interval_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
+                    android:textColor="?android:textColorPrimary"
+                    android:textSize="@dimen/default_list_text_size"
+                    osmand:typeface="@string/font_roboto_medium"
+                    tools:text="10 km"/>
+
+                <ImageView
+                    android:id="@+id/split_interval_arrow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_action_arrow_drop_down"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/color_view"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:minHeight="48dp"
+                android:paddingRight="16dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:background="?attr/selectableItemBackground"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/colorText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:textColor="?android:textColorPrimary"
+                    android:textSize="@dimen/default_list_text_size"
+                    android:text="@string/shared_string_color"/>
+
+                <ImageView
+                    android:id="@+id/colorImage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="16dp"
+                    android:src="@drawable/ic_action_circle"/>
+
+            </LinearLayout>
 
         </LinearLayout>
 

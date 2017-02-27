@@ -45,6 +45,7 @@ public class TrackActivity extends TabActivity {
 	ViewPager mViewPager;
 	private long modifiedTime = -1;
 	private List<GpxDisplayGroup> displayGroups;
+	private List<GpxDisplayGroup> originalGroups = new ArrayList<>();
 
 	@Override
 	public void onCreate(Bundle icicle) {
@@ -108,7 +109,7 @@ public class TrackActivity extends TabActivity {
 						}
 					}
 					((OsmandFragmentPagerAdapter) mViewPager.getAdapter()).addTab(
-							getTabIndicator(R.string.info_button, TrackSegmentFragment.class));
+							getTabIndicator(R.string.gpx_track, TrackSegmentFragment.class));
 					if (isHavingWayPoints() || isHavingRoutePoints()) {
 						((OsmandFragmentPagerAdapter) mViewPager.getAdapter()).addTab(
 								getTabIndicator(R.string.points, TrackPointFragment.class));
@@ -132,7 +133,7 @@ public class TrackActivity extends TabActivity {
 		}
 	}
 
-	public List<GpxDisplayGroup> getGpxFile() {
+	public List<GpxDisplayGroup> getGpxFile(boolean useDisplayGroups) {
 		if (gpxFile == null) {
 			return new ArrayList<>();
 		}
@@ -140,6 +141,10 @@ public class TrackActivity extends TabActivity {
 			modifiedTime = gpxFile.modifiedTime;
 			GpxSelectionHelper selectedGpxHelper = ((OsmandApplication) getApplication()).getSelectedGpxHelper();
 			displayGroups = selectedGpxHelper.collectDisplayGroups(gpxFile);
+			originalGroups.clear();
+			for (GpxDisplayGroup g : displayGroups) {
+				originalGroups.add(g.cloneInstance());
+			}
 			if (file != null) {
 				SelectedGpxFile sf = selectedGpxHelper.getSelectedFileByPath(gpxFile.path);
 				if (sf != null && file != null && sf.getDisplayGroups() != null) {
@@ -147,7 +152,11 @@ public class TrackActivity extends TabActivity {
 				}
 			}
 		}
-		return displayGroups;
+		if (useDisplayGroups) {
+			return displayGroups;
+		} else {
+			return originalGroups;
+		}
 	}
 
 	@Override

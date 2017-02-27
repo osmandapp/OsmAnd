@@ -225,7 +225,7 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 				public void onClick(View v) {
 					SelectedGpxFile sf = app.getSelectedGpxHelper().selectGpxFile(getGpx(), vis.isChecked(), false);
 					if (vis.isChecked() && sf.getGpxFile() != null) {
-						final List<GpxDisplayGroup> groups = getGroups();
+						final List<GpxDisplayGroup> groups = getOriginalGroups();
 						if (groups.size() > 0 && groups.get(0).getModifiableList().size() > 0) {
 							GpxDisplayItem item = groups.get(0).getModifiableList().get(0);
 							app.getSettings().setMapLocationToShow(item.locationStart.lat, item.locationStart.lon,
@@ -309,7 +309,7 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 						public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 							selectedSplitInterval = position;
 							SelectedGpxFile sf = app.getSelectedGpxHelper().selectGpxFile(getGpx(), vis.isChecked(), false);
-							final List<GpxDisplayGroup> groups = getGroups();
+							final List<GpxDisplayGroup> groups = getDisplayGroups();
 							if (groups.size() > 0) {
 								updateSplit(groups, vis.isChecked() ? sf : null);
 							}
@@ -323,8 +323,12 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 		}
 	}
 
-	private List<GpxDisplayGroup> getGroups() {
-		return filterGroups();
+	private List<GpxDisplayGroup> getOriginalGroups() {
+		return filterGroups(false);
+	}
+
+	private List<GpxDisplayGroup> getDisplayGroups() {
+		return filterGroups(true);
 	}
 
 	private void setupSplitIntervalView(View view) {
@@ -332,7 +336,7 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 		final TextView text = (TextView) view.findViewById(R.id.split_interval_text);
 		final ImageView img = (ImageView) view.findViewById(R.id.split_interval_arrow);
 		int colorId;
-		final List<GpxDisplayGroup> groups = getGroups();
+		final List<GpxDisplayGroup> groups = getDisplayGroups();
 		if (groups.size() > 0) {
 			colorId = app.getSettings().isLightContent() ?
 					R.color.primary_text_light : R.color.primary_text_dark;
@@ -387,8 +391,8 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 		return false;
 	}
 
-	private List<GpxDisplayGroup> filterGroups() {
-		List<GpxDisplayGroup> result = getMyActivity().getGpxFile();
+	private List<GpxDisplayGroup> filterGroups(boolean useDisplayGroups) {
+		List<GpxDisplayGroup> result = getMyActivity().getGpxFile(useDisplayGroups);
 		List<GpxDisplayGroup> groups = new ArrayList<>();
 		for (GpxDisplayGroup group : result) {
 			boolean add = hasFilterType(group.getType());
@@ -425,7 +429,7 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 
 	protected void updateContent() {
 		adapter.clear();
-		List<GpxDisplayGroup> groups = filterGroups();
+		List<GpxDisplayGroup> groups = getOriginalGroups();
 		adapter.setNotifyOnChange(false);
 		for (GpxDisplayItem i : flatten(groups)) {
 			adapter.add(i);
@@ -443,7 +447,7 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 	}
 
 	private void prepareSplitIntervalAdapterData() {
-		final List<GpxDisplayGroup> groups = getGroups();
+		final List<GpxDisplayGroup> groups = getDisplayGroups();
 
 		options.add(app.getString(R.string.shared_string_none));
 		distanceSplit.add(-1d);
@@ -873,7 +877,7 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 								((TextView) view.findViewById(R.id.time_moving_text))
 										.setText(Algorithms.formatDuration((int) (analysis.timeMoving / 1000), app.accessibilityEnabled()));
 								((TextView) view.findViewById(R.id.distance_text))
-										.setText(OsmAndFormatter.getFormattedDistance(analysis.totalDistance, app));
+										.setText(OsmAndFormatter.getFormattedDistance(analysis.totalDistanceMoving, app));
 
 							} else {
 								chart.setVisibility(View.GONE);
@@ -999,10 +1003,10 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 
 		protected void onPostExecute(Void result) {
 			if (mSelectedGpxFile != null) {
-				mSelectedGpxFile.setDisplayGroups(filterGroups());
+				mSelectedGpxFile.setDisplayGroups(getDisplayGroups());
 			}
 			if (mFragment.isVisible()) {
-				mFragment.updateContent();
+				//mFragment.updateContent();
 			}
 			if (!mActivity.isFinishing()) {
 				mActivity.setProgressBarIndeterminateVisibility(false);
