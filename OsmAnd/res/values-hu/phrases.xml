@@ -265,7 +265,7 @@
 		<string name="poi_craft">Kézművesműhely</string>
 	<string name="poi_finance">Pénzügy</string>
 	<string name="poi_natural">Természet</string>
-	<string name="poi_seamark">Hajózási</string>
+	<string name="poi_seamark">Hajózásitérkép-jel</string>
 	<string name="poi_military">Katonai</string>
 	<string name="poi_osmwiki">Wikipédia</string>
 	<string name="poi_alcohol">Alkoholüzlet</string>
@@ -1488,7 +1488,7 @@
 
 	<string name="poi_craft_computer">Számítógép-szerelő</string>
 	<string name="poi_floating_dock">Úszódokk</string>
-	<string name="poi_seamark_harbour">Kikötő</string>
+	<string name="poi_seamark_harbour">Kikötő (hajózásitérkép-jel)</string>
 	<string name="poi_landmark">Parti jel</string>
 	<string name="poi_mooring">Kikötőhely</string>
 	<string name="poi_garden">Kert</string>
@@ -1790,7 +1790,7 @@
 	<string name="poi_fuel_type">Típus</string>
 	<string name="poi_payment_type">Fizetési mód</string>
 	<string name="poi_trash_disposal">Hulladékkonténer</string>
-		<string name="poi_beacon">Jel</string>
+		<string name="poi_beacon">Hajózási jel</string>
 	<string name="poi_free_flying">Siklóernyő- és sárkányrepülőbolt</string>
 	<string name="poi_standpipe">Föld feletti tűzcsap</string>
 	<string name="poi_groyne">Sarkantyú</string>
@@ -1820,10 +1820,10 @@
 <string name="poi_payment_meal_voucher_yes">Étkezési utalványok</string>
 	<string name="poi_payment_meal_voucher_no">Étkezési utalványt nem fogad el</string>
 	<string name="poi_dry_dock">Szárazdokk</string>
-	<string name="poi_fog_signal">Ködjelzés</string>
+	<string name="poi_fog_signal">Ködjelző</string>
 	<string name="poi_harbour_basin">Kikötőmedence</string>
 	<string name="poi_pile">Cölöp</string>
-	<string name="poi_radio_station">Rádióállomás (parti jel)</string>
+	<string name="poi_radio_station">Rádióállomás (hajózásitérkép-jel)</string>
 	<string name="poi_power_supply_yes">Van</string>
 	<string name="poi_power_supply_no">Elektromos csatlakozó nincs</string>
 	<string name="poi_generator_output_electricity">Kimeneti teljesítmény</string>
@@ -3231,20 +3231,20 @@
 
 	<string name="poi_fast_food_cafeteria">Van</string>
 
-	<string name="poi_seamark_building">Épület (parti jel)</string>
-	<string name="poi_seamark_bridge">Híd (parti jel)</string>
-	<string name="poi_seamark_dyke">Töltés (parti jel)</string>
-	<string name="poi_seamark_light">Fény (vízi jel)</string>
-	<string name="poi_seamark_light_major">Jelentős fény (vízi jel)</string>
-	<string name="poi_seamark_light_minor">Kis fény (vízi jel)</string>
-	<string name="poi_seamark_light_float">Úszó fény (vízi jel)</string>
-	<string name="poi_seamark_light_vessel">Hajófény (vízi jel)</string>
-	<string name="poi_topmark">Csúcsjel (vízi jel)</string>
+	<string name="poi_seamark_building">Épület (hajózásitérkép-jel)</string>
+	<string name="poi_seamark_bridge">Híd (hajózásitérkép-jel)</string>
+	<string name="poi_seamark_dyke">Töltés (hajózásitérkép-jel)</string>
+	<string name="poi_seamark_light">Fény (hajózásitérkép-jel)</string>
+	<string name="poi_seamark_light_major">Jelentős fény (hajózásitérkép-jel)</string>
+	<string name="poi_seamark_light_minor">Kis fény (hajózásitérkép-jel)</string>
+	<string name="poi_seamark_light_float">Úszó fény (hajózásitérkép-jel)</string>
+	<string name="poi_seamark_light_vessel">Hajófény (hajózásitérkép-jel)</string>
+	<string name="poi_topmark">Csúcsjel (hajózásitérkép-jel)</string>
 	<string name="poi_daymark">Nappali jelzés</string>
-	<string name="poi_notice">Hajózási jelzés</string>
-	<string name="poi_radar_transponder"/>
-	<string name="poi_seamark_rock">Szikla (parti jel)</string>
-	<string name="poi_seamark_wreck">Hajóroncs (vízi jel)</string>
+	<string name="poi_notice">Hajózási jelzőtábla</string>
+	<string name="poi_radar_transponder">Radar-válaszjeladó, transzponder (hajózásitérkép-jel)</string>
+	<string name="poi_seamark_rock">Szikla (hajózásitérkép-jel)</string>
+	<string name="poi_seamark_wreck">Hajóroncs (hajózásitérkép-jel)</string>
 
 	<string name="poi_distance_mark">Folyamkilométer-tábla</string>
 	<string name="poi_denomination_assemblies_of_god">Assemblies of God (Isten gyülekezetei)</string>
@@ -3254,4 +3254,6 @@
 	<string name="poi_bandy">Bandy</string>
 
 	<string name="poi_mdf">Fő elosztókeret (telefonközpont)</string>
+	<string name="poi_signal_station_traffic">Jelzőállomás (vízi közlekedés)</string>
+	<string name="poi_signal_station_warning">Jelzőállomás (figyelmeztetés)</string>
 	</resources>
