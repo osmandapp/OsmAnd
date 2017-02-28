@@ -138,11 +138,11 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.favorites_tree, container, false);
 		ExpandableListView listView = (ExpandableListView) view.findViewById(android.R.id.list);
-		View headerView = inflater.inflate(R.layout.list_shadow_header, null, false);
-		listView.addHeaderView(headerView);
-		View footerView = inflater.inflate(R.layout.list_shadow_footer, null, false);
-		listView.addFooterView(footerView);
 		favouritesAdapter.synchronizeGroups();
+		if (!favouritesAdapter.isEmpty()) {
+			listView.addHeaderView(inflater.inflate(R.layout.list_shadow_header, null, false));
+			listView.addFooterView(inflater.inflate(R.layout.list_shadow_footer, null, false));
+		}
 		listView.setAdapter(favouritesAdapter);
 		setListView(listView);
 		setHasOptionsMenu(true);

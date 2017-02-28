@@ -9,6 +9,10 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="points_delete_multiple_succesful">Point(s) deleted successfully.</string>
+    <string name="points_delete_multiple">You are going to delete %1$d point(s). Are you sure?</string>
+    <string name="route_points_category_name">Points on the route to pass</string>
+    <string name="track_points_category_name">Important points in this route</string>
     <string name="gpx_track">Track</string>
     <string name="max_speed">Max speed</string>
     <string name="average_speed">Average speed</string>
@@ -18,7 +22,7 @@
     <string name="shared_string_start_time">Start time</string>
     <string name="shared_string_end_time">End time</string>
     <string name="shared_string_color">Color</string>
-    <string name="select_gpx_folder">Select GPX folder</string>
+    <string name="select_gpx_folder">Select track folder</string>
     <string name="file_can_not_be_moved">File can not be moved.</string>
     <string name="shared_string_move">Move</string>
     <string name="shared_string_tracks">Tracks</string>

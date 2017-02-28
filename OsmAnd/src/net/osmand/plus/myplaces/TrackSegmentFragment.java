@@ -199,95 +199,97 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 	}
 
 	private void setupListView(ListView listView) {
-		if (adapter.getCount() > 0) {
-			View view = getActivity().getLayoutInflater().inflate(R.layout.gpx_item_list_header, null, false);
-			listView.addHeaderView(view);
-			listView.addFooterView(getActivity().getLayoutInflater().inflate(R.layout.list_shadow_footer, null, false));
-			final ImageView imageView = (ImageView) view.findViewById(R.id.imageView);
-			final View splitIntervalView = view.findViewById(R.id.split_interval_view);
-			final View colorView = view.findViewById(R.id.color_view);
-			final SwitchCompat vis = (SwitchCompat) view.findViewById(R.id.showOnMapToggle);
-			vis.setChecked(app.getSelectedGpxHelper().getSelectedFileByPath(getGpx().path) != null);
-			vis.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-				@Override
-				public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-					SelectedGpxFile sf = app.getSelectedGpxHelper().selectGpxFile(getGpx(), vis.isChecked(), false);
-					if (vis.isChecked() && sf.getModifiableGpxFile() != null) {
-						sf.processPoints();
-						updateColorView(colorView);
+		View view = getActivity().getLayoutInflater().inflate(R.layout.gpx_item_list_header, null, false);
+		listView.addHeaderView(view);
+		listView.addFooterView(getActivity().getLayoutInflater().inflate(R.layout.list_shadow_footer, null, false));
+		final ImageView imageView = (ImageView) view.findViewById(R.id.imageView);
+		final View splitColorView = view.findViewById(R.id.split_color_view);
+		final View divider = view.findViewById(R.id.divider);
+		final View splitIntervalView = view.findViewById(R.id.split_interval_view);
+		final View colorView = view.findViewById(R.id.color_view);
+		final SwitchCompat vis = (SwitchCompat) view.findViewById(R.id.showOnMapToggle);
+		vis.setChecked(app.getSelectedGpxHelper().getSelectedFileByPath(getGpx().path) != null);
+		vis.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				SelectedGpxFile sf = app.getSelectedGpxHelper().selectGpxFile(getGpx(), vis.isChecked(), false);
+				if (vis.isChecked() && sf.getModifiableGpxFile() != null) {
+					sf.processPoints();
+					updateColorView(colorView);
+				} else {
+					updateColorView(colorView);
+				}
+			}
+		});
+		imageView.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				SelectedGpxFile sf = app.getSelectedGpxHelper().selectGpxFile(getGpx(), vis.isChecked(), false);
+				if (vis.isChecked() && sf.getGpxFile() != null) {
+					final List<GpxDisplayGroup> groups = getOriginalGroups();
+					if (groups.size() > 0 && groups.get(0).getModifiableList().size() > 0) {
+						GpxDisplayItem item = groups.get(0).getModifiableList().get(0);
+						app.getSettings().setMapLocationToShow(item.locationStart.lat, item.locationStart.lon,
+								15,
+								new PointDescription(PointDescription.POINT_TYPE_GPX_ITEM, item.group.getGpxName()),
+								false,
+								item);
 					} else {
-						updateColorView(colorView);
-					}
-				}
-			});
-			imageView.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					SelectedGpxFile sf = app.getSelectedGpxHelper().selectGpxFile(getGpx(), vis.isChecked(), false);
-					if (vis.isChecked() && sf.getGpxFile() != null) {
-						final List<GpxDisplayGroup> groups = getOriginalGroups();
-						if (groups.size() > 0 && groups.get(0).getModifiableList().size() > 0) {
-							GpxDisplayItem item = groups.get(0).getModifiableList().get(0);
-							app.getSettings().setMapLocationToShow(item.locationStart.lat, item.locationStart.lon,
+						GPXUtilities.WptPt wpt = sf.getGpxFile().findPointToShow();
+						if (wpt != null) {
+							app.getSettings().setMapLocationToShow(wpt.getLatitude(), wpt.getLongitude(),
 									15,
-									new PointDescription(PointDescription.POINT_TYPE_GPX_ITEM, item.group.getGpxName()),
+									new PointDescription(PointDescription.POINT_TYPE_WPT, wpt.name),
 									false,
-									item);
-						} else {
-							GPXUtilities.WptPt wpt = sf.getGpxFile().findPointToShow();
-							if (wpt != null) {
-								app.getSettings().setMapLocationToShow(wpt.getLatitude(), wpt.getLongitude(),
-										15,
-										new PointDescription(PointDescription.POINT_TYPE_WPT, wpt.name),
-										false,
-										wpt);
-							}
+									wpt);
 						}
-						MapActivity.launchMapActivityMoveToTop(getMyActivity());
 					}
+					MapActivity.launchMapActivityMoveToTop(getMyActivity());
 				}
-			});
-			updateColorView(colorView);
-			colorView.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					final ListPopupWindow popup = new ListPopupWindow(getActivity());
-					popup.setAnchorView(colorView);
-					popup.setContentWidth(AndroidUtils.dpToPx(app, 200f));
-					popup.setModal(true);
-					popup.setDropDownGravity(Gravity.RIGHT | Gravity.TOP);
-					popup.setVerticalOffset(AndroidUtils.dpToPx(app, -48f));
-					popup.setHorizontalOffset(AndroidUtils.dpToPx(app, -6f));
-					final GpxAppearanceAdapter gpxApprAdapter = new GpxAppearanceAdapter(getActivity(),
-							getGpx().getColor(0), GpxAppearanceAdapterType.TRACK_COLOR);
-					popup.setAdapter(gpxApprAdapter);
-					popup.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+			}
+		});
+		updateColorView(colorView);
+		colorView.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				final ListPopupWindow popup = new ListPopupWindow(getActivity());
+				popup.setAnchorView(colorView);
+				popup.setContentWidth(AndroidUtils.dpToPx(app, 200f));
+				popup.setModal(true);
+				popup.setDropDownGravity(Gravity.RIGHT | Gravity.TOP);
+				popup.setVerticalOffset(AndroidUtils.dpToPx(app, -48f));
+				popup.setHorizontalOffset(AndroidUtils.dpToPx(app, -6f));
+				final GpxAppearanceAdapter gpxApprAdapter = new GpxAppearanceAdapter(getActivity(),
+						getGpx().getColor(0), GpxAppearanceAdapterType.TRACK_COLOR);
+				popup.setAdapter(gpxApprAdapter);
+				popup.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
-						@Override
-						public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-							AppearanceListItem item = gpxApprAdapter.getItem(position);
-							if (item != null) {
-								if (item.getAttrName() == CURRENT_TRACK_COLOR_ATTR) {
-									int clr = item.getColor();
-									if (vis.isChecked()) {
-										SelectedGpxFile sf = app.getSelectedGpxHelper().selectGpxFile(getGpx(), vis.isChecked(), false);
-										if (clr != 0 && sf.getModifiableGpxFile() != null) {
-											sf.getModifiableGpxFile().setColor(clr);
-											app.getGpxDatabase().updateColor(getGpxDataItem(), clr);
-										}
-									} else {
+					@Override
+					public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+						AppearanceListItem item = gpxApprAdapter.getItem(position);
+						if (item != null) {
+							if (item.getAttrName() == CURRENT_TRACK_COLOR_ATTR) {
+								int clr = item.getColor();
+								if (vis.isChecked()) {
+									SelectedGpxFile sf = app.getSelectedGpxHelper().selectGpxFile(getGpx(), vis.isChecked(), false);
+									if (clr != 0 && sf.getModifiableGpxFile() != null) {
+										sf.getModifiableGpxFile().setColor(clr);
 										app.getGpxDatabase().updateColor(getGpxDataItem(), clr);
 									}
+								} else {
+									app.getGpxDatabase().updateColor(getGpxDataItem(), clr);
 								}
 							}
-							popup.dismiss();
-							updateColorView(colorView);
 						}
-					});
-					popup.show();
-				}
-			});
+						popup.dismiss();
+						updateColorView(colorView);
+					}
+				});
+				popup.show();
+			}
+		});
 
+		if (adapter.getCount() > 0) {
 			prepareSplitIntervalAdapterData();
 			setupSplitIntervalView(splitIntervalView);
 			updateSplitIntervalView(splitIntervalView);
@@ -320,6 +322,9 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 					popup.show();
 				}
 			});
+		} else {
+			splitColorView.setVisibility(View.GONE);
+			divider.setVisibility(View.GONE);
 		}
 	}
 
@@ -518,14 +523,12 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 
 			final OsmandSettings settings = app.getSettings();
 			LatLon location = new LatLon(child.locationStart.lat, child.locationStart.lon);
-
-			if (child.group.getType() == GpxDisplayItemType.TRACK_POINTS) {
-				settings.setMapLocationToShow(location.getLatitude(), location.getLongitude(),
+			settings.setMapLocationToShow(location.getLatitude(), location.getLongitude(),
 						settings.getLastKnownMapZoom(),
-						new PointDescription(PointDescription.POINT_TYPE_WPT, child.locationStart.name),
+						new PointDescription(PointDescription.POINT_TYPE_GPX_ITEM, child.group.getGpxName()),
 						false,
-						child.locationStart);
-			}
+						child);
+
 			MapActivity.launchMapActivityMoveToTop(getActivity());
 		}
 	}

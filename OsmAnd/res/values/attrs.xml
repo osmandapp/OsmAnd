@@ -5,6 +5,7 @@
     </declare-styleable>
     <declare-styleable name="OsmAndTheme">
         <attr name="routeParameterTitleColor" format="color"/>
+        <attr name="chart_marker_background" format="reference" />
         <!-- list colors -->
         <attr name="ctx_menu_info_divider" format="color"/>
         <attr name="searchbar_text" format="color"/>
