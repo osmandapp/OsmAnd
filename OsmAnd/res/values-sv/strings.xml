@@ -2498,4 +2498,20 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="average_speed">Medelhastighet</string>
     <string name="shared_string_time_moving">Tid i rörelse</string>
     <string name="max_speed">Maxhastighet</string>
+    <string name="no_update_info_desc">Kontrollera inte efter uppdateringar om nya versioner, rabatter relaterade till OsmAnd</string>
+    <string name="lang_sr_latn">Serbiska (latin)</string>
+    <string name="configure_screen_quick_action">Snabb handling</string>
+
+    <string name="quick_action_item_action">Åtgärd %d</string>
+    <string name="quick_action_take_audio_note">Ta ljudanteckning</string>
+    <string name="quick_action_take_video_note">Ta videoanteckning</string>
+    <string name="quick_action_take_photo_note">Ta fotoanteckning</string>
+    <string name="quick_action_new_action">Lägg till åtgärd</string>
+    <string name="quick_action_edit_action">Redigera åtgärd</string>
+    <string name="dialog_add_action_title">Lägg till åtgärd</string>
+    <string name="quick_actions_delete">Ta bort åtgärd</string>
+    <string name="quick_actions_delete_text">Är du säker på att du vill ta bort åtgärden \"%s\"?</string>
+    <string name="quick_favorites_show_favorites_dialog">Visa favoriterdialogen</string>
+    <string name="quick_favorites_name_preset">Namn förinställt</string>
+    <string name="quick_action_add_marker_descr">Trycka på åtgärdsknappen kommer att lägga en kartmarkör i skärmens centrum.</string>
     </resources>
