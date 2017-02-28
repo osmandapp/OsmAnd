@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/expandable_list_item_background"
+    android:minHeight="@dimen/list_item_height"
+    android:orientation="vertical">
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?attr/dashboard_divider"
+        android:visibility="gone"/>
+
+    <View
+        android:id="@+id/list_divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?attr/dashboard_divider"
+        android:layout_marginLeft="54dp"
+        android:visibility="gone"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/list_content_padding">
+
+        <CheckBox
+            android:id="@+id/toggle_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="@dimen/list_content_padding"
+            android:focusable="false"
+            android:visibility="gone"
+            tools:visibility="visible"/>
+
+        <ImageView
+            android:id="@+id/icon"
+            android:layout_width="@dimen/standard_icon_size"
+            android:layout_height="@dimen/standard_icon_size"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="@dimen/list_content_padding"/>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:paddingRight="@dimen/list_content_padding"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp">
+
+            <TextView
+                android:id="@+id/label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="?android:textColorPrimary"
+                android:textSize="@dimen/default_list_text_size"
+                tools:text="Point title"/>
+
+            <TextView
+                android:id="@+id/description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="?android:textColorSecondary"
+                android:textSize="@dimen/default_sub_text_size"
+                android:maxLines="2"
+                tools:text="Point description"/>
+
+        </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/options"
+            android:contentDescription="@string/shared_string_more"
+            android:layout_width="@dimen/list_item_height"
+            android:layout_height="@dimen/list_item_height"
+            android:layout_gravity="center_vertical"
+            android:background="?attr/dashboard_button"
+            android:src="@drawable/ic_overflow_menu_white"
+            android:visibility="visible"/>
+
+    </LinearLayout>
+
+</LinearLayout>

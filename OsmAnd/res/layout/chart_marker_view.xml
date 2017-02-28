@@ -8,7 +8,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:background="@drawable/chart_marker_background">
+        android:background="?attr/chart_marker_background">
 
         <LinearLayout
             android:id="@+id/text_alt_container"

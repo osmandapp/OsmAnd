@@ -76,6 +76,7 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -88,6 +89,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 	// protected static final int DELETE_ACTION_ID = 1;
 	private boolean selectionMode = false;
 	private List<GpxInfo> selectedItems = new ArrayList<>();
+	private Set<Integer> selectedGroups = new LinkedHashSet<>();
 	private ActionMode actionMode;
 	private LoadGpxTask asyncLoader;
 	private ProcessGpxTask asyncProcessor;
@@ -271,6 +273,9 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 				}
 			});
 			*/
+		} else {
+			View headerView = inflater.inflate(R.layout.list_shadow_header, null, false);
+			listView.addHeaderView(headerView);
 		}
 		View footerView = inflater.inflate(R.layout.list_shadow_footer, null, false);
 		listView.addFooterView(footerView);
@@ -467,6 +472,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		enableSelectionMode(true);
 		showOnMapMode = true;
 		selectedItems.clear();
+		selectedGroups.clear();
 		final Set<GpxInfo> originalSelectedItems = allGpxAdapter.getSelectedGpx();
 		selectedItems.addAll(originalSelectedItems);
 		actionMode = getActionBarActivity().startSupportActionMode(new ActionMode.Callback() {
@@ -533,6 +539,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 
 		enableSelectionMode(true);
 		selectedItems.clear();
+		selectedGroups.clear();
 		actionMode = getActionBarActivity().startSupportActionMode(new ActionMode.Callback() {
 
 			@Override
@@ -776,6 +783,12 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		public void refreshSelected() {
 			selected.clear();
 			selected.addAll(getSelectedGpx());
+			Collections.sort(selected, new Comparator<GpxInfo>() {
+				@Override
+				public int compare(GpxInfo i1, GpxInfo i2) {
+					return i1.getName().toLowerCase().compareTo(i2.getName().toLowerCase());
+				}
+			});
 		}
 
 		public Set<GpxInfo> getSelectedGpx() {
@@ -958,15 +971,17 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			if (selectionMode) {
 				final CheckBox ch = (CheckBox) v.findViewById(R.id.toggle_item);
 				ch.setVisibility(View.VISIBLE);
-				//ch.setChecked(selectedItems.contains(model));
+				ch.setChecked(selectedGroups.contains(groupPosition));
 
 				ch.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
 						if (ch.isChecked()) {
 							selectedItems.addAll(data.get(category.get(getGroupPosition(groupPosition))));
+							selectedGroups.add(groupPosition);
 						} else {
 							selectedItems.removeAll(data.get(category.get(getGroupPosition(groupPosition))));
+							selectedGroups.remove(groupPosition);
 						}
 						allGpxAdapter.notifyDataSetInvalidated();
 						updateSelectionMode(actionMode);
