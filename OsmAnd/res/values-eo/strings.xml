@@ -237,7 +237,7 @@
     <string name="clear_active_markers_q">Ĉu vi volas forigi ĉiujn aktivajn mapmarkojn?</string>
     <string name="map_markers">Mapmarkoj</string>
     <string name="map_marker">Mapmarko</string>
-    <string name="clear_markers_history_q">Ĉu vi volas vakigi historion de mapmarkoj?</string>
+    <string name="clear_markers_history_q">Ĉu vi volas forviŝi historion de mapmarkoj?</string>
     <string name="active_markers">Markoj aktivaj</string>
     <string name="lang_nv">Navaha</string>
     <string name="lang_la">Latino</string>
@@ -405,8 +405,8 @@
     <string name="shared_string_select_all">Elekti ĉiujn</string>
     <string name="shared_string_deselect">Malelekti</string>
     <string name="shared_string_deselect_all">Malelekti ĉiujn</string>
-    <string name="shared_string_clear">Vakigi</string>
-    <string name="shared_string_clear_all">Vakigi ĉiujn</string>
+    <string name="shared_string_clear">Forviŝi</string>
+    <string name="shared_string_clear_all">Forviŝi ĉiujn</string>
     <string name="shared_string_save">Konservi</string>
     <string name="shared_string_rename">Alinomi</string>
     <string name="shared_string_delete">Forigi</string>
@@ -514,7 +514,7 @@ Vi povas spuri ĉiujn aparatojn de partoprenanta grupo realtempe. Ankaŭ vi pova
     <string name="osmo_grop_name_length_alert">Grupa nomo devas enhavi almenaŭ 3 signojn!</string>
     <string name="local_recordings_delete_all_confirm">Ĉu vi certe volas forigi %1$d notojn?</string>
     <string name="local_osm_changes_upload_all_confirm">Ĉu vi certe volas alŝuti %1$d ŝanĝo(j)n al OSM?</string>
-    <string name="confirmation_to_clear_history">Ĉu vi volas vakigi la historion?</string>
+    <string name="confirmation_to_clear_history">Ĉu vi volas forviŝi la historion?</string>
     <string name="delay_to_start_navigation">Ekigi navigadon turnon-post-turno post…</string>
     <string name="shared_string_go">Ekigi</string>
     <string name="delay_to_start_navigation_descr">Difinu tempon de montrado de la kurs-plana ekrano</string>
@@ -1053,7 +1053,7 @@ Premtenu por vidi sur la mapo</string>
     <string name="speak_cameras">Rapid-kontroliloj</string>
     <string name="speak_traffic_warnings">Trafikaj avertoj</string>
     <string name="osb_author_or_password_not_specified">Bonvolu entajpi uzantnomon kaj pasvorton por OSM en Agordoj</string>
-    <string name="clear_intermediate_points">Vakigi inter-celojn</string>
+    <string name="clear_intermediate_points">Forviŝi inter-celojn</string>
     <string name="keep_intermediate_points">Konservi inter-celojn</string>
     <string name="new_directions_point_dialog">Vi jam precizigis inter-celojn.</string>
     <string name="context_menu_item_directions_to">Navigi al</string>
@@ -1094,7 +1094,7 @@ Premtenu por vidi sur la mapo</string>
  * Tuŝu mezur-fenestraĵon por vidi pli funkciojn.</string>
     <string name="distance_measurement_start_editing">Ekigi redaktadon</string>
     <string name="distance_measurement_finish_editing">Finigi redaktadon</string>
-    <string name="distance_measurement_clear_route">Vakigi ĉiujn punktojn</string>
+    <string name="distance_measurement_clear_route">Forviŝi ĉiujn punktojn</string>
     <string name="distance_measurement_finish_subtrack">Ekigi novan subkurson</string>
     <string name="distance_measurement_load_gpx">Malfermi GPX-dosieron</string>
     <string name="wait_current_task_finished">Bonvolu atendi ĝis nuna tasko finos</string>
@@ -1108,7 +1108,7 @@ Premtenu por vidi sur la mapo</string>
     <string name="install_paid">Plena versio</string>
     <string name="cancel_route">Forĵeti kurson</string>
     <string name="cancel_navigation">Ĉesigi navigadon</string>
-    <string name="clear_destination">Vakigi celpunkton</string>
+    <string name="clear_destination">Forviŝi celpunkton</string>
     <string name="street_name">Strat-nomo</string>
     <string name="download_using_mobile_internet">Nuntempe vi ne konektas tra vifion. Ĉu vi volas uzi estantan interretan konekton por elŝuti?</string>
     <string name="hno">Dom-numero</string>
@@ -1135,7 +1135,7 @@ Premtenu por vidi sur la mapo</string>
     <string name="download_hillshade_maps">Nivel-ombrumoj</string>
     <string name="local_indexes_cat_av">Sonaj/videaj datumoj</string>
     <string name="stop_routing_confirm">Ĉu vi certe volas ĉesigi navigadon?</string>
-    <string name="clear_dest_confirm">Ĉu vi certe volas vakigi la celon (kaj inter-celojn)?</string>
+    <string name="clear_dest_confirm">Ĉu vi certe volas forviŝi la celon (kaj inter-celojn)?</string>
     <string name="precise_routing_mode">Precizaj kursoj (alfa)</string>
     <string name="precise_routing_mode_descr">Aktivigas kalkuladon de precizaj seneraraj kursoj. Nuntempe ĝi estas malrapida kaj nur por limigitaj distancoj.</string>
     <string name="recording_context_menu_show">Montri</string>
@@ -2426,7 +2426,7 @@ Se vi bezonas helpon pri OsmAnd aplikaĵo, bonvolu kontakti nian helpantaron: su
     <string name="routing_attr_short_way_name">Brulaĵ-ŝparema kurso</string>
     <string name="routing_attr_short_way_description">Kalkulas brulaĵ-ŝpareman kurson (kutime plej mallongan)</string>
     <string name="replace_favorite_confirmation">Ĉu vi volas anstataŭigi la ŝatatan ejon %1$s?</string>
-    <string name="clear_tile_data">Vakigi ĉiujn kahelojn</string>
+    <string name="clear_tile_data">Forviŝi ĉiujn kahelojn</string>
     <string name="update_all_maps_now">Ĉu vi volas ĝisdatigi ĉiujn mapojn nun?</string>
     <string name="skip_map_downloading">Transsalti elŝuto de mapoj</string>
     <string name="skip_map_downloading_desc">Vi havas neniun eksterretan mapon instalitan. Vi povus elekti iun el la listo aŭ elŝuti mapojn poste per la Menuo - %1$s.</string>
