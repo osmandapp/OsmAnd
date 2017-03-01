@@ -759,7 +759,7 @@
 	<string name="poi_website">Internetseite</string>
 	<string name="poi_description">Beschreibung</string>
 	<string name="poi_opening_hours">Öffnungszeiten</string>
-	<string name="poi_barrier_entrance">Eingang</string>
+	<string name="poi_barrier_entrance">Durchlass in Mauer oder Zaun</string>
 	<string name="poi_entrance_main">Haupteingang</string>
 	<string name="poi_entrance">Eingang</string>
 	<string name="poi_entrance_exit">Ausgang</string>
@@ -871,20 +871,20 @@
 	<string name="poi_kent_carriage_gap">Kutschendurchlass</string>
 	<string name="poi_highway_crossing">Fußgängerübergang</string>
 
-	<string name="poi_icn_ref">Knotenpunkt Internationales Fahrradnetzwerk</string>
-	<string name="poi_ncn_ref">Knotenpunkt Nationale Radroute</string>
-	<string name="poi_rcn_ref">Knotenpunkt Regionales Fahrradnetzwerk</string>
-	<string name="poi_lcn_ref">Knotenpunkt Lokales Fahrradnetzwerk</string>
-	<string name="poi_iwn_ref">Knotenpunkt Internationales Wandernetzwerk</string>
-	<string name="poi_nwn_ref">Knotenpunkt Nationale Wanderroute</string>
-	<string name="poi_rwn_ref">Knotenpunkt Regionales Wandernetzwerk</string>
-	<string name="poi_lwn_ref">Knotenpunkt Lokales Wandernetzwerk</string>
+	<string name="poi_icn_ref">Internationaler Radwegenetz-Knoten</string>
+	<string name="poi_ncn_ref">Nationaler Radwegenetz-Knoten</string>
+	<string name="poi_rcn_ref">Regionaler Radwegenetz-Knoten</string>
+	<string name="poi_lcn_ref">Lokaler Radwegenetz-Knoten</string>
+	<string name="poi_iwn_ref">Internationaler Wanderwegenetz-Knoten</string>
+	<string name="poi_nwn_ref">Nationaler Wanderwegenetz-Knoten</string>
+	<string name="poi_rwn_ref">Regionaler Wanderwegenetz-Knoten</string>
+	<string name="poi_lwn_ref">Lokaler Wanderwegenetz-Knoten</string>
 
 	<string name="poi_route_hiking_iwn_poi">Internationaler Wanderweg</string>
 	<string name="poi_route_hiking_nwn_poi">Nationaler Wanderweg</string>
 	<string name="poi_route_hiking_rwn_poi">Regionaler Wanderweg</string>
 	<string name="poi_route_hiking_lwn_poi">Örtlicher Wanderweg</string>
-	<string name="poi_route_hiking_ref_poi">Wanderweg Bezeichnung</string>
+	<string name="poi_route_hiking_ref_poi">Wanderwegshinweis</string>
 
 	<string name="poi_collection_times">Leerungszeiten</string>
 	<string name="poi_service_times">Betriebszeiten</string>
@@ -1075,16 +1075,16 @@
 	<string name="poi_content_gas">Inhalt: Gas</string>
 	<string name="poi_content_biomass">Inhalt: Biomasse</string>
 	<string name="poi_content_wastewater">Inhalt: Abwasser</string>
-	<string name="poi_content_crop">Inhalt: Ernte</string>
+	<string name="poi_content_crop">Inhalt: Getreide</string>
 	<string name="poi_content_fodder">Inhalt: Futter</string>
 	<string name="poi_content_beer">Inhalt: Bier</string>
 	<string name="poi_content_salt">Inhalt: Salz</string>
-	<string name="poi_content_grain">Inhalt: Getreide</string>
+	<string name="poi_content_grain">Inhalt: Korn</string>
 
 	<string name="poi_nudism_yes">Erlaubt</string>
 	<string name="poi_nudism_no">Verboten</string>
 	<string name="poi_nudism_obligatory">Verbindlich</string>
-	<string name="poi_nudism_customary">üblich</string>
+	<string name="poi_nudism_customary">Üblich</string>
 	<string name="poi_nudism_permissive">Freizügig</string>
 
 	<string name="poi_trade_building_supplies">Baubedarf</string>
@@ -1642,7 +1642,7 @@
 
 	<string name="poi_hackerspace">Hackerspace</string>
 
-	<string name="poi_wiki_lang_als">Elsässische wiki</string>
+	<string name="poi_wiki_lang_als">Elsässisches Wiki</string>
 	<string name="poi_wiki_lang_bs">Bosnisches Wiki</string>
 	<string name="poi_wiki_lang_fy">Friesisches Wiki</string>
 	<string name="poi_wiki_lang_hy">Armenisches Wiki</string>
@@ -1653,16 +1653,16 @@
 	<string name="poi_wiki_lang_sh">Serbokroatisches Wiki</string>
 	<string name="poi_wiki_lang_ta">Tamilisches Wiki</string>
 	<string name="poi_wiki_lang_kk">Kasachisches Wiki</string>
-	<string name="poi_wiki_lang_uz">Usbekische Wiki</string>
+	<string name="poi_wiki_lang_uz">Usbekisches Wiki</string>
 	<string name="poi_wiki_lang_ce">Tschetschenisches Wiki</string>
 	<string name="poi_wiki_lang_ur">Urduisches Wiki</string>
-	<string name="poi_wiki_lang_oc">Okzitanisch Wiki</string>
+	<string name="poi_wiki_lang_oc">Okzitanisches Wiki</string>
 	<string name="poi_wiki_lang_jv">Javanisches Wiki</string>
 	<string name="poi_wiki_lang_zhyue">Kantonesisches Wiki</string>
 	<string name="poi_wiki_lang_ast">Astur-leonisches Wiki</string>
 	<string name="poi_wiki_lang_lmo">Lombardisches Wiki</string>
 	<string name="poi_wiki_lang_ne">Nepalisches Wiki</string>
-	<string name="poi_wiki_lang_scn">sizilianisches Wiki</string>
+	<string name="poi_wiki_lang_scn">Sizilianisches Wiki</string>
 	<string name="poi_wiki_lang_bar">Bayrisches Wiki</string>
 	<string name="poi_wiki_lang_mn">Mongolisches Wiki</string>
 	<string name="poi_wiki_lang_nap">Neapolitanisches Wiki</string>
@@ -2221,30 +2221,30 @@
 
 	<string name="poi_escape_lane">Notweg</string>
 
-	<string name="poi_crop_rice">Ernte: Reis</string>
-	<string name="poi_crop_grass">Ernte: Gras</string>
-	<string name="poi_crop_corn">Ernte: Mais</string>
-	<string name="poi_crop_cereal">Ernte: Getreide</string>
-	<string name="poi_crop_sugarcane">Ernte: Zuckerrohr</string>
-	<string name="poi_crop_wheat">Ernte: Weizen</string>
-	<string name="poi_crop_soy">Ernte: Soja</string>
-	<string name="poi_crop_barley">Ernte: Gerste</string>
-	<string name="poi_crop_vegetables">Ernte: Gemüse</string>
-	<string name="poi_crop_hop">Ernte: Hopfen</string>
-	<string name="poi_crop_rape">Ernte: Raps</string>
-	<string name="poi_crop_beet">Ernte: Rübe</string>
-	<string name="poi_crop_tea">Ernte: Lavendel</string>
-	<string name="poi_crop_coffee">Ernte: Kaffee</string>
-	<string name="poi_crop_sunflower">Ernte: Sonnenblume</string>
-	<string name="poi_crop_poultry">Ernte: Geflügel</string>
-	<string name="poi_crop_raspberry">Ernte: Himbeere</string>
-	<string name="poi_crop_tobacco">Ernte: Tabak</string>
-	<string name="poi_crop_strawberry">Ernte: Erdbeere</string>
-	<string name="poi_crop_vegetables_flowers">Ernte: Gemüse, Blumen</string>
-	<string name="poi_crop_cassava">Ernte: Maniok</string>
-	<string name="poi_crop_cranberry">Ernte: Preiselbeeren</string>
-	<string name="poi_crop_asparagus">Ernte: Spargel</string>
-	<string name="poi_crop_flowers">Ernte: Blumen</string>
+	<string name="poi_crop_rice">Anbauprodukt: Reis</string>
+	<string name="poi_crop_grass">Anbauprodukt: Gras</string>
+	<string name="poi_crop_corn">Anbauprodukt: Mais</string>
+	<string name="poi_crop_cereal">Anbauprodukt: Getreide</string>
+	<string name="poi_crop_sugarcane">Anbauprodukt: Zuckerrohr</string>
+	<string name="poi_crop_wheat">Anbauprodukt: Weizen</string>
+	<string name="poi_crop_soy">Anbauprodukt: Soja</string>
+	<string name="poi_crop_barley">Anbauprodukt: Gerste</string>
+	<string name="poi_crop_vegetables">Anbauprodukt: Gemüse</string>
+	<string name="poi_crop_hop">Anbauprodukt: Hopfen</string>
+	<string name="poi_crop_rape">Anbauprodukt: Raps</string>
+	<string name="poi_crop_beet">Anbauprodukt: Rübe</string>
+	<string name="poi_crop_tea">Anbauprodukt: Tee</string>
+	<string name="poi_crop_coffee">Anbauprodukt: Kaffee</string>
+	<string name="poi_crop_sunflower">Anbauprodukt: Sonnenblume</string>
+	<string name="poi_crop_poultry">Anbauprodukt: Geflügel</string>
+	<string name="poi_crop_raspberry">Anbauprodukt: Himbeere</string>
+	<string name="poi_crop_tobacco">Anbauprodukt: Tabak</string>
+	<string name="poi_crop_strawberry">Anbauprodukt: Erdbeere</string>
+	<string name="poi_crop_vegetables_flowers">Anbauprodukt: Gemüse, Blumen</string>
+	<string name="poi_crop_cassava">Anbauprodukt: Maniok</string>
+	<string name="poi_crop_cranberry">Anbauprodukt: Preiselbeere</string>
+	<string name="poi_crop_asparagus">Anbauprodukt: Spargel</string>
+	<string name="poi_crop_flowers">Anbauprodukt: Blumen</string>
 
 	<string name="poi_surveillance_indoor">Überwachung: Innen</string>
 	<string name="poi_surveillance_outdoor">Überwachung: Außen</string>
@@ -2302,7 +2302,7 @@
 	<string name="poi_theatre_genre_chamber_music">Kammermusik</string>
 	<string name="poi_bandstand">Genre: Musikpavillon</string>
 	<string name="poi_consulting">Beratung</string>
-	<string name="poi_crop_lavender">Ernte: Lavendel</string>
+	<string name="poi_crop_lavender">Anbauprodukt: Lavendel</string>
 	<string name="poi_castle_type_kremlin">Burgtyp: Kreml</string>
 	<string name="poi_castle_type_castrum">Burgtyp: Römerkastell</string>
 	<string name="poi_castle_type_shiro">Burgtyp: Shiro</string>
@@ -2432,7 +2432,7 @@
 	<string name="poi_wiki_lang_tt">Tatarisches Wiki</string>
 	<string name="poi_wiki_lang_ky">Kirgisisches Wiki</string>
 	<string name="poi_wiki_lang_tg">Tadschikisches Wiki</string>
-	<string name="poi_wiki_lang_ba">baschkirisches Wiki</string>
+	<string name="poi_wiki_lang_ba">Baschkirisches Wiki</string>
 	<string name="poi_wiki_lang_sco">Schottisches Wiki</string>
 	<string name="poi_wiki_lang_pnb">Panjabisches Wiki</string>
 	<string name="poi_wiki_lang_cv">Tschuwaschisches Wiki</string>
@@ -2578,29 +2578,29 @@
 	<string name="poi_bandy">Bandy</string>
 
 <string name="poi_protected_area">Geschütztes Gebiet</string>
-	<string name="poi_protection_object_historic">Geschütztes Objekt: historisch</string>
-	<string name="poi_protection_object_nature">Geschütztes Objekt: Natur</string>
-	<string name="poi_protection_object_water">Geschütztes Objekt: Wasser</string>
+	<string name="poi_protection_object_historic">Schutzobjekt: historisch</string>
+	<string name="poi_protection_object_nature">Schutzobjekt: Natur</string>
+	<string name="poi_protection_object_water">Schutzobjekt: Wasser</string>
 
-<string name="poi_protection_object_habitat">Geschütztes Objekt: Lebensraum</string>
+<string name="poi_protection_object_habitat">Schutzobjekt: Lebensraum</string>
 	<string name="poi_nuclear_explosion_country">Explosion: Land</string>
 	<string name="poi_addr_housename">Hausname</string>
 	<string name="poi_nuclear_explosion_site">Ort einer nuklearen Explosion</string>
-	<string name="poi_nuclear_explosion_type_underground_tunnel">Explosionsart: Untergrund, Tunnel</string>
-	<string name="poi_nuclear_explosion_type_atmospheric">Explosionsart: atmosphärische</string>
-	<string name="poi_nuclear_explosion_type_atmospheric_atmospheric_surface">Explosionsart: atmosphärische, Oberfläche</string>
-	<string name="poi_nuclear_explosion_type_underground">Explosionsart: Untergrund</string>
+	<string name="poi_nuclear_explosion_type_underground_tunnel">Explosionsart: unterirdisch, Tunnel</string>
+	<string name="poi_nuclear_explosion_type_atmospheric">Explosionsart: atmosphärisch</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_atmospheric_surface">Explosionsart: atmosphärisch, oberirdisch</string>
+	<string name="poi_nuclear_explosion_type_underground">Explosionsart: unterirdisch</string>
 	<string name="poi_nuclear_explosion_type_space">Explosionsart: Weltall (Höhe über 80km)</string>
 	<string name="poi_nuclear_explosion_type_underwater">Explosionsart: unter Wasser</string>
 	<string name="poi_tanning_salon">Solarium</string>
 
-<string name="poi_nuclear_explosion_type_underground_shaft">Explosionstyp: Untergrund, Welle</string>
-	<string name="poi_nuclear_explosion_type_atmospheric_airdrop">Explosionstyp: Luftangriff</string>
-	<string name="poi_nuclear_explosion_type_atmospheric_surface_tower">Explosionstyp: atmosphärisch, Oberfläche, Turm</string>
-	<string name="poi_nuclear_explosion_type_atmospheric_balloon">Explosionstyp: atmosphärisch, Ballon</string>
-	<string name="poi_nuclear_explosion_type_atmospheric_water_surface_barge">Explosionstyp: atmosphärisch, Wasseroberfläche , Barge</string>
-	<string name="poi_nuclear_explosion_type_cratering_burst">Explosionstyp: Kraterbruch (flache Untergrund )</string>
-	<string name="poi_nuclear_explosion_type_atmospheric_rocket_or_missile">Explosionstyp: atmosphärisch, Rakete oder Raketen</string>
+<string name="poi_nuclear_explosion_type_underground_shaft">Explosionsart: unterirdisch, Schacht</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_airdrop">Explosionsart: atmosphärisch, Abwurf</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_surface_tower">Explosionsart: atmosphärisch, oberirdisch, Turm</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_balloon">Explosionsart: atmosphärisch, Ballon</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_water_surface_barge">Explosionsart: atmosphärisch, über Wasser, Barge</string>
+	<string name="poi_nuclear_explosion_type_cratering_burst">Explosionsart: Kraterbildende Explosion (oberflächennah unterirdisch)</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_rocket_or_missile">Explosionsart: atmosphärisch, Rakete oder Lenkwaffe</string>
 	<string name="poi_nuclear_explosion_date_utc">Explosionsdatum (UTC)</string>
 	<string name="poi_nuclear_explosion_shot_name_en">Bezeichnung der Explosion</string>
 	<string name="poi_nuclear_explosion_series">Explosionsserie</string>
@@ -2609,22 +2609,22 @@
 	<string name="poi_nuclear_explosion_purpose_safety_experiment">Explosionszweck: Sicherheitsexperiment</string>
 	<string name="poi_nuclear_explosion_purpose_research_for_peaceful_applications">Explosionszweck: Forschung für friedliche Anwendungen</string>
 	<string name="poi_nuclear_explosion_purpose_fundamental_science">Explosionszweck: Grundlagenforschung</string>
-	<string name="poi_nuclear_explosion_purpose_industrial_application_cavity_excavation">Explosionszweck: industrielle Anwendung, Aushub Hohlraum</string>
-	<string name="poi_nuclear_explosion_purpose_industrial_application_seismic_sounding">Explosionszweck: industrielle Anwendung, seismisch klingend</string>
-	<string name="poi_nuclear_explosion_purpose_industrial_application_oil_stimulation">Explosionszweck: industrielle Anwendung, Öl Stimulation</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application_cavity_excavation">Explosionszweck: industrielle Anwendung, Hohlraumgewinnung</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application_seismic_sounding">Explosionszweck: industrielle Anwendung, seismische Sondierung</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application_oil_stimulation">Explosionszweck: industrielle Anwendung, Ölquellen-Stimulation</string>
 	<string name="poi_nuclear_explosion_purpose_industrial_application">Explosionszweck: industrielle Anwendung</string>
 	<string name="poi_nuclear_explosion_purpose_industrial_application_earth_moving">Explosionszweck: industrielle Anwendung, Erdbewegung</string>
 	<string name="poi_nuclear_explosion_time_utc">Explosionszeit (UTC)</string>
-	<string name="poi_nuclear_explosion_yield">Explosionsausbeute</string>
+	<string name="poi_nuclear_explosion_yield">Sprengkraft der Explosion</string>
 	<string name="poi_nuclear_explosion_hole">Explosionsloch</string>
-	<string name="poi_nuclear_explosion_height_of_burst">Höhe der Explosion</string>
-	<string name="poi_nuclear_explosion_ground_zero_altitude">Höhe ü.M. des Explosionszentrum</string>
-	<string name="poi_nuclear_explosion_body_wave_magnitude">Körperwelle Größe</string>
-	<string name="poi_nuclear_explosion_salvo_first_detonation">Explosionsalve: erste Detonation eines Salvetests</string>
-	<string name="poi_nuclear_explosion_salvo_second_or_later_detonation">Explosionsalve: zweite Detonation eines Salvetests</string>
+	<string name="poi_nuclear_explosion_height_of_burst">Höhe der Explosionswolke</string>
+	<string name="poi_nuclear_explosion_ground_zero_altitude">Höhe des Explosionszentrums</string>
+	<string name="poi_nuclear_explosion_body_wave_magnitude">Raumwellen-Magnitude</string>
+	<string name="poi_nuclear_explosion_salvo_first_detonation">Explosionssalve: erste Detonation eines Salventests</string>
+	<string name="poi_nuclear_explosion_salvo_second_or_later_detonation">Explosionssalve: zweite oder spätere Detonation eines Salventests</string>
 	<string name="poi_nuclear_explosion_crater_diameter">Explosion: Kraterdurchmesser</string>
 	<string name="poi_nuclear_explosion_warhead">Explosion: Sprengkopf</string>
-	<string name="poi_nuclear_explosion_device">Explosion: Gerät</string>
+	<string name="poi_nuclear_explosion_device">Explosion: Einheit</string>
 
 	<string name="poi_religion">Religiöse Waren</string>
 
@@ -2782,33 +2782,33 @@
 	<string name="poi_counselling_type_sexual_abuse_no">Beratung (sexueller Missbrauch): Nein</string>
 	<string name="poi_counselling_type_victim_yes">Beratung (Opfer): Ja</string>
 	<string name="poi_counselling_type_victim_no">Beratung (Opfer): Nein</string>
-	<string name="poi_counselling_type_violence_yes">Gewalt-Beratung: Ja</string>
-	<string name="poi_counselling_type_violence_no">Gewalt-Beratung: Nein</string>
+	<string name="poi_counselling_type_violence_yes">Beratung (Gewalt): Ja</string>
+	<string name="poi_counselling_type_violence_no">Beratung (Gewalt): Nein</string>
 
-	<string name="poi_provided_for_infant_yes">Für Säuglinge zur Verfügung gestellt: Ja</string>
-	<string name="poi_provided_for_infant_no">Für Säuglinge zur Verfügung gestellt: Nein</string>
-	<string name="poi_provided_for_toddler_yes">Für Kleinkinder zur Verfügung gestellt: Ja</string>
-	<string name="poi_provided_for_toddler_no">Für Kleinkinder zur Verfügung gestellt: Nein</string>
-	<string name="poi_provided_for_child_yes">Für Kinder vorhanden: Ja</string>
-	<string name="poi_provided_for_child_no">Für Kinder vorhanden: Nein</string>
-	<string name="poi_provided_for_adult_yes">Für Erwachsene zur Verfügung gestellt: Ja</string>
-	<string name="poi_provided_for_adult_no">Für Erwachsene zur Verfügung gestellt: Nein</string>
-	<string name="poi_provided_for_woman_yes">Für Frauen zur Verfügung gestellt: Ja</string>
-	<string name="poi_provided_for_woman_no">Für Frauen zur Verfügung gestellt: Nein</string>
-	<string name="poi_provided_for_senior_yes">Vorgesehen für Senioren: Ja</string>
-	<string name="poi_provided_for_senior_no">Für Senioren zur Verfügung gestellt: Nein</string>
-	<string name="poi_provided_for_girl_yes">Vorgesehen für Mädchen: Ja</string>
-	<string name="poi_provided_for_girl_no">Für Mädchen zur Verfügung gestellt: Nein</string>
-	<string name="poi_provided_for_man_yes">Für Männer zur Verfügung gestellt: Ja</string>
-	<string name="poi_provided_for_man_no">Für Männer zur Verfügung gestellt: Nein</string>
-	<string name="poi_provided_for_boy_yes">Vorgesehen für Jungen: Ja</string>
-	<string name="poi_provided_for_boy_no">Für Jungen zur Verfügung gestellt: Nein</string>
+	<string name="poi_provided_for_infant_yes">Angebot für Säuglinge: Ja</string>
+	<string name="poi_provided_for_infant_no">Angebot für Säuglinge: Nein</string>
+	<string name="poi_provided_for_toddler_yes">Angebot für Kleinkinder: Ja</string>
+	<string name="poi_provided_for_toddler_no">Angebot für Kleinkinder: Nein</string>
+	<string name="poi_provided_for_child_yes">Angebot für Kinder: Ja</string>
+	<string name="poi_provided_for_child_no">Angebot für Kinder: Nein</string>
+	<string name="poi_provided_for_adult_yes">Angebot für Erwachsene: Ja</string>
+	<string name="poi_provided_for_adult_no">Angebot für Erwachsene: Nein</string>
+	<string name="poi_provided_for_woman_yes">Angebot für Frauen: Ja</string>
+	<string name="poi_provided_for_woman_no">Angebot für Frauen: Nein</string>
+	<string name="poi_provided_for_senior_yes">Angebot für Senioren: Ja</string>
+	<string name="poi_provided_for_senior_no">Angebot für Senioren: Nein</string>
+	<string name="poi_provided_for_girl_yes">Angebot für Mädchen: Ja</string>
+	<string name="poi_provided_for_girl_no">Angebot für Mädchen: Nein</string>
+	<string name="poi_provided_for_man_yes">Angebot für Männer: Ja</string>
+	<string name="poi_provided_for_man_no">Angebot für Männer: Nein</string>
+	<string name="poi_provided_for_boy_yes">Angebot für Jungen: Ja</string>
+	<string name="poi_provided_for_boy_no">Angebot für Jungen: Nein</string>
 
 	<string name="poi_capacity_beds">Kapazität (Betten)</string>
 
 	<string name="poi_treat_inpatient_yes">Stationäre Dienste: Ja</string>
 	<string name="poi_treat_inpatient_no">Stationäre Dienste: Nein</string>
-	<string name="poi_treat_inpatient_only">Nur Stationäre Dienste</string>
+	<string name="poi_treat_inpatient_only">Nur stationäre Dienste</string>
 	<string name="poi_counselling_yes">Beratung: Ja</string>
 	<string name="poi_counselling_no">Beratung: Nein</string>
 	<string name="poi_emergency_yes">Notfall: Ja</string>
@@ -2819,23 +2819,23 @@
 	<string name="poi_disease_ebola_no">Ebola: Nein</string>
 	<string name="poi_disease_autism_no">Autismus: Nein</string>
 	<string name="poi_office_physician">Arztpraxis</string>
-	<string name="poi_office_therapist">Therapeuten-Büro</string>
+	<string name="poi_office_therapist">Therapeutenpraxis</string>
 	<string name="poi_office_podologist">Podiater</string>
 	<string name="poi_office_healer">Heiler</string>
-	<string name="poi_office_psychologist">Psychologie-Büro</string>
+	<string name="poi_office_psychologist">Psychologische Praxis</string>
 	<string name="poi_office_nursing_service">Pflegedienst</string>
-	<string name="poi_office_midwife">Hebamme-Büro</string>
+	<string name="poi_office_midwife">Hebammenpraxis</string>
 
 	<string name="poi_fire_hydrant_diameter">Hydrantdurchmesser</string>
 	<string name="poi_fire_hydrant_pressure">Hydrantdruck</string>
 	<string name="poi_fire_hydrant_count">Hydrantnummer</string>
 	<string name="poi_fire_hydrant_flow_capacity">Hydrantdurchflusskapazität</string>
-	<string name="poi_fire_hydrant_position_sidewalk">Hydrant Position: Bürgersteig</string>
-	<string name="poi_fire_hydrant_position_green">Hydrant Position: Wiese</string>
-	<string name="poi_fire_hydrant_position_lane">Hydrant Position: Fahrbahn</string>
-	<string name="poi_fire_hydrant_position_parking_lot">Hydrant Position: Parkplatz</string>
-	<string name="poi_fire_hydrant_position_street">Hydrant Position: Straße</string>
-	<string name="poi_fire_hydrant_position_underground">Hydrant Position: Untergrund</string>
+	<string name="poi_fire_hydrant_position_sidewalk">Hydrantstandort: Bürgersteig</string>
+	<string name="poi_fire_hydrant_position_green">Hydrantstandort: Wiese</string>
+	<string name="poi_fire_hydrant_position_lane">Hydrantstandort: Fahrbahn</string>
+	<string name="poi_fire_hydrant_position_parking_lot">Hydrantstandort: Parkplatz</string>
+	<string name="poi_fire_hydrant_position_street">Hydrantstandort: Straße</string>
+	<string name="poi_fire_hydrant_position_underground">Hydrantstandort: Untergrund</string>
 	<string name="poi_fire_hydrant_style_wsh">Hydrantart: Schacht</string>
 	<string name="poi_fire_hydrant_style_water_source_main">Haupt</string>
 	<string name="poi_fire_hydrant_style_water_source_pond">Teich</string>
@@ -2866,11 +2866,11 @@
 <string name="poi_summer_camp">Sommerlager</string>
 	<string name="poi_recreation_center">Erholungszentrum</string>
 
-	<string name="poi_crossing_activation_automatic">Überquerungsaktivierung: automatisch</string>
-	<string name="poi_crossing_activation_local">Überquerungsaktivierung: lokal</string>
-	<string name="poi_crossing_activation_remote">Überquerungsaktivierung: mit Fernbedienung</string>
-	<string name="poi_crossing_barrier_no">Kreuzungsbarriere: keine</string>
-	<string name="poi_crossing_barrier_yes">Kreuzungsbarriere</string>
+	<string name="poi_crossing_activation_automatic">Bahnübergangssteuerung: automatisch</string>
+	<string name="poi_crossing_activation_local">Bahnübergangssteuerung: lokal</string>
+	<string name="poi_crossing_activation_remote">Bahnübergangssteuerung: ferngesteuert</string>
+	<string name="poi_crossing_barrier_no">Schranken: keine</string>
+	<string name="poi_crossing_barrier_yes">Schranke</string>
 	<string name="poi_crossing_barrier_full">Schranke: komplett</string>
 	<string name="poi_crossing_barrier_half">Schranke: halb</string>
 	<string name="poi_crossing_barrier_double_half">Schranken: 2 halbe</string>
@@ -2883,11 +2883,11 @@
 
 	<string name="poi_ventilation_shaft">Lüftungsschacht</string>
 
-	<string name="poi_pump_type_beam_pump">Pumpentyp: Strahl Pumpe</string>
+	<string name="poi_pump_type_beam_pump">Pumpentyp: Strahlpumpe</string>
 	<string name="poi_pump_type_india_mk_2_3">Pumpentyp: Indien Mk II oder III &gt;</string>
 	<string name="poi_pump_type_gravity">Pumpentyp: Schwerkraft</string>
-	<string name="poi_pump_style_modern">Pumpen Stil: modern</string>
-	<string name="poi_pump_style_historic">Pumpen Stil: historisch</string>
+	<string name="poi_pump_style_modern">Pumpenstil: modern</string>
+	<string name="poi_pump_style_historic">Pumpenstil: historisch</string>
 	<string name="poi_pump_status_ok">Pumpenzustand: ok</string>
 	<string name="poi_pump_status_broken">Pumpenzustand: defekt</string>
 	<string name="poi_pump_status_locked">Pumpenzustand: gesperrt</string>
@@ -2917,10 +2917,10 @@
 	<string name="poi_crossing_on_demand_no">Übergang auf Anfrage: nein</string>
 	<string name="poi_crossing_saltire_yes">Andreaskreuz</string>
 	<string name="poi_crossing_saltire_no">Andreaskreuz: nein</string>
-	<string name="poi_crossing_supervision_yes">Kreuzungsaufsicht</string>
-	<string name="poi_crossing_supervision_no">Kreuzungsaufsicht: nein</string>
-	<string name="poi_crossing_supervision_attendant">Kreuzungsaufsicht: Begleiter</string>
-	<string name="poi_crossing_supervision_camera">Kreuzungsaufsicht: Kamera</string>
+	<string name="poi_crossing_supervision_yes">Bahnübergangsüberwachung</string>
+	<string name="poi_crossing_supervision_no">Bahnübergangsüberwachung: keine</string>
+	<string name="poi_crossing_supervision_attendant">Bahnübergangsüberwachung: Bediensteter</string>
+	<string name="poi_crossing_supervision_camera">Bahnübergangsüberwachung: Kamera</string>
 
 	<string name="poi_dispensing_yes">Ja</string>
 	<string name="poi_dispensing_no">nicht einlösbar</string>
@@ -3337,11 +3337,11 @@
 	<string name="poi_animal_keeping_type_open_stable">Typ: offener Stall</string>
 
 <string name="poi_animal_keeping_type_paddock">Typ: Paddock</string>
-	<string name="poi_tower_construction_lattice">Konstruktion: Gitter</string>
-	<string name="poi_tower_construction_freestanding">Konstruktion: freistehend</string>
-	<string name="poi_tower_construction_dome">Konstruktion: Kuppel</string>
-	<string name="poi_tower_construction_dish">Konstruktion: Schüssel</string>
-	<string name="poi_tower_construction_concealed">Konstruktion: verdeckt</string>
+	<string name="poi_tower_construction_lattice">Bauart: Gitter</string>
+	<string name="poi_tower_construction_freestanding">Anlage: freistehend</string>
+	<string name="poi_tower_construction_dome">Bauart: Kuppel</string>
+	<string name="poi_tower_construction_dish">Bauart: Plattform</string>
+	<string name="poi_tower_construction_concealed">Anlage: verdeckt</string>
 
 <string name="poi_railway_yard">Güterbahnhof</string>
 
@@ -3353,6 +3353,6 @@
 
 	<string name="poi_drink_wine_yes">Wein: Ja</string>
 	<string name="poi_drink_wine_retail">Wine: Einzelhandel</string>
-	<string name="poi_drink_wine_served">Wein: serviert</string>
+	<string name="poi_drink_wine_served">Wein: Ausschank</string>
 
 </resources>
