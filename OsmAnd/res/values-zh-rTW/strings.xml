@@ -2762,7 +2762,7 @@ Facebook：https://www.facebook.com/osmandapp
     <string name="quick_action_add_parking_descr">輕點動作按鈕將會在螢幕中心的位置增加一個停車場所。</string>
     <string name="quick_action_duplicates">指定的快速動作名稱已在使用中，已更改為 %1$s 以避免重複。</string>
     <string name="quick_action_duplicate">快速動作的名稱重複</string>
-    <string name="quick_action_showhide_favorites_descr">輕點動作按鈕將會在地圖上顯示或隱藏我的收藏標記。</string>
+    <string name="quick_action_showhide_favorites_descr">輕點動作按鈕將會在地圖上顯示或隱藏我的收藏標點。</string>
     <string name="quick_action_showhide_poi_descr">輕點動作按鈕將會在地圖上顯示或隱藏 POI。</string>
     <string name="quick_action_map_overlay_switch">地圖上圖層已更改為 \"%s\"。</string>
     <string name="quick_action_map_underlay_switch">地圖底層已更改為 \"%s\"。</string>
@@ -2818,7 +2818,7 @@ Facebook：https://www.facebook.com/osmandapp
     <string name="routing_attr_driving_style_name">駕駛方式</string>
     <string name="routing_attr_driving_style_description">安全、快速或穩定的駕駛</string>
     <string name="shared_string_tracks">軌跡</string>
-    <string name="select_gpx_folder">選擇 GPX 資料夾</string>
+    <string name="select_gpx_folder">選擇軌跡資料夾</string>
     <string name="file_can_not_be_moved">檔案無法移動。</string>
     <string name="shared_string_move">移動</string>
     <string name="shared_string_time_moving">時間移動</string>
@@ -2829,4 +2829,9 @@ Facebook：https://www.facebook.com/osmandapp
     <string name="shared_string_color">顏色</string>
     <string name="max_speed">最高速度</string>
     <string name="average_speed">平均速度</string>
+    <string name="gpx_track">軌跡</string>
+    <string name="points_delete_multiple_succesful">標點已成功刪除。</string>
+    <string name="points_delete_multiple">您將要刪除 %1$d 個標點。您確定嗎？</string>
+    <string name="route_points_category_name">在路線上要經過的的標點</string>
+    <string name="track_points_category_name">在此路線中的重要標點</string>
     </resources>
