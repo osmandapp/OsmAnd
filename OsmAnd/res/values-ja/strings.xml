@@ -1095,7 +1095,7 @@ POIの更新は利用できません</string>
 	<string name="av_camera_focus_macro">マクロ(近距離)フォーカスモード</string>
 	<string name="osmand_srtm_long_description_1000_chars">"このプラグインは、等高線のオーバーレイ表示と陰影起伏図(浮き彫り表示)の両方がOsmAndの標準マップ上に表示出来るように用意されています。\nこの機能は地形の構造を知る必要のある、アスリート、ハイカー、登山者、そしてその他の多くの人々の助けになるでしょう。
 \n\nこのグローバルデータ(北緯70°から南緯70°の間)はSRTM(スペースシャトル立体地形データ)とNASAの地球観測衛星であるテラ(Terra)に搭載されたASTER(資源探査用将来型センサ)と呼ばれる機器の観測結果をベースにしたものです。 ASTERはNASAと日本の経済産業省(METI)、そして宇宙システム開発利用推進機構(J-spacesystems)の共同作業によるものです。 "</string>
-    <string name="audionotes_location_not_defined">メモを取る地点が指定されていません。『ロケーションメニュー』から地点を指定しメモを取ることが出来ます。</string>
+    <string name="audionotes_location_not_defined">メモを取る地点が指定されていません。マップ上を長タップでメニューを開き、右端のボタン『その他のアクション』から任意の形式のメモを取ることが出来ます。</string>
     <string name="map_widget_audionotes">音声メモ</string>
     <string name="audionotes_plugin_description">音声/ビデオメモプラグインは、旅行中の音声/写真/ビデオに関するメモ機能を提供します。マップ画面上のボタンまたはコンテキストメニューから使用出来ます。</string>
     <string name="audionotes_plugin_name">音声/ビデオメモ</string>
@@ -1882,7 +1882,7 @@ OsmAnd+は最新の更新情報を受けとることが出来る、有料バー�
 	<string name="device_memory">デバイス容量</string>
     <string name="rendering_attr_pisteGrooming_name">ゲレンデ圧雪</string>
     <string name="world_ski_missing">スキーマップを表示するためには専用のオフラインマップのダウンロードが必要</string>
-    <string name="nautical_maps_missing">航海マップを表示するためには専用のオフラインマップのダウンロードが必要</string>
+    <string name="nautical_maps_missing">航海マップを表示するためには専用のオフラインマップのダウンロードが必要です</string>
 	<string name="edit_group">グループ編集</string>
     <string name="shared_string_release">リリース</string>
 	<string name="plugin_description_title">説明</string>
@@ -2355,7 +2355,7 @@ OsmAnd+は最新の更新情報を受けとることが出来る、有料バー�
 購読収入の一部はOSMコミュニティに還元され、OSMに貢献した各ユーザーにも支払われます。
 OsmAndとOSMをサポートする方法として現状最適な方法であると思われます。</string>
     
-    <string name="no_address_found">設定しない</string>
+    <string name="no_address_found">未登録の住所</string>
     <string name="number_of_contributors">貢献者数</string>
     <string name="number_of_edits">編集数</string>
     <string name="reports_for">表示レポート</string>
