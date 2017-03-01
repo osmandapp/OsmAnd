@@ -2347,7 +2347,7 @@ Om du tycker om OsmAnd och OSM och vill stödja dem så är detta ett utmärkt s
     <string name="rendering_attr_contourColorScheme_description">Färgschema för konturer</string>
     <string name="save_track_min_speed">Minsta loggningshastighet</string>
     <string name="save_track_min_speed_descr">Välj minsta hastighet som startar loggning av en punkt</string>
-    <string name="save_track_min_distance">Loggar rörelsedetektor</string>
+    <string name="save_track_min_distance">Loggning av rörelse</string>
     <string name="save_track_min_distance_descr">Ange minsta avstånd från den senaste positionen för att en punkt ska loggas</string>
     <string name="save_track_precision">Minsta loggningsprecision</string>
     <string name="save_track_precision_descr">Välj minsta precision som startar loggning av en punkt</string>
@@ -2383,7 +2383,7 @@ Om du tycker om OsmAnd och OSM och vill stödja dem så är detta ett utmärkt s
  • Klickbara ikoner på kartan
 
 
- • Kraftfull sökning med POI-filter: Sök t.ex. restauranger kvalitet, eller campingplatser med speciellta faciliteter
+ • Kraftfull sökning med POI-filter: Sök t.ex. restauranger efter kvalitet, eller campingplatser med speciellta faciliteter
 
 
  • Ny Topo Map-stil för cyklister och vandrare
@@ -2500,7 +2500,7 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="max_speed">Maxhastighet</string>
     <string name="no_update_info_desc">Kontrollera inte efter uppdateringar om nya versioner, rabatter relaterade till OsmAnd</string>
     <string name="lang_sr_latn">Serbiska (latin)</string>
-    <string name="configure_screen_quick_action">Snabb handling</string>
+    <string name="configure_screen_quick_action">Snabbåtgärd</string>
 
     <string name="quick_action_item_action">Åtgärd %d</string>
     <string name="quick_action_take_audio_note">Ta ljudanteckning</string>
@@ -2511,7 +2511,7 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="dialog_add_action_title">Lägg till åtgärd</string>
     <string name="quick_actions_delete">Ta bort åtgärd</string>
     <string name="quick_actions_delete_text">Är du säker på att du vill ta bort åtgärden \"%s\"?</string>
-    <string name="quick_favorites_show_favorites_dialog">Visa favoriterdialogen</string>
-    <string name="quick_favorites_name_preset">Namn förinställt</string>
-    <string name="quick_action_add_marker_descr">Trycka på åtgärdsknappen kommer att lägga en kartmarkör i skärmens centrum.</string>
+    <string name="quick_favorites_show_favorites_dialog">Visa dialogen Favoriter</string>
+    <string name="quick_favorites_name_preset">Förinställt namn</string>
+    <string name="quick_action_add_marker_descr">Tryck på åtgärdsknappen sätter en kartmarkör i centrum av skärmen.</string>
     </resources>
