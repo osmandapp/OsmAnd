@@ -2834,4 +2834,5 @@ Facebook：https://www.facebook.com/osmandapp
     <string name="points_delete_multiple">您將要刪除 %1$d 個標點。您確定嗎？</string>
     <string name="route_points_category_name">在路線上要經過的的標點</string>
     <string name="track_points_category_name">在此路線中的重要標點</string>
+    <string name="add_new_folder">增加新的檔案夾</string>
     </resources>
