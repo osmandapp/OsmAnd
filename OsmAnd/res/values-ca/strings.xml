@@ -2667,7 +2667,7 @@ i encara més…
     <string name="routing_attr_driving_style_name">Estil de conducció</string>
     <string name="routing_attr_driving_style_description">Conducció segura, ràpida o equilibrada</string>
     <string name="shared_string_tracks">Pistes</string>
-    <string name="select_gpx_folder">Seleccioneu la carpeta GPX</string>
+    <string name="select_gpx_folder">Seleccioneu la carpeta de traces</string>
     <string name="file_can_not_be_moved">El fitxer no es pot moure.</string>
     <string name="shared_string_move">Mou</string>
     <string name="shared_string_time_moving">Temps en moviment</string>
@@ -2679,4 +2679,8 @@ i encara més…
     <string name="max_speed">Velocitat màxima</string>
     <string name="average_speed">Velocitat mitjana</string>
     <string name="gpx_track">Pista</string>
+    <string name="points_delete_multiple_succesful">El(s) punt(s) s\'ha(n) esborrat correctament.</string>
+    <string name="points_delete_multiple">Esteu eliminant %1$d punt(s). Ho confirmeu?</string>
+    <string name="route_points_category_name">Punts de pas a la ruta</string>
+    <string name="track_points_category_name">Punts destacables en aquesta ruta</string>
     </resources>
