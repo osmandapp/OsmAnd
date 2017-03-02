@@ -1758,7 +1758,7 @@ Le %2$s</string>
     <string name="upload_poi">Last opp interessepunkt</string>
     <string name="osmo_share_location">Del</string>
     <string name="rendering_value_high_name">Høy</string>
-    <string name="rendering_value_medium_w_name">Medium</string>
+    <string name="rendering_value_medium_w_name">Middels</string>
     <string name="rendering_value_low_name">Lav</string>
     <string name="rendering_attr_hideWaterPolygons_description">Vann</string>
     <string name="rendering_attr_hideWaterPolygons_name">Skjul vann</string>
@@ -2138,4 +2138,15 @@ Representerer området: %1$s x %2$s</string>
     <string name="context_menu_item_add_parking_point">Marker som parkeringsplass</string>
     <string name="route_roundabout">Rundkjøring: Ta avkjøring %1$d og kjør</string>
     <string name="support_new_features">Støtt nye funksjoner</string>
+    <string name="max_speed">Maks fart</string>
+    <string name="shared_string_start_time">Starttid</string>
+    <string name="shared_string_end_time">Sluttid</string>
+    <string name="shared_string_color">Farge</string>
+    <string name="file_can_not_be_moved">Filen kan ikke flyttes.</string>
+    <string name="shared_string_move">Flytt</string>
+    <string name="shared_string_tracks">Spor</string>
+    <string name="routing_attr_driving_style_name">Kjørestil</string>
+    <string name="routing_attr_driving_style_description">Trygg, rask eller balansert kjøring</string>
+    <string name="shared_string_time">Tid</string>
+    <string name="total_distance">Total distanse</string>
     </resources>
