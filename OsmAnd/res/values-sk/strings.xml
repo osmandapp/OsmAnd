@@ -2645,7 +2645,7 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="total_distance">Celková vzdialenosť</string>
     <string name="routing_attr_driving_style_name">Štýl jazdy</string>
     <string name="routing_attr_driving_style_description">Bezpečná, rýchla alebo vyvážená jazda</string>
-    <string name="select_gpx_folder">Zvoľte priečinok pre GPX</string>
+    <string name="select_gpx_folder">Zvoľte priečinok pre stopy</string>
     <string name="file_can_not_be_moved">Súbor nemôže byť presunutý.</string>
     <string name="shared_string_move">Presunúť</string>
     <string name="shared_string_tracks">Stopy</string>
@@ -2658,4 +2658,8 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="max_speed">Maximálna rýchlosť</string>
     <string name="average_speed">Priemerná rýchlosť</string>
     <string name="gpx_track">Stopa</string>
+    <string name="points_delete_multiple_succesful">Bod(y) boli úspešne vymazané.</string>
+    <string name="points_delete_multiple">Chystáte sa vymazať %1$d bodov. Ste si istý?</string>
+    <string name="route_points_category_name">Prechodné body na trase</string>
+    <string name="track_points_category_name">Dôležité body na tejto trase</string>
     </resources>
