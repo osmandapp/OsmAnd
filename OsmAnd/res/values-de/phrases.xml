@@ -433,11 +433,11 @@
 	<string name="poi_seafood">Fischgeschäft</string>
 	<string name="poi_anchor_berth">Ankerplatz</string>
 	<string name="poi_anchorage">Ankerplatz</string>
-	<string name="poi_beacon">Seemarker/Wegweiser</string>
-	<string name="poi_beacon_cardinal">Hauptleuchtturm</string>
-	<string name="poi_beacon_lateral">Nebenleuchtturm</string>
-	<string name="poi_beacon_safe_water">Sicheres Gewässer-Leuchtturm</string>
-	<string name="poi_beacon_special_purpose">Sonderleuchtturm</string>
+	<string name="poi_beacon">Bake/Tonne</string>
+	<string name="poi_beacon_cardinal">Kardinalzeichen</string>
+	<string name="poi_beacon_lateral">Lateralzeichen</string>
+	<string name="poi_beacon_safe_water">Mitte-Fahrwasser-Zeichen</string>
+	<string name="poi_beacon_special_purpose">Sonderseezeichen</string>
 	<string name="poi_berth">Ankerplatz</string>
 	<string name="poi_seamark_bridge">Seezeichenbrücke</string>
 	<string name="poi_seamark_building">Seegebäude</string>
