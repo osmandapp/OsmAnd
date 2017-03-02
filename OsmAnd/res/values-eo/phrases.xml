@@ -578,7 +578,7 @@
 	<string name="poi_optometrist">Okulisto</string>
 	<string name="poi_physiotherapist">Fizioterapiisto</string>
 	<string name="poi_podiatrist">Piedisto</string>
-	<string name="poi_psychotherapist">Psikoterapiisto</string>
+	<string name="poi_psychotherapist">Psiĥoterapiisto</string>
 	<string name="poi_healthcare_rehabilitation">Rekapabligo</string>
 	<string name="poi_speech_therapist">Ortofonisto</string>
 	<string name="poi_healthcare_yes">Medicinejo</string>
@@ -2145,7 +2145,7 @@
 	<string name="poi_summit_cross">Kruco sur la montopinto: jes</string>
 
 	<string name="poi_temperature">Temperaturo</string>
-	<string name="poi_fitness_station">Ekzerco-parko</string>
+	<string name="poi_fitness_station">Ekzerc-parko</string>
 
 	<string name="poi_hackerspace">Kodumulejo</string>
 
@@ -2660,7 +2660,7 @@
 	<string name="poi_office_therapist">Kabineto de terapiisto</string>
 	<string name="poi_office_podologist">Kabineto de piedisto</string>
 	<string name="poi_office_healer">Kabineto de kuracisto</string>
-	<string name="poi_office_psychologist">Kabineto de psikologiisto</string>
+	<string name="poi_office_psychologist">Kabineto de psiĥologiisto</string>
 	<string name="poi_office_nursing_service">Oficejo de flegisto</string>
 	<string name="poi_office_midwife">Oficejo de akuŝisto</string>
 
@@ -2917,7 +2917,7 @@
 	<string name="poi_health_person_type_paramedic">Laboranto de sanservo: medicina savisto (sukuristo)</string>
 	<string name="poi_health_person_type_physician">Laboranto de sanservo: doktoro de medicino</string>
 	<string name="poi_health_person_type_podologist">Laboranto de sanservo: piedisto</string>
-	<string name="poi_health_person_type_psychologist">Laboranto de sanservo: psikologiisto</string>
+	<string name="poi_health_person_type_psychologist">Laboranto de sanservo: psiĥologiisto</string>
 	<string name="poi_health_person_type_therapist">Laboranto de sanservo: terapiisto</string>
 	<string name="poi_health_person_type_physician_assitant">Laboranto de sanservo: helpanto de doktoro</string>
 	<string name="poi_health_person_type_technician">Laboranto de sanservo: teĥnikisto</string>
@@ -3004,7 +3004,7 @@
 	<string name="poi_health_specialty_herbalism_yes">Herbo-kuracado</string>
 	<string name="poi_health_specialty_chiropractic_yes">Ĥiropraktiko (kontraŭ-medicino)</string>
 	<string name="poi_health_specialty_naturopathy_yes">Natur-kuracado (naturopatio) (kontraŭ-medicino)</string>
-	<string name="poi_health_specialty_depth_psychology_yes">Profunda psikologio</string>
+	<string name="poi_health_specialty_depth_psychology_yes">Profunda psiĥologio</string>
 	<string name="poi_health_specialty_behavior_yes">Konduta terapio</string>
 
 	<string name="poi_wiki_link">Vikipedio</string>
