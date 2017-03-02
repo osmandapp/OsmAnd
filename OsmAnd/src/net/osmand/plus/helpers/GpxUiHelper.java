@@ -1014,23 +1014,66 @@ public class GpxUiHelper {
 				return (int)value + " " + mainUnitY;
 			}
 		});
-
-		ArrayList<Entry> values = new ArrayList<>();
+		
+		List<Entry> values = new ArrayList<>();
 		List<Elevation> elevationData = analysis.elevationData;
 		float nextX = 0;
 		float nextY;
-		//float prevElev = -80000;
-		//float gist = 1.5f;
+		float elev;
+		float prevElev = -80000;
+		int i = -1;
+		int lastIndex = elevationData.size() - 1;
+		float shift = 0f;
+		Entry entry = null;
 		for (Elevation e : elevationData) {
+			i++;
 			if (e.distance > 0) {
 				nextX += (float) e.distance / divX;
-				nextY = (float) (e.elevation * convEle);
-				//if (Math.abs(prevElev - e.elevation) < gist) {
-				//	continue;
-				//} else {
-				//	prevElev = (float) e.elevation;
-				//}
-				values.add(new Entry(nextX, nextY));
+				elev = (float) e.elevation;
+				if (prevElev != -80000) {
+					if (elev < prevElev) {
+						shift = .5f;
+					} else if (elev > prevElev) {
+						shift = -.5f;
+					} else if (prevElev == elev && i < lastIndex) {
+						continue;
+					}
+				}
+				prevElev = elev;
+				nextY = (elev + shift) * convEle;
+				entry = new Entry(nextX, nextY);
+				values.add(entry);
+			}
+		}
+
+		/*
+		values = new ArrayList<>();
+		values.add(new Entry(0, 0));
+		values.add(new Entry(20, 0));
+		values.add(new Entry(45, -47));
+		values.add(new Entry(53, 335));
+		values.add(new Entry(57, 26));
+		values.add(new Entry(62, 387));
+		values.add(new Entry(74, 104));
+		values.add(new Entry(89, 0));
+		values.add(new Entry(95, 100));
+		values.add(new Entry(100, 0));
+		*/
+
+		List<Point2D> points = new ArrayList<>(values.size());
+		for (Entry e : values) {
+			points.add(new Point2D(e.getX(), e.getY()));
+		}
+		List<Segment> spline = calculateSpline(points);
+		if (spline != null) {
+			int count = 8;
+			values = new ArrayList<>();
+			for (Segment s : spline) {
+				Point2D p = new Point2D();
+				for (i = 0; i < count; ++i) {
+					s.calc((double) i / (double) count, p);
+					values.add(new Entry((float) p.x, (float) p.y));
+				}
 			}
 		}
 
@@ -1061,7 +1104,8 @@ public class GpxUiHelper {
 		dataSet.setDrawHorizontalHighlightIndicator(false);
 		dataSet.setHighLightColor(light ? mChart.getResources().getColor(R.color.secondary_text_light) : mChart.getResources().getColor(R.color.secondary_text_dark));
 
-		//dataSet.setMode(LineDataSet.Mode.HORIZONTAL_BEZIER);
+		//dataSet.setCubicIntensity(.2f);
+		//dataSet.setMode(LineDataSet.Mode.CUBIC_BEZIER);
 
 		dataSet.setFillFormatter(new IFillFormatter() {
 			@Override
@@ -1260,6 +1304,29 @@ public class GpxUiHelper {
 				return (int)value + " " + mainUnitY;
 			}
 		});
+
+		/*
+		List<Entry> values = new ArrayList<>();
+		List<Elevation> elevationData = analysis.elevationData;
+		float nextX = 0;
+		float nextY;
+		float elev;
+		float prevElev = -80000;
+		int i = -1;
+		int lastIndex = elevationData.size() - 1;
+		float shift = 0f;
+		Entry entry = null;
+		for (Elevation e : elevationData) {
+			i++;
+			if (e.distance > 0) {
+				nextX += (float) e.distance / divX;
+				elev = (float) e.elevation;
+				nextY = elev + shift;
+				entry = new Entry(nextX, nextY);
+				values.add(entry);
+			}
+		}
+		*/
 
 		ArrayList<Entry> values = new ArrayList<>();
 		List<Elevation> elevationData = analysis.elevationData;
@@ -1563,5 +1630,163 @@ public class GpxUiHelper {
 		public void setSelected(boolean selected) {
 			this.selected = selected;
 		}
+	}
+
+	public static class Point2D {
+		double x, y;
+
+		Point2D() {
+			x = 0.0;
+			y = 0.0;
+		}
+
+		Point2D(double x, double y) {
+			this.x = x;
+			this.y = y;
+		}
+
+		Point2D(Point2D p) {
+			this.x = p.x;
+			this.y = p.y;
+		}
+
+		Point2D minus(Point2D point) {
+			return new Point2D(x - point.x, y - point.y);
+		}
+
+		Point2D plus(Point2D point) {
+			return new Point2D(x + point.x, y + point.y);
+		}
+
+		Point2D mult(double v) {
+			return new Point2D(x * v, y * v);
+		}
+
+		void thisMinus(Point2D point) {
+			x -= point.x;
+			y -= point.y;
+		}
+
+		void thisPlus(Point2D point) {
+			x += point.x;
+			y += point.y;
+		}
+
+		void normalize()
+		{
+			double l = Math.sqrt(x * x + y * y);
+			x /= l;
+			y /= l;
+		}
+	}
+
+	public static class Segment {
+		Point2D[] points = new Point2D[4];
+
+		Segment() {
+		}
+
+		void calc(double t, Point2D p)
+		{
+			double t2 = t * t;
+			double t3 = t2 * t;
+			double nt = 1.0 - t;
+			double nt2 = nt * nt;
+			double nt3 = nt2 * nt;
+			p.x = nt3 * points[0].x + 3.0 * t * nt2 * points[1].x + 3.0 * t2 * nt * points[2].x + t3 * points[3].x;
+			p.y = nt3 * points[0].y + 3.0 * t * nt2 * points[1].y + 3.0 * t2 * nt * points[2].y + t3 * points[3].y;
+		}
+	}
+
+	public static List<Segment> calculateSpline(List<Point2D> values) {
+		final double EPSILON  = 1.0e-5;
+
+		int n = values.size() - 1;
+
+		if (n < 2)
+			return null;
+
+		List<Segment> bezier = new ArrayList<>(n);
+		for (int i = 0; i < n; i++) {
+			bezier.add(new Segment());
+		}
+
+		Point2D tgL = new Point2D();
+		Point2D tgR = new Point2D();
+		Point2D cur;
+		Point2D next = values.get(1).minus(values.get(0));
+		next.normalize();
+
+		double l1, l2, tmp, x;
+
+		--n;
+
+		for (int i = 0; i < n; ++i)
+		{
+			bezier.get(i).points[0] = new Point2D(values.get(i));
+			bezier.get(i).points[1] = new Point2D(values.get(i));
+			bezier.get(i).points[2] = new Point2D(values.get(i + 1));
+			bezier.get(i).points[3] = new Point2D(values.get(i + 1));
+
+			cur = next;
+			next = values.get(i + 2).minus(values.get(i + 1));
+			next.normalize();
+
+			tgL = tgR;
+
+			tgR = cur.plus(next);
+			tgR.normalize();
+
+			if (Math.abs(values.get(i + 1).y - values.get(i).y) < EPSILON)
+			{
+				l1 = 0.0;
+				l2 = 0.0;
+			}
+			else
+			{
+				tmp = values.get(i + 1).x - values.get(i).x;
+				l1 = Math.abs(tgL.x) > EPSILON ? tmp / (2.0 * tgL.x) : 1.0;
+				l2 = Math.abs(tgR.x) > EPSILON ? tmp / (2.0 * tgR.x) : 1.0;
+			}
+
+			if (Math.abs(tgL.x) > EPSILON && Math.abs(tgR.x) > EPSILON)
+			{
+				tmp = tgL.y / tgL.x - tgR.y / tgR.x;
+				if (Math.abs(tmp) > EPSILON)
+				{
+					x = (values.get(i + 1).y - tgR.y / tgR.x * values.get(i + 1).x - values.get(i).y + tgL.y / tgL.x * values.get(i).x) / tmp;
+					if (x > values.get(i).x && x < values.get(i + 1).x)
+					{
+						if (tgL.y > 0.0)
+						{
+							if (l1 > l2)
+								l1 = 0.0;
+							else
+								l2 = 0.0;
+						}
+						else
+						{
+							if (l1 < l2)
+								l1 = 0.0;
+							else
+								l2 = 0.0;
+						}
+					}
+				}
+			}
+
+			bezier.get(i).points[1].thisPlus(tgL.mult(l1));
+			bezier.get(i).points[2].thisMinus(tgR.mult(l2));
+		}
+
+		l1 = Math.abs(tgL.x) > EPSILON ? (values.get(n + 1).x - values.get(n).x) / (2.0 * tgL.x) : 1.0;
+
+		bezier.get(n).points[0] = new Point2D(values.get(n));
+		bezier.get(n).points[1] = new Point2D(values.get(n));
+		bezier.get(n).points[2] = new Point2D(values.get(n + 1));
+		bezier.get(n).points[3] = new Point2D(values.get(n + 1));
+		bezier.get(n).points[1].thisPlus(tgR.mult(l1));
+
+		return bezier;
 	}
 }
