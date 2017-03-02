@@ -210,7 +210,8 @@ public class GPXDatabase {
 	}
 
 	private String getFileDir(File itemFile) {
-		return itemFile.getParentFile().equals(context.getAppPath(IndexConstants.GPX_INDEX_DIR)) ?
+		return itemFile.getParentFile() == null ||
+				itemFile.getParentFile().equals(context.getAppPath(IndexConstants.GPX_INDEX_DIR)) ?
 				"" : itemFile.getParentFile().getName();
 	}
 
