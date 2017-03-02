@@ -140,7 +140,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	// photo shot:
 	private static int shotId = 0;
 	private SoundPool sp = null;
-	public static final int FULL_SCEEN_RESULT_DELAY_MS = 5000;
+	public static final int FULL_SCEEN_RESULT_DELAY_MS = 3000;
 
 	public final CommonPreference<Integer> AV_CAMERA_PICTURE_SIZE;
 	public final CommonPreference<Integer> AV_CAMERA_FOCUS_TYPE;
