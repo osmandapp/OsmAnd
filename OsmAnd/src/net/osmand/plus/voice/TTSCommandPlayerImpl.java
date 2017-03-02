@@ -239,12 +239,16 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 				}
 				
 				private String getVoiceUsed() {
-					if (android.os.Build.VERSION.SDK_INT >= 21) {
-						if (mTts.getVoice() != null) {
-							return mTts.getVoice().toString();
-						}
-					} else {
+					try {
+						if (android.os.Build.VERSION.SDK_INT >= 21) {
+							if (mTts.getVoice() != null) {
+								return mTts.getVoice().toString();
+							}
+						} else {
 							return mTts.getLanguage() + " (Voice details not reported in API<21)";
+						}
+					} catch (RuntimeException e) {
+						// mTts.getVoice() might throw NPE
 					}
 					return "";
 				}
