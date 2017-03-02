@@ -167,11 +167,12 @@
     <string name="mile_per_hour">mil/godzinę</string>
     <string name="mile">mila</string>
     <string name="send_location_way_choose_title">Udostępnij położenie używając</string>
-    <string name="send_location_sms_pattern">Pozycja: %1$s\n%2$s</string>
+    <string name="send_location_sms_pattern">Położenie: %1$s
+%2$s</string>
     <string name="send_location_email_pattern">Aby zobaczyć lokację użyj linku w przeglądarce %1$s lub linku do intentu androidowego %2$s</string>
     <string name="send_location">Wyślij położenie</string>
     <string name="context_menu_item_share_location">Udostępnij położenie</string>
-    <string name="add_waypoint_dialog_added">Punkt GPX \'\'{0}\'\' został pomyślnie dodany</string>
+    <string name="add_waypoint_dialog_added">Dodano punkt GPX „{0}”</string>
     <string name="add_waypoint_dialog_title">Dodaj punkt pośredni do śladu GPX</string>
     <string name="context_menu_item_add_waypoint">Dodaj punkt do GPX</string>
     <string name="amenity_type_administrative">Administracyjne</string>
@@ -197,13 +198,13 @@
     <string name="amenity_type_transportation">Transport</string>
     <string name="indexing_address">Indeksowanie adresów…</string>
     <string name="indexing_map">Indeksowanie map…</string>
-    <string name="indexing_poi">Indeksowanie POI…</string>
+    <string name="indexing_poi">Indeksowanie użytecznych miejsc…</string>
     <string name="indexing_transport">Indeksowanie transportu…</string>
     <string name="shared_string_io_error">Wystąpił błąd wejścia/wyjścia</string>
     <string name="km">km</string>
     <string name="km_h">km/h</string>
     <string name="m">m</string>
-    <string name="old_map_index_is_not_supported">Przestarzały format danych \'\'{0}\'\' nie jest wspierany</string>
+    <string name="old_map_index_is_not_supported">Przestarzały format danych „{0}” nie jest obsługiwany</string>
     <string name="poi_filter_car_aid">Pomoc drogowa</string>
     <string name="poi_filter_closest_poi">Pobliskie użyteczne miejsca</string>
     <string name="poi_filter_custom_filter">Własny filtr</string>
@@ -212,19 +213,19 @@
     <string name="poi_filter_fuel">Paliwo</string>
     <string name="poi_filter_namefinder">Wyszukiwarka nazw online</string>
     <string name="reading_cached_tiles">Wczytywanie zachowanych kafelków…</string>
-    <string name="version_index_is_big_for_memory">Index\'\'{0}\'\' nie zmieścił się w pamięci</string>
-    <string name="version_index_is_not_supported">Wersja indeksu \'\'{0}\'\' nie jest wspierana</string>
+    <string name="version_index_is_big_for_memory">Indeks „{0}” nie zmieścił się w pamięci</string>
+    <string name="version_index_is_not_supported">Wersja indeksu „{0}” nie jest obsługiwana</string>
     
     
     <string name="osmand_routing_experimental">Nawigacja offline w OsmAnd jest funkcją eksperymentalną i nie działa dla odległości większych niż 20 km.\n\nUsługa nawigacji została tymczasowo przełączona na CloudMade (online).</string>
-    <string name="specified_dir_doesnt_exist">Nie mogę odnaleźć wskazanego katalogu.</string>
+    <string name="specified_dir_doesnt_exist">Nie można odnaleźć wskazanego katalogu.</string>
     <string name="application_dir">Katalog przechowywania danych</string>
 
     <string name="osmand_net_previously_installed">Poprzednia wersja OsmAnd jest zainstalowana. Wszystkie dane offline są obsługiwane przez nową wersję aplikacji ale punkty ulubione powinny być wyeksportowane w starej wersji aplikacji i zaimportowane w nowej.</string>
-    <string name="build_installed">Kompilacja {0} zainstalowana pomyślnie ({1}).</string>
+    <string name="build_installed">Zainstalowano kompilację {0} ({1}).</string>
     <string name="downloading_build">Pobieranie kompilacji…</string>
     <string name="install_selected_build">Kontynuować instalację OsmAnd - {0} z {1} {2} MB ?</string>
-    <string name="loading_builds_failed">Pobieranie listy kompilacji OsmAnd nie powiodło się</string>
+    <string name="loading_builds_failed">Nie udało się pobrać listy kompilacji OsmAnd</string>
     <string name="loading_builds">Wczytywanie listy kompilacji OsmAnd…</string>
     <string name="select_build_to_install">Wybierz, którą kompilację OsmAnd zainstalować</string>
     <string name="contribution_activity">Wersje instalacyjne</string>
@@ -255,8 +256,8 @@
     <string name="shared_string_download_map">Pobierz mapę</string>
     <string name="select_max_zoom_preload_area">Proszę wybrać maksymalne przybliżenie do pobrania</string>
     <string name="maps_could_not_be_downloaded">Nie udało się pobrać tej mapy</string>
-    <string name="continuous_rendering">Rysowanie ciągłe</string>
-    <string name="continuous_rendering_descr">Używaj ciągłego rysowania podczas wyświetlania zamiast rysować jeden obrazek na raz</string>
+    <string name="continuous_rendering">Renderowanie ciągłe</string>
+    <string name="continuous_rendering_descr">Używa ciągłego renderowania podczas wyświetlania zamiast renderowania jednego obrazu na raz</string>
     <string name="rendering_exception">Wystąpił błąd podczas rysowania wybranej powierzchni</string>
     <string name="rendering_out_of_memory">Brak wystarczającej ilości pamięci, aby wyświetlić wybrany obszar</string>
     <string name="show_point_options">Użyj położenia…</string>
@@ -264,8 +265,8 @@
     <string name="renderer_load_exception">Wystąpił błąd: nie wczytano renderera</string>
     <string name="renderers">Renderer wektorowy</string>
     <string name="renderers_descr">Wybierz wygląd mapy wektorowej offline</string>
-    <string name="poi_context_menu_website">Wyświetl stronę internetową Miejsca</string>
-    <string name="poi_context_menu_call">Wyświetl nr telefonu Miejsca</string>
+    <string name="poi_context_menu_website">Wyświetl stronę internetową użytecznego miejsca</string>
+    <string name="poi_context_menu_call">Wyświetl nr telefonu użytecznego miejsca</string>
     <string name="website">Strona internetowa</string>
     <string name="phone">Telefon</string>
     <string name="download_type_to_filter">Proszę wprowadzić tekst, aby filtrować dane</string>
@@ -774,8 +775,7 @@ Mapy kafelkowe można uzyskać bezpośrednio z zasobów sieciowych, jak i przygo
     <string name="shared_string_name">Nazwa</string>
     <string name="favourites_edit_dialog_category">Kategoria</string>
     <string name="gpx_option_from_start_point">Przejdź wzdłuż całej ścieżki</string>
-  <string name="create_poi_link_to_osm_doc">
-<u>Online OSM</u> map classification with images"</string>
+  <string name="create_poi_link_to_osm_doc"><u>Online OSM</u> map classification with images"</string>
     <string name="local_index_routing_data">Dane wyznaczania tras</string>
     <string name="navigate_point_format">Format</string>
     <string name="poi_search_desc">Wyszukiwanie użytecznych miejsc</string>
