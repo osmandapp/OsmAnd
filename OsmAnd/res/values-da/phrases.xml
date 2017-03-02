@@ -1187,7 +1187,7 @@
 
 	<string name="poi_parking_multi_storey">P-hus</string>
 
-	<string name="poi_bicycle_parking_stands">Cykelsstativ</string>
+	<string name="poi_bicycle_parking_stands">Cykelstativ</string>
 	<string name="poi_bicycle_parking_wall_loops">Vægmonteret cykelparkering</string>
 	<string name="poi_bicycle_parking_building">Cykelparkeringsboks</string>
 	<string name="poi_bicycle_parking_shed">Cykelskur</string>
@@ -1224,7 +1224,7 @@
 	<string name="poi_trees_pomegranate">Granatæble</string>
 
 	<string name="poi_parking_underground">Parkeringskælder</string>
-	<string name="poi_bicycle_parking_rack">Cykelsstativ</string>
+	<string name="poi_bicycle_parking_rack">Cykelstativ</string>
 	<string name="poi_nudism_yes">Tilladt</string>
 	<string name="poi_nudism_no">Forbudt</string>
 	<string name="poi_nudism_obligatory">Obligatorisk</string>
@@ -2932,8 +2932,8 @@
 
 <string name="poi_military_checkpoint">Militærkontrolpost</string>
 
-<string name="poi_bicycle_parking_lockers">Garderobeskabe</string>
-	<string name="poi_bicycle_parking_tree">Cykeltræsparkering</string>
+<string name="poi_bicycle_parking_lockers">Cykelskabe</string>
+	<string name="poi_bicycle_parking_tree">Vertikal-parkering</string>
 	<string name="poi_bicycle_parking_streetpod">Streetpod</string>
 
 <string name="poi_depth">Dybde</string>
@@ -3439,6 +3439,6 @@
 	<string name="poi_drink_wine_retail">Vin: detailhandel</string>
 	<string name="poi_drink_wine_served">Vin: serveres</string>
 
-<string name="poi_energy_supplier">Energi leverandør kontor</string>
+<string name="poi_energy_supplier">Energileverandør-kontor</string>
 
 </resources>
