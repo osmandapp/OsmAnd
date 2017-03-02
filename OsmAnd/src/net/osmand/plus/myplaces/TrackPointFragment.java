@@ -346,7 +346,6 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 			@Override
 			public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
 				if (item.getItemId() == DELETE_ACTION_ID) {
-					mode.finish();
 					deleteItemsAction();
 				}
 				return true;
@@ -397,10 +396,14 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 						if (gpx.showCurrentTrack) {
 							savingTrackHelper.deletePointData(item.locationStart);
 						} else {
-							gpx.deleteWptPt(item.locationStart);
+							if (item.group.getType() == GpxDisplayItemType.TRACK_POINTS) {
+								gpx.deleteWptPt(item.locationStart);
+							} else if (item.group.getType() == GpxDisplayItemType.TRACK_ROUTE_POINTS) {
+								gpx.deleteRtePt(item.locationStart);
+							}
 						}
 					}
-					if (gpx.showCurrentTrack) {
+					if (!gpx.showCurrentTrack) {
 						GPXUtilities.writeGpxFile(new File(gpx.path), gpx, app);
 						boolean selected = app.getSelectedGpxHelper().getSelectedFileByPath(gpx.path) != null;
 						if (selected) {
@@ -522,7 +525,6 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 			@Override
 			public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
 				if (item.getItemId() == SELECT_FAVORITES_ACTION_MODE_ID) {
-					mode.finish();
 					selectFavoritesImpl();
 				}
 				return true;
@@ -549,6 +551,9 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
+					if (actionMode != null) {
+						actionMode.finish();
+					}
 					FavouritesDbHelper fdb = app.getFavorites();
 					for(GpxDisplayItem i : selectedItems) {
 						if (i.locationStart != null) {
@@ -794,7 +799,7 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 										new PointDescription(PointDescription.POINT_TYPE_WPT, gpxItem.name),
 										false,
 										gpxItem.locationStart);
-								//todo: open edit dialog
+								settings.setEditObjectToShow();
 
 								MapActivity.launchMapActivityMoveToTop(getActivity());
 								return true;
@@ -828,6 +833,7 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 				ch.setVisibility(View.VISIBLE);
 				ch.setChecked(selectedItems.contains(gpxItem));
 				row.findViewById(R.id.icon).setVisibility(View.GONE);
+				options.setVisibility(View.GONE);
 				ch.setOnClickListener(new View.OnClickListener() {
 
 					@Override
