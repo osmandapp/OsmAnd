@@ -763,6 +763,16 @@ public class GPXUtilities {
 			return points.remove(pt);
 		}
 
+		public boolean deleteRtePt(WptPt pt) {
+			modifiedTime = System.currentTimeMillis();
+			for (Route route : routes) {
+				if (route.points.remove(pt)) {
+					return true;
+				}
+			}
+			return false;
+		}
+
 		public List<TrkSegment> processRoutePoints() {
 			List<TrkSegment> tpoints = new ArrayList<TrkSegment>();
 			if (routes.size() > 0) {

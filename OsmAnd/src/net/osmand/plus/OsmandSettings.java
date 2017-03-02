@@ -1622,11 +1622,18 @@ public class OsmandSettings {
 	}
 
 	private Object objectToShow;
+	private boolean editObjectToShow;
 
 	public Object getAndClearObjectToShow() {
 		Object objectToShow = this.objectToShow;
 		this.objectToShow = null;
 		return objectToShow;
+	}
+
+	public boolean getAndClearEditObjectToShow() {
+		boolean res = this.editObjectToShow;
+		this.editObjectToShow = false;
+		return res;
 	}
 
 	public int getMapZoomToShow() {
@@ -1649,6 +1656,10 @@ public class OsmandSettings {
 		if (addToHistory) {
 			SearchHistoryHelper.getInstance(ctx).addNewItemToHistory(latitude, longitude, pointDescription);
 		}
+	}
+
+	public void setEditObjectToShow() {
+		this.editObjectToShow = true;
 	}
 
 	public void setMapLocationToShow(double latitude, double longitude, int zoom) {

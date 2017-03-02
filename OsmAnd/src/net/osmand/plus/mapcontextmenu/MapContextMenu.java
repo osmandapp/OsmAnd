@@ -739,6 +739,19 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		return dlg;
 	}
 
+	public boolean openEditor() {
+		if (object != null) {
+			if (object instanceof FavouritePoint) {
+				getFavoritePointEditor().edit((FavouritePoint) object);
+				return true;
+			} else if (object instanceof WptPt) {
+				getWptPtPointEditor().edit((WptPt) object);
+				return true;
+			}
+		}
+		return false;
+	}
+
 	public void addAsLastIntermediate() {
 		mapActivity.getMyApplication().getTargetPointsHelper().navigateToPoint(latLon,
 				true, mapActivity.getMyApplication().getTargetPointsHelper().getIntermediatePoints().size(),

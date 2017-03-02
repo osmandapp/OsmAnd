@@ -742,6 +742,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		LatLon latLonToShow = settings.getAndClearMapLocationToShow();
 		PointDescription mapLabelToShow = settings.getAndClearMapLabelToShow(latLonToShow);
 		Object toShow = settings.getAndClearObjectToShow();
+		boolean editToShow = settings.getAndClearEditObjectToShow();
 		int status = settings.isRouteToPointNavigateAndClear();
 		if (status != 0) {
 			// always enable and follow and let calculate it (i.e.GPS is not accessible in a garage)
@@ -785,6 +786,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 					MapRouteInfoMenu.showLocationOnMap(this, latLonToShow.getLatitude(), latLonToShow.getLongitude());
 				} else {
 					mapContextMenu.show(latLonToShow, mapLabelToShow, toShow);
+				}
+				if (editToShow) {
+					mapContextMenu.openEditor();
 				}
 			} else if (!latLonToShow.equals(cur)) {
 				mapView.getAnimatedDraggingThread().startMoving(latLonToShow.getLatitude(),
