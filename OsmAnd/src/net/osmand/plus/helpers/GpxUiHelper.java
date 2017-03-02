@@ -1014,7 +1014,7 @@ public class GpxUiHelper {
 				return (int)value + " " + mainUnitY;
 			}
 		});
-		
+
 		List<Entry> values = new ArrayList<>();
 		List<Elevation> elevationData = analysis.elevationData;
 		float nextX = 0;
