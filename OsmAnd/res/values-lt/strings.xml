@@ -2640,4 +2640,23 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="lang_zh_hk">Kiniečių (Honkongas)</string>
     <string name="max_speed">Didžiausias greitis</string>
     <string name="average_speed">Vidutinis greitis</string>
+    <string name="shared_string_color">Spalva</string>
+    <string name="shared_string_time">Laikas</string>
+    <string name="gpx_add_track">Pridėti maršrutą</string>
+    <string name="quick_action_item_action">Veiksmas %d</string>
+    <string name="quick_action_add_poi">Pridėti LV</string>
+    <string name="quick_action_map_style">Pakeisti žemėlapio stilių</string>
+    <string name="quick_action_add_parking">Pridėti parkavimo vietą</string>
+    <string name="quick_action_new_action">Pridėti veiksmą</string>
+    <string name="quick_action_edit_action">Redaguoti veiksmą</string>
+    <string name="dialog_add_action_title">Pridėti veiksmą</string>
+    <string name="quick_actions_delete">Ištrinti veiksmą</string>
+    <string name="favorite_empty_place_name">Vieta</string>
+    <string name="quick_action_showhide_poi_title">Rodyti/slėpti LV</string>
+    <string name="quick_action_add_category">Pridėti kategoriją</string>
+    <string name="quick_action_bug_message">Pranešimas</string>
+    <string name="quick_action_map_styles">Žemėlapio stiliai</string>
+    <string name="quick_action_map_source_title">Žemėlapio šaltiniai</string>
+    <string name="quick_action_map_source_action">Pridėti žemėlapio šaltinį</string>
+    <string name="quick_action_map_source">Pakeisti žemėlapio šaltinį</string>
     </resources>
