@@ -573,4 +573,11 @@
 	<string name="poi_tents_no">Telt ikke tillatt</string>
 	<string name="poi_washing_machine">Vaskemaskin</string>
 	<string name="poi_washing_machine_no">Vaskemaskin: nei</string>
+	<string name="poi_fuel_avia_type">Type</string>
+	<string name="poi_clothes_type">Type</string>
+	<string name="poi_shoes_type">Type</string>
+	<string name="poi_fire_hydrant_type">Type</string>
+	<string name="poi_fire_hydrant_position">Posisjon</string>
+	<string name="poi_highway_crossing_type">Type</string>
+	<string name="poi_service_car">Tjeneste</string>
 	</resources>
