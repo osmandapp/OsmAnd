@@ -3346,4 +3346,6 @@
 	<string name="poi_drink_wine_retail">Wine: retail</string>
 	<string name="poi_drink_wine_served">Wine: served</string>
 
+	<string name="poi_energy_supplier">Energy supplier office</string>
+
 </resources>
