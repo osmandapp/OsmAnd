@@ -2803,7 +2803,7 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="total_distance">Distàntzia totale</string>
     <string name="shared_string_time">Ora</string>
     <string name="shared_string_tracks">Rastas</string>
-    <string name="select_gpx_folder">Icherta sa cartella GPX</string>
+    <string name="select_gpx_folder">Icherta sa cartella de sas rastas</string>
     <string name="file_can_not_be_moved">Su documentu non podet èssere mòidu.</string>
     <string name="shared_string_move">Move</string>
     <string name="max_speed">Lestresa màssima</string>
@@ -2815,4 +2815,7 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="shared_string_end_time">Ora de fine</string>
     <string name="shared_string_color">Colore</string>
     <string name="gpx_track">Rasta</string>
+    <string name="points_delete_multiple_succesful">Puntu/os iscantzelladu/os.</string>
+    <string name="points_delete_multiple">As a iscantzellare %1$d puntu/os. Seguru ses?</string>
+    <string name="track_points_category_name">Puntos importantes in custa àndala</string>
     </resources>
