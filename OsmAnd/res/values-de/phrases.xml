@@ -434,17 +434,17 @@
 	<string name="poi_anchor_berth">Ankerplatz</string>
 	<string name="poi_anchorage">Ankerplatz</string>
 	<string name="poi_beacon">Bake (Seezeichen)</string>
-	<string name="poi_beacon_cardinal">Kardinal-Bake</string>
-	<string name="poi_beacon_lateral">Lateral-Bake</string>
+	<string name="poi_beacon_cardinal">Untiefenbake (Kardinal)</string>
+	<string name="poi_beacon_lateral">Fahrrinnenbake (Lateral)</string>
 	<string name="poi_beacon_safe_water">Mitte-Fahrwasser-Bake</string>
 	<string name="poi_beacon_special_purpose">Sonderzeichen-Bake</string>
 	<string name="poi_berth">Landesteg</string>
 	<string name="poi_seamark_bridge">Seezeichenbrücke</string>
 	<string name="poi_seamark_building">Seezeichengebäude</string>
-	<string name="poi_buoy_cardinal">Kardinal-Tonne</string>
-	<string name="poi_buoy_installation">Installationsboje</string>
-	<string name="poi_buoy_isolated_danger">Einzelgefahr-Tonne</string>
-	<string name="poi_buoy_lateral">Lateral-Tonne</string>
+	<string name="poi_buoy_cardinal">Untiefentonne (Kardinal)</string>
+	<string name="poi_buoy_installation">Ansteuertonne</string>
+	<string name="poi_buoy_isolated_danger">Einzelgefahrtonne</string>
+	<string name="poi_buoy_lateral">Fahrrinnentonne (Lateral)</string>
 	<string name="poi_buoy_safe_water">Mitte-Fahrwasser-Tonne</string>
 	<string name="poi_buoy_special_purpose">Sonderzeichen-Tonne</string>
 	<string name="poi_daymark">Tagzeichen</string>
@@ -455,12 +455,12 @@
 	<string name="poi_fog_signal">Nebelsignal</string>
 	<string name="poi_seamark_harbour">Hafen</string>
 	<string name="poi_harbour_basin">Hafenbecken</string>
-	<string name="poi_landmark">Grenzstein</string>
-	<string name="poi_seamark_light">Leuchtseezeichen</string>
-	<string name="poi_seamark_light_float">Treibendes Leuchtseezeichen</string>
-	<string name="poi_seamark_light_major">Hauptleuchtseezeichen</string>
-	<string name="poi_seamark_light_minor">Nebenleuchtseezeichen</string>
-	<string name="poi_seamark_light_vessel">Schiffsleuchtseezeichen</string>
+	<string name="poi_landmark">Landmarke</string>
+	<string name="poi_seamark_light">Leuchtfeuer, Seezeichen</string>
+	<string name="poi_seamark_light_float">Treibendes Leuchtfeuer</string>
+	<string name="poi_seamark_light_major">Hauptleuchtfeuer</string>
+	<string name="poi_seamark_light_minor">Nebenleuchtfeuer</string>
+	<string name="poi_seamark_light_vessel">Feuerschiff</string>
 	<string name="poi_mooring">Liegeplatz</string>
 	<string name="poi_notice">Hinweis</string>
 	<string name="poi_pile">Pfahl</string>
@@ -470,7 +470,7 @@
 	<string name="poi_signal_station_traffic">Signalstelle: Verkehr</string>
 	<string name="poi_signal_station_warning">Signalstelle: Warnung</string>
 	<string name="poi_small_craft_facility">Sportbooteinrichtung</string>
-	<string name="poi_topmark">Baken</string>
+	<string name="poi_topmark">Toppzeichen</string>
 	<string name="poi_seamark_wreck">Wrack</string>
 	<string name="poi_second_hand">Gebrauchtwaren</string>
 	<string name="poi_service_tyres">Reifenhändler</string>
@@ -3352,7 +3352,9 @@
 <string name="poi_fast_food_cafeteria">Ja</string>
 
 	<string name="poi_drink_wine_yes">Wein: Ja</string>
-	<string name="poi_drink_wine_retail">Wine: Einzelhandel</string>
+	<string name="poi_drink_wine_retail">Wein: Einzelhandel</string>
 	<string name="poi_drink_wine_served">Wein: Ausschank</string>
+
+<string name="poi_energy_supplier">Energieunternehmensbüro</string>
 
 </resources>
