@@ -1,7 +1,204 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+<FrameLayout
+    android:id="@+id/plan_route_info"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_transparent"
+    android:clickable="true"
+    xmlns:tools="http://schemas.android.com/tools">
 
-</LinearLayout>
+    <LinearLayout
+        android:layout_width="@dimen/dashboard_land_width"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@drawable/bg_left_menu_dark">
+
+        <LinearLayout
+            android:id="@+id/top_bar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="@dimen/dashboard_map_toolbar"
+            android:gravity="center_vertical"
+            android:background="@color/osmand_orange"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/top_bar_back_button"
+                style="@style/Widget.AppCompat.ActionButton"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:layout_gravity="top"
+                android:contentDescription="@string/back_to_search"
+                android:src="@drawable/abc_ic_ab_back_mtrl_am_alpha"/>
+
+            <LinearLayout
+                android:id="@+id/top_bar_title_layout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp">
+
+                <TextView
+                    android:id="@+id/top_bar_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@null"
+                    android:ellipsize="end"
+                    android:gravity="center_vertical"
+                    android:lines="1"
+                    android:singleLine="true"
+                    android:textColor="?android:textColorPrimary"
+                    android:textSize="@dimen/abc_text_size_medium_material"
+                    android:text="@string/rendering_category_details"/>
+
+                <TextView
+                    android:id="@+id/widget_top_bar_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@null"
+                    android:ellipsize="end"
+                    android:gravity="center_vertical"
+                    android:textColor="?android:textColorPrimary"
+                    android:textSize="@dimen/default_sub_text_size"
+                    android:visibility="gone"
+                    tools:text="New version of OsmAnd+ with 50% discount"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/main_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="bottom"
+            android:background="?attr/bg_color"
+            android:clickable="true"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:id="@+id/left_axis"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/list_item_height"
+                        android:layout_weight="1"
+                        android:orientation="horizontal"
+                        android:minHeight="50dp"
+                        android:background="?attr/selectableItemBackground"
+                        android:gravity="center_vertical">
+
+                        <ImageView
+                            android:id="@+id/left_axis_icon"
+                            android:layout_width="@dimen/standard_icon_size"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/list_content_padding"
+                            android:layout_marginRight="@dimen/list_content_padding"
+                            android:src="@drawable/ic_action_altitude_average"/>
+
+                        <TextView
+                            android:id="@+id/left_axis_title"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginRight="@dimen/list_content_padding"
+                            android:textColor="?android:attr/textColorPrimary"
+                            android:textSize="@dimen/default_list_text_size"
+                            tools:text="@string/altitude"/>
+
+                        <ImageView
+                            android:id="@+id/left_axis_arrow"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="@dimen/list_content_padding"
+                            android:src="@drawable/ic_action_arrow_drop_down"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/right_axis"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/list_item_height"
+                        android:layout_weight="1"
+                        android:orientation="horizontal"
+                        android:minHeight="50dp"
+                        android:background="?attr/selectableItemBackground"
+                        android:gravity="center_vertical">
+
+                        <View
+                            android:id="@+id/divider_vertical"
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:background="?attr/dashboard_divider"
+                            android:focusable="false"/>
+
+                        <ImageView
+                            android:id="@+id/right_axis_icon"
+                            android:layout_width="@dimen/standard_icon_size"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/list_content_padding"
+                            android:layout_marginRight="@dimen/list_content_padding"
+                            android:src="@drawable/ic_action_speed"/>
+
+                        <TextView
+                            android:id="@+id/right_axis_title"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginRight="@dimen/list_content_padding"
+                            android:textColor="?android:attr/textColorPrimary"
+                            android:textSize="@dimen/default_list_text_size"
+                            tools:text="@string/map_widget_speed"/>
+
+                        <ImageView
+                            android:id="@+id/right_axis_arrow"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="@dimen/list_content_padding"
+                            android:src="@drawable/ic_action_arrow_drop_down"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <View
+                    android:id="@+id/divider_bottom"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="?attr/dashboard_divider"
+                    android:focusable="false"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:background="?attr/bg_color"
+                    android:paddingTop="8dp">
+
+                    <com.github.mikephil.charting.charts.LineChart
+                        android:id="@+id/chart"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_vertical"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</FrameLayout>
