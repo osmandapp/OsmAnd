@@ -1041,6 +1041,7 @@ public class GpxUiHelper {
 					} else if (elev > prevElev) {
 						shift = -1f;
 					} else if (prevElev == elev && i < lastIndex) {
+						values.add(new Entry(nextX, entry.getY()));
 						continue;
 					}
 				}
@@ -1071,24 +1072,24 @@ public class GpxUiHelper {
 			newValues.add(e);
 			lastEntry = e;
 		}
+		*/
 
-		List<Point2D> points = new ArrayList<>(newValues.size());
-		for (Entry e : newValues) {
+		List<Point2D> points = new ArrayList<>(values.size());
+		for (Entry e : values) {
 			points.add(new Point2D(e.getX(), e.getY()));
 		}
 		List<Segment> spline = calculateSpline(points);
 		if (spline != null) {
 			int count = 8;
-			newValues = new ArrayList<>();
+			values = new ArrayList<>();
 			for (Segment s : spline) {
 				Point2D p = new Point2D();
 				for (i = 0; i < count; ++i) {
 					s.calc((double) i / (double) count, p);
-					newValues.add(new Entry((float) p.x, (float) p.y));
+					values.add(new Entry((float) p.x, (float) p.y));
 				}
 			}
 		}
-		*/
 
 		OrderedLineDataSet dataSet = new OrderedLineDataSet(values, "", GPXDataSetType.ALTITUDE);
 		dataSet.priority = (float) (analysis.avgElevation - analysis.minElevation) * convEle;
@@ -1362,6 +1363,7 @@ public class GpxUiHelper {
 					} else if (elev > prevElev) {
 						shift = -1f;
 					} else if (prevElev == elev && i < lastIndex) {
+						values.add(new Entry(nextX, entry.getY()));
 						continue;
 					}
 				}
@@ -1511,7 +1513,7 @@ public class GpxUiHelper {
 		int index = (int) ((GREEN_PROXIMITY / STEP) / 2);
 		for (int k = 0; k < calculatedGreenDist.length; k++) {
 			calculatedGreenDist[k] = calculatedDist[index + k];
-			calculatedGreenH[k] = (calculatedH[k] - calculatedH[ 2 * index + k]) * 100 / GREEN_PROXIMITY;
+			calculatedGreenH[k] = (calculatedH[ 2 * index + k] - calculatedH[k]) * 100 / GREEN_PROXIMITY;
 			if (Double.isNaN(calculatedGreenH[k])) {
 				calculatedGreenH[k] = 0;
 			}
