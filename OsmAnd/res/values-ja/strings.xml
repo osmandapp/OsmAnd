@@ -1122,7 +1122,7 @@ POIの更新は利用できません</string>
 	<string name="live_monitoring_url_descr">指定したWebアドレスに経路データを送信します／使えるパラメータ:緯度={0}、経度={1}、タイムスタンプ={2}、HDOP={3}、標高={4}、速度={5}、ベアリング={6}</string>
 	<string name="live_monitoring_url">オンライン追跡ウェブアドレス</string>
 	<string name="gpx_monitoring_disabled_warn">\'旅程・経路記録\'での設定を使用しGPXウィジェットを使って経路を記録します。</string>
-	<string name="show_current_gpx_title">現在のトラックを表示</string>
+	<string name="show_current_gpx_title">現在の経路を表示</string>
 	<string name="free_version_message">このOsmAnd 無料版はダウンロード数が%1$s個に制限されており、オフラインでのWikipedia記事利用もサポートしていません。</string>
 	<string name="free_version_title">無料版</string>
 	<string name="poi_context_menu_showdescription">POIの説明文を表示</string>
@@ -1811,7 +1811,7 @@ OsmAnd+は最新の更新情報を受けとることが出来る、有料バー�
     <string name="error_avoid_specific_road">バイパスが見つかりません</string>
     <string name="save_track_to_gpx_globally_headline">要求時に経路を保存</string>
 	<string name="enable_proxy_title">HTTPプロキシを使用</string>
-	<string name="enable_proxy_descr">すべてのネットワーク要求に使用されるプロキシの設定を行います</string>
+	<string name="enable_proxy_descr">設定したプロキシは全てのネットワーク接続時に使用されます</string>
 	<string name="proxy_host_title">プロキシホスト</string>
 	<string name="proxy_host_descr">プロキシのホスト名を設定します(例：127.0.0.1)</string>
 	<string name="proxy_port_title">プロキシポート</string>
@@ -2564,4 +2564,42 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="lang_sr_latn">セルビア語 (ラテン)</string>
     <string name="lang_zh_hk">中国語 (香港)</string>
     <string name="driving_region_australia">オーストラリア</string>
+    <string name="gpx_no_tracks_title">フォルダ内に経路データが存在しません</string>
+    <string name="gpx_no_tracks_title_folder">以下フォルダーにトラックを追加することが可能です</string>
+    <string name="gpx_add_track">経路を追加</string>
+    <string name="gpx_appearance">表示形式</string>
+    <string name="max_speed">最大速度</string>
+    <string name="average_speed">平均速度</string>
+    <string name="shared_string_time_moving">移動時間</string>
+    <string name="shared_string_time_span">時間間隔</string>
+    <string name="shared_string_max">最大</string>
+    <string name="shared_string_start_time">開始時刻</string>
+    <string name="shared_string_end_time">終了時刻</string>
+    <string name="shared_string_color">色</string>
+    <string name="select_gpx_folder">経路フォルダー選択</string>
+    <string name="file_can_not_be_moved">ファイルを移動することはできません。</string>
+    <string name="shared_string_move">移動</string>
+    <string name="shared_string_tracks">経路</string>
+    <string name="routing_attr_driving_style_name">運転スタイル</string>
+    <string name="routing_attr_driving_style_description">安全、高速、またはバランスを取った運転</string>
+    <string name="route_altitude">ルートの標高</string>
+    <string name="altitude_descent">下り</string>
+    <string name="altitude_ascent">上り</string>
+    <string name="altitude_range">標高範囲</string>
+    <string name="average_altitude">平均標高</string>
+    <string name="shared_string_time">時間</string>
+    <string name="total_distance">総走行距離</string>
+    <string name="routing_attr_height_obstacles_name">標高データを使用</string>
+    <string name="routing_attr_height_obstacles_description">SRTM、ASTER、EU-DEMによる地形標高データを使用します</string>
+
+    <string name="rendering_attr_hideWaterPolygons_description">水域</string>
+    <string name="rendering_attr_hideWaterPolygons_name">水域を非表示</string>
+    <string name="wiki_around">近隣にWikipedia記載地点有り</string>
+    <string name="trip_rec_notification_settings">旅程記録(データ無し)</string>
+    <string name="trip_rec_notification_settings_desc">旅行開始時に記録ボタンを押した際、通知を表示します</string>
+    <string name="shared_string_notifications">通知</string>
+    <string name="shared_string_trip">旅行</string>
+    <string name="shared_string_recorded">記録</string>
+    <string name="shared_string_record">記録</string>
+    <string name="gpx_logging_no_data">データなし</string>
     </resources>
