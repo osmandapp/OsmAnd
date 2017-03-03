@@ -2708,4 +2708,10 @@ Pokud potřebujete pomoci s aplikací OsmAnd, prosím kontaktujte naši podporu
     <string name="shared_string_color">Barva</string>
     <string name="max_speed">Maximální rychlost</string>
     <string name="average_speed">Průměrná rychlost</string>
+    <string name="add_new_folder">Přidat nový adresář</string>
+    <string name="points_delete_multiple_succesful">Bod(y) úspěšně smazané.</string>
+    <string name="points_delete_multiple">Chystáte se smazat %1$d bod(ů). Jste si jistý?</string>
+    <string name="route_points_category_name">Průchozí body na trase</string>
+    <string name="track_points_category_name">Důležité body na této trase</string>
+    <string name="gpx_track">Trasa</string>
     </resources>
