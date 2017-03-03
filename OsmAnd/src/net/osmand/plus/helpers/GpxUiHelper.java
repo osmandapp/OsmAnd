@@ -1037,9 +1037,9 @@ public class GpxUiHelper {
 				elev = (float) e.elevation;
 				if (prevElev != -80000) {
 					if (elev < prevElev) {
-						shift = .5f;
+						shift = 0f;
 					} else if (elev > prevElev) {
-						shift = -.5f;
+						shift = -1f;
 					} else if (prevElev == elev && i < lastIndex) {
 						continue;
 					}
@@ -1051,6 +1051,7 @@ public class GpxUiHelper {
 			}
 		}
 
+		/*
 		List<Entry> newValues = new ArrayList<>();
 		Entry lastEntry = null;
 		i = -1;
@@ -1087,8 +1088,9 @@ public class GpxUiHelper {
 				}
 			}
 		}
+		*/
 
-		OrderedLineDataSet dataSet = new OrderedLineDataSet(newValues, "", GPXDataSetType.ALTITUDE);
+		OrderedLineDataSet dataSet = new OrderedLineDataSet(values, "", GPXDataSetType.ALTITUDE);
 		dataSet.priority = (float) (analysis.avgElevation - analysis.minElevation) * convEle;
 		dataSet.units = mainUnitY;
 
@@ -1356,9 +1358,9 @@ public class GpxUiHelper {
 				elev = (float) e.elevation;
 				if (prevElev != -80000) {
 					if (elev < prevElev) {
-						shift = .5f;
+						shift = 0f;
 					} else if (elev > prevElev) {
-						shift = -.5f;
+						shift = -1f;
 					} else if (prevElev == elev && i < lastIndex) {
 						continue;
 					}
@@ -1370,6 +1372,7 @@ public class GpxUiHelper {
 			}
 		}
 
+		/*
 		List<Entry> eleValues = new ArrayList<>();
 		Entry lastEntry = null;
 		i = -1;
@@ -1470,6 +1473,53 @@ public class GpxUiHelper {
 					values.add(new Entry((float) p.x, (float) p.y));
 				}
 			}
+		}
+		*/
+
+		double totalDistance = meters;
+		double[] dist = new double[values.size()];
+		double[] h = new double[values.size()];
+		i = 0;
+		for (Entry e : values) {
+			dist[i] = e.getX();
+			h[i] = e.getY();
+			i++;
+		}
+
+		double STEP = 5;
+
+		double[] calculatedDist = new double[(int) (totalDistance / STEP) + 1];
+		double[] calculatedH = new double[(int) (totalDistance / STEP) + 1];
+		int nextW = 0;
+		for (int k = 0; k < calculatedDist.length; k++) {
+			if (k > 0) {
+				calculatedDist[k] = calculatedDist[k - 1] + STEP;
+			}
+			while(nextW < lastIndex && calculatedDist[k] > dist[nextW]) {
+				nextW ++;
+			}
+			double pd = nextW == 0 ? 0 : dist[nextW - 1];
+			double ph = nextW == 0 ? h[0] : h[nextW - 1];
+			calculatedH[k] = ph + (h[nextW] - ph) / (dist[nextW] - pd) * (calculatedDist[k] - pd);
+		}
+
+		double GREEN_PROXIMITY = 150;
+
+		double[] calculatedGreenDist = new double[(int) ((totalDistance - GREEN_PROXIMITY) / STEP) + 1];
+		double[] calculatedGreenH = new double[(int) ((totalDistance - GREEN_PROXIMITY) / STEP) + 1];
+
+		int index = (int) ((GREEN_PROXIMITY / STEP) / 2);
+		for (int k = 0; k < calculatedGreenDist.length; k++) {
+			calculatedGreenDist[k] = calculatedDist[index + k];
+			calculatedGreenH[k] = (calculatedH[k] - calculatedH[ 2 * index + k]) * 100 / GREEN_PROXIMITY;
+			if (Double.isNaN(calculatedGreenH[k])) {
+				calculatedGreenH[k] = 0;
+			}
+		}
+
+		values.clear();
+		for (i = 0; i < calculatedGreenDist.length; i++) {
+			values.add(new Entry((float) calculatedGreenDist[i] / divX, (float) calculatedGreenH[i]));
 		}
 
 		OrderedLineDataSet dataSet = new OrderedLineDataSet(values, "", GPXDataSetType.SLOPE);
