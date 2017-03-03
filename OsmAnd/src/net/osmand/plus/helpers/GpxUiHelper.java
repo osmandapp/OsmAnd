@@ -1051,38 +1051,44 @@ public class GpxUiHelper {
 			}
 		}
 
-		/*
-		values = new ArrayList<>();
-		values.add(new Entry(0, 0));
-		values.add(new Entry(20, 0));
-		values.add(new Entry(45, -47));
-		values.add(new Entry(53, 335));
-		values.add(new Entry(57, 26));
-		values.add(new Entry(62, 387));
-		values.add(new Entry(74, 104));
-		values.add(new Entry(89, 0));
-		values.add(new Entry(95, 100));
-		values.add(new Entry(100, 0));
-		*/
-
-		List<Point2D> points = new ArrayList<>(values.size());
+		List<Entry> newValues = new ArrayList<>();
+		Entry lastEntry = null;
+		i = -1;
+		lastIndex = values.size() - 1;
+		boolean hasSameY = false;
 		for (Entry e : values) {
+			i++;
+			if (lastEntry != null) {
+				if (lastEntry.getY() == e.getY() && i < lastIndex) {
+					hasSameY = true;
+					continue;
+				} else if (hasSameY) {
+					lastEntry.setX(lastEntry.getX() + (e.getX() - lastEntry.getX()) / 2f);
+					hasSameY = false;
+				}
+			}
+			newValues.add(e);
+			lastEntry = e;
+		}
+
+		List<Point2D> points = new ArrayList<>(newValues.size());
+		for (Entry e : newValues) {
 			points.add(new Point2D(e.getX(), e.getY()));
 		}
 		List<Segment> spline = calculateSpline(points);
 		if (spline != null) {
 			int count = 8;
-			values = new ArrayList<>();
+			newValues = new ArrayList<>();
 			for (Segment s : spline) {
 				Point2D p = new Point2D();
 				for (i = 0; i < count; ++i) {
 					s.calc((double) i / (double) count, p);
-					values.add(new Entry((float) p.x, (float) p.y));
+					newValues.add(new Entry((float) p.x, (float) p.y));
 				}
 			}
 		}
 
-		OrderedLineDataSet dataSet = new OrderedLineDataSet(values, "", GPXDataSetType.ALTITUDE);
+		OrderedLineDataSet dataSet = new OrderedLineDataSet(newValues, "", GPXDataSetType.ALTITUDE);
 		dataSet.priority = (float) (analysis.avgElevation - analysis.minElevation) * convEle;
 		dataSet.units = mainUnitY;
 
@@ -1333,68 +1339,135 @@ public class GpxUiHelper {
 		}
 		*/
 
-		ArrayList<Entry> values = new ArrayList<>();
+		List<Entry> values = new ArrayList<>();
 		List<Elevation> elevationData = analysis.elevationData;
-		float nextX;
+		float nextX = 0;
 		float nextY;
-		float nextDistM;
+		float elev;
+		float prevElev = -80000;
+		int i = -1;
+		int lastIndex = elevationData.size() - 1;
+		float shift = 0f;
+		Entry entry = null;
+		for (Elevation e : elevationData) {
+			i++;
+			if (e.distance > 0) {
+				nextX += (float) e.distance;
+				elev = (float) e.elevation;
+				if (prevElev != -80000) {
+					if (elev < prevElev) {
+						shift = .5f;
+					} else if (elev > prevElev) {
+						shift = -.5f;
+					} else if (prevElev == elev && i < lastIndex) {
+						continue;
+					}
+				}
+				prevElev = elev;
+				nextY = (elev + shift);
+				entry = new Entry(nextX, nextY);
+				values.add(entry);
+			}
+		}
+
+		List<Entry> eleValues = new ArrayList<>();
+		Entry lastEntry = null;
+		i = -1;
+		lastIndex = values.size() - 1;
+		boolean hasSameY = false;
+		for (Entry e : values) {
+			i++;
+			if (lastEntry != null) {
+				if (lastEntry.getY() == e.getY() && i < lastIndex) {
+					hasSameY = true;
+					continue;
+				} else if (hasSameY) {
+					lastEntry.setX(lastEntry.getX() + (e.getX() - lastEntry.getX()) / 2f);
+					hasSameY = false;
+				}
+			}
+			eleValues.add(e);
+			lastEntry = e;
+		}
+
+		List<Point2D> points = new ArrayList<>(eleValues.size());
+		for (Entry e : eleValues) {
+			points.add(new Point2D(e.getX(), e.getY()));
+		}
+		List<Segment> spline = calculateSpline(points);
+		if (spline != null) {
+			int count = 8;
+			eleValues = new ArrayList<>();
+			for (Segment s : spline) {
+				Point2D p = new Point2D();
+				for (i = 0; i < count; ++i) {
+					s.calc((double) i / (double) count, p);
+					eleValues.add(new Entry((float) p.x, (float) p.y));
+				}
+			}
+		}
+
+		values.clear();
+		//List<Elevation> elevationData = analysis.elevationData;
+		//float nextX;
+		//float nextY;
 		float nextXM;
 		float nextYM;
 		float prevXM;
 		float prevYM;
+		float delta = 150;
 		float prevDistM = -1;
-		//float prevElevM = -80000;
-		//float gist = 1.5f; // 1.5 meters
-		float delta = 30f; // 30 meters
+		float nextDistM;
 		float d;
-		if (elevationData.size() > 1) {
-			Elevation e0 = elevationData.get(0);
-			d = (float) e0.distance;
-			if (d > delta) {
-				nextXM = d / 2f;
-				prevDistM = d;
-			} else {
-				nextXM = 0f;
-			}
-			nextYM = 0;
+		if (eleValues.size() > 1) {
+			nextXM = eleValues.get(0).getX();
+			nextYM = eleValues.get(0).getY();
 			prevXM = nextXM;
-			prevYM = nextYM;
-			nextX = nextXM / divX;
+			prevYM = 0;
+			nextX = 0;
 			nextY = 0;
-			for (int i = 1; i < elevationData.size(); i++) {
-				Elevation e = elevationData.get(i);
-				if (e.distance > 0) {
-					d += (float) e.distance;
-					if (d < delta && i < elevationData.size() - 1) {
-						continue;
-					}
-					if (prevDistM < 0) {
-						nextDistM = d / 2f;
-					} else {
-						nextDistM = prevDistM / 2f + d / 2f;
-					}
-					prevDistM = d;
-					d = 0;
-					nextXM += nextDistM;
-					nextYM = (float) e.elevation;
-					//if (Math.abs(prevElevM - nextYM) < gist) {
-					//	nextX += nextDistM / divX;
-					//	continue;
-					//} else {
-					//	prevElevM = nextYM;
-					//}
-					if (nextX == 0) {
-						prevXM = nextXM;
-						prevYM = nextYM;
-						values.add(new Entry(nextDistM / divX, nextY));
-					}
-					nextX += nextDistM / divX;
-					nextY = (nextYM - prevYM) / (nextXM - prevXM) * 100f;
-					if (Math.abs(nextY) < 120) {
-						values.add(new Entry(nextX, nextY));
-						prevXM = nextXM;
-						prevYM = nextYM;
-					}
+			for (i = 1; i < eleValues.size(); i++) {
+				Entry e = eleValues.get(i);
+				d = e.getX() - prevXM;
+				if (d < delta && i < eleValues.size() - 1) {
+					continue;
+				}
+				if (prevDistM < 0) {
+					nextDistM = d / 2f;
+				} else {
+					nextDistM = prevDistM / 2f + d / 2f;
+				}
+				prevDistM = d;
+				if (nextX == 0) {
+					values.add(new Entry(prevXM / divX, 0));
+					prevXM = nextXM;
+					prevYM = nextYM;
+				}
+				nextXM = e.getX();
+				nextYM = e.getY();
+				nextX = (prevXM + nextDistM) / divX;
+				nextY = (nextYM - prevYM) / (nextXM - prevXM) * 100f;
+				if (Math.abs(nextY) < 120) {
+					values.add(new Entry(nextX, nextY));
+					prevXM = nextXM;
+					prevYM = nextYM;
+				}
+			}
+		}
+
+		points = new ArrayList<>(values.size());
+		for (Entry e : values) {
+			points.add(new Point2D(e.getX(), e.getY()));
+		}
+		spline = calculateSpline(points);
+		if (spline != null) {
+			int count = 8;
+			values = new ArrayList<>();
+			for (Segment s : spline) {
+				Point2D p = new Point2D();
+				for (i = 0; i < count; ++i) {
+					s.calc((double) i / (double) count, p);
+					values.add(new Entry((float) p.x, (float) p.y));
 				}
 			}
 		}
