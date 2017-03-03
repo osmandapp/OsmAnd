@@ -1801,7 +1801,7 @@
 	<string name="poi_shelter_type_lean_to">Colgadizo</string>
 	<string name="poi_shelter_type_basic_hut">Cabaña precaria</string>
 	<string name="poi_shelter_type_building">Edificio</string>
-	<string name="poi_shelter_type_wildlife_hide">Fauna oculta</string>
+	<string name="poi_shelter_type_wildlife_hide">Observación oculta de fauna</string>
 	<string name="poi_shelter_type_rock_shelter">Refugio de las rocas</string>
 	<string name="poi_shelter_type_sun_shelter">Refugio del sol</string>
 	<string name="poi_shelter_type_abandoned">Refugio abandonado</string>
