@@ -2691,4 +2691,5 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="points_delete_multiple">%1$d punkto(j) estos forigitaj. Ĉu pluigi?</string>
     <string name="route_points_category_name">Preterirendaj punktoj sur kurso</string>
     <string name="track_points_category_name">Gravaj punktoj de tiu ĉi kurso</string>
+    <string name="shared_string_slope">Klineco</string>
     </resources>
