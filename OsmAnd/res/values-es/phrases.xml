@@ -1616,10 +1616,10 @@
 	<string name="poi_delivery_no">Sin servicio a domicilio</string>
 	<string name="poi_delivery_only">Sólo servicio a domicilio</string>
 
-	<string name="poi_outdoor_seating_yes">Con asientos exteriores</string>
+	<string name="poi_outdoor_seating_yes">Asientos exteriores: Sí</string>
 	<string name="poi_outdoor_seating_no">Sin asientos exteriores</string>
 	<string name="poi_outdoor_seating_terrace">Asientos exteriores: Terraza</string>
-	<string name="poi_outdoor_seating_sidewalk">Asientos exteriores: Vereda</string>
+	<string name="poi_outdoor_seating_sidewalk">Asientos exteriores: Acera</string>
 	<string name="poi_outdoor_seating_pedestrian_zone">Asientos exteriores: Zona peatonal</string>
 	<string name="poi_outdoor_seating_garden">Asientos exteriores: Jardín</string>
 	<string name="poi_outdoor_seating_patio">Asientos exteriores: Patio</string>
@@ -2140,14 +2140,14 @@
 	<string name="poi_shower_outdoor">Ducha exterior</string>
 	<string name="poi_shower_cold">Ducha fría</string>
 	<string name="poi_shower_indoor">Ducha interior</string>
-	<string name="poi_caravans_yes">Permitido casas rodantes</string>
+	<string name="poi_caravans_yes">Si</string>
 	<string name="poi_caravans_no">Prohibido casas rodantes</string>
 	<string name="poi_impromptu_yes">Improvisado: Si</string>
 	<string name="poi_impromptu_no">Improvisado: No</string>
 	<string name="poi_sanitary_dump_station_yes">Con estación de descarga sanitaria</string>
 	<string name="poi_sanitary_dump_station_no">Sin estación de descarga sanitaria</string>
 	<string name="poi_sanitary_dump_station_customers">Estación de descarga sanitaria sólo para clientes</string>
-	<string name="poi_power_supply_yes">Con fuentes de alimentación</string>
+	<string name="poi_power_supply_yes">Si</string>
 	<string name="poi_power_supply_no">Sin fuentes de alimentación</string>
 	<string name="poi_power_supply_cee_17_blue">Fuente de alimentación (enchufe): CEE 17 azul</string>
 	<string name="poi_power_supply_cee_7_4">Fuente de alimentación (enchufe): CEE 7/4</string>
@@ -2162,40 +2162,40 @@
 	<string name="poi_refugee_yes">Con servicios para refugiados</string>
 	<string name="poi_refugee_no">Sin servicios para refugiados</string>
 
-	<string name="poi_social_facility_group_home">Centro social: Grupo residencial</string>
-	<string name="poi_social_facility_assisted_living">Centro social: Vida asistida</string>
-	<string name="poi_social_facility_outreach">Centro social: Alcance</string>
-	<string name="poi_social_facility_food_bank">Centro social: Banco de alimentos</string>
-	<string name="poi_social_facility_shelter">Centro social: Refugio</string>
-	<string name="poi_social_facility_ambulatory_care">Centro social: Asistencia sanitaria</string>
-	<string name="poi_social_facility_workshop">Centro social: Centro laboral</string>
-	<string name="poi_social_facility_day_care">Centro social: Guardería</string>
+	<string name="poi_social_facility_group_home">Grupo residencial</string>
+	<string name="poi_social_facility_assisted_living">Vida asistida</string>
+	<string name="poi_social_facility_outreach">Alcance</string>
+	<string name="poi_social_facility_food_bank">Banco de alimentos</string>
+	<string name="poi_social_facility_shelter">Refugio</string>
+	<string name="poi_social_facility_ambulatory_care">Asistencia sanitaria</string>
+	<string name="poi_social_facility_workshop">Centro laboral</string>
+	<string name="poi_social_facility_day_care">Guardería</string>
 
-	<string name="poi_social_facility_for_senior">Centro social para jubilados</string>
-	<string name="poi_social_facility_for_child">Centro social para niños</string>
-	<string name="poi_social_facility_for_orphan">Centro social para huérfanos</string>
-	<string name="poi_social_facility_for_disabled">Centro social para discapacitados</string>
-	<string name="poi_social_facility_for_mental_health">Centro social para personas con problemas mentales</string>
-	<string name="poi_social_facility_for_juvenile">Centro social juvenil</string>
-	<string name="poi_social_facility_for_homeless">Centro social para personas sin hogar</string>
-	<string name="poi_social_facility_for_migrant">Centro social para migrantes</string>
-	<string name="poi_social_facility_for_underprivileged">Centro social para desfavorecidos</string>
-	<string name="poi_social_facility_for_drug_addicted">Centro social para drogadictos</string>
-	<string name="poi_social_facility_for_unemployed">Centro social para desempleados</string>
-	<string name="poi_social_facility_for_diseased">Centro social para enfermos</string>
-	<string name="poi_social_facility_for_child_juvenile">Centro social para niños y juvenil</string>
+	<string name="poi_social_facility_for_senior">Jubilados</string>
+	<string name="poi_social_facility_for_child">Niños</string>
+	<string name="poi_social_facility_for_orphan">Huérfanos</string>
+	<string name="poi_social_facility_for_disabled">Discapacitados</string>
+	<string name="poi_social_facility_for_mental_health">Personas con problemas mentales</string>
+	<string name="poi_social_facility_for_juvenile">Juvenil</string>
+	<string name="poi_social_facility_for_homeless">Personas sin hogar</string>
+	<string name="poi_social_facility_for_migrant">Migrantes</string>
+	<string name="poi_social_facility_for_underprivileged">Desfavorecidos</string>
+	<string name="poi_social_facility_for_drug_addicted">Drogadictos</string>
+	<string name="poi_social_facility_for_unemployed">Desempleados</string>
+	<string name="poi_social_facility_for_diseased">Enfermos</string>
+	<string name="poi_social_facility_for_child_juvenile">Niños y juvenil</string>
 
-	<string name="poi_theatre_genre_philharmonic">Género: Filarmónica</string>
-	<string name="poi_theatre_genre_musical">Género: Musical</string>
-	<string name="poi_theatre_genre_drama">Género: Drama</string>
-	<string name="poi_theatre_genre_opera">Género: Ópera</string>
-	<string name="poi_theatre_genre_cabaret">Género: Cabaret</string>
-	<string name="poi_theatre_genre_puppet">Género: Títeres</string>
-	<string name="poi_theatre_genre_comedy">Género: Comedia</string>
-	<string name="poi_theatre_genre_chamber_music">Género: Música de cámara</string>
-	<string name="poi_theatre_genre_marionette">Género: Marionetas</string>
-	<string name="poi_theatre_genre_ballet">Género: Ballet</string>
-	<string name="poi_theatre_genre_shadow_play">Género: Juego de sombras</string>
+	<string name="poi_theatre_genre_philharmonic">Filarmónica</string>
+	<string name="poi_theatre_genre_musical">Musical</string>
+	<string name="poi_theatre_genre_drama">Drama</string>
+	<string name="poi_theatre_genre_opera">Ópera</string>
+	<string name="poi_theatre_genre_cabaret">Cabaret</string>
+	<string name="poi_theatre_genre_puppet">Títeres</string>
+	<string name="poi_theatre_genre_comedy">Comedia</string>
+	<string name="poi_theatre_genre_chamber_music">Música de cámara</string>
+	<string name="poi_theatre_genre_marionette">Marionetas</string>
+	<string name="poi_theatre_genre_ballet">Ballet</string>
+	<string name="poi_theatre_genre_shadow_play">Juego de sombras</string>
 
 	<string name="poi_bandstand">Templete</string>
 	<string name="poi_kiln">Horno (kiln)</string>
@@ -2269,8 +2269,8 @@
 	<string name="poi_historic_civilization_tiahuanacota">Civilización: Tiahuanacota</string>
 
 	<string name="poi_animal_training">Amaestramiento de animales</string>
-	<string name="poi_animal_training_dog">Amaestramiento canino</string>
-	<string name="poi_animal_training_horse">Amaestramiento equino</string>
+	<string name="poi_animal_training_dog">Canino</string>
+	<string name="poi_animal_training_horse">Equino</string>
 
 	<string name="poi_horse_yes">Permitido caballos</string>
 	<string name="poi_horse_no">Prohibido caballos</string>
@@ -2314,7 +2314,7 @@
 	<string name="poi_historic_era_paleolithic">Era histórica: Paleolítico (2.6 millones de años – 10000 AP)</string>
 	<string name="poi_historic_era_mesolithic">Era histórica: Mesolítica</string>
 	<string name="poi_historic_era_neolithic">Era histórica: Neolítico</string>
-	<string name="poi_historic_era_chalcolithic">Era histórica: Calcolítico (milenios IV-III aC)</string>
+	<string name="poi_historic_era_chalcolithic">Era histórica: Calcolítico (4to–3er milenio aC)</string>
 
 	<string name="poi_historic_stone">Piedra histórica</string>
 	<string name="poi_stone_type_conciliation_cross">Tipo: Cruz de conciliación</string>
@@ -2340,15 +2340,15 @@
 	<string name="poi_material_marble">Material: Mármol</string>
 	<string name="poi_material_aluminium">Material: Aluminio</string>
 
-	<string name="poi_site_type_megalith">Tipo: Megalito</string>
-	<string name="poi_site_type_tumulus">Tipo: Túmulo</string>
-	<string name="poi_site_type_fortification">Tipo: Fortificación</string>
-	<string name="poi_site_type_settlement">Tipo: Asentamiento</string>
-	<string name="poi_site_type_city">Tipo: Ciudad</string>
-	<string name="poi_site_type_hut_circle">Tipo: Círculo de choza</string>
-	<string name="poi_site_type_necropolis">Tipo: Necrópolis</string>
-	<string name="poi_site_type_petroglyph">Tipo: Petroglifo</string>
-	<string name="poi_site_type_earthwork">Tipo: Obras de tierra</string>
+	<string name="poi_site_type_megalith">Megalito</string>
+	<string name="poi_site_type_tumulus">Túmulo</string>
+	<string name="poi_site_type_fortification">Fortificación</string>
+	<string name="poi_site_type_settlement">Asentamiento</string>
+	<string name="poi_site_type_city">Ciudad</string>
+	<string name="poi_site_type_hut_circle">Círculo de choza</string>
+	<string name="poi_site_type_necropolis">Necrópolis</string>
+	<string name="poi_site_type_petroglyph">Petroglifo</string>
+	<string name="poi_site_type_earthwork">Obras de tierra</string>
 	<string name="poi_megalith_type_menhir">Tipo de megalito: Menhir</string>
 	<string name="poi_megalith_type_dolmen">Tipo de megalito: Dolmen</string>
 	<string name="poi_megalith_type_nuraghe">Tipo de megalito: Nuraga</string>
@@ -2413,11 +2413,11 @@
 
 	<string name="poi_ref">Referencia</string>
 
-	<string name="poi_cargo_passengers">Cargamento: Pasajeros</string>
-	<string name="poi_cargo_vehicle">Cargamento: Vehículos</string>
-	<string name="poi_cargo_bicycle">Cargamento: Bicicletas</string>
-	<string name="poi_cargo_container">Cargamento: Contenedores</string>
-	<string name="poi_cargo_hgv">Cargamento: Vehículos pesados</string>
+	<string name="poi_cargo_passengers">Pasajeros</string>
+	<string name="poi_cargo_vehicle">Vehículos</string>
+	<string name="poi_cargo_bicycle">Bicicletas</string>
+	<string name="poi_cargo_container">Contenedores</string>
+	<string name="poi_cargo_hgv">Vehículos pesados</string>
 
 <string name="poi_fitness_station">Gimnasio exterior</string>
 
@@ -2493,78 +2493,78 @@
 
 <string name="poi_internet_access_type_yes">Con acceso a Internet</string>
 
-	<string name="poi_health_specialty_general_yes">Especialidad médica: Médico general</string>
-	<string name="poi_health_specialty_ophthalmology_yes">Especialidad médica: Oftalmología</string>
-	<string name="poi_health_specialty_gynaecology_yes">Especialidad médica: Ginecología</string>
-	<string name="poi_health_specialty_internal_medicine_yes">Especialidad médica: Medicina interna</string>
-	<string name="poi_health_specialty_orthopaedics_yes">Especialidad médica: Ortopedia</string>
-	<string name="poi_health_specialty_otolaryngology_yes">Especialidad médica: Otorrinolaringología</string>
-	<string name="poi_health_specialty_paediatrics_yes">Especialidad médica: Pediatría</string>
+	<string name="poi_health_specialty_general_yes">Médico general</string>
+	<string name="poi_health_specialty_ophthalmology_yes">Oftalmología</string>
+	<string name="poi_health_specialty_gynaecology_yes">Ginecología</string>
+	<string name="poi_health_specialty_internal_medicine_yes">Medicina interna</string>
+	<string name="poi_health_specialty_orthopaedics_yes">Ortopedia</string>
+	<string name="poi_health_specialty_otolaryngology_yes">Otorrinolaringología</string>
+	<string name="poi_health_specialty_paediatrics_yes">Pediatría</string>
 	<string name="poi_health_specialty_paediatrics_no">Especialidad médica: Sin pediatría</string>
-	<string name="poi_health_specialty_dermatology_yes">Especialidad médica: Dermatología</string>
-	<string name="poi_health_specialty_urology_yes">Especialidad médica: Urología</string>
-	<string name="poi_health_specialty_surgery_yes">Especialidad médica: Cirugía general</string>
-	<string name="poi_health_specialty_radiology_yes">Especialidad médica: Radiología</string>
-	<string name="poi_health_specialty_psychiatry_yes">Especialidad médica: Psiquiatría</string>
-	<string name="poi_health_specialty_neurology_yes">Especialidad médica: Neurología</string>
-	<string name="poi_health_specialty_dermatovenereology_yes">Especialidad médica: Dermatovenereología</string>
-	<string name="poi_health_specialty_cardiology_yes">Especialidad médica: Cardiología</string>
-	<string name="poi_health_specialty_trauma_yes">Especialidad médica: Traumatología</string>
-	<string name="poi_health_specialty_biology_yes">Especialidad médica: Biología clínica</string>
-	<string name="poi_health_specialty_osteopathy_yes">Especialidad médica: Osteopatía</string>
-	<string name="poi_health_specialty_anaesthetics_yes">Especialidad médica: Anestésicos</string>
-	<string name="poi_health_specialty_pulmonology_yes">Especialidad médica: Neumología</string>
-	<string name="poi_health_specialty_dental_oral_maxillo_facial_surgery_yes">Especialidad médica: Cirugía dental, oral y maxilofacial</string>
-	<string name="poi_health_specialty_maternity_yes">Especialidad médica: Maternidad</string>
-	<string name="poi_health_specialty_emergency_medicine_yes">Especialidad médica: Medicina de urgencia</string>
+	<string name="poi_health_specialty_dermatology_yes">Dermatología</string>
+	<string name="poi_health_specialty_urology_yes">Urología</string>
+	<string name="poi_health_specialty_surgery_yes">Cirugía general</string>
+	<string name="poi_health_specialty_radiology_yes">Radiología</string>
+	<string name="poi_health_specialty_psychiatry_yes">Psiquiatría</string>
+	<string name="poi_health_specialty_neurology_yes">Neurología</string>
+	<string name="poi_health_specialty_dermatovenereology_yes">Dermatovenereología</string>
+	<string name="poi_health_specialty_cardiology_yes">Cardiología</string>
+	<string name="poi_health_specialty_trauma_yes">Traumatología</string>
+	<string name="poi_health_specialty_biology_yes">Biología clínica</string>
+	<string name="poi_health_specialty_osteopathy_yes">Osteopatía</string>
+	<string name="poi_health_specialty_anaesthetics_yes">Anestésicos</string>
+	<string name="poi_health_specialty_pulmonology_yes">Neumología</string>
+	<string name="poi_health_specialty_dental_oral_maxillo_facial_surgery_yes">Cirugía dental, oral y maxilofacial</string>
+	<string name="poi_health_specialty_maternity_yes">Maternidad</string>
+	<string name="poi_health_specialty_emergency_medicine_yes">Medicina de urgencia</string>
 	<string name="poi_health_specialty_emergency_medicine_no">Especialidad médica: Sin medicina de urgencia</string>
-	<string name="poi_health_specialty_plastic_surgery_yes">Especialidad médica: Cirugía plástica</string>
-	<string name="poi_health_specialty_orthodontics_yes">Especialidad médica: Ortodoncia</string>
-	<string name="poi_health_specialty_physiotherapy_yes">Especialidad médica: Psicoterapia</string>
-	<string name="poi_health_specialty_biochemistry_yes">Especialidad médica: Bioquímica</string>
-	<string name="poi_health_specialty_occupational_yes">Especialidad médica: Terapia ocupacional</string>
-	<string name="poi_health_specialty_child_psychiatry_yes">Especialidad médica: Psiquiatría infantil</string>
-	<string name="poi_health_specialty_physiatry_yes">Especialidad médica: Medicina física y rehabilitación</string>
-	<string name="poi_health_specialty_maxillofacial_surgery_yes">Especialidad médica: Cirugía maxilofacial</string>
-	<string name="poi_health_specialty_diagnostic_radiology_yes">Especialidad médica: Radiología diagnóstica</string>
-	<string name="poi_health_specialty_gastroenterology_yes">Especialidad médica: Gastroenterología</string>
-	<string name="poi_health_specialty_dentistry_yes">Especialidad médica: Odontología</string>
-	<string name="poi_health_specialty_nephrology_yes">Especialidad médica: Nefrología (enfermedades renales)</string>
-	<string name="poi_health_specialty_neurosurgery_yes">Especialidad médica: Neurocirugía</string>
-	<string name="poi_health_specialty_neuropsychiatry_yes">Especialidad médica: Neuropsiquiatría</string>
-	<string name="poi_health_specialty_endocrinology_yes">Especialidad médica: Endocrinología</string>
-	<string name="poi_health_specialty_nuclear_medicine_yes">Especialidad médica: Medicina nuclear</string>
-	<string name="poi_health_specialty_pathology_yes">Especialidad médica: Anatomía patológica</string>
-	<string name="poi_health_specialty_oncology_yes">Especialidad médica: Oncología</string>
-	<string name="poi_health_specialty_tropical_medicine_yes">Especialidad médica: Medicina tropical</string>
+	<string name="poi_health_specialty_plastic_surgery_yes">Cirugía plástica</string>
+	<string name="poi_health_specialty_orthodontics_yes">Ortodoncia</string>
+	<string name="poi_health_specialty_physiotherapy_yes">Psicoterapia</string>
+	<string name="poi_health_specialty_biochemistry_yes">Bioquímica</string>
+	<string name="poi_health_specialty_occupational_yes">Terapia ocupacional</string>
+	<string name="poi_health_specialty_child_psychiatry_yes">Psiquiatría infantil</string>
+	<string name="poi_health_specialty_physiatry_yes">Medicina física y rehabilitación</string>
+	<string name="poi_health_specialty_maxillofacial_surgery_yes">Cirugía maxilofacial</string>
+	<string name="poi_health_specialty_diagnostic_radiology_yes">Radiología diagnóstica</string>
+	<string name="poi_health_specialty_gastroenterology_yes">Gastroenterología</string>
+	<string name="poi_health_specialty_dentistry_yes">Odontología</string>
+	<string name="poi_health_specialty_nephrology_yes">Nefrología (enfermedades renales)</string>
+	<string name="poi_health_specialty_neurosurgery_yes">Neurocirugía</string>
+	<string name="poi_health_specialty_neuropsychiatry_yes">Neuropsiquiatría</string>
+	<string name="poi_health_specialty_endocrinology_yes">Endocrinología</string>
+	<string name="poi_health_specialty_nuclear_medicine_yes">Medicina nuclear</string>
+	<string name="poi_health_specialty_pathology_yes">Anatomía patológica</string>
+	<string name="poi_health_specialty_oncology_yes">Oncología</string>
+	<string name="poi_health_specialty_tropical_medicine_yes">Medicina tropical</string>
 	<string name="poi_health_specialty_tropical_medicine_no">Especialidad médica: Sin medicina tropical</string>
-	<string name="poi_health_specialty_obstetrics_postnatal_yes">Especialidad médica: Obstetricia (postnatal)</string>
+	<string name="poi_health_specialty_obstetrics_postnatal_yes">Obstetricia (postnatal)</string>
 	<string name="poi_health_specialty_obstetrics_postnatal_no">Especialidad médica: Sin obstetricia (postnatal)</string>
-	<string name="poi_health_specialty_obstetrics_antenatal_yes">Especialidad médica: Obstetricia (prenatal)</string>
+	<string name="poi_health_specialty_obstetrics_antenatal_yes">Obstetricia (prenatal)</string>
 	<string name="poi_health_specialty_obstetrics_antenatal_no">Especialidad médica: Sin obstetricia (prenatal)</string>
-	<string name="poi_health_specialty_social_paediatrics_yes">Especialidad médica: Pediatría social</string>
+	<string name="poi_health_specialty_social_paediatrics_yes">Pediatría social</string>
 	<string name="poi_health_specialty_social_paediatrics_no">Especialidad médica: Sin pediatría social</string>
-	<string name="poi_health_specialty_obstetrics_caesarean_section_yes">Especialidad médica: Obstetricia (cesárea)</string>
+	<string name="poi_health_specialty_obstetrics_caesarean_section_yes">Obstetricia (cesárea)</string>
 	<string name="poi_health_specialty_obstetrics_caesarean_section_no">Especialidad médica: Sin obstetricia (cesárea)</string>
-	<string name="poi_health_specialty_addiction_medicine_yes">Especialidad médica: Medicina adictiva</string>
-	<string name="poi_health_specialty_optometry_yes">Especialidad médica: Optometría</string>
-	<string name="poi_health_specialty_clinical_pathology_yes">Especialidad médica: Patología clínica</string>
-	<string name="poi_health_specialty_speech_therapy_yes">Especialidad médica: Terapia del habla</string>
-	<string name="poi_health_specialty_manual_therapy_yes">Especialidad médica: Terapia manual</string>
-	<string name="poi_health_specialty_sports_medicine_yes">Especialidad médica: Medicina deportiva</string>
-	<string name="poi_health_specialty_podology_yes">Especialidad médica: Podología</string>
-	<string name="poi_health_specialty_adult_psychiatry_yes">Especialidad médica: Psiquiatría adulta</string>
-	<string name="poi_health_specialty_acupuncture_yes">Especialidad médica: Acupuntura</string>
-	<string name="poi_health_specialty_homeopathy_yes">Especialidad médica: Homeopatía</string>
-	<string name="poi_health_specialty_traditional_chinese_medicine_yes">Especialidad médica: Medicina china tradicional</string>
-	<string name="poi_health_specialty_reiki_yes">Especialidad médica: Reiki</string>
-	<string name="poi_health_specialty_chiropractic_yes">Especialidad médica: Quiropráctica</string>
-	<string name="poi_health_specialty_naturopathy_yes">Especialidad médica: Naturopatía</string>
-	<string name="poi_health_specialty_depth_psychology_yes">Especialidad médica: Psicología profunda</string>
-	<string name="poi_health_specialty_behavior_yes">Especialidad médica: Conducta</string>
+	<string name="poi_health_specialty_addiction_medicine_yes">Medicina adictiva</string>
+	<string name="poi_health_specialty_optometry_yes">Optometría</string>
+	<string name="poi_health_specialty_clinical_pathology_yes">Patología clínica</string>
+	<string name="poi_health_specialty_speech_therapy_yes">Terapia del habla</string>
+	<string name="poi_health_specialty_manual_therapy_yes">Terapia manual</string>
+	<string name="poi_health_specialty_sports_medicine_yes">Medicina deportiva</string>
+	<string name="poi_health_specialty_podology_yes">Podología</string>
+	<string name="poi_health_specialty_adult_psychiatry_yes">Psiquiatría adulta</string>
+	<string name="poi_health_specialty_acupuncture_yes">Acupuntura</string>
+	<string name="poi_health_specialty_homeopathy_yes">Homeopatía</string>
+	<string name="poi_health_specialty_traditional_chinese_medicine_yes">Medicina china tradicional</string>
+	<string name="poi_health_specialty_reiki_yes">Reiki</string>
+	<string name="poi_health_specialty_chiropractic_yes">Quiropráctica</string>
+	<string name="poi_health_specialty_naturopathy_yes">Naturopatía</string>
+	<string name="poi_health_specialty_depth_psychology_yes">Psicología profunda</string>
+	<string name="poi_health_specialty_behavior_yes">Conducta</string>
 
 
-<string name="poi_health_specialty_herbalism_yes">Especialidad médica: herbolaria</string>
+<string name="poi_health_specialty_herbalism_yes">Herbolaria</string>
 	<string name="poi_building_type_pyramid">Pirámide</string>
 
 <string name="poi_fitness_centre">Gimnasio</string>
@@ -2578,8 +2578,8 @@
 	<string name="poi_water_heater_no">Sin calentador de agua</string>
 
 	<string name="poi_parking_surface">Tipo: En superficie</string>
-	<string name="poi_parking_garage_boxes">Tipo: Cochera comunitaria individual</string>
-	<string name="poi_parking_carports">Tipo: Cochera abierta</string>
+	<string name="poi_parking_garage_boxes">Cochera comunitaria individual</string>
+	<string name="poi_parking_carports">Cochera abierta</string>
 
 	<string name="poi_dojo">Dojo</string>
 
@@ -2669,13 +2669,13 @@
 
 <string name="poi_plant_nursery">Vivero de plantas</string>
 
-<string name="poi_car_wash_yes">Lavado de coche: sí</string>
+<string name="poi_car_wash_yes">Sí</string>
 
-	<string name="poi_vacuum_cleaner_yes">Aspiradora: sí</string>
+	<string name="poi_vacuum_cleaner_yes">Sí</string>
 	<string name="poi_vacuum_cleaner_no">Aspiradora: no</string>
 	<string name="poi_amenity_vacuum_cleaner">Aspiradora</string>
 
-<string name="poi_compressed_air_yes">Aire comprimido: sí</string>
+<string name="poi_compressed_air_yes">Sí</string>
 	<string name="poi_compressed_air_no">Aire comprimido: no</string>
 
 	<string name="poi_sport_free_flying">Vuelo libre (deporte)</string>
@@ -2684,18 +2684,18 @@
 	<string name="poi_button_operated_yes">Funciona con botón: sí</string>
 	<string name="poi_button_operated_no">Funciona con botón: no</string>
 
-	<string name="poi_free_flying_site_takeoff">Sitio de vuelo libre: despegue</string>
-	<string name="poi_free_flying_site_landing">Sitio de vuelo libre: aterrizaje</string>
-	<string name="poi_free_flying_site_toplanding">Sitio de vuelo libre: aterrizaje elevado</string>
-	<string name="poi_free_flying_site_towing">Sitio de vuelo libre: remolcador</string>
-	<string name="poi_free_flying_site_training">Sitio de vuelo libre: formación</string>
-	<string name="poi_free_flying_official_yes">Oficial de vuelo libre: sí</string>
-	<string name="poi_free_flying_official_no">Oficial de vuelo libre: no</string>
-	<string name="poi_free_flying_paragliding_yes">Parapente: sí</string>
+	<string name="poi_free_flying_site_takeoff">Despegue</string>
+	<string name="poi_free_flying_site_landing">Aterrizaje</string>
+	<string name="poi_free_flying_site_toplanding">Aterrizaje elevado</string>
+	<string name="poi_free_flying_site_towing">Remolcador</string>
+	<string name="poi_free_flying_site_training">Formación</string>
+	<string name="poi_free_flying_official_yes">Oficial: Sí</string>
+	<string name="poi_free_flying_official_no">Oficial: No</string>
+	<string name="poi_free_flying_paragliding_yes">Parapente</string>
 	<string name="poi_free_flying_paragliding_no">Parapente: no</string>
-	<string name="poi_free_flying_hanggliding_yes">Ala delta: sí</string>
+	<string name="poi_free_flying_hanggliding_yes">Ala delta</string>
 	<string name="poi_free_flying_hanggliding_no">Ala delta: no</string>
-	<string name="poi_free_flying_rigid_yes">Vuelo libre rígido: sí</string>
+	<string name="poi_free_flying_rigid_yes">Rígido</string>
 	<string name="poi_free_flying_rigid_no">Vuelo libre rígido: no</string>
 	<string name="poi_free_flying_site_orientation_n">"Orientación  del sitio de vuelo libre: N"</string>
 	<string name="poi_free_flying_site_orientation_ne">Orientación del sitio de vuelo libre: NE</string>
@@ -2706,22 +2706,22 @@
 	<string name="poi_free_flying_site_orientation_w">"Orientación  del sitio de vuelo libre: O"</string>
 	<string name="poi_free_flying_site_orientation_nw">"Orientación  del sitio de vuelo libre: NO"</string>
 	<string name="poi_free_flying_no_flight_time">Sin horario de vuelo (vuelo libre)</string>
-	<string name="poi_free_flying_guest_guidelines_yes">Directrices de huésped para vuelo libre: sí</string>
-	<string name="poi_free_flying_guest_guidelines_no">Directrices de huésped para vuelo libre: no</string>
+	<string name="poi_free_flying_guest_guidelines_yes">Directrices de huésped: Sí</string>
+	<string name="poi_free_flying_guest_guidelines_no">Directrices de huésped: No</string>
 
 	<string name="poi_tanning_salon">Solárium</string>
 
 <string name="poi_sanitary_dump_station">Estación de descarga sanitaria</string>
 
-	<string name="poi_medical_system_western_yes">Sistema médico: occidental</string>
-	<string name="poi_medical_system_chinese_yes">Sistema médico: chino tradicional</string>
+	<string name="poi_medical_system_western_yes">Occidental</string>
+	<string name="poi_medical_system_chinese_yes">Chino tradicional</string>
 	<string name="poi_medical_system_unknown_yes">Sistema médico: desconocido</string>
-	<string name="poi_medical_system_ayurveeda_yes">Sistema médico: ayurvédico</string>
-	<string name="poi_medical_system_kampo_yes">Sistema médico: kampo</string>
-	<string name="poi_medical_system_mongolian_yes">Sistema médico: mongol tradicional</string>
-	<string name="poi_medical_system_tibetan_yes">Sistema médico: tradicional tibetano</string>
-	<string name="poi_medical_system_sidda_yes">Sistema médico: sidda</string>
-	<string name="poi_medical_system_unani_yes">Sistema médico: unani</string>
+	<string name="poi_medical_system_ayurveeda_yes">Ayurvédico</string>
+	<string name="poi_medical_system_kampo_yes">Kampo</string>
+	<string name="poi_medical_system_mongolian_yes">Mongol tradicional</string>
+	<string name="poi_medical_system_tibetan_yes">Tradicional tibetano</string>
+	<string name="poi_medical_system_sidda_yes">Sidda</string>
+	<string name="poi_medical_system_unani_yes">Unani</string>
 
 	<string name="poi_health_service_nursing_yes">Servicio de salud: enfermería: sí</string>
 	<string name="poi_health_service_nursing_no">Servicio de salud: enfermería: no</string>
@@ -2755,11 +2755,11 @@
 
 	<string name="poi_suction_point">Punto de aspiración</string>
 
-	<string name="poi_fire_hydrant_type_underground">Tipo: subterráneo</string>
-	<string name="poi_fire_hydrant_type_pillar">Tipo: pilar</string>
-	<string name="poi_fire_hydrant_type_dry_barrel">Tipo: barril seco</string>
-	<string name="poi_fire_hydrant_type_pond">Tipo: estanque</string>
-	<string name="poi_fire_hydrant_type_wall">Tipo: pared</string>
+	<string name="poi_fire_hydrant_type_underground">Subterráneo</string>
+	<string name="poi_fire_hydrant_type_pillar">Pilar</string>
+	<string name="poi_fire_hydrant_type_dry_barrel">Barril seco</string>
+	<string name="poi_fire_hydrant_type_pond">Estanque</string>
+	<string name="poi_fire_hydrant_type_wall">Pared</string>
 
 	<string name="poi_health_amenity_type_first_aid_kit">Kit de primeros auxilios</string>
 	<string name="poi_health_amenity_type_scales">Básculas públicas</string>
@@ -2840,7 +2840,7 @@
 	<string name="poi_counselling_no">Asesoría: no</string>
 	<string name="poi_emergency_yes">Emergencia: sí</string>
 	<string name="poi_emergency_no">Emergencia: no</string>
-	<string name="poi_home_visit_yes">Visitas domiciliarias: sí</string>
+	<string name="poi_home_visit_yes">Sí</string>
 	<string name="poi_home_visit_no">Visitas domiciliarias: no</string>
 
 	<string name="poi_disease_malaria_yes">Malaria: sí</string>
@@ -2872,10 +2872,10 @@
 	<string name="poi_fire_hydrant_position_street">Ubicación del hidrante: en la calle</string>
 	<string name="poi_fire_hydrant_position_underground">Ubicación del hidrante: subterráneo</string>
 	<string name="poi_fire_hydrant_style_wsh">Estilo del hidrante: wsh</string>
-	<string name="poi_fire_hydrant_style_water_source_main">Origen del agua del hidrante: principal</string>
-	<string name="poi_fire_hydrant_style_water_source_pond">Origen del agua del hidrante: estanque</string>
-	<string name="poi_fire_hydrant_style_water_source_stream">Origen del agua del hidrante: arroyo</string>
-	<string name="poi_fire_hydrant_style_water_source_cistern">Origen del agua del hidrante: cisterna</string>
+	<string name="poi_fire_hydrant_style_water_source_main">Principal</string>
+	<string name="poi_fire_hydrant_style_water_source_pond">Estanque</string>
+	<string name="poi_fire_hydrant_style_water_source_stream">Arroyo</string>
+	<string name="poi_fire_hydrant_style_water_source_cistern">Cisterna</string>
 	<string name="poi_in_service_yes">En servicio: sí</string>
 
 <string name="poi_forestry_compartment">Señal: Parcela forestal</string>
@@ -2907,7 +2907,7 @@
 
 <string name="poi_salt_yes">Sal</string>
 	<string name="poi_salt_no">Sal: no</string>
-	<string name="poi_wheelchair_designated">Señalado para sillas de ruedas</string>
+	<string name="poi_wheelchair_designated">Señalado</string>
 	<string name="poi_summer_camp">Campamento de verano</string>
 	<string name="poi_crossing_activation_automatic">Activación del cruce: automática</string>
 	<string name="poi_crossing_activation_local">Activación del cruce: local</string>
@@ -2934,7 +2934,7 @@
 	<string name="poi_crossing_supervision_attendant">Supervisión del paso a nivel: persona</string>
 	<string name="poi_crossing_supervision_camera">Supervisión del paso a nivel: cámara</string>
 
-	<string name="poi_dispensing_yes">Dispensa recetas: sí</string>
+	<string name="poi_dispensing_yes">Sí</string>
 	<string name="poi_dispensing_no">Dispensa recetas: no</string>
 
 	<string name="poi_aerodrome_type_international">Internacional</string>
@@ -2955,7 +2955,7 @@
 	<string name="poi_pump_status_broken">Estado de la bomba: estropeada</string>
 	<string name="poi_pump_status_locked">Estado de la bomba: bloqueada</string>
 
-	<string name="poi_payment_troika_yes">Acepta tarjeta Troika</string>
+	<string name="poi_payment_troika_yes">Troika</string>
 	<string name="poi_payment_troika_no">No acepta tarjeta Troika</string>
 
 	<string name="poi_telescope">Telescopio</string>
@@ -2969,8 +2969,8 @@
 	<string name="poi_telescope_usage_research">Uso: investigación</string>
 
 	<string name="poi_observatory_type_espionage">Uso: espionaje</string>
-	<string name="poi_observatory_type_meteorological">Uso: meteorológico</string>
-	<string name="poi_observatory_type_gravitational">Uso: gravitacional</string>
+	<string name="poi_observatory_type_meteorological">Meteorológico</string>
+	<string name="poi_observatory_type_gravitational">Gravitacional</string>
 
 	<string name="poi_greenhouse_horticulture">Horticultura en invernadero</string>
 
@@ -2996,13 +2996,13 @@
 	<string name="poi_display_digital_yes">Pantalla digital</string>
 	<string name="poi_display_sundial_yes">Reloj de sol</string>
 
-	<string name="poi_barometer_yes">Barómetro: sí</string>
+	<string name="poi_barometer_yes">Barómetro</string>
 	<string name="poi_barometer_no">Barómetro: no</string>
-	<string name="poi_thermometer_yes">Termómetro: sí</string>
+	<string name="poi_thermometer_yes">Termómetro</string>
 	<string name="poi_thermometer_no">Termómetro: no</string>
-	<string name="poi_hygrometer_yes">Higrómetro: sí</string>
+	<string name="poi_hygrometer_yes">Higrómetro</string>
 	<string name="poi_hygrometer_no">Higrómetro: no</string>
-	<string name="poi_date_yes">Muestra la fecha: sí</string>
+	<string name="poi_date_yes">Muestra la fecha</string>
 	<string name="poi_date_no">Muestra la fecha: no</string>
 
 	<string name="poi_support_pole">Soporte: poste</string>
