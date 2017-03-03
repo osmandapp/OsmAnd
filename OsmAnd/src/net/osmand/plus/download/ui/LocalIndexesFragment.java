@@ -35,6 +35,8 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.map.ITileSource;
 import net.osmand.plus.ContextMenuAdapter;
@@ -51,13 +53,9 @@ import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.base.OsmandExpandableListFragment;
 import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.download.DownloadActivity;
-import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
-import net.osmand.plus.resources.IncrementalChangesManager;
-import net.osmand.plus.resources.IncrementalChangesManager.IncrementalUpdate;
-import net.osmand.plus.resources.IncrementalChangesManager.IncrementalUpdateList;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -283,7 +281,10 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 					}
 				}
 			});
-			b.setView(editText);
+			b.setTitle(R.string.shared_string_rename);
+			int leftPadding = AndroidUtils.dpToPx(a, 24f);
+			int topPadding = AndroidUtils.dpToPx(a, 4f);
+			b.setView(editText, leftPadding, topPadding, leftPadding, topPadding);
 			// Behaviour will be overwritten later;
 			b.setPositiveButton(R.string.shared_string_save, null);
 			b.setNegativeButton(R.string.shared_string_cancel, null);
