@@ -48,6 +48,7 @@ import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.other.MapRouteInfoMenu;
+import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 
@@ -83,6 +84,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 	private OsmandSettings settings;
 
 	private MapRouteInfoMenu mapRouteInfoMenu;
+	private TrackDetailsMenu trackDetailsMenu;
 	private MapHudButton backToLocationControl;
 	private MapHudButton menuControl;
 	private MapHudButton compassHud;
@@ -112,6 +114,10 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 	public MapRouteInfoMenu getMapRouteInfoMenu() {
 		return mapRouteInfoMenu;
+	}
+
+	public TrackDetailsMenu getTrackDetailsMenu() {
+		return trackDetailsMenu;
 	}
 
 	@Override
@@ -276,6 +282,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 	private void initRouteControls() {
 		mapRouteInfoMenu = new MapRouteInfoMenu(mapActivity, this);
+		trackDetailsMenu = new TrackDetailsMenu(mapActivity, this);
 	}
 
 	public void updateRouteButtons(View main, boolean routeInfo) {

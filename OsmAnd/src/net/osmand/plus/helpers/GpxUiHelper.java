@@ -65,6 +65,7 @@ import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.ActivityResultListener;
@@ -74,6 +75,7 @@ import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.dialogs.ConfigureMapMenu;
 import net.osmand.plus.dialogs.ConfigureMapMenu.AppearanceListItem;
 import net.osmand.plus.dialogs.ConfigureMapMenu.GpxAppearanceAdapter;
+import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
@@ -225,12 +227,15 @@ public class GpxUiHelper {
 		return null;
 	}
 
-	public static AlertDialog selectSingleGPXFile(final Activity activity,
-											final boolean showCurrentGpx, final CallbackWithObject<GPXFile[]> callbackWithObject) {
+	public static AlertDialog selectSingleGPXFile(final Activity activity, boolean showCurrentGpx,
+												  final CallbackWithObject<GPXFile[]> callbackWithObject) {
 		OsmandApplication app = (OsmandApplication) activity.getApplication();
 		int gpxDirLength = app.getAppPath(IndexConstants.GPX_INDEX_DIR).getAbsolutePath().length();
 		List<SelectedGpxFile> selectedGpxFiles = app.getSelectedGpxHelper().getSelectedGPXFiles();
 		final List<GPXInfo> list = new ArrayList<>(selectedGpxFiles.size() + 1);
+		if (OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class) == null) {
+			showCurrentGpx = false;
+		}
 		if (!selectedGpxFiles.isEmpty() || showCurrentGpx) {
 			if (showCurrentGpx) {
 				list.add(new GPXInfo(activity.getString(R.string.shared_string_currently_recording_track), 0, 0));

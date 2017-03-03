@@ -8,7 +8,6 @@ import android.support.v7.app.AlertDialog;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
@@ -21,9 +20,6 @@ import android.widget.TextView;
 import net.osmand.Location;
 import net.osmand.ValueHolder;
 import net.osmand.plus.ApplicationMode;
-import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.ContextMenuItem;
-import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.NavigationService;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmAndTaskManager.OsmAndTaskRunnable;
@@ -128,35 +124,6 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 				layer.removeSideWidget(monitoringControl);
 				layer.recreateControls();
 				monitoringControl = null;
-			}
-		}
-	}
-
-	@Override
-	public void registerMapContextMenuActions(final MapActivity mapActivity, final double latitude, final double longitude,
-			ContextMenuAdapter adapter, Object selectedObj) {
-		ContextMenuAdapter.ItemClickListener listener = new ContextMenuAdapter.ItemClickListener() {
-			@Override
-			public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int resId, int pos, boolean isChecked) {
-				if (resId == R.string.context_menu_item_add_waypoint) {
-					mapActivity.getContextMenu().addWptPt();
-				} else if (resId == R.string.context_menu_item_edit_waypoint) {
-					mapActivity.getContextMenu().editWptPt();
-				}
-				return true;
-			}
-		};
-		adapter.addItem(new ContextMenuItem.ItemBuilder()
-				.setTitleId(R.string.context_menu_item_add_waypoint, mapActivity)
-				.setIcon(R.drawable.ic_action_gnew_label_dark)
-				.setListener(listener).createItem());
-		if (selectedObj instanceof WptPt) {
-			WptPt pt = (WptPt) selectedObj;
-			if (app.getSelectedGpxHelper().getSelectedGPXFile(pt) != null) {
-				adapter.addItem(new ContextMenuItem.ItemBuilder()
-						.setTitleId(R.string.context_menu_item_edit_waypoint, mapActivity)
-						.setIcon(R.drawable.ic_action_edit_dark)
-						.setListener(listener).createItem());
 			}
 		}
 	}

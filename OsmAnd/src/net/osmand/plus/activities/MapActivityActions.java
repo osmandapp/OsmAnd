@@ -48,6 +48,7 @@ import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.dialogs.FavoriteDialogs;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.liveupdates.OsmLiveActivity;
+import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.BaseMapLayer;
@@ -274,6 +275,36 @@ public class MapActivityActions implements DialogProvider {
 					.setIcon(R.drawable.ic_action_intermediate).createItem());
 		}
 		OsmandPlugin.registerMapContextMenu(mapActivity, latitude, longitude, adapter, selectedObj);
+
+		ContextMenuAdapter.ItemClickListener listener = new ContextMenuAdapter.ItemClickListener() {
+			@Override
+			public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int resId, int pos, boolean isChecked) {
+				if (resId == R.string.context_menu_item_add_waypoint) {
+					mapActivity.getContextMenu().addWptPt();
+				} else if (resId == R.string.context_menu_item_edit_waypoint) {
+					mapActivity.getContextMenu().editWptPt();
+				}
+				return true;
+			}
+		};
+
+		if (!mapActivity.getMyApplication().getSelectedGpxHelper().getSelectedGPXFiles().isEmpty()
+				|| (OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class) != null)) {
+			adapter.addItem(new ContextMenuItem.ItemBuilder()
+					.setTitleId(R.string.context_menu_item_add_waypoint, mapActivity)
+					.setIcon(R.drawable.ic_action_gnew_label_dark)
+					.setListener(listener).createItem());
+		}
+
+		if (selectedObj instanceof GPXUtilities.WptPt) {
+			GPXUtilities.WptPt pt = (GPXUtilities.WptPt) selectedObj;
+			if (getMyApplication().getSelectedGpxHelper().getSelectedGPXFile(pt) != null) {
+				adapter.addItem(new ContextMenuItem.ItemBuilder()
+						.setTitleId(R.string.context_menu_item_edit_waypoint, mapActivity)
+						.setIcon(R.drawable.ic_action_edit_dark)
+						.setListener(listener).createItem());
+			}
+		}
 
 		final AlertDialog.Builder builder = new AlertDialog.Builder(mapActivity);
 		final ArrayAdapter<ContextMenuItem> listAdapter =
