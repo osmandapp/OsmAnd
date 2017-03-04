@@ -2818,4 +2818,6 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="points_delete_multiple_succesful">Puntu/os iscantzelladu/os.</string>
     <string name="points_delete_multiple">As a iscantzellare %1$d puntu/os. Seguru ses?</string>
     <string name="track_points_category_name">Puntos importantes in custa àndala</string>
+    <string name="add_new_folder">Annanghe una cartella noa</string>
+    <string name="route_points_category_name">Puntos in s\'àndala imbeniente</string>
     </resources>
