@@ -2849,7 +2849,7 @@ Ja jums ir vajadzīga palīdzība ar OsmAnd aplikāciju, lūdzu kontaktējieties
     <string name="altitude_range">Altitūdas diapazons</string>
     <string name="average_altitude">Vidējā altitūda</string>
     <string name="shared_string_time">Laiks</string>
-    <string name="total_distance">Maršruta kopējais garums</string>
+    <string name="total_distance">Maršruta garums</string>
     <string name="routing_attr_height_relief_smoothness_factor_name">Reljefa gluduma koeficients</string>
     <string name="routing_attr_height_relief_smoothness_factor_description">Līdzenāks vai kalnaināks reljefs</string>
     <string name="routing_attr_height_obstacles_name">Lietot elevācijas datus</string>
