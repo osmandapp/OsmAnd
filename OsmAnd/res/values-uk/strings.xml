@@ -2090,8 +2090,8 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="shared_string_show_details">Показати деталі</string>
     <string name="osm_edit_context_menu_delete">Видалити OSM редагування</string>
     <string name="rendering_value_disabled_name">Вимкнено</string>
-    <string name="rendering_value_walkingRoutesScopeOSMC_name">Розмальовування відповідно до області маршруту</string>
-    <string name="rendering_value_walkingRoutesOSMC_name">Розмальовування відповідно до OSMC</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">Забарвлення згідно приналежності мережі</string>
+    <string name="rendering_value_walkingRoutesOSMC_name">Розмальовування відповідно пішохідній символіці OSMC</string>
     <string name="osmo_share_my_location">Повідомляти про місцезнаходження</string>
     <string name="shared_string_logoff">Вийти</string>
     <string name="local_recordings_delete_all_confirm">Ви збираєтеся видалити %1$d записів. Ви впевнені?</string>
@@ -2604,7 +2604,7 @@ Facebook: https://www.facebook.com/osmandapp
     <string name="save_track_min_distance">Мінімальна дистанція для запису</string>
     <string name="save_track_min_distance_descr">Виберіть відстань, при перевищенні якого точка буде записана в трек</string>
     <string name="save_track_precision">Мінімально точність запису</string>
-    <string name="save_track_precision_descr">Виберіть мінімально допустиму точність визначення координат</string>
+    <string name="save_track_precision_descr">Виберіть мінімально допустиму точність для точки, щоб бути зажурнальованою</string>
     <string name="christmas_poi">Різдвяні POI</string>
     <string name="christmas_desc">Напередодні різдвяних і новорічних свят, ви можете вибрати для відображення POI, пов\'язані з Різдвом: ялинки, ярмарки і т.п.</string>
     <string name="christmas_desc_q">Показати різдвяні POI?</string>
@@ -2759,7 +2759,7 @@ Facebook: https://www.facebook.com/osmandapp
     <string name="altitude_descent">Спуск</string>
     <string name="altitude_ascent">Підіймання</string>
     <string name="altitude_range">Діапазон висот</string>
-    <string name="average_altitude">Середнє</string>
+    <string name="average_altitude">Середня висота</string>
     <string name="shared_string_time">Час</string>
     <string name="total_distance">Загальна відстань</string>
     <string name="routing_attr_height_relief_smoothness_factor_name">Коефіцієнт плавності рельєфу</string>
@@ -2771,7 +2771,7 @@ Facebook: https://www.facebook.com/osmandapp
     <string name="rendering_attr_depthContours_name">Контури глибини</string>
 	<string name="auto_split_recording_title">Авто-розрив запису після перерви</string>
 	<string name="auto_split_recording_descr">Почати новий сегмент після 6 хвилинної перерви, новий трек після 2 годинної перерви, або новий файл після тривалої перерви (якщо змінилася дата).</string>
-    <string name="select_gpx_folder">Виберіть папку GPX</string>
+    <string name="select_gpx_folder">Виберіть теку GPX-треку</string>
     <string name="release_2_6">"
  • Нова функція: кнопка швидкої дії
    
@@ -2841,4 +2841,6 @@ Facebook: https://www.facebook.com/osmandapp
     <string name="quick_action_interim_dialog">Показати проміжний діалог</string>
     <string name="favorite_autofill_toast_text">" було збережено до "</string>
     <string name="quick_action_add_create_items">Створення елементів</string>
+    <string name="add_new_folder">Додати нову теку</string>
+    <string name="points_delete_multiple_succesful">Точку(и) успішно вилучено.</string>
     </resources>
