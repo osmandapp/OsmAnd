@@ -201,7 +201,7 @@ MB)をダウンロードしますか?</string>
      <string name="osmand_service">バックグラウンドモード</string>
      <string name="osmand_service_descr">画面オフの間もOsmAndはバックグラウンドモードで動作します</string>
      <string name="fast_route_mode">最速ルート</string>
-     <string name="fast_route_mode_descr">有効なら目的地までの最速ルートで計算し、無効なら最短ルートで計算します</string>
+     <string name="fast_route_mode_descr">"有効なら目的地までの最速ルートで計算し、無効なら燃費を抑えた短いルートで計算します "</string>
      <string name="tiles_to_download_estimated_size">ズームレベル {0}で
 {1} 件のタイル({2} MB)をダウンロード</string>
      <string name="shared_string_download_map">マップをダウンロード</string>
@@ -586,8 +586,7 @@ POIの更新は利用できません</string>
 
 <string name="poi_edit_title">POIの編集</string>
 <string name="poi_create_title">POIを作成</string>
-<string name="poi_error_poi_not_found">ノードが見つからないか、施設が
-単独ノードではありません</string>
+<string name="poi_error_poi_not_found">ノードが見つからない、または未サポートの複数ノードで構成されています。</string>
 <string name="poi_remove_confirm_template">{0} を削除しますか(コメントを入力) ?</string>
 <string name="poi_remove_title">POIを削除</string>
 <string name="shared_string_delete">削除</string>
@@ -816,7 +815,7 @@ POIの更新は利用できません</string>
     <string name="download_roads_only_item">道路のみ</string>
     <string name="download_roads_only_maps">道路のみのマップ</string>
     
-	<string name="rendering_attr_noAdminboundaries_name">境界線を隠す</string>
+	<string name="rendering_attr_noAdminboundaries_name">境界</string>
 	
     
     
@@ -962,7 +961,7 @@ POIの更新は利用できません</string>
 	<string name="route_roundabout">ロータリー交差点: %1$d 番目の出口を選択</string>
 	<string name="route_kl">左寄りで道なりに走行</string>
 	<string name="route_kr">右寄りで道なりに走行</string>
-	<string name="rendering_attr_noPolygons_name">ポリゴンを隠す</string>
+	<string name="rendering_attr_noPolygons_name">ポリゴン</string>
 	<string name="rendering_attr_appMode_name">描画方法</string>
 	<string name="rendering_attr_appMode_description">マップを最適化</string>
 	<string name="rendering_attr_contourLines_description">表示ズームレベルの選択(要『等高線データ』):</string>
@@ -1214,7 +1213,7 @@ POIの更新は利用できません</string>
 	<string name="shared_string_name">名前</string>
 	<string name="favourites_edit_dialog_category">カテゴリー</string>
 	<string name="shared_string_no_thanks">遠慮します</string>
-	<string name="basemap_missing">ベースワールドマップ(小さなズームでのみ全世界をカバーします)が欠落しています。World_basemap_x.obfをダウンロードしてみてください。</string>
+	<string name="basemap_missing">基本世界地図(小さなズームでのみ全世界をカバーします)が欠落しています。概要地図であるWorld_basemap_x.obfをダウンロードしてみてください。</string>
 	<string name="vector_data_missing">オンボード(オフライン)データがSDカード上に見つかりません。オフラインマップを使用するにはそれらをダウンロードしてください。</string>
 	<string name="local_index_gpx_info_show">\n\nオプションを表示するには長押しして下さい</string>
 	
@@ -1857,7 +1856,23 @@ OsmAnd+は最新の更新情報を受けとることが出来る、有料バー�
 	
 	<string name="plugin_touringview_name">ツーリングマップ表示</string>
 	<string name="confirmation_to_clear_history">履歴を消去しますか？</string>
-    <string name="plugin_touringview_descr">"これを有効にすると、OsmAndのマップスタイルを変更し\'ツーリングビュー\'表示になります。これは旅行者やプロドライバー向けの特殊な詳細図です。\n\nこの表示では任意のズームで、マップデータ内の情報を可能な限り最大限表示します(特に高速を含む一般道路、未舗装道路、小規模通路、およびオリエンテーションマーク)。\n\nまた道路種別を色別で分け、大型車等で走行時に道を判別しやすいようになっています。\n\nさらに自転車用ルートや登山用ルートを示すような特別なツーリングオプションも用意されています。\n\n特別なマップのダウンロードは必要なく、標準マップから生成されます。\n\n設定の有効無効化で元に戻せますが、\'マップ設定\'下の\'マップスタイル \'を変更することで必要に応じて切り替えることも出来ます。 "</string>
+    <string name="plugin_touringview_descr">"これを有効にすると、OsmAndのマップスタイルを変更し\'ツーリングビュー\'表示になります。これは旅行者やプロドライバー向けの特殊な詳細図です。
+
+
+この表示では任意のズームで、マップデータ内の情報を可能な限り最大限表示します(特に高速を含む一般道路、未舗装道路、小規模通路、およびオリエンテーションマーク)。
+
+
+また道路種別を色別で分け、大型車等で走行時に道を判別しやすいようになっています。
+
+
+さらに自転車用ルートや登山用ルートを示すような特別なツーリングオプションも用意されています。
+
+
+特別なマップのダウンロードは必要なく、標準マップから生成されます。
+
+
+設定の有効無効化で元に戻せますが、\'マップ設定\'下の\'マップスタイル \'を変更することで必要に応じて切り替えることも出来ます。
+ "</string>
 	<string name="plugin_nautical_name">航海マップ表示</string>
 	<string name="local_osm_changes_upload_all_confirm">OSMに%1$dカ所の変更をアップロードします。よろしいですか？</string>
     <string name="plugin_nautical_descr">"このプラグインはOsmAnd Maps &amp; Navigationにて航海マップを生成し、ボート、セーリング、その他のウォータースポーツに向けた機能を豊かにします。\n\n特殊マップアドオンはOsmAndに内陸だけでなく沿岸に向けた、航海ナビゲーションマークやチャートシンボルを提供します。各ナビゲーションマークの説明はそれらの意味(カテゴリ、形状、色、順序、参照など)を識別するために必要な詳細を示されます。
@@ -2005,7 +2020,7 @@ OsmAnd+は最新の更新情報を受けとることが出来る、有料バー�
 	<string name="rate_this_app_long">Google PlayでOsmAndの評価をお願いします</string>
 	<string name="user_hates_app_get_feedback">理由を教えてください。</string>
 	<string name="user_hates_app_get_feedback_long">このアプリの変更して欲しい箇所を教えて下さい。</string>
-<string name="rendering_value_walkingRoutesScopeOSMC_name">ルート範囲に応じてカラー変更</string>
+<string name="rendering_value_walkingRoutesScopeOSMC_name">所属ネットワークに応じたカラー変更</string>
     <string name="rendering_value_walkingRoutesOSMC_name">OSMCのハイキングシンボルカラー</string>
     <string name="traffic_warning_hazard">通行注意</string>
     <string name="rendering_value_boldOutline_name">太線</string>
@@ -2176,7 +2191,7 @@ OsmAnd+は最新の更新情報を受けとることが出来る、有料バー�
     <string name="rendering_attr_currentTrackWidth_description">GPX経路の幅</string>
     <string name="rendering_attr_roadStyle_description">道路の表示形式</string>
     <string name="poi_dialog_reopen">再び開く</string>
-	<string name="application_dir_description">マップを保存する場所を選択してください。</string>
+	<string name="application_dir_description">マップやその他データファイルを保存する場所を選択します。</string>
     
     <string name="enter_country_name">国名を入力</string>
     <string name="new_version">新しいバージョン</string>
@@ -2326,7 +2341,53 @@ OsmAnd+は最新の更新情報を受けとることが出来る、有料バー�
     <string name="av_audio_bitrate">音声ビットレート</string>
     <string name="av_audio_bitrate_descr">音声のビットレートを選択します</string>
     <string name="looking_up_address">道路名及び市町村名を取得中</string>
-    <string name="osmand_plus_extended_description_4000_chars_v2">" OsmAnd Maps &amp; Navigation - インターネットに接続することなく目的の場所を探したりルートを検索することが出来ます。なじみのない場所やルートを検索出来るように旅行の前に、その地域の地図をダウンロードしてください。基本的な機能:・200カ国の詳細なマップ・オフラインでの音声ナビゲーション・オフラインでの住所検索・地図上の場所についての情報、観光、喫茶店、駐車場、店舗・お気に入りの場所の追加・乗用車、自転車、徒歩移動ごとのナビゲーション設定・GPX経路を表示、記録機能・POIに関するWikipedia情報利用・マップに追加できる音声やビデオメモ機能・運転時に分かりやすい昼と夜のマップモード・公共交通機関のルートや停留所・自転車道や歩道小道・世界中の観光向けトレイルコース・様々なオンラインマップにも対応・道路の舗装状況や街路照明の情報・POIの追加、編集、削除(OpenStreetMap.orgユーザー向け)・OSM - 他のデバイスのライブモニタリング機能はその国に通じた信頼性の高いナビゲーターを得るのと同等 - フランス、ドイツ、メキシコ、イギリス、スペイン、オランダ、アメリカ、ロシア、ブラジルやその他の地域。プラグイン:・等高線 https://goo.gl/7mojP8 既存マップに等高線や地形の陰影表示を追加で描写可能。・スキーマップ https://goo.gl/pX6DxJ スキーゲレンデ、クロスカントリースキーコース、ロープウェイやリフトの情報。・航海マップ https://goo.gl/0hEdxm 沿岸や航海時のナビゲーションを補助する特殊スタイルマップ。・駐車位置 https://goo.gl/6JxQXF 車両の駐車位置や駐車料金、残り駐車時間などの表示。等々乞うご期待！Twitter: https://twitter.com/osmandapp Facebook: https://www.facebook.com/osmandapp サイト: http://osmand.net OsmAndアプリについてのヘルプが必要な場合はサポートチームにご連絡ください: support@osmand.net. "</string>
+    <string name="osmand_plus_extended_description_4000_chars_v2">"
+OsmAnd Maps &amp; Navigation - インターネットに接続することなく目的の場所を探したりルートを検索することが出来ます。なじみのない場所やルートを検索出来るように旅行の前に、その地域の地図をダウンロードしてください。
+
+基本的な機能:
+• 200カ国の詳細なマップ
+• オフラインでの音声ナビゲーション
+• オフラインでの住所検索
+• 地図上の場所についての情報:観光、喫茶店、駐車場、店舗等
+• お気に入りの場所の追加
+• 乗用車、自転車、徒歩移動ごとのナビゲーション設定
+
+追加機能:
+• GPX経路を表示、記録機能
+• POIに関するWikipedia情報利用
+• マップに追加できる音声やビデオメモ機能
+• 運転時に分かりやすい昼と夜のマップモード
+• 公共交通機関のルートや停留所
+• 自転車道や歩道小道
+• 世界中の観光向けトレイルコース
+• 様々なオンラインマップにも対応
+• 道路の舗装状況や街路照明の情報
+• POIの追加、編集、削除(OpenStreetMap.orgユーザー向け)
+• OSM - 他のデバイスのライブモニタリング機能
+
+その国に通じた信頼性の高いナビゲーターを得るのと同等の価値があります - フランス、ドイツ、メキシコ、イギリス、スペイン、オランダ、アメリカ、ロシア、ブラジルやその他の地域。
+
+プラグイン:
+• 等高線 https://goo.gl/7mojP8
+ 既存マップに等高線や地形の陰影表示を追加で描写可能。
+
+• スキーマップ https://goo.gl/pX6DxJ
+ スキーゲレンデ、クロスカントリースキーコース、ロープウェイやリフトの情報。
+
+• 航海マップ https://goo.gl/0hEdxm
+ 沿岸や航海時のナビゲーションを補助する特殊スタイルマップ。
+
+• 駐車位置 https://goo.gl/6JxQXF
+ 車両の駐車位置や駐車料金、残り駐車時間などの表示。
+
+等々乞うご期待！
+
+Twitter: https://twitter.com/osmandapp
+Facebook: https://www.facebook.com/osmandapp
+サイト: http://osmand.net
+
+OsmAndアプリについてのヘルプが必要な場合はサポートチームにご連絡ください: support@osmand.net. 
+ "</string>
     <string name="begin_with_osmand_menu_group">OsmAndを初めて使う方へ</string>
     <string name="first_usage_item">使用方法の簡易説明</string>
     <string name="update">更新</string>
@@ -2361,7 +2422,7 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="reports_for">表示レポート</string>
     <string name="share_geo">geo:</string>
     <string name="coords_format">座標の形式</string>
-    <string name="coords_format_descr">地理座標系形式</string>
+    <string name="coords_format_descr">地理座標で表示される形式を指定します</string>
   	<string name="app_mode_bus">バス</string>
  	<string name="app_mode_train">鉄道</string>
     <string name="current_track">現在の経路</string>
@@ -2602,4 +2663,89 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="shared_string_recorded">記録</string>
     <string name="shared_string_record">記録</string>
     <string name="gpx_logging_no_data">データなし</string>
-    </resources>
+    <string name="routing_attr_short_way_name">燃費を抑えたルート</string>
+    <string name="routing_attr_short_way_description">燃費を抑えることを重視した(通常より短い)ルートにします</string>
+    <string name="clear_tile_data">すべてのタイルを消去</string>
+    <string name="navigate_point_olc">オープンロケーションコード(OLC)</string>
+    <string name="navigate_point_olc_info_invalid">無効なOLCです
+</string>
+    <string name="navigate_point_olc_info_short">省略OLCです
+省略されてないコードを入力して下さい</string>
+    <string name="navigate_point_olc_info_area">OLCは有効で
+指定されたエリアは: %1$s x %2$sです</string>
+    <string name="configure_screen_quick_action">クイックアクション</string>
+
+    <string name="quick_action_item_action">アクション %d</string>
+    <string name="quick_action_item_screen">画面 %d</string>
+    <string name="quick_action_add_marker">マップマーカー追加</string>
+    <string name="quick_action_add_poi">POIを追加</string>
+    <string name="quick_action_map_style">マップスタイルの変更</string>
+    <string name="quick_action_map_style_switch">マップスタイルが\"%s\"に変更されました。</string>
+    <string name="quick_action_take_audio_note">音声メモを取る</string>
+    <string name="quick_action_take_video_note">ビデオメモを取る</string>
+    <string name="quick_action_take_photo_note">写真メモを取る</string>
+    <string name="quick_action_add_osm_bug">OSMのバグを追加</string>
+    <string name="quick_action_navigation_voice">音声のon/off</string>
+    <string name="quick_action_navigation_voice_off">音声はoffです</string>
+    <string name="quick_action_navigation_voice_on">音声はonです</string>
+    <string name="quick_action_add_gpx">GPX経由地点を追加</string>
+    <string name="quick_action_add_parking">駐車場所を追加</string>
+    <string name="quick_action_new_action">アクションを追加</string>
+    <string name="quick_action_edit_action">アクションを編集</string>
+    <string name="quick_action_add_favorite">お気に入りに追加</string>
+    <string name="dialog_add_action_title">アクションを追加</string>
+    <string name="quick_actions_delete">アクションを削除</string>
+    <string name="quick_actions_delete_text">クイックアクション\"%s\"を削除してもよろしいですか？</string>
+    <string name="quick_favorites_show_favorites_dialog">お気に入りダイアログを表示</string>
+    <string name="quick_favorites_name_preset">プリセットに名前を付ける</string>
+    <string name="quick_action_add_marker_descr">アクションボタンをタップすると、画面中心にマップマーカーが追加されます。</string>
+    <string name="quick_action_add_gpx_descr">アクションボタンをタップすると、画面中央の地点をGPX経由地点として追加します。</string>
+    <string name="quick_action_take_audio_note_descr">アクションボタンをタップすると画面中央の地点に音声メモを追加します。</string>
+    <string name="quick_action_take_video_note_descr">アクションボタンをタップすると画面中央の地点に動画メモが追加されます。</string>
+    <string name="quick_action_take_photo_note_descr">アクションボタンをタップすると画面中央の地点に写真メモが追加されます。</string>
+    <string name="quick_action_add_osm_bug_descr">アクションボタンをタップすると画面中央の地点にOSMバグ注記が追加されます。</string>
+    <string name="quick_action_add_poi_descr">アクションボタンをタップすると画面中央の地点にPOIが追加されます。</string>
+    <string name="quick_action_navigation_voice_descr">アクションボタンをタップするとナビゲーション中の案内音声on/off切替が出来ます。</string>
+    <string name="quick_action_add_parking_descr">アクションボタンをタップすると画面中央の地点に駐車場所が追加されます。</string>
+    <string name="quick_action_interim_dialog">中間ダイアログを表示</string>
+    <string name="favorite_empty_place_name">場所</string>
+    <string name="quick_action_duplicates">指定されたクイックアクション名はすでに使われています。重複を避けるために%1$sに変更されました。</string>
+    <string name="quick_action_duplicate">クイックアクション名の重複</string>
+    <string name="quick_action_showhide_favorites_descr">アクションボタンをタップするとマップ画面でのお気に入り地点の表示、非表示の切替が出来ます。</string>
+    <string name="quick_action_showhide_poi_descr">アクションボタンをタップするとマップ画面でのPOIの表示、非表示の切替が出来ます。</string>
+    <string name="quick_action_showhide_favorites_title">お気に入りの表示/非表示</string>
+    <string name="quick_action_favorites_show">お気に入りを表示</string>
+    <string name="quick_action_favorites_hide">お気に入りを非表示</string>
+    <string name="quick_action_showhide_poi_title">POIの表示/非表示</string>
+    <string name="quick_action_poi_show">%1$sを表示</string>
+    <string name="quick_action_poi_hide">%1$sを非表示</string>
+    <string name="quick_action_add_category">カテゴリーを追加</string>
+    <string name="quick_action_add_create_items">アイテムを作成</string>
+    <string name="quick_action_add_configure_map">マップの設定</string>
+    <string name="quick_action_add_navigation">ナビゲーション</string>
+    <string name="quick_action_fav_name_descr">住所または場所の名前を利用する場合は空白のままにします</string>
+    <string name="quick_action_bug_descr">このメッセージはコメント欄に自動入力されます。</string>
+    <string name="quick_action_bug_message">メッセージ</string>
+    <string name="quick_action_category_descr">お気に入りを保存するカテゴリーを選択します</string>
+    <string name="quick_action_gpx_category_descr">オプションのカテゴリーを選択してください</string>
+    <string name="quick_action_poi_list">POI一覧</string>
+    <string name="quick_action_sh_poi_descr">マップ上に表示される1つまたは複数のPOIカテゴリーを追加できます。</string>
+    <string name="quick_action_map_style_action">マップスタイルを追加します</string>
+    <string name="quick_action_empty_param_error">パラメーターは空白にはできません</string>
+    <string name="quick_action_map_styles">マップスタイル</string>
+    <string name="quick_action_map_overlay">オーバーレイマップの変更</string>
+    <string name="quick_action_map_overlay_title">オーバーレイマップ</string>
+    <string name="quick_action_map_overlay_action">オーバーレイを追加します</string>
+    <string name="quick_action_map_overlay_switch">オーバーレイマップは\"%s\"に変更されました。</string>
+    <string name="quick_action_map_underlay_switch">アンダーレイマップは\"%s\"に変更されました。</string>
+    <string name="quick_action_map_underlay">アンダーレイマップを変更</string>
+    <string name="quick_action_map_underlay_title">アンダーレイマップ</string>
+    <string name="quick_action_map_underlay_action">アンダーレイを追加</string>
+    <string name="quick_action_map_source">ソースマップを変更</string>
+    <string name="quick_action_map_source_title">ソースマップ</string>
+    <string name="quick_action_map_source_action">ソースマップを追加</string>
+    <string name="quick_action_map_source_switch">ソースマップは\"%s\"に変更されました。</string>
+    <string name="quick_action_btn_tutorial_title">ボタン位置を変更</string>
+    <string name="quick_action_btn_tutorial_descr">長タップとドラッグで画面上のボタンの位置を変更します</string>
+	<string name="shared_string_action_name">アクション名</string>
+</resources>
