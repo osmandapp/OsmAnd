@@ -2913,4 +2913,25 @@
 	<string name="poi_public_bookcase_type_metal_cabinet">Tipus: cabina metàlica</string>
 	<string name="poi_public_bookcase_type_shelf">Tipus: prestatge</string>
 
+	<string name="poi_tower_construction_freestanding">Construcció: independent</string>
+	<string name="poi_tower_construction_dish">Construcció: parabòlica</string>
+	<string name="poi_tower_construction_concealed">Construcció: camuflada</string>
+
+	<string name="poi_tower_construction_lattice">Estructura d\'acer</string>
+	<string name="poi_locomotive">Locomotora</string>
+
+	<string name="poi_cliff">Penya-segat</string>
+
+	<string name="poi_animal_keeping">Estable</string>
+	<string name="poi_animal_keeping_horse">Estable: cavalls</string>
+	<string name="poi_animal_keeping_sheep">Estable: ovelles</string>
+	<string name="poi_monument_yes">Monument</string>
+
+	<string name="poi_industrial_oil">Tipus: indústria petroliera</string>
+	<string name="poi_industrial_wellsite">Tipus: camp de pous</string>
+	<string name="poi_industrial_timber">Tipus: recursos forestals</string>
+	<string name="poi_industrial_auto_wrecker">Tipus: cementiri de cotxes</string>
+	<string name="poi_industrial_depot">Tipus: cotxera</string>
+
+	<string name="poi_quango">ONG quasi autònoma</string>
 	</resources>
