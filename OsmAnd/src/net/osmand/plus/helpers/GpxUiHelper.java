@@ -9,6 +9,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
+import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
@@ -34,6 +36,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.github.mikephil.charting.animation.ChartAnimator;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.Legend;
@@ -46,10 +49,14 @@ import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.formatter.IFillFormatter;
+import com.github.mikephil.charting.formatter.IValueFormatter;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.interfaces.dataprovider.LineDataProvider;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
+import com.github.mikephil.charting.renderer.LineChartRenderer;
 import com.github.mikephil.charting.utils.MPPointF;
+import com.github.mikephil.charting.utils.Transformer;
+import com.github.mikephil.charting.utils.ViewPortHandler;
 
 import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
@@ -867,6 +874,8 @@ public class GpxUiHelper {
 		mChart.setExtraTopOffset(24f);
 		mChart.setExtraBottomOffset(16f);
 
+		mChart.setRenderer(new SplineRenderer(mChart, mChart.getAnimator(), mChart.getViewPortHandler()));
+
 		// create a custom MarkerView (extend MarkerView) and specify the layout
 		// to use for it
 		GPXMarkerView mv = new GPXMarkerView(mChart.getContext());
@@ -969,6 +978,54 @@ public class GpxUiHelper {
 		return granularity;
 	}
 
+	private static List<Entry> calculateElevationArray(GPXTrackAnalysis analysis, float divX, float convEle) {
+		List<Entry> values = new ArrayList<>();
+		List<Elevation> elevationData = analysis.elevationData;
+		float nextX = 0;
+		float nextY;
+		float prevYM;
+		float elev;
+		float prevElevOrig = -80000;
+		float prevElev = 0;
+		int i = -1;
+		int lastIndex = elevationData.size() - 1;
+		float shift = 0f;
+		Entry lastEntry = null;
+		float lastXSameY = -1;
+		boolean hasSameY = false;
+		for (Elevation e : elevationData) {
+			i++;
+			if (e.distance > 0) {
+				nextX += (float) e.distance / divX;
+				elev = (float) e.elevation;
+				if (prevElevOrig != -80000) {
+					if (elev > prevElevOrig) {
+						elev -= 1f;
+					} else if (prevElevOrig == elev && i < lastIndex) {
+						hasSameY = true;
+						lastXSameY = nextX;
+						continue;
+					}
+					if (prevElev == elev && i < lastIndex) {
+						hasSameY = true;
+						lastXSameY = nextX;
+						continue;
+					}
+					if (hasSameY) {
+						values.add(new Entry(lastXSameY, lastEntry.getY()));
+					}
+					hasSameY = false;
+				}
+				prevElevOrig = (float) e.elevation;
+				prevElev = elev;
+				nextY = elev * convEle;
+				lastEntry = new Entry(nextX, nextY);
+				values.add(lastEntry);
+			}
+		}
+		return values;
+	}
+
 	public static OrderedLineDataSet createGPXElevationDataSet(OsmandApplication ctx, LineChart mChart, GPXTrackAnalysis analysis, boolean useRightAxis, boolean drawFilled) {
 		OsmandSettings settings = ctx.getSettings();
 		OsmandSettings.MetricsConstants mc = settings.METRIC_SYSTEM.get();
@@ -1020,76 +1077,7 @@ public class GpxUiHelper {
 			}
 		});
 
-		List<Entry> values = new ArrayList<>();
-		List<Elevation> elevationData = analysis.elevationData;
-		float nextX = 0;
-		float nextY;
-		float elev;
-		float prevElev = -80000;
-		int i = -1;
-		int lastIndex = elevationData.size() - 1;
-		float shift = 0f;
-		Entry entry = null;
-		for (Elevation e : elevationData) {
-			i++;
-			if (e.distance > 0) {
-				nextX += (float) e.distance / divX;
-				elev = (float) e.elevation;
-				if (prevElev != -80000) {
-					if (elev < prevElev) {
-						shift = 0f;
-					} else if (elev > prevElev) {
-						shift = -1f;
-					} else if (prevElev == elev && i < lastIndex) {
-						values.add(new Entry(nextX, entry.getY()));
-						continue;
-					}
-				}
-				prevElev = elev;
-				nextY = (elev + shift) * convEle;
-				entry = new Entry(nextX, nextY);
-				values.add(entry);
-			}
-		}
-
-		/*
-		List<Entry> newValues = new ArrayList<>();
-		Entry lastEntry = null;
-		i = -1;
-		lastIndex = values.size() - 1;
-		boolean hasSameY = false;
-		for (Entry e : values) {
-			i++;
-			if (lastEntry != null) {
-				if (lastEntry.getY() == e.getY() && i < lastIndex) {
-					hasSameY = true;
-					continue;
-				} else if (hasSameY) {
-					lastEntry.setX(lastEntry.getX() + (e.getX() - lastEntry.getX()) / 2f);
-					hasSameY = false;
-				}
-			}
-			newValues.add(e);
-			lastEntry = e;
-		}
-		*/
-
-		List<Point2D> points = new ArrayList<>(values.size());
-		for (Entry e : values) {
-			points.add(new Point2D(e.getX(), e.getY()));
-		}
-		List<Segment> spline = calculateSpline(points);
-		if (spline != null) {
-			int count = 8;
-			values = new ArrayList<>();
-			for (Segment s : spline) {
-				Point2D p = new Point2D();
-				for (i = 0; i < count; ++i) {
-					s.calc((double) i / (double) count, p);
-					values.add(new Entry((float) p.x, (float) p.y));
-				}
-			}
-		}
+		List<Entry> values = calculateElevationArray(analysis, divX, convEle);
 
 		OrderedLineDataSet dataSet = new OrderedLineDataSet(values, "", GPXDataSetType.ALTITUDE);
 		dataSet.priority = (float) (analysis.avgElevation - analysis.minElevation) * convEle;
@@ -1118,7 +1106,7 @@ public class GpxUiHelper {
 		dataSet.setDrawHorizontalHighlightIndicator(false);
 		dataSet.setHighLightColor(light ? mChart.getResources().getColor(R.color.secondary_text_light) : mChart.getResources().getColor(R.color.secondary_text_dark));
 
-		//dataSet.setCubicIntensity(.2f);
+		//dataSet.setMode(LineDataSet.Mode.HORIZONTAL_BEZIER);
 		//dataSet.setMode(LineDataSet.Mode.CUBIC_BEZIER);
 
 		dataSet.setFillFormatter(new IFillFormatter() {
@@ -1271,16 +1259,19 @@ public class GpxUiHelper {
 		mChart.setData(data);
 	}
 
-	public static OrderedLineDataSet createGPXSlopeDataSet(OsmandApplication ctx, LineChart mChart, GPXTrackAnalysis analysis, boolean useRightAxis, boolean drawFilled) {
+	public static OrderedLineDataSet createGPXSlopeDataSet(OsmandApplication ctx, LineChart mChart, GPXTrackAnalysis analysis, List<Entry> eleValues, boolean useRightAxis, boolean drawFilled) {
 		OsmandSettings settings = ctx.getSettings();
 		boolean light = settings.isLightContent();
-		final float meters = analysis.totalDistance;
+		OsmandSettings.MetricsConstants mc = settings.METRIC_SYSTEM.get();
+		boolean useFeet = (mc == OsmandSettings.MetricsConstants.MILES_AND_FEET) || (mc == OsmandSettings.MetricsConstants.MILES_AND_YARDS);
+		final float convEle = useFeet ? 3.28084f : 1.0f;
+		final float totalDistance = analysis.totalDistance;
 
 		float[] koef = new float[] { 1f };
 		StringBuilder fmt = new StringBuilder();
 		StringBuilder unitX = new StringBuilder();
 
-		float granularity = getXAxisParams(ctx, meters, koef, fmt, unitX);
+		float granularity = getXAxisParams(ctx, totalDistance, koef, fmt, unitX);
 		float divX = koef[0];
 		final String formatX = fmt.toString();
 		final String mainUnitX = unitX.toString();
@@ -1319,174 +1310,21 @@ public class GpxUiHelper {
 			}
 		});
 
-		/*
-		List<Entry> values = new ArrayList<>();
-		List<Elevation> elevationData = analysis.elevationData;
-		float nextX = 0;
-		float nextY;
-		float elev;
-		float prevElev = -80000;
-		int i = -1;
-		int lastIndex = elevationData.size() - 1;
-		float shift = 0f;
-		Entry entry = null;
-		for (Elevation e : elevationData) {
-			i++;
-			if (e.distance > 0) {
-				nextX += (float) e.distance / divX;
-				elev = (float) e.elevation;
-				nextY = elev + shift;
-				entry = new Entry(nextX, nextY);
-				values.add(entry);
-			}
-		}
-		*/
-
-		List<Entry> values = new ArrayList<>();
-		List<Elevation> elevationData = analysis.elevationData;
-		float nextX = 0;
-		float nextY;
-		float elev;
-		float prevElev = -80000;
-		int i = -1;
-		int lastIndex = elevationData.size() - 1;
-		float shift = 0f;
-		Entry entry = null;
-		for (Elevation e : elevationData) {
-			i++;
-			if (e.distance > 0) {
-				nextX += (float) e.distance;
-				elev = (float) e.elevation;
-				if (prevElev != -80000) {
-					if (elev < prevElev) {
-						shift = 0f;
-					} else if (elev > prevElev) {
-						shift = -1f;
-					} else if (prevElev == elev && i < lastIndex) {
-						values.add(new Entry(nextX, entry.getY()));
-						continue;
-					}
-				}
-				prevElev = elev;
-				nextY = (elev + shift);
-				entry = new Entry(nextX, nextY);
-				values.add(entry);
+		List<Entry> values;
+		if (eleValues == null) {
+			values = calculateElevationArray(analysis, 1f, 1f);
+		} else {
+			values = new ArrayList<>(eleValues.size());
+			for (Entry e : eleValues) {
+				values.add(new Entry(e.getX() * divX, e.getY() / convEle));
 			}
 		}
 
-		/*
-		List<Entry> eleValues = new ArrayList<>();
-		Entry lastEntry = null;
-		i = -1;
-		lastIndex = values.size() - 1;
-		boolean hasSameY = false;
-		for (Entry e : values) {
-			i++;
-			if (lastEntry != null) {
-				if (lastEntry.getY() == e.getY() && i < lastIndex) {
-					hasSameY = true;
-					continue;
-				} else if (hasSameY) {
-					lastEntry.setX(lastEntry.getX() + (e.getX() - lastEntry.getX()) / 2f);
-					hasSameY = false;
-				}
-			}
-			eleValues.add(e);
-			lastEntry = e;
+		if (values == null) {
+			return null;
 		}
 
-		List<Point2D> points = new ArrayList<>(eleValues.size());
-		for (Entry e : eleValues) {
-			points.add(new Point2D(e.getX(), e.getY()));
-		}
-		List<Segment> spline = calculateSpline(points);
-		if (spline != null) {
-			int count = 8;
-			eleValues = new ArrayList<>();
-			for (Segment s : spline) {
-				Point2D p = new Point2D();
-				for (i = 0; i < count; ++i) {
-					s.calc((double) i / (double) count, p);
-					eleValues.add(new Entry((float) p.x, (float) p.y));
-				}
-			}
-		}
-
-		values.clear();
-		//List<Elevation> elevationData = analysis.elevationData;
-		//float nextX;
-		//float nextY;
-		float nextXM;
-		float nextYM;
-		float prevXM;
-		float prevYM;
-		float delta = 150;
-		float prevDistM = -1;
-		float nextDistM;
-		float d;
-		if (eleValues.size() > 1) {
-			nextXM = eleValues.get(0).getX();
-			nextYM = eleValues.get(0).getY();
-			prevXM = nextXM;
-			prevYM = 0;
-			nextX = 0;
-			nextY = 0;
-			for (i = 1; i < eleValues.size(); i++) {
-				Entry e = eleValues.get(i);
-				d = e.getX() - prevXM;
-				if (d < delta && i < eleValues.size() - 1) {
-					continue;
-				}
-				if (prevDistM < 0) {
-					nextDistM = d / 2f;
-				} else {
-					nextDistM = prevDistM / 2f + d / 2f;
-				}
-				prevDistM = d;
-				if (nextX == 0) {
-					values.add(new Entry(prevXM / divX, 0));
-					prevXM = nextXM;
-					prevYM = nextYM;
-				}
-				nextXM = e.getX();
-				nextYM = e.getY();
-				nextX = (prevXM + nextDistM) / divX;
-				nextY = (nextYM - prevYM) / (nextXM - prevXM) * 100f;
-				if (Math.abs(nextY) < 120) {
-					values.add(new Entry(nextX, nextY));
-					prevXM = nextXM;
-					prevYM = nextYM;
-				}
-			}
-		}
-
-		points = new ArrayList<>(values.size());
-		for (Entry e : values) {
-			points.add(new Point2D(e.getX(), e.getY()));
-		}
-		spline = calculateSpline(points);
-		if (spline != null) {
-			int count = 8;
-			values = new ArrayList<>();
-			for (Segment s : spline) {
-				Point2D p = new Point2D();
-				for (i = 0; i < count; ++i) {
-					s.calc((double) i / (double) count, p);
-					values.add(new Entry((float) p.x, (float) p.y));
-				}
-			}
-		}
-		*/
-
-		double totalDistance = meters;
-		double[] dist = new double[values.size()];
-		double[] h = new double[values.size()];
-		i = 0;
-		for (Entry e : values) {
-			dist[i] = e.getX();
-			h[i] = e.getY();
-			i++;
-		}
+		int lastIndex = values.size() - 1;
 
 		double STEP = 5;
 
@@ -1497,34 +1335,56 @@ public class GpxUiHelper {
 			if (k > 0) {
 				calculatedDist[k] = calculatedDist[k - 1] + STEP;
 			}
-			while(nextW < lastIndex && calculatedDist[k] > dist[nextW]) {
+			while(nextW < lastIndex && calculatedDist[k] > values.get(nextW).getX()) {
 				nextW ++;
 			}
-			double pd = nextW == 0 ? 0 : dist[nextW - 1];
-			double ph = nextW == 0 ? h[0] : h[nextW - 1];
-			calculatedH[k] = ph + (h[nextW] - ph) / (dist[nextW] - pd) * (calculatedDist[k] - pd);
+			double pd = nextW == 0 ? 0 : values.get(nextW - 1).getX();
+			double ph = nextW == 0 ? values.get(0).getY() : values.get(nextW - 1).getY();
+			calculatedH[k] = ph + (values.get(nextW).getY() - ph) / (values.get(nextW).getX() - pd) * (calculatedDist[k] - pd);
 		}
 
-		double GREEN_PROXIMITY = 150;
+		double SLOPE_PROXIMITY = 150;
 
-		double[] calculatedGreenDist = new double[(int) ((totalDistance - GREEN_PROXIMITY) / STEP) + 1];
-		double[] calculatedGreenH = new double[(int) ((totalDistance - GREEN_PROXIMITY) / STEP) + 1];
+		double[] calculatedSlopeDist = new double[(int) ((totalDistance - SLOPE_PROXIMITY) / STEP) + 1];
+		double[] calculatedSlope = new double[(int) ((totalDistance - SLOPE_PROXIMITY) / STEP) + 1];
 
-		int index = (int) ((GREEN_PROXIMITY / STEP) / 2);
-		for (int k = 0; k < calculatedGreenDist.length; k++) {
-			calculatedGreenDist[k] = calculatedDist[index + k];
-			calculatedGreenH[k] = (calculatedH[ 2 * index + k] - calculatedH[k]) * 100 / GREEN_PROXIMITY;
-			if (Double.isNaN(calculatedGreenH[k])) {
-				calculatedGreenH[k] = 0;
+		int index = (int) ((SLOPE_PROXIMITY / STEP) / 2);
+		for (int k = 0; k < calculatedSlopeDist.length; k++) {
+			calculatedSlopeDist[k] = calculatedDist[index + k];
+			calculatedSlope[k] = (calculatedH[ 2 * index + k] - calculatedH[k]) * 100 / SLOPE_PROXIMITY;
+			if (Double.isNaN(calculatedSlope[k])) {
+				calculatedSlope[k] = 0;
 			}
 		}
 
-		values.clear();
-		for (i = 0; i < calculatedGreenDist.length; i++) {
-			values.add(new Entry((float) calculatedGreenDist[i] / divX, (float) calculatedGreenH[i]));
+		List<Entry> slopeValues = new ArrayList<>(calculatedSlopeDist.length);
+		float prevSlope = -80000;
+		float slope;
+		float x;
+		float lastXSameY = 0;
+		boolean hasSameY = false;
+		Entry lastEntry = null;
+		lastIndex = calculatedSlopeDist.length - 1;
+		for (int i = 0; i < calculatedSlopeDist.length; i++) {
+			x = (float) calculatedSlopeDist[i] / divX;
+			slope = (float) calculatedSlope[i];
+			if (prevSlope != -80000) {
+				if (prevSlope == slope && i < lastIndex) {
+					hasSameY = true;
+					lastXSameY = x;
+					continue;
+				}
+				if (hasSameY) {
+					slopeValues.add(new Entry(lastXSameY, lastEntry.getY()));
+				}
+				hasSameY = false;
+			}
+			prevSlope = slope;
+			lastEntry = new Entry(x, slope);
+			slopeValues.add(lastEntry);
 		}
 
-		OrderedLineDataSet dataSet = new OrderedLineDataSet(values, "", GPXDataSetType.SLOPE);
+		OrderedLineDataSet dataSet = new OrderedLineDataSet(slopeValues, "", GPXDataSetType.SLOPE);
 		dataSet.units = mainUnitY;
 
 		dataSet.setColor(ContextCompat.getColor(mChart.getContext(), R.color.gpx_chart_green));
@@ -1551,6 +1411,7 @@ public class GpxUiHelper {
 		dataSet.setHighLightColor(light ? mChart.getResources().getColor(R.color.secondary_text_light) : mChart.getResources().getColor(R.color.secondary_text_dark));
 
 		//dataSet.setMode(LineDataSet.Mode.HORIZONTAL_BEZIER);
+		//dataSet.setMode(LineDataSet.Mode.CUBIC_BEZIER);
 
 		/*
 		dataSet.setFillFormatter(new IFillFormatter() {
@@ -1567,7 +1428,7 @@ public class GpxUiHelper {
 	}
 
 	public static void setGPXSlopeChartData(OsmandApplication ctx, LineChart mChart, GPXTrackAnalysis analysis, boolean useRightAxis, boolean drawFilled) {
-		LineDataSet dataSet = createGPXSlopeDataSet(ctx, mChart, analysis, useRightAxis, drawFilled);
+		LineDataSet dataSet = createGPXSlopeDataSet(ctx, mChart, analysis, null, useRightAxis, drawFilled);
 		ArrayList<ILineDataSet> dataSets = new ArrayList<>();
 		dataSets.add(dataSet);
 		LineData data = new LineData(dataSets);
@@ -1586,14 +1447,31 @@ public class GpxUiHelper {
 
 		public float priority;
 		public String units;
+		public List<Segment> spline;
 
 		public OrderedLineDataSet(List<Entry> yVals, String label, GPXDataSetType dataSetType) {
 			super(yVals, label);
 			this.dataSetType = dataSetType;
+
+			/*
+			List<Point2D> points = new ArrayList<>(yVals.size());
+			for (Entry e : yVals) {
+				points.add(new Point2D(e.getX(), e.getY()));
+			}
+			spline = calculateSpline(points);
+			*/
 		}
 
 		public GPXDataSetType getDataSetType() {
 			return dataSetType;
+		}
+
+		public Segment getSegmentForEntryIndex(int index) {
+			if (index < spline.size()) {
+				return spline.get(index);
+			} else {
+				return spline.get(spline.size() - 1);
+			}
 		}
 	}
 
@@ -1918,5 +1796,71 @@ public class GpxUiHelper {
 		bezier.get(n).points[1].thisPlus(tgR.mult(l1));
 
 		return bezier;
+	}
+
+	public static class SplineRenderer extends LineChartRenderer {
+
+		public SplineRenderer(LineDataProvider chart, ChartAnimator animator, ViewPortHandler viewPortHandler) {
+			super(chart, animator, viewPortHandler);
+		}
+
+		@Override
+		protected void drawCubicBezier(ILineDataSet dataSet) {
+			if (!(dataSet instanceof OrderedLineDataSet)) {
+				super.drawCubicBezier(dataSet);
+			} else {
+
+				OrderedLineDataSet ds = (OrderedLineDataSet) dataSet;
+
+				float phaseY = mAnimator.getPhaseY();
+
+				Transformer trans = mChart.getTransformer(dataSet.getAxisDependency());
+
+				mXBounds.set(mChart, dataSet);
+
+				cubicPath.reset();
+
+				if (mXBounds.range >= 1) {
+
+					final int firstIndex = mXBounds.min + 1;
+					final int lastIndex = mXBounds.min + mXBounds.range;
+
+					Segment seg = ds.getSegmentForEntryIndex(Math.max(firstIndex - 1, 0));
+
+					if (seg == null) return;
+
+					// let the spline start
+					cubicPath.moveTo((float) seg.points[0].x, (float) seg.points[0].y * phaseY);
+
+					for (int j = firstIndex; j <= lastIndex; j++) {
+
+						seg = ds.getSegmentForEntryIndex(j);
+
+						cubicPath.cubicTo((float) seg.points[1].x, (float) seg.points[1].y * phaseY,
+								(float) seg.points[2].x, (float) seg.points[2].y * phaseY,
+								(float) seg.points[3].x, (float) seg.points[3].y * phaseY);
+					}
+				}
+
+				// if filled is enabled, close the path
+				if (ds.isDrawFilledEnabled()) {
+
+					cubicFillPath.reset();
+					cubicFillPath.addPath(cubicPath);
+
+					drawCubicFill(mBitmapCanvas, ds, cubicFillPath, trans, mXBounds);
+				}
+
+				mRenderPaint.setColor(ds.getColor());
+
+				mRenderPaint.setStyle(Paint.Style.STROKE);
+
+				trans.pathValueToPixel(cubicPath);
+
+				mBitmapCanvas.drawPath(cubicPath, mRenderPaint);
+
+				mRenderPaint.setPathEffect(null);
+			}
+		}
 	}
 }
