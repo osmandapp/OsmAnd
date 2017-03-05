@@ -306,7 +306,7 @@
 	<string name="poi_religion_christian">Kristanismo</string>
 	<string name="poi_religion_jewish">Judismo</string>
 	<string name="poi_religion_muslim">Islamo</string>
-	<string name="poi_theatre">Teatro</string>
+	<string name="poi_theatre">Teatrejo</string>
 	<string name="poi_theatre_genre_circus">Cirko</string>
 	<string name="poi_nightclub">Noktoklubejo</string>
 	<string name="poi_playground">Infana ludejo</string>
@@ -868,7 +868,7 @@
 	<string name="poi_village_green">Verda tereno</string>
 	<string name="poi_trail_riding_station">Parkumejo ĉevala</string>
 
-	<string name="poi_food_court">Manĝo-bazaro</string>
+	<string name="poi_food_court">Manĝobazaro</string>
 	<string name="poi_drinking_water">Trinkakvejo</string>
 	<string name="poi_barbecue">Rostilo</string>
 
@@ -1647,15 +1647,15 @@
 	<string name="poi_vending_public_transport_tickets">Biletoj publik-transportaj</string>
 	<string name="poi_vending_drinks">Trinkaĵoj</string>
 	<string name="poi_vending_sweets">Sukeraĵoj</string>
-	<string name="poi_vending_condoms">Penisingoj</string>
-	<string name="poi_vending_parcel_pickup_mail_in">Ricevo kaj sendo de pakaĵoj</string>
+	<string name="poi_vending_condoms">Kondomoj</string>
+	<string name="poi_vending_parcel_pickup_mail_in">Ricevo kaj sendo de poŝtaĵoj</string>
 	<string name="poi_vending_stamps">Poŝtmarkoj</string>
 	<string name="poi_vending_bicycle_tube">Biciklaj aertuboj</string>
 	<string name="poi_vending_food">Manĝaĵoj</string>
 	<string name="poi_vending_drinks_food">Trinkaĵoj kaj manĝaĵoj</string>
 	<string name="poi_vending_fuel">Brulaĵo</string>
-	<string name="poi_vending_parcel_pickup">Ricevo de pakaĵoj</string>
-	<string name="poi_vending_parcel_mail_in">Sendo de pakaĵoj</string>
+	<string name="poi_vending_parcel_pickup">Ricevo de poŝtaĵoj</string>
+	<string name="poi_vending_parcel_mail_in">Sendo de poŝtaĵoj</string>
 	<string name="poi_vending_milk">Lakto</string>
 	<string name="poi_vending_elongated_coin">Etenditaj moneroj</string>
 	<string name="poi_vending_bread">Panoj</string>
