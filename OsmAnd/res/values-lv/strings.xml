@@ -2823,4 +2823,36 @@ Ja jums ir vajadzīga palīdzība ar OsmAnd aplikāciju, lūdzu kontaktējieties
  "</string>
     <string name="rendering_attr_depthContours_description">Rādīt dziļuma kontūras un punktus</string>
     <string name="rendering_attr_depthContours_name">Dziļuma kontūras</string>
-	</resources>
+	<string name="add_new_folder">Pievienot jaunu mapi</string>
+    <string name="points_delete_multiple_succesful">Punkts(i) izdzēsts veiksmīgi.</string>
+    <string name="points_delete_multiple">Jūs izdzēsīsiet %1$d punktu(us). Vai turpināt?</string>
+    <string name="route_points_category_name">Punkti maršruta ceļā</string>
+    <string name="track_points_category_name">Izceltie punkti maršrutā</string>
+    <string name="gpx_track">Treks</string>
+    <string name="max_speed">Maks. ātrums</string>
+    <string name="average_speed">Vidējais ātrums</string>
+    <string name="shared_string_time_moving">Laiks kustībā</string>
+    <string name="shared_string_time_span">Laika sprīdis</string>
+    <string name="shared_string_max">Maks.</string>
+    <string name="shared_string_start_time">Starta laiks</string>
+    <string name="shared_string_end_time">Finiša laiks</string>
+    <string name="shared_string_color">Krāsa</string>
+    <string name="select_gpx_folder">Izvēlieties treku mapi</string>
+    <string name="file_can_not_be_moved">Fails nevar tikt pārvietots.</string>
+    <string name="shared_string_move">Pārvietot</string>
+    <string name="shared_string_tracks">Treki</string>
+    <string name="routing_attr_driving_style_name">Braukšanas stils</string>
+    <string name="routing_attr_driving_style_description">Droša, ātra vai balancēta braukšana</string>
+    <string name="route_altitude">Maršruta altitūda</string>
+    <string name="altitude_descent">Pazeminās</string>
+    <string name="altitude_ascent">Paaugstinās</string>
+    <string name="altitude_range">Altitūdas diapazons</string>
+    <string name="average_altitude">Vidējā altitūda</string>
+    <string name="shared_string_time">Laiks</string>
+    <string name="total_distance">Maršruta kopējais garums</string>
+    <string name="routing_attr_height_relief_smoothness_factor_name">Reljefa gluduma koeficients</string>
+    <string name="routing_attr_height_relief_smoothness_factor_description">Līdzenāks vai kalnaināks reljefs</string>
+    <string name="routing_attr_height_obstacles_name">Lietot elevācijas datus</string>
+    <string name="routing_attr_height_obstacles_description">Lietot apgabala elevācijas datus no SRTM, ASTER un EU-DEM</string>
+
+    </resources>
