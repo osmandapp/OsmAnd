@@ -225,16 +225,20 @@ public class ShowRouteInfoDialogFragment extends DialogFragment {
 		});
 
 		GPXTrackAnalysis analysis = gpx.getAnalysis(0);
-		List<ILineDataSet> dataSets = new ArrayList<>();
-		GpxUiHelper.OrderedLineDataSet elevationDataSet = GpxUiHelper.createGPXElevationDataSet(app, mChart, analysis, false, true);
-		dataSets.add(elevationDataSet);
-		if (analysis.elevationData.size() > 1) {
-			GpxUiHelper.OrderedLineDataSet slopeDataSet = GpxUiHelper.createGPXSlopeDataSet(app, mChart, analysis, true, true);
-			dataSets.add(slopeDataSet);
+		if (analysis.totalDistance > 0) {
+			List<ILineDataSet> dataSets = new ArrayList<>();
+			GpxUiHelper.OrderedLineDataSet elevationDataSet = GpxUiHelper.createGPXElevationDataSet(app, mChart, analysis, false, true);
+			dataSets.add(elevationDataSet);
+			if (analysis.elevationData.size() > 1) {
+				GpxUiHelper.OrderedLineDataSet slopeDataSet = GpxUiHelper.createGPXSlopeDataSet(app, mChart, analysis, elevationDataSet.getValues(), true, true);
+				dataSets.add(slopeDataSet);
+			}
+			LineData data = new LineData(dataSets);
+			mChart.setData(data);
+			mChart.setVisibility(View.VISIBLE);
+		} else {
+			mChart.setVisibility(View.GONE);
 		}
-		LineData data = new LineData(dataSets);
-		mChart.setData(data);
-
 		((TextView) headerView.findViewById(R.id.average_text))
 				.setText(OsmAndFormatter.getFormattedAlt(analysis.avgElevation, app));
 

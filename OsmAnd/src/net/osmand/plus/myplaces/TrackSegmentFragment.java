@@ -543,6 +543,11 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 		}
 
 		@Override
+		public boolean isEmpty() {
+			return false;
+		}
+
+		@Override
 		public void clear() {
 			super.clear();
 			pagerAdaptersMap.clear();
@@ -740,7 +745,8 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 						case GPX_TAB_ITEM_GENERAL:
 							if (analysis != null) {
 								List<ILineDataSet> dataSets = new LinkedList<>();
-								if (analysis.elevationData != null || analysis.isSpeedSpecified()) {
+								if ((analysis.elevationData != null && analysis.totalDistance > 0)
+										|| analysis.isSpeedSpecified()) {
 									GpxUiHelper.setupGPXChart(app, chart, 4);
 									OrderedLineDataSet speedDataSet = null;
 									OrderedLineDataSet elevationDataSet = null;
@@ -810,13 +816,13 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 							break;
 						case GPX_TAB_ITEM_ALTITUDE:
 							if (analysis != null) {
-								if (analysis.elevationData != null) {
+								if (analysis.elevationData != null && analysis.totalDistance > 0) {
 									GpxUiHelper.setupGPXChart(app, chart, 4);
 									List<ILineDataSet> dataSets = new ArrayList<>();
 									OrderedLineDataSet elevationDataSet = GpxUiHelper.createGPXElevationDataSet(app, chart, analysis, false, true);
 									dataSets.add(elevationDataSet);
 									if (analysis.elevationData.size() > 1) {
-										OrderedLineDataSet slopeDataSet = GpxUiHelper.createGPXSlopeDataSet(app, chart, analysis, true, true);
+										OrderedLineDataSet slopeDataSet = GpxUiHelper.createGPXSlopeDataSet(app, chart, analysis, elevationDataSet.getValues(), true, true);
 										dataSets.add(slopeDataSet);
 									}
 									LineData data = new LineData(dataSets);
@@ -861,8 +867,13 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 							break;
 						case GPX_TAB_ITEM_SPEED:
 							if (analysis != null && analysis.isSpeedSpecified()) {
-								GpxUiHelper.setupGPXChart(app, chart, 4);
-								GpxUiHelper.setGPXSpeedChartData(app, chart, analysis, false, true);
+								if (analysis.totalDistance > 0) {
+									GpxUiHelper.setupGPXChart(app, chart, 4);
+									GpxUiHelper.setGPXSpeedChartData(app, chart, analysis, false, true);
+									chart.setVisibility(View.VISIBLE);
+								} else {
+									chart.setVisibility(View.GONE);
+								}
 								((ImageView) view.findViewById(R.id.average_icon))
 										.setImageDrawable(ic.getThemedIcon(R.drawable.ic_action_speed));
 								((ImageView) view.findViewById(R.id.max_icon))
