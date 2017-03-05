@@ -41,6 +41,7 @@ import net.osmand.AndroidUtils;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.GPXDatabase;
 import net.osmand.plus.GPXUtilities;
+import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
@@ -87,7 +88,8 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 	public static final String ARG_TO_FILTER_SHORT_TRACKS = "ARG_TO_FILTER_SHORT_TRACKS";
 
 	private OsmandApplication app;
-	private ArrayAdapter<GpxDisplayItem> adapter;
+	private SegmentGPXAdapter adapter;
+	private View headerView;
 
 	private GpxDisplayItemType[] filterTypes = { GpxSelectionHelper.GpxDisplayItemType.TRACK_SEGMENT };
 	private List<String> options = new ArrayList<>();
@@ -160,7 +162,7 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 		}
 	}
 
-	private GPXUtilities.GPXFile getGpx() {
+	private GPXFile getGpx() {
 		return getMyActivity().getGpx();
 	}
 
@@ -199,16 +201,18 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 	}
 
 	private void setupListView(ListView listView) {
-		View view = getActivity().getLayoutInflater().inflate(R.layout.gpx_item_list_header, null, false);
-		listView.addHeaderView(view);
-		listView.addFooterView(getActivity().getLayoutInflater().inflate(R.layout.list_shadow_footer, null, false));
-		final ImageView imageView = (ImageView) view.findViewById(R.id.imageView);
-		final View splitColorView = view.findViewById(R.id.split_color_view);
-		final View divider = view.findViewById(R.id.divider);
-		final View splitIntervalView = view.findViewById(R.id.split_interval_view);
-		final View colorView = view.findViewById(R.id.color_view);
-		final SwitchCompat vis = (SwitchCompat) view.findViewById(R.id.showOnMapToggle);
-		vis.setChecked(app.getSelectedGpxHelper().getSelectedFileByPath(getGpx().path) != null);
+		if (headerView == null) {
+			headerView = getActivity().getLayoutInflater().inflate(R.layout.gpx_item_list_header, null, false);
+			listView.addHeaderView(headerView);
+			listView.addFooterView(getActivity().getLayoutInflater().inflate(R.layout.list_shadow_footer, null, false));
+		}
+		final ImageView imageView = (ImageView) headerView.findViewById(R.id.imageView);
+		final View splitColorView = headerView.findViewById(R.id.split_color_view);
+		final View divider = headerView.findViewById(R.id.divider);
+		final View splitIntervalView = headerView.findViewById(R.id.split_interval_view);
+		final View colorView = headerView.findViewById(R.id.color_view);
+		final SwitchCompat vis = (SwitchCompat) headerView.findViewById(R.id.showOnMapToggle);
+		vis.setChecked(getGpx() != null && app.getSelectedGpxHelper().getSelectedFileByPath(getGpx().path) != null);
 		vis.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -322,6 +326,8 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 					popup.show();
 				}
 			});
+			splitColorView.setVisibility(View.VISIBLE);
+			divider.setVisibility(View.VISIBLE);
 		} else {
 			splitColorView.setVisibility(View.GONE);
 			divider.setVisibility(View.GONE);
@@ -366,8 +372,8 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 
 	private void updateColorView(View colorView) {
 		final ImageView colorImageView = (ImageView) colorView.findViewById(R.id.colorImage);
-		int color = getGpxDataItem().getColor();
-		if (color == 0) {
+		int color = getGpxDataItem() != null ? getGpxDataItem().getColor() : 0;
+		if (color == 0 && getGpx() != null) {
 			color = getGpx().getColor(0);
 		}
 		if (color == 0) {
@@ -426,10 +432,16 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 	}
 
 	public void setContent(ListView listView) {
-		adapter = new SegmentGPXAdapter(new ArrayList<GpxDisplayItem>());
+		if (adapter == null) {
+			adapter = new SegmentGPXAdapter(new ArrayList<GpxDisplayItem>());
+		} else {
+			adapter.clear();
+		}
 		updateContent();
 		setupListView(listView);
-		setListAdapter(adapter);
+		if (listView.getAdapter() == null) {
+			setListAdapter(adapter);
+		}
 	}
 
 	protected void updateContent() {
@@ -601,13 +613,13 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 		}
 	}
 
-	enum GPXTabItemType {
+	private enum GPXTabItemType {
 		GPX_TAB_ITEM_GENERAL,
 		GPX_TAB_ITEM_ALTITUDE,
 		GPX_TAB_ITEM_SPEED
 	}
 
-	class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvider, ViewAtPositionInterface {
+	private class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvider, ViewAtPositionInterface {
 
 		protected SparseArray<View> views = new SparseArray<>();
 		private PagerSlidingTabStrip tabs;

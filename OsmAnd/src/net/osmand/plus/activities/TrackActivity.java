@@ -1,6 +1,3 @@
-/**
- *
- */
 package net.osmand.plus.activities;
 
 import android.content.Intent;

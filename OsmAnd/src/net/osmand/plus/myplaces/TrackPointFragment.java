@@ -54,7 +54,6 @@ import net.osmand.plus.activities.TrackActivity;
 import net.osmand.plus.base.FavoriteImageDrawable;
 import net.osmand.plus.base.OsmandExpandableListFragment;
 import net.osmand.plus.dialogs.DirectionsDialogs;
-import net.osmand.plus.mapcontextmenu.editors.WptPtEditor;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -141,7 +140,7 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 	}
 
 	private void setupListView(ListView listView) {
-		if (!adapter.isEmpty()) {
+		if (!adapter.isEmpty() && listView.getHeaderViewsCount() == 0) {
 			listView.addHeaderView(getActivity().getLayoutInflater().inflate(R.layout.list_shadow_header, null, false));
 			listView.addFooterView(getActivity().getLayoutInflater().inflate(R.layout.list_shadow_footer, null, false));
 		}
@@ -187,12 +186,15 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 
 	public void setContent() {
 		setContent(listView);
+		expandAllGroups();
 	}
 
 	public void setContent(ExpandableListView listView) {
 		adapter.synchronizeGroups(filterGroups());
 		setupListView(listView);
-		listView.setAdapter(adapter);
+		if (listView.getAdapter() == null) {
+			listView.setAdapter(adapter);
+		}
 	}
 
 	protected List<GpxDisplayItem> flatten(List<GpxDisplayGroup> groups) {
