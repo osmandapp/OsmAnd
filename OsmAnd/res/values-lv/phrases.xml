@@ -2751,4 +2751,6 @@
 	<string name="poi_health_specialty_obstetrics_antenatal_no">Ginekoloģija (pirmsdzemdību): nav</string>
 	<string name="poi_health_specialty_obstetrics_caesarean_section_yes">Ginekoloģija (ķeizargrieziena)</string>
 	<string name="poi_health_specialty_obstetrics_caesarean_section_no">Ginekoloģija (ķeizargrieziena): nav</string>
+	<string name="poi_stone_type_coat_of_arms">Tips: ğerbonis</string>
+
 	</resources>
