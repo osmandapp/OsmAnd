@@ -368,10 +368,13 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 										   List<SelectedGpxFile> selectedGPXFiles, DrawSettings settings) {
 
 		for (SelectedGpxFile g : selectedGPXFiles) {
-			GpxDataItem gpxDataItem = view.getApplication().getGpxDatabase().getItem(new File(g.getGpxFile().path));
+			GpxDataItem gpxDataItem = null;
+			if (!g.isShowCurrentTrack()) {
+				gpxDataItem = view.getApplication().getGpxDatabase().getItem(new File(g.getGpxFile().path));
+			}
 			List<TrkSegment> segments = g.getPointsToDisplay();
 			for (TrkSegment ts : segments) {
-				int color = gpxDataItem.getColor();
+				int color = gpxDataItem != null ? gpxDataItem.getColor() : 0;
 				if (color == 0) {
 					color = ts.getColor(cachedColor);
 				}
