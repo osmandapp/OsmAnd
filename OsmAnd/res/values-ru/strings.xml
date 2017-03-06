@@ -1,5 +1,23 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
+    <string name="shared_string_slope">Уклон</string>
+    <string name="add_new_folder">Добавить новую папку</string>
+    <string name="points_delete_multiple_succesful">Удалено успешно</string>
+    <string name="points_delete_multiple">Вы собираетесь удалить %1$d точку(и). Вы уверены?</string>
+    <string name="route_points_category_name">Точки для прохождения</string>
+    <string name="track_points_category_name">Важные точки маршрута</string>
+    <string name="gpx_track">Track</string>
+    <string name="max_speed">Макс. скорость</string>
+    <string name="average_speed">Средняя скорость</string>
+    <string name="shared_string_time_moving">Время в движении</string>
+    <string name="shared_string_time_span">Общее время</string>
+    <string name="shared_string_max">Макс.</string>
+    <string name="shared_string_start_time">Время начала</string>
+    <string name="shared_string_end_time">Время окончания</string>
+    <string name="shared_string_color">Цвет</string>
+    <string name="select_gpx_folder">Выберите папку для треков</string>
+    <string name="shared_string_move">Переместить</string>
+    <string name="shared_string_tracks">Треки</string>
     <string name="altitude_descent">Спуск</string>
     <string name="altitude_ascent">Подъём</string>
     <string name="altitude_range">Диапазон высот</string>
