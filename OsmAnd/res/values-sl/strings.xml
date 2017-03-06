@@ -2661,7 +2661,7 @@ V kolikor naletite na težave s programom OsmAnd, prosimo, stopite v stik s skup
     <string name="upload_poi">Pošlji točko POI</string>
     <string name="route_calculation">Izračunavanje poti</string>
     <string name="gpx_no_tracks_title">Ni še shranjenih poti</string>
-    <string name="gpx_no_tracks_title_folder">Mogoče je dodati tudi poti v mape</string>
+    <string name="gpx_no_tracks_title_folder">Poti so shranjene v mapi</string>
     <string name="gpx_add_track">Dodaj pot</string>
     <string name="gpx_appearance">Videz</string>
     <string name="rendering_value_fine_name">Drobno</string>
