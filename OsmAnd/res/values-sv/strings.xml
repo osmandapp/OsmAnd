@@ -2520,4 +2520,9 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="route_points_category_name">Punkter längs rutten att passera</string>
     <string name="track_points_category_name">Viktiga punkter längs denna rutt</string>
     <string name="gpx_track">Spår</string>
-    </resources>
+    <string name="shared_string_action_name">Åtgärdsnamn</string>
+<string name="quick_action_map_overlay_title">Kartöverlägg</string>
+    <string name="quick_action_map_overlay_action">Lägg till överlägg</string>
+    <string name="quick_action_map_overlay_switch">"Kartöverlägget har ändrats till  \"%s\"."</string>
+    <string name="quick_action_btn_tutorial_descr">Tryck länge och dra knappen för att ändra dess position på skärmen</string>
+	</resources>
