@@ -45,7 +45,7 @@ public class OsmAndFormatter {
 		}
 	}
 
-	public static String getFormattedDurationShort(int seconds, OsmandApplication ctx) {
+	public static String getFormattedDurationShort(int seconds) {
 		int hours = seconds / (60 * 60);
 		int minutes = (seconds / 60) % 60;
 		int sec = seconds % 60;

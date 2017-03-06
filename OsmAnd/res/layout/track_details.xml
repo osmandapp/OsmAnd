@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:background="@color/color_transparent"
     android:clickable="true"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:osmand="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
         android:id="@+id/top_bar_layout"
@@ -14,6 +15,7 @@
         android:layout_height="wrap_content"
         android:minHeight="@dimen/dashboard_map_toolbar"
         android:gravity="center_vertical"
+        android:clickable="true"
         android:background="@drawable/gradient_toolbar"
         android:orientation="horizontal">
 
@@ -36,7 +38,7 @@
             android:paddingBottom="10dp"
             android:paddingTop="10dp">
 
-            <TextView
+            <net.osmand.plus.widgets.TextViewEx
                 android:id="@+id/top_bar_title"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -45,8 +47,9 @@
                 android:gravity="center_vertical"
                 android:lines="1"
                 android:singleLine="true"
-                android:textColor="?android:textColorPrimary"
+                android:textColor="@color/color_white"
                 android:textSize="@dimen/abc_text_size_medium_material"
+                osmand:typeface="@string/font_roboto_medium"
                 android:text="@string/rendering_category_details"/>
 
             <TextView
@@ -62,6 +65,8 @@
                 tools:text="New version of OsmAnd+ with 50% discount"/>
 
         </LinearLayout>
+
+
 
     </LinearLayout>
 
@@ -85,7 +90,7 @@
                 android:orientation="horizontal">
 
                 <LinearLayout
-                    android:id="@+id/left_axis"
+                    android:id="@+id/y_axis"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/list_item_height"
                     android:layout_weight="1"
@@ -95,7 +100,7 @@
                     android:gravity="center_vertical">
 
                     <ImageView
-                        android:id="@+id/left_axis_icon"
+                        android:id="@+id/y_axis_icon"
                         android:layout_width="@dimen/standard_icon_size"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/list_content_padding"
@@ -103,7 +108,7 @@
                         android:src="@drawable/ic_action_altitude_average"/>
 
                     <TextView
-                        android:id="@+id/left_axis_title"
+                        android:id="@+id/y_axis_title"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -113,7 +118,7 @@
                         tools:text="@string/altitude"/>
 
                     <ImageView
-                        android:id="@+id/left_axis_arrow"
+                        android:id="@+id/y_axis_arrow"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_marginRight="@dimen/list_content_padding"
@@ -122,7 +127,7 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/right_axis"
+                    android:id="@+id/x_axis"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/list_item_height"
                     android:layout_weight="1"
@@ -139,25 +144,25 @@
                         android:focusable="false"/>
 
                     <ImageView
-                        android:id="@+id/right_axis_icon"
+                        android:id="@+id/x_axis_icon"
                         android:layout_width="@dimen/standard_icon_size"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/list_content_padding"
                         android:layout_marginRight="@dimen/list_content_padding"
-                        android:src="@drawable/ic_action_speed"/>
+                        android:src="@drawable/ic_action_marker_dark"/>
 
                     <TextView
-                        android:id="@+id/right_axis_title"
+                        android:id="@+id/x_axis_title"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:layout_marginRight="@dimen/list_content_padding"
                         android:textColor="?android:attr/textColorPrimary"
                         android:textSize="@dimen/default_list_text_size"
-                        tools:text="@string/map_widget_speed"/>
+                        tools:text="@string/distance"/>
 
                     <ImageView
-                        android:id="@+id/right_axis_arrow"
+                        android:id="@+id/x_axis_arrow"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_marginRight="@dimen/list_content_padding"

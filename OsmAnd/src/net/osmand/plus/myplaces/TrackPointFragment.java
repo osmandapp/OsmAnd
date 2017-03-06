@@ -796,6 +796,9 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 							public boolean onMenuItemClick(MenuItem mItem) {
 								final OsmandSettings settings = app.getSettings();
 								LatLon location = new LatLon(gpxItem.locationStart.lat, gpxItem.locationStart.lon);
+								if (gpxItem.group.getGpx() != null) {
+									app.getSelectedGpxHelper().setGpxFileToDisplay(gpxItem.group.getGpx());
+								}
 								settings.setMapLocationToShow(location.getLatitude(), location.getLongitude(),
 										settings.getLastKnownMapZoom(),
 										new PointDescription(PointDescription.POINT_TYPE_WPT, gpxItem.name),

@@ -92,10 +92,14 @@ public class GPXUtilities {
 	}
 
 	public static class Elevation {
-		public double distance, elevation;
+		public double distance;
+		public int time;
+		public double elevation;
 	}
 	public static class Speed {
-		public double distance, speed;
+		public double distance;
+		public int time;
+		public double speed;
 	}
 
 	public static class WptPt extends GPXExtensions implements LocationPoint {
@@ -311,6 +315,7 @@ public class GPXUtilities {
 			float totalElevation = 0;
 			int elevationPoints = 0;
 			int speedCount = 0;
+			int timeDiff = 0;
 			double totalSpeedSum = 0;
 			points = 0;
 
@@ -443,6 +448,8 @@ public class GPXUtilities {
 						// a little more exact, also seems slightly faster:
 						net.osmand.Location.distanceBetween(prev.lat, prev.lon, point.lat, point.lon, calculations);
 						totalDistance += calculations[0];
+						point.distance = totalDistance;
+						timeDiff = (int)((point.time - prev.time) / 1000);
 
 						// Motion detection:
 						//   speed > 0  uses GPS chipset's motion detection
@@ -459,8 +466,10 @@ public class GPXUtilities {
 
 					}
 
+					elevation1.time = timeDiff;
 					elevation1.distance = (j > 0) ? calculations[0] : 0;
 					elevationData.add(elevation1);
+					speed1.time = timeDiff;
 					speed1.distance = elevation1.distance;
 					speedData.add(speed1);
 				}

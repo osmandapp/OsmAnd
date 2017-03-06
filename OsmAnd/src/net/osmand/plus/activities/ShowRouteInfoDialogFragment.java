@@ -43,6 +43,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.GpxUiHelper;
+import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetAxisType;
 import net.osmand.plus.mapcontextmenu.other.MapRouteInfoMenu;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
@@ -227,10 +228,12 @@ public class ShowRouteInfoDialogFragment extends DialogFragment {
 		GPXTrackAnalysis analysis = gpx.getAnalysis(0);
 		if (analysis.totalDistance > 0) {
 			List<ILineDataSet> dataSets = new ArrayList<>();
-			GpxUiHelper.OrderedLineDataSet elevationDataSet = GpxUiHelper.createGPXElevationDataSet(app, mChart, analysis, false, true);
+			GpxUiHelper.OrderedLineDataSet elevationDataSet =
+					GpxUiHelper.createGPXElevationDataSet(app, mChart, analysis, GPXDataSetAxisType.DISTANCE, false, true);
 			dataSets.add(elevationDataSet);
 			if (analysis.elevationData.size() > 1) {
-				GpxUiHelper.OrderedLineDataSet slopeDataSet = GpxUiHelper.createGPXSlopeDataSet(app, mChart, analysis, elevationDataSet.getValues(), true, true);
+				GpxUiHelper.OrderedLineDataSet slopeDataSet =
+						GpxUiHelper.createGPXSlopeDataSet(app, mChart, analysis, GPXDataSetAxisType.DISTANCE, elevationDataSet.getValues(), true, true);
 				dataSets.add(slopeDataSet);
 			}
 			LineData data = new LineData(dataSets);

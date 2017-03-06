@@ -36,6 +36,7 @@ public class TrackActivity extends TabActivity {
 	public static final String TRACK_FILE_NAME = "TRACK_FILE_NAME";
 	public static final String CURRENT_RECORDING = "CURRENT_RECORDING";
 	protected List<WeakReference<Fragment>> fragList = new ArrayList<>();
+	protected PagerSlidingTabStrip slidingTabLayout;
 	private File file = null;
 	private GPXFile gpxFile;
 	private GpxDataItem gpxDataItem;
@@ -43,6 +44,7 @@ public class TrackActivity extends TabActivity {
 	private long modifiedTime = -1;
 	private List<GpxDisplayGroup> displayGroups;
 	private List<GpxDisplayGroup> originalGroups = new ArrayList<>();
+	private boolean stopped = false;
 
 	@Override
 	public void onCreate(Bundle icicle) {
@@ -69,7 +71,7 @@ public class TrackActivity extends TabActivity {
 		}
 		setContentView(R.layout.tab_content);
 
-		final PagerSlidingTabStrip slidingTabLayout = (PagerSlidingTabStrip) findViewById(R.id.sliding_tabs);
+		slidingTabLayout = (PagerSlidingTabStrip) findViewById(R.id.sliding_tabs);
 		if (slidingTabLayout != null) {
 			slidingTabLayout.setShouldExpand(true);
 
@@ -85,34 +87,54 @@ public class TrackActivity extends TabActivity {
 
 				@Override
 				protected GPXFile doInBackground(Void... params) {
+					long startTime = System.currentTimeMillis();
+					GPXFile result = null;
 					if (file == null) {
-						return getMyApplication().getSavingTrackHelper().getCurrentGpx();
+						result = getMyApplication().getSavingTrackHelper().getCurrentGpx();
+					} else {
+						SelectedGpxFile selectedGpxFile = getMyApplication().getSelectedGpxHelper().getSelectedFileByPath(file.getAbsolutePath());
+						if (selectedGpxFile != null && selectedGpxFile.getGpxFile() != null) {
+							result = selectedGpxFile.getGpxFile();
+						} else {
+							result = GPXUtilities.loadGPXFile(TrackActivity.this, file);
+						}
 					}
-					return GPXUtilities.loadGPXFile(TrackActivity.this, file);
+					if (result != null) {
+						while (System.currentTimeMillis() - startTime < 200) {
+							try {
+								Thread.sleep(50);
+							} catch (InterruptedException e) {
+								// ignore
+							}
+						}
+					}
+					return result;
 				}
 
 				protected void onPostExecute(GPXFile result) {
 					setSupportProgressBarIndeterminateVisibility(false);
 
-					setGpx(result);
-					setGpxDataItem(getMyApplication().getGpxDatabase().getItem(file));
+					if (!stopped) {
+						setGpx(result);
+						setGpxDataItem(getMyApplication().getGpxDatabase().getItem(file));
 
-					for (WeakReference<Fragment> f : fragList) {
-						Fragment frag = f.get();
-						if (frag instanceof TrackSegmentFragment) {
-							((TrackSegmentFragment) frag).setContent();
-						} else if (frag instanceof TrackPointFragment) {
-							((TrackPointFragment) frag).setContent();
+						for (WeakReference<Fragment> f : fragList) {
+							Fragment frag = f.get();
+							if (frag instanceof TrackSegmentFragment) {
+								((TrackSegmentFragment) frag).updateContent();
+							} else if (frag instanceof TrackPointFragment) {
+								((TrackPointFragment) frag).setContent();
+							}
 						}
-					}
-					((OsmandFragmentPagerAdapter) mViewPager.getAdapter()).addTab(
-							getTabIndicator(R.string.gpx_track, TrackSegmentFragment.class));
-					if (isHavingWayPoints() || isHavingRoutePoints()) {
 						((OsmandFragmentPagerAdapter) mViewPager.getAdapter()).addTab(
-								getTabIndicator(R.string.points, TrackPointFragment.class));
-					} else {
-						slidingTabLayout.setVisibility(View.GONE);
-						getSupportActionBar().setElevation(AndroidUtils.dpToPx(getMyApplication(), 4f));
+								getTabIndicator(R.string.gpx_track, TrackSegmentFragment.class));
+						if (isHavingWayPoints() || isHavingRoutePoints()) {
+							((OsmandFragmentPagerAdapter) mViewPager.getAdapter()).addTab(
+									getTabIndicator(R.string.points, TrackPointFragment.class));
+						} else {
+							slidingTabLayout.setVisibility(View.GONE);
+							getSupportActionBar().setElevation(AndroidUtils.dpToPx(getMyApplication(), 4f));
+						}
 					}
 				}
 			}.execute((Void) null);
@@ -164,7 +186,6 @@ public class TrackActivity extends TabActivity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-
 	}
 
 	public OsmandApplication getMyApplication() {
@@ -175,8 +196,12 @@ public class TrackActivity extends TabActivity {
 	protected void onPause() {
 		super.onPause();
 	}
-	
-	
+
+	@Override
+	protected void onStop() {
+		super.onStop();
+		stopped = true;
+	}
 
 	public Toolbar getClearToolbar(boolean visible) {
 		final Toolbar tb = (Toolbar) findViewById(R.id.bottomControls);

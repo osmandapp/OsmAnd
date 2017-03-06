@@ -9,8 +9,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
-import android.graphics.Canvas;
-import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
@@ -36,7 +34,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.github.mikephil.charting.animation.ChartAnimator;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.Legend;
@@ -45,18 +42,13 @@ import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.ChartData;
 import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.formatter.IFillFormatter;
-import com.github.mikephil.charting.formatter.IValueFormatter;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.interfaces.dataprovider.LineDataProvider;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
-import com.github.mikephil.charting.renderer.LineChartRenderer;
 import com.github.mikephil.charting.utils.MPPointF;
-import com.github.mikephil.charting.utils.Transformer;
-import com.github.mikephil.charting.utils.ViewPortHandler;
 
 import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
@@ -67,6 +59,7 @@ import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.Elevation;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.GPXTrackAnalysis;
+import net.osmand.plus.GPXUtilities.Speed;
 import net.osmand.plus.GPXUtilities.TrkSegment;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.IconsCache;
@@ -874,8 +867,6 @@ public class GpxUiHelper {
 		mChart.setExtraTopOffset(24f);
 		mChart.setExtraBottomOffset(16f);
 
-		mChart.setRenderer(new SplineRenderer(mChart, mChart.getAnimator(), mChart.getViewPortHandler()));
-
 		// create a custom MarkerView (extend MarkerView) and specify the layout
 		// to use for it
 		GPXMarkerView mv = new GPXMarkerView(mChart.getContext());
@@ -914,7 +905,7 @@ public class GpxUiHelper {
 		legend.setEnabled(false);
 	}
 
-	private static float getXAxisParams(OsmandApplication ctx, float meters, float[] koef, StringBuilder format, StringBuilder unit) {
+	private static float setupXAxisDistance(OsmandApplication ctx, XAxis xAxis, float meters) {
 		OsmandSettings settings = ctx.getSettings();
 		OsmandSettings.MetricsConstants mc = settings.METRIC_SYSTEM.get();
 		float divX;
@@ -970,33 +961,70 @@ public class GpxUiHelper {
 			}
 		}
 
-		koef[0] = divX;
-		if (fmt != null) {
-			format.append(fmt);
-		}
-		unit.append(ctx.getString(mainUnitStr));
-		return granularity;
+		final String formatX = fmt;
+		final String mainUnitX = ctx.getString(mainUnitStr);
+
+		xAxis.setGranularity(granularity);
+		xAxis.setValueFormatter(new IAxisValueFormatter() {
+
+			@Override
+			public String getFormattedValue(float value, AxisBase axis) {
+				if (!Algorithms.isEmpty(formatX)) {
+					return MessageFormat.format(formatX + mainUnitX, value);
+				} else {
+					return (int)value + " " + mainUnitX;
+				}
+			}
+		});
+
+		return divX;
 	}
 
-	private static List<Entry> calculateElevationArray(GPXTrackAnalysis analysis, float divX, float convEle) {
+	private static float setupXAxisTime(XAxis xAxis, long timeSpan) {
+
+		final boolean useHours = timeSpan / 3600000 > 0;
+		xAxis.setGranularity(1f);
+		xAxis.setValueFormatter(new IAxisValueFormatter() {
+
+			@Override
+			public String getFormattedValue(float value, AxisBase axis) {
+				int seconds = (int)value;
+				if (useHours) {
+					int hours = seconds / (60 * 60);
+					int minutes = (seconds / 60) % 60;
+					int sec = seconds % 60;
+					return hours + ":" + (minutes < 10 ? "0" + minutes : minutes) + ":" + (sec < 10 ? "0" + sec : sec);
+				} else {
+					int minutes = (seconds / 60) % 60;
+					int sec = seconds % 60;
+					return (minutes < 10 ? "0" + minutes : minutes) + ":" + (sec < 10 ? "0" + sec : sec);
+				}
+			}
+		});
+
+		return 1f;
+	}
+
+	private static List<Entry> calculateElevationArray(GPXTrackAnalysis analysis, GPXDataSetAxisType axisType,
+													   float divX, float convEle) {
 		List<Entry> values = new ArrayList<>();
 		List<Elevation> elevationData = analysis.elevationData;
 		float nextX = 0;
 		float nextY;
-		float prevYM;
 		float elev;
 		float prevElevOrig = -80000;
 		float prevElev = 0;
 		int i = -1;
 		int lastIndex = elevationData.size() - 1;
-		float shift = 0f;
 		Entry lastEntry = null;
 		float lastXSameY = -1;
 		boolean hasSameY = false;
+		float x;
 		for (Elevation e : elevationData) {
 			i++;
-			if (e.distance > 0) {
-				nextX += (float) e.distance / divX;
+			x = axisType == GPXDataSetAxisType.TIME ? e.time : (float) e.distance;
+			if (x > 0) {
+				nextX += x / divX;
 				elev = (float) e.elevation;
 				if (prevElevOrig != -80000) {
 					if (elev > prevElevOrig) {
@@ -1026,36 +1054,23 @@ public class GpxUiHelper {
 		return values;
 	}
 
-	public static OrderedLineDataSet createGPXElevationDataSet(OsmandApplication ctx, LineChart mChart, GPXTrackAnalysis analysis, boolean useRightAxis, boolean drawFilled) {
+	public static OrderedLineDataSet createGPXElevationDataSet(OsmandApplication ctx, LineChart mChart,
+															   GPXTrackAnalysis analysis,
+															   GPXDataSetAxisType axisType,
+															   boolean useRightAxis, boolean drawFilled) {
 		OsmandSettings settings = ctx.getSettings();
 		OsmandSettings.MetricsConstants mc = settings.METRIC_SYSTEM.get();
 		boolean useFeet = (mc == OsmandSettings.MetricsConstants.MILES_AND_FEET) || (mc == OsmandSettings.MetricsConstants.MILES_AND_YARDS);
 		boolean light = settings.isLightContent();
 		final float convEle = useFeet ? 3.28084f : 1.0f;
-		final float meters = analysis.totalDistance;
 
-		float[] koef = new float[] { 1f };
-		StringBuilder fmt = new StringBuilder();
-		StringBuilder unitX = new StringBuilder();
-
-		float granularity = getXAxisParams(ctx, meters, koef, fmt, unitX);
-		float divX = koef[0];
-		final String formatX = fmt.toString();
-		final String mainUnitX = unitX.toString();
-
+		float divX;
 		XAxis xAxis = mChart.getXAxis();
-		xAxis.setGranularity(granularity);
-		xAxis.setValueFormatter(new IAxisValueFormatter() {
-
-			@Override
-			public String getFormattedValue(float value, AxisBase axis) {
-				if (!Algorithms.isEmpty(formatX)) {
-					return MessageFormat.format(formatX + mainUnitX, value);
-				} else {
-					return (int)value + " " + mainUnitX;
-				}
-			}
-		});
+		if (axisType == GPXDataSetAxisType.TIME && analysis.isTimeSpecified()) {
+			divX = setupXAxisTime(xAxis, analysis.timeSpan);
+		} else {
+			divX = setupXAxisDistance(ctx, xAxis, analysis.totalDistance);
+		}
 
 		final String mainUnitY = useFeet ? ctx.getString(R.string.foot) : ctx.getString(R.string.m);
 
@@ -1069,6 +1084,7 @@ public class GpxUiHelper {
 		yAxis.setTextColor(ActivityCompat.getColor(mChart.getContext(), R.color.gpx_chart_blue));
 		yAxis.setGridColor(ActivityCompat.getColor(mChart.getContext(), R.color.gpx_chart_blue_grid));
 		yAxis.setGranularity(1f);
+		yAxis.resetAxisMinimum();
 		yAxis.setValueFormatter(new IAxisValueFormatter() {
 
 			@Override
@@ -1077,10 +1093,13 @@ public class GpxUiHelper {
 			}
 		});
 
-		List<Entry> values = calculateElevationArray(analysis, divX, convEle);
+		List<Entry> values = calculateElevationArray(analysis, axisType, divX, convEle);
 
-		OrderedLineDataSet dataSet = new OrderedLineDataSet(values, "", GPXDataSetType.ALTITUDE);
+		OrderedLineDataSet dataSet = new OrderedLineDataSet(values, "", GPXDataSetType.ALTITUDE, axisType);
 		dataSet.priority = (float) (analysis.avgElevation - analysis.minElevation) * convEle;
+		dataSet.divX = divX;
+		dataSet.mulY = convEle;
+		dataSet.divY = Float.NaN;
 		dataSet.units = mainUnitY;
 
 		dataSet.setColor(ContextCompat.getColor(mChart.getContext(), R.color.gpx_chart_blue));
@@ -1107,7 +1126,6 @@ public class GpxUiHelper {
 		dataSet.setHighLightColor(light ? mChart.getResources().getColor(R.color.secondary_text_light) : mChart.getResources().getColor(R.color.secondary_text_dark));
 
 		//dataSet.setMode(LineDataSet.Mode.HORIZONTAL_BEZIER);
-		//dataSet.setMode(LineDataSet.Mode.CUBIC_BEZIER);
 
 		dataSet.setFillFormatter(new IFillFormatter() {
 			@Override
@@ -1121,41 +1139,20 @@ public class GpxUiHelper {
 		return dataSet;
 	}
 
-	public static void setGPXElevationChartData(OsmandApplication ctx, LineChart mChart, GPXTrackAnalysis analysis, boolean useRightAxis, boolean drawFilled) {
-		LineDataSet dataSet = createGPXElevationDataSet(ctx, mChart, analysis, useRightAxis, drawFilled);
-		ArrayList<ILineDataSet> dataSets = new ArrayList<>();
-		dataSets.add(dataSet);
-		LineData data = new LineData(dataSets);
-		mChart.setData(data);
-	}
-
-	public static OrderedLineDataSet createGPXSpeedDataSet(OsmandApplication ctx, LineChart mChart, GPXTrackAnalysis analysis, boolean useRightAxis, boolean drawFilled) {
+	public static OrderedLineDataSet createGPXSpeedDataSet(OsmandApplication ctx, LineChart mChart,
+														   GPXTrackAnalysis analysis,
+														   GPXDataSetAxisType axisType,
+														   boolean useRightAxis, boolean drawFilled) {
 		OsmandSettings settings = ctx.getSettings();
 		boolean light = settings.isLightContent();
-		final float meters = analysis.totalDistance;
 
-		float[] koef = new float[] { 1f };
-		StringBuilder fmt = new StringBuilder();
-		StringBuilder unitX = new StringBuilder();
-
-		float granularity = getXAxisParams(ctx, meters, koef, fmt, unitX);
-		float divX = koef[0];
-		final String formatX = fmt.toString();
-		final String mainUnitX = unitX.toString();
-
+		float divX;
 		XAxis xAxis = mChart.getXAxis();
-		xAxis.setGranularity(granularity);
-		xAxis.setValueFormatter(new IAxisValueFormatter() {
-
-			@Override
-			public String getFormattedValue(float value, AxisBase axis) {
-				if (!Algorithms.isEmpty(formatX)) {
-					return MessageFormat.format(formatX + mainUnitX, value);
-				} else {
-					return (int)value + " " + mainUnitX;
-				}
-			}
-		});
+		if (axisType == GPXDataSetAxisType.TIME && analysis.isTimeSpecified()) {
+			divX = setupXAxisTime(xAxis, analysis.timeSpan);
+		} else {
+			divX = setupXAxisDistance(ctx, xAxis, analysis.totalDistance);
+		}
 
 		OsmandSettings.SpeedConstants sps = settings.SPEED_SYSTEM.get();
 		float mulSpeed = Float.NaN;
@@ -1194,12 +1191,14 @@ public class GpxUiHelper {
 		});
 
 		ArrayList<Entry> values = new ArrayList<>();
-		List<GPXUtilities.Speed> speedData = analysis.speedData;
+		List<Speed> speedData = analysis.speedData;
 		float nextX = 0;
 		float nextY;
-		for (GPXUtilities.Speed s : speedData) {
-			if (s.distance > 0) {
-				nextX += (float) s.distance / divX;
+		float x;
+		for (Speed s : speedData) {
+			x = axisType == GPXDataSetAxisType.TIME ? s.time : (float) s.distance;
+			if (x > 0) {
+				nextX += x / divX;
 				if (Float.isNaN(divSpeed)) {
 					nextY = (float) (s.speed * mulSpeed);
 				} else {
@@ -1212,12 +1211,20 @@ public class GpxUiHelper {
 			}
 		}
 
-		OrderedLineDataSet dataSet = new OrderedLineDataSet(values, "", GPXDataSetType.SPEED);
+		OrderedLineDataSet dataSet = new OrderedLineDataSet(values, "", GPXDataSetType.SPEED, axisType);
 
 		if (Float.isNaN(divSpeed)) {
 			dataSet.priority = analysis.avgSpeed * mulSpeed;
 		} else {
 			dataSet.priority = divSpeed / analysis.avgSpeed;
+		}
+		dataSet.divX = divX;
+		if (Float.isNaN(divSpeed)) {
+			dataSet.mulY = mulSpeed;
+			dataSet.divY = Float.NaN;
+		} else {
+			dataSet.divY = divSpeed;
+			dataSet.mulY = Float.NaN;
 		}
 		dataSet.units = mainUnitY;
 
@@ -1251,15 +1258,11 @@ public class GpxUiHelper {
 		return dataSet;
 	}
 
-	public static void setGPXSpeedChartData(OsmandApplication ctx, LineChart mChart, GPXTrackAnalysis analysis, boolean useRightAxis, boolean drawFilled) {
-		LineDataSet dataSet = createGPXSpeedDataSet(ctx, mChart, analysis, useRightAxis, drawFilled);
-		ArrayList<ILineDataSet> dataSets = new ArrayList<>();
-		dataSets.add(dataSet);
-		LineData data = new LineData(dataSets);
-		mChart.setData(data);
-	}
-
-	public static OrderedLineDataSet createGPXSlopeDataSet(OsmandApplication ctx, LineChart mChart, GPXTrackAnalysis analysis, List<Entry> eleValues, boolean useRightAxis, boolean drawFilled) {
+	public static OrderedLineDataSet createGPXSlopeDataSet(OsmandApplication ctx, LineChart mChart,
+														   GPXTrackAnalysis analysis,
+														   GPXDataSetAxisType axisType,
+														   List<Entry> eleValues,
+														   boolean useRightAxis, boolean drawFilled) {
 		OsmandSettings settings = ctx.getSettings();
 		boolean light = settings.isLightContent();
 		OsmandSettings.MetricsConstants mc = settings.METRIC_SYSTEM.get();
@@ -1267,28 +1270,13 @@ public class GpxUiHelper {
 		final float convEle = useFeet ? 3.28084f : 1.0f;
 		final float totalDistance = analysis.totalDistance;
 
-		float[] koef = new float[] { 1f };
-		StringBuilder fmt = new StringBuilder();
-		StringBuilder unitX = new StringBuilder();
-
-		float granularity = getXAxisParams(ctx, totalDistance, koef, fmt, unitX);
-		float divX = koef[0];
-		final String formatX = fmt.toString();
-		final String mainUnitX = unitX.toString();
-
+		float divX;
 		XAxis xAxis = mChart.getXAxis();
-		xAxis.setGranularity(granularity);
-		xAxis.setValueFormatter(new IAxisValueFormatter() {
-
-			@Override
-			public String getFormattedValue(float value, AxisBase axis) {
-				if (!Algorithms.isEmpty(formatX)) {
-					return MessageFormat.format(formatX + mainUnitX, value);
-				} else {
-					return (int)value + " " + mainUnitX;
-				}
-			}
-		});
+		if (axisType == GPXDataSetAxisType.TIME && analysis.isTimeSpecified()) {
+			divX = setupXAxisTime(xAxis, analysis.timeSpan);
+		} else {
+			divX = setupXAxisDistance(ctx, xAxis, analysis.totalDistance);
+		}
 
 		final String mainUnitY = "%";
 
@@ -1302,6 +1290,7 @@ public class GpxUiHelper {
 		yAxis.setTextColor(ActivityCompat.getColor(mChart.getContext(), R.color.gpx_chart_green));
 		yAxis.setGridColor(ActivityCompat.getColor(mChart.getContext(), R.color.gpx_chart_green_grid));
 		yAxis.setGranularity(1f);
+		yAxis.resetAxisMinimum();
 		yAxis.setValueFormatter(new IAxisValueFormatter() {
 
 			@Override
@@ -1311,8 +1300,8 @@ public class GpxUiHelper {
 		});
 
 		List<Entry> values;
-		if (eleValues == null) {
-			values = calculateElevationArray(analysis, 1f, 1f);
+		if (eleValues == null || axisType == GPXDataSetAxisType.TIME) {
+			values = calculateElevationArray(analysis, GPXDataSetAxisType.DISTANCE, 1f, 1f);
 		} else {
 			values = new ArrayList<>(eleValues.size());
 			for (Entry e : eleValues) {
@@ -1327,6 +1316,12 @@ public class GpxUiHelper {
 		int lastIndex = values.size() - 1;
 
 		double STEP = 5;
+
+		float timeDistKoef = 1f;
+		if (axisType == GPXDataSetAxisType.TIME) {
+			timeDistKoef = analysis.timeSpan / totalDistance / 1000;
+			divX = 1f;
+		}
 
 		double[] calculatedDist = new double[(int) (totalDistance / STEP) + 1];
 		double[] calculatedH = new double[(int) (totalDistance / STEP) + 1];
@@ -1350,7 +1345,7 @@ public class GpxUiHelper {
 
 		int index = (int) ((SLOPE_PROXIMITY / STEP) / 2);
 		for (int k = 0; k < calculatedSlopeDist.length; k++) {
-			calculatedSlopeDist[k] = calculatedDist[index + k];
+			calculatedSlopeDist[k] = calculatedDist[index + k] * timeDistKoef;
 			calculatedSlope[k] = (calculatedH[ 2 * index + k] - calculatedH[k]) * 100 / SLOPE_PROXIMITY;
 			if (Double.isNaN(calculatedSlope[k])) {
 				calculatedSlope[k] = 0;
@@ -1384,7 +1379,8 @@ public class GpxUiHelper {
 			slopeValues.add(lastEntry);
 		}
 
-		OrderedLineDataSet dataSet = new OrderedLineDataSet(slopeValues, "", GPXDataSetType.SLOPE);
+		OrderedLineDataSet dataSet = new OrderedLineDataSet(slopeValues, "", GPXDataSetType.SLOPE, axisType);
+		dataSet.divX = divX;
 		dataSet.units = mainUnitY;
 
 		dataSet.setColor(ContextCompat.getColor(mChart.getContext(), R.color.gpx_chart_green));
@@ -1411,7 +1407,6 @@ public class GpxUiHelper {
 		dataSet.setHighLightColor(light ? mChart.getResources().getColor(R.color.secondary_text_light) : mChart.getResources().getColor(R.color.secondary_text_dark));
 
 		//dataSet.setMode(LineDataSet.Mode.HORIZONTAL_BEZIER);
-		//dataSet.setMode(LineDataSet.Mode.CUBIC_BEZIER);
 
 		/*
 		dataSet.setFillFormatter(new IFillFormatter() {
@@ -1427,51 +1422,108 @@ public class GpxUiHelper {
 		return dataSet;
 	}
 
-	public static void setGPXSlopeChartData(OsmandApplication ctx, LineChart mChart, GPXTrackAnalysis analysis, boolean useRightAxis, boolean drawFilled) {
-		LineDataSet dataSet = createGPXSlopeDataSet(ctx, mChart, analysis, null, useRightAxis, drawFilled);
-		ArrayList<ILineDataSet> dataSets = new ArrayList<>();
-		dataSets.add(dataSet);
-		LineData data = new LineData(dataSets);
-		mChart.setData(data);
+	public enum GPXDataSetType {
+		ALTITUDE(R.string.altitude, R.drawable.ic_action_altitude_average),
+		SPEED(R.string.map_widget_speed, R.drawable.ic_action_speed),
+		SLOPE(R.string.shared_string_slope, R.drawable.ic_action_altitude_ascent);
+
+		private int stringId;
+		private int imageId;
+
+		private GPXDataSetType(int stringId, int imageId) {
+			this.stringId = stringId;
+			this.imageId = imageId;
+		}
+
+		public String getName(Context ctx) {
+			return ctx.getString(stringId);
+		}
+
+		public int getStringId() {
+			return stringId;
+		}
+
+		public int getImageId() {
+			return imageId;
+		}
+
+		public Drawable getImageDrawable(OsmandApplication app) {
+			return app.getIconsCache().getThemedIcon(imageId);
+		}
 	}
 
-	public enum GPXDataSetType {
-		ALTITUDE,
-		SPEED,
-		SLOPE
+	public enum GPXDataSetAxisType {
+		DISTANCE(R.string.distance, R.drawable.ic_action_marker_dark),
+		TIME(R.string.shared_string_time, R.drawable.ic_action_time);
+
+		private int stringId;
+		private int imageId;
+
+		private GPXDataSetAxisType(int stringId, int imageId) {
+			this.stringId = stringId;
+			this.imageId = imageId;
+		}
+
+		public String getName(Context ctx) {
+			return ctx.getString(stringId);
+		}
+
+		public int getStringId() {
+			return stringId;
+		}
+
+		public int getImageId() {
+			return imageId;
+		}
+
+		public Drawable getImageDrawable(OsmandApplication app) {
+			return app.getIconsCache().getThemedIcon(imageId);
+		}
 	}
 
 	public static class OrderedLineDataSet extends LineDataSet {
 
 		private GPXDataSetType dataSetType;
+		private GPXDataSetAxisType dataSetAxisType;
 
-		public float priority;
-		public String units;
-		public List<Segment> spline;
+		float priority;
+		String units;
+		float divX = 1f;
+		float divY = 1f;
+		float mulY = 1f;
 
-		public OrderedLineDataSet(List<Entry> yVals, String label, GPXDataSetType dataSetType) {
+		OrderedLineDataSet(List<Entry> yVals, String label, GPXDataSetType dataSetType, GPXDataSetAxisType dataSetAxisType) {
 			super(yVals, label);
 			this.dataSetType = dataSetType;
-
-			/*
-			List<Point2D> points = new ArrayList<>(yVals.size());
-			for (Entry e : yVals) {
-				points.add(new Point2D(e.getX(), e.getY()));
-			}
-			spline = calculateSpline(points);
-			*/
+			this.dataSetAxisType = dataSetAxisType;
 		}
 
 		public GPXDataSetType getDataSetType() {
 			return dataSetType;
 		}
 
-		public Segment getSegmentForEntryIndex(int index) {
-			if (index < spline.size()) {
-				return spline.get(index);
-			} else {
-				return spline.get(spline.size() - 1);
-			}
+		public GPXDataSetAxisType getDataSetAxisType() {
+			return dataSetAxisType;
+		}
+
+		public float getPriority() {
+			return priority;
+		}
+
+		public float getDivX() {
+			return divX;
+		}
+
+		public float getDivY() {
+			return divY;
+		}
+
+		public float getMulY() {
+			return mulY;
+		}
+
+		public String getUnits() {
+			return units;
 		}
 	}
 
@@ -1613,7 +1665,7 @@ public class GpxUiHelper {
 		private long fileSize;
 		private boolean selected;
 
-		public GPXInfo(String fileName, long lastModified, long fileSize) {
+		GPXInfo(String fileName, long lastModified, long fileSize) {
 			this.fileName = fileName;
 			this.lastModified = lastModified;
 			this.fileSize = fileSize;
@@ -1637,230 +1689,6 @@ public class GpxUiHelper {
 
 		public void setSelected(boolean selected) {
 			this.selected = selected;
-		}
-	}
-
-	public static class Point2D {
-		double x, y;
-
-		Point2D() {
-			x = 0.0;
-			y = 0.0;
-		}
-
-		Point2D(double x, double y) {
-			this.x = x;
-			this.y = y;
-		}
-
-		Point2D(Point2D p) {
-			this.x = p.x;
-			this.y = p.y;
-		}
-
-		Point2D minus(Point2D point) {
-			return new Point2D(x - point.x, y - point.y);
-		}
-
-		Point2D plus(Point2D point) {
-			return new Point2D(x + point.x, y + point.y);
-		}
-
-		Point2D mult(double v) {
-			return new Point2D(x * v, y * v);
-		}
-
-		void thisMinus(Point2D point) {
-			x -= point.x;
-			y -= point.y;
-		}
-
-		void thisPlus(Point2D point) {
-			x += point.x;
-			y += point.y;
-		}
-
-		void normalize()
-		{
-			double l = Math.sqrt(x * x + y * y);
-			x /= l;
-			y /= l;
-		}
-	}
-
-	public static class Segment {
-		Point2D[] points = new Point2D[4];
-
-		Segment() {
-		}
-
-		void calc(double t, Point2D p)
-		{
-			double t2 = t * t;
-			double t3 = t2 * t;
-			double nt = 1.0 - t;
-			double nt2 = nt * nt;
-			double nt3 = nt2 * nt;
-			p.x = nt3 * points[0].x + 3.0 * t * nt2 * points[1].x + 3.0 * t2 * nt * points[2].x + t3 * points[3].x;
-			p.y = nt3 * points[0].y + 3.0 * t * nt2 * points[1].y + 3.0 * t2 * nt * points[2].y + t3 * points[3].y;
-		}
-	}
-
-	public static List<Segment> calculateSpline(List<Point2D> values) {
-		final double EPSILON  = 1.0e-5;
-
-		int n = values.size() - 1;
-
-		if (n < 2)
-			return null;
-
-		List<Segment> bezier = new ArrayList<>(n);
-		for (int i = 0; i < n; i++) {
-			bezier.add(new Segment());
-		}
-
-		Point2D tgL = new Point2D();
-		Point2D tgR = new Point2D();
-		Point2D cur;
-		Point2D next = values.get(1).minus(values.get(0));
-		next.normalize();
-
-		double l1, l2, tmp, x;
-
-		--n;
-
-		for (int i = 0; i < n; ++i)
-		{
-			bezier.get(i).points[0] = new Point2D(values.get(i));
-			bezier.get(i).points[1] = new Point2D(values.get(i));
-			bezier.get(i).points[2] = new Point2D(values.get(i + 1));
-			bezier.get(i).points[3] = new Point2D(values.get(i + 1));
-
-			cur = next;
-			next = values.get(i + 2).minus(values.get(i + 1));
-			next.normalize();
-
-			tgL = tgR;
-
-			tgR = cur.plus(next);
-			tgR.normalize();
-
-			if (Math.abs(values.get(i + 1).y - values.get(i).y) < EPSILON)
-			{
-				l1 = 0.0;
-				l2 = 0.0;
-			}
-			else
-			{
-				tmp = values.get(i + 1).x - values.get(i).x;
-				l1 = Math.abs(tgL.x) > EPSILON ? tmp / (2.0 * tgL.x) : 1.0;
-				l2 = Math.abs(tgR.x) > EPSILON ? tmp / (2.0 * tgR.x) : 1.0;
-			}
-
-			if (Math.abs(tgL.x) > EPSILON && Math.abs(tgR.x) > EPSILON)
-			{
-				tmp = tgL.y / tgL.x - tgR.y / tgR.x;
-				if (Math.abs(tmp) > EPSILON)
-				{
-					x = (values.get(i + 1).y - tgR.y / tgR.x * values.get(i + 1).x - values.get(i).y + tgL.y / tgL.x * values.get(i).x) / tmp;
-					if (x > values.get(i).x && x < values.get(i + 1).x)
-					{
-						if (tgL.y > 0.0)
-						{
-							if (l1 > l2)
-								l1 = 0.0;
-							else
-								l2 = 0.0;
-						}
-						else
-						{
-							if (l1 < l2)
-								l1 = 0.0;
-							else
-								l2 = 0.0;
-						}
-					}
-				}
-			}
-
-			bezier.get(i).points[1].thisPlus(tgL.mult(l1));
-			bezier.get(i).points[2].thisMinus(tgR.mult(l2));
-		}
-
-		l1 = Math.abs(tgL.x) > EPSILON ? (values.get(n + 1).x - values.get(n).x) / (2.0 * tgL.x) : 1.0;
-
-		bezier.get(n).points[0] = new Point2D(values.get(n));
-		bezier.get(n).points[1] = new Point2D(values.get(n));
-		bezier.get(n).points[2] = new Point2D(values.get(n + 1));
-		bezier.get(n).points[3] = new Point2D(values.get(n + 1));
-		bezier.get(n).points[1].thisPlus(tgR.mult(l1));
-
-		return bezier;
-	}
-
-	public static class SplineRenderer extends LineChartRenderer {
-
-		public SplineRenderer(LineDataProvider chart, ChartAnimator animator, ViewPortHandler viewPortHandler) {
-			super(chart, animator, viewPortHandler);
-		}
-
-		@Override
-		protected void drawCubicBezier(ILineDataSet dataSet) {
-			if (!(dataSet instanceof OrderedLineDataSet)) {
-				super.drawCubicBezier(dataSet);
-			} else {
-
-				OrderedLineDataSet ds = (OrderedLineDataSet) dataSet;
-
-				float phaseY = mAnimator.getPhaseY();
-
-				Transformer trans = mChart.getTransformer(dataSet.getAxisDependency());
-
-				mXBounds.set(mChart, dataSet);
-
-				cubicPath.reset();
-
-				if (mXBounds.range >= 1) {
-
-					final int firstIndex = mXBounds.min + 1;
-					final int lastIndex = mXBounds.min + mXBounds.range;
-
-					Segment seg = ds.getSegmentForEntryIndex(Math.max(firstIndex - 1, 0));
-
-					if (seg == null) return;
-
-					// let the spline start
-					cubicPath.moveTo((float) seg.points[0].x, (float) seg.points[0].y * phaseY);
-
-					for (int j = firstIndex; j <= lastIndex; j++) {
-
-						seg = ds.getSegmentForEntryIndex(j);
-
-						cubicPath.cubicTo((float) seg.points[1].x, (float) seg.points[1].y * phaseY,
-								(float) seg.points[2].x, (float) seg.points[2].y * phaseY,
-								(float) seg.points[3].x, (float) seg.points[3].y * phaseY);
-					}
-				}
-
-				// if filled is enabled, close the path
-				if (ds.isDrawFilledEnabled()) {
-
-					cubicFillPath.reset();
-					cubicFillPath.addPath(cubicPath);
-
-					drawCubicFill(mBitmapCanvas, ds, cubicFillPath, trans, mXBounds);
-				}
-
-				mRenderPaint.setColor(ds.getColor());
-
-				mRenderPaint.setStyle(Paint.Style.STROKE);
-
-				trans.pathValueToPixel(cubicPath);
-
-				mBitmapCanvas.drawPath(cubicPath, mRenderPaint);
-
-				mRenderPaint.setPathEffect(null);
-			}
 		}
 	}
 }

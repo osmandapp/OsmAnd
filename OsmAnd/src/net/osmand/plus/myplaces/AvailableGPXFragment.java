@@ -195,7 +195,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		if (isRecording) {
 			currentGpxView.findViewById(R.id.segment_time_div).setVisibility(View.VISIBLE);
 			TextView segmentTime = (TextView) currentGpxView.findViewById(R.id.segment_time);
-			segmentTime.setText(OsmAndFormatter.getFormattedDurationShort((int)(sth.getDuration() / 1000), app));
+			segmentTime.setText(OsmAndFormatter.getFormattedDurationShort((int)(sth.getDuration() / 1000)));
 			segmentTime.setVisibility(View.VISIBLE);
 			stop.setCompoundDrawablesWithIntrinsicBounds(app.getIconsCache()
 					.getIcon(R.drawable.ic_action_rec_stop, light ? R.color.color_dialog_buttons_light : R.color.color_dialog_buttons_dark), null, null, null);

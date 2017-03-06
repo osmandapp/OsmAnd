@@ -38,11 +38,14 @@ import com.github.mikephil.charting.listener.ChartTouchListener.ChartGesture;
 import com.github.mikephil.charting.listener.OnChartGestureListener;
 
 import net.osmand.AndroidUtils;
+import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.GPXDatabase;
-import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.GPXTrackAnalysis;
+import net.osmand.plus.GPXUtilities.Track;
+import net.osmand.plus.GPXUtilities.TrkSegment;
+import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
@@ -60,6 +63,8 @@ import net.osmand.plus.dialogs.ConfigureMapMenu.AppearanceListItem;
 import net.osmand.plus.dialogs.ConfigureMapMenu.GpxAppearanceAdapter;
 import net.osmand.plus.dialogs.ConfigureMapMenu.GpxAppearanceAdapter.GpxAppearanceAdapterType;
 import net.osmand.plus.helpers.GpxUiHelper;
+import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetAxisType;
+import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetType;
 import net.osmand.plus.helpers.GpxUiHelper.OrderedLineDataSet;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip.CustomTabProvider;
@@ -75,7 +80,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -89,7 +93,6 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 
 	private OsmandApplication app;
 	private SegmentGPXAdapter adapter;
-	private View headerView;
 
 	private GpxDisplayItemType[] filterTypes = { GpxSelectionHelper.GpxDisplayItemType.TRACK_SEGMENT };
 	private List<String> options = new ArrayList<>();
@@ -97,7 +100,7 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 	private TIntArrayList timeSplit = new TIntArrayList();
 	private int selectedSplitInterval;
 	private boolean updateEnable;
-
+	private View headerView;
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -117,14 +120,22 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 		setHasOptionsMenu(true);
 		View view = getActivity().getLayoutInflater().inflate(R.layout.update_index, container, false);
 		view.findViewById(R.id.header_layout).setVisibility(View.GONE);
+
 		ListView listView = (ListView) view.findViewById(android.R.id.list);
 		listView.setDivider(null);
 		listView.setDividerHeight(0);
+
 		TextView tv = new TextView(getActivity());
 		tv.setText(R.string.none_selected_gpx);
 		tv.setTextSize(24);
 		listView.setEmptyView(tv);
-		setContent(listView);
+
+		adapter = new SegmentGPXAdapter(new ArrayList<GpxDisplayItem>());
+		headerView = getActivity().getLayoutInflater().inflate(R.layout.gpx_item_list_header, null, false);
+		listView.addHeaderView(headerView);
+		listView.addFooterView(getActivity().getLayoutInflater().inflate(R.layout.list_shadow_footer, null, false));
+		updateHeader();
+		setListAdapter(adapter);
 		return view;
 	}
 
@@ -200,12 +211,7 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 		updateEnable = false;
 	}
 
-	private void setupListView(ListView listView) {
-		if (headerView == null) {
-			headerView = getActivity().getLayoutInflater().inflate(R.layout.gpx_item_list_header, null, false);
-			listView.addHeaderView(headerView);
-			listView.addFooterView(getActivity().getLayoutInflater().inflate(R.layout.list_shadow_footer, null, false));
-		}
+	private void updateHeader() {
 		final ImageView imageView = (ImageView) headerView.findViewById(R.id.imageView);
 		final View splitColorView = headerView.findViewById(R.id.split_color_view);
 		final View divider = headerView.findViewById(R.id.divider);
@@ -216,13 +222,8 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 		vis.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-				SelectedGpxFile sf = app.getSelectedGpxHelper().selectGpxFile(getGpx(), vis.isChecked(), false);
-				if (vis.isChecked() && sf.getModifiableGpxFile() != null) {
-					sf.processPoints();
-					updateColorView(colorView);
-				} else {
-					updateColorView(colorView);
-				}
+				app.getSelectedGpxHelper().selectGpxFile(getGpx(), vis.isChecked(), false);
+				updateColorView(colorView);
 			}
 		});
 		imageView.setOnClickListener(new View.OnClickListener() {
@@ -239,7 +240,7 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 								false,
 								item);
 					} else {
-						GPXUtilities.WptPt wpt = sf.getGpxFile().findPointToShow();
+						WptPt wpt = sf.getGpxFile().findPointToShow();
 						if (wpt != null) {
 							app.getSettings().setMapLocationToShow(wpt.getLatitude(), wpt.getLongitude(),
 									15,
@@ -427,24 +428,7 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 		return groups;
 	}
 
-	public void setContent() {
-		setContent(getListView());
-	}
-
-	public void setContent(ListView listView) {
-		if (adapter == null) {
-			adapter = new SegmentGPXAdapter(new ArrayList<GpxDisplayItem>());
-		} else {
-			adapter.clear();
-		}
-		updateContent();
-		setupListView(listView);
-		if (listView.getAdapter() == null) {
-			setListAdapter(adapter);
-		}
-	}
-
-	protected void updateContent() {
+	public void updateContent() {
 		adapter.clear();
 		List<GpxDisplayGroup> groups = getOriginalGroups();
 		adapter.setNotifyOnChange(false);
@@ -453,6 +437,7 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 		}
 		adapter.setNotifyOnChange(true);
 		adapter.notifyDataSetChanged();
+		updateHeader();
 	}
 
 	protected List<GpxDisplayItem> flatten(List<GpxDisplayGroup> groups) {
@@ -523,30 +508,7 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 		}
 	}
 
-	/*
-	@Override
-	public void onListItemClick(ListView l, View v, int position, long id) {
-
-		GpxDisplayItem child = adapter.getItem(position);
-		if (child != null) {
-			if (child.group.getGpx() != null) {
-				app.getSelectedGpxHelper().setGpxFileToDisplay(child.group.getGpx());
-			}
-
-			final OsmandSettings settings = app.getSettings();
-			LatLon location = new LatLon(child.locationStart.lat, child.locationStart.lon);
-			settings.setMapLocationToShow(location.getLatitude(), location.getLongitude(),
-						settings.getLastKnownMapZoom(),
-						new PointDescription(PointDescription.POINT_TYPE_GPX_ITEM, child.group.getGpxName()),
-						false,
-						child);
-
-			MapActivity.launchMapActivityMoveToTop(getActivity());
-		}
-	}
-	*/
-
-	class SegmentGPXAdapter extends ArrayAdapter<GpxDisplayItem> {
+	private class SegmentGPXAdapter extends ArrayAdapter<GpxDisplayItem> {
 
 		private Map<GpxDisplayItem, GPXItemPagerAdapter> pagerAdaptersMap = new HashMap<>();
 
@@ -603,11 +565,14 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 				tabLayout = (PagerSlidingTabStrip) row.findViewById(R.id.sliding_tabs);
 				pager = (WrapContentHeightViewPager) row.findViewById(R.id.pager);
 			}
-			pager.setAdapter(getPagerAdapter(tabLayout, getItem(position)));
-			if (create) {
-				tabLayout.setViewPager(pager);
-			} else {
-				tabLayout.notifyDataSetChanged(true);
+			GpxDisplayItem item = getItem(position);
+			if (item != null) {
+				pager.setAdapter(getPagerAdapter(tabLayout, item));
+				if (create) {
+					tabLayout.setViewPager(pager);
+				} else {
+					tabLayout.notifyDataSetChanged(true);
+				}
 			}
 			return row;
 		}
@@ -626,6 +591,7 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 		private GpxDisplayItem gpxItem;
 		private GPXTabItemType[] tabTypes;
 		private String[] titles;
+		private Map<GPXTabItemType, List<ILineDataSet>> dataSetsMap = new HashMap<>();
 
 		GPXItemPagerAdapter(PagerSlidingTabStrip tabs, GpxDisplayItem gpxItem) {
 			super();
@@ -663,6 +629,59 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 						break;
 				}
 			}
+		}
+
+		private List<ILineDataSet> getDataSets(GPXTabItemType tabType, LineChart chart) {
+			List<ILineDataSet> dataSets = dataSetsMap.get(tabType);
+			if (dataSets == null && chart != null) {
+				dataSets = new ArrayList<>();
+				GPXTrackAnalysis analysis = gpxItem.analysis;
+				switch (tabType) {
+					case GPX_TAB_ITEM_GENERAL: {
+						OrderedLineDataSet speedDataSet = null;
+						OrderedLineDataSet elevationDataSet = null;
+						if (analysis.isSpeedSpecified()) {
+							speedDataSet = GpxUiHelper.createGPXSpeedDataSet(app, chart,
+									analysis, GPXDataSetAxisType.DISTANCE, true, true);
+						}
+						if (analysis.elevationData != null) {
+							elevationDataSet = GpxUiHelper.createGPXElevationDataSet(app, chart,
+									analysis, GPXDataSetAxisType.DISTANCE, false, true);
+						}
+						if (speedDataSet != null) {
+							dataSets.add(speedDataSet);
+							if (elevationDataSet != null) {
+								dataSets.add(elevationDataSet.getPriority() < speedDataSet.getPriority()
+										? 1 : 0, elevationDataSet);
+							}
+						} else if (elevationDataSet != null) {
+							dataSets.add(elevationDataSet);
+						}
+						dataSetsMap.put(GPXTabItemType.GPX_TAB_ITEM_GENERAL, dataSets);
+						break;
+					}
+					case GPX_TAB_ITEM_ALTITUDE: {
+						OrderedLineDataSet elevationDataSet = GpxUiHelper.createGPXElevationDataSet(app, chart,
+								analysis, GPXDataSetAxisType.DISTANCE, false, true);
+						dataSets.add(elevationDataSet);
+						if (analysis.elevationData.size() > 1) {
+							OrderedLineDataSet slopeDataSet = GpxUiHelper.createGPXSlopeDataSet(app, chart,
+									analysis, GPXDataSetAxisType.DISTANCE, elevationDataSet.getValues(), true, true);
+							dataSets.add(slopeDataSet);
+						}
+						dataSetsMap.put(GPXTabItemType.GPX_TAB_ITEM_ALTITUDE, dataSets);
+						break;
+					}
+					case GPX_TAB_ITEM_SPEED: {
+						OrderedLineDataSet speedDataSet = GpxUiHelper.createGPXSpeedDataSet(app, chart,
+								analysis, GPXDataSetAxisType.DISTANCE, false, true);
+						dataSets.add(speedDataSet);
+						dataSetsMap.put(GPXTabItemType.GPX_TAB_ITEM_SPEED, dataSets);
+						break;
+					}
+				}
+			}
+			return dataSets;
 		}
 
 		@Override
@@ -756,29 +775,11 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 					switch (tabType) {
 						case GPX_TAB_ITEM_GENERAL:
 							if (analysis != null) {
-								List<ILineDataSet> dataSets = new LinkedList<>();
 								if ((analysis.elevationData != null && analysis.totalDistance > 0)
 										|| analysis.isSpeedSpecified()) {
 									GpxUiHelper.setupGPXChart(app, chart, 4);
-									OrderedLineDataSet speedDataSet = null;
-									OrderedLineDataSet elevationDataSet = null;
-									if (analysis.isSpeedSpecified()) {
-										speedDataSet = GpxUiHelper.createGPXSpeedDataSet(app, chart, analysis, true, true);
-									}
-									if (analysis.elevationData != null) {
-										elevationDataSet = GpxUiHelper.createGPXElevationDataSet(app, chart, analysis, false, true);
-									}
-									if (speedDataSet != null) {
-										dataSets.add(speedDataSet);
-										if (elevationDataSet != null) {
-											dataSets.add(elevationDataSet.priority < speedDataSet.priority ? 1 : 0, elevationDataSet);
-										}
-									} else  if (elevationDataSet != null) {
-										dataSets.add(elevationDataSet);
-									}
-
-									LineData data = new LineData(dataSets);
-									chart.setData(data);
+									chart.setData(new LineData(getDataSets(GPXTabItemType.GPX_TAB_ITEM_GENERAL, chart)));
+									updateChart(chart);
 									chart.setVisibility(View.VISIBLE);
 								} else {
 									chart.setVisibility(View.GONE);
@@ -821,7 +822,7 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 							view.findViewById(R.id.details_view).setOnClickListener(new View.OnClickListener() {
 								@Override
 								public void onClick(View v) {
-									//todo
+									openDetails(GPXTabItemType.GPX_TAB_ITEM_GENERAL);
 								}
 							});
 
@@ -830,15 +831,8 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 							if (analysis != null) {
 								if (analysis.elevationData != null && analysis.totalDistance > 0) {
 									GpxUiHelper.setupGPXChart(app, chart, 4);
-									List<ILineDataSet> dataSets = new ArrayList<>();
-									OrderedLineDataSet elevationDataSet = GpxUiHelper.createGPXElevationDataSet(app, chart, analysis, false, true);
-									dataSets.add(elevationDataSet);
-									if (analysis.elevationData.size() > 1) {
-										OrderedLineDataSet slopeDataSet = GpxUiHelper.createGPXSlopeDataSet(app, chart, analysis, elevationDataSet.getValues(), true, true);
-										dataSets.add(slopeDataSet);
-									}
-									LineData data = new LineData(dataSets);
-									chart.setData(data);
+									chart.setData(new LineData(getDataSets(GPXTabItemType.GPX_TAB_ITEM_ALTITUDE, chart)));
+									updateChart(chart);
 									chart.setVisibility(View.VISIBLE);
 								} else {
 									chart.setVisibility(View.GONE);
@@ -872,7 +866,7 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 							view.findViewById(R.id.details_view).setOnClickListener(new View.OnClickListener() {
 								@Override
 								public void onClick(View v) {
-									//todo
+									openDetails(GPXTabItemType.GPX_TAB_ITEM_ALTITUDE);
 								}
 							});
 
@@ -881,7 +875,8 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 							if (analysis != null && analysis.isSpeedSpecified()) {
 								if (analysis.totalDistance > 0) {
 									GpxUiHelper.setupGPXChart(app, chart, 4);
-									GpxUiHelper.setGPXSpeedChartData(app, chart, analysis, false, true);
+									chart.setData(new LineData(getDataSets(GPXTabItemType.GPX_TAB_ITEM_SPEED, chart)));
+									updateChart(chart);
 									chart.setVisibility(View.VISIBLE);
 								} else {
 									chart.setVisibility(View.GONE);
@@ -914,7 +909,7 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 							view.findViewById(R.id.details_view).setOnClickListener(new View.OnClickListener() {
 								@Override
 								public void onClick(View v) {
-									//todo
+									openDetails(GPXTabItemType.GPX_TAB_ITEM_SPEED);
 								}
 							});
 							break;
@@ -1008,11 +1003,79 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 			if (gpxItem.chartMatrix != null) {
 				chart.getViewPortHandler().refresh(new Matrix(gpxItem.chartMatrix), chart, true);
 			}
-			chart.highlightValue(gpxItem.chartHighlightPos, 0);
+			if (gpxItem.chartHighlightPos != -1) {
+				chart.highlightValue(gpxItem.chartHighlightPos, 0);
+			} else {
+				chart.highlightValue(null);
+			}
+		}
+
+		void openDetails(GPXTabItemType tabType) {
+			LatLon location = null;
+			WptPt wpt = null;
+			gpxItem.chartType = null;
+			List<ILineDataSet> ds = getDataSets(tabType, null);
+			if (ds != null && ds.size() > 0) {
+				for (ILineDataSet dataSet : ds) {
+					OrderedLineDataSet orderedDataSet = (OrderedLineDataSet) dataSet;
+					if (orderedDataSet.getDataSetType() == GPXDataSetType.ALTITUDE) {
+						gpxItem.chartType = GPXDataSetType.ALTITUDE;
+						break;
+					}
+					gpxItem.chartType = orderedDataSet.getDataSetType();
+				}
+				if (gpxItem.chartHighlightPos != -1) {
+					TrkSegment segment = null;
+					for (Track t : gpxItem.group.getGpx().tracks) {
+						for (TrkSegment s : t.segments) {
+							if (s.points.size() > 0 && s.points.get(0).equals(gpxItem.analysis.locationStart)) {
+								segment = s;
+								break;
+							}
+						}
+						if (segment != null) {
+							break;
+						}
+					}
+					if (segment != null) {
+						OrderedLineDataSet dataSet = (OrderedLineDataSet) ds.get(0);
+						float distance = gpxItem.chartHighlightPos * dataSet.getDivX();
+						for (WptPt p : segment.points) {
+							if (p.distance >= distance) {
+								wpt = p;
+								break;
+							}
+						}
+						if (wpt != null) {
+							location = new LatLon(wpt.lat, wpt.lon);
+						}
+					}
+				}
+			}
+			if (location == null) {
+				location = new LatLon(gpxItem.locationStart.lat, gpxItem.locationStart.lon);
+			}
+			if (wpt != null) {
+				gpxItem.locationOnMap = wpt;
+			} else {
+				gpxItem.locationOnMap = gpxItem.locationStart;
+			}
+
+			if (gpxItem.group.getGpx() != null) {
+				app.getSelectedGpxHelper().setGpxFileToDisplay(gpxItem.group.getGpx());
+			}
+			final OsmandSettings settings = app.getSettings();
+			settings.setMapLocationToShow(location.getLatitude(), location.getLongitude(),
+					settings.getLastKnownMapZoom(),
+					new PointDescription(PointDescription.POINT_TYPE_WPT, gpxItem.name),
+					false,
+					gpxItem);
+
+			MapActivity.launchMapActivityMoveToTop(getActivity());
 		}
 	}
 
-	class SplitTrackAsyncTask extends AsyncTask<Void, Void, Void> {
+	private class SplitTrackAsyncTask extends AsyncTask<Void, Void, Void> {
 		@Nullable
 		private final SelectedGpxFile mSelectedGpxFile;
 		@NonNull private final TrackSegmentFragment mFragment;

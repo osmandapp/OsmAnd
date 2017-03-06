@@ -7,6 +7,8 @@ import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
@@ -19,6 +21,7 @@ public class TrackDetailsMenuFragment extends Fragment {
 
 	private TrackDetailsMenu menu;
 	private View mainView;
+	private View topBar;
 
 	private MapActivity getMapActivity() {
 		return (MapActivity) getActivity();
@@ -30,7 +33,7 @@ public class TrackDetailsMenuFragment extends Fragment {
 		MapActivity mapActivity = getMapActivity();
 
 		menu = mapActivity.getMapLayers().getMapControlsLayer().getTrackDetailsMenu();
-		View view = inflater.inflate(R.layout.plan_route_info, container, false);
+		View view = inflater.inflate(R.layout.track_details, container, false);
 		if (menu == null) {
 			return view;
 		}
@@ -38,11 +41,22 @@ public class TrackDetailsMenuFragment extends Fragment {
 		view.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				MapActivity.clearPrevActivityIntent();
 				dismiss();
 			}
 		});
 
 		mainView = view.findViewById(R.id.main_view);
+		topBar = view.findViewById(R.id.top_bar_layout);
+
+		ImageButton backButton = (ImageButton) topBar.findViewById(R.id.top_bar_back_button);
+		backButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				getActivity().onBackPressed();
+			}
+		});
+
 		updateInfo();
 
 		return view;
@@ -90,7 +104,7 @@ public class TrackDetailsMenuFragment extends Fragment {
 		int slideOutAnim = R.anim.slide_out_bottom;
 
 		mapActivity.getSupportFragmentManager().beginTransaction()
-				.setCustomAnimations(slideInAnim, slideOutAnim, slideInAnim, slideOutAnim)
+				//.setCustomAnimations(slideInAnim, slideOutAnim, slideInAnim, slideOutAnim)
 				.add(R.id.routeMenuContainer, this, TAG)
 				.addToBackStack(TAG)
 				.commitAllowingStateLoss();
@@ -100,7 +114,7 @@ public class TrackDetailsMenuFragment extends Fragment {
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
 			try {
-				activity.getSupportFragmentManager().popBackStack(TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+				activity.getSupportFragmentManager().popBackStackImmediate(TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
 			} catch (Exception e) {
 				// ignore
 			}
@@ -117,42 +131,16 @@ public class TrackDetailsMenuFragment extends Fragment {
 		} else {
 			AndroidUtils.setBackground(ctx, mainView, nightMode, R.drawable.bg_left_menu_light, R.drawable.bg_left_menu_dark);
 		}
-		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.dividerModesLayout), nightMode,
-				R.color.dashboard_divider_light, R.color.dashboard_divider_dark);
-		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.dividerFromDropDown), nightMode,
-				R.color.dashboard_divider_light, R.color.dashboard_divider_dark);
-		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.viaLayoutDivider), nightMode,
-				R.color.dashboard_divider_light, R.color.dashboard_divider_dark);
-		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.dividerToDropDown), nightMode,
-				R.color.dashboard_divider_light, R.color.dashboard_divider_dark);
-		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.dividerButtons), nightMode,
-				R.color.dashboard_divider_light, R.color.dashboard_divider_dark);
+		ImageButton backButton = (ImageButton) topBar.findViewById(R.id.top_bar_back_button);
+		backButton.setImageDrawable(ctx.getMyApplication().getIconsCache().getIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha, R.color.color_white));
 
-		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.dividerBtn1), nightMode,
-				R.color.dashboard_divider_light, R.color.dashboard_divider_dark);
-		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.dividerBtn2), nightMode,
-				R.color.dashboard_divider_light, R.color.dashboard_divider_dark);
-		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.dividerBtn3), nightMode,
-				R.color.dashboard_divider_light, R.color.dashboard_divider_dark);
+		AndroidUtils.setTextPrimaryColor(ctx, (TextView) mainView.findViewById(R.id.y_axis_title), nightMode);
+		AndroidUtils.setTextPrimaryColor(ctx, (TextView) mainView.findViewById(R.id.x_axis_title), nightMode);
 
-		AndroidUtils.setTextPrimaryColor(ctx, (TextView) mainView.findViewById(R.id.ViaView), nightMode);
-		AndroidUtils.setTextSecondaryColor(ctx, (TextView) mainView.findViewById(R.id.ViaSubView), nightMode);
-		AndroidUtils.setTextSecondaryColor(ctx, (TextView) mainView.findViewById(R.id.toTitle), nightMode);
-		AndroidUtils.setTextSecondaryColor(ctx, (TextView) mainView.findViewById(R.id.fromTitle), nightMode);
-		AndroidUtils.setTextPrimaryColor(ctx, (TextView) mainView.findViewById(R.id.InfoTextView), nightMode);
-
-		AndroidUtils.setDashButtonBackground(ctx, mainView.findViewById(R.id.FromLayout), nightMode);
-		AndroidUtils.setDashButtonBackground(ctx, mainView.findViewById(R.id.ViaLayout), nightMode);
-		AndroidUtils.setDashButtonBackground(ctx, mainView.findViewById(R.id.ToLayout), nightMode);
-		AndroidUtils.setDashButtonBackground(ctx, mainView.findViewById(R.id.Info), nightMode);
-
-		AndroidUtils.setDashButtonBackground(ctx, mainView.findViewById(R.id.Next), nightMode);
-		AndroidUtils.setDashButtonBackground(ctx, mainView.findViewById(R.id.Prev), nightMode);
-
-		AndroidUtils.setTextPrimaryColor(ctx, (TextView) mainView.findViewById(R.id.DistanceText), nightMode);
-		AndroidUtils.setTextSecondaryColor(ctx, (TextView) mainView.findViewById(R.id.DistanceTitle), nightMode);
-		AndroidUtils.setTextPrimaryColor(ctx, (TextView) mainView.findViewById(R.id.DurationText), nightMode);
-		AndroidUtils.setTextSecondaryColor(ctx, (TextView) mainView.findViewById(R.id.DurationTitle), nightMode);
+		ImageView yAxisArrow = (ImageView) mainView.findViewById(R.id.y_axis_arrow);
+		ImageView xAxisArrow = (ImageView) mainView.findViewById(R.id.x_axis_arrow);
+		yAxisArrow.setImageDrawable(ctx.getMyApplication().getIconsCache().getThemedIcon(R.drawable.ic_action_arrow_drop_down));
+		xAxisArrow.setImageDrawable(ctx.getMyApplication().getIconsCache().getThemedIcon(R.drawable.ic_action_arrow_drop_down));
 	}
 
 	public static boolean showInstance(final MapActivity mapActivity) {
@@ -168,9 +156,9 @@ public class TrackDetailsMenuFragment extends Fragment {
 				slideOutAnim = R.anim.slide_out_left;
 			}
 
-			MapRouteInfoMenuFragment fragment = new MapRouteInfoMenuFragment();
+			TrackDetailsMenuFragment fragment = new TrackDetailsMenuFragment();
 			mapActivity.getSupportFragmentManager().beginTransaction()
-					.setCustomAnimations(slideInAnim, slideOutAnim, slideInAnim, slideOutAnim)
+					//.setCustomAnimations(slideInAnim, slideOutAnim, slideInAnim, slideOutAnim)
 					.add(R.id.routeMenuContainer, fragment, TAG)
 					.addToBackStack(TAG).commitAllowingStateLoss();
 

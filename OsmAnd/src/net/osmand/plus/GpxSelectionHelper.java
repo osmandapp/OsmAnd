@@ -15,6 +15,8 @@ import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandSettings.MetricsConstants;
 import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.helpers.GpxUiHelper;
+import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetAxisType;
+import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetType;
 import net.osmand.util.Algorithms;
 
 import org.json.JSONArray;
@@ -661,6 +663,10 @@ public class GpxSelectionHelper {
 		public String url;
 		public Bitmap image;
 		public boolean expanded;
+
+		public WptPt locationOnMap;
+		public GPXDataSetType chartType;
+		public GPXDataSetAxisType chartAxisType = GPXDataSetAxisType.DISTANCE;
 
 		public Matrix chartMatrix;
 		public float chartHighlightPos = -1f;

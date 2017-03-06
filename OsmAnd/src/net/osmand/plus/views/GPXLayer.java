@@ -67,6 +67,9 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 	private Paint paintIcon;
 	private Bitmap pointSmall;
 
+	private Bitmap selectedPoint;
+	private LatLon selectedPointLatLon;
+
 	private static final int startZoom = 7;
 
 
@@ -141,6 +144,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 
 		paintIcon = new Paint();
 		pointSmall = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_white_shield_small);
+		selectedPoint = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_default_location);
 
 		contextMenuLayer = view.getLayerByClass(ContextMenuLayer.class);
 
@@ -343,6 +347,16 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 					drawBigPoint(canvas, o, fileColor, x, y);
 				}
 			}
+			if (selectedPointLatLon != null
+					&& selectedPointLatLon.getLatitude() >= latLonBounds.bottom
+					&& selectedPointLatLon.getLatitude() <= latLonBounds.top
+					&& selectedPointLatLon.getLongitude() >= latLonBounds.left
+					&& selectedPointLatLon.getLongitude() <= latLonBounds.right) {
+				float x = tileBox.getPixXFromLatLon(selectedPointLatLon.getLatitude(), selectedPointLatLon.getLongitude());
+				float y = tileBox.getPixYFromLatLon(selectedPointLatLon.getLatitude(), selectedPointLatLon.getLongitude());
+				paintIcon.setColorFilter(null);
+				canvas.drawBitmap(selectedPoint, x - selectedPoint.getWidth() / 2, y - selectedPoint.getHeight() / 2, paintIcon);
+			}
 			this.fullObjectsLatLon = fullObjectsLatLon;
 			this.smallObjectsLatLon = smallObjectsLatLon;
 		}
@@ -402,8 +416,15 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 	}
 
 	private List<WptPt> getListStarPoints(SelectedGpxFile g) {
-
 		return g.getGpxFile().points;
+	}
+
+	public LatLon getSelectedPointLatLon() {
+		return selectedPointLatLon;
+	}
+
+	public void setSelectedPointLatLon(LatLon selectedPointLatLon) {
+		this.selectedPointLatLon = selectedPointLatLon;
 	}
 
 	private boolean calculateBelongs(int ex, int ey, int objx, int objy, int radius) {

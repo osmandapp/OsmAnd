@@ -9,6 +9,7 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="shared_string_slope">Slope</string>
     <string name="add_new_folder">Add new folder</string>
     <string name="points_delete_multiple_succesful">Point(s) deleted successfully.</string>
     <string name="points_delete_multiple">You are going to delete %1$d point(s). Are you sure?</string>
