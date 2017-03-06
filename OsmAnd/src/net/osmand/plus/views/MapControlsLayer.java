@@ -632,11 +632,12 @@ public class MapControlsLayer extends OsmandMapLayer {
 			routePlanningMode = true;
 		}
 		boolean routeFollowingMode = !routePlanningMode && rh.isFollowingMode();
-		boolean dialogOpened = MapRouteInfoMenu.isVisible();
+		boolean routeDialogOpened = MapRouteInfoMenu.isVisible();
 		boolean showRouteCalculationControls = routePlanningMode ||
 				((app.accessibilityEnabled() || (System.currentTimeMillis() - touchEvent < TIMEOUT_TO_SHOW_BUTTONS)) && routeFollowingMode);
-		updateMyLocation(rh, dialogOpened);
-		boolean showButtons = (showRouteCalculationControls || !routeFollowingMode) && !isInChangeMarkerPositionMode();
+		updateMyLocation(rh, routeDialogOpened);
+		boolean showButtons = (showRouteCalculationControls || !routeFollowingMode)
+				&& !isInChangeMarkerPositionMode() && !isInGpxDetailsMode();
 		//routePlanningBtn.setIconResId(routeFollowingMode ? R.drawable.ic_action_gabout_dark : R.drawable.map_directions);
 		if (rh.isFollowingMode()) {
 			routePlanningBtn.setIconResId(R.drawable.map_start_navigation);
@@ -651,15 +652,15 @@ public class MapControlsLayer extends OsmandMapLayer {
 		routePlanningBtn.updateVisibility(showButtons);
 		menuControl.updateVisibility(showButtons);
 
-		mapZoomIn.updateVisibility(!dialogOpened);
-		mapZoomOut.updateVisibility(!dialogOpened);
-		compassHud.updateVisibility(!dialogOpened && shouldShowCompass());
+		mapZoomIn.updateVisibility(!routeDialogOpened);
+		mapZoomOut.updateVisibility(!routeDialogOpened);
+		compassHud.updateVisibility(!routeDialogOpened && shouldShowCompass());
 
 		if (layersHud.setIconResId(settings.getApplicationMode().getSmallIconDark())) {
 			layersHud.update(app, isNight);
 		}
-		layersHud.updateVisibility(!dialogOpened);
-		quickSearchHud.updateVisibility(!dialogOpened);
+		layersHud.updateVisibility(!routeDialogOpened);
+		quickSearchHud.updateVisibility(!routeDialogOpened);
 
 		if (!routePlanningMode && !routeFollowingMode) {
 			if (mapView.isZooming()) {
@@ -1044,6 +1045,10 @@ public class MapControlsLayer extends OsmandMapLayer {
 	private boolean isInChangeMarkerPositionMode(){
 		return mapQuickActionLayer == null ? contextMenuLayer.isInChangeMarkerPositionMode() :
 				mapQuickActionLayer.isInChangeMarkerPositionMode() || contextMenuLayer.isInChangeMarkerPositionMode();
+	}
+
+	private boolean isInGpxDetailsMode() {
+		return contextMenuLayer.isInGpxDetailsMode();
 	}
 
 	public static View.OnLongClickListener getOnClickMagnifierListener(final OsmandMapTileView view) {

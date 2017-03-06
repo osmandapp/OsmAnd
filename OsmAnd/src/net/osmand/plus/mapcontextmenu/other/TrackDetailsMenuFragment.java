@@ -7,7 +7,6 @@ import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -21,7 +20,6 @@ public class TrackDetailsMenuFragment extends Fragment {
 
 	private TrackDetailsMenu menu;
 	private View mainView;
-	private View topBar;
 
 	private MapActivity getMapActivity() {
 		return (MapActivity) getActivity();
@@ -38,24 +36,7 @@ public class TrackDetailsMenuFragment extends Fragment {
 			return view;
 		}
 
-		view.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				MapActivity.clearPrevActivityIntent();
-				dismiss();
-			}
-		});
-
 		mainView = view.findViewById(R.id.main_view);
-		topBar = view.findViewById(R.id.top_bar_layout);
-
-		ImageButton backButton = (ImageButton) topBar.findViewById(R.id.top_bar_back_button);
-		backButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				getActivity().onBackPressed();
-			}
-		});
 
 		updateInfo();
 
@@ -100,11 +81,7 @@ public class TrackDetailsMenuFragment extends Fragment {
 	}
 
 	public void show(MapActivity mapActivity) {
-		int slideInAnim = R.anim.slide_in_bottom;
-		int slideOutAnim = R.anim.slide_out_bottom;
-
 		mapActivity.getSupportFragmentManager().beginTransaction()
-				//.setCustomAnimations(slideInAnim, slideOutAnim, slideInAnim, slideOutAnim)
 				.add(R.id.routeMenuContainer, this, TAG)
 				.addToBackStack(TAG)
 				.commitAllowingStateLoss();
@@ -131,8 +108,6 @@ public class TrackDetailsMenuFragment extends Fragment {
 		} else {
 			AndroidUtils.setBackground(ctx, mainView, nightMode, R.drawable.bg_left_menu_light, R.drawable.bg_left_menu_dark);
 		}
-		ImageButton backButton = (ImageButton) topBar.findViewById(R.id.top_bar_back_button);
-		backButton.setImageDrawable(ctx.getMyApplication().getIconsCache().getIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha, R.color.color_white));
 
 		AndroidUtils.setTextPrimaryColor(ctx, (TextView) mainView.findViewById(R.id.y_axis_title), nightMode);
 		AndroidUtils.setTextPrimaryColor(ctx, (TextView) mainView.findViewById(R.id.x_axis_title), nightMode);
@@ -145,21 +120,9 @@ public class TrackDetailsMenuFragment extends Fragment {
 
 	public static boolean showInstance(final MapActivity mapActivity) {
 		try {
-			boolean portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
-			int slideInAnim;
-			int slideOutAnim;
-			if (portrait) {
-				slideInAnim = R.anim.slide_in_bottom;
-				slideOutAnim = R.anim.slide_out_bottom;
-			} else {
-				slideInAnim = R.anim.slide_in_left;
-				slideOutAnim = R.anim.slide_out_left;
-			}
-
 			TrackDetailsMenuFragment fragment = new TrackDetailsMenuFragment();
 			mapActivity.getSupportFragmentManager().beginTransaction()
-					//.setCustomAnimations(slideInAnim, slideOutAnim, slideInAnim, slideOutAnim)
-					.add(R.id.routeMenuContainer, fragment, TAG)
+					.add(R.id.bottomFragmentContainer, fragment, TAG)
 					.addToBackStack(TAG).commitAllowingStateLoss();
 
 			return true;
