@@ -29,7 +29,6 @@ import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
-import org.kxml2.io.KXmlSerializer;
 
 public class RouteResultPreparation {
 
