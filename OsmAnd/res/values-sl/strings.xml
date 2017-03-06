@@ -806,7 +806,7 @@ Vektorske zemljevide je mogoče pridobiti preko spletnih virov, ali pa jih shran
 
     <string name="no_vector_map_loaded">Vektorski zemljevidi niso naloženi</string>
     <string name="map_route_by_gpx">Navigacija z GPX</string>
-    <string name="gpx_files_not_found">V mapi sledi ni najti nobene datoteke GPX</string>
+    <string name="gpx_files_not_found">V mapi sledi ni najti mogoče nobene datoteke GPX.</string>
     <string name="layer_gpx_layer">Sled GPX …</string>
     <string name="error_reading_gpx">Napaka med branjem podatkov GPX</string>
     <string name="vector_data">Vektorski zemljevidi za delo brez povezave</string>
@@ -2825,4 +2825,6 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="points_delete_multiple">Izbrisati želite točke (%1$d). Ali želite nadaljevati?</string>
     <string name="route_points_category_name">Točke na poti, ki jih je treba doseči</string>
     <string name="track_points_category_name">Pomembnejše točke na poti</string>
+    <string name="shared_string_slope">Pobočje</string>
+    <string name="add_new_folder">Dodaj novo mapo</string>
     </resources>
