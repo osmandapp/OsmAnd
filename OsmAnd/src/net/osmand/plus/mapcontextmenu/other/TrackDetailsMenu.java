@@ -84,6 +84,13 @@ public class TrackDetailsMenu {
 						mapActivity.onBackPressed();
 					}
 				});
+				toolbarController.setOnCloseButtonClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						MapActivity.clearPrevActivityIntent();
+						hide();
+					}
+				});
 				mapActivity.showTopToolbar(toolbarController);
 			}
 
@@ -365,7 +372,7 @@ public class TrackDetailsMenu {
 		@Override
 		public void updateToolbar(MapInfoWidgetsFactory.TopToolbarView view) {
 			super.updateToolbar(view);
-			view.getCloseButton().setVisibility(View.GONE);
+			//view.getCloseButton().setVisibility(View.GONE);
 			view.getShadowView().setVisibility(View.GONE);
 		}
 	}

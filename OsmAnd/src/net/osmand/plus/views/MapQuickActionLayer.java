@@ -296,6 +296,7 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionRe
     private void setUpQuickActionBtnVisibility() {
         boolean hideQuickButton = !isLayerOn ||
                 contextMenuLayer.isInChangeMarkerPositionMode() ||
+				contextMenuLayer.isInGpxDetailsMode() ||
                 mapActivity.getContextMenu().isVisible() && !mapActivity.getContextMenu().findMenuFragment().get().isRemoving() ||
                 mapActivity.getContextMenu().isVisible() && mapActivity.getContextMenu().findMenuFragment().get().isAdded() ||
                 mapActivity.getContextMenu().getMultiSelectionMenu().isVisible() && mapActivity.getContextMenu().getMultiSelectionMenu().getFragmentByTag().isAdded() ||

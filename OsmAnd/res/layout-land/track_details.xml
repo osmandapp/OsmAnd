@@ -2,14 +2,14 @@
 <FrameLayout
     android:id="@+id/plan_route_info"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    android:layout_width="@dimen/dashboard_land_width"
     android:layout_height="match_parent"
     android:background="@color/color_transparent"
-    android:clickable="true"
     xmlns:tools="http://schemas.android.com/tools">
 
     <LinearLayout
-        android:layout_width="@dimen/dashboard_land_width"
+        android:id="@+id/main_view"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:background="@drawable/bg_left_menu_dark">
@@ -51,12 +51,12 @@
                     android:gravity="center_vertical"
                     android:lines="1"
                     android:singleLine="true"
-                    android:textColor="?android:textColorPrimary"
+                    android:textColor="@color/color_white"
                     android:textSize="@dimen/abc_text_size_medium_material"
                     android:text="@string/rendering_category_details"/>
 
                 <TextView
-                    android:id="@+id/widget_top_bar_description"
+                    android:id="@+id/top_bar_description"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@null"
@@ -69,10 +69,18 @@
 
             </LinearLayout>
 
+            <ImageButton
+                android:id="@+id/top_bar_close_button"
+                style="@style/Widget.AppCompat.ActionButton"
+                android:layout_width="56dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="top"
+                android:contentDescription="@string/shared_string_close"
+                android:src="@drawable/ic_action_remove_dark"/>
+
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/main_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="bottom"
@@ -91,7 +99,7 @@
                     android:orientation="horizontal">
 
                     <LinearLayout
-                        android:id="@+id/left_axis"
+                        android:id="@+id/y_axis"
                         android:layout_width="0dp"
                         android:layout_height="@dimen/list_item_height"
                         android:layout_weight="1"
@@ -101,7 +109,7 @@
                         android:gravity="center_vertical">
 
                         <ImageView
-                            android:id="@+id/left_axis_icon"
+                            android:id="@+id/y_axis_icon"
                             android:layout_width="@dimen/standard_icon_size"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/list_content_padding"
@@ -109,7 +117,7 @@
                             android:src="@drawable/ic_action_altitude_average"/>
 
                         <TextView
-                            android:id="@+id/left_axis_title"
+                            android:id="@+id/y_axis_title"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -119,7 +127,7 @@
                             tools:text="@string/altitude"/>
 
                         <ImageView
-                            android:id="@+id/left_axis_arrow"
+                            android:id="@+id/y_axis_arrow"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:layout_marginRight="@dimen/list_content_padding"
@@ -128,7 +136,7 @@
                     </LinearLayout>
 
                     <LinearLayout
-                        android:id="@+id/right_axis"
+                        android:id="@+id/x_axis"
                         android:layout_width="0dp"
                         android:layout_height="@dimen/list_item_height"
                         android:layout_weight="1"
@@ -145,7 +153,7 @@
                             android:focusable="false"/>
 
                         <ImageView
-                            android:id="@+id/right_axis_icon"
+                            android:id="@+id/x_axis_icon"
                             android:layout_width="@dimen/standard_icon_size"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/list_content_padding"
@@ -153,7 +161,7 @@
                             android:src="@drawable/ic_action_speed"/>
 
                         <TextView
-                            android:id="@+id/right_axis_title"
+                            android:id="@+id/x_axis_title"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -163,7 +171,7 @@
                             tools:text="@string/map_widget_speed"/>
 
                         <ImageView
-                            android:id="@+id/right_axis_arrow"
+                            android:id="@+id/x_axis_arrow"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:layout_marginRight="@dimen/list_content_padding"

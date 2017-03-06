@@ -292,7 +292,9 @@ public class MapInfoWidgetsFactory {
 			} else {
 				view.updateVisibility(descrView, false);
 			}
-			view.getShadowView().setVisibility(View.VISIBLE);
+			if (view.getShadowView() != null) {
+				view.getShadowView().setVisibility(View.VISIBLE);
+			}
 		}
 	}
 

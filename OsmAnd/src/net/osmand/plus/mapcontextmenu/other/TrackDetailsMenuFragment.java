@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -32,11 +33,31 @@ public class TrackDetailsMenuFragment extends Fragment {
 
 		menu = mapActivity.getMapLayers().getMapControlsLayer().getTrackDetailsMenu();
 		View view = inflater.inflate(R.layout.track_details, container, false);
-		if (menu == null) {
+		if (menu == null || menu.getGpxItem() == null) {
 			return view;
 		}
 
 		mainView = view.findViewById(R.id.main_view);
+
+		ImageButton backButton = (ImageButton) mainView.findViewById(R.id.top_bar_back_button);
+		ImageButton closeButton = (ImageButton) mainView.findViewById(R.id.top_bar_close_button);
+		if (backButton != null) {
+			backButton.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					getActivity().onBackPressed();
+				}
+			});
+		}
+		if (closeButton != null) {
+			closeButton.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					MapActivity.clearPrevActivityIntent();
+					dismiss();
+				}
+			});
+		}
 
 		updateInfo();
 
@@ -46,7 +67,7 @@ public class TrackDetailsMenuFragment extends Fragment {
 	@Override
 	public void onResume() {
 		super.onResume();
-		if (menu == null) {
+		if (menu == null || menu.getGpxItem() == null) {
 			dismiss();
 		}
 	}
@@ -116,13 +137,20 @@ public class TrackDetailsMenuFragment extends Fragment {
 		ImageView xAxisArrow = (ImageView) mainView.findViewById(R.id.x_axis_arrow);
 		yAxisArrow.setImageDrawable(ctx.getMyApplication().getIconsCache().getThemedIcon(R.drawable.ic_action_arrow_drop_down));
 		xAxisArrow.setImageDrawable(ctx.getMyApplication().getIconsCache().getThemedIcon(R.drawable.ic_action_arrow_drop_down));
+
+		ImageButton backButton = (ImageButton) mainView.findViewById(R.id.top_bar_back_button);
+		if (backButton != null) {
+			backButton.setImageDrawable(ctx.getMyApplication().getIconsCache().getIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha, R.color.color_white));
+		}
+
 	}
 
 	public static boolean showInstance(final MapActivity mapActivity) {
 		try {
+			boolean portrait = mapActivity.findViewById(R.id.bottomFragmentContainer) != null;
 			TrackDetailsMenuFragment fragment = new TrackDetailsMenuFragment();
 			mapActivity.getSupportFragmentManager().beginTransaction()
-					.add(R.id.bottomFragmentContainer, fragment, TAG)
+					.add(portrait ? R.id.bottomFragmentContainer : R.id.routeMenuContainer, fragment, TAG)
 					.addToBackStack(TAG).commitAllowingStateLoss();
 
 			return true;
