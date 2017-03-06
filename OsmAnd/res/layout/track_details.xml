@@ -6,69 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/color_transparent"
     android:clickable="true"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:osmand="http://schemas.android.com/apk/res-auto">
-
-    <LinearLayout
-        android:id="@+id/top_bar_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:minHeight="@dimen/dashboard_map_toolbar"
-        android:gravity="center_vertical"
-        android:clickable="true"
-        android:background="@drawable/gradient_toolbar"
-        android:orientation="horizontal">
-
-        <ImageButton
-            android:id="@+id/top_bar_back_button"
-            style="@style/Widget.AppCompat.ActionButton"
-            android:layout_width="56dp"
-            android:layout_height="56dp"
-            android:layout_gravity="top"
-            android:contentDescription="@string/back_to_search"
-            android:src="@drawable/abc_ic_ab_back_mtrl_am_alpha"/>
-
-        <LinearLayout
-            android:id="@+id/top_bar_title_layout"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:paddingBottom="10dp"
-            android:paddingTop="10dp">
-
-            <net.osmand.plus.widgets.TextViewEx
-                android:id="@+id/top_bar_title"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@null"
-                android:ellipsize="end"
-                android:gravity="center_vertical"
-                android:lines="1"
-                android:singleLine="true"
-                android:textColor="@color/color_white"
-                android:textSize="@dimen/abc_text_size_medium_material"
-                osmand:typeface="@string/font_roboto_medium"
-                android:text="@string/rendering_category_details"/>
-
-            <TextView
-                android:id="@+id/widget_top_bar_description"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@null"
-                android:ellipsize="end"
-                android:gravity="center_vertical"
-                android:textColor="?android:textColorPrimary"
-                android:textSize="@dimen/default_sub_text_size"
-                android:visibility="gone"
-                tools:text="New version of OsmAnd+ with 50% discount"/>
-
-        </LinearLayout>
-
-
-
-    </LinearLayout>
+    xmlns:tools="http://schemas.android.com/tools">
 
     <LinearLayout
         android:id="@+id/main_view"

@@ -33,6 +33,8 @@ import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetType;
 import net.osmand.plus.helpers.GpxUiHelper.OrderedLineDataSet;
 import net.osmand.plus.views.MapControlsLayer;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory;
+import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -44,6 +46,7 @@ public class TrackDetailsMenu {
 	private OsmandMapTileView mapView;
 	private MapControlsLayer mapControlsLayer;
 	private GpxDisplayItem gpxItem;
+	private TrackDetailsBarController toolbarController;
 
 	private static boolean VISIBLE;
 	private boolean nightMode;
@@ -72,13 +75,22 @@ public class TrackDetailsMenu {
 			boolean portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
 			if (!portrait) {
 				mapActivity.getMapView().setMapPositionX(1);
+			} else {
+				toolbarController = new TrackDetailsBarController();
+				toolbarController.setTitle(mapActivity.getString(R.string.rendering_category_details));
+				toolbarController.setOnBackButtonClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						mapActivity.onBackPressed();
+					}
+				});
+				mapActivity.showTopToolbar(toolbarController);
 			}
 
 			mapActivity.refreshMap();
 
 			TrackDetailsMenuFragment.showInstance(mapActivity);
-
-			mapActivity.findViewById(R.id.MapHudButtonsOverlay).setVisibility(View.INVISIBLE);
+			mapActivity.getMapLayers().getContextMenuLayer().enterGpxDetailsMode();
 		}
 	}
 
@@ -109,10 +121,13 @@ public class TrackDetailsMenu {
 
 	public void onDismiss() {
 		VISIBLE = false;
+		if (toolbarController != null) {
+			mapActivity.hideTopToolbar(toolbarController);
+		}
+		mapActivity.getMapLayers().getContextMenuLayer().exitGpxDetailsMode();
 		mapActivity.getMapLayers().getGpxLayer().setSelectedPointLatLon(null);
 		mapActivity.getMapView().setMapPositionX(0);
 		mapActivity.getMapView().refreshMap();
-		mapActivity.findViewById(R.id.MapHudButtonsOverlay).setVisibility(View.VISIBLE);
 	}
 
 	public void updateInfo(final View main) {
@@ -332,6 +347,26 @@ public class TrackDetailsMenu {
 			chart.highlightValue(gpxItem.chartHighlightPos, 0);
 		} else {
 			chart.highlightValue(null);
+		}
+	}
+
+	private static class TrackDetailsBarController extends TopToolbarController {
+
+		TrackDetailsBarController() {
+			super(MapInfoWidgetsFactory.TopToolbarControllerType.TRACK_DETAILS);
+			setBackBtnIconClrIds(0, 0);
+			setCloseBtnIconClrIds(0, 0);
+			setTitleTextClrIds(R.color.primary_text_dark, R.color.primary_text_dark);
+			setDescrTextClrIds(R.color.primary_text_dark, R.color.primary_text_dark);
+			setBgIds(R.drawable.gradient_toolbar, R.drawable.gradient_toolbar,
+					R.drawable.gradient_toolbar, R.drawable.gradient_toolbar);
+		}
+
+		@Override
+		public void updateToolbar(MapInfoWidgetsFactory.TopToolbarView view) {
+			super.updateToolbar(view);
+			view.getCloseButton().setVisibility(View.GONE);
+			view.getShadowView().setVisibility(View.GONE);
 		}
 	}
 }

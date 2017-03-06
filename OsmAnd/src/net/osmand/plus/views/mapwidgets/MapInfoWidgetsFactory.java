@@ -48,6 +48,7 @@ public class MapInfoWidgetsFactory {
 	public enum TopToolbarControllerType {
 		QUICK_SEARCH,
 		CONTEXT_MENU,
+		TRACK_DETAILS,
 		DISCOUNT,
 	}
 
@@ -291,6 +292,7 @@ public class MapInfoWidgetsFactory {
 			} else {
 				view.updateVisibility(descrView, false);
 			}
+			view.getShadowView().setVisibility(View.VISIBLE);
 		}
 	}
 
@@ -305,6 +307,7 @@ public class MapInfoWidgetsFactory {
 		private TextView titleView;
 		private TextView descrView;
 		private ImageButton closeButton;
+		private View shadowView;
 		private boolean nightMode;
 
 		public TopToolbarView(final MapActivity map) {
@@ -317,6 +320,7 @@ public class MapInfoWidgetsFactory {
 			closeButton = (ImageButton) map.findViewById(R.id.widget_top_bar_close_button);
 			titleView = (TextView) map.findViewById(R.id.widget_top_bar_title);
 			descrView = (TextView) map.findViewById(R.id.widget_top_bar_description);
+			shadowView = map.findViewById(R.id.widget_top_bar_shadow);
 			updateVisibility(false);
 		}
 
@@ -346,6 +350,10 @@ public class MapInfoWidgetsFactory {
 
 		public ImageButton getCloseButton() {
 			return closeButton;
+		}
+
+		public View getShadowView() {
+			return shadowView;
 		}
 
 		public TopToolbarController getTopController() {

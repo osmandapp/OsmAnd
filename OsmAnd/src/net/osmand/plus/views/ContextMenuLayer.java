@@ -78,6 +78,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	private boolean cancelApplyingNewMarkerPosition;
 	private LatLon applyingMarkerLatLon;
 	private boolean wasCollapseButtonVisible;
+	private boolean mInGpxDetailsMode;
 
 	private List<String> publicTransportTypes;
 
@@ -240,6 +241,10 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		return mInChangeMarkerPositionMode;
 	}
 
+	public boolean isInGpxDetailsMode() {
+		return mInGpxDetailsMode;
+	}
+
 	public boolean isObjectMoveable(Object o) {
 		if (o == null) {
 			return true;
@@ -305,6 +310,34 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		});
 	}
 
+	public void enterGpxDetailsMode() {
+		menu.updateMapCenter(null);
+		menu.hide();
+
+		mInGpxDetailsMode = true;
+		mark(View.INVISIBLE, R.id.map_ruler_layout,
+				R.id.map_left_widgets_panel, R.id.map_right_widgets_panel, R.id.map_center_info);
+
+		View collapseButton = activity.findViewById(R.id.map_collapse_button);
+		if (collapseButton != null && collapseButton.getVisibility() == View.VISIBLE) {
+			wasCollapseButtonVisible = true;
+			collapseButton.setVisibility(View.INVISIBLE);
+		} else {
+			wasCollapseButtonVisible = false;
+		}
+	}
+
+	public void exitGpxDetailsMode() {
+		mInGpxDetailsMode = false;
+		mark(View.VISIBLE, R.id.map_ruler_layout,
+				R.id.map_left_widgets_panel, R.id.map_right_widgets_panel, R.id.map_center_info);
+
+		View collapseButton = activity.findViewById(R.id.map_collapse_button);
+		if (collapseButton != null && wasCollapseButtonVisible) {
+			collapseButton.setVisibility(View.VISIBLE);
+		}
+	}
+
 	private void quitMovingMarker() {
 		mInChangeMarkerPositionMode = false;
 		mark(View.VISIBLE, R.id.map_ruler_layout,
@@ -314,7 +347,6 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		if (collapseButton != null && wasCollapseButtonVisible) {
 			collapseButton.setVisibility(View.VISIBLE);
 		}
-
 	}
 
 	private void enterMovingMode(RotatedTileBox tileBox) {
@@ -500,7 +532,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	}
 
 	public boolean disableLongPressOnMap() {
-		if (mInChangeMarkerPositionMode) {
+		if (mInChangeMarkerPositionMode || mInGpxDetailsMode) {
 			return true;
 		}
 		boolean res = false;
@@ -574,7 +606,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 	@Override
 	public boolean onSingleTap(PointF point, RotatedTileBox tileBox) {
-		if (mInChangeMarkerPositionMode) {
+		if (mInChangeMarkerPositionMode || mInGpxDetailsMode) {
 			return true;
 		}
 
@@ -673,7 +705,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 		switch (event.getAction()) {
 			case MotionEvent.ACTION_DOWN:
-				if (!mInChangeMarkerPositionMode) {
+				if (!mInChangeMarkerPositionMode && !mInGpxDetailsMode) {
 					selectObjectsForContextMenu(tileBox, new PointF(event.getX(), event.getY()), true);
 					if (pressedLatLonFull.size() > 0 || pressedLatLonSmall.size() > 0) {
 						view.refreshMap();

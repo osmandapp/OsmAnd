@@ -220,7 +220,13 @@
         <include layout="@layout/recording_note_fragment"
             tools:visibility="gone"/>
 
-        <include layout="@layout/move_marker_bottom_sheet"/>
+        <include layout="@layout/move_marker_bottom_sheet"
+                 tools:visibility="gone"/>
+
+        <FrameLayout
+            android:id="@+id/bottomFragmentContainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
 
         <LinearLayout
             android:id="@+id/map_context_menu_layout"
