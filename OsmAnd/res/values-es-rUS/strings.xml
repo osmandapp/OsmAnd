@@ -2651,4 +2651,5 @@ Representa el área: %1$s x %2$s</string>
     <string name="track_points_category_name">Puntos importantes en esta ruta</string>
     <string name="add_new_folder">Añadir nueva carpeta</string>
     <string name="shared_string_slope">Pendiente</string>
+    <string name="lang_ber">Bereber (amazig)</string>
     </resources>
