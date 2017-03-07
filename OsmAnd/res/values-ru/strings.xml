@@ -6,7 +6,7 @@
     <string name="points_delete_multiple">Вы собираетесь удалить %1$d точку(и). Вы уверены?</string>
     <string name="route_points_category_name">Точки для прохождения</string>
     <string name="track_points_category_name">Важные точки маршрута</string>
-    <string name="gpx_track">Track</string>
+    <string name="gpx_track">Трек</string>
     <string name="max_speed">Макс. скорость</string>
     <string name="average_speed">Средняя скорость</string>
     <string name="shared_string_time_moving">Время в движении</string>
