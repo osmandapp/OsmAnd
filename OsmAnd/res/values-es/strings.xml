@@ -2163,7 +2163,7 @@ Lon %2$s</string>
     <string name="clear_updates_proposition_message">Puede quitar las actualizaciones descargadas y volver a la edición original del mapa</string>
     <string name="add_time_span">Añadir intervalo de tiempo</string>
     <string name="road_blocked">Carretera bloqueada</string>
-    <string name="shared_string_select">Selecciona</string>
+    <string name="shared_string_select">Seleccionar</string>
     <string name="switch_start_finish">Invertir punto de partida y destino</string>
     <string name="rendering_attr_hideIcons_name">Iconos de PDI</string>
     <string name="number_of_contributors">Número de colaboradores</string>
@@ -2450,7 +2450,7 @@ El espacio de almacenamiento usado es {3} MB temporalmente y {1} MB permanenteme
     <string name="gpx_logging_no_data">Sin datos</string>
     <string name="legacy_search">Búsqueda clásica</string>
     <string name="show_legacy_search">Mostrar búsqueda clásica</string>
-    <string name="show_legacy_search_desc">Permitir la búsqueda clásica en la lista de cajón</string>
+    <string name="show_legacy_search_desc">Activa la búsqueda clásica en la lista de cajón</string>
     <string name="routing_attr_allow_motorway_name">Permitir autopistas</string>
     <string name="routing_attr_allow_motorway_description">Permite autopistas</string>
     <string name="trip_rec_notification_settings">Grabación de viaje (sin datos)</string>
@@ -2609,7 +2609,7 @@ El espacio de almacenamiento usado es {3} MB temporalmente y {1} MB permanenteme
     <string name="routing_attr_height_obstacles_name">Utilizar datos de elevación</string>
     <string name="routing_attr_height_obstacles_description">Utilizar los datos de elevación del terreno proporcionados por SRTM, ASTER y UE-DEM</string>
 
-    <string name="rendering_attr_depthContours_description">Mostrar puntos y curvas de nivel</string>
+    <string name="rendering_attr_depthContours_description">Muestra las curvas de nivel y puntos</string>
     <string name="rendering_attr_depthContours_name">Curvas a nivel</string>
 	<string name="auto_split_recording_title">Auto-dividir grabaciones después de la separación</string>
 	<string name="auto_split_recording_descr">Iniciar nuevo segmento después de un hueco de 6 min, nueva pista después de un hueco de 2 h, o nuevo archivo después de un hueco más largo si ha cambiado la fecha.</string>
@@ -2619,7 +2619,7 @@ El espacio de almacenamiento usado es {3} MB temporalmente y {1} MB permanenteme
     <string name="navigate_point_olc_info_short">OLC corto
 Por favor proporciona un código completo</string>
     <string name="navigate_point_olc_info_area">OLC completo válido
-Representa área: %1$s x %2$s</string>
+Área representada: %1$s x %2$s</string>
     <string name="quick_action_page_list_descr">Tocando el botón de acción paginará a través de la lista abajo.</string>
     <string name="quick_action_map_overlay_switch">El mapa superpuesto se ha cambiado a \"%s\".</string>
     <string name="quick_action_map_underlay_switch">El mapa subyacente se ha cambiado a \"%s\".</string>
@@ -2631,7 +2631,7 @@ Representa área: %1$s x %2$s</string>
     <string name="track_points_category_name">Puntos importantes en esta ruta</string>
     <string name="gpx_track">Traza</string>
     <string name="max_speed">Velocidad máxima</string>
-    <string name="average_speed">Rango de velocidad</string>
+    <string name="average_speed">Velocidad media</string>
     <string name="shared_string_time_moving">Tiempo moviéndose</string>
     <string name="shared_string_time_span">Lapso de tiempo</string>
     <string name="shared_string_max">Máx</string>
