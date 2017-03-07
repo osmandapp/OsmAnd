@@ -2591,7 +2591,7 @@ El espacio de almacenamiento usado es {3} MB temporalmente y {1} MB permanenteme
 
  y más…
  "</string>
-	<string name="select_gpx_folder">Seleccionar carpeta GPX</string>
+	<string name="select_gpx_folder">Seleccionar carpeta de traza</string>
     <string name="file_can_not_be_moved">No se puede mover el archivo.</string>
     <string name="shared_string_move">Mover</string>
     <string name="shared_string_tracks">Trazas</string>
@@ -2601,7 +2601,7 @@ El espacio de almacenamiento usado es {3} MB temporalmente y {1} MB permanenteme
     <string name="altitude_descent">Descenso</string>
     <string name="altitude_ascent">Ascenso</string>
     <string name="altitude_range">Rango de altitud</string>
-    <string name="average_altitude">Media</string>
+    <string name="average_altitude">Altitud media</string>
     <string name="shared_string_time">Tiempo</string>
     <string name="total_distance">Distancia total</string>
     <string name="routing_attr_height_relief_smoothness_factor_name">Factor de suavizado del relieve</string>
@@ -2623,4 +2623,19 @@ Representa área: %1$s x %2$s</string>
     <string name="quick_action_page_list_descr">Tocando el botón de acción paginará a través de la lista abajo.</string>
     <string name="quick_action_map_overlay_switch">El mapa superpuesto se ha cambiado a \"%s\".</string>
     <string name="quick_action_map_underlay_switch">El mapa subyacente se ha cambiado a \"%s\".</string>
+    <string name="shared_string_slope">Pendiente</string>
+    <string name="add_new_folder">Añadir nueva carpeta</string>
+    <string name="points_delete_multiple_succesful">Punto(s) eliminados con éxito.</string>
+    <string name="points_delete_multiple">¿Seguro que quiere borrar %1$d punto(s)?</string>
+    <string name="route_points_category_name">Puntos en la ruta a pasar</string>
+    <string name="track_points_category_name">Puntos importantes en esta ruta</string>
+    <string name="gpx_track">Traza</string>
+    <string name="max_speed">Velocidad máxima</string>
+    <string name="average_speed">Rango de velocidad</string>
+    <string name="shared_string_time_moving">Tiempo moviéndose</string>
+    <string name="shared_string_time_span">Lapso de tiempo</string>
+    <string name="shared_string_max">Máx</string>
+    <string name="shared_string_start_time">Hora de inicio</string>
+    <string name="shared_string_end_time">Hora de fin</string>
+    <string name="shared_string_color">Color</string>
     </resources>
