@@ -2939,4 +2939,12 @@
 	<string name="poi_free_flying_paragliding_no">Parapent: no</string>
 	<string name="poi_free_flying_hanggliding_yes">Ala delta</string>
 	<string name="poi_free_flying_site_toplanding">Pista elevada</string>
+	<string name="poi_wetland_bog">Torbera</string>
+	<string name="poi_wetland_marsh">Aiguamoll</string>
+	<string name="poi_wetland_reedbed">Canyar</string>
+	<string name="poi_wetland_swamp">Pantà</string>
+	<string name="poi_wetland_saltern">Salina</string>
+	<string name="poi_wetland_tidalflat">Plana de marea</string>
+	<string name="poi_wetland_saltmarsh">Aiguamoll de sal</string>
+	<string name="poi_wetland_mangrove">Manglar</string>
 	</resources>
