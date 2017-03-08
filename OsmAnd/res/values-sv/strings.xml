@@ -2529,4 +2529,6 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="routing_attr_height_obstacles_description">Använd terränghöjddata från SRTM, ASTER och EU-DEM</string>
 
     <string name="rendering_attr_depthContours_description">Visa djupkonturer och punkter</string>
+    <string name="shared_string_slope">Sluttning</string>
+    <string name="altitude_range">Höjdområde</string>
     </resources>
