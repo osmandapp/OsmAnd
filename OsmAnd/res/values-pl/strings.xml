@@ -2880,4 +2880,5 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="add_new_folder">Dodaj nowy katalog</string>
     <string name="shared_string_slope">Nachylenie</string>
     <string name="lang_ber">Berberyjski</string>
+    <string name="relief_smoothness_factor_descr">Bardziej równo lub bardziej górzyście</string>
     </resources>
