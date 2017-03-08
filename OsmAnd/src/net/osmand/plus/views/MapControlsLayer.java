@@ -636,7 +636,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		boolean trackDialogOpened = TrackDetailsMenu.isVisible();
 		boolean showRouteCalculationControls = routePlanningMode ||
 				((app.accessibilityEnabled() || (System.currentTimeMillis() - touchEvent < TIMEOUT_TO_SHOW_BUTTONS)) && routeFollowingMode);
-		updateMyLocation(rh, routeDialogOpened);
+		updateMyLocation(rh, routeDialogOpened || trackDialogOpened);
 		boolean showButtons = (showRouteCalculationControls || !routeFollowingMode)
 				&& !isInChangeMarkerPositionMode() && !isInGpxDetailsMode();
 		//routePlanningBtn.setIconResId(routeFollowingMode ? R.drawable.ic_action_gabout_dark : R.drawable.map_directions);

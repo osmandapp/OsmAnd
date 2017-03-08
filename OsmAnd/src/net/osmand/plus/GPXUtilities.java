@@ -337,6 +337,7 @@ public class GPXUtilities {
 				channelBottom = channelBase;
 				channelThres = channelThresMin;
 
+				float segmentDistance = 0f;
 				metricEnd += s.metricEnd;
 				secondaryMetricEnd += s.secondaryMetricEnd;
 				points += numberOfPoints;
@@ -448,7 +449,8 @@ public class GPXUtilities {
 						// a little more exact, also seems slightly faster:
 						net.osmand.Location.distanceBetween(prev.lat, prev.lon, point.lat, point.lon, calculations);
 						totalDistance += calculations[0];
-						point.distance = totalDistance;
+						segmentDistance += calculations[0];
+						point.distance = segmentDistance;
 						timeDiff = (int)((point.time - prev.time) / 1000);
 
 						// Motion detection:
