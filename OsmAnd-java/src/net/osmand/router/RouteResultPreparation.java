@@ -427,9 +427,9 @@ public class RouteResultPreparation {
 								serializer.endTag("","desc");
 								lastHeight = h;
 							} else if(lastHeight != -180){
-								serializer.startTag("","ele");
-								serializer.text(lastHeight +"");
-								serializer.endTag("","ele");
+//								serializer.startTag("","ele");
+//								serializer.text(lastHeight +"");
+//								serializer.endTag("","ele");
 							}
 							serializer.endTag("", "trkpt");
 							prev = l;
