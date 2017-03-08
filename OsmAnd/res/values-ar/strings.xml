@@ -2753,4 +2753,12 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
 • عرض نمط ارتفاع أساسي و بسيط لتسجيلات الجي بي إكس
 • العديد من التحسينات الأخرى وإصلاح الأخطاء وأكثر من ذلك ...
  "</string>
-	</resources>
+	<string name="add_new_folder">أضف ملفا جديدا</string>
+    <string name="track_points_category_name">النقاط المهمة في هذا الطريق</string>
+    <string name="max_speed">السرعة القصوى</string>
+    <string name="average_speed">متوسط السرعة</string>
+    <string name="shared_string_color">اللون</string>
+    <string name="file_can_not_be_moved">لا يمكن نقل الملف.</string>
+    <string name="total_distance">المسافة الإجمالية</string>
+    <string name="lang_ber">البربرية</string>
+    </resources>
