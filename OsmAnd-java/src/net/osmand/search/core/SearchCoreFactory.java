@@ -925,7 +925,7 @@ public class SearchCoreFactory {
 					res.preferredZoom = 17;
 					resultMatcher.publish(res);
 				}
-				if(!Algorithms.isEmpty(lw) && !Character.isDigit(lw.charAt(0))) {
+				if(Algorithms.isEmpty(lw) || !Character.isDigit(lw.charAt(0))) {
 					for(Street street : s.getIntersectedStreets()) {
 						SearchResult res = new SearchResult(phrase);
 						if(!sm.matches(street.getName()) && !sm.matches(street.getAllNames(true))) {
@@ -936,6 +936,7 @@ public class SearchCoreFactory {
 						res.object = street;
 						res.file = file;
 						res.relatedObject = s;
+						res.priority = priority + 1;
 						res.localeRelatedObjectName = s.getName(phrase.getSettings().getLang(), phrase.getSettings().isTransliterate());
 						res.priorityDistance = 0;
 						res.objectType = ObjectType.STREET_INTERSECTION;
