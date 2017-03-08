@@ -702,13 +702,6 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		boolean transliterate = app.getSettings().MAP_TRANSLITERATE_NAMES.get();
 		searchHelper = app.getSearchUICore();
 		searchUICore = searchHelper.getCore();
-		if (newSearch) {
-			setResultCollection(null);
-			if (!phraseDefined) {
-				searchUICore.resetPhrase();
-			}
-			phraseDefined = false;
-		}
 
 		location = app.getLocationProvider().getLastKnownLocation();
 
@@ -735,6 +728,15 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 				new LatLon(searchLatLon.getLatitude(), searchLatLon.getLongitude()));
 		settings = settings.setLang(locale, transliterate);
 		searchUICore.updateSettings(settings);
+
+		if (newSearch) {
+			setResultCollection(null);
+			if (!phraseDefined) {
+				searchUICore.resetPhrase();
+			}
+			phraseDefined = false;
+		}
+
 		searchUICore.setOnSearchStart(new Runnable() {
 			@Override
 			public void run() {
