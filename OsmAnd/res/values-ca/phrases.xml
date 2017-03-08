@@ -2934,4 +2934,8 @@
 	<string name="poi_industrial_depot">Tipus: cotxera</string>
 
 	<string name="poi_quango">ONG quasi autònoma</string>
+	<string name="poi_free_flying_hanggliding_no">Ala delta: no</string>
+	<string name="poi_free_flying_paragliding_yes">Parapent</string>
+	<string name="poi_free_flying_paragliding_no">Parapent: no</string>
+	<string name="poi_free_flying_hanggliding_yes">Ala delta</string>
 	</resources>
