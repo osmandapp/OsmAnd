@@ -2818,4 +2818,8 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 
  і шмат другога…
  "</string>
-	</resources>
+	<string name="shared_string_slope">Ухіл</string>
+    <string name="add_new_folder">Дадаць новую тэчку</string>
+    <string name="points_delete_multiple_succesful">Кропка(і) паспяхова выдалена.</string>
+    <string name="points_delete_multiple">Вы збіраецеся выдаліць %1$d кропак. Вы ўпэўнены?</string>
+    </resources>
