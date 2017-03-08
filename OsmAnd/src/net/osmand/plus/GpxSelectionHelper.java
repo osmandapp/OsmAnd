@@ -673,6 +673,7 @@ public class GpxSelectionHelper {
 		public String url;
 		public Bitmap image;
 		public boolean expanded;
+		public boolean route;
 
 		public WptPt locationOnMap;
 		public GPXDataSetType chartType;

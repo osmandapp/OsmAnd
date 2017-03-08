@@ -223,6 +223,9 @@ public class ShowRouteInfoDialogFragment extends DialogFragment {
 			GpxDisplayGroup group = getMyApplication().getSelectedGpxHelper().buildGpxDisplayGroup(gpx, 0, groupName);
 			if (group != null && group.getModifiableList().size() > 0) {
 				gpxItem = group.getModifiableList().get(0);
+				if (gpxItem != null) {
+					gpxItem.route = true;
+				}
 			}
 		}
 	}

@@ -126,6 +126,7 @@ public class TrackDetailsMenu {
 		}
 		mapActivity.getMapLayers().getContextMenuLayer().exitGpxDetailsMode();
 		mapActivity.getMapLayers().getGpxLayer().setSelectedPointLatLon(null);
+		mapActivity.getMapLayers().getMapInfoLayer().setSelectedPointLatLon(null);
 		mapActivity.getMapView().setMapPositionX(0);
 		mapActivity.getMapView().refreshMap();
 	}
@@ -183,7 +184,11 @@ public class TrackDetailsMenu {
 								}
 							}
 							if (wpt != null) {
-								mapActivity.getMapLayers().getGpxLayer().setSelectedPointLatLon(new LatLon(wpt.lat, wpt.lon));
+								if (gpxItem.route) {
+									mapActivity.getMapLayers().getMapInfoLayer().setSelectedPointLatLon(new LatLon(wpt.lat, wpt.lon));
+								} else {
+									mapActivity.getMapLayers().getGpxLayer().setSelectedPointLatLon(new LatLon(wpt.lat, wpt.lon));
+								}
 								mapActivity.setMapLocation(wpt.lat, wpt.lon);
 							}
 						}

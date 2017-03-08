@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.TreeMap;
 
 import net.osmand.Location;
+import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.R;
@@ -48,13 +49,24 @@ public class RouteLayer extends OsmandMapLayer {
 	private Paint paintIcon;
 	private Paint paintIconAction;
 
+	private Paint paintIconSelected;
+	private Bitmap selectedPoint;
+	private LatLon selectedPointLatLon;
+
 	private RenderingLineAttributes attrs;
 
 
 	public RouteLayer(RoutingHelper helper){
 		this.helper = helper;
 	}
-	
+
+	public LatLon getSelectedPointLatLon() {
+		return selectedPointLatLon;
+	}
+
+	public void setSelectedPointLatLon(LatLon selectedPointLatLon) {
+		this.selectedPointLatLon = selectedPointLatLon;
+	}
 
 	private void initUI() {
 		actionArrow = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_action_arrow, null);
@@ -79,6 +91,9 @@ public class RouteLayer extends OsmandMapLayer {
 		
 		attrs.paint2.setStrokeCap(Cap.BUTT);
 		attrs.paint2.setColor(Color.BLACK);
+
+		paintIconSelected = new Paint();
+		selectedPoint = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_default_location);
 	}
 	
 	@Override
@@ -133,6 +148,17 @@ public class RouteLayer extends OsmandMapLayer {
 			double lat = topLatitude - bottomLatitude + 0.1;  
 			double lon = rightLongitude - leftLongitude + 0.1;
 			drawLocations(tileBox, canvas, topLatitude + lat, leftLongitude - lon, bottomLatitude - lat, rightLongitude + lon);
+
+			if (selectedPointLatLon != null
+					&& selectedPointLatLon.getLatitude() >= latlonRect.bottom
+					&& selectedPointLatLon.getLatitude() <= latlonRect.top
+					&& selectedPointLatLon.getLongitude() >= latlonRect.left
+					&& selectedPointLatLon.getLongitude() <= latlonRect.right) {
+				float x = tileBox.getPixXFromLatLon(selectedPointLatLon.getLatitude(), selectedPointLatLon.getLongitude());
+				float y = tileBox.getPixYFromLatLon(selectedPointLatLon.getLatitude(), selectedPointLatLon.getLongitude());
+				paintIcon.setColorFilter(null);
+				canvas.drawBitmap(selectedPoint, x - selectedPoint.getWidth() / 2, y - selectedPoint.getHeight() / 2, paintIconSelected);
+			}
 		}
 	
 	}

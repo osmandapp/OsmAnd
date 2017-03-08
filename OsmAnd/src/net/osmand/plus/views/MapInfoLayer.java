@@ -1,8 +1,16 @@
 package net.osmand.plus.views;
 
 
-import java.lang.reflect.Field;
+import android.content.Context;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.support.v4.content.ContextCompat;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
 
+import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
@@ -26,14 +34,8 @@ import net.osmand.plus.views.mapwidgets.RouteInfoWidgetsFactory.LanesControl;
 import net.osmand.plus.views.mapwidgets.RouteInfoWidgetsFactory.RulerWidget;
 import net.osmand.plus.views.mapwidgets.RouteInfoWidgetsFactory.TimeControlWidgetState;
 import net.osmand.plus.views.mapwidgets.TextInfoWidget;
-import android.content.Context;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.support.v4.content.ContextCompat;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.ImageButton;
-import android.widget.LinearLayout;
+
+import java.lang.reflect.Field;
 
 public class MapInfoLayer extends OsmandMapLayer {
 	private final MapActivity map;
@@ -54,6 +56,8 @@ public class MapInfoLayer extends OsmandMapLayer {
 	private DrawSettings drawSettings;
 	private TopTextView streetNameView;
 	private TopToolbarView topToolbarView;
+
+	private LatLon selectedPointLatLon;
 
 	public MapInfoLayer(MapActivity map, RouteLayer layer){
 		this.map = map;
@@ -205,7 +209,16 @@ public class MapInfoLayer extends OsmandMapLayer {
 			}
 		});
 	}
-	
+
+	public LatLon getSelectedPointLatLon() {
+		return selectedPointLatLon;
+	}
+
+	public void setSelectedPointLatLon(LatLon selectedPointLatLon) {
+		this.selectedPointLatLon = selectedPointLatLon;
+		routeLayer.setSelectedPointLatLon(selectedPointLatLon);
+	}
+
 	private static class TextState {
 		boolean textBold ;
 		boolean night;
