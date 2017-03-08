@@ -795,7 +795,7 @@ public class ConfigureMapMenu {
 		}
 	}
 
-	public static String[] mapNamesIds = new String[]{"", "en", "af", "als", "ar", "az", "be", "bg", "bn", "bpy", "br", "bs", "ca", "ceb", "cs", "cy", "da", "de", "el", "eo", "es", "et", "eu", "fa", "fi", "fr", "fy", "ga", "gl", "he", "hi", "hsb", "hr", "ht", "hu", "hy", "id", "is", "it", "ja", "ka", "ko", "ku", "la", "lb", "lt", "lv", "mk", "ml", "mr", "ms", "nds", "new", "nl", "nn", "no", "nv", "os", "pl", "pms", "pt", "ro", "ru", "sc", "sh", "sk", "sl", "sq", "sr", "sv", "sw", "ta", "te", "th", "tl", "tr", "uk", "vi", "vo", "zh"};
+	public static String[] mapNamesIds = new String[]{"", "en", "af", "als", "ar", "az", "be", "ber", "bg", "bn", "bpy", "br", "bs", "ca", "ceb", "cs", "cy", "da", "de", "el", "eo", "es", "et", "eu", "fa", "fi", "fr", "fy", "ga", "gl", "he", "hi", "hsb", "hr", "ht", "hu", "hy", "id", "is", "it", "ja", "ka", "kab", "ko", "ku", "la", "lb", "lt", "lv", "mk", "ml", "mr", "ms", "nds", "new", "nl", "nn", "no", "nv", "os", "pl", "pms", "pt", "ro", "ru", "sc", "sh", "sk", "sl", "sq", "sr", "sv", "sw", "ta", "te", "th", "tl", "tr", "uk", "vi", "vo", "zh"};
 
 	public static String[] getSortedMapNamesIds(Context ctx, String[] ids, String[] values) {
 		final Map<String, String> mp = new HashMap<>();
@@ -1267,42 +1267,17 @@ public class ConfigureMapMenu {
 
 		private OsmandApplication app;
 		private int currentColor;
-		private GpxAppearanceAdapterType adapterType = GpxAppearanceAdapterType.TRACK_WIDTH_COLOR;
 
-		public enum GpxAppearanceAdapterType {
-			TRACK_WIDTH,
-			TRACK_COLOR,
-			TRACK_WIDTH_COLOR
-		}
-
-		public GpxAppearanceAdapter(Context context, String currentColorValue, GpxAppearanceAdapterType adapterType) {
+		public GpxAppearanceAdapter(Context context, String currentColorValue) {
 			super(context, R.layout.rendering_prop_menu_item);
-			this.app = (OsmandApplication) getContext().getApplicationContext();
-			this.adapterType = adapterType;
-			RenderingRulesStorage renderer = app.getRendererRegistry().getCurrentSelectedRenderer();
-			this.currentColor = parseTrackColor(renderer, currentColorValue);
-			init();
-		}
+			app = (OsmandApplication) getContext().getApplicationContext();
 
-		public GpxAppearanceAdapter(Context context, int currentColor, GpxAppearanceAdapterType adapterType) {
-			super(context, R.layout.rendering_prop_menu_item);
-			this.app = (OsmandApplication) getContext().getApplicationContext();
-			this.adapterType = adapterType;
-			this.currentColor = currentColor;
-			init();
-		}
-
-		public void init() {
 			RenderingRuleProperty trackWidthProp = null;
 			RenderingRuleProperty trackColorProp = null;
 			RenderingRulesStorage renderer = app.getRendererRegistry().getCurrentSelectedRenderer();
 			if (renderer != null) {
-				if (adapterType == GpxAppearanceAdapterType.TRACK_WIDTH || adapterType == GpxAppearanceAdapterType.TRACK_WIDTH_COLOR) {
-					trackWidthProp = renderer.PROPS.getCustomRule(CURRENT_TRACK_WIDTH_ATTR);
-				}
-				if (adapterType == GpxAppearanceAdapterType.TRACK_COLOR || adapterType == GpxAppearanceAdapterType.TRACK_WIDTH_COLOR) {
-					trackColorProp = renderer.PROPS.getCustomRule(CURRENT_TRACK_COLOR_ATTR);
-				}
+				trackWidthProp = renderer.PROPS.getCustomRule(CURRENT_TRACK_WIDTH_ATTR);
+				trackColorProp = renderer.PROPS.getCustomRule(CURRENT_TRACK_COLOR_ATTR);
 			}
 
 			if (trackWidthProp != null) {
@@ -1318,6 +1293,8 @@ public class ConfigureMapMenu {
 				item.setLastItem(true);
 			}
 			if (trackColorProp != null) {
+				currentColor = parseTrackColor(renderer, currentColorValue);
+
 				AppearanceListItem item = new AppearanceListItem(CURRENT_TRACK_COLOR_ATTR, "",
 						SettingsActivity.getStringPropertyValue(getContext(), trackColorProp.getDefaultValueDescription()),
 						parseTrackColor(renderer, ""));
