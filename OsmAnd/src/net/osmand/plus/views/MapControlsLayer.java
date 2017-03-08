@@ -282,7 +282,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 	private void initRouteControls() {
 		mapRouteInfoMenu = new MapRouteInfoMenu(mapActivity, this);
-		trackDetailsMenu = new TrackDetailsMenu(mapActivity, this);
+		trackDetailsMenu = new TrackDetailsMenu(mapActivity);
 	}
 
 	public void updateRouteButtons(View main, boolean routeInfo) {
@@ -633,6 +633,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		}
 		boolean routeFollowingMode = !routePlanningMode && rh.isFollowingMode();
 		boolean routeDialogOpened = MapRouteInfoMenu.isVisible();
+		boolean trackDialogOpened = TrackDetailsMenu.isVisible();
 		boolean showRouteCalculationControls = routePlanningMode ||
 				((app.accessibilityEnabled() || (System.currentTimeMillis() - touchEvent < TIMEOUT_TO_SHOW_BUTTONS)) && routeFollowingMode);
 		updateMyLocation(rh, routeDialogOpened);
@@ -654,13 +655,13 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 		mapZoomIn.updateVisibility(!routeDialogOpened);
 		mapZoomOut.updateVisibility(!routeDialogOpened);
-		compassHud.updateVisibility(!routeDialogOpened && shouldShowCompass());
+		compassHud.updateVisibility(!routeDialogOpened && !trackDialogOpened && shouldShowCompass());
 
 		if (layersHud.setIconResId(settings.getApplicationMode().getSmallIconDark())) {
 			layersHud.update(app, isNight);
 		}
-		layersHud.updateVisibility(!routeDialogOpened);
-		quickSearchHud.updateVisibility(!routeDialogOpened);
+		layersHud.updateVisibility(!routeDialogOpened && !trackDialogOpened);
+		quickSearchHud.updateVisibility(!routeDialogOpened && !trackDialogOpened);
 
 		if (!routePlanningMode && !routeFollowingMode) {
 			if (mapView.isZooming()) {

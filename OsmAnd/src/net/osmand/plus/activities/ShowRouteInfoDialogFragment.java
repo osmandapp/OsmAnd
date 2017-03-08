@@ -1,6 +1,8 @@
 package net.osmand.plus.activities;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnDismissListener;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
@@ -30,6 +32,7 @@ import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
 import net.osmand.Location;
+import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
@@ -37,6 +40,8 @@ import net.osmand.plus.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.plus.GPXUtilities.Track;
 import net.osmand.plus.GPXUtilities.TrkSegment;
 import net.osmand.plus.GPXUtilities.WptPt;
+import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
+import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
@@ -44,6 +49,7 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetAxisType;
+import net.osmand.plus.helpers.GpxUiHelper.OrderedLineDataSet;
 import net.osmand.plus.mapcontextmenu.other.MapRouteInfoMenu;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
@@ -68,6 +74,8 @@ public class ShowRouteInfoDialogFragment extends DialogFragment {
 	private ListView listView;
 	private RouteInfoAdapter adapter;
 	private GPXFile gpx;
+	private OrderedLineDataSet elevationDataSet;
+	private GpxDisplayItem gpxItem;
 	private boolean hasHeights;
 
 	public ShowRouteInfoDialogFragment() {
@@ -210,6 +218,12 @@ public class ShowRouteInfoDialogFragment extends DialogFragment {
 			}
 			track.segments.add(seg);
 			gpx.tracks.add(track);
+
+			String groupName = getMyApplication().getString(R.string.current_route);
+			GpxDisplayGroup group = getMyApplication().getSelectedGpxHelper().buildGpxDisplayGroup(gpx, 0, groupName);
+			if (group != null && group.getModifiableList().size() > 0) {
+				gpxItem = group.getModifiableList().get(0);
+			}
 		}
 	}
 
@@ -228,11 +242,11 @@ public class ShowRouteInfoDialogFragment extends DialogFragment {
 		GPXTrackAnalysis analysis = gpx.getAnalysis(0);
 		if (analysis.totalDistance > 0) {
 			List<ILineDataSet> dataSets = new ArrayList<>();
-			GpxUiHelper.OrderedLineDataSet elevationDataSet =
+			elevationDataSet =
 					GpxUiHelper.createGPXElevationDataSet(app, mChart, analysis, GPXDataSetAxisType.DISTANCE, false, true);
 			dataSets.add(elevationDataSet);
 			if (analysis.elevationData.size() > 1) {
-				GpxUiHelper.OrderedLineDataSet slopeDataSet =
+				OrderedLineDataSet slopeDataSet =
 						GpxUiHelper.createGPXSlopeDataSet(app, mChart, analysis, GPXDataSetAxisType.DISTANCE, elevationDataSet.getValues(), true, true);
 				dataSets.add(slopeDataSet);
 			}
@@ -263,6 +277,68 @@ public class ShowRouteInfoDialogFragment extends DialogFragment {
 				.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_action_altitude_descent));
 		((ImageView) headerView.findViewById(R.id.ascent_icon))
 				.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_action_altitude_ascent));
+
+		headerView.findViewById(R.id.details_view).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				openDetails();
+			}
+		});
+	}
+
+	void openDetails() {
+		if (gpxItem != null) {
+			LatLon location = null;
+			WptPt wpt = null;
+			gpxItem.chartType = GpxUiHelper.GPXDataSetType.ALTITUDE;
+			if (gpxItem.chartHighlightPos != -1) {
+				TrkSegment segment = gpx.tracks.get(0).segments.get(0);
+				if (segment != null) {
+					float distance = gpxItem.chartHighlightPos * elevationDataSet.getDivX();
+					for (WptPt p : segment.points) {
+						if (p.distance >= distance) {
+							wpt = p;
+							break;
+						}
+					}
+					if (wpt != null) {
+						location = new LatLon(wpt.lat, wpt.lon);
+					}
+				}
+			}
+
+			if (location == null) {
+				location = new LatLon(gpxItem.locationStart.lat, gpxItem.locationStart.lon);
+			}
+			if (wpt != null) {
+				gpxItem.locationOnMap = wpt;
+			} else {
+				gpxItem.locationOnMap = gpxItem.locationStart;
+			}
+
+			final MapActivity activity = (MapActivity)getActivity();
+			if (activity != null) {
+				dismiss();
+				final MapRouteInfoMenu mapRouteInfoMenu = activity.getMapLayers().getMapControlsLayer().getMapRouteInfoMenu();
+				final LatLon fLocation = location;
+				mapRouteInfoMenu.setOnDismissListener(new OnDismissListener() {
+					@Override
+					public void onDismiss(DialogInterface dialog) {
+						mapRouteInfoMenu.setOnDismissListener(null);
+
+						final OsmandSettings settings = activity.getMyApplication().getSettings();
+						settings.setMapLocationToShow(fLocation.getLatitude(), fLocation.getLongitude(),
+								settings.getLastKnownMapZoom(),
+								new PointDescription(PointDescription.POINT_TYPE_WPT, gpxItem.name),
+								false,
+								gpxItem);
+
+						MapActivity.launchMapActivityMoveToTop(activity);
+					}
+				});
+				mapRouteInfoMenu.hide();
+			}
+		}
 	}
 
 	private void buildMenuButtons() {

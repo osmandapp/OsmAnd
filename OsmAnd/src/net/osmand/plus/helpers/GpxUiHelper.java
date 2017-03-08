@@ -1198,6 +1198,10 @@ public class GpxUiHelper {
 		for (Speed s : speedData) {
 			x = axisType == GPXDataSetAxisType.TIME ? s.time : (float) s.distance;
 			if (x > 0) {
+				if (axisType == GPXDataSetAxisType.TIME && x > 60) {
+					values.add(new Entry(nextX + 1, 0));
+					values.add(new Entry(nextX + x - 1, 0));
+				}
 				nextX += x / divX;
 				if (Float.isNaN(divSpeed)) {
 					nextY = (float) (s.speed * mulSpeed);

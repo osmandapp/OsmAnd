@@ -315,6 +315,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		menu.hide();
 
 		mInGpxDetailsMode = true;
+		activity.disableDrawer();
 		mark(View.INVISIBLE, R.id.map_ruler_layout,
 				R.id.map_left_widgets_panel, R.id.map_right_widgets_panel, R.id.map_center_info);
 
@@ -329,6 +330,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 	public void exitGpxDetailsMode() {
 		mInGpxDetailsMode = false;
+		activity.enableDrawer();
 		mark(View.VISIBLE, R.id.map_ruler_layout,
 				R.id.map_left_widgets_panel, R.id.map_right_widgets_panel, R.id.map_center_info);
 

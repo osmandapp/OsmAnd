@@ -31,8 +31,6 @@ import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetAxisType;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetType;
 import net.osmand.plus.helpers.GpxUiHelper.OrderedLineDataSet;
-import net.osmand.plus.views.MapControlsLayer;
-import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
 
@@ -43,18 +41,13 @@ import java.util.List;
 public class TrackDetailsMenu {
 
 	private MapActivity mapActivity;
-	private OsmandMapTileView mapView;
-	private MapControlsLayer mapControlsLayer;
 	private GpxDisplayItem gpxItem;
 	private TrackDetailsBarController toolbarController;
 
 	private static boolean VISIBLE;
-	private boolean nightMode;
 
-	public TrackDetailsMenu(MapActivity mapActivity, MapControlsLayer mapControlsLayer) {
+	public TrackDetailsMenu(MapActivity mapActivity) {
 		this.mapActivity = mapActivity;
-		this.mapControlsLayer = mapControlsLayer;
-		mapView = mapActivity.getMapView();
 	}
 
 	public GpxDisplayItem getGpxItem() {
@@ -138,7 +131,6 @@ public class TrackDetailsMenu {
 	}
 
 	public void updateInfo(final View main) {
-		nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
 		updateView(main);
 	}
 
@@ -299,6 +291,7 @@ public class TrackDetailsMenu {
 			yAxisArrow.setVisibility(View.VISIBLE);
 		} else {
 			yAxis.setOnClickListener(null);
+			yAxis.setBackgroundResource(0);
 			yAxisArrow.setVisibility(View.GONE);
 		}
 
@@ -342,6 +335,7 @@ public class TrackDetailsMenu {
 			xAxisArrow.setVisibility(View.VISIBLE);
 		} else {
 			xAxis.setOnClickListener(null);
+			xAxis.setBackgroundResource(0);
 			xAxisArrow.setVisibility(View.GONE);
 		}
 	}

@@ -1,8 +1,6 @@
 package net.osmand.plus.mapmarkers;
 
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnDismissListener;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -41,7 +39,6 @@ public class MapMarkerSelectionFragment extends BaseOsmAndDialogFragment {
 	private boolean target;
 
 	private OnMarkerSelectListener onClickListener;
-	private OnDismissListener onDismissListener;
 
 	@Nullable
 	@Override
@@ -62,7 +59,6 @@ public class MapMarkerSelectionFragment extends BaseOsmAndDialogFragment {
 		if (mapActivity != null) {
 			MapRouteInfoMenu routeInfoMenu = mapActivity.getMapLayers().getMapControlsLayer().getMapRouteInfoMenu();
 			onClickListener = routeInfoMenu.getOnMarkerSelectListener();
-			onDismissListener = routeInfoMenu.getOnDismissDialogListener();
 
 			screenOrientation = DashLocationFragment.getScreenOrientation(mapActivity);
 
@@ -110,14 +106,6 @@ public class MapMarkerSelectionFragment extends BaseOsmAndDialogFragment {
 			}
 		});
 		return view;
-	}
-
-	@Override
-	public void onDismiss(DialogInterface dialog) {
-		super.onDismiss(dialog);
-		if (onDismissListener != null) {
-			onDismissListener.onDismiss(dialog);
-		}
 	}
 
 	@Override

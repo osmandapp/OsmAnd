@@ -86,8 +86,25 @@ public class GpxSelectionHelper {
 		return app.getString(resId, formatArgs);
 	}
 
-	public List<GpxDisplayGroup> collectDisplayGroups(GPXFile g) {
-		List<GpxDisplayGroup> dg = new ArrayList<>();
+	public GpxDisplayGroup buildGpxDisplayGroup(GPXFile g, int trackIndex, String name) {
+		Track t = g.tracks.get(trackIndex);
+		GpxDisplayGroup group = new GpxDisplayGroup(g);
+		group.gpxName = name;
+		group.color = t.getColor(g.getColor(0));
+		group.setType(GpxDisplayItemType.TRACK_SEGMENT);
+		group.setTrack(t);
+		String ks = (trackIndex + 1) + "";
+		group.setName(getString(R.string.gpx_selection_track, name, g.tracks.size() == 1 ? "" : ks));
+		String d = "";
+		if (t.name != null && t.name.length() > 0) {
+			d = t.name + " " + d;
+		}
+		group.setDescription(d);
+		processGroupTrack(app, group);
+		return group;
+	}
+
+	private String getGroupName(GPXFile g) {
 		String name = g.path;
 		if (g.showCurrentTrack) {
 			name = getString(R.string.shared_string_currently_recording_track);
@@ -105,23 +122,16 @@ public class GpxSelectionHelper {
 			}
 			name = name.replace('_', ' ');
 		}
+		return name;
+	}
+
+	public List<GpxDisplayGroup> collectDisplayGroups(GPXFile g) {
+		List<GpxDisplayGroup> dg = new ArrayList<>();
+		String name = getGroupName(g);
 		if (g.tracks.size() > 0) {
-			int k = 1;
-			for (Track t : g.tracks) {
-				GpxDisplayGroup group = new GpxDisplayGroup(g);
-				group.gpxName = name;
-				group.color = t.getColor(g.getColor(0));
-				group.setType(GpxDisplayItemType.TRACK_SEGMENT);
-				group.setTrack(t);
-				String ks = (k++) + "";
-				group.setName(getString(R.string.gpx_selection_track, name, g.tracks.size() == 1 ? "" : ks));
-				String d = "";
-				if (t.name != null && t.name.length() > 0) {
-					d = t.name + " " + d;
-				}
-				group.setDescription(d);
+			for (int i = 0; i < g.tracks.size(); i++) {
+				GpxDisplayGroup group = buildGpxDisplayGroup(g, i, name);
 				dg.add(group);
-				processGroupTrack(app, group);
 			}
 		}
 		if (g.routes.size() > 0) {

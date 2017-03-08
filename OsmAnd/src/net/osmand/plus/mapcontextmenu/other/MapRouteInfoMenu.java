@@ -80,9 +80,9 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 	private AddressLookupRequest startPointRequest;
 	private AddressLookupRequest targetPointRequest;
 	private List<LatLon> intermediateRequestsLatLon = new ArrayList<>();
+	private OnDismissListener onDismissListener;
 
 	private OnMarkerSelectListener onMarkerSelectListener;
-	private OnDismissListener onDismissDialogListener;
 
 	private static final long SPINNER_MY_LOCATION_ID = 1;
 	private static final long SPINNER_FAV_ID = 2;
@@ -116,6 +116,14 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 		};
 	}
 
+	public OnDismissListener getOnDismissListener() {
+		return onDismissListener;
+	}
+
+	public void setOnDismissListener(OnDismissListener onDismissListener) {
+		this.onDismissListener = onDismissListener;
+	}
+
 	public boolean onSingleTap(PointF point, RotatedTileBox tileBox) {
 		if (selectFromMapTouch) {
 			LatLon latlon = tileBox.getLatLonFromPixel(point.x, point.y);
@@ -134,10 +142,6 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 
 	public OnMarkerSelectListener getOnMarkerSelectListener() {
 		return onMarkerSelectListener;
-	}
-
-	public OnDismissListener getOnDismissDialogListener() {
-		return onDismissDialogListener;
 	}
 
 	private void cancelStartPointAddressRequest() {
@@ -847,6 +851,9 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 		}
 		if (getTargets().getPointToNavigate() == null && !selectFromMapTouch) {
 			mapActivity.getMapActions().stopNavigationWithoutConfirm();
+		}
+		if (onDismissListener != null) {
+			onDismissListener.onDismiss(null);
 		}
 	}
 

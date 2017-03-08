@@ -54,7 +54,6 @@ import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.AppInitializer.InitEvents;
 import net.osmand.plus.ApplicationMode;
-import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.MapMarkersHelper.MapMarkerChangedListener;
@@ -91,7 +90,6 @@ import net.osmand.plus.mapcontextmenu.other.DestinationReachedMenu;
 import net.osmand.plus.mapcontextmenu.other.MapRouteInfoMenu;
 import net.osmand.plus.mapcontextmenu.other.MapRouteInfoMenuFragment;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
-import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenuFragment;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.routing.RoutingHelper;
@@ -448,6 +446,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 		if (TrackDetailsMenu.isVisible()) {
 			getMapLayers().getMapControlsLayer().getTrackDetailsMenu().hide();
+			if (prevActivityIntent == null) {
+				return;
+			}
 		}
 		if (prevActivityIntent != null && getSupportFragmentManager().getBackStackEntryCount() == 0) {
 			prevActivityIntent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
