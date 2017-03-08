@@ -156,7 +156,6 @@ public class RouteLayer extends OsmandMapLayer {
 					&& selectedPointLatLon.getLongitude() <= latlonRect.right) {
 				float x = tileBox.getPixXFromLatLon(selectedPointLatLon.getLatitude(), selectedPointLatLon.getLongitude());
 				float y = tileBox.getPixYFromLatLon(selectedPointLatLon.getLatitude(), selectedPointLatLon.getLongitude());
-				paintIcon.setColorFilter(null);
 				canvas.drawBitmap(selectedPoint, x - selectedPoint.getWidth() / 2, y - selectedPoint.getHeight() / 2, paintIconSelected);
 			}
 		}
