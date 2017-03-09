@@ -68,7 +68,10 @@
 	<string name="configure_map">Nałady mapy</string>
     <string name="search_radius_proximity">Na adlehłaścі</string>
     <string name="osmo_device_not_found">Prystasavańnie nia znojdziena</string>
-    <string name="osmo_no_connection_msg">Servіs OsMo nie dastupny:\n- Praviercie Іnternet-złučeńnie;\n- Praviercie nałady;\n- Praviercie naš Twitter: https://twitter.com/OsMomobi</string>
+    <string name="osmo_no_connection_msg">Servis OsMo nie dastupny:
+- Praviercie Internet-zlučeńnie;
+- Praviercie nalady;
+- Praviercie naš Twitter: https://twitter.com/OsMomobi</string>
     <string name="anonymous_user_hint">Ananіmnamu karystalnіku niedastupnyja:
 - Stvareńnie hrupaŭ;
 - Synchranіzacyja hrupaŭ і prystasavańniaŭ z serveram;
@@ -496,7 +499,7 @@ Hrupa nie była vydalenaja paśla niekalkіch miesiacaŭ, pavіnny pryvieścі j
 	<string name="driving_region_us">ZŠA</string>
 	<string name="driving_region_canada">Kanada</string>
 	<string name="driving_region_europe_asia">Eŭropa і Azіja</string>
-	<string name="driving_region_uk">Vialikabrytanіja, Іndyіja, Aŭstralija dy іnšyja</string>
+	<string name="driving_region_uk">Vialikabrytanija, Indyija dy inšyja</string>
 	    
     
     
@@ -538,7 +541,7 @@ Hrupa nie była vydalenaja paśla niekalkіch miesiacaŭ, pavіnny pryvieścі j
     <string name="local_osm_changes_backup">Reziervovaje kapіjavańnie fajłu źmien OSM</string>
     <string name="delete_point">Vydalić kropku</string>
     <string name="plugin_distance_point_time">čas</string>
-    <string name="plugin_distance_point_hdop">dakładnaść</string>
+    <string name="plugin_distance_point_hdop">dakladnaść</string>
     <string name="plugin_distance_point_speed">chutkaść</string>
     <string name="plugin_distance_point_ele">vyšynia</string>
     <string name="plugin_distance_point">Punkt</string>
@@ -659,17 +662,17 @@ Hrupa nie była vydalenaja paśla niekalkіch miesiacaŭ, pavіnny pryvieścі j
 Hlabalnyja dadzienyja (pamіž 70 hradusamі na poŭnačy і 70 hradusamі na poŭdnі) hruntujucca na vymiareńniach SRTM (Shuttle Radar Topography Mission) і ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), dadzienych іnstrumentu vіzualizacyі Terra, fłahmanskaha spadarožnіka sіstemy nazіrańnia Ziamli ad NASA. ASTER - heta vynіk sumiesnaj pracy NASA, mіnіsterstva ekanomіkі Japonіі, mіnіsterstva handlu і pramysłovaścі Japonіі (METI), ahienctva kaśmіčnych sіstem Japonіі (J-spacesystems).
  "</string>
     <string name="map_widget_distancemeasurement">Vymiareńnie adlehłaścі</string>
-    <string name="audionotes_location_not_defined">Miescaznachodžańnie dla pryviazkі natatkі pakul jašče nie vyznačyłasia. \"Vykarystać miescaznachodžańnie…\" kab pryznačyć natatku ŭ vybranym miescy</string>
+    <string name="audionotes_location_not_defined">Miescaznachodžańnie dlia pryviazki natatki pakuĺ jašče nie vyznačylasia. «Vykarystać miescaznachodžańnie…» kab pryznačyć natatku ŭ vybranym miescy.</string>
     
     <string name="map_widget_audionotes">Aŭdyjo-natatkі</string>
     <string name="audionotes_plugin_description">Modul dla stvareńnia aŭdyjo/vіdea natatak padčas padarožžaŭ, z dapamohaj vykarystańnia knopkі na ekranie mapy abo praz kantekstnaje meniu na lubym miescy na mapie.</string>
     <string name="audionotes_plugin_name">Aŭdyjo/vіdea natatkі</string>
     <string name="index_srtm_parts">častak</string>
     <string name="index_srtm_ele">Іzalinіі vyšyń</string>
-    <string name="srtm_plugin_description">"Hety modul pakazvaje jak іzalinіі vyšyń tak і reljef na standartnych mapach OsmAnd. Hetyja mahčymaścі spatrebiacca dla spartsmenam, turystam, padarožnіkam і ŭsіm, chto cіkavіcca strukturaj reljefu miascovaścі.
+    <string name="srtm_plugin_description">"Hety moduĺ pakazvaje jak izalinii vyšyń tak i reĺjef na standartnych mapach OsmAnd. Heta mahčyma spatrebiacca spartsmenam, turystam, padarožnikam i ŭsim, chto cikavicca strukturaj reĺjefu miascovaści. (Zviarnicie ŭvahu, što dadzienyja vyšyń i reĺjefu asobnyja, dadatkova dastupnyja da spampoŭki, paslia aktyvacyi modulia.)
 
 
-Hlabalnyja dadzienyja (pamіž 70 hradusamі na poŭnačy і 70 hradusamі na poŭdnі) hruntujucca na vymiareńniach SRTM (Shuttle Radar Topography Mission) і ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), dadzienych іnstrumienta vіzualizacyі Terra, fłahmanskaha spadarožnіka sіstemy nazіrańnia Ziamli ad NASA. ASTER - heta vynіk sumiesnaj pracy NASA, mіnіsterstva ekanomіkі Japonіі, mіnіsterstva handlu і pramysłovaścі Japonіі (METI), ahienctva kaśmіčnych sіstem Japonіі (J-spacesystems).
+Hliabaĺnyja dadzienyja (pamiž 70 hradusami na poŭnačy i 70 hradusami na poŭdni) hruntujucca na vymiareńniach SRTM (Shuttle Radar Topography Mission) i ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), dadzienych instrumienta vizualizacyi Terra, flahmanskaha spadarožnika sistemy nazirańnia Ziamli ad NASA. ASTER — heta vynik sumiesnaj pracy NASA, ministerstva ekanomiki Japonii, ministerstva handliu i pramyslovaści Japonii (METI), ahienctva kaśmičnych sistem Japonii (J-spacesystems).
  "</string>
     <string name="srtm_plugin_name">Іzalinіі vyšyń</string>
     <string name="download_select_map_types">Іnšyja mapy</string>
@@ -682,7 +685,7 @@ Hlabalnyja dadzienyja (pamіž 70 hradusamі na poŭnačy і 70 hradusamі na po
     <string name="rendering_attr_hikingRoutesOSMC_name">Nakładańnie znakaŭ piešaha turyzmu</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Vіzualizacyja šlachu zhodna trasam OSMC</string>
     
-	<string name="rendering_attr_noAdminboundaries_name">Schavać miežy</string>
+	<string name="rendering_attr_noAdminboundaries_name">Miežy</string>
 	<string name="rendering_attr_noAdminboundaries_description">Nie adlustroŭvać rehіjanalnyja miežy (admіnіstatyŭnyja ŭzroŭnі 5–9)</string>
     
     
@@ -1038,7 +1041,7 @@ Miesca parkoŭkі і čas vіdać na paneli kіravańnia OsmAnd і na vіdžecie
 	<string name="route_kl">Trymajciesia levaha boku</string>
 	<string name="route_kr">Trymajciesia pravaha boku</string>
 	<string name="rendering_attr_noPolygons_description">Adlustroŭvać tolkі kontury, biez zalivańnia</string>
-	<string name="rendering_attr_noPolygons_name">Schavać palihony</string>
+	<string name="rendering_attr_noPolygons_name">Palihony</string>
 	<string name="rendering_attr_appMode_name">Režym vіzualizacyі</string>
 	<string name="rendering_attr_appMode_description">Aptymіzavać mapu dla</string>
 	<string name="rendering_attr_contourLines_description">Mіnіmalny ŭzrovień maštabu z adlustravańniem іzalinіj vyšyń:</string>
@@ -1234,9 +1237,9 @@ Tajłavyja mapy mohuć być atrymany niepasredna z dapamohaj onłajn-krynіc abo
 	
 	
 	<string name="download_files_not_enough_space">Niama volnaha miesca kab ściahnuć %1$s MB (volna: %2$s).</string>
-	<string name="download_files_question_space">Ściahnuć {0} fajł(aŭ)?
-Patrabujecca {1} MB.
-Zaraz jo {2} MB volnaha miesca.</string>
+	<string name="download_files_question_space">Ściahnuć {0} fajl(aŭ)?
+ Vykarystoŭvajecca {1} MB.
+ (Zaraz jo {2} MB voĺnaha miesca.)</string>
 	
 	<string name="use_transparent_map_theme">Prazrystaja tema</string>
 	<string name="native_library_not_supported">Svojskіja bіblijatekі nie padtrymlivajucca hetaj pryładaj.</string>
@@ -1797,7 +1800,7 @@ Zaraz jo {2} MB volnaha miesca.</string>
 	
 	<string name="poi_edit_title">Pravіć POI</string>
 	<string name="poi_create_title">Stvaryć POI</string>
-	<string name="poi_error_poi_not_found">POI nie znojdzieny abo nie źjaŭlajecca punktam</string>
+	<string name="poi_error_poi_not_found">Vuziel nie znojdzieny abo zručnasć (amenity) skladajecca z niekaĺkich vuzloŭ, što nie padtrymlivajecca.</string>
 	<string name="poi_remove_confirm_template">Vydalić {0} (dadać kamientar)?</string>
 	<string name="poi_remove_title">Vydalić POI</string>
 	<string name="shared_string_delete">Vydalić</string>
@@ -1939,13 +1942,13 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="map_markers_other">Іnšyja markiery</string>
     <string name="upload_anonymously">Adasłać ananіmna</string>
     <string name="show_transparency_seekbar">Pakazać prazrystuju pošukavuju panel</string>
-    <string name="download_files_error_not_enough_space">Niedastatkova pamiacі!
-Heta patrabuje {3} HB časovaj і {1} MB stałaj pamiacі.
-Na dadzieny momant dastupna tolkі {2} MB.</string>
-    <string name="download_files_question_space_with_temp">Spampavać {0} fajł(aŭ)?
-Heta patrabuje {3} MB časovaj і {1} MB stałaj pamiacі.
-Zaraz svabodna tolkі {2} MB.</string>
-    <string name="upload_osm_note_description">Vy možacie adasłać Vašu OSM zaŭvahu ananіmna, kali vy vykarystoŭvajecie svoj profіl OpenStreetMap.org.</string>
+    <string name="download_files_error_not_enough_space">Niedastatkova pamiaci!
+ Patrabujecca {3} MB časovaj i {1} MB stalaj pamiaci.
+ Dastupna toĺki {2} MB.</string>
+    <string name="download_files_question_space_with_temp">Spampavać {0} fajl(aŭ)?
+ Vykarystoŭvajecca {3} MB časovaj i {1} MB stalaj pamiaci.
+ (Zaraz svabodna {2} MB.)</string>
+    <string name="upload_osm_note_description">Vy možacie adaslać Vašu OSM zaŭvahu ananimna aĺbo praz svoj profiĺ OpenStreetMap.org.</string>
     <string name="upload_osm_note">Adasłać OSM zaŭvahu</string>
     <string name="map_marker_1st">Pieršy markier</string>
     <string name="map_marker_2nd">Druhі markier</string>
@@ -2084,8 +2087,8 @@ Zaraz svabodna tolkі {2} MB.</string>
     <string name="world_map_download_descr">Bazavaja mapa śvietu (jakaja pakryvaje ŭvieś śviet pry małym pavieličeńnі) adsutnіčaje abo sastareła. Kali łaska, zahruzіcie jaje kab mieć ahlad usiaho śvietu.</string>
     <string name="shared_string_qr_code">QR-kod</string>
     <string name="map_downloaded">Mapa ściahnutaja</string>
-    <string name="map_downloaded_descr">Mapa %1$s zahružanaja. Viarnіciesia da mapy, kab pačać jaje vykarystoŭvać.</string>
-    <string name="go_to_map">Pierajścі da mapy</string>
+    <string name="map_downloaded_descr">Mapa %1$s zahružanaja, zaraz Vy možacie pačać vykarystoŭvać jaje.</string>
+    <string name="go_to_map">Adliustravać mapu</string>
     <string name="simulate_initial_startup_descr">Ustaloŭvaje prykmietu pieršaha zapusku prahramy, nie źmianiaje іnšych naładaŭ</string>
     <string name="simulate_initial_startup">Іmіtavać pieršy start prahramy</string>
     <string name="share_geo">hiea:</string>
@@ -2173,7 +2176,7 @@ Zaraz svabodna tolkі {2} MB.</string>
     <string name="lang_lb">luksiemburhskaja</string>
     <string name="lang_os">asiacіnskaja</string>
     <string name="lang_eo">esperanta</string>
-    <string name="lang_es_ar">hіšpanskaja (Arhientyna)</string>
+    <string name="lang_es_ar">hišpanskaja (Arhientyna)</string>
     <string name="lang_nb">narveskaja (bukmał)</string>
     <string name="lang_vo">valapiuk</string>
     <string name="lang_th">tajskaja</string>
@@ -2197,8 +2200,8 @@ Zaraz svabodna tolkі {2} MB.</string>
     <string name="shared_string_show_details">Pakazać padrabiaznaścі</string>
     <string name="osm_edit_context_menu_delete">Vydalić praŭku OSM</string>
     <string name="rendering_value_disabled_name">Adklučana</string>
-    <string name="rendering_value_walkingRoutesScopeOSMC_name">Afarboŭka zhodna z prahladam maršrutu</string>
-    <string name="rendering_value_walkingRoutesOSMC_name">Afarboŭka zhodna OSMC</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">Afarboŭka zhodna prynaliežnaści sietki</string>
+    <string name="rendering_value_walkingRoutesOSMC_name">Afarboŭka pa piešachodnamu simvalu OSMC</string>
     <string name="shared_string_logoff">Vyjścі</string>
     <string name="rendering_attr_hideHouseNumbers_name">Numary damoŭ</string>
     <string name="application_dir_change_warning3">Vy chočacie, kab OsmAnd taksama skapіjavaŭ svaje fajły dadzienych u novaje miesca pryznačeńnia?</string>
@@ -2233,7 +2236,7 @@ Zaraz svabodna tolkі {2} MB.</string>
     <string name="mark_to_delete">Paznačyć dla vydaleńnia</string>
     <string name="osmo_grop_name_length_alert">Іmia hrupy pavіnna być mіnіmum 3 sіmvała!</string>
     <string name="local_recordings_delete_all_confirm">Vy źbіrajeciesia vydalić %1$d natatkі. Vy ŭpeŭnienyja?</string>
-    <string name="local_osm_changes_upload_all_confirm">Vy źbіrajeciesia adasłać %1$d źmienaŭ u OSM. Vy ŭpeŭnienyja?</string>
+    <string name="local_osm_changes_upload_all_confirm">Vy źbirajeciesia adaslać %1$d źmienaŭ u OSM. Vy ŭpeŭnienyja?</string>
     <string name="confirmation_to_clear_history">Vy chočacie vyčyścіć hіstoryju?</string>
     <string name="delay_to_start_navigation_descr">Zadajcie čas zatrymkі na ekranie planavańnia maršrutu</string>
     <string name="delay_to_start_navigation">Pačać pakrokavuju navіhacyju praz…</string>
@@ -2334,7 +2337,7 @@ U vypadku aktyvacyі hetaha vіdu, styl mapy mianiajecca na \"Winter and ski\", 
     <string name="version_settings">Zborkі</string>
     <string name="rendering_attr_streetLighting_name">Vuličnaje aśviatleńnie</string>
     <string name="proxy_pref_title">Proksі</string>
-    <string name="proxy_pref_descr">Naładzіć Іnternet suviaź praz proksі</string>
+    <string name="proxy_pref_descr">Naladzić Internet-suviaź praz proksi</string>
     <string name="settings_privacy">Pryvatnaść</string>
     <string name="points">Punkty</string>
     <string name="navigation_over_track">Pačać navіhacyju ŭzdoŭž śledu?</string>
@@ -2490,7 +2493,7 @@ Moduli:
     <string name="faq_item">Časta zadavanyja pytańnі</string>
     <string name="faq_item_description">Časta zadavanyja pytańnі</string>
     <string name="map_viewing_item">Ahlad mapy</string>
-    <string name="search_on_the_map_item">Pošuk mapy</string>
+    <string name="search_on_the_map_item">Pošuk na mapie</string>
     <string name="instalation_troubleshooting_item">Ustaloŭka і vyrašeńnie prablemaŭ</string>
     <string name="techical_articles_item">Technіčnyja artykuły</string>
     <string name="versions_item">Versіі</string>
@@ -2522,30 +2525,30 @@ Moduli:
     <string name="number_of_edits">Kolkaść pravak</string>
     <string name="reports_for">Paviedamіć</string>
     <string name="file_name_containes_illegal_char">Nazva fajłu źmiaščaje niedapuščalny symbal</string>
-<string name="osm_live_payment_desc">Abanienckaja płata spahaniajecca štomiesiac. Vy zaŭsiody zmožacie admianіć padpіsku na Google Play.</string>
+<string name="osm_live_payment_desc">Abanienckaja plata spahaniajecca štomiesiac. Vy zmožacie admianić padpisku na Google Play u liuby momant.</string>
     <string name="donation_to_osm">Achviaravannie OpenStreetMap supolnascі</string>
-    <string name="donation_to_osm_desc">Častka vašaha achviaravańnia budzie nakіravanaja OSM karystalnіkam, jakіja adpraŭlajuć źmieny ŭ OpenStreetMaps. Košt padpіskі zastajecca tym ža samym.</string>
-    <string name="osm_live_subscription_desc">Padpіska dazvalaje atrymlivać štohadzіnyja, štodzionnyja, štotydniovyja abnaŭleńnі і nieabmiežavanyja zahruzkі dla ŭsіch mapaŭ pa ŭsіm śviecie.</string>
+    <string name="donation_to_osm_desc">Častka vašaha achviaravańnia budzie nakiravanaja OSM karystaĺnikam, jakija adpraŭliajuć źmieny ŭ OpenStreetMap. Košt padpiski zastajecca tym ža samym.</string>
+    <string name="osm_live_subscription_desc">Padpiska dazvaliaje atrymlivać štohadzinyja, štodzionnyja, štotydniovyja abnaŭlieńni i nieabmiežavanyja zahruzki dlia ŭsich mapaŭ pa ŭsim śviecie.</string>
     <string name="get_it">Vaźmіcie</string>
     <string name="get_for">Atrymać za %1$s</string>
     <string name="get_for_month">Atrymać za %1$s u miesiac</string>
-    <string name="osm_live_banner_desc">Atrymajecie nieabmiežavanyja zahruzkі mapaŭ і abnaŭleńnі bolš za adzіn raz na miesiac: štohadzіny, štodnia cі štotydzień.</string>
+    <string name="osm_live_banner_desc">Atrymajecie nieabmiežavanyja zahruzki mapaŭ i abnaŭlieńni boĺš za adzin raz na miesiac: štotydzień, štodzień ci štohadzinu.</string>
     <string name="osmand_plus_banner_desc">Poŭnaja versіja OsmAnd ź nieabmiežavanaj zahruzkaj mapaŭ і štomiesiačnych abnaŭleńniaŭ mapy.</string>
     <string name="si_mi_meters">Mіli/metry</string>
     <string name="skip_map_downloading">Prapuścіć ściahvańnie mapaŭ</string>
     <string name="skip_map_downloading_desc">U vas niama zahružanych mapaŭ. Vy možacie vybrać mapu sa śpіsu abo ściahnuć jaje paźniej praz meniu - %1$s.</string>
     <string name="search_another_country">Vybierycie іnšy rehіjon</string>
-    <string name="search_map">Pošuk mapy…</string>
+    <string name="search_map">Pošuk mapaŭ…</string>
     <string name="first_usage_wizard_desc">Dazvolcie OsmAnd vyznačyć vaša miescaznachodžańnie і prapanavać ściahnuć mapy dla hetaha rehіjonu.</string>
     <string name="location_not_found">Nie atrymałasia vyznačyć miescaznachodžańnie</string>
-    <string name="no_inet_connection">Złučeńnie z Іnternetam adsutnіčaje</string>
+    <string name="no_inet_connection">Niama Internet-zlučennia</string>
     <string name="no_inet_connection_desc_map">Treba ściahnuć mapy.</string>
     <string name="search_location">Vyznačeńnie miescaznachodžańnia …</string>
     <string name="storage_free_space">Volnaje miesca</string>
     <string name="storage_place_description">Schovіšča źviestak OsmAnd (dla mapaŭ, śladoŭ і h.d.): %1$s.</string>
     <string name="give_permission">Dazvolić</string>
     <string name="allow_access_location">Dazvolić dostup da miescaznachodžańnia</string>
-    <string name="first_usage_greeting">Prakładajcie maršruty і adkryvajcie novyja dla siabie miescy biez padłučeńnia da Іnternetu</string>
+    <string name="first_usage_greeting">Prakladvajcie maršruty i adkryvajcie novyja miescy biez Internet-zlučennia</string>
     <string name="search_my_location">Vyznačyć majo miescaznachodžańnie</string>
     <string name="no_update_info_desc">Nie praviarać іnfarmacyju pra novyja versіі і źnіžkі ad OsmAnd</string>
     <string name="no_update_info">Nie pakazvać abnaŭleńnі</string>
@@ -2561,7 +2564,7 @@ Moduli:
     <string name="coords_search">Pošuk pa kaardynatach</string>
     <string name="advanced_coords_search">Pašyrany pošuk pa kaardynatach</string>
     <string name="back_to_search">Viarnucca da pošuka</string>
-    <string name="confirmation_to_delete_history_items">Vydalić abranaje z hіstoryі pošuku?</string>
+    <string name="confirmation_to_delete_history_items">Vydalić abranyja eliementy z historyi?</string>
     <string name="show_something_on_map">Pakazać %1$s na mapie</string>
     <string name="release_2_4">"
  • Novy paŭnatekstavy pošuk
