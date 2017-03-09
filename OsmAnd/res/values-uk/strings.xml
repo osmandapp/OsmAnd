@@ -2843,4 +2843,18 @@ Facebook: https://www.facebook.com/osmandapp
     <string name="quick_action_add_create_items">Створення елементів</string>
     <string name="add_new_folder">Додати нову теку</string>
     <string name="points_delete_multiple_succesful">Точку(и) успішно вилучено.</string>
+    <string name="points_delete_multiple">"Ви збираєтеся вилучити %1$d точку(и).  Певні?"</string>
+    <string name="route_points_category_name">Точки для проходження</string>
+    <string name="track_points_category_name">Важливі точки маршруту</string>
+    <string name="gpx_track">Трек</string>
+    <string name="max_speed">"Макс.  швидкість"</string>
+    <string name="average_speed">Середня швидкість</string>
+    <string name="shared_string_time_moving">Час в русі</string>
+    <string name="shared_string_time_span">Загальний час</string>
+    <string name="shared_string_max">Макс.</string>
+    <string name="shared_string_start_time">Час початку</string>
+    <string name="shared_string_end_time">Час закінчення</string>
+    <string name="shared_string_color">Колір</string>
+    <string name="shared_string_slope">Ухил</string>
+    <string name="lang_ber">Берберська</string>
     </resources>
