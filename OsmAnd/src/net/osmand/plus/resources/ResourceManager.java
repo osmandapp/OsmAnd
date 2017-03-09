@@ -551,7 +551,8 @@ public class ResourceManager {
 					unpackBundledAssets(assetManager, applicationDataDir, progress, isFirstInstall);
 					context.getSettings().PREVIOUS_INSTALLED_VERSION.set(fv);
 					copyRegionsBoundaries();
-					copyPoiTypes();
+					// see Issue #3381
+					//copyPoiTypes();
 					for (String internalStyle : context.getRendererRegistry().getInternalRenderers().keySet()) {
 						File fl = context.getRendererRegistry().getFileForInternalStyle(internalStyle);
 						if (fl.exists()) {
