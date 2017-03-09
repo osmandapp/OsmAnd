@@ -2947,4 +2947,16 @@
 	<string name="poi_wetland_tidalflat">Plana de marea</string>
 	<string name="poi_wetland_saltmarsh">Aiguamoll de sal</string>
 	<string name="poi_wetland_mangrove">Manglar</string>
+	<string name="poi_cuisine_fried_food">Fregitel·la</string>
+	<string name="poi_cuisine_hotdog">Frankfurt</string>
+	<string name="poi_cuisine_salad">Amanida</string>
+	<string name="poi_cuisine_frozen_yogurt">Iogurt gelat</string>
+	<string name="poi_cuisine_couscous">Cuscús</string>
+	<string name="poi_cuisine_fried_chicken">Pollastre fregit</string>
+	<string name="poi_cuisine_dessert">Postres</string>
+	<string name="poi_cuisine_canteen">Cantina</string>
+	<string name="poi_cuisine_tacos">Tacos</string>
+	<string name="poi_cuisine_piadina">Piadina</string>
+	<string name="poi_cuisine_smoothie">Batut de fruites</string>
+	<string name="poi_cuisine_souvlaki">Suvlaki</string>
 	</resources>
