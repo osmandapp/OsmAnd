@@ -16,6 +16,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.AppCompatCheckBox;
 import android.support.v7.widget.ListPopupWindow;
 import android.support.v7.widget.SwitchCompat;
 import android.text.SpannableString;
@@ -57,6 +58,7 @@ import net.osmand.CallbackWithObject;
 import net.osmand.IndexConstants;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
+import net.osmand.plus.GPXDatabase;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.Elevation;
 import net.osmand.plus.GPXUtilities.GPXFile;
@@ -78,6 +80,7 @@ import net.osmand.plus.dialogs.ConfigureMapMenu;
 import net.osmand.plus.dialogs.ConfigureMapMenu.AppearanceListItem;
 import net.osmand.plus.dialogs.ConfigureMapMenu.GpxAppearanceAdapter;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
+import net.osmand.plus.myplaces.AvailableGPXFragment;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
@@ -418,8 +421,7 @@ public class GpxUiHelper {
 		final DateFormat dateFormat = android.text.format.DateFormat.getMediumDateFormat(activity);
 		final File dir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
 		AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-		final int layout = R.layout.list_item_with_checkbox;
-		final int switchLayout = R.layout.list_item_with_switch;
+		final int layout = R.layout.dash_gpx_track_item;
 		final Map<String, String> gpxAppearanceParams = new HashMap<>();
 
 		final ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(activity, layout, R.id.title,
@@ -439,13 +441,13 @@ public class GpxUiHelper {
 			public View getView(final int position, View convertView, ViewGroup parent) {
 				// User super class to create the View
 				View v = convertView;
+				boolean checkLayout = getItemViewType(position) == 0;
 				if (v == null) {
-					if (getItemViewType(position) == 0) {
-						v = activity.getLayoutInflater().inflate(layout, null);
-					} else {
-						v = activity.getLayoutInflater().inflate(switchLayout, null);
-					}
+					v = activity.getLayoutInflater().inflate(layout, null);
 				}
+
+				GPXInfo info = list.get(position);
+				AvailableGPXFragment.udpateGpxInfoView(v, info, app, false);
 
 				TextView tv = (TextView) v.findViewById(R.id.title);
 				TextView dv = (TextView) v.findViewById(R.id.description);
@@ -467,57 +469,61 @@ public class GpxUiHelper {
 				}
 
 				tv.setText(item.getTitle().replace("/", " • "));
+
 				GPXInfo info = list.get(position);
+				GPXDatabase.GpxDataItem dataItem = app.getGpxDatabase().getItem(new File(info.fileName));
 				StringBuilder sb = new StringBuilder();
-				if (info.getLastModified() > 0) {
-					sb.append(dateFormat.format(info.getLastModified()));
-				}
-				if (info.getFileSize() >= 0) {
-					if (sb.length() > 0) {
-						sb.append(" • ");
+				if (dataItem != null && dataItem.getAnalysis() != null) {
+
+				} else {
+					if (info.getLastModified() > 0) {
+						sb.append(dateFormat.format(info.getLastModified()));
 					}
-					long fileSizeKB = info.getFileSize() / 1000;
-					if (info.getFileSize() < 5000) {
-						sb.append(info.getFileSize()).append(" B");
-					} else if (fileSizeKB > 100) {
-						sb.append(formatMb.format(new Object[]{(float) fileSizeKB / (1 << 10)}));
-					} else {
-						sb.append(fileSizeKB).append(" kB");
+					if (info.getFileSize() >= 0) {
+						if (sb.length() > 0) {
+							sb.append(" • ");
+						}
+						long fileSizeKB = info.getFileSize() / 1000;
+						if (info.getFileSize() < 5000) {
+							sb.append(info.getFileSize()).append(" B");
+						} else if (fileSizeKB > 100) {
+							sb.append(formatMb.format(new Object[]{(float) fileSizeKB / (1 << 10)}));
+						} else {
+							sb.append(fileSizeKB).append(" kB");
+						}
 					}
 				}
 				dv.setText(sb.toString());
 
-				/*
-				final ArrayAdapter<String> arrayAdapter = this;
-				iconView.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						int nline = item.getTitle().indexOf('\n');
-						if (nline == -1) {
-							String fileName = list.get(position).getFileName();
-							setDescripionInDialog(arrayAdapter, adapter, activity, dir, fileName, position);
-						} else {
-							item.setTitle(item.getTitle().substring(0, nline));
-							arrayAdapter.notifyDataSetInvalidated();
-						}
-					}
-
-				});
-				*/
-
-
-				final CheckBox ch = ((CheckBox) v.findViewById(R.id.toggle_item));
 				if (item.getSelected() == null) {
-					ch.setVisibility(View.INVISIBLE);
+					v.findViewById(R.id.check_item).setVisibility(View.GONE);
 				} else {
-					ch.setOnCheckedChangeListener(null);
-					ch.setChecked(item.getSelected());
-					ch.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-						@Override
-						public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-							item.setSelected(isChecked);
-						}
-					});
+					if (checkLayout) {
+						final AppCompatCheckBox ch = ((AppCompatCheckBox) v.findViewById(R.id.toggle_checkbox_item));
+						ch.setVisibility(View.VISIBLE);
+						v.findViewById(R.id.toggle_item).setVisibility(View.GONE);
+						ch.setOnCheckedChangeListener(null);
+						ch.setChecked(item.getSelected());
+						ch.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+							@Override
+							public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+								item.setSelected(isChecked);
+							}
+						});
+					} else {
+						final SwitchCompat ch = ((SwitchCompat) v.findViewById(R.id.toggle_item));
+						ch.setVisibility(View.VISIBLE);
+						v.findViewById(R.id.toggle_checkbox_item).setVisibility(View.GONE);
+						ch.setOnCheckedChangeListener(null);
+						ch.setChecked(item.getSelected());
+						ch.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+							@Override
+							public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+								item.setSelected(isChecked);
+							}
+						});
+					}
+					v.findViewById(R.id.check_item).setVisibility(View.VISIBLE);
 				}
 				return v;
 			}

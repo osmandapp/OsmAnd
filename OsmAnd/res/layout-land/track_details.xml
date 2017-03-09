@@ -123,7 +123,7 @@
                             android:layout_weight="1"
                             android:layout_marginRight="@dimen/list_content_padding"
                             android:textColor="?android:attr/textColorPrimary"
-                            android:textSize="@dimen/default_list_text_size"
+                            android:textSize="@dimen/default_desc_text_size"
                             tools:text="@string/altitude"/>
 
                         <ImageView
@@ -167,7 +167,7 @@
                             android:layout_weight="1"
                             android:layout_marginRight="@dimen/list_content_padding"
                             android:textColor="?android:attr/textColorPrimary"
-                            android:textSize="@dimen/default_list_text_size"
+                            android:textSize="@dimen/default_desc_text_size"
                             tools:text="@string/map_widget_speed"/>
 
                         <ImageView

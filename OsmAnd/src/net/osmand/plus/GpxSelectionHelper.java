@@ -64,7 +64,7 @@ public class GpxSelectionHelper {
 			}
 
 			File file = new File(selectedGPXFiles.get(0).getGpxFile().path);
-			return Algorithms.getFileNameWithoutExtension(file);
+			return Algorithms.getFileNameWithoutExtension(file).replace('_', ' ');
 		} else if (selectedGPXFiles.size() == 0) {
 			return null;
 		} else {

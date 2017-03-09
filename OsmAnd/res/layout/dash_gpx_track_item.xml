@@ -190,6 +190,14 @@
 				android:focusable="false"
 				android:gravity="center_vertical"/>
 
+			<android.support.v7.widget.AppCompatCheckBox
+				android:id="@+id/toggle_checkbox_item"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+				android:visibility="gone"/>
+
         </LinearLayout>
 
 	</LinearLayout>
