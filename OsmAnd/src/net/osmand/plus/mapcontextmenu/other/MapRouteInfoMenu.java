@@ -639,7 +639,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 			}
 		}
 		mapActivity.getMapView().fitLocationToMap(latitude, longitude, mapActivity.getMapView().getZoom(),
-				tileBoxWidthPx, tileBoxHeightPx, AndroidUtils.dpToPx(mapActivity, 40f));
+				tileBoxWidthPx, tileBoxHeightPx, AndroidUtils.dpToPx(mapActivity, 40f), true);
 	}
 
 	@Override

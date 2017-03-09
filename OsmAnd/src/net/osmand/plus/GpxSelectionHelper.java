@@ -676,7 +676,7 @@ public class GpxSelectionHelper {
 		public boolean route;
 
 		public WptPt locationOnMap;
-		public GPXDataSetType chartType;
+		public GPXDataSetType[] chartTypes;
 		public GPXDataSetAxisType chartAxisType = GPXDataSetAxisType.DISTANCE;
 
 		public Matrix chartMatrix;

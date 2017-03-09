@@ -640,11 +640,11 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 					case GPX_TAB_ITEM_GENERAL: {
 						OrderedLineDataSet speedDataSet = null;
 						OrderedLineDataSet elevationDataSet = null;
-						if (analysis.isSpeedSpecified()) {
+						if (analysis.hasSpeedData) {
 							speedDataSet = GpxUiHelper.createGPXSpeedDataSet(app, chart,
 									analysis, GPXDataSetAxisType.DISTANCE, true, true);
 						}
-						if (analysis.elevationData != null) {
+						if (analysis.hasElevationData) {
 							elevationDataSet = GpxUiHelper.createGPXElevationDataSet(app, chart,
 									analysis, GPXDataSetAxisType.DISTANCE, false, true);
 						}
@@ -664,7 +664,7 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 						OrderedLineDataSet elevationDataSet = GpxUiHelper.createGPXElevationDataSet(app, chart,
 								analysis, GPXDataSetAxisType.DISTANCE, false, true);
 						dataSets.add(elevationDataSet);
-						if (analysis.elevationData.size() > 1) {
+						if (analysis.hasElevationData) {
 							OrderedLineDataSet slopeDataSet = GpxUiHelper.createGPXSlopeDataSet(app, chart,
 									analysis, GPXDataSetAxisType.DISTANCE, elevationDataSet.getValues(), true, true);
 							dataSets.add(slopeDataSet);
@@ -775,8 +775,7 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 					switch (tabType) {
 						case GPX_TAB_ITEM_GENERAL:
 							if (analysis != null) {
-								if ((analysis.elevationData != null && analysis.totalDistance > 0)
-										|| analysis.isSpeedSpecified()) {
+								if (analysis.hasElevationData || analysis.hasSpeedData) {
 									GpxUiHelper.setupGPXChart(app, chart, 4);
 									chart.setData(new LineData(getDataSets(GPXTabItemType.GPX_TAB_ITEM_GENERAL, chart)));
 									updateChart(chart);
@@ -829,7 +828,7 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 							break;
 						case GPX_TAB_ITEM_ALTITUDE:
 							if (analysis != null) {
-								if (analysis.elevationData != null && analysis.totalDistance > 0) {
+								if (analysis.hasElevationData) {
 									GpxUiHelper.setupGPXChart(app, chart, 4);
 									chart.setData(new LineData(getDataSets(GPXTabItemType.GPX_TAB_ITEM_ALTITUDE, chart)));
 									updateChart(chart);
@@ -873,7 +872,7 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 							break;
 						case GPX_TAB_ITEM_SPEED:
 							if (analysis != null && analysis.isSpeedSpecified()) {
-								if (analysis.totalDistance > 0) {
+								if (analysis.hasSpeedData) {
 									GpxUiHelper.setupGPXChart(app, chart, 4);
 									chart.setData(new LineData(getDataSets(GPXTabItemType.GPX_TAB_ITEM_SPEED, chart)));
 									updateChart(chart);
@@ -1013,16 +1012,13 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 		void openDetails(GPXTabItemType tabType) {
 			LatLon location = null;
 			WptPt wpt = null;
-			gpxItem.chartType = null;
+			gpxItem.chartTypes = null;
 			List<ILineDataSet> ds = getDataSets(tabType, null);
 			if (ds != null && ds.size() > 0) {
-				for (ILineDataSet dataSet : ds) {
-					OrderedLineDataSet orderedDataSet = (OrderedLineDataSet) dataSet;
-					if (orderedDataSet.getDataSetType() == GPXDataSetType.ALTITUDE) {
-						gpxItem.chartType = GPXDataSetType.ALTITUDE;
-						break;
-					}
-					gpxItem.chartType = orderedDataSet.getDataSetType();
+				gpxItem.chartTypes = new GPXDataSetType[ds.size()];
+				for (int i = 0; i < ds.size(); i++) {
+					OrderedLineDataSet orderedDataSet = (OrderedLineDataSet) ds.get(i);
+					gpxItem.chartTypes[i] = orderedDataSet.getDataSetType();
 				}
 				if (gpxItem.chartHighlightPos != -1) {
 					TrkSegment segment = null;

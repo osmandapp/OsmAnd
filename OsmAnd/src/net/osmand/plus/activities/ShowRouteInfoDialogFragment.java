@@ -49,6 +49,7 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetAxisType;
+import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetType;
 import net.osmand.plus.helpers.GpxUiHelper.OrderedLineDataSet;
 import net.osmand.plus.mapcontextmenu.other.MapRouteInfoMenu;
 import net.osmand.plus.routing.RouteDirectionInfo;
@@ -75,6 +76,7 @@ public class ShowRouteInfoDialogFragment extends DialogFragment {
 	private RouteInfoAdapter adapter;
 	private GPXFile gpx;
 	private OrderedLineDataSet elevationDataSet;
+	private OrderedLineDataSet slopeDataSet;
 	private GpxDisplayItem gpxItem;
 	private boolean hasHeights;
 
@@ -241,20 +243,21 @@ public class ShowRouteInfoDialogFragment extends DialogFragment {
 		});
 
 		GPXTrackAnalysis analysis = gpx.getAnalysis(0);
-		if (analysis.totalDistance > 0) {
+		if (analysis.hasElevationData) {
 			List<ILineDataSet> dataSets = new ArrayList<>();
-			elevationDataSet =
-					GpxUiHelper.createGPXElevationDataSet(app, mChart, analysis, GPXDataSetAxisType.DISTANCE, false, true);
+			elevationDataSet = GpxUiHelper.createGPXElevationDataSet(app, mChart, analysis,
+					GPXDataSetAxisType.DISTANCE, false, true);
 			dataSets.add(elevationDataSet);
-			if (analysis.elevationData.size() > 1) {
-				OrderedLineDataSet slopeDataSet =
-						GpxUiHelper.createGPXSlopeDataSet(app, mChart, analysis, GPXDataSetAxisType.DISTANCE, elevationDataSet.getValues(), true, true);
-				dataSets.add(slopeDataSet);
-			}
+			slopeDataSet = GpxUiHelper.createGPXSlopeDataSet(app, mChart, analysis,
+					GPXDataSetAxisType.DISTANCE, elevationDataSet.getValues(), true, true);
+			dataSets.add(slopeDataSet);
+
 			LineData data = new LineData(dataSets);
 			mChart.setData(data);
 			mChart.setVisibility(View.VISIBLE);
 		} else {
+			elevationDataSet = null;
+			slopeDataSet = null;
 			mChart.setVisibility(View.GONE);
 		}
 		((TextView) headerView.findViewById(R.id.average_text))
@@ -291,7 +294,7 @@ public class ShowRouteInfoDialogFragment extends DialogFragment {
 		if (gpxItem != null) {
 			LatLon location = null;
 			WptPt wpt = null;
-			gpxItem.chartType = GpxUiHelper.GPXDataSetType.ALTITUDE;
+			gpxItem.chartTypes = new GPXDataSetType[] { GPXDataSetType.ALTITUDE, GPXDataSetType.SLOPE };
 			if (gpxItem.chartHighlightPos != -1) {
 				TrkSegment segment = gpx.tracks.get(0).segments.get(0);
 				if (segment != null) {

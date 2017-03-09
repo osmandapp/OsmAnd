@@ -15,6 +15,7 @@ import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.listener.ChartTouchListener;
+import com.github.mikephil.charting.listener.ChartTouchListener.ChartGesture;
 import com.github.mikephil.charting.listener.OnChartGestureListener;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 
@@ -41,6 +42,8 @@ import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControll
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class TrackDetailsMenu {
@@ -239,7 +242,7 @@ public class TrackDetailsMenu {
 		return new QuadRect(left, top, right, bottom);
 	}
 
-	private void fitTrackOnMap(LineChart chart) {
+	private void fitTrackOnMap(LineChart chart, LatLon location, boolean forceFit) {
 		QuadRect rect = getRect(chart, chart.getLowestVisibleX(), chart.getHighestVisibleX());
 		if (rect != null) {
 			RotatedTileBox tb = mapActivity.getMapView().getCurrentRotatedTileBox().copy();
@@ -256,30 +259,41 @@ public class TrackDetailsMenu {
 					tileBoxHeightPx = tb.getPixHeight() - f.getHeight();
 				}
 			}
-			mapActivity.getMapView().fitRectToMap(rect.left, rect.right, rect.top, rect.bottom,
-					tileBoxWidthPx, tileBoxHeightPx, 0);
+			if (forceFit) {
+				mapActivity.getMapView().fitRectToMap(rect.left, rect.right, rect.top, rect.bottom,
+						tileBoxWidthPx, tileBoxHeightPx, 0);
+			} else if (location != null &&
+					!mapActivity.getMapView().getTileBox(tileBoxWidthPx, tileBoxHeightPx, 0).containsLatLon(location)) {
+				boolean animating = mapActivity.getMapView().getAnimatedDraggingThread().isAnimating();
+				mapActivity.getMapView().fitLocationToMap(location.getLatitude(), location.getLongitude(),
+						mapActivity.getMapView().getZoom(), tileBoxWidthPx, tileBoxHeightPx, 0, !animating);
+			} else {
+				mapActivity.refreshMap();
+			}
+
 		}
 	}
 
 
-	private void refreshChart(LineChart chart) {
+	private void refreshChart(LineChart chart, boolean forceFit) {
 		gpxItem.chartMatrix = new Matrix(chart.getViewPortHandler().getMatrixTouch());
 		Highlight[] highlights = chart.getHighlighted();
+		LatLon location = null;
 		if (highlights != null && highlights.length > 0) {
 			gpxItem.chartHighlightPos = highlights[0].getX();
 			WptPt wpt = getPoint(chart, gpxItem.chartHighlightPos);
 			if (wpt != null) {
+				location = new LatLon(wpt.lat, wpt.lon);
 				if (gpxItem.route) {
-					mapActivity.getMapLayers().getMapInfoLayer().setSelectedPointLatLon(new LatLon(wpt.lat, wpt.lon));
+					mapActivity.getMapLayers().getMapInfoLayer().setSelectedPointLatLon(location);
 				} else {
-					mapActivity.getMapLayers().getGpxLayer().setSelectedPointLatLon(new LatLon(wpt.lat, wpt.lon));
+					mapActivity.getMapLayers().getGpxLayer().setSelectedPointLatLon(location);
 				}
-				//mapActivity.setMapLocation(wpt.lat, wpt.lon);
 			}
 		} else {
 			gpxItem.chartHighlightPos = -1;
 		}
-		fitTrackOnMap(chart);
+		fitTrackOnMap(chart, location, forceFit);
 	}
 
 	private void updateView(final View parentView) {
@@ -287,7 +301,7 @@ public class TrackDetailsMenu {
 		chart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
 			@Override
 			public void onValueSelected(Entry e, Highlight h) {
-				refreshChart(chart);
+				refreshChart(chart, false);
 			}
 
 			@Override
@@ -296,13 +310,24 @@ public class TrackDetailsMenu {
 			}
 		});
 		chart.setOnChartGestureListener(new OnChartGestureListener() {
+			boolean hasTranslated = false;
+
 			@Override
-			public void onChartGestureStart(MotionEvent me, ChartTouchListener.ChartGesture lastPerformedGesture) {
+			public void onChartGestureStart(MotionEvent me, ChartGesture lastPerformedGesture) {
+				hasTranslated = false;
 			}
 
 			@Override
-			public void onChartGestureEnd(MotionEvent me, ChartTouchListener.ChartGesture lastPerformedGesture) {
-				refreshChart(chart);
+			public void onChartGestureEnd(MotionEvent me, ChartGesture lastPerformedGesture) {
+				if ((lastPerformedGesture == ChartGesture.DRAG && hasTranslated) ||
+						lastPerformedGesture == ChartGesture.X_ZOOM ||
+						lastPerformedGesture == ChartGesture.Y_ZOOM ||
+						lastPerformedGesture == ChartGesture.PINCH_ZOOM ||
+						lastPerformedGesture == ChartGesture.DOUBLE_TAP ||
+						lastPerformedGesture == ChartGesture.ROTATE) {
+
+					refreshChart(chart, true);
+				}
 			}
 
 			@Override
@@ -327,6 +352,7 @@ public class TrackDetailsMenu {
 
 			@Override
 			public void onChartTranslate(MotionEvent me, float dX, float dY) {
+				hasTranslated = true;
 			}
 		});
 
@@ -336,27 +362,37 @@ public class TrackDetailsMenu {
 		if (analysis != null) {
 			GpxUiHelper.setupGPXChart(app, chart, 4);
 
-			if (gpxItem.chartType != null) {
+			if (gpxItem.chartTypes != null) {
 				List<ILineDataSet> dataSets = new ArrayList<>();
-				OrderedLineDataSet dataSet = null;
-				if (gpxItem.chartType != null) {
-					switch (gpxItem.chartType) {
-						case ALTITUDE:
-							dataSet = GpxUiHelper.createGPXElevationDataSet(app, chart, analysis,
-									gpxItem.chartAxisType, false, true);
-							break;
-						case SPEED:
-							dataSet = GpxUiHelper.createGPXSpeedDataSet(app, chart, analysis,
-									gpxItem.chartAxisType, false, true);
-							break;
-						case SLOPE:
-							dataSet = GpxUiHelper.createGPXSlopeDataSet(app, chart, analysis,
-									gpxItem.chartAxisType, null, false, true);
-							break;
+				if (gpxItem.chartTypes != null && gpxItem.chartTypes.length > 0) {
+					for (int i = 0; i < gpxItem.chartTypes.length; i++) {
+						OrderedLineDataSet dataSet = null;
+						switch (gpxItem.chartTypes[i]) {
+							case ALTITUDE:
+								dataSet = GpxUiHelper.createGPXElevationDataSet(app, chart, analysis,
+										gpxItem.chartAxisType, false, true);
+								break;
+							case SPEED:
+								dataSet = GpxUiHelper.createGPXSpeedDataSet(app, chart, analysis,
+										gpxItem.chartAxisType, gpxItem.chartTypes.length > 1, true);
+								break;
+							case SLOPE:
+								dataSet = GpxUiHelper.createGPXSlopeDataSet(app, chart, analysis,
+										gpxItem.chartAxisType, null, gpxItem.chartTypes.length > 1, true);
+								break;
+						}
+						dataSets.add(dataSet);
 					}
 				}
-				dataSets.add(dataSet);
 
+				Collections.sort(dataSets, new Comparator<ILineDataSet>() {
+					@Override
+					public int compare(ILineDataSet ds1, ILineDataSet ds2) {
+						OrderedLineDataSet dataSet1 = (OrderedLineDataSet) ds1;
+						OrderedLineDataSet dataSet2 = (OrderedLineDataSet) ds2;
+						return dataSet1.getPriority() > dataSet2.getPriority() ? -1 : (dataSet1.getPriority() == dataSet2.getPriority() ? 0 : 1);
+					}
+				});
 				chart.setData(new LineData(dataSets));
 				updateChart(chart);
 			}
@@ -366,31 +402,38 @@ public class TrackDetailsMenu {
 		ImageView yAxisIcon = (ImageView) parentView.findViewById(R.id.y_axis_icon);
 		TextView yAxisTitle = (TextView) parentView.findViewById(R.id.y_axis_title);
 		View yAxisArrow = parentView.findViewById(R.id.y_axis_arrow);
-		final List<GPXDataSetType> availableTypes = new ArrayList<>();
+		final List<GPXDataSetType[]> availableTypes = new ArrayList<>();
 		if (analysis != null) {
-			if (analysis.elevationData != null) {
-				availableTypes.add(GPXDataSetType.ALTITUDE);
-				availableTypes.add(GPXDataSetType.SLOPE);
+			if (analysis.hasElevationData) {
+				availableTypes.add(new GPXDataSetType[] { GPXDataSetType.ALTITUDE });
+				availableTypes.add(new GPXDataSetType[] { GPXDataSetType.SLOPE });
 			}
-			if (analysis.isSpeedSpecified()) {
-				availableTypes.add(GPXDataSetType.SPEED);
+			if (analysis.hasSpeedData) {
+				availableTypes.add(new GPXDataSetType[] { GPXDataSetType.SPEED });
+			}
+			if (analysis.hasElevationData) {
+				availableTypes.add(new GPXDataSetType[] { GPXDataSetType.ALTITUDE, GPXDataSetType.SLOPE });
+			}
+			if (analysis.hasElevationData && analysis.hasSpeedData) {
+				availableTypes.add(new GPXDataSetType[] { GPXDataSetType.ALTITUDE, GPXDataSetType.SPEED });
 			}
 		}
-		availableTypes.remove(gpxItem.chartType);
-		yAxisIcon.setImageDrawable(gpxItem.chartType.getImageDrawable(app));
-		yAxisTitle.setText(gpxItem.chartType.getName(app));
+		yAxisIcon.setImageDrawable(GPXDataSetType.getImageDrawable(app, gpxItem.chartTypes));
+		yAxisTitle.setText(GPXDataSetType.getName(app, gpxItem.chartTypes));
 		if (availableTypes.size() > 0) {
 			yAxis.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					final PopupMenu optionsMenu = new PopupMenu(mapActivity, v);
 					DirectionsDialogs.setupPopUpMenuIcon(optionsMenu);
-					for (final GPXDataSetType type : availableTypes) {
-						MenuItem menuItem = optionsMenu.getMenu().add(type.getStringId()).setIcon(type.getImageDrawable(app));
+					for (final GPXDataSetType[] types : availableTypes) {
+						MenuItem menuItem = optionsMenu.getMenu()
+								.add(GPXDataSetType.getName(app, types))
+								.setIcon(GPXDataSetType.getImageDrawable(app, types));
 						menuItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 							@Override
 							public boolean onMenuItemClick(MenuItem mItem) {
-								gpxItem.chartType = type;
+								gpxItem.chartTypes = types;
 								update();
 								return true;
 							}
@@ -451,7 +494,7 @@ public class TrackDetailsMenu {
 			xAxisArrow.setVisibility(View.GONE);
 		}
 
-		refreshChart(chart);
+		refreshChart(chart, true);
 	}
 
 	private void updateChart(LineChart chart) {
@@ -480,7 +523,6 @@ public class TrackDetailsMenu {
 		@Override
 		public void updateToolbar(MapInfoWidgetsFactory.TopToolbarView view) {
 			super.updateToolbar(view);
-			//view.getCloseButton().setVisibility(View.GONE);
 			view.getShadowView().setVisibility(View.GONE);
 		}
 	}
