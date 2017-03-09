@@ -2047,8 +2047,8 @@ OsmAnd+は最新の更新情報を受けとることが出来る、有料バー�
 	<string name="shared_string_card_was_hidden">項目は非表示</string>
 	<string name="building_number">棟の番号</string>
 	<string name="next_proceed">次</string>
-	<string name="opening_at">～で開く</string>
-	<string name="closing_at">～で閉じる</string>
+	<string name="opening_at">営業開始時間</string>
+	<string name="closing_at">営業終了時間</string>
 	
 	
 	<string name="contact_info">連絡先</string>
@@ -2707,7 +2707,7 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="quick_action_add_poi_descr">アクションボタンをタップすると画面中央の地点にPOIが追加されます。</string>
     <string name="quick_action_navigation_voice_descr">アクションボタンをタップするとナビゲーション中の案内音声on/off切替が出来ます。</string>
     <string name="quick_action_add_parking_descr">アクションボタンをタップすると画面中央の地点に駐車場所が追加されます。</string>
-    <string name="quick_action_interim_dialog">中間ダイアログを表示</string>
+    <string name="quick_action_interim_dialog">住所＆カテゴリー入力ダイアログを表示</string>
     <string name="favorite_empty_place_name">場所</string>
     <string name="quick_action_duplicates">指定されたクイックアクション名はすでに使われています。重複を避けるために%1$sに変更されました。</string>
     <string name="quick_action_duplicate">クイックアクション名の重複</string>
@@ -2738,10 +2738,10 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="quick_action_map_overlay_action">オーバーレイを追加します</string>
     <string name="quick_action_map_overlay_switch">オーバーレイマップは\"%s\"に変更されました。</string>
     <string name="quick_action_map_underlay_switch">アンダーレイマップは\"%s\"に変更されました。</string>
-    <string name="quick_action_map_underlay">アンダーレイマップを変更</string>
+    <string name="quick_action_map_underlay">アンダーレイマップの変更</string>
     <string name="quick_action_map_underlay_title">アンダーレイマップ</string>
     <string name="quick_action_map_underlay_action">アンダーレイを追加</string>
-    <string name="quick_action_map_source">ソースマップを変更</string>
+    <string name="quick_action_map_source">ソースマップの変更</string>
     <string name="quick_action_map_source_title">ソースマップ</string>
     <string name="quick_action_map_source_action">ソースマップを追加</string>
     <string name="quick_action_map_source_switch">ソースマップは\"%s\"に変更されました。</string>
