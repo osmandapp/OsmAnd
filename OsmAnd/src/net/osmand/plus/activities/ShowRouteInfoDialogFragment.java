@@ -211,8 +211,6 @@ public class ShowRouteInfoDialogFragment extends DialogFragment {
 						}
 					}
 					lastHeight = h;
-				} else if (lastHeight != HEIGHT_UNDEFINED) {
-					point.ele = lastHeight;
 				}
 				seg.points.add(point);
 			}

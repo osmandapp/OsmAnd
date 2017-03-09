@@ -244,8 +244,6 @@ public class RouteCalculationResult {
 						}
 					}
 					lastHeight = h;
-				} else if (lastHeight != HEIGHT_UNDEFINED) {
-					n.setAltitude(lastHeight);
 				}
 				locations.add(n);
 				attachAlarmInfo(alarms, s, i, locations.size());

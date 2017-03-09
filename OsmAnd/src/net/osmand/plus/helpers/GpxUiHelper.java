@@ -1024,33 +1024,35 @@ public class GpxUiHelper {
 		float x;
 		for (Elevation e : elevationData) {
 			i++;
-			x = axisType == GPXDataSetAxisType.TIME ? e.time : (float) e.distance;
+			x = axisType == GPXDataSetAxisType.TIME ? e.time : e.distance;
 			if (x > 0) {
 				nextX += x / divX;
-				elev = (float) e.elevation;
-				if (prevElevOrig != -80000) {
-					if (elev > prevElevOrig) {
-						elev -= 1f;
-					} else if (prevElevOrig == elev && i < lastIndex) {
-						hasSameY = true;
-						lastXSameY = nextX;
-						continue;
+				if (!Float.isNaN(e.elevation)) {
+					elev = e.elevation;
+					if (prevElevOrig != -80000) {
+						if (elev > prevElevOrig) {
+							elev -= 1f;
+						} else if (prevElevOrig == elev && i < lastIndex) {
+							hasSameY = true;
+							lastXSameY = nextX;
+							continue;
+						}
+						if (prevElev == elev && i < lastIndex) {
+							hasSameY = true;
+							lastXSameY = nextX;
+							continue;
+						}
+						if (hasSameY) {
+							values.add(new Entry(lastXSameY, lastEntry.getY()));
+						}
+						hasSameY = false;
 					}
-					if (prevElev == elev && i < lastIndex) {
-						hasSameY = true;
-						lastXSameY = nextX;
-						continue;
-					}
-					if (hasSameY) {
-						values.add(new Entry(lastXSameY, lastEntry.getY()));
-					}
-					hasSameY = false;
+					prevElevOrig = e.elevation;
+					prevElev = elev;
+					nextY = elev * convEle;
+					lastEntry = new Entry(nextX, nextY);
+					values.add(lastEntry);
 				}
-				prevElevOrig = (float) e.elevation;
-				prevElev = elev;
-				nextY = elev * convEle;
-				lastEntry = new Entry(nextX, nextY);
-				values.add(lastEntry);
 			}
 		}
 		return values;
@@ -1198,7 +1200,7 @@ public class GpxUiHelper {
 		float nextY;
 		float x;
 		for (Speed s : speedData) {
-			x = axisType == GPXDataSetAxisType.TIME ? s.time : (float) s.distance;
+			x = axisType == GPXDataSetAxisType.TIME ? s.time : s.distance;
 			if (x > 0) {
 				if (axisType == GPXDataSetAxisType.TIME && x > 60) {
 					values.add(new Entry(nextX + 1, 0));
@@ -1206,9 +1208,9 @@ public class GpxUiHelper {
 				}
 				nextX += x / divX;
 				if (Float.isNaN(divSpeed)) {
-					nextY = (float) (s.speed * mulSpeed);
+					nextY = s.speed * mulSpeed;
 				} else {
-					nextY = (float) (divSpeed / s.speed);
+					nextY = divSpeed / s.speed;
 				}
 				if (nextY < 0) {
 					nextY = 0;

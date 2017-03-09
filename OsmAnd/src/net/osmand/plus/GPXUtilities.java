@@ -6,6 +6,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.support.annotation.ColorInt;
+
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LocationPoint;
@@ -92,14 +93,14 @@ public class GPXUtilities {
 	}
 
 	public static class Elevation {
-		public double distance;
+		public float distance;
 		public int time;
-		public double elevation;
+		public float elevation;
 	}
 	public static class Speed {
-		public double distance;
+		public float distance;
 		public int time;
-		public double speed;
+		public float speed;
 	}
 
 	public static class WptPt extends GPXExtensions implements LocationPoint {
@@ -363,9 +364,9 @@ public class GPXUtilities {
 						minElevation = Math.min(elevation, minElevation);
 						maxElevation = Math.max(elevation, maxElevation);
 
-						elevation1.elevation = elevation;
+						elevation1.elevation = (float) elevation;
 					} else {
-						elevation1.elevation = 0;
+						elevation1.elevation = Float.NaN;
 					}
 
 					float speed = (float) point.speed;
