@@ -41,6 +41,7 @@ import com.github.mikephil.charting.components.MarkerView;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.ChartData;
+import com.github.mikephil.charting.data.DataSet;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
@@ -79,6 +80,7 @@ import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
 
 import java.io.File;
 import java.text.DateFormat;
@@ -1606,24 +1608,24 @@ public class GpxUiHelper {
 						break;
 				}
 				if (altSetIndex != -1) {
-					Entry eAlt = chartData.getEntryForHighlight(new Highlight(e.getX(), Float.NaN, altSetIndex));
-					((TextView) textAltView.findViewById(R.id.text_alt_value)).setText(Integer.toString((int) eAlt.getY()) + " ");
+					float y = getInterpolatedY(altSetIndex == 0 ? dataSet1 : dataSet2, e);
+					((TextView) textAltView.findViewById(R.id.text_alt_value)).setText(Integer.toString((int) y) + " ");
 					((TextView) textAltView.findViewById(R.id.text_alt_units)).setText((altSetIndex == 0 ? dataSet1.units : dataSet2.units));
 					textAltView.setVisibility(VISIBLE);
 				} else {
 					textAltView.setVisibility(GONE);
 				}
 				if (spdSetIndex != -1) {
-					Entry eSpd = chartData.getEntryForHighlight(new Highlight(e.getX(), Float.NaN, spdSetIndex));
-					((TextView) textSpdView.findViewById(R.id.text_spd_value)).setText(Integer.toString((int) eSpd.getY()) + " ");
+					float y = getInterpolatedY(spdSetIndex == 0 ? dataSet1 : dataSet2, e);
+					((TextView) textSpdView.findViewById(R.id.text_spd_value)).setText(Integer.toString((int) y) + " ");
 					((TextView) textSpdView.findViewById(R.id.text_spd_units)).setText(spdSetIndex == 0 ? dataSet1.units : dataSet2.units);
 					textSpdView.setVisibility(VISIBLE);
 				} else {
 					textSpdView.setVisibility(GONE);
 				}
 				if (slpSetIndex != -1) {
-					Entry eSlp = chartData.getEntryForHighlight(new Highlight(e.getX(), Float.NaN, slpSetIndex));
-					((TextView) textSlpView.findViewById(R.id.text_slp_value)).setText(Integer.toString((int) eSlp.getY()) + " ");
+					float y = getInterpolatedY(slpSetIndex == 0 ? dataSet1 : dataSet2, e);
+					((TextView) textSlpView.findViewById(R.id.text_slp_value)).setText(Integer.toString((int) y) + " ");
 					textSlpView.setVisibility(VISIBLE);
 				} else {
 					textSlpView.setVisibility(GONE);
@@ -1636,6 +1638,20 @@ public class GpxUiHelper {
 				findViewById(R.id.divider).setVisibility(GONE);
 			}
 			super.refreshContent(e, highlight);
+		}
+
+		private float getInterpolatedY(OrderedLineDataSet ds, Entry e) {
+			if (ds.getEntryIndex(e) == -1) {
+				Entry upEntry = ds.getEntryForXValue(e.getX(), Float.NaN, DataSet.Rounding.UP);
+				Entry downEntry = upEntry;
+				int upIndex = ds.getEntryIndex(upEntry);
+				if (upIndex > 0) {
+					downEntry = ds.getEntryForIndex(upIndex - 1);
+				}
+				return MapUtils.getInterpolatedY(downEntry.getX(), downEntry.getY(), upEntry.getX(), upEntry.getY(), e.getX());
+			} else {
+				return e.getY();
+			}
 		}
 
 		@Override
