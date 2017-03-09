@@ -784,11 +784,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		tb.setPixelDimensions(tbw, tbh);
 
 		double clat = bottom / 2 + top / 2;
-		//double clat = 5 * bottom / 4 - top / 4;
 		double clon = left / 2 + right / 2;
-		// landscape mode
-//				double clat = bottom / 2 + top / 2;
-//				double clon = 5 * left / 4 - right / 4;
 		tb.setLatLonCenter(clat, clon);
 		while (tb.getZoom() < 17 && tb.containsLatLon(top, left) && tb.containsLatLon(bottom, right)) {
 			tb.setZoom(tb.getZoom() + 1);
@@ -803,8 +799,31 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		animatedDraggingThread.startMoving(clat, clon, tb.getZoom(), true);
 	}
 
+	public RotatedTileBox getTileBox(int tileBoxWidthPx, int tileBoxHeightPx, int marginTopPx) {
+		RotatedTileBox tb = currentViewport.copy();
+		double border = 0.8;
+		int dy = 0;
+
+		int tbw = (int) (tb.getPixWidth() * border);
+		int tbh = (int) (tb.getPixHeight() * border);
+		if (tileBoxWidthPx > 0) {
+			tbw = (int) (tileBoxWidthPx * border);
+		} else if (tileBoxHeightPx > 0) {
+			tbh = (int) (tileBoxHeightPx * border);
+			dy = (tb.getPixHeight() - tileBoxHeightPx) / 2 - marginTopPx;
+		}
+		tb.setPixelDimensions(tbw, tbh);
+
+		if (dy != 0) {
+			double clat = tb.getLatFromPixel(tb.getPixWidth() / 2, tb.getPixHeight() / 2 - dy);
+			double clon = tb.getLonFromPixel(tb.getPixWidth() / 2, tb.getPixHeight() / 2);
+			tb.setLatLonCenter(clat, clon);
+		}
+		return tb;
+	}
+
 	public void fitLocationToMap(double clat, double clon, int zoom,
-							 int tileBoxWidthPx, int tileBoxHeightPx, int marginTopPx) {
+							 int tileBoxWidthPx, int tileBoxHeightPx, int marginTopPx, boolean animated) {
 		RotatedTileBox tb = currentViewport.copy();
 		int dy = 0;
 
@@ -823,7 +842,11 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			clat = tb.getLatFromPixel(tb.getPixWidth() / 2, tb.getPixHeight() / 2 + dy);
 			clon = tb.getLonFromPixel(tb.getPixWidth() / 2, tb.getPixHeight() / 2);
 		}
-		animatedDraggingThread.startMoving(clat, clon, tb.getZoom(), true);
+		if (animated) {
+			animatedDraggingThread.startMoving(clat, clon, tb.getZoom(), true);
+		} else {
+			setLatLon(clat, clon);
+		}
 	}
 
 	public boolean onGenericMotionEvent(MotionEvent event) {

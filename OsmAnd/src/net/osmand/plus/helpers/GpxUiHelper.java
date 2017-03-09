@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
@@ -865,6 +866,7 @@ public class GpxUiHelper {
 		mChart.getDescription().setEnabled(false);
 		mChart.setMaxVisibleValueCount(10);
 		mChart.setMinOffset(0f);
+		mChart.setDragDecelerationEnabled(false);
 
 		mChart.setExtraTopOffset(24f);
 		mChart.setExtraBottomOffset(16f);
@@ -1443,7 +1445,7 @@ public class GpxUiHelper {
 			this.imageId = imageId;
 		}
 
-		public String getName(Context ctx) {
+		public String getName(@NonNull Context ctx) {
 			return ctx.getString(stringId);
 		}
 
@@ -1455,8 +1457,32 @@ public class GpxUiHelper {
 			return imageId;
 		}
 
-		public Drawable getImageDrawable(OsmandApplication app) {
+		public Drawable getImageDrawable(@NonNull OsmandApplication app) {
 			return app.getIconsCache().getThemedIcon(imageId);
+		}
+
+		public static String getName(@NonNull Context ctx, @NonNull GPXDataSetType[] types) {
+			List<String> list = new ArrayList<>();
+			for (GPXDataSetType type : types) {
+				list.add(type.getName(ctx));
+			}
+			Collections.sort(list);
+			StringBuilder sb = new StringBuilder();
+			for (String s : list) {
+				if (sb.length() > 0) {
+					sb.append("/");
+				}
+				sb.append(s);
+			}
+			return sb.toString();
+		}
+
+		public static Drawable getImageDrawable(@NonNull OsmandApplication app, @NonNull GPXDataSetType[] types) {
+			if (types.length > 0) {
+				return types[0].getImageDrawable(app);
+			} else {
+				return null;
+			}
 		}
 	}
 

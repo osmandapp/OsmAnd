@@ -301,6 +301,9 @@ public class GPXUtilities {
 		public List<Elevation> elevationData;
 		public List<Speed> speedData;
 
+		public boolean hasElevationData;
+		public boolean hasSpeedData;
+
 		public boolean isSpeedSpecified() {
 			return avgSpeed > 0;
 		}
@@ -472,9 +475,15 @@ public class GPXUtilities {
 					elevation1.time = timeDiff;
 					elevation1.distance = (j > 0) ? calculations[0] : 0;
 					elevationData.add(elevation1);
+					if (!hasElevationData && !Float.isNaN(elevation1.elevation) && totalDistance > 0) {
+						hasElevationData = true;
+					}
 					speed1.time = timeDiff;
 					speed1.distance = elevation1.distance;
 					speedData.add(speed1);
+					if (!hasSpeedData && speed1.speed > 0 && totalDistance > 0) {
+						hasSpeedData = true;
+					}
 				}
 			}
 			if (!isTimeSpecified()) {
