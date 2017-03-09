@@ -586,7 +586,21 @@ public class MapUtils {
 		return rect;
 	}
 
-	
+	public static float getInterpolatedY(float x1, float y1, float x2, float y2, float x) {
+
+		float a = y1 - y2;
+		float b = x2 - x1;
+
+		float d = -a * b;
+		if (d != 0) {
+			float c1 = y2 * x1 - x2 * y1;
+			float c2 = x * (y2 - y1);
+
+			return (a * (c1 - c2)) / d;
+		} else {
+			return y1;
+		}
+	}
 }
 
 
