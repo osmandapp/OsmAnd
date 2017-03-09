@@ -1379,9 +1379,9 @@
 	<string name="osn_comment_dialog_title">Yorum Ekle</string>
 	<string name="osn_reopen_dialog_title">Notu yeniden açın</string>
 	<string name="osn_close_dialog_title">Notu kapat</string>
-	<string name="osn_add_dialog_success">Not Başarıyla oluşturuldu</string>
+	<string name="osn_add_dialog_success">Not, başarıyla oluşturuldu</string>
 	<string name="osn_add_dialog_error">Dinlenme Alanı</string>
-	<string name="osn_close_dialog_success">Not başarıyla kapatıldı</string>
+	<string name="osn_close_dialog_success">Not, başarıyla kapatıldı</string>
 	<string name="osn_close_dialog_error">Özel durum oluştu: nota kapatılmamış</string>
 	<string name="shared_string_commit">işlemek</string>
 	
@@ -1394,10 +1394,10 @@
     <string name="lang_fy">Frizce</string>
     <string name="lang_als">Arnavut (Tosk)</string>
     <string name="read_more">Daha fazla oku</string>
-    <string name="whats_new">Yenilikler neler:</string>
+    <string name="whats_new">Yenilikler neler</string>
     <string name="rendering_attr_hideProposed_name">Önerilen nesneler</string>
     <string name="shared_string_update">Güncelleştirme</string>
-    <string name="shared_string_upload">Yükleme</string>
+    <string name="shared_string_upload">Yükle</string>
     <string name="osm_edit_created_poi">OSM POI oluşturmak</string>
     
     <string name="world_map_download_descr">Dünya genel bakış haritası (küçük yakınlaştırmalarda tüm dünyayı kapsar) eksik veya eski. Tam bir çevre için dünya genel bakış haritasını indirmeyi düşünün.</string>
@@ -2088,7 +2088,7 @@
     <string name="show_transparency_seekbar">Şeffaflık seekbar göster</string>
     <string name="download_files_error_not_enough_space">Yeterli alan yok! Bu kalıcı olarak {3} MB geçici olarak ve {1} MB gerekir. Şu anda, orada sadece (2 MB) mevcuttur.</string>
     <string name="download_files_question_space_with_temp">Gerçekten {0} dosyaları download? Bu {3} MB geçici olarak ve {1} MB kalıcı olarak ihtiyacı var. Şu anda kullanılabilir (2) MB vardır.</string>
-    <string name="upload_osm_note_description">OpenStreetMap.org profil kullanıyorsanız OSM notunuzu anonim karşıya yükleyebilirsiniz.</string>
+    <string name="upload_osm_note_description">OpenStreetMap.org kullanıyorsanız OSM notunuzu anonim olarak profilinize yükleyebilirsiniz.</string>
     <string name="upload_osm_note">OSM Not yükle</string>
     <string name="shared_string_move_up">Yukarı Taşı</string>
     <string name="shared_string_move_down">Aşağı taşı</string>
@@ -2146,4 +2146,24 @@
     <string name="si_mi_meters">Mil/metre</string>
     <string name="routing_attr_short_way_name">Yakıt verimli yol</string>
     <string name="routing_attr_short_way_description">Yakıt verimli yol kullan (çoğunlukla daha kısa)</string>
+    <string name="add_new_folder">Yeni klasör ekle</string>
+    <string name="points_delete_multiple_succesful">Nokta(lar) başarıyla silindi.</string>
+    <string name="gpx_track">Takip et</string>
+    <string name="track_points_category_name">Bu rotadaki önemli noktalar</string>
+    <string name="max_speed">Azami hız</string>
+    <string name="average_speed">Ortalama hız</string>
+    <string name="shared_string_max">Azami</string>
+    <string name="shared_string_start_time">Başlangıç zamanı</string>
+    <string name="shared_string_end_time">Bitiş zamanı</string>
+    <string name="shared_string_color">Renk</string>
+    <string name="file_can_not_be_moved">Dosya taşınamadı.</string>
+    <string name="shared_string_move">Taşı</string>
+    <string name="routing_attr_driving_style_name">Sürüş stili</string>
+    <string name="routing_attr_driving_style_description">Güvenli,hızlı yada dengeli sürüş</string>
+    <string name="shared_string_time">Zaman</string>
+    <string name="total_distance">Toplam mesafe</string>
+    <string name="rendering_value_high_name">Yüksek</string>
+    <string name="rendering_value_medium_w_name">Orta</string>
+    <string name="rendering_value_low_name">Düşük</string>
+    <string name="rendering_attr_hideWaterPolygons_description">Su</string>
     </resources>
