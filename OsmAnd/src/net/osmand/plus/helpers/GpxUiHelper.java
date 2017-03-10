@@ -60,6 +60,7 @@ import net.osmand.IndexConstants;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.GPXDatabase;
+import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.Elevation;
 import net.osmand.plus.GPXUtilities.GPXFile;
@@ -424,11 +425,13 @@ public class GpxUiHelper {
 		final DateFormat dateFormat = android.text.format.DateFormat.getMediumDateFormat(activity);
 		final File dir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
 		AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-		final int layout = R.layout.dash_gpx_track_item;
+		final int layout = R.layout.gpx_track_item;
 		final Map<String, String> gpxAppearanceParams = new HashMap<>();
 
 		final ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(activity, layout, R.id.title,
 				adapter.getItemNames()) {
+
+			List<GpxDataItem> dataItems = null;
 
 			@Override
 			public int getItemViewType(int position) {
@@ -440,6 +443,17 @@ public class GpxUiHelper {
 				return 2;
 			}
 
+			private GpxDataItem getDataItem(GPXInfo info) {
+				if (dataItems != null) {
+					for (GpxDataItem item : dataItems) {
+						if (item.getFile().getAbsolutePath().endsWith(info.fileName)) {
+							return item;
+						}
+					}
+				}
+				return null;
+			}
+
 			@Override
 			public View getView(final int position, View convertView, ViewGroup parent) {
 				// User super class to create the View
@@ -449,56 +463,13 @@ public class GpxUiHelper {
 					v = activity.getLayoutInflater().inflate(layout, null);
 				}
 
+				if (dataItems == null) {
+					dataItems = app.getGpxDatabase().getItems();
+				}
+
 				final ContextMenuItem item = adapter.getItem(position);
 				GPXInfo info = list.get(position);
-				udpateGpxInfoView(v, item, info, showCurrentGpx && position == 0, app);
-
-				/*
-				TextView tv = (TextView) v.findViewById(R.id.title);
-				TextView dv = (TextView) v.findViewById(R.id.description);
-
-				if (showCurrentGpx && position == 0) {
-					tv.setText(item.getTitle());
-					dv.setText(OsmAndFormatter.getFormattedDistance(app.getSavingTrackHelper().getDistance(), app));
-					final SwitchCompat ch = ((SwitchCompat) v.findViewById(R.id.toggle_item));
-					ch.setOnCheckedChangeListener(null);
-					ch.setChecked(item.getSelected());
-					ch.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-						@Override
-						public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-							item.setSelected(isChecked);
-						}
-					});
-					return v;
-				}
-
-				tv.setText(item.getTitle().replace("/", " • "));
-
-				GPXInfo info = list.get(position);
-				GPXDatabase.GpxDataItem dataItem = app.getGpxDatabase().getItem(new File(info.fileName));
-				StringBuilder sb = new StringBuilder();
-				if (dataItem != null && dataItem.getAnalysis() != null) {
-
-				} else {
-					if (info.getLastModified() > 0) {
-						sb.append(dateFormat.format(info.getLastModified()));
-					}
-					if (info.getFileSize() >= 0) {
-						if (sb.length() > 0) {
-							sb.append(" • ");
-						}
-						long fileSizeKB = info.getFileSize() / 1000;
-						if (info.getFileSize() < 5000) {
-							sb.append(info.getFileSize()).append(" B");
-						} else if (fileSizeKB > 100) {
-							sb.append(formatMb.format(new Object[]{(float) fileSizeKB / (1 << 10)}));
-						} else {
-							sb.append(fileSizeKB).append(" kB");
-						}
-					}
-				}
-				dv.setText(sb.toString());
-				*/
+				udpateGpxInfoView(v, item, info, getDataItem(info), showCurrentGpx && position == 0, app);
 
 				if (item.getSelected() == null) {
 					v.findViewById(R.id.check_item).setVisibility(View.GONE);
@@ -716,12 +687,9 @@ public class GpxUiHelper {
 		return dlg;
 	}
 
-	public static void udpateGpxInfoView(View v, ContextMenuItem item, GPXInfo info, boolean currentlyRecordingTrack, OsmandApplication app) {
+	public static void udpateGpxInfoView(View v, ContextMenuItem item, GPXInfo info, GpxDataItem dataItem, boolean currentlyRecordingTrack, OsmandApplication app) {
 		TextView viewName = ((TextView) v.findViewById(R.id.name));
-		v.findViewById(R.id.divider_list).setVisibility(View.GONE);
-		v.findViewById(R.id.divider_dash).setVisibility(View.GONE);
-
-		viewName.setText(item.getTitle().replace("/", " • "));
+		viewName.setText(item.getTitle().replace("/", " • ").trim());
 		ImageView icon = (ImageView) v.findViewById(R.id.icon);
 		icon.setVisibility(View.GONE);
 		//icon.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_action_polygom_dark));
@@ -730,11 +698,8 @@ public class GpxUiHelper {
 		GPXTrackAnalysis analysis = null;
 		if (currentlyRecordingTrack) {
 			analysis = app.getSavingTrackHelper().getCurrentTrack().getTrackAnalysis();
-		} else {
-			GPXDatabase.GpxDataItem dataItem = app.getGpxDatabase().getItem(new File(info.fileName));
-			if (dataItem != null) {
-				analysis = dataItem.getAnalysis();
-			}
+		} else if (dataItem != null) {
+			analysis = dataItem.getAnalysis();
 		}
 
 		boolean sectionRead = analysis == null;
@@ -874,7 +839,7 @@ public class GpxUiHelper {
 				if (res != 0) {
 					return res;
 				}
-				return -i1.getFileName().compareTo(i2.getFileName());
+				return -i1.getFileName().toLowerCase().compareTo(i2.getFileName().toLowerCase());
 			}
 		});
 		return list;

@@ -187,7 +187,9 @@
 				android:layout_height="wrap_content"
 				android:paddingTop="4dp"
 				android:paddingBottom="4dp"
-				android:focusable="false"
+                android:clickable="false"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
 				android:gravity="center_vertical"/>
 
 			<android.support.v7.widget.AppCompatCheckBox
@@ -196,6 +198,9 @@
 				android:layout_height="wrap_content"
                 android:paddingTop="4dp"
                 android:paddingBottom="4dp"
+                android:clickable="false"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
 				android:visibility="gone"/>
 
         </LinearLayout>
