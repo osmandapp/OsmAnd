@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
@@ -65,6 +66,7 @@ import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.plus.GPXUtilities.Speed;
 import net.osmand.plus.GPXUtilities.TrkSegment;
+import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmAndFormatter;
@@ -92,6 +94,7 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -446,12 +449,13 @@ public class GpxUiHelper {
 					v = activity.getLayoutInflater().inflate(layout, null);
 				}
 
+				final ContextMenuItem item = adapter.getItem(position);
 				GPXInfo info = list.get(position);
-				AvailableGPXFragment.udpateGpxInfoView(v, info, app, false);
+				udpateGpxInfoView(v, item, info, showCurrentGpx && position == 0, app);
 
+				/*
 				TextView tv = (TextView) v.findViewById(R.id.title);
 				TextView dv = (TextView) v.findViewById(R.id.description);
-				final ContextMenuItem item = adapter.getItem(position);
 
 				if (showCurrentGpx && position == 0) {
 					tv.setText(item.getTitle());
@@ -494,6 +498,7 @@ public class GpxUiHelper {
 					}
 				}
 				dv.setText(sb.toString());
+				*/
 
 				if (item.getSelected() == null) {
 					v.findViewById(R.id.check_item).setVisibility(View.GONE);
@@ -709,6 +714,79 @@ public class GpxUiHelper {
 			// Unknown reason but on some devices fail
 		}
 		return dlg;
+	}
+
+	public static void udpateGpxInfoView(View v, ContextMenuItem item, GPXInfo info, boolean currentlyRecordingTrack, OsmandApplication app) {
+		TextView viewName = ((TextView) v.findViewById(R.id.name));
+		v.findViewById(R.id.divider_list).setVisibility(View.GONE);
+		v.findViewById(R.id.divider_dash).setVisibility(View.GONE);
+
+		viewName.setText(item.getTitle().replace("/", " • "));
+		ImageView icon = (ImageView) v.findViewById(R.id.icon);
+		icon.setVisibility(View.GONE);
+		//icon.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_action_polygom_dark));
+		viewName.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
+
+		GPXTrackAnalysis analysis = null;
+		if (currentlyRecordingTrack) {
+			analysis = app.getSavingTrackHelper().getCurrentTrack().getTrackAnalysis();
+		} else {
+			GPXDatabase.GpxDataItem dataItem = app.getGpxDatabase().getItem(new File(info.fileName));
+			if (dataItem != null) {
+				analysis = dataItem.getAnalysis();
+			}
+		}
+
+		boolean sectionRead = analysis == null;
+		if (sectionRead) {
+			v.findViewById(R.id.read_section).setVisibility(View.GONE);
+			v.findViewById(R.id.unknown_section).setVisibility(View.VISIBLE);
+			String date = "";
+			String size = "";
+			if (info.getFileSize() >= 0) {
+				if (info.getFileSize() > 100) {
+					size = formatMb.format(new Object[]{(float) info.getFileSize() / (1 << 10)});
+				} else {
+					size = info.getFileSize() + " kB";
+				}
+			}
+			DateFormat df = app.getResourceManager().getDateFormat();
+			long fd = info.getLastModified();
+			if (fd > 0) {
+				date = (df.format(new Date(fd)));
+			}
+			TextView sizeText = (TextView) v.findViewById(R.id.date_and_size_details);
+			sizeText.setText(date + " \u2022 " + size);
+
+		} else {
+			v.findViewById(R.id.read_section).setVisibility(View.VISIBLE);
+			v.findViewById(R.id.unknown_section).setVisibility(View.GONE);
+			ImageView distanceI = (ImageView) v.findViewById(R.id.distance_icon);
+			distanceI.setVisibility(View.VISIBLE);
+			distanceI.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_small_distance));
+			ImageView pointsI = (ImageView) v.findViewById(R.id.points_icon);
+			pointsI.setVisibility(View.VISIBLE);
+			pointsI.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_small_point));
+			ImageView timeI = (ImageView) v.findViewById(R.id.time_icon);
+			timeI.setVisibility(View.VISIBLE);
+			timeI.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_small_time));
+			TextView time = (TextView) v.findViewById(R.id.time);
+			TextView distance = (TextView) v.findViewById(R.id.distance);
+			TextView pointsCount = (TextView) v.findViewById(R.id.points_count);
+			pointsCount.setText(analysis.wptPoints + "");
+			distance.setText(OsmAndFormatter.getFormattedDistance(analysis.totalDistance, app));
+
+			if (analysis.isTimeSpecified()) {
+				time.setText(Algorithms.formatDuration((int) (analysis.timeSpan / 1000), app.accessibilityEnabled()) + "");
+			} else {
+				time.setText("");
+			}
+		}
+
+		TextView descr = ((TextView) v.findViewById(R.id.description));
+		descr.setVisibility(View.GONE);
+
+		v.findViewById(R.id.check_item).setVisibility(View.GONE);
 	}
 
 	@TargetApi(Build.VERSION_CODES.KITKAT)
