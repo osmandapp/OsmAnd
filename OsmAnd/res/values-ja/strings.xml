@@ -692,10 +692,13 @@ POIの更新は利用できません</string>
     <string name="gpx_saved_sucessfully">GPXファイルは正常に {0} に保存されました</string>
     <string name="osmand_distance_planning_plugin_description">このプラグインはマップ画面のタップ、又は既存のGPXファイルから道順を作成したり、旅程の計画など任意の地点間の距離を測定するためのウィジェットを追加します。得られた結果はGPXファイルとして保存することができるので、後で使用することができます。</string>
     <string name="osmand_distance_planning_plugin_name">距離の計算＆計画ツール</string>
-    <string name="use_distance_measurement_help">* 地点をマークするにはタップして下さい。\n 
-        * マップ上で長タップすると以前の地点を削除できます。\n
-        * 地点を長タップすると詳細を見ることができます。\n
-        * 測定ウィジェットをタップするとより多くのアクションを行うことができます。</string>
+    <string name="use_distance_measurement_help">* 地点をマークするにはタップして下さい。
+ 
+ * マップ上で長タップすると以前の地点を削除できます。
+
+ * 地点を長押しすると詳細を見ることができます。
+
+ * 測定ウィジェットをタップするとより多くのアクションを行うことができます。</string>
     <string name="shared_string_do_not_show_again">これ以降表示しない</string>
     <string name="distance_measurement_start_editing">編集を開始</string>
     <string name="distance_measurement_finish_editing">編集を終了</string>
@@ -1092,9 +1095,13 @@ POIの更新は利用できません</string>
 	<string name="av_photo_play_sound">写真撮影時に撮影音を使用</string>
 	<string name="av_camera_focus_infinity">フォーカスを無限遠(∞)にセット</string>
 	<string name="av_camera_focus_macro">マクロ(近距離)フォーカスモード</string>
-	<string name="osmand_srtm_long_description_1000_chars">"このプラグインは、等高線のオーバーレイ表示と陰影起伏図(浮き彫り表示)の両方がOsmAndの標準マップ上に表示出来るように用意されています。\nこの機能は地形の構造を知る必要のある、アスリート、ハイカー、登山者、そしてその他の多くの人々の助けになるでしょう。
-\n\nこのグローバルデータ(北緯70°から南緯70°の間)はSRTM(スペースシャトル立体地形データ)とNASAの地球観測衛星であるテラ(Terra)に搭載されたASTER(資源探査用将来型センサ)と呼ばれる機器の観測結果をベースにしたものです。 ASTERはNASAと日本の経済産業省(METI)、そして宇宙システム開発利用推進機構(J-spacesystems)の共同作業によるものです。 "</string>
-    <string name="audionotes_location_not_defined">メモを取る地点が指定されていません。マップ上を長タップでメニューを開き、右端のボタン『その他のアクション』から任意の形式のメモを取ることが出来ます。</string>
+	<string name="osmand_srtm_long_description_1000_chars">"このプラグインは、等高線のオーバーレイ表示と陰影起伏図(浮き彫り表示)の両方がOsmAndの標準マップ上に表示出来るように用意されています。
+この機能は地形の構造を知る必要のある、アスリート、ハイカー、登山者、そしてその他の多くの人々の助けになるでしょう。
+
+
+このグローバルデータ(北緯70°から南緯70°の間)はSRTM(スペースシャトル立体地形データ)とNASAの地球観測衛星であるテラ(Terra)に搭載されたASTER(資源探査用将来型センサ)と呼ばれる機器の観測結果をベースにしたものです。 ASTERはNASAと日本の経済産業省(METI)、そして宇宙システム開発利用推進機構(J-spacesystems)の共同作業によるものです。
+ "</string>
+    <string name="audionotes_location_not_defined">メモを取る地点が指定されていません。マップ上を長押しでメニューを開き、右端のボタン『その他のアクション』から任意の形式のメモを取ることが出来ます。</string>
     <string name="map_widget_audionotes">音声メモ</string>
     <string name="audionotes_plugin_description">音声/ビデオメモプラグインは、旅行中の音声/写真/ビデオに関するメモ機能を提供します。マップ画面上のボタンまたはコンテキストメニューから使用出来ます。</string>
     <string name="audionotes_plugin_name">音声/ビデオメモ</string>
@@ -1337,7 +1344,9 @@ OsmAnd+は最新の更新情報を受けとることが出来る、有料バー�
 	<string name="rendering_attr_noPolygons_description">マップ上の土地の特徴を透明にする</string>
 	<string name="osmand_rastermaps_plugin_description">"このプラグインを使用すると、標準のOpenStreetMapタイル(Mapnik風)から衛星画像、天気図、気候マップ、地質図、陰影起伏図など、目的に応じた様々な(タイル又はラスタと呼ばれる)オンラインマップにアクセスし、レイヤーに反映することができます。
 
+
 これらのマップのいずれも(OsmAnd標準オフラインマップの様に)ベースマップとして使用でき、オーバーレイマップ、アンダーレイマップとしてもOsmAndマップ画面に表示させることが出来ます。アンダーレイマップを見やすくしたい時は、OsmAndベクターマップの特定の要素を必要に応じて\'マップ設定\'メニューから簡単に非表示にすることができます。
+
 
 タイルマップはオンライン経由で直接取得することが可能です、また様々なサードパーティ製マップ作成ツールで作成したSQLiteデータベースをオフラインで使用するために調整することができます。(手動でOsmAndのデータフォルダにコピーする必要があります)
  "</string>
@@ -1875,8 +1884,14 @@ OsmAnd+は最新の更新情報を受けとることが出来る、有料バー�
  "</string>
 	<string name="plugin_nautical_name">航海マップ表示</string>
 	<string name="local_osm_changes_upload_all_confirm">OSMに%1$dカ所の変更をアップロードします。よろしいですか？</string>
-    <string name="plugin_nautical_descr">"このプラグインはOsmAnd Maps &amp; Navigationにて航海マップを生成し、ボート、セーリング、その他のウォータースポーツに向けた機能を豊かにします。\n\n特殊マップアドオンはOsmAndに内陸だけでなく沿岸に向けた、航海ナビゲーションマークやチャートシンボルを提供します。各ナビゲーションマークの説明はそれらの意味(カテゴリ、形状、色、順序、参照など)を識別するために必要な詳細を示されます。
-\n\nOsmAndの従来のマップスタイルに戻すには、このプラグインを非アクティブにするか、必要に応じて\'マップ設定\'の\'マップスタイル \'からも変更出来ます。 "</string>
+    <string name="plugin_nautical_descr">"このプラグインはOsmAnd Maps &amp; Navigationにて航海マップを生成し、ボート、セーリング、その他のウォータースポーツに向けた機能を豊かにします。
+
+
+特殊マップアドオンはOsmAndに内陸だけでなく沿岸に向けた、航海ナビゲーションマークやチャートシンボルを提供します。各ナビゲーションマークの説明はそれらの意味(カテゴリ、形状、色、順序、参照など)を識別するために必要な詳細を示されます。
+
+
+OsmAndの従来のマップスタイルに戻すには、このプラグインを非アクティブにするか、必要に応じて\'マップ設定\'の\'マップスタイル \'からも変更出来ます。
+ "</string>
 	<string name="plugin_ski_name">スキーマップ表示</string>
 	<string name="plugin_ski_descr">"このプラグインは簡単にダウンヒル、クロスカントリー、アルペンの各スキーコース、ロープウェイやスキーリフト等の配置などを参照できます。ルートとゲレンデが色分けされた難易度によって示され、冬の雪景色をイメージした\'ウィンター風\'マップスタイルで描かれます。
 
@@ -1923,7 +1938,7 @@ OsmAnd+は最新の更新情報を受けとることが出来る、有料バー�
 	<string name="shared_string_edit">編集</string>
 	<string name="shared_string_places">場所</string>
 	<string name="shared_string_search">検索</string>
-	<string name="shared_string_is_open">開く</string>
+	<string name="shared_string_is_open">営業中</string>
     <string name="filter_poi_hint">名前でフィルター</string>
     <string name="search_poi_category_hint">名称でフィルター</string>
     <string name="index_name_netherlands">ヨーロッパ - オランダ</string>
@@ -2470,7 +2485,7 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="access_disable_offroute_recalc_descr">案内されたルートから大きく離れた場合、自動的にルートの再計算をしないようにします</string>
     <string name="back_to_search">検索に戻る</string>
     <string name="confirmation_to_delete_history_items">選択された履歴を削除しますか？</string>
-    <string name="show_something_on_map">%1$sをマップ上に表示</string>
+    <string name="show_something_on_map">マップ上の%1$sへ移動</string>
     <string name="release_2_4">"
  • 新しくなって、より強化されたフリーワード検索
 
@@ -2746,7 +2761,7 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="quick_action_map_source_action">ソースマップを追加</string>
     <string name="quick_action_map_source_switch">ソースマップは\"%s\"に変更されました。</string>
     <string name="quick_action_btn_tutorial_title">ボタン位置を変更</string>
-    <string name="quick_action_btn_tutorial_descr">長タップとドラッグで画面上のボタンの位置を変更します</string>
+    <string name="quick_action_btn_tutorial_descr">長押しとドラッグで画面上のボタンの位置を変更します</string>
 	<string name="shared_string_action_name">アクション名</string>
 <string name="shared_string_slope">坂</string>
     <string name="add_new_folder">新しいフォルダーを追加</string>
