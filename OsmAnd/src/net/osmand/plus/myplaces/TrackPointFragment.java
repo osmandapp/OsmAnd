@@ -818,7 +818,7 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 					groupColor = gpxItem.locationStart.getColor(groupColor);
 				}
 				if (groupColor == 0) {
-					groupColor = getMyActivity().getResources().getColor(R.color.gpx_track);
+					groupColor = getMyActivity().getResources().getColor(R.color.gpx_color_point);
 				}
 				icon.setImageDrawable(FavoriteImageDrawable.getOrCreate(getActivity(), groupColor, false));
 			} else {
