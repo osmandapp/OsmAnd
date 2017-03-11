@@ -1126,8 +1126,21 @@
 	<string name="poi_access_delivery">配達時のみ通行可(Delivery access)</string>
 	<string name="poi_access_agricultural">農業目的のみ通行可(Agricultural access)</string>
 
-	<string name="poi_fuel_type">燃料種</string>
-	<string name="poi_fuel_avia_type">航空燃料種</string>
-	<string name="poi_payment_type">対応支払い方法</string>
+	<string name="poi_fuel_type">燃料種(Type)</string>
+	<string name="poi_fuel_avia_type">航空燃料種(Type)</string>
+	<string name="poi_payment_type">対応支払い方法(Payment type)</string>
 	<string name="poi_payment_fuel_type">燃料カード(Fuel cards)</string>
+	<string name="poi_additional_type">追加(Additional)</string>
+	<string name="poi_internet_access_type">インターネット接続の種類(Internet access type)</string>
+	<string name="poi_vending_type">自動販売機の種類(Vending type)</string>
+	<string name="poi_bicycle_service">自転車サービス(Bicycle service)</string>
+	<string name="poi_fire_hydrant_water_source">水源(Water Source)</string>
+	<string name="poi_payment_toll_type">お支払いの種類(Payment type)</string>
+	<string name="poi_traffic_signals_sound">音声(Sound)</string>
+	<string name="poi_tactile_paving">視覚障害者誘導用ブロック(Tactile paving)</string>
+	<string name="poi_self_service">セルフサービス(Self service)</string>
+	<string name="poi_automated">自動(Automated)</string>
+	<string name="poi_subway_station_filter">地下鉄駅(Subway station)</string>
+	<string name="poi_ferry_terminal_cargo">貨物(Cargo)</string>
+	<string name="poi_aerialway_bicycle">自転車交通(Bicycle transportation)</string>
 	</resources>
