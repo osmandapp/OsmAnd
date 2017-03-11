@@ -33,6 +33,7 @@ public class WptPtEditorFragment extends PointEditorFragment {
 
 	private boolean saved;
 	private int color;
+	private int defaultColor;
 	private boolean skipDialog;
 
 	@Override
@@ -41,6 +42,7 @@ public class WptPtEditorFragment extends PointEditorFragment {
 		savingTrackHelper = getMapActivity().getMyApplication().getSavingTrackHelper();
 		selectedGpxHelper = getMapActivity().getMyApplication().getSelectedGpxHelper();
 		editor = getMapActivity().getContextMenu().getWptPtPointEditor();
+		defaultColor = getResources().getColor(R.color.gpx_color_point);
 	}
 
 	@Override
@@ -52,18 +54,19 @@ public class WptPtEditorFragment extends PointEditorFragment {
 		FavoriteGroup group = getMyApplication().getFavorites().getGroup(wpt.category);
 
 		if (group == null) {
-
-			int defaultColor = getResources().getColor(R.color.gpx_color_point);
-			color = wpt.getColor(defaultColor);
-
-		} else color = group.color;
+			color = wpt.getColor(0);
+		} else {
+			color = group.color;
+		}
 	}
 
 	@Override
 	public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
 
-		if (skipDialog) save(true);
+		if (skipDialog) {
+			save(true);
+		}
 	}
 
 	@Override
@@ -247,12 +250,12 @@ public class WptPtEditorFragment extends PointEditorFragment {
 
 	@Override
 	public Drawable getNameIcon() {
-		return FavoriteImageDrawable.getOrCreate(getMapActivity(), color, false);
+		return FavoriteImageDrawable.getOrCreate(getMapActivity(), color == 0 ? defaultColor : color, false);
 	}
 
 	@Override
 	public Drawable getCategoryIcon() {
-		return getPaintedIcon(R.drawable.ic_action_folder_stroke, color);
+		return getPaintedIcon(R.drawable.ic_action_folder_stroke, color == 0 ? defaultColor : color);
 	}
 
 	private static class SaveGpxAsyncTask extends AsyncTask<Void, Void, Void> {
