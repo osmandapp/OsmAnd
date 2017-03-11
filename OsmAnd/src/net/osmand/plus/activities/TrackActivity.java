@@ -116,7 +116,7 @@ public class TrackActivity extends TabActivity {
 
 					if (!stopped) {
 						setGpx(result);
-						setGpxDataItem(getMyApplication().getGpxDatabase().getItem(file));
+						setGpxDataItem(file != null ? getMyApplication().getGpxDatabase().getItem(file) : null);
 
 						for (WeakReference<Fragment> f : fragList) {
 							Fragment frag = f.get();
