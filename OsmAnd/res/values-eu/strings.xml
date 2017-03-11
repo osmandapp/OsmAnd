@@ -2824,4 +2824,6 @@ eta gehiago…
     <string name="routing_attr_height_obstacles_name">Erabili elebazio kotak</string>
     <string name="routing_attr_height_obstacles_description">Erabili SRT, ASTER eta EU-DEM hornitzaileen elebazio datuak</string>
 
+    <string name="shared_string_slope">Malda</string>
+    <string name="lang_ber">Berberera</string>
     </resources>
