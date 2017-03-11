@@ -2,18 +2,28 @@ package net.osmand.plus.myplaces;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.graphics.Matrix;
+import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.ListPopupWindow;
 import android.support.v7.widget.SwitchCompat;
+import android.util.DisplayMetrics;
 import android.util.SparseArray;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -23,6 +33,7 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
@@ -31,16 +42,22 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.listener.ChartTouchListener.ChartGesture;
 import com.github.mikephil.charting.listener.OnChartGestureListener;
+import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 
 import net.osmand.AndroidUtils;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.data.QuadRect;
+import net.osmand.data.RotatedTileBox;
+import net.osmand.data.RotatedTileBox.RotatedTileBoxBuilder;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
+import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.plus.GPXUtilities.Track;
@@ -66,6 +83,10 @@ import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetAxisType;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetType;
 import net.osmand.plus.helpers.GpxUiHelper.OrderedLineDataSet;
+import net.osmand.plus.render.MapRenderRepositories;
+import net.osmand.plus.resources.ResourceManager;
+import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
+import net.osmand.plus.views.Renderable;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip.CustomTabProvider;
 import net.osmand.plus.views.controls.WrapContentHeightViewPager;
@@ -101,6 +122,19 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 	private int selectedSplitInterval;
 	private boolean updateEnable;
 	private View headerView;
+	private int containerWidthPx;
+	private int trackColor;
+	private Paint paint;
+	private Bitmap selectedPoint;
+	private LatLon selectedPointLatLon;
+	private int defPointColor;
+	private Paint paintIcon;
+	private Bitmap pointSmall;
+
+	private ImageView imageView;
+	private RotatedTileBox rotatedTileBox;
+	private Bitmap mapBitmap;
+
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -129,6 +163,16 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 		tv.setText(R.string.none_selected_gpx);
 		tv.setTextSize(24);
 		listView.setEmptyView(tv);
+
+		containerWidthPx = container.getWidth();
+		paint = new Paint();
+		paint.setStyle(Paint.Style.STROKE);
+		paint.setAntiAlias(true);
+		paint.setStrokeWidth(AndroidUtils.dpToPx(app, 4f));
+		defPointColor = ContextCompat.getColor(app, R.color.gpx_color_point);
+		paintIcon = new Paint();
+		pointSmall = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_white_shield_small);
+		selectedPoint = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_default_location);
 
 		adapter = new SegmentGPXAdapter(new ArrayList<GpxDisplayItem>());
 		headerView = getActivity().getLayoutInflater().inflate(R.layout.gpx_item_list_header, null, false);
@@ -226,15 +270,16 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 	}
 
 	private void updateHeader() {
-		final ImageView imageView = (ImageView) headerView.findViewById(R.id.imageView);
+		imageView = (ImageView) headerView.findViewById(R.id.imageView);
 		final View splitColorView = headerView.findViewById(R.id.split_color_view);
 		final View divider = headerView.findViewById(R.id.divider);
 		final View splitIntervalView = headerView.findViewById(R.id.split_interval_view);
 		final View colorView = headerView.findViewById(R.id.color_view);
 		final SwitchCompat vis = (SwitchCompat) headerView.findViewById(R.id.showOnMapToggle);
-		vis.setChecked(getGpx() != null &&
+		boolean selected = getGpx() != null &&
 				((getGpx().showCurrentTrack && app.getSelectedGpxHelper().getSelectedCurrentRecordingTrack() != null) ||
-						(getGpx().path != null && app.getSelectedGpxHelper().getSelectedFileByPath(getGpx().path) != null)));
+						(getGpx().path != null && app.getSelectedGpxHelper().getSelectedFileByPath(getGpx().path) != null));
+		vis.setChecked(selected);
 		vis.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -351,6 +396,159 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 			splitColorView.setVisibility(View.GONE);
 			divider.setVisibility(View.GONE);
 		}
+
+		QuadRect rect = getRect();
+		if (rect.left != 0 && rect.top != 0) {
+			double clat = rect.bottom / 2 + rect.top / 2;
+			double clon = rect.left / 2 + rect.right / 2;
+			WindowManager mgr = (WindowManager) getActivity().getSystemService(Context.WINDOW_SERVICE);
+			DisplayMetrics dm = new DisplayMetrics();
+			mgr.getDefaultDisplay().getMetrics(dm);
+			RotatedTileBoxBuilder boxBuilder = new RotatedTileBoxBuilder()
+					.setLocation(clat, clon)
+					.setZoom(15)
+					.density(dm.density)
+					.setPixelDimensions(containerWidthPx, AndroidUtils.dpToPx(app, 152f), 0.5f, 0.5f);
+
+			rotatedTileBox = boxBuilder.build();
+			while (rotatedTileBox.getZoom() < 17 && rotatedTileBox.containsLatLon(rect.top, rect.left) && rotatedTileBox.containsLatLon(rect.bottom, rect.right)) {
+				rotatedTileBox.setZoom(rotatedTileBox.getZoom() + 1);
+			}
+			while (rotatedTileBox.getZoom() >= 7 && (!rotatedTileBox.containsLatLon(rect.top, rect.left) || !rotatedTileBox.containsLatLon(rect.bottom, rect.right))) {
+				rotatedTileBox.setZoom(rotatedTileBox.getZoom() - 1);
+			}
+
+			DrawSettings drawSettings = new DrawSettings(!app.getSettings().isLightContent(), true);
+			ResourceManager resourceManager = app.getResourceManager();
+			MapRenderRepositories renderer = resourceManager.getRenderer();
+			if (resourceManager.updateRenderedMapNeeded(rotatedTileBox, drawSettings)) {
+				resourceManager.updateRendererMap(rotatedTileBox);
+				while (renderer.getBitmapLocation() != rotatedTileBox) {
+					try {
+						Thread.sleep(50);
+					} catch (InterruptedException e) {
+						// ignore
+					}
+				}
+			}
+			mapBitmap = renderer.getBitmap();
+			while (mapBitmap == null) {
+				try {
+					Thread.sleep(50);
+				} catch (InterruptedException e) {
+					// ignore
+				}
+				mapBitmap = renderer.getBitmap();
+			}
+
+			SelectedGpxFile sf = new SelectedGpxFile();
+			sf.setGpxFile(getGpx());
+			Canvas canvas = new Canvas(mapBitmap);
+			drawTrack(canvas, rotatedTileBox, sf, drawSettings);
+			drawPoints(canvas, rotatedTileBox, sf);
+
+			imageView.setImageDrawable(new BitmapDrawable(app.getResources(), mapBitmap));
+			imageView.setVisibility(View.VISIBLE);
+		} else {
+			imageView.setVisibility(View.GONE);
+		}
+	}
+
+	private void drawTrack(Canvas canvas, RotatedTileBox tileBox, SelectedGpxFile g, DrawSettings settings) {
+		GpxDataItem gpxDataItem = null;
+		if (!g.isShowCurrentTrack()) {
+			gpxDataItem = getGpxDataItem();
+		}
+		List<TrkSegment> segments = g.getPointsToDisplay();
+		for (TrkSegment ts : segments) {
+			int color = gpxDataItem != null ? gpxDataItem.getColor() : 0;
+			if (color == 0) {
+				color = ts.getColor(trackColor);
+			}
+			if (ts.renders.isEmpty()                // only do once (CODE HERE NEEDS TO BE UI INSTEAD)
+					&& !ts.points.isEmpty()) {        // hmmm. 0-point tracks happen, but.... how?
+				if (g.isShowCurrentTrack()) {
+					ts.renders.add(new Renderable.CurrentTrack(ts.points));
+				} else {
+					ts.renders.add(new Renderable.StandardTrack(ts.points, 17.2));
+				}
+			}
+			paint.setColor(color == 0 ? trackColor : color);
+			ts.drawRenderers(tileBox.getZoom(), paint, canvas, tileBox);
+		}
+	}
+
+	private void drawPoints(Canvas canvas, RotatedTileBox tileBox, SelectedGpxFile g) {
+		List<WptPt> pts = g.getGpxFile().points;
+		@ColorInt
+		int fileColor = g.getColor() == 0 ? defPointColor : g.getColor();
+		for (WptPt o : pts) {
+			float x = tileBox.getPixXFromLatLon(o.lat, o.lon);
+			float y = tileBox.getPixYFromLatLon(o.lat, o.lon);
+
+			int pointColor = o.getColor(fileColor);
+			paintIcon.setColorFilter(new PorterDuffColorFilter(pointColor, PorterDuff.Mode.MULTIPLY));
+			canvas.drawBitmap(pointSmall, x - pointSmall.getWidth() / 2, y - pointSmall.getHeight() / 2, paintIcon);
+		}
+
+		if (selectedPointLatLon != null) {
+			float x = tileBox.getPixXFromLatLon(selectedPointLatLon.getLatitude(), selectedPointLatLon.getLongitude());
+			float y = tileBox.getPixYFromLatLon(selectedPointLatLon.getLatitude(), selectedPointLatLon.getLongitude());
+			paintIcon.setColorFilter(null);
+			canvas.drawBitmap(selectedPoint, x - selectedPoint.getWidth() / 2, y - selectedPoint.getHeight() / 2, paintIcon);
+		}
+	}
+
+	private Bitmap drawSelectedPoint() {
+		if (mapBitmap != null && rotatedTileBox != null && selectedPointLatLon != null) {
+			float x = rotatedTileBox.getPixXFromLatLon(selectedPointLatLon.getLatitude(), selectedPointLatLon.getLongitude());
+			float y = rotatedTileBox.getPixYFromLatLon(selectedPointLatLon.getLatitude(), selectedPointLatLon.getLongitude());
+			paintIcon.setColorFilter(null);
+			Bitmap bmp = mapBitmap.copy(mapBitmap.getConfig(), true);
+			Canvas canvas = new Canvas(bmp);
+			canvas.drawBitmap(selectedPoint, x - selectedPoint.getWidth() / 2, y - selectedPoint.getHeight() / 2, paintIcon);
+			return bmp;
+		} else {
+			return null;
+		}
+	}
+
+	private QuadRect getRect() {
+		double left = 0, right = 0;
+		double top = 0, bottom = 0;
+		if (getGpx() != null) {
+			for (Track track : getGpx().tracks) {
+				for (TrkSegment segment : track.segments) {
+					for (WptPt p : segment.points) {
+						if (left == 0 && right == 0) {
+							left = p.getLongitude();
+							right = p.getLongitude();
+							top = p.getLatitude();
+							bottom = p.getLatitude();
+						} else {
+							left = Math.min(left, p.getLongitude());
+							right = Math.max(right, p.getLongitude());
+							top = Math.max(top, p.getLatitude());
+							bottom = Math.min(bottom, p.getLatitude());
+						}
+					}
+				}
+			}
+			for (WptPt p : getGpx().points) {
+				if (left == 0 && right == 0) {
+					left = p.getLongitude();
+					right = p.getLongitude();
+					top = p.getLatitude();
+					bottom = p.getLatitude();
+				} else {
+					left = Math.min(left, p.getLongitude());
+					right = Math.max(right, p.getLongitude());
+					top = Math.max(top, p.getLatitude());
+					bottom = Math.min(bottom, p.getLatitude());
+				}
+			}
+		}
+		return new QuadRect(left, top, right, bottom);
 	}
 
 	private List<GpxDisplayGroup> getOriginalGroups() {
@@ -406,6 +604,7 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 		} else {
 			colorImageView.setImageDrawable(app.getIconsCache().getPaintedIcon(R.drawable.ic_action_circle, color));
 		}
+		trackColor = color;
 	}
 
 	private boolean isArgumentTrue(@NonNull String arg) {
@@ -610,6 +809,7 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 		private GPXTabItemType[] tabTypes;
 		private String[] titles;
 		private Map<GPXTabItemType, List<ILineDataSet>> dataSetsMap = new HashMap<>();
+		private TrkSegment segment;
 
 		GPXItemPagerAdapter(PagerSlidingTabStrip tabs, GpxDisplayItem gpxItem) {
 			super();
@@ -708,6 +908,53 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 			return dataSets;
 		}
 
+		private TrkSegment getTrackSegment(LineChart chart) {
+			if (segment == null) {
+				List<ILineDataSet> ds = chart.getLineData().getDataSets();
+				if (ds != null && ds.size() > 0) {
+					for (GPXUtilities.Track t : gpxItem.group.getGpx().tracks) {
+						for (TrkSegment s : t.segments) {
+							if (s.points.size() > 0 && s.points.get(0).equals(gpxItem.analysis.locationStart)) {
+								segment = s;
+								break;
+							}
+						}
+						if (segment != null) {
+							break;
+						}
+					}
+				}
+			}
+			return segment;
+		}
+
+		private WptPt getPoint(LineChart chart, float pos) {
+			WptPt wpt = null;
+			List<ILineDataSet> ds = chart.getLineData().getDataSets();
+			if (ds != null && ds.size() > 0) {
+				TrkSegment segment = getTrackSegment(chart);
+				OrderedLineDataSet dataSet = (OrderedLineDataSet) ds.get(0);
+				if (gpxItem.chartAxisType == GPXDataSetAxisType.TIME) {
+					float time = pos * 1000;
+					for (WptPt p : segment.points) {
+						if (p.time - gpxItem.analysis.startTime >= time) {
+							wpt = p;
+							break;
+						}
+					}
+				} else {
+					float distance = pos * dataSet.getDivX();
+					for (WptPt p : segment.points) {
+						if (p.distance >= distance) {
+							wpt = p;
+							break;
+						}
+					}
+				}
+			}
+			return wpt;
+		}
+
 		@Override
 		public int getCount() {
 			return tabTypes.length;
@@ -736,7 +983,6 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 			}
 
 			if (view != null) {
-				OsmandApplication app = (OsmandApplication) getActivity().getApplicationContext();
 				if (gpxItem != null) {
 					GPXTrackAnalysis analysis = gpxItem.analysis;
 					final LineChart chart = (LineChart) view.findViewById(R.id.chart);
@@ -745,6 +991,22 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 						public boolean onTouch(View v, MotionEvent event) {
 							getListView().requestDisallowInterceptTouchEvent(true);
 							return false;
+						}
+					});
+					chart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
+						@Override
+						public void onValueSelected(Entry e, Highlight h) {
+							WptPt wpt = getPoint(chart, h.getX());
+							if (wpt != null) {
+								selectedPointLatLon = new LatLon(wpt.lat, wpt.lon);
+								Bitmap bmp = drawSelectedPoint();
+								imageView.setImageDrawable(new BitmapDrawable(app.getResources(), bmp));
+							}
+						}
+
+						@Override
+						public void onNothingSelected() {
+
 						}
 					});
 					final View finalView = view;
