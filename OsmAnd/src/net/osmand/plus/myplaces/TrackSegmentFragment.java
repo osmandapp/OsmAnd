@@ -287,33 +287,6 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 				updateColorView(colorView);
 			}
 		});
-		imageView.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				SelectedGpxFile sf = app.getSelectedGpxHelper().selectGpxFile(getGpx(), vis.isChecked(), false);
-				if (vis.isChecked() && sf.getGpxFile() != null) {
-					final List<GpxDisplayGroup> groups = getOriginalGroups();
-					if (groups.size() > 0 && groups.get(0).getModifiableList().size() > 0) {
-						GpxDisplayItem item = groups.get(0).getModifiableList().get(0);
-						app.getSettings().setMapLocationToShow(item.locationStart.lat, item.locationStart.lon,
-								15,
-								new PointDescription(PointDescription.POINT_TYPE_GPX_ITEM, item.group.getGpxName()),
-								false,
-								item);
-					} else {
-						WptPt wpt = sf.getGpxFile().findPointToShow();
-						if (wpt != null) {
-							app.getSettings().setMapLocationToShow(wpt.getLatitude(), wpt.getLongitude(),
-									15,
-									new PointDescription(PointDescription.POINT_TYPE_WPT, wpt.name),
-									false,
-									wpt);
-						}
-					}
-					MapActivity.launchMapActivityMoveToTop(getMyActivity());
-				}
-			}
-		});
 		updateColorView(colorView);
 		colorView.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -397,60 +370,62 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 			divider.setVisibility(View.GONE);
 		}
 
-		QuadRect rect = getRect();
-		if (rect.left != 0 && rect.top != 0) {
-			double clat = rect.bottom / 2 + rect.top / 2;
-			double clon = rect.left / 2 + rect.right / 2;
-			WindowManager mgr = (WindowManager) getActivity().getSystemService(Context.WINDOW_SERVICE);
-			DisplayMetrics dm = new DisplayMetrics();
-			mgr.getDefaultDisplay().getMetrics(dm);
-			RotatedTileBoxBuilder boxBuilder = new RotatedTileBoxBuilder()
-					.setLocation(clat, clon)
-					.setZoom(15)
-					.density(dm.density)
-					.setPixelDimensions(containerWidthPx, AndroidUtils.dpToPx(app, 152f), 0.5f, 0.5f);
+		if (rotatedTileBox == null || mapBitmap == null) {
+			QuadRect rect = getRect();
+			if (rect.left != 0 && rect.top != 0) {
+				double clat = rect.bottom / 2 + rect.top / 2;
+				double clon = rect.left / 2 + rect.right / 2;
+				WindowManager mgr = (WindowManager) getActivity().getSystemService(Context.WINDOW_SERVICE);
+				DisplayMetrics dm = new DisplayMetrics();
+				mgr.getDefaultDisplay().getMetrics(dm);
+				RotatedTileBoxBuilder boxBuilder = new RotatedTileBoxBuilder()
+						.setLocation(clat, clon)
+						.setZoom(15)
+						.density(dm.density)
+						.setPixelDimensions(containerWidthPx, AndroidUtils.dpToPx(app, 152f), 0.5f, 0.5f);
 
-			rotatedTileBox = boxBuilder.build();
-			while (rotatedTileBox.getZoom() < 17 && rotatedTileBox.containsLatLon(rect.top, rect.left) && rotatedTileBox.containsLatLon(rect.bottom, rect.right)) {
-				rotatedTileBox.setZoom(rotatedTileBox.getZoom() + 1);
-			}
-			while (rotatedTileBox.getZoom() >= 7 && (!rotatedTileBox.containsLatLon(rect.top, rect.left) || !rotatedTileBox.containsLatLon(rect.bottom, rect.right))) {
-				rotatedTileBox.setZoom(rotatedTileBox.getZoom() - 1);
-			}
+				rotatedTileBox = boxBuilder.build();
+				while (rotatedTileBox.getZoom() < 17 && rotatedTileBox.containsLatLon(rect.top, rect.left) && rotatedTileBox.containsLatLon(rect.bottom, rect.right)) {
+					rotatedTileBox.setZoom(rotatedTileBox.getZoom() + 1);
+				}
+				while (rotatedTileBox.getZoom() >= 7 && (!rotatedTileBox.containsLatLon(rect.top, rect.left) || !rotatedTileBox.containsLatLon(rect.bottom, rect.right))) {
+					rotatedTileBox.setZoom(rotatedTileBox.getZoom() - 1);
+				}
 
-			DrawSettings drawSettings = new DrawSettings(!app.getSettings().isLightContent(), true);
-			ResourceManager resourceManager = app.getResourceManager();
-			MapRenderRepositories renderer = resourceManager.getRenderer();
-			if (resourceManager.updateRenderedMapNeeded(rotatedTileBox, drawSettings)) {
-				resourceManager.updateRendererMap(rotatedTileBox);
-				while (renderer.getBitmapLocation() != rotatedTileBox) {
+				DrawSettings drawSettings = new DrawSettings(!app.getSettings().isLightContent(), true);
+				ResourceManager resourceManager = app.getResourceManager();
+				MapRenderRepositories renderer = resourceManager.getRenderer();
+				if (resourceManager.updateRenderedMapNeeded(rotatedTileBox, drawSettings)) {
+					resourceManager.updateRendererMap(rotatedTileBox);
+					while (renderer.getBitmapLocation() != rotatedTileBox) {
+						try {
+							Thread.sleep(50);
+						} catch (InterruptedException e) {
+							// ignore
+						}
+					}
+				}
+				mapBitmap = renderer.getBitmap();
+				while (mapBitmap == null) {
 					try {
 						Thread.sleep(50);
 					} catch (InterruptedException e) {
 						// ignore
 					}
+					mapBitmap = renderer.getBitmap();
 				}
-			}
-			mapBitmap = renderer.getBitmap();
-			while (mapBitmap == null) {
-				try {
-					Thread.sleep(50);
-				} catch (InterruptedException e) {
-					// ignore
-				}
-				mapBitmap = renderer.getBitmap();
-			}
 
-			SelectedGpxFile sf = new SelectedGpxFile();
-			sf.setGpxFile(getGpx());
-			Canvas canvas = new Canvas(mapBitmap);
-			drawTrack(canvas, rotatedTileBox, sf, drawSettings);
-			drawPoints(canvas, rotatedTileBox, sf);
+				SelectedGpxFile sf = new SelectedGpxFile();
+				sf.setGpxFile(getGpx());
+				Canvas canvas = new Canvas(mapBitmap);
+				drawTrack(canvas, rotatedTileBox, sf, drawSettings);
+				drawPoints(canvas, rotatedTileBox, sf);
 
-			imageView.setImageDrawable(new BitmapDrawable(app.getResources(), mapBitmap));
-			imageView.setVisibility(View.VISIBLE);
-		} else {
-			imageView.setVisibility(View.GONE);
+				imageView.setImageDrawable(new BitmapDrawable(app.getResources(), mapBitmap));
+				imageView.setVisibility(View.VISIBLE);
+			} else {
+				imageView.setVisibility(View.GONE);
+			}
 		}
 	}
 
