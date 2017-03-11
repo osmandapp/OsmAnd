@@ -730,7 +730,7 @@
 
 	<string name="poi_lodging">Проживання</string>
 	<string name="poi_hotel">Готель</string>
-	<string name="poi_guest_house"/>
+	<string name="poi_guest_house">Гостьовий будинок</string>
 	<string name="poi_hostel">Хостел</string>
 	<string name="poi_motel">Мотель</string>
 	<string name="poi_alpine_hut">Гірський притулок</string>
@@ -886,7 +886,7 @@
 	<string name="poi_piste">Лижна траса</string>
 	<string name="poi_piste_downhill">Швидкісний спуск</string>
 	<string name="poi_piste_nordic">Прогулянкова або бігова лижня</string>
-	<string name="poi_piste_skitour"/>
+	<string name="poi_piste_skitour">Траса скі-тур</string>
 	<string name="poi_piste_hike">Лижна траса для походів</string>
 	<string name="poi_piste_sleigh">Траса для санних візків</string>
 	<string name="poi_piste_sled">Траса для саней</string>
@@ -900,4 +900,9 @@
 	<string name="poi_cinema">Кінотеатр</string>
 	<string name="poi_casino">Казино</string>
 	<string name="poi_additional_type">Дадатково</string>
+	<string name="poi_free_flying_characteristics">Характеристика</string>
+	<string name="poi_free_flying_characteristic">Характеристика</string>
+	<string name="poi_denomination_uniting">Об\'єднана Церква в Австралії</string>
+	<string name="poi_denomination_reform">Реформістський іудаїзм</string>
+	<string name="poi_community_centre">Громадський центр</string>
 	</resources>
