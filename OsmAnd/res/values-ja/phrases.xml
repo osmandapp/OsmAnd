@@ -1126,4 +1126,8 @@
 	<string name="poi_access_delivery">配達時のみ通行可(Delivery access)</string>
 	<string name="poi_access_agricultural">農業目的のみ通行可(Agricultural access)</string>
 
+	<string name="poi_fuel_type">燃料種</string>
+	<string name="poi_fuel_avia_type">航空燃料種</string>
+	<string name="poi_payment_type">対応支払い方法</string>
+	<string name="poi_payment_fuel_type">燃料カード(Fuel cards)</string>
 	</resources>
