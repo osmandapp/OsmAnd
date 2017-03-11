@@ -216,6 +216,16 @@
                 </LinearLayout>
 
                 <ImageButton
+                    android:id="@+id/widget_top_bar_refresh_button"
+                    style="@style/Widget.AppCompat.ActionButton"
+                    android:layout_width="48dp"
+                    android:layout_height="56dp"
+                    android:layout_gravity="top"
+                    android:contentDescription="@string/shared_string_refresh"
+                    android:src="@drawable/ic_action_refresh_dark"
+                    android:visibility="gone"/>
+
+                <ImageButton
                     android:id="@+id/widget_top_bar_close_button"
                     style="@style/Widget.AppCompat.ActionButton"
                     android:layout_width="48dp"

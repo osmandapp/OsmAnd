@@ -14,7 +14,6 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
-import com.github.mikephil.charting.listener.ChartTouchListener;
 import com.github.mikephil.charting.listener.ChartTouchListener.ChartGesture;
 import com.github.mikephil.charting.listener.OnChartGestureListener;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
@@ -93,6 +92,17 @@ public class TrackDetailsMenu {
 						hide();
 					}
 				});
+				/*
+				if (gpxItem.group.getGpx().showCurrentTrack) {
+					toolbarController.setRefreshBtnVisible(true);
+					toolbarController.setOnRefreshButtonClickListener(new View.OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							update();
+						}
+					});
+				}
+				*/
 				mapActivity.showTopToolbar(toolbarController);
 			}
 
@@ -381,7 +391,9 @@ public class TrackDetailsMenu {
 										gpxItem.chartAxisType, null, gpxItem.chartTypes.length > 1, true);
 								break;
 						}
-						dataSets.add(dataSet);
+						if (dataSet != null) {
+							dataSets.add(dataSet);
+						}
 					}
 				}
 
@@ -403,19 +415,28 @@ public class TrackDetailsMenu {
 		TextView yAxisTitle = (TextView) parentView.findViewById(R.id.y_axis_title);
 		View yAxisArrow = parentView.findViewById(R.id.y_axis_arrow);
 		final List<GPXDataSetType[]> availableTypes = new ArrayList<>();
+		boolean hasSlopeChart = false;
 		if (analysis != null) {
 			if (analysis.hasElevationData) {
 				availableTypes.add(new GPXDataSetType[] { GPXDataSetType.ALTITUDE });
-				availableTypes.add(new GPXDataSetType[] { GPXDataSetType.SLOPE });
+				if (gpxItem.chartAxisType != GPXDataSetAxisType.TIME) {
+					availableTypes.add(new GPXDataSetType[]{GPXDataSetType.SLOPE});
+				}
 			}
 			if (analysis.hasSpeedData) {
 				availableTypes.add(new GPXDataSetType[] { GPXDataSetType.SPEED });
 			}
-			if (analysis.hasElevationData) {
+			if (analysis.hasElevationData && gpxItem.chartAxisType != GPXDataSetAxisType.TIME) {
 				availableTypes.add(new GPXDataSetType[] { GPXDataSetType.ALTITUDE, GPXDataSetType.SLOPE });
 			}
 			if (analysis.hasElevationData && analysis.hasSpeedData) {
 				availableTypes.add(new GPXDataSetType[] { GPXDataSetType.ALTITUDE, GPXDataSetType.SPEED });
+			}
+		}
+		for (GPXDataSetType t : gpxItem.chartTypes) {
+			if (t == GPXDataSetType.SLOPE) {
+				hasSlopeChart = true;
+				break;
 			}
 		}
 		yAxisIcon.setImageDrawable(GPXDataSetType.getImageDrawable(app, gpxItem.chartTypes));
@@ -461,7 +482,7 @@ public class TrackDetailsMenu {
 			xAxisIcon.setImageDrawable(ic.getThemedIcon(R.drawable.ic_action_marker_dark));
 			xAxisTitle.setText(app.getString(R.string.distance));
 		}
-		if (analysis != null && analysis.isTimeSpecified()) {
+		if (analysis != null && analysis.isTimeSpecified() && !hasSlopeChart) {
 			xAxis.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
@@ -513,6 +534,7 @@ public class TrackDetailsMenu {
 		TrackDetailsBarController() {
 			super(MapInfoWidgetsFactory.TopToolbarControllerType.TRACK_DETAILS);
 			setBackBtnIconClrIds(0, 0);
+			setRefreshBtnIconClrIds(0, 0);
 			setCloseBtnIconClrIds(0, 0);
 			setTitleTextClrIds(R.color.primary_text_dark, R.color.primary_text_dark);
 			setDescrTextClrIds(R.color.primary_text_dark, R.color.primary_text_dark);

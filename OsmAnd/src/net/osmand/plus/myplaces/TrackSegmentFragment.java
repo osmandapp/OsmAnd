@@ -40,7 +40,7 @@ import com.github.mikephil.charting.listener.OnChartGestureListener;
 import net.osmand.AndroidUtils;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.GPXDatabase;
+import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.plus.GPXUtilities.Track;
@@ -171,13 +171,27 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 					});
 			MenuItemCompat.setShowAsAction(item, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 		}
+		if (getGpx() != null && getGpx().showCurrentTrack) {
+			MenuItem item = menu.add(R.string.shared_string_refresh).setIcon(R.drawable.ic_action_refresh_dark)
+					.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+						@Override
+						public boolean onMenuItemClick(MenuItem item) {
+							if (updateEnable) {
+								updateContent();
+								adapter.notifyDataSetChanged();
+							}
+							return true;
+						}
+					});
+			MenuItemCompat.setShowAsAction(item, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
+		}
 	}
 
 	private GPXFile getGpx() {
 		return getMyActivity().getGpx();
 	}
 
-	private GPXDatabase.GpxDataItem getGpxDataItem() {
+	private GpxDataItem getGpxDataItem() {
 		return getMyActivity().getGpxDataItem();
 	}
 
@@ -201,7 +215,7 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 		updateContent();
 		updateEnable = true;
 		if (getGpx() != null && getGpx().showCurrentTrack) {
-			startHandler();
+			//startHandler();
 		}
 	}
 
@@ -218,7 +232,9 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 		final View splitIntervalView = headerView.findViewById(R.id.split_interval_view);
 		final View colorView = headerView.findViewById(R.id.color_view);
 		final SwitchCompat vis = (SwitchCompat) headerView.findViewById(R.id.showOnMapToggle);
-		vis.setChecked(getGpx() != null && app.getSelectedGpxHelper().getSelectedFileByPath(getGpx().path) != null);
+		vis.setChecked(getGpx() != null &&
+				((getGpx().showCurrentTrack && app.getSelectedGpxHelper().getSelectedCurrentRecordingTrack() != null) ||
+						(getGpx().path != null && app.getSelectedGpxHelper().getSelectedFileByPath(getGpx().path) != null)));
 		vis.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -279,9 +295,11 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 									SelectedGpxFile sf = app.getSelectedGpxHelper().selectGpxFile(getGpx(), vis.isChecked(), false);
 									if (clr != 0 && sf.getModifiableGpxFile() != null) {
 										sf.getModifiableGpxFile().setColor(clr);
-										app.getGpxDatabase().updateColor(getGpxDataItem(), clr);
+										if (getGpxDataItem() != null) {
+											app.getGpxDatabase().updateColor(getGpxDataItem(), clr);
+										}
 									}
-								} else {
+								} else if (getGpxDataItem() != null) {
 									app.getGpxDatabase().updateColor(getGpxDataItem(), clr);
 								}
 							}
@@ -663,11 +681,15 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 					case GPX_TAB_ITEM_ALTITUDE: {
 						OrderedLineDataSet elevationDataSet = GpxUiHelper.createGPXElevationDataSet(app, chart,
 								analysis, GPXDataSetAxisType.DISTANCE, false, true);
-						dataSets.add(elevationDataSet);
+						if (elevationDataSet != null) {
+							dataSets.add(elevationDataSet);
+						}
 						if (analysis.hasElevationData) {
 							OrderedLineDataSet slopeDataSet = GpxUiHelper.createGPXSlopeDataSet(app, chart,
 									analysis, GPXDataSetAxisType.DISTANCE, elevationDataSet.getValues(), true, true);
-							dataSets.add(slopeDataSet);
+							if (slopeDataSet != null) {
+								dataSets.add(slopeDataSet);
+							}
 						}
 						dataSetsMap.put(GPXTabItemType.GPX_TAB_ITEM_ALTITUDE, dataSets);
 						break;
@@ -675,7 +697,9 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 					case GPX_TAB_ITEM_SPEED: {
 						OrderedLineDataSet speedDataSet = GpxUiHelper.createGPXSpeedDataSet(app, chart,
 								analysis, GPXDataSetAxisType.DISTANCE, false, true);
-						dataSets.add(speedDataSet);
+						if (speedDataSet != null) {
+							dataSets.add(speedDataSet);
+						}
 						dataSetsMap.put(GPXTabItemType.GPX_TAB_ITEM_SPEED, dataSets);
 						break;
 					}

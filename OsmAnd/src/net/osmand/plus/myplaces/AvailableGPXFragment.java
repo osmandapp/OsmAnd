@@ -1606,8 +1606,10 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		if (sgpx != null) {
 			icon.setImageDrawable(app.getIconsCache().getIcon(R.drawable.ic_action_polygom_dark, R.color.color_distance));
 			analysis = sgpx.getTrackAnalysis();
+		} else if (child.currentlyRecordingTrack) {
+			analysis = app.getSavingTrackHelper().getCurrentTrack().getTrackAnalysis();
 		} else {
-			GpxDataItem dataItem = app.getGpxDatabase().getItem(child.file);
+			GpxDataItem dataItem = child.file == null ? null : app.getGpxDatabase().getItem(child.file);
 			if (dataItem != null) {
 				analysis = dataItem.getAnalysis();
 			}

@@ -30,7 +30,6 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ImageView;
@@ -59,7 +58,6 @@ import net.osmand.CallbackWithObject;
 import net.osmand.IndexConstants;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
-import net.osmand.plus.GPXDatabase;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.Elevation;
@@ -67,7 +65,6 @@ import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.plus.GPXUtilities.Speed;
 import net.osmand.plus.GPXUtilities.TrkSegment;
-import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmAndFormatter;
@@ -83,7 +80,6 @@ import net.osmand.plus.dialogs.ConfigureMapMenu;
 import net.osmand.plus.dialogs.ConfigureMapMenu.AppearanceListItem;
 import net.osmand.plus.dialogs.ConfigureMapMenu.GpxAppearanceAdapter;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
-import net.osmand.plus.myplaces.AvailableGPXFragment;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
@@ -1237,13 +1233,6 @@ public class GpxUiHelper {
 		yAxis.setTextColor(ActivityCompat.getColor(mChart.getContext(), R.color.gpx_chart_orange));
 		yAxis.setGridColor(ActivityCompat.getColor(mChart.getContext(), R.color.gpx_chart_orange_grid));
 		yAxis.setAxisMinimum(0f);
-		yAxis.setValueFormatter(new IAxisValueFormatter() {
-
-			@Override
-			public String getFormattedValue(float value, AxisBase axis) {
-				return (int)value + " " + mainUnitY;
-			}
-		});
 
 		ArrayList<Entry> values = new ArrayList<>();
 		List<Speed> speedData = analysis.speedData;
@@ -1271,6 +1260,23 @@ public class GpxUiHelper {
 		}
 
 		OrderedLineDataSet dataSet = new OrderedLineDataSet(values, "", GPXDataSetType.SPEED, axisType);
+
+		String format = null;
+		if (dataSet.getYMax() < 3) {
+			format = "{0,number,0.#} ";
+		}
+		final String formatY = format;
+		yAxis.setValueFormatter(new IAxisValueFormatter() {
+
+			@Override
+			public String getFormattedValue(float value, AxisBase axis) {
+				if (!Algorithms.isEmpty(formatY)) {
+					return MessageFormat.format(formatY + mainUnitY, value);
+				} else {
+					return (int)value + " " + mainUnitY;
+				}
+			}
+		});
 
 		if (Float.isNaN(divSpeed)) {
 			dataSet.priority = analysis.avgSpeed * mulSpeed;
@@ -1322,6 +1328,9 @@ public class GpxUiHelper {
 														   GPXDataSetAxisType axisType,
 														   List<Entry> eleValues,
 														   boolean useRightAxis, boolean drawFilled) {
+		if (axisType == GPXDataSetAxisType.TIME) {
+			return null;
+		}
 		OsmandSettings settings = ctx.getSettings();
 		boolean light = settings.isLightContent();
 		OsmandSettings.MetricsConstants mc = settings.METRIC_SYSTEM.get();
@@ -1329,13 +1338,8 @@ public class GpxUiHelper {
 		final float convEle = useFeet ? 3.28084f : 1.0f;
 		final float totalDistance = analysis.totalDistance;
 
-		float divX;
 		XAxis xAxis = mChart.getXAxis();
-		if (axisType == GPXDataSetAxisType.TIME && analysis.isTimeSpecified()) {
-			divX = setupXAxisTime(xAxis, analysis.timeSpan);
-		} else {
-			divX = setupXAxisDistance(ctx, xAxis, analysis.totalDistance);
-		}
+		float divX = setupXAxisDistance(ctx, xAxis, analysis.totalDistance);
 
 		final String mainUnitY = "%";
 
@@ -1359,7 +1363,7 @@ public class GpxUiHelper {
 		});
 
 		List<Entry> values;
-		if (eleValues == null || axisType == GPXDataSetAxisType.TIME) {
+		if (eleValues == null) {
 			values = calculateElevationArray(analysis, GPXDataSetAxisType.DISTANCE, 1f, 1f);
 		} else {
 			values = new ArrayList<>(eleValues.size());
@@ -1375,12 +1379,6 @@ public class GpxUiHelper {
 		int lastIndex = values.size() - 1;
 
 		double STEP = 5;
-
-		float timeDistKoef = 1f;
-		if (axisType == GPXDataSetAxisType.TIME) {
-			timeDistKoef = analysis.timeSpan / totalDistance / 1000;
-			divX = 1f;
-		}
 
 		double[] calculatedDist = new double[(int) (totalDistance / STEP) + 1];
 		double[] calculatedH = new double[(int) (totalDistance / STEP) + 1];
@@ -1399,12 +1397,16 @@ public class GpxUiHelper {
 
 		double SLOPE_PROXIMITY = 150;
 
+		if (totalDistance - SLOPE_PROXIMITY < 0) {
+			return null;
+		}
+
 		double[] calculatedSlopeDist = new double[(int) ((totalDistance - SLOPE_PROXIMITY) / STEP) + 1];
 		double[] calculatedSlope = new double[(int) ((totalDistance - SLOPE_PROXIMITY) / STEP) + 1];
 
 		int index = (int) ((SLOPE_PROXIMITY / STEP) / 2);
 		for (int k = 0; k < calculatedSlopeDist.length; k++) {
-			calculatedSlopeDist[k] = calculatedDist[index + k] * timeDistKoef;
+			calculatedSlopeDist[k] = calculatedDist[index + k];
 			calculatedSlope[k] = (calculatedH[ 2 * index + k] - calculatedH[k]) * 100 / SLOPE_PROXIMITY;
 			if (Double.isNaN(calculatedSlope[k])) {
 				calculatedSlope[k] = 0;

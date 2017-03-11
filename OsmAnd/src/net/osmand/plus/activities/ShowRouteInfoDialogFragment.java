@@ -247,11 +247,14 @@ public class ShowRouteInfoDialogFragment extends DialogFragment {
 			List<ILineDataSet> dataSets = new ArrayList<>();
 			elevationDataSet = GpxUiHelper.createGPXElevationDataSet(app, mChart, analysis,
 					GPXDataSetAxisType.DISTANCE, false, true);
-			dataSets.add(elevationDataSet);
+			if (elevationDataSet != null) {
+				dataSets.add(elevationDataSet);
+			}
 			slopeDataSet = GpxUiHelper.createGPXSlopeDataSet(app, mChart, analysis,
 					GPXDataSetAxisType.DISTANCE, elevationDataSet.getValues(), true, true);
-			dataSets.add(slopeDataSet);
-
+			if (slopeDataSet != null) {
+				dataSets.add(slopeDataSet);
+			}
 			LineData data = new LineData(dataSets);
 			mChart.setData(data);
 			mChart.setVisibility(View.VISIBLE);

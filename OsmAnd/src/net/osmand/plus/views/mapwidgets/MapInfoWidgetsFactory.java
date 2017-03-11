@@ -191,6 +191,12 @@ public class MapInfoWidgetsFactory {
 		int closeBtnIconClrLightId = R.color.icon_color;
 		int closeBtnIconClrDarkId = 0;
 
+		int refreshBtnIconLightId = R.drawable.ic_action_refresh_dark;
+		int refreshBtnIconDarkId = R.drawable.ic_action_refresh_dark;
+		int refreshBtnIconClrLightId = R.color.icon_color;
+		int refreshBtnIconClrDarkId = 0;
+		boolean refreshBtnVisible = false;
+
 		int titleTextClrLightId = R.color.primary_text_light;
 		int titleTextClrDarkId = R.color.primary_text_dark;
 		int descrTextClrLightId = R.color.primary_text_light;
@@ -206,6 +212,7 @@ public class MapInfoWidgetsFactory {
 		OnClickListener onBackButtonClickListener;
 		OnClickListener onTitleClickListener;
 		OnClickListener onCloseButtonClickListener;
+		OnClickListener onRefreshButtonClickListener;
 
 
 		public TopToolbarController(TopToolbarControllerType type) {
@@ -255,6 +262,20 @@ public class MapInfoWidgetsFactory {
 			this.closeBtnIconClrDarkId = closeBtnIconClrDarkId;
 		}
 
+		public void setRefreshBtnIconIds(int refreshBtnIconLightId, int refreshBtnIconDarkId) {
+			this.refreshBtnIconLightId = refreshBtnIconLightId;
+			this.refreshBtnIconDarkId = refreshBtnIconDarkId;
+		}
+
+		public void setRefreshBtnIconClrIds(int refreshBtnIconClrLightId, int refreshBtnIconClrDarkId) {
+			this.refreshBtnIconClrLightId = refreshBtnIconClrLightId;
+			this.refreshBtnIconClrDarkId = refreshBtnIconClrDarkId;
+		}
+
+		public void setRefreshBtnVisible(boolean visible) {
+			this.refreshBtnVisible = visible;
+		}
+
 		public void setTitleTextClrIds(int titleTextClrLightId, int titleTextClrDarkId) {
 			this.titleTextClrLightId = titleTextClrLightId;
 			this.titleTextClrDarkId = titleTextClrDarkId;
@@ -275,6 +296,10 @@ public class MapInfoWidgetsFactory {
 
 		public void setOnCloseButtonClickListener(OnClickListener onCloseButtonClickListener) {
 			this.onCloseButtonClickListener = onCloseButtonClickListener;
+		}
+
+		public void setOnRefreshButtonClickListener(OnClickListener onRefreshButtonClickListener) {
+			this.onRefreshButtonClickListener = onRefreshButtonClickListener;
 		}
 
 		public void updateToolbar(TopToolbarView view) {
@@ -308,6 +333,7 @@ public class MapInfoWidgetsFactory {
 		private ImageButton backButton;
 		private TextView titleView;
 		private TextView descrView;
+		private ImageButton refreshButton;
 		private ImageButton closeButton;
 		private View shadowView;
 		private boolean nightMode;
@@ -319,6 +345,7 @@ public class MapInfoWidgetsFactory {
 			topBarLayout = map.findViewById(R.id.widget_top_bar_layout);
 			topBarTitleLayout = map.findViewById(R.id.widget_top_bar_title_layout);
 			backButton = (ImageButton) map.findViewById(R.id.widget_top_bar_back_button);
+			refreshButton = (ImageButton) map.findViewById(R.id.widget_top_bar_refresh_button);
 			closeButton = (ImageButton) map.findViewById(R.id.widget_top_bar_close_button);
 			titleView = (TextView) map.findViewById(R.id.widget_top_bar_title);
 			descrView = (TextView) map.findViewById(R.id.widget_top_bar_description);
@@ -352,6 +379,10 @@ public class MapInfoWidgetsFactory {
 
 		public ImageButton getCloseButton() {
 			return closeButton;
+		}
+
+		public ImageButton getRefreshButton() {
+			return refreshButton;
 		}
 
 		public View getShadowView() {
@@ -414,6 +445,7 @@ public class MapInfoWidgetsFactory {
 			backButton.setOnClickListener(controller.onBackButtonClickListener);
 			topBarTitleLayout.setOnClickListener(controller.onTitleClickListener);
 			closeButton.setOnClickListener(controller.onCloseButtonClickListener);
+			refreshButton.setOnClickListener(controller.onRefreshButtonClickListener);
 		}
 
 		public void updateInfo() {
@@ -443,6 +475,11 @@ public class MapInfoWidgetsFactory {
 				} else {
 					closeButton.setImageDrawable(app.getIconsCache().getIcon(controller.closeBtnIconDarkId, controller.closeBtnIconClrDarkId));
 				}
+				if (controller.refreshBtnIconDarkId == 0) {
+					refreshButton.setImageDrawable(null);
+				} else {
+					refreshButton.setImageDrawable(app.getIconsCache().getIcon(controller.refreshBtnIconDarkId, controller.refreshBtnIconClrDarkId));
+				}
 				int titleColor = map.getResources().getColor(controller.titleTextClrDarkId);
 				int descrColor = map.getResources().getColor(controller.descrTextClrDarkId);
 				titleView.setTextColor(titleColor);
@@ -459,6 +496,11 @@ public class MapInfoWidgetsFactory {
 				} else {
 					closeButton.setImageDrawable(app.getIconsCache().getIcon(controller.closeBtnIconLightId, controller.closeBtnIconClrLightId));
 				}
+				if (controller.refreshBtnIconLightId == 0) {
+					refreshButton.setImageDrawable(null);
+				} else {
+					refreshButton.setImageDrawable(app.getIconsCache().getIcon(controller.refreshBtnIconLightId, controller.refreshBtnIconClrLightId));
+				}
 				int titleColor = map.getResources().getColor(controller.titleTextClrLightId);
 				int descrColor = map.getResources().getColor(controller.descrTextClrLightId);
 				titleView.setTextColor(titleColor);
@@ -468,6 +510,11 @@ public class MapInfoWidgetsFactory {
 				titleView.setSingleLine(true);
 			} else {
 				titleView.setSingleLine(false);
+			}
+			if (controller.refreshBtnVisible && refreshButton.getVisibility() == View.GONE) {
+				refreshButton.setVisibility(View.VISIBLE);
+			} else {
+				refreshButton.setVisibility(View.GONE);
 			}
 		}
 

@@ -486,6 +486,10 @@ public class GPXUtilities {
 					}
 				}
 			}
+			if (totalDistance < 0) {
+				hasElevationData = false;
+				hasSpeedData = false;
+			}
 			if (!isTimeSpecified()) {
 				startTime = filestamp;
 				endTime = filestamp;
