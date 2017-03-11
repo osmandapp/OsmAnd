@@ -2761,4 +2761,15 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="file_can_not_be_moved">لا يمكن نقل الملف.</string>
     <string name="total_distance">المسافة الإجمالية</string>
     <string name="lang_ber">البربرية</string>
+    <string name="points_delete_multiple_succesful">تم حذف النقطة أو النقاط بنجاح.</string>
+    <string name="points_delete_multiple">أنت بصدد حذف %1$d نقطة. هل أنت متأكد ؟</string>
+    <string name="shared_string_max">أقصى</string>
+    <string name="shared_string_start_time">ساعة البداية</string>
+    <string name="shared_string_end_time">ساعة النهاية</string>
+    <string name="routing_attr_driving_style_name">نوع السياقة</string>
+    <string name="altitude_descent">منحدر</string>
+    <string name="altitude_ascent">مرتفع</string>
+    <string name="altitude_range">مدى الإرتفاع</string>
+    <string name="average_altitude">متوسط الإرتفاع</string>
+    <string name="routing_attr_height_obstacles_name">إستعمل بيانات الإرتفاع</string>
     </resources>
