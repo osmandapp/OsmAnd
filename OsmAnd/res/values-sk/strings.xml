@@ -2621,7 +2621,13 @@ Zodpovedá oblasti: %1$s x %2$s</string>
  • Podpora pre Otvorený kód pre polohu (Open Location Code - OLC)
 
 
- • Zobrazenie jednoduchého výškového profilu pre zaznamenané GPX
+ • Zobrazenie nadmorskej výšky a sklonu pre zaznamenané GPX (aj rýchlosť) a vypočítanú trasu
+
+
+ • Nastavenie \"Štýlu jazdy\" a vylepšenia logiky cyklistickej navigácie
+
+
+ • Nastavenia pre použitie výškových údajov pri navigácii bicykla
 
 
  • Ďalšie vylepšenia a opravy chýb
@@ -2665,4 +2671,11 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="add_new_folder">Pridať nový priečinok</string>
     <string name="shared_string_slope">Svah</string>
     <string name="lang_ber">Berbersky</string>
+    <string name="relief_smoothness_factor_hills">Pahorky</string>
+    <string name="relief_smoothness_factor_plains">Roviny</string>
+    <string name="relief_smoothness_factor_more_plains">Viac rovín</string>
+    <string name="driving_style_speed">Rýchly</string>
+    <string name="driving_style_balance">Vyvážený</string>
+    <string name="driving_style_safety">Bezpečný</string>
+    <string name="relief_smoothness_factor_descr">Priorita pre roviny a pahorky</string>
     </resources>
