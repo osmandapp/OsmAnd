@@ -2836,7 +2836,13 @@ Reprezentuje obszar: %1$s x %2$s</string>
  • Obsługa otwartych kodów lokalizacyjnych (OLC)
 
 
- • Wyświetlanie profilu terenu dla nagranych śladów GPX
+ • Wyświetlanie profilu terenu dla nagranego śladu GPX (także prędkość) i dla wytyczonych tras
+
+
+ • Ustawienie \'Styl jazdy\' i logiczne ulepszenia w wytyczaniu tras rowerowych
+
+
+ • Ustawienie użycia danych wysokościowych w wytyczaniu tras rowerowych
 
 
  • Mnóstwo innych ulepszeń i poprawek
@@ -2880,5 +2886,11 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="add_new_folder">Dodaj nowy katalog</string>
     <string name="shared_string_slope">Nachylenie</string>
     <string name="lang_ber">Berberyjski</string>
-    <string name="relief_smoothness_factor_descr">Bardziej równo lub bardziej górzyście</string>
+    <string name="relief_smoothness_factor_descr">Preferuj wzgórza lub równiny</string>
+    <string name="relief_smoothness_factor_hills">Górzysty</string>
+    <string name="relief_smoothness_factor_plains">Płaski</string>
+    <string name="relief_smoothness_factor_more_plains">Bardziej płaski</string>
+    <string name="driving_style_speed">Szybki</string>
+    <string name="driving_style_balance">Zrównoważony</string>
+    <string name="driving_style_safety">Bezpieczny</string>
     </resources>
