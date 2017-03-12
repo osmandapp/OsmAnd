@@ -3,6 +3,7 @@ package net.osmand.plus.activities;
 
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnMultiChoiceClickListener;
 import android.content.Intent;
@@ -12,8 +13,17 @@ import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
+import android.util.TypedValue;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.TextView;
+
 import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.ContextMenuAdapter;
+import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.DeviceAdminRecv;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
@@ -26,6 +36,7 @@ import net.osmand.plus.routing.RouteProvider.RouteService;
 import net.osmand.router.GeneralRouter;
 import net.osmand.router.GeneralRouter.RoutingParameter;
 import net.osmand.router.GeneralRouter.RoutingParameterType;
+import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +46,7 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 
 	private Preference avoidRouting;
 	private Preference preferRouting;
+	private Preference reliefFactorRouting;
 	private Preference showAlarms;
 	private Preference speakAlarms;
 	private ListPreference routerServicePreference;
@@ -46,7 +58,8 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 	
 	private List<RoutingParameter> avoidParameters = new ArrayList<RoutingParameter>();
 	private List<RoutingParameter> preferParameters = new ArrayList<RoutingParameter>();
-	public static final String INTENT_SKIP_DIALOG = "INTENT_SKIP_DIALOG"; 
+	private List<RoutingParameter> reliefFactorParameters = new ArrayList<RoutingParameter>();
+	public static final String INTENT_SKIP_DIALOG = "INTENT_SKIP_DIALOG";
 	
 	public SettingsNavigationActivity() {
 		super(true);
@@ -238,12 +251,15 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 				List<RoutingParameter> others = new ArrayList<GeneralRouter.RoutingParameter>();
 				for(Map.Entry<String, RoutingParameter> e : parameters.entrySet()) {
 					String param = e.getKey();
-					if(param.startsWith("avoid_")) {
-						avoidParameters.add(e.getValue());
-					} else if(param.startsWith("prefer_")) {
-						preferParameters.add(e.getValue());
-					} else if(!param.equals("short_way")) {
-						others.add(e.getValue());
+					RoutingParameter routingParameter = e.getValue();
+					if (param.startsWith("avoid_")) {
+						avoidParameters.add(routingParameter);
+					} else if (param.startsWith("prefer_")) {
+						preferParameters.add(routingParameter);
+					} else if ("relief_smoothness_factor".equals(routingParameter.getGroup())) {
+						reliefFactorParameters.add(routingParameter);
+					} else if (!param.equals("short_way") && !"driving_style".equals(routingParameter.getGroup())) {
+						others.add(routingParameter);
 					}
 				}
 				if (avoidParameters.size() > 0) {
@@ -260,10 +276,18 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 					preferRouting.setOnPreferenceClickListener(this);
 					cat.addPreference(preferRouting);
 				}
+				if (reliefFactorParameters.size() > 0) {
+					reliefFactorRouting = new Preference(this);
+					reliefFactorRouting.setTitle(SettingsBaseActivity.getRoutingStringPropertyName(this, reliefFactorParameters.get(0).getGroup(),
+							Algorithms.capitalizeFirstLetterAndLowercase(reliefFactorParameters.get(0).getGroup().replace('_', ' '))));
+					reliefFactorRouting.setSummary(R.string.relief_smoothness_factor_descr);
+					reliefFactorRouting.setOnPreferenceClickListener(this);
+					cat.addPreference(reliefFactorRouting);
+				}
 				for(RoutingParameter p : others) {
 					Preference basePref;
 					if(p.getType() == RoutingParameterType.BOOLEAN) {
-						basePref = createCheckBoxPreference(settings.getCustomRoutingBooleanProperty(p.getId()));
+						basePref = createCheckBoxPreference(settings.getCustomRoutingBooleanProperty(p.getId(), p.getDefaultBoolean()));
 					} else {
 						Object[] vls = p.getPossibleValues();
 						String[] svlss = new String[vls.length];
@@ -290,6 +314,31 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 				PreferenceCategory category = (PreferenceCategory) screen.findPreference("guidance_preferences");
 				category.removePreference(speedLimitExceed);
 			}
+		}
+	}
+
+	public String getRoutinParameterTitle(Context context, RoutingParameter routingParameter) {
+		return SettingsBaseActivity.getRoutingStringPropertyName(context, routingParameter.getId(),
+				routingParameter.getName());
+	}
+
+	public boolean isRoutingParameterSelected(OsmandSettings settings, ApplicationMode am, RoutingParameter routingParameter) {
+		final OsmandSettings.CommonPreference<Boolean> property =
+				settings.getCustomRoutingBooleanProperty(routingParameter.getId(), routingParameter.getDefaultBoolean());
+		if(am != null) {
+			return property.getModeValue(am);
+		} else {
+			return property.get();
+		}
+	}
+
+	public void setRoutingParameterSelected(OsmandSettings settings, ApplicationMode am, RoutingParameter routingParameter, boolean isChecked) {
+		final OsmandSettings.CommonPreference<Boolean> property =
+				settings.getCustomRoutingBooleanProperty(routingParameter.getId(), routingParameter.getDefaultBoolean());
+		if(am != null) {
+			property.setModeValue(am, isChecked);
+		} else {
+			property.set(isChecked);
 		}
 	}
 
@@ -346,15 +395,82 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 	@Override
 	public boolean onPreferenceClick(Preference preference) {
 		if (preference == avoidRouting || preference == preferRouting) {
-			List<RoutingParameter> prms = preference == avoidRouting ? avoidParameters : preferParameters; 
+			List<RoutingParameter> prms = preference == avoidRouting ? avoidParameters : preferParameters;
 			String[] vals = new String[prms.size()];
 			OsmandPreference[] bls = new OsmandPreference[prms.size()];
-			for(int i = 0; i < prms.size(); i++) {
-				RoutingParameter p =  prms.get(i);
+			for (int i = 0; i < prms.size(); i++) {
+				RoutingParameter p = prms.get(i);
 				vals[i] = SettingsBaseActivity.getRoutingStringPropertyName(this, p.getId(), p.getName());
-				bls[i] = settings.getCustomRoutingBooleanProperty(p.getId());
+				bls[i] = settings.getCustomRoutingBooleanProperty(p.getId(), p.getDefaultBoolean());
 			}
 			showBooleanSettings(vals, bls, preference.getTitle());
+			return true;
+		} else if (preference == reliefFactorRouting) {
+			final ApplicationMode am = settings.getApplicationMode();
+			final ContextMenuAdapter adapter = new ContextMenuAdapter();
+			int i = 0;
+			int selectedIndex = -1;
+			for (RoutingParameter p : reliefFactorParameters) {
+				adapter.addItem(ContextMenuItem.createBuilder(getRoutinParameterTitle(this, p))
+						.setSelected(false).createItem());
+				if (isRoutingParameterSelected(settings, am, p)) {
+					selectedIndex = i;
+				}
+				i++;
+			}
+			if (selectedIndex == -1) {
+				selectedIndex = 0;
+			}
+
+			AlertDialog.Builder builder = new AlertDialog.Builder(this);
+			final int layout = R.layout.list_menu_item_native_singlechoice;
+
+			final ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(this, layout, R.id.text1,
+					adapter.getItemNames()) {
+				@NonNull
+				@Override
+				public View getView(final int position, View convertView, ViewGroup parent) {
+					// User super class to create the View
+					View v = convertView;
+					if (v == null) {
+						v = SettingsNavigationActivity.this.getLayoutInflater().inflate(layout, null);
+					}
+					final ContextMenuItem item = adapter.getItem(position);
+					TextView tv = (TextView) v.findViewById(R.id.text1);
+					tv.setText(item.getTitle());
+					tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16f);
+
+					return v;
+				}
+			};
+
+			final int[] selectedPosition = {selectedIndex};
+			builder.setSingleChoiceItems(listAdapter, selectedIndex, new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int position) {
+					selectedPosition[0] = position;
+				}
+			});
+			builder.setTitle(SettingsBaseActivity.getRoutingStringPropertyName(this, reliefFactorParameters.get(0).getGroup(),
+					Algorithms.capitalizeFirstLetterAndLowercase(reliefFactorParameters.get(0).getGroup().replace('_', ' '))))
+					.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
+
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+
+							int position = selectedPosition[0];
+							if (position >= 0 && position < reliefFactorParameters.size()) {
+								for (int i = 0; i < reliefFactorParameters.size(); i++) {
+									setRoutingParameterSelected(settings, am, reliefFactorParameters.get(i), i == position);
+								}
+								//mapActivity.getRoutingHelper().recalculateRouteDueToSettingsChange();
+								//updateParameters();
+							}
+						}
+					})
+					.setNegativeButton(R.string.shared_string_cancel, null);
+
+			builder.create().show();
 			return true;
 		} else if (preference == showAlarms) {
 			showBooleanSettings(new String[] { getString(R.string.show_traffic_warnings), getString(R.string.show_pedestrian_warnings),

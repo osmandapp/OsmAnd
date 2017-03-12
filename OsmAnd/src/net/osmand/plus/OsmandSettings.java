@@ -2724,9 +2724,9 @@ public class OsmandSettings {
 
 	Map<String, CommonPreference<Boolean>> customBooleanRoutingProps = new LinkedHashMap<String, OsmandSettings.CommonPreference<Boolean>>();
 
-	public CommonPreference<Boolean> getCustomRoutingBooleanProperty(String attrName) {
+	public CommonPreference<Boolean> getCustomRoutingBooleanProperty(String attrName, boolean defaulfValue) {
 		if (!customBooleanRoutingProps.containsKey(attrName)) {
-			customBooleanRoutingProps.put(attrName, new BooleanPreference("prouting_" + attrName, false).makeProfile());
+			customBooleanRoutingProps.put(attrName, new BooleanPreference("prouting_" + attrName, defaulfValue).makeProfile());
 		}
 		return customBooleanRoutingProps.get(attrName);
 	}

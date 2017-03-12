@@ -215,11 +215,13 @@ public class RoutingConfiguration {
 
 	private static void parseRoutingParameter(XmlPullParser parser, GeneralRouter currentRouter) {
 		String description = parser.getAttributeValue("", "description");
+		String group = parser.getAttributeValue("", "group");
 		String name = parser.getAttributeValue("", "name");
 		String id = parser.getAttributeValue("", "id");
 		String type = parser.getAttributeValue("", "type");
-		if(type.equalsIgnoreCase("boolean")) {
-			currentRouter.registerBooleanParameter(id, name, description);
+		boolean defaultValue = Boolean.parseBoolean(parser.getAttributeValue("", "default"));
+		if (type.equalsIgnoreCase("boolean")) {
+			currentRouter.registerBooleanParameter(id, Algorithms.isEmpty(group) ? null : group, name, description, defaultValue);
 		} else if(type.equalsIgnoreCase("numeric")) {
 			String values = parser.getAttributeValue("", "values");
 			String valueDescriptions = parser.getAttributeValue("", "valueDescriptions");
