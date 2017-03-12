@@ -40,6 +40,7 @@ import net.osmand.plus.Version;
 import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.resources.AsyncLoadingThread.MapLoadRequest;
+import net.osmand.plus.resources.AsyncLoadingThread.OnMapLoadedListener;
 import net.osmand.plus.resources.AsyncLoadingThread.TileLoadDownloadRequest;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
@@ -1017,9 +1018,9 @@ public class ResourceManager {
 		return renderer.updateMapIsNeeded(rotatedTileBox, drawSettings);
 	}
 	
-	public void updateRendererMap(RotatedTileBox rotatedTileBox){
+	public void updateRendererMap(RotatedTileBox rotatedTileBox, OnMapLoadedListener mapLoadedListener){
 		renderer.interruptLoadingMap();
-		asyncLoadingThread.requestToLoadMap(new MapLoadRequest(rotatedTileBox));
+		asyncLoadingThread.requestToLoadMap(new MapLoadRequest(rotatedTileBox, mapLoadedListener));
 	}
 	
 	public void interruptRendering(){
