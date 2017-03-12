@@ -2649,7 +2649,9 @@ Indikas lokon:  %1$s x %2$s"</string>
  • Subteno por \'Malferma pozicia kodo\' (OLC)
 
 
- • Montrado de terenaj profiloj por registritaj GPX-suproj
+ • Montrado de terena profilo por registrita GPX-spuro (ankaŭ rapido) kaj por kalkulita kurso
+
+
 
 
  • Kelkaj aliaj plibonigoj kaj erar-riparoj
@@ -2693,5 +2695,11 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="track_points_category_name">Gravaj punktoj de tiu ĉi kurso</string>
     <string name="shared_string_slope">Klineco</string>
     <string name="lang_ber">Berbera</string>
-    <string name="relief_smoothness_factor_descr">Pli ebena aŭ pli malebena</string>
+    <string name="relief_smoothness_factor_descr">Preferas aŭ ebenojn aŭ malebenojn</string>
+    <string name="relief_smoothness_factor_hills">Malebena</string>
+    <string name="relief_smoothness_factor_plains">Ebena</string>
+    <string name="relief_smoothness_factor_more_plains">Pli ebena</string>
+    <string name="driving_style_speed">Rapida</string>
+    <string name="driving_style_balance">Ekvilibra</string>
+    <string name="driving_style_safety">Sekura</string>
     </resources>
