@@ -1373,6 +1373,9 @@ public class GpxUiHelper {
 		}
 
 		if (values == null) {
+			if (useRightAxis) {
+				yAxis.setEnabled(false);
+			}
 			return null;
 		}
 
@@ -1398,6 +1401,9 @@ public class GpxUiHelper {
 		double SLOPE_PROXIMITY = 150;
 
 		if (totalDistance - SLOPE_PROXIMITY < 0) {
+			if (useRightAxis) {
+				yAxis.setEnabled(false);
+			}
 			return null;
 		}
 
