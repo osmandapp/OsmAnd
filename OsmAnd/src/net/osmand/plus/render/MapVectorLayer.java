@@ -158,7 +158,7 @@ public class MapVectorLayer extends BaseMapLayer {
 					// view.getHeight() / 2);
 					final RotatedTileBox copy = tilesRect.copy();
 					copy.increasePixelDimensions(copy.getPixWidth() / 3, copy.getPixHeight() / 4);
-					resourceManager.updateRendererMap(copy);
+					resourceManager.updateRendererMap(copy, null);
 				}
 
 			}

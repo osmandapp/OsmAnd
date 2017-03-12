@@ -17,6 +17,14 @@
             android:layout_height="152dp"
             android:scaleType="center"/>
 
+        <ProgressBar
+            android:id="@+id/mapLoadProgress"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:indeterminate="true"
+            android:layout_gravity="center"
+            android:visibility="gone"/>
+
         <LinearLayout android:id="@+id/topShadowView"
                       android:layout_width="match_parent"
                       android:layout_height="wrap_content"

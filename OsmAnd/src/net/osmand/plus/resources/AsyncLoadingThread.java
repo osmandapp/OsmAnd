@@ -50,6 +50,9 @@ public class AsyncLoadingThread extends Thread {
 							MapLoadRequest r = (MapLoadRequest) req;
 							resourceManger.getRenderer().loadMap(r.tileBox, resourceManger.getMapTileDownloader());
 							mapLoaded = !resourceManger.getRenderer().wasInterrupted();
+							if (r.mapLoadedListener != null) {
+								r.mapLoadedListener.onMapLoaded(!mapLoaded);
+							}
 						}
 					}
 				}
@@ -182,13 +185,18 @@ public class AsyncLoadingThread extends Thread {
 
 	}
 
+	public interface OnMapLoadedListener {
+		void onMapLoaded(boolean interrupted);
+	}
 
 	protected static class MapLoadRequest {
 		public final RotatedTileBox tileBox;
+		public final OnMapLoadedListener mapLoadedListener;
 
-		public MapLoadRequest(RotatedTileBox tileBox) {
+		public MapLoadRequest(RotatedTileBox tileBox, OnMapLoadedListener mapLoadedListener) {
 			super();
 			this.tileBox = tileBox;
+			this.mapLoadedListener = mapLoadedListener;
 		}
 	}
 

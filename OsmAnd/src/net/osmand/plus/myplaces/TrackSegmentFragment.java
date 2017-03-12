@@ -39,6 +39,7 @@ import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.LineChart;
@@ -84,6 +85,7 @@ import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetAxisType;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetType;
 import net.osmand.plus.helpers.GpxUiHelper.OrderedLineDataSet;
 import net.osmand.plus.render.MapRenderRepositories;
+import net.osmand.plus.resources.AsyncLoadingThread;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.Renderable;
@@ -122,7 +124,6 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 	private int selectedSplitInterval;
 	private boolean updateEnable;
 	private View headerView;
-	private int containerWidthPx;
 	private int trackColor;
 	private Paint paint;
 	private Bitmap selectedPoint;
@@ -134,6 +135,7 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 	private ImageView imageView;
 	private RotatedTileBox rotatedTileBox;
 	private Bitmap mapBitmap;
+	private Bitmap mapTrackBitmap;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -164,7 +166,6 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 		tv.setTextSize(24);
 		listView.setEmptyView(tv);
 
-		containerWidthPx = container.getWidth();
 		paint = new Paint();
 		paint.setStyle(Paint.Style.STROKE);
 		paint.setAntiAlias(true);
@@ -276,6 +277,7 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 		final View splitIntervalView = headerView.findViewById(R.id.split_interval_view);
 		final View colorView = headerView.findViewById(R.id.color_view);
 		final SwitchCompat vis = (SwitchCompat) headerView.findViewById(R.id.showOnMapToggle);
+		final ProgressBar progressBar = (ProgressBar) headerView.findViewById(R.id.mapLoadProgress);
 		boolean selected = getGpx() != null &&
 				((getGpx().showCurrentTrack && app.getSelectedGpxHelper().getSelectedCurrentRecordingTrack() != null) ||
 						(getGpx().path != null && app.getSelectedGpxHelper().getSelectedFileByPath(getGpx().path) != null));
@@ -320,6 +322,7 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 								} else if (getGpxDataItem() != null) {
 									app.getGpxDatabase().updateColor(getGpxDataItem(), clr);
 								}
+								refreshTrackBitmap();
 							}
 						}
 						popup.dismiss();
@@ -370,9 +373,11 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 			divider.setVisibility(View.GONE);
 		}
 
-		if (rotatedTileBox == null || mapBitmap == null) {
+		if (rotatedTileBox == null || mapBitmap == null || mapTrackBitmap == null) {
 			QuadRect rect = getRect();
 			if (rect.left != 0 && rect.top != 0) {
+				progressBar.setVisibility(View.VISIBLE);
+
 				double clat = rect.bottom / 2 + rect.top / 2;
 				double clon = rect.left / 2 + rect.right / 2;
 				WindowManager mgr = (WindowManager) getActivity().getSystemService(Context.WINDOW_SERVICE);
@@ -382,7 +387,7 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 						.setLocation(clat, clon)
 						.setZoom(15)
 						.density(dm.density)
-						.setPixelDimensions(containerWidthPx, AndroidUtils.dpToPx(app, 152f), 0.5f, 0.5f);
+						.setPixelDimensions(dm.widthPixels, AndroidUtils.dpToPx(app, 152f), 0.5f, 0.5f);
 
 				rotatedTileBox = boxBuilder.build();
 				while (rotatedTileBox.getZoom() < 17 && rotatedTileBox.containsLatLon(rect.top, rect.left) && rotatedTileBox.containsLatLon(rect.bottom, rect.right)) {
@@ -392,44 +397,55 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 					rotatedTileBox.setZoom(rotatedTileBox.getZoom() - 1);
 				}
 
-				DrawSettings drawSettings = new DrawSettings(!app.getSettings().isLightContent(), true);
-				ResourceManager resourceManager = app.getResourceManager();
-				MapRenderRepositories renderer = resourceManager.getRenderer();
+				final DrawSettings drawSettings = new DrawSettings(!app.getSettings().isLightContent(), true);
+				final ResourceManager resourceManager = app.getResourceManager();
+				final MapRenderRepositories renderer = resourceManager.getRenderer();
 				if (resourceManager.updateRenderedMapNeeded(rotatedTileBox, drawSettings)) {
-					resourceManager.updateRendererMap(rotatedTileBox);
-					while (renderer.getBitmapLocation() != rotatedTileBox) {
-						try {
-							Thread.sleep(50);
-						} catch (InterruptedException e) {
-							// ignore
+					resourceManager.updateRendererMap(rotatedTileBox, new AsyncLoadingThread.OnMapLoadedListener() {
+						@Override
+						public void onMapLoaded(boolean interrupted) {
+							app.runInUIThread(new Runnable() {
+								@Override
+								public void run() {
+									if (updateEnable) {
+										mapBitmap = renderer.getBitmap();
+										if (mapBitmap != null) {
+											progressBar.setVisibility(View.GONE);
+											refreshTrackBitmap();
+										}
+									}
+								}
+							});
 						}
-					}
-				}
-				mapBitmap = renderer.getBitmap();
-				while (mapBitmap == null) {
-					try {
-						Thread.sleep(50);
-					} catch (InterruptedException e) {
-						// ignore
-					}
-					mapBitmap = renderer.getBitmap();
+					});
 				}
 
-				SelectedGpxFile sf = new SelectedGpxFile();
-				sf.setGpxFile(getGpx());
-				Canvas canvas = new Canvas(mapBitmap);
-				drawTrack(canvas, rotatedTileBox, sf, drawSettings);
-				drawPoints(canvas, rotatedTileBox, sf);
-
-				imageView.setImageDrawable(new BitmapDrawable(app.getResources(), mapBitmap));
 				imageView.setVisibility(View.VISIBLE);
 			} else {
 				imageView.setVisibility(View.GONE);
 			}
+		} else {
+			refreshTrackBitmap();
 		}
 	}
 
-	private void drawTrack(Canvas canvas, RotatedTileBox tileBox, SelectedGpxFile g, DrawSettings settings) {
+	private void refreshTrackBitmap() {
+		SelectedGpxFile sf = new SelectedGpxFile();
+		sf.setGpxFile(getGpx());
+		Bitmap bmp = mapBitmap.copy(mapBitmap.getConfig(), true);
+		Canvas canvas = new Canvas(bmp);
+		drawTrack(canvas, rotatedTileBox, sf);
+		drawPoints(canvas, rotatedTileBox, sf);
+		mapTrackBitmap = bmp;
+		Bitmap selectedPointBitmap = drawSelectedPoint();
+		if (selectedPointBitmap != null) {
+			imageView.setImageDrawable(new BitmapDrawable(app.getResources(), selectedPointBitmap));
+		} else {
+			imageView.setImageDrawable(new BitmapDrawable(app.getResources(), mapTrackBitmap));
+		}
+	}
+
+	private void drawTrack(Canvas canvas, RotatedTileBox tileBox, SelectedGpxFile g) {
 		GpxDataItem gpxDataItem = null;
 		if (!g.isShowCurrentTrack()) {
 			gpxDataItem = getGpxDataItem();
@@ -465,21 +481,14 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 			paintIcon.setColorFilter(new PorterDuffColorFilter(pointColor, PorterDuff.Mode.MULTIPLY));
 			canvas.drawBitmap(pointSmall, x - pointSmall.getWidth() / 2, y - pointSmall.getHeight() / 2, paintIcon);
 		}
-
-		if (selectedPointLatLon != null) {
-			float x = tileBox.getPixXFromLatLon(selectedPointLatLon.getLatitude(), selectedPointLatLon.getLongitude());
-			float y = tileBox.getPixYFromLatLon(selectedPointLatLon.getLatitude(), selectedPointLatLon.getLongitude());
-			paintIcon.setColorFilter(null);
-			canvas.drawBitmap(selectedPoint, x - selectedPoint.getWidth() / 2, y - selectedPoint.getHeight() / 2, paintIcon);
-		}
 	}
 
 	private Bitmap drawSelectedPoint() {
-		if (mapBitmap != null && rotatedTileBox != null && selectedPointLatLon != null) {
+		if (mapTrackBitmap != null && rotatedTileBox != null && selectedPointLatLon != null) {
 			float x = rotatedTileBox.getPixXFromLatLon(selectedPointLatLon.getLatitude(), selectedPointLatLon.getLongitude());
 			float y = rotatedTileBox.getPixYFromLatLon(selectedPointLatLon.getLatitude(), selectedPointLatLon.getLongitude());
 			paintIcon.setColorFilter(null);
-			Bitmap bmp = mapBitmap.copy(mapBitmap.getConfig(), true);
+			Bitmap bmp = mapTrackBitmap.copy(mapTrackBitmap.getConfig(), true);
 			Canvas canvas = new Canvas(bmp);
 			canvas.drawBitmap(selectedPoint, x - selectedPoint.getWidth() / 2, y - selectedPoint.getHeight() / 2, paintIcon);
 			return bmp;
@@ -702,8 +711,6 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 
 	private class SegmentGPXAdapter extends ArrayAdapter<GpxDisplayItem> {
 
-		private Map<GpxDisplayItem, GPXItemPagerAdapter> pagerAdaptersMap = new HashMap<>();
-
 		SegmentGPXAdapter(List<GpxDisplayItem> items) {
 			super(getActivity(), R.layout.gpx_list_item_tab_content, items);
 		}
@@ -711,21 +718,6 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 		@Override
 		public boolean isEmpty() {
 			return false;
-		}
-
-		@Override
-		public void clear() {
-			super.clear();
-			pagerAdaptersMap.clear();
-		}
-
-		private GPXItemPagerAdapter getPagerAdapter(PagerSlidingTabStrip tabs, GpxDisplayItem gpxItem) {
-			GPXItemPagerAdapter adapter = pagerAdaptersMap.get(gpxItem);
-			if (adapter == null) {
-				adapter = new GPXItemPagerAdapter(tabs, gpxItem);
-				pagerAdaptersMap.put(gpxItem, adapter);
-			}
-			return adapter;
 		}
 
 		@NonNull
@@ -759,7 +751,7 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 			}
 			GpxDisplayItem item = getItem(position);
 			if (item != null) {
-				pager.setAdapter(getPagerAdapter(tabLayout, item));
+				pager.setAdapter(new GPXItemPagerAdapter(tabLayout, item));
 				if (create) {
 					tabLayout.setViewPager(pager);
 				} else {
@@ -1256,17 +1248,21 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 
 		void updateChart(int position) {
 			View view = getViewAtPosition(position);
-			updateChart((LineChart) view.findViewById(R.id.chart));
+			if (view != null) {
+				updateChart((LineChart) view.findViewById(R.id.chart));
+			}
 		}
 
 		void updateChart(LineChart chart) {
-			if (gpxItem.chartMatrix != null) {
-				chart.getViewPortHandler().refresh(new Matrix(gpxItem.chartMatrix), chart, true);
-			}
-			if (gpxItem.chartHighlightPos != -1) {
-				chart.highlightValue(gpxItem.chartHighlightPos, 0);
-			} else {
-				chart.highlightValue(null);
+			if (chart != null) {
+				if (gpxItem.chartMatrix != null) {
+					chart.getViewPortHandler().refresh(new Matrix(gpxItem.chartMatrix), chart, true);
+				}
+				if (gpxItem.chartHighlightPos != -1) {
+					chart.highlightValue(gpxItem.chartHighlightPos, 0);
+				} else {
+					chart.highlightValue(null);
+				}
 			}
 		}
 
