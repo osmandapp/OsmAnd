@@ -1095,8 +1095,8 @@
 
 	<string name="poi_operator">管理者(Operator)</string>
 	<string name="poi_brand">ブランド(Brand)</string>
-	<string name="poi_fee_yes">要料金(Fee is charged)</string>
-	<string name="poi_fee_no">無料(No fee)</string>
+	<string name="poi_fee_yes">有料(Yes)</string>
+	<string name="poi_fee_no">無料(No)</string>
 	<string name="poi_drinking_water_yes">飲用可能(Drinking water: yes)</string>
 	<string name="poi_drinking_water_no">飲用不可(Drinking water: no)</string>
 	<string name="poi_supervised_yes">監督者(Supervised)</string>
@@ -1113,9 +1113,9 @@
 	<string name="poi_crossing_uncontrolled">信号機なし横断歩道(Uncontrolled)</string>
 	<string name="poi_crossing_unmarked">信号及び表示なし横断歩道(Unmarked)</string>
 	<string name="poi_start_date">完成日(Start date)</string>
-	<string name="poi_wheelchair_yes">車椅子(Wheelchair)</string>
-	<string name="poi_wheelchair_no">車椅子:通行不可(Wheelchair: not accessible)</string>
-	<string name="poi_wheelchair_limited">車椅子:通行制限有り(Wheelchair: limited)</string>
+	<string name="poi_wheelchair_yes">可(Yes)</string>
+	<string name="poi_wheelchair_no">不可(No)</string>
+	<string name="poi_wheelchair_limited">制限有り(Limited)</string>
 	<string name="poi_wholesale">卸売り(Wholesale)</string>
 
 	<string name="poi_access_private">要通行許可(Private access)</string>
@@ -1143,4 +1143,21 @@
 	<string name="poi_subway_station_filter">地下鉄駅(Subway station)</string>
 	<string name="poi_ferry_terminal_cargo">貨物(Cargo)</string>
 	<string name="poi_aerialway_bicycle">自転車交通(Bicycle transportation)</string>
+	<string name="poi_fee">料金(Fee)</string>
+	<string name="poi_site_type_megalith">巨石建造物(Megalith)</string>
+	<string name="poi_site_type_tumulus">古墳(Tumulus)</string>
+	<string name="poi_site_type_fortification">砦・要塞(Fortification)</string>
+	<string name="poi_site_type_settlement">開拓・居留地(Settlement)</string>
+	<string name="poi_site_type_city">都市(City)</string>
+	<string name="poi_site_type_hut_circle">環状列石(Hut circle)</string>
+	<string name="poi_site_type_necropolis">巨大墓所または荒廃都市(Necropolis)</string>
+	<string name="poi_site_type_petroglyph">壁画・彫刻(Petroglyph)</string>
+	<string name="poi_site_type_earthwork">土塁・壕(Earthwork)</string>
+	<string name="poi_internet_access_type_wlan">無線LAN有り(Wi-Fi)</string>
+	<string name="poi_internet_access_type_terminal">接続用PC有り(Terminal)</string>
+	<string name="poi_internet_access_type_wired">有線LAN有り(Wired)</string>
+	<string name="poi_wheelchair_accessibility">車椅子補助(Wheelchair accessibility)</string>
+	<string name="poi_wheelchair_designated">指定(Designated)</string>
+	<string name="poi_payment_coins_50c12">50セント、1ユーロ、2ユーロ硬貨(50c, 1€, and 2€ coins)</string>
+	<string name="poi_payment_cash_yes">現金(Cash)</string>
 	</resources>
