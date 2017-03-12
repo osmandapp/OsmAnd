@@ -164,12 +164,14 @@ public class GeneralRouter implements VehicleRouter {
 	}
 	
 
-	public void registerBooleanParameter(String id, String name, String description) {
+	public void registerBooleanParameter(String id, String group, String name, String description, boolean defaultValue) {
 		RoutingParameter rp = new RoutingParameter();
+		rp.group = group;
 		rp.name = name;
 		rp.description = description;
 		rp.id = id;
 		rp.type = RoutingParameterType.BOOLEAN;
+		rp.defaultBoolean = defaultValue;
 		parameters.put(rp.id, rp);
 		
 	}
@@ -435,16 +437,21 @@ public class GeneralRouter implements VehicleRouter {
 	
 	public static class RoutingParameter {
 		private String id;
+		private String group;
 		private String name;
 		private String description;
 		private RoutingParameterType type;
 		private Object[] possibleValues;
 		private String[] possibleValueDescriptions;
+		private boolean defaultBoolean;
 		
 		public String getId() {
 			return id;
 		}
-		
+
+		public String getGroup() {
+			return group;
+		}
 		public String getName() {
 			return name;
 		}
@@ -457,9 +464,11 @@ public class GeneralRouter implements VehicleRouter {
 		public String[] getPossibleValueDescriptions() {
 			return possibleValueDescriptions;
 		}
-		
 		public Object[] getPossibleValues() {
 			return possibleValues;
+		}
+		public boolean getDefaultBoolean() {
+			return defaultBoolean;
 		}
 	}
 	
