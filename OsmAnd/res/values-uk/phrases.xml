@@ -924,4 +924,13 @@
 	<string name="poi_bench">Лавка</string>
 	<string name="poi_swimming_pool">Басейн</string>
 	<string name="poi_water_park">Аквапарк</string>
+	<string name="poi_park">Парк</string>
+	<string name="poi_recreation_ground">Майданчик для ігор</string>
+	<string name="poi_village_green">Громадська територія</string>
+	<string name="poi_trail_riding_station">Місце для ночівлі наїзників і коней</string>
+
+	<string name="poi_biergarten">Літнє кафе</string>
+	<string name="poi_restaurant">Ресторан</string>
+	<string name="poi_bar">Бар</string>
+	<string name="poi_pub">Паб</string>
 	</resources>
