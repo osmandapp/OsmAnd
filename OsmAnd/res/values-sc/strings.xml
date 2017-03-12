@@ -2835,4 +2835,5 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="routing_attr_driving_style_speed_name">Lestru</string>
     <string name="routing_attr_driving_style_balance_name">Bilantziadu</string>
     <string name="routing_attr_driving_style_safety_name">Seguru</string>
+    <string name="routing_attr_relief_smoothness_factor_name">Valore de ispitadura rilievos</string>
     </resources>
