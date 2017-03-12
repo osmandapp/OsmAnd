@@ -2795,10 +2795,13 @@ représentant la zone : %1$s x %2$s</string>
  • Support d\'Open Location Code (OLC)
 
 
- • Affichage d\'un profile d’altitude simple pour les enregistrements GPX
+ • Affichage d\'un profile d’altitude, de pente et de vitesse pour les enregistrements GPX comme pour les itinéraires calculés
 
 
- • Et de nombreuses autres améliorations et corrections…
+ • Améliorations des itinéraires à vélo : paramétrage du style de \"conduite\", possibilité d\'utiliser les données d\'altitude
+
+
+ • Et de nombreuses autres améliorations et corrections d\'anomalies…
  "</string>
 	<string name="rendering_attr_depthContours_description">Afficher les lignes de sonde</string>
     <string name="rendering_attr_depthContours_name">Lignes de sonde</string>
@@ -2836,4 +2839,10 @@ représentant la zone : %1$s x %2$s</string>
     <string name="track_points_category_name">Points importants sur cette route</string>
     <string name="shared_string_slope">Piste</string>
     <string name="lang_ber">Berbère</string>
+    <string name="driving_style_speed">Rapide</string>
+    <string name="driving_style_safety">Sûre</string>
+    <string name="relief_smoothness_factor_hills">Collines</string>
+    <string name="relief_smoothness_factor_plains">Plaines</string>
+    <string name="driving_style_balance">Compromis</string>
+    <string name="relief_smoothness_factor_descr">Priorité sur les plaines ou les collines</string>
     </resources>
