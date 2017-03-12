@@ -1,5 +1,12 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
+    <string name="relief_smoothness_factor_hills">Холмы</string>
+    <string name="relief_smoothness_factor_plains">Равнины</string>
+    <string name="relief_smoothness_factor_more_plains">Больше равнин</string>
+    <string name="driving_style_speed">Скоростной</string>
+    <string name="driving_style_balance">Сбалансированный</string>
+    <string name="driving_style_safety">Безопасный</string>
+    <string name="relief_smoothness_factor_descr">Приоритет равнинам или холмам</string>
     <string name="shared_string_slope">Уклон</string>
     <string name="add_new_folder">Добавить новую папку</string>
     <string name="points_delete_multiple_succesful">Удалено успешно</string>
@@ -2279,21 +2286,25 @@
     <string name="quick_action_btn_tutorial_title">Изменить положение кнопки</string>
 	<string name="shared_string_action_name">Название действия</string>
 <string name="release_2_6">"
- • Новая функция: кнопка быстрого действия
- 
+• Новая функция: кнопка быстрого действия
+
 • Улучшенный ответ на жесты сенсорного экрана
 
-• Новый шрифт карты охватывающий больше языков 
+• Новый шрифт карты, охватывающий больше языков
 
 • Поддержка TTS для вариантов региональных языков
 
-• Улучшение видимости в нескольких стилях карт и Википедии 
+• Улучшение видимости в нескольких стилях карт и Википедии
 
-• Поддержка Open Location Code (OLC) 
+• Поддержка Open Location Code (OLC)
 
-• Отображение основного высотного профиля для записанного GPX 
+• Отображение профиля высоты, уклона для записанного GPX (также профиль скорости) и построенного маршрута
 
-• Несколько других улучшений и исправлений ошибок
+• Настройка \"Стиль вождения\" и улучшение логики для велосипедного роутинга
+
+• Настройки для использования данных о высотах в велосипедном роутинге
+
+• Множество других улучшений и исправлений ошибок
 
 и многое другое…
  "</string>

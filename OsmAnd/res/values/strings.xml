@@ -9,7 +9,13 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
-    <string name="relief_smoothness_factor_descr">More plains, balance, more hills</string>
+    <string name="relief_smoothness_factor_hills">Hills</string>
+    <string name="relief_smoothness_factor_plains">Plains</string>
+    <string name="relief_smoothness_factor_more_plains">More plains</string>
+    <string name="driving_style_speed">Speed</string>
+    <string name="driving_style_balance">Balance</string>
+    <string name="driving_style_safety">Safety</string>
+    <string name="relief_smoothness_factor_descr">Priority to plains or hills</string>
     <string name="shared_string_slope">Slope</string>
     <string name="add_new_folder">Add new folder</string>
     <string name="points_delete_multiple_succesful">Point(s) deleted successfully.</string>
@@ -30,7 +36,6 @@
     <string name="shared_string_move">Move</string>
     <string name="shared_string_tracks">Tracks</string>
     <string name="routing_attr_driving_style_name">Driving style</string>
-    <string name="routing_attr_driving_style_description">Safe, fast or balanced driving</string>
     <string name="route_altitude">Route altitude</string>
     <string name="altitude_descent">Descent</string>
     <string name="altitude_ascent">Ascent</string>
@@ -39,7 +44,6 @@
     <string name="shared_string_time">Time</string>
     <string name="total_distance">Total distance</string>
     <string name="routing_attr_height_relief_smoothness_factor_name">Relief smoothness factor</string>
-    <string name="routing_attr_height_relief_smoothness_factor_description">More plains or more hills</string>
     <string name="routing_attr_height_obstacles_name">Use elevation data</string>
     <string name="routing_attr_height_obstacles_description">Use terrain elevation data provided by SRTM, ASTER and EU-DEM</string>
 
@@ -52,7 +56,9 @@
 	\u2022 Support TTS for regional language variants\n\n
 	\u2022 Visibility enhancements in several map styles and wikipedia\n\n
 	\u2022 Support Open Location Code (OLC)\n\n
-	\u2022 Display basic elevation profile for recorded GPX\n\n
+	\u2022 Display elevation and slope profile for recorded GPX (also speed) and calculated route\n\n
+	\u2022 \"Driving style\" setting and logic improvements in bicycle routing\n\n
+	\u2022 Settings for using altitude data in bicycle routing\n\n
 	\u2022 Several other improvements and bug fixes\n\n
 	and more…
 	</string>
