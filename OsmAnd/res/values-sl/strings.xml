@@ -2837,4 +2837,5 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="routing_attr_driving_style_balance_name">Pretehtano</string>
     <string name="routing_attr_driving_style_safety_name">Varno</string>
     <string name="relief_smoothness_factor_descr">Prednostna izbira ravnin ali gričevja</string>
+    <string name="routing_attr_relief_smoothness_factor_name">Določilo gladkosti izrisa reliefa</string>
     </resources>
