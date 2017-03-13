@@ -721,7 +721,7 @@ Mapy kafelkowe można uzyskać bezpośrednio z zasobów sieciowych, jak i przygo
     <string name="use_fluorescent_overlays">Odblaskowe nakładki</string>
     <string name="use_fluorescent_overlays_descr">Użyj odblaskowych kolorów do wyświetlania ścieżek i tras</string>
     <string name="offline_edition">Edycja w trybie offline</string>
-    <string name="offline_edition_descr">Zawsze wprowadza modyfikacje w trybie offline</string>
+    <string name="offline_edition_descr">Zawsze wprowadza modyfikacje w trybie bez połączenia z siecią</string>
 
     <string name="local_openstreetmap_uploading">Wysyłanie…</string>
     <string name="local_openstreetmap_were_uploaded">Wysłano {0} użytecznych miejsc/uwag</string>
@@ -775,7 +775,7 @@ Mapy kafelkowe można uzyskać bezpośrednio z zasobów sieciowych, jak i przygo
     <string name="shared_string_name">Nazwa</string>
     <string name="favourites_edit_dialog_category">Kategoria</string>
     <string name="gpx_option_from_start_point">Przejdź wzdłuż całej ścieżki</string>
-  <string name="create_poi_link_to_osm_doc"><u>Online OSM</u> map classification with images"</string>
+  <string name="create_poi_link_to_osm_doc"><u>Online OSM</u> map classification with images</string>
     <string name="local_index_routing_data">Dane wyznaczania tras</string>
     <string name="navigate_point_format">Format</string>
     <string name="poi_search_desc">Wyszukiwanie użytecznych miejsc</string>
@@ -2664,9 +2664,9 @@ Jeśli potrzebujesz pomocy podczas używania OsmAnd, prosimy o kontakt z naszym 
     <string name="rendering_attr_surfaceIntegrity_name">Spójność nawierzchni dróg</string>
     <string name="christmas_poi">Bożonarodzeniowe miejsca</string>
     <string name="save_track_min_speed_descr">Rejestruje położenie po osiągnięciu określonej prędkości ruchu</string>
-    <string name="rendering_attr_contourColorScheme_description">Schemat kolorów konturów</string>
+    <string name="rendering_attr_contourColorScheme_description">Zestaw kolorów poziomic</string>
     <string name="save_track_min_speed">Minimalna prędkość rejestrowania</string>
-    <string name="save_track_min_distance">Wykrywanie ruchu podczas rejestracji</string>
+    <string name="save_track_min_distance">Wykrywanie ruchu podczas rejestrowania</string>
     <string name="save_track_min_distance_descr">Rejestruje położenie po oddaleniu na określoną odległość od ostatniego położenia</string>
     <string name="save_track_precision">Minimalna dokładność rejestrowania</string>
     <string name="save_track_precision_descr">Rejestruje położenie po osiągnięciu zadanej dokładności</string>
@@ -2700,7 +2700,7 @@ Jeśli potrzebujesz pomocy podczas używania OsmAnd, prosimy o kontakt z naszym 
 i więcej...
  "</string>
     <string name="trip_rec_notification_settings">Rejestrowanie śladu (brak danych)</string>
-    <string name="trip_rec_notification_settings_desc">Wyświetla komunikat umożliwiający rozpoczęcie rejestrowania śladu po przyciśnięciu przycisku</string>
+    <string name="trip_rec_notification_settings_desc">Wyświetla komunikat umożliwiający rozpoczęcie rejestrowania śladu po naciśnięciu przycisku</string>
     <string name="shared_string_notifications">Powiadomienia</string>
     <string name="osmo_share_location">Udostępnij</string>
     <string name="osmo_pause_location">Wstrzymaj</string>
@@ -2718,7 +2718,7 @@ i więcej...
     <string name="legacy_search">Przestarzała wyszukiwarka</string>
     <string name="show_legacy_search">Przestarzała wyszukiwarka</string>
     <string name="show_legacy_search_desc">Aktywuje przestarzałą wyszukiwarkę w menu rozwijanym</string>
-    <string name="routing_attr_allow_motorway_name">Zezwól na autostrady</string>
+    <string name="routing_attr_allow_motorway_name">Uwzglednianie autostrad</string>
     <string name="routing_attr_allow_motorway_description">Zezwala na autostrady</string>
     <string name="lang_sr_latn">Serbski (łaciński)</string>
     <string name="lang_zh_hk">Chiński (Hongkong)</string>
