@@ -2762,9 +2762,11 @@ Koda predstavlja območje: %1$s x %2$s</string>
 
  • Podpora OLC (Open Location Code)
 
- • Prikaz profila nadmorske višine za shranjene sledi GPX
+ • Prikaz profila nadmorske višine za shranjene sledi GPX (poti in hitrosti) in preračunane poti
 
- • Mnogo izboljšav in razrešenih hroščev
+• Nastavitev »sloga vožnje« in izboljšava preračunavanja kolesarskih poti 
+
+• Mnogo izboljšav in razrešenih hroščev
 
 
  in še mnogo več …
@@ -2828,4 +2830,11 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="shared_string_slope">Pobočje</string>
     <string name="add_new_folder">Dodaj novo mapo</string>
     <string name="lang_ber">Berberščina</string>
+    <string name="relief_smoothness_factor_hills">Gričevje</string>
+    <string name="relief_smoothness_factor_plains">Ravnine</string>
+    <string name="relief_smoothness_factor_more_plains">Več ravnin</string>
+    <string name="driving_style_speed">Hitro</string>
+    <string name="driving_style_balance">Pretehtano</string>
+    <string name="driving_style_safety">Varno</string>
+    <string name="relief_smoothness_factor_descr">Prednostna izbira ravnin ali gričevja</string>
     </resources>
