@@ -2629,7 +2629,7 @@
 	<string name="poi_dyke">Daiks</string>
 	<string name="poi_dolphin">Steķi (ūdenī)</string>
 
-	<string name="poi_forestry_compartment">Ceļa rādītājs: meža iecirknis</string>
+	<string name="poi_forestry_compartment">Ceļa rādītājs: meža apgabals</string>
 	<string name="poi_inscription_n">Uzraksts: Z</string>
 	<string name="poi_inscription_nw">Uzraksts: ZR</string>
 	<string name="poi_inscription_w">Uzraksts: R</string>
@@ -2752,5 +2752,46 @@
 	<string name="poi_health_specialty_obstetrics_caesarean_section_yes">Ginekoloģija (ķeizargrieziena)</string>
 	<string name="poi_health_specialty_obstetrics_caesarean_section_no">Ginekoloģija (ķeizargrieziena): nav</string>
 	<string name="poi_stone_type_coat_of_arms">Tips: ğerbonis</string>
+
+	<string name="poi_cafeteria">Kafitērija</string>
+
+<string name="poi_social_facility_outreach">Sociālie pakalpojumi bezpajumtniekiem</string>
+	<string name="poi_ramp_stroller_yes">Ramps (divsliežu): ir</string>
+	<string name="poi_ramp_stroller_no">Ramps (divsliežu): nav</string>
+	<string name="poi_conveying_yes">Konveijeris: ir</string>
+
+	<string name="poi_bridge_ref">Tilta ref</string>
+	<string name="poi_tunnel_ref">Tuneļa ref</string>
+
+	<string name="poi_ref">Reference</string>
+
+	<string name="poi_forestry_allotment">Ceļa rādītājs: meža iecirknis</string>
+	<string name="poi_street_cabinet">Sadales skapis</string>
+
+	<string name="poi_nuclear_explosion_country">Eksplozija: valsts</string>
+	<string name="poi_nuclear_explosion_site">Eksplozija: vieta</string>
+	<string name="poi_nuclear_explosion_salvo_first_detonation">Eksplozija: pirmā detonācija</string>
+	<string name="poi_nuclear_explosion_salvo_second_or_later_detonation">Eksplozija: otrā vai vēlāka detonācija</string>
+	<string name="poi_plant_nursery">Dārzniecība</string>
+
+	<string name="poi_free_flying_site_orientation_n">Brīvā lidojuma orientieris: Z</string>
+	<string name="poi_free_flying_site_orientation_ne">Brīvā lidojuma orientieris: ZA</string>
+	<string name="poi_free_flying_site_orientation_e">Brīvā lidojuma orientieris: A</string>
+	<string name="poi_free_flying_site_orientation_se">Brīvā lidojuma orientieris: DA</string>
+	<string name="poi_free_flying_site_orientation_s">Brīvā lidojuma orientieris: D</string>
+	<string name="poi_free_flying_site_orientation_sw">Brīvā lidojuma orientieris: DR</string>
+	<string name="poi_free_flying_site_orientation_w">Brīvā lidojuma orientieris: R</string>
+	<string name="poi_free_flying_site_orientation_nw">Brīvā lidojuma orientieris: ZR</string>
+	<string name="poi_free_flying_no_flight_time">Brīvā lidojuma aizlieguma laiki</string>
+	<string name="poi_free_flying_guest_guidelines_yes">Viesu vadlīnijas: ir</string>
+	<string name="poi_free_flying_guest_guidelines_no">Viesu vadlīnijas: nav</string>
+
+	<string name="poi_medical_system_western_yes">Rietumu medicīna</string>
+	<string name="poi_medical_system_chinese_yes">Ķīniešu tradicionālā</string>
+	<string name="poi_medical_system_kampo_yes">Japāņu tradicionālā</string>
+	<string name="poi_medical_system_mongolian_yes">Mongoļu tradicionālā</string>
+	<string name="poi_medical_system_tibetan_yes">Tibetiešu tradicionālā</string>
+	<string name="poi_medical_system_sidda_yes">Indiešu (Sidhas) tradicionālā</string>
+	<string name="poi_medical_system_unani_yes">Grieķu-arābu (Unani Tibb) tradicionālā</string>
 
 	</resources>
