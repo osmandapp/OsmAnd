@@ -2959,4 +2959,25 @@
 	<string name="poi_cuisine_piadina">Piadina</string>
 	<string name="poi_cuisine_smoothie">Batut de fruites</string>
 	<string name="poi_cuisine_souvlaki">Suvlaki</string>
+	<string name="poi_treat_inpatient_yes">Serveis pels ingressats: sí</string>
+	<string name="poi_treat_inpatient_no">Serveis pels ingressats: no</string>
+	<string name="poi_treat_inpatient_only">Serveis pels ingressats: exclusivament</string>
+	<string name="poi_counselling_yes">Assessorament: sí</string>
+	<string name="poi_counselling_no">Assessorament: no</string>
+	<string name="poi_office_physician">Consulta fisioterapeuta</string>
+	<string name="poi_office_therapist">Consulta terapeuta</string>
+	<string name="poi_office_podologist">Consulta podòleg</string>
+	<string name="poi_fire_hydrant_style_water_source_main">Artèria</string>
+	<string name="poi_fire_hydrant_style_water_source_pond">Estany</string>
+	<string name="poi_fire_hydrant_style_water_source_stream">Riu</string>
+	<string name="poi_fire_hydrant_style_water_source_cistern">Cisterna</string>
+	<string name="poi_in_service_yes">En servei: sí</string>
+
+	<string name="poi_aerodrome_type_international">Internacional</string>
+	<string name="poi_aerodrome_type_regional">Regional</string>
+	<string name="poi_aerodrome_type_public">Públic</string>
+	<string name="poi_aerodrome_type_military">Militar</string>
+	<string name="poi_aerodrome_type_military_public">Militar/públic</string>
+	<string name="poi_aerodrome_type_private">Privat</string>
+
 	</resources>
