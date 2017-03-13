@@ -268,7 +268,7 @@
     <string name="favorite_category_add_new">Aldoni novan</string>
     <string name="favorite_category_select">Elekti kategorion</string>
     <string name="default_speed_system_descr">Difinu unuon de rapido</string>
-    <string name="default_speed_system">Rapidunuo</string>
+    <string name="default_speed_system">Rapid-unuo</string>
     <string name="nm">nm</string>
     <string name="si_nm">Marmejloj</string>
     <string name="si_kmh">Kilometroj en horo</string>
@@ -1100,8 +1100,8 @@ Premtenu por vidi sur la mapo</string>
     <string name="wait_current_task_finished">Bonvolu atendi ĝis nuna tasko finos</string>
     <string name="use_kalman_filter_compass">Uzi filtrilon de Kalman</string>
     <string name="use_kalman_filter_compass_descr">Etigas bruojn en legoj de kompaso sed egigas inertecon</string>
-    <string name="use_magnetic_sensor">Uzi magneto-sentilon</string>
-    <string name="use_magnetic_sensor_descr">Uzas magneto-sentilon anstataŭ orientiĝo-sentilon por legi kompasan direkton</string>
+    <string name="use_magnetic_sensor">Uzi magnet-sentilon</string>
+    <string name="use_magnetic_sensor_descr">Uzas magnet-sentilon anstataŭ orientiĝ-sentilon por legi kompasan direkton</string>
     <string name="other_location">Alia</string>
     <string name="files_limit">Ankoraŭ %1$d dosieroj</string>
     <string name="available_downloads_left">%1$d dosieroj disponeblaj por elŝuto</string>
@@ -2640,7 +2640,7 @@ Indikas lokon:  %1$s x %2$s"</string>
  • Novaj mapaj tiparoj subtenataj pli da lingvoj
 
 
- •Subteno por dialektoj en parolsintezitaj dialogaj helpoj
+ • Subteno por dialektoj en parolsintezitaj dialogaj helpoj
 
 
  • Videblaj plibonigoj en kelkaj mapaj montrmanieroj kaj en Vikipedio
@@ -2652,6 +2652,10 @@ Indikas lokon:  %1$s x %2$s"</string>
  • Montrado de terena profilo por registrita GPX-spuro (ankaŭ rapido) kaj por kalkulita kurso
 
 
+ • Agordo \"Veturada stilo\" kaj logikaj plibonigoj en bicikla difinado de vojo
+
+
+ • Agordo por uzi altitudajn datumojn por bicikla difinado de vojo
 
 
  • Kelkaj aliaj plibonigoj kaj erar-riparoj
