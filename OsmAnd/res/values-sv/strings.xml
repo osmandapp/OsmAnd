@@ -2531,4 +2531,11 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="rendering_attr_depthContours_description">Visa djupkonturer och punkter</string>
     <string name="shared_string_slope">Sluttning</string>
     <string name="altitude_range">Höjdområde</string>
+    <string name="relief_smoothness_factor_hills">Kullar</string>
+    <string name="relief_smoothness_factor_plains">Slätter</string>
+    <string name="relief_smoothness_factor_more_plains">Mer slätter</string>
+    <string name="driving_style_speed">Hastighet</string>
+    <string name="driving_style_balance">Balans</string>
+    <string name="driving_style_safety">Säkerhet</string>
+    <string name="relief_smoothness_factor_descr">Prio för slätter eller kullar</string>
     </resources>
