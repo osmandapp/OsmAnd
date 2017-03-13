@@ -944,4 +944,9 @@
 	<string name="poi_craft_brewery">Пивоварня</string>
 	<string name="poi_craft_boatbuilder">Верф</string>
 	<string name="poi_craft_bookbinder">Палітурна майстерня</string>
+	<string name="poi_craft_carpenter">Столярна майстерня</string>
+	<string name="poi_craft_carpet_layer">Укладання килимів, ковроліну</string>
+	<string name="poi_craft_caterer">Кейтерінг</string>
+	<string name="poi_craft_clockmaker">Годинникар</string>
+	<string name="poi_craft_dressmaker">Пошиття, ремонт одягу</string>
 	</resources>
