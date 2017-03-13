@@ -2626,7 +2626,13 @@ Zobrazená oblast: %1$s x %2$s</string>
  • Podpora Open Location Code (OLC)
 
 
- • Zobrazení jednoduchého výškového profilu pro zaznamenaný GPX
+ • Zobrazení nadmořské výšky a sklonu pro zaznamenané GPX (také rychlost) a vypočítanou rychlost
+
+
+ • Nastavení \"Stylu jízdy\" a vylepšení logiky cyklistické navigace
+
+
+ • Nastavení pro použití výškových údajů při cyklo-navigaci
 
 
  • Další vylepšení a opravy chyb
@@ -2714,4 +2720,13 @@ Pokud potřebujete pomoci s aplikací OsmAnd, prosím kontaktujte naši podporu
     <string name="route_points_category_name">Průchozí body na trase</string>
     <string name="track_points_category_name">Důležité body na této trase</string>
     <string name="gpx_track">Trasa</string>
+    <string name="relief_smoothness_factor_hills">Kopce</string>
+    <string name="relief_smoothness_factor_plains">Roviny</string>
+    <string name="relief_smoothness_factor_more_plains">Více rovin</string>
+    <string name="driving_style_speed">Rychlý</string>
+    <string name="driving_style_balance">Vyvážený</string>
+    <string name="driving_style_safety">Bezpečný</string>
+    <string name="relief_smoothness_factor_descr">Priorita pro roviny nebo kopce</string>
+    <string name="shared_string_slope">Svah</string>
+    <string name="lang_ber">Berbersky</string>
     </resources>
