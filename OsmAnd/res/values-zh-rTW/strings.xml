@@ -2837,4 +2837,11 @@ Facebook：https://www.facebook.com/osmandapp
     <string name="add_new_folder">增加新的檔案夾</string>
     <string name="shared_string_slope">斜坡</string>
     <string name="lang_ber">柏柏爾語</string>
+    <string name="relief_smoothness_factor_hills">丘陵</string>
+    <string name="relief_smoothness_factor_plains">平原</string>
+    <string name="relief_smoothness_factor_more_plains">更多平原</string>
+    <string name="driving_style_speed">速度</string>
+    <string name="driving_style_balance">均衡</string>
+    <string name="driving_style_safety">安全性</string>
+    <string name="relief_smoothness_factor_descr">優先往平原或丘陵</string>
     </resources>
