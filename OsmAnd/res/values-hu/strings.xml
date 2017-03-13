@@ -2872,8 +2872,8 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="shared_string_start_time">Kezdő idő</string>
     <string name="shared_string_end_time">Befejező idő</string>
     <string name="shared_string_color">Szín</string>
-    <string name="relief_smoothness_factor_hills">Hegy</string>
-    <string name="relief_smoothness_factor_plains">Síkság</string>
+    <string name="relief_smoothness_factor_hills">Hegyvidék</string>
+    <string name="relief_smoothness_factor_plains">Síkvidék</string>
     <string name="relief_smoothness_factor_more_plains">Több síkság</string>
     <string name="driving_style_speed">Sebesség</string>
     <string name="driving_style_balance">Egyensúly</string>
