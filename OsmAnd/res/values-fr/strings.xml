@@ -2845,4 +2845,10 @@ représentant la zone : %1$s x %2$s</string>
     <string name="relief_smoothness_factor_plains">Plaines</string>
     <string name="driving_style_balance">Compromis</string>
     <string name="relief_smoothness_factor_descr">Priorité sur les plaines ou les collines</string>
+    <string name="routing_attr_relief_smoothness_factor_hills_name">Collines</string>
+    <string name="routing_attr_relief_smoothness_factor_plains_name">Plaines</string>
+    <string name="routing_attr_relief_smoothness_factor_more_plains_name">Plus de plaines</string>
+    <string name="routing_attr_driving_style_speed_name">Rapide</string>
+    <string name="routing_attr_driving_style_balance_name">Compromis</string>
+    <string name="routing_attr_driving_style_safety_name">Sûre</string>
     </resources>
