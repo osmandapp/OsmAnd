@@ -334,38 +334,43 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 		});
 
 		if (adapter.getCount() > 0) {
-			prepareSplitIntervalAdapterData();
-			setupSplitIntervalView(splitIntervalView);
-			updateSplitIntervalView(splitIntervalView);
-			splitIntervalView.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					final ListPopupWindow popup = new ListPopupWindow(getActivity());
-					popup.setAnchorView(splitIntervalView);
-					popup.setContentWidth(AndroidUtils.dpToPx(app, 200f));
-					popup.setModal(true);
-					popup.setDropDownGravity(Gravity.RIGHT | Gravity.TOP);
-					popup.setVerticalOffset(AndroidUtils.dpToPx(app, -48f));
-					popup.setHorizontalOffset(AndroidUtils.dpToPx(app, -6f));
-					popup.setAdapter(new ArrayAdapter<>(getMyActivity(),
-							R.layout.popup_list_text_item, options));
-					popup.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+			if (!getGpx().showCurrentTrack) {
+				prepareSplitIntervalAdapterData();
+				setupSplitIntervalView(splitIntervalView);
+				updateSplitIntervalView(splitIntervalView);
+				splitIntervalView.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						final ListPopupWindow popup = new ListPopupWindow(getActivity());
+						popup.setAnchorView(splitIntervalView);
+						popup.setContentWidth(AndroidUtils.dpToPx(app, 200f));
+						popup.setModal(true);
+						popup.setDropDownGravity(Gravity.RIGHT | Gravity.TOP);
+						popup.setVerticalOffset(AndroidUtils.dpToPx(app, -48f));
+						popup.setHorizontalOffset(AndroidUtils.dpToPx(app, -6f));
+						popup.setAdapter(new ArrayAdapter<>(getMyActivity(),
+								R.layout.popup_list_text_item, options));
+						popup.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
-						@Override
-						public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-							selectedSplitInterval = position;
-							SelectedGpxFile sf = app.getSelectedGpxHelper().selectGpxFile(getGpx(), vis.isChecked(), false);
-							final List<GpxDisplayGroup> groups = getDisplayGroups();
-							if (groups.size() > 0) {
-								updateSplit(groups, vis.isChecked() ? sf : null);
+							@Override
+							public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+								selectedSplitInterval = position;
+								SelectedGpxFile sf = app.getSelectedGpxHelper().selectGpxFile(getGpx(), vis.isChecked(), false);
+								final List<GpxDisplayGroup> groups = getDisplayGroups();
+								if (groups.size() > 0) {
+									updateSplit(groups, vis.isChecked() ? sf : null);
+								}
+								popup.dismiss();
+								updateSplitIntervalView(splitIntervalView);
 							}
-							popup.dismiss();
-							updateSplitIntervalView(splitIntervalView);
-						}
-					});
-					popup.show();
-				}
-			});
+						});
+						popup.show();
+					}
+				});
+				splitIntervalView.setVisibility(View.VISIBLE);
+			} else {
+				splitIntervalView.setVisibility(View.GONE);
+			}
 			splitColorView.setVisibility(View.VISIBLE);
 			divider.setVisibility(View.VISIBLE);
 		} else {
