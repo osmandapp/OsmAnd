@@ -14,8 +14,11 @@
         android:background="?attr/bg_color">
 
         <LinearLayout
+            android:id="@+id/current_track_info"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackground"
+            android:paddingBottom="8dp"
             android:orientation="horizontal">
 
             <CheckBox
@@ -145,6 +148,13 @@
             </LinearLayout>
 
         </LinearLayout>
+
+        <View
+            android:id="@+id/divider_list"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="54dp"
+            android:background="?attr/dashboard_divider"/>
 
         <LinearLayout
             android:layout_width="match_parent"
