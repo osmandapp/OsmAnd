@@ -40,6 +40,9 @@ public class DiscountHelper {
 
 
 	public static void checkAndDisplay(final MapActivity mapActivity) {
+		if (mapActivity.getMyApplication().getSettings().DO_NOT_SHOW_STARTUP_MESSAGES.get()) {
+			return;
+		}
 		if (mBannerVisible) {
 			showDiscountBanner(mapActivity, mTitle, mDescription, mIcon, mUrl);
 		}
@@ -161,6 +164,7 @@ public class DiscountHelper {
 			toolbarController.setOnBackButtonClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
+					mapActivity.getMyApplication().logEvent(mapActivity, "motd_click");
 					mBannerVisible = false;
 					openUrl(mapActivity, url);
 				}
@@ -168,6 +172,7 @@ public class DiscountHelper {
 			toolbarController.setOnTitleClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
+					mapActivity.getMyApplication().logEvent(mapActivity, "motd_click");
 					mBannerVisible = false;
 					openUrl(mapActivity, url);
 				}
@@ -176,6 +181,7 @@ public class DiscountHelper {
 		toolbarController.setOnCloseButtonClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				mapActivity.getMyApplication().logEvent(mapActivity, "motd_close");
 				mBannerVisible = false;
 				mapActivity.hideTopToolbar(toolbarController);
 			}

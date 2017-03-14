@@ -793,7 +793,10 @@ public class OsmandApplication extends MultiDexApplication {
 	
 	public void logEvent(Activity ctx, String event) {
 		try {
-			if(Version.isGooglePlayEnabled(this) && Version.isFreeVersion(this)) { 
+			if (Version.isGooglePlayEnabled(this) && Version.isFreeVersion(this)
+					&& !osmandSettings.DO_NOT_SEND_ANONYMOUS_APP_USAGE.get()
+					&& !osmandSettings.FULL_VERSION_PURCHASED.get()
+					&& !osmandSettings.LIVE_UPDATES_PURCHASED.get()) {
 				Class<?> cl = Class.forName("com.google.firebase.analytics.FirebaseAnalytics");
 				Method mm = cl.getMethod("getInstance", Context.class);
 				Object inst = mm.invoke(null, ctx == null ? this : ctx);
@@ -807,7 +810,7 @@ public class OsmandApplication extends MultiDexApplication {
 
 	public void initRemoteConfig() {
 		try {
-			if(Version.isGooglePlayEnabled(this) && Version.isFreeVersion(this)) {
+			if (Version.isGooglePlayEnabled(this) && Version.isFreeVersion(this)) {
 				Class<?> cl = Class.forName("com.google.firebase.remoteconfig.FirebaseRemoteConfig");
 				Method mm = cl.getMethod("getInstance");
 				Object inst = mm.invoke(null);
@@ -837,7 +840,7 @@ public class OsmandApplication extends MultiDexApplication {
 
 	public void activateFetchedRemoteParams() {
 		try {
-			if(Version.isGooglePlayEnabled(this) && Version.isFreeVersion(this)) {
+			if (Version.isGooglePlayEnabled(this) && Version.isFreeVersion(this)) {
 				Class<?> cl = Class.forName("com.google.firebase.remoteconfig.FirebaseRemoteConfig");
 				Method mm = cl.getMethod("getInstance");
 				Object inst = mm.invoke(null);
@@ -851,7 +854,7 @@ public class OsmandApplication extends MultiDexApplication {
 
 	public boolean getRemoteBoolean(String key, boolean defaultValue) {
 		try {
-			if(Version.isGooglePlayEnabled(this) && Version.isFreeVersion(this)) {
+			if (Version.isGooglePlayEnabled(this) && Version.isFreeVersion(this)) {
 				Class<?> cl = Class.forName("com.google.firebase.remoteconfig.FirebaseRemoteConfig");
 				Method mm = cl.getMethod("getInstance");
 				Object inst = mm.invoke(null);

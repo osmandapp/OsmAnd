@@ -9,6 +9,10 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="do_not_send_anonymous_app_usage">Do not send anonymous app usage</string>
+    <string name="do_not_send_anonymous_app_usage_desc">It sends general information about screen used during session. We do not collect any geolocation or user input related data.</string>
+    <string name="do_not_show_startup_messages">Do not show messages at startup</string>
+    <string name="do_not_show_startup_messages_desc">It displays app discounts &amp; special local events messages</string>
     <string name="parking_options">Parking options</string>
     <string name="full_version_thanks">Thank you for purchasing full version of OsmAnd!</string>
     <string name="routing_attr_relief_smoothness_factor_hills_name">Hills</string>

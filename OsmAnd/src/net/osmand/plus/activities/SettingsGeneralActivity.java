@@ -436,7 +436,11 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 						OsmandSettings.OSMAND_LIGHT_THEME});
 
 		misc.addPreference(createCheckBoxPreference(settings.USE_KALMAN_FILTER_FOR_COMPASS, R.string.use_kalman_filter_compass, R.string.use_kalman_filter_compass_descr));
-
+		if (Version.isGooglePlayEnabled(getMyApplication()) && Version.isFreeVersion(getMyApplication())
+				&& !settings.FULL_VERSION_PURCHASED.get() && !settings.LIVE_UPDATES_PURCHASED.get()) {
+			misc.addPreference(createCheckBoxPreference(settings.DO_NOT_SEND_ANONYMOUS_APP_USAGE, R.string.do_not_send_anonymous_app_usage, R.string.do_not_send_anonymous_app_usage_desc));
+		}
+		misc.addPreference(createCheckBoxPreference(settings.DO_NOT_SHOW_STARTUP_MESSAGES, R.string.do_not_show_startup_messages, R.string.do_not_show_startup_messages_desc));
 	}
 
 

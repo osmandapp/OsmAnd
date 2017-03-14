@@ -22,7 +22,7 @@ public class XMasDialogFragment extends DialogFragment {
 	private static boolean XmasDialogWasProcessed = false;
 
 	public static boolean shouldShowXmasDialog(OsmandApplication app) {
-		if (XmasDialogWasProcessed) {
+		if (XmasDialogWasProcessed || app.getSettings().DO_NOT_SHOW_STARTUP_MESSAGES.get()) {
 			return false;
 		}
 		int numberOfStarts = app.getAppInitializer().getNumberOfStarts();
