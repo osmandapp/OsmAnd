@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources><string name="offline_navigation_not_available">OsmAnd-ით ნავიგაცია გათიშულ რეჟიმში დროებით მიუწვდომელია.</string>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="offline_navigation_not_available">OsmAnd-ით ნავიგაცია გათიშულ რეჟიმში დროებით მიუწვდომელია.</string>
   <string name="left_side_navigation">მარცხენა ხელით ტარება</string>
   <string name="left_side_navigation_descr">აირჩიეთ მარცხენა მხარეს საჭის გამომყენებელი ქვეყნებისათვის</string>
   
@@ -1287,4 +1288,5 @@
     <string name="access_direction_audio_feedback">მიმართულებების აუდიოკარნახი</string>
     <string name="use_osm_live_routing">OSM ცოცხალი ნავიგაცია</string>
     <string name="access_no_destination">დანიშნულება მითითებული არაა</string>
+    <string name="routing_attr_relief_smoothness_factor_plains_name">ველები</string>
     </resources>
