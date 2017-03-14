@@ -125,6 +125,7 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 	private boolean updateEnable;
 	private View headerView;
 	private int trackColor;
+	private int currentTrackColor;
 	private Paint paint;
 	private Bitmap selectedPoint;
 	private LatLon selectedPointLatLon;
@@ -322,6 +323,9 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 								} else if (getGpxDataItem() != null) {
 									app.getGpxDatabase().updateColor(getGpxDataItem(), clr);
 								}
+								if (getGpx().showCurrentTrack) {
+									app.getSettings().CURRENT_TRACK_COLOR.set(clr);
+								}
 								refreshTrackBitmap();
 							}
 						}
@@ -435,8 +439,14 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 	}
 
 	private void refreshTrackBitmap() {
-		SelectedGpxFile sf = new SelectedGpxFile();
-		sf.setGpxFile(getGpx());
+		currentTrackColor = app.getSettings().CURRENT_TRACK_COLOR.get();
+		SelectedGpxFile sf;
+		if (getGpx().showCurrentTrack) {
+			sf = app.getSavingTrackHelper().getCurrentTrack();
+		} else {
+			sf = new SelectedGpxFile();
+			sf.setGpxFile(getGpx());
+		}
 		Bitmap bmp = mapBitmap.copy(mapBitmap.getConfig(), true);
 		Canvas canvas = new Canvas(bmp);
 		drawTrack(canvas, rotatedTileBox, sf);
@@ -458,6 +468,9 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 		List<TrkSegment> segments = g.getPointsToDisplay();
 		for (TrkSegment ts : segments) {
 			int color = gpxDataItem != null ? gpxDataItem.getColor() : 0;
+			if (g.isShowCurrentTrack()) {
+				color = currentTrackColor;
+			}
 			if (color == 0) {
 				color = ts.getColor(trackColor);
 			}
@@ -580,7 +593,11 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 		final ImageView colorImageView = (ImageView) colorView.findViewById(R.id.colorImage);
 		int color = getGpxDataItem() != null ? getGpxDataItem().getColor() : 0;
 		if (color == 0 && getGpx() != null) {
-			color = getGpx().getColor(0);
+			if (getGpx().showCurrentTrack) {
+				color = app.getSettings().CURRENT_TRACK_COLOR.get();
+			} else {
+				color = getGpx().getColor(0);
+			}
 		}
 		if (color == 0) {
 			final RenderingRulesStorage renderer = app.getRendererRegistry().getCurrentSelectedRenderer();

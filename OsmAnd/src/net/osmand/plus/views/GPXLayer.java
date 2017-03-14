@@ -66,6 +66,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 	private int cachedColor;
 	private Paint paintIcon;
 	private Bitmap pointSmall;
+	private int currentTrackColor;
 
 	private Bitmap selectedPoint;
 	private LatLon selectedPointLatLon;
@@ -173,6 +174,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 		} else {
 			List<SelectedGpxFile> selectedGPXFiles = selectedGpxHelper.getSelectedGPXFiles();
 			cache.clear();
+			currentTrackColor = view.getSettings().CURRENT_TRACK_COLOR.get();
 			if (!selectedGPXFiles.isEmpty()) {
 				drawSelectedFilesSegments(canvas, tileBox, selectedGPXFiles, settings);
 				canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
@@ -389,6 +391,9 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 			List<TrkSegment> segments = g.getPointsToDisplay();
 			for (TrkSegment ts : segments) {
 				int color = gpxDataItem != null ? gpxDataItem.getColor() : 0;
+				if (g.isShowCurrentTrack()) {
+					color = currentTrackColor;
+				}
 				if (color == 0) {
 					color = ts.getColor(cachedColor);
 				}
