@@ -2708,4 +2708,5 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="routing_attr_driving_style_safety_name">Sekura</string>
     <string name="routing_attr_relief_smoothness_factor_name">Nivel-ombruma glateco</string>
     <string name="full_version_thanks">Dankon al ci por aĉeti la plenan version de OsmAnd!</string>
+    <string name="parking_options">Parkumadaj agordoj</string>
     </resources>
