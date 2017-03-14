@@ -1047,7 +1047,7 @@ Premtenu por vidi sur la mapo</string>
     <string name="driving_region">Trafika regiono</string>
     <string name="driving_region_descr">Elektu trafikan regionon: Usono, Eŭropo, Unuiĝinta Reĝlando, Azio kaj aliaj</string>
     <string name="speak_title">Anoncado…</string>
-    <string name="speak_descr">Agordu anoncoj pri strataj nomoj, trafikaj avertoj (endaj haltejoj, strat-ĝiboj), rapid-kontroliloj, rapidlimoj</string>
+    <string name="speak_descr">Agordu anoncojn pri strataj nomoj, trafikaj avertoj (endaj haltejoj, strat-ĝiboj), rapid-kontroliloj, rapidlimoj</string>
     <string name="speak_street_names">Nomoj de stratoj (parolsintezitaj)</string>
     <string name="speak_speed_limit">Rapidlimoj</string>
     <string name="speak_cameras">Rapid-kontroliloj</string>
@@ -1244,7 +1244,7 @@ Premtenu por vidi sur la mapo</string>
     <string name="poi_filter_for_tourists">Por turistoj</string>
     <string name="poi_filter_fuel">Brulaĵo</string>
     <string name="show_warnings_title">Montri avertojn…</string>
-    <string name="show_warnings_descr">Agordu trafikajn avertojn (pri rapidlimoj, endaj haltejoj, strat-ĝiboj), avertojn pri rapid-kontroliloj, kaj informojn pri koridoroj</string>
+    <string name="show_warnings_descr">Agordu trafikajn avertojn (pri rapidlimoj, endaj haltejoj, strat-ĝiboj), avertojn pri rapid-kontroliloj kaj informojn pri koridoroj</string>
     <string name="use_compass_navigation">Uzi kompason</string>
     <string name="use_compass_navigation_descr">Uzas kompason, nur kiam nenia direkto estas legebla</string>
     <string name="avoid_motorway">Eviti aŭtovojojn</string>
@@ -1530,7 +1530,7 @@ Proporcia memoro %4$s MB (Limito de Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="choose_auto_follow_route">Aŭtomate centrigi mapon</string>
     <string name="choose_auto_follow_route_descr">Tempo antaŭ map-vido samtempigos kun aktuala pozicio</string>
     <string name="keep_informing_never">Nur permane (tuŝu sageton)</string>
-    <string name="keep_informing_descr">Re-anoncas sciigojn pri navigado je regulaj temp-intervaloj</string>
+    <string name="keep_informing_descr">Reanoncas sciigojn pri navigado je regulaj temp-intervaloj</string>
     <string name="keep_informing">Reanonci navigadajn sciigojn</string>
     <string name="auto_follow_route_navigation">Aŭtomate centrigi nur navigade</string>
     <string name="auto_follow_route_navigation_descr">Aŭtomate centrigas map-vidon nur dum navigado.</string>
@@ -2652,7 +2652,7 @@ Indikas lokon:  %1$s x %2$s"</string>
  • Montrado de terena profilo por registrita GPX-spuro (ankaŭ rapido) kaj por kalkulita kurso
 
 
- • Agordo \"Veturada stilo\" kaj logikaj plibonigoj en bicikla difinado de vojo
+ • Agordo \'Veturada stilo\' kaj logikaj plibonigoj en bicikla difinado de vojo
 
 
  • Agordo por uzi altitudajn datumojn por bicikla difinado de vojo
@@ -2667,8 +2667,8 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="rendering_attr_depthContours_name">Profundaj konturoj</string>
 	<string name="routing_attr_height_relief_smoothness_factor_name">Glateca-faktoro de nivelombrumo</string>
     <string name="routing_attr_height_relief_smoothness_factor_description">Pli da ebenejoj aŭ pli da montetoj</string>
-    <string name="routing_attr_height_obstacles_name">Uzi datumoj pri alto</string>
-    <string name="routing_attr_height_obstacles_description">Uzas datumojn pri alto liverataj de SRTM, ASTER kaj EU-DEM</string>
+    <string name="routing_attr_height_obstacles_name">Uzi datumoj pri altitudo</string>
+    <string name="routing_attr_height_obstacles_description">Uzas datumojn pri altitudo liveritajn de SRTM, ASTER kaj EU-DEM</string>
 
     <string name="route_altitude">Kursa altitudo</string>
     <string name="altitude_descent">Malsupreniro</string>
@@ -2706,6 +2706,6 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="routing_attr_driving_style_speed_name">Rapida</string>
     <string name="routing_attr_driving_style_balance_name">Ekvilibra</string>
     <string name="routing_attr_driving_style_safety_name">Sekura</string>
-    <string name="routing_attr_relief_smoothness_factor_name">Faktoro de nivelombruma glateco</string>
+    <string name="routing_attr_relief_smoothness_factor_name">Nivel-ombruma glateco</string>
     <string name="full_version_thanks">Dankon al ci por aĉeti la plenan version de OsmAnd!</string>
     </resources>
