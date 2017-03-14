@@ -2899,5 +2899,5 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="do_not_show_startup_messages">Nie pokazuj wiadomości przy starcie</string>
     <string name="do_not_show_startup_messages_desc">Wyświetla wiadomości dotyczące rabatów i specjalnych wydarzeń lokalnych</string>
     <string name="parking_options">Opcje parkowania</string>
-    <string name="full_version_thanks">Dziękujemy Ci za zakup pełnej wersji OsmAnd!</string>
+    <string name="full_version_thanks">Dziękujemy za zakup pełnej wersji OsmAnd!</string>
     </resources>
