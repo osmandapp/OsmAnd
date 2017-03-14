@@ -2850,4 +2850,7 @@ Facebook：https://www.facebook.com/osmandapp
     <string name="routing_attr_driving_style_balance_name">均衡</string>
     <string name="routing_attr_driving_style_safety_name">安全性</string>
     <string name="relief_smoothness_factor_descr">優先往平原或丘陵</string>
+    <string name="full_version_thanks">感謝您購買完整版的 OsmAnd！</string>
+    <string name="routing_attr_relief_smoothness_factor_name">地貌平滑率</string>
+    <string name="parking_options">停車選項</string>
     </resources>
