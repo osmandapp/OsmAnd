@@ -505,7 +505,7 @@
 	<string name="poi_wilderness_hut">避難小屋(Wilderness hut)</string>
 
 	<string name="poi_place_of_worship">寺社・教会・モスク(Place of worship)</string>
-	<string name="poi_religion_christian">キリスト教(Сhristianity)</string>
+	<string name="poi_religion_christian">キリスト教(Christianity)</string>
 	<string name="poi_religion_jewish">ユダヤ教(Judaism)</string>
 	<string name="poi_religion_muslim">イスラム教(Islam)</string>
 	<string name="poi_religion_sikh">シク教(Sikhism)</string>
@@ -1295,4 +1295,7 @@
 	<string name="poi_information_terminal">端末(Terminal)</string>
 	<string name="poi_information_route_marker">ルートマーカー(Route marker)</string>
 	<string name="poi_information_trail_blaze">道しるべ(Trail blaze)</string>
+	<string name="poi_religion_type">宗教(Religion)</string>
+	<string name="poi_recreation_center">レクリエーションセンター(Recreation center)</string>
+
 	</resources>
