@@ -574,8 +574,11 @@ public class DownloadIndexesThread {
 		}
 		
 		private boolean validateNotExceedsFreeLimit(IndexItem item) {
-			boolean exceed = Version.isFreeVersion(app) && !app.getSettings().LIVE_UPDATES_PURCHASED.get() &&
-					DownloadActivityType.isCountedInDownloads(item) && downloads.get() >= DownloadValidationManager.MAXIMUM_AVAILABLE_FREE_DOWNLOADS;
+			boolean exceed = Version.isFreeVersion(app)
+					&& !app.getSettings().LIVE_UPDATES_PURCHASED.get()
+					&& !app.getSettings().FULL_VERSION_PURCHASED.get()
+					&& DownloadActivityType.isCountedInDownloads(item)
+					&& downloads.get() >= DownloadValidationManager.MAXIMUM_AVAILABLE_FREE_DOWNLOADS;
 			if(exceed) {
 				String breakDownloadMessage = app.getString(R.string.free_version_message,
 						DownloadValidationManager.MAXIMUM_AVAILABLE_FREE_DOWNLOADS + "");

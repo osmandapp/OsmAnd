@@ -73,6 +73,7 @@ public class OsmandApplication extends MultiDexApplication {
 	private static final org.apache.commons.logging.Log LOG = PlatformUtil.getLog(OsmandApplication.class);
 
 	public static final String SHOW_PLUS_VERSION_PARAM = "show_plus_version";
+	public static final String SHOW_PLUS_VERSION_INAPP_PARAM = "show_plus_version_inapp";
 
 	final AppInitializer appInitializer = new AppInitializer(this);
 	OsmandSettings osmandSettings = null;
