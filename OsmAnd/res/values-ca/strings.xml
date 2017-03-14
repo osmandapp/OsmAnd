@@ -2692,11 +2692,11 @@ i encara més…
     <string name="add_new_folder">Afegeix a una carpeta nova</string>
     <string name="shared_string_slope">Pista</string>
     <string name="lang_ber">Berber</string>
-    <string name="relief_smoothness_factor_hills">Turons</string>
-    <string name="relief_smoothness_factor_plains">Planes</string>
-    <string name="relief_smoothness_factor_more_plains">Encara més planes</string>
-    <string name="driving_style_speed">Ràpid</string>
-    <string name="driving_style_balance">Equilibrat</string>
-    <string name="driving_style_safety">Segur</string>
+    <string name="routing_attr_relief_smoothness_factor_hills_name">Turons</string>
+    <string name="routing_attr_relief_smoothness_factor_plains_name">Planes</string>
+    <string name="routing_attr_relief_smoothness_factor_more_plains_name">Encara més planes</string>
+    <string name="routing_attr_driving_style_speed_name">Ràpid</string>
+    <string name="routing_attr_driving_style_balance_name">Equilibrat</string>
+    <string name="routing_attr_driving_style_safety_name">Segur</string>
     <string name="relief_smoothness_factor_descr">Prioritat per les planes o pels turons</string>
     </resources>

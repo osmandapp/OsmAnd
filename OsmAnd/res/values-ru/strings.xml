@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
-    <string name="relief_smoothness_factor_hills">Холмы</string>
-    <string name="relief_smoothness_factor_plains">Равнины</string>
-    <string name="relief_smoothness_factor_more_plains">Больше равнин</string>
-    <string name="driving_style_speed">Скоростной</string>
-    <string name="driving_style_balance">Сбалансированный</string>
-    <string name="driving_style_safety">Безопасный</string>
+    <string name="routing_attr_relief_smoothness_factor_hills_name">Холмы</string>
+    <string name="routing_attr_relief_smoothness_factor_plains_name">Равнины</string>
+    <string name="routing_attr_relief_smoothness_factor_more_plains_name">Больше равнин</string>
+    <string name="routing_attr_driving_style_speed_name">Скоростной</string>
+    <string name="routing_attr_driving_style_balance_name">Сбалансированный</string>
+    <string name="routing_attr_driving_style_safety_name">Безопасный</string>
     <string name="relief_smoothness_factor_descr">Приоритет равнинам или холмам</string>
     <string name="shared_string_slope">Уклон</string>
     <string name="add_new_folder">Добавить новую папку</string>

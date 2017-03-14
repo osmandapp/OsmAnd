@@ -9,12 +9,12 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
-    <string name="relief_smoothness_factor_hills">Hills</string>
-    <string name="relief_smoothness_factor_plains">Plains</string>
-    <string name="relief_smoothness_factor_more_plains">More plains</string>
-    <string name="driving_style_speed">Speed</string>
-    <string name="driving_style_balance">Balance</string>
-    <string name="driving_style_safety">Safety</string>
+    <string name="routing_attr_relief_smoothness_factor_hills_name"plains>Hills</string>
+    <string name="routing_attr_relief_smoothness_factor_plains_name">Plains</string>
+    <string name="routing_attr_relief_smoothness_factor_more_plains_name">More plains</string>
+    <string name="routing_attr_driving_style_speed_name">Speed</string>
+    <string name="routing_attr_driving_style_balance_name">Balance</string>
+    <string name="routing_attr_driving_style_safety_name">Safety</string>
     <string name="relief_smoothness_factor_descr">Priority to plains or hills</string>
     <string name="shared_string_slope">Slope</string>
     <string name="add_new_folder">Add new folder</string>
@@ -43,7 +43,7 @@
     <string name="average_altitude">Average altitude</string>
     <string name="shared_string_time">Time</string>
     <string name="total_distance">Total distance</string>
-    <string name="routing_attr_height_relief_smoothness_factor_name">Relief smoothness factor</string>
+    <string name="routing_attr_relief_smoothness_factor_name">Relief smoothness factor</string>
     <string name="routing_attr_height_obstacles_name">Use elevation data</string>
     <string name="routing_attr_height_obstacles_description">Use terrain elevation data provided by SRTM, ASTER and EU-DEM</string>
 

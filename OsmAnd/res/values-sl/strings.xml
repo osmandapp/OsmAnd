@@ -2830,11 +2830,11 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="shared_string_slope">Pobočje</string>
     <string name="add_new_folder">Dodaj novo mapo</string>
     <string name="lang_ber">Berberščina</string>
-    <string name="relief_smoothness_factor_hills">Gričevje</string>
-    <string name="relief_smoothness_factor_plains">Ravnine</string>
-    <string name="relief_smoothness_factor_more_plains">Več ravnin</string>
-    <string name="driving_style_speed">Hitro</string>
-    <string name="driving_style_balance">Pretehtano</string>
-    <string name="driving_style_safety">Varno</string>
+    <string name="routing_attr_relief_smoothness_factor_hills_name">Gričevje</string>
+    <string name="routing_attr_relief_smoothness_factor_plains_name">Ravnine</string>
+    <string name="routing_attr_relief_smoothness_factor_more_plains_name">Več ravnin</string>
+    <string name="routing_attr_driving_style_speed_name">Hitro</string>
+    <string name="routing_attr_driving_style_balance_name">Pretehtano</string>
+    <string name="routing_attr_driving_style_safety_name">Varno</string>
     <string name="relief_smoothness_factor_descr">Prednostna izbira ravnin ali gričevja</string>
     </resources>

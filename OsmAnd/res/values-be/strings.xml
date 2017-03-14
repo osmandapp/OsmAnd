@@ -2894,10 +2894,10 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="quick_action_btn_tutorial_descr">Доўгі націск і перацягванне дазвальці перамясціць кропку</string>
 	<string name="route_points_category_name">Кропкі на маршруце</string>
     <string name="relief_smoothness_factor_descr">Прыярытэт раўнінам ці ўзгоркам</string>
-    <string name="relief_smoothness_factor_hills">Узгоркі</string>
-    <string name="relief_smoothness_factor_plains">Раўніны</string>
-    <string name="relief_smoothness_factor_more_plains">Больш раўнін</string>
-    <string name="driving_style_speed">Швыдкі</string>
-    <string name="driving_style_balance">Збалансаваны</string>
-    <string name="driving_style_safety">Бяспечны</string>
+    <string name="routing_attr_relief_smoothness_factor_hills_name">Узгоркі</string>
+    <string name="routing_attr_relief_smoothness_factor_plains_name">Раўніны</string>
+    <string name="routing_attr_relief_smoothness_factor_more_plains_name">Больш раўнін</string>
+    <string name="routing_attr_driving_style_speed_name">Швыдкі</string>
+    <string name="routing_attr_driving_style_balance_name">Збалансаваны</string>
+    <string name="routing_attr_driving_style_safety_name">Бяспечны</string>
     </resources>

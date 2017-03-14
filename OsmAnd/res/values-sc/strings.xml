@@ -2829,10 +2829,10 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="shared_string_slope">Caladòrgia</string>
     <string name="lang_ber">Bèrberu</string>
     <string name="relief_smoothness_factor_descr">Prioridade a sos terrinos in paris o a sos cùcuros</string>
-    <string name="relief_smoothness_factor_hills">Cùcuros/montigros</string>
-    <string name="relief_smoothness_factor_plains">Terrinu in paris</string>
-    <string name="relief_smoothness_factor_more_plains">Prus in paris</string>
-    <string name="driving_style_speed">Lestru</string>
-    <string name="driving_style_balance">Bilantziadu</string>
-    <string name="driving_style_safety">Seguru</string>
+    <string name="routing_attr_relief_smoothness_factor_hills_name">Cùcuros/montigros</string>
+    <string name="routing_attr_relief_smoothness_factor_plains_name">Terrinu in paris</string>
+    <string name="routing_attr_relief_smoothness_factor_more_plains_name">Prus in paris</string>
+    <string name="routing_attr_driving_style_speed_name">Lestru</string>
+    <string name="routing_attr_driving_style_balance_name">Bilantziadu</string>
+    <string name="routing_attr_driving_style_safety_name">Seguru</string>
     </resources>

@@ -2887,10 +2887,10 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="shared_string_slope">Nachylenie</string>
     <string name="lang_ber">Berberyjski</string>
     <string name="relief_smoothness_factor_descr">Preferuj wzgórza lub równiny</string>
-    <string name="relief_smoothness_factor_hills">Górzysty</string>
-    <string name="relief_smoothness_factor_plains">Płaski</string>
-    <string name="relief_smoothness_factor_more_plains">Bardziej płaski</string>
-    <string name="driving_style_speed">Szybki</string>
-    <string name="driving_style_balance">Zrównoważony</string>
-    <string name="driving_style_safety">Bezpieczny</string>
+    <string name="routing_attr_relief_smoothness_factor_hills_name">Górzysty</string>
+    <string name="routing_attr_relief_smoothness_factor_plains_name">Płaski</string>
+    <string name="routing_attr_relief_smoothness_factor_more_plains_name">Bardziej płaski</string>
+    <string name="routing_attr_driving_style_speed_name">Szybki</string>
+    <string name="routing_attr_driving_style_balance_name">Zrównoważony</string>
+    <string name="routing_attr_driving_style_safety_name">Bezpieczny</string>
     </resources>

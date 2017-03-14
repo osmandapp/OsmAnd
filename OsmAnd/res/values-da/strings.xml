@@ -2900,11 +2900,11 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="add_new_folder">Tilføj ny mappe</string>
     <string name="shared_string_slope">Hældning</string>
     <string name="lang_ber">Berbisk</string>
-    <string name="relief_smoothness_factor_hills">Bakker</string>
-    <string name="relief_smoothness_factor_plains">Sletter</string>
-    <string name="relief_smoothness_factor_more_plains">Flere sletter</string>
-    <string name="driving_style_speed">Hastighed</string>
-    <string name="driving_style_balance">Blanceret</string>
-    <string name="driving_style_safety">Sikkerhed</string>
+    <string name="routing_attr_relief_smoothness_factor_hills_name">Bakker</string>
+    <string name="routing_attr_relief_smoothness_factor_plains_name">Sletter</string>
+    <string name="routing_attr_relief_smoothness_factor_more_plains_name">Flere sletter</string>
+    <string name="routing_attr_driving_style_speed_name">Hastighed</string>
+    <string name="routing_attr_driving_style_balance_name">Blanceret</string>
+    <string name="routing_attr_driving_style_safety_name">Sikkerhed</string>
     <string name="relief_smoothness_factor_descr">Prioriteret efter sletter eller bakker</string>
     </resources>

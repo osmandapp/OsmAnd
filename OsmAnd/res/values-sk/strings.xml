@@ -2671,11 +2671,11 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="add_new_folder">Pridať nový priečinok</string>
     <string name="shared_string_slope">Svah</string>
     <string name="lang_ber">Berbersky</string>
-    <string name="relief_smoothness_factor_hills">Pahorky</string>
-    <string name="relief_smoothness_factor_plains">Roviny</string>
-    <string name="relief_smoothness_factor_more_plains">Viac rovín</string>
-    <string name="driving_style_speed">Rýchly</string>
-    <string name="driving_style_balance">Vyvážený</string>
-    <string name="driving_style_safety">Bezpečný</string>
+    <string name="routing_attr_relief_smoothness_factor_hills_name">Pahorky</string>
+    <string name="routing_attr_relief_smoothness_factor_plains_name">Roviny</string>
+    <string name="routing_attr_relief_smoothness_factor_more_plains_name">Viac rovín</string>
+    <string name="routing_attr_driving_style_speed_name">Rýchly</string>
+    <string name="routing_attr_driving_style_balance_name">Vyvážený</string>
+    <string name="routing_attr_driving_style_safety_name">Bezpečný</string>
     <string name="relief_smoothness_factor_descr">Priorita pre roviny a pahorky</string>
     </resources>

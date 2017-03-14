@@ -2642,12 +2642,12 @@ Por favor proporciona un código completo</string>
     <string name="shared_string_start_time">Hora de inicio</string>
     <string name="shared_string_end_time">Hora de fin</string>
     <string name="shared_string_color">Color</string>
-    <string name="relief_smoothness_factor_hills">Colinas</string>
-    <string name="relief_smoothness_factor_plains">Llanuras</string>
-    <string name="relief_smoothness_factor_more_plains">Más llanos</string>
-    <string name="driving_style_speed">Velocidad</string>
-    <string name="driving_style_balance">Equilibrio</string>
-    <string name="driving_style_safety">Seguridad</string>
+    <string name="routing_attr_relief_smoothness_factor_hills_name">Colinas</string>
+    <string name="routing_attr_relief_smoothness_factor_plains_name">Llanuras</string>
+    <string name="routing_attr_relief_smoothness_factor_more_plains_name">Más llanos</string>
+    <string name="routing_attr_driving_style_speed_name">Velocidad</string>
+    <string name="routing_attr_driving_style_balance_name">Equilibrio</string>
+    <string name="routing_attr_driving_style_safety_name">Seguridad</string>
     <string name="relief_smoothness_factor_descr">Prioridad a llanuras o colinas</string>
     <string name="lang_ber">Bereber</string>
     </resources>
