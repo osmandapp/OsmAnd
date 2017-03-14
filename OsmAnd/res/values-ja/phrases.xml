@@ -1250,4 +1250,49 @@
 	<string name="poi_toilets_disposal_chemical">化学処理トイレ(Toilets disposal: chemical)</string>
 	<string name="poi_toilets_disposal_bucket">バケツトイレ(Toilets disposal: bucket)</string>
 
+	<string name="poi_backcountry">バックカントリー・管理区域外エリア(Backcountry)</string>
+	<string name="poi_backcountry_yes">可(Yes)</string>
+	<string name="poi_backcountry_no">不可(No)</string>
+	<string name="poi_caravans">キャンピングカー・トレーラー(Caravans)</string>
+	<string name="poi_caravans_yes">可(Yes)</string>
+	<string name="poi_caravans_no">キャンピングカー:不可(Caravans: no)</string>
+	<string name="poi_clock_option">時計オプション(Additional)</string>
+	<string name="poi_barometer_yes">気圧計・晴雨計(Barometer)</string>
+	<string name="poi_barometer_no">気圧計:無し(Barometer: no)</string>
+	<string name="poi_date_yes">日付表示(Date display)</string>
+	<string name="poi_date_no">日付表示:無し(Date display: no)</string>
+
+	<string name="poi_hygrometer_yes">湿度計(Hygrometer)</string>
+	<string name="poi_hygrometer_no">湿度計:無し(Hygrometer: no)</string>
+	<string name="poi_thermometer_yes">温度計(Thermometer)</string>
+	<string name="poi_thermometer_no">温度計:無し(Thermometer: no)</string>
+	<string name="poi_denomination">宗派(Denomination)</string>
+	<string name="poi_fireplace">暖炉(Fireplace)</string>
+	<string name="poi_fireplace_yes">有り(Yes)</string>
+	<string name="poi_fireplace_no">暖炉無し(No fireplace)</string>
+
+	<string name="poi_information_contents">情報コンテンツ(Contents)</string>
+	<string name="poi_board_type_astronomy">天文学(Astronomy)</string>
+
+	<string name="poi_board_type_notice">掲示板(Bulletin board)</string>
+	<string name="poi_board_type_plants">植物(Plants)</string>
+	<string name="poi_board_type_geology">地質学(Geology)</string>
+	<string name="poi_board_type_public_transport">公共交通機関(Public transport)</string>
+	<string name="poi_board_type_technology">テクノロジー(Technology)</string>
+	<string name="poi_information_history">歴史(History)</string>
+	<string name="poi_information_nature">自然(Nature)</string>
+	<string name="poi_information_audioguide">音声ガイド(Audioguide)</string>
+	<string name="poi_information_sign">記号(Sign)</string>
+	<string name="poi_information_bicyclemap">自転車マップ(Bicycle map)</string>
+	<string name="poi_information_tactile_model">触知模型(Tactile model)</string>
+	<string name="poi_information_tactile_map">触地図(Tactile map)</string>
+	<string name="poi_information_board">看板(Board)</string>
+	<string name="poi_information_hikingmap">ハイキングマップ(Hiking map)</string>
+	<string name="poi_information_type">提供情報種別(Type)</string>
+	<string name="poi_information_guidepost">道標(Guidepost)</string>
+	<string name="poi_information_map">地図(Map)</string>
+	<string name="poi_information_office">事務所(Office)</string>
+	<string name="poi_information_terminal">端末(Terminal)</string>
+	<string name="poi_information_route_marker">ルートマーカー(Route marker)</string>
+	<string name="poi_information_trail_blaze">道しるべ(Trail blaze)</string>
 	</resources>
