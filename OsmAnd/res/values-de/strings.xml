@@ -2715,7 +2715,13 @@ Abgedeckte Fläche: %1$s x %2$s</string>
  • Unterstützung des Offenen Standortcodes (OLC)
 
 
- • Anzeige eines Höhenprofils für aufgezeichnete GPX-Tracks
+ • Anzeige eines Höhen- und Steigungsprofils für aufgezeichnete GPX-Tracks (inkl. Geschwindigkeiten) und errechnete Routen
+
+
+ • \"Fahrstil\"-Einstellungen und logische Verbesserungen bei der Rad-Wegführung
+
+
+ • Einstellungen zur Verwendung von Höhendaten in der Rad-Wegführung
 
 
  • Verschiedene Verbesserungen und Fehlerbehebungen
@@ -2758,4 +2764,12 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="route_points_category_name">Zu passierende Punkte auf der Route</string>
     <string name="add_new_folder">Neuen Ordner hinzufügen</string>
     <string name="shared_string_slope">Steigung</string>
+    <string name="relief_smoothness_factor_hills">Berge</string>
+    <string name="relief_smoothness_factor_plains">Ebenen</string>
+    <string name="relief_smoothness_factor_more_plains">Weitere Ebenen</string>
+    <string name="driving_style_speed">Geschwindigkeit</string>
+    <string name="driving_style_balance">Ausgewogenheit</string>
+    <string name="relief_smoothness_factor_descr">Wichtung von Ebenen oder Bergen</string>
+    <string name="driving_style_safety">Sicherheit</string>
+    <string name="lang_ber">Berber</string>
     </resources>

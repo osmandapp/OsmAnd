@@ -1161,4 +1161,93 @@
 	<string name="poi_payment_coins_50c12">50セント、1ユーロ、2ユーロ硬貨(50c, 1€, and 2€ coins)</string>
 	<string name="poi_payment_cash_yes">現金(Cash)</string>
 	<string name="poi_payment_ep_cash_yes">キャッシュカード(ゲルトカルテ)(Cash card (Geldkarte))</string>
+	<string name="poi_free_flying_characteristics">ジャンル(Characteristic)</string>
+	<string name="poi_free_flying_hanggliding_yes">ハンググライディング(Hanggliding)</string>
+	<string name="poi_free_flying_site_takeoff">離陸可(Takeoff)</string>
+	<string name="poi_free_flying_site_landing">着陸可(Landing)</string>
+	<string name="poi_free_flying_site_toplanding">トップランディング(Toplanding)</string>
+	<string name="poi_free_flying_site_towing">曳航(Towing)</string>
+	<string name="poi_free_flying_site_training">トレーニング(Training)</string>
+	<string name="poi_free_flying_official_yes">公認準拠(Official: yes)</string>
+	<string name="poi_free_flying_official_no">公認非準拠(Official: no)</string>
+	<string name="poi_free_flying_paragliding_yes">パラグライディング(Paragliding)</string>
+	<string name="poi_free_flying_paragliding_no">パラグライディング不可(Paragliding: no)</string>
+	<string name="poi_free_flying_hanggliding_no">ハンググライディング不可(Hanggliding: no)</string>
+	<string name="poi_free_flying_rigid_yes">リジットウイング(Rigid)</string>
+	<string name="poi_free_flying_rigid_no">リジットウイング不可(Free flying rigid: no)</string>
+	<string name="poi_free_flying_guest_guidelines_yes">ゲストガイドライン有り(Guest guidelines: yes)</string>
+	<string name="poi_free_flying_guest_guidelines_no">ゲストガイドライン無し(Guest guidelines: no)</string>
+
+	<string name="poi_nudism">裸体主義(Nudism)</string>
+	<string name="poi_nudism_yes">許可(Allowed)</string>
+	<string name="poi_nudism_no">禁止(Prohibited)</string>
+	<string name="poi_nudism_obligatory">義務(Obligatory)</string>
+	<string name="poi_nudism_customary">通例(Customary)</string>
+	<string name="poi_nudism_permissive">許容(Permissive)</string>
+
+	<string name="poi_gambling_type">賭博種</string>
+	<string name="poi_gambling_lottery">宝くじ(Lottery)</string>
+	<string name="poi_gambling_pachinko">パチンコ(Pachinko)</string>
+	<string name="poi_gambling_slot_machines">スロットマシーン(Slot machines)</string>
+	<string name="poi_gambling_betting">賭け事(Betting)</string>
+	<string name="poi_gambling_bingo">ビンゴ(Bingo)</string>
+
+	<string name="poi_massage_type">マッサージタイプ(Massage type)</string>
+	<string name="poi_massage_thai">タイ式</string>
+	<string name="poi_massage_sexual">性的・回春(Massage type)</string>
+	<string name="poi_massage_chinese">中国式・ツボ押し(Chinese)</string>
+	<string name="poi_massage_therapeutic">セラピック・整体(Therapeutic)</string>
+
+	<string name="poi_massage_yes">マッサージサービス(Massage services)</string>
+	<string name="poi_piste_difficulty">ゲレンデ難易度(Piste difficulty)</string>
+	<string name="poi_piste_grooming">ゲレンデ状態・調整(Piste grooming)</string>
+	<string name="poi_piste_difficulty_easy">簡単・初級者用(Easy)</string>
+	<string name="poi_piste_difficulty_intermediate">普通・中級者用(Intermediate)</string>
+	<string name="poi_piste_difficulty_advanced">上級者用(Advanced)</string>
+	<string name="poi_piste_difficulty_novice">すごく簡単・初心者用(Novice)</string>
+	<string name="poi_piste_difficulty_expert">難しい・上級者用(Expert)</string>
+	<string name="poi_piste_difficulty_freeride">フリーライド・競技用(Freeride)</string>
+	<string name="poi_piste_grooming_classic">一般的なアルペン・ノルディックスキー用(Classic)</string>
+	<string name="poi_piste_grooming_classic_skating">一般的コース＋スケート可(Classic+skating)</string>
+	<string name="poi_piste_grooming_backcountry">バックカントリー(Backcountry)</string>
+	<string name="poi_piste_grooming_scooter">スノースクート(Scooter)</string>
+	<string name="poi_piste_grooming_skating">スケート(Skating)</string>
+	<string name="poi_piste_grooming_no">無し(No)</string>
+	<string name="poi_piste_grooming_mogul">こぶ有り(Mogul)</string>
+
+	<string name="poi_smoking">喫煙(Smoking)</string>
+	<string name="poi_smoking_no">禁煙(Not allowed)</string>
+	<string name="poi_smoking_outside">屋外のみ可(Outside only)</string>
+	<string name="poi_smoking_yes">喫煙可(Allowed)</string>
+	<string name="poi_smoking_separated">限られた場所のみ・分煙(In a separated room)</string>
+	<string name="poi_smoking_isolated">喫煙室のみ可(In a isolated room)</string>
+	<string name="poi_smoking_dedicated">喫煙者専用(Dedicated to smokers)</string>
+
+	<string name="poi_theatre_genre">ジャンル(Genre)</string>
+	<string name="poi_theatre_genre_philharmonic">交響楽団(Philharmonic)</string>
+	<string name="poi_theatre_genre_musical">ミュージカル(Musical)</string>
+	<string name="poi_theatre_genre_drama">演劇(Drama)</string>
+	<string name="poi_theatre_genre_opera">オペラ(Opera)</string>
+	<string name="poi_theatre_genre_cabaret">キャバレー(Cabaret)</string>
+	<string name="poi_theatre_genre_puppet">人形劇(Puppet)</string>
+	<string name="poi_theatre_genre_comedy">喜劇(Comedy)</string>
+	<string name="poi_theatre_genre_chamber_music">室内楽(Chamber music)</string>
+	<string name="poi_theatre_genre_marionette">糸繰り人形劇(Marionette)</string>
+	<string name="poi_theatre_genre_ballet">バレエ(Ballet)</string>
+	<string name="poi_theatre_genre_shadow_play">影絵芝居(Shadow play)</string>
+
+	<string name="poi_toilets_yes">有り(Yes)</string>
+	<string name="poi_toilets_no">無し(Without toilets)</string>
+	<string name="poi_toilets_wheelchair_yes">車椅子用トイレ有り(Access to the toilets for wheelchairs: yes)</string>
+	<string name="poi_toilets_wheelchair_no">車椅子用トイレ無し(Access to the toilets for wheelchairs: no)</string>
+	<string name="poi_toilets_access_customers">来客用トイレ(Toilets access: customers)</string>
+	<string name="poi_toilets_access_permissive">共用トイレ(Toilets access: permissive)</string>
+	<string name="poi_toilets_access_community">従業員用トイレ(Toilets access: community)</string>
+	<string name="poi_toilets_access_public">公衆トイレ(Toilets access: public)</string>
+
+	<string name="poi_toilets_disposal_flush">水洗(Toilets disposal: flush)</string>
+	<string name="poi_toilets_disposal_pitlatrine">汲み取り式トイレ(Toilets disposal: pitlatrine)</string>
+	<string name="poi_toilets_disposal_chemical">化学処理トイレ(Toilets disposal: chemical)</string>
+	<string name="poi_toilets_disposal_bucket">バケツトイレ(Toilets disposal: bucket)</string>
+
 	</resources>
