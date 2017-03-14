@@ -240,42 +240,45 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 	 */
 	public void showAddParkingDialog(final MapActivity mapActivity, final double latitude, final double longitude) {
 		final boolean wasEventPreviouslyAdded = isParkingEventAdded();
-		final View addParking = mapActivity.getLayoutInflater().inflate(R.layout.parking_set_type, null);
-		final Dialog choose = new Dialog(mapActivity);
-		choose.setContentView(addParking);
-		choose.setCancelable(true);
-		choose.setTitle(mapActivity.getString(R.string.osmand_parking_choose_type));		
-		
-		ImageButton limitButton = (ImageButton) addParking.findViewById(R.id.parking_lim_button);
-		limitButton.setOnClickListener(new View.OnClickListener() {
+
+		final ContextMenuAdapter menuAdapter = new ContextMenuAdapter();
+		ContextMenuItem.ItemBuilder itemBuilder = new ContextMenuItem.ItemBuilder();
+
+		menuAdapter.addItem(itemBuilder.setTitleId(R.string.osmand_parking_no_lim_text, app)
+				.setIcon(R.drawable.ic_action_time_start).setTag(1).createItem());
+		menuAdapter.addItem(itemBuilder.setTitleId(R.string.osmand_parking_time_limit, app)
+				.setIcon(R.drawable.ic_action_time_span).setTag(2).createItem());
+
+		final AlertDialog.Builder builder = new AlertDialog.Builder(mapActivity);
+		boolean light = app.getSettings().isLightContent() && !app.getDaynightHelper().isNightMode();
+		final ArrayAdapter<ContextMenuItem> listAdapter = menuAdapter.createListAdapter(mapActivity, light);
+		builder.setTitle(R.string.parking_options);
+		builder.setAdapter(listAdapter, new DialogInterface.OnClickListener() {
 			@Override
-			public void onClick(View v) {
-				if (wasEventPreviouslyAdded) {
-					showDeleteEventWarning(mapActivity);
+			public void onClick(final DialogInterface dialog, int which) {
+				ContextMenuItem item = menuAdapter.getItem(which);
+				int index = item.getTag();
+				if (index == 1) {
+					dialog.dismiss();
+					if (wasEventPreviouslyAdded) {
+						showDeleteEventWarning(mapActivity);
+					}
+					addOrRemoveParkingEvent(false);
+					setParkingPosition(mapActivity, latitude, longitude, false);
+					showContextMenuIfNeeded(mapActivity);
+					mapActivity.getMapView().refreshMap();
+				} else if (index == 2) {
+					if (wasEventPreviouslyAdded) {
+						showDeleteEventWarning(mapActivity);
+					}
+					setParkingPosition(mapActivity, latitude, longitude, true);
+					showSetTimeLimitDialog(mapActivity, dialog);
+					mapActivity.getMapView().refreshMap();
 				}
-				setParkingPosition(mapActivity, latitude, longitude, true);
-				showSetTimeLimitDialog(mapActivity, choose);
-				mapActivity.getMapView().refreshMap();
 			}
 		});
-
-		ImageButton noLimitButton = (ImageButton) addParking.findViewById(R.id.parking_no_lim_button);
-		noLimitButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				choose.dismiss();
-				if (wasEventPreviouslyAdded) {
-					showDeleteEventWarning(mapActivity);
-				}
-				addOrRemoveParkingEvent(false);
-				setParkingPosition(mapActivity, latitude, longitude, false);
-				showContextMenuIfNeeded(mapActivity);
-				mapActivity.getMapView().refreshMap();
-			}
-		});
-
-		choose.show();
-
+		builder.setNegativeButton(R.string.shared_string_cancel, null);
+		builder.create().show();
 	}
 
 	private void showContextMenuIfNeeded(final MapActivity mapActivity) {
@@ -315,9 +318,9 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 	 * The dialog has option to add a notification to Calendar app. 
 	 * Anyway the time-limit can be seen from parking point description.
 	 * @param mapActivity
-	 * @param choose 
+	 * @param choose
 	 */
-	private void showSetTimeLimitDialog(final MapActivity mapActivity, final Dialog choose) {
+	private void showSetTimeLimitDialog(final MapActivity mapActivity, final DialogInterface choose) {
 		final View setTimeParking = mapActivity.getLayoutInflater().inflate(R.layout.parking_set_time_limit, null);
 		AlertDialog.Builder setTime = new AlertDialog.Builder(mapActivity);
 		setTime.setView(setTimeParking);
