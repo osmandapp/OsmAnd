@@ -2877,4 +2877,12 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="add_new_folder">Aggiungi una nuova cartella</string>
     <string name="shared_string_slope">Pendenza</string>
     <string name="lang_ber">Berbero</string>
+    <string name="routing_attr_relief_smoothness_factor_hills_name">Colline</string>
+    <string name="routing_attr_relief_smoothness_factor_plains_name">Pianure</string>
+    <string name="routing_attr_relief_smoothness_factor_more_plains_name">Più pianure</string>
+    <string name="routing_attr_driving_style_speed_name">Velocità</string>
+    <string name="routing_attr_driving_style_balance_name">Bilanciato</string>
+    <string name="routing_attr_driving_style_safety_name">Sicuro</string>
+    <string name="relief_smoothness_factor_descr">Priorità alle pianure o alle colline</string>
+    <string name="routing_attr_relief_smoothness_factor_name">Fattore smussamento rilievi</string>
     </resources>
