@@ -2980,4 +2980,9 @@
 	<string name="poi_aerodrome_type_military_public">Militar/públic</string>
 	<string name="poi_aerodrome_type_private">Privat</string>
 
+	<string name="poi_nuclear_explosion_device">Explosió: dispositiu</string>
+
+	<string name="poi_addr_housename">Nom de la casa</string>
+
+
 	</resources>
