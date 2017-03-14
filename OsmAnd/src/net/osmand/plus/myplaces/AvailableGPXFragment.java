@@ -271,6 +271,15 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		if (OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class) != null) {
 			currentGpxView = inflater.inflate(R.layout.current_gpx_item, null, false);
 			createCurrentTrackView();
+			currentGpxView.findViewById(R.id.current_track_info).setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					Intent newIntent = new Intent(getActivity(), getMyApplication().getAppCustomization().getTrackActivity());
+					newIntent.putExtra(TrackActivity.CURRENT_RECORDING, true);
+					newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+					startActivity(newIntent);
+				}
+			});
 			listView.addHeaderView(currentGpxView);
 			/*
 			currentTrackView.setOnClickListener(new View.OnClickListener() {
