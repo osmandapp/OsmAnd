@@ -2910,8 +2910,8 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="routing_attr_relief_smoothness_factor_name">Relief udjævningsfaktor</string>
     <string name="full_version_thanks">Tak for køb af den fulde version af OsmAnd!</string>
     <string name="parking_options">Indstillinger for parkering</string>
-    <string name="do_not_send_anonymous_app_usage">Send send ikke anonym app-anvendelse</string>
+    <string name="do_not_send_anonymous_app_usage">Send ikke anonyme data om anvendelse</string>
     <string name="do_not_send_anonymous_app_usage_desc">Sender generelle oplysninger om skærm brug under sessionen. Vi indsamler ikke geografisk placering eller brugerinput data.</string>
     <string name="do_not_show_startup_messages">Vis ikke meddelelser ved opstart</string>
-    <string name="do_not_show_startup_messages_desc">Viser app rabatter &amp; særlige lokale arrangementer meddelelser</string>
+    <string name="do_not_show_startup_messages_desc">Viser meddelelser om rabatter &amp; særlige lokale arrangementer</string>
     </resources>
