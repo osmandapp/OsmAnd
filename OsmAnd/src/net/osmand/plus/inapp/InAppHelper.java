@@ -36,6 +36,7 @@ public class InAppHelper {
 	boolean mDebugLog = false;
 
 	private static boolean mSubscribedToLiveUpdates = false;
+	private static boolean mFullVersionPurchased = false;
 	private static String mLiveUpdatesPrice;
 	private static long lastValidationCheckTime;
 	private static String mFullVersionPrice;
@@ -79,6 +80,10 @@ public class InAppHelper {
 		return mSubscribedToLiveUpdates;
 	}
 
+	public static boolean isFullVersionPurchased() {
+		return mFullVersionPurchased;
+	}
+
 	public static String getLiveUpdatesPrice() {
 		return mLiveUpdatesPrice;
 	}
@@ -108,7 +113,9 @@ public class InAppHelper {
 		isDeveloperVersion = Version.isDeveloperVersion(ctx);
 		if (isDeveloperVersion) {
 			mSubscribedToLiveUpdates = true;
+			mFullVersionPurchased = true;
 			ctx.getSettings().LIVE_UPDATES_PURCHASED.set(true);
+			ctx.getSettings().FULL_VERSION_PURCHASED.set(true);
 		}
 	}
 
@@ -214,6 +221,13 @@ public class InAppHelper {
 			if (mSubscribedToLiveUpdates) {
 				ctx.getSettings().LIVE_UPDATES_PURCHASED.set(true);
 			}
+
+			Purchase fullVersionPurchase = inventory.getPurchase(SKU_FULL_VERSION_PRICE);
+			mFullVersionPurchased = isDeveloperVersion || (fullVersionPurchase != null && fullVersionPurchase.getPurchaseState() == 0);
+			if (mFullVersionPurchased) {
+				ctx.getSettings().FULL_VERSION_PURCHASED.set(true);
+			}
+
 			lastValidationCheckTime = System.currentTimeMillis();
 			logDebug("User " + (mSubscribedToLiveUpdates ? "HAS" : "DOES NOT HAVE")
 					+ " live updates purchased.");
@@ -270,9 +284,26 @@ public class InAppHelper {
 		}
 	};
 
+	public void purchaseFullVersion(final Activity activity) {
+		if (mHelper == null || !mHelper.subscriptionsSupported()) {
+			complain("Subscriptions not supported on your device yet. Sorry!");
+			notifyError("Subscriptions not supported on your device yet. Sorry!");
+			if (stopAfterResult) {
+				stop();
+			}
+			return;
+		}
+
+		logDebug("Launching purchase flow for full version");
+		if (mHelper != null) {
+			mHelper.launchPurchaseFlow(activity,
+					SKU_FULL_VERSION_PRICE, RC_REQUEST, mPurchaseFinishedListener);
+		}
+	}
+
 	public void purchaseLiveUpdates(final Activity activity, final String email, final String userName,
 									final String countryDownloadName, final boolean hideUserName) {
-		if (!mHelper.subscriptionsSupported()) {
+		if (mHelper == null || !mHelper.subscriptionsSupported()) {
 			complain("Subscriptions not supported on your device yet. Sorry!");
 			notifyError("Subscriptions not supported on your device yet. Sorry!");
 			if (stopAfterResult) {
@@ -414,6 +445,24 @@ public class InAppHelper {
 
 						notifyDismissProgress();
 						notifyItemPurchased(SKU_LIVE_UPDATES);
+						if (stopAfterResult) {
+							stop();
+						}
+					}
+				});
+			}
+			if (purchase.getSku().equals(SKU_FULL_VERSION_PRICE)) {
+				// bought full version
+				logDebug("Full version purchased.");
+				sendToken(purchase.getToken(), new OnRequestResultListener() {
+					@Override
+					public void onResult(String result) {
+						showToast(ctx.getString(R.string.full_version_thanks));
+						mFullVersionPurchased = true;
+						ctx.getSettings().FULL_VERSION_PURCHASED.set(true);
+
+						notifyDismissProgress();
+						notifyItemPurchased(SKU_FULL_VERSION_PRICE);
 						if (stopAfterResult) {
 							stop();
 						}

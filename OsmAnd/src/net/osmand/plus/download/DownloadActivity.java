@@ -1,11 +1,9 @@
 package net.osmand.plus.download;
 
 import android.Manifest;
-import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StatFs;
@@ -185,7 +183,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 			inAppHelper = new InAppHelper(getMyApplication(), true);
 			inAppHelper.addListener(this);
 			visibleBanner.setUpdatingPrices(true);
-			inAppHelper.start(true);
+			inAppHelper.start(false);
 		}
 
 		final Intent intent = getIntent();
@@ -197,10 +195,22 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 	}
 
 	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		// Pass on the activity result to the helper for handling
+		if (inAppHelper == null || !inAppHelper.onActivityResultHandled(requestCode, resultCode, data)) {
+			// not handled, so handle it ourselves (here's where you'd
+			// perform any handling of activity results not related to in-app
+			// billing...
+			super.onActivityResult(requestCode, resultCode, data);
+		}
+	}
+
+	@Override
 	public void onDestroy() {
 		super.onDestroy();
 		if (inAppHelper != null) {
 			inAppHelper.removeListener(this);
+			inAppHelper.stop();
 		}
 	}
 
@@ -291,6 +301,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 
 	@Override
 	public void onItemPurchased(String sku) {
+		visibleBanner.setUpdatingPrices(false);
 	}
 
 	@Override
@@ -347,7 +358,8 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 	}
 
 	private static boolean shouldShowFreeVersionBanner(OsmandApplication application) {
-		return (Version.isFreeVersion(application) && !application.getSettings().LIVE_UPDATES_PURCHASED.get())
+		return (Version.isFreeVersion(application) && !application.getSettings().LIVE_UPDATES_PURCHASED.get()
+				&& !application.getSettings().FULL_VERSION_PURCHASED.get())
 				|| application.getSettings().SHOULD_SHOW_FREE_VERSION_BANNER.get();
 	}
 	
@@ -380,8 +392,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 					collapseBanner();
 				} else {
 					ctx.getMyApplication().logEvent(ctx, "click_free_dialog");
-					new FreeVersionDialogFragment().show(ctx.getSupportFragmentManager(), "dialog");
-					// expandBanner();
+					new FreeVersionDialogFragment().show(ctx.getSupportFragmentManager(), FreeVersionDialogFragment.TAG);
 				}
 			}
 		};
@@ -438,12 +449,11 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 				@Override
 				public void onClick(View v) {
 					ctx.getMyApplication().logEvent(ctx, "click_buy_plus");
-					Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(Version.marketPrefix(
-							ctx.getMyApplication()) + "net.osmand.plus"));
-					try {
-						ctx.startActivity(intent);
-					} catch (ActivityNotFoundException e) {
-						LOG.error("ActivityNotFoundException", e);
+					ctx.inAppHelper.purchaseFullVersion(ctx);
+					DialogFragment f = (DialogFragment) ctx.getSupportFragmentManager()
+							.findFragmentByTag(FreeVersionDialogFragment.TAG);
+					if (f != null) {
+						f.dismiss();
 					}
 				}
 			});
@@ -489,6 +499,9 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 
 		public void updateFreeVersionBanner() {
 			if (!shouldShowFreeVersionBanner(ctx.getMyApplication())) {
+				if (freeVersionBanner.getVisibility() == View.VISIBLE) {
+					freeVersionBanner.setVisibility(View.GONE);
+				}
 				return;
 			}
 			setMinimizedFreeVersionBanner(false);
