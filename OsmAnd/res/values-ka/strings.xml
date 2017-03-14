@@ -1289,4 +1289,5 @@
     <string name="use_osm_live_routing">OSM ცოცხალი ნავიგაცია</string>
     <string name="access_no_destination">დანიშნულება მითითებული არაა</string>
     <string name="routing_attr_relief_smoothness_factor_plains_name">ველები</string>
+    <string name="routing_attr_relief_smoothness_factor_more_plains_name">მეტი ველები</string>
     </resources>
