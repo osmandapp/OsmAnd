@@ -2853,4 +2853,5 @@ représentant la zone : %1$s x %2$s</string>
     <string name="routing_attr_driving_style_safety_name">Sûre</string>
     <string name="full_version_thanks">Merci d\'avoir acheté la version complète d\'OsmAnd !</string>
     <string name="routing_attr_relief_smoothness_factor_name">Facteur de relief</string>
+    <string name="parking_options">Choix de stationnement</string>
     </resources>
