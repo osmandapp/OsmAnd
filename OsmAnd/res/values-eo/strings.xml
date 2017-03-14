@@ -2709,4 +2709,8 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="routing_attr_relief_smoothness_factor_name">Nivel-ombruma glateco</string>
     <string name="full_version_thanks">Dankon al ci por aĉeti la plenan version de OsmAnd!</string>
     <string name="parking_options">Parkumadaj agordoj</string>
+    <string name="do_not_send_anonymous_app_usage">Ne sendi anoniman statistikon pri uzado</string>
+    <string name="do_not_send_anonymous_app_usage_desc">Ĝi sendas ĝeneralajn informojn pri uzado de ekrano dum seanco. Ni ne kolektas iujn ajn datumojn pri pozicio aŭ datumojn entajpitajn de uzanto.</string>
+    <string name="do_not_show_startup_messages">Ne montri mesaĝojn je starto</string>
+    <string name="do_not_show_startup_messages_desc">Montras mesaĝojn pri rabatoj kaj specialaj lokaj okazoj</string>
     </resources>
