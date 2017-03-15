@@ -190,7 +190,7 @@
 	<string name="poi_fuel">ガソリンスタンド(Gas station)</string>
 	<string name="poi_charging_station">充電ステーション(Charging station)</string>
 	<string name="poi_vehicle_ramp">車両用取付け道路(Vehicle ramp)</string>
-	<string name="poi_compressed_air">空気入れ・圧縮空気(Compressed air)</string>
+	<string name="poi_compressed_air">空気入れ・エアーコンプレッサー(Compressed air)</string>
 	<string name="poi_parking">駐車場(Parking)</string>
 	<string name="poi_motorcycle_parking">バイク駐輪場(Motorcycle parking)</string>
 	<string name="poi_parking_entrance">駐車場入口(Parking entrance)</string>
@@ -1298,4 +1298,51 @@
 	<string name="poi_religion_type">宗教(Religion)</string>
 	<string name="poi_recreation_center">レクリエーションセンター(Recreation center)</string>
 
+	<string name="poi_power_supply">電源(Power supply)</string>
+	<string name="poi_power_supply_no">電源:無し(Power supply: no)</string>
+	<string name="poi_power_supply_cee_17_blue">電源ソケット形状:CEE 17 青(Power supply (socket): CEE 17 blue)</string>
+	<string name="poi_power_supply_cee_7_4">電源ソケット形状:CEE 7/4(Power supply (socket): CEE 7/4)</string>
+	<string name="poi_power_supply_cee_7_5">電源ソケット形状:CEE 7/5(Power supply (socket): CEE 7/5)</string>
+	<string name="poi_power_supply_nema_5_15">電源ソケット形状:NEMA 5-15(Power supply (socket): NEMA 5-15)</string>
+
+	<string name="poi_star_rating">星評価(Star rating)</string>
+	<string name="poi_stars_1">1 ツーリスト(1 (Tourist))</string>
+	<string name="poi_stars_1s">1S ツーリスト上位(1S (Superior Tourist))</string>
+	<string name="poi_stars_2">2 スタンダード(2 (Standard))</string>
+	<string name="poi_stars_2s">2S スタンダード上位(2S (Superior Standard))</string>
+	<string name="poi_stars_3">3 コンフォート(3 (Comfort))</string>
+	<string name="poi_stars_3s">3S コンフォート上位(3S (Superior Comfort))</string>
+	<string name="poi_stars_4">4 ファーストクラス(4 (First Class))</string>
+	<string name="poi_stars_4s">4S ファーストクラス上位(4S (Superior First Class))</string>
+	<string name="poi_stars_5">5 ラグジュアリー(5 (Luxury))</string>
+	<string name="poi_stars_5s">5S ラグジュアリー上位(5S (Superior Luxury))</string>
+	<string name="poi_tents">テント(Tents)</string>
+	<string name="poi_tents_no">テント不可(Tents not allowed)</string>
+	<string name="poi_tents_yes">許可(Allowed)</string>
+	<string name="poi_washing_machine">洗濯機(Washing machine)</string>
+	<string name="poi_washing_machine_no">洗濯機:無し(Washing machine: no)</string>
+	<string name="poi_car_wash_no">洗車:無し(Car wash: no)</string>
+
+
+	<string name="poi_compressed_air_filter">エアーコンプレッサー(Compressed air)</string>
+	<string name="poi_compressed_air_yes">有り(Yes)</string>
+	<string name="poi_compressed_air_no">エアーコンプレッサー:無し(Compressed air: no)</string>
+
+	<string name="poi_self_service_yes">肯定(Yes)</string>
+	<string name="poi_self_service_no">否定(No self-service)</string>
+	<string name="poi_vacuum_cleaner_filter">掃除機(Vacuum cleaner)</string>
+	<string name="poi_vacuum_cleaner_yes">有り(Yes)</string>
+	<string name="poi_vacuum_cleaner_no">掃除機:無し(Vacuum cleaner: no)</string>
+	<string name="poi_amenity_vacuum_cleaner">掃除機(Vacuum cleaner)</string>
+
+	<string name="poi_fuel_adblue">アドブルー・尿素水還元剤(AdBlue fuel)</string>
+
+	<string name="poi_drive_through">ドライブスルー(Drive through)</string>
+	<string name="poi_drive_through_yes">有り(Yes)</string>
+	<string name="poi_drive_through_no">無し(Drive-through: no)</string>
+
+	<string name="poi_fuel_91ul">91UL 無鉛航空燃料(91UL fuel)</string>
+	<string name="poi_fuel_100ll">100LL 有鉛航空燃料(100LL fuel)</string>
+	<string name="poi_fuel_jeta1">JET A-1ジェット燃料(Jet A-1 fuel)</string>
+	<string name="poi_fuel_autogas">AutoGas・エタノールフリー無鉛燃料(Autogas)</string>
 	</resources>
