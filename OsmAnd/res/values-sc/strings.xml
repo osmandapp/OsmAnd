@@ -2842,4 +2842,6 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="do_not_show_startup_messages">No ammustres messàgios a s\'alluìngiu</string>
     <string name="do_not_show_startup_messages_desc">Ammustra sos iscontos pro sas aplicatziones e messàgios a pitzu de sos eventos locales</string>
     <string name="parking_options">Issèberos pro sos parchègios</string>
+    <string name="right_side_navigation">Ghia a destra</string>
+    <string name="driving_region_automatic">Automàtica</string>
     </resources>
