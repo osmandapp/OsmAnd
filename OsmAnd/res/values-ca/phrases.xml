@@ -3010,4 +3010,7 @@
 	<string name="poi_theatre_genre_ballet">Ballet</string>
 	<string name="poi_theatre_genre_shadow_play">Ombres xineses</string>
 
+	<string name="poi_historic_manor">Casal històric</string>
+	<string name="poi_backcountry_yes">Sí</string>
+	<string name="poi_backcountry_no">No</string>
 	</resources>
