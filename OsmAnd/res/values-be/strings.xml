@@ -2907,4 +2907,6 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="parking_options">Опцыі паркоўкі</string>
     <string name="full_version_thanks">Дякуй вам за набыццё поўнай версіі OsmAnd!</string>
     <string name="routing_attr_relief_smoothness_factor_name">Ступень перасечанасці мясцовасці</string>
+    <string name="right_side_navigation">Правабаковы рух</string>
+    <string name="driving_region_automatic">Аўтаматычны</string>
     </resources>
