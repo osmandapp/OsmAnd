@@ -2853,8 +2853,8 @@ Facebook：https://www.facebook.com/osmandapp
     <string name="full_version_thanks">感謝您購買完整版的 OsmAnd！</string>
     <string name="routing_attr_relief_smoothness_factor_name">地貌平滑率</string>
     <string name="parking_options">停車選項</string>
-    <string name="do_not_send_anonymous_app_usage">不發送匿名應用程式使用法</string>
+    <string name="do_not_send_anonymous_app_usage">不要傳送匿名應用程式使用法</string>
     <string name="do_not_show_startup_messages">不要在啟動時顯示訊息</string>
-    <string name="do_not_show_startup_messages_desc">顯示應用折扣和特殊在地活動訊息</string>
-    <string name="do_not_send_anonymous_app_usage_desc">發送在活動期間有關螢幕使用的一般資訊。我們不會收集任何的地理位置或使用者輸入的相關資料。</string>
+    <string name="do_not_show_startup_messages_desc">顯示應用程式折扣和專用的在地事件訊息</string>
+    <string name="do_not_send_anonymous_app_usage_desc">在通信期間傳送有關螢幕使用的一般資訊。我們不會收集任何的地理位置或使用者輸入的相關資料。</string>
     </resources>
