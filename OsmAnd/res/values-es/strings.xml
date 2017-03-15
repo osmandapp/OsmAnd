@@ -2650,4 +2650,11 @@ Por favor proporciona un código completo</string>
     <string name="routing_attr_driving_style_safety_name">Seguridad</string>
     <string name="relief_smoothness_factor_descr">Prioridad a llanuras o colinas</string>
     <string name="lang_ber">Bereber</string>
+    <string name="do_not_send_anonymous_app_usage">No enviar datos anónimos de uso de la aplicación</string>
+    <string name="do_not_send_anonymous_app_usage_desc">"Envía información general sobre la pantalla usada durante la sesión. No recopilamos datos de geolocalización o de entrada de  usuario."</string>
+    <string name="do_not_show_startup_messages">No mostrar los mensajes en el inicio</string>
+    <string name="do_not_show_startup_messages_desc">Muestra descuentos de la aplicación y mensajes de eventos locales</string>
+    <string name="parking_options">Opciones de aparcamiento</string>
+    <string name="full_version_thanks">¡Gracias por comprar la versión completa de OsmAnd!</string>
+    <string name="routing_attr_relief_smoothness_factor_name">Factor de suavizado de relieve</string>
     </resources>
