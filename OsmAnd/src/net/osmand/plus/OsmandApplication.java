@@ -43,6 +43,7 @@ import net.osmand.plus.dialogs.RateUsBottomSheetDialog;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.helpers.AvoidSpecificRoads;
 import net.osmand.plus.helpers.WaypointHelper;
+import net.osmand.plus.inapp.InAppHelper;
 import net.osmand.plus.mapcontextmenu.other.RoutePreferencesMenu;
 import net.osmand.plus.monitoring.LiveMonitoringHelper;
 import net.osmand.plus.poi.PoiFiltersHelper;
@@ -157,6 +158,7 @@ public class OsmandApplication extends MultiDexApplication {
 //			targetPointsHelper.clearPointToNavigate(false);
 //		}
 
+		InAppHelper.initialize(this);
 		initRemoteConfig();
 		startApplication();
 		System.out.println("Time to start application " + (System.currentTimeMillis() - timeToStart) + " ms. Should be less < 800 ms");
