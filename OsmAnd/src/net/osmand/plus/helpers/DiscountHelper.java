@@ -11,6 +11,8 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.inapp.InAppHelper;
+import net.osmand.plus.liveupdates.OsmLiveActivity;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControllerType;
 import net.osmand.util.Algorithms;
@@ -124,10 +126,8 @@ public class DiscountHelper {
 						settings.DISCOUNT_SHOW_DATETIME_MS.set(System.currentTimeMillis());
 						showDiscountBanner(mapActivity, message, description, icon, url);	
 					}
-					
 				}
 			}
-
 		} catch (Exception e) {
 			logError("JSON parsing error: ", e);
 		}
@@ -154,7 +154,8 @@ public class DiscountHelper {
 		return result;
 	}
 
-	private static void showDiscountBanner(final MapActivity mapActivity, final String title, final String description, final String icon, final String url) {
+	private static void showDiscountBanner(final MapActivity mapActivity, final String title,
+										   final String description, final String icon, final String url) {
 		final DiscountBarController toolbarController = new DiscountBarController();
 		toolbarController.setTitle(title);
 		toolbarController.setDescription(description);
@@ -166,6 +167,7 @@ public class DiscountHelper {
 				public void onClick(View v) {
 					mapActivity.getMyApplication().logEvent(mapActivity, "motd_click");
 					mBannerVisible = false;
+					mapActivity.hideTopToolbar(toolbarController);
 					openUrl(mapActivity, url);
 				}
 			});
@@ -174,6 +176,7 @@ public class DiscountHelper {
 				public void onClick(View v) {
 					mapActivity.getMyApplication().logEvent(mapActivity, "motd_click");
 					mBannerVisible = false;
+					mapActivity.hideTopToolbar(toolbarController);
 					openUrl(mapActivity, url);
 				}
 			});
@@ -196,10 +199,26 @@ public class DiscountHelper {
 		mapActivity.showTopToolbar(toolbarController);
 	}
 
-	private static void openUrl(MapActivity mapActivity, String url) {
-		Intent intent = new Intent(Intent.ACTION_VIEW);
-		intent.setData(Uri.parse(url));
-		mapActivity.startActivity(intent);
+	private static void openUrl(final MapActivity mapActivity, String url) {
+		if (url.startsWith("osmand-in-app:")) {
+			if (url.contains(InAppHelper.SKU_FULL_VERSION_PRICE)) {
+				mapActivity.execInAppTask(new InAppHelper.InAppRunnable() {
+					@Override
+					public void run(InAppHelper helper) {
+						helper.purchaseFullVersion(mapActivity);
+					}
+				});
+			} else if (url.contains(InAppHelper.SKU_LIVE_UPDATES)){
+				Intent intent = new Intent(mapActivity, OsmLiveActivity.class);
+				intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+				intent.putExtra(OsmLiveActivity.OPEN_SUBSCRIPTION_INTENT_PARAM, true);
+				mapActivity.startActivity(intent);
+			}
+		} else {
+			Intent intent = new Intent(Intent.ACTION_VIEW);
+			intent.setData(Uri.parse(url));
+			mapActivity.startActivity(intent);
+		}
 	}
 
 	private static class DiscountBarController extends TopToolbarController {

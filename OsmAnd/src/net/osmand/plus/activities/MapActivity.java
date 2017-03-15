@@ -84,6 +84,7 @@ import net.osmand.plus.helpers.DiscountHelper;
 import net.osmand.plus.helpers.ExternalApiHelper;
 import net.osmand.plus.helpers.GpxImportHelper;
 import net.osmand.plus.helpers.WakeLockHelper;
+import net.osmand.plus.inapp.InAppHelper;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.MapContextMenuFragment;
 import net.osmand.plus.mapcontextmenu.other.DestinationReachedMenu;
@@ -180,6 +181,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	private boolean permissionGranted;
 
 	private boolean mIsDestroyed = false;
+	private InAppHelper inAppHelper;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -929,6 +931,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		if (atlasMapRendererView != null) {
 			atlasMapRendererView.handleOnDestroy();
 		}
+		if (inAppHelper != null) {
+			inAppHelper.stop();
+		}
 		mIsDestroyed = true;
 	}
 
@@ -1212,6 +1217,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (inAppHelper != null && inAppHelper.onActivityResultHandled(requestCode, resultCode, data)) {
+			return;
+		}
 		for (ActivityResultListener listener : activityResultListeners) {
 			if (listener.processResult(requestCode, resultCode, data)) {
 				removeActivityResultListener(listener);
@@ -1537,5 +1545,40 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		NEW,
 		NEW_IF_EXPIRED,
 		CURRENT,
+	}
+
+	public InAppHelper execInAppTask(@NonNull InAppHelper.InAppRunnable runnable) {
+		if (inAppHelper != null) {
+			inAppHelper.stop();
+		}
+		inAppHelper = new InAppHelper(getMyApplication(), false);
+		inAppHelper.addListener(new InAppHelper.InAppListener() {
+			@Override
+			public void onError(String error) {
+				inAppHelper = null;
+			}
+
+			@Override
+			public void onGetItems() {
+				inAppHelper = null;
+			}
+
+			@Override
+			public void onItemPurchased(String sku) {
+				inAppHelper = null;
+			}
+
+			@Override
+			public void showProgress() {
+
+			}
+
+			@Override
+			public void dismissProgress() {
+
+			}
+		});
+		inAppHelper.exec(runnable);
+		return inAppHelper;
 	}
 }
