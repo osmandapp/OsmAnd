@@ -2784,7 +2784,13 @@ Area honi dagokio: %1$s x %2$s</string>
  • Open Location Code (OLC) euskarria
 
 
- • Grabatutako GPX fitxategietan oinarrizko altuera informazioa
+ • Grabatutako GPX fitxategietan altuera eta malda profila, abiadura eta kalkulatutako ibilbidea
+
+
+ • \"Gidatzeko estiloa\" ezarpena eta hobekuntzak bizikletentzako ibilbideetarako logikan
+
+
+ • Bizikletentzako ibilbideetan altuera-datuak erabiltzeko ezarpenak
 
 
  • Beste hainbat hobekuntza eta arazoen konponketa
@@ -2826,4 +2832,20 @@ eta gehiago…
 
     <string name="shared_string_slope">Malda</string>
     <string name="lang_ber">Berberera</string>
+    <string name="right_side_navigation">Eskumatik gidatzea</string>
+    <string name="driving_region_automatic">Automatikoa</string>
+    <string name="do_not_send_anonymous_app_usage">Ez bidali aplikazioaren erabilera datu anonimoak</string>
+    <string name="do_not_send_anonymous_app_usage_desc">Saioan zehar erabilitako pantailaren informazio orokorra bidaltzen du. Ez dugu kokalekurik edo erabiltzaileari lotutako informazioa jasotzen.</string>
+    <string name="do_not_show_startup_messages">Ez erakutsi mezuak hasieran</string>
+    <string name="do_not_show_startup_messages_desc">Aplikazioen deskontuak eta tokiko gertaeren inguruko mezuak bistaratzen ditu</string>
+    <string name="parking_options">Aparkatzeko aukerak</string>
+    <string name="full_version_thanks">Eskerrik asko OsmAnd aplikazioaren bertsio osoa erosteagatik!</string>
+    <string name="routing_attr_relief_smoothness_factor_hills_name">Mendixkak</string>
+    <string name="routing_attr_relief_smoothness_factor_plains_name">Lautadak</string>
+    <string name="routing_attr_relief_smoothness_factor_more_plains_name">Lautada gehiago</string>
+    <string name="routing_attr_driving_style_speed_name">Abiadura</string>
+    <string name="routing_attr_driving_style_balance_name">Orekatua</string>
+    <string name="routing_attr_driving_style_safety_name">Segurtasuna</string>
+    <string name="relief_smoothness_factor_descr">Lehentasuna lautada ala mendixkei</string>
+    <string name="routing_attr_relief_smoothness_factor_name">Erliebearen lausotze faktorea</string>
     </resources>
