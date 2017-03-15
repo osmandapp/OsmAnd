@@ -1858,7 +1858,7 @@ Punktar</string>
     <string name="rendering_attr_hideWaterPolygons_name">Fela vatn</string>
     <string name="rendering_attr_alpineHiking_name"/>
     <string name="rendering_attr_hikingRoutesOSMC_name">Yfirlag með göngutáknum</string>
-    <string name="rendering_attr_OSMMapperAssistant_name"/>
+    <string name="rendering_attr_OSMMapperAssistant_name">OSM-kortagerðaraðstoð</string>
     <string name="first_usage_greeting">Fáðu leiðbeiningar og uppgötvaðu nýja staði, án nettengingar</string>
     <string name="rendering_attr_roadColors_description">Veldu litastef fyrir vegi:</string>
     <string name="rendering_attr_roadColors_name">Litastef fyrir vegi</string>
@@ -1952,4 +1952,91 @@ Punktar</string>
     <string name="parking_options">Valkostir bílastæða</string>
     <string name="full_version_thanks">Takk fyrir að kaupa fulla útgáfu OsmAnd!</string>
     <string name="routing_attr_relief_smoothness_factor_hills_name">Hæðir</string>
+    <string name="routing_attr_relief_smoothness_factor_plains_name">Sléttur</string>
+    <string name="routing_attr_relief_smoothness_factor_more_plains_name">Meiri sléttur</string>
+    <string name="routing_attr_driving_style_speed_name">Hraði</string>
+    <string name="routing_attr_driving_style_balance_name">Jafnvægi</string>
+    <string name="routing_attr_driving_style_safety_name">Öryggi</string>
+    <string name="relief_smoothness_factor_descr">Forgangur á sléttur eða hæðir</string>
+    <string name="shared_string_slope">Brekka</string>
+    <string name="add_new_folder">Bæta við nýrri möppu</string>
+    <string name="points_delete_multiple_succesful">Punkti/punktum var eytt.</string>
+    <string name="points_delete_multiple">Þú ert að fara að eyða %1$d punktum. Ertu viss?</string>
+    <string name="track_points_category_name">Mikilvægir punktar á þessari leið</string>
+    <string name="gpx_track">Ferill</string>
+    <string name="max_speed">Mesti hraði</string>
+    <string name="average_speed">Meðalhraði</string>
+    <string name="shared_string_time_moving">Tími á ferð</string>
+    <string name="shared_string_time_span">Tímarammi</string>
+    <string name="shared_string_max">Hámark</string>
+    <string name="shared_string_start_time">Upphafstími</string>
+    <string name="shared_string_end_time">Lokatími</string>
+    <string name="shared_string_color">Litur</string>
+    <string name="select_gpx_folder">Veldu möppu undir ferla</string>
+    <string name="file_can_not_be_moved">Ekki er hægt að færa skrá.</string>
+    <string name="shared_string_move">Færa</string>
+    <string name="shared_string_tracks">Ferlar</string>
+    <string name="routing_attr_driving_style_name">Akstursstíll</string>
+    <string name="route_altitude">Hæð leiðar</string>
+    <string name="altitude_descent">Lækkun</string>
+    <string name="altitude_ascent">Hækkun</string>
+    <string name="altitude_range">Hæðarsvið</string>
+    <string name="average_altitude">Meðalhæð</string>
+    <string name="shared_string_time">Tími</string>
+    <string name="total_distance">Heildarvegalengd</string>
+    <string name="routing_attr_height_obstacles_name">Nota hæðargögn</string>
+    <string name="move_marker_bottom_sheet_title">Færa kortið til að breyta staðsetningu merkis</string>
+    <string name="osmo_no_connection_msg">Get ekki tengst við OsMo-þjóninn
+- athugaðu nettenginguna þína
+- skoðaðu stillingarnar þínar
+- kíktu á Twitter-reikninginn okkar: https://twitter.com/OsMomobi</string>
+    <string name="osm_user_stat">Breytingar %1$s, vægi %2$s, heildarfjöldi breytinga %3$s</string>
+    <string name="osm_editors_ranking">Vægisröðun OSM-ritsjóra</string>
+    <string name="download_files_error_not_enough_space">Ekki nægilegt geymslupláss!
+ Nauðsynlegt geymslupláss er {3} MB tímabundið, {1} MB fast.
+ Tiltækt pláss er einungis {2} MB.</string>
+    <string name="download_files_question_space_with_temp">Sækja {0} skrá(r)?
+ Nauðsynlegt geymslupláss er {3} MB tímabundið, {1} MB fast.
+ (Tiltækt pláss er einungis {2} MB.)</string>
+    <string name="download_files_question_space">Sækja {0} skrá(r)?
+ Notað geymslupláss er {1} MB.
+ (Tiltækt pláss er {2} MB.)</string>
+    <string name="add_time_span">Bæta við tímaramma</string>
+    <string name="select_voice_provider_descr">"Veldu eða sæktu  raddleiðsögn fyrir tungumálið þitt"</string>
+    <string name="impassable_road_desc">Veldu þá vegi sem þú vilt forðast á meðan leiðsögn stendur</string>
+    <string name="no_address_found">Ekkert heimilisfang er ákvarðað</string>
+    <string name="show_on_start_description">\'Slökkva\' ræsir kortaskjá beint</string>
+    <string name="osn_add_dialog_error">Frávik kom upp: minnispunktur var ekki útbúinn</string>
+    <string name="osn_close_dialog_error">Frávik kom upp: minnispunkti var ekki lokað</string>
+    <string name="osb_comment_dialog_error">Frávik kom upp: athugasemd var ekki bætt við</string>
+    <string name="map_downloaded_descr">Kort af %1$s hefur verið sótt, þú getur núna byrjað að nota það.</string>
+    <string name="animate_routing_gpx">Herma með því að nota GPX-feril</string>
+    <string name="zoom_by_trackball_descr">Breyta aðdrætti á kort með láréttum hreyfingum bendilkúlu</string>
+    <string name="zoom_by_trackball">Nota bendilkúlu til að stýra aðdrætti</string>
+    <string name="use_fluorescent_overlays_descr">Nota flúrliti til að birta ferla og leiðir</string>
+    <string name="gpx_option_from_start_point">Fara eftir öllum ferlinum</string>
+    <string name="routing_attr_avoid_shuttle_train_name">Forðast tengilest</string>
+    <string name="routing_attr_avoid_shuttle_train_description">Forðast tengilest</string>
+    <string name="restart_is_required">Til að breytingarnar verði að fullu virkar, þarf að endurræsa forritið handvirkt.</string>
+    <string name="lang_ber">Berberska</string>
+    <string name="gps_network_not_enabled">Staðsetningarþjónustan er ekki virk. Viltu kveikja á henni?</string>
+    <string name="application_dir_change_warning3">Viltu að OsmAnd afriti einnig gagnaskrárnar sínar á nýja áfangastaðinn?</string>
+    <string name="osmo_grop_name_length_alert">Heiti hóps verður að vera a.m.k 3 stafa langt!</string>
+    <string name="action_create">Aðgerðin útbúa</string>
+    <string name="action_modify">Aðgerðin breyta</string>
+    <string name="action_delete">Aðgerðin eyða</string>
+    <string name="simulate_your_location">Herma staðsetningu þína</string>
+    <string name="tips_and_tricks_descr">Algengar spurningar, nýlegar breytingar og fleira</string>
+    <string name="osmand_distance_planning_plugin_name">Vegalengdareiknivél og skipulagstól</string>
+    <string name="world_ski_missing">Til að birta skíðakort, verður að ná í sérstakt kort til notkunar án nettengingar</string>
+    <string name="nautical_maps_missing">Til að birta sjókort, verður að ná í sérstakt kort til notkunar án nettengingar</string>
+    <string name="remove_the_tag">FJARLÆGJA MERKIÐ</string>
+    <string name="version_settings_descr">Sækja náttfara (nightly builds)</string>
+    <string name="version_settings">Útgáfusamsetningar</string>
+    <string name="navigate_point_olc">Opna staðsetningarkóða</string>
+    <string name="build_installed">Tókst að setja útgáfusamsetningu {0} inn ({1}).</string>
+    <string name="downloading_build">Sæki útgáfusamsetningu…</string>
+    <string name="loading_builds_failed">Mistókst að ná í lista yfir útgáfusamsetningar OsmAnd</string>
+    <string name="loading_builds">Hleð inn OsmAnd útgáfusamsetningum…</string>
+    <string name="select_build_to_install">Veldu OsmAnd útgáfusamsetningu til að setja upp</string>
     </resources>
