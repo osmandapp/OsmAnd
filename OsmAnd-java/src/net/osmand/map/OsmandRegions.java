@@ -370,6 +370,8 @@ public class OsmandRegions {
 		sr.log = false;
 		if (reader != null) {
 			reader.searchMapIndex(sr);
+		} else {
+			throw new IOException("Reader == null");
 		}
 		return result;
 	}
@@ -689,16 +691,16 @@ public class OsmandRegions {
 		}
 	}
 
-	public BinaryMapDataObject findBinaryMapDataObject(LatLon latLon) {
+	public BinaryMapDataObject findBinaryMapDataObject(LatLon latLon) throws IOException {
 		int point31x = MapUtils.get31TileNumberX(latLon.getLongitude());
 		int point31y = MapUtils.get31TileNumberY(latLon.getLatitude());
 
 		BinaryMapDataObject res = null;
-		List<BinaryMapDataObject> mapDataObjects = null;
+		List<BinaryMapDataObject> mapDataObjects;
 		try {
 			mapDataObjects = queryBbox(point31x, point31x, point31y, point31y);
 		} catch (IOException e) {
-			e.printStackTrace();
+			throw new IOException("Error while calling queryBbox");
 		}
 
 		if (mapDataObjects != null) {

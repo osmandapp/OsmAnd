@@ -20,15 +20,14 @@ import android.support.v7.app.NotificationCompat;
 import android.support.v7.app.NotificationCompat.Builder;
 import android.view.View;
 import android.widget.Toast;
+
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.map.WorldRegion;
 import net.osmand.map.WorldRegion.RegionParams;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings.DrivingRegion;
-import net.osmand.plus.OsmandSettings.MetricsConstants;
-import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.base.BasicProgressAsyncTask;
@@ -154,27 +153,15 @@ public class DownloadIndexesThread {
 		}
 		updateNotification();
 	}
-	
+
 	public void initSettingsFirstMap(WorldRegion reg) {
 		if(app.getSettings().FIRST_MAP_IS_DOWNLOADED.get() || reg == null) {
 			return;
 		}
 		app.getSettings().FIRST_MAP_IS_DOWNLOADED.set(true);
-		DrivingRegion drg = null;
 		RegionParams params = reg.getParams();
-		boolean americanSigns = "american".equals(params.getRegionRoadSigns());
-		boolean leftHand = "yes".equals(params.getRegionLeftHandDriving());
-		MetricsConstants mc = "miles".equals(params.getRegionMetric()) ?
-				MetricsConstants.MILES_AND_FEET : MetricsConstants.KILOMETERS_AND_METERS;
-		for (DrivingRegion r : DrivingRegion.values()) {
-			if (r.americanSigns == americanSigns && r.leftHandDriving == leftHand &&
-					r.defMetrics == mc) {
-				drg = r;
-				break;
-			}
-		}
-		if (drg != null) {
-			app.getSettings().DRIVING_REGION.set(drg);
+		if (!app.getSettings().DRIVING_REGION_AUTOMATIC.get()) {
+			app.setupDrivingRegion(reg);
 		}
 		String lang = params.getRegionLang();
 		if (lang != null) {

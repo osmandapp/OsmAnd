@@ -6,8 +6,11 @@ import android.view.WindowManager;
 import net.osmand.Location;
 import net.osmand.StateChangedListener;
 import net.osmand.ValueHolder;
+import net.osmand.binary.BinaryMapDataObject;
+import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.map.IMapLocationListener;
+import net.osmand.map.WorldRegion;
 import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarkerChangedListener;
 import net.osmand.plus.OsmAndConstants;
@@ -17,6 +20,7 @@ import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.AutoZoomMap;
+import net.osmand.plus.OsmandSettings.DrivingRegion;
 import net.osmand.plus.R;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
@@ -25,6 +29,8 @@ import net.osmand.plus.routing.RoutingHelper.IRouteInformationListener;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.util.MapUtils;
+
+import java.io.IOException;
 
 public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLocationListener,
 		OsmAndCompassListener, IRouteInformationListener, MapMarkerChangedListener {
@@ -46,6 +52,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	private boolean showRouteFinishDialog = false;
 	private Location myLocation;
 	private Float heading;
+	private boolean drivingRegionUpdated = false;
 
 	public MapViewTrackingUtilities(OsmandApplication app){
 		this.app = app;
@@ -56,6 +63,10 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 		addTargetPointListener(app);
 		addMapMarkersListener(app);
 		app.getRoutingHelper().addListener(this);
+	}
+
+	public void resetDrivingRegionUpdate() {
+		drivingRegionUpdated = false;
 	}
 
 	private void addTargetPointListener(OsmandApplication app) {
@@ -141,6 +152,23 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 		showViewAngle = false;
 		if (location != null) {
 			locationProvider = location.getProvider();
+			if (settings.DRIVING_REGION_AUTOMATIC.get() && !drivingRegionUpdated) {
+				try {
+					BinaryMapDataObject o = app.getRegions().findBinaryMapDataObject(
+							new LatLon(location.getLatitude(), location.getLongitude()));
+					if (o != null) {
+						String fullName = app.getRegions().getFullName(o);
+						WorldRegion worldRegion = app.getRegions().getRegionData(fullName);
+						if (worldRegion != null) {
+							app.setupDrivingRegion(worldRegion);
+						}
+					}
+					drivingRegionUpdated = true;
+
+				} catch (IOException e) {
+					// ignore
+				}
+			}
 		}
 		if (mapView != null) {
 			RotatedTileBox tb = mapView.getCurrentRotatedTileBox();

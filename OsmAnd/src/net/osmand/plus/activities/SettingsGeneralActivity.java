@@ -20,10 +20,17 @@ import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat.OnRequestPermissionsResultCallback;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.AppCompatCheckedTextView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import net.osmand.IProgress;
@@ -50,6 +57,7 @@ import net.osmand.render.RenderingRulesStorage;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -60,7 +68,7 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 	public static final String MORE_VALUE = "MORE_VALUE";
 	private Preference applicationDir;
 	private ListPreference applicationModePreference;
-	private ListPreference drivingRegionPreference;
+	private Preference drivingRegionPreference;
 	private ChooseAppDirFragment chooseAppDirFragment;
 	private boolean permissionRequested;
 	private boolean permissionGranted;
@@ -93,15 +101,15 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 				new String[]{getString(R.string.map_orientation_portrait), getString(R.string.map_orientation_landscape), getString(R.string.map_orientation_default)},
 				new Integer[]{ActivityInfo.SCREEN_ORIENTATION_PORTRAIT, ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE, ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED});
 
+		drivingRegionPreference = screen.findPreference(settings.DRIVING_REGION.getId());
+
 		addLocalPrefs((PreferenceGroup) screen.findPreference("localization"));
 		addVoicePrefs((PreferenceGroup) screen.findPreference("voice"));
 		addProxyPrefs((PreferenceGroup) screen.findPreference("proxy"));
 		addMiscPreferences((PreferenceGroup) screen.findPreference("misc"));
 
-
 		applicationModePreference = (ListPreference) screen.findPreference(settings.APPLICATION_MODE.getId());
 		applicationModePreference.setOnPreferenceChangeListener(this);
-		drivingRegionPreference = (ListPreference) screen.findPreference(settings.DRIVING_REGION.getId());
 	}
 
 
@@ -134,15 +142,79 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 
 
 	private void addLocalPrefs(PreferenceGroup screen) {
+		drivingRegionPreference.setTitle(R.string.driving_region);
+		drivingRegionPreference.setSummary(R.string.driving_region_descr);
+		drivingRegionPreference.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+			@Override
+			public boolean onPreferenceClick(Preference preference) {
+				final AlertDialog.Builder b = new AlertDialog.Builder(SettingsGeneralActivity.this);
+
+				b.setTitle(getString(R.string.driving_region));
+
+				final List<DrivingRegion> drs = new ArrayList<>();
+				drs.add(null);
+				drs.addAll(Arrays.asList(DrivingRegion.values()));
+				int sel = -1;
+				DrivingRegion selectedDrivingRegion = settings.DRIVING_REGION.get();
+				if (settings.DRIVING_REGION_AUTOMATIC.get()) {
+					sel = 0;
+				}
+				for (int i = 1; i < drs.size(); i++) {
+					if (sel == -1 && drs.get(i) == selectedDrivingRegion) {
+						sel = i;
+						break;
+					}
+				}
+
+				final int selected = sel;
+				final ArrayAdapter<DrivingRegion> singleChoiceAdapter =
+						new ArrayAdapter<DrivingRegion>(SettingsGeneralActivity.this, R.layout.single_choice_description_item, R.id.text1, drs) {
+					@NonNull
+					@Override
+					public View getView(int position, View convertView, @NonNull ViewGroup parent) {
+						View v = convertView;
+						if (v == null) {
+							LayoutInflater inflater = SettingsGeneralActivity.this.getLayoutInflater();
+							v = inflater.inflate(R.layout.single_choice_description_item, parent, false);
+						}
+						DrivingRegion item = getItem(position);
+						AppCompatCheckedTextView title = (AppCompatCheckedTextView) v.findViewById(R.id.text1);
+						TextView desc = (TextView) v.findViewById(R.id.description);
+						if (item != null) {
+							title.setText(getString(item.name));
+							desc.setVisibility(View.VISIBLE);
+							desc.setText(item.getDescription(v.getContext()));
+						} else {
+							title.setText(getString(R.string.driving_region_automatic));
+							desc.setVisibility(View.GONE);
+						}
+						title.setChecked(position == selected);
+						return v;
+					}
+				};
+
+				b.setAdapter(singleChoiceAdapter, new OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						if (drs.get(which) == null) {
+							settings.DRIVING_REGION_AUTOMATIC.set(true);
+							MapActivity.getSingleMapViewTrackingUtilities().resetDrivingRegionUpdate();
+						} else {
+							settings.DRIVING_REGION_AUTOMATIC.set(false);
+							settings.DRIVING_REGION.set(drs.get(which));
+						}
+						updateAllSettings();
+					}
+				});
+
+				b.setNegativeButton(R.string.shared_string_cancel, null);
+				b.show();
+				return true;
+			}
+		});
+
 		String[] entries;
 		String[] entrieValues;
-
-		DrivingRegion[] drs = DrivingRegion.values();
-		entries = new String[drs.length];
-		for (int i = 0; i < entries.length; i++) {
-			entries[i] = getString(drs[i].name); // + " (" + drs[i].defMetrics.toHumanString(this) +")" ;
-		}
-		registerListPreference(settings.DRIVING_REGION, screen, entries, drs);
 
 		MetricsConstants[] mvls = MetricsConstants.values();
 		entries = new String[mvls.length];
@@ -458,7 +530,7 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 		applicationModePreference.setTitle(getString(R.string.settings_preset) + "  ["
 				+ settings.APPLICATION_MODE.get().toHumanString(getMyApplication()) + "]");
 		drivingRegionPreference.setTitle(getString(R.string.driving_region) + "  ["
-				+ getString(settings.DRIVING_REGION.get().name) + "]");
+				+ getString(settings.DRIVING_REGION_AUTOMATIC.get() ? R.string.driving_region_automatic : settings.DRIVING_REGION.get().name) + "]");
 	}
 
 	@Override

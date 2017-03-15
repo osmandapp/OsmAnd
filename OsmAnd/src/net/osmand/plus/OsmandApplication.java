@@ -29,6 +29,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibilityPlugin;
 import net.osmand.data.LatLon;
 import net.osmand.map.OsmandRegions;
+import net.osmand.map.WorldRegion;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.access.AccessibilityMode;
@@ -789,6 +790,27 @@ public class OsmandApplication extends MultiDexApplication {
 			System.err.println(e.getMessage());
 		}
 		return l;
+	}
+
+	public void setupDrivingRegion(WorldRegion reg) {
+		OsmandSettings.DrivingRegion drg = null;
+		WorldRegion.RegionParams params = reg.getParams();
+		boolean americanSigns = "american".equals(params.getRegionRoadSigns());
+		boolean leftHand = "yes".equals(params.getRegionLeftHandDriving());
+		OsmandSettings.MetricsConstants mc1 = "miles".equals(params.getRegionMetric()) ?
+				OsmandSettings.MetricsConstants.MILES_AND_FEET : OsmandSettings.MetricsConstants.KILOMETERS_AND_METERS;
+		OsmandSettings.MetricsConstants mc2 = "miles".equals(params.getRegionMetric()) ?
+				OsmandSettings.MetricsConstants.MILES_AND_METERS : OsmandSettings.MetricsConstants.KILOMETERS_AND_METERS;
+		for (OsmandSettings.DrivingRegion r : OsmandSettings.DrivingRegion.values()) {
+			if (r.americanSigns == americanSigns && r.leftHandDriving == leftHand &&
+					(r.defMetrics == mc1 || r.defMetrics == mc2)) {
+				drg = r;
+				break;
+			}
+		}
+		if (drg != null) {
+			osmandSettings.DRIVING_REGION.set(drg);
+		}
 	}
 	
 	public void logEvent(Activity ctx, String event) {
