@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources><string name="shared_string_topbar">Supra breto</string>
     <string name="recalculate_route">Rekalkuli kurson</string>
-    <string name="donations">Donacioj</string>
+    <string name="donations">Donacoj</string>
     <string name="number_of_recipients">Nombro da ricevontoj</string>
     <string name="osm_user_stat">Redaktoj: %1$s, rango: %2$s, ĉiuj redaktoj: %3$s</string>
     <string name="osm_editors_ranking">Ranglisto de OSM-redaktantoj</string>
@@ -77,8 +77,8 @@
     <string name="shared_string_reverse_order">Inversa ordigo</string>
     <string name="switch_start_finish">Anstataŭigi komencpunkton per finpunkto</string>
     <string name="rendering_attr_hideIcons_name">Piktogramoj de interesejoj</string>
-    <string name="item_removed">Ero forigita</string>
-    <string name="n_items_removed">eroj forigitaj</string>
+    <string name="item_removed">Elemento forigita</string>
+    <string name="n_items_removed">elementoj forigitaj</string>
     <string name="shared_string_undo_all">MALFARI ĈIUJN</string>
     <string name="starting_point">Komencpunkto</string>
     <string name="shared_string_not_selected">Neelektita</string>
@@ -1932,7 +1932,7 @@ Kaj la loko kaj tempo estas montrataj ĉe la OsmAnd stirpanelo, kaj ĉe la fenes
     <string name="uploading_data">Alŝutado de datumoj…</string>
     <string name="uploading">Alŝutado…</string>
     <string name="search_osm_nominatim">Serĉi enrete per OSM Nominatim</string>
-    <string name="hint_search_online">Serĉi enrete: Domnumero, strato, urbo</string>
+    <string name="hint_search_online">Serĉi enrete: domnumero, strato, urbo</string>
     <string name="max_level_download_tile">Maks. enreta pligrandigo</string>
     <string name="max_level_download_tile_descr">Elektu maksimuman skal-nivelo por elŝuti enretajn kahelajn mapojn</string>
     <string name="route_general_information">Tuta distanco %1$s, vojaĝ-tempo %2$d h %3$d min.</string>
@@ -2202,7 +2202,7 @@ Kaj la loko kaj tempo estas montrataj ĉe la OsmAnd stirpanelo, kaj ĉe la fenes
  kaj pli...
  "</string>
     <string name="dist_away_from_my_location">Serĉi %1$s for</string>
-    <string name="confirmation_to_delete_history_items">Ĉu vi volas forigi elektitajn erojn el historio?</string>
+    <string name="confirmation_to_delete_history_items">Ĉu vi volas forigi elektitajn elementojn el historio?</string>
     <string name="back_to_search">Reveni al serĉo</string>
     <string name="coords_search">Koordinat-serĉo</string>
     <string name="advanced_coords_search">Detala koordinat-serĉo</string>
@@ -2370,7 +2370,7 @@ Proksimuma kovrito de mapo kaj kvalito:
  - Antarkto: *
 
 Listo de subtenataj landoj (preskaŭ la tuta mondo!):
-Afganujo, Albanujo, Alĝerio, Andoro, Angolo, Angvilo, Antigvo kaj Barbudo, Argentino, Armenujo, Arubo, Aŭstralio, Aŭstrujo, Azerbajĝano, Bahamoj, Bangladeŝo, Barato, Barbado, Barejno, Belgujo, Belizo, Belorusujo, Benino, Birmo, Bocvano, Bolivio, Bonero, Bosnujo kaj Hercegovino, Brazilo, Britaj Virgulininsuloj, Britujo, Brunejo, Bulgarujo, Burkino, Burundo, Butano, Centr-Afriko, Ĉado, Ĉeĥujo, Ĉilio, Ĉinujo, Danujo, Domingo, Dominiko, Ebur-Bordo, Egiptujo, Ekvadoro, Eritreo, Estonujo, Etiopujo, Fiĝioj, Filipinoj, Franca Gviano, Franca Polinezio, Francujo, Gabono, Gambio, Ganao, Germanujo, Gernezejo, Grekujo, Grenado, Gronlando, Gujano, Gvadelupo, Gvamo, Gvatemalo, Gvineo, Gvineo Ekvatora, Gvineo-Bisaŭo, Ĝibraltaro, Ĝibutio, Haitio, Hispanujo, Honduro, Honkongo, Hungarujo, Indonezio, Irako, Irano, Irlando, Islando, Israelo, Italujo, Jamajko, Japanujo, Jemeno, Jordanio, Ĵerzejo, Kaboverdo, Kamboĝo, Kameruno, Kanado, Kartvelujo, Kataro, Kazaĥujo, Kenjo, Kipro, Kirgizujo, Kiribato, Kolombio, Komoroj, Kongo, Kostariko, Kroatujo, Kubo, Kuracao , Kuvajto, Laoso, Latvujo, Lesoto, Libano, Liberio, Libio, Liĥtenŝtejno, Litovujo, Luksemburgo, Madagaskaro, Majoto, Makao, Makedonujo, Malajzio, Malavio, Maldivoj, Malio, Malto, Manksinsulo, Maroko, Martiniko, Maŭricio, Maŭritanujo, Meksiko, Mikronezio, Moldavujo, Monako, Moncerato, Mongolujo, Montenegro, Mozambiko, Namibio, Nauro, Nederlandaj Antiloj, Nederlando, Nepalo, Niĝerio, Niĝero, Nikaragvo, Nord-Koreo, Norvegujo, Nov-Kaledonio, Nov-Zelando, Okcidenta Saharo, Omano, Orienta Timoro, Pakistano, Palaŭo, Palestino, Panamo, Papuo-Nov-Gvineo, Paragvajo, Peruo, Polujo, Portugalujo, Puertoriko, Ruando, Rumanujo, Rusujo, Saint-Barthélemy, Saint-Martin, Salvadoro, Samoo, Sankta Heleno, Sankta Kristoforo kaj Neviso, Sankta Lucio, Sankta Vincento kaj Grenadinoj, Sankta-Piero kaj Mikelono, Sanmarino, Saŭda Arabujo, Sejŝeloj, Senegalo, Serbujo, Sieraleono, Singapuro, Sirio, Slovakujo, Slovenujo, Somalujo, Somalujo, Srilanko, Sud-Afriko, Sud-Georgio kaj Sud-Sandviĉinsuloj, Sud-Koreo, Sud-Sudano, Sudano, Suomujo, Surinamo, Svazilando, Svedujo, Svisujo, Taĝikujo, Tajlando, Tajvano, Tanzanio, Togo, Tokelao, Tongo, Trinidado kaj Tobago, Tunizio, Turkmenujo, Turkujo, Tuvalo, Ugando, Ukrainujo, Unuiĝintaj Arabaj Emirlandoj, Urugvajo, Usono, Uzbekujo, Uzbekujo, Valiso kaj Futuno, Vanuatuo, Vatikano, Venezuelo, Vjetnamujo, Zambio, Zimbabvo
+Afganujo, Albanujo, Alĝerio, Andoro, Angolo, Angvilo, Antigvo kaj Barbudo, Argentino, Armenujo, Arubo, Aŭstralio, Aŭstrujo, Azerbajĝano, Bahamoj, Bangladeŝo, Barato, Barbado, Barejno, Belgujo, Belizo, Belorusujo, Benino, Birmo, Bocvano, Bolivio, Bonero, Bosnujo kaj Hercegovino, Brazilo, Britaj Virgulininsuloj, Britujo, Brunejo, Bulgarujo, Burkino, Burundo, Butano, Centr-Afriko, Ĉado, Ĉeĥujo, Ĉilio, Ĉinujo, Danujo, Domingo, Dominiko, Ebur-Bordo, Egiptujo, Ekvadoro, Eritreo, Estonujo, Etiopujo, Fiĝioj, Filipinoj, Franca Gviano, Franca Polinezio, Francujo, Gabono, Gambio, Ganao, Germanujo, Gernezejo, Grekujo, Grenado, Gronlando, Gujano, Gvadelupo, Gvamo, Gvatemalo, Gvineo, Gvineo Ekvatora, Gvineo-Bisaŭo, Ĝibraltaro, Ĝibutio, Haitio, Hispanujo, Honduro, Honkongo, Hungarujo, Indonezio, Irako, Irano, Irlando, Islando, Israelo, Italujo, Jamajko, Japanujo, Jemeno, Jordanio, Ĵerzejo, Kaboverdo, Kamboĝo, Kameruno, Kanado, Kartvelujo, Kataro, Kazaĥujo, Kenjo, Kipro, Kirgizujo, Kiribato, Kolombio, Komoroj, Kongo, Kostariko, Kroatujo, Kubo, Kuracao , Kuvajto, Laoso, Latvujo, Lesoto, Libano, Liberio, Libio, Liĥtenŝtejno, Litovujo, Luksemburgo, Madagaskaro, Majoto, Makao, Makedonujo, Malajzio, Malavio, Maldivoj, Malio, Malto, Manksinsulo, Maroko, Martiniko, Maŭricio, Maŭritanujo, Meksiko, Mikronezio, Moldavujo, Monako, Moncerato, Mongolujo, Montenegro, Mozambiko, Namibio, Nauro, Nederlandaj Antiloj, Nederlando, Nepalo, Niĝerio, Niĝero, Nikaragvo, Nord-Koreo, Norvegujo, Nov-Kaledonio, Nov-Zelando, Okcidenta Saharo, Omano, Orienta Timoro, Pakistano, Palaŭo, Palestino, Panamo, Papuo-Nov-Gvineo, Paragvajo, Peruo, Polujo, Portugalujo, Puertoriko, Ruando, Rumanujo, Rusujo, Saint-Barthélemy, Saint-Martin, Salvadoro, Samoo, Sankta Heleno, Sankta Kristoforo kaj Neviso, Sankta Lucio, Sankta Vincento kaj Grenadinoj, Sankta-Piero kaj Mikelono, Sanmarino, Sauda Arabujo, Sejŝeloj, Senegalo, Serbujo, Sieraleono, Singapuro, Sirio, Slovakujo, Slovenujo, Somalujo, Somalujo, Srilanko, Sud-Afriko, Sud-Georgio kaj Sud-Sandviĉinsuloj, Sud-Koreo, Sud-Sudano, Sudano, Suomujo, Surinamo, Svazilando, Svedujo, Svisujo, Taĝikujo, Tajlando, Tajvano, Tanzanio, Togo, Tokelao, Tongo, Trinidado kaj Tobago, Tunizio, Turkmenujo, Turkujo, Tuvalo, Ugando, Ukrainujo, Unuiĝintaj Arabaj Emirlandoj, Urugvajo, Usono, Uzbekujo, Uzbekujo, Valiso kaj Futuno, Vanuatuo, Vatikano, Venezuelo, Vjetnamujo, Zambio, Zimbabvo
  "</string>
     <string name="osmand_plus_extended_description_4000_chars_v2">"
 OsmAnd Mapoj kaj Navigado - trovu ejoj sur mapo kaj difini kursojn sen interreta konekto. Elŝutu mapon de lando antaŭ vi vojaĝos tie por trovi lokojn kaj vojojn de nekonata regiono.
@@ -2713,4 +2713,6 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="do_not_send_anonymous_app_usage_desc">Sendas ĝeneralajn informojn pri uzado de ekrano dum seanco. Ni ne kolektas iujn ajn datumojn pri pozicio aŭ datumojn entajpitajn de uzanto.</string>
     <string name="do_not_show_startup_messages">Ne montri mesaĝojn je starto</string>
     <string name="do_not_show_startup_messages_desc">Montras mesaĝojn pri rabatoj kaj specialaj lokaj okazoj</string>
+    <string name="driving_region_automatic">Aŭtomata</string>
+    <string name="right_side_navigation">Dekstr-flanka trafiko</string>
     </resources>
