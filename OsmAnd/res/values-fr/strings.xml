@@ -2857,4 +2857,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="do_not_send_anonymous_app_usage">N\'envoyer aucune information d\'usage sur les applications (même anonymes)</string>
     <string name="do_not_show_startup_messages">N\'afficher aucun message au démarrage</string>
     <string name="do_not_show_startup_messages_desc">Ces messages concernent les offres spéciales d\'achat d\'applications</string>
+    <string name="right_side_navigation">Conduite à droite</string>
+    <string name="driving_region_automatic">Automatique</string>
+    <string name="do_not_send_anonymous_app_usage_desc">Nous collectons des données sur l\'utilisation de l\'application mais en aucun cas des données de positionnement ou saisies par l\'utilisateur.</string>
     </resources>
