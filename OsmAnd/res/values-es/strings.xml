@@ -2514,7 +2514,7 @@ El espacio de almacenamiento usado es {3} MB temporalmente y {1} MB permanenteme
     <string name="quick_action_navigation_voice_off">La voz está apagada</string>
     <string name="quick_action_navigation_voice_on">La voz está encendida</string>
     <string name="quick_action_add_gpx">Añadir punto de ruta GPX</string>
-    <string name="quick_action_add_parking">Situar aparcamiento</string>
+    <string name="quick_action_add_parking">Añadir lugar de estacionamiento</string>
     <string name="quick_action_new_action">Añadir acción</string>
     <string name="quick_action_edit_action">Editar acción</string>
     <string name="quick_action_add_favorite">Añadir favorito</string>
