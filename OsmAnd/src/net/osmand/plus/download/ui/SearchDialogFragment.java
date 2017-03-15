@@ -394,7 +394,12 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 			@Override
 			protected IndexItem doInBackground(Void... params) {
 				Amenity amenity = cityItem.getAmenity();
-				BinaryMapDataObject o = osmandRegions.findBinaryMapDataObject(amenity.getLocation());
+				BinaryMapDataObject o = null;
+				try {
+					o = osmandRegions.findBinaryMapDataObject(amenity.getLocation());
+				} catch (IOException e) {
+					// ignore
+				}
 				if (o != null) {
 					String selectedFullName = osmandRegions.getFullName(o);
 					WorldRegion downloadRegion = osmandRegions.getRegionData(selectedFullName);

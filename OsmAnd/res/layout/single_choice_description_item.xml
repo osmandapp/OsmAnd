@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_height="wrap_content"
+              android:layout_width="match_parent"
+              android:minHeight="?android:attr/listPreferredItemHeightSmall"
+              android:paddingTop="6dp"
+              android:paddingBottom="6dp"
+              android:orientation="vertical">
+
+    <View
+        android:id="@+id/topDivider"
+        android:background="?attr/dashboard_divider"
+        android:layout_height="1dp"
+        android:layout_width="wrap_content"
+        android:visibility="gone"/>
+
+    <android.support.v7.widget.AppCompatCheckedTextView
+        android:id="@+id/text1"
+        android:checkMark="?android:attr/listChoiceIndicatorSingle"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:gravity="center_vertical"
+        android:paddingLeft="26dp"
+        android:paddingRight="@dimen/list_content_padding"
+        android:textColor="?android:attr/textColorPrimary"
+        android:textSize="@dimen/default_list_text_size"/>
+
+    <TextView
+        android:id="@+id/description"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:paddingLeft="26dp"
+        android:paddingRight="48dp"
+        android:paddingBottom="6dp"
+        android:textColor="?android:attr/textColorSecondary"
+        android:textSize="@dimen/default_desc_text_size"
+        android:visibility="gone"/>
+
+    <View
+        android:id="@+id/bottomDivider"
+        android:background="?attr/dashboard_divider"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/list_header_padding"
+        android:layout_width="wrap_content"
+        android:visibility="gone"/>
+
+</LinearLayout>
+

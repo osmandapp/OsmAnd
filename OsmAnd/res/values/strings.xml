@@ -9,6 +9,8 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="right_side_navigation">Right-hand driving</string>
+    <string name="driving_region_automatic">Automatic</string>
     <string name="do_not_send_anonymous_app_usage">Do not send anonymous app usage</string>
     <string name="do_not_send_anonymous_app_usage_desc">It sends general information about screen used during session. We do not collect any geolocation or user input related data.</string>
     <string name="do_not_show_startup_messages">Do not show messages at startup</string>
