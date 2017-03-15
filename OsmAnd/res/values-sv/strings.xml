@@ -2545,4 +2545,7 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="routing_attr_driving_style_speed_name">Hastighet</string>
     <string name="routing_attr_driving_style_balance_name">Balans</string>
     <string name="routing_attr_driving_style_safety_name">Säkerhet</string>
+    <string name="right_side_navigation">Högertrafik</string>
+    <string name="driving_region_automatic">Automatisk</string>
+    <string name="do_not_send_anonymous_app_usage">Skicka inte anonym appanvändning</string>
     </resources>
