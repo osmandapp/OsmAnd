@@ -2701,4 +2701,9 @@ i encara més…
     <string name="relief_smoothness_factor_descr">Prioritat per les planes o pels turons</string>
     <string name="routing_attr_relief_smoothness_factor_name">Factor de detall del relleu</string>
     <string name="full_version_thanks">Us agraïm la compra de la versió complerta d\'OsmAnd!</string>
+    <string name="do_not_send_anonymous_app_usage">No enviïs anònimament la utilització de l\'aplicació</string>
+    <string name="do_not_send_anonymous_app_usage_desc">S\'envia informació general de les pantalles utilitzades durant la sessió. No recollim cap geolocalització ni dades relatives a les entrades de l\'usuari.</string>
+    <string name="do_not_show_startup_messages">No mostris missatges en engegar</string>
+    <string name="do_not_show_startup_messages_desc">Mostra descomptes de l\'aplicació i missatges de fets locals destacats</string>
+    <string name="parking_options">Opcions d\'aparcament</string>
     </resources>
