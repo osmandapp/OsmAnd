@@ -2916,4 +2916,15 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="do_not_show_startup_messages_desc">Viser meddelelser om rabatter &amp; særlige lokale arrangementer</string>
     <string name="right_side_navigation">Højrekørsel</string>
     <string name="driving_region_automatic">Automatisk</string>
+    <string name="osmand_extended_description_part1">"
+ OsmAnd (OSM Automated Navigation Directions) er et kort- og navigationsprogram med adgang til fri, verdensomspændende, og høj kvalitet OpenStreetMap (OSM) data.
+
+ Nyd stemme og optisk navigation, visning af IP\'er (interessepunkter), opret og administrere GPX-spor, ved hjælp af højdekurvevisualisering og højdeinfo (via udvidelse), vælg mellem kørsel, cykling, fodgænger tilstande, OSM redigering og meget mere.
+ "</string>
+    <string name="osmand_extended_description_part7">"
+ Bidrag til OSM 
+• Rapporter data bugs 
+• Overfør GPX-spor til OSM direkte
+• Tilføj IP\'er og overfør dem direkte til OSM (eller senere, hvis offline)
+ "</string>
     </resources>
