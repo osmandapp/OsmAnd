@@ -1252,7 +1252,7 @@ public class GpxUiHelper {
 				} else {
 					nextY = divSpeed / s.speed;
 				}
-				if (nextY < 0) {
+				if (nextY < 0 || Float.isInfinite(nextY)) {
 					nextY = 0;
 				}
 				values.add(new Entry(nextX, nextY));
