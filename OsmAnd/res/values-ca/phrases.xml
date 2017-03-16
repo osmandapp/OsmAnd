@@ -3013,4 +3013,25 @@
 	<string name="poi_historic_manor">Casal històric</string>
 	<string name="poi_backcountry_yes">Sí</string>
 	<string name="poi_backcountry_no">No</string>
+	<string name="poi_material_composite">Material: compòsit</string>
+	<string name="poi_material_limestone">Material: pedra calcària</string>
+	<string name="poi_fortification_type_hill_fort">Tipus de fortificació: castre</string>
+	<string name="poi_fortification_type_ring_ditch">Fortificació tipus: anell de rasa</string>
+
+	<string name="poi_craft_electronics">Reparació electrònica</string>
+	<string name="poi_fireworks">Focs artificials</string>
+
+	<string name="poi_health_specialty_pathology_yes">Anatomia patològica</string>
+	<string name="poi_health_specialty_social_paediatrics_yes">Sociologia pediàtrica</string>
+	<string name="poi_health_specialty_social_paediatrics_no">Especialitat mèdica: sense sociologia pediàtrica</string>
+	<string name="poi_health_specialty_obstetrics_caesarean_section_yes">Obstetrícia (cesàries)</string>
+	<string name="poi_health_specialty_obstetrics_caesarean_section_no">Especialitat mèdica: sense obstetrícia (cesàries)</string>
+	<string name="poi_health_specialty_addiction_medicine_yes">Medicina de l\'addicció</string>
+	<string name="poi_health_specialty_optometry_yes">Optometria</string>
+	<string name="poi_health_specialty_clinical_pathology_yes">Patologia clínica</string>
+	<string name="poi_health_specialty_speech_therapy_yes">Logopèdia</string>
+	<string name="poi_health_specialty_manual_therapy_yes">Teràpia manual</string>
+	<string name="poi_health_specialty_sports_medicine_yes">Medicina esportiva</string>
+	<string name="poi_health_specialty_podology_yes">Podologia</string>
+	<string name="poi_health_specialty_adult_psychiatry_yes">Psiquiatria per adults</string>
 	</resources>
