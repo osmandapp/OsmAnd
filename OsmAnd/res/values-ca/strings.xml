@@ -2706,4 +2706,6 @@ i encara més…
     <string name="do_not_show_startup_messages">No mostris missatges en engegar</string>
     <string name="do_not_show_startup_messages_desc">Mostra descomptes de l\'aplicació i missatges de fets locals destacats</string>
     <string name="parking_options">Opcions d\'aparcament</string>
+    <string name="right_side_navigation">Conducció per la dreta</string>
+    <string name="driving_region_automatic">Automàtic</string>
     </resources>
