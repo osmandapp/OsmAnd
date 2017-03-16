@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnDismissListener;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Matrix;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.net.Uri;
@@ -29,7 +30,10 @@ import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
+import com.github.mikephil.charting.listener.ChartTouchListener;
+import com.github.mikephil.charting.listener.OnChartGestureListener;
 
 import net.osmand.Location;
 import net.osmand.data.LatLon;
@@ -232,7 +236,7 @@ public class ShowRouteInfoDialogFragment extends DialogFragment {
 
 	private void buildHeader(View headerView) {
 		OsmandApplication app = getMyApplication();
-		LineChart mChart = (LineChart) headerView.findViewById(R.id.chart);
+		final LineChart mChart = (LineChart) headerView.findViewById(R.id.chart);
 		GpxUiHelper.setupGPXChart(app, mChart, 4);
 		mChart.setOnTouchListener(new View.OnTouchListener() {
 			@Override
@@ -257,6 +261,62 @@ public class ShowRouteInfoDialogFragment extends DialogFragment {
 			}
 			LineData data = new LineData(dataSets);
 			mChart.setData(data);
+
+			mChart.setOnChartGestureListener(new OnChartGestureListener() {
+
+				float highlightDrawX = -1;
+
+				@Override
+				public void onChartGestureStart(MotionEvent me, ChartTouchListener.ChartGesture lastPerformedGesture) {
+					if (mChart.getHighlighted() != null && mChart.getHighlighted().length > 0) {
+						highlightDrawX = mChart.getHighlighted()[0].getDrawX();
+					} else {
+						highlightDrawX = -1;
+					}
+				}
+
+				@Override
+				public void onChartGestureEnd(MotionEvent me, ChartTouchListener.ChartGesture lastPerformedGesture) {
+					gpxItem.chartMatrix = new Matrix(mChart.getViewPortHandler().getMatrixTouch());
+					Highlight[] highlights = mChart.getHighlighted();
+					if (highlights != null && highlights.length > 0) {
+						gpxItem.chartHighlightPos = highlights[0].getX();
+					} else {
+						gpxItem.chartHighlightPos = -1;
+					}
+				}
+
+				@Override
+				public void onChartLongPressed(MotionEvent me) {
+				}
+
+				@Override
+				public void onChartDoubleTapped(MotionEvent me) {
+				}
+
+				@Override
+				public void onChartSingleTapped(MotionEvent me) {
+				}
+
+				@Override
+				public void onChartFling(MotionEvent me1, MotionEvent me2, float velocityX, float velocityY) {
+				}
+
+				@Override
+				public void onChartScale(MotionEvent me, float scaleX, float scaleY) {
+				}
+
+				@Override
+				public void onChartTranslate(MotionEvent me, float dX, float dY) {
+					if (highlightDrawX != -1) {
+						Highlight h = mChart.getHighlightByTouchPoint(highlightDrawX, 0f);
+						if (h != null) {
+							mChart.highlightValue(h);
+						}
+					}
+				}
+			});
+
 			mChart.setVisibility(View.VISIBLE);
 		} else {
 			elevationDataSet = null;

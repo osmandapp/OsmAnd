@@ -284,9 +284,7 @@ public class TrackDetailsMenu {
 		}
 	}
 
-
 	private void refreshChart(LineChart chart, boolean forceFit) {
-		gpxItem.chartMatrix = new Matrix(chart.getViewPortHandler().getMatrixTouch());
 		Highlight[] highlights = chart.getHighlighted();
 		LatLon location = null;
 		if (highlights != null && highlights.length > 0) {
@@ -321,10 +319,16 @@ public class TrackDetailsMenu {
 		});
 		chart.setOnChartGestureListener(new OnChartGestureListener() {
 			boolean hasTranslated = false;
+			float highlightDrawX = -1;
 
 			@Override
 			public void onChartGestureStart(MotionEvent me, ChartGesture lastPerformedGesture) {
 				hasTranslated = false;
+				if (chart.getHighlighted() != null && chart.getHighlighted().length > 0) {
+					highlightDrawX = chart.getHighlighted()[0].getDrawX();
+				} else {
+					highlightDrawX = -1;
+				}
 			}
 
 			@Override
@@ -336,6 +340,7 @@ public class TrackDetailsMenu {
 						lastPerformedGesture == ChartGesture.DOUBLE_TAP ||
 						lastPerformedGesture == ChartGesture.ROTATE) {
 
+					gpxItem.chartMatrix = new Matrix(chart.getViewPortHandler().getMatrixTouch());
 					refreshChart(chart, true);
 				}
 			}
@@ -363,6 +368,13 @@ public class TrackDetailsMenu {
 			@Override
 			public void onChartTranslate(MotionEvent me, float dX, float dY) {
 				hasTranslated = true;
+				if (highlightDrawX != -1) {
+					Highlight h = chart.getHighlightByTouchPoint(highlightDrawX, 0f);
+					if (h != null) {
+						chart.highlightValue(h);
+						refreshChart(chart, false);
+					}
+				}
 			}
 		});
 
