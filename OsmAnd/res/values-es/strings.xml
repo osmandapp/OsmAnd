@@ -2657,4 +2657,11 @@ Por favor proporciona un código completo</string>
     <string name="parking_options">Opciones de aparcamiento</string>
     <string name="full_version_thanks">¡Gracias por comprar la versión completa de OsmAnd!</string>
     <string name="routing_attr_relief_smoothness_factor_name">Factor de suavizado de relieve</string>
+    <string name="right_side_navigation">Conducción por la derecha</string>
+    <string name="driving_region_automatic">Automático</string>
+    <string name="osmand_extended_description_part1">"
+ OsmAnd (OSM Automated Navigation Directions, Guía de Navegación Automatizada) es una aplicación de mapa y navegación con acceso a los datos abiertos, de todo el mundo y de alta calidad de OpenStreetMap (OSM).
+
+ Disfruta del navegador por voz y  visual, visualización de PDIs (puntos de interés), creación y gestión de  trazas GPX, visualización de curvas de nivel y uso de la información de altitud (mediante un extra), elegir entre modos conducción, ciclismo o peatonal, edición de OSM y mucho más.
+ "</string>
     </resources>
