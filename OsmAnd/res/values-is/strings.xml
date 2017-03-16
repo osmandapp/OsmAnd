@@ -1856,7 +1856,7 @@ Punktar</string>
     <string name="rendering_value_medium_w_name">Miðlungs</string>
     <string name="rendering_value_low_name">Lágur</string>
     <string name="rendering_attr_hideWaterPolygons_name">Fela vatn</string>
-    <string name="rendering_attr_alpineHiking_name"/>
+    <string name="rendering_attr_alpineHiking_name">Svissneska gönguleiðakvörðunin (SAC)</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Yfirlag með göngutáknum</string>
     <string name="rendering_attr_OSMMapperAssistant_name">OSM-kortagerðaraðstoð</string>
     <string name="first_usage_greeting">Fáðu leiðbeiningar og uppgötvaðu nýja staði, án nettengingar</string>
@@ -2101,4 +2101,16 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="install_selected_build">Viltu setja upp OsmAnd - {0} af {1} {2} MB ?</string>
     <string name="quick_action_map_overlay_switch">Yfirlagi kortsins var breytt yfir í \"%s\".</string>
     <string name="quick_action_map_underlay_switch">Undirlagi kortsins var breytt yfir í \"%s\".</string>
+    <string name="osmo_locations_sent">"Sendar %1$d staðsetningar (í biðminni %2$d) "</string>
+    <string name="keep_and_add_destination_point">Bæta við sem áfangastað í framhaldinu</string>
+    <string name="routing_preferences_descr">Stillingar leiðavals</string>
+    <string name="disable_complex_routing">Gera flókið leiðaval óvirkt</string>
+    <string name="local_osm_changes_backup_successful">Tókst að útbúa OSM-breytingaskrá %1$s</string>
+    <string name="av_use_external_recorder_descr">Nota upptökutæki kerfisins fyrir myndskeið</string>
+    <string name="av_use_external_recorder">Nota upptökutæki kerfisins</string>
+    <string name="av_use_external_camera_descr">Nota forrit kerfisins fyrir ljósmyndir</string>
+    <string name="rendering_attr_alpineHiking_description">Setja leiðir fram samkvæmt SAC, svissneska gönguleiðakvarðanum</string>
+    <string name="rendering_attr_hikingRoutesOSMC_description">Setja leiðir fram samkvæmt OSMC-ferlum</string>
+
+    <string name="search_villages_and_postcodes">Leita í fleiri sveitarfélögum/póstnúmerum</string>
     </resources>
