@@ -1518,15 +1518,51 @@
 	<string name="poi_diet_vegetarian_yes">ベジタリアン用食提供可(Vegetarian)</string>
 	<string name="poi_diet_vegetarian_no">無し(Vegetarian diet: no)</string>
 	<string name="poi_diet_vegan_filter_yes">ヴィーガン(Vegan)</string>
-	<string name="poi_diet_vegan_only">ヴィーガン専用(Vegan only)</string>
+	<string name="poi_diet_vegan_only">ヴィーガンのみ(Vegan only)</string>
 	<string name="poi_diet_vegan_yes">ヴィーガン用食提供可(Vegan)</string>
-	<string name="poi_diet_vegan_no">無し(Vegan diet: no)</string>
+	<string name="poi_diet_vegan_no">ヴィーガン無し(Vegan diet: no)</string>
 	<string name="poi_diet_gluten_free_filter_yes">グルテンフリー(Gluten free)</string>
 	<string name="poi_diet_gluten_free_only">グルテンフリーのみ(Gluten-free only)</string>
 	<string name="poi_diet_gluten_free_yes">グルテンフリー(Gluten-free)</string>
 	<string name="poi_diet_gluten_free_no">グルテンフリー不可(Gluten-free diet: no)</string>
 	<string name="poi_diet_kosher_filter_yes">カシェル(Kosher)</string>
 	<string name="poi_diet_kosher_only">カシェルのみ(Kosher only)</string>
-	<string name="poi_diet_kosher_yes">カシェル可(Kosher)</string>
-	<string name="poi_diet_kosher_no">カシェル不可(Kosher diet: no)</string>
+	<string name="poi_diet_kosher_yes">カシェル有り(Kosher)</string>
+	<string name="poi_diet_kosher_no">カシェル無し(Kosher diet: no)</string>
+	<string name="poi_diet_halal_filter_yes">ハラール(Halal)</string>
+	<string name="poi_diet_halal_only">ハラールのみ(Halal only)</string>
+	<string name="poi_diet_halal_yes">ハラール有り(Halal)</string>
+	<string name="poi_diet_halal_no">ハラール：無し(Halal diet: no)</string>
+	<string name="poi_diet_lactose_free_filter_yes">ラクトースフリー・乳糖無し(Lactose free)</string>
+	<string name="poi_diet_lactose_free_only">ラクトースフリーのみ(Lactose-free only)</string>
+	<string name="poi_diet_lactose_free_yes">ラクトースフリー有り(Lactose-free)</string>
+	<string name="poi_diet_lactose_free_no">ラクトースフリー:無し(Lactose-free diet: no)</string>
+	<string name="poi_diet_pescetarian_yes">ペクスタリアン(Pescetarian)</string>
+
+	<string name="poi_dish">料理(Dish)</string>
+	<string name="poi_wiki_lang_ku">クルド語 wiki(Kurdish wiki)</string>
+	<string name="poi_microbrewery">地ビール醸造所(Microbrewery)</string>
+	<string name="poi_microbrewery_yes">地ビール醸造所(Microbrewery)</string>
+	<string name="poi_microbrewery_no">地ビール醸造所無し</string>
+
+	<string name="poi_organic_yes">自然食品:有り(Organic food: yes)</string>
+	<string name="poi_organic_no">自然食品:無し(Organic food: no)</string>
+	<string name="poi_organic_only">自然食品のみ(Organic food only)</string>
+
+	<string name="poi_outdoor_seating">屋外席(Outdoor seating)</string>
+	<string name="poi_outdoor_seating_filter_yes">有り(Yes)</string>
+	<string name="poi_outdoor_seating_yes">屋外席:有り(Outdoor seating: yes)</string>
+	<string name="poi_outdoor_seating_no">屋外席無し(No outdoor seating)</string>
+	<string name="poi_outdoor_seating_terrace">屋外席:テラス(Outdoor seating: terrace)</string>
+	<string name="poi_outdoor_seating_sidewalk">屋外席:歩道側(Outdoor seating: sidewalk)</string>
+	<string name="poi_outdoor_seating_pedestrian_zone">屋外席:歩行者ゾーン(Outdoor seating: pedestrian zone)</string>
+	<string name="poi_outdoor_seating_garden">屋外席:庭(Outdoor seating: garden)</string>
+	<string name="poi_outdoor_seating_patio">屋外席:中庭(Outdoor seating: patio)</string>
+
+	<string name="poi_takeaway">テイクアウト・持ち帰り(Takeaway)</string>
+	<string name="poi_takeaway_filter_yes">有り(Yes)</string>
+	<string name="poi_takeaway_yes">テイクアウト・持ち帰り有り(Takeaway)</string>
+	<string name="poi_takeaway_no">持ち帰り無し(No takeaway)</string>
+	<string name="poi_takeaway_only">テイクアウト・持ち帰りのみ(Takeaway only)</string>
+
 	</resources>
