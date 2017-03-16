@@ -3042,27 +3042,27 @@ Repræsenterer område: %1$s x %2$s</string>
   • Del din placering, så dine venner kan finde dig
  "</string>
     <string name="osmand_plus_extended_description_part6">"
- Cykel og fodgængere funktioner
-  • Visning fod, vandreture, og cykelstier, fantastisk til udendørs aktiviteter
-  • Særlige routing og visningstilstande for cykel og fodgænger
-  • Valgfri offentlig transport stopper (bus, sporvogn, tog), herunder linje navne
-  • Valgfri tur optagelse til lokal GPX-fil eller online tjeneste
-  • Valgfri hastighed og højde display
-  • Visning af højdekurver og hill-shading (via ekstra plugin)
+ Cykel og fodgænger-funktioner
+  • Visning af gang, vandre og cykel-stier, fantastisk til udendørsaktiviteter
+  • Særlige navigations og visnings-tilstande for cyklister og fodgængere
+  • Valgfrie stoppesteder for offentlig transport (bus, sporvogn, tog), herunder også linjenavne
+  • Valgfri ruteoptagelse til lokal GPX-fil eller online tjeneste
+  • Valgfri hastigheds og højde-visning
+  • Visning af højdekurver og skyggekort (med ekstra plugin)
  "</string>
     <string name="osmand_plus_extended_description_part8">"
- Anslået kort dækning og kvalitet:
+ Anslået kortdækning og kvalitet:
   • Vesteuropa: ****
-  • Øst Europa: ***
+  • Østeuropa: ***
   • Rusland: ***
   • Nordamerika: ***
   • Sydamerika: **
   • Asien: **
   • Japan &amp; Korea: ***
-  • Mellem Østen: **
+  • Mellemøsten: **
   • Afrika: **
   • Antarktis: *
-  De fleste lande over hele kloden tilgængelige som downloads!
+  De fleste lande i verden er tilgængelige som downloads!
   Fra Afghanistan til Zimbabwe, fra Australien til USA. Argentina, Brasilien, Canada, Frankrig, Tyskland, Mexico, Storbritannien, Spanien, ...
  "</string>
     </resources>
