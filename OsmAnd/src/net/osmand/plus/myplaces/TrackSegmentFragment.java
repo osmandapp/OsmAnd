@@ -1000,8 +1000,16 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 					});
 					final View finalView = view;
 					chart.setOnChartGestureListener(new OnChartGestureListener() {
+
+						float highlightDrawX = -1;
+
 						@Override
 						public void onChartGestureStart(MotionEvent me, ChartGesture lastPerformedGesture) {
+							if (chart.getHighlighted() != null && chart.getHighlighted().length > 0) {
+								highlightDrawX = chart.getHighlighted()[0].getDrawX();
+							} else {
+								highlightDrawX = -1;
+							}
 						}
 
 						@Override
@@ -1043,6 +1051,18 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 
 						@Override
 						public void onChartTranslate(MotionEvent me, float dX, float dY) {
+							if (highlightDrawX != -1) {
+								Highlight h = chart.getHighlightByTouchPoint(highlightDrawX, 0f);
+								if (h != null) {
+									chart.highlightValue(h);
+									WptPt wpt = getPoint(chart, h.getX());
+									if (wpt != null) {
+										selectedPointLatLon = new LatLon(wpt.lat, wpt.lon);
+										Bitmap bmp = drawSelectedPoint();
+										imageView.setImageDrawable(new BitmapDrawable(app.getResources(), bmp));
+									}
+								}
+							}
 						}
 					});
 
