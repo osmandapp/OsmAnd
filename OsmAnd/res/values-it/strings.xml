@@ -2885,4 +2885,11 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="routing_attr_driving_style_safety_name">Sicuro</string>
     <string name="relief_smoothness_factor_descr">Priorità alle pianure o alle colline</string>
     <string name="routing_attr_relief_smoothness_factor_name">Fattore smussamento rilievi</string>
+    <string name="driving_region_automatic">Automatica</string>
+    <string name="do_not_send_anonymous_app_usage">Non inviare informazioni anonime sull\'utilizzo</string>
+    <string name="do_not_send_anonymous_app_usage_desc">Invia informazioni generali a riguardo allo schermo utilizzato durante la sessione. Non raccogliamo alcun geolocalizzazione o dato immesso dall\'utilizzatore.</string>
+    <string name="do_not_show_startup_messages">Non mostrare alcun messaggio all\'avvio</string>
+    <string name="do_not_show_startup_messages_desc">Mostra messaggi riguardo app in sconto ed eventi locali speciali</string>
+    <string name="parking_options">Opzioni parcheggio</string>
+    <string name="full_version_thanks">Grazie di avere acquistato la versione completa di OsmAnd!</string>
     </resources>
