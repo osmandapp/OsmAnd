@@ -2848,4 +2848,6 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="do_not_show_startup_messages_desc">Pojavijo se lahko sporočila o popustih programa in posebna krajevna sporočila o dogodkih</string>
     <string name="parking_options">Možnosti parkiranja</string>
     <string name="full_version_thanks">Zahvaljujemo se vam za nakup polne različice programa OsmAnd!</string>
+    <string name="right_side_navigation">Promet po desni strani</string>
+    <string name="driving_region_automatic">Samodejno</string>
     </resources>
