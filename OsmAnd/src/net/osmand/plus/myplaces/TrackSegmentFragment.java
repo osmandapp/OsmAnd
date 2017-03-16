@@ -1082,11 +1082,11 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 								((ImageView) view.findViewById(R.id.distance_icon))
 										.setImageDrawable(ic.getThemedIcon(R.drawable.ic_action_polygom_dark));
 								((ImageView) view.findViewById(R.id.duration_icon))
-										.setImageDrawable(ic.getThemedIcon(R.drawable.ic_action_time_start));
+										.setImageDrawable(ic.getThemedIcon(R.drawable.ic_action_time_span));
 								((ImageView) view.findViewById(R.id.start_time_icon))
 										.setImageDrawable(ic.getThemedIcon(R.drawable.ic_action_time_start));
 								((ImageView) view.findViewById(R.id.end_time_icon))
-										.setImageDrawable(ic.getThemedIcon(R.drawable.ic_action_time_start));
+										.setImageDrawable(ic.getThemedIcon(R.drawable.ic_action_time_end));
 
 								((TextView) view.findViewById(R.id.distance_text))
 										.setText(OsmAndFormatter.getFormattedDistance(analysis.totalDistance, app));
