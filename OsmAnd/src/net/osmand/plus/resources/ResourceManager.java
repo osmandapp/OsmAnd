@@ -506,6 +506,7 @@ public class ResourceManager {
 		// indexingImageTiles(progress);
 		warnings.addAll(indexingMaps(progress));
 		warnings.addAll(indexVoiceFiles(progress));
+		warnings.addAll(indexFontFiles(progress));
 		warnings.addAll(OsmandPlugin.onIndexingFiles(progress));
 		warnings.addAll(indexAdditionalMaps(progress));
 		return warnings;
@@ -532,6 +533,23 @@ public class ResourceManager {
 						if (conf.exists()) {
 							indexFileNames.put(f.getName(), dateFormat.format(conf.lastModified())); //$NON-NLS-1$
 						}
+					}
+				}
+			}
+		}
+		return warnings;
+	}
+
+	public List<String> indexFontFiles(IProgress progress){
+		File file = context.getAppPath(IndexConstants.FONT_INDEX_DIR);
+		file.mkdirs();
+		List<String> warnings = new ArrayList<String>();
+		if (file.exists() && file.canRead()) {
+			File[] lf = file.listFiles();
+			if (lf != null) {
+				for (File f : lf) {
+					if (!f.isDirectory()) {
+						indexFileNames.put(f.getName(), dateFormat.format(f.lastModified()));
 					}
 				}
 			}

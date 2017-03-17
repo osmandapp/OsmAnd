@@ -197,7 +197,8 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 					.setListener(listener)
 					.setPosition(2).createItem());
 		}
-		if (info.getType() != LocalIndexType.TTS_VOICE_DATA && info.getType() != LocalIndexType.VOICE_DATA) {
+		if (info.getType() != LocalIndexType.TTS_VOICE_DATA && info.getType() != LocalIndexType.VOICE_DATA
+				&& info.getType() != LocalIndexType.FONT_DATA) {
 			adapter.addItem(new ContextMenuItem.ItemBuilder()
 					.setTitleId(R.string.shared_string_rename, getContext())
 					.setListener(listener)
@@ -447,6 +448,8 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 					parent = getMyApplication().getAppPath(IndexConstants.VOICE_INDEX_DIR);
 				} else if (i.getOriginalType() == LocalIndexType.VOICE_DATA) {
 					parent = getMyApplication().getAppPath(IndexConstants.VOICE_INDEX_DIR);
+				} else if (i.getOriginalType() == LocalIndexType.FONT_DATA) {
+					parent = getMyApplication().getAppPath(IndexConstants.FONT_INDEX_DIR);
 				}
 				return new File(parent, i.getFileName());
 			}

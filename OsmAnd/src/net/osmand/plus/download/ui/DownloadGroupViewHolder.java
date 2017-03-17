@@ -30,6 +30,8 @@ public class DownloadGroupViewHolder {
 		if (group.getType() == DownloadResourceGroup.DownloadResourceGroupType.VOICE_REC
 				|| group.getType() == DownloadResourceGroup.DownloadResourceGroupType.VOICE_TTS) {
 			iconLeft = ctx.getMyApplication().getIconsCache().getThemedIcon(R.drawable.ic_action_volume_up);
+		} else if (group.getType() == DownloadResourceGroup.DownloadResourceGroupType.FONTS) {
+			iconLeft = ctx.getMyApplication().getIconsCache().getThemedIcon(R.drawable.ic_action_map_language);
 		} else {
 			IconsCache cache = ctx.getMyApplication().getIconsCache();
 			if (isParentWorld(group) || isParentWorld(group.getParentGroup())) {

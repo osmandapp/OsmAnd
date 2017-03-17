@@ -513,6 +513,8 @@ public class MapDataMenuController extends MenuController {
 			} else if (localIndexInfo.getOriginalType() == LocalIndexType.TTS_VOICE_DATA
 					|| localIndexInfo.getOriginalType() == LocalIndexType.VOICE_DATA) {
 				return DownloadActivityType.VOICE_FILE;
+			} else if (localIndexInfo.getOriginalType() == LocalIndexType.FONT_DATA) {
+				return DownloadActivityType.FONT_FILE;
 			} else {
 				return null;
 			}
