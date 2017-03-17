@@ -2889,4 +2889,12 @@ représentant la zone : %1$s x %2$s</string>
  • Antarctique : * (1)
  La grande majorité des pays sont couverts, téléchargez les cartes dont vous avez besoin !
  "</string>
+    <string name="fonts_header">Polices pour les textes de la carte</string>
+    <string name="osmand_plus_extended_description_part5">"
+ Fonctionnalités liées à la sécurité
+ • Bascule automatique en mode jour / nuit (option)
+ • Affichage des limitations de vitesse avec rappels en cas de dépassement (option)
+ • Zoom adapté à la vitesse (option)
+ • Partage de votre position pour que n\'importe qui puisse vous rejoindre rapidement
+ "</string>
     </resources>
