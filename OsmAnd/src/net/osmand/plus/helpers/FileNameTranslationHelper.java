@@ -23,9 +23,11 @@ public class FileNameTranslationHelper {
 	public static String getFileName(Context ctx, OsmandRegions regions, String fileName) {
 		String basename = getBasename(fileName);
 		if (basename.endsWith(WIKI_NAME)) { //wiki files
-			return getWikiName(ctx,basename);
+			return getWikiName(ctx, basename);
 		} else if (fileName.endsWith("tts")) { //tts files
 			return getVoiceName(ctx, fileName);
+		} else if (fileName.endsWith(IndexConstants.FONT_INDEX_EXT)) { //otf files
+			return getFontName(ctx, basename);
 		} else if (fileName.startsWith(HILL_SHADE)){
 			return getHillShadeName(ctx, regions, basename);
 		} else if (fileName.length() == 2) { //voice recorded files
@@ -75,9 +77,9 @@ public class FileNameTranslationHelper {
 		return  wikiName + " " + ctx.getString(R.string.amenity_type_osmwiki);
 	}
 
-	public static String getVoiceName(Context ctx, String basename) {
+	public static String getVoiceName(Context ctx, String fileName) {
 		try {
-			String nm = basename.replace('-', '_').replace(' ', '_');
+			String nm = fileName.replace('-', '_').replace(' ', '_');
 			if (nm.endsWith("_tts") || nm.endsWith("-tts")) {
 				nm = nm.substring(0, nm.length() - 4);
 			}
@@ -89,7 +91,11 @@ public class FileNameTranslationHelper {
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
-		return basename;
+		return fileName;
+	}
+
+	public static String getFontName(Context ctx, String basename) {
+		return basename.replace('-', ' ').replace('_', ' ');
 	}
 
 	private static String getBasename(String fileName) {

@@ -89,6 +89,8 @@ public class LocalIndexHelper {
 			info.setDescription(getInstalledDate(f));
 		} else if (info.getType() == LocalIndexType.VOICE_DATA) {
 			info.setDescription(getInstalledDate(f));
+		} else if (info.getType() == LocalIndexType.FONT_DATA) {
+			info.setDescription(getInstalledDate(f));
 		}
 	}
 
@@ -210,6 +212,7 @@ public class LocalIndexHelper {
 		loadWikiData(app.getAppPath(IndexConstants.WIKI_INDEX_DIR), result, loadTask);
 		//loadVoiceData(app.getAppPath(IndexConstants.TTSVOICE_INDEX_EXT_ZIP), result, true, loadTask);
 		loadVoiceData(app.getAppPath(IndexConstants.VOICE_INDEX_DIR), result, false, loadTask);
+		loadFontData(app.getAppPath(IndexConstants.FONT_INDEX_DIR), result, false, loadTask);
 		loadObfData(app.getAppPath(IndexConstants.BACKUP_INDEX_DIR), result, true, loadTask, loadedMaps);
 
 		return result;
@@ -250,6 +253,20 @@ public class LocalIndexHelper {
 						result.add(info);
 						loadTask.loadFile(info);
 					}
+				}
+			}
+		}
+	}
+
+	private void loadFontData(File fontDir, List<LocalIndexInfo> result, boolean backup, AbstractLoadLocalIndexTask loadTask) {
+		if (fontDir.canRead()) {
+			for (File fontFile : listFilesSorted(fontDir)) {
+				if (fontFile.isFile() && fontFile.getName().endsWith(IndexConstants.FONT_INDEX_EXT)) {
+					LocalIndexType lt = LocalIndexType.FONT_DATA;
+					LocalIndexInfo info = new LocalIndexInfo(lt, fontFile, backup, app);
+					updateDescription(info);
+					result.add(info);
+					loadTask.loadFile(info);
 				}
 			}
 		}
@@ -342,6 +359,7 @@ public class LocalIndexHelper {
 		WIKI_DATA(R.string.local_indexes_cat_wiki, R.drawable.ic_plugin_wikipedia, 50),
 		TTS_VOICE_DATA(R.string.local_indexes_cat_tts, R.drawable.ic_action_volume_up, 20),
 		VOICE_DATA(R.string.local_indexes_cat_voice, R.drawable.ic_action_volume_up, 30),
+		FONT_DATA(R.string.fonts_header, R.drawable.ic_action_map_language, 35),
 		DEACTIVATED(R.string.local_indexes_cat_backup, R.drawable.ic_type_archive, 1000);
 //		AV_DATA(R.string.local_indexes_cat_av);;
 
@@ -391,6 +409,13 @@ public class LocalIndexHelper {
 					l = fileName.length();
 				}
 				return fileName.substring(0, l);
+			}
+			if (this == FONT_DATA) {
+				int l = fileName.indexOf('.');
+				if (l == -1) {
+					l = fileName.length();
+				}
+				return fileName.substring(0, l).replace('_', ' ').replace('-', ' ');
 			}
 			int ls = fileName.lastIndexOf('_');
 			if (ls >= 0) {

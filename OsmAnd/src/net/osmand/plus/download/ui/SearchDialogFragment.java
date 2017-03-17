@@ -478,7 +478,8 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 				// process other maps & voice prompts
 				if (group.getType() == DownloadResourceGroupType.OTHER_MAPS_HEADER
 						|| group.getType() == DownloadResourceGroupType.VOICE_HEADER_REC
-						|| group.getType() == DownloadResourceGroupType.VOICE_HEADER_TTS) {
+						|| group.getType() == DownloadResourceGroupType.VOICE_HEADER_TTS
+						|| group.getType() == DownloadResourceGroupType.FONTS_HEADER) {
 					if (group.getIndividualResources() != null) {
 						for (IndexItem item : group.getIndividualResources()) {
 							name = item.getVisibleName(ctx, osmandRegions, false).toLowerCase();

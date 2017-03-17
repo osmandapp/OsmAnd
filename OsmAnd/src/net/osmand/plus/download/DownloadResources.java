@@ -155,6 +155,8 @@ public class DownloadResources extends DownloadResourceGroup {
 							}
 						}
 					}
+				} else if (item.getType() == DownloadActivityType.FONT_FILE) {
+					oldItemSize = new File(app.getAppPath(IndexConstants.FONT_INDEX_DIR), item.getTargetFileName()).length();
 				} else {
 					oldItemSize = app.getAppPath(item.getTargetFileName()).length();
 				}
@@ -244,11 +246,13 @@ public class DownloadResources extends DownloadResourceGroup {
 		otherMapsScreen.addGroup(otherMaps);
 		otherMapsGroup.addGroup(otherMapsScreen);
 
-		DownloadResourceGroup voiceGroup = new DownloadResourceGroup(this, DownloadResourceGroupType.VOICE_GROUP);
-		DownloadResourceGroup voiceScreenTTS = new DownloadResourceGroup(voiceGroup, DownloadResourceGroupType.VOICE_TTS);
-		DownloadResourceGroup voiceScreenRec = new DownloadResourceGroup(voiceGroup, DownloadResourceGroupType.VOICE_REC);
-		DownloadResourceGroup voiceTTS = new DownloadResourceGroup(voiceGroup, DownloadResourceGroupType.VOICE_HEADER_TTS);
-		DownloadResourceGroup voiceRec = new DownloadResourceGroup(voiceGroup, DownloadResourceGroupType.VOICE_HEADER_REC);
+		DownloadResourceGroup otherGroup = new DownloadResourceGroup(this, DownloadResourceGroupType.OTHER_GROUP);
+		DownloadResourceGroup voiceScreenTTS = new DownloadResourceGroup(otherGroup, DownloadResourceGroupType.VOICE_TTS);
+		DownloadResourceGroup voiceScreenRec = new DownloadResourceGroup(otherGroup, DownloadResourceGroupType.VOICE_REC);
+		DownloadResourceGroup fontScreen = new DownloadResourceGroup(otherGroup, DownloadResourceGroupType.FONTS);
+		DownloadResourceGroup voiceTTS = new DownloadResourceGroup(otherGroup, DownloadResourceGroupType.VOICE_HEADER_TTS);
+		DownloadResourceGroup voiceRec = new DownloadResourceGroup(otherGroup, DownloadResourceGroupType.VOICE_HEADER_REC);
+		DownloadResourceGroup fonts = new DownloadResourceGroup(otherGroup, DownloadResourceGroupType.FONTS_HEADER);
 
 		DownloadResourceGroup worldMaps = new DownloadResourceGroup(this, DownloadResourceGroupType.WORLD_MAPS);
 		Map<WorldRegion, List<IndexItem> > groupByRegion = new LinkedHashMap<WorldRegion, List<IndexItem>>();
@@ -260,6 +264,10 @@ public class DownloadResources extends DownloadResourceGroup {
 				} else {
 					voiceRec.addItem(ii);
 				}
+				continue;
+			}
+			if (ii.getType() == DownloadActivityType.FONT_FILE) {
+				fonts.addItem(ii);
 				continue;
 			}
 			String basename = ii.getBasename().toLowerCase();
@@ -322,9 +330,15 @@ public class DownloadResources extends DownloadResourceGroup {
 
 		voiceScreenTTS.addGroup(voiceTTS);
 		voiceScreenRec.addGroup(voiceRec);
-		voiceGroup.addGroup(voiceScreenTTS);
-		voiceGroup.addGroup(voiceScreenRec);
-		addGroup(voiceGroup);
+		if (fonts.getIndividualResources() != null) {
+			fontScreen.addGroup(fonts);
+		}
+		otherGroup.addGroup(voiceScreenTTS);
+		otherGroup.addGroup(voiceScreenRec);
+		if (fonts.getIndividualResources() != null) {
+			otherGroup.addGroup(fontScreen);
+		}
+		addGroup(otherGroup);
 
 		createHillshadeSRTMGroups();
 		trimEmptyGroups();

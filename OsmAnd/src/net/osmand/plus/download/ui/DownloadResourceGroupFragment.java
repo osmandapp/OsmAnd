@@ -308,6 +308,8 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 			if (group.getType() == DownloadResourceGroupType.VOICE_REC
 					|| group.getType() == DownloadResourceGroupType.VOICE_TTS) {
 				iconLeft = ctx.getMyApplication().getIconsCache().getThemedIcon(R.drawable.ic_action_volume_up);
+			} else if (group.getType() == DownloadResourceGroupType.FONTS) {
+				iconLeft = ctx.getMyApplication().getIconsCache().getThemedIcon(R.drawable.ic_action_map_language);
 			} else {
 				IconsCache cache = ctx.getMyApplication().getIconsCache();
 				if (isParentWorld(group) || isParentWorld(group.getParentGroup())) {

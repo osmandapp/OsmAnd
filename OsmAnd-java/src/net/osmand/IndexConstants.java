@@ -33,7 +33,9 @@ public class IndexConstants {
 	public static final String TTSVOICE_INDEX_EXT_ZIP = ".ttsvoice.zip"; //$NON-NLS-1$
 	public static final String ANYVOICE_INDEX_EXT_ZIP = "voice.zip"; //$NON-NLS-1$ //to cactch both voices, .voice.zip and .ttsvoice.zip
 
-	
+	public static final String FONT_INDEX_EXT = ".otf"; //$NON-NLS-1$
+	public static final String FONT_INDEX_EXT_ZIP = ".otf.zip"; //$NON-NLS-1$
+
 	
 	public static final String RENDERER_INDEX_EXT = ".render.xml"; //$NON-NLS-1$
 	
@@ -53,6 +55,7 @@ public class IndexConstants {
 	public static final String ROADS_INDEX_DIR = "roads/"; //$NON-NLS-1$
 	public static final String WIKI_INDEX_DIR = "wiki/"; //$NON-NLS-1$
 	public static final String AV_INDEX_DIR = "avnotes/"; //$NON-NLS-1$
+	public static final String FONT_INDEX_DIR = "fonts/"; //$NON-NLS-1$
 	public static final String VOICE_INDEX_DIR = "voice/"; //$NON-NLS-1$
 	public static final String RENDERERS_DIR = "rendering/"; //$NON-NLS-1$
 	public static final String ROUTING_XML_FILE= "routing.xml";

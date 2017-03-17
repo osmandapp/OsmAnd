@@ -33,17 +33,16 @@ public class DownloadActivityType {
 			new DownloadActivityType(R.string.download_regular_maps, "map", 10);
 	public static final DownloadActivityType VOICE_FILE =
 			new DownloadActivityType(R.string.voices, R.drawable.ic_action_volume_up, "voice", 20);
+	public static final DownloadActivityType FONT_FILE =
+			new DownloadActivityType(R.string.fonts_header, R.drawable.ic_action_map_language, "fonts", 25);
 	public static final DownloadActivityType ROADS_FILE =
 			new DownloadActivityType(R.string.download_roads_only_maps, "road_map", 30);
 	public static final DownloadActivityType SRTM_COUNTRY_FILE =
-			new DownloadActivityType(R.string.download_srtm_maps,
-					R.drawable.ic_plugin_srtm, "srtm_map", 40);
+			new DownloadActivityType(R.string.download_srtm_maps, R.drawable.ic_plugin_srtm, "srtm_map", 40);
 	public static final DownloadActivityType HILLSHADE_FILE =
-			new DownloadActivityType(R.string.download_hillshade_maps,
-					R.drawable.ic_action_hillshade_dark, "hillshade", 50);
+			new DownloadActivityType(R.string.download_hillshade_maps, R.drawable.ic_action_hillshade_dark, "hillshade", 50);
 	public static final DownloadActivityType WIKIPEDIA_FILE =
-			new DownloadActivityType(R.string.download_wikipedia_maps,
-					R.drawable.ic_plugin_wikipedia, "wikimap", 60);
+			new DownloadActivityType(R.string.download_wikipedia_maps, R.drawable.ic_plugin_wikipedia, "wikimap", 60);
 	public static final DownloadActivityType LIVE_UPDATES_FILE =
 			new DownloadActivityType(R.string.download_live_updates, "live_updates", 70);
 	private final int stringResource;
@@ -115,6 +114,8 @@ public class DownloadActivityType {
 			return fileName.endsWith(addVersionToExt(IndexConstants.BINARY_ROAD_MAP_INDEX_EXT_ZIP, IndexConstants.BINARY_MAP_VERSION));
 		} else if (VOICE_FILE == this) {
 			return fileName.endsWith(addVersionToExt(IndexConstants.VOICE_INDEX_EXT_ZIP, IndexConstants.VOICE_VERSION));
+		} else if (FONT_FILE == this) {
+			return fileName.endsWith(IndexConstants.FONT_INDEX_EXT_ZIP);
 		} else if (WIKIPEDIA_FILE == this) {
 			return fileName.endsWith(addVersionToExt(IndexConstants.BINARY_WIKI_MAP_INDEX_EXT_ZIP,
 					IndexConstants.BINARY_MAP_VERSION));
@@ -135,6 +136,8 @@ public class DownloadActivityType {
 			return ctx.getAppPath(IndexConstants.MAPS_PATH);
 		} else if (VOICE_FILE == this) {
 			return ctx.getAppPath(IndexConstants.VOICE_INDEX_DIR);
+		} else if (FONT_FILE == this) {
+			return ctx.getAppPath(IndexConstants.FONT_INDEX_DIR);
 		} else if (ROADS_FILE == this) {
 			return ctx.getAppPath(IndexConstants.ROADS_INDEX_DIR);
 		} else if (SRTM_COUNTRY_FILE == this) {
@@ -178,6 +181,8 @@ public class DownloadActivityType {
 			return IndexConstants.BINARY_ROAD_MAP_INDEX_EXT;
 		} else if (VOICE_FILE == this) {
 			return "";
+		} else if (FONT_FILE == this) {
+			return IndexConstants.FONT_INDEX_EXT;
 		} else if (SRTM_COUNTRY_FILE == this) {
 			return IndexConstants.BINARY_SRTM_MAP_INDEX_EXT;
 		} else if (WIKIPEDIA_FILE == this) {
@@ -199,15 +204,20 @@ public class DownloadActivityType {
 			return "&srtmcountry=yes";
 		} else if (this == DownloadActivityType.WIKIPEDIA_FILE) {
 			return "&wiki=yes";
-		}else if (this== DownloadActivityType.HILLSHADE_FILE) {
+		}else if (this == DownloadActivityType.HILLSHADE_FILE) {
 			return "&hillshade=yes";
 		}
 		return "";
 	}
 
 	public String getBaseUrl(OsmandApplication ctx, String fileName) {
-		return "http://" + IndexConstants.INDEX_DOWNLOAD_DOMAIN + "/download?event=2&"
-				+ Version.getVersionAsURLParam(ctx) + "&file=" + encode(fileName);
+		if (this == FONT_FILE) {
+			return "http://" + IndexConstants.INDEX_DOWNLOAD_DOMAIN + "/download?event=2&fonts=yes&"
+					+ Version.getVersionAsURLParam(ctx) + "&file=" + encode(fileName);
+		} else {
+			return "http://" + IndexConstants.INDEX_DOWNLOAD_DOMAIN + "/download?event=2&"
+					+ Version.getVersionAsURLParam(ctx) + "&file=" + encode(fileName);
+		}
 	}
 
 
@@ -268,9 +278,12 @@ public class DownloadActivityType {
 			}
 			return getBasename(indexItem);
 		}
+		if (this == FONT_FILE) {
+			return FileNameTranslationHelper.getFontName(ctx, getBasename(indexItem));
+		}
 		final String basename = getBasename(indexItem);
 		if (basename.endsWith(FileNameTranslationHelper.WIKI_NAME)){
-			return FileNameTranslationHelper.getWikiName(ctx,basename);
+			return FileNameTranslationHelper.getWikiName(ctx, basename);
 		}
 //		if (this == HILLSHADE_FILE){
 //			return FileNameTranslationHelper.getHillShadeName(ctx, osmandRegions, bn);
@@ -300,6 +313,12 @@ public class DownloadActivityType {
 				l = fileName.length();
 			}
 			return fileName.substring(0, l);
+		} else if (this == FONT_FILE) {
+			int l = fileName.indexOf('.');
+			if (l == -1) {
+				l = fileName.length();
+			}
+			return fileName.substring(0, l) + IndexConstants.FONT_INDEX_EXT;
 		} else if (this == HILLSHADE_FILE) {
 			return fileName.replace('_', ' ');
 		} else if (this == LIVE_UPDATES_FILE) {
@@ -350,6 +369,13 @@ public class DownloadActivityType {
 		}
 		if (this == VOICE_FILE) {
 			int l = fileName.lastIndexOf('_');
+			if (l == -1) {
+				l = fileName.length();
+			}
+			return fileName.substring(0, l);
+		}
+		if (this == FONT_FILE) {
+			int l = fileName.indexOf('.');
 			if (l == -1) {
 				l = fileName.length();
 			}
