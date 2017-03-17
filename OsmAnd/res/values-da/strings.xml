@@ -3010,7 +3010,7 @@ Repræsenterer område: %1$s x %2$s</string>
   • Sving-for-sving stemmevejledning (indspillede og syntetiseret stemmer)
   • Valgfri vognbaneskift, gadenavn visning, og forventet ankomsttidspunkt
   • Understøtter mellemliggende punkter på ruten
-  • Automatisk omdirigering, ved afvigelse fra ruten
+  • Automatisk genberegning, ved afvigelse fra ruten
   • Søg efter steder efter adresse, efter type (fx: restaurant, hotel, tankstation, museum), eller ved geografiske koordinater
  "</string>
     <string name="osmand_plus_extended_description_part3">"
@@ -3034,7 +3034,7 @@ Repræsenterer område: %1$s x %2$s</string>
  "</string>
     <string name="osmand_plus_extended_description_part5">"
  Sikkerhedsfunktioner
-  • Valgfri automatiseret dag/nat visning skift
+  • Valgfri automatisk skift af dag/nat visning
   • Valgfri visning af hastighedsgrænse med påmindelse ved overskridelse
   • Valgfri hastighedsafhængig zoom
   • Del placering, så dine venner kan finde dig
