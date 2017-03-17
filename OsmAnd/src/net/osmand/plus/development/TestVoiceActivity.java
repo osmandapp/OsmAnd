@@ -280,6 +280,8 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 						} else if (((OsmandApplication) getApplication()).getSettings().BT_SCO_DELAY.get() == 2000) {
 							((OsmandApplication) getApplication()).getSettings().BT_SCO_DELAY.set(2500);
 						} else if (((OsmandApplication) getApplication()).getSettings().BT_SCO_DELAY.get() == 2500) {
+							((OsmandApplication) getApplication()).getSettings().BT_SCO_DELAY.set(3000);
+						} else if (((OsmandApplication) getApplication()).getSettings().BT_SCO_DELAY.get() == 3000) {
 							((OsmandApplication) getApplication()).getSettings().BT_SCO_DELAY.set(1000);
 						}
 						Toast.makeText(TestVoiceActivity.this, "BT SCO init delay changed to " + ((OsmandApplication) getApplication()).getSettings().BT_SCO_DELAY.get() + " ms", Toast.LENGTH_LONG).show();
