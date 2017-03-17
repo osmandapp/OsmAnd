@@ -2823,4 +2823,5 @@ OsmAnd+ es una versión de pago. Comprando la aplicación, ayudas al proyecto, f
 
 Algunas de las principales funciones:
  "</string>
+    <string name="fonts_header">Estilo del texto del mapa</string>
     </resources>
