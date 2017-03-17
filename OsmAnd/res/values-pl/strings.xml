@@ -169,7 +169,7 @@
     <string name="send_location_way_choose_title">Udostępnij położenie używając</string>
     <string name="send_location_sms_pattern">Położenie: %1$s
 %2$s</string>
-    <string name="send_location_email_pattern">Aby zobaczyć lokację użyj linku w przeglądarce %1$s lub linku do intentu androidowego %2$s</string>
+    <string name="send_location_email_pattern">Aby wyświetlić położenie proszę użyć odnośnika %1$s lub odnośnika intent androida %2$s</string>
     <string name="send_location">Wyślij położenie</string>
     <string name="context_menu_item_share_location">Udostępnij położenie</string>
     <string name="add_waypoint_dialog_added">Dodano punkt GPX „{0}”</string>
