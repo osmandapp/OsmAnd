@@ -2892,4 +2892,6 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="do_not_show_startup_messages_desc">Mostra messaggi riguardo app in sconto ed eventi locali speciali</string>
     <string name="parking_options">Opzioni parcheggio</string>
     <string name="full_version_thanks">Grazie di avere acquistato la versione completa di OsmAnd!</string>
+    <string name="fonts_header">Carattere della mappa</string>
+    <string name="right_side_navigation">Guida a destra</string>
     </resources>
