@@ -1565,4 +1565,35 @@
 	<string name="poi_takeaway_no">持ち帰り無し(No takeaway)</string>
 	<string name="poi_takeaway_only">テイクアウト・持ち帰りのみ(Takeaway only)</string>
 
+	<string name="poi_archaeological_site_type">遺跡(Type)</string>
+	<string name="poi_health_specialty">医療機関(Health specialty)</string>
+	<string name="poi_health_specialty_general_yes">総合診療医(General practitioner)</string>
+	<string name="poi_health_specialty_ophthalmology_yes">眼科(Ophthalmology)</string>
+	<string name="poi_health_specialty_gynaecology_yes">婦人科(Gynaecology)</string>
+	<string name="poi_health_specialty_internal_medicine_yes">内科(Internal medicine)</string>
+	<string name="poi_health_specialty_orthopaedics_yes">整形外科(Orthopaedics)</string>
+	<string name="poi_health_specialty_otolaryngology_yes">耳鼻咽喉科(Otolaryngology)</string>
+	<string name="poi_health_specialty_paediatrics_yes">小児科(Paediatrics)</string>
+	<string name="poi_health_specialty_paediatrics_no">医療機関:小児科:無し(Health specialty: paediatrics: no)</string>
+	<string name="poi_health_specialty_dermatology_yes">皮膚科(Dermatology)</string>
+	<string name="poi_health_specialty_urology_yes">泌尿器科(Urology)</string>
+	<string name="poi_health_specialty_surgery_yes">一般外科(General surgery)</string>
+	<string name="poi_health_specialty_radiology_yes">放射線科(Radiology)</string>
+	<string name="poi_health_specialty_psychiatry_yes">精神科(Psychiatry)</string>
+	<string name="poi_health_specialty_neurology_yes">神経科(Neurology)</string>
+	<string name="poi_health_specialty_dermatovenereology_yes">皮膚-性病科(Dermato-venereology)</string>
+	<string name="poi_health_specialty_cardiology_yes">循環器科(Cardiology)</string>
+	<string name="poi_health_specialty_trauma_yes">外傷外科(Traumatology)</string>
+	<string name="poi_health_specialty_biology_yes">臨床生物学(Clinical biology)</string>
+	<string name="poi_health_specialty_osteopathy_yes">整骨院・接骨院(Osteopathy)</string>
+	<string name="poi_health_specialty_anaesthetics_yes">麻酔科医(Anaesthetics)</string>
+	<string name="poi_health_specialty_pulmonology_yes">呼吸器内科(Respiratory medicine)</string>
+	<string name="poi_health_specialty_dental_oral_maxillo_facial_surgery_yes">歯科・口腔外科(Dental, oral and maxillo-facial surgery)</string>
+	<string name="poi_health_specialty_maternity_yes">産科(Maternity)</string>
+	<string name="poi_health_specialty_emergency_medicine_yes">救急医療・救命救急センター(Accident and emergency medicine)</string>
+	<string name="poi_health_specialty_emergency_medicine_no">救急医療:無し(Health specialty: accident and emergency medicine: no)</string>
+	<string name="poi_health_specialty_plastic_surgery_yes">整形手術・形成外科(Plastic surgery)</string>
+	<string name="poi_health_specialty_orthodontics_yes">矯正歯科(Orthodontics)</string>
+	<string name="poi_health_specialty_physiotherapy_yes">理学療法(Physiotherapy)</string>
+	<string name="poi_health_specialty_biochemistry_yes">生物化学(Biological chemistry)</string>
 	</resources>
