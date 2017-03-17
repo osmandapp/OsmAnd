@@ -2774,29 +2774,36 @@ Facebook: https://www.facebook.com/osmandapp
     <string name="select_gpx_folder">Виберіть теку GPX-треку</string>
     <string name="release_2_6">"
  • Нова функція: кнопка швидкої дії
-   
-   
+
+
  • Покращена відповідь на жести сенсорного екрану
-  
-   
+
+
  • Новий шрифт мапи охоплює більше мов
-  
-   
+
+
  • Підтримка TTS для варіантів регіональних мов
-  
-   
+
+
  • Покращення видимості в декількох стилях мап та Вікіпедії
-  
-   
+
+
  • Підтримка Open Location Code (OLC)
-  
-   
- • Відображення основного висотного профілю для записаного GPX
-  
-   
+
+
+ • Показ профілю висоти, та ухилу для записаного GPX (а також швидкості) та побудованого маршруту
+
+
+ • Параметр \"Стиль водіння\" та покращення логіки для побудови маршруту для велосипеда
+
+
+ • Настройки для використання даних о висотах в побудові велосипедного маршруту
+
+
  • Кілька інших поліпшень й виправлень помилок
-  
- та багато іншого…
+
+
+  та багато іншого…
  "</string>
 	<string name="navigate_point_olc_info_invalid">Некоректний OLC
 </string>
@@ -2857,4 +2864,9 @@ Facebook: https://www.facebook.com/osmandapp
     <string name="shared_string_color">Колір</string>
     <string name="shared_string_slope">Ухил</string>
     <string name="lang_ber">Берберська</string>
+    <string name="fonts_header">Шрифти для мапи</string>
+    <string name="right_side_navigation"/>
+    <string name="routing_attr_driving_style_balance_name">Збалансований</string>
+    <string name="routing_attr_driving_style_safety_name">Безпечний</string>
+    <string name="routing_attr_driving_style_speed_name">Швидкісний</string>
     </resources>
