@@ -2847,6 +2847,18 @@ Indikas lokon:  %1$s x %2$s"</string>
  OsmAnd estas malfermkoda kaj daŭre disvolvigata. Ĉiu povas kontribui al la aplikaĵo per raporti erarojn, plibonigi tradukojn aŭ programi novajn funkciojn. La projekto estas senĉese plibonigata ĉiumaniere de programistoj kaj uzantoj. La projekto estas ankaŭ subtenata permone por fondi kodumado kaj testi novajn funkciojn.
  "</string>
     <string name="osmand_plus_extended_description_part8">"
- Proksimuma map-atingo
+ Proksimuma map-atingo kaj kvalito:
+ • Okcidenta Eŭropo: ****
+ • Orienta Eŭropo: ***
+ • Rusujo: ***
+ • Nordameriko: ***
+ • Sudameriko: **
+ • Azio: **
+ • Japanujo kaj Koreujo: ***
+ • Proksim-Oriento: **
+ • Afriko: **
+ • Antarkto: *
+ Mapoj de preskaŭ ĉiuj de landoj de la mondo estas elŝuteblaj!
+De Afganujo al Zimbabvo, de Aŭstralio al Usono, Argentino, Brazilo, Kanado, Francujo, Germanujo, Meksiko, Britujo, Hispanujo, …
  "</string>
     </resources>
