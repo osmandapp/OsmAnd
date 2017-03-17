@@ -1596,4 +1596,27 @@
 	<string name="poi_health_specialty_orthodontics_yes">矯正歯科(Orthodontics)</string>
 	<string name="poi_health_specialty_physiotherapy_yes">理学療法(Physiotherapy)</string>
 	<string name="poi_health_specialty_biochemistry_yes">生物化学(Biological chemistry)</string>
+	<string name="poi_health_specialty_occupational_yes">作業療法(Occupational therapy)</string>
+	<string name="poi_health_specialty_child_psychiatry_yes">児童精神医学(Child psychiatry)</string>
+	<string name="poi_health_specialty_physiatry_yes">物理療法・リハビリテーション(Physical medicine and rehabilitation)</string>
+	<string name="poi_health_specialty_maxillofacial_surgery_yes">顎顔面外科(Maxillo-facial surgery)</string>
+	<string name="poi_health_specialty_diagnostic_radiology_yes">放射線診断科(Diagnostic radiology)</string>
+	<string name="poi_health_specialty_gastroenterology_yes">消化器科(Gastroenterology)</string>
+	<string name="poi_health_specialty_dentistry_yes">歯科(Dentistry)</string>
+	<string name="poi_health_specialty_nephrology_yes">腎臓（腎疾患）専門科(Nephrology (renal diseases))</string>
+	<string name="poi_health_specialty_neurosurgery_yes">脳神経外科(Neurological surgery)</string>
+	<string name="poi_health_specialty_neuropsychiatry_yes">神経精神医(Neuropsychiatry)</string>
+	<string name="poi_health_specialty_endocrinology_yes">内分泌科(Endocrinology)</string>
+	<string name="poi_health_specialty_nuclear_medicine_yes">核医学(Nuclear medicine)</string>
+	<string name="poi_health_specialty_pathology_yes">病理解剖学(Pathological anatomy)</string>
+	<string name="poi_health_specialty_oncology_yes">臨床腫瘍科(Oncology)</string>
+	<string name="poi_health_specialty_tropical_medicine_yes">熱帯医学(Tropical medicine)</string>
+	<string name="poi_health_specialty_tropical_medicine_no">熱帯医学：無し(Health specialty: tropical medicine: no)</string>
+	<string name="poi_health_specialty_obstetrics_postnatal_yes">産科（生後）(Obstetrics (postnatal))</string>
+	<string name="poi_health_specialty_obstetrics_postnatal_no">産科（生後）：無し(Health specialty: obstetrics (postnatal): no)</string>
+	<string name="poi_health_specialty_obstetrics_antenatal_yes">産婦人科（出産前）(Obstetrics (antenatal))</string>
+	<string name="poi_health_specialty_obstetrics_antenatal_no">産婦人科（産前）：無し(Health specialty: obstetrics (antenatal): no)</string>
+	<string name="poi_health_specialty_social_paediatrics_yes">社会小児科(Social paediatrics)</string>
+	<string name="poi_health_specialty_social_paediatrics_no">社会小児科：無し(Health specialty: social paediatrics: no)</string>
+	<string name="poi_health_specialty_obstetrics_caesarean_section_yes">産科（帝王切開）(Obstetrics (caesarean section))</string>
 	</resources>
