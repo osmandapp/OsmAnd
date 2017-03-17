@@ -865,7 +865,7 @@ Tanto la ubicación como el tiempo del estacionamiento se muestran en el menú p
     <string name="osmand_play_title_30_chars">Navegación y Mapas OsmAnd</string>
     <string name="osmand_short_description_80_chars">Visor y navegador móvil global de mapas OSM con y sin conexión</string>
     <string name="osmand_long_description_1000_chars">"
- OsmAnd (OSM Automated Navigation Directions, Guía de Navegación Automatizada)
+ OsmAnd (OSM Automated Navigation Directions, y en español, Guía de Navegación Automatizada de OSM)
 
  OsmAnd es una aplicación de navegación de código abierto con acceso a una amplia variedad de datos globales de OpenStreetMap (OSM).
 Todos los datos del mapa (vectores y teselas) pueden ser almacenados en la memoria del teléfono para su uso sin conexión. OsmAnd también ofrece funcionalidad de rutas con y sin conexión, incluyendo indicaciones giro-a-giro mediante voz.
@@ -963,7 +963,7 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="osmand_plus_play_title_30_chars">Navegación y Mapas OsmAnd+</string>
     <string name="osmand_plus_short_description_80_chars">Visor y navegador móvil global de mapas OSM con y sin conexión</string>
     <string name="osmand_plus_long_description_1000_chars">"
- OsmAnd+ (OSM Automated Navigation Directions)
+ OsmAnd+ (OSM Automated Navigation Directions, y en español, Guía de Navegación Automatizada de OSM)
 
  OsmAnd+ es una aplicación de navegación de código abierto con acceso a una amplia variedad de datos globales de OpenStreetMap (OSM). Todos los datos del mapa (vectores y teselas), pueden ser almacenados en la memoria del teléfono para su uso sin conexión. OsmAnd también ofrece funcionalidad de rutas con y sin conexión con guía giro-a-giro mediante voz.
 
@@ -2402,8 +2402,8 @@ Si amas a OsmAnd, OSM y quieres apoyarlos, esta es una perfecta manera de hacerl
     <string name="update_all_maps_now">¿Quieres actualizar ahora todos los mapas?</string>
     <string name="clear_tile_data">Limpiar todas las teselas</string>
     <string name="search_my_location">Buscar mi ubicación</string>
-    <string name="no_update_info_desc">No comprobar actualizaciones de nuevas versiones, relacionadas con descuentos de OsmAnd</string>
-    <string name="no_update_info">No mostrar actualizaciones</string>
+    <string name="no_update_info_desc">Ocultar actualizaciones de nuevas versiones, relacionadas con descuentos de OsmAnd</string>
+    <string name="no_update_info">Ocultar actualizaciones</string>
     <string name="skip_map_downloading">Omitir descargas de mapas</string>
     <string name="skip_map_downloading_desc">Sin mapas descargados. Puedes elegir uno de la lista o descargarlos luego mediante el Menú - %1$s.</string>
     <string name="search_another_country">Elegir otra región</string>
@@ -2665,7 +2665,7 @@ Representa el área: %1$s x %2$s</string>
     <string name="relief_smoothness_factor_descr">Prioridad a llanuras o colinas</string>
     <string name="do_not_send_anonymous_app_usage">No enviar datos de uso anónimos de la aplicación</string>
     <string name="do_not_send_anonymous_app_usage_desc">Envía información general acerca de la pantalla utilizada durante la sesión. No recopilamos ningún dato de geolocalización o ingreso de datos relacionados al usuario.</string>
-    <string name="do_not_show_startup_messages">No mostrar los mensajes al inicio</string>
+    <string name="do_not_show_startup_messages">Ocultar los mensajes al inicio</string>
     <string name="do_not_show_startup_messages_desc">Muestra descuentos de la aplicación y mensajes especiales de eventos locales</string>
     <string name="parking_options">Opciones de estacionamiento</string>
     <string name="full_version_thanks">¡Gracias por comprar la versión completa de OsmAnd!</string>
@@ -2673,7 +2673,7 @@ Representa el área: %1$s x %2$s</string>
     <string name="right_side_navigation">Conducción por la derecha</string>
     <string name="driving_region_automatic">Automático</string>
     <string name="osmand_extended_description_part1">"
- OsmAnd (en español, Direcciones de Navegación Automatizadas OSM) es una aplicación de mapa y navegación con acceso a los datos libres de OpenStreetMap (OSM), en todo el mundo y de alta calidad.
+ OsmAnd (OSM Automated Navigation Directions, y en español, Guía de Navegación Automatizada de OSM) es una aplicación de mapa y navegación con acceso a los datos libres de OpenStreetMap (OSM), en todo el mundo y de alta calidad.
 
  Disfruta del navegador por voz y óptico, la visualización de PDIs (puntos de interés), la creación y gestión de trazas GPX, utiliza la información de visualización y la altitud de las curvas de nivel (mediante un complemento), elige entre modos de automóvil, bicicleta o peatón, edita en OSM y mucho más.
  "</string>
@@ -2813,5 +2813,14 @@ Representa el área: %1$s x %2$s</string>
  • Antártida: *
  ¡Más países alrededor del globo están disponibles para descargar!
  Obtén un navegador confiable en tu país - ya sea Francia, Alemania, México, Reino Unido, España, Países bajos, Argentina, Estados Unidos, Rusia, Brasil o cualquier otro.
+ "</string>
+    <string name="osmand_plus_extended_description_part1">"
+ OsmAnd+ (OSM Automated Navigation Directions, y en español, Guía de Navegación Automatizada de OSM) es una aplicación de mapa y navegación con acceso a los datos libres de OpenStreetMap (OSM), en todo el mundo y de alta calidad.
+
+ Disfruta del navegador por voz y óptico, la visualización de PDIs (puntos de interés), la creación y gestión de trazas GPX, utiliza la información de visualización y la altitud de las curvas de nivel (mediante un complemento), elige entre modos de automóvil, bicicleta o peatón, edita en OSM y mucho más.
+
+OsmAnd+ es una versión de pago. Comprando la aplicación, ayudas al proyecto, financiando el desarrollo de nuevas funciones y recibiendo las últimas actualizaciones.
+
+Algunas de las principales funciones:
  "</string>
     </resources>
