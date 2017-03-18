@@ -900,7 +900,7 @@ public class GpxUiHelper {
 		OsmandSettings settings = ctx.getSettings();
 		boolean light = settings.isLightContent();
 
-		if (android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR2) {
+		if (android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
 			mChart.setHardwareAccelerationEnabled(false);
 		} else {
 			mChart.setHardwareAccelerationEnabled(true);
