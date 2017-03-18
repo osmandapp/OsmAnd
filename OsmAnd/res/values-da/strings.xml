@@ -3014,7 +3014,7 @@ Repræsenterer område: %1$s x %2$s</string>
   • Søg efter steder efter adresse, efter type (fx: restaurant, hotel, tankstation, museum), eller ved geografiske koordinater
  "</string>
     <string name="osmand_plus_extended_description_part3">"
- Kort Visning
+ Kortvisning
   • Vis position og orientering
   • Juster eventuelt kortet efter kompas eller bevægelsesretning
   • Gem de vigtigste steder som foretrukne
