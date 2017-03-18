@@ -1381,7 +1381,7 @@
 	<string name="osn_close_dialog_title">Notu kapat</string>
 	<string name="osn_add_dialog_success">Not başarıyla oluşturuldu</string>
 	<string name="osn_add_dialog_error">Dinlenme Alanı</string>
-	<string name="osn_close_dialog_success">Not, başarıyla kapatıldı</string>
+	<string name="osn_close_dialog_success">Not başarıyla kapatıldı</string>
 	<string name="osn_close_dialog_error">Özel durum oluştu: nota kapatılmamış</string>
 	<string name="shared_string_commit">işlemek</string>
 	
@@ -1396,7 +1396,7 @@
     <string name="read_more">Daha fazla oku</string>
     <string name="whats_new">Yenilikler neler</string>
     <string name="rendering_attr_hideProposed_name">Önerilen nesneler</string>
-    <string name="shared_string_update">Güncelleştirme</string>
+    <string name="shared_string_update">Güncelle</string>
     <string name="shared_string_upload">Yükle</string>
     <string name="osm_edit_created_poi">OSM POI oluşturmak</string>
     
