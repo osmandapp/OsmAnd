@@ -2713,4 +2713,45 @@ i encara més…
 
  Gaudiu del guiatge visual i de veu, la representació de *PDIs (punts d\'interès), de la creació i gestió de traces de GPX, la selecció la representació de corbes de nivell i d\'informació d\'elevació (a través d\'un *connector), dels modes diferenciats entre la conducció de vehicle, bicicleta o com vianant, de la edició d\'OSM i de molt més.
  "</string>
+    <string name="restore_purchases">Recupera les compres</string>
+    <string name="fonts_header">Tipus de lletra pel mapa</string>
+    <string name="osmand_extended_description_part2">"
+ Navegació GPS
+ • Podeu triar el mode desconnectat (no hi hauran càrrecs de roaming si sou a l\'estranger) o el mode en línia (més àgil)
+ • El guiatge de veu gir-a-gir us dirigeix pel camí (veus enregistrades i sintètiques)
+ • La ruta es tornarà a calcular si us desvieu de la proposta anterior
+ • Les indicacions de carril, els noms de carrer i el temps d\'arribada estimat us ajudaran pel camí
+ • Per fer el vostre viatge més segur, els canvis entre mode diurn i nocturn són automàtics
+ • Podeu activar la indicació dels límits de velocitat i d\'avertiments si els supereu
+ • L\'escala del mapa s\'ajusta a la vostra velocitat
+ • Podeu cercar destinacions per adreça, per tipus (p. ex.: aparcament, restaurant, hotel, gasolinera, museu), o per les coordenades geogràfiques
+ • Gestiona els punts intermedis en el vostre itinerari
+ • Podeu enregistrar el vostre trajecte o baixar una traça GPX i seguir-la
+ "</string>
+    <string name="osmand_extended_description_part4">"
+ Esquí
+El connector de mapes d\'esquí d\'OsmAnd us permet veure les pistes amb la seva dificultat i altres informacions addicional, com ara la ubicació dels ascensors i altres instal·lacions.
+ "</string>
+    <string name="osmand_extended_description_part5">"
+ Ciclisme
+ • Podeu trobar vies de ciclisme en el mapa
+ • La navegació GPS en mode de ciclisme genera la vostra ruta utilitzant vies de ciclisme
+ • Podeu veure la vostra velocitat i alçada
+ • L\'opció d\'enregistrar traces GPX us permetrà addicionalment que compartir-les
+ • El connector addicional Via us permet habilitar les corbes de nivell i un ombrejat del relleu
+ "</string>
+    <string name="osmand_extended_description_part6">"
+ A peu, fent senderisme, o visitant una ciutat
+• El mapa mostra les rutes per vianants i de senderisme
+• La viquipèdia, en el vostre idioma preferit, us pot ajudar molt visitant una ciutat
+• Parades de transport públic (autobús, tramvia, tren), incloent-hi noms de línia, ajuda de navegació en una ciutat nova
+• La navegació GPS en mode de vianants genera la vostre ruta per camins peatonals
+• Podeu baixar i seguir una traça GPX o enregistrar i compartir les vostres
+ "</string>
+    <string name="osmand_extended_description_part7">"
+ Col·laboreu amb Openstreetmap (OSM)
+• Informant de dades errònies
+• Pujant traces GPX a OSM directament des de l\'aplicació
+• Afegint PDIs i penjar-los a OSM directament  (o més tard si no esteu connectats)
+ "</string>
     </resources>
