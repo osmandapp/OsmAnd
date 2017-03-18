@@ -2920,12 +2920,7 @@ Pro praghere iscrie su còdighe intreu</string>
 
  OsmAnd+ est sa versione a pagamentu. Comporande·la, agiudas s\'isvilupu de funtzionalidades noas, e podes retzire sos ùrtimos agiornamentos.
 
- Calicuna de sas funtzionalidades prus importantes:OsmAnd+ (OSM Automated Navigation Directions) est un\'aplicatzione pro sa consultatzione de mapas e su nàvigu chi impreat sos datos lìberos, vàlidos pro totu su mundu, e de alta calidade de OpenStreetMap (OSM).
- Imprea sa ghia vocale e sas indicatziones in s\'ischermu, càstia sos PDI (puntos de interesse), crea e manìgia rastas GPX, abìlita sa visualizatzione de sas curvas de livellu e sos datos de s\'artària (pro mèdiu de un\'estensione), issèbera sa modalidade intre ghia pro sa màchina, sas bitzicletas e a pedes, agiuda a megioare sas mapas OSM e àteru meda.
-
- OsmAnd+ est sa versione a pagamentu. Comporande·la, agiudas s\'isvilupu de funtzionalidades noas, e podes retzire sos ùrtimos agiornamentos.
-
- Calicuna de sas funtzionalidades prus importante:
+ Calicuna de sas funtzionalidades prus importantes:
  "</string>
     <string name="osmand_plus_extended_description_part2">"
  Nàvigu
@@ -2995,5 +2990,5 @@ Pro praghere iscrie su còdighe intreu</string>
  Dae s\'Afghanistan a su Zimbabwe, dae s\'Austràlia a sos Istados Unidos. Argentina, Brasile, Cànada, Frantza, Germània, Mèssicu, Regnu Unidu, Ispagna, …
  "</string>
     <string name="fonts_header">Caràteres pro sa mapa</string>
-    <string name="restore_purchases">Riprìstina sas comporas</string>
+    <string name="restore_purchases">Riprìstina sas còmporas</string>
     </resources>
