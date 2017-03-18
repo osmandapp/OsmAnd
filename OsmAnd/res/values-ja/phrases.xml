@@ -1619,4 +1619,9 @@
 	<string name="poi_health_specialty_social_paediatrics_yes">社会小児科(Social paediatrics)</string>
 	<string name="poi_health_specialty_social_paediatrics_no">社会小児科：無し(Health specialty: social paediatrics: no)</string>
 	<string name="poi_health_specialty_obstetrics_caesarean_section_yes">産科（帝王切開）(Obstetrics (caesarean section))</string>
+	<string name="poi_health_specialty_obstetrics_caesarean_section_no">産科（帝王切開）：無し(Health specialty: obstetrics (caesarean section): no)</string>
+	<string name="poi_health_specialty_addiction_medicine_yes">中毒医学(Addiction medicine)</string>
+	<string name="poi_health_specialty_optometry_yes">検眼医(Optometry)</string>
+	<string name="poi_health_specialty_clinical_pathology_yes">臨床病理学(Clinical pathology)</string>
+	<string name="poi_health_specialty_speech_therapy_yes">言語聴覚療法(Speech therapy)</string>
 	</resources>
