@@ -120,6 +120,7 @@ android {
 		freedev {
 			dimension "version"
 			applicationId "net.osmand.dev"
+			resConfig "en"
 		}
 		free {
 			dimension "version"
