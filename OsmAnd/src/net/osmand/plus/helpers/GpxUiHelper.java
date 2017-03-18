@@ -900,7 +900,7 @@ public class GpxUiHelper {
 		OsmandSettings settings = ctx.getSettings();
 		boolean light = settings.isLightContent();
 
-		mChart.setHardwareAccelerationEnabled(true);
+		mChart.setHardwareAccelerationEnabled(false);
 		mChart.setTouchEnabled(true);
 		mChart.setDragEnabled(true);
 		mChart.setScaleEnabled(true);
