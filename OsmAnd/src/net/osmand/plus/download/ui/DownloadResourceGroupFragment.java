@@ -183,7 +183,7 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 
 	@Override
 	public void onGetItems() {
-		if (restorePurchasesView != null && restorePurchasesView.getVisibility() == View.VISIBLE) {
+		if (restorePurchasesView != null && restorePurchasesView.findViewById(R.id.container).getVisibility() == View.VISIBLE) {
 			restorePurchasesView.findViewById(R.id.container).setVisibility(View.GONE);
 		}
 	}
@@ -198,7 +198,7 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 
 	@Override
 	public void dismissProgress() {
-		if (restorePurchasesView != null && restorePurchasesView.getVisibility() == View.VISIBLE) {
+		if (restorePurchasesView != null && restorePurchasesView.findViewById(R.id.container).getVisibility() == View.VISIBLE) {
 			restorePurchasesView.findViewById(R.id.progressBar).setVisibility(View.GONE);
 		}
 	}
