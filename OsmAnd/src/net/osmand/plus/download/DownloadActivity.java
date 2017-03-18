@@ -111,6 +111,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 	private DownloadIndexesThread downloadThread;
 	protected WorldRegion downloadItem;
 	protected String downloadTargetFileName;
+
 	private InAppHelper inAppHelper;
 
 	private boolean srtmDisabled;
@@ -180,14 +181,13 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 			}
 		});
 		viewPager.setCurrentItem(currentTab);
-		visibleBanner = new BannerAndDownloadFreeVersion(findViewById(R.id.mainLayout), this, true);
 
+		visibleBanner = new BannerAndDownloadFreeVersion(findViewById(R.id.mainLayout), this, true);
 		if (shouldShowFreeVersionBanner(getMyApplication())) {
-			inAppHelper = new InAppHelper(getMyApplication(), true);
-			inAppHelper.addListener(this);
 			visibleBanner.setUpdatingPrices(true);
-			inAppHelper.start(false);
 		}
+
+		startInAppHelper();
 
 		final Intent intent = getIntent();
 		if (intent != null && intent.getExtras() != null) {
@@ -211,6 +211,18 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
+		stopInAppHelper();
+	}
+
+	public void startInAppHelper() {
+		stopInAppHelper();
+
+		inAppHelper = new InAppHelper(getMyApplication(), true);
+		inAppHelper.addListener(this);
+		inAppHelper.start(false);
+	}
+
+	public void stopInAppHelper() {
 		if (inAppHelper != null) {
 			inAppHelper.removeListener(this);
 			inAppHelper.stop();
@@ -308,24 +320,54 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 	@Override
 	public void onError(String error) {
 		visibleBanner.setUpdatingPrices(false);
+		for (WeakReference<Fragment> ref : fragSet) {
+			Fragment f = ref.get();
+			if (f instanceof InAppListener && f.isAdded()) {
+				((InAppListener) f).onError(error);
+			}
+		}
 	}
 
 	@Override
 	public void onGetItems() {
 		visibleBanner.setUpdatingPrices(false);
+		for (WeakReference<Fragment> ref : fragSet) {
+			Fragment f = ref.get();
+			if (f instanceof InAppListener && f.isAdded()) {
+				((InAppListener) f).onGetItems();
+			}
+		}
 	}
 
 	@Override
 	public void onItemPurchased(String sku) {
 		visibleBanner.setUpdatingPrices(false);
+		for (WeakReference<Fragment> ref : fragSet) {
+			Fragment f = ref.get();
+			if (f instanceof InAppListener && f.isAdded()) {
+				((InAppListener) f).onItemPurchased(sku);
+			}
+		}
 	}
 
 	@Override
 	public void showProgress() {
+		for (WeakReference<Fragment> ref : fragSet) {
+			Fragment f = ref.get();
+			if (f instanceof InAppListener && f.isAdded()) {
+				((InAppListener) f).showProgress();
+			}
+		}
 	}
 
 	@Override
 	public void dismissProgress() {
+		for (WeakReference<Fragment> ref : fragSet) {
+			Fragment f = ref.get();
+			if (f instanceof InAppListener && f.isAdded()) {
+				((InAppListener) f).dismissProgress();
+			}
+		}
 	}
 
 	@Override
@@ -531,8 +573,8 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 				freeVersionBanner.findViewById(R.id.bannerTopLayout).setOnClickListener(onCollapseListener);
 			}
 
-			if (InAppHelper.hasPrices() || !updatingPrices) {
-				if (!InAppHelper.hasPrices()) {
+			if (InAppHelper.hasPrices(ctx.getMyApplication()) || !updatingPrices) {
+				if (!InAppHelper.hasPrices(ctx.getMyApplication())) {
 					fullVersionButton.setText(ctx.getString(R.string.get_for, ctx.getString(R.string.full_version_price)));
 					osmLiveButton.setText(ctx.getString(R.string.get_for_month, ctx.getString(R.string.osm_live_default_price)));
 				} else {

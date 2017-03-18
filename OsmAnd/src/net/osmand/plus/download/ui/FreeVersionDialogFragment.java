@@ -10,6 +10,7 @@ import android.view.View;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.Version;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadActivity.FreeVersionDialog;
 
@@ -30,7 +31,7 @@ public class FreeVersionDialogFragment extends DialogFragment {
 		builder.setNegativeButton(R.string.later, null);
 		View view = getActivity().getLayoutInflater().inflate(R.layout.free_version_banner, null);
 
-		boolean hidePlus = !app.getRemoteBoolean(SHOW_PLUS_VERSION_INAPP_PARAM, true);
+		boolean hidePlus = !Version.isFreeVersion(app) || !app.getRemoteBoolean(SHOW_PLUS_VERSION_INAPP_PARAM, true);
 		view.findViewById(R.id.osmLiveLayoutTopDivider).setVisibility(hidePlus ? View.GONE : View.VISIBLE);
 		view.findViewById(R.id.fullVersionLayout).setVisibility(hidePlus ? View.GONE : View.VISIBLE);
 		builder.setView(view);

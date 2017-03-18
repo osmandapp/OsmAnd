@@ -16,6 +16,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnChildClickListener;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import net.osmand.plus.IconsCache;
@@ -31,12 +32,15 @@ import net.osmand.plus.download.DownloadResourceGroup;
 import net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
+import net.osmand.plus.inapp.InAppHelper;
+import net.osmand.plus.inapp.InAppHelper.InAppListener;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class DownloadResourceGroupFragment extends DialogFragment implements DownloadEvents, OnChildClickListener {
+public class DownloadResourceGroupFragment extends DialogFragment implements DownloadEvents,
+		InAppListener, OnChildClickListener {
 	public static final int RELOAD_ID = 0;
 	public static final int SEARCH_ID = 1;
 	public static final String TAG = "RegionDialogFragment";
@@ -50,6 +54,7 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 	private DownloadActivity activity;
 	private Toolbar toolbar;
 	private View searchView;
+	private View restorePurchasesView;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -103,11 +108,33 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 
 		listView = (ExpandableListView) view.findViewById(android.R.id.list);
 		addSearchRow();
+		addRestorePurchasesRow();
 		listView.setOnChildClickListener(this);
 		listAdapter = new DownloadResourceGroupAdapter(activity);
 		listView.setAdapter(listAdapter);
 
 		return view;
+	}
+
+	private void addRestorePurchasesRow() {
+		if (!openAsDialog() && !InAppHelper.isInAppIntentoryRead()) {
+			restorePurchasesView = activity.getLayoutInflater().inflate(R.layout.restore_purchases_list_footer, null);
+			((ImageView) restorePurchasesView.findViewById(R.id.icon)).setImageDrawable(
+					getMyApplication().getIconsCache().getThemedIcon(R.drawable.ic_action_reset_to_default_dark));
+			restorePurchasesView.findViewById(R.id.button).setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					restorePurchasesView.findViewById(R.id.progressBar).setVisibility(View.VISIBLE);
+					activity.startInAppHelper();
+				}
+			});
+			listView.addFooterView(restorePurchasesView);
+			listView.setFooterDividersEnabled(false);
+			IndexItem worldBaseMapItem = activity.getDownloadThread().getIndexes().getWorldBaseMapItem();
+			if (worldBaseMapItem == null || !worldBaseMapItem.isDownloaded()) {
+				restorePurchasesView.findViewById(R.id.container).setVisibility(View.GONE);
+			}
+		}
 	}
 
 	private void addSearchRow() {
@@ -124,20 +151,55 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 				}
 			});
 			listView.addHeaderView(searchView);
-			listView.setHeaderDividersEnabled(false);
+			listView.setHeaderDividersEnabled(true);
 			IndexItem worldBaseMapItem = activity.getDownloadThread().getIndexes().getWorldBaseMapItem();
 			if (worldBaseMapItem == null || !worldBaseMapItem.isDownloaded()) {
-				title.setVisibility(View.GONE);
+				searchView.findViewById(R.id.title).setVisibility(View.GONE);
+				listView.setHeaderDividersEnabled(false);
 			}
 		}
 	}
 
 	private void updateSearchView() {
+		IndexItem worldBaseMapItem = null;
 		if (searchView != null && searchView.findViewById(R.id.title).getVisibility() == View.GONE) {
-			IndexItem worldBaseMapItem = activity.getDownloadThread().getIndexes().getWorldBaseMapItem();
+			worldBaseMapItem = activity.getDownloadThread().getIndexes().getWorldBaseMapItem();
 			if (worldBaseMapItem != null && worldBaseMapItem.isDownloaded()) {
 				searchView.findViewById(R.id.title).setVisibility(View.VISIBLE);
+				listView.setHeaderDividersEnabled(true);
 			}
+		}
+		if (restorePurchasesView != null && restorePurchasesView.findViewById(R.id.container).getVisibility() == View.GONE
+				&& !InAppHelper.isInAppIntentoryRead()) {
+			if (worldBaseMapItem != null && worldBaseMapItem.isDownloaded()) {
+				restorePurchasesView.findViewById(R.id.container).setVisibility(View.VISIBLE);
+			}
+		}
+	}
+
+	@Override
+	public void onError(String error) {
+	}
+
+	@Override
+	public void onGetItems() {
+		if (restorePurchasesView != null && restorePurchasesView.getVisibility() == View.VISIBLE) {
+			restorePurchasesView.findViewById(R.id.container).setVisibility(View.GONE);
+		}
+	}
+
+	@Override
+	public void onItemPurchased(String sku) {
+	}
+
+	@Override
+	public void showProgress() {
+	}
+
+	@Override
+	public void dismissProgress() {
+		if (restorePurchasesView != null && restorePurchasesView.getVisibility() == View.VISIBLE) {
+			restorePurchasesView.findViewById(R.id.progressBar).setVisibility(View.GONE);
 		}
 	}
 

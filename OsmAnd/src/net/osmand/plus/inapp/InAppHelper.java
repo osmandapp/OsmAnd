@@ -119,8 +119,9 @@ public class InAppHelper {
 		return SKU_LIVE_UPDATES;
 	}
 
-	public static boolean hasPrices() {
-		return !Algorithms.isEmpty(mLiveUpdatesPrice) && !Algorithms.isEmpty(mFullVersionPrice);
+	public static boolean hasPrices(OsmandApplication app) {
+		return !Algorithms.isEmpty(mLiveUpdatesPrice)
+				&& (!Version.isFreeVersion(app) || !Algorithms.isEmpty(mFullVersionPrice));
 	}
 
 	public static void initialize(OsmandApplication ctx) {
@@ -144,6 +145,10 @@ public class InAppHelper {
 			ctx.getSettings().LIVE_UPDATES_PURCHASED.set(true);
 			ctx.getSettings().FULL_VERSION_PURCHASED.set(true);
 		}
+	}
+
+	public static boolean isInAppIntentoryRead() {
+		return lastValidationCheckTime != 0;
 	}
 
 	public void exec(final @NonNull InAppRunnable runnable) {
