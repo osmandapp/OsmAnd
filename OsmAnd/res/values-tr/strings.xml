@@ -652,7 +652,7 @@
 	<string name="pref_vector_map">Vektör harita ayarları</string>
 	<string name="delete_confirmation_msg">" silinsin mi %1$s?"</string>
 	<string name="city_type_suburb">Banliyö</string>
-	<string name="city_type_hamlet">Küçük köy</string>
+	<string name="city_type_hamlet">Mezra</string>
 	<string name="city_type_village">Köy</string>
 	<string name="city_type_town">Kasaba</string>
 	<string name="city_type_city">Şehir</string>
@@ -1145,7 +1145,7 @@
     <string name="restart_is_required">Değişikliklerin geçerli olabilmesi için uygulamayı yeniden başlatmalısınız.</string>
     <string name="light_theme">Açık</string>
     <string name="dark_theme">Koyu</string>
-    <string name="lang_pms">Piedmontese</string>
+    <string name="lang_pms">Piyemontece</string>
     <string name="error_message_pattern">Hata: {0}</string>
 <string name="user_hates_app_get_feedback">Nedenini bize söyleyin.</string>
 	<string name="user_hates_app_get_feedback_long">Lütfen bize bu uygulamada ne değişklikler olmasını istediğinizi söyleyin.</string>
@@ -1274,7 +1274,7 @@
 	
 	<string name="rendering_value_pink_name">pembe</string>
 	
-	<string name="rendering_value_brown_name">kahverengi</string>
+	<string name="rendering_value_brown_name">Kahverengi</string>
 	
 	
 	
@@ -1294,7 +1294,7 @@
     <string name="lang_sq">Arnavutça</string>
     <string name="lang_is">İzlandaca</string>
     <string name="lang_bpy">Bishnupriya</string>
-    <string name="lang_nv">Navajo</string>
+    <string name="lang_nv">Navahoca</string>
     <string name="lang_ga">İrlandaca</string>
     <string name="lang_la">Latince</string>
     <string name="lang_ku">Kürtçe</string>
@@ -1351,7 +1351,7 @@
 	<string name="osmo_plugin_name">OpenStreetMap İzleme</string>
 	<string name="osmo_plugin_description">"Bu eklenti OsMo adlı gelişmiş canlı izlemeyi etkinleştirir, bkz  http://osmo.mobi.\n\nBir grup içindeki bütün aygıtları gerçek zamanlı olarak izleyebilir ve birbiriyle iletişim kurabilir. Oturum izleme veya daimi izleme için çeşitli seçenekleri vardır.\n\nAnonim gruplar belirli günlerde, ve belirli özelliklerde kendiliğinden oluşturulabilir, örn. uzaktan herhangi kontrol ve yönetici olmadan. Diğer yandan, tam özellikli gruplar websitesinde oluşturulabilir ve sadece kayıtlı kullanıcılar erişebilir. "</string>
 	<string name="plugin_touringview_name">Harita gezinti görünümü</string>
-	<string name="lang_new">Newar / Nepal Bhasa</string>
+	<string name="lang_new">Nevar / Nepal Bhasa</string>
     <string name="favorite_category_add_new">Yeni Ekle</string>
     <string name="favorite_category_select">Kategori Seç</string>
     <string name="default_speed_system_descr">Hız ölçüm sistemini tanımlar</string>
@@ -1379,7 +1379,7 @@
 	<string name="osn_comment_dialog_title">Yorum Ekle</string>
 	<string name="osn_reopen_dialog_title">Notu yeniden açın</string>
 	<string name="osn_close_dialog_title">Notu kapat</string>
-	<string name="osn_add_dialog_success">Not, başarıyla oluşturuldu</string>
+	<string name="osn_add_dialog_success">Not başarıyla oluşturuldu</string>
 	<string name="osn_add_dialog_error">Dinlenme Alanı</string>
 	<string name="osn_close_dialog_success">Not, başarıyla kapatıldı</string>
 	<string name="osn_close_dialog_error">Özel durum oluştu: nota kapatılmamış</string>
@@ -1986,7 +1986,7 @@
 <string name="route_distance">Mesafe:</string>
     <string name="route_duration">Zaman:</string>
     <string name="update_now">Şimdi güncelle</string>
-<string name="missing_write_external_storage_permission">App SD kartı kullanma iznine sahip değil.</string>
+<string name="missing_write_external_storage_permission">App SD kartı kullanma iznine sahip değil</string>
 <string name="select_voice_provider">Sesli yönlendirme seç</string>
     <string name="select_voice_provider_descr">Diliniz için sesli yönlendirme indirin veya seçin</string>
     <string name="impassable_road_desc">Yol seçimini navigasyon sırasında önlemek istiyorsanız</string>
@@ -2096,7 +2096,7 @@
     <string name="avoid_road">Yol önlemek</string>
     <string name="storage_directory_readonly_desc">Seçili veri depolama klasörü salt okunur olduğunu. Depolama klasörü geçici olarak dahili hafızaya geçildi. Lütfen geçerli depolama dizini seçin.</string>
     <string name="storage_directory_shared">Paylaşılan bellek</string>
-    <string name="shared_string_topbar">Topbar</string>
+    <string name="shared_string_topbar">Üstçubuk</string>
     <string name="recalculate_route">Rota yeniden hesaplama</string>
     <string name="report">Rapor</string>
     <string name="access_no_destination">Varış noktası ayarlanmadı</string>
