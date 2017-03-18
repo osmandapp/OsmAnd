@@ -2909,4 +2909,6 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="routing_attr_relief_smoothness_factor_name">Ступень перасечанасці мясцовасці</string>
     <string name="right_side_navigation">Правабаковы рух</string>
     <string name="driving_region_automatic">Аўтаматычны</string>
+    <string name="restore_purchases">Аднаўленне пакупак</string>
+    <string name="fonts_header">Шрыфты для мапы</string>
     </resources>
