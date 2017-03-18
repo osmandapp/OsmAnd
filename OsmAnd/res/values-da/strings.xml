@@ -2850,7 +2850,7 @@ Repræsenterer område: %1$s x %2$s</string>
   • Understøtter Open Location Code (OLC)
 
 
-  • Få vist elevation- og hældningsprofil for indspillet GPX (også hastighed) og beregnede rute
+  • Få vist højde- og hældningsprofil for indspillet GPX (også hastighed) og beregnet rute
 
 
   • Forbedret \"kørestil\" indstilling og logik i cykel ruteplanlægning
@@ -2977,7 +2977,7 @@ Repræsenterer område: %1$s x %2$s</string>
  "</string>
     <string name="osmand_extended_description_part4">"
  Skikort
- OsmAnd skikort udvidelsen viser skiløjper med angivelse af kompleksitet og nogle yderligere oplysninger, såsom placering af lifte og andre faciliteter.
+ Udvidelsen viser skiløjper med angivelse af sværhedsgrad og yderligere oplysninger, såsom placering af lifte og andre faciliteter.
  "</string>
     <string name="osmand_extended_description_part5">"
  Cykling
