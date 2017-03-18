@@ -3065,4 +3065,5 @@ Repræsenterer område: %1$s x %2$s</string>
  "</string>
     <string name="fonts_header">Skrifttyper for kort</string>
     <string name="restore_purchases">Gendan køb</string>
+    <string name="shared_string_visible">Synlig</string>
     </resources>
