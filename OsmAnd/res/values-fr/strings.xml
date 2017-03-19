@@ -2899,4 +2899,20 @@ représentant la zone : %1$s x %2$s</string>
  "</string>
     <string name="restore_purchases">Restaurer vos achats</string>
     <string name="shared_string_visible">Visible</string>
+    <string name="osmand_plus_extended_description_part7">"
+ Améliorez OSM
+ • Signalez des erreurs sur les données
+ • Envoyez des traces GPX directement depuis l\'application
+ • Ajoutez des Points d\'Intérêts
+ • Enregistrez vos itinéraires en arrière-plan (pendant que votre appareil est en veille)
+ OsmAnd est une application open source très active. Toutes les contributions sont bienvenues que ce soit en signalant des bugs, en participant à la traduction ou en développant de nouvelles fonctionnalités. Grâce aux interactions entre les utilisateurs et les développeurs l\'application est en évolution permanente. Le projet est bien sûr ouvert à toute contribution financière pour accélérer encore son développement.
+ "</string>
+    <string name="analyze_on_map">Analyser sur la carte</string>
+    <string name="osmand_plus_extended_description_part1">"
+ OsmAnd+ (OSM Automated Navigation Directions) est une application de visualisation de cartes et de navigation utilisant les données gratuites couvrant le monde entier du projet OpenStreetMap (OSM). Profitez d\'un guidage vocal comme visuel; Découvrez des Points d\'Intérêts (PI); Créez et gérez des traces GPX; Installez des plugins pour visualiser l\'altitude et les courbes de niveaux; Utilisez les modes Conduite, Piéton, Cycliste; Contribuez à l\'amélioration des cartes OSM et bien plus encore !
+
+ OsmAnd+ est la version payante de l\'application, en l\'achetant vous supportez le projet, financez le développement de nouvelles fonctionnalités, et recevez les dernières mises à jour.
+
+Fonctionnalités principales :
+ "</string>
     </resources>
