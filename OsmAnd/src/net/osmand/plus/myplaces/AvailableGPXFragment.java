@@ -1134,7 +1134,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		@Override
 		public String getGroup(int groupPosition) {
 			if (isSelectedGroup(groupPosition)) {
-				return app.getString(R.string.osm_live_active);
+				return app.getString(R.string.shared_string_visible);
 			}
 			return category.get(getGroupPosition(groupPosition));
 		}
