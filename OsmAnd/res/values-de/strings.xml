@@ -58,7 +58,7 @@ Hilfe zur OsmAnd-App erhalten Sie durch unser Support-Team unter support@osmand.
 	<string name="world_maps">Weltweite Karten</string>
 	<string name="gps_network_not_enabled">Kein Standortdienst aktiviert. Aktivieren?</string>
 	<string name="disable_recording_once_app_killed">Eigenständige Streckenaufzeichnung unterbinden</string>
-	<string name="disable_recording_once_app_killed_descrp">Pausiert die GPX-Aufzeichnung wenn OsmAnd gestoppt wird (via zuletzt verwendete Apps). (Der Hintergrunddienst-Indikator in der Android-Benachrichtigungsleiste verschwindet dann.)</string>
+	<string name="disable_recording_once_app_killed_descrp">Die GPX-Aufzeichnung wird angehalten, wenn OsmAnd beendet wird (über „zuletzt verwendete Apps“). (Die Hintergrunddienst-Anzeige verschwindet aus der Android-Benachrichtigungsleiste.)</string>
 	<string name="shared_string_import2osmand">Nach OsmAnd importieren</string>
 	<string name="tips_and_tricks_descr">Häufig gestellte Fragen, neueste Änderungen und anderes</string>
 	<string name="delay_to_start_navigation">Routenführung beginnen nach…</string>
@@ -2153,7 +2153,7 @@ Lon %2$s</string>
     <string name="osmand_running_in_background">Läuft im Hintergrund</string>
     <string name="favourites_edit_dialog_title">Favoriteninformationen</string>
     <string name="simulate_your_location_stop_descr">Standort-Simulation beenden</string>
-    <string name="simulate_your_location_descr">Simulieren durch eine berechnete Route oder eines aufgezeichneten GPX-Track</string>
+    <string name="simulate_your_location_descr">Simulation einer berechneten Route oder eines aufgezeichneten GPX-Track</string>
     <string name="recent_places">Letzte Orte</string>
 	<string name="saved_at_time">Erfolgreich gespeichert um: %1$s</string>
 	<string name="count_of_lines">Anzahl der Reihen</string>
@@ -2518,7 +2518,7 @@ Wenn Sie OsmAnd und OSM lieben und unterstützen wollen, so ist dies die perfekt
     <string name="search_my_location">Meinen Standort suchen</string>
     <string name="no_update_info">Keine Aktualisierungen anzeigen</string>
     <string name="skip_map_downloading">Herunterladen der Karten überspringen</string>
-    <string name="no_update_info_desc">Keine aktuellen Meldungen zu neuen Versionen, Rabatten von OsmAnd abfragen</string>
+    <string name="no_update_info_desc">Keine aktuellen Meldungen zu neuen Versionen, Angeboten von OsmAnd abfragen</string>
     <string name="si_mi_meters">Meilen/Meter</string>
     <string name="osm_live_banner_desc">Unbegrenzt Karten herunterladen und sie nicht nur einmal pro Monat, sondern wöchentlich, täglich oder stündlich aktualisieren.</string>
     <string name="osmand_plus_banner_desc">Vollversion von OsmAnd mit unbegrenzten Karten-Downloads und monatlichen Kartenaktualisierungen.</string>
@@ -2549,8 +2549,8 @@ Wenn Sie OsmAnd und OSM lieben und unterstützen wollen, so ist dies die perfekt
     <string name="rendering_attr_surfaceIntegrity_name">Straßenoberflächenbeschaffenheit</string>
     <string name="search_hint">Stadt, Adresse, POI-Bezeichnung eingeben</string>
     <string name="christmas_poi">Weihnachts POI</string>
-    <string name="christmas_desc">Im Vorgriff auf Weihnachten und Neujahr, können Sie Weihnachts-POI anzeigen: Weihnachtsbäume, Märkte, etc.</string>
-    <string name="christmas_desc_q">Weihnachts POI anzeigen?</string>
+    <string name="christmas_desc">Im Vorgriff auf Weihnachten und Neujahr, können Sie weihnachtliche Attraktionen anzeigen: Weihnachtsbäume, Märkte, etc.</string>
+    <string name="christmas_desc_q">Weihnachtsattraktionen anzeigen?</string>
     <string name="save_track_min_speed">Mindestgeschwindigkeit für Erfassung</string>
     <string name="save_track_min_speed_descr">Legen Sie die Mindestgeschwindigkeit fest, ab der ein Punkt aufgezeichnet wird</string>
     <string name="save_track_min_distance">Bewegungserkennung für Erfassung</string>
@@ -2646,7 +2646,7 @@ und vieles mehr ...
     <string name="quick_action_add_category">Kategorie hinzufügen</string>
     <string name="quick_action_add_configure_map">Karte konfigurieren</string>
     <string name="quick_action_add_navigation">Navigation</string>
-    <string name="quick_action_fav_name_descr">Lassen Sie das Feld leer um automatisch die Adresse oder den Namen des Ortes zu verwenden</string>
+    <string name="quick_action_fav_name_descr">Lassen Sie das Feld leer, um automatisch die Adresse oder den Namen des Ortes zu verwenden</string>
     <string name="quick_action_bug_message">Nachricht</string>
     <string name="quick_action_poi_list">POI-Liste</string>
     <string name="quick_action_sh_poi_descr">Sie können eine oder mehrere POI-Kategorien hinzufügen um diese auf der Karte anzuzeigen.</string>
@@ -2893,7 +2893,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
  • Positionsübermittlung, damit Freunde Sie finden können
  "</string>
     <string name="osmand_plus_extended_description_part8">"
- Ungefähre Kartenabdeckung und -qualität:
+ Kartenabdeckung und ungefähre -qualität:
  • Westeuropa: ****
  • Osteuropa: ***
  • Russland: ***
@@ -2906,5 +2906,31 @@ Abgedeckte Fläche: %1$s x %2$s</string>
  • Antarktis: *
  Die meisten Länder rund um den Globus stehen zum Herunterladen bereit!
  Von Afghanistan bis Zimbabwe, von Australien bis in die USA. Argentinien, Brasilien, Kanada, Frankreich, Deutschland, Mexiko, Großbritannien, Spanien, ...
+ "</string>
+    <string name="osmand_plus_extended_description_part6">"
+ Funktionen für Radler und Fußgänger
+ • Darstellung von Fuß-, Wander- und Radwegen, großartig für Outdoor-Aktivitäten
+ • Spezielle Routenberechnung und Anzeigearten für Radler und Fußgänger
+ • Wahlweise Haltestellen öffentlicher Verkehrsmittel (Bus, Tram, Bahn), einschließlich Linienbezeichnungen
+ • Wahlweise Streckenaufzeichnung als GPX-Datei auf dem Gerät oder bei einem Online-Dienst
+ • Wahlweise Geschwindigkeits- und Höhenanzeige
+ • Darstellung von Höhenlinien und Geländeschattierung (über Zusatzmodul)
+ "</string>
+    <string name="osmand_plus_extended_description_part7">"
+ Direkte Mitarbeit an OSM
+ • Fehler melden
+ • GPX-Tracks direkt aus der App an OSM weiterleiten
+ • POIs ergänzen und sie direkt (oder, bei fehlender Netzverbindung, später) zu OSM hochladen
+ • Wahlweise Streckenaufzeichnung auch im Hintergrund (im Ruhezustand des Gerätes)
+ OsmAnd ist quelloffen und wird stetig weiterentwickelt. Jeder kann durch Meldung von Fehlern, Verbesserung der Übersetzung oder Programmierung neuer Funktionen an der Anwendung mitarbeiten. Durch all diese Formen der Zusammenarbeit zwischen Entwickler und Anwender wird eine lebendige, kontinuierliche Verbesserung des Projekts gewährleistet. Darüberhinaus ist der Fortschritt des Projekts auch auf finanzielle Zuschüsse angewiesen, um die Programmierung und Testung neuer Funktionalitäten fördern zu können.
+ "</string>
+    <string name="osmand_plus_extended_description_part3">"
+ Kartenansicht
+ • Positions- und Richtungsanzeige
+ • Kartenausrichtung wahlweise nach Kompass oder Ihrer Bewegungsrichtung
+ • Sicherung Ihrer wichtigsten Orte als Favoriten
+ • Anzeige der POIs (point of interests) in Ihrer Umgebung
+ • Anzeige spezieller Online-Karten, Satellitenansichten (von Bing), verschiedener Overlays wie GPX-Tracks zu Touren-/Routenverläufen und zusätzlicher Kartenebenen mit einstellbarer Transparenz
+ • Anzeige von Ortsnamen wahlweise in Englisch, Landessprache, oder phonetischer Schreibweise
  "</string>
     </resources>
