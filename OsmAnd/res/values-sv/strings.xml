@@ -2551,4 +2551,5 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="do_not_show_startup_messages">Visa inga meddelanden vid uppstart</string>
     <string name="do_not_show_startup_messages_desc"/>
     <string name="parking_options">Parkeringsalternativ</string>
+    <string name="fonts_header">Teckensnitt för kartan</string>
     </resources>
