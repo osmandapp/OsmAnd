@@ -2898,4 +2898,5 @@ représentant la zone : %1$s x %2$s</string>
  • Partage de votre position pour que n\'importe qui puisse vous rejoindre rapidement
  "</string>
     <string name="restore_purchases">Restaurer vos achats</string>
+    <string name="shared_string_visible">Visible</string>
     </resources>
