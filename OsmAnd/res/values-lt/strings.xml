@@ -2023,7 +2023,7 @@ Specialiai atskiro žemėlapio atsisiųsti nereikia, šis rodinys bus sukurtas i
 	<string name="plugin_ski_descr">"Šis įskiepis suteikia priėjimą prie pasaulio kalnų slidinėjimo trasų, lygumų slidinėjimo trasų, kalnų slidinėjimo maršrutų, keltuvų ir slidinėjimo keltuvų duomenų. Maršrutai ir trasos yra nuspalvintos spalvomis atsižvelgiant į jų sudėtingumą bei atvaizduojami specialiu \"Žiemos\" žemėlapio stiliumi, kuris naudoja sniego spalvos žiemos peizažą.
 \n\nAktyvavus šį žemėlapio stilių, kraštovaizdis atvaizduojamas taip, kaip jis atrodytų žiemą. Šis rodinys gali būti išjungtas arba deaktyvuojant jį arba pakeitus \"Žemėlapio stilių\" meniu \"Žemėlapio nustatymuose\", į norimą. "</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Spalvos pagal priklausomybę tinklui</string>
-    <string name="rendering_value_walkingRoutesOSMC_name">Spalvinimas pagal OSMC pėsčiųjų žygiu simbolius</string>
+    <string name="rendering_value_walkingRoutesOSMC_name">Spalvinimas pagal OSMC pėsčiųjų žygių simbolius</string>
     <string name="storage_directory_multiuser">Vartotojų talpykla</string>
     <string name="gps_network_not_enabled">Neįjungta vietos nustatymo paslauga. Įjungti?</string>
     <string name="shared_string_import2osmand">Importavimas į OsmAnd</string>
@@ -2659,4 +2659,9 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="quick_action_map_source_title">Žemėlapio šaltiniai</string>
     <string name="quick_action_map_source_action">Pridėti žemėlapio šaltinį</string>
     <string name="quick_action_map_source">Pakeisti žemėlapio šaltinį</string>
+    <string name="restore_purchases">Atkurti pirkinius</string>
+    <string name="fonts_header">Žemėlapio šriftai</string>
+    <string name="right_side_navigation">Vairavimas dešinėje</string>
+    <string name="driving_region_automatic">Automatinis</string>
+    <string name="do_not_send_anonymous_app_usage">Nesiųsti anoniminės programėlės naudojimo informacijos</string>
     </resources>
