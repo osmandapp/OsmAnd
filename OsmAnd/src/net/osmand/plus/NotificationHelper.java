@@ -6,7 +6,6 @@ import android.support.v4.app.NotificationCompat.Builder;
 import net.osmand.plus.notifications.GpsWakeUpNotification;
 import net.osmand.plus.notifications.GpxNotification;
 import net.osmand.plus.notifications.NavigationNotification;
-import net.osmand.plus.notifications.OsMoNotification;
 import net.osmand.plus.notifications.OsmandNotification;
 import net.osmand.plus.notifications.OsmandNotification.NotificationType;
 
@@ -55,8 +54,6 @@ public class NotificationHelper {
 			notification = gpxNotification;
 		} else if (gpsWakeUpNotification.isEnabled()) {
 			notification = gpsWakeUpNotification;
-		} else if (osMoNotification.isEnabled() && osMoNotification.isActive()) {
-			notification = osMoNotification;
 		}
 		return notification;
 	}
@@ -75,7 +72,6 @@ public class NotificationHelper {
 	public void showNotifications() {
 		boolean navNotificationVisible = navigationNotification.showNotification();
 		gpxNotification.showNotification();
-		osMoNotification.showNotification();
 		if (!navNotificationVisible && !gpxNotification.isActive()) {
 			gpsWakeUpNotification.showNotification();
 		}
@@ -102,7 +98,6 @@ public class NotificationHelper {
 	public void refreshNotifications() {
 		boolean navNotificationVisible = navigationNotification.refreshNotification();
 		gpxNotification.refreshNotification();
-		osMoNotification.refreshNotification();
 		if (!navNotificationVisible && !gpxNotification.isActive()) {
 			gpsWakeUpNotification.refreshNotification();
 		} else {
