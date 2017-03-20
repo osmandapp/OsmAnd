@@ -211,6 +211,7 @@ public class ResourceManager {
 	
 	protected boolean internetIsNotAccessible = false;
 	private java.text.DateFormat dateFormat;
+	private boolean depthContours;
 	
 	public ResourceManager(OsmandApplication context) {
 		
@@ -269,7 +270,11 @@ public class ResourceManager {
 	public OsmandApplication getContext() {
 		return context;
 	}
-	
+
+	public boolean hasDepthContours() {
+		return depthContours;
+	}
+
 	////////////////////////////////////////////// Working with tiles ////////////////////////////////////////////////
 	
 	public Bitmap getTileImageForMapAsync(String file, ITileSource map, int x, int y, int zoom, boolean loadFromInternetIfNeeded) {
@@ -745,6 +750,7 @@ public class ResourceManager {
 			}
 		}
 		File liveDir = context.getAppPath(IndexConstants.LIVE_INDEX_DIR);
+		depthContours = false;
 		for (File f : files) {
 			progress.startTask(context.getString(R.string.indexing_map) + " " + f.getName(), -1); //$NON-NLS-1$
 			try {
@@ -783,6 +789,9 @@ public class ResourceManager {
 						changesManager.indexMainMap(f, dateCreated);
 					}
 					indexFileNames.put(f.getName(), dateFormat.format(dateCreated)); //$NON-NLS-1$
+					if (!depthContours && f.getName().toLowerCase().startsWith("depth_")) {
+						depthContours = true;
+					}
 					renderer.initializeNewResource(progress, f, mapReader);
 					BinaryMapReaderResource resource = new BinaryMapReaderResource(f, mapReader);
 					

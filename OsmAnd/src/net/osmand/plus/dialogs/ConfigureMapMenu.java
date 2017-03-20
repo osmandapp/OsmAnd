@@ -99,9 +99,11 @@ public class ConfigureMapMenu {
 		});
 		RenderingRulesStorage renderer = ma.getMyApplication().getRendererRegistry().getCurrentSelectedRenderer();
 		List<RenderingRuleProperty> customRules = new ArrayList<>();
+		boolean hasDepthContours = ma.getMyApplication().getResourceManager().hasDepthContours();
 		if (renderer != null) {
 			for (RenderingRuleProperty p : renderer.PROPS.getCustomRules()) {
-				if (!RenderingRuleStorageProperties.UI_CATEGORY_HIDDEN.equals(p.getCategory())) {
+				if (!RenderingRuleStorageProperties.UI_CATEGORY_HIDDEN.equals(p.getCategory())
+						&& (hasDepthContours || !p.getAttrName().equals("depthContours"))) {
 					customRules.add(p);
 				}
 			}
