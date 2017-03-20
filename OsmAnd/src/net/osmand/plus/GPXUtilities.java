@@ -286,6 +286,11 @@ public class GPXUtilities {
 		public WptPt locationStart;
 		public WptPt locationEnd;
 
+		public double left = 0;
+		public double right = 0;
+		public double top = 0;
+		public double bottom = 0;
+
 		public boolean isTimeSpecified() {
 			return startTime != Long.MAX_VALUE && startTime != 0;
 		}
@@ -296,6 +301,10 @@ public class GPXUtilities {
 
 		public boolean isElevationSpecified() {
 			return maxElevation != -100;
+		}
+
+		public boolean isBoundsCalculated() {
+			return left !=0 && right != 0 && top != 0 && bottom != 0;
 		}
 
 		public List<Elevation> elevationData;
@@ -357,6 +366,18 @@ public class GPXUtilities {
 					if (time != 0) {
 						startTime = Math.min(startTime, time);
 						endTime = Math.max(endTime, time);
+					}
+
+					if (left == 0 && right == 0) {
+						left = point.getLongitude();
+						right = point.getLongitude();
+						top = point.getLatitude();
+						bottom = point.getLatitude();
+					} else {
+						left = Math.min(left, point.getLongitude());
+						right = Math.max(right, point.getLongitude());
+						top = Math.max(top, point.getLatitude());
+						bottom = Math.min(bottom, point.getLatitude());
 					}
 
 					double elevation = point.ele;
