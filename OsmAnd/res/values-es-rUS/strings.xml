@@ -2833,4 +2833,5 @@ Algunas de las principales funciones:
     <string name="index_item_depth_points_northern_hemisphere">Puntos de profundidad del hemisferio norte</string>
     <string name="download_depth_countours">Curvas de profundidad</string>
     <string name="nautical_maps">Mapas náuticos</string>
+    <string name="depth_contour_descr">Conjunto de mapas que le permiten ver las curvas de profundidad marinas.</string>
     </resources>
