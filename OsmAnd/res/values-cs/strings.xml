@@ -1093,7 +1093,7 @@ Celosvětová výšková data (mezi 70 stupni severní šířky a 70 stupni již
     <string name="driving_region_japan">Japonsko</string>
     <string name="driving_region_us">Spojené státy</string>
     <string name="driving_region_canada">Kanada</string>
-    <string name="driving_region_europe_asia">Evropa a Asie</string>
+    <string name="driving_region_europe_asia">Evropa, Asie, Latinská Amerika a podobné</string>
     <string name="driving_region_uk">Británie, Indie a podobné</string>
     <string name="about_version">Verze:</string>
     <string name="shared_string_about">O aplikaci</string>
