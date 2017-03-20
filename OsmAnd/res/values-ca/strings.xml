@@ -2772,4 +2772,19 @@ El connector de mapes d\'esquí d\'OsmAnd us permet veure les pistes amb la seva
  La majoria de països de tot el món estan disponibles per la seva descàrrega!
  Aconseguiu un navegador fiable pel vostre país - sigui França, Alemanya, Mèxic, Regne Unit, Espanya, Holanda, EUA, Rússia, Brasil o qualsevol altre.
  "</string>
+    <string name="osmand_plus_extended_description_part8">"
+ Cobertura i qualitat aproximades dels mapes:
+ • Europa Occidental: ****
+ • Europa Oriental: ***
+ • Rússia: ***
+ • Amèrica del Nord: ***
+ • Amèrica del Sud: **
+ • Àsia: **
+ • Japó i Corea: ***
+ • Orient Mitjà: **
+ • Àfrica: **
+ • Antàrtida: *
+ La majoria de països de tot el món estan disponibles per descarregar-los!
+ Des de Afganistan a Zimbabwe, de Austràlia als EUA. Argentina, Brasil, Canadà, França, Alemanya, Mèxic, Regne Unit, Espanya, …
+ "</string>
     </resources>
