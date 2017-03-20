@@ -2921,4 +2921,5 @@ Fonctionnalités principales :
     <string name="index_item_depth_points_northern_hemisphere">Lignes de sonde pour l\'hémisphère nord</string>
     <string name="download_depth_countours">Lignes de sonde</string>
     <string name="nautical_maps">Cartes marines</string>
+    <string name="depth_contour_descr">Certaines cartes permettent de visualiser la profondeur d\'eau grâce à des lignes de sonde.</string>
     </resources>
