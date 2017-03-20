@@ -478,7 +478,9 @@ public class TargetPointsHelper {
 			return false;
 		}
 		Location current = routingHelper.getLastProjection();
-		double dist = 400000;
+        double dist = 400000;
+        if (ApplicationMode.BICYCLE.isDerivedRoutingFrom(routingHelper.getAppMode())
+                && settings.getCustomRoutingBooleanProperty("height_obstacles", false).getModeValue(routingHelper.getAppMode())) { dist = 50000; }
 		List<TargetPoint> list = getIntermediatePointsWithTarget();
 		if(!list.isEmpty()) {
 			if(current != null && MapUtils.getDistance(list.get(0).point, current.getLatitude(), current.getLongitude()) > dist) {
