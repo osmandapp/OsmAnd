@@ -2825,4 +2825,6 @@ Algunas de las principales funciones:
  "</string>
     <string name="fonts_header">Estilo del texto del mapa</string>
     <string name="restore_purchases">Restaurar compras</string>
+    <string name="analyze_on_map">Analizar en el mapa</string>
+    <string name="shared_string_visible">Visible</string>
     </resources>
