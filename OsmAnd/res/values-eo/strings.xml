@@ -2870,4 +2870,5 @@ De Afganujo al Zimbabvo, de Aŭstralio al Usono, Argentino, Brazilo, Kanado, Fra
     <string name="index_item_depth_points_northern_hemisphere">Profund-kurboj de norda duonsfero</string>
     <string name="download_depth_countours">Profund-kurboj</string>
     <string name="nautical_maps">Maraj mapoj</string>
+    <string name="depth_contour_descr">Kolekto da mapoj, kiu ebligas al vi vidi marajn profund-kurbojn.</string>
     </resources>
