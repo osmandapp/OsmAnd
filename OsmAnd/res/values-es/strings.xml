@@ -2664,4 +2664,21 @@ Por favor proporciona un código completo</string>
 
  Disfruta del navegador por voz y  visual, visualización de PDIs (puntos de interés), creación y gestión de  trazas GPX, visualización de curvas de nivel y uso de la información de altitud (mediante un extra), elegir entre modos conducción, ciclismo o peatonal, edición de OSM y mucho más.
  "</string>
+    <string name="analyze_on_map">Analizar en el mapa</string>
+    <string name="shared_string_visible">Visible</string>
+    <string name="restore_purchases">Restaurar compras</string>
+    <string name="fonts_header">Fuentes para mapa</string>
+    <string name="osmand_extended_description_part2">"
+ Navegación GPS
+• Puedes elegir modo entre desconectado (sin cargos de roaming cuando estás en el extranjero) o conectado (más rápido)
+• La guía de voz correo a giro te indica a lo largo del camino (voces grabadas y sintetizadas)
+• La ruta se reconstruye cada vez que te apartes de ella
+• La indicación de carril, los nombres de las calles, y el tiempo estimado de llegada ayudará a lo largo de la vía
+• Para hacer tu viaje más seguro,  el modo día/noche cambia automáticamente
+• Puedes elegir mostrar los límites de velocidad, y recibir recordatorios si se superan
+• El zoom del mapa se ajusta a tu velocidad
+• Puedes buscar destinos por dirección, por tipo (por ejemplo: aparcamiento, restaurante, hotel, gasolinera, museo), o mediante coordenadas geográficas
+• Admite puntos intermedios en el itinerario
+• Puedes grabar tu propia pista  GPX o subir una, y seguirla
+ "</string>
     </resources>
