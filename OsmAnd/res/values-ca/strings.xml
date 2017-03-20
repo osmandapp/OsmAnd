@@ -2754,4 +2754,22 @@ El connector de mapes d\'esquí d\'OsmAnd us permet veure les pistes amb la seva
 • Pujant traces GPX a OSM directament des de l\'aplicació
 • Afegint PDIs i penjar-los a OSM directament  (o més tard si no esteu connectats)
  "</string>
+    <string name="analyze_on_map">Analitza en el mapa</string>
+    <string name="shared_string_visible">Visible</string>
+    <string name="osmand_extended_description_part8">"
+ OsmAnd s\'integra en el moviment de codi obert i s\'està desenvolupant activament. Tothom pot contribuir a l\'aplicació informant d\'errors, millorant traduccions o aportant codi de noves característiques. El projecte és troba en un estat molt actiu de millora contínua en tots aquests fronts de desenvolupament i d\'interacció amb l\'usuari. El progrés del projecte també es recolza en contribucions econòmiques per finançar la programació i les proves de noves funcionalitats.
+ La cobertura aproximada dels mapes i la seva qualitat:
+ • Europa Occidental: ****
+ • Europa Oriental: ***
+ • Rússia: ***
+ • Amèrica del Nord: ***
+ • Amèrica del Sud: **
+ • Àsia: **
+ • Japó i Corea: ***
+ • Orient Mitjà: **
+ • Àfrica: **
+ • Antàrtida: *
+ La majoria de països de tot el món estan disponibles per la seva descàrrega!
+ Aconseguiu un navegador fiable pel vostre país - sigui França, Alemanya, Mèxic, Regne Unit, Espanya, Holanda, EUA, Rússia, Brasil o qualsevol altre.
+ "</string>
     </resources>
