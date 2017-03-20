@@ -179,7 +179,7 @@ public class ItemViewHolder {
 			progressBar.setVisibility(View.GONE);
 			descrTextView.setVisibility(View.VISIBLE);
 			if (indexItem.getType() == DownloadActivityType.DEPTH_CONTOUR_FILE && !depthContoursPurchased) {
-				descrTextView.setVisibility(View.GONE);
+				descrTextView.setText(context.getString(R.string.depth_contour_descr));
 			} else if ((indexItem.getType() == DownloadActivityType.SRTM_COUNTRY_FILE ||
 					indexItem.getType() == DownloadActivityType.HILLSHADE_FILE) && srtmDisabled) {
 				if(showTypeInName) {
