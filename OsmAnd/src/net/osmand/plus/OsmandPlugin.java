@@ -105,7 +105,7 @@ public abstract class OsmandPlugin {
 		Set<String> enabledPlugins = settings.getEnabledPlugins();
 		allPlugins.add(new OsmandRasterMapsPlugin(app));
 		allPlugins.add(new OsmandMonitoringPlugin(app));
-		allPlugins.add(new OsMoPlugin(app));
+		// allPlugins.add(new OsMoPlugin(app));
 		checkMarketPlugin(app, new SRTMPlugin(app), true, SRTM_PLUGIN_COMPONENT_PAID, SRTM_PLUGIN_COMPONENT);
 
 		// ? questionable - definitely not market plugin 

@@ -19,7 +19,6 @@ public class NotificationHelper {
 
 	private NavigationNotification navigationNotification;
 	private GpxNotification gpxNotification;
-	private OsMoNotification osMoNotification;
 	private GpsWakeUpNotification gpsWakeUpNotification;
 	private List<OsmandNotification> all = new ArrayList<>();
 
@@ -31,11 +30,9 @@ public class NotificationHelper {
 	private void init() {
 		navigationNotification = new NavigationNotification(app);
 		gpxNotification = new GpxNotification(app);
-		osMoNotification = new OsMoNotification(app);
 		gpsWakeUpNotification = new GpsWakeUpNotification(app);
 		all.add(navigationNotification);
 		all.add(gpxNotification);
-		all.add(osMoNotification);
 		all.add(gpsWakeUpNotification);
 	}
 
