@@ -656,7 +656,7 @@ Tanto la ubicación como el tiempo del estacionamiento se muestran en el menú p
     <string name="driving_region_japan">Japón</string>
     <string name="driving_region_us">Estados Unidos</string>
     <string name="driving_region_canada">Canadá</string>
-    <string name="driving_region_europe_asia">Europa, Asia, América Latina y similares</string>
+    <string name="driving_region_europe_asia">Europa, Asia, Latinoamérica y similares</string>
     <string name="driving_region_uk">Reino Unido, India y similares</string>
     <string name="speak_title">Anunciar…</string>
     <string name="speak_descr">Configura el anuncio de nombres de calles, avisos de tráfico (paradas, lomadas), radares y límites de velocidad</string>
@@ -2828,4 +2828,10 @@ Algunas de las principales funciones:
     <string name="restore_purchases">Restaurar compras</string>
     <string name="analyze_on_map">Analizar en el mapa</string>
     <string name="shared_string_visible">Visible</string>
+    <string name="sea_depth_thanks">¡Gracias por comprar las curvas de profundidad marinas!</string>
+    <string name="index_item_depth_contours_osmand_ext">Curvas de profundidad</string>
+    <string name="index_item_depth_points_southern_hemisphere">Puntos de profundidad del hemisferio sur</string>
+    <string name="index_item_depth_points_northern_hemisphere">Puntos de profundidad del hemisferio norte</string>
+    <string name="download_depth_countours">Curvas de profundidad</string>
+    <string name="nautical_maps">Mapas náuticos</string>
     </resources>
