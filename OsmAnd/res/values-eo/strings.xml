@@ -206,7 +206,7 @@
     <string name="driving_region_japan">Japanujo</string>
     <string name="driving_region_us">Usono</string>
     <string name="driving_region_canada">Kanado</string>
-    <string name="driving_region_europe_asia">Eŭropo, Azio kaj Latin-Ameriko</string>
+    <string name="driving_region_europe_asia">Eŭropo, Azio kaj Latin-Ameriko kaj similaj</string>
     <string name="driving_region_uk">Britujo, Barato kaj aliaj</string>
     <string name="index_name_north_america">Nordameriko</string>
     <string name="index_name_netherlands">Eŭropo - Nederlando</string>
@@ -1045,7 +1045,7 @@ Premtenu por vidi sur la mapo</string>
     <string name="maps_define_edit">Difini/redakti…</string>
     <string name="map_widget_fps_info">Montri kadrojn sekunde (senerarigo)</string>
     <string name="driving_region">Trafika regiono</string>
-    <string name="driving_region_descr">Elektu trafikan regionon: Usono, Eŭropo, Unuiĝinta Reĝlando, Azio kaj aliaj</string>
+    <string name="driving_region_descr">Elektu trafikan regionon: Usono, Eŭropo, Britujo, Azio kaj aliaj</string>
     <string name="speak_title">Anoncado…</string>
     <string name="speak_descr">Agordu anoncojn pri strataj nomoj, trafikaj avertoj (endaj haltejoj, strat-ĝiboj), rapid-kontroliloj, rapidlimoj</string>
     <string name="speak_street_names">Nomoj de stratoj (parolsintezitaj)</string>
