@@ -333,7 +333,7 @@ public class NativeLibrary {
 		});
 		for(File f : lst) {
 			final String name = f.getName();
-			if(!name.endsWith(".ttf") || !name.endsWith(".otf")) {
+			if(!name.endsWith(".ttf") && !name.endsWith(".otf")) {
 				continue;
 			}
 			try {
