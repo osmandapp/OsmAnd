@@ -2946,8 +2946,8 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="osmand_plus_extended_description_part7">"
  Bidrag direkte til OSM
   • Rapporter fejl i data
-  • Overfør GPX-spor til OSM direkte
-  • Tilføj IP og overfør dem direkte til OSM (eller senere, hvis offline)
+  • Overfør GPX-spor direkte til OSM
+  • Tilføj IP\'er og overfør dem direkte til OSM (eller senere, hvis offline)
   • Valgfri turoptagelse også i baggrundstilstand (mens enheden er i dvaletilstand)
 
   OsmAnd er open source og bliver aktivt udviklet. Alle kan bidrage til anvendelsen ved at rapportere fejl, forbedring af oversættelser eller kodning af nye funktioner. Projektet er i en livlig tilstand af kontinuerlig forbedring af alle disse former for udvikling og brugerinteraktion. Projektets fremdrift er også afhængig af finansielle bidrag til finansiering af kodning og afprøvning af nye funktionaliteter.
