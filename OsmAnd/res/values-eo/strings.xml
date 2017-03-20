@@ -206,7 +206,7 @@
     <string name="driving_region_japan">Japanujo</string>
     <string name="driving_region_us">Usono</string>
     <string name="driving_region_canada">Kanado</string>
-    <string name="driving_region_europe_asia">Eŭropo kaj Azio</string>
+    <string name="driving_region_europe_asia">Eŭropo, Azio kaj Latin-Ameriko</string>
     <string name="driving_region_uk">Britujo, Barato kaj aliaj</string>
     <string name="index_name_north_america">Nordameriko</string>
     <string name="index_name_netherlands">Eŭropo - Nederlando</string>
@@ -2864,4 +2864,10 @@ De Afganujo al Zimbabvo, de Aŭstralio al Usono, Argentino, Brazilo, Kanado, Fra
     <string name="restore_purchases">Restarigi aĉetaĵojn</string>
     <string name="shared_string_visible">Videbla</string>
     <string name="analyze_on_map">Analizi sur mapo</string>
+    <string name="sea_depth_thanks">Dankon al vi por aĉeti maran profund-kurbojn!</string>
+    <string name="index_item_depth_contours_osmand_ext">Profund-kurbojn</string>
+    <string name="index_item_depth_points_southern_hemisphere">Profund-kurboj de suda duonsfero</string>
+    <string name="index_item_depth_points_northern_hemisphere">Profund-kurboj de norda duonsfero</string>
+    <string name="download_depth_countours">Profund-kurboj</string>
+    <string name="nautical_maps">Naŭtikaj mapoj</string>
     </resources>
