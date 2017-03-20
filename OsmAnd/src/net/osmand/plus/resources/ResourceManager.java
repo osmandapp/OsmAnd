@@ -723,10 +723,10 @@ public class ResourceManager {
 		collectFiles(appPath, IndexConstants.BINARY_MAP_INDEX_EXT, files);
 		renameRoadsFiles(files, roadsPath);
 		collectFiles(roadsPath, IndexConstants.BINARY_MAP_INDEX_EXT, files);
-		if(!Version.isFreeVersion(context)) {
+		if (!Version.isFreeVersion(context) || context.getSettings().FULL_VERSION_PURCHASED.get()) {
 			collectFiles(context.getAppPath(IndexConstants.WIKI_INDEX_DIR), IndexConstants.BINARY_MAP_INDEX_EXT, files);
 		}
-		if(OsmandPlugin.getEnabledPlugin(SRTMPlugin.class) != null) {
+		if (OsmandPlugin.getEnabledPlugin(SRTMPlugin.class) != null) {
 			collectFiles(context.getAppPath(IndexConstants.SRTM_INDEX_DIR), IndexConstants.BINARY_MAP_INDEX_EXT, files);
 		}
 		

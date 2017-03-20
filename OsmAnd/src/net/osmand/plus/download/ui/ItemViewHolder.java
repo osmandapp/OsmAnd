@@ -1,7 +1,6 @@
 package net.osmand.plus.download.ui;
 
 import android.annotation.SuppressLint;
-import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -23,7 +22,6 @@ import android.widget.Toast;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
-import net.osmand.plus.Version;
 import net.osmand.plus.activities.LocalIndexHelper.LocalIndexType;
 import net.osmand.plus.activities.LocalIndexInfo;
 import net.osmand.plus.download.CityItem;
@@ -53,7 +51,8 @@ public class ItemViewHolder {
 	private boolean srtmNeedsInstallation;
 	private boolean nauticalPluginDisabled;
 	private boolean freeVersion;
-	
+	private boolean depthContoursPurchased;
+
 	protected final DownloadActivity context;
 	
 	private int textColorPrimary;
@@ -74,7 +73,8 @@ public class ItemViewHolder {
 		ASK_FOR_SEAMARKS_PLUGIN,
 		ASK_FOR_SRTM_PLUGIN_PURCHASE,
 		ASK_FOR_SRTM_PLUGIN_ENABLE,
-		ASK_FOR_FULL_VERSION_PURCHASE
+		ASK_FOR_FULL_VERSION_PURCHASE,
+		ASK_FOR_DEPTH_CONTOURS_PURCHASE
 	}
 	
 
@@ -130,6 +130,7 @@ public class ItemViewHolder {
 		nauticalPluginDisabled = context.isNauticalPluginDisabled();
 		freeVersion = context.isFreeVersion();
 		srtmNeedsInstallation = context.isSrtmNeedsInstallation();
+		depthContoursPurchased = context.getMyApplication().getSettings().DEPTH_CONTOURS_PURCHASED.get();
 	}
 
 	public void bindIndexItem(final IndexItem indexItem) {
@@ -177,7 +178,9 @@ public class ItemViewHolder {
 		if (!isDownloading) {
 			progressBar.setVisibility(View.GONE);
 			descrTextView.setVisibility(View.VISIBLE);
-			if ((indexItem.getType() == DownloadActivityType.SRTM_COUNTRY_FILE ||
+			if (indexItem.getType() == DownloadActivityType.DEPTH_CONTOUR_FILE && !depthContoursPurchased) {
+				descrTextView.setVisibility(View.GONE);
+			} else if ((indexItem.getType() == DownloadActivityType.SRTM_COUNTRY_FILE ||
 					indexItem.getType() == DownloadActivityType.HILLSHADE_FILE) && srtmDisabled) {
 				if(showTypeInName) {
 					descrTextView.setText("");
@@ -311,8 +314,12 @@ public class ItemViewHolder {
 				clickAction = RightButtonAction.ASK_FOR_SRTM_PLUGIN_ENABLE;
 			}
 
-		} else if (indexItem.getType() == DownloadActivityType.WIKIPEDIA_FILE && freeVersion) {
+		} else if (indexItem.getType() == DownloadActivityType.WIKIPEDIA_FILE && freeVersion
+				&& !context.getMyApplication().getSettings().FULL_VERSION_PURCHASED.get()) {
 			clickAction = RightButtonAction.ASK_FOR_FULL_VERSION_PURCHASE;
+		} else if (indexItem.getType() == DownloadActivityType.DEPTH_CONTOUR_FILE
+				&& !context.getMyApplication().getSettings().DEPTH_CONTOURS_PURCHASED.get()) {
+			clickAction = RightButtonAction.ASK_FOR_DEPTH_CONTOURS_PURCHASE;
 		}
 		return clickAction;
 	}
@@ -323,39 +330,37 @@ public class ItemViewHolder {
 				@Override
 				public void onClick(View v) {
 					switch (clickAction) {
-					case ASK_FOR_FULL_VERSION_PURCHASE:
-						context.getMyApplication().logEvent(context, "click_buy_plus");
-						Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(Version.marketPrefix(context
-								.getMyApplication()) + "net.osmand.plus"));
-						try {
-							context.startActivity(intent);
-						} catch (ActivityNotFoundException e) {
-							//ignore
-						}
-						break;
-					case ASK_FOR_SEAMARKS_PLUGIN:
-						context.startActivity(new Intent(context, context.getMyApplication().getAppCustomization()
-								.getPluginsActivity()));
-						Toast.makeText(context.getApplicationContext(),
-								context.getString(R.string.activate_seamarks_plugin), Toast.LENGTH_SHORT).show();
-						break;
-					case ASK_FOR_SRTM_PLUGIN_PURCHASE:
-						OsmandPlugin plugin = OsmandPlugin.getPlugin(SRTMPlugin.class);
-						if(plugin == null || plugin.getInstallURL() == null) {
+						case ASK_FOR_FULL_VERSION_PURCHASE:
+							context.getMyApplication().logEvent(context, "click_buy_plus_inapp");
+							context.purchaseFullVersion();
+							break;
+						case ASK_FOR_DEPTH_CONTOURS_PURCHASE:
+							context.getMyApplication().logEvent(context, "click_buy_depth_contours_inapp");
+							context.purchaseDepthContours();
+							break;
+						case ASK_FOR_SEAMARKS_PLUGIN:
+							context.startActivity(new Intent(context, context.getMyApplication().getAppCustomization()
+									.getPluginsActivity()));
 							Toast.makeText(context.getApplicationContext(),
-									context.getString(R.string.activate_srtm_plugin), Toast.LENGTH_LONG).show();
-						} else {
-							context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(plugin.getInstallURL())));
-						}
-						break;
-					case ASK_FOR_SRTM_PLUGIN_ENABLE:
-						context.startActivity(new Intent(context, context.getMyApplication().getAppCustomization()
-								.getPluginsActivity()));
-						Toast.makeText(context, context.getString(R.string.activate_srtm_plugin),
-								Toast.LENGTH_SHORT).show();
-						break;
-					case DOWNLOAD:
-						break;
+									context.getString(R.string.activate_seamarks_plugin), Toast.LENGTH_SHORT).show();
+							break;
+						case ASK_FOR_SRTM_PLUGIN_PURCHASE:
+							OsmandPlugin plugin = OsmandPlugin.getPlugin(SRTMPlugin.class);
+							if(plugin == null || plugin.getInstallURL() == null) {
+								Toast.makeText(context.getApplicationContext(),
+										context.getString(R.string.activate_srtm_plugin), Toast.LENGTH_LONG).show();
+							} else {
+								context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(plugin.getInstallURL())));
+							}
+							break;
+						case ASK_FOR_SRTM_PLUGIN_ENABLE:
+							context.startActivity(new Intent(context, context.getMyApplication().getAppCustomization()
+									.getPluginsActivity()));
+							Toast.makeText(context, context.getString(R.string.activate_srtm_plugin),
+									Toast.LENGTH_SHORT).show();
+							break;
+						case DOWNLOAD:
+							break;
 					}
 				}
 			};

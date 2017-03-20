@@ -39,6 +39,8 @@ public class DownloadActivityType {
 			new DownloadActivityType(R.string.download_roads_only_maps, "road_map", 30);
 	public static final DownloadActivityType SRTM_COUNTRY_FILE =
 			new DownloadActivityType(R.string.download_srtm_maps, R.drawable.ic_plugin_srtm, "srtm_map", 40);
+	public static final DownloadActivityType DEPTH_CONTOUR_FILE =
+			new DownloadActivityType(R.string.download_regular_maps, "depth", 45);
 	public static final DownloadActivityType HILLSHADE_FILE =
 			new DownloadActivityType(R.string.download_hillshade_maps, R.drawable.ic_action_hillshade_dark, "hillshade", 50);
 	public static final DownloadActivityType WIKIPEDIA_FILE =
@@ -124,13 +126,15 @@ public class DownloadActivityType {
 					IndexConstants.BINARY_MAP_VERSION));
 		} else if (HILLSHADE_FILE == this) {
 			return fileName.endsWith(IndexConstants.SQLITE_EXT);
+		} else if (DEPTH_CONTOUR_FILE == this) {
+			return fileName.endsWith(addVersionToExt(IndexConstants.BINARY_MAP_INDEX_EXT_ZIP, IndexConstants.BINARY_MAP_VERSION));
 		}
 		return false;
 	}
 	
 	public File getDownloadFolder(OsmandApplication ctx, IndexItem indexItem) {
 		if (NORMAL_FILE == this) {
-			if(indexItem.fileName.endsWith(IndexConstants.SQLITE_EXT)) {
+			if (indexItem.fileName.endsWith(IndexConstants.SQLITE_EXT)) {
 				return ctx.getAppPath(IndexConstants.TILES_INDEX_DIR);
 			}
 			return ctx.getAppPath(IndexConstants.MAPS_PATH);
@@ -148,6 +152,8 @@ public class DownloadActivityType {
 			return ctx.getAppPath(IndexConstants.LIVE_INDEX_DIR);
 		} else if (HILLSHADE_FILE == this) {
 			return ctx.getAppPath(IndexConstants.TILES_INDEX_DIR);
+		} else if (DEPTH_CONTOUR_FILE == this) {
+			return ctx.getAppPath(IndexConstants.MAPS_PATH);
 		}
 		throw new UnsupportedOperationException();
 	}
@@ -191,33 +197,34 @@ public class DownloadActivityType {
 			return BINARY_MAP_INDEX_EXT;
 		} else if (HILLSHADE_FILE == this) {
 			return IndexConstants.SQLITE_EXT;
+		} else if (DEPTH_CONTOUR_FILE == this) {
+			return BINARY_MAP_INDEX_EXT;
 		}
 		throw new UnsupportedOperationException();
 	}
 	
 	public String getUrlSuffix(OsmandApplication ctx) {
-		if (this== DownloadActivityType.ROADS_FILE) {
+		if (this== ROADS_FILE) {
 			return "&road=yes";
-		} else if (this == DownloadActivityType.LIVE_UPDATES_FILE) {
+		} else if (this == LIVE_UPDATES_FILE) {
 			return "&aosmc=yes";
-		} else if (this == DownloadActivityType.SRTM_COUNTRY_FILE) {
+		} else if (this == SRTM_COUNTRY_FILE) {
 			return "&srtmcountry=yes";
-		} else if (this == DownloadActivityType.WIKIPEDIA_FILE) {
+		} else if (this == WIKIPEDIA_FILE) {
 			return "&wiki=yes";
-		}else if (this == DownloadActivityType.HILLSHADE_FILE) {
+		} else if (this == HILLSHADE_FILE) {
 			return "&hillshade=yes";
+		} else if (this == FONT_FILE) {
+			return "&fonts=yes";
+		} else if (this == DEPTH_CONTOUR_FILE) {
+			return "&inapp=depth";
 		}
 		return "";
 	}
 
 	public String getBaseUrl(OsmandApplication ctx, String fileName) {
-		if (this == FONT_FILE) {
-			return "http://" + IndexConstants.INDEX_DOWNLOAD_DOMAIN + "/download?event=2&fonts=yes&"
-					+ Version.getVersionAsURLParam(ctx) + "&file=" + encode(fileName);
-		} else {
-			return "http://" + IndexConstants.INDEX_DOWNLOAD_DOMAIN + "/download?event=2&"
-					+ Version.getVersionAsURLParam(ctx) + "&file=" + encode(fileName);
-		}
+		return "http://" + IndexConstants.INDEX_DOWNLOAD_DOMAIN + "/download?event=2&"
+				+ Version.getVersionAsURLParam(ctx) + "&file=" + encode(fileName);
 	}
 
 
@@ -258,12 +265,16 @@ public class DownloadActivityType {
 	}
 
 	public String getVisibleDescription(IndexItem indexItem, Context ctx) {
-		if (this == DownloadActivityType.SRTM_COUNTRY_FILE) {
+		if (this == SRTM_COUNTRY_FILE) {
 			return ctx.getString(R.string.download_srtm_maps);
-		} else if (this == DownloadActivityType.WIKIPEDIA_FILE) {
+		} else if (this == WIKIPEDIA_FILE) {
 			return ctx.getString(R.string.shared_string_wikipedia);
-		} else if (this == DownloadActivityType.ROADS_FILE) {
+		} else if (this == ROADS_FILE) {
 			return ctx.getString(R.string.download_roads_only_item);
+		} else if (this == DEPTH_CONTOUR_FILE) {
+			return ctx.getString(R.string.download_depth_countours);
+		} else if (this == FONT_FILE) {
+			return ctx.getString(R.string.fonts_header);
 		}
 		return "";
 	}
@@ -334,13 +345,13 @@ public class DownloadActivityType {
 				l = fileName.length();
 			}
 			String baseNameWithoutVersion = fileName.substring(0, l);
-			if (this == DownloadActivityType.SRTM_COUNTRY_FILE) {
+			if (this == SRTM_COUNTRY_FILE) {
 				return baseNameWithoutVersion + IndexConstants.BINARY_SRTM_MAP_INDEX_EXT;
 			}
-			if (this == DownloadActivityType.WIKIPEDIA_FILE) {
+			if (this == WIKIPEDIA_FILE) {
 				return baseNameWithoutVersion + IndexConstants.BINARY_WIKI_MAP_INDEX_EXT;
 			}
-			if (this == DownloadActivityType.ROADS_FILE) {
+			if (this == ROADS_FILE) {
 				return baseNameWithoutVersion + IndexConstants.BINARY_ROAD_MAP_INDEX_EXT;
 			}
 			baseNameWithoutVersion += IndexConstants.BINARY_MAP_INDEX_EXT;

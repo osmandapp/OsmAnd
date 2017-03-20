@@ -34,6 +34,7 @@ public class DownloadResourceGroup {
 		SRTM_HEADER(R.string.download_srtm_maps),
 		HILLSHADE_HEADER(R.string.download_hillshade_maps),
 		OTHER_MAPS_HEADER(R.string.download_select_map_types),
+		NAUTICAL_MAPS_HEADER(R.string.nautical_maps),
 		// headers with voice items
 		VOICE_HEADER_TTS(R.string.index_name_tts_voice),
 		VOICE_HEADER_REC(R.string.index_name_voice),
@@ -79,7 +80,7 @@ public class DownloadResourceGroup {
 					|| this == WORLD_MAPS || this == REGION_MAPS || this == OTHER_GROUP
 					|| this == HILLSHADE_HEADER || this == SRTM_HEADER
 					|| this == OTHER_MAPS_HEADER || this == OTHER_MAPS_GROUP
-					|| this == FONTS_HEADER;
+					|| this == FONTS_HEADER || this == NAUTICAL_MAPS_HEADER;
 		}
 
 		public static String getVoiceTTSId() {

@@ -85,6 +85,7 @@
             android:paddingRight="18dp"
             android:background="@drawable/buy_btn_background_light"
             android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/dashFavIconMargin"
             android:layout_marginRight="8dp"
             android:textColor="@color/buy_button_color"
             android:text="@string/buy"
