@@ -218,6 +218,12 @@ public class FileNameTranslationHelper {
 			return ctx.getString(R.string.index_item_world_bitcoin_payments);
 		} else if (basename.equals("world_seamarks_basemap")) {
 			return ctx.getString(R.string.index_item_world_seamarks);
+		} else if (basename.equals("depth_contours_osmand_ext")) {
+			return ctx.getString(R.string.index_item_depth_contours_osmand_ext);
+		} else if (basename.equals("depth_points_southern_hemisphere_osmand_ext")) {
+			return ctx.getString(R.string.index_item_depth_points_southern_hemisphere);
+		} else if (basename.equals("depth_points_northern_hemisphere_osmand_ext")) {
+			return ctx.getString(R.string.index_item_depth_points_northern_hemisphere);
 		}
 		return null;
 	}

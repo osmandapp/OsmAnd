@@ -255,6 +255,8 @@ public class DownloadResources extends DownloadResourceGroup {
 		DownloadResourceGroup fonts = new DownloadResourceGroup(otherGroup, DownloadResourceGroupType.FONTS_HEADER);
 
 		DownloadResourceGroup worldMaps = new DownloadResourceGroup(this, DownloadResourceGroupType.WORLD_MAPS);
+		DownloadResourceGroup nauticalMaps = new DownloadResourceGroup(this, DownloadResourceGroupType.NAUTICAL_MAPS_HEADER);
+
 		Map<WorldRegion, List<IndexItem> > groupByRegion = new LinkedHashMap<WorldRegion, List<IndexItem>>();
 		OsmandRegions regs = app.getRegions();
 		for (IndexItem ii : resources) {
@@ -270,6 +272,12 @@ public class DownloadResources extends DownloadResourceGroup {
 				fonts.addItem(ii);
 				continue;
 			}
+			if (ii.getType() == DownloadActivityType.DEPTH_CONTOUR_FILE) {
+				if (app.getSettings().DEPTH_CONTOURS_PURCHASED.get() || nauticalMaps.size() == 0) {
+					nauticalMaps.addItem(ii);
+				}
+				continue;
+			}
 			String basename = ii.getBasename().toLowerCase();
 			WorldRegion wg = regs.getRegionDataByDownloadName(basename);
 			if (wg != null) {
@@ -279,7 +287,11 @@ public class DownloadResources extends DownloadResourceGroup {
 				groupByRegion.get(wg).add(ii);
 			} else {
 				if (ii.getFileName().startsWith("World_")) {
-					worldMaps.addItem(ii);
+					if (ii.getFileName().toLowerCase().startsWith(WORLD_SEAMARKS_KEY)) {
+						nauticalMaps.addItem(ii);
+					} else {
+						worldMaps.addItem(ii);
+					}
 				} else {
 					otherMaps.addItem(ii);
 				}
@@ -324,6 +336,7 @@ public class DownloadResources extends DownloadResourceGroup {
 		// 2. if there is no subregions and there only 1 index item it could be merged to the level up - objection there is no such maps
 		// 3. if hillshade/srtm is disabled, all maps from inner level could be combined into 1 
 		addGroup(worldMaps);
+		addGroup(nauticalMaps);
 		if (otherMaps.size() > 0) {
 			addGroup(otherMapsGroup);
 		}

@@ -229,6 +229,18 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 		}
 	}
 
+	public void purchaseFullVersion() {
+		if (inAppHelper != null) {
+			inAppHelper.purchaseFullVersion(this);
+		}
+	}
+
+	public void purchaseDepthContours() {
+		if (inAppHelper != null) {
+			inAppHelper.purchaseDepthContours(this);
+		}
+	}
+
 	public DownloadIndexesThread getDownloadThread() {
 		return downloadThread;
 	}

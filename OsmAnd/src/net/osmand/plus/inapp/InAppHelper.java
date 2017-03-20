@@ -38,14 +38,19 @@ public class InAppHelper {
 
 	private static boolean mSubscribedToLiveUpdates = false;
 	private static boolean mFullVersionPurchased = false;
+	private static boolean mDepthContoursPurchased = false;
 	private static String mLiveUpdatesPrice;
 	private static long lastValidationCheckTime;
 	private static String mFullVersionPrice;
+	private static String mDepthContoursPrice;
 
 	public static final String SKU_FULL_VERSION_PRICE = "osmand_full_version_price";
 	private static final String SKU_LIVE_UPDATES_FULL = "osm_live_subscription_2";
 	private static final String SKU_LIVE_UPDATES_FREE = "osm_free_live_subscription_2";
+	private static final String SKU_DEPTH_CONTOURS_FULL = "net.osmand.seadepth_plus";
+	private static final String SKU_DEPTH_CONTOURS_FREE = "net.osmand.seadepth";
 	public static String SKU_LIVE_UPDATES;
+	public static String SKU_DEPTH_CONTOURS;
 
 	private static final long PURCHASE_VALIDATION_PERIOD_MSEC = 1000 * 60 * 60 * 24; // daily
 	// (arbitrary) request code for the purchase flow
@@ -107,8 +112,16 @@ public class InAppHelper {
 		return mFullVersionPurchased;
 	}
 
+	public static boolean isDepthContoursPurchased() {
+		return mDepthContoursPurchased;
+	}
+
 	public static String getLiveUpdatesPrice() {
 		return mLiveUpdatesPrice;
+	}
+
+	public static String getDepthContoursPrice() {
+		return mDepthContoursPrice;
 	}
 
 	public static String getFullVersionPrice() {
@@ -132,6 +145,13 @@ public class InAppHelper {
 				SKU_LIVE_UPDATES = SKU_LIVE_UPDATES_FULL;
 			}
 		}
+		if (SKU_DEPTH_CONTOURS == null) {
+			if (Version.isFreeVersion(ctx)) {
+				SKU_DEPTH_CONTOURS = SKU_DEPTH_CONTOURS_FREE;
+			} else {
+				SKU_DEPTH_CONTOURS = SKU_DEPTH_CONTOURS_FULL;
+			}
+		}
 	}
 
 	public InAppHelper(OsmandApplication ctx, boolean forceRequestInventory) {
@@ -142,8 +162,10 @@ public class InAppHelper {
 		if (isDeveloperVersion) {
 			mSubscribedToLiveUpdates = true;
 			mFullVersionPurchased = true;
+			mDepthContoursPurchased = true;
 			ctx.getSettings().LIVE_UPDATES_PURCHASED.set(true);
 			ctx.getSettings().FULL_VERSION_PURCHASED.set(true);
+			ctx.getSettings().DEPTH_CONTOURS_PURCHASED.set(true);
 		}
 	}
 
@@ -225,9 +247,8 @@ public class InAppHelper {
 					logDebug("Setup successful. Querying inventory.");
 					List<String> skus = new ArrayList<>();
 					skus.add(SKU_LIVE_UPDATES);
-					if (forceRequestInventory) {
-						skus.add(SKU_FULL_VERSION_PRICE);
-					}
+					skus.add(SKU_DEPTH_CONTOURS);
+					skus.add(SKU_FULL_VERSION_PRICE);
 					mHelper.queryInventoryAsync(true, skus, mGotInventoryListener);
 				} else {
 					notifyDismissProgress();
@@ -278,6 +299,12 @@ public class InAppHelper {
 				ctx.getSettings().FULL_VERSION_PURCHASED.set(true);
 			}
 
+			Purchase depthContoursPurchase = inventory.getPurchase(SKU_DEPTH_CONTOURS);
+			mDepthContoursPurchased = isDeveloperVersion || (depthContoursPurchase != null && depthContoursPurchase.getPurchaseState() == 0);
+			if (mDepthContoursPurchased) {
+				ctx.getSettings().DEPTH_CONTOURS_PURCHASED.set(true);
+			}
+
 			lastValidationCheckTime = System.currentTimeMillis();
 			logDebug("User " + (mSubscribedToLiveUpdates ? "HAS" : "DOES NOT HAVE")
 					+ " live updates purchased.");
@@ -285,6 +312,11 @@ public class InAppHelper {
 			if (inventory.hasDetails(SKU_LIVE_UPDATES)) {
 				SkuDetails liveUpdatesDetails = inventory.getSkuDetails(SKU_LIVE_UPDATES);
 				mLiveUpdatesPrice = liveUpdatesDetails.getPrice();
+			}
+
+			if (inventory.hasDetails(SKU_DEPTH_CONTOURS)) {
+				SkuDetails depthContoursDetails = inventory.getSkuDetails(SKU_DEPTH_CONTOURS);
+				mDepthContoursPrice = depthContoursDetails.getPrice();
 			}
 
 			if (inventory.hasDetails(SKU_FULL_VERSION_PRICE)) {
@@ -335,9 +367,9 @@ public class InAppHelper {
 	};
 
 	public void purchaseFullVersion(final Activity activity) {
-		if (mHelper == null || !mHelper.subscriptionsSupported()) {
-			complain("Subscriptions not supported on your device yet. Sorry!");
-			notifyError("Subscriptions not supported on your device yet. Sorry!");
+		if (mHelper == null) {
+			complain("In-app hepler is not initialized!");
+			notifyError("In-app hepler is not initialized!");
 			if (stopAfterResult) {
 				stop();
 			}
@@ -348,6 +380,23 @@ public class InAppHelper {
 		if (mHelper != null) {
 			mHelper.launchPurchaseFlow(activity,
 					SKU_FULL_VERSION_PRICE, RC_REQUEST, mPurchaseFinishedListener);
+		}
+	}
+
+	public void purchaseDepthContours(final Activity activity) {
+		if (mHelper == null) {
+			complain("In-app hepler is not initialized!");
+			notifyError("In-app hepler is not initialized!");
+			if (stopAfterResult) {
+				stop();
+			}
+			return;
+		}
+
+		logDebug("Launching purchase flow for sea depth contours");
+		if (mHelper != null) {
+			mHelper.launchPurchaseFlow(activity,
+					SKU_DEPTH_CONTOURS, RC_REQUEST, mPurchaseFinishedListener);
 		}
 	}
 
@@ -504,20 +553,29 @@ public class InAppHelper {
 			if (purchase.getSku().equals(SKU_FULL_VERSION_PRICE)) {
 				// bought full version
 				logDebug("Full version purchased.");
-				sendToken(purchase.getToken(), new OnRequestResultListener() {
-					@Override
-					public void onResult(String result) {
-						showToast(ctx.getString(R.string.full_version_thanks));
-						mFullVersionPurchased = true;
-						ctx.getSettings().FULL_VERSION_PURCHASED.set(true);
+				showToast(ctx.getString(R.string.full_version_thanks));
+				mFullVersionPurchased = true;
+				ctx.getSettings().FULL_VERSION_PURCHASED.set(true);
 
-						notifyDismissProgress();
-						notifyItemPurchased(SKU_FULL_VERSION_PRICE);
-						if (stopAfterResult) {
-							stop();
-						}
-					}
-				});
+				notifyDismissProgress();
+				notifyItemPurchased(SKU_FULL_VERSION_PRICE);
+				if (stopAfterResult) {
+					stop();
+				}
+			}
+			if (purchase.getSku().equals(SKU_DEPTH_CONTOURS)) {
+				// bought sea depth contours
+				logDebug("Sea depth contours purchased.");
+				showToast(ctx.getString(R.string.sea_depth_thanks));
+				mDepthContoursPurchased = true;
+				ctx.getSettings().DEPTH_CONTOURS_PURCHASED.set(true);
+				ctx.getSettings().getCustomRenderBooleanProperty("depthContours").set(true);
+
+				notifyDismissProgress();
+				notifyItemPurchased(SKU_DEPTH_CONTOURS);
+				if (stopAfterResult) {
+					stop();
+				}
 			}
 		}
 	};
