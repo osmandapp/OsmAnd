@@ -1311,7 +1311,7 @@ Liste over understøttede lande (dybest set hele verden!): Afghanistan, Albanien
     <string name="driving_region_europe_asia">Europa, Asien, Latinamerika og lignende</string>
     <string name="driving_region_uk">Storbritannien, Indien og lignende</string>
     <string name="driving_region">Område</string>
-    <string name="driving_region_descr">Vælg område: USA, Europa, England, Asien m.fl.</string>
+    <string name="driving_region_descr">Vælg kørselregion: USA, Europa, Storbritannien, Asien og andre</string>
     <string name="map_widget_fps_info">FPS-fejlsøgningssinfo</string>
     <string name="local_index_tile_data_expire">Udløber (minutter): %1$s</string>
     <string name="local_index_tile_data_maxzoom">Maks zoomniveau: %1$s</string>
@@ -3073,4 +3073,5 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="index_item_depth_points_northern_hemisphere">Dybdepunkter nordlige halvkugle</string>
     <string name="download_depth_countours">Dybdekonturer</string>
     <string name="nautical_maps">Søkort</string>
+    <string name="depth_contour_descr">Kortsæt giver mulighed for at se dybdekonturlinjer.</string>
     </resources>
