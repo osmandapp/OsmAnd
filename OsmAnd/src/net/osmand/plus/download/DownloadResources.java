@@ -132,6 +132,7 @@ public class DownloadResources extends DownloadResourceGroup {
 			if ((item.getType() == DownloadActivityType.NORMAL_FILE && !item.extra)
 					|| item.getType() == DownloadActivityType.ROADS_FILE
 					|| item.getType() == DownloadActivityType.WIKIPEDIA_FILE
+					|| item.getType() == DownloadActivityType.DEPTH_CONTOUR_FILE
 					|| item.getType() == DownloadActivityType.SRTM_COUNTRY_FILE) {
 				outdated = true;
 			} else {
