@@ -812,7 +812,7 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 			List<GPXTabItemType> tabTypeList = new ArrayList<>();
 			tabTypeList.add(GPXTabItemType.GPX_TAB_ITEM_GENERAL);
 			if (gpxItem != null && gpxItem.analysis != null) {
-				if (gpxItem.analysis.elevationData != null) {
+				if (gpxItem.analysis.hasElevationData) {
 					tabTypeList.add(GPXTabItemType.GPX_TAB_ITEM_ALTITUDE);
 				}
 				if (gpxItem.analysis.isSpeedSpecified()) {

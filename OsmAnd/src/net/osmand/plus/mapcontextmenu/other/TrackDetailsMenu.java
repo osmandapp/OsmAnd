@@ -305,6 +305,16 @@ public class TrackDetailsMenu {
 	}
 
 	private void updateView(final View parentView) {
+		GPXTrackAnalysis analysis = gpxItem.analysis;
+		if (analysis == null || gpxItem.chartTypes == null) {
+			parentView.setVisibility(View.GONE);
+			if (analysis != null && analysis.isBoundsCalculated()) {
+				mapActivity.getMapView()
+						.fitRectToMap(analysis.left, analysis.right, analysis.top, analysis.bottom, 0, 0, 0);
+			}
+			return;
+		}
+
 		final LineChart chart = (LineChart) parentView.findViewById(R.id.chart);
 		chart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
 			@Override
@@ -380,47 +390,43 @@ public class TrackDetailsMenu {
 
 		final OsmandApplication app = mapActivity.getMyApplication();
 		final IconsCache ic = app.getIconsCache();
-		GPXTrackAnalysis analysis = gpxItem.analysis;
-		if (analysis != null) {
-			GpxUiHelper.setupGPXChart(app, chart, 4);
 
-			if (gpxItem.chartTypes != null) {
-				List<ILineDataSet> dataSets = new ArrayList<>();
-				if (gpxItem.chartTypes != null && gpxItem.chartTypes.length > 0) {
-					for (int i = 0; i < gpxItem.chartTypes.length; i++) {
-						OrderedLineDataSet dataSet = null;
-						switch (gpxItem.chartTypes[i]) {
-							case ALTITUDE:
-								dataSet = GpxUiHelper.createGPXElevationDataSet(app, chart, analysis,
-										gpxItem.chartAxisType, false, true);
-								break;
-							case SPEED:
-								dataSet = GpxUiHelper.createGPXSpeedDataSet(app, chart, analysis,
-										gpxItem.chartAxisType, gpxItem.chartTypes.length > 1, true);
-								break;
-							case SLOPE:
-								dataSet = GpxUiHelper.createGPXSlopeDataSet(app, chart, analysis,
-										gpxItem.chartAxisType, null, gpxItem.chartTypes.length > 1, true);
-								break;
-						}
-						if (dataSet != null) {
-							dataSets.add(dataSet);
-						}
-					}
+		GpxUiHelper.setupGPXChart(app, chart, 4);
+
+		List<ILineDataSet> dataSets = new ArrayList<>();
+		if (gpxItem.chartTypes != null && gpxItem.chartTypes.length > 0) {
+			for (int i = 0; i < gpxItem.chartTypes.length; i++) {
+				OrderedLineDataSet dataSet = null;
+				switch (gpxItem.chartTypes[i]) {
+					case ALTITUDE:
+						dataSet = GpxUiHelper.createGPXElevationDataSet(app, chart, analysis,
+								gpxItem.chartAxisType, false, true);
+						break;
+					case SPEED:
+						dataSet = GpxUiHelper.createGPXSpeedDataSet(app, chart, analysis,
+								gpxItem.chartAxisType, gpxItem.chartTypes.length > 1, true);
+						break;
+					case SLOPE:
+						dataSet = GpxUiHelper.createGPXSlopeDataSet(app, chart, analysis,
+								gpxItem.chartAxisType, null, gpxItem.chartTypes.length > 1, true);
+						break;
 				}
-
-				Collections.sort(dataSets, new Comparator<ILineDataSet>() {
-					@Override
-					public int compare(ILineDataSet ds1, ILineDataSet ds2) {
-						OrderedLineDataSet dataSet1 = (OrderedLineDataSet) ds1;
-						OrderedLineDataSet dataSet2 = (OrderedLineDataSet) ds2;
-						return dataSet1.getPriority() > dataSet2.getPriority() ? -1 : (dataSet1.getPriority() == dataSet2.getPriority() ? 0 : 1);
-					}
-				});
-				chart.setData(new LineData(dataSets));
-				updateChart(chart);
+				if (dataSet != null) {
+					dataSets.add(dataSet);
+				}
 			}
 		}
+
+		Collections.sort(dataSets, new Comparator<ILineDataSet>() {
+			@Override
+			public int compare(ILineDataSet ds1, ILineDataSet ds2) {
+				OrderedLineDataSet dataSet1 = (OrderedLineDataSet) ds1;
+				OrderedLineDataSet dataSet2 = (OrderedLineDataSet) ds2;
+				return dataSet1.getPriority() > dataSet2.getPriority() ? -1 : (dataSet1.getPriority() == dataSet2.getPriority() ? 0 : 1);
+			}
+		});
+		chart.setData(new LineData(dataSets));
+		updateChart(chart);
 
 		View yAxis = parentView.findViewById(R.id.y_axis);
 		ImageView yAxisIcon = (ImageView) parentView.findViewById(R.id.y_axis_icon);
@@ -428,23 +434,22 @@ public class TrackDetailsMenu {
 		View yAxisArrow = parentView.findViewById(R.id.y_axis_arrow);
 		final List<GPXDataSetType[]> availableTypes = new ArrayList<>();
 		boolean hasSlopeChart = false;
-		if (analysis != null) {
-			if (analysis.hasElevationData) {
-				availableTypes.add(new GPXDataSetType[] { GPXDataSetType.ALTITUDE });
-				if (gpxItem.chartAxisType != GPXDataSetAxisType.TIME) {
-					availableTypes.add(new GPXDataSetType[]{GPXDataSetType.SLOPE});
-				}
-			}
-			if (analysis.hasSpeedData) {
-				availableTypes.add(new GPXDataSetType[] { GPXDataSetType.SPEED });
-			}
-			if (analysis.hasElevationData && gpxItem.chartAxisType != GPXDataSetAxisType.TIME) {
-				availableTypes.add(new GPXDataSetType[] { GPXDataSetType.ALTITUDE, GPXDataSetType.SLOPE });
-			}
-			if (analysis.hasElevationData && analysis.hasSpeedData) {
-				availableTypes.add(new GPXDataSetType[] { GPXDataSetType.ALTITUDE, GPXDataSetType.SPEED });
+		if (analysis.hasElevationData) {
+			availableTypes.add(new GPXDataSetType[] { GPXDataSetType.ALTITUDE });
+			if (gpxItem.chartAxisType != GPXDataSetAxisType.TIME) {
+				availableTypes.add(new GPXDataSetType[]{GPXDataSetType.SLOPE});
 			}
 		}
+		if (analysis.hasSpeedData) {
+			availableTypes.add(new GPXDataSetType[] { GPXDataSetType.SPEED });
+		}
+		if (analysis.hasElevationData && gpxItem.chartAxisType != GPXDataSetAxisType.TIME) {
+			availableTypes.add(new GPXDataSetType[] { GPXDataSetType.ALTITUDE, GPXDataSetType.SLOPE });
+		}
+		if (analysis.hasElevationData && analysis.hasSpeedData) {
+			availableTypes.add(new GPXDataSetType[] { GPXDataSetType.ALTITUDE, GPXDataSetType.SPEED });
+		}
+
 		for (GPXDataSetType t : gpxItem.chartTypes) {
 			if (t == GPXDataSetType.SLOPE) {
 				hasSlopeChart = true;
@@ -494,7 +499,7 @@ public class TrackDetailsMenu {
 			xAxisIcon.setImageDrawable(ic.getThemedIcon(R.drawable.ic_action_marker_dark));
 			xAxisTitle.setText(app.getString(R.string.distance));
 		}
-		if (analysis != null && analysis.isTimeSpecified() && !hasSlopeChart) {
+		if (analysis.isTimeSpecified() && !hasSlopeChart) {
 			xAxis.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
