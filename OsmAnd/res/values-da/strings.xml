@@ -2906,7 +2906,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="routing_attr_driving_style_speed_name">Hastighed</string>
     <string name="routing_attr_driving_style_balance_name">Blanceret</string>
     <string name="routing_attr_driving_style_safety_name">Sikkerhed</string>
-    <string name="relief_smoothness_factor_descr">Prioriteret efter sletter eller bakker</string>
+    <string name="relief_smoothness_factor_descr">Prioriteret for sletter eller bakker</string>
     <string name="routing_attr_relief_smoothness_factor_name">Reliefudjævningsfaktor</string>
     <string name="full_version_thanks">Tak for køb af den fulde version af OsmAnd!</string>
     <string name="parking_options">Indstillinger for parkering</string>
@@ -2982,7 +2982,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="osmand_extended_description_part5">"
  Cykling
   • Find cykelstier på kortet
-  • GPS-navigation i cykel tilstand laver ruten ved hjælp af cykelstier
+  • GPS-navigation i cykeltilstand laver ruten ved hjælp af cykelstier
   • Se hastighed og højde
   • GPX optagelse kan optage turen og dele den
   • Via ekstra udvidelser kan aktiveres visning af højdekurver og relieflag
@@ -2996,11 +2996,11 @@ Repræsenterer område: %1$s x %2$s</string>
   • Overfør og følg en GPX rute eller optag og del egne ruter
  "</string>
     <string name="osmand_plus_extended_description_part1">"
- OsmAnd (OSM Automated Navigation Directions) er et kort- og navigationsprogram med adgang til fri, verdensomspændende, og høj kvalitet OpenStreetMap (OSM) data.
+ OsmAnd (OSM Automated Navigation Directions) er et kort- og navigationsprogram med adgang til fri, verdensomspændende, og højkvalitet data fra OpenStreetMap (OSM).
 
  Nyd stemme og optisk navigation, visning af IP\'er (interessepunkter), opret og administrere GPX-spor, ved hjælp af højdekurvevisualisering og højdeinfo, vælg mellem bilkørsel, cykling, fodgænger tilstand, OSM redigering og meget mere.
 
- OsmAnd+ er den betalte programversion. Ved køb støttes projektet og udviklingen af nye funktioner, og modtager de seneste opdateringer.
+ OsmAnd+ er den betalte programversion. Ved køb støttes projektet og udvikling af nye funktioner, og modtager de seneste opdateringer.
 
  Nogle af de vigtigste funktioner:
  "</string>
@@ -3019,7 +3019,7 @@ Repræsenterer område: %1$s x %2$s</string>
   • Juster eventuelt kortet efter kompas eller bevægelsesretning
   • Gem de vigtigste steder som foretrukne
   • Vis IP\'er (interessepunkt) i nærheden
-  • Vis specialiserede online kortfliser, satellitvisning (fra Bing), forskellige overlejringer som touring/navigation GPX-spor og yderligere lag med tilpasselig gennemsigtighed
+  • Vis specialiserede online kortfliser, satellitvisning (fra Bing), forskellige overlejringer som touring/navigation GPX-spor og yderligere lag med justerbar gennemsigtighed
   • Vis valgfrit stednavne på engelsk, lokal eller fonetisk stavemåde
  "</string>
     <string name="osmand_plus_extended_description_part4">"
@@ -3042,7 +3042,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="osmand_plus_extended_description_part6">"
  Cykel og fodgænger-funktioner
   • Visning af gang-, vandre- og cykelstier, fantastisk til udendørsaktiviteter
-  • Særlige navigations og visningstilstande for cyklister og fodgængere
+  • Særlige navigations- og visningstilstande for cyklister og fodgængere
   • Valgfrie stoppesteder for offentlig transport (bus, sporvogn, tog), herunder også linjenavne
   • Valgfri ruteoptagelse til lokal GPX-fil eller online tjeneste
   • Valgfri hastigheds og højdevisning
