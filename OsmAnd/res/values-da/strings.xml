@@ -3084,4 +3084,8 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="quick_action_add_destination_desc">Tryk på genvejen vil tilføje en destination på skærmen center placering.</string>
     <string name="quick_action_replace_destination_desc">Tryk på genvejen vil erstatte placeringen af destinationen med skærmen center placering.</string>
     <string name="quick_action_add_first_intermediate_desc">Tryk på genvejen vil tilføje en første mellemliggende punkt på skærmen center placering.</string>
+    <string name="quick_action_auto_zoom">Auto zoom kort på tænd/sluk</string>
+    <string name="quick_action_auto_zoom_desc">Tryk på genvejen vil tænde/slukke auto zoom kort efter hastighed.</string>
+    <string name="quick_action_auto_zoom_on">Auto zoom kort til</string>
+    <string name="quick_action_auto_zoom_off">Auto zoom-kort fra</string>
     </resources>
