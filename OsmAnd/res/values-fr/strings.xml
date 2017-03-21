@@ -2922,4 +2922,6 @@ Fonctionnalités principales :
     <string name="download_depth_countours">Lignes de sonde</string>
     <string name="nautical_maps">Cartes marines</string>
     <string name="depth_contour_descr">Certaines cartes permettent de visualiser la profondeur d\'eau grâce à des lignes de sonde.</string>
+    <string name="subscribe_email_error">Erreur</string>
+    <string name="subscribe_email_desc">Inscrivez-vous à notre lettre d\'informations sur les applications et téléchargez 3 cartes supplémentaires gratuitement !</string>
     </resources>
