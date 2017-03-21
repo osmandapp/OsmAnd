@@ -9,6 +9,12 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="quick_action_add_destination">Add destination</string>
+    <string name="quick_action_replace_destination">Replace destination</string>
+    <string name="quick_action_add_first_intermediate">Add first intermediate</string>
+    <string name="quick_action_add_destination_desc">Tapping the action button will add a destination at the screen center location.</string>
+    <string name="quick_action_replace_destination_desc">Tapping the action button will replace location of the destination with the screen center location.</string>
+    <string name="quick_action_add_first_intermediate_desc">Tapping the action button will add a first intermediate point at the screen center location.</string>
     <string name="no_overlay">No overlay</string>
     <string name="no_underlay">No underlay</string>
     <string name="subscribe_email_error">Error</string>
