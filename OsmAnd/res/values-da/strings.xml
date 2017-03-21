@@ -3081,7 +3081,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="quick_action_add_destination">Tilføj destination</string>
     <string name="quick_action_replace_destination">Udskift destination</string>
     <string name="quick_action_add_first_intermediate">Tilføj første mellemliggende</string>
-    <string name="quick_action_add_destination_desc">Tryk på handlingsknappen vil tilføje en destination på skærmen center placering.</string>
-    <string name="quick_action_replace_destination_desc">Tryk på handlingsknappen vil erstatte placeringen af destinationen med skærmen center placering.</string>
-    <string name="quick_action_add_first_intermediate_desc">Tryk på handlingsknappen vil tilføje en første mellemliggende punkt på skærmen center placering.</string>
+    <string name="quick_action_add_destination_desc">Tryk på genvejen vil tilføje en destination på skærmen center placering.</string>
+    <string name="quick_action_replace_destination_desc">Tryk på genvejen vil erstatte placeringen af destinationen med skærmen center placering.</string>
+    <string name="quick_action_add_first_intermediate_desc">Tryk på genvejen vil tilføje en første mellemliggende punkt på skærmen center placering.</string>
     </resources>
