@@ -26,6 +26,7 @@ import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.quickaction.actions.NewAction;
 
 import java.util.List;
 
@@ -63,7 +64,7 @@ public class QuickActionsWidget extends LinearLayout {
     public void setActions(List<QuickAction> actions){
 
         this.actions = actions;
-        this.actions.add(new QuickActionFactory.NewAction());
+        this.actions.add(new NewAction());
 
         removeAllViews();
         setupLayout(getContext(), countPage());

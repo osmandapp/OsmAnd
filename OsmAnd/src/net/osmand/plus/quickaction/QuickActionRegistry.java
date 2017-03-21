@@ -8,9 +8,17 @@ import com.google.gson.reflect.TypeToken;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
+import net.osmand.plus.audionotes.TakeAudioNoteAction;
+import net.osmand.plus.audionotes.TakePhotoNoteAction;
+import net.osmand.plus.audionotes.TakeVideoNoteAction;
 import net.osmand.plus.openseamapsplugin.NauticalMapsPlugin;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
+import net.osmand.plus.parkingpoint.ParkingAction;
 import net.osmand.plus.parkingpoint.ParkingPositionPlugin;
+import net.osmand.plus.quickaction.actions.AddOSMBugAction;
+import net.osmand.plus.quickaction.actions.AddPOIAction;
+import net.osmand.plus.quickaction.actions.MapSourceAction;
+import net.osmand.plus.quickaction.actions.MapStyleAction;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 
 import java.lang.reflect.Type;
@@ -74,9 +82,9 @@ public class QuickActionRegistry {
 
             if (OsmandPlugin.getEnabledPlugin(AudioVideoNotesPlugin.class) == null) {
 
-                if (action.type == QuickActionFactory.TakeAudioNoteAction.TYPE ||
-                        action.type == QuickActionFactory.TakePhotoNoteAction.TYPE ||
-                        action.type == QuickActionFactory.TakeVideoNoteAction.TYPE) {
+                if (action.type == TakeAudioNoteAction.TYPE ||
+                        action.type == TakePhotoNoteAction.TYPE ||
+                        action.type == TakeVideoNoteAction.TYPE) {
 
                     skip = true;
                 }
@@ -84,17 +92,16 @@ public class QuickActionRegistry {
 
             if (OsmandPlugin.getEnabledPlugin(ParkingPositionPlugin.class) == null) {
 
-                if (action.type == QuickActionFactory.ParkingAction.TYPE) {
+                if (action.type == ParkingAction.TYPE) {
                     skip = true;
                 }
             }
 
             if (OsmandPlugin.getEnabledPlugin(NauticalMapsPlugin.class) == null) {
 
-                if (action.type == QuickActionFactory.MapStyleAction.TYPE) {
+                if (action.type == MapStyleAction.TYPE) {
 
-                    if (((QuickActionFactory.MapStyleAction) QuickActionFactory.produceAction(action))
-                            .getFilteredStyles().isEmpty()){
+                    if (((MapStyleAction) QuickActionFactory.produceAction(action)).getFilteredStyles().isEmpty()){
 
                         skip = true;
                     }
@@ -103,18 +110,18 @@ public class QuickActionRegistry {
 
             if (OsmandPlugin.getEnabledPlugin(OsmandRasterMapsPlugin.class) == null) {
 
-                if (action.type == QuickActionFactory.MapSourceAction.TYPE) {
+                if (action.type == MapSourceAction.TYPE) {
                     skip = true;
                 }
             }
 
             if (OsmandPlugin.getEnabledPlugin(OsmEditingPlugin.class) == null) {
 
-                if (action.type == QuickActionFactory.AddPOIAction.TYPE) {
+                if (action.type == AddPOIAction.TYPE) {
                     skip = true;
                 }
 
-                if (action.type == QuickActionFactory.AddOSMBugAction.TYPE) {
+                if (action.type == AddOSMBugAction.TYPE) {
                     skip = true;
                 }
             }

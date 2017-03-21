@@ -63,6 +63,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 	public static final int REQUEST_ADDRESS_SELECT = 2;
 	private static final int REQUEST_LOCATION_FOR_NAVIGATION_PERMISSION = 200;
 	private static final int REQUEST_LOCATION_FOR_NAVIGATION_FAB_PERMISSION = 201;
+	private static final int REQUEST_LOCATION_FOR_ADD_DESTINATION_PERMISSION = 202;
 
 	public MapHudButton createHudButton(View iv, int resId) {
 		MapHudButton mc = new MapHudButton();
@@ -103,6 +104,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 	private ContextMenuLayer contextMenuLayer;
 	private MapQuickActionLayer mapQuickActionLayer;
 	private boolean forceShowCompass;
+	private LatLon requestedLatLon;
 
 	public MapControlsLayer(MapActivity activity) {
 		this.mapActivity = activity;
@@ -480,18 +482,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 				DirectionsDialogs.addWaypointDialogAndLaunchMap(mapActivity, latLon.getLatitude(),
 						latLon.getLongitude(), pointDescription);
 			} else if (targets.getIntermediatePoints().isEmpty()) {
-				boolean hasPointToStart = settings.restorePointToStart();
-				targets.navigateToPoint(latLon, true, -1, pointDescription);
-				if (!hasPointToStart) {
-					mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(null, null, null, true, true);
-				} else {
-					TargetPoint start = targets.getPointToStart();
-					if (start != null) {
-						mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(null, start.point, start.getOriginalPointDescription(), true, true);
-					} else {
-						mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(null, null, null, true, true);
-					}
-				}
+				startRoutePlanningWithDestination(latLon, pointDescription, targets);
 				menu.close();
 			} else {
 				AlertDialog.Builder bld = new AlertDialog.Builder(mapActivity);
@@ -524,6 +515,85 @@ public class MapControlsLayer extends OsmandMapLayer {
 				});
 				bld.setNegativeButton(R.string.shared_string_cancel, null);
 				bld.show();
+			}
+		}
+	}
+
+	private void startRoutePlanningWithDestination(LatLon latLon, PointDescription pointDescription, TargetPointsHelper targets) {
+		boolean hasPointToStart = settings.restorePointToStart();
+		targets.navigateToPoint(latLon, true, -1, pointDescription);
+		if (!hasPointToStart) {
+			mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(null, null, null, true, true);
+		} else {
+			TargetPoint start = targets.getPointToStart();
+			if (start != null) {
+				mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(null, start.point, start.getOriginalPointDescription(), true, true);
+			} else {
+				mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(null, null, null, true, true);
+			}
+		}
+	}
+
+	private PointDescription getPointDescriptionForTarget(LatLon latLon) {
+		final MapContextMenu menu = mapActivity.getContextMenu();
+		PointDescription pointDescription;
+		if (menu.isActive() && latLon.equals(menu.getLatLon())) {
+			pointDescription = menu.getPointDescriptionForTarget();
+		} else {
+			pointDescription = new PointDescription(PointDescription.POINT_TYPE_LOCATION, "");
+		}
+		return pointDescription;
+	}
+
+	public void addDestination(LatLon latLon) {
+		if (latLon != null) {
+			if (!OsmAndLocationProvider.isLocationPermissionAvailable(mapActivity)) {
+				requestedLatLon = latLon;
+				ActivityCompat.requestPermissions(mapActivity,
+						new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+						REQUEST_LOCATION_FOR_ADD_DESTINATION_PERMISSION);
+			} else {
+				PointDescription pointDescription = getPointDescriptionForTarget(latLon);
+				mapActivity.getContextMenu().close();
+				final TargetPointsHelper targets = mapActivity.getMyApplication().getTargetPointsHelper();
+				RoutingHelper routingHelper = mapActivity.getMyApplication().getRoutingHelper();
+				if (routingHelper.isFollowingMode() || routingHelper.isRoutePlanningMode()) {
+					targets.navigateToPoint(latLon, true, targets.getIntermediatePoints().size() + 1, pointDescription);
+				} else if (targets.getIntermediatePoints().isEmpty()) {
+					startRoutePlanningWithDestination(latLon, pointDescription, targets);
+				}
+			}
+		}
+	}
+
+	public void addFirstIntermediate(LatLon latLon) {
+		if (latLon != null) {
+			RoutingHelper routingHelper = mapActivity.getMyApplication().getRoutingHelper();
+			if (routingHelper.isFollowingMode() || routingHelper.isRoutePlanningMode()) {
+				PointDescription pointDescription = getPointDescriptionForTarget(latLon);
+				mapActivity.getContextMenu().close();
+				final TargetPointsHelper targets = mapActivity.getMyApplication().getTargetPointsHelper();
+				if (routingHelper.isFollowingMode() || routingHelper.isRoutePlanningMode()) {
+					targets.navigateToPoint(latLon, true, 0, pointDescription);
+				} else if (targets.getIntermediatePoints().isEmpty()) {
+					startRoutePlanningWithDestination(latLon, pointDescription, targets);
+				}
+			} else {
+				addDestination(latLon);
+			}
+		}
+	}
+
+	public void replaceDestination(LatLon latLon) {
+		RoutingHelper routingHelper = mapActivity.getMyApplication().getRoutingHelper();
+		if (latLon != null) {
+			if (routingHelper.isFollowingMode() || routingHelper.isRoutePlanningMode()) {
+				PointDescription pointDescription = getPointDescriptionForTarget(latLon);
+				mapActivity.getContextMenu().close();
+				final TargetPointsHelper targets = mapActivity.getMyApplication().getTargetPointsHelper();
+				targets.navigateToPoint(latLon, true, -1, pointDescription);
+			} else {
+				addDestination(latLon);
 			}
 		}
 	}
@@ -1125,6 +1195,9 @@ public class MapControlsLayer extends OsmandMapLayer {
 		} else if (requestCode == REQUEST_LOCATION_FOR_NAVIGATION_FAB_PERMISSION
 				&& grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 			navigateFab();
+		} else if (requestCode == REQUEST_LOCATION_FOR_ADD_DESTINATION_PERMISSION
+				&& grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+			addDestination(requestedLatLon);
 		}
 	}
 }
