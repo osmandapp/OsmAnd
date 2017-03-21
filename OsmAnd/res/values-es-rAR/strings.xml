@@ -2839,4 +2839,14 @@ Algunas de las principales funciones:
     <string name="subscribe_email_desc">¡Suscríbete a nuestra lista de correo electrónico para recibir descuentos de la aplicación y obtener más de 3 descargas de mapa!</string>
     <string name="no_overlay">Sin superposición</string>
     <string name="no_underlay">Sin subyacencia</string>
+    <string name="quick_action_auto_zoom">Alternar ampliación automática del mapa</string>
+    <string name="quick_action_auto_zoom_desc">Al pulsar el botón de acción se alternará la ampliación automática del mapa de acuerdo a la velocidad.</string>
+    <string name="quick_action_auto_zoom_on">Ampliación automática del mapa activada</string>
+    <string name="quick_action_auto_zoom_off">Ampliación automática del mapa desactivada</string>
+    <string name="quick_action_add_destination">Añadir destino</string>
+    <string name="quick_action_replace_destination">Reemplazar destino</string>
+    <string name="quick_action_add_first_intermediate">Añadir primer destino intermedio</string>
+    <string name="quick_action_add_destination_desc">Al pulsar el botón de acción se agregará un destino en el centro de la pantalla.</string>
+    <string name="quick_action_replace_destination_desc">Al pulsar el botón de acción se reemplazará el destino con la ubicación central de la pantalla.</string>
+    <string name="quick_action_add_first_intermediate_desc">Al pulsar el botón de acción se agregará un primer punto intermedio en el centro de la pantalla.</string>
     </resources>
