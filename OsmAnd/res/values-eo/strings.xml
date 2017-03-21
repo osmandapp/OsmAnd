@@ -2883,6 +2883,6 @@ De Afganujo al Zimbabvo, de Aŭstralio al Usono, Argentino, Brazilo, Kanado, Fra
     <string name="subscribe_email_desc">Abonu nian dissendoliston pri rabatoj de aplikaĵo kaj havigu 3 pliajn map-elŝutojn!</string>
     <string name="quick_action_auto_zoom">Aŭtomata map-pligrandigo ek/for</string>
     <string name="quick_action_auto_zoom_desc">Premado sur ag-butono aŭtomate aktivigos/malaktivigos map-pligrandigon laŭ via rapido.</string>
-    <string name="quick_action_auto_zoom_on">Aŭtomate pligrandigi mapon</string>
-    <string name="quick_action_auto_zoom_off">Ne pligrandigi mapon aŭtomate</string>
+    <string name="quick_action_auto_zoom_on">Aŭtomata map-pligrandigo ek</string>
+    <string name="quick_action_auto_zoom_off">Aŭtomata map-pligrandigo for</string>
     </resources>
