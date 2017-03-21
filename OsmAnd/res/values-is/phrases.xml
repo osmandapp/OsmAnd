@@ -269,7 +269,7 @@
 	<string name="poi_ford_stepping_stones">Stiklubrú</string>
 	<string name="poi_mountain_pass">Fjallaskarð</string>
 	<string name="poi_city_wall">Borgarmúr</string>
-	<string name="poi_traffic_calming_table">Tafla</string>
+	<string name="poi_traffic_calming_table">Pallur</string>
 	<string name="poi_traffic_calming_island">Umferðareyja</string>
 	<string name="poi_traffic_signals">Stöðvunarljós</string>
 
@@ -1973,4 +1973,34 @@
 	<string name="poi_vehicle_ramp">Bifreiðarampur</string>
 	<string name="poi_public_transport_platform_trolleybus">Biðstöð rafknúinna strætisvagna</string>
 	<string name="poi_railway_platform">Brautarpallur</string>
+	<string name="poi_lift_gate">Bómuhlið</string>
+	<string name="poi_traffic_calming_hump">Alda</string>
+	<string name="poi_traffic_calming_cushion">Koddi</string>
+	<string name="poi_traffic_calming_chicane">Hliðrun</string>
+	<string name="poi_traffic_calming_rumble_strip">Hvinrendur</string>
+	<string name="poi_traffic_calming_choker">Þrenging</string>
+	<string name="poi_railway_buffer_stop">Járnbrautarstuðpúði</string>
+	<string name="poi_aeroway_terminal">Flugstöð</string>
+	<string name="poi_aeroway_gate">Flughlið</string>
+
+	<string name="poi_slipway">Dráttarbraut</string>
+	<string name="poi_ferry_terminal">Ferjustöð</string>
+	<string name="poi_aerialway_station">Lyftustöð</string>
+	<string name="poi_aerialway_mixed_lift">Lokuð stólalyfta</string>
+	<string name="poi_turning_circle">Snúningshringur</string>
+	<string name="poi_motorway_junction">Þjóðvegatenging</string>
+	<string name="poi_standpipe">Tengipípa</string>
+	<string name="poi_water_works">Vatnsvinnsla</string>
+	<string name="poi_water_tower">Vatnsturn</string>
+	<string name="poi_waterway_turning_point">Snúningspunktur á siglingaleið</string>
+	<string name="poi_weir">Stíflugarður</string>
+	<string name="poi_breakwater">Brimvarnargarður</string>
+	<string name="poi_groyne">Öldubrjótur</string>
+
+	<string name="poi_power_substation">Spennivirki</string>
+	<string name="poi_power_cable_distribution_cabinet">Kapaltengiskápur</string>
+	<string name="poi_power_plant">Aflstöð</string>
+	<string name="poi_power_generator">Aflgjafi</string>
+	<string name="poi_club_motorcycle">Mótorhjólaklúbbur</string>
+	<string name="poi_motorcycle_repair">Mótorhjólaviðgerðir</string>
 	</resources>
