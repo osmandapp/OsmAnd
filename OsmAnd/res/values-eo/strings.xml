@@ -1053,9 +1053,9 @@ Premtenu por vidi sur la mapo</string>
     <string name="speak_cameras">Rapid-kontroliloj</string>
     <string name="speak_traffic_warnings">Trafikaj avertoj</string>
     <string name="osb_author_or_password_not_specified">Bonvolu entajpi uzantnomon kaj pasvorton por OSM en Agordoj</string>
-    <string name="clear_intermediate_points">Forviŝi inter-celojn</string>
-    <string name="keep_intermediate_points">Konservi inter-celojn</string>
-    <string name="new_directions_point_dialog">Vi jam precizigis inter-celojn.</string>
+    <string name="clear_intermediate_points">Forviŝi intercelojn</string>
+    <string name="keep_intermediate_points">Konservi intercelojn</string>
+    <string name="new_directions_point_dialog">Vi jam precizigis intercelojn.</string>
     <string name="context_menu_item_directions_to">Navigi al</string>
     <string name="context_menu_item_directions_from">Navigi el</string>
     <string name="route_descr_map_location">"Mapo: "</string>
@@ -1135,7 +1135,7 @@ Premtenu por vidi sur la mapo</string>
     <string name="download_hillshade_maps">Nivel-ombrumoj</string>
     <string name="local_indexes_cat_av">Sonaj/videaj datumoj</string>
     <string name="stop_routing_confirm">Ĉu vi certe volas ĉesigi navigadon?</string>
-    <string name="clear_dest_confirm">Ĉu vi certe volas forviŝi la celon (kaj inter-celojn)?</string>
+    <string name="clear_dest_confirm">Ĉu vi certe volas forviŝi la celon (kaj intercelojn)?</string>
     <string name="precise_routing_mode">Precizaj kursoj (alfa)</string>
     <string name="precise_routing_mode_descr">Aktivigas kalkuladon de precizaj seneraraj kursoj. Nuntempe ĝi estas malrapida kaj nur por limigitaj distancoj.</string>
     <string name="recording_context_menu_show">Montri</string>
@@ -1216,19 +1216,19 @@ Premtenu por vidi sur la mapo</string>
     <string name="no_route">Nenia kurso</string>
     <string name="delete_target_point">Forigi celon</string>
     <string name="target_point">Celo %1$s</string>
-    <string name="intermediate_point">Inter-celo %1$s</string>
-    <string name="context_menu_item_last_intermediate_point">Aldoni kiel finan inter-celon</string>
-    <string name="context_menu_item_first_intermediate_point">Aldoni kiel unuan inter-celon</string>
-    <string name="add_as_last_destination_point">Aldoni kiel finan inter-celon</string>
-    <string name="add_as_first_destination_point">Aldoni kiel unuan inter-celon</string>
+    <string name="intermediate_point">Intercelo %1$s</string>
+    <string name="context_menu_item_last_intermediate_point">Aldoni kiel finan intercelon</string>
+    <string name="context_menu_item_first_intermediate_point">Aldoni kiel unuan intercelon</string>
+    <string name="add_as_last_destination_point">Aldoni kiel finan intercelon</string>
+    <string name="add_as_first_destination_point">Aldoni kiel unuan intercelon</string>
 
     <string name="replace_destination_point">Anstataŭigi la celon</string>
     <string name="new_destination_point_dialog">Vi jam elektis celon:</string>
     <string name="target_points">Celoj</string>
-    <string name="intermediate_point_too_far">Inter-celo %1$s estas tro malproksime al la plej proksima vojo.</string>
-    <string name="arrived_at_intermediate_point">Vi alvenis al la inter-celo</string>
-    <string name="context_menu_item_intermediate_point">Aldoni kiel inter-celon</string>
-    <string name="map_widget_intermediate_distance">Inter-celo</string>
+    <string name="intermediate_point_too_far">Intercelo %1$s estas tro malproksime al la plej proksima vojo.</string>
+    <string name="arrived_at_intermediate_point">Vi alvenis al la intercelo</string>
+    <string name="context_menu_item_intermediate_point">Aldoni kiel intercelon</string>
+    <string name="map_widget_intermediate_distance">Intercelo</string>
     <string name="ending_point_too_far">Celo estas tro malproksime al la plej proksima vojo.</string>
     <string name="add_tag">Aldoni markon</string>
     <string name="btn_advanced_mode">Sperta reĝimo…</string>
@@ -2871,4 +2871,14 @@ De Afganujo al Zimbabvo, de Aŭstralio al Usono, Argentino, Brazilo, Kanado, Fra
     <string name="download_depth_countours">Profund-kurboj</string>
     <string name="nautical_maps">Maraj mapoj</string>
     <string name="depth_contour_descr">Kolekto da mapoj, kiu ebligas al vi vidi marajn profund-kurbojn.</string>
+    <string name="quick_action_add_destination">Aldoni celon</string>
+    <string name="quick_action_replace_destination">Anstataŭigi celon</string>
+    <string name="quick_action_add_first_intermediate">Aldoni unuan interlokon</string>
+    <string name="quick_action_add_destination_desc">Premado sur ag-butono aldonos celon al ekrana centro.</string>
+    <string name="quick_action_replace_destination_desc">Premado sur ag-butono anstataŭigos cellokon per loko en centra ekrano.</string>
+    <string name="quick_action_add_first_intermediate_desc">Premado sur ag-butono aldonos unuan intercelon al ekrana centro.</string>
+    <string name="no_overlay">Neniu surtavolo</string>
+    <string name="no_underlay">Neniu subtavolo</string>
+    <string name="subscribe_email_error">Eraro</string>
+    <string name="subscribe_email_desc">Abonu nian dissendoliston pri rabatoj de aplikaĵo kaj havigu 3 pliajn map-elŝutojn!</string>
     </resources>
