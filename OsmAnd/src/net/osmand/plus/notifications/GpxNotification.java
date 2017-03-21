@@ -108,20 +108,20 @@ public class GpxNotification extends OsmandNotification {
 		color = 0;
 		icon = R.drawable.ic_action_polygom_dark;
 		boolean isGpxRecording = app.getSavingTrackHelper().getIsRecording();
-		float recordedDistane = app.getSavingTrackHelper().getDistance();
+		float recordedDistance = app.getSavingTrackHelper().getDistance();
 		ongoing = true;
 		if (isGpxRecording) {
 			color = app.getResources().getColor(R.color.osmand_orange);
 			notificationTitle = app.getString(R.string.shared_string_trip) + " • "
 					+ Algorithms.formatDuration((int) (app.getSavingTrackHelper().getDuration() / 1000), true);
 			notificationText = app.getString(R.string.shared_string_recorded)
-					+ ": " + OsmAndFormatter.getFormattedDistance(recordedDistane, app);
+					+ ": " + OsmAndFormatter.getFormattedDistance(recordedDistance, app);
 		} else {
-			if (recordedDistane > 0) {
-				notificationTitle = app.getString(R.string.shared_string_pause) + " • "
+			if (recordedDistance > 0) {
+				notificationTitle = app.getString(R.string.shared_string_paused) + " • "
 						+ Algorithms.formatDuration((int) (app.getSavingTrackHelper().getDuration() / 1000), true);
 				notificationText = app.getString(R.string.shared_string_recorded)
-						+ ": " + OsmAndFormatter.getFormattedDistance(recordedDistane, app);
+						+ ": " + OsmAndFormatter.getFormattedDistance(recordedDistance, app);
 			} else {
 				ongoing = false;
 				notificationTitle = app.getString(R.string.shared_string_trip_recording);
@@ -157,7 +157,7 @@ public class GpxNotification extends OsmandNotification {
 			Intent startIntent = new Intent(OSMAND_START_GPX_SERVICE_ACTION);
 			PendingIntent startPendingIntent = PendingIntent.getBroadcast(app, 0, startIntent,
 					PendingIntent.FLAG_UPDATE_CURRENT);
-			if (recordedDistane > 0) {
+			if (recordedDistance > 0) {
 				notificationBuilder.addAction(R.drawable.ic_action_rec_start,
 						app.getString(R.string.shared_string_continue), startPendingIntent);
 				notificationBuilder.addAction(R.drawable.ic_action_save, app.getString(R.string.shared_string_save),
