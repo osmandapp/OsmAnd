@@ -3074,4 +3074,6 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="download_depth_countours">Dybdekonturer</string>
     <string name="nautical_maps">Søkort</string>
     <string name="depth_contour_descr">Kortsæt giver mulighed for at se dybdekonturlinjer.</string>
+    <string name="subscribe_email_error">Fejl</string>
+    <string name="subscribe_email_desc">Abonner på e-mail liste om app rabatter og hent yderligere 3 kort!</string>
     </resources>
