@@ -9,6 +9,8 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="no_overlay">No overlay</string>
+    <string name="no_underlay">No underlay</string>
     <string name="subscribe_email_error">Error</string>
     <string name="subscribe_email_desc">Subscribe to our email list about app discounts and get 3 more map downloads!</string>
     <string name="depth_contour_descr">Set of maps allows you to see sea depth contour lines.</string>
