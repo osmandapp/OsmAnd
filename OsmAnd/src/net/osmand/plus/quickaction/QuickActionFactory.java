@@ -2175,6 +2175,7 @@ public class QuickActionFactory {
         public static final int TYPE = 15;
 
         private final static String KEY_OVERLAYS = "overlays";
+		private final static String KEY_NO_OVERLAY = "no_overlay";
 
         protected MapOverlayAction() {
             super(TYPE);
@@ -2238,8 +2239,14 @@ public class QuickActionFactory {
                     nextSource = sources.get(index + 1);
                 }
 
-                settings.MAP_OVERLAY.set(nextSource.first);
-                settings.MAP_OVERLAY_PREVIOUS.set(nextSource.first);
+				boolean hasOverlay = !nextSource.first.equals(KEY_NO_OVERLAY);
+				if (hasOverlay) {
+					settings.MAP_OVERLAY.set(nextSource.first);
+					settings.MAP_OVERLAY_PREVIOUS.set(nextSource.first);
+				} else {
+					settings.MAP_OVERLAY.set(null);
+					settings.MAP_OVERLAY_PREVIOUS.set(null);
+				}
 
                 plugin.updateMapLayers(activity.getMapView(), settings.MAP_OVERLAY, activity.getMapLayers());
                 Toast.makeText(activity, activity.getString(R.string.quick_action_map_overlay_switch, nextSource.second), Toast.LENGTH_SHORT).show();
@@ -2274,6 +2281,7 @@ public class QuickActionFactory {
 
                     final OsmandSettings settings = activity.getMyApplication().getSettings();
                     Map<String, String> entriesMap = settings.getTileSourceEntries();
+                    entriesMap.put(KEY_NO_OVERLAY, activity.getString(R.string.no_overlay));
                     AlertDialog.Builder builder = new AlertDialog.Builder(activity);
                     final ArrayList<String> keys = new ArrayList<>(entriesMap.keySet());
                     final String[] items = new String[entriesMap.size()];
@@ -2310,6 +2318,7 @@ public class QuickActionFactory {
         public static final int TYPE = 16;
 
         private final static String KEY_UNDERLAYS = "underlays";
+		private final static String KEY_NO_UNDERLAY = "no_underlay";
 
         protected MapUnderlayAction() {
             super(TYPE);
@@ -2372,8 +2381,18 @@ public class QuickActionFactory {
                     nextSource = sources.get(index + 1);
                 }
 
-                settings.MAP_UNDERLAY.set(nextSource.first);
-                settings.MAP_UNDERLAY_PREVIOUS.set(nextSource.first);
+				boolean hasUnderlay = !nextSource.first.equals(KEY_NO_UNDERLAY);
+				if (hasUnderlay) {
+					settings.MAP_UNDERLAY.set(nextSource.first);
+					settings.MAP_UNDERLAY_PREVIOUS.set(nextSource.first);
+				} else {
+					settings.MAP_UNDERLAY.set(null);
+					settings.MAP_UNDERLAY_PREVIOUS.set(null);
+				}
+
+				final OsmandSettings.CommonPreference<Boolean> hidePolygonsPref =
+						activity.getMyApplication().getSettings().getCustomRenderBooleanProperty("noPolygons");
+				hidePolygonsPref.set(hasUnderlay);
 
                 plugin.updateMapLayers(activity.getMapView(), settings.MAP_UNDERLAY, activity.getMapLayers());
                 Toast.makeText(activity, activity.getString(R.string.quick_action_map_underlay_switch, nextSource.second), Toast.LENGTH_SHORT).show();
@@ -2408,6 +2427,7 @@ public class QuickActionFactory {
 
                     final OsmandSettings settings = activity.getMyApplication().getSettings();
                     Map<String, String> entriesMap = settings.getTileSourceEntries();
+					entriesMap.put(KEY_NO_UNDERLAY, activity.getString(R.string.no_underlay));
                     AlertDialog.Builder builder = new AlertDialog.Builder(activity);
                     final ArrayList<String> keys = new ArrayList<>(entriesMap.keySet());
                     final String[] items = new String[entriesMap.size()];
