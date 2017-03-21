@@ -9,6 +9,8 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="subscribe_email_error">Error</string>
+    <string name="subscribe_email_desc">Subscribe to our email list about app discounts and get 3 more map downloads!</string>
     <string name="depth_contour_descr">Set of maps allows you to see sea depth contour lines.</string>
     <string name="sea_depth_thanks">Thank you for purchasing sea depth contours!</string>
     <string name="index_item_depth_contours_osmand_ext">Depth contours</string>

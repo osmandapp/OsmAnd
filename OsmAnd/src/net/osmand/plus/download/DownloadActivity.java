@@ -413,6 +413,10 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 		downloadHasFinished();
 	}
 
+	public void updateBanner() {
+		visibleBanner.updateBannerInProgress();
+	}
+
 	private int getCurrentTab() {
 		return viewPager.getCurrentItem();
 	}
@@ -427,7 +431,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 		return Math.max(downloadsLeft, 0) > 0;
 	}
 
-	private static boolean shouldShowFreeVersionBanner(OsmandApplication application) {
+	public static boolean shouldShowFreeVersionBanner(OsmandApplication application) {
 		return (Version.isFreeVersion(application) && !application.getSettings().LIVE_UPDATES_PURCHASED.get()
 				&& !application.getSettings().FULL_VERSION_PURCHASED.get())
 				|| application.getSettings().SHOULD_SHOW_FREE_VERSION_BANNER.get();
