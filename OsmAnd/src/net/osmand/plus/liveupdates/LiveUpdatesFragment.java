@@ -633,9 +633,11 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppList
 
 		@Override
 		protected void onProgressUpdate(LocalIndexInfo... values) {
+			String fileNameL;
 			for (LocalIndexInfo localIndexInfo : values) {
+				fileNameL = localIndexInfo.getFileName().toLowerCase();
 				if (localIndexInfo.getType() == LocalIndexHelper.LocalIndexType.MAP_DATA
-						&& !(localIndexInfo.getFileName().toLowerCase().contains("world"))) {
+						&& !fileNameL.contains("world") && !fileNameL.startsWith("depth_")) {
 					adapter.add(localIndexInfo);
 				}
 			}
