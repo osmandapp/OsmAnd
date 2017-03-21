@@ -1308,12 +1308,12 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="announce_gpx_waypoints">Punti GPX di passaggio</string>
 
 
-    <string name="driving_region_descr">Scegliete la regione di guida: USA, Europa, UK, Asia o Altre</string>
+    <string name="driving_region_descr">Scegliete la regione di guida: USA, Europa, UK, Asia o altre</string>
     <string name="driving_region">Regione di guida</string>
     <string name="driving_region_japan">Giappone</string>
     <string name="driving_region_us">Stati Uniti</string>
     <string name="driving_region_canada">Canada</string>
-    <string name="driving_region_europe_asia">Europa &amp; Asia</string>
+    <string name="driving_region_europe_asia">Europa, Asia, America Latina e similari</string>
     <string name="driving_region_uk">UK, India, Australia e simili</string>
     <string name="map_widget_fps_info">Informazioni FPS</string>
     <string name="local_index_tile_data_zooms">Zoom scaricati: %1$s</string>
@@ -2892,7 +2892,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="do_not_show_startup_messages_desc">Mostra messaggi riguardo app in sconto ed eventi locali speciali</string>
     <string name="parking_options">Opzioni parcheggio</string>
     <string name="full_version_thanks">Grazie di avere acquistato la versione completa di OsmAnd!</string>
-    <string name="fonts_header">Carattere della mappa</string>
+    <string name="fonts_header">Caratteri della mappa</string>
     <string name="right_side_navigation">Guida a destra</string>
     <string name="depth_contour_descr">Insieme di mappe che permettono di visualizzare le isoipse marine.</string>
     <string name="sea_depth_thanks">Grazie per avere acquistato le isoipse marine!</string>
@@ -2902,4 +2902,8 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="download_depth_countours">Isoipse marine</string>
     <string name="nautical_maps">Mappe nautiche</string>
     <string name="analyze_on_map">Analizza sulla mappa</string>
+    <string name="shared_string_visible">Visibile</string>
+    <string name="restore_purchases">Ripristina gli acquisti fatti</string>
+    <string name="subscribe_email_error">Errore</string>
+    <string name="subscribe_email_desc">Sottoscrivi la mailing list della nostra applicazione e avrai ulteriori 3 download di mappe!</string>
     </resources>
