@@ -1158,7 +1158,7 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="transport_search_desc">Buscar transporte público</string>
     <string name="favourites_search_desc">Buscar favoritos</string>
     <string name="offline_navigation_not_available">La navegación sin conexión de OsmAnd, no está disponible temporalmente.</string>
-    <string name="left_side_navigation">Conducción por la izquierda</string>
+    <string name="left_side_navigation">Conducir por la izquierda</string>
     <string name="left_side_navigation_descr">Elige la conducción para países con tráfico por la izquierda</string>
     <string name="local_index_description">Pulsa cualquier objeto para ver más detalles, mantén pulsado para desactivar o borrar. Datos en el dispositivo actualmente (%1$s libre):</string>
     <string name="unknown_from_location">El punto de partida todavía no se determinó</string>
@@ -2671,7 +2671,7 @@ Representa el área: %1$s x %2$s</string>
     <string name="parking_options">Opciones de estacionamiento</string>
     <string name="full_version_thanks">¡Gracias por comprar la versión completa de OsmAnd!</string>
     <string name="routing_attr_relief_smoothness_factor_name">Factor de suavidad del relieve</string>
-    <string name="right_side_navigation">Conducción por la derecha</string>
+    <string name="right_side_navigation">Conducir por la derecha</string>
     <string name="driving_region_automatic">Automático</string>
     <string name="osmand_extended_description_part1">"
  OsmAnd (OSM Automated Navigation Directions, y en español, Guía de Navegación Automatizada de OSM) es una aplicación de mapa y navegación con acceso a los datos libres de OpenStreetMap (OSM), en todo el mundo y de alta calidad.
@@ -2836,17 +2836,17 @@ Algunas de las principales funciones:
     <string name="nautical_maps">Mapas náuticos</string>
     <string name="depth_contour_descr">Conjunto de mapas que le permiten ver las curvas de profundidad marinas.</string>
     <string name="subscribe_email_error">Error</string>
-    <string name="subscribe_email_desc">¡Suscríbete a nuestra lista de correo electrónico para recibir descuentos de la aplicación y obtener más de 3 descargas de mapa!</string>
+    <string name="subscribe_email_desc">¡Suscríbete a nuestra lista de correo electrónico para recibir descuentos de la aplicación y obtener 3 descargas de mapas más!</string>
     <string name="no_overlay">Sin superposición</string>
     <string name="no_underlay">Sin subyacencia</string>
     <string name="quick_action_auto_zoom">Alternar ampliación automática del mapa</string>
-    <string name="quick_action_auto_zoom_desc">Al pulsar el botón de acción se alternará la ampliación automática del mapa de acuerdo a la velocidad.</string>
+    <string name="quick_action_auto_zoom_desc">Pulsar el botón de acción alternará la ampliación automática del mapa de acuerdo a la velocidad.</string>
     <string name="quick_action_auto_zoom_on">Ampliación automática del mapa activada</string>
     <string name="quick_action_auto_zoom_off">Ampliación automática del mapa desactivada</string>
     <string name="quick_action_add_destination">Añadir destino</string>
     <string name="quick_action_replace_destination">Reemplazar destino</string>
     <string name="quick_action_add_first_intermediate">Añadir primer destino intermedio</string>
-    <string name="quick_action_add_destination_desc">Al pulsar el botón de acción se agregará un destino en el centro de la pantalla.</string>
-    <string name="quick_action_replace_destination_desc">Al pulsar el botón de acción se reemplazará el destino con la ubicación central de la pantalla.</string>
-    <string name="quick_action_add_first_intermediate_desc">Al pulsar el botón de acción se agregará un primer punto intermedio en el centro de la pantalla.</string>
+    <string name="quick_action_add_destination_desc">Pulsar el botón de acción agregará un destino en el centro de la pantalla.</string>
+    <string name="quick_action_replace_destination_desc">Pulsar el botón de acción reemplazará el destino con la ubicación central de la pantalla.</string>
+    <string name="quick_action_add_first_intermediate_desc">Pulsar el botón de acción agregará un primer punto intermedio en el centro de la pantalla.</string>
     </resources>
