@@ -412,7 +412,7 @@
     <string name="driving_region_japan">Japan</string>
     <string name="driving_region_us">Bandaríkin</string>
     <string name="driving_region_canada">Kanada</string>
-    <string name="driving_region_europe_asia">Evrópa og Asía</string>
+    <string name="driving_region_europe_asia">Evrópa, Asía, Mið- og Suður-Ameríka o.þ.h.</string>
     <string name="driving_region_uk">Bretland, Indland og svipað</string>
     <string name="driving_region_australia">Ástralía</string>
     <string name="speak_title">Tilkynna…</string>
@@ -907,7 +907,7 @@ Ferill %2$s</string>
     <string name="address_search_desc">Leit að heimilisfangi</string>
     <string name="transport_search_desc">Leit að almenningssamgöngum</string>
     <string name="favourites_search_desc">Leit að eftirlætum</string>
-    <string name="left_side_navigation">Ekið á vinstri helmingi</string>
+    <string name="left_side_navigation">Ekið á vinstri akrein</string>
     <string name="unknown_location">Staðsetning er ekki enn þekkt</string>
     <string name="local_indexes_cat_map">Stöðluð kort (vektor)</string>
     <string name="native_rendering">Innbyggð myndgerð</string>
@@ -2113,4 +2113,63 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Setja leiðir fram samkvæmt OSMC-ferlum</string>
 
     <string name="search_villages_and_postcodes">Leita í fleiri sveitarfélögum/póstnúmerum</string>
+    <string name="analyze_on_map">Greina á korti</string>
+    <string name="shared_string_visible">Sýnilegt</string>
+    <string name="restore_purchases">Endurheimta innkaup</string>
+    <string name="fonts_header">Letur fyrir kort</string>
+    <string name="right_side_navigation">Ekið á hægri akrein</string>
+    <string name="driving_region_automatic">Sjálfvirkt</string>
+    <string name="routing_attr_height_obstacles_description">Nota yfirborðshæðargögn frá SRTM, ASTER og EU-DEM</string>
+
+    <string name="auto_split_recording_title">Skipta skráningu sjálfvirkt eftir bil</string>
+	<string name="incremental_search_city">Stigvaxandi leit í borg</string>
+    <string name="rendering_attr_showRoadMaps_description">Velja þegar birta á kort einungis með vegum:</string>
+    <string name="show_warnings_descr">Stilla umferðaraðvaranir (hraðatakmarkanir, lokanir, umferðarhnúta, hraðahindranir), aðvaranir um hraðamyndavélar og upplýsingar um akreinaskiptingar</string>
+    <string name="osmand_short_description_80_chars">Almenn skoðun landakorta í farsíma og flakk á ónettengdum sem nettengdum OSM-landakortum</string>
+	<string name="osmand_extended_description_part7">"
+ Leggðu þitt fram til OSM
+ • Tilkynntu um villur í gögnum
+ • Sendu inn GPX-ferla til OSM beint úr forritinu
+ • Bættu við merkisstöðum og sendu þá beint inn til OSM (eða síðar ef engin nettenging er til staðar)
+ "</string>
+    <string name="osmand_extended_description_part8">"
+ OsmAnd er opinn hugbúnaður og í stöðugri þróun. Hver sem er getur tekið þátt í gerð forritsins, til dæmis með því að tilkynna um hnökra, bæta þýðingar eða forrita nýja eiginleika. Lífleg staða verkefnisins og sífelldar endurbætur má þannig rekja til margra þátta samspils milli notenda og hönnuða. Verkefnið styðst líka við fjárhagslega styrki frá notendum sem nýtast til að fjármagna viðameiri forritun og prófanir.
+ Gæði og áætluð þekja landakorta:
+ • Vestur-Evrópa: ****
+ • Austur-Evrópa: ***
+ • Rússland: ***
+ • Norður-Ameríka: ***
+ • Suður-Ameríka: **
+ • Asía: **
+ • Japan &amp; Kórea: ***
+ • Miðausturlönd: **
+ • Afríka: **
+ • Suðurskautslandið: *
+ Hægt er að sækja kort frá flestum heimsins löndum á netinu!
+ Frá Afghanistan til Zimbabwe, frá Ástralíu til BNA. Argentína, Brasilía, Kanada, Frakkland, Þýskaland, Mexíkó, Spánn, …
+ "</string>
+    <string name="osmand_plus_short_description_80_chars">Almenn skoðun landakorta í farsíma og flakk á ónettengdum sem nettengdum OSM-landakortum</string>
+	<string name="osmand_plus_extended_description_part7">"
+ Leggðu þitt fram til OSM
+ • Tilkynntu um villur í gögnum
+ • Sendu inn GPX-ferla til OSM beint úr forritinu
+ • Bættu við merkisstöðum og sendu þá beint inn til OSM (eða síðar ef engin nettenging er til staðar)
+ OsmAnd er opinn hugbúnaður og í stöðugri þróun. Hver sem er getur tekið þátt í gerð forritsins, til dæmis með því að tilkynna um hnökra, bæta þýðingar eða forrita nýja eiginleika. Lífleg staða verkefnisins og sífelldar endurbætur má þannig rekja til margra þátta samspils milli notenda og hönnuða. Verkefnið styðst líka við fjárhagslega styrki frá notendum sem nýtast til að fjármagna viðameiri forritun og prófanir.
+ "</string>
+    <string name="search_offline_geo_error">Ekki tókst að þátta \'%s\' geo-virkniskipun (intent)</string>
+    <string name="send_location_email_pattern">Til að sjá staðsetninguna, fylgdu veftenglinum %1$s eða Android-virkniskipunatenglinum %2$s</string>
+    <string name="version_index_is_not_supported">Ekki er stuðningur við \'\'{0}\'\' útgáfu af vísi</string>
+    <string name="gps_status_app_not_found">Forrit til að birta stöðu GPS fannst ekki. Leita á markaðnum?</string>
+    <string name="no_overlay">Ekkert yfirlag</string>
+    <string name="no_underlay">Ekkert undirlag</string>
+    <string name="subscribe_email_error">Villa</string>
+    <string name="sea_depth_thanks">Takk fyrir að kaupa sjódýptarlínur!</string>
+    <string name="index_item_depth_contours_osmand_ext">Dýptarlínur</string>
+    <string name="index_item_depth_points_southern_hemisphere">Dýptarpunktar á suðurhveli</string>
+    <string name="index_item_depth_points_northern_hemisphere">Dýptarpunktar á norðurhveli</string>
+    <string name="download_depth_countours">Dýptarlínur</string>
+    <string name="nautical_maps">Sjókort</string>
+    <string name="osm_live_subscription">Áskrift að OSM Live</string>
+    <string name="osm_live_support_region">Svæði sem stuðningur er við</string>
+    <string name="rendering_value_walkingRoutesOSMC_name">Litur fer eftir OSMC göngutáknum</string>
     </resources>
