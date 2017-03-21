@@ -9,7 +9,7 @@
     <string name="relief_smoothness_factor_descr">Приоритет равнинам или холмам</string>
     <string name="shared_string_slope">Уклон</string>
     <string name="add_new_folder">Добавить новую папку</string>
-    <string name="points_delete_multiple_succesful">Удалено успешно</string>
+    <string name="points_delete_multiple_succesful">Точки успешно удалены.</string>
     <string name="points_delete_multiple">Вы собираетесь удалить %1$d точку(и). Вы уверены?</string>
     <string name="route_points_category_name">Точки для прохождения</string>
     <string name="track_points_category_name">Важные точки маршрута</string>
@@ -2112,7 +2112,7 @@
     <string name="osm_live_not_active">Неактивные</string>
     <string name="osm_live_region_desc">Часть вашего пожертвования будет направляться пользователям OpenStreetMap внесшим изменения в карту этого региона</string>
     <string name="download_files_error_not_enough_space">Недостаточно места! Необходимо {3} Мб временно и {1} Мб на постоянной основе. В настоящее время доступно только {2} Мб свободного места.</string>
-    <string name="upload_osm_note_description">Можно отправить заметку OSM анонимно или используя свой профиль OpenStreetMap.org</string>
+    <string name="upload_osm_note_description">Можно отправить заметку OSM анонимно или используя свой профиль OpenStreetMap.org.</string>
     <string name="upload_osm_note">Загрузить OSM заметку</string>
     <string name="use_drawer_btn">Использовать меню</string>
     <string name="use_dashboard_btn">Использовать домашнюю страницу</string>
