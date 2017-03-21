@@ -2845,4 +2845,18 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="nautical_maps">Námorné mapy</string>
     <string name="analyze_on_map">Analyzovať na mape</string>
     <string name="shared_string_visible">Viditeľné</string>
+    <string name="quick_action_auto_zoom">Automatické priblíženie mapy zap/vyp</string>
+    <string name="quick_action_auto_zoom_desc">Stlačením tlačidla zapnete/vypnete automatické priblíženie mapy podľa vašej rýchlosti.</string>
+    <string name="quick_action_auto_zoom_on">Automatické priblíženie mapy zapnuté</string>
+    <string name="quick_action_auto_zoom_off">Automatické priblíženie mapy vypnuté</string>
+    <string name="quick_action_add_destination">Pridať cieľ</string>
+    <string name="quick_action_replace_destination">Nahradiť cieľ</string>
+    <string name="quick_action_add_first_intermediate">Pridať prvý prechodný bod</string>
+    <string name="quick_action_add_destination_desc">Stlačením tlačidla pridáte cieľ v strede obrazovky.</string>
+    <string name="quick_action_replace_destination_desc">Stlačením tlačidla nahradíte polohu cieľa bodom v strede obrazovky.</string>
+    <string name="quick_action_add_first_intermediate_desc">Stlačením tlačidla pridáte prvý prechodný bod v strede obrazovky.</string>
+    <string name="no_overlay">Žiadna prekrývacia vrstva</string>
+    <string name="no_underlay">Žiadna podkladová vrstva</string>
+    <string name="subscribe_email_error">Chyba</string>
+    <string name="subscribe_email_desc">Prihláste sa do emailovej skupiny o zľavách aplikácie a získajte 3 stiahnutia máp navyše!</string>
     </resources>
