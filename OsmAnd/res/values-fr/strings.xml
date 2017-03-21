@@ -2932,4 +2932,8 @@ Fonctionnalités principales :
     <string name="quick_action_add_first_intermediate_desc">Appuyez sur le bouton d\'action pour ajouter le centre de la carte comme première étape.</string>
     <string name="quick_action_add_destination_desc">Appuyez sur le bouton d\'action pour ajouter le centre de la carte comme destination.</string>
     <string name="quick_action_replace_destination_desc">Appuyez sur le bouton d\'action pour remplacer la destination par le centre de la carte.</string>
+    <string name="quick_action_auto_zoom">Zoom automatique de la carte Actif / Inactif</string>
+    <string name="quick_action_auto_zoom_desc">Appuyez sur le bouton pour activer ou désactiver le zoom automatique de la carte en fonction de votre vitesse.</string>
+    <string name="quick_action_auto_zoom_on">Zoom automatique activé</string>
+    <string name="quick_action_auto_zoom_off">Zoom automatique désactivé</string>
     </resources>
