@@ -955,6 +955,10 @@ public class OsmandSettings {
 					RouteService.values()).makeProfile();
 
 	// this value string is synchronized with settings_pref.xml preference name
+	public final CommonPreference<AutoZoomMap> AUTO_ZOOM_MAP_PREV =
+			new EnumIntPreference<AutoZoomMap>("auto_zoom_map_new_prev", AutoZoomMap.NONE,
+					AutoZoomMap.values()).makeProfile().cache();
+
 	public final CommonPreference<AutoZoomMap> AUTO_ZOOM_MAP =
 			new EnumIntPreference<AutoZoomMap>("auto_zoom_map_new", AutoZoomMap.NONE,
 					AutoZoomMap.values()).makeProfile().cache();

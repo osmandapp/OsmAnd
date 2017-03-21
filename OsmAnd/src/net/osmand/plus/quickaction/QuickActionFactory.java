@@ -27,6 +27,7 @@ import net.osmand.plus.quickaction.actions.MapUnderlayAction;
 import net.osmand.plus.quickaction.actions.MarkerAction;
 import net.osmand.plus.quickaction.actions.NavAddDestinationAction;
 import net.osmand.plus.quickaction.actions.NavAddFirstIntermediateAction;
+import net.osmand.plus.quickaction.actions.NavAutoZoomMapAction;
 import net.osmand.plus.quickaction.actions.NavReplaceDestinationAction;
 import net.osmand.plus.quickaction.actions.NavVoiceAction;
 import net.osmand.plus.quickaction.actions.NewAction;
@@ -125,6 +126,7 @@ public class QuickActionFactory {
 		QuickAction addDestination = new NavAddDestinationAction();
 		QuickAction addFirstIntermediate = new NavAddFirstIntermediateAction();
 		QuickAction replaceDestination = new NavReplaceDestinationAction();
+		QuickAction autoZoomMap = new NavAutoZoomMapAction();
 
 		ArrayList<QuickAction> navigationQuickActions = new ArrayList<>();
 
@@ -139,6 +141,9 @@ public class QuickActionFactory {
 		}
 		if (!replaceDestination.hasInstanceInList(active)) {
 			navigationQuickActions.add(replaceDestination);
+		}
+		if (!autoZoomMap.hasInstanceInList(active)) {
+			navigationQuickActions.add(autoZoomMap);
 		}
 
 		if (navigationQuickActions.size() > 0) {
@@ -214,6 +219,9 @@ public class QuickActionFactory {
 			case NavReplaceDestinationAction.TYPE:
 				return new NavReplaceDestinationAction();
 
+			case NavAutoZoomMapAction.TYPE:
+				return new NavAutoZoomMapAction();
+
             default:
                 return new QuickAction();
         }
@@ -282,6 +290,9 @@ public class QuickActionFactory {
 
 			case NavReplaceDestinationAction.TYPE:
 				return new NavReplaceDestinationAction(quickAction);
+
+			case NavAutoZoomMapAction.TYPE:
+				return new NavAutoZoomMapAction(quickAction);
 
 			default:
                 return quickAction;
@@ -352,6 +363,9 @@ public class QuickActionFactory {
 			case NavReplaceDestinationAction.TYPE:
 				return R.drawable.ic_action_target;
 
+			case NavAutoZoomMapAction.TYPE:
+				return R.drawable.ic_action_search_dark;
+
             default:
 				return R.drawable.ic_action_plus;
         }
@@ -421,6 +435,9 @@ public class QuickActionFactory {
 			case NavReplaceDestinationAction.TYPE:
 				return R.string.quick_action_replace_destination;
 
+			case NavAutoZoomMapAction.TYPE:
+				return R.string.quick_action_auto_zoom;
+
             default:
 				return R.string.quick_action_new_action;
         }
@@ -442,6 +459,7 @@ public class QuickActionFactory {
 			case NavAddDestinationAction.TYPE:
 			case NavAddFirstIntermediateAction.TYPE:
 			case NavReplaceDestinationAction.TYPE:
+			case NavAutoZoomMapAction.TYPE:
                 return false;
 
             default: return true;
