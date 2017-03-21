@@ -2926,4 +2926,10 @@ Fonctionnalités principales :
     <string name="subscribe_email_desc">Inscrivez-vous à notre lettre d\'informations sur les applications et téléchargez 3 cartes supplémentaires gratuitement !</string>
     <string name="no_overlay">Sans sur-couche</string>
     <string name="no_underlay">Sans sous-couche</string>
+    <string name="quick_action_add_destination">Ajouter une destination</string>
+    <string name="quick_action_replace_destination">Remplacer la destination</string>
+    <string name="quick_action_add_first_intermediate">Ajouter une première étape</string>
+    <string name="quick_action_add_first_intermediate_desc">Appuyez sur le bouton d\'action pour ajouter le centre de la carte comme première étape.</string>
+    <string name="quick_action_add_destination_desc">Appuyez sur le bouton d\'action pour ajouter le centre de la carte comme destination.</string>
+    <string name="quick_action_replace_destination_desc">Appuyez sur le bouton d\'action pour remplacer la destination par le centre de la carte.</string>
     </resources>
