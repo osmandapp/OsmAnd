@@ -2787,4 +2787,6 @@ El connector de mapes d\'esquí d\'OsmAnd us permet veure les pistes amb la seva
  La majoria de països de tot el món estan disponibles per descarregar-los!
  Des de Afganistan a Zimbabwe, de Austràlia als EUA. Argentina, Brasil, Canadà, França, Alemanya, Mèxic, Regne Unit, Espanya, …
  "</string>
+    <string name="subscribe_email_error">Error</string>
+    <string name="subscribe_email_desc">Subscriviu-vos a la nostra llista de correu sobre descomptes a la aplicació i aconseguiu 3 baixades de mapa addicionals!</string>
     </resources>
