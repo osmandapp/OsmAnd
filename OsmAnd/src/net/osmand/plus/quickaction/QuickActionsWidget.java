@@ -10,6 +10,7 @@ import android.support.annotation.StyleRes;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.view.ContextThemeWrapper;
 import android.support.v7.widget.GridLayout;
 import android.util.AttributeSet;
@@ -242,6 +243,16 @@ public class QuickActionsWidget extends LinearLayout {
                         if (selectionListener != null) selectionListener.onActionSelected(action);
                     }
                 });
+				if (action.isActionEditable()) {
+					view.setOnLongClickListener(new OnLongClickListener() {
+						@Override
+						public boolean onLongClick(View v) {
+							CreateEditActionDialog dialog = CreateEditActionDialog.newInstance(action.id);
+							dialog.show(((AppCompatActivity) getContext()).getSupportFragmentManager(), AddQuickActionDialog.TAG);
+							return true;
+						}
+					});
+				}
             }
 
             if (land) {
