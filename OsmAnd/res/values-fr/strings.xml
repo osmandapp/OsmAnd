@@ -2924,4 +2924,6 @@ Fonctionnalités principales :
     <string name="depth_contour_descr">Certaines cartes permettent de visualiser la profondeur d\'eau grâce à des lignes de sonde.</string>
     <string name="subscribe_email_error">Erreur</string>
     <string name="subscribe_email_desc">Inscrivez-vous à notre lettre d\'informations sur les applications et téléchargez 3 cartes supplémentaires gratuitement !</string>
+    <string name="no_overlay">Sans sur-couche</string>
+    <string name="no_underlay">Sans sous-couche</string>
     </resources>
