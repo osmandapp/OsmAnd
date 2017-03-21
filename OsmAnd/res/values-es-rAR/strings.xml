@@ -2837,4 +2837,6 @@ Algunas de las principales funciones:
     <string name="depth_contour_descr">Conjunto de mapas que le permiten ver las curvas de profundidad marinas.</string>
     <string name="subscribe_email_error">Error</string>
     <string name="subscribe_email_desc">¡Suscríbete a nuestra lista de correo electrónico para recibir descuentos de la aplicación y obtener más de 3 descargas de mapa!</string>
+    <string name="no_overlay">Sin superposición</string>
+    <string name="no_underlay">Sin subyacencia</string>
     </resources>
