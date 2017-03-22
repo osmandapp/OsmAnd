@@ -2678,8 +2678,8 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="routing_attr_driving_style_balance_name">Vyvážený</string>
     <string name="routing_attr_driving_style_safety_name">Bezpečný</string>
     <string name="relief_smoothness_factor_descr">Priorita pre roviny a pahorky</string>
-    <string name="do_not_send_anonymous_app_usage">Neodosielať anonymné informácie o používaní aplikácie</string>
-    <string name="do_not_send_anonymous_app_usage_desc">Odosiela všeobecné informácie o obrazovkách používaných pri práci s aplikáciou. Nezbierame informácie o polohe ani používateľom písané údaje.</string>
+    <string name="do_not_send_anonymous_app_usage">Neodosielať anonymné štatistiky o používaní aplikácie</string>
+    <string name="do_not_send_anonymous_app_usage_desc">OsmAnd odosiela všeobecné informácie o obrazovkách používaných pri práci s aplikáciou. Nezbierame informácie o polohe ani používateľom písané údaje.</string>
     <string name="do_not_show_startup_messages">Nezobrazovať oznamy pri štarte</string>
     <string name="do_not_show_startup_messages_desc">Zobrazuje zľavy a oznamy o miestnych udalostiach</string>
     <string name="parking_options">Možnosti parkovania</string>
@@ -2836,7 +2836,7 @@ Zodpovedá oblasti: %1$s x %2$s</string>
  Od Afganistanu po Zimbabwe, od Austrálie po USA. Argentína, Brazília, Kanada, Francúzsko, Nemecko, Mexiko, Spojené kráľovstvo, Španielsko, Slovensko, …
  "</string>
     <string name="restore_purchases">Obnoviť nákupy</string>
-    <string name="depth_contour_descr">Sada máp umožňuje vidieť hĺbkové vrstevnice (izobaty) morí.</string>
+    <string name="depth_contour_descr">Sada máp umožňuje vidieť hĺbkové vrstevnice (izobaty) a body v moriach (založené na mriežke po 30 uhlových sekundách).</string>
     <string name="sea_depth_thanks">Ďakujeme za zakúpenie hĺbkových vrstevníc!</string>
     <string name="index_item_depth_contours_osmand_ext">Hĺbkové vrstevnice</string>
     <string name="index_item_depth_points_southern_hemisphere">Hĺbkové body južnej pologule</string>
@@ -2852,11 +2852,12 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="quick_action_add_destination">Pridať cieľ</string>
     <string name="quick_action_replace_destination">Nahradiť cieľ</string>
     <string name="quick_action_add_first_intermediate">Pridať prvý prechodný bod</string>
-    <string name="quick_action_add_destination_desc">Stlačením tlačidla pridáte cieľ v strede obrazovky.</string>
-    <string name="quick_action_replace_destination_desc">Stlačením tlačidla nahradíte polohu cieľa bodom v strede obrazovky.</string>
+    <string name="quick_action_add_destination_desc">Stlačením tlačidla pridáte cieľ v strede obrazovky. Doterajší cieľ sa stane posledným prechodným bodom.</string>
+    <string name="quick_action_replace_destination_desc">Stlačením tlačidla nahradíte cieľ bodom v strede obrazovky.</string>
     <string name="quick_action_add_first_intermediate_desc">Stlačením tlačidla pridáte prvý prechodný bod v strede obrazovky.</string>
     <string name="no_overlay">Žiadna prekrývacia vrstva</string>
     <string name="no_underlay">Žiadna podkladová vrstva</string>
     <string name="subscribe_email_error">Chyba</string>
     <string name="subscribe_email_desc">Prihláste sa do emailovej skupiny o zľavách aplikácie a získajte 3 stiahnutia máp navyše!</string>
+    <string name="shared_string_paused">Pozastavené</string>
     </resources>
