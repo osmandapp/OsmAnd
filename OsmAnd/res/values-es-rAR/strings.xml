@@ -2664,8 +2664,8 @@ Representa el área: %1$s x %2$s</string>
     <string name="routing_attr_driving_style_balance_name">Equilibrado</string>
     <string name="routing_attr_driving_style_safety_name">Seguridad</string>
     <string name="relief_smoothness_factor_descr">Prioridad a llanuras o colinas</string>
-    <string name="do_not_send_anonymous_app_usage">No enviar datos de uso anónimos de la aplicación</string>
-    <string name="do_not_send_anonymous_app_usage_desc">Envía información general acerca de la pantalla utilizada durante la sesión. No recopilamos ningún dato de geolocalización o ingreso de datos relacionados al usuario.</string>
+    <string name="do_not_send_anonymous_app_usage">No enviar estadísticas de uso anónimas de la aplicación</string>
+    <string name="do_not_send_anonymous_app_usage_desc">La aplicación de OsmAnd, envía información general acerca de la pantalla utilizada durante la sesión. No recopilamos ningún dato de geolocalización o ingreso de datos relacionados al usuario.</string>
     <string name="do_not_show_startup_messages">Ocultar mensajes al inicio</string>
     <string name="do_not_show_startup_messages_desc">Muestra descuentos de la aplicación y mensajes especiales de eventos locales</string>
     <string name="parking_options">Opciones de estacionamiento</string>
@@ -2834,7 +2834,7 @@ Algunas de las principales funciones:
     <string name="index_item_depth_points_northern_hemisphere">Puntos de profundidad del hemisferio norte</string>
     <string name="download_depth_countours">Curvas de profundidad</string>
     <string name="nautical_maps">Mapas náuticos</string>
-    <string name="depth_contour_descr">Conjunto de mapas que le permiten ver las curvas de profundidad marinas.</string>
+    <string name="depth_contour_descr">Conjunto de mapas que le permiten ver las curvas y puntos de profundidad marinas (según una grilla de 30 arco segundos).</string>
     <string name="subscribe_email_error">Error</string>
     <string name="subscribe_email_desc">¡Suscríbete a nuestra lista de correo electrónico para recibir descuentos de la aplicación y obtener 3 descargas de mapas más!</string>
     <string name="no_overlay">Sin superposición</string>
@@ -2846,7 +2846,7 @@ Algunas de las principales funciones:
     <string name="quick_action_add_destination">Añadir destino</string>
     <string name="quick_action_replace_destination">Reemplazar destino</string>
     <string name="quick_action_add_first_intermediate">Añadir primer destino intermedio</string>
-    <string name="quick_action_add_destination_desc">Pulsar el botón de acción agregará un destino en el centro de la pantalla.</string>
+    <string name="quick_action_add_destination_desc">Pulsar el botón de acción agregará un destino en el centro de la pantalla. Previamente, establece el destino a añadir como último punto intermedio.</string>
     <string name="quick_action_replace_destination_desc">Pulsar el botón de acción reemplazará el destino con la ubicación central de la pantalla.</string>
     <string name="quick_action_add_first_intermediate_desc">Pulsar el botón de acción agregará un primer punto intermedio en el centro de la pantalla.</string>
     <string name="shared_string_paused">Pausado</string>
