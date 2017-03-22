@@ -2848,4 +2848,5 @@ Algunas de las principales funciones:
     <string name="quick_action_add_destination_desc">Pulsar el botón de acción agregará un destino en el centro de la pantalla.</string>
     <string name="quick_action_replace_destination_desc">Pulsar el botón de acción reemplazará el destino con la ubicación central de la pantalla.</string>
     <string name="quick_action_add_first_intermediate_desc">Pulsar el botón de acción agregará un primer punto intermedio en el centro de la pantalla.</string>
+    <string name="shared_string_paused">Pausado</string>
     </resources>
