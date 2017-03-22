@@ -4,7 +4,7 @@
 	<string name="poi_bank">銀行(Bank)</string>
 	<string name="poi_bus_stop">バス停(Bus stop)</string>
 	<string name="poi_car_rental">レンタカー(Car rental)</string>
-	<string name="poi_car_wash">洗車(Car wash)</string>
+	<string name="poi_car_wash">洗車場(Car wash)</string>
 	<string name="poi_casino">賭場・カジノ(Casino)</string>
 	<string name="poi_city">市(City)</string>
 	<string name="poi_college">大学(College)</string>
@@ -1101,8 +1101,8 @@
 	<string name="poi_drinking_water_no">飲用不可(Drinking water: no)</string>
 	<string name="poi_supervised_yes">監督者(Supervised)</string>
 	<string name="poi_supervised_no">監督者無し(Without supervision)</string>
-	<string name="poi_seasonal_yes">季節限定(Seasonal)</string>
-	<string name="poi_seasonal_no">季節非限定(Not seasonal)</string>
+	<string name="poi_seasonal_yes">限定(Yes)</string>
+	<string name="poi_seasonal_no">非限定(No)</string>
 	<string name="poi_seasonal_dry_season">乾季(Dry season)</string>
 	<string name="poi_seasonal_wet_season">雨季(Wet season)</string>
 	<string name="poi_seasonal_spring">春(Spring)</string>
@@ -1135,7 +1135,7 @@
 	<string name="poi_vending_type">自動販売機の種類(Vending type)</string>
 	<string name="poi_bicycle_service">自転車サービス(Bicycle service)</string>
 	<string name="poi_fire_hydrant_water_source">水源(Water Source)</string>
-	<string name="poi_payment_toll_type">お支払いの種類(Payment type)</string>
+	<string name="poi_payment_toll_type">支払いの種類(Payment type)</string>
 	<string name="poi_traffic_signals_sound">音声(Sound)</string>
 	<string name="poi_tactile_paving">視覚障害者誘導用ブロック(Tactile paving)</string>
 	<string name="poi_self_service">セルフサービス(Self service)</string>
@@ -1159,7 +1159,7 @@
 	<string name="poi_wheelchair_accessibility">車椅子補助(Wheelchair accessibility)</string>
 	<string name="poi_wheelchair_designated">指定(Designated)</string>
 	<string name="poi_payment_coins_50c12">50セント、1ユーロ、2ユーロ硬貨(50c, 1€, and 2€ coins)</string>
-	<string name="poi_payment_cash_yes">現金(Cash)</string>
+	<string name="poi_payment_cash_yes">現金可(Cash)</string>
 	<string name="poi_payment_ep_cash_yes">キャッシュカード(ゲルトカルテ)(Cash card (Geldkarte))</string>
 	<string name="poi_free_flying_characteristics">ジャンル(Characteristic)</string>
 	<string name="poi_free_flying_hanggliding_yes">ハンググライディング(Hanggliding)</string>
@@ -1185,7 +1185,7 @@
 	<string name="poi_nudism_customary">通例(Customary)</string>
 	<string name="poi_nudism_permissive">許容(Permissive)</string>
 
-	<string name="poi_gambling_type">賭博種</string>
+	<string name="poi_gambling_type">賭博種(Type)</string>
 	<string name="poi_gambling_lottery">宝くじ(Lottery)</string>
 	<string name="poi_gambling_pachinko">パチンコ(Pachinko)</string>
 	<string name="poi_gambling_slot_machines">スロットマシーン(Slot machines)</string>
@@ -1321,7 +1321,7 @@
 	<string name="poi_tents_yes">許可(Allowed)</string>
 	<string name="poi_washing_machine">洗濯機(Washing machine)</string>
 	<string name="poi_washing_machine_no">洗濯機:無し(Washing machine: no)</string>
-	<string name="poi_car_wash_no">洗車:無し(Car wash: no)</string>
+	<string name="poi_car_wash_no">洗車場:無し(Car wash: no)</string>
 
 
 	<string name="poi_compressed_air_filter">エアーコンプレッサー(Compressed air)</string>
@@ -1542,8 +1542,8 @@
 	<string name="poi_dish">料理(Dish)</string>
 	<string name="poi_wiki_lang_ku">クルド語 wiki(Kurdish wiki)</string>
 	<string name="poi_microbrewery">地ビール醸造所(Microbrewery)</string>
-	<string name="poi_microbrewery_yes">地ビール醸造所(Microbrewery)</string>
-	<string name="poi_microbrewery_no">地ビール醸造所無し</string>
+	<string name="poi_microbrewery_yes">地ビール醸造有り(Microbrewery)</string>
+	<string name="poi_microbrewery_no">地ビール醸造無し</string>
 
 	<string name="poi_organic_yes">自然食品:有り(Organic food: yes)</string>
 	<string name="poi_organic_no">自然食品:無し(Organic food: no)</string>
@@ -1565,7 +1565,7 @@
 	<string name="poi_takeaway_no">持ち帰り無し(No takeaway)</string>
 	<string name="poi_takeaway_only">テイクアウト・持ち帰りのみ(Takeaway only)</string>
 
-	<string name="poi_archaeological_site_type">遺跡(Type)</string>
+	<string name="poi_archaeological_site_type">遺跡種(Type)</string>
 	<string name="poi_health_specialty">医療機関(Health specialty)</string>
 	<string name="poi_health_specialty_general_yes">総合診療医(General practitioner)</string>
 	<string name="poi_health_specialty_ophthalmology_yes">眼科(Ophthalmology)</string>
@@ -1639,4 +1639,62 @@
 	<string name="poi_health_specialty_behavior_yes">行動療法(Behavior)</string>
 	<string name="poi_health_specialty_palliative_medicine_yes">緩和医療・ホスピス(Health specialty: palliative medicine)</string>
 
+	<string name="poi_social_facility_type">公共施設種(Type)</string>
+	<string name="poi_social_facility_for">対象者(Target group)</string>
+	<string name="poi_social_facility_group_home">グループホーム・集団生活型介護施設(Group home)</string>
+	<string name="poi_social_facility_assisted_living">居住型支援施設(Assisted living)</string>
+	<string name="poi_social_facility_outreach">訪問支援(Outreach)</string>
+	<string name="poi_social_facility_food_bank">フードバンク・食糧支援(Food bank)</string>
+	<string name="poi_social_facility_shelter">避難所・一時宿泊施設(Shelter)</string>
+	<string name="poi_social_facility_ambulatory_care">外来診療(Ambulatory care)</string>
+	<string name="poi_social_facility_workshop">ワークショップ・体験型セミナー(Workshop)</string>
+	<string name="poi_social_facility_day_care">デイケア・日帰り療養(Day care)</string>
+
+	<string name="poi_social_facility_for_senior">高齢者(Seniors)</string>
+	<string name="poi_social_facility_for_child">子供(Children)</string>
+	<string name="poi_social_facility_for_orphan">孤児(Orphans)</string>
+	<string name="poi_social_facility_for_disabled">身体障碍者(Disabled)</string>
+	<string name="poi_social_facility_for_mental_health">精神障害者(Patients with mental disorders)</string>
+	<string name="poi_social_facility_for_juvenile">少年・少女(Juvenile)</string>
+	<string name="poi_social_facility_for_homeless">ホームレス(Homeless)</string>
+	<string name="poi_social_facility_for_migrant">移住者(Migrants)</string>
+	<string name="poi_social_facility_for_underprivileged">社会的弱者(Underprivileged)</string>
+	<string name="poi_social_facility_for_drug_addicted">薬物依存者(Drug addicted)</string>
+	<string name="poi_social_facility_for_unemployed">失業者(Unemployed)</string>
+	<string name="poi_social_facility_for_diseased">特定疾患者(Diseased)</string>
+	<string name="poi_social_facility_for_child_juvenile">子供;少年(Child;juvenile)</string>
+
+	<string name="poi_free_flying_characteristic">対応種(Characteristic)</string>
+	<string name="poi_seasonal">営業期(Seasonal)</string>
+	<string name="poi_drive_in">ドライブイン(Drive in)</string>
+	<string name="poi_drive_in_no">不可(Drive-in: no)</string>
+	<string name="poi_power_supply_yes">有り(Yes)</string>
+	<string name="poi_scout_camp">ボーイスカウト用キャンプ(Scout camp)</string>
+	<string name="poi_scout_yes">肯定(Scout camp: yes)</string>
+	<string name="poi_scout_no">否定(Scout camp: no)</string>
+	<string name="poi_washing_machine_yes">有り(Yes)</string>
+	<string name="poi_shower_filter_yes">有り(Yes)</string>
+	<string name="poi_car_wash_yes">有り(Yes)</string>
+
+	<string name="poi_payment_transport_type">送金の種類(Payment type (transport))</string>
+	<string name="poi_payment_coins_yes">硬貨(Coins)</string>
+	<string name="poi_payment_coins_no">硬貨不可(Coins not accepted)</string>
+	<string name="poi_payment_coins_0.5">50セント硬貨($0.5 coins)</string>
+	<string name="poi_payment_telephone_cards_yes">テレホンカード(Telephone cards)</string>
+	<string name="poi_payment_telephone_cards_no">テレホンカード不可(Telephone cards not accepted)</string>
+	<string name="poi_payment_credit_cards_yes">クレジットカード可(Credit cards)</string>
+	<string name="poi_payment_credit_cards_no">クレジットカード不可(Credit cards not accepted)</string>
+	<string name="poi_payment_notes_yes">紙幣(Banknotes)</string>
+	<string name="poi_payment_notes_no">紙幣不可(Banknotes not accepted)</string>
+	<string name="poi_payment_electronic_purses_yes">電子マネー可(Electronic purses)</string>
+	<string name="poi_payment_electronic_purses_no">電子マネー不可(Electronic purses not accepted)</string>
+	<string name="poi_payment_cash_no">現金不可(Cash not accepted)</string>
+	<string name="poi_payment_debit_cards_yes">デビットカード(Debit cards)</string>
+	<string name="poi_payment_debit_cards_no">デビットカード不可(Debit cards not accepted)</string>
+	<string name="poi_payment_bitcoin_yes">ビットコイン(Bitcoin)</string>
+	<string name="poi_payment_bitcoin_no">ビットコイン不可(Bitcoin not accepted)</string>
+	<string name="poi_payment_visa_yes">VISA(Visa)</string>
+	<string name="poi_payment_visa_no">VISAカード不可(Visa cards not accepted)</string>
+	<string name="poi_payment_mastercard_yes">MasterCard(MasterCard)</string>
+	<string name="poi_payment_mastercard_no">MasterCard不可(MasterCard not accepted)</string>
 	</resources>
