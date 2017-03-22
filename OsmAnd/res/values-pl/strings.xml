@@ -2902,4 +2902,14 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="full_version_thanks">Dziękujemy za zakup pełnej wersji OsmAnd!</string>
     <string name="right_side_navigation">Ruch prawostronny</string>
     <string name="driving_region_automatic">Automatyczny</string>
+    <string name="restore_purchases">Przywróć zakupy</string>
+    <string name="nautical_maps">Mapy morskie</string>
+    <string name="shared_string_visible">Widoczne</string>
+    <string name="no_overlay">Brak nakładki</string>
+    <string name="no_underlay">Brak podkładu</string>
+    <string name="subscribe_email_error">Błąd</string>
+    <string name="quick_action_add_destination">Dodaj cel trasy</string>
+    <string name="quick_action_replace_destination">Zastąp cel trasy</string>
+    <string name="quick_action_auto_zoom_on">Włącz automatyczne przybliżanie</string>
+    <string name="quick_action_auto_zoom_off">Wyłącz automatyczne przybliżanie</string>
     </resources>
