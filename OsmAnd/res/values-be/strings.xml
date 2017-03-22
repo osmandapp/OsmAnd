@@ -30,7 +30,7 @@
 	<string name="driving_region_japan">Японія</string>
 	<string name="driving_region_us">ЗША</string>
 	<string name="driving_region_canada">Канада</string>
-	<string name="driving_region_europe_asia">Эўропа і Азія</string>
+	<string name="driving_region_europe_asia">Эўропа, Азія, Лацінская Амерыка ды іншыя</string>
 	<string name="driving_region_uk">Вялікабрытанія, Індыія ды іншыя</string>
 	    
     
@@ -2901,7 +2901,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="routing_attr_driving_style_balance_name">Збалансаваны</string>
     <string name="routing_attr_driving_style_safety_name">Бяспечны</string>
     <string name="do_not_send_anonymous_app_usage">На адсылаць ананімнай статыстыкі выкарыстання</string>
-    <string name="do_not_send_anonymous_app_usage_desc">Адсылае агульную інфармацыю аб выкарыстанні экрана падчас сессіі. Мы не збіраем дадзеных датычнах месцазнаходжання і ўводу.</string>
+    <string name="do_not_send_anonymous_app_usage_desc">OsmAnd адсылае агульную інфармацыю аб выкарыстанні экрана падчас сессіі. Мы не збіраем дадзеных датычнах месцазнаходжання і ўводу.</string>
     <string name="do_not_show_startup_messages">Не паказваць паведамленні пры старце</string>
     <string name="do_not_show_startup_messages_desc">Паказвае паведамленні пра зніжкі і спецыяльныя лакальныя падзеі</string>
     <string name="parking_options">Опцыі паркоўкі</string>
@@ -2911,4 +2911,5 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="driving_region_automatic">Аўтаматычны</string>
     <string name="restore_purchases">Аднаўленне пакупак</string>
     <string name="fonts_header">Шрыфты для мапы</string>
+    <string name="quick_action_auto_zoom">Аўтамаштаб мапы ўкл/адкл</string>
     </resources>
