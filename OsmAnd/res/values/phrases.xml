@@ -1363,7 +1363,7 @@
 	<string name="poi_trees_coca">Coca</string>
 	<string name="poi_trees_kiwi">Kiwi</string>
 	<string name="poi_trees_meadow_orchard">Meadow orchard</string>
-	<string name="poi_trees_nectorine">Nectorine</string>
+	<string name="poi_trees_nectorine">Nectarine</string>
 	<string name="poi_trees_mango">Mango</string>
 	<string name="poi_trees_rubber">Rubber</string>
 	<string name="poi_trees_date">Date</string>
@@ -1862,7 +1862,7 @@
 	<string name="poi_memorial_column">Column</string>
 	<string name="poi_memorial_stupa">Stupa</string>
 	<string name="poi_memorial_prasat">Prasat</string>
-	<string name="poi_memorial_fassade_decoration">Fassade decoration</string>
+	<string name="poi_memorial_fassade_decoration">Facade decoration</string>
 
 	<string name="poi_inscription">Inscription</string>
 	<string name="poi_historic_quarry">Historic quarry</string>
@@ -3271,7 +3271,7 @@
 	<string name="poi_cuisine_czech">Czech</string>
 	<string name="poi_cuisine_cuban">Cuban</string>
 	<string name="poi_cuisine_british">British</string>
-	<string name="poi_cuisine_latin_american">Latin american</string>
+	<string name="poi_cuisine_latin_american">Latin American</string>
 	<string name="poi_cuisine_nepalese">Nepalese</string>
 	<string name="poi_cuisine_mongolian">Mongolian</string>
 	<string name="poi_cuisine_middle_eastern">Middle eastern</string>

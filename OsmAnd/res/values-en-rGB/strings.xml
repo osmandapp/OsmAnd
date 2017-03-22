@@ -45,6 +45,7 @@
 	<string name="favourites_context_menu_delete">Delete favourite</string>
 	<string name="favourites_remove_dialog_msg">Delete favourite point \'%s\'?</string>
 	<string name="favourites_remove_dialog_success">Favourite point {0} was successfully deleted.</string>
+	<string name="replace_favorite_confirmation">Are you sure you want to replace favourite %1$s?</string>
 	<string name="osmo_center_location">Centre on the screen</string>
 	<string name="always_center_position_on_map">Display position always in centre</string>
 	<string name="choose_auto_follow_route">Auto-centre map view</string>
@@ -55,4 +56,9 @@
 	<string name="search_near_map">Search near current map centre</string>
 	<string name="position_on_map_center">Centre</string>
 	<string name="route_general_information">Total distance %1$s, travelling time %2$d h %3$d m.</string>
+	<string name="rendering_attr_contourColorScheme_name">Contour lines colour scheme</string>
+	<string name="quick_action_add_destination_desc">Tapping the action button will add a destination at the screen centre location.</string>
+	<string name="quick_action_replace_destination_desc">Tapping the action button will replace the destination with the screen centre location.</string>
+	<string name="quick_action_add_first_intermediate_desc">Tapping the action button will add a first intermediate point at the screen centre location.</string>
+	<string name="analyze_on_map">Analyse on map</string>
 </resources>
