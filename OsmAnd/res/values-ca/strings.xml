@@ -2797,4 +2797,35 @@ El connector de mapes d\'esquí d\'OsmAnd us permet veure les pistes amb la seva
     <string name="index_item_depth_points_northern_hemisphere">Punts de fondària a l\'hemisferi nord</string>
     <string name="download_depth_countours">Isòbates</string>
     <string name="nautical_maps">Cartes nàutiques</string>
+    <string name="quick_action_auto_zoom">Escala automàtica del mapa activa/desactiva</string>
+    <string name="quick_action_auto_zoom_desc">Prement el botó d\'acció commutareu l\'escala automàtica del mapa en funció de la vostra velocitat.</string>
+    <string name="quick_action_auto_zoom_on">Escala automàtica del mapa activada</string>
+    <string name="quick_action_auto_zoom_off">Escala automàtica del mapa desactivada</string>
+    <string name="quick_action_add_destination">Afegeix destinació</string>
+    <string name="quick_action_replace_destination">Substitueix destinació</string>
+    <string name="quick_action_add_first_intermediate">Afegeix primer intermedi</string>
+    <string name="quick_action_add_destination_desc">Prement el botó d\'acció afegireu com destinació el punt central de la pantalla.</string>
+    <string name="quick_action_replace_destination_desc">Prement el botó d\'acció substituireu la destinació actual pel punt central de la pantalla.</string>
+    <string name="quick_action_add_first_intermediate_desc">Prement el botó d\'acció afegireu com primer punt intermedi el punt central de la pantalla.</string>
+    <string name="depth_contour_descr">Conjunt de mapes que us permet veure les corbes batimètriques del mar.</string>
+    <string name="shared_string_paused">En pausa</string>
+    <string name="osmand_extended_description_part3">"
+ Mapa
+• Mostra els PDIs (punts d\'interès) al vostre voltant
+• Ajusta l\'orientació del mapa a la vostra direcció del moviment (o al nord)
+• Mostra on sou i com esteu orientat
+• Comparteix la votre ubicació de manera que els vostre amics us puguin trobar
+• Manté els vostres llocs més importants a Preferits
+• Permet escollir com es mostren els noms al mapa: en anglès, llengues locals o en ortografia fonètica
+• Mostra representacions especialitzades disponibles a la xarxa, vistes de satèl·lit (Bing), diferents superposicions com traces GPX d\'exploració/navegació i capes addicionals amb un grau transparència variable
+ "</string>
+    <string name="osmand_plus_extended_description_part2">"
+ Navegació
+• Funciona en línia (ràpid) o sense connexió (sense càrrecs de roaming quan sigueu a l\'estranger)
+• Indicacions de veu a cada gir (amb missatges gravats i sintetitzats)
+• Orientació opcional del carril  visualització del nom de la via i el temps estimat d\'arribada
+• Suporta punts d\'itinerari intermedis
+• Revisió automàtica de la ruta quan us aparteu de la ruta proposada
+• Cerca de llocs per adreça, tipus (per exemple: restaurant, hotel, gasolinera, museu) o coordenades geogràfiques
+ "</string>
     </resources>
