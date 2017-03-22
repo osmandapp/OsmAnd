@@ -1,5 +1,38 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
+    <string name="parking_options">Опции парковки</string>
+    <string name="full_version_thanks">Спасибо за покупку полной версии OsmAnd!</string>
+    <string name="do_not_show_startup_messages">Не показывать сообщения при старте</string>
+    <string name="do_not_show_startup_messages_desc">Отображаются скидки и специальные сообщения о местных событиях</string>
+
+    <string name="do_not_send_anonymous_app_usage_desc">OsmAnd отсылает общую информацию об использовании программы. Мы не собираем местонахождения пользователей или их запросы, относящиеся к личным данным.</string>
+    <string name="do_not_send_anonymous_app_usage">Не отсылать анонимную статистику использования</string>
+    <string name="driving_region_automatic">Авто</string>
+    <string name="right_side_navigation">Правосторонняя навигация</string>
+    <string name="shared_string_visible">Видимый</string>
+    <string name="restore_purchases">Восстановить покупки</string>
+    <string name="fonts_header">Доп.шрифты для карты</string>
+    <string name="analyze_on_map">Посмотреть на карте</string>
+    <string name="nautical_maps">Морские карты</string>
+    <string name="download_depth_countours">Контуры глубин</string>
+    <string name="index_item_depth_contours_osmand_ext">Контуры глубин</string>
+    <string name="index_item_depth_points_southern_hemisphere">Точки глубин (южное полушарие)</string>
+    <string name="index_item_depth_points_northern_hemisphere">Точки глубин (северное полушарие)</string>
+    <string name="depth_contour_descr">Контуры и точки глубин (основано на сетке в 30 угловых секунд)</string>
+    <string name="subscribe_email_desc">Подпишитесь на нашу email рассылку про скидки на OsmAnd и получите 3 дополнительные загрузки карт!</string>
+    <string name="subscribe_email_error">Ошибка</string>
+    <string name="quick_action_auto_zoom">Автомасштаб карты вкл/выкл</string>
+    <string name="quick_action_auto_zoom_desc">Нажатие на кнопку действия переключит автомасштаб карты.</string>
+    <string name="quick_action_auto_zoom_on">Автомасштаб включен</string>
+    <string name="quick_action_auto_zoom_off">Автомасштаб выключен</string>
+    <string name="quick_action_add_destination">Добавить пункт назначения</string>
+    <string name="quick_action_replace_destination">Установить пункт назначения</string>
+    <string name="quick_action_add_first_intermediate">Добавить первую промежуточную точку</string>
+    <string name="quick_action_add_destination_desc">Нажатие на кнопку действия добавит пункт назначения в центр экрана. Ранее установленный пункт становится последней промежуточной точкой.</string>
+    <string name="quick_action_replace_destination_desc">Нажатие на кнопку действия установит пункт назначения в центр экрана.</string>
+    <string name="quick_action_add_first_intermediate_desc">Нажатие на кнопку действия добавит в центр экрана первую промежуточную точку маршрута.</string>
+    <string name="no_overlay">Карта покрытия выключена</string>
+    <string name="no_underlay">Подложка выключена</string>
     <string name="routing_attr_relief_smoothness_factor_hills_name">Холмы</string>
     <string name="routing_attr_relief_smoothness_factor_plains_name">Равнины</string>
     <string name="routing_attr_relief_smoothness_factor_more_plains_name">Больше равнин</string>
@@ -755,7 +788,7 @@
     <string name="data_settings">Данные</string>
     <string name="osm_settings">Редактирование OSM</string>
     <string name="auto_zoom_map_descr">Автоматически изменять масштаб карты при изменении скорости</string>
-    <string name="auto_zoom_map">Масштаб</string>
+    <string name="auto_zoom_map">Автомасштаб</string>
     <string name="additional_settings">Дополнительные настройки</string>
     <string name="save_current_track_descr">Сохранить текущий трек на SD-карту сейчас</string>
     <string name="save_current_track">Сохранить текущий трек GPX</string>
@@ -2313,5 +2346,5 @@
     <string name="quick_action_navigation_voice_off">Голос выключен</string>
     <string name="quick_action_navigation_voice_on">Голос включен</string>
     <string name="file_can_not_be_moved">Файл не может быть перемещен.</string>
-    <string name="sea_depth_thanks">Thank you for purchasing sea depth contours!</string>
+    <string name="sea_depth_thanks">Спасибо за покупку контуров глубин!</string>
     </resources>

@@ -16,14 +16,14 @@
     <string name="quick_action_add_destination">Add destination</string>
     <string name="quick_action_replace_destination">Replace destination</string>
     <string name="quick_action_add_first_intermediate">Add first intermediate</string>
-    <string name="quick_action_add_destination_desc">Tapping the action button will add a destination at the screen center location.</string>
+    <string name="quick_action_add_destination_desc">Tapping the action button will add a destination at the screen center location. Previously set destination becomes last intermediate point.</string>
     <string name="quick_action_replace_destination_desc">Tapping the action button will replace the destination with the screen center location.</string>
     <string name="quick_action_add_first_intermediate_desc">Tapping the action button will add a first intermediate point at the screen center location.</string>
     <string name="no_overlay">No overlay</string>
     <string name="no_underlay">No underlay</string>
     <string name="subscribe_email_error">Error</string>
     <string name="subscribe_email_desc">Subscribe to our email list about app discounts and get 3 more map downloads!</string>
-    <string name="depth_contour_descr">Set of maps allows you to see sea depth contour lines.</string>
+    <string name="depth_contour_descr">Set of maps allows you to see sea depth contour lines and points (based on 30 arc-second grid).</string>
     <string name="sea_depth_thanks">Thank you for purchasing sea depth contours!</string>
     <string name="index_item_depth_contours_osmand_ext">Depth contours</string>
     <string name="index_item_depth_points_southern_hemisphere">Depth points southern hemisphere</string>
@@ -36,8 +36,8 @@
     <string name="fonts_header">Fonts for map</string>
     <string name="right_side_navigation">Right-hand driving</string>
     <string name="driving_region_automatic">Automatic</string>
-    <string name="do_not_send_anonymous_app_usage">Do not send anonymous app usage</string>
-    <string name="do_not_send_anonymous_app_usage_desc">It sends general information about screen used during session. We do not collect any geolocation or user input related data.</string>
+    <string name="do_not_send_anonymous_app_usage">Do not send anonymous app usage statistics</string>
+    <string name="do_not_send_anonymous_app_usage_desc">OsmAnd app sends general information about screen used during session. We do not collect any geolocation or user input related data.</string>
     <string name="do_not_show_startup_messages">Do not show messages at startup</string>
     <string name="do_not_show_startup_messages_desc">It displays app discounts &amp; special local events messages</string>
     <string name="parking_options">Parking options</string>
