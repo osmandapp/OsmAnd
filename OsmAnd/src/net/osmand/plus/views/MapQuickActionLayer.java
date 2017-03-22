@@ -198,18 +198,18 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionRe
 
     private void enterMovingMode(RotatedTileBox tileBox) {
         previousMapPosition = view.getMapPosition();
-        view.setMapPosition(OsmandSettings.BOTTOM_CONSTANT);
+        view.setMapPosition(OsmandSettings.MIDDLE_CONSTANT);
         MapContextMenu menu = mapActivity.getContextMenu();
 
-        LatLon         ll   = menu.isActive() && tileBox.containsLatLon(menu.getLatLon()) ? menu.getLatLon() : tileBox.getCenterLatLon();
-        Boolean isFollowPoint = isFolowPoint(tileBox, menu);
+        LatLon ll = menu.isActive() && tileBox.containsLatLon(menu.getLatLon()) ? menu.getLatLon() : tileBox.getCenterLatLon();
+        boolean isFollowPoint = isFolowPoint(tileBox, menu);
 
         menu.updateMapCenter(null);
         menu.close();
 
         RotatedTileBox rb = new RotatedTileBox(tileBox);
         if (!isFollowPoint && previousMapPosition != OsmandSettings.BOTTOM_CONSTANT)
-            rb.setCenterLocation(0.5f, 0.15f);
+            rb.setCenterLocation(0.5f, 0.3f);
 
         rb.setLatLonCenter(ll.getLatitude(), ll.getLongitude());
         double lat = rb.getLatFromPixel(tileBox.getCenterPixelX(), tileBox.getCenterPixelY());

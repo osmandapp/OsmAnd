@@ -1217,6 +1217,7 @@ public class OsmandSettings {
 	// this value string is synchronized with settings_pref.xml preference name
 	public static final int CENTER_CONSTANT = 0;
 	public static final int BOTTOM_CONSTANT = 1;
+	public static final int MIDDLE_CONSTANT = 2;
 	public final CommonPreference<Boolean> CENTER_POSITION_ON_MAP = new BooleanPreference("center_position_on_map", false).makeProfile();
 
 	// this value string is synchronized with settings_pref.xml preference name
