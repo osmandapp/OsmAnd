@@ -156,4 +156,7 @@
 	<string name="poi_shoes_type">Type</string>
 	<string name="poi_fire_hydrant_type">Type</string>
 	<string name="poi_fire_hydrant_position">Position</string>
+	<string name="poi_outdoor_seating_sidewalk">Outdoor seating: pavement</string>
+	<string name="poi_cuisine_savory_pancakes">Savoury pancakes</string>
+	<string name="poi_toilets">Toilet</string>
 	</resources>
