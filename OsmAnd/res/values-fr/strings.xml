@@ -2936,4 +2936,5 @@ Fonctionnalités principales :
     <string name="quick_action_auto_zoom_desc">Appuyez sur le bouton pour activer ou désactiver le zoom automatique de la carte en fonction de votre vitesse.</string>
     <string name="quick_action_auto_zoom_on">Zoom automatique activé</string>
     <string name="quick_action_auto_zoom_off">Zoom automatique désactivé</string>
+    <string name="shared_string_paused">Mis en pause</string>
     </resources>
