@@ -1267,11 +1267,11 @@ Die globalen Daten (zwischen 70° Nord und 70° Süd) basieren auf Messungen von
 	<string name="speak_descr">Einstellungen für Ansagen zu Straßennamen, Verkehrswarnungen, Blitzern oder Tempolimits</string>
 	<string name="speak_street_names">Straßennamen (TTS)</string>
 	<string name="map_widget_fps_info">FPS-Debug-Info</string>
-	<string name="driving_region_descr">Verkehrsregion wählen: Europa, USA, GB, etc.</string>
+	<string name="driving_region_descr">Fahrregion wählen: Europa, USA, GB, etc.</string>
 	<string name="driving_region_japan">Japan</string>
 	<string name="driving_region_us">USA</string>
 	<string name="driving_region_canada">Kanada</string>
-	<string name="driving_region_europe_asia">Europa und Asien</string>
+	<string name="driving_region_europe_asia">Europa, Asien, Lateinamerika, &amp; ähnliche</string>
 	<string name="driving_region_uk">UK, Indien &amp; andere</string>
 	<string name="driving_region_australia">Australien</string>
 	<string name="announce_gpx_waypoints">GPX-Wegpunkte</string>
@@ -2935,4 +2935,29 @@ Abgedeckte Fläche: %1$s x %2$s</string>
  • Anzeige spezieller Online-Karten, Satellitenansichten (von Bing), verschiedener Overlays wie GPX-Tracks zu Touren-/Routenverläufen und zusätzlicher Kartenebenen mit einstellbarer Transparenz
  • Anzeige von Ortsnamen wahlweise in Englisch, Landessprache, oder phonetischer Schreibweise
  "</string>
+    <string name="quick_action_auto_zoom">Autom. Zoom an/aus</string>
+    <string name="quick_action_auto_zoom_desc">Drücken der Aktionstaste schaltet die automatische, geschwindigkeitsabhängige Kartenvergrößerung ein/aus.</string>
+    <string name="quick_action_auto_zoom_on">Autom. Zoom an</string>
+    <string name="quick_action_auto_zoom_off">Autom. Zoom aus</string>
+    <string name="quick_action_add_destination">Ziel hinzufügen</string>
+    <string name="quick_action_replace_destination">Ziel ersetzen</string>
+    <string name="quick_action_add_first_intermediate">Ersten Zwischenstopp hinzufügen</string>
+    <string name="quick_action_add_destination_desc">Drücken der Aktionstaste fügt die zum Bildschirmmittelpunkt gehörende Position als Ziel hinzu.</string>
+    <string name="quick_action_replace_destination_desc">Drücken der Aktionstaste ersetzt das Ziel durch die dem Bildschirmmittelpunkt entsprechende Position.</string>
+    <string name="quick_action_add_first_intermediate_desc">Drücken der Aktionstaste fügt die zum Bildschirmmittelpunkt gehörende Position als ersten Zwischenstopp ein.</string>
+    <string name="subscribe_email_error">Fehler</string>
+    <string name="subscribe_email_desc">Tragen Sie sich in unsere Mail-Liste zu App-Angeboten ein, und erhalten Sie dafür 3 zusätzliche Karten-Downloads!</string>
+    <string name="depth_contour_descr">Der Kartensatz macht die Betrachtung von Meerestiefenlinien möglich.</string>
+    <string name="sea_depth_thanks">Vielen Dank, dass Sie die Meerestiefenkonturen erworben haben!</string>
+    <string name="index_item_depth_contours_osmand_ext">Tiefenkonturen</string>
+    <string name="index_item_depth_points_southern_hemisphere">Meerestiefen der Südhalbkugel</string>
+    <string name="index_item_depth_points_northern_hemisphere">Meerestiefen der Nordhalbkugel</string>
+    <string name="download_depth_countours">Tiefenkonturen</string>
+    <string name="nautical_maps">Seekarten</string>
+    <string name="analyze_on_map">Auf Karte auswerten</string>
+    <string name="shared_string_visible">Sichtbar</string>
+    <string name="right_side_navigation">Rechtsverkehr</string>
+    <string name="no_overlay">Kein Overlay</string>
+    <string name="no_underlay">Kein Underlay</string>
+    <string name="shared_string_paused">Angehalten</string>
     </resources>
