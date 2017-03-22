@@ -129,6 +129,7 @@
     <string name="shared_string_notifications">Notifications</string>
     <string name="shared_string_continue">Continue</string>
     <string name="shared_string_pause">Pause</string>
+    <string name="shared_string_paused">Paused</string>
     <string name="shared_string_trip">Trip</string>
     <string name="shared_string_recorded">Recorded</string>
     <string name="shared_string_record">Record</string>
