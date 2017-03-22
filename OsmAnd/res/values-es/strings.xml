@@ -2613,7 +2613,7 @@ El espacio de almacenamiento usado es {3} MB temporalmente y {1} MB permanenteme
     <string name="routing_attr_height_obstacles_name">Utilizar datos de elevación</string>
     <string name="routing_attr_height_obstacles_description">Utilizar los datos de elevación del terreno proporcionados por SRTM, ASTER y UE-DEM</string>
 
-    <string name="rendering_attr_depthContours_description">Muestra las curvas de profundidad y puntos</string>
+    <string name="rendering_attr_depthContours_description">Muestra puntos y curvas de profundidad</string>
     <string name="rendering_attr_depthContours_name">Curvas a nivel</string>
 	<string name="auto_split_recording_title">Auto-dividir grabaciones después de la separación</string>
 	<string name="auto_split_recording_descr">Iniciar nuevo segmento después de un hueco de 6 min, nueva pista después de un hueco de 2 h, o nuevo archivo después de un hueco más largo si ha cambiado la fecha.</string>
