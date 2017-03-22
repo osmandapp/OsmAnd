@@ -2875,7 +2875,7 @@ De Afganujo al Zimbabvo, de Aŭstralio al Usono, Argentino, Brazilo, Kanado, Fra
     <string name="quick_action_replace_destination">Anstataŭigi celon</string>
     <string name="quick_action_add_first_intermediate">Aldoni unuan interlokon</string>
     <string name="quick_action_add_destination_desc">Premado sur ag-butono aldonos celon al ekrana centro.</string>
-    <string name="quick_action_replace_destination_desc">Premado sur ag-butono anstataŭigos cellokon per loko en centra ekrano.</string>
+    <string name="quick_action_replace_destination_desc">Premado sur ag-butono anstataŭigos celon per loko en centra ekrano.</string>
     <string name="quick_action_add_first_intermediate_desc">Premado sur ag-butono aldonos unuan intercelon al ekrana centro.</string>
     <string name="no_overlay">Neniu surtavolo</string>
     <string name="no_underlay">Neniu subtavolo</string>
@@ -2885,4 +2885,5 @@ De Afganujo al Zimbabvo, de Aŭstralio al Usono, Argentino, Brazilo, Kanado, Fra
     <string name="quick_action_auto_zoom_desc">Premado sur ag-butono aŭtomate aktivigos/malaktivigos map-pligrandigon laŭ via rapido.</string>
     <string name="quick_action_auto_zoom_on">Aŭtomata map-pligrandigo ek</string>
     <string name="quick_action_auto_zoom_off">Aŭtomata map-pligrandigo for</string>
+    <string name="shared_string_paused">Paŭzigita</string>
     </resources>
