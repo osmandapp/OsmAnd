@@ -1725,4 +1725,21 @@
 	<string name="poi_payment_cryptocurrencies_no">暗号通貨不可(Cryptocurrencies not accepted)</string>
 	<string name="poi_payment_others_yes">その他(Others)</string>
 	<string name="poi_payment_others_no">その他該当支払い方法不可(Other payment methods not accepted)</string>
+	<string name="poi_payment_routex_yes">燃料カード_Routex(Routex)</string>
+	<string name="poi_payment_routex_no">燃料カード_Routex不可(Routex fuel cards not accepted)</string>
+	<string name="poi_payment_bancomat_yes">デビットカード_Bancomat(Bancomat)</string>
+	<string name="poi_payment_bancomat_no">デビットカード_Bancomat不可(Bancomat not accepted)</string>
+	<string name="poi_payment_icsf_yes">公共交通機関_ICストアドフェアカード(Suica等)(IC Stored Fare)</string>
+	<string name="poi_payment_icsf_no">公共交通機関_ICストアドフェアカード(Suica等)(IC Stored Fare)</string>
+	<string name="poi_payment_prepaid_ticket_yes">公共交通機関_プリペイドチケット(Prepaid tickets)</string>
+	<string name="poi_payment_jcb_yes">クレジットカード_JCB(JCB)</string>
+	<string name="poi_payment_jcb_no">クレジットカード_JCB不可(JCB cards not accepted)</string>
+	<string name="poi_payment_laser_yes">デビットカード_Laser(Laser)</string>
+	<string name="poi_payment_laser_no">デビットカード_Laser不可(Laser cards not accepted)</string>
+	<string name="poi_payment_ep_quick_yes">電子マネー_Quick(Quick)</string>
+	<string name="poi_payment_ep_quick_no">電子マネー_Quickカード不可(Quick cards not accepted)</string>
+	<string name="poi_payment_eurowag_yes">燃料カード_Eurowag(Eurowag)</string>
+	<string name="poi_payment_eurowag_no">燃料カード_Eurowag不可(Eurowag cards not accepted)</string>
+	<string name="poi_payment_e_zpass_yes">有料道路_E-ZPass(E‑ZPass)</string>
+	<string name="poi_payment_e_zpass_no">有料道路_E-ZPass不可(E‑ZPass not accepted)</string>
 	</resources>
