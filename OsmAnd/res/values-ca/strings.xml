@@ -2701,8 +2701,8 @@ i encara més…
     <string name="relief_smoothness_factor_descr">Prioritat per les planes o pels turons</string>
     <string name="routing_attr_relief_smoothness_factor_name">Factor de detall del relleu</string>
     <string name="full_version_thanks">Us agraïm la compra de la versió complerta d\'OsmAnd!</string>
-    <string name="do_not_send_anonymous_app_usage">No enviïs anònimament la utilització de l\'aplicació</string>
-    <string name="do_not_send_anonymous_app_usage_desc">S\'envia informació general de les pantalles utilitzades durant la sessió. No recollim cap geolocalització ni dades relatives a les entrades de l\'usuari.</string>
+    <string name="do_not_send_anonymous_app_usage">No enviïs anònimament les estadístiques d\'us de l\'aplicació</string>
+    <string name="do_not_send_anonymous_app_usage_desc">L\'aplicació OsmAnd envia informació general de les pantalles utilitzades durant la sessió. No recollim cap geolocalització ni dades relatives a les entrades de l\'usuari.</string>
     <string name="do_not_show_startup_messages">No mostris missatges en engegar</string>
     <string name="do_not_show_startup_messages_desc">Mostra descomptes de l\'aplicació i missatges de fets locals destacats</string>
     <string name="parking_options">Opcions d\'aparcament</string>
@@ -2804,10 +2804,10 @@ El connector de mapes d\'esquí d\'OsmAnd us permet veure les pistes amb la seva
     <string name="quick_action_add_destination">Afegeix destinació</string>
     <string name="quick_action_replace_destination">Substitueix destinació</string>
     <string name="quick_action_add_first_intermediate">Afegeix primer intermedi</string>
-    <string name="quick_action_add_destination_desc">Prement el botó d\'acció afegireu com destinació el punt central de la pantalla.</string>
+    <string name="quick_action_add_destination_desc">Prement el botó d\'acció afegireu com destinació el punt central de la pantalla. L\'anterior destí esdevindrà el darrer punt intermedi.</string>
     <string name="quick_action_replace_destination_desc">Prement el botó d\'acció substituireu la destinació actual pel punt central de la pantalla.</string>
     <string name="quick_action_add_first_intermediate_desc">Prement el botó d\'acció afegireu com primer punt intermedi el punt central de la pantalla.</string>
-    <string name="depth_contour_descr">Conjunt de mapes que us permet veure les corbes batimètriques del mar.</string>
+    <string name="depth_contour_descr">Conjunt de mapes que us mostra corbes batimètriques del mar i fondàries puntuals (segons una graella de 30\'\' d\'arc de pas).</string>
     <string name="shared_string_paused">En pausa</string>
     <string name="osmand_extended_description_part3">"
  Mapa
@@ -2827,5 +2827,14 @@ El connector de mapes d\'esquí d\'OsmAnd us permet veure les pistes amb la seva
 • Suporta punts d\'itinerari intermedis
 • Revisió automàtica de la ruta quan us aparteu de la ruta proposada
 • Cerca de llocs per adreça, tipus (per exemple: restaurant, hotel, gasolinera, museu) o coordenades geogràfiques
+ "</string>
+    <string name="osmand_plus_extended_description_part1">"
+ OsmAnd + (OSM Automated Navigation Directions) és una aplicació per consulta de mapes i de navegació, amb accés a les dades obertes d\'OpenStreetMap (OSM), d\'abast mundial i gran qualitat.
+
+ Navegueu amb indicacions visuals i de veu, mostrant PDIs (punts d\'interès), creant i gestionant traces GPX, disposant de corbes de nivell i cotes puntuals, seleccioneu la navegació per vehicle, bicicleta o vianant, editeu OSM i molt més.
+
+ OsmAnd + és la versió de pagament de l\'aplicació. En comprar-la, recolzareu el projecte, finançant el desenvolupament de noves característiques i rebreu les darreres actualitzacions.
+
+ Característiques principals:
  "</string>
     </resources>
