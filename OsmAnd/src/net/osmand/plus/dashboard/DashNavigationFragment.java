@@ -42,9 +42,6 @@ public class DashNavigationFragment extends DashBaseFragment {
 			public void onClick(View view) {
 
 				ShowRouteInfoDialogFragment.showDialog(getActivity().getSupportFragmentManager());
-				Intent intent = new Intent(view.getContext(), ShowRouteInfoDialogFragment.class);
-				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				view.getContext().startActivity(intent);
 			}
 		});
 		return view;
