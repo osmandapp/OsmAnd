@@ -2937,4 +2937,9 @@ Fonctionnalités principales :
     <string name="quick_action_auto_zoom_on">Zoom automatique activé</string>
     <string name="quick_action_auto_zoom_off">Zoom automatique désactivé</string>
     <string name="shared_string_paused">Mis en pause</string>
+    <string name="type_city_town">Type de ville</string>
+    <string name="type_postcode">Saisissez le code postal</string>
+    <string name="nearest_cities">Villes les plus proches</string>
+    <string name="select_city">Sélectionnez la ville</string>
+    <string name="select_postcode">Sélectionnez le code postal</string>
     </resources>
