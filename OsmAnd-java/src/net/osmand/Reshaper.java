@@ -1,5 +1,7 @@
 package net.osmand;
 
+import java.io.UnsupportedEncodingException;
+
 import org.apache.commons.logging.Log;
 
 import com.ibm.icu.text.ArabicShaping;
@@ -10,6 +12,13 @@ import com.ibm.icu.text.BidiRun;
 public class Reshaper {
 	private final static Log LOG = PlatformUtil.getLog(Reshaper.class);
 	
+	public static String reshape(byte[] bytes) {
+		try {
+			return reshape(new String(bytes, "UTF-8"));
+		} catch (UnsupportedEncodingException e) {
+			return "";
+		}
+	}
 	public static String reshape(String s) {
 //		if(true) {
 //			return s;
