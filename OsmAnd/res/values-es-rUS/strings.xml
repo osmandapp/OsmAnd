@@ -2849,4 +2849,9 @@ Algunas de las principales funciones:
     <string name="quick_action_replace_destination_desc">Pulsar el botón de acción reemplazará el destino con la ubicación central de la pantalla.</string>
     <string name="quick_action_add_first_intermediate_desc">Pulsar el botón de acción añadirá un primer punto intermedio en el centro de la pantalla.</string>
     <string name="shared_string_paused">Pausado</string>
+    <string name="type_city_town">Tipo de ciudad o pueblo</string>
+    <string name="type_postcode">Tipo de código postal</string>
+    <string name="nearest_cities">Ciudades cercanas</string>
+    <string name="select_city">Marca la ciudad</string>
+    <string name="select_postcode">Marca el código postal</string>
     </resources>
