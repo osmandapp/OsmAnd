@@ -2737,7 +2737,7 @@
 
 	<string name="poi_health_specialty_palliative_medicine_yes">Palliativmedizin</string>
 
-	<string name="poi_fire_hydrant_type_dry_barrel">Überflur (trocken)</string>
+	<string name="poi_fire_hydrant_type_dry_barrel">entleert (Frost)</string>
 	<string name="poi_health_person_type_healer">Funktion im Gesundheitssektor: Therapeut</string>
 	<string name="poi_health_person_type_midwife">Funktion im Gesundheitssektor: Hebamme</string>
 	<string name="poi_health_person_type_nurse">Funktion im Gesundheitssektor: Pflegefachkraft</string>
