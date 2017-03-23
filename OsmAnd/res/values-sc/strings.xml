@@ -355,7 +355,7 @@ Sos datos globales (intre sos 70 grados nord e sos 70 grados sud) sunt basados i
     <string name="no_buildings_found">Perunu edifìtziu agatau.</string>
     <string name="incremental_search_city">Chirca incrementale de sa tzitade</string>
     <string name="search_villages_and_postcodes">Chirca àteras biddas/còdighes postales</string>
-    <string name="voice_stream_voice_call">Àudio mutidas bogales (chircat fintzas de firmare sa mùsica)</string>
+    <string name="voice_stream_voice_call">Àudio mutidas bogales (firmat fintzas sa mùsica)</string>
     <string name="voice_stream_notification">Àudio notìficas</string>
     <string name="voice_stream_music">Àudio media/mùsica</string>
     <string name="rendering_attr_showRoadMaps_description">Issèbera cando ammustrare mapas cun petzi sas istradas:</string>
