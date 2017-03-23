@@ -9,6 +9,11 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="type_city_town">Type city or town</string>
+    <string name="type_postcode">Type postcode</string>
+    <string name="nearest_cities">Nearest cities</string>
+    <string name="select_city">Select city</string>
+    <string name="select_postcode">Select postcode</string>
     <string name="quick_action_auto_zoom">Auto zoom map on/off</string>
     <string name="quick_action_auto_zoom_desc">Tapping the action button will turn on/off auto zoom map according to your speed.</string>
     <string name="quick_action_auto_zoom_on">Auto zoom map on</string>

@@ -1,4 +1,4 @@
-package net.osmand.plus.search;
+package net.osmand.plus.search.listitems;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -39,6 +39,10 @@ public class QuickSearchListItem {
 	public QuickSearchListItem(OsmandApplication app, SearchResult searchResult) {
 		this.app = app;
 		this.searchResult = searchResult;
+	}
+
+	public QuickSearchListItemType getType() {
+		return QuickSearchListItemType.SEARCH_RESULT;
 	}
 
 	public SearchResult getSearchResult() {

@@ -29,7 +29,10 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.OsmAndListFragment;
 import net.osmand.plus.dashboard.DashLocationFragment;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
-import net.osmand.plus.search.QuickSearchDialogFragment.CustomSearchButton;
+import net.osmand.plus.search.listitems.QuickSearchButtonListItem;
+import net.osmand.plus.search.listitems.QuickSearchListItem;
+import net.osmand.plus.search.listitems.QuickSearchListItemType;
+import net.osmand.plus.search.listitems.QuickSearchMoreListItem;
 import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchResult;
 import net.osmand.util.Algorithms;
@@ -47,6 +50,7 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 	enum SearchListFragmentType {
 		HISTORY,
 		CATEGORIES,
+		ADDRESS,
 		MAIN
 	}
 
@@ -86,11 +90,11 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 		if (index < listAdapter.getCount()) {
 			QuickSearchListItem item = listAdapter.getItem(index);
 			if (item != null) {
-				if (item instanceof QuickSearchMoreListItem) {
+				if (item.getType() == QuickSearchListItemType.SEARCH_MORE) {
 					((QuickSearchMoreListItem) item).getOnClickListener().onClick(view);
-				} else if (item instanceof CustomSearchButton) {
-					((CustomSearchButton) item).getOnClickListener().onClick(view);
-				} else {
+				} else if (item.getType() == QuickSearchListItemType.BUTTON) {
+					((QuickSearchButtonListItem) item).getOnClickListener().onClick(view);
+				} else if (item.getType() == QuickSearchListItemType.SEARCH_RESULT) {
 					SearchResult sr = item.getSearchResult();
 
 					if (sr.objectType == ObjectType.POI

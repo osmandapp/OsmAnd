@@ -5,7 +5,6 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -65,6 +64,10 @@ import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.search.QuickSearchHelper.SearchHistoryAPI;
+import net.osmand.plus.search.listitems.QuickSearchButtonListItem;
+import net.osmand.plus.search.listitems.QuickSearchHeaderListItem;
+import net.osmand.plus.search.listitems.QuickSearchListItem;
+import net.osmand.plus.search.listitems.QuickSearchMoreListItem;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControllerType;
 import net.osmand.search.SearchUICore;
@@ -72,6 +75,8 @@ import net.osmand.search.SearchUICore.SearchResultCollection;
 import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchCoreAPI;
 import net.osmand.search.core.SearchCoreFactory.SearchAmenityTypesAPI;
+import net.osmand.search.core.SearchCoreFactory.SearchCityByNameAPI;
+import net.osmand.search.core.SearchCoreFactory.SearchPostcodeAPI;
 import net.osmand.search.core.SearchPhrase;
 import net.osmand.search.core.SearchResult;
 import net.osmand.search.core.SearchSettings;
@@ -118,6 +123,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	private QuickSearchMainListFragment mainSearchFragment;
 	private QuickSearchHistoryListFragment historySearchFragment;
 	private QuickSearchCategoriesListFragment categoriesSearchFragment;
+	private QuickSearchAddressListFragment addrSearchFragment;
 	private QuickSearchToolbarController toolbarController;
 
 	private Toolbar toolbarEdit;
@@ -406,6 +412,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		);
 
 		viewPager = (LockableViewPager) view.findViewById(R.id.pager);
+		viewPager.setOffscreenPageLimit(2);
 		pagerAdapter = new SearchFragmentPagerAdapter(getChildFragmentManager(), getResources());
 		viewPager.setAdapter(pagerAdapter);
 		if (centerLatLon != null || showCategories) {
@@ -484,6 +491,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 							String newText = searchUICore.getPhrase().getTextWithoutLastWord();
 							searchEditText.setText(newText);
 							searchEditText.setSelection(newText.length());
+							searchUICore.setSearchApiClass(null);
 						} else if (useMapCenter && location != null) {
 							useMapCenter = false;
 							centerLatLon = null;
@@ -702,6 +710,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		boolean transliterate = app.getSettings().MAP_TRANSLITERATE_NAMES.get();
 		searchHelper = app.getSearchUICore();
 		searchUICore = searchHelper.getCore();
+		searchUICore.setSearchApiClass(null);
 
 		location = app.getLocationProvider().getLastKnownLocation();
 
@@ -873,7 +882,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			searchView.setVisibility(View.GONE);
 		} else if (!show && tabsView.getVisibility() == View.VISIBLE) {
 			tabToolbarView.setVisibility(View.GONE);
-			buttonToolbarView.setVisibility(View.VISIBLE);
+			buttonToolbarView.setVisibility(searchUICore.isInCustomSearch() ? View.GONE : View.VISIBLE);
 			tabsView.setVisibility(View.GONE);
 			searchView.setVisibility(View.VISIBLE);
 		}
@@ -897,6 +906,11 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			case CATEGORIES:
 				categoriesSearchFragment = (QuickSearchCategoriesListFragment) searchListFragment;
 				reloadCategories();
+				break;
+
+			case ADDRESS:
+				addrSearchFragment = (QuickSearchAddressListFragment) searchListFragment;
+				reloadCities();
 				break;
 
 			case MAIN:
@@ -951,7 +965,8 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 				for (SearchResult sr : res.getCurrentSearchResults()) {
 					rows.add(new QuickSearchListItem(app, sr));
 				}
-				rows.add(new CustomSearchButton(app, new OnClickListener() {
+				rows.add(new QuickSearchButtonListItem(app, R.drawable.ic_action_search_dark,
+						app.getString(R.string.custom_search), new OnClickListener() {
 					@Override
 					public void onClick(View v) {
 						PoiUIFilter filter = app.getPoiFilters().getCustomPOIFilter();
@@ -966,7 +981,74 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			e.printStackTrace();
 			app.showToastMessage(e.getMessage());
 		}
+	}
 
+	public void reloadCities() {
+		if (app.isApplicationInitializing()) {
+			showProgressBar();
+			app.getAppInitializer().addListener(new AppInitializeListener() {
+				@Override
+				public void onProgress(AppInitializer init, AppInitializer.InitEvents event) {
+				}
+
+				@Override
+				public void onFinish(AppInitializer init) {
+					if (!paused) {
+						reloadCitiesInternal();
+						if (!searching) {
+							hideProgressBar();
+						}
+					}
+				}
+			});
+		} else {
+			reloadCitiesInternal();
+		}
+	}
+
+	private void reloadCitiesInternal() {
+		try {
+			SearchResultCollection res = searchUICore.shallowSearch(SearchCityByNameAPI.class,
+					"", null);
+			List<QuickSearchListItem> rows = new ArrayList<>();
+			rows.add(new QuickSearchButtonListItem(app, R.drawable.ic_action_building_number,
+					app.getString(R.string.select_city), new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					searchEditText.setHint(R.string.type_city_town);
+					searchUICore.setSearchApiClass(SearchCityByNameAPI.class);
+					updateTabbarVisibility(false);
+					runSearch();
+				}
+			}));
+			rows.add(new QuickSearchButtonListItem(app, R.drawable.ic_action_postcode,
+					app.getString(R.string.select_postcode), new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					searchEditText.setHint(R.string.type_postcode);
+					searchUICore.setSearchApiClass(SearchPostcodeAPI.class);
+					mainSearchFragment.getAdapter().clear();
+					updateTabbarVisibility(false);
+					searchEditText.requestFocus();
+					AndroidUtils.softKeyboardDelayed(searchEditText);
+				}
+			}));
+
+			if (res != null) {
+				rows.add(new QuickSearchHeaderListItem(app, app.getString(R.string.nearest_cities), true));
+				int limit = 15;
+				for (SearchResult sr : res.getCurrentSearchResults()) {
+					if (limit > 0) {
+						rows.add(new QuickSearchListItem(app, sr));
+					}
+					limit--;
+				}
+			}
+			addrSearchFragment.updateListAdapter(rows, false);
+		} catch (IOException e) {
+			e.printStackTrace();
+			app.showToastMessage(e.getMessage());
+		}
 	}
 
 	public void reloadHistory() {
@@ -1186,10 +1268,12 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			}
 		}
 		searchUICore.selectSearchResult(sr);
+		searchUICore.setSearchApiClass(null);
 		String txt = searchUICore.getPhrase().getText(true);
 		searchQuery = txt;
 		searchEditText.setText(txt);
 		searchEditText.setSelection(txt.length());
+		buttonToolbarView.setVisibility(View.VISIBLE);
 		updateToolbarButton();
 		SearchSettings settings = searchUICore.getPhrase().getSettings();
 		if (settings.getRadiusLevel() != 1) {
@@ -1486,10 +1570,16 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	}
 
 	public class SearchFragmentPagerAdapter extends FragmentPagerAdapter {
-		private final String[] fragments = new String[]{QuickSearchHistoryListFragment.class.getName(),
-				QuickSearchCategoriesListFragment.class.getName()};
-		private final int[] titleIds = new int[]{QuickSearchHistoryListFragment.TITLE,
-				QuickSearchCategoriesListFragment.TITLE};
+		private final String[] fragments = new String[] {
+				QuickSearchHistoryListFragment.class.getName(),
+				QuickSearchCategoriesListFragment.class.getName(),
+				QuickSearchAddressListFragment.class.getName()
+		};
+		private final int[] titleIds = new int[]{
+				QuickSearchHistoryListFragment.TITLE,
+				QuickSearchCategoriesListFragment.TITLE,
+				QuickSearchAddressListFragment.TITLE
+		};
 		private final String[] titles;
 
 		public SearchFragmentPagerAdapter(FragmentManager fm, Resources res) {
@@ -1582,6 +1672,15 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		}
 	}
 
+	public static class QuickSearchAddressListFragment extends QuickSearchListFragment {
+		public static final int TITLE = R.string.address;
+
+		@Override
+		public SearchListFragmentType getType() {
+			return SearchListFragmentType.ADDRESS;
+		}
+	}
+
 	public static class QuickSearchMainListFragment extends QuickSearchListFragment {
 
 		@Override
@@ -1597,27 +1696,4 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		}
 	}
 
-	public static class CustomSearchButton extends QuickSearchListItem {
-
-		private OnClickListener onClickListener;
-
-		public CustomSearchButton(OsmandApplication app, OnClickListener onClickListener) {
-			super(app, null);
-			this.onClickListener = onClickListener;
-		}
-
-		@Override
-		public Drawable getIcon() {
-			return app.getIconsCache().getIcon(R.drawable.ic_action_search_dark);
-		}
-
-		@Override
-		public String getName() {
-			return app.getString(R.string.custom_search);
-		}
-
-		public OnClickListener getOnClickListener() {
-			return onClickListener;
-		}
-	}
 }

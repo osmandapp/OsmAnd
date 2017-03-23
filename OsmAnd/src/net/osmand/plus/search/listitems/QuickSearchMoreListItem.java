@@ -1,4 +1,4 @@
-package net.osmand.plus.search;
+package net.osmand.plus.search.listitems;
 
 import android.view.View.OnClickListener;
 
@@ -13,6 +13,10 @@ public class QuickSearchMoreListItem extends QuickSearchListItem {
 		super(app, null);
 		this.name = name;
 		this.onClickListener = onClickListener;
+	}
+
+	public QuickSearchListItemType getType() {
+		return QuickSearchListItemType.SEARCH_MORE;
 	}
 
 	@Override

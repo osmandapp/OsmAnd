@@ -3,6 +3,7 @@ package net.osmand.plus.search;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.NonNull;
 import android.support.v4.view.ViewCompat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,7 +22,12 @@ import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.dashboard.DashLocationFragment;
-import net.osmand.plus.search.QuickSearchDialogFragment.CustomSearchButton;
+import net.osmand.plus.search.listitems.QuickSearchButtonListItem;
+import net.osmand.plus.search.listitems.QuickSearchHeaderListItem;
+import net.osmand.plus.search.listitems.QuickSearchListItem;
+import net.osmand.plus.search.listitems.QuickSearchListItemType;
+import net.osmand.plus.search.listitems.QuickSearchMoreListItem;
+import net.osmand.plus.search.listitems.QuickSearchSelectAllListItem;
 import net.osmand.search.core.SearchPhrase;
 import net.osmand.util.Algorithms;
 import net.osmand.util.OpeningHoursParser;
@@ -40,23 +46,16 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 	private Float heading;
 	private boolean useMapCenter;
 
-	private int searchMoreItemPosition;
-	private int selectAllItemPosition;
-	private int customSearchItemPosition;
-
 	private int screenOrientation;
 	private int dp56;
 	private int dp1;
+
+	private boolean hasSearchMoreItem;
 
 	private OnSelectionListener selectionListener;
 	private boolean selectionMode;
 	private boolean selectAll;
 	private List<QuickSearchListItem> selectedItems = new ArrayList<>();
-
-	private static final int ITEM_TYPE_REGULAR = 0;
-	private static final int ITEM_TYPE_SEARCH_MORE = 1;
-	private static final int ITEM_TYPE_SELECT_ALL = 2;
-	private static final int ITEM_TYPE_CUSTOM_SEARCH = 3;
 
 	public interface OnSelectionListener {
 
@@ -150,75 +149,62 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 	public void setListItems(List<QuickSearchListItem> items) {
 		setNotifyOnChange(false);
 		clear();
+		hasSearchMoreItem = false;
 		for (QuickSearchListItem item : items) {
 			add(item);
+			if (!hasSearchMoreItem && item.getType() == QuickSearchListItemType.SEARCH_MORE) {
+				hasSearchMoreItem = true;
+			}
 		}
-		acquireAdditionalItemsPositions();
 		setNotifyOnChange(true);
 		notifyDataSetChanged();
 	}
 
-	public void addListItem(QuickSearchListItem item) {
-		if (searchMoreItemPosition != -1 && item instanceof QuickSearchMoreListItem) {
+	public void addListItem(@NonNull QuickSearchListItem item) {
+		if (hasSearchMoreItem && item.getType() == QuickSearchListItemType.SEARCH_MORE) {
 			return;
 		}
 		setNotifyOnChange(false);
 		add(item);
-		acquireAdditionalItemsPositions();
+		if (item.getType() == QuickSearchListItemType.SEARCH_MORE) {
+			hasSearchMoreItem = true;
+		}
 		setNotifyOnChange(true);
 		notifyDataSetChanged();
 	}
 
-	public void insertListItem(QuickSearchListItem item, int index) {
+	public void insertListItem(@NonNull QuickSearchListItem item, int index) {
 		setNotifyOnChange(false);
 		insert(item, index);
-		acquireAdditionalItemsPositions();
+		if (item.getType() == QuickSearchListItemType.SEARCH_MORE) {
+			hasSearchMoreItem = true;
+		}
 		setNotifyOnChange(true);
 		notifyDataSetChanged();
-	}
-
-	private void acquireAdditionalItemsPositions() {
-		selectAllItemPosition = -1;
-		searchMoreItemPosition = -1;
-		customSearchItemPosition = -1;
-		if (getCount() > 0) {
-			QuickSearchListItem first = getItem(0);
-			QuickSearchListItem last = getItem(getCount() - 1);
-			selectAllItemPosition = first instanceof QuickSearchSelectAllListItem ? 0 : -1;
-			searchMoreItemPosition = last instanceof QuickSearchMoreListItem ? getCount() - 1 : -1;
-			customSearchItemPosition = last instanceof CustomSearchButton ? getCount() - 1 : -1;
-		}
 	}
 
 	@Override
-	public QuickSearchListItem getItem(int position) {
-		return super.getItem(position);
+	public boolean isEnabled(int position) {
+		return getItem(position).getType() != QuickSearchListItemType.HEADER;
 	}
 
 	@Override
 	public int getItemViewType(int position) {
-		if (position == searchMoreItemPosition) {
-			return ITEM_TYPE_SEARCH_MORE;
-		} else if (position == customSearchItemPosition) {
-			return ITEM_TYPE_CUSTOM_SEARCH;
-		} else if (position == selectAllItemPosition) {
-			return ITEM_TYPE_SELECT_ALL;
-		} else {
-			return ITEM_TYPE_REGULAR;
-		}
+		return getItem(position).getType().ordinal();
 	}
 
 	@Override
 	public int getViewTypeCount() {
-		return 4;
+		return QuickSearchListItemType.values().length;
 	}
 
+	@NonNull
 	@Override
-	public View getView(final int position, View convertView, ViewGroup parent) {
+	public View getView(final int position, View convertView, @NonNull ViewGroup parent) {
 		final QuickSearchListItem listItem = getItem(position);
-		int viewType = getItemViewType(position);
+		QuickSearchListItemType type = listItem.getType();
 		LinearLayout view;
-		if (viewType == ITEM_TYPE_SEARCH_MORE) {
+		if (type == QuickSearchListItemType.SEARCH_MORE) {
 			if (convertView == null) {
 				LayoutInflater inflater = (LayoutInflater) app
 						.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -229,7 +215,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 			}
 
 			((TextView) view.findViewById(R.id.title)).setText(listItem.getName());
-		} else if (viewType == ITEM_TYPE_CUSTOM_SEARCH) {
+		} else if (type == QuickSearchListItemType.BUTTON) {
 			if (convertView == null) {
 				LayoutInflater inflater = (LayoutInflater) app
 						.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -238,7 +224,9 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 			} else {
 				view = (LinearLayout) convertView;
 			}
-		} else if (viewType == ITEM_TYPE_SELECT_ALL) {
+			((ImageView) view.findViewById(R.id.imageView)).setImageDrawable(listItem.getIcon());
+			((TextView) view.findViewById(R.id.title)).setText(listItem.getName());
+		} else if (type == QuickSearchListItemType.SELECT_ALL) {
 			if (convertView == null) {
 				LayoutInflater inflater = (LayoutInflater) app
 						.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -257,6 +245,18 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 					toggleCheckbox(position, ch);
 				}
 			});
+		} else if (type == QuickSearchListItemType.HEADER) {
+			if (convertView == null) {
+				LayoutInflater inflater = (LayoutInflater) app
+						.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+				view = (LinearLayout) inflater.inflate(
+						R.layout.search_header_list_item, null);
+			} else {
+				view = (LinearLayout) convertView;
+			}
+			view.findViewById(R.id.top_divider)
+					.setVisibility(((QuickSearchHeaderListItem)listItem).isShowTopDivider() ? View.VISIBLE : View.GONE);
+			((TextView) view.findViewById(R.id.title)).setText(listItem.getName());
 		} else {
 			if (convertView == null) {
 				LayoutInflater inflater = (LayoutInflater) app
@@ -344,11 +344,12 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 						app.getSettings().isLightContent() ? R.color.bg_color_light : R.color.bg_color_dark));
 		View divider = view.findViewById(R.id.divider);
 		if (divider != null) {
-			if (position == getCount() - 1) {
+			if (position == getCount() - 1 || getItem(position + 1).getType() == QuickSearchListItemType.HEADER) {
 				divider.setVisibility(View.GONE);
 			} else {
 				divider.setVisibility(View.VISIBLE);
-				if (position + 1 == searchMoreItemPosition || position == selectAllItemPosition) {
+				if (getItem(position + 1).getType() == QuickSearchListItemType.SEARCH_MORE
+						|| type == QuickSearchListItemType.SELECT_ALL) {
 					LinearLayout.LayoutParams p = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dp1);
 					p.setMargins(0, 0, 0 ,0);
 					divider.setLayoutParams(p);
@@ -364,13 +365,14 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 	}
 
 	public void toggleCheckbox(int position, CheckBox ch) {
-		int viewType = getItemViewType(position);
-		if (viewType == ITEM_TYPE_SELECT_ALL) {
+		QuickSearchListItemType type = getItem(position).getType();
+		if (type == QuickSearchListItemType.SELECT_ALL) {
 			selectAll = ch.isChecked();
 			if (ch.isChecked()) {
 				selectedItems.clear();
 				for (int i = 0; i < getCount(); i++) {
-					if (getItemViewType(i) == ITEM_TYPE_REGULAR) {
+					QuickSearchListItemType t = getItem(i).getType();
+					if (t == QuickSearchListItemType.SEARCH_RESULT) {
 						selectedItems.add(getItem(i));
 					}
 				}

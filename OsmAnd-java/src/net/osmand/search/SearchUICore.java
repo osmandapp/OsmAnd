@@ -7,7 +7,6 @@ import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
-import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.search.core.CustomSearchPoiFilter;
 import net.osmand.search.core.ObjectType;
@@ -30,7 +29,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
@@ -44,7 +42,7 @@ public class SearchUICore {
 	private static final int TIMEOUT_BETWEEN_CHARS = 200;
 	private static final Log LOG = PlatformUtil.getLog(SearchUICore.class); 
 	private SearchPhrase phrase;
-	private SearchResultCollection  currentSearchResult;
+	private SearchResultCollection currentSearchResult;
 	
 	private ThreadPoolExecutor singleThreadedExecutor;
 	private LinkedBlockingQueue<Runnable> taskQueue;
@@ -56,8 +54,11 @@ public class SearchUICore {
 	List<SearchCoreAPI> apis = new ArrayList<>();
 	private SearchSettings searchSettings;
 	private MapPoiTypes poiTypes;
-	
-	
+
+	private SearchCoreFactory.SearchCityByNameAPI searchCityByNameAPI;
+	private SearchCoreFactory.SearchPostcodeAPI searchPostcodeAPI;
+	private Class<? extends SearchCoreAPI> searchApiClass;
+
 	public SearchUICore(MapPoiTypes poiTypes, String locale, boolean transliterate) {
 		this.poiTypes = poiTypes;
 		taskQueue = new LinkedBlockingQueue<Runnable>();
@@ -67,7 +68,19 @@ public class SearchUICore {
 		currentSearchResult = new SearchResultCollection(phrase);
 		singleThreadedExecutor = new ThreadPoolExecutor(1, 1, 0L, TimeUnit.MILLISECONDS, taskQueue);
 	}
-	
+
+	public Class<? extends SearchCoreAPI> getSearchApiClass() {
+		return searchApiClass;
+	}
+
+	public void setSearchApiClass(Class<? extends SearchCoreAPI> searchApiClass) {
+		this.searchApiClass = searchApiClass;
+	}
+
+	public boolean isInCustomSearch() {
+		return searchApiClass != null;
+	}
+
 	public static class SearchResultCollection {
 		private List<SearchResult> searchResults;
 		private SearchPhrase phrase;
@@ -242,10 +255,15 @@ public class SearchUICore {
 	
 	@SuppressWarnings("unchecked")
 	public <T> T getApiByClass(Class<T> cl) {
-		for(SearchCoreAPI a : apis) {
+		for (SearchCoreAPI a : apis) {
 			if(cl.isInstance(a)) {
 				return (T) a;
 			}
+		}
+		if (cl.isInstance(searchCityByNameAPI)) {
+			return (T) searchCityByNameAPI;
+		} else if (cl.isInstance(searchPostcodeAPI)) {
+			return (T) searchPostcodeAPI;
 		}
 		return null;
 	}
@@ -279,7 +297,11 @@ public class SearchUICore {
 		apis.add(streetsApi);
 		SearchStreetByCityAPI cityApi = new SearchCoreFactory.SearchStreetByCityAPI(streetsApi);
 		apis.add(cityApi);
-		apis.add(new SearchCoreFactory.SearchAddressByNameAPI(streetsApi, cityApi));
+		SearchCoreFactory.SearchAddressByNameAPI searchAddressByNameAPI
+				= new SearchCoreFactory.SearchAddressByNameAPI(streetsApi, cityApi);
+		apis.add(searchAddressByNameAPI);
+		searchCityByNameAPI = new SearchCoreFactory.SearchCityByNameAPI(searchAddressByNameAPI);
+		searchPostcodeAPI = new SearchCoreFactory.SearchPostcodeAPI();
 	}
 
 	public void clearCustomSearchPoiFilters() {
@@ -414,7 +436,12 @@ public class SearchUICore {
 
 	private void searchInBackground(final SearchPhrase phrase, SearchResultMatcher matcher) {
 		preparePhrase(phrase);
-		ArrayList<SearchCoreAPI> lst = new ArrayList<>(apis);
+		ArrayList<SearchCoreAPI> lst = new ArrayList<>();
+		if (searchApiClass != null) {
+			lst.add(getApiByClass(searchApiClass));
+		} else {
+			lst.addAll(apis);
+		}
 		Collections.sort(lst, new Comparator<SearchCoreAPI>() {
 
 			@Override
@@ -423,11 +450,11 @@ public class SearchUICore {
 						o2.getSearchPriority(phrase));
 			}
 		});
-		for(SearchCoreAPI api : lst) {
-			if(matcher.isCancelled()) {
+		for (SearchCoreAPI api : lst) {
+			if (matcher.isCancelled()) {
 				break;
 			}
-			if(api.getSearchPriority(phrase) == -1) {
+			if (api.getSearchPriority(phrase) == -1) {
 				continue;
 			}
 			try {
