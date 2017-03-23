@@ -2715,10 +2715,10 @@
 
 <string name="poi_health_service_support_yes">Gesundheitswesen: Unterstützung: Ja</string>
 	<string name="poi_health_service_support_no">Gesundheitswesen: Unterstützung: Nein</string>
-	<string name="poi_suction_point">Saugpunkt</string>
+	<string name="poi_suction_point">Saugstelle</string>
 
-	<string name="poi_fire_hydrant_type_underground">Untergrund</string>
-	<string name="poi_fire_hydrant_type_pillar">Säule</string>
+	<string name="poi_fire_hydrant_type_underground">Unterflur</string>
+	<string name="poi_fire_hydrant_type_pillar">Überflur</string>
 	<string name="poi_fire_hydrant_type_pond">Teich</string>
 	<string name="poi_fire_hydrant_type_wall">Wand</string>
 
@@ -2737,7 +2737,7 @@
 
 	<string name="poi_health_specialty_palliative_medicine_yes">Palliativmedizin</string>
 
-	<string name="poi_fire_hydrant_type_dry_barrel">Trockenfass</string>
+	<string name="poi_fire_hydrant_type_dry_barrel">Überflur (trocken)</string>
 	<string name="poi_health_person_type_healer">Funktion im Gesundheitssektor: Therapeut</string>
 	<string name="poi_health_person_type_midwife">Funktion im Gesundheitssektor: Hebamme</string>
 	<string name="poi_health_person_type_nurse">Funktion im Gesundheitssektor: Pflegefachkraft</string>
@@ -2828,14 +2828,14 @@
 
 	<string name="poi_fire_hydrant_diameter">Hydrantdurchmesser</string>
 	<string name="poi_fire_hydrant_pressure">Hydrantdruck</string>
-	<string name="poi_fire_hydrant_count">Hydrantnummer</string>
+	<string name="poi_fire_hydrant_count">Hydrantanzahl</string>
 	<string name="poi_fire_hydrant_flow_capacity">Hydrantdurchflusskapazität</string>
 	<string name="poi_fire_hydrant_position_sidewalk">Hydrantstandort: Bürgersteig</string>
 	<string name="poi_fire_hydrant_position_green">Hydrantstandort: Wiese</string>
 	<string name="poi_fire_hydrant_position_lane">Hydrantstandort: Fahrbahn</string>
 	<string name="poi_fire_hydrant_position_parking_lot">Hydrantstandort: Parkplatz</string>
 	<string name="poi_fire_hydrant_position_street">Hydrantstandort: Straße</string>
-	<string name="poi_fire_hydrant_position_underground">Hydrantstandort: Untergrund</string>
+	<string name="poi_fire_hydrant_position_underground">Hydrantstandort: Unterflur</string>
 	<string name="poi_fire_hydrant_style_wsh">Hydrantart: Schacht</string>
 	<string name="poi_fire_hydrant_style_water_source_main">Haupt</string>
 	<string name="poi_fire_hydrant_style_water_source_pond">Teich</string>
