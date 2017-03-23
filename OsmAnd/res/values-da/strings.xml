@@ -3090,4 +3090,9 @@ Tidligere destination bliver sidste mellemliggende punkt.</string>
     <string name="quick_action_auto_zoom_on">Auto kortzoom til</string>
     <string name="quick_action_auto_zoom_off">Auto kortzoom fra</string>
     <string name="shared_string_paused">Pauset</string>
+    <string name="type_city_town">Indtast by eller bydel</string>
+    <string name="type_postcode">Indtast postnummer</string>
+    <string name="nearest_cities">Nærmeste byer</string>
+    <string name="select_city">Vælg by</string>
+    <string name="select_postcode">Vælg postnummer</string>
     </resources>
