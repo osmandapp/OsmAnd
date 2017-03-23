@@ -2662,7 +2662,7 @@ Se ami OsmAnd e OSM e vuoi sostenerli, questo è un modo perfetto per farlo.</st
     <string name="rendering_attr_surfaceIntegrity_name">Integrità della superficie stradale</string>
     <string name="save_track_min_speed_descr">Imposta la velocità minima per la registrazione di un punto</string>
     <string name="save_track_min_distance">Soglia del movimento di registrazione</string>
-    <string name="save_track_min_distance_descr">Scegliere la distanza minima dal precedente punto a avverrà la registrazione di un nuovo punto</string>
+    <string name="save_track_min_distance_descr">Scegliere la distanza minima dal precedente punto a cui avverrà la registrazione di un nuovo punto</string>
     <string name="save_track_precision">Precisione minima per la registrazione</string>
     <string name="save_track_precision_descr">Impostare la minima precisione per la registrazione di un punto</string>
     <string name="rendering_attr_contourColorScheme_name">Colorazione delle linee isoipse</string>
@@ -2886,15 +2886,15 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="relief_smoothness_factor_descr">Priorità alle pianure o alle colline</string>
     <string name="routing_attr_relief_smoothness_factor_name">Fattore smussamento rilievi</string>
     <string name="driving_region_automatic">Automatica</string>
-    <string name="do_not_send_anonymous_app_usage">Non inviare informazioni anonime sull\'utilizzo</string>
-    <string name="do_not_send_anonymous_app_usage_desc">Invia informazioni generali a riguardo allo schermo utilizzato durante la sessione. Non raccogliamo alcun geolocalizzazione o dato immesso dall\'utilizzatore.</string>
+    <string name="do_not_send_anonymous_app_usage">Non inviare statistiche anonime sull\'utilizzo dell\'app</string>
+    <string name="do_not_send_anonymous_app_usage_desc">L\'app OsmAnd Invia informazioni generali a riguardo allo schermo utilizzato durante la sessione. Non raccogliamo alcun geolocalizzazione o dato immesso dall\'utilizzatore.</string>
     <string name="do_not_show_startup_messages">Non mostrare alcun messaggio all\'avvio</string>
     <string name="do_not_show_startup_messages_desc">Mostra messaggi riguardo app in sconto ed eventi locali speciali</string>
     <string name="parking_options">Opzioni parcheggio</string>
-    <string name="full_version_thanks">Grazie di avere acquistato la versione completa di OsmAnd!</string>
+    <string name="full_version_thanks">Grazie per avere acquistato la versione completa di OsmAnd!</string>
     <string name="fonts_header">Caratteri della mappa</string>
     <string name="right_side_navigation">Guida a destra</string>
-    <string name="depth_contour_descr">Insieme di mappe che permettono di visualizzare le isoipse marine.</string>
+    <string name="depth_contour_descr">"Insieme di mappe che permettono di visualizzare le isoipse marine e i punti (basati su una  griglia di 30 arco secondi)."</string>
     <string name="sea_depth_thanks">Grazie per avere acquistato le isoipse marine!</string>
     <string name="index_item_depth_contours_osmand_ext">Isoipse marine</string>
     <string name="index_item_depth_points_southern_hemisphere">Punti sotto il livello del mare dell\'emisfero Australe</string>
@@ -2912,4 +2912,11 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="quick_action_auto_zoom_off">Zoom della mappa automatico disattivato</string>
     <string name="quick_action_add_destination">Aggiungi una destinazione</string>
     <string name="quick_action_replace_destination">Sostituisci la destinazione</string>
+    <string name="quick_action_add_first_intermediate">Aggiungi il primo intermedio</string>
+    <string name="quick_action_add_destination_desc">Toccando il pulsante azione aggiungerai una destinazione nella posizione al centro dello schermo. La destinazione impostata in precedenza diverrà l\'ultimo punto intermedio.</string>
+    <string name="quick_action_replace_destination_desc">Toccando il pulsante azione sostituirai la destinazione con la posizione al centro dello schermo.</string>
+    <string name="quick_action_add_first_intermediate_desc">Toccando il pulsante azione aggiungerai un primo punto intermedio nella posizione al centro dello schermo.</string>
+    <string name="no_overlay">Nessun stato sovrapposto</string>
+    <string name="no_underlay">Nessun stato di sfondo</string>
+    <string name="shared_string_paused">In pausa</string>
     </resources>
