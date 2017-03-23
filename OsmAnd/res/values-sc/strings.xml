@@ -3015,4 +3015,9 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="download_depth_countours">Curvas de livellu marinas</string>
     <string name="nautical_maps">Mapas nàuticas</string>
     <string name="shared_string_paused">In pàusa</string>
+    <string name="nearest_cities">Tzitades a curtzu</string>
+    <string name="select_city">Issèbera sa tzitade</string>
+    <string name="type_city_town">Iscrie sa tzitade o sa bidda</string>
+    <string name="type_postcode">Iscrie su còdighe postale</string>
+    <string name="select_postcode">Issèbera su còdighe postale</string>
     </resources>
