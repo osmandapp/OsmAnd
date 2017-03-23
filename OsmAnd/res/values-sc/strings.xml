@@ -152,9 +152,9 @@
     <string name="driving_region">Regione de ghia</string>
     <string name="driving_region_us">Istados Unidos</string>
     <string name="driving_region_canada">Cànada</string>
-    <string name="driving_region_europe_asia">Europa e Àsia</string>
+    <string name="driving_region_europe_asia">Europa, Àsia, Amèrica latina e sìmiles</string>
     <string name="driving_region_uk">UK, Ìndia, e sìmiles</string>
-    <string name="driving_region_descr">Issèbera sa regione de ghia: USA, Europa, UK, Àsia e Àteras</string>
+    <string name="driving_region_descr">Issèbera sa regione de ghia: USA, Europa, UK, Àsia e àteras</string>
     <string name="driving_region_japan">Giappone</string>
     <string name="announce_gpx_waypoints">Puntos de coladòrgiu GPX</string>
     <string name="speak_title">Annuntzia…</string>
@@ -2838,7 +2838,7 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="routing_attr_relief_smoothness_factor_name">Valore de ispitadura rilievos</string>
     <string name="full_version_thanks">Gràtzias pro àere comporadu sa versione intrea de OsmAnd!</string>
     <string name="do_not_send_anonymous_app_usage">No imbies informatziones anònimas a pitzu de s\'impreu de s\'aplicatzione</string>
-    <string name="do_not_send_anonymous_app_usage_desc">Imbiat informatziones generales a pitzu de s\'ischermu impreadu in su mentres de sa sessione. Non retzimus perunu datu de geolocalizatzione o chi pertochet datos insertados dae s\'impreadore.</string>
+    <string name="do_not_send_anonymous_app_usage_desc">OsmAnd imbiat informatziones generales a pitzu de s\'ischermu impreadu in su mentres de sa sessione. Non retzimus perunu datu de geolocalizatzione o chi pertochet datos insertados dae s\'impreadore.</string>
     <string name="do_not_show_startup_messages">No ammustres messàgios a s\'alluìngiu</string>
     <string name="do_not_show_startup_messages_desc">Ammustra sos iscontos pro sas aplicatziones e messàgios a pitzu de sos eventos locales</string>
     <string name="parking_options">Issèberos pro sos parchègios</string>
@@ -2993,4 +2993,26 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="restore_purchases">Riprìstina sas còmporas</string>
     <string name="shared_string_visible">Visìbile</string>
     <string name="analyze_on_map">Analiza in sa mapa</string>
+    <string name="quick_action_auto_zoom">Ismanniamentu atomàticu mapa allutu/istudadu</string>
+    <string name="quick_action_auto_zoom_desc">Incarchende su butone as a istudare o allùghere s\'ismanniamentu mapa chi sighit sa lestresa tua.</string>
+    <string name="quick_action_auto_zoom_on">Ismanniamentu automàticu mapa allutu</string>
+    <string name="quick_action_auto_zoom_off">Ismanniamentu automàticu mapa istudadu</string>
+    <string name="quick_action_add_destination">Annanghe una destinatzione</string>
+    <string name="quick_action_replace_destination">Muda sa destinatzione</string>
+    <string name="quick_action_add_first_intermediate">Annanghe su primu puntu de coladòrgiu</string>
+    <string name="quick_action_add_destination_desc">Incarchende su butone as a annànghere una destinatzione in sa positzione in su tzentru de sa mapa. S\'ùrtima destinatzione impostada in antis at a divènnere unu puntu de coladòrgiu.</string>
+    <string name="quick_action_replace_destination_desc">Incarchende su butone as a mudare sa destinatzione cun sa positzione in su tzentru de sa mapa.</string>
+    <string name="quick_action_add_first_intermediate_desc">Incarchende su butone as a annànghere unu puntu de coladòrgiu in sa positzione in su tzentru de sa mapa.</string>
+    <string name="no_overlay">Perunu istratu superiore</string>
+    <string name="no_underlay">Perunu istratu inferiore</string>
+    <string name="subscribe_email_error">Errore</string>
+    <string name="subscribe_email_desc">Iscrie·ti a sa listra de posta eletrònica nostra a pitzu de sos iscontos pro s\'aplicatzione e as a tènnere 3 iscarrigamentos de mapas in prus!</string>
+    <string name="depth_contour_descr">Grupu de mapas chi ti permitint de bìdere sas curvas e sos puntos de livellu marinos (fatos sighinde una griglia de 30 arcu-segundos).</string>
+    <string name="sea_depth_thanks">Gràtzias pro àere comporadu sas curvas de livellu marinas!</string>
+    <string name="index_item_depth_contours_osmand_ext">Curvas de livellu marinas</string>
+    <string name="index_item_depth_points_southern_hemisphere">Puntos suta de su livellu de su mare in s\'emisferu australe</string>
+    <string name="index_item_depth_points_northern_hemisphere">Puntos suta de su livellu de su mare in s\'emisferu boreale</string>
+    <string name="download_depth_countours">Curvas de livellu marinas</string>
+    <string name="nautical_maps">Mapas nàuticas</string>
+    <string name="shared_string_paused">In pàusa</string>
     </resources>
