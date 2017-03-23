@@ -1334,7 +1334,7 @@ Afganistan, Albanija, Alžirija, Andora, Angola, Angvila, Antigva in Barbuda, Ar
     <string name="driving_region_japan">Japonska</string>
     <string name="driving_region_us">Združene države</string>
     <string name="driving_region_canada">Kanada</string>
-    <string name="driving_region_europe_asia">Evropa in Azija</string>
+    <string name="driving_region_europe_asia">Evropa, Azija, Latinska Amerika in podobno</string>
     <string name="driving_region_uk">Velika Britanija, Indija in drugo</string>
 
     <string name="about_version">Različica:</string>
@@ -2860,4 +2860,10 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="analyze_on_map">Preuči na zemljevidu</string>
     <string name="fonts_header">Pisave za zemljevid</string>
     <string name="shared_string_paused">V premoru</string>
+    <string name="osmand_extended_description_part7">"
+ Sodelujte pri razvoju OSM
+ • Pošiljajte poročila o hroščih
+ • Objavljajte sledi GPX za OSM neposredno iz programa
+ • Dodajajte točke POI in jih neposredno pošiljajte na strežnik OSM (z zamikom, če ni vzpostavljene povezave)
+ "</string>
     </resources>
