@@ -2842,7 +2842,7 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="routing_attr_driving_style_safety_name">Varno</string>
     <string name="relief_smoothness_factor_descr">Prednostna izbira ravnin ali gričevja</string>
     <string name="routing_attr_relief_smoothness_factor_name">Določilo gladkosti izrisa reliefa</string>
-    <string name="do_not_send_anonymous_app_usage">Ne pošiljaj nobenih podatkov uporabe programa</string>
+    <string name="do_not_send_anonymous_app_usage">Ne pošiljaj statističnih podatkov uporabe programa</string>
     <string name="do_not_send_anonymous_app_usage_desc">Pošiljajo se le splošni podatki o uporabi zaslona med sejo navigacije. Geolokacijski podatki in podatki uporabnika se nikoli ne shranjujejo na strežnikih.</string>
     <string name="do_not_show_startup_messages">Ne prikazuj sporočil ob zagunu</string>
     <string name="do_not_show_startup_messages_desc">Pojavijo se lahko sporočila o popustih programa in posebna krajevna sporočila o dogodkih</string>
@@ -2850,4 +2850,14 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="full_version_thanks">Zahvaljujemo se vam za nakup polne različice programa OsmAnd!</string>
     <string name="right_side_navigation">Promet po desni strani</string>
     <string name="driving_region_automatic">Samodejno</string>
+    <string name="quick_action_auto_zoom">Omogoči/Onemogoči samodejno približanje zemljevida</string>
+    <string name="quick_action_auto_zoom_on">Samodejno približanje zemljevida je omogočeno.</string>
+    <string name="quick_action_auto_zoom_off">Samodejno približanje zemljevida je onemogočeno.</string>
+    <string name="quick_action_add_destination">Dodaj cilj</string>
+    <string name="quick_action_replace_destination">Zamenjaj cilj</string>
+    <string name="subscribe_email_error">Napaka</string>
+    <string name="nautical_maps">Navtični zemljevidi</string>
+    <string name="analyze_on_map">Preuči na zemljevidu</string>
+    <string name="fonts_header">Pisave za zemljevid</string>
+    <string name="shared_string_paused">V premoru</string>
     </resources>
