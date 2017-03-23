@@ -1207,7 +1207,7 @@ A globális adatok (az északi 70° és déli 70° szélesség között) az SRTM
     <string name="driving_region_japan">Japán</string>
     <string name="driving_region_us">USA</string>
     <string name="driving_region_canada">Kanada</string>
-    <string name="driving_region_europe_asia">Európa és Ázsia</string>
+    <string name="driving_region_europe_asia">Európa, Ázsia, Latin-Amerika és hasonlók</string>
     <string name="driving_region_uk">UK, India, Ausztrália, stb.</string>
 
 
@@ -2888,7 +2888,7 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="gpx_track">Nyomvonal</string>
     <string name="lang_ber">berber</string>
     <string name="do_not_send_anonymous_app_usage">Ne küldjön anonim használati statisztikát</string>
-    <string name="do_not_send_anonymous_app_usage_desc">Általános adatokat küld a munkamenet alatt használt képernyőkről. Nem gyűjtünk helyadatot és felhasználó által bevitt adatokat.</string>
+    <string name="do_not_send_anonymous_app_usage_desc">Az OsmAnd általános adatokat küld a munkamenet alatt használt képernyőkről. Nem gyűjtünk helyadatot és felhasználó által bevitt adatokat.</string>
     <string name="do_not_show_startup_messages">Ne mutasson üzeneteket indításkor</string>
     <string name="do_not_show_startup_messages_desc">Alkalmazás akciókat és helyi események üzeneteit jeleníti meg</string>
     <string name="parking_options">Parkolási opciók</string>
@@ -2896,4 +2896,35 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="routing_attr_relief_smoothness_factor_name">Domborzatsimasági tényező</string>
     <string name="right_side_navigation">Jobb oldali közlekedés</string>
     <string name="driving_region_automatic">Automatikus</string>
+    <string name="type_city_town">Add meg a várost vagy települést</string>
+    <string name="type_postcode">Add meg az irányítószámot</string>
+    <string name="nearest_cities">Közeli városok</string>
+    <string name="quick_action_auto_zoom">Térkép automatikus nagyítása be/ki</string>
+    <string name="quick_action_auto_zoom_desc">A gombra nyomva ki- és bekapcsolhatod a térkép sebességtől függő automatikus nagyítását.</string>
+    <string name="quick_action_auto_zoom_on">Térkép automatikus nagyítása be</string>
+    <string name="quick_action_auto_zoom_off">Térkép automatikus nagyítása ki</string>
+    <string name="quick_action_add_destination">Célpont hozzáadása</string>
+    <string name="quick_action_replace_destination">Célpont lecserélése</string>
+    <string name="quick_action_add_first_intermediate">Hozzáadás első köztes célpontként</string>
+    <string name="quick_action_add_destination_desc">A gombra nyomva a képernyő középpontját beállítja célpontként. A korábban beállított célpontból utolsó köztes célpont lesz.</string>
+    <string name="quick_action_replace_destination_desc">A gombra nyomva lecseréli a célpontot a képernyő középpontjára.</string>
+    <string name="quick_action_add_first_intermediate_desc">A gombra nyomva hozzáad egy első köztes célpontot a képernyő középpontján.</string>
+    <string name="no_overlay">Nincs rátét</string>
+    <string name="no_underlay">Nincs alátét</string>
+    <string name="subscribe_email_error">Hiba</string>
+    <string name="subscribe_email_desc">Iratkozz fel az alkalmazás akciókról szóló hírlevelünkre és kapsz további 3 térképletöltést!</string>
+    <string name="depth_contour_descr">Térképsorozat, ami lehetővé teszi a tengeri mélységvonalak és -pontok megjelenítését (30 szögperces háló alapján).</string>
+    <string name="sea_depth_thanks">Köszönjük, hogy megvásároltad a tengeri mélységvonalakat!</string>
+    <string name="index_item_depth_contours_osmand_ext">Mélységvonalak</string>
+    <string name="index_item_depth_points_southern_hemisphere">Mélységpontok, déli félteke</string>
+    <string name="index_item_depth_points_northern_hemisphere">Mélységpontok, északi félteke</string>
+    <string name="download_depth_countours">Mélységvonalak</string>
+    <string name="nautical_maps">Hajózási térképek</string>
+    <string name="analyze_on_map">Elemzés a térképen</string>
+    <string name="shared_string_visible">Látható</string>
+    <string name="restore_purchases">Vásárlások visszaállítása</string>
+    <string name="fonts_header">Térkép betűtípusok</string>
+    <string name="shared_string_paused">Szüneteltetve</string>
+    <string name="select_city">Válassz várost</string>
+    <string name="select_postcode">Válassz irányítószámot</string>
     </resources>
