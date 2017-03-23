@@ -2914,4 +2914,8 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="quick_action_auto_zoom_off">Wyłączono automatyczne przybliżanie</string>
     <string name="quick_action_auto_zoom">Przełącz automatyczne przybliżanie</string>
     <string name="quick_action_add_first_intermediate">Dodaj pierwszy pośredni cel trasy</string>
+    <string name="quick_action_auto_zoom_desc">Przełącza automatyczne przybliżanie mapy zależne od prędkości ruchu.</string>
+    <string name="quick_action_add_destination_desc">Ustala cel trasy w położeniu na środku ekranu a poprzednio ustalony cel zamienia na ostatni cel pośredni.</string>
+    <string name="quick_action_replace_destination_desc">Zastępuje cel trasy położeniem na środku ekranu.</string>
+    <string name="quick_action_add_first_intermediate_desc">Ustala pierwszy cel pośredni trasy w położeniu na środku ekranu.</string>
     </resources>
