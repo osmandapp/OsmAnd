@@ -299,7 +299,7 @@ Dlaždicové mapy môžete získať priamo zo zdrojov na Internete, alebo ich m�
     <string name="switch_to_vector_map_to_see">Pre túto oblasť je dostupná offline vektorová mapa.\n\t\n\tNa jej použitie aktivujte Menu → Zobrazenie → Zdroj mapy… → Vektorové OSM mapy.</string>
     <string name="choose_audio_stream">Výstup hlasových pokynov</string>
     <string name="choose_audio_stream_descr">Výber reproduktora pre prehrávanie hlasových pokynov</string>
-    <string name="voice_stream_voice_call">Zvuk telefónneho hovoru (tiež sa pokúsi prerušiť Bluetooth stereo v aute)</string>
+    <string name="voice_stream_voice_call">Zvuk telefónneho hovoru (tiež preruší Bluetooth stereo v aute)</string>
     <string name="voice_stream_notification">Oznámenia</string>
     <string name="voice_stream_music">Hudba/médiá</string>
     <string name="warning_tile_layer_not_downloadable">Aplikácia nemôže stiahnuť mapovú vrstvu %1$s, prosím skúste ju preinštalovať.</string>
