@@ -1619,7 +1619,7 @@ Proporcia memoro %4$s MB (Limito de Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="switch_to_vector_map_to_see">Eksterreta vektora mapo disponebla por tiu ĉi loko.
 \n\t\n\tPor uzi ĝin, elektu \'Menuo\' → \'Agordi mapon\' → \'Map-fontoj…\' → \'Eksterretaj vektoraj mapoj\'.</string>
     <string name="choose_audio_stream">Eligo de gvidata voĉo</string>
-    <string name="voice_stream_voice_call">Voĉa aŭd-kanalo (ankaŭ provas paŭzi muzikon de laŭtparoliloj de aŭto)</string>
+    <string name="voice_stream_voice_call">Voĉa aŭd-kanalo (ankaŭ paŭzas muzikon de laŭtparoliloj de aŭto)</string>
     <string name="choose_audio_stream_descr">Elektu laŭtparolilon por ludi gvidatan voĉon</string>
     <string name="voice_stream_notification">Sciiga aŭd-kanalo</string>
     <string name="voice_stream_music">Aŭdvidaĵa/muzika kanalo</string>
