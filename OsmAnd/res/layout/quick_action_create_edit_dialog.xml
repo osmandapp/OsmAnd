@@ -119,7 +119,7 @@
             android:id="@+id/btnApply"
             android:layout_width="match_parent"
             android:layout_height="56dp"
-            android:text="Apply"
+            android:text="@string/shared_string_apply"
             android:textAllCaps="true"
             android:textColor="@color/color_white"
             android:textSize="@dimen/default_list_text_size"
