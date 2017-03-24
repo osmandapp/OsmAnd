@@ -3359,4 +3359,9 @@
 <string name="poi_deadlock">Maltrapasejo</string>
 
 	<string name="poi_cuisine_deli">Bongustaĵoj</string>
-	</resources>
+	<string name="poi_electronics_repair_computer">Riparo de elektronikaĵoj: komputiloj</string>
+	<string name="poi_electronics_repair_appliance">Riparo de elektronikaĵoj: aparatoj</string>
+	<string name="poi_electronics_repair_phone">Riparo de elektronikaĵoj: telefonoj</string>
+	<string name="poi_electronics_repair_tv">Riparo de elektronikaĵoj: televidiloj</string>
+
+</resources>
