@@ -170,6 +170,8 @@ public class SearchCoreFactory {
 
 	public static class SearchPostcodeAPI extends SearchBaseAPI {
 
+		private static final int LIMIT = 10000;
+
 		@Override
 		public boolean search(final SearchPhrase phrase, final SearchResultMatcher resultMatcher) throws IOException {
 			if (!phrase.isUnknownSearchWordPresent()) {
@@ -185,7 +187,9 @@ public class SearchCoreFactory {
 					SearchRequest<City> req = BinaryMapIndexReader.buildAddressRequest(new ResultMatcher<City>() {
 						@Override
 						public boolean publish(City object) {
-							return object.isPostcode() && nm.matches(object.getPostcode());
+							return object.isPostcode()
+									&& !Algorithms.isEmpty(object.getName())
+									&& nm.matches(object.getName());
 						}
 
 						@Override
@@ -194,8 +198,10 @@ public class SearchCoreFactory {
 						}
 					});
 					List<City> l = r.getCities(req, BinaryMapAddressReaderAdapter.POSTCODES_TYPE);
+					int limit = 0;
 					for (City c  : l) {
 						LatLon cl = c.getLocation();
+						c.setReferenceFile(r);
 						int y = MapUtils.get31TileNumberY(cl.getLatitude());
 						int x = MapUtils.get31TileNumberX(cl.getLongitude());
 						if (postcodeBbox.contains(x, y, x, y)) {
@@ -211,6 +217,10 @@ public class SearchCoreFactory {
 							res.priorityDistance = 0.1;
 							res.objectType = ObjectType.POSTCODE;
 							resultMatcher.publish(res);
+
+							if (limit++ > LIMIT * phrase.getRadiusLevel()) {
+								break;
+							}
 						}
 					}
 				}
