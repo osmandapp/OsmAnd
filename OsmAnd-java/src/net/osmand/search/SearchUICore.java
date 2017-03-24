@@ -536,7 +536,7 @@ public class SearchUICore {
 			if (o1.getFoundWordCount() != o2.getFoundWordCount()) {
 				return -Algorithms.compare(o1.getFoundWordCount(), o2.getFoundWordCount());
 			}
-			if (!sortByName || sp.isEmpty()) {
+			if (!sortByName) {
 				double s1 = o1.getSearchDistance(loc);
 				double s2 = o2.getSearchDistance(loc);
 				int cmp = Double.compare(s1, s2);

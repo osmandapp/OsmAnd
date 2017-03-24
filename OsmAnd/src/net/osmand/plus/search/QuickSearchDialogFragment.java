@@ -1313,6 +1313,10 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			searchUICore.updateSettings(settings.setRadiusLevel(1));
 		}
 		runCoreSearch(txt, false, false);
+		if (sr.objectType == ObjectType.CITY) {
+			searchEditText.requestFocus();
+			AndroidUtils.softKeyboardDelayed(searchEditText);
+		}
 	}
 
 	public void replaceQueryWithUiFilter(PoiUIFilter filter, String nameFilter) {
@@ -1484,6 +1488,8 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 				historySearchFragment.updateLocation(latLon, heading);
 			} else if (categoriesSearchFragment != null && viewPager.getCurrentItem() == 1) {
 				categoriesSearchFragment.updateLocation(latLon, heading);
+			} else if (addrSearchFragment != null && viewPager.getCurrentItem() == 2) {
+				addrSearchFragment.updateLocation(latLon, heading);
 			}
 		}
 	}
@@ -1498,6 +1504,9 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			}
 			if (categoriesSearchFragment != null) {
 				categoriesSearchFragment.getListAdapter().setUseMapCenter(useMapCenter);
+			}
+			if (addrSearchFragment != null) {
+				addrSearchFragment.getListAdapter().setUseMapCenter(useMapCenter);
 			}
 		}
 	}
