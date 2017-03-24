@@ -198,6 +198,9 @@ public class SearchUICore {
 						String type2 = a2.getType().getKeyName();
 						String subType1 = a1.getSubType();
 						String subType2 = a2.getSubType();
+						if(a1.getId().longValue() == a2.getId().longValue() && (subType1.equals("building") || subType2.equals("building"))) {
+							return true;
+						}
 						if (!type1.equals(type2)) {
 							return false;
 						}
