@@ -316,14 +316,14 @@
 
 	<string name="poi_diet_vegetarian_only">Bare vegetarisk</string>
 	<string name="poi_diet_vegetarian_yes">Vegetarisk</string>
-	<string name="poi_diet_vegetarian_no">Vegetarkost: nei</string>
-	<string name="poi_diet_vegetarian_few">Vegetarkost (noen)</string>
+	<string name="poi_diet_vegetarian_no">Vegetarisk: nei</string>
+	<string name="poi_diet_vegetarian_few">Vegetarisk (noen få)</string>
 	<string name="poi_diet_vegan_only">Bare vegansk</string>
 	<string name="poi_diet_vegan_yes">Vegansk</string>
-	<string name="poi_diet_vegan_no">Vegankost: nei</string>
+	<string name="poi_diet_vegan_no">Vegansk: nei</string>
 	<string name="poi_diet_gluten_free_only">Bare glutenfri</string>
 	<string name="poi_diet_gluten_free_yes">Glutenfri</string>
-	<string name="poi_diet_gluten_free_no">Glutenfri kost: nei</string>
+	<string name="poi_diet_gluten_free_no">Glutenfri: nei</string>
 	<string name="poi_traffic_signals">Trafikklys</string>
 
 	<string name="poi_car_wash">Bilvask</string>
@@ -504,7 +504,7 @@
 	<string name="poi_diet_lactose_free_filter_yes">Laktosefri</string>
 	<string name="poi_diet_lactose_free_only">Bare laktosefri</string>
 	<string name="poi_diet_lactose_free_yes">Laktosefri</string>
-	<string name="poi_diet_lactose_free_no">Laktosefri kost: nei</string>
+	<string name="poi_diet_lactose_free_no">Laktosefri: nei</string>
 	<string name="poi_diet_pescetarian_yes">Pesco-vegetarisk</string>
 
 	<string name="poi_drive_in_yes">Ja</string>
@@ -579,5 +579,7 @@
 	<string name="poi_fire_hydrant_type">Type</string>
 	<string name="poi_fire_hydrant_position">Posisjon</string>
 	<string name="poi_highway_crossing_type">Type</string>
-	<string name="poi_service_car">Tjeneste</string>
+	<string name="poi_service_car">Service</string>
+	<string name="poi_diet">Kost</string>
+	<string name="poi_beach_surface_type">Overflate</string>
 	</resources>
