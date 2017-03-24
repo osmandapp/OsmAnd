@@ -138,7 +138,7 @@
 	<string name="poi_fort">Erőd</string>
 	<string name="poi_fountain">Szökőkút</string>
 	<string name="poi_historic_ruins">Történelmi rom</string>
-	<string name="poi_monument">Kiemelkedő emlékmű</string>
+	<string name="poi_monument">Kiemelkedően jelentős emlékmű</string>
 	<string name="poi_zoo">Állatkert</string>
 	<string name="poi_theme_park">Vidámpark</string>
 
@@ -2227,7 +2227,7 @@
 	<string name="poi_crop_flowers">Termény: virág</string>
 
 	<string name="poi_site_type_necropolis">Nekropolisz</string>
-	<string name="poi_craft_electronics_repair">Háztartásigép-szerelő műhely</string>
+	<string name="poi_craft_electronics_repair">Villamosgép-szerelő műhely</string>
 	<string name="poi_ramp_bicycle_yes">Kerékpárosrámpa</string>
 	<string name="poi_ramp_bicycle_no">Kerékpárosrámpa nincs</string>
 	<string name="poi_bicycle_parking_tree">Kerékpárfa</string>
@@ -3256,4 +3256,9 @@
 	<string name="poi_mdf">Fő elosztókeret (telefonközpont)</string>
 	<string name="poi_signal_station_traffic">Jelzőállomás (vízi közlekedés)</string>
 	<string name="poi_signal_station_warning">Jelzőállomás (figyelmeztetés)</string>
-	</resources>
+	<string name="poi_electronics_repair_computer">Villamosgép-szerelés: számítógép</string>
+	<string name="poi_electronics_repair_appliance">Villamosgép-szerelés: háztartási gép</string>
+	<string name="poi_electronics_repair_phone">Villamosgép-szerelés: telefon</string>
+	<string name="poi_electronics_repair_tv">Villamosgép-szerelés: TV</string>
+
+</resources>
