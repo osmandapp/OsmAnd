@@ -1,5 +1,10 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
+    <string name="quick_action_take_audio_note">Записать аудио</string>
+    <string name="quick_action_take_video_note">Записать видео</string>
+    <string name="quick_action_take_photo_note">Сделать фото</string>
+    <string name="quick_action_add_osm_bug">Добавить заметку OSM</string>
+
     <string name="parking_options">Опции парковки</string>
     <string name="full_version_thanks">Спасибо за покупку полной версии OsmAnd!</string>
     <string name="do_not_show_startup_messages">Не показывать сообщения при старте</string>
