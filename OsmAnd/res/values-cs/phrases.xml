@@ -2484,7 +2484,7 @@
 	<string name="poi_wiki_lang_af">Africká wiki</string>
 	<string name="poi_wiki_lang_als">Alsaská wiki</string>
 	<string name="poi_wiki_lang_az">Azerská wiki</string>
-	<string name="poi_craft_electronics">Oprava elektroniky</string>
+	<string name="poi_craft_electronics_repair">Oprava elektroniky</string>
 	<string name="poi_fireworks">Prodej zábavní pyrotechniky</string>
 
 	<string name="poi_aerialway_length">Délka</string>

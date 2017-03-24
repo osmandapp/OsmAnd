@@ -2550,7 +2550,7 @@
 	<string name="poi_wiki_lang_mn">Википедия на монгольском</string>
 	<string name="poi_wiki_lang_nap">Википедия на неополитанском</string>
 
-	<string name="poi_craft_electronics">Ремонт электроники</string>
+	<string name="poi_craft_electronics_repair">Ремонт электроники</string>
 	<string name="poi_fireworks">Магазин фейерверков</string>
 
 	<string name="poi_aerialway_length">Протяжённость</string>
@@ -3377,5 +3377,10 @@
 	<string name="poi_fast_food_cafeteria">Да</string>
 	<string name="poi_drink_wine_yes">Вино: есть</string>
 	<string name="poi_drink_wine_served">Вино: подаётся</string>
+
+	<string name="poi_electronics_repair_computer">Ремонт электроники: компьютеры</string>
+	<string name="poi_electronics_repair_appliance">Ремонт электроники: бытовая техника</string>
+	<string name="poi_electronics_repair_phone">Ремонт электроники: телефоны</string>
+	<string name="poi_electronics_repair_tv">Ремонт электроники: телевизоры</string>
 
 </resources>

@@ -1430,7 +1430,7 @@
 	<string name="poi_tunnel_pedestrian">Тунэль для пешаходаў</string>
 	<string name="poi_tunnel_railway">Чыгуначны тунэль</string>
 	<string name="poi_bridge_car">Аўтамабільны мост</string>
-	<string name="poi_craft_electronics">Рамонт электронікі</string>
+	<string name="poi_craft_electronics_repair">Рамонт электронікі</string>
 
 <string name="poi_mini_roundabout">Міні кругавы рух</string>
 	<string name="poi_railway_crossing">Чыгуначны пераход</string>

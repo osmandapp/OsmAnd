@@ -2124,7 +2124,7 @@
 	<string name="poi_technical_monument">Pomnik techniki</string>
 
 	<string name="poi_animal_boarding">Hotel dla zwierząt</string>
-	<string name="poi_craft_electronics">Naprawa elektroniki</string>
+	<string name="poi_craft_electronics_repair">Naprawa elektroniki</string>
 	<string name="poi_architecture_modern">Architektura: modernizm</string>
 	<string name="poi_architecture_stalinist_neoclassicism">Architektura: socrealizm (stalinistyczny neoklasycyzm)</string>
 	<string name="poi_architecture_eclectic">Architektura: eklektyzm</string>

@@ -1138,7 +1138,7 @@
 
 	<string name="poi_aerialway_length">Länge</string>
 
-<string name="poi_craft_electronics">Elektrogeräte-Reparatur</string>
+<string name="poi_craft_electronics_repair">Elektrogeräte-Reparatur</string>
 	<string name="poi_aerialway_pylon">Stütze</string>
 
 	<string name="poi_memorial_war">Kriegsdenkmal</string>

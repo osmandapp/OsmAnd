@@ -1707,7 +1707,7 @@
 	<string name="poi_vending_cigarettes">Sigaretas</string>
 	<string name="poi_fireworks">Butega de fogos de artifìtziu</string>
 
-<string name="poi_craft_electronics">Acontzadura de eletrodomèsticos</string>
+<string name="poi_craft_electronics_repair">Acontzadura de eletrodomèsticos</string>
 	<string name="poi_sewing">Mertzeria</string>
 	<string name="poi_craft_carpenter">Mastru de carros (carpentiere)</string>
 	<string name="poi_funeral_directors">Pompas fùnebres</string>

@@ -2026,7 +2026,7 @@
 
 	<string name="poi_hackerspace">Hackerspace</string>
 
-	<string name="poi_craft_electronics">Atelier de réparations électroniques</string>
+	<string name="poi_craft_electronics_repair">Atelier de réparations électroniques</string>
 	<string name="poi_fireworks">Magasin de feux d\'artifice</string>
 
 	<string name="poi_aerialway_length">Longueur</string>

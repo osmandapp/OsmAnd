@@ -2370,7 +2370,7 @@
 	<string name="poi_wiki_lang_mn">蒙古語維基</string>
 	<string name="poi_wiki_lang_nap">那不勒斯語維基</string>
 
-	<string name="poi_craft_electronics">3C產品維修</string>
+	<string name="poi_craft_electronics_repair">3C產品維修</string>
 	<string name="poi_historic_period_nuragic">歷史時期：nuragic</string>
 	<string name="poi_historic_period_stone_bronze_undetermined">歷史時期：石器時代 / 青銅器時代 (未確定)</string>
 	<string name="poi_historic_period_bronze_age">歷史時期：青銅器時代</string>
