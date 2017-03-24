@@ -473,7 +473,7 @@ public class WaypointHelper {
 			if ((type == FAVORITES || all)) {
 				final List<LocationPointWrapper> array = clearAndGetArray(locationPoints, FAVORITES);
 				if (showFavorites) {
-					findLocationPoints(route, FAVORITES, array, app.getFavorites().getFavouritePoints(),
+					findLocationPoints(route, FAVORITES, array, app.getFavorites().getVisibleFavouritePoints(),
 							announceFavorites);
 					sortList(array);
 				}
