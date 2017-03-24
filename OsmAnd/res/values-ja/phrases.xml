@@ -1773,4 +1773,18 @@
 	<string name="poi_payment_svg_no">燃料カード_SVG不可</string>
 	<string name="poi_payment_sms_yes">電話による支払_SMS支払い</string>
 	<string name="poi_payment_sms_no">電話による支払_SMS支払い不可</string>
+	<string name="poi_payment_ov_chipkaart_yes">公共交通機関_OV-Chipkaart</string>
+	<string name="poi_payment_ov_chipkaart_no">公共交通機関_OV-Chipkaart不可</string>
+	<string name="poi_payment_oyster_yes">公共交通機関_Oysterカード</string>
+	<string name="poi_payment_oyster_no">公共交通機関_Oysterカード不可</string>
+	<string name="poi_payment_sube_yes">公共交通機関_SUBEカード</string>
+	<string name="poi_payment_sube_no">公共交通機関_SUBEカード不可</string>
+	<string name="poi_payment_via_verde_yes">有料道路_Via Verde</string>
+	<string name="poi_payment_via_verde_no">有料道路_Via Verde不可</string>
+	<string name="poi_payment_meal_voucher_yes">その他_Meal vouchers</string>
+	<string name="poi_payment_meal_voucher_no">その他_Meal vouchers不可</string>
+	<string name="poi_payment_paypal_yes">その他_PayPal</string>
+	<string name="poi_payment_paypal_no">その他_PayPal不可</string>
+	<string name="poi_payment_u_key_yes">その他_U-Key</string>
+	<string name="poi_payment_u_key_no">その他_U-Key不可</string>
 	</resources>
