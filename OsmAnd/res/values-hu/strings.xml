@@ -1190,7 +1190,7 @@ A globális adatok (az északi 70° és déli 70° szélesség között) az SRTM
 
     <string name="destination_point">Célpont %1$s</string>
     <string name="context_menu_item_destination_point">Beállítás célpontnak</string>
-    <string name="please_select_address">Előbb válassz várost és utcát</string>
+    <string name="please_select_address">Előbb válassz települést és utcát</string>
     <string name="search_street_in_neighborhood_cities">Utca keresése közeli városrészekben</string>
     <string name="av_camera_focus">Kamera fókuszmód</string>
     <string name="av_camera_focus_descr">Belső kamera fókuszmódjának kiválasztása</string>
@@ -2898,7 +2898,7 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="driving_region_automatic">Automatikus</string>
     <string name="type_city_town">Add meg a várost vagy települést</string>
     <string name="type_postcode">Add meg az irányítószámot</string>
-    <string name="nearest_cities">Közeli városok</string>
+    <string name="nearest_cities">Közeli települések</string>
     <string name="quick_action_auto_zoom">Térkép automatikus nagyítása be/ki</string>
     <string name="quick_action_auto_zoom_desc">A gombra nyomva ki- és bekapcsolhatod a térkép sebességtől függő automatikus nagyítását.</string>
     <string name="quick_action_auto_zoom_on">Térkép automatikus nagyítása be</string>
@@ -2925,6 +2925,6 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="restore_purchases">Vásárlások visszaállítása</string>
     <string name="fonts_header">Térkép betűtípusok</string>
     <string name="shared_string_paused">Szüneteltetve</string>
-    <string name="select_city">Válassz várost</string>
+    <string name="select_city">Válassz települést</string>
     <string name="select_postcode">Válassz irányítószámot</string>
     </resources>
