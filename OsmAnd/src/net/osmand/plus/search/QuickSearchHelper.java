@@ -1,8 +1,5 @@
 package net.osmand.plus.search;
 
-import java.util.Arrays;
-import java.util.List;
-
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
@@ -16,9 +13,13 @@ import net.osmand.search.SearchUICore;
 import net.osmand.search.SearchUICore.SearchResultCollection;
 import net.osmand.search.core.CustomSearchPoiFilter;
 import net.osmand.search.core.ObjectType;
-import net.osmand.search.core.SearchCoreFactory;
+import net.osmand.search.core.SearchCoreFactory.SearchBaseAPI;
 import net.osmand.search.core.SearchPhrase;
 import net.osmand.search.core.SearchResult;
+
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 
 public class QuickSearchHelper implements ResourceListener {
 
@@ -63,76 +64,10 @@ public class QuickSearchHelper implements ResourceListener {
 		setRepositoriesForSearchUICore(app);
 		core.init();
 		// Register favorites search api
-		core.registerAPI(new SearchCoreFactory.SearchBaseAPI() {
-
-			@Override
-			public boolean isSearchMoreAvailable(SearchPhrase phrase) {
-				return false;
-			}
-			
-			@Override
-			public boolean search(SearchPhrase phrase, SearchUICore.SearchResultMatcher resultMatcher) {
-				List<FavouritePoint> favList = app.getFavorites().getFavouritePoints();
-				for (FavouritePoint point : favList) {
-					SearchResult sr = new SearchResult(phrase);
-					sr.localeName = point.getName();
-					sr.object = point;
-					sr.priority = SEARCH_FAVORITE_OBJECT_PRIORITY;
-					sr.objectType = ObjectType.FAVORITE;
-					sr.location = new LatLon(point.getLatitude(), point.getLongitude());
-					sr.preferredZoom = 17;
-					if (phrase.getUnknownSearchWordLength() <= 1 && phrase.isNoSelectedType()) {
-						resultMatcher.publish(sr);
-					} else if (phrase.getNameStringMatcher().matches(sr.localeName)) {
-						resultMatcher.publish(sr);
-					}
-				}
-				return true;
-			}
-
-			@Override
-			public int getSearchPriority(SearchPhrase p) {
-				if(!p.isNoSelectedType() || !p.isUnknownSearchWordPresent()) {
-					return -1;
-				}
-				return SEARCH_FAVORITE_API_PRIORITY;
-			}
-		});
+		core.registerAPI(new SearchFavoriteAPI(app));
 
 		// Register favorites by category search api
-		core.registerAPI(new SearchCoreFactory.SearchBaseAPI() {
-			
-			@Override
-			public boolean isSearchMoreAvailable(SearchPhrase phrase) {
-				return false;
-			}
-
-			@Override
-			public boolean search(SearchPhrase phrase, SearchUICore.SearchResultMatcher resultMatcher) {
-				List<FavouritePoint> favList = app.getFavorites().getFavouritePoints();
-				for (FavouritePoint point : favList) {
-					SearchResult sr = new SearchResult(phrase);
-					sr.localeName = point.getName();
-					sr.object = point;
-					sr.priority = SEARCH_FAVORITE_CATEGORY_PRIORITY;
-					sr.objectType = ObjectType.FAVORITE;
-					sr.location = new LatLon(point.getLatitude(), point.getLongitude());
-					sr.preferredZoom = 17;
-					if (point.getCategory() != null && phrase.getNameStringMatcher().matches(point.getCategory())) {
-						resultMatcher.publish(sr);
-					}
-				}
-				return true;
-			}
-
-			@Override
-			public int getSearchPriority(SearchPhrase p) {
-				if(!p.isNoSelectedType() || !p.isUnknownSearchWordPresent()) {
-					return -1;
-				}
-				return SEARCH_FAVORITE_API_CATEGORY_PRIORITY;
-			}
-		});
+		core.registerAPI(new SearchFavoriteByCategoryAPI(app));
 
 		// Register WptPt search api
 		core.registerAPI(new SearchWptAPI(app));
@@ -156,11 +91,12 @@ public class QuickSearchHelper implements ResourceListener {
 		core.getSearchSettings().setOfflineIndexes(Arrays.asList(binaryMapIndexReaderArray));
 	}
 
-	public static class SearchWptAPI extends SearchCoreFactory.SearchBaseAPI {
+	public static class SearchWptAPI extends SearchBaseAPI {
 
 		private OsmandApplication app;
 
 		public SearchWptAPI(OsmandApplication app) {
+			super(ObjectType.WPT);
 			this.app = app;
 		}
 		
@@ -170,8 +106,10 @@ public class QuickSearchHelper implements ResourceListener {
 		}
 
 		@Override
-		public boolean search(SearchPhrase phrase, SearchUICore.SearchResultMatcher resultMatcher) {
-
+		public boolean search(SearchPhrase phrase, SearchUICore.SearchResultMatcher resultMatcher) throws IOException {
+			if (!super.search(phrase, resultMatcher)) {
+				return false;
+			}
 			if (phrase.isEmpty()) {
 				return false;
 			}
@@ -209,11 +147,102 @@ public class QuickSearchHelper implements ResourceListener {
 		}
 	}
 
-	public static class SearchHistoryAPI extends SearchCoreFactory.SearchBaseAPI {
+	public static class SearchFavoriteByCategoryAPI extends SearchBaseAPI {
+
+		private OsmandApplication app;
+
+		public SearchFavoriteByCategoryAPI(OsmandApplication app) {
+			super(ObjectType.FAVORITE);
+			this.app = app;
+		}
+
+		@Override
+		public boolean isSearchMoreAvailable(SearchPhrase phrase) {
+			return false;
+		}
+
+		@Override
+		public boolean search(SearchPhrase phrase, SearchUICore.SearchResultMatcher resultMatcher) throws IOException {
+			if (!super.search(phrase, resultMatcher)) {
+				return false;
+			}
+			List<FavouritePoint> favList = app.getFavorites().getFavouritePoints();
+			for (FavouritePoint point : favList) {
+				SearchResult sr = new SearchResult(phrase);
+				sr.localeName = point.getName();
+				sr.object = point;
+				sr.priority = SEARCH_FAVORITE_CATEGORY_PRIORITY;
+				sr.objectType = ObjectType.FAVORITE;
+				sr.location = new LatLon(point.getLatitude(), point.getLongitude());
+				sr.preferredZoom = 17;
+				if (point.getCategory() != null && phrase.getNameStringMatcher().matches(point.getCategory())) {
+					resultMatcher.publish(sr);
+				}
+			}
+			return true;
+		}
+
+		@Override
+		public int getSearchPriority(SearchPhrase p) {
+			if(!p.isNoSelectedType() || !p.isUnknownSearchWordPresent()) {
+				return -1;
+			}
+			return SEARCH_FAVORITE_API_CATEGORY_PRIORITY;
+		}
+	}
+
+	public static class SearchFavoriteAPI extends SearchBaseAPI {
+
+		private OsmandApplication app;
+
+		public SearchFavoriteAPI(OsmandApplication app) {
+			super(ObjectType.FAVORITE);
+			this.app = app;
+		}
+
+		@Override
+		public boolean isSearchMoreAvailable(SearchPhrase phrase) {
+			return false;
+		}
+
+		@Override
+		public boolean search(SearchPhrase phrase, SearchUICore.SearchResultMatcher resultMatcher) throws IOException {
+			if (!super.search(phrase, resultMatcher)) {
+				return false;
+			}
+			List<FavouritePoint> favList = app.getFavorites().getFavouritePoints();
+			for (FavouritePoint point : favList) {
+				SearchResult sr = new SearchResult(phrase);
+				sr.localeName = point.getName();
+				sr.object = point;
+				sr.priority = SEARCH_FAVORITE_OBJECT_PRIORITY;
+				sr.objectType = ObjectType.FAVORITE;
+				sr.location = new LatLon(point.getLatitude(), point.getLongitude());
+				sr.preferredZoom = 17;
+				if (phrase.getUnknownSearchWordLength() <= 1 && phrase.isNoSelectedType()) {
+					resultMatcher.publish(sr);
+				} else if (phrase.getNameStringMatcher().matches(sr.localeName)) {
+					resultMatcher.publish(sr);
+				}
+			}
+			return true;
+		}
+
+		@Override
+		public int getSearchPriority(SearchPhrase p) {
+			if(!p.isNoSelectedType() || !p.isUnknownSearchWordPresent()) {
+				return -1;
+			}
+			return SEARCH_FAVORITE_API_PRIORITY;
+		}
+	}
+
+	public static class SearchHistoryAPI extends SearchBaseAPI {
 
 		private OsmandApplication app;
 
 		public SearchHistoryAPI(OsmandApplication app) {
+			super(ObjectType.RECENT_OBJ);
 			this.app = app;
 		}
 		
@@ -223,7 +252,10 @@ public class QuickSearchHelper implements ResourceListener {
 		}
 
 		@Override
-		public boolean search(SearchPhrase phrase, SearchUICore.SearchResultMatcher resultMatcher) {
+		public boolean search(SearchPhrase phrase, SearchUICore.SearchResultMatcher resultMatcher) throws IOException {
+			if (!super.search(phrase, resultMatcher)) {
+				return false;
+			}
 			SearchHistoryHelper helper = SearchHistoryHelper.getInstance(app);
 			List<SearchHistoryHelper.HistoryEntry> points = helper.getHistoryEntries();
 			int p = 0;

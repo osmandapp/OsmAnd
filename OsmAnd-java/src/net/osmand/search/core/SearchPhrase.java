@@ -1,5 +1,16 @@
 package net.osmand.search.core;
 
+import net.osmand.Collator;
+import net.osmand.CollatorStringMatcher;
+import net.osmand.CollatorStringMatcher.StringMatcherMode;
+import net.osmand.StringMatcher;
+import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
+import net.osmand.data.LatLon;
+import net.osmand.data.QuadRect;
+import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -11,18 +22,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.regex.Pattern;
-
-import net.osmand.Collator;
-import net.osmand.CollatorStringMatcher;
-import net.osmand.CollatorStringMatcher.StringMatcherMode;
-import net.osmand.OsmAndCollator;
-import net.osmand.StringMatcher;
-import net.osmand.binary.BinaryMapIndexReader;
-import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
-import net.osmand.data.LatLon;
-import net.osmand.data.QuadRect;
-import net.osmand.util.Algorithms;
-import net.osmand.util.MapUtils;
 
 //immutable object
 public class SearchPhrase {
@@ -288,7 +287,36 @@ public class SearchPhrase {
 	public int getRadiusLevel() {
 		return settings.getRadiusLevel();
 	}
-	
+
+	public ObjectType[] getSearchTypes() {
+		return settings.getSearchTypes();
+	}
+
+	public boolean isCustomSearch() {
+		return getSearchTypes() != null;
+	}
+
+	public boolean isSearchTypeAllowed(ObjectType searchType) {
+		if (getSearchTypes() == null) {
+			return true;
+		} else {
+			for (ObjectType type : getSearchTypes()) {
+				if (type == searchType) {
+					return true;
+				}
+			}
+			return false;
+		}
+	}
+
+	public boolean isEmptyQueryAllowed() {
+		return settings.isEmptyQueryAllowed();
+	}
+
+	public boolean isSortByName() {
+		return settings.isSortByName();
+	}
+
 	public SearchPhrase selectWord(SearchResult res) {
 		return selectWord(res, null, false);
 	}
@@ -405,15 +433,13 @@ public class SearchPhrase {
 	public boolean isEmpty() {
 		return words.isEmpty() && unknownSearchPhrase.isEmpty();
 	}
-	
-	
+
 	public SearchWord getLastSelectedWord() {
 		if(words.isEmpty()) {
 			return null;
 		}
 		return words.get(words.size() - 1);
 	}
-
 	
 	public LatLon getWordLocation() {
 		for(int i = words.size() - 1; i >= 0; i--) {
@@ -435,7 +461,6 @@ public class SearchPhrase {
 		// last token or myLocationOrVisibleMap if not selected 
 		return settings.getOriginalLocation();
 	}
-
 
 	public void selectFile(BinaryMapIndexReader object) {
 		if(indexes == null) {

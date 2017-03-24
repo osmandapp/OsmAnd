@@ -20,4 +20,5 @@ public interface SearchCoreAPI {
 	 */
 	public boolean isSearchMoreAvailable(SearchPhrase phrase);
 
+	boolean isSearchAvailable(ObjectType[] typesToSearch);
 }
