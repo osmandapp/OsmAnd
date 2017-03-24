@@ -955,18 +955,20 @@ public class OsmandSettings {
 					RouteService.values()).makeProfile();
 
 	// this value string is synchronized with settings_pref.xml preference name
-	public final CommonPreference<AutoZoomMap> AUTO_ZOOM_MAP_PREV =
-			new EnumIntPreference<AutoZoomMap>("auto_zoom_map_new_prev", AutoZoomMap.NONE,
-					AutoZoomMap.values()).makeProfile().cache();
-
-	public final CommonPreference<AutoZoomMap> AUTO_ZOOM_MAP =
-			new EnumIntPreference<AutoZoomMap>("auto_zoom_map_new", AutoZoomMap.NONE,
-					AutoZoomMap.values()).makeProfile().cache();
-
+	public final CommonPreference<Boolean> AUTO_ZOOM_MAP = new BooleanPreference("auto_zoom_map_on_off", false).makeProfile().cache();
 	{
-		AUTO_ZOOM_MAP.setModeDefaultValue(ApplicationMode.CAR, AutoZoomMap.FAR);
-		AUTO_ZOOM_MAP.setModeDefaultValue(ApplicationMode.BICYCLE, AutoZoomMap.NONE);
-		AUTO_ZOOM_MAP.setModeDefaultValue(ApplicationMode.PEDESTRIAN, AutoZoomMap.NONE);
+		AUTO_ZOOM_MAP.setModeDefaultValue(ApplicationMode.CAR, true);
+		AUTO_ZOOM_MAP.setModeDefaultValue(ApplicationMode.BICYCLE, false);
+		AUTO_ZOOM_MAP.setModeDefaultValue(ApplicationMode.PEDESTRIAN, false);
+	}
+
+	public final CommonPreference<AutoZoomMap> AUTO_ZOOM_MAP_SCALE =
+			new EnumIntPreference<AutoZoomMap>("auto_zoom_map_scale", AutoZoomMap.FAR,
+					AutoZoomMap.values()).makeProfile().cache();
+	{
+		AUTO_ZOOM_MAP_SCALE.setModeDefaultValue(ApplicationMode.CAR, AutoZoomMap.FAR);
+		AUTO_ZOOM_MAP_SCALE.setModeDefaultValue(ApplicationMode.BICYCLE, AutoZoomMap.CLOSE);
+		AUTO_ZOOM_MAP_SCALE.setModeDefaultValue(ApplicationMode.PEDESTRIAN, AutoZoomMap.CLOSE);
 	}
 
 	public final CommonPreference<Integer> DELAY_TO_START_NAVIGATION = new IntPreference("delay_to_start_navigation", -1) {
@@ -3016,7 +3018,6 @@ public class OsmandSettings {
 	}
 
 	public enum AutoZoomMap {
-		NONE(R.string.auto_zoom_none, 0f, 18),
 		FARTHEST(R.string.auto_zoom_farthest, 1f, 15.5f),
 		FAR(R.string.auto_zoom_far, 1.4f, 17f),
 		CLOSE(R.string.auto_zoom_close, 2f, 19f);

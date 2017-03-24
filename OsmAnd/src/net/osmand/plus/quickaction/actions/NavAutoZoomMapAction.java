@@ -8,7 +8,6 @@ import android.widget.Toast;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.OsmandSettings.AutoZoomMap;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.quickaction.QuickAction;
@@ -29,13 +28,8 @@ public class NavAutoZoomMapAction extends QuickAction {
 	public void execute(MapActivity activity) {
 
 		OsmandSettings settings = activity.getMyApplication().getSettings();
-		if (settings.AUTO_ZOOM_MAP.get() == AutoZoomMap.NONE) {
-			settings.AUTO_ZOOM_MAP.set(settings.AUTO_ZOOM_MAP_PREV.get());
-		} else {
-			settings.AUTO_ZOOM_MAP_PREV.set(settings.AUTO_ZOOM_MAP.get());
-			settings.AUTO_ZOOM_MAP.set(AutoZoomMap.NONE);
-		}
-		Toast.makeText(activity, activity.getString(settings.AUTO_ZOOM_MAP.get() == AutoZoomMap.NONE
+		settings.AUTO_ZOOM_MAP.set(!settings.AUTO_ZOOM_MAP.get());
+		Toast.makeText(activity, activity.getString(!settings.AUTO_ZOOM_MAP.get()
 				? R.string.quick_action_auto_zoom_off : R.string.quick_action_auto_zoom_on), Toast.LENGTH_SHORT).show();
 	}
 
@@ -54,14 +48,13 @@ public class NavAutoZoomMapAction extends QuickAction {
 	@Override
 	public String getActionText(OsmandApplication application) {
 
-		return application.getSettings().AUTO_ZOOM_MAP.get() != AutoZoomMap.NONE
-				? application.getString(R.string.quick_action_auto_zoom_off)
-				: application.getString(R.string.quick_action_auto_zoom_on);
+		return application.getSettings().AUTO_ZOOM_MAP.get()
+				? application.getString(R.string.quick_action_auto_zoom_off) : application.getString(R.string.quick_action_auto_zoom_on);
 	}
 
 	@Override
 	public boolean isActionWithSlash(OsmandApplication application) {
 
-		return application.getSettings().AUTO_ZOOM_MAP.get() != AutoZoomMap.NONE;
+		return application.getSettings().AUTO_ZOOM_MAP.get();
 	}
 }

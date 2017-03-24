@@ -47,10 +47,10 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 	private Preference avoidRouting;
 	private Preference preferRouting;
 	private Preference reliefFactorRouting;
+	private Preference autoZoom;
 	private Preference showAlarms;
 	private Preference speakAlarms;
 	private ListPreference routerServicePreference;
-	private ListPreference autoZoomMapPreference;
 	private ListPreference speedLimitExceed;
 	
 	private ComponentName mDeviceAdmin;
@@ -133,13 +133,10 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 		}
 		registerListPreference(settings.AUTO_FOLLOW_ROUTE, screen, entries, intValues);
 
-		entries = new String[AutoZoomMap.values().length];
-		for(int i=0; i<entries.length; i++){
-			entries[i] = getString(AutoZoomMap.values()[i].name);
-		}
-		registerListPreference(settings.AUTO_ZOOM_MAP, screen, entries, AutoZoomMap.values());
-		
-        //keep informing option:
+		autoZoom = screen.findPreference("auto_zoom_map_on_off");
+		autoZoom.setOnPreferenceClickListener(this);
+
+		//keep informing option:
         Integer[] keepInformingValues = new Integer[]{0, 1, 2, 3, 5, 7, 10, 15, 20, 25, 30};
         String[] keepInformingNames = new String[keepInformingValues.length];
         keepInformingNames[0] = getString(R.string.keep_informing_never);
@@ -168,10 +165,6 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 		registerListPreference(settings.WAKE_ON_VOICE_INT, screen, screenPowerSaveNames, screenPowerSaveValues);
         
 //         registerBooleanPreference(settings.SHOW_ZOOM_BUTTONS_NAVIGATION, screen);
-
-		autoZoomMapPreference = (ListPreference) screen.findPreference(settings.AUTO_ZOOM_MAP.getId());
-		autoZoomMapPreference.setOnPreferenceChangeListener(this);
-
 		
 		showAlarms = (Preference) screen.findPreference("show_routing_alarms");
 		showAlarms.setOnPreferenceClickListener(this);
@@ -404,6 +397,77 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 				bls[i] = settings.getCustomRoutingBooleanProperty(p.getId(), p.getDefaultBoolean());
 			}
 			showBooleanSettings(vals, bls, preference.getTitle());
+			return true;
+		} else if (preference == autoZoom) {
+			final ApplicationMode am = settings.getApplicationMode();
+			final ContextMenuAdapter adapter = new ContextMenuAdapter();
+			int i = 0;
+			int selectedIndex = -1;
+			adapter.addItem(ContextMenuItem.createBuilder(getString(R.string.auto_zoom_none))
+					.setSelected(false).createItem());
+			if (!settings.AUTO_ZOOM_MAP.get()) {
+				selectedIndex = 0;
+			}
+			i++;
+			for (AutoZoomMap autoZoomMap : AutoZoomMap.values()) {
+				adapter.addItem(ContextMenuItem.createBuilder(getString(autoZoomMap.name))
+						.setSelected(false).createItem());
+				if (selectedIndex == -1 && settings.AUTO_ZOOM_MAP_SCALE.get() == autoZoomMap) {
+					selectedIndex = i;
+				}
+				i++;
+			}
+			if (selectedIndex == -1) {
+				selectedIndex = 0;
+			}
+
+			AlertDialog.Builder builder = new AlertDialog.Builder(this);
+			final int layout = R.layout.list_menu_item_native_singlechoice;
+
+			final ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(this, layout, R.id.text1,
+					adapter.getItemNames()) {
+				@NonNull
+				@Override
+				public View getView(final int position, View convertView, ViewGroup parent) {
+					// User super class to create the View
+					View v = convertView;
+					if (v == null) {
+						v = SettingsNavigationActivity.this.getLayoutInflater().inflate(layout, null);
+					}
+					final ContextMenuItem item = adapter.getItem(position);
+					TextView tv = (TextView) v.findViewById(R.id.text1);
+					tv.setText(item.getTitle());
+					tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16f);
+
+					return v;
+				}
+			};
+
+			final int[] selectedPosition = {selectedIndex};
+			builder.setSingleChoiceItems(listAdapter, selectedIndex, new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int position) {
+					selectedPosition[0] = position;
+				}
+			});
+			builder.setTitle(R.string.auto_zoom_map)
+					.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
+
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+
+							int position = selectedPosition[0];
+							if (position == 0) {
+								settings.AUTO_ZOOM_MAP.set(false);
+							} else {
+								settings.AUTO_ZOOM_MAP.set(true);
+								settings.AUTO_ZOOM_MAP_SCALE.set(AutoZoomMap.values()[position -1]);
+							}
+						}
+					})
+					.setNegativeButton(R.string.shared_string_cancel, null);
+
+			builder.create().show();
 			return true;
 		} else if (preference == reliefFactorRouting) {
 			final ApplicationMode am = settings.getApplicationMode();
