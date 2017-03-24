@@ -19,8 +19,6 @@ import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.OsmandSettings.AutoZoomMap;
-import net.osmand.plus.OsmandSettings.DrivingRegion;
 import net.osmand.plus.R;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
@@ -173,7 +171,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 		if (mapView != null) {
 			RotatedTileBox tb = mapView.getCurrentRotatedTileBox();
 			if (isMapLinkedToLocation() && location != null) {
-				if (settings.AUTO_ZOOM_MAP.get() != AutoZoomMap.NONE) {
+				if (settings.AUTO_ZOOM_MAP.get()) {
 					autozoom(location);
 				}
 				int currentMapRotation = settings.ROTATE_MAP.get();
@@ -268,7 +266,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 		if (speed < 83f / 3.6) {
 			time = 60f;
 		}
-		time /= settings.AUTO_ZOOM_MAP.get().coefficient;
+		time /= settings.AUTO_ZOOM_MAP_SCALE.get().coefficient;
 		double distToSee = speed * time;
 		float zoomDelta = (float) (Math.log(visibleDist / distToSee) / Math.log(2.0f));
 		// check if 17, 18 is correct?
@@ -289,7 +287,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 					// decrease a bit
 					zdelta += 1;
 				}
-				double targetZoom = Math.min(tb.getZoom() + tb.getZoomFloatPart() + zdelta, settings.AUTO_ZOOM_MAP.get().maxZoom); 
+				double targetZoom = Math.min(tb.getZoom() + tb.getZoomFloatPart() + zdelta, settings.AUTO_ZOOM_MAP_SCALE.get().maxZoom);
 				int threshold = settings.AUTO_FOLLOW_ROUTE.get();
 				if (now - lastTimeAutoZooming > 4500 && (now - lastTimeAutoZooming > threshold || !isUserZoomed)) {
 					isUserZoomed = false;
