@@ -2903,12 +2903,12 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="routing_attr_relief_smoothness_factor_hills_name">Bakker</string>
     <string name="routing_attr_relief_smoothness_factor_plains_name">Sletter</string>
     <string name="routing_attr_relief_smoothness_factor_more_plains_name">Flere sletter</string>
-    <string name="routing_attr_driving_style_speed_name">Hastighed</string>
+    <string name="routing_attr_driving_style_speed_name">Hurtig</string>
     <string name="routing_attr_driving_style_balance_name">Blanceret</string>
-    <string name="routing_attr_driving_style_safety_name">Sikkerhed</string>
-    <string name="relief_smoothness_factor_descr">Prioriteret for sletter eller bakker</string>
-    <string name="routing_attr_relief_smoothness_factor_name">Reliefudjævningsfaktor</string>
-    <string name="full_version_thanks">Tak for køb af den fulde version af OsmAnd!</string>
+    <string name="routing_attr_driving_style_safety_name">Sikker</string>
+    <string name="relief_smoothness_factor_descr">Vægtet efter sletter eller bakker</string>
+    <string name="routing_attr_relief_smoothness_factor_name">Terrænfaktor</string>
+    <string name="full_version_thanks">Tak for købet af den fulde version af OsmAnd!</string>
     <string name="parking_options">Indstillinger for parkering</string>
     <string name="do_not_send_anonymous_app_usage">Send ikke anonyme brugsstatistikker</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd sender generelle oplysninger om skærmbrug under sessionen. Vi indsamler ikke geografisk placering eller brugerinput data.</string>
@@ -2958,7 +2958,7 @@ Repræsenterer område: %1$s x %2$s</string>
   • Sving-for-sving stemmevejledning (indspillet og syntetiseret stemmer)
   • Rutens genberegnes ved afvigelse
   • Banevejledning, gadenavne, og forventet ankomsttidspunkt vil hjælpe undervejs
-  • For at gøre rejsen mere sikkert, skifter dag-/nat-tilstand automatisk
+  • For at gøre rejsen mere sikker, skifter dag-/nat-tilstand automatisk
   • Vælg at vise hastighedsgrænser, og få påmindelser, hvis de overskrides
   • Kortzoom tilpasser sig hastigheden
   • Søg destination efter adresse, efter type (fx: parkering, restaurant, hotel, tankstation, museum), eller ved geografiskekoordinater
@@ -3067,7 +3067,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="restore_purchases">Gendan køb</string>
     <string name="shared_string_visible">Synlig</string>
     <string name="analyze_on_map">Analyser på kortet</string>
-    <string name="sea_depth_thanks">Tak for købet af havdybdekonturer!</string>
+    <string name="sea_depth_thanks">Tak for købet af dybdekonturer!</string>
     <string name="index_item_depth_contours_osmand_ext">Dybdekonturer</string>
     <string name="index_item_depth_points_southern_hemisphere">Dybdepunkter sydlige halvkugle</string>
     <string name="index_item_depth_points_northern_hemisphere">Dybdepunkter nordlige halvkugle</string>
@@ -3080,7 +3080,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="no_underlay">Ingen underlejring</string>
     <string name="quick_action_add_destination">Tilføj destination</string>
     <string name="quick_action_replace_destination">Udskift destination</string>
-    <string name="quick_action_add_first_intermediate">Tilføj første mellemliggende</string>
+    <string name="quick_action_add_first_intermediate">Tilføj første mellemliggende punkt</string>
     <string name="quick_action_add_destination_desc">Tryk på genvejen vil tilføje en destination på skærmens centrum.
 Tidligere destination bliver sidste mellemliggende punkt.</string>
     <string name="quick_action_replace_destination_desc">Tryk på genvejen vil erstatte destinationen med skærmens centrum.</string>
