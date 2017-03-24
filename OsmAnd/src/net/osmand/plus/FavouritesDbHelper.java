@@ -433,6 +433,16 @@ public class FavouritesDbHelper {
 		return cachedFavoritePoints;
 	}
 	
+	public List<FavouritePoint> getVisibleFavouritePoints() {
+		List<FavouritePoint> fp = new ArrayList<>();
+		for(FavouritePoint p : cachedFavoritePoints) {
+			if(p.isVisible()) {
+				fp.add(p);
+			}
+		}
+		return fp;
+	}
+	
 
 	public List<FavoriteGroup> getFavoriteGroups() {
 		return favoriteGroups;
