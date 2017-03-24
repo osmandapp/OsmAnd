@@ -1130,7 +1130,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 	private void runSearch(String text) {
 		showProgressBar();
-		SearchSettings settings = searchUICore.getPhrase().getSettings();
+		SearchSettings settings = searchUICore.getSearchSettings();
 		if (settings.getRadiusLevel() != 1) {
 			searchUICore.updateSettings(settings.setRadiusLevel(1));
 		}
@@ -1308,7 +1308,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		searchEditText.setSelection(txt.length());
 		buttonToolbarView.setVisibility(View.VISIBLE);
 		updateToolbarButton();
-		SearchSettings settings = searchUICore.getPhrase().getSettings();
+		SearchSettings settings = searchUICore.getSearchSettings();
 		if (settings.getRadiusLevel() != 1) {
 			searchUICore.updateSettings(settings.setRadiusLevel(1));
 		}
@@ -1347,7 +1347,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 					@Override
 					public void onClick(View v) {
 						if (!interruptedSearch) {
-							SearchSettings settings = searchUICore.getPhrase().getSettings();
+							SearchSettings settings = searchUICore.getSearchSettings();
 							searchUICore.updateSettings(settings.setRadiusLevel(settings.getRadiusLevel() + 1));
 						}
 						runCoreSearch(searchQuery, false, true);
@@ -1591,7 +1591,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		searchEditText.setText(txt);
 		searchEditText.setSelection(txt.length());
 		updateToolbarButton();
-		SearchSettings settings = searchUICore.getPhrase().getSettings();
+		SearchSettings settings = searchUICore.getSearchSettings();
 		if (settings.getRadiusLevel() != 1) {
 			searchUICore.updateSettings(settings.setRadiusLevel(1));
 		}
