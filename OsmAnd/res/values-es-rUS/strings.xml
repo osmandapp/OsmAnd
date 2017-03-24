@@ -2523,7 +2523,7 @@ Si amas a OsmAnd, OSM y quieres apoyarlos, esta es una perfecta manera de hacerl
     <string name="quick_action_take_video_note">Grabar nota de video</string>
     <string name="quick_action_take_photo_note">Tomar nota fotográfica</string>
     <string name="quick_action_add_osm_bug">Añadir error OSM</string>
-    <string name="quick_action_navigation_voice">Desactivar/activar voz</string>
+    <string name="quick_action_navigation_voice">Alternar activación de voz</string>
     <string name="quick_action_navigation_voice_off">Voz desactivada</string>
     <string name="quick_action_navigation_voice_on">Voz activada</string>
     <string name="quick_action_add_gpx">Añadir punto de ruta GPX</string>
@@ -2552,10 +2552,10 @@ Si amas a OsmAnd, OSM y quieres apoyarlos, esta es una perfecta manera de hacerl
     <string name="quick_action_duplicate">Nombre de la acción rápida duplicado</string>
     <string name="quick_action_showhide_favorites_descr">Pulsar el botón de acción mostrará u ocultará los favoritos en el mapa.</string>
     <string name="quick_action_showhide_poi_descr">Pulsar el botón de acción mostrará u ocultará los PDIs en el mapa.</string>
-    <string name="quick_action_showhide_favorites_title">Mostrar/ocultar favoritos</string>
+    <string name="quick_action_showhide_favorites_title">Alternar visualización de favoritos</string>
     <string name="quick_action_favorites_show">Mostrar Favoritos</string>
     <string name="quick_action_favorites_hide">Ocultar Favoritos</string>
-    <string name="quick_action_showhide_poi_title">Mostrar/ocultar PDI</string>
+    <string name="quick_action_showhide_poi_title">Alternar visualización de PDI</string>
     <string name="quick_action_poi_show">Mostrar %1$s</string>
     <string name="quick_action_poi_hide">Ocultar %1$s</string>
     <string name="quick_action_add_category">Añadir una categoría</string>
@@ -2849,9 +2849,9 @@ Algunas de las principales funciones:
     <string name="quick_action_replace_destination_desc">Pulsar el botón de acción reemplazará el destino con la ubicación central de la pantalla.</string>
     <string name="quick_action_add_first_intermediate_desc">Pulsar el botón de acción añadirá un primer punto intermedio en el centro de la pantalla.</string>
     <string name="shared_string_paused">Pausado</string>
-    <string name="type_city_town">Tipo de ciudad o pueblo</string>
-    <string name="type_postcode">Tipo de código postal</string>
+    <string name="type_city_town">Escribe la ciudad o pueblo</string>
+    <string name="type_postcode">Escribe el código postal</string>
     <string name="nearest_cities">Ciudades cercanas</string>
-    <string name="select_city">Marca la ciudad</string>
-    <string name="select_postcode">Marca el código postal</string>
+    <string name="select_city">Elegir la ciudad o pueblo</string>
+    <string name="select_postcode">Elegir el código postal</string>
     </resources>
