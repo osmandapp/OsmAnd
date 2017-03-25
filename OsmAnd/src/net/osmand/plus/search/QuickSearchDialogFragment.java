@@ -122,7 +122,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	private QuickSearchMainListFragment mainSearchFragment;
 	private QuickSearchHistoryListFragment historySearchFragment;
 	private QuickSearchCategoriesListFragment categoriesSearchFragment;
-	private QuickSearchAddressListFragment addrSearchFragment;
+	private QuickSearchAddressListFragment addressSearchFragment;
 	private QuickSearchToolbarController toolbarController;
 
 	private Toolbar toolbarEdit;
@@ -436,7 +436,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 						addressSearch = position == 2;
 						updateClearButtonAndHint();
 						if (addressSearch) {
-							startSearchingCity(true, true);
+							startAddressSearch();
 						} else {
 							stopAddressSearch();
 						}
@@ -466,6 +466,9 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 						updateClearButtonVisibility(true);
 						boolean textEmpty = newQueryText.length() == 0;
 						updateTabbarVisibility(textEmpty);
+						if (textEmpty && addressSearch) {
+							startAddressSearch();
+						}
 						if (textEmpty && poiFilterApplied) {
 							poiFilterApplied = false;
 							reloadCategories();
@@ -477,15 +480,8 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 						if (!searchQuery.equalsIgnoreCase(newQueryText)) {
 							searchQuery = newQueryText;
 							if (Algorithms.isEmpty(searchQuery)) {
-								if (addressSearch) {
-									startSearchingCity(true, true);
-								}
 								searchUICore.resetPhrase();
 							} else {
-								if (addressSearch) {
-									updateAddressSearch(searchUICore.getPhrase().getLastSelectedWord() != null
-											? searchUICore.getPhrase().getLastSelectedWord().getResult() : null);
-								}
 								runSearch();
 							}
 						} else if (runSearchFirstTime) {
@@ -517,6 +513,9 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 							searchUICore.updateSettings(ss);
 							updateClearButtonAndHint();
 							updateClearButtonVisibility(true);
+							if (addressSearchFragment != null) {
+								reloadCities();
+							}
 							startLocationUpdate();
 						}
 						updateToolbarButton();
@@ -898,7 +897,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			clearButton.setImageDrawable(app.getIconsCache().getIcon(R.drawable.ic_action_get_my_location, R.color.color_myloc_distance));
 		} else {
 			if (addressSearch) {
-				searchEditText.setHint(R.string.type_city_town);
+				searchEditText.setHint(R.string.type_address);
 			} else {
 				searchEditText.setHint(R.string.search_poi_category_hint);
 			}
@@ -953,7 +952,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 				break;
 
 			case ADDRESS:
-				addrSearchFragment = (QuickSearchAddressListFragment) searchListFragment;
+				addressSearchFragment = (QuickSearchAddressListFragment) searchListFragment;
 				reloadCities();
 				break;
 
@@ -1002,8 +1001,13 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 	private void reloadCategoriesInternal() {
 		try {
-			SearchResultCollection res = searchUICore.shallowSearch(SearchAmenityTypesAPI.class,
-					"", null);
+			if (addressSearch) {
+				stopAddressSearch();
+			}
+			SearchResultCollection res = searchUICore.shallowSearch(SearchAmenityTypesAPI.class, "", null);
+			if (addressSearch) {
+				startAddressSearch();
+			}
 			if (res != null) {
 				List<QuickSearchListItem> rows = new ArrayList<>();
 				for (SearchResult sr : res.getCurrentSearchResults()) {
@@ -1052,11 +1056,10 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 	private void reloadCitiesInternal() {
 		try {
-			startSearchingCity(false, false);
-			SearchResultCollection res = searchUICore.shallowSearch(SearchAddressByNameAPI.class,
-					"", null);
+			startNearestCitySearch();
+			SearchResultCollection res = searchUICore.shallowSearch(SearchAddressByNameAPI.class, "", null);
 			if (addressSearch) {
-				startSearchingCity(true, true);
+				startAddressSearch();
 			} else {
 				stopAddressSearch();
 			}
@@ -1067,7 +1070,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 				@Override
 				public void onClick(View v) {
 					searchEditText.setHint(R.string.type_city_town);
-					startSearchingCity(true, true);
+					startCitySearch();
 					updateTabbarVisibility(false);
 					runSearch();
 					searchEditText.requestFocus();
@@ -1079,7 +1082,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 				@Override
 				public void onClick(View v) {
 					searchEditText.setHint(R.string.type_postcode);
-					startSearchingPostcode(true);
+					startPostcodeSearch();
 					mainSearchFragment.getAdapter().clear();
 					updateTabbarVisibility(false);
 					searchEditText.requestFocus();
@@ -1097,7 +1100,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 					limit--;
 				}
 			}
-			addrSearchFragment.updateListAdapter(rows, false);
+			addressSearchFragment.updateListAdapter(rows, false);
 		} catch (IOException e) {
 			e.printStackTrace();
 			app.showToastMessage(e.getMessage());
@@ -1129,9 +1132,14 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 	private void reloadHistoryInternal() {
 		try {
-			SearchResultCollection res = searchUICore.shallowSearch(SearchHistoryAPI.class,
-					"", null);
-			List<QuickSearchListItem> rows = new ArrayList<>();
+			if (addressSearch) {
+				stopAddressSearch();
+			}
+			SearchResultCollection res = searchUICore.shallowSearch(SearchHistoryAPI.class, "", null);
+			if (addressSearch) {
+				startAddressSearch();
+			}
+ 			List<QuickSearchListItem> rows = new ArrayList<>();
 			if (res != null) {
 				for (SearchResult sr : res.getCurrentSearchResults()) {
 					rows.add(new QuickSearchListItem(app, sr));
@@ -1144,56 +1152,50 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		}
 	}
 
-	private void startSearchingCity(boolean sortByName, boolean searchVillages) {
+	private void startAddressSearch() {
 		SearchSettings settings = searchUICore.getSearchSettings()
 				.setEmptyQueryAllowed(true)
 				.setAddressSearch(true)
+				.setSortByName(true)
+				.setSearchTypes(ObjectType.CITY, ObjectType.VILLAGE, ObjectType.POSTCODE,
+						ObjectType.HOUSE, ObjectType.STREET_INTERSECTION, ObjectType.STREET,
+						ObjectType.LOCATION, ObjectType.PARTIAL_LOCATION)
 				.setRadiusLevel(1);
 
-		if (sortByName) {
-			settings = settings.setSortByName(true);
-		}
-		if (searchVillages) {
-			settings = settings.setSearchTypes(ObjectType.CITY, ObjectType.VILLAGE);
-		} else {
-			settings = settings.setSearchTypes(ObjectType.CITY);
-		}
 		searchUICore.updateSettings(settings);
 	}
 
-	private void startSearchingPostcode(boolean sortByName) {
+	private void startCitySearch() {
+		SearchSettings settings = searchUICore.getSearchSettings()
+				.setEmptyQueryAllowed(true)
+				.setAddressSearch(true)
+				.setSortByName(true)
+				.setSearchTypes(ObjectType.CITY, ObjectType.VILLAGE)
+				.setRadiusLevel(1);
+
+		searchUICore.updateSettings(settings);
+	}
+
+	private void startNearestCitySearch() {
+		SearchSettings settings = searchUICore.getSearchSettings()
+				.setEmptyQueryAllowed(true)
+				.setAddressSearch(true)
+				.setSortByName(false)
+				.setSearchTypes(ObjectType.CITY)
+				.setRadiusLevel(1);
+
+		searchUICore.updateSettings(settings);
+	}
+
+	private void startPostcodeSearch() {
 		SearchSettings settings = searchUICore.getSearchSettings()
 				.setSearchTypes(ObjectType.POSTCODE)
 				.setEmptyQueryAllowed(false)
 				.setAddressSearch(true)
+				.setSortByName(true)
 				.setRadiusLevel(1);
 
-		if (sortByName) {
-			settings = settings.setSortByName(true);
-		}
 		searchUICore.updateSettings(settings);
-	}
-
-	private void updateAddressSearch(SearchResult searchResult) {
-		if (searchResult != null) {
-			if (searchResult.objectType == ObjectType.STREET) {
-				SearchSettings settings = searchUICore.getSearchSettings()
-						.setSearchTypes(ObjectType.HOUSE, ObjectType.STREET_INTERSECTION)
-						.setEmptyQueryAllowed(false)
-						.setSortByName(false)
-						.setRadiusLevel(1);
-
-				searchUICore.updateSettings(settings);
-			} else if (searchResult.objectType == ObjectType.CITY || searchResult.objectType == ObjectType.VILLAGE) {
-				SearchSettings settings = searchUICore.getSearchSettings()
-						.setSearchTypes(ObjectType.STREET)
-						.setEmptyQueryAllowed(false)
-						.setSortByName(false)
-						.setRadiusLevel(1);
-
-				searchUICore.updateSettings(settings);
-			}
-		}
 	}
 
 	private void stopAddressSearch() {
@@ -1384,9 +1386,6 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			}
 		}
 		searchUICore.selectSearchResult(sr);
-		if (addressSearch) {
-			updateAddressSearch(sr);
-		}
 		String txt = searchUICore.getPhrase().getText(true);
 		searchQuery = txt;
 		searchEditText.setText(txt);
@@ -1573,8 +1572,8 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 				historySearchFragment.updateLocation(latLon, heading);
 			} else if (categoriesSearchFragment != null && viewPager.getCurrentItem() == 1) {
 				categoriesSearchFragment.updateLocation(latLon, heading);
-			} else if (addrSearchFragment != null && viewPager.getCurrentItem() == 2) {
-				addrSearchFragment.updateLocation(latLon, heading);
+			} else if (addressSearchFragment != null && viewPager.getCurrentItem() == 2) {
+				addressSearchFragment.updateLocation(latLon, heading);
 			}
 		}
 	}
@@ -1590,8 +1589,8 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			if (categoriesSearchFragment != null) {
 				categoriesSearchFragment.getListAdapter().setUseMapCenter(useMapCenter);
 			}
-			if (addrSearchFragment != null) {
-				addrSearchFragment.getListAdapter().setUseMapCenter(useMapCenter);
+			if (addressSearchFragment != null) {
+				addressSearchFragment.getListAdapter().setUseMapCenter(useMapCenter);
 			}
 		}
 	}
