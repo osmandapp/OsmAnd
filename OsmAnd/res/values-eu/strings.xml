@@ -15,12 +15,12 @@
   <string name="edit_tilesource_choose_existing">Aukeratu existitzen dena…</string>
   <string name="maps_define_edit">Definitu/Editatu…</string>
   <string name="map_widget_fps_info">FPS debugeatzeko info</string>
-  <string name="driving_region_descr">Aukeratu gidatze eremua: EEBB, Europa, EB, Asia edo Bestelakoak</string>
+  <string name="driving_region_descr">Aukeratu gidatze eremua: EEBB, Europa, EB, Asia edo bestelakoak</string>
   <string name="driving_region">Gidatze eremua</string>
   <string name="driving_region_japan">Japonia</string>
   <string name="driving_region_us">EEBB</string>
   <string name="driving_region_canada">Kanada</string>
-  <string name="driving_region_europe_asia">Europa &amp; Asia</string>
+  <string name="driving_region_europe_asia">Europa, Asia, Hego Amerika eta antzekoak</string>
   <string name="driving_region_uk">Erresuma Batua, India edo antzekoa</string>
   
   
@@ -888,7 +888,7 @@ Biltegiratzean {1} MB erabiliko dira.
 ⇥Erabiltzeko, aktibatu \'Menua\' -&gt; \'Konfiguratu mapa\' -&gt; \'Maparen Iturburua…\' -&gt; \'Lineaz kanpoko bektore mapak\'.</string>
   <string name="choose_audio_stream">Ahots gidaritzaren irteera</string>
   <string name="choose_audio_stream_descr">Aukeratu ahots gidaritza erreproduzitzeko bozgorailua</string>
-  <string name="voice_stream_voice_call">Ahots deiaren audioa (Kotxearen BT estereoak ere eteten saiatzen da)</string>
+  <string name="voice_stream_voice_call">Ahots deiaren audioa (Kotxearen BT estereoak ere eteteko)</string>
   <string name="voice_stream_notification">Notifikazioen audioa</string>
   <string name="voice_stream_music">Media/musikaren audioa</string>
   <string name="warning_tile_layer_not_downloadable">Aplikazioak ezin du %1$s geruza mapa deskargatu, saiatu mesedez berrinstalatzen.</string>
@@ -2834,8 +2834,8 @@ eta gehiago…
     <string name="lang_ber">Berberera</string>
     <string name="right_side_navigation">Eskumatik gidatzea</string>
     <string name="driving_region_automatic">Automatikoa</string>
-    <string name="do_not_send_anonymous_app_usage">Ez bidali aplikazioaren erabilera datu anonimoak</string>
-    <string name="do_not_send_anonymous_app_usage_desc">Saioan zehar erabilitako pantailaren informazio orokorra bidaltzen du. Ez dugu kokalekurik edo erabiltzaileari lotutako informazioa jasotzen.</string>
+    <string name="do_not_send_anonymous_app_usage">Ez bidali aplikazioaren erabilera estatistika anonimoak</string>
+    <string name="do_not_send_anonymous_app_usage_desc">OsmAnd aplikazioak saioan zehar erabilitako pantailaren informazio orokorra bidaltzen du. Ez dugu kokalekurik edo erabiltzaileari lotutako informazioa jasotzen.</string>
     <string name="do_not_show_startup_messages">Ez erakutsi mezuak hasieran</string>
     <string name="do_not_show_startup_messages_desc">Aplikazioen deskontuak eta tokiko gertaeren inguruko mezuak bistaratzen ditu</string>
     <string name="parking_options">Aparkatzeko aukerak</string>
@@ -2848,4 +2848,40 @@ eta gehiago…
     <string name="routing_attr_driving_style_safety_name">Segurtasuna</string>
     <string name="relief_smoothness_factor_descr">Lehentasuna lautada ala mendixkei</string>
     <string name="routing_attr_relief_smoothness_factor_name">Erliebearen lausotze faktorea</string>
+    <string name="type_city_town">Idatzi hiria edo herria</string>
+    <string name="type_postcode">Idatzi posta-kodea</string>
+    <string name="nearest_cities">Inguruko hiriak</string>
+    <string name="select_city">Aukeratu hiria</string>
+    <string name="select_postcode">Aukeratu posta-kodea</string>
+    <string name="quick_action_auto_zoom">Maparen zoom automatikoa bai/ez</string>
+    <string name="quick_action_auto_zoom_desc">Ekintza botoia sakatzean abiaduraren araberako maparen zoom automatikoa gaitu edo desgaituko da.</string>
+    <string name="quick_action_auto_zoom_on">Maparen zoom automatikoa gaituta</string>
+    <string name="quick_action_auto_zoom_off">Maparen zoom automatikoa desgaituta</string>
+    <string name="quick_action_add_destination">Gehitu helburua</string>
+    <string name="quick_action_replace_destination">Ordeztu helburua</string>
+    <string name="quick_action_add_first_intermediate">Gehitu lehen tartekoa</string>
+    <string name="quick_action_add_destination_desc">Ekintza botoia sakatzean pantailaren erdian helburu bat kokatuko du. Aurreko helburua tarteko puntu bihurtzen da.</string>
+    <string name="quick_action_replace_destination_desc">Ekintza botoia sakatzean helburua pantailaren erdiko puntuarekin ordeztuko da.</string>
+    <string name="quick_action_add_first_intermediate_desc">Ekintza botoia sakatzean pantailaren erdiko puntua tarteko puntu gisa gehituko da.</string>
+    <string name="no_overlay">Gain-azalik ez</string>
+    <string name="no_underlay">Azpi-azalik ez</string>
+    <string name="subscribe_email_error">Errorea</string>
+    <string name="subscribe_email_desc">Harpidetu gure posta-zerrendara aplikazioen deskontuak jaso eta 3 mapa gehiago deskargatu ahal izateko!</string>
+    <string name="sea_depth_thanks">Eskerrik asko itsasoko sakoneraren sestra-kurbak erosteagatik!</string>
+    <string name="depth_contour_descr">Itsasoaren sakoneraren sestra-kurbak eta puntuak ikustea baimentzen duten mapen multzoa (30 arku segundoko saretan oinarritua)</string>
+    <string name="index_item_depth_contours_osmand_ext">Sakonera sestra-kurbak</string>
+    <string name="index_item_depth_points_southern_hemisphere">Hego hemisferioko sakonera puntuak</string>
+    <string name="index_item_depth_points_northern_hemisphere">Ipar hemisferioko sakonera puntuak</string>
+    <string name="download_depth_countours">Sakonera sestra-kurbak</string>
+    <string name="nautical_maps">Itsas mapak</string>
+    <string name="analyze_on_map">Aztertu mapan</string>
+    <string name="shared_string_visible">Ikusgai</string>
+    <string name="restore_purchases">Berreskuratu erosketak</string>
+    <string name="fonts_header">Maparen letra-tipoak</string>
+    <string name="shared_string_paused">Pausatua</string>
+    <string name="osmand_extended_description_part1">"
+ OsmAnd (OSM Automated Navigation Directions) mapa eta nabigazio aplikazio bat da. Doako, mundu osoko eta kalitate altuko OpenStreetMap (OSM) mapak eskura jartzen dizkizuna.
+
+ Gozatu ahots bidezko nabigazioa edo nabigazio grafikoa, ikusi interesezko puntuak (POI),  sortu eta kudeatu GPX lorratzak, erabili sestra-kurbak eta altuera datuak (gehigarri abtek bidez), aukeratu kotxe, bizikleta eta oinezko moduen artean, editatu OSM, eta askoz gehiago.
+ "</string>
     </resources>
