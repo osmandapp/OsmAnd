@@ -207,7 +207,7 @@
     <string name="driving_region_us">Usono</string>
     <string name="driving_region_canada">Kanado</string>
     <string name="driving_region_europe_asia">Eŭropo, Azio, Latin-Ameriko kaj similaj</string>
-    <string name="driving_region_uk">Britujo, Barato kaj aliaj</string>
+    <string name="driving_region_uk">Britujo, Barato kaj similaj</string>
     <string name="index_name_north_america">Nordameriko</string>
     <string name="index_name_netherlands">Eŭropo - Nederlando</string>
     <string name="index_name_us">Nordameriko - Usono</string>
@@ -2664,7 +2664,7 @@ Indikas lokon:  %1$s x %2$s"</string>
  kaj pli...
  "</string>
 	<string name="rendering_attr_depthContours_description">Montras punktojn kaj konturojn de profundo</string>
-    <string name="rendering_attr_depthContours_name">Profundaj konturoj</string>
+    <string name="rendering_attr_depthContours_name">Profundec-kurboj</string>
 	<string name="routing_attr_height_relief_smoothness_factor_name">Glateca-faktoro de nivelombrumo</string>
     <string name="routing_attr_height_relief_smoothness_factor_description">Pli da ebenejoj aŭ pli da montetoj</string>
     <string name="routing_attr_height_obstacles_name">Uzi datumoj pri altitudo</string>
@@ -2864,13 +2864,13 @@ De Afganujo al Zimbabvo, de Aŭstralio al Usono, Argentino, Brazilo, Kanado, Fra
     <string name="restore_purchases">Restarigi aĉetaĵojn</string>
     <string name="shared_string_visible">Videbla</string>
     <string name="analyze_on_map">Analizi sur mapo</string>
-    <string name="sea_depth_thanks">Dankon al vi por aĉeti marajn profund-kurbojn!</string>
-    <string name="index_item_depth_contours_osmand_ext">Profund-kurbojn</string>
-    <string name="index_item_depth_points_southern_hemisphere">Profund-kurboj de suda duonsfero</string>
-    <string name="index_item_depth_points_northern_hemisphere">Profund-kurboj de norda duonsfero</string>
-    <string name="download_depth_countours">Profund-kurboj</string>
+    <string name="sea_depth_thanks">Dankon al vi por aĉeti marajn profundec-kurbojn!</string>
+    <string name="index_item_depth_contours_osmand_ext">Profundec-kurbojn</string>
+    <string name="index_item_depth_points_southern_hemisphere">Profundec-kurboj de suda duonsfero</string>
+    <string name="index_item_depth_points_northern_hemisphere">Profundec-kurboj de norda duonsfero</string>
+    <string name="download_depth_countours">Profundec-kurboj</string>
     <string name="nautical_maps">Maraj mapoj</string>
-    <string name="depth_contour_descr">Kolekto da mapoj, kiu ebligas al vi vidi marajn profund-kurbojn kaj punktojn (bazitajn sur 30-arksekunda krado).</string>
+    <string name="depth_contour_descr">Kolekto da mapoj, kiu ebligas al vi vidi marajn profundec-kurbojn kaj punktojn (bazitajn sur 30-arksekunda krado).</string>
     <string name="quick_action_add_destination">Aldoni celon</string>
     <string name="quick_action_replace_destination">Anstataŭigi celon</string>
     <string name="quick_action_add_first_intermediate">Aldoni unuan interlokon</string>
