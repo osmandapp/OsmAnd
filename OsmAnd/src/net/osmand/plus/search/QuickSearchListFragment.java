@@ -29,15 +29,18 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.OsmAndListFragment;
 import net.osmand.plus.dashboard.DashLocationFragment;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
+import net.osmand.plus.search.listitems.QuickSearchBottomShadowListItem;
 import net.osmand.plus.search.listitems.QuickSearchButtonListItem;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.search.listitems.QuickSearchListItemType;
 import net.osmand.plus.search.listitems.QuickSearchMoreListItem;
+import net.osmand.plus.search.listitems.QuickSearchTopShadowListItem;
 import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchResult;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class QuickSearchListFragment extends OsmAndListFragment {
@@ -77,10 +80,10 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 					}
 				}
 			});
-			View header = getLayoutInflater(savedInstanceState).inflate(R.layout.list_shadow_header, null);
-			View footer = getLayoutInflater(savedInstanceState).inflate(R.layout.list_shadow_footer, null);
-			listView.addHeaderView(header, null, false);
-			listView.addFooterView(footer, null, false);
+			//View header = getLayoutInflater(savedInstanceState).inflate(R.layout.list_shadow_header, null);
+			//View footer = getLayoutInflater(savedInstanceState).inflate(R.layout.list_shadow_footer, null);
+			//listView.addHeaderView(header, null, false);
+			//listView.addFooterView(footer, null, false);
 		}
 	}
 
@@ -322,7 +325,12 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 
 	public void updateListAdapter(List<QuickSearchListItem> listItems, boolean append) {
 		if (listAdapter != null) {
-			listAdapter.setListItems(listItems);
+			List<QuickSearchListItem> list = new ArrayList<>(listItems);
+			if (list.size() > 0) {
+				list.add(0, new QuickSearchTopShadowListItem(getMyApplication()));
+				list.add(new QuickSearchBottomShadowListItem(getMyApplication()));
+			}
+			listAdapter.setListItems(list);
 			if (!append) {
 				getListView().setSelection(0);
 			}
@@ -331,7 +339,20 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 
 	public void addListItem(QuickSearchListItem listItem) {
 		if (listItem != null) {
-			listAdapter.addListItem(listItem);
+			if (listAdapter.getCount() == 0) {
+				List<QuickSearchListItem> list = new ArrayList<>();
+				list.add(new QuickSearchTopShadowListItem(getMyApplication()));
+				list.add(listItem);
+				list.add(new QuickSearchBottomShadowListItem(getMyApplication()));
+				listAdapter.setListItems(list);
+			} else {
+				QuickSearchListItem lastItem = listAdapter.getItem(listAdapter.getCount() - 1);
+				if (lastItem.getType() == QuickSearchListItemType.BOTTOM_SHADOW) {
+					listAdapter.insertListItem(listItem, listAdapter.getCount() - 1);
+				} else {
+					listAdapter.addListItem(listItem);
+				}
+			}
 		}
 	}
 }

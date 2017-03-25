@@ -5,5 +5,7 @@ public enum QuickSearchListItemType {
 	HEADER,
 	BUTTON,
 	SEARCH_MORE,
-	SELECT_ALL
+	SELECT_ALL,
+	TOP_SHADOW,
+	BOTTOM_SHADOW
 }

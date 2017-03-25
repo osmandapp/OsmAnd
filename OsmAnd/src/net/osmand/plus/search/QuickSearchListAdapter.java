@@ -174,6 +174,9 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 	}
 
 	public void insertListItem(@NonNull QuickSearchListItem item, int index) {
+		if (hasSearchMoreItem && item.getType() == QuickSearchListItemType.SEARCH_MORE) {
+			return;
+		}
 		setNotifyOnChange(false);
 		insert(item, index);
 		if (item.getType() == QuickSearchListItemType.SEARCH_MORE) {
@@ -185,7 +188,10 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 
 	@Override
 	public boolean isEnabled(int position) {
-		return getItem(position).getType() != QuickSearchListItemType.HEADER;
+		QuickSearchListItemType type = getItem(position).getType();
+		return type != QuickSearchListItemType.HEADER
+				&& type != QuickSearchListItemType.TOP_SHADOW
+				&& type != QuickSearchListItemType.BOTTOM_SHADOW;
 	}
 
 	@Override
@@ -257,6 +263,26 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 			view.findViewById(R.id.top_divider)
 					.setVisibility(((QuickSearchHeaderListItem)listItem).isShowTopDivider() ? View.VISIBLE : View.GONE);
 			((TextView) view.findViewById(R.id.title)).setText(listItem.getName());
+		} else if (type == QuickSearchListItemType.TOP_SHADOW) {
+			if (convertView == null) {
+				LayoutInflater inflater = (LayoutInflater) app
+						.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+				view = (LinearLayout) inflater.inflate(
+						R.layout.list_shadow_header, null);
+			} else {
+				view = (LinearLayout) convertView;
+			}
+			return view;
+		} else if (type == QuickSearchListItemType.BOTTOM_SHADOW) {
+			if (convertView == null) {
+				LayoutInflater inflater = (LayoutInflater) app
+						.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+				view = (LinearLayout) inflater.inflate(
+						R.layout.list_shadow_footer, null);
+			} else {
+				view = (LinearLayout) convertView;
+			}
+			return view;
 		} else {
 			if (convertView == null) {
 				LayoutInflater inflater = (LayoutInflater) app
@@ -344,7 +370,8 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 						app.getSettings().isLightContent() ? R.color.bg_color_light : R.color.bg_color_dark));
 		View divider = view.findViewById(R.id.divider);
 		if (divider != null) {
-			if (position == getCount() - 1 || getItem(position + 1).getType() == QuickSearchListItemType.HEADER) {
+			if (position == getCount() - 1 || getItem(position + 1).getType() == QuickSearchListItemType.HEADER
+					|| getItem(position + 1).getType() == QuickSearchListItemType.BOTTOM_SHADOW) {
 				divider.setVisibility(View.GONE);
 			} else {
 				divider.setVisibility(View.VISIBLE);
