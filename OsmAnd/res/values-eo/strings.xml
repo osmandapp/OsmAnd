@@ -2889,6 +2889,6 @@ De Afganujo al Zimbabvo, de Aŭstralio al Usono, Argentino, Brazilo, Kanado, Fra
     <string name="type_city_town">Entajpu urbon</string>
     <string name="type_postcode">Entajpu poŝtkodon</string>
     <string name="nearest_cities">Proksimaj urboj</string>
-    <string name="select_city">Elektu urbon</string>
-    <string name="select_postcode">Elektu poŝtkodon</string>
+    <string name="select_city">Elekti urbon</string>
+    <string name="select_postcode">Elekti poŝtkodon</string>
     </resources>
