@@ -3169,4 +3169,9 @@
 
 <string name="poi_energy_supplier">Oficina de proveedor de energía</string>
 
+<string name="poi_electronics_repair_computer">Reparación de electrónicos: Computadoras</string>
+	<string name="poi_electronics_repair_appliance">Reparación de electrónicos: Electrodomésticos</string>
+	<string name="poi_electronics_repair_phone">Reparación de electrónicos: Teléfonos</string>
+	<string name="poi_electronics_repair_tv">Reparación de electrónicos: Televisores</string>
+
 </resources>
