@@ -39,7 +39,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class SearchUICore {
 
-	private static final int TIMEOUT_BETWEEN_CHARS = 200;
+	private static final int TIMEOUT_BETWEEN_CHARS = 700;
 	private static final Log LOG = PlatformUtil.getLog(SearchUICore.class);
 	private SearchPhrase phrase;
 	private SearchResultCollection  currentSearchResult;
@@ -253,7 +253,7 @@ public class SearchUICore {
 			SearchPhrase sphrase = this.phrase.generateNewPhrase(text, searchSettings);
 			preparePhrase(sphrase);
 			AtomicInteger ai = new AtomicInteger();
-			SearchResultMatcher rm = new SearchResultMatcher(matcher, ai.get(), ai, totalLimit);
+			SearchResultMatcher rm = new SearchResultMatcher(matcher, sphrase, ai.get(), ai, totalLimit);
 			api.search(sphrase, rm);
 
 			SearchResultCollection collection = new SearchResultCollection(
@@ -368,7 +368,7 @@ public class SearchUICore {
 					if (onSearchStart != null) {
 						onSearchStart.run();
 					}
-					SearchResultMatcher rm = new SearchResultMatcher(matcher, request, requestNumber, totalLimit);
+					SearchResultMatcher rm = new SearchResultMatcher(matcher, phrase, request, requestNumber, totalLimit);
 					if(TIMEOUT_BETWEEN_CHARS > 0) {
 						Thread.sleep(TIMEOUT_BETWEEN_CHARS);
 					}
@@ -377,7 +377,6 @@ public class SearchUICore {
 					}
 					searchInBackground(phrase, rm);
 					if (!rm.isCancelled()) {
-
 						SearchResultCollection collection = new SearchResultCollection(
 								phrase);
 						collection.addSearchResults(rm.getRequestResults(), true, true);
@@ -457,11 +456,13 @@ public class SearchUICore {
 		private SearchResult parentSearchResult;
 		private final AtomicInteger requestNumber;
 		int count = 0;
+		private SearchPhrase phrase;
 
 
-		public SearchResultMatcher(ResultMatcher<SearchResult> matcher, int request,
+		public SearchResultMatcher(ResultMatcher<SearchResult> matcher, SearchPhrase phrase, int request,
 								   AtomicInteger requestNumber, int totalLimit) {
 			this.matcher = matcher;
+			this.phrase = phrase;
 			this.request = request;
 			this.requestNumber = requestNumber;
 			this.totalLimit = totalLimit;
@@ -504,6 +505,14 @@ public class SearchUICore {
 
 		@Override
 		public boolean publish(SearchResult object) {
+			if (!phrase.getNameStringMatcher().matches(object.localeName)) {
+				for (String s : object.otherNames) {
+					if (phrase.getNameStringMatcher().matches(s)) {
+						object.alternateName = s;
+						break;
+					}
+				}
+			}
 			if (matcher == null || matcher.publish(object)) {
 				count++;
 				object.parentSearchResult = parentSearchResult;

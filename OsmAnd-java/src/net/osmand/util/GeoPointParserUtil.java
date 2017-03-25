@@ -236,6 +236,11 @@ public class GeoPointParserUtil {
 		System.out.println("url: " + url);
 		actual = GeoPointParserUtil.parse(url);
 		assertGeoPoint(actual, new GeoParsedPoint(dlat, dlon));
+		
+		url = "http://maps.google.com/maps?f=d&saddr=My+Location&daddr=" +dlat +"," +dlon+"&hl=en"; 
+		System.out.println("url: " + url);
+		actual = GeoPointParserUtil.parse(url);
+		assertGeoPoint(actual, new GeoParsedPoint(dlat, dlon));
 
 		// http://www.osmand.net/go.html?lat=34&lon=-106&z=11
 		url = "http://www.osmand.net/go.html?lat=" + ilat + "&lon=" + ilon + "&z=" + z;

@@ -52,6 +52,7 @@ public class SearchResult {
 	public LatLon location;
 	public int preferredZoom = 15;
 	public String localeName;
+	public String alternateName;
 	
 	public Collection<String> otherNames;
 	
