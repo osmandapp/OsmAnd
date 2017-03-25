@@ -15,7 +15,7 @@ import org.junit.Test;
 public class LocationSearchTest {
 
 	private void search(String string, LatLon latLon) throws IOException {
-		SearchResultMatcher srm = new SearchUICore.SearchResultMatcher(null, 0, null, 100);
+		SearchResultMatcher srm = new SearchUICore.SearchResultMatcher(null, null, 0, null, 100);
 		new SearchCoreFactory.SearchLocationAndUrlAPI().
 			search(new SearchPhrase(null, OsmAndCollator.primaryCollator()).generateNewPhrase(string, null), srm);
 		Assert.assertEquals(1, srm.getRequestResults().size());
