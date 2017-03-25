@@ -2,7 +2,6 @@ package net.osmand.plus.search.listitems;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.Amenity;
 import net.osmand.data.City;
@@ -101,7 +100,8 @@ public class QuickSearchListItem {
 	}
 
 	public String getTypeName() {
-		return getTypeName(app, searchResult);
+		String typeName = getTypeName(app, searchResult);
+		return (searchResult.alternateName != null ? searchResult.alternateName  + " • " : "") + typeName;
 	}
 
 	public static String getTypeName(OsmandApplication app, SearchResult searchResult) {
