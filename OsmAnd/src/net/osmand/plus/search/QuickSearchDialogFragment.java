@@ -160,6 +160,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	private boolean fabVisible;
 	private boolean runSearchFirstTime;
 	private boolean phraseDefined;
+	private boolean addressSearch;
 
 	private static final double DISTANCE_THRESHOLD = 70000; // 70km
 	private static final int EXPIRATION_TIME_MIN = 10; // 10 minutes
@@ -430,6 +431,13 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 					@Override
 					public void onPageSelected(int position) {
 						hideKeyboard();
+						addressSearch = position == 2;
+						updateClearButtonAndHint();
+						if (addressSearch) {
+							startSearchingCity(true, true);
+						} else {
+							stopAddressSearch();
+						}
 					}
 
 					@Override
@@ -467,9 +475,15 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 						if (!searchQuery.equalsIgnoreCase(newQueryText)) {
 							searchQuery = newQueryText;
 							if (Algorithms.isEmpty(searchQuery)) {
-								stopCustomSearch();
+								if (addressSearch) {
+									startSearchingCity(true, true);
+								}
 								searchUICore.resetPhrase();
 							} else {
+								if (addressSearch) {
+									updateAddressSearch(searchUICore.getPhrase().getLastSelectedWord() != null
+											? searchUICore.getPhrase().getLastSelectedWord().getResult() : null);
+								}
 								runSearch();
 							}
 						} else if (runSearchFirstTime) {
@@ -491,7 +505,6 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 							String newText = searchUICore.getPhrase().getTextWithoutLastWord();
 							searchEditText.setText(newText);
 							searchEditText.setSelection(newText.length());
-							stopCustomSearch();
 						} else if (useMapCenter && location != null) {
 							useMapCenter = false;
 							centerLatLon = null;
@@ -710,7 +723,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		boolean transliterate = app.getSettings().MAP_TRANSLITERATE_NAMES.get();
 		searchHelper = app.getSearchUICore();
 		searchUICore = searchHelper.getCore();
-		stopCustomSearch();
+		stopAddressSearch();
 
 		location = app.getLocationProvider().getLastKnownLocation();
 
@@ -821,6 +834,10 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		super.onDismiss(dialog);
 	}
 
+	public boolean onBackPressed() {
+		return false;
+	}
+
 	public Toolbar getToolbar() {
 		return toolbar;
 	}
@@ -861,7 +878,11 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			searchEditText.setHint(getString(R.string.dist_away_from_my_location, dist));
 			clearButton.setImageDrawable(app.getIconsCache().getIcon(R.drawable.ic_action_get_my_location, R.color.color_myloc_distance));
 		} else {
-			searchEditText.setHint(R.string.search_poi_category_hint);
+			if (addressSearch) {
+				searchEditText.setHint(R.string.type_city_town);
+			} else {
+				searchEditText.setHint(R.string.search_poi_category_hint);
+			}
 			clearButton.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_action_remove_dark));
 		}
 	}
@@ -1008,10 +1029,14 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 	private void reloadCitiesInternal() {
 		try {
-			startSearchingCities(false, false);
+			startSearchingCity(false, false);
 			SearchResultCollection res = searchUICore.shallowSearch(SearchAddressByNameAPI.class,
 					"", null);
-			stopCustomSearch();
+			if (addressSearch) {
+				startSearchingCity(true, true);
+			} else {
+				stopAddressSearch();
+			}
 
 			List<QuickSearchListItem> rows = new ArrayList<>();
 			rows.add(new QuickSearchButtonListItem(app, R.drawable.ic_action_building_number,
@@ -1019,7 +1044,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 				@Override
 				public void onClick(View v) {
 					searchEditText.setHint(R.string.type_city_town);
-					startSearchingCities(true, true);
+					startSearchingCity(true, true);
 					updateTabbarVisibility(false);
 					runSearch();
 					searchEditText.requestFocus();
@@ -1031,7 +1056,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 				@Override
 				public void onClick(View v) {
 					searchEditText.setHint(R.string.type_postcode);
-					startSearchingPostcodes(true);
+					startSearchingPostcode(true);
 					mainSearchFragment.getAdapter().clear();
 					updateTabbarVisibility(false);
 					searchEditText.requestFocus();
@@ -1096,8 +1121,12 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		}
 	}
 
-	private void startSearchingCities(boolean sortByName, boolean searchVillages) {
-		SearchSettings settings = searchUICore.getSearchSettings().setEmptyQueryAllowed(true).setRadiusLevel(1);
+	private void startSearchingCity(boolean sortByName, boolean searchVillages) {
+		SearchSettings settings = searchUICore.getSearchSettings()
+				.setEmptyQueryAllowed(true)
+				.setAddressSearch(true)
+				.setRadiusLevel(1);
+
 		if (sortByName) {
 			settings = settings.setSortByName(true);
 		}
@@ -1109,18 +1138,49 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		searchUICore.updateSettings(settings);
 	}
 
-	private void startSearchingPostcodes(boolean sortByName) {
-		SearchSettings settings = searchUICore.getSearchSettings().setSearchTypes(ObjectType.POSTCODE)
-				.setEmptyQueryAllowed(false).setRadiusLevel(1);
+	private void startSearchingPostcode(boolean sortByName) {
+		SearchSettings settings = searchUICore.getSearchSettings()
+				.setSearchTypes(ObjectType.POSTCODE)
+				.setEmptyQueryAllowed(false)
+				.setAddressSearch(true)
+				.setRadiusLevel(1);
+
 		if (sortByName) {
 			settings = settings.setSortByName(true);
 		}
 		searchUICore.updateSettings(settings);
 	}
 
-	private void stopCustomSearch() {
-		SearchSettings settings = searchUICore.getSearchSettings().resetSearchTypes()
-				.setEmptyQueryAllowed(false).setSortByName(false).setRadiusLevel(1);
+	private void updateAddressSearch(SearchResult searchResult) {
+		if (searchResult != null) {
+			if (searchResult.objectType == ObjectType.STREET) {
+				SearchSettings settings = searchUICore.getSearchSettings()
+						.setSearchTypes(ObjectType.HOUSE, ObjectType.STREET_INTERSECTION)
+						.setEmptyQueryAllowed(false)
+						.setSortByName(false)
+						.setRadiusLevel(1);
+
+				searchUICore.updateSettings(settings);
+			} else if (searchResult.objectType == ObjectType.CITY || searchResult.objectType == ObjectType.VILLAGE) {
+				SearchSettings settings = searchUICore.getSearchSettings()
+						.setSearchTypes(ObjectType.STREET)
+						.setEmptyQueryAllowed(false)
+						.setSortByName(false)
+						.setRadiusLevel(1);
+
+				searchUICore.updateSettings(settings);
+			}
+		}
+	}
+
+	private void stopAddressSearch() {
+		SearchSettings settings = searchUICore.getSearchSettings()
+				.resetSearchTypes()
+				.setEmptyQueryAllowed(false)
+				.setSortByName(false)
+				.setAddressSearch(false)
+				.setRadiusLevel(1);
+
 		searchUICore.updateSettings(settings);
 	}
 
@@ -1301,7 +1361,9 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			}
 		}
 		searchUICore.selectSearchResult(sr);
-		stopCustomSearch();
+		if (addressSearch) {
+			updateAddressSearch(sr);
+		}
 		String txt = searchUICore.getPhrase().getText(true);
 		searchQuery = txt;
 		searchEditText.setText(txt);
