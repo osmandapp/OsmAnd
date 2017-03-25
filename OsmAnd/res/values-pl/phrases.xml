@@ -3381,4 +3381,9 @@
 
 <string name="poi_energy_supplier">Biuro dostawcy energii</string>
 
+<string name="poi_electronics_repair_computer">Naprawa elektroniki: komputery</string>
+	<string name="poi_electronics_repair_appliance">Naprawa elektroniki: urządzenia</string>
+	<string name="poi_electronics_repair_phone">Naprawa elektroniki: telefony</string>
+	<string name="poi_electronics_repair_tv">Naprawa elektroniki: telewizory</string>
+
 </resources>
