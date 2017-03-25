@@ -188,7 +188,7 @@ Actuellement {2} Mo sont disponibles.</string>
 \n\t\n\tPour activer : \'Menu\' → \'Configurer la carte\' → \'Carte en ligne…\' → \'Cartes vectorielles hors ligne\'.</string>
     <string name="choose_audio_stream">Sortie audio pour le guidage</string>
     <string name="choose_audio_stream_descr">Sélectionnez la sortie audio à utiliser pour le guidage vocal</string>
-    <string name="voice_stream_voice_call">Sortie téléphonie</string>
+    <string name="voice_stream_voice_call">Sortie du téléphone (aussi pour arrêter le Bluetooth véhicule)</string>
     <string name="voice_stream_notification">Sortie notifications</string>
     <string name="voice_stream_music">Sortie musique</string>
     <string name="warning_tile_layer_not_downloadable">L\'application ne peut télécharger la couche de carte %1$s, veuillez tenter de la réinstaller.</string>
@@ -2545,10 +2545,10 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="advanced_coords_search">Recherche avancée de coordonnées</string>
     <string name="dist_away_from_my_location">Recherche %1$s autour</string>
     <string name="release_2_4">"
- • Nouveau moteur de recherche performant à texte libre
+ • Nouveau moteur de recherche pour les lieux permettant la saisie d\'un texte libre
 
 
- • Intégration avec les systèmes audio voiture et haut-parleur Bluetooth
+ • Diffusion des instructions vocales vers  le système audio d\'un véhicule ou tout autre appareil Bluetooth
 
 
  • Instructions de guidage, annonces vocales, et indications de voies directionnelles améliorées
@@ -2560,10 +2560,10 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
  • Ajout de paramètres locaux et support de paramètres régionaux
 
 
- • Autres améliorations et corrections de bogues
+ • Autres améliorations et corrections d\'anomalies
 
 
- Et plus encore…
+ Et bien plus encore…
  "</string>
     <string name="update_all_maps_now">Souhaitez-vous mettre à jour toutes les cartes maintenant ?</string>
     <string name="clear_tile_data">Supprimer toutes les tuiles</string>
