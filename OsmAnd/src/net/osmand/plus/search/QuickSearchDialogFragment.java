@@ -1156,7 +1156,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		SearchSettings settings = searchUICore.getSearchSettings()
 				.setEmptyQueryAllowed(true)
 				.setAddressSearch(true)
-				.setSortByName(true)
+				.setSortByName(false)
 				.setSearchTypes(ObjectType.CITY, ObjectType.VILLAGE, ObjectType.POSTCODE,
 						ObjectType.HOUSE, ObjectType.STREET_INTERSECTION, ObjectType.STREET,
 						ObjectType.LOCATION, ObjectType.PARTIAL_LOCATION)
