@@ -3396,4 +3396,9 @@
 
 <string name="poi_energy_supplier">Офіс пастаўшчыка энергіі</string>
 
+<string name="poi_electronics_repair_computer">Рамонт электронікі: кампутары</string>
+	<string name="poi_electronics_repair_appliance">Рамонт электронікі: бытавая тэхніка</string>
+	<string name="poi_electronics_repair_phone">Рамонт электронікі: тэлефоны</string>
+	<string name="poi_electronics_repair_tv">Рамонт электронікі: тэлевізары</string>
+
 </resources>
