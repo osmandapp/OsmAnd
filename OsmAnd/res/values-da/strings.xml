@@ -754,7 +754,7 @@ Liste over understøttede lande (dybest set hele verden!): Afghanistan, Albanien
 \n\nFor at anvende aktiver \'Menu\' → \'Konfigurer kort\' → \'Vælg kortkilde…\' → \'Offline vektor-kort\'.</string>
     <string name="choose_audio_stream">Audiokanal for talevejledning</string>
     <string name="choose_audio_stream_descr">Vælg højttaler til at afspille talevejledning</string>
-    <string name="voice_stream_voice_call">Telefonopkald lyd (også at afbryde Bluetooth bilradio)</string>
+    <string name="voice_stream_voice_call">Telefonopkald lyd (også afbryde Bluetooth bilradio)</string>
     <string name="voice_stream_notification">Meddelelselyd</string>
     <string name="voice_stream_music">Medie-/musiklyd</string>
     <string name="warning_tile_layer_not_downloadable">Programmet kan ikke hente kortlaget %1$s, prøv at installere igen.</string>
@@ -2917,9 +2917,9 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="right_side_navigation">Højrekørsel</string>
     <string name="driving_region_automatic">Automatisk</string>
     <string name="osmand_extended_description_part1">"
- OsmAnd (OSM Automated Navigation Directions) er et kort- og navigationsprogram med adgang til fri, verdensomspændende, og høj kvalitet OpenStreetMap (OSM) data.
+ OsmAnd (OSM Automated Navigation Directions) er et kort- og navigationsprogram med adgang til gratis, verdensomspændende og af høj kvalitet OpenStreetMap (OSM) data.
 
- Nyd stemme og optisk navigation, visning af IP\'er (interessepunkter), opret og administrere GPX-spor, ved hjælp af højdekurvevisualisering og højdeinfo (via udvidelse), vælg mellem bilkørsel, cykling og fodgænger tilstand, OSM redigering og meget mere.
+ Nyd stemme og visuel navigation, visning af IP\'er (interessepunkter), opret og administrere GPX-spor, ved hjælp af højdekurvevisualisering og højdeinfo (via udvidelse), vælg mellem bilkørsel, cykling og fodgænger tilstand, OSM redigering og meget mere.
  "</string>
     <string name="osmand_extended_description_part7">"
  Bidrag til OSM 
@@ -3075,7 +3075,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="nautical_maps">Søkort</string>
     <string name="depth_contour_descr">Kortsæt giver mulighed for at se dybdekonturlinjer og punkter (baseret på 30 bue-sekunder gitter).</string>
     <string name="subscribe_email_error">Fejl</string>
-    <string name="subscribe_email_desc">Abonner på e-mail liste om app rabatter og hent yderligere 3 kort!</string>
+    <string name="subscribe_email_desc">Abonner på e-mail listen om OsmAnd rabatter og hent yderligere 3 kort!</string>
     <string name="no_overlay">Ingen overleejring</string>
     <string name="no_underlay">Ingen underlejring</string>
     <string name="quick_action_add_destination">Tilføj destination</string>
@@ -3086,7 +3086,7 @@ Tidligere destination bliver sidste mellemliggende punkt.</string>
     <string name="quick_action_replace_destination_desc">Tryk på genvejen vil erstatte destinationen med skærmens centrum.</string>
     <string name="quick_action_add_first_intermediate_desc">Tryk på genvejen vil tilføje et første mellemliggende punkt på skærmens centrum.</string>
     <string name="quick_action_auto_zoom">Auto kortzoom til/fra</string>
-    <string name="quick_action_auto_zoom_desc">Tryk på genvejen vil tænde til/fra auto zoom kort efter hastighed.</string>
+    <string name="quick_action_auto_zoom_desc">Tryk på genvejen vil skifte den hastighedafhænige kortzoom til/fra.</string>
     <string name="quick_action_auto_zoom_on">Auto kortzoom til</string>
     <string name="quick_action_auto_zoom_off">Auto kortzoom fra</string>
     <string name="shared_string_paused">Pauset</string>
