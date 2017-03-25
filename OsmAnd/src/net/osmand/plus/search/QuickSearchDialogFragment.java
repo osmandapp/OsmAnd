@@ -1386,6 +1386,9 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			}
 		}
 		searchUICore.selectSearchResult(sr);
+		if (addressSearch) {
+			startAddressSearch();
+		}
 		String txt = searchUICore.getPhrase().getText(true);
 		searchQuery = txt;
 		searchEditText.setText(txt);
