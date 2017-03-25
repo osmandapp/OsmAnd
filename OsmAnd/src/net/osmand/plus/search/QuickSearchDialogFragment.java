@@ -344,7 +344,9 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 				new OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						dismiss();
+						if (!processBackAction()) {
+							dismiss();
+						}
 					}
 				}
 		);
@@ -549,6 +551,19 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			searchEditText.requestFocus();
 			AndroidUtils.softKeyboardDelayed(searchEditText);
 		}
+	}
+
+	@NonNull
+	@Override
+	public Dialog onCreateDialog(Bundle savedInstanceState) {
+		return new Dialog(getActivity(), getTheme()){
+			@Override
+			public void onBackPressed() {
+				if (!processBackAction()) {
+					cancel();
+				}
+			}
+		};
 	}
 
 	public void saveCustomFilter() {
@@ -834,7 +849,11 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		super.onDismiss(dialog);
 	}
 
-	public boolean onBackPressed() {
+	private boolean processBackAction() {
+		if (addressSearch && isSearchViewVisible()) {
+			searchEditText.setText("");
+			return true;
+		}
 		return false;
 	}
 
@@ -907,6 +926,10 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			tabsView.setVisibility(View.GONE);
 			searchView.setVisibility(View.VISIBLE);
 		}
+	}
+
+	private boolean isSearchViewVisible() {
+		return searchView.getVisibility() == View.VISIBLE;
 	}
 
 	public void setResultCollection(SearchResultCollection resultCollection) {
