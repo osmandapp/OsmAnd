@@ -317,6 +317,10 @@ public class SearchPhrase {
 		return settings.isSortByName();
 	}
 
+	public boolean isInAddressSearch() {
+		return settings.isInAddressSearch();
+	}
+
 	public SearchPhrase selectWord(SearchResult res) {
 		return selectWord(res, null, false);
 	}
