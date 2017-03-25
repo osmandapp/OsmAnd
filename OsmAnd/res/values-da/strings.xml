@@ -3095,4 +3095,5 @@ Tidligere destination bliver sidste mellemliggende punkt.</string>
     <string name="nearest_cities">Nærmeste byer</string>
     <string name="select_city">Vælg by</string>
     <string name="select_postcode">Vælg postnummer</string>
+    <string name="type_address">Indtast adresse</string>
     </resources>
