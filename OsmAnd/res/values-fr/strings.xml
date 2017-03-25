@@ -2942,4 +2942,5 @@ Fonctionnalités principales :
     <string name="nearest_cities">Villes les plus proches</string>
     <string name="select_city">Sélectionnez la ville</string>
     <string name="select_postcode">Sélectionnez le code postal</string>
+    <string name="type_address">Saisissez une adresse</string>
     </resources>
