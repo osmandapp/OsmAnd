@@ -270,7 +270,7 @@
 \t Pro zobrazení zvolte Menu → Nastavení mapy → Zdroj map… → Vektorové off-line mapy.</string>
     <string name="choose_audio_stream">Kanál pro navádění</string>
     <string name="choose_audio_stream_descr">Zvolte kanál poskytující hlasové navádění</string>
-    <string name="voice_stream_voice_call">Zvuk telefonního hovoru (také se pokusí přerušit Bluetooth hudební výstup)</string>
+    <string name="voice_stream_voice_call">Zvuk telefonního hovoru (také přeruší Bluetooth autorádio)</string>
     <string name="voice_stream_notification">Upozornění</string>
     <string name="voice_stream_music">Hudba</string>
     <string name="warning_tile_layer_not_downloadable">Data pro mapovou vrstvu %1$s nelze stáhnout, zkuste je prosím znovu nainstalovat.</string>
@@ -2729,8 +2729,8 @@ Pokud potřebujete pomoci s aplikací OsmAnd, prosím kontaktujte naši podporu
     <string name="relief_smoothness_factor_descr">Priorita pro roviny nebo kopce</string>
     <string name="shared_string_slope">Svah</string>
     <string name="lang_ber">Berbersky</string>
-    <string name="do_not_send_anonymous_app_usage">Neposílat anonymní informace o používání aplikace</string>
-    <string name="do_not_send_anonymous_app_usage_desc">Odesílá všeobecné informace o obrazovce používané během sezení. Nesbíráme žádné informace o poloze, ani data související se zadávanými údaji uživatelem.</string>
+    <string name="do_not_send_anonymous_app_usage">Neposílat anonymní statistiky používání aplikace</string>
+    <string name="do_not_send_anonymous_app_usage_desc">Odesílá všeobecné informace o obrazovce používané během sezení. Nesbíráme žádné informace o poloze ani data související s údaji zadávanými uživatelem.</string>
     <string name="do_not_show_startup_messages">Nezobrazovat zprávy při spuštění</string>
     <string name="do_not_show_startup_messages_desc">Zobrazuje slevy aplikace a mimořádné zprávy o lokálních událostech</string>
     <string name="parking_options">Možnosti parkování</string>
@@ -2740,4 +2740,17 @@ Pokud potřebujete pomoci s aplikací OsmAnd, prosím kontaktujte naši podporu
     <string name="driving_region_automatic">Automaticky</string>
     <string name="restore_purchases">Obnovit nákupy</string>
     <string name="fonts_header">Písma pro mapu</string>
+    <string name="type_address">Zadejte adresu</string>
+    <string name="type_city_town">Zadejte město</string>
+    <string name="type_postcode">Zadejte směrovací číslo</string>
+    <string name="nearest_cities">Nejbližší města</string>
+    <string name="select_city">Zvolte město</string>
+    <string name="select_postcode">Zvolte směrovací číslo</string>
+    <string name="quick_action_auto_zoom">Automatické přiblížení mapy</string>
+    <string name="quick_action_auto_zoom_desc">Stisknutím akčního tlačítka zapnete/vypnete automatické přibližování mapy v závislosti na vaší rychlosti.</string>
+    <string name="quick_action_auto_zoom_on">Automatické přiblížení zapnuto</string>
+    <string name="quick_action_auto_zoom_off">Automatické přiblížení vypnuto</string>
+    <string name="quick_action_add_destination">Přidat cíl</string>
+    <string name="quick_action_replace_destination">Nahradit cíl</string>
+    <string name="quick_action_add_first_intermediate">Přidat první mezicíl</string>
     </resources>
