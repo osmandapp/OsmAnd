@@ -121,7 +121,7 @@
 
     <string name="choose_audio_stream">Wyjście dźwięku nawigacji głosowej</string>
     <string name="choose_audio_stream_descr">Określa głośnik do odtwarzania nawigacji głosowej</string>
-    <string name="voice_stream_voice_call">Kanał głosowy (także próbuje przerwać muzykę z głośników)</string>
+    <string name="voice_stream_voice_call">Kanał głosowy (także przerywa odtwarzanie muzyki z głośników)</string>
     <string name="voice_stream_notification">Kanał powiadomień</string>
     <string name="voice_stream_music">Kanał media/music</string>
     <string name="warning_tile_layer_not_downloadable">Program nie może pobrać warstwy %1$s, spróbuj ją przeinstalować.</string>
@@ -1207,9 +1207,9 @@ Niektóre z podstawowych funkcji:
 
     <string name="driving_region_japan">Japonia</string>
     <string name="driving_region_us">Stany Zjednoczone</string>
-    <string name="driving_region_europe_asia">Europa i Azja</string>
+    <string name="driving_region_europe_asia">Europa i Azja, Ameryka Łaciński i podobne</string>
     <string name="driving_region_uk">Wielka Brytania, Indie i inne</string>
-    <string name="driving_region_descr">Wybiera region poruszania się: Stany Zjednoczone, Europa, Wielka Brytania, Azja oraz Inne</string>
+    <string name="driving_region_descr">Wybiera region poruszania się: Stany Zjednoczone, Europa, Wielka Brytania, Azja oraz inne</string>
     <string name="driving_region">Region ruchu</string>
     <string name="driving_region_canada">Kanada</string>
     <string name="map_widget_fps_info">Informacje diagnozowania błędów FPS</string>
@@ -2851,7 +2851,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
  i więcej...
  "</string>
 	<string name="rendering_attr_depthContours_description">Wyświetla kontury i punkty głębi</string>
-    <string name="rendering_attr_depthContours_name">Kontury głębi</string>
+    <string name="rendering_attr_depthContours_name">Mapy batymetryczne</string>
 	<string name="routing_attr_height_relief_smoothness_factor_name">Współczynnik gładkości rzeźby terenu</string>
     <string name="routing_attr_height_relief_smoothness_factor_description">Więcej równin lub więcej wzgórz</string>
     <string name="routing_attr_height_obstacles_name">Użyj danych wysokościowych</string>
@@ -2895,7 +2895,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="routing_attr_driving_style_safety_name">Bezpieczny</string>
     <string name="routing_attr_relief_smoothness_factor_name">Współczynnik gładkości cieniowania terenu</string>
     <string name="do_not_send_anonymous_app_usage">Nie wysyłaj anonimowych statystyk użytkowania</string>
-    <string name="do_not_send_anonymous_app_usage_desc">Wysyła ogólne informacje dotyczące użytkowania ekranu podczas sesji. Nie zbieramy jakichkolwiek danych lokalizacyjnych i danych wpisywanych przez użytkownika.</string>
+    <string name="do_not_send_anonymous_app_usage_desc">OsmAnd wysyła ogólne informacje dotyczące użytkowania ekranu podczas sesji. Nie zbieramy jakichkolwiek danych lokalizacyjnych i danych wpisywanych przez użytkownika.</string>
     <string name="do_not_show_startup_messages">Nie pokazuj wiadomości przy starcie</string>
     <string name="do_not_show_startup_messages_desc">Wyświetla wiadomości dotyczące rabatów i specjalnych wydarzeń lokalnych</string>
     <string name="parking_options">Opcje parkowania</string>
@@ -2918,4 +2918,25 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="quick_action_add_destination_desc">Ustala cel trasy w położeniu na środku ekranu a poprzednio ustalony cel zamienia na ostatni cel pośredni.</string>
     <string name="quick_action_replace_destination_desc">Zastępuje cel trasy położeniem na środku ekranu.</string>
     <string name="quick_action_add_first_intermediate_desc">Ustala pierwszy cel pośredni trasy w położeniu na środku ekranu.</string>
+    <string name="type_address">Wpisz adres</string>
+    <string name="type_city_town">Wpisz miasto</string>
+    <string name="type_postcode">Wpisz kod pocztowy</string>
+    <string name="nearest_cities">Pobliskie miasta</string>
+    <string name="select_city">Wybierz miasto</string>
+    <string name="select_postcode">Wybierz kod pocztowy</string>
+    <string name="subscribe_email_desc">Zapisz się do naszej subskrypcji dotyczącej rabatów na aplikację i zgarnij 3 dodatkowe pobrania map!</string>
+    <string name="depth_contour_descr">Zastaw map przedstawiających punkty głębokości i poziomice dna morskiego (oparty na siatce dokładności 30 sekund kątowych).</string>
+    <string name="sea_depth_thanks">Dziękujemy za zakup map batymetrycznych!</string>
+    <string name="index_item_depth_contours_osmand_ext">Mapy batymetryczne</string>
+    <string name="index_item_depth_points_southern_hemisphere">Mapy batymetryczne półkuli południowej</string>
+    <string name="index_item_depth_points_northern_hemisphere">Mapy batymetryczne półkuli północnej</string>
+    <string name="download_depth_countours">Mapy batymetryczne</string>
+    <string name="analyze_on_map">Analizuj na mapie</string>
+    <string name="fonts_header">Kroje pisma mapy</string>
+    <string name="shared_string_paused">Wstrzymano</string>
+    <string name="osmand_extended_description_part1">"
+ OsmAnd (OSM Automatyczne Nawigowanie Do celu) mapą i aplikacją nawigacji z dostępem do darmowych światowych wysokiej jakości danych OpenStreetMap (OSM).
+
+ Rozkoszuj się głosową i optyczną nawigacją, przeglądaniem użytecznych miejsc (ang. POI), tworzeniem i zarządzaniem śladami GPX, wyświetlaniem poziomic i informacji o wysokości (przez zewnętrzną wtyczkę), wyborem między trybami samochodowym, rowerowym i pieszym, edycją OSM i więcej.
+ "</string>
     </resources>
