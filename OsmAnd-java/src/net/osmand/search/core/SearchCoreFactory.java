@@ -41,6 +41,7 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -355,6 +356,15 @@ public class SearchCoreFactory {
 							}
 							if (!phrase.getNameStringMatcher().matches(stripBraces(sr.localeName))) {
 								sr.priorityDistance = 5;
+							}
+							String searchTextLower = phrase.getUnknownSearchWord().toLowerCase();
+							if (!Algorithms.isEmpty(searchTextLower) && !sr.localeName.toLowerCase().contains(searchTextLower)) {
+								for (String otherName : sr.otherNames) {
+									if (otherName.toLowerCase().contains(searchTextLower)) {
+										sr.localeName = sr.localeName + " (" + otherName + ")";
+										break;
+									}
+								}
 							}
 							sr.objectType = ObjectType.STREET;
 							sr.localeRelatedObjectName = ((Street)object).getCity().getName(phrase.getSettings().getLang(), phrase.getSettings().isTransliterate());
@@ -865,6 +875,15 @@ public class SearchCoreFactory {
 					if (phrase.isUnknownSearchWordPresent()
 							&& !(nm.matches(res.localeName) || nm.matches(res.otherNames))) {
 						continue;
+					}
+					String searchTextLower = phrase.getUnknownSearchWord().toLowerCase();
+					if (!Algorithms.isEmpty(searchTextLower) && !res.localeName.toLowerCase().contains(searchTextLower)) {
+						for (String otherName : res.otherNames) {
+							if (otherName.toLowerCase().contains(searchTextLower)) {
+								res.localeName = res.localeName + " (" + otherName + ")";
+								break;
+							}
+						}
 					}
 					res.localeRelatedObjectName = c.getName(phrase.getSettings().getLang(), phrase.getSettings().isTransliterate());
 					res.object = object;
