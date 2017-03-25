@@ -1787,4 +1787,8 @@
 	<string name="poi_payment_paypal_no">その他_PayPal不可</string>
 	<string name="poi_payment_u_key_yes">その他_U-Key</string>
 	<string name="poi_payment_u_key_no">その他_U-Key不可</string>
+	<string name="poi_payment_token_yes">その他_トークン(クーポン、パウチャー、ギフト券等)</string>
+	<string name="poi_payment_token_no">その他_トークン(クーポン、パウチャー、ギフト券等)不可</string>
+	<string name="poi_payment_gift_card_yes">その他_ギフト券</string>
+	<string name="poi_payment_gift_card_no">その他_ギフト券不可</string>
 	</resources>
