@@ -864,7 +864,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="switch_to_vector_map_to_see">Для гэтага рэгіёну даступныя лякальныя вэктарныя мапы.\n\t\n\tДля іх выкарыстаньня абярыце пункт мэню \'Налада мапы\' → \'Крыніца мапы…\' → \'Лякальныя вэктарныя мапы\'.</string>
 	<string name="choose_audio_stream">Вывад галасавых падказак</string>
 	<string name="choose_audio_stream_descr">Абярыце канал для галасавых падказак</string>
-	<string name="voice_stream_voice_call">Канал телефанаваньня (таксама спрабуе спыніць музыку з дынамікаў)</string>
+	<string name="voice_stream_voice_call">Канал телефанаваньня (таксама спыняе музыку з дынамікаў)</string>
 	<string name="voice_stream_notification">Канал апавяшчэньня</string>
 	<string name="voice_stream_music">Мэдыя/музычны канал</string>
 	<string name="warning_tile_layer_not_downloadable">Дастасаваньне не можа сьцягнуць слой мапы %1$s, паспрабуйце пераўсталяваць яе.</string>
@@ -2912,4 +2912,13 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="restore_purchases">Аднаўленне пакупак</string>
     <string name="fonts_header">Шрыфты для мапы</string>
     <string name="quick_action_auto_zoom">Аўтамаштаб мапы ўкл/адкл</string>
+    <string name="nearest_cities">Бліжэйшыя гарады</string>
+    <string name="select_city">Абраць горад</string>
+    <string name="select_postcode">Абраць паштовы індэкс</string>
+    <string name="quick_action_add_destination">Дадаць месца прызначэння</string>
+    <string name="quick_action_replace_destination">Замяніць пункт прызначэння</string>
+    <string name="quick_action_add_first_intermediate">Дадаць прамежкавы пункт</string>
+    <string name="subscribe_email_error">Памылка</string>
+    <string name="quick_action_auto_zoom_on">Аўтамаштаб уключаны</string>
+    <string name="quick_action_auto_zoom_off">Аўтамаштаб адключаны</string>
     </resources>
