@@ -2970,9 +2970,9 @@ Repræsenterer område: %1$s x %2$s</string>
   • Viser IP\'er (interessepunkter) i nærheden
   • Justerer kortet til bevægelsesretning (eller kompas)
   • Viser hvor du er og hvor du kigger på
-  • Del placering, så dine venner kan finde dig
+  • Del placering, så andre kan finde dig
   • Gem vigtige steder i favoritter
-  • Giver mulighed for at vælge, hvordan navne vises på kortet: på engelsk, lokale- eller fonetiske- stavemåde
+  • Giver mulighed for at vælge, hvordan navne vises på kortet: på engelsk, lokal eller fonetisk stavemåde
   • Viser specialiserede online kortfliser, satellitvisning (fra Bing), forskellige overlejringer som touring/navigation GPX-spor og yderligere lag med tilpasselig gennemsigtighed
  "</string>
     <string name="osmand_extended_description_part4">"
