@@ -243,7 +243,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 	private void initTopControls() {
 		View configureMap = mapActivity.findViewById(R.id.map_layers_button);
-		layersHud = createHudButton(configureMap, R.drawable.ic_world_globe_dark)
+		layersHud = createHudButton(configureMap, R.drawable.map_world_globe_dark)
 				.setIconColorId(R.color.on_map_icon_color, 0)
 				.setBg(R.drawable.btn_inset_circle_trans, R.drawable.btn_inset_circle_night);
 		controls.add(layersHud);
@@ -727,7 +727,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		mapZoomOut.updateVisibility(!routeDialogOpened);
 		compassHud.updateVisibility(!routeDialogOpened && !trackDialogOpened && shouldShowCompass());
 
-		if (layersHud.setIconResId(settings.getApplicationMode().getSmallIconDark())) {
+		if (layersHud.setIconResId(settings.getApplicationMode().getMapIconId())) {
 			layersHud.update(app, isNight);
 		}
 		layersHud.updateVisibility(!routeDialogOpened && !trackDialogOpened);
