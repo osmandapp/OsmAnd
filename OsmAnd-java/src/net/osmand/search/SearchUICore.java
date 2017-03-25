@@ -39,7 +39,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class SearchUICore {
 
-	private static final int TIMEOUT_BETWEEN_CHARS = 700;
+	private static final int TIMEOUT_BETWEEN_CHARS = 400;
 	private static final Log LOG = PlatformUtil.getLog(SearchUICore.class);
 	private SearchPhrase phrase;
 	private SearchResultCollection  currentSearchResult;
