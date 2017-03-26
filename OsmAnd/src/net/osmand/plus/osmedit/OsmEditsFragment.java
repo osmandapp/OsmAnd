@@ -25,6 +25,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -60,6 +61,7 @@ public class OsmEditsFragment extends OsmAndListFragment
 	OsmEditingPlugin plugin;
 
 	private OsmEditsAdapter listAdapter;
+	private View footerView;
 
 	private boolean selectionMode = false;
 
@@ -124,6 +126,8 @@ public class OsmEditsFragment extends OsmAndListFragment
 		} else {
 			((ActionBarProgressActivity) getActivity()).getClearToolbar(false);
 		}
+		((ActionBarProgressActivity) getActivity()).updateListViewFooter(footerView);
+
 		MenuItem item = menu.add(R.string.local_openstreetmap_uploadall).
 				setIcon(R.drawable.ic_action_export);
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
@@ -288,6 +292,7 @@ public class OsmEditsFragment extends OsmAndListFragment
 		getView().findViewById(R.id.select_all).setVisibility(selectionMode ? View.VISIBLE : View.GONE);
 		((FavoritesActivity) getActivity()).setToolbarVisibility(!selectionMode &&
 				AndroidUiHelper.isOrientationPortrait(getActivity()));
+		((FavoritesActivity) getActivity()).updateListViewFooter(footerView);
 	}
 
 	public OsmandActionBarActivity getActionBarActivity() {
@@ -312,8 +317,16 @@ public class OsmEditsFragment extends OsmAndListFragment
 		dataPoints.addAll(l2);
 		if (listAdapter == null) {
 			listAdapter = new OsmEditsAdapter(dataPoints);
-			getListView().setAdapter(listAdapter);
-			getListView().setOnItemClickListener(new OnItemClickListener() {
+			ListView listView = getListView();
+			if (dataPoints.size() > 0) {
+				//listView.addHeaderView(getActivity().getLayoutInflater().inflate(R.layout.list_shadow_header, null, false));
+				footerView = getActivity().getLayoutInflater().inflate(R.layout.list_shadow_footer, null, false);
+				listView.addFooterView(footerView);
+				listView.setHeaderDividersEnabled(false);
+				listView.setFooterDividersEnabled(false);
+			}
+			listView.setAdapter(listAdapter);
+			listView.setOnItemClickListener(new OnItemClickListener() {
 
 				@Override
 				public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

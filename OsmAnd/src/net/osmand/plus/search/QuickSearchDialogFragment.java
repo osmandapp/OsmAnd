@@ -1122,7 +1122,9 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 					app.getString(R.string.coords_search), new OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					QuickSearchCoordinatesFragment.showDialog(QuickSearchDialogFragment.this, "");
+					LatLon latLon = searchUICore.getSearchSettings().getOriginalLocation();
+					QuickSearchCoordinatesFragment.showDialog(QuickSearchDialogFragment.this,
+							latLon.getLatitude(), latLon.getLongitude());
 				}
 			}));
 

@@ -8,6 +8,7 @@ import android.content.res.TypedArray;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.content.ContextCompat;
@@ -110,6 +111,8 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 	private GpxInfo currentRecording;
 	private boolean showOnMapMode;
 	private View currentGpxView;
+	private View footerView;
+	private boolean importing = false;
 
 	@Override
 	public void onAttach(Context activity) {
@@ -123,6 +126,21 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		selectedGpxHelper = ((OsmandApplication) activity.getApplicationContext()).getSelectedGpxHelper();
 		allGpxAdapter = new GpxIndexesAdapter(getActivity());
 		setAdapter(allGpxAdapter);
+	}
+
+	public boolean isImporting() {
+		return importing;
+	}
+
+	public void startImport() {
+		this.importing = true;
+	}
+
+	public void finishImport(boolean success) {
+		if (success) {
+			reloadTracks();
+		}
+		this.importing = false;
 	}
 
 	private void startHandler() {
@@ -148,15 +166,18 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 	@Override
 	public void onResume() {
 		super.onResume();
-		if (asyncLoader == null || asyncLoader.getResult() == null) {
-			asyncLoader = new LoadGpxTask();
-			asyncLoader.execute(getActivity());
-		} else {
-			allGpxAdapter.refreshSelected();
-			allGpxAdapter.notifyDataSetChanged();
+
+		if (!importing) {
+			if (asyncLoader == null || asyncLoader.getResult() == null) {
+				asyncLoader = new LoadGpxTask();
+				asyncLoader.execute(getActivity());
+			} else {
+				allGpxAdapter.refreshSelected();
+				allGpxAdapter.notifyDataSetChanged();
+			}
+			asyncProcessor = new ProcessGpxTask();
+			asyncProcessor.execute();
 		}
-		asyncProcessor = new ProcessGpxTask();
-		asyncProcessor.execute();
 		updateCurrentTrack();
 
 		updateEnable = true;
@@ -293,7 +314,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			View headerView = inflater.inflate(R.layout.list_shadow_header, null, false);
 			listView.addHeaderView(headerView);
 		}
-		View footerView = inflater.inflate(R.layout.list_shadow_footer, null, false);
+		footerView = inflater.inflate(R.layout.list_shadow_footer, null, false);
 		listView.addFooterView(footerView);
 		if (this.adapter != null) {
 			listView.setAdapter(this.adapter);
@@ -328,6 +349,15 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		}
 		newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		a.startActivity(newIntent);
+	}
+
+	public void reloadTracks() {
+		asyncLoader = new LoadGpxTask();
+		asyncLoader.execute(getActivity());
+		if (asyncProcessor == null) {
+			asyncProcessor = new ProcessGpxTask();
+			asyncProcessor.execute();
+		}
 	}
 
 	@Override
@@ -376,6 +406,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		} else {
 			((FavoritesActivity) getActivity()).getClearToolbar(false);
 		}
+		((FavoritesActivity) getActivity()).updateListViewFooter(footerView);
 
 		// TODO Rewrite without ContextMenuAdapter
 		optionsMenuAdapter = new ContextMenuAdapter();
@@ -383,12 +414,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			@Override
 			public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, final int itemId, int pos, boolean isChecked) {
 				if (itemId == R.string.local_index_mi_reload) {
-					asyncLoader = new LoadGpxTask();
-					asyncLoader.execute(getActivity());
-					if (asyncProcessor == null) {
-						asyncProcessor = new ProcessGpxTask();
-						asyncProcessor.execute();
-					}
+					reloadTracks();
 				} else if (itemId == R.string.shared_string_show_on_map) {
 					openShowOnMapMode();
 				} else if (itemId == R.string.shared_string_delete) {
@@ -400,10 +426,17 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 									doAction(itemId);
 								}
 							});
+				} else if (itemId == R.string.gpx_add_track) {
+					addTrack();
 				}
 				return true;
 			}
 		};
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+			optionsMenuAdapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.gpx_add_track, getActivity())
+					.setIcon(R.drawable.ic_action_plus)
+					.setListener(listener).createItem());
+		}
 		optionsMenuAdapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.shared_string_show_on_map, getActivity())
 				.setIcon(R.drawable.ic_show_on_map)
 				.setListener(listener).createItem());
@@ -429,7 +462,6 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			if (contextMenuItem.getIcon() != -1) {
 				item.setIcon(contextMenuItem.getIcon());
 			}
-
 		}
 	}
 
@@ -458,6 +490,10 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		return super.onOptionsItemSelected(item);
 	}
 
+	private void addTrack() {
+		((FavoritesActivity) getActivity()).addTrack();
+	}
+
 	public void showProgressBar() {
 		((FavoritesActivity) getActivity()).setSupportProgressBarIndeterminateVisibility(true);
 	}
@@ -481,6 +517,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		if (AndroidUiHelper.isOrientationPortrait(getActivity())) {
 			((FavoritesActivity) getActivity()).setToolbarVisibility(!selectionMode &&
 					AndroidUiHelper.isOrientationPortrait(getActivity()));
+			((FavoritesActivity) getActivity()).updateListViewFooter(footerView);
 		}
 	}
 

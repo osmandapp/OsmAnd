@@ -13,6 +13,7 @@
         android:src="@drawable/bg_shadow_list_bottom"/>
 
     <View
+        android:id="@+id/bottomMarginView"
         android:layout_width="match_parent"
         android:layout_height="16dp"/>
 
