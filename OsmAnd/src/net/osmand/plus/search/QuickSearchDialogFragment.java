@@ -20,7 +20,10 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
+import android.text.Spannable;
+import android.text.SpannableString;
 import android.text.TextWatcher;
+import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -41,6 +44,8 @@ import net.osmand.Location;
 import net.osmand.ResultMatcher;
 import net.osmand.access.AccessibilityAssistant;
 import net.osmand.access.NavigationInfo;
+import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.data.City;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.osm.AbstractPoiType;
@@ -63,6 +68,7 @@ import net.osmand.plus.activities.MapActivity.ShowQuickSearchMode;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
 import net.osmand.plus.poi.PoiUIFilter;
+import net.osmand.plus.resources.RegionAddressRepository;
 import net.osmand.plus.search.QuickSearchHelper.SearchHistoryAPI;
 import net.osmand.plus.search.listitems.QuickSearchButtonListItem;
 import net.osmand.plus.search.listitems.QuickSearchHeaderListItem;
@@ -1064,7 +1070,29 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 				stopAddressSearch();
 			}
 
+			OsmandSettings settings = app.getSettings();
 			List<QuickSearchListItem> rows = new ArrayList<>();
+
+			final SearchResult lastCityResult = getLastCityResult();
+			if (lastCityResult != null) {
+				String selectStreets = app.getString(R.string.select_streets);
+				String inCityName = app.getString(R.string.shared_string_in_name, settings.getLastSearchedCityName());
+				Spannable spannable = new SpannableString(selectStreets + " " + inCityName);
+				boolean light = settings.isLightContent();
+				spannable.setSpan(new ForegroundColorSpan(getResources().getColor(light ? R.color.icon_color : R.color.color_white)),
+						selectStreets.length() + 1, spannable.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+				rows.add(new QuickSearchButtonListItem(app, R.drawable.ic_action_street_name,
+						spannable, new OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						completeQueryWithObject(lastCityResult);
+
+						searchEditText.requestFocus();
+						AndroidUtils.softKeyboardDelayed(searchEditText);
+					}
+				}));
+			}
 			rows.add(new QuickSearchButtonListItem(app, R.drawable.ic_action_building_number,
 					app.getString(R.string.select_city), new OnClickListener() {
 				@Override
@@ -1073,6 +1101,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 					startCitySearch();
 					updateTabbarVisibility(false);
 					runCoreSearch("", false, false);
+
 					searchEditText.requestFocus();
 					AndroidUtils.softKeyboardDelayed(searchEditText);
 				}
@@ -1112,6 +1141,53 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			e.printStackTrace();
 			app.showToastMessage(e.getMessage());
 		}
+	}
+
+	private SearchResult getLastCityResult() throws IOException {
+		OsmandSettings settings = app.getSettings();
+		final long lastCityId = settings.getLastSearchedCity();
+		final LatLon lastPoint = settings.getLastSearchedPoint();
+		if (lastCityId != -1 && lastPoint != null) {
+			final String lastCityName = settings.getLastSearchedCityName();
+			LatLon prevLatLon = startLastCitySearch(lastPoint);
+			SearchResultCollection lastCity = searchUICore.shallowSearch(SearchAddressByNameAPI.class, lastCityName, new ResultMatcher<SearchResult>() {
+
+				boolean cityFound = false;
+
+				@Override
+				public boolean publish(SearchResult object) {
+					if (object.objectType == ObjectType.CITY && ((City) object.object).getId() == lastCityId) {
+						cityFound = true;
+						return true;
+					} else {
+						return false;
+					}
+				}
+
+				@Override
+				public boolean isCancelled() {
+					return cityFound;
+				}
+			});
+			if (addressSearch) {
+				startAddressSearch();
+			} else {
+				stopAddressSearch();
+			}
+			// Restore previous search location
+			searchUICore.updateSettings(searchUICore.getSearchSettings().setOriginalLocation(prevLatLon));
+
+			if (lastCity != null) {
+				List<SearchResult> results = lastCity.getCurrentSearchResults();
+				if (results.size() > 0) {
+					final SearchResult sr = results.get(0);
+					if (sr.objectType == ObjectType.CITY) {
+						return sr;
+					}
+				}
+			}
+		}
+		return null;
 	}
 
 	public void reloadHistory() {
@@ -1192,6 +1268,20 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 				.setRadiusLevel(1);
 
 		searchUICore.updateSettings(settings);
+	}
+
+	private LatLon startLastCitySearch(LatLon latLon) {
+		SearchSettings settings = searchUICore.getSearchSettings();
+		LatLon prevLatLon = settings.getOriginalLocation();
+		settings = settings.setEmptyQueryAllowed(true)
+				.setAddressSearch(true)
+				.setSortByName(false)
+				.setSearchTypes(ObjectType.CITY)
+				.setOriginalLocation(latLon)
+				.setRadiusLevel(1);
+
+		searchUICore.updateSettings(settings);
+		return prevLatLon;
 	}
 
 	private void startPostcodeSearch() {
@@ -1395,6 +1485,19 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		searchUICore.selectSearchResult(sr);
 		if (addressSearch) {
 			startAddressSearch();
+			if (sr.objectType == ObjectType.CITY) {
+				if (sr.relatedObject != null && sr.relatedObject instanceof BinaryMapIndexReader) {
+					File f = ((BinaryMapIndexReader) sr.relatedObject).getFile();
+					if (f != null) {
+						RegionAddressRepository region = app.getResourceManager().getRegionRepository(f.getName());
+						if (region != null) {
+							app.getSettings().setLastSearchedRegion(region.getFileName(), region.getEstimatedRegionCenter());
+							City city = (City) sr.object;
+							app.getSettings().setLastSearchedCity(city.getId(), sr.localeName, city.getLocation());
+						}
+					}
+				}
+			}
 		}
 		String txt = searchUICore.getPhrase().getText(true);
 		searchQuery = txt;

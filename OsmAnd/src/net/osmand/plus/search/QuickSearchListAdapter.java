@@ -220,7 +220,11 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 				view = (LinearLayout) convertView;
 			}
 
-			((TextView) view.findViewById(R.id.title)).setText(listItem.getName());
+			if (listItem.getSpannableName() != null) {
+				((TextView) view.findViewById(R.id.title)).setText(listItem.getSpannableName());
+			} else {
+				((TextView) view.findViewById(R.id.title)).setText(listItem.getName());
+			}
 		} else if (type == QuickSearchListItemType.BUTTON) {
 			if (convertView == null) {
 				LayoutInflater inflater = (LayoutInflater) app
@@ -231,7 +235,11 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 				view = (LinearLayout) convertView;
 			}
 			((ImageView) view.findViewById(R.id.imageView)).setImageDrawable(listItem.getIcon());
-			((TextView) view.findViewById(R.id.title)).setText(listItem.getName());
+			if (listItem.getSpannableName() != null) {
+				((TextView) view.findViewById(R.id.title)).setText(listItem.getSpannableName());
+			} else {
+				((TextView) view.findViewById(R.id.title)).setText(listItem.getName());
+			}
 		} else if (type == QuickSearchListItemType.SELECT_ALL) {
 			if (convertView == null) {
 				LayoutInflater inflater = (LayoutInflater) app
@@ -262,7 +270,11 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 			}
 			view.findViewById(R.id.top_divider)
 					.setVisibility(((QuickSearchHeaderListItem)listItem).isShowTopDivider() ? View.VISIBLE : View.GONE);
-			((TextView) view.findViewById(R.id.title)).setText(listItem.getName());
+			if (listItem.getSpannableName() != null) {
+				((TextView) view.findViewById(R.id.title)).setText(listItem.getSpannableName());
+			} else {
+				((TextView) view.findViewById(R.id.title)).setText(listItem.getName());
+			}
 		} else if (type == QuickSearchListItemType.TOP_SHADOW) {
 			if (convertView == null) {
 				LayoutInflater inflater = (LayoutInflater) app
@@ -314,7 +326,11 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 
 			imageView.setImageDrawable(listItem.getIcon());
 			String name = listItem.getName();
-			title.setText(name);
+			if (listItem.getSpannableName() != null) {
+				title.setText(listItem.getSpannableName());
+			} else {
+				title.setText(name);
+			}
 
 			String desc = listItem.getTypeName();
 			boolean hasDesc = false;
