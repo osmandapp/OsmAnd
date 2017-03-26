@@ -2884,4 +2884,18 @@ eta gehiago…
 
  Gozatu ahots bidezko nabigazioa edo nabigazio grafikoa, ikusi interesezko puntuak (POI),  sortu eta kudeatu GPX lorratzak, erabili sestra-kurbak eta altuera datuak (gehigarri abtek bidez), aukeratu kotxe, bizikleta eta oinezko moduen artean, editatu OSM, eta askoz gehiago.
  "</string>
+    <string name="type_address">Idatzi helbidea</string>
+    <string name="osmand_extended_description_part2">"
+ GPS nabigazioa
+ • Lineaz kanpo (Ibiltaritza kargurik ez atzerrian zaudenean) edo konektatuta (azkarragoa) aritzea erabaki dezakezu
+ • Biraz-birako ahots gidaketa bidean daramakizu (grabatutako eta sintetizatutako ahotsak)
+ • Ibilbidea berregin egiten da bidetik ateratzen bazara
+ • Erraien gida, kaleen izenak, eta heltzeko orduaren estimazioa bidean lagunduko zaituzte
+ • Bidaia seguruagoa egiteko, egun/gau moduak automatikoki aldatzen dira
+ • Abiadura muga bistaratzea aukeratu dezakezu, eta gainditzen baduzu abisuak jasotzea
+ • Maparen zooma abiadurara egokitzen da
+ • Helbidea, mota (adib. aparkalekua, jatetxea, hotela, gasolindegia, museoa) edo koordenatu geografikoen arabera bilatu ditzakezu helburuak
+ • Ibilbidean tarteko puntuentzat euskarria du
+ • Zure ibilbidea grabatu dezakezu edo GPX lorratz bat kargatu eta jarraitu dezakezu
+ "</string>
     </resources>
