@@ -1072,7 +1072,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 					searchEditText.setHint(R.string.type_city_town);
 					startCitySearch();
 					updateTabbarVisibility(false);
-					runSearch();
+					runCoreSearch("", false, false);
 					searchEditText.requestFocus();
 					AndroidUtils.softKeyboardDelayed(searchEditText);
 				}
@@ -1249,7 +1249,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	}
 
 	private void runCoreSearchInternal(String text, boolean updateResult, boolean searchMore) {
-		SearchResultCollection c = searchUICore.search(text, new ResultMatcher<SearchResult>() {
+		SearchResultCollection c = searchUICore.search(text, updateResult, new ResultMatcher<SearchResult>() {
 			SearchResultCollection regionResultCollection = null;
 			SearchCoreAPI regionResultApi = null;
 			List<SearchResult> results = new ArrayList<>();

@@ -39,7 +39,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class SearchUICore {
 
-	private static final int TIMEOUT_BETWEEN_CHARS = 400;
+	private static final int TIMEOUT_BETWEEN_CHARS = 700;
+	private static final int TIMEOUT_BEFORE_SEARCH = 50;
 	private static final Log LOG = PlatformUtil.getLog(SearchUICore.class);
 	private SearchPhrase phrase;
 	private SearchResultCollection  currentSearchResult;
@@ -353,7 +354,7 @@ public class SearchUICore {
 		return this.phrase;
 	}
 
-	public SearchResultCollection search(final String text, final ResultMatcher<SearchResult> matcher) {
+	public SearchResultCollection search(final String text, final boolean updateResult, final ResultMatcher<SearchResult> matcher) {
 		final int request = requestNumber.incrementAndGet();
 		final SearchPhrase phrase = this.phrase.generateNewPhrase(text, searchSettings);
 		this.phrase = phrase;
@@ -369,10 +370,12 @@ public class SearchUICore {
 						onSearchStart.run();
 					}
 					SearchResultMatcher rm = new SearchResultMatcher(matcher, phrase, request, requestNumber, totalLimit);
-					if(TIMEOUT_BETWEEN_CHARS > 0) {
+					if (TIMEOUT_BETWEEN_CHARS > 0 && updateResult) {
 						Thread.sleep(TIMEOUT_BETWEEN_CHARS);
+					} else if (TIMEOUT_BEFORE_SEARCH > 0) {
+						Thread.sleep(TIMEOUT_BEFORE_SEARCH);
 					}
-					if(rm.isCancelled()) {
+					if (rm.isCancelled()) {
 						return;
 					}
 					searchInBackground(phrase, rm);
