@@ -2892,4 +2892,6 @@ De Afganujo al Zimbabvo, de Aŭstralio al Usono, Argentino, Brazilo, Kanado, Fra
     <string name="select_city">Elekti urbon</string>
     <string name="select_postcode">Elekti poŝtkodon</string>
     <string name="type_address">Entajpu adreson</string>
+    <string name="select_streets">Elekti stratojn</string>
+    <string name="shared_string_in_name">en %1$s</string>
     </resources>
