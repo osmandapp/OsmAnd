@@ -2868,4 +2868,5 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="type_address">Zadajte adresu</string>
     <string name="select_street">Zvoľte ulicu</string>
     <string name="shared_string_in_name">v %1$s</string>
+    <string name="shared_string_overview">Prehľad</string>
     </resources>
