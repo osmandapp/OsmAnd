@@ -179,7 +179,7 @@ El espacio de almacenamiento usado es {1} MB.
 \n\nPara utilizarlo, activarlo en \'Menú\' → \'Configurar mapa\' → \'Fuente del mapa…\' → \'Mapas vectoriales sin conexión\'.</string>
     <string name="choose_audio_stream">Salida de los avisos de voz</string>
     <string name="choose_audio_stream_descr">Elige el canal para reproducir los avisos de voz</string>
-    <string name="voice_stream_voice_call">Audio de llamada de voz (también intenta interrumpir los altavoces BT del coche)</string>
+    <string name="voice_stream_voice_call">Audio de llamada de voz (también interrumpir los altavoces BT del coche)</string>
     <string name="voice_stream_notification">Notificación auditiva</string>
     <string name="voice_stream_music">Audio de multimedia</string>
     <string name="warning_tile_layer_not_downloadable">La aplicación no puede descargar la capa %1$s del mapa, intente reinstalar.</string>
@@ -1153,9 +1153,9 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="driving_region_japan">Japón</string>
     <string name="driving_region_us">Estados Unidos</string>
     <string name="driving_region_canada">Canadá</string>
-    <string name="driving_region_europe_asia">Europa y Asia</string>
+    <string name="driving_region_europe_asia">Europa, Asia, Latinoamérica y similares</string>
     <string name="driving_region_uk">Reino Unido, India y similar</string>
-    <string name="driving_region_descr">Seleccione la región de conducción: EEUU, Europa, Reino Unido, Asia, y otras</string>
+    <string name="driving_region_descr">Seleccione la región de conducción: EEUU, Europa, Reino Unido, Asia y otras</string>
     <string name="driving_region">Región de conducción</string>
     <string name="edit_tilesource_minzoom">Acercamiento mínimo</string>
     <string name="edit_tilesource_expiration_time">Expirar (minutos)</string>
@@ -2473,7 +2473,7 @@ El espacio de almacenamiento usado es {3} MB temporalmente y {1} MB permanenteme
     <string name="rendering_attr_contourColorScheme_name">Esquema de color de las curvas de nivel</string>
     <string name="rendering_attr_surfaceIntegrity_name">Integridad de la superficie de la carretera</string>
     <string name="search_hint">Escribe ciudad, dirección, nombre del PDI</string>
-    <string name="translit_name_if_miss">Transliterar si falta nombre de %1$s</string>
+    <string name="translit_name_if_miss">Transliterar nombres si no se encuentran en %1$s</string>
     <string name="translit_names">Transliterar nombres</string>
     <string name="edit_filter">Editar categorías</string>
     <string name="subcategories">Subcategorías</string>
@@ -2650,8 +2650,8 @@ Por favor proporciona un código completo</string>
     <string name="routing_attr_driving_style_safety_name">Seguridad</string>
     <string name="relief_smoothness_factor_descr">Prioridad a llanuras o colinas</string>
     <string name="lang_ber">Bereber</string>
-    <string name="do_not_send_anonymous_app_usage">No enviar datos anónimos de uso de la aplicación</string>
-    <string name="do_not_send_anonymous_app_usage_desc">"Envía información general sobre la pantalla usada durante la sesión. No recopilamos datos de geolocalización o de entrada de  usuario."</string>
+    <string name="do_not_send_anonymous_app_usage">No enviar estadísticas de uso anónimas de la aplicación</string>
+    <string name="do_not_send_anonymous_app_usage_desc">"La aplicación de OsmAnd, envía información general sobre la pantalla usada durante la sesión. No recopilamos datos de geolocalización o de entrada de  usuario."</string>
     <string name="do_not_show_startup_messages">No mostrar los mensajes en el inicio</string>
     <string name="do_not_show_startup_messages_desc">Muestra descuentos de la aplicación y mensajes de eventos locales</string>
     <string name="parking_options">Opciones de aparcamiento</string>
@@ -2741,7 +2741,7 @@ Cobertura y calidad aproximadas del mapa:
     <string name="quick_action_replace_destination">Sustituir destino</string>
     <string name="quick_action_add_first_intermediate">Añadir primer intermedio</string>
     <string name="quick_action_add_destination_desc">Tocando el botón de acción añadirá un destino en la ubicación de centro de la pantalla.</string>
-    <string name="quick_action_replace_destination_desc">Tocando el botón de acción sustituirá la ubicación del destino con la ubicación de centro de la pantalla.</string>
+    <string name="quick_action_replace_destination_desc">Tocando el botón de acción sustituirá el destino con la ubicación del centro de la pantalla.</string>
     <string name="quick_action_add_first_intermediate_desc">Tocando el botón de acción añadirá un primer punto intermedio en la ubicación de centro de la pantalla.</string>
     <string name="no_overlay">Sin superposición</string>
     <string name="no_underlay">Sin subyacente</string>
@@ -2762,4 +2762,13 @@ OsmAnd+ es la versión de pago de la aplicación. Al comprarla, estás apoyando 
 
 Algunas de las características principales:
  "</string>
+    <string name="select_streets">Seleccionar calles</string>
+    <string name="shared_string_in_name">en %1$s</string>
+    <string name="type_address">Escribe la dirección</string>
+    <string name="type_city_town">Escribe la ciudad o pueblo</string>
+    <string name="type_postcode">Escribe el código postal</string>
+    <string name="nearest_cities">Ciudades cercanas</string>
+    <string name="select_city">Selecciona la ciudad</string>
+    <string name="select_postcode">Selecciona el código postal</string>
+    <string name="shared_string_paused">Pausado</string>
     </resources>
