@@ -3,8 +3,12 @@
  */
 package net.osmand.plus.myplaces;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -23,6 +27,7 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.FavoritesTreeFragment;
 import net.osmand.plus.activities.TabActivity;
+import net.osmand.plus.helpers.GpxImportHelper;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip;
 
 import java.io.File;
@@ -35,10 +40,13 @@ import java.util.List;
  */
 public class FavoritesActivity extends TabActivity {
 
+	private static final int OPEN_GPX_DOCUMENT_REQUEST = 1006;
+
 	public static final int  GPX_TAB = R.string.shared_string_my_tracks;
 	public static final int  FAV_TAB = R.string.shared_string_my_favorites;
 	protected List<WeakReference<Fragment>> fragList = new ArrayList<>();
 	private int tabSize;
+	private GpxImportHelper gpxImportHelper;
 
 	@Override
 	public void onCreate(Bundle icicle) {
@@ -47,6 +55,8 @@ public class FavoritesActivity extends TabActivity {
 		super.onCreate(icicle);
 
 		app.logEvent(this, "myplaces_open");
+
+		gpxImportHelper = new GpxImportHelper(this, getMyApplication(), null);
 
 		//noinspection ConstantConditions
 		getSupportActionBar().setTitle(R.string.shared_string_my_places);
@@ -57,6 +67,54 @@ public class FavoritesActivity extends TabActivity {
 		List<TabItem> mTabs = getTabItems();
 		setTabs(mTabs);
 		// setupHomeButton();
+	}
+
+	@TargetApi(Build.VERSION_CODES.KITKAT)
+	public void addTrack() {
+		Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+		intent.setType("*/*");
+		startActivityForResult(intent, OPEN_GPX_DOCUMENT_REQUEST);
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (requestCode == OPEN_GPX_DOCUMENT_REQUEST && resultCode == Activity.RESULT_OK) {
+			if (data != null) {
+				Uri uri = data.getData();
+				AvailableGPXFragment gpxFragment = getGpxFragment();
+				if (gpxFragment!= null) {
+					gpxFragment.startImport();
+				}
+				gpxImportHelper.setGpxImportCompleteListener(new GpxImportHelper.OnGpxImportCompleteListener() {
+					@Override
+					public void onComplete(boolean success) {
+						AvailableGPXFragment gpxFragment = getGpxFragment();
+						if (gpxFragment!= null) {
+							gpxFragment.finishImport(success);
+						}
+						gpxImportHelper.setGpxImportCompleteListener(null);
+					}
+				});
+				if (!gpxImportHelper.handleGpxImport(uri, false)) {
+					if (gpxFragment!= null) {
+						gpxFragment.finishImport(false);
+					}
+				}
+			}
+		} else {
+			super.onActivityResult(requestCode, resultCode, data);
+		}
+	}
+
+	private AvailableGPXFragment getGpxFragment() {
+		AvailableGPXFragment gpxFragment = null;
+		for (WeakReference<Fragment> f : fragList) {
+			Fragment frag = f.get();
+			if (frag instanceof AvailableGPXFragment) {
+				gpxFragment = (AvailableGPXFragment) frag;
+			}
+		}
+		return gpxFragment;
 	}
 
 	private void setTabs(List<TabItem> mTabs) {

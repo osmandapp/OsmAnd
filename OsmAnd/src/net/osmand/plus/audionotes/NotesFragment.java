@@ -23,6 +23,7 @@ import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -59,7 +60,8 @@ public class NotesFragment extends OsmAndListFragment {
 	AudioVideoNotesPlugin plugin;
 	List<AudioVideoNotesPlugin.Recording> items;
 	NotesAdapter listAdapter;
-	
+	private View footerView;
+
 	private boolean selectionMode = false;
 
 	private final static int MODE_DELETE = 100;
@@ -118,8 +120,16 @@ public class NotesFragment extends OsmAndListFragment {
 	public void onResume() {
 		super.onResume();
 		items = new ArrayList<>(plugin.getAllRecordings());
+		ListView listView = getListView();
+		if (items.size() > 0) {
+			//listView.addHeaderView(getActivity().getLayoutInflater().inflate(R.layout.list_shadow_header, null, false));
+			footerView = getActivity().getLayoutInflater().inflate(R.layout.list_shadow_footer, null, false);
+			listView.addFooterView(footerView);
+			listView.setHeaderDividersEnabled(false);
+			listView.setFooterDividersEnabled(false);
+		}
 		listAdapter = new NotesAdapter(items);
-		getListView().setAdapter(listAdapter);
+		listView.setAdapter(listAdapter);
 	}
 
 	@Override
@@ -130,6 +140,8 @@ public class NotesFragment extends OsmAndListFragment {
 		} else {
 			((ActionBarProgressActivity) getActivity()).getClearToolbar(false);
 		}
+		((ActionBarProgressActivity) getActivity()).updateListViewFooter(footerView);
+
 		MenuItem item = menu.add(R.string.shared_string_share).
 				setIcon(R.drawable.ic_action_export);
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
@@ -172,6 +184,7 @@ public class NotesFragment extends OsmAndListFragment {
 			view.findViewById(R.id.select_all).setVisibility(selectionMode ? View.VISIBLE : View.GONE);
 			((FavoritesActivity) getActivity()).setToolbarVisibility(!selectionMode &&
 					AndroidUiHelper.isOrientationPortrait(getActivity()));
+			((FavoritesActivity) getActivity()).updateListViewFooter(footerView);
 		}
 	}
 	

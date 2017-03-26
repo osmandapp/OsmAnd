@@ -55,7 +55,10 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 	private static final String QUICK_SEARCH_COORDS_OLC_INFO_KEY = "quick_search_coords_olc_info_key";
 	private static final String QUICK_SEARCH_COORDS_FORMAT_KEY = "quick_search_coords_format_key";
 	private static final String QUICK_SEARCH_COORDS_USE_MAP_CENTER_KEY = "quick_search_coords_use_map_center_key";
+
 	private static final String QUICK_SEARCH_COORDS_TEXT_KEY = "quick_search_coords_text_key";
+	private static final String QUICK_SEARCH_COORDS_LATITUDE_KEY = "quick_search_coords_latitude_key";
+	private static final String QUICK_SEARCH_COORDS_LONGITUDE_KEY = "quick_search_coords_longitude_key";
 
 	private View view;
 	private View coordsView;
@@ -117,9 +120,19 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 		myLocation = app.getLocationProvider().getLastKnownLocation();
 		currentFormat = app.getSettings().COORDINATES_FORMAT.get();
 
+		latEdit = ((EditText) view.findViewById(R.id.latitudeEditText));
+		lonEdit = ((EditText) view.findViewById(R.id.longitudeEditText));
+		northingEdit = ((EditText) view.findViewById(R.id.northingEditText));
+		eastingEdit = ((EditText) view.findViewById(R.id.eastingEditText));
+		zoneEdit = ((EditText) view.findViewById(R.id.zoneEditText));
+		olcEdit = ((EditText) view.findViewById(R.id.olcEditText));
+		olcInfo = ((TextView) view.findViewById(R.id.olcInfoTextView));
+		formatEdit = ((EditText) view.findViewById(R.id.formatEditText));
+
 		String defaultLat = "";
 		String defaultZone = "";
 		String defaultOlc = "";
+		boolean coordinatesApplied = false;
 		if (getArguments() != null) {
 			String text = getArguments().getString(QUICK_SEARCH_COORDS_TEXT_KEY);
 			if (!Algorithms.isEmpty(text)) {
@@ -129,6 +142,14 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 					defaultOlc = text.trim();
 				} else {
 					defaultLat = text.trim();
+				}
+			} else {
+				double latitude = getArguments().getDouble(QUICK_SEARCH_COORDS_LATITUDE_KEY, Double.NaN);
+				double longitude = getArguments().getDouble(QUICK_SEARCH_COORDS_LONGITUDE_KEY, Double.NaN);
+				if (!Double.isNaN(latitude) && !Double.isNaN(longitude)) {
+					currentLatLon = new LatLon(latitude, longitude);
+					applyFormat(currentFormat, true);
+					coordinatesApplied = true;
 				}
 			}
 		}
@@ -153,28 +174,21 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 		else if (getArguments().containsKey(QUICK_SEARCH_COORDS_USE_MAP_CENTER_KEY))
 			useMapCenter = getArguments().getBoolean(QUICK_SEARCH_COORDS_USE_MAP_CENTER_KEY);
 
-		latEdit = ((EditText) view.findViewById(R.id.latitudeEditText));
-		lonEdit = ((EditText) view.findViewById(R.id.longitudeEditText));
-		northingEdit = ((EditText) view.findViewById(R.id.northingEditText));
-		eastingEdit = ((EditText) view.findViewById(R.id.eastingEditText));
-		zoneEdit = ((EditText) view.findViewById(R.id.zoneEditText));
-		olcEdit = ((EditText) view.findViewById(R.id.olcEditText));
-		olcInfo = ((TextView) view.findViewById(R.id.olcInfoTextView));
-		formatEdit = ((EditText) view.findViewById(R.id.formatEditText));
-
-		latEdit.setText(latStr);
-		latEdit.setSelection(latStr.length());
-		lonEdit.setText(lonStr);
-		lonEdit.setSelection(lonStr.length());
-		northingEdit.setText(northingStr);
-		northingEdit.setSelection(northingStr.length());
-		eastingEdit.setText(eastingStr);
-		eastingEdit.setSelection(eastingStr.length());
-		zoneEdit.setText(zoneStr);
-		zoneEdit.setSelection(zoneStr.length());
-		olcEdit.setText(olcStr);
-		olcEdit.setSelection(olcStr.length());
-		olcInfo.setText(olcInfoStr);
+		if (!coordinatesApplied) {
+			latEdit.setText(latStr);
+			latEdit.setSelection(latStr.length());
+			lonEdit.setText(lonStr);
+			lonEdit.setSelection(lonStr.length());
+			northingEdit.setText(northingStr);
+			northingEdit.setSelection(northingStr.length());
+			eastingEdit.setText(eastingStr);
+			eastingEdit.setSelection(eastingStr.length());
+			zoneEdit.setText(zoneStr);
+			zoneEdit.setSelection(zoneStr.length());
+			olcEdit.setText(olcStr);
+			olcEdit.setSelection(olcStr.length());
+			olcInfo.setText(olcInfoStr);
+		}
 
 		formatEdit.setText(PointDescription.formatToHumanString(app, currentFormat));
 		formatEdit.setOnClickListener(new View.OnClickListener() {
@@ -489,8 +503,8 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 		}
 	}
 
-	private boolean applyFormat(int format) {
-		if (currentFormat != format) {
+	private boolean applyFormat(int format, boolean forceApply) {
+		if (currentFormat != format || forceApply) {
 			int prevFormat = currentFormat;
 			currentFormat = format;
 			formatEdit.setText(PointDescription.formatToHumanString(getMyApplication(), currentFormat));
@@ -639,6 +653,15 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 		fragment.show(parentFragment.getChildFragmentManager(), TAG);
 	}
 
+	public static void showDialog(DialogFragment parentFragment, double latitude, double longitude) {
+		Bundle bundle = new Bundle();
+		bundle.putDouble(QUICK_SEARCH_COORDS_LATITUDE_KEY, latitude);
+		bundle.putDouble(QUICK_SEARCH_COORDS_LONGITUDE_KEY, longitude);
+		QuickSearchCoordinatesFragment fragment = new QuickSearchCoordinatesFragment();
+		fragment.setArguments(bundle);
+		fragment.show(parentFragment.getChildFragmentManager(), TAG);
+	}
+
 	public static class ChooseCoordsFormatDialogFragment extends DialogFragment {
 		@NonNull
 		@Override
@@ -656,7 +679,7 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 					.setSingleChoiceItems(entries, parent.currentFormat, new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
-							parent.applyFormat(which);
+							parent.applyFormat(which, false);
 							dialog.dismiss();
 						}
 					});

@@ -3,9 +3,13 @@ package net.osmand.plus.activities;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
+import net.osmand.AndroidUtils;
 import net.osmand.plus.R;
+import net.osmand.plus.myplaces.FavoritesActivity;
 
 public class ActionBarProgressActivity extends OsmandActionBarActivity {
 
@@ -44,6 +48,26 @@ public class ActionBarProgressActivity extends OsmandActionBarActivity {
 		View toolbar = findViewById(R.id.bottomControls);
 		if (toolbar != null) {
 			toolbar.setVisibility(visible ? View.VISIBLE : View.GONE);
+		}
+	}
+
+	public boolean isToolbarVisible() {
+		View toolbar = findViewById(R.id.bottomControls);
+		return toolbar != null && toolbar.getVisibility() == View.VISIBLE;
+	}
+
+	public void updateListViewFooter(View footerView) {
+		if (footerView != null) {
+			View bottomMarginView = footerView.findViewById(R.id.bottomMarginView);
+			if (bottomMarginView != null) {
+				if (isToolbarVisible()) {
+					bottomMarginView.setLayoutParams(new LinearLayout.LayoutParams(
+							ViewGroup.LayoutParams.MATCH_PARENT, AndroidUtils.dpToPx(this, 72f)));
+				} else {
+					bottomMarginView.setLayoutParams(new LinearLayout.LayoutParams(
+							ViewGroup.LayoutParams.MATCH_PARENT, AndroidUtils.dpToPx(this, 16f)));
+				}
+			}
 		}
 	}
 }

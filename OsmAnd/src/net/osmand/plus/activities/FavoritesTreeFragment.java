@@ -89,6 +89,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 	private SearchView searchView;
 	Drawable arrowImage;
 	private HashMap<String, OsmandSettings.OsmandPreference<Boolean>> preferenceCache = new HashMap<>();
+	private View footerView;
 
 	@Override
 	public void onAttach(Context context) {
@@ -141,7 +142,8 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 		favouritesAdapter.synchronizeGroups();
 		if (!favouritesAdapter.isEmpty()) {
 			listView.addHeaderView(inflater.inflate(R.layout.list_shadow_header, null, false));
-			listView.addFooterView(inflater.inflate(R.layout.list_shadow_footer, null, false));
+			footerView = inflater.inflate(R.layout.list_shadow_footer, null, false);
+			listView.addFooterView(footerView);
 		}
 		listView.setAdapter(favouritesAdapter);
 		setListView(listView);
@@ -275,6 +277,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 		} else {
 			((FavoritesActivity) getActivity()).getClearToolbar(false);
 		}
+		((FavoritesActivity) getActivity()).updateListViewFooter(footerView);
 
 
 		if (!MenuItemCompat.isActionViewExpanded(mi)) {
@@ -427,6 +430,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 		this.selectionMode = selectionMode;
 		((FavoritesActivity) getActivity()).setToolbarVisibility(!selectionMode &&
 				AndroidUiHelper.isOrientationPortrait(getActivity()));
+		((FavoritesActivity) getActivity()).updateListViewFooter(footerView);
 	}
 
 	protected void openChangeGroupDialog(final FavoriteGroup group) {

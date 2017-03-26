@@ -93,7 +93,7 @@
 	<color name="actionbar_dark_color">#39464d</color>
 	<color name="tool_bar_color_dark">#CC080B0D</color>
 	<color name="actionbar_light_color">#ff8f00</color>
-	<color name="tool_bar_color_light">#b4ff8f00</color>
+	<color name="tool_bar_color_light">#CC080B0D</color>
 
 	<color name="download_pressed_light">#8cff8f00</color>
 	<color name="download_pressed_dark">#be39464d</color>
