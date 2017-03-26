@@ -2858,4 +2858,5 @@ Algunas de las principales funciones:
     <string name="type_address">Escribe la dirección</string>
     <string name="select_streets">Elegir calles</string>
     <string name="shared_string_in_name">en %1$s</string>
+    <string name="shared_string_overview">Resumen</string>
     </resources>
