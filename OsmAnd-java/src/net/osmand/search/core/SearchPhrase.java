@@ -43,26 +43,68 @@ public class SearchPhrase {
 	private static final Pattern reg = Pattern.compile(ALLDELIMITERS);
 	private Collator clt;
 	
-	private static Set<String> conjunctionsThe = new TreeSet<>();
-	private static Set<String> conjunctionsAnd = new TreeSet<>();
+	private static Set<String> conjunctions = new TreeSet<>();
 	static {
 		// the
-		conjunctionsThe.add("the");
-		conjunctionsThe.add("der");
-		conjunctionsThe.add("den");
-		conjunctionsThe.add("die");
-		conjunctionsThe.add("das");
-		conjunctionsThe.add("la");
-		conjunctionsThe.add("le");
-		conjunctionsThe.add("el");
-		conjunctionsThe.add("il");
+		conjunctions.add("the");
+		conjunctions.add("der");
+		conjunctions.add("den");
+		conjunctions.add("die");
+		conjunctions.add("das");
+		conjunctions.add("la");
+		conjunctions.add("le");
+		conjunctions.add("el");
+		conjunctions.add("il");
 		// and
-		conjunctionsAnd .add("and");
-		conjunctionsAnd .add("und");
-		conjunctionsAnd .add("en");
-		conjunctionsAnd .add("et");
-		conjunctionsAnd .add("y");
-		conjunctionsAnd .add("и");
+		conjunctions.add("and");
+		conjunctions.add("und");
+		conjunctions.add("en");
+		conjunctions.add("et");
+		conjunctions.add("y");
+		conjunctions.add("и");
+		// short 
+		conjunctions.add("f");
+		conjunctions.add("u");
+		conjunctions.add("jl.");
+		conjunctions.add("j");
+		conjunctions.add("sk");
+		conjunctions.add("w");
+		conjunctions.add("a.");
+		conjunctions.add("of");
+		conjunctions.add("k");
+		conjunctions.add("r");
+		conjunctions.add("h");
+		conjunctions.add("mc");
+		conjunctions.add("sw");
+		conjunctions.add("g");
+		conjunctions.add("v");
+		conjunctions.add("m");
+		conjunctions.add("c.");
+		conjunctions.add("r.");
+		conjunctions.add("ct");
+		conjunctions.add("e.");
+		conjunctions.add("dr.");
+		conjunctions.add("j.");		
+		conjunctions.add("in");
+		conjunctions.add("al");
+		conjunctions.add("út");
+		conjunctions.add("per");
+		conjunctions.add("ne");
+		conjunctions.add("p");
+		conjunctions.add("et");
+		conjunctions.add("s.");
+		conjunctions.add("f.");
+		conjunctions.add("t");
+		conjunctions.add("fe");
+		conjunctions.add("à");
+		conjunctions.add("i");
+		conjunctions.add("c");
+		conjunctions.add("le");
+		conjunctions.add("s");
+		conjunctions.add("av.");
+		conjunctions.add("den");
+		conjunctions.add("dr");
+		conjunctions.add("y");
 	}
 	
 	
@@ -111,7 +153,7 @@ public class SearchPhrase {
 			boolean first = true;
 			for (int i = 0; i < ws.length ; i++) {
 				String wd = ws[i].trim();
-				if (wd.length() > 0 && !conjunctionsThe.contains(wd.toLowerCase())) {
+				if (wd.length() > 0 && !conjunctions.contains(wd.toLowerCase())) {
 					if (first) {
 						sp.unknownSearchWordTrim = wd;
 						first = false;
