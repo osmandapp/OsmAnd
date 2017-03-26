@@ -2,6 +2,8 @@ package net.osmand.plus.search.listitems;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.text.Spannable;
+
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.Amenity;
 import net.osmand.data.City;
@@ -71,6 +73,10 @@ public class QuickSearchListItem {
 
 	public String getName() {
 		return getName(app, searchResult);
+	}
+
+	public Spannable getSpannableName() {
+		return null;
 	}
 
 	public static String getName(OsmandApplication app, SearchResult searchResult) {

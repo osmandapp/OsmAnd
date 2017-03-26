@@ -9,6 +9,8 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="select_streets">Select streets</string>
+    <string name="shared_string_in_name">in %1$s</string>
     <string name="type_address">Type address</string>
     <string name="type_city_town">Type city or town</string>
     <string name="type_postcode">Type postcode</string>
