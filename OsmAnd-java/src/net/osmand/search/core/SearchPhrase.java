@@ -289,7 +289,7 @@ public class SearchPhrase {
 	}
 
 	public ObjectType[] getSearchTypes() {
-		return settings.getSearchTypes();
+		return settings == null ? null : settings.getSearchTypes();
 	}
 
 	public boolean isCustomSearch() {

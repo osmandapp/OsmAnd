@@ -508,7 +508,7 @@ public class SearchUICore {
 
 		@Override
 		public boolean publish(SearchResult object) {
-			if (!phrase.getNameStringMatcher().matches(object.localeName)) {
+			if (phrase != null && !phrase.getNameStringMatcher().matches(object.localeName)) {
 				for (String s : object.otherNames) {
 					if (phrase.getNameStringMatcher().matches(s)) {
 						object.alternateName = s;
