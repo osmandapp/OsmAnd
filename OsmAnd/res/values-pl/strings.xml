@@ -2918,9 +2918,9 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="quick_action_add_destination_desc">Ustala cel trasy w położeniu na środku ekranu a poprzednio ustalony cel zamienia na ostatni cel pośredni.</string>
     <string name="quick_action_replace_destination_desc">Zastępuje cel trasy położeniem na środku ekranu.</string>
     <string name="quick_action_add_first_intermediate_desc">Ustala pierwszy cel pośredni trasy w położeniu na środku ekranu.</string>
-    <string name="type_address">Wpisz adres</string>
-    <string name="type_city_town">Wpisz miasto</string>
-    <string name="type_postcode">Wpisz kod pocztowy</string>
+    <string name="type_address">Wprowadź adres</string>
+    <string name="type_city_town">Wprowadź miasto</string>
+    <string name="type_postcode">Wprowadź kod pocztowy</string>
     <string name="nearest_cities">Pobliskie miasta</string>
     <string name="select_city">Wybierz miasto</string>
     <string name="select_postcode">Wybierz kod pocztowy</string>
