@@ -381,13 +381,18 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 
 	private void showOnMap() {
 		if (currentLatLon != null) {
-			((QuickSearchDialogFragment)getParentFragment()).dismiss();
+			QuickSearchDialogFragment dialogFragment = (QuickSearchDialogFragment) getParentFragment();
+			dialogFragment.hideToolbar();
+			dialogFragment.hide();
+
 			PointDescription pointDescription =
 					new PointDescription(currentLatLon.getLatitude(), currentLatLon.getLongitude());
 			getMyApplication().getSettings().setMapLocationToShow(
 					currentLatLon.getLatitude(), currentLatLon.getLongitude(),
 					15, pointDescription, true, currentLatLon);
 			MapActivity.launchMapActivityMoveToTop(getActivity());
+
+			dismiss();
 		}
 	}
 

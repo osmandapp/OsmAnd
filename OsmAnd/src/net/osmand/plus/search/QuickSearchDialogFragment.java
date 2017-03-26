@@ -1089,6 +1089,13 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 					AndroidUtils.softKeyboardDelayed(searchEditText);
 				}
 			}));
+			rows.add(new QuickSearchButtonListItem(app, R.drawable.ic_action_marker_dark,
+					app.getString(R.string.coords_search), new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					QuickSearchCoordinatesFragment.showDialog(QuickSearchDialogFragment.this, "");
+				}
+			}));
 
 			if (res != null) {
 				rows.add(new QuickSearchHeaderListItem(app, app.getString(R.string.nearest_cities), true));
