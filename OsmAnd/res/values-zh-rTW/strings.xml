@@ -2807,8 +2807,8 @@ Facebook：https://www.facebook.com/osmandapp
 
  和更多…
  "</string>
-	<string name="rendering_attr_depthContours_description">顯示深度等高線和標記</string>
-    <string name="rendering_attr_depthContours_name">深度等高線</string>
+	<string name="rendering_attr_depthContours_description">顯示等深線和標記</string>
+    <string name="rendering_attr_depthContours_name">等深線</string>
 	<string name="routing_attr_height_relief_smoothness_factor_name">地貌柔滑系數</string>
     <string name="routing_attr_height_relief_smoothness_factor_description">更多的平原或丘陵</string>
     <string name="routing_attr_height_obstacles_name">使用海拔資料</string>
@@ -2866,4 +2866,54 @@ Facebook：https://www.facebook.com/osmandapp
     <string name="select_city">選擇城市</string>
     <string name="select_postcode">選擇郵遞區號</string>
     <string name="quick_action_auto_zoom">自動縮放地圖開/關</string>
+    <string name="quick_action_auto_zoom_on">自動縮放地圖開啟</string>
+    <string name="quick_action_auto_zoom_off">自動縮放地圖關閉</string>
+    <string name="quick_action_add_destination">增加目的地</string>
+    <string name="quick_action_replace_destination">更換目的地</string>
+    <string name="no_overlay">無上圖層</string>
+    <string name="no_underlay">無下圖層</string>
+    <string name="subscribe_email_error">錯誤</string>
+    <string name="sea_depth_thanks">感謝您購買海洋等深線！</string>
+    <string name="index_item_depth_contours_osmand_ext">等深線</string>
+    <string name="index_item_depth_points_southern_hemisphere">南半球深點</string>
+    <string name="index_item_depth_points_northern_hemisphere">北半球深點</string>
+    <string name="download_depth_countours">等深線</string>
+    <string name="nautical_maps">航海地圖</string>
+    <string name="analyze_on_map">在地圖上分析</string>
+    <string name="restore_purchases">恢復購買</string>
+    <string name="fonts_header">地圖字體</string>
+    <string name="right_side_navigation">右側駕駛</string>
+    <string name="driving_region_automatic">自動</string>
+    <string name="shared_string_paused">暫停</string>
+    <string name="osmand_plus_extended_description_part8">"
+ 大概的地圖覆蓋區域和品質：
+ • 西歐： ****
+ • 東歐： ***
+ • 俄羅斯： ***
+ • 北美洲： ***
+ • 南美洲： **
+ • 亞洲：**
+ • 日本和韓國： ***
+ • 中東： **
+ • 非洲： **
+ • 南極洲： *
+ 全球大多數國家都可以下載！
+ 從阿富汗到辛巴威，從澳大利亞到美國。 阿根廷、巴西、加拿大、法國、德國、墨西哥、英國、 西班牙 …
+ "</string>
+    <string name="osmand_plus_extended_description_part5">"
+ 安全功能
+ • 自動日/夜檢視切換選項
+ • 速限顯示功能選項，如果您超速了它會提醒
+ • 取決於速度的地圖縮放選項
+ • 分享您所在的位置的功能，這樣您的朋友能找到您
+ "</string>
+    <string name="osmand_plus_extended_description_part6">"
+ 自行車和步行功能
+ • 地圖包括步行，健行旅遊者，自行車道，非常適合戶外活動
+ • 特殊的自行車和行人的路線和顯示模式
+ • 任選的大眾運輸工具 (公共汽車、 電車、火車）包括線路名稱
+ • 任選的旅程錄製到裝置端 GPX 檔案或線上服務
+ • 任選的速度和高度顯示
+ • 顯示等高線和地形陰影（經由附加的外掛元件）
+ "</string>
     </resources>
