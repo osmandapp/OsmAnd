@@ -41,6 +41,15 @@ public class TrackDetailsMenuFragment extends Fragment {
 
 		mainView = view.findViewById(R.id.main_view);
 
+		TextView topBarTitle = (TextView) mainView.findViewById(R.id.top_bar_title);
+		if (topBarTitle != null) {
+			if (menu.getGpxItem().group != null) {
+				topBarTitle.setText(menu.getGpxItem().group.getGpxName());
+			} else {
+				topBarTitle.setText(mapActivity.getString(R.string.rendering_category_details));
+			}
+		}
+
 		ImageButton backButton = (ImageButton) mainView.findViewById(R.id.top_bar_back_button);
 		ImageButton closeButton = (ImageButton) mainView.findViewById(R.id.top_bar_close_button);
 		if (backButton != null) {
@@ -55,7 +64,6 @@ public class TrackDetailsMenuFragment extends Fragment {
 			closeButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					MapActivity.clearPrevActivityIntent();
 					dismiss();
 				}
 			});
@@ -75,7 +83,9 @@ public class TrackDetailsMenuFragment extends Fragment {
 				} else {
 					obs.removeGlobalOnLayoutListener(this);
 				}
-				updateInfo();
+				if (getMapActivity() != null) {
+					updateInfo();
+				}
 			}
 		});
 

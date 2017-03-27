@@ -674,6 +674,7 @@ public class GpxSelectionHelper {
 		public Bitmap image;
 		public boolean expanded;
 		public boolean route;
+		public boolean wasHidden = true;
 
 		public WptPt locationOnMap;
 		public GPXDataSetType[] chartTypes;

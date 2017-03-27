@@ -208,10 +208,14 @@ public class GpxUiHelper {
 		if (allGpxList.isEmpty()) {
 			Toast.makeText(activity, R.string.gpx_files_not_found, Toast.LENGTH_LONG).show();
 		}
-		allGpxList.add(0, new GPXInfo(activity.getString(R.string.show_current_gpx_title), 0, 0));
-		final ContextMenuAdapter adapter = createGpxContextMenuAdapter(allGpxList, selectedGpxList, true);
+		boolean showCurrentTrack = false;
+		if (OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class) != null) {
+			allGpxList.add(0, new GPXInfo(activity.getString(R.string.show_current_gpx_title), 0, 0));
+			showCurrentTrack = true;
+		}
+		final ContextMenuAdapter adapter = createGpxContextMenuAdapter(allGpxList, selectedGpxList, showCurrentTrack);
 
-		return createDialog(activity, true, true, true, callbackWithObject, allGpxList, adapter);
+		return createDialog(activity, showCurrentTrack, true, true, callbackWithObject, allGpxList, adapter);
 	}
 
 	public static AlertDialog selectGPXFile(final Activity activity,
@@ -1136,7 +1140,7 @@ public class GpxUiHelper {
 		} else {
 			yAxis = mChart.getAxisLeft();
 		}
-		yAxis.setTextColor(ActivityCompat.getColor(mChart.getContext(), R.color.gpx_chart_blue));
+		yAxis.setTextColor(ActivityCompat.getColor(mChart.getContext(), R.color.gpx_chart_blue_label));
 		yAxis.setGridColor(ActivityCompat.getColor(mChart.getContext(), R.color.gpx_chart_blue_grid));
 		yAxis.setGranularity(1f);
 		yAxis.resetAxisMinimum();
@@ -1234,7 +1238,7 @@ public class GpxUiHelper {
 		} else {
 			yAxis = mChart.getAxisLeft();
 		}
-		yAxis.setTextColor(ActivityCompat.getColor(mChart.getContext(), R.color.gpx_chart_orange));
+		yAxis.setTextColor(ActivityCompat.getColor(mChart.getContext(), R.color.gpx_chart_orange_label));
 		yAxis.setGridColor(ActivityCompat.getColor(mChart.getContext(), R.color.gpx_chart_orange_grid));
 		yAxis.setAxisMinimum(0f);
 
@@ -1354,7 +1358,7 @@ public class GpxUiHelper {
 		} else {
 			yAxis = mChart.getAxisLeft();
 		}
-		yAxis.setTextColor(ActivityCompat.getColor(mChart.getContext(), R.color.gpx_chart_green));
+		yAxis.setTextColor(ActivityCompat.getColor(mChart.getContext(), R.color.gpx_chart_green_label));
 		yAxis.setGridColor(ActivityCompat.getColor(mChart.getContext(), R.color.gpx_chart_green_grid));
 		yAxis.setGranularity(1f);
 		yAxis.resetAxisMinimum();

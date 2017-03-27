@@ -50,7 +50,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:layout_marginRight="@dimen/list_content_padding"
+                        android:layout_marginRight="8dp"
                         android:textColor="?android:attr/textColorPrimary"
                         android:textSize="@dimen/default_desc_text_size"
                         tools:text="@string/altitude"/>
@@ -59,7 +59,7 @@
                         android:id="@+id/y_axis_arrow"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:layout_marginRight="@dimen/list_content_padding"
+                        android:layout_marginRight="8dp"
                         android:src="@drawable/ic_action_arrow_drop_down"/>
 
                 </LinearLayout>
@@ -94,7 +94,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:layout_marginRight="@dimen/list_content_padding"
+                        android:layout_marginRight="8dp"
                         android:textColor="?android:attr/textColorPrimary"
                         android:textSize="@dimen/default_desc_text_size"
                         tools:text="@string/distance"/>
@@ -103,7 +103,7 @@
                         android:id="@+id/x_axis_arrow"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:layout_marginRight="@dimen/list_content_padding"
+                        android:layout_marginRight="8dp"
                         android:src="@drawable/ic_action_arrow_drop_down"/>
 
                 </LinearLayout>
