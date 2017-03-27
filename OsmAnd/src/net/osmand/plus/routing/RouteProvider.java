@@ -2,6 +2,7 @@ package net.osmand.plus.routing;
 
 
 import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -1252,7 +1253,7 @@ public class RouteProvider {
 		bpars.putDoubleArray("lons", lons);
 		bpars.putString("fast", params.fast ? "1" : "0");
 		bpars.putString("v", mode);
-		bpars.putString("trackFormat", "kml");
+		bpars.putString("trackFormat", "gpx");
 
 		OsmandApplication ctx = (OsmandApplication) params.ctx;
 		List<Location> res = new ArrayList<Location>();
@@ -1262,45 +1263,27 @@ public class RouteProvider {
 			return new RouteCalculationResult("BRouter service is not available");
 		}
 		try {
-			String kmlMessage = brouterService.getTrackFromParams(bpars);
-			if (kmlMessage == null)
-				kmlMessage = "no result from brouter";
-			if (!kmlMessage.startsWith("<")) {
-				return new RouteCalculationResult(kmlMessage);
+			String gpxMessage = brouterService.getTrackFromParams(bpars);
+			if (gpxMessage == null)
+				gpxMessage = "no result from brouter";
+			if (!gpxMessage.startsWith("<")) {
+				return new RouteCalculationResult(gpxMessage);
 			}
 
-			DocumentBuilder dom = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-			Document doc = dom.parse(new InputSource(new StringReader(kmlMessage)));
-			NodeList list = doc.getElementsByTagName("coordinates"); //$NON-NLS-1$
-			for (int i = 0; i < list.getLength(); i++) {
-				Node item = list.item(i);
-				String str = item.getFirstChild().getNodeValue();
-				if (str == null) {
-					continue;
-				}
-				int st = 0;
-				int next = 0;
-				while ((next = str.indexOf('\n', st)) != -1) {
-					String coordinate = str.substring(st, next + 1);
-					int s = coordinate.indexOf(',');
-					if (s != -1) {
-						try {
-							double lon = Double.parseDouble(coordinate.substring(0, s));
-							double lat = Double.parseDouble(coordinate.substring(s + 1));
-							Location l = new Location("router"); //$NON-NLS-1$
-							l.setLatitude(lat);
-							l.setLongitude(lon);
-							res.add(l);
-						} catch (NumberFormatException e) {
+			GPXFile gpxFile = GPXUtilities.loadGPXFile(
+					ctx, new ByteArrayInputStream(gpxMessage.getBytes("UTF-8")));
+
+			for (Track track : gpxFile.tracks) {
+				for (TrkSegment ts : track.segments) {
+					for (WptPt p : ts.points) {
+						Location l = new Location("router"); //$NON-NLS-1$
+						l.setLatitude(p.lat);
+						l.setLongitude(p.lon);
+						if (p.ele != Double.NaN) {
+							l.setAltitude(p.ele);
 						}
+						res.add(l);
 					}
-					st = next + 1;
-				}
-			}
-			if (list.getLength() == 0) {
-				if (doc.getChildNodes().getLength() == 1) {
-					Node item = doc.getChildNodes().item(0);
-					return new RouteCalculationResult(item.getNodeValue());
 				}
 			}
 		} catch (Exception e) {
