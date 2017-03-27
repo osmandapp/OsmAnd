@@ -308,6 +308,15 @@ public class OsmEditsFragment extends OsmAndListFragment
 	}
 
 	@Override
+	public void onActivityCreated(Bundle savedInstanceState) {
+		super.onActivityCreated(savedInstanceState);
+		getListView().setBackgroundColor(
+				getResources().getColor(
+						getMyApplication().getSettings().isLightContent() ? R.color.ctx_menu_info_view_bg_light
+								: R.color.ctx_menu_info_view_bg_dark));
+	}
+
+	@Override
 	public void onResume() {
 		super.onResume();
 		ArrayList<OsmPoint> dataPoints = new ArrayList<>();
@@ -318,7 +327,7 @@ public class OsmEditsFragment extends OsmAndListFragment
 		if (listAdapter == null) {
 			listAdapter = new OsmEditsAdapter(dataPoints);
 			ListView listView = getListView();
-			if (dataPoints.size() > 0) {
+			if (dataPoints.size() > 0 && footerView == null) {
 				//listView.addHeaderView(getActivity().getLayoutInflater().inflate(R.layout.list_shadow_header, null, false));
 				footerView = getActivity().getLayoutInflater().inflate(R.layout.list_shadow_footer, null, false);
 				listView.addFooterView(footerView);

@@ -115,13 +115,21 @@ public class NotesFragment extends OsmAndListFragment {
 		listAdapter.notifyDataSetInvalidated();
 	}
 
+	@Override
+	public void onActivityCreated(Bundle savedInstanceState) {
+		super.onActivityCreated(savedInstanceState);
+		getListView().setBackgroundColor(
+				getResources().getColor(
+						getMyApplication().getSettings().isLightContent() ? R.color.ctx_menu_info_view_bg_light
+								: R.color.ctx_menu_info_view_bg_dark));
+	}
 
 	@Override
 	public void onResume() {
 		super.onResume();
 		items = new ArrayList<>(plugin.getAllRecordings());
 		ListView listView = getListView();
-		if (items.size() > 0) {
+		if (items.size() > 0 && footerView == null) {
 			//listView.addHeaderView(getActivity().getLayoutInflater().inflate(R.layout.list_shadow_header, null, false));
 			footerView = getActivity().getLayoutInflater().inflate(R.layout.list_shadow_footer, null, false);
 			listView.addFooterView(footerView);
