@@ -481,7 +481,7 @@
     <string name="switch_to_vector_map_to_see">指定以離線向量地圖顯示\n\t\n\t啟用方式\'選單\' -&gt; \'組態地圖\' -&gt; \'地圖來源…\' -&gt; \'離線向量圖\'。</string>
     <string name="choose_audio_stream">語音導航輸出</string>
     <string name="choose_audio_stream_descr">選擇揚聲器播放語音導航</string>
-    <string name="voice_stream_voice_call">通話音訊 (也會嘗試中斷汽車 BT 音響)</string>
+    <string name="voice_stream_voice_call">通話音訊 (也會中斷汽車 BT 音響)</string>
     <string name="voice_stream_notification">通知音訊</string>
     <string name="voice_stream_music">多媒體/音樂音訊</string>
     <string name="warning_tile_layer_not_downloadable">無法下載 %1$s 圖層，請嘗試重新安裝。</string>
@@ -1274,7 +1274,7 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="driving_region_japan">日本</string>
     <string name="driving_region_us">美國</string>
     <string name="driving_region_canada">加拿大</string>
-    <string name="driving_region_europe_asia">歐洲和亞洲</string>
+    <string name="driving_region_europe_asia">歐洲、亞洲、拉丁美洲和同類的</string>
     <string name="driving_region_uk">英國、印度和其他</string>
     <string name="driving_region">駕駛區域</string>
     <string name="map_widget_fps_info">FPS 除錯資訊</string>
@@ -2853,8 +2853,17 @@ Facebook：https://www.facebook.com/osmandapp
     <string name="full_version_thanks">感謝您購買完整版的 OsmAnd！</string>
     <string name="routing_attr_relief_smoothness_factor_name">地貌平滑率</string>
     <string name="parking_options">停車選項</string>
-    <string name="do_not_send_anonymous_app_usage">不要傳送匿名應用程式使用法</string>
+    <string name="do_not_send_anonymous_app_usage">不要傳送匿名應用程式使用方式統計</string>
     <string name="do_not_show_startup_messages">不要在啟動時顯示訊息</string>
     <string name="do_not_show_startup_messages_desc">顯示應用程式折扣和專用的在地事件訊息</string>
-    <string name="do_not_send_anonymous_app_usage_desc">在通信期間傳送有關螢幕使用的一般資訊。我們不會收集任何的地理位置或使用者輸入的相關資料。</string>
+    <string name="do_not_send_anonymous_app_usage_desc">OsmAnd 應用程式在通信期間傳送有關螢幕使用的一般資訊。我們不會收集任何的地理位置或使用者輸入的相關資料。</string>
+    <string name="select_streets">選擇街道</string>
+    <string name="shared_string_in_name">在 %1$s</string>
+    <string name="type_address">輸入地址</string>
+    <string name="type_city_town">輸入城市或鄉鎮</string>
+    <string name="type_postcode">輸入郵遞區號</string>
+    <string name="nearest_cities">最近的城市</string>
+    <string name="select_city">選擇城市</string>
+    <string name="select_postcode">選擇郵遞區號</string>
+    <string name="quick_action_auto_zoom">自動縮放地圖開/關</string>
     </resources>
