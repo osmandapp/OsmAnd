@@ -354,7 +354,7 @@ public class SearchUICore {
 		return this.phrase;
 	}
 
-	public SearchResultCollection search(final String text, final boolean updateResult, final ResultMatcher<SearchResult> matcher) {
+	public SearchResultCollection search(final String text, final boolean delayedExecution, final ResultMatcher<SearchResult> matcher) {
 		final int request = requestNumber.incrementAndGet();
 		final SearchPhrase phrase = this.phrase.generateNewPhrase(text, searchSettings);
 		this.phrase = phrase;
@@ -370,7 +370,7 @@ public class SearchUICore {
 						onSearchStart.run();
 					}
 					SearchResultMatcher rm = new SearchResultMatcher(matcher, phrase, request, requestNumber, totalLimit);
-					if (TIMEOUT_BETWEEN_CHARS > 0 && updateResult) {
+					if (TIMEOUT_BETWEEN_CHARS > 0 && delayedExecution) {
 						Thread.sleep(TIMEOUT_BETWEEN_CHARS);
 					} else if (TIMEOUT_BEFORE_SEARCH > 0) {
 						Thread.sleep(TIMEOUT_BEFORE_SEARCH);
