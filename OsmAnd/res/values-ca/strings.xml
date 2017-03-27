@@ -2851,4 +2851,7 @@ El connector de mapes d\'esquí d\'OsmAnd us permet veure les pistes amb la seva
  • Mostra variants especials disponibles en línia, imatges de satèl·lit (de Bing),superposicions variades com traces de GPX turístiques/rutes i capes addicionals amb  transparència configurable
  • Opcionalment mostra els noms dels llocs en anglès, llengua local o ortografia fonètica
  "</string>
+    <string name="select_streets">Seleccioneu carrers</string>
+    <string name="shared_string_in_name">inclou %1$s</string>
+    <string name="type_address">Indiqueu l\'adreça</string>
     </resources>
