@@ -2902,8 +2902,8 @@ Facebook：https://www.facebook.com/osmandapp
  "</string>
     <string name="osmand_plus_extended_description_part5">"
  安全功能
- • 自動日/夜檢視切換選項
- • 速限顯示功能選項，如果您超速了它會提醒
+ • 任選的自動日/夜檢視切換
+ • 任選的速限顯示功能，如果您超速了它會提醒
  • 取決於速度的地圖縮放選項
  • 分享您所在的位置的功能，這樣您的朋友能找到您
  "</string>
@@ -2915,5 +2915,13 @@ Facebook：https://www.facebook.com/osmandapp
  • 任選的旅程錄製到裝置端 GPX 檔案或線上服務
  • 任選的速度和高度顯示
  • 顯示等高線和地形陰影（經由附加的外掛元件）
+ "</string>
+    <string name="osmand_plus_extended_description_part7">"
+ 直接提供給 OSM
+ • 報告地圖錯誤
+ • 直接從該應用程式上傳 GPX 軌跡到 OSM
+ • 增加 POI 並直接上傳給 OSM（如果離線或在之後上傳）
+ • 任選的旅程錄製而且在背景模式（當裝置處於休眠模式下）
+OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告錯誤、改進翻譯或編寫新的功能，每個人都可以作出貢獻。透過所有的這些形成開發人員和使用者交互的作用下，讓該專案處於不斷改善的活絡狀態。專案的開發進度、編寫程式碼和測試新的功能，還是要依靠提供資金捐款資助。
  "</string>
     </resources>
