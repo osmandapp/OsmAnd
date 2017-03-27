@@ -119,6 +119,8 @@ public class ApplicationMode {
 		public ApplicationModeBuilder carLocation() {
 			applicationMode.bearingIconDay = R.drawable.map_car_bearing;
 			applicationMode.bearingIconNight = R.drawable.map_car_bearing_night;
+			applicationMode.headingIconDay = R.drawable.map_car_location_view_angle;
+			applicationMode.headingIconNight = R.drawable.map_car_location_view_angle_night;
 			applicationMode.locationIconDay = R.drawable.map_car_location;
 			applicationMode.locationIconNight = R.drawable.map_car_location_night;
 			return this;
@@ -132,6 +134,8 @@ public class ApplicationMode {
 		public ApplicationModeBuilder bicycleLocation() {
 			applicationMode.bearingIconDay = R.drawable.map_bicycle_bearing;
 			applicationMode.bearingIconNight = R.drawable.map_bicycle_bearing_night;
+			applicationMode.headingIconDay = R.drawable.map_bicycle_location_view_angle;
+			applicationMode.headingIconNight = R.drawable.map_bicycle_location_view_angle_night;
 			applicationMode.locationIconDay = R.drawable.map_bicycle_location;
 			applicationMode.locationIconNight = R.drawable.map_bicycle_location_night;
 			return this;
@@ -140,6 +144,8 @@ public class ApplicationMode {
 		public ApplicationModeBuilder defLocation() {
 			applicationMode.bearingIconDay = R.drawable.map_pedestrian_bearing;
 			applicationMode.bearingIconNight = R.drawable.map_pedestrian_bearing_night;
+			applicationMode.headingIconDay = R.drawable.map_default_location_view_angle;
+			applicationMode.headingIconNight = R.drawable.map_default_location_view_angle_night;
 			applicationMode.locationIconDay = R.drawable.map_pedestrian_location;
 			applicationMode.locationIconNight = R.drawable.map_pedestrian_location_night;
 			return this;
@@ -281,6 +287,14 @@ public class ApplicationMode {
 		return bearingIconNight;
 	}
 
+	public int getResourceHeadingDay() {
+		return headingIconDay;
+	}
+
+	public int getResourceHeadingNight() {
+		return headingIconNight;
+	}
+
 	public int getResourceLocationDay() {
 		return locationIconDay;
 	}
@@ -339,13 +353,15 @@ public class ApplicationMode {
 	private final String stringKey;
 
 	private ApplicationMode parent;
-	private int mapIconId = R.drawable.ic_browse_map;
+	private int mapIconId = R.drawable.map_world_globe_dark;
 	private int smallIconDark = R.drawable.ic_world_globe_dark;
 	private float defaultSpeed = 10f;
 	private int minDistanceForTurn = 50;
 	private int arrivalDistance = 90;
 	private int bearingIconDay = R.drawable.map_pedestrian_bearing;
 	private int bearingIconNight = R.drawable.map_pedestrian_bearing_night;
+	private int headingIconDay = R.drawable.map_pedestrian_location_view_angle;
+	private int headingIconNight = R.drawable.map_pedestrian_location_view_angle_night;
 	private int locationIconDay = R.drawable.map_pedestrian_location;
 	private int locationIconNight = R.drawable.map_pedestrian_location_night;
 	private static StateChangedListener<String> listener;

@@ -26,17 +26,16 @@ public class PointLocationLayer extends OsmandMapLayer implements ContextMenuLay
 	private static final Log LOG = PlatformUtil.getLog(PointLocationLayer.class);
 
 	protected final static int RADIUS = 7;
-	protected final static float HEADING_ANGLE = 60;
-	
+
 	private Paint locationPaint;
 	private Paint area;
 	private Paint aroundArea;
-	private Paint headingPaint;
-	
+
 	private OsmandMapTileView view;
 	
 	private ApplicationMode appMode;
 	private Bitmap bearingIcon;
+	private Bitmap headingIcon;
 	private Bitmap locationIcon;
 	private OsmAndLocationProvider locationProvider;
 	private MapViewTrackingUtilities mapViewTrackingUtilities;
@@ -51,8 +50,7 @@ public class PointLocationLayer extends OsmandMapLayer implements ContextMenuLay
 		locationPaint.setAntiAlias(true);
 		locationPaint.setFilterBitmap(true);
 		locationPaint.setDither(true);
-		
-		
+
 		area = new Paint();
 		area.setColor(view.getResources().getColor(R.color.pos_area));
 		
@@ -61,11 +59,6 @@ public class PointLocationLayer extends OsmandMapLayer implements ContextMenuLay
 		aroundArea.setStyle(Style.STROKE);
 		aroundArea.setStrokeWidth(1);
 		aroundArea.setAntiAlias(true);
-		
-		headingPaint = new Paint();
-		headingPaint.setColor(view.getResources().getColor(R.color.pos_heading));
-		headingPaint.setAntiAlias(true);
-		headingPaint.setStyle(Style.FILL);
 		
 		updateIcons(view.getSettings().getApplicationMode(), false);
 		locationProvider = view.getApplication().getLocationProvider();
@@ -113,8 +106,13 @@ public class PointLocationLayer extends OsmandMapLayer implements ContextMenuLay
 
 			Float heading = locationProvider.getHeading();
 			if (heading != null && mapViewTrackingUtilities.isShowViewAngle()) {
-				canvas.drawArc(getHeadingRect(locationX, locationY), heading - HEADING_ANGLE / 2 - 90, HEADING_ANGLE,
-						true, headingPaint);
+
+				canvas.save();
+				canvas.rotate(heading - 180, locationX, locationY);
+				canvas.drawBitmap(headingIcon, locationX - headingIcon.getWidth() / 2,
+						locationY - headingIcon.getHeight() / 2, locationPaint);
+				canvas.restore();
+
 			}
 			if (isBearing) {
 				float bearing = lastKnownLocation.getBearing();
@@ -147,12 +145,16 @@ public class PointLocationLayer extends OsmandMapLayer implements ContextMenuLay
 			final int resourceBearing = nighMode ? resourceBearingNight : resourceBearingDay;
 			bearingIcon = BitmapFactory.decodeResource(view.getResources(), resourceBearing);
 
+			final int resourceHeadingDay = appMode.getResourceHeadingDay();
+			final int resourceHeadingNight = appMode.getResourceHeadingNight();
+			final int resourceHeading = nighMode ? resourceHeadingNight : resourceHeadingDay;
+			headingIcon = BitmapFactory.decodeResource(view.getResources(), resourceHeading);
+
 			final int resourceLocationDay = appMode.getResourceLocationDay();
 			final int resourceLocationNight = appMode.getResourceLocationNight();
 			final int resourceLocation = nighMode ? resourceLocationNight : resourceLocationDay;
 			locationIcon = BitmapFactory.decodeResource(view.getResources(), resourceLocation);
 			area.setColor(view.getResources().getColor(!nm ? R.color.pos_area : R.color.pos_area_night));
-			headingPaint.setColor(view.getResources().getColor(!nm ? R.color.pos_heading : R.color.pos_heading_night));
 		}
 		
 	}
