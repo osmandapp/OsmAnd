@@ -24,6 +24,7 @@ import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.TextWatcher;
 import android.text.style.ForegroundColorSpan;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -41,6 +42,7 @@ import android.widget.Toast;
 
 import net.osmand.AndroidUtils;
 import net.osmand.Location;
+import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.access.AccessibilityAssistant;
 import net.osmand.access.NavigationInfo;
@@ -99,6 +101,8 @@ import static net.osmand.search.core.ObjectType.POI_TYPE;
 import static net.osmand.search.core.SearchCoreFactory.SEARCH_AMENITY_TYPE_PRIORITY;
 
 public class QuickSearchDialogFragment extends DialogFragment implements OsmAndCompassListener, OsmAndLocationListener {
+
+	private static final org.apache.commons.logging.Log LOG = PlatformUtil.getLog(QuickSearchDialogFragment.class);
 
 	public static final String TAG = "QuickSearchDialogFragment";
 	private static final String QUICK_SEARCH_QUERY_KEY = "quick_search_query_key";
@@ -1007,6 +1011,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 	private void reloadCategoriesInternal() {
 		try {
+			LOG.info("+++ start loading categories");
 			if (addressSearch) {
 				stopAddressSearch();
 			}
@@ -1031,6 +1036,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 				}));
 				categoriesSearchFragment.updateListAdapter(rows, false);
 			}
+			LOG.info("--- categories loaded");
 		} catch (IOException e) {
 			e.printStackTrace();
 			app.showToastMessage(e.getMessage());
@@ -1062,6 +1068,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 	private void reloadCitiesInternal() {
 		try {
+			LOG.info("+++ start loading nearest cities");
 			startNearestCitySearch();
 			SearchResultCollection res = searchUICore.shallowSearch(SearchAddressByNameAPI.class, "", null);
 			if (addressSearch) {
@@ -1069,11 +1076,14 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			} else {
 				stopAddressSearch();
 			}
+			LOG.info("--- nearest cities found: " + (res != null ? res.getCurrentSearchResults().size() : 0));
 
 			OsmandSettings settings = app.getSettings();
 			List<QuickSearchListItem> rows = new ArrayList<>();
 
+			LOG.info("+++ start last city request");
 			final SearchResult lastCityResult = getLastCityResult();
+			LOG.info("--- last city found: " + (lastCityResult != null ? lastCityResult.localeName : "-"));
 			if (lastCityResult != null) {
 				String selectStreets = app.getString(R.string.select_streets);
 				String inCityName = app.getString(R.string.shared_string_in_name, settings.getLastSearchedCityName());
@@ -1139,6 +1149,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 				}
 			}
 			addressSearchFragment.updateListAdapter(rows, false);
+			LOG.info("--- nearest cities loaded");
 		} catch (IOException e) {
 			e.printStackTrace();
 			app.showToastMessage(e.getMessage());
@@ -1217,6 +1228,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 	private void reloadHistoryInternal() {
 		try {
+			LOG.info("+++ start loading history");
 			if (addressSearch) {
 				stopAddressSearch();
 			}
@@ -1231,6 +1243,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 				}
 			}
 			historySearchFragment.updateListAdapter(rows, false);
+			LOG.info("--- history loaded: count=" + rows.size());
 		} catch (IOException e) {
 			e.printStackTrace();
 			app.showToastMessage(e.getMessage());
