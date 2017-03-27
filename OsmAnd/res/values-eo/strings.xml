@@ -350,11 +350,11 @@
     <string name="lang_et">Estona</string>
     <string name="lang_ceb">Cebua</string>
     <string name="shared_string_import2osmand">Enporti al OsmAnd</string>
-    <string name="archive_wikipedia_data">Vi havas malnovajn malkongruajn Vikipediajn datumojn elŝutitajn. Ĉu vi volas arĥivigi ilin?</string>
-    <string name="download_wikipedia_files">Ĉu vi volas elŝuti aldonajn Vikipediajn datumojn (%1$s MB) ?</string>
+    <string name="archive_wikipedia_data">Vi havas malnovajn malkongruajn vikipediajn datumojn elŝutitajn. Ĉu vi volas arĥivigi ilin?</string>
+    <string name="download_wikipedia_files">Ĉu vi volas elŝuti aldonajn vikipediajn datumojn (%1$s MB) ?</string>
     <string name="gps_network_not_enabled">Pozici-trova servo estas malaktiva. Ĉu vi volas aktivigi ĝin?</string>
     <string name="disable_recording_once_app_killed">Preventi de aŭtomata protokolado</string>
-    <string name="disable_recording_once_app_killed_descrp">Paŭzas GPX-protokoladon kiam la aplikaĵo fermas. (Fona piktogramo de OsmAnd malaperas de Androida sciiga breto.)</string>
+    <string name="disable_recording_once_app_killed_descrp">Paŭzas GPX-protokoladon kiam la aplikaĵo fermas. (Fona piktogramo de OsmAnd malaperas de androida sciiga breto.)</string>
     <string name="read_full_article">Legi tutan artikolon (enrete)</string>
     <string name="shared_string_show_details">Montri detalojn</string>
     <string name="osm_edit_context_menu_delete">Forigi OSM-redaktojn</string>
@@ -1202,7 +1202,7 @@ Premtenu por vidi sur la mapo</string>
     <string name="rendering_attr_showRoadMaps_name">Nur-vojaj mapoj</string>
     <string name="rendering_attr_showRoadMaps_description">Elektu kiam montri nur-vojajn mapojn:</string>
     <string name="safe_mode">Sendanĝera reĝimo</string>
-    <string name="safe_mode_description">Lanĉas la aplikaĵon en sendanĝera reĝimo (uzante pli malrapidan Androidan kodon anstataŭ indiĝenan).</string>
+    <string name="safe_mode_description">Lanĉas la aplikaĵon en sendanĝera reĝimo (uzante pli malrapidan androidan kodon anstataŭ indiĝenan).</string>
     <string name="native_library_not_running">La aplikaĵo funkcias en sendanĝera reĝimo (malaktivigi ĝin en agordoj).</string>
     <string name="close_changeset">Fermi ŝanĝaron</string>
     <string name="zxing_barcode_scanner_not_found">ZXing Barcode Scanner ne estas instalita. Ĉu serĉi ĝin en Google Play?</string>
@@ -1610,7 +1610,7 @@ Proporcia memoro %4$s MB (Limito de Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="installing_new_resources">Elpakado de novaj datumoj…</string>
     <string name="internet_connection_required_for_online_route">Servo de enreta navigado estas elektita, sed vi ne estas konektita al Interreto.</string>
     <string name="tts_language_not_supported_title">Lingvo ne subtenata</string>
-    <string name="tts_language_not_supported">La elektita lingvo ne estas subtenata per instalita Androida parolsintezilo. Ĉu vi volas serĉi alian parolsintezilon en la Market? Aliokaze la aktuale uzata lingvo estos elektita.</string>
+    <string name="tts_language_not_supported">La elektita lingvo ne estas subtenata per instalita androida parolsintezilo. Ĉu vi volas serĉi alian parolsintezilon en la Market? Aliokaze la aktuale uzata lingvo estos elektita.</string>
     <string name="tts_missing_language_data_title">Mankas datumojn</string>
     <string name="tts_missing_language_data">Neniaj datumoj instalitaj por la elektita lingvo. Ĉu vi volas malfermi Market-on por instali?</string>
     <string name="gpx_option_reverse_route">Inversigi direkton de GPX</string>
@@ -1716,7 +1716,7 @@ Aktivigo de tiu ĉi map-vido ŝanĝas map-aspekton al \'Vintro kaj skiado\', mon
     <string name="osmand_parking_plugin_name">Parkumeja pozicio</string>
 	<string name="osmand_parking_plugin_description">La Parkumeja pozicio kromprogramo plifaciligas al vi memori kie via aŭto estas parkumata kaj kiom da parkumeja tempo restas (se ĝi estas limigita).
 
-Kaj la loko kaj tempo estas montrataj ĉe la OsmAnd stirpanelo, kaj ĉe la fenestraĵo sur la mapekrano. Memorigo povas esti aldonita al la Androida kalendaro.</string>
+Kaj la loko kaj tempo estas montrataj ĉe la OsmAnd stirpanelo, kaj ĉe la fenestraĵo sur la mapekrano. Memorigo povas esti aldonita al la androida kalendaro.</string>
     <string name="osmand_distance_planning_plugin_name">Kalkulilo de distanco kaj planilo</string>
     <string name="osmand_distance_planning_plugin_description">Tiu ĉi kromprogramo liveras mapekranan fenestraĵon por krei kursojn tuŝante sur la mapo, aŭ por uzi aŭ modifi ekzistajn GPX-dosierojn por plani ekskurson aŭ mezuri distancon inter punktoj. Rezultoj povas esti konservitaj kiel GPX-dosieroj, kiuj oni povas estonte uzi por gvidado.</string>
     <string name="osm_settings">OSM redaktado</string>
@@ -1742,7 +1742,7 @@ Kaj la loko kaj tempo estas montrataj ĉe la OsmAnd stirpanelo, kaj ĉe la fenes
     <string name="mile">mi</string>
     <string name="send_location_way_choose_title">Kunhavigi lokon per</string>
     <string name="send_location_sms_pattern">Loko: %1$s\n%2$s</string>
-    <string name="send_location_email_pattern">Por vidi lokon, malfermu retumilan ligilon %1$s aŭ Androidan ligilon %2$s</string>
+    <string name="send_location_email_pattern">Por vidi lokon, malfermu retumilan ligilon %1$s aŭ androidan ligilon %2$s</string>
     <string name="send_location">Sendi lokon</string>
     <string name="context_menu_item_share_location">Kunhavigi lokon</string>
     <string name="add_waypoint_dialog_added">GPX-navigadpunkto \"{0}\" aldonita sukcese</string>
@@ -1830,7 +1830,7 @@ Kaj la loko kaj tempo estas montrataj ĉe la OsmAnd stirpanelo, kaj ĉe la fenes
     <string name="fav_imported_sucessfully">Ŝatataj ejoj enportitaj sukcese</string>
     <string name="import_file_favourites">Ĉu konservi datumojn kiel GPX-dosieron aŭ enporti navigadpunktojn al Ŝatataj?</string>
     <string name="map_screen_orientation">Orientiĝo de ekrano</string>
-    <string name="map_screen_orientation_descr">Vertikala, horizontala, aŭ laŭ aparato</string>
+    <string name="map_screen_orientation_descr">Vertikala, horizontala aŭ laŭ aparato</string>
     <string name="map_orientation_landscape">Horizontala</string>
     <string name="map_orientation_portrait">Vertikala</string>
     <string name="map_orientation_default">Sama kiel aparato</string>
