@@ -1,30 +1,21 @@
 package net.osmand.plus.views.mapwidgets;
 
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.drawable.Drawable;
-import android.support.v7.app.AlertDialog;
-import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import net.osmand.Location;
-import net.osmand.ValueHolder;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.plus.CurrentPositionHelper;
-import net.osmand.plus.NavigationService;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmAndLocationProvider.GPSInfo;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
-import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.actions.StartGPSStatus;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
@@ -33,7 +24,6 @@ import net.osmand.plus.helpers.WaypointDialogHelper;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.helpers.WaypointHelper.LocationPointWrapper;
 import net.osmand.plus.mapcontextmenu.other.MapRouteInfoMenu;
-import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
@@ -110,64 +100,7 @@ public class MapInfoWidgetsFactory {
 		gpsInfoControl.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				if (app.getNavigationService() != null) {
-					AlertDialog.Builder dlg = new AlertDialog.Builder(map);
-					dlg.setTitle(app.getString(R.string.sleep_mode_stop_dialog));
-
-					//Show currently active wake-up interval
-					int soi = app.getNavigationService().getServiceOffInterval();
-					if (soi == 0) {
-						dlg.setMessage(app.getString(R.string.gps_wake_up_timer) + ": " + app.getString(R.string.int_continuosly));
-					} else if (soi <= 90000) {
-						dlg.setMessage(app.getString(R.string.gps_wake_up_timer) + ": " + Integer.toString(soi / 1000) + " " + app.getString(R.string.int_seconds));
-					} else {
-						dlg.setMessage(app.getString(R.string.gps_wake_up_timer) + ": " + Integer.toString(soi / 1000 / 60) + " " + app.getString(R.string.int_min));
-					}
-
-					dlg.setPositiveButton(app.getString(R.string.keep_navigation_service), null);
-					dlg.setNegativeButton(app.getString(R.string.stop_navigation_service), new DialogInterface.OnClickListener() {
-						@Override
-						public void onClick(DialogInterface dialogInterface, int i) {
-							Intent serviceIntent = new Intent(app, NavigationService.class);
-							app.stopService(serviceIntent);
-						}
-					});
-					dlg.show();
-
-				} else {
-					final ValueHolder<Integer> vs = new ValueHolder<Integer>();
-					vs.value = 0;
-					final AlertDialog[] dlgshow = new AlertDialog[1];
-					AlertDialog.Builder dlg = new AlertDialog.Builder(map);
-					dlg.setTitle(app.getString(R.string.enable_sleep_mode));
-					WindowManager mgr = (WindowManager) map.getSystemService(Context.WINDOW_SERVICE);
-					DisplayMetrics dm = new DisplayMetrics();
-					mgr.getDefaultDisplay().getMetrics(dm);
-					LinearLayout ll = OsmandMonitoringPlugin.createIntervalChooseLayout(map,
-							app.getString(R.string.gps_wake_up_timer) + " : %s",
-							OsmandMonitoringPlugin.SECONDS,
-							OsmandMonitoringPlugin.MINUTES,
-							null, vs, dm);
-					if (Version.isGpsStatusEnabled(app)) {
-						dlg.setNeutralButton(R.string.gps_status, new DialogInterface.OnClickListener() {
-							@Override
-							public void onClick(DialogInterface dialog, int which) {
-								new StartGPSStatus(map).run();
-							}
-						});
-					}
-					dlg.setView(ll);
-					dlg.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							app.startNavigationService(NavigationService.USED_BY_WAKE_UP, vs.value);
-						}
-					});
-					dlg.setNegativeButton(R.string.shared_string_cancel, null);
-					dlgshow[0] = dlg.show();
-
-				}
-
+				new StartGPSStatus(map).run();
 			}
 		});
 		return gpsInfoControl;
