@@ -17,6 +17,7 @@ import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 
+import net.osmand.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.ValueHolder;
 import net.osmand.plus.ApplicationMode;
@@ -235,7 +236,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		
 		AlertDialog.Builder bld = new AlertDialog.Builder(map);
 		final TIntArrayList items = new TIntArrayList();
-		if(wasTrackMonitored) {
+		if (wasTrackMonitored) {
 			items.add(R.string.gpx_monitoring_stop);
 			items.add(R.string.gpx_start_new_segment);
 			if(settings.LIVE_MONITORING.get()) {
@@ -247,7 +248,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		} else {
 			items.add(R.string.gpx_monitoring_start);
 		}
-		if(app.getSavingTrackHelper().hasDataToSave()) {
+		if (app.getSavingTrackHelper().hasDataToSave()) {
 			items.add(R.string.save_current_track);
 		}
 		String[] strings = new String[items.size()];
@@ -392,13 +393,14 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 			final String patternMsg, final int[] seconds, final int[] minutes,
 			final ValueHolder<Boolean> choice, final ValueHolder<Integer> v, DisplayMetrics dm) {
 		LinearLayout ll = new LinearLayout(uiCtx);
+		final int dp24 = AndroidUtils.dpToPx(uiCtx, 24f);
+		final int dp8 = AndroidUtils.dpToPx(uiCtx, 8f);
 		final TextView tv = new TextView(uiCtx);
-		tv.setPadding((int)(7 * dm.density), (int)(3 * dm.density), (int)(7* dm.density), 0);
+		tv.setPadding(dp24, dp8 * 2, dp24, dp8);
 		tv.setText(String.format(patternMsg, uiCtx.getString(R.string.int_continuosly)));
-		
-		
+
 		SeekBar sp = new SeekBar(uiCtx);
-		sp.setPadding((int)(7 * dm.density), (int)(5 * dm.density), (int)(7* dm.density), 0);
+		sp.setPadding(dp24 + dp8, dp8, dp24 + dp8, dp8);
 		final int secondsLength = seconds.length;
     	final int minutesLength = minutes.length;
     	sp.setMax(secondsLength + minutesLength - 1);
@@ -452,7 +454,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 			cb.setText(R.string.shared_string_remember_my_choice);
 			LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT,
 					LayoutParams.WRAP_CONTENT);
-			lp.setMargins((int)(7* dm.density), (int)(10* dm.density), (int)(7* dm.density), 0);
+			lp.setMargins(dp24, dp8 * 2, dp24, 0);
 			cb.setLayoutParams(lp);
 			cb.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
