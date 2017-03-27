@@ -78,7 +78,11 @@ public class TrackDetailsMenu {
 				mapActivity.getMapView().setMapPositionX(1);
 			} else {
 				toolbarController = new TrackDetailsBarController();
-				toolbarController.setTitle(mapActivity.getString(R.string.rendering_category_details));
+				if (gpxItem != null && gpxItem.group != null) {
+					toolbarController.setTitle(gpxItem.group.getGpxName());
+				} else {
+					toolbarController.setTitle(mapActivity.getString(R.string.rendering_category_details));
+				}
 				toolbarController.setOnBackButtonClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
@@ -88,21 +92,9 @@ public class TrackDetailsMenu {
 				toolbarController.setOnCloseButtonClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						MapActivity.clearPrevActivityIntent();
 						hide();
 					}
 				});
-				/*
-				if (gpxItem.group.getGpx().showCurrentTrack) {
-					toolbarController.setRefreshBtnVisible(true);
-					toolbarController.setOnRefreshButtonClickListener(new View.OnClickListener() {
-						@Override
-						public void onClick(View v) {
-							update();
-						}
-					});
-				}
-				*/
 				mapActivity.showTopToolbar(toolbarController);
 			}
 
@@ -141,6 +133,9 @@ public class TrackDetailsMenu {
 
 	public void onDismiss() {
 		VISIBLE = false;
+		if (gpxItem != null && !gpxItem.route && gpxItem.wasHidden && gpxItem.group != null && gpxItem.group.getGpx() != null) {
+			mapActivity.getMyApplication().getSelectedGpxHelper().selectGpxFile(gpxItem.group.getGpx(), false, false);
+		}
 		if (toolbarController != null) {
 			mapActivity.hideTopToolbar(toolbarController);
 		}

@@ -1357,6 +1357,7 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 			}
 
 			if (gpxItem.group.getGpx() != null) {
+				gpxItem.wasHidden = app.getSelectedGpxHelper().getSelectedFileByPath(getGpx().path) == null;
 				app.getSelectedGpxHelper().setGpxFileToDisplay(gpxItem.group.getGpx());
 			}
 			final OsmandSettings settings = app.getSettings();
