@@ -348,7 +348,6 @@ public class SearchUICore {
 		final int request = requestNumber.incrementAndGet();
 		final SearchPhrase phrase = this.phrase.generateNewPhrase(text, searchSettings);
 		this.phrase = phrase;
-		phrase.getLastSelectedWord();
 		SearchResultCollection quickRes = new SearchResultCollection(phrase);
 		filterCurrentResults(quickRes.searchResults, phrase);
 		LOG.info("> Search phrase " + phrase + " " + quickRes.searchResults.size());
