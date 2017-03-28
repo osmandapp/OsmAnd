@@ -47,8 +47,6 @@ public class SearchUICore {
 
 	private ThreadPoolExecutor singleThreadedExecutor;
 	private LinkedBlockingQueue<Runnable> taskQueue;
-	private Runnable onSearchStart = null;
-	private Runnable onResultsComplete = null;
 	private AtomicInteger requestNumber = new AtomicInteger();
 	private int totalLimit = -1; // -1 unlimited - not used
 
@@ -308,14 +306,6 @@ public class SearchUICore {
 		return phrase;
 	}
 
-	public void setOnSearchStart(Runnable onSearchStart) {
-		this.onSearchStart = onSearchStart;
-	}
-
-	public void setOnResultsComplete(Runnable onResultsComplete) {
-		this.onResultsComplete = onResultsComplete;
-	}
-
 	public SearchSettings getSearchSettings() {
 		return searchSettings;
 	}
@@ -358,6 +348,7 @@ public class SearchUICore {
 		final int request = requestNumber.incrementAndGet();
 		final SearchPhrase phrase = this.phrase.generateNewPhrase(text, searchSettings);
 		this.phrase = phrase;
+		phrase.getLastSelectedWord();
 		SearchResultCollection quickRes = new SearchResultCollection(phrase);
 		filterCurrentResults(quickRes.searchResults, phrase);
 		LOG.info("> Search phrase " + phrase + " " + quickRes.searchResults.size());
@@ -366,10 +357,8 @@ public class SearchUICore {
 			@Override
 			public void run() {
 				try {
-					if (onSearchStart != null) {
-						onSearchStart.run();
-					}
 					SearchResultMatcher rm = new SearchResultMatcher(matcher, phrase, request, requestNumber, totalLimit);
+					rm.searchStarted(phrase);
 					if (TIMEOUT_BETWEEN_CHARS > 0 && delayedExecution) {
 						Thread.sleep(TIMEOUT_BETWEEN_CHARS);
 					} else if (TIMEOUT_BEFORE_SEARCH > 0) {
@@ -385,9 +374,7 @@ public class SearchUICore {
 						collection.addSearchResults(rm.getRequestResults(), true, true);
 						LOG.info(">> Search phrase " + phrase + " " + rm.getRequestResults().size());
 						currentSearchResult = collection;
-						if (onResultsComplete != null) {
-							onResultsComplete.run();
-						}
+						rm.searchFinished(phrase);
 					}
 				} catch (InterruptedException e) {
 					e.printStackTrace();
@@ -483,6 +470,22 @@ public class SearchUICore {
 
 		public int getCount() {
 			return requestResults.size();
+		}
+
+		public void searchStarted(SearchPhrase phrase) {
+			if (matcher != null) {
+				SearchResult sr = new SearchResult(phrase);
+				sr.objectType = ObjectType.SEARCH_STARTED;
+				matcher.publish(sr);
+			}
+		}
+
+		public void searchFinished(SearchPhrase phrase) {
+			if (matcher != null) {
+				SearchResult sr = new SearchResult(phrase);
+				sr.objectType = ObjectType.SEARCH_FINISHED;
+				matcher.publish(sr);
+			}
 		}
 
 		public void apiSearchFinished(SearchCoreAPI api, SearchPhrase phrase) {

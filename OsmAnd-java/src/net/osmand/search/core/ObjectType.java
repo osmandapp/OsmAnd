@@ -12,6 +12,8 @@ public enum ObjectType {
 	
 	REGION(true),
 
+	SEARCH_STARTED(false),
+	SEARCH_FINISHED(false),
 	SEARCH_API_FINISHED(false),
 	SEARCH_API_REGION_FINISHED(false),
 	UNKNOWN_NAME_FILTER(false);
