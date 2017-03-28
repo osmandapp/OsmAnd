@@ -256,7 +256,7 @@ Ehhez {1} MB helyre van szükség.
     <string name="switch_to_vector_map_to_see">Offline vektoros térkép érhető el ezen a helyen.\n\t\n\tAktiválni a \'Menü\' → \'Térkép beállítása\' → \'Térképforrás…\' → \'Offline vektoros térképek\' menüben tudod.</string>
     <string name="choose_audio_stream">Hangnavigáció kimenete</string>
     <string name="choose_audio_stream_descr">Hangnavigáció csatornájának kiválasztása</string>
-    <string name="voice_stream_voice_call">Telefonhívás hangcsatorna (megpróbálja megszakítani a Bluetooth zenelejátszást)</string>
+    <string name="voice_stream_voice_call">Telefonhívás hangcsatorna (megszakítja a Bluetooth zenelejátszást)</string>
     <string name="voice_stream_notification">Üzenetjel hangcsatorna</string>
     <string name="voice_stream_music">Zene hangcsatorna</string>
     <string name="warning_tile_layer_not_downloadable">%1$s térkép réteget nem tudja az alkalmazás letölteni, meg kell próbálni újratelepíteni.</string>
@@ -2927,4 +2927,7 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="shared_string_paused">Szüneteltetve</string>
     <string name="select_city">Válassz települést</string>
     <string name="select_postcode">Válassz irányítószámot</string>
+    <string name="select_streets">Utca választása</string>
+    <string name="shared_string_in_name">itt: %1$s</string>
+    <string name="type_address">Add meg a címet</string>
     </resources>
