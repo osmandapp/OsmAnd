@@ -3441,9 +3441,9 @@
 
 <string name="poi_energy_supplier">Energileverandør-kontor</string>
 
-<string name="poi_electronics_repair_computer">Elektronik reparation: computere</string>
-	<string name="poi_electronics_repair_appliance">Elektronik reparation: husholdningsapparater</string>
-	<string name="poi_electronics_repair_phone">Elektronik reparation: telefon</string>
-	<string name="poi_electronics_repair_tv">Elektronik reparation: tv</string>
+<string name="poi_electronics_repair_computer">Elektronikreparation: computere</string>
+	<string name="poi_electronics_repair_appliance">Elektronikreparation: husholdningsapparater</string>
+	<string name="poi_electronics_repair_phone">Elektronikreparation: telefon</string>
+	<string name="poi_electronics_repair_tv">Elektronikreparation: tv</string>
 
 </resources>
