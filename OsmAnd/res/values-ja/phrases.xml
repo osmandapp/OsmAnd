@@ -1791,4 +1791,15 @@
 	<string name="poi_payment_token_no">その他_トークン(クーポン、パウチャー、ギフト券等)不可</string>
 	<string name="poi_payment_gift_card_yes">その他_ギフト券</string>
 	<string name="poi_payment_gift_card_no">その他_ギフト券不可</string>
+	<string name="poi_medical_system">その他系統医学（Medical system)</string>
+	<string name="poi_medical_system_western_yes">西欧諸国の伝統医学(Western)</string>
+	<string name="poi_medical_system_chinese_yes">中国の伝統医学(Traditional Chinese)</string>
+	<string name="poi_medical_system_ayurveeda_yes">アーユルヴェーダ・インドの伝統医学(Ayurveeda)</string>
+	<string name="poi_medical_system_kampo_yes">漢方医学(Kampo)</string>
+	<string name="poi_medical_system_mongolian_yes">モンゴルの伝統医学(Traditional Mongolian)</string>
+	<string name="poi_medical_system_tibetan_yes">チベットの伝統医学(Traditional Tibetan)</string>
+	<string name="poi_medical_system_sidda_yes">南インドのタミル伝統医学(Sidda)</string>
+	<string name="poi_medical_system_unani_yes">ユナニ医学・南アジアの伝統医学(Unani)</string>
+
+	<string name="poi_health_facility_type_office">医療事務(Medical office)</string>
 	</resources>
