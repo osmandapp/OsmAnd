@@ -573,6 +573,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 						ExternalApiHelper apiHelper = new ExternalApiHelper(this);
 						Intent result = apiHelper.processApiRequest(intent);
 						setResult(apiHelper.getResultCode(), result);
+						result.setAction(null);
+						setIntent(result);
 						if (apiHelper.needFinish()) {
 							finish();
 						}
