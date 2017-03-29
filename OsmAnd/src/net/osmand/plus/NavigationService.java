@@ -33,7 +33,6 @@ public class NavigationService extends Service implements LocationListener {
 	public static int USED_BY_NAVIGATION = 1;
 	public static int USED_BY_GPX = 2;
 	public static int USED_BY_LIVE = 4;
-	public static int USED_BY_WAKE_UP = 8;
 	public final static String USAGE_INTENT = "SERVICE_USED_BY";
 	public final static String USAGE_OFF_INTERVAL = "SERVICE_OFF_INTERVAL";
 

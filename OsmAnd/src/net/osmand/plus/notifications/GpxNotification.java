@@ -41,6 +41,9 @@ public class GpxNotification extends OsmandNotification {
 				final OsmandMonitoringPlugin plugin = OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class);
 				if (plugin != null) {
 					plugin.saveCurrentTrack();
+					if (!app.getSettings().SAVE_GLOBAL_TRACK_TO_GPX.get()) {
+						plugin.stopRecording();
+					}
 				}
 			}
 		}, new IntentFilter(OSMAND_SAVE_GPX_SERVICE_ACTION));
@@ -147,8 +150,8 @@ public class GpxNotification extends OsmandNotification {
 			if (app.getSavingTrackHelper().getDistance() > 0) {
 				notificationBuilder.addAction(R.drawable.ic_pause,
 						app.getString(R.string.shared_string_pause), stopPendingIntent);
-				notificationBuilder.addAction(R.drawable.ic_action_save, app.getString(R.string.shared_string_save),
-						savePendingIntent);
+				notificationBuilder.addAction(R.drawable.ic_action_save,
+						app.getString(R.string.shared_string_save), savePendingIntent);
 			} else {
 				notificationBuilder.addAction(R.drawable.ic_action_rec_stop,
 						app.getString(R.string.shared_string_control_stop), stopPendingIntent);
@@ -160,8 +163,8 @@ public class GpxNotification extends OsmandNotification {
 			if (recordedDistance > 0) {
 				notificationBuilder.addAction(R.drawable.ic_action_rec_start,
 						app.getString(R.string.shared_string_continue), startPendingIntent);
-				notificationBuilder.addAction(R.drawable.ic_action_save, app.getString(R.string.shared_string_save),
-						savePendingIntent);
+				notificationBuilder.addAction(R.drawable.ic_action_save,
+						app.getString(R.string.shared_string_save), savePendingIntent);
 			} else {
 				notificationBuilder.addAction(R.drawable.ic_action_rec_start,
 						app.getString(R.string.shared_string_record), startPendingIntent);

@@ -124,6 +124,9 @@ public class RoutingHelper {
 		if (b) {
 			if (app.getNavigationService() != null) {
 				app.getNavigationService().stopIfNeeded(app, NavigationService.USED_BY_NAVIGATION);
+			} else {
+				app.getNotificationHelper().updateTopNotification();
+				app.getNotificationHelper().refreshNotifications();
 			}
 		} else {
 			app.startNavigationService(NavigationService.USED_BY_NAVIGATION, 0);
@@ -140,6 +143,9 @@ public class RoutingHelper {
 		if (!follow) {
 			if (app.getNavigationService() != null) {
 				app.getNavigationService().stopIfNeeded(app, NavigationService.USED_BY_NAVIGATION);
+			} else {
+				app.getNotificationHelper().updateTopNotification();
+				app.getNotificationHelper().refreshNotifications();
 			}
 		} else {
 			app.startNavigationService(NavigationService.USED_BY_NAVIGATION, 0);

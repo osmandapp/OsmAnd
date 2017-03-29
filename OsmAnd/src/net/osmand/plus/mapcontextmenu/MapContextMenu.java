@@ -353,9 +353,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 					 @Nullable PointDescription pointDescription,
 					 @Nullable Object object) {
 		if (init(latLon, pointDescription, object)) {
-			if (!MapRouteInfoMenu.isVisible()) {
-				showInternal();
-			}
+			showInternal();
 		}
 	}
 
