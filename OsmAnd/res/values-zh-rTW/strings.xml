@@ -2970,4 +2970,24 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
  • 顯示專用的線上地圖圖磚、衛星視圖（來自 Bing）、不同的疊加層如旅遊/導航 GPX 軌跡以及可自定透明度的附加層
  • 可任選顯示地名於英文、裝置端或語言的拼寫
  "</string>
+    <string name="quick_action_add_first_intermediate">增加第一個中轉</string>
+    <string name="shared_string_visible">可見的</string>
+    <string name="osmand_extended_description_part3">"
+ 地圖
+ • 顯示您週遭的 POI（興趣點）
+ • 調整地圖到您的移動方向（或羅盤）
+ • 顯示您在哪裡和您在看的地方
+ • 分享您的位置，讓您的朋友能找到您
+ • 保存您最重要的地點於我的收藏
+ • 允許您去選擇怎樣在地圖上顯示名稱：於英文、裝置端或語言的拼寫
+ • 顯示專用的線上地圖圖磚、衛星視圖（來自 Bing）、不同的疊加層如旅遊/導航 GPX 軌跡以及可自定透明度的附加層
+ "</string>
+    <string name="osmand_extended_description_part5">"
+ 自行車
+ • 您可以在地圖找到自行車道
+ • GPS 導航在自行車模式下，使用自行車道構建您的路線
+ • 您能看到您的速度和海拔高度
+ • GPX 錄製選項使您能去記錄您的旅程並且分享
+ • 通過附加的外掛元件，您可以啟用顯示等高線和地形陰影
+ "</string>
     </resources>
