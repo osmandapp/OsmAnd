@@ -19,6 +19,7 @@ public class FileNameTranslationHelper {
 	private static final Log LOG = PlatformUtil.getLog(FileNameTranslationHelper.class);
 	public static final String WIKI_NAME = "_wiki";
 	public static final String HILL_SHADE = "Hillshade_";
+	public static final String SEA_DEPTH = "Depth_";
 
 	public static String getFileName(Context ctx, OsmandRegions regions, String fileName) {
 		String basename = getBasename(fileName);

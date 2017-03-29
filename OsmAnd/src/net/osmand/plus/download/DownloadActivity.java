@@ -57,6 +57,7 @@ import net.osmand.plus.download.ui.DownloadResourceGroupFragment;
 import net.osmand.plus.download.ui.FreeVersionDialogFragment;
 import net.osmand.plus.download.ui.LocalIndexesFragment;
 import net.osmand.plus.download.ui.UpdatesIndexFragment;
+import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.inapp.InAppHelper;
 import net.osmand.plus.inapp.InAppHelper.InAppListener;
 import net.osmand.plus.liveupdates.OsmLiveActivity;
@@ -308,18 +309,28 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 			downloadItem = null;
 			downloadTargetFileName = null;
 		}
-		if (!Algorithms.isEmpty(downloadTargetFileName) && downloadTargetFileName.endsWith(IndexConstants.FONT_INDEX_EXT)) {
-			AlertDialog.Builder bld = new AlertDialog.Builder(this);
-			bld.setMessage(R.string.restart_is_required);
-			bld.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
+		if (!Algorithms.isEmpty(downloadTargetFileName)) {
+			File f = new File(downloadTargetFileName);
+			if (f.exists()) {
+				String fileName = f.getName();
+				if (fileName.endsWith(IndexConstants.FONT_INDEX_EXT)) {
+					AlertDialog.Builder bld = new AlertDialog.Builder(this);
+					bld.setMessage(R.string.restart_is_required);
+					bld.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
 
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					android.os.Process.killProcess(android.os.Process.myPid());
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							android.os.Process.killProcess(android.os.Process.myPid());
+						}
+					});
+					bld.setNegativeButton(R.string.shared_string_cancel, null);
+					bld.show();
+				} else if (fileName.startsWith(FileNameTranslationHelper.SEA_DEPTH)) {
+					getMyApplication().getSettings().getCustomRenderBooleanProperty("depthContours").set(true);
 				}
-			});
-			bld.setNegativeButton(R.string.shared_string_cancel, null);
-			bld.show();
+			}
+			downloadItem = null;
+			downloadTargetFileName = null;
 		}
 		for (WeakReference<Fragment> ref : fragSet) {
 			Fragment f = ref.get();
