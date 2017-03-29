@@ -25,10 +25,12 @@ import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
+import net.osmand.plus.osmedit.OsmEditingPlugin;
 import net.osmand.plus.views.POIMapLayer;
 import net.osmand.util.Algorithms;
 import net.osmand.util.OpeningHoursParser;
@@ -467,6 +469,18 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		}
 
 		OsmandSettings st = ((OsmandApplication) mapActivity.getApplicationContext()).getSettings();
+
+		boolean osmEditingEnabled = OsmandPlugin.getEnabledPlugin(OsmEditingPlugin.class) != null;
+		if (osmEditingEnabled) {
+			String link;
+			if (amenity.getId() % 2 == 0) {
+				link = "http://www.openstreetmap.org/node/";
+			} else {
+				link = "http://www.openstreetmap.org/way/";
+			}
+			buildRow(view, R.drawable.ic_action_info_dark, link + (amenity.getId() >> 1),
+					0, false, null, true, 0, true, null);
+		}
 		buildRow(view, R.drawable.ic_action_get_my_location, PointDescription.getLocationName(app,
 				amenity.getLocation().getLatitude(), amenity.getLocation().getLongitude(), true)
 				.replaceAll("\n", " "), 0, false, null, false, 0, false, null);
