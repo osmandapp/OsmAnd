@@ -41,7 +41,7 @@ import java.util.List;
 import gnu.trove.list.array.TIntArrayList;
 
 public class OsmandMonitoringPlugin extends OsmandPlugin {
-	private static final String ID = "osmand.monitoring";
+	public static final String ID = "osmand.monitoring";
 	public final static String OSMAND_SAVE_SERVICE_ACTION = "OSMAND_SAVE_SERVICE_ACTION";
 	private OsmandSettings settings;
 	private OsmandApplication app;
@@ -231,7 +231,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		return monitoringControl;
 	}
 
-	private void controlDialog(final Activity map) {
+	public void controlDialog(final Activity map) {
 		final boolean wasTrackMonitored = settings.SAVE_GLOBAL_TRACK_TO_GPX.get();
 		
 		AlertDialog.Builder bld = new AlertDialog.Builder(map);

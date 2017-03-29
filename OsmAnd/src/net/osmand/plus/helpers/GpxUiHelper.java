@@ -75,11 +75,14 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.ActivityResultListener;
 import net.osmand.plus.activities.ActivityResultListener.OnActivityResultListener;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.PluginActivity;
 import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.dialogs.ConfigureMapMenu;
 import net.osmand.plus.dialogs.ConfigureMapMenu.AppearanceListItem;
 import net.osmand.plus.dialogs.ConfigureMapMenu.GpxAppearanceAdapter;
+import net.osmand.plus.download.ui.LocalIndexesFragment;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
+import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
@@ -208,14 +211,10 @@ public class GpxUiHelper {
 		if (allGpxList.isEmpty()) {
 			Toast.makeText(activity, R.string.gpx_files_not_found, Toast.LENGTH_LONG).show();
 		}
-		boolean showCurrentTrack = false;
-		if (OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class) != null) {
-			allGpxList.add(0, new GPXInfo(activity.getString(R.string.show_current_gpx_title), 0, 0));
-			showCurrentTrack = true;
-		}
-		final ContextMenuAdapter adapter = createGpxContextMenuAdapter(allGpxList, selectedGpxList, showCurrentTrack);
+		allGpxList.add(0, new GPXInfo(activity.getString(R.string.show_current_gpx_title), 0, 0));
 
-		return createDialog(activity, showCurrentTrack, true, true, callbackWithObject, allGpxList, adapter);
+		final ContextMenuAdapter adapter = createGpxContextMenuAdapter(allGpxList, selectedGpxList, true);
+		return createDialog(activity, true, true, true, callbackWithObject, allGpxList, adapter);
 	}
 
 	public static AlertDialog selectGPXFile(final Activity activity,
@@ -646,6 +645,25 @@ public class GpxUiHelper {
 					ContextMenuItem item = adapter.getItem(position);
 					item.setSelected(!item.getSelected());
 					listAdapter.notifyDataSetInvalidated();
+					if (position == 0 && showCurrentGpx && item.getSelected()) {
+						OsmandMonitoringPlugin monitoringPlugin = OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class);
+						if (monitoringPlugin == null) {
+							AlertDialog.Builder confirm = new AlertDialog.Builder(activity);
+							confirm.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
+								@Override
+								public void onClick(DialogInterface dialog, int which) {
+									Intent intent = new Intent(activity, PluginActivity.class);
+									intent.putExtra(PluginActivity.EXTRA_PLUGIN_ID, OsmandMonitoringPlugin.ID);
+									activity.startActivity(intent);
+								}
+							});
+							confirm.setNegativeButton(R.string.shared_string_cancel, null);
+							confirm.setMessage(activity.getString(R.string.enable_plugin_monitoring_services));
+							confirm.show();
+						} else if (!app.getSettings().SAVE_GLOBAL_TRACK_TO_GPX.get()) {
+							monitoringPlugin.controlDialog(activity);
+						}
+					}
 				} else {
 					dlg.dismiss();
 					if (showCurrentGpx && position == 0) {

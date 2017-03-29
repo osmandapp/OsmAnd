@@ -238,8 +238,6 @@ public class MapActivityLayers {
 								settings.SAVE_GLOBAL_TRACK_TO_GPX.get()) {
 							Toast.makeText(activity,
 									R.string.gpx_monitoring_disabled_warn, Toast.LENGTH_LONG).show();
-						} else {
-							g.path = getString(R.string.show_current_gpx_title);
 						}
 						break;
 					} else {
