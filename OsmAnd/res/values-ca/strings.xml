@@ -2871,4 +2871,21 @@ El connector de mapes d\'esquí d\'OsmAnd us permet veure les pistes amb la seva
 • Escala en funció de la velocitat  (opcional)
 • Si compartiu la vostra ubicació, els vostres amics us podran trobar
  "</string>
+    <string name="osmand_plus_extended_description_part6">"
+ Característiques per ciclistes i vianants
+• Visualització de vies per vianants, senderisme i carrils bici, ideal per activitats a l\'aire lliure
+• Representació i navegació a mida per ciclistes i vianants
+• Indicació opcional de les parades del transport públic (autobús, tramvia, tren), incloent-hi noms de línia
+• Enregistrament opcional del trajecte en un fitxer GPX local o a un servei a la xarxa
+• Indicació opcional de la velocitat i l\'altitud
+• Visualització de corbes de nivell i ombrejat de relleu (amb un connector addicional)
+ "</string>
+    <string name="osmand_plus_extended_description_part7">"
+ Col·laboreu directament amb OSM
+• Notifiqueu errors en les dades
+• Pugeu traces GPX directament a OSM des de l\'aplicació
+• Afegiu PDIs i pugeu-los OSM (o feu-ho més tard si no esteu connectats)
+• Registre opcional del trajecte,  també en segon pla (mentre el dispositiu està bloquejat)
+OsmAnd és de codi obert i es desenvolupa activament . Tothom pot recolzar l\'aplicació informant d\'errors, millorant les traduccions o programant noves característiques. El projecte està en plena efervescència i millora contínua per aquestes vies de desenvolupament i interacció amb l\'usuari. L\'avenç del projecte també es basa en les aportacions econòmiques i la col·laboració en les proves de noves funcionalitats.
+ "</string>
     </resources>
