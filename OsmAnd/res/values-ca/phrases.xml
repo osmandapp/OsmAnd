@@ -3034,4 +3034,18 @@
 	<string name="poi_health_specialty_sports_medicine_yes">Medicina esportiva</string>
 	<string name="poi_health_specialty_podology_yes">Podologia</string>
 	<string name="poi_health_specialty_adult_psychiatry_yes">Psiquiatria per adults</string>
+	<string name="poi_pump_type_gravity">Tipus de bombament: gravitacional</string>
+	<string name="poi_pump_style_modern">Estil del bombament: modern</string>
+	<string name="poi_pump_style_historic">Estil del bombament: antic</string>
+	<string name="poi_pump_status_ok">Estat del bombament: operatiu</string>
+	<string name="poi_pump_status_broken">Estat del bombament: trencat</string>
+	<string name="poi_pump_status_locked">Estat del bombament: bloquejat</string>
+
+	<string name="poi_payment_troika_yes">Troika</string>
+	<string name="poi_payment_troika_no">La tarja Troika no s\'accepta</string>
+
+	<string name="poi_telescope">Telescopi</string>
+	<string name="poi_telescope_type_optical">Telescopi: òptic</string>
+	<string name="poi_telescope_type_radio">Telescopi: radiotelescopi</string>
+	<string name="poi_telescope_type_gamma">Telescopi: raigs gamma</string>
 	</resources>
