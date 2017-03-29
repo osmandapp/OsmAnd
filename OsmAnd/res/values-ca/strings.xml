@@ -2854,4 +2854,21 @@ El connector de mapes d\'esquí d\'OsmAnd us permet veure les pistes amb la seva
     <string name="select_streets">Seleccioneu carrers</string>
     <string name="shared_string_in_name">inclou %1$s</string>
     <string name="type_address">Indiqueu l\'adreça</string>
+    <string name="osmand_plus_extended_description_part4">"
+ Utilitza les dades d\'OSM i de la Viquipèdia
+• Informació de qualitat dels millors projectes col·laboratius del món
+• Les dades OSM estan disponibles per país o regió
+• PDI\'s de la Viquipèdia, perfecte per fer turisme
+• Baixades il·limitades i gratuïtes, directament des de l\'aplicació
+• Mapes vectorials compactes en local que s\'actualitzen un cop al mes, com a mínim
+
+• Selecció entre les dades completes d\'una regió o només la xarxa viària (Exemple: tot el Japó ocupa 700 MB però només són 200 MB per a la xarxa viària)
+ "</string>
+    <string name="osmand_plus_extended_description_part5">"
+ Característiques de seguretat
+• Canvi automàtic entre el mode diürn/nocturn (opcional)
+• Indicacions del límit de velocitat i notificació d\'excés (opcional)
+• Escala en funció de la velocitat  (opcional)
+• Si compartiu la vostra ubicació, els vostres amics us podran trobar
+ "</string>
     </resources>
