@@ -18,6 +18,8 @@ import android.view.VelocityTracker;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
 import android.widget.FrameLayout;
@@ -42,6 +44,7 @@ import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.mapcontextmenu.MenuController.MenuState;
 import net.osmand.plus.mapcontextmenu.MenuController.TitleButtonController;
 import net.osmand.plus.mapcontextmenu.MenuController.TitleProgressController;
+import net.osmand.plus.mapcontextmenu.other.MapRouteInfoMenu;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.controls.SingleTapConfirm;
@@ -751,7 +754,7 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 	@Override
 	public void onResume() {
 		super.onResume();
-		if (!menu.isActive()) {
+		if (!menu.isActive() || MapRouteInfoMenu.isVisible()) {
 			dismissMenu();
 			return;
 		}
