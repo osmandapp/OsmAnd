@@ -657,7 +657,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements SampleC
 	}
 
 	private void runCoreSearchInternal(String text, boolean updateResult, boolean searchMore) {
-		SearchResultCollection c = searchUICore.search(text, new ResultMatcher<SearchResult>() {
+		SearchResultCollection c = searchUICore.search(text, updateResult, new ResultMatcher<SearchResult>() {
 			SearchResultCollection regionResultCollection = null;
 			SearchCoreAPI regionResultApi = null;
 			List<SearchResult> results = new ArrayList<>();
