@@ -47,6 +47,8 @@ public class SearchUICore {
 
 	private ThreadPoolExecutor singleThreadedExecutor;
 	private LinkedBlockingQueue<Runnable> taskQueue;
+	private Runnable onSearchStart = null;
+	private Runnable onResultsComplete = null;
 	private AtomicInteger requestNumber = new AtomicInteger();
 	private int totalLimit = -1; // -1 unlimited - not used
 
@@ -306,6 +308,14 @@ public class SearchUICore {
 		return phrase;
 	}
 
+	public void setOnSearchStart(Runnable onSearchStart) {
+		this.onSearchStart = onSearchStart;
+	}
+
+	public void setOnResultsComplete(Runnable onResultsComplete) {
+		this.onResultsComplete = onResultsComplete;
+	}
+
 	public SearchSettings getSearchSettings() {
 		return searchSettings;
 	}
@@ -356,6 +366,9 @@ public class SearchUICore {
 			@Override
 			public void run() {
 				try {
+					if (onSearchStart != null) {
+						onSearchStart.run();
+					}
 					SearchResultMatcher rm = new SearchResultMatcher(matcher, phrase, request, requestNumber, totalLimit);
 					rm.searchStarted(phrase);
 					if (TIMEOUT_BETWEEN_CHARS > 0 && delayedExecution) {
@@ -374,6 +387,9 @@ public class SearchUICore {
 						LOG.info(">> Search phrase " + phrase + " " + rm.getRequestResults().size());
 						currentSearchResult = collection;
 						rm.searchFinished(phrase);
+						if (onResultsComplete != null) {
+							onResultsComplete.run();
+						}
 					}
 				} catch (InterruptedException e) {
 					e.printStackTrace();
