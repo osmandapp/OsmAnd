@@ -193,7 +193,8 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 					showViewAngle = routePlanningMode; // disable compass rotation in that mode
 				}
 				registerUnregisterSensor(location);
-				mapView.getAnimatedDraggingThread().startMovingNav(location.getLatitude(), location.getLongitude(), zoom, rotation);
+				mapView.getAnimatedDraggingThread().startMoving(
+						location.getLatitude(), location.getLongitude(), zoom, rotation, false);
 				//mapView.setLatLon(location.getLatitude(), location.getLongitude());
 			} else if(location != null) {
 				showViewAngle = (!location.hasBearing() || isSmallSpeedForCompass(location)) && (tb != null && 

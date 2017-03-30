@@ -116,7 +116,8 @@ public class AnimateDraggingMapThread {
 		
 	}
 
-	public void startMovingNav(final double finalLat, final double finalLon, final Integer finalZoom, final Float finalRotation){
+	public void startMoving(final double finalLat, final double finalLon, final Integer finalZoom,
+							final Float finalRotation, final boolean notifyListener) {
 		stopAnimatingSync();
 		final RotatedTileBox rb = tileView.getCurrentRotatedTileBox().copy();
 		double startLat = rb.getLatitude();
@@ -124,11 +125,6 @@ public class AnimateDraggingMapThread {
 		final int startZoom = rb.getZoom();
 		final double startZoomFP = rb.getZoomFloatPart();
 		final float startRotaton = rb.getRotate();
-
-		final float mMoveX = rb.getPixXFromLatLon(startLat, startLon) - rb.getPixXFromLatLon(finalLat, finalLon);
-		final float mMoveY = rb.getPixYFromLatLon(startLat, startLon) - rb.getPixYFromLatLon(finalLat, finalLon);
-
-		final float animationTime = Math.max(450, (Math.abs(mMoveX) + Math.abs(mMoveY)) / 1200f * MOVE_MOVE_ANIMATION_TIME);
 
 		final int zoom;
 		final float rotation;
@@ -143,24 +139,36 @@ public class AnimateDraggingMapThread {
 			rotation = startRotaton;
 		}
 
+		final float mMoveX = rb.getPixXFromLatLon(startLat, startLon) - rb.getPixXFromLatLon(finalLat, finalLon);
+		final float mMoveY = rb.getPixYFromLatLon(startLat, startLon) - rb.getPixYFromLatLon(finalLat, finalLon);
+		boolean skipAnimation = !rb.containsLatLon(finalLat, finalLon);
+		if (skipAnimation) {
+			tileView.setLatLonAnimate(finalLat, finalLon, notifyListener);
+			tileView.setFractionalZoom(zoom, 0, notifyListener);
+			tileView.rotateToAnimate(rotation);
+			return;
+		}
+
+		final float animationTime = 1000;//Math.max(450, (Math.abs(mMoveX) + Math.abs(mMoveY)) / 1200f * MOVE_MOVE_ANIMATION_TIME);
+
 		startThreadAnimating(new Runnable() {
 
 			@Override
 			public void run() {
 				setTargetValues(zoom, finalLat, finalLon);
 				if (zoom != startZoom || startZoomFP != 0) {
-					animatingZoomInThread(startZoom, startZoomFP, zoom, 0, ZOOM_MOVE_ANIMATION_TIME, false);
+					animatingZoomInThread(startZoom, startZoomFP, zoom, 0, ZOOM_MOVE_ANIMATION_TIME, notifyListener);
 				}
 
 				if (!stopped){
-					animatingMoveInThread(mMoveX, mMoveY, animationTime, false);
+					animatingMoveInThread(mMoveX, mMoveY, animationTime, notifyListener);
 				}
 
 				if (!stopped){
-					tileView.setLatLonAnimate(finalLat, finalLon, false);
+					tileView.setLatLonAnimate(finalLat, finalLon, notifyListener);
 				}
 
-				tileView.setFractionalZoom(zoom, 0, false);
+				tileView.setFractionalZoom(zoom, 0, notifyListener);
 
 				if (rotation != startRotaton) {
 					AnimateDraggingMapThread.this.targetRotate = rotation;
