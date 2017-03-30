@@ -18,8 +18,6 @@ import android.view.VelocityTracker;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
 import android.widget.FrameLayout;
@@ -47,6 +45,7 @@ import net.osmand.plus.mapcontextmenu.MenuController.TitleProgressController;
 import net.osmand.plus.mapcontextmenu.other.MapRouteInfoMenu;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.controls.HorizontalSwipeConfirm;
 import net.osmand.plus.views.controls.SingleTapConfirm;
 import net.osmand.util.Algorithms;
 
@@ -241,6 +240,7 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 		runLayoutListener();
 
 		final GestureDetector singleTapDetector = new GestureDetector(view.getContext(), new SingleTapConfirm());
+		final GestureDetector swipeDetector = new GestureDetector(view.getContext(), new HorizontalSwipeConfirm(true));
 
 		final View.OnTouchListener slideTouchListener = new View.OnTouchListener() {
 			private float dy;
@@ -285,6 +285,9 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 				}
 
 				if (menu.isLandscapeLayout()) {
+					if (swipeDetector.onTouchEvent(event)) {
+						menu.close();
+					}
 					return true;
 				}
 
