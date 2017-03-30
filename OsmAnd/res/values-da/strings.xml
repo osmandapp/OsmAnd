@@ -421,7 +421,7 @@ Kortfliser kan hentes direkte via online-kilder, eller kan fremstilles til offli
     <string name="index_name_asia">Asien</string>
     <string name="index_name_oceania">Australien og Oceanien</string>
     <string name="index_name_other">Verdens- og emnekort</string>
-    <string name="index_name_wiki">Wikipedia interessepunkter på verdensplan</string>
+    <string name="index_name_wiki">Globale Wikipedia interessepunkter</string>
     <string name="index_name_voice">Talemeddelelser (optaget, begrænset funktionalitet)</string>
     <string name="index_name_tts_voice">Talemeddelelser (TTS generator, anbefalet)</string>
     <string name="amenity_type_user_defined">Brugerdefineret</string>
@@ -1448,11 +1448,11 @@ Liste over understøttede lande (dybest set hele verden!): Afghanistan, Albanien
     <string name="lang_pt_br">Portugisisk (Brasilien)</string>
     <string name="index_name_canada">Nordamerika - Canada</string>
     <string name="lang_hr">Kroatisk</string>
-    <string name="index_item_world_basemap">Oversigtskort (på verdensplan)</string>
-    <string name="index_item_world_ski">Skikort (på verdensplan)</string>
+    <string name="index_item_world_basemap">Global oversigtskort</string>
+    <string name="index_item_world_ski">Globalt skikort</string>
     <string name="index_item_nation_addresses">Adresser på landsplan</string>
-    <string name="index_item_world_seamarks">Sømærker (på verdensplan)</string>
-    <string name="index_item_world_bitcoin_payments">Bitcoinbetalinger (på verdensplan)</string>
+    <string name="index_item_world_seamarks">Globale sømærker</string>
+    <string name="index_item_world_bitcoin_payments">Globale bitcoinbetalinger</string>
     <string name="index_item_world_altitude_correction">Global højdekorrektion</string>
     <string name="always_center_position_on_map">Vis altid position centeret</string>
     <string name="voice_pref_title">Tale</string>
