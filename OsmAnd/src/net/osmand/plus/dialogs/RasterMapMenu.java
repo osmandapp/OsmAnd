@@ -15,6 +15,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityLayers;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
+import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin.OnMapSelectedCallback;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin.RasterMapType;
 import net.osmand.plus.views.GPXLayer;
 import net.osmand.plus.views.RouteLayer;
@@ -67,10 +68,17 @@ public class RasterMapMenu {
 		final int toggleActionStringId = selected ? R.string.shared_string_enabled
 				: R.string.shared_string_disabled;
 
-		final OsmandRasterMapsPlugin.OnMapSelectedCallback onMapSelectedCallback =
-				new OsmandRasterMapsPlugin.OnMapSelectedCallback() {
+		final OnMapSelectedCallback onMapSelectedCallback =
+				new OnMapSelectedCallback() {
 					@Override
-					public void onMapSelected() {
+					public void onMapSelected(boolean canceled) {
+						if (type == RasterMapType.UNDERLAY && !canceled && !selected) {
+							hidePolygonsPref.set(true);
+							refreshMapComplete(mapActivity);
+						} else if (type == RasterMapType.UNDERLAY && !canceled && mapTypePreference.get() == null) {
+							hidePolygonsPref.set(false);
+							refreshMapComplete(mapActivity);
+						}
 						mapActivity.getDashboard().refreshContent(true);
 					}
 				};
@@ -97,10 +105,6 @@ public class RasterMapMenu {
 						@Override
 						public void run() {
 							plugin.toggleUnderlayState(mapActivity, type, onMapSelectedCallback);
-							if (type == RasterMapType.UNDERLAY) {
-								hidePolygonsPref.set(isChecked);
-								mapActivity.getDashboard().refreshContent(true);
-							}
 							refreshMapComplete(mapActivity);
 						}
 					});

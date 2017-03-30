@@ -161,7 +161,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		if (!force && exMapPref.get() != null) {
 			mapPref.set(exMapPref.get());
 			if (callback != null) {
-				callback.onMapSelected();
+				callback.onMapSelected(false);
 			}
 			updateMapLayers(mapView, mapPref, layers);
 			return;
@@ -192,7 +192,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 									mapPref.set(template.getName());
 									exMapPref.set(template.getName());
 									if (callback != null) {
-										callback.onMapSelected();
+										callback.onMapSelected(false);
 									}
 									updateMapLayers(mapView, mapPref, layers);
 								} else {
@@ -214,7 +214,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 					mapPref.set(keys.get(which));
 					exMapPref.set(keys.get(which));
 					if (callback != null) {
-						callback.onMapSelected();
+						callback.onMapSelected(false);
 					}
 					updateMapLayers(mapView, mapPref, layers);
 				}
@@ -227,7 +227,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 					@Override
 					public void onDismiss(DialogInterface dialog) {
 						if (callback != null) {
-							callback.onMapSelected();
+							callback.onMapSelected(true);
 						}
 					}
 				});
@@ -259,7 +259,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 						toggleUnderlayState(mapActivity, RasterMapType.OVERLAY,
 								new OnMapSelectedCallback() {
 									@Override
-									public void onMapSelected() {
+									public void onMapSelected(boolean canceled) {
 										ContextMenuItem item = adapter.getItem(pos);
 
 										String overlayMapDescr = settings.MAP_OVERLAY.get();
@@ -275,10 +275,10 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 								});
 						return false;
 					case R.string.layer_underlay:
-						toggleUnderlayState(mapActivity, RasterMapType.UNDERLAY, new
-								OnMapSelectedCallback() {
+						toggleUnderlayState(mapActivity, RasterMapType.UNDERLAY,
+								new OnMapSelectedCallback() {
 									@Override
-									public void onMapSelected() {
+									public void onMapSelected(boolean canceled) {
 										ContextMenuItem item = adapter.getItem(pos);
 
 										String underlayMapDescr = settings.MAP_UNDERLAY.get();
@@ -578,7 +578,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		if (map != null) {
 			mapTypePreference.set(null);
 			if (callback != null) {
-				callback.onMapSelected();
+				callback.onMapSelected(false);
 			}
 			updateMapLayers(mapView, null, mapLayers);
 		} else {
@@ -592,6 +592,6 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 	}
 
 	public interface OnMapSelectedCallback {
-		void onMapSelected();
+		void onMapSelected(boolean canceled);
 	}
 }
