@@ -59,10 +59,11 @@ public class RenderedObjectMenuController extends MenuController {
 			return renderedObject.getName();
 		} else if (renderedObject.getTags().size() > 0) {
 			String lang = getMapActivity().getMyApplication().getSettings().MAP_PREFERRED_LOCALE.get().toLowerCase();
-			String name;
+			String name = "";
 			if (!Algorithms.isEmpty(lang)) {
 				name = renderedObject.getTags().get("name:" + lang);
-			} else {
+			}
+			if (Algorithms.isEmpty(name)) {
 				name = renderedObject.getTags().get("name");
 			}
 			return name;
