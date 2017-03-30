@@ -2945,4 +2945,5 @@ Fonctionnalités principales :
     <string name="type_address">Saisissez une adresse</string>
     <string name="select_streets">Sélectionnez les rues</string>
     <string name="shared_string_in_name">dans %1$s</string>
+    <string name="shared_string_overview">Vue d\'ensemble</string>
     </resources>
