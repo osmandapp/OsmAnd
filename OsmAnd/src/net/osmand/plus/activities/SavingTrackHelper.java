@@ -422,9 +422,10 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		if (points.size() == 0 || newSegment) {
 			points.add(new TrkSegment());
 		}
-		if(track.segments.size() == 0 || newSegment) {
+		boolean segmentAdded = false;
+		if (track.segments.size() == 0 || newSegment) {
 			track.segments.add(new TrkSegment());
-			currentTrack.processPoints();
+			segmentAdded = true;
 		}
 		if (pt != null) {
 			int ind = points.size() - 1;
@@ -432,6 +433,9 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 			last.points.add(pt);
 			TrkSegment lt = track.segments.get(track.segments.size() - 1);
 			lt.points.add(pt);
+		}
+		if (segmentAdded) {
+			currentTrack.processPoints();
 		}
 		currentTrack.getModifiableGpxFile().modifiedTime = time;
 	}
