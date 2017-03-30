@@ -19,6 +19,7 @@ public class ShareMenu extends BaseMenuController {
 
 	private LatLon latLon;
 	private String title;
+	private String address;
 
 	private static final String KEY_SHARE_MENU_LATLON = "key_share_menu_latlon";
 	private static final String KEY_SHARE_MENU_POINT_TITLE = "key_share_menu_point_title";
@@ -67,12 +68,13 @@ public class ShareMenu extends BaseMenuController {
 		return title;
 	}
 
-	public static void show(LatLon latLon, String title, MapActivity mapActivity) {
+	public static void show(LatLon latLon, String title, String address, MapActivity mapActivity) {
 
 		ShareMenu menu = new ShareMenu(mapActivity);
 
 		menu.latLon = latLon;
 		menu.title = title;
+		menu.address = address;
 
 		ShareMenuFragment.showInstance(menu);
 	}
@@ -85,6 +87,9 @@ public class ShareMenu extends BaseMenuController {
 		StringBuilder sb = new StringBuilder();
 		if (!Algorithms.isEmpty(title)) {
 			sb.append(title).append("\n");
+		}
+		if (!Algorithms.isEmpty(address) && !address.equals(title)) {
+			sb.append(address).append("\n");
 		}
 		sb.append(getMapActivity().getString(R.string.shared_string_location)).append(": ");
 		sb.append(geoUrl).append("\n").append(httpUrl);

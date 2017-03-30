@@ -376,8 +376,8 @@ public abstract class MenuController extends BaseMenuController {
 		return pointDescription.getName();
 	}
 
-	public void share(LatLon latLon, String title) {
-		ShareMenu.show(latLon, title, getMapActivity());
+	public void share(LatLon latLon, String title, String address) {
+		ShareMenu.show(latLon, title, address, getMapActivity());
 	}
 
 	public void updateData() {
