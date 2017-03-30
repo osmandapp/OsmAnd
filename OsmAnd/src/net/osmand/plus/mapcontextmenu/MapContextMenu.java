@@ -705,9 +705,9 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 
 	public void buttonSharePressed() {
 		if (menuController != null) {
-			menuController.share(latLon, nameStr);
+			menuController.share(latLon, nameStr, streetStr);
 		} else {
-			ShareMenu.show(latLon, nameStr, mapActivity);
+			ShareMenu.show(latLon, nameStr, streetStr, mapActivity);
 		}
 	}
 

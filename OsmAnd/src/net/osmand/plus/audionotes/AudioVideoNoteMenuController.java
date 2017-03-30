@@ -9,7 +9,6 @@ import android.support.v7.app.AlertDialog;
 
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -161,7 +160,7 @@ public class AudioVideoNoteMenuController extends MenuController {
 	}
 
 	@Override
-	public void share(LatLon latLon, String title) {
+	public void share(LatLon latLon, String title, String address) {
 		if (mIsFileAvailable) {
 			String path = mRecording.getFile().getAbsolutePath();
 			MediaScannerConnection.scanFile(getMapActivity(), new String[]{path},
@@ -184,7 +183,7 @@ public class AudioVideoNoteMenuController extends MenuController {
 						}
 					});
 		} else {
-			super.share(latLon, title);
+			super.share(latLon, title, "");
 		}
 	}
 }
