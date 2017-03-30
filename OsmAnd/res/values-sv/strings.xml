@@ -2552,7 +2552,7 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="do_not_show_startup_messages_desc"/>
     <string name="parking_options">Parkeringsalternativ</string>
     <string name="fonts_header">Teckensnitt för kartan</string>
-    <string name="select_streets">Välj gator</string>
+    <string name="select_street">Välj gator</string>
     <string name="shared_string_in_name">i %1$s</string>
     <string name="type_address">Ange adress</string>
     <string name="type_city_town">Ange stad</string>

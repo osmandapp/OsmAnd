@@ -3021,6 +3021,6 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="type_postcode">Iscrie su còdighe postale</string>
     <string name="select_postcode">Issèbera su còdighe postale</string>
     <string name="type_address">Iscrie s\'indiritzu</string>
-    <string name="select_streets">Ischerta sas istradas</string>
+    <string name="select_street">Ischerta sas istradas</string>
     <string name="shared_string_in_name">in %1$s</string>
     </resources>

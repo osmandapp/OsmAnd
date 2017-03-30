@@ -2762,7 +2762,7 @@ OsmAnd+ es la versión de pago de la aplicación. Al comprarla, estás apoyando 
 
 Algunas de las características principales:
  "</string>
-    <string name="select_streets">Seleccionar calles</string>
+    <string name="select_street">Seleccionar calles</string>
     <string name="shared_string_in_name">en %1$s</string>
     <string name="type_address">Escribe la dirección</string>
     <string name="type_city_town">Escribe la ciudad o pueblo</string>

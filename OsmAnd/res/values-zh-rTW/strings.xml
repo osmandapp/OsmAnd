@@ -2857,7 +2857,7 @@ Facebook：https://www.facebook.com/osmandapp
     <string name="do_not_show_startup_messages">不要在啟動時顯示訊息</string>
     <string name="do_not_show_startup_messages_desc">顯示應用程式折扣和專用的在地事件訊息</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd 應用程式在通信期間傳送有關螢幕使用的一般資訊。我們不會收集任何的地理位置或使用者輸入的相關資料。</string>
-    <string name="select_streets">選擇街道</string>
+    <string name="select_street">選擇街道</string>
     <string name="shared_string_in_name">在 %1$s</string>
     <string name="type_address">輸入地址</string>
     <string name="type_city_town">輸入城市或鄉鎮</string>
