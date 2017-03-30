@@ -711,7 +711,7 @@ Liste over understøttede lande (dybest set hele verden!): Afghanistan, Albanien
     <string name="show_more_map_detail_descr">Vis nogle vektor-kortdetaljer (f.eks. veje) allerede ved lavere zoom</string>
     <string name="favourites_delete_multiple_succesful">Favoritter er slettet.</string>
     <string name="favorite_delete_multiple">%1$d favoritter og %2$d favoritgrupper slettes. Forsæt?</string>
-    <string name="basemap_missing">Verdensgrundkort (dækker hele verden ved lave zoomniveauer) mangler. Overvej at hente World_basemap_x.obf for en komplet oversigt.</string>
+    <string name="basemap_missing">Verdensgrundkort (dækker hele verden ved lave zoomniveauer) mangler. Overvej at hente World_basemap_x.obf for en global oversigt.</string>
     <string name="vector_data_missing">Offline-data mangler på SD-kort. Overvej at hente for at kunne bruge kort offline.</string>
 
 
@@ -1453,7 +1453,7 @@ Liste over understøttede lande (dybest set hele verden!): Afghanistan, Albanien
     <string name="index_item_nation_addresses">Adresser på landsplan</string>
     <string name="index_item_world_seamarks">Sømærker (på verdensplan)</string>
     <string name="index_item_world_bitcoin_payments">Bitcoinbetalinger (på verdensplan)</string>
-    <string name="index_item_world_altitude_correction">Højdekorrektion (på verdensplan)</string>
+    <string name="index_item_world_altitude_correction">Global højdekorrektion</string>
     <string name="always_center_position_on_map">Vis altid position centeret</string>
     <string name="voice_pref_title">Tale</string>
     <string name="misc_pref_title">Diverse</string>
