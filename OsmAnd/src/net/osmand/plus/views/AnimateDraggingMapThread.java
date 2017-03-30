@@ -1,16 +1,16 @@
 package net.osmand.plus.views;
 
+import android.os.SystemClock;
+import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.DecelerateInterpolator;
+import android.view.animation.LinearInterpolator;
+
 import net.osmand.PlatformUtil;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
-
-import android.os.SystemClock;
-import android.view.animation.AccelerateDecelerateInterpolator;
-import android.view.animation.DecelerateInterpolator;
-import android.view.animation.LinearInterpolator;
 
 /**
  * Thread for animated dragging.
@@ -116,8 +116,61 @@ public class AnimateDraggingMapThread {
 		
 	}
 
-	
-	public void startMoving(final double finalLat, final double finalLon, final int endZoom,  final boolean notifyListener){
+	public void startMovingNav(final double finalLat, final double finalLon, final Integer finalZoom, final Float finalRotation){
+		stopAnimatingSync();
+		final RotatedTileBox rb = tileView.getCurrentRotatedTileBox().copy();
+		double startLat = rb.getLatitude();
+		double startLon = rb.getLongitude();
+		final int startZoom = rb.getZoom();
+		final double startZoomFP = rb.getZoomFloatPart();
+		final float startRotaton = rb.getRotate();
+
+		final float mMoveX = rb.getPixXFromLatLon(startLat, startLon) - rb.getPixXFromLatLon(finalLat, finalLon);
+		final float mMoveY = rb.getPixYFromLatLon(startLat, startLon) - rb.getPixYFromLatLon(finalLat, finalLon);
+
+		final float animationTime = Math.max(450, (Math.abs(mMoveX) + Math.abs(mMoveY)) / 1200f * MOVE_MOVE_ANIMATION_TIME);
+
+		final int zoom;
+		final float rotation;
+		if (finalZoom != null) {
+			zoom = finalZoom;
+		} else {
+			zoom = startZoom;
+		}
+		if (finalRotation != null) {
+			rotation = finalRotation;
+		} else {
+			rotation = startRotaton;
+		}
+
+		startThreadAnimating(new Runnable() {
+
+			@Override
+			public void run() {
+				setTargetValues(zoom, finalLat, finalLon);
+				if (zoom != startZoom || startZoomFP != 0) {
+					animatingZoomInThread(startZoom, startZoomFP, zoom, 0, ZOOM_MOVE_ANIMATION_TIME, false);
+				}
+
+				if (!stopped){
+					animatingMoveInThread(mMoveX, mMoveY, animationTime, false);
+				}
+
+				if (!stopped){
+					tileView.setLatLonAnimate(finalLat, finalLon, false);
+				}
+
+				tileView.setFractionalZoom(zoom, 0, false);
+
+				if (rotation != startRotaton) {
+					AnimateDraggingMapThread.this.targetRotate = rotation;
+				}
+				pendingRotateAnimation();
+			}
+		});
+	}
+
+	public void startMoving(final double finalLat, final double finalLon, final int endZoom, final boolean notifyListener){
 		stopAnimatingSync();
 		final RotatedTileBox rb = tileView.getCurrentRotatedTileBox().copy();
 		double startLat = rb.getLatitude();

@@ -171,8 +171,10 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 		if (mapView != null) {
 			RotatedTileBox tb = mapView.getCurrentRotatedTileBox();
 			if (isMapLinkedToLocation() && location != null) {
+				Integer zoom = null;
+				Float rotation = null;
 				if (settings.AUTO_ZOOM_MAP.get()) {
-					autozoom(location);
+					zoom = autozoom(location);
 				}
 				int currentMapRotation = settings.ROTATE_MAP.get();
 				boolean smallSpeed = isSmallSpeedForCompass(location);
@@ -183,14 +185,16 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 					if (location.hasBearing() && !smallSpeed) {
 						// special case when bearing equals to zero (we don't change anything)
 						if (location.getBearing() != 0f) {
-							mapView.setRotate(-location.getBearing());
+							rotation = -location.getBearing();
+							//mapView.setRotate(-location.getBearing());
 						}
 					}
 				} else if(currentMapRotation == OsmandSettings.ROTATE_MAP_COMPASS) {
 					showViewAngle = routePlanningMode; // disable compass rotation in that mode
 				}
 				registerUnregisterSensor(location);
-				mapView.setLatLon(location.getLatitude(), location.getLongitude());
+				mapView.getAnimatedDraggingThread().startMovingNav(location.getLatitude(), location.getLongitude(), zoom, rotation);
+				//mapView.setLatLon(location.getLatitude(), location.getLongitude());
 			} else if(location != null) {
 				showViewAngle = (!location.hasBearing() || isSmallSpeedForCompass(location)) && (tb != null && 
 						tb.containsLatLon(location.getLatitude(), location.getLongitude()));
@@ -273,7 +277,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 		return zoomDelta;
 	}
 	
-	public void autozoom(Location location) {
+	public Integer autozoom(Location location) {
 		if (location.hasSpeed()) {
 			long now = System.currentTimeMillis();
 			final RotatedTileBox tb = mapView.getCurrentRotatedTileBox();
@@ -298,11 +302,13 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 					// round to 0.33
 					targetZoom = Math.round(targetZoom * 3) / 3f;
 					int newIntegerZoom = (int)Math.round(targetZoom);
-					double zPart = targetZoom - newIntegerZoom;
-					 mapView.getAnimatedDraggingThread().startZooming(newIntegerZoom, zPart, false);
+					//double zPart = targetZoom - newIntegerZoom;
+					//mapView.getAnimatedDraggingThread().startZooming(newIntegerZoom, zPart, false);
+					return newIntegerZoom;
 				}
 			}
 		}
+		return mapView.getZoom();
 	}
 	
 	public void backToLocationImpl() {
