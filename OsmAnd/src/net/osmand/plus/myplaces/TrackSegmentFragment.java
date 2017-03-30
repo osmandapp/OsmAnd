@@ -826,7 +826,7 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 			for (int i = 0; i < titles.length; i++) {
 				switch (tabTypes[i]) {
 					case GPX_TAB_ITEM_GENERAL:
-						titles[i] = context.getString(R.string.general_settings);
+						titles[i] = context.getString(R.string.shared_string_overview);
 						break;
 					case GPX_TAB_ITEM_ALTITUDE:
 						titles[i] = context.getString(R.string.altitude);
