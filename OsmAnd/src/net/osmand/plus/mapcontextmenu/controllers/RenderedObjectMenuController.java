@@ -82,16 +82,17 @@ public class RenderedObjectMenuController extends MenuController {
 
 	@Override
 	public void addPlainMenuItems(String typeStr, PointDescription pointDescription, final LatLon latLon) {
-		super.addPlainMenuItems(typeStr, pointDescription, latLon);
 		boolean osmEditingEnabled = OsmandPlugin.getEnabledPlugin(OsmEditingPlugin.class) != null;
-		if (osmEditingEnabled) {
+		if (osmEditingEnabled && renderedObject.getId() != null
+				&& renderedObject.getId() > 0 && renderedObject.getId() < 1000000000) {
 			String link;
-			if ((renderedObject.getId() >> 6) % 2 == 0) {
+			if ((renderedObject.getId() >> 6) % 2 != 0) {
 				link = "http://www.openstreetmap.org/node/";
 			} else {
 				link = "http://www.openstreetmap.org/way/";
 			}
 			addPlainMenuItem(R.drawable.ic_action_info_dark, link + (renderedObject.getId() >> 7), true, true, null);
 		}
+		addMyLocationToPlainItems(latLon);
 	}
 }

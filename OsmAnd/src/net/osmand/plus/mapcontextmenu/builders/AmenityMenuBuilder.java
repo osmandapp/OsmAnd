@@ -471,7 +471,8 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		OsmandSettings st = ((OsmandApplication) mapActivity.getApplicationContext()).getSettings();
 
 		boolean osmEditingEnabled = OsmandPlugin.getEnabledPlugin(OsmEditingPlugin.class) != null;
-		if (osmEditingEnabled) {
+		if (osmEditingEnabled && amenity.getId() != null
+				&& amenity.getId() > 0 && amenity.getId() < 1000000000) {
 			String link;
 			if (amenity.getId() % 2 == 0) {
 				link = "http://www.openstreetmap.org/node/";
