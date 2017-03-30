@@ -2927,7 +2927,7 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="shared_string_paused">Szüneteltetve</string>
     <string name="select_city">Válassz települést</string>
     <string name="select_postcode">Válassz irányítószámot</string>
-    <string name="select_streets">Utca választása</string>
+    <string name="select_street">Utca választása</string>
     <string name="shared_string_in_name">itt: %1$s</string>
     <string name="type_address">Add meg a címet</string>
     </resources>

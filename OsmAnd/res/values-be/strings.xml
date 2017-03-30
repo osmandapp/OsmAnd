@@ -2921,7 +2921,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="subscribe_email_error">Памылка</string>
     <string name="quick_action_auto_zoom_on">Аўтамаштаб уключаны</string>
     <string name="quick_action_auto_zoom_off">Аўтамаштаб адключаны</string>
-    <string name="select_streets">Выберыце вуліцу</string>
+    <string name="select_street">Выберыце вуліцу</string>
     <string name="shared_string_in_name">у %1$s</string>
     <string name="type_address">Увядзіце адрас</string>
     <string name="type_city_town">Увядзіце горад</string>

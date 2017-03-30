@@ -2943,7 +2943,7 @@ Fonctionnalités principales :
     <string name="select_city">Sélectionnez la ville</string>
     <string name="select_postcode">Sélectionnez le code postal</string>
     <string name="type_address">Saisissez une adresse</string>
-    <string name="select_streets">Sélectionnez les rues</string>
+    <string name="select_street">Sélectionnez les rues</string>
     <string name="shared_string_in_name">dans %1$s</string>
     <string name="shared_string_overview">Vue d\'ensemble</string>
     </resources>

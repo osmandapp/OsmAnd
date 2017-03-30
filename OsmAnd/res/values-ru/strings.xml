@@ -1,5 +1,15 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
+    <string name="shared_string_overview">Обзор</string>
+    <string name="select_street">Выберите улицу</string>
+    <string name="shared_string_in_name">в %1$s</string>
+    <string name="type_address">Введите адрес</string>
+    <string name="type_city_town">Введите город</string>
+    <string name="type_postcode">Введите почтовый код</string>
+    <string name="nearest_cities">Ближайшие города</string>
+    <string name="select_city">Выберите город</string>
+    <string name="select_postcode">Выберите почтовый код</string>
+
     <string name="quick_action_take_audio_note">Записать аудио</string>
     <string name="quick_action_take_video_note">Записать видео</string>
     <string name="quick_action_take_photo_note">Сделать фото</string>
