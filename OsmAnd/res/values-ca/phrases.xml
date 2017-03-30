@@ -3048,4 +3048,42 @@
 	<string name="poi_telescope_type_optical">Telescopi: òptic</string>
 	<string name="poi_telescope_type_radio">Telescopi: radiotelescopi</string>
 	<string name="poi_telescope_type_gamma">Telescopi: raigs gamma</string>
+	<string name="poi_health_service_nursing_yes">Servei mèdic: infermeria: sí</string>
+	<string name="poi_health_service_nursing_no">Servei mèdic: infermeria: no</string>
+	<string name="poi_health_service_counselling_yes">Servei mèdic: assesorament: sí</string>
+	<string name="poi_health_service_counselling_no">Servei mèdic: assessorament: no</string>
+	<string name="poi_health_service_examination_yes">Servei mèdic: reconeixements: sí</string>
+	<string name="poi_health_service_examination_no">Servei mèdic: reconeixements: no</string>
+	<string name="poi_health_service_child_care_yes">Servei mèdic: atenció infantil: sí</string>
+	<string name="poi_health_service_child_care_no">Servei mèdic: atenció infantil: no</string>
+	<string name="poi_health_service_prevention_yes">Servei mèdic: prevenció: sí</string>
+	<string name="poi_health_service_prevention_no">Servei mèdic: prevenció: no</string>
+	<string name="poi_health_service_prevention_vaccination_yes">Servei mèdic: vacunacions: sí</string>
+	<string name="poi_health_service_prevention_vaccination_no">Servei mèdic: vacunacions: no</string>
+	<string name="poi_health_facility_type_support_group_home">Tipus de centre sanitari: punt de trobada teràpia de grup</string>
+
+	<string name="poi_fire_hydrant_type_pillar">Pilar</string>
+	<string name="poi_fire_hydrant_type_pond">Bassa</string>
+	<string name="poi_fire_hydrant_type_wall">Paret</string>
+
+	<string name="poi_health_person_type_healer">Funció de treballador sanitari: terapeuta</string>
+	<string name="poi_health_person_type_midwife">Funció de treballador sanitari: llevador</string>
+	<string name="poi_health_person_type_nurse">Funció de treballador sanitari: infermer</string>
+	<string name="poi_health_person_type_paramedic">Funció de treballador sanitari: paramèdic</string>
+	<string name="poi_health_person_type_physician">Funció de treballador sanitari: metge</string>
+	<string name="poi_health_person_type_podologist">Funció de treballador sanitari: podòleg</string>
+	<string name="poi_health_person_type_psychologist">Funció de treballador sanitari: psicòleg</string>
+	<string name="poi_health_person_type_therapist">Funció de treballador sanitari: terapeuta</string>
+	<string name="poi_health_person_type_physician_assitant">Funció de treballador sanitari: ajudant de metge</string>
+	<string name="poi_health_person_type_technician">Funció de treballador sanitari: tècnic</string>
+	<string name="poi_health_person_type_witchdoctor">Funció de treballador sanitari: curandero</string>
+
+	<string name="poi_social_facility_day_care">Assistència diurna</string>
+
+	<string name="poi_social_facility_for_senior">Gent gran</string>
+	<string name="poi_bandstand">Quiosc</string>
+	<string name="poi_kiln">Forn</string>
+	<string name="poi_product_brick">Producte: maons</string>
+	<string name="poi_product_quicklime">Producte: calç viva</string>
+	<string name="poi_product_lime">Producte: calç</string>
 	</resources>
