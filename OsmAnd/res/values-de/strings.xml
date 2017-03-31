@@ -514,7 +514,7 @@ OSM ist ein gemeinschaftliches, frei zugängliches, globales Kartografierungspro
 		\n\tZur Verwendung aktivieren: \'Menu\' → \'Karte konfigurieren\' → \'Kartenquelle…\' → \'Offline-Vektor-Karten\'.</string>
 	<string name="choose_audio_stream">Navi-Sprachausgabe</string>
 	<string name="choose_audio_stream_descr">Lautsprecher für Sprachansagen wählen</string>
-	<string name="voice_stream_voice_call">Wie Anrufe (simuliert auch Anrufe zur Auto Stereo Anlage)</string>
+	<string name="voice_stream_voice_call">Wie Anrufe (über Bluetooth auch zur Stereoanlage im Auto)</string>
 	<string name="voice_stream_notification">Wie Benachrichtigungen</string>
 	<string name="voice_stream_music">Wie Medien/Musik</string>
 	<string name="warning_tile_layer_not_downloadable">Kartenebene %1$s wurde nicht heruntergeladen, bitte nochmal laden.</string>
@@ -2968,4 +2968,5 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="select_street">Straßen wählen</string>
     <string name="shared_string_in_name">in %1$s</string>
     <string name="type_address">Adresse eingeben</string>
+    <string name="shared_string_overview">Übersicht</string>
     </resources>
