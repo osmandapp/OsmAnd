@@ -2898,4 +2898,6 @@ eta gehiago…
  • Ibilbidean tarteko puntuentzat euskarria du
  • Zure ibilbidea grabatu dezakezu edo GPX lorratz bat kargatu eta jarraitu dezakezu
  "</string>
+    <string name="shared_string_overview">Ikuspegi orokorra</string>
+    <string name="select_street">Aukeratu kalea</string>
     </resources>
