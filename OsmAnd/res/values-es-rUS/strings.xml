@@ -2855,7 +2855,7 @@ Algunas de las principales funciones:
     <string name="select_city">Elegir la ciudad o pueblo</string>
     <string name="select_postcode">Elegir el código postal</string>
     <string name="type_address">Escribe la dirección</string>
-    <string name="select_street">Elegir calles</string>
+    <string name="select_street">Elegir la calle</string>
     <string name="shared_string_in_name">en %1$s</string>
     <string name="shared_string_overview">Resumen</string>
     </resources>
