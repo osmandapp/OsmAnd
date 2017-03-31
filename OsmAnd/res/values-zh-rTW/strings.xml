@@ -11,19 +11,19 @@
     <string name="no_route">沒有路線</string>
     <string name="delete_target_point">移除目的地</string>
     <string name="target_point">目的地 %1$s</string>
-    <string name="intermediate_point">中間節點 %1$s</string>
+    <string name="intermediate_point">中轉地點 %1$s</string>
 
-    <string name="context_menu_item_last_intermediate_point">增為最後一個的中途標點</string>
-    <string name="context_menu_item_first_intermediate_point">增為第一個中途標點</string>
-    <string name="add_as_last_destination_point">增為最後一個的中途標點</string>
-    <string name="add_as_first_destination_point">增為第一個中途標點</string>
+    <string name="context_menu_item_last_intermediate_point">增為最後一個的中轉地點</string>
+    <string name="context_menu_item_first_intermediate_point">增加為第一個中轉地點</string>
+    <string name="add_as_last_destination_point">增加為最後一個的中轉地點</string>
+    <string name="add_as_first_destination_point">增加為第一個中轉地點</string>
     <string name="replace_destination_point">替換目的地</string>
     <string name="new_destination_point_dialog">您已經設定了一個目的地：</string>
     <string name="target_points">目的地</string>
-    <string name="intermediate_point_too_far">中途標點 %1$s 離最近的道路太遠。</string>
-    <string name="arrived_at_intermediate_point">您已經抵達您的中途標點</string>
-    <string name="context_menu_item_intermediate_point">增為中途標點</string>
-    <string name="map_widget_intermediate_distance">中途標點</string>
+    <string name="intermediate_point_too_far">中轉地點 %1$s 離最近的道路太遠。</string>
+    <string name="arrived_at_intermediate_point">您已經抵達您的中轉地點</string>
+    <string name="context_menu_item_intermediate_point">增加為中轉地點</string>
+    <string name="map_widget_intermediate_distance">中轉地點</string>
     <string name="ending_point_too_far">結束標點離最近的道路太遠。</string>
     <string name="add_tag">增加旗標</string>
     <string name="btn_advanced_mode">進階模式…</string>
@@ -992,7 +992,7 @@
     <string name="local_indexes_cat_srtm">等高線</string>
     <string name="local_indexes_cat_av">音訊/視訊資料</string>
     <string name="stop_routing_confirm">您確定要停止導航嗎？</string>
-    <string name="clear_dest_confirm">您確定想要清除您的目的地(含中間的目的地)？</string>
+    <string name="clear_dest_confirm">您確定想要清除您的目的地(含中轉地點)？</string>
     <string name="precise_routing_mode">精確的路線 (alpha)</string>
     <string name="precise_routing_mode_descr">允許去預估精確而無差錯的路線。仍然有距離限制並且緩慢。</string>
     <string name="recording_context_menu_show">顯示</string>
@@ -1217,7 +1217,7 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="distance_measurement_clear_route">清除所有的標點</string>
     <string name="files_limit">剩餘 %1$d 個檔</string>
     <string name="layer_recordings">記錄層</string>
-    <string name="intermediate_items_sort_return">在目前的位置到達目的地之間的路途上，沿路的中途標點已採取了最佳化排列。</string>
+    <string name="intermediate_items_sort_return">在目前的位置到達目的地之間的路途上，沿路的中轉地點已採取了最佳化排列。</string>
     <string name="osmand_srtm_long_description_1000_chars">"這個外掛元件同時提供了等高線上層和（地貌）山體陰影層，顯示在 OsmAnd 標準地圖的頂部。此功能會讓運動選手、健行旅遊者、背包客，和任何感興趣的人對起伏的地貌結構大加讚賞。
 
 
@@ -1249,9 +1249,9 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="av_photo_play_sound_descr">選擇在按下快門拍照時，是否發出音效</string>
 
     <string name="osb_author_or_password_not_specified">請在設定裡指定 OSM 的使用者名稱和密碼</string>
-    <string name="clear_intermediate_points">清除中途標點</string>
-    <string name="keep_intermediate_points">保留中途標點</string>
-    <string name="new_directions_point_dialog">您已經有中途標點設定。</string>
+    <string name="clear_intermediate_points">清除中轉地點</string>
+    <string name="keep_intermediate_points">保留中轉地點</string>
+    <string name="new_directions_point_dialog">您已經有中轉地點設定。</string>
     <string name="context_menu_item_directions_to">導引到</string>
     <string name="context_menu_item_directions_from">導引由</string>
     <string name="route_descr_map_location">地圖： </string>
@@ -1308,7 +1308,7 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="auto_zoom_close">近距</string>
     <string name="auto_zoom_far">中距</string>
     <string name="auto_zoom_farthest">遠距</string>
-    <string name="route_is_too_long">在兩點間距離超過 200 公里以外時，OsmAnd 的離線路線可能要花很長的時間(或有時無動作)。為了有更好的效能，您或許需要增加中途標點。</string>
+    <string name="route_is_too_long">在兩點間距離超過 200 公里以外時，OsmAnd 的離線路線可能要花很長的時間(或有時無動作)。為了有更好的效能，您或許需要增加中轉地點。</string>
     <string name="animate_routing_route_not_calculated">請先計劃行車路線</string>
     <string name="animate_routing_route">使用模擬計算行車路線 </string>
     <string name="animate_routing_gpx">使用 GPX 軌跡模擬</string>
