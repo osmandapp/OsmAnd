@@ -3036,4 +3036,7 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="shared_string_overview">概要</string>
     <string name="quick_action_replace_destination_desc">輕點動作按鈕將把螢幕中心的位置更換為目的地。</string>
     <string name="quick_action_add_first_intermediate_desc">輕點動作按鈕將會在螢幕中心的位置增加一個中轉點。</string>
+    <string name="depth_contour_descr">地圖集容許您查看見海洋等深線和標點（基於30弧秒格）。</string>
+    <string name="quick_action_add_destination_desc">輕點動作按鈕將在螢幕中心位置增加一個目的地。以前設定的目的地成為最後的中轉點。</string>
+    <string name="subscribe_email_desc">簽署我們有關應用程式折扣的電子郵件名單和獲得3次以上的地圖下載！</string>
     </resources>
