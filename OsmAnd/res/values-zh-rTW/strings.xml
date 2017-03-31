@@ -3033,4 +3033,7 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
  一些主要特點：
  "</string>
     <string name="quick_action_auto_zoom_desc">輕點動作按鈕開/關將會根據您的速度自動縮放地圖。</string>
+    <string name="shared_string_overview">概要</string>
+    <string name="quick_action_replace_destination_desc">輕點動作按鈕將把螢幕中心的位置更換為目的地。</string>
+    <string name="quick_action_add_first_intermediate_desc">輕點動作按鈕將會在螢幕中心的位置增加一個中轉點。</string>
     </resources>
