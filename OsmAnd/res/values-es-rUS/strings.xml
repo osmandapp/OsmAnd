@@ -2357,7 +2357,7 @@ Si amas a OsmAnd, OSM y quieres apoyarlos, esta es una perfecta manera de hacerl
  	<string name="app_mode_train">Tren</string>
     <string name="lang_ast">Asturiano</string>
     <string name="coords_format">Formato de coordenadas</string>
-    <string name="coords_format_descr">Formato para las coordenadas geográficas</string>
+    <string name="coords_format_descr">Formato de las coordenadas geográficas</string>
   	<string name="shared_string_is_open">Abierto ahora</string>
     <string name="storage_directory_card">Tarjeta de memoria</string>
     <string name="shared_string_is_open_24_7">Abierto 24/7</string>
@@ -2858,4 +2858,6 @@ Algunas de las principales funciones:
     <string name="select_street">Elegir la calle</string>
     <string name="shared_string_in_name">en %1$s</string>
     <string name="shared_string_overview">Resumen</string>
+    <string name="animate_my_location">Animar mi ubicación</string>
+    <string name="animate_my_location_desc">Activa la animación de mi ubicación en el mapa</string>
     </resources>
