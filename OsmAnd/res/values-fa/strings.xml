@@ -2170,4 +2170,8 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
     <string name="osm_live_subscription_settings">تنظیمات اشتراک</string>
     <string name="quick_action_auto_zoom">زوم اتوماتیک روشن/خاموش</string>
     <string name="select_street">انتخاب خیابان</string>
+    <string name="shared_string_in_name">"در  %1$s"</string>
+    <string name="type_address">نوشتن آدرس</string>
+    <string name="type_city_town">نام شهر یا شهرستان</string>
+    <string name="type_postcode">کد پستی</string>
     </resources>
