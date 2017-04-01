@@ -930,7 +930,7 @@ Les dades globals (entre 70 graus nord i 70 graus sud) estan basades en mesures 
     <string name="rendering_attr_showRoadMaps_description">Indiqueu quan mostrar mapes de només carreteres:</string>
     <string name="auto_announce_on">Inicia els anuncis automàtics</string>
     <string name="send_location_email_pattern">Per a veure la localització seguiu l\'enllaç web %1$s o l\'enllaç Android %2$s</string>
-    <string name="loading_builds_failed">L\'obtenció del llistat de construccions disponibles de l\'OsmAnd ha fallat</string>
+    <string name="loading_builds_failed">L\'obtenció del llistat de versions de l\'OsmAnd ha fallat</string>
     <string name="contribution_activity">Activitat especial per la versió dels col·laboradors</string>
     <string name="transport_context_menu">Cerca transport a la parada</string>
     <string name="background_service_wait_int_descr">Estableix el temps màxim d\'espera per a cada correcció de la posició en segon pla</string>
@@ -1733,7 +1733,7 @@ Les rutes enregistrades es poden compartir amb els vostres amics o aportar-les p
     <string name="shared_string_enable">Activa</string>
     <string name="shared_string_disable">Desactiva</string>
     <string name="rendering_attr_pisteGrooming_name">Pista condicionada</string>
-    <string name="get_plugin">Obtén</string>
+    <string name="get_plugin">Obteniu</string>
     <string name="free">"%1$s disponible "</string>
     <string name="device_memory">Memòria del dispositiu</string>
     <string name="shared_string_audio">Àudio</string>
