@@ -176,7 +176,7 @@
 	<string name="poi_community_centre">Közösségi ház</string>
 	<string name="poi_theatre">Színház</string>
 	<string name="poi_theatre_genre_circus">Cirkusz</string>
-	<string name="poi_beach_resort">Strand</string>
+	<string name="poi_beach_resort">Vízparti üdülőhely</string>
 	<string name="poi_hunting_stand">Magasles</string>
 	<string name="poi_marina">Kishajókikötő</string>
 	<string name="poi_miniature_golf">Minigolf</string>
@@ -1123,8 +1123,8 @@
 	<string name="poi_animal_shelter_bird">Madármenhely</string>
 
 	<string name="poi_seats">Ülőhelyek</string>
-	<string name="poi_backrest_yes">Háttámla van</string>
-	<string name="poi_backrest_no">Háttámla nincs</string>
+	<string name="poi_backrest_yes">Támla van</string>
+	<string name="poi_backrest_no">Támla nincs</string>
 
 	<string name="poi_intermittent">Időszakos meder</string>
 
@@ -1461,7 +1461,7 @@
 	<string name="poi_denomination_maronite">Maronita</string>
 	<string name="poi_denomination_mahayana">Mahájána buddhizmus</string>
 
-	<string name="poi_resort">Üdülő</string>
+	<string name="poi_resort">Üdülőhely</string>
 	<string name="poi_hanami">Cseresznyevirágzás-nézés</string>
 	<string name="poi_gallery">Művészeti galéria</string>
 	<string name="poi_craft_handicraft">Kézművestermék-készítő</string>
