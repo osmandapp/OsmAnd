@@ -2675,7 +2675,7 @@ public class OsmandSettings {
 		}
 
 		;
-	}.makeProfile();
+	}.makeGlobal();
 
 
 	// this value string is synchronized with settings_pref.xml preference name
