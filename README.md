@@ -2,7 +2,7 @@ OsmAnd (OSM Automated Navigation Directions)
 ------------
 This project aims at providing comfortable map viewing and navigation (routing) application for mobile devices. Particular stress lies with complete offline features (via pre-loaded offline map data) or economic internet usage.
 To get started, continue with the basic description below, then find more detail on our Welcome Wiki Pages, the Project Homepage, or the OpenStreetMap OsmAnd Wiki Page.
-You are welcome to discuss any question regarding the project at the google group OsmAnd. Please do not use comments on wiki pages because it is rather difficult to find them.
+You are welcome to discuss any question regarding the project at the Google group OsmAnd. Please do not use comments on wiki pages because it is rather difficult to find them.
 
 <a href="https://f-droid.org/repository/browse/?fdid=net.osmand.plus" target="_blank">
 <img src="https://f-droid.org/badge/get-it-on.png" alt="Get it on F-Droid" height="90"/></a>
@@ -13,7 +13,7 @@ Functionality
 -------------
 **OsmAnd (OSM Automated Navigation Directions)** is a map and navigation application with access to the free, worldwide, and high-quality OpenStreetMap (OSM) data. All map data can be stored on your device's memory card for offline use. Via your device's GPS, OsmAnd offers routing, with optical and voice guidance, for car, bike, and pedestrian. All the main functionalities work both online and offline (no internet needed).
 
-##Some of the main features:
+## Some of the main features:
 
 #### Navigation
  * Works online (fast) or offline (no roaming charges when you are abroad)
@@ -34,7 +34,7 @@ Functionality
  * Optionally display place names in English, local, or phonetic spelling
 
 #### Use OpenStreetMap and Wikipedia Data
- * High quality information from the best collaborative projects of the world
+ * High quality information from the world's best collaborative projects
  * Global maps from OpenStreetMap, available per country or region
  * Wikipedia POIs, great for sightseeing (not available in free version)
  * Unlimited free download, directly from the app (download limit 16 map files in free version)
@@ -63,7 +63,7 @@ Functionality
  * Add POIs and directly upload them to OSM (or later if offline)
  * Optional trip recording also in background mode (while device is in sleep mode)
 
-OsmAnd is open source and actively being developed. Everyone can contribute to the application by reporting bugs, [improving translations](https://hosted.weblate.org/projects/osmand/), or coding new features. The project is in a lively state of continuous improvement by all these forms of developer and user interaction. The project progress also relies on financial contributions to fund the development, coding, and testing of new functionalities. By buying OsmAnd+ and subscribing to OsmAnd Live you help the application to be even more awesome! It is also possible to make a general donation, see http://osmand.net/help-online#buy_app.
+OsmAnd is open source and actively being developed. Everyone can contribute to the application by reporting bugs, [improving translations](https://hosted.weblate.org/projects/osmand/), or coding new features. The project is in a lively state of continuous improvement by all these forms of developer and user interaction. The project progress also relies on financial contributions to fund the development, coding, and testing of new functionality. By buying OsmAnd+ and subscribing to OsmAnd Live you help the application to be even more awesome! It is also possible to make a general donation, see http://osmand.net/help-online#buy_app.
 
 
 ####  Approximate map coverage and quality:
