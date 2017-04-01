@@ -63,6 +63,10 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 				R.string.use_osm_live_routing,
 				R.string.use_osm_live_routing_description));
 
+		cat.addPreference(createCheckBoxPreference(settings.ANIMATE_MY_LOCATION,
+				R.string.animate_my_location,
+				R.string.animate_my_location_desc));
+
 		final Preference firstRunPreference = new Preference(this);
 		firstRunPreference.setTitle(R.string.simulate_initial_startup);
 		firstRunPreference.setSummary(R.string.simulate_initial_startup_descr);

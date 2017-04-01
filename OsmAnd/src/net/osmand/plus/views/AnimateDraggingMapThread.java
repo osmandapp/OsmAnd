@@ -1,6 +1,7 @@
 package net.osmand.plus.views;
 
 import android.os.SystemClock;
+import android.support.v4.util.Pair;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.LinearInterpolator;
@@ -24,6 +25,7 @@ public class AnimateDraggingMapThread {
 	private final static float ZOOM_ANIMATION_TIME = 250f;
 	private final static float ZOOM_MOVE_ANIMATION_TIME = 350f;
 	private final static float MOVE_MOVE_ANIMATION_TIME = 900f;
+	private final static float NAV_ANIMATION_TIME = 1000f;
 	private final static int DEFAULT_SLEEP_TO_REDRAW = 15;
 	
 	private volatile boolean stopped;
@@ -116,7 +118,7 @@ public class AnimateDraggingMapThread {
 		
 	}
 
-	public void startMoving(final double finalLat, final double finalLon, final Integer finalZoom,
+	public void startMoving(final double finalLat, final double finalLon, final Pair<Integer, Double> finalZoom,
 							final Float finalRotation, final boolean notifyListener) {
 		stopAnimatingSync();
 		final RotatedTileBox rb = tileView.getCurrentRotatedTileBox().copy();
@@ -127,11 +129,14 @@ public class AnimateDraggingMapThread {
 		final float startRotaton = rb.getRotate();
 
 		final int zoom;
+		final double zoomFP;
 		final float rotation;
 		if (finalZoom != null) {
-			zoom = finalZoom;
+			zoom = finalZoom.first;
+			zoomFP = finalZoom.second;
 		} else {
 			zoom = startZoom;
+			zoomFP = startZoomFP;
 		}
 		if (finalRotation != null) {
 			rotation = finalRotation;
@@ -149,31 +154,33 @@ public class AnimateDraggingMapThread {
 			return;
 		}
 
-		final float animationTime = 1000;//Math.max(450, (Math.abs(mMoveX) + Math.abs(mMoveY)) / 1200f * MOVE_MOVE_ANIMATION_TIME);
-
 		startThreadAnimating(new Runnable() {
 
 			@Override
 			public void run() {
 				setTargetValues(zoom, finalLat, finalLon);
-				if (zoom != startZoom || startZoomFP != 0) {
-					animatingZoomInThread(startZoom, startZoomFP, zoom, 0, ZOOM_MOVE_ANIMATION_TIME, notifyListener);
+				boolean animateZoom = finalZoom != null && (zoom != startZoom || startZoomFP != 0);
+				if (animateZoom) {
+					animatingZoomInThread(startZoom, startZoomFP, zoom, zoomFP, NAV_ANIMATION_TIME, notifyListener);
 				}
-
-				if (!stopped){
-					animatingMoveInThread(mMoveX, mMoveY, animationTime, notifyListener);
-				}
-
-				if (!stopped){
-					tileView.setLatLonAnimate(finalLat, finalLon, notifyListener);
-				}
-
-				tileView.setFractionalZoom(zoom, 0, notifyListener);
 
 				if (rotation != startRotaton) {
 					AnimateDraggingMapThread.this.targetRotate = rotation;
+					//animatingRotateInThread(rotation, NAV_ANIMATION_TIME, notifyListener);
 				}
 				pendingRotateAnimation();
+
+				if (!stopped){
+					animatingMoveInThread(mMoveX, mMoveY, NAV_ANIMATION_TIME, notifyListener);
+				}
+
+				if (!stopped){
+					//tileView.setLatLonAnimate(finalLat, finalLon, notifyListener);
+				}
+
+				if (animateZoom) {
+					//tileView.setFractionalZoom(zoom, zoomFP, notifyListener);
+				}
 			}
 		});
 	}
@@ -236,7 +243,31 @@ public class AnimateDraggingMapThread {
 			}
 		});
 	}
-	
+
+	private void animatingRotateInThread(float rotate, float animationTime, boolean notify){
+		AccelerateDecelerateInterpolator interpolator = new AccelerateDecelerateInterpolator();
+		float startRotate = tileView.getRotate();
+		float rotationDiff = MapUtils.unifyRotationDiff(startRotate, rotate);
+		if (tileView.isMapRotateEnabled() && Math.abs(rotationDiff) > 1) {
+			long timeMillis = SystemClock.uptimeMillis();
+			float normalizedTime;
+			while (!stopped) {
+				normalizedTime = (SystemClock.uptimeMillis() - timeMillis) / animationTime;
+				if (normalizedTime > 1f) {
+					break;
+				}
+				float interpolation = interpolator.getInterpolation(normalizedTime);
+				tileView.rotateToAnimate(rotationDiff * interpolation + startRotate);
+				try {
+					Thread.sleep(DEFAULT_SLEEP_TO_REDRAW);
+				} catch (InterruptedException e) {
+					stopped = true;
+				}
+			}
+		}
+		tileView.rotateToAnimate(rotate);
+	}
+
 	private void animatingMoveInThread(float moveX, float moveY, float animationTime,
 			boolean notify){
 		AccelerateDecelerateInterpolator interpolator = new AccelerateDecelerateInterpolator();
@@ -245,9 +276,9 @@ public class AnimateDraggingMapThread {
 		float cY = 0;
 		long timeMillis = SystemClock.uptimeMillis();
 		float normalizedTime = 0f;
-		while(!stopped){
+		while (!stopped){
 			normalizedTime = (SystemClock.uptimeMillis() - timeMillis) / animationTime; 
-			if(normalizedTime > 1f){
+			if (normalizedTime > 1f) {
 				break;
 			}
 			float interpolation = interpolator.getInterpolation(normalizedTime);
@@ -262,7 +293,6 @@ public class AnimateDraggingMapThread {
 				stopped = true;
 			}
 		}
-		
 	}
 	
 	private void animatingZoomInThread(int zoomStart, double zoomFloatStart, 
