@@ -2224,7 +2224,7 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
     <string name="routing_attr_driving_style_safety_name">امنیت</string>
     <string name="relief_smoothness_factor_descr">اولویت با دشت یا تپه</string>
     <string name="shared_string_slope">شیب</string>
-    <!-- string name="points_delete_multiple"> آیا شما میخواهید ٪ 1 $ d نقطه (ها). حذف کنید ؟</string -->
+    <string name="points_delete_multiple">آیا شما میخواهید ٪ 1 $ d نقطه (ها). حذف کنید ؟</string>
     <string name="track_points_category_name">نکات مهم در این مسیر</string>
     <string name="gpx_track">مسیر</string>
     <string name="shared_string_time_span">مدت زمان</string>
