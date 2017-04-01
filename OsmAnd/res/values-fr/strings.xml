@@ -2948,4 +2948,13 @@ Fonctionnalités principales :
     <string name="shared_string_overview">Vue d\'ensemble</string>
     <string name="animate_my_location_desc">Activer l\'animation de ma position sur la carte</string>
     <string name="animate_my_location">Animer ma position</string>
+    <string name="osmand_plus_extended_description_part6">"
+ Fonctionnalités adaptées aux cyclistes et piétons
+ • Affichage des itinéraires piétons et des circuits de randonnée ou encore des pistes cyclables; idéal pour les activités de plein air
+ • Modes de guidage adaptés aux cyclistes et piétons
+ • Affichage des arrêts de transports publics (bus, tram, train) avec identification des lignes (option)
+ • Enregistrement GPX du trajet en local ou en ligne (option)
+ • Affichage de la vitesse et de l\'altitude (option)
+ • Affichage des courbes de niveaux et ombrage du relief (nécessite un greffon additionnel)
+ "</string>
     </resources>
