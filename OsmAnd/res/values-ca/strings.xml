@@ -2888,4 +2888,5 @@ El connector de mapes d\'esquí d\'OsmAnd us permet veure les pistes amb la seva
 • Registre opcional del trajecte,  també en segon pla (mentre el dispositiu està bloquejat)
 OsmAnd és de codi obert i es desenvolupa activament . Tothom pot recolzar l\'aplicació informant d\'errors, millorant les traduccions o programant noves característiques. El projecte està en plena efervescència i millora contínua per aquestes vies de desenvolupament i interacció amb l\'usuari. L\'avenç del projecte també es basa en les aportacions econòmiques i la col·laboració en les proves de noves funcionalitats.
  "</string>
+    <string name="shared_string_overview">Visió general</string>
     </resources>
