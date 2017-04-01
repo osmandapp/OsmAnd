@@ -160,26 +160,17 @@ public class AnimateDraggingMapThread {
 			public void run() {
 				setTargetValues(zoom, finalLat, finalLon);
 				boolean animateZoom = finalZoom != null && (zoom != startZoom || startZoomFP != 0);
+				boolean animateRotation = rotation != startRotaton;
 				if (animateZoom) {
 					animatingZoomInThread(startZoom, startZoomFP, zoom, zoomFP, NAV_ANIMATION_TIME, notifyListener);
 				}
 
-				if (rotation != startRotaton) {
-					AnimateDraggingMapThread.this.targetRotate = rotation;
-					//animatingRotateInThread(rotation, NAV_ANIMATION_TIME, notifyListener);
+				if (animateRotation) {
+					animatingRotateInThread(rotation, 500f, notifyListener);
 				}
-				pendingRotateAnimation();
 
 				if (!stopped){
 					animatingMoveInThread(mMoveX, mMoveY, NAV_ANIMATION_TIME, notifyListener);
-				}
-
-				if (!stopped){
-					//tileView.setLatLonAnimate(finalLat, finalLon, notifyListener);
-				}
-
-				if (animateZoom) {
-					//tileView.setFractionalZoom(zoom, zoomFP, notifyListener);
 				}
 			}
 		});
@@ -254,6 +245,7 @@ public class AnimateDraggingMapThread {
 			while (!stopped) {
 				normalizedTime = (SystemClock.uptimeMillis() - timeMillis) / animationTime;
 				if (normalizedTime > 1f) {
+					tileView.rotateToAnimate(rotate);
 					break;
 				}
 				float interpolation = interpolator.getInterpolation(normalizedTime);
@@ -264,8 +256,9 @@ public class AnimateDraggingMapThread {
 					stopped = true;
 				}
 			}
+		} else {
+			tileView.rotateToAnimate(rotate);
 		}
-		tileView.rotateToAnimate(rotate);
 	}
 
 	private void animatingMoveInThread(float moveX, float moveY, float animationTime,
