@@ -3024,4 +3024,6 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="select_street">Ischerta sas istradas</string>
     <string name="shared_string_in_name">in %1$s</string>
     <string name="shared_string_overview">Vista generale</string>
+    <string name="animate_my_location">Ànima sa positzione mea</string>
+    <string name="animate_my_location_desc">Allughe s\'animatzione de sa positzione mea in sa mapa</string>
     </resources>
