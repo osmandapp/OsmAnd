@@ -2946,4 +2946,6 @@ Fonctionnalités principales :
     <string name="select_street">Sélectionnez les rues</string>
     <string name="shared_string_in_name">dans %1$s</string>
     <string name="shared_string_overview">Vue d\'ensemble</string>
+    <string name="animate_my_location_desc">Activer l\'animation de ma position sur la carte</string>
+    <string name="animate_my_location">Animer ma position</string>
     </resources>
