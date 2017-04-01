@@ -2464,4 +2464,17 @@
 	<string name="poi_megalith_type_nuraghe">巨石類別︰塔狀</string>
 	<string name="poi_megalith_type_stone_circle">巨石類別︰石環</string>
 	<string name="poi_megalith_type_passage_grave">巨石類別︰走廊墳墓</string>
+	<string name="poi_city_capital">首都</string>
+	<string name="poi_pharmacy_dispensing">配藥</string>
+	<string name="poi_healthcare_alternative_types">專門的</string>
+	<string name="poi_free_flying_characteristics">特色</string>
+	<string name="poi_star_rating">星級</string>
+	<string name="poi_religion_type">宗教</string>
+	<string name="poi_denomination">教派</string>
+	<string name="poi_information_contents">內容</string>
+	<string name="poi_clock_option">附加</string>
+	<string name="poi_scout_camp">偵察營</string>
+	<string name="poi_backcountry">偏僻地區</string>
+	<string name="poi_piste_difficulty">滑雪道難度</string>
+	<string name="poi_piste_grooming">滑雪道修整</string>
 	</resources>
