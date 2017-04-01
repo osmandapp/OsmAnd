@@ -2171,7 +2171,120 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
     <string name="quick_action_auto_zoom">زوم اتوماتیک روشن/خاموش</string>
     <string name="select_street">انتخاب خیابان</string>
     <string name="shared_string_in_name">"در  %1$s"</string>
-    <string name="type_address">نوشتن آدرس</string>
+    <string name="type_address">آدرس</string>
     <string name="type_city_town">نام شهر یا شهرستان</string>
     <string name="type_postcode">کد پستی</string>
+    <string name="select_city">انتخاب شهر</string>
+    <string name="select_postcode">انتخاب کدپستی</string>
+    <string name="quick_action_auto_zoom_on">زوم اتوماتیک روشن است</string>
+    <string name="quick_action_auto_zoom_off">زوم اتوماتیک خاموش است</string>
+    <string name="quick_action_add_destination">اضافه کرد مقصد</string>
+    <string name="quick_action_replace_destination">تغییر مقصد</string>
+    <string name="subscribe_email_error">خطا</string>
+    <string name="sea_depth_thanks">از اینکه برنامه Sea Detph Contours را خریدید سپاسگذاریم</string>
+    <string name="analyze_on_map">آنالیز نقشه</string>
+    <string name="shared_string_visible">قابل دیدن</string>
+    <string name="restore_purchases">برگشت به خرید</string>
+    <string name="fonts_header">فونت نقشه</string>
+    <string name="right_side_navigation">خودرو با فرمان سمت راست</string>
+    <string name="driving_region_automatic">اتوماتیک</string>
+    <string name="do_not_show_startup_messages">پیام را در هنگام شروع برنامه نشان نده</string>
+    <string name="parking_options">تنظیمات پارکینگ</string>
+    <string name="full_version_thanks">از اینکه نسخه کامل OsmAnd را خریدید سپاسگذاریم !</string>
+    <string name="routing_attr_relief_smoothness_factor_hills_name">تپه ها</string>
+    <string name="routing_attr_driving_style_speed_name">سرعت</string>
+    <string name="routing_attr_driving_style_balance_name">تعادل</string>
+    <string name="add_new_folder">اضافه کردن پوشه جدید</string>
+    <string name="points_delete_multiple_succesful">نقطه مورد نظر پاک شد</string>
+    <string name="max_speed">حداکثر سرعت</string>
+    <string name="average_speed">میانگین سرعت</string>
+    <string name="shared_string_max">حداکثر</string>
+    <string name="shared_string_start_time">زمان شروع</string>
+    <string name="shared_string_end_time">زمان پایان</string>
+    <string name="shared_string_color">رنگ</string>
+    <string name="file_can_not_be_moved">امکان انتقال فایل وجود ندارد.</string>
+    <string name="shared_string_move">حرکت</string>
+    <string name="routing_attr_driving_style_name">حالت رانندگی</string>
+    <string name="shared_string_time">زمان</string>
+    <string name="rendering_value_high_name">زیاد</string>
+    <string name="rendering_value_medium_w_name">متوسط</string>
+    <string name="rendering_value_low_name">کم</string>
+    <string name="rendering_attr_hideWaterPolygons_description">آب</string>
+    <string name="rendering_attr_hideWaterPolygons_name">مخفی کرد آب</string>
+    <string name="shared_string_overview">نمای کلی</string>
+    <string name="nearest_cities">نزدیکترین شهرستانها</string>
+    <string name="quick_action_auto_zoom_desc">با ضربه زدن به صفحه قابلیت زوم خودکار با توجه به سرعت را روشن یا خاموش کنید</string>
+    <string name="quick_action_add_first_intermediate">اضافه کردن اول حدواسط</string>
+    <string name="subscribe_email_desc">اشتراک در خبرنامه ما برای دریافت نقشه های بیشتر و تخفیفات آینده !</string>
+    <string name="index_item_depth_contours_osmand_ext">خطوط عمقی</string>
+    <string name="index_item_depth_points_southern_hemisphere">نقاط عمیق نیمکره جنوبی</string>
+    <string name="index_item_depth_points_northern_hemisphere">نقاط عمیق نیمکره شمالی</string>
+    <string name="nautical_maps">نقشه دریایی</string>
+    <string name="routing_attr_relief_smoothness_factor_plains_name">دشت</string>
+    <string name="routing_attr_driving_style_safety_name">امنیت</string>
+    <string name="relief_smoothness_factor_descr">اولویت با دشت یا تپه</string>
+    <string name="shared_string_slope">شیب</string>
+    <string name="points_delete_multiple">آیا شما میخواهید ٪ 1 $ d نقطه (ها). حذف کنید ؟</string>
+    <string name="track_points_category_name">نکات مهم در این مسیر</string>
+    <string name="gpx_track">مسیر</string>
+    <string name="shared_string_time_span">مدت زمان</string>
+    <string name="select_gpx_folder">پوشه مسیر را انتخاب کنید</string>
+    <string name="shared_string_tracks">مسیرها</string>
+    <string name="route_altitude">ارتفاع مسیر</string>
+    <string name="altitude_descent">نزولی</string>
+    <string name="altitude_ascent">صعودی</string>
+    <string name="altitude_range">دامنه ارتفاع</string>
+    <string name="average_altitude">میانگین ارتفاع</string>
+    <string name="total_distance">مجموع فاصله</string>
+    <string name="routing_attr_height_obstacles_name">استفاده از اطلاعات ارتفاع</string>
+    <string name="routing_attr_height_obstacles_description">استفاده از اطلاعات ارتفاع زمین ارائه شده توسط SRTM، ASTER و اتحادیه اروپا-DEM</string>
+
+    <string name="rendering_attr_depthContours_description">نمایش خطوط عمقی و نقاط</string>
+    <string name="rendering_attr_depthContours_name">خطوط عمقی</string>
+	<string name="rendering_attr_contourDensity_description">تراکم خطوط تراز</string>
+    <string name="rendering_attr_contourDensity_name">تراکم خطوط تراز</string>
+    <string name="rendering_attr_contourWidth_description">اندازه خطوط تراز</string>
+    <string name="rendering_attr_contourWidth_name">انداه خطوط تراز</string>
+    <string name="routing_attr_allow_motorway_name">دسترسی به بزرگراه</string>
+    <string name="routing_attr_allow_motorway_description">دسترسی به بزرگراه</string>
+    <string name="wiki_around">مقالات ویکیپدیا در مورد این منطقه موجود هست</string>
+    <string name="search_map_hint">جستجوی شهر یا منطقه</string>
+    <string name="upload_poi">آپلود POI</string>
+    <string name="route_calculation">محاسبه مسیر</string>
+    <string name="gpx_add_track">اضافه کردن مسیر</string>
+    <string name="gpx_appearance">ظاهر</string>
+    <string name="osmo_share_location">اشتراک گذاری</string>
+    <string name="osmo_pause_location">توقف</string>
+    <string name="osmo_service_running">خدمات OSM در حال اجرا است</string>
+    <string name="trip_rec_notification_settings">ضبط سفر (اطلاعات موجود نیست)</string>
+    <string name="shared_string_notifications">اطلاعیه</string>
+    <string name="shared_string_continue">ادامه</string>
+    <string name="shared_string_pause">توقف</string>
+    <string name="shared_string_paused">مکث</string>
+    <string name="shared_string_trip">سفر</string>
+    <string name="shared_string_recorded">ضبط کردن</string>
+    <string name="shared_string_record">ضبط</string>
+    <string name="gpx_logging_no_data">اطلاعاتی وجود ندارد</string>
+    <string name="rendering_attr_contourColorScheme_description">رنگ خطوط تراز</string>
+    <string name="save_track_min_speed">ورود به سیستم با سرعت کم</string>
+    <string name="save_track_precision">ورود به سیستم با حداقل دقت</string>
+    <string name="christmas_poi">کریسمس POI</string>
+    <string name="christmas_desc">پیش بینی کریسمس و تعطیلات سال جدید، شما می توانید انتخاب کنید برای نمایش POI مرتبط با کریسمس درخت کریسمس، بازارها، و غیره</string>
+    <string name="christmas_desc_q">نمایش کریسمس POI؟</string>
+    <string name="rendering_value_light_brown_name">قهوه ای روشن</string>
+    <string name="rendering_value_dark_brown_name">قهوه ای تیره</string>
+    <string name="rendering_attr_contourColorScheme_name">رنگ خطور تراز</string>
+    <string name="rendering_attr_surfaceIntegrity_name">سلامت سطح جاده</string>
+    <string name="search_hint">تایپ شهر، آدرس، نام POI</string>
+    <string name="edit_filter">ویرایش دسته</string>
+    <string name="subcategories">زیر شاخه ها</string>
+    <string name="selected_categories">انتخاب دسته</string>
+    <string name="create_custom_poi">ایجاد فیلتر های سفارشی</string>
+    <string name="custom_search">جستجوی سفارشی</string>
+    <string name="shared_string_filters">فیلترها</string>
+    <string name="apply_filters">اعمال فیلتر</string>
+    <string name="save_filter">ذخیره فیلتر</string>
+    <string name="delete_filter">حذف فیلتر</string>
+    <string name="new_filter">فیلتر جدید</string>
+    <string name="new_filter_desc">لطفا یک نام برای فیلتر جدید را وارد کنید، این نام به عنوان دسته جدید اضافه میشود.</string>
     </resources>
