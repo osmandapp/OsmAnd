@@ -178,12 +178,13 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 					zoom = autozoom(location);
 				}
 				int currentMapRotation = settings.ROTATE_MAP.get();
-				boolean smallSpeed = isSmallSpeedForCompass(location);
+				boolean smallSpeedForCompass = isSmallSpeedForCompass(location);
+				boolean smallSpeedForAnimation = isSmallSpeedForAnimation(location);
 				// boolean virtualBearing = fMode && settings.SNAP_TO_ROAD.get();
-				showViewAngle = (!location.hasBearing() || smallSpeed) && (tb != null && 
+				showViewAngle = (!location.hasBearing() || smallSpeedForCompass) && (tb != null &&
 						tb.containsLatLon(location.getLatitude(), location.getLongitude()));
 				if (currentMapRotation == OsmandSettings.ROTATE_MAP_BEARING) {
-					if (location.hasBearing() && !smallSpeed) {
+					if (location.hasBearing() && !smallSpeedForCompass) {
 						// special case when bearing equals to zero (we don't change anything)
 						if (location.getBearing() != 0f) {
 							rotation = -location.getBearing();
@@ -193,7 +194,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 					showViewAngle = routePlanningMode; // disable compass rotation in that mode
 				}
 				registerUnregisterSensor(location);
-				if (settings.ANIMATE_MY_LOCATION.get()) {
+				if (settings.ANIMATE_MY_LOCATION.get() && !smallSpeedForAnimation) {
 					mapView.getAnimatedDraggingThread().startMoving(
 							location.getLatitude(), location.getLongitude(), zoom, rotation, false);
 				} else {
@@ -230,8 +231,11 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	public static boolean isSmallSpeedForCompass(Location location) {
 		return !location.hasSpeed() || location.getSpeed() < 0.5;
 	}
-	
-	
+
+	public static boolean isSmallSpeedForAnimation(Location location) {
+		return !location.hasSpeed() || location.getSpeed() < 1.5;
+	}
+
 	public boolean isShowViewAngle() {
 		return showViewAngle;
 	}
