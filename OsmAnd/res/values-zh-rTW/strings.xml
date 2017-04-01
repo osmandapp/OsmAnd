@@ -357,7 +357,7 @@
     <string name="settings_preset">預置設定檔</string>
     <string name="settings_preset_descr">檢視地圖和導航設定，記住每個使用設定檔。在這裡設定您的預置設定檔。</string>
     <string name="routing_settings">導航</string>
-    <string name="routing_settings_descr">指定導航選項</string>
+    <string name="routing_settings_descr">為導航指定選項</string>
     <string name="global_settings">整體設定</string>
     <string name="index_settings">管理地圖檔案</string>
     <string name="general_settings">一般設定</string>
