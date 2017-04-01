@@ -386,8 +386,9 @@ public class OsmandApplication extends MultiDexApplication {
 		return player;
 	}
 
-	public void initVoiceCommandPlayer(final Activity uiContext, boolean warningNoneProvider, Runnable run, boolean showDialog, boolean force) {
-		String voiceProvider = osmandSettings.VOICE_PROVIDER.get();
+	public void initVoiceCommandPlayer(final Activity uiContext, ApplicationMode applicationMode,
+									   boolean warningNoneProvider, Runnable run, boolean showDialog, boolean force) {
+		String voiceProvider = osmandSettings.VOICE_PROVIDER.getModeValue(applicationMode);
 		if (voiceProvider == null || OsmandSettings.VOICE_PROVIDER_NOT_USE.equals(voiceProvider)) {
 			if (warningNoneProvider && voiceProvider == null) {
 				final AlertDialog.Builder builder = new AlertDialog.Builder(uiContext);
@@ -435,7 +436,7 @@ public class OsmandApplication extends MultiDexApplication {
 
 		} else {
 			if (player == null || !Algorithms.objectEquals(voiceProvider, player.getCurrentVoice()) || force) {
-				appInitializer.initVoiceDataInDifferentThread(uiContext, voiceProvider, run, showDialog);
+				appInitializer.initVoiceDataInDifferentThread(uiContext, applicationMode, voiceProvider, run, showDialog);
 			}
 		}
 

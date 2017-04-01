@@ -439,12 +439,18 @@ public class AppInitializer implements IProgress {
 
 
 
-	public synchronized void initVoiceDataInDifferentThread(final Activity uiContext, final String voiceProvider, final Runnable run, boolean showDialog) {
+	public synchronized void initVoiceDataInDifferentThread(final Activity uiContext,
+															final ApplicationMode applicationMode,
+															final String voiceProvider,
+															final Runnable run,
+															boolean showDialog) {
+
 		final ProgressDialog dlg = showDialog ? ProgressDialog.show(uiContext, app.getString(R.string.loading_data),
 				app.getString(R.string.voice_data_initializing)) : null;
 		new Thread(new Runnable() {
 
-			public CommandPlayer createCommandPlayer(String voiceProvider, OsmandApplication osmandApplication, Activity ctx)
+			public CommandPlayer createCommandPlayer(String voiceProvider, ApplicationMode applicationMode,
+													 OsmandApplication osmandApplication, Activity ctx)
 					throws CommandPlayerException {
 				if (voiceProvider != null) {
 					File parent = osmandApplication.getAppPath(IndexConstants.VOICE_INDEX_DIR);
@@ -454,9 +460,9 @@ public class AppInitializer implements IProgress {
 					}
 
 					if (MediaCommandPlayerImpl.isMyData(voiceDir)) {
-						return new MediaCommandPlayerImpl(osmandApplication, osmandApplication.getRoutingHelper().getVoiceRouter(), voiceProvider);
+						return new MediaCommandPlayerImpl(osmandApplication, applicationMode, osmandApplication.getRoutingHelper().getVoiceRouter(), voiceProvider);
 					} else if (TTSCommandPlayerImpl.isMyData(voiceDir)) {
-						return new TTSCommandPlayerImpl(ctx, osmandApplication.getRoutingHelper().getVoiceRouter(), voiceProvider);
+						return new TTSCommandPlayerImpl(ctx, applicationMode, osmandApplication.getRoutingHelper().getVoiceRouter(), voiceProvider);
 					}
 					throw new CommandPlayerException(ctx.getString(R.string.voice_data_not_supported));
 				}
@@ -468,7 +474,7 @@ public class AppInitializer implements IProgress {
 					if (app.player != null) {
 						app.player.clear();
 					}
-					app.player = createCommandPlayer(voiceProvider, app, uiContext);
+					app.player = createCommandPlayer(voiceProvider, applicationMode, app, uiContext);
 					app.getRoutingHelper().getVoiceRouter().setPlayer(app.player);
 					if(dlg != null) {
 						dlg.dismiss();

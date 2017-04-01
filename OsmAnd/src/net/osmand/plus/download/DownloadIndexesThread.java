@@ -25,6 +25,7 @@ import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.map.WorldRegion;
 import net.osmand.map.WorldRegion.RegionParams;
+import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
@@ -155,7 +156,7 @@ public class DownloadIndexesThread {
 	}
 
 	public void initSettingsFirstMap(WorldRegion reg) {
-		if(app.getSettings().FIRST_MAP_IS_DOWNLOADED.get() || reg == null) {
+		if (app.getSettings().FIRST_MAP_IS_DOWNLOADED.get() || reg == null) {
 			return;
 		}
 		app.getSettings().FIRST_MAP_IS_DOWNLOADED.set(true);
@@ -176,7 +177,10 @@ public class DownloadIndexesThread {
 				}
 			}
 			if (setTts != null) {
-				app.getSettings().VOICE_PROVIDER.set(setTts);
+				List<ApplicationMode> modes = ApplicationMode.allPossibleValues();
+				for (ApplicationMode mode : modes) {
+					app.getSettings().VOICE_PROVIDER.setModeValue(mode, setTts);
+				}
 			}
 		}
 	}

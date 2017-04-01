@@ -11,10 +11,7 @@
 		<ListPreference android:key="coordinates_format" android:title="@string/coords_format" android:summary="@string/coords_format_descr"></ListPreference>
 
 	</PreferenceCategory>
-	<PreferenceCategory android:title="@string/voice_pref_title" android:key="voice">
-	    <ListPreference android:title="@string/voice_provider" android:key="voice_provider" android:summary="@string/voice_provider_descr"></ListPreference>
-	</PreferenceCategory>
-	
+
 	<PreferenceCategory android:title="@string/misc_pref_title" android:key="misc">
 		<ListPreference android:key="osmand_theme" android:title="@string/choose_osmand_theme" android:summary="@string/choose_osmand_theme_descr"></ListPreference>
 	</PreferenceCategory>

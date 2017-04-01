@@ -251,6 +251,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 								//updateMenu();
 							}
 							routingHelper.setAppMode(next);
+							mapActivity.getMyApplication().initVoiceCommandPlayer(mapActivity, next, true, null, false, false);
 							routingHelper.recalculateRouteDueToSettingsChange();
 						}
 					}

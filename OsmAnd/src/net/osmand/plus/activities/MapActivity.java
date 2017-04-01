@@ -511,8 +511,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 		app.getLocationProvider().checkIfLastKnownLocationIsValid();
 		// for voice navigation
-		if (settings.AUDIO_STREAM_GUIDANCE.get() != null) {
-			setVolumeControlStream(settings.AUDIO_STREAM_GUIDANCE.get());
+		ApplicationMode routingAppMode = getRoutingHelper().getAppMode();
+		if (routingAppMode != null && settings.AUDIO_STREAM_GUIDANCE.getModeValue(routingAppMode) != null) {
+			setVolumeControlStream(settings.AUDIO_STREAM_GUIDANCE.getModeValue(routingAppMode));
 		} else {
 			setVolumeControlStream(AudioManager.STREAM_MUSIC);
 		}

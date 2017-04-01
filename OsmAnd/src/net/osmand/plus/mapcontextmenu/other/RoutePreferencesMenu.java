@@ -269,7 +269,8 @@ public class RoutePreferencesMenu {
 		entrieValues = new String[voiceFiles.size() + 2];
 		int k = 0;
 		int selected = -1;
-		String selectedValue = mapActivity.getMyApplication().getSettings().VOICE_PROVIDER.get();
+		String selectedValue = mapActivity.getMyApplication().getSettings().VOICE_PROVIDER.getModeValue(
+				mapActivity.getMyApplication().getRoutingHelper().getAppMode());
 		entrieValues[k] = OsmandSettings.VOICE_PROVIDER_NOT_USE;
 		entries[k] = mapActivity.getResources().getString(R.string.shared_string_do_not_use);
 		ContextMenuItem.ItemBuilder itemBuilder = new ContextMenuItem.ItemBuilder();
@@ -324,8 +325,10 @@ public class RoutePreferencesMenu {
 	}
 
 	public static void applyVoiceProvider(MapActivity mapActivity, String provider) {
-		mapActivity.getMyApplication().getSettings().VOICE_PROVIDER.set(provider);
-		mapActivity.getMyApplication().initVoiceCommandPlayer(mapActivity, false, null, true, false);
+		OsmandApplication app = mapActivity.getMyApplication();
+		ApplicationMode applicationMode = app.getRoutingHelper().getAppMode();
+		app.getSettings().VOICE_PROVIDER.setModeValue(applicationMode, provider);
+		app.initVoiceCommandPlayer(mapActivity, applicationMode, false, null, true, false);
 	}
 
 	private static Set<String> getVoiceFiles(MapActivity mapActivity) {
@@ -502,7 +505,7 @@ public class RoutePreferencesMenu {
 					v.findViewById(R.id.toggle_item).setVisibility(View.GONE);
 					final TextView btn = (TextView) v.findViewById(R.id.select_button);
 					btn.setTextColor(btn.getLinkTextColors());
-					String voiceProvider = settings.VOICE_PROVIDER.get();
+					String voiceProvider = settings.VOICE_PROVIDER.getModeValue(routingHelper.getAppMode());
 					String voiceProviderStr;
 					if (voiceProvider != null) {
 						if (OsmandSettings.VOICE_PROVIDER_NOT_USE.equals(voiceProvider)) {

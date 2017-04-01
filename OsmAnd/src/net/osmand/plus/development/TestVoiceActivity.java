@@ -114,7 +114,8 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 				final OsmandApplication app = (OsmandApplication) getApplication();
 				getSupportActionBar().setTitle(app.getString(R.string.test_voice_prompts) + " (" + entrieValues[which] + ")");
 				app.getSettings().VOICE_PROVIDER.set(entrieValues[which]);
-				app.initVoiceCommandPlayer(TestVoiceActivity.this, true, new Runnable() {
+				app.initVoiceCommandPlayer(TestVoiceActivity.this,
+						app.getSettings().APPLICATION_MODE.get(), true, new Runnable() {
 					
 					@Override
 					public void run() {

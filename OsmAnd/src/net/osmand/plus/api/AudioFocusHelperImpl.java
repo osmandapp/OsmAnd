@@ -2,6 +2,7 @@ package net.osmand.plus.api;
 
 import net.osmand.PlatformUtil;
 
+import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import org.apache.commons.logging.Log;
 
@@ -19,16 +20,16 @@ public class AudioFocusHelperImpl implements AudioManager.OnAudioFocusChangeList
     private static final Log log = PlatformUtil.getLog(AudioFocusHelperImpl.class);
 
     @Override
-    public boolean requestFocus(Context context, int streamType) {
+    public boolean requestFocus(Context context, ApplicationMode applicationMode, int streamType) {
         AudioManager mAudioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
         return AudioManager.AUDIOFOCUS_REQUEST_GRANTED == mAudioManager.requestAudioFocus(this, streamType, 
-              ((OsmandApplication) context.getApplicationContext()).getSettings().INTERRUPT_MUSIC.get()?
+              ((OsmandApplication) context.getApplicationContext()).getSettings().INTERRUPT_MUSIC.getModeValue(applicationMode)?
               AudioManager.AUDIOFOCUS_GAIN_TRANSIENT: 
               AudioManager.AUDIOFOCUS_GAIN_TRANSIENT_MAY_DUCK );
     }
 
     @Override
-    public boolean abandonFocus(Context context, int streamType)
+    public boolean abandonFocus(Context context, ApplicationMode applicationMode, int streamType)
     {
         AudioManager mAudioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
         return AudioManager.AUDIOFOCUS_REQUEST_GRANTED == mAudioManager.abandonAudioFocus(this);

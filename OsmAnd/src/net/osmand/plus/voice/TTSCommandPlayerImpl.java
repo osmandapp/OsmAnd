@@ -11,6 +11,7 @@ import android.speech.tts.TextToSpeech.OnUtteranceCompletedListener;
 import android.support.v7.app.AlertDialog;
 
 import net.osmand.PlatformUtil;
+import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.SettingsActivity;
@@ -69,9 +70,9 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 	private HashMap<String, String> params = new HashMap<String, String>();
 	private VoiceRouter vrt;
 
-	public TTSCommandPlayerImpl(Activity ctx, VoiceRouter vrt, String voiceProvider)
+	public TTSCommandPlayerImpl(Activity ctx, ApplicationMode applicationMode, VoiceRouter vrt, String voiceProvider)
 			throws CommandPlayerException {
-		super((OsmandApplication) ctx.getApplicationContext(), voiceProvider, CONFIG_FILE, TTS_VOICE_VERSION);
+		super((OsmandApplication) ctx.getApplicationContext(), applicationMode, voiceProvider, CONFIG_FILE, TTS_VOICE_VERSION);
 		this.vrt = vrt;
 		if (Algorithms.isEmpty(language)) {
 			throw new CommandPlayerException(
@@ -82,7 +83,8 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 			cSpeechRate = app.getSettings().SPEECH_RATE.get();
 		}
 		initializeEngine(app, ctx);
-		params.put(TextToSpeech.Engine.KEY_PARAM_STREAM, app.getSettings().AUDIO_STREAM_GUIDANCE.get().toString());
+		params.put(TextToSpeech.Engine.KEY_PARAM_STREAM, app.getSettings().AUDIO_STREAM_GUIDANCE
+				.getModeValue(getApplicationMode()).toString());
 	}
 	
 	
@@ -111,7 +113,7 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 			if (ttsRequests++ == 0) {
 				requestAudioFocus();
 				// Delay first prompt of each batch to allow BT SCO connection being established
-				if (ctx.getSettings().AUDIO_STREAM_GUIDANCE.get() == 0) {
+				if (ctx.getSettings().AUDIO_STREAM_GUIDANCE.getModeValue(getApplicationMode()) == 0) {
 					ttsRequests++;
 					if (android.os.Build.VERSION.SDK_INT < 21) {
 						params.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID,""+System.currentTimeMillis());

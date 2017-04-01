@@ -4,11 +4,9 @@ package net.osmand.plus.activities;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
-import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
-import android.media.AudioManager;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -49,23 +47,17 @@ import net.osmand.plus.dashboard.DashChooseAppDirFragment.ChooseAppDirFragment;
 import net.osmand.plus.dashboard.DashChooseAppDirFragment.MoveFilesToDifferentDirectory;
 import net.osmand.plus.dialogs.ConfigureMapMenu;
 import net.osmand.plus.download.DownloadActivity;
-import net.osmand.plus.download.DownloadActivityType;
-import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.render.NativeOsmandLibrary;
-import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.render.RenderingRulesStorage;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Set;
 
 
 public class SettingsGeneralActivity extends SettingsBaseActivity implements OnRequestPermissionsResultCallback {
 
-	public static final String MORE_VALUE = "MORE_VALUE";
 	private Preference applicationDir;
 	private ListPreference applicationModePreference;
 	private Preference drivingRegionPreference;
@@ -104,42 +96,12 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 		drivingRegionPreference = screen.findPreference(settings.DRIVING_REGION.getId());
 
 		addLocalPrefs((PreferenceGroup) screen.findPreference("localization"));
-		addVoicePrefs((PreferenceGroup) screen.findPreference("voice"));
 		addProxyPrefs((PreferenceGroup) screen.findPreference("proxy"));
 		addMiscPreferences((PreferenceGroup) screen.findPreference("misc"));
 
 		applicationModePreference = (ListPreference) screen.findPreference(settings.APPLICATION_MODE.getId());
 		applicationModePreference.setOnPreferenceChangeListener(this);
 	}
-
-
-	private void addVoicePrefs(PreferenceGroup cat) {
-		if (!Version.isBlackberry((OsmandApplication) getApplication())) {
-			ListPreference lp = createListPreference(
-					settings.AUDIO_STREAM_GUIDANCE,
-					new String[]{getString(R.string.voice_stream_music), getString(R.string.voice_stream_notification),
-							getString(R.string.voice_stream_voice_call)}, new Integer[]{AudioManager.STREAM_MUSIC,
-							AudioManager.STREAM_NOTIFICATION, AudioManager.STREAM_VOICE_CALL}, R.string.choose_audio_stream,
-					R.string.choose_audio_stream_descr);
-			final OnPreferenceChangeListener prev = lp.getOnPreferenceChangeListener();
-			lp.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
-
-				@Override
-				public boolean onPreferenceChange(Preference preference, Object newValue) {
-					prev.onPreferenceChange(preference, newValue);
-					CommandPlayer player = getMyApplication().getPlayer();
-					if (player != null) {
-						player.updateAudioStream(settings.AUDIO_STREAM_GUIDANCE.get());
-					}
-					return true;
-				}
-			});
-			cat.addPreference(lp);
-			cat.addPreference(createCheckBoxPreference(settings.INTERRUPT_MUSIC, R.string.interrupt_music,
-					R.string.interrupt_music_descr));
-		}
-	}
-
 
 	private void addLocalPrefs(PreferenceGroup screen) {
 		drivingRegionPreference.setTitle(R.string.driving_region);
@@ -524,7 +486,6 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 	}
 
 	public void updateAllSettings() {
-		reloadVoiceListPreference(getPreferenceScreen());
 		super.updateAllSettings();
 		updateApplicationDirTextAndSummary();
 		applicationModePreference.setTitle(getString(R.string.settings_preset) + "  ["
@@ -536,19 +497,6 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 	@Override
 	public boolean onPreferenceChange(Preference preference, Object newValue) {
 		String id = preference.getKey();
-		if (id.equals(settings.VOICE_PROVIDER.getId())) {
-			if (MORE_VALUE.equals(newValue)) {
-				// listPref.set(oldValue); // revert the change..
-				final Intent intent = new Intent(this, DownloadActivity.class);
-				intent.putExtra(DownloadActivity.TAB_TO_OPEN, DownloadActivity.DOWNLOAD_TAB);
-				intent.putExtra(DownloadActivity.FILTER_CAT, DownloadActivityType.VOICE_FILE.getTag());
-				startActivity(intent);
-			} else {
-				super.onPreferenceChange(preference, newValue);
-				getMyApplication().initVoiceCommandPlayer(this, false, null, true, false);
-			}
-			return true;
-		}
 		super.onPreferenceChange(preference, newValue);
 		if (id.equals(settings.SAFE_MODE.getId())) {
 			if ((Boolean) newValue) {
@@ -708,43 +656,6 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 				}
 			});
 		}
-	}
-
-
-	private void reloadVoiceListPreference(PreferenceScreen screen) {
-		String[] entries;
-		String[] entrieValues;
-		Set<String> voiceFiles = getVoiceFiles();
-		entries = new String[voiceFiles.size() + 2];
-		entrieValues = new String[voiceFiles.size() + 2];
-		int k = 0;
-		// entries[k++] = getString(R.string.shared_string_none);
-		entrieValues[k] = OsmandSettings.VOICE_PROVIDER_NOT_USE;
-		entries[k++] = getString(R.string.shared_string_do_not_use);
-		for (String s : voiceFiles) {
-			entries[k] = (s.contains("tts") ? getString(R.string.ttsvoice) + " " : "") +
-					FileNameTranslationHelper.getVoiceName(this, s);
-			entrieValues[k] = s;
-			k++;
-		}
-		entrieValues[k] = MORE_VALUE;
-		entries[k] = getString(R.string.install_more);
-		registerListPreference(settings.VOICE_PROVIDER, screen, entries, entrieValues);
-	}
-
-
-	private Set<String> getVoiceFiles() {
-		// read available voice data
-		File extStorage = getMyApplication().getAppPath(IndexConstants.VOICE_INDEX_DIR);
-		Set<String> setFiles = new LinkedHashSet<String>();
-		if (extStorage.exists()) {
-			for (File f : extStorage.listFiles()) {
-				if (f.isDirectory()) {
-					setFiles.add(f.getName());
-				}
-			}
-		}
-		return setFiles;
 	}
 
 	@Override

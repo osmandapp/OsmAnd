@@ -47,4 +47,9 @@
 			android:summary="@string/delay_to_start_navigation_descr" />
 		-->
 	</PreferenceCategory>
+
+	<PreferenceCategory android:title="@string/voice_pref_title" android:key="voice">
+		<ListPreference android:title="@string/voice_provider" android:key="voice_provider" android:summary="@string/voice_provider_descr"></ListPreference>
+	</PreferenceCategory>
+
 </PreferenceScreen>

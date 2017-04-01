@@ -7,11 +7,13 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnMultiChoiceClickListener;
 import android.content.Intent;
+import android.media.AudioManager;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceCategory;
+import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
@@ -21,6 +23,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import net.osmand.IndexConstants;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
@@ -32,17 +35,26 @@ import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.OsmandSettings.SpeedConstants;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
+import net.osmand.plus.download.DownloadActivity;
+import net.osmand.plus.download.DownloadActivityType;
+import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.routing.RouteProvider.RouteService;
+import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.router.GeneralRouter;
 import net.osmand.router.GeneralRouter.RoutingParameter;
 import net.osmand.router.GeneralRouter.RoutingParameterType;
 import net.osmand.util.Algorithms;
 
+import java.io.File;
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class SettingsNavigationActivity extends SettingsBaseActivity {
+
+	public static final String MORE_VALUE = "MORE_VALUE";
 
 	private Preference avoidRouting;
 	private Preference preferRouting;
@@ -223,8 +235,72 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 		} else {
 			profileDialog();
 		}
+
+		addVoicePrefs((PreferenceGroup) screen.findPreference("voice"));
 	}
-	
+
+	private void reloadVoiceListPreference(PreferenceScreen screen) {
+		String[] entries;
+		String[] entrieValues;
+		Set<String> voiceFiles = getVoiceFiles();
+		entries = new String[voiceFiles.size() + 2];
+		entrieValues = new String[voiceFiles.size() + 2];
+		int k = 0;
+		// entries[k++] = getString(R.string.shared_string_none);
+		entrieValues[k] = OsmandSettings.VOICE_PROVIDER_NOT_USE;
+		entries[k++] = getString(R.string.shared_string_do_not_use);
+		for (String s : voiceFiles) {
+			entries[k] = (s.contains("tts") ? getString(R.string.ttsvoice) + " " : "") +
+					FileNameTranslationHelper.getVoiceName(this, s);
+			entrieValues[k] = s;
+			k++;
+		}
+		entrieValues[k] = MORE_VALUE;
+		entries[k] = getString(R.string.install_more);
+		registerListPreference(settings.VOICE_PROVIDER, screen, entries, entrieValues);
+	}
+
+
+	private Set<String> getVoiceFiles() {
+		// read available voice data
+		File extStorage = getMyApplication().getAppPath(IndexConstants.VOICE_INDEX_DIR);
+		Set<String> setFiles = new LinkedHashSet<String>();
+		if (extStorage.exists()) {
+			for (File f : extStorage.listFiles()) {
+				if (f.isDirectory()) {
+					setFiles.add(f.getName());
+				}
+			}
+		}
+		return setFiles;
+	}
+
+	private void addVoicePrefs(PreferenceGroup cat) {
+		if (!Version.isBlackberry((OsmandApplication) getApplication())) {
+			ListPreference lp = createListPreference(
+					settings.AUDIO_STREAM_GUIDANCE,
+					new String[]{getString(R.string.voice_stream_music), getString(R.string.voice_stream_notification),
+							getString(R.string.voice_stream_voice_call)}, new Integer[]{AudioManager.STREAM_MUSIC,
+							AudioManager.STREAM_NOTIFICATION, AudioManager.STREAM_VOICE_CALL}, R.string.choose_audio_stream,
+					R.string.choose_audio_stream_descr);
+			final Preference.OnPreferenceChangeListener prev = lp.getOnPreferenceChangeListener();
+			lp.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+
+				@Override
+				public boolean onPreferenceChange(Preference preference, Object newValue) {
+					prev.onPreferenceChange(preference, newValue);
+					CommandPlayer player = getMyApplication().getPlayer();
+					if (player != null) {
+						player.updateAudioStream(settings.AUDIO_STREAM_GUIDANCE.get());
+					}
+					return true;
+				}
+			});
+			cat.addPreference(lp);
+			cat.addPreference(createCheckBoxPreference(settings.INTERRUPT_MUSIC, R.string.interrupt_music,
+					R.string.interrupt_music_descr));
+		}
+	}
 
 	private void prepareRoutingPrefs(PreferenceScreen screen) {
 		PreferenceCategory cat = (PreferenceCategory) screen.findPreference("routing_preferences");
@@ -350,12 +426,9 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 		return router;
 	}
 
-
-	
-
-
 	public void updateAllSettings() {	
 		prepareRoutingPrefs(getPreferenceScreen());
+		reloadVoiceListPreference(getPreferenceScreen());
 		super.updateAllSettings();
 		routerServicePreference.setSummary(getString(R.string.router_service_descr) + "  [" + settings.ROUTER_SERVICE.get() + "]");
 	}
@@ -363,6 +436,20 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 	@Override
 	public boolean onPreferenceChange(Preference preference, Object newValue) {
 		String id = preference.getKey();
+		if (id.equals(settings.VOICE_PROVIDER.getId())) {
+			if (MORE_VALUE.equals(newValue)) {
+				// listPref.set(oldValue); // revert the change..
+				final Intent intent = new Intent(this, DownloadActivity.class);
+				intent.putExtra(DownloadActivity.TAB_TO_OPEN, DownloadActivity.DOWNLOAD_TAB);
+				intent.putExtra(DownloadActivity.FILTER_CAT, DownloadActivityType.VOICE_FILE.getTag());
+				startActivity(intent);
+			} else {
+				super.onPreferenceChange(preference, newValue);
+				getMyApplication().initVoiceCommandPlayer(
+						this, settings.APPLICATION_MODE.get(), false, null, true, false);
+			}
+			return true;
+		}
 		super.onPreferenceChange(preference, newValue);
 		if (id.equals(settings.ROUTER_SERVICE.getId())) {
 			routerServicePreference.setSummary(getString(R.string.router_service_descr) + "  ["
