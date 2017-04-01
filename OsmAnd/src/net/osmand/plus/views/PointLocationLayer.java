@@ -91,7 +91,8 @@ public class PointLocationLayer extends OsmandMapLayer implements ContextMenuLay
 		}
 		int locationX;
 		int locationY;
-		if (mapViewTrackingUtilities.isMapLinkedToLocation()) {
+		if (mapViewTrackingUtilities.isMapLinkedToLocation()
+				&& !MapViewTrackingUtilities.isSmallSpeedForAnimation(lastKnownLocation)) {
 			locationX = box.getPixXFromLonNoRot(box.getLongitude());
 			locationY = box.getPixYFromLatNoRot(box.getLatitude());
 		} else {
