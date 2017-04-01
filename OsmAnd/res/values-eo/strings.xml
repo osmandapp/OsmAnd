@@ -2895,4 +2895,6 @@ De Afganujo al Zimbabvo, de Aŭstralio al Usono, Argentino, Brazilo, Kanado, Fra
     <string name="select_street">Elekti straton</string>
     <string name="shared_string_in_name">en %1$s</string>
     <string name="shared_string_overview">Sumigo</string>
+    <string name="animate_my_location">Animaciigi mian pozicion</string>
+    <string name="animate_my_location_desc">Aktivigas movbildon de mia pozicio sur la mapo</string>
     </resources>
