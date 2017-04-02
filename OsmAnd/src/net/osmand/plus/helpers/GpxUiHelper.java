@@ -661,7 +661,7 @@ public class GpxUiHelper {
 							confirm.setMessage(activity.getString(R.string.enable_plugin_monitoring_services));
 							confirm.show();
 						} else if (!app.getSettings().SAVE_GLOBAL_TRACK_TO_GPX.get()) {
-							monitoringPlugin.controlDialog(activity);
+							monitoringPlugin.controlDialog(activity, false);
 						}
 					}
 				} else {
