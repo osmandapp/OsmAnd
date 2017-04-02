@@ -2477,4 +2477,13 @@
 	<string name="poi_backcountry">偏僻地區</string>
 	<string name="poi_piste_difficulty">滑雪道難度</string>
 	<string name="poi_piste_grooming">滑雪道修整</string>
+	<string name="poi_theatre_genre">類型</string>
+	<string name="poi_outdoor_seating">室外的座位</string>
+	<string name="poi_fee">費用</string>
+	<string name="poi_smoking">吸煙</string>
+	<string name="poi_delivery">遞送</string>
+	<string name="poi_gambling_type">類別</string>
+	<string name="poi_pump_type_gravity">泵浦的類別︰重力</string>
+	<string name="poi_public_bookcase_type_phone_box">類別︰電話亭</string>
+	<string name="poi_public_bookcase_type_reading_box">類別︰讀本盒</string>
 	</resources>
