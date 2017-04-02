@@ -1296,7 +1296,7 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 		}
 
 		void updateChart(LineChart chart) {
-			if (chart != null) {
+			if (chart != null && !chart.isEmpty()) {
 				if (gpxItem.chartMatrix != null) {
 					chart.getViewPortHandler().refresh(new Matrix(gpxItem.chartMatrix), chart, true);
 				}
