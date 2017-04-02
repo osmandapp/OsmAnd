@@ -2425,9 +2425,9 @@
 	<string name="poi_historic_period_roman_greece">Történelmi kor: római Görögország (Kr. e. 146 – Kr. u. 330)</string>
 	<string name="poi_historic_period_roman_kingdom">Történelmi kor: római királyság (Kr. e. 753–509)</string>
 	<string name="poi_historic_period_dominate">Történelmi kor: dominatus (Kr. u. 285–476)</string>
-	<string name="poi_historic_period_villager">Történelmi kor: falusi (I. és II. korszak, Kr. e. 1580–133)</string>
-	<string name="poi_historic_period_urban">Történelmi kor: városi (III. korszak, Kr. e. 133 – Kr. u. 374)</string>
-	<string name="poi_historic_period_classical">Történelmi kor: klasszikus (Kr. u. 374–900)</string>
+	<string name="poi_historic_period_villager">Történelmi kor: falusi (I. és II. korszak, Kr. e. 1580 – Kr. u. 133)</string>
+	<string name="poi_historic_period_urban">Történelmi kor: városi (III. korszak, Kr. u. 133–374)</string>
+	<string name="poi_historic_period_classical">Történelmi kor: klasszikus (IV. korszak, Kr. u. 374–900)</string>
 	<string name="poi_historic_period_imperial">Történelmi kor: birodalmi (V. korszak, Kr. u. 900–1200)</string>
 
 	<string name="poi_historic_era_paleolithic">Történelmi korszak: őskőkorszak (2,6 millió – 10000 évvel ezelőtt)</string>
