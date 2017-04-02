@@ -1260,9 +1260,9 @@
 	<string name="poi_pump_powered">動力泵浦</string>
 	<string name="poi_pump_no">無泵浦</string>
 
-	<string name="poi_water_characteristic_mineral">水特徵的：礦泉水</string>
-	<string name="poi_water_characteristic_mud">水特徵的：泥漿</string>
-	<string name="poi_water_characteristic_sulfuric">水特徵的：硫酸</string>
+	<string name="poi_water_characteristic_mineral">礦泉水</string>
+	<string name="poi_water_characteristic_mud">水的特質：泥漿</string>
+	<string name="poi_water_characteristic_sulfuric">硫酸</string>
 
 	<string name="poi_water_point">供水點</string>
 
@@ -2486,4 +2486,29 @@
 	<string name="poi_pump_type_gravity">泵浦的類別︰重力</string>
 	<string name="poi_public_bookcase_type_phone_box">類別︰電話亭</string>
 	<string name="poi_public_bookcase_type_reading_box">類別︰讀本盒</string>
+	<string name="poi_drive_in">免下車服務</string>
+	<string name="poi_drive_through">得來速</string>
+	<string name="poi_takeaway">外帶</string>
+	<string name="poi_cocktails">雞尾酒</string>
+	<string name="poi_microbrewery">自釀酒廠</string>
+	<string name="poi_beauty_salon_service">服務</string>
+	<string name="poi_recycling_accepted_waste">接受廢棄物</string>
+	<string name="poi_fireplace">壁爐</string>
+	<string name="poi_seasonal">季節性</string>
+	<string name="poi_water_characteristic">水的特質</string>
+	<string name="poi_beach_surface_type">表面</string>
+	<string name="poi_nudism">天體主義</string>
+	<string name="poi_diet">飲食</string>
+	<string name="poi_health_specialty">健康專業</string>
+	<string name="poi_tents">帳篷</string>
+	<string name="poi_washing_machine">洗衣機</string>
+	<string name="poi_caravans">露營拖車</string>
+	<string name="poi_power_supply">電源供應</string>
+	<string name="poi_medical_system">醫療系統</string>
+	<string name="poi_home_visit">出診</string>
+	<string name="poi_dish">碗盤</string>
+	<string name="poi_social_facility_for">目標群體</string>
+	<string name="poi_compressed_air_filter">壓縮空氣</string>
+	<string name="poi_vacuum_cleaner_filter">真空吸塵器</string>
+	<string name="poi_free_flying_characteristic">特性</string>
 	</resources>
