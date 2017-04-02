@@ -1349,7 +1349,7 @@ Die globalen Daten (zwischen 70° Nord und 70° Süd) basieren auf Messungen von
 	<string name="keep_and_add_destination_point">Als letztes Ziel hinzufügen</string>
 	<string name="select_gpx">GPX-Datei auswählen…</string>
 	<string name="route_descr_select_destination">Ziel wählen</string>
-	<string name="interrupt_music_descr">Jegliche Musikwiedergabe bei Sprachhinweisen vollständig pausieren (nicht nur leiser spielen)</string>
+	<string name="interrupt_music_descr">Musikwiedergabe für Sprachhinweise pausieren (nicht nur leiser spielen)</string>
 	<string name="always_center_position_on_map">Standort immer in Bildschirmmitte anzeigen</string>
 	<string name="voice_pref_title">Stimme</string>
 	<string name="misc_pref_title">Verschiedenes</string>
