@@ -446,7 +446,7 @@
     <string name="closing_changeset">Zamykanie zestawu zmian…</string>
     <string name="commiting_node">Zapisywanie węzła…</string>
     <string name="loading_poi_obj">Wczytywanie użytecznego miejsca…</string>
-    <string name="auth_failed">Autoryzacja nie powiodła się</string>
+    <string name="auth_failed">Nie udało się uwierzytelnić</string>
     <string name="failed_op">nie powiodło się</string>
     <string name="converting_names">Konwertowanie natywnych/angielskich nazw…</string>
     <string name="loading_streets_buildings">Wczytywanie ulic/budynków…</string>
@@ -660,7 +660,7 @@ Mapy kafelkowe można uzyskać bezpośrednio z zasobów sieciowych, jak i przygo
     <string name="gpx_visibility_txt">Widoczność</string>
     <string name="gpx_tags_txt">Etykiety</string>
     <string name="gpx_description_txt">Opis</string>
-    <string name="validate_gpx_upload_name_pwd">Proszę podać nazwę użytkownika OSM oraz hasło aby wysłać pliki GPX.</string>
+    <string name="validate_gpx_upload_name_pwd">Proszę wprowadzić nazwę użytkownika OSM oraz hasło, aby wysyłać pliki GPX.</string>
     <string name="default_buttons_support">Wsparcie</string>
     <string name="support_new_features">Wesprzyj prace</string>
 
