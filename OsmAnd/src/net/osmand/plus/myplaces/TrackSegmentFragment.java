@@ -1105,7 +1105,6 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 									((TextView) view.findViewById(R.id.end_date_text)).setText(df.format(end));
 								} else {
 									view.findViewById(R.id.list_divider).setVisibility(View.GONE);
-									view.findViewById(R.id.list_divider_altitude).setVisibility(View.GONE);
 									view.findViewById(R.id.start_end_time).setVisibility(View.GONE);
 								}
 							} else {
@@ -1113,64 +1112,7 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 								view.findViewById(R.id.distance_time_span).setVisibility(View.GONE);
 								view.findViewById(R.id.list_divider).setVisibility(View.GONE);
 								view.findViewById(R.id.start_end_time).setVisibility(View.GONE);
-								view.findViewById(R.id.list_divider_altitude).setVisibility(View.GONE);
 							}
-
-							//Altitude Data
-							if (analysis != null && analysis.hasElevationData) {
-								((ImageView) view.findViewById(R.id.average_altitude_icon))
-										.setImageDrawable(ic.getThemedIcon(R.drawable.ic_action_altitude_average));
-								((ImageView) view.findViewById(R.id.altitude_range_icon))
-										.setImageDrawable(ic.getThemedIcon(R.drawable.ic_action_altitude_average));
-								((ImageView) view.findViewById(R.id.ascent_icon))
-										.setImageDrawable(ic.getThemedIcon(R.drawable.ic_action_altitude_ascent));
-								((ImageView) view.findViewById(R.id.descent_icon))
-										.setImageDrawable(ic.getThemedIcon(R.drawable.ic_action_altitude_descent));
-
-								String minAltitude = OsmAndFormatter.getFormattedAlt(analysis.minElevation, app);
-								String maxAltitude = OsmAndFormatter.getFormattedAlt(analysis.maxElevation, app);
-								String asc = OsmAndFormatter.getFormattedAlt(analysis.diffElevationUp, app);
-								String desc = OsmAndFormatter.getFormattedAlt(analysis.diffElevationDown, app);
-
-								((TextView) view.findViewById(R.id.average_altitude_text))
-										.setText(OsmAndFormatter.getFormattedAlt(analysis.avgElevation, app));
-								((TextView) view.findViewById(R.id.altitude_range_text)).setText(minAltitude + " - " + maxAltitude);
-								((TextView) view.findViewById(R.id.ascent_text)).setText(asc);
-								((TextView) view.findViewById(R.id.descent_text)).setText(desc);
-
-							} else {
-								view.findViewById(R.id.average_altitude_range).setVisibility(View.GONE);
-								view.findViewById(R.id.list_divider_altitude).setVisibility(View.GONE);
-								view.findViewById(R.id.ascent_descent).setVisibility(View.GONE);
-							}
-
-							//Speed data
-							if (analysis != null && analysis.isSpeedSpecified() && analysis.hasSpeedData) {
-								((ImageView) view.findViewById(R.id.average_speed_icon))
-										.setImageDrawable(ic.getThemedIcon(R.drawable.ic_action_speed));
-								((ImageView) view.findViewById(R.id.max_speed_icon))
-										.setImageDrawable(ic.getThemedIcon(R.drawable.ic_action_max_speed));
-								((ImageView) view.findViewById(R.id.time_moving_icon))
-										.setImageDrawable(ic.getThemedIcon(R.drawable.ic_action_time_span));
-//								((ImageView) view.findViewById(R.id.distance_icon))
-//										.setImageDrawable(ic.getThemedIcon(R.drawable.ic_action_polygom_dark));
-
-								String avgSpeed = OsmAndFormatter.getFormattedSpeed(analysis.avgSpeed, app);
-								String maxSpeed = OsmAndFormatter.getFormattedSpeed(analysis.maxSpeed, app);
-
-								((TextView) view.findViewById(R.id.average_speed_text)).setText(avgSpeed);
-								((TextView) view.findViewById(R.id.max_speed_text)).setText(maxSpeed);
-								((TextView) view.findViewById(R.id.time_moving_text))
-										.setText(Algorithms.formatDuration((int) (analysis.timeMoving / 1000), app.accessibilityEnabled()));
-//								((TextView) view.findViewById(R.id.distance_text))
-//										.setText(OsmAndFormatter.getFormattedDistance(analysis.totalDistanceMoving, app));
-
-							} else {
-								view.findViewById(R.id.max_speed).setVisibility(View.GONE);
-								view.findViewById(R.id.list_divider_speed).setVisibility(View.GONE);
-								view.findViewById(R.id.time_distance).setVisibility(View.GONE);
-							}
-
 							view.findViewById(R.id.details_view).setOnClickListener(new View.OnClickListener() {
 								@Override
 								public void onClick(View v) {
