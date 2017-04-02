@@ -48,6 +48,7 @@ import net.osmand.plus.base.FavoriteImageDrawable;
 import net.osmand.plus.base.OsmandExpandableListFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.ColorDialogs;
+import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -88,6 +89,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 	private ActionMode actionMode;
 	private SearchView searchView;
 	Drawable arrowImage;
+	Drawable arrowImageDisabled;
 	private HashMap<String, OsmandSettings.OsmandPreference<Boolean>> preferenceCache = new HashMap<>();
 	private View footerView;
 
@@ -107,6 +109,10 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 		} else {
 			arrowImage.setColorFilter(ContextCompat.getColor(context, R.color.color_distance), PorterDuff.Mode.MULTIPLY);
 		}
+		arrowImageDisabled = ContextCompat.getDrawable(context, R.drawable.ic_direction_arrow);
+		arrowImageDisabled.mutate();
+		arrowImageDisabled.setColorFilter(ContextCompat.getColor(
+				context, light ? R.color.icon_color : R.color.icon_color_light), PorterDuff.Mode.MULTIPLY);
 	}
 
 	private void deleteFavorites() {
@@ -652,6 +658,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 		public void synchronizeGroups() {
 			favoriteGroups.clear();
 			groups.clear();
+			List<FavoriteGroup> disablesGroups = new ArrayList<>();
 			List<FavoriteGroup> gs = helper.getFavoriteGroups();
 			Set<?> flt = filter;
 			for (FavoriteGroup key : gs) {
@@ -670,9 +677,14 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 					favoriteGroups.put(key, list);
 				}
 				if (!empty) {
-					groups.add(key);
+					if (key.visible) {
+						groups.add(key);
+					} else {
+						disablesGroups.add(key);
+					}
 				}
 			}
+			groups.addAll(disablesGroups);
 			notifyDataSetChanged();
 		}
 
@@ -729,10 +741,22 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 			OsmandApplication app = getMyApplication();
 			boolean light = app.getSettings().isLightContent();
 			final FavoriteGroup model = getGroup(groupPosition);
+			boolean visible = model.visible;
+			int enabledColor = light ? R.color.primary_text_light : R.color.primary_text_dark;
+			int disabledColor = light ? R.color.secondary_text_light : R.color.secondary_text_dark;
 			row.findViewById(R.id.group_divider).setVisibility(groupPosition == 0 ? View.GONE : View.VISIBLE);
-			setCategoryIcon(app, FavoriteImageDrawable.getOrCreate(getActivity(), model.color, false), groupPosition, isExpanded, row, light);
+			setCategoryIcon(app, app.getIconsCache().getPaintedIcon(
+					R.drawable.ic_action_fav_dark, visible ? (model.color | 0xff000000) : getResources().getColor(disabledColor)),
+					groupPosition, isExpanded, row, light);
 			adjustIndicator(app, groupPosition, isExpanded, row, light);
 			TextView label = (TextView) row.findViewById(R.id.category_name);
+			label.setTextColor(getResources().getColor(visible ? enabledColor : disabledColor));
+			if (visible) {
+				Typeface typeface = FontCache.getFont(getContext(), "fonts/Roboto-Medium.ttf");
+				label.setTypeface(typeface, Typeface.NORMAL);
+			} else {
+				label.setTypeface(Typeface.DEFAULT, Typeface.ITALIC);
+			}
 			label.setText(model.name.length() == 0 ? getString(R.string.shared_string_favorites) : model.name);
 
 			if (selectionMode) {
@@ -793,12 +817,18 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 				row = inflater.inflate(R.layout.favorites_list_item, parent, false);
 				row.findViewById(R.id.list_divider).setVisibility(View.VISIBLE);
 			}
+			OsmandApplication app = getMyApplication();
+			boolean light = app.getSettings().isLightContent();
+			int enabledColor = light ? R.color.primary_text_light : R.color.primary_text_dark;
+			int disabledColor = light ? R.color.secondary_text_light : R.color.secondary_text_dark;
+			int disabledIconColor = light ? R.color.icon_color : R.color.icon_color_light;
 
 			TextView name = (TextView) row.findViewById(R.id.favourite_label);
 			TextView distanceText = (TextView) row.findViewById(R.id.distance);
 			ImageView icon = (ImageView) row.findViewById(R.id.favourite_icon);
 
 			final FavouritePoint model = getChild(groupPosition, childPosition);
+			boolean visible = model.isVisible();
 			row.setTag(model);
 
 			if (showOptionsButton) {
@@ -814,20 +844,30 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 					}
 				});
 			}
-			icon.setImageDrawable(FavoriteImageDrawable.getOrCreate(getActivity(), model.getColor(), false));
+			icon.setImageDrawable(FavoriteImageDrawable.getOrCreate(getActivity(),
+					visible ? model.getColor() : getResources().getColor(disabledIconColor), false));
 			LatLon lastKnownMapLocation = getMyApplication().getSettings().getLastKnownMapLocation();
 			int dist = (int) (MapUtils.getDistance(model.getLatitude(), model.getLongitude(),
 					lastKnownMapLocation.getLatitude(), lastKnownMapLocation.getLongitude()));
 			String distance = OsmAndFormatter.getFormattedDistance(dist, getMyApplication()) + "  ";
 			name.setText(model.getName(), TextView.BufferType.SPANNABLE);
-			name.setTypeface(Typeface.DEFAULT, model.isVisible() ? Typeface.NORMAL : Typeface.ITALIC);
+			name.setTypeface(Typeface.DEFAULT, visible ? Typeface.NORMAL : Typeface.ITALIC);
+			name.setTextColor(getResources().getColor(visible ? enabledColor : disabledColor));
 			distanceText.setText(distance);
-			distanceText.setTextColor(getResources().getColor(R.color.color_distance));
+			if (visible) {
+				distanceText.setTextColor(getResources().getColor(R.color.color_distance));
+			} else {
+				distanceText.setTextColor(getResources().getColor(disabledColor));
+			}
 			row.findViewById(R.id.group_image).setVisibility(View.GONE);
 
 			ImageView direction = (ImageView) row.findViewById(R.id.direction);
 			direction.setVisibility(View.VISIBLE);
-			direction.setImageDrawable(arrowImage);
+			if (visible) {
+				direction.setImageDrawable(arrowImage);
+			} else {
+				direction.setImageDrawable(arrowImageDisabled);
+			}
 
 			final CheckBox ch = (CheckBox) row.findViewById(R.id.toggle_item);
 			if (selectionMode) {
