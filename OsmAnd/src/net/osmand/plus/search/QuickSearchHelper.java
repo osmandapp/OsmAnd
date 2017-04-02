@@ -3,6 +3,8 @@ package net.osmand.plus.search;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
+import net.osmand.plus.FavouritesDbHelper;
+import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.OsmandApplication;
@@ -67,7 +69,7 @@ public class QuickSearchHelper implements ResourceListener {
 		core.registerAPI(new SearchFavoriteAPI(app));
 
 		// Register favorites by category search api
-		core.registerAPI(new SearchFavoriteByCategoryAPI(app));
+		core.registerAPI(new SearchFavoriteCategoryAPI(app));
 
 		// Register WptPt search api
 		core.registerAPI(new SearchWptAPI(app));
@@ -107,9 +109,6 @@ public class QuickSearchHelper implements ResourceListener {
 
 		@Override
 		public boolean search(SearchPhrase phrase, SearchUICore.SearchResultMatcher resultMatcher) throws IOException {
-			if (!super.search(phrase, resultMatcher)) {
-				return false;
-			}
 			if (phrase.isEmpty()) {
 				return false;
 			}
@@ -147,13 +146,15 @@ public class QuickSearchHelper implements ResourceListener {
 		}
 	}
 
-	public static class SearchFavoriteByCategoryAPI extends SearchBaseAPI {
+	public static class SearchFavoriteCategoryAPI extends SearchBaseAPI {
 
 		private OsmandApplication app;
+		private FavouritesDbHelper helper;
 
-		public SearchFavoriteByCategoryAPI(OsmandApplication app) {
-			super(ObjectType.FAVORITE);
+		public SearchFavoriteCategoryAPI(OsmandApplication app) {
+			super(ObjectType.FAVORITE_GROUP);
 			this.app = app;
+			this.helper = app.getFavorites();
 		}
 
 		@Override
@@ -163,20 +164,19 @@ public class QuickSearchHelper implements ResourceListener {
 
 		@Override
 		public boolean search(SearchPhrase phrase, SearchUICore.SearchResultMatcher resultMatcher) throws IOException {
-			if (!super.search(phrase, resultMatcher)) {
-				return false;
-			}
 			List<FavouritePoint> favList = app.getFavorites().getFavouritePoints();
 			for (FavouritePoint point : favList) {
-				SearchResult sr = new SearchResult(phrase);
-				sr.localeName = point.getName();
-				sr.object = point;
-				sr.priority = SEARCH_FAVORITE_CATEGORY_PRIORITY;
-				sr.objectType = ObjectType.FAVORITE;
-				sr.location = new LatLon(point.getLatitude(), point.getLongitude());
-				sr.preferredZoom = 17;
-				if (point.getCategory() != null && phrase.getNameStringMatcher().matches(point.getCategory())) {
-					resultMatcher.publish(sr);
+				FavoriteGroup group = helper.getGroup(point);
+				if (group != null && group.visible) {
+					SearchResult sr = new SearchResult(phrase);
+					sr.localeName = group.name;
+					sr.object = group;
+					sr.priority = SEARCH_FAVORITE_CATEGORY_PRIORITY;
+					sr.objectType = ObjectType.FAVORITE_GROUP;
+					sr.preferredZoom = 17;
+					if (phrase.getNameStringMatcher().matches(sr.localeName)) {
+						resultMatcher.publish(sr);
+					}
 				}
 			}
 			return true;
@@ -184,7 +184,7 @@ public class QuickSearchHelper implements ResourceListener {
 
 		@Override
 		public int getSearchPriority(SearchPhrase p) {
-			if(!p.isNoSelectedType() || !p.isUnknownSearchWordPresent()) {
+			if (!p.isNoSelectedType() || !p.isUnknownSearchWordPresent()) {
 				return -1;
 			}
 			return SEARCH_FAVORITE_API_CATEGORY_PRIORITY;
@@ -207,11 +207,11 @@ public class QuickSearchHelper implements ResourceListener {
 
 		@Override
 		public boolean search(SearchPhrase phrase, SearchUICore.SearchResultMatcher resultMatcher) throws IOException {
-			if (!super.search(phrase, resultMatcher)) {
-				return false;
-			}
 			List<FavouritePoint> favList = app.getFavorites().getFavouritePoints();
 			for (FavouritePoint point : favList) {
+				if (!point.isVisible()) {
+					continue;
+				}
 				SearchResult sr = new SearchResult(phrase);
 				sr.localeName = point.getName();
 				sr.object = point;
@@ -219,7 +219,12 @@ public class QuickSearchHelper implements ResourceListener {
 				sr.objectType = ObjectType.FAVORITE;
 				sr.location = new LatLon(point.getLatitude(), point.getLongitude());
 				sr.preferredZoom = 17;
-				if (phrase.getUnknownSearchWordLength() <= 1 && phrase.isNoSelectedType()) {
+				if (phrase.isLastWord(ObjectType.FAVORITE_GROUP)
+						&& !point.getCategory().equals(phrase.getLastSelectedWord().getResult().localeName)) {
+					continue;
+				}
+				if (phrase.getUnknownSearchWordLength() <= 1
+						&& (phrase.isNoSelectedType() || phrase.isLastWord(ObjectType.FAVORITE_GROUP))) {
 					resultMatcher.publish(sr);
 				} else if (phrase.getNameStringMatcher().matches(sr.localeName)) {
 					resultMatcher.publish(sr);
@@ -230,6 +235,9 @@ public class QuickSearchHelper implements ResourceListener {
 
 		@Override
 		public int getSearchPriority(SearchPhrase p) {
+			if (p.isLastWord(ObjectType.FAVORITE_GROUP)) {
+				return SEARCH_FAVORITE_API_PRIORITY;
+			}
 			if(!p.isNoSelectedType() || !p.isUnknownSearchWordPresent()) {
 				return -1;
 			}
@@ -253,9 +261,6 @@ public class QuickSearchHelper implements ResourceListener {
 
 		@Override
 		public boolean search(SearchPhrase phrase, SearchUICore.SearchResultMatcher resultMatcher) throws IOException {
-			if (!super.search(phrase, resultMatcher)) {
-				return false;
-			}
 			SearchHistoryHelper helper = SearchHistoryHelper.getInstance(app);
 			List<SearchHistoryHelper.HistoryEntry> points = helper.getHistoryEntries();
 			int p = 0;

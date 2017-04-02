@@ -8,7 +8,7 @@ public enum ObjectType {
 	// LOCATION
 	LOCATION(true), PARTIAL_LOCATION(false),
 	// UI OBJECTS
-	FAVORITE(true), WPT(true), RECENT_OBJ(true), 
+	FAVORITE(true), FAVORITE_GROUP(false), WPT(true), RECENT_OBJ(true),
 	
 	REGION(true),
 
@@ -28,5 +28,12 @@ public enum ObjectType {
 	
 	public static boolean isAddress(ObjectType t) {
 		return t == CITY || t == VILLAGE || t == POSTCODE || t == STREET || t == HOUSE || t == STREET_INTERSECTION;
+	}
+
+	public static ObjectType getExclusiveSearchType(ObjectType t) {
+		if (t == FAVORITE_GROUP) {
+			return FAVORITE;
+		}
+		return null;
 	}
 }

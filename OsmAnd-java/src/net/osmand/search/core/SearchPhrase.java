@@ -408,7 +408,15 @@ public class SearchPhrase {
 		}
 		return false;
 	}
-	
+
+	public ObjectType getExclusiveSearchType() {
+		SearchWord lastWord = getLastSelectedWord();
+		if (lastWord != null) {
+			return ObjectType.getExclusiveSearchType(lastWord.getType());
+		}
+		return null;
+	}
+
 	public NameStringMatcher getNameStringMatcher() {
 		if(sm != null) {
 			return sm;

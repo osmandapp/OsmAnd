@@ -427,7 +427,7 @@ public class SearchUICore {
 			if (matcher.isCancelled()) {
 				break;
 			}
-			if (api.getSearchPriority(phrase) == -1) {
+			if (!api.isSearchAvailable(phrase) || api.getSearchPriority(phrase) == -1) {
 				continue;
 			}
 			try {

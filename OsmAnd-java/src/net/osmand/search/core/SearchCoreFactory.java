@@ -91,8 +91,12 @@ public class SearchCoreFactory {
 		}
 
 		@Override
-		public boolean isSearchAvailable(ObjectType... typesToSearch) {
-			if (typesToSearch == null) {
+		public boolean isSearchAvailable(SearchPhrase p) {
+			ObjectType[] typesToSearch = p.getSearchTypes();
+			ObjectType exclusiveSearchType = p.getExclusiveSearchType();
+			if (exclusiveSearchType != null) {
+				return searchTypes != null && searchTypes.length == 1 && searchTypes[0] == exclusiveSearchType;
+			} else if (typesToSearch == null) {
 				return true;
 			} else {
 				for (ObjectType type : searchTypes) {
@@ -108,7 +112,7 @@ public class SearchCoreFactory {
 
 		@Override
 		public boolean search(SearchPhrase phrase, SearchResultMatcher resultMatcher) throws IOException {
-			return isSearchAvailable(phrase.getSearchTypes());
+			return true;
 		}
 
 		@Override
@@ -127,7 +131,7 @@ public class SearchCoreFactory {
 			phrase.countUnknownWordsMatch(res);
 			int cnt = resultMatcher.getCount();
 			List<String> ws = phrase.getUnknownSearchWords(res.otherWordsMatch);
-			if (!ws.isEmpty() && api != null && api.isSearchAvailable(phrase.getSearchTypes())) {
+			if (!ws.isEmpty() && api != null && api.isSearchAvailable(phrase)) {
 				SearchPhrase nphrase = phrase.selectWord(res, ws,
 						phrase.isLastUnknownSearchWordComplete());
 				SearchResult prev = resultMatcher.setParentSearchResult(res);
@@ -151,9 +155,6 @@ public class SearchCoreFactory {
 
 		@Override
 		public boolean search(SearchPhrase phrase, SearchResultMatcher resultMatcher) throws IOException {
-			if (!super.search(phrase, resultMatcher)) {
-				return false;
-			}
 			for (BinaryMapIndexReader bmir : phrase.getOfflineIndexes()) {
 				if (bmir.getRegionCenter() != null) {
 					SearchResult sr = new SearchResult(phrase);
@@ -245,9 +246,6 @@ public class SearchCoreFactory {
 
 		@Override
 		public boolean search(final SearchPhrase phrase, final SearchResultMatcher resultMatcher) throws IOException {
-			if (!super.search(phrase, resultMatcher)) {
-				return false;
-			}
 			if (!phrase.isUnknownSearchWordPresent() && !phrase.isEmptyQueryAllowed()) {
 				return false;
 			}
@@ -466,9 +464,6 @@ public class SearchCoreFactory {
 
 		@Override
 		public boolean search(final SearchPhrase phrase, final SearchResultMatcher resultMatcher) throws IOException {
-			if (!super.search(phrase, resultMatcher)) {
-				return false;
-			}
 			if(!phrase.isUnknownSearchWordPresent()) {
 				return false;
 			}
@@ -582,9 +577,6 @@ public class SearchCoreFactory {
 
 		@Override
 		public boolean search(SearchPhrase phrase, SearchResultMatcher resultMatcher) throws IOException {
-			if (!super.search(phrase, resultMatcher)) {
-				return false;
-			}
 			if (translatedNames.isEmpty()) {
 				translatedNames = types.getAllTranslatedNames(false);
 				topVisibleFilters = types.getTopVisibleFilters();
@@ -707,9 +699,6 @@ public class SearchCoreFactory {
 
 		@Override
 		public boolean search(final SearchPhrase phrase, final SearchResultMatcher resultMatcher) throws IOException {
-			if (!super.search(phrase, resultMatcher)) {
-				return false;
-			}
 			if (phrase.isLastWord(ObjectType.POI_TYPE)) {
 				Object obj = phrase.getLastSelectedWord().getResult().object;
 				SearchPoiTypeFilter ptf;
@@ -842,9 +831,6 @@ public class SearchCoreFactory {
 		private static int LIMIT = 10000;
 		@Override
 		public boolean search(SearchPhrase phrase, SearchResultMatcher resultMatcher) throws IOException {
-			if (!super.search(phrase, resultMatcher)) {
-				return false;
-			}
 			SearchWord sw = phrase.getLastSelectedWord();
 			if (isLastWordCityGroup(phrase) && sw.getResult() != null && sw.getResult().file != null) {
 				City c = (City) sw.getResult().object;
@@ -916,9 +902,6 @@ public class SearchCoreFactory {
 
 		@Override
 		public boolean search(SearchPhrase phrase, final SearchResultMatcher resultMatcher) throws IOException {
-			if (!super.search(phrase, resultMatcher)) {
-				return false;
-			}
 			Street s = null;
 			int priority = SEARCH_BUILDING_BY_STREET_PRIORITY;
 			if (phrase.isLastWord(ObjectType.STREET)) {
@@ -1068,9 +1051,6 @@ public class SearchCoreFactory {
 
 		@Override
 		public boolean search(SearchPhrase phrase, SearchResultMatcher resultMatcher) throws IOException {
-			if (!super.search(phrase, resultMatcher)) {
-				return false;
-			}
 			if (!phrase.isUnknownSearchWordPresent()) {
 				return false;
 			}

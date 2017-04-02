@@ -47,6 +47,7 @@ import net.osmand.access.AccessibilityAssistant;
 import net.osmand.access.NavigationInfo;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.City;
+import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.osm.AbstractPoiType;
@@ -54,6 +55,7 @@ import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
+import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.WptPt;
@@ -329,19 +331,50 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 							hide();
 						} else {
 							SearchWord word = searchPhrase.getLastSelectedWord();
-							if (word != null && word.getLocation() != null) {
-								SearchResult searchResult = word.getResult();
-								String name = QuickSearchListItem.getName(app, searchResult);
-								String typeName = QuickSearchListItem.getTypeName(app, searchResult);
-								PointDescription pointDescription = new PointDescription(PointDescription.POINT_TYPE_ADDRESS, typeName, name);
-								app.getSettings().setMapLocationToShow(
-										searchResult.location.getLatitude(), searchResult.location.getLongitude(),
-										searchResult.preferredZoom, pointDescription, true, searchResult.object);
+							if (word != null) {
+								if (word.getLocation() != null) {
+									SearchResult searchResult = word.getResult();
+									String name = QuickSearchListItem.getName(app, searchResult);
+									String typeName = QuickSearchListItem.getTypeName(app, searchResult);
+									PointDescription pointDescription = new PointDescription(PointDescription.POINT_TYPE_ADDRESS, typeName, name);
+									app.getSettings().setMapLocationToShow(
+											searchResult.location.getLatitude(), searchResult.location.getLongitude(),
+											searchResult.preferredZoom, pointDescription, true, searchResult.object);
 
-								hideToolbar();
-								MapActivity.launchMapActivityMoveToTop(getActivity());
-								reloadHistory();
-								hide();
+									hideToolbar();
+									MapActivity.launchMapActivityMoveToTop(getActivity());
+									reloadHistory();
+									hide();
+								} else if (word.getType() == ObjectType.FAVORITE_GROUP) {
+									FavouritesDbHelper.FavoriteGroup group = (FavouritesDbHelper.FavoriteGroup) word.getResult().object;
+									if (group.points.size() > 1) {
+										double left = 0, right = 0;
+										double top = 0, bottom = 0;
+										for (FavouritePoint p : group.points) {
+											if (left == 0) {
+												left = p.getLongitude();
+												right = p.getLongitude();
+												top = p.getLatitude();
+												bottom = p.getLatitude();
+											} else {
+												left = Math.min(left, p.getLongitude());
+												right = Math.max(right, p.getLongitude());
+												top = Math.max(top, p.getLatitude());
+												bottom = Math.min(bottom, p.getLatitude());
+											}
+										}
+										getMapActivity().getMapView().fitRectToMap(left, right, top, bottom, 0, 0, 0);
+										hideToolbar();
+										MapActivity.launchMapActivityMoveToTop(getActivity());
+										hide();
+									} else if (group.points.size() == 1) {
+										FavouritePoint p = group.points.get(0);
+										app.getSettings().setMapLocationToShow(p.getLatitude(), p.getLongitude(), word.getResult().preferredZoom);
+										hideToolbar();
+										MapActivity.launchMapActivityMoveToTop(getActivity());
+										hide();
+									}
+								}
 							}
 						}
 					}
@@ -1000,13 +1033,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	private void reloadCategoriesInternal() {
 		try {
 			LOG.info("+++ start loading categories");
-			if (addressSearch) {
-				stopAddressSearch();
-			}
 			SearchResultCollection res = searchUICore.shallowSearch(SearchAmenityTypesAPI.class, "", null);
-			if (addressSearch) {
-				startAddressSearch();
-			}
 			if (res != null) {
 				List<QuickSearchListItem> rows = new ArrayList<>();
 				for (SearchResult sr : res.getCurrentSearchResults()) {
@@ -1225,13 +1252,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	private void reloadHistoryInternal() {
 		try {
 			LOG.info("+++ start loading history");
-			if (addressSearch) {
-				stopAddressSearch();
-			}
 			SearchResultCollection res = searchUICore.shallowSearch(SearchHistoryAPI.class, "", null);
-			if (addressSearch) {
-				startAddressSearch();
-			}
  			List<QuickSearchListItem> rows = new ArrayList<>();
 			if (res != null) {
 				for (SearchResult sr : res.getCurrentSearchResults()) {

@@ -16,6 +16,7 @@ import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiFilter;
 import net.osmand.osm.PoiType;
+import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.OsmAndFormatter;
@@ -220,6 +221,8 @@ public class QuickSearchListItem {
 				FavouritePoint fav = (FavouritePoint) searchResult.object;
 				return fav.getCategory().length() == 0 ?
 						app.getString(R.string.shared_string_favorites) : fav.getCategory();
+			case FAVORITE_GROUP:
+				return app.getString(R.string.shared_string_my_favorites);
 			case REGION:
 				BinaryMapIndexReader binaryMapIndexReader = (BinaryMapIndexReader) searchResult.object;
 				System.out.println(binaryMapIndexReader.getFile().getAbsolutePath() + " " + binaryMapIndexReader.getCountryName());
@@ -258,6 +261,7 @@ public class QuickSearchListItem {
 	public static Drawable getTypeIcon(OsmandApplication app, SearchResult searchResult) {
 		switch (searchResult.objectType) {
 			case FAVORITE:
+			case FAVORITE_GROUP:
 				return app.getIconsCache().getThemedIcon(R.drawable.ic_small_group);
 			case RECENT_OBJ:
 				HistoryEntry historyEntry = (HistoryEntry) searchResult.object;
@@ -364,6 +368,9 @@ public class QuickSearchListItem {
 			case FAVORITE:
 				FavouritePoint fav = (FavouritePoint) searchResult.object;
 				return FavoriteImageDrawable.getOrCreate(app, fav.getColor(), false);
+			case FAVORITE_GROUP:
+				FavoriteGroup group = (FavoriteGroup) searchResult.object;
+				return app.getIconsCache().getPaintedIcon(R.drawable.ic_action_fav_dark, group.color | 0xff000000);
 			case REGION:
 				return app.getIconsCache().getIcon(R.drawable.ic_world_globe_dark,
 						app.getSettings().isLightContent() ? R.color.osmand_orange : R.color.osmand_orange_dark);
