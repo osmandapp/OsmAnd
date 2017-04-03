@@ -323,13 +323,14 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 					getSiteApi() + "api/0.6/node/" + nodeId, "GET", null, ctx.getString(R.string.loading_poi_obj) + nodeId, false); //$NON-NLS-1$ //$NON-NLS-2$
 			if (res != null) {
 				OsmBaseStorage st = new OsmBaseStorage();
+				st.setConvertTagsToLC(false);
 				st.parseOSM(new ByteArrayInputStream(res.getBytes("UTF-8")), null, null, true); //$NON-NLS-1$
 				EntityId id = new Entity.EntityId(EntityType.NODE, nodeId);
 				Node entity = (Node) st.getRegisteredEntities().get(id);
 				// merge non existing tags
 				for (String rtag : entity.getTagKeySet()) {
 					if (!n.getTagKeySet().contains(rtag)) {
-						n.putTag(rtag, entity.getTag(rtag));
+						n.putTagNoLC(rtag, entity.getTag(rtag));
 					}
 				}
 				if(MapUtils.getDistance(n.getLatLon(), entity.getLatLon()) < 10) {
@@ -362,6 +363,7 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 					getSiteApi() + "api/0.6/node/" + nodeId, "GET", null, ctx.getString(R.string.loading_poi_obj) + nodeId, false); //$NON-NLS-1$ //$NON-NLS-2$
 			if (res != null) {
 				OsmBaseStorage st = new OsmBaseStorage();
+				st.setConvertTagsToLC(false);
 				st.parseOSM(new ByteArrayInputStream(res.getBytes("UTF-8")), null, null, true); //$NON-NLS-1$
 				EntityId id = new Entity.EntityId(EntityType.NODE, nodeId);
 				Node entity = (Node) st.getRegisteredEntities().get(id);
@@ -372,7 +374,7 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 					PoiType poiType = n.getType().getPoiTypeByKeyName(n.getSubType());
 					if(poiType.getOsmValue().equals(entity.getTag(poiType.getOsmTag()))) {
 						entity.removeTag(poiType.getOsmTag());
-						entity.putTag(EditPoiData.POI_TYPE_TAG, poiType.getTranslation());
+						entity.putTagNoLC(EditPoiData.POI_TYPE_TAG, poiType.getTranslation());
 					} else {
 						// later we could try to determine tags
 					}

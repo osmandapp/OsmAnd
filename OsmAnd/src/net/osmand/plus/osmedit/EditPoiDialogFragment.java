@@ -398,19 +398,19 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 			if (tag.getKey().equals(EditPoiData.POI_TYPE_TAG)) {
 				final PoiType poiType = editPoiData.getAllTranslatedSubTypes().get(tag.getValue().trim().toLowerCase());
 				if (poiType != null) {
-					node.putTag(poiType.getOsmTag(), poiType.getOsmValue());
+					node.putTagNoLC(poiType.getOsmTag(), poiType.getOsmValue());
 					if (poiType.getOsmTag2() != null) {
-						node.putTag(poiType.getOsmTag2(), poiType.getOsmValue2());
+						node.putTagNoLC(poiType.getOsmTag2(), poiType.getOsmValue2());
 					}
 				} else if (!Algorithms.isEmpty(tag.getValue())) {
-					node.putTag(editPoiData.getPoiCategory().getDefaultTag(), tag.getValue());
+					node.putTagNoLC(editPoiData.getPoiCategory().getDefaultTag(), tag.getValue());
 
 				}
 				if (offlineEdit && !Algorithms.isEmpty(tag.getValue())) {
-					node.putTag(tag.getKey(), tag.getValue());
+					node.putTagNoLC(tag.getKey(), tag.getValue());
 				}
 			} else if (!Algorithms.isEmpty(tag.getKey()) && !Algorithms.isEmpty(tag.getValue())) {
-				node.putTag(tag.getKey(), tag.getValue());
+				node.putTagNoLC(tag.getKey(), tag.getValue());
 			}
 		}
 		commitNode(action, node, mOpenstreetmapUtil.getEntityInfo(node.getId()), "", false,

@@ -120,7 +120,7 @@ public abstract class Entity implements Serializable {
 	public Entity(Entity copy, long id) {
 		this.id = id;
 		for (String t : copy.getTagKeySet()) {
-			putTag(t, copy.getTag(t));
+			putTagNoLC(t, copy.getTag(t));
 		}
 		this.dataLoaded = copy.dataLoaded;
 	}
@@ -153,10 +153,14 @@ public abstract class Entity implements Serializable {
 	}
 
 	public String putTag(String key, String value) {
+		return putTagNoLC(key.toLowerCase(), value);
+	}
+	
+	public String putTagNoLC(String key, String value) {
 		if (tags == null) {
 			tags = new LinkedHashMap<String, String>();
 		}
-		return tags.put(key.toLowerCase(), value);
+		return tags.put(key, value);
 	}
 
 	public void replaceTags(Map<String, String> toPut) {

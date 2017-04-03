@@ -112,19 +112,19 @@ public class AddPOIAction extends QuickAction {
 				if (tag.getKey().equals(EditPoiData.POI_TYPE_TAG)) {
 					final PoiType poiType = editPoiData.getAllTranslatedSubTypes().get(tag.getValue().trim().toLowerCase());
 					if (poiType != null) {
-						newNode.putTag(poiType.getOsmTag(), poiType.getOsmValue());
+						newNode.putTagNoLC(poiType.getOsmTag(), poiType.getOsmValue());
 						if (poiType.getOsmTag2() != null) {
-							newNode.putTag(poiType.getOsmTag2(), poiType.getOsmValue2());
+							newNode.putTagNoLC(poiType.getOsmTag2(), poiType.getOsmValue2());
 						}
 					} else if (!Algorithms.isEmpty(tag.getValue())) {
-						newNode.putTag(editPoiData.getPoiCategory().getDefaultTag(), tag.getValue());
+						newNode.putTagNoLC(editPoiData.getPoiCategory().getDefaultTag(), tag.getValue());
 
 					}
 					if (offlineEdit && !Algorithms.isEmpty(tag.getValue())) {
-						newNode.putTag(tag.getKey(), tag.getValue());
+						newNode.putTagNoLC(tag.getKey(), tag.getValue());
 					}
 				} else if (!Algorithms.isEmpty(tag.getKey()) && !Algorithms.isEmpty(tag.getValue())) {
-					newNode.putTag(tag.getKey(), tag.getValue());
+					newNode.putTagNoLC(tag.getKey(), tag.getValue());
 				}
 			}
 			EditPoiDialogFragment.commitNode(action, newNode, mOpenstreetmapUtil.getEntityInfo(newNode.getId()), "", false,

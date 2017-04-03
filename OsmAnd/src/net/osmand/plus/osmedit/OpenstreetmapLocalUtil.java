@@ -57,15 +57,15 @@ public class OpenstreetmapLocalUtil implements OpenstreetmapUtil {
 		Node entity = new Node(n.getLocation().getLatitude(),
 							   n.getLocation().getLongitude(),
 							   nodeId);
-		entity.putTag(EditPoiData.POI_TYPE_TAG, poiType.getTranslation());
+		entity.putTagNoLC(EditPoiData.POI_TYPE_TAG, poiType.getTranslation());
 		if(poiType.getOsmTag2() != null) {
-			entity.putTag(poiType.getOsmTag2(), poiType.getOsmValue2());
+			entity.putTagNoLC(poiType.getOsmTag2(), poiType.getOsmValue2());
 		}
 		if(!Algorithms.isEmpty(n.getName())) {
-			entity.putTag(OSMTagKey.NAME.getValue(), n.getName());
+			entity.putTagNoLC(OSMTagKey.NAME.getValue(), n.getName());
 		}
 		if(!Algorithms.isEmpty(n.getOpeningHours())) {
-			entity.putTag(OSMTagKey.OPENING_HOURS.getValue(), n.getOpeningHours());
+			entity.putTagNoLC(OSMTagKey.OPENING_HOURS.getValue(), n.getOpeningHours());
 		}
 
 		// check whether this is node (because id of node could be the same as relation)

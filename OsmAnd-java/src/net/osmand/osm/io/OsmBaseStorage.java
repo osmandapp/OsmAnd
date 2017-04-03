@@ -73,6 +73,7 @@ public class OsmBaseStorage {
 	protected InputStream streamForProgress;
 	protected List<IOsmStorageFilter> filters = new ArrayList<IOsmStorageFilter>();
 	protected boolean supressWarnings = true;
+	protected boolean convertTagsToLC = true;
 	protected boolean parseEntityInfo;
 	
 	
@@ -223,7 +224,11 @@ public class OsmBaseStorage {
 			if (ELEM_TAG.equals(name)) {
 				String key = parser.getAttributeValue("",ATTR_K);
 				if(key != null){
-					currentParsedEntity.putTag(key, parser.getAttributeValue("",ATTR_V));
+					if(convertTagsToLC) {
+						currentParsedEntity.putTag(key, parser.getAttributeValue("",ATTR_V));
+					} else {
+						currentParsedEntity.putTagNoLC(key, parser.getAttributeValue("",ATTR_V));
+					}
 				}
 			} else if (ELEM_ND.equals(name)) {
 				Long id = parseId(parser, ATTR_REF, -1);

@@ -113,7 +113,7 @@ public class OpenstreetmapsDbHelper extends SQLiteOpenHelper {
 					String tags = query.getString(5);
 					String[] split = tags.split("\\$\\$\\$");
 					for(int i=0; i<split.length - 1; i+= 2){
-						entity.putTag(split[i].trim(), split[i+1].trim());
+						entity.putTagNoLC(split[i].trim(), split[i+1].trim());
 					}
 					p.setEntity(entity);
 					p.setAction(query.getString(3));

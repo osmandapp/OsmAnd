@@ -20,6 +20,7 @@ import java.util.Map;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteSubregion;
 import net.osmand.binary.RouteDataObject;
+import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
 import net.osmand.data.QuadRect;
 import net.osmand.render.RenderingRuleSearchRequest;
@@ -360,6 +361,7 @@ public class NativeLibrary {
 		private String iconRes;
 		private int order;
 		private boolean visible;
+		private LatLon labelLatLon;
 		
 		public Map<String, String> getTags() {
 			return tags;
@@ -371,6 +373,14 @@ public class NativeLibrary {
 		
 		public int getOrder() {
 			return order;
+		}
+		
+		public void setLabelLatLon(LatLon labelLatLon) {
+			this.labelLatLon = labelLatLon;
+		}
+		
+		public LatLon getLabelLatLon() {
+			return labelLatLon;
 		}
 		
 		public void setOrder(int order) {
