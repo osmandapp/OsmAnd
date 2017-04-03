@@ -24,7 +24,7 @@
     <string name="do_not_send_anonymous_app_usage">Не отсылать анонимную статистику использования</string>
     <string name="driving_region_automatic">Авто</string>
     <string name="right_side_navigation">Правосторонняя навигация</string>
-    <string name="shared_string_visible">Видимый</string>
+    <string name="shared_string_visible">Видимые</string>
     <string name="restore_purchases">Восстановить покупки</string>
     <string name="fonts_header">Доп.шрифты для карты</string>
     <string name="analyze_on_map">Посмотреть на карте</string>
