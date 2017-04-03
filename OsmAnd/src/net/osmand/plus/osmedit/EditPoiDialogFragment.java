@@ -399,6 +399,9 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 	}
 
 	private boolean testTooManyCapitalLetters(String name) {
+		if(name == null) {
+			return false;
+		}
 		int capital = 0;
 		int lower = 0;
 		int nonalpha = 0;
