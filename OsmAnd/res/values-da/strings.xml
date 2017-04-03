@@ -3104,4 +3104,5 @@ Tidligere destination bliver sidste mellemliggende punkt.</string>
     <string name="favorite_group_name">Gruppenavn</string>
     <string name="change_color">Skift farve</string>
     <string name="edit_name">Rediger navn</string>
+    <string name="save_poi_too_many_uppercase">Navnet indeholder for mange store bogstaver. Fortsæt?</string>
     </resources>
