@@ -705,21 +705,37 @@ public class RouteResultPreparation {
 					active.activeStartIndex = active.activeStartIndex + target.activeStartIndex;
 					changed = true;
 				} else {
-					// cause the next-turn goes forward exclude left most and right most lane
-					if(active.activeStartIndex == 0) {
-						active.activeStartIndex ++;
-						active.activeLen--;
+					int straightActiveLen = 0;
+					int straightActiveBegin = -1;
+					for(int i = active.activeStartIndex; i <= active.activeEndIndex; i++) {
+						if(TurnType.hasAnyTurnLane(active.originalLanes[i], TurnType.C)) {
+							straightActiveLen++;
+							if(straightActiveBegin == -1) {
+								straightActiveBegin = i;
+							}
+						}
 					}
-					if(active.activeEndIndex == active.originalLanes.length - 1) {
-						active.activeEndIndex --;
-						active.activeLen--;
+					if(straightActiveLen == target.activeLen) {
+						active.activeStartIndex = straightActiveBegin;
+						active.activeEndIndex = straightActiveBegin + target.activeLen - 1;
+						changed = true;
+					} else {
+						// cause the next-turn goes forward exclude left most and right most lane
+						if (active.activeStartIndex == 0) {
+							active.activeStartIndex++;
+							active.activeLen--;
+						}
+						if (active.activeEndIndex == active.originalLanes.length - 1) {
+							active.activeEndIndex--;
+							active.activeLen--;
+						}
+						float ratio = (active.activeLen - target.activeLen) / 2f;
+						if (ratio > 0) {
+							active.activeEndIndex = (int) Math.ceil(active.activeEndIndex - ratio);
+							active.activeStartIndex = (int) Math.floor(active.activeStartIndex + ratio);
+						}
+						changed = true;
 					}
-					float ratio = (active.activeLen - target.activeLen) / 2f;
-					if(ratio > 0) {
-						active.activeEndIndex = (int) Math.ceil(active.activeEndIndex - ratio);
-						active.activeStartIndex = (int) Math.floor(active.activeStartIndex + ratio);
-					}
-					changed = true;
 				}
 			}
 		}
@@ -1042,8 +1058,17 @@ public class RouteResultPreparation {
 			String[] splitLaneOptions = turnLanes.split("\\|", -1);
 			int activeBeginIndex = findActiveIndex(rawLanes, splitLaneOptions, rs.leftLanes, true, 
 					rs.leftLanesInfo, rs.roadsOnLeft, rs.addRoadsOnLeft);
+			
+			if(!rs.keepLeft && activeBeginIndex != -1 && 
+					splitLaneOptions.length > 0 && !splitLaneOptions[splitLaneOptions.length - 1].contains(";")) {
+				activeBeginIndex = Math.max(activeBeginIndex, 1);
+			}
 			int activeEndIndex = findActiveIndex(rawLanes, splitLaneOptions, rs.rightLanes, false, 
 					rs.rightLanesInfo, rs.roadsOnRight, rs.addRoadsOnRight);
+			if(!rs.keepRight && activeEndIndex != -1  && 
+					splitLaneOptions.length > 0 && !splitLaneOptions[0].contains(";") ) {
+				activeEndIndex = Math.min(activeEndIndex, rawLanes.length - 1);
+			}
 			if (activeBeginIndex == -1 || activeEndIndex == -1 || activeBeginIndex > activeEndIndex) {
 				// something went wrong
 				return createSimpleKeepLeftRightTurn(leftSide, prevSegm, currentSegm, rs);
@@ -1116,8 +1141,7 @@ public class RouteResultPreparation {
 		for (int i = 0; i < rawLanes.length; i++) {
 			int ind = left ? i : (rawLanes.length - i - 1);
 			if (!lookupSlightTurn ||
-					TurnType.isSlightTurn(TurnType.getPrimaryTurn(rawLanes[ind]))
-					|| TurnType.isSlightTurn(TurnType.getSecondaryTurn(rawLanes[ind]))) {
+					TurnType.hasAnySlightTurnLane(rawLanes[ind])) {
 				String[] laneTurns = splitLaneOptions[ind].split(";");
 				int cnt = 0;
 				for(String lTurn : laneTurns) {
@@ -1127,14 +1151,8 @@ public class RouteResultPreparation {
 						diffTurnRoads --;
 					}
 				}
-//				int cnt = countOccurrences(splitLaneOptions[ind], ';') + 1;
-//				if(cnt > 1) {
-//					// sometimes slight right turn goes to the road with 2 lanes 
-//					// the better situation to group all the lanes and 
-//					// when ';' we know for sure the lane combines 2 group
-//					roads --;
-//				}
 				lanes -= cnt;
+				//lanes--;
 				// we already found slight turn others are turn in different direction
 				lookupSlightTurn = false;
 			}
