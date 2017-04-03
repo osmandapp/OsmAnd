@@ -234,7 +234,7 @@ public class OsmEditsLayer extends OsmandMapLayer implements ContextMenuLayer.IC
 		@Override
 		protected Node doInBackground(Void... params) {
 			Node node = objectInMotion.getEntity();
-			return mOpenstreetmapUtil.commitNodeImpl(OsmPoint.Action.MODIFY, node,
+			return mOpenstreetmapUtil.commitNodeImpl(objectInMotion.getAction(), node,
 					mOpenstreetmapUtil.getEntityInfo(node.getId()), "", false);
 		}
 
