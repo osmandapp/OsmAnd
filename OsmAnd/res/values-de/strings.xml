@@ -746,7 +746,7 @@ OSM ist ein gemeinschaftliches, frei zugängliches, globales Kartografierungspro
 	<string name="route_head">Geradeaus</string>
 	<string name="first_time_continue">Weiter</string>
 	<string name="first_time_download">Offline-Daten herunterladen</string>
-	<string name="first_time_msg">Danke, dass Sie OsmAnd verwenden. Viele Funktionen benötigen offline Karten, die Sie in über \'Einstellungen\' → \'Kartenverwaltung\' herunterladen können. Danach können Sie Landkarten ansehen sowie Adressen, POI und ÖPNV finden.</string>
+	<string name="first_time_msg">"Danke, dass Sie OsmAnd verwenden. Für viele Funktionen dieser Anwendung sind Offline-Daten zu einer Region nötig, die Sie  über \'Einstellungen\' → \'Kartenverwaltung\' herunterladen können. Erst danach sind Sie in der Lage, Landkarten anzusehen, Adressen zu suchen, nach POIs zu sehen und öffentliche Verkehrsmittel zu finden."</string>
 	<string name="search_poi_location">Warte auf Signal…</string>
 	<string name="search_near_map">Suche in der Nähe</string>
 	<string name="search_nearby">Suche um Aufenthaltsort</string>
