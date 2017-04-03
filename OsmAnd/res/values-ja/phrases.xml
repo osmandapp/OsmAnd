@@ -1097,8 +1097,8 @@
 	<string name="poi_brand">ブランド(Brand)</string>
 	<string name="poi_fee_yes">有料(Yes)</string>
 	<string name="poi_fee_no">無料(No)</string>
-	<string name="poi_drinking_water_yes">飲用可能(Drinking water: yes)</string>
-	<string name="poi_drinking_water_no">飲用不可(Drinking water: no)</string>
+	<string name="poi_drinking_water_yes">有り</string>
+	<string name="poi_drinking_water_no">無し</string>
 	<string name="poi_supervised_yes">監督者(Supervised)</string>
 	<string name="poi_supervised_no">監督者無し(Without supervision)</string>
 	<string name="poi_seasonal_yes">限定(Yes)</string>
@@ -1338,8 +1338,8 @@
 	<string name="poi_fuel_adblue">アドブルー・尿素水還元剤(AdBlue fuel)</string>
 
 	<string name="poi_drive_through">ドライブスルー(Drive through)</string>
-	<string name="poi_drive_through_yes">有り(Yes)</string>
-	<string name="poi_drive_through_no">無し(Drive-through: no)</string>
+	<string name="poi_drive_through_yes">有り</string>
+	<string name="poi_drive_through_no">無し</string>
 
 	<string name="poi_fuel_91ul">91UL 無鉛航空燃料(91UL fuel)</string>
 	<string name="poi_fuel_100ll">100LL 有鉛航空燃料(100LL fuel)</string>
@@ -1639,7 +1639,7 @@
 	<string name="poi_health_specialty_behavior_yes">行動療法(Behavior)</string>
 	<string name="poi_health_specialty_palliative_medicine_yes">緩和医療・ホスピス(Health specialty: palliative medicine)</string>
 
-	<string name="poi_social_facility_type">公共施設種(Type)</string>
+	<string name="poi_social_facility_type">福祉施設種(Type)</string>
 	<string name="poi_social_facility_for">対象者(Target group)</string>
 	<string name="poi_social_facility_group_home">グループホーム・集団生活型介護施設(Group home)</string>
 	<string name="poi_social_facility_assisted_living">居住型支援施設(Assisted living)</string>
@@ -1667,7 +1667,7 @@
 	<string name="poi_free_flying_characteristic">対応種(Characteristic)</string>
 	<string name="poi_seasonal">営業期(Seasonal)</string>
 	<string name="poi_drive_in">ドライブイン(Drive in)</string>
-	<string name="poi_drive_in_no">不可(Drive-in: no)</string>
+	<string name="poi_drive_in_no">無し</string>
 	<string name="poi_power_supply_yes">有り(Yes)</string>
 	<string name="poi_scout_camp">ボーイスカウト用キャンプ(Scout camp)</string>
 	<string name="poi_scout_yes">肯定(Scout camp: yes)</string>
@@ -1680,8 +1680,8 @@
 	<string name="poi_payment_coins_yes">硬貨(Coins)</string>
 	<string name="poi_payment_coins_no">硬貨不可(Coins not accepted)</string>
 	<string name="poi_payment_coins_0.5">硬貨_50セント硬貨($0.5 coins)</string>
-	<string name="poi_payment_telephone_cards_yes">電話支払い_テレホンカード(Telephone cards)</string>
-	<string name="poi_payment_telephone_cards_no">電話支払い_テレホンカード不可(Telephone cards not accepted)</string>
+	<string name="poi_payment_telephone_cards_yes">電話による支払_テレホンカード(Telephone cards)</string>
+	<string name="poi_payment_telephone_cards_no">電話による支払_テレホンカード不可(Telephone cards not accepted)</string>
 	<string name="poi_payment_credit_cards_yes">クレジットカード(Credit cards)</string>
 	<string name="poi_payment_credit_cards_no">クレジットカード不可(Credit cards not accepted)</string>
 	<string name="poi_payment_notes_yes">紙幣(Banknotes)</string>
@@ -1802,4 +1802,22 @@
 	<string name="poi_medical_system_unani_yes">ユナニ医学・南アジアの伝統医学(Unani)</string>
 
 	<string name="poi_health_facility_type_office">医療事務(Medical office)</string>
+	<string name="poi_drive_in_yes">有り</string>
+	<string name="poi_healthcare_alternative_types">特殊医療(Specialty)</string>
+	<string name="poi_home_visit">往診(Home visit)</string>
+	<string name="poi_home_visit_no">無し</string>
+
+	<string name="poi_home_visit_yes">有り</string>
+	<string name="poi_pharmacy_dispensing">調剤(Dispensing)</string>
+	<string name="poi_dispensing_yes">有り</string>
+	<string name="poi_dispensing_no">無し</string>
+
+	<string name="poi_bench_yes">有り</string>
+	<string name="poi_bench_no">無し</string>
+	<string name="poi_covered">屋根・覆い(Covered)</string>
+	<string name="poi_covered_yes">有り</string>
+	<string name="poi_covered_no">無し</string>
+
+	<string name="poi_tactile_paving_yes">有り</string>
+	<string name="poi_tactile_paving_no">無し</string>
 	</resources>
