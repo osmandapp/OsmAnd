@@ -246,9 +246,9 @@ Rasterkarten können direkt online bezogen werden, und werden im OsmAnd-Unterord
 	<string name="osmand_accessibility_description">Diese Erweiterung verschafft den direkten Zugriff auf die System-Eingabehilfen in OsmAnd. Dadurch kann z.B. die Abspielgeschwindigkeit der Synthesizer-Stimme, die Bildschirmnavigation mittels Steuerkreuz, die Benutzung eines Trackballs zur Zoomsteuerung oder die Sprachausgabe, wie die automatische Ansage Ihrer Position, konfiguriert werden.</string>
 
 	<string name="osmand_development_plugin_description">Diese Erweiterung aktiviert Entwicklereinstellungen und Funktionen zur Fehlersuche, wie Testung oder Simulation der Routenberechnung, der Bildschirm-Render-Leistung oder der Sprachsteuerung. Diese Einstellungen sind für Entwickler gedacht und werden für die Verwendung von OsmAnd sonst nicht benötigt.</string>
-	<string name="plugins_screen">Erweiterungsmodule</string>
-	<string name="prefs_plugins_descr">Module aktivieren weitergehende Einstellungen und zusätzliche Funktionen</string>
-	<string name="prefs_plugins">Erweiterungsmodule</string>
+	<string name="plugins_screen">Erweiterungen</string>
+	<string name="prefs_plugins_descr">Erweiterungen aktivieren weiterte Einstellungen und zusätzliche Funktionen</string>
+	<string name="prefs_plugins">Erweiterungen</string>
 	<string name="osm_editing_plugin_description">Diese Erweiterung ermöglicht das Erstellen und Bearbeiten von OSM-POI-Objekten, das Melden oder Kommentieren von OSM-Fehlern, sowie das Hochladen von GPX-Dateien als Beiträge zu OSM (benötigt ein OSM-Benutzerkonto).
 
 OSM ist ein gemeinschaftliches, frei zugängliches, globales Kartografierungsprojekt, Details siehe https://openstreetmap.org. Jeder ist eingeladen, aktiv daran mitzuarbeiten. Die Mitarbeit kann auch direkt via OsmAnd erfolgen, wenn in den Einstellungen der OsmAnd-Erweiterung ein OSM-Benutzerkonto hinterlegt wird.</string>
@@ -700,7 +700,7 @@ OSM ist ein gemeinschaftliches, frei zugängliches, globales Kartografierungspro
 	<string name="layer_osm_bugs">OSM-Notizen (online)</string>
 	
 	<string name="layer_poi">POI…</string>
-	<string name="layer_amenity_label">POI-Namen</string>
+	<string name="layer_amenity_label">Punktbezeichnungen</string>
 	<string name="layer_map">Kartenquelle…</string>
 	<string name="menu_layers">Kartenebenen</string>
 	<string name="context_menu_item_search_poi">Suche POI</string>
@@ -2092,7 +2092,7 @@ Lon %2$s</string>
 	<string name="commit_poi">POI übermitteln</string>
 <string name="routing_attr_avoid_shuttle_train_name">Pendelzug vermeiden</string>
 	<string name="routing_attr_avoid_shuttle_train_description">Pendelzug vermeiden</string>
-    <string name="plugin_settings">Erweiterungsmodule</string>
+    <string name="plugin_settings">Erweiterungen</string>
 	<string name="building_number">Hausnummer</string>
 	<string name="opening_at">geöffnet ab</string>
 	<string name="closing_at">geschlossen ab</string>
@@ -2168,7 +2168,7 @@ Lon %2$s</string>
     <string name="features_menu_group">Merkmale</string>
     <string name="help_us_to_improve_menu_group">Hilf uns, OsmAnd weiter zu verbessern</string>
     <string name="other_menu_group">Weitere</string>
-    <string name="plugins_menu_group">Module</string>
+    <string name="plugins_menu_group">Erweiterungen</string>
     <string name="first_usage_item">Erste Benutzung</string>
     <string name="first_usage_item_description">Wie Karten heruntergeladen und erste Einstellungen gewählt werden</string>
     <string name="navigation_item_description">Navigation einstellen</string>
@@ -2460,7 +2460,7 @@ Wenn Sie OsmAnd und OSM lieben und unterstützen wollen, so ist dies die perfekt
     <string name="app_mode_bus">Bus</string>
  	<string name="app_mode_train">Zug</string>
     <string name="coords_format">Koordinatenformat</string>
-    <string name="coords_format_descr">Format der geographischen Koordinaten</string>
+    <string name="coords_format_descr">Format geographischer Koordinaten</string>
 		<string name="shared_string_is_open_24_7">24/7 geöffnet</string>
   	<string name="storage_directory_card">Speicherkarte</string>
     
@@ -2969,4 +2969,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="shared_string_in_name">in %1$s</string>
     <string name="type_address">Adresse eingeben</string>
     <string name="shared_string_overview">Übersicht</string>
+    <string name="favorite_group_name">Gruppenname</string>
+    <string name="change_color">Farbe ändern</string>
+    <string name="edit_name">Name ändern</string>
     </resources>
