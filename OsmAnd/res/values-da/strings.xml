@@ -3101,4 +3101,7 @@ Tidligere destination bliver sidste mellemliggende punkt.</string>
     <string name="shared_string_overview">Oversigt</string>
     <string name="animate_my_location">Animér placering</string>
     <string name="animate_my_location_desc">Aktiverer animation af placering på kortet</string>
+    <string name="favorite_group_name">Gruppenavn</string>
+    <string name="change_color">Skift farve</string>
+    <string name="edit_name">Rediger navn</string>
     </resources>
