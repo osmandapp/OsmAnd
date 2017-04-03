@@ -2894,4 +2894,5 @@ OsmAnd és de codi obert i es desenvolupa activament . Tothom pot recolzar l\'ap
     <string name="favorite_group_name">Nom del grup</string>
     <string name="change_color">Canvia el color</string>
     <string name="edit_name">Edita el nom</string>
+    <string name="save_poi_too_many_uppercase">El nom té moltes majúscules. Voleu continuar?</string>
     </resources>
