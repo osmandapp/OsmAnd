@@ -386,24 +386,30 @@ public class ShowRouteInfoDialogFragment extends DialogFragment {
 			final MapActivity activity = (MapActivity)getActivity();
 			if (activity != null) {
 				dismiss();
+
+				final OsmandSettings settings = activity.getMyApplication().getSettings();
+				settings.setMapLocationToShow(location.getLatitude(), location.getLongitude(),
+						settings.getLastKnownMapZoom(),
+						new PointDescription(PointDescription.POINT_TYPE_WPT, gpxItem.name),
+						false,
+						gpxItem);
+
 				final MapRouteInfoMenu mapRouteInfoMenu = activity.getMapLayers().getMapControlsLayer().getMapRouteInfoMenu();
-				final LatLon fLocation = location;
-				mapRouteInfoMenu.setOnDismissListener(new OnDismissListener() {
-					@Override
-					public void onDismiss(DialogInterface dialog) {
-						mapRouteInfoMenu.setOnDismissListener(null);
-
-						final OsmandSettings settings = activity.getMyApplication().getSettings();
-						settings.setMapLocationToShow(fLocation.getLatitude(), fLocation.getLongitude(),
-								settings.getLastKnownMapZoom(),
-								new PointDescription(PointDescription.POINT_TYPE_WPT, gpxItem.name),
-								false,
-								gpxItem);
-
-						MapActivity.launchMapActivityMoveToTop(activity);
-					}
-				});
-				mapRouteInfoMenu.hide();
+				if (mapRouteInfoMenu.isVisible()) {
+					// We arrived here by the route info menu.
+					// First, we close it and then show the details.
+					mapRouteInfoMenu.setOnDismissListener(new OnDismissListener() {
+						@Override
+						public void onDismiss(DialogInterface dialog) {
+							mapRouteInfoMenu.setOnDismissListener(null);
+							MapActivity.launchMapActivityMoveToTop(activity);
+						}
+					});
+					mapRouteInfoMenu.hide();
+				} else {
+					// We arrived here by the dashboard.
+					MapActivity.launchMapActivityMoveToTop(activity);
+				}
 			}
 		}
 	}
