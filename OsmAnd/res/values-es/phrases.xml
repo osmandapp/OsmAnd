@@ -2135,7 +2135,7 @@
 	<string name="poi_washing_machine_yes">Sí</string>
 	<string name="poi_washing_machine_no">Sin lavarropa</string>
 	<string name="poi_shower_yes">Ducha: sí</string>
-	<string name="poi_shower_no">Sin ducha</string>
+	<string name="poi_shower_no">Ducha: no</string>
 	<string name="poi_shower_hot">Ducha: caliente</string>
 	<string name="poi_shower_outdoor">Ducha: exterior</string>
 	<string name="poi_shower_cold">Ducha: fría</string>
@@ -3400,6 +3400,6 @@
 	<string name="poi_electronics_repair_phone">Reparación de electrónicos: Teléfonos</string>
 	<string name="poi_electronics_repair_tv">Reparación de electrónicos: Televisores</string>
 
-<string name="poi_cuisine_shawarma">S</string>
+<string name="poi_cuisine_shawarma">Shawarma</string>
 
 	</resources>
