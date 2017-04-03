@@ -52,6 +52,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	private Location myLocation;
 	private Float heading;
 	private boolean drivingRegionUpdated = false;
+	private boolean movingToMyLocation = false;
 
 	public MapViewTrackingUtilities(OsmandApplication app){
 		this.app = app;
@@ -145,6 +146,10 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 		this.contextMenu = contextMenu;
 	}
 
+	public boolean isMovingToMyLocation() {
+		return movingToMyLocation;
+	}
+
 	@Override
 	public void updateLocation(Location location) {
 		myLocation = location;
@@ -194,7 +199,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 					showViewAngle = routePlanningMode; // disable compass rotation in that mode
 				}
 				registerUnregisterSensor(location);
-				if (settings.ANIMATE_MY_LOCATION.get() && !smallSpeedForAnimation) {
+				if (settings.ANIMATE_MY_LOCATION.get() && !smallSpeedForAnimation && !movingToMyLocation) {
 					mapView.getAnimatedDraggingThread().startMoving(
 							location.getLatitude(), location.getLongitude(), zoom, rotation, false);
 				} else {
@@ -333,7 +338,14 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 					net.osmand.Location lastKnownLocation = locationProvider.getLastKnownLocation();
 					AnimateDraggingMapThread thread = mapView.getAnimatedDraggingThread();
 					int fZoom = mapView.getZoom() < 15 ? 15 : mapView.getZoom();
-					thread.startMoving(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude(), fZoom, false);
+					movingToMyLocation = true;
+					thread.startMoving(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude(),
+							fZoom, false, new Runnable() {
+								@Override
+								public void run() {
+									movingToMyLocation = false;
+								}
+							});
 				}
 				mapView.refreshMap();
 			}

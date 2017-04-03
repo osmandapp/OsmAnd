@@ -170,13 +170,18 @@ public class AnimateDraggingMapThread {
 				}
 
 				if (!stopped){
-					animatingMoveInThread(mMoveX, mMoveY, NAV_ANIMATION_TIME, notifyListener);
+					animatingMoveInThread(mMoveX, mMoveY, NAV_ANIMATION_TIME, notifyListener, null);
 				}
 			}
 		});
 	}
 
-	public void startMoving(final double finalLat, final double finalLon, final int endZoom, final boolean notifyListener){
+	public void startMoving(final double finalLat, final double finalLon, final int endZoom, final boolean notifyListener) {
+		startMoving(finalLat, finalLon, endZoom, notifyListener, null);
+	}
+
+	public void startMoving(final double finalLat, final double finalLon, final int endZoom,
+							final boolean notifyListener, final Runnable finishAminationCallback) {
 		stopAnimatingSync();
 		final RotatedTileBox rb = tileView.getCurrentRotatedTileBox().copy();
 		double startLat = rb.getLatitude();
@@ -219,7 +224,7 @@ public class AnimateDraggingMapThread {
 				}
 				
 				if(!stopped){
-					animatingMoveInThread(mMoveX, mMoveY, animationTime, notifyListener);
+					animatingMoveInThread(mMoveX, mMoveY, animationTime, notifyListener, finishAminationCallback);
 				}
 				if(!stopped){
 					tileView.setLatLonAnimate(finalLat, finalLon, notifyListener);
@@ -262,7 +267,7 @@ public class AnimateDraggingMapThread {
 	}
 
 	private void animatingMoveInThread(float moveX, float moveY, float animationTime,
-			boolean notify){
+			boolean notify, final Runnable finishAnimationCallback){
 		AccelerateDecelerateInterpolator interpolator = new AccelerateDecelerateInterpolator();
 		
 		float cX = 0;
@@ -285,6 +290,14 @@ public class AnimateDraggingMapThread {
 			} catch (InterruptedException e) {
 				stopped = true;
 			}
+		}
+		if (finishAnimationCallback != null) {
+			tileView.getApplication().runInUIThread(new Runnable() {
+				@Override
+				public void run() {
+					finishAnimationCallback.run();
+				}
+			});
 		}
 	}
 	
