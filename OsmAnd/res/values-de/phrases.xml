@@ -2856,7 +2856,7 @@
 
 	<string name="poi_bicycle_parking_lockers">Schließfächer</string>
 	<string name="poi_bicycle_parking_tree">Fahrrad-Baum</string>
-	<string name="poi_bicycle_parking_streetpod">Straßenschließfach</string>
+	<string name="poi_bicycle_parking_streetpod">Straßenschale</string>
 
 	<string name="poi_salt_yes">Salz</string>
 	<string name="poi_salt_no">Salz: Nein</string>
