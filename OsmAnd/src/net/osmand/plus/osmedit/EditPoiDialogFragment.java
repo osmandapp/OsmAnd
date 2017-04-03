@@ -426,24 +426,29 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 		Node node = new Node(original.getLatitude(), original.getLongitude(), original.getId());
 		OsmPoint.Action action = node.getId() < 0 ? OsmPoint.Action.CREATE : OsmPoint.Action.MODIFY;
 		for (Map.Entry<String, String> tag : editPoiData.getTagValues().entrySet()) {
-			if (tag.getKey().equals(EditPoiData.POI_TYPE_TAG)) {
-				final PoiType poiType = editPoiData.getAllTranslatedSubTypes().get(tag.getValue().trim().toLowerCase());
-				if (poiType != null) {
-					node.putTagNoLC(poiType.getOsmTag(), poiType.getOsmValue());
-					if (poiType.getOsmTag2() != null) {
-						node.putTagNoLC(poiType.getOsmTag2(), poiType.getOsmValue2());
-					}
-				} else if (!Algorithms.isEmpty(tag.getValue())) {
-					node.putTagNoLC(editPoiData.getPoiCategory().getDefaultTag(), tag.getValue());
-
-				}
-				if (offlineEdit && !Algorithms.isEmpty(tag.getValue())) {
-					node.putTagNoLC(tag.getKey(), tag.getValue());
-				}
-			} else if (!Algorithms.isEmpty(tag.getKey()) && !Algorithms.isEmpty(tag.getValue())) {
+			if (!Algorithms.isEmpty(tag.getKey()) && !Algorithms.isEmpty(tag.getValue()) && 
+					!tag.getKey().equals(EditPoiData.POI_TYPE_TAG)) {
 				node.putTagNoLC(tag.getKey(), tag.getValue());
 			}
 		}
+		String poiTypeTag = editPoiData.getTagValues().get(EditPoiData.POI_TYPE_TAG);
+		if (poiTypeTag != null) {
+			final PoiType poiType = editPoiData.getAllTranslatedSubTypes().get(poiTypeTag.trim().toLowerCase());
+			if (poiType != null) {
+				node.putTagNoLC(poiType.getOsmTag(), poiType.getOsmValue());
+				node.removeTag(EditPoiData.REMOVE_TAG_PREFIX + poiType.getOsmTag());
+				if (poiType.getOsmTag2() != null) {
+					node.putTagNoLC(poiType.getOsmTag2(), poiType.getOsmValue2());
+					node.removeTag(EditPoiData.REMOVE_TAG_PREFIX + poiType.getOsmTag2());
+				}
+			} else if (!Algorithms.isEmpty(poiTypeTag)) {
+				node.putTagNoLC(editPoiData.getPoiCategory().getDefaultTag(), poiTypeTag);
+
+			}
+			if (offlineEdit && !Algorithms.isEmpty(poiTypeTag)) {
+				node.putTagNoLC(EditPoiData.POI_TYPE_TAG, poiTypeTag);
+			}
+		} 
 		commitNode(action, node, mOpenstreetmapUtil.getEntityInfo(node.getId()), "", false,
 				new CallbackWithObject<Node>() {
 
