@@ -2893,4 +2893,5 @@ OsmAnd és de codi obert i es desenvolupa activament . Tothom pot recolzar l\'ap
     <string name="animate_my_location_desc">Activa l\'animació de la meva posició al mapa</string>
     <string name="favorite_group_name">Nom del grup</string>
     <string name="change_color">Canvia el color</string>
+    <string name="edit_name">Edita el nom</string>
     </resources>
