@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.TextInputLayout;
@@ -45,7 +46,6 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import net.osmand.CallbackWithObject;
 import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
@@ -83,16 +83,15 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 	private static final String TAGS_LIST = "tags_list";
 	private static final String IS_ADDING_POI = "is_adding_poi";
 
-	public static final HashSet<String> BASIC_TAGS = new HashSet<String>() {
-		{
-			add(OSMSettings.OSMTagKey.NAME.getValue());
-			add(OSMSettings.OSMTagKey.ADDR_STREET.getValue());
-			add(OSMSettings.OSMTagKey.ADDR_HOUSE_NUMBER.getValue());
-			add(OSMSettings.OSMTagKey.PHONE.getValue());
-			add(OSMSettings.OSMTagKey.WEBSITE.getValue());
-			add(OSMSettings.OSMTagKey.OPENING_HOURS.getValue());
-		}
-	};
+	public static final HashSet<String> BASIC_TAGS = new HashSet<String>() ;
+	static {
+		BASIC_TAGS.add(OSMSettings.OSMTagKey.NAME.getValue());
+		BASIC_TAGS.add(OSMSettings.OSMTagKey.ADDR_STREET.getValue());
+		BASIC_TAGS.add(OSMSettings.OSMTagKey.ADDR_HOUSE_NUMBER.getValue());
+		BASIC_TAGS.add(OSMSettings.OSMTagKey.PHONE.getValue());
+		BASIC_TAGS.add(OSMSettings.OSMTagKey.WEBSITE.getValue());
+		BASIC_TAGS.add(OSMSettings.OSMTagKey.OPENING_HOURS.getValue());
+	}
 
 	private EditPoiData editPoiData;
 	private ViewPager viewPager;
@@ -374,12 +373,22 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 		if (TextUtils.isEmpty(poiTypeEditText.getText())) {
 			HashSet<String> tagsCopy = new HashSet<>();
 			tagsCopy.addAll(editPoiData.getTagValues().keySet());
-			tagsCopy.removeAll(BASIC_TAGS);
-			if (tagsCopy.isEmpty()) {
-				poiTypeEditText.setError(getResources().getString(R.string.please_specify_poi_type));
+			if (Algorithms.isEmpty(editPoiData.getTag(OSMSettings.OSMTagKey.ADDR_HOUSE_NUMBER.getValue()))) {
+				SaveExtraValidationDialogFragment f = new SaveExtraValidationDialogFragment();
+				Bundle args = new Bundle();
+				args.putInt("message", R.string.save_poi_without_poi_type_message);
+				f.setArguments(args);
+				f.show(getChildFragmentManager(), "dialog");
+				// poiTypeEditText.setError(getResources().getString(R.string.please_specify_poi_type));
 			} else {
-				new SaveWithAdvancedTagsDialogFragment().show(getChildFragmentManager(), "dialog");
+				save();
 			}
+		} else if (testTooManyCapitalLetters(editPoiData.getTag(OSMSettings.OSMTagKey.NAME.getValue()))) {
+			SaveExtraValidationDialogFragment f = new SaveExtraValidationDialogFragment();
+			Bundle args = new Bundle();
+			args.putInt("message", R.string.save_poi_too_many_uppercase);
+			f.setArguments(args);
+			f.show(getChildFragmentManager(), "dialog");			
 		} else if (editPoiData.getPoiCategory() == getMyApplication().getPoiTypes().getOtherPoiCategory()) {
 			poiTypeEditText.setError(getResources().getString(R.string.please_specify_poi_type));
 		} else if (editPoiData.getPoiTypeDefined() == null) {
@@ -387,6 +396,25 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 		} else {
 			save();
 		}
+	}
+
+	private boolean testTooManyCapitalLetters(String name) {
+		int capital = 0;
+		int lower = 0;
+		int nonalpha = 0;
+		for(int i = 0; i < name.length(); i++) {
+			char c = name.charAt(i);
+			if(Character.isAlphabetic(c)) {
+				if(Character.toUpperCase(c) != c && Character.toLowerCase(c) == c) {
+					lower ++;
+				} else {
+					capital ++;
+				}
+			} else {
+				nonalpha ++;
+			}
+		}
+		return capital > nonalpha && capital > lower;
 	}
 
 	private void save() {
@@ -739,13 +767,18 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 		}
 	}
 
-	public static class SaveWithAdvancedTagsDialogFragment extends DialogFragment {
+	public static class SaveExtraValidationDialogFragment extends DialogFragment {
 		@NonNull
 		@Override
 		public Dialog onCreateDialog(Bundle savedInstanceState) {
 			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+			String msg = getString(R.string.save_poi_without_poi_type_message);
+			int i = getArguments().getInt("message", 0);
+			if(i != 0) {
+				msg = getString(i);
+			}
 			builder.setTitle(getResources().getString(R.string.are_you_sure))
-					.setMessage(getString(R.string.save_poi_without_poi_type_message))
+					.setMessage(msg)
 					.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {

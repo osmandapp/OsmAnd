@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
     <!--
     	 Disclaimer:
@@ -93,10 +93,9 @@
     <string name="routing_attr_relief_smoothness_factor_name">Relief smoothness factor</string>
     <string name="routing_attr_height_obstacles_name">Use elevation data</string>
     <string name="routing_attr_height_obstacles_description">Use terrain elevation data provided by SRTM, ASTER and EU-DEM</string>
-
     <string name="rendering_attr_depthContours_description">Show depth contours and points</string>
     <string name="rendering_attr_depthContours_name">Depth contours</string>
-	<string name="release_2_6">
+    <string name="release_2_6">
 	\u2022 New feature: Quick action button\n\n
 	\u2022 Improved touch screen gesture response\n\n
 	\u2022 New map fonts covering more locales\n\n
@@ -109,8 +108,8 @@
 	\u2022 Several other improvements and bug fixes\n\n
 	and more…
 	</string>
-	<string name="auto_split_recording_title">Auto-split recordings after gap</string>
-	<string name="auto_split_recording_descr">Start new segment after gap of 6 min, new track after gap of 2 h, or new file after longer gap if date has changed.</string>
+    <string name="auto_split_recording_title">Auto-split recordings after gap</string>
+    <string name="auto_split_recording_descr">Start new segment after gap of 6 min, new track after gap of 2 h, or new file after longer gap if date has changed.</string>
     <string name="rendering_attr_contourDensity_description">Contour lines density</string>
     <string name="rendering_attr_contourDensity_name">Contour lines density</string>
     <string name="rendering_value_high_name">High</string>
@@ -361,11 +360,9 @@
     <string name="osm_live_region_desc">Part of your donation will be sent to OSM users who submit changes to the map in that region</string>
     <string name="osm_live_subscription_settings">Subscription settings</string>
     <string name="osm_live_ask_for_purchase">Please purchase OSM Live subscription first</string>
-
     <string name="osm_live_header">This subscription enables hourly updates for all maps around the world.
         Part of the income goes back to the OSM community and is paid for each OSM contribution. 
         If you love OsmAnd and OSM and want to support them, this is the perfect way to do it.</string>
-
     <string name="select_map_marker">Select map marker</string>
     <string name="map_markers_other">Other markers</string>
     <string name="upload_anonymously">Upload anonymously</string>
@@ -488,7 +485,6 @@
     <string name="osb_comment_dialog_error">Exception occurred: comment was not added</string>
     <string name="osb_comment_dialog_success">Comment was successfully added</string>
     <string name="shared_string_commit">Commit</string>
-
     <string name="context_menu_item_delete_waypoint">Delete GPX waypoint?</string>
     <string name="context_menu_item_edit_waypoint">Edit GPX waypoint</string>
     <string name="shared_string_location">Location</string>
@@ -503,7 +499,6 @@
     <string name="shared_string_update">Update</string>
     <string name="shared_string_upload">Upload</string>
     <string name="osm_edit_created_poi">Created OSM POI</string>
-
     <string name="world_map_download_descr">World basemap (covering the whole world at small zooms) is missing or outdated. Please consider downloading it for a global overview.</string>
     <string name="shared_string_qr_code">QR-code</string>
     <string name="map_downloaded">Map downloaded</string>
@@ -768,25 +763,25 @@
     <string name="track_segments">Track segments</string>
     <string name="track_points">Track points</string>
     <string name="shared_string_online_maps">Online maps</string>
-	<string name="osmand_rastermaps_plugin_description">With this plugin you can access many types of online (so called tile or raster) maps, from predefined OpenStreetMap tiles (like Mapnik) to satellite images and special purpose layers like weather maps, climate maps, geological maps, hillshade layers, etc.
+    <string name="osmand_rastermaps_plugin_description">With this plugin you can access many types of online (so called tile or raster) maps, from predefined OpenStreetMap tiles (like Mapnik) to satellite images and special purpose layers like weather maps, climate maps, geological maps, hillshade layers, etc.
 		\n\nAny of these maps can either be used as the main (base) map to be displayed on the OsmAnd map screen, or as an overlay or underlay to another base map (like OsmAnd\'s standard offline maps). In order to make any underlay map more visible, certain elements of the OsmAnd vector maps can easily be hidden via the \'Configure map\' menu as desired.
 		\n\nTile maps can be obtained directly via online sources, or can be prepared for offline use (and manually copied to OsmAnd\'s data folder) as an SQLite database which can be produced by a variety of 3rd party map preparation tools.
 	</string>
     <string name="record_plugin_name">Trip recording</string>
-	<string name="record_plugin_description">This plugin activates the functionality to record and save your tracks by manually touching the GPX logging widget on the map screen, or also to automatically log all of your navigation routes to a GPX file.
+    <string name="record_plugin_description">This plugin activates the functionality to record and save your tracks by manually touching the GPX logging widget on the map screen, or also to automatically log all of your navigation routes to a GPX file.
 		\n\nRecorded tracks can be shared with your friends or be used for OSM contributions. Athletes can use recorded tracks to monitor their trainings. Some basic track analysis can be performed directly in OsmAnd, like lap times, average speed etc., and tracks can of course also later be analyzed in special 3rd party analysis tools.
 	</string>
     <string name="srtm_paid_version_title">Contour lines plugin</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd plugin for offline contour lines</string>
-	<string name="osmand_srtm_long_description_1000_chars">This plugin provides both a contour line overlay and a (relief) hillshade layer to be displayed on top of OsmAnd\'s standard maps. This functionality will be much appreciated by athletes, hikers, trekkers, and anybody interested in the relief structure of a landscape.
+    <string name="osmand_srtm_long_description_1000_chars">This plugin provides both a contour line overlay and a (relief) hillshade layer to be displayed on top of OsmAnd\'s standard maps. This functionality will be much appreciated by athletes, hikers, trekkers, and anybody interested in the relief structure of a landscape.
 		\n\nThe global data (between 70 degrees north and 70 degrees south) is based on measurements by SRTM (Shuttle Radar Topography Mission) and ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), an imaging instrument onboard Terra, the flagship satellite of NASA\'s Earth Observing System. ASTER is a cooperative effort between NASA, Japan\'s Ministry of Economy, Trade and Industry (METI), and Japan Space Systems (J-spacesystems).
 	</string>
     <string name="srtm_plugin_name">Contour Lines</string>
-	<string name="srtm_plugin_description">This plugin provides both a contour line overlay and a (relief) hillshade layer to be displayed on top of OsmAnd\'s standard maps. This functionality will be much appreciated by athletes, hikers, trekkers, and anybody interested in the relief structure of a landscape. (Please note that contour line and/or relief data are separate, additional downloads available after activating the plugin.)
+    <string name="srtm_plugin_description">This plugin provides both a contour line overlay and a (relief) hillshade layer to be displayed on top of OsmAnd\'s standard maps. This functionality will be much appreciated by athletes, hikers, trekkers, and anybody interested in the relief structure of a landscape. (Please note that contour line and/or relief data are separate, additional downloads available after activating the plugin.)
 		\n\nThe global data (between 70 degrees north and 70 degrees south) is based on measurements by SRTM (Shuttle Radar Topography Mission) and ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), an imaging instrument onboard Terra, the flagship satellite of NASA\'s Earth Observing System. ASTER is a cooperative effort between NASA, Japan\'s Ministry of Economy, Trade and Industry (METI), and Japan Space Systems (J-spacesystems).
 	</string>
     <string name="plugin_touringview_name">Touring map view</string>
-	<string name="plugin_touringview_descr">Activating this view changes OsmAnd\'s map style to \'Touring view\', this is a special high-detail view for travelers and professional drivers.
+    <string name="plugin_touringview_descr">Activating this view changes OsmAnd\'s map style to \'Touring view\', this is a special high-detail view for travelers and professional drivers.
 		\n\nThis view provides, at any given map zoom, the maximum amount of travel details available in the map data (particularly roads, tracks, paths, and orientation marks).
 		\n\nIt also clearly depicts all types of roads unambiguously by color coding, which is useful when e.g. driving large vehicles.
 		\n\nAnd it provides special touring options like showing bicycle routes or Alpine mountain routes.
@@ -794,18 +789,18 @@
 		\n\nThis view can be reverted by either de-activating it again here, or by changing the \'Map style\' under \'Configure map\' as desired.
 	</string>
     <string name="plugin_nautical_name">Nautical map view</string>
-	<string name="plugin_nautical_descr">This plugin enriches the OsmAnd map and navigation app to also produce nautical maps for boating, sailing, and other types of watersports.
+    <string name="plugin_nautical_descr">This plugin enriches the OsmAnd map and navigation app to also produce nautical maps for boating, sailing, and other types of watersports.
 		\n\nA special map add-on for OsmAnd will provide all nautical navigation marks and chart symbols, for inland  as well as for nearshore navigation. The description of each navigation mark provides the details needed to identify them and their meaning (category, shape, color, sequence, reference, etc.).
 		\n\nTo return to one of OsmAnd\'s conventional map styles, simply either de-activate this plugin again, or change the \'Map style\' under \'Configure map\' as desired.
 	</string>
     <string name="plugin_ski_name">Ski map view</string>
-	<string name="plugin_ski_descr">This plugin for OsmAnd puts at your fingertips details of global downhill ski slopes, cross country ski runs, Alpine ski routes, cable cars and ski lifts. Routes and pistes are shown color-coded by difficulty, and depicted in a special \'Winter\' map style which assimilates a snow-colored winter landscape.
+    <string name="plugin_ski_descr">This plugin for OsmAnd puts at your fingertips details of global downhill ski slopes, cross country ski runs, Alpine ski routes, cable cars and ski lifts. Routes and pistes are shown color-coded by difficulty, and depicted in a special \'Winter\' map style which assimilates a snow-colored winter landscape.
 		\n\nActivating this view changes the map style to \'Winter and ski\', showing all landscape features under wintry conditions. This view can be reverted by either de-activating it again here, or by changing the \'Map style\' under \'Configure map\' as desired.
 	</string>
     <string name="audionotes_plugin_name">Audio/video notes</string>
     <string name="audionotes_plugin_description">The Audio/video notes plugin provides the functionality to take audio/photography/video notes during a trip, using either a button on the map screen, or directly the context menu for any position on the map.</string>
     <string name="osmand_parking_plugin_name">Parking Position</string>
-	<string name="osmand_parking_plugin_description">The parking position plugin lets you memorize where your car is parked and how much parking time is left (if there is a time limit).
+    <string name="osmand_parking_plugin_description">The parking position plugin lets you memorize where your car is parked and how much parking time is left (if there is a time limit).
 	\nBoth the location and time are visible on the OsmAnd dashboard as well as in widget on the map screen. An alarm can be added to the Android calendar as a reminder.</string>
     <string name="osmand_distance_planning_plugin_name">Distance calculator &amp; planning tool</string>
     <string name="osmand_distance_planning_plugin_description">This plugin provides a map screen widget allowing to create paths by tapping on the map, or use or modify existing GPX files, to plan a trip and measure the distance between points. The results can be saved as a GPX file, which can later be used for guidance.</string>
@@ -863,7 +858,6 @@
     <string name="dash_download_manage">Manage</string>
     <string name="map_locale">Map language</string>
     <string name="rendering_attr_transportStops_name">Transport stops</string>
-
     <string name="navigate_point_zone">Zone</string>
     <string name="navigate_point_olc">Open Location Code</string>
     <string name="navigate_point_olc_info_invalid">Invalid OLC\n</string>
@@ -948,7 +942,6 @@
     <string name="save_track_interval_descr">Choose logging interval for track recording during navigation</string>
     <string name="voice_provider_descr">Select voice guidance for navigation</string>
     <string name="voice_provider">Voice guidance</string>
-
     <string name="enable_proxy_title">Enable HTTP Proxy</string>
     <string name="enable_proxy_descr">Configure HTTP Proxy for all network requests</string>
     <string name="proxy_host_title">Proxy Host</string>
@@ -1189,8 +1182,6 @@
     <string name="route_info">Route information</string>
     <string name="routing_attr_prefer_motorway_name">Prefer motorways</string>
     <string name="routing_attr_prefer_motorway_description">Prefer motorways</string>
-
-
     <string name="routing_attr_avoid_toll_name">Avoid toll roads</string>
     <string name="routing_attr_avoid_toll_description">Avoid toll roads</string>
     <string name="routing_attr_avoid_unpaved_name">Avoid unpaved roads</string>
@@ -1286,7 +1277,6 @@
     <string name="route_to">To:</string>
     <string name="route_via">Via:</string>
     <string name="route_from">From:</string>
-
     <string name="app_mode_default">Browse map</string>
     <string name="settings_preset">Default profile</string>
     <string name="settings_preset_descr">Map view and navigation settings are remembered per use profile. Set your default profile here.</string>
@@ -1410,7 +1400,6 @@
     <string name="rendering_attr_alpineHiking_description">Render paths according to SAC scale</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Hiking symbol overlay</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Render paths according to OSMC traces</string>
-
     <string name="rendering_attr_noAdminboundaries_name">Boundaries</string>
     <string name="rendering_attr_noAdminboundaries_description">Suppress display of regional boundaries (admin levels 5–9)</string>
     <string name="map_widget_max_speed">Speed limit</string>
@@ -1440,7 +1429,6 @@
     <string name="context_menu_item_first_intermediate_point">Add as first intermediate destination</string>
     <string name="add_as_last_destination_point">Add as last intermediate destination</string>
     <string name="add_as_first_destination_point">Add as first intermediate destination</string>
-
     <string name="replace_destination_point">Replace the destination</string>
     <string name="new_destination_point_dialog">You have already set a destination:</string>
     <string name="target_points">Destinations</string>
@@ -1475,7 +1463,7 @@
     <string name="interrupt_music">Pause music</string>
     <string name="osmand_play_title_30_chars">OsmAnd Maps &amp; Navigation</string>
     <string name="osmand_short_description_80_chars">Global Mobile Map Viewing &amp; Navigation for Offline and Online OSM Maps</string>
-	<string name="osmand_long_description_1000_chars">
+    <string name="osmand_long_description_1000_chars">
 		OsmAnd (OSM Automated Navigation Directions)
 
 		OsmAnd is an open source navigation application with access to a wide variety of global OpenStreetMap (OSM) data. All map data (vector or tile maps) can be stored on the phone memory card for offline usage. OsmAnd also offers offline and online routing functionality including turn-by-turn voice guidance.
@@ -1571,7 +1559,7 @@
     </string>
     <string name="osmand_plus_play_title_30_chars">OsmAnd+ Maps &amp; Navigation</string>
     <string name="osmand_plus_short_description_80_chars">Global Mobile Map Viewing &amp; Navigation for Offline and Online OSM Maps</string>
-	<string name="osmand_plus_long_description_1000_chars">
+    <string name="osmand_plus_long_description_1000_chars">
 		OsmAnd+ (OSM Automated Navigation Directions)
 
 		OsmAnd+ is an open source navigation application with access to a wide variety of global OpenStreetMap (OSM) data. All map data (vector or tile maps) can be stored on the phone memory card for offline use. OsmAnd also offers offline and online routing functionality including turn-by-turn voice guidance.
@@ -1665,7 +1653,7 @@
         • Africa: **
         • Antarctica: *
         Most countries around the globe available as downloads!
-        From Afghanistan to Zimbabwe, from Australia to the USA. Argentina, Brazil, Canada, France, Germany, Mexico, UK, Spain, &#8230;
+        From Afghanistan to Zimbabwe, from Australia to the USA. Argentina, Brazil, Canada, France, Germany, Mexico, UK, Spain, …
     </string>
     <string name="filterpoi_activity">Create POI filter</string>
     <string name="recalculate_route_to_your_location">Transport mode:</string>
@@ -1719,7 +1707,7 @@
     <string name="select_animate_speedup">Select speed of route simulation</string>
     <string name="global_app_allocated_memory_descr">Allocated memory %1$s MB (Android limit %2$s MB, Dalvik %3$s MB).</string>
     <string name="global_app_allocated_memory">Allocated memory</string>
-	<string name="native_app_allocated_memory_descr">Total native memory allocated by app %1$s MB (Dalvik %2$s MB, other %3$s MB).
+    <string name="native_app_allocated_memory_descr">Total native memory allocated by app %1$s MB (Dalvik %2$s MB, other %3$s MB).
 		Proportional memory %4$s MB (Android limit %5$s MB, Dalvik %6$s MB).</string>
     <string name="native_app_allocated_memory">Total native memory</string>
     <string name="starting_point_too_far">Starting point too far from nearest road.</string>
@@ -1805,7 +1793,6 @@
     <string name="show_ruler_level">Display ruler</string>
     <string name="info_button">Info</string>
     <string name="back_to_location">Back to position</string>
-
     <string name="accessibility_mode">Accessibility mode</string>
     <string name="accessibility_mode_descr">Turns on the accessibility features</string>
     <string name="accessibility_default">According to the global system setting</string>
@@ -1936,7 +1923,6 @@
     <string name="city_type_village">Village</string>
     <string name="city_type_town">Town</string>
     <string name="city_type_city">City</string>
-
     <string name="animate_route_off">Stop simulation</string>
     <string name="animate_route">Start simulation</string>
     <string name="file_can_not_be_renamed">File can not be renamed.</string>
@@ -2098,8 +2084,6 @@
     <string name="version_index_is_not_supported">The version of index \'\'{0}\'\' is not supported</string>
     <string name="osmand_routing_experimental">OsmAnd offline navigation is an experimental feature and it does not work for distances of more than about 20 km.\n\nNavigation service is temporarily switched to online CloudMade.</string>
     <string name="specified_dir_doesnt_exist">Can not find the specified folder.</string>
-
-
     <string name="osmand_net_previously_installed">A previous OsmAnd version is installed. All offline data will be supported by the new application. But Favorite points should be exported in the old application and later imported by the new one.</string>
     <string name="build_installed">Build {0} successfully installed ({1}).</string>
     <string name="downloading_build">Downloading build…</string>
@@ -2365,7 +2349,6 @@
     <string name="search_address_street_option">Intersecting street</string>
     <!-- string name="search_tabs_location">Location</string -->
     <string name="context_menu_item_update_map">Update map</string>
-
     <string name="context_menu_item_create_poi">Create POI</string>
     <string name="add_favorite_dialog_top_text">Enter favorite name</string>
     <string name="add_favorite_dialog_default_favourite_name">Favorite</string>
@@ -2430,12 +2413,11 @@
     <string name="try_again">Try again</string>
     <string name="error_message_pattern">Error: {0}</string>
     <string name="dahboard_options_dialog_title">Configure dashboard</string>
-
     <string name="shared_string_card_was_hidden">Card was hidden</string>
     <string name="shared_string_undo">UNDO</string>
     <string name="shared_string_skip">Skip</string>
     <string name="app_name_osmand">OsmAnd</string>
-    <string name="offline_maps_and_navigation"><![CDATA[Offline Maps\n& Navigation]]></string>
+    <string name="offline_maps_and_navigation">Offline Maps\n&amp; Navigation</string>
     <string name="commit_poi">Commit POI</string>
     <string name="tab_title_basic">Basic</string>
     <string name="tab_title_advanced">Advanced</string>
@@ -2475,9 +2457,7 @@
     <string name="update_all">Update all (%1$s MB)</string>
     <string name="free_downloads_used">Free downloads used</string>
     <string name="free_downloads_used_description">Displays the used free downloads</string>
-
     <string name="application_dir_description">Choose where you want to store maps and other data files.</string>
-
     <string name="enter_country_name">Enter country name</string>
     <string name="new_version">New version</string>
     <string name="begin_with_osmand_menu_group">First steps with OsmAnd</string>
@@ -2499,6 +2479,7 @@
     <string name="feedback">Feedback</string>
     <string name="contact_us">Contact us</string>
     <string name="map_legend">Map legend</string>
+    <string name="save_poi_too_many_uppercase">Name contains too many capital letters. Do you want to continue?</string>
     <string name="save_poi_without_poi_type_message">Do you really want to save POI without POI type?</string>
     <string name="poi_context_menu_modify_osm_change">Modify OSM change</string>
     <string name="use_dashboard_btn">Use dashboard</string>
@@ -2525,7 +2506,6 @@
     <string name="reports_for">Report for</string>
     <string name="file_name_containes_illegal_char">File name contains illegal character</string>
     <string name="configure_screen_quick_action">Quick action</string>
-
     <string name="quick_action_item_action">Action %d</string>
     <string name="quick_action_item_screen">Screen %d</string>
     <string name="quick_action_add_marker">Add map marker</string>
@@ -2600,5 +2580,5 @@
     <string name="quick_action_map_source_switch">The map source has been changed to \"%s\".</string>
     <string name="quick_action_btn_tutorial_title">Change button position</string>
     <string name="quick_action_btn_tutorial_descr">Long tap and drag the button to change its position on the screen</string>
-	<string name="shared_string_action_name">Action name</string>
+    <string name="shared_string_action_name">Action name</string>
 </resources>
