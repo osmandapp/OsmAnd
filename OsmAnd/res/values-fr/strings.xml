@@ -2957,4 +2957,7 @@ Fonctionnalités principales :
  • Affichage de la vitesse et de l\'altitude (option)
  • Affichage des courbes de niveaux et ombrage du relief (nécessite un greffon additionnel)
  "</string>
+    <string name="favorite_group_name">Nom du groupe</string>
+    <string name="change_color">Modifier la couleur</string>
+    <string name="edit_name">Modifier le nom</string>
     </resources>
