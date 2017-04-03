@@ -728,7 +728,7 @@ public class MapRenderRepositories {
 			if(requestedBox.getZoom() <= zoomOnlyForBasemaps && 
 					"".equals(prefs.MAP_PREFERRED_LOCALE.get())) {
 				currentRenderingContext.preferredLocale = app.getLanguage();
-				currentRenderingContext.transliterate = true;
+				currentRenderingContext.transliterate = !"ru".equals(app.getLanguage()) && !"uk".equals(app.getLanguage());
 			} else {
 				currentRenderingContext.preferredLocale = prefs.MAP_PREFERRED_LOCALE.get();
 				currentRenderingContext.transliterate = prefs.MAP_TRANSLITERATE_NAMES.get();
