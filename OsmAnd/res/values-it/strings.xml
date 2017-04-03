@@ -2566,7 +2566,7 @@ Se ami OsmAnd e OSM e vuoi sostenerli, questo è un modo perfetto per farlo.</st
     <string name="shared_string_is_open_24_7">Aperto 24/7</string>
     <string name="storage_directory_card">Scheda di memoria</string>
     <string name="coords_format">Formato coordinate</string>
-    <string name="coords_format_descr">Formato per le coordinate geografiche</string>
+    <string name="coords_format_descr">Formato delle coordinate geografiche</string>
   	<string name="route_stops_before">%1$s fermate prima</string>
     <string name="coords_search">Ricerca per coordinate</string>
     <string name="advanced_coords_search">Ricerca avanzata per coordinate</string>
@@ -2927,4 +2927,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="select_street">Seleziona le strade</string>
     <string name="shared_string_in_name">in %1$s</string>
     <string name="type_address">Scrivi l\'indirizzo</string>
+    <string name="animate_my_location">Anima la mia localizzazione</string>
+    <string name="animate_my_location_desc">Abilita l\'animazione della mia localizzazione nella mappa</string>
+    <string name="shared_string_overview">Panoramica</string>
     </resources>
