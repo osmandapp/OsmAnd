@@ -125,6 +125,10 @@ public class OsmBaseStorage {
 		
 	}
 	
+	public void setConvertTagsToLC(boolean convertTagsToLC) {
+		this.convertTagsToLC = convertTagsToLC;
+	}
+	
 	public boolean isSupressWarnings() {
 		return supressWarnings;
 	}
