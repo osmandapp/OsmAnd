@@ -1590,9 +1590,9 @@
 	<string name="poi_diet_gluten_free_only">只有無麩質食物</string>
 	<string name="poi_diet_gluten_free_yes">無麩質食物</string>
 	<string name="poi_diet_gluten_free_no">無麩質食物：無</string>
-	<string name="poi_diet_kosher_only">只有符合猶太教規食物</string>
-	<string name="poi_diet_kosher_yes">符合猶太教規食物</string>
-	<string name="poi_diet_kosher_no">符合猶太教規食物：無</string>
+	<string name="poi_diet_kosher_only">只有猶太教潔食</string>
+	<string name="poi_diet_kosher_yes">猶太教潔食</string>
+	<string name="poi_diet_kosher_no">猶太教潔食食物：無</string>
 	<string name="poi_diet_halal_only">只有清真食物</string>
 	<string name="poi_diet_halal_yes">清真食物</string>
 	<string name="poi_diet_halal_no">清真食物：無</string>
@@ -2416,8 +2416,8 @@
 	<string name="poi_health_specialty_psychiatry_yes">醫療專業：精神科</string>
 	<string name="poi_health_specialty_neurology_yes">醫療專業：神經科</string>
 	<string name="poi_seamark_dyke">防波堤</string>
-	<string name="poi_historic_period_villager">歷史時期：村民 (時代 I, II, 1580 BC – 133 AC)</string>
-	<string name="poi_historic_period_urban">歷史時期：城市（時代，133 AC - 374 AC）</string>
+	<string name="poi_historic_period_villager">"歷史時期：村民 (新時代 I, II, 西元前 1580 年  – 西元 133 年)"</string>
+	<string name="poi_historic_period_urban">歷史時期：城市（新時代 III，西元 133 年 - 西元 374 年）</string>
 	<string name="poi_fuel_type">類別</string>
 	<string name="poi_fuel_avia_type">類別</string>
 	<string name="poi_payment_type">支付類別</string>
@@ -2511,4 +2511,37 @@
 	<string name="poi_compressed_air_filter">壓縮空氣</string>
 	<string name="poi_vacuum_cleaner_filter">真空吸塵器</string>
 	<string name="poi_free_flying_characteristic">特性</string>
+	<string name="poi_cafeteria">自助餐廳</string>
+
+<string name="poi_emergency_infrastructure">緊急基本設施</string>
+	<string name="poi_spices">香料店</string>
+	<string name="poi_shop_craft">藝術和手工藝用品店</string>
+	<string name="poi_religion">宗教物品</string>
+
+	<string name="poi_waterway_fuel">船用加油站</string>
+	<string name="poi_ice_hockey">冰上曲棍球</string>
+	<string name="poi_club_sailing">航海俱樂部</string>
+	<string name="poi_club_scout">童子軍俱樂部</string>
+
+	<string name="poi_wheelchair_accessibility">輪椅通道</string>
+	<string name="poi_diet_vegetarian_filter_yes">素食者</string>
+	<string name="poi_diet_vegan_filter_yes">素食主義者</string>
+	<string name="poi_diet_gluten_free_filter_yes">無麩質</string>
+	<string name="poi_club_freemasonry">共濟會寄宿</string>
+	<string name="poi_diet_kosher_filter_yes">猶太教潔食</string>
+	<string name="poi_diet_halal_filter_yes">清真食物</string>
+	<string name="poi_diet_lactose_free_filter_yes">無乳糖食物</string>
+	<string name="poi_takeaway_filter_yes">是的</string>
+	<string name="poi_delivery_filter_yes">是的</string>
+	<string name="poi_outdoor_seating_filter_yes">是的</string>
+	<string name="poi_diaper_table_count">尿布更換台數量</string>
+	<string name="poi_service_bicycle_charging_yes">自行車充電︰是的</string>
+	<string name="poi_service_bicycle_charging_no">自行車充電︰沒有</string>
+	<string name="poi_bicycle_repair_station">自行車自行維修站</string>
+
+	<string name="poi_shower_filter_yes">是的</string>
+	<string name="poi_historic_period_classical">歷史時期：古典（新時代 IV，西元 374 年 - 西元 900 年）</string>
+	<string name="poi_historic_period_imperial">歷史時期︰帝國 (新時代 V，西元 900 年 — 西元 1200 年)</string>
+
+	<string name="poi_historic_era_paleolithic">歷史時期：舊石器時代（260 萬年前 - 100 萬年前）</string>
 	</resources>
