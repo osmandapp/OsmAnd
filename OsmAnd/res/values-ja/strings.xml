@@ -2770,4 +2770,20 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="track_points_category_name">このルートで重要なポイント</string>
     <string name="gpx_track">経路</string>
     <string name="get_for_month">月額</string>
+    <string name="favorite_group_name">グループ名</string>
+    <string name="change_color">色を変更</string>
+    <string name="edit_name">名前の編集</string>
+    <string name="animate_my_location">現在地をアニメーションさせる</string>
+    <string name="animate_my_location_desc">地図上で現在地をアニメーションさせて強調表示します</string>
+    <string name="shared_string_overview">概要</string>
+    <string name="select_street">道路を選択</string>
+    <string name="type_address">住所を入力</string>
+    <string name="type_city_town">市や町の名前を入力</string>
+    <string name="type_postcode">郵便番号を入力</string>
+    <string name="nearest_cities">最寄りの市町村名を入力</string>
+    <string name="select_city">市を選択</string>
+    <string name="select_postcode">郵便番号を選択</string>
+    <string name="quick_action_auto_zoom">マップの自動ズームをON/OFF</string>
+    <string name="quick_action_auto_zoom_desc">アクションボタンをタップすると、移動速度に応じたマップの自動ズーム機能のON/OFFが出来ます。</string>
+    <string name="quick_action_auto_zoom_on">マップの自動ズームON</string>
     </resources>
