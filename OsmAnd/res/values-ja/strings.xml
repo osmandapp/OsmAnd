@@ -2122,7 +2122,7 @@ OsmAndの従来のマップスタイルに戻すには、このプラグイン�
 	<string name="roads">道路</string>
     <string name="downloading_number_of_files">%1$d のファイルをダウンロード中</string>
     <string name="show_free_version_banner">無料版のバナーを表示</string>
-    <string name="show_free_version_banner_description">有料版を所持している場合でも無料版バナーを見ることが出来ます</string>
+    <string name="show_free_version_banner_description">有料版でも、ダウンロード画面の有料版広告見ることが出来ます</string>
     <string name="buy">購入</string>
     <string name="activate_seamarks_plugin">水位線プラグインを有効にしてください</string>
     <string name="activate_srtm_plugin">SRTMプラグインを有効にしてください</string>
@@ -2624,7 +2624,7 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
 等々
  "</string>
     <string name="search_hint">市町村名、住所、POI名称を入力</string>
-    <string name="osm_live_banner_desc">毎月、毎週、毎日、毎時と設定された更新頻度に合わせた、マップの無制限ダウンロードを可能にしましょう。</string>
+    <string name="osm_live_banner_desc">毎月、毎週、毎日、毎時と設定された更新頻度に合わせた、マップの無制限ダウンロードが可能になります。</string>
     <string name="osmand_plus_banner_desc">有料バージョンのOsmAndは毎月のマップ更新が得られ、マップのダウンロード数制限はありません。</string>
     <string name="location_not_found">場所が見つかりません</string>
     <string name="no_inet_connection_desc_map">マップのダウンロードにはインターネット接続が必要です。</string>
@@ -2769,4 +2769,5 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="points_delete_multiple">%1$d個のポイントを削除します。よろしいですか？</string>
     <string name="track_points_category_name">このルートで重要なポイント</string>
     <string name="gpx_track">経路</string>
+    <string name="get_for_month">月額</string>
     </resources>
