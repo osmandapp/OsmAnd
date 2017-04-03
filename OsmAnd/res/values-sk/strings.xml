@@ -2871,4 +2871,7 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="shared_string_overview">Prehľad</string>
     <string name="animate_my_location">Animovať moju polohu</string>
     <string name="animate_my_location_desc">Povoliť animovanie mojej polohy na mape</string>
+    <string name="favorite_group_name">Názov skupiny</string>
+    <string name="change_color">Zmeniť farbu</string>
+    <string name="edit_name">Upraviť názov</string>
     </resources>
