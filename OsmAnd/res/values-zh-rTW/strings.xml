@@ -3041,4 +3041,7 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="subscribe_email_desc">簽署我們有關應用程式折扣的電子郵件名單和獲得3次以上的地圖下載！</string>
     <string name="animate_my_location">動畫制作我的位置</string>
     <string name="animate_my_location_desc">在地圖上啟用動畫制作我的位置</string>
+    <string name="favorite_group_name">群組名稱</string>
+    <string name="change_color">更改顏色</string>
+    <string name="edit_name">編輯名稱</string>
     </resources>
