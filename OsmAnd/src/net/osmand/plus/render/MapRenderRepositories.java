@@ -792,7 +792,6 @@ public class MapRenderRepositories {
 			}
 			String renderingDebugInfo = currentRenderingContext.renderingDebugInfo;
 			currentRenderingContext.ended = true;
-			visibleRenderingContext = currentRenderingContext;
 			if (checkWhetherInterrupted()) {
 				// revert if it was interrupted 
 				// (be smart a bit do not revert if road already drawn) 
@@ -806,6 +805,7 @@ public class MapRenderRepositories {
 				currentRenderingContext = null;
 				return;
 			} else {
+				visibleRenderingContext = currentRenderingContext;
 				this.checkedRenderedState = renderedState;
 				this.checkedBox = this.bmpLocation;
 			}

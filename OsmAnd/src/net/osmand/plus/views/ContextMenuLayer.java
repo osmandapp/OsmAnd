@@ -437,9 +437,31 @@ public class ContextMenuLayer extends OsmandMapLayer {
 				renderedObjects = nativeLib.searchRenderedObjectsFromContext(rc, (int) (point.x - x), (int) (point.y - y));
 			}
 			if (renderedObjects != null) {
+				// double tx = c.first/ (rc->tileDivisor);
+				// double ty = c.second / (rc->tileDivisor);
+			    // float dTileX = tx - rc->getLeft();
+			    // float dTileY = ty - rc->getTop();
+			    // rc->calcX = rc->cosRotateTileSize * dTileX - rc->sinRotateTileSize * dTileY;
+			    // rc->calcY = rc->sinRotateTileSize * dTileX + rc->cosRotateTileSize * dTileY;
+				int TILE_SIZE = 256;
+				double cosRotateTileSize = Math.cos(Math.toRadians(rc.rotate)) * TILE_SIZE;
+				double sinRotateTileSize  = Math.sin(Math.toRadians(rc.rotate)) * TILE_SIZE;
+				for(RenderedObject r : renderedObjects) {
+					double cx = r.getBbox().centerX();
+					double cy = r.getBbox().centerY();
+					double dTileX = (cx * cosRotateTileSize + cy * sinRotateTileSize) / (TILE_SIZE * TILE_SIZE); 
+					double dTileY = (cy * cosRotateTileSize - cx * sinRotateTileSize) / (TILE_SIZE * TILE_SIZE);
+					int x31 = (int) ((dTileX + rc.leftX) * rc.tileDivisor);
+					int y31 = (int) ((dTileY + rc.topY) * rc.tileDivisor);
+					double lat = MapUtils.get31LatitudeY(y31);
+					double lon = MapUtils.get31LongitudeX(x31);
+					r.setLabelLatLon(new LatLon(lat, lon));
+				}
 				IContextMenuProvider poiMenuProvider = activity.getMapLayers().getPoiMapLayer();
 				for (RenderedObject renderedObject : renderedObjects) {
-					if (renderedObject.getX() != null && renderedObject.getX().size() == 1
+					if(renderedObject.getLabelLatLon() != null) {
+						customLatLon = renderedObject.getLabelLatLon();	
+					} else if (renderedObject.getX() != null && renderedObject.getX().size() == 1
 							&& renderedObject.getY() != null && renderedObject.getY().size() == 1) {
 						customLatLon = new LatLon(MapUtils.get31LatitudeY(renderedObject.getY().get(0)),
 								MapUtils.get31LongitudeX(renderedObject.getX().get(0)));
@@ -452,7 +474,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 							names.add(renderedObject.getName());
 						}
 						for (Entry<String, String> entry : renderedObject.getTags().entrySet()) {
-							if (entry.getKey().startsWith("name")) {
+							if (entry.getKey().startsWith("name:") && !entry.getValue().equals("")) {
 								names.add(entry.getValue());
 							}
 						}
@@ -470,7 +492,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 								nodes.add(new Node(MapUtils.get31LatitudeY(renderedObject.getY().get(i)),
 										MapUtils.get31LongitudeX(renderedObject.getX().get(i)), 0));
 							}
-							customLatLon = OsmMapUtils.getMathWeightCenterForNodes(nodes);
+							//customLatLon = OsmMapUtils.getMathWeightCenterForNodes(nodes);
 						}
 						selectedObjects.put(renderedObject, null);
 					}
