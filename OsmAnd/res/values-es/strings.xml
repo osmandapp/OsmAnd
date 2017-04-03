@@ -2532,7 +2532,7 @@ El espacio de almacenamiento usado es {3} MB temporalmente y {1} MB permanenteme
     <string name="quick_action_add_poi_descr">Pulsar el botón de acción agregará un PDI en la ubicación del centro de la pantalla.</string>
     <string name="quick_action_navigation_voice_descr">Pulsar el botón de acción desactivará o activará las indicaciones de voz durante la navegación.</string>
     <string name="quick_action_add_parking_descr">Pulsar el botón de acción agregará un lugar de aparcamiento en la ubicación del centro de la pantalla.</string>
-    <string name="quick_action_interim_dialog">Mostrar un diálogo interino</string>
+    <string name="quick_action_interim_dialog">Mostrar un diálogo temporal</string>
     <string name="favorite_autofill_toast_text">" se guarda en "</string>
     <string name="favorite_empty_place_name">Lugar</string>
     <string name="quick_action_duplicates">El nombre de acción rápida especificado ya está en uso, se ha cambiado a %1$s para evitar duplicación.</string>
