@@ -3,6 +3,7 @@ package net.osmand.plus.activities;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
@@ -745,8 +746,9 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 			int enabledColor = light ? R.color.primary_text_light : R.color.primary_text_dark;
 			int disabledColor = light ? R.color.secondary_text_light : R.color.secondary_text_dark;
 			row.findViewById(R.id.group_divider).setVisibility(groupPosition == 0 ? View.GONE : View.VISIBLE);
+			int color = model.color == 0 || model.color == Color.BLACK ? getResources().getColor(R.color.color_favorite) : model.color;
 			setCategoryIcon(app, app.getIconsCache().getPaintedIcon(
-					R.drawable.ic_action_fav_dark, visible ? (model.color | 0xff000000) : getResources().getColor(disabledColor)),
+					R.drawable.ic_action_fav_dark, visible ? (color | 0xff000000) : getResources().getColor(disabledColor)),
 					groupPosition, isExpanded, row, light);
 			adjustIndicator(app, groupPosition, isExpanded, row, light);
 			TextView label = (TextView) row.findViewById(R.id.category_name);

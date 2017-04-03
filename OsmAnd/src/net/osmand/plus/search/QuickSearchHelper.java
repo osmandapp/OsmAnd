@@ -8,6 +8,7 @@ import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.resources.ResourceManager.ResourceListener;
@@ -18,6 +19,7 @@ import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchCoreFactory.SearchBaseAPI;
 import net.osmand.search.core.SearchPhrase;
 import net.osmand.search.core.SearchResult;
+import net.osmand.util.Algorithms;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -164,18 +166,31 @@ public class QuickSearchHelper implements ResourceListener {
 
 		@Override
 		public boolean search(SearchPhrase phrase, SearchUICore.SearchResultMatcher resultMatcher) throws IOException {
-			List<FavouritePoint> favList = app.getFavorites().getFavouritePoints();
-			for (FavouritePoint point : favList) {
-				FavoriteGroup group = helper.getGroup(point);
-				if (group != null && group.visible) {
+			String baseGroupName = app.getString(R.string.shared_string_favorites);
+			List<FavoriteGroup> groups = app.getFavorites().getFavoriteGroups();
+			for (FavoriteGroup group : groups) {
+				if (group.visible) {
 					SearchResult sr = new SearchResult(phrase);
-					sr.localeName = group.name;
+					sr.localeName = Algorithms.isEmpty(group.name) ? baseGroupName : group.name;
 					sr.object = group;
 					sr.priority = SEARCH_FAVORITE_CATEGORY_PRIORITY;
 					sr.objectType = ObjectType.FAVORITE_GROUP;
 					sr.preferredZoom = 17;
 					if (phrase.getNameStringMatcher().matches(sr.localeName)) {
-						resultMatcher.publish(sr);
+						if (group.points.size() < 5) {
+							for (FavouritePoint point : group.points) {
+								SearchResult srp = new SearchResult(phrase);
+								srp.localeName = point.getName();
+								srp.object = point;
+								srp.priority = SEARCH_FAVORITE_OBJECT_PRIORITY;
+								srp.objectType = ObjectType.FAVORITE;
+								srp.location = new LatLon(point.getLatitude(), point.getLongitude());
+								srp.preferredZoom = 17;
+								resultMatcher.publish(srp);
+							}
+						} else {
+							resultMatcher.publish(sr);
+						}
 					}
 				}
 			}
@@ -219,9 +234,11 @@ public class QuickSearchHelper implements ResourceListener {
 				sr.objectType = ObjectType.FAVORITE;
 				sr.location = new LatLon(point.getLatitude(), point.getLongitude());
 				sr.preferredZoom = 17;
-				if (phrase.isLastWord(ObjectType.FAVORITE_GROUP)
-						&& !point.getCategory().equals(phrase.getLastSelectedWord().getResult().localeName)) {
-					continue;
+				if (phrase.isLastWord(ObjectType.FAVORITE_GROUP)) {
+					FavoriteGroup group = (FavoriteGroup) phrase.getLastSelectedWord().getResult().object;
+					if (group != null && !point.getCategory().equals(group.name)) {
+						continue;
+					}
 				}
 				if (phrase.getUnknownSearchWordLength() <= 1
 						&& (phrase.isNoSelectedType() || phrase.isLastWord(ObjectType.FAVORITE_GROUP))) {

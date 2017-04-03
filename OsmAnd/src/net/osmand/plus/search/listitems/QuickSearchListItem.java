@@ -1,6 +1,7 @@
 package net.osmand.plus.search.listitems;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.text.Spannable;
 
@@ -370,7 +371,8 @@ public class QuickSearchListItem {
 				return FavoriteImageDrawable.getOrCreate(app, fav.getColor(), false);
 			case FAVORITE_GROUP:
 				FavoriteGroup group = (FavoriteGroup) searchResult.object;
-				return app.getIconsCache().getPaintedIcon(R.drawable.ic_action_fav_dark, group.color | 0xff000000);
+				int color = group.color == 0 || group.color == Color.BLACK ? app.getResources().getColor(R.color.color_favorite) : group.color;
+				return app.getIconsCache().getPaintedIcon(R.drawable.ic_action_fav_dark, color | 0xff000000);
 			case REGION:
 				return app.getIconsCache().getIcon(R.drawable.ic_world_globe_dark,
 						app.getSettings().isLightContent() ? R.color.osmand_orange : R.color.osmand_orange_dark);
