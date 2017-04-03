@@ -2966,4 +2966,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
  "</string>
     <string name="animate_my_location">Анімаваць маю пазіцыю</string>
     <string name="animate_my_location_desc">Уключае анімацыю маёй пазіцыі на мапе</string>
+    <string name="favorite_group_name">Назва групы</string>
+    <string name="change_color">Змяніць колер</string>
+    <string name="edit_name">Рэдагаваць назву</string>
     </resources>
