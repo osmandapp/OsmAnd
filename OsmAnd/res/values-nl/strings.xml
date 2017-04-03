@@ -2862,7 +2862,7 @@ voor Gebied: %1$s x %2$s</string>
     <string name="shared_string_start_time">Begintijd</string>
     <string name="shared_string_end_time">Eindtijd</string>
     <string name="shared_string_color">Kleur</string>
-    <string name="shared_string_time_span">Tijdsspanne</string>
+    <string name="shared_string_time_span">Tijdsduur</string>
     <string name="shared_string_time_moving">Tijd in beweging</string>
     <string name="routing_attr_driving_style_name">Rijstijl</string>
     <string name="routing_attr_height_relief_smoothness_factor_description">Gebruik vlakke routes of routes met meer hoogteverschillen</string>
