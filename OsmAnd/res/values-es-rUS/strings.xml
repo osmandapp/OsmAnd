@@ -2860,4 +2860,7 @@ Algunas de las principales funciones:
     <string name="shared_string_overview">Resumen</string>
     <string name="animate_my_location">Animar mi ubicación</string>
     <string name="animate_my_location_desc">Activa la animación de mi ubicación en el mapa</string>
+    <string name="favorite_group_name">Nombre del grupo</string>
+    <string name="change_color">Cambiar color</string>
+    <string name="edit_name">Editar nombre</string>
     </resources>
