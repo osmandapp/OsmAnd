@@ -167,7 +167,7 @@ public class AdvancedEditPoiFragment extends BaseOsmAndFragment
 			editPoiData.setIsInEdit(true);
 			for (Entry<String, String> tag : editPoiData.getTagValues().entrySet()) {
 				if (tag.getKey().equals(EditPoiData.POI_TYPE_TAG)
-						|| tag.getKey().equals(OSMSettings.OSMTagKey.NAME.getValue()))
+						|| tag.getKey().equals(OSMSettings.OSMTagKey.NAME.getValue()) || tag.getKey().startsWith(EditPoiData.REMOVE_TAG_PREFIX))
 					continue;
 				addTagView(tag.getKey(), tag.getValue());
 			}

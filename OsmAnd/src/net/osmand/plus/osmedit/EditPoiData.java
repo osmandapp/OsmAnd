@@ -23,6 +23,8 @@ public class EditPoiData {
 	private Node entity;
 	
 	public static final String POI_TYPE_TAG = "poi_type_tag";
+	public static final String REMOVE_TAG_PREFIX = "----";
+	public static final String REMOVE_TAG_VALUE = "DELETE";
 	private boolean hasChangesBeenMade = false;
 	private Map<String, PoiType> allTranslatedSubTypes;
 	private PoiCategory category;
@@ -99,7 +101,6 @@ public class EditPoiData {
 		}
 	}
 
-
 	public Map<String, String> getTagValues() {
 		return Collections.unmodifiableMap(tagValues);
 	}
@@ -109,6 +110,7 @@ public class EditPoiData {
 		checkNotInEdit();
 		try { 
 			isInEdit = true;
+			tagValues.remove(REMOVE_TAG_PREFIX+tag);
 			tagValues.put(tag, value);
 			notifyDatasetChanged(tag);
 		} finally {
@@ -137,6 +139,7 @@ public class EditPoiData {
 		checkNotInEdit();
 		try { 
 			isInEdit = true;
+			tagValues.put(REMOVE_TAG_PREFIX+tag, REMOVE_TAG_VALUE);
 			tagValues.remove(tag);
 			notifyDatasetChanged(tag);
 		} finally {
@@ -185,6 +188,8 @@ public class EditPoiData {
 		retrieveType();
 		PoiType pt = getPoiTypeDefined();
 		if(pt != null) {
+			tagValues.put(REMOVE_TAG_PREFIX+pt.getOsmTag(), REMOVE_TAG_VALUE);
+			tagValues.put(REMOVE_TAG_PREFIX+pt.getOsmTag2(), REMOVE_TAG_VALUE);
 			tagValues.remove(pt.getOsmTag());
 			tagValues.remove(pt.getOsmTag2());
 			category = pt.getCategory();
