@@ -357,6 +357,18 @@ public class TurnType {
 	public static boolean isSlightTurn(int type) {
 		return type == TSLL || type == TSLR || type == C || type == KL || type == KR;
 	}
+	
+	public static boolean hasAnySlightTurnLane(int type) {
+		return TurnType.isSlightTurn(TurnType.getPrimaryTurn(type))
+				|| TurnType.isSlightTurn(TurnType.getSecondaryTurn(type))
+				|| TurnType.isSlightTurn(TurnType.getTertiaryTurn(type));
+	}
+	
+	public static boolean hasAnyTurnLane(int type, int turn) {
+		return TurnType.getPrimaryTurn(type) == turn
+				|| TurnType.getSecondaryTurn(type) == turn
+				|| TurnType.getTertiaryTurn(type) == turn;
+	}
 
 	public static void collectTurnTypes(int lane, TIntHashSet set) {
 		int pt = TurnType.getPrimaryTurn(lane);
