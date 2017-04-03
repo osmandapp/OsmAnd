@@ -2571,4 +2571,19 @@
 	<string name="poi_cross">十字架</string>
 	<string name="poi_summit_cross">山頂十字架︰是的</string>
 
+	<string name="poi_electronics_repair_phone">電子維修︰電話</string>
+	<string name="poi_electronics_repair_tv">電子維修︰電視</string>
+
+<string name="poi_electronics_repair_computer">電子維修︰電腦</string>
+	<string name="poi_electronics_repair_appliance">電子維修︰裝置</string>
+	<string name="poi_concentration_camp">類別︰集中營</string>
+	<string name="poi_pow_camp">類別︰戰俘營</string>
+	<string name="poi_labor_camp">類別︰勞改營</string>
+	<string name="poi_concentration_camp_nazism">類別︰納粹</string>
+	<string name="poi_concentration_camp_gulag">類別︰古拉格</string>
+
+	<string name="poi_temperature">温度</string>
+	<string name="poi_bathing_yes">沐浴︰是的</string>
+	<string name="poi_bathing_no">沐浴︰沒有</string>
+
 	</resources>
