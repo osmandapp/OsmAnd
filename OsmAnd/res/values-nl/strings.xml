@@ -274,7 +274,7 @@ Er is nu {2} MB beschikbaar</string>
 \n\t\n\tOm deze te gebruiken, kies \'Menu\' → \'Kaart instellen\' → \'Kaartbron…\' → \'Offline vectorkaarten\'.</string>
   <string name="choose_audio_stream">Audiokanaal stembegeleiding</string>
   <string name="choose_audio_stream_descr">Audiokanaal voor de stembegeleiding kiezen</string>
-  <string name="voice_stream_voice_call">Telefoongesprek</string>
+  <string name="voice_stream_voice_call">als Telefoonoproep (onderbreekt BT-autoradio)</string>
   <string name="voice_stream_notification">als melding</string>
   <string name="voice_stream_music">als media/muziek</string>
   <string name="warning_tile_layer_not_downloadable">Kaartlaag %1$s kan niet worden gedownload. Probeer deze opnieuw te installeren.</string>
@@ -1336,12 +1336,12 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 	<string name="speak_street_names">Straatnamen (TTS)</string>
         
     
-    <string name="driving_region_descr">Regio voor autorijden: VS, Europa, GB, Azië en overige</string>
+    <string name="driving_region_descr">Kies regio voor autorijden: VS, Europa, GB of Azië enz.</string>
 	<string name="driving_region">Regio voor autorijden</string>
 	<string name="driving_region_japan">Japan</string>
 	<string name="driving_region_us">Verenigde Staten</string>
 	<string name="driving_region_canada">Canada</string>
-	<string name="driving_region_europe_asia">Europa en Azië</string>
+	<string name="driving_region_europe_asia">Europa, Azië en Zuid-Amerika enz.</string>
 	<string name="driving_region_uk">Verenigd Koninkrijk, India, etc.</string>
 	<string name="map_widget_fps_info">FPS-debuginformatie</string>
 	<string name="local_index_tile_data_zooms">Zoomniveau\'s gedownload: %1$s</string>
@@ -2751,7 +2751,9 @@ Als je hulp nodig hebt met OsmAnd: neem contact op met ons support team: support
 
  • Ondersteunt Open Location Code (OLC)
 
- • Weergave van een hoogteprofiel van een opgenomen GPX-track
+ • Weergave van een hoogte- en hellingsprofiel van een berekende route of een opgenomen GPX-track (met snelheid) 
+
+ • Extra fietsnavigarltie-instellingen met rijstijl en hoogtegegevens
 
  • Diverse andere verbeteringen en bug fixes
 
@@ -2844,7 +2846,7 @@ voor Gebied: %1$s x %2$s</string>
 	<string name="shared_string_action_name">Titel voor de Actie (eventueel wijzigen)</string>
 <string name="rendering_attr_depthContours_description">Toon dieptelijnen en -punten</string>
     <string name="rendering_attr_depthContours_name">Dieptelijnen</string>
-	<string name="select_gpx_folder">Kies GPX-map</string>
+	<string name="select_gpx_folder">Kies map voor GPX-tracks</string>
     <string name="file_can_not_be_moved">Bestand kan niet verplaatst worden.</string>
     <string name="shared_string_move">Verplaatsen</string>
     <string name="shared_string_tracks">Tracks</string>
@@ -2927,4 +2929,11 @@ voor Gebied: %1$s x %2$s</string>
     <string name="animate_my_location_desc">De kaart vloeiend weergeven tijdens het volgen van je positie</string>
     <string name="shared_string_slope">Helling</string>
     <string name="add_new_folder">Nieuwe map ttoevoegen</string>
+    <string name="points_delete_multiple_succesful">Punt(en) met succes verwijderd.</string>
+    <string name="points_delete_multiple">Er worden %1$d punt(en) verwijderd. Doorgaan ?</string>
+    <string name="route_points_category_name">Punten langs de route</string>
+    <string name="track_points_category_name">Belangrijke punten op deze route</string>
+    <string name="routing_attr_relief_smoothness_factor_name">Reliëfvoorkeur</string>
+    <string name="shared_string_paused">In pauze</string>
+    <string name="lang_ber">Berbers</string>
     </resources>
