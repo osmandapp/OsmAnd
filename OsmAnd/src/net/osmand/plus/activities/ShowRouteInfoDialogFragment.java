@@ -395,7 +395,7 @@ public class ShowRouteInfoDialogFragment extends DialogFragment {
 						gpxItem);
 
 				final MapRouteInfoMenu mapRouteInfoMenu = activity.getMapLayers().getMapControlsLayer().getMapRouteInfoMenu();
-				if (mapRouteInfoMenu.isVisible()) {
+				if (MapRouteInfoMenu.isVisible()) {
 					// We arrived here by the route info menu.
 					// First, we close it and then show the details.
 					mapRouteInfoMenu.setOnDismissListener(new OnDismissListener() {
