@@ -2544,4 +2544,10 @@
 	<string name="poi_historic_period_imperial">歷史時期︰帝國 (新時代 V，西元 900 年 — 西元 1200 年)</string>
 
 	<string name="poi_historic_era_paleolithic">歷史時期：舊石器時代（260 萬年前 - 100 萬年前）</string>
+	<string name="poi_site_type_hut_circle">環狀石塊</string>
+	<string name="poi_site_type_necropolis">大型墓地</string>
+	<string name="poi_site_type_petroglyph">岩石畫</string>
+	<string name="poi_site_type_earthwork">土木工程</string>
+	<string name="poi_fortification_type_hill_fort">防禦類別︰土堡</string>
+	<string name="poi_fortification_type_limes">防禦類別︰邊防線</string>
 	</resources>
