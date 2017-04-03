@@ -3044,4 +3044,5 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="favorite_group_name">群組名稱</string>
     <string name="change_color">更改顏色</string>
     <string name="edit_name">編輯名稱</string>
+    <string name="save_poi_too_many_uppercase">名稱中包含太多的大寫字母。您想要繼續嗎？</string>
     </resources>
