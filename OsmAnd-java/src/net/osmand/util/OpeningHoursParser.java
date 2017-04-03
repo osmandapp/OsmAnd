@@ -89,6 +89,7 @@ public class OpeningHoursParser {
 		 * list of the different rules
 		 */
 		private ArrayList<OpeningHoursRule> rules;
+		private String original;
 
 		/**
 		 * Constructor
@@ -265,6 +266,14 @@ public class OpeningHoursParser {
 			}
 
 			return s.substring(0, s.length() - 2);
+		}
+
+		public void setOriginal(String original) {
+			this.original = original;
+		}
+		
+		public String getOriginal() {
+			return original;
 		}
 	}
 
@@ -1419,6 +1428,7 @@ public class OpeningHoursParser {
 		String[] rules = format.split(";"); //$NON-NLS-1$
 		// FIXME: What if the semicolon is inside a quoted string?
 		OpeningHours rs = new OpeningHours();
+		rs.setOriginal(format);
 		for (String r : rules) {
 			r = r.trim();
 			if (r.length() == 0) {
@@ -1448,6 +1458,7 @@ public class OpeningHoursParser {
 		}
 		String[] rules = format.split(";"); //$NON-NLS-1$
 		OpeningHoursParser.OpeningHours rs = new OpeningHoursParser.OpeningHours();
+		rs.setOriginal(format);
 		for (String r : rules) {
 			r = r.trim();
 			if (r.length() == 0) {
