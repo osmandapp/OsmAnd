@@ -2844,4 +2844,5 @@ Algunas de las características principales:
  ¡Más países alrededor del globo están disponibles para descargar!
  Desde Afganistán a Zimbabue, desde Australia a Estados Unidos. Argentina, Brasil, Canadá, Francia, Alemania, México, Reino Unido, España, …
  "</string>
+    <string name="save_poi_too_many_uppercase">El nombre contiene demasiadas letras capitales. ¿Continuar?</string>
     </resources>
