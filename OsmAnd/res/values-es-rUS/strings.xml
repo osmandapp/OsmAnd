@@ -2744,26 +2744,21 @@ Representa el área: %1$s x %2$s</string>
  "</string>
     <string name="osmand_plus_extended_description_part2">"
  Navegación GPS
- • Puedes eligir entre los modos  sin conexión (sin cargos de roaming al viajar al extranjero) o en línea (rápido)
- • La guía por voz giro-a-giro lo guía a lo largo del camino (voces grabadas y sintetizadas)
- • La ruta se recalcula al salirse de la misma
- • Guía de carriles, nombres de calles y tiempo estimado al destino, lo ayudará a lo largo de la ruta
- • Para hacer su viaje seguro, los modos día/noche se alternan automáticamente
- • Puedes elegir mostrar los límites de velocidad y obtener un aviso al excederte del mismo
- • El acercamiento del mapa se ajusta a la velocidad
- • Puedes buscar destinos por dirección, tipo (p.e.: estacionamientos, restaurantes, hoteles, gasolineras, museos), o por coordenada geográfica
+ • Funciona en línea (rápido) o sin conexión (sin cargos de roaming al viajar al extranjero)
+ • Guía por voz giro-a-giro (voces grabadas y sintetizadas)
+ • (Opcional) Guía de carriles, nombres de calles y tiempo estimado al destino
  • Soporta puntos intermedios en el itinerario
- • Puedes grabar tu viaje o subir una traza GPX y seguirla
+ • La ruta se recalcula al salirse de la misma  
+ • Puedes buscar destinos por dirección, tipo (p.e.: estacionamientos, restaurantes, hoteles, estaciones de servicio, museos), o por coordenada geográfica
  "</string>
     <string name="osmand_plus_extended_description_part3">"
  Mapa
- • Muestra PDIs (puntos de interés) cerca de ti
- • Ajusta el mapa a la dirección del movimiento (o brújula)
- • Muestra dónde estás y hacia dónde miras
- • Comparte la ubicación para que tus amigos te encuentren
+ • Muestra tu ubicación y orientación
+ • (Opcional) Ajusta el mapa a la dirección del movimiento (o brújula)
  • Guarda lugares importantes en Favoritos
- • Permite elegir como mostrar los nombres en el mapa: en inglés, local, u ortografía fonética
+ • Muestra PDIs (puntos de interés) cerca de ti
  • Muestra teselas en línea especiales, vista satelital (de Bing), diferentes superposiciones como trazas de travesía/navegación GPX y capas adicionales con transparencia personalizable
+ • Permite elegir como mostrar los nombres en el mapa: en inglés, local, u ortografía fonética
  "</string>
     <string name="osmand_plus_extended_description_part4">"
  Uso de datos de OSM y Wikipedia
@@ -2812,7 +2807,7 @@ Representa el área: %1$s x %2$s</string>
  • África: **
  • Antártida: *
  ¡Más países alrededor del globo están disponibles para descargar!
- Obtén un navegador confiable en tu país - ya sea Francia, Alemania, México, Reino Unido, España, Países bajos, Argentina, Estados Unidos, Rusia, Brasil o cualquier otro.
+ Desde Afganistán a Zimbabue, desde Australia a Estados Unidos. Argentina, Brasil, Canadá, Francia, Alemania, México, Reino Unido, España, …
  "</string>
     <string name="osmand_plus_extended_description_part1">"
  OsmAnd+ (OSM Automated Navigation Directions, y en español, Guía de Navegación Automatizada de OSM) es una aplicación de mapa y navegación con acceso a los datos libres de OpenStreetMap (OSM), en todo el mundo y de alta calidad.
