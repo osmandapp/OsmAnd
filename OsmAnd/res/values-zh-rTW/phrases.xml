@@ -2553,4 +2553,22 @@
 	<string name="poi_fortification_type_sconce">防禦類別︰掩蔽物</string>
 	<string name="poi_fortification_type_ring_ditch">防禦類別︰環狀溝</string>
 
+	<string name="poi_historic_farm">歷史農場</string>
+	<string name="poi_square">廣場</string>
+	<string name="poi_artist_name">藝術家</string>
+	<string name="poi_sculptor">雕刻家</string>
+
+	<string name="poi_building_type_church">建築類別︰教堂</string>
+	<string name="poi_building_type_chapel">建築類別︰小教堂</string>
+	<string name="poi_building_type_mosque">建築類別︰清真寺</string>
+	<string name="poi_building_type_temple">建築類別︰寺廟</string>
+	<string name="poi_building_type_cathedral">建築類別︰主教堂</string>
+	<string name="poi_building_type_monastery">建築類別︰修道院</string>
+	<string name="poi_building_type_basilica">建築類別︰大教堂</string>
+	<string name="poi_building_type_synagogue">建築類別︰猶太教堂</string>
+	<string name="poi_building_type_shrine">建築類別︰聖陵</string>
+
+	<string name="poi_cross">十字架</string>
+	<string name="poi_summit_cross">山頂十字架︰是的</string>
+
 	</resources>
