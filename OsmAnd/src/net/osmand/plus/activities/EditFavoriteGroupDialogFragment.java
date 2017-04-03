@@ -5,9 +5,11 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.ListPopupWindow;
+import android.support.v7.widget.SwitchCompat;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,14 +23,21 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
+import net.osmand.data.FavouritePoint;
+import net.osmand.data.LatLon;
+import net.osmand.data.PointDescription;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
 import net.osmand.plus.IconsCache;
+import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BottomSheetDialogFragment;
 import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.util.Algorithms;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class EditFavoriteGroupDialogFragment extends BottomSheetDialogFragment {
 
@@ -72,7 +81,7 @@ public class EditFavoriteGroupDialogFragment extends BottomSheetDialogFragment {
 			}
 		}
 
-		final View view = inflater.inflate(R.layout.fragment_data_storage_place_dialog, container,
+		final View view = inflater.inflate(R.layout.edit_fav_fragment, container,
 				false);
 		if (group == null) {
 			return view;
@@ -80,9 +89,11 @@ public class EditFavoriteGroupDialogFragment extends BottomSheetDialogFragment {
 
 		IconsCache ic = app.getIconsCache();
 
+		final TextView title = (TextView) view.findViewById(R.id.title);
+		title.setText(Algorithms.isEmpty(group.name) ? app.getString(R.string.shared_string_favorites) : group.name);
 		View editNameView = view.findViewById(R.id.edit_name_view);
 		((ImageView) view.findViewById(R.id.edit_name_icon))
-				.setImageDrawable(ic.getIcon(R.drawable.ic_action_edit_dark));
+				.setImageDrawable(ic.getThemedIcon(R.drawable.ic_action_edit_dark));
 		editNameView.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -94,7 +105,7 @@ public class EditFavoriteGroupDialogFragment extends BottomSheetDialogFragment {
 				int topPadding = AndroidUtils.dpToPx(activity, 4f);
 				b.setView(nameEditText, leftPadding, topPadding, leftPadding, topPadding);
 				b.setNegativeButton(R.string.shared_string_cancel, null);
-				b.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
+				b.setPositiveButton(R.string.shared_string_save, new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						String name = nameEditText.getText().toString();
@@ -102,7 +113,9 @@ public class EditFavoriteGroupDialogFragment extends BottomSheetDialogFragment {
 						if (nameChanged) {
 							getMyApplication().getFavorites()
 									.editFavouriteGroup(group, name, group.color, group.visible);
+							updateParentFragment();
 						}
+						dismiss();
 					}
 				});
 				b.show();
@@ -111,7 +124,7 @@ public class EditFavoriteGroupDialogFragment extends BottomSheetDialogFragment {
 
 		final View changeColorView = view.findViewById(R.id.change_color_view);
 		((ImageView) view.findViewById(R.id.change_color_icon))
-				.setImageDrawable(ic.getIcon(R.drawable.ic_action_appearance));
+				.setImageDrawable(ic.getThemedIcon(R.drawable.ic_action_appearance));
 		updateColorView(changeColorView);
 		changeColorView.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -134,10 +147,11 @@ public class EditFavoriteGroupDialogFragment extends BottomSheetDialogFragment {
 							if (color != group.color) {
 								getMyApplication().getFavorites()
 										.editFavouriteGroup(group, group.name, color, group.visible);
+								updateParentFragment();
 							}
 						}
 						popup.dismiss();
-						updateColorView(changeColorView);
+						dismiss();
 					}
 				});
 				popup.show();
@@ -146,33 +160,64 @@ public class EditFavoriteGroupDialogFragment extends BottomSheetDialogFragment {
 
 		View showOnMapView = view.findViewById(R.id.show_on_map_view);
 		((ImageView) view.findViewById(R.id.show_on_map_icon))
-				.setImageDrawable(ic.getIcon(R.drawable.ic_map));
+				.setImageDrawable(ic.getThemedIcon(R.drawable.ic_map));
+		final SwitchCompat checkbox = (SwitchCompat) view.findViewById(R.id.show_on_map_switch);
+		checkbox.setChecked(group.visible);
 		showOnMapView.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				//todo
+				boolean visible = !group.visible;
+				checkbox.setChecked(visible);
+				getMyApplication().getFavorites()
+						.editFavouriteGroup(group, group.name, group.color, visible);
+				updateParentFragment();
+				dismiss();
 			}
 		});
 
 		View addToMarkersView = view.findViewById(R.id.add_to_markers_view);
-		((ImageView) view.findViewById(R.id.add_to_markers_icon))
-				.setImageDrawable(ic.getIcon(R.drawable.ic_action_flag_dark));
-		addToMarkersView.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				//todo
-			}
-		});
+		if (app.getSettings().USE_MAP_MARKERS.get() && group.points.size() > 0) {
+			((ImageView) view.findViewById(R.id.add_to_markers_icon))
+					.setImageDrawable(ic.getThemedIcon(R.drawable.ic_action_flag_dark));
+			addToMarkersView.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					MapMarkersHelper markersHelper = getMyApplication().getMapMarkersHelper();
+					List<LatLon> points = new ArrayList<>(group.points.size());
+					List<PointDescription> names = new ArrayList<>(group.points.size());
+					for (FavouritePoint fp : group.points) {
+						points.add(new LatLon(fp.getLatitude(), fp.getLongitude()));
+						names.add(new PointDescription(PointDescription.POINT_TYPE_MAP_MARKER, fp.getName()));
+					}
+					markersHelper.addMapMarkers(points, names);
+					dismiss();
+					MapActivity.launchMapActivityMoveToTop(getActivity());
+				}
+			});
+		} else {
+			addToMarkersView.setVisibility(View.GONE);
+		}
 
 		View shareView = view.findViewById(R.id.share_view);
-		((ImageView) view.findViewById(R.id.share_icon))
-				.setImageDrawable(ic.getIcon(R.drawable.ic_action_gshare_dark));
-		shareView.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				//todo
-			}
-		});
+		if (group.points.size() > 0) {
+			((ImageView) view.findViewById(R.id.share_icon))
+					.setImageDrawable(ic.getThemedIcon(R.drawable.ic_action_gshare_dark));
+			shareView.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					FavoritesTreeFragment fragment = getFavoritesTreeFragment();
+					if (fragment != null) {
+						fragment.shareFavorites(group);
+					}
+					dismiss();
+				}
+			});
+		} else {
+			shareView.setVisibility(View.GONE);
+		}
+		if (group.points.size() == 0) {
+			view.findViewById(R.id.divider).setVisibility(View.GONE);
+		}
 
 		return view;
 	}
@@ -182,6 +227,21 @@ public class EditFavoriteGroupDialogFragment extends BottomSheetDialogFragment {
 		super.onResume();
 		if (group == null) {
 			dismiss();
+		}
+	}
+
+	private FavoritesTreeFragment getFavoritesTreeFragment() {
+		Fragment fragment = getParentFragment();
+		if (fragment instanceof FavoritesTreeFragment) {
+			return (FavoritesTreeFragment) fragment;
+		}
+		return null;
+	}
+
+	private void updateParentFragment() {
+		FavoritesTreeFragment fragment = getFavoritesTreeFragment();
+		if (fragment != null) {
+			fragment.reloadData();
 		}
 	}
 

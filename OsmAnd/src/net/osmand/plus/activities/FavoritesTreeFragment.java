@@ -24,12 +24,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,7 +36,6 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
-import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
@@ -48,7 +45,6 @@ import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.base.FavoriteImageDrawable;
 import net.osmand.plus.base.OsmandExpandableListFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.util.Algorithms;
@@ -65,8 +61,6 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import gnu.trove.list.array.TIntArrayList;
 
 
 public class FavoritesTreeFragment extends OsmandExpandableListFragment {
@@ -185,6 +179,11 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 		super.onResume();
 		favouritesAdapter.synchronizeGroups();
 		initListExpandedState();
+	}
+
+	public void reloadData() {
+		favouritesAdapter.synchronizeGroups();
+		favouritesAdapter.notifyDataSetInvalidated();
 	}
 
 	private void updateSelectionMode(ActionMode m) {
@@ -440,45 +439,6 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 		((FavoritesActivity) getActivity()).updateListViewFooter(footerView);
 	}
 
-	protected void openChangeGroupDialog(final FavoriteGroup group) {
-		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-		View view = getActivity().getLayoutInflater().inflate(R.layout.fav_group_edit, null);
-
-		final EditText nameEditText = (EditText) view.findViewById(R.id.nameEditText);
-		nameEditText.setText(group.name);
-
-		final CheckBox checkBox = (CheckBox) view.findViewById(R.id.Visibility);
-		checkBox.setChecked(group.visible);
-
-		final Spinner colorSpinner = (Spinner) view.findViewById(R.id.ColorSpinner);
-		final TIntArrayList list = new TIntArrayList();
-		final int intColor = group.color == 0 ? getResources().getColor(R.color.color_favorite) : group.color;
-		ColorDialogs.setupColorSpinner(getActivity(), intColor, colorSpinner, list);
-
-		builder.setTitle(R.string.edit_group);
-		builder.setView(view);
-		builder.setNegativeButton(R.string.shared_string_cancel, null);
-		builder.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
-
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				int clr = list.get(colorSpinner.getSelectedItemPosition());
-				String name = nameEditText.getText().toString();
-				boolean nameChanged = !Algorithms.objectEquals(group.name, name);
-				if (clr != intColor || group.visible != checkBox.isChecked() || nameChanged) {
-					getMyApplication().getFavorites().editFavouriteGroup(group, name, clr,
-							checkBox.isChecked());
-					if (nameChanged) {
-						favouritesAdapter.synchronizeGroups();
-					}
-					favouritesAdapter.notifyDataSetInvalidated();
-				}
-
-			}
-		});
-		builder.show();
-	}
-
 	private void deleteFavoritesAction() {
 		if (groupsToDelete.size() + favoritesSelected.size() > 0) {
 
@@ -498,11 +458,10 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 		}
 	}
 	
-	private StringBuilder generateHtmlPrint() {
+	private StringBuilder generateHtmlPrint(List<FavoriteGroup> groups) {
 		StringBuilder html = new StringBuilder();
 		html.append("<h1>My Favorites</h1>");
-		List<FavoriteGroup> groups = getMyApplication().getFavorites().getFavoriteGroups();
-		for(FavoriteGroup group : groups) {
+		for (FavoriteGroup group : groups) {
 			html.append("<h3>"+group.name+"</h3>");
 			for(FavouritePoint fp : group.points) {
 				String url = "geo:"+((float)fp.getLatitude())+","+((float)fp.getLongitude())+"?m="+fp.getName();
@@ -523,46 +482,68 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 		if (favouritesAdapter.isEmpty()) {
 			Toast.makeText(getActivity(), R.string.no_fav_to_save, Toast.LENGTH_LONG).show();
 		} else {
-			final AsyncTask<Void, Void, GPXFile> exportTask = new AsyncTask<Void, Void, GPXFile>() {
-				@Override
-				protected GPXFile doInBackground(Void... params) {
-					return helper.asGpxFile();
-				}
-
-				@Override
-				protected void onPreExecute() {
-					showProgressBar();
-				}
-
-				@Override
-				protected void onPostExecute(GPXFile gpxFile) {
-					hideProgressBar();
-					File dir = new File(getActivity().getCacheDir(), "share");
-					if (!dir.exists()) {
-						dir.mkdir();
-					}
-					File src = helper.getExternalFile();
-					File dst = new File(dir, src.getName());
-					try {
-						Algorithms.fileCopy(src, dst);
-						final Intent sendIntent = new Intent();
-						sendIntent.setAction(Intent.ACTION_SEND);
-						sendIntent.putExtra(Intent.EXTRA_TEXT, Html.fromHtml(generateHtmlPrint().toString()));
-						sendIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share_fav_subject));
-						sendIntent.putExtra(Intent.EXTRA_STREAM,
-								FileProvider.getUriForFile(getActivity(),
-										getActivity().getPackageName() + ".fileprovider", dst));
-						sendIntent.setType("text/plain");
-						startActivity(sendIntent);
-					} catch (IOException e) {
-						//Toast.makeText(getActivity(), "Error sharing favorites: " + e.getMessage(), Toast.LENGTH_LONG).show();
-						e.printStackTrace();
-					}
-				}
-			};
-
-			exportTask.execute();
+			shareFavorites(null);
 		}
+	}
+
+	public void shareFavorites(final FavoriteGroup group) {
+		final AsyncTask<Void, Void, Void> exportTask = new AsyncTask<Void, Void, Void>() {
+
+			File src = null;
+			File dst = null;
+
+			@Override
+			protected Void doInBackground(Void... params) {
+				if (group != null) {
+					helper.saveFile(group.points, dst);
+				}
+				return null;
+			}
+
+			@Override
+			protected void onPreExecute() {
+				showProgressBar();
+				File dir = new File(getActivity().getCacheDir(), "share");
+				if (!dir.exists()) {
+					dir.mkdir();
+				}
+				if (group == null) {
+					src = helper.getExternalFile();
+				}
+				dst = new File(dir, src != null ? src.getName() : FavouritesDbHelper.FILE_TO_SAVE);
+			}
+
+			@Override
+			protected void onPostExecute(Void res) {
+				hideProgressBar();
+				try {
+					if (src != null && dst != null) {
+						Algorithms.fileCopy(src, dst);
+					}
+					final Intent sendIntent = new Intent();
+					sendIntent.setAction(Intent.ACTION_SEND);
+					List<FavoriteGroup> groups;
+					if (group != null) {
+						groups = new ArrayList<>();
+						groups.add(group);
+					} else {
+						groups = getMyApplication().getFavorites().getFavoriteGroups();
+					}
+					sendIntent.putExtra(Intent.EXTRA_TEXT, Html.fromHtml(generateHtmlPrint(groups).toString()));
+					sendIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share_fav_subject));
+					sendIntent.putExtra(Intent.EXTRA_STREAM,
+							FileProvider.getUriForFile(getActivity(),
+									getActivity().getPackageName() + ".fileprovider", dst));
+					sendIntent.setType("text/plain");
+					startActivity(sendIntent);
+				} catch (IOException e) {
+					//Toast.makeText(getActivity(), "Error sharing favorites: " + e.getMessage(), Toast.LENGTH_LONG).show();
+					e.printStackTrace();
+				}
+			}
+		};
+
+		exportTask.execute();
 	}
 
 	protected void export() {
@@ -799,7 +780,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 				ch.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						openChangeGroupDialog(model);
+						EditFavoriteGroupDialogFragment.showInstance(getChildFragmentManager(), model.name);
 					}
 
 				});
