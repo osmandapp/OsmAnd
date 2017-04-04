@@ -2837,4 +2837,9 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="save_track_min_distance_descr">ログに記録を許可する最後に記録した地点からの最低移動距離を設定します</string>
     <string name="save_track_precision">ログに記録する最小精度</string>
     <string name="save_track_precision_descr">ログに記録を許可する最低精度を設定します</string>
+    <string name="restore_purchases">購入情報の復元</string>
+    <string name="get_for">%1$sで入手</string>
+    <string name="first_usage_wizard_desc">OsmAndで現在地を取得すると、あなたの地域近辺マップのダウンロードが提案されます。</string>
+    <string name="coords_search">座標検索</string>
+    <string name="advanced_coords_search">高度な座標検索</string>
     </resources>
