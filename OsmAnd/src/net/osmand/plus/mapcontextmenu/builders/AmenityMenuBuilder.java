@@ -473,7 +473,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		boolean osmEditingEnabled = OsmandPlugin.getEnabledPlugin(OsmEditingPlugin.class) != null;
 		if (osmEditingEnabled && amenity.getId() != null
 				&& amenity.getId() > 0 && 
-				(amenity.getId() % 2 == 1 || (amenity.getId() >> 1) < Integer.MAX_VALUE)) {
+				(amenity.getId() % 2 == 0 || (amenity.getId() >> 1) < Integer.MAX_VALUE)) {
 			String link;
 			if (amenity.getId() % 2 == 0) {
 				link = "http://www.openstreetmap.org/node/";
