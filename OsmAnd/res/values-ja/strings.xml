@@ -648,7 +648,7 @@ POIの更新は利用できません</string>
 	<string name="driving_region_japan">日本</string>
 	<string name="driving_region_us">米国</string>
 	<string name="driving_region_canada">カナダ</string>
-	<string name="driving_region_europe_asia">ヨーロッパ &amp; アジア</string>
+	<string name="driving_region_europe_asia">ヨーロッパ、アジア、ラテンアメリカ＆同様の国々</string>
 	<string name="driving_region_uk">イギリス、インド、その他類似国</string>
 	    
     
@@ -2842,4 +2842,6 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="first_usage_wizard_desc">OsmAndで現在地を取得すると、あなたの地域近辺マップのダウンロードが提案されます。</string>
     <string name="coords_search">座標検索</string>
     <string name="advanced_coords_search">高度な座標検索</string>
+    <string name="lang_ber">ベルベル諸語</string>
+    <string name="route_is_too_long_v2">現在のルートは計算するのに長すぎます。10分経ってもルート設定がされない場合、中間の目的地を設定してください。</string>
     </resources>
