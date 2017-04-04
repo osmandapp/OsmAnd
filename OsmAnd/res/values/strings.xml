@@ -9,6 +9,7 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="display_zoom_level">Display zoom level: %1$s</string>
     <string name="favorite_group_name">Group name</string>
     <string name="change_color">Change color</string>
     <string name="edit_name">Edit name</string>
