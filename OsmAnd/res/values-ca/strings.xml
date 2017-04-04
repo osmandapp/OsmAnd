@@ -2897,4 +2897,5 @@ OsmAnd és de codi obert i es desenvolupa activament . Tothom pot recolzar l\'ap
     <string name="save_poi_too_many_uppercase">El nom té moltes majúscules. Voleu continuar?</string>
     <string name="display_zoom_level">Mostra nivell d\'escala: %1$s</string>
     <string name="route_is_too_long_v2">La ruta sembla massa llarga per optimitzar-la. Afegiu fites intermèdies si no obteniu cap proposta desprès de 10 minuts.</string>
+    <string name="srtm_color_scheme">Combinació de colors</string>
     </resources>
