@@ -415,6 +415,7 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 	private void clearParameters() {
 		preferParameters.clear();
 		avoidParameters.clear();
+		reliefFactorParameters.clear();
 	}
 
 
