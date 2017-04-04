@@ -3031,4 +3031,5 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="edit_name">Acontza su nùmene</string>
     <string name="save_poi_too_many_uppercase">In su nùmene bi sunt tropas lìteras maiùscolas. Boles sighire?</string>
     <string name="route_is_too_long_v2">B\'est sa possibilidade chi s\'àndala siat tropu longa pro èssere calculada. Si no at a èssere pronta in 10 minutos pro praghere agiunghe carchi destinatzione intermèdia.</string>
+    <string name="display_zoom_level">Livellu ismmaniamentu ischermu: %1$s</string>
     </resources>
