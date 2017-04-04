@@ -181,6 +181,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 		DASHBOARD,
 		OVERLAY_MAP,
 		UNDERLAY_MAP,
+		CONTOUR_LINES,
 		MAP_MARKERS,
 		MAP_MARKERS_SELECTION
 	}
