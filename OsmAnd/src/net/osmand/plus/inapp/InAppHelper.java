@@ -270,7 +270,7 @@ public class InAppHelper {
 
 			// Is it a failure?
 			if (result.isFailure()) {
-				complain("Failed to query inventory: " + result);
+				logError("Failed to query inventory: " + result);
 				notifyError(result.getMessage());
 				if (stopAfterResult) {
 					stop();
