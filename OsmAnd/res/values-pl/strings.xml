@@ -2960,4 +2960,5 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="favorite_group_name">Nazwa grupy</string>
     <string name="change_color">Zmień kolor</string>
     <string name="edit_name">Zmień nazwę</string>
+    <string name="display_zoom_level">Stopień przybliżenia widoku: %1$s</string>
     </resources>
