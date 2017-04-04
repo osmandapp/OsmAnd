@@ -3105,5 +3105,10 @@ Tidligere destination bliver sidste mellemliggende punkt.</string>
     <string name="change_color">Skift farve</string>
     <string name="edit_name">Rediger navn</string>
     <string name="save_poi_too_many_uppercase">Navnet indeholder for mange store bogstaver. Fortsæt?</string>
-    <string name="route_is_too_long_v2">Ruten er muligvis for lang til at beregnes. Tilføj mellemliggende destinationer, hvis ruten ikke er færdig beregnet efter 10 minutter.</string>
+    <string name="route_is_too_long_v2">Ruten kan være for lang til at beregnes. Tilføj mellemliggende destinationer, hvis ruten ikke er beregnet efter 10 minutter.</string>
+    <string name="display_zoom_level">Vise zoomniveau: %1$ s</string>
+    <string name="srtm_color_scheme">Farveskema</string>
+    <string name="show_from_zoom_level">Vis fra zoomniveau</string>
+    <string name="routing_attr_allow_private_name">Tillad privat adgang</string>
+    <string name="routing_attr_allow_private_name_description">Giver adgang til private områder</string>
     </resources>
