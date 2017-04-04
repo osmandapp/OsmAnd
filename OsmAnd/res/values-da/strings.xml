@@ -3105,4 +3105,5 @@ Tidligere destination bliver sidste mellemliggende punkt.</string>
     <string name="change_color">Skift farve</string>
     <string name="edit_name">Rediger navn</string>
     <string name="save_poi_too_many_uppercase">Navnet indeholder for mange store bogstaver. Fortsæt?</string>
+    <string name="route_is_too_long_v2">Ruten er muligvis for lang til at beregnes. Tilføj mellemliggende destinationer, hvis ruten ikke er færdig beregnet efter 10 minutter.</string>
     </resources>
