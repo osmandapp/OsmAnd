@@ -2595,4 +2595,19 @@
 	<string name="poi_historic_railway">古蹟鐵路</string>
 
 	<string name="poi_prison_camp">前監獄</string>
+	<string name="poi_boat_storage">船艇棧房</string>
+
+	<string name="poi_conveying_yes">運輸︰是的</string>
+
+	<string name="poi_bridge_ref">橋梁參考</string>
+	<string name="poi_tunnel_ref">隧道參考</string>
+
+	<string name="poi_ref">参考</string>
+
+	<string name="poi_cargo_passengers">乘客</string>
+	<string name="poi_cargo_vehicle">車輛</string>
+	<string name="poi_cargo_bicycle">自行車</string>
+	<string name="poi_cargo_container">貨櫃</string>
+	<string name="poi_cargo_hgv">HGV</string>
+
 	</resources>
