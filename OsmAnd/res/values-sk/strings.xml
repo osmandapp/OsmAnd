@@ -2874,4 +2874,11 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="favorite_group_name">Názov skupiny</string>
     <string name="change_color">Zmeniť farbu</string>
     <string name="edit_name">Upraviť názov</string>
+    <string name="srtm_color_scheme">Farebná schéma</string>
+    <string name="show_from_zoom_level">Zobraziť od úrovne priblíženia</string>
+    <string name="routing_attr_allow_private_name">Povoliť súkromný prístup</string>
+    <string name="routing_attr_allow_private_name_description">Povoliť prístup do súkromných oblastí</string>
+    <string name="display_zoom_level">Priblíženie zobrazenia: %1$s</string>
+    <string name="route_is_too_long_v2">Táto trasa môže byť príliš dlhá na výpočet. Ak sa nenájde výsledok do 10 minút, vložte prosím tranzitné ciele.</string>
+    <string name="save_poi_too_many_uppercase">Názov obsahuje príliš veľa veľkých písmen. Chcete pokračovať?</string>
     </resources>
