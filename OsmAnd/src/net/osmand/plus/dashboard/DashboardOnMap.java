@@ -75,6 +75,7 @@ import net.osmand.plus.mapcontextmenu.other.RoutePreferencesMenu.LocalRoutingPar
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RoutingHelper.IRouteInformationListener;
+import net.osmand.plus.srtmplugin.ContourLinesMenu;
 import net.osmand.plus.views.DownloadedRegionsLayer;
 import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -454,6 +455,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 			tv.setText(R.string.map_markers);
 		} else if (visibleType == DashboardType.MAP_MARKERS_SELECTION) {
 			tv.setText(R.string.select_map_markers);
+		} else if (visibleType == DashboardType.CONTOUR_LINES) {
+			tv.setText(R.string.srtm_plugin_name);
 		}
 		ImageView edit = (ImageView) dashboardView.findViewById(R.id.toolbar_edit);
 		edit.setVisibility(View.GONE);
@@ -959,6 +962,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 				cm = RasterMapMenu.createListAdapter(mapActivity, OsmandRasterMapsPlugin.RasterMapType.UNDERLAY);
 			} else if (visibleType == DashboardType.OVERLAY_MAP) {
 				cm = RasterMapMenu.createListAdapter(mapActivity, OsmandRasterMapsPlugin.RasterMapType.OVERLAY);
+			} else if (visibleType == DashboardType.CONTOUR_LINES) {
+				cm = ContourLinesMenu.createListAdapter(mapActivity);
 			}
 			if (cm != null) {
 				updateListAdapter(cm);

@@ -15,6 +15,7 @@ import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.render.RenderingRulesStorage.RenderingRulesStorageResolver;
 import net.osmand.util.Algorithms;
@@ -259,4 +260,16 @@ public class RendererRegistry {
     public IRendererLoadedEventListener getRendererLoadedEventListener() {
         return rendererLoadedEventListener;
     }
+
+	public RenderingRuleProperty getCustomRenderingRuleProperty(String attrName) {
+		RenderingRulesStorage renderer = getCurrentSelectedRenderer();
+		if (renderer != null) {
+			for (RenderingRuleProperty p : renderer.PROPS.getCustomRules()) {
+				if (p.getAttrName().equals(attrName)) {
+					return p;
+				}
+			}
+		}
+		return null;
+	}
 }

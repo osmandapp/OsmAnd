@@ -72,6 +72,9 @@ import java.util.Map;
 
 import gnu.trove.list.array.TIntArrayList;
 
+import static net.osmand.plus.srtmplugin.SRTMPlugin.CONTOUR_LINES_ATTR;
+import static net.osmand.plus.srtmplugin.SRTMPlugin.CONTOUR_LINES_SCHEME_ATTR;
+
 public class ConfigureMapMenu {
 	private static final Log LOG = PlatformUtil.getLog(ConfigureMapMenu.class);
 	public static final String HIKING_ROUTES_OSMC_ATTR = "hikingRoutesOSMC";
@@ -79,9 +82,6 @@ public class ConfigureMapMenu {
 	public static final String CURRENT_TRACK_WIDTH_ATTR = "currentTrackWidth";
 	public static final String COLOR_ATTR = "color";
 	public static final String ROAD_STYLE_ATTR = "roadStyle";
-	public static final String CONTOUR_LINES_ATTR = "contourLines";
-	public static final String CONTOUR_LINES_SCHEME_ATTR = "contourColorScheme";
-	public static final String CONTOUR_LINES_DISABLED_VALUE = "disabled";
 	private int hikingRouteOSMCValue;
 	private int selectedLanguageIndex;
 	private boolean transliterateNames;
@@ -146,9 +146,6 @@ public class ConfigureMapMenu {
 			} else if (itemId == R.string.layer_gpx_layer && cm.getItem(pos).getSelected()) {
 				showGpxSelectionDialog(adapter, adapter.getItem(pos));
 				return false;
-			} else if (itemId == R.string.srtm_plugin_name) {
-				ma.getDashboard().setDashboardVisibility(true, DashboardOnMap.DashboardType.CONTOUR_LINES);
-				return false;
 			} else {
 				CompoundButton btn = (CompoundButton) view.findViewById(R.id.toggle_item);
 				if (btn != null && btn.getVisibility() == View.VISIBLE) {
@@ -198,30 +195,11 @@ public class ConfigureMapMenu {
 					ContextMenuItem it = adapter.getItem(pos);
 					ma.getMapLayers().selectMapLayer(ma.getMapView(), it, adapter);
 				}
-			} else if (itemId == R.string.srtm_plugin_name) {
-				toggleContourLines(adapter, itemId, pos, isChecked);
 			}
 			adapter.notifyDataSetChanged();
 			ma.getMapLayers().updateLayers(ma.getMapView());
 			ma.getMapView().refreshMap();
 			return false;
-		}
-
-		private void toggleContourLines(final ArrayAdapter<ContextMenuItem> adapter, final int itemId,
-										final int pos, final boolean isChecked) {
-			RenderingRuleProperty contourLinesProp = getCustomRuleProperty(ma.getMyApplication(), CONTOUR_LINES_ATTR);
-			if (contourLinesProp != null) {
-				final OsmandSettings.CommonPreference<String> pref =
-						ma.getMyApplication().getSettings().getCustomRenderProperty(contourLinesProp.getAttrName());
-				if (!isChecked) {
-					pref.set(CONTOUR_LINES_DISABLED_VALUE);
-					String description = ma.getString(R.string.display_zoom_level, SettingsActivity.getStringPropertyValue(ma, pref.get()));
-					cm.getItem(pos).setDescription(description);
-				} else {
-					ContextMenuItem menuItem = createRenderingProperty(cm, ma, 0, contourLinesProp);
-					menuItem.getItemClickListener().onContextMenuClick(adapter, itemId, pos, false);
-				}
-			}
 		}
 
 		private void showGpxSelectionDialog(final ArrayAdapter<ContextMenuItem> adapter,
@@ -491,28 +469,6 @@ public class ConfigureMapMenu {
 				.setIcon(R.drawable.ic_world_globe_dark)
 				.setDescription(settings.MAP_ONLINE_DATA.get() ? settings.MAP_TILE_SOURCES.get() : null)
 				.setListener(l).createItem());
-		RenderingRuleProperty contourLinesProp = getCustomRuleProperty(app, CONTOUR_LINES_ATTR);
-		if (contourLinesProp != null) {
-			final OsmandSettings.CommonPreference<String> pref =
-					settings.getCustomRenderProperty(contourLinesProp.getAttrName());
-			String descr;
-			boolean contourLinesSelected;
-			if (!Algorithms.isEmpty(pref.get())) {
-				descr = SettingsActivity.getStringPropertyValue(activity, pref.get());
-				contourLinesSelected = !pref.get().equals(CONTOUR_LINES_DISABLED_VALUE);
-			} else {
-				descr = SettingsActivity.getStringPropertyValue(
-						activity, contourLinesProp.getDefaultValueDescription());
-				contourLinesSelected = !contourLinesProp.getDefaultValueDescription().equals(CONTOUR_LINES_DISABLED_VALUE);
-			}
-			adapter.addItem(new ContextMenuItem.ItemBuilder()
-					.setTitleId(R.string.srtm_plugin_name, activity)
-					.setSelected(contourLinesSelected)
-					.setIcon(R.drawable.ic_plugin_srtm)
-					.setDescription(app.getString(R.string.display_zoom_level, descr))
-					.setSecondaryIcon(R.drawable.ic_action_additional_option)
-					.setListener(l).createItem());
-		}
 
 		OsmandPlugin.registerLayerContextMenu(activity.getMapView(), adapter, activity);
 		app.getAppCustomization().prepareLayerContextMenu(activity, adapter);
@@ -849,18 +805,6 @@ public class ConfigureMapMenu {
 					.setCategory(true).setLayout(R.layout.list_group_title_with_switch).createItem());
 			createCustomRenderingProperties(adapter, activity, customRules);
 		}
-	}
-
-	private RenderingRuleProperty getCustomRuleProperty(OsmandApplication app, String attrName) {
-		RenderingRulesStorage renderer = app.getRendererRegistry().getCurrentSelectedRenderer();
-		if (renderer != null) {
-			for (RenderingRuleProperty p : renderer.PROPS.getCustomRules()) {
-				if (p.getAttrName().equals(attrName)) {
-					return p;
-				}
-			}
-		}
-		return null;
 	}
 
 	public static String[] mapNamesIds = new String[]{"", "en", "af", "als", "ar", "az", "be", "ber", "bg", "bn", "bpy", "br", "bs", "ca", "ceb", "cs", "cy", "da", "de", "el", "eo", "es", "et", "eu", "fa", "fi", "fr", "fy", "ga", "gl", "he", "hi", "hsb", "hr", "ht", "hu", "hy", "id", "is", "it", "ja", "ka", "kab", "ko", "ku", "la", "lb", "lt", "lv", "mk", "ml", "mr", "ms", "nds", "new", "nl", "nn", "no", "nv", "os", "pl", "pms", "pt", "ro", "ru", "sc", "sh", "sk", "sl", "sq", "sr", "sv", "sw", "ta", "te", "th", "tl", "tr", "uk", "vi", "vo", "zh"};
@@ -1322,24 +1266,11 @@ public class ConfigureMapMenu {
 									}
 									refreshMapComplete(activity);
 									String description = SettingsActivity.getStringPropertyValue(activity, pref.get());
-									if (itemId == R.string.srtm_plugin_name) {
-										description = activity.getString(R.string.display_zoom_level, description);
-									}
 									adapter.getItem(pos).setDescription(description);
 									dialog.dismiss();
 								}
 							});
 							b.setNegativeButton(R.string.shared_string_dismiss, null);
-							b.setOnDismissListener(new DialogInterface.OnDismissListener() {
-								@Override
-								public void onDismiss(DialogInterface dialog) {
-									if (itemId == R.string.srtm_plugin_name && pref.get().equals(CONTOUR_LINES_DISABLED_VALUE)) {
-										adapter.getItem(pos).setSelected(false);
-										adapter.getItem(pos).setColorRes(ContextMenuItem.INVALID_ID);
-									}
-									ad.notifyDataSetChanged();
-								}
-							});
 							b.show();
 							return false;
 						}
