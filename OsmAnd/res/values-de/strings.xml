@@ -384,7 +384,7 @@ OSM ist ein gemeinschaftliches, frei zugängliches, globales Kartografierungspro
 
 	<string name="routing_settings">Navigation</string>
 	<string name="routing_settings_2">Navigationseinstellungen</string>
-	<string name="routing_settings_descr">Nutzerprofilspezifische Einstellungen (Autofahrer, Radfahrer, Fußgänger)</string>
+	<string name="routing_settings_descr">Nutzungsabhängige Einstellungen (Autofahrer, Radfahrer, Fußgänger)</string>
 	<string name="global_settings">Globale Einstellungen</string>
 	<string name="index_settings">Kartenverwaltung</string>
 	<string name="index_settings_descr">Herunterladen und Verwalten von auf Ihrem Gerät gespeicherten Offline-Kartendateien</string>
@@ -2971,5 +2971,10 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="shared_string_overview">Übersicht</string>
     <string name="favorite_group_name">Gruppenname</string>
     <string name="change_color">Farbe ändern</string>
-    <string name="edit_name">Name ändern</string>
+    <string name="edit_name">Namen ändern</string>
+    <string name="animate_my_location">Meine Position animieren</string>
+    <string name="animate_my_location_desc">Meine Position auf der Karte mit Animation abbilden</string>
+    <string name="route_is_too_long_v2">Die Route ist für eine Berechnung unter Umständen zu lang. Fügen Sie bitte Zwischenstopps ein, wenn nach 10 Minuten kein Routenvorschlag erscheint.</string>
+    <string name="save_poi_too_many_uppercase">Der Name enthält zu viele Großbuchstaben. Möchten Sie den Vorgang fortsetzen?</string>
+    <string name="display_zoom_level">Bildschirm-Zoomstufe: %1$s</string>
     </resources>
