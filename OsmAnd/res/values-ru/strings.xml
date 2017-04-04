@@ -1,5 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
+    <string name="srtm_color_scheme">Цветовая схема</string>
+    <string name="show_from_zoom_level">Отображать с масштаба</string>
     <string name="animate_my_location">Анимация моего местоположения</string>
     <string name="animate_my_location_desc">Разрешить анимацию моего местоположения на карте</string>
     <string name="display_zoom_level">Уровень масштабирования: %1$s</string>
