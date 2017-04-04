@@ -221,7 +221,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 			main.findViewById(R.id.DurationIcon).setVisibility(View.GONE);
 			main.findViewById(R.id.InfoDistance).setVisibility(View.GONE);
 			main.findViewById(R.id.InfoDuration).setVisibility(View.GONE);
-			textView.setText(R.string.route_is_too_long);
+			textView.setText(R.string.route_is_too_long_v2);
 			textView.setVisibility(View.VISIBLE);
 			iconView.setImageDrawable(mapActivity.getMyApplication().getIconsCache().getIcon(R.drawable.ic_warning, isLight()));
 		} else {

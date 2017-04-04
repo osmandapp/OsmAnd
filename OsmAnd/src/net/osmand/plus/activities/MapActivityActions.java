@@ -459,7 +459,7 @@ public class MapActivityActions implements DialogProvider {
 			mapActivity.getMapLayers().getMapControlsLayer().showDialog();
 		}
 		if (targets.hasTooLongDistanceToNavigate()) {
-			app.showToastMessage(R.string.route_is_too_long);
+			app.showToastMessage(R.string.route_is_too_long_v2);
 		}
 	}
 
@@ -488,7 +488,7 @@ public class MapActivityActions implements DialogProvider {
 			mapActivity.getMapLayers().getMapControlsLayer().showDialog();
 		}
 		if (targets.hasTooLongDistanceToNavigate()) {
-			app.showToastMessage(R.string.route_is_too_long);
+			app.showToastMessage(R.string.route_is_too_long_v2);
 		}
 	}
 
