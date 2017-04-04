@@ -86,7 +86,7 @@ public class RenderedObjectMenuController extends MenuController {
 		boolean osmEditingEnabled = OsmandPlugin.getEnabledPlugin(OsmEditingPlugin.class) != null;
 		if (osmEditingEnabled && renderedObject.getId() != null
 				&& renderedObject.getId() > 0 && 
-				(renderedObject.getId() % 2 == 0 || (renderedObject.getId() >> 7) < 10*1000*1000*1000)) {
+				(renderedObject.getId() % 2 == 0 || (renderedObject.getId() >> 7) < Integer.MAX_VALUE)) {
 			String link;
 			if ((renderedObject.getId() >> 6) % 2 != 0) {
 				link = "http://www.openstreetmap.org/node/";
