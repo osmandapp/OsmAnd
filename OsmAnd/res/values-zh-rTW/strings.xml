@@ -3046,4 +3046,5 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="edit_name">編輯名稱</string>
     <string name="save_poi_too_many_uppercase">名稱中包含太多的大寫字母。您想要繼續嗎？</string>
     <string name="route_is_too_long_v2">路線可能太長，無法計算。如果在10分鐘內沒有建議路線，請增加中轉目的站。</string>
+    <string name="display_zoom_level">顯示縮放級別：%1$s</string>
     </resources>
