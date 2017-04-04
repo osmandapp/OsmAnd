@@ -2960,4 +2960,5 @@ Fonctionnalités principales :
     <string name="favorite_group_name">Nom du groupe</string>
     <string name="change_color">Modifier la couleur</string>
     <string name="edit_name">Modifier le nom</string>
+    <string name="save_poi_too_many_uppercase">Le nom contient beaucoup de majuscules. Souhaitez-vous continuer ?</string>
     </resources>
