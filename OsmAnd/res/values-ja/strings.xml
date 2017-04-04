@@ -2844,4 +2844,9 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="advanced_coords_search">高度な座標検索</string>
     <string name="lang_ber">ベルベル諸語</string>
     <string name="route_is_too_long_v2">現在のルートは計算するのに長すぎます。10分経ってもルート設定がされない場合、中間の目的地を設定してください。</string>
+    <string name="osmand_extended_description_part1">"
+ OsmAnd(OSM Automated Navigation Directions～自動ナビ案内)は、無料、ワールドワイド対応、高品質のOpenStreetMap(OSM)データを使用した、地図＆ナビゲーションアプリです。
+
+音声と視覚による案内、POI(Point Of Interest～興味的地点)表示、GPX経路の作成と管理、等高線を使った地形情報(要プラグイン)、ドライブ、サイクリング、徒歩移動各移動手段別のモード、OSMの編集等々に対応。
+ "</string>
     </resources>
