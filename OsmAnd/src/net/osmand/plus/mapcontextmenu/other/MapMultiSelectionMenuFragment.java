@@ -75,6 +75,10 @@ public class MapMultiSelectionMenuFragment extends Fragment implements AdapterVi
 	@Override
 	public void onResume() {
 		super.onResume();
+		if (MapRouteInfoMenu.isVisible()) {
+			dismissMenu();
+			return;
+		}
 		wasDrawerDisabled = menu.getMapActivity().isDrawerDisabled();
 		if (!wasDrawerDisabled) {
 			menu.getMapActivity().disableDrawer();
@@ -104,6 +108,7 @@ public class MapMultiSelectionMenuFragment extends Fragment implements AdapterVi
 		if (mapActivity.isActivityDestroyed()) {
 			return;
 		}
+		mapActivity.getContextMenu().hideMenues();
 
 		MapMultiSelectionMenu menu = mapActivity.getContextMenu().getMultiSelectionMenu();
 

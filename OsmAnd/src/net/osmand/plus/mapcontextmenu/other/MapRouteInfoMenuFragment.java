@@ -173,9 +173,7 @@ public class MapRouteInfoMenuFragment extends Fragment {
 				slideOutAnim = R.anim.slide_out_left;
 			}
 
-			if (mapActivity.getContextMenu().isVisible()) {
-				mapActivity.getContextMenu().hide();
-			}
+			mapActivity.getContextMenu().hideMenues();
 
 			MapRouteInfoMenuFragment fragment = new MapRouteInfoMenuFragment();
 			mapActivity.getSupportFragmentManager().beginTransaction()
