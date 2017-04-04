@@ -41,7 +41,7 @@ public class HorizontalSwipeConfirm implements GestureDetector.OnGestureListener
 	@Override
 	public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
 
-		if (Math.abs(e1.getY() - e2.getY()) > SWIPE_MAX_OFF_PATH) {
+		if (e1 == null || e2 == null || Math.abs(e1.getY() - e2.getY()) > SWIPE_MAX_OFF_PATH) {
 			return false;
 		}
 		// right to left swipe
