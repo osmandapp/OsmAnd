@@ -77,6 +77,7 @@ public class ConfigureMapMenu {
 	public static final String CURRENT_TRACK_COLOR_ATTR = "currentTrackColor";
 	public static final String CURRENT_TRACK_WIDTH_ATTR = "currentTrackWidth";
 	public static final String COLOR_ATTR = "color";
+	public static final String ROAD_STYLE_ATTR = "roadStyle";
 	private int hikingRouteOSMCValue;
 	private int selectedLanguageIndex;
 	private boolean transliterateNames;
@@ -633,6 +634,12 @@ public class ConfigureMapMenu {
 					}
 				}).createItem());
 
+		ContextMenuItem props;
+		props = createRenderingProperty(customRules, adapter, activity, R.drawable.ic_action_intersection, ROAD_STYLE_ATTR);
+		if (props != null) {
+			adapter.addItem(props);
+		}
+
 		adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.text_size, activity)
 				.setDescription(getScale(activity)).setLayout(R.layout.list_item_single_line_descrition_narrow)
 				.setIcon(R.drawable.ic_action_map_text_size).setListener(new ContextMenuAdapter.ItemClickListener() {
@@ -761,7 +768,6 @@ public class ConfigureMapMenu {
 					}
 				}).createItem());
 
-		ContextMenuItem props;
 		props = createProperties(customRules, null, R.string.rendering_category_transport, R.drawable.ic_action_bus_dark,
 				"transport", null, adapter, activity, true);
 		if (props != null) {
@@ -1143,90 +1149,115 @@ public class ConfigureMapMenu {
 
 	private void createCustomRenderingProperties(final ContextMenuAdapter adapter, final MapActivity activity,
 												 List<RenderingRuleProperty> customRules) {
-		final OsmandMapTileView view = activity.getMapView();
 		for (final RenderingRuleProperty p : customRules) {
 			if (p.getAttrName().equals(RenderingRuleStorageProperties.A_APP_MODE) ||
 					p.getAttrName().equals(RenderingRuleStorageProperties.A_ENGINE_V1) ||
 					p.getAttrName().equals(HIKING_ROUTES_OSMC_ATTR) ||
+					p.getAttrName().equals(ROAD_STYLE_ATTR) ||
 					p.getAttrName().equals(CURRENT_TRACK_COLOR_ATTR) ||
 					p.getAttrName().equals(CURRENT_TRACK_WIDTH_ATTR)) {
 				continue;
 			}
-			String propertyName = SettingsActivity.getStringPropertyName(view.getContext(), p.getAttrName(),
-					p.getName());
-			// test old descr as title
-			final String propertyDescr = SettingsActivity.getStringPropertyDescription(view.getContext(),
-					p.getAttrName(), p.getName());
-			if (p.isBoolean()) {
-				final OsmandSettings.CommonPreference<Boolean> pref = view.getApplication().getSettings()
-						.getCustomRenderBooleanProperty(p.getAttrName());
-				adapter.addItem(ContextMenuItem.createBuilder(propertyName)
-						.setListener(new ContextMenuAdapter.ItemClickListener() {
+			adapter.addItem(createRenderingProperty(adapter, activity, 0, p));
+		}
+	}
 
-							@Override
-							public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked) {
-								pref.set(!pref.get());
-								refreshMapComplete(activity);
-								return false;
-							}
-						})
-						.setSelected(pref.get())
-						.createItem());
-			} else {
-				final OsmandSettings.CommonPreference<String> pref = view.getApplication().getSettings()
-						.getCustomRenderProperty(p.getAttrName());
-				String descr;
-				if (!Algorithms.isEmpty(pref.get())) {
-					descr = SettingsActivity.getStringPropertyValue(activity, pref.get());
-				} else {
-					descr = SettingsActivity.getStringPropertyValue(view.getContext(),
-							p.getDefaultValueDescription());
-				}
-				adapter.addItem(ContextMenuItem.createBuilder(propertyName).setListener(new ContextMenuAdapter.ItemClickListener() {
-
-					@Override
-					public boolean onContextMenuClick(final ArrayAdapter<ContextMenuItem> ad,
-													  int itemId, final int pos, boolean isChecked) {
-						AlertDialog.Builder b = new AlertDialog.Builder(view.getContext());
-						// test old descr as title
-						b.setTitle(propertyDescr);
-
-						int i = Arrays.asList(p.getPossibleValues()).indexOf(pref.get());
-						if (i >= 0) {
-							i++;
-						} else if (Algorithms.isEmpty(pref.get())) {
-							i = 0;
-						}
-
-						String[] possibleValuesString = new String[p.getPossibleValues().length + 1];
-						possibleValuesString[0] = SettingsActivity.getStringPropertyValue(view.getContext(),
-								p.getDefaultValueDescription());
-
-						for (int j = 0; j < p.getPossibleValues().length; j++) {
-							possibleValuesString[j + 1] = SettingsActivity.getStringPropertyValue(view.getContext(),
-									p.getPossibleValues()[j]);
-						}
-
-						b.setSingleChoiceItems(possibleValuesString, i, new DialogInterface.OnClickListener() {
-							@Override
-							public void onClick(DialogInterface dialog, int which) {
-								if (which == 0) {
-									pref.set("");
-								} else {
-									pref.set(p.getPossibleValues()[which - 1]);
-								}
-								refreshMapComplete(activity);
-								adapter.getItem(pos).setDescription(SettingsActivity.getStringPropertyValue(activity, pref.get()));
-								dialog.dismiss();
-								ad.notifyDataSetInvalidated();
-							}
-						});
-						b.setNegativeButton(R.string.shared_string_dismiss, null);
-						b.show();
-						return false;
-					}
-				}).setDescription(descr).setLayout(R.layout.list_item_single_line_descrition_narrow).createItem());
+	private ContextMenuItem createRenderingProperty(final List<RenderingRuleProperty> customRules,
+													final ContextMenuAdapter adapter, final MapActivity activity,
+													@DrawableRes final int icon, final String attrName) {
+		for (final RenderingRuleProperty p : customRules) {
+			if (p.getAttrName().equals(attrName)) {
+				return createRenderingProperty(adapter, activity, icon, p);
 			}
+		}
+		return null;
+	}
+
+	private ContextMenuItem createRenderingProperty(final ContextMenuAdapter adapter, final MapActivity activity,
+										 @DrawableRes final int icon, final RenderingRuleProperty p) {
+		final OsmandMapTileView view = activity.getMapView();
+		String propertyName = SettingsActivity.getStringPropertyName(view.getContext(), p.getAttrName(),
+				p.getName());
+
+		final String propertyDescr = SettingsActivity.getStringPropertyDescription(view.getContext(),
+				p.getAttrName(), p.getName());
+		if (p.isBoolean()) {
+			final OsmandSettings.CommonPreference<Boolean> pref = view.getApplication().getSettings()
+					.getCustomRenderBooleanProperty(p.getAttrName());
+			return ContextMenuItem.createBuilder(propertyName)
+					.setListener(new ContextMenuAdapter.ItemClickListener() {
+
+						@Override
+						public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked) {
+							pref.set(!pref.get());
+							refreshMapComplete(activity);
+							return false;
+						}
+					})
+					.setSelected(pref.get())
+					.createItem();
+		} else {
+			final OsmandSettings.CommonPreference<String> pref = view.getApplication().getSettings()
+					.getCustomRenderProperty(p.getAttrName());
+			String descr;
+			if (!Algorithms.isEmpty(pref.get())) {
+				descr = SettingsActivity.getStringPropertyValue(activity, pref.get());
+			} else {
+				descr = SettingsActivity.getStringPropertyValue(view.getContext(),
+						p.getDefaultValueDescription());
+			}
+			ContextMenuItem.ItemBuilder builder = ContextMenuItem.createBuilder(propertyName)
+					.setListener(new ContextMenuAdapter.ItemClickListener() {
+
+						@Override
+						public boolean onContextMenuClick(final ArrayAdapter<ContextMenuItem> ad,
+														  int itemId, final int pos, boolean isChecked) {
+							AlertDialog.Builder b = new AlertDialog.Builder(view.getContext());
+							// test old descr as title
+							b.setTitle(propertyDescr);
+
+							int i = Arrays.asList(p.getPossibleValues()).indexOf(pref.get());
+							if (i >= 0) {
+								i++;
+							} else if (Algorithms.isEmpty(pref.get())) {
+								i = 0;
+							}
+
+							String[] possibleValuesString = new String[p.getPossibleValues().length + 1];
+							possibleValuesString[0] = SettingsActivity.getStringPropertyValue(view.getContext(),
+									p.getDefaultValueDescription());
+
+							for (int j = 0; j < p.getPossibleValues().length; j++) {
+								possibleValuesString[j + 1] = SettingsActivity.getStringPropertyValue(view.getContext(),
+										p.getPossibleValues()[j]);
+							}
+
+							b.setSingleChoiceItems(possibleValuesString, i, new DialogInterface.OnClickListener() {
+								@Override
+								public void onClick(DialogInterface dialog, int which) {
+									if (which == 0) {
+										pref.set("");
+									} else {
+										pref.set(p.getPossibleValues()[which - 1]);
+									}
+									refreshMapComplete(activity);
+									adapter.getItem(pos).setDescription(SettingsActivity.getStringPropertyValue(activity, pref.get()));
+									dialog.dismiss();
+									ad.notifyDataSetInvalidated();
+								}
+							});
+							b.setNegativeButton(R.string.shared_string_dismiss, null);
+							b.show();
+							return false;
+						}
+					})
+					.setDescription(descr)
+					.setLayout(R.layout.list_item_single_line_descrition_narrow);
+			if (icon != 0) {
+				builder.setIcon(icon);
+			}
+
+			return builder.createItem();
 		}
 	}
 
