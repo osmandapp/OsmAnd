@@ -1310,6 +1310,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		if (fragmentRef != null) {
 			fragmentRef.get().newDownloadIndexes();
 		}
+		if (dashboardOnMap.isVisible()) {
+			dashboardOnMap.onNewDownloadIndexes();
+		}
 		refreshMap();
 	}
 
@@ -1323,6 +1326,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		if (fragmentRef != null) {
 			fragmentRef.get().downloadInProgress();
 		}
+		if (dashboardOnMap.isVisible()) {
+			dashboardOnMap.onDownloadInProgress();
+		}
 	}
 
 	@Override
@@ -1334,6 +1340,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		WeakReference<MapContextMenuFragment> fragmentRef = getContextMenu().findMenuFragment();
 		if (fragmentRef != null) {
 			fragmentRef.get().downloadHasFinished();
+		}
+		if (dashboardOnMap.isVisible()) {
+			dashboardOnMap.onDownloadHasFinished();
 		}
 		refreshMap();
 	}
