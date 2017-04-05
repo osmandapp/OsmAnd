@@ -310,7 +310,7 @@ El servicio de navegación se ha cambiado temporalmente al servicio con conexió
     <string name="renderer_load_sucess">Visualización cargada</string>
     <string name="renderer_load_exception">Error: No se cargó la visualización</string>
     <string name="renderers">Renderizado vectorial</string>
-    <string name="renderers_descr">Elige la apariencia del renderizado</string>
+    <string name="renderers_descr">Elige el aspecto del renderizado</string>
     <string name="poi_context_menu_website">Mostrar sitio web del PDI</string>
     <string name="poi_context_menu_call">Mostrar teléfono del PDI</string>
     <string name="website">Sitio web</string>
@@ -2522,7 +2522,7 @@ El espacio de almacenamiento usado es {3} MB temporalmente y {1} MB permanenteme
     <string name="quick_actions_delete">Eliminar acción</string>
     <string name="quick_actions_delete_text">¿Estás seguro que deseas eliminar la acción de \"%s\"?</string>
     <string name="quick_favorites_show_favorites_dialog">Mostrar diálogo de favoritos</string>
-    <string name="quick_favorites_name_preset">Nombre de ajuste preestablecido</string>
+    <string name="quick_favorites_name_preset">Nombre predefinido</string>
     <string name="quick_action_add_marker_descr">Pulsar el botón de acción agregará un marcador de mapa en la ubicación del centro de la pantalla.</string>
     <string name="quick_action_add_gpx_descr">Pulsar el botón de acción agregará un punto intermedio GPX en la ubicación del centro de la pantalla.</string>
     <string name="quick_action_take_audio_note_descr">Pulsar el botón de acción agregará una nota de audio en la ubicación del centro de la pantalla.</string>
@@ -2733,7 +2733,7 @@ Cobertura y calidad aproximadas del mapa:
 ¡La mayoría de los países de todo el mundo están disponibles para su descarga!
  Consigue un navegador fiable navigator en su país - ya sea Francia, Alemania, Méjico, Reino Unido, España, Países Bajos, Estados Unidos, Rusia, Brasil o cualquier otro.
  "</string>
-    <string name="quick_action_auto_zoom">Zoom automático del mapa sí/no</string>
+    <string name="quick_action_auto_zoom">Alternar ampliación automática del mapa</string>
     <string name="quick_action_auto_zoom_desc">Tocando el botón de acción encenderá/apagará el zoom automático del mapa de acuerdo a tu velocidad.</string>
     <string name="quick_action_auto_zoom_on">Encender zoom automático del mapa</string>
     <string name="quick_action_auto_zoom_off">Apagar zoom automático del mapa</string>
