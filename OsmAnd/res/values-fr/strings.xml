@@ -2967,4 +2967,7 @@ Fonctionnalités principales :
     <string name="srtm_color_scheme">Couleur du thème</string>
     <string name="show_from_zoom_level">Afficher à partir du niveau de zoom</string>
     <string name="route_is_too_long_v2">Cet itinéraire risque d\'être très long à calculer. Merci d\'ajouter des points de passage intermédiaires.</string>
+    <string name="srtm_menu_download_descr">Pour afficher les courbes de niveaux sur une carte, vous devez télécharger la carte courbes de niveaux de cette région.</string>
+    <string name="shared_string_plugin">Greffon</string>
+    <string name="srtm_purchase_header">Pour afficher les courbes de niveaux sur une carte, vous devez acheter puis installer le greffon</string>
     </resources>
