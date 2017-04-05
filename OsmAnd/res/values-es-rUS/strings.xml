@@ -1521,7 +1521,7 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="renderer_load_sucess">Visualización cargada</string>
     <string name="renderer_load_exception">Error: No se cargó la visualización</string>
     <string name="renderers">Visualización vectorial</string>
-    <string name="renderers_descr">Elige apariencia de visualización de mapas vectoriales</string>
+    <string name="renderers_descr">Elige el aspecto de visualización de los mapas vectoriales</string>
     <string name="poi_context_menu_website">Mostrar sitio web del PDI</string>
     <string name="poi_context_menu_call">Mostrar teléfono del PDI</string>
     <string name="download_type_to_filter">escribe el filtro</string>
@@ -2488,7 +2488,7 @@ Si amas a OsmAnd, OSM y quieres apoyarlos, esta es una perfecta manera de hacerl
     <string name="gpx_no_tracks_title">No tienes trazas todavía</string>
     <string name="gpx_no_tracks_title_folder">También puedes añadir trazas a la carpeta</string>
     <string name="gpx_add_track">Añadir traza</string>
-    <string name="gpx_appearance">Apariencia</string>
+    <string name="gpx_appearance">Aspecto</string>
     <string name="rendering_value_fine_name">Muy fino</string>
     <string name="route_calculation">Cálculo de la ruta</string>
     <string name="upload_poi">Subir PDI</string>
@@ -2865,7 +2865,7 @@ Algunas de las principales funciones:
     <string name="routing_attr_allow_private_name_description">Permite acceder a áreas privadas</string>
     <string name="display_zoom_level">Nivel de ampliación de pantalla: %1$s</string>
     <string name="route_is_too_long_v2">Esta ruta puede ser muy larga para calcular. Añade destinos intermedios si no se encuentran resultados dentro de los 10 minutos.</string>
-    <string name="srtm_menu_download_descr">Para ver las curvas de nivel en el mapa, necesitas descargar el mapa de curvas de nivel de esta región.</string>
+    <string name="srtm_menu_download_descr">Para ver las curvas de nivel en el mapa, debes descargar el mapa de curvas de nivel de esta región.</string>
     <string name="shared_string_plugin">Complemento</string>
     <string name="srtm_purchase_header">Para ver las curvas de nivel en el mapa, debes comprar e instalar el complemento</string>
     </resources>
