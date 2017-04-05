@@ -121,9 +121,9 @@
 	
 	<string name="plugins_screen">插件</string>
 	<string name="prefs_plugins">插件</string>
-	<string name="debugging_and_development">OsmAnd发展</string>
+	<string name="debugging_and_development">OsmAnd 开发</string>
 	<string name="native_rendering">原生渲染</string>
-	<string name="send_files_to_osm">将GPX文件发送OSM？</string>
+	<string name="send_files_to_osm">将GPX文件发送至OSM？</string>
 	<string name="gpx_visibility_txt">能见度</string>
 	<string name="gpx_tags_txt">标签</string>
 	<string name="gpx_description_txt">描述</string>
@@ -212,7 +212,7 @@
 	<string name="city_type_village">村</string>
 	<string name="city_type_town">镇</string>
 	<string name="city_type_city">城市</string>
-	<string name="gpx_navigation">GPX的航班</string>
+	<string name="gpx_navigation">GPX 路径</string>
 	<string name="button_upgrade_osmandplus">升级OsmAnd+</string>
 	<string name="shared_string_rename">重命名</string>
 	
@@ -649,7 +649,7 @@
 	<string name="map_version_changed_info">服务器包含与您当前应用版本不兼容的地图文件。要下载并使用这些文件，请将应用程序升级至新版本。</string>
 	
 	<string name="search_position_current_location_search">搜索位置…</string>
-	<string name="search_position_current_location_found">位置(已找到)</string>
+	<string name="search_position_current_location_found">我的位置（已找到）</string>
 	<string name="search_position_address">地址…</string>
 	<string name="search_position_favorites">收藏夹…</string>
 	<string name="search_position_undefined">未定义</string>
@@ -817,7 +817,7 @@
 	<string name="list_index_files_was_not_loaded">区域列表未能从 osmand.net 获取。</string>
 	
 	<string name="fav_points_edited">收藏点已被编辑</string>
-	<string name="mark_final_location_first">请首先选择终点</string>
+	<string name="mark_final_location_first">请首先选择目的地</string>
 	<string name="opening_hours">营业时间</string>
 	<string name="opening_changeset">正在打开修改集…</string>
 	<string name="closing_changeset">正在关闭修改集…</string>
@@ -1080,7 +1080,7 @@
     <string name="srtm_plugin_disabled">等高线已禁用</string>
     <string name="favorite_category_add_new">添加新的</string>
     <string name="favorite_category_select">选择分类</string>
-    <string name="default_speed_system_descr">定义速度测量系统</string>
+    <string name="default_speed_system_descr">定义速度单位</string>
     <string name="default_speed_system">速度测量</string>
     <string name="nm">浬</string>
     <string name="si_nm">海里</string>
@@ -1401,4 +1401,37 @@
     <string name="rendering_category_others">其它地图属性</string>
     <string name="print_route">显示路线</string>
     <string name="search_osm_offline">搜索地理位置</string>
+    <string name="srtm_color_scheme">颜色方案</string>
+    <string name="change_color">改变颜色</string>
+    <string name="edit_name">编辑名称</string>
+    <string name="display_zoom_level">显示缩放等级：%1$s</string>
+    <string name="online_map">在线地图</string>
+    <string name="roads_only">仅道路</string>
+    <string name="device_memory">设备内存</string>
+    <string name="osmo_auth_error_short">授权失败</string>
+    <string name="first_usage_item">初次使用</string>
+    <string name="tips_and_tricks_descr">常见问题、最近修改和其它内容</string>
+    <string name="faq_item_description">常见问题</string>
+    <string name="features_menu_group">功能</string>
+    <string name="osmand_parking_plugin_name">泊车位置</string>
+    <string name="plugin_ski_name">滑雪地图浏览</string>
+    <string name="help_us_to_improve_menu_group">帮助我们改进 OsmAnd</string>
+    <string name="contact_us">联系我们</string>
+    <string name="follow_us">跟随我们</string>
+    <string name="instalation_troubleshooting_item">安装和疑难解答</string>
+    <string name="techical_articles_item">技术文章</string>
+    <string name="navigation_item_description">设置导航</string>
+    <string name="first_usage_item_description">如何下载地图，进行基本设置</string>
+    <string name="search_on_the_map_item">在地图中搜索</string>
+    <string name="osmand_short_description_80_chars">全球移动地图浏览，以及使用离线和在线 OSM 地图进行导航</string>
+    <string name="search_categories">分类</string>
+    <string name="map_widget_map_rendering">地图渲染</string>
+    <string name="local_map_names">本地名称</string>
+    <string name="versions_item">版本信息</string>
+    <string name="shared_string_my_location">我的位置</string>
+    <string name="osmo_enable_tracker">发送我的位置</string>
+    <string name="select_destination_and_intermediate_points">选择目的地</string>
+    <string name="route_descr_select_destination">选择目的地</string>
+    <string name="wake_on_voice_descr">（如果屏幕未点亮）在接近转弯地点时点亮屏幕</string>
+    <string name="change_markers_position">改变记号位置</string>
     </resources>
