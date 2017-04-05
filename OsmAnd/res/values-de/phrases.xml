@@ -961,13 +961,13 @@
 	<string name="poi_fee_no">Nein</string>
 	<string name="poi_drinking_water_yes">Ja</string>
 	<string name="poi_drinking_water_no">Nein</string>
-	<string name="poi_supervised_yes">beaufsichtigt</string>
+	<string name="poi_supervised_yes">Beaufsichtigt</string>
 	<string name="poi_supervised_no">Ohne Aufsicht</string>
-	<string name="poi_crossing_traffic_signals">mit Ampeln</string>
-	<string name="poi_access_no">kein Zugang</string>
-	<string name="poi_access_customers">frei für Kunden</string>
+	<string name="poi_crossing_traffic_signals">Mit Ampeln</string>
+	<string name="poi_access_no">Zutritt verboten</string>
+	<string name="poi_access_customers">Kundenverkehr frei</string>
 	<string name="poi_access_delivery">Lieferverkehr frei</string>
-	<string name="poi_access_agricultural">frei für Landwirtschaft</string>
+	<string name="poi_access_agricultural">Landwirtschaftl. Verkehr frei</string>
 
 	<string name="poi_recycling_centre">Recyclingzentrum</string>
 	<string name="poi_recycling_aluminium">Aluminium</string>
@@ -999,9 +999,9 @@
 	<string name="poi_crossing_uncontrolled">Unkontrolliert</string>
 	<string name="poi_crossing_unmarked">Unmarkiert</string>
 
-	<string name="poi_access_private">Privater Zugang</string>
-	<string name="poi_access_destination">Anliegerzugang</string>
-	<string name="poi_access_permissive">Erlaubter Zugang</string>
+	<string name="poi_access_private">Privatweg</string>
+	<string name="poi_access_destination">Anlieger frei</string>
+	<string name="poi_access_permissive">Zutritt erlaubt</string>
 	<string name="poi_animal_shelter_dog">Unterkunft für Hunde</string>
 	<string name="poi_animal_shelter_cat">Katzenhütte</string>
 	<string name="poi_animal_shelter_dog_cat">Katzen-/ Hundehütte</string>
@@ -1059,7 +1059,7 @@
 	<string name="poi_height">Höhe</string>
 	<string name="poi_ele">Meereshöhe</string>
 	<string name="poi_start_date">Anfangsdatum</string>
-	<string name="poi_wheelchair_yes">Rollstuhlgerecht</string>
+	<string name="poi_wheelchair_yes">Ja</string>
 	<string name="poi_wheelchair_no">Nein</string>
 	<string name="poi_wheelchair_limited">Eingeschränkt</string>
 	<string name="poi_wholesale">Großhandel</string>
@@ -1125,7 +1125,7 @@
 	<string name="poi_trees_coffea">Kaffee</string>
 	<string name="poi_trees_pomegranate">Granatapfel</string>
 
-	<string name="poi_rural">ländlich</string>
+	<string name="poi_rural">Ländlich</string>
 
 	<string name="poi_animal_shelter">Tierheim</string>
 	<string name="poi_seats">Sitze</string>
@@ -3071,7 +3071,7 @@
 	<string name="poi_beach_surface_type">Oberfläche</string>
 	<string name="poi_nudism">FKK</string>
 
-<string name="poi_wheelchair_accessibility">Rollstuhlzugänglichkeit</string>
+<string name="poi_wheelchair_accessibility">Rollstuhlgerecht</string>
 	<string name="poi_resort_type">Typ</string>
 	<string name="poi_piste_grooming">Pistenpflege</string>
 	<string name="poi_recycling_type">Typ</string>
