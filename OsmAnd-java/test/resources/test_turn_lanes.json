@@ -584,7 +584,7 @@
     }
   },
   {
-    "testName": "32.Motorway TR South Kent Des Moines Road (1st turn incorrect)",
+    "testName": "32.Motorway TR South Kent Des Moines Road",
     "startPoint": {
       "latitude": 45.64518099200965,
       "longitude": 35.668448954820605
@@ -594,7 +594,7 @@
       "longitude": 35.66181853413579
     },
     "expectedResults": {
-      "222244": "TL|+TL|C",
+      "222244": "TL|TL|+C,TR",
       "222243": "TL|TL|+C|C|TSLR",
       "222164": "TL|TL|+C|C"
     }
