@@ -599,7 +599,7 @@
 	<string name="poi_block">Tömb</string>
 	<string name="poi_cattle_grid">Marharács</string>
 	<string name="poi_full_height_turnstile">Teljes forgókapu</string>
-	<string name="poi_bump_gate">Lökőajtó</string>
+	<string name="poi_bump_gate">Lökőkapu</string>
 	<string name="poi_general_barrier">Általános akadály</string>
 	<string name="poi_stile">Kerítésátjáró</string>
 	<string name="poi_height_restrictor">Magasságkorlátozó</string>
@@ -850,7 +850,7 @@
 	<string name="poi_religion_scientologist">Szcientológus</string>
 	<string name="poi_religion_pagan">Pogány</string>
 	<string name="poi_religion_tenrikyo">Tenrikyö</string>
-	<string name="poi_religion_zoroastrian">Zoroasztrista</string>
+	<string name="poi_religion_zoroastrian">Zoroasztriánus</string>
 
 	<string name="poi_denomination_catholic">Katolikus</string>
 	<string name="poi_denomination_baptist">Baptista</string>
@@ -1385,8 +1385,8 @@
 
 	<string name="poi_bench_yes">Van</string>
 	<string name="poi_bench_no">Pad nincs</string>
-	<string name="poi_bin_yes">Szemeteskosár van</string>
-	<string name="poi_bin_no">Szemeteskosár nincs</string>
+	<string name="poi_bin_yes">Szemétkosár van</string>
+	<string name="poi_bin_no">Szemétkosár nincs</string>
 
 	<string name="poi_resource_antimony">Antimon</string>
 	<string name="poi_resource_asbestos">Azbeszt</string>
@@ -2037,7 +2037,7 @@
 	<string name="poi_medical_system">Gyógyászati tradíció</string>
 	<string name="poi_home_visit">Otthoni látogatás</string>
 	<string name="poi_waterway_fuel">Hajóüzemanyag-töltő állomás</string>
-	<string name="poi_bunker_silo">Bunkersiló</string>
+	<string name="poi_bunker_silo"/>
 	<string name="poi_ice_hockey">Jégkorong</string>
 	<string name="poi_denomination_united">Egyesült</string>
 	<string name="poi_denomination_united_reformed">Egyesült református</string>
@@ -3183,7 +3183,7 @@
 	<string name="poi_site_type_petroglyph">Sziklarajz</string>
 	<string name="poi_pa">Pā (erődített maori falu)</string>
 
-	<string name="poi_ref">Azonosító szám:</string>
+	<string name="poi_ref">Azonosító szám</string>
 
 	<string name="poi_fitness_centre">Fitneszközpont</string>
 	<string name="poi_hackerspace">Hackerspace</string>
