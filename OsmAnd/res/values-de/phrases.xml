@@ -1891,8 +1891,8 @@
 	<string name="poi_diet_vegan_yes">Vegan</string>
 	<string name="poi_diet_vegan_no">vegan: Nein</string>
 	<string name="poi_diet_gluten_free_only">Nur glutenfreie</string>
-	<string name="poi_diet_gluten_free_yes">gleutenfrei</string>
-	<string name="poi_diet_gluten_free_no">gleutenfrei: Nein</string>
+	<string name="poi_diet_gluten_free_yes">glutenfrei</string>
+	<string name="poi_diet_gluten_free_no">glutenfrei: Nein</string>
 	<string name="poi_diet_kosher_only">Nur koscher</string>
 	<string name="poi_diet_kosher_yes">Koscher</string>
 	<string name="poi_diet_kosher_no">koscher: Nein</string>
@@ -1989,7 +1989,7 @@
 	<string name="poi_memorial_obelisk">Obelisk</string>
 	<string name="poi_memorial_column">Spalte</string>
 	<string name="poi_memorial_stupa">Stupa</string>
-	<string name="poi_inscription">Inschrift</string>
+	<string name="poi_inscription">Beschriftung</string>
 	<string name="poi_historic_quarry">historischer Steinbruch</string>
 
 	<string name="poi_resource_antimony">Antimon</string>
@@ -2554,14 +2554,14 @@
 
 	<string name="poi_forestry_compartment">Wegweiser: Forstfach</string>
 	<string name="poi_forestry_allotment">Wegweiser: Forstwirtschaft Zuteilung</string>
-	<string name="poi_inscription_n">Inschrift: N</string>
-	<string name="poi_inscription_nw">Inschrift: NW</string>
-	<string name="poi_inscription_w">Inschrift: W</string>
-	<string name="poi_inscription_sw">Inschrift: SW</string>
-	<string name="poi_inscription_s">Inschrift: S</string>
-	<string name="poi_inscription_se">Inschrift: SO</string>
-	<string name="poi_inscription_e">Inschrift: O</string>
-	<string name="poi_inscription_ne">Inschrift: NO</string>
+	<string name="poi_inscription_n">Beschriftung: N</string>
+	<string name="poi_inscription_nw">Beschriftung: NW</string>
+	<string name="poi_inscription_w">Beschriftung: W</string>
+	<string name="poi_inscription_sw">Beschriftung: SW</string>
+	<string name="poi_inscription_s">Beschriftung: S</string>
+	<string name="poi_inscription_se">Beschriftung: SO</string>
+	<string name="poi_inscription_e">Beschriftung: O</string>
+	<string name="poi_inscription_ne">Beschriftung: NO</string>
 
 	<string name="poi_construction_yes">Im Bau</string>
 	<string name="poi_additional_atm_yes">Geldautomat: Ja</string>
