@@ -2861,9 +2861,12 @@ Algunas de las principales funciones:
     <string name="edit_name">Editar nombre</string>
     <string name="save_poi_too_many_uppercase">El nombre contiene demasiadas letras capitales. ¿Continuar?</string>
     <string name="srtm_color_scheme">Esquema de color</string>
-    <string name="show_from_zoom_level">Mostrar desde el nivel de ampliación</string>
+    <string name="show_from_zoom_level">Vista del nivel de ampliación</string>
     <string name="routing_attr_allow_private_name">Permitir el acceso privado</string>
     <string name="routing_attr_allow_private_name_description">Permite acceder a áreas privadas</string>
     <string name="display_zoom_level">Nivel de ampliación de pantalla: %1$s</string>
     <string name="route_is_too_long_v2">Esta ruta puede ser muy larga para calcular. Añade destinos intermedios si no se encuentran resultados dentro de los 10 minutos.</string>
+    <string name="srtm_menu_download_descr">Para ver las curvas de nivel en el mapa, necesitas descargar el mapa de curvas de nivel de esta región.</string>
+    <string name="shared_string_plugin">Complemento</string>
+    <string name="srtm_purchase_header">Para ver las curvas de nivel en el mapa, debes comprar e instalar el complemento</string>
     </resources>
