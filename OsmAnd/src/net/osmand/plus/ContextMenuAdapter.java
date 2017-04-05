@@ -222,7 +222,12 @@ public class ContextMenuAdapter {
 			int secondaryDrawable = item.getSecondaryIcon();
 			if (secondaryDrawable != ContextMenuItem.INVALID_ID) {
 				@ColorRes
-				int colorRes = lightTheme ? R.color.icon_color_light : R.color.dialog_inactive_text_color_dark;
+				int colorRes;
+				if (secondaryDrawable == R.drawable.ic_action_additional_option) {
+					colorRes = lightTheme ? R.color.icon_color_light : R.color.dialog_inactive_text_color_dark;
+				} else {
+					colorRes = lightTheme ? R.color.icon_color : R.color.color_white;
+				}
 				Drawable drawable = mIconsCache.getIcon(item.getSecondaryIcon(), colorRes);
 				ImageView imageView = (ImageView) convertView.findViewById(R.id.secondary_icon);
 				imageView.setImageDrawable(drawable);
@@ -287,19 +292,27 @@ public class ContextMenuAdapter {
 				}
 			}
 
-			if (convertView.findViewById(R.id.ProgressBar) != null) {
-				ProgressBar bar = (ProgressBar) convertView.findViewById(R.id.ProgressBar);
+			View progressBar = convertView.findViewById(R.id.ProgressBar);
+			if (progressBar != null) {
+				ProgressBar bar = (ProgressBar) progressBar;
 				if (item.isLoading()) {
+					int progress = item.getProgress();
+					if (progress == ContextMenuItem.INVALID_ID) {
+						bar.setIndeterminate(true);
+					} else {
+						bar.setIndeterminate(false);
+						bar.setProgress(progress);
+					}
 					bar.setVisibility(View.VISIBLE);
 				} else {
-					bar.setVisibility(View.INVISIBLE);
+					bar.setVisibility(View.GONE);
 				}
 			}
 
 			View descriptionTextView = convertView.findViewById(R.id.description);
 			if (descriptionTextView != null) {
 				String itemDescr = item.getDescription();
-				if (itemDescr != null) {
+				if (itemDescr != null && (progressBar == null || !item.isLoading())) {
 					((TextView) descriptionTextView).setText(itemDescr);
 					descriptionTextView.setVisibility(View.VISIBLE);
 				} else {
@@ -328,7 +341,18 @@ public class ContextMenuAdapter {
 
 	public interface ItemClickListener {
 		//boolean return type needed to desribe if drawer needed to be close or not
-		boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int position, boolean isChecked);
+		boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter,
+								   int itemId,
+								   int position,
+								   boolean isChecked);
+	}
+
+	public interface ProgressListener {
+		boolean onProgressChanged(Object progressObject,
+								  int progress,
+								  ArrayAdapter<ContextMenuItem> adapter,
+								  int itemId,
+								  int position);
 	}
 
 	public interface OnIntegerValueChangedListener {

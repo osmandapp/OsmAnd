@@ -141,21 +141,29 @@ public class SRTMPlugin extends OsmandPlugin {
 					toggleContourLines(mapActivity, isChecked, new Runnable() {
 						@Override
 						public void run() {
-							ContextMenuItem item = adapter.getItem(position);
-							if (item != null) {
-								RenderingRuleProperty contourLinesProp = app.getRendererRegistry().getCustomRenderingRuleProperty(CONTOUR_LINES_ATTR);
-								if (contourLinesProp != null) {
-									OsmandSettings settings = app.getSettings();
-									final OsmandSettings.CommonPreference<String> pref =
-											settings.getCustomRenderProperty(contourLinesProp.getAttrName());
-									boolean selected = !pref.get().equals(CONTOUR_LINES_DISABLED_VALUE);
+							RenderingRuleProperty contourLinesProp = app.getRendererRegistry().getCustomRenderingRuleProperty(CONTOUR_LINES_ATTR);
+							if (contourLinesProp != null) {
+								OsmandSettings settings = app.getSettings();
+								final OsmandSettings.CommonPreference<String> pref =
+										settings.getCustomRenderProperty(contourLinesProp.getAttrName());
+								boolean selected = !pref.get().equals(CONTOUR_LINES_DISABLED_VALUE);
+
+								SRTMPlugin plugin = OsmandPlugin.getPlugin(SRTMPlugin.class);
+								if (selected && plugin != null && !plugin.isActive() && !plugin.needsInstallation()) {
+									OsmandPlugin.enablePlugin(mapActivity, mapActivity.getMyApplication(), plugin, true);
+								}
+
+								ContextMenuItem item = adapter.getItem(position);
+								if (item != null) {
 									item.setDescription(app.getString(R.string.display_zoom_level,
 											getPrefDescription(app, contourLinesProp, pref)));
 									item.setColorRes(selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
 									item.setSelected(selected);
 									adapter.notifyDataSetChanged();
 								}
+								ContourLinesMenu.refreshMapComplete(mapActivity);
 							}
+
 						}
 					});
 				} else if (itemId == R.string.layer_hillshade) {

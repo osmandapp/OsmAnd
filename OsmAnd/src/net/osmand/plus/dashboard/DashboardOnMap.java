@@ -63,6 +63,8 @@ import net.osmand.plus.dashboard.tools.TransactionBuilder;
 import net.osmand.plus.dialogs.ConfigureMapMenu;
 import net.osmand.plus.dialogs.RasterMapMenu;
 import net.osmand.plus.download.DownloadActivity;
+import net.osmand.plus.download.DownloadIndexesThread;
+import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.MapMarkerDialogHelper;
 import net.osmand.plus.helpers.MapMarkerDialogHelper.MapMarkersDialogHelperCallbacks;
@@ -86,6 +88,7 @@ import net.osmand.plus.views.controls.SwipeDismissListViewTouchListener;
 import net.osmand.plus.views.controls.SwipeDismissListViewTouchListener.DismissCallbacks;
 import net.osmand.plus.views.controls.SwipeDismissListViewTouchListener.Undoable;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
+import net.osmand.search.core.ObjectType;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -886,7 +889,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 				&& visibleType != DashboardType.MAP_MARKERS
 				&& visibleType != DashboardType.MAP_MARKERS_SELECTION
 				&& visibleType != DashboardType.CONFIGURE_SCREEN
-				&& visibleType != DashboardType.CONFIGURE_MAP) {
+				&& visibleType != DashboardType.CONFIGURE_MAP
+				&& visibleType != DashboardType.CONTOUR_LINES) {
 			listView.setDivider(dividerDrawable);
 			listView.setDividerHeight(dpToPx(1f));
 		} else {
@@ -982,6 +986,37 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 		updateListAdapter(listAdapter, listener);
 	}
 
+	public void onNewDownloadIndexes() {
+		if (visibleType == DashboardType.CONTOUR_LINES) {
+			refreshContent(true);
+		}
+	}
+
+	@SuppressWarnings("unchecked")
+	public void onDownloadInProgress() {
+		if (visibleType == DashboardType.CONTOUR_LINES) {
+			DownloadIndexesThread downloadThread = getMyApplication().getDownloadThread();
+			IndexItem downloadIndexItem = downloadThread.getCurrentDownloadingItem();
+			if (downloadIndexItem != null) {
+				int downloadProgress = downloadThread.getCurrentDownloadingItemProgress();
+				ArrayAdapter<ContextMenuItem> adapter = (ArrayAdapter<ContextMenuItem>) listAdapter;
+				for (int i = 0; i < adapter.getCount(); i++) {
+					ContextMenuItem item = adapter.getItem(i);
+					if (item != null && item.getProgressListener() != null) {
+						item.getProgressListener().onProgressChanged(
+								downloadIndexItem, downloadProgress, adapter, (int) adapter.getItemId(i), i);
+					}
+				}
+			}
+		}
+	}
+
+	public void onDownloadHasFinished() {
+		if (visibleType == DashboardType.CONTOUR_LINES) {
+			refreshContent(true);
+		}
+	}
+
 	public void refreshContent(boolean force) {
 		if (visibleType == DashboardType.WAYPOINTS
 				|| visibleType == DashboardType.MAP_MARKERS
@@ -989,7 +1024,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 				|| visibleType == DashboardType.CONFIGURE_SCREEN
 				|| force) {
 			updateListAdapter();
-		} else if (visibleType == DashboardType.CONFIGURE_MAP || visibleType == DashboardType.ROUTE_PREFERENCES) {
+		} else if (visibleType == DashboardType.CONFIGURE_MAP
+				|| visibleType == DashboardType.ROUTE_PREFERENCES) {
 			int index = listView.getFirstVisiblePosition();
 			View v = listView.getChildAt(0);
 			int top = (v == null) ? 0 : (v.getTop() - listView.getPaddingTop());

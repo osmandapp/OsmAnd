@@ -20,7 +20,7 @@ public class ContextMenuItem {
 	@ColorRes
 	private int colorRes;
 	@DrawableRes
-	private final int secondaryIcon;
+	private int secondaryIcon;
 	private Boolean selected;
 	private int progress;
 	@LayoutRes
@@ -32,6 +32,7 @@ public class ContextMenuItem {
 	private String description;
 	private final ContextMenuAdapter.ItemClickListener itemClickListener;
 	private final ContextMenuAdapter.OnIntegerValueChangedListener integerListener;
+	private final ContextMenuAdapter.ProgressListener progressListener;
 	private final boolean hideDivider;
 	private final int minHeight;
 	private final int tag;
@@ -50,6 +51,7 @@ public class ContextMenuItem {
 							String description,
 							ContextMenuAdapter.ItemClickListener itemClickListener,
 							ContextMenuAdapter.OnIntegerValueChangedListener integerListener,
+							ContextMenuAdapter.ProgressListener progressListener,
 							boolean hideDivider,
 							int minHeight,
 							int tag) {
@@ -68,6 +70,7 @@ public class ContextMenuItem {
 		this.description = description;
 		this.itemClickListener = itemClickListener;
 		this.integerListener = integerListener;
+		this.progressListener = progressListener;
 		this.hideDivider = hideDivider;
 		this.minHeight = minHeight;
 		this.tag = tag;
@@ -148,6 +151,10 @@ public class ContextMenuItem {
 		return integerListener;
 	}
 
+	public ContextMenuAdapter.ProgressListener getProgressListener() {
+		return progressListener;
+	}
+
 	public boolean shouldSkipPainting() {
 		return skipPaintingWithoutColor;
 	}
@@ -162,6 +169,10 @@ public class ContextMenuItem {
 
 	public void setIcon(int iconId) {
 		this.mIcon = iconId;
+	}
+
+	public void setSecondaryIcon(int secondaryIcon) {
+		this.secondaryIcon = secondaryIcon;
 	}
 
 	public void setColorRes(int colorRes) {
@@ -216,6 +227,7 @@ public class ContextMenuItem {
 		private String mDescription = null;
 		private ContextMenuAdapter.ItemClickListener mItemClickListener = null;
 		private ContextMenuAdapter.OnIntegerValueChangedListener mIntegerListener = null;
+		private ContextMenuAdapter.ProgressListener mProgressListener = null;
 		private boolean mSkipPaintingWithoutColor;
 		private boolean mHideDivider;
 		private int mMinHeight;
@@ -295,6 +307,11 @@ public class ContextMenuItem {
 			return this;
 		}
 
+		public ItemBuilder setProgressListener(ContextMenuAdapter.ProgressListener progressListener) {
+			mProgressListener = progressListener;
+			return this;
+		}
+
 		public ItemBuilder setSkipPaintingWithoutColor(boolean skipPaintingWithoutColor) {
 			mSkipPaintingWithoutColor = skipPaintingWithoutColor;
 			return this;
@@ -322,8 +339,8 @@ public class ContextMenuItem {
 		public ContextMenuItem createItem() {
 			return new ContextMenuItem(mTitleId, mTitle, mIcon, mColorRes, mSecondaryIcon,
 					mSelected, mProgress, mLayout, mLoading, mIsCategory, mSkipPaintingWithoutColor,
-					mPosition, mDescription, mItemClickListener, mIntegerListener, mHideDivider,
-					mMinHeight, mTag);
+					mPosition, mDescription, mItemClickListener, mIntegerListener, mProgressListener,
+					mHideDivider, mMinHeight, mTag);
 		}
 	}
 }
