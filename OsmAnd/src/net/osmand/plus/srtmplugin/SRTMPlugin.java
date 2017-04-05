@@ -1,6 +1,7 @@
 package net.osmand.plus.srtmplugin;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
@@ -132,10 +133,31 @@ public class SRTMPlugin extends OsmandPlugin {
 			}
 
 			@Override
-			public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int position, boolean isChecked) {
+			public boolean onContextMenuClick(final ArrayAdapter<ContextMenuItem> adapter,
+											  final int itemId,
+											  final int position,
+											  final boolean isChecked) {
 				if (itemId == R.string.srtm_plugin_name) {
-					toggleContourLines(mapActivity, adapter, itemId, position, isChecked);
-					adapter.notifyDataSetChanged();
+					toggleContourLines(mapActivity, isChecked, new Runnable() {
+						@Override
+						public void run() {
+							ContextMenuItem item = adapter.getItem(position);
+							if (item != null) {
+								RenderingRuleProperty contourLinesProp = app.getRendererRegistry().getCustomRenderingRuleProperty(CONTOUR_LINES_ATTR);
+								if (contourLinesProp != null) {
+									OsmandSettings settings = app.getSettings();
+									final OsmandSettings.CommonPreference<String> pref =
+											settings.getCustomRenderProperty(contourLinesProp.getAttrName());
+									boolean selected = !pref.get().equals(CONTOUR_LINES_DISABLED_VALUE);
+									item.setDescription(app.getString(R.string.display_zoom_level,
+											getPrefDescription(app, contourLinesProp, pref)));
+									item.setColorRes(selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
+									item.setSelected(selected);
+									adapter.notifyDataSetChanged();
+								}
+							}
+						}
+					});
 				} else if (itemId == R.string.layer_hillshade) {
 					HILLSHADE.set(!HILLSHADE.get());
 					adapter.getItem(position).setColorRes(HILLSHADE.get() ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
@@ -146,21 +168,17 @@ public class SRTMPlugin extends OsmandPlugin {
 			}
 		};
 
-		//app.getSettings().CONTOUR_LINES_ZOOM.set(null);
 		RenderingRuleProperty contourLinesProp = app.getRendererRegistry().getCustomRenderingRuleProperty(CONTOUR_LINES_ATTR);
 		if (contourLinesProp != null) {
 			final OsmandSettings.CommonPreference<String> pref =
 					app.getSettings().getCustomRenderProperty(contourLinesProp.getAttrName());
-			String descr;
 			boolean contourLinesSelected;
 			if (!Algorithms.isEmpty(pref.get())) {
-				descr = SettingsActivity.getStringPropertyValue(mapActivity, pref.get());
 				contourLinesSelected = !pref.get().equals(CONTOUR_LINES_DISABLED_VALUE);
 			} else {
-				descr = SettingsActivity.getStringPropertyValue(
-						mapActivity, contourLinesProp.getDefaultValueDescription());
 				contourLinesSelected = !contourLinesProp.getDefaultValueDescription().equals(CONTOUR_LINES_DISABLED_VALUE);
 			}
+			String descr = getPrefDescription(app, contourLinesProp, pref);
 			adapter.addItem(new ContextMenuItem.ItemBuilder()
 					.setTitleId(R.string.srtm_plugin_name, mapActivity)
 					.setSelected(contourLinesSelected)
@@ -180,9 +198,9 @@ public class SRTMPlugin extends OsmandPlugin {
 				.createItem());
 	}
 
-	private void toggleContourLines(final MapActivity activity,
-									final ArrayAdapter<ContextMenuItem> adapter, final int itemId,
-									final int pos, final boolean isChecked) {
+	public void toggleContourLines(final MapActivity activity,
+								   final boolean isChecked,
+								   final Runnable callback) {
 		RenderingRuleProperty contourLinesProp = app.getRendererRegistry().getCustomRenderingRuleProperty(CONTOUR_LINES_ATTR);
 		if (contourLinesProp != null) {
 			OsmandSettings settings = app.getSettings();
@@ -192,35 +210,35 @@ public class SRTMPlugin extends OsmandPlugin {
 			if (!isChecked) {
 				zoomSetting.set(pref.get());
 				pref.set(CONTOUR_LINES_DISABLED_VALUE);
-				ContextMenuItem item = adapter.getItem(pos);
-				if (item != null) {
-					item.setDescription(app.getString(R.string.display_zoom_level,
-							SettingsActivity.getStringPropertyValue(app, pref.get())));
-					item.setColorRes(ContextMenuItem.INVALID_ID);
+				if (callback != null) {
+					callback.run();
 				}
-			} else if (!Algorithms.isEmpty(zoomSetting.get())) {
+			} else if (zoomSetting.get() != null && !zoomSetting.get().equals(CONTOUR_LINES_DISABLED_VALUE)) {
 				pref.set(zoomSetting.get());
-				ContextMenuItem item = adapter.getItem(pos);
-				if (item != null) {
-					item.setDescription(app.getString(R.string.display_zoom_level,
-							SettingsActivity.getStringPropertyValue(app, pref.get())));
-					item.setColorRes(R.color.osmand_orange);
+				if (callback != null) {
+					callback.run();
 				}
 			} else {
-				selectZoomLevel(activity, adapter, contourLinesProp, pref, pos);
+				selectPropertyValue(activity, contourLinesProp, pref, callback);
 			}
 		}
 	}
 
-	private void selectZoomLevel(final MapActivity activity,
-								 final ArrayAdapter<ContextMenuItem> adapter,
-								 final RenderingRuleProperty p,
-								 final OsmandSettings.CommonPreference<String> pref,
-								 final int pos) {
+	public String getPrefDescription(final Context ctx, final RenderingRuleProperty p, final OsmandSettings.CommonPreference<String> pref) {
+		if (!Algorithms.isEmpty(pref.get())) {
+			return SettingsActivity.getStringPropertyValue(ctx, pref.get());
+		} else {
+			return SettingsActivity.getStringPropertyValue(ctx, p.getDefaultValueDescription());
+		}
+	}
+
+	public void selectPropertyValue(final MapActivity activity,
+									 final RenderingRuleProperty p,
+									 final OsmandSettings.CommonPreference<String> pref,
+									 final Runnable callback) {
 		final String propertyDescr = SettingsActivity.getStringPropertyDescription(activity,
 				p.getAttrName(), p.getName());
 		AlertDialog.Builder b = new AlertDialog.Builder(activity);
-		// test old descr as title
 		b.setTitle(propertyDescr);
 
 		List<String> possibleValuesList = new ArrayList<>(Arrays.asList(p.getPossibleValues()));
@@ -259,20 +277,9 @@ public class SRTMPlugin extends OsmandPlugin {
 		b.setOnDismissListener(new DialogInterface.OnDismissListener() {
 			@Override
 			public void onDismiss(DialogInterface dialog) {
-				ContextMenuItem item = adapter.getItem(pos);
-				if (item != null) {
-					String description = activity.getString(R.string.display_zoom_level,
-							SettingsActivity.getStringPropertyValue(activity, pref.get()));
-					item.setDescription(description);
-					if (pref.get().equals(CONTOUR_LINES_DISABLED_VALUE)) {
-						item.setSelected(false);
-						item.setColorRes(ContextMenuItem.INVALID_ID);
-					} else {
-						item.setSelected(true);
-						item.setColorRes(R.color.osmand_orange);
-					}
+				if (callback != null) {
+					callback.run();
 				}
-				adapter.notifyDataSetChanged();
 			}
 		});
 		b.show();

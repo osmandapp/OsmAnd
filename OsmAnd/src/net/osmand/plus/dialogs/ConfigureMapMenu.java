@@ -47,6 +47,7 @@ import net.osmand.plus.openseamapsplugin.NauticalMapsPlugin;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.render.RendererRegistry;
+import net.osmand.plus.srtmplugin.SRTMPlugin;
 import net.osmand.plus.views.GPXLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.RouteLayer;
@@ -472,6 +473,13 @@ public class ConfigureMapMenu {
 
 		OsmandPlugin.registerLayerContextMenu(activity.getMapView(), adapter, activity);
 		app.getAppCustomization().prepareLayerContextMenu(activity, adapter);
+		boolean srtmDisabled = OsmandPlugin.getEnabledPlugin(SRTMPlugin.class) == null;
+		if (srtmDisabled) {
+			SRTMPlugin srtmPlugin = OsmandPlugin.getPlugin(SRTMPlugin.class);
+			if (srtmPlugin != null) {
+				srtmPlugin.registerLayerContextMenuActions(activity.getMapView(), adapter, activity);
+			}
+		}
 	}
 
 	public static void refreshMapComplete(final MapActivity activity) {
