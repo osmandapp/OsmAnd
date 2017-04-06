@@ -183,6 +183,7 @@ public class DashTrackFragment extends DashBaseFragment {
 
 	public static void createCurrentTrackView(View v, final OsmandApplication app) {
 		((TextView) v.findViewById(R.id.name)).setText(R.string.shared_string_currently_recording_track);
+		v.findViewById(R.id.icon).setVisibility(View.GONE);
 		v.findViewById(R.id.time_icon).setVisibility(View.GONE);
 		v.findViewById(R.id.divider_dash).setVisibility(View.GONE);
 		v.findViewById(R.id.divider_list).setVisibility(View.GONE);
