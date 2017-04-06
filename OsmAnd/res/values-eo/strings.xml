@@ -736,7 +736,7 @@ Registritaj kursoj povas esti kunhavigitaj kun viaj amikoj aŭ esti uzita por ko
     <string name="rendering_attr_hideNonVehicleHighways_name">Vojoj ne por aŭtoj</string>
     <string name="rendering_attr_hideText_name">Priskriboj</string>
     <string name="rendering_attr_hideWoodScrubs_name">Arboj kaj arbustaĵoj</string>
-    <string name="rendering_attr_buildings15zoom_name">Konstruaĵoj ĉe pligrandigo 15</string>
+    <string name="rendering_attr_buildings15zoom_name">Konstruaĵoj ĉe skal-nivelo 15</string>
     <string name="rendering_attr_moreDetailed_name">Pli detaloj</string>
     <string name="rendering_attr_lessDetailed_name">Malpli detaloj</string>
     <string name="rendering_attr_hideAccess_name">Aliraj baroj</string>
@@ -1248,8 +1248,8 @@ Premtenu por vidi sur la mapo</string>
     <string name="use_compass_navigation">Uzi kompason</string>
     <string name="use_compass_navigation_descr">Uzas kompason, nur kiam nenia direkto estas legebla</string>
     <string name="avoid_motorway">Eviti aŭtovojojn</string>
-    <string name="auto_zoom_map">Aŭtomate skaladi mapon</string>
-    <string name="auto_zoom_map_descr">Aŭtomate skaladas mapon depende de via rapido (ĝis kiam mapo estas samtempigita kun aktuala pozicio)</string>
+    <string name="auto_zoom_map">Aŭtomate skali mapon</string>
+    <string name="auto_zoom_map_descr">Aŭtomate skalas mapon depende de via rapido (ĝis kiam mapo estas samtempigita kun aktuala pozicio)</string>
     <string name="snap_to_road_descr">Proksimumigas pozicion al vojo dum navigado</string>
     <string name="snap_to_road">Proksimumigi al vojo</string>
     <string name="interrupt_music">Paŭzigi muzikon</string>
@@ -1373,7 +1373,7 @@ Proporcia memoro %4$s MB (Limito de Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="rendering_attr_appMode_name">Desegnata reĝimo</string>
     <string name="rendering_attr_appMode_description">Plejbonigas mapon por</string>
     <string name="rendering_attr_contourLines_name">Montri nivelkurbojn</string>
-    <string name="rendering_attr_contourLines_description">Montras de skal-nivelo (postulas datumojn de nivelkurboj):</string>
+    <string name="rendering_attr_contourLines_description">Vidigi de skal-nivelo (postulas datumojn de nivelkurboj):</string>
     <string name="rendering_attr_hmRendered_description">Pliigas nombron de detaloj montrataj sur mapo</string>
     <string name="rendering_attr_hmRendered_name">Montri pli map-detalojn</string>
     <string name="local_index_routing_data">Voj-difinaj datumoj</string>
@@ -1926,7 +1926,7 @@ Kaj la loko kaj tempo estas montrataj ĉe la OsmAnd stirpanelo, kaj ĉe la fenes
     <string name="update_poi_error_local">Eraro dum ĝisdatigado de loka listo de interesejoj</string>
     <string name="update_poi_error_loading">Eraro dum ŝargado de datumoj el servilo</string>
     <string name="update_poi_no_offline_poi_index">Neniaj eksterretaj datumoj de interesejoj por tiu ĉi areo</string>
-    <string name="update_poi_is_not_available_for_zoom">Ĝisdatigo de interesejoj neebla por malgrandaj skaladoj</string>
+    <string name="update_poi_is_not_available_for_zoom">Ĝisdatigo de interesejoj neebla por malgrandaj skaloj</string>
     <string name="context_menu_item_update_poi">Ĝisdatigi interesejojn</string>
     <string name="context_menu_item_update_map_confirm">Ĉu ĝisdatigi lokajn datumojn per Interreto?</string>
     <string name="uploading_data">Alŝutado de datumoj…</string>
@@ -1934,7 +1934,7 @@ Kaj la loko kaj tempo estas montrataj ĉe la OsmAnd stirpanelo, kaj ĉe la fenes
     <string name="search_osm_nominatim">Serĉi enrete per OSM Nominatim</string>
     <string name="hint_search_online">Serĉi enrete: domnumero, strato, urbo</string>
     <string name="max_level_download_tile">Maks. enreta pligrandigo</string>
-    <string name="max_level_download_tile_descr">Elektu maksimuman skal-nivelo por elŝuti enretajn kahelajn mapojn</string>
+    <string name="max_level_download_tile_descr">Elektu maksimuman skal-nivelon por elŝuti enretajn kahelajn mapojn</string>
     <string name="route_general_information">Tuta distanco %1$s, vojaĝ-tempo %2$d h %3$d min.</string>
     <string name="router_service">Navigada servo</string>
     <string name="router_service_descr">Elektu enretan aŭ eksterretan servon por navigado</string>
@@ -2881,10 +2881,10 @@ De Afganujo al Zimbabvo, de Aŭstralio al Usono, Argentino, Brazilo, Kanado, Fra
     <string name="no_underlay">Neniu subtavolo</string>
     <string name="subscribe_email_error">Eraro</string>
     <string name="subscribe_email_desc">Abonu nian dissendoliston pri rabatoj de aplikaĵo kaj havigu 3 pliajn map-elŝutojn!</string>
-    <string name="quick_action_auto_zoom">Aŭtomata map-pligrandigo ek/for</string>
-    <string name="quick_action_auto_zoom_desc">Premado sur la ag-butono aŭtomate aktivigos/malaktivigos map-pligrandigon laŭ via rapido.</string>
-    <string name="quick_action_auto_zoom_on">Aŭtomata map-pligrandigo ek</string>
-    <string name="quick_action_auto_zoom_off">Aŭtomata map-pligrandigo for</string>
+    <string name="quick_action_auto_zoom">Aŭtomata map-skalado ek/for</string>
+    <string name="quick_action_auto_zoom_desc">Premado sur la ag-butono aŭtomate aktivigos/malaktivigos map-skaladon laŭ via rapido.</string>
+    <string name="quick_action_auto_zoom_on">Aŭtomata map-skalado ek</string>
+    <string name="quick_action_auto_zoom_off">Aŭtomata map-skalado for</string>
     <string name="shared_string_paused">Paŭzigita</string>
     <string name="type_city_town">Entajpu urbon</string>
     <string name="type_postcode">Entajpu poŝtkodon</string>
@@ -2901,10 +2901,10 @@ De Afganujo al Zimbabvo, de Aŭstralio al Usono, Argentino, Brazilo, Kanado, Fra
     <string name="change_color">Ŝanĝi koloron</string>
     <string name="edit_name">Redakti nomon</string>
     <string name="srtm_color_scheme">Kolor-skemo</string>
-    <string name="show_from_zoom_level">Vidigi de pligrandiga nivelo</string>
+    <string name="show_from_zoom_level">Vidigi de skal-nivelo</string>
     <string name="routing_attr_allow_private_name">Permesi privatan aliron</string>
     <string name="routing_attr_allow_private_name_description">Permesas aliron al privataj areoj</string>
-    <string name="display_zoom_level">Montrada pligrandig-nivelo: %1$s</string>
+    <string name="display_zoom_level">Vidigi de skal-nivelo: %1$s</string>
     <string name="route_is_too_long_v2">Tiu ĉi kurso povas esti tro longa por kalkuli. Bonvolu aldoni intercelojn, se neniu rezulto estos trovita post 10 minutoj.</string>
     <string name="save_poi_too_many_uppercase">Nomo enhavas tro multe da grandaj literoj? Ĉu vi volas pluigi?</string>
     <string name="srtm_menu_download_descr">Por vidi nivelkurbojn sur la mapo, vi devas elŝuti nivelkurban mapon por tiu ĉi regiono.</string>
@@ -2912,5 +2912,5 @@ De Afganujo al Zimbabvo, de Aŭstralio al Usono, Argentino, Brazilo, Kanado, Fra
     <string name="srtm_purchase_header">Por vidi nivelkurbojn sur la mapo, vi devas aĉeti kaj instali la kromprogramon</string>
     <string name="hillshade_menu_download_descr">Por vidi nivel-ombrumon sub la mapo, vi devas elŝuti specialan mapon por tiu ĉi regiono.</string>
     <string name="hillshade_purchase_header">Por vidi nivel-ombrumon sub la mapo, vi devas aĉeti kaj instali kromprogramon</string>
-    <string name="hide_from_zoom_level">Kaŝi de pligrandiga nivelo</string>
+    <string name="hide_from_zoom_level">Kaŝi de skal-nivelo</string>
     </resources>
