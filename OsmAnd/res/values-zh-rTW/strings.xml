@@ -226,7 +226,7 @@
     <string name="online_map_settings_descr">組態線上或暫存的地圖圖磚來源</string>
 	
 	
-	<string name="osmand_rastermaps_plugin_description">"有了這個外掛元件，您可以存取多種類型的網上（所謂的圖磚或網格）地圖，從預設的 OpenStreetMap 圖磚（如 Mapnik）到衛星圖像和特殊用途的圖層，比如天氣地圖、氣候地圖、地質地圖、山體陰影層等。
+	<string name="osmand_rastermaps_plugin_description">"有了這個外掛元件，您可以存取多種類型的網上（所謂的圖磚或網格）地圖，從預設的 OpenStreetMap 圖磚（如 Mapnik）到衛星圖像和特殊用途的圖層，比如天氣地圖、氣候地圖、地質地圖、地形陰影層等。
 
 這些地圖可以被用來作為主要的（基本）地圖，以便在 OsmAnd 地圖螢幕上顯示，或作為上層又或另外基本地圖的底層（如 OsmAnd 標準的離線地圖）。為了使任何的底層地圖可以看見，OsmAnd 向量地圖可以容易的根據需要透過 \'組態地圖\' 選單來隱藏某些構成。
 
@@ -1218,13 +1218,13 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="files_limit">剩餘 %1$d 個檔</string>
     <string name="layer_recordings">記錄層</string>
     <string name="intermediate_items_sort_return">在目前的位置到達目的地之間的路途上，沿路的中轉地點已採取了最佳化排列。</string>
-    <string name="osmand_srtm_long_description_1000_chars">"這個外掛元件同時提供了等高線上層和（地貌）山體陰影層，顯示在 OsmAnd 標準地圖的頂部。此功能會讓運動選手、健行旅遊者、背包客，和任何感興趣的人對起伏的地貌結構大加讚賞。
+    <string name="osmand_srtm_long_description_1000_chars">"這個外掛元件同時提供了等高線上層和（地貌）地形陰影層，顯示在 OsmAnd 標準地圖的頂部。此功能會讓運動選手、健行旅遊者、背包客，和任何感興趣的人對起伏的地貌結構大加讚賞。
 
 
 全球圖資（在北緯 70 度至南緯 70 度之間）的量測基礎在於 SRTM (Shuttle Radar Topography Mission)和 ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer)，安裝在美國太空總署地球觀測系統的旗艦衛星 Terra 上的遙測儀器，ASTER 是美國太空總署、日本經濟產業省(METI)、日本太空系統 (J-spacesystems)之間的通力合作產物。
  "</string>
     <string name="audionotes_location_not_defined">以位置去關聯的附註尚未下定義。\"使用位置 …\"，把註解分配給指定的位置。</string>
-    <string name="srtm_plugin_description">"這個外掛元件同時提供了等高線上層和（地貌）山體陰影層，顯示在 OsmAnd 標準地圖的頂部。此功能會讓運動選手、健行旅遊者、背包客，和任何感興趣的人對起伏的地貌結構大加讚賞。（請注意，等高線和地貌資料是各自獨立的，在外掛元件啟用後可以追加下載。）
+    <string name="srtm_plugin_description">"這個外掛元件同時提供了等高線上層和（地貌）地形陰影層，顯示在 OsmAnd 標準地圖的頂部。此功能會讓運動選手、健行旅遊者、背包客，和任何感興趣的人對起伏的地貌結構大加讚賞。（請注意，等高線和地貌資料是各自獨立的，在外掛元件啟用後可以追加下載。）
 
 
 全球圖資（在 70 度以北和 70 度以南之間）的量測基礎在於 SRTM（Shuttle Radar Topography Mission）和 ASTER（Advanced Spaceborne Thermal Emission and Reflection Radiometer），安裝在美國太空總署地球觀測系統的旗艦衛星 Terra 上的遙測儀器，ASTER 是美國太空總署、日本經濟產業省（METI）、日本太空系統（J-spacesystems）之間的通力合作的產物。
