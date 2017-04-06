@@ -70,7 +70,7 @@ public class GpxImportHelper {
 	public boolean handleGpxImport(final Uri contentUri, final boolean useImportDir) {
 		final String name = getNameFromContentUri(contentUri);
 		final boolean isOsmandSubdir = isSubDirectory(app.getAppPath(IndexConstants.GPX_INDEX_DIR), new File(contentUri.getPath()));
-		if (!isOsmandSubdir && name.endsWith(GPX_SUFFIX)) {
+		if (!isOsmandSubdir && name != null && name.endsWith(GPX_SUFFIX)) {
 			handleGpxImport(contentUri, name, true, useImportDir);
 			return true;
 		}
@@ -85,12 +85,7 @@ public class GpxImportHelper {
 
 		if (fileName != null && fileName.endsWith(KML_SUFFIX)) {
 			handleKmlImport(intentUri, fileName, saveFile, useImportDir);
-//Issue 2275
-//		} else if (fileName != null && (fileName.contains("favourite")|| 
-//				fileName.contains("favorite"))) {
-//			handleFavouritesImport(intentUri, fileName, saveFile);
 		} else {
-//			handleGpxImport(intentUri, fileName, saveFile);
 			handleFavouritesImport(intentUri, fileName, saveFile, useImportDir);
 		}
 	}
@@ -99,7 +94,12 @@ public class GpxImportHelper {
 		final String name;
 		final Cursor returnCursor = app.getContentResolver().query(contentUri, null, null, null, null);
 		if (returnCursor != null && returnCursor.moveToFirst()) {
-			name = returnCursor.getString(returnCursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
+			int columnIndex = returnCursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
+			if (columnIndex != -1) {
+				name = returnCursor.getString(columnIndex);
+			} else {
+				name = contentUri.getLastPathSegment();
+			}
 		} else {
 			name = null;
 		}
