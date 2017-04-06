@@ -34,6 +34,8 @@ public class SRTMPlugin extends OsmandPlugin {
 	public static final String CONTOUR_LINES_ATTR = "contourLines";
 	public static final String CONTOUR_LINES_SCHEME_ATTR = "contourColorScheme";
 	public static final String CONTOUR_LINES_DISABLED_VALUE = "disabled";
+	public static final String CONTOUR_WIDTH_ATTR = "contourWidth";
+	public static final String CONTOUR_DENSITY_ATTR = "contourDensity";
 
 	private OsmandApplication app;
 	private boolean paid;

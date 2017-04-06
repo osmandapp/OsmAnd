@@ -73,8 +73,10 @@ import java.util.Map;
 
 import gnu.trove.list.array.TIntArrayList;
 
+import static net.osmand.plus.srtmplugin.SRTMPlugin.CONTOUR_DENSITY_ATTR;
 import static net.osmand.plus.srtmplugin.SRTMPlugin.CONTOUR_LINES_ATTR;
 import static net.osmand.plus.srtmplugin.SRTMPlugin.CONTOUR_LINES_SCHEME_ATTR;
+import static net.osmand.plus.srtmplugin.SRTMPlugin.CONTOUR_WIDTH_ATTR;
 
 public class ConfigureMapMenu {
 	private static final Log LOG = PlatformUtil.getLog(ConfigureMapMenu.class);
@@ -1158,38 +1160,34 @@ public class ConfigureMapMenu {
 		return scale + " %";
 	}
 
+	private boolean isPropertyAccepted(RenderingRuleProperty p) {
+		return !(p.getAttrName().equals(RenderingRuleStorageProperties.A_APP_MODE) ||
+				p.getAttrName().equals(RenderingRuleStorageProperties.A_ENGINE_V1) ||
+				p.getAttrName().equals(HIKING_ROUTES_OSMC_ATTR) ||
+				p.getAttrName().equals(ROAD_STYLE_ATTR) ||
+				p.getAttrName().equals(CONTOUR_WIDTH_ATTR) ||
+				p.getAttrName().equals(CONTOUR_DENSITY_ATTR) ||
+				p.getAttrName().equals(CONTOUR_LINES_ATTR) ||
+				p.getAttrName().equals(CONTOUR_LINES_SCHEME_ATTR) ||
+				p.getAttrName().equals(CURRENT_TRACK_COLOR_ATTR) ||
+				p.getAttrName().equals(CURRENT_TRACK_WIDTH_ATTR));
+	}
 
 	private void createCustomRenderingProperties(final ContextMenuAdapter adapter, final MapActivity activity,
 												 List<RenderingRuleProperty> customRules) {
 		for (final RenderingRuleProperty p : customRules) {
-			if (p.getAttrName().equals(RenderingRuleStorageProperties.A_APP_MODE) ||
-					p.getAttrName().equals(RenderingRuleStorageProperties.A_ENGINE_V1) ||
-					p.getAttrName().equals(HIKING_ROUTES_OSMC_ATTR) ||
-					p.getAttrName().equals(ROAD_STYLE_ATTR) ||
-					p.getAttrName().equals(CONTOUR_LINES_ATTR) ||
-					p.getAttrName().equals(CONTOUR_LINES_SCHEME_ATTR) ||
-					p.getAttrName().equals(CURRENT_TRACK_COLOR_ATTR) ||
-					p.getAttrName().equals(CURRENT_TRACK_WIDTH_ATTR)) {
-				continue;
+			if (isPropertyAccepted(p)) {
+				adapter.addItem(createRenderingProperty(adapter, activity, 0, p));
 			}
-			adapter.addItem(createRenderingProperty(adapter, activity, 0, p));
 		}
 	}
 
 	private int getCustomRenderingPropertiesSize(List<RenderingRuleProperty> customRules) {
 		int size = 0;
 		for (final RenderingRuleProperty p : customRules) {
-			if (p.getAttrName().equals(RenderingRuleStorageProperties.A_APP_MODE) ||
-					p.getAttrName().equals(RenderingRuleStorageProperties.A_ENGINE_V1) ||
-					p.getAttrName().equals(HIKING_ROUTES_OSMC_ATTR) ||
-					p.getAttrName().equals(ROAD_STYLE_ATTR) ||
-					p.getAttrName().equals(CONTOUR_LINES_ATTR) ||
-					p.getAttrName().equals(CONTOUR_LINES_SCHEME_ATTR) ||
-					p.getAttrName().equals(CURRENT_TRACK_COLOR_ATTR) ||
-					p.getAttrName().equals(CURRENT_TRACK_WIDTH_ATTR)) {
-				continue;
+			if (isPropertyAccepted(p)) {
+				size++;
 			}
-			size++;
 		}
 		return size;
 	}

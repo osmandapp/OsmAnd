@@ -17,6 +17,7 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.PluginActivity;
+import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadValidationManager;
@@ -31,9 +32,11 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import static net.osmand.plus.srtmplugin.SRTMPlugin.CONTOUR_DENSITY_ATTR;
 import static net.osmand.plus.srtmplugin.SRTMPlugin.CONTOUR_LINES_ATTR;
 import static net.osmand.plus.srtmplugin.SRTMPlugin.CONTOUR_LINES_DISABLED_VALUE;
 import static net.osmand.plus.srtmplugin.SRTMPlugin.CONTOUR_LINES_SCHEME_ATTR;
+import static net.osmand.plus.srtmplugin.SRTMPlugin.CONTOUR_WIDTH_ATTR;
 
 public class ContourLinesMenu {
 	private static final String TAG = "ContourLinesMenu";
@@ -61,6 +64,30 @@ public class ContourLinesMenu {
 		if (plugin == null || contourLinesProp == null || colorSchemeProp == null) {
 			return;
 		}
+
+		final String contourWidthName;
+		final String contourDensityName;
+		final OsmandSettings.CommonPreference<String> widthPref;
+		final OsmandSettings.CommonPreference<String> densityPref;
+		final RenderingRuleProperty contourWidthProp = app.getRendererRegistry().getCustomRenderingRuleProperty(CONTOUR_WIDTH_ATTR);
+		if (contourWidthProp != null) {
+			contourWidthName = SettingsActivity.getStringPropertyName(app, contourWidthProp.getAttrName(),
+					contourWidthProp.getName());
+			widthPref = settings.getCustomRenderProperty(contourWidthProp.getAttrName());
+		} else {
+			contourWidthName = null;
+			widthPref = null;
+		}
+		final RenderingRuleProperty contourDensityProp = app.getRendererRegistry().getCustomRenderingRuleProperty(CONTOUR_DENSITY_ATTR);
+		if (contourDensityProp != null) {
+			contourDensityName = SettingsActivity.getStringPropertyName(app, contourDensityProp.getAttrName(),
+					contourDensityProp.getName());
+			densityPref = settings.getCustomRenderProperty(contourDensityProp.getAttrName());
+		} else {
+			contourDensityName = null;
+			densityPref = null;
+		}
+
 		final OsmandSettings.CommonPreference<String> pref = settings.getCustomRenderProperty(contourLinesProp.getAttrName());
 		final OsmandSettings.CommonPreference<String> colorPref = settings.getCustomRenderProperty(colorSchemeProp.getAttrName());
 
@@ -68,6 +95,7 @@ public class ContourLinesMenu {
 		final int toggleActionStringId = selected ? R.string.shared_string_enabled : R.string.shared_string_disabled;
 		final int showZoomLevelStringId = R.string.show_from_zoom_level;
 		final int colorSchemeStringId = R.string.srtm_color_scheme;
+
 		ContextMenuAdapter.OnRowItemClick l = new ContextMenuAdapter.OnRowItemClick() {
 			@Override
 			public boolean onRowItemClick(ArrayAdapter<ContextMenuItem> adapter,
@@ -127,6 +155,30 @@ public class ContourLinesMenu {
 					intent.putExtra(PluginActivity.EXTRA_PLUGIN_ID, plugin.getId());
 					mapActivity.startActivity(intent);
 					closeDashboard(mapActivity);
+				} else if (contourWidthProp != null && itemId == contourWidthName.hashCode()) {
+					plugin.selectPropertyValue(mapActivity, contourWidthProp, widthPref, new Runnable() {
+						@Override
+						public void run() {
+							ContextMenuItem item = adapter.getItem(pos);
+							if (item != null) {
+								item.setDescription(plugin.getPrefDescription(app, contourWidthProp, widthPref));
+								adapter.notifyDataSetChanged();
+							}
+							refreshMapComplete(mapActivity);
+						}
+					});
+				} else if (contourDensityProp != null && itemId == contourDensityName.hashCode()) {
+					plugin.selectPropertyValue(mapActivity, contourDensityProp, densityPref, new Runnable() {
+						@Override
+						public void run() {
+							ContextMenuItem item = adapter.getItem(pos);
+							if (item != null) {
+								item.setDescription(plugin.getPrefDescription(app, contourDensityProp, densityPref));
+								adapter.notifyDataSetChanged();
+							}
+							refreshMapComplete(mapActivity);
+						}
+					});
 				}
 				return false;
 			}
@@ -162,6 +214,22 @@ public class ContourLinesMenu {
 					.setIcon(R.drawable.ic_action_appearance)
 					.setDescription(plugin.getPrefDescription(app, colorSchemeProp, colorPref))
 					.setListener(l).createItem());
+			if (contourWidthProp != null) {
+				contextMenuAdapter.addItem(new ContextMenuItem.ItemBuilder()
+						.setTitle(contourWidthName)
+						.setLayout(R.layout.list_item_single_line_descrition_narrow)
+						.setIcon(R.drawable.ic_action_gpx_width_thin)
+						.setDescription(plugin.getPrefDescription(app, contourWidthProp, widthPref))
+						.setListener(l).createItem());
+			}
+			if (contourDensityProp != null) {
+				contextMenuAdapter.addItem(new ContextMenuItem.ItemBuilder()
+						.setTitle(contourDensityName)
+						.setLayout(R.layout.list_item_single_line_descrition_narrow)
+						.setIcon(R.drawable.ic_plugin_srtm)
+						.setDescription(plugin.getPrefDescription(app, contourDensityProp, densityPref))
+						.setListener(l).createItem());
+			}
 		}
 
 		if (!srtmEnabled) {
