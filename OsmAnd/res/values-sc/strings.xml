@@ -3036,4 +3036,10 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="show_from_zoom_level">Ammustra dae su livellu de ismanniamentu</string>
     <string name="routing_attr_allow_private_name">Permiti s\'atzessu privadu</string>
     <string name="routing_attr_allow_private_name_description">Permiti s\'atzessu a sas àreas privadas</string>
+    <string name="hillshade_menu_download_descr">Pro bìdere sas umbraduras de sos rilievos in sa mapa depes iscarrigare una mapa ispetziale de custa regione.</string>
+    <string name="hillshade_purchase_header">Pro bìdere sas umbraduras de sos rilievos in sa mapa depes comporare e installare s\'estensione</string>
+    <string name="hide_from_zoom_level">Cua dae su livellu de ismanniamentu</string>
+    <string name="srtm_menu_download_descr">Pro bìdere sas lìnias de livellu in sa mapa depes iscarrigare sa mapa de sas curvas de livellu de custa regione.</string>
+    <string name="shared_string_plugin">Estensione</string>
+    <string name="srtm_purchase_header">Pro bìdere sas curvas de livellu in sa mapa depes comporare e installare s\'estensione</string>
     </resources>
