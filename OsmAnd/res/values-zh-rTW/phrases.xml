@@ -2619,4 +2619,6 @@
 	<string name="poi_health_specialty_ophthalmology_yes">眼科</string>
 	<string name="poi_health_specialty_gynaecology_yes">婦科</string>
 	<string name="poi_health_specialty_internal_medicine_yes">內科</string>
+	<string name="poi_health_specialty_cardiology_yes">心臟病學</string>
+	<string name="poi_health_specialty_trauma_yes">創傷科</string>
 	</resources>
