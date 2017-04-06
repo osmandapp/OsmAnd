@@ -2868,4 +2868,7 @@ Algunas de las principales funciones:
     <string name="srtm_menu_download_descr">Para ver las curvas de nivel en el mapa, debes descargar el mapa de curvas de nivel de esta región.</string>
     <string name="shared_string_plugin">Complemento</string>
     <string name="srtm_purchase_header">Para ver las curvas de nivel en el mapa, debes comprar e instalar el complemento</string>
+    <string name="hillshade_menu_download_descr">Para ver el sombreado en el mapa, debes descargar el mapa especial de esta región.</string>
+    <string name="hillshade_purchase_header">Para ver el sombreado en el mapa, debes comprar e instalar el complemento</string>
+    <string name="hide_from_zoom_level">Ocultar desde el nivel de ampliación</string>
     </resources>
