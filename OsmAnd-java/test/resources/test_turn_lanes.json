@@ -612,6 +612,20 @@
     "expectedResults": {
       "320168795": "C,TL|+TR"
     }
+  },
+  {
+    "testName": "34.Semmering-Schnellstraße TL Wiener Straße",
+    "startPoint": {
+      "latitude": 45.60877412952071,
+      "longitude": 35.41727355122569
+    },
+    "endPoint": {
+      "latitude": 45.60809863951456,
+      "longitude": 35.43970754742625
+    },
+    "expectedResults": {
+      "127297831": "C|C|+TR"
+    }
   }
 
 ]
