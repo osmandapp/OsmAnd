@@ -394,23 +394,38 @@ public class DownloadResources extends DownloadResourceGroup {
 						}
 					}
 					WorldRegion downloadRegion = regions.getRegionData(regions.getFullName(o));
-					if (downloadRegion == null || !isRegion || !regions.contain(o, point31x, point31y)) {
-						it.remove();
-					}
-					List<IndexItem> otherIndexItems = new ArrayList<>(downloadThread.getIndexes().getIndexItems(downloadRegion));
-					for (IndexItem indexItem : otherIndexItems) {
-						if (indexItem.getType() == type
-								&& !res.contains(indexItem)) {
-							if (indexItem.isDownloaded()) {
-								res.clear();
-								return res;
-							}
-							res.add(indexItem);
+					if (downloadRegion != null && isRegion && regions.contain(o, point31x, point31y)) {
+						if (!isIndexItemDownloaded(downloadThread, type, downloadRegion, res)) {
+							addIndexItem(downloadThread, type, downloadRegion, res);
 						}
 					}
 				}
 			}
 		}
 		return res;
+	}
+
+	private static boolean isIndexItemDownloaded(DownloadIndexesThread downloadThread, DownloadActivityType type, WorldRegion downloadRegion, List<IndexItem> res) {
+		List<IndexItem> otherIndexItems = new ArrayList<>(downloadThread.getIndexes().getIndexItems(downloadRegion));
+		for (IndexItem indexItem : otherIndexItems) {
+			if (indexItem.getType() == type && indexItem.isDownloaded()) {
+				return true;
+			}
+		}
+		return downloadRegion.getSuperregion() != null
+				&& isIndexItemDownloaded(downloadThread, type, downloadRegion.getSuperregion(), res);
+	}
+
+	private static boolean addIndexItem(DownloadIndexesThread downloadThread, DownloadActivityType type, WorldRegion downloadRegion, List<IndexItem> res) {
+		List<IndexItem> otherIndexItems = new ArrayList<>(downloadThread.getIndexes().getIndexItems(downloadRegion));
+		for (IndexItem indexItem : otherIndexItems) {
+			if (indexItem.getType() == type
+					&& !res.contains(indexItem)) {
+				res.add(indexItem);
+				return true;
+			}
+		}
+		return downloadRegion.getSuperregion() != null
+				&& addIndexItem(downloadThread, type, downloadRegion.getSuperregion(), res);
 	}
 }
