@@ -5,14 +5,14 @@
 
     <string name="update_poi_does_not_change_indexes">Les modifications de points d\'intérêt dans l\'application sont sans effet sur les cartes téléchargées, les modifications sont enregistrées dans un fichier.</string>
     <string name="local_openstreetmap_uploading">Transfert…</string>
-    <string name="local_openstreetmap_were_uploaded">{0} PI/Notes ont été envoyés</string>
+    <string name="local_openstreetmap_were_uploaded">{0} points d\'intérêt/notes ont été envoyés</string>
     <string name="local_openstreetmap_uploadall">Tout envoyer</string>
 
 
     <string name="local_openstreetmap_upload">Envoyer les modifications vers OSM</string>
     <string name="local_openstreetmap_delete">Supprimer la modification</string>
     <string name="local_openstreetmap_descr_title">Modification asynchrone d\'OSM :</string>
-    <string name="local_openstreetmap_settings">PI/Notes OSM enregistrés en local</string>
+    <string name="local_openstreetmap_settings">Points d\'intérêt/notes OSM enregistrés en local</string>
     <string name="local_openstreetmap_settings_descr">Afficher et gérer les points d\'intérêt/notes OSM enregistrés dans la base de données locale</string>
 
 
@@ -25,7 +25,7 @@
 
     <string name="free_version_message">La version gratuite d\'OsmAnd est limitée à %1$s téléchargements et ne gère pas les articles Wikipedia hors-ligne.</string>
     <string name="free_version_title">Version gratuite</string>
-    <string name="poi_context_menu_showdescription">Afficher description PI</string>
+    <string name="poi_context_menu_showdescription">Afficher description point d\'intérêt</string>
     <string name="index_name_north_america">Amérique du Nord</string>
     <string name="index_name_us">Amérique du Nord - États-Unis</string>
     <string name="index_name_central_america">Amérique centrale</string>
@@ -265,7 +265,7 @@ Actuellement {2} Mo sont disponibles.</string>
     <string name="amenity_type_transportation">Transport</string>
     <string name="indexing_address">Indexation de l\'adresse…</string>
     <string name="indexing_map">Indexation de la carte…</string>
-    <string name="indexing_poi">Indexation du PI…</string>
+    <string name="indexing_poi">Indexation du point d\'intérêt…</string>
     <string name="indexing_transport">Indexation des transports…</string>
     <string name="shared_string_io_error">Erreur d\'entrée/sortie</string>
     <string name="km">km</string>
@@ -273,7 +273,7 @@ Actuellement {2} Mo sont disponibles.</string>
     <string name="m">m</string>
     <string name="old_map_index_is_not_supported">Le format obsolète de la carte \'\'{0}\'\' n\'\'est pas supporté</string>
     <string name="poi_filter_car_aid">Pour conducteurs</string>
-    <string name="poi_filter_closest_poi">Points d\'intérêt (PI) à proximité</string>
+    <string name="poi_filter_closest_poi">Points d\'intérêt à proximité</string>
     <string name="poi_filter_custom_filter">Filtre personnalisé</string>
     <string name="poi_filter_food_shop">Alimentation</string>
     <string name="poi_filter_for_tourists">Pour voyageurs</string>
@@ -326,8 +326,8 @@ Actuellement {2} Mo sont disponibles.</string>
     <string name="renderer_load_exception">Erreur : le moteur de rendu n\'est pas chargé</string>
     <string name="renderers">Affichage vectoriel</string>
     <string name="renderers_descr">Sélectionnez le style d\'affichage</string>
-    <string name="poi_context_menu_website">Afficher le site web du PI</string>
-    <string name="poi_context_menu_call">Afficher le numéro téléphone du PI</string>
+    <string name="poi_context_menu_website">Afficher le site web du point d\'intérêt</string>
+    <string name="poi_context_menu_call">Afficher le numéro téléphone du point d\'intérêt</string>
     <string name="website">Site web</string>
     <string name="phone">Téléphone</string>
     <string name="download_type_to_filter">Filtre</string>
@@ -368,7 +368,7 @@ Actuellement {2} Mo sont disponibles.</string>
     <string name="error_occurred_loading_gpx">Erreur lors du chargement du fichier GPX</string>
     <string name="send_report">Envoyer le rapport</string>
     <string name="none_region_found">Aucune région trouvée sur la carte SD. Essayez d\'en télécharger une d\'internet.</string>
-    <string name="poi_namefinder_query_empty">Paramètres de recherche pour trouver le PI</string>
+    <string name="poi_namefinder_query_empty">Paramètres de recherche pour trouver le point d\'intérêt</string>
     <string name="any_poi">Tout</string>
     
     <string name="thanks_yandex_traffic">Merci à Yandex de fournir des informations sur le trafic.</string>
@@ -427,7 +427,7 @@ Actuellement {2} Mo sont disponibles.</string>
     <string name="route_head">Avancez</string>
     <string name="first_time_continue">Continuer</string>
     <string name="first_time_download">Téléchargement des régions</string>
-    <string name="first_time_msg">Merci d\'avoir choisi OsmAnd. La plupart des fonctionnalités de l\'application nécessitent des données régionales, utilisables hors-ligne, que vous pouvez au préalable télécharger (\'Paramètres\' → \'Données hors-ligne\') ou préparer vous-même. Ces données permettront de visualiser les cartes et de rechercher une adresse, un point d\'intérêt (PI) ou un transport public.</string>
+    <string name="first_time_msg">Merci d\'avoir choisi OsmAnd. La plupart des fonctionnalités de l\'application nécessitent des données régionales, utilisables hors-ligne, que vous pouvez au préalable télécharger (\'Paramètres\' → \'Données hors-ligne\') ou préparer vous-même. Ces données permettront de visualiser les cartes et de rechercher une adresse, un point d\'intérêt ou un transport public.</string>
     <string name="search_poi_location">Recherche d\'un signal…</string>
     <string name="search_near_map">Rechercher autour du centre de la carte</string>
     <string name="search_nearby">Rechercher à proximité</string>
@@ -454,7 +454,7 @@ Actuellement {2} Mo sont disponibles.</string>
     <string name="show_transport_over_map_description">Afficher les arrêts de transport publics sur la carte</string>
     <string name="show_transport_over_map">Afficher les arrêts de transports publics</string>
     <string name="hello">Application de navigation OsmAnd</string>
-    <string name="update_poi_success">Mise à jour des données PI réussie ({0} ont été chargés)</string>
+    <string name="update_poi_success">Mise à jour des points d\'intérêt réussie ({0} ont été chargés)</string>
     <string name="update_poi_error_local">Erreur de mise à jour des index locaux</string>
     <string name="update_poi_error_loading">Erreur lors du chargement des données du serveur</string>
     <string name="update_poi_no_offline_poi_index">Il n\'y a pas de données hors-ligne pour cette région</string>
@@ -506,7 +506,7 @@ Actuellement {2} Mo sont disponibles.</string>
     <string name="opening_changeset">Ouverture des modifications…</string>
     <string name="closing_changeset">Fermeture des modifications…</string>
     <string name="commiting_node">Envoi des nœuds…</string>
-    <string name="loading_poi_obj">Chargement des points d\'intérêts…</string>
+    <string name="loading_poi_obj">Chargement des points d\'intérêt…</string>
     <string name="auth_failed">Échec de l\\\'autorisation</string>
     <string name="failed_op">Échec</string>
     <string name="converting_names">Convertir les noms en anglais…</string>
@@ -566,7 +566,7 @@ Actuellement {2} Mo sont disponibles.</string>
     <string name="show_view_angle">Afficher l\'angle de vue</string>
     <string name="map_view_3d_descr">Activer vue 3D de la carte</string>
     <string name="map_view_3d">Vue 3D</string>
-    <string name="show_poi_over_map_description">Afficher PI sur la carte (utiliser le dernier filtre)</string>
+    <string name="show_poi_over_map_description">Afficher les points d\'intérêt sur la carte (utiliser le dernier filtre)</string>
     <string name="show_poi_over_map">Afficher point d\'intérêt</string>
     <string name="map_tile_source_descr">Sélectionnez la source des cartes dites tuiles (en ligne ou en cache)</string>
     <string name="map_tile_source">Carte en ligne (tuiles)</string>
@@ -645,9 +645,9 @@ Actuellement {2} Mo sont disponibles.</string>
     <string name="poi_create_title">Créer un point d\'intérêt</string>
     <string name="poi_error_poi_not_found">L\'objet est introuvable ou est composé de plusieurs nœuds, ce qui n\'est pas possible actuellement.</string>
     <string name="poi_remove_confirm_template">Voulez-vous vraiment supprimer {0} (inscrire commentaire) ?</string>
-    <string name="poi_remove_title">Supprimer le PI</string>
+    <string name="poi_remove_title">Supprimer le point d\'intérêt</string>
     <string name="shared_string_delete">Supprimer</string>
-    <string name="poi_remove_success">PI supprimé avec succès</string>
+    <string name="poi_remove_success">Point d\'intérêt supprimé avec succès</string>
     <string name="poi_action_add">ajouter</string>
     <string name="poi_action_change">modifier</string>
     <string name="poi_action_succeded_template">Action {0} réussie.</string>
@@ -923,9 +923,9 @@ Fonctionnalités principales :
 - Fonctionne complètement hors-ligne (après téléchargement des cartes)
 - Cartes compactes disponibles pour le monde entier
 - Téléchargement illimité des cartes pour un pays ou une région directement depuis l\'application
-- Points d\'intérêt (PI) Wikipédia hors-ligne, idéal pour les voyages touristiques
+- Points d\'intérêt Wikipédia hors-ligne, idéal pour les voyages touristiques
 - Possibilité de superposer plusieurs couches, telles que des traces, des points d\'intérêt, des favoris, des courbes de niveau, les transports public et bien d\'autres cartes (pistes de ski, chemin de randonnées, circuit à vélo, balisage maritime ...) avec une transparence personnalisable
-- Recherche hors-ligne d\'adresses et de points d\'intérêts
+- Recherche hors-ligne d\'adresses et de points d\'intérêt
 - Navigation hors-ligne sur des itinéraires de moyenne distance
 - Modes : voiture, cycliste et piéton
 - Options : vue jour/nuit automatique, zoom automatique en fonction de la vitesse, plusieurs modes d\'orientation automatique de la carte (fixe, boussole, direction), affichage des limitations de vitesse, guidage vocal par voix enregistrées ou par synthèse vocale.
@@ -2075,7 +2075,7 @@ Pour revenir à l’un des styles de carte classique de OsmAnd, désactivez simp
     <string name="shared_string_skip">Ignorer</string>
     <string name="app_name_osmand">OsmAnd</string>
     <string name="offline_maps_and_navigation">Cartes hors-ligne\n&amp; Navigation</string>
-    <string name="commit_poi">Enregistrer le PI</string>
+    <string name="commit_poi">Enregistrer le point d\'intérêt</string>
     <string name="plugin_settings">Greffons</string>
     <string name="tab_title_basic">Basique</string>
     <string name="tab_title_advanced">Étendue</string>
@@ -2200,7 +2200,7 @@ Pour revenir à l’un des styles de carte classique de OsmAnd, désactivez simp
     <string name="feedback">Sondage</string>
     <string name="contact_us">Nous contacter</string>
 
-    <string name="osm_edit_created_poi">PI créés sur OSM</string>
+    <string name="osm_edit_created_poi">Point d\'intérêt créé sur OSM</string>
     
     <string name="map_legend">Légende</string>
 <string name="shared_string_upload">Téléchargement</string>
@@ -2237,8 +2237,8 @@ Pour revenir à l’un des styles de carte classique de OsmAnd, désactivez simp
 	
     <string name="poi_dialog_reopen">Ré-ouvrir</string>
 	<string name="osm_edit_commented_note">Note OSM commentée</string>
-    <string name="osm_edit_modified_poi">PI OSM modifié</string>
-    <string name="osm_edit_deleted_poi">PI OSM supprimé</string>
+    <string name="osm_edit_modified_poi">Point d\'intérêt OSM modifié</string>
+    <string name="osm_edit_deleted_poi">Point d\'intérêt OSM supprimé</string>
     <string name="osm_save_offline">Enregistrer pour utiliser hors-ligne</string>
     <string name="rendering_attr_currentTrackColor_description">Couleur GPX</string>
     <string name="rendering_attr_currentTrackWidth_description">Largeur GPX</string>
@@ -2250,7 +2250,7 @@ Pour revenir à l’un des styles de carte classique de OsmAnd, désactivez simp
     <string name="dashboard_or_drawer_description">Nouvelle option permettant de définir le comportement du bouton Menu : lancement du Tableau de bord ou du Menu statique ? Ce paramètre peut être modifié par la suite dans les préférences.</string>
     <string name="access_from_map_description">Le bouton Menu lance le tableau de bord (plutôt que le Menu)</string>
     <string name="access_from_map">Accès depuis la carte</string>
-    <string name="please_specify_poi_type_only_from_list">Merci d\'indiquer un type pour ce PI ou d\'ignorer</string>
+    <string name="please_specify_poi_type_only_from_list">Merci d\'indiquer un type pour ce point d\'intérêt ou l\'ignorer</string>
     <string name="routing_attr_avoid_stairs_name">Éviter les escaliers</string>
 	<string name="routing_attr_avoid_borders_name">Éviter le franchissement de frontières</string>
 	<string name="routing_attr_avoid_stairs_description">Éviter les escaliers</string>
@@ -2620,8 +2620,8 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="search_hint">Saisissez une ville, une adresse ou un nom de point d\'intérêt</string>
     <string name="rendering_attr_contourColorScheme_name">Couleurs des courbes de niveau</string>
     <string name="rendering_attr_surfaceIntegrity_name">État de la route</string>
-    <string name="christmas_poi">PI de Noël</string>
-    <string name="christmas_desc">Anticipez Noël et le Nouvel An en affichant les Points d\'Intérêts associés à ces évènements de fin d\'année comme : les arbres de Noël, les marchés ...</string>
+    <string name="christmas_poi">Points d\'intérêt de Noël</string>
+    <string name="christmas_desc">Anticipez Noël et le Nouvel An en affichant les points d\'intérêt associés à ces évènements de fin d\'année comme : les arbres de Noël, les marchés ...</string>
     <string name="christmas_desc_q">Afficher les points d\'intérêt de Noël ?</string>
     <string name="rendering_attr_contourColorScheme_description">Couleurs des courbes de niveau</string>
     <string name="save_track_min_speed">Vitesse minimale pour enregistrer</string>
@@ -2640,7 +2640,7 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
  • Icônes cliquables sur la carte
 
 
- • Recherche avancée des Points d\'Intérêts (PI), exemple : recherche de restaurants par spécialité ...
+ • Recherche avancée des points d\'intérêt, exemple : recherche de restaurants par spécialité ...
 
 
  • Nouveau style OsmAnd Topo pour les cyclistes et les randonneurs
@@ -2863,7 +2863,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="osmand_extended_description_part1">"
  OsmAnd (OSM Automated Navigation Directions) est une application de visualisation de cartes et de navigation utilisant les données gratuites couvrant le monde entier du projet OpenStreetMap (OSM).
 
- Profitez d\'un guidage vocal comme visuel; Découvrez des Points d\'Intérêts (PI); Créez et gérez des traces GPX; Installez des plugins pour visualiser l\'altitude et les courbes de niveaux; Utilisez les modes Conduite, Piéton, Cycliste; Contribuez à l\'amélioration des cartes OSM et bien plus encore !
+ Profitez d\'un guidage vocal comme visuel; Découvrez des points d\'intérêt; Créez et gérez des traces GPX; Installez des plugins pour visualiser l\'altitude et les courbes de niveaux; Utilisez les modes Conduite, Piéton, Cycliste; Contribuez à l\'amélioration des cartes OSM et bien plus encore !
  "</string>
     <string name="osmand_extended_description_part4">"
  Ski
@@ -2903,13 +2903,13 @@ représentant la zone : %1$s x %2$s</string>
  Améliorez OSM
  • Signalez des erreurs sur les données
  • Envoyez des traces GPX directement depuis l\'application
- • Ajoutez des Points d\'Intérêts
+ • Ajoutez des points d\'intérêt
  • Enregistrez vos itinéraires en arrière-plan (pendant que votre appareil est en veille)
  OsmAnd est une application open source très active. Toutes les contributions sont bienvenues que ce soit en signalant des bugs, en participant à la traduction ou en développant de nouvelles fonctionnalités. Grâce aux interactions entre les utilisateurs et les développeurs l\'application est en évolution permanente. Le projet est bien sûr ouvert à toute contribution financière pour accélérer encore son développement.
  "</string>
     <string name="analyze_on_map">Analyser sur la carte</string>
     <string name="osmand_plus_extended_description_part1">"
- OsmAnd+ (OSM Automated Navigation Directions) est une application de visualisation de cartes et de navigation utilisant les données gratuites couvrant le monde entier du projet OpenStreetMap (OSM). Profitez d\'un guidage vocal comme visuel; Découvrez des Points d\'Intérêts (PI); Créez et gérez des traces GPX; Installez des plugins pour visualiser l\'altitude et les courbes de niveaux; Utilisez les modes Conduite, Piéton, Cycliste; Contribuez à l\'amélioration des cartes OSM et bien plus encore !
+ OsmAnd+ (OSM Automated Navigation Directions) est une application de visualisation de cartes et de navigation utilisant les données gratuites couvrant le monde entier du projet OpenStreetMap (OSM). Profitez d\'un guidage vocal comme visuel; Découvrez des points d\'intérêt; Créez et gérez des traces GPX; Installez des plugins pour visualiser l\'altitude et les courbes de niveaux; Utilisez les modes Conduite, Piéton, Cycliste; Contribuez à l\'amélioration des cartes OSM et bien plus encore !
 
  OsmAnd+ est la version payante de l\'application, en l\'achetant vous supportez le projet, financez le développement de nouvelles fonctionnalités, et recevez les dernières mises à jour.
 
@@ -2967,7 +2967,9 @@ Fonctionnalités principales :
     <string name="srtm_color_scheme">Couleur du thème</string>
     <string name="show_from_zoom_level">Afficher à partir du niveau de zoom</string>
     <string name="route_is_too_long_v2">Cet itinéraire risque d\'être très long à calculer. Merci d\'ajouter des points de passage intermédiaires.</string>
-    <string name="srtm_menu_download_descr">Pour afficher les courbes de niveaux sur une carte, vous devez télécharger la carte courbes de niveaux de cette région.</string>
+    <string name="srtm_menu_download_descr">Pour afficher les courbes de niveaux sur la carte, vous devez télécharger la carte courbes de niveaux de cette région.</string>
     <string name="shared_string_plugin">Greffon</string>
     <string name="srtm_purchase_header">Pour afficher les courbes de niveaux sur une carte, vous devez acheter puis installer le greffon</string>
+    <string name="hillshade_purchase_header">Pour afficher les ombrages sur la carte, vous devez acheter et installer le plugin</string>
+    <string name="hide_from_zoom_level">Masquer depuis le niveau de zoom</string>
     </resources>
