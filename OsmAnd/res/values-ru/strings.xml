@@ -1,10 +1,15 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
+    <string name="hillshade_menu_download_descr">Для того, чтобы отобразить затенение рельефа, вам нужно загрузить специальную карту для этой области</string>
+    <string name="hillshade_purchase_header">Для того, чтобы отобразить затенение рельефа, вам нужно купить и установить плагин</string>
+    <string name="srtm_menu_download_descr">Для того, чтобы отобразить линии контуров рельефа, вам нужно загрузить специальную карту для этой области</string>
+    <string name="shared_string_plugin">Плагин</string>
+    <string name="srtm_purchase_header">Для того, чтобы отобразить линии контуров рельефа, вам нужно купить и установить плагин</string>
     <string name="srtm_color_scheme">Цветовая схема</string>
     <string name="show_from_zoom_level">Отображать с масштаба</string>
     <string name="animate_my_location">Анимация моего местоположения</string>
     <string name="animate_my_location_desc">Разрешить анимацию моего местоположения на карте</string>
-    <string name="display_zoom_level">Уровень масштабирования: %1$s</string>
+    <string name="display_zoom_level">Масштаб: %1$s</string>
     <string name="favorite_group_name">Имя группы</string>
     <string name="change_color">Изменить цвет</string>
     <string name="edit_name">Изменить имя</string>
