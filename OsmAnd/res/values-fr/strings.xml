@@ -5,7 +5,7 @@
 
     <string name="update_poi_does_not_change_indexes">Les modifications de points d\'intérêt dans l\'application sont sans effet sur les cartes téléchargées, les modifications sont enregistrées dans un fichier.</string>
     <string name="local_openstreetmap_uploading">Transfert…</string>
-    <string name="local_openstreetmap_were_uploaded">{0} points d\'intérêt/notes ont été envoyés</string>
+    <string name="local_openstreetmap_were_uploaded">{0} Points d\'intérêt / Notes ont été envoyés</string>
     <string name="local_openstreetmap_uploadall">Tout envoyer</string>
 
 
@@ -166,7 +166,7 @@ Actuellement {2} Mo sont disponibles.</string>
 
     <string name="local_indexes_cat_tile">Cartes en ligne ou en cache</string>
     <string name="local_indexes_cat_map">Cartes standard (vectorielles)</string>
-    <string name="local_indexes_cat_poi">Points d\'intérêt</string>
+    <string name="local_indexes_cat_poi">Données pour les points d\'intérêt</string>
     <string name="ttsvoice">Voix de synthèse</string>
     <string name="search_offline_clear_search">Nouvelle recherche</string>
     <string name="map_text_size_descr">Choisir taille du texte pour les noms sur la carte</string>
@@ -641,7 +641,7 @@ Actuellement {2} Mo sont disponibles.</string>
     
     
     
-    <string name="poi_edit_title">Editer point d\'intérêt</string>
+    <string name="poi_edit_title">Modifier le point d\'intérêt</string>
     <string name="poi_create_title">Créer un point d\'intérêt</string>
     <string name="poi_error_poi_not_found">L\'objet est introuvable ou est composé de plusieurs nœuds, ce qui n\'est pas possible actuellement.</string>
     <string name="poi_remove_confirm_template">Voulez-vous vraiment supprimer {0} (inscrire commentaire) ?</string>
@@ -2086,7 +2086,7 @@ Pour revenir à l’un des styles de carte classique de OsmAnd, désactivez simp
 
     <string name="description">Description</string>
     <string name="add_opening_hours">Ajouter des heures d\'ouverture</string>
-    <string name="poi_dialog_poi_type">Type du point d\'intérêt</string>
+    <string name="poi_dialog_poi_type">Type de point d\'intérêt</string>
     <string name="av_locations">Positions</string>
     <string name="poi_action_delete">Supprimer</string>
     <string name="contact_info">Contact</string>
@@ -2698,9 +2698,9 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="quick_action_add_poi">Ajouter un point d\'intérêt</string>
     <string name="quick_action_map_style">Modifier le style de carte</string>
     <string name="quick_action_map_style_switch">Le style de carte est maintenant \"%s\".</string>
-    <string name="quick_action_take_audio_note">Prendre une note sonore</string>
-    <string name="quick_action_take_video_note">Prendre une note vidéo</string>
-    <string name="quick_action_take_photo_note">Prendre une note photo</string>
+    <string name="quick_action_take_audio_note">Créer une note sonore</string>
+    <string name="quick_action_take_video_note">Créer une note vidéo</string>
+    <string name="quick_action_take_photo_note">Créer une note photo</string>
     <string name="quick_action_add_osm_bug">Signaler une anomalie OSM</string>
     <string name="quick_action_navigation_voice">Voix Active / Inactive</string>
     <string name="quick_action_navigation_voice_off">La voix est désactivée</string>
@@ -2970,6 +2970,7 @@ Fonctionnalités principales :
     <string name="srtm_menu_download_descr">Pour afficher les courbes de niveaux sur la carte, vous devez télécharger la carte courbes de niveaux de cette région.</string>
     <string name="shared_string_plugin">Greffon</string>
     <string name="srtm_purchase_header">Pour afficher les courbes de niveaux sur une carte, vous devez acheter puis installer le greffon</string>
-    <string name="hillshade_purchase_header">Pour afficher les ombrages sur la carte, vous devez acheter et installer le plugin</string>
+    <string name="hillshade_purchase_header">Pour afficher les ombrages du relief sur la carte, vous devez acheter et installer un greffon</string>
     <string name="hide_from_zoom_level">Masquer depuis le niveau de zoom</string>
+    <string name="hillshade_menu_download_descr">Pour afficher le relief sur la carte, vous devez télécharger une carte supplémentaire de la région.</string>
     </resources>
