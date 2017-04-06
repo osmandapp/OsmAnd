@@ -2881,4 +2881,10 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="display_zoom_level">Priblíženie zobrazenia: %1$s</string>
     <string name="route_is_too_long_v2">Táto trasa môže byť príliš dlhá na výpočet. Ak sa nenájde výsledok do 10 minút, vložte prosím tranzitné ciele.</string>
     <string name="save_poi_too_many_uppercase">Názov obsahuje príliš veľa veľkých písmen. Chcete pokračovať?</string>
+    <string name="hillshade_menu_download_descr">Pre zobrazenie tieňovaných svahov musíte stiahnuť špeciálnu mapu pre tento región.</string>
+    <string name="hillshade_purchase_header">Pre zobrazenie tieňovaných svahov si musíte kúpiť a nainštalovať zásuvný modul</string>
+    <string name="hide_from_zoom_level">Skryť od úrovne priblíženia</string>
+    <string name="shared_string_plugin">Zásuvný modul</string>
+    <string name="srtm_purchase_header">Pre zobrazenie vrstevníc si musíte kúpiť a nainštalovať zásuvný modul</string>
+    <string name="srtm_menu_download_descr">Pre zobrazenie vrstevníc na mape musíte stiahnuť mapu vrstevníc pre tento región.</string>
     </resources>
