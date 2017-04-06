@@ -986,7 +986,7 @@
     <string name="prefer_in_routing_title">優先權…</string>
     <string name="prefer_motorways">高速公路優先權</string>
 
-    <string name="download_hillshade_maps">山體陰影</string>
+    <string name="download_hillshade_maps">地形陰影</string>
 
 
     <string name="local_indexes_cat_srtm">等高線</string>
@@ -3054,4 +3054,7 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="srtm_menu_download_descr">要觀看地圖上的等高線，您需要下載該地區的等高線圖。</string>
     <string name="shared_string_plugin">外掛元件</string>
     <string name="srtm_purchase_header">要看到地圖上的等高線，您需要購買並安裝外掛元件</string>
+    <string name="hillshade_menu_download_descr">對於在地圖上觀看地形陰影，您需要下載該地區專門的地圖。</string>
+    <string name="hillshade_purchase_header">要在地圖上看到地形陰影，您需要購買並安裝外掛元件</string>
+    <string name="hide_from_zoom_level">從縮放級別來隱藏</string>
     </resources>
