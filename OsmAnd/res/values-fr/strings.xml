@@ -3,7 +3,7 @@
     <string name="offline_edition">Modifications hors-ligne</string>
     <string name="offline_edition_descr">Toujours utiliser l\'édition hors-ligne</string>
 
-    <string name="update_poi_does_not_change_indexes">Les modifications de PI dans l\'application sont sans effet sur les cartes téléchargées, les modifications sont enregistrées dans un fichier.</string>
+    <string name="update_poi_does_not_change_indexes">Les modifications de points d\'intérêt dans l\'application sont sans effet sur les cartes téléchargées, les modifications sont enregistrées dans un fichier.</string>
     <string name="local_openstreetmap_uploading">Transfert…</string>
     <string name="local_openstreetmap_were_uploaded">{0} PI/Notes ont été envoyés</string>
     <string name="local_openstreetmap_uploadall">Tout envoyer</string>
@@ -13,7 +13,7 @@
     <string name="local_openstreetmap_delete">Supprimer la modification</string>
     <string name="local_openstreetmap_descr_title">Modification asynchrone d\'OSM :</string>
     <string name="local_openstreetmap_settings">PI/Notes OSM enregistrés en local</string>
-    <string name="local_openstreetmap_settings_descr">Afficher et gérer les PI/Notes OSM enregistrés dans la base de données locale</string>
+    <string name="local_openstreetmap_settings_descr">Afficher et gérer les points d\'intérêt/notes OSM enregistrés dans la base de données locale</string>
 
 
     <string name="live_monitoring_interval_descr">Préciser l\'intervalle pour le suivi en ligne</string>
@@ -99,11 +99,11 @@ Actuellement {2} Mo sont disponibles.</string>
     <string name="file_can_not_be_renamed">Fichier ne peut être renommé.</string>
     <string name="file_with_name_already_exists">Un fichier avec ce nom existe déjà.</string>
     <string name="gpx_navigation">Itinéraire GPX</string>
-    <string name="poi_query_by_name_matches_categories">Des catégories de PI correspondantes à la recherche ont été trouvées :</string>
-    <string name="data_to_search_poi_not_available">Pas de données de PI en local pour effectuer une recherche.</string>
+    <string name="poi_query_by_name_matches_categories">Des catégories de points d\'intérêt correspondantes à la recherche ont été trouvées :</string>
+    <string name="data_to_search_poi_not_available">Pas de données de points d\'intérêt en local pour effectuer une recherche.</string>
     <string name="poi_filter_by_name">Rechercher par nom</string>
-    <string name="old_poi_file_should_be_deleted">Le fichier de PI \'%1$s\' est obsolète et peut être supprimé.</string>
-    <string name="update_poi_file_not_found">Fichier local de gestion des modifications de PI introuvable, et ne peut être créé.</string>
+    <string name="old_poi_file_should_be_deleted">Le fichier de points d\'intérêt \'%1$s\' est obsolète et peut être supprimé.</string>
+    <string name="update_poi_file_not_found">Fichier local de gestion des modifications de points d\'intérêt introuvable, et ne peut être créé.</string>
     <string name="button_upgrade_osmandplus">Mettre à jour OsmAnd+</string>
     <string name="map_version_changed_info">Les fichiers de cartes sur le serveur sont incompatibles avec votre version de l\'application. Pour les télécharger et les utiliser, installez une version plus récente de votre application.</string>
     <string name="shared_string_rename">Renommer</string>
@@ -155,7 +155,7 @@ Actuellement {2} Mo sont disponibles.</string>
     <string name="local_index_mi_reload">Recharger depuis la carte SD</string>
     <string name="shared_string_download">Télécharger</string>
 
-    <string name="local_index_poi_data">Données PI</string>
+    <string name="local_index_poi_data">Points d\'intérêt</string>
     <string name="local_index_address_data">Données adresses</string>
     <string name="local_index_transport_data">Données des transports publics</string>
     <string name="local_index_map_data">Cartes</string>
@@ -166,7 +166,7 @@ Actuellement {2} Mo sont disponibles.</string>
 
     <string name="local_indexes_cat_tile">Cartes en ligne ou en cache</string>
     <string name="local_indexes_cat_map">Cartes standard (vectorielles)</string>
-    <string name="local_indexes_cat_poi">Données PI</string>
+    <string name="local_indexes_cat_poi">Points d\'intérêt</string>
     <string name="ttsvoice">Voix de synthèse</string>
     <string name="search_offline_clear_search">Nouvelle recherche</string>
     <string name="map_text_size_descr">Choisir taille du texte pour les noms sur la carte</string>
@@ -278,7 +278,7 @@ Actuellement {2} Mo sont disponibles.</string>
     <string name="poi_filter_food_shop">Alimentation</string>
     <string name="poi_filter_for_tourists">Pour voyageurs</string>
     <string name="poi_filter_fuel">Carburant</string>
-    <string name="poi_filter_namefinder">Recherche de PI en ligne</string>
+    <string name="poi_filter_namefinder">Recherche de points d\'intérêt en ligne</string>
     <string name="reading_cached_tiles">Lecture des tuiles en cache…</string>
     <string name="version_index_is_big_for_memory">L\'index \'\'{0}\'\' est trop gros pour la mémoire</string>
     <string name="version_index_is_not_supported">La version de l\'\'index \'\'{0}\'\' n\'\'est pas supporté</string>
@@ -351,8 +351,8 @@ Actuellement {2} Mo sont disponibles.</string>
     <string name="transport_context_menu">Transport en commun</string>
 
     
-    <string name="poi_context_menu_modify">Modifier PI</string>
-    <string name="poi_context_menu_delete">Supprimer PI</string>
+    <string name="poi_context_menu_modify">Modifier point d\'intérêt</string>
+    <string name="poi_context_menu_delete">Supprimer point d\'intérêt</string>
     <string name="rotate_map_compass_opt">D\'après la boussole</string>
     <string name="rotate_map_bearing_opt">Dans la direction du déplacement</string>
     <string name="rotate_map_none_opt">Aucune rotation (nord vers le haut)</string>
@@ -458,7 +458,7 @@ Actuellement {2} Mo sont disponibles.</string>
     <string name="update_poi_error_local">Erreur de mise à jour des index locaux</string>
     <string name="update_poi_error_loading">Erreur lors du chargement des données du serveur</string>
     <string name="update_poi_no_offline_poi_index">Il n\'y a pas de données hors-ligne pour cette région</string>
-    <string name="update_poi_is_not_available_for_zoom">La mise à jour des PI n\'est pas disponible pour un faible niveau de zoom</string>
+    <string name="update_poi_is_not_available_for_zoom">La mise à jour des points d\'intérêt n\'est pas disponible pour un faible niveau de zoom</string>
     <string name="context_menu_item_update_poi">Mettre à jour les points d\'intérêt</string>
     <string name="context_menu_item_update_map_confirm">Mettre à jour les données locales via Internet ?</string>
     <string name="search_history_city">Ville :\n{0}</string>
@@ -491,7 +491,7 @@ Actuellement {2} Mo sont disponibles.</string>
 
     <string name="downloading_list_indexes">Téléchargement de la liste des régions disponibles…</string>
     <string name="list_index_files_was_not_loaded">Les fichiers d\'index ne sont pas d\'osmand.net.</string>
-    <string name="select_index_file_to_download">Aucun Résultat. Si vous ne trouvez pas votre région, vous pouvez la créer vous-même (voir sur http://osmand.net).</string>
+    <string name="select_index_file_to_download">Aucun résultat. Si vous ne trouvez pas votre région, vous pouvez la créer vous-même (voir sur http://osmand.net).</string>
 
     <string name="fav_points_edited">Le favori a été modifié</string>
     <string name="fav_points_not_exist">Il n\'existe aucun favori</string>
@@ -515,7 +515,7 @@ Actuellement {2} Mo sont disponibles.</string>
     <string name="loading_streets">Chargement des rues…</string>
     <string name="loading_cities">Chargement des villes…</string>
 
-    <string name="poi">PI</string>
+    <string name="poi">Point d\'intérêt</string>
     <string name="error_occurred_saving_gpx">Erreur lors de l\'enregistrement du fichier GPX</string>
     <string name="error_calculating_route">Erreur de calcul de l\'itinéraire</string>
     <string name="error_calculating_route_occured">Erreur lors du calcul de l\'itinéraire</string>
@@ -554,7 +554,7 @@ Actuellement {2} Mo sont disponibles.</string>
     <string name="mark_point">Destination</string>
 
 
-    <string name="shared_string_add_to_favorites">Ajouter aux Favoris</string>
+    <string name="shared_string_add_to_favorites">Ajouter aux favoris</string>
     <string name="use_english_names_descr">Afficher sur la carte les noms locaux ou les noms anglais</string>
     <string name="use_english_names">Utiliser les noms anglais</string>
     <string name="app_settings">Paramètres de l\'application</string>
@@ -567,7 +567,7 @@ Actuellement {2} Mo sont disponibles.</string>
     <string name="map_view_3d_descr">Activer vue 3D de la carte</string>
     <string name="map_view_3d">Vue 3D</string>
     <string name="show_poi_over_map_description">Afficher PI sur la carte (utiliser le dernier filtre)</string>
-    <string name="show_poi_over_map">Afficher PI</string>
+    <string name="show_poi_over_map">Afficher point d\'intérêt</string>
     <string name="map_tile_source_descr">Sélectionnez la source des cartes dites tuiles (en ligne ou en cache)</string>
     <string name="map_tile_source">Carte en ligne (tuiles)</string>
     <string name="map_source">Source cartographique</string>
@@ -641,8 +641,8 @@ Actuellement {2} Mo sont disponibles.</string>
     
     
     
-    <string name="poi_edit_title">Éditer PI</string>
-    <string name="poi_create_title">Créer un point d\'intérêt (PI)</string>
+    <string name="poi_edit_title">Editer point d\'intérêt</string>
+    <string name="poi_create_title">Créer un point d\'intérêt</string>
     <string name="poi_error_poi_not_found">L\'objet est introuvable ou est composé de plusieurs nœuds, ce qui n\'est pas possible actuellement.</string>
     <string name="poi_remove_confirm_template">Voulez-vous vraiment supprimer {0} (inscrire commentaire) ?</string>
     <string name="poi_remove_title">Supprimer le PI</string>
@@ -656,7 +656,7 @@ Actuellement {2} Mo sont disponibles.</string>
     <string name="poi_error_info_not_loaded">Les informations sur l\'objet n\'ont pas étés chargés</string>
     <string name="poi_dialog_opening_hours">Ouvert</string>
     <string name="poi_dialog_comment">Commentaire</string>
-    <string name="poi_dialog_comment_default">Modification PI</string>
+    <string name="poi_dialog_comment_default">Modification point d\'intérêt</string>
     <string name="poi_dialog_other_tags_message">Tous les autres attributs sont conservés</string>
     <string name="default_buttons_commit">Envoyer</string>
     <string name="shared_string_clear">Effacer</string>
@@ -899,7 +899,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
 <string name="day_night_info_description">Lever : %1$s
 \nCoucher : %2$s</string>
     <string name="day_night_info">Information jour/nuit</string>
-    <string name="filterpoi_activity">Créer un filtre des PI</string>
+    <string name="filterpoi_activity">Créer un filtre de points d\'intérêt</string>
     <string name="map_widget_renderer">Style de la carte</string>
     <string name="int_continuosly">En continu</string>
 
@@ -2086,11 +2086,11 @@ Pour revenir à l’un des styles de carte classique de OsmAnd, désactivez simp
 
     <string name="description">Description</string>
     <string name="add_opening_hours">Ajouter des heures d\'ouverture</string>
-    <string name="poi_dialog_poi_type">Type de PI</string>
+    <string name="poi_dialog_poi_type">Type du point d\'intérêt</string>
     <string name="av_locations">Positions</string>
     <string name="poi_action_delete">Supprimer</string>
     <string name="contact_info">Contact</string>
-    <string name="please_specify_poi_type">Merci d\'indiquer un type de PI.</string>
+    <string name="please_specify_poi_type">Merci d\'indiquer un type de point d\'intérêt.</string>
     <string name="working_days">Jours travaillés</string>
     <string name="recent_places">Emplacements récents</string>
     <string name="favourites">Favoris</string>
@@ -2220,7 +2220,7 @@ Pour revenir à l’un des styles de carte classique de OsmAnd, désactivez simp
     <string name="shared_string_location">Position</string>
     <string name="context_menu_item_delete_waypoint">Supprimer l\'étape GPX ?</string>
     <string name="context_menu_item_edit_waypoint">Modifier l\'étape GPX</string>
-    <string name="context_menu_item_open_note">Créer une note OSM</string>
+    <string name="context_menu_item_open_note">Signaler une anomalie OSM</string>
     <string name="osm_edit_reopened_note">Note OSM réouverte</string>
     <string name="osm_edit_removed_note">Note OSM supprimée</string>
 	<string name="osm_edit_created_note">Note OSM créée</string>
@@ -2265,9 +2265,9 @@ Pour revenir à l’un des styles de carte classique de OsmAnd, désactivez simp
 
  • Téléchargement des cartes des régions en appuyant directement sur la carte mondiale
 
- • Amélioration de la recherche des PI (Point d\'Intérêt)
+ • Amélioration de la recherche des points d\'intérêt
 
- • Amélioration des PI (Point d\'Intérêt) et des contributions OSM (Open Street Map)
+ • Amélioration des points d\'intérêt et des contributions OSM (OpenStreetMap)
 
  • Refonte du téléchargement des cartes
 
@@ -2329,7 +2329,7 @@ Pour revenir à l’un des styles de carte classique de OsmAnd, désactivez simp
     <string name="rec_split_storage_size_desc">Espace maximum alloué pour tous les enregistrements</string>
     <string name="shared_string_type">Type</string>
     <string name="switch_start_finish">Inverser Départ et Destination</string>
-    <string name="rendering_attr_hideIcons_name">Icônes des PI</string>
+    <string name="rendering_attr_hideIcons_name">Icônes des points d\'intérêt</string>
     <string name="number_of_contributors">Nombre de contributeurs</string>
     <string name="number_of_edits">Nombre de modifications</string>
     <string name="reports_for">Rapport pour</string>
@@ -2622,7 +2622,7 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="rendering_attr_surfaceIntegrity_name">État de la route</string>
     <string name="christmas_poi">PI de Noël</string>
     <string name="christmas_desc">Anticipez Noël et le Nouvel An en affichant les Points d\'Intérêts associés à ces évènements de fin d\'année comme : les arbres de Noël, les marchés ...</string>
-    <string name="christmas_desc_q">Afficher les PI de Noël ?</string>
+    <string name="christmas_desc_q">Afficher les points d\'intérêt de Noël ?</string>
     <string name="rendering_attr_contourColorScheme_description">Couleurs des courbes de niveau</string>
     <string name="save_track_min_speed">Vitesse minimale pour enregistrer</string>
     <string name="save_track_min_speed_descr">Indiquez une vitesse minimale à partir de laquelle déclencher l\'enregistrement</string>
@@ -2670,7 +2670,7 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="rendering_value_fine_name">Bien</string>
     <string name="translit_name_if_miss">Transformer si le nom %1$s est absent</string>
     <string name="route_calculation">Calcul de l\'itinéraire</string>
-    <string name="upload_poi">Télécharger les PI</string>
+    <string name="upload_poi">Télécharger les points d\'intérêt</string>
     <string name="route_roundabout_short">Prenez la sortie %1$d</string>
     <string name="search_map_hint">Rechercher une ville ou une région</string>
     <string name="routing_attr_allow_motorway_description">Autoriser les trajets sur autoroutes</string>
@@ -2695,12 +2695,12 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="quick_action_item_action">Action %d</string>
     <string name="quick_action_item_screen">Écran %d</string>
     <string name="quick_action_add_marker">Ajouter un marqueur</string>
-    <string name="quick_action_add_poi">Ajouter un PI</string>
+    <string name="quick_action_add_poi">Ajouter un point d\'intérêt</string>
     <string name="quick_action_map_style">Modifier le style de carte</string>
     <string name="quick_action_map_style_switch">Le style de carte est maintenant \"%s\".</string>
-    <string name="quick_action_take_audio_note">Créer une note sonore</string>
-    <string name="quick_action_take_video_note">Créer une note vidéo</string>
-    <string name="quick_action_take_photo_note">Créer une note photo</string>
+    <string name="quick_action_take_audio_note">Prendre une note sonore</string>
+    <string name="quick_action_take_video_note">Prendre une note vidéo</string>
+    <string name="quick_action_take_photo_note">Prendre une note photo</string>
     <string name="quick_action_add_osm_bug">Signaler une anomalie OSM</string>
     <string name="quick_action_navigation_voice">Voix Active / Inactive</string>
     <string name="quick_action_navigation_voice_off">La voix est désactivée</string>
@@ -2723,7 +2723,7 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="quick_action_showhide_favorites_title">Afficher / Masquer les favoris</string>
     <string name="quick_action_favorites_show">Afficher les favoris</string>
     <string name="quick_action_favorites_hide">Masquer les favoris</string>
-    <string name="quick_action_showhide_poi_title">Afficher / Masquer les PI</string>
+    <string name="quick_action_showhide_poi_title">Afficher / Masquer les points d\'intérêt</string>
     <string name="quick_action_poi_show">Afficher %1$s</string>
     <string name="quick_action_poi_hide">"Masquer  %1$s"</string>
     <string name="quick_action_add_category">Ajouter une catégorie</string>
@@ -2733,8 +2733,8 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="quick_action_bug_message">Message</string>
     <string name="quick_action_category_descr">Vous pouvez indiquer une catégorie pour ce favori.</string>
     <string name="quick_action_gpx_category_descr">Vous pouvez indiquer une catégorie pour ce point GPX.</string>
-    <string name="quick_action_poi_list">Liste des PI</string>
-    <string name="quick_action_sh_poi_descr">Vous pouvez indiquer les catégories de PI à afficher sur la carte.</string>
+    <string name="quick_action_poi_list">Liste des points d\'intérêt</string>
+    <string name="quick_action_sh_poi_descr">Vous pouvez indiquer les catégories de points d\'intérêt à afficher sur la carte.</string>
     <string name="quick_action_map_style_action">Ajouter un style de carte</string>
     <string name="quick_action_empty_param_error">Les paramètres ne peuvent être vides</string>
     <string name="quick_action_map_styles">Styles de carte</string>
@@ -2756,11 +2756,11 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="quick_action_take_video_note_descr">Appuyez sur le bouton d\'action pour ajouter une note Vidéo au centre de la carte.</string>
     <string name="quick_action_take_photo_note_descr">Appuyez sur le bouton d\'action pour ajouter une note Photo au centre de la carte.</string>
     <string name="quick_action_add_osm_bug_descr">Appuyez sur le bouton d\'action pour signaler une anomalie OSM au centre de la carte.</string>
-    <string name="quick_action_add_poi_descr">Appuyez sur le bouton d\'action pour ajouter un PI au centre de la carte.</string>
+    <string name="quick_action_add_poi_descr">Appuyez sur le bouton d\'action pour ajouter un point d\'intérêt au centre de la carte.</string>
     <string name="quick_action_navigation_voice_descr">Appuyez sur le bouton pour activer ou désactiver le Guidage vocal pendant la navigation.</string>
     <string name="quick_action_add_parking_descr">Appuyez sur le bouton pour ajouter un emplacement de stationnement au centre de la carte.</string>
     <string name="quick_action_showhide_favorites_descr">Appuyez sur le bouton pour afficher ou masquer les favoris sur la carte.</string>
-    <string name="quick_action_showhide_poi_descr">Appuyez sur le bouton pour afficher ou masquer les PI sur la carte.</string>
+    <string name="quick_action_showhide_poi_descr">Appuyez sur le bouton pour afficher ou masquer les points d\'intérêt sur la carte.</string>
     <string name="quick_action_interim_dialog">Afficher une fenêtre intermédiaire</string>
     <string name="quick_action_add_create_items">Créer les éléments</string>
     <string name="quick_action_bug_descr">Ce texte sera renseigné automatiquement dans la zone de commentaire.</string>
@@ -2870,7 +2870,7 @@ représentant la zone : %1$s x %2$s</string>
  Le greffon OsmAnd ski maps permet de visualiser les pistes de ski avec leur niveau de difficulté et d\'autres informations utiles comme l\'emplacement et le type des remontées mécaniques.
  "</string>
     <string name="osmand_extended_description_part7">"
- Contribuez à Open Street Map (OSM)
+ Contribuez à OpenStreetMap (OSM)
  • Signalez des anomalies
  • Envoyez des traces GPX vers OSM directement depuis l\'application
  • Ajoutez des Points d\'Intérêt et envoyez-les vers OSM (immédiatement ou plus tard si vous êtes hors-ligne)
