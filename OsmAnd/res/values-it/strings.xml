@@ -2930,4 +2930,8 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="animate_my_location">Anima la mia localizzazione</string>
     <string name="animate_my_location_desc">Abilita l\'animazione della mia localizzazione nella mappa</string>
     <string name="shared_string_overview">Panoramica</string>
+    <string name="show_from_zoom_level">Mostra dal livello di zoom</string>
+    <string name="display_zoom_level">Mostra il livello dello zoom: %1$s</string>
+    <string name="favorite_group_name">Nome del gruppo</string>
+    <string name="change_color">Cambia il colore</string>
     </resources>
