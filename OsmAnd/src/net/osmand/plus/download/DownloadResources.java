@@ -1,10 +1,14 @@
 package net.osmand.plus.download;
 
 import net.osmand.IndexConstants;
+import net.osmand.binary.BinaryMapDataObject;
+import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.data.LatLon;
 import net.osmand.map.OsmandRegions;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.download.DownloadOsmandIndexesHelper.AssetIndexItem;
+import net.osmand.util.MapUtils;
 
 import java.io.File;
 import java.io.FilenameFilter;
@@ -12,6 +16,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -360,5 +365,52 @@ public class DownloadResources extends DownloadResourceGroup {
 		return true;
 	}
 
+	public static List<IndexItem> findIndexItemsAt(OsmandApplication app, LatLon latLon, DownloadActivityType type) throws IOException {
 
+		List<IndexItem> res = new ArrayList<>();
+		OsmandRegions regions = app.getRegions();
+		DownloadIndexesThread downloadThread = app.getDownloadThread();
+
+		int point31x = MapUtils.get31TileNumberX(latLon.getLongitude());
+		int point31y = MapUtils.get31TileNumberY(latLon.getLatitude());
+
+		List<BinaryMapDataObject> mapDataObjects;
+		try {
+			mapDataObjects = regions.queryBbox(point31x, point31x, point31y, point31y);
+		} catch (IOException e) {
+			throw new IOException("Error while calling queryBbox");
+		}
+		if (mapDataObjects != null) {
+			Iterator<BinaryMapDataObject> it = mapDataObjects.iterator();
+			while (it.hasNext()) {
+				BinaryMapDataObject o = it.next();
+				if (o.getTypes() != null) {
+					boolean isRegion = true;
+					for (int i = 0; i < o.getTypes().length; i++) {
+						BinaryMapIndexReader.TagValuePair tp = o.getMapIndex().decodeType(o.getTypes()[i]);
+						if ("boundary".equals(tp.value)) {
+							isRegion = false;
+							break;
+						}
+					}
+					WorldRegion downloadRegion = regions.getRegionData(regions.getFullName(o));
+					if (downloadRegion == null || !isRegion || !regions.contain(o, point31x, point31y)) {
+						it.remove();
+					}
+					List<IndexItem> otherIndexItems = new ArrayList<>(downloadThread.getIndexes().getIndexItems(downloadRegion));
+					for (IndexItem indexItem : otherIndexItems) {
+						if (indexItem.getType() == type
+								&& !res.contains(indexItem)) {
+							if (indexItem.isDownloaded()) {
+								res.clear();
+								return res;
+							}
+							res.add(indexItem);
+						}
+					}
+				}
+			}
+		}
+		return res;
+	}
 }

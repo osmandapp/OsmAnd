@@ -9,6 +9,9 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="hillshade_menu_download_descr">For view hillshade on the map, you need to download special map of this region.</string>
+    <string name="hillshade_purchase_header">To see hillshade on the map, you need to buy and install plugin</string>
+    <string name="hide_from_zoom_level">Hide from zoom level</string>
     <string name="srtm_menu_download_descr">For view contour lines on the map, you need to download contour line map of this region.</string>
     <string name="shared_string_plugin">Plugin</string>
     <string name="srtm_purchase_header">To see contour lines on the map, you need to buy and install plugin</string>

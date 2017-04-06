@@ -78,6 +78,8 @@ import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RoutingHelper.IRouteInformationListener;
 import net.osmand.plus.srtmplugin.ContourLinesMenu;
+import net.osmand.plus.srtmplugin.HillshadeMenu;
+import net.osmand.plus.srtmplugin.SRTMPlugin;
 import net.osmand.plus.views.DownloadedRegionsLayer;
 import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -186,6 +188,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 		OVERLAY_MAP,
 		UNDERLAY_MAP,
 		CONTOUR_LINES,
+		HILLSHADE,
 		MAP_MARKERS,
 		MAP_MARKERS_SELECTION
 	}
@@ -460,6 +463,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 			tv.setText(R.string.select_map_markers);
 		} else if (visibleType == DashboardType.CONTOUR_LINES) {
 			tv.setText(R.string.srtm_plugin_name);
+		} else if (visibleType == DashboardType.HILLSHADE) {
+			tv.setText(R.string.layer_hillshade);
 		}
 		ImageView edit = (ImageView) dashboardView.findViewById(R.id.toolbar_edit);
 		edit.setVisibility(View.GONE);
@@ -890,7 +895,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 				&& visibleType != DashboardType.MAP_MARKERS_SELECTION
 				&& visibleType != DashboardType.CONFIGURE_SCREEN
 				&& visibleType != DashboardType.CONFIGURE_MAP
-				&& visibleType != DashboardType.CONTOUR_LINES) {
+				&& visibleType != DashboardType.CONTOUR_LINES
+				&& visibleType != DashboardType.HILLSHADE) {
 			listView.setDivider(dividerDrawable);
 			listView.setDividerHeight(dpToPx(1f));
 		} else {
@@ -968,6 +974,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 				cm = RasterMapMenu.createListAdapter(mapActivity, OsmandRasterMapsPlugin.RasterMapType.OVERLAY);
 			} else if (visibleType == DashboardType.CONTOUR_LINES) {
 				cm = ContourLinesMenu.createListAdapter(mapActivity);
+			} else if (visibleType == DashboardType.HILLSHADE) {
+				cm = HillshadeMenu.createListAdapter(mapActivity);
 			}
 			if (cm != null) {
 				updateListAdapter(cm);
@@ -987,14 +995,14 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 	}
 
 	public void onNewDownloadIndexes() {
-		if (visibleType == DashboardType.CONTOUR_LINES) {
+		if (visibleType == DashboardType.CONTOUR_LINES || visibleType == DashboardType.HILLSHADE) {
 			refreshContent(true);
 		}
 	}
 
 	@SuppressWarnings("unchecked")
 	public void onDownloadInProgress() {
-		if (visibleType == DashboardType.CONTOUR_LINES) {
+		if (visibleType == DashboardType.CONTOUR_LINES || visibleType == DashboardType.HILLSHADE) {
 			DownloadIndexesThread downloadThread = getMyApplication().getDownloadThread();
 			IndexItem downloadIndexItem = downloadThread.getCurrentDownloadingItem();
 			if (downloadIndexItem != null) {
@@ -1012,8 +1020,15 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 	}
 
 	public void onDownloadHasFinished() {
-		if (visibleType == DashboardType.CONTOUR_LINES) {
+		if (visibleType == DashboardType.CONTOUR_LINES || visibleType == DashboardType.HILLSHADE) {
 			refreshContent(true);
+			if (visibleType == DashboardType.HILLSHADE) {
+				SRTMPlugin plugin = OsmandPlugin.getEnabledPlugin(SRTMPlugin.class);
+				if (plugin != null && plugin.isHillShadeLayerEnabled()) {
+					plugin.registerLayers(mapActivity);
+				}
+			}
+			SRTMPlugin.refreshMapComplete(mapActivity);
 		}
 	}
 
