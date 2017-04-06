@@ -278,7 +278,7 @@ public class MapTileDownloader {
 					timeForErrorCounter = System.currentTimeMillis();
 					request.setError(true);
 					log.error("UnknownHostException, cannot download tile " + request.url + " " + e.getMessage()); //$NON-NLS-1$  //$NON-NLS-2$
-				} catch (IOException e) {
+				} catch (Exception e) {
 					currentErrors++;
 					timeForErrorCounter = System.currentTimeMillis();
 					request.setError(true);
