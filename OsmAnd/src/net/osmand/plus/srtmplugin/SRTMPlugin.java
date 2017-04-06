@@ -18,7 +18,9 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.dashboard.DashboardOnMap;
+import net.osmand.plus.views.GPXLayer;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.RouteLayer;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.util.Algorithms;
 
@@ -130,6 +132,9 @@ public class SRTMPlugin extends OsmandPlugin {
 				if (itemId == R.string.srtm_plugin_name) {
 					mapActivity.getDashboard().setDashboardVisibility(true, DashboardOnMap.DashboardType.CONTOUR_LINES);
 					return false;
+				} else if (itemId == R.string.layer_hillshade) {
+					mapActivity.getDashboard().setDashboardVisibility(true, DashboardOnMap.DashboardType.HILLSHADE);
+					return false;
 				}
 				return true;
 			}
@@ -163,16 +168,31 @@ public class SRTMPlugin extends OsmandPlugin {
 									item.setSelected(selected);
 									adapter.notifyDataSetChanged();
 								}
-								ContourLinesMenu.refreshMapComplete(mapActivity);
+								refreshMapComplete(mapActivity);
 							}
 
 						}
 					});
 				} else if (itemId == R.string.layer_hillshade) {
-					HILLSHADE.set(!HILLSHADE.get());
-					adapter.getItem(position).setColorRes(HILLSHADE.get() ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
-					adapter.notifyDataSetChanged();
-					updateLayers(mapView, mapActivity);
+					toggleHillshade(mapActivity, isChecked, new Runnable() {
+						@Override
+						public void run() {
+							boolean selected = HILLSHADE.get();
+							SRTMPlugin plugin = OsmandPlugin.getPlugin(SRTMPlugin.class);
+							if (selected && plugin != null && !plugin.isActive() && !plugin.needsInstallation()) {
+								OsmandPlugin.enablePlugin(mapActivity, mapActivity.getMyApplication(), plugin, true);
+							}
+
+							ContextMenuItem item = adapter.getItem(position);
+							if (item != null) {
+								item.setColorRes(selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
+								item.setSelected(selected);
+								adapter.notifyDataSetChanged();
+							}
+							updateLayers(mapView, mapActivity);
+							refreshMapComplete(mapActivity);
+						}
+					});
 				}
 				return true;
 			}
@@ -196,6 +216,7 @@ public class SRTMPlugin extends OsmandPlugin {
 					.setDescription(app.getString(R.string.display_zoom_level, descr))
 					.setColor(contourLinesSelected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
 					.setSecondaryIcon(R.drawable.ic_action_additional_option)
+					.setPosition(12)
 					.setListener(listener).createItem());
 		}
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
@@ -203,6 +224,7 @@ public class SRTMPlugin extends OsmandPlugin {
 				.setSelected(HILLSHADE.get())
 				.setColor(HILLSHADE.get() ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
 				.setIcon(R.drawable.ic_action_hillshade_dark)
+				.setSecondaryIcon(R.drawable.ic_action_additional_option)
 				.setListener(listener)
 				.setPosition(13)
 				.createItem());
@@ -231,6 +253,15 @@ public class SRTMPlugin extends OsmandPlugin {
 			} else {
 				selectPropertyValue(activity, contourLinesProp, pref, callback);
 			}
+		}
+	}
+
+	public void toggleHillshade(final MapActivity activity,
+								   final boolean isChecked,
+								   final Runnable callback) {
+		HILLSHADE.set(isChecked);
+		if (callback != null) {
+			callback.run();
 		}
 	}
 
@@ -279,7 +310,7 @@ public class SRTMPlugin extends OsmandPlugin {
 				} else {
 					pref.set(possibleValues[which - 1]);
 				}
-				ContourLinesMenu.refreshMapComplete(activity);
+				refreshMapComplete(activity);
 				dialog.dismiss();
 			}
 		});
@@ -304,4 +335,17 @@ public class SRTMPlugin extends OsmandPlugin {
 		return null;
 	}
 
+	public static void refreshMapComplete(final MapActivity activity) {
+		activity.getMyApplication().getResourceManager().getRenderer().clearCache();
+		activity.updateMapSettings();
+		GPXLayer gpx = activity.getMapView().getLayerByClass(GPXLayer.class);
+		if (gpx != null) {
+			gpx.updateLayerStyle();
+		}
+		RouteLayer rte = activity.getMapView().getLayerByClass(RouteLayer.class);
+		if (rte != null) {
+			rte.updateLayerStyle();
+		}
+		activity.getMapView().refreshMap(true);
+	}
 }
