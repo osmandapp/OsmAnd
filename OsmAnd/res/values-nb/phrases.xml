@@ -582,4 +582,14 @@
 	<string name="poi_service_car">Service</string>
 	<string name="poi_diet">Kost</string>
 	<string name="poi_beach_surface_type">Overflate</string>
+	<string name="poi_office">Kontor</string>
+	<string name="poi_tea">Tebutikk</string>
+	<string name="poi_guest_house">Gjestgiveri</string>
+	<string name="poi_religion_christian">Kristendom</string>
+	<string name="poi_trees_tea">Te</string>
+	<string name="poi_vending_ice_cream">Iskrem</string>
+	<string name="poi_addr_housename">Husnavn</string>
+
+
+	<string name="poi_xmas">Jul</string>
 	</resources>
