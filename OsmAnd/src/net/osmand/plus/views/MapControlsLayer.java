@@ -3,7 +3,6 @@ package net.osmand.plus.views;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -43,7 +42,6 @@ import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivity.ShowQuickSearchMode;
-import net.osmand.plus.activities.search.SearchAddressFragment;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
@@ -60,7 +58,6 @@ import gnu.trove.list.array.TIntArrayList;
 public class MapControlsLayer extends OsmandMapLayer {
 
 	private static final int TIMEOUT_TO_SHOW_BUTTONS = 7000;
-	public static final int REQUEST_ADDRESS_SELECT = 2;
 	private static final int REQUEST_LOCATION_FOR_NAVIGATION_PERMISSION = 200;
 	private static final int REQUEST_LOCATION_FOR_NAVIGATION_FAB_PERMISSION = 201;
 	private static final int REQUEST_LOCATION_FOR_ADD_DESTINATION_PERMISSION = 202;
@@ -1173,18 +1170,11 @@ public class MapControlsLayer extends OsmandMapLayer {
 		};
 	}
 
-	public void onActivityResult(int requestCode, int resultCode, Intent data) {
-		if (requestCode == REQUEST_ADDRESS_SELECT && resultCode == SearchAddressFragment.SELECT_ADDRESS_POINT_RESULT_OK) {
-			String name = data.getStringExtra(SearchAddressFragment.SELECT_ADDRESS_POINT_INTENT_KEY);
-			boolean target = data.getBooleanExtra(MapRouteInfoMenu.TARGET_SELECT, true);
-			LatLon latLon = new LatLon(
-					data.getDoubleExtra(SearchAddressFragment.SELECT_ADDRESS_POINT_LAT, 0),
-					data.getDoubleExtra(SearchAddressFragment.SELECT_ADDRESS_POINT_LON, 0));
-			if (name != null) {
-				mapRouteInfoMenu.selectAddress(name, latLon, target);
-			} else {
-				mapRouteInfoMenu.selectAddress("", latLon, target);
-			}
+	public void selectAddress(String name, double latitude, double longitude, boolean target) {
+		if (name != null) {
+			mapRouteInfoMenu.selectAddress(name, new LatLon(latitude, longitude), target);
+		} else {
+			mapRouteInfoMenu.selectAddress("", new LatLon(latitude, longitude), target);
 		}
 	}
 

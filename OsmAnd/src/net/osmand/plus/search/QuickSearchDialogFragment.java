@@ -110,7 +110,6 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	private static final String QUICK_SEARCH_LAT_KEY = "quick_search_lat_key";
 	private static final String QUICK_SEARCH_LON_KEY = "quick_search_lon_key";
 	private static final String QUICK_SEARCH_INTERRUPTED_SEARCH_KEY = "quick_search_interrupted_search_key";
-	private static final String QUICK_SEARCH_SHOW_CATEGORIES_KEY = "quick_search_show_categories_key";
 	private static final String QUICK_SEARCH_HIDDEN_KEY = "quick_search_hidden_key";
 	private static final String QUICK_SEARCH_TOOLBAR_TITLE_KEY = "quick_search_toolbar_title_key";
 	private static final String QUICK_SEARCH_TOOLBAR_VISIBLE_KEY = "quick_search_toolbar_visible_key";
@@ -118,6 +117,9 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 	private static final String QUICK_SEARCH_RUN_SEARCH_FIRST_TIME_KEY = "quick_search_run_search_first_time_key";
 	private static final String QUICK_SEARCH_PHRASE_DEFINED_KEY = "quick_search_phrase_defined_key";
+
+	private static final String QUICK_SEARCH_SHOW_TAB_KEY = "quick_search_show_tab_key";
+	private static final String QUICK_SEARCH_TYPE_KEY = "quick_search_type_key";
 
 	private Toolbar toolbar;
 	private LockableViewPager viewPager;
@@ -176,9 +178,22 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	private boolean citiesLoaded;
 	private LatLon storedOriginalLocation;
 
+	private QuickSearchType searchType = QuickSearchType.REGULAR;
+
 	private static final double DISTANCE_THRESHOLD = 70000; // 70km
 	private static final int EXPIRATION_TIME_MIN = 10; // 10 minutes
 
+	public enum QuickSearchTab {
+		HISTORY,
+		CATEGORIES,
+		ADDRESS,
+	}
+
+	public enum QuickSearchType {
+		REGULAR,
+		START_POINT,
+		DESTINATION,
+	}
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -220,6 +235,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 		Bundle arguments = getArguments();
 		if (savedInstanceState != null) {
+			searchType = QuickSearchType.valueOf(savedInstanceState.getString(QUICK_SEARCH_TYPE_KEY, QuickSearchType.REGULAR.name()));
 			searchQuery = savedInstanceState.getString(QUICK_SEARCH_QUERY_KEY);
 			double lat = savedInstanceState.getDouble(QUICK_SEARCH_LAT_KEY, Double.NaN);
 			double lon = savedInstanceState.getDouble(QUICK_SEARCH_LON_KEY, Double.NaN);
@@ -233,6 +249,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			fabVisible = savedInstanceState.getBoolean(QUICK_SEARCH_FAB_VISIBLE_KEY, false);
 		}
 		if (searchQuery == null && arguments != null) {
+			searchType = QuickSearchType.valueOf(arguments.getString(QUICK_SEARCH_TYPE_KEY, QuickSearchType.REGULAR.name()));
 			searchQuery = arguments.getString(QUICK_SEARCH_QUERY_KEY);
 			runSearchFirstTime = arguments.getBoolean(QUICK_SEARCH_RUN_SEARCH_FIRST_TIME_KEY, false);
 			phraseDefined = arguments.getBoolean(QUICK_SEARCH_PHRASE_DEFINED_KEY, false);
@@ -246,9 +263,12 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		if (searchQuery == null)
 			searchQuery = "";
 
-		boolean showCategories = false;
+		QuickSearchTab showSearchTab = QuickSearchTab.HISTORY;
 		if (arguments != null) {
-			showCategories = arguments.getBoolean(QUICK_SEARCH_SHOW_CATEGORIES_KEY, false);
+			showSearchTab = QuickSearchTab.valueOf(arguments.getString(QUICK_SEARCH_SHOW_TAB_KEY, QuickSearchTab.HISTORY.name()));
+		}
+		if (showSearchTab == QuickSearchTab.ADDRESS) {
+			addressSearch = true;
 		}
 
 		tabToolbarView = view.findViewById(R.id.tab_toolbar_layout);
@@ -462,8 +482,16 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		viewPager.setOffscreenPageLimit(2);
 		pagerAdapter = new SearchFragmentPagerAdapter(getChildFragmentManager(), getResources());
 		viewPager.setAdapter(pagerAdapter);
-		if (centerLatLon != null || showCategories) {
-			viewPager.setCurrentItem(1);
+		switch (showSearchTab) {
+			case HISTORY:
+				viewPager.setCurrentItem(0);
+				break;
+			case CATEGORIES:
+				viewPager.setCurrentItem(1);
+				break;
+			case ADDRESS:
+				viewPager.setCurrentItem(2);
+				break;
 		}
 
 		tabLayout = (TabLayout) view.findViewById(R.id.tab_layout);
@@ -677,6 +705,10 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		getMapActivity().hideTopToolbar(toolbarController);
 	}
 
+	public QuickSearchType getSearchType() {
+		return searchType;
+	}
+
 	public String getText() {
 		return searchEditText.getText().toString();
 	}
@@ -838,6 +870,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
+		outState.putString(QUICK_SEARCH_TYPE_KEY, searchType.name());
 		outState.putString(QUICK_SEARCH_QUERY_KEY, searchQuery);
 		outState.putBoolean(QUICK_SEARCH_INTERRUPTED_SEARCH_KEY, interruptedSearch = searching);
 		outState.putBoolean(QUICK_SEARCH_HIDDEN_KEY, hidden);
@@ -985,6 +1018,9 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 			case ADDRESS:
 				addressSearchFragment = (QuickSearchAddressListFragment) searchListFragment;
+				if (addressSearch && !citiesLoaded) {
+					reloadCities();
+				}
 				break;
 
 			case MAIN:
@@ -1672,7 +1708,8 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	public static boolean showInstance(@NonNull MapActivity mapActivity,
 									   @NonNull String searchQuery,
 									   @Nullable Object object,
-									   boolean showCategories,
+									   QuickSearchType searchType,
+									   QuickSearchTab showSearchTab,
 									   @Nullable LatLon latLon) {
 		try {
 
@@ -1710,7 +1747,8 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			}
 
 			bundle.putString(QUICK_SEARCH_QUERY_KEY, searchQuery);
-			bundle.putBoolean(QUICK_SEARCH_SHOW_CATEGORIES_KEY, showCategories);
+			bundle.putString(QUICK_SEARCH_SHOW_TAB_KEY, showSearchTab.name());
+			bundle.putString(QUICK_SEARCH_TYPE_KEY, searchType.name());
 			if (latLon != null) {
 				bundle.putDouble(QUICK_SEARCH_LAT_KEY, latLon.getLatitude());
 				bundle.putDouble(QUICK_SEARCH_LON_KEY, latLon.getLongitude());

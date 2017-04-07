@@ -4,7 +4,6 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnDismissListener;
-import android.content.Intent;
 import android.graphics.PointF;
 import android.graphics.drawable.Drawable;
 import android.support.v4.app.Fragment;
@@ -41,7 +40,6 @@ import net.osmand.plus.activities.FavoritesListFragment.FavouritesAdapter;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.ShowRouteInfoDialogFragment;
 import net.osmand.plus.activities.actions.AppModeDialog;
-import net.osmand.plus.activities.search.SearchAddressActivity;
 import net.osmand.plus.dialogs.FavoriteDialogs;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.MapMarkerDialogHelper;
@@ -306,10 +304,8 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 						} else if (id == SPINNER_MAP_ID) {
 							selectOnScreen(true);
 						} else if (id == SPINNER_ADDRESS_ID) {
-							Intent intent = new Intent(mapActivity, SearchAddressActivity.class);
-							intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-							intent.putExtra(TARGET_SELECT, true);
-							mapActivity.startActivityForResult(intent, MapControlsLayer.REQUEST_ADDRESS_SELECT);
+							mapActivity.showQuickSearch(MapActivity.ShowQuickSearchMode.DESTINATION_SELECTION, false);
+							setupToSpinner(parentView);
 						} else if (id == SPINNER_MAP_MARKER_MORE_ID) {
 							selectMapMarker(-1, true);
 							setupToSpinner(parentView);
@@ -378,10 +374,8 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 						} else if (id == SPINNER_MAP_ID) {
 							selectOnScreen(false);
 						} else if (id == SPINNER_ADDRESS_ID) {
-							Intent intent = new Intent(mapActivity, SearchAddressActivity.class);
-							intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-							intent.putExtra(TARGET_SELECT, false);
-							mapActivity.startActivityForResult(intent, MapControlsLayer.REQUEST_ADDRESS_SELECT);
+							mapActivity.showQuickSearch(MapActivity.ShowQuickSearchMode.START_POINT_SELECTION, false);
+							setupFromSpinner(parentView);
 						} else if (id == SPINNER_MAP_MARKER_MORE_ID) {
 							selectMapMarker(-1, false);
 							setupFromSpinner(parentView);

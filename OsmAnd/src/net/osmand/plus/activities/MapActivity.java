@@ -97,6 +97,8 @@ import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RoutingHelper.IRouteInformationListener;
 import net.osmand.plus.routing.RoutingHelper.RouteCalculationProgressCallback;
 import net.osmand.plus.search.QuickSearchDialogFragment;
+import net.osmand.plus.search.QuickSearchDialogFragment.QuickSearchTab;
+import net.osmand.plus.search.QuickSearchDialogFragment.QuickSearchType;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.MapControlsLayer;
 import net.osmand.plus.views.MapInfoLayer;
@@ -1230,10 +1232,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			}
 		}
 		OsmandPlugin.onMapActivityResult(requestCode, resultCode, data);
-		MapControlsLayer mcl = mapView.getLayerByClass(MapControlsLayer.class);
-		if (mcl != null) {
-			mcl.onActivityResult(requestCode, resultCode, data);
-		}
 	}
 
 	public void refreshMap() {
@@ -1475,7 +1473,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			fragment.dismiss();
 			refreshMap();
 		}
-		QuickSearchDialogFragment.showInstance(this, "", null, true, new LatLon(latitude, longitude));
+		QuickSearchDialogFragment.showInstance(this, "", null,
+				QuickSearchType.REGULAR, QuickSearchTab.CATEGORIES, new LatLon(latitude, longitude));
 	}
 
 	public void showQuickSearch(Object object) {
@@ -1485,22 +1484,37 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			fragment.dismiss();
 			refreshMap();
 		}
-		QuickSearchDialogFragment.showInstance(this, "", object, true, null);
+		QuickSearchDialogFragment.showInstance(this, "", object,
+				QuickSearchType.REGULAR, QuickSearchTab.CATEGORIES, null);
 	}
 
 	public void showQuickSearch(ShowQuickSearchMode mode, boolean showCategories) {
 		hideContextMenu();
 		QuickSearchDialogFragment fragment = getQuickSearchDialogFragment();
-		if (fragment != null) {
-			if (mode == ShowQuickSearchMode.NEW || (mode == ShowQuickSearchMode.NEW_IF_EXPIRED && fragment.isExpired())) {
+		if (mode == ShowQuickSearchMode.START_POINT_SELECTION || mode == ShowQuickSearchMode.DESTINATION_SELECTION) {
+			if (fragment != null) {
 				fragment.dismiss();
-				QuickSearchDialogFragment.showInstance(this, "", null, showCategories, null);
+			}
+			if (mode == ShowQuickSearchMode.START_POINT_SELECTION) {
+				QuickSearchDialogFragment.showInstance(this, "", null,
+						QuickSearchType.START_POINT, showCategories ? QuickSearchTab.CATEGORIES : QuickSearchTab.ADDRESS, null);
+			} else {
+				QuickSearchDialogFragment.showInstance(this, "", null,
+						QuickSearchType.DESTINATION, showCategories ? QuickSearchTab.CATEGORIES : QuickSearchTab.ADDRESS, null);
+			}
+		} else if (fragment != null) {
+			if (mode == ShowQuickSearchMode.NEW
+					|| (mode == ShowQuickSearchMode.NEW_IF_EXPIRED && fragment.isExpired())) {
+				fragment.dismiss();
+				QuickSearchDialogFragment.showInstance(this, "", null,
+						QuickSearchType.REGULAR, showCategories ? QuickSearchTab.CATEGORIES : QuickSearchTab.HISTORY, null);
 			} else {
 				fragment.show();
 			}
 			refreshMap();
 		} else {
-			QuickSearchDialogFragment.showInstance(this, "", null, showCategories, null);
+			QuickSearchDialogFragment.showInstance(this, "", null,
+					QuickSearchType.REGULAR, showCategories ? QuickSearchTab.CATEGORIES : QuickSearchTab.HISTORY, null);
 		}
 	}
 
@@ -1557,6 +1571,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		NEW,
 		NEW_IF_EXPIRED,
 		CURRENT,
+		START_POINT_SELECTION,
+		DESTINATION_SELECTION,
 	}
 
 	public InAppHelper execInAppTask(@NonNull InAppHelper.InAppRunnable runnable) {

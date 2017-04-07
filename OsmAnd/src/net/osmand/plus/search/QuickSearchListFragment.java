@@ -80,10 +80,6 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 					}
 				}
 			});
-			//View header = getLayoutInflater(savedInstanceState).inflate(R.layout.list_shadow_header, null);
-			//View footer = getLayoutInflater(savedInstanceState).inflate(R.layout.list_shadow_footer, null);
-			//listView.addHeaderView(header, null, false);
-			//listView.addFooterView(footer, null, false);
 		}
 	}
 
@@ -108,7 +104,7 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 							|| sr.objectType == ObjectType.WPT
 							|| sr.objectType == ObjectType.STREET_INTERSECTION) {
 
-						showOnMap(sr);
+						showResult(sr);
 					} else {
 						dialogFragment.completeQueryWithObject(item.getSearchResult());
 					}
@@ -169,7 +165,7 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 		dialogFragment.onSearchListFragmentResume(this);
 	}
 
-	private void showOnMap(SearchResult searchResult) {
+	private void showResult(SearchResult searchResult) {
 		if (searchResult.location != null) {
 			OsmandApplication app = getMyApplication();
 			String lang = searchResult.requiredSearchPhrase.getSettings().getLang();
@@ -249,12 +245,37 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 			dialogFragment.hideToolbar();
 			dialogFragment.hide();
 
-			getMyApplication().getSettings().setMapLocationToShow(
-					searchResult.location.getLatitude(), searchResult.location.getLongitude(),
-					searchResult.preferredZoom, pointDescription, true, object);
+			switch (dialogFragment.getSearchType()) {
+				case REGULAR: {
+					getMyApplication().getSettings().setMapLocationToShow(
+							searchResult.location.getLatitude(), searchResult.location.getLongitude(),
+							searchResult.preferredZoom, pointDescription, true, object);
 
-			MapActivity.launchMapActivityMoveToTop(getActivity());
-			dialogFragment.reloadHistory();
+					MapActivity.launchMapActivityMoveToTop(getActivity());
+					dialogFragment.reloadHistory();
+					break;
+				}
+				case START_POINT: {
+					MapActivity mapActivity = getMapActivity();
+					if (mapActivity != null) {
+						mapActivity.getMapLayers().getMapControlsLayer().selectAddress(
+								pointDescription != null ? pointDescription.getName() : null,
+								searchResult.location.getLatitude(), searchResult.location.getLongitude(),
+								false);
+					}
+					break;
+				}
+				case DESTINATION: {
+					MapActivity mapActivity = getMapActivity();
+					if (mapActivity != null) {
+						mapActivity.getMapLayers().getMapControlsLayer().selectAddress(
+								pointDescription != null ? pointDescription.getName() : null,
+								searchResult.location.getLatitude(), searchResult.location.getLongitude(),
+								true);
+					}
+					break;
+				}
+			}
 		}
 	}
 
