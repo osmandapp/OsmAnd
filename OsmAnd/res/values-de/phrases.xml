@@ -1301,14 +1301,14 @@
 	<string name="poi_animal_no">Tiere nicht erlaubt</string>
 
 	<string name="poi_historic_stone">Historischer Stein</string>
-	<string name="poi_material_wood">Martial: Holz</string>
+	<string name="poi_material_wood">Material: Holz</string>
 	<string name="poi_material_metal">Material: Metall</string>
 	<string name="poi_material_steel">Material: Stahl</string>
 	<string name="poi_material_stone">Material: Stein</string>
 	<string name="poi_material_plastic">Martial: Plastik</string>
 	<string name="poi_material_sandstone">Material: Sandstein</string>
 	<string name="poi_material_granite_stone">Material: Granit</string>
-	<string name="poi_material_metal_wood">Material: Metal; Holz</string>
+	<string name="poi_material_metal_wood">Material: Metall; Holz</string>
 	<string name="poi_material_glass">Material: Glas</string>
 	<string name="poi_material_bronze">Material: Bronze</string>
 	<string name="poi_material_earth">Material: Erde</string>
@@ -1586,10 +1586,10 @@
 	<string name="poi_material_concrete">Material: Beton</string>
 	<string name="poi_material_masonry">Material: Mauerwerk</string>
 	<string name="poi_material_brick">Martial: Ziegel</string>
-	<string name="poi_material_composite">Material: zusammengesetzte</string>
+	<string name="poi_material_composite">Material: Verbundstoff</string>
 	<string name="poi_material_limestone">Material: Kalkstein</string>
 	<string name="poi_material_marble">Material: Marmor</string>
-	<string name="poi_site_type_megalith">Magalith</string>
+	<string name="poi_site_type_megalith">Megalith</string>
 	<string name="poi_site_type_tumulus">Grabhügel</string>
 	<string name="poi_site_type_fortification">Befestigung</string>
 	<string name="poi_site_type_settlement">Siedlung</string>
@@ -1598,9 +1598,9 @@
 	<string name="poi_site_type_earthwork">Erdarbeiten</string>
 	<string name="poi_megalith_type_menhir">Megalith-Typ: Menhir</string>
 	<string name="poi_megalith_type_dolmen">Megalith-Typ: Dolmen</string>
-	<string name="poi_fortification_type_hill_fort">Befestigungstyp: Höhenburg</string>
+	<string name="poi_fortification_type_hill_fort">Befestigungstyp: Wallburg</string>
 	<string name="poi_fortification_type_limes">Befestigungstyp: Limes</string>
-	<string name="poi_fortification_type_sconce">Befestigungstyp: Leuchter</string>
+	<string name="poi_fortification_type_sconce">Befestigungstyp: Schanze</string>
 	<string name="poi_fortification_type_ring_ditch">Befestigungstyp: Ringgraben</string>
 
 	<string name="poi_pa">Pa (befestigte Siedlung der Maori)</string>
@@ -1615,7 +1615,7 @@
 	<string name="poi_sculptor">Bildhauer</string>
 
 	<string name="poi_building_type_monastery">Gebäudeart: Kloster</string>
-	<string name="poi_prison_camp">Ehemaliges Kriegsgefangenenlager</string>
+	<string name="poi_prison_camp">Ehemaliges Gefangenenlager</string>
 	<string name="poi_concentration_camp">Typ: Konzentrationslager</string>
 	<string name="poi_pow_camp">Typ: Kriegsgefangenenlager</string>
 	<string name="poi_labor_camp">Typ: Arbeitslager</string>
@@ -1627,10 +1627,10 @@
 
 	<string name="poi_boat_storage">Bootslager</string>
 
-	<string name="poi_bridge_ref">Brücken Nr</string>
-	<string name="poi_tunnel_ref">Tunnel Nr</string>
+	<string name="poi_bridge_ref">Brücke Nr.</string>
+	<string name="poi_tunnel_ref">Tunnel Nr.</string>
 
-	<string name="poi_ref">Nr</string>
+	<string name="poi_ref">Nr.</string>
 
 	<string name="poi_cargo_passengers">Passagiere</string>
 	<string name="poi_cargo_vehicle">Fahrzeuge</string>
@@ -2385,20 +2385,20 @@
 	<string name="poi_historic_period_alexander_the_great">Historisches Zeitalter: Alexander der Große</string>
 	<string name="poi_resource_bauxite">Bauxit</string>
 	<string name="poi_architecture_postconstructivism">Architektur: Postkonstruktivismus</string>
-	<string name="poi_historic_period_christian_egypt">Historisches Zeitalter: Christlich-ägyptisch</string>
+	<string name="poi_historic_period_christian_egypt">Historisches Zeitalter: Christliches Ägypten</string>
 	<string name="poi_historic_period_byzantine_egypt">Historisches Zeitalter: Byzantinisches Ägypten (30 v. Chr. - 641 n. Chr.)</string>
 	<string name="poi_historic_period_persian_occupation">Historisches Zeitalter: Persische Besetzung</string>
 	<string name="poi_historic_period_greek_dark_ages">Historisches Zeitalter: Dunkle Jahrhunderte (Antike) (1100 - 800 v. Chr.)</string>
-	<string name="poi_historic_period_roman_greece">Historisches Zeitalter: Römisch-griechisch (146 v. Chr - 330 n. Chr.)</string>
+	<string name="poi_historic_period_roman_greece">Historisches Zeitalter: Römisches Griechenland (146 v. Chr - 330 n. Chr.)</string>
 	<string name="poi_historic_period_roman_kingdom">Historisches Zeitalter: Römische Königszeit (756 - 509 v. Chr.)</string>
 	<string name="poi_historic_period_dominate">Historisches Zeitalter: Dominat (285 - 476 n. Chr.)</string>
 	<string name="poi_historic_period_ptolemaic_egypt">Historisches Zeitalter: Ptolemäisches Königreich (305 - 30 v. Chr.)</string>
-	<string name="poi_historic_period_villager">Historisches Zeitalter: Spiedler (I, II Epoche, 1580 v. Chr. - 133 n. Chr.)</string>
-	<string name="poi_historic_period_urban">Historisches Zeitalter: städtisch (III Epoche, 133 - 374 n. Chr.)</string>
-	<string name="poi_historic_period_classical">Historisches Zeitalter: Klassik (IV Epoche, 374 - 900 n. Chr.)</string>
-	<string name="poi_historic_period_imperial">"Historisches Zeitalter: Imperialismus  (V Epoche, 900 - 1200 n. Chr.)"</string>
+	<string name="poi_historic_period_villager">Historisches Zeitalter: Ländliches Tiahuanaco (I., II. Epoche, 1580 v. Chr. - 133 n. Chr.)</string>
+	<string name="poi_historic_period_urban">Historisches Zeitalter: Städtisches Tiahuanaco (III. Epoche, 133 - 374 n. Chr.)</string>
+	<string name="poi_historic_period_classical">Historisches Zeitalter: Klassisches Tiahuanaco (IV. Epoche, 374 - 900 n. Chr.)</string>
+	<string name="poi_historic_period_imperial">Historisches Zeitalter: Imperialistisches Tiahuanaco (V. Epoche, 900 - 1200 n. Chr.)</string>
 
-	<string name="poi_historic_era_paleolithic">Historische Epoche: Altsteinzeit (2,6 millionen Jahre - 10000 BP (vor heute))</string>
+	<string name="poi_historic_era_paleolithic">Historische Epoche: Altsteinzeit (2,6 Mio. - 10000 Jahre vor heute)</string>
 	<string name="poi_historic_era_mesolithic">Historische Epoche: Mittelsteinzeit</string>
 	<string name="poi_historic_era_neolithic">Historische Epoche: Jungsteinzeit</string>
 	<string name="poi_historic_era_chalcolithic">Historische Epoche: Kupfersteinzeit (4. - 3. Jahrtausend v.Chr.)</string>
@@ -2488,19 +2488,19 @@
 	<string name="poi_health_specialty_oncology_yes">Onkologie</string>
 	<string name="poi_health_specialty_tropical_medicine_yes">Tropenmedizin</string>
 	<string name="poi_health_specialty_tropical_medicine_no">Tropenmedizin: Nein</string>
-	<string name="poi_health_specialty_obstetrics_postnatal_yes">Geburtshilfe (postnatal)</string>
+	<string name="poi_health_specialty_obstetrics_postnatal_yes">Geburtshilfe (nachgeburtlich)</string>
 	<string name="poi_health_specialty_obstetrics_postnatal_no">Geburtshilfe (nachgeburtlich): Nein</string>
-	<string name="poi_health_specialty_obstetrics_antenatal_yes">Geburtshilfe (vorgeburtliche)</string>
-	<string name="poi_health_specialty_obstetrics_antenatal_no">Geburtshilfe (vorgeburtliche): Nein</string>
+	<string name="poi_health_specialty_obstetrics_antenatal_yes">Geburtshilfe (vorgeburtlich)</string>
+	<string name="poi_health_specialty_obstetrics_antenatal_no">Geburtshilfe (vorgeburtlich): Nein</string>
 	<string name="poi_health_specialty_social_paediatrics_yes">Sozialpädiatrie</string>
 	<string name="poi_health_specialty_social_paediatrics_no">Sozialpädiatrie: Nein</string>
 	<string name="poi_health_specialty_obstetrics_caesarean_section_yes">Geburtshilfe (Kaiserschnitt)</string>
 	<string name="poi_health_specialty_obstetrics_caesarean_section_no">Geburtshilfe (Kaiserschnitt): Nein</string>
 	<string name="poi_health_specialty_addiction_medicine_yes">Suchtmedizin</string>
-	<string name="poi_health_specialty_optometry_yes">Augenheilkunde</string>
+	<string name="poi_health_specialty_optometry_yes">Optometrie</string>
 	<string name="poi_health_specialty_clinical_pathology_yes">Klinische Pathologie</string>
 	<string name="poi_health_specialty_speech_therapy_yes">Logopädie</string>
-	<string name="poi_health_specialty_manual_therapy_yes">Physiotherapie</string>
+	<string name="poi_health_specialty_manual_therapy_yes">Manualtherapie</string>
 	<string name="poi_health_specialty_sports_medicine_yes">Sportmedizin</string>
 	<string name="poi_health_specialty_podology_yes">Podologie</string>
 	<string name="poi_health_specialty_adult_psychiatry_yes">Erwachsenenpsychiatrie</string>
@@ -2512,7 +2512,7 @@
 	<string name="poi_health_specialty_chiropractic_yes">Chiropraktik</string>
 	<string name="poi_health_specialty_naturopathy_yes">Naturheilkunde</string>
 	<string name="poi_health_specialty_depth_psychology_yes">Tiefenpsychologie</string>
-	<string name="poi_health_specialty_behavior_yes">Verhalten</string>
+	<string name="poi_health_specialty_behavior_yes">Verhaltenstherapie</string>
 
 
 <string name="poi_building_type_pyramid">Gebäudetyp: Pyramide</string>
@@ -2537,14 +2537,14 @@
 	<string name="poi_badminton">Federball</string>
 	<string name="poi_judo">Judo</string>
 	<string name="poi_disc_golf">Discgolf</string>
-	<string name="poi_rc_car">Ferngesteuertes Autorennen</string>
+	<string name="poi_rc_car">RC-Car-Rennen</string>
 	<string name="poi_squash">Squash</string>
 	<string name="poi_shuffleboard">Shuffleboard</string>
 	<string name="poi_boxing">Boxen</string>
 
 <string name="poi_gaelic_games">Gälische Spiele</string>
 	<string name="poi_netball">Korbball</string>
-	<string name="poi_karting">Kart fahren</string>
+	<string name="poi_karting">Kartfahren</string>
 	<string name="poi_futsal">Futsal</string>
 	<string name="poi_lacrosse">Lacrosse</string>
 	<string name="poi_official_name">Offizieller Name</string>
@@ -2552,8 +2552,8 @@
 <string name="poi_seamark_dyke">Seezeichen Deich</string>
 	<string name="poi_dolphin">Dalbe</string>
 
-	<string name="poi_forestry_compartment">Wegweiser: Forstfach</string>
-	<string name="poi_forestry_allotment">Wegweiser: Forstwirtschaft Zuteilung</string>
+	<string name="poi_forestry_compartment">Schild: Forstabteilung</string>
+	<string name="poi_forestry_allotment">Schild: Forstparzelle</string>
 	<string name="poi_inscription_n">Beschriftung: N</string>
 	<string name="poi_inscription_nw">Beschriftung: NW</string>
 	<string name="poi_inscription_w">Beschriftung: W</string>
@@ -2722,8 +2722,8 @@
 	<string name="poi_fire_hydrant_type_pond">Teich</string>
 	<string name="poi_fire_hydrant_type_wall">Wand</string>
 
-	<string name="poi_health_amenity_type_first_aid_kit">Erste Hilfe Kasten</string>
-	<string name="poi_health_amenity_type_scales">Öffentliche Waagen</string>
+	<string name="poi_health_amenity_type_first_aid_kit">Erste-Hilfe-Koffer</string>
+	<string name="poi_health_amenity_type_scales">Öffentliche Waage</string>
 
 	<string name="poi_health_person_type_assistant">Funktion im Gesundheitssektor: Helfer</string>
 	<string name="poi_depth">Tiefe</string>
