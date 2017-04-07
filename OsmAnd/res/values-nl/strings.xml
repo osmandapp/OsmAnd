@@ -2955,12 +2955,82 @@ Gebruik visuele en gesproken navigatie, bekijk POIs (point of interest), maak en
  "</string>
     <string name="osmand_extended_description_part2">"
  GPS-navigatie
-•
-•
-•
-•
-•
-•
-•
+• Offline (geen datakosten) of online (snellere) routeberekening
+• Stap-voor-stap navigatie met opgenomen stem of gesproken straatnamen
+• Route wordt herberekend wanneer u ervan afwijkt
+• Rijstrookbegeleiding, straatnamen en verwachte aankomsttijd helpen u tijdens de reis
+• Voor de veiligheid: automatische keuze van dag- of nachtweergave
+• Toon maximum snelheid en waarschuw bij overschrijding
+• Kaartgrootte past zich aan bij de snelheid
+• Zoek bestemming op adres, soort (parkeerplaats, restaurant, brandstof, museum) of coördinaten
+• Maak tussenpunten op een reis
+• Neem uw reis op als GPX-spoor of volg een GPX-spoor
+ "</string>
+    <string name="osmand_extended_description_part3">"
+ Kaart
+• Toon POI (Points Of Interest)
+• Draai in de bewegingsrichting (of kompasrichting)
+• Toont uw positie en waar u naar kijkt
+• Deel uw lokatie met vrienden
+• Bewaar belangrijke plaatsen in Favorieten
+• Toon namen in Engelse, lokale, of fonetische schrijfwijze
+• Toon extra informatie, zoals satellietfoto (van Bing), GPX-sporen, andere kaartstijlen en extra informatielagen
+ "</string>
+    <string name="osmand_extended_description_part4">"
+ Skiën
+Met de OsmAnd Ski plugin ziet u pistes met hun moeilijkheidsgraad, en extra informatie zoals liften en andere faciliteiten.
+ "</string>
+    <string name="osmand_extended_description_part5">"
+ Fietsen
+• Vind fietspaden op de kaart
+• Routeberekening met gebruik van fietspaden
+• Toon snelheid en hoogte
+• Neem de rit op als GPX-spoor en deel deze
+• Geef, met een extra plugin, hoogteverschillen weer als hoogtelijnen of reliëfschaduw.
+ "</string>
+    <string name="osmand_extended_description_part6">"
+ Wandelen
+• De kaart toont voetpaden, bergpaden, routes door parken
+• Wikipedia vertelt u meer over uw omgeving
+• OV-haltes (tram, bus, trein, metro), inclusief lijnnummers, helpen u te navigeren
+• Navigatie gebruikt voetpaden
+• Neem uw weg op als GPX-route of volg een gedownloade route
+ "</string>
+    <string name="osmand_extended_description_part7">"
+ Werk mee aan OpenStreetMap (OSM)
+• Meld fouten
+• Upload sporen naar OSM, direct vanuit de app
+• Voeg POI toe aan de kaart en upload deze
+ "</string>
+    <string name="osmand_extended_description_part8">"
+ OsmAnd is open-source wordt steeds verder ontwikkeld. Iedereen kan helpen door bugs te melden, vertalingen te verbeteren of nieuwe functies te programmeren.
+Door deze interactie wordt het steeds beter. De voortgang is mede afhankelijk van betalingen om programmeurs en testers voor nieuwe functies te betalen.
+
+Indicatie van compleetheid en kwaliteit van de kaart:
+ • West-Europa: ****
+ • Oost-Europa: ***
+ • Rusland: ***
+ • Noord-Amerika: ***
+ • Zuid-Amerika: **
+ • Azië: **
+ • Japan &amp; Korea: ***
+ • Midden-Oosten: **
+ • Afrika: **
+ • Antarctica: *
+ De meeste landen ter wereld hebben een kaart die u kunt downloaden!
+ "</string>
+    <string name="osmand_plus_extended_description_part8">"
+ Indicatie van compleetheid en kwaliteit van de kaart:
+ • West-Europa: ****
+ • Oost-Europa: ***
+ • Rusland: ***
+ • Noord-Amerika: ***
+ • Zuid-Amerika: **
+ • Azië: **
+ • Japan &amp; Korea: ***
+ • Midden-Oosten: **
+ • Afrika: **
+ • Antarctica: *
+Van bijna alle landen is een kaart te downloaden: van Afghanistan tot Zimbabwe, Australie tot de VS, Nederland, Duitsland, Spanje, Japan, ...
  "</string>
     </resources>
