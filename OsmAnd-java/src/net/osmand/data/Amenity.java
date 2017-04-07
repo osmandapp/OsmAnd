@@ -2,6 +2,7 @@ package net.osmand.data;
 
 import net.osmand.Location;
 import net.osmand.osm.PoiCategory;
+import net.osmand.osm.edit.Node;
 import net.osmand.util.Algorithms;
 
 import java.io.BufferedReader;
@@ -16,6 +17,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.zip.GZIPInputStream;
+
+import gnu.trove.list.array.TIntArrayList;
 
 
 public class Amenity extends MapObject {
@@ -33,6 +36,8 @@ public class Amenity extends MapObject {
 	private String openingHours;
 	private Map<String, String> additionalInfo;
 	private AmenityRoutePoint routePoint; // for search on path
+	private TIntArrayList x;
+	private TIntArrayList y;
 
 	public Amenity() {
 	}
@@ -58,6 +63,20 @@ public class Amenity extends MapObject {
 
 	public void setSubType(String subType) {
 		this.subType = subType;
+	}
+
+	public TIntArrayList getX() {
+		if (x == null) {
+			x = new TIntArrayList();
+		}
+		return x;
+	}
+
+	public TIntArrayList getY() {
+		if (y == null) {
+			y = new TIntArrayList();
+		}
+		return y;
 	}
 
 	public String getOpeningHours() {
