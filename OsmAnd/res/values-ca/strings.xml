@@ -2895,14 +2895,16 @@ OsmAnd és de codi obert i es desenvolupa activament . Tothom pot recolzar l\'ap
     <string name="change_color">Canvia el color</string>
     <string name="edit_name">Edita el nom</string>
     <string name="save_poi_too_many_uppercase">El nom té moltes majúscules. Voleu continuar?</string>
-    <string name="display_zoom_level">Mostra nivell d\'escala: %1$s</string>
+    <string name="display_zoom_level">Nivell d\'escala de visualització: %1$s</string>
     <string name="route_is_too_long_v2">Aquesta ruta sembla massa llarga per calcular-la. Afegiu-hi fites intermèdies si no us dona un resultat abans de 10 minuts.</string>
     <string name="srtm_color_scheme">Combinació de colors</string>
-    <string name="show_from_zoom_level">Mostra amb l\'ampliació màxima</string>
+    <string name="show_from_zoom_level">Mostra amb escala mínima</string>
     <string name="routing_attr_allow_private_name">Permet l\'accés privat</string>
     <string name="routing_attr_allow_private_name_description">Permet l\'accés a zones privades</string>
-    <string name="hillshade_menu_download_descr">Per veure l\'ombrejat de relleu del mapa us caldrà baixar un mapa especial de la mateixa zona.</string>
+    <string name="hillshade_menu_download_descr">Per veure l\'ombrejat de relleu al mapa cal baixar un mapa especial d\'aquesta zona.</string>
     <string name="hillshade_purchase_header">Per veure l\'ombrejat de relleu al mapa cal comprar i instal·lar un connector</string>
     <string name="shared_string_plugin">Connector</string>
     <string name="srtm_purchase_header">Per veure les corbes de nivell cal comprar i instal·lar un connector</string>
+    <string name="srtm_menu_download_descr">Per veure les corbes de nivell al mapa cal baixar un mapa de corbes de nivell de\'aquesta zona.</string>
+    <string name="hide_from_zoom_level">Amaga a una escala superior</string>
     </resources>
