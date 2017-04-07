@@ -2968,6 +2968,9 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="route_is_too_long_v2">Ta trasa może być zbyt długa do wyznaczenia. Prosimy dodać punkty pośrednie, jeżeli nie dostaniesz wyniku w ciągu 10 minut.</string>
     <string name="save_poi_too_many_uppercase">Nazwa zawiera zbyt wiele wielkich liter. Czy chcesz kontynuować?</string>
     <string name="shared_string_plugin">Wtyczka</string>
-    <string name="srtm_menu_download_descr">Aby wyświetlić poziomice na mapie, należy pobrać mapę poziomic dla tego obszaru.</string>
+    <string name="srtm_menu_download_descr">Aby wyświetlić poziomice na mapie, należy pobrać mapę poziomic tego obszaru.</string>
     <string name="hide_from_zoom_level">Ukrywanie od stopnia przybliżenia</string>
+    <string name="hillshade_purchase_header">Aby wyświetlić cieniowanie rzeźby terenu, należy zakupić i zainstalować wtyczkę.</string>
+    <string name="hillshade_menu_download_descr">Aby wyświetlić cieniowanie rzeźby terenu, należy pobrać specjalną mapę tego obszaru.</string>
+    <string name="srtm_purchase_header">Aby wyświetlić poziomice na mapie, należy zakupić i zainstalować wtyczkę.</string>
     </resources>
