@@ -26,7 +26,7 @@ public class ActiveDownloadsDialogFragment extends DialogFragment implements Dow
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-		builder.setTitle(R.string.downloads).setNegativeButton(R.string.shared_string_dismiss, null);
+		builder.setTitle(R.string.downloads).setNegativeButton(R.string.shared_string_close, null);
 		adapter = new IndexItemAdapter(this, getDownloadActivity());
 		builder.setAdapter(adapter, null);
 		return builder.create();
