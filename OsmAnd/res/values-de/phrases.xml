@@ -1002,10 +1002,10 @@
 	<string name="poi_access_private">Privatweg</string>
 	<string name="poi_access_destination">Anlieger frei</string>
 	<string name="poi_access_permissive">Zutritt erlaubt</string>
-	<string name="poi_animal_shelter_dog">Unterkunft für Hunde</string>
-	<string name="poi_animal_shelter_cat">Katzenhütte</string>
-	<string name="poi_animal_shelter_dog_cat">Katzen-/ Hundehütte</string>
-	<string name="poi_animal_shelter_bird">Vogelhaus</string>
+	<string name="poi_animal_shelter_dog">Asylform: Hunde</string>
+	<string name="poi_animal_shelter_cat">Asylform: Katzen</string>
+	<string name="poi_animal_shelter_dog_cat">Asylform: Hunde, Katzen</string>
+	<string name="poi_animal_shelter_bird">Asylform: Vögel</string>
 
 <string name="poi_mill_pond">Mühlenteich</string>
 	<string name="twitter">Twitter</string>
@@ -1127,7 +1127,7 @@
 
 	<string name="poi_rural">Ländlich</string>
 
-	<string name="poi_animal_shelter">Tierheim</string>
+	<string name="poi_animal_shelter">Tierasyl</string>
 	<string name="poi_seats">Sitze</string>
 	<string name="poi_backrest_yes">Rückenlehne: Ja</string>
 	<string name="poi_backrest_no">Rückenlehne: Nein</string>
@@ -1754,14 +1754,14 @@
 	<string name="poi_piste_grooming_no">Nein</string>
 	<string name="poi_piste_grooming_mogul">Buckel</string>
 
-	<string name="poi_garden_type_residential">Garten-Typ: Wohnhausgarten</string>
-	<string name="poi_garden_type_community">Garten-Typ: Gemeinschaftsgarten</string>
-	<string name="poi_garden_type_private">Garten-Typ: privat</string>
-	<string name="poi_garden_type_botanical">Garten-Typ: botanisch</string>
+	<string name="poi_garden_type_residential">Gartentyp: Hausgarten</string>
+	<string name="poi_garden_type_community">Gartentyp: Gemeinschaftsgarten</string>
+	<string name="poi_garden_type_private">Gartentyp: privat</string>
+	<string name="poi_garden_type_botanical">Gartentyp: botanisch</string>
 
-	<string name="poi_garden_style_kitchen">Garten-Typ: Küchengarten</string>
-	<string name="poi_garden_style_rosarium">Garten-Typ: Rosengarten</string>
-	<string name="poi_garden_style_french">Garten-Typ: französisch</string>
+	<string name="poi_garden_style_kitchen">Gartenstil: Küchengarten</string>
+	<string name="poi_garden_style_rosarium">Gartenstil: Rosengarten</string>
+	<string name="poi_garden_style_french">Gartenstil: Französisch</string>
 	<string name="poi_love_hotel">Liebeshotel</string>
 
 	<string name="poi_payment_electronic_purses_yes">Elektronische Geldbörsen</string>
@@ -2927,7 +2927,7 @@
 
 	<string name="poi_pumping_station">Pumpstation</string>
 
-	<string name="poi_display_yes">Anzeige: ja</string>
+	<string name="poi_display_yes">Anzeige: Ja</string>
 	<string name="poi_display_no">Anzeige: nein</string>
 	<string name="poi_display_analog_yes">Analoge Anzeige</string>
 	<string name="poi_display_digital_yes">Digitale Anzeige</string>
@@ -2940,7 +2940,7 @@
 	<string name="poi_date_yes">Datumsanzeige</string>
 	<string name="poi_date_no">Datumsanzeige: nein</string>
 
-	<string name="poi_passenger_information_display_yes">Informationsanzeige für Passagiere: ja</string>
+	<string name="poi_passenger_information_display_yes">Informationsanzeige für Passagiere: Ja</string>
 	<string name="poi_passenger_information_display_no">Informationsanzeige für Passagiere: nein</string>
 
 	<string name="poi_min_age">Mindestalter</string>
@@ -2964,14 +2964,14 @@
 
 	<string name="poi_display_sundial_yes">Sonnenuhr</string>
 
-	<string name="poi_support_pole">Unterstützung: Pole</string>
-	<string name="poi_support_wall_mounted">Unterstützung: Wand</string>
-	<string name="poi_support_tree">Unterstützung: Baum</string>
-	<string name="poi_support_pedestal">Unterstützung: Sockel</string>
-	<string name="poi_support_ground">Unterstützung: Boden</string>
-	<string name="poi_support_ceiling">Unterstützung: Decke</string>
-	<string name="poi_support_roof">Unterstützung: Dach</string>
-	<string name="poi_support_tower">Unterstützung: Turm</string>
+	<string name="poi_support_pole">Abstützung: Mast</string>
+	<string name="poi_support_wall_mounted">Abstützung: Wand</string>
+	<string name="poi_support_tree">Abstützung: Baum</string>
+	<string name="poi_support_pedestal">Abstützung: Sockel</string>
+	<string name="poi_support_ground">Abstützung: Boden</string>
+	<string name="poi_support_ceiling">Abstützung: Decke</string>
+	<string name="poi_support_roof">Abstützung: Dach</string>
+	<string name="poi_support_tower">Abstützung: Turm</string>
 
 	<string name="poi_aquaculture">Aquakultur</string>
 	<string name="poi_aquaculture_shrimp">Aquakultur: Garnelen</string>
@@ -2993,7 +2993,7 @@
 	<string name="poi_greenhouse_horticulture">Gewächshaus</string>
 
 	<string name="poi_generator_output_steam_yes">Ausgabe: Dampf</string>
-	<string name="poi_support_suspended">Unterstützung: ausgesetzt</string>
+	<string name="poi_support_suspended">Abstützung: hängend</string>
 	<string name="poi_diplomatic_consulate_general">Generalkonsulat</string>
 	<string name="poi_diplomatic_honorary_consulate">Honorarkonsulat</string>
 	<string name="poi_observatory_type_gravitational">Schwerkraft</string>
@@ -3001,7 +3001,7 @@
 	<string name="poi_generator_output_hot_water">Ausgangsleistung: heißes Wasser</string>
 	<string name="poi_generator_output_compressed_air">Ausgangsleistung: Druckluft</string>
 	<string name="poi_generator_output_biogas">Ausgangsleistung: Biogas</string>
-	<string name="poi_support_billboard">Unterstützung: Reklametafel</string>
+	<string name="poi_support_billboard">Abstützung: Reklametafel</string>
 	<string name="poi_diplomatic_high_commission">Hochkommissar</string>
 
 	<string name="poi_fire_operator">Feueroperator</string>
@@ -3080,8 +3080,8 @@
 	<string name="poi_xmas_event">Weihnachtsveranstaltung</string>
 	<string name="poi_xmas_market">Weihnachtsmarkt</string>
 	<string name="poi_xmas_pyramid">Weihnachtspyramide</string>
-	<string name="poi_xmas_shop">Weihnachtesgeschäft</string>
-	<string name="poi_xmas_shop_christmas_tree">Teeladen</string>
+	<string name="poi_xmas_shop">Weihnachtsgeschäft</string>
+	<string name="poi_xmas_shop_christmas_tree">Weihnachtsbaumverkauf</string>
 	<string name="poi_xmas_tree">Weihnachtsbaum</string>
 	<string name="poi_xmas_day_date">Weihnachten: Zeit für die Veranstaltung</string>
 	<string name="poi_xmas_note">Weihnachten: Hinweis</string>
@@ -3119,7 +3119,7 @@
 	<string name="poi_cuisine_coffee">Kaffee</string>
 	<string name="poi_cuisine_sandwich">Sandwich</string>
 	<string name="poi_cuisine_kebab">Kebab</string>
-	<string name="poi_cuisine_chicken">Hünchen</string>
+	<string name="poi_cuisine_chicken">Hähnchen</string>
 	<string name="poi_cuisine_ice_cream">Speiseeis</string>
 	<string name="poi_cuisine_sushi">Sushi</string>
 	<string name="poi_cuisine_fish_and_chips">Fisch und Pommes</string>
@@ -3153,7 +3153,7 @@
 	<string name="poi_cuisine_bistro">Bistro</string>
 	<string name="poi_cuisine_bakery">Bäckerei</string>
 	<string name="poi_cuisine_couscous">Kuskus</string>
-	<string name="poi_cuisine_fried_chicken">Gebratenes Huhn</string>
+	<string name="poi_cuisine_fried_chicken">Brathähnchen</string>
 	<string name="poi_cuisine_dessert">Nachtisch</string>
 	<string name="poi_cuisine_canteen">Kantine</string>
 	<string name="poi_cuisine_tacos">Tacos</string>
@@ -3237,7 +3237,7 @@
 	<string name="poi_cuisine_latin_american">Lateinamerikanisch</string>
 	<string name="poi_cuisine_nepalese">Nepalesisch</string>
 	<string name="poi_cuisine_mongolian">Mongolisch</string>
-	<string name="poi_cuisine_middle_eastern">orientalisch</string>
+	<string name="poi_cuisine_middle_eastern">Orientalisch</string>
 	<string name="poi_cuisine_ukrainian">Ukrainisch</string>
 	<string name="poi_cuisine_afghan">Afghanisch</string>
 	<string name="poi_cuisine_belgian">Belgisch</string>
@@ -3296,9 +3296,9 @@
 	<string name="poi_social_facility_type">Typ</string>
 	<string name="poi_cuisine_sagardotegia">Sagardotegie</string>
 	<string name="poi_cuisine_sub">Baguetterie</string>
-	<string name="poi_cuisine_pastel">Empanada</string>
+	<string name="poi_cuisine_pastel">Pastel</string>
 	<string name="poi_cuisine_balkan">Balkan</string>
-	<string name="poi_cuisine_lao">Lao</string>
+	<string name="poi_cuisine_lao">Laotisch</string>
 	<string name="poi_cuisine_cajun">Cajun</string>
 	<string name="poi_waterway_fuel">Tankstelle für Boote</string>
 
