@@ -60,7 +60,7 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 	public static final float MARKER_PADDING_DP = 20f;
 	public static final float MARKER_PADDING_X_DP = 50f;
 	public static final float SKIP_HALF_SCREEN_STATE_KOEF = .21f;
-	public static final int ZOOM_IN_STANDARD = 16;
+	public static final int ZOOM_IN_STANDARD = 17;
 
 	private View view;
 	private View mainView;
@@ -93,6 +93,7 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 
 	private OsmandMapTileView map;
 	private LatLon mapCenter;
+	private int mapZoom;
 	private int origMarkerX;
 	private int origMarkerY;
 	private boolean customMapCenter;
@@ -151,6 +152,10 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 			mapCenter = menu.getMapCenter();
 			origMarkerX = box.getCenterPixelX();
 			origMarkerY = box.getCenterPixelY();
+		}
+		mapZoom = menu.getMapZoom();
+		if (mapZoom == 0) {
+			mapZoom = map.getZoom();
 		}
 
 		IconsCache iconsCache = getMyApplication().getIconsCache();
@@ -252,34 +257,11 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 			private float velocityY;
 			private float maxVelocityY;
 
-			private boolean hasMoved;
-
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
 
 				if (singleTapDetector.onTouchEvent(event)) {
 					moving = false;
-					int posY = getViewY();
-					if (!centered) {
-						if (!zoomIn && menu.supportZoomIn()) {
-							LatLon centerLatLon = map.getCurrentRotatedTileBox().getCenterLatLon();
-							if (centerLatLon.equals(menu.getLatLon())) {
-								zoomIn = true;
-							}
-						}
-						centerMarkerLocation();
-					} else if (!zoomIn && menu.supportZoomIn()) {
-						int fZoom = getZoom();
-						zoomIn = true;
-						if (fZoom < ZOOM_IN_STANDARD) {
-							AnimateDraggingMapThread thread = map.getAnimatedDraggingThread();
-							thread.startZooming(ZOOM_IN_STANDARD,
-									map.getZoomFractionalPart(), true);
-						}
-					}
-					if (hasMoved) {
-						applyPosY(posY, false, false, 0, 0);
-					}
 					openMenuHalfScreen();
 					return true;
 				}
@@ -293,7 +275,6 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 
 				switch (event.getAction()) {
 					case MotionEvent.ACTION_DOWN:
-						hasMoved = false;
 						dy = event.getY();
 						dyMain = getViewY();
 						velocity = VelocityTracker.obtain();
@@ -305,7 +286,6 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 
 					case MotionEvent.ACTION_MOVE:
 						if (moving) {
-							hasMoved = true;
 							float y = event.getY();
 							float newY = getViewY() + (y - dy);
 							setViewY((int) newY, false, false);
@@ -783,12 +763,20 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 	@Override
 	public void onDestroyView() {
 		super.onDestroyView();
-		if (mapCenter != null) {
-			map.setLatLon(mapCenter.getLatitude(), mapCenter.getLongitude());
+		if (!menu.isActive()) {
+			if (mapCenter != null) {
+				if (mapZoom == 0) {
+					mapZoom = map.getZoom();
+				}
+				//map.setLatLon(mapCenter.getLatitude(), mapCenter.getLongitude());
+				//map.setIntZoom(mapZoom);
+				AnimateDraggingMapThread thread = map.getAnimatedDraggingThread();
+				thread.startMoving(mapCenter.getLatitude(), mapCenter.getLongitude(), mapZoom, true);
+			}
+
+			menu.setMapCenter(null);
+			menu.setMapZoom(0);
 		}
-		menu.setMapCenter(null);
-		menu.setMapZoom(0);
-		//getMapActivity().getMapLayers().getMapControlsLayer().setControlsClickable(true);
 	}
 
 	public void rebuildMenu() {
@@ -1269,6 +1257,14 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 	}
 
 	private void doBeforeMenuStateChange(int previousState, int newState) {
+		if (newState == MenuState.HALF_SCREEN) {
+			centered = true;
+			if (!zoomIn && menu.supportZoomIn()) {
+				if (getZoom() < ZOOM_IN_STANDARD) {
+					zoomIn = true;
+				}
+			}
+		}
 	}
 
 	private void doAfterMenuStateChange(int previousState, int newState) {
