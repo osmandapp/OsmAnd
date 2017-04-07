@@ -20,6 +20,7 @@ import android.widget.ArrayAdapter;
 import android.widget.FrameLayout.LayoutParams;
 import android.widget.ImageView;
 
+import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
 import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.RenderingContext;
@@ -32,8 +33,6 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiFilter;
 import net.osmand.osm.PoiType;
-import net.osmand.osm.edit.Node;
-import net.osmand.osm.edit.OsmMapUtils;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.R;
@@ -51,6 +50,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import gnu.trove.list.array.TIntArrayList;
+
 public class ContextMenuLayer extends OsmandMapLayer {
 	//private static final Log LOG = PlatformUtil.getLog(ContextMenuLayer.class);
 	public static final int VIBRATE_SHORT = 100;
@@ -65,6 +66,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 	private ImageView contextMarker;
 	private Paint paint;
+	private Paint outlinePaint;
 	private Bitmap pressedBitmap;
 	private Bitmap pressedBitmapSmall;
 	private List<LatLon> pressedLatLonFull = new ArrayList<>();
@@ -81,6 +83,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	private boolean mInGpxDetailsMode;
 
 	private List<String> publicTransportTypes;
+	private Object selectedObject;
 
 	public ContextMenuLayer(MapActivity activity) {
 		this.activity = activity;
@@ -110,10 +113,25 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		paint = new Paint();
 		pressedBitmap = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_shield_tap);
 		pressedBitmapSmall = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_shield_tap_small);
+
+		outlinePaint = new Paint();
+		outlinePaint.setStyle(Paint.Style.STROKE);
+		outlinePaint.setAntiAlias(true);
+		outlinePaint.setStrokeWidth(AndroidUtils.dpToPx(activity, 2f));
+		outlinePaint.setStrokeCap(Paint.Cap.ROUND);
+		outlinePaint.setColor(activity.getResources().getColor(R.color.osmand_orange));
 	}
 
 	public boolean isVisible() {
 		return menu.isActive();
+	}
+
+	public Object getSelectedObject() {
+		return selectedObject;
+	}
+
+	public void setSelectedObject(Object selectedObject) {
+		this.selectedObject = selectedObject;
 	}
 
 	private List<String> getPublicTransportTypes() {
@@ -136,6 +154,35 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox box, DrawSettings nightMode) {
+		if (selectedObject != null) {
+			TIntArrayList x = null;
+			TIntArrayList y = null;
+			if (selectedObject instanceof Amenity) {
+				Amenity a = (Amenity) selectedObject;
+				x = a.getX();
+				y = a.getY();
+			} else if (selectedObject instanceof RenderedObject) {
+				RenderedObject r = (RenderedObject) selectedObject;
+				x = r.getX();
+				y = r.getY();
+			}
+			if (x != null && y != null && x.size() > 2) {
+				double lat = MapUtils.get31LatitudeY(y.get(0));
+				double lon = MapUtils.get31LongitudeX(x.get(0));
+				int px,py, prevX, prevY;
+				prevX = (int) box.getPixXFromLatLon(lat, lon);
+				prevY = (int) box.getPixYFromLatLon(lat, lon);
+				for (int i = 1; i < x.size(); i++) {
+					lat = MapUtils.get31LatitudeY(y.get(i));
+					lon = MapUtils.get31LongitudeX(x.get(i));
+					px = (int) box.getPixXFromLatLon(lat, lon);
+					py = (int) box.getPixYFromLatLon(lat, lon);
+					canvas.drawLine(prevX, prevY, px, py, outlinePaint);
+					prevX = px;
+					prevY = py;
+				}
+			}
+		}
 		for (LatLon latLon : pressedLatLonSmall) {
 			int x = (int) box.getPixXFromLatLon(latLon.getLatitude(), latLon.getLongitude());
 			int y = (int) box.getPixYFromLatLon(latLon.getLatitude(), latLon.getLongitude());
@@ -422,7 +469,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	}
 
 	private boolean showContextMenu(PointF point, RotatedTileBox tileBox, boolean showUnknownLocation) {
-		LatLon customLatLon = null;
+		LatLon objectLatLon = null;
 		Map<Object, IContextMenuProvider> selectedObjects = selectObjectsForContextMenu(tileBox, point, false);
 		NativeOsmandLibrary nativeLib = NativeOsmandLibrary.getLoadedLibrary();
 		if (nativeLib != null) {
@@ -439,17 +486,17 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			if (renderedObjects != null) {
 				// double tx = c.first/ (rc->tileDivisor);
 				// double ty = c.second / (rc->tileDivisor);
-			    // float dTileX = tx - rc->getLeft();
-			    // float dTileY = ty - rc->getTop();
-			    // rc->calcX = rc->cosRotateTileSize * dTileX - rc->sinRotateTileSize * dTileY;
-			    // rc->calcY = rc->sinRotateTileSize * dTileX + rc->cosRotateTileSize * dTileY;
+				// float dTileX = tx - rc->getLeft();
+				// float dTileY = ty - rc->getTop();
+				// rc->calcX = rc->cosRotateTileSize * dTileX - rc->sinRotateTileSize * dTileY;
+				// rc->calcY = rc->sinRotateTileSize * dTileX + rc->cosRotateTileSize * dTileY;
 				int TILE_SIZE = 256;
 				double cosRotateTileSize = Math.cos(Math.toRadians(rc.rotate)) * TILE_SIZE;
 				double sinRotateTileSize  = Math.sin(Math.toRadians(rc.rotate)) * TILE_SIZE;
 				for(RenderedObject r : renderedObjects) {
 					double cx = r.getBbox().centerX();
 					double cy = r.getBbox().centerY();
-					double dTileX = (cx * cosRotateTileSize + cy * sinRotateTileSize) / (TILE_SIZE * TILE_SIZE); 
+					double dTileX = (cx * cosRotateTileSize + cy * sinRotateTileSize) / (TILE_SIZE * TILE_SIZE);
 					double dTileY = (cy * cosRotateTileSize - cx * sinRotateTileSize) / (TILE_SIZE * TILE_SIZE);
 					int x31 = (int) ((dTileX + rc.leftX) * rc.tileDivisor);
 					int y31 = (int) ((dTileY + rc.topY) * rc.tileDivisor);
@@ -461,12 +508,10 @@ public class ContextMenuLayer extends OsmandMapLayer {
 				for (RenderedObject renderedObject : renderedObjects) {
 					if (renderedObject.getX() != null && renderedObject.getX().size() == 1
 							&& renderedObject.getY() != null && renderedObject.getY().size() == 1) {
-						customLatLon = new LatLon(MapUtils.get31LatitudeY(renderedObject.getY().get(0)),
+						objectLatLon = new LatLon(MapUtils.get31LatitudeY(renderedObject.getY().get(0)),
 								MapUtils.get31LongitudeX(renderedObject.getX().get(0)));
-					} else if(renderedObject.getLabelLatLon() != null) {
-						customLatLon = renderedObject.getLabelLatLon();	
-					} else {
-						customLatLon = tileBox.getLatLonFromPixel(point.x, point.y);
+					} else if (renderedObject.getLabelLatLon() != null) {
+						objectLatLon = renderedObject.getLabelLatLon();
 					}
 					if (renderedObject.getId() != null) {
 						List<String> names = new ArrayList<>();
@@ -478,21 +523,19 @@ public class ContextMenuLayer extends OsmandMapLayer {
 								names.add(entry.getValue());
 							}
 						}
-						Amenity amenity = findAmenity(renderedObject.getId() >> 7, names,
-								customLatLon.getLatitude(), customLatLon.getLongitude());
+						LatLon searchLatLon = objectLatLon;
+						if (searchLatLon == null) {
+							searchLatLon = tileBox.getLatLonFromPixel(point.x, point.y);
+						}
+						Amenity amenity = findAmenity(renderedObject.getId() >> 7, names, searchLatLon);
 						if (amenity != null) {
+							if (renderedObject.getX() != null && renderedObject.getX().size() > 1
+									&& renderedObject.getY() != null && renderedObject.getY().size() > 1) {
+								amenity.getX().addAll(renderedObject.getX());
+								amenity.getY().addAll(renderedObject.getY());
+							}
 							selectedObjects.put(amenity, poiMenuProvider);
 							continue;
-						}
-						if (renderedObject.getX() != null && renderedObject.getX().size() > 1
-								&& renderedObject.getY() != null && renderedObject.getY().size() > 1) {
-
-							List<Node> nodes = new ArrayList<>(renderedObject.getX().size());
-							for (int i = 0; i < renderedObject.getX().size(); i++) {
-								nodes.add(new Node(MapUtils.get31LatitudeY(renderedObject.getY().get(i)),
-										MapUtils.get31LongitudeX(renderedObject.getX().get(i)), 0));
-							}
-							//customLatLon = OsmMapUtils.getMathWeightCenterForNodes(nodes);
 						}
 						selectedObjects.put(renderedObject, null);
 					}
@@ -509,7 +552,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 				pointDescription = provider.getObjectName(selectedObj);
 			}
 			if (latLon == null) {
-				latLon = customLatLon;
+				latLon = objectLatLon;
 			}
 			if (latLon == null) {
 				latLon = getLatLon(point, tileBox);
@@ -661,8 +704,8 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		return false;
 	}
 
-	private Amenity findAmenity(long id, List<String> names, double lat, double lon) {
-		QuadRect rect = MapUtils.calculateLatLonBbox(lat, lon, 50);
+	private Amenity findAmenity(long id, List<String> names, LatLon latLon) {
+		QuadRect rect = MapUtils.calculateLatLonBbox(latLon.getLatitude(), latLon.getLongitude(), 50);
 		List<Amenity> amenities = activity.getMyApplication().getResourceManager().searchAmenities(
 				new BinaryMapIndexReader.SearchPoiTypeFilter() {
 					@Override

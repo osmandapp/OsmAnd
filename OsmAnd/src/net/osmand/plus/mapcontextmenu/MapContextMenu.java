@@ -480,6 +480,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 	}
 
 	private void clearSelectedObject(Object object) {
+		mapActivity.getMapLayers().getContextMenuLayer().setSelectedObject(null);
 		if (object != null) {
 			for (OsmandMapLayer l : mapActivity.getMapView().getLayers()) {
 				if (l instanceof ContextMenuLayer.IContextMenuProvider) {
@@ -495,6 +496,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 	}
 
 	private void setSelectedObject(@Nullable Object object) {
+		mapActivity.getMapLayers().getContextMenuLayer().setSelectedObject(object);
 		if (object != null) {
 			for (OsmandMapLayer l : mapActivity.getMapView().getLayers()) {
 				if (l instanceof ContextMenuLayer.IContextMenuProvider) {
