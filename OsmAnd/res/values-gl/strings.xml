@@ -405,7 +405,7 @@ As pistas gravadas pódense compartir ou empregar colaborando con OSM. Os atleta
 	<string name="driving_region_japan">Xapón</string>
 	<string name="driving_region_us">Estados Unidos</string>
 	<string name="driving_region_canada">Canadá</string>
-	<string name="driving_region_europe_asia">Europa e Asia</string>
+	<string name="driving_region_europe_asia">"Europa,  Asia, Lationoamérica e semellantes"</string>
 	<string name="driving_region_uk">Reino Unido, India e semellantes</string>
     <string name="speak_title">Anunciar…</string>
 	<string name="speak_descr">Configurar para anunciar os nomes das rúas, os avisos de tráfico (detencións forzosas, bandas sonoras), os avisos de radar e os límites de velocidade</string>
@@ -1941,7 +1941,7 @@ Lon %2$s</string>
     <string name="shared_string_qr_code">Código QR</string>
     <string name="map_downloaded">Mapa descargado</string>
     <string name="map_downloaded_descr">Descargouse o mapa de %1$s. Volva ao mapa para comezalo a usar.</string>
-    <string name="go_to_map">Ir ao mapa</string>
+    <string name="go_to_map">Mostrar o mapa</string>
     <string name="share_menu_location">Compartir a localización</string>
     <string name="min_mile">min/m</string>
     <string name="min_km">min/km</string>
@@ -2494,4 +2494,15 @@ Pódese pechar esta vista desactivándoa aquí ou cambiando o «Estilo de mapa»
     <string name="shared_string_time">Tempo</string>
     <string name="total_distance">Distancia total</string>
     <string name="routing_attr_height_obstacles_name">Empregar datos de elevación</string>
+    <string name="shared_string_plugin">Engadido</string>
+    <string name="srtm_purchase_header">Para ver as liñas de nivel no mapa hai que comprar e instalar un engadido</string>
+    <string name="srtm_color_scheme">Esquema de cores</string>
+    <string name="routing_attr_allow_private_name">Permitir acceso privado</string>
+    <string name="routing_attr_allow_private_name_description">Permitir acceso a zonas privadas</string>
+    <string name="change_color">Cambiar a cor</string>
+    <string name="edit_name">Editar o nome</string>
+    <string name="lang_fy">Frisón</string>
+    <string name="favorite_category_add_new">Engadir novo</string>
+    <string name="lang_ber">Bérber</string>
+    <string name="lang_kn">Kannada</string>
     </resources>
