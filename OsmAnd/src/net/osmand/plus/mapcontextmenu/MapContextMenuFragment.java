@@ -773,10 +773,9 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 				AnimateDraggingMapThread thread = map.getAnimatedDraggingThread();
 				thread.startMoving(mapCenter.getLatitude(), mapCenter.getLongitude(), mapZoom, true);
 			}
-
-			menu.setMapCenter(null);
-			menu.setMapZoom(0);
 		}
+		menu.setMapCenter(null);
+		menu.setMapZoom(0);
 	}
 
 	public void rebuildMenu() {
