@@ -2621,4 +2621,10 @@
 	<string name="poi_health_specialty_internal_medicine_yes">內科</string>
 	<string name="poi_health_specialty_cardiology_yes">心臟病學</string>
 	<string name="poi_health_specialty_trauma_yes">創傷科</string>
+	<string name="poi_health_specialty_osteopathy_yes">整骨療法</string>
+	<string name="poi_health_specialty_plastic_surgery_yes">整形外科</string>
+	<string name="poi_fast_food_cafeteria">是的</string>
+
+	<string name="poi_drink_wine_yes">酒︰是的</string>
+	<string name="poi_drink_wine_retail">酒︰零售</string>
 	</resources>
