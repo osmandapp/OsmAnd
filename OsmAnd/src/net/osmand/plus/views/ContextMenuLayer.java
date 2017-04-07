@@ -459,12 +459,12 @@ public class ContextMenuLayer extends OsmandMapLayer {
 				}
 				IContextMenuProvider poiMenuProvider = activity.getMapLayers().getPoiMapLayer();
 				for (RenderedObject renderedObject : renderedObjects) {
-					if(renderedObject.getLabelLatLon() != null) {
-						customLatLon = renderedObject.getLabelLatLon();	
-					} else if (renderedObject.getX() != null && renderedObject.getX().size() == 1
+					if (renderedObject.getX() != null && renderedObject.getX().size() == 1
 							&& renderedObject.getY() != null && renderedObject.getY().size() == 1) {
 						customLatLon = new LatLon(MapUtils.get31LatitudeY(renderedObject.getY().get(0)),
 								MapUtils.get31LongitudeX(renderedObject.getX().get(0)));
+					} else if(renderedObject.getLabelLatLon() != null) {
+						customLatLon = renderedObject.getLabelLatLon();	
 					} else {
 						customLatLon = tileBox.getLatLonFromPixel(point.x, point.y);
 					}
