@@ -699,7 +699,7 @@
 	<string name="poi_sailing">Segeln</string>
 	<string name="poi_apartment">Apartment</string>
 	<string name="poi_internet_access_wlan">Internetzugang: WLAN</string>
-	<string name="poi_internet_access_wired">Internetzugang: Kabelgebunden</string>
+	<string name="poi_internet_access_wired">Internetzugang: kabelgebunden</string>
 	<string name="poi_internet_access_public">Internetzugang: Öffentlich</string>
 	<string name="poi_picnic_table">Picknicktisch</string>
 	<string name="poi_wine_cellar">Weinkeller</string>
@@ -1239,10 +1239,10 @@
 	<string name="poi_washing_machine_no">Waschmaschine: Nein</string>
 	<string name="poi_shower_yes">Dusche: Ja</string>
 	<string name="poi_shower_no">Dusche: Nein</string>
-	<string name="poi_shower_hot">Dusche: Heiß</string>
+	<string name="poi_shower_hot">Dusche: warm</string>
 	<string name="poi_shower_outdoor">Dusche: im Freien</string>
-	<string name="poi_shower_cold">Dusche: Kalt</string>
-	<string name="poi_shower_indoor">Dusche: Drinnen</string>
+	<string name="poi_shower_cold">Dusche: kalt</string>
+	<string name="poi_shower_indoor">Dusche: drinnen</string>
 	<string name="poi_caravans_yes">Ja</string>
 	<string name="poi_caravans_no">Wohnwagen: Nein</string>
 	<string name="poi_power_supply_yes">Ja</string>
@@ -2073,7 +2073,7 @@
 	<string name="poi_architecture_brutalism">Architektur: Brutalismus</string>
 	<string name="poi_architecture_classicism">Architektur: Klassizismus</string>
 	<string name="poi_architecture_gothic">Architektur: Gotik</string>
-	<string name="poi_architecture_oldrussian">Architektur: Altrussisch</string>
+	<string name="poi_architecture_oldrussian">Architektur: altrussisch</string>
 	<string name="poi_architecture_baroque">Architektur: Barock</string>
 	<string name="poi_architecture_wilhelminian_style">Architektur: Gründerzeit</string>
 	<string name="poi_architecture_renaissance">Architektur: Renaissance</string>
@@ -2094,7 +2094,7 @@
 	<string name="poi_bridge_structure_viaduct">Brückenkonstruktion: Viadukt</string>
 	<string name="poi_bridge_structure_aqueduct">Brückenaufbau: Aquädukt</string>
 	<string name="poi_bridge_structure_log">Brückenaufbau: Baumstamm</string>
-	<string name="poi_bridge_type_movable">Brückentyp: bewegliche</string>
+	<string name="poi_bridge_type_movable">Brückentyp: beweglich</string>
 	<string name="poi_bridge_movable_bascule">Beweglicher Brückentyp: Klappbrücke</string>
 	<string name="poi_bridge_movable_swing">Beweglicher Brückentyp: Schwenkbrücke</string>
 	<string name="poi_bridge_movable_lift">Beweglicher Brückentyp: Hebebrücke</string>
@@ -2107,7 +2107,7 @@
 	<string name="poi_lit_no">Beleuchtung: Nein</string>
 
 	<string name="poi_surface_unpaved">Oberfläche: unbefestigte</string>
-	<string name="poi_surface_paved">Oberfläche: befestigte</string>
+	<string name="poi_surface_paved">Oberfläche: befestigt</string>
 	<string name="poi_surface_asphalt">Oberfläche: Asphalt</string>
 	<string name="poi_surface_concrete">Oberfläche: Beton</string>
 	<string name="poi_surface_sett">Oberfläche: Pflasterstein (behauen)</string>
@@ -2193,7 +2193,7 @@
 	<string name="poi_industrial_intermodal_freight_terminal">Typ: intermodales Frachtterminal</string>
 	<string name="poi_industrial_sawmill">Typ: Sägewerk</string>
 	<string name="poi_industrial_water_purification">Typ: Wasseraufbereitung</string>
-	<string name="poi_industrial_port">Typ: Haven</string>
+	<string name="poi_industrial_port">Typ: Hafen</string>
 	<string name="poi_industrial_depot">Typ: Lagerhaus</string>
 
 	<string name="poi_watering_place">Trog</string>
@@ -2246,8 +2246,8 @@
 	<string name="poi_crop_asparagus">Anbauprodukt: Spargel</string>
 	<string name="poi_crop_flowers">Anbauprodukt: Blumen</string>
 
-	<string name="poi_surveillance_indoor">Überwachung: Innen</string>
-	<string name="poi_surveillance_outdoor">Überwachung: Außen</string>
+	<string name="poi_surveillance_indoor">Überwachung: innen</string>
+	<string name="poi_surveillance_outdoor">Überwachung: außen</string>
 	<string name="poi_surveillance_public">Überwachung: öffentlicher Bereich</string>
 
 	<string name="poi_clothes_denim">Jeans</string>
@@ -2339,11 +2339,11 @@
 
 	<string name="poi_historic_civilization_ancient_roman">Kultur: Römische Antike (753 v.Chr. - 284 n.Chr..)</string>
 	<string name="poi_historic_civilization_nuragic">Kultur: Nuraghen (18. Jh. v.Chr. - 2 Jh. n.Chr.)</string>
-	<string name="poi_historic_civilization_etruscan">Kultur: Etrusker (12. - 6. Jh. v.Chr.)</string>
+	<string name="poi_historic_civilization_etruscan">Kultur: Etrusker (12. - 6. Jh. v. Chr.)</string>
 	<string name="poi_historic_civilization_prehistoric">Kultur: Prähistorisch</string>
 	<string name="poi_historic_civilization_ancient_greek">Kultur: Griechische Antike</string>
 	<string name="poi_historic_civilization_roman">Kultur: Römisch</string>
-	<string name="poi_historic_civilization_byzantine">"Kultur: Byzantinisch (285 - 1453  v.Chr.)"</string>
+	<string name="poi_historic_civilization_byzantine">"Kultur: byzantinisch (285 - 1453  n. Chr.)"</string>
 	<string name="poi_historic_civilization_imperial_chinese">"Kultur: Chinesische Kaiserzeit (221 - 1911  v.Chr.)"</string>
 	<string name="poi_historic_civilization_ancient_egyptian">Kultur: Altes Ägypten (bis 332 v.Chr.)</string>
 	<string name="poi_historic_civilization_celtic">Kultur: Keltisch</string>
@@ -2386,7 +2386,7 @@
 	<string name="poi_resource_bauxite">Bauxit</string>
 	<string name="poi_architecture_postconstructivism">Architektur: Postkonstruktivismus</string>
 	<string name="poi_historic_period_christian_egypt">Historisches Zeitalter: Christliches Ägypten</string>
-	<string name="poi_historic_period_byzantine_egypt">Historisches Zeitalter: Byzantinisches Ägypten (30 v. Chr. - 641 n. Chr.)</string>
+	<string name="poi_historic_period_byzantine_egypt">Historisches Zeitalter: byzantinisches Ägypten (30 v. Chr. - 641 n. Chr.)</string>
 	<string name="poi_historic_period_persian_occupation">Historisches Zeitalter: Persische Besetzung</string>
 	<string name="poi_historic_period_greek_dark_ages">Historisches Zeitalter: Dunkle Jahrhunderte (Antike) (1100 - 800 v. Chr.)</string>
 	<string name="poi_historic_period_roman_greece">Historisches Zeitalter: Römisches Griechenland (146 v. Chr - 330 n. Chr.)</string>
@@ -2599,7 +2599,7 @@
 	<string name="poi_nuclear_explosion_type_atmospheric_surface_tower">Explosionsart: atmosphärisch, oberirdisch, Turm</string>
 	<string name="poi_nuclear_explosion_type_atmospheric_balloon">Explosionsart: atmosphärisch, Ballon</string>
 	<string name="poi_nuclear_explosion_type_atmospheric_water_surface_barge">Explosionsart: atmosphärisch, über Wasser, Barge</string>
-	<string name="poi_nuclear_explosion_type_cratering_burst">Explosionsart: Kraterbildende Explosion (oberflächennah unterirdisch)</string>
+	<string name="poi_nuclear_explosion_type_cratering_burst">Explosionsart: kraterbildende Explosion (oberflächennah unterirdisch)</string>
 	<string name="poi_nuclear_explosion_type_atmospheric_rocket_or_missile">Explosionsart: atmosphärisch, Rakete oder Lenkwaffe</string>
 	<string name="poi_nuclear_explosion_date_utc">Explosionsdatum (UTC)</string>
 	<string name="poi_nuclear_explosion_shot_name_en">Bezeichnung der Explosion</string>
@@ -2845,7 +2845,7 @@
 
 	<string name="poi_street_cabinet_power">Kasten-Typ: Strom</string>
 	<string name="poi_street_cabinet_telecom">Kasten-Typ: Telekom</string>
-	<string name="poi_street_cabinet_cable_tv">Kasten-Typ: Kabelfernsehn</string>
+	<string name="poi_street_cabinet_cable_tv">Kasten-Typ: Kabelfernsehen</string>
 	<string name="poi_street_cabinet_gas">Kasten-Typ: Gas</string>
 	<string name="poi_street_cabinet_postal_service">Kasten-Typ: Postdienst</string>
 	<string name="poi_street_cabinet_waste">Kasten-Typ: Abfall</string>
