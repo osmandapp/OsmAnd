@@ -574,9 +574,9 @@
     <string name="choose_osmand_theme_descr">Velg programtema</string>
     <string name="driving_region_us">USA</string>
     <string name="driving_region_canada">Canada</string>
-    <string name="driving_region_europe_asia">Europa og Asia</string>
+    <string name="driving_region_europe_asia">Europa, Asia, Latin-Amerika &amp; lignende</string>
     <string name="driving_region_uk">Storbritannia, India og lignende</string>
-    <string name="driving_region_descr">Velg region for bilkjøring: USA, Europa, Storbritannia, Asia, og andre</string>
+    <string name="driving_region_descr">Velg region for bilkjøring: USA, Europa, Storbritannia, Asia og andre</string>
     <string name="driving_region_japan">Japan</string>
     <string name="driving_region">Region for bilkjøring</string>
 
@@ -909,7 +909,7 @@
     <string name="edit_tilesource_elliptic_tile">Elliptisk mercator</string>
     <string name="delete_point">Slett punkt</string>
     <string name="plugin_distance_point_time">tid</string>
-    <string name="plugin_distance_point_hdop">presisjon</string>
+    <string name="plugin_distance_point_hdop">nøyaktighet</string>
     <string name="plugin_distance_point_speed">fart</string>
     <string name="plugin_distance_point_ele">høyde</string>
     <string name="plugin_distance_point">Punkt</string>
@@ -1843,15 +1843,15 @@ Le %2$s</string>
     <string name="osmand_long_description_1000_chars">"
  OsmAnd (OSM Automated Navigation Directions)
 
- OsmAnd er et navigasjonsprogram med åpen kildekode og med tilgang til et rikt utvalg av globale OpenStreetMap (OSM)-data. Alle kartdata (vektor- eller fliskart) kan lagres på telefonens minnekort for frakoblet bruk. OsmAnd tilbyr også frakoblet og nettbasert rutefunksjonalitet inkludert talebaserte anvisninger.
+ OsmAnd er et navigeringsprogram med åpen kildekode og med tilgang til et bredt mangfold av globale OpenStreetMap (OSM)-data. Alle kartdata (vektor- eller fliskart) kan lagres på telefonens minnekort for frakoblet bruk. OsmAnd tilbyr også frakoblet og nettbasert rutefunksjon inkludert talebaserte anvisninger.
 
  Noen av kjernefunksjonene:
- - Fullstendig frakoblet funksjonalitet (lagre nedlastede vektor- eller fliskart i enhetens lagringsmedium)
+ - Fullstendig nettfrakoblet funksjonalitet (lagre nedlastede vektor- eller fliskart i enhetens lagringsmedium)
  - Kompakte frakoblede vektorkart fra hele verden tilgjengelig
  - Last ned lands- eller regionkart direkte fra programmet
- - Overlegg av flere kartlag mulig, som GPX og navigasjonsspor, interessepunkter, favoritter, koter, stoppesteder for offentlig transport, ytterligere kart med egendefinert gjennomsiktighet
+ - Overlegg av flere kartlag mulig, som GPX og navigeringsspor, interessepunkter, favoritter, koter, stoppesteder for offentlig transport, ytterligere kart med egendefinert gjennomsiktighet
  - Frakoblet søk etter adresser og steder (interessepunkter)
- - Frakoblet ruteplanlegging for middels avstander 
+ - Frakoblet ruteplanlegging for middels avstander
  - Bil, sykkel eller fotgjengermoduser med:
  - Valgfri automatisk skifting mellom dag/natt-visning
  - Valgfri fartsavhengig kart-zooming
@@ -1870,8 +1870,8 @@ Le %2$s</string>
     <string name="gpx_add_track">Legg til spor</string>
     <string name="trip_rec_notification_settings">Turopptak (ingen data)</string>
     <string name="trip_rec_notification_settings_desc">Vis merknader som lar deg starte en tur ved å trykke opptaksknappen</string>
-    <string name="save_track_min_speed">Minste loggingshastighet</string>
-    <string name="save_track_min_speed_descr">Velg minste hastighet som starter loggføringen av punkter</string>
+    <string name="save_track_min_speed">Minimumshastighet for logging</string>
+    <string name="save_track_min_speed_descr">Still inn minimumshastighet for at et punkt skal logges</string>
     <string name="save_track_min_distance">Logging ved bevegelsesoppdagelse</string>
     <string name="save_track_min_distance_descr">Angi minste avstand fra siste posisjon for at et punkt skal logges</string>
     <string name="save_track_precision">Minste loggingspresisjon</string>
@@ -1960,8 +1960,8 @@ Le %2$s</string>
 Angi hele koden</string>
     <string name="navigate_point_olc_info_area">Gyldig full OLC
 Representerer området: %1$s x %2$s</string>
-    <string name="navigate_point_northing">Nordlig</string>
-    <string name="navigate_point_easting">Østlig</string>
+    <string name="navigate_point_northing">Nordverdi</string>
+    <string name="navigate_point_easting">Østverdi</string>
     <string name="fav_point_emoticons_message">Navn på favorittpunkt endret til %1$s for å støtte lagring av streng med smilefjes til fil.</string>
     <string name="save_global_track_interval_descr">Velg logginsintervall for det generelle sporingsopptaket (aktivert via GPX-skjermelementet for logging på kartet)</string>
     <string name="save_track_to_gpx_globally_headline">Sporingslogging på forespørsel</string>
@@ -2033,7 +2033,7 @@ Representerer området: %1$s x %2$s</string>
     <string name="distance_measurement_load_gpx">Åpne eksisterende GPX</string>
     <string name="use_magnetic_sensor_descr">Bruk magnetsensor for å bestemme kompassverdi istedenfor orienteringssensor</string>
     <string name="download_using_mobile_internet">Wi-Fi er i øyeblikket ikke tilkoblet. Ønsker du å bruke gjeldende internettilknytning for nedlasting?</string>
-    <string name="contribution_activity">Installer versjon</string>
+    <string name="contribution_activity">Installasjonsversjon</string>
     <string name="item_checked">valgt</string>
     <string name="item_unchecked">fravalgt</string>
     <string name="index_name_openmaps">OpenMaps EU</string>
@@ -2191,5 +2191,47 @@ Representerer området: %1$s x %2$s</string>
     <string name="points_delete_multiple_succesful">Punkt(er) slettet.</string>
     <string name="points_delete_multiple">Du skal slette %1$d punkt(er). Er du sikker?</string>
     <string name="average_speed">Gjennomsnittshastighet</string>
-    <string name="select_gpx_folder">Velg mappe</string>
+    <string name="select_gpx_folder">Velg spor-mappe</string>
+    <string name="osmand_extended_description_part1">"
+ OsmAnd (OSM Automated Navigation Directions) er et kart- og navigeringsprogram med tilgang til gratis, verdensomspennende og høykvalitets OpenStreetMap (OSM)-data.
+
+ Gled deg over tale og visuell navigering, visning av interessepunkter, oppretting og behandling av GPX-spor, bruk av kotevisualisering og høydeinformasjon (gjennom programtillegg), et valg mellom kjøring, sykling, fotgjenger-modus, OSM-redigering og mye mer.
+ "</string>
+    <string name="osmand_plus_long_description_1000_chars">"
+ OsmAnd+ (OSM Automated Navigation Directions)
+
+ OsmAnd+ er et navigeringsprogram med åpen kildekode og med tilgang til et bredt mangfold av globale OpenStreetMap (OSM)-data. Alle kartdata (vektor- eller fliskart) kan lagres på telefonens minnekort for frakoblet bruk. OsmAnd tilbyr også frakoblet og nettbasert rutefunksjon inkludert talebaserte anvisninger.
+
+ OsmAnd+ er betalingsversjonen, ved å kjøpe den støtter du prosjektet, finansierer utviklingen av nye funksjoner, og mottar de siste oppdateringene.
+
+ Noen av kjernefunksjonene:
+ - Fullstendig nettfrakoblet funksjonalitet (lagre nedlastede vektor- eller fliskart i enhetens lagringsmedium)
+ - Kompakte frakoblede vektorkart fra hele verden tilgjengelig
+ - Ubegrenset nedlasting av lands- eller regionkart direkte fra programmet
+ - Frakoblede Wikipedia-funksjoner (last ned Wikipedia-interessepunkter), flott for sightseeing
+ - Overlegg av flere kartlag mulig, som GPX og navigeringsspor, interessepunkter, favoritter, koter, stoppesteder for offentlig transport, ytterligere kart med egendefinert gjennomsiktighet
+ - Frakoblet søk etter adresser og steder (interessepunkter)
+ - Frakoblet ruteplanlegging for middels avstander
+ - Bil, sykkel eller fotgjengermoduser med:
+ - Valgfri automatisk skifting mellom dag/natt-visning
+ - Valgfri fartsavhengig kart-zooming
+ - Valgfri kartjustering etter kompass- eller bevegelsesretning
+ - Valgfri fil-henvisning, fartsgrensevisning, innspilte og TTS-tale
+ "</string>
+    <string name="osmand_plus_extended_description_part1">"
+ OsmAnd+ (OSM Automated Navigation Directions) er et kart- og navigeringsprogram med tilgang til gratis, verdensomspennende og høykvalitets OpenStreetMap (OSM)-data.
+ Gled deg over tale og visuell navigering, visning av interessepunkter, oppretting og behandling av GPX-spor, bruk av kotevisualisering og høydeinformasjon, et valg mellom kjøring, sykling, fotgjenger-modus, OSM-redigering og mye mer.
+
+ OsmAnd+ er betalingsversjonen, ved å kjøpe den støtter du prosjektet, finansierer utviklingen av nye funksjoner, og mottar de siste oppdateringene.
+
+ Noen av hovedfunksjonene:
+ "</string>
+    <string name="quick_action_map_source_switch">Kartkilden er endret til \"%s\".</string>
+    <string name="quick_action_map_source_action">Legg til kartkilde</string>
+    <string name="quick_action_map_source_title">Kartkilder</string>
+    <string name="quick_action_map_source">Endre kartkilde</string>
+    <string name="quick_action_map_styles">Kartstiler</string>
+    <string name="quick_action_map_style_action">Legg til en kartstil</string>
+    <string name="quick_action_poi_list">Interessepunktliste</string>
+    <string name="quick_action_sh_poi_descr">Du kan legge til en eller flere interessepunktkategorier som skal vises på kartet.</string>
     </resources>
