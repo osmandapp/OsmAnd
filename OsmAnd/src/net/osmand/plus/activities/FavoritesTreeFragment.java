@@ -9,13 +9,11 @@ import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.view.ActionMode;
-import android.support.v7.widget.SearchView;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -82,7 +80,6 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 	private Set<FavouritePoint> favoritesSelected = new LinkedHashSet<>();
 	private Set<FavoriteGroup> groupsToDelete = new LinkedHashSet<>();
 	private ActionMode actionMode;
-	private SearchView searchView;
 	Drawable arrowImage;
 	Drawable arrowImageDisabled;
 	private HashMap<String, OsmandSettings.OsmandPreference<Boolean>> preferenceCache = new HashMap<>();
@@ -142,7 +139,20 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 		ExpandableListView listView = (ExpandableListView) view.findViewById(android.R.id.list);
 		favouritesAdapter.synchronizeGroups();
 		if (!favouritesAdapter.isEmpty()) {
-			listView.addHeaderView(inflater.inflate(R.layout.list_shadow_header, null, false));
+			boolean light = getMyApplication().getSettings().isLightContent();
+			View searchView = inflater.inflate(R.layout.search_fav_list_item, null);
+			searchView.setBackgroundResource(light ? R.color.bg_color_light : R.color.bg_color_dark);
+			TextView title = (TextView) searchView.findViewById(R.id.title);
+			title.setCompoundDrawablesWithIntrinsicBounds(getMyApplication().getIconsCache().getThemedIcon(R.drawable.ic_action_search_dark), null, null, null);
+			title.setHint(R.string.shared_string_search);
+			searchView.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					FavoritesSearchFragment.showInstance(getActivity(), "");
+				}
+			});
+			listView.addHeaderView(searchView);
+			listView.addHeaderView(inflater.inflate(R.layout.list_item_divider, null, false));
 			footerView = inflater.inflate(R.layout.list_shadow_footer, null, false);
 			listView.addFooterView(footerView);
 		}
@@ -241,39 +251,10 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 		menu.clear();
 		MenuItem mi = createMenuItem(menu, SEARCH_ID, R.string.search_poi_filter, R.drawable.ic_action_search_dark,
 				R.drawable.ic_action_search_dark, MenuItemCompat.SHOW_AS_ACTION_ALWAYS | MenuItemCompat.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW);
-		searchView = new SearchView(getActivity());
-		FavoritesActivity.updateSearchView(getActivity(), searchView);
-		MenuItemCompat.setActionView(mi, searchView);
-		searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+		mi.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
-			public boolean onQueryTextSubmit(String query) {
-				favouritesAdapter.getFilter().filter(query);
-				return true;
-			}
-
-			@Override
-			public boolean onQueryTextChange(String newText) {
-				favouritesAdapter.getFilter().filter(newText);
-				return true;
-			}
-		});
-		MenuItemCompat.setOnActionExpandListener(mi, new MenuItemCompat.OnActionExpandListener() {
-			@Override
-			public boolean onMenuItemActionExpand(MenuItem item) {
-				return true;
-			}
-
-			@Override
-			public boolean onMenuItemActionCollapse(MenuItem item) {
-				favouritesAdapter.setFilterResults(null);
-				favouritesAdapter.synchronizeGroups();
-				favouritesAdapter.notifyDataSetChanged();
-				// Needed to hide intermediate progress bar after closing action mode
-				new Handler().postDelayed(new Runnable() {
-					public void run() {
-						hideProgressBar();
-					}
-				}, 100);
+			public boolean onMenuItemClick(MenuItem item) {
+				FavoritesSearchFragment.showInstance(getActivity(), "");
 				return true;
 			}
 		});
