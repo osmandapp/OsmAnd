@@ -32,6 +32,7 @@ import net.osmand.plus.quickaction.actions.NavReplaceDestinationAction;
 import net.osmand.plus.quickaction.actions.NavVoiceAction;
 import net.osmand.plus.quickaction.actions.NewAction;
 import net.osmand.plus.quickaction.actions.ShowHideFavoritesAction;
+import net.osmand.plus.quickaction.actions.ShowHideOSMBugAction;
 import net.osmand.plus.quickaction.actions.ShowHidePoiAction;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 
@@ -91,6 +92,7 @@ public class QuickActionFactory {
         if (OsmandPlugin.getEnabledPlugin(OsmEditingPlugin.class) != null) {
 
             quickActions.add(new AddPOIAction());
+			quickActions.add(new ShowHideOSMBugAction());
             quickActions.add(new AddOSMBugAction());
         }
 
@@ -192,6 +194,9 @@ public class QuickActionFactory {
             case NavVoiceAction.TYPE:
                 return new NavVoiceAction();
 
+			case ShowHideOSMBugAction.TYPE:
+				return new ShowHideOSMBugAction();
+
             case AddOSMBugAction.TYPE:
                 return new AddOSMBugAction();
 
@@ -263,6 +268,9 @@ public class QuickActionFactory {
 
             case NavVoiceAction.TYPE:
                 return new NavVoiceAction(quickAction);
+
+			case ShowHideOSMBugAction.TYPE:
+				return new ShowHideOSMBugAction(quickAction);
 
             case AddOSMBugAction.TYPE:
                 return new AddOSMBugAction(quickAction);
@@ -336,8 +344,11 @@ public class QuickActionFactory {
             case NavVoiceAction.TYPE:
                 return R.drawable.ic_action_volume_up;
 
-            case AddOSMBugAction.TYPE:
+            case ShowHideOSMBugAction.TYPE:
                 return R.drawable.ic_action_bug_dark;
+
+			case AddOSMBugAction.TYPE:
+				return R.drawable.ic_action_bug_dark;
 
             case AddPOIAction.TYPE:
                 return R.drawable.ic_action_gabout_dark;
@@ -408,6 +419,9 @@ public class QuickActionFactory {
             case NavVoiceAction.TYPE:
                 return R.string.quick_action_navigation_voice;
 
+			case ShowHideOSMBugAction.TYPE:
+				return R.string.quick_action_showhide_osmbugs_title;
+
             case AddOSMBugAction.TYPE:
                 return R.string.quick_action_add_osm_bug;
 
@@ -460,6 +474,7 @@ public class QuickActionFactory {
 			case NavAddFirstIntermediateAction.TYPE:
 			case NavReplaceDestinationAction.TYPE:
 			case NavAutoZoomMapAction.TYPE:
+			case ShowHideOSMBugAction.TYPE:
                 return false;
 
             default: return true;

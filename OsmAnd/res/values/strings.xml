@@ -9,6 +9,10 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="quick_action_showhide_osmbugs_title">Show/hide OSM Notes</string>
+    <string name="quick_action_osmbugs_show">Show OSM Notes</string>
+    <string name="quick_action_osmbugs_hide">Hide OSM Notes</string>
+    <string name="quick_action_showhide_osmbugs_descr">Tapping the action button will show or hide OSM Notes on the map.</string>
     <string name="sorted_by_distance">Sorted by distance</string>
     <string name="search_favorites">Search favorites</string>
     <string name="hillshade_menu_download_descr">For view hillshade on the map, you need to download special map of this region.</string>
