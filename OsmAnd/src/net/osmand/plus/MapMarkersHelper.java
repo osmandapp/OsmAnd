@@ -50,6 +50,17 @@ public class MapMarkersHelper {
 					getOnlyName());
 		}
 
+		public String getName(Context ctx) {
+			String name;
+			PointDescription pd = getPointDescription(ctx);
+			if (Algorithms.isEmpty(pd.getName())) {
+				name = pd.getTypeName();
+			} else {
+				name = pd.getName();
+			}
+			return name;
+		}
+
 		public PointDescription getOriginalPointDescription() {
 			return pointDescription;
 		}

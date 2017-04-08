@@ -531,14 +531,7 @@ public class MapMarkerDialogHelper {
 
 		waypointDeviation.setVisibility(View.GONE);
 
-		String descr;
-		PointDescription pd = marker.getPointDescription(app);
-		if (Algorithms.isEmpty(pd.getName())) {
-			descr = pd.getTypeName();
-		} else {
-			descr = pd.getName();
-		}
-
+		String descr = marker.getName(app);
 		if (textShadow != null) {
 			textShadow.setText(descr);
 		}
