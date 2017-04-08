@@ -2913,4 +2913,6 @@ De Afganujo al Zimbabvo, de Aŭstralio al Usono, Argentino, Brazilo, Kanado, Fra
     <string name="hillshade_menu_download_descr">Por vidi nivel-ombrumon sub la mapo, vi devas elŝuti specialan mapon por tiu ĉi regiono.</string>
     <string name="hillshade_purchase_header">Por vidi nivel-ombrumon sub la mapo, vi devas aĉeti kaj instali kromprogramon</string>
     <string name="hide_from_zoom_level">Kaŝi de skal-nivelo</string>
+    <string name="sorted_by_distance">Ordigitaj laŭ distanco</string>
+    <string name="search_favorites">Serĉi en ŝatataj</string>
     </resources>
