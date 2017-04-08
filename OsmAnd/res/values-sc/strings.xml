@@ -3042,4 +3042,6 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="srtm_menu_download_descr">Pro bìdere sas lìnias de livellu in sa mapa depes iscarrigare sa mapa de sas curvas de livellu de custa regione.</string>
     <string name="shared_string_plugin">Estensione</string>
     <string name="srtm_purchase_header">Pro bìdere sas curvas de livellu in sa mapa depes comporare e installare s\'estensione</string>
+    <string name="search_favorites">Chirca preferidos</string>
+    <string name="sorted_by_distance">Ordinados pro distàntzia</string>
     </resources>
