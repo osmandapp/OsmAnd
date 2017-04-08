@@ -2887,4 +2887,10 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="shared_string_plugin">Zásuvný modul</string>
     <string name="srtm_purchase_header">Pre zobrazenie vrstevníc si musíte kúpiť a nainštalovať zásuvný modul</string>
     <string name="srtm_menu_download_descr">Pre zobrazenie vrstevníc na mape musíte stiahnuť mapu vrstevníc pre tento región.</string>
+    <string name="sorted_by_distance">Zoradené podľa vzdialenosti</string>
+    <string name="search_favorites">Hľadať obľúbené body</string>
+    <string name="quick_action_showhide_osmbugs_title">Zobraziť/skryť OSM poznámky</string>
+    <string name="quick_action_osmbugs_show">Zobraziť OSM poznámky</string>
+    <string name="quick_action_osmbugs_hide">Skryť OSM poznámky</string>
+    <string name="quick_action_showhide_osmbugs_descr">Stlačením tlačidla akcie zobrazíte/skryjete OSM poznámky na mape.</string>
     </resources>
