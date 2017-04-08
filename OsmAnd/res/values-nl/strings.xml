@@ -3034,4 +3034,9 @@ Indicatie van compleetheid en kwaliteit van de kaart:
 Van bijna alle landen is een kaart te downloaden: van Afghanistan tot Zimbabwe, Australie tot de VS, Nederland, Duitsland, Spanje, Japan, ...
  "</string>
     <string name="save_poi_too_many_uppercase">Naam bevat erg veel hoofdletters, toch doorgaan?</string>
+    <string name="search_favorites">Zoek favorieten</string>
+    <string name="quick_action_showhide_osmbugs_title">Toon/verberg OSM-opmerkingen</string>
+    <string name="quick_action_osmbugs_show">Toon OSM-opmerkingen</string>
+    <string name="quick_action_osmbugs_hide">Verberg OSM-opmerkingen</string>
+    <string name="quick_action_showhide_osmbugs_descr">Een druk op de sneltoets toont of verbergt OSM-opmerkingen.</string>
     </resources>
