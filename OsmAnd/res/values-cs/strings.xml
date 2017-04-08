@@ -2325,7 +2325,7 @@ Pokud máte rádi OsmAnd a OSM a chcete je podpořit, toto je výborný způsob,
     <string name="map_widget_battery">Stav baterie</string>
     <!-- string name="lat_lon_pattern">Šíř: %1$.5f Dél: %2$.5f</string -->
     <string name="access_direction_audio_feedback">Zvuková zpětná vazba směru</string>
-    <string name="use_osm_live_routing_description">Aktivovat navigaci pomocí změn z OSM Live (beta)</string>
+    <string name="use_osm_live_routing_description">Povolit navigaci pro OSM Live changes (Beta)</string>
 	<string name="change_markers_position">Změnit umístění značky</string>
     <string name="move_marker_bottom_sheet_title">Posuňte mapu pro změnu umístění značky</string>
     <string name="lang_hu_formal">Maďarština (formální)</string>
