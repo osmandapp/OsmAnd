@@ -3117,4 +3117,6 @@ Tidligere destination bliver sidste mellemliggende punkt.</string>
     <string name="hillshade_menu_download_descr">For se relieflag på kortet, hent særligt kort for området.</string>
     <string name="hillshade_purchase_header">For at se relieflag på kortet, køb og installer udvidelse</string>
     <string name="hide_from_zoom_level">Skjul fra zoom-niveau</string>
+    <string name="sorted_by_distance">Sorteret efter afstand</string>
+    <string name="search_favorites">Søg blandt favoritter</string>
     </resources>
