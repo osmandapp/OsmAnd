@@ -967,7 +967,7 @@
     <string name="loading_postcodes">Laster postnummer…</string>
     <string name="loading_data">Laster data…</string>
 	
-	<string name="srtm_plugin_description">"Dette programtillegget gir både et lag med koter og et lag med relieffskygger som kan vises oppå standardkartene til OsmAnd. Denne funksjonen vil bli satt stor pris på av idrettsutøvere, turgåere og enhver som er interessert i relieff-strukturen til et landskap. (Merk at koter og/eller relieff-data er separate tilleggsnedlastinger tilgjengelig etter aktivering av programtillegget.)
+	<string name="srtm_plugin_description">"Dette programtillegget gir både et lag med koter og et lag med relieffskygger som kan vises oppå standardkartene til OsmAnd. Denne funksjonen vil bli satt stor pris på av idrettsutøvere, turgåere og enhver som er interessert i relieff-strukturen til et landskap. (Merk at koter og/eller relieff-data er separate tilleggsnedlastinger tilgjengelige etter aktivering av programtillegget.)
  
 
 De globale dataene (mellom 70 grader nord og 70 grader sør) er basert på målinger av SRTM (Shuttle Radar Topography Mission) og ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), et bildeinstrument ombord på Terra, flaggskipsatellitten til NASA\'s Earth Observing System. ASTER er et samarbeid mellom NASA, Japans finansdepartement, Trade and Industry (METI), og Japan Space Systems (J-spacesystems).
@@ -980,7 +980,7 @@ De globale dataene (mellom 70 grader nord og 70 grader sør) er basert på måli
 
     <string name="error_avoid_specific_road">Ingen omkjøring funnet</string>
     <string name="home_button">Hjem</string>
-    <string name="map_update">Oppdateringer tilgjengelig for %1$s kart</string>
+    <string name="map_update">Oppdateringer tilgjengelige for %1$s kart</string>
     <string name="search_for">Søk etter</string>
 
     <string name="coordinates">Koordinater</string>
@@ -1353,7 +1353,7 @@ Le %2$s</string>
     <string name="rendering_value_red_name">Rød</string>
     <string name="rendering_value_translucent_orange_name">Gjennomskinnelig orange</string>
     <string name="traffic_warning_hazard">Fare</string>
-    <string name="no_updates_available">Ingen oppdateringer tilgjengelig</string>
+    <string name="no_updates_available">Ingen oppdateringer tilgjengelige</string>
     <string name="download_live_updates">Live-oppdateringer</string>
     <string name="rendering_value_default13_name">Standard (13)</string>
     <string name="rendering_value_defaultTranslucentCyan_name">Standard (gjennomskinnelig cyan)</string>
@@ -1847,7 +1847,7 @@ Le %2$s</string>
 
  Noen av kjernefunksjonene:
  - Fullstendig nettfrakoblet funksjonalitet (lagre nedlastede vektor- eller fliskart i enhetens lagringsmedium)
- - Kompakte frakoblede vektorkart fra hele verden tilgjengelig
+ - Kompakte frakoblede vektorkart fra hele verden tilgjengelige
  - Last ned lands- eller regionkart direkte fra programmet
  - Overlegg av flere kartlag mulig, som GPX og navigeringsspor, interessepunkter, favoritter, koter, stoppesteder for offentlig transport, ytterligere kart med egendefinert gjennomsiktighet
  - Frakoblet søk etter adresser og steder (interessepunkter)
@@ -2206,7 +2206,7 @@ Representerer området: %1$s x %2$s</string>
 
  Noen av kjernefunksjonene:
  - Fullstendig nettfrakoblet funksjonalitet (lagre nedlastede vektor- eller fliskart i enhetens lagringsmedium)
- - Kompakte frakoblede vektorkart fra hele verden tilgjengelig
+ - Kompakte frakoblede vektorkart fra hele verden tilgjengelige
  - Ubegrenset nedlasting av lands- eller regionkart direkte fra programmet
  - Frakoblede Wikipedia-funksjoner (last ned Wikipedia-interessepunkter), flott for sightseeing
  - Overlegg av flere kartlag mulig, som GPX og navigeringsspor, interessepunkter, favoritter, koter, stoppesteder for offentlig transport, ytterligere kart med egendefinert gjennomsiktighet
@@ -2234,4 +2234,19 @@ Representerer området: %1$s x %2$s</string>
     <string name="quick_action_map_style_action">Legg til en kartstil</string>
     <string name="quick_action_poi_list">Interessepunktliste</string>
     <string name="quick_action_sh_poi_descr">Du kan legge til en eller flere interessepunktkategorier som skal vises på kartet.</string>
+    <string name="quick_action_category_descr">Velg kategorien til å lagre favoritten i</string>
+    <string name="quick_action_add_navigation">Navigering</string>
+    <string name="quick_action_add_configure_map">Kartinnstilling</string>
+    <string name="quick_action_add_category">Legg til en kategori</string>
+    <string name="quick_action_favorites_hide">Skjul favoritter</string>
+    <string name="quick_action_showhide_poi_title">Vis/skjul interessepunkt</string>
+    <string name="quick_action_poi_show">Vis %1$s</string>
+    <string name="quick_action_poi_hide">Skjul %1$s</string>
+    <string name="quick_action_favorites_show">Vis favoritter</string>
+    <string name="quick_action_showhide_favorites_title">Vis/skjul favoritter</string>
+    <string name="favorite_empty_place_name">Sted</string>
+    <string name="quick_action_add_favorite">Legg til favoritt</string>
+    <string name="quick_action_navigation_voice">Tale på/av</string>
+    <string name="quick_action_navigation_voice_off">Tale er av</string>
+    <string name="quick_action_navigation_voice_on">Tale er på</string>
     </resources>
