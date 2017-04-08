@@ -2189,4 +2189,5 @@ Representerer området: %1$s x %2$s</string>
     <string name="quick_action_map_overlay_action">Legg til overlegg</string>
     <string name="quick_action_map_overlay_switch">Kartoverlegget er endret til \"%s\".</string>
     <string name="points_delete_multiple_succesful">Punkt(er) slettet.</string>
+    <string name="points_delete_multiple">Du skal til å slette %1$d punkt(er). Er du sikker?</string>
     </resources>
