@@ -500,7 +500,7 @@
 
 	<string name="poi_canal">Akvovojo</string>
 	<string name="poi_pier">Marponto</string>
-	<string name="poi_surveillance">Fara kontrolado</string>
+	<string name="poi_surveillance">Supergardo</string>
 	<string name="poi_observatory">Observejo</string>
 	<string name="poi_astronomical_observatory">Astroscienca</string>
 	<string name="poi_mast">Masto</string>
@@ -1909,7 +1909,7 @@
 
 	<string name="poi_route_railway_ref">Referenco de fervojo</string>
 
-	<string name="poi_surveillance_yes">Gardo: jes</string>
+	<string name="poi_surveillance_yes">Supergardo: jes</string>
 	<string name="poi_shop_additional_yes">Kun vendejo</string>
 
 	<string name="poi_service_bicycle_retail_yes">Vendado</string>
@@ -2029,9 +2029,9 @@
 	<string name="poi_crop_asparagus">Kultivaĵo: asparago</string>
 	<string name="poi_crop_flowers">Kultivaĵo: floroj</string>
 
-	<string name="poi_surveillance_indoor">Fara kontrolado: ene</string>
-	<string name="poi_surveillance_outdoor">Fara kontrolado: ekstere</string>
-	<string name="poi_surveillance_public">Fara kontrolado: publika ejo</string>
+	<string name="poi_surveillance_indoor">Supergardo: ene</string>
+	<string name="poi_surveillance_outdoor">Supergardo: ekstere</string>
+	<string name="poi_surveillance_public">Supergardo: publika ejo</string>
 
 	<string name="poi_clothes_women">Inaj</string>
 	<string name="poi_clothes_underwear">Subvesto</string>
