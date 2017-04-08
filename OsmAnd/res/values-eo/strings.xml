@@ -2915,4 +2915,8 @@ De Afganujo al Zimbabvo, de Aŭstralio al Usono, Argentino, Brazilo, Kanado, Fra
     <string name="hide_from_zoom_level">Kaŝi de skal-nivelo</string>
     <string name="sorted_by_distance">Ordigitaj laŭ distanco</string>
     <string name="search_favorites">Serĉi en ŝatataj</string>
+    <string name="quick_action_showhide_osmbugs_title">Montri/kaŝi OSM-rimarkojn</string>
+    <string name="quick_action_osmbugs_show">Montri OSM-rimarkojn</string>
+    <string name="quick_action_osmbugs_hide">Kaŝi OSM-rimarkojn</string>
+    <string name="quick_action_showhide_osmbugs_descr">Premado sur la ag-butono montros aŭ kaŝos OSM-rimarkojn sur la mapo.</string>
     </resources>
