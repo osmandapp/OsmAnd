@@ -40,7 +40,7 @@
 	<string name="poi_marketplace">Piac</string>
 	<string name="poi_police">Rendőrség</string>
 	<string name="poi_fire_station">Tűzoltóság</string>
-	<string name="poi_emergency_phone">Segélykérő telefon</string>
+	<string name="poi_emergency_phone">Segélyhívó telefon</string>
 	<string name="poi_fire_hydrant">Tűzcsap</string>
 	<string name="poi_ambulance_station">Mentőállomás</string>
 	<string name="poi_ford">Gázló</string>
@@ -191,22 +191,22 @@
 	<string name="poi_bar">Bár</string>
 	<string name="poi_pub">Kocsma</string>
 	<string name="poi_drinking_water">Ivóvíz</string>
-	<string name="poi_craft_beekeeper">Méhészet</string>
+	<string name="poi_craft_beekeeper">Méhész</string>
 	<string name="poi_craft_blacksmith">Kovács</string>
 	<string name="poi_craft_brewery">Sörfőzde</string>
 	<string name="poi_craft_bookbinder">Könyvkötő</string>
 	<string name="poi_craft_carpenter">Asztalos</string>
 	<string name="poi_craft_clockmaker">Órás (falióra)</string>
 	<string name="poi_craft_dressmaker">Nőiruha-készítő</string>
-	<string name="poi_craft_electrician">Villanyszerelő műhely</string>
+	<string name="poi_craft_electrician">Villanyszerelő</string>
 	<string name="poi_craft_gardener">Kertész</string>
 	<string name="poi_craft_jeweller">Ékszerész</string>
 	<string name="poi_craft_locksmith">Lakatos</string>
 	<string name="poi_craft_key_cutter">Kulcsmásoló</string>
-	<string name="poi_craft_photographer">Fényképész műterem</string>
+	<string name="poi_craft_photographer">Fényképész</string>
 	<string name="poi_craft_photographic_laboratory">Fotólabor</string>
-	<string name="poi_craft_plumber">Vízvezeték-szerelő műhely</string>
-	<string name="poi_craft_roofer">Tetőfedő műhely</string>
+	<string name="poi_craft_plumber">Vízvezeték-szerelő</string>
+	<string name="poi_craft_roofer">Tetőfedő</string>
 	<string name="poi_craft_shoemaker">Cipész</string>
 	<string name="poi_hairdresser">Fodrász</string>
 	<string name="poi_car_rental">Autókölcsönző</string>
@@ -262,7 +262,7 @@
 	<string name="poi_sustenance">Étkezés</string>
 	<string name="poi_cafe_and_restaurant">Kávézó és étterem</string>
 	<string name="poi_service">Szolgáltatás</string>
-		<string name="poi_craft">Kézművesműhely</string>
+		<string name="poi_craft">Műhely</string>
 	<string name="poi_finance">Pénzügy</string>
 	<string name="poi_natural">Természet</string>
 	<string name="poi_seamark">Hajózás</string>
@@ -281,7 +281,7 @@
 	<string name="poi_shoes">Cipőbolt</string>
 	<string name="poi_computer">Számítástechnikai bolt</string>
 	<string name="poi_curtain">Függönybolt</string>
-	<string name="poi_fabric">Szövetbolt</string>
+	<string name="poi_fabric">Méteráru</string>
 	<string name="poi_bedding">Ágyneműbolt</string>
 	<string name="poi_dive">Búvárfelszerelés</string>
 	<string name="poi_doityourself">Barkácsáruház</string>
@@ -297,7 +297,7 @@
 	<string name="poi_musical_instrument">Hangszerbolt</string>
 	<string name="poi_fire_extinguisher">Tűzoltókészülék</string>
 	<string name="poi_fire_flapper">Tűzseprű</string>
-	<string name="poi_fire_hose">Tűzoltó tömlő</string>
+	<string name="poi_fire_hose">Tűzoltótömlő</string>
 	<string name="poi_fire_water_pond">Tűzivízmedence</string>
 	<string name="poi_traffic_calming_bump">Fekvőrendőr</string>
 	<string name="poi_traffic_calming_hump">Hosszú fekvőrendőr</string>
@@ -305,8 +305,8 @@
 	<string name="poi_traffic_calming_chicane">Forgalomlassító félsziget</string>
 	<string name="poi_traffic_calming_rumble_strip">Rázócsík</string>
 	<string name="poi_traffic_calming_table">Fekvőrendőr – lapos tábla</string>
-	<string name="poi_traffic_calming_choker">Forgalomlassító útszűkítés</string>
-	<string name="poi_fuel_diesel">Dízel</string>
+	<string name="poi_traffic_calming_choker">Forgalomlassító útszűkület</string>
+	<string name="poi_fuel_diesel">Gázolaj</string>
 	<string name="poi_fuel_biodiesel">Biodízel</string>
 	<string name="poi_fuel_lpg">Cseppfolyós gáz (LPG)</string>
 	<string name="poi_fuel_octane_80">80-as oktánszámú</string>
@@ -333,7 +333,7 @@
 	<string name="poi_aerialway_station">Kötélpályásfelvonó-állomás</string>
 	<string name="poi_aerialway_cable_car">Nagykabinos felvonó</string>
 	<string name="poi_aerialway_gondola">Gondolakabinos felvonó</string>
-	<string name="poi_aerialway_chair_lift">Üléses felvonó</string>
+	<string name="poi_aerialway_chair_lift">Ülőlift</string>
 	<string name="poi_aerialway_t_bar">Csákányos sílift</string>
 	<string name="poi_aerialway_j_bar">Csákányos egyszemélyes sílift</string>
 	<string name="poi_aerialway_platter">Tányéros sílift</string>
@@ -352,8 +352,8 @@
 	<string name="poi_boatyard">Hajótelep</string>
 	<string name="poi_wastewater_plant">Szennyvíztelep</string>
 	<string name="poi_transportation">Közlekedés</string>
-		<string name="poi_fuel_gtl_diesel">GTL dízel</string>
-	<string name="poi_fuel_hgv_diesel">Teherautódízel</string>
+		<string name="poi_fuel_gtl_diesel">GTL-gázolaj</string>
+	<string name="poi_fuel_hgv_diesel">Tehergépkocsi-gázolaj</string>
 	<string name="poi_fuel_1_25">1:25 keverék</string>
 	<string name="poi_fuel_1_50">1:50 keverék</string>
 	<string name="poi_fuel_svo">SVO biodízel</string>
@@ -362,7 +362,7 @@
 	<string name="poi_fuel_e85">E85 etanol</string>
 	<string name="poi_fuel_biogas">Biogáz</string>
 	<string name="poi_vehicle_ramp">Szerelőrámpa</string>
-	<string name="poi_lock_gate">Zsilip</string>
+	<string name="poi_lock_gate">Zsilipkapu</string>
 	<string name="poi_waterway_turning_point">Megfordulóhely hajóknak</string>
 	<string name="poi_weir">Bukógát</string>
 	<string name="poi_dam">Völgyzáró gát</string>
@@ -597,7 +597,7 @@
 	<string name="poi_cycle_barrier">Kerékpáros akadály</string>
 	<string name="poi_motorcycle_barrier">Motorkerékpár-akadály</string>
 	<string name="poi_block">Tömb</string>
-	<string name="poi_cattle_grid">Marharács</string>
+	<string name="poi_cattle_grid">Szarvasmarharács</string>
 	<string name="poi_full_height_turnstile">Teljes forgókapu</string>
 	<string name="poi_bump_gate">Lökőkapu</string>
 	<string name="poi_general_barrier">Általános akadály</string>
@@ -890,12 +890,12 @@
 	<string name="poi_dance_floor">Tánctér</string>
 	<string name="poi_nightclub">Diszkó</string>
 	<string name="poi_stripclub">Sztriptízbár</string>
-	<string name="poi_craft_agricultural_engines">Mezőgazdaságimotor-gyártó műhely</string>
+	<string name="poi_craft_agricultural_engines">Mezőgazdaságigép-gyártó</string>
 	<string name="poi_craft_carpet_layer">Szőnyegpadló-lerakó műhely</string>
 	<string name="poi_craft_caterer">Partyszerviz műhely</string>
 	<string name="poi_craft_glaziery">Üvegműves</string>
 	<string name="poi_craft_optician">Látszerész</string>
-	<string name="poi_craft_painter">Szobafestő műhely</string>
+	<string name="poi_craft_painter">Szobafestő</string>
 	<string name="poi_craft_watchmaker">Órás (karóra)</string>
 	<string name="poi_cutline">Nyiladék</string>
 	<string name="poi_shower">Zuhany</string>
@@ -1004,7 +1004,7 @@
 	<string name="poi_seasonal_autumn">Ősszel</string>
 	<string name="poi_seasonal_winter">Télen</string>
 	<string name="poi_crossing_traffic_signals">Jelzőlámpás</string>
-	<string name="poi_crossing_uncontrolled">Szabályozatlan</string>
+	<string name="poi_crossing_uncontrolled">Nem ellenőrzött</string>
 	<string name="poi_crossing_unmarked">Jelzetlen</string>
 	<string name="poi_start_date">Kezdő dátum</string>
 	<string name="poi_wheelchair_yes">Igen</string>
@@ -1137,7 +1137,7 @@
 	<string name="poi_generator_source_wind">Energiaforrás: szél</string>
 	<string name="poi_generator_source_geothermal">Energiaforrás: geotermikus</string>
 	<string name="poi_generator_source_oil">Energiaforrás: kőolaj</string>
-	<string name="poi_generator_source_diesel">Energiaforrás: dízel</string>
+	<string name="poi_generator_source_diesel">Energiaforrás: gázolaj</string>
 
 	<string name="poi_pump_manual">Kézi</string>
 	<string name="poi_pump_powered">Meghajtott</string>
@@ -1465,26 +1465,26 @@
 	<string name="poi_hanami">Cseresznyevirágzás-nézés</string>
 	<string name="poi_gallery">Művészeti galéria</string>
 	<string name="poi_craft_handicraft">Kézművestermék-készítő</string>
-	<string name="poi_craft_hvac">Fűtés-, szellőztetés- és légkondicionálás-szerelő műhely</string>
-	<string name="poi_craft_insulation">Épület-hőszigetelő műhely</string>
+	<string name="poi_craft_hvac">Fűtés-, szellőztetés- és légkondicionálás-szerelő</string>
+	<string name="poi_craft_insulation">Épület-hőszigetelő</string>
 	<string name="poi_craft_metal_construction">Fémiparos</string>
-	<string name="poi_craft_parquet_layer">Parkettalerakó műhely</string>
-	<string name="poi_craft_plasterer">Gipszműves, stukkós műhely</string>
+	<string name="poi_craft_parquet_layer">Parkettalerakó</string>
+	<string name="poi_craft_plasterer">Gipszműves, stukkós</string>
 	<string name="poi_craft_pottery">Fazekas</string>
 	<string name="poi_craft_saddler">Nyeregkészítő</string>
 	<string name="poi_craft_sailmaker">Vitorlakészítő</string>
 	<string name="poi_craft_sawmill">Fűrészmalom</string>
-	<string name="poi_craft_scaffolder">Állványépítő műhely</string>
-	<string name="poi_craft_sculptor">Szobrász műterem</string>
-	<string name="poi_craft_stand_builder">Standépítő műhely</string>
+	<string name="poi_craft_scaffolder">Állványépítő</string>
+	<string name="poi_craft_sculptor">Szobrász</string>
+	<string name="poi_craft_stand_builder">Standépítő</string>
 	<string name="poi_craft_stonemason">Kőfaragó</string>
-	<string name="poi_craft_sun_protection">Árnyékolástechnikai műhely</string>
-	<string name="poi_craft_sweep">Kéményseprő műhely</string>
+	<string name="poi_craft_sun_protection">Árnyékolástechnikus</string>
+	<string name="poi_craft_sweep">Kéményseprő</string>
 	<string name="poi_craft_tailor">Szabó</string>
-	<string name="poi_craft_tiler">Burkolóműhely</string>
-	<string name="poi_craft_tinsmith">Bádogosműhely</string>
-	<string name="poi_craft_upholsterer">Kárpitosműhely</string>
-	<string name="poi_craft_window_construction">Ablakkészítő műhely</string>
+	<string name="poi_craft_tiler">Burkoló</string>
+	<string name="poi_craft_tinsmith">Bádogos</string>
+	<string name="poi_craft_upholsterer">Kárpitos</string>
+	<string name="poi_craft_window_construction">Ablakkészítő</string>
 
 	<string name="poi_craft_computer">Számítógép-szerelő</string>
 	<string name="poi_floating_dock">Úszódokk</string>
@@ -1609,11 +1609,11 @@
 	<string name="poi_payment_diners_club_yes">Diners Club</string>
 	<string name="poi_payment_diners_club_no">Diners Club kártyát nem fogad el</string>
 	<string name="poi_payment_dkv_yes">DKV</string>
-	<string name="poi_payment_dkv_no">DKV-t nem fogad el</string>
+	<string name="poi_payment_dkv_no">DKV kártyát nem fogad el</string>
 	<string name="poi_payment_uta_yes">UTA</string>
 	<string name="poi_payment_uta_no">UTA kártyát nem fogad el</string>
-	<string name="poi_payment_girocard_yes">Girokártya</string>
-	<string name="poi_payment_girocard_no">Girokártyát nem fogad el</string>
+	<string name="poi_payment_girocard_yes">Girocard</string>
+	<string name="poi_payment_girocard_no">Girocardot nem fogad el</string>
 	<string name="poi_payment_discover_card_yes">Discover Card</string>
 	<string name="poi_payment_discover_card_no">Discover Cardot nem fogad el</string>
 	<string name="poi_payment_visa_electron_yes">Visa Electron</string>
@@ -2014,7 +2014,7 @@
 	<string name="poi_recycling_type">Típus</string>
 	<string name="poi_recycling_accepted_waste">Elfogadott hulladék</string>
 	<string name="poi_shelter_type">Típus</string>
-	<string name="poi_fireplace">Beltéri tűzrakó hely</string>
+	<string name="poi_fireplace">Beltéri tűzrakóhely</string>
 	<string name="poi_seasonal">Időszakos</string>
 	<string name="poi_massage_type">Masszázstípus</string>
 	<string name="poi_tents">Sátor</string>
@@ -2103,15 +2103,15 @@
 
 	<string name="poi_deadlock">Holtpont</string>
 
-	<string name="poi_payment_electronic_purses_yes">Elektronikus pénztárca</string>
+	<string name="poi_payment_electronic_purses_yes">Elektronikus pénztárcák</string>
 	<string name="poi_payment_electronic_purses_no">Elektronikus pénztárcát nem fogad el</string>
 	<string name="poi_payment_bancomat_yes">Bancomat</string>
-	<string name="poi_payment_bancomat_no">Bancomatot nem fogad el</string>
+	<string name="poi_payment_bancomat_no">Bancomat kártyát nem fogad el</string>
 	<string name="poi_payment_prepaid_ticket_yes">Előre kifizetett jegy</string>
 	<string name="poi_payment_jcb_yes">JCB</string>
-	<string name="poi_payment_jcb_no">JCB-kártyát nem fogad el</string>
+	<string name="poi_payment_jcb_no">JCB kártyát nem fogad el</string>
 	<string name="poi_payment_laser_yes">Lézer</string>
-	<string name="poi_payment_laser_no">Lézeres kártyát nem fogad el</string>
+	<string name="poi_payment_laser_no">Laser kártyát nem fogad el</string>
 	<string name="poi_payment_wire_transfer_no"/>
 	<string name="poi_payment_sms_yes">SMS-fizetés</string>
 	<string name="poi_payment_sms_no">SMS-fizetés nem lehetséges</string>
@@ -2227,7 +2227,7 @@
 	<string name="poi_crop_flowers">Termény: virág</string>
 
 	<string name="poi_site_type_necropolis">Nekropolisz</string>
-	<string name="poi_craft_electronics_repair">Villamosgép-szerelő műhely</string>
+	<string name="poi_craft_electronics_repair">Villamosgép-szerelő</string>
 	<string name="poi_ramp_bicycle_yes">Kerékpárosrámpa</string>
 	<string name="poi_ramp_bicycle_no">Kerékpárosrámpa nincs</string>
 	<string name="poi_bicycle_parking_tree">Kerékpárfa</string>
@@ -2470,7 +2470,7 @@
 	<string name="poi_inscription_e">Felirat (kelet)</string>
 	<string name="poi_inscription_ne">Felirat (északkelet)</string>
 
-	<string name="poi_social_facility_group_home">Csoportos otthon</string>
+	<string name="poi_social_facility_group_home">Lakóotthon</string>
 	<string name="poi_social_facility_day_care">Napközi ellátás</string>
 
 	<string name="poi_social_facility_for_mental_health">Értelmi fogyatékos betegek</string>
@@ -3045,18 +3045,18 @@
 	<string name="poi_crossing_barrier_full">Teljes sorompó</string>
 	<string name="poi_crossing_barrier_half">Félsorompó</string>
 	<string name="poi_crossing_barrier_double_half">Két félsorompó</string>
-	<string name="poi_crossing_bell_yes">Hangjelzés a vasúti kereszteződésben</string>
-	<string name="poi_crossing_bell_no">Hangjelzés a vasúti kereszteződésben nincs</string>
+	<string name="poi_crossing_bell_yes">Hangjelzés a vasúti átjáróban</string>
+	<string name="poi_crossing_bell_no">Hangjelzés a vasúti átjáróban nincs</string>
 	<string name="poi_crossing_light_yes">Fénysorompó</string>
 	<string name="poi_crossing_light_no">Fénysorompó nincs</string>
 	<string name="poi_crossing_on_demand_yes">Vasúti átkelés csak kérésre</string>
 	<string name="poi_crossing_on_demand_no">Vasúti átkelés nem csak kérésre</string>
 	<string name="poi_crossing_saltire_yes">Andráskereszt</string>
 	<string name="poi_crossing_saltire_no">Andráskereszt nincs</string>
-	<string name="poi_crossing_supervision_yes">Felügyelt vasúti kereszteződés</string>
-	<string name="poi_crossing_supervision_no">Nem felügyelt vasúti kereszteződés</string>
-	<string name="poi_crossing_supervision_attendant">Vasútikereszteződés-felügyelet: jelzőőr</string>
-	<string name="poi_crossing_supervision_camera">Vasútikereszteződés-felügyelet: kamera</string>
+	<string name="poi_crossing_supervision_yes">Felügyelt vasúti átjáró</string>
+	<string name="poi_crossing_supervision_no">Nem felügyelt vasúti átjáró</string>
+	<string name="poi_crossing_supervision_attendant">Vasútiájáró-felügyelet: jelzőőr</string>
+	<string name="poi_crossing_supervision_camera">Vasútiátjáró-felügyelet: kamera</string>
 
 	<string name="poi_impromptu_yes">Vadkempinghely</string>
 	<string name="poi_impromptu_no">Nem vadkempinghely</string>
@@ -3185,7 +3185,7 @@
 
 	<string name="poi_ref">Azonosító szám</string>
 
-	<string name="poi_fitness_centre">Fitneszközpont</string>
+	<string name="poi_fitness_centre">Fitneszklub</string>
 	<string name="poi_hackerspace">Hackerspace</string>
 
 
@@ -3261,4 +3261,19 @@
 	<string name="poi_electronics_repair_phone">Villamosgép-szerelés: telefon</string>
 	<string name="poi_electronics_repair_tv">Villamosgép-szerelés: TV</string>
 
-</resources>
+<string name="poi_payment_account_cards_yes">Ügyfélkártyák</string>
+	<string name="poi_payment_account_cards_no">Ügyfélkártyát nem fogad el</string>
+	<string name="poi_payment_efectivo_yes">Efectivo</string>
+	<string name="poi_payment_efectivo_no">Efectivót nem fogad el</string>
+	<string name="poi_payment_routex_yes">Routex</string>
+	<string name="poi_payment_routex_no">Routex üzemanyagkártyát nem fogad el</string>
+	<string name="poi_payment_icsf_no">IC Stored Fare kártyát nem fogad el</string>
+	<string name="poi_payment_ep_quick_no">Quick kártyát nem fogad el</string>
+	<string name="poi_payment_eurowag_no">Eurowag kártyát nem fogad el</string>
+	<string name="poi_payment_e_zpass_yes">E-ZPass</string>
+	<string name="poi_payment_e_zpass_no">E-ZPasst nem fogad el</string>
+	<string name="poi_payment_euroshell_yes">euroShell</string>
+	<string name="poi_payment_euroshell_no">euroShell üzemanyagkártyát nem fogad el</string>
+	<string name="poi_payment_kitcard_yes">KITCard</string>
+	<string name="poi_payment_kitcard_no">KITCardot nem fogad el</string>
+	</resources>
