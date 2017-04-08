@@ -2982,4 +2982,10 @@ Fonctionnalités principales :
     <string name="hillshade_purchase_header">Pour afficher les ombrages du relief sur la carte, vous devez acheter et installer un greffon</string>
     <string name="hide_from_zoom_level">Masquer depuis le niveau de zoom</string>
     <string name="hillshade_menu_download_descr">Pour afficher le relief sur la carte, vous devez télécharger une carte supplémentaire de la région.</string>
+    <string name="quick_action_showhide_osmbugs_title">Afficher / Masquer les notes OSM</string>
+    <string name="quick_action_osmbugs_show">Afficher les notes OSM</string>
+    <string name="quick_action_osmbugs_hide">Masquer les notes OSM</string>
+    <string name="quick_action_showhide_osmbugs_descr">Appuyez sur le bouton d\'action affichera ou masquera les notes OSM sur la carte.</string>
+    <string name="sorted_by_distance">Trier par distance</string>
+    <string name="search_favorites">Rechercher des favoris</string>
     </resources>
